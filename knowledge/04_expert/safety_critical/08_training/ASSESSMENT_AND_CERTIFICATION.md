@@ -73,6 +73,7 @@ Rust语言 (权重30%)
 > **[来源: Rust Official Docs]**
 
 ### 2.1 个人认证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -108,6 +109,7 @@ Level 4: Expert
 ```
 
 ### 2.2 企业认证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -140,9 +142,11 @@ Level 3: Center of Excellence
 ---
 
 ## 3. 考试内容
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 L1: Foundation 考试
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -174,6 +178,7 @@ Level 3: Center of Excellence
 ```
 
 ### 3.2 L2: Practitioner 考试
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -203,6 +208,7 @@ Level 3: Center of Excellence
 ```
 
 ### 3.3 L3: Professional 考试
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -235,9 +241,11 @@ Level 3: Center of Excellence
 ---
 
 ## 4. 样题示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 L1样题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -270,6 +278,7 @@ fn process(data: &[u8]) -> Vec<u8> {
 ```
 
 ### 4.2 L2样题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -329,6 +338,7 @@ impl StateMachine<Running> {
 ```
 
 ### 4.3 L3样题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -359,9 +369,11 @@ impl StateMachine<Running> {
 ---
 
 ## 5. 学习路径
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 自学路径
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -385,6 +397,7 @@ impl StateMachine<Running> {
 ```
 
 ### 5.2 企业培训路径
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -413,9 +426,11 @@ impl StateMachine<Running> {
 ---
 
 ## 6. 认证维护
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 续证要求
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -439,6 +454,7 @@ L4续证 (每5年):
 ```
 
 ### 6.2 持续教育
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -454,9 +470,11 @@ L4续证 (每5年):
 ---
 
 ## 7. 全球认可
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 地区认证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 地区 | 认可机构 | 等效认证 | 互认协议 |
@@ -467,6 +485,7 @@ L4续证 (每5年):
 | **日本** | JAB | RSCD-L3+ | 互认 |
 
 ### 7.2 行业认可
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -503,6 +522,7 @@ L4续证 (每5年):
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -672,4 +692,3 @@ L4续证 (每5年):
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

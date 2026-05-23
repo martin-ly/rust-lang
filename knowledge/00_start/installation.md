@@ -9,6 +9,7 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 rustup 官方文档来源标注、工具链管理权威引用 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 完成本章后，你将能够：
@@ -19,6 +20,7 @@
 - [ ] 理解工具链管理
 
 ## 📋 先决条件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 操作系统: Windows 10+, macOS 10.14+, 或 Linux
@@ -26,9 +28,11 @@
 - 互联网连接
 
 ## 🛠️ 安装步骤
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 使用 rustup 安装（推荐）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### Windows
@@ -48,6 +52,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 ### 2. 配置环境变量
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 安装程序会自动配置，但可能需要重启终端。
@@ -60,6 +65,7 @@ source $HOME/.cargo/env  # Linux/macOS
 ```
 
 ### 3. 验证安装
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
@@ -69,9 +75,11 @@ rustup --version  # 应显示: rustup 1.x.x
 ```
 
 ## 🔧 工具链管理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 查看已安装工具链
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
@@ -79,6 +87,7 @@ rustup show
 ```
 
 ### 切换到特定版本
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -87,6 +96,7 @@ rustup default 1.93.0
 ```
 
 ### 更新到最新版
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -94,9 +104,11 @@ rustup update
 ```
 
 ## 📝 配置 Cargo
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 创建配置目录
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
@@ -104,6 +116,7 @@ mkdir -p ~/.cargo
 ```
 
 ### 常用配置 (~/.cargo/config.toml)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```toml
@@ -121,9 +134,11 @@ git-fetch-with-cli = true  # 使用系统 git
 ```
 
 ## 💻 IDE 配置
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### VS Code（推荐）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. 安装 VS Code
@@ -143,6 +158,7 @@ git-fetch-with-cli = true  # 使用系统 git
 ```
 
 ### 其他 IDE
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **IntelliJ IDEA**: Rust 插件
@@ -150,6 +166,7 @@ git-fetch-with-cli = true  # 使用系统 git
 - **Emacs**: rustic 或 lsp-mode
 
 ## ⚠️ 常见问题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 问题 | 原因 | 解决方案 |
@@ -159,6 +176,7 @@ git-fetch-with-cli = true  # 使用系统 git
 | Windows 链接器错误 | 缺少 Visual Studio | 安装 Build Tools |
 
 ### 配置国内镜像（中国用户）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ~/.cargo/config.toml:
@@ -172,9 +190,11 @@ registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 ```
 
 ## 🎮 练习
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 练习 1: 验证安装
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 运行以下命令并记录输出：
@@ -186,6 +206,7 @@ rustup show
 ```
 
 ### 练习 2: 工具链切换
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 尝试安装 nightly 工具链并切换：
@@ -197,6 +218,7 @@ rustup default stable  # 切回稳定版
 ```
 
 ## ✅ 自我检测
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. 如何查看当前 Rust 版本？
@@ -228,6 +250,7 @@ rustup default stable  # 切回稳定版
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Hello World](./hello_world.md)
@@ -262,4 +285,3 @@ rustup default stable  # 切回稳定版
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

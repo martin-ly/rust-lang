@@ -62,6 +62,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 运行时性能
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 指标 | Rust | C | C++ | Ada | Java | Go |
@@ -73,6 +74,7 @@
 | **二进制大小** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ |
 
 ### 2.2 零成本抽象
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -95,9 +97,11 @@
 ---
 
 ## 3. 安全关键适用性矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 功能安全标准支持
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 标准 | Rust | C | C++ | Ada | 注释 |
@@ -109,6 +113,7 @@
 | **EN 50128** | ✅ 支持 | ✅ 成熟 | ⚠️ 受限 | ✅ 成熟 | SIL 4适用 |
 
 ### 3.2 认证工具链可用性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -138,9 +143,11 @@ C++: ⭐⭐
 ---
 
 ## 4. 开发效率对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 学习曲线
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -168,6 +175,7 @@ C++: ⭐⭐
 ```
 
 ### 4.2 开发工具支持
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 工具 | Rust | C | C++ | Ada | Java | Go |
@@ -181,9 +189,11 @@ C++: ⭐⭐
 ---
 
 ## 5. 生态成熟度对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 库生态
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 领域 | Rust | C | C++ | Ada | Java | Go |
@@ -195,6 +205,7 @@ C++: ⭐⭐
 | **数学/控制** | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
 
 ### 5.2 社区活跃度
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -228,9 +239,11 @@ Java:
 ---
 
 ## 6. 综合评分矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 安全关键项目适用性评分
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | Rust | C | C++ | Ada | Java | Go |
@@ -246,6 +259,7 @@ Java:
 | **总分** | **81** | **73** | **70** | **79** | **76** | **69** |
 
 ### 6.2 场景推荐
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -273,9 +287,11 @@ Java:
 ---
 
 ## 7. 迁移成本分析
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 从C/C++迁移到Rust
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -301,6 +317,7 @@ Java:
 ```
 
 ### 7.2 FFI边界成本
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 边界类型 | 复杂度 | 性能影响 | 维护成本 |
@@ -313,9 +330,11 @@ Java:
 ---
 
 ## 8. 未来趋势预测
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 8.1 2026-2030预测
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -357,6 +376,7 @@ Java:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -464,4 +484,3 @@ Java:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

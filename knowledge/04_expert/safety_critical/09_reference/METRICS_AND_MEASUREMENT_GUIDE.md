@@ -75,6 +75,7 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 > **[来源: Rust Official Docs]**
 
 ### 2.1 覆盖率类型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 类型 | 定义 | ASIL D | ASIL C | 工具 |
@@ -86,6 +87,7 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 | **行覆盖** | 执行代码行比例 | 100% | 100% | tarpaulin |
 
 ### 2.2 覆盖率测量
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -104,6 +106,7 @@ cargo llvm-cov -p my-crate --lcov
 ```
 
 ### 2.3 覆盖率检查表
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -137,9 +140,11 @@ mod coverage {
 ---
 
 ## 3. 缺陷度量
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 缺陷密度
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 阶段 | 度量 | 目标 | 计算方法 |
@@ -150,6 +155,7 @@ mod coverage {
 | **现场** | 缺陷/KLOC | < 0.1 | 现场报告 |
 
 ### 3.2 缺陷分类
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -171,9 +177,11 @@ mod coverage {
 ---
 
 ## 4. 过程度量
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 开发效率
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 度量 | 定义 | 目标 | 收集方法 |
@@ -184,6 +192,7 @@ mod coverage {
 | **评审效率** | 缺陷/评审小时 | > 2 | 评审记录 |
 
 ### 4.2 时间度量
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -204,9 +213,11 @@ mod coverage {
 ---
 
 ## 5. 安全特定度量
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 安全分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 度量 | 定义 | ASIL D要求 | 工具 |
@@ -217,6 +228,7 @@ mod coverage {
 | **诊断覆盖** | 故障检测比例 | > 99% | FMEDA |
 
 ### 5.2 形式化验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -241,9 +253,11 @@ mod coverage {
 ---
 
 ## 6. 工具链度量
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 构建性能
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 度量 | 目标 | 测量 | 优化 |
@@ -254,6 +268,7 @@ mod coverage {
 | **覆盖率** | < 5分钟 | llvm-cov | 增量 |
 
 ### 6.2 CI/CD度量
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -268,9 +283,11 @@ mod coverage {
 ---
 
 ## 7. 度量报告模板
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 周报模板
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```markdown
@@ -302,6 +319,7 @@ mod coverage {
 ```
 
 ### 7.2 月度报告模板
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```markdown
@@ -331,9 +349,11 @@ mod coverage {
 ---
 
 ## 8. 度量工具
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 8.1 自动收集
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```yaml
@@ -351,6 +371,7 @@ mod coverage {
 ```
 
 ### 8.2 可视化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -378,6 +399,7 @@ mod coverage {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -467,4 +489,3 @@ mod coverage {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

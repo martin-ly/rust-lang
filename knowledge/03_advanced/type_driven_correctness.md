@@ -223,14 +223,17 @@ pub fn demo_request_builder() {
 ---
 
 ## 3. Phantom Types（幻影类型）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Phantom Types 是**仅用于类型参数、不承载数据**的类型。它们与 `PhantomData` 结合使用，在编译时编码额外的类型约束。
 
 ### 3.2 示例：单位安全的物理计算
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -307,14 +310,17 @@ pub fn demo_phantom_types() {
 ---
 
 ## 4. Capability Tokens（能力令牌）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 什么是 Capability？
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Capability 安全模型是一种访问控制范式：**持有某个类型的值，就证明了拥有对应的权限**。
 
 ### 4.2 示例：权限分级文件系统访问
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -403,6 +409,7 @@ pub fn demo_capability_tokens() {
 ```
 
 ### 4.3 运行时零成本
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 能力令牌模式的关键优势：
@@ -420,6 +427,7 @@ assert_eq!(size_of::<Capability<Read>>(), 0);
 ---
 
 ## 5. 综合示例：类型安全的资源生命周期管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -525,6 +533,7 @@ pub fn demo_lifecycle_management() {
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -573,6 +582,7 @@ graph TD
 ---
 
 ## 6. 模式对比与选择指南
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | 核心机制 | 适用场景 | 运行时成本 |
@@ -582,6 +592,7 @@ graph TD
 | **Capability Tokens** | 能力 → 类型持有 | 权限控制、访问管理 | 零 |
 
 ### 何时使用？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **使用 Type-State**: 当对象有明确的生命周期阶段，且某些操作只在特定阶段合法时
@@ -591,6 +602,7 @@ graph TD
 ---
 
 ## 模块 6: 反例集
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 反例 1: Type-State 状态转换缺失导致编译错误
@@ -749,9 +761,11 @@ struct LimitedCapability<P> {
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 表征 A: Type-Driven Correctness 模式选择决策树
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -789,6 +803,7 @@ struct LimitedCapability<P> {
 ```
 
 ### 表征 B: 编译时检查 vs 运行时检查成本对比矩阵
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 检查维度 | Type-State (编译时) | Enum+Match (运行时) | 运行时 Assert |
@@ -803,6 +818,7 @@ struct LimitedCapability<P> {
 | **FFI 友好度** | 低（C 无此概念） | 高 | 高 |
 
 ### 表征 C: Type-State 状态转换正确性验证流程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -842,6 +858,7 @@ struct LimitedCapability<P> {
 ---
 
 ## 7. 注意事项
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **API 复杂度**: 类型驱动的正确性会增加 API 的表面积（每个状态一个 impl 块）
@@ -852,6 +869,7 @@ struct LimitedCapability<P> {
 ---
 
 ## 8. 参考文献
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **Aldrich, J.** *"Typestate-Oriented Programming"*. Onward! 2009.
@@ -873,9 +891,11 @@ struct LimitedCapability<P> {
 ---
 
 ## ⚖️ 模块 9: 设计权衡分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 为什么 Rust 适合 Type-Driven Correctness？
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 的类型系统结合了以下特性，使其成为 Type-Driven Correctness 的理想载体：
@@ -886,6 +906,7 @@ Rust 的类型系统结合了以下特性，使其成为 Type-Driven Correctness
 4. **无空值**: `Option<T>` 和 `Result<T, E>` 强制显式处理缺失值，与 Type-State 互补。
 
 ### 9.2 该设计的成本
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **API 表面积膨胀**: Type-State 为每个状态提供独立的 `impl` 块，API 文档复杂度显著增加。一个 3 状态的文件句柄可能有 15+ 个方法分布在 3 个 `impl` 块中。
@@ -897,6 +918,7 @@ Rust 的类型系统结合了以下特性，使其成为 Type-Driven Correctness
 **状态爆炸**: 如果状态空间很大（如 TCP 状态机的 11 个状态），Type-State 会产生大量样板代码。
 
 ### 9.3 什么场景下 Type-Driven Correctness 是次优的？
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **快速原型**: 类型层面的编码增加了设计时间。原型阶段应优先使用运行时检查，成熟后再重构。
@@ -907,9 +929,11 @@ Rust 的类型系统结合了以下特性，使其成为 Type-Driven Correctness
 ---
 
 ## 📝 模块 10: 自我检测与练习
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 概念性问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Type-State 模式与 GoF 状态模式（State Pattern）有何本质区别？** 为什么 Rust 的 Type-State 是"零成本"的，而传统的状态模式不是？
@@ -919,6 +943,7 @@ Rust 的类型系统结合了以下特性，使其成为 Type-Driven Correctness
 3. **Capability Tokens 与 RBAC（基于角色的访问控制）在编译时验证方面有何优势？** 它的局限性是什么？
 
 ### 代码修复题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **题 1**: 以下 Type-State 实现有缺陷，某些非法状态转换未被阻止。请修复：
@@ -1045,6 +1070,7 @@ impl AuthManager {
 </details>
 
 ### 开放设计题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **题 3**: 你正在设计一个数据库连接库。连接有以下状态：
@@ -1069,9 +1095,11 @@ impl AuthManager {
 ---
 
 ## 📖 权威来源与延伸阅读
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 官方文档（一级来源）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [TRPL: Ch19.3 — Advanced Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) —— `PhantomData`、关联类型、类型约束的权威指南
@@ -1079,6 +1107,7 @@ impl AuthManager {
 - [Rust Reference: PhantomData](https://doc.rust-lang.org/std/marker/struct.PhantomData.html) —— `PhantomData` 的精确语义与使用场景
 
 ### 学术来源（一级来源）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **Fähndrich & Leino, "Declaring and Checking Non-null Types in an Object-Oriented Language"**, *OOPSLA 2003* —— Type-State 模式的学术先驱，将运行时状态提升为编译时类型。
@@ -1086,6 +1115,7 @@ impl AuthManager {
 - **Wadler, "Theorems for Free!"**, *FPCA 1989* —— 参数性定理，类型驱动的正确性的理论基础。
 
 ### 社区权威（二级来源）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **Jon Gjengset**, [Crust of Rust: Phantom Types](https://www.youtube.com/watch?v=QlM6HIXp5HQ) —— Phantom Types 与 Type-State 的可视化讲解。
@@ -1113,6 +1143,7 @@ impl AuthManager {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [延迟初始化 (Lazy Initialization)](lazy_initialization.md)
@@ -1476,4 +1507,3 @@ impl AuthManager {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

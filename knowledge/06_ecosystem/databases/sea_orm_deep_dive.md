@@ -45,6 +45,7 @@
   - [🧪 测试策略](#-测试策略)
   - [🔗 参考资源](#-参考资源)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -86,6 +87,7 @@ Sea-ORM 适用场景:
 > **[来源: Rust Official Docs]**
 
 ### 核心概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -108,6 +110,7 @@ pub enum Relation {
 ```
 
 ### 与 Diesel/SQLx 对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特性 | Sea-ORM | Diesel | SQLx |
@@ -122,9 +125,11 @@ pub enum Relation {
 ---
 
 ## 🚀 快速开始
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 安装配置
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```toml
@@ -138,6 +143,7 @@ tokio = { version = "1", features = ["full"] }
 ```
 
 ### CLI 工具
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -153,9 +159,11 @@ sea-orm-cli generate entity \
 ---
 
 ## 📐 实体定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 基本实体
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -184,6 +192,7 @@ impl ActiveModelBehavior for ActiveModel {}
 ```
 
 ### 关系定义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -236,6 +245,7 @@ impl Related<super::user::Entity> for Entity {
 ```
 
 ### 复合主键
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -253,9 +263,11 @@ pub struct Model {
 ---
 
 ## 💾 CRUD 操作
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Create
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -289,6 +301,7 @@ user::Entity::insert_many(users)
 ```
 
 ### Read
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -320,6 +333,7 @@ let num_pages = paginator.num_pages().await?;
 ```
 
 ### Update
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -344,6 +358,7 @@ user::Entity::update_many()
 ```
 
 ### Delete
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -367,9 +382,11 @@ user::Entity::delete_many()
 ---
 
 ## 🔗 关联查询
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Eager Loading
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -397,6 +414,7 @@ let result: Vec<(user::Model, Vec<(post::Model, Vec<comment::Model>)>)> =
 ```
 
 ### Lazy Loading
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -415,9 +433,11 @@ let posts: Vec<post::Model> = user.find_related(post::Entity)
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 连接池
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -436,6 +456,7 @@ let db = Database::connect(opt).await?;
 ```
 
 ### 查询优化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -469,6 +490,7 @@ let results = db.query_all(
 ---
 
 ## 🧪 测试策略
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -503,6 +525,7 @@ mod tests {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Sea-ORM 官方文档](https://www.sea-ql.org/SeaORM/)
@@ -519,6 +542,7 @@ mod tests {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
@@ -686,4 +710,3 @@ mod tests {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

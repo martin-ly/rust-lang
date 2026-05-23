@@ -71,6 +71,7 @@ _________________________________
 ---
 
 ### 模块安全等级检查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```markdown
@@ -126,9 +127,11 @@ _________________________________
 ---
 
 ## 认证准备检查清单
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### ISO 26262准备清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```markdown
@@ -201,6 +204,7 @@ _________________________________
 ---
 
 ## 发布前检查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```markdown
@@ -260,9 +264,11 @@ _________________________________
 ---
 
 ## 文档模板
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 安全需求规格模板
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```markdown
@@ -357,6 +363,7 @@ _________________________________
 ```
 
 ### 设计文档模板
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```markdown
@@ -400,46 +407,56 @@ pub fn function_name(arg: Type) -> Result<Output, Error>;
 - 自检: ...
 
 ## 3. 数据流
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 正常操作
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 [数据流图]
 
 ### 3.2 错误处理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 [错误处理流]
 
 ## 4. 资源使用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 内存
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 栈使用: X bytes
 - 堆使用: Y bytes (如适用)
 
 ### 4.2 时间
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 最坏情况执行时间: X μs
 
 ## 5. 安全分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 假设
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ...
 
 ### 5.2 依赖
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ...
 
 ### 5.3 风险
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ...
@@ -521,9 +538,11 @@ pub fn function_name(arg: Type) -> Result<Output, Error>;
 ---
 
 ## 工具配置模板
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Clippy配置 (.clippy.toml)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```toml
@@ -573,6 +592,7 @@ deny = [
 ```
 
 ### CI配置 (.github/workflows/ci.yml)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```yaml
@@ -624,6 +644,7 @@ jobs:
 ```
 
 ### Cargo.toml模板
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```toml
@@ -667,6 +688,7 @@ debug = true
 ---
 
 ## 使用说明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **选择合适的检查清单**根据当前阶段和任务
@@ -687,6 +709,7 @@ debug = true
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -746,4 +769,3 @@ debug = true
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

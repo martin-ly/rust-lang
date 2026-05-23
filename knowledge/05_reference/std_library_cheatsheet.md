@@ -177,6 +177,7 @@ s.insert(42);
 ---
 
 ### std::string - 字符串
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -219,6 +220,7 @@ let s = format!("{:.2}", 3.14159); // 小数位限制
 ---
 
 ### std::io - 输入输出
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -273,6 +275,7 @@ let line = stdin.lock().lines().next();
 ---
 
 ### std::fs - 文件系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -316,6 +319,7 @@ for entry in fs::read_dir("./")? {
 ---
 
 ### std::path - 路径处理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -356,6 +360,7 @@ let parent = p.parent();
 ---
 
 ### std::env - 环境变量
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -388,6 +393,7 @@ let key = env::var("API_KEY").unwrap_or_default();
 ---
 
 ### std::process - 进程管理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -444,6 +450,7 @@ let status = child.wait()?;  // 等待结束
 ---
 
 ### std::thread - 多线程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -489,6 +496,7 @@ thread::scope(|s| {
 ---
 
 ### std::sync - 同步原语
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### Mutex<T> - 互斥锁
@@ -568,6 +576,7 @@ let val = rx.recv().unwrap();
 ---
 
 ### std::time - 时间处理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -632,6 +641,7 @@ let since_epoch = now.duration_since(SystemTime::UNIX_EPOCH)?;
 ---
 
 ### std::iter - 迭代器
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### Iterator Trait 方法
@@ -690,9 +700,11 @@ let first_even = [1,2,3,4].iter().find(|&&x| x % 2 == 0);
 ---
 
 ## 常用 Traits 速查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 基础 Trait
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | Trait | 方法 | 说明 |
@@ -716,6 +728,7 @@ impl fmt::Display for Point {
 ```
 
 ### 转换 Trait
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | Trait | 方法 | 说明 |
@@ -736,6 +749,7 @@ let v = Vec::<i32>::new();  // 等价
 ```
 
 ### 引用转换 Trait
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Trait | 方法 | 说明 |
@@ -755,6 +769,7 @@ is_hello(String::new()); // String
 ```
 
 ### 智能指针 Trait
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | Trait | 方法 | 说明 |
@@ -772,6 +787,7 @@ impl<T> Deref for MyBox<T> {
 ```
 
 ### 迭代 Trait
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | Trait | 方法 | 说明 |
@@ -797,9 +813,11 @@ for item in &mut collection { } // iter_mut()
 ---
 
 ## 常用宏速查
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 输出宏
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 宏 | 说明 | 示例 |
@@ -813,6 +831,7 @@ for item in &mut collection { } // iter_mut()
 | `writeln!` | 写入缓冲区换行 | `writeln!(buf, "{}", x)?` |
 
 ### 格式语法
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -835,6 +854,7 @@ println!("{0} {1} {0}", a, b);   // 位置参数
 ```
 
 ### 集合宏
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 宏 | 说明 | 示例 |
@@ -844,6 +864,7 @@ println!("{0} {1} {0}", a, b);   // 位置参数
 | `vec![val; n]` | 重复值 | `vec![0; 10]` |
 
 ### 开发辅助宏
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 宏 | 说明 | 用途 |
@@ -869,6 +890,7 @@ match value {
 ```
 
 ### 其他常用宏
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 宏 | 说明 |
@@ -888,9 +910,11 @@ match value {
 ---
 
 ## 快速参考表
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 类型转换表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 来源 | 目标 | 方法 |
@@ -905,6 +929,7 @@ match value {
 | `i32` | `String` | `.to_string()` |
 
 ### 错误处理速查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -927,6 +952,7 @@ let x = result.unwrap_or_default(); // 或 Default
 ```
 
 ### 生命周期标注模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -941,9 +967,11 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str  // 多生命周期
 ---
 
 ## 📖 权威来源与延伸阅读
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 官方文档（一级来源）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust Standard Library 文档](https://doc.rust-lang.org/std/) —— 标准库完整 API 参考
@@ -962,6 +990,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str  // 多生命周期
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 标准库速查](./std_library_cheatsheet.md)
@@ -1299,4 +1328,3 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str  // 多生命周期
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

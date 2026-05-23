@@ -39,6 +39,7 @@
   - [🧪 测试](#-测试)
   - [🔗 参考资源](#-参考资源)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -111,6 +112,7 @@ fn create_router(state: Arc<AppState>) -> Router {
 ```
 
 ### 请求处理流程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -136,9 +138,11 @@ sequenceDiagram
 ---
 
 ## 📐 核心概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Handler
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Handler 是任何实现 `Handler` trait 的函数。
@@ -181,6 +185,7 @@ fn custom_handler() -> impl Handler<(), Arc<AppState>> {
 ```
 
 ### Extractor
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Extractors 从请求中提取数据。
@@ -268,6 +273,7 @@ async fn protected_route(api_key: ApiKey) -> String {
 ```
 
 ### Response
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -329,6 +335,7 @@ async fn tuple_response() -> (StatusCode, Json<User>) {
 ```
 
 ### 中间件
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -397,9 +404,11 @@ fn create_app() -> Router {
 ---
 
 ## 🚀 高级用法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 状态管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -449,6 +458,7 @@ fn create_router() -> Router {
 ```
 
 ### 错误处理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -523,6 +533,7 @@ async fn get_user(Path(id): Path<i64>) -> Result<Json<User>, AppError> {
 ```
 
 ### 认证授权
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -591,6 +602,7 @@ fn protected_routes() -> Router {
 ```
 
 ### WebSocket
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -650,9 +662,11 @@ async fn handle_socket(socket: WebSocket, state: Arc<AppState>) {
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 基准数据
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 场景 | 吞吐量 | P99 延迟 | 内存/连接 |
@@ -663,6 +677,7 @@ async fn handle_socket(socket: WebSocket, state: Arc<AppState>) {
 | WebSocket | 100K conn | - | 8KB |
 
 ### 优化建议
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -693,6 +708,7 @@ let pool = PgPoolOptions::new()
 ---
 
 ## 🧪 测试
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -729,6 +745,7 @@ async fn test_get_user() {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Axum 官方文档](https://docs.rs/axum/latest/axum/)
@@ -745,6 +762,7 @@ async fn test_get_user() {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
@@ -1026,4 +1044,3 @@ async fn test_get_user() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

@@ -120,6 +120,7 @@ Rust 的所有权规则在编译期检查：
 ---
 
 ### 模块 2: 属性清单
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
@@ -140,6 +141,7 @@ Rust 的所有权规则在编译期检查：
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -188,6 +190,7 @@ graph TD
 ---
 
 ### 模块 4: 机制解释
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 4.1 类型系统视角
@@ -284,6 +287,7 @@ fn main() {
 ---
 
 ### 模块 5: 正例集
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 5.1 Minimal（最小正例）
@@ -385,6 +389,7 @@ impl Directory {
 ---
 
 ### 模块 6: 反例集
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 反例 1: `Rc` 循环引用导致内存泄漏
@@ -513,9 +518,11 @@ println!("{}", *data);
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 表征 A: 智能指针选择决策树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -564,6 +571,7 @@ println!("{}", *data);
 ```
 
 ### 表征 B: 智能指针能力矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 能力 | `Box<T>` | `Rc<T>` | `Arc<T>` | `RefCell<T>` | `Mutex<T>` |
@@ -577,6 +585,7 @@ println!("{}", *data);
 | **典型组合** | — | `Rc<RefCell<T>>` | `Arc<Mutex<T>>` | `Rc<RefCell<T>>` | `Arc<Mutex<T>>` |
 
 ### 表征 C: Rc 引用计数生命周期图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -642,9 +651,11 @@ Rc<T> 引用计数的生命周期
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 官方来源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
@@ -654,6 +665,7 @@ Rc<T> 引用计数的生命周期
 | [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) | 官方 | Arc API | 模块 2 |
 
 ### 8.2 学术来源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 论文/来源 | 会议/机构 | 核心论证 | 本文档对应点 |
@@ -662,6 +674,7 @@ Rc<T> 引用计数的生命周期
 | **"Region-Based Memory Management"** (Tofte & Talpin) | TOPLAS 1994 | 基于区域的内存管理，与 Rust 所有权系统相关 | 模块 4.3 |
 
 ### 8.3 社区权威
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
@@ -670,6 +683,7 @@ Rc<T> 引用计数的生命周期
 | **Niko Matsakis** | [Rust 所有权博客系列](https://smallcultfollowing.com/babysteps/) | 所有权与内部可变性的设计权衡 | 模块 1.3 |
 
 ### 8.4 跨语言对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | Rust (`Rc`/`Arc`) | C++ (`shared_ptr`) | Java (GC) | Swift (ARC) |
@@ -685,9 +699,11 @@ Rc<T> 引用计数的生命周期
 ---
 
 ## ⚖️ 模块 9: 设计权衡分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 9.1 为什么 Rust 需要 `RefCell`？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 `RefCell` 看似违反了 Rust 的借用规则，但它提供了一种**受控的灵活性**：
@@ -699,6 +715,7 @@ Rc<T> 引用计数的生命周期
 代价：借用冲突导致 **panic**（而非编译错误）。
 
 ### 9.2 该设计的成本
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **运行时 panic 风险**: `RefCell` 的借用检查在运行时进行，双借冲突导致 panic。`Mutex` 的锁竞争导致线程阻塞。
@@ -708,6 +725,7 @@ Rc<T> 引用计数的生命周期
 **循环引用风险**: 与 GC 语言不同，Rust 不会自动打破循环引用。开发者必须主动使用 `Weak`。
 
 ### 9.3 什么场景下智能指针是次优的？
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **简单所有权**: 如果数据有清晰的所有者，直接使用栈变量或 `Box`，避免 `Rc` 的引用计数开销。
@@ -717,9 +735,11 @@ Rc<T> 引用计数的生命周期
 ---
 
 ## 📝 模块 10: 自我检测与练习
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 概念性问题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **`Rc<RefCell<T>>` 和 `Arc<Mutex<T>>` 在功能上有何对应关系？** 为什么不能直接用 `Rc<RefCell<T>>` 跨线程，而必须用 `Arc<Mutex<T>>`？
@@ -729,6 +749,7 @@ Rc<T> 引用计数的生命周期
 3. **`Deref` trait 的自动转换与 C++ 的隐式类型转换有何异同？** Rust 为什么选择显式 trait 实现而非隐式转换？
 
 ### 代码修复题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **题 1**: 以下代码存在借用冲突。请分析原因并修复：
@@ -821,6 +842,7 @@ fn main() {
 </details>
 
 ### 开放设计题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **题 3**: 你正在实现一个 DOM 树解析器（类似 HTML DOM）。节点有以下特征：
@@ -842,6 +864,7 @@ fn main() {
 ---
 
 ## 📖 延伸阅读
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust Book - Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
@@ -865,6 +888,7 @@ fn main() {
 ---
 
 ## 📚 权威来源索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方与半官方
@@ -889,6 +913,7 @@ fn main() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [集合类型 (Collections)](collections.md)
@@ -1164,4 +1189,3 @@ fn main() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

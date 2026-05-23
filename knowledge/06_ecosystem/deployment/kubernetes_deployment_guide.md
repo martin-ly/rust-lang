@@ -43,6 +43,7 @@
     - [优雅关闭](#优雅关闭)
   - [🔗 参考资源](#-参考资源)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -148,6 +149,7 @@ ENTRYPOINT ["/app/myapp"]
 ```
 
 ### Distroless 镜像
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```dockerfile
@@ -176,9 +178,11 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
 ---
 
 ## ☸️ Kubernetes 配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Deployment
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```yaml
@@ -309,6 +313,7 @@ spec:
 ```
 
 ### Service
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```yaml
@@ -350,6 +355,7 @@ spec:
 ```
 
 ### ConfigMap
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```yaml
@@ -378,6 +384,7 @@ data:
 ```
 
 ### Secret
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```yaml
@@ -395,6 +402,7 @@ stringData:
 ```
 
 ### HPA (水平自动伸缩)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```yaml
@@ -451,6 +459,7 @@ spec:
 ```
 
 ### VPA (垂直自动伸缩)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```yaml
@@ -482,9 +491,11 @@ spec:
 ---
 
 ## 📈 可观测性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Metrics
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```yaml
@@ -508,6 +519,7 @@ spec:
 ```
 
 ### Logging
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```yaml
@@ -540,6 +552,7 @@ data:
 ```
 
 ### Tracing
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```yaml
@@ -575,9 +588,11 @@ spec:
 ---
 
 ## 🛡️ 安全性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### NetworkPolicy
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```yaml
@@ -617,6 +632,7 @@ spec:
 ```
 
 ### PodSecurityPolicy
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```yaml
@@ -643,9 +659,11 @@ spec:
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 资源优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```yaml
@@ -660,6 +678,7 @@ resources:
 ```
 
 ### 启动优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -681,6 +700,7 @@ async fn main() {
 ```
 
 ### 优雅关闭
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -716,6 +736,7 @@ async fn graceful_shutdown() {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Kubernetes 官方文档](https://kubernetes.io/docs/)
@@ -731,6 +752,7 @@ async fn graceful_shutdown() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
@@ -994,4 +1016,3 @@ async fn graceful_shutdown() {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

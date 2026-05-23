@@ -13,6 +13,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Tokio 运行时深度解析](#tokio-运行时深度解析)
@@ -54,10 +55,12 @@
     - [学术来源](#学术来源)
     - [跨语言来源](#跨语言来源)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 🎯 概述
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Tokio 是 Rust 最流行的异步运行时，提供：
@@ -68,6 +71,7 @@ Tokio 是 Rust 最流行的异步运行时，提供：
 - **同步原语**: 异步版本的 Mutex、Channel 等
 
 ### 对比其他运行时
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | Tokio | async-std | smol |
@@ -80,9 +84,11 @@ Tokio 是 Rust 最流行的异步运行时，提供：
 ---
 
 ## 🏗️ 架构设计
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 运行时组件
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -107,6 +113,7 @@ graph TD
 ```
 
 ### 任务调度
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -128,6 +135,7 @@ graph TD
 ---
 
 ### 模块 1: 概念定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 1.1 直观定义
@@ -152,6 +160,7 @@ Tokio 使用**工作窃取（Work-Stealing）**调度模型：每个工作线程
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -185,9 +194,11 @@ graph TD
 ---
 
 ## 💡 核心概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 任务 (Task)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -217,6 +228,7 @@ async fn named_task() {
 ```
 
 ### 执行器 (Executor)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -252,6 +264,7 @@ fn multi_threaded() {
 ```
 
 ### I/O 驱动
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -287,6 +300,7 @@ async fn tcp_server() -> tokio::io::Result<()> {
 ```
 
 ### 定时器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -324,9 +338,11 @@ async fn slow_operation() -> String {
 ---
 
 ## 🚀 高级用法
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 运行时配置
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -365,6 +381,7 @@ fn optimized_runtime() {
 ```
 
 ### 任务管理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -413,6 +430,7 @@ async fn cancel_task() {
 ```
 
 ### 并发模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -467,9 +485,11 @@ async fn shared_state() {
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 最佳实践
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -518,6 +538,7 @@ async fn local_tasks() {
 ```
 
 ### 性能调优参数
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -539,9 +560,11 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## 🗺️ 模块 7: 思维表征
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 表征: Tokio 运行时选择决策矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 运行时类型 | 工作线程 | 说明 |
@@ -553,6 +576,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 | **阻塞操作多** | `new_multi_thread` | 默认 + 增加 blocking_threads | 避免工作线程阻塞 |
 
 ### 表征: 异步代码阻塞陷阱
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -577,6 +601,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 来源 | 类型 | 说明 |
@@ -587,9 +612,11 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## ⚖️ 模块 9: 设计权衡
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 为什么 Tokio 使用多线程运行时？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 单线程运行时（如 `async-std` 的早期版本）简单但无法利用多核。Tokio 的工作窃取模型：
@@ -603,6 +630,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## 📝 模块 10: 自我检测
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Tokio 的 `spawn` 与 `spawn_blocking` 有何根本区别？** 在什么场景下必须使用 `spawn_blocking`？
@@ -645,6 +673,7 @@ async fn main() {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/)
@@ -661,6 +690,7 @@ async fn main() {
 ---
 
 ## 📚 权威来源索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方来源
@@ -684,6 +714,7 @@ async fn main() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
@@ -891,4 +922,3 @@ async fn main() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

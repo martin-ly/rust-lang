@@ -48,6 +48,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 系统架构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -74,6 +75,7 @@
 ```
 
 ### Rust模块结构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -420,9 +422,11 @@ impl PidController {
 ---
 
 ## 验证策略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 测试层次
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -445,6 +449,7 @@ Level 3: 系统测试
 ```
 
 ### 测试覆盖率要求
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模块 | 语句 | 分支 | MC/DC |
@@ -455,6 +460,7 @@ Level 3: 系统测试
 | 传感器驱动 | 100% | 100% | 100% |
 
 ### 形式化验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -495,9 +501,11 @@ mod verification {
 ---
 
 ## 认证经验
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### IEC 62304符合性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 软件开发生命周期
@@ -528,6 +536,7 @@ mod verification {
 ```
 
 ### FDA提交经验
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 软件文档
@@ -548,9 +557,11 @@ mod verification {
 ---
 
 ## 关键指标
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 代码度量
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 指标 | 值 |
@@ -563,6 +574,7 @@ mod verification {
 | 集成测试数 | 85 |
 
 ### 缺陷数据
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 阶段 | 发现缺陷数 | 严重程度 |
@@ -577,9 +589,11 @@ mod verification {
 ---
 
 ## 经验教训
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 成功因素
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **早期培训**: 团队提前3个月学习Rust
@@ -588,6 +602,7 @@ mod verification {
 4. **持续验证**: CI集成Miri和Kani
 
 ### 挑战与解决
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 挑战 | 解决方案 |
@@ -600,6 +615,7 @@ mod verification {
 ---
 
 ## 结论
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本案例证明Rust完全可以用于IEC 62304 Class C医疗设备开发。关键成功因素包括:
@@ -625,6 +641,7 @@ mod verification {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -856,4 +873,3 @@ mod verification {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

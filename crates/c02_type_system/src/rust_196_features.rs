@@ -373,7 +373,8 @@ pub fn get_never_type_info() -> String {
 ///
 /// ## 代码示例
 ///
-/// ```rust
+/// ```rust,ignore
+/// // 注意: RangeToInclusive 的 IntoIterator 需要 Rust 1.96+ 且 Idx: Zero
 /// use core::range::{
 ///     Range, RangeFrom, RangeFromIter, RangeIter, RangeToInclusive, RangeToInclusiveIter,
 /// };
@@ -393,7 +394,7 @@ pub fn get_never_type_info() -> String {
 /// // ... 无限递增（需配合 take）
 ///
 /// // RangeToInclusive: 闭区间 (-∞, 5]
-/// let to = RangeToInclusive { end: 5 };
+/// let to = RangeToInclusive { last: 5 };
 /// // 注意：RangeToInclusive 需要从 0 开始迭代
 /// let mut iter: RangeToInclusiveIter<i32> = to.into_iter();
 /// assert_eq!(iter.next(), Some(0));

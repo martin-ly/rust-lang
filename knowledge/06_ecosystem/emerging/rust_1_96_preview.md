@@ -88,6 +88,7 @@ assert!(result.is_ok());
 > **状态**: 稳定化 PR #152122 推进中
 
 ### 4. `cargo script` / Frontmatter
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 单文件 Rust 脚本，无需 `Cargo.toml`：
@@ -124,6 +125,7 @@ cargo script my_script.rs
 > **状态**: nightly 已实现，RFC #3502/#3503 已批准，目标 1.96 稳定
 
 ### 5. RFC 3550 新 Range 类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 1.95 已稳定 `RangeInclusive` 和 `RangeInclusiveIter`。1.96 预计继续推进 RFC 3550：
@@ -142,6 +144,7 @@ for i in r { // r 仍可用，因为是 Copy
 > **目标**: 为 Edition 2027 的语法糖替换做准备
 
 ### 6. `proc_macro_value`
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 过程宏支持直接返回值类型：
@@ -156,6 +159,7 @@ for i in r { // r 仍可用，因为是 Copy
 ---
 
 ## 📊 与 1.95 对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 1.95 | 1.96 (预计) |
@@ -169,6 +173,7 @@ for i in r { // r 仍可用，因为是 Copy
 ---
 
 ## ⚠️ 使用注意
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 所有上述特性在 1.96 稳定前均需 nightly 编译器和 feature gate：
@@ -190,6 +195,7 @@ cargo +nightly -Z script run my_script.rs
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust 1.96.0 Beta Release Notes](https://releases.rs/docs/1.96.0/)
@@ -213,6 +219,7 @@ cargo +nightly -Z script run my_script.rs
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
@@ -296,4 +303,3 @@ cargo +nightly -Z script run my_script.rs
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

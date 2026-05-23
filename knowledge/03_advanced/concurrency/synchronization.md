@@ -135,6 +135,7 @@ Mutex 的 OS 实现（以 POSIX pthread_mutex 为例）:
 ---
 
 ### 模块 2: 属性清单
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
@@ -155,6 +156,7 @@ Mutex 的 OS 实现（以 POSIX pthread_mutex 为例）:
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -198,6 +200,7 @@ graph TD
 ---
 
 ### Mutex - 互斥锁
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 `Mutex<T>` 提供独占访问，同一时刻只有一个线程可以获取锁。
@@ -239,6 +242,7 @@ fn main() {
 ---
 
 ### RwLock - 读写锁
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 当读多写少时，`RwLock<T>` 比 `Mutex<T>` 更高效，允许多个读者或一个写者。
@@ -287,6 +291,7 @@ fn main() {
 ---
 
 ### Condvar - 条件变量
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 `Condvar` 用于线程间的事件通知，常与 `Mutex` 配合使用实现复杂的同步逻辑。
@@ -339,6 +344,7 @@ fn main() {
 ---
 
 ### Barrier - 屏障
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 `Barrier` 用于同步多个线程，使它们在执行后续代码前全部到达某个同步点。
@@ -386,6 +392,7 @@ fn main() {
 ---
 
 ### Semaphore - 信号量
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 虽然标准库没有直接提供 `Semaphore`，但可通过 `tokio::sync::Semaphore` 或自定义实现。
@@ -429,6 +436,7 @@ async fn main() {
 ---
 
 ### mpsc 通道进阶
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 多生产者单消费者模式的高级用法：
@@ -500,6 +508,7 @@ fn main() {
 ---
 
 ### 死锁避免
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 死锁发生的四个必要条件：互斥、占有等待、不可抢占、循环等待。
@@ -591,6 +600,7 @@ fn try_lock_example() {
 ---
 
 ### Poisoning 处理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 当线程在持有锁时 panic，锁会被标记为 "poisoned" 状态。
@@ -633,9 +643,11 @@ fn main() {
 ---
 
 ## 💡 最佳实践
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 1. 优先使用消息传递而非共享内存
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -660,6 +672,7 @@ fn process_in_parallel(items: Vec<i32>) -> Vec<i32> {
 ```
 
 ### 2. 避免在 async 代码中使用阻塞锁
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -679,6 +692,7 @@ async fn good_example(data: std::sync::Arc<Mutex<i32>>) {
 ```
 
 ### 3. 使用作用域线程简化生命周期
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -705,9 +719,11 @@ fn scoped_threads_example() {
 ---
 
 ## ⚠️ 常见陷阱
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 陷阱 1：持有锁跨越 await 点
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -729,6 +745,7 @@ async fn good(data: Arc<Mutex<Data>>) {
 ```
 
 ### 陷阱 2：Mutex 包裹不需要同步的类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -741,6 +758,7 @@ let counter = AtomicUsize::new(0);
 ```
 
 ### 陷阱 3：在单线程上下文中过度同步
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -755,9 +773,11 @@ struct SingleThreadContext {
 ---
 
 ## 🎮 动手练习
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 练习 1：实现线程池
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -843,6 +863,7 @@ impl Worker {
 ```
 
 ### 练习 2：读者-写者锁的实现模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -880,9 +901,11 @@ fn reader_writer_pattern() {
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 表征 A: 同步原语选择决策树
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -926,6 +949,7 @@ fn reader_writer_pattern() {
 ```
 
 ### 表征 B: 同步原语能力矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | `Mutex<T>` | `RwLock<T>` | `Condvar` | `Barrier` | `mpsc` |
@@ -939,6 +963,7 @@ fn reader_writer_pattern() {
 | **Async 等价** | `tokio::sync::Mutex` | `tokio::sync::RwLock` | `tokio::sync::Notify` | N/A | `tokio::sync::mpsc` |
 
 ### 表征 C: 死锁四条件与破坏策略
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -971,9 +996,11 @@ fn reader_writer_pattern() {
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 8.1 官方来源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
@@ -983,6 +1010,7 @@ fn reader_writer_pattern() {
 | [The Rustonomicon - Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | 高级教程 | Send/Sync 与同步原语 | 模块 1.3 |
 
 ### 8.2 学术来源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 论文/来源 | 会议/机构 | 核心论证 | 本文档对应点 |
@@ -991,6 +1019,7 @@ fn reader_writer_pattern() {
 | **"The Problem of Safe Concurrency"** | Niko Matsakis 博客 | Rust 同步原语的设计哲学 | 模块 9 |
 
 ### 8.3 社区权威
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
@@ -1000,6 +1029,7 @@ fn reader_writer_pattern() {
 | **Tokio 团队** | [Tokio Sync Primitives](https://tokio.rs/tokio/topics/shared-state) | 异步上下文中的同步原语选择 | 模块 7 |
 
 ### 8.4 跨语言对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | Rust `std::sync` | C++ `std::mutex` | Java `synchronized` | Go `sync.Mutex` |
@@ -1016,9 +1046,11 @@ fn reader_writer_pattern() {
 ---
 
 ## ⚖️ 模块 9: 设计权衡分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 为什么 Rust 的标准库同步原语基于 OS 内核对象？
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 OS 内核对象（如 POSIX pthread_mutex）提供：
@@ -1028,6 +1060,7 @@ OS 内核对象（如 POSIX pthread_mutex）提供：
 3. **与现有生态集成**：调试工具（如 TSan、GDB）识别标准锁。
 
 ### 9.2 该设计的成本
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **性能**：OS 阻塞涉及系统调用（~100ns 到 ~1μs），高频短临界区下不如自旋锁。
@@ -1037,6 +1070,7 @@ OS 内核对象（如 POSIX pthread_mutex）提供：
 **平台差异**：Windows 的 `SRWLOCK` 与 POSIX 的 `pthread_rwlock_t` 在公平性和递归性上行为不同。
 
 ### 9.3 什么场景下标准库同步原语是次优的？
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **极高频短临界区**：`parking_lot` 或自旋锁更优。
@@ -1046,9 +1080,11 @@ OS 内核对象（如 POSIX pthread_mutex）提供：
 ---
 
 ## 📝 模块 10: 自我检测与练习
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 概念性问题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **为什么 `Mutex<T>` 是 `Sync` 的条件是 `T: Send`，而非 `T: Sync`？** 如果 `T: !Sync`（如 `RefCell`），`Mutex<RefCell<T>>` 是否安全？
@@ -1058,6 +1094,7 @@ OS 内核对象（如 POSIX pthread_mutex）提供：
 3. **RwLock 的写饥饿是如何产生的？** 在什么负载特征下写饥饿会成为一个实际问题？
 
 ### 代码修复题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **题 1**: 修复以下代码中的死锁风险：
@@ -1164,6 +1201,7 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 </details>
 
 ### 开放设计题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **题 3**: 你正在设计一个高并发缓存系统。要求：
@@ -1185,9 +1223,11 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 ---
 
 ## 📖 延伸阅读
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [The Rust Programming Language - 并发章节](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
@@ -1195,6 +1235,7 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 - [Rust By Example - 并发](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html)
 
 ### 推荐书籍
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **《Programming Rust》** - Jim Blandy 等著（第 19 章并发详解）
@@ -1202,6 +1243,7 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 - **《Concurrent Programming: Algorithms, Principles, and Foundations》** - 并发理论基础
 
 ### 优秀 Crate
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - `parking_lot`：更快速、更紧凑的同步原语
@@ -1210,6 +1252,7 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 - `tokio::sync`：异步环境下的同步原语
 
 ### 相关主题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 内存模型与原子操作](./atomics.md)
@@ -1230,6 +1273,7 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 ---
 
 ## 📚 权威来源索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方来源
@@ -1640,4 +1684,3 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

@@ -72,6 +72,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 > **[来源: Rust Official Docs]**
 
 ### 2.1 汽车系统ASIL选择
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -97,6 +98,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ```
 
 ### 2.2 工业系统SIL选择
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -123,6 +125,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ```
 
 ### 2.3 航空系统DAL选择
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -147,9 +150,11 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ---
 
 ## 3. 等级分解策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 ASIL分解
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -177,6 +182,7 @@ ASIL D分解选项:
 ```
 
 ### 3.2 SIL分解
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -228,9 +234,11 @@ impl OneOutOfTwo {
 ---
 
 ## 4. Rust实现建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 ASIL A实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -262,6 +270,7 @@ pub fn asil_a_function(input: Input) -> Result<Output, Error> {
 ```
 
 ### 4.2 ASIL B实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -293,6 +302,7 @@ pub fn asil_b_function(input: Input) -> Result<Output, Error> {
 ```
 
 ### 4.3 ASIL C实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -338,6 +348,7 @@ impl ValidatedValue {
 ```
 
 ### 4.4 ASIL D实现
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -406,9 +417,11 @@ impl AsilDProcessor {
 ---
 
 ## 5. 降级与升级策略
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 等级降级条件
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -426,6 +439,7 @@ impl AsilDProcessor {
 ```
 
 ### 5.2 等级升级触发
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -440,9 +454,11 @@ impl AsilDProcessor {
 ---
 
 ## 6. 检查清单
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### ASIL确定检查表
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 危害分析完成
@@ -455,6 +471,7 @@ impl AsilDProcessor {
 - [ ] 利益相关方评审
 
 ### 等级实现检查表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### ASIL A
@@ -504,6 +521,7 @@ impl AsilDProcessor {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -679,4 +697,3 @@ impl AsilDProcessor {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

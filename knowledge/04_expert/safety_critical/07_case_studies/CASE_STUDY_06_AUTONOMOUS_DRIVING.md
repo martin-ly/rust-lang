@@ -48,6 +48,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 感知流水线
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -62,6 +63,7 @@
 ```
 
 ### Rust模块结构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -211,9 +213,11 @@ pub mod output {
 ---
 
 ## 实时性能优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 流水线并行
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -276,6 +280,7 @@ impl PerceptionPipeline {
 ```
 
 ### 内存池管理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -322,9 +327,11 @@ impl<'a, const N: usize> Drop for PooledImage<'a, N> {
 ---
 
 ## 安全设计
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 冗余与多样性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -376,6 +383,7 @@ impl DiverseDetector {
 ```
 
 ### 故障检测
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -413,9 +421,11 @@ impl SafetyMonitor {
 ---
 
 ## 验证与确认
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 仿真测试
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -459,6 +469,7 @@ mod simulation_tests {
 ```
 
 ### 形式化验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -497,9 +508,11 @@ mod verification {
 ---
 
 ## 关键指标
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 性能指标
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 指标 | 目标 | 实际 | 状态 |
@@ -510,6 +523,7 @@ mod verification {
 | **系统可用性** | > 99.9% | 99.97% | ✅ |
 
 ### 安全指标
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 指标 | 目标 | 实际 |
@@ -535,6 +549,7 @@ mod verification {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -732,4 +747,3 @@ mod verification {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

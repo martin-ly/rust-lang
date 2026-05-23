@@ -36,6 +36,7 @@
     - [当前限制](#当前限制)
   - [🔗 参考资源](#-参考资源)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -99,9 +100,11 @@ fn get_processor() -> impl AsyncFn(i32, i32) -> i32 {
 ---
 
 ## 📐 语法详解
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 基础语法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -128,6 +131,7 @@ fn main() {
 ```
 
 ### 捕获模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -166,6 +170,7 @@ async fn capture_examples() {
 ```
 
 ### 与 async move 对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | `|| async move {}` | `async &#124;&#124; {}` |
@@ -197,9 +202,11 @@ fn new_way() -> impl async FnOnce() -> i32 {
 ---
 
 ## 🚀 实际应用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 回调函数
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -255,6 +262,7 @@ async fn example() {
 ```
 
 ### 事件处理器
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -298,6 +306,7 @@ async fn websocket_server() {
 ```
 
 ### 中间件链
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -396,9 +405,11 @@ async fn middleware_example() {
 ---
 
 ## 🔍 实现细节
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### AsyncFn Trait
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -424,9 +435,11 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 ---
 
 ## ⚠️ 注意事项
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 当前限制
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -452,6 +465,7 @@ let f = async || {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Tracking Issue](https://github.com/rust-lang/rust/issues/62290)
@@ -466,6 +480,7 @@ let f = async || {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
@@ -636,4 +651,3 @@ let f = async || {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

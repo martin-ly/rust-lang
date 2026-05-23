@@ -337,6 +337,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 证明结构模板
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -364,6 +365,7 @@
 ```
 
 ### 应用指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **安全案例构建**: 使用公理1-3构建形式化安全案例
@@ -372,6 +374,7 @@
 4. **风险评估**: 使用推理树识别证明漏洞
 
 ### 限制与假设
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 所有推理假设编译器无缺陷
@@ -387,6 +390,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -552,4 +556,3 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

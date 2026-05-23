@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 完成本章后，你将能够：
@@ -26,6 +27,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Unsafe Rust** — 未定义行为、原始指针（`unsafe_rust.md`）
@@ -35,9 +37,11 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 1.1 直观定义
@@ -74,6 +78,7 @@ fn add(a: i32, b: i32) -> i32 {
 | 编译器无法优化的热路径 | 检查 LLVM IR 后决定 | ⚠️ 谨慎使用 |
 
 ### 模块 2: 属性清单
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 约束 | 说明 | 示例 |
@@ -95,6 +100,7 @@ fn add(a: i32, b: i32) -> i32 {
 | `noreturn` | 不会返回到调用点 |
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -119,6 +125,7 @@ fn add(a: i32, b: i32) -> i32 {
 ```
 
 ### 模块 4: 机制解释
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 4.1 编译器如何内联汇编
@@ -144,6 +151,7 @@ asm!(
 ```
 
 ### 模块 5: 正例集
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### 5.1 读取 x86 CPU ID
@@ -221,6 +229,7 @@ pub fn full_memory_barrier() {
 ```
 
 ### 模块 6: 反例集
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 6.1 未声明 clobber 寄存器
@@ -280,6 +289,7 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 ```
 
 ### 模块 7: 思维表征
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 内联汇编决策流程
@@ -301,6 +311,7 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 ```
 
 ### 模块 8: 国际化对齐
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 术语 (中文) | 英文 | 来源 |
@@ -313,6 +324,7 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 | 内存屏障 | Memory Barrier / Fence | ARM/x86 Architecture |
 
 ### 模块 9: 设计权衡
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 方案 | 安全 | 性能 | 可移植性 | 维护性 |
@@ -325,6 +337,7 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 > **原则**: 仅在 `std::arch` 固有函数无法满足需求时使用 `asm!`。每次使用 `asm!` 都需要架构特定的测试和长期维护。
 
 ### 模块 10: 自我检测
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 10.1 快速检查
@@ -349,6 +362,7 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)
@@ -365,6 +379,7 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 ---
 
 ## 📚 权威来源索引
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 官方来源
@@ -387,6 +402,7 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [FFI (Foreign Function Interface)](ffi.md)
@@ -508,4 +524,3 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

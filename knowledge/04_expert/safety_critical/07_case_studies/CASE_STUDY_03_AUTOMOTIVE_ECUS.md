@@ -61,6 +61,7 @@
 - 安全性和性能并重
 
 ### 适用场景分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -86,9 +87,11 @@
 ---
 
 ## 技术架构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### ECU软件架构
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -133,9 +136,11 @@
 ---
 
 ## 关键技术方案
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. AUTOSAR集成
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **挑战**: AUTOSAR是汽车软件标准，需要与Rust集成
@@ -175,6 +180,7 @@ impl RteInterface {
 ```
 
 ### 2. 实时操作系统集成
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **方案**: 使用FreeRTOS/Zephyr的Rust绑定
@@ -218,6 +224,7 @@ let control_task = Task::new(
 ```
 
 ### 3. 通信协议栈
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### CAN通信
@@ -274,9 +281,11 @@ impl SomeIpService {
 ---
 
 ## 功能安全实施
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### ASIL分解策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -303,6 +312,7 @@ impl SomeIpService {
 ```
 
 ### E2E保护
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -334,6 +344,7 @@ impl<T: Serialize> E2EProtected<T> {
 ```
 
 ### 安全监控
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -365,9 +376,11 @@ impl SafetyMonitor {
 ---
 
 ## 性能优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 代码大小优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -394,6 +407,7 @@ pub struct CompactStruct {
 ```
 
 ### 执行时间优化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -422,9 +436,11 @@ fn critical_calculation(x: u32) -> u32 {
 ---
 
 ## 当前挑战
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 技术挑战
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 挑战 | 影响 | 缓解策略 |
@@ -435,6 +451,7 @@ fn critical_calculation(x: u32) -> u32 {
 | **人才短缺** | 项目进度 | 培训和外部咨询 |
 
 ### 标准挑战
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **MISRA Rust**: 标准仍在制定中
@@ -445,9 +462,11 @@ fn critical_calculation(x: u32) -> u32 {
 ---
 
 ## 行业进展
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 已知项目
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 公司/组织 | 项目 | 状态 | 安全等级 |
@@ -458,6 +477,7 @@ fn critical_calculation(x: u32) -> u32 {
 | **Mercedes** | 信息娱乐 | 原型 | QM |
 
 ### 标准化进展
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **AUTOSAR**: 考虑Rust支持
@@ -467,9 +487,11 @@ fn critical_calculation(x: u32) -> u32 {
 ---
 
 ## 建议与最佳实践
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 短期 (1-2年)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. 在QM/ASIL A项目中试点Rust
@@ -478,6 +500,7 @@ fn critical_calculation(x: u32) -> u32 {
 4. 参与MISRA Rust标准制定
 
 ### 中期 (3-5年)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. ASIL B/C项目生产使用
@@ -486,6 +509,7 @@ fn critical_calculation(x: u32) -> u32 {
 4. 行业合作标准化
 
 ### 长期 (5年+)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. ASIL D安全关键应用
@@ -496,6 +520,7 @@ fn critical_calculation(x: u32) -> u32 {
 ---
 
 ## 参考资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [AUTOSAR](https://www.autosar.org)
@@ -517,6 +542,7 @@ fn critical_calculation(x: u32) -> u32 {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -676,4 +702,3 @@ fn critical_calculation(x: u32) -> u32 {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

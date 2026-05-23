@@ -65,6 +65,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 审计工具链
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -90,6 +91,7 @@ cargo bloat --release
 ```
 
 ### 2.2 unsafe代码审计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -146,9 +148,11 @@ mod audit {
 ---
 
 ## 3. 依赖安全审计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 依赖评估矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 评估项 | 权重 | 检查方法 |
@@ -160,6 +164,7 @@ mod audit {
 | **代码质量** | 10% | 静态分析 |
 
 ### 3.2 依赖审计配置
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```toml
@@ -213,6 +218,7 @@ allow-registry = [
 ```
 
 ### 3.3 SBOM生成与验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -230,9 +236,11 @@ cargo tree --edges normal --prefix none | sort | uniq
 ---
 
 ## 4. 运行时安全监控
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 安全事件检测
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -306,6 +314,7 @@ pub enum SecurityAction {
 ```
 
 ### 4.2 入侵检测
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -350,9 +359,11 @@ impl IntrusionDetector {
 ---
 
 ## 5. 审计报告模板
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 执行摘要
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```markdown
@@ -395,6 +406,7 @@ impl IntrusionDetector {
 ```
 
 ### 5.2 详细审计清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -423,9 +435,11 @@ impl IntrusionDetector {
 ---
 
 ## 6. 持续安全监控
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 CI集成
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```yaml
@@ -472,6 +486,7 @@ jobs:
 ```
 
 ### 6.2 安全指标仪表板
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -512,6 +527,7 @@ impl SecurityMetrics {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -683,4 +699,3 @@ impl SecurityMetrics {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

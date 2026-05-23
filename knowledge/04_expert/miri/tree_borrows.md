@@ -129,6 +129,7 @@ fn reserved_demo(x: &mut i32) {
 ---
 
 ### 模块 2: 属性清单
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
@@ -149,6 +150,7 @@ fn reserved_demo(x: &mut i32) {
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -193,6 +195,7 @@ graph TD
 ---
 
 ### 模块 4: 机制解释
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 4.1 类型系统视角
@@ -290,6 +293,7 @@ Miri 执行时:
 ---
 
 ### 模块 5: 正例集
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 5.1 Minimal（最小正例）
@@ -360,6 +364,7 @@ jobs:
 ---
 
 ### 模块 6: 反例集
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 反例 1: 通过 &mut 写 Frozen 分支
@@ -471,9 +476,11 @@ fn good_drop() {
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 表征 A: Stacked Borrows vs Tree Borrows 对比图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -526,6 +533,7 @@ Tree Borrows (树形模型):
 ```
 
 ### 表征 B: 权限状态转换图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -566,6 +574,7 @@ Tree Borrows (树形模型):
 ```
 
 ### 表征 C: SB 误报 vs TB 合法代码矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 代码模式 | Stacked Borrows | Tree Borrows | 说明 |
@@ -580,9 +589,11 @@ Tree Borrows (树形模型):
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 官方来源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
@@ -592,6 +603,7 @@ Tree Borrows (树形模型):
 | [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) | 官方参考 | 内存模型讨论 | 模块 1.3 |
 
 ### 8.2 学术来源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 论文/来源 | 会议/机构 | 核心论证 | 本文档对应点 |
@@ -601,6 +613,7 @@ Tree Borrows (树形模型):
 | **"RustBelt"** | POPL 2018 | 用 Iris 分离逻辑证明 Rust 类型系统，为内存模型提供理论基础 | 模块 1.3 |
 
 ### 8.3 社区权威
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
@@ -610,6 +623,7 @@ Tree Borrows (树形模型):
 | **Villani et al.** | PLDI 2025 演讲 | 论文作者对 Tree Borrows 的直观解释 | 模块 1.3 |
 
 ### 8.4 跨语言对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | Rust (Tree Borrows) | C/C++ | LLVM `noalias` | Java/JVM |
@@ -625,9 +639,11 @@ Tree Borrows (树形模型):
 ---
 
 ## ⚖️ 模块 9: 设计权衡分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 9.1 为什么 Tree Borrows 替代了 Stacked Borrows？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 核心驱动力是**误报率**：SB 的线性栈模型对常见的 reborrow 模式过于严格，导致 54% 的 Miri 报告是误报。这使得开发者倾向于忽略 Miri 警告，降低了工具的实用性。
@@ -639,6 +655,7 @@ TB 通过树形模型解决了这个问题：
 3. **更自然的语义**：与程序员的直觉（"reborrow 是子引用，不应立即禁用父引用"）一致。
 
 ### 9.2 该设计的成本
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **实现复杂度**：TB 的树结构比 SB 的栈更复杂，Miri 的执行速度略有下降。
@@ -648,6 +665,7 @@ TB 通过树形模型解决了这个问题：
 **尚未稳定**：TB 仍是实验性内存模型，尚未写入 Rust 语言规范。未来可能进一步调整。
 
 ### 9.3 什么场景下 TB 是次优的？
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **不运行 Miri 时**：TB 是 Miri 的内存模型，对不运行 Miri 的代码无直接影响。
@@ -657,9 +675,11 @@ TB 通过树形模型解决了这个问题：
 ---
 
 ## 📝 模块 10: 自我检测与练习
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 概念性问题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Tree Borrows 的 Reserved 状态与 Stacked Borrows 的对应处理有何本质差异？** 为什么 Reserved 能解决 54% 的误报？
@@ -669,6 +689,7 @@ TB 通过树形模型解决了这个问题：
 3. **TB 的 Frozen 状态与 Rust 编译期的 `&T` 不可变性有何关系？** 为什么通过 `unsafe` 写 Frozen 区域是 UB，即使在编译期允许？
 
 ### 代码修复题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **题 1**: 以下代码在 Miri + TB 下会报告 UB。请解释原因并修复：
@@ -731,6 +752,7 @@ fn mixed_refs(x: &mut i32) {
 </details>
 
 ### 开放设计题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **题 3**: 你正在维护一个使用大量 `unsafe` 的 crate（如自定义集合库）。你面临选择：
@@ -752,6 +774,7 @@ fn mixed_refs(x: &mut i32) {
 ---
 
 ## 📖 延伸阅读
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Tree Borrows PLDI 2025 Paper](https://pldi25.sigplan.org/) — 原始论文
@@ -779,6 +802,7 @@ fn mixed_refs(x: &mut i32) {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Tree Borrows 权威指南](../academic/tree_borrows_authoritative_guide.md)
@@ -1054,4 +1078,3 @@ fn mixed_refs(x: &mut i32) {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

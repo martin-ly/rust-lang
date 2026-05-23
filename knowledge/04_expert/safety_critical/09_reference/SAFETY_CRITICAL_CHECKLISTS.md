@@ -63,9 +63,11 @@
 ---
 
 ## 需求阶段检查表
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 安全需求规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 安全需求可追溯至危险分析
@@ -80,6 +82,7 @@
 - [ ] 需求基线建立
 
 ### Rust特定需求
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 确定no_std要求
@@ -96,9 +99,11 @@
 ---
 
 ## 架构设计检查表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 软件架构
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 架构满足安全需求
@@ -113,6 +118,7 @@
 - [ ] 架构评审完成
 
 ### Rust架构特定
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] crate结构清晰
@@ -127,6 +133,7 @@
 - [ ] 静态分配验证
 
 ### 设计模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 使用类型状态模式
@@ -143,9 +150,11 @@
 ---
 
 ## 编码阶段检查表
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 代码规范
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 遵循Rust编码标准
@@ -160,6 +169,7 @@
 - [ ] 模块大小合理
 
 ### 内存安全
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 所有权规则遵守
@@ -174,6 +184,7 @@
 - [ ] Miri测试通过
 
 ### unsafe代码审查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] unsafe使用必要性论证
@@ -188,6 +199,7 @@
 - [ ] 代码审查记录
 
 ### 并发安全
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] Send/Sync实现正确
@@ -202,6 +214,7 @@
 - [ ] Kani验证通过
 
 ### 错误处理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 使用Result传播错误
@@ -218,9 +231,11 @@
 ---
 
 ## 测试阶段检查表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 单元测试
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 测试覆盖率 >= 80%
@@ -235,6 +250,7 @@
 - [ ] 测试结果记录
 
 ### 集成测试
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 接口测试完整
@@ -249,6 +265,7 @@
 - [ ] 稳定性测试
 
 ### 安全特定测试
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] Miri UB测试通过
@@ -263,6 +280,7 @@
 - [ ] 静态分析通过
 
 ### 验证覆盖率
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 语句覆盖 >= 80%
@@ -279,9 +297,11 @@
 ---
 
 ## 代码审查检查表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 审查准备
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 代码变更范围清晰
@@ -294,6 +314,7 @@
 - [ ] 审查检查表准备
 
 ### 审查内容
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 需求实现正确性
@@ -308,6 +329,7 @@
 - [ ] 文档完整性
 
 ### 审查记录
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 发现问题记录
@@ -321,9 +343,11 @@
 ---
 
 ## 发布前检查表
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 发布准备
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 所有需求实现验证
@@ -338,6 +362,7 @@
 - [ ] 发布说明准备
 
 ### 安全验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 安全需求满足验证
@@ -352,6 +377,7 @@
 - [ ] 发布授权获得
 
 ### 配置管理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 代码基线冻结
@@ -368,9 +394,11 @@
 ---
 
 ## 维护阶段检查表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 变更管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 变更请求记录
@@ -385,6 +413,7 @@
 - [ ] 利益相关方通知
 
 ### 现场监控
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 现场数据收集
@@ -401,9 +430,11 @@
 ---
 
 ## 认证准备检查表
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 文档准备
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 安全计划
@@ -418,6 +449,7 @@
 - [ ] 安全案例
 
 ### 证据收集
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 需求追溯矩阵
@@ -432,6 +464,7 @@
 - [ ] 培训记录
 
 ### 评估准备
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 评估员选择
@@ -448,9 +481,11 @@
 ---
 
 ## 快速检查表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 每日开发检查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -463,6 +498,7 @@
 ```
 
 ### 每周检查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -475,6 +511,7 @@
 ```
 
 ### 发布前快速检查
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -491,9 +528,11 @@
 ---
 
 ## 检查表使用指南
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### ASIL等级调整
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | ASIL等级 | 必须检查项 | 覆盖率要求 | 审查强度 |
@@ -505,6 +544,7 @@
 | **QM** | 基础项 | 无要求 | 自检 |
 
 ### 检查表定制
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 根据项目特点调整:
@@ -532,6 +572,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -655,4 +696,3 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

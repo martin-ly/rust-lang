@@ -85,6 +85,7 @@ Rust基金会:
 > **[来源: Rust Official Docs]**
 
 ### 2.1 代码贡献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -110,6 +111,7 @@ Rust基金会:
 ```
 
 ### 2.2 贡献流程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -142,9 +144,11 @@ git push origin feature/my-contribution
 ---
 
 ## 3. 知识分享
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 内容创作
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -171,6 +175,7 @@ git push origin feature/my-contribution
 ```
 
 ### 3.2 演讲和分享
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -197,9 +202,11 @@ git push origin feature/my-contribution
 ---
 
 ## 4. 标准参与
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 标准组织
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -220,6 +227,7 @@ git push origin feature/my-contribution
 ```
 
 ### 4.2 认证机构合作
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -243,9 +251,11 @@ git push origin feature/my-contribution
 ---
 
 ## 5. 教育资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 导师计划
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -268,6 +278,7 @@ git push origin feature/my-contribution
 ```
 
 ### 5.2 学习小组
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -294,9 +305,11 @@ git push origin feature/my-contribution
 ---
 
 ## 6. 职业发展
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 技能认证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -318,6 +331,7 @@ git push origin feature/my-contribution
 ```
 
 ### 6.2 职业机会
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -341,9 +355,11 @@ git push origin feature/my-contribution
 ---
 
 ## 7. 贡献行为准则
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 行为准则
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -365,6 +381,7 @@ git push origin feature/my-contribution
 ```
 
 ### 7.2 贡献质量
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -390,9 +407,11 @@ git push origin feature/my-contribution
 ---
 
 ## 8. 资源链接
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 8.1 官方资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -411,6 +430,7 @@ git push origin feature/my-contribution
 ```
 
 ### 8.2 安全关键特定
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -444,6 +464,7 @@ git push origin feature/my-contribution
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -587,4 +608,3 @@ git push origin feature/my-contribution
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

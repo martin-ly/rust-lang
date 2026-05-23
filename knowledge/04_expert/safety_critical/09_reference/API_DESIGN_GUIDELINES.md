@@ -109,6 +109,7 @@ let config = Config::new()
 > **[来源: Rust Official Docs]**
 
 ### 2.1 错误类型设计
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -169,6 +170,7 @@ impl std::fmt::Display for DeviceError {
 ```
 
 ### 2.2 错误恢复策略
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -211,9 +213,11 @@ pub trait Recoverable {
 ---
 
 ## 3. 资源管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 RAII模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -270,6 +274,7 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
 ```
 
 ### 3.2 借用设计
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -322,9 +327,11 @@ impl DataStore {
 ---
 
 ## 4. 异步API设计
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 安全异步接口
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -377,6 +384,7 @@ impl<F> Drop for CancelSafe<F> {
 ```
 
 ### 4.2 流式API
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -419,9 +427,11 @@ async fn process_stream() {
 ---
 
 ## 5. 文档和示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 文档规范
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -467,6 +477,7 @@ pub struct TemperatureSensor {
 ```
 
 ### 5.2 示例代码
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -510,9 +521,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ## 6. 版本兼容性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 语义化版本
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -549,6 +562,7 @@ pub fn new_method() {
 ```
 
 ### 6.2 特性标志
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```toml
@@ -569,9 +583,11 @@ safety-d = ["formal-verification"]
 ---
 
 ## 7. API审查检查表
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 安全性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 类型系统防止错误使用
@@ -581,6 +597,7 @@ safety-d = ["formal-verification"]
 - [ ] unsafe代码有文档
 
 ### 可用性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 命名清晰一致
@@ -590,6 +607,7 @@ safety-d = ["formal-verification"]
 - [ ] 常见用法简单
 
 ### 性能
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 零成本抽象
@@ -598,6 +616,7 @@ safety-d = ["formal-verification"]
 - [ ] 编译时优化
 
 ### 兼容性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 语义化版本
@@ -621,6 +640,7 @@ safety-d = ["formal-verification"]
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -840,4 +860,3 @@ safety-d = ["formal-verification"]
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

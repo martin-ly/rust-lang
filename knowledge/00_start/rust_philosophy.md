@@ -9,6 +9,7 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 设计决策来源标注、零成本抽象学术引用、内存安全形式化语义来源 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 完成本章后，你将能够：
@@ -19,12 +20,14 @@
 - [ ] 对比 Rust 与其他系统语言
 
 ## 📋 先决条件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 了解至少一门其他编程语言
 - 对内存管理有基本概念
 
 ## 🧠 核心哲学
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 内存安全保证
@@ -61,6 +64,7 @@ fn safe() {
 **关键洞察**: 大多数内存错误在编译期就能被发现。
 
 ### 2. 零成本抽象
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > "零成本抽象：你使用的抽象，不会比手写底层代码更昂贵。"
@@ -82,6 +86,7 @@ let sum: i32 = numbers.iter().map(|x| x * 2).sum();
 - **Rust**: 完全内联优化，零开销
 
 ### 3. 并发 fearless
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 的类型系统保证并发安全：
@@ -110,6 +115,7 @@ fn safe_share() {
 ```
 
 ### 4. 实用主义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Rust 不追求理论完美，而是解决实际问题：
@@ -121,6 +127,7 @@ Rust 不追求理论完美，而是解决实际问题：
 | 自动 GC | 手动 + 编译器检查 | 可预测性能 |
 
 ## 📊 与其他语言对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 特性 | C/C++ | Java | Python | Rust |
@@ -132,9 +139,11 @@ Rust 不追求理论完美，而是解决实际问题：
 | 编译期检查 | 弱 | 中等 | 弱 | 强 |
 
 ## 🎯 设计权衡
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 学习曲线 vs 安全性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -146,6 +155,7 @@ Rust 不追求理论完美，而是解决实际问题：
 **Rust 的选择**: 接受更高的学习门槛，换取编译期保证。
 
 ### 显式 vs 隐式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 倾向于**显式**：
@@ -164,9 +174,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 **哲学**: "显式优于隐式"（来自 Python 之禅，Rust 同样遵循）
 
 ## 💡 实际意义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 什么时候选择 Rust？
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ✅ **适合 Rust**:
@@ -184,9 +196,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 - 团队没有学习时间
 
 ## 🎮 思考练习
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 练习 1: 语言选择
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 假设你要开发：
@@ -199,6 +213,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 分别选择什么语言？为什么？
 
 ### 练习 2: 所有权设计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 如果你要设计一门新语言，你会如何处理内存管理？
@@ -209,6 +224,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 - 其他方案？
 
 ## ✅ 自我检测
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. Rust 如何实现内存安全而无需 GC？
@@ -216,6 +232,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 3. Rust 的主要权衡是什么？
 
 ## 📖 延伸阅读
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 语言 FAQ](https://www.rust-lang.org/faq)
@@ -252,6 +269,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Hello, World](hello_world.md)
@@ -306,4 +324,3 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

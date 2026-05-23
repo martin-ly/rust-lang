@@ -63,6 +63,7 @@ Tree Borrows (2023):
 > **[来源: Rust Official Docs]**
 
 ### 2.1 Rust验证工具研究
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -103,6 +104,7 @@ Aeneas (Inria):
 ```
 
 ### 2.2 关键研究成果
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -134,9 +136,11 @@ Aeneas (Inria):
 ---
 
 ## 3. 类型系统研究
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 高级类型特性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -163,6 +167,7 @@ Aeneas (Inria):
 ```
 
 ### 3.2 学术研究前沿
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 研究方向 | 机构 | 状态 | 预期影响 |
@@ -175,9 +180,11 @@ Aeneas (Inria):
 ---
 
 ## 4. 编译器研究
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 rustc优化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -198,6 +205,7 @@ MIR优化:
 ```
 
 ### 4.2 形式化语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -220,9 +228,11 @@ Oxide (Penn):
 ---
 
 ## 5. 应用领域研究
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 操作系统
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -249,6 +259,7 @@ Tock (斯坦福):
 ```
 
 ### 5.2 嵌入式与实时
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -266,9 +277,11 @@ Rust on RTOS:
 ---
 
 ## 6. 教育与课程
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 大学课程
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -294,6 +307,7 @@ ETH Zurich:
 ```
 
 ### 6.2 在线资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -311,9 +325,11 @@ Rust Formal Methods Interest Group:
 ---
 
 ## 7. 未来研究方向
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 近期目标 (2026-2027)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -334,6 +350,7 @@ Tree Borrows集成:
 ```
 
 ### 7.2 中期目标 (2028-2030)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -356,9 +373,11 @@ Tree Borrows集成:
 ---
 
 ## 8. 研究资助
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 8.1 当前项目
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -396,6 +415,7 @@ ERC (欧洲):
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -521,4 +541,3 @@ ERC (欧洲):
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

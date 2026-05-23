@@ -115,6 +115,7 @@ impl ConfigurationManagementPlan {
 ```
 
 ### A-2: 软件开发过程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 软件需求数据
@@ -413,6 +414,7 @@ impl ControlOutput {
 ```
 
 ### A-3: 软件验证过程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 验证方法
@@ -501,6 +503,7 @@ mod tests {
 ```
 
 ### 覆盖率目标
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 软件等级 | 语句 | 决策 | MC/DC | 数据耦合 | 控制耦合 |
@@ -513,9 +516,11 @@ mod tests {
 ---
 
 ## DO-330工具鉴定
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 工具鉴定等级
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -591,9 +596,11 @@ pub enum TestResult {
 ---
 
 ## 适航认证检查表
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Level A软件完整检查表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 计划阶段
@@ -658,6 +665,7 @@ pub enum TestResult {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -927,4 +935,3 @@ pub enum TestResult {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

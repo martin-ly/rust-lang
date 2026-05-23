@@ -54,6 +54,7 @@ hello_world/
 > **[来源: Rust Official Docs]**
 
 ### Cargo.toml
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```toml
@@ -67,6 +68,7 @@ edition = "2024"      # Rust 版本
 ```
 
 ### src/main.rs
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -76,9 +78,11 @@ fn main() {
 ```
 
 ## 🏃 编译和运行
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 开发模式（快速编译）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
@@ -95,6 +99,7 @@ Hello, world!
 ```
 
 ### 发布模式（优化编译）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -102,9 +107,11 @@ cargo run --release
 ```
 
 ## 🧠 代码解析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### `fn main()`
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - Rust 程序的入口点
@@ -112,6 +119,7 @@ cargo run --release
 - 无参数（简单情况）
 
 ### `println!` 宏
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -123,9 +131,11 @@ println!("1 + 1 = {}", 1 + 1);       // 表达式
 注意 `!` 表示这是一个**宏**，不是普通函数。
 
 ## ✨ 增强示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 示例 1: 交互式程序
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -153,6 +163,7 @@ Alice
 ```
 
 ### 示例 2: 计算程序
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -168,6 +179,7 @@ fn main() {
 ```
 
 ## 📁 项目结构详解
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -186,6 +198,7 @@ my_project/
 ```
 
 ## ⚠️ 常见错误
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 错误 | 原因 | 修复 |
@@ -195,9 +208,11 @@ my_project/
 | `cannot find value` | 变量未定义 | 检查变量名和作用域 |
 
 ## 🎮 练习
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 练习 1: 修改程序
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 修改 `main.rs` 输出：
@@ -208,6 +223,7 @@ Hello, Rust!
 ```
 
 ### 练习 2: 简单计算器
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 创建一个程序，接受两个数字并输出它们的和、差、积、商。
@@ -240,6 +256,7 @@ fn main() {
 </details>
 
 ## ✅ 自我检测
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. `cargo new` 创建了哪些文件？
@@ -327,4 +344,3 @@ fn main() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

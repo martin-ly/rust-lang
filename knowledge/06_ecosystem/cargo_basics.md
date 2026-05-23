@@ -126,6 +126,7 @@ Cargo 使用 **SemVer** 解析依赖版本：
 ---
 
 ### 模块 2: 属性清单
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
@@ -139,6 +140,7 @@ Cargo 使用 **SemVer** 解析依赖版本：
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -185,6 +187,7 @@ graph TD
 ---
 
 ### 模块 4: 机制解释
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 4.1 Cargo.toml 结构
@@ -264,6 +267,7 @@ strip = "symbols"      # 移除符号表
 ---
 
 ### 模块 5: 正例集
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 5.1 Minimal
@@ -329,6 +333,7 @@ lto = "thin"
 ---
 
 ### 模块 6: 反例集
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 反例 1: 忽略 Cargo.lock 导致构建不可复现
@@ -366,9 +371,11 @@ cargo build --release
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 表征 A: Cargo 命令使用频率决策树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -399,6 +406,7 @@ cargo build --release
 ```
 
 ### 表征 B: Debug vs Release Profile 对比矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 维度 | Debug (`cargo build`) | Release (`cargo build --release`) |
@@ -413,9 +421,11 @@ cargo build --release
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 官方来源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 来源 | 类型 | 对应章节/条目 |
@@ -425,6 +435,7 @@ cargo build --release
 | [Workspace](https://doc.rust-lang.org/cargo/reference/workspaces.html) | 官方 | 工作空间配置 |
 
 ### 8.4 跨语言对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | Cargo | npm (Node.js) | pip (Python) | Go Modules |
@@ -439,9 +450,11 @@ cargo build --release
 ---
 
 ## ⚖️ 模块 9: 设计权衡分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 9.1 Cargo 的 resolver = "2" 改进了什么？
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 1.51 引入的 resolver v2 解决了 feature 合并的问题：
@@ -452,6 +465,7 @@ Rust 1.51 引入的 resolver v2 解决了 feature 合并的问题：
 代价：某些项目的依赖解析结果可能改变，需要显式迁移。
 
 ### 9.2 该设计的成本
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **编译时间**: Rust 的编译速度是常见批评。`cargo check` 缓解了开发期，但 `cargo build --release` 在大型项目中可能需要数分钟。
@@ -459,6 +473,7 @@ Rust 1.51 引入的 resolver v2 解决了 feature 合并的问题：
 **Cargo.lock 冲突**: 多人协作时 `Cargo.lock` 的合并冲突频繁。需要团队约定更新策略。
 
 ### 9.3 什么场景下 Cargo 是次优的？
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **极简嵌入式**: 对于 < 8KB Flash 的 bare-metal 项目，`cargo` 的 overhead 可能超过收益。可能直接使用 `rustc` + 链接脚本。
@@ -467,9 +482,11 @@ Rust 1.51 引入的 resolver v2 解决了 feature 合并的问题：
 ---
 
 ## 📝 模块 10: 自我检测与练习
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 概念性问题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **`cargo check` 为什么比 `cargo build` 快 5-10 倍？** 它在编译管道的哪个阶段停止？
@@ -479,6 +496,7 @@ Rust 1.51 引入的 resolver v2 解决了 feature 合并的问题：
 3. **Workspace 的 `[workspace.dependencies]` 解决了什么问题？** 如果没有它，多 crate 项目会面临什么版本管理困境？
 
 ### 代码修复题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **题 1**: 以下 `Cargo.toml` 配置有问题。请指出并修复：
@@ -518,6 +536,7 @@ tokio = { version = "1.0", features = ["full"] }
 </details>
 
 ### 开放设计题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **题 2**: 你的团队正在开发一个大型 Rust 项目，包含 20+ 个内部 crate。你面临以下挑战：
@@ -534,9 +553,11 @@ tokio = { version = "1.0", features = ["full"] }
 ---
 
 ## 📖 权威来源与延伸阅读
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 官方文档（一级来源）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [The Cargo Book](https://doc.rust-lang.org/cargo/) —— Cargo 的完整官方文档
@@ -546,6 +567,7 @@ tokio = { version = "1.0", features = ["full"] }
 - [RFC 2121 — Cargo Workspaces](https://rust-lang.github.io/rfcs/2121-cargo-workspace.html) —— Workspace 功能的设计决策
 
 ### 社区权威（二级来源）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [crates.io 文档](https://doc.rust-lang.org/cargo/reference/publishing.html) —— 包发布与注册表机制
@@ -565,6 +587,7 @@ tokio = { version = "1.0", features = ["full"] }
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 标准库速查](../05_reference/std_library_cheatsheet.md)
@@ -746,4 +769,3 @@ tokio = { version = "1.0", features = ["full"] }
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

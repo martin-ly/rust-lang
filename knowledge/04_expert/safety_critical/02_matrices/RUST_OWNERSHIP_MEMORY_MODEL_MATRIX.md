@@ -85,6 +85,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 内存安全问题对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 问题类型 | C/C++ | Java | Rust Safe | Rust Unsafe | 检测方式 |
@@ -100,6 +101,7 @@
 *注: Rust中内存泄漏通常通过循环引用可能发生，但可用弱引用避免
 
 ### 内存布局对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -135,9 +137,11 @@ struct Aligned {
 ---
 
 ## 并发安全模型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Send和Sync trait矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 类型 | Send | Sync | 说明 | 示例 |
@@ -151,6 +155,7 @@ struct Aligned {
 | **PhantomData** | 可变 | 可变 | 标记类型 | 泛型编程 |
 
 ### 并发模式选择
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -176,6 +181,7 @@ struct Aligned {
 ```
 
 ### 实际代码示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -231,9 +237,11 @@ fn lock_free_counter() {
 ---
 
 ## 安全关键系统内存管理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 堆分配 vs 栈分配
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | 栈分配 | 堆分配 (Box) | 堆分配 (Vec) | 静态分配 |
@@ -246,6 +254,7 @@ fn lock_free_counter() {
 | **适用场景** | 局部变量 | 大对象 | 动态集合 | 全局配置 |
 
 ### 实时系统内存策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -291,6 +300,7 @@ fn use_pool() {
 ```
 
 ### 内存对齐和填充
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -338,9 +348,11 @@ struct PackedSensorData {
 ---
 
 ## 零成本抽象验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 抽象开销对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -363,6 +375,7 @@ fn manual_sum(values: &[i32]) -> i32 {
 ```
 
 ### 编译器优化验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
@@ -380,9 +393,11 @@ cargo rustc --release -- --emit=asm
 ---
 
 ## 形式化语义基础
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 操作语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -408,6 +423,7 @@ cargo rustc --release -- --emit=asm
 ```
 
 ### 类型系统规则
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 规则 | 表达式 | 条件 | 结果类型 |
@@ -422,9 +438,11 @@ cargo rustc --release -- --emit=asm
 ---
 
 ## 安全关键系统建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 内存使用规范
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -459,6 +477,7 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 ```
 
 ### 内存安全检查清单
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 所有数组访问都有边界检查
@@ -482,6 +501,7 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -643,4 +663,3 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

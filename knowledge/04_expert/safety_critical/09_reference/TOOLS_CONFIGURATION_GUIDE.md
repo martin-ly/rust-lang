@@ -92,6 +92,7 @@
 ```
 
 ### Rust工具链安装脚本
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -162,9 +163,11 @@ echo "Please restart your terminal or run 'source $HOME/.cargo/env'"
 ---
 
 ## 静态分析工具
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Clippy配置详解
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 项目级配置 (clippy.toml)
@@ -241,6 +244,7 @@ test-stdin-width = 120
 ```
 
 ### Cargo Audit配置
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 自动化审计脚本
@@ -300,9 +304,11 @@ show_tree = true
 ---
 
 ## 测试工具配置
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Miri配置
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 运行脚本
@@ -341,6 +347,7 @@ runner = "cargo miri"
 ```
 
 ### Kani配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 验证脚本
@@ -393,6 +400,7 @@ timeout = 3600  # 1小时
 ```
 
 ### 测试覆盖率
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### Tarpaulin配置
@@ -457,9 +465,11 @@ clean = true
 ---
 
 ## 嵌入式开发工具
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 交叉编译配置
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### .cargo/config.toml完整配置
@@ -502,6 +512,7 @@ DEFMT_LOG = "info"
 ```
 
 ### 调试配置
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### VSCode调试配置 (.vscode/launch.json)
@@ -534,9 +545,11 @@ DEFMT_LOG = "info"
 ---
 
 ## CI/CD配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### GitHub Actions完整配置
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```yaml
@@ -686,6 +699,7 @@ jobs:
 ---
 
 ## 工具速查表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具 | 用途 | 常用命令 |
@@ -717,6 +731,7 @@ jobs:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -992,4 +1007,3 @@ jobs:
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

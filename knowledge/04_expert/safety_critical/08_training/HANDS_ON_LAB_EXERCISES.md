@@ -120,6 +120,7 @@ struct Watchdog;
 ```
 
 ### 验证点
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] LED按预期闪烁
@@ -129,14 +130,17 @@ struct Watchdog;
 ---
 
 ## 实验2: 环形缓冲区 (基础)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 目标
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 实现一个线程安全的无锁环形缓冲区
 
 ### 要求
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 静态分配
@@ -144,6 +148,7 @@ struct Watchdog;
 - 完全测试覆盖
 
 ### 代码框架
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -261,14 +266,17 @@ mod tests {
 ---
 
 ## 实验3: 状态机控制器 (中级)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 目标
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 实现一个带安全监控的状态机
 
 ### 要求
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 类型状态模式
@@ -276,6 +284,7 @@ mod tests {
 - 故障恢复
 
 ### 代码框架
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -402,14 +411,17 @@ pub enum ErrorCode {
 ---
 
 ## 实验4: 传感器驱动 (高级)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 目标
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 实现一个带校准和故障检测的传感器驱动
 
 ### 要求
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 硬件抽象层
@@ -417,6 +429,7 @@ pub enum ErrorCode {
 - 故障注入测试
 
 ### 代码框架
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -527,14 +540,17 @@ pub enum SensorError {
 ---
 
 ## 实验5: 安全通信协议 (专家)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 目标
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 实现一个带E2E保护的简单通信协议
 
 ### 要求
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - CRC校验
@@ -542,6 +558,7 @@ pub enum SensorError {
 - 重放攻击防护
 
 ### 代码框架
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -646,9 +663,11 @@ pub enum CommError {
 ---
 
 ## 实验检查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 实验1: LED闪烁器
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 代码编译通过
@@ -657,6 +676,7 @@ pub enum CommError {
 - [ ] 代码审查完成
 
 ### 实验2: 环形缓冲区
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] Miri测试通过
@@ -665,6 +685,7 @@ pub enum CommError {
 - [ ] 边界测试完成
 
 ### 实验3: 状态机
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 类型状态模式正确
@@ -673,6 +694,7 @@ pub enum CommError {
 - [ ] 故障恢复测试
 
 ### 实验4: 传感器驱动
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 校准功能正确
@@ -681,6 +703,7 @@ pub enum CommError {
 - [ ] 性能测试通过
 
 ### 实验5: 通信协议
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] CRC校验正确
@@ -705,6 +728,7 @@ pub enum CommError {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -950,4 +974,3 @@ pub enum CommError {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

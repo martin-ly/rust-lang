@@ -7,6 +7,7 @@
 > **定理链编号**: T-010 借用唯一性 → T-011 生命周期包含
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 借用与引用 (Borrowing and References)](#rust-借用与引用-borrowing-and-references)
@@ -44,6 +45,7 @@
   - [相关概念](#相关概念-1)
   - [思维导图：借用系统全景](#思维导图借用系统全景)
   - [决策树：借用类型选择](#决策树借用类型选择)
+  - [权威来源索引](#权威来源索引)
 
 > **Bloom 层级**: 理解
 
@@ -137,6 +139,7 @@ fn main() {
 ---
 
 ### 不可变借用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 默认引用不可变。可创建多个，因为都是**只读**。
@@ -156,6 +159,7 @@ fn main() {
 ---
 
 ### 可变借用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 使用 `&mut T` 修改借用的数据：
@@ -191,6 +195,7 @@ fn main() {
 ---
 
 ### 借用规则
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 场景 | 允许？ | 说明 |
@@ -220,6 +225,7 @@ fn main() {
 ---
 
 ### 悬垂引用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 指向已释放内存的指针。Rust 编译器禁止这种情况。
@@ -253,6 +259,7 @@ fn no_dangle() -> String {
 ---
 
 ### 借用与函数
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -285,9 +292,11 @@ fn main() {
 ---
 
 ## 💡 最佳实践
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 优先使用不可变引用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -298,6 +307,7 @@ fn analyze(data: &[i32]) -> i32 {
 ```
 
 ### 2. 限制可变引用作用域
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -310,6 +320,7 @@ let second = &data[1];  // ✅ 可以再次借用
 ```
 
 ### 3. 使用切片引用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -324,9 +335,11 @@ first_word("literal");
 ---
 
 ## ⚠️ 常见陷阱
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 陷阱 1：持有引用时修改数据
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -338,6 +351,7 @@ v.push(4);  // ✅ 引用使用完后再修改
 ```
 
 ### 陷阱 2：混淆 `&` 和 `&mut`
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -350,6 +364,7 @@ r.push_str(" world");
 ```
 
 ### 陷阱 3：返回局部变量引用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -368,9 +383,11 @@ fn good() -> String {
 ---
 
 ## 🎮 动手练习
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 练习 1：修复错误
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -394,6 +411,7 @@ fn first_word(s: &String) -> &str {
 </details>
 
 ### 练习 2：实现大写转换
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -410,6 +428,7 @@ fn make_uppercase(s: &mut String) {
 ```
 
 ### 练习 3：修复借用冲突
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -439,6 +458,7 @@ fn main() {
 </details>
 
 ### 练习 4：计数函数
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -455,9 +475,11 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 ---
 
 ## 📖 权威来源与延伸阅读
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 官方文档（一级来源）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [The Rust Book - Ch4.2: References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) —— 借用的权威入门定义
@@ -465,6 +487,7 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 - [Rust Reference - Interior Mutability](https://doc.rust-lang.org/reference/special-types-and-traits.html) —— `UnsafeCell` 与内部可变性
 
 ### 学术来源（一级来源）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **Ralf Jung et al., "RustBelt: Securing the Foundations of the Rust Programming Language"**, *POPL 2018* —— 借用检查器的形式化验证（Alias-XOR-Mutation 定理、分离逻辑分数权限）。
@@ -473,12 +496,14 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 - **Ralf Jung, "Tree Borrows: Or, How I Learned to Stop Worrying and Love the Alias"**, *arXiv 2023* —— 用树结构替代栈结构，更精确地建模层次化借用关系。
 
 ### 社区权威（二级来源）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **Niko Matsakis**, ["Two interpretations of borrowing"](https://smallcultfollowing.com/babysteps/blog/2024/01/05/two-interpretations-of-borrowing/) —— 借用的区域视角 vs 流视角。
 - **Jon Gjengset**, [Crust of Rust: References](https://www.youtube.com/watch?v=rAl-9HwD858) —— 借用与引用的可视化深入讲解。
 
 ### 跨语言对比（三级来源）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 语言 | 对应机制 | 权威来源 |
@@ -488,6 +513,7 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 | **Go** | 指针 `*T`（无别名-可变分离概念） | [Go Spec: Pointers](https://go.dev/ref/spec#Pointer_types) |
 
 ### 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 概念 | 描述 | 示例 |
@@ -500,6 +526,7 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 ---
 
 ## 📝 总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 借用是 Rust 所有权系统的核心机制：
@@ -521,6 +548,7 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [迭代器 (Iterators)](iterators.md)
@@ -531,6 +559,7 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 ---
 
 ## 思维导图：借用系统全景
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -552,6 +581,7 @@ graph TD
 ---
 
 ## 决策树：借用类型选择
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -711,4 +741,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

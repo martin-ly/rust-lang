@@ -66,6 +66,7 @@ MISRA C:2025 总规则数: 143
 - 相比C的隐式UB，这是安全改进
 
 ### 2. 未使用代码 (Rules 2.x)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 规则 | MISRA要求 | Rust编译器 | 调整后级别 |
@@ -79,6 +80,7 @@ MISRA C:2025 总规则数: 143
 | R2.7 | 无未使用参数 | 编译器警告 | Advisory |
 
 ### 3. 注释 (Rules 3.x)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 规则 | MISRA要求 | Rust支持 | 调整后级别 |
@@ -89,6 +91,7 @@ MISRA C:2025 总规则数: 143
 **注意**: Rust原生支持嵌套`/* */`注释，这是C不支持的特性
 
 ### 4. 标识符 (Rules 5.x)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 规则 | MISRA要求 | Rust差异 | 调整后级别 |
@@ -102,6 +105,7 @@ MISRA C:2025 总规则数: 143
 | R5.7 | 标识符区分 | 编译器警告 | Advisory |
 
 ### 5. 类型系统 (Rules 6.x, 7.x)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **这是Rust最强的领域！**
@@ -116,6 +120,7 @@ MISRA C:2025 总规则数: 143
 | R7.4 | 字符串常量const | 自动 | Required (自动) |
 
 ### 6. 字面量和常量 (Rules 8.x)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 规则 | MISRA要求 | Rust特性 | 调整后级别 |
@@ -136,6 +141,7 @@ MISRA C:2025 总规则数: 143
 | R8.14 | 变量声明限制 | let语句 | Required (自动) |
 
 ### 7. 指针和数组 (Rules 11.x, 18.x) - 关键章节
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **Rust借用检查器自动保证的关键规则:**
@@ -161,6 +167,7 @@ MISRA C:2025 总规则数: 143
 | R18.8 | 可变长数组 | 不支持 | n/a |
 
 ### 8. 内存管理 (Rules 21.x, 22.x) - Rust强项
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 规则 | MISRA要求 | Rust所有权 | 调整后级别 |
@@ -196,9 +203,11 @@ MISRA C:2025 总规则数: 143
 ---
 
 ## Rust特定优势
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 编译器自动保证的类别
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **内存安全 (100%)**
@@ -225,9 +234,11 @@ MISRA C:2025 总规则数: 143
 ---
 
 ## 实施建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 对于新项目
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **使用Rust安全子集**
@@ -255,6 +266,7 @@ MISRA C:2025 总规则数: 143
    - 提供安全论证
 
 ### 对于C到Rust迁移
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **规则映射审查**
@@ -275,9 +287,11 @@ MISRA C:2025 总规则数: 143
 ---
 
 ## 工具配置
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Clippy配置 (MISRA风格)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -301,6 +315,7 @@ cyclomatic-complexity-threshold = 15
 ```
 
 ### 编译器标志
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
@@ -314,9 +329,11 @@ RUSTFLAGS="-D warnings -W unsafe-code" cargo build
 ---
 
 ## 认证文档模板
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### Rust MISRA合规声明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```markdown
@@ -351,9 +368,11 @@ RUSTFLAGS="-D warnings -W unsafe-code" cargo build
 ---
 
 ## 未来展望
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### MISRA Rust标准
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 MISRA已表示正在考虑制定专门的Rust编码规范：
@@ -366,6 +385,7 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
   - 嵌入式Rust
 
 ### 参与机会
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 加入MISRA工作组
@@ -375,6 +395,7 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
 ---
 
 ## 参考资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [MISRA C:2025 Addendum 6 PDF](https://misra.org.uk/app/uploads/2025/03/MISRA-C-2025-ADD6.pdf)
@@ -395,6 +416,7 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -500,4 +522,3 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

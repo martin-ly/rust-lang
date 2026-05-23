@@ -103,6 +103,7 @@ SeqCst:     全局全序（所有 SeqCst 操作对所有线程可见顺序一致
 ---
 
 ### 模块 2: 属性清单
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
@@ -123,6 +124,7 @@ SeqCst:     全局全序（所有 SeqCst 操作对所有线程可见顺序一致
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -165,6 +167,7 @@ graph TD
 ---
 
 ### 什么是原子操作
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **原子操作**（Atomic Operation）是指不可中断的操作——要么完全执行，要么完全不执行，不存在中间状态。从硬件层面看，现代 CPU 提供专门的指令来保证对单个内存位置的操作的原子性。
@@ -205,6 +208,7 @@ fn main() {
 ```
 
 ### 原子类型概览
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Rust 标准库在 `std::sync::atomic` 模块中提供以下原子类型：
@@ -226,6 +230,7 @@ Rust 标准库在 `std::sync::atomic` 模块中提供以下原子类型：
 - 不支持复合类型（如结构体），需要使用 `AtomicPtr` 配合 `Box`
 
 ### 内存顺序 (Memory Ordering)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **内存顺序是原子操作中最复杂、最关键的概念**。它决定了操作之间的可见性保证和指令重排的约束。
@@ -349,6 +354,7 @@ static FLAG_B: AtomicBool = AtomicBool::new(false);
 ```
 
 ### Compare-and-Swap (CAS) 操作
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 CAS 是无锁算法的核心原语，提供**原子性的条件更新**：
@@ -407,6 +413,7 @@ impl<T> LockFreeStack<T> {
 - 使用 hazard pointers 或 epoch-based 内存回收
 
 ### Fetch-and-Modify 操作
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 常见的原子修改操作：
@@ -458,6 +465,7 @@ assert_eq!(counter.load(Ordering::Relaxed), 7);
 ```
 
 ### 无锁数据结构基础
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 自旋锁实现
@@ -527,6 +535,7 @@ impl<T> SpinLock<T> {
 ```
 
 ### 原子与互斥锁的对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 原子操作 | 互斥锁 (`Mutex`) |
@@ -547,6 +556,7 @@ impl<T> SpinLock<T> {
 ---
 
 ## 💡 最佳实践
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **默认使用最弱的内存序**：从 `Relaxed` 开始，仅在必要时增强
@@ -603,6 +613,7 @@ impl<T> SpinLock<T> {
 ---
 
 ## ⚠️ 常见陷阱
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **忘记 Unsafe Rust**：原子操作常与 `UnsafeCell`、原始指针配合使用
@@ -649,9 +660,11 @@ impl<T> SpinLock<T> {
 ---
 
 ## 🎮 动手练习
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 练习 1: 无锁计数器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 实现一个线程安全的计数器，支持 `increment()` 和 `get()` 方法：
@@ -711,6 +724,7 @@ mod tests {
 ```
 
 ### 练习 2: 单次初始化 (One-shot Initialization)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 使用原子操作实现一个只执行一次的初始化：
@@ -793,9 +807,11 @@ where
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 表征 A: 内存序选择决策树（增强版）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -851,6 +867,7 @@ where
 ```
 
 ### 表征 B: 原子操作 vs 互斥锁选择矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 维度 | 原子操作 (Relaxed) | 原子操作 (AcqRel) | `Mutex` | `RwLock` |
@@ -864,6 +881,7 @@ where
 | **调试难度** | 极高 | 极高 | 低 | 低 |
 
 ### 表征 C: happens-before 建立示意图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -895,9 +913,11 @@ ready.store      ─┼── Release ─────┐             │
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 官方来源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
@@ -907,6 +927,7 @@ ready.store      ─┼── Release ─────┐             │
 | [The Rustonomicon - Atomics](https://doc.rust-lang.org/nomicon/atomics.html) | 高级教程 | 内存模型基础 | 模块 1.3 |
 
 ### 8.2 学术来源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 论文/来源 | 会议/机构 | 核心论证 | 本文档对应点 |
@@ -916,6 +937,7 @@ ready.store      ─┼── Release ─────┐             │
 | **"Common Compiler Optimisations are Invalid in the C11 Memory Model"** | PLDI 2015 (Vafeiadis et al.) | C11/Rust 内存模型中编译器优化的边界 | 模块 6 |
 
 ### 8.3 社区权威
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
@@ -925,6 +947,7 @@ ready.store      ─┼── Release ─────┐             │
 | **Herb Sutter** | ["atomic Weapons"](https://herbsutter.com/) | C++ 原子操作的演讲系列，与 Rust 语义高度相关 | 模块 4 |
 
 ### 8.4 跨语言对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 维度 | Rust `std::sync::atomic` | C++ `std::atomic` | Java `volatile` + `Atomic*` | Go `sync/atomic` |
@@ -940,9 +963,11 @@ ready.store      ─┼── Release ─────┐             │
 ---
 
 ## ⚖️ 模块 9: 设计权衡分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 为什么 Rust 提供了五种内存序而不是只有一种？
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 核心原因是**性能与可移植性的 trade-off**：
@@ -952,6 +977,7 @@ ready.store      ─┼── Release ─────┐             │
 3. **SeqCst** 是最安全的"默认"，但性能成本显著（尤其在高频计数器场景）。
 
 ### 9.2 该设计的成本
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **认知负担**: 内存序是并发编程中最难理解的概念之一。错误的 Ordering 选择不会导致编译错误，而是导致难以复现的运行时 bug。
@@ -961,6 +987,7 @@ ready.store      ─┼── Release ─────┐             │
 **验证成本**: 无锁算法的正确性需要形式化验证或模型检测（如 `loom`），不能仅依赖测试。
 
 ### 9.3 什么场景下原子操作是次优的？
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **大多数业务逻辑**: `Mutex` 或 `RwLock` 更简单、更安全。无锁编程应仅在性能分析确认瓶颈后使用。
@@ -970,9 +997,11 @@ ready.store      ─┼── Release ─────┐             │
 ---
 
 ## 📝 模块 10: 自我检测与练习
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 概念性问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **为什么 `Ordering::Relaxed` 的 `fetch_add` 不能保证其他线程以相同顺序看到多个原子变量的更新？** 用 happens-before 关系解释。
@@ -982,6 +1011,7 @@ ready.store      ─┼── Release ─────┐             │
 3. **ABA 问题的本质是什么？** 为什么 tagged pointer 可以解决它？在 Rust 中实现 tagged pointer 有什么特殊挑战？
 
 ### 代码修复题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **题 1**: 以下代码试图用 Relaxed 实现标志位同步，但有严重问题。请识别并修复：
@@ -1069,6 +1099,7 @@ fn increment(counter: &AtomicUsize) {
 </details>
 
 ### 开放设计题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **题 3**: 你正在设计一个高并发计数器系统。要求：
@@ -1090,6 +1121,7 @@ fn increment(counter: &AtomicUsize) {
 ---
 
 ## 📖 延伸阅读
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 官方文档
@@ -1105,6 +1137,7 @@ fn increment(counter: &AtomicUsize) {
 - ISO C++20 §31 — *Atomics library* [来源: C++ `std::atomic` 的内存序枚举与 Rust `Ordering` 的精确对应关系; `memory_order` 的形式化语义定义]
 
 ### 相关 crate
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | Crate | 用途 |
@@ -1115,6 +1148,7 @@ fn increment(counter: &AtomicUsize) {
 | `sharded-slab` | 无锁的 slab 分配器 |
 
 ### 硬件基础
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [内存屏障（Memory Barrier）](https://en.wikipedia.org/wiki/Memory_barrier)
@@ -1135,6 +1169,7 @@ fn increment(counter: &AtomicUsize) {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Concurrency 并发编程](README.md)
@@ -1506,4 +1541,3 @@ fn increment(counter: &AtomicUsize) {
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

@@ -146,6 +146,7 @@ profile = "minimal"
 ```
 
 ### 1.4 .cargo/config.toml
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```toml
@@ -168,6 +169,7 @@ retry = 3
 ```
 
 ### 1.5 main.rs模板
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -225,6 +227,7 @@ fn main() -> ! {
 ```
 
 ### 1.6 lib.rs模板
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -251,6 +254,7 @@ pub type Result<T> = core::result::Result<T, SafetyError>;
 ```
 
 ### 1.7 memory.x
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```ld
@@ -273,9 +277,11 @@ _stack_top = ORIGIN(RAM) + LENGTH(RAM);
 ---
 
 ## 2. 应用程序模板
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 2.1 项目结构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -303,6 +309,7 @@ safety-application/
 ```
 
 ### 2.2 Cargo.toml
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```toml
@@ -354,6 +361,7 @@ harness = false
 ```
 
 ### 2.3 state_machine.rs
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -427,6 +435,7 @@ impl StateMachine<Running> {
 ```
 
 ### 2.4 CI/CD配置
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```yaml
@@ -518,9 +527,11 @@ jobs:
 ---
 
 ## 3. 快速启动命令
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 创建新项目
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -537,6 +548,7 @@ cd my-safety-project
 ```
 
 ### 3.2 初始化检查清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -582,6 +594,7 @@ echo "   4. Run 'cargo test' to run tests"
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -805,4 +818,3 @@ echo "   4. Run 'cargo test' to run tests"
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

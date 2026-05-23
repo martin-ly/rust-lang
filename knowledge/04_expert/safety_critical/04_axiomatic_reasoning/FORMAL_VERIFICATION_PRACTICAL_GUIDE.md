@@ -61,6 +61,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 基础用法
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -82,6 +83,7 @@ cargo miri run
 ```
 
 ### 环境变量配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -96,6 +98,7 @@ export MIRIFLAGS="-Zmiri-data-race-detector"
 ```
 
 ### 实际示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -132,6 +135,7 @@ fn use_after_free() {
 ```
 
 ### 在CI中集成Miri
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```yaml
@@ -160,14 +164,17 @@ jobs:
 ---
 
 ## Kani模型检查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 基础概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Kani使用有界模型检查(BMC)验证Rust代码属性。它将代码转换为逻辑公式，使用SAT/SMT求解器验证。
 
 ### 安装与配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -180,6 +187,7 @@ kani --version
 ```
 
 ### 基本证明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -207,6 +215,7 @@ fn verify_add() {
 ```
 
 ### 复杂验证示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -253,6 +262,7 @@ fn verify_binary_search() {
 ```
 
 ### 不安全代码验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -279,6 +289,7 @@ fn verify_safe_access() {
 ```
 
 ### Kani高级特性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -317,14 +328,17 @@ fn verify_with_stub() {
 ---
 
 ## Verus定理证明
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 概述
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Verus是用于验证Rust程序正确性的工具，基于SMT求解器，支持复杂的不变量和前置/后置条件。
 
 ### 安装
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
@@ -335,6 +349,7 @@ cargo build --release
 ```
 
 ### 基本证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -375,6 +390,7 @@ verus! {
 ```
 
 ### 数据结构验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -431,9 +447,11 @@ verus! {
 ---
 
 ## 验证策略
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 分层验证方法
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -465,6 +483,7 @@ Level 5: 定理证明 (Verus)
 ```
 
 ### 验证投资回报率
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 验证级别 | 投入 | 收益 | 适用场景 |
@@ -478,9 +497,11 @@ Level 5: 定理证明 (Verus)
 ---
 
 ## 实战案例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 案例1: 安全关键状态机
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -568,6 +589,7 @@ fn verify_state_machine() {
 ```
 
 ### 案例2: 加密算法验证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -605,9 +627,11 @@ fn verify_constant_time() {
 ---
 
 ## 最佳实践
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 从简单开始
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -620,6 +644,7 @@ fn verify_simple_property() {
 ```
 
 ### 2. 逐步增加复杂度
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -635,6 +660,7 @@ fn verify_with_assumptions() {
 ```
 
 ### 3. 处理循环
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -654,6 +680,7 @@ fn verify_with_loop() {
 ```
 
 ### 4. 在CI中集成
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```yaml
@@ -684,9 +711,11 @@ jobs:
 ---
 
 ## 故障排除
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Kani超时
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -707,6 +736,7 @@ fn fast_proof() {
 ```
 
 ### Miri堆溢出
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -727,6 +757,7 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -960,4 +991,3 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

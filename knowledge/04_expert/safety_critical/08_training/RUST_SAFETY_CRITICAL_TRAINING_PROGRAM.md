@@ -109,6 +109,7 @@
   - 错误处理模式
 
 ### 第2周: 基础应用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 模块4: 错误处理 (2天)
@@ -132,6 +133,7 @@
 - 代码覆盖率
 
 ### Level 1 评估
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **理论考试**: 50道选择题 (80%通过)
@@ -141,9 +143,11 @@
 ---
 
 ## Level 2: 系统编程 (2周)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 第3周: 底层编程
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 模块7: 智能指针 (2天)
@@ -195,6 +199,7 @@
 - Send和Sync trait
 
 ### 第4周: 嵌入式Rust
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 模块10: 无标准库编程 (2天)
@@ -219,6 +224,7 @@
 - 优先级管理
 
 ### Level 2 评估
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **项目**: 嵌入式传感器驱动
@@ -228,9 +234,11 @@
 ---
 
 ## Level 3: 安全关键 (2周)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 第5周: 功能安全基础
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 模块13: 功能安全标准 (3天)
@@ -258,6 +266,7 @@
 - 静态分析工具
 
 ### 第6周: 验证与确认
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 模块15: 高级测试技术 (2天)
@@ -292,6 +301,7 @@
 - 审计模拟
 
 ### Level 3 评估
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **项目**: ASIL B模块开发
@@ -301,9 +311,11 @@
 ---
 
 ## Level 4: 认证与专业 (2周)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 第7周: 认证考试准备
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 模块18: 功能安全认证 (FSC)
@@ -320,6 +332,7 @@
 - 工具链熟练度
 
 ### 第8周: 实战项目
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 模块20: 完整项目开发
@@ -330,6 +343,7 @@
 - 认证文档
 
 ### Level 4 评估
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **FSC考试**: 80%+
@@ -339,9 +353,11 @@
 ---
 
 ## 培训资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 在线课程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 资源 | 类型 | 费用 | 推荐度 |
@@ -352,6 +368,7 @@
 | [High Assurance Rust](https://highassurance.rs) | 自学 | 免费 | ⭐⭐⭐⭐ |
 
 ### 实验环境
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -366,6 +383,7 @@ cargo install kani-verifier verus
 ```
 
 ### 参考书籍
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **《The Rust Programming Language》** - 官方教程
@@ -376,9 +394,11 @@ cargo install kani-verifier verus
 ---
 
 ## 认证路径
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 个人认证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -400,6 +420,7 @@ cargo install kani-verifier verus
 ```
 
 ### 组织认证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - ISO 9001 (质量管理体系)
@@ -410,9 +431,11 @@ cargo install kani-verifier verus
 ---
 
 ## 培训计划表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 8周密集班
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 周 | 主题 | 课时 | 评估 |
@@ -427,6 +450,7 @@ cargo install kani-verifier verus
 | 8 | 实战项目 | 40h | 项目答辩 |
 
 ### 兼职学习班 (16周)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 每周2天，每天8小时
@@ -436,9 +460,11 @@ cargo install kani-verifier verus
 ---
 
 ## 成功指标
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 学员能力评估
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 能力 | Level 1 | Level 2 | Level 3 | Level 4 |
@@ -449,6 +475,7 @@ cargo install kani-verifier verus
 | 认证准备 | - | - | 70% | 90% |
 
 ### 就业方向
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 嵌入式Rust工程师
@@ -459,6 +486,7 @@ cargo install kani-verifier verus
 ---
 
 ## 联系与注册
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **培训机构**: [Ferrous Systems](https://ferrous-systems.com/training/)
@@ -478,6 +506,7 @@ cargo install kani-verifier verus
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -611,4 +640,3 @@ cargo install kani-verifier verus
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

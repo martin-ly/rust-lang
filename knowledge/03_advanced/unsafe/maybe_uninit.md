@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 完成本章后，你将能够：
@@ -26,6 +27,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **所有权与借用** — 所有权转移、引用规则（`01_fundamentals/ownership.md`）
@@ -35,9 +37,11 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 1.1 直观定义
@@ -68,6 +72,7 @@ assert_eq!(value, 42);
 | 现代推荐 | 已废弃，不应使用 | Rust 1.36+ 标准方式 |
 
 ### 模块 2: 属性清单
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | API | 安全级别 | 说明 |
@@ -89,6 +94,7 @@ assert_eq!(value, 42);
 > - `AsRef`/`AsMut` 实现支持数组视图访问
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -110,6 +116,7 @@ MaybeUninit<T>
 ```
 
 ### 模块 4: 机制解释
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 4.1 为什么需要 `MaybeUninit`
@@ -141,6 +148,7 @@ struct RawVec<T> {
 ```
 
 ### 模块 5: 正例集
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### 5.1 栈上数组的高效初始化
@@ -253,6 +261,7 @@ let initialized_box: Box<[u8; 1024]> = unsafe {
 ```
 
 ### 模块 6: 反例集
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 6.1 对未初始化值调用 `assume_init()`
@@ -291,6 +300,7 @@ let mut arr: [MaybeUninit<String>; 3] = unsafe { MaybeUninit::uninit().assume_in
 ```
 
 ### 模块 7: 思维表征
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 初始化状态机
@@ -314,6 +324,7 @@ MaybeUninit<T>
 ```
 
 ### 模块 8: 国际化对齐
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 术语 (中文) | 英文 | 来源 |
@@ -325,6 +336,7 @@ MaybeUninit<T>
 | 部分初始化 | Partial Initialization | Rust Unsafe Guidelines |
 
 ### 模块 9: 设计权衡
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 方案 | 安全 | 性能 | 复杂度 | 适用场景 |
@@ -335,6 +347,7 @@ MaybeUninit<T>
 | `smallvec` (crate) | ✅ | 栈+堆混合 | 低 | 大小变化但通常较小 |
 
 ### 模块 10: 自我检测
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 10.1 快速检查
@@ -359,6 +372,7 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [MaybeUninit 文档](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)
@@ -375,6 +389,7 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 ---
 
 ## 📚 权威来源索引
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 官方来源
@@ -397,6 +412,7 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [FFI (Foreign Function Interface)](ffi.md)
@@ -522,4 +538,3 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -79,6 +79,7 @@ rustup default 1.81.0
 ```
 
 ### 2. Ferrocene工具链 (预认证)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -96,6 +97,7 @@ rustc --version  # 应显示Ferrocene版本
 ```
 
 ### 3. 开发工具安装
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -121,9 +123,11 @@ rustup component add llvm-tools-preview
 ---
 
 ## 项目配置
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Cargo.toml模板
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```toml
@@ -195,6 +199,7 @@ path = "src/main.rs"
 ```
 
 ### rust-toolchain.toml
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```toml
@@ -217,6 +222,7 @@ profile = "minimal"
 ```
 
 ### .cargo/config.toml
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```toml
@@ -257,9 +263,11 @@ crates-io = { index = "https://github.com/rust-lang/crates.io-index" }
 ---
 
 ## Clippy配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### clippy.toml
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```toml
@@ -303,6 +311,7 @@ struct-field-name-threshold = 5
 ```
 
 ### 自定义Lint规则
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -345,9 +354,11 @@ impl LintPass for SafetyCriticalLints {
 ---
 
 ## 测试配置
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Miri配置
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -371,6 +382,7 @@ cargo miri run --bin binary_name
 ```
 
 ### Kani配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -392,6 +404,7 @@ cargo kani --harness my_proof --visualize
 ```
 
 ### Cargo.toml测试配置
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```toml
@@ -411,9 +424,11 @@ codegen-units = 1
 ---
 
 ## 覆盖率配置
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### cargo-tarpaulin
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -437,6 +452,7 @@ cargo tarpaulin --mcdc
 ```
 
 ### tarpaulin.toml
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```toml
@@ -480,6 +496,7 @@ run-types = ["Tests", "Doctests"]
 ```
 
 ### llvm-cov配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -499,9 +516,11 @@ cargo llvm-cov --html --ignore-filename-regex 'tests/.*'
 ---
 
 ## CI/CD配置
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### GitHub Actions完整配置
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```yaml
@@ -662,9 +681,11 @@ jobs:
 ---
 
 ## 文档生成
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### rustdoc配置
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -679,6 +700,7 @@ cargo doc --open
 ```
 
 ### 文档测试
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -711,9 +733,11 @@ pub unsafe fn safe_wrapper(ptr: *const i32) -> i32 {
 ---
 
 ## 依赖管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### cargo-deny配置
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```toml
@@ -783,6 +807,7 @@ github = ["your-org"]
 ```
 
 ### Cargo.lock管理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -799,9 +824,11 @@ cargo update --workspace --locked --dry-run
 ---
 
 ## IDE配置
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### VS Code settings.json
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```json
@@ -852,6 +879,7 @@ cargo update --workspace --locked --dry-run
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -1147,4 +1175,3 @@ cargo update --workspace --locked --dry-run
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

@@ -70,6 +70,7 @@ Level 5: 专家 (持续学习)
 | 生命周期 | ../01_fundamentals/lifetimes.md | 8h | ⭐⭐⭐⭐⭐ |
 
 ### Level 1 项目实战
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 命令行计算器
@@ -79,9 +80,11 @@ Level 5: 专家 (持续学习)
 ---
 
 ## Level 2: 进阶 - 掌握抽象 (60-80小时)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 类型系统 (15-20小时)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -91,6 +94,7 @@ Level 5: 专家 (持续学习)
 | 生命周期进阶 | ../02_intermediate/lifetimes_advanced.md | 5h | ⭐⭐⭐⭐ |
 
 ### 2.2 集合与迭代器 (10-15小时)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -100,6 +104,7 @@ Level 5: 专家 (持续学习)
 | 字符串处理 | ../02_intermediate/strings.md | 3h | ⭐⭐⭐⭐ |
 
 ### 2.3 错误处理 (5-8小时)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -109,6 +114,7 @@ Level 5: 专家 (持续学习)
 | 自定义错误 | ../02_intermediate/error_handling.md | 2h | ⭐⭐⭐⭐ |
 
 ### 2.4 智能指针 (10-12小时)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -118,6 +124,7 @@ Level 5: 专家 (持续学习)
 | RefCell 和 Mutex | ../02_intermediate/interior_mutability.md | 5h | ⭐⭐⭐⭐⭐ |
 
 ### Level 2 项目实战
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 简单数据库（内存）
@@ -127,9 +134,11 @@ Level 5: 专家 (持续学习)
 ---
 
 ## Level 3: 高级 - 系统编程 (80-100小时)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 3.1 并发编程 (20-25小时)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -140,6 +149,7 @@ Level 5: 专家 (持续学习)
 | Send 和 Sync | ../03_advanced/concurrency/send_sync.md | 5h | ⭐⭐⭐⭐⭐ |
 
 ### 3.2 异步编程 (25-30小时)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -150,6 +160,7 @@ Level 5: 专家 (持续学习)
 | 异步 trait | ../03_advanced/async/async_traits.md | 3h | ⭐⭐⭐ |
 
 ### 3.3 宏系统 (15-20小时)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -158,6 +169,7 @@ Level 5: 专家 (持续学习)
 | 过程宏 | ../03_advanced/macros/procedural.md | 8h | ⭐⭐⭐ |
 
 ### 3.4 Unsafe Rust (10-15小时)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -167,6 +179,7 @@ Level 5: 专家 (持续学习)
 | 原始指针 | ../03_advanced/unsafe/raw_pointers.md | 3h | ⭐⭐⭐ |
 
 ### Level 3 项目实战
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 多线程 Web 服务器
@@ -176,9 +189,11 @@ Level 5: 专家 (持续学习)
 ---
 
 ## Level 4: 精通 - 工程实践 (60-100小时)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 设计模式 (20-25小时)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -188,6 +203,7 @@ Level 5: 专家 (持续学习)
 | 行为型模式 | ../04_expert/design_patterns/behavioral.md | 8h | ⭐⭐⭐ |
 
 ### 4.2 性能优化 (15-20小时)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -197,6 +213,7 @@ Level 5: 专家 (持续学习)
 | SIMD | ../04_expert/performance/simd.md | 5h | ⭐⭐ |
 
 ### 4.3 内存模型 (10-15小时)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 主题 | 文档位置 | 时间 | 掌握程度 |
@@ -205,6 +222,7 @@ Level 5: 专家 (持续学习)
 | Tree Borrows | ../04_expert/miri/tree_borrows.md | 5h | ⭐⭐⭐ |
 
 ### Level 4 项目实战
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 高性能网络框架
@@ -214,9 +232,11 @@ Level 5: 专家 (持续学习)
 ---
 
 ## Level 5: 专家 - 持续学习
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 形式化验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 主题 | 文档位置 |
@@ -225,6 +245,7 @@ Level 5: 专家 (持续学习)
 | 验证工具 | ../05_master/verification/ |
 
 ### 5.2 编译器内部
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 主题 | 文档位置 |
@@ -233,6 +254,7 @@ Level 5: 专家 (持续学习)
 | 优化 | ../05_master/compiler/optimization.md |
 
 ### 5.3 贡献 Rust
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 阅读 [Rust RFCs](https://rust-lang.github.io/rfcs/)
@@ -241,19 +263,23 @@ Level 5: 专家 (持续学习)
 ---
 
 ## 📊 个性化路径
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### Web 开发者路径
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 基础 → 泛型/Trait → 错误处理 → 异步/Tokio → Web 框架
 
 ### 系统编程路径
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 基础 → 所有权深度 → 并发 → Unsafe → FFI → 嵌入式
 
 ### 数据科学路径
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 基础 → 迭代器 → 集合 → ndarray → 性能优化
@@ -261,9 +287,11 @@ Level 5: 专家 (持续学习)
 ---
 
 ## ✅ 学习检查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Level 1 完成标准
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 理解所有权、借用、生命周期
@@ -271,6 +299,7 @@ Level 5: 专家 (持续学习)
 - [ ] 能阅读简单 Rust 代码
 
 ### Level 2 完成标准
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 能使用泛型和 Trait 设计接口
@@ -278,6 +307,7 @@ Level 5: 专家 (持续学习)
 - [ ] 能编写 2000 行以内的项目
 
 ### Level 3 完成标准
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 能编写多线程/异步程序
@@ -285,6 +315,7 @@ Level 5: 专家 (持续学习)
 - [ ] 能参与开源项目
 
 ### Level 4 完成标准
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 能优化程序性能
@@ -366,4 +397,3 @@ Level 5: 专家 (持续学习)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

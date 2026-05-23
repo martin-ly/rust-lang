@@ -50,6 +50,7 @@ SIL 4系统要求:
 > **[来源: Rust Official Docs]**
 
 ### 硬件架构: 2x2取2
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -79,6 +80,7 @@ SIL 4系统要求:
 ```
 
 ### 软件架构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -535,9 +537,11 @@ pub mod types {
 ---
 
 ## 冗余与多样性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 多样性实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -614,9 +618,11 @@ pub enum ComparisonResult {
 ---
 
 ## 验证与确认
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 形式化验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -673,6 +679,7 @@ mod verification {
 ```
 
 ### 测试覆盖
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 测试类型 | 目标 | 实际 | 工具 |
@@ -685,9 +692,11 @@ mod verification {
 ---
 
 ## 认证与评估
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 评估机构审查
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 主要审查点
@@ -716,9 +725,11 @@ mod verification {
 ---
 
 ## 关键经验
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 成功因素
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **形式化方法**: Kani验证发现12个边界条件问题
@@ -727,6 +738,7 @@ mod verification {
 4. **静态分析**: 编译期捕获90%潜在缺陷
 
 ### 量化指标
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 指标 | Rust项目 | 传统C项目 | 改进 |
@@ -749,6 +761,7 @@ mod verification {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -1042,4 +1055,3 @@ mod verification {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

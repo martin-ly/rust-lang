@@ -36,6 +36,7 @@
   - [🧪 测试](#-测试)
   - [🔗 参考资源](#-参考资源)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -90,6 +91,7 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 编译时查询检查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -124,6 +126,7 @@ async fn get_user(pool: &PgPool, user_id: i64) -> Result<User, sqlx::Error> {
 - 参数数量匹配
 
 ### 类型安全
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -145,6 +148,7 @@ struct UserWithPosts {
 ```
 
 ### 异步原生
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -169,9 +173,11 @@ let (users, posts): (Vec<User>, Vec<Post>) = tokio::try_join!(
 ---
 
 ## 🚀 高级用法
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 连接池
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -211,6 +217,7 @@ impl Database {
 ```
 
 ### 事务处理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -276,6 +283,7 @@ async fn nested_transaction_example(db: &Database) -> Result<(), sqlx::Error> {
 ```
 
 ### 查询构建
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -335,6 +343,7 @@ async fn bulk_insert_users(
 ```
 
 ### 迁移
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```sql
@@ -370,9 +379,11 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
 ---
 
 ## 📊 性能优化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 基准数据
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 操作 | SQLx | Diesel | Sea-ORM |
@@ -383,6 +394,7 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
 | 批量插入 | 50K/s | 40K/s | 35K/s |
 
 ### 优化建议
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -417,6 +429,7 @@ let pool = PgPoolOptions::new()
 ---
 
 ## 🧪 测试
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -459,6 +472,7 @@ mod tests {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [SQLx 官方文档](https://docs.rs/sqlx/latest/sqlx/)
@@ -474,6 +488,7 @@ mod tests {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
@@ -649,4 +664,3 @@ mod tests {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

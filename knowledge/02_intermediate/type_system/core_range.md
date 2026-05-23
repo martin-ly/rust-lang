@@ -16,6 +16,7 @@
 Rust 1.95.0 引入了 `core::range` 模块 [来源: Rust 1.95 Release Notes / 2026; RFC 3550 — Rangeful / 2025; 核心设计决策: 新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型，为未来统一所有 range 类型提供命名空间]，新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型。这是对 `std::ops::RangeInclusive` 的模块级补充，旨在为未来统一所有 range 类型提供命名空间。
 
 ### 关键区分
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 类型 | 表示法 | 包含端点 | 模块 |
@@ -29,9 +30,11 @@ Rust 1.95.0 引入了 `core::range` 模块 [来源: Rust 1.95 Release Notes / 20
 ---
 
 ## 二、基本用法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 创建区间
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -42,6 +45,7 @@ let r = RangeInclusive::new(1, 10);
 ```
 
 ### 2.2 遍历区间
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -54,6 +58,7 @@ for i in r {
 ```
 
 ### 2.3 区间运算
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -67,9 +72,11 @@ fn overlap(a: &RangeInclusive<i32>, b: &RangeInclusive<i32>) -> bool {
 ---
 
 ## 三、应用场景
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 分页计算
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -83,6 +90,7 @@ fn page_range(total: u32, per_page: u32, page: u32) -> RangeInclusive<u32> {
 ```
 
 ### 3.2 区间树
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -104,9 +112,11 @@ impl<T: Ord + Clone> IntervalTree<T> {
 ---
 
 ## 四、限制与反例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### ❌ 空区间行为
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -115,6 +125,7 @@ let r = RangeInclusive::new(5, 3);  // start > end
 ```
 
 ### ❌ 与旧 Range 的混淆
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -126,6 +137,7 @@ assert_eq!(r.into_iter().count(), 6);  // 不是 5！
 ---
 
 ## 五、迁移指南
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -144,6 +156,7 @@ let from_old = core::range::RangeInclusive { start: *old.start(), last: *old.end
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -173,9 +186,11 @@ graph TD
 ---
 
 ### 模块 7: 思维表征
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 表征: Range 类型对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -197,6 +212,7 @@ core::range::RangeInclusive (1.95+):
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 来源 | 类型 | 说明 |
@@ -207,9 +223,11 @@ core::range::RangeInclusive (1.95+):
 ---
 
 ## ⚖️ 模块 9: 设计权衡
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 为什么引入 core::range 模块？
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `core::range` 为未来统一所有 range 类型（`Range`、`RangeInclusive`、`RangeFrom`、`RangeTo` 等）提供了命名空间，使标准库能够逐步演进 range API 而不破坏现有代码。
@@ -219,6 +237,7 @@ core::range::RangeInclusive (1.95+):
 ---
 
 ## 📝 模块 10: 自我检测
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **`core::range::RangeInclusive` 与 `std::ops::RangeInclusive` 在语义上有何异同？** 为什么 Rust 1.95 引入前者而不直接替换后者？
@@ -250,6 +269,7 @@ core::range::RangeInclusive (1.95+):
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [泛型深入 (Generics)](../generics.md)
@@ -315,4 +335,3 @@ core::range::RangeInclusive (1.95+):
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

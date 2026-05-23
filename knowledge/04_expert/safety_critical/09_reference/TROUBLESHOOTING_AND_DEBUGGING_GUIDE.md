@@ -93,6 +93,7 @@ impl<'a> Container<'a> {
 ```
 
 ### 1.2 泛型约束错误
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -131,6 +132,7 @@ fn find_max_ref<T: PartialOrd>(list: &[T]) -> &T {
 ```
 
 ### 1.3 no_std编译错误
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -161,9 +163,11 @@ fn use_static_vec() {
 ---
 
 ## 2. 运行时问题诊断
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 Panic分析与恢复
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -211,6 +215,7 @@ pub fn safe_execute<T>(operation: impl FnOnce() -> T) -> Option<T> {
 ```
 
 ### 2.2 堆栈溢出检测
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -255,6 +260,7 @@ pub mod stack_monitor {
 ```
 
 ### 2.3 死锁检测
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -331,9 +337,11 @@ impl DeadlockDetector {
 ---
 
 ## 3. 工具链问题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Miri常见问题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
@@ -365,6 +373,7 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 ```
 
 ### 3.2 Kani验证失败
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -395,6 +404,7 @@ fn verify_panic_case() {
 ```
 
 ### 3.3 Clippy配置问题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```toml
@@ -411,9 +421,11 @@ allow = [
 ---
 
 ## 4. 性能问题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 二进制大小优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```toml
@@ -431,6 +443,7 @@ panic-halt = "0.2"
 ```
 
 ### 4.2 实时性能调优
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -461,9 +474,11 @@ pub fn cache_warmup<T>(data: &[T]) {
 ---
 
 ## 5. 认证相关问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 覆盖率不达标
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -494,6 +509,7 @@ proptest! {
 ```
 
 ### 5.2 工具链鉴定问题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -529,9 +545,11 @@ mod tool_qualification {
 ---
 
 ## 6. 调试技巧
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 日志记录
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -561,6 +579,7 @@ pub fn log_safety_event(event: SafetyEvent) {
 ```
 
 ### 6.2 断言策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -610,6 +629,7 @@ trait Invariant {
 ---
 
 ## 7. 常见问题速查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 问题 | 快速解决方案 |
@@ -639,6 +659,7 @@ trait Invariant {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -864,4 +885,3 @@ trait Invariant {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

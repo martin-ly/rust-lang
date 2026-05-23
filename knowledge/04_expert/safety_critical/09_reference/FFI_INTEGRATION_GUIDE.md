@@ -134,6 +134,7 @@ pub enum FfiError {
 ```
 
 ### 2. 类型转换安全
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -202,6 +203,7 @@ pub enum FfiError {
 ```
 
 ### 3. 回调安全
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -284,9 +286,11 @@ pub enum EventType {
 ---
 
 ## 安全关键FFI模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 内存管理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -357,6 +361,7 @@ impl<T> Drop for CVec<T> {
 ```
 
 ### 2. 并发FFI
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -427,9 +432,11 @@ impl Drop for NativeContextWrapper {
 ---
 
 ## 自动生成工具
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### bindgen配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -469,6 +476,7 @@ fn main() {
 ```
 
 ### cbindgen配置
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```toml
@@ -496,9 +504,11 @@ rename_types = "PascalCase"
 ---
 
 ## 验证与测试
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### FFI测试模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -545,9 +555,11 @@ mod tests {
 ---
 
 ## 最佳实践检查表
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 设计阶段
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 最小化FFI边界
@@ -557,6 +569,7 @@ mod tests {
 - [ ] 线程安全模型确定
 
 ### 实现阶段
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 所有unsafe代码有SAFETY注释
@@ -566,6 +579,7 @@ mod tests {
 - [ ] 线程安全标记正确
 
 ### 测试阶段
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 异常输入测试
@@ -591,6 +605,7 @@ mod tests {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -812,4 +827,3 @@ mod tests {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

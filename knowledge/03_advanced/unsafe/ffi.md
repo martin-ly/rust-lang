@@ -113,6 +113,7 @@ Rust 调用 C 函数:
 ---
 
 ### 模块 2: 属性清单
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
@@ -133,6 +134,7 @@ Rust 调用 C 函数:
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -176,6 +178,7 @@ graph TD
 ---
 
 ### 模块 4: 机制解释
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 4.1 类型系统视角
@@ -276,6 +279,7 @@ pub extern "C" fn safe_rust_function() -> c_int {
 ---
 
 ### 模块 5: 正例集
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 5.1 Minimal（最小正例）
@@ -389,6 +393,7 @@ impl !Sync for Context {}
 ---
 
 ### 模块 6: 反例集
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 反例 1: 忘记 `catch_unwind` 导致 UB
@@ -510,9 +515,11 @@ impl Drop for Buffer {
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 表征 A: FFI 安全设计决策树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -568,6 +575,7 @@ impl Drop for Buffer {
 ```
 
 ### 表征 B: Rust/C 类型映射矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | Rust 类型 | C 类型 | 大小保证 | 可空 | 备注 |
@@ -586,6 +594,7 @@ impl Drop for Buffer {
 | `#[repr(C)] enum` | `enum` / `int` | 确定 | N/A | 标签类型需指定 |
 
 ### 表征 C: Panic 边界防火墙模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -623,9 +632,11 @@ C 调用 Rust 函数的标准防护层:
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 官方来源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
@@ -636,6 +647,7 @@ C 调用 Rust 函数的标准防护层:
 | [cbindgen 文档](https://github.com/eqrion/cbindgen) | 社区工具 | 从 Rust 生成 C 头文件 | 模块 7 |
 
 ### 8.2 学术来源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 论文/来源 | 会议/机构 | 核心论证 | 本文档对应点 |
@@ -644,6 +656,7 @@ C 调用 Rust 函数的标准防护层:
 | **"RustBelt"** | POPL 2018 | FFI 边界的内存安全保证形式化 | 模块 1.3 |
 
 ### 8.3 社区权威
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
@@ -653,6 +666,7 @@ C 调用 Rust 函数的标准防护层:
 | **The Cargo Team** | ["The bindgen User Guide"](https://rust-lang.github.io/rust-bindgen/) | bindgen 的最佳实践 | 模块 7 |
 
 ### 8.4 跨语言对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | Rust FFI | C FFI (被调用) | Go cgo | Python ctypes / CFFI |
@@ -670,9 +684,11 @@ C 调用 Rust 函数的标准防护层:
 ---
 
 ## ⚖️ 模块 9: 设计权衡分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 9.1 为什么 Rust 的 FFI 基于 C ABI？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 C ABI 是操作系统层面的事实标准：
@@ -682,6 +698,7 @@ C ABI 是操作系统层面的事实标准：
 3. **稳定性**: C ABI 比 C++ ABI 更稳定，更适合跨语言边界。
 
 ### 9.2 该设计的成本
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **手动维护成本**: FFI 绑定需要手工维护 `repr(C)` 结构体、函数签名。`bindgen` 自动化了大部分工作，但复杂宏和条件编译仍需人工处理。
@@ -691,6 +708,7 @@ C ABI 是操作系统层面的事实标准：
 **调试困难**: FFI 相关的 bug（如结构体布局不匹配）往往是静默的内存损坏，调试难度极高。
 
 ### 9.3 什么场景下 FFI 是次优的？
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **纯 Rust 生态可满足时**: 优先使用纯 Rust crate，避免 FFI 的复杂性和 `unsafe`。
@@ -700,9 +718,11 @@ C ABI 是操作系统层面的事实标准：
 ---
 
 ## 📝 模块 10: 自我检测与练习
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 概念性问题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **为什么 Rust panic 跨越 FFI 边界到 C 是未定义行为？** C 的栈展开机制与 Rust panic 的运行时展开有何不同？
@@ -712,6 +732,7 @@ C ABI 是操作系统层面的事实标准：
 3. **`Option<&T>` 在 FFI 中可以优化为可空指针。为什么 `Option<Box<T>>` 也可以优化为可空指针，但 `Option<Vec<T>>` 不行？**
 
 ### 代码修复题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **题 1**: 修复以下 FFI 代码中的安全问题：
@@ -814,6 +835,7 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 </details>
 
 ### 开放设计题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **题 3**: 你正在将一个大型的 C 数学库（如 BLAS/LAPACK）包装为安全的 Rust API。C API 的特点是：
@@ -835,6 +857,7 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 ---
 
 ## 📖 延伸阅读
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [The Rustonomicon - FFI](https://doc.rust-lang.org/nomicon/ffi.html)
@@ -857,6 +880,7 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 ---
 
 ## 📚 权威来源索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方来源
@@ -880,6 +904,7 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [内联汇编 (Inline Assembly)](inline_asm.md)
@@ -1165,4 +1190,3 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

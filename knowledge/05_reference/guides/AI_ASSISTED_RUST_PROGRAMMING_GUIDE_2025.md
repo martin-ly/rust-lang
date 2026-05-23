@@ -80,6 +80,7 @@
 ---
 
 ## 4. AI 辅助工作流（推荐）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 阶段 | 工作流 | 工具 |
@@ -92,6 +93,7 @@
 ---
 
 ## 5. 用 Rust 构建 AI 应用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 在 AI/ML 领域有 Burn、Candle、llm 等生态，详见 [AI+Rust 生态指南](../../../docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md)。
@@ -99,6 +101,7 @@ Rust 在 AI/ML 领域有 Burn、Candle、llm 等生态，详见 [AI+Rust 生态�
 ---
 
 ## 6. 注意事项
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **验证输出**: AI 生成的 Rust 代码务必 `cargo build` 和 `cargo test` 验证
@@ -108,6 +111,7 @@ Rust 在 AI/ML 领域有 Burn、Candle、llm 等生态，详见 [AI+Rust 生态�
 ---
 
 ## 7. 相关文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [guides/README.md](../README.md) - 指南入口
@@ -168,4 +172,3 @@ Rust 在 AI/ML 领域有 Burn、Candle、llm 等生态，详见 [AI+Rust 生态�
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -148,9 +148,11 @@ pub enum E2EResult {
 ---
 
 ## ISO 26262-6: 软件级产品开发
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.5 软件安全需求规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### ASIL等级对应需求
@@ -193,6 +195,7 @@ pub enum DivisionError {
 ```
 
 ### 6.6 软件架构设计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 架构设计原则
@@ -331,6 +334,7 @@ pub enum RecoveryAction {
 ```
 
 ### 6.7 软件单元设计与实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 编码标准对应表
@@ -471,6 +475,7 @@ mod tests {
 ```
 
 ### 6.8 软件单元测试
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 测试方法矩阵
@@ -565,9 +570,11 @@ mod asil_d_tests {
 ---
 
 ## 工具链鉴定
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### TCL (Tool Confidence Level) 确定
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 工具 | 用途 | TCL | 鉴定方法 |
@@ -579,6 +586,7 @@ mod asil_d_tests {
 | kani | 形式化验证 | TCL 2 | 验证测试 |
 
 ### 鉴定测试套件
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -612,9 +620,11 @@ mod tool_qualification {
 ---
 
 ## 认证检查表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### ASIL D项目检查表
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 安全需求100%覆盖
@@ -645,6 +655,7 @@ mod tool_qualification {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -900,4 +911,3 @@ mod tool_qualification {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

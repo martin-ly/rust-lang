@@ -279,6 +279,7 @@ cargo embed
 ---
 
 ## 关键资源链接
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 资源 | URL |
@@ -301,6 +302,7 @@ cargo embed
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -436,4 +438,3 @@ cargo embed
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

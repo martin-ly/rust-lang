@@ -55,6 +55,7 @@ let fetch = async |url: &str| -> Result<String, Error> {
 - 文件写入操作：取消后文件处于未定义状态
 
 ### 安全实践
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -77,9 +78,11 @@ let risky = async || {
 ```
 
 ## 完整示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例 1：基础 async closure
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -92,6 +95,7 @@ pub fn basic_async_closure() -> impl Fn(i32) -> Pin<Box<dyn Future<Output = i32>
 ```
 
 ### 示例 2：并发执行
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -113,6 +117,7 @@ pub async fn run_async_closures_concurrently(inputs: Vec<i32>) -> Vec<i32> {
 ```
 
 ### 示例 3：流处理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -136,6 +141,7 @@ pub async fn process_stream_with_async_closure(
 ```
 
 ### 示例 4：Cancellation Safety 演示
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -161,6 +167,7 @@ pub async fn cancellation_safe_async_closure(items: Vec<i32>) -> Vec<i32> {
 ```
 
 ## 捕获行为对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 特性 | 传统 `|x| async move {}` | `async || {}` |
@@ -171,6 +178,7 @@ pub async fn cancellation_safe_async_closure(items: Vec<i32>) -> Vec<i32> {
 | 调试 | 栈追踪较深 | 栈追踪较浅 |
 
 ## 适用场景
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **异步回调**：事件处理器、定时器回调
@@ -181,6 +189,7 @@ pub async fn cancellation_safe_async_closure(items: Vec<i32>) -> Vec<i32> {
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -211,9 +220,11 @@ graph TD
 ---
 
 ### 模块 7: 思维表征
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 表征: 传统 vs 2024 async closures 语法对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -252,6 +263,7 @@ let fetch = async |url: &str| -> Result<String, Error> {
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 来源 | 类型 | 说明 |
@@ -262,9 +274,11 @@ let fetch = async |url: &str| -> Result<String, Error> {
 ---
 
 ## ⚖️ 模块 9: 设计权衡
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 为什么 async closures 花了这么久才稳定？
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Rust 的 async 闭包需要解决三个核心问题：
@@ -274,6 +288,7 @@ Rust 的 async 闭包需要解决三个核心问题：
 3. **生命周期**: async 闭包返回 `Future`，其生命周期与捕获变量的生命周期复杂交织。
 
 ### 迁移成本
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - **语法层面**: 从 `|x| async move {}` 到 `async |x| {}` 的迁移机械且安全。
@@ -283,6 +298,7 @@ Rust 的 async 闭包需要解决三个核心问题：
 ---
 
 ## 📝 模块 10: 自我检测
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **传统 `|x| async move {}` 与 `async |x| {}` 在捕获语义上有何差异？** 为什么后者更灵活？
@@ -332,6 +348,7 @@ let process = async |items: Vec<i32>| -> i32 {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Async Closures 异步闭包](async_closure.md)
@@ -350,6 +367,7 @@ let process = async |items: Vec<i32>| -> i32 {
 ---
 
 ## 迁移建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **新项目**：直接使用 `async || {}` 语法
@@ -457,4 +475,3 @@ let process = async |items: Vec<i32>| -> i32 {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

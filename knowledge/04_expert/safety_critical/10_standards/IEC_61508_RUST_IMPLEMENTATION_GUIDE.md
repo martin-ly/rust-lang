@@ -146,6 +146,7 @@ pub enum SafetyError {
 ```
 
 ### 7.4.3 软件安全验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 验证方法表(Annex B)
@@ -208,9 +209,11 @@ mod verification {
 ---
 
 ## Part 6: 软件开发和验证技术
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Table A.1 - 设计和编码技术
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -299,6 +302,7 @@ pub enum CommunicationResult<T> {
 ```
 
 ### Table A.2 - 数据导向技术
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -366,9 +370,11 @@ fn enter_safe_state() {
 ---
 
 ## Part 7: 技术和措施
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 系统性能力(SCL)评估
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -384,6 +390,7 @@ Rust适用性: SCL 2-3
 ```
 
 ### 硬件容错要求
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -450,9 +457,11 @@ impl Voter {
 ---
 
 ## 工业协议集成
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Modbus RTU/TCP
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -522,6 +531,7 @@ pub trait ModbusTransport {
 ```
 
 ### OPC UA
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -582,9 +592,11 @@ impl SafetyOpcUaServer {
 ---
 
 ## 开发检查表
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### SIL 4项目完整检查表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 需求阶段
@@ -643,6 +655,7 @@ impl SafetyOpcUaServer {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -892,4 +905,3 @@ impl SafetyOpcUaServer {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

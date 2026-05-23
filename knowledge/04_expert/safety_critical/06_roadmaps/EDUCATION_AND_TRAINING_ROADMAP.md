@@ -86,6 +86,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 ```
 
 ### 阶段2: 嵌入式Rust (6-8周)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 学习目标
@@ -159,6 +160,7 @@ fn SysTick() {
 - 简单RTOS集成
 
 ### 阶段3: 功能安全基础 (4-6周)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 学习目标
@@ -189,6 +191,7 @@ fn SysTick() {
 ```
 
 ### 阶段4: 高级Rust安全 (6-8周)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 学习目标
@@ -300,6 +303,7 @@ impl ThreadSafeStateMachine {
 ```
 
 ### 阶段5: 形式化验证 (4-6周)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 学习目标
@@ -362,9 +366,11 @@ mod verification {
 ---
 
 ## 2. 企业培训体系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 培训矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 角色 | 阶段1 | 阶段2 | 阶段3 | 阶段4 | 阶段5 |
@@ -376,6 +382,7 @@ mod verification {
 | **项目经理** | 选修 | 选修 | 必修 | 选修 | 选修 |
 
 ### 培训课程设计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 课程A: Rust安全关键基础 (3天)
@@ -433,6 +440,7 @@ Day 2: Verus/Creusot
 ```
 
 ### 认证体系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -460,9 +468,11 @@ Day 2: Verus/Creusot
 ---
 
 ## 3. 学习资源库
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 推荐阅读
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 书籍 | 难度 | 主题 | 优先级 |
@@ -474,6 +484,7 @@ Day 2: Verus/Creusot
 | IEC 61508 Handbook | 中级 | 工业安全 | ⭐⭐⭐ |
 
 ### 在线课程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -492,6 +503,7 @@ Day 2: Verus/Creusot
 ```
 
 ### 实践平台
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -511,9 +523,11 @@ Day 2: Verus/Creusot
 ---
 
 ## 4. 评估与认证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 技能评估矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 技能 | 初级 | 中级 | 高级 | 专家 |
@@ -525,6 +539,7 @@ Day 2: Verus/Creusot
 | **验证** | 单元测试 | 集成测试 | 形式化验证 | 验证工具开发 |
 
 ### 认证考试示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -555,9 +570,11 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 ---
 
 ## 5. 持续学习
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 社区参与
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -577,6 +594,7 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 ```
 
 ### 知识更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -612,6 +630,7 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
@@ -831,4 +850,3 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

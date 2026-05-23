@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 完成本章后，你将能够：
@@ -26,6 +27,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **枚举与模式匹配** — `enum`、`match`（`01_fundamentals/enums.md`）
@@ -36,9 +38,11 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 1.1 直观定义
@@ -107,6 +111,7 @@ expr?: T
 ---
 
 ### 模块 2: 属性清单
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
@@ -126,6 +131,7 @@ expr?: T
 ---
 
 ### 模块 3: 概念依赖图
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -168,6 +174,7 @@ graph TD
 ---
 
 ### 模块 4: 机制解释
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 4.1 类型系统视角
@@ -230,6 +237,7 @@ panic = "abort"  # 更小的二进制，无 unwinding 开销
 ---
 
 ### 模块 5: 正例集
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 5.1 Minimal（最小正例）
@@ -307,6 +315,7 @@ fn main() -> Result<()> {
 ---
 
 ### 模块 6: 反例集
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 反例 1: 滥用 `unwrap()` 处理用户输入
@@ -418,9 +427,11 @@ fn main() {
 ---
 
 ## 🗺️ 模块 7: 思维表征套件
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 表征 A: Result vs Option 决策树
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -452,6 +463,7 @@ fn main() {
 ```
 
 ### 表征 B: 错误处理策略矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 推荐策略 | 反模式 | 理由 |
@@ -466,6 +478,7 @@ fn main() {
 | **快速错误传播** | `anyhow::Result` | 自定义错误类型 | 减少 boilerplate，适合应用代码 |
 
 ### 表征 C: ? 运算符传播路径图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -501,9 +514,11 @@ fn main() {
 ---
 
 ## 📚 模块 8: 国际化对齐
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 官方来源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
@@ -513,6 +528,7 @@ fn main() {
 | [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html) | 官方 | `?` 运算符设计 | 模块 4.2 |
 
 ### 8.2 学术来源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 论文/来源 | 会议/机构 | 核心论证 | 本文档对应点 |
@@ -521,6 +537,7 @@ fn main() {
 | **"The Error Model"** (Joe Duffy) | Midori OS | 错误码 vs 异常的系统级分析，Rust 的设计哲学受其影响 | 模块 9 |
 
 ### 8.3 社区权威
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
@@ -529,6 +546,7 @@ fn main() {
 | **dtolnay** | [thiserror 文档](https://docs.rs/thiserror/) | 通过派生宏消除错误类型样板 | 模块 5.2 |
 
 ### 8.4 跨语言对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 维度 | Rust (`Result`) | Go (error 返回值) | Haskell (`Either`) | Java (Exception) | C (errno) |
@@ -544,9 +562,11 @@ fn main() {
 ---
 
 ## ⚖️ 模块 9: 设计权衡分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 为什么 Rust 没有异常？
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 选择 `Result` 而非异常的核心原因：
@@ -557,6 +577,7 @@ Rust 选择 `Result` 而非异常的核心原因：
 4. **可组合性**: `map`、`and_then`、`?` 提供了函数式的错误处理组合子。
 
 ### 9.2 该设计的成本
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **样板代码**: 在 `?` 出现之前（Rust 1.13 之前），错误传播需要大量 `match` 嵌套。`?` 显著改善但自定义错误类型仍有 boilerplate（`thiserror` 解决此问题）。
@@ -566,6 +587,7 @@ Rust 选择 `Result` 而非异常的核心原因：
 **学习曲线**: 来自 Java/Python 的开发者习惯异常思维，需要适应"错误即值"的范式。
 
 ### 9.3 什么场景下 `Result` 是次优的？
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **极端深层嵌套调用**: 如果调用链非常深且每层都可能失败，`?` 的显式传播比异常的隐式传播更冗长。
@@ -575,9 +597,11 @@ Rust 选择 `Result` 而非异常的核心原因：
 ---
 
 ## 📝 模块 10: 自我检测与练习
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 概念性问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **`Option<T>` 和 `Result<T, ()>` 在语义上有何区别？** 为什么 Rust 同时保留两者而不是统一为 `Result`？
@@ -587,6 +611,7 @@ Rust 选择 `Result` 而非异常的核心原因：
 3. **`anyhow::Error` 和 `thiserror` 的错误类型在设计目标上有何根本区别？** 为什么库作者推荐 `thiserror` 而应用开发者推荐 `anyhow`？
 
 ### 代码修复题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **题 1**: 以下代码存在多个错误处理问题。请识别并修复：
@@ -709,6 +734,7 @@ enum AppError {
 </details>
 
 ### 开放设计题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **题 3**: 你正在设计一个 CLI 工具，需要处理以下错误场景：
@@ -730,6 +756,7 @@ enum AppError {
 ---
 
 ## 📖 延伸阅读
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust Book - Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
@@ -753,6 +780,7 @@ enum AppError {
 ---
 
 ## 📚 权威来源索引
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 官方与半官方
@@ -777,6 +805,7 @@ enum AppError {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [集合类型 (Collections)](collections.md)
@@ -1006,4 +1035,3 @@ enum AppError {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-
