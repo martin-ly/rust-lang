@@ -1906,5 +1906,4 @@ graph TD
 > [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 > [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 
-
 > **相关文件**: [RustBelt 谓词映射](../00_meta/rustbelt_predicate_map.md) · [能力图谱](../00_meta/competency_graph.md#五形式化能力) · [RustBelt](../04_formal/04_rustbelt.md)

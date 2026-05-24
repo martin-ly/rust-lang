@@ -3,24 +3,37 @@
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Orphan Rule 的设计意图
-> **前置依赖**: [L1 类型系统](../01_foundation/04_type_system.md) · [L1 所有权](../01_foundation/01_ownership.md)
-> **后置延伸**: [L3 并发](../03_advanced/01_concurrency.md) · [L4 类型论](../04_formal/02_type_theory.md) · [L6 设计模式](../06_ecosystem/02_patterns.md)
+> **前置依赖**: [L1 类型系统](../01_foundation/04_type_system.md) ·
+> [L1 所有权](../01_foundation/01_ownership.md)
+> **后置延伸**: [L3 并发](../03_advanced/01_concurrency.md) ·
+> [L4 类型论](../04_formal/02_type_theory.md) ·
+> [L6 设计模式](../06_ecosystem/02_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait
 > **定理链编号**: T-020 特质一致性 → T-021 孤儿规则完备性 → T-022 关联类型规范化
 
 > **层级**: L2 进阶概念
-> **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md)
-> **后置概念**: [Generics](./02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
-> **主要来源**: [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html) · [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) · [RFC 255](https://rust-lang.github.io/rfcs/0255-object-safety.html)
+> **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) ·
+> [Ownership](../01_foundation/01_ownership.md)
+> **后置概念**: [Generics](./02_generics.md) ·
+> [Concurrency](../03_advanced/01_concurrency.md) ·
+> [Async](../03_advanced/02_async.md)
+> **主要来源**: [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) ·
+> [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
+> [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) ·
+> [RFC 255](https://rust-lang.github.io/rfcs/0255-object-safety.html)
 
 ---
 
 > **Bloom 层级**: 应用 → 分析 → 评价
 **变更日志**:
 
-- v2.3 (2026-05-14): 深化 Const Trait（impl const Trait vs ~const 区别、macro_rules! 替代方案）、#[fundamental]（Pin<P> 修正、透明性原理、与 non_exhaustive 对比）；更新 TODO 列表
-- v2.2 (2026-05-13): Phase A-2 形式化深化——新增§4.1b Coherence 的形式化逻辑基础（类型论一致性公理、Orphan Rule [来源: [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)] covering 条件数学定义、System F 约束多态对接、Blanket impl 的 Horn 子句可满足性与重叠检测算法）
-- v2.1 (2026-05-13): 补充 RPITIT 存在类型 vs 全称类型形式化语义与高阶边界、Const Trait / ~const 实验特性、#[fundamental] 与 Orphan Rule 例外、Negative Impls 形式化语义；更新 TODO 列表
+- v2.3 (2026-05-14): 深化 Const Trait（impl const Trait vs ~const 区别、macro_rules! 替代方案）、
+- #[fundamental]（`Pin<P>` 修正、透明性原理、与 non_exhaustive 对比）；更新 TODO 列表
+- v2.2 (2026-05-13): Phase A-2 形式化深化——新增§4.1b Coherence 的形式化逻辑基础（类型论一致性公理、Orphan Rule [来源: [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)] covering 条件数学定义、
+- System F 约束多态对接、
+- Blanket impl 的 Horn 子句可满足性与重叠检测算法）
+- v2.1 (2026-05-13): 补充 RPITIT 存在类型 vs 全称类型形式化语义与高阶边界、
+- Const Trait / ~const 实验特性、#[fundamental] 与 Orphan Rule 例外、Negative Impls 形式化语义；更新 TODO 列表
 - v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡
 - v1.0 (2026-05-12): 初始版本
 
@@ -132,9 +145,14 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class)** A type class is a type system construct that supports ad hoc polymorphism. This is achieved by adding constraints to type variables in parametrically polymorphic types. Functions defined in a type class and applied via a type class constraint can use different implementations depending on the particular types of the parameters at each call site. Rust's traits are directly inspired by Haskell's type classes.
+> **[Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class)** A type class is a type system construct that supports ad hoc polymorphism.
+> This is achieved by adding constraints to type variables in parametrically polymorphic types.
+> Functions defined in a type class and applied via a type class constraint can use different implementations depending on the particular types of the parameters at each call site.
+> Rust's traits are directly inspired by Haskell's type classes.
 
-> **[Wikipedia: Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))** In computer programming, a trait is a concept used in object-oriented programming that represents a set of methods that can be used to extend the functionality of a class. Rust uses traits to define shared behavior in an abstract way, enabling ad hoc polymorphism without inheritance.
+> **[Wikipedia: Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))** In computer programming,
+> a trait is a concept used in object-oriented programming that represents a set of methods that can be used to extend the functionality of a class.
+> Rust uses traits to define shared behavior in an abstract way, enabling ad hoc polymorphism without inheritance.
 
 > **[Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)** Ad hoc polymorphism is a kind of polymorphism in which polymorphic functions can be applied to arguments of different types, because a polymorphic function can denote a number of distinct and potentially heterogeneous implementations depending on the type of the argument(s). Rust traits provide this through explicit implementation.
 
@@ -144,7 +162,8 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** A trait defines functionality a particular type has and can share with other types. We can use traits to define shared behavior in an abstract way. We can use trait bounds to specify that a generic type can be any type that has certain behavior.
+> **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** A trait defines functionality a particular type has and can share with other types.
+> We can use traits to define shared behavior in an abstract way. We can use trait bounds to specify that a generic type can be any type that has certain behavior.
 
 > **[Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html)** A trait describes an abstract interface that types can implement. This interface is made up of associated items, which come in three varieties: functions, types, and constants. All traits define an implicit type parameter `Self` that refers to the type implementing the trait.
 

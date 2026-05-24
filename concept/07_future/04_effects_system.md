@@ -657,5 +657,4 @@ Q4: 与现有生态的兼容性？
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-
 > **相关文件**: [异步](../03_advanced/02_async.md) · [类型论](../04_formal/02_type_theory.md) · [问题图谱](../00_meta/problem_graph.md)

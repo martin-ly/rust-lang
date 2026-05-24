@@ -3,7 +3,10 @@
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Cre — 设计 AI × Rust 集成策略
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Formal Methods](./02_formal_methods.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) ·
+> [Type System](../01_foundation/04_type_system.md) ·
+> [Traits](../02_intermediate/01_traits.md) ·
+> [Formal Methods](./02_formal_methods.md)
 > **主要来源**: [AI Coding Trends 2025-2026] · [Rust AI Ecosystem] · [Verus/Creusot + LLM] · [Wikipedia]
 
 ---
@@ -1378,6 +1381,5 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 
 > **相关文件**: [能力图谱](../00_meta/competency_graph.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Rust in AI](../07_future/21_rust_in_ai.md)

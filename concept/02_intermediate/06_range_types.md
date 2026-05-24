@@ -7,7 +7,12 @@
 
 ---
 
-> **来源**: [RFC 3550 — New Range Types](https://github.com/rust-lang/rfcs/pull/3550) · [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) · [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) · [core::range](https://doc.rust-lang.org/core/range/index.html) · [Iterator Trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html) · [IntoIterator Trait](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)
+> **来源**: [RFC 3550 — New Range Types](https://github.com/rust-lang/rfcs/pull/3550) ·
+> [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) ·
+> [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) ·
+> [core::range](https://doc.rust-lang.org/core/range/index.html) ·
+> [Iterator Trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html) ·
+> [IntoIterator Trait](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)
 
 ## 📑 目录
 >

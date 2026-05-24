@@ -4,8 +4,11 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Und — 理解 Fn/FnMut/FnOnce 的语义差异
 > **定位**: 深入分析 Rust 闭包的**类型系统**——`Fn`、`FnMut`、`FnOnce` 三者的捕获规则、自动 trait 推导、以及闭包与函数指针的本质区别。
-> **前置概念**: [Traits](./01_traits.md) · [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md)
-> **后置概念**: [Async](../03_advanced/02_async.md) · [Generics](./02_generics.md)
+> **前置概念**: [Traits](./01_traits.md) ·
+> [Ownership](../01_foundation/01_ownership.md) ·
+> [Borrowing](../01_foundation/02_borrowing.md)
+> **后置概念**: [Async](../03_advanced/02_async.md) ·
+> [Generics](./02_generics.md)
 
 ---
 

@@ -1462,5 +1462,4 @@ graph TD
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
-
 > **相关文件**: [版本跟踪](../07_future/05_rust_version_tracking.md) · [Effects 系统](../07_future/04_effects_system.md) · [能力图谱](../00_meta/competency_graph.md)
