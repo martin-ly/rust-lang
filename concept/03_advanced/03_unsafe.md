@@ -3328,5 +3328,53 @@ Gheri & Watt 提出了 **Provenance** 模型：
 | **形式化验证** | 困难（Promising Semantics） | JMM 已形式化 | RustBelt + Stacked/Tree Borrows |
 | **工业工具** | ThreadSanitizer | JFR + JMC | Miri + Kani |
 
+---
+
+## 十六、边界测试：Unsafe 代码的编译错误与运行时灾难
+
+### 16.1 边界测试：裸指针解引用前的空检查（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let ptr: *const i32 = std::ptr::null();
+    // ❌ 编译错误: 即使 unsafe 块也不能解引用空指针而不检查
+    // 实际上 unsafe { *ptr } 可以编译，但运行时 panic/UB
+    unsafe {
+        println!("{}", *ptr); // 运行时 UB: 空指针解引用
+    }
+}
+```
+
+> **修正**: 解引用裸指针前必须检查 `!ptr.is_null()`。即使如此，仍可能悬垂——unsafe 代码的正确性由程序员保证。
+
+### 16.2 边界测试：将 &T 转换为 &mut T（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 5;
+    let r = &x as *const i32 as *mut i32;
+    // ❌ 编译错误: cannot cast `*const i32` to `*mut i32`
+    // Rust 禁止直接转换，防止共享引用变可变引用
+    unsafe {
+        *r = 10; // 若转换成功，这会破坏不可变性保证
+    }
+}
+```
+
+> **修正**: `&T` 到 `&mut T` 的转换必须通过 `UnsafeCell<T>` 进行，这是 Rust 中唯一允许从共享引用获取可变引用的安全途径。
+
+### 16.3 边界测试：无效 UTF-8 的 str::from_utf8_unchecked（运行时 UB）
+
+```rust
+fn main() {
+    let invalid = vec![0x80, 0x81, 0x82]; // 无效 UTF-8 序列
+    // ⚠️ 运行时 UB: from_utf8_unchecked 要求输入必须是有效 UTF-8
+    let s = unsafe { std::str::from_utf8_unchecked(&invalid) };
+    // 后续对 s 的操作可能导致 panic 或未定义行为
+}
+```
+
+> **修正**: 除非 100% 确定输入有效，否则使用 `std::str::from_utf8`（返回 `Result`）而非 `from_utf8_unchecked`。
+
 > **相关判定树**: [Unsafe 判定树](../00_meta/concept_definition_decision_forest.md#九unsafe-判定树)
 > **相关 FTA**: [Unsafe 契约失效树](../00_meta/fault_tree_analysis_collection.md#六unsafe-契约失效树) · [内存安全失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)

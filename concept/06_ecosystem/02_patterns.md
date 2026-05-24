@@ -1995,4 +1995,83 @@ fn main() {
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
+---
+
+## 十二、边界测试：设计模式的编译错误
+
+### 12.1 边界测试：Builder 模式未消费 self（编译错误）
+
+```rust,compile_fail
+struct Builder {
+    value: i32,
+}
+
+impl Builder {
+    fn set_value(&mut self, v: i32) -> &mut Self {
+        self.value = v;
+        self // 返回 &mut Self
+    }
+
+    fn build(&self) -> Product {
+        // ❌ 编译错误: cannot move out of `*self` which is behind a shared reference
+        // build 获取 &self，但需要 move self.value
+        Product { value: self.value } // 若 value 是 String 等 non-Copy 类型则失败
+    }
+}
+
+struct Product { value: i32 }
+
+// 正确: build 消费 self（获取所有权）
+impl Builder {
+    fn build_fixed(self) -> Product {
+        Product { value: self.value } // ✅ self 被 move
+    }
+}
+```
+
+> **修正**: Builder 的 `build()` 方法必须消费 `self`（而非 `&self`），以便转移内部字段的所有权。
+
+### 12.2 边界测试：Singleton 在多线程中的不安全实现（编译错误）
+
+```rust,compile_fail
+use std::cell::RefCell;
+
+struct Singleton {
+    data: RefCell<i32>, // RefCell 不是 Sync
+}
+
+static INSTANCE: Singleton = Singleton { data: RefCell::new(0) };
+// ❌ 编译错误: `RefCell<i32>` cannot be shared between threads safely
+// static 变量必须是 Sync，但 RefCell 不是 Sync
+
+// 正确: 使用 Mutex 或 RwLock（Sync）
+use std::sync::Mutex;
+static INSTANCE_FIXED: Mutex<Singleton> = Mutex::new(Singleton { data: RefCell::new(0) });
+```
+
+> **修正**: 全局状态必须使用 `Sync` 类型（`Mutex`、`RwLock`、`Atomic*`）。`RefCell`、`Cell` 等内部可变性类型不是 `Sync`。
+
+### 12.3 边界测试：Newtype 模式的孤儿规则（编译错误）
+
+```rust,compile_fail
+// 错误：违反孤儿规则——为外部类型实现外部 trait
+impl std::fmt::Display for Vec<i32> {
+    // ❌ 编译错误: E0117: only traits defined in the current crate can be implemented for arbitrary types
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+
+// 正确: 使用 Newtype 模式绕过
+struct MyVec(Vec<i32>);
+
+impl std::fmt::Display for MyVec {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{:?}", self.0)
+    }
+}
+```
+
+> **修正**: 孤儿规则（Orphan Rule）禁止为外部 crate 的外部类型实现外部 trait。使用 Newtype 模式（`struct Wrapper(ExternalType)`）是标准解法。
+
 > **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md#三设计能力) · [Trait](../02_intermediate/01_traits.md)

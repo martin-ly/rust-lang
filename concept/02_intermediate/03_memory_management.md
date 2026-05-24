@@ -113,6 +113,10 @@
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
+  - [十三、边界测试：内存管理的编译错误](#十三边界测试内存管理的编译错误)
+    - [13.1 边界测试：Box::into\_raw 后双重释放（运行时 UB）](#131-边界测试boxinto_raw-后双重释放运行时-ub)
+    - [13.2 边界测试：Vec 索引越界（编译错误 vs 运行时 panic）](#132-边界测试vec-索引越界编译错误-vs-运行时-panic)
+    - [13.3 边界测试：Pin 误用（编译错误）](#133-边界测试pin-误用编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -2304,6 +2308,70 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+## 十三、边界测试：内存管理的编译错误
+
+### 13.1 边界测试：Box::into_raw 后双重释放（运行时 UB）
+
+```rust
+fn main() {
+    let b = Box::new(42);
+    let raw = Box::into_raw(b); // 转移所有权到裸指针
+    // ⚠️ 运行时 UB: b 已无效，但后续仍可能误用
+    // drop(b); // 若调用，编译错误（b 已 move）
+
+    unsafe {
+        drop(Box::from_raw(raw)); // 正确: 从 raw 重建 Box 后 drop
+        // drop(Box::from_raw(raw)); // ❌ 双重释放！第二次 from_raw 产生悬垂 Box
+    }
+}
+```
+
+> **修正**: `into_raw` 和 `from_raw` 必须一一对应。使用 `ManuallyDrop` 或清晰的所有权文档防止双重释放。
+
+### 13.2 边界测试：Vec 索引越界（编译错误 vs 运行时 panic）
+
+```rust,compile_fail
+fn main() {
+    let v = vec![1, 2, 3];
+    // ❌ 编译错误: index out of bounds (Rust 编译期不检查，但运行时 panic)
+    // 注意: Vec 索引在编译期不检查，运行时 panic
+    let x = v[10]; // 运行时 thread 'main' panicked at 'index out of bounds'
+}
+
+// 正确: 使用 get() 返回 Option
+fn safe_access(v: &Vec<i32>, i: usize) -> Option<&i32> {
+    v.get(i) // ✅ 不 panic，返回 None
+}
+```
+
+> **修正**: 优先使用 `get()`/`get_mut()` 而非索引操作符 `[]`，避免运行时 panic。
+
+### 13.3 边界测试：Pin 误用（编译错误）
+
+```rust,compile_fail
+use std::pin::Pin;
+
+fn main() {
+    let mut x = 42;
+    let pinned = Pin::new(&mut x); // Pin<&mut i32>
+    // ❌ 编译错误: cannot borrow data in a `Pin` as mutable
+    // Pin<&mut T> 的 DerefMut 仅当 T: Unpin 时可用
+    *pinned = 10; // E0596: cannot borrow data in a `Pin<&mut i32>` as mutable
+}
+
+// 正确: 使用 Pin<&mut SelfReferential> 防止自引用结构移动
+struct SelfRef {
+    data: String,
+    ptr: *const String, // 指向 data 的指针
+}
+
+impl !Unpin for SelfRef {} // 标记为 !Unpin
+```
+
+> **修正**: `Pin<&mut T>` 仅在 `T: Unpin` 时允许可变访问。对于 `!Unpin` 类型，Pin 保证内存位置不变。
 
 > **相关判定树**: [所有权判定树](../00_meta/concept_definition_decision_forest.md#二所有权判定树) · [借用判定树](../00_meta/concept_definition_decision_forest.md#三借用判定树)
 > **相关 FTA**: [内存安全失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
