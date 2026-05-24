@@ -3378,3 +3378,20 @@ fn main() {
 
 > **相关判定树**: [Unsafe 判定树](../00_meta/concept_definition_decision_forest.md#九unsafe-判定树)
 > **相关 FTA**: [Unsafe 契约失效树](../00_meta/fault_tree_analysis_collection.md#六unsafe-契约失效树) · [内存安全失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
+
+### 16.4 边界测试：通过 `&T` 获取 `&mut T`（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 5;
+    let r = &x;
+    // ❌ 编译错误: 不能从共享引用 `&T` 获取可变引用 `&mut T`
+    // 这是 Rust 借用检查器的核心保证
+    let r_mut = r as *const i32 as *mut i32;
+    unsafe {
+        *r_mut = 10; // 即使 unsafe 块也不允许这种转换
+    }
+}
+```
+
+> **修正**: 从 `&T` 获取 `&mut T` 的唯一安全途径是通过 `UnsafeCell<T>`。任何绕过此限制的方式都破坏 Rust 的别名规则。

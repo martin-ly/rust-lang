@@ -19,8 +19,9 @@
 #![allow(dead_code)]
 
 use anyhow::Result;
-use candle_core::{Device, Tensor, DType};
-use candle_nn::{ops::softmax, Linear, Module};
+use candle_core::{DType, Device, Tensor};
+use candle_nn::ops::softmax;
+use candle_nn::{Linear, Module};
 
 fn main() -> Result<()> {
     println!("🤖 AI/ML 生态实战演示 —— Candle 框架\n");
@@ -104,10 +105,7 @@ fn demo_03_simple_neural_network(device: &Device) -> Result<()> {
     // 输入: 4 个样本，每个 3 维特征
     let input = Tensor::new(
         &[
-            0.5f32, 0.2, 0.1,
-            0.9, 0.7, 0.3,
-            0.1, 0.4, 0.8,
-            0.3, 0.6, 0.2,
+            0.5f32, 0.2, 0.1, 0.9, 0.7, 0.3, 0.1, 0.4, 0.8, 0.3, 0.6, 0.2,
         ],
         device,
     )?
@@ -118,9 +116,7 @@ fn demo_03_simple_neural_network(device: &Device) -> Result<()> {
     // 第一层: 3 -> 5
     let weight_1 = Tensor::new(
         &[
-            0.1f32, 0.2, 0.3, 0.4, 0.5,
-            0.2, 0.3, 0.4, 0.5, 0.6,
-            0.3, 0.4, 0.5, 0.6, 0.7,
+            0.1f32, 0.2, 0.3, 0.4, 0.5, 0.2, 0.3, 0.4, 0.5, 0.6, 0.3, 0.4, 0.5, 0.6, 0.7,
         ],
         device,
     )?
@@ -137,13 +133,7 @@ fn demo_03_simple_neural_network(device: &Device) -> Result<()> {
 
     // 第二层: 5 -> 2
     let weight_2 = Tensor::new(
-        &[
-            0.1f32, 0.2,
-            0.2, 0.3,
-            0.3, 0.4,
-            0.4, 0.5,
-            0.5, 0.6,
-        ],
+        &[0.1f32, 0.2, 0.2, 0.3, 0.3, 0.4, 0.4, 0.5, 0.5, 0.6],
         device,
     )?
     .reshape((5, 2))?;
@@ -167,9 +157,7 @@ fn demo_04_softmax_classification(device: &Device) -> Result<()> {
     // 模拟 3 个样本、4 个类别的 logits
     let logits = Tensor::new(
         &[
-            2.0f32, 1.0, 0.1, 0.5,
-            0.5, 2.5, 1.0, 0.2,
-            1.0, 0.5, 2.0, 0.3,
+            2.0f32, 1.0, 0.1, 0.5, 0.5, 2.5, 1.0, 0.2, 1.0, 0.5, 2.0, 0.3,
         ],
         device,
     )?

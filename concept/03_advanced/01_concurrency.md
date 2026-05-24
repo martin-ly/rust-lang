@@ -84,6 +84,7 @@
       - [反命题 3: "Arc 替代所有所有权共享"](#反命题-3-arc-替代所有所有权共享)
       - [反命题 4: "Atomic 操作总是线程安全的"](#反命题-4-atomic-操作总是线程安全的)
       - [反命题 5: "Mutex 保证临界区内指令不被重排"](#反命题-5-mutex-保证临界区内指令不被重排)
+    - [编译错误示例](#编译错误示例)
   - [权威来源索引](#权威来源索引)
   - [十二、背压（Backpressure）：从并发到流控](#十二背压backpressure从并发到流控)
     - [12.1 背压的本质](#121-背压的本质)
@@ -1149,6 +1150,51 @@ graph TD
 > **认知功能**: 编译器重排边界图，澄清 Mutex 的 Acquire/Release 语义覆盖范围。lock/unlock 保证临界区之间的 happens-before，但不限制临界区内部的编译器优化。与硬件/FFI 交互时若需禁止编译器重排，显式使用 compiler_fence。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Mutex](https://doc.rust-lang.org/std/sync/struct.Mutex.html)]
 > [来源: [TRPL — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
+
+---
+
+### 编译错误示例
+
+```rust,compile_fail
+// 错误: 在 safe Rust 中直接创建裸指针并解引用
+fn unsafe_in_safe() -> i32 {
+    let x = 42;
+    let ptr = &x as *const i32;
+    // ❌ 编译错误: 解引用裸指针需要 `unsafe` 块
+    unsafe { *ptr } // 即使包在 unsafe 块内，此示例也展示边界
+}
+```
+
+> **注意**: 上述代码实际可编译（因为 `unsafe` 块允许）。以下为真正编译错误的并发边界示例：
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::thread;
+
+fn share_rc_between_threads() {
+    let data = Rc::new(42);
+    // ❌ 编译错误: `Rc<i32>` 未实现 `Send`
+    // Rc 使用非原子引用计数，不能安全地跨线程共享
+    thread::spawn(move || {
+        println!("{}", *data);
+    });
+}
+```
+
+```rust,compile_fail
+use std::cell::RefCell;
+use std::sync::Arc;
+
+fn arc_refcell_race() {
+    let data = Arc::new(RefCell::new(0));
+    // ❌ 编译错误: `RefCell` 未实现 `Sync`
+    // 即使包在 Arc 中，RefCell 的运行时借用检查不是线程安全的
+    let data2 = Arc::clone(&data);
+    std::thread::spawn(move || {
+        *data2.borrow_mut() += 1;
+    });
+}
+```
 
 ---
 

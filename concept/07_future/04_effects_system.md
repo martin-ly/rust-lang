@@ -502,6 +502,54 @@ Q4: 与现有生态的兼容性？
 | Rust 版本跟踪 | [`./05_rust_version_tracking.md`](./05_rust_version_tracking.md) | 效果相关语言特性状态 |
 | 语言演进 | [`./03_evolution.md`](./03_evolution.md) §2.1, §2.3.1 | 效果系统在长程演进中的定位 |
 
+---
+
+## 七之一、效果限制导致的编译错误
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** Rust 现有效果系统（`async`/`const`/`unsafe`）在编译期即拒绝效果不匹配的程序。
+
+### 编译错误 1：`const fn` 中调用 `async fn`
+
+```rust,compile_fail
+async fn async_op() -> i32 { 42 }
+
+const fn const_context() -> i32 {
+    // ❌ 编译错误: `async_op` 不是 `const fn`
+    // const 效果要求所有调用必须在编译期可求值
+    async_op()
+}
+```
+
+> **效果分析**: `async fn` 产生 `Future`（延迟计算效果），与 `const fn` 的编译期求值效果冲突。编译器在效果层面拒绝此组合。
+
+### 编译错误 2：`MutexGuard` 跨越 `await` 点
+
+```rust,compile_fail
+use std::sync::Mutex;
+
+async fn bad_mutex_usage(m: Mutex<i32>) {
+    let guard = m.lock().unwrap();
+    some_async().await; // ❌ 编译错误: `MutexGuard` 不能安全地跨线程发送
+    drop(guard);
+}
+
+async fn some_async() {}
+```
+
+> **效果分析**: `std::sync::MutexGuard` 不实现 `Send`，而 `await` 点可能导致任务在线程间迁移（`Send` 效果约束）。编译器检测到此效果冲突。
+
+### 编译错误 3：Safe Rust 中直接解引用裸指针
+
+```rust,compile_fail
+fn safe_context(ptr: *const i32) -> i32 {
+    // ❌ 编译错误: 解引用裸指针是 `unsafe` 操作
+    // 验证工具（Miri/Kani）专门检测此类 UB
+    *ptr
+}
+```
+
+> **效果分析**: `unsafe` 效果标记了"放弃编译器保证"的边界。Safe Rust 中不允许解引用裸指针——编译器将此操作隔离在 `unsafe` 块内，强制开发者承担 safety proof 义务。
+
 > **[来源: Plotkin & Pretnar 2009 — Algebraic Effects; Koka Documentation; Eff Language]** Effect 系统概念基于代数效应的经典论文和现代语言实现。✅
 
 > **[来源: Rust Lang Team Blog; Rust Internals Discussion; RFC 3668 AsyncFn]** Rust 效果追踪分析基于语言团队的公开讨论和稳定化的 trait 系统。✅

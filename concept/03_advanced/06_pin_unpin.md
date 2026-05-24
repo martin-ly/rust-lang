@@ -34,6 +34,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -416,6 +417,60 @@ graph TD
 > **陷阱总结**: Pin 的大多数陷阱源于**对 Unpin/!Unpin 的误解**和**不安全的投影操作**。理解 Pin 的语义契约是避免这些陷阱的关键。
 > [来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/index.html)]
 > [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html)]
+
+### 编译错误示例
+
+```rust,compile_fail
+use std::marker::PhantomPinned;
+use std::pin::Pin;
+
+struct SelfRef {
+    data: String,
+    ptr: *const String,
+    _pin: PhantomPinned,
+}
+
+fn pin_new_requires_unpin() {
+    let mut x = SelfRef {
+        data: String::from("hello"),
+        ptr: std::ptr::null(),
+        _pin: PhantomPinned,
+    };
+    // ❌ 编译错误: `SelfRef` 未实现 `Unpin`
+    // Pin::new 要求 T: Unpin
+    let pinned = Pin::new(&mut x);
+}
+```
+
+> **修正**: 对 `!Unpin` 类型使用 `Box::pin` 或 `unsafe { Pin::new_unchecked(&mut x) }`。
+
+```rust,compile_fail
+use std::pin::Pin;
+
+fn pin_project_misuse() {
+    let mut x = String::from("hello");
+    let pinned = Pin::new(&mut x);
+    // ❌ 编译错误: 无法从 `Pin<&mut String>` 获取 `&mut String`
+    // Pin 阻止了获取可变引用的能力（除非 T: Unpin）
+    let r: &mut String = pinned.get_mut();
+}
+```
+
+> **修正**: `Pin<&mut T>` 只允许在 `T: Unpin` 时获取 `&mut T`。对 `!Unpin` 类型，只能通过 `unsafe { pinned.as_mut().get_unchecked_mut() }` 访问，且必须遵守 Pin 契约（不移动值）。
+
+```rust,compile_fail
+use std::pin::Pin;
+
+struct Wrapper<T>(T);
+
+fn pin_field_access<T>(pinned: Pin<&Wrapper<T>>) -> &T {
+    // ❌ 编译错误: 无法直接从 Pin<&Wrapper<T>> 访问字段
+    // 因为字段可能是 !Unpin，需要显式投影
+    &pinned.0
+}
+```
+
+> **修正**: 结构体字段投影需要 `unsafe` 或 `pin-project` crate。直接访问 `pinned.0` 会绕过 Pin 的地址稳定性保证。
 
 ---
 

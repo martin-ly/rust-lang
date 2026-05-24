@@ -32,6 +32,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
@@ -501,6 +502,52 @@ graph TD
 
 > **陷阱总结**: 无锁编程的陷阱主要与**内存序**、**ABA**、**内存泄漏**、**自旋**和**数据竞争**相关。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 编译错误示例
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+fn lockfree_data_race() {
+    let x = AtomicUsize::new(0);
+    // ❌ 编译错误: 原子类型不能通过 &mut 访问
+    // 原子类型提供内部可变性，必须通过原子方法访问
+    let r = &mut x;
+    *r = 1;
+}
+```
+
+> **修正**: 原子类型（`AtomicUsize` 等）实现内部可变性，必须通过 `.store()`、`.load()` 等原子方法访问，不能通过 `&mut` 直接赋值。
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicPtr, Ordering};
+
+fn atomic_ptr_send() {
+    let ptr = AtomicPtr::new(std::ptr::null_mut::<i32>());
+    std::thread::spawn(move || {
+        // ❌ 编译错误: AtomicPtr 虽然实现了 Send，但指针目标可能不 Send
+        // 若指针指向栈数据，跨线程转移会导致悬垂
+        ptr.store(std::ptr::null_mut(), Ordering::Relaxed);
+    });
+}
+```
+
+> **修正**: `AtomicPtr<T>` 的 `Send`/`Sync` 依赖于 `T` 的 `Send`/`Sync`。若指针指向非 Send 数据，即使原子操作本身安全，指针内容也可能不安全。
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+fn compare_exchange_weak_loop() {
+    let x = AtomicUsize::new(0);
+    // ❌ 编译错误: compare_exchange_weak 返回 Result，不能直接忽略
+    // 且 CAS 操作需要处理 spurious failure
+    while x.compare_exchange_weak(0, 1, Ordering::Relaxed, Ordering::Relaxed).is_err() {
+        // 自旋等待
+    }
+}
+```
+
+> **修正**: `compare_exchange_weak` 可能因 spurious failure 失败，即使在期望值正确时。循环中通常需要 `hint::spin_loop()` 或 `thread::yield_now()` 避免忙等。
 
 ---
 

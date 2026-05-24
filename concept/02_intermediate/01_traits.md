@@ -102,6 +102,7 @@
     - [7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界](#71-测试-1-orphan-rule--coherence-多层嵌套边界)
     - [7.2 测试 2: Trait 对象安全 + dyn/impl 分发边界](#72-测试-2-trait-对象安全--dynimpl-分发边界)
     - [7.3 测试 3: Blanket impl + 关联类型递归 + Auto Trait 推导边界](#73-测试-3-blanket-impl--关联类型递归--auto-trait-推导边界)
+    - [7.5 编译错误示例](#75-编译错误示例)
   - [八、认知路径（Cognitive Path）](#八认知路径cognitive-path)
     - [Step 1: 直觉类比 — "Trait 像岗位描述"](#step-1-直觉类比--trait-像岗位描述)
     - [Step 2: 语法熟悉 — 定义、实现、约束](#step-2-语法熟悉--定义实现约束)
@@ -1211,6 +1212,42 @@ fn test_auto_trait() {
 ```
 
 > **过渡到认知路径**: 边界测试验证了定理在极端条件下的行为，但从学习者的视角，这些概念如何从直觉逐步构建到形式化理解？下一节提供六步递进的认知路径，每步之间有过渡解释，将"Trait 是什么"逐步转化为"Trait 为什么这样设计"，最终达到"我设计的 Trait 体系是否自洽"的自主验证能力。
+
+### 7.5 编译错误示例
+
+```rust,compile_fail
+// 错误: 为外部类型实现外部 Trait（Orphan Rule 违反）
+impl std::fmt::Display for Vec<i32> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+// ❌ 编译错误: E0117 —— 只有 Trait 或类型至少一个为本地定义时才允许实现
+```
+
+```rust,compile_fail
+// 错误: Trait 对象安全冲突 —— 返回 Self
+trait CloneSelf {
+    fn clone_self(&self) -> Self;
+}
+
+fn use_dyn_clone(obj: &dyn CloneSelf) {
+    // ❌ 编译错误: E0038 —— `CloneSelf` 不是对象安全的
+    // 因为 `clone_self` 返回 `Self`（Sized），vtable 无法实例化
+}
+```
+
+```rust,compile_fail
+// 错误: 泛型方法无法在 Trait 对象中使用
+trait GenericMethod {
+    fn process<T>(&self, x: T) -> T;
+}
+
+fn use_dyn_generic(obj: &dyn GenericMethod) {
+    // ❌ 编译错误: E0038 —— `GenericMethod` 不是对象安全的
+    // 泛型方法无法在 vtable 中存储（单态化需要编译期知道 T）
+}
+```
 
 ---
 

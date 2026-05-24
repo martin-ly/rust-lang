@@ -42,6 +42,7 @@
       - [C++ 的 `operator*` 歧义](#c-的-operator-歧义)
       - [C++ 的隐式类型转换 vs Rust 的显式 Trait](#c-的隐式类型转换-vs-rust-的显式-trait)
     - [7.3 重载决议 vs Trait 解析](#73-重载决议-vs-trait-解析)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -598,6 +599,50 @@ let b: i32 = a.into();          // ✅ 显式: MyInt → i32
 | **编译错误信息** | 复杂（候选函数列表） | 简洁（缺失 trait impl） |
 
 > **关键洞察**: C++ 的运算符重载是**语法层面的重载**——`operator+` 是函数名，遵循 C++ 重载决议规则。Rust 的运算符是**语法糖层面的 Trait 调用**——`a + b` 是 `Add::add(a, b)` 的语法糖，遵循 Trait 解析规则。Rust 的设计消除了 C++ 运算符重载的歧义性（如 `*` 的一元/二元），但牺牲了 C++ 的灵活性（如自定义隐式转换链）。[来源: 💡 原创分析] · [Rust Reference — §4.2.3] ✅
+
+### 编译错误示例
+
+```rust,compile_fail
+// 错误: impl Trait 在 trait 定义中使用
+trait MyTrait {
+    fn method() -> impl Iterator<Item = i32>;
+    // ❌ 编译错误: `impl Trait` 不允许在 trait 定义中使用
+    // trait 中需要具体类型或关联类型
+}
+```
+
+> **修正**: trait 定义中不能使用 `impl Trait` 作为返回类型。应使用关联类型（`type Output: Iterator<Item = i32>;`）或泛型参数。
+
+```rust,compile_fail
+// 错误: const 泛型参数类型不匹配
+fn array_size<const N: usize>(arr: [i32; N]) -> usize {
+    N
+}
+
+fn main() {
+    let a = [1, 2, 3];
+    // ❌ 编译错误: const 泛型参数不能通过类型推断自动匹配
+    // 实际上此例可编译，以下为教学性边界示例
+    let _ = array_size::<4>(a); // 大小不匹配
+}
+```
+
+> **修正**: `const` 泛型参数必须与数组/类型的大小精确匹配。编译器在编译期验证 const 泛型约束。
+
+```rust,compile_fail
+// 错误: 类型递归导致无限大小
+enum InfList<T> {
+    Cons(T, InfList<T>), // 递归无间接层
+    Nil,
+}
+
+fn infinite_size() {
+    // ❌ 编译错误: 递归类型 `InfList` 有无限大小
+    let _ = InfList::Cons(1, InfList::Nil);
+}
+```
+
+> **修正**: 递归类型必须包含间接层（`Box<T>`、`Rc<T>`、`Arc<T>`），使编译器能计算固定大小。
 
 ---
 

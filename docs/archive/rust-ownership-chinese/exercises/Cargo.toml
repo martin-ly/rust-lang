@@ -6,9 +6,9 @@ rust-version = "1.75"
 
 [dependencies]
 # 自引用结构支持
-ouroboros = { version = "0.18", optional = true }
+ouroboros = { version = "0.18.5", optional = true }
 # 异步支持
-tokio = { version = "1.35", features = ["full", "test-util"] }
+tokio = { version = "1.52.3", features = ["full", "test-util"] }
 
 [features]
 default = ["ouroboros"]

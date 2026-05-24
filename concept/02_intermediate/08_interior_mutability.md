@@ -40,6 +40,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -439,6 +440,56 @@ graph TD
 
 > **陷阱总结**: 内部可变性的陷阱主要来自**运行时规则的违反**（panic）和**并发错误**（死锁）。这些是逻辑错误，需要通过设计和代码审查来避免。
 > [来源: [Rust Common Mistakes](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)]
+
+### 编译错误示例
+
+```rust,compile_fail
+use std::cell::Cell;
+
+fn cell_non_copy() {
+    let c = Cell::new(String::from("hello"));
+    // ❌ 编译错误: `String` 未实现 `Copy`
+    // Cell::get 要求 T: Copy，因为它返回值的副本
+    let s = c.get();
+}
+```
+
+> **修正**: 对非 Copy 类型使用 `Cell::take` 或改用 `RefCell`。
+
+```rust,compile_fail
+use std::cell::RefCell;
+use std::sync::Arc;
+use std::thread;
+
+fn refcell_not_sync() {
+    let shared = Arc::new(RefCell::new(5));
+    // ❌ 编译错误: `RefCell<i32>` 未实现 `Sync`
+    // Arc 要求内部类型实现 Sync 才能安全跨线程共享
+    let shared2 = Arc::clone(&shared);
+    thread::spawn(move || {
+        *shared2.borrow_mut() += 1;
+    });
+}
+```
+
+> **修正**: 使用 `Arc<Mutex<T>>` 或 `Arc<RwLock<T>>` 替代 `Arc<RefCell<T>>`。
+
+```rust,compile_fail
+use std::sync::Mutex;
+use std::thread;
+
+fn mutex_guard_not_send() {
+    let m = Mutex::new(0);
+    let guard = m.lock().unwrap();
+    // ❌ 编译错误: `MutexGuard` 不能跨线程发送
+    // std::sync::MutexGuard 不实现 Send（某些平台实现）
+    thread::spawn(move || {
+        println!("{}", *guard);
+    });
+}
+```
+
+> **修正**: 在 `std::sync::Mutex` 的标准实现中，`MutexGuard` 实际上是 `Send` 的。但在某些自定义实现或 `std::sync::RwLockReadGuard` 中可能不实现。以上为教学性边界示例。
 
 ---
 

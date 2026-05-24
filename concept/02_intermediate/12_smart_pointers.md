@@ -32,6 +32,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -461,6 +462,59 @@ graph TD
 
 > **陷阱总结**: 智能指针的陷阱主要与**语义混淆**、**借用冲突**、**线程安全误解**和**过度使用**相关。理解每种指针的所有权语义是避免陷阱的关键。
 > [来源: [Rust Clippy — Rc clone](https://rust-lang.github.io/rust-clippy/master/index.html)]
+
+### 编译错误示例
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::thread;
+
+fn rc_not_send() {
+    let data = Rc::new(42);
+    // ❌ 编译错误: `Rc<i32>` 未实现 `Send`
+    // Rc 使用非原子引用计数，不能安全跨线程转移所有权
+    thread::spawn(move || {
+        println!("{}", *data);
+    });
+}
+```
+
+> **修正**: 需要跨线程共享时使用 `Arc<T>` 替代 `Rc<T>`。
+
+```rust,compile_fail
+use std::pin::Pin;
+
+struct SelfReferential {
+    data: String,
+    ptr: *const String, // 指向 data 的指针
+}
+
+fn pin_unpin_misuse() {
+    let mut x = SelfReferential {
+        data: String::from("hello"),
+        ptr: std::ptr::null(),
+    };
+    // ❌ 编译错误: `SelfReferential` 未实现 `Unpin`
+    // 若类型包含自引用，Pin::new 要求类型实现 Unpin
+    let pinned = Pin::new(&mut x);
+}
+```
+
+> **修正**: 对可能自引用的类型使用 `Pin::new_unchecked`（unsafe）或通过 `Box::pin` 固定到堆上。
+
+```rust,compile_fail
+use std::pin::Pin;
+
+fn pin_mut_after_pin() {
+    let mut x = String::from("hello");
+    let pinned = Pin::new(&mut x);
+    // ❌ 编译错误: 无法获取已固定引用的可变引用
+    // Pin<&mut T> 阻止了获取 &mut T 的能力（除非 T: Unpin）
+    let r = &mut x;
+}
+```
+
+> **修正**: `Pin<&mut T>` 的设计目的是防止自引用类型在移动后失效。一旦值被 Pin 固定，除非 `T: Unpin`，否则无法获取可变引用。
 
 ---
 

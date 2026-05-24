@@ -36,6 +36,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -491,6 +492,59 @@ graph TD
 
 > **陷阱总结**: 并发陷阱主要与**锁内回调**、**Arc 遗漏**、**锁粒度**、**async 阻塞**和**内存序**相关。
 > [source: [Common Rust Concurrency Mistakes](https://rust-unofficial.github.io/too-many-lists/)]
+
+### 编译错误示例
+
+```rust,compile_fail
+use std::sync::Mutex;
+use std::thread;
+
+fn mutex_guard_lifetime() {
+    let data = Mutex::new(0);
+    let guard = data.lock().unwrap();
+    // ❌ 编译错误: `MutexGuard` 不能跨线程发送
+    // 某些平台/实现中 `MutexGuard` 不实现 `Send`
+    thread::spawn(move || {
+        println!("{}", *guard);
+    });
+}
+```
+
+> **修正**: 避免将 `MutexGuard` 移动到闭包中。若需跨线程共享数据，使用 `Arc<Mutex<T>>` 并在每个线程中独立 `lock()`。
+
+```rust,compile_fail
+use std::sync::Arc;
+use std::cell::RefCell;
+
+fn arc_refcell_thread() {
+    let data = Arc::new(RefCell::new(0));
+    let data2 = Arc::clone(&data);
+    // ❌ 编译错误: `RefCell<i32>` 未实现 `Sync`
+    // Arc<T> 要求 T: Sync 才能安全跨线程共享
+    std::thread::spawn(move || {
+        *data2.borrow_mut() += 1;
+    });
+}
+```
+
+> **修正**: `RefCell` 提供单线程内部可变性。跨线程场景必须使用 `Mutex<T>`、`RwLock<T>` 或原子类型。
+
+```rust,compile_fail
+use std::thread;
+
+fn thread_spawn_lifetime() {
+    let data = vec![1, 2, 3];
+    // ❌ 编译错误: `data` 的生命周期不够长
+    // thread::spawn 要求闭包是 'static
+    let handle = thread::spawn(|| {
+        println!("{:?}", data);
+    });
+    drop(data); // data 可能在此 drop
+    handle.join().unwrap();
+}
+```
+
+> **修正**: `thread::spawn` 要求闭包满足 `'static` 生命周期。引用栈数据必须通过 `move` 闭包转移所有权，或使用 `crossbeam::scope` 进行有界线程。
 
 ---
 

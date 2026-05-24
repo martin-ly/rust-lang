@@ -9,18 +9,18 @@ license = "MIT OR Apache-2.0"
 
 [dependencies]
 # RTIC 实时框架
-rtic = { version = "2.1", features = ["thumbv7-backend"] }
+rtic = { version = "2.2.0", features = ["thumbv7-backend"] }
 
 # STM32F4 HAL (支持 STM32F407, STM32F446 等)
-stm32f4xx-hal = { version = "0.21", features = ["stm32f407", "rtic2"] }
+stm32f4xx-hal = { version = "0.23.0", features = ["stm32f407", "rtic2"] }
 
 # 嵌入式基础
-cortex-m = { version = "0.7.6", features = ["inline-asm"] }
-cortex-m-rt = "0.7"
+cortex-m = { version = "0.7.7", features = ["inline-asm"] }
+cortex-m-rt = "0.7.5"
 panic-halt = "0.2"
 
 # 可移植原子操作
-portable-atomic = { version = "1.6", features = ["critical-section"] }
+portable-atomic = { version = "1.13.1", features = ["critical-section"] }
 
 [profile.release]
 debug = 2

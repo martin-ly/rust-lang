@@ -30,6 +30,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -477,6 +478,46 @@ graph TD
 
 > **陷阱总结**: 过程宏的陷阱主要与**标识符处理**、**泛型支持**、**卫生性**和**错误处理**相关。遵循最佳实践可使宏更健壮、更易维护。
 > [来源: [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop)]
+
+### 编译错误示例
+
+```rust,compile_fail
+// 错误: 在函数内部定义过程宏
+fn main() {
+    // ❌ 编译错误: 过程宏必须在 crate 根级别定义
+    // #[proc_macro] 只能用于独立的 proc-macro crate
+    #[proc_macro]
+    pub fn my_macro(input: TokenStream) -> TokenStream {
+        input
+    }
+}
+```
+
+> **修正**: 过程宏必须在独立的 `proc-macro = true` 的 crate 中定义，不能在普通函数内或同一个 crate 中使用。
+
+```rust,compile_fail
+use proc_macro::TokenStream;
+
+// 错误: 过程宏函数签名不匹配
+#[proc_macro_derive(MyTrait)]
+pub fn derive_macro(input: TokenStream, extra: TokenStream) -> TokenStream {
+    // ❌ 编译错误: derive 宏只能接受一个 TokenStream 参数
+    input
+}
+```
+
+> **修正**: `#[proc_macro_derive]` 函数必须恰好接受一个 `TokenStream` 参数。`#[proc_macro]` 接受一个，`#[proc_macro_attribute]` 接受两个（item 和 attributes）。
+
+```rust,compile_fail
+// 错误: 在 proc-macro crate 中使用非 proc_macro 导出
+#[proc_macro]
+pub fn my_macro(input: String) -> String {
+    // ❌ 编译错误: 过程宏必须使用 `proc_macro::TokenStream`
+    input
+}
+```
+
+> **修正**: 过程宏必须使用 `proc_macro::TokenStream`（或 `proc_macro2::TokenStream`）作为输入和输出类型，不能使用 `String` 或其他类型。
 
 ---
 

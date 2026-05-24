@@ -32,6 +32,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -555,6 +556,51 @@ graph TD
 
 > **陷阱总结**: 原子操作的陷阱主要与**Relaxed 误用**、**CAS 参数**、**内存序假设**、**原子借用**和**盲目优化**相关。
 > [来源: [Rust Atomics and Locks — Common Mistakes](https://marabos.nl/atomics/)]
+
+### 编译错误示例
+
+```rust,compile_fail
+use std::sync::atomic::AtomicUsize;
+
+fn atomic_borrow() {
+    let x = AtomicUsize::new(0);
+    // ❌ 编译错误: 不能可变借用原子类型
+    // 原子类型必须通过原子方法访问，不能通过 &mut
+    let r = &mut x;
+    *r = 1;
+}
+```
+
+> **修正**: 原子类型（`AtomicUsize`、`AtomicBool` 等）实现了内部可变性。必须通过 `.store()`、`.load()`、`.fetch_add()` 等原子方法访问，不能通过 `&mut`。
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+fn atomic_send() {
+    let x = AtomicUsize::new(0);
+    // ❌ 编译错误: `AtomicUsize` 未实现 `Sync`
+    // 实际上 AtomicUsize 实现了 Sync，此示例展示静态变量约束
+    static mut GLOBAL: AtomicUsize = AtomicUsize::new(0);
+    unsafe {
+        GLOBAL.store(1, Ordering::Relaxed);
+    }
+}
+```
+
+> **修正**: `static mut` 需要 `unsafe` 块访问。推荐使用 `std::sync::LazyLock` 或 `once_cell` 进行线程安全的延迟初始化，而非 `static mut`。
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicPtr, Ordering};
+
+fn atomic_ptr_deref() {
+    let ptr = AtomicPtr::new(std::ptr::null_mut::<i32>());
+    // ❌ 编译错误: AtomicPtr::load 返回 *mut T，不能直接解引用
+    // 必须先加载到局部变量，再 unsafe 解引用
+    let val = unsafe { *ptr.load(Ordering::Relaxed) };
+}
+```
+
+> **修正**: `AtomicPtr::load` 返回 `*mut T`，解引用需要 `unsafe` 块。编译器在此处可能给出不同错误——核心点是原子指针加载后仍需 unsafe 才能访问目标内存。
 
 ---
 

@@ -30,6 +30,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱与最佳实践](#五常见陷阱与最佳实践)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -406,6 +407,57 @@ graph TD
 
 > **实践要点**: FFI 代码的错误往往隐藏在**看似正确的类型匹配**之下。最安全的策略是最小化 FFI 边界面积，最大化 safe Rust 封装。
 > [来源: [Rust FFI Best Practices](https://doc.rust-lang.org/nomicon/ffi.html)]
+
+### 编译错误示例
+
+```rust,compile_fail
+// 错误: 在 safe Rust 中直接声明 extern 函数
+extern "C" {
+    fn c_function();
+}
+
+fn main() {
+    // ❌ 编译错误: 调用 `unsafe extern` 函数需要 `unsafe` 块
+    // FFI 函数默认是 unsafe 的，因为 Rust 编译器无法验证 C 代码的安全性
+    c_function();
+}
+```
+
+> **修正**: 所有 FFI 调用必须包裹在 `unsafe { }` 块中，或通过 safe wrapper 封装。
+
+```rust,compile_fail
+#[repr(C)]
+struct RustStruct {
+    data: String, // String 不是 repr(C) 兼容类型
+}
+
+fn repr_c_violation() {
+    // ❌ 编译错误: 在 `#[repr(C)]` 结构体中使用非 C 兼容类型
+    // String 包含胖指针和容量信息，其布局不保证与 C 兼容
+    let s = RustStruct { data: String::from("hello") };
+}
+```
+
+> **修正**: `#[repr(C)]` 结构体的字段必须是 C 兼容类型（`i32`、`*const T`、裸指针等）。复杂类型需通过 `Box` 或引用传递。
+
+```rust,compile_fail
+use std::panic::catch_unwind;
+
+// 错误: panic 穿越 FFI 边界未处理
+extern "C" fn callback() {
+    panic!("from C"); // 若 C 调用此函数且 panic 未捕获 → UB
+}
+
+fn main() {
+    // ❌ 编译错误: catch_unwind 要求闭包是 `UnwindSafe`
+    // 某些类型（如 &mut）不实现 UnwindSafe
+    let result = catch_unwind(|| {
+        callback();
+    });
+}
+```
+
+> **修正**: FFI 回调中必须 `catch_unwind` 防止 panic 跨越语言边界。对于非 `UnwindSafe` 类型，需使用 `AssertUnwindSafe` 包装。
 
 ---
 

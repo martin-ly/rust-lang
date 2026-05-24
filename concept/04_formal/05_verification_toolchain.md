@@ -961,6 +961,48 @@ Rust 的 Copy 类型        → 普通复制（非线性）
 
 ---
 
+## 八、验证边界：编译错误示例
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** 验证工具的目标是捕获运行时错误；但 Rust 编译器本身已能在编译期拒绝大量不安全模式。
+
+### 编译错误 1：Safe Rust 中直接解引用裸指针
+
+```rust,compile_fail
+fn safe_deref(ptr: *const i32) -> i32 {
+    // ❌ 编译错误: 解引用裸指针需要 `unsafe` 块
+    // 这是 Miri/Kani 验证的核心目标之一：检测裸指针误用
+    *ptr
+}
+```
+
+> **验证映射**: 编译器通过 `unsafe` 效果边界强制区分安全/不安全代码。验证工具在此基础上进一步证明 `unsafe` 块内的操作是合法的（如无 use-after-free、无数据竞争）。
+
+### 编译错误 2：`unsafe impl Send` 错误应用
+
+```rust,compile_fail
+use std::rc::Rc;
+
+struct MyData(Rc<i32>);
+
+// ❌ 编译错误: `Rc` 包含 `NonNull`，不能安全实现 `Send`
+// 错误实现会导致数据竞争——Kani/Verus 会验证此类假设
+unsafe impl Send for MyData {}
+```
+
+> **验证映射**: `Send`/`Sync` 是 Rust 并发安全的基石。`unsafe impl` 允许绕过编译器检查，但验证工具（如 Verus 的线性幽灵、Kani 的并发模型）可以证明或反驳此类实现的安全性。
+
+### 编译错误 3：`const fn` 中调用非 const 操作
+
+```rust,compile_fail
+const fn const_context() {
+    // ❌ 编译错误: `println!` 不是 `const` 操作
+    // 验证工具（如 Prusti/Creusot）需区分 const/spec/exec 三种模式
+    println!("hello");
+}
+```
+
+> **验证映射**: `const` 效果限制了函数可执行的操作集合。这与 Verus 的 `spec`/`exec` 分离、Creusot 的 ghost 投影共享同一哲学——编译期/逻辑期/运行时的严格分层。
+
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]; 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [来源: Formal Methods Deep Dive]; 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [来源: Web Authority Alignment Sprint]

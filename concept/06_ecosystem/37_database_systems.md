@@ -9,7 +9,11 @@
 
 ---
 
-> **来源**: [TiKV GitHub](https://github.com/tikv/tikv) · [PingCAP TiKV 架构文档](https://tikv.org/docs/5.1/concepts/architecture/) · [Materialize Documentation](https://materialize.com/docs/) · [Meilisearch Documentation](https://www.meilisearch.com/docs) · [SurrealDB Documentation](https://surrealdb.com/docs)
+> **来源**: [TiKV GitHub](https://github.com/tikv/tikv) ·
+> [PingCAP TiKV 架构文档](https://tikv.org/docs/5.1/concepts/architecture/) ·
+> [Materialize Documentation](https://materialize.com/docs/) ·
+> [Meilisearch Documentation](https://www.meilisearch.com/docs) ·
+> [SurrealDB Documentation](https://surrealdb.com/docs)
 
 ---
 
@@ -248,3 +252,64 @@ FROM person:tobie;
 > **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 工业系统深度对齐
+
+---
+
+## 八、编译错误示例
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** 数据库系统中常见的 Rust 编译错误模式。
+
+### 编译错误 1：`Arc<RefCell<T>>` 跨线程共享
+
+```rust,compile_fail
+use std::sync::Arc;
+use std::cell::RefCell;
+use std::thread;
+
+fn db_connection_pool() {
+    let pool = Arc::new(RefCell::new(Vec::new()));
+    let pool2 = Arc::clone(&pool);
+    // ❌ 编译错误: `RefCell` 未实现 `Sync`
+    // 数据库连接池若使用 RefCell 管理状态，不能跨线程共享
+    thread::spawn(move || {
+        pool2.borrow_mut().push("conn1");
+    });
+}
+```
+
+> **修正**: 数据库连接池必须使用 `Arc<Mutex<T>>` 或 `Arc<RwLock<T>>` 实现线程安全的内部可变性。
+
+### 编译错误 2：泛型 Trait bound 未满足
+
+```rust,compile_fail
+use std::fmt::Display;
+
+struct Query<T> {
+    data: T,
+}
+
+impl<T> Query<T> {
+    fn format(&self) -> String {
+        // ❌ 编译错误: `T` 未实现 `Display`
+        // 数据库查询结果格式化需要类型约束
+        format!("{}", self.data)
+    }
+}
+```
+
+> **修正**: 泛型数据库操作必须添加 Trait bound（`T: Display` 或 `T: Serialize`）。
+
+### 编译错误 3：生命周期不匹配导致悬垂引用
+
+```rust,compile_fail
+fn query_result() -> &str {
+    let result = String::from("query result");
+    // ❌ 编译错误: 返回局部变量的引用
+    // 数据库查询结果若分配在栈上，不能返回引用
+    &result
+}
+```
+
+> **修正**: 数据库查询结果通常需要返回拥有所有权的类型（`String`、`Vec<u8>`）或 `Box<str>`，不能返回局部数据的引用。
+
+---

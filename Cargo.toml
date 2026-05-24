@@ -240,9 +240,9 @@ leptos_axum = "0.8.6"  # 更新至最新稳定版本
 
 # 2025-12-11: 桌面应用框架 (Tauri 2.0已解决GTK3安全漏洞)
 # tauri: 使用Web技术构建跨平台桌面应用的框架
-tauri = "2.9.3"
+tauri = "2.11.2"
 # tauri-build: tauri的构建工具
-tauri-build = "2.5.2"
+tauri-build = "2.6.2"
 
 # 2025-12-11: 其他异步生态常用依赖（统一版本）
 # async-trait: 异步trait支持库
@@ -293,7 +293,7 @@ prost-types = "0.14.3"
 
 # 安全更新 - 修复protobuf安全漏洞 (RUSTSEC-2024-0437)
 # 通过工作区依赖强制使用安全版本
-protobuf = "4.33.2-release" # 修复递归崩溃漏洞
+protobuf = "4.34.2-release" # 修复递归崩溃漏洞
 
 # 2025-12-11: TLS 和加密最新稳定版本
 # rustls: 现代TLS库，用Rust编写，提供高性能和安全性
@@ -318,7 +318,7 @@ anyhow = "1.0.102"
 # serde: 通用序列化/反序列化框架，支持多种数据格式
 serde = { version = "1.0.228", features = ["derive"] }
 # serde_json: JSON序列化/反序列化支持
-serde_json = "1.0.149"
+serde_json = "1.0.150"
 # serde_yaml: YAML序列化/反序列化支持
 serde_yaml = "0.9.34"
 # postcard: 二进制序列化格式，替代 bincode (unmaintained, RUSTSEC-2025-0141)
@@ -350,28 +350,28 @@ log = "0.4.29"
 # prometheus: Prometheus指标收集库
 prometheus = "0.14.0"
 # tracing-opentelemetry: tracing与OpenTelemetry的集成 - 2025年10月最新版本
-tracing-opentelemetry = "0.32.1"
+tracing-opentelemetry = "0.33.0"
 # opentelemetry: OpenTelemetry的Rust实现
 # 2026-05-14: 保持 0.31.0，tracing-opentelemetry 0.32.1 仅支持 opentelemetry ^0.31.0
-opentelemetry = "0.31.0"
+opentelemetry = "0.32.0"
 # opentelemetry_sdk: OpenTelemetry SDK
 # 2026-05-14: 保持 0.31.0，与 opentelemetry 0.31.x 配套
-opentelemetry_sdk = { version = "0.31.0", features = ["rt-tokio"] }
+opentelemetry_sdk = { version = "0.32.0", features = ["rt-tokio"] }
 # opentelemetry-otlp: OpenTelemetry OTLP导出器
 # 2026-05-14: 保持 0.31.1，与 opentelemetry 0.31.x 配套
-opentelemetry-otlp = { version = "0.31.1", features = ["http-json"] }
+opentelemetry-otlp = { version = "0.32.0", features = ["http-json"] }
 # opentelemetry-stdout: OpenTelemetry标准输出导出器
 # 2026-05-14: 保持 0.31.0，与 opentelemetry 0.31.x 配套
-opentelemetry-stdout = "0.31.0"
+opentelemetry-stdout = "0.32.0"
 # opentelemetry-proto: OpenTelemetry协议缓冲区定义
 # 2026-05-14: 保持 0.31.0，与 opentelemetry 0.31.x 配套
-opentelemetry-proto = { version = "0.31.0", features = ["gen-tonic"] }
+opentelemetry-proto = { version = "0.32.0", features = ["gen-tonic"] }
 
 # 2025-09-27: 指标最新稳定版本
 # metrics: 指标收集库，提供高性能的指标记录
-metrics = "0.24.2"
+metrics = "0.24.6"
 # metrics-exporter-prometheus: metrics的Prometheus导出器
-metrics-exporter-prometheus = "0.18.1"
+metrics-exporter-prometheus = "0.18.3"
 
 # 2025-12-25: 时间处理最新稳定版本
 # chrono: 日期和时间处理库，支持多种日期格式和时区
@@ -399,9 +399,9 @@ libc = "0.2.186"
 # 2026-03-28: 升级到 0.10.x (重大版本更新)
 rand = "0.10.1"
 # rand_chacha: ChaCha20随机数生成器
-rand_chacha = "0.9.0"
+rand_chacha = "0.10.0"
 # rand_core: 随机数核心库
-rand_core = "0.9.5"
+rand_core = "0.10.1"
 # sha2: SHA-2哈希算法实现
 # 2026-03-28: 升级到 0.11.0 (重大版本更新)
 sha2 = "0.11.0"
@@ -420,8 +420,9 @@ sea-orm = { version = "2.0.0-rc.18", features = [
     "runtime-tokio-rustls", # tokio运行时和rustls支持
 ], default-features = false }
 # sqlx: 异步纯Rust SQL工具包，支持编译时检查的查询
-sqlx = { version = "0.8.6", features = [
-    "runtime-tokio-rustls", # tokio运行时和rustls支持
+sqlx = { version = "0.9.0", features = [
+    "runtime-tokio",       # tokio运行时支持
+    "tls-rustls",          # rustls TLS支持
     "postgres",            # PostgreSQL支持
     "mysql",               # MySQL支持
     "sqlite",              # SQLite支持
@@ -431,9 +432,9 @@ sqlx = { version = "0.8.6", features = [
 # redis: Redis客户端库，支持异步操作
 redis = "1.2.1"
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
-rusqlite = { version = "0.38.0", default-features = false }
+rusqlite = { version = "0.39.0", default-features = false }
 # mysql_async: MySQL异步客户端
-mysql_async = "0.36.1"
+mysql_async = "0.36.2"
 # mysql_common: MySQL通用类型
 mysql_common = "0.35.5"
 # mysql-common-derive: MySQL通用类型派生宏
@@ -479,31 +480,31 @@ proptest = "1.11.0"
 # rstest: 基于fixture的测试框架，支持参数化测试
 rstest = "0.26.1"  # 更新至最新稳定版本
 # cargo-tarpaulin: 代码覆盖率测试工具
-cargo-tarpaulin = "0.35.0"
+cargo-tarpaulin = "0.35.4"
 # cargo-audit: 安全漏洞审计工具
-cargo-audit = "0.22.0"
+cargo-audit = "0.22.1"
 
 # 2025-10-11: AI 和机器学习最新稳定版本
 # candle-core: 极简主义ML框架的核心库
-candle-core = "0.9.2"
+candle-core = "0.10.2"
 # candle-nn: candle的神经网络支持
-candle-nn = "0.9.2"
+candle-nn = "0.10.2"
 # candle-transformers: candle的Transformer模型支持
-candle-transformers = "0.9.2"
+candle-transformers = "0.10.2"
 # tch: PyTorch的Rust绑定，提供深度学习支持
-tch = "0.22.0"
+tch = "0.24.0"
 # petgraph: 图数据结构和算法库
 petgraph = "0.8.3"
 # image: 图像处理库
 image = "0.25.10"
 # imageproc: 图像处理算法库
-imageproc = "0.26.0"
+imageproc = "0.26.2"
 # nalgebra: 线性代数库
-nalgebra = "0.34.1"
+nalgebra = "0.34.2"
 # nalgebra-macros: nalgebra的宏支持
 nalgebra-macros = "0.3.0"
 # ndarray: N维数组库 - 版本 0.15+ (字母索引)
-ndarray = "0.17.1"
+ndarray = "0.17.2"
 # ndarray-stats: ndarray的统计功能
 ndarray-stats = "0.7.0"
 # png: PNG图像格式支持
@@ -522,7 +523,7 @@ lru = "0.18.0"
 # Web 和 GUI 框架 - 2025年12月11日最新稳定版本
 # tauri 已移除，使用 egui/iced 替代 (解决 GTK3 安全漏洞)
 # egui: 易于使用的即时模式GUI，支持Web和原生平台 - 版本 0.28+ (字母索引)
-egui = "0.33.3"
+egui = "0.34.2"
 # iced: 受Elm启发的跨平台GUI库
 iced = "0.14.0"
 
@@ -554,13 +555,13 @@ proc-macro-error2 = "2.0.1"
 is-terminal = "0.4.17"
 # wasm-bindgen: WebAssembly绑定生成器，支持WebAssembly 2.0 - 版本 0.2+ (字母索引)
 # 2026-04-24: Rust 1.96.0 同步更新
-wasm-bindgen = "0.2.121"
+wasm-bindgen = "0.2.122"
 # js-sys: WebAssembly 与 JavaScript 的绑定
-js-sys = "0.3.98"
+js-sys = "0.3.99"
 # wasm-bindgen-futures: WebAssembly 异步 Future 支持
-wasm-bindgen-futures = "0.4.71"
+wasm-bindgen-futures = "0.4.72"
 # wasm-bindgen-test: WebAssembly 测试框架
-wasm-bindgen-test = "0.3.67"
+wasm-bindgen-test = "0.3.72"
 # nix: 系统调用安全封装库
 # 2026-05-12: cargo update 0.31.2 -> 0.31.3
 nix = "0.31.3"
@@ -580,8 +581,8 @@ nix = "0.31.3"
 # 2026-05-19: 已升级至 4.6.x (cargo update 成功解析)
 clap = { version = "4.6.1", default-features = false }
 clap_builder = { version = "4.6.0", default-features = false }
-clap_complete = "4.5.67"
-clap_derive = "4.5.61"
+clap_complete = "4.6.5"
+clap_derive = "4.6.1"
 
 # DNS 解析库
 # 2026-05-18: 升级至 0.26.1，修复 RUSTSEC-2026-0118/0119
@@ -610,7 +611,7 @@ nom = "8.0.0"
 
 # 其他传递依赖
 # matchit: 0.8.6 可用，但 axum 0.8.9 精确锁定 =0.8.4，无法升级
-matchit = "0.8.4"
+matchit = "0.9.2"
 # unicode-width: 0.2.2 已可用 (cargo update 成功解析)
 unicode-width = "0.2.2"
 # either: 1.16.0 已可用 (cargo update 成功解析)

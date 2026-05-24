@@ -126,6 +126,9 @@ graph TB
 | [18_distributed_systems.md](./18_distributed_systems.md) | 分布式系统 | gRPC、Raft、Actor、服务发现、微服务 | ✅ v1.0 | L3 Async, L4 Network | Observability, Wasm |
 | [35_pattern_composition_algebra.md](./35_pattern_composition_algebra.md) | 模式组合代数 | 设计模式的形式化组合、冲突检测、Rust 所有权约束 | ✅ v1.0 | L2 Trait, L3 Concurrency | Software Architecture |
 | [36_stream_processing_ecosystem.md](./36_stream_processing_ecosystem.md) | 流处理生态 | timely/differential dataflow、Materialize、RisingWave、Fluvio | ✅ v1.0 | L3 Stream Processing | Distributed Systems |
+| [37_database_systems.md](./37_database_systems.md) | 数据库系统 | TiKV/Percolator、Materialize、Meilisearch、SurrealDB | ✅ v1.0 | L3 Concurrency | Stream Processing |
+| [38_network_protocols.md](./38_network_protocols.md) | 网络协议 | QUIC/HTTP-3、quinn、h3、eBPF/aya | ✅ v1.0 | L3 Async | OS Kernel |
+| [39_os_kernel.md](./39_os_kernel.md) | 操作系统 | Rust for Linux、Theseus、Redox、eBPF | ✅ v1.0 | L3 Unsafe | Network Protocols |
 
 ---
 
@@ -183,5 +186,5 @@ L6 的工程实践输出到：
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新: 2026-05-21
+**最后更新**: 2026-05-24
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

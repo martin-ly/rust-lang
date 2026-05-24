@@ -19,9 +19,9 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 nix = { workspace = true, features = ["process", "user", "signal"], optional = true }
 libc = { workspace = true }
-memmap2 = "0.9.9"
+memmap2 = "0.9.10"
 shared_memory = "0.12.4"
-signal-hook = "0.4.3"
+signal-hook = "0.4.4"
 common = { workspace = true, features = ["serde", "error-trait", "async"] }
 anyhow = { workspace = true }
 thiserror = { workspace = true }

@@ -12,7 +12,7 @@
 //! [来源: egui GitHub / egui.rs](https://egui.rs/)
 
 use eframe::{App, Frame, NativeOptions};
-use egui::{CentralPanel, Context, TextStyle, Vec2};
+use egui::{CentralPanel, TextStyle, Ui, Vec2};
 
 /// 计算器应用状态
 #[derive(Default)]
@@ -100,20 +100,19 @@ impl CalculatorApp {
 }
 
 impl App for CalculatorApp {
-    fn update(&mut self, ctx: &Context, _frame: &mut Frame) {
+    fn ui(&mut self, ui: &mut Ui, _frame: &mut Frame) {
         // 设置默认字体大小
-        let mut style = (*ctx.style()).clone();
-        style.text_styles.insert(
-            TextStyle::Button,
-            egui::FontId::proportional(24.0),
-        );
-        style.text_styles.insert(
-            TextStyle::Heading,
-            egui::FontId::proportional(36.0),
-        );
-        ctx.set_style(style);
+        let ctx = ui.ctx();
+        let mut style = (*ctx.global_style()).clone();
+        style
+            .text_styles
+            .insert(TextStyle::Button, egui::FontId::proportional(24.0));
+        style
+            .text_styles
+            .insert(TextStyle::Heading, egui::FontId::proportional(36.0));
+        ctx.set_global_style(style);
 
-        CentralPanel::default().show(ctx, |ui| {
+        CentralPanel::default().show_inside(ui, |ui| {
             ui.vertical_centered(|ui| {
                 ui.heading("🧮 Rust 计算器");
                 ui.label("egui 即时模式 GUI 演示");
@@ -124,11 +123,7 @@ impl App for CalculatorApp {
                     ui.set_min_width(280.0);
                     ui.set_min_height(60.0);
                     ui.vertical_centered(|ui| {
-                        ui.label(
-                            egui::RichText::new(&self.display)
-                                .size(36.0)
-                                .monospace(),
-                        );
+                        ui.label(egui::RichText::new(&self.display).size(36.0).monospace());
                     });
                 });
 
@@ -164,7 +159,10 @@ impl App for CalculatorApp {
                 // 第 2 行: 7 8 9 ×
                 ui.horizontal(|ui| {
                     for digit in ['7', '8', '9'] {
-                        if ui.add_sized(button_size, egui::Button::new(digit.to_string())).clicked() {
+                        if ui
+                            .add_sized(button_size, egui::Button::new(digit.to_string()))
+                            .clicked()
+                        {
                             self.input_digit(digit);
                         }
                     }
@@ -176,7 +174,10 @@ impl App for CalculatorApp {
                 // 第 3 行: 4 5 6 -
                 ui.horizontal(|ui| {
                     for digit in ['4', '5', '6'] {
-                        if ui.add_sized(button_size, egui::Button::new(digit.to_string())).clicked() {
+                        if ui
+                            .add_sized(button_size, egui::Button::new(digit.to_string()))
+                            .clicked()
+                        {
                             self.input_digit(digit);
                         }
                     }
@@ -188,7 +189,10 @@ impl App for CalculatorApp {
                 // 第 4 行: 1 2 3 +
                 ui.horizontal(|ui| {
                     for digit in ['1', '2', '3'] {
-                        if ui.add_sized(button_size, egui::Button::new(digit.to_string())).clicked() {
+                        if ui
+                            .add_sized(button_size, egui::Button::new(digit.to_string()))
+                            .clicked()
+                        {
                             self.input_digit(digit);
                         }
                     }
@@ -199,7 +203,10 @@ impl App for CalculatorApp {
 
                 // 第 5 行: 0 . =
                 ui.horizontal(|ui| {
-                    if ui.add_sized(Vec2::new(134.0, 55.0), egui::Button::new("0")).clicked() {
+                    if ui
+                        .add_sized(Vec2::new(134.0, 55.0), egui::Button::new("0"))
+                        .clicked()
+                    {
                         self.input_digit('0');
                     }
                     if ui.add_sized(button_size, egui::Button::new(".")).clicked()
@@ -214,7 +221,7 @@ impl App for CalculatorApp {
 
                 ui.add_space(20.0);
                 ui.label(
-                    egui::RichText::new("Rust 1.95.0 + egui 0.33 + eframe 0.33")
+                    egui::RichText::new("Rust 1.95.0 + egui 0.34 + eframe 0.34")
                         .size(12.0)
                         .color(ui.visuals().weak_text_color()),
                 );
@@ -235,7 +242,7 @@ fn format_result(value: f64) -> String {
 
 fn main() {
     let options = NativeOptions {
-        viewport: egui::ViewportBuilder::default()
+        viewport: eframe::egui::ViewportBuilder::default()
             .with_inner_size([320.0, 480.0])
             .with_resizable(false),
         ..Default::default()

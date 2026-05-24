@@ -34,6 +34,7 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+    - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
@@ -458,6 +459,49 @@ graph TD
 > **陷阱总结**: NLL/Polonius 的陷阱主要与**过度期望**、**drop 顺序**、**unsafe 边界**、**Edition 差异**和**过度优化**相关。
 > [来源: [Common NLL Misconceptions](https://github.com/rust-lang/rust/issues/43234)]
 > [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)]
+
+### 编译错误示例
+
+```rust,compile_fail
+fn nll_scope_limitation() {
+    let mut data = vec![1, 2, 3];
+    let r = &data[0];
+    println!("{}", r);
+    // ❌ 编译错误: 即使 NLL 放宽了借用规则，此处的共享借用仍阻止后续可变借用
+    // 因为 r 的生命周期可能延伸到作用域末尾（在旧版借用检查器中）
+    data.push(4); // E0502
+}
+```
+
+> **修正**: NLL（Non-Lexical Lifetimes）已将借用分析从"作用域级"精确到"使用点级"。但如果共享借用 `r` 在可变借用 `data.push()` 之后仍被使用，编译器仍会拒绝。
+
+```rust,compile_fail
+fn polonius_dataflow() {
+    let mut x = 5;
+    let r = &mut x;
+    *r += 1;
+    // ❌ 编译错误: Polonius 支持基于数据流的更精确分析，但 stable 编译器尚未启用
+    // 在 Polonius 启用后，若 x 不再通过其他路径使用，此处可能允许
+    let y = &mut x; // E0499
+    *y += 1;
+}
+```
+
+> **修正**: Polonius 是下一代借用检查器，支持基于数据流的精确分析。当前 stable 仍使用传统 NLL，对条件分支中的借用模式更严格。
+
+```rust,compile_fail
+fn drop_order_nll() {
+    let mut data = vec![1, 2, 3];
+    let r = &mut data;
+    r.push(4);
+    // ❌ 编译错误: 在 r 仍活跃时不能 drop data
+    // drop(data); // E0505
+    drop(r);
+    drop(data);
+}
+```
+
+> **修正**: NLL 下，可变借用 `r` 的生命周期精确到其最后一次使用。`drop(r)` 显式结束借用后，`data` 才能被移动/释放。
 
 ---
 

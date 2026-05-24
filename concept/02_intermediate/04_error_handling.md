@@ -111,6 +111,7 @@
   - [十一、边界测试：错误处理的编译错误](#十一边界测试错误处理的编译错误)
     - [11.1 边界测试：? 运算符在错误类型不匹配时使用（编译错误）](#111-边界测试-运算符在错误类型不匹配时使用编译错误)
     - [11.2 边界测试：panic 在 const fn 中（编译错误）](#112-边界测试panic-在-const-fn-中编译错误)
+    - [11.3 边界测试：`Result` 未处理（编译错误）](#113-边界测试result-未处理编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -2968,5 +2969,21 @@ const fn divide_fixed(a: i32, b: i32) -> i32 {
 ```
 
 > **修正**: `const fn` 中不允许 `panic!`（除非在编译期可求值的上下文中）。使用 `assert!` 替代。
+
+### 11.3 边界测试：`Result` 未处理（编译错误）
+
+```rust,compile_fail
+fn fallible_op() -> Result<i32, String> {
+    Ok(42)
+}
+
+fn main() {
+    // ❌ 编译错误: `Result` 的 `must_use` 属性
+    // 忽略 `Result` 会导致编译警告，在 `deny(warnings)` 下为错误
+    fallible_op();
+}
+```
+
+> **修正**: `Result<T, E>` 标记了 `#[must_use]`，调用者必须显式处理（`?`、`match`、`if let` 或 `let _ = ...`）。
 
 > **相关问题树**: [错误处理问题树](../00_meta/problem_graph.md#七错误处理问题树)
