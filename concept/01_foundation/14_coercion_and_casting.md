@@ -9,7 +9,11 @@
 
 ---
 
-> **来源**: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) · [Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#cast-expressions) · [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) · [RFC 0401 — Coercions](https://rust-lang.github.io/rfcs/0401-coercions.html) · [Wikipedia — Type Conversion](https://en.wikipedia.org/wiki/Type_conversion)
+> **来源**: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) ·
+> [Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#cast-expressions) ·
+> [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) ·
+> [RFC 0401 — Coercions](https://rust-lang.github.io/rfcs/0401-coercions.html) ·
+> [Wikipedia — Type Conversion](https://en.wikipedia.org/wiki/Type_conversion)
 
 ## 📑 目录
 >

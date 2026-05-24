@@ -36,6 +36,12 @@
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+  - [七、C++ 运算符重载/类型转换 vs Rust Trait 系统](#七c-运算符重载类型转换-vs-rust-trait-系统)
+    - [7.1 运算符重载机制对比](#71-运算符重载机制对比)
+    - [7.2 关键差异分析](#72-关键差异分析)
+      - [C++ 的 `operator*` 歧义](#c-的-operator-歧义)
+      - [C++ 的隐式类型转换 vs Rust 的显式 Trait](#c-的隐式类型转换-vs-rust-的显式-trait)
+    - [7.3 重载决议 vs Trait 解析](#73-重载决议-vs-trait-解析)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -506,6 +512,92 @@ graph TD
 
 > **陷阱总结**: 高级类型系统的陷阱主要与**impl Trait 语义**、**const generics 限制**、**签名复杂度**、**推断**和**类型别名**相关。
 > [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
+
+---
+
+## 七、C++ 运算符重载/类型转换 vs Rust Trait 系统
+
+> **[来源: C++ Standard — §13.5 Overloaded operators] · [Rust Reference — §4.2.3 Operator expressions] · [TRPL — Ch. 19.2]** ✅
+
+### 7.1 运算符重载机制对比
+
+| 运算符 | C++（成员/友元函数） | Rust（Trait） |
+|:---|:---|:---|
+| `+` | `operator+(const T&)` / `operator+(const T&, const T&)` | `std::ops::Add` |
+| `-` | `operator-`（一元/二元同名） | `std::ops::Neg`（一元）/ `std::ops::Sub`（二元） |
+| `*` | `operator*`（解引用/乘法同名） | `std::ops::Deref` / `std::ops::Mul`（区分） |
+| `->` | `operator->` | `std::ops::Deref::deref` + 自动 `.` |
+| `()` | `operator()` — 仿函数 | 无直接等价（使用闭包或 Fn trait） |
+| `[]` | `operator[]` | `std::ops::Index` / `std::ops::IndexMut` |
+| `==` | `operator==` | `std::cmp::PartialEq` / `Eq` |
+| `<` | `operator<` | `std::cmp::PartialOrd` / `Ord` |
+| `<<` | `operator<<`（输出/位左移同名） | `std::fmt::Display` / `std::ops::Shl`（区分） |
+| `new`/`delete` | `operator new` / `operator delete` | 无（全局分配器 trait `GlobalAlloc`） |
+| 类型转换 | `operator T()` / `explicit operator T()` | `From<T>` / `TryFrom<T>` / `Into<T>` |
+
+### 7.2 关键差异分析
+
+#### C++ 的 `operator*` 歧义
+
+```cpp
+// C++: * 既表示解引用又表示乘法
+T a = ...;
+T b = *a;   // 解引用（operator* 一元）
+T c = a * b; // 乘法（operator* 二元）
+// 编译器通过上下文区分，但重载时可能产生歧义
+```
+
+```rust
+// Rust: Deref 和 Mul 是两个不同的 trait
+let a = Box::new(5);
+let b = *a; // Deref::deref 然后解引用
+let c = a * 2; // 编译错误: Box<i32> 没有实现 Mul
+// 必须显式: (*a) * 2
+```
+
+#### C++ 的隐式类型转换 vs Rust 的显式 Trait
+
+```cpp
+// C++: 隐式转换可能引入 bug
+class MyInt {
+public:
+    MyInt(int x) : val(x) {}          // 隐式转换构造
+    operator int() const { return val; } // 隐式转换运算符
+};
+
+MyInt a = 5;     // ✅ 隐式: int → MyInt
+int b = a;       // ✅ 隐式: MyInt → int
+MyInt c = a + 3; // ⚠️ 隐式转换链: MyInt → int → 加 → int → MyInt
+```
+
+```rust
+// Rust: 所有转换必须显式通过 trait
+struct MyInt(i32);
+
+impl From<i32> for MyInt {
+    fn from(x: i32) -> Self { MyInt(x) }
+}
+
+impl From<MyInt> for i32 {
+    fn from(x: MyInt) -> Self { x.0 }
+}
+
+let a: MyInt = 5.into();        // ✅ 显式: i32 → MyInt
+let b: i32 = a.into();          // ✅ 显式: MyInt → i32
+// let c: MyInt = a + MyInt(3); // ❌ MyInt 未实现 Add
+```
+
+### 7.3 重载决议 vs Trait 解析
+
+| 维度 | C++ 重载决议 | Rust Trait 解析 |
+|:---|:---|:---|
+| **选择机制** | 最佳匹配（可能模棱两可） | 唯一 impl（Coherence 保证） |
+| **自定义优先级** | 通过参数类型精细控制 | 无（Orphan Rule 限制） |
+| **泛型运算符** | `template<typename T>` + `operator+` | `impl<T: Add> Add for Wrapper<T>` |
+| **二元运算符对称性** | 需定义 `operator+(T, U)` 和 `operator+(U, T)` | 只需 `impl Add<U> for T`（Add 默认覆盖反向） |
+| **编译错误信息** | 复杂（候选函数列表） | 简洁（缺失 trait impl） |
+
+> **关键洞察**: C++ 的运算符重载是**语法层面的重载**——`operator+` 是函数名，遵循 C++ 重载决议规则。Rust 的运算符是**语法糖层面的 Trait 调用**——`a + b` 是 `Add::add(a, b)` 的语法糖，遵循 Trait 解析规则。Rust 的设计消除了 C++ 运算符重载的歧义性（如 `*` 的一元/二元），但牺牲了 C++ 的灵活性（如自定义隐式转换链）。[来源: 💡 原创分析] · [Rust Reference — §4.2.3] ✅
 
 ---
 

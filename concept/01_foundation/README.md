@@ -153,6 +153,9 @@ Type System（理解"类型即证明"）
 | [08_collections.md](./08_collections.md) | 集合类型 | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ v1.0 | Ownership, Generics | Smart Pointers, Ecosystem |
 | [09_strings_and_text.md](./09_strings_and_text.md) | 字符串与文本 | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ v1.0 | Ownership, Type System | Collections, FFI |
 | [10_numerics.md](./10_numerics.md) | 数值类型与运算 | 整数、浮点、溢出、饱和运算、类型转换 | ✅ v1.0 | Type System | Zero Cost, Collections |
+| [20_variable_model.md](./20_variable_model.md) | 变量模型（PL 通用） | 环境/存储、绑定语义、值语义 vs 引用语义、lvalue/rvalue | ✅ v1.0 | Type System, Ownership | Evaluation Strategies |
+| [21_effects_and_purity.md](./21_effects_and_purity.md) | 副作用与纯度 | 引用透明、效果系统、Rust const/unsafe/async 作为效果 | ✅ v1.0 | Ownership, Type System | Formal Methods |
+| [22_data_abstraction_spectrum.md](./22_data_abstraction_spectrum.md) | 数据抽象谱系 | C→C++→Java→Haskell→Rust 的抽象演进、Trait 统一性 | ✅ v1.0 | Type System, Trait | Comparative |
 
 ---
 

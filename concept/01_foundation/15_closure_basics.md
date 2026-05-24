@@ -9,7 +9,11 @@
 
 ---
 
-> **来源**: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) · [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) · [std::ops::Fn](https://doc.rust-lang.org/std/ops/trait.Fn.html) · [RFC 1558 — Closures](https://rust-lang.github.io/rfcs/1558-closure-to-fn-coercion.html) · [Wikipedia — Closure (computer programming)](https://en.wikipedia.org/wiki/Closure_(computer_programming))
+> **来源**: [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
+> [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html) ·
+> [std::ops::Fn](https://doc.rust-lang.org/std/ops/trait.Fn.html) ·
+> [RFC 1558 — Closures](https://rust-lang.github.io/rfcs/1558-closure-to-fn-coercion.html) ·
+> [Wikipedia — Closure (computer programming)](https://en.wikipedia.org/wiki/Closure_(computer_programming))
 
 ## 📑 目录
 >

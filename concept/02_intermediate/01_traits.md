@@ -92,6 +92,7 @@
       - [编译器如何裁决重叠 impl](#编译器如何裁决重叠-impl)
       - [与 C++ 模板特化的对比](#与-c-模板特化的对比)
       - [编译错误：非法重叠](#编译错误非法重叠)
+    - [5.8 SFINAE 与 Trait Bounds 的深度对比](#58-sfinae-与-trait-bounds-的深度对比)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
     - [6.1 反命题 1: "Trait 实现总是无冲突的"](#61-反命题-1-trait-实现总是无冲突的)
     - [6.2 反命题 2: "Blanket impl 覆盖所有类型"](#62-反命题-2-blanket-impl-覆盖所有类型)
@@ -829,6 +830,74 @@ impl Foo for Vec<u8> { fn foo() {} }       // ⚠️ 更特化
 
 > **关键洞察**: Specialization 不是"多继承"的替代物。它的语义是"为更具体的类型提供更高效的实现"，而非"为同一类型附加多个行为"。这与 C++ 模板特化的"代码选择"机制同构，但受 Coherence 公理约束。
 [来源: [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html)]
+
+---
+
+### 5.8 SFINAE 与 Trait Bounds 的深度对比
+
+> **[来源: C++ Standard — §13.10.3 Temp.deduct] · [Rust Reference — §4.2.5 Trait objects] · [Tangram Vision — C++ Rust Generics] · [brendanzab gist]** ✅
+
+SFINAE（Substitution Failure Is Not An Error）是 C++ 模板元编程的核心机制：
+
+```cpp
+// C++: SFINAE 通过 enable_if 约束模板参数
+template<typename T>
+typename std::enable_if_t<std::is_integral_v<T>, T>
+add(T a, T b) {
+    return a + b;
+}
+
+// 对非整数类型，模板替换失败，但这不是错误——只是候选被排除
+// add(1.0, 2.0); // 编译错误: 无匹配函数（不是 SFINAE 错误）
+```
+
+**SFINAE 的问题**:
+
+| 问题 | 说明 | Rust 的替代 |
+|:---|:---|:---|
+| **错误信息恐怖** | 模板替换失败产生数百行错误 | Trait bound 失败产生简洁错误 |
+| **可读性差** | `enable_if` + `void_t` + `decltype` 晦涩难懂 | `T: Trait` 直观清晰 |
+| **编译时间长** | 大量模板实例化尝试 | 单态化仅在类型满足约束后进行 |
+| **调试困难** | 模板实例化链难以追踪 | Trait 实现位置明确 |
+
+**Rust 的等价机制**:
+
+```rust
+// Rust: Trait bound 是显式的约束
+fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
+    a + b
+}
+
+// 编译错误信息:
+// error: cannot add `f64` to `f64` using `+`（实际上 f64 实现了 Add，此例仅为示意）
+// 注: Rust 的错误信息指向具体的 trait bound 不满足，而非模板替换失败
+```
+
+**C++20 Concepts 的改进**:
+
+```cpp
+// C++20: Concepts 使约束更直观
+template<typename T>
+concept Addable = requires(T a, T b) {
+    { a + b } -> std::same_as<T>;
+};
+
+template<Addable T>
+T add(T a, T b) { return a + b; }
+```
+
+**Concepts vs Trait Bounds 对比**:
+
+| 维度 | C++20 Concepts | Rust Trait Bounds |
+|:---|:---|:---|
+| **语法** | `template<Concept T>` | `fn f<T: Trait>()` |
+| **自动匹配** | ✅ 编译器自动检查类型满足 Concept | ❌ 必须显式 `impl Trait for Type` |
+| **错误信息** | 显著改善（但仍复杂） | 简洁，指向具体 impl 缺失 |
+| **关联类型** | ❌ 无直接支持 | ✅ `type Output;` |
+| **默认实现** | ❌ 无 | ✅ `trait Foo { fn bar() {} }` |
+| **泛型约束组合** | `ConceptA && ConceptB` | `T: TraitA + TraitB` |
+
+> **关键洞察**: C++20 Concepts 是 C++ 社区对 SFINAE 复杂性的回应，但它仍是**约束机制**而非**实现机制**。Rust 的 Trait 既是约束机制（`T: Trait`）又是实现机制（`impl Trait for Type`），这种统一是 Rust 类型系统的核心设计优势。[来源: 💡 原创分析] · [Tangram Vision Blog] ✅
 
 ---
 

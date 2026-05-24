@@ -7,7 +7,11 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [std::num](https://doc.rust-lang.org/std/num/index.html) · [Wikipedia — Integer Overflow](https://en.wikipedia.org/wiki/Integer_overflow) · [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)
+> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) ·
+> [std::num](https://doc.rust-lang.org/std/num/index.html) ·
+> [Wikipedia — Integer Overflow](https://en.wikipedia.org/wiki/Integer_overflow) ·
+> [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)
 
 ## 📑 目录
 >

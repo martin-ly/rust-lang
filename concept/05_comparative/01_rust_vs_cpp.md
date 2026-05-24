@@ -378,6 +378,55 @@ C++ 的机制是**层叠式**的：
 
 ---
 
+### 7.3 Move 语义系统对比（深度）
+
+> **[来源: The Coded Message — RAII] · [Stroustrup — The C++ Programming Language, Ch. 17] · [Rust Reference — §4.1.8 Moves]** ✅
+
+#### 7.3.1 C++ 的 Move：值类别 + 移动构造函数
+
+C++11 引入的 move 语义基于**值类别（value categories）**：
+
+```cpp
+std::string s1 = "hello";
+std::string s2 = std::move(s1); // std::move = static_cast<string&&>(s1)
+// s1 变为 xvalue（将亡值），s2 调用移动构造函数
+// s1 仍处于"有效但未指定状态"——可以调用 .empty()，但不能依赖其内容
+```
+
+**C++ Move 的复杂性**:
+
+| 维度 | C++ | Rust |
+|:---|:---|:---|
+| **Move 操作** | `std::move`（类型转换）+ 移动构造函数 | 赋值语句（语言级语义） |
+| **资源转移** | 在移动构造函数中手动转移资源 | 编译器自动 bitwise copy + 标记无效 |
+| **Moved-from 状态** | 有效但未指定（仍可访问） | **编译期禁止访问** |
+| **空状态** | 无（`std::string` 有空状态，但不是所有类型） | 无（所有权转移后变量不存在） |
+| **自赋值安全** | 需要手动检查 | 编译期禁止（已移动变量不可再用） |
+| **三/五/零法则** | Rule of Three/Five/Zero | `Copy`/`Clone`/`Drop` 自动推导 |
+| **RVO/NRVO** | 可选的编译器优化 | Guaranteed copy elision（保证省略） |
+
+#### 7.3.2 Rust 的 Move：所有权转移
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1; // Move: s1 的所有权转移到 s2
+// s1 被编译器标记为 moved-from，后续任何访问都是编译错误
+```
+
+**关键差异**: Rust 的移动**不调用任何函数**。对于 `!Copy` 类型，移动 = bitwise copy + 原变量失效。这与 C++ 的移动构造函数形成鲜明对比。
+
+#### 7.3.3 C++ 的拷贝省略 vs Rust 的保证省略
+
+| 语言 | 机制 | 保证性 | 条件 |
+|:---|:---|:---:|:---|
+| C++ | RVO / NRVO | 编译器可选优化 | 特定模式（纯局部变量返回） |
+| C++17 | Guaranteed copy elision | 语言保证 | prvalue 的纯返回 |
+| Rust | Move semantics | **语言保证** | 所有 `!Copy` 类型的赋值都是移动 |
+
+> **关键洞察**: C++ 的 RVO 是编译器优化（可能不触发），Rust 的移动是语言语义（总是触发）。这使得 Rust 的性能更可预测。[来源: Rust Reference — §4.1.8] ✅
+
+---
+
 ## 八、结论：范式转移与选择哲学
 >
 > [来源: [Wikipedia — C++]]
@@ -2558,6 +2607,5 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 
 > **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [Rust vs Go](./02_rust_vs_go.md) · [执行模型同构](./05_execution_model_isomorphism.md)

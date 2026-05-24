@@ -3,13 +3,23 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用字符串处理和编码知识
-> **定位**: 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与 str [来源: [Rust str](https://doc.rust-lang.org/std/str/index.html)] 的所有权语义、UTF-8 [来源: [UTF-8](https://en.wikipedia.org/wiki/UTF-8)] [来源: [UTF-8 Wikipedia](https://en.wikipedia.org/wiki/UTF-8)] 编码约束、格式化宏（format!/write!）的类型安全设计，以及与 C 字符串、OS 字符串的互操作。
+> **定位**:
+> 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与
+> str [来源: [Rust str](https://doc.rust-lang.org/std/str/index.html)] 的所有权语义、
+> UTF-8 [来源: [UTF-8](https://en.wikipedia.org/wiki/UTF-8)]
+> [来源: [UTF-8 Wikipedia](https://en.wikipedia.org/wiki/UTF-8)]
+> 编码约束、格式化宏（format!/write!）的类型安全设计，以及与 C 字符串、OS 字符串的互操作。
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Type System](./04_type_system.md)
 > **后置概念**: [Collections](./08_collections.md) · [FFI](../03_advanced/05_rust_ffi.md)
 
 ---
 
-> **来源**: [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) · [std::str](https://doc.rust-lang.org/std/str/index.html) · [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html) · [Unicode Standard](https://www.unicode.org/standard/standard.html) · [Rust Formatting](https://doc.rust-lang.org/std/fmt/index.html) · [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504)
+> **来源**: [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) ·
+> [std::str](https://doc.rust-lang.org/std/str/index.html) ·
+> [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html) ·
+> [Unicode Standard](https://www.unicode.org/standard/standard.html) ·
+> [Rust Formatting](https://doc.rust-lang.org/std/fmt/index.html) ·
+> [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504)
 
 ## 📑 目录
 >

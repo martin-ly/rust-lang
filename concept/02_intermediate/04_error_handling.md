@@ -103,6 +103,11 @@
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
+  - [十、C++ 异常安全 vs Rust 错误处理](#十c-异常安全-vs-rust-错误处理)
+    - [10.1 异常安全保证等级](#101-异常安全保证等级)
+    - [10.2 C++ 异常 vs Rust `Result` 的 ABI 差异](#102-c-异常-vs-rust-result-的-abi-差异)
+    - [10.3 C++23 `std::expected` vs Rust `Result`](#103-c23-stdexpected-vs-rust-result)
+    - [10.4 析构函数异常：C++ 的致命陷阱](#104-析构函数异常c-的致命陷阱)
 
 ## 一、权威定义（Definition）
 >
@@ -2136,6 +2141,97 @@ fn compute() -> Maybe<i32> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
+
+---
+
+## 十、C++ 异常安全 vs Rust 错误处理
+
+> **[来源: Brown University CRP — Exceptions] · [Google Comprehensive Rust — C++ Exception] · [C++ Standard — §15] · [Rustonomicon — Exception Safety]** ✅
+
+### 10.1 异常安全保证等级
+
+C++ 社区定义了三种异常安全保证（Exception Safety Guarantees）：
+
+| 保证等级 | 定义 | C++ 实现 | Rust 等价 |
+|:---|:---|:---|:---|
+| **No-throw guarantee** | 操作绝不抛出异常 | `noexcept` 函数 | 普通函数（panic = abort） |
+| **Strong guarantee** | 操作成功或保持原状态（事务性） | 拷贝-修改-交换惯用法 | `Result` + 早期返回 |
+| **Basic guarantee** | 操作后程序处于有效状态（可能改变） | RAII + 异常捕获 | `Result` + `?` 传播 |
+| **No guarantee** | 可能泄漏资源或破坏不变量 | 未处理的异常 | `unsafe` 块 / `mem::forget` |
+
+### 10.2 C++ 异常 vs Rust `Result` 的 ABI 差异
+
+| 维度 | C++ 异常 | Rust `Result<T, E>` |
+|:---|:---|:---|
+| **控制流** | 非局部跳转（栈展开） | 显式返回 + `?` 传播 |
+| **类型安全** | 运行时类型匹配（RTTI） | 编译期穷尽性检查 |
+| **性能** | 无异常时零开销 | 始终有 `Result` 封装开销（通常优化掉） |
+| **二进制体积** | 增加 10-30%（unwind 元数据） | 无额外开销（panic=abort） |
+| **跨 FFI** | 不能跨 C ABI | 可自由跨 FFI（`Result` 是普通类型） |
+| **析构函数异常** | 析构函数抛异常 → `std::terminate` | `Drop::drop` 不可失败（`&mut self`，无返回值） |
+
+### 10.3 C++23 `std::expected` vs Rust `Result`
+
+```cpp
+// C++23: std::expected（类似 Rust Result）
+std::expected<int, Error> parse_int(const std::string& s) {
+    try {
+        return std::stoi(s);
+    } catch (...) {
+        return std::unexpected(Error::InvalidFormat);
+    }
+}
+
+// 调用: 不强制处理错误！
+auto result = parse_int("42");
+// result.value(); // 可能抛 bad_expected_access！
+```
+
+```rust
+// Rust: Result（强制处理）
+fn parse_int(s: &str) -> Result<i32, ParseIntError> {
+    s.parse::<i32>()
+}
+
+// 调用: 编译器强制处理
+let result = parse_int("42");
+match result {
+    Ok(n) => println!("{}", n),
+    Err(e) => println!("Error: {:?}", e), // 强制此分支
+}
+```
+
+> **关键洞察**: C++23 `std::expected` 是 Rust `Result` 的语法类似物，但**不强制错误处理**——调用者可以忽略 `expected`，直到访问 `.value()` 时才可能抛异常。Rust 的 `Result` 通过类型系统强制错误处理的分支覆盖。[来源: C++23 Draft Standard] · [Rust Reference — §4.5.6] ✅
+
+### 10.4 析构函数异常：C++ 的致命陷阱
+
+```cpp
+// C++: 析构函数抛异常 = 灾难
+class Dangerous {
+public:
+    ~Dangerous() {
+        throw std::runtime_error("boom"); // ❌ std::terminate!
+    }
+};
+
+// 在栈展开过程中，若另一个异常正在传播，析构函数抛异常会导致 std::terminate
+```
+
+```rust
+// Rust: Drop 不能失败
+impl Drop for Safe {
+    fn drop(&mut self) {
+        // 返回值是 ()，不能返回 Result
+        // 若需要失败，必须 panic（或忽略错误）
+        if let Err(e) = self.cleanup() {
+            // 只能 log 或 panic
+            eprintln!("Cleanup failed: {:?}", e);
+        }
+    }
+}
+```
+
+> **关键洞察**: C++ 允许析构函数抛异常，但在栈展开时会导致 `std::terminate`。Rust 根本不允许 `Drop::drop` 返回 `Result`——资源释放必须是**不可失败**的操作。这是 Rust "无未定义行为"承诺的重要组成部分。[来源: Rustonomicon — Drop Check] ✅
 
 ---
 

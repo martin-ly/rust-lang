@@ -7,7 +7,20 @@
 
 ---
 
-> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/index.html) · [TRPL Ch8 — Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html) · [Rust Performance Book](https://nnethercote.github.io/perf-book/collections.html) · [Wikipedia — B-tree](https://en.wikipedia.org/wiki/B-tree) · [Wikipedia — Binary Heap](https://en.wikipedia.org/wiki/Binary_heap) · [hashbrown crate](https://github.com/rust-lang/hashbrown) · [std::collections::HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html) · [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) · [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html) · [std::hash::BuildHasher](https://doc.rust-lang.org/std/hash/trait.BuildHasher.html) · [rustc-hash crate](https://github.com/rust-lang/rustc-hash) · [fxhash crate](https://docs.rs/fxhash/latest/fxhash/) · [seahash crate](https://docs.rs/seahash/latest/seahash/) · [ahash crate](https://docs.rs/ahash/latest/ahash/)
+> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/index.html) ·
+> [TRPL Ch8 — Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html) ·
+> [Rust Performance Book](https://nnethercote.github.io/perf-book/collections.html) ·
+> [Wikipedia — B-tree](https://en.wikipedia.org/wiki/B-tree) ·
+> [Wikipedia — Binary Heap](https://en.wikipedia.org/wiki/Binary_heap) ·
+> [hashbrown crate](https://github.com/rust-lang/hashbrown) ·
+> [std::collections::HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html) ·
+> [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) ·
+> [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html) ·
+> [std::hash::BuildHasher](https://doc.rust-lang.org/std/hash/trait.BuildHasher.html) ·
+> [rustc-hash crate](https://github.com/rust-lang/rustc-hash) ·
+> [fxhash crate](https://docs.rs/fxhash/latest/fxhash/) ·
+> [seahash crate](https://docs.rs/seahash/latest/seahash/) ·
+> [ahash crate](https://docs.rs/ahash/latest/ahash/)
 
 ## 📑 目录
 >

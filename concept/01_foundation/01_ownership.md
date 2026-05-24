@@ -68,7 +68,11 @@
       - [核心语义对比](#核心语义对比)
       - [代码对比：同一需求的不同实现](#代码对比同一需求的不同实现)
       - [`mem::forget` vs `.release()`：主动放弃析构](#memforget-vs-release主动放弃析构)
-    - [8.2 补充：`Drop` 的 `std::mem::forget` 边界分析](#82-补充drop-的-stdmemforget-边界分析)
+    - [8.2 补充：C++ 构造函数/析构函数语义 vs Rust 的所有权初始化](#82-补充c-构造函数析构函数语义-vs-rust-的所有权初始化)
+      - [构造函数类别对比](#构造函数类别对比)
+      - [初始化语义对比](#初始化语义对比)
+      - [析构函数对比](#析构函数对比)
+    - [8.3 补充：`Drop` 的 `std::mem::forget` 边界分析](#83-补充drop-的-stdmemforget-边界分析)
       - [`mem::forget` 的语义与边界](#memforget-的语义与边界)
       - [`ManuallyDrop<T>`：显式控制析构时机](#manuallydropt显式控制析构时机)
     - [8.3 补充：`ManuallyDrop` 和 `MaybeUninit` 的所有权例外](#83-补充manuallydrop-和-maybeuninit-的所有权例外)
@@ -812,7 +816,63 @@ s.release();  // 释放所有权但不 delete，常规代码中常见
 
 ---
 
-### 8.2 补充：`Drop` 的 `std::mem::forget` 边界分析
+### 8.2 补充：C++ 构造函数/析构函数语义 vs Rust 的所有权初始化
+
+> **[来源: C++ Standard — §12.1 Constructors] · [C++ Standard — §12.4 Destructors] · [Rust Reference — §4.1.8 Moves] · [Stroustrup — The C++ Programming Language, Ch. 17]** ✅
+
+#### 构造函数类别对比
+
+| 构造函数类型 | C++ | Rust |
+|:---|:---|:---|
+| **默认构造** | `T()` / `= default` | `T::new()`（约定）或 `#[derive(Default)]` |
+| **拷贝构造** | `T(const T&)` — 自动或显式 | `Clone::clone(&self)` — Trait 显式实现 |
+| **移动构造** | `T(T&&)` — C++11 引入 | `Move` 是语言语义，不调用函数 |
+| **转换构造** | `T(const U&)` — 隐式/显式 | `From<U> for T` — Trait 显式实现 |
+| **委托构造** | `T() : T(0) {}` — C++11 | 无（通过辅助函数或 Default） |
+| **初始化列表** | `std::initializer_list<T>` — 语法糖 | 数组/Vec字面量 `[1,2,3]` — 编译器内建 |
+
+#### 初始化语义对比
+
+```cpp
+// C++: 初始化类别复杂
+class Widget {
+public:
+    Widget() {}              // 默认构造
+    Widget(const Widget&) {} // 拷贝构造
+    Widget(Widget&&) {}      // 移动构造
+    Widget(int x) {}         // 转换构造
+};
+
+Widget w1;           // 默认初始化
+Widget w2 = w1;      // 拷贝初始化
+Widget w3 = std::move(w2); // 移动初始化
+Widget w4 = 42;      // 隐式转换构造（若未 explicit）
+```
+
+```rust
+// Rust: 初始化 = 所有权获取
+let w1 = Widget::new();  // 约定：关联函数作为构造器
+let w2 = w1.clone();     // 显式拷贝（Clone trait）
+let w3 = w1;             // Move（所有权转移）
+let w4 = Widget::from(42); // 显式转换（From trait）
+```
+
+#### 析构函数对比
+
+| 维度 | C++ 析构函数 | Rust `Drop` |
+|:---|:---|:---|
+| **声明** | `~T()` | `impl Drop for T { fn drop(&mut self) }` |
+| **调用时机** | 作用域结束 / `delete` | 作用域结束（自动） |
+| **可失败** | ❌ 抛异常 → `std::terminate` | ❌ 无返回值，不能失败 |
+| **显式调用** | `obj.~T()`（危险，不推荐） | `std::mem::drop(obj)`（安全） |
+| **顺序控制** | 成员按声明逆序析构 | 成员按声明逆序析构（相同） |
+| **虚析构** | `virtual ~T()`（多态基类必需） | 无继承，无需虚析构 |
+
+> **关键洞察**: C++ 的构造函数体系是**语法驱动的**——`T()`、`T(const T&)`、`T(T&&)` 是编译器识别的特殊签名。Rust 的初始化是**Trait 驱动的**——`Default`、`Clone`、`From` 是普通 Trait，没有特殊语法地位。这种统一性减少了语言复杂性，但也意味着 Rust 缺少 C++ 的"构造函数"概念（特别是拷贝/移动构造函数的统一语义）。[来源: 💡 原创分析] · [Rust Reference — §4.1.8] ✅
+
+---
+
+### 8.3 补充：`Drop` 的 `std::mem::forget` 边界分析
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 

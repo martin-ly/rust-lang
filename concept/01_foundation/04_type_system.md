@@ -127,15 +127,18 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[Wikipedia: Type system]** In computer programming, a type system is a logical system comprising a set of rules that assigns a property called a type to every term. A type system constrains the operations that can be performed on values of different types, preventing errors in programs.
+> **[Wikipedia: Type system]** In computer programming, a type system is a logical system comprising a set of rules that assigns a property called a type to every term.
+> A type system constrains the operations that can be performed on values of different types, preventing errors in programs.
 
-> **[Wikipedia: Rust]** Rust has a strong, static type system with type inference. The type system supports algebraic data types, generics, and traits (type classes) but does not use garbage collection.
+> **[Wikipedia: Rust]** Rust has a strong, static type system with type inference.
+> The type system supports algebraic data types, generics, and traits (type classes) but does not use garbage collection.
 
 ### 1.2 TRPL 官方定义
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[TRPL: Ch3.2]** Rust is a statically typed language, which means that it must know the types of all variables at compile time. The compiler can usually infer what type we want to use based on the value and how we use it.
+> **[TRPL: Ch3.2]** Rust is a statically typed language, which means that it must know the types of all variables at compile time.
+> The compiler can usually infer what type we want to use based on the value and how we use it.
 
 > **[TRPL: Ch6]** Rust's enums are most similar to algebraic data types in functional languages, such as Haskell, F#, OCaml, and others. They allow you to define a type by enumerating its possible variants.
 

@@ -9,7 +9,11 @@
 
 ---
 
-> **来源**: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) · [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes/testing.html) · [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) · [Rust By Example — Testing](https://doc.rust-lang.org/rust-by-example/testing.html) · [Wikipedia — Unit Testing](https://en.wikipedia.org/wiki/Unit_testing)
+> **来源**: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) ·
+> [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes/testing.html) ·
+> [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) ·
+> [Rust By Example — Testing](https://doc.rust-lang.org/rust-by-example/testing.html) ·
+> [Wikipedia — Unit Testing](https://en.wikipedia.org/wiki/Unit_testing)
 
 ## 📑 目录
 >

@@ -123,6 +123,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 | [06_rust_vs_java.md](./06_rust_vs_java.md) | Rust vs Java | 所有权 vs GC、并发模型、运行时架构、场景矩阵 | ✅ v1.0 | L1 Ownership, L3 Concurrency | JVM 迁移、企业系统选型 |
 | [07_rust_vs_python.md](./07_rust_vs_python.md) | Rust vs Python | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL、元编程 | ✅ v1.0 | L1 Ownership, L1 Type System | 性能瓶颈、混合架构选型 |
 | [08_rust_vs_javascript.md](./08_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ v1.0 | L1 Ownership, L3 Async | Web 性能、WASM 集成 |
+| [02_cpp_abi_object_model.md](./02_cpp_abi_object_model.md) | C++ ABI 与对象模型 | ABI 稳定性、对象布局、vtable、repr(C)、Move ABI、RTTI | ✅ v1.0 | L1 Ownership, L3 Unsafe, L3 FFI | C++ 迁移、FFI |
 
 ---
 

@@ -7,7 +7,11 @@
 
 ---
 
-> **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) · [std::num](https://doc.rust-lang.org/std/num/) · [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md) · [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)
+> **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) ·
+> [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) ·
+> [std::num](https://doc.rust-lang.org/std/num/) ·
+> [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md) ·
+> [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)
 
 ## 📑 目录
 >

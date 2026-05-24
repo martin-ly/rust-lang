@@ -9,7 +9,11 @@
 
 ---
 
-> **来源**: [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) · [TRPL Ch3 — Control Flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html) · [TRPL Ch6 — Match](https://doc.rust-lang.org/book/ch06-02-match.html) · [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html) · [RFC 160 — `if let`](https://github.com/rust-lang/rfcs/pull/160)
+> **来源**: [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) ·
+> [TRPL Ch3 — Control Flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html) ·
+> [TRPL Ch6 — Match](https://doc.rust-lang.org/book/ch06-02-match.html) ·
+> [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html) ·
+> [RFC 160 — `if let`](https://github.com/rust-lang/rfcs/pull/160)
 
 ## 📑 目录
 >
