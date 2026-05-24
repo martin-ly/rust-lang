@@ -112,6 +112,8 @@
     - [11.1 边界测试：? 运算符在错误类型不匹配时使用（编译错误）](#111-边界测试-运算符在错误类型不匹配时使用编译错误)
     - [11.2 边界测试：panic 在 const fn 中（编译错误）](#112-边界测试panic-在-const-fn-中编译错误)
     - [11.3 边界测试：`Result` 未处理（编译错误）](#113-边界测试result-未处理编译错误)
+    - [11.4 边界测试：`?` 在闭包中的类型推断失败（编译错误）](#114-边界测试-在闭包中的类型推断失败编译错误)
+    - [11.5 边界测试：自定义 Error 未实现 `std::error::Error`（编译错误）](#115-边界测试自定义-error-未实现-stderrorerror编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -2985,5 +2987,43 @@ fn main() {
 ```
 
 > **修正**: `Result<T, E>` 标记了 `#[must_use]`，调用者必须显式处理（`?`、`match`、`if let` 或 `let _ = ...`）。
+
+### 11.4 边界测试：`?` 在闭包中的类型推断失败（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let result: Result<i32, String> = Ok(42);
+    let closure = || {
+        // ❌ 编译错误: `?` 在闭包中无法推断返回类型
+        // 闭包没有显式返回类型，`?` 无法确定目标 Error 类型
+        let val = result?;
+        Ok(val * 2)
+    };
+}
+```
+
+> **修正**: 在闭包中使用 `?` 时，必须显式标注闭包返回类型（`|| -> Result<i32, String> { ... }`）。
+
+### 11.5 边界测试：自定义 Error 未实现 `std::error::Error`（编译错误）
+
+```rust,compile_fail
+#[derive(Debug)]
+struct MyError {
+    msg: String,
+}
+
+fn fallible() -> Result<(), MyError> {
+    Err(MyError { msg: "error".to_string() })
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // ❌ 编译错误: `MyError` 未实现 `std::error::Error`
+    // `?` 运算符需要 `From<MyError> for Box<dyn Error>`
+    fallible()?;
+    Ok(())
+}
+```
+
+> **修正**: 自定义错误类型必须实现 `std::error::Error`（通常通过 `#[derive(thiserror::Error)]` 或手动实现），才能与 `?` 运算符和 `Box<dyn Error>` 兼容。
 
 > **相关问题树**: [错误处理问题树](../00_meta/problem_graph.md#七错误处理问题树)

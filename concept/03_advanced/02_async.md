@@ -3846,6 +3846,62 @@ fn recursive_fixed(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 > **修正**: `async fn` 是语法糖，展开后返回 `impl Future`。递归 `async fn` 会导致无限大的类型，必须使用 `Box::pin<dyn Future>` 进行类型擦除。
 
+### 16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）
+
+```rust,compile_fail
+async fn borrow_lifetime_issue() {
+    let s = String::from("hello");
+    let r = &s;
+    // ❌ 编译错误: `r` 的生命周期可能超过 `s`
+    // async fn 被拆分为 Future 状态机，引用的生命周期需覆盖整个 Future
+    some_async_op().await;
+    println!("{}", r); // r 引用 s，但 s 在状态机中可能无法保证存活
+}
+
+async fn some_async_op() {}
+
+// 正确: 将数据所有权移入 Future，而非借用
+async fn borrow_lifetime_fixed() {
+    let s = String::from("hello");
+    some_async_op().await;
+    println!("{}", s); // ✅ 拥有所有权，无生命周期问题
+}
+```
+
+> **修正**: `async fn` 编译为状态机，所有跨 `await` 的引用必须具有 `'static` 或等价生命周期。避免在 `async` 块中借用局部变量，改用所有权移动。
+
+### 16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）
+
+```rust,compile_fail
+use std::pin::Pin;
+use std::future::Future;
+use std::task::{Context, Poll};
+
+struct BadFuture;
+
+impl Future for BadFuture {
+    type Output = i32;
+
+    fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<i32> {
+        // ❌ 编译错误: cannot move out of `self` which is behind a mutable reference
+        let inner = *self; // Pin<&mut Self> 不允许解包获取所有权
+        Poll::Ready(42)
+    }
+}
+
+// 正确: 通过 Pin::map_unchecked_mut 安全访问内部
+impl Future for BadFuture {
+    type Output = i32;
+
+    fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<i32> {
+        // ✅ Pin<&mut Self> 保证 Self 不会被移动
+        Poll::Ready(42)
+    }
+}
+```
+
+> **修正**: `Pin<&mut Self>` 的核心保证是 `Self` 在内存中不可移动。任何试图从 `Pin<&mut Self>` 中获取所有权或移动内部值的操作都违反 Pin 契约，导致编译错误。
+
 > **相关判定树**: [异步判定树](../00_meta/concept_definition_decision_forest.md#八异步判定树)
 > **相关 FTA**: [异步安全失效树](../00_meta/fault_tree_analysis_collection.md#五异步安全失效树)
 > **相关概念**: [流处理语义](./20_stream_processing_semantics.md) · [流处理生态](../06_ecosystem/36_stream_processing_ecosystem.md)

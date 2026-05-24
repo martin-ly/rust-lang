@@ -2647,3 +2647,38 @@ fn main() {
 > **C++ 对比**: C++ 允许返回局部变量的引用，运行时产生未定义行为。Rust 在编译期通过生命周期系统阻止此类错误。
 
 > **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [Rust vs Go](./02_rust_vs_go.md) · [执行模型同构](./05_execution_model_isomorphism.md)
+
+### 9.3 边界测试：C++ 隐式复制 vs Rust 显式 Clone（编译错误）
+
+```rust,compile_fail
+struct Buffer {
+    data: Vec<u8>,
+}
+
+fn main() {
+    let b1 = Buffer { data: vec![1, 2, 3] };
+    let b2 = b1; // Move（Vec 未实现 Copy）
+    // ❌ 编译错误: borrow of moved value: `b1`
+    // Rust 要求显式 Clone，而 C++ 会隐式调用拷贝构造函数
+    println!("{:?}", b1.data);
+}
+```
+
+> **C++ 对比**: C++ 中 `Buffer b2 = b1;` 会调用拷贝构造函数，复制整个 `Vec`（深拷贝）。Rust 中 `let b2 = b1;` 是 move，原变量失效。如需复制，必须显式调用 `b1.clone()`。
+
+### 9.4 边界测试：C++ 模板 SFINAE vs Rust Trait Bounds（编译错误）
+
+```rust,compile_fail
+fn add<T>(a: T, b: T) -> T {
+    // ❌ 编译错误: cannot add `T` to `T`
+    // Rust 要求显式 trait bound，而 C++ SFINAE 会静默失败
+    a + b
+}
+
+// 正确: 显式 trait bound
+fn add_fixed<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
+    a + b
+}
+```
+
+> **C++ 对比**: C++ `template<typename T> T add(T a, T b) { return a + b; }` 在实例化失败时产生复杂错误信息（SFINAE 替代失败）。Rust 在定义时就拒绝无约束的泛型操作，错误信息更精确。

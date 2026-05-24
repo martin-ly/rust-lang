@@ -6,7 +6,7 @@
 //! ## 运行
 //!
 //! ```bash
-//! cargo run -p c08_algorithms --example ai_ml_ecosystem_demo --features with-candle
+//! cargo run -p c08_algorithms --example ai_ml_ecosystem_demo
 //! ```
 //!
 //! ## 依赖

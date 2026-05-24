@@ -3395,3 +3395,52 @@ fn main() {
 ```
 
 > **修正**: 从 `&T` 获取 `&mut T` 的唯一安全途径是通过 `UnsafeCell<T>`。任何绕过此限制的方式都破坏 Rust 的别名规则。
+
+### 16.5 边界测试：裸指针算术越界（运行时 UB）
+
+```rust
+fn main() {
+    let arr = [1, 2, 3];
+    let ptr = arr.as_ptr();
+    // ⚠️ 运行时 UB: 越界裸指针即使不立即解引用也构成 UB
+    let bad = unsafe { ptr.add(100) }; // 越界，违反 LLVM 指针范围假设
+    // unsafe { println!("{}", *bad); } // 若解引用则立即崩溃
+}
+
+// 正确: 始终在访问前检查边界
+fn safe_access() {
+    let arr = [1, 2, 3];
+    let ptr = arr.as_ptr();
+    let idx = 1usize;
+    if idx < arr.len() {
+        unsafe {
+            println!("{}", *ptr.add(idx)); // ✅ 边界内访问
+        }
+    }
+}
+```
+
+> **修正**: 裸指针算术（`.add()`, `.offset()`）必须保证结果指针在原始分配对象的范围内或刚好越过末尾（one-past-the-end）。越界裸指针是未定义行为，即使不立即解引用也可能触发编译器优化假设破坏。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 16.6 边界测试：`std::mem::transmute` 类型大小不匹配（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: u32 = 0x12345678;
+    // ❌ 编译错误: cannot transmute between types of different sizes
+    let y: u64 = unsafe { std::mem::transmute(x) };
+    // u32 (4 bytes) 与 u64 (8 bytes) 大小不同，禁止 transmute
+}
+
+// 正确: 仅 transmute 相同大小的类型
+fn safe_transmute() {
+    let x: u32 = 0x12345678;
+    let y: [u8; 4] = unsafe { std::mem::transmute(x) }; // ✅ 同为 4 字节
+    println!("{:?}", y);
+}
+```
+
+> **修正**: `std::mem::transmute` 要求源类型和目标类型必须具有完全相同的内存布局大小。大小不匹配会在编译期报错。即使大小相同，transmute 也可能导致类型语义破坏（如将整数 transmute 为指针）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+> **相关判定树**: [Unsafe 判定树](../00_meta/concept_definition_decision_forest.md#九unsafe-判定树)
+> **相关 FTA**: [Unsafe 契约失效树](../00_meta/fault_tree_analysis_collection.md#六unsafe-契约失效树) · [内存安全失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)

@@ -85,6 +85,8 @@
     - [11.1 边界测试：use-after-move（编译错误）](#111-边界测试use-after-move编译错误)
     - [11.2 边界测试：Copy trait 不满足时的赋值（编译错误）](#112-边界测试copy-trait-不满足时的赋值编译错误)
     - [11.3 边界测试：循环引用导致所有权无法释放（逻辑错误）](#113-边界测试循环引用导致所有权无法释放逻辑错误)
+    - [11.4 边界测试：部分 move 后访问被 move 的字段（编译错误）](#114-边界测试部分-move-后访问被-move-的字段编译错误)
+    - [11.5 边界测试：函数返回值的所有权转移（编译错误）](#115-边界测试函数返回值的所有权转移编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -1358,3 +1360,39 @@ fn main() {
 
 > **相关判定树**: [所有权判定树](../00_meta/concept_definition_decision_forest.md#二所有权判定树) · [内存安全 FTA](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
 > **相关谓词映射**: [own(τ) 谓词](../00_meta/rustbelt_predicate_map.md#二所有权谓词-ownτ-映射)
+
+### 11.4 边界测试：部分 move 后访问被 move 的字段（编译错误）
+
+```rust,compile_fail
+struct Person {
+    name: String,
+    age: i32,
+}
+
+fn main() {
+    let p = Person { name: String::from("Alice"), age: 30 };
+    let name = p.name; // name 被 move
+    // ❌ 编译错误: borrow of partially moved value: `p`
+    // p.name 已被 move，但 p.age 仍有效
+    println!("{} is {}", p.name, p.age); // E0382
+}
+```
+
+> **修正**: 部分 move 后，被 move 的字段不可访问。如需保留，使用 `p.name.clone()`。
+
+### 11.5 边界测试：函数返回值的所有权转移（编译错误）
+
+```rust,compile_fail
+fn take_ownership(s: String) -> String {
+    s // 所有权返回给调用者
+}
+
+fn main() {
+    let s = String::from("hello");
+    let t = take_ownership(s); // s 的所有权转移给函数，再转移给 t
+    // ❌ 编译错误: borrow of moved value: `s`
+    println!("{}", s); // E0382
+}
+```
+
+> **修正**: 函数参数按值传递时发生 move。如需保留原变量，传递 `s.clone()` 或使用 `&s`。
