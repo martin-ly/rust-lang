@@ -36,6 +36,8 @@
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：过程宏的 `Span` 与错误定位精度（编译错误/调试困难）](#105-边界测试过程宏的-span-与错误定位精度编译错误调试困难)
     - [10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
+    - [10.4 边界测试：proc\_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）](#104-边界测试proc_macro-的-tokenstream-与-hygiene-标识符生成编译错误)
+    - [10.6 边界测试：不可变借用与可变借用的冲突](#106-边界测试不可变借用与可变借用的冲突)
 
 ---
 
@@ -757,3 +759,17 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 ```
 
 > **修正**: **过程宏**的 crate 类型限制：1) `proc_macro` crate 只能在 `crate-type = ["proc-macro"]` 的 crate 中使用；2) `quote` 和 `syn` 是辅助库（非编译器内置）；3) 过程宏在编译期执行，无运行时开销。TokenStream 的处理：1) `syn::parse` — 将 TokenStream 解析为 AST；2) `quote!` — 从模板生成 TokenStream；3) `proc_macro2::TokenStream` — 可跨线程使用（`proc_macro::TokenStream` 不可 Send）。hygiene：1) `Span::call_site()` — 继承调用方 hygiene；2) `Span::mixed_site()` — 混合 hygiene（宏定义的变量不可被调用方访问）；3) `Span::def_site()` — 定义点 hygiene（最严格）。这与 Lisp 的宏（无 hygiene，易捕获变量）或 C 的宏（纯文本替换）不同——Rust 的过程宏有完善的 hygiene 系统。[来源: [Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+
+### 10.6 边界测试：不可变借用与可变借用的冲突
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let r = &v;
+    // ❌ 编译错误: 已存在不可变借用时不能可变借用
+    v.push(4);
+    println!("{:?}", r);
+}
+```
+
+> **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。

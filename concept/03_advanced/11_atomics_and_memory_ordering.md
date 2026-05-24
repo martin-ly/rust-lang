@@ -40,6 +40,7 @@
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
     - [10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）](#103-边界测试relaxed-顺序与-happens-before-缺失逻辑错误ub)
+    - [10.9 边界测试：match 分支返回类型不一致](#109-边界测试match-分支返回类型不一致)
 
 ---
 
@@ -928,3 +929,19 @@ fn main() {
 ```
 
 > **修正**: `Ordering::Relaxed` 是**最弱**的原子顺序：保证原子操作本身不撕裂，但不建立**happens-before**关系。两个线程分别 `Relaxed` store/load 同一变量，load 可能看到旧值——因为编译器/CPU 可能重排序。需要同步的场景：1) `Release`/`Acquire` 对（建立单向 happens-before）；2) `SeqCst`（全局总序，最强但最慢）；3) `AcqRel`（组合读写）。Rust 的内存模型与 C++20 一致（`std::memory_order`），但 Rust 要求显式指定 Ordering（无默认）。这与 Java 的 `volatile`（等价于 `SeqCst`）或 Go 的原子操作（类似 C++，但 API 更简单）不同——Rust 的原子 API 精确暴露硬件能力，开发者需理解内存模型。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] · [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
+
+### 10.9 边界测试：match 分支返回类型不一致
+
+```rust,compile_fail
+fn main() {
+    let x = Some(5);
+    let v = match x {
+        Some(n) => n,
+        // ❌ 编译错误: match arm 类型不匹配
+        None => "none",
+    };
+    println!("{}", v);
+}
+```
+
+> **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。

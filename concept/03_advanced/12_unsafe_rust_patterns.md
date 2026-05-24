@@ -40,6 +40,8 @@
     - [10.4 边界测试：`MaybeUninit` 的数组初始化模式（编译错误）](#104-边界测试maybeuninit-的数组初始化模式编译错误)
     - [10.5 边界测试：`std::ptr::read` 的重复读取（运行时 UB）](#105-边界测试stdptrread-的重复读取运行时-ub)
     - [10.3 边界测试：`MaybeUninit` 的未初始化读取（运行时 UB）](#103-边界测试maybeuninit-的未初始化读取运行时-ub)
+    - [10.4 边界测试：MaybeUninit 的未初始化内存读取（运行时 UB）](#104-边界测试maybeuninit-的未初始化内存读取运行时-ub)
+    - [10.1 边界测试：const fn 中的非编译期操作](#101-边界测试const-fn-中的非编译期操作)
 
 ---
 
@@ -881,3 +883,17 @@ fn main() {
 ```
 
 > **修正**: **`MaybeUninit<T>`** 是 Rust 处理未初始化内存的安全抽象：1) `MaybeUninit::uninit()` — 分配内存但不初始化；2) `MaybeUninit::write(val)` — 安全写入；3) `unsafe { uninit.assume_init() }` — 假设已初始化，读取值（unsafe！）；4) `unsafe { *uninit.as_ptr() }` — 同样 unsafe，读取可能未初始化的值。UB 条件：1) 在 `write` 前 `assume_init`/`as_ptr` dereference → UB；2) `assume_init_read()` 后再次使用 → double read（可能安全但可能 panic）；3) `drop` 未初始化的 `MaybeUninit<T>`（`T` 未实现 `Drop` 时安全）。与 C 的未初始化变量（UB，编译器优化不可预测）或 C++ 的 `std::optional`（有状态标记，安全）不同——Rust 的 `MaybeUninit` 是显式的、零成本的未初始化抽象，但使用需 unsafe。[来源: [MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/unchecked-uninit.html)]
+
+### 10.1 边界测试：const fn 中的非编译期操作
+
+```rust,compile_fail
+const fn foo(x: i32) -> i32 {
+    // ❌ 编译错误: Vec::new() 不是 const fn（在旧版本中）
+    let v = Vec::new();
+    x
+}
+
+fn main() {}
+```
+
+> **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。

@@ -20,6 +20,9 @@
     - [1.2 Tokio Runtime 架构](#12-tokio-runtime-架构)
     - [1.3 TCP vs UDP 语义差异](#13-tcp-vs-udp-语义差异)
     - [1.4 Tower Service 抽象](#14-tower-service-抽象)
+  - [十、边界测试：网络编程的编译错误](#十边界测试网络编程的编译错误)
+    - [10.1 边界测试：`TcpStream` 的 `move` 与分裂（编译错误）](#101-边界测试tcpstream-的-move-与分裂编译错误)
+    - [10.2 边界测试：套接字地址类型不匹配（编译错误）](#102-边界测试套接字地址类型不匹配编译错误)
   - [二、技术细节](#二技术细节)
     - [2.1 Tokio TCP 服务端实现](#21-tokio-tcp-服务端实现)
     - [2.2 Tokio UDP 编程模型](#22-tokio-udp-编程模型)
@@ -36,6 +39,11 @@
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：异步 TCP 的 `split` 与 `reunite` 的所有权（编译错误）](#103-边界测试异步-tcp-的-split-与-reunite-的所有权编译错误)
+    - [10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时性能问题）](#104-边界测试缓冲区大小与-mtu-的匹配运行时性能问题)
+    - [10.3 边界测试：`TcpStream` 的 `set_nonblocking` 与 async 混用（运行时错误）](#103-边界测试tcpstream-的-set_nonblocking-与-async-混用运行时错误)
+    - [10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）](#104-边界测试tcpstream-的同步读写与-async-混用编译错误运行时死锁)
+    - [10.7 边界测试：不可变借用与可变借用的冲突](#107-边界测试不可变借用与可变借用的冲突)
 
 ---
 
@@ -843,7 +851,7 @@ graph LR
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-### 10.3 边界测试：异步 TCP 的 `split` 与 ` reunite` 的所有权（编译错误）
+### 10.3 边界测试：异步 TCP 的 `split` 与 `reunite` 的所有权（编译错误）
 
 ```rust,compile_fail
 use tokio::net::TcpStream;
@@ -853,11 +861,11 @@ async fn echo(stream: TcpStream) {
     let (mut read, mut write) = stream.split();
     // ❌ 编译错误: split 后 stream 被消耗，不能再次使用
     // let (r2, w2) = stream.split(); // stream 已移动
-    
+
     let mut buf = [0u8; 1024];
     let n = read.read(&mut buf).await.unwrap();
     write.write_all(&buf[..n]).await.unwrap();
-    
+
     // 正确: reunite 恢复 stream（若 read 和 write 都还存在）
     // let _stream = read.reunite(write).unwrap();
 }
@@ -905,10 +913,24 @@ fn main() {
     let stream = TcpStream::connect("127.0.0.1:8080").unwrap();
     // ❌ 编译错误: std::net::TcpStream 没有 async 方法
     // stream.read_async(&mut buf).await;
-    
+
     // 正确: 使用 tokio::net::TcpStream（async 版本）
     // 或 std::net::TcpStream 的阻塞 IO
 }
 ```
 
 > **修正**: **同步 IO** 与 **async IO** 的区分：1) `std::net::TcpStream` — 阻塞 IO（`read`/`write` 阻塞当前线程）；2) `tokio::net::TcpStream` — 异步 IO（`read`/`write` 返回 `Future`）；3) 混用后果：在 async 上下文中使用阻塞 IO → 阻塞 executor 线程 → 其他任务饥饿。`tokio::net::TcpStream` 的创建：1) `TcpStream::connect("addr").await` — 异步连接；2) `listener.accept().await` — 异步接受连接；3) 从 `std::net::TcpStream` 转换：`tokio::net::TcpStream::from_std(std_stream)`（需设置 non-blocking）。这与 Go 的 `net` 包（所有 IO 隐式异步，通过 goroutine 调度）或 Python 的 `asyncio`（显式区分 `socket` 和 `asyncio.open_connection`）不同——Rust 要求显式选择 IO 模型。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]
+
+### 10.7 边界测试：不可变借用与可变借用的冲突
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let r = &v;
+    // ❌ 编译错误: 已存在不可变借用时不能可变借用
+    v.push(4);
+    println!("{:?}", r);
+}
+```
+
+> **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。

@@ -41,6 +41,7 @@
     - [10.3 边界测试：闭包参数的类型推断歧义（编译错误）](#103-边界测试闭包参数的类型推断歧义编译错误)
     - [10.4 边界测试：关联类型的投影歧义（编译错误）](#104-边界测试关联类型的投影歧义编译错误)
     - [10.3 边界测试：闭包捕获与类型推断的交互（编译错误）](#103-边界测试闭包捕获与类型推断的交互编译错误)
+    - [10.4 边界测试：类型推断的模糊性与显式标注需求（编译错误）](#104-边界测试类型推断的模糊性与显式标注需求编译错误)
 
 ---
 
@@ -674,4 +675,52 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 闭包的**trait 自动实现**：1) `Fn` — 捕获 `&T`，可多次调用；2) `FnMut` — 捕获 `&mut T`，可多次调用（需 `mut` 绑定）；3) `FnOnce` — 捕获 `T`（move），只能调用一次。编译器根据闭包体自动推断实现的 trait。`v.push(4)` 需要 `&mut v`，所以闭包至少实现 `FnMut`。若闭包还移动捕获变量（如 `drop(v)`），则只能实现 `FnOnce`。类型推断的陷阱：1) 先以 `Fn` 使用闭包，后添加 `mut` 捕获 → 编译错误；2) `move ||` 强制 move 所有捕获，可能从 `FnMut` 降级为 `FnOnce`；3) 递归闭包需显式类型标注（`let f: &dyn Fn(i32) -> i32 = &|x| { ... }`）。这与 C++ 的 lambda（按值/按引用捕获显式指定）或 Java 的匿名类（隐式 final 变量捕获）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+> **修正**:
+> Rust 闭包的**trait 自动实现**：
+>
+> 1) `Fn` — 捕获 `&T`，可多次调用；
+> 2) `FnMut` — 捕获 `&mut T`，可多次调用（需 `mut` 绑定）；
+> 3) `FnOnce` — 捕获 `T`（move），只能调用一次。编译器根据闭包体自动推断实现的 trait。`v.push(4)` 需要 `&mut v`，所以闭包至少实现 `FnMut`。若闭包还移动捕获变量（如 `drop(v)`），则只能实现 `FnOnce`。
+> 类型推断的陷阱：
+> 4) 先以 `Fn` 使用闭包，后添加 `mut` 捕获 → 编译错误；
+> 5) `move ||` 强制 move 所有捕获，可能从 `FnMut` 降级为 `FnOnce`；
+> 6) 递归闭包需显式类型标注（`let f: &dyn Fn(i32) -> i32 = &|x| { ... }`）。这与 C++ 的 lambda（按值/按引用捕获显式指定）或 Java 的匿名类（隐式 final 变量捕获）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+
+### 10.4 边界测试：类型推断的模糊性与显式标注需求（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: 类型推断无法确定 collect 的目标类型
+    let v = [1, 2, 3].iter().map(|x| x * 2).collect();
+    println!("{:?}", v);
+}
+```
+
+> **修正**: Rust 的 **Hindley-Milner 类型推断** 变体：
+>
+> 1) 局部变量类型通常可推断；
+> 2) 函数签名需显式标注（除非是 closure）；
+> 3) `collect()` 的目标类型需显式指定（`collect::<Vec<_>>()` 或 `let v: Vec<_>`）。
+> 类型推断限制：
+> 4) 闭包参数类型（除非从上下文推断）；
+> 5) 泛型方法调用（如 `parse()` 需 `::<i32>`）；
+> 6) 数字字面量（默认 `i32`，但可覆盖）。
+> 显式标注的好处：
+> 7) 文档化（读者知道类型）；
+> 8) 编译错误更精确（推断失败时错误信息模糊）；
+> 9) API 边界（公共接口必须显式）。
+> 这与 Haskell 的完全类型推断（几乎无需标注，但复杂程序可能需要）或 C++ 的 `auto`（有限推断，模板参数从调用推断）不同——Rust 的平衡点是"局部推断 + 接口显式"。
+> [来源: [Type Inference](https://doc.rust-lang.org/reference/type-inference.html)] ·
+> [来源: [Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
+
+### 10.5 边界测试：类型不匹配的基础错误
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: 类型不匹配
+    let x: i32 = "hello";
+}
+```
+
+> **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。

@@ -124,6 +124,7 @@
     - [12.3 边界测试：match 非穷尽（编译错误）](#123-边界测试match-非穷尽编译错误)
     - [12.4 边界测试：impl Trait 在参数位置与返回位置的差异（编译错误）](#124-边界测试impl-trait-在参数位置与返回位置的差异编译错误)
     - [12.5 边界测试：生命周期省略规则失效（编译错误）](#125-边界测试生命周期省略规则失效编译错误)
+    - [10.1 边界测试：类型不匹配的基础错误](#101-边界测试类型不匹配的基础错误)
 
 ## 一、权威定义（Definition）
 >
@@ -3170,3 +3171,14 @@ fn longest_fixed<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 > **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树) · [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)
 > **相关 FTA**: [类型系统失效树](../00_meta/fault_tree_analysis_collection.md#四类型系统失效树)
+
+### 10.1 边界测试：类型不匹配的基础错误
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: 类型不匹配
+    let x: i32 = "hello";
+}
+```
+
+> **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。

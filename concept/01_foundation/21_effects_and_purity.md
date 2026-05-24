@@ -512,3 +512,14 @@ fn main() {
 ```
 
 > **修正**: `const fn` 有严格的**编译期求值**限制：1) 不能分配堆内存（`Vec::new()`、`Box::new()`）；2) 不能调用非 `const fn`；3) 不能进行 I/O 或随机数生成；4) 不能有 `unsafe` 块。但 1.83+ 中 `const fn` 已支持 `mut` 绑定、循环、`if let`、解构赋值等。未来演进：`const fn` 可能支持有限的堆分配（`const Heap` 提案），但当前受限。这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 `enum` 强制编译期求值不同——Rust 的 `const` 系统保守但逐步扩展，每次扩展需确保编译期求值的可判定性。[来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] · [来源: [Rust Const Eval](https://doc.rust-lang.org/nightly/unstable-book/language-features/const-fn.html)]
+
+### 10.2 边界测试：类型不匹配的基础错误
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: 类型不匹配
+    let x: i32 = "hello";
+}
+```
+
+> **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。

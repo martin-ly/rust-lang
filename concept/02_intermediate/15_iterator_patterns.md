@@ -45,6 +45,7 @@
     - [10.4 边界测试：消耗型适配器与双重迭代（编译错误）](#104-边界测试消耗型适配器与双重迭代编译错误)
     - [10.6 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）](#106-边界测试iteratorfuse-后的重复消费逻辑错误)
     - [10.2 边界测试：`Iterator::collect` 的目标类型推断失败（编译错误）](#102-边界测试iteratorcollect-的目标类型推断失败编译错误)
+    - [10.8 边界测试：match 分支返回类型不一致](#108-边界测试match-分支返回类型不一致)
 
 ---
 
@@ -626,3 +627,19 @@ fn main() {
 ```
 
 > **修正**: `Iterator::collect()` 将迭代器消费为目标集合，但 Rust 的类型推断**仅从上下文**推导目标类型。若无处指定（如 `let x = ...collect()` 且无后续使用约束），编译器报错。常见模式：1) `let v: Vec<_> = iter.collect()`；2) `iter.collect::<Vec<_>>()`（turbofish 语法）；3) 函数返回类型约束（`fn foo() -> Vec<i32> { iter.collect() }`）。`collect()` 是 Rust 迭代器适配器的关键"终止操作"（consuming adaptor），与惰性适配器（`map`、`filter`）不同——它是编译器推断链的终点。这与 Java 的 `Stream.collect(Collectors.toList())`（显式指定收集器）或 Python 的 `list(iter)`（目标类型由构造函数决定）不同——Rust 的 `collect` 依赖类型推断，更灵活但可能需显式标注。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
+
+### 10.8 边界测试：match 分支返回类型不一致
+
+```rust,compile_fail
+fn main() {
+    let x = Some(5);
+    let v = match x {
+        Some(n) => n,
+        // ❌ 编译错误: match arm 类型不匹配
+        None => "none",
+    };
+    println!("{}", v);
+}
+```
+
+> **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。

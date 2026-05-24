@@ -44,6 +44,8 @@
     - [10.4 边界测试：回调函数的生命周期与 `Box::into_raw` 泄漏（编译错误/运行时 UB）](#104-边界测试回调函数的生命周期与-boxinto_raw-泄漏编译错误运行时-ub)
     - [10.5 边界测试：C 的 `long double` 与 Rust 的类型映射缺失（编译错误）](#105-边界测试c-的-long-double-与-rust-的类型映射缺失编译错误)
     - [10.3 边界测试：C 可变参数函数的不安全绑定（运行时 UB）](#103-边界测试c-可变参数函数的不安全绑定运行时-ub)
+    - [10.4 边界测试：C 结构体的内存对齐与 Rust 的 `#[repr(C)]`（运行时 ABI 不匹配）](#104-边界测试c-结构体的内存对齐与-rust-的-reprc运行时-abi-不匹配)
+    - [10.7 边界测试：生命周期参数的不匹配返回](#107-边界测试生命周期参数的不匹配返回)
 
 ---
 
@@ -910,3 +912,16 @@ fn main() {
 ```
 
 > **修正**: `#[repr(C)]` 使 Rust struct 遵循**平台 C ABI 的布局规则**：1) 字段按声明顺序排列；2) 对齐要求与 C 相同；3) 大小和对齐是平台相关的（x86_64 上 `u32` 对齐 4 字节）。风险：1) C 代码使用 `#pragma pack(1)` → Rust 需 `#[repr(C, packed)]`；2) C 的位域（bitfields）→ Rust 无直接等价物，需手动掩码；3) C 的 `_Alignas` → Rust 的 `#[repr(align(N))]`。`bindgen` 工具自动从 C 头文件生成 Rust 绑定（含正确的 `repr` 和字段布局）。这与 C++ 的 `extern "C"`（类似 ABI 兼容）或 Go 的 cgo（自动生成，但可能对齐不一致）不同——Rust 的 FFI 要求开发者显式控制内存布局。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/other-reprs.html)] · [来源: [bindgen](https://rust-lang.github.io/rust-bindgen/)]
+
+### 10.7 边界测试：生命周期参数的不匹配返回
+
+```rust,compile_fail
+fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
+    // ❌ 编译错误: 不能返回 y，因为 y 的生命周期 'b 可能短于 'a
+    y
+}
+
+fn main() {}
+```
+
+> **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。

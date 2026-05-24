@@ -45,6 +45,7 @@
     - [10.3 边界测试：过程宏的 hygiene 与标识符捕获（编译错误）](#103-边界测试过程宏的-hygiene-与标识符捕获编译错误)
     - [10.4 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）](#104-边界测试cfg-条件编译的互斥性编译错误逻辑错误)
     - [10.3 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）](#103-边界测试cfg-条件编译的互斥性编译错误逻辑错误)
+    - [10.7 边界测试：match 分支返回类型不一致](#107-边界测试match-分支返回类型不一致)
 
 ---
 
@@ -871,3 +872,19 @@ fn main() {
 ```
 
 > **修正**: `#[cfg]` 是**条件编译**：根据编译目标（OS、架构、特性）选择性地包含代码。上述代码在 Linux、Windows 和其他平台各有一个实现，编译时**恰好一个**生效。风险：1) 所有 `cfg` 条件互斥但不穷尽 → 某些平台无实现；2) `cfg` 与 `cfg_attr` 混用导致属性不一致；3) `cfg` 测试用 `cfg!(...)` 宏（编译期布尔值）与 `#[cfg(...)]` 属性（条件编译）混淆。这与 C 的 `#ifdef`（预处理器文本替换）不同——Rust 的 `cfg` 是编译器的语义分析阶段，能进行更精确的条件检查。[来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)]
+
+### 10.7 边界测试：match 分支返回类型不一致
+
+```rust,compile_fail
+fn main() {
+    let x = Some(5);
+    let v = match x {
+        Some(n) => n,
+        // ❌ 编译错误: match arm 类型不匹配
+        None => "none",
+    };
+    println!("{}", v);
+}
+```
+
+> **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。

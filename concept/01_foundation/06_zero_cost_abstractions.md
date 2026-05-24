@@ -49,6 +49,7 @@
     - [10.3 边界测试：泛型单态化导致的代码膨胀（编译错误/链接错误）](#103-边界测试泛型单态化导致的代码膨胀编译错误链接错误)
     - [10.4 边界测试：`async` 状态机的 `Pin` 开销（编译错误/运行时行为）](#104-边界测试async-状态机的-pin-开销编译错误运行时行为)
     - [10.3 边界测试：零大小类型的布局陷阱（编译错误/UB）](#103-边界测试零大小类型的布局陷阱编译错误ub)
+    - [10.3 边界测试：所有权移动后的再次使用](#103-边界测试所有权移动后的再次使用)
 
 ---
 
@@ -657,3 +658,16 @@ fn main() {
 ```
 
 > **修正**: 零大小类型（ZST，如 `()`、`PhantomData<T>`、空 struct）占 0 字节。其数组也占 0 字节，所有元素的地址相同。这在 unsafe 代码中是常见陷阱：1) 不能通过指针算术区分不同 ZST 元素（`ptr.add(1) == ptr`）；2) `std::ptr::read::<()>()` 是 no-op 但合法；3) `Box<ZeroSized>` 的分配可能返回对齐地址但不保证唯一。安全 Rust 中 ZST 是合法的且常用（类型标记、状态机），但 unsafe 边界需格外小心。[来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/exotic-sizes.html)]
+
+### 10.3 边界测试：所有权移动后的再次使用
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let s2 = s;
+    // ❌ 编译错误: s 已被 move 到 s2
+    println!("{}", s);
+}
+```
+
+> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。

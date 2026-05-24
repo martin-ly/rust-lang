@@ -42,6 +42,7 @@
     - [10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）](#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
     - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）](#103-边界测试assert_matches-与嵌套模式的绑定编译错误)
     - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](#104-边界测试自定义断言失败消息的类型约束编译错误)
+    - [10.4 边界测试：所有权移动后的再次使用](#104-边界测试所有权移动后的再次使用)
 
 ---
 
@@ -639,3 +640,16 @@ fn main() {
 ```
 
 > **修正**: `assert!`、`assert_eq!`、`assert_ne!` 的自定义消息参数必须实现 `std::fmt::Display` trait。`Vec<&str>` 未实现 `Display`，因此不能直接作为消息。解决方案：1) 使用 `format!("{:?}", vec)`（`Debug` 实现）；2) 使用 `vec.join(", ")` 转为 `String`；3) 使用 `assert!(..., "message", args...)` 的格式化语法。这与 C 的 `assert`（只接受布尔，无自定义消息）或 Python 的 `assert`（接受任意表达式作为消息）不同——Rust 的断言消息有类型约束，保证错误输出可读。`assert!` 的格式化参数使用与 `println!` 相同的语法，支持 `{}`、`{:?}`、`{:x}` 等格式说明符。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/macro.assert.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：所有权移动后的再次使用
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let s2 = s;
+    // ❌ 编译错误: s 已被 move 到 s2
+    println!("{}", s);
+}
+```
+
+> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。

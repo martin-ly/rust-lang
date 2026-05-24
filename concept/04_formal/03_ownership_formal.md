@@ -79,6 +79,8 @@
     - [10.3 边界测试：子类型化与生命周期协变（编译错误）](#103-边界测试子类型化与生命周期协变编译错误)
     - [10.4 边界测试：悬垂指针的形式化禁止（编译错误）](#104-边界测试悬垂指针的形式化禁止编译错误)
     - [10.3 边界测试：形式化所有权与编译器实现的差距（编译错误）](#103-边界测试形式化所有权与编译器实现的差距编译错误)
+    - [10.4 边界测试：形式化所有权与编译器实现的偏差（运行时 UB）](#104-边界测试形式化所有权与编译器实现的偏差运行时-ub)
+    - [10.2 边界测试：const fn 中的非编译期操作](#102-边界测试const-fn-中的非编译期操作)
 
 > **层级**: L4 形式化理论
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Linear Logic](./01_linear_logic.md) · [Type Theory](./02_type_theory.md)
@@ -1877,3 +1879,17 @@ fn main() {
 ```
 
 > **修正**: Rust 编译器的**借用检查**实现了**所有权形式化模型**的近似：1) 形式化："同一时间只能有一个 `&mut` 或任意数量的 `&`"；2) 编译器：NLL（Non-Lexical Lifetimes）使借用仅在**使用点**检查，而非作用域；3) Polonius（未来）：更精确的流敏感分析，允许更多合法程序。形式化与实现的差距：1) 某些安全程序被拒绝（false positive，如交叉引用循环）；2) 某些 unsafe 代码绕过检查（程序员责任）；3) `RefCell` 运行时检查替代编译期检查。研究：RustBelt 证明标准库的 unsafe 代码在形式化模型下安全；Stacked Borrows / Tree Borrows 定义引用的别名规则（Miri 检查）。这与 C 的内存模型（无形式化，实现定义行为）或 Haskell 的纯度（类似形式化，但无显式所有权）不同——Rust 是形式化理论成功指导工业实践的案例。[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)] · [来源: [Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)]
+
+### 10.2 边界测试：const fn 中的非编译期操作
+
+```rust,compile_fail
+const fn foo(x: i32) -> i32 {
+    // ❌ 编译错误: Vec::new() 不是 const fn（在旧版本中）
+    let v = Vec::new();
+    x
+}
+
+fn main() {}
+```
+
+> **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。

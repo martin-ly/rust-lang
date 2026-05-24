@@ -38,6 +38,7 @@
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：`Functor` 与 Rust 迭代器的映射（编译错误）](#103-边界测试functor-与-rust-迭代器的映射编译错误)
     - [10.4 边界测试：`Monad` 与 Rust 的 `?` 运算符（编译错误）](#104-边界测试monad-与-rust-的--运算符编译错误)
+    - [10.7 边界测试：所有权移动后的再次使用](#107-边界测试所有权移动后的再次使用)
 
 ---
 
@@ -749,3 +750,16 @@ fn monadic_bind() -> Result<i32, String> {
 ```
 
 > **修正**: **Monad** 是范畴论中描述"可序列化计算"的结构，Haskell 的 `Monad` typeclass 统一了 `Maybe`、`Either`、`IO`、`List` 的绑定语义。Rust 中没有 `Monad` trait，但 `?` 运算符提供了**特定于 `Result` 和 `Option`** 的 monadic 绑定：`?` 在 `Err`/`None` 时提前返回，在 `Ok`/`Some` 时解包值。这限制了 `?` 只能在返回 `Result`/`Option` 的函数中使用，不能用于自定义 monad（如 `List`、`State`、`Reader`）。`?` 的设计是务实的：覆盖 95% 的使用场景（错误处理），牺牲理论统一性换取编译器优化的简洁性。这与 Haskell 的 `do` 语法（通用 monad）、Scala 的 `for` 推导（通用 monad）或 JavaScript 的 `async/await`（特定于 Promise）类似——Rust 的 `?` 是"特化 monad"。[来源: [Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming))] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-03-improving-our-io-project.html)]
+
+### 10.7 边界测试：所有权移动后的再次使用
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let s2 = s;
+    // ❌ 编译错误: s 已被 move 到 s2
+    println!("{}", s);
+}
+```
+
+> **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。

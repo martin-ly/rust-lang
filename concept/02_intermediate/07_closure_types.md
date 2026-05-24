@@ -47,6 +47,7 @@
     - [10.3 边界测试：`Fn` trait 的自动实现与 `move` 闭包（编译错误）](#103-边界测试fn-trait-的自动实现与-move-闭包编译错误)
     - [10.4 边界测试：闭包递归的类型推断失败（编译错误）](#104-边界测试闭包递归的类型推断失败编译错误)
     - [10.5 边界测试：闭包在 `match` 臂中的类型推断（编译错误）](#105-边界测试闭包在-match-臂中的类型推断编译错误)
+    - [10.6 边界测试：生命周期参数的不匹配返回](#106-边界测试生命周期参数的不匹配返回)
 
 ---
 
@@ -626,3 +627,16 @@ fn main() {
 > 解决方案：1) 使用函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）：`match true { true => (|x: i32| x + 1) as fn(i32) -> i32, ... }`；2) 使用 `Box<dyn Fn(i32) -> i32>`（有堆分配）；3) 使用枚举包装不同闭包，手动分发。
 > 这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 可统一）或 JavaScript 的函数（无类型差异）不同——Rust 的闭包类型系统在提供零成本抽象的同时，增加了类型操作的复杂性。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+
+### 10.6 边界测试：生命周期参数的不匹配返回
+
+```rust,compile_fail
+fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
+    // ❌ 编译错误: 不能返回 y，因为 y 的生命周期 'b 可能短于 'a
+    y
+}
+
+fn main() {}
+```
+
+> **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。

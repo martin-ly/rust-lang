@@ -49,6 +49,7 @@
     - [10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）](#103-边界测试result-与-option-的混用编译错误)
     - [10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）](#104-边界测试catch_unwind-与-unwindsafe编译错误)
     - [10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）](#105-边界测试result-的-unwrap_unchecked-与-release-模式运行时-ub)
+    - [10.5 边界测试：生命周期参数的不匹配返回](#105-边界测试生命周期参数的不匹配返回)
 
 ---
 
@@ -900,3 +901,16 @@ fn main() {
 ```
 
 > **修正**: `Result::unwrap_unchecked` 和 `Option::unwrap_unchecked` 是 `unsafe` 方法：调用者必须保证值是 `Ok`/`Some`，否则是 UB。与 `unwrap`（Err 时 panic）不同，`unwrap_unchecked` 无检查、无分支，是零成本的"信任但验证"操作。使用场景：1) 热路径上已通过前置检查确保成功；2) 编译器无法推断但开发者确知的状态；3) 与 C 代码交互（C 函数返回错误码，但 Rust 侧已处理）。风险：错误使用导致任意行为（可能读取无效内存、可能崩溃、可能静默错误）。这与 C 的 `*(int*)NULL`（同样 UB，但编译器可能不警告）或 Swift 的 `try!`（运行时 panic，非 UB）不同——Rust 的 `unwrap_unchecked` 是真正的"无安全网"操作。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/enum.Result.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.5 边界测试：生命周期参数的不匹配返回
+
+```rust,compile_fail
+fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
+    // ❌ 编译错误: 不能返回 y，因为 y 的生命周期 'b 可能短于 'a
+    y
+}
+
+fn main() {}
+```
+
+> **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。

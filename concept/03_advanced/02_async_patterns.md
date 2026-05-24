@@ -509,3 +509,17 @@ fn main() {}
 ```
 
 > **修正**: `tokio::select!` 并发等待多个 future，**第一个完成的被处理**。`select!` 中的每个分支是独立的 async 块，但 `select!` 宏展开后会在每个分支前插入 await 点。若外部变量以 `&mut` 借用并被多个分支使用，编译器拒绝——这可能导致数据竞争（虽然单线程调度，但编译器保守）。安全模式：1) 使用 `Arc<Mutex<T>>` 共享状态；2) 在 `select!` 前完成所有借用操作；3) 使用 `tokio::sync::mpsc` 通道传递数据。`select!` 与 Go 的 `select`（通道操作）或 Erlang 的 `receive`（消息匹配）类似——Rust 的编译期借用检查使并发模式更安全。[来源: [tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)]
+
+### 10.4 边界测试：返回局部变量的悬垂引用
+
+```rust,compile_fail
+fn get_ref() -> &i32 {
+    let x = 42;
+    // ❌ 编译错误: 返回局部变量的引用
+    &x
+}
+
+fn main() {}
+```
+
+> **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。

@@ -48,6 +48,7 @@
     - [10.5 边界测试：`Iterator::fold` 的初始值类型与闭包返回类型不匹配（编译错误）](#105-边界测试iteratorfold-的初始值类型与闭包返回类型不匹配编译错误)
     - [10.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）](#105-边界测试chunksexact-的剩余元素处理逻辑错误)
     - [10.2 边界测试：`flat_map` 与嵌套迭代器的类型匹配（编译错误）](#102-边界测试flat_map-与嵌套迭代器的类型匹配编译错误)
+    - [10.9 边界测试：const fn 中的非编译期操作](#109-边界测试const-fn-中的非编译期操作)
 
 ---
 
@@ -704,3 +705,17 @@ fn main() {
 ```
 
 > **修正**: `flat_map` 要求闭包返回一个**迭代器**，然后将所有迭代器扁平化为一个。`data.iter()` 产生 `&Vec<i32>`，`v.iter()` 产生 `&i32`。`flat_map(|v| v.iter())` 返回 `Iter<&i32>`，collect 后为 `Vec<&i32>` 而非 `Vec<i32>`。修复：1) `data.into_iter().flat_map(|v| v.into_iter()).collect()`（移动所有权）；2) `data.iter().flat_map(|v| v.iter().copied()).collect()`（复制值）。`flat_map` 是 monadic `bind` 在迭代器上的实现：`Iter<Item=Iter<Item=T>>` → `Iter<Item=T>`。这与 Haskell 的 `concatMap` 或 Python 的 `itertools.chain.from_iterable` 类似——Rust 的类型系统要求迭代器元素类型精确匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.9 边界测试：const fn 中的非编译期操作
+
+```rust,compile_fail
+const fn foo(x: i32) -> i32 {
+    // ❌ 编译错误: Vec::new() 不是 const fn（在旧版本中）
+    let v = Vec::new();
+    x
+}
+
+fn main() {}
+```
+
+> **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。

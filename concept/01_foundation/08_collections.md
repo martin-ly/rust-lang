@@ -48,6 +48,7 @@
     - [10.3 边界测试：`Vec::drain` 的范围越界（运行时 panic）](#103-边界测试vecdrain-的范围越界运行时-panic)
     - [10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）](#104-边界测试hashmap-的自定义哈希器与-buildhasherdefault编译错误)
     - [10.3 边界测试：`Vec::drain` 后继续使用原 Vec（编译错误）](#103-边界测试vecdrain-后继续使用原-vec编译错误)
+    - [10.4 边界测试：不可变借用与可变借用的冲突](#104-边界测试不可变借用与可变借用的冲突)
 
 ---
 
@@ -702,3 +703,17 @@ fn main() {
 ```
 
 > **修正**: `Vec::drain(range)` 返回一个迭代器，它**可变借用**原 `Vec`（`&mut self`）。在 `drain` 迭代器存活期间，不能对原 `Vec` 进行任何操作（读、写、push、pop）。`drain` 的实现：将指定范围的元素移动到迭代器中，原位置标记为空。迭代器 `drop` 时，压缩剩余元素。这与 `retain`（原地过滤，不返回迭代器）或 `splice`（替换范围）不同——`drain` 是"取出并消费"的操作。常见模式：`for x in v.drain(..) { process(x); }` 完成后 `v` 为空。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：不可变借用与可变借用的冲突
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let r = &v;
+    // ❌ 编译错误: 已存在不可变借用时不能可变借用
+    v.push(4);
+    println!("{:?}", r);
+}
+```
+
+> **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。

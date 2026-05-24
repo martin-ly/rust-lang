@@ -1339,3 +1339,19 @@ fn main() {
 ```
 
 > **修正**: Rust 的 **所有权** 实现了**近似线性类型**（affine type）：1) 值可使用一次（move）或多次（`Copy`）；2) 非 `Copy` 类型 move 后不可再用；3) `Drop` 在值离开作用域时自动调用（除非 `mem::forget`）。纯线性类型（如 Linear Haskell）要求值**必须**使用一次（不能丢弃），Rust 是**affine**（可用零次或一次）。资源管理：1) `File` — `drop` 关闭文件描述符；2) `MutexGuard` — `drop` 释放锁；3) `Box` — `drop` 释放堆内存。显式泄漏：`mem::forget(res)` — 不调用 `drop`，内存/资源泄漏（有时 intentional）。这与 C++ 的 RAII（类似，但允许拷贝和多次使用）或 Java 的 try-with-resources（运行时检查，编译器不保证使用）不同——Rust 的所有权是编译期资源管理。[来源: [Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [来源: [Linear Logic](https://plato.stanford.edu/entries/logic-linear/)]
+
+### 10.1 边界测试：match 分支返回类型不一致
+
+```rust,compile_fail
+fn main() {
+    let x = Some(5);
+    let v = match x {
+        Some(n) => n,
+        // ❌ 编译错误: match arm 类型不匹配
+        None => "none",
+    };
+    println!("{}", v);
+}
+```
+
+> **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。

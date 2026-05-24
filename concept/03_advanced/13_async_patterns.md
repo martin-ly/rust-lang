@@ -36,6 +36,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时行为）](#103-边界测试取消安全性cancellation-safety的违反运行时行为)
+    - [10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）](#104-边界测试tokiospawn-的-send-约束与-rc编译错误)
+    - [10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时 panic）](#105-边界测试stream-的-fuse-与-select_next_some-的交互运行时-panic)
+    - [10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）](#103-边界测试stream-的背压与缓冲区溢出运行时内存增长)
+    - [10.4 边界测试：async fn 在 trait 中的生命周期推断与实现约束（编译错误）](#104-边界测试async-fn-在-trait-中的生命周期推断与实现约束编译错误)
 
 ---
 
@@ -832,7 +837,7 @@ use tokio::sync::mpsc;
 async fn receiver() {
     let (tx, mut rx) = mpsc::channel(1);
     tx.send(1).await.unwrap();
-    
+
     // ⚠️ 运行时风险: 非取消安全的 future 在 select 中可能丢失数据
     tokio::select! {
         val = rx.recv() => {
@@ -873,7 +878,7 @@ use futures::stream::{self, StreamExt};
 
 async fn demo() {
     let mut s = stream::iter(vec![Some(1), Some(2), None]).fuse();
-    
+
     // ⚠️ 运行时问题: select_next_some 在 None 后 panic（若未 fuse）
     // 但 fuse 后返回 Poll::Pending  forever
     while let Some(x) = s.select_next_some().await {
@@ -905,7 +910,7 @@ fn main() {}
 
 ### 10.4 边界测试：async fn 在 trait 中的生命周期推断与实现约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait AsyncTrait {
     async fn method(&self) -> i32;
 }

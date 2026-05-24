@@ -41,6 +41,7 @@
     - [10.3 边界测试：`f32` 与 `f64` 的精度陷阱（逻辑错误）](#103-边界测试f32-与-f64-的精度陷阱逻辑错误)
     - [10.4 边界测试：移位操作的越界（运行时 panic）](#104-边界测试移位操作的越界运行时-panic)
     - [10.3 边界测试：浮点数的 `Eq` 与 `Ord` 缺失（编译错误）](#103-边界测试浮点数的-eq-与-ord-缺失编译错误)
+    - [10.1 边界测试：函数重复定义](#101-边界测试函数重复定义)
 
 ---
 
@@ -731,3 +732,14 @@ fn main() {
 ```
 
 > **修正**: `f32`/`f64` **不**实现 `Eq` 和 `Ord` trait，因为 IEEE 754 的特殊值：`NaN != NaN`（违反自反性），`NaN < x` 和 `NaN > x` 都为 false（违反全序性）。这导致：1) 不能将 `f64` 作为 `HashMap` 的键；2) 不能用 `==` 做精确比较（`0.1 + 0.2 != 0.3`）；3) 排序结果不稳定（`sort` 使用 `PartialOrd` 而非 `Ord`，允许不可比较元素）。替代方案：`ordered_float` crate 提供 `NotNan` 和 `OrderedFloat`（将 NaN 视为最大/最小值，实现 `Eq`+`Ord`）。这与 C 的 `==`（直接比较位模式）或 Python 的 `==`（`float` 是可哈希的，但 `nan != nan`）不同——Rust 的类型系统通过 trait 系统排除了数学上不成立的比较。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.f64.html)] · [来源: [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)]
+
+### 10.1 边界测试：函数重复定义
+
+```rust,compile_fail
+fn duplicate() {}
+fn duplicate() {}
+
+fn main() {}
+```
+
+> **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。

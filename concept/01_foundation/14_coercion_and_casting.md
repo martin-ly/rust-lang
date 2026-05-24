@@ -824,3 +824,17 @@ fn main() {
 ```
 
 > **修正**: 闭包与函数指针的类型关系：1) **无捕获闭包**（`Fn` / `FnMut` / `FnOnce` 不捕获环境）可**强制转换**为函数指针 `fn(T) -> U`；2) **捕获闭包**有编译器生成的匿名类型（如 `{closure@main.rs:10:5}`），不能转为函数指针；3) `fn` 指针大小固定（两个指针：`data` + `code` 或单个代码指针），闭包类型大小取决于捕获的变量。需要传递捕获闭包时，使用 trait object：`Box<dyn Fn(i32) -> i32>` 或 `&dyn Fn(i32) -> i32`。这与 C++ 的 lambda（无捕获时可转为函数指针，有捕获时不能）或 Java 的 lambda（总是转为函数式接口，但底层是对象）类似——Rust 的闭包类型系统精确区分捕获和无捕获。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+
+### 10.8 边界测试：const fn 中的非编译期操作
+
+```rust,compile_fail
+const fn foo(x: i32) -> i32 {
+    // ❌ 编译错误: Vec::new() 不是 const fn（在旧版本中）
+    let v = Vec::new();
+    x
+}
+
+fn main() {}
+```
+
+> **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。

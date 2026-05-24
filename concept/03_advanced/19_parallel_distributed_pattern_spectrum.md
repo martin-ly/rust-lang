@@ -653,3 +653,16 @@ fn main() {
 ```
 
 > **修正**: **`rayon`** 的**并行迭代器**：1) `par_iter()` / `into_par_iter()` — 将工作负载分片到线程池；2) 闭包必须是 `Send`（跨线程安全）和 `Fn`（无 `&mut` 环境捕获）；3) 顺序结果需使用 `reduce`、`fold` + `sum`、或原子变量。正确模式：1) `(0..100).into_par_iter().sum::<i32>()` — 内置求和；2) `fold` + `reduce`（分片累积后合并）；3) `AtomicUsize` / `Mutex`（共享可变状态，但不推荐）。`rayon` 的线程池：1) 全局线程池（默认线程数 = CPU 核心数）；2) `ThreadPoolBuilder` 自定义；3) `join`（分治并行）。这与 OpenMP 的 `parallel for`（编译指令，隐式 reduction）或 C++ 的 `std::execution::par`（类似 rayon，但标准库支持）不同——Rust 的 rayon 是库级并行，类型安全。[来源: [Rayon](https://docs.rs/rayon/)] · [来源: [Data Parallelism](https://doc.rust-lang.org/book/)]
+
+### 10.8 边界测试：生命周期参数的不匹配返回
+
+```rust,compile_fail
+fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
+    // ❌ 编译错误: 不能返回 y，因为 y 的生命周期 'b 可能短于 'a
+    y
+}
+
+fn main() {}
+```
+
+> **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。

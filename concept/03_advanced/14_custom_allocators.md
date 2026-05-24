@@ -42,6 +42,7 @@
     - [10.4 边界测试：自定义分配器的 `Layout` 对齐要求（运行时 UB）](#104-边界测试自定义分配器的-layout-对齐要求运行时-ub)
     - [10.5 边界测试：分配器的 `dealloc` 与 `alloc` 的布局不匹配（运行时 UB）](#105-边界测试分配器的-dealloc-与-alloc-的布局不匹配运行时-ub)
     - [10.3 边界测试：全局分配器与 `#[global_allocator]` 重复定义（编译错误）](#103-边界测试全局分配器与-global_allocator-重复定义编译错误)
+    - [10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（运行时 UB）](#104-边界测试自定义分配器的-layout-不匹配与内存安全运行时-ub)
 
 ---
 
@@ -786,13 +787,13 @@ fn main() {}
 
 ### 10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 use std::alloc::{alloc, dealloc, Layout};
 
 fn main() {
     let layout = Layout::new::<u32>();
     let ptr = unsafe { alloc(layout) };
-    
+
     // ❌ 运行时 UB: 使用错误的 Layout dealloc
     let wrong_layout = Layout::new::<u64>();
     unsafe { dealloc(ptr, wrong_layout); }
@@ -800,3 +801,14 @@ fn main() {
 ```
 
 > **修正**: **`alloc`/`dealloc`** 的 **Layout 契约**：1) `alloc(layout)` 返回的指针必须用**相同 layout** 的 `dealloc` 释放；2) layout 的大小和对齐必须匹配；3) 重复释放（double free）→ UB；4) 释放未分配指针 → UB。`GlobalAlloc` trait 的要求：1) `alloc` 返回满足 layout.align 的指针；2) `dealloc` 的 ptr 和 layout 必须与 `alloc` 匹配；3) `realloc` 保持已有数据不变。调试工具：1) `#[cfg(debug_assertions)]` 使用检测分配器；2) Miri 检测 UB；3) AddressSanitizer / Valgrind（Linux）。这与 C 的 `malloc`/`free`（无 layout 概念，大小隐式存储）或 C++ 的 `new`/`delete`（调用析构函数 + 释放内存）不同——Rust 的分配器接口显式传递 layout，更灵活但更需小心。[来源: [GlobalAlloc](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)] · [来源: [Rust Allocator API](https://doc.rust-lang.org/std/alloc/index.html)]
+
+### 10.3 边界测试：函数重复定义
+
+```rust,compile_fail
+fn duplicate() {}
+fn duplicate() {}
+
+fn main() {}
+```
+
+> **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。

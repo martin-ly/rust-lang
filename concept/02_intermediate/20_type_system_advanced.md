@@ -49,6 +49,8 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：impl Trait 的自动 trait 捕获规则（编译错误）](#103-边界测试impl-trait-的自动-trait-捕获规则编译错误)
+    - [10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）](#104-边界测试关联类型的默认实现与具体化冲突编译错误)
+    - [10.2 边界测试：函数重复定义](#102-边界测试函数重复定义)
 
 ---
 
@@ -800,3 +802,14 @@ fn main() {}
 ```
 
 > **修正**: Rust 的**关联类型默认值**：1) `type Item = i32;` 在 trait 定义中提供默认值；2) `impl` 中可省略 `type Item = ...`（使用默认值）；3) 但不能指定不同的具体类型（不能覆盖默认值）。这与 C++20 的 `using` alias（无默认值概念）或 Haskell 的 associated type synonyms（可覆盖）不同——Rust 的默认关联类型是"fallback"而非"可覆盖的默认值"。未来可能的扩展：`default type Item = i32;` 语法（允许覆盖）。当前替代方案：1) 使用泛型参数而非关联类型；2) 使用多个 trait（一个含默认，一个不含）。这与类型类的默认方法（可覆盖）不同——Rust 的关联类型默认值不可覆盖是设计决策。[来源: [Associated Types](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/items/associated-items.html)]
+
+### 10.2 边界测试：函数重复定义
+
+```rust,compile_fail
+fn duplicate() {}
+fn duplicate() {}
+
+fn main() {}
+```
+
+> **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。

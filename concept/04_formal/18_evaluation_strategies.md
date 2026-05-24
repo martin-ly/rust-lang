@@ -443,3 +443,17 @@ fn main() {
 ```
 
 > **修正**: Rust 的**按值传递**（move semantics）对大类型（如 `[u8; 10000]`）可能产生隐式内存复制（memcpy）。虽然 Rust 的所有权系统保证无双重释放，但性能上：1) 大数组按值传递 = memcpy；2) `Box<[u8; 10000]>` 只传递指针（8 字节）；3) `&[u8]` 传递 fat pointer（16 字节）。优化：1) 大类型使用 `Box<T>` 或 `&T`；2) 使用 `#[repr(C)]` 控制布局（但通常无需）；3) 编译器的 NRVO（Named Return Value Optimization）可能消除部分复制。Rust 的 move 语义在抽象层面是"零成本"（不调用拷贝构造函数），但底层仍是 `memcpy`——这是所有值语义语言的共性。这与 C++ 的 RVO/NRVO（类似优化）或 Go 的接口值（隐式指针+堆分配）不同——Rust 的 move 语义是显式的、可预测的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+
+### 10.3 边界测试：const fn 中的非编译期操作
+
+```rust,compile_fail
+const fn foo(x: i32) -> i32 {
+    // ❌ 编译错误: Vec::new() 不是 const fn（在旧版本中）
+    let v = Vec::new();
+    x
+}
+
+fn main() {}
+```
+
+> **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。

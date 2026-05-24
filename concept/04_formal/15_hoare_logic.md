@@ -49,6 +49,7 @@
     - [10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）](#103-边界测试霍尔逻辑的不变量与-rust-的-while-let编译错误)
     - [10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）](#104-边界测试-weakest-precondition-与-unsafe-代码的规范缺口编译错误验证失败)
     - [10.5 边界测试：循环不变量的发现与人工介入（验证失败）](#105-边界测试循环不变量的发现与人工介入验证失败)
+    - [10.9 边界测试：生命周期参数的不匹配返回](#109-边界测试生命周期参数的不匹配返回)
 
 ---
 
@@ -779,3 +780,16 @@ fn gcd(a: u32, b: u32) -> u32 {
 ```
 
 > **修正**: 霍尔逻辑中，**循环不变量**（loop invariant）是证明循环正确性的关键：在每次迭代前后保持为真的断言。发现不变量通常是**人类智慧**的任务——自动工具（Dafny、Why3）可验证给定的不变量，但难以自动发现。`gcd` 的不变量 `gcd(x, y) == gcd(a, b)` 需要数论知识，非通用启发式可推导。Rust 的形式化工具现状：1) Prusti 支持 `#[invariant(...)]` 注解；2) Creusot 支持类似 WhyML 的逻辑函数；3) Kani 依赖有界展开，不直接处理不变量。这与 Isabelle/HOL（手动证明，完全控制）或 Dafny（自动生成部分不变量）类似——不变量的发现是形式化方法的"艺术"部分，需要领域知识和创造力。[来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)] · [来源: [Prusti Loop Invariants](https://www.pm.inf.ethz.ch/research/prusti.html)]
+
+### 10.9 边界测试：生命周期参数的不匹配返回
+
+```rust,compile_fail
+fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
+    // ❌ 编译错误: 不能返回 y，因为 y 的生命周期 'b 可能短于 'a
+    y
+}
+
+fn main() {}
+```
+
+> **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。

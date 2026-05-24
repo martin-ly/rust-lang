@@ -46,6 +46,7 @@
     - [10.3 边界测试：`RangeInclusive` 的 `Copy` 缺失（编译错误）](#103-边界测试rangeinclusive-的-copy-缺失编译错误)
     - [10.4 边界测试：`Iterator::size_hint` 与无限范围（逻辑错误）](#104-边界测试iteratorsize_hint-与无限范围逻辑错误)
     - [10.3 边界测试：范围模式的穷尽性检查（编译错误）](#103-边界测试范围模式的穷尽性检查编译错误)
+    - [10.5 边界测试：不可变借用与可变借用的冲突](#105-边界测试不可变借用与可变借用的冲突)
 
 ---
 
@@ -559,3 +560,17 @@ fn main() {
 ```
 
 > **修正**: Rust 的 `match` 要求**穷尽**（exhaustive）——覆盖所有可能的值。范围模式 `a..=b` 只覆盖闭区间，不覆盖区间外的值。整数类型（`i32`、`u8` 等）的范围是完整的，任何遗漏都会导致编译错误。修复：添加 `_ =>` 通配分支或补全范围。范围类型（`Range`、`RangeInclusive`）作为值时，不能直接用于 `match`（非枚举类型），需用 `if let` 或解构。这与 Haskell 的 guard（不强制穷尽）或 Scala 的 `match`（非穷尽时警告）不同——Rust 的穷尽检查是编译错误，不可忽略。[来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)]
+
+### 10.5 边界测试：不可变借用与可变借用的冲突
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let r = &v;
+    // ❌ 编译错误: 已存在不可变借用时不能可变借用
+    v.push(4);
+    println!("{:?}", r);
+}
+```
+
+> **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
