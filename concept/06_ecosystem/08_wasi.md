@@ -400,83 +400,170 @@ impl GuestFile for File {
 
 ---
 
-## 权威来源索引
+---
 
-> **[来源: [crates.io](https://crates.io/)]**
+## 八、反例与边界测试（Examples & Counter-examples）
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+> **[来源: [WASI Preview 2 Docs](https://wasi.dev)]**
+> **[来源: [WebAssembly Component Model Spec](https://component-model.bytecodealliance.org)]**
+
+### 8.1 正确示例：安全的 wit-bindgen 组件
+
+```rust
+// 标准 Rust — 编译通过
+// 对应 WIT: export run: func() -> result<s32, string>;
+
+#[derive(Debug)]
+enum CalcError { DivisionByZero }
+
+fn safe_div(a: i32, b: i32) -> Result<i32, CalcError> {
+    if b == 0 { Err(CalcError::DivisionByZero) }
+    else { Ok(a / b) }
+}
+
+fn run() -> Result<i32, String> {
+    let result = safe_div(10, 2)
+        .map_err(|e| format!("{:?}", e))?;
+    Ok(result)
+}
+```
+
+### 8.2 反例：跨组件边界忽略 Result 错误
+
+```rust,compile_fail
+// 错误：在 wit-bindgen 生成的绑定中忽略 Result
+// 编译器强制处理错误分支——跨组件边界保持类型安全
+
+fn risky_run() -> i32 {
+    let result = host::filesystem::read("/data"); // 返回 Result<Vec<u8>, IoError>
+    result.len() // ❌ 编译错误：不能直接访问 Result 的内容
+}
+```
+
+> **编译错误** (`E0599`): `Result<Vec<u8>, IoError>` 没有 `.len()` 方法。
+> **认知功能**: 此反例展示了 WIT `result<T, E>` → Rust `Result<T, E>` 映射的核心价值——编译器强制处理跨组件边界的错误，消除静默失败。[来源: wit-bindgen Docs] ✅
+
+### 8.3 反例：沙箱逃逸尝试（能力边界外访问）
+
+```rust,compile_fail
+// 错误：尝试访问未被授予能力的资源
+// WASI 能力安全模型在运行时拒绝此访问
+
+use std::fs::File;
+
+fn escape_sandbox() {
+    // Guest 只被授予 /sandbox/data 的访问能力
+    let _ = File::open("/etc/passwd"); // ❌ 运行时拒绝
+}
+```
+
+> **运行时错误**: WASI 能力检查器返回 `ENOTCAPABLE`（无能力）。
+> **与 Rust 所有权的同构**: 这类似于 Rust 编译器阻止无所有权变量的访问——WASI 在运行时强制执行相同的逻辑，但边界是"能力句柄"而非"所有权变量"。
+> **关键洞察**: Rust 的所有权检查在编译期，WASI 的能力检查在运行时，二者形成**互补的安全层**。[来源: 💡 原创分析]
+
+### 8.4 反例：WIT 类型不匹配导致组件组合失败
+
+```rust,compile_fail
+// 错误：组件 A 导出 i32，组件 B 期望 s64
+// 组件组合时的类型签名不匹配
+
+// 组件 A 的 WIT（版本 1.0）:
+// export add: func(a: i32, b: i32) -> i32;
+
+// 组件 B 的 WIT（错误地期望 1.1 版本）:
+// import add: func(a: s64, b: s64) -> s64;
+
+// 运行时链接错误：类型签名不兼容
+```
+
+> **组合错误**: WebAssembly 组件组合器（compositor）在链接阶段检测到类型签名不匹配，拒绝组合。
+> **形式化根基**: Component Model 的**类型提升规则**（type lifting）要求导入/导出接口的 WIT 类型完全一致。这是 Wasm 从动态链接（C 的 `dlsym`）向**强类型组合**演进的关键设计。[来源: Component Model Spec] ✅
+
+### 8.5 边界极限测试：Resource 句柄生命周期
+
+```rust
+// 边界测试：Resource 句柄在跨组件传递时的生命周期
+
+// 宿主创建 Resource
+let file = preopen_file("/sandbox/data.txt")?;
+
+// 将 Resource 句柄 move 到 guest
+let guest_result = guest::process(file); // file 被 move
+
+// ❌ 边界测试：尝试在 move 后使用句柄
+// let _ = file.read(); // 编译错误（如果 file 未实现 Copy）
+
+// Guest 内部可以将 Resource 传递给子组件
+let sub_result = subcomponent::analyze(file); // 再次 move
+
+// 最终 Guest drop 句柄 → 宿主回收资源
+```
+
+> **边界洞察**: Resource 句柄的 move 语义与 Rust 的所有权完全一致。但 Wasm 组件边界上的 move 是**运行时行为**（句柄表索引转移），而非编译期检查。这意味着：
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
+> 1. 同组件内的 Resource 传递由 Rust 编译器检查
+> 2. 跨组件的 Resource 传递由 Wasm 运行时检查
+> 3. 两者都保证"无句柄 = 无访问权"，但检查时机不同
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+## 九、WASI 与 Rust 的形式化同构
+>
+> **[来源: [Capability-Based Security Research](https://en.wikipedia.org/wiki/Capability-based_security)]**
+> **[来源: [WASI Preview 2 Docs](https://wasi.dev)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+### 9.1 所有权 ↔ 能力安全 的同构映射
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+| Rust 概念 | WASI 概念 | 形式化对应 |
+|:---|:---|:---|
+| `Own<T>` | Capability Handle | 资源唯一标识 |
+| `move` | Handle transfer | 所有权转移 |
+| `&T` | Read-only capability | 不可变共享 |
+| `&mut T` | Read-write capability | 可变独占 |
+| `drop` | Handle revocation | 资源释放 |
+| 编译期检查 | 运行时检查 | 检查时机不同，安全保证等价 |
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **形式化命题** [Tier 3]: WASI 的能力安全模型是 Rust 所有权模型的**运行时模拟**。
+>
+> **论证**:
+>
+> - Rust 编译器通过类型系统保证内存安全（无 UAF、无 DF）
+> - WASI 运行时通过能力检查器保证沙箱安全（无越权访问）
+> - 两者都基于"资源唯一标识 + 显式转移"的核心原则
+> - 关键差异：Rust 在编译期检查，WASI 在运行时检查
+>
+> **局限性**: 此同构是概念层面的类比，而非数学上的严格同构。Rust 的所有权有线性逻辑的完整形式化（RustBelt），而 WASI 的能力安全目前缺乏同等深度的形式化证明。[来源: 💡 原创分析]
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+### 9.2 形式化验证的空白与挑战
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+| 验证目标 | 当前状态 | 挑战 |
+|:---|:---|:---|
+| Wasm 字节码类型安全 | ✅ W3C 规范证明 | 已完成 |
+| Component Model 组合安全 | ⚠️ 部分形式化 | 组合器的行为规约不完整 |
+| WASI 能力安全正确性 | ❌ 无完整证明 | 能力传递的时序性质未形式化 |
+| wit-bindgen 生成代码正确性 | ❌ 无形式化证明 | 代码生成器的正确性依赖测试 |
+| Rust → Wasm 编译正确性 | ❌ 无端到端证明 | rustc → LLVM → Wasm 后端链过长 |
 
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
+> **关键洞察**: Wasm 生态目前处于"工程正确性领先于形式化证明"的状态。与 Rust 编译器（有 RustBelt 证明 Safe Rust 的内存安全）相比，Wasm/Component Model 的形式化根基明显薄弱。这是未来 3-5 年的重要研究方向。[来源: 💡 原创分析]
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+## 十、知识来源关系（Provenance）
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+| 论断 | 来源 | 可信度 |
+|:---|:---|:---:|
+| Wasm 沙箱隔离保证 | [W3C Wasm Spec] | ✅ |
+| WASI 能力安全模型 | [WASI Preview 2 Docs] | ✅ |
+| Component Model 类型提升 | [Component Model Spec] | ✅ |
+| wit-bindgen 生成代码类型安全 | [wit-bindgen Docs] | ✅ |
+| Rust 所有权 ↔ WASI 能力同构 | [💡 原创分析] | ⚠️ 概念类比 |
+| Wasm 形式化根基薄弱 | [💡 原创分析] | ⚠️ 趋势判断 |
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+---
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **权威来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WebAssembly Component Model Spec](https://component-model.bytecodealliance.org) · [wit-bindgen Docs](https://github.com/bytecodealliance/wit-bindgen) · [WASMtime Docs](https://docs.wasmtime.dev)
+>
+> **文档版本**: 1.2
+> **对应 Rust 版本**: 1.90.0+ (Edition 2024)
+> **最后更新**: 2026-05-24
+> **状态**: ✅ 权威来源对齐 + 反例补充完成

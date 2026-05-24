@@ -16,6 +16,13 @@
 
 ---
 
+> ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。
+>
+> **使用方式**: `rustup run nightly rustc ...` 或 `cargo +nightly ...`
+> **状态查询**: <https://doc.rust-lang.org/nightly/unstable-book/index.html>
+> **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
+
+---
 > **Bloom 层级**: 应用 → 分析
 **变更日志**:
 

@@ -3,7 +3,7 @@
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.9（2026-05-23 更新，对齐 Rust 1.95.0 stable + 1.96 beta.8（2026-05-28 预计 stable）、核心概念来源标注率 100% 达标）
+> **状态**: v1.9（2026-05-24 更新，对齐 Rust 1.90.0 stable / 1.95.0 nightly preview。核心概念来源标注率 100% 达标。⚠️ 1.91+ 特性基于 nightly/unstable 文档，stable 权威来源待更新）
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Evolution](./03_evolution.md)
 

@@ -1,13 +1,13 @@
-# 分离逻辑：并发安全的指针推理系统
+# 分离逻辑：Rust 所有权的形式化根基
 
-> **Bloom 层级**: 分析 → 评价
-> **定位**: 介绍 **分离逻辑（Separation Logic, SL）**——由 John Reynolds 和 Peter O'Hearn 发展的用于推理指针程序和并发程序的模态逻辑。分析 SL 如何为 Rust 的 ownership + borrowing 提供形式化语义根基，以及 Iris 框架如何将 SL 扩展到高阶并发程序。
-> **前置概念**: [Ownership Formal](./03_ownership_formal.md) · [Concurrency](../03_advanced/01_concurrency.md)
-> **后置概念**: [RustBelt](./04_rustbelt.md) · [Type Theory](./02_type_theory.md)
+> **Bloom 层级**: 评价 → 创造
+> **定位**: 深入讲解**分离逻辑（Separation Logic）**——从霍尔逻辑到分离合取、框架规则，揭示 Rust 所有权系统如何建立在严格的数学基础之上，并连接形式化验证工具如 Iris 和 Viper。
+> **前置概念**: [Linear Logic](./01_linear_logic.md) · [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
+> **后置概念**: [Verification Toolchain](./05_verification_toolchain.md) · [Type Theory](./02_type_theory.md)
 
 ---
 
-> **来源**: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf) · [O'Hearn 2019 — Separation Logic](https://doi.org/10.1145/3211968) · [Iris Framework](https://iris-project.org/) · [RustBelt Paper](https://doi.org/10.1145/3158154) · [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
+> **来源**: [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf) · [Iris Project](https://iris-project.org/) · [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) · [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic) · [Viper Verification Infrastructure](https://www.pm.inf.ethz.ch/research/viper.html)
 
 ## 📑 目录
 >
@@ -15,17 +15,17 @@
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
-- [分离逻辑：并发安全的指针推理系统](#分离逻辑并发安全的指针推理系统)
+- [分离逻辑：Rust 所有权的形式化根基](#分离逻辑rust-所有权的形式化根基)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 霍尔逻辑与指针的困境](#11-霍尔逻辑与指针的困境)
-    - [1.2 分离合取：\* 算子](#12-分离合取-算子)
-    - [1.3 帧规则与局部推理](#13-帧规则与局部推理)
+    - [1.1 从霍尔逻辑到分离逻辑](#11-从霍尔逻辑到分离逻辑)
+    - [1.2 分离合取与资源所有权](#12-分离合取与资源所有权)
+    - [1.3 框架规则与局部推理](#13-框架规则与局部推理)
   - [二、技术细节](#二技术细节)
-    - [2.1 分离逻辑的断言语言](#21-分离逻辑的断言语言)
-    - [2.2 从 SL 到并发分离逻辑（CSL）](#22-从-sl-到并发分离逻辑csl)
-    - [2.3 Iris：高阶并发分离逻辑](#23-iris高阶并发分离逻辑)
-  - [三、Rust 的应用映射](#三rust-的应用映射)
+    - [2.1 分离逻辑的基本断言](#21-分离逻辑的基本断言)
+    - [2.2 Rust 所有权的形式化映射](#22-rust-所有权的形式化映射)
+    - [2.3 Iris 与更高阶分离逻辑](#23-iris-与更高阶分离逻辑)
+  - [三、形式化模式矩阵](#三形式化模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -42,98 +42,124 @@
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-### 1.1 霍尔逻辑与指针的困境
+### 1.1 从霍尔逻辑到分离逻辑
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-经典霍尔逻辑（Hoare Logic）在推理指针程序时面临**框架问题**（Frame Problem）：
-
 ```text
-霍尔三元组: {P} C {Q}
-  含义: 如果前置条件 P 成立，执行 C 后后置条件 Q 成立
+霍尔逻辑（Hoare Logic）:
+  ├── {P} C {Q}: 前置条件 P，命令 C，后置条件 Q
+  ├── 规则: 顺序、条件、循环
+  └── 局限: 不处理堆内存（指针别名）
 
-  指针程序的困境:
-  {x ↦ 3} [x] := 4 {x ↦ 4}
+  示例:
+  {x = 5} x := x + 1 {x = 6}
 
-  问题: 这个赋值是否影响 y 指向的内存？
-  ├── 如果 x ≠ y，则 y 不变
-  └── 如果 x = y（别名），则 y 也变成 4
+  堆内存的问题:
+  ├── 指针别名: p 和 q 可能指向同一位置
+  ├── 修改 *p 可能影响 *q
+  ├── 霍尔逻辑无法表达"不重叠"
+  └── 需要扩展以处理分离资源
 
-  经典逻辑的解决方案:
-  ├── 需要显式声明"x 和 y 指向不同地址"
-  └── 导致前置条件爆炸式增长，不可扩展
+分离逻辑（Separation Logic）:
+  ├── John Reynolds (2002), Peter O'Hearn 等
+  ├── 扩展霍尔逻辑处理堆内存
+  ├── 关键创新: 分离合取 (*)
+  └── 资源独占性的形式化
+
+  核心思想:
+  ├── 堆可以被"分离"为不重叠的部分
+  ├── 程序只操作其拥有的资源部分
+  ├── 其他部分不受影响（框架规则）
+  └── 支持局部推理和组合
 ```
 
-> **核心问题**: 经典逻辑缺乏表达**内存分离**的原语——无法简洁断言"这两段内存不相交"。
-> [来源: [O'Hearn 2019 — Separation Logic](https://doi.org/10.1145/3211968)]
+> **认知功能**: **分离逻辑将"资源独占"从编程直觉提升为数学公理**——它是 Rust 所有权系统的形式化先驱。
+> [来源: [Reynolds — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf)]
 
 ---
 
-### 1.2 分离合取：* 算子
+### 1.2 分离合取与资源所有权
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
-分离逻辑的核心创新: 分离合取（Separating Conjunction）
-
-  语法: P * Q
-  语义: 存在不相交的堆片段 h1 和 h2，使得 h1 ⊨ P 且 h2 ⊨ Q
-
-  与经典合取的区别:
-  ┌─────────────┬─────────────────────────────┬─────────────────────────────┐
-  │             │ 经典合取 (∧)                │ 分离合取 (*)                │
-  ├─────────────┼─────────────────────────────┼─────────────────────────────┤
-  │ 语义        │ P 和 Q 在同一状态上成立      │ P 和 Q 在不相交的内存上成立 │
-  │ 别名        │ 允许别名（重叠）             │ 禁止别名（互斥）            │
-  │ Rust 对应   │ 多个 &T 借用同一数据         │ &mut T 独占访问             │
-  └─────────────┴─────────────────────────────┴─────────────────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+分离逻辑的断言:
 
   基本断言:
-  ├── emp: 空堆（不拥有任何内存）
-  ├── x ↦ v: x 指向值 v（拥有恰好一个单元）
-  └── x ↦ _ : x 指向某个值（不关心具体值）
+  ├── emp: 空堆（无资源）
+  ├── x ↦ v: 地址 x 存储值 v（单点堆）
+  ├── P * Q: 分离合取（P 和 Q 拥有不相交的堆）
+  └── P ∧ Q: 经典合取（可能有重叠）
+
+  分离合取的含义:
+  P * Q 为真 ⇔ 堆可以被分为两部分 h1 和 h2
+                h1 满足 P，h2 满足 Q
+                h1 和 h2 不相交
 
   示例:
-  (x ↦ 3) * (y ↦ 4)  →  x 和 y 指向不同地址，值分别为 3 和 4
-  (x ↦ 3) ∧ (y ↦ 4)  →  x 和 y 可能指向同一地址（如果 x = y）
+  (x ↦ 5) * (y ↦ 10)
+  // 地址 x 和 y 是不同的，分别存储 5 和 10
+
+  (x ↦ 5) ∧ (x ↦ 10)
+  // 矛盾！x 不能同时存储 5 和 10
+
+  与 Rust 的映射:
+  ┌─────────────────────┬─────────────────────────────┐
+  │ 分离逻辑            │ Rust                        │
+  ├─────────────────────┼─────────────────────────────┤
+  │ emp                 │ () （无资源）               │
+  │ x ↦ v               │ let x = Box::new(v)         │
+  │ P * Q               │ (p, q): 不重叠的所有权      │
+  │ P → Q               │ 资源转移: move              │
+  │ ∃x. P               │ 存在类型 / 匿名引用         │
+  └─────────────────────┴─────────────────────────────┘
 ```
 
-> **认知功能**: 分离合取 `*` 是分离逻辑的**核心算子**——它将内存状态分解为不相交的片段，使局部推理成为可能。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
-> **关键洞察**: `*` 算子与 Rust 的 **ownership 转移** 同构——`P * Q` 意味着两段内存的 ownership 是分离的，这与 Rust 的核心规则"一个值只能有一个 owner"精确对应。
-> [来源: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf)]
+> **分离洞察**: **分离合取 (*) 是分离逻辑的核心创新**——它精确编码了"资源不重叠"的概念，与 Rust 的独占所有权直接对应。
+> [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
 
 ---
 
-### 1.3 帧规则与局部推理
+### 1.3 框架规则与局部推理
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
-帧规则（Frame Rule）:
+框架规则（Frame Rule）:
 
-  如果 {P} C {Q} 成立，则对任意 R：
-  {P * R} C {Q * R} 也成立（假设 C 不修改 R 中的变量）
+  形式:
+  {P} C {Q} 且 R 与 P, Q 无关
+  ─────────────────────────────
+  {P * R} C {Q * R}
 
-  意义:
-  ├── 只需证明 C 对其直接操作的内存的正确性
-  ├── 其他内存（R）自动"携带通过"
-  └── 实现局部推理（Local Reasoning）
+  含义:
+  ├── 如果 C 在资源 P 上从 P 变换到 Q
+  ├── 那么在 P 加上额外资源 R 上
+  ├── C 从 P*R 变换到 Q*R
+  └── R 完全不受影响
 
-  Rust 对应:
-  fn foo(x: &mut i32) {
-      *x = 42;  // 只需考虑 x 指向的内存
+  为什么重要:
+  ├── 模块化验证: 只需验证操作的资源
+  ├── 组合性: 小证明组合为大证明
+  ├── 与 Rust 模块系统的对应
+  └── 并发的基础: 不同线程操作分离资源
+
+  Rust 中的对应:
+  fn process(data: &mut Vec<i32>) {
+      // 只操作 data，其他资源不受影响
+      data.push(42);
   }
-  // 其他变量自动"携带通过"——编译器保证不会意外修改
 
-  帧规则是分离逻辑与 Rust borrow checker 的深层连接:
-  ├── borrow checker 的 "局部性" = 帧规则的编译期实现
-  └── &mut T 的独占性 = 分离合取 * 的运行期保证
+  // 框架规则: 调用 process 时，其他所有权不变
+  let mut v = vec![1, 2, 3];
+  let s = String::from("hello");
+  process(&mut v);
+  // s 完全不受影响（编译期保证）
 ```
 
-> **帧规则洞察**: 帧规则是分离逻辑的**推理引擎**——它允许我们专注于代码直接操作的内存，忽略不相关的部分。Rust 的 borrow checker 本质上是帧规则的**自动化定理证明器**。
-> [来源: [O'Hearn, Reynolds, Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44585-4_8)]
+> **框架洞察**: **框架规则是"局部推理"的数学基础**——它使验证可以模块化，与 Rust 的所有权隔离完美对应。
+> [来源: [O'Hearn — Resources, Concurrency and Local Reasoning](https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/localreasoning.pdf)]
 
 ---
 
@@ -143,135 +169,171 @@
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
-### 2.1 分离逻辑的断言语言
+### 2.1 分离逻辑的基本断言
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
-分离逻辑断言语法（核心）:
+分离逻辑的断言语言:
 
-  P, Q ::=  emp                    // 空堆
-         |  E ↦ E'                // 点断言（单堆单元）
-         |  P * Q                 // 分离合取
-         |  P -* Q                // 分离蕴含（魔法棒）
-         |  P ∧ Q | P ∨ Q | ¬P    // 经典逻辑连接词
-         |  ∃x. P | ∀x. P         // 量词
+  语法:
+  P, Q ::= emp                  // 空堆
+         | e ↦ e'              // 指向关系
+         | P * Q               // 分离合取
+         | P ∧ Q               // 经典合取
+         | P ∨ Q               // 析取
+         | P → Q               // 分离蕴含（magic wand）
+         | ∃x. P               // 存在量词
+         | ∀x. P               // 全称量词
 
-  分离蕴含（Magic Wand）P -* Q:
-  ├── 语义: "如果获得 P，则能推出 Q"
-  ├── 对应 Rust 的借用归还: &mut T 归还后，ownership 恢复
-  └── 示例: (x ↦ _) -* (x ↦ 3) 表示"如果 x 指向某个值，可以更新为 3"
+  分离蕴含（Magic Wand）:
+  P -* Q: "如果我获得 P，我可以变换为 Q"
 
-  常见派生断言:
-  ├── P ** Q := (P * Q) ∧ (P ∧ Q)  // 强分离（不常用）
-  └── lseg(x, y) := 链表从 x 到 y 的分离归纳断言
+  示例:
+  (x ↦ 5) -* (x ↦ 10)
+  // "如果 x 指向 5，我可以将它变为指向 10"
+  // 对应 Rust: *x = 10（如果我有 &mut）
+
+  规则:
+  ├── 交换律: P * Q = Q * P
+  ├── 结合律: (P * Q) * R = P * (Q * R)
+  ├── emp 是单位元: P * emp = P
+  └── *-intro: P * (P -* Q) ⊢ Q
+
+  与线性逻辑的关系:
+  ├── 分离逻辑的 * 对应线性逻辑的 ⊗
+  ├── 分离逻辑的 -* 对应线性逻辑的 ⊸
+  └── 分离逻辑是直觉主义线性逻辑的变体
 ```
 
-> **断言语言**: 分离逻辑的断言语言是**资源敏感的**——每个断言不仅是真值，还描述了对内存资源的**所有权**。这与 Rust 的类型系统同构：类型不仅描述值的形状，还描述其对内存资源的所有权。
-> [来源: [Iris Lecture Notes](https://iris-project.org/tutorial-pdfs/iris-from-the-ground-up.pdf)]
+> **断言洞察**: **分离蕴含（-*）是 Rust mutable borrow 的形式化对应**——"如果你有独占访问，你可以修改"。
+> [来源: [Iris Lecture Notes](https://iris-project.org/tutorial-pdfs/iris-lecture-notes.pdf)]
 
 ---
 
-### 2.2 从 SL 到并发分离逻辑（CSL）
+### 2.2 Rust 所有权的形式化映射
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
-并发分离逻辑（Concurrent Separation Logic, CSL）:
+Rust 所有权 → 分离逻辑:
 
-  O'Hearn 2007 扩展:
-  ├── 原子命令规则: 原子操作可并行执行，只要它们的 precondition 分离
-  ├── 并行规则:
-  │     {P1} C1 {Q1}    {P2} C2 {Q2}
-  │     ────────────────────────────────  (P1 * P2 成立)
-  │     {P1 * P2} C1 || C2 {Q1 * Q2}
-  └── 含义: 如果两个线程的初始内存分离，则它们可以安全并行
+  所有权:
+  let x = Box::new(42);
+  // 分离逻辑: x ↦ 42
 
-  Rust 的 Send/Sync 与 CSL:
-  ├── T: Send  →  T 的 ownership 可转移到其他线程（资源移动）
-  ├── T: Sync  →  &T 可安全共享（只读资源，满足 * 的只读重叠）
-  └── Sync 对应 CSL 的 "读-读共享": (x ↦ v) 可被多个读者 *-合取
+  移动:
+  let y = x;
+  // 分离逻辑: x ↦ 42 ⊢ y ↦ 42（x 失效）
 
-  局限性:
-  ├── 基础 CSL 不支持细粒度锁（如读写锁）
-  ├── 不支持高阶函数（函数指针、闭包）
-  └── 这些需要 Iris 的扩展
+  借用:
+  let r = &x;
+  // 分离逻辑: x ↦ 42 ⊢ r ↦ x * (x ↦ 42 只读)
+
+  可变借用:
+  let r = &mut x;
+  // 分离逻辑: x ↦ 42 ⊢ r ↦ x * (x 被冻结)
+
+  释放:
+  drop(x);
+  // 分离逻辑: x ↦ 42 ⊢ emp（内存回收）
+
+  借用检查器的分离逻辑视角:
+  ├── &T: 只读共享 (x ↦ v 可以被多个 &T 共享)
+  ├── &mut T: 独占访问 (x ↦ v 只能被一个 &mut T 使用)
+  ├── move: 资源转移 (P * (x ↦ v) ⊢ Q * (y ↦ v))
+  └── 生命周期: 资源有效的时间范围
+
+  关键对应:
+  Rust 的 borrow checker ≈ 分离逻辑的自动定理证明器
+  ├── 编译期检查资源不重叠
+  ├── 验证生命周期约束
+  └── 保证无数据竞争
 ```
 
-> **CSL 洞察**: CSL 的**并行规则**直接解释了 Rust 的 `thread::spawn` 为什么安全——如果两个线程的初始资源（变量所有权）是分离的（通过 move 闭包），则它们可以安全并行。
-> [来源: [O'Hearn 2007 — Resources, Concurrency and Local Reasoning](https://doi.org/10.1016/j.tcs.2006.12.035)]
+> **映射洞察**: **Rust 的 borrow checker 是分离逻辑的"自动版本"**——编译器自动证明程序满足分离逻辑约束。
+> [来源: [RustBelt — Logical Relations](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
 ---
 
-### 2.3 Iris：高阶并发分离逻辑
+### 2.3 Iris 与更高阶分离逻辑
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```mermaid
-graph TD
-    subgraph Iris["Iris 框架层次"]
-        BASE["基础层: 高阶分离逻辑 + 资源代数"]
-        GHOST["幽灵状态层: 不变量 + 协议状态机"]
-        HOCAP["HoCAP: 高阶并发抽象证明"]
-        LAYER["逻辑原子性 + 层次化抽象"]
-    end
+```text
+Iris: 更高阶并发分离逻辑框架
 
-    subgraph RustBelt["RustBelt 应用"]
-        RB1["Rust 类型系统形式化"]
-        RB2["unsafe 代码验证"]
-        RB3["Send/Sync 推导证明"]
-    end
+  核心特性:
+  ├── 更高阶: 可以量化断言
+  ├── 并发: 支持线程和原子操作
+  ├── 模块化: 可组合的不变式
+  └── Ghost State: 虚拟状态用于推理
 
-    BASE --> GHOST --> HOCAP --> LAYER
-    LAYER -->|"实例化"| RB1
-    RB1 --> RB2
-    RB1 --> RB3
+  在 Rust 验证中的应用:
+  ├── RustBelt 使用 Iris 验证 Rust 标准库
+  ├── 证明 Vec, Box, Rc, Arc 的安全性
+  ├── 处理 unsafe 代码的不变性
+  └── 形式化 Send/Sync 的语义
+
+  Iris 资源代数:
+  ├── 定义资源的组合方式
+  ├── 独占资源 (Excl(v)): 只能有一个所有者
+  ├── 共享资源 (Frag(γ, q, v)): 分数所有权
+  └── 授权 (Auth(γ, v)): 读写权限分离
+
+  Ghost State 示例:
+  ├── 验证计数器的单调性
+  ├── 证明无 ABA 问题
+  └── 形式化并发协议
+
+  工具链:
+  ├── Coq + Iris: 交互式证明
+  ├── RustBelt: Rust 特定扩展
+  └── Aneris: 分布式系统扩展
 ```
 
-> **认知功能**: 此图展示 Iris 框架的**层次结构**及其在 RustBelt 中的应用。Iris 不是单一逻辑，而是一个**逻辑框架**——基础层提供高阶分离逻辑，上层提供幽灵状态、协议和原子性抽象。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
-> **使用建议**: 理解 Iris 有助于阅读 RustBelt 论文——RustBelt 使用 Iris 的**不变量**和**协议**来形式化 Rust 的类型系统。
-> **关键洞察**: Iris 的**资源代数**（Resource Algebra）统一了所有权（独占有）、共享（读共享）和放弃（不可恢复）三种资源模式，这与 Rust 的 ownership 系统同构。
-> [来源: [Jung et al. 2018 — Iris from the Ground Up](https://doi.org/10.1017/S0956796818000151)] · [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]
+> **Iris 洞察**: **Iris 将分离逻辑扩展到并发和更高阶场景**——它是验证 Rust unsafe 代码的数学基础。
+> [来源: [Iris Project](https://iris-project.org/)]
 
 ---
 
-## 三、Rust 的应用映射
+## 三、形式化模式矩阵
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
-Rust 概念 ↔ 分离逻辑映射:
+场景 → 分离逻辑工具 → 应用
 
-  Ownership:
-  ├── Rust: let x = Box::new(42);  // x 拥有堆内存
-  └── SL:  x ↦ 42                  // x 指向值 42（拥有该堆单元）
+内存安全验证:
+  → 基本分离逻辑
+  → 证明无 use-after-free, double-free
+  → 对应 Rust 的所有权检查
 
-  Move:
-  ├── Rust: let y = x;  // x 的 ownership 转移到 y
-  └── SL:  (x ↦ v) 蕴含可以推导 (y ↦ v) 且 x 不再指向 v
+并发安全:
+  → Iris
+  → 证明无数据竞争
+  → 验证 atomic 操作的正确性
 
-  Borrow:
-  ├── Rust: let r = &x;  // 共享借用
-  └── SL:  (x ↦ v) 可被分割为 (r ↦ v) * (x ↦ v) 的只读共享
+协议验证:
+  → Actris / Aneris
+  → 验证消息传递协议
+  → 分布式系统的形式化
 
-  Mutable Borrow:
-  ├── Rust: let r = &mut x;  // 独占借用
-  └── SL:  (x ↦ v) 临时转移为 (r ↦ v)，归还后恢复
+Unsafe 代码审计:
+  → RustBelt
+  → 验证 std 的 unsafe 实现
+  → 为 safe API 提供形式化保证
 
-  Drop:
-  ├── Rust: x 离开作用域，内存释放
-  └── SL:  (x ↦ v) 被消费，变为 emp
-
-  Lifetime:
-  ├── Rust: 'a 标注借用有效期
-  └── SL:  幽灵状态协议跟踪资源的生命周期阶段
+资源管理:
+  → 分数分离逻辑
+  → Rc/Arc 的引用计数验证
+  → 共享所有权的正确性
 ```
 
-> **映射洞察**: Rust 的**整个类型系统**可以在分离逻辑中找到对应——这不是巧合，而是 Rust 设计者（尤其是 Niko Matsakis）深受分离逻辑影响的体现。
-> [来源: [RustBelt — Rust 类型系统形式化](https://plv.mpi-sws.org/rustbelt/)]
+> **模式矩阵**: **分离逻辑是连接 Rust 工程实践和形式化验证的桥梁**——它为所有权系统提供了严格的数学语义。
+> [来源: [RustBelt — Methodology](https://plv.mpi-sws.org/rustbelt/popl18/)]
 
 ---
 
@@ -287,23 +349,20 @@ Rust 概念 ↔ 分离逻辑映射:
 
 ```mermaid
 graph TD
-    ROOT["命题: 分离逻辑可以完全形式化 Rust 类型系统"]
-    ROOT --> Q1{"是否包含 unsafe?"}
-    Q1 -->|否| TRUE["✅ RustBelt 已形式化 safe 子集"]
-    Q1 -->|是| Q2{"unsafe 代码是否遵循 Safety 契约?"}
-    Q2 -->|是| PART["⚠️ 部分形式化（需手动证明契约）"]
-    Q2 -->|否| FALSE["❌ 无法形式化（UB 行为）"]
+    ROOT["命题: 所有 Rust 代码都应用分离逻辑验证"]
+    ROOT --> Q1{"是否安全代码?"}
+    Q1 -->|是| COMPILER["✅ 编译器已验证"]
+    Q1 -->|否| Q2{"是否关键路径?"}
+    Q2 -->|是| FORMAL["✅ 形式化验证"]
+    Q2 -->|否| TESTING["⚠️ 测试 + Miri 足够"]
 
-    style TRUE fill:#c8e6c9
-    style PART fill:#fff3e0
-    style FALSE fill:#ffcdd2
+    style COMPILER fill:#c8e6c9
+    style FORMAL fill:#c8e6c9
+    style TESTING fill:#fff3e0
 ```
 
-> **认知功能**: 此决策树展示分离逻辑**形式化 Rust 的边界**——safe 子集已完全形式化（RustBelt），但 unsafe 代码需要额外的手动证明。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
-> **使用建议**: 对于 safe Rust，可以信赖编译器的正确性；对于 unsafe，需要理解底层分离逻辑语义。
-> **关键洞察**: RustBelt 证明的是 **safe Rust → 无 UB**，但**不证明 unsafe Rust 的正确性**——后者是程序员的责任。
-> [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]
+> **认知功能**: **Safe Rust 已由编译器验证**，形式化验证主要针对 **unsafe 代码和安全关键组件**。
+> [来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)]
 
 ---
 
@@ -312,70 +371,87 @@ graph TD
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
-边界 1: 高阶类型
-├── 分离逻辑原生支持一阶指针（x ↦ v）
-├── 高阶函数（&dyn Fn()、泛型闭包）需要 Iris 的扩展
-├── RustBelt 使用 Iris 的 "高阶幽灵状态" 处理这些场景
-└── 证明复杂度显著增加
+边界 1: 验证复杂度
+├── 完整程序验证是 NP-hard/不可判定
+├── 需要简化模型和抽象
+├── 大代码库的验证不现实
+└── 缓解: 验证关键组件，信任编译器
 
-边界 2: 递归类型与所有权
-├── 链表、树等递归数据结构的 ownership 涉及递归分离断言
-├── lseg(x, y) := (x = y ∧ emp) ∨ (∃z. x ↦ z * lseg(z, y))
-├── Rust 编译器通过递归类型检查自动处理
-└── 形式化证明需要归纳不变量
+边界 2: 工具可用性
+├── Iris/Coq 需要深厚的形式化背景
+├── 学习曲线极陡
+├── 与开发工作流集成困难
+└── 缓解: 自动化工具（Kani, Prusti）
 
-边界 3: UnsafeCell 与内部可变性
-├── Cell<T> 允许通过共享引用修改值
-├── 这在基础分离逻辑中不可表达（违反 * 的互斥性）
-├── 解决方案: Iris 的 "原子内存" 或 "协议状态机"
-└── RustBelt 使用特殊资源代数处理 UnsafeCell
+边界 3: Unsafe 的语义鸿沟
+├── RustBelt 覆盖核心语言
+├── 但 LLVM IR 优化可能引入 UB
+├── 编译器 bug 可能破坏保证
+└── 缓解: 验证到 MIR 级别
 
-边界 4: 自引用类型
-├── Pin<&mut T> 保证内存不动性
-├── 分离逻辑原生不追踪内存地址稳定性
-├── 需要扩展: "位置资源"（location resources）或 "令牌"（tokens）
-└── 这是当前形式化研究的活跃领域
+边界 4: 并发验证的复杂性
+├── 并发程序的验证极其困难
+├── 状态空间爆炸
+├── 需要复杂的不变式
+└── 缓解: 模型检查（loom），简化并发模型
+
+边界 5: 与实际硬件的差距
+├── 形式化模型假设理想硬件
+├── 实际有缓存一致性、内存重排序
+├── 硬件 bug 可能破坏软件保证
+└── 缓解: 硬件验证 + 容错设计
 ```
 
-> **边界要点**: 分离逻辑形式化 Rust 的边界主要与**高阶类型**、**递归结构**、**内部可变性**和**不动性**相关。这些边界推动了 Iris 等框架的持续演进。
-> [来源: [Iris 2.0 Paper](https://doi.org/10.1145/3371070)]
+> **边界要点**: 形式化验证的边界主要与**复杂度**、**工具可用性**、**语义鸿沟**、**并发**和**硬件差距**相关。
+> [来源: [The Limitations of Formal Verification](https://www.hillelwayne.com/post/limitations-of-formal/)]
 
 ---
 
 ## 五、常见陷阱
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
-陷阱 1: 混淆 * 与 ∧
-  ❌ (x ↦ 3) ∧ (y ↦ 4)  // 可能 x = y，导致同一地址两个值
+陷阱 1: 混淆分离合取与经典合取
+  ❌ (x ↦ 5) ∧ (y ↦ 10)  // 经典合取，未要求 x ≠ y
+     // 如果 x = y，则矛盾
 
-  ✅ (x ↦ 3) * (y ↦ 4)  // x 和 y 必须指向不同地址
+  ✅ (x ↦ 5) * (y ↦ 10)  // 分离合取，保证 x ≠ y
+     // Rust: let a = Box::new(5); let b = Box::new(10);
 
-陷阱 2: 忽视分离蕴含的语义
-  ❌ P -* Q 表示 "P 推出 Q"
-     // 错误: 不是经典逻辑蕴含，而是资源敏感蕴含
+陷阱 2: 忽视框架规则的副作用
+  ❌ 假设 {P * R} C {Q * R} 中 R 完全不变
+     // 实际上 R 的内部指针可能变化
 
-  ✅ P -* Q 表示 "在已有资源基础上，如果额外获得 P，则能得到 Q"
-     // 这是资源重组的操作，不是真值推导
+  ✅ 确保 R 真正独立于操作
+     // Rust 借用检查器保证这一点
 
-陷阱 3: 认为 SL 只用于程序验证工具
-  ❌ SL 只是 Coq/Isabelle 中的形式化玩具
+陷阱 3: 过度形式化
+  ❌ 尝试验证所有代码
+     // 不现实，收益递减
 
-  ✅ SL 的思想已渗透 Rust 编译器设计:
-     - borrow checker = 帧规则的自动化
-     - ownership = 分离资源管理
-     - lifetimes = 资源协议的编译期检查
+  ✅ 聚焦关键路径和 unsafe 边界
+     // 安全代码由编译器保证
 
-陷阱 4: 过度追求完全形式化
-  ❌ 试图用 Iris 证明每个函数的 correctnes
+陷阱 4: 忽略工具限制
+  ❌ 假设形式化工具无 bug
+     // 工具本身可能有缺陷
 
-  ✅ 形式化是验证关键不安全抽象的工具
-     日常代码依赖编译器的自动化保证
+  ✅ 交叉验证，使用多个工具
+     // Kani + Miri + 测试
+
+陷阱 5: 抽象的精度损失
+  ❌ 过度简化模型
+     // 遗漏关键行为
+
+  ✅ 逐步细化模型
+     // 从核心属性开始
 ```
 
-> **陷阱总结**: 分离逻辑的主要陷阱源于其与**经典逻辑**的差异（资源敏感性 vs 真值敏感性）以及**理论与实践**的鸿沟（形式化工具 vs 编译器实现）。
-> [来源: [Separation Logic Tutorial — O'Hearn](https://doi.org/10.1145/3211968)]
+> **陷阱总结**: 形式化验证的陷阱主要与**逻辑混淆**、**框架规则假设**、**过度形式化**、**工具限制**和**抽象精度**相关。
+> [来源: [Formal Verification Pitfalls](https://www.hillelwayne.com/post/limitations-of-formal/)]
 
 ---
 
@@ -385,29 +461,19 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf) | ✅ 一级 | 奠基论文 |
-| [O'Hearn 2019 — Separation Logic](https://doi.org/10.1145/3211968) | ✅ 一级 | CACM 综述 |
-| [Iris Framework](https://iris-project.org/) | ✅ 一级 | 高阶并发分离逻辑 |
-| [RustBelt Paper](https://doi.org/10.1145/3158154) | ✅ 一级 | Rust 类型系统形式化 |
-| [Jung et al. 2018 — Iris from the Ground Up](https://doi.org/10.1017/S0956796818000151) | ✅ 一级 | Iris 教程论文 |
-| [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic) | ✅ 三级 | 入门概述 |
+| [Reynolds — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf) | ✅ 一级 | 原始论文 |
+| [Iris Project](https://iris-project.org/) | ✅ 一级 | 框架主页 |
+| [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ 一级 | Rust 形式化验证 |
+| [Separation Logic Wikipedia](https://en.wikipedia.org/wiki/Separation_logic) | ✅ 一级 | 概念介绍 |
+| [Viper](https://www.pm.inf.ethz.ch/research/viper.html) | ✅ 一级 | 验证基础设施 |
 
 ---
 
 ```rust
 fn main() {
     let mut x = 5;
-    let y = &mut x;
-    *y += 1;
-    println!("{}", x); // 6
-}
-```
-
-```rust
-fn main() {
-    let s1 = String::from("hello");
-    let s2 = s1.clone();
-    println!("{} {}", s1, s2);
+    x += 1;
+    println!("{}", x);
 }
 ```
 
@@ -417,16 +483,16 @@ fn main() {
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-- [Ownership Formal](./03_ownership_formal.md) — 所有权形式化
-- [RustBelt](./04_rustbelt.md) — Rust 类型系统形式化证明
-- [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
-- [Type Theory](./02_type_theory.md) — 类型论基础
+- [Linear Logic](./01_linear_logic.md) — 线性逻辑
+- [Ownership Formalization](./03_ownership_formal.md) — 所有权形式化
+- [RustBelt](./04_rustbelt.md) — RustBelt 验证
+- [Type Theory](./02_type_theory.md) — 类型论
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Iris Project](https://iris-project.org/), [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -498,6 +564,34 @@ fn main() {
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -516,6 +610,16 @@ fn main() {
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -525,3 +629,5 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

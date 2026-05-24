@@ -9,6 +9,13 @@
 
 ---
 
+> ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。
+>
+> **使用方式**: `rustup run nightly rustc ...` 或 `cargo +nightly ...`
+> **状态查询**: <https://doc.rust-lang.org/nightly/unstable-book/index.html>
+> **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
+
+---
 > **来源**: [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) · [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) · [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/2021/09/06/Separating-contract-and-implementation.html) · [Rust Reference — Trait Implementations](https://doc.rust-lang.org/reference/items/implementations.html) · [Wikipedia — Multiple Dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
 
 ## 📑 目录

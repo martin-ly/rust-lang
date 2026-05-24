@@ -9,6 +9,13 @@
 
 ---
 
+> ⚠️ **不稳定特性警告**: 本文件包含 `#![feature(...)]` 标注的代码示例，需要 **nightly 工具链** 编译。
+>
+> **使用方式**: `rustup run nightly rustc ...` 或 `cargo +nightly ...`
+> **状态查询**: <https://doc.rust-lang.org/nightly/unstable-book/index.html>
+> **注意**: 不稳定特性可能在后续版本中变更或移除，生产代码应避免依赖。
+
+---
 > **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) · [RFC 3086 — Portable SIMD](https://github.com/rust-lang/rfcs/pull/3086) · [RFC 1398 — Global Allocators](https://github.com/rust-lang/rfcs/pull/1398) · [RFC 3185 — Static Async Traits](https://github.com/rust-lang/rfcs/pull/3185) · [RFC 2515 — Type Alias Impl Trait](https://github.com/rust-lang/rfcs/pull/2515) · [Rust Internals — 2027 Edition Wishlist](https://internals.rust-lang.org/) · [Rust Foundation Roadmap](https://foundation.rust-lang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [RFC 3516 — gen blocks](https://github.com/rust-lang/rfcs/pull/3516)
 
 ## 📑 目录

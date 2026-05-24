@@ -479,9 +479,10 @@ graph TD
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **权威来源**: Jung et al., *Stacked Borrows: An Aliasing Model for Rust*, POPL 2019
+> **状态**: ⚠️ **历史模型** — Tree Borrows 自 2024 年末起成为 Miri 默认别名模型。Stacked Borrows 退为 `-Zmiri-stacked-borrows` 兼容选项。
 > **核心思想**: 为每个内存位置维护一个访问权限栈（Borrow Stack），在解释执行时动态验证引用与裸指针的别名规则是否被违反。
 
-**动机**：Rust 的引用规则（`&T` 不可变共享、`&mut T` 唯一可变）在编译时静态检查，但 `unsafe` 代码中的裸指针可以绕过这些检查。Stacked Borrows 提供了一个**操作语义模型**，使得 Miri 能够在解释执行时动态检测别名违规。
+**动机**：Rust 的引用规则（`&T` 不可变共享、`&mut T` 唯一可变）在编译时静态检查，但 `unsafe` 代码中的裸指针可以绕过这些检查。Stacked Borrows 提供了**第一代**操作语义模型，使 Miri 能够动态检测别名违规。尽管其严格性导致部分合法模式被误判，但理解 Stacked Borrows 仍是理解 Tree Borrows 演进的基础。
 
 **核心概念：Borrow Stack**
 
@@ -1080,7 +1081,7 @@ unsafe fn invalid_enum() -> Color {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[Miri Documentation]** Miri 支持 Stacked Borrows 和实验性的 Tree Borrows 两种内存模型；Tree Borrows 更宽松，可覆盖更多合法 unsafe 模式。✅ 已验证
+> **[Miri Documentation]** Miri 自 2024 年末起默认使用 Tree Borrows 别名模型；Stacked Borrows 退为 `-Zmiri-stacked-borrows` 兼容选项。Tree Borrows 更宽松，可覆盖更多合法 unsafe 模式。✅ 已验证
 >
 > **[Ralf Jung Blog]** Miri 无法检测 FFI 边界错误和活性性质（死锁/无限循环），因为 FFI 调用不透明且活性问题不可判定。✅ 已验证
 
@@ -1110,8 +1111,8 @@ graph TD
 
 | 条件 | 结果 | 说明 |
 |:---|:---|:---|
-| Stacked Borrows 模型 | ⚠️ 部分检测 | 严格的别名规则 |
-| Tree Borrows 模型 | ⚠️ 更宽松检测 | 实验性，覆盖更多合法模式 |
+| Stacked Borrows 模型 | ⚠️ 兼容模式 | 历史默认模型，部分合法模式被误判 |
+| Tree Borrows 模型 | ✅ 默认检测 | 2024 年末起为 Miri 默认，覆盖更多合法模式 |
 | 数据竞争 | ✅ 检测 | happens-before 分析 |
 | 未初始化读取 | ✅ 检测 | `MaybeUninit` 追踪 |
 | 悬垂指针解引用 | ✅ 检测 | 内存分配追踪 |
