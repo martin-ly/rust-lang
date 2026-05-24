@@ -37,6 +37,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：宏模式的编译错误](#十边界测试宏模式的编译错误)
+    - [10.1 边界测试：`macro_rules!` 的优先级与贪婪匹配（编译错误）](#101-边界测试macro_rules-的优先级与贪婪匹配编译错误)
+    - [10.2 边界测试：宏中的 hygiene 与变量捕获（编译错误）](#102-边界测试宏中的-hygiene-与变量捕获编译错误)
 
 ---
 
@@ -592,3 +595,101 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：宏模式的编译错误
+
+### 10.1 边界测试：`macro_rules!` 的优先级与贪婪匹配（编译错误）
+
+```rust,compile_fail
+macro_rules! ambiguous {
+    ($e:expr) => { println!("expr: {}", $e) };
+    ($i:ident) => { println!("ident: {}", $i) };
+}
+
+fn main() {
+    let x = 5;
+    // ❌ 编译错误: macro expansion errors (根据实现可能匹配第一个分支)
+    // macro_rules 按顺序匹配，第一个匹配的分支被使用
+    // $e:expr 匹配 x，因此永远不会匹配 $i:ident
+    ambiguous!(x); // 实际匹配 expr 分支
+}
+
+// 正确: 更具体的模式放在前面
+macro_rules! ordered {
+    ($i:ident) => { println!("ident: {}", $i) };
+    ($e:expr) => { println!("expr: {}", $e) };
+}
+```
+
+> **修正**: `macro_rules!` 采用**顺序贪婪匹配**——从上到下尝试每个分支，第一个成功匹配的分支被展开。更通用的模式（如 `$e:expr`）若排在前面，会阻止后面更具体的模式（如 `$i:ident`）被匹配。这与正则表达式的贪婪匹配类似，但宏的匹配是结构化的（基于 token tree）。设计宏时必须将最具体的模式放在前面，通用模式放在后面。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：宏中的 hygiene 与变量捕获（编译错误）
+
+```rust,compile_fail
+macro_rules! declare_x {
+    () => {
+        let x = 42;
+    };
+}
+
+fn main() {
+    declare_x!();
+    // ❌ 编译错误: cannot find value `x` in this scope
+    // macro_rules! 默认具有 hygiene，宏内部定义的变量不在外部可见
+    println!("{}", x);
+}
+
+// 正确: 将值作为表达式返回
+macro_rules! get_x {
+    () => { 42 };
+}
+
+fn fixed() {
+    let x = get_x!();
+    println!("{}", x); // ✅ x 在宏外部定义
+}
+```
+
+> **修正**: Rust 的宏系统具有**卫生性**（hygiene）——宏内部定义的标识符不会与外部作用域冲突。`let x = 42;` 在宏内部定义的 `x` 只在宏展开后的代码块内可见，外部无法访问。这与 C 的宏（文本替换，无卫生性）形成鲜明对比。 hygiene 通过给宏生成的标识符附加唯一上下文标记实现，确保宏不会意外污染调用者的命名空间。若需从宏返回值，应使用表达式（`42`）而非绑定语句（`let x = 42`）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：`tt` muncher 的 token 消耗（编译错误）
+
+```rust,compile_fail
+macro_rules! count_tts {
+    () => { 0 };
+    ($odd:tt $($a:tt $b:tt)*) => { 1 + count_tts!($($a)*) };
+}
+
+fn main() {
+    // ❌ 编译错误: token 模式不匹配导致递归异常
+    // count_tts!(1 2 3) — 3 个 token，但模式假设成对
+    let n = count_tts!(1 2);
+    println!("{}", n);
+}
+```
+
+> **修正**: `tt` muncher 是 Rust 声明宏的高级技巧：递归地消耗 token tree（`tt`），每次处理一个或一对 token。模式的精确性至关重要：`($odd:tt $($a:tt $b:tt)*)` 要求奇数个 token（1 + 2*n），偶数个 token 时无匹配 arm。`tt` muncher 的复杂性：1) token 边界（`1 + 2` 是 3 个 tt 还是 5 个？）；2) 递归深度限制；3) 模式优先级（第一个匹配的 arm 被使用）。这是 Rust 宏系统的"暗艺术"——强大但难以调试。现代替代：过程宏（`proc_macro`）提供完整的 token 解析能力，更易维护。这与 Lisp 的宏（同样基于 S-expression 的递归处理）或 C 的预处理器（无递归，纯文本替换）不同——Rust 的 `tt` muncher 在声明宏的有限表达能力中实现了过程宏的部分功能。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
+
+### 10.4 边界测试：宏生成的 `unsafe` 块边界（编译错误）
+
+```rust,compile_fail
+macro_rules! unsafe_op {
+    ($op:expr) => {
+        unsafe { $op }
+    };
+}
+
+fn main() {
+    let ptr = &mut 5 as *mut i32;
+    // ❌ 编译错误: unsafe_op! 生成的 unsafe 块封装了 $op，
+    // 但调用者仍需 unsafe 块调用宏？
+    // unsafe_op!(*ptr = 10); // 若宏展开为 unsafe { *ptr = 10 }，
+    // 调用在 safe 代码中，但 unsafe 块在宏内部
+    // 实际上: 宏生成的 unsafe 块在调用处，因此不需要外部 unsafe
+    // 但以下错误:
+    let x = unsafe_op!(*ptr);
+    println!("{}", x);
+}
+```
+
+> **修正**: 宏生成的 `unsafe` 块的可见性取决于宏设计。`unsafe_op!` 在展开代码中创建 `unsafe` 块，因此调用者不需要额外的 `unsafe`——这**隐藏了 unsafe 边界**，是危险的做法。Rust 社区的最佳实践：unsafe 操作应在调用点可见，即 `unsafe { unsafe_op!(...) }`，让代码审查者一眼看到 unsafe。`std` 中的某些宏（如 `vec!`）内部使用 unsafe，但经过了严格审计。自定义宏应避免隐藏 unsafe，或使用 `unsafe` 关键字要求调用者显式标记。这与 C 的宏（常隐藏 `*` 解引用、指针运算等 unsafe 操作）或 C++ 的模板（unsafe 在模板内部，调用点不可见）不同——Rust 的 unsafe 块是语法层面的，宏展开后仍保留，可通过源码映射追踪。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]

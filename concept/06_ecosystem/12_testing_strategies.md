@@ -39,6 +39,12 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：测试策略的编译错误](#十边界测试测试策略的编译错误)
+    - [10.1 边界测试：`#[should_panic]` 的误用（测试失败）](#101-边界测试should_panic-的误用测试失败)
+    - [10.2 边界测试：异步测试的运行时要求（编译错误）](#102-边界测试异步测试的运行时要求编译错误)
+    - [10.3 边界测试：属性宏测试的顺序依赖（运行时测试失败）](#103-边界测试属性宏测试的顺序依赖运行时测试失败)
+    - [10.4 边界测试：`mockall` 的泛型 mock 限制（编译错误）](#104-边界测试mockall-的泛型-mock-限制编译错误)
+    - [10.5 边界测试：属性测试的 shrink 陷阱（测试覆盖盲区）](#105-边界测试属性测试的-shrink-陷阱测试覆盖盲区)
 
 ---
 
@@ -579,3 +585,106 @@ jobs:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：测试策略的编译错误
+
+### 10.1 边界测试：`#[should_panic]` 的误用（测试失败）
+
+```rust
+#[test]
+#[should_panic]
+fn test_panic() {
+    // ❌ 测试失败: 若代码没有 panic，should_panic 测试失败
+    let x = 42;
+    assert_eq!(x, 42); // 不 panic，测试失败！
+}
+
+// 正确: 确保被测代码确实 panic
+#[test]
+#[should_panic(expected = "index out of bounds")]
+fn test_panic_fixed() {
+    let v = vec![1, 2, 3];
+    let _ = v[100]; // ✅ panic!
+}
+```
+
+> **修正**: `#[should_panic]` 标记测试用例期望 panic，若测试正常完成则失败。`expected` 参数可指定期望的 panic 消息子串，防止捕获错误的 panic。这与 JUnit 的 `@Test(expected = Exception.class)` 或 pytest 的 `pytest.raises` 类似，但 Rust 的 `should_panic` 更严格——必须实际 panic，不能只抛出异常（Rust 没有异常）。在测试 unsafe 代码的边界条件时，`should_panic` 是验证编译期无法阻止的运行时错误的唯一方式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：异步测试的运行时要求（编译错误）
+
+```rust,compile_fail
+#[test]
+async fn async_test() {
+    // ❌ 编译错误: async test 需要 tokio::test 或类似宏
+    // 标准库的 test runner 不支持直接运行 async 函数
+    let result = async_op().await;
+    assert_eq!(result, 42);
+}
+
+async fn async_op() -> i32 { 42 }
+
+// 正确: 使用 tokio::test
+// #[tokio::test]
+// async fn async_test_fixed() {
+//     let result = async_op().await;
+//     assert_eq!(result, 42);
+// }
+```
+
+> **修正**: Rust 的标准测试运行时不支持 `async fn` 测试——`#[test]` 期望函数返回 `()`，而 `async fn` 返回 `Future`。`tokio::test`、`async_std::test` 等宏将异步测试包装在 `block_on` 中，自动执行 Future。这与 JavaScript 的 `async` 测试（测试框架自动 await）不同——Rust 要求显式选择运行时。这种显式性避免了隐式运行时依赖，但增加了测试代码的样板。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
+### 10.3 边界测试：属性宏测试的顺序依赖（运行时测试失败）
+
+```rust,compile_fail
+static mut COUNTER: i32 = 0;
+
+#[test]
+fn test_a() {
+    unsafe { COUNTER += 1; }
+    assert_eq!(unsafe { COUNTER }, 1);
+}
+
+#[test]
+fn test_b() {
+    unsafe { COUNTER += 1; }
+    assert_eq!(unsafe { COUNTER }, 1); // ❌ 可能失败（并行执行时）
+}
+```
+
+> **修正**: `cargo test` 默认并行执行测试（`--test-threads` 默认为 CPU 核心数），共享可变状态（`static mut`、文件系统、数据库）导致测试不稳定（flaky tests）。解决方案：1) 使用 `std::sync::atomic::AtomicI32`（线程安全）；2) 每个测试使用独立资源（临时目录、`uuid` 命名）；3) `#[serial]` 属性（`serial_test` crate）强制串行执行；4) `cargo test -- --test-threads=1`（全局串行）。Rust 的测试框架（`libtest`）与 Java 的 JUnit（`@Before`/`@After` 隔离）、Go 的 `testing`（顺序执行，但 `t.Parallel()` 启用并发）类似，但 Rust 的默认并行更激进。测试策略的核心原则：**测试必须独立、可重复、无副作用**。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] · [来源: [serial_test Crate](https://docs.rs/serial_test/)]
+
+### 10.4 边界测试：`mockall` 的泛型 mock 限制（编译错误）
+
+```rust,compile_fail
+use mockall::automock;
+
+#[automock]
+trait Repository<T> {
+    fn find(&self, id: i32) -> Option<T>;
+}
+
+fn main() {
+    // ❌ 编译错误: automock 生成的 MockRepository 对泛型参数的处理复杂
+    // let mut mock = MockRepository::<String>::new();
+    // mock.expect_find().returning(|_| Some("data".to_string()));
+}
+```
+
+> **修正**: `mockall` 是 Rust 的功能强大的 mock 库，但泛型 trait 的 mocking 存在限制：`automock` 为每个具体类型实例生成 mock（`MockRepository_String`），而非保留泛型。这使得泛型 trait 的 mock 使用繁琐，且不支持某些高级场景（如关联类型、where clause）。替代方案：1) 手动实现 mock（手写 struct + trait impl）；2) 使用 `mockiato`（另一 mock 库，支持泛型更好）；3) 将泛型 trait 包装为具体 trait（`trait StringRepository: Repository<String> {}`）。Rust 的宏系统在生成泛型代码时的限制是生态的共同挑战：proc macro 在泛型上操作 AST，而非类型实例化后的代码。这与 Java 的 Mockito（通过反射和字节码生成 mock，支持泛型）或 C++ 的 GoogleMock（模板元编程，支持泛型）不同——Rust 的静态类型和宏系统使 mock 更受限但更类型安全。[来源: [mockall Documentation](https://docs.rs/mockall/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)]
+
+### 10.5 边界测试：属性测试的 shrink 陷阱（测试覆盖盲区）
+
+```rust,compile_fail
+use proptest::prelude::*;
+
+proptest! {
+    #[test]
+    fn test_division(a in 1..100i32, b in 1..100i32) {
+        let _ = a / b; // 当 b == 0 时 panic，但范围排除了 0
+    }
+}
+
+// ⚠️ 测试盲区: 属性测试的生成范围可能遗漏边界值
+```
+
+> **修正**: 属性测试（Property-Based Testing）通过随机生成输入验证不变量，但**生成策略**决定覆盖范围。`1..100` 排除了 0、负数、大数——若 `division` 的实际输入可能为 0，测试通过但生产环境 panic。Proptest 的 shrink：测试失败时，尝试简化反例（如 `100` → `50` → `25` → `0`），但若 0 不在生成范围，无法发现。最佳实践：1) 生成范围覆盖全部有效域（`any::<i32>()`）；2) 使用 `prop_filter` 排除无效输入，而非缩小范围；3) 结合单元测试覆盖边界值（`i32::MIN / -1` 的溢出）。这与 QuickCheck（Haskell，类似）或 Hypothesis（Python，shrink 更智能）类似——属性测试不能替代边界值分析，而是补充随机覆盖。[来源: [proptest Book](https://proptest-rs.github.io/proptest/intro.html)] · [来源: [QuickCheck Paper](https://doi.org/10.1145/263690.263804)]

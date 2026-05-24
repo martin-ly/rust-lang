@@ -39,6 +39,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
+    - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](#101-边界测试wasm32-目标的标准库限制编译错误)
+    - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](#102-边界测试wasm-bindgen-的类型映射编译错误)
+    - [10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）](#103-边界测试wasm-的线性内存与-rust-引用的不兼容性编译错误)
+    - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
 
 ---
 
@@ -479,3 +484,72 @@ Rust Wasm 工具链:
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+## 十、边界测试：WebAssembly 的编译错误
+
+### 10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）
+
+```rust,compile_fail
+#![no_main]
+
+use std::thread;
+
+fn main() {
+    // ❌ 编译错误: `std::thread` 在 wasm32-unknown-unknown 目标不可用
+    // WebAssembly 是单线程模型（无原生线程支持）
+    thread::spawn(|| {
+        println!("hello from thread");
+    });
+}
+
+// 正确: 使用 wasm-bindgen-futures 进行异步编程
+// 或使用 Web Workers（通过 js-sys）
+```
+
+> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块不可用。WebAssembly 的线程支持通过 `wasm32-wasi` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
+
+### 10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）
+
+```rust,compile_fail
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn process(data: String) -> Vec<u8> {
+    data.into_bytes()
+}
+
+// ❌ 编译错误: wasm-bindgen 不直接支持 Vec<u8> 返回类型
+// 需要返回 JsValue 或使用 #[wasm_bindgen] 标记的类型
+```
+
+> **修正**: `wasm-bindgen` 在 Rust 和 JavaScript 之间自动生成绑定代码，但不是所有 Rust 类型都可自动映射。`String`、`Vec<T>`（特定 T）、`Option<T>` 等支持自动转换，但自定义结构体需要 `#[wasm_bindgen]` 标记，复杂类型需手动序列化为 `JsValue`。这与 AssemblyScript 的自动类型映射不同——Rust 的设计更保守，要求显式控制 FFI 边界，避免隐式转换导致的性能问题或语义差异。[来源: [wasm-bindgen Documentation](https://rustwasm.github.io/wasm-bindgen/)]
+
+### 10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）
+
+```rust,compile_fail
+#![no_std]
+
+#[no_mangle]
+pub extern "C" fn process(data: *mut u8, len: usize) {
+    // ❌ 运行时 UB: 直接将原始指针转为 &mut [u8] 不安全
+    // 需验证指针非空、对齐、在 WASM 线性内存范围内
+    let slice = unsafe { core::slice::from_raw_parts_mut(data, len) };
+    slice[0] = 1;
+}
+```
+
+> **修正**: WASM 的线性内存（Linear Memory）是一个连续的 byte 数组，Rust 的引用（`&T`、`&mut T`）要求**非空、对齐、有效**。从 host 传递的指针可能：1) 为 null；2) 未对齐；3) 越界。`slice::from_raw_parts_mut` 不验证这些条件，违反即 UB。安全封装：1) 验证 `data != null`；2) 验证 `data + len <= memory_size`；3) 使用 `wasm-bindgen` 生成的绑定（自动处理类型转换）。这与 C 的 WASM 模块（同样需验证指针）或 AssemblyScript（类型安全的 TypeScript 子集编译到 WASM）类似——WASM 的低级接口需要显式安全检查。`wasm-bindgen` 和 `wit-bindgen` 提供高层绑定生成，减少手动指针操作。[来源: [WASM Linear Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [wasm-bindgen Documentation](https://rustwasm.github.io/wasm-bindgen/)]
+
+### 10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）
+
+```rust,compile_fail
+#![no_std]
+
+fn main() {
+    // ❌ 运行时陷阱: no_std WASM 中 panic 默认调用 `unreachable`
+    // 导致 WASM 陷阱（trap），宿主环境难以调试
+    panic!("something went wrong");
+}
+```
+
+> **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasi` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]

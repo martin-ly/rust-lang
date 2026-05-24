@@ -1003,3 +1003,112 @@ func ParseJSON(input string) string {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **相关文件**: [Rust vs C++](./01_rust_vs_cpp.md) · [范式矩阵](./03_paradigm_matrix.md) · [问题图谱](../00_meta/problem_graph.md#三并发系统设计问题树)
+
+## 十、边界测试：Rust 与 Go 的编译错误对比
+
+### 10.1 边界测试：Go 的隐式接口 vs Rust 的显式 trait（编译错误）
+
+```rust,compile_fail
+trait Reader {
+    fn read(&mut self, buf: &mut [u8]) -> usize;
+}
+
+struct MyReader;
+
+// ❌ 编译错误: `MyReader` 未实现 `Reader`
+// Rust 要求显式 impl trait
+fn use_reader<R: Reader>(r: &mut R) {
+    let mut buf = [0u8; 1024];
+    r.read(&mut buf);
+}
+
+fn main() {
+    let mut r = MyReader;
+    use_reader(&mut r);
+}
+
+// 正确: 显式实现 trait
+impl Reader for MyReader {
+    fn read(&mut self, buf: &mut [u8]) -> usize {
+        buf.len()
+    }
+}
+```
+
+> **Go 对比**: Go 使用**结构类型**（structural typing）——只要类型有对应方法，就自动满足接口。Rust 使用**名义类型**（nominal typing）——必须显式 `impl Trait for Type`。Go 的隐式接口减少样板代码，但可能导致" accidentally satisfied" 接口（类型无意间实现接口，产生意外行为）。Rust 的显式实现增加代码量，但确保接口实现是设计者的有意选择，且编译错误更精确。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：Go 的 nil 指针与 Rust 的 `Option`（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: `Option<&str>` 不能直接与字符串比较
+    // Rust 没有 nil 指针，空引用用 Option::None 表示
+    let s: Option<&str> = None;
+    // if s == nil { ... } // 编译错误
+}
+
+// 正确: 使用 Option 进行显式空值处理
+fn fixed() {
+    let s: Option<&str> = None;
+    match s {
+        Some(val) => println!("{}", val),
+        None => println!("empty"), // ✅ 显式处理空值
+    }
+}
+```
+
+> **Go 对比**: Go 的 `nil` 是指针类型的零值，空接口值也是 `nil`，但**接口值包含类型和值两部分**。Go 中 `var p *int = nil` 是合法的空指针，但解引用会导致运行时 panic。Rust 没有 `nil` 指针——引用（`&T`、`&mut T`）永远有效，`Option<T>` 显式编码可空值。`None` 和 `Some` 在类型层面区分，编译器强制处理两种情况。这消除了 Go/C 中常见的 nil pointer dereference 漏洞。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：Go 的接口与 Rust 的 trait 的隐式实现差异（编译错误）
+
+```rust,compile_fail
+// Go: 隐式实现接口（struct 有方法即实现接口）
+// type Reader interface { Read(p []byte) (n int, err error) }
+// type MyStruct struct {}
+// func (m MyStruct) Read(p []byte) (int, error) { return 0, nil }
+// MyStruct 自动实现 Reader
+
+// Rust: 必须显式 impl trait for type
+trait Reader {
+    fn read(&mut self, buf: &mut [u8]) -> std::io::Result<usize>;
+}
+
+struct MyStruct;
+
+// ❌ 编译错误: 若忘记显式 impl Reader for MyStruct
+// 即使有同名方法，也不算实现 trait
+
+fn use_reader<R: Reader>(r: &mut R) {
+    let mut buf = [0u8; 1024];
+    r.read(&mut buf).unwrap();
+}
+
+fn main() {
+    let mut s = MyStruct;
+    // use_reader(&mut s); // 编译错误
+}
+```
+
+> **修正**: Go 的接口是**结构化**的（structural）：任何类型只要有接口要求的方法，就自动实现该接口。Rust 的 trait 是**名义化**的（nominal）：必须显式 `impl Trait for Type`，即使类型已有同名方法。这是设计哲学的差异：Go 追求隐式、简洁，但方法签名不匹配时产生难以调试的错误；Rust 追求显式、安全，trait 实现是契约的明确声明。Rust 的显式实现也支持**孤儿规则**（orphan rule）：不能为外部类型实现外部 trait，防止意外冲突。Go 无此限制，但不同包的方法可能意外"实现"接口。这与 Haskell 的 typeclass（名义化，需 `instance` 声明）或 Scala 的 structural types（类似 Go 的隐式实现）类似——Rust 选择了 Haskell 的名义化路径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Go Interfaces](https://go.dev/tour/methods/9)]
+
+### 10.4 边界测试：Go 的 nil 与 Rust 的 `Option` 的语义差异（编译错误）
+
+```rust,compile_fail
+// Go: interface 值可为 nil，但 nil interface 不等于 nil
+// var p *int = nil
+// var i interface{} = p
+// i != nil // true! 因为 interface 包含类型信息
+
+fn main() {
+    let p: Option<&i32> = None;
+    // Rust: Option<&i32> 的 None 是明确的"无值"
+    // 没有 "typed nil" 的概念
+    
+    // ❌ 逻辑错误: 从 C/Go 迁移到 Rust 时，可能用裸指针模拟 nil
+    let raw: *const i32 = std::ptr::null();
+    // 空指针不是 Option，解引用是 UB
+    // unsafe { println!("{}", *raw); } // UB!
+}
+```
+
+> **修正**: Go 的 `nil` 是多重含义的：指针 nil、接口 nil、channel nil、map nil、slice nil，且 "nil interface" 不等于 "nil 指针放入 interface"。Rust 用 `Option<T>` 统一表达"可能无值"：`Option<&T>` 的 `None` 对应 nil 指针，`Option<Box<T>>` 的 `None` 对应 nil 堆指针。Rust 无隐式 nil：所有引用必须有效（或显式 `Option`），裸指针可能为 null 但只能在 `unsafe` 中解引用。这与 Go 的 "nil 是零值"（所有引用类型的默认值）或 Java 的 `null`（所有引用类型的默认值）不同——Rust 消除了 billion-dollar mistake（Tony Hoare 对 null 的称呼）通过类型系统强制显式处理缺失值。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Null References: The Billion Dollar Mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/)]

@@ -33,6 +33,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：类型擦除的编译错误](#十边界测试类型擦除的编译错误)
+    - [10.1 边界测试：`dyn Trait` 的大小未知（编译错误）](#101-边界测试dyn-trait-的大小未知编译错误)
+    - [10.2 边界测试：trait object 的方法返回 `Self`（编译错误）](#102-边界测试trait-object-的方法返回-self编译错误)
 
 ---
 
@@ -718,3 +721,93 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：类型擦除的编译错误
+
+### 10.1 边界测试：`dyn Trait` 的大小未知（编译错误）
+
+```rust,compile_fail
+trait Drawable {
+    fn draw(&self);
+}
+
+struct Canvas;
+
+impl Canvas {
+    // ❌ 编译错误: `dyn Drawable` 的大小在编译期未知
+    // trait object 是 DST（动态大小类型），不能直接作为值类型
+    fn add(&mut self, item: dyn Drawable) {}
+}
+
+// 正确: 使用 Box 或引用
+impl Canvas {
+    fn add_boxed(&mut self, item: Box<dyn Drawable>) {} // ✅ Box 大小固定
+    fn add_ref(&mut self, item: &dyn Drawable) {}       // ✅ 引用大小固定
+}
+```
+
+> **修正**: `dyn Trait` 是动态大小类型（DST），编译器无法在编译期确定其大小（不同实现类型大小不同）。DST 不能直接作为函数参数、返回值或变量类型，必须放在指针后面：`Box<dyn Trait>`（拥有）、`&dyn Trait`（借用）、`&mut dyn Trait`（可变借用）。这与 C++ 的虚函数表指针类似，但 Rust 的 `dyn` 是显式语法，编译器拒绝隐式类型擦除。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：trait object 的方法返回 `Self`（编译错误）
+
+```rust,compile_fail
+trait Cloneable {
+    fn clone(&self) -> Self; // 返回 Self
+}
+
+struct Button;
+impl Cloneable for Button {
+    fn clone(&self) -> Self { Button }
+}
+
+fn make_clone(obj: &dyn Cloneable) -> Box<dyn Cloneable> {
+    // ❌ 编译错误: `Self` 在 trait object 中不允许
+    // trait object 在运行时才知具体类型，无法确定 Self 的大小
+    Box::new(obj.clone())
+}
+
+// 正确: 使用 dyn_clone crate 或修改 trait 设计
+// trait Cloneable {
+//     fn clone_box(&self) -> Box<dyn Cloneable>; // 返回固定大小类型
+// }
+```
+
+> **修正**: Trait object 在运行时通过 vtable 动态分发，vtable 中的方法签名必须是"对象安全"（object-safe）的。返回 `Self` 的方法不是对象安全的，因为编译器无法在编译期确定 `Self` 的具体类型和大小。类似地，泛型方法（`fn method<T>(&self, t: T)`）也不是对象安全的——vtable 无法存储无限多单态化版本。Rust 编译器在 trait 定义时检查对象安全性，拒绝将非对象安全 trait 转为 `dyn Trait`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）
+
+```rust,compile_fail
+use std::any::Any;
+
+fn main() {
+    let s = String::from("hello");
+    let any: &dyn Any = &s;
+    // ❌ 编译错误: Any 要求 'static，&String 不是 'static
+    // let s2 = any.downcast_ref::<String>().unwrap();
+}
+```
+
+> **修正**: `dyn Any` 要求底层类型是 `'static`，因为 `Any` trait 的 `type_id` 方法在运行时识别类型，而运行时需要类型在程序生命周期内稳定。带生命引用的类型（`&'a String`）不能转为 `dyn Any`，因为 `'a` 可能短于 `'static`。解决方案：1) 使用 `Any` 时只处理 `'static` 类型（`String`、`Vec<T>`、`i32`）；2) 对非 `'static` 类型使用自定义 trait object 或 enum；3) 使用 `unsafe` 和裸指针绕过（不推荐）。这与 Java 的 `instanceof`（无生命周期限制）或 C++ 的 `dynamic_cast`（无生命周期限制）不同——Rust 的生命周期系统渗透到运行时类型擦除，确保即使动态分派也不违反内存安全。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/any/trait.Any.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+
+### 10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）
+
+```rust,compile_fail
+trait Processor {
+    fn process<T: Default>(&self) -> T;
+}
+
+struct MyProcessor;
+
+impl Processor for MyProcessor {
+    fn process<T: Default>(&self) -> T {
+        T::default()
+    }
+}
+
+fn main() {
+    // ❌ 编译错误: Processor 不是对象安全的，因为有泛型方法
+    // let p: Box<dyn Processor> = Box::new(MyProcessor);
+}
+```
+
+> **修正**: Trait 对象（`dyn Trait`）通过 vtable 实现动态分发，vtable 在编译期生成，包含所有方法的函数指针。泛型方法（`fn process<T>`）无法在 vtable 中表示，因为 `T` 的可能实例无限——编译器不能为所有类型生成函数指针。因此含泛型方法的 trait 不是**对象安全**的（object-safe），不能作为 `dyn Trait` 使用。这与 C++ 的虚函数（无泛型虚函数，模板方法不能是虚的）或 Java 的泛型接口（类型擦除，泛型信息在运行时不可用）不同——Rust 在编译期拒绝非对象安全的 trait 对象，防止运行时类型错误。替代方案：将泛型方法改为关联函数或非泛型方法，或使用静态分发（`impl Trait`）。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]

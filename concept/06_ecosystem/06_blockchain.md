@@ -760,3 +760,100 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
+
+## 十、边界测试：区块链的编译错误
+
+### 10.1 边界测试：加密原语的常量时间执行（运行时风险）
+
+```rust
+fn main() {
+    let secret = [1u8, 2, 3, 4];
+    let guess = [1u8, 2, 3, 4];
+    // ⚠️ 安全风险: 非常量时间比较可能导致时序攻击
+    if secret == guess {
+        println!("match");
+    }
+}
+
+// 正确: 使用 subtle crate 进行常量时间比较
+use subtle::ConstantTimeEq;
+
+fn fixed() {
+    let secret = [1u8, 2, 3, 4];
+    let guess = [1u8, 2, 3, 4];
+    if secret.ct_eq(&guess).into() {
+        println!("match"); // ✅ 执行时间与匹配程度无关
+    }
+}
+```
+
+> **修正**: 区块链和加密货币应用对时序攻击（timing attack）高度敏感。标准库的 `==` 运算符在发现第一个不匹配字节时立即返回，执行时间与匹配字节数相关，可能泄露密钥信息。`subtle` crate 提供常量时间比较原语（`ct_eq`、`ct_gt` 等），确保执行时间不泄露信息。这与 Rust 的标准库设计冲突——标准库优先性能，加密应用优先安全，因此需要显式选择常量时间操作。[来源: [subtle Documentation](https://docs.rs/subtle/)]
+
+### 10.2 边界测试：智能合约的状态一致性（编译错误）
+
+```rust,compile_fail
+struct Contract {
+    balance: u64,
+}
+
+impl Contract {
+    fn withdraw(&mut self, amount: u64) {
+        // ❌ 编译错误: 若先修改状态再检查条件，重入攻击风险
+        // self.balance -= amount; // 先扣款
+        // if self.balance < 0 { panic!(); } // 后检查
+
+        // 正确: 先检查不变量
+        assert!(self.balance >= amount);
+        self.balance -= amount;
+    }
+}
+```
+
+> **修正**: 智能合约的漏洞（如 The DAO 攻击）常源于"检查-生效-交互"（Checks-Effects-Interactions）模式的违反。Rust 的所有权系统不直接防止重入攻击，但编译期检查确保状态修改的顺序可被静态分析。形式化验证工具（如 Kani）可验证合约的数学不变量（如总供应量守恒）。Rust 在区块链生态（Solana、Polkadot、Near）中的优势是：编译期内存安全 + 运行时性能，消除整类 Solidity 的内存相关漏洞。[来源: [Rust in Blockchain](https://rust-in-blockchain.github.io/)]
+
+### 10.3 边界测试：加密签名的类型安全（编译错误）
+
+```rust,compile_fail
+use secp256k1::{SecretKey, PublicKey, Message};
+
+fn sign(sk: &SecretKey, msg: &[u8]) -> Vec<u8> {
+    // ❌ 编译错误/逻辑错误: msg 未哈希为 32 字节直接使用
+    // let msg = Message::from_slice(msg).unwrap(); // 可能 panic（长度不是32）
+    // secp256k1 要求消息是 32 字节哈希值
+    todo!()
+}
+```
+
+> **修正**: 椭圆曲线签名（ECDSA、Schnorr）要求消息先经过密码学哈希（SHA-256、Keccak-256）压缩为固定长度（32 字节），再作为签名输入。直接对原始消息签名是安全漏洞（长度扩展攻击、消息结构歧义）。Rust 的 `secp256k1` crate 在类型层面强化这一点：`Message` 类型只能通过 `Message::from_slice(&[u8; 32])` 构造，拒绝任意长度输入。这与 C 的 libsecp256k1（接受 `const unsigned char* msg32`，依赖文档约束）或 Go 的 `crypto/ecdsa`（接受 `[]byte`，内部哈希）不同——Rust 的类型系统阻止"忘记哈希"的错误。区块链应用（以太坊、比特币）中，签名正确性是资金安全的核心，类型安全的密码学库是 Rust 的重要优势。[来源: [secp256k1 Crate](https://docs.rs/secp256k1/)] · [来源: [Rust Crypto WG](https://github.com/rustcrypto/)]
+
+### 10.4 边界测试：`no_std` 与哈希计算的堆分配（编译错误）
+
+```rust,compile_fail
+#![no_std]
+
+fn hash_data(data: &[u8]) -> [u8; 32] {
+    // ❌ 编译错误: sha2 的 Sha256::new() 在 no_std 中可用，
+    // 但某些哈希库依赖 Vec/Box
+    // use sha2::{Sha256, Digest};
+    // let mut hasher = Sha256::new();
+    // hasher.update(data);
+    // hasher.finalize().into()
+    todo!()
+}
+```
+
+> **修正**: 区块链的共识节点和轻客户端常在资源受限环境运行（嵌入式、WASM、TEE），要求 `no_std`（无标准库）。Rust 的密码学生态（`rust-crypto`）积极支持 `no_std`：`sha2`、`sha3`、`blake2` 等 crate 提供 `default-features = false` 配置，禁用 `std` 依赖。但某些高级功能（如 `update` 的流式接口、并行哈希）可能需要 `std` 或 `alloc`。区块链项目的依赖管理：1) 检查每个密码学 crate 的 `no_std` 支持；2) 使用 `heapless` 替代 `Vec`；3) 在合约环境（如 CosmWasm、ink!）中，堆分配受限制，需预分配缓冲区。这与 Solidity（EVM 的内存模型固定）或 Go（无 `no_std` 概念）不同——Rust 的 `no_std` 允许在极端约束下使用高级抽象。[来源: [Rust Crypto Documentation](https://docs.rs/sha2/)] · [来源: [Substrate Documentation](https://docs.substrate.io/)]
+
+### 10.7 边界测试：no_std 环境下的 `Vec` 使用（编译错误）
+
+```rust,compile_fail
+#![no_std]
+
+fn main() {
+    // ❌ 编译错误: Vec 需要分配器，no_std 环境下不可用
+    let v = vec![1, 2, 3];
+    println!("{:?}", v);
+}
+```
+
+> **修正**: 区块链智能合约（如 Substrate pallet）和嵌入式系统常用 `#![no_std]` 以减少依赖和二进制大小。`no_std` 禁用 `std`，仅保留 `core` 和（若启用）`alloc`。1) `Vec`、`String`、`Box` 需 `extern crate alloc;` + `use alloc::vec::Vec;`；2) `println!`、`format!` 不可用（无标准输出）；3) `std::collections::HashMap` 不可用（`hashbrown` crate 替代）。链上运行时的特殊限制：1) 无浮点数（非确定性）；2) 无随机数生成（可复现性）；3) 严格 gas/weight 限制。Rust 的 `no_std` 是区块链开发的基石——Substrate、ink! 都基于此。这与 Solidity（无标准库概念，依赖 OpenZeppelin）或 Go（无 `no_std` 等价物）不同——Rust 的显式依赖管理使资源受限环境开发成为可能。[来源: [The Rust Programming Language](https://doc.rust-lang.org/reference/names/preludes.html)] · [来源: [Substrate no_std](https://docs.substrate.io/build/)]

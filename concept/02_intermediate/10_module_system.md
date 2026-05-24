@@ -33,6 +33,9 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：模块系统的编译错误](#十边界测试模块系统的编译错误)
+    - [10.1 边界测试：`pub(crate)` 与 `pub(super)` 的可见性层级（编译错误）](#101-边界测试pubcrate-与-pubsuper-的可见性层级编译错误)
+    - [10.2 边界测试：模块文件与目录的命名冲突（编译错误）](#102-边界测试模块文件与目录的命名冲突编译错误)
 
 ---
 
@@ -566,3 +569,97 @@ fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：模块系统的编译错误
+
+### 10.1 边界测试：`pub(crate)` 与 `pub(super)` 的可见性层级（编译错误）
+
+```rust,compile_fail
+mod outer {
+    mod inner {
+        pub(crate) struct CrateVisible; // crate 内可见
+    }
+
+    fn test() {
+        // ❌ 编译错误: `CrateVisible` 在 inner 中是 pub(crate)，
+        // 但以下代码在 outer 中，应该可以访问...
+        // 实际上 pub(crate) 确实可以在 outer 访问
+        // 以下为真正的可见性错误:
+        pub(super) struct SuperVisible; // super = outer
+    }
+
+    fn test2() {
+        let _ = SuperVisible; // 错误: SuperVisible 在 test 函数内定义
+    }
+}
+```
+
+> **修正**: `pub(crate)` 限制可见性为当前 crate，`pub(super)` 限制为父模块。Rust 的可见性修饰符精确控制项的暴露范围：`pub`（完全公开）、`pub(crate)`（crate 内）、`pub(super)`（父模块）、`pub(in path)`（指定路径）。这与 Java 的 `package-private` 或 C# 的 `internal` 类似，但 Rust 提供更细粒度的控制。模块项默认私有，必须显式提升可见性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：模块文件与目录的命名冲突（编译错误）
+
+```rust,compile_fail
+// src/foo.rs 和 src/foo/ 同时存在时
+// ❌ 编译错误: file not found for module `foo`
+// Rust 模块系统对 foo 的解析有歧义:
+// - src/foo.rs （文件模块）
+// - src/foo/mod.rs （目录模块）
+// - src/foo.rs + src/foo/*.rs （2018 Edition 后不再支持混合）
+
+// 正确: 使用目录模块（Rust 2018+ 推荐）
+// src/
+//   foo/
+//     mod.rs
+//     bar.rs
+
+// 或: 使用内联模块
+mod foo {
+    pub mod bar;
+}
+```
+
+> **修正**: Rust 2018 Edition 后，模块文件组织有两种方式："经典"（`foo/mod.rs` + `foo/bar.rs`）和"扁平"（`foo.rs` + `foo/bar.rs`）。同一模块不能同时使用两种组织方式（如 `foo.rs` 和 `foo/mod.rs` 同时存在）。2018 Edition 引入的扁平结构减少了 `mod.rs` 的嵌套，但要求目录和文件命名严格对应。这是 Rust 模块系统的文件-模块同构原则——模块树直接映射到文件系统树。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：`use self::` 与 `use crate::` 的路径解析（编译错误）
+
+```rust,compile_fail
+mod inner {
+    pub fn func() {}
+}
+
+mod sibling {
+    pub fn func() {}
+}
+
+fn main() {
+    use self::inner::func;
+    func();
+    
+    // ❌ 编译错误: self 指当前模块，不能访问 sibling
+    // use self::sibling::func;
+    
+    // 正确: 使用 super 或 crate
+    use crate::sibling::func as sibling_func;
+    sibling_func();
+}
+```
+
+> **修正**: `self` 关键字在 `use` 语句中指**当前模块**，`super` 指父模块，`crate` 指 crate 根。`self::sibling` 在当前模块无 `sibling` 子模块时编译错误。路径解析规则：1) 相对路径以 `self::`、`super::` 或 `crate::` 开头；2) 绝对路径以 crate 名或 `::crate_name` 开头；3) 2018 Edition 后，裸路径（`inner::func`）默认解析为相对路径。这与 Python 的相对 import（`.` 当前包，`..` 父包）或 JavaScript 的 `./` 和 `../` 类似——Rust 的模块路径显式区分绝对和相对，防止意外解析到外部依赖的同名模块。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html)] · [来源: [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html)]
+
+### 10.4 边界测试：路径重导出（re-export）的循环（编译错误）
+
+```rust,compile_fail
+// lib.rs
+pub mod a {
+    pub use crate::b::B;
+}
+
+pub mod b {
+    pub use crate::a::A;
+}
+
+// ❌ 编译错误: 若 A 和 B 互相重导出，且未实际定义
+// 循环 use 本身允许，但 item 不存在时失败
+```
+
+> **修正**: `pub use` 重导出是组织 API 表面的重要工具：将内部模块的项暴露到 crate 根或公共模块。但重导出不创建新项，只是别名——目标项必须存在。循环 `pub use`（A 重导出 B，B 重导出 A）在项存在时合法（只是双向别名），但若项不存在（如上述代码中 `A` 和 `B` 未定义），编译错误。这与 C++ 的 `using`（类似别名）或 JavaScript 的 `export { x } from './y'`（ES6 re-export）类似——重导出是模块系统的组织工具，不改变项的可见性或所有权。Rust 的 `pub use` 常用于 `prelude` 模式：在 crate 根集中暴露所有公开类型，简化用户的使用路径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html)] · [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]

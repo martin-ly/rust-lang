@@ -24,6 +24,9 @@
   - [二、技术细节](#二技术细节)
     - [2.1 并发执行模式](#21-并发执行模式)
     - [2.2 取消与超时](#22-取消与超时)
+  - [十、边界测试：异步模式的编译错误](#十边界测试异步模式的编译错误)
+    - [10.1 边界测试：`Stream` 与 `Future` 的所有权混淆（编译错误）](#101-边界测试stream-与-future-的所有权混淆编译错误)
+    - [10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）](#102-边界测试取消安全cancellation-safety违反逻辑错误)
     - [2.3 背压与流控制](#23-背压与流控制)
   - [三、异步模式矩阵](#三异步模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -264,6 +267,65 @@ async fn process_stream() {
 ### 2.2 取消与超时
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：异步模式的编译错误
+
+### 10.1 边界测试：`Stream` 与 `Future` 的所有权混淆（编译错误）
+
+```rust,compile_fail
+use futures::stream::{self, StreamExt};
+use futures::future::FutureExt;
+
+async fn bad_mix() {
+    let s = stream::iter(vec![1, 2, 3]);
+    // ❌ 编译错误: `stream::Iter` 不是 `Future`
+    // Stream 和 Future 是不同的 trait，不能混用
+    let val = s.await; // Stream 需要 next().await
+}
+
+// 正确: 使用 next() 从 Stream 获取 Future
+async fn fixed() {
+    let mut s = stream::iter(vec![1, 2, 3]);
+    while let Some(val) = s.next().await { // ✅ StreamExt::next 返回 Future
+        println!("{}", val);
+    }
+}
+```
+
+> **修正**: `Stream` 和 `Future` 是 Rust 异步生态中的两个核心 trait。`Future` 代表**单次**异步计算，`Stream` 代表**多次**异步值序列。`Stream` 不实现 `Future`，必须通过 `StreamExt::next()` 获取 `Future<Item = Option<T>>`。这与 JavaScript 的 `AsyncIterator`（`for await...of`）类似，但 Rust 的区分更严格——编译器拒绝将 Stream 直接 await。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
+
+### 10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）
+
+```rust
+use tokio::sync::mpsc;
+
+async fn bad_cancel_safe() {
+    let (tx, mut rx) = mpsc::channel::<i32>(1);
+    tx.send(1).await.unwrap();
+
+    // ⚠️ 逻辑错误: 非取消安全的操作
+    // 若此 future 在 recv().await 时被取消，消息可能已消费但未处理
+    let val = rx.recv().await.unwrap();
+    // 若取消发生在 recv 返回后但 val 使用前，消息丢失
+    println!("{}", val);
+}
+
+// 正确: 使用 cancel-safe 的 channel 或立即处理
+async fn fixed() {
+    let (tx, mut rx) = mpsc::channel::<i32>(1);
+    tx.send(1).await.unwrap();
+
+    // tokio::select! 中必须使用 cancel-safe 操作
+    tokio::select! {
+        Some(val) = rx.recv() => {
+            println!("{}", val); // ✅ 在 select 分支内立即处理
+        }
+        else => println!("channel closed"),
+    }
+}
+```
+
+> **修正**: 取消安全（cancellation safety）指 async 操作在 future 被取消后仍保持正确状态。`tokio::sync::mpsc::Receiver::recv` 是取消安全的——若 future 在 `await` 时被丢弃，消息保留在 channel 中。但自定义组合操作可能不 cancel-safe：若在 `await` 前后有状态变更，取消可能导致状态不一致。Tokio 文档明确标注每个 API 的取消安全性，这是 Rust 异步编程相比其他语言更严格的契约。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ```rust,ignore
 // 取消和超时控制
@@ -761,3 +823,63 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+### 10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时行为）
+
+```rust,compile_fail
+use tokio::sync::mpsc;
+
+async fn receiver() {
+    let (tx, mut rx) = mpsc::channel(1);
+    tx.send(1).await.unwrap();
+    
+    // ⚠️ 运行时风险: 非取消安全的 future 在 select 中可能丢失数据
+    tokio::select! {
+        val = rx.recv() => {
+            println!("received: {:?}", val);
+        }
+        _ = tokio::time::sleep(std::time::Duration::from_secs(1)) => {
+            println!("timeout");
+            // rx.recv() 被取消，若未实现 CancelSafe，消息可能丢失
+        }
+    }
+}
+```
+
+> **修正**: 取消安全性（cancellation safety）指 future 在被 `select!` 或 `AbortHandle` 取消后，不处于部分完成的不一致状态。`tokio::sync::mpsc::Receiver::recv` 是取消安全的——若被取消，消息仍在通道中，下次 `recv` 可获取。但许多操作不是取消安全的：1) `tokio::io::AsyncReadExt::read`（部分读取后取消，已读数据丢失）；2) 自定义 future 在 `poll` 中修改状态后返回 `Pending`。安全模式：使用 `tokio::select!` 的 `biased` 模式控制优先级，或将非取消安全操作包装为原子事务。这与 Go 的 `select`（goroutine 不会取消，只是阻塞）或 JavaScript 的 `Promise.race`（Promise 不可取消，只是忽略结果）不同——Rust 的 `select!` 实际取消未完成的分支，要求开发者考虑取消语义。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+
+### 10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+use tokio::task;
+
+async fn work() {
+    let data = Rc::new(42);
+    // ❌ 编译错误: `Rc<i32>` 不是 `Send`，不能跨线程 spawn
+    let handle = task::spawn(async move {
+        println!("{}", data);
+    });
+    handle.await.unwrap();
+}
+```
+
+> **修正**: `tokio::spawn` 将 future 发送到线程池执行，要求 future 是 `Send + 'static`。`Rc<T>` 不是 `Send`（引用计数非原子），因此不能出现在 spawn 的闭包中。解决方案：1) 使用 `Arc<T>`（原子引用计数，`Send + Sync`）；2) 在单线程执行器（`tokio::runtime::Builder::new_current_thread()`）中使用 `task::spawn_local`（不要求 `Send`）；3) 使用 `tokio::sync::Mutex` 而非 `std::sync::Mutex`（异步友好的锁）。这与 Go 的 goroutine（任何变量都可共享，通过 channel 同步）或 JavaScript 的 Worker（通过 `postMessage` 传递结构化克隆数据）不同——Rust 在编译期阻止非线程安全数据跨线程，即使通过异步抽象。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
+
+### 10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时 panic）
+
+```rust,compile_fail
+use futures::stream::{self, StreamExt};
+
+async fn demo() {
+    let mut s = stream::iter(vec![Some(1), Some(2), None]).fuse();
+    
+    // ⚠️ 运行时问题: select_next_some 在 None 后 panic（若未 fuse）
+    // 但 fuse 后返回 Poll::Pending  forever
+    while let Some(x) = s.select_next_some().await {
+        println!("{}", x);
+    }
+}
+```
+
+> **修正**: `StreamExt::select_next_some` 是 `future` crate 的便利方法：在 `Some(x)` 时返回 `x`，在 `None` 时 panic（设计为与 `select!` 配合使用）。`fuse()` 在底层流返回 `None` 后使后续 `poll` 始终返回 `None`。`select_next_some` 遇到 `None` panic，因此应与 `Fuse` 流配合时谨慎——`fuse` 不消除 `None`，只是重复它。正确使用：1) `while let Some(x) = stream.next().await`（标准循环）；2) `select!` 中配合 `Fuse` 和 `complete` 分支；3) 避免 `select_next_some` 在可能独立使用的地方。这与 `Option::unwrap`（同样 panic on None）或 `Iterator::next().unwrap()`（同样风险）类似——`select_next_some` 是"我确定还有元素"的断言。[来源: [futures Crate](https://docs.rs/futures/)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]

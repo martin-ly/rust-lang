@@ -38,6 +38,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：零成本抽象的编译错误](#十二边界测试零成本抽象的编译错误)
+    - [12.1 边界测试：泛型单态化导致代码膨胀（逻辑错误 / 编译器限制）](#121-边界测试泛型单态化导致代码膨胀逻辑错误--编译器限制)
+    - [12.2 边界测试：`inline` 暗示与编译器优化冲突（逻辑错误）](#122-边界测试inline-暗示与编译器优化冲突逻辑错误)
 
 ---
 
@@ -445,3 +448,181 @@ Rust 性能分析工具链:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十二、边界测试：零成本抽象的编译错误
+
+### 12.1 边界测试：泛型单态化导致代码膨胀（逻辑错误 / 编译器限制）
+
+```rust
+// 以下代码编译通过，但导致二进制膨胀
+fn generic_id<T>(x: T) -> T { x }
+
+fn main() {
+    let _a = generic_id(1i32);
+    let _b = generic_id(2i64);
+    let _c = generic_id(3u32);
+    let _d = generic_id(4u64);
+    // 编译器为每个类型生成独立的函数实例
+    // → 代码膨胀（code bloat）
+}
+
+// 正确: 使用 trait object 减少单态化（有运行时成本）
+fn trait_object(x: &dyn std::any::Any) -> &dyn std::any::Any {
+    x // ✅ 动态分发，无单态化，但有间接调用开销
+}
+```
+
+> **修正**: 零成本抽象的核心是"你不需要的就不付代价"，但"你需要的一定要付代价"。泛型单态化是 Rust 实现零成本多态的方式——每个具体类型生成独立代码，消除运行时分发。代价是二进制体积增大。在嵌入式或受限环境中，需权衡泛型与动态分发。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 12.2 边界测试：`inline` 暗示与编译器优化冲突（逻辑错误）
+
+```rust
+#[inline(never)]
+fn never_inline(x: i32) -> i32 {
+    x * 2
+}
+
+#[inline(always)]
+fn always_inline(x: i32) -> i32 {
+    x + 1
+}
+
+fn main() {
+    let a = never_inline(5);
+    let b = always_inline(5);
+    // ⚠️ 逻辑错误: `inline(always)` 只是提示，编译器可能拒绝
+    // 若函数过大或递归，编译器会忽略 inline hint
+    println!("{} {}", a, b);
+}
+```
+
+> **修正**: `#[inline]`、`#[inline(always)]` 和 `#[inline(never)]` 是编译器提示而非强制指令。编译器根据优化级别、函数大小、调用频率等因素决定是否内联。`inline(always)` 在递归函数或过大函数上可能被编译器拒绝。真正的零成本抽象依赖编译器的优化决策，而非人工指令。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+## 十二、边界测试：零成本抽象的编译错误
+
+### 12.1 边界测试：泛型单态化与代码膨胀（逻辑错误）
+
+```rust
+fn generic_id<T>(x: T) -> T { x }
+
+fn main() {
+    let _a = generic_id(1i32);
+    let _b = generic_id(2i64);
+    let _c = generic_id(3u32);
+    let _d = generic_id(4u64);
+    // ⚠️ 逻辑错误: 编译器为每个类型生成独立代码
+    // → 二进制膨胀（code bloat）
+}
+
+// 正确: 使用 trait object 减少单态化（有运行时成本）
+fn dyn_id(x: &dyn std::any::Any) -> &dyn std::any::Any {
+    x // 动态分发，无单态化
+}
+```
+
+> **修正**: 零成本抽象的核心是"你不需要的就不付代价"，但"你需要的一定要付代价"。泛型单态化是 Rust 实现零成本多态的方式——每个具体类型生成独立代码，消除运行时分发。代价是二进制体积增大。在嵌入式或受限环境中，需权衡泛型与动态分发。这与 C++ 的模板膨胀问题相同，但 Rust 的编译器（monomorphization collector）更积极地消除未使用的泛型实例。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 12.2 边界测试：`inline` 提示与编译器优化（逻辑错误）
+
+```rust
+#[inline(never)]
+fn never_inline(x: i32) -> i32 {
+    x * 2
+}
+
+#[inline(always)]
+fn always_inline(x: i32) -> i32 {
+    x + 1
+}
+
+fn main() {
+    let a = never_inline(5);
+    let b = always_inline(5);
+    // ⚠️ 逻辑错误: `inline(always)` 只是提示，编译器可能拒绝
+    // 若函数过大或递归，编译器忽略 inline hint
+    println!("{} {}", a, b);
+}
+```
+
+> **修正**: `#[inline]`、`#[inline(always)]` 和 `#[inline(never)]` 是编译器提示而非强制指令。编译器根据优化级别、函数大小、调用频率等因素决定是否内联。`inline(always)` 在递归函数或过大函数上可能被编译器拒绝。真正的零成本抽象依赖编译器的优化决策，而非人工指令。这与 C 的 `inline` 关键字类似，但 Rust 的编译器（LLVM）有更精细的启发式算法。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 12.3 边界测试：泛型递归类型的大小计算（编译错误）
+
+```rust,compile_fail
+enum List<T> {
+    Cons(T, List<T>), // ❌ 编译错误: recursive type `List<T>` has infinite size
+    Nil,
+}
+
+// 正确: 使用 Box 引入间接层
+enum ListFixed<T> {
+    Cons(T, Box<ListFixed<T>>), // ✅ Box 是指针，大小固定
+    Nil,
+}
+```
+
+> **修正**: Rust 要求所有类型在编译期具有确定大小。递归类型直接包含自身会导致无限递归的大小计算。`Box<T>` 在堆上分配，指针大小固定（平台相关，通常为 8 字节），使编译器能计算 `ListFixed<T>` 的大小。这与 C 的链表（`struct Node { int data; struct Node* next; }`）相同，但 Rust 在类型层面强制此约束——不允许隐式指针，必须显式 `Box`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 12.4 边界测试：`dyn Trait` 的大小未知（编译错误）
+
+```rust,compile_fail
+trait Drawable {
+    fn draw(&self);
+}
+
+fn main() {
+    // ❌ 编译错误: `dyn Drawable` 的大小在编译期未知
+    let obj: dyn Drawable = /* ... */;
+}
+
+// 正确: 使用 Box 或引用
+fn fixed() {
+    let obj: Box<dyn Drawable> = /* ... */; // ✅ 指针大小固定
+}
+```
+
+> **修正**: `dyn Trait` 是动态大小类型（DST），编译器无法在编译期确定其大小（不同实现类型大小不同）。DST 不能直接作为变量类型，必须放在指针后面：`Box<dyn Trait>`、`&dyn Trait`。这与 C++ 的虚函数表指针类似，但 Rust 的 `dyn` 是显式语法，编译器拒绝隐式类型擦除。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：泛型单态化导致的代码膨胀（编译错误/链接错误）
+
+```rust,compile_fail
+fn process<T: std::fmt::Display>(x: T) {
+    println!("{}", x);
+}
+
+fn main() {
+    process(1i32);
+    process(2i64);
+    process(3u32);
+    process(4u64);
+    process(5f32);
+    process(6f64);
+    // ⚠️ 代码膨胀: 每个 T 实例生成一份 process 的代码
+    // 若 T 有 100 种实例，二进制体积增加 100 倍
+}
+```
+
+> **修正**: 零成本抽象的核心机制是**单态化**（monomorphization）：为每个使用的具体类型生成独立的机器码。这消除了运行时虚函数调用开销，但导致**代码膨胀**（code bloat）。极端情况下，泛型库（如 `itertools`、`nalgebra`）的复杂泛型链生成巨大的二进制。缓解策略：1) 使用 trait 对象 `dyn Trait`（运行时虚分发，体积更小但有间接开销）；2) 将泛型函数拆分为"泛型外壳 + 非泛型内核"（如 `println!` 的格式化逻辑共享）；3) `#[inline(never)]` 控制内联。这与 C++ 的模板（同样单态化，同样膨胀问题）或 Java 的泛型（类型擦除，无膨胀但装箱开销）不同——Rust 在零成本和体积间提供选择，但不自动优化膨胀。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+
+### 10.4 边界测试：`async` 状态机的 `Pin` 开销（编译错误/运行时行为）
+
+```rust,compile_fail
+use std::pin::Pin;
+
+async fn self_ref() -> i32 {
+    let x = 5;
+    let r = &x;
+    // ❌ 编译错误: async 块包含自引用，返回的 future 必须 Pin
+    // 但 async fn 自动处理 Pin，开发者通常不感知
+    *r
+}
+
+fn main() {
+    let f = self_ref();
+    // f 是实现了 Future 的匿名类型，内部可能自引用
+    // 必须通过 Pin<&mut f> poll
+    // tokio::pin!(f);
+}
+```
+
+> **修正**: `async fn` 编译为状态机，状态机可能**自引用**（某个状态包含指向其他状态的引用）。自引用的值不能被移动（移动后引用悬垂），因此必须 `Pin` 在内存中。`async fn` 的返回类型自动是 `impl Future`，调用者通过 `Pin<&mut impl Future>` `poll`。`tokio::pin!` 宏在栈上创建 `Pin`，`Box::pin` 在堆上创建。这是零成本抽象的代价：自引用检测和 `Pin` 管理是编译器自动完成的，但底层机制复杂。与 JavaScript 的 Promise（无自引用问题，因为所有变量在闭包中按引用捕获）或 Go 的 goroutine（栈可增长和移动，通过指针重定位处理）不同——Rust 的 async 在编译期生成固定布局的状态机，运行时无额外开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-04-pin.html)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]

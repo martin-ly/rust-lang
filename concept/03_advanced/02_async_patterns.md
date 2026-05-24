@@ -381,3 +381,107 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 > **相关判定树**: [异步判定树](../00_meta/concept_definition_decision_forest.md#八异步判定树)
 > **相关 FTA**: [异步安全失效树](../00_meta/fault_tree_analysis_collection.md#五异步安全失效树)
+
+## 十、边界测试：异步模式的编译错误
+
+### 10.1 边界测试：`async fn` 在 trait 中的限制（编译错误）
+
+```rust,compile_fail
+trait AsyncService {
+    async fn process(&self) -> i32; // ❌ 编译错误: async fn in trait 不稳定
+}
+
+// 正确: 使用 async_trait 宏或返回 impl Future
+use std::future::Future;
+
+trait AsyncServiceFixed {
+    fn process(&self) -> impl Future<Output = i32>; // ✅ RPITIT
+}
+
+// 或: 使用 async_trait crate
+// #[async_trait]
+// trait AsyncService { async fn process(&self) -> i32; }
+```
+
+> **修正**: `async fn` 在 trait 中直到 Rust 1.75 才稳定（通过 `impl Future` 返回类型推断，RPITIT）。在旧版本或需要对象安全时，使用 `async-trait` crate 将异步方法转换为返回 `Pin<Box<dyn Future>>` 的普通方法。`async fn in trait` 的实现涉及编译器将 `async fn` 语法糖展开为 `impl Future` 的返回类型，并在 trait 的 vtable 中存储 future 的生成逻辑。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：Tokio 运行时未启动时调用 `spawn`（运行时 panic）
+
+```rust
+use tokio::task;
+
+fn main() {
+    // ⚠️ 运行时 panic: there is no reactor running, must be called from the context of a Tokio runtime
+    // let handle = task::spawn(async { 42 }); // panic!
+}
+
+// 正确: 在 #[tokio::main] 或 Runtime::block_on 中调用
+#[tokio::main]
+async fn main_fixed() {
+    let handle = task::spawn(async { 42 }); // ✅ 在 Tokio 运行时内
+    let result = await.handle.unwrap();
+    println!("{}", result);
+}
+```
+
+> **修正**: Tokio 的 `spawn` 需要在活跃的运行时（runtime）上下文中执行。运行时通过线程局部存储（thread-local）维护当前上下文，`spawn` 检查此上下文以确定将任务加入哪个调度器。在主线程直接调用 `spawn` 而不启动运行时会 panic。这与 Go 的 `go` 关键字（隐式全局调度器）不同——Rust 的运行时是显式的，允许一个程序中同时存在多个隔离的运行时实例。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
+### 10.3 边界测试：异步闭包的 `move` 与 `Pin` 交互（编译错误）
+
+```rust,compile_fail
+use std::future::Future;
+use std::pin::Pin;
+
+fn spawn<F>(f: F) where F: Future<Output = ()> + Send + 'static {
+    // spawn 任务
+}
+
+fn main() {
+    let data = vec![1, 2, 3];
+    // ❌ 编译错误: async move 闭包可能不是 'static
+    let task = async move {
+        println!("{:?}", data);
+    };
+    spawn(task);
+}
+```
+
+> **修正**: `async move` 闭包捕获环境变量，生成的 future 的生命周期与捕获变量绑定。若捕获变量不是 `'static`（如局部引用），future 也不是 `'static`，不能发送到 `'static` bound 的任务执行器（`tokio::spawn`、`async_std::task::spawn`）。解决方案：1) 确保只捕获 `'static` 数据（`String`、`Vec<T>`、`Arc<T>`）；2) 使用 `async` 块（非 `move`），只捕获引用，但 future 的生命周期与引用绑定，不能 spawn；3) 使用 `tokio::task::local_set`（非 `'static` 任务）。这是 Rust 异步与所有权系统的核心张力：异步任务通常需要 `'static`，但闭包自然捕获局部引用。与 Go 的 goroutine（闭包捕获变量，GC 管理生命周期）或 JavaScript 的 Promise（闭包捕获引用，无生命周期概念）不同——Rust 在编译期验证异步任务的安全性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
+### 10.4 边界测试：Stream 的 `fuse` 与重复 poll（编译错误/运行时 panic）
+
+```rust,compile_fail
+use futures::stream::{self, StreamExt};
+
+async fn demo() {
+    let mut s = stream::iter(vec![1, 2, 3]).fuse();
+    while let Some(x) = s.next().await {
+        println!("{}", x);
+    }
+    // ⚠️ 运行时行为: fuse 后再次 poll 返回 Poll::Ready(None)
+    // 但不会 panic（与未 fuse 的 Stream 不同）
+    // 若未 fuse，某些 Stream 再次 poll 是 UB
+}
+```
+
+> **修正**: `Stream::fuse` 包装流，在流结束后（`Poll::Ready(None)`）再次 `poll` 时仍返回 `None`，而非 panic 或 UB。这是防御式编程：某些 `Stream` 实现（如手动实现的 future）在结束后再次 poll 是未定义行为。`fuse` 的代价是一个布尔标志（`terminated: bool`），可忽略。Rust 的异步生态广泛使用 `fuse`：1) `select!` 宏内部自动 fuse 分支；2) `StreamExt::fuse` 显式包装；3) `FusedFuture`/`FusedStream` trait 标记"可安全重复 poll"。这与 Tokio 的 `select!`（要求 future 实现 `FusedFuture`）或 async-std 的 `stream::fuse` 相同——fuse 是 Rust 异步的安全基石。忘记 fuse 在 `select!` 循环中可能导致 panic：`select!` 在分支完成后移除它，但若 future 未正确报告完成，可能重复 poll。[来源: [futures Crate Documentation](https://docs.rs/futures/)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
+### 10.5 边界测试：`tokio::select!` 的 `biased` 模式与公平性（运行时饥饿）
+
+```rust,compile_fail
+use tokio::sync::mpsc;
+
+async fn unfair_select() {
+    let (tx1, mut rx1) = mpsc::channel(10);
+    let (tx2, mut rx2) = mpsc::channel(10);
+    
+    tokio::select! {
+        biased; // ❌ 运行时饥饿: 优先检查 rx1，若 rx1 始终有数据，rx2 饥饿
+        Some(v) = rx1.recv() => println!("1: {}", v),
+        Some(v) = rx2.recv() => println!("2: {}", v),
+        else => println!("no data"),
+    }
+}
+```
+
+> **修正**: `tokio::select!` 默认**伪随机**选择就绪分支，保证长期公平性。`biased` 模式按声明顺序优先选择，适用于已知优先级的场景（如取消信号优先于工作项），但可能导致低优先级分支饥饿。常见错误：1) 不必要的 `biased`（默认随机足够）；2) `biased` 模式下高频率分支垄断执行；3) 忘记 `else` 分支（所有分支 futures 完成后 `select!` panic）。这与 Go 的 `select`（随机公平，无 biased 选项）或 Rust `futures::select!`（同样伪随机）类似——公平性是并发调度的重要属性，`biased` 是显式放弃公平的 opt-in 机制。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]

@@ -29,13 +29,18 @@
   - [四、工程实践](#四工程实践)
     - [4.1 快速 CLI 原型](#41-快速-cli-原型)
 - [\[derive(Parser)\]](#deriveparser-1)
-  - [4.3 数据处理与临时任务](#43-数据处理与临时任务)
+    - [4.3 数据处理与临时任务](#43-数据处理与临时任务)
 - [\[derive(Deserialize)\]](#derivedeserialize)
   - [六、与 L1-L4 的关系映射](#六与-l1-l4-的关系映射)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Cargo Script 的编译错误](#十边界测试cargo-script-的编译错误)
+    - [10.1 边界测试：`cargo script` 的依赖解析（编译错误）](#101-边界测试cargo-script-的依赖解析编译错误)
+    - [10.2 边界测试：单文件脚本的模块限制（编译错误）](#102-边界测试单文件脚本的模块限制编译错误)
+    - [10.5 边界测试：`cargo script` 的缓存与依赖版本漂移（运行时行为变化）](#105-边界测试cargo-script-的缓存与依赖版本漂移运行时行为变化)
+    - [10.7 边界测试：cargo script 的依赖解析与版本冲突（运行时/编译错误）](#107-边界测试cargo-script-的依赖解析与版本冲突运行时编译错误)
 
 ---
 
@@ -485,3 +490,76 @@ Cargo Script:  File = Crate (单模块，无子模块)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+## 十、边界测试：Cargo Script 的编译错误
+
+### 10.1 边界测试：`cargo script` 的依赖解析（编译错误）
+
+```rust,compile_fail
+//! ```cargo
+//! [dependencies]
+//! serde = "1.0"
+//! ```
+
+use serde::Deserialize;
+
+// ❌ 编译错误: cargo script 的依赖解析与常规 Cargo.toml 不同
+// 若依赖版本冲突，可能报错
+#[derive(Deserialize)]
+struct Data { value: i32 }
+
+fn main() {
+    let _data: Data = serde_json::from_str(r#"{"value": 42}"#).unwrap();
+}
+```
+
+> **修正**: Cargo Script（Rust 1.79+ 实验性支持）允许在文件头部通过 frontmatter 声明依赖。依赖解析遵循与普通 Cargo 项目相同的规则，但错误信息可能更复杂（因为无显式 Cargo.toml）。版本冲突时，Cargo 使用统一版本选择算法（unification），可能选择比预期更新的版本。这与 Python 的 `pip install` 或 Node 的 `npx` 不同——Cargo 的依赖解析是确定性的，生成 `Cargo.lock` 锁定版本。[来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+
+### 10.2 边界测试：单文件脚本的模块限制（编译错误）
+
+```rust,compile_fail
+// main.rs（单文件脚本）
+mod helper; // ❌ 编译错误: 找不到 helper.rs 文件
+
+fn main() {
+    helper::do_something();
+}
+```
+
+> **修正**: Cargo Script 单文件模式不支持子模块（`mod foo;`），因为无文件系统目录结构。若需多模块，必须使用常规 Cargo 项目（`cargo new`）。这与 Python 的 `if __name__ == "__main__"` 单文件脚本不同——Rust 的模块系统严格映射到文件系统。`cargo script` 适合快速原型和单次运行任务，复杂项目仍需完整项目结构。[来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+
+### 10.5 边界测试：`cargo script` 的缓存与依赖版本漂移（运行时行为变化）
+
+```rust,compile_fail
+//! ```cargo
+//! [dependencies]
+//! serde_json = "1"
+//! ```
+
+fn main() {
+    // ⚠️ 运行时行为变化: cargo script 的依赖版本由 Cargo 解析
+    // "1" 可能匹配 1.0.0 或 1.99.0，不同版本行为可能不同
+    let _ = serde_json::from_str::<i32>("42").unwrap();
+}
+```
+
+> **修正**: `cargo script`（Rust 1.79+ 实验性）的 frontmatter 依赖声明使用与 `Cargo.toml` 相同的版本解析规则。`serde_json = "1"` 允许任何 `1.x.x` 版本，Cargo 选择满足所有依赖约束的最新版本。这导致**版本漂移**：同一脚本在不同时间运行可能使用不同依赖版本，行为变化。解决方案：1) 使用精确版本 `serde_json = "=1.0.117"`；2) 使用 `Cargo.lock`（cargo script 生成隐式 lock 文件）；3) 对关键脚本进行版本锁定审查。这与 Python 的 `pip install`（同样解析最新版本）或 Node 的 `npx`（每次可能下载最新版本）相同——便捷与确定性是权衡。`cargo` 的 lock 文件机制缓解了部分风险，但 script 的隐式性增加了不确定性。[来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs/3502-cargo-script.html)] · [来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+
+### 10.7 边界测试：cargo script 的依赖解析与版本冲突（运行时/编译错误）
+
+```rust,compile_fail
+#!/usr/bin/env cargo
+---
+[dependencies]
+serde = "1.0"
+serde_json = "1.0"
+# ❌ 编译错误: 若某依赖间接依赖 serde 的不同版本，可能冲突
+# 例如: crate_a 依赖 serde = "=1.0.150", crate_b 依赖 serde = "1.0"
+---
+
+fn main() {
+    println!("cargo script demo");
+}
+```
+
+> **修正**: Cargo script（`cargo` shebang）是 Rust 1.79+ 的实验性功能，允许在 `.rs` 文件中内嵌 `Cargo.toml` 元数据。版本冲突的解决：1) Cargo 的语义版本解析通常自动调和兼容版本；2) 精确版本（`"=1.0.150"`）会阻止升级，可能导致冲突；3) 使用 `cargo update -p serde --precise 1.0.150` 锁定特定版本。Cargo script 的限制：1) 无 workspace 共享依赖；2) 每次运行可能重新编译（无增量编译缓存）；3) 不支持复杂构建脚本。这与 Python 的 `pip` + `requirements.txt`（类似冲突）或 Deno 的 URL 导入（无版本冲突，但无版本管理）不同——Cargo 的依赖解析是行业中最成熟的之一，但单文件脚本的限制仍需注意。[来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs/3424-cargo-script.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]

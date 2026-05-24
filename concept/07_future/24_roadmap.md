@@ -54,6 +54,11 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 路线图的编译错误](#十边界测试rust-路线图的编译错误)
+    - [10.1 边界测试：`never_type` (`!`) 的降级与类型推断（编译错误）](#101-边界测试never_type--的降级与类型推断编译错误)
+    - [10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）](#102-边界测试gat泛型关联类型的递归约束编译错误)
+    - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）](#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
+    - [10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）](#105-边界测试语言特性稳定化的时间预估偏差工程规划风险)
 
 ---
 
@@ -975,3 +980,88 @@ fn main() {
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
+
+## 十、边界测试：Rust 路线图的编译错误
+
+### 10.1 边界测试：`never_type` (`!`) 的降级与类型推断（编译错误）
+
+```rust,compile_fail
+fn always_panic() -> ! {
+    panic!("never returns")
+}
+
+fn main() {
+    let x = if true {
+        42
+    } else {
+        always_panic()
+    };
+    // ❌ 编译错误（旧版编译器）: `!` 的类型推断问题
+    // `x` 的类型推导: 42 是 i32，always_panic() 是 !
+    // ! 应能 coerce 为任意类型，但某些上下文推断失败
+    println!("{}", x);
+}
+```
+
+> **修正**: `!`（never type）是 Rust 的类型系统核心：表示"永不返回"的计算。`!` 可强制转换（coerce）为任意类型，因此 `if cond { 42 } else { panic!() }` 的类型为 `i32`。但 `!` 的稳定化过程漫长：从实验性到部分稳定（`Infallible` 别名）到完全稳定，跨越多个 Rust 版本。编译器在类型推断 `!` 时的边缘情况：1) `match` 分支类型统一；2) 闭包返回类型推断；3) `Result<T, !>` 的 `?` 运算符行为。`!` 的稳定化是 Rust 类型系统成熟度的重要里程碑——它使"不可恢复错误"在类型层面得到精确表达，而非使用占位类型（`std::convert::Infallible`）。这与 Haskell 的 `Void`（需显式 `absurd` 转换）或 TypeScript 的 `never`（类似语义，但无运行时对应）类似。[来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）
+
+```rust,compile_fail
+trait Iterable {
+    type Item<'a>;
+    type Iter<'a>: Iterator<Item = Self::Item<'a>>;
+
+    fn iter<'a>(&'a self) -> Self::Iter<'a>;
+}
+
+// ❌ 编译错误: GAT 的生命周期约束递归
+impl Iterable for Vec<i32> {
+    type Item<'a> = &'a i32;
+    type Iter<'a> = std::slice::Iter<'a, i32>;
+
+    fn iter<'a>(&'a self) -> Self::Iter<'a> {
+        self.iter() // 递归调用自身!
+    }
+}
+```
+
+> **修正**: GAT（Generic Associated Types，Rust 1.65 稳定）允许关联类型带有自己的泛型参数（通常是生命周期），解决了返回"借用迭代器"等长期问题。但 GAT 的使用引入了新的复杂度：**递归约束**和**高阶 trait bound（HRTB）**。上述代码中，`fn iter` 的实现递归调用自身（无限循环），但编译错误可能首先由生命周期约束引起——`Self::Iter<'a>` 的定义要求 `'a` 与 `self` 的借用生命周期匹配。GAT 的正确使用模式：标准库中的 `LendingIterator`（实验性）、自定义集合的借用视图、类型状态机（type-state machines）。Rust 的 GAT 设计与 Haskell 的 type families、C++ 的模板模板参数类似，但集成在 trait system 中，保持零成本抽象。[来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）
+
+```rust,compile_fail
+fn make_iter() -> impl Iterator<Item = i32> {
+    vec![1, 2, 3].into_iter()
+}
+
+fn main() {
+    // ❌ 编译错误: impl Trait 不能用于 let 绑定的类型注解
+    // let x: impl Iterator<Item = i32> = make_iter();
+
+    // 正确: 使用具体类型（若可知）或 trait object
+    let x = make_iter();
+    // 或: let x: Box<dyn Iterator<Item = i32>> = Box::new(make_iter());
+}
+```
+
+> **修正**: `impl Trait`（存在类型）可在**函数返回类型**和**函数参数**中使用（RPIT、APIT），但不能在**let 绑定的类型注解**中使用。原因是 `impl Trait` 隐藏具体类型，编译器需要知道变量的确切大小和对齐，而 `impl Trait` 不提供这些信息（它只保证实现了某 trait）。这与类型别名 `type MyIter = impl Iterator<Item = i32>`（不稳定，`type_alias_impl_trait`）不同——类型别名在定义点固定具体类型，可在 let 中使用。`impl Trait` 的设计权衡：1) 函数返回：隐藏实现细节，允许变更；2) 函数参数：接受任何实现者；3) let 绑定：不提供额外价值，增加复杂性。这与 Swift 的 `some Collection`（类似 `impl Trait`，同样限制）或 Haskell 的 `exists a. Show a => a`（存在类型，用法更灵活）类似——Rust 的 `impl Trait` 是受限但实用的存在类型。[来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
+
+### 10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）
+
+```rust,compile_fail
+// ❌ 规划风险: 依赖 nightly 特性的项目面临稳定化时间表不确定
+#![feature(generic_const_exprs)]
+#![feature(adt_const_params)]
+
+fn process<const N: usize>(arr: [i32; N]) -> [i32; N + 1]
+where
+    [i32; N + 1]: Sized,
+{
+    // generic_const_exprs 已延迟数年
+    // 项目若依赖此特性，可能长期困于 nightly
+    unimplemented!()
+}
+```
+
+> **修正**: Rust 的**特性稳定化**遵循严格流程：nightly → 实现完善 → FCP（Final Comment Period）→ 稳定。但某些复杂特性长期停滞：1) `generic_const_exprs`：依赖类型级计算，设计困难；2) `specialization`：类型系统 soundness 问题；3) `unsized_locals`：实现复杂。工程风险：1) 项目启动时依赖 nightly 特性，预期 6 个月稳定化，实际 3 年未完成；2) nightly 编译器版本漂移，特性语义变更，代码不兼容；3) 无法发布到 crates.io（限制 nightly 依赖）。缓解策略：1) 生产代码只用稳定特性；2) nightly 特性用 feature flag 隔离，提供稳定回退；3) 跟踪 [Rust Lang Team 的优先级](https://github.com/rust-lang/lang-team/) 和 [RFC 合并状态](https://rust-lang.github.io/rfcs/)。这与 Go 的"无 nightly，所有特性直接进入稳定版"或 Java 的 JEP 流程（长期但可预测）不同——Rust 的 nightly/stable 双轨制提供早期实验能力，但稳定化时间表不确定性是工程风险。[来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]

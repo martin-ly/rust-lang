@@ -41,6 +41,11 @@
   - [十二、来源](#十二来源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：事件驱动架构的编译错误](#十边界测试事件驱动架构的编译错误)
+    - [10.1 边界测试：事件类型的反序列化安全（运行时错误）](#101-边界测试事件类型的反序列化安全运行时错误)
+    - [10.2 边界测试：事件处理器的 `Send` 约束（编译错误）](#102-边界测试事件处理器的-send-约束编译错误)
+    - [10.3 边界测试：事件总线的类型擦除与向下转型失败（运行时 panic）](#103-边界测试事件总线的类型擦除与向下转型失败运行时-panic)
+    - [10.4 边界测试：事件处理顺序与生命周期管理（运行时悬垂引用）](#104-边界测试事件处理顺序与生命周期管理运行时悬垂引用)
 
 ---
 
@@ -974,3 +979,111 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
+
+## 十、边界测试：事件驱动架构的编译错误
+
+### 10.1 边界测试：事件类型的反序列化安全（运行时错误）
+
+```rust
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct OrderCreated {
+    order_id: u64,
+    amount: f64,
+}
+
+fn main() {
+    let json = r#"{"order_id": 123, "amount": "invalid"}"#;
+    // ⚠️ 运行时错误: Serde 反序列化失败
+    // let event: OrderCreated = serde_json::from_str(json).unwrap(); // panic!
+
+    // 正确: 显式处理反序列化错误
+    match serde_json::from_str::<OrderCreated>(json) {
+        Ok(event) => println!("{:?}", event.order_id),
+        Err(e) => println!("invalid event: {}", e), // ✅ 安全处理
+    }
+}
+```
+
+> **修正**: 事件驱动架构中，事件通常以 JSON/Protobuf 形式在消息队列（Kafka、RabbitMQ）中传递。消费者反序列化事件时，必须处理格式错误、字段缺失、类型不匹配等问题。Rust 的 `serde` 在编译期生成反序列化代码，运行期返回 `Result`——不会静默忽略错误（如 JavaScript 的 `JSON.parse` 后访问 undefined 字段）。这确保了事件契约的严格性：生产者发送 `OrderCreated`，消费者必须能完整解析，否则明确报错。[来源: [Serde Documentation](https://serde.rs/)]
+
+### 10.2 边界测试：事件处理器的 `Send` 约束（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+
+struct EventHandler {
+    state: Rc<i32>, // Rc 不是 Send
+}
+
+impl EventHandler {
+    fn handle(&self, _event: &str) {
+        println!("{}", self.state);
+    }
+}
+
+fn main() {
+    let handler = EventHandler { state: Rc::new(0) };
+    // ❌ 编译错误: `Rc<i32>` cannot be sent between threads safely
+    // 事件处理器通常需要在线程池上执行
+    std::thread::spawn(move || {
+        handler.handle("event");
+    }).join().unwrap();
+}
+
+// 正确: 使用 Arc
+type Arc = std::sync::Arc;
+
+struct HandlerFixed {
+    state: Arc<i32>,
+}
+```
+
+> **修正**: 事件驱动架构通常使用线程池或异步运行时处理事件。事件处理器必须实现 `Send`（可跨线程移动）和 `Sync`（可跨线程共享）。`Rc<T>` 使用非原子引用计数，不能跨线程；`Arc<T>` 使用原子操作，是线程安全的。Rust 编译器在编译期验证这些约束，阻止将非 Send 类型传递到线程池。这与 Java 的 `ExecutorService.submit()`（运行时才可能报错）或 Go 的 goroutine（自动共享，但可能数据竞争）不同——Rust 在编译期消除并发错误。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：事件总线的类型擦除与向下转型失败（运行时 panic）
+
+```rust,compile_fail
+use std::any::Any;
+
+struct EventBus {
+    handlers: Vec<Box<dyn Fn(&dyn Any)>>,
+}
+
+impl EventBus {
+    fn emit(&self, event: &dyn Any) {
+        for handler in &self.handlers {
+            handler(event);
+        }
+    }
+}
+
+fn main() {
+    let bus = EventBus { handlers: vec![] };
+    // ❌ 运行时 panic: 若 handler 错误地 downcast 事件类型
+    // handler 中: event.downcast_ref::<WrongType>().unwrap() // panic!
+}
+```
+
+> **修正**: 事件驱动架构中，**类型擦除**（`dyn Any`）允许异构事件共存，但 `downcast_ref` 在类型不匹配时返回 `None`。`unwrap()` 导致 panic。安全模式：1) 使用 enum 事件（`enum Event { UserLogin(UserEvent), OrderPlaced(OrderEvent) }`），模式匹配替代 downcast；2) 使用泛型事件总线（`EventBus<T>`），但限制为单一事件类型；3) 使用 `actix` 的地址系统（强类型消息，编译期检查）。Rust 的类型系统鼓励强类型事件：enum 是零成本的标签联合，模式匹配是穷尽检查的。这与 C# 的 `event EventHandler<T>`（泛型，强类型）或 JavaScript 的 EventEmitter（字符串事件名，完全动态）不同——Rust 的强类型事件消除了运行时类型错误，但增加了事件定义的样板。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [actix Documentation](https://actix.rs/)]
+
+### 10.4 边界测试：事件处理顺序与生命周期管理（运行时悬垂引用）
+
+```rust,compile_fail
+struct EventSystem<'a> {
+    listeners: Vec<Box<dyn Fn(&'a str)>>,
+}
+
+fn main() {
+    let mut system: EventSystem = EventSystem { listeners: vec![] };
+    {
+        let msg = String::from("event");
+        // ❌ 编译错误: 闭包捕获 &msg，但 msg 的生命周期短于 system
+        system.listeners.push(Box::new(|e| println!("{}", e)));
+        // 若闭包实际捕获 msg，生命周期不匹配
+    }
+}
+```
+
+> **修正**: 事件监听器（闭包）的生命周期与捕获的引用绑定。若监听器存储在比引用更长的结构中（如全局事件总线），闭包必须是 `'static`（无非 `'static` 引用）。解决方案：1) 使用 `String` 而非 `&str`（拥有数据）；2) 使用 `Arc<str>`（共享拥有）；3) 使用通道（`mpsc`）将事件发送到拥有数据的任务。Rust 的生命周期系统强制事件系统的架构决策：要么事件数据被拥有（`String`、`Arc<T>`），要么事件总线是临时的（生命周期与引用绑定）。这与 C++ 的 `std::function`（可捕获引用，但悬垂是 UB）或 Java 的监听器（总是引用，GC 管理生命周期）不同——Rust 在编译期防止了事件系统中的悬垂引用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Lifetime Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#lifetime-bounds)]

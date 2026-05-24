@@ -39,6 +39,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Panic 与 Abort 的编译错误](#十边界测试panic-与-abort-的编译错误)
+    - [10.1 边界测试：`catch_unwind` 捕获非 `UnwindSafe` 类型（编译错误）](#101-边界测试catch_unwind-捕获非-unwindsafe-类型编译错误)
+    - [10.2 边界测试：在 `Drop` 中 panic 导致双重 panic（运行时 abort）](#102-边界测试在-drop-中-panic-导致双重-panic运行时-abort)
 
 ---
 
@@ -666,3 +669,162 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：Panic 与 Abort 的编译错误
+
+### 10.1 边界测试：`catch_unwind` 捕获非 `UnwindSafe` 类型（编译错误）
+
+```rust,compile_fail
+use std::panic::catch_unwind;
+
+fn main() {
+    let mut x = vec![1, 2, 3];
+    let r = &mut x;
+    // ❌ 编译错误: `&mut Vec<i32>` cannot be sent between threads safely
+    // catch_unwind 要求闭包实现 UnwindSafe，而 &mut 不实现
+    let result = catch_unwind(|| {
+        r.push(4);
+        panic!("oops");
+    });
+}
+
+// 正确: 使用 AssertUnwindSafe 包装
+use std::panic::AssertUnwindSafe;
+
+fn fixed() {
+    let mut x = vec![1, 2, 3];
+    let result = catch_unwind(AssertUnwindSafe(|| {
+        x.push(4);
+        panic!("oops");
+    }));
+    println!("{:?}", result);
+}
+```
+
+> **修正**: `catch_unwind` 捕获 panic 并恢复执行，但要求闭包实现 `UnwindSafe` trait。共享/可变引用（`&T`、`&mut T`）、`RefCell` 等类型不实现 `UnwindSafe`，因为 panic 可能导致它们处于不一致状态（如 `RefCell` 的借用计数未递减）。使用 `AssertUnwindSafe` 包装闭包可显式声明"我知道这是安全的"——但这是 unsafe 的契约。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.2 边界测试：在 `Drop` 中 panic 导致双重 panic（运行时 abort）
+
+```rust
+struct BadDrop;
+
+impl Drop for BadDrop {
+    fn drop(&mut self) {
+        panic!("panic in drop"); // ⚠️ 若在已有 panic 时执行 → abort
+    }
+}
+
+fn main() {
+    let _ = BadDrop;
+    // 若主线程 panic，BadDrop 的 drop 被调用，再次 panic
+    // → 双重 panic → 程序 abort（非优雅退出）
+}
+
+// 正确: Drop 中绝不 panic
+struct GoodDrop;
+
+impl Drop for GoodDrop {
+    fn drop(&mut self) {
+        // ✅ 使用日志记录而非 panic
+        eprintln!("dropping");
+    }
+}
+```
+
+> **修正**: `Drop::drop` 在值离开作用域或 panic 传播时被调用。若在 panic 处理过程中（unwinding stack）`Drop` 再次 panic，Rust 无法继续栈展开，直接调用 `abort()` 终止进程。这是 Rust 的"双重 panic = abort"策略——确保资源泄漏不会导致更严重的不安全状态。`Drop` 实现应永不 panic。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：`panic=abort` 与 `catch_unwind` 的冲突（编译错误/链接错误）
+
+```rust,compile_fail
+use std::panic::catch_unwind;
+
+// Cargo.toml: profile.release panic = "abort"
+
+fn main() {
+    // ❌ 编译错误/链接错误: panic=abort 时 catch_unwind 不可用
+    let _ = catch_unwind(|| {
+        panic!("this will abort, not unwind");
+    });
+}
+```
+
+> **修正**: `panic=abort` 配置使 panic 直接调用 `abort()` 终止进程，跳过栈展开和 `Drop` 调用。这消除了 `catch_unwind` 的语义基础——没有展开，就没有可捕获的 panic。混合使用 `panic=abort` 和 `catch_unwind` 的代码在链接时失败（`catch_unwind` 的符号未定义）或运行时直接 abort。选择 `panic=abort` 的场景：嵌入式（无栈展开支持）、追求最小二进制体积、禁止异常处理的系统。代价：无法从子线程 panic 中恢复（`std::thread::spawn` 的 `JoinHandle` 无法获取 panic payload），某些库（如 `rayon`）要求 `panic=unwind`。这与 C 的 `abort()`（无恢复）或 C++ 的 `-fno-exceptions`（编译错误使用 try/catch）类似。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Cargo Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html)]
+
+### 10.4 边界测试：双重 panic导致 abort（运行时行为）
+
+```rust
+struct Bomb;
+
+impl Drop for Bomb {
+    fn drop(&mut self) {
+        panic!("double panic!");
+    }
+}
+
+fn main() {
+    let _bomb = Bomb;
+    panic!("first panic");
+    // ⚠️ 运行时 abort: 栈展开调用 Bomb::drop，drop 中又 panic
+    // 双重 panic → process abort
+}
+```
+
+> **修正**: Rust 的 panic 机制设计为"不可恢复"，栈展开过程中调用 `Drop::drop` 释放资源。若 `drop` 中再次 panic，形成**双重 panic**（double panic），Rust 立即调用 `abort()` 终止进程（不继续展开）。这是为了防止无限递归和状态进一步损坏。安全关键代码中，`Drop` 实现必须保证不 panic——称为"panic safety"。这与 C++ 的异常规范（`noexcept`）类似，但 Rust 不强制静态检查（`drop` 不标记为 `noexcept`），依赖运行时检测。`std::panic::always_abort()`（不稳定）可配置所有 panic 直接 abort，避免双重 panic 风险。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/exception-safety.html)]
+
+### 10.5 边界测试：`panic=abort` 与 `Drop` 的补偿动作缺失（运行时资源泄漏）
+
+```rust
+struct Resource {
+    name: &'static str,
+}
+
+impl Drop for Resource {
+    fn drop(&mut self) {
+        println!("cleaning up {}", self.name);
+    }
+}
+
+fn main() {
+    let _r1 = Resource { name: "file" };
+    let _r2 = Resource { name: "socket" };
+    // ⚠️ 运行时: panic=abort 时，不调用 Drop，资源泄漏
+    // panic!("abort now");
+}
+```
+
+> **修正**: `panic=abort` 直接终止进程，**不执行栈展开**，因此不调用任何 `Drop::drop`。这与 `panic=unwind` 形成对比：unwind 会逐帧调用 Drop，释放资源。选择 `panic=abort` 的场景（嵌入式、最小体积）需接受资源泄漏风险，或避免在 panic 路径上持有需要清理的资源。安全关键系统通常使用 `panic=abort`，因为栈展开的代码体积大且复杂，可能引入额外错误路径。这与 C 的 `abort()`（同样不调用 atexit 处理程序）或 C++ 的 `std::terminate`（不调用析构函数）相同——abort 是"立即停止"，无清理。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Cargo Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html)]
+
+### 10.6 边界测试：`catch_unwind` 与 FFI 的不可恢复性（运行时 UB）
+
+```rust,compile_fail
+extern "C" {
+    fn c_function();
+}
+
+fn main() {
+    let result = std::panic::catch_unwind(|| {
+        unsafe { c_function(); }
+    });
+    // ❌ 运行时 UB: 若 C 函数触发 C++ 异常或 longjmp，
+    // catch_unwind 无法捕获，可能导致堆栈损坏
+    match result {
+        Ok(_) => println!("success"),
+        Err(_) => println!("panic caught"),
+    }
+}
+```
+
+> **修正**: `catch_unwind` 只捕获 Rust 的 panic（栈展开），不捕获 C++ 异常、Windows SEH、或 `longjmp`。若 FFI 调用的 C 代码调用 C++ 库（如通过 C 接口封装），C++ 异常传播过 FFI 边界是 UB。安全模式：1) 确保 C 代码不抛出异常（`noexcept`、`extern "C"` 包装器捕获异常）；2) 不在 `catch_unwind` 中调用可能 `longjmp` 的 C 函数（如某些 libc 函数）；3) 使用 `panic=abort`（无栈展开，但进程终止）。这与 Java 的 JNI（Java 异常与 C 异常不互通）或 Python 的 `ctypes`（同样不捕获 C 异常）相同——跨语言异常处理是系统编程的边界问题。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.7 边界测试：`core::intrinsics::abort` 与 `std::process::abort` 的差异（运行时行为）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 运行时: core::intrinsics::abort 是底层 trap 指令，
+    // std::process::abort 可能执行清理（如刷新 stdout）
+    // 在 no_std 环境中只能使用 core::intrinsics::abort
+    unsafe { core::intrinsics::abort(); }
+}
+```
+
+> **修正**: `std::process::abort` 和 `core::intrinsics::abort` 都终止进程，但行为不同：1) `std::process::abort` 可能刷新标准流、生成 core dump（视平台）；2) `core::intrinsics::abort` 是直接执行非法指令（`ud2` on x86、`brk #0x1` on ARM），无清理。`no_std` 环境（嵌入式、内核）只能使用 `core::intrinsics::abort`（或 `panic=abort` 配置的 panic handler）。选择取决于场景：用户空间应用使用 `std::process::abort`（更友好），裸机代码使用 `core::intrinsics::abort`（更直接）。这与 C 的 `abort()`（SIGABRT，可能触发信号处理器）或 C++ 的 `std::abort`（类似 C）不同——Rust 的两种 abort 提供了不同层级的控制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/process/fn.abort.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]

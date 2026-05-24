@@ -1193,3 +1193,101 @@ Miri 的局限（与 loom 互补）:
 | 惰性求值与响应式编程 | [Wikipedia: Lazy evaluation] · [CMU 15-214: Principles of Software Construction] | ✅ |
 
 ---
+
+## 十、边界测试：高级异步模式的编译错误
+
+### 10.1 边界测试：`select!` 宏中分支完成后的变量使用（编译错误）
+
+```rust,compile_fail
+use tokio::sync::mpsc;
+
+async fn bad_select() {
+    let (tx, mut rx) = mpsc::channel::<i32>(10);
+    let (tx2, mut rx2) = mpsc::channel::<i32>(10);
+
+    tokio::select! {
+        Some(val) = rx.recv() => {
+            println!("rx: {}", val);
+        }
+        Some(val2) = rx2.recv() => {
+            println!("rx2: {}", val2);
+        }
+    }
+    // ❌ 编译错误: `val` 可能未绑定
+    // select! 只有一个分支完成，其他分支的变量不可用
+    // println!("{}", val); // 若 rx2 完成，val 未定义
+}
+
+// 正确: 在 select! 内部完成所有操作
+async fn fixed_select() {
+    let (mut rx, mut rx2) = (tokio::sync::mpsc::channel::<i32>(10).1, tokio::sync::mpsc::channel::<i32>(10).1);
+    tokio::select! {
+        Some(val) = rx.recv() => {
+            println!("rx: {}", val); // ✅ 在分支内使用
+        }
+        Some(val2) = rx2.recv() => {
+            println!("rx2: {}", val2); // ✅ 在分支内使用
+        }
+    }
+}
+```
+
+> **修正**: `tokio::select!`（以及 `futures::select!`）在编译时生成状态机，但只有**一个**分支完成执行。其他分支的绑定变量在 `select!` 之后不可用。试图在 `select!` 块外使用分支变量是编译错误（或未定义行为，取决于宏实现）。这类似于 `match` 的变量绑定只在对应臂中有效。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
+### 10.2 边界测试：`Stream::next()` 与所有权冲突（编译错误）
+
+```rust,compile_fail
+use futures::stream::{self, StreamExt};
+
+async fn bad_stream() {
+    let mut s = stream::iter(vec![1, 2, 3]);
+    while let Some(item) = s.next().await {
+        // ❌ 编译错误: cannot borrow `s` as mutable more than once at a time
+        // 若尝试在循环内重新 poll stream
+        s.next().await; // s 已被 while let 的可变借用占用
+        println!("{}", item);
+    }
+}
+
+// 正确: 顺序消费 stream
+async fn fixed_stream() {
+    let mut s = stream::iter(vec![1, 2, 3]);
+    while let Some(item) = s.next().await {
+        println!("{}", item); // ✅ 每次迭代只 poll 一次
+    }
+}
+```
+
+> **修正**: `Stream::next()` 获取 `&mut self`，返回的 `Item` 可能与 Stream 的内部状态关联。在 `while let Some(item) = s.next().await` 中，`s` 被可变借用直到 `item` 释放。不能在循环体内再次调用 `s.next()`。这与迭代器的借用规则一致——`Iterator::next(&mut self)` 要求独占可变访问。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
+
+### 10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）
+
+```rust,compile_fail
+use std::pin::Pin;
+
+struct SelfRef {
+    data: String,
+    ptr: *const String,
+}
+
+impl SelfRef {
+    fn new() -> Self {
+        let mut s = SelfRef {
+            data: String::from("hello"),
+            ptr: std::ptr::null(),
+        };
+        s.ptr = &s.data;
+        s
+    }
+}
+
+fn main() {
+    let s = SelfRef::new();
+    // ❌ 编译错误: SelfRef 自动实现 Unpin（无 PhantomPinned），
+    // 因此 Pin<&mut SelfRef> 不阻止移动
+    // let mut pinned = Box::pin(s);
+    // std::mem::swap(&mut pinned, &mut Box::pin(SelfRef::new())); // 可能移动!
+}
+```
+
+> **修正**: `Pin<P<T>>` 只在 `T: !Unpin` 时保证 `T` 不被移动。`SelfRef` 未包含 `std::marker::PhantomPinned`，因此自动实现 `Unpin`——`Pin<&mut SelfRef>` 允许 `get_mut()` 获取 `&mut SelfRef`，进而允许移动。正确做法：`struct SelfRef { data: String, ptr: *const String, _pin: std::marker::PhantomPinned }`，显式标记 `!Unpin`。这与 C++ 的 `std::pin`（C++20，类似概念）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 `Unpin` 是自动 trait，`PhantomPinned` 是显式禁用自动实现的方法。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-04-pin.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/pinning.html)]

@@ -942,3 +942,94 @@ Rust 的编译时延在 eBPF 开发中尤为明显：
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
+
+## 十、边界测试：eBPF Rust 的编译错误
+
+### 10.1 边界测试：eBPF 程序的栈大小限制（编译错误/验证失败）
+
+```rust,compile_fail
+#![no_std]
+#![no_main]
+
+use aya_ebpf::{macros::kprobe, programs::ProbeContext};
+
+#[kprobe]
+pub fn test_prog(ctx: ProbeContext) -> u32 {
+    // ❌ 验证失败: eBPF 栈大小限制 512 字节
+    let mut buf = [0u8; 1024]; // 1KB 栈数组，超出限制
+
+    let mut x = 0u64;
+    for i in 0..100 {
+        x += i as u64;
+    }
+
+    0
+}
+```
+
+> **修正**: eBPF 程序运行在内核上下文中，资源极其受限：栈大小最大 512 字节（Linux 内核限制），指令数限制 100 万条，无堆分配，无递归，无循环（或有限循环，取决于内核版本）。Rust 的 eBPF 生态（aya、redbpf）在编译期通过编译器插件和验证器检查这些约束。大数组必须使用 `PerCpuArray` 或 `HashMap`（BPF map，驻留在内核内存而非栈），函数调用必须内联（或受限于 BPF-to-BPF call 限制）。这与用户空间 Rust（GB 级内存、递归、动态分配）截然不同——eBPF 是"在极端约束下编程"，Rust 的类型系统和宏在此场景下仍提供内存安全（无空指针、无 use-after-free），但不能防止资源超限。[来源: [aya Documentation](https://aya-rs.dev/)] · [来源: [Linux Kernel eBPF Documentation](https://www.kernel.org/doc/html/latest/bpf/)]
+
+### 10.2 边界测试：eBPF 与用户空间的类型布局不匹配（编译错误）
+
+```rust,compile_fail
+// eBPF 程序 (kernel space)
+#[repr(C)]
+struct Event {
+    pid: u32,
+    uid: u32,
+    comm: [u8; 16],
+}
+
+// 用户空间程序
+#[repr(C)]
+struct UserEvent {
+    pid: u32,
+    uid: u64, // ❌ 类型不匹配: eBPF 中是 u32，用户空间是 u64
+    comm: [u8; 16],
+}
+```
+
+> **修正**: eBPF 程序与用户空间程序通过 BPF map 和 perf buffer 交换数据，共享数据结构必须**逐字节布局一致**。Rust 的 `#[repr(C)]` 确保 C 兼容布局，但字段类型、顺序、大小必须在两端完全一致。`u32` vs `u64` 的不匹配导致读取时偏移错乱（`uid` 读到 `comm` 的部分数据）。更隐蔽的问题是填充（padding）：`#[repr(C)]` 的 `struct { u8, u32 }` 在 x86-64 上有 3 字节填充，若 eBPF 端和用户空间端编译目标不同（如 eBPF 端是 64 位，用户空间是 32 位），对齐可能不同。最佳实践：使用 `#[repr(C, packed)]` 消除填充，显式指定字段大小，或通过 `aya-tool` 自动生成共享类型。这与网络协议的字节序问题类似——跨边界通信的数据结构需要严格的形式化规范。[来源: [aya Documentation](https://aya-rs.dev/)] · [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
+
+### 10.3 边界测试：eBPF 的验证器拒绝与 Rust 的抽象泄漏（运行时加载失败）
+
+```rust,compile_fail
+#![no_std]
+#![no_main]
+
+use aya_ebpf::{macros::tracepoint, programs::TracePointContext};
+
+#[tracepoint]
+pub fn trace_handler(ctx: TracePointContext) -> u32 {
+    // ❌ 验证器拒绝: eBPF 验证器检查所有路径有界
+    // 若 Rust 的 panic 展开路径被编译进 eBPF，验证器可能拒绝
+    // 因为 panic 涉及复杂控制流
+    let x: i32 = unsafe { ctx.read_at(0) };
+    if x < 0 {
+        // 某些 Rust 模式可能生成验证器不理解的代码
+        return 1;
+    }
+    0
+}
+```
+
+> **修正**: eBPF 程序在加载到内核前需通过**验证器**（verifier）检查：1) 无无限循环；2) 无无效内存访问；3) 栈大小 ≤ 512 字节；4) 指令数 ≤ 100 万。Rust 的高级抽象可能生成验证器难以分析的控制流：1) `panic` 的展开代码（即使不可达）；2) 复杂的 `match` 优化；3) 循环的边界证明不足。`aya` 和 `redbpf` 提供 `#[inline(never)]`、`#[no_panic]` 等属性帮助生成验证器友好的代码。调试方法：1) `bpftool prog load` 查看验证器日志；2) `aya-log` 输出运行时日志；3) 简化 Rust 代码，逐步定位验证器拒绝点。这与 C 的 eBPF（同样需通过验证器，但控制流更简单）或 Go 的 eBPF（通过 `cilium/ebpf` 生成，较少高级抽象）类似——Rust 的类型安全在 eBPF 中仍有效，但验证器的保守性要求代码风格适应。[来源: [aya Documentation](https://aya-rs.dev/)] · [来源: [Linux eBPF Verifier](https://www.kernel.org/doc/html/latest/bpf/verifier.html)]
+
+### 10.4 边界测试：eBPF 与用户空间的 map 类型共享（编译错误）
+
+```rust,compile_fail
+// eBPF 程序
+#[map(name = "COUNTER")]
+static mut COUNTER: HashMap<u32, u64> = HashMap::with_max_entries(1024, 0);
+
+// 用户空间程序
+use aya::maps::HashMap as AyaHashMap;
+
+fn read_counter(bpf: &mut Bpf) {
+    // ❌ 编译错误/运行时错误: eBPF map 的键值类型必须与用户空间一致
+    // 若 eBPF 中 HashMap<u32, u64>，用户空间用 HashMap<u64, u32>，行为未定义
+    let mut counter: AyaHashMap<_, u32, u64> = AyaHashMap::try_from(bpf.map_mut("COUNTER").unwrap()).unwrap();
+}
+```
+
+> **修正**: eBPF 的 **map** 是内核中的键值存储，eBPF 程序和用户空间程序通过 map 交换数据。map 的类型（键大小、值大小、最大条目数）在创建时固定，eBPF 侧和用户空间侧必须一致。Rust 的 `aya` 库在编译期通过泛型参数检查类型：`AyaHashMap<_, u32, u64>` 要求键 4 字节、值 8 字节，与 eBPF 的 `HashMap<u32, u64>` 匹配。但类型别名、平台差异（32/64 位）、对齐填充仍可能导致不匹配。安全模式：1) 使用共享类型定义 crate（`#[repr(C)]` struct）；2) 显式 `assert_eq!(std::mem::size_of::<Key>(), 4)`；3) 使用 `aya-tool` 从 eBPF 代码生成 Rust 绑定。这与 C 的 eBPF（手动计算大小，易错）或 Go 的 `cilium/ebpf`（反射检查类型）类似——Rust 的泛型在编译期提供了部分保护，但跨语言边界的类型一致性仍需人工保证。[来源: [aya Documentation](https://aya-rs.dev/)] · [来源: [Linux BPF Maps](https://docs.kernel.org/bpf/maps.html)]

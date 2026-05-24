@@ -271,4 +271,53 @@ const fn network_setup() {
 
 > **修正**: `const fn` 仅支持编译期可求值操作。异步网络操作必须在运行时通过 async runtime 执行。
 
+### 编译错误 4：QUIC 连接的生命周期与所有权转移（编译错误）
+
+```rust,compile_fail
+use quinn::{Connection, Endpoint};
+
+async fn handle_conn(conn: Connection) {
+    let (mut send, mut recv) = conn.open_bi().await.unwrap();
+    // 发送数据后尝试再次使用 conn
+    // ❌ 编译错误: `open_bi` 消耗 Connection 的部分状态
+    // 实际上 Quinn 的 Connection 是 Clone 的，以下为教学示例
+    let (mut send2, mut recv2) = conn.open_bi().await.unwrap(); // 若 Connection 非 Clone 则错误
+}
+
+// 正确: Quinn 的 Connection 是 Arc 内部管理，可 Clone
+async fn handle_conn_fixed(conn: Connection) {
+    let conn2 = conn.clone(); // ✅ Connection 内部是 Arc
+    let (mut send, mut recv) = conn.open_bi().await.unwrap();
+    let (mut send2, mut recv2) = conn2.open_bi().await.unwrap();
+}
+```
+
+> **修正**: Quinn（Rust QUIC 实现）的 `Connection` 类型内部使用 `Arc` 管理状态，因此可以 `Clone`。但 QUIC 的流（stream）语义要求应用层理解连接、双向流、单向流的所有权关系。若自定义网络协议实现未正确设计所有权，可能出现"连接已关闭但仍尝试发送"的编译期或运行时错误。[来源: [Quinn Documentation](https://docs.rs/quinn/)]
+
+### 编译错误 5：Tokio `UdpSocket` 的 `send` 与 `send_to` 混用（编译错误）
+
+```rust,compile_fail
+use tokio::net::UdpSocket;
+
+async fn bad_udp(socket: &UdpSocket) {
+    socket.connect("127.0.0.1:8080").await.unwrap();
+    // ❌ 编译错误: 已 connect 的 socket 不能再用 send_to
+    // send_to 需要未连接的 socket 或指定目标地址
+    socket.send_to(b"hello", "127.0.0.1:8080").await.unwrap();
+}
+
+// 正确: connected socket 使用 send
+async fn fixed_udp(socket: &UdpSocket) {
+    socket.connect("127.0.0.1:8080").await.unwrap();
+    socket.send(b"hello").await.unwrap(); // ✅ connected send
+}
+
+// 或未 connected socket 使用 send_to
+async fn fixed_udp2(socket: &UdpSocket) {
+    socket.send_to(b"hello", "127.0.0.1:8080").await.unwrap(); // ✅ send_to
+}
+```
+
+> **修正**: Tokio 的 `UdpSocket` 严格区分"已连接"和"未连接"模式。`connect` 后必须使用 `send`/`recv`（无需地址），未连接时必须使用 `send_to`/`recv_from`（需显式地址）。这是操作系统 UDP socket API 的 Rust 类型安全封装——编译器通过 API 设计阻止非法调用，而非运行时返回错误。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
 ---

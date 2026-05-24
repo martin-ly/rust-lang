@@ -435,3 +435,65 @@ fn closure_effect() {
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 通用 PL 基座层
+
+## 十、边界测试：效果与纯度的编译错误
+
+### 10.1 边界测试：`const fn` 中调用非 `const` 方法（编译错误）
+
+```rust,compile_fail
+struct Counter {
+    value: i32,
+}
+
+impl Counter {
+    fn new(v: i32) -> Self {
+        Self { value: v }
+    }
+}
+
+const fn make_counter() -> Counter {
+    // ❌ 编译错误: `Counter::new` 不是 const fn
+    // const fn 只能调用其他 const fn
+    Counter::new(42)
+}
+
+// 正确: 将 new 标记为 const fn
+impl Counter {
+    const fn new_const(v: i32) -> Self {
+        Self { value: v } // ✅ const fn 构造函数
+    }
+}
+
+const fn make_counter_fixed() -> Counter {
+    Counter::new_const(42) // ✅ 调用 const fn
+}
+```
+
+> **修正**: `const fn` 的效果约束限制其只能调用其他 `const fn`、使用常量、执行基本控制流。任何涉及堆分配、I/O、可变静态变量的操作都被禁止。这与 Haskell 的 `IO` monad 或纯函数语言的效果追踪类似——Rust 通过 `const` 关键字在编译期划分"纯计算"与"效果ful计算"的边界。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：`unsafe` 块的传染性与 FFI 边界（编译错误）
+
+```rust,compile_fail
+extern "C" {
+    fn c_malloc(size: usize) -> *mut u8;
+    fn c_free(ptr: *mut u8);
+}
+
+fn safe_wrapper(size: usize) -> Vec<u8> {
+    // ❌ 编译错误: call to unsafe function is unsafe and requires unsafe function or block
+    // 即使包装为安全函数，内部仍需 unsafe 块
+    let ptr = c_malloc(size);
+    Vec::from_raw_parts(ptr, size, size)
+}
+
+// 正确: 显式标记 unsafe 块
+fn safe_wrapper_fixed(size: usize) -> Vec<u8> {
+    let ptr = unsafe { c_malloc(size) };
+    if ptr.is_null() {
+        panic!("allocation failed");
+    }
+    unsafe { Vec::from_raw_parts(ptr, 0, size) } // ✅ unsafe 块明确标记
+}
+```
+
+> **修正**: `unsafe` 效果具有"传染性"——调用 `unsafe fn` 或解引用裸指针必须在 `unsafe` 块内进行。但 `unsafe` 块**不自动**使周围代码变为 unsafe；它只是告诉编译器"程序员已验证此处的安全性"。将 unsafe 操作包装为安全 API 时，必须确保所有 unsafe 前置条件在函数体内被满足（如空指针检查、长度验证、生命周期保证）。这是 Rust 安全抽象的核心契约。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]

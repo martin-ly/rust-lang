@@ -50,6 +50,9 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：高级集合的编译错误](#十二边界测试高级集合的编译错误)
+    - [12.1 边界测试：`BTreeMap` 键未实现 `Ord`（编译错误）](#121-边界测试btreemap-键未实现-ord编译错误)
+    - [12.2 边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）](#122-边界测试vecdeque-容量与索引的环绕逻辑错误)
 
 ---
 
@@ -863,3 +866,135 @@ fn main() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十二、边界测试：高级集合的编译错误
+
+### 12.1 边界测试：`BTreeMap` 键未实现 `Ord`（编译错误）
+
+```rust,compile_fail
+use std::collections::BTreeMap;
+
+#[derive(Debug, PartialEq, Eq)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    let mut map = BTreeMap::new();
+    // ❌ 编译错误: `Point` cannot be ordered
+    // BTreeMap 要求键实现 Ord（全序关系）
+    map.insert(Point { x: 1, y: 2 }, "value");
+}
+
+// 正确: 为 Point 实现 Ord
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord)] // ✅ derive 生成
+struct PointFixed {
+    x: i32,
+    y: i32,
+}
+```
+
+> **修正**: `BTreeMap` 基于 B-Tree 实现，要求键具有全序关系（`Ord` trait）。与 `HashMap`（要求 `Hash + Eq`）不同，`BTreeMap` 使用比较而非哈希。`Ord` 要求满足反对称、传递和完全性（任何两个元素可比较）。自定义类型需手动实现 `Ord` 或 derive（derive 按字段顺序字典序比较）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 12.2 边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）
+
+```rust
+use std::collections::VecDeque;
+
+fn main() {
+    let mut deque: VecDeque<i32> = VecDeque::with_capacity(4);
+    deque.push_back(1);
+    deque.push_back(2);
+    deque.push_back(3);
+    deque.push_back(4);
+    // ⚠️ 逻辑错误: 索引访问不反映逻辑顺序
+    // VecDeque 内部使用环形缓冲区，物理索引 ≠ 逻辑索引
+    println!("{:?}", deque); // [1, 2, 3, 4]
+
+    deque.pop_front(); // 移除 1
+    deque.push_back(5); // 添加 5
+    // 内部可能: [5, 2, 3, 4]（物理）→ 逻辑 [2, 3, 4, 5]
+    println!("{:?}", deque);
+}
+
+// 正确: 始终使用迭代器或双端队列 API
+fn fixed() {
+    let mut deque: VecDeque<i32> = VecDeque::new();
+    deque.extend(1..=5);
+    while let Some(front) = deque.pop_front() {
+        println!("{}", front); // ✅ 按逻辑顺序访问
+    }
+}
+```
+
+> **修正**: `VecDeque` 使用环形缓冲区（circular buffer）实现 O(1) 双端操作。其内部存储可能"环绕"——逻辑首元素不一定在物理索引 0 处。直接索引 `deque[i]` 访问的是物理位置，而非逻辑第 i 个元素。应使用 `iter()`、`pop_front()`/`pop_back()` 等 API 保证逻辑顺序。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）
+
+```rust,compile_fail
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert("key", vec![1, 2, 3]);
+
+    // ❌ 编译错误: 不能同时持有 `map` 的引用和可变引用
+    let value = map.get("key").unwrap();
+    map.entry("key").or_insert(vec![]).push(4);
+    // value 在这里仍被借用
+    println!("{:?}", value);
+}
+```
+
+> **修正**: `HashMap::entry` 需要 `&mut self`，因为 `or_insert` 可能修改 map（插入新键）。若同时持有 `get` 返回的 `&V`，则存在 `&mut self` 与 `&V` 的借用冲突——即使 `entry` 的键与 `get` 的键不同，编译器也无法证明不重叠。解决方案：1) 先 `clone` 需要的值，再调用 `entry`；2) 使用 `HashMap::get_mut` 获取 `&mut V`，直接修改；3) 用 `if let Some(v) = map.get_mut("key")` 替代 `entry` API。这与 Java 的 `Map::compute`（无借用检查，可并发修改）或 C++ 的 `std::unordered_map`（迭代器失效规则）不同——Rust 的借用检查在编译期阻止"读的同时写"，即使逻辑上安全。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-03-hash-maps.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.HashMap.html)]
+
+### 10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）
+
+```rust,compile_fail
+use std::collections::BTreeMap;
+
+fn main() {
+    let mut map = BTreeMap::new();
+    map.insert(1, "a");
+    map.insert(2, "b");
+    map.insert(3, "c");
+
+    // ❌ 编译错误: range 遍历需要不可变引用，同时修改不被允许
+    for (k, v) in map.range(1..3) {
+        map.insert(*k + 10, *v); // 尝试在遍历中插入
+    }
+}
+```
+
+> **修正**: `BTreeMap::range` 返回不可变迭代器，因为遍历过程中修改树结构会破坏迭代器状态（节点指针悬垂）。这与 C++ 的 `std::map` 相同（遍历中 `insert` 可能使迭代器失效），但 Rust 在编译期阻止。`BTreeMap` 的 sorted 性质使其适合范围查询，但修改必须在遍历前或遍历后完成。安全模式：1) `collect` 需要修改的键值对，遍历后再批量插入；2) 使用 `retain`（若支持）；3) 使用 `Cursor` API（不稳定，`BTreeMap::cursor_mut`）。Rust 的标准库设计优先考虑安全而非便利——遍历中修改是常见需求，但 Rust 要求显式处理，避免隐式迭代器失效。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）
+
+```rust,compile_fail
+use std::collections::HashSet;
+
+#[derive(Eq, PartialEq)]
+struct BadHash {
+    x: i32,
+}
+
+impl std::hash::Hash for BadHash {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        // ❌ 逻辑错误: Hash 实现不稳定的值（如随机数、时间戳）
+        // 导致同一对象在不同查询时有不同哈希值
+        self.x.hash(state);
+        // 若加入额外随机状态:
+        // rand::random::<u64>().hash(state); // 灾难!
+    }
+}
+
+fn main() {
+    let mut set = HashSet::new();
+    set.insert(BadHash { x: 1 });
+    // 若哈希不稳定，contains 可能返回 false
+    // assert!(set.contains(&BadHash { x: 1 }));
+}
+```
+
+> **修正**: `Hash` trait 的实现必须满足**一致性**：若 `a == b`，则 `hash(a) == hash(b)`，且同一对象的哈希值在对象不变时应恒定。违反一致性导致 `HashMap`/`HashSet` 行为异常：插入后查找不到、重复元素、内存泄漏。常见错误：1) 哈希中包含随机数或时间戳；2) 哈希中包含未实现 `Hash` 的字段的指针地址；3) `PartialEq` 和 `Hash` 基于不同字段（如 `Eq` 比较 `id`，`Hash` 哈希 `name`）。这与 Java 的 `hashCode`/`equals` 契约（同样要求一致）或 Python 的 `__hash__`/`__eq__`（同样要求一致）相同——哈希表的正确性依赖哈希函数的一致性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/hash/trait.Hash.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

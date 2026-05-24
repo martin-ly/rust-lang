@@ -38,6 +38,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：DevOps 与 CI/CD 的编译错误](#十边界测试devops-与-cicd-的编译错误)
+    - [10.1 边界测试：Docker 多阶段构建的 musl 目标链接错误（编译错误）](#101-边界测试docker-多阶段构建的-musl-目标链接错误编译错误)
+    - [10.2 边界测试：测试隔离的 `static mut` 数据竞争（编译错误）](#102-边界测试测试隔离的-static-mut-数据竞争编译错误)
+    - [10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）](#106-边界测试docker-多阶段构建的缓存失效编译时间膨胀)
+    - [10.7 边界测试：缓存键未包含 Cargo.lock 导致的不一致构建（CI 非确定性）](#107-边界测试缓存键未包含-cargolock-导致的不一致构建ci-非确定性)
 
 ---
 
@@ -725,3 +730,83 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：DevOps 与 CI/CD 的编译错误
+
+### 10.1 边界测试：Docker 多阶段构建的 musl 目标链接错误（编译错误）
+
+```rust,compile_fail
+// Cargo.toml 中无特别配置
+
+fn main() {
+    // ❌ 编译错误: 在 alpine/musl 目标上编译 glibc 依赖的 crate
+    // reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
+    // 若使用默认特性（native-tls），会链接 glibc，在 musl 目标上失败
+    println!("hello");
+}
+```
+
+> **修正**: Rust 的静态链接（musl target：`x86_64-unknown-linux-musl`）与动态链接（glibc target：`x86_64-unknown-linux-gnu`）是不同的编译目标。许多 crate（尤其是涉及 TLS/SSL、DNS 解析的）默认链接系统库（glibc、OpenSSL）。在 Alpine Linux（musl-based）容器中进行多阶段构建时，必须使用：1) `rustls-tls` 替代 `native-tls`；2) `vendored` 特性静态编译 OpenSSL；3) `cross` 或 `cargo zigbuild` 处理交叉编译。这与 Go 的静态编译（默认静态，CGO_ENABLED=0）不同——Rust 的 crate 生态依赖 C 库的比例更高，需要显式配置静态链接。[来源: [Rust Cargo Documentation](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)] · [来源: [musl libc](https://musl.libc.org/)]
+
+### 10.2 边界测试：测试隔离的 `static mut` 数据竞争（编译错误）
+
+```rust,compile_fail
+static mut COUNTER: i32 = 0;
+
+#[test]
+fn test_a() {
+    unsafe {
+        COUNTER += 1;
+        assert_eq!(COUNTER, 1);
+    }
+}
+
+#[test]
+fn test_b() {
+    unsafe {
+        COUNTER += 1;
+        assert_eq!(COUNTER, 1); // ❌ 运行时数据竞争/测试不稳定
+    }
+}
+```
+
+> **修正**: `static mut` 在 Rust 中是极不安全的机制：任何访问都需要 `unsafe` 块，但编译器不保证线程安全或测试隔离。并行测试（`cargo test -- --test-threads=8`）时，`test_a` 和 `test_b` 可能并发执行，导致 `COUNTER` 的值不确定。正确做法：1) 使用 `std::sync::atomic::AtomicI32`（无锁、线程安全）；2) 使用 `std::sync::Mutex`（互斥）；3) 使用 `thread_local!`（每个线程独立）。Rust 2024 Edition 进一步限制 `static mut` 的使用，鼓励迁移到安全抽象。这与 C 的全局变量（无任何保护）或 Go 的 `sync/atomic`（包级原子操作）不同——Rust 的类型系统逐步淘汰最危险的并发原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [Rust RFC 3560](https://rust-lang.github.io/rfcs/3560-static-mut-references.html)]
+
+### 10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）
+
+```rust,compile_fail
+# Dockerfile
+# FROM rust:1.75 AS builder
+# WORKDIR /app
+# COPY . .
+# RUN cargo build --release
+#
+# ❌ 编译时间膨胀: 每次 COPY . . 使缓存失效，依赖重新编译
+
+# 正确: 先复制 Cargo.toml/Cargo.lock，构建依赖，再复制源码
+# FROM rust:1.75 AS builder
+# WORKDIR /app
+# COPY Cargo.toml Cargo.lock ./
+# RUN mkdir src && echo "fn main() {}" > src/main.rs
+# RUN cargo build --release
+# COPY src ./src
+# RUN cargo build --release
+```
+
+> **修正**: Docker 的层缓存机制：每层指令的输入（文件 + 命令）未变时复用缓存。`COPY . .` 复制所有文件（包括 `src/` 中的源码修改），使后续层缓存失效。Rust 的优化构建策略：1) 先复制 `Cargo.toml`/`Cargo.lock`，用空 `main.rs` 构建依赖（生成 `target/release/deps`）；2) 再复制真实源码，只重新编译项目代码（依赖已缓存）。这与 Cargo 的 `vendor`（本地缓存依赖源码）或 `sccache`（分布式编译缓存）配合，显著加速 CI 构建。Node 的 `package.json` 分层、Go 的 `go.mod` 分层同理——Docker 缓存是 CI 优化的核心技术。[来源: [Docker Build Cache](https://docs.docker.com/build/cache/)] · [来源: [Rust Docker Guide](https://doc.rust-lang.org/cargo/guide/cargo-home.html)]
+
+### 10.7 边界测试：缓存键未包含 Cargo.lock 导致的不一致构建（CI 非确定性）
+
+```rust,compile_fail
+# .github/workflows/ci.yml
+# ❌ 配置错误: 缓存键未包含 Cargo.lock，依赖版本漂移
+# - uses: actions/cache@v3
+#   with:
+#     path: ~/.cargo/registry
+#     key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml') }}
+
+# 正确: 应使用 Cargo.lock（若提交）或 Cargo.toml + toolchain
+# key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+```
+
+> **修正**: Rust CI 缓存的关键是**缓存键**的精确性：1) `Cargo.lock` 存在且提交 → 用 `hashFiles('**/Cargo.lock')`，完全确定；2) `Cargo.lock` 不提交（库 crate）→ 用 `hashFiles('**/Cargo.toml')`，但依赖版本可能漂移；3) 工具链变更 → 键应包含 `rustc --version`。`Swatinem/rust-cache` 是社区最佳实践：自动处理 Cargo registry、target 目录、正确缓存键。常见 CI 陷阱：1) 缓存 `target/` 但不缓存 `~/.cargo/registry` → 每次重新下载依赖；2) 缓存过大 → GitHub Actions 缓存限制 10GB；3) 未区分 debug/release → 缓存冲突。这与 Java 的 Maven/Gradle 缓存或 Node.js 的 `npm ci` 缓存类似——Rust 的 Cargo 缓存策略需理解 workspace 结构和 lockfile 语义。[来源: [Swatinem/rust-cache](https://github.com/Swatinem/rust-cache)] · [来源: [GitHub Actions Caching](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)]

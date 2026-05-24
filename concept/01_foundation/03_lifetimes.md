@@ -72,6 +72,7 @@
     - [8.3 边界测试：生命周期与泛型冲突（编译错误）](#83-边界测试生命周期与泛型冲突编译错误)
     - [8.4 边界测试：`'static` 误用（编译错误）](#84-边界测试static-误用编译错误)
     - [8.5 边界测试：生命周期省略规则在复杂签名中失效（编译错误）](#85-边界测试生命周期省略规则在复杂签名中失效编译错误)
+    - [8.6 边界测试：生命周期与所有权转移的交互（编译错误）](#86-边界测试生命周期与所有权转移的交互编译错误)
   - [九、认知路径（Cognitive Path）](#九认知路径cognitive-path)
 
 ## 一、权威定义（Definition）
@@ -924,6 +925,30 @@ fn complex_lifetime_fixed<'a, 'b>(a: &'a str, b: &'b str, _c: &str) -> (&'a str,
 ```
 
 > **修正**: 生命周期省略规则仅适用于简单情况（单输入引用 → 单输出引用）。当函数签名涉及多个输入引用和多个输出引用时，编译器无法自动推断生命周期关系，必须显式标注。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 8.6 边界测试：生命周期与所有权转移的交互（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let r = &s;
+    // ❌ 编译错误: cannot move out of `s` because it is borrowed
+    // 赋值（转移所有权）与借用冲突：传参时若通过引用传参，原变量不可 move
+    let t = s; // move / 所有权转移
+    println!("{}", r); // r 仍引用 s，但 s 已被转移
+}
+
+// 正确: 先完成借用，再转移所有权
+fn fixed() {
+    let s = String::from("hello");
+    let r = &s;
+    println!("{}", r); // ✅ 借用完成后使用
+    let t = s; // ✅ 现在可以转移所有权
+    println!("{}", t);
+}
+```
+
+> **修正**: Rust 的所有权转移（move）与借用是互斥的。若变量已被借用（无论是共享借用 `&T` 还是可变借用 `&mut T`），在借用释放前不能转移其所有权。这与 C++ 的移动语义不同——C++ 允许从被引用对象移动（可能导致悬垂引用），而 Rust 在编译期阻止这种危险模式。此外，Rust 禁止读取未初始化变量（uninitialized），`let x: i32;` 声明后若未赋值就使用，编译器报错。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ---
 

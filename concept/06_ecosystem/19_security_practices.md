@@ -40,6 +40,12 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：安全实践的编译错误](#十边界测试安全实践的编译错误)
+    - [10.1 边界测试：密码学常量时间操作（运行时风险）](#101-边界测试密码学常量时间操作运行时风险)
+    - [10.2 边界测试：`unsafe` 代码的审计边界（编译错误）](#102-边界测试unsafe-代码的审计边界编译错误)
+    - [10.3 边界测试：`zeroize` 与编译器优化的冲突（逻辑错误）](#103-边界测试zeroize-与编译器优化的冲突逻辑错误)
+    - [10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）](#104-边界测试依赖供应链的-typo-squatting运行时安全风险)
+    - [10.7 边界测试：secret 在内存中的残留与 `zeroize`（运行时信息泄露）](#107-边界测试secret-在内存中的残留与-zeroize运行时信息泄露)
 
 ---
 
@@ -556,3 +562,89 @@ graph TD
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
+
+## 十、边界测试：安全实践的编译错误
+
+### 10.1 边界测试：密码学常量时间操作（运行时风险）
+
+```rust
+fn verify_password(input: &[u8], secret: &[u8]) -> bool {
+    // ⚠️ 安全风险: 非常量时间比较
+    // 时序攻击可推测密钥长度和字节
+    input == secret // 早期返回
+}
+
+// 正确: 使用 subtle crate
+use subtle::ConstantTimeEq;
+
+fn verify_password_fixed(input: &[u8], secret: &[u8]) -> bool {
+    input.ct_eq(secret).into() // ✅ 常量时间
+}
+```
+
+> **修正**: 安全关键代码（密码学、身份验证）必须防御**时序攻击**——攻击者通过测量执行时间推测密钥信息。Rust 的标准库不保证常量时间操作（优先性能），`subtle` crate 提供 `CtOption`、`ConstantTimeEq` 等原语。这与 C 的 OpenSSL（手动实现常量时间）或 Go 的 `crypto/subtle` 类似，但 Rust 的类型系统可帮助区分常量时间和非常量时间操作。形式化验证工具可进一步证明常量时间属性。[来源: [subtle Documentation](https://docs.rs/subtle/)]
+
+### 10.2 边界测试：`unsafe` 代码的审计边界（编译错误）
+
+```rust,compile_fail
+fn safe_wrapper(ptr: *const u8, len: usize) -> &[u8] {
+    // ❌ 编译错误: 裸指针转引用需要 unsafe 块
+    std::slice::from_raw_parts(ptr, len)
+}
+
+// 正确: 在 unsafe 块中转换，并验证前置条件
+fn safe_wrapper_fixed(ptr: *const u8, len: usize) -> Option<&[u8]> {
+    if ptr.is_null() || len == 0 {
+        return None;
+    }
+    Some(unsafe { std::slice::from_raw_parts(ptr, len) })
+}
+```
+
+> **修正**: 安全审计的核心是识别和限制 `unsafe` 代码的边界。Rust 编译器强制 `unsafe` 操作必须在 `unsafe` 块内，使审计者能快速定位需要人工验证的代码。安全最佳实践：1) 最小化 unsafe 代码量；2) 将 unsafe 封装为 safe API；3) 使用 `#[deny(unsafe_code)]` 禁止 unsafe；4) 使用 `cargo-geiger` 统计 unsafe 依赖。这与 C/C++ 的"所有代码都可能 unsafe"不同——Rust 的安全边界是显式的、可度量的。[来源: [Rust Secure Code Guidelines](https://secure-code-guidelines.rust-lang.org/)]
+
+### 10.3 边界测试：`zeroize` 与编译器优化的冲突（逻辑错误）
+
+```rust,compile_fail
+use zeroize::Zeroize;
+
+fn main() {
+    let mut secret = [0u8; 32];
+    // 填充密钥...
+    // ...
+    secret.zeroize();
+    // ❌ 逻辑错误: 编译器可能优化掉 zeroize，认为 secret 不再使用
+    // 需使用 Zeroizing 包装器或 volatile 写入
+}
+```
+
+> **修正**: `zeroize` crate 安全清除敏感数据（密钥、密码），防止内存残留。但编译器的死存储消除（dead store elimination）可能优化掉 `zeroize` 调用——若 `secret` 在 `zeroize` 后不再使用，编译器认为写入无意义。`zeroize` 通过 `core::ptr::write_volatile` 和内存屏障防止优化，但早期版本或某些配置下仍可能失效。最佳实践：1) 使用 `Zeroizing<T>` 包装器（Drop 时自动 zeroize）；2) 在堆上分配敏感数据（`Box::new(secret)`），利用操作系统的清零或加密内存（如 Linux 的 `mlock` + `madvise(MADV_DONTDUMP)`）；3) 使用硬件支持（AES-NI 的密钥寄存器）。这与 C 的 `memset_s`（C11，标记为不优化）或 OpenSSL 的 `OPENSSL_cleanse` 类似——安全清除是密码学实现的细节，但至关重要。[来源: [zeroize Crate](https://docs.rs/zeroize/)] · [来源: [Rust Crypto WG](https://github.com/rustcrypto/)]
+
+### 10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）
+
+```rust,compile_fail
+// Cargo.toml
+// [dependencies]
+// serde = "1.0" // 正确
+// serde-json = "1.0" // ❌ 安全风险: typo-squatting 包名
+
+fn main() {
+    // 恶意 crate 可能提供与 serde_json 相同的 API，
+    // 但内部窃取数据或植入后门
+}
+```
+
+> **修正**: typo-squatting（域名/包名抢注）是供应链攻击的常见手段：攻击者注册与流行包名相似的名字（`serde-json` vs `serde_json`、`tokioo` vs `tokio`），等待开发者打错字。Rust 的 crates.io 有初步防护：1) 名称相似度检查（阻止过于相似的名称）；2) 下载统计异常监控；3) `cargo vet` 审计依赖。但完全防护不可能——开发者必须：1) 仔细检查 Cargo.toml 中的包名；2) 使用 `cargo tree` 检查依赖树中的可疑包；3) 锁定 Cargo.lock 并审计更新；4) 使用私有 registry（企业环境）。这与 npm 的 `event-stream` 事件（恶意包被下载数百万次）或 PyPI 的定期清理（删除恶意包）类似——开源生态的开放性是优势也是风险。[来源: [crates.io Policies](https://crates.io/policies)] · [来源: [cargo-vet Documentation](https://mozilla.github.io/cargo-vet/)]
+
+### 10.7 边界测试：secret 在内存中的残留与 `zeroize`（运行时信息泄露）
+
+```rust,compile_fail
+fn main() {
+    let password = String::from("super_secret_123");
+    // ❌ 运行时信息泄露: String 的 drop 不覆盖内存，密码残留于堆
+    drop(password);
+    // 内存可能被后续分配读取，或在 core dump 中泄露
+}
+```
+
+> **修正**: Rust 的 `drop` 释放内存但不**覆盖**（zeroize）内容——这是性能优化，但对敏感数据（密码、密钥、令牌）是安全风险。`zeroize` crate 提供 `Zeroize` trait，drop 时自动覆盖内存：`password.zeroize();`。更严格：使用 `secrecy` crate 包装敏感类型，禁止 `Debug`、`Display`，强制 zeroize。深层防护：1) `mlock` 防止交换到磁盘；2) `memfd_secret`（Linux）创建仅进程可见的匿名内存；3) 编译时防止 secret 进入 `.rodata`。这与 Go 的 `memset`（需手动调用，无自动 zeroize）或 C++ 的 `secure_allocator`（类似概念）不同——Rust 的类型系统可通过 wrapper 类型（`Secret<T>`）在编译期强制安全实践。[来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226: Sensitive Information in Resource Not Removed Before Reuse](https://cwe.mitre.org/data/definitions/226.html)]

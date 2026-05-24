@@ -37,6 +37,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：错误处理的编译错误](#十边界测试错误处理的编译错误)
+    - [10.1 边界测试：`thiserror` 与 `anyhow` 的混用（编译错误）](#101-边界测试thiserror-与-anyhow-的混用编译错误)
+    - [10.2 边界测试：`Result` 嵌套与 `?` 的传播限制（编译错误）](#102-边界测试result-嵌套与--的传播限制编译错误)
 
 ---
 
@@ -555,3 +558,105 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：错误处理的编译错误
+
+### 10.1 边界测试：`thiserror` 与 `anyhow` 的混用（编译错误）
+
+```rust,compile_fail
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+enum AppError {
+    #[error("io error")]
+    Io(#[from] std::io::Error),
+}
+
+fn fallible() -> Result<(), anyhow::Error> {
+    // ❌ 编译错误: `?` 无法将 `AppError` 转为 `anyhow::Error`
+    // 除非 AppError 实现 std::error::Error（thiserror 已处理）
+    // 实际错误是类型不匹配：函数返回 anyhow::Error，但 ? 需要 From 转换
+    do_something()?;
+    Ok(())
+}
+
+fn do_something() -> Result<(), AppError> {
+    Ok(())
+}
+
+// 正确: anyhow 自动包装实现 std::error::Error 的类型
+fn fixed() -> Result<(), anyhow::Error> {
+    do_something()?; // ✅ anyhow::Error 自动实现 From<AppError>
+    Ok(())
+}
+```
+
+> **修正**: `anyhow::Error` 是动态错误类型（类似 `Box<dyn std::error::Error>`），自动实现 `From<E>`（对任何实现 `std::error::Error` 的 `E`）。`thiserror` 生成的错误类型实现 `std::error::Error`，因此可与 `anyhow` 无缝互操作。混用问题是：库代码应使用 `thiserror`（定义具体错误类型），应用代码使用 `anyhow`（统一错误处理），两者通过 `?` 和 `From` trait 自动桥接。[来源: [thiserror Documentation](https://docs.rs/thiserror/)] · [来源: [anyhow Documentation](https://docs.rs/anyhow/)]
+
+### 10.2 边界测试：`Result` 嵌套与 `?` 的传播限制（编译错误）
+
+```rust,compile_fail
+fn outer() -> Result<Result<i32, String>, String> {
+    let inner = inner_op()?; // ✅ 传播外层 Result 的错误
+    // ❌ 编译错误: `?` 只能传播一层 Result
+    // inner 是 Result<i32, String>，不能直接解包
+    Ok(inner)
+}
+
+fn inner_op() -> Result<Result<i32, String>, String> {
+    Ok(Ok(42))
+}
+
+// 正确: 显式处理嵌套 Result
+fn outer_fixed() -> Result<i32, String> {
+    let inner = inner_op()?; // 解包外层
+    let val = inner?;        // 解包内层
+    Ok(val)
+}
+```
+
+> **修正**: `?` 运算符自动将 `Result<T, E>` 的 `Err` 分支转换为函数返回类型（通过 `From` trait），但只能处理一层 `Result`。嵌套 `Result`（如 `Result<Result<T, E1>, E2>`）需要显式逐层解包。这是 Rust 显式错误处理哲学的体现——不自动扁平化嵌套错误类型，要求程序员明确每一层错误的语义。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.5 边界测试：`thiserror` 的 `#[from]` 与类型歧义（编译错误）
+
+```rust,compile_fail
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+enum AppError {
+    #[error("io: {0}")]
+    Io(#[from] std::io::Error),
+    #[error("custom: {0}")]
+    Custom(String),
+}
+
+fn may_fail() -> Result<(), AppError> {
+    // ❌ 编译错误: 若某操作可能产生 std::io::Error 和 String，
+    // #[from] 只自动转换一种类型
+    std::fs::read_to_string("file")?; // io::Error → AppError::Io ✅
+    // let s: String = ...;
+    // s.parse::<i32>()?; // String 不是错误类型，不适用
+    Ok(())
+}
+```
+
+> **修正**: `#[from]` 属性为单个类型生成 `From` 实现：`From<std::io::Error> for AppError`。若多个错误类型需要转换，需为每个类型添加 `#[from]` 变体，或手动实现 `From`。`?` 运算符的自动转换基于 `From` trait，因此一个枚举只能有一个变体作为某类型的默认转换目标。这与 `anyhow` 的 `Context` trait（可为任意错误添加上下文）或 `eyre` 的 `WrapErr` 类似——结构化错误（`thiserror`）在类型严格性上有优势，但灵活性不如通用错误类型（`anyhow`）。选择取决于场景：库代码使用 `thiserror`（调用者需匹配错误类型），应用代码使用 `anyhow`（快速传播）。[来源: [thiserror Documentation](https://docs.rs/thiserror/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)]
+
+### 10.6 边界测试：`eyre` 与 `anyhow` 的混用导致上下文丢失（编译错误）
+
+```rust,compile_fail
+use eyre::Result;
+
+fn may_fail() -> anyhow::Result<i32> {
+    anyhow::bail!("error")
+}
+
+fn main() -> Result<()> {
+    // ❌ 编译错误: eyre::Result 与 anyhow::Result 不直接兼容
+    // 两者都包装 dyn Error，但类型不同
+    let _ = may_fail()?;
+    Ok(())
+}
+```
+
+> **修正**: `anyhow` 和 `eyre` 都是 Rust 的错误处理库，提供通用错误类型和上下文。但 `anyhow::Error` 和 `eyre::Report` 是不同的类型，不能自动转换。混用导致：1) `?` 运算符无法自动转换；2) 错误链上下文断裂；3) 调试输出格式不一致。项目应统一选择一种：1) `anyhow`（更轻量、生态更广）；2) `eyre`（更丰富的上下文、自定义错误处理钩子）。这与 Go 的单一 `error` 接口（无此问题）或 Java 的异常层次（可混合，但 `catch` 需匹配类型）不同——Rust 的错误生态提供选择，但选择后需统一。[来源: [anyhow Documentation](https://docs.rs/anyhow/)] · [来源: [eyre Documentation](https://docs.rs/eyre/)]

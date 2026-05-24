@@ -35,6 +35,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 C# 的编译错误对比](#十边界测试rust-与-c-的编译错误对比)
+    - [10.1 边界测试：C# 的 async/await 与 Rust 的 Future（编译错误）](#101-边界测试c-的-asyncawait-与-rust-的-future编译错误)
+    - [10.2 边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）](#102-边界测试c-的-linq-与-rust-的迭代器编译错误)
+    - [10.3 边界测试：C# 的 async/await 与 Rust 的 `?` 在 async 中的交互（编译错误）](#103-边界测试c-的-asyncawait-与-rust-的--在-async-中的交互编译错误)
+    - [10.4 边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误）](#104-边界测试c-的属性与-rust-的派生宏的编译期差异编译错误)
 
 ---
 
@@ -777,3 +782,93 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：Rust 与 C# 的编译错误对比
+
+### 10.1 边界测试：C# 的 async/await 与 Rust 的 Future（编译错误）
+
+```rust,compile_fail
+async fn fetch() -> String {
+    String::from("data")
+}
+
+fn main() {
+    let future = fetch();
+    // ❌ 编译错误: `main` 不是 async，不能 await
+    // let data = future.await; // 编译错误
+}
+
+// 正确: 使用 block_on 或 tokio::main
+#[tokio::main]
+async fn main_fixed() {
+    let data = fetch().await; // ✅ 在 async 上下文中 await
+    println!("{}", data);
+}
+```
+
+> **C# 对比**: C# 的 `async/await` 可在任何方法中使用（包括 `Main`），编译器自动生成状态机。Rust 的 `async fn` 返回 `Future`，必须在异步运行时上执行。C# 的 `Task` 与 Rust 的 `Future` 类似，但 C# 有隐式运行时（线程池），Rust 要求显式选择运行时（Tokio、async-std）。Rust 的设计更灵活（可选择无运行时），但增加了认知负担。C# 的 `await` 可在 `catch`/`finally` 中使用，Rust 的 `?` 运算符在 `async` 中有类似限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let data = vec![1, 2, 3];
+    // ❌ 编译错误: Rust 没有方法语法糖，每个操作都是显式方法调用
+    // let result = data.Where(|x| x > 1).Select(|x| x * 2);
+    let result: Vec<_> = data.into_iter()
+        .filter(|x| *x > 1)
+        .map(|x| x * 2)
+        .collect(); // ✅ 显式方法链
+}
+```
+
+> **C# 对比**: C# 的 LINQ 提供查询表达式语法（`from x in data where x > 1 select x * 2`），编译器转换为方法调用。Rust 只有方法链（`filter().map().collect()`），没有查询表达式。LINQ 的延迟执行与 Rust 的惰性迭代器相同，但 C# 的 `IEnumerable` 有运行时开销（虚方法调用），Rust 的迭代器通过单态化实现零成本。Rust 的迭代器是更底层的抽象，性能更优，但可读性不如 LINQ 查询表达式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：C# 的 async/await 与 Rust 的 `?` 在 async 中的交互（编译错误）
+
+```rust,compile_fail
+async fn fetch_data() -> Result<String, reqwest::Error> {
+    let resp = reqwest::get("https://example.com").await?;
+    let body = resp.text().await?;
+    Ok(body)
+}
+
+fn main() {
+    // ❌ 编译错误: main 不是 async，不能直接使用 await
+    // let body = fetch_data().await; // 错误
+
+    // 正确: 使用 runtime block_on
+    // tokio::runtime::Runtime::new().unwrap().block_on(async {
+    //     let body = fetch_data().await.unwrap();
+    //     println!("{}", body);
+    // });
+}
+```
+
+> **修正**: C# 的 `async/await` 从 `Main` 方法开始就支持：`static async Task Main()` 是合法的，编译器自动生成状态机包装。Rust 的 `main` 不能是 `async fn`——`main` 是程序入口点，操作系统直接调用，无运行时调度 async 任务。必须用 `#[tokio::main]` 宏或手动创建 runtime 并 `block_on`。这是设计差异：C# 的 async 是语言级别的（编译器内置状态机生成），Rust 的 async 是库级别的（`Future` trait + runtime crate）。C# 的 `async Main` 隐藏了 runtime 创建，Rust 要求显式选择 runtime（tokio、async-std、smol）。这与 JavaScript 的 `async` 函数（自动由事件循环调度）或 Python 的 `asyncio.run()`（显式入口，类似 Rust）类似——Rust 的显式设计提供了更多控制权，但增加了样板代码。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [C# Async Main](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#asyncmain)]
+
+### 10.4 边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误）
+
+```rust,compile_fail
+// C#: [Serializable] 是运行时反射标记
+// [Serializable]
+// public class MyClass { }
+
+// Rust: #[derive(Debug)] 在编译期生成代码
+#[derive(Debug)]
+struct MyStruct {
+    x: i32,
+}
+
+fn main() {
+    let s = MyStruct { x: 5 };
+    println!("{:?}", s); // ✅ 编译期生成 Debug::fmt 实现
+
+    // ❌ 编译错误: 不能为外部类型派生 trait（孤儿规则）
+    // #[derive(Debug)]
+    // struct Wrapper(std::fs::File);
+    // File 未实现 Debug，即使 Wrapper 是本地类型，derive 也失败
+}
+```
+
+> **修正**: C# 的**属性**（attributes）主要是**元数据**：`[Serializable]`、`[Obsolete]` 等标记供运行时反射读取，不改变代码行为（少数如 `[MethodImpl]` 影响 JIT）。Rust 的**派生宏**（`#[derive(...)]`）是**代码生成**：在编译期生成 trait 实现代码（`Debug::fmt`、`Clone::clone` 等）。这是编译期 vs 运行期的根本差异：C# 的属性轻量但能力有限，Rust 的 derive 强大但增加编译时间。C# 的代码生成需额外工具（T4 模板、Source Generators），Rust 的宏是语言原生特性。这与 Java 的注解（类似 C# 属性，运行时反射）或 Python 的装饰器（运行时元编程）不同——Rust 的宏是编译期元编程，零运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [C# Attributes](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/)]

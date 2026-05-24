@@ -36,6 +36,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 Kotlin 的编译错误对比](#十边界测试rust-与-kotlin-的编译错误对比)
+    - [10.1 边界测试：Kotlin 的可空类型与 Rust 的 Option（编译错误）](#101-边界测试kotlin-的可空类型与-rust-的-option编译错误)
+    - [10.2 边界测试：Kotlin 的 data class 与 Rust 的 derive（编译错误）](#102-边界测试kotlin-的-data-class-与-rust-的-derive编译错误)
+    - [10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）](#103-边界测试kotlin-的协程与-rust-的-async-的调度模型差异运行时死锁)
+    - [10.4 边界测试：Kotlin 的 null safety 与 Rust 的 `Option` 的语法差异（编译错误）](#104-边界测试kotlin-的-null-safety-与-rust-的-option-的语法差异编译错误)
 
 ---
 
@@ -750,3 +755,108 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：Rust 与 Kotlin 的编译错误对比
+
+### 10.1 边界测试：Kotlin 的可空类型与 Rust 的 Option（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s: Option<String> = None;
+    // ❌ 编译错误: `Option<String>` 不能直接调用 String 方法
+    // 与 Kotlin 的 s?.length 不同，Rust 必须显式解包
+    let len = s.len(); // 编译错误
+}
+
+// 正确: 使用 ? 运算符或 match
+fn fixed() -> Result<(), String> {
+    let s: Option<String> = Some(String::from("hello"));
+    let len = s.as_ref().map(|v| v.len()).unwrap_or(0); // ✅ 安全处理
+    println!("{}", len);
+    Ok(())
+}
+```
+
+> **Kotlin 对比**: Kotlin 的可空类型（`String?`）与 Rust 的 `Option<String>` 类似，但 Kotlin 提供 `?.`（安全调用）和 `?:`（Elvis 运算符）简化空值处理。Rust 的 `?` 运算符用于 `Result`/`Option` 传播，`.map()` 和 `unwrap_or()` 对应 Kotlin 的 `?.let` 和 `?:`。Kotlin 的 null safety 在编译期检查，但 JVM 运行时仍可能有 null（与 Java 互操作时）。Rust 的 `Option` 是枚举，无运行时 null——`None` 和 `Some` 在内存布局中明确区分（niche optimization）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：Kotlin 的 data class 与 Rust 的 derive（编译错误）
+
+```rust,compile_fail
+struct User {
+    name: String,
+    age: i32,
+}
+
+fn main() {
+    let u1 = User { name: String::from("Alice"), age: 30 };
+    // ❌ 编译错误: `User` 未实现 `PartialEq`
+    // 不能比较结构体，除非显式 derive 或实现
+    // if u1 == u2 { ... }
+}
+
+// 正确: 使用 derive
+#[derive(PartialEq, Debug, Clone)]
+struct UserFixed {
+    name: String,
+    age: i32,
+}
+
+fn fixed() {
+    let u1 = UserFixed { name: String::from("Alice"), age: 30 };
+    let u2 = u1.clone(); // ✅ 显式 clone
+    assert_eq!(u1, u2);
+}
+```
+
+> **Kotlin 对比**: Kotlin 的 `data class` 自动生成 `equals`、`hashCode`、`toString`、`copy`，默认支持解构和比较。Rust 的 `#[derive(...)]` 提供类似功能，但要求显式 opt-in——默认不生成任何 trait 实现。这体现了 Rust 的"显式优于隐式"哲学：只有声明了 `#[derive(Clone)]` 的类型才可 clone，避免了 Kotlin/Java 中意外深拷贝的性能问题。Rust 的 derive 在编译期展开，无运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）
+
+```rust,compile_fail
+use tokio::task;
+
+async fn kotlin_style() {
+    // Kotlin: 协程默认可在任意线程调度（Dispatchers.Default）
+    // 或限制在特定线程（Dispatchers.Main）
+
+    // Rust: async 块本身不运行，需提交到运行时
+    let handle = task::spawn(async {
+        println!("background");
+    });
+    handle.await.unwrap();
+}
+
+fn main() {
+    // ❌ 运行时死锁风险: 若在单线程运行时中阻塞等待
+    // tokio::runtime::Runtime::new().unwrap().block_on(async {
+    //     let handle = tokio::spawn(async {
+    //         // 任务
+    //     });
+    //     // 若当前线程是唯一的 worker，且 block_on 不调度 spawned 任务...
+    //     // 实际上 tokio 的多线程 runtime 无此问题
+    // });
+}
+```
+
+> **修正**: Kotlin 的协程由**调度器**（Dispatcher）管理：`Dispatchers.Default`（线程池）、`Dispatchers.IO`（IO 密集型线程池）、`Dispatchers.Main`（主线程）。协程可在调度器间切换（`withContext`）。Rust 的 async 更底层：`async` 块是惰性 future，需显式提交到 runtime（`tokio::spawn`、`async_std::task::spawn`）。Tokio 的 runtime 有**多线程**和**单线程**模式：多线程模式自动调度任务到可用线程，单线程模式（`current_thread`）要求任务显式 yield（`.await`）以允许其他任务运行。Kotlin 的协程更"自动"，Rust 的 async 更"显式"。这与 Go 的 goroutine（运行时自动调度）或 C# 的 `async/await`（Task Parallel Library 调度）类似——Rust 的 async 提供了最大控制权，但增加了认知负担。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Kotlin Coroutines Guide](https://kotlinlang.org/docs/coroutines-guide.html)]
+
+### 10.4 边界测试：Kotlin 的 null safety 与 Rust 的 `Option` 的语法差异（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s: Option<String> = Some("hello".to_string());
+    // ❌ 编译错误: Rust 无 Kotlin 的安全调用运算符 ?.
+    // Kotlin: val len = s?.length ?: 0
+
+    // Rust 的等价写法:
+    let len = s.as_ref().map(|v| v.len()).unwrap_or(0);
+    // 或:
+    let len = match &s {
+        Some(v) => v.len(),
+        None => 0,
+    };
+    println!("{}", len);
+}
+```
+
+> **修正**: Kotlin 的 **null safety** 通过编译期检查和语法糖（`?.`、`?:`、`!!`）实现：`.?` 安全调用（null 时返回 null），`?:` Elvis 运算符（null 时返回默认值），`!!` 非空断言（null 时 NPE）。Rust 的 `Option<T>` 提供相同的安全保证，但语法更冗长：`map`（`?.` 的等价）、`unwrap_or`（`?:` 的等价）、`unwrap`（`!!` 的等价，panic 而非 NPE）。Kotlin 的语法更简洁，Rust 的方法链更灵活（可组合任意转换）。两者都消除了 null 指针异常——Kotlin 在 JVM 层面将 `T?` 映射为 `T` 或 `null`，Rust 在类型层面将 `Option<T>` 与 `T` 区分。这与 Swift 的 `Optional`（类似 Kotlin，有 `?.` 和 `??`）或 TypeScript 的 `strictNullChecks`（编译期检查，但运行时仍是 JavaScript 的 null）类似——现代语言都在消除 null 的危害，实现方式各异。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Kotlin Null Safety](https://kotlinlang.org/docs/null-safety.html)]

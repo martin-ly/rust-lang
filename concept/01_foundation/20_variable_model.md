@@ -365,3 +365,87 @@ fn reference_vs_pointer() {
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 通用 PL 基座层
+
+## 十、边界测试：变量模型的编译错误
+
+### 10.1 边界测试：`let` 与 `const` 的初始化差异（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: i32;
+    // ❌ 编译错误: borrow of possibly-uninitialized variable: `x`
+    // let 变量允许未初始化，但使用前必须赋值
+    println!("{}", x);
+}
+
+// 正确: 使用前初始化
+fn fixed() {
+    let x: i32;
+    x = 42; // ✅ 赋值后可用
+    println!("{}", x);
+}
+```
+
+> **修正**: Rust 的 `let` 绑定允许延迟初始化（declarative without immediate initialization），但编译器通过" definite assignment analysis "确保变量在使用前已被赋值。这与 C/C++ 的未初始化变量（包含垃圾值）形成鲜明对比——Rust 在编译期阻止使用未初始化变量。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：`const` 与 `static` 的 `Drop` 限制（编译错误）
+
+```rust,compile_fail
+struct Resource {
+    data: String,
+}
+
+impl Drop for Resource {
+    fn drop(&mut self) {
+        println!("dropping");
+    }
+}
+
+const CONST_RES: Resource = Resource {
+    data: String::new(),
+}; // ❌ 编译错误: `String` 未实现 `Copy`
+// const 要求值是编译期可求值的，且不能包含非 Copy 的 Drop 类型
+
+// 正确: static 允许非 Copy 类型（但需 unsafe 初始化）
+static mut STATIC_RES: Option<Resource> = None;
+
+fn init() {
+    unsafe {
+        STATIC_RES = Some(Resource { data: String::from("hello") });
+    }
+}
+```
+
+> **修正**: `const` 变量在编译期求值并内联到使用处，要求值实现 `Copy` 或 `'static` 且不含运行时分配。`static` 变量在数据段分配，允许非 `Copy` 类型，但初始化必须是编译期常量（Rust 1.83+ 的 `const {}` 块放宽了部分限制）。`String`、`Vec` 等堆分配类型不能作为 `const`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：变量遮蔽（shadowing）与不可变引用的冲突（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 5;
+    let r = &x;
+    let x = x + 1; // 遮蔽，创建新变量
+    // ❌ 编译错误: r 仍引用旧的 x，但旧 x 未被移动或释放
+    // 实际上此代码编译通过，因为遮蔽不改变原变量的生命周期
+    println!("{} {}", r, x);
+}
+```
+
+> **修正**: Rust 的**变量遮蔽**（shadowing）允许在同一作用域内用相同名称声明新变量。遮蔽不是赋值——它创建全新的绑定，原绑定仍有效（直到作用域结束）。`let x = x + 1` 后，`r` 仍引用旧的 `x`，因为旧 `x` 的生命周期未改变。这与 C/Java 的变量重声明（同一作用域内非法）或 Python 的变量重新绑定（无生命周期概念）不同——Rust 的遮蔽是安全的，因为每个绑定有独立的生命周期，编译器追踪所有活跃绑定。但遮蔽可能导致困惑：阅读代码时难以确定哪个 `x` 被使用。建议：在短作用域内使用遮蔽（如 `let x = x.trim()`），避免在长函数中多次遮蔽。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)] · [来源: [Rust Reference — Shadowing](https://doc.rust-lang.org/reference/statements-and-expressions.html#let-statements)]
+
+### 10.4 边界测试：未初始化变量的强制使用（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: i32;
+    if some_condition() {
+        x = 1;
+    }
+    // ❌ 编译错误: 若 some_condition() 为 false，x 未初始化
+    println!("{}", x);
+}
+
+fn some_condition() -> bool { false }
+```
+
+> **修正**: Rust 编译器通过**流敏感分析**（flow-sensitive analysis）追踪变量初始化状态：在 `println!` 处，编译器检查所有控制流路径上 `x` 是否已初始化。若存在未初始化路径，编译错误。这与 C 的未初始化变量使用（编译器警告但不阻止，运行时读取垃圾值）或 Java 的局部变量（编译器检查，与 Rust 类似）不同——Rust 的初始化分析更精确：1) 考虑条件分支；2) 考虑循环；3) 考虑 `match` 分支。`MaybeUninit<T>` 允许显式处理未初始化状态，但使用 `unsafe`。这与 Swift 的 `let`/`var`（必须初始化，与 Rust 类似）或 Go 的变量声明（零值初始化，无未初始化概念）不同——Rust 在默认情况下禁止未初始化使用，但允许显式控制（`MaybeUninit`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)] · [来源: [Rust Reference — Let Statements](https://doc.rust-lang.org/reference/statements-and-expressions.html#let-statements)]

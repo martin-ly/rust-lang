@@ -38,6 +38,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Serde 模式的编译错误](#十边界测试serde-模式的编译错误)
+    - [10.1 边界测试：反序列化时字段缺失（运行时错误）](#101-边界测试反序列化时字段缺失运行时错误)
+    - [10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时错误）](#102-边界测试serdeflatten-与重复字段编译错误--运行时错误)
 
 ---
 
@@ -689,3 +692,140 @@ graph TD
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十、边界测试：Serde 模式的编译错误
+
+### 10.1 边界测试：反序列化时字段缺失（运行时错误）
+
+```rust
+use serde::Deserialize;
+
+#[derive(Deserialize, Debug)]
+struct User {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let json = r#"{"name": "Alice"}"#; // 缺少 age 字段
+    // ⚠️ 运行时错误: missing field `age`
+    // let user: User = serde_json::from_str(json).unwrap(); // panic!
+
+    // 正确: 使用 Option 或默认值
+    let result = serde_json::from_str::<User>(json);
+    match result {
+        Ok(u) => println!("{:?}", u),
+        Err(e) => println!("deserialize error: {}", e), // ✅ 安全处理
+    }
+}
+```
+
+> **修正**: Serde 的 `Deserialize` derive 默认要求所有字段存在。缺失字段会导致反序列化错误（`Err`）。使用 `Option<T>` 或 `#[serde(default)]` 可使字段可选。Serde 的编译期生成代码在运行期检查字段存在性——这与 Protobuf 的 schema 演化（向后兼容字段标记）不同，Rust/Serde 的反序列化严格遵循结构体定义，不自动填充默认值。[来源: [Serde Documentation](https://serde.rs/)]
+
+### 10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时错误）
+
+```rust,compile_fail
+use serde::Deserialize;
+
+#[derive(Deserialize, Debug)]
+struct Outer {
+    id: u32,
+    #[serde(flatten)]
+    inner: Inner,
+}
+
+#[derive(Deserialize, Debug)]
+struct Inner {
+    id: String, // ❌ 与 Outer.id 同名但不同类型
+}
+
+fn main() {
+    let json = r#"{"id": 42}"#;
+    // 运行时错误: Serde 无法确定 id 属于 Outer 还是 Inner
+    // let outer: Outer = serde_json::from_str(json).unwrap();
+}
+
+// 正确: 避免字段名冲突
+#[derive(Deserialize, Debug)]
+struct OuterFixed {
+    outer_id: u32,
+    #[serde(flatten)]
+    inner: InnerFixed,
+}
+
+#[derive(Deserialize, Debug)]
+struct InnerFixed {
+    inner_id: String, // ✅ 无冲突
+}
+```
+
+> **修正**: `#[serde(flatten)]` 将嵌套结构体的字段展开到父结构体级别。若嵌套结构体与父结构体有同名字段，Serde 的反序列化逻辑会产生歧义——它尝试按顺序匹配字段，可能导致类型不匹配或数据错位。这是 Serde 的一个已知限制：flatten 不支持字段重名，且对枚举类型的 flatten 支持有限（需 `#[serde(untagged)]` 配合）。[来源: [Serde Documentation](https://serde.rs/)]
+
+### 10.3 边界测试：反序列化的 `deny_unknown_fields`（运行时错误）
+
+```rust,compile_fail
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Config {
+    host: String,
+    port: u16,
+}
+
+fn main() {
+    let json = r#"{"host":"localhost","port":8080,"extra":"value"}"#;
+    // ❌ 运行时错误: `deny_unknown_fields` 拒绝未知字段
+    let cfg: Config = serde_json::from_str(json).unwrap();
+    println!("{}:{}", cfg.host, cfg.port);
+}
+```
+
+> **修正**: `#[serde(deny_unknown_fields)]` 在反序列化时检查输入中是否包含 struct 未定义的字段。若存在未知字段，返回 `Err`（`unknown field \`extra\`, expected \`host\` or \`port\``）。这是 API 版本兼容性设计的工具：strict 模式（拒绝未知）防止客户端发送未来版本的字段导致误解；lenient 模式（默认，忽略未知）允许向前兼容。Rust 的 serde 生态通过属性宏控制这些行为，编译期生成对应的反序列化代码。这与 Go 的 `json.Unmarshal`（默认忽略未知字段，`DisallowUnknownFields` 选项开启严格模式）或 Python 的 `dataclasses`（无内置未知字段检查）类似，但 Rust 的配置在编译期固定，无运行时开销。[来源: [Serde Documentation](https://serde.rs/container-attrs.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：枚举的 `untagged` 反序列化歧义（运行时错误）
+
+```rust,compile_fail
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+#[serde(untagged)]
+enum Message {
+    Text(String),
+    Number(i32),
+}
+
+fn main() {
+    // ❌ 运行时歧义: "42" 可匹配 Text 或 Number?
+    // untagged 按声明顺序尝试，先匹配 Text
+    let msg: Message = serde_json::from_str("\"42\"").unwrap();
+    // msg 实际是 Message::Text("42")，不是 Number(42)
+}
+```
+
+> **修正**: `#[serde(untagged)]` 使枚举在序列化时不包含变体标签（如 `{"Text":"hello"}` → `"hello"`），反序列化时按声明顺序尝试每个变体，第一个成功的被选中。这引入**顺序敏感性**：`Text(String)` 在 `Number(i32)` 之前，因此 `"42"` 被解析为 `Text` 而非 `Number`。若顺序颠倒，结果相反。这是 untagged 枚举的设计限制——无标签时无法从值本身推断变体类型。安全模式：1) 使用 tagged 枚举（默认，明确标签）；2) 严格排序变体（最具体的在前）；3) 使用 `#[serde(try_from = "...")]` 自定义解析逻辑。这与 JSON Schema 的 `oneOf`（类似问题，按顺序验证）或 Protocol Buffers（有明确类型标签，无此问题）类似。[来源: [Serde Documentation](https://serde.rs/enum-representations.html)] · [来源: [JSON Schema Validation](https://json-schema.org/)]
+
+### 10.5 边界测试：`serde` 的 `skip_serializing_if` 与 `Option` 的交互（逻辑错误）
+
+```rust,compile_fail
+use serde::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]
+struct Config {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    timeout: Option<u32>,
+}
+
+fn main() {
+    let cfg = Config { timeout: None };
+    let json = serde_json::to_string(&cfg).unwrap();
+    // json: "{}" — timeout 字段被跳过
+    
+    let restored: Config = serde_json::from_str(&json).unwrap();
+    // ⚠️ 逻辑错误: 若业务逻辑区分 "未设置" 和 "显式设置为 None"
+    // skip_serializing_if 使两者无法区分
+    assert!(restored.timeout.is_none());
+}
+```
+
+> **修正**: `skip_serializing_if` 在条件满足时省略字段，反序列化时缺失字段使用默认值（`Option::None`）。这导致**信息丢失**：无法区分"显式设置 None"和"未提供该字段"。解决方案：1) 使用 tri-state 枚举：`enum MaybeTimeout { NotSet, Infinite, Seconds(u32) }`；2) 不使用 `skip_serializing_if`，始终序列化 `null`；3) 使用 `#[serde(default)]` + 自定义默认值。这与 GraphQL 的 nullable vs optional（同样区分）或 Protocol Buffers 的 `has_field()`（可区分未设置和默认值）类似——序列化格式的表达能力影响 API 设计。Rust 的类型系统可帮助建模这些状态（`Option<Option<T>>` 或自定义 enum）。[来源: [Serde Documentation](https://serde.rs/field-attrs.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

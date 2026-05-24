@@ -117,6 +117,8 @@
     - [13.1 边界测试：Box::into\_raw 后双重释放（运行时 UB）](#131-边界测试boxinto_raw-后双重释放运行时-ub)
     - [13.2 边界测试：Vec 索引越界（编译错误 vs 运行时 panic）](#132-边界测试vec-索引越界编译错误-vs-运行时-panic)
     - [13.3 边界测试：Pin 误用（编译错误）](#133-边界测试pin-误用编译错误)
+    - [3.4 边界测试：`ManuallyDrop` 后重复访问（运行时 UB）](#34-边界测试manuallydrop-后重复访问运行时-ub)
+    - [3.5 边界测试：对齐要求不满足的 `alloc::alloc`（运行时 UB）](#35-边界测试对齐要求不满足的-allocalloc运行时-ub)
 
 ## 一、权威定义（Definition）
 >
@@ -2375,3 +2377,87 @@ impl !Unpin for SelfRef {} // 标记为 !Unpin
 
 > **相关判定树**: [所有权判定树](../00_meta/concept_definition_decision_forest.md#二所有权判定树) · [借用判定树](../00_meta/concept_definition_decision_forest.md#三借用判定树)
 > **相关 FTA**: [内存安全失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
+
+### 3.4 边界测试：`ManuallyDrop` 后重复访问（运行时 UB）
+
+```rust
+use std::mem::ManuallyDrop;
+
+fn main() {
+    let mut md = ManuallyDrop::new(String::from("hello"));
+    let s = unsafe { ManuallyDrop::take(&mut md) }; // 取出内部值
+    // ⚠️ 运行时 UB: md 现在处于未初始化状态
+    // let s2 = unsafe { ManuallyDrop::take(&mut md) }; // 二次 take = UB!
+    drop(s); // 正确释放
+}
+
+// 正确: ManuallyDrop 只 take 一次
+fn fixed() {
+    let md = ManuallyDrop::new(String::from("hello"));
+    println!("{}", &*md); // ✅ 通过 Deref 访问，不取出
+    // md 在作用域结束时不会自动 drop
+    unsafe { ManuallyDrop::drop(&mut { md }) }; // 显式 drop
+}
+```
+
+> **修正**: `ManuallyDrop<T>` 阻止编译器自动调用 `Drop::drop`，允许程序员手动控制析构时机。`ManuallyDrop::take` 取出内部值后，`ManuallyDrop` 本身变为未初始化状态。再次访问或 `take` 是未定义行为。这是 Rust unsafe 边界的典型模式——编译器放弃自动管理，程序员承担完全责任。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 3.5 边界测试：对齐要求不满足的 `alloc::alloc`（运行时 UB）
+
+```rust
+use std::alloc::{alloc, dealloc, Layout};
+
+fn main() {
+    // ⚠️ 运行时 UB: 分配时对齐不足
+    let layout = Layout::from_size_align(10, 1).unwrap(); // 对齐 1
+    let ptr = unsafe { alloc(layout) };
+    // 若后续将 ptr 转为 &u64，但 u64 要求对齐 8
+    // let r = unsafe { &*(ptr as *const u64) }; // UB: 未对齐引用
+    unsafe { dealloc(ptr, layout); }
+}
+
+// 正确: 使用类型自然对齐
+fn fixed() {
+    let layout = Layout::new::<u64>(); // 对齐 = 8，大小 = 8
+    let ptr = unsafe { alloc(layout) };
+    assert!(!ptr.is_null());
+    unsafe { dealloc(ptr, layout); }
+}
+```
+
+> **修正**: Rust 的全局分配器 API 要求调用者提供正确的内存布局（大小和对齐）。对齐不足会导致未定义行为——不仅是性能问题，现代编译器假设所有引用都正确对齐，未对齐引用可能触发硬件异常或被优化掉。`Layout::new::<T>()` 自动使用类型 `T` 的自然对齐，是安全做法。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：`Box::leak` 的永久泄漏（逻辑错误）
+
+```rust,compile_fail
+fn main() {
+    let s = Box::leak(Box::new(String::from("permanent")));
+    // ⚠️ 逻辑错误: s 的生命周期是 'static，但从未释放
+    // 程序结束前内存一直占用
+    println!("{}", s);
+}
+```
+
+> **修正**: `Box::leak` 将堆分配转换为 `'static` 引用，故意放弃释放——内存永久泄漏，直到进程结束。使用场景：1) 全局配置字符串（程序生命周期内需要）；2) 单例模式（`lazy_static` 内部使用 `Box::leak`）；3) 与 C 代码交互（C 接管 Rust 分配的内存）。`Box::leak` 是安全的（不 unsafe），因为放弃所有权是 Rust 安全模型允许的操作（类似 `std::mem::forget`）。这与 C 的 `malloc` 无 `free`（同样泄漏，但可能是 bug）或 Java 的静态引用（GC 不回收）类似——Rust 的 `Box::leak` 是显式、有文档的泄漏，C 的泄漏常是疏忽。长期运行的服务应避免 `Box::leak`，或在关闭时通过 `unsafe` 回收（若保持原始指针）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/boxed/struct.Box.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-01-box.html)]
+
+### 10.4 边界测试：`Rc<RefCell<T>>` 的循环引用（运行时 panic/内存泄漏）
+
+```rust,compile_fail
+use std::rc::{Rc, Weak};
+use std::cell::RefCell;
+
+struct Node {
+    next: Option<Rc<RefCell<Node>>>,
+}
+
+fn main() {
+    let a = Rc::new(RefCell::new(Node { next: None }));
+    let b = Rc::new(RefCell::new(Node { next: Some(Rc::clone(&a)) }));
+    // ❌ 运行时问题: 若 a.next = Some(Rc::clone(&b))，形成循环引用
+    // Rc 的引用计数永不为 0，内存泄漏
+    a.borrow_mut().next = Some(Rc::clone(&b));
+    // a 和 b 互相引用，无法释放
+}
+```
+
+> **修正**: `Rc`（单线程引用计数）和 `Arc`（多线程引用计数）在循环引用时泄漏内存，因为每个节点的引用计数至少为 1（来自循环中的另一个节点）。解决方案：1) 使用 `Weak` 引用（不增加强引用计数，允许打破循环）；2) 使用 arena 分配器（统一释放整个图）；3) 使用 `unsafe` 裸指针管理复杂图结构。`Rc<RefCell<T>>` 是 Rust 中表达共享可变图的标准模式，但循环引用是其弱点。这与 C++ 的 `std::shared_ptr`（同样循环引用，需 `std::weak_ptr`）或 Java 的 GC（自动检测循环引用并回收）不同——Rust 无 GC，循环引用的检测和预防是开发者责任。这与所有权系统的根本假设一致：所有权图必须是有向无环图（DAG），循环需要 `Weak` 打破。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-06-reference-cycles.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/rc/struct.Rc.html)]

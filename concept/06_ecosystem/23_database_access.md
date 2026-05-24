@@ -38,6 +38,11 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：数据库访问的编译错误](#十边界测试数据库访问的编译错误)
+    - [10.1 边界测试：SQLx 的编译期查询验证（编译错误）](#101-边界测试sqlx-的编译期查询验证编译错误)
+    - [10.2 边界测试：连接池的生命周期管理（编译错误）](#102-边界测试连接池的生命周期管理编译错误)
+    - [10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时死锁）](#106-边界测试连接池的-deadlock-与异步等待运行时死锁)
+    - [10.5 边界测试：连接池耗尽与异步等待超时（运行时超时/崩溃）](#105-边界测试连接池耗尽与异步等待超时运行时超时崩溃)
 
 ---
 
@@ -704,3 +709,89 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：数据库访问的编译错误
+
+### 10.1 边界测试：SQLx 的编译期查询验证（编译错误）
+
+```rust,compile_fail
+// 假设表: users (id INTEGER PRIMARY KEY, name TEXT)
+
+async fn bad_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
+    // ❌ 编译错误: sqlx 编译期检查查询与返回类型不匹配
+    let row: (i32, i32) = sqlx::query_as("SELECT id, name FROM users")
+        .fetch_one(pool)
+        .await?;
+    // name 是 TEXT，不能映射到 i32
+    Ok(())
+}
+
+// 正确: 查询类型与数据库 schema 匹配
+async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
+    let row: (i32, String) = sqlx::query_as("SELECT id, name FROM users")
+        .fetch_one(pool)
+        .await?; // ✅ id: INTEGER → i32, name: TEXT → String
+    println!("{}: {}", row.0, row.1);
+    Ok(())
+}
+```
+
+> **修正**: SQLx 的宏（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。编译期验证要求开发时数据库可访问（或使用 `sqlx-data.json` 离线模式），这是类型安全的代价。[来源: [SQLx Documentation](https://docs.rs/sqlx/)]
+
+### 10.2 边界测试：连接池的生命周期管理（编译错误）
+
+```rust,compile_fail
+use sqlx::SqlitePool;
+
+async fn fetch_data(pool: &SqlitePool) -> Result<String, sqlx::Error> {
+    let row = sqlx::query!("SELECT name FROM users WHERE id = ?", 1)
+        .fetch_one(pool)
+        .await?;
+    // ❌ 编译错误: row.name 的生命周期与 pool 绑定
+    // 若尝试返回引用，会违反生命周期规则
+    // Ok(&row.name) // 编译错误
+    Ok(row.name) // ✅ 返回所有权
+}
+```
+
+> **修正**: 数据库查询返回的行数据通常引用连接池内部缓冲区。在 Rust 中，这些引用不能逃离异步函数——它们的生命周期与连接租用期绑定。正确做法是返回拥有所有权的值（`String`、`Vec<u8>`），而非引用。这与 Go 的 `sql.Rows.Scan`（复制到变量）或 Java 的 `ResultSet.getString`（返回新字符串）类似，但 Rust 的类型系统显式追踪生命周期，阻止悬垂引用。连接池的租用-归还模式通过 RAII 自动管理，防止连接泄漏。[来源: [SQLx Documentation](https://docs.rs/sqlx/)]
+
+### 10.6 边界测试：连接池的 `deadlock` 与异步等待（运行时死锁）
+
+```rust,compile_fail
+use sqlx::SqlitePool;
+
+async fn nested_query(pool: &SqlitePool) -> Result<(), sqlx::Error> {
+    let mut tx = pool.begin().await?;
+
+    // ❌ 运行时死锁: 若在事务中再次获取连接（而非使用事务）
+    // let row = sqlx::query!("SELECT ...").fetch_one(pool).await?;
+    // 连接池耗尽时，等待新连接 → 但当前连接被事务持有不放
+
+    // 正确: 在事务内使用事务对象
+    let row = sqlx::query!("SELECT ...").fetch_one(&mut *tx).await?;
+    tx.commit().await?;
+    Ok(())
+}
+```
+
+> **修正**: 数据库连接池的**死锁**是常见生产问题：事务持有连接不放，同时尝试从池中获取新连接。若池大小为 N，并发事务数 ≥ N 时，所有事务等待新连接，但无连接可用——死锁。Rust 的 `sqlx` 和 `deadpool` 不提供自动死锁检测，需开发者避免：1) 在事务内只使用事务对象（`&mut tx`），不直接从 pool 获取连接；2) 限制并发事务数（`tokio::sync::Semaphore`）；3) 设置连接获取超时（`pool.acquire().timeout(...)`）。这与 Java 的 HikariCP（同样可能死锁）或 Go 的 `sql.DB`（连接管理在标准库，但死锁仍可能发生）类似——连接池死锁是通用问题，Rust 的类型系统不自动预防，但编译期查询检查减少了 SQL 错误。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [Database Connection Pool Patterns](https://docs.oracle.com/en/database/oracle/oracle-database/19/jjucp/)]
+
+### 10.5 边界测试：连接池耗尽与异步等待超时（运行时超时/崩溃）
+
+```rust,compile_fail
+use sqlx::postgres::PgPoolOptions;
+
+async fn query(pool: &sqlx::PgPool) {
+    // ❌ 运行时超时: 若所有连接被占用且未释放，新请求无限等待
+    let row: (i64,) = sqlx::query_as("SELECT 1")
+        .fetch_one(pool)
+        .await
+        .unwrap();
+}
+
+// 若连接池大小 = 10，并发请求 = 100，90 个请求排队
+// 若无超时配置，可能永远等待
+```
+
+> **修正**: 数据库连接池（`sqlx`、`deadpool`、`bb8`）管理有限的数据库连接资源。**池耗尽**（pool exhaustion）是高并发系统的常见问题：1) 连接未正确释放（忘记 `drop` guard、长事务）；2) 池大小配置过小（`max_connections = 10` 对应 1000 QPS）；3) 慢查询占用连接过久。`sqlx` 的 `acquire_timeout` 配置获取连接的超时，防止无限等待。异步 Rust 的特殊风险：`await` 持有连接 guard 跨越 await 点 → 其他任务无法获取连接 → 死锁。安全模式：在最小作用域内使用连接，或在 `async` 块开始时获取，结束前释放。这与 Go 的 `sql.DB`（内置连接池，默认无上限）或 Java 的 HikariCP（类似配置）不同——Rust 的显式生命周期使连接泄漏更难发生，但 async/await 引入了新的持有模式。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [PostgreSQL Connection Pooling](https://wiki.postgresql.org/wiki/PgBouncer)]

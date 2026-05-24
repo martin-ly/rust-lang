@@ -33,6 +33,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Newtype 与包装器的编译错误](#十边界测试newtype-与包装器的编译错误)
+    - [10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）](#101-边界测试newtype-不继承原类型的-trait编译错误)
+    - [10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时 UB）](#102-边界测试phantomdata-的协变逆变误用编译错误--运行时-ub)
 
 ---
 
@@ -513,3 +516,132 @@ graph TD
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十、边界测试：Newtype 与包装器的编译错误
+
+### 10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）
+
+```rust,compile_fail
+struct Meters(u32);
+
+fn add_distance(a: Meters, b: Meters) -> Meters {
+    // ❌ 编译错误: cannot add `Meters` to `Meters`
+    // Newtype 不自动实现原类型的 trait
+    Meters(a.0 + b.0) // 必须手动解包
+}
+
+fn main() {
+    let d1 = Meters(100);
+    let d2 = Meters(200);
+    let _ = add_distance(d1, d2);
+}
+
+// 正确: 为 Newtype 实现所需 trait
+use std::ops::Add;
+
+impl Add for Meters {
+    type Output = Self;
+    fn add(self, other: Self) -> Self {
+        Meters(self.0 + other.0)
+    }
+}
+```
+
+> **修正**: Newtype 模式（`struct Wrapper(T)`）创建全新的类型，**不继承**原类型的任何 trait 实现。这是 Newtype 的核心特征——类型隔离。如需使用原类型的操作，必须手动实现（或使用 `derive_more` crate 委托）。这与 C++ 的 `typedef` 或 `using`（类型别名）完全不同——Rust 的 Newtype 是强类型抽象，编译器将 `Meters` 和 `u32` 视为完全不同的类型。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时 UB）
+
+```rust,use std::marker::PhantomData;
+
+struct Container<T> {
+    ptr: *const u8,
+    _marker: PhantomData<T>,
+}
+
+fn main() {
+    let c: Container<&'static str> = Container {
+        ptr: std::ptr::null(),
+        _marker: PhantomData,
+    };
+    // ⚠️ 逻辑错误: PhantomData<&'static str> 使 Container 对 'static 协变
+    // 若将 Container<&'static str> 转为 Container<&'a str>（'a 更短），可能不安全
+    let _short: Container<&str> = c; // 类型转换，但语义可能错误
+}
+
+// 正确: 使用 PhantomData<*const T> 使类型不变
+struct InvariantContainer<T> {
+    ptr: *const u8,
+    _marker: PhantomData<*const T>, // ✅ *const T 使 T 不变（invariant）
+}
+```
+
+> **修正**: `PhantomData<T>` 不仅标记类型参数的使用，还影响类型的**变异性**（variance）。`PhantomData<&'a T>` 使类型对 `'a` 协变，`PhantomData<&'a mut T>` 使类型对 `'a` 逆变，`PhantomData<*const T>` 使类型对 `T` 不变。错误选择变异性可能导致生命周期绕过——将短生命周期值通过类型转换赋给期望长生命周期的上下文，产生悬垂引用。这是 Rust 高级类型系统的微妙之处，也是 unsafe 代码审查的重点。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：newtype 的 derive 限制（编译错误）
+
+```rust,compile_fail
+struct Meters(u32);
+struct Seconds(u32);
+
+fn main() {
+    let m = Meters(100);
+    let s = Seconds(60);
+    // ❌ 编译错误: newtype 不自动继承底层类型的 trait 实现
+    let total = m.0 + s.0; // 需要手动访问内部字段
+    // 不能: m + s（即使 Meters 和 Seconds 都包装 u32）
+}
+```
+
+> **修正**: newtype 模式（`struct Meters(u32)`）创建新类型，不自动继承底层类型的 trait 实现。需要手动实现 `Add`、`Display`、`From` 等 trait，或使用 `derive_more` crate 减少样板。这是 newtype 的代价：类型安全（防止 `Meters` + `Seconds` 的语义错误）需要显式实现操作。若需要完全继承底层类型的行为，使用类型别名（`type Meters = u32`）——但类型别名不创建新类型，无 newtype 的安全保护。Rust 的 orphan rule 也限制 newtype 的 trait 实现：不能为外部类型实现外部 trait（`impl Add for Meters` 中 `Meters` 是本地类型，合法；但 `impl Add for u32` 非法）。这与 Haskell 的 `newtype`（自动派生底层类型的 typeclass 实例，通过 `GeneralizedNewtypeDeriving`）或 Scala 的 value class（类似 newtype，有性能优化）不同——Rust 更保守，要求显式实现。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+
+### 10.4 边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）
+
+```rust,compile_fail
+use std::ops::Deref;
+
+struct Wrapper(String);
+
+impl Deref for Wrapper {
+    type Target = String;
+    fn deref(&self) -> &String { &self.0 }
+}
+
+fn takes_str(s: &str) {
+    println!("{}", s);
+}
+
+fn main() {
+    let w = Wrapper(String::from("hello"));
+    takes_str(&w); // ✅ Deref 强制转换: &Wrapper → &String → &str
+    
+    // ❌ 逻辑错误: Deref 使 Wrapper 表现得像 String，但语义不同
+    // 开发者可能忘记 Wrapper 和 String 是不同的类型
+    let s: String = w.clone(); // 克隆的是 String，不是 Wrapper
+}
+```
+
+> **修正**: `Deref` 强制转换是 Rust 的"便捷特性"：`&Wrapper` 可自动转为 `&String`（若 `Wrapper: Deref<Target=String>`），再转为 `&str`（若 `String: Deref<Target=str>`）。但过度使用 `Deref` 创建"隐式接口"——`Wrapper` 似乎拥有 `String` 的所有方法，但实际上只转发引用操作。修改操作（`push_str`、`clear`）需要 `DerefMut`，构造需要 `From`/`Into`。API 设计建议：只为智能指针类型（`Box`、`Rc`、`Arc` 的自定义版本）实现 `Deref`，不为领域类型（`Meters`、`Username`）实现——领域类型应显式定义方法，避免隐式行为带来的困惑。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/predictability.html)]
+
+### 10.5 边界测试：newtype 的 `Deref` 过度使用导致的方法名冲突（编译错误/逻辑错误）
+
+```rust,compile_fail
+use std::ops::Deref;
+
+struct Username(String);
+
+impl Deref for Username {
+    type Target = String;
+    fn deref(&self) -> &String { &self.0 }
+}
+
+fn main() {
+    let u = Username(String::from("alice"));
+    // ❌ 逻辑错误: Deref 使 Username 拥有 String 的所有方法
+    // 但某些方法可能语义不当
+    let _ = u.to_uppercase(); // 返回 String，不是 Username
+    let _ = u.len(); // 是 String 的长度，语义正确
+    let _ = u.clone(); // 返回 String，不是 Username!
+}
+```
+
+> **修正**: `Deref` 强制转换使 newtype 获得内部类型的所有方法，但**返回类型**仍是内部类型。`u.clone()` 返回 `String` 而非 `Username`，因为 `clone` 的签名在 `String` 中定义，返回 `Self`（`String`）。若需要 `Username::clone()` 返回 `Username`，必须手动 `impl Clone for Username`。这是 `Deref` 委托的局限：它转发方法调用，但不改变方法签名。这与 C# 的 `implicit operator`（类似转换，但同样不改变返回类型）或 Scala 的 `implicit class`（扩展方法，不继承方法）类似——newtype 模式要求显式实现所需 trait，不能仅依赖 `Deref`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/predictability.html)]

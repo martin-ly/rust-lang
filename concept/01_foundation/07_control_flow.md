@@ -39,6 +39,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：控制流的编译错误](#十二边界测试控制流的编译错误)
+    - [12.1 边界测试：`loop` 返回值类型不匹配（编译错误）](#121-边界测试loop-返回值类型不匹配编译错误)
+    - [12.2 边界测试：`if let` 与 `while let` 的变量遮蔽（编译错误）](#122-边界测试if-let-与-while-let-的变量遮蔽编译错误)
 
 ---
 
@@ -726,3 +729,88 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十二、边界测试：控制流的编译错误
+
+### 12.1 边界测试：`loop` 返回值类型不匹配（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let result = loop {
+        break 42; // break 带值
+        break "hello"; // ❌ 编译错误: mismatched types
+        // 同一 loop 的所有 break 必须返回相同类型
+    };
+    println!("{}", result);
+}
+
+// 正确: 所有 break 返回相同类型
+fn fixed() -> i32 {
+    loop {
+        if some_condition() {
+            break 42; // ✅ i32
+        }
+        break 0; // ✅ i32
+    }
+}
+
+fn some_condition() -> bool { false }
+```
+
+> **修正**: `loop` 表达式可以返回值（通过 `break expr;`），但所有 `break` 分支必须返回相同类型。编译器通过控制流分析推断 `loop` 的类型。若存在不一致的 `break` 类型，编译器报错。这类似于 `match` 的所有分支必须返回相同类型。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 12.2 边界测试：`if let` 与 `while let` 的变量遮蔽（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = Some(5);
+    if let Some(x) = x {
+        // x 在此处遮蔽外部 x
+        println!("inner: {}", x);
+    }
+    // ❌ 编译错误: `x` 的值已被移动
+    // 若 x 不是 Copy 类型，if let 的解构可能消耗值
+    println!("outer: {}", x);
+}
+
+// 正确: 使用引用匹配
+fn fixed() {
+    let x = Some(String::from("hello"));
+    if let Some(ref inner) = x { // ✅ 匹配引用，不消耗 x
+        println!("inner: {}", inner);
+    }
+    println!("outer: {:?}", x); // ✅ x 仍有效
+}
+```
+
+> **修正**: `if let` 和 `while let` 通过模式匹配解构值。若模式不使用 `ref` 或 `ref mut`，则发生所有权移动（对非 `Copy` 类型）。使用 `ref` 绑定创建引用而非获取所有权，允许在匹配后继续使用原值。这是 Rust 模式匹配与所有权系统的关键交互点。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：`loop` 表达式的类型推断（编译错误）
+
+```rust,compile_fail
+fn maybe_return() -> i32 {
+    let x = loop {
+        if some_condition() {
+            break 42;
+        }
+        // ❌ 编译错误: 若 loop 永不 break，或 break 的类型不一致
+    };
+    x
+}
+
+fn some_condition() -> bool { true }
+```
+
+> **修正**: `loop` 是 Rust 中唯一可返回值的循环结构：`break expr` 返回 `expr` 作为 `loop` 的值。编译器要求：1) 所有 `break` 返回相同类型；2) 若 `loop` 可能无限循环（无 `break`），其类型为 `!`（never type），可 coerce 为任意类型。`loop { break 42 }` 的类型是 `i32`，`loop { break "hello" }` 的类型是 `&str`。若 `break` 的类型不一致，编译错误。这与 C 的 `for`/`while`（无返回值）或 Haskell 的 `rec`/`fix`（返回值但语义不同）不同——Rust 的 `loop` 返回值使某些模式更简洁（如重试逻辑返回操作结果）。`loop` 与 `break` 的组合是 Rust 控制流的独特设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html)]
+
+### 10.4 边界测试：`?` 运算符在 `main` 中的返回类型（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let file = std::fs::File::open("not_exist.txt")?;
+    // ❌ 编译错误: `?` 要求函数返回 Result 或 Option
+    // main 默认返回 ()
+}
+```
+
+> **修正**: `?` 运算符只能在返回 `Result` 或 `Option` 的函数中使用。`main` 函数可返回 `Result<(), E>`（`E: Debug`），Rust 在返回 `Err` 时打印错误并设置非零退出码。正确写法：`fn main() -> Result<(), Box<dyn std::error::Error>> { let file = std::fs::File::open("...")?; Ok(()) }`。这与 Go 的 `if err != nil { return err }`（在 main 中返回 error 等价于 `os.Exit(1)`）或 Python 的 `sys.exit(1)` 类似——Rust 的类型系统要求显式声明 `main` 可能失败。`main` 返回 `Result` 是 Rust 错误处理哲学的自然延伸：连程序入口点也使用 `Result`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Reference — Main Function](https://doc.rust-lang.org/reference/crates-and-source-files.html#main-functions)]

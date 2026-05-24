@@ -23,6 +23,9 @@
     - [1.3 不动点定理](#13-不动点定理)
   - [二、Rust 的指称解释](#二rust-的指称解释)
     - [2.1 类型即域](#21-类型即域)
+  - [十、边界测试：指称语义的编译错误](#十边界测试指称语义的编译错误)
+    - [10.1 边界测试：非终止计算与 `loop {}` 的类型（编译错误）](#101-边界测试非终止计算与-loop--的类型编译错误)
+    - [10.2 边界测试：`panic!` 的指称与 `Result` 的指称分离（编译错误）](#102-边界测试panic-的指称与-result-的指称分离编译错误)
     - [2.2 所有权即线性性](#22-所有权即线性性)
     - [2.3 生命周期即区域](#23-生命周期即区域)
   - [三、反命题与边界分析](#三反命题与边界分析)
@@ -32,6 +35,8 @@
   - [五、来源与延伸阅读](#五来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：发散函数（`!`）的指称语义（编译错误）](#103-边界测试发散函数的指称语义编译错误)
+    - [10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）](#104-边界测试unsafe-代码的语义鸿沟运行时-ub)
 
 ---
 
@@ -146,6 +151,52 @@ Kleene 不动点定理:
 ### 2.1 类型即域
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：指称语义的编译错误
+
+### 10.1 边界测试：非终止计算与 `loop {}` 的类型（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: `loop {}` 的类型是 `!` (never type)，
+    // 在 Rust 1.41+ 中可被强制转换为任何类型
+    let x: i32 = loop {}; // 无限循环，无返回值
+}
+
+// 正确: never type 的指称是底部元素 ⊥
+fn diverges() -> ! {
+    loop {} // ✅ 返回 never type，表示非终止
+}
+
+// never type 可被强制转换为任何类型
+fn call_diverges() -> i32 {
+    diverges() // ✅ ! → i32 是合法的强制转换
+}
+```
+
+> **修正**: 在指称语义中，类型 `T` 的指称是一个数学域（domain），包含所有可能的值。`!`（never type）的指称是**底部元素** `⊥`，表示非终止或 panic。`⊥` 是任何域的子集（因为 `⊥ ⊑ v` 对所有 `v` 成立），因此 `!` 可被强制转换为任何类型。这与 Haskell 的 `undefined :: a` 或 Scala 的 `Nothing` 类似——底部类型是所有类型的子类型。Rust 的 `!` 类型目前仍在部分特性中不稳定，但核心语义已稳定。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：`panic!` 的指称与 `Result` 的指称分离（编译错误）
+
+```rust,compile_fail
+fn may_fail() -> Result<i32, String> {
+    // ❌ 编译错误: panic! 返回 !，不是 Result
+    // panic 的指称是 ⊥（底部），不是 Err
+    panic!("not implemented");
+}
+
+// 正确: panic 与 Result 的语义区分
+fn may_fail_fixed() -> Result<i32, String> {
+    Err("not implemented".to_string()) // ✅ Err 是 Result 的正常变体
+}
+
+fn main() {
+    // panic 表示编程错误，不应被常规捕获
+    // Result 表示预期内的错误，应被调用者处理
+}
+```
+
+> **修正**: 在指称语义中，`panic!` 和 `Result::Err` 有完全不同的指称。`panic!` 的指称是 `⊥`（底部）——表示计算失败，栈展开释放资源，通常不应恢复。`Result::Err` 的指称是 `Ok(v) ⊑ Err(e)` 域中的一个正常元素——错误是值空间的一部分，可被匹配、传播、转换。Rust 强制区分这两种错误模式：`panic` 用于不可恢复错误（bug），`Result` 用于可恢复错误（文件不存在、网络超时）。这与 Java 的异常（Exception vs Error）或 Haskell 的 `Either`（无 panic 机制）形成对比。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ```text
 Rust 类型的指称:
@@ -497,3 +548,36 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 10.3 边界测试：发散函数（`!`）的指称语义（编译错误）
+
+```rust,compile_fail
+fn diverges() -> ! {
+    loop {}
+}
+
+fn main() {
+    let x = diverges();
+    // ❌ 编译错误: x 的类型是 !，不能作为值使用
+    // 但从指称语义看，diverges() 的语义是 ⊥（底），不返回任何值
+    // let y: i32 = x; // ! 可 coerce 为 i32，但不能打印或操作
+    println!("{}", x); // ! 未实现 Display
+}
+```
+
+> **修正**: 在指称语义中，**底**（bottom，⊥）表示非终止或错误的计算。Rust 的 `!` 类型（never type）是 ⊥ 的类型论对应：没有值的类型。`diverges() -> !` 的语义是"此函数永不返回"，其"返回值"是 ⊥。`!` 可 coerce 为任意类型（ex falso quodlibet），因此 `let y: i32 = diverges()` 合法——但 `diverges()` 永不执行到赋值点，所以 `y` 永远不会被使用。这与 Haskell 的 `undefined :: a`（值层面的 ⊥，有类型但运行时错误）或 Scala 的 `Nothing`（类型层面的 ⊥，无值）类似——Rust 的 `!` 更接近 Scala 的 `Nothing`，是空类型（uninhabited type）。`!` 的稳定化使 Rust 的类型系统在理论上更完整，支持更精确的控制流分析。[来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] · [来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)]
+
+### 10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 42;
+    let r = &mut x as *mut i32;
+    unsafe {
+        let r2 = r.add(1);
+        *r2 = 0; // ❌ 运行时 UB: 越界写入
+    }
+}
+```
+
+> **修正**: 指称语义为 safe Rust 提供了精确的数学模型，但 `unsafe` 代码打破了这一模型。Safe Rust 的语义保证：没有数据竞争、没有悬垂指针、没有类型混淆。`unsafe` 块允许开发者绕过这些保证，但要求手动维护语义不变式。上述代码中，`r.add(1)` 指向 `x` 之后的内存（未分配），写入是未定义行为——指称语义无法描述 `unsafe` 代码的行为，因为 `unsafe` 进入了实现定义的领域。形式化验证工具（Miri、Kani、RustBelt）试图为 `unsafe` 代码建立安全边界：Miri 解释执行检测 UB，Kani 符号验证断言，RustBelt 在分离逻辑中证明 unsafe 抽象的安全性。但完全的形式化覆盖仍是开放问题——`unsafe` 是 Rust 语义中的"已知未知"。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]

@@ -35,6 +35,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Return Type Notation 预览的编译错误](#十边界测试return-type-notation-预览的编译错误)
+    - [10.1 边界测试：RTN 与生命周期参数的冲突（编译错误）](#101-边界测试rtn-与生命周期参数的冲突编译错误)
+    - [10.2 边界测试：RTN 与泛型返回类型的边界（编译错误）](#102-边界测试rtn-与泛型返回类型的边界编译错误)
+    - [10.3 边界测试：RTN 与关联类型的返回值约束（编译错误）](#103-边界测试rtn-与关联类型的返回值约束编译错误)
+    - [10.4 边界测试：RTN 与默认方法实现的交互（编译错误）](#104-边界测试rtn-与默认方法实现的交互编译错误)
 
 ---
 
@@ -424,3 +429,82 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：Return Type Notation 预览的编译错误
+
+### 10.1 边界测试：RTN 与生命周期参数的冲突（编译错误）
+
+```rust,compile_fail
+trait Parser<'a> {
+    type Output;
+    fn parse(&'a self, input: &'a str) -> Self::Output;
+}
+
+fn process<'a, P>(parser: P) -> impl Parser<'a, Output = impl Into<String>>
+where
+    P: Parser<'a>,
+    P::parse(..): Send, // ❌ 语法错误: RTN 不支持带生命周期参数的关联函数
+{
+    parser
+}
+```
+
+> **修正**: Return Type Notation（RTN，RFC 3654）允许在 trait bound 中约束关联函数的返回类型：`P::foo(..): Send` 表示 `P` 实现的 `foo` 方法的返回类型实现 `Send`。但 RTN 当前不支持带生命周期参数的函数签名——`P::parse(&'a self, &'a str)` 的生命周期参数使 RTN 语法解析复杂化。生命周期在 RTN 中的处理方式仍在设计：是隐式泛化（对任意生命周期约束），还是要求显式指定（`P::parse<'a>(..): Send`）？这与 `async fn` 的 `-> impl Future<Output = T> + Send` 问题相同——异步方法的返回类型（future）是否 `Send` 取决于捕获的生命周期。RTN 的目标是为这一问题提供简洁、通用的语法。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
+
+### 10.2 边界测试：RTN 与泛型返回类型的边界（编译错误）
+
+```rust,compile_fail
+trait Factory {
+    fn create<T: Default>() -> T;
+}
+
+fn make_thing<F>() -> impl Factory
+where
+    F: Factory,
+    F::create::<String>(..): Send, // ❌ 语法错误: RTN 不支持显式泛型参数
+{
+    todo!()
+}
+```
+
+> **修正**: RTN 的另一个边界是**泛型方法**（generic methods）：`Factory::create<T>()` 的返回类型依赖于 `T`，RTN 语法 `F::create(..): Send` 未明确指定 `T`，导致歧义。可能的解决方案：1) `F::create::<String>(..): Send` 显式实例化；2) `for<T: Default> F::create<T>(..): Send` 全称量化；3) 仅支持非泛型方法的 RTN（保守方案）。设计挑战：Rust 的 trait system 已有大量复杂度（关联类型、泛型、生命周期、where bound），RTN 必须与现有机制无缝集成。这与 Haskell 的 `forall` 或 C++ 的 `decltype(auto)` 类似——类型系统的表达能力扩展需要谨慎的语法设计。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+
+### 10.3 边界测试：RTN 与关联类型的返回值约束（编译错误）
+
+```rust,compile_fail
+trait Factory {
+    type Product;
+    fn create(&self) -> Self::Product;
+}
+
+fn use_factory<F>(f: F)
+where
+    F: Factory,
+    F::create(..): Send, // ❌ 语法错误: RTN 不支持关联函数的返回值
+{
+}
+```
+
+> **修正**: RTN（Return Type Notation）当前设计主要针对**trait 方法**的返回类型约束，但对**关联函数**（无 `self`）和**关联类型构造**的支持仍在讨论。`Factory::create` 是 trait 方法，但 `F::create(..): Send` 的语法在 `F` 是具体类型时可能歧义（`F` 可能有多重实现）。RTN 的设计挑战：1) 语法简洁性（`F::foo(..): Send` vs `for<'a> F::foo<'a>(..): Send`）；2) 与现有 where bound 的集成；3) 编译器实现的复杂性（需在 trait resolution 后检查返回类型）。这与 C++ 的 `decltype(auto)`（返回类型推断，类似挑战）或 Swift 的 `some Collection`（不透明返回类型，不直接约束）类似——RTN 是 Rust 类型系统的精细化扩展，目标是解决 async fn 的 `Send` 推断问题。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/)]
+
+### 10.4 边界测试：RTN 与默认方法实现的交互（编译错误）
+
+```rust,compile_fail
+trait Processor {
+    fn process(&self) -> impl Send {
+        // 默认实现
+        42
+    }
+}
+
+struct MyProcessor;
+impl Processor for MyProcessor {
+    fn process(&self) -> i32 {
+        // ❌ 编译错误: 若重写默认实现，返回类型是否仍需 Send？
+        // RTN 要求默认实现和重写都满足约束
+        42
+    }
+}
+```
+
+> **修正**: `impl Trait` 在 trait 方法返回类型中的使用（RPITIT，Return Position Impl Trait In Traits）与 RTN 交互复杂：默认实现返回 `impl Send`，要求所有重写也返回 `Send` 类型。但编译器如何验证？1) 在 trait 定义处检查默认实现；2) 在每个 `impl` 处检查重写；3) 通过 RTN `Processor::process(..): Send` 在调用点验证。当前 Rust 1.75+ 支持 RPITIT，但 RTN 仍处于实验阶段。设计决策：返回类型约束应属于 trait 契约（所有实现必须满足）还是调用者约束（特定调用需要）？RTN 倾向于后者，但前者也有需求（如 `Iterator::next` 返回 `Option<Self::Item>`，`Item` 在 trait 定义时约束）。这与 Java 的泛型返回类型（编译期擦除，无此问题）或 C++ 的 `auto` 返回（推断具体类型，无约束）不同——Rust 的 `impl Trait` 是存在类型 + 约束的组合。[来源: [Rust RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)] · [来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)]

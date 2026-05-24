@@ -45,6 +45,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：字符串与文本的编译错误](#十二边界测试字符串与文本的编译错误)
+    - [12.1 边界测试：`String` 与 `&str` 的生命周期不匹配（编译错误）](#121-边界测试string-与-str-的生命周期不匹配编译错误)
+    - [12.2 边界测试：字符串索引操作（编译错误）](#122-边界测试字符串索引操作编译错误)
 
 ---
 
@@ -611,3 +614,84 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十二、边界测试：字符串与文本的编译错误
+
+### 12.1 边界测试：`String` 与 `&str` 的生命周期不匹配（编译错误）
+
+```rust,compile_fail
+fn get_str() -> &str {
+    let s = String::from("hello");
+    // ❌ 编译错误: `s` does not live long enough
+    // String 在函数返回时 drop，不能返回其内部 str 的引用
+    &s[..]
+}
+
+// 正确: 返回 String（所有权）
+fn get_string() -> String {
+    String::from("hello") // ✅ 所有权转移给调用者
+}
+
+// 或: 返回 'static str
+fn get_static() -> &'static str {
+    "hello" // ✅ 字符串字面量是 'static
+}
+```
+
+> **修正**: `String` 拥有堆分配的 UTF-8 字节数组，`&str` 是对其内部数据的借用。返回 `&str` 意味着返回一个引用，但被引用的 `String` 在函数返回时释放。这与悬垂引用问题相同——生命周期系统阻止返回指向局部 `String` 的 `&str`。正确做法是返回 `String`（转移所有权）或返回 `'static str`（字符串字面量）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 12.2 边界测试：字符串索引操作（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = "hello".to_string();
+    // ❌ 编译错误: `String` cannot be indexed by `{integer}`
+    // Rust 字符串不支持整数索引
+    let c = s[0];
+}
+
+// 正确: 使用 chars() 迭代或 get 方法
+fn fixed() {
+    let s = "hello".to_string();
+    let c = s.chars().nth(0); // ✅ 返回 Option<char>
+    println!("{:?}", c); // Some('h')
+
+    // 或使用字节索引（需谨慎，可能截断 UTF-8）
+    let byte = s.as_bytes().get(0); // ✅ 返回 Option<&u8>
+    println!("{:?}", byte);
+}
+```
+
+> **修正**: Rust 禁止 `String`/`str` 的整数索引，因为 UTF-8 是多字节编码，第 N 个"字符"不一定是第 N 个字节。`"你好"[0]` 可能返回 UTF-8 首字节而非完整字符。这与 Python/Java 的透明 Unicode 处理不同——Rust 强制开发者显式选择字节级或字符级访问，避免隐式截断多字节字符。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：`str::split` 与模式类型的不匹配（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = "hello world";
+    // ❌ 编译错误: split 的参数类型不匹配
+    // let parts: Vec<&str> = s.split(' ').collect(); // char，OK
+    // let parts: Vec<&str> = s.split(" ").collect(); // &str，OK
+    // let parts: Vec<&str> = s.split([' ', '\t']).collect(); // [char; 2]，OK（1.51+）
+    
+    // 但以下错误:
+    let parts: Vec<&str> = s.split(vec![' ', '\t']).collect();
+    // Vec<char> 未实现 Pattern trait
+}
+```
+
+> **修正**: `str::split` 接受实现 `Pattern` trait 的参数：`char`、`&str`、`&[char]`、`FnMut(char) -> bool`。`Vec<char>` 未实现 `Pattern`，因此不能作为 `split` 参数。Rust 的 `Pattern` trait 是稳定的内部 trait（`std::str::pattern::Pattern`），不对外公开实现，因此不能为自定义类型实现 `Pattern`。这是标准库的封闭 trait 设计：防止外部类型破坏 `split` 的内部优化。替代方案：1) 将 `Vec<char>` 转为 `&[char]`（`vec.as_slice()`）；2) 使用闭包 `|c| vec.contains(&c)`；3) 使用 `regex` crate 处理复杂分割模式。这与 Python 的 `str.split`（接受 `str` 或 `None`）或 JavaScript 的 `String.prototype.split`（接受字符串或正则）不同——Rust 的 `split` 参数类型在编译期严格检查，但灵活性较低。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.str.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：字符串拼接的 `+` 运算符消耗左操作数（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = String::from(" world");
+    let s3 = s1 + &s2; // s1 被消耗，s2 被借用
+    // ❌ 编译错误: s1 在 + 后被移动，不能再次使用
+    println!("{}", s1);
+}
+```
+
+> **修正**: `String + &str` 的实现消耗左边的 `String`（取得所有权），追加右边的 `&str`，返回新的 `String`。这是效率优化：若 `s1` 有足够容量，直接在其缓冲区后追加 `s2` 的内容，无需新分配。代价：`s1` 被移动。若需保留 `s1`，应使用 `format!("{}{}", s1, s2)` 或 `s1.clone() + &s2`。多次拼接时，`+` 链的效率差（每次可能重新分配），应使用 `String::with_capacity` + `push_str` 或 `format!`。这与 Java 的 `String +`（创建新 `String`，不修改原对象）或 C++ 的 `std::string +`（创建新字符串）不同——Rust 的 `+` 是变异操作（mutating），利用已有分配。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)]

@@ -37,6 +37,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Safety Tags 预览的编译错误](#十边界测试safety-tags-预览的编译错误)
+    - [10.1 边界测试：安全标签的层级不匹配（编译错误）](#101-边界测试安全标签的层级不匹配编译错误)
+    - [10.2 边界测试：标签传播与 unsafe 块边界（编译错误）](#102-边界测试标签传播与-unsafe-块边界编译错误)
+    - [10.3 边界测试：安全标签的层级蕴含与工具支持缺失（编译错误/验证失败）](#103-边界测试安全标签的层级蕴含与工具支持缺失编译错误验证失败)
+    - [10.4 边界测试：`unsafe` 代码的安全标签审计与人为遗漏（逻辑错误）](#104-边界测试unsafe-代码的安全标签审计与人为遗漏逻辑错误)
 
 ---
 
@@ -392,59 +397,84 @@ graph TD
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
-
----
-
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+## 十、边界测试：Safety Tags 预览的编译错误
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+### 10.1 边界测试：安全标签的层级不匹配（编译错误）
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+```rust,compile_fail
+#[safety::tag("memory-safe")]
+fn safe_alloc(size: usize) -> *mut u8 {
+    // ❌ 编译错误/审计失败: 标记为 memory-safe 但返回裸指针
+    std::alloc::alloc(std::alloc::Layout::array::<u8>(size).unwrap())
+}
 
-> **[来源: [crates.io](https://crates.io/)]**
+#[safety::tag("memory-safe")]
+fn safe_use(ptr: *mut u8) {
+    // ❌ 编译错误: 标记为 safe 但在 safe 函数中使用裸指针
+    unsafe { *ptr = 0; }
+}
+```
 
-> **[来源: [docs.rs](https://docs.rs/)]**
+> **修正**: Safety Tags（实验性概念）是为 unsafe 代码提供形式化安全契约的元数据系统。函数或模块标记为 `"memory-safe"`、`"thread-safe"`、`"panic-safe"` 等，静态分析工具验证代码行为与标签一致。`safe_alloc` 标记为 `memory-safe` 但返回未初始化的裸指针——使用者必须知道指针的有效性约束，因此实际上不是"安全"的。正确做法：返回 `Vec<u8>` 或 `Box<[u8]>`，将裸指针封装在安全抽象中。这与 Rust 现有的 unsafe 函数契约（文档中描述前置条件）相比，Safety Tags 将非形式化的文档注释提升为可机器检查的声明。挑战：标签语义的精确定义、标签之间的蕴含关系（`memory-safe` ⇒ `thread-safe`?）、与形式化验证工具（Kani、Prusti）的集成。[来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)] · [来源: [Safety Dance Blog Series](https://vgatherps.github.io/)]
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+### 10.2 边界测试：标签传播与 unsafe 块边界（编译错误）
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+```rust,compile_fail
+#[safety::tag("no-panic")]
+fn no_panic_add(a: i32, b: i32) -> i32 {
+    // ❌ 编译错误/审计失败: 加法可能溢出 panic（debug 模式）
+    a + b
+}
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+#[safety::tag("no-panic")]
+fn safe_add(a: i32, b: i32) -> i32 {
+    // 正确: 使用 wrapping_add 或 checked_add
+    a.wrapping_add(b) // ✅ 显式处理溢出
+}
+```
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+> **修正**: `"no-panic"` 标签要求函数在任何输入下都不 panic。Rust 的许多基本操作在 debug 模式下会 panic（整数溢出、数组越界、除零），在 release 模式下则回绕（wrap）或产生 UB（`get_unchecked`）。`no-panic` 标签强制开发者使用显式的安全替代：`wrapping_add`、`checked_div`、`get`（返回 `Option`）等。`no_panic` crate 通过链接时检查验证最终二进制中无 panic 调用。这与航空、汽车等安全关键领域的需求一致——禁止不可恢复的错误路径。形式化上，`no-panic` 是**全函数**（total function）的近似：对所有定义域输入都有定义输出。完全的 totality 证明需要形式化验证，但 `no-panic` 标签 + 静态分析是实用的工程折中。[来源: [no_panic Crate](https://docs.rs/no-panic/)] · [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+### 10.3 边界测试：安全标签的层级蕴含与工具支持缺失（编译错误/验证失败）
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+```rust,compile_fail
+#[safety::tag("memory-safe")]
+#[safety::tag("thread-safe")]
+fn safe_function() {}
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+// ❌ 编译错误/验证失败: 若工具不处理标签层级，
+// "memory-safe" 可能不蕴含 "no-ub"
+// 标签语义未标准化，不同工具解释不同
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+fn main() {
+    safe_function();
+}
+```
 
----
+> **修正**: Safety Tags 是 Rust 安全代码 WG 提出的实验性概念，但目前**无编译器支持**，无标准语义。标签如 `"memory-safe"`、`"thread-safe"`、`"no-panic"` 是声明式的，工具（lint、验证器）可选择性识别。挑战：1) **标签语义**：`"memory-safe"` 是否蕴含 `"no-ub"`、`"no-data-race"`、`"no-use-after-free"`？2) **标签传播**：调用 `"memory-safe"` 函数的函数是否自动 `"memory-safe"`？3) **工具碎片化**：`cargo-geiger` 统计 unsafe，`no_panic` 检查 panic，无统一工具处理所有标签。这与 Java 的 `@Nullable`/`@NonNull`（Checker Framework 支持，但非标准）或 C 的 `__attribute__((nonnull))`（编译器支持有限）类似——标签/注解系统的价值取决于工具生态的成熟度。[来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)] · [来源: [Safety Dance Blog](https://vgatherps.github.io/)]
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+### 10.4 边界测试：`unsafe` 代码的安全标签审计与人为遗漏（逻辑错误）
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+```rust,compile_fail
+#[safety::tag("memory-safe")]
+fn wrapper() {
+    unsafe {
+        // ❌ 逻辑错误: 标签声明 memory-safe，但 unsafe 块未充分审计
+        // 若内部违反内存安全，标签是虚假承诺
+        let ptr = 0x1 as *mut i32;
+        *ptr = 42; // UB!
+    }
+}
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+fn main() {
+    wrapper();
+}
+```
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **修正**: 安全标签是**信任机制**，非**验证机制**：开发者声明代码满足某些安全属性，但编译器不自动验证（除非结合 Kani/Prusti 等工具）。虚假标签比无标签更危险——它给审查者虚假的安全感。最佳实践：1) 每个 `unsafe` 块配详细注释（输入不变式、输出保证、为何安全）；2) 使用 Miri 在测试套件中运行 unsafe 代码；3) 使用 `cargo vet` 审计依赖的 unsafe 使用。这与航空领域的 DO-178C（"已验证"是认证过程的结果，非自我声明）或网络安全领域的 SOC 2（信任但需审计）类似——标签是起点，非终点。Rust 社区正在探索将标签与形式化验证结合：标签声明 + 工具验证 = 可组合的安全保证。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]

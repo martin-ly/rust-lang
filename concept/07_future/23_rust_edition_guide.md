@@ -33,6 +33,11 @@
   - [五、来源与延伸阅读](#五来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust Edition Guide 的编译错误](#十边界测试rust-edition-guide-的编译错误)
+    - [10.1 边界测试：`impl Trait` 在静态项中的生命周期捕获（编译错误）](#101-边界测试impl-trait-在静态项中的生命周期捕获编译错误)
+    - [10.2 边界测试：Edition 迁移的宏展开差异（编译错误）](#102-边界测试edition-迁移的宏展开差异编译错误)
+    - [10.6 边界测试：Edition 2024 的 `gen` 关键字保留与现有标识符冲突（编译错误）](#106-边界测试edition-2024-的-gen-关键字保留与现有标识符冲突编译错误)
+    - [10.5 边界测试：多 Edition workspace 的依赖解析冲突（编译错误）](#105-边界测试多-edition-workspace-的依赖解析冲突编译错误)
 
 ---
 
@@ -490,3 +495,77 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：Rust Edition Guide 的编译错误
+
+### 10.1 边界测试：`impl Trait` 在静态项中的生命周期捕获（编译错误）
+
+```rust,compile_fail
+fn make_iter() -> impl Iterator<Item = i32> {
+    vec![1, 2, 3].into_iter()
+}
+
+static ITER: impl Iterator<Item = i32> = make_iter();
+// ❌ 编译错误: `impl Trait` 不能用于 static/const 项（当前限制）
+
+fn main() {
+    for x in ITER {
+        println!("{}", x);
+    }
+}
+```
+
+> **修正**: `impl Trait` 在类型别名位置和静态项中的使用是 Rust 的长期限制。`static` 和 `const` 要求类型在编译期完全已知（单态化），而 `impl Trait` 是**存在类型**（existential type）——隐藏具体实现，只暴露 trait bound。编译器需要知道 `static` 的确切大小和对齐，因此不能是抽象的 `impl Trait`。RFC 2289（`type_alias_impl_trait`）部分解决了类型别名的问题，但 `static`/`const` 仍不支持。Edition 演进可能逐步放宽这些限制。 workaround：使用 trait 对象 `Box<dyn Iterator<Item = i32>>`（有运行时虚函数开销），或手写具体类型（暴露实现细节）。这与 C++ 的 `auto`（不能用于 `static`）或 Java 的接口（可用于 `static`，但需具体实现类）不同——Rust 的 `impl Trait` 设计追求零成本抽象，但静态位置的单态化要求与之冲突。[来源: [Rust RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bound.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：Edition 迁移的宏展开差异（编译错误）
+
+```rust,compile_fail
+// Edition 2021 宏
+macro_rules! old_macro {
+    () => {
+        let _ = async { println!("hello"); };
+        // Edition 2021: async 块不捕获生命周期
+    };
+}
+
+// Edition 2024: async 块捕获规则变更
+fn use_macro() {
+    let x = 5;
+    old_macro!();
+    // ❌ 若宏在 Edition 2024 中展开，async 块的生命周期捕获可能不同
+    // 导致编译错误或行为变化
+}
+```
+
+> **修正**: Rust 的 Edition 是 crate 级别的，但宏展开继承调用点的 Edition。这意味着定义在 Edition 2021 crate 中的宏，在 Edition 2024 crate 中调用时，按 Edition 2024 规则展开。若宏生成的代码依赖特定 Edition 语义（如 `async` 块的生命周期捕获、`match` 的移动语义），跨 Edition 使用可能导致意外行为。`cargo fix` 的 Edition 迁移工具检查这些风险，但复杂宏可能需手动审查。这与 C 预处理器宏（纯文本替换，无 Edition 概念）或 Lisp 宏（同像性，环境继承）不同——Rust 的宏系统既有 hygiene（避免命名冲突）又有 Edition 敏感性，增加了复杂性。最佳实践：避免在宏中生成依赖 Edition 边缘语义的代码，使用显式、可移植的写法。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+
+### 10.6 边界测试：Edition 2024 的 `gen` 关键字保留与现有标识符冲突（编译错误）
+
+```rust,compile_fail
+struct Gen {
+    value: i32,
+}
+
+fn main() {
+    let gen = Gen { value: 42 };
+    // ❌ 编译错误: Edition 2024 中 `gen` 成为保留关键字
+    // 变量名、函数名、模块名使用 `gen` 需重命名
+    println!("{}", gen.value);
+}
+```
+
+> **修正**: Rust 2024 Edition 将 `gen` 设为保留关键字（为 `gen` 块特性预留）。现有代码中使用 `gen` 作为标识符（变量、函数、结构体字段）的需重命名。`cargo fix --edition` 自动处理大部分冲突，但某些边缘情况需手动修复：1) 宏生成的代码包含 `gen`；2) 外部 crate 的公开 API 使用 `gen`（需等待上游修复）；3) `include!` 或 `include_str!` 引入的文件中的 `gen`。这与 Python 3 的 `print` 变为关键字（破坏性变更）或 C 的 `_Bool`/`bool`（C99 引入，可能冲突）类似——语言演进需要"征用"标识符空间。Rust 的 Edition 机制缓解了这一痛苦：旧 Edition 代码继续编译，迁移时工具辅助重命名。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)] · [来源: [Rust RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)]
+
+### 10.5 边界测试：多 Edition workspace 的依赖解析冲突（编译错误）
+
+```rust,compile_fail
+// Workspace Cargo.toml
+// [workspace]
+// members = ["crate_2018", "crate_2021", "crate_2024"]
+// resolver = "3" // 2024 edition 默认
+
+// ❌ 编译错误: 若 crate_2018 依赖旧版 syn（不支持 2024 edition）
+// 且 crate_2024 的 proc-macro 使用 syn 2.0，可能导致版本冲突
+```
+
+> **修正**: Workspace 中**多 edition 共存**是常见场景（逐步迁移），但依赖解析的复杂性：1) proc-macro crate 的 edition 影响宏展开代码的解析；2) `resolver = "3"`（2024 edition 默认）改变依赖特征解析，可能影响旧 crate；3) 某些 crate 的 `build.rs` 依赖特定 edition 行为。最佳实践：1) workspace 统一 `resolver = "2"` 或 `"3"`（不混用）；2) proc-macro crate 优先升级到新 edition（影响所有依赖者）；3) 使用 `cargo tree` 检查依赖图中 edition 分布。`cargo` 的依赖解析保证：同一 crate 的多个版本可在依赖图中共存（不同版本视为不同 crate），但 proc-macro 只能有一个版本（编译期加载）。这与 npm 的 workspaces（类似多包管理）或 Java 的 Maven multi-module（版本统一强制）不同——Rust 的 workspace 更灵活，但 edition 交互是高级话题。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/resolver.html)] · [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]

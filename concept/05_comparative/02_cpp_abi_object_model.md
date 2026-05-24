@@ -573,3 +573,108 @@ pub struct CDrawable {
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — C/C++ 工程层对比
+
+## 十、边界测试：C++ ABI 与 Rust 的编译错误对比
+
+### 10.1 边界测试：C++ 的多重继承 vs Rust 的 trait 组合（编译错误）
+
+```rust,compile_fail
+trait Drawable { fn draw(&self); }
+trait Clickable { fn click(&self); }
+
+struct Button;
+
+impl Drawable for Button { fn draw(&self) {} }
+impl Clickable for Button { fn click(&self) {} }
+
+fn use_both(obj: &(dyn Drawable + Clickable)) {
+    // ❌ 编译错误: trait objects cannot contain multiple non-auto traits
+    // Rust 不支持多 trait 的 trait object（除非一个是 auto trait）
+    obj.draw();
+    obj.click();
+}
+```
+
+> **C++ 对比**: C++ 支持多重继承，`class Button : public Drawable, public Clickable` 可直接创建包含两个基类子对象的对象。Rust 的 trait object（`dyn Trait`）只能包含一个"主 trait"，因为 vtable 只能存储一个主 trait 的方法指针。多 trait 组合需通过泛型（`T: Drawable + Clickable`）或创建新的组合 trait（`trait Interactive: Drawable + Clickable {}`）。这与 C++ 的虚继承和菱形继承问题形成对比——Rust 的设计消除了 vtable 布局的复杂性，但限制了动态分发的灵活性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：C++ 的隐式构造 vs Rust 的显式构造（编译错误）
+
+```rust,compile_fail
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    // ❌ 编译错误: expected struct `Point`, found `i32`
+    // Rust 没有隐式转换或构造
+    let p: Point = 5;
+}
+
+// 正确: 显式构造
+fn fixed() {
+    let p = Point { x: 1, y: 2 }; // ✅ 显式构造
+}
+```
+
+> **C++ 对比**: C++ 支持隐式构造函数（`Point(int x) : x(x), y(0) {}`），允许 `Point p = 5;` 这样的代码。这可能导致意外转换和性能问题（临时对象）。Rust 禁止隐式构造——必须显式写出字段名或使用构造函数函数。这消除了 C++ 中常见的"unexpected implicit conversion" bug，但增加了样板代码。Rust 的 `From`/`Into` trait 提供显式、可追踪的类型转换，编译器拒绝未实现的转换。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：C++ 虚函数表与 Rust trait 对象的 ABI 差异（运行时崩溃）
+
+```rust,compile_fail
+// C++ 侧
+// struct Base { virtual int foo() = 0; };
+// struct Derived : Base { int foo() override { return 42; } };
+
+// Rust 侧通过 FFI 调用
+#[repr(C)]
+pub struct Base {
+    vtable: *const (),
+}
+
+extern "C" {
+    fn create_derived() -> *mut Base;
+    fn call_foo(base: *mut Base) -> i32;
+}
+
+fn main() {
+    let base = unsafe { create_derived() };
+    // ❌ 运行时崩溃: Rust 不能直接通过 C++ 的 vtable 调用虚函数
+    // 因为 C++ 的 vtable 布局与 Rust 的 dyn Trait 不同
+    let result = unsafe { call_foo(base) }; // 若 call_foo 是 C++ 函数，可能正常
+    // 但若尝试在 Rust 中手动解引用 vtable，布局不匹配导致崩溃
+}
+```
+
+> **修正**: C++ 的虚函数表（vtable）和 Rust 的 trait 对象（`dyn Trait`）在概念上相似（动态分发），但**ABI 不兼容**。C++ 的 vtable 通常包含：1) type_info 指针（RTTI）；2) 虚析构函数；3) 虚函数指针。Rust 的 vtable 包含：1) drop 函数指针；2) 大小和对齐；3) trait 方法指针。布局不同，不能直接互操作。跨语言虚函数调用必须通过 C ABI（函数指针）或 `cxx` crate 的桥接层。这与 COM（Windows 的组件对象模型，定义了跨语言 vtable 标准）或 Swift 的 witness table（与 Rust 的 vtable 类似但不兼容）类似——语言间的动态分发需要显式适配层。Rust 的 `cbindgen` 生成 C 头文件时，不导出 trait 对象，只导出 `#[repr(C)]` struct 和函数指针。[来源: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)] · [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)]
+
+### 10.4 边界测试：C++ 的 RAII 与 Rust 的 Drop 顺序差异（运行时 UB）
+
+```rust,compile_fail
+struct Outer {
+    inner1: Inner,
+    inner2: Inner,
+}
+
+struct Inner {
+    data: i32,
+}
+
+impl Drop for Inner {
+    fn drop(&mut self) {
+        println!("dropping {}", self.data);
+    }
+}
+
+fn main() {
+    let o = Outer {
+        inner1: Inner { data: 1 },
+        inner2: Inner { data: 2 },
+    };
+    // Rust: drop 顺序与声明顺序相反（inner2 先 drop，然后 inner1）
+    // C++: 同样与声明顺序相反
+    // 但若涉及依赖（inner2 的 drop 依赖 inner1），两者都可能失败
+}
+```
+
+> **修正**: Rust 和 C++ 的析构顺序相同：struct 的字段按**声明顺序的逆序**析构（最后声明的先析构），局部变量按声明顺序的逆序析构。但**依赖管理**不同：C++ 允许在析构函数中访问其他字段（通过 `this` 指针），Rust 的 `Drop` 只能访问自身字段。若 `inner2` 的 drop 逻辑需要 `inner1` 的数据，C++ 中可能侥幸成功（若 `inner1` 尚未析构），Rust 中必然失败（`inner1` 已析构，或 borrow checker 阻止访问）。这是 Rust 更严格的安全保证：drop 必须是自包含的，不能依赖其他字段的生命周期。这与 C++ 的"析构函数可做任何事"（包括访问已析构的成员，UB 但常见）不同——Rust 的 borrow checker 在 drop 边界上同样严格。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)]

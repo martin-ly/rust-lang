@@ -35,6 +35,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 规范预览的编译错误](#十边界测试rust-规范预览的编译错误)
+    - [10.1 边界测试：规范未定义行为的边界（编译错误/运行时 UB）](#101-边界测试规范未定义行为的边界编译错误运行时-ub)
+    - [10.2 边界测试：规范与编译器实现的差异（编译错误）](#102-边界测试规范与编译器实现的差异编译错误)
+    - [10.6 边界测试：规范与编译器实现的临时不一致（编译错误）](#106-边界测试规范与编译器实现的临时不一致编译错误)
+    - [10.5 边界测试：规范草案与编译器实现的不一致（编译行为漂移）](#105-边界测试规范草案与编译器实现的不一致编译行为漂移)
 
 ---
 
@@ -488,3 +493,79 @@ fn main() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+## 十、边界测试：Rust 规范预览的编译错误
+
+### 10.1 边界测试：规范未定义行为的边界（编译错误/运行时 UB）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 0;
+    let r1 = &mut x as *mut i32;
+    let r2 = &mut x as *mut i32;
+    unsafe {
+        // ❌ 运行时 UB: 根据规范，两个可变指针指向同一位置且都被使用
+        // 具体是否为 UB 取决于使用的内存模型（Stacked Borrows / Tree Borrows / Rust Spec）
+        *r1 = 1;
+        *r2 = 2;
+    }
+    println!("{}", x);
+}
+```
+
+> **修正**: Rust 规范（The Rust Specification）正在编写中，目标是精确定义哪些程序是合法的、哪些是未定义行为（UB）。当前 Rust 的 UB 定义分散在 Reference、Nomicon、RFC 和学术 paper 中，存在模糊地带。例如：两个不重叠的 `*mut T` 指向同一对象是否 UB？Stacked Borrows 说"是"（基于借用栈的标签），Tree Borrows 说"可能不是"（更宽松的别名模型）。Rust 规范将最终裁定这些边缘情况。对开发者的影响：避免任何可能触发 UB 的代码，即使 Miri（基于 Stacked Borrows）不报错。这与 C 的 ISO C 标准（明确的 UB 列表）类似，但 Rust 的内存模型更复杂（所有权、借用、内部可变性、Pin）。规范的编写是 Rust 成熟度的重要标志——从"实现定义语言"走向"规范定义语言"。[来源: [Rust Specification Draft](https://spec.rust-lang.org/)] · [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/01/31/tree-borrows.html)]
+
+### 10.2 边界测试：规范与编译器实现的差异（编译错误）
+
+```rust,compile_fail
+// 假设规范允许的行为，但当前编译器拒绝
+fn maybe_dangle<'a>(x: &'a i32) -> &'a i32 {
+    let y = *x + 1;
+    &y // ❌ 编译错误: `y` 的生命周期不够长
+}
+
+fn main() {
+    let x = 5;
+    let r = maybe_dangle(&x);
+    println!("{}", r);
+}
+```
+
+> **修正**: 在某些情况下，规范可能允许比当前编译器更宽松的程序。例如：Polonius（下一代借用检查器）将接受一些 NLL（Non-Lexical Lifetimes）拒绝的合法程序。`maybe_dangle` 的例子中，编译器拒绝是因为 `&y` 的生命周期不能超出函数作用域——即使从语义上看，返回值实际上等价于 `x` 的某个函数（若优化器内联并常量传播）。规范与实现的差距是语言演进的自然现象：规范定义"理想语义"，编译器逐步逼近。Rust 的"规范优先"策略（先写规范，再对齐实现）与 C/C++ 的"实现优先"策略（标准委员会标准化现有实践）不同——Rust 有机会在规范阶段消除历史包袱。但对开发者而言，**以编译器为准**仍是实用原则：编译器拒绝的代码不能用于生产，无论规范是否认为合法。[来源: [Rust Specification Project](https://github.com/rust-lang/spec/)] · [来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)]
+
+### 10.6 边界测试：规范与编译器实现的临时不一致（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 0;
+    let r = &mut x;
+    let p = r as *mut i32;
+    unsafe {
+        *p = 1; // 通过裸指针写入
+        *r = 2; // 随后通过引用写入
+    }
+    // ❌ 编译错误/语义争议: 某些编译器版本可能接受，规范可能拒绝
+    // Stacked Borrows 认为这是 UB，Tree Borrows 允许
+    println!("{}", x);
+}
+```
+
+> **修正**: Rust 规范未最终确定时，编译器实现与形式化模型（Stacked Borrows、Tree Borrows）可能存在不一致。上述代码在**当前稳定编译器**上可能编译通过（NLL 接受），但 Miri（基于 Stacked Borrows）报告 UB。这是过渡状态的表现：1) 编译器更宽松（接受更多程序）；2) 形式化工具更严格（标记潜在 UB）；3) 规范将最终裁定。开发者的务实策略：1) 运行 Miri 测试 unsafe 代码；2) 避免形式化模型标记为 UB 的模式；3) 关注规范进展。这与 C 的 "实现定义行为"（不同编译器行为不同）不同——Rust 的目标是统一规范，但过程需要时间。规范的编写由 Rust 基金会资助，是 Rust 成熟度的重要标志。[来源: [Rust Specification Project](https://github.com/rust-lang/spec/)] · [来源: [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/01-31_tree-borrows.html)]
+
+### 10.5 边界测试：规范草案与编译器实现的不一致（编译行为漂移）
+
+```rust,compile_fail
+// ❌ 潜在不一致: Rust 规范草案定义的行为与 rustc 实际实现可能不同
+// 例如: 规范可能定义求值顺序为左到右，但旧版 rustc 实现不同
+
+fn main() {
+    let mut x = 0;
+    let r = &mut x;
+    *r += 1;
+    // 规范中: 借用检查规则的定义方式
+    // 实现中: NLL (Non-Lexical Lifetimes) 的算法细节
+    // 若规范文本与实现有歧义，以实现为准（de facto 标准）
+}
+```
+
+> **修正**: Rust 规范项目（Ferrocene、Rust Specification）的目标是创建**权威参考文档**，但开发中的风险：1) 规范描述的行为与实际编译器（rustc）不一致；2) 规范更新滞后于语言演进（新特性先实现，后规范）；3) 规范与 Miri 的行为定义冲突（Miri 是"理想行为"，但 rustc 可能有 bug）。策略：1) 规范以 rustc 行为为基准（reference implementation）；2) Miri 作为可执行规范验证不一致；3) 发现不一致时，先确定是 rustc bug 还是规范 bug，再修复。这与 C++ 的标准（ISO 标准先行，编译器后实现，导致长期不一致）或 Go 的规范（语言规范与官方编译器同步维护）不同——Rust 选择"实现先行"路径，规范是后验文档，非先验约束。Ferrocene 的安全关键认证需要稳定规范，推动规范与实现的同步。[来源: [Rust Specification Working Group](https://github.com/rust-lang/spec)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]

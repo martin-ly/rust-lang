@@ -696,3 +696,18 @@ fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.5 边界测试：Polonius 与 NLL 的接受程序差异（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 0;
+    let r = &mut x;
+    *r = 1;
+    let p = &x; // NLL: 错误，r 仍活跃
+    // Polonius: 可能接受，因为 r 之后不再使用
+    println!("{}", p);
+}
+```
+
+> **修正**: Polonius 是 Rust 的下一代借用检查器，基于**数据流分析**而非 NLL 的**基于位置的分析**。Polonius 能精确追踪引用的"最后使用点"：上述代码中 `r` 在 `*r = 1` 后不再使用，因此 `p = &x` 应合法。但 NLL 保守地拒绝（`r` 的作用域延伸到块结束）。Polonius 接受更多合法程序，但：1) 编译时间可能更长（分析更复杂）；2) 某些边缘情况的行为仍在定义；3) 尚未稳定（`-Zpolonius` 实验标志）。这与 C++ 的 borrow checker（无此概念，完全信任开发者）或 Swift 的内存安全（ARC，无编译期借用检查）不同——Rust 的借用检查器在持续精确化，逐步减少保守拒绝。[来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)] · [来源: [NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)]

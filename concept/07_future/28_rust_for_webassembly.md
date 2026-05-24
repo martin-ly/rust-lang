@@ -63,6 +63,12 @@
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
+    - [10.1 边界测试：WASI 的文件系统权限（运行时错误）](#101-边界测试wasi-的文件系统权限运行时错误)
+    - [10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）](#102-边界测试wasm-bindgen-的类型不匹配编译错误)
+    - [10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）](#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
+    - [10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）](#103-边界测试wasm-组件模型component-model的类型映射编译错误)
+    - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](#104-边界测试wasi-preview-2-的功能性权限运行时错误)
 
 ---
 
@@ -806,3 +812,114 @@ Rust panic in Wasm:
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十、边界测试：WebAssembly 的编译错误
+
+### 10.1 边界测试：WASI 的文件系统权限（运行时错误）
+
+```rust
+use std::fs;
+
+fn main() {
+    // ⚠️ 运行时错误: WASI 需要显式目录预打开（preopen）
+    // let content = fs::read_to_string("/etc/passwd").unwrap(); // 可能失败!
+
+    // 正确: 使用预打开目录的相对路径
+    // wasmtime --dir=. ./module.wasm
+    let content = fs::read_to_string("./data.txt").unwrap(); // ✅ 预打开当前目录
+    println!("{}", content);
+}
+```
+
+> **修正**: WASI（WebAssembly System Interface）是 Wasm 的模块化系统接口，设计原则是**能力安全**（capability-based security）。Wasm 模块默认无权访问任何文件系统路径——运行时（wasmtime、wasmer）必须通过 `--dir=.` 参数**预打开**（preopen）目录，模块才能访问该目录下的文件。这与传统进程的"继承父进程文件描述符"不同——WASI 的权限显式、最小化、可审计。Rust 的 `std::fs` 在 WASI 目标上编译为 WASI 调用，`File::open("/etc/passwd")` 在未预打开时返回 `PermissionDenied`。这是沙箱安全的关键：即使 Wasm 模块包含恶意代码，其影响范围被限制在预打开的能力内。[来源: [WASI Documentation](https://wasi.dev/)] · [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+
+### 10.2 边界测试：`wasm-bindgen` 的类型不匹配（编译错误）
+
+```rust,compile_fail
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub struct Point {
+    pub x: i32,
+    pub y: i32,
+}
+
+#[wasm_bindgen]
+impl Point {
+    // ❌ 编译错误: wasm-bindgen 不支持返回裸指针
+    pub fn as_ptr(&self) -> *const i32 {
+        &self.x
+    }
+
+    // ❌ 编译错误: 不支持泛型方法
+    pub fn generic<T: Default>(&self) -> T {
+        T::default()
+    }
+}
+```
+
+> **修正**: `wasm-bindgen` 生成 Rust 与 JavaScript 之间的绑定代码，但只支持可映射到 JavaScript 类型的 Rust 类型。不支持的类型包括：裸指针（`*const T`、`*mut T`）、引用（`&T` 在返回中有限支持）、泛型、闭包（有限支持）、大部分标准库类型（`Vec<T>` 支持，`HashMap` 不支持）。编译错误发生在 `wasm-bindgen` 宏展开阶段——它尝试为不支持的类型生成绑定代码并失败。安全替代：将裸指针包装为 `JsValue`，使用 `serde-wasm-bindgen` 序列化复杂类型，或手动编写 JS shim。这与 C 的 Emscripten（编译为 JS 并模拟 POSIX）不同——`wasm-bindgen` 是显式、类型安全的 FFI，而非透明移植。[来源: [wasm-bindgen Documentation](https://rustwasm.github.io/wasm-bindgen/)] · [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]
+
+### 10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）
+
+```rust,compile_fail
+#![no_std]
+
+use wee_alloc::WeeAlloc;
+
+#[global_allocator]
+static ALLOC: WeeAlloc = WeeAlloc::INIT;
+
+fn main() {
+    // ⚠️ 运行时错误: wee_alloc 极简但碎片化严重
+    // 大量小分配后，可能无法分配中等大小块（即使总空闲足够）
+    let mut vecs = Vec::new();
+    for i in 0..1000 {
+        vecs.push(vec![0u8; i]);
+    }
+}
+```
+
+> **修正**: `wee_alloc` 是 WASM 的轻量级分配器（~1KB 代码体积），但采用简单的链表分配策略，容易产生碎片。WASM 的线性内存（Linear Memory）增长是单向的（只能增大，不能缩小），碎片导致内存 footprint 膨胀。替代方案：1) `dlmalloc`（更成熟的分配器，体积较大 ~10KB）；2) 预分配池（`bumpalo` 的 bump allocator，无碎片但不支持释放）；3) 避免动态分配（`no_std` + 固定大小缓冲区）。WASM 模块的大小（代码 + 数据）直接影响加载时间：Rust 的 WASM 输出通常 100KB-1MB，优化后（`wasm-opt`、LTO）可降至 10KB-100KB。`wee_alloc` 的目标是将分配器本身的大小降至最低，但牺牲了分配效率和碎片控制。[来源: [wee_alloc Crate](https://docs.rs/wee_alloc/)] · [来源: [WASM Optimization Guide](https://rustwasm.github.io/book/reference/code-size.html)]
+
+### 10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）
+
+```rust,compile_fail
+// 使用 wit-bindgen 生成组件接口
+
+wit_bindgen::generate!({
+    world: "my-world",
+    path: "wit/my-world.wit",
+});
+
+// WIT 接口:
+// record person { name: string, age: u32 }
+// greet: func(p: person) -> string
+
+fn greet(p: Person) -> String {
+    // ❌ 编译错误: wit-bindgen 生成的类型可能与 Rust 惯用类型冲突
+    // 如 WIT 的 `list<u8>` 映射为 `Vec<u8>`，但 `string` 映射为 `String`
+    // 若手动定义同名类型，冲突
+    format!("Hello, {}!", p.name)
+}
+```
+
+> **修正**: WASM Component Model 是 WebAssembly 的模块化和互操作标准，使用 WIT（WASM Interface Types）定义接口。`wit-bindgen` 将 WIT 文件生成 Rust 绑定代码，包括：1) 数据类型（record、variant、resource）；2) 函数导入/导出；3) 异步支持（`future`、`stream`）。类型映射的挑战：1) WIT 的 `string` 是 UTF-8，但 Rust 的 `String` 也是 UTF-8，映射直接；2) WIT 的 `option<T>` 映射为 Rust 的 `Option<T>`；3) WIT 的 `result<T, E>` 映射为 Rust 的 `Result<T, E>`；4) WIT 的 `resource` 映射为 Rust 的 struct + `Drop`。但 WIT 的某些类型无直接 Rust 等价物（如 `future<T>`），需生成包装代码。这与 gRPC 的 protobuf 生成（`prost`）、Cap'n Proto 的 schema 生成类似——接口定义语言（IDL）到 Rust 的绑定生成是 WASM 组件化的关键。[来源: [WASM Component Model](https://component-model.bytecodealliance.org/)] · [来源: [wit-bindgen](https://github.com/bytecodealliance/wit-bindgen)]
+
+### 10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）
+
+```rust,compile_fail
+use wasi::filesystem::types;
+
+fn main() {
+    // ❌ 运行时错误: WASI Preview 2 要求显式能力传递
+    // 不能直接打开任意文件，需从父组件获取目录句柄
+
+    // 正确: 使用预打开目录
+    // let preopens = wasi::filesystem::preopens::get_directories();
+    // let dir = preopens[0].0;
+    // let file = types::Descriptor::open_at(&dir, "data.txt", ...);
+}
+```
+
+> **修正**: WASI Preview 2 是 WASM 的系统接口新一代标准，基于**组件模型**和**能力安全**（capability-based security）。与 WASI Preview 1 不同：1) 不再使用全局预打开（`--dir=.`)，而是通过组件的 `import` 显式传递能力；2) 文件系统是 `wasi:filesystem` 接口，需从环境中获取 `Descriptor`；3) 网络是 `wasi:sockets` 接口，同样需要显式能力。这改变了 WASM 模块的编写方式：模块不再假设拥有文件系统或网络，而是通过接口声明需求，运行时注入能力。这与 Deno 的权限模型（`--allow-read`、`--allow-net`）或 Cloudflare Workers 的隔离（无文件系统，有 fetch API）类似——WASI Preview 2 将 WASM 从"沙箱中的 POSIX"推向"能力安全的组件"。[来源: [WASI Preview 2](https://github.com/WebAssembly/WASI/tree/main/preview2)] · [来源: [Component Model](https://component-model.bytecodealliance.org/)]

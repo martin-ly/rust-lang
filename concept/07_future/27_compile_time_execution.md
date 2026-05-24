@@ -36,6 +36,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：编译期执行的编译错误](#十边界测试编译期执行的编译错误)
+    - [10.1 边界测试：`const fn` 的受限操作（编译错误）](#101-边界测试const-fn-的受限操作编译错误)
+    - [10.2 边界测试：过程宏的 TokenStream 解析错误（编译错误）](#102-边界测试过程宏的-tokenstream-解析错误编译错误)
+    - [10.3 边界测试：`const fn` 中的浮点数限制（编译错误）](#103-边界测试const-fn-中的浮点数限制编译错误)
+    - [10.4 边界测试：编译期堆分配的 `const Heap` 展望（编译错误）](#104-边界测试编译期堆分配的-const-heap-展望编译错误)
 
 ---
 
@@ -648,3 +653,80 @@ fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：编译期执行的编译错误
+
+### 10.1 边界测试：`const fn` 的受限操作（编译错误）
+
+```rust,compile_fail
+const fn allocate() -> Vec<i32> {
+    // ❌ 编译错误: const fn 中不能堆分配
+    vec![1, 2, 3]
+}
+
+fn main() {
+    let v = allocate();
+    println!("{:?}", v);
+}
+```
+
+> **修正**: `const fn` 在编译期执行，因此不能使用运行时才可用的功能：堆分配（`Box::new`、`Vec::new`）、I/O、随机数、线程、panic（Rust 1.57+ 允许 `const panic`）。`vec![]` 宏在底层调用 `Vec::new()` 和堆分配，因此不能在 `const fn` 中使用。编译期计算应使用栈分配类型（数组 `[T; N]`、`const` 值）或 `const` 泛型。Rust 的 `const fn` 能力在持续扩展：1.46 允许 `if`/`match`，1.57 允许 `panic`，1.64 允许 `dyn Trait`，未来可能允许有限堆分配（`const Heap` RFC）。这与 C++ 的 `constexpr`（C++20 允许堆分配和虚函数）相比，Rust 更保守——优先保证编译期执行的确定性和可预测性。[来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)] · [来源: [Rust RFC 2344](https://rust-lang.github.io/rfcs/2344-const-looping.html)]
+
+### 10.2 边界测试：过程宏的 TokenStream 解析错误（编译错误）
+
+```rust,compile_fail
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, DeriveInput};
+
+#[proc_macro_derive(MyDerive)]
+pub fn my_derive(input: TokenStream) -> TokenStream {
+    // ❌ 编译错误: 若输入不是合法 struct/enum，syn 解析失败
+    let input = parse_macro_input!(input as DeriveInput);
+    let name = input.ident;
+
+    // 若尝试为 union 生成 derive，可能产生不支持的代码
+    let expanded = quote! {
+        impl Default for #name {
+            fn default() -> Self {
+                // union 不能有自动 Default
+                panic!("not supported")
+            }
+        }
+    };
+    expanded.into()
+}
+```
+
+> **修正**: 过程宏（procedural macros）在编译期操作 TokenStream，将 Rust 代码作为数据变换。`syn` crate 将 TokenStream 解析为 AST（`DeriveInput`、`ItemFn` 等），解析失败时产生编译错误。过程宏的调试困难：错误信息指向宏生成的代码，而非宏定义本身。Rust 1.64+ 的 `Span::error` 和 `proc_macro::Diagnostic` 改善了错误报告。过程宏的编译期执行能力强大但风险高：无限循环的宏导致编译器挂起，`quote!` 生成的代码可能有类型错误（在宏调用点报告）。这与 C 的宏预处理器（纯文本替换，无类型检查）或 Lisp 的宏（同像性，编译期执行）不同——Rust 的过程宏在编译期运行完整 Rust 代码，但输出仍需通过类型检查。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [syn Documentation](https://docs.rs/syn/)]
+
+### 10.3 边界测试：`const fn` 中的浮点数限制（编译错误）
+
+```rust,compile_fail
+const fn compute_area(r: f64) -> f64 {
+    // ❌ 编译错误: const fn 中浮点数操作受限
+    // 旧版 Rust 禁止浮点数运算，新版允许但仍有约束
+    std::f64::consts::PI * r * r
+}
+
+fn main() {
+    const AREA: f64 = compute_area(2.0);
+    println!("{}", AREA);
+}
+```
+
+> **修正**: `const fn` 中的浮点数支持是渐进添加的：1) 旧版 Rust 完全禁止 `const fn` 中的浮点运算（因 LLVM 的浮点常数折叠非确定性）；2) Rust 1.83+ 允许基本浮点运算，但 `std::f64::consts::PI` 等常数一直可用；3) 浮点数的 `==` 比较在 `const fn` 中受限（因 NaN 的语义）。挑战：浮点数的编译期求值需要与运行期完全一致，但编译器和目标平台的浮点单元可能行为不同（如 FMA 可用性）。`rustc` 使用 LLVM 的 APFloat 库进行编译期浮点模拟，确保一致性。这与 C++ 的 `constexpr`（C++23 允许浮点，同样需一致性保证）或 Zig 的 `comptime`（浮点完全支持，因 Zig 自托管编译器控制求值）不同——Rust 的 `const fn` 保守但逐步扩展。[来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)] · [来源: [Rust Const Eval Working Group](https://rust-lang.github.io/const-eval/)]
+
+### 10.4 边界测试：编译期堆分配的 `const Heap` 展望（编译错误）
+
+```rust,compile_fail
+const fn build_map() -> std::collections::HashMap<i32, i32> {
+    // ❌ 编译错误: const fn 不能堆分配
+    // let mut map = std::collections::HashMap::new();
+    // map.insert(1, 2);
+    // map
+    std::collections::HashMap::new()
+}
+```
+
+> **修正**: `const fn` 当前禁止堆分配（`Box::new`、`Vec::new`、`HashMap::new`），因为编译期的内存管理复杂：1) 分配的内存在编译后如何释放？2) 若 `const` 值嵌入二进制，堆分配的数据需序列化为静态数据；3) 循环引用的 `const` 值如何表示？`const Heap` RFC 提议允许编译期堆分配，但将分配的数据"冻结"为静态只读数据（类似 `let s = const { String::from("hello") }` 在编译期创建 `String`，运行期作为 `&'static str` 使用）。这与 C++ 的 `constexpr` new（C++20，允许编译期分配，但对象需在编译期销毁）或 Zig 的 `comptime` 分配器（编译期分配，结果序列化到二进制）类似——Rust 的 `const Heap` 是语言演进的重要方向，使编译期元编程能力接近 Zig 和 C++20。[来源: [Rust Const Heap RFC](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]

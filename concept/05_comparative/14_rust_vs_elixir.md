@@ -33,6 +33,12 @@
   - [八、来源与延伸阅读](#八来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 Elixir 的编译错误对比](#十边界测试rust-与-elixir-的编译错误对比)
+    - [10.1 边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）](#101-边界测试elixir-的动态类型与-rust-的静态模式编译错误)
+  - [十、边界测试：Rust 与 Elixir 的编译错误对比](#十边界测试rust-与-elixir-的编译错误对比-1)
+    - [10.1 边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）](#101-边界测试elixir-的动态类型与-rust-的静态模式编译错误-1)
+    - [10.2 边界测试：Elixir 的进程邮箱与 Rust 的 channel（编译错误）](#102-边界测试elixir-的进程邮箱与-rust-的-channel编译错误)
+    - [10.5 边界测试：Elixir 的进程隔离与 Rust 的共享内存并发（编译错误）](#105-边界测试elixir-的进程隔离与-rust-的共享内存并发编译错误)
 
 ---
 
@@ -799,3 +805,106 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：Rust 与 Elixir 的编译错误对比
+
+### 10.1 边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 42;
+    // ❌ 编译错误: expected `i32`, found `&str`
+    // Rust 变量类型固定，不能重新赋值为不同类型
+    // x = "hello"; // 编译错误
+}
+
+// 正确: 使用枚举表达多种类型
+enum Value {
+    Int(i32),
+    Str(String),
+}
+
+fn fixed() {
+    let v = Value::Int(42);
+    let v = Value::Str(String::from("hello")); // shadowing
+}
+```
+
+> **Elixir 对比**: Elixir 是动态类型——变量是值的标签，`x = 42; x =
+
+## 十、边界测试：Rust 与 Elixir 的编译错误对比
+
+### 10.1 边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 42;
+    // ❌ 编译错误: expected `i32`, found `&str`
+    // x = "hello"; // 编译错误
+}
+
+// 正确: 使用枚举表达多种类型
+enum Value {
+    Int(i32),
+    Str(String),
+}
+
+fn fixed() {
+    let v = Value::Int(42);
+    let v = Value::Str(String::from("hello"));
+}
+```
+
+> **Elixir 对比**: Elixir 是动态类型，变量可以重新绑定为任何类型。Rust 的变量类型在编译期固定，不能重新赋值为不同类型。Rust 的 `enum` 是表达"多种可能类型"的方式，调用者必须通过 `match` 处理每个变体。这与 Elixir 的 pattern matching 类似，但 Rust 在编译期验证穷尽性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：Elixir 的进程邮箱与 Rust 的 channel（编译错误）
+
+```rust,compile_fail
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<i32>();
+    // ❌ 编译错误: `rx` 不能被多个线程共享
+    // mpsc 的 Receiver 不是 Sync
+    std::thread::spawn(move || {
+        println!("{}", rx.recv().unwrap());
+    });
+}
+
+// 正确: 使用广播或每个线程一个 Receiver
+use std::sync::Arc;
+use std::sync::Mutex;
+
+fn fixed() {
+    let data = Arc::new(Mutex::new(42));
+    let data2 = Arc::clone(&data);
+    std::thread::spawn(move || {
+        println!("{}", *data2.lock().unwrap());
+    });
+}
+```
+
+> **Elixir 对比**: Elixir 的进程（Actor 模型）通过邮箱（mailbox）接收消息，每个进程有独立邮箱，无共享状态。Rust 的 `mpsc::channel` 是多生产者单消费者——多个发送者，一个接收者。若需广播，使用 `tokio::sync::broadcast` 或 `crossbeam::channel`。Elixir 的进程隔离在虚拟机（BEAM）层面实现，Rust 的 channel 在类型系统层面保证线程安全。两者都消除了数据竞争，但实现层级不同。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.5 边界测试：Elixir 的进程隔离与 Rust 的共享内存并发（编译错误）
+
+```rust,compile_fail
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let data = Arc::new(vec![1, 2, 3]);
+    let d2 = Arc::clone(&data);
+
+    // ❌ 编译错误: 不能将不可变引用的 Arc 内容转为可变
+    // thread::spawn(move || {
+    //     d2.push(4); // Vec 在 Arc 中不可变
+    // });
+
+    // Elixir 中: 进程间不共享内存，通过消息传递
+    // Rust 中: 共享内存需显式同步原语
+    println!("{:?}", data);
+}
+```
+
+> **修正**: Elixir/Erlang 的 **Actor 模型** 中，进程完全隔离——不共享内存，所有通信通过异步消息传递。Rust 支持 Actor 模型（`actix`），但默认是**共享内存并发**：线程共享地址空间，通过锁/原子同步。Elixir 的优势：1) 无数据竞争（无共享内存）；2) 容错（进程崩溃不影响其他进程，supervisor 重启）；3) 热代码升级。Rust 的优势：1) 性能（无消息序列化开销）；2) 细粒度控制（可选择共享或无共享）；3) 类型安全（编译期防止数据竞争）。从 Elixir 迁移到 Rust 时，需注意：1) 不再有进程隔离的保护；2) 共享状态需 `Mutex`/`RwLock`；3) 错误处理从"let it crash"变为显式 `Result` 传播。这与 Go 的 goroutine + channel（可选择共享或通信）类似——Rust 提供两种并发模型，但共享内存是默认和最高效的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Elixir Processes](https://elixir-lang.org/getting-started/processes.html)]

@@ -32,6 +32,11 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：lambda 演算的编译错误](#十边界测试lambda-演算的编译错误)
+    - [10.1 边界测试：Y 组合子与递归类型（编译错误）](#101-边界测试y-组合子与递归类型编译错误)
+    - [10.2 边界测试：高阶函数的类型推断（编译错误）](#102-边界测试高阶函数的类型推断编译错误)
+    - [10.3 边界测试：Y 组合子在 Rust 中的实现（编译错误）](#103-边界测试y-组合子在-rust-中的实现编译错误)
+    - [10.4 边界测试：λ 演算中的变量捕获与闭包（编译错误）](#104-边界测试λ-演算中的变量捕获与闭包编译错误)
 
 ---
 
@@ -577,3 +582,92 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：lambda 演算的编译错误
+
+### 10.1 边界测试：Y 组合子与递归类型（编译错误）
+
+```rust,compile_fail
+// Y = λf.(λx.f (x x)) (λx.f (x x))
+// 在 Rust 中直接表达需要递归类型
+
+fn y_combinator<F, T>(f: F) -> T
+where
+    F: Fn(T) -> T,
+{
+    // ❌ 编译错误: cannot find type `T` in this scope
+    // Y 组合子需要自引用类型，Rust 的类型系统直接拒绝无限递归
+    y_combinator(|x| f(y_combinator(f)))(y_combinator(|x| f(y_combinator(f))))
+}
+
+// 正确: Rust 使用显式递归而非 Y 组合子
+fn factorial(n: u64) -> u64 {
+    if n == 0 { 1 } else { n * factorial(n - 1) }
+}
+```
+
+> **修正**: 无类型 lambda 演算通过 **Y 组合子** 实现递归，但 Y 组合子需要自应用（`x x`），在简单类型 lambda 演算中不可类型化。Rust 的类型系统拒绝无限递归类型（`T = T → T`），因此无法直接表达 Y 组合子。Rust 通过显式函数递归（`fn` 定义）替代，编译器检查终止性（不保证，但优化尾递归）。这与 Haskell 的惰性求值和递归类型（`newtype Fix f = Fix (f (Fix f))`）不同——Rust 的严格求值和有限类型使 Y 组合子不实用。[来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)]
+
+### 10.2 边界测试：高阶函数的类型推断（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: type annotations needed
+    // compose 需要显式类型参数
+    let compose = |f, g| |x| f(g(x));
+    let add1 = |x: i32| x + 1;
+    let mul2 = |x: i32| x * 2;
+    let h = compose(add1, mul2);
+}
+
+// 正确: 显式标注高阶函数类型
+fn compose<A, B, C, F, G>(f: F, g: G) -> impl Fn(A) -> C
+where
+    F: Fn(B) -> C,
+    G: Fn(A) -> B,
+{
+    move |x| f(g(x))
+}
+
+fn fixed() {
+    let add1 = |x: i32| x + 1;
+    let mul2 = |x: i32| x * 2;
+    let h = compose(add1, mul2);
+    println!("{}", h(5)); // (5 * 2) + 1 = 11
+}
+```
+
+> **修正**: 高阶函数（HOF）在 lambda 演算中是核心构造。Rust 的闭包类型推断对高阶函数支持有限——多参数闭包的类型推断需要显式标注或使用泛型函数。`impl Fn(A) -> C` 返回类型（RPIT）在 Rust 1.75+ 中支持，但闭包本身的类型是匿名的，不能显式写出。这与 Haskell 的自动类型推断（Hindley-Milner）形成对比——Rust 的推断更保守，要求关键位置显式标注，以换取更清晰的错误信息。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：Y 组合子在 Rust 中的实现（编译错误）
+
+```rust,compile_fail
+fn y_combinator<F, T>(f: F) -> T
+where
+    F: Fn(T) -> T,
+{
+    // ❌ 编译错误: Rust 无无限类型，Y 组合子无法直接表达
+    // Y = λf. (λx. f (x x)) (λx. f (x x))
+    // 需要自引用类型，Rust 不允许
+    f(y_combinator(f))
+}
+```
+
+> **修正**: Y 组合子是 λ 演算中的不动点组合子，允许递归函数的定义而不显式自引用。Y 组合子需要**无限类型**（`T = T -> T`），Rust 的类型系统拒绝无限大小类型。间接实现：1) 使用 `Box` 打破循环（`Fn(Box<dyn Fn()>) -> Box<dyn Fn()>`）；2) 使用 trait object 延迟类型解析；3) 使用 `std::recursion`（不存在，需手动实现）。Rust 不支持 general recursion 的显式组合子，因为递归通过函数名直接自引用实现——这是设计的简化，而非限制。这与 Haskell 的 `fix`（`Data.Function.fix`，利用惰性求值实现 Y 组合子）或 Scheme 的 `letrec`（显式递归绑定）不同——Rust 的递归是直接的，无组合子抽象，但编译器可优化尾递归（虽不保证）。[来源: [Fixed-Point Combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：λ 演算中的变量捕获与闭包（编译错误）
+
+```rust,compile_fail
+fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
+    move |y| x + y
+}
+
+fn main() {
+    let add5 = make_adder(5);
+    // ❌ 逻辑注意: 闭包捕获 x 的值（move），不是引用
+    // 这是词法作用域的变量捕获，与动态作用域不同
+    println!("{}", add5(10)); // 15
+}
+```
+
+> **修正**: Rust 的闭包实现**词法作用域**（lexical scoping）：捕获定义时环境中的变量，而非调用时的环境。这与 λ 演算的词法绑定一致（`λx.λy.x+y` 中 `x` 绑定到外层参数），与动态作用域（Lisp 早期版本、Bash 变量）不同。`move` 关键字改变捕获方式（按值而非按引用），但不改变作用域规则——仍绑定到定义时的值。Rust 的闭包类型（`Fn`、`FnMut`、`FnOnce`）根据捕获方式自动推断，是 λ 演算在系统编程语言中的实现。与 C++ 的 lambda（同样词法作用域，捕获列表 `[=]`/`[&]` 显式控制）或 JavaScript 的闭包（词法作用域，但 `this` 动态绑定）类似——Rust 的闭包设计兼顾了函数式编程的表达力和系统编程的性能。[来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)]

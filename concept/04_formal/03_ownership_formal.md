@@ -73,6 +73,11 @@
     - [11.6 与 RustBelt / Miri 的关系](#116-与-rustbelt--miri-的关系)
   - [十二、Wikipedia 概念对齐](#十二wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：所有权形式化的编译错误](#十边界测试所有权形式化的编译错误)
+    - [10.1 边界测试：线性类型与 `Drop` 的冲突（编译错误）](#101-边界测试线性类型与-drop-的冲突编译错误)
+    - [10.2 边界测试：分离逻辑与共享可变状态的不可兼得（编译错误）](#102-边界测试分离逻辑与共享可变状态的不可兼得编译错误)
+    - [10.3 边界测试：子类型化与生命周期协变（编译错误）](#103-边界测试子类型化与生命周期协变编译错误)
+    - [10.4 边界测试：悬垂指针的形式化禁止（编译错误）](#104-边界测试悬垂指针的形式化禁止编译错误)
 
 > **层级**: L4 形式化理论
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Linear Logic](./01_linear_logic.md) · [Type Theory](./02_type_theory.md)
@@ -1748,3 +1753,96 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > [来源: [crates.io](https://crates.io/)]
 
 > **相关谓词映射**: [RustBelt 核心谓词](../00_meta/rustbelt_predicate_map.md#一rustbelt-核心谓词定义) · [定理推导链](../00_meta/rustbelt_predicate_map.md#六从谓词到定理的推导链)
+
+## 十、边界测试：所有权形式化的编译错误
+
+### 10.1 边界测试：线性类型与 `Drop` 的冲突（编译错误）
+
+```rust,compile_fail
+struct LinearResource;
+
+impl Drop for LinearResource {
+    fn drop(&mut self) {
+        println!("dropping");
+    }
+}
+
+fn consume(r: LinearResource) {
+    // 消耗 r
+}
+
+fn main() {
+    let r = LinearResource;
+    consume(r);
+    // ❌ 编译错误: value used here after move
+    // 若尝试在 consume 后使用 r
+    // drop(r); // r 已被 move
+}
+```
+
+> **修正**: Rust 的所有权系统可视为一种**仿射类型系统**（affine type system）——资源最多使用一次（move），但允许通过 `Drop` 隐式释放。纯线性类型系统（linear logic）要求资源**恰好**使用一次，不允许隐式丢弃。Rust 的 `Drop` trait 提供了从线性到仿射的过渡：值可隐式 drop（不显式使用），或显式 move 到消费函数。这是 Rust 实用主义的设计选择——完全线性类型对系统编程过于严格（如临时字符串的中间结果）。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)]
+
+### 10.2 边界测试：分离逻辑与共享可变状态的不可兼得（编译错误）
+
+```rust,compile_fail
+use std::cell::RefCell;
+
+fn main() {
+    let rc = RefCell::new(42);
+    let b1 = rc.borrow();
+    // ❌ 编译错误: already borrowed
+    // let b2 = rc.borrow_mut(); // 与 b1 冲突
+    println!("{}", b1);
+}
+
+// 正确: 使用 Mutex 进行线程安全共享
+use std::sync::Mutex;
+
+fn fixed() {
+    let m = Mutex::new(42);
+    {
+        let guard = m.lock().unwrap();
+        println!("{}", *guard);
+    } // guard 在此释放
+    {
+        let mut guard = m.lock().unwrap();
+        *guard = 100; // ✅ 现在可以可变访问
+    }
+}
+```
+
+> **修正**: 分离逻辑（separation logic）的核心规则是"独占资源可组合，共享资源需分权"。`RefCell` 在单线程内通过运行时借用检查实现分权（`borrow`/`borrow_mut`），`Mutex` 在多线程间通过互斥实现分权。两者都体现了分离逻辑的 **borrow-splitting** 原则：独占权限 `own(τ)` 可拆分为共享权限 `shr(κ, ℓ)` 和独占权限 `own(τ) ∗ shr(κ, ℓ)`，但不能同时拥有两个可变权限。Rust 编译器（`RefCell` 运行时）和操作系统（`Mutex`）分别在不同层级实现了这一形式化保证。[来源: [Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
+
+### 10.3 边界测试：子类型化与生命周期协变（编译错误）
+
+```rust,compile_fail
+fn assign_long_to_short<'a, 'b>(x: &'a str, y: &'b str)
+where
+    'a: 'b, // 'a 比 'b 长
+{
+    let short: &'b str = x; // ✅ 'a: 'b 时，&'a str 可赋值给 &'b str
+}
+
+fn bad_assign<'a, 'b>(x: &'a str, y: &'b str) {
+    // ❌ 编译错误: 'b 可能比 'a 长，不能赋值
+    let short: &'a str = y;
+}
+```
+
+> **修正**: 引用的生命周期具有**协变性**（covariance）：`&'a T` 是 `'a` 的协变，即若 `'long: 'short`，则 `&'long T` 可视为 `&'short T` 的子类型。这是安全的，因为短生命周期的引用不会比长生命周期更久存活。但逆方向不成立：`&'short T` 不能赋值给 `&'long T`，因为短引用可能在长引用仍被使用时失效。Rust 编译器通过**子类型化**（subtyping）检查实现生命周期约束：`'a: 'b` 表示 `'a` 是 `'b` 的子类型（`'a` 更长）。这与 Java 的泛型协变（`? extends T`）或 C# 的泛型约束（`where T : class`）不同——Rust 的协变仅限于生命周期和某些类型构造器（`&T`、`Box<T>`、`fn(T) -> U` 的返回类型），`&mut T` 和 `fn(T) -> U` 的参数类型是逆变的。[来源: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html)] · [来源: [Variance in Rust](https://doc.rust-lang.org/nomicon/subtyping.html)]
+
+### 10.4 边界测试：悬垂指针的形式化禁止（编译错误）
+
+```rust,compile_fail
+fn dangling() -> &i32 {
+    let x = 42;
+    &x // ❌ 编译错误: x 在函数返回时被释放
+}
+
+fn main() {
+    let r = dangling();
+    println!("{}", r);
+}
+```
+
+> **修正**: 形式化上，`x` 的生命周期 `ℓ_x` 受限于函数作用域。`&x` 的类型是 `&'a i32`，其中 `'a` 是引用的生命周期。函数返回类型 `&i32` 隐含一个生命周期参数 `'a`，但编译器无法找到与 `x` 的生命周期匹配的输入参数——`x` 是局部变量，其生命周期短于函数返回后。这与 C 的返回局部变量指针（编译器通常警告但不阻止，运行时悬垂）或 C++ 的返回局部引用（同样警告，运行时 UB）形成鲜明对比。Rust 的所有权形式化将"悬垂指针"这一运行时错误转化为编译期类型错误，通过**区域类型**（region types）和**生命周期包含**（lifetime inclusion）的约束系统实现。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]

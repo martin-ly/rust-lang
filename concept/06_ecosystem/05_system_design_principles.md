@@ -46,6 +46,11 @@
     - [相关概念文件](#相关概念文件)
   - [七、系统设计决策的知识流动图](#七系统设计决策的知识流动图)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：系统设计原则的编译错误](#十边界测试系统设计原则的编译错误)
+    - [10.1 边界测试：Send/Sync 违反导致跨线程共享状态（编译错误）](#101-边界测试sendsync-违反导致跨线程共享状态编译错误)
+    - [10.2 边界测试：trait 对象的安全性约束（编译错误）](#102-边界测试trait-对象的安全性约束编译错误)
+    - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）](#105-边界测试依赖注入与-trait-object-的性能权衡运行时开销)
+    - [10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）](#105-边界测试过度工程化的类型状态机编译复杂度爆炸)
 
 ---
 
@@ -645,3 +650,90 @@ graph LR
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md) · [安全边界](../05_comparative/04_safety_boundaries.md)
+
+## 十、边界测试：系统设计原则的编译错误
+
+### 10.1 边界测试：Send/Sync 违反导致跨线程共享状态（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::thread;
+
+fn main() {
+    let data = Rc::new(42);
+    // ❌ 编译错误: `Rc<i32>` 不能在线程间安全传递
+    let handle = thread::spawn(move || {
+        println!("{}", data);
+    });
+    handle.join().unwrap();
+}
+```
+
+> **修正**: `Rc<T>`（引用计数）不是 `Send`，因为其内部计数器非线程安全。跨线程共享数据必须使用 `Arc<T>`（原子引用计数），它使用原子操作维护计数器。这是 Rust 类型系统对**线程安全**的形式化保证：`Send` 标记类型可安全转移到其他线程，`Sync` 标记类型可安全被多个线程共享。编译器通过 trait bound 检查在编译期阻止数据竞争——`thread::spawn` 要求闭包是 `'static + Send`，`Rc<i32>` 不满足 `Send` 约束。这比 Java 的 `synchronized` 或 Go 的 `chan` 更根本：Rust 在类型层面消除数据竞争，而非运行时检测。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/marker/trait.Send.html)]
+
+### 10.2 边界测试：trait 对象的安全性约束（编译错误）
+
+```rust,compile_fail
+trait Handler {
+    fn handle(&self, req: &str) -> String;
+}
+
+struct Dispatcher {
+    // ❌ 编译错误: `Handler` 不是对象安全的（object-safe）
+    handlers: Vec<Box<dyn Handler>>, // 若 Handler 使用泛型则失败
+}
+
+impl Dispatcher {
+    fn route(&self, req: &str) -> String {
+        self.handlers[0].handle(req)
+    }
+}
+```
+
+> **修正**: Rust 的 trait 对象安全（object safety）要求：1) 方法不使用 `Self: Sized`；2) 方法不使用泛型类型参数；3) 关联函数（无 `self`）不能是对象安全的。违反这些规则的 trait 不能作为 `dyn Trait` 使用。这是 Rust 动态分发与静态分发的边界：静态单态化（monomorphization）允许泛型方法，但 trait 对象（vtable 动态分发）要求方法签名在编译期确定。与 Java 的接口（总是动态分发）或 C++ 的虚函数（无对象安全概念）不同，Rust 显式区分这两种机制，要求开发者根据场景选择。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+
+### 10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）
+
+```rust,compile_fail
+trait Repository {
+    fn find(&self, id: i32) -> Option<String>;
+}
+
+struct Service {
+    repo: Box<dyn Repository>,
+}
+
+impl Service {
+    fn use_repo(&self, id: i32) -> String {
+        // ⚠️ 运行时开销: trait object 的虚函数调用
+        self.repo.find(id).unwrap_or_default()
+    }
+}
+```
+
+> **修正**: 依赖注入（DI）在 Rust 中通常通过**泛型**（静态分发）或 **trait object**（动态分发）实现。泛型无运行时开销，但代码膨胀；trait object 有 vtable 间接开销（约 1-2 个指针解引用），但二进制更小。上述代码使用 `Box<dyn Repository>` 实现 DI，每次 `find` 调用有虚函数开销。在性能关键路径上，应使用泛型：`struct Service<R: Repository> { repo: R }`。Rust 的类型系统允许在编译期选择：开发时使用 trait object（快速迭代），发布时重构为泛型（性能优化）。这与 Java 的接口（总是动态分发，JIT 可能内联）或 C++ 的模板（总是静态分发）不同——Rust 提供了两种机制，让开发者根据场景选择。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+
+### 10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）
+
+```rust,compile_fail
+struct HttpRequest<State> {
+    url: String,
+    _state: std::marker::PhantomData<State>,
+}
+
+struct Unsent;
+struct Sent;
+struct Received;
+
+impl HttpRequest<Unsent> {
+    fn new(url: String) -> Self { Self { url, _state: std::marker::PhantomData } }
+    fn send(self) -> HttpRequest<Sent> {
+        HttpRequest { url: self.url, _state: std::marker::PhantomData }
+    }
+}
+
+// ❌ 编译问题: 随着状态数增长，转换矩阵的组合爆炸
+// 若有 5 个状态和 10 个转换，需 50 个 impl 块
+```
+
+> **修正**: 类型状态（Typestate）模式将运行时状态检查移至编译期，但**状态机复杂度**随状态数指数增长。5 个状态 × 10 个转换 = 50 个 `impl` 块，维护困难。替代方案：1) 简化状态空间（合并相似状态）；2) 使用枚举状态 + 运行时检查（`match` + `panic!`），适用于复杂状态机；3) 使用宏生成重复实现（`macro_rules!`）。设计原则：类型状态用于**关键路径**（如 `File<Open>` vs `File<Closed>`），普通状态机用枚举。这与 Rust 的"零成本抽象"哲学一致——编译期检查的代价是编译时间增加，而非运行时。这与 Haskell 的 GADT 类型状态或 Idris 的依赖类型状态机类似——Rust 的 PhantomData 是轻量类型状态实现，但复杂度限制在工业规模系统中需权衡。[来源: [Typestate Pattern in Rust](https://cliffle.com/blog/rust-typestate/)] · [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]

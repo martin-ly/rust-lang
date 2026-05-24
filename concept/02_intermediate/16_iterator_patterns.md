@@ -557,3 +557,129 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：迭代器模式的编译错误
+
+### 10.1 边界测试：`Iterator::zip` 长度不匹配（逻辑错误）
+
+```rust
+fn main() {
+    let a = vec![1, 2, 3];
+    let b = vec![10, 20];
+    // ⚠️ 逻辑错误: zip 在较短的迭代器结束时停止
+    let pairs: Vec<_> = a.iter().zip(b.iter()).collect();
+    println!("{:?}", pairs); // [(1, 10), (2, 20)] — 3 被忽略！
+}
+
+// 正确: 使用 zip_longest（itertools）或显式检查长度
+fn fixed() {
+    let a = vec![1, 2, 3];
+    let b = vec![10, 20];
+    assert_eq!(a.len(), b.len(), "iterators must have same length");
+    let pairs: Vec<_> = a.iter().zip(b.iter()).collect();
+    println!("{:?}", pairs);
+}
+```
+
+> **修正**: `Iterator::zip` 产生的新迭代器在**任一**源迭代器结束时停止，不会报错或填充默认值。这与 Python 的 `zip` 行为相同，但与 `zip_longest`（填充 `None`）不同。Rust 标准库选择最小惊讶原则：不隐式填充或扩展，要求调用者显式处理长度不匹配。`itertools` crate 提供 `zip_longest` 等扩展，但标准库的保守设计确保无意外分配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.2 边界测试：`flat_map` 与嵌套迭代器的所有权（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let data = vec![vec![1, 2], vec![3, 4]];
+    let iter = data.into_iter();
+    // ❌ 编译错误: `into_iter` 消耗 data，后续不能使用 data
+    let flat: Vec<_> = iter.flat_map(|v| v.into_iter()).collect();
+    // println!("{:?}", data); // data 已被消耗
+}
+
+// 正确: 使用 iter() 借用
+fn fixed() {
+    let data = vec![vec![1, 2], vec![3, 4]];
+    let flat: Vec<_> = data.iter().flat_map(|v| v.iter()).cloned().collect();
+    println!("{:?}", flat);  // [1, 2, 3, 4]
+    println!("{:?}", data);  // ✅ data 仍可用
+}
+```
+
+> **修正**: `flat_map` 将嵌套迭代器扁平化为单层迭代器，但所有权规则仍然适用。若外层使用 `into_iter()`（消耗），内层也必须使用 `into_iter()`（消耗子集合），导致所有数据被转移。若需保留原数据，外层使用 `iter()`，内层使用 `iter()` + `cloned()`（复制元素）。`flat_map` 的签名 `FnMut(Self::Item) -> impl Iterator` 要求返回的迭代器与 `self` 的生命周期一致，增加了嵌套借用时的复杂性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十二、边界测试：迭代器模式的编译错误（续）
+
+### 12.1 边界测试：`enumerate` 与索引类型（逻辑错误）
+
+```rust
+fn main() {
+    let data = vec![10, 20, 30];
+    // ⚠️ 逻辑错误: enumerate 返回 usize，可能与预期类型不匹配
+    for (idx, val) in data.iter().enumerate() {
+        println!("idx={}, val={}", idx, val);
+        // idx 是 usize，若需要 i32 需显式转换
+        // let i: i32 = idx; // 编译错误
+    }
+}
+
+// 正确: 显式转换索引
+fn fixed() {
+    let data = vec![10, 20, 30];
+    for (idx, val) in data.iter().enumerate() {
+        let i = idx as i32; // ✅ 显式转换
+        println!("i={}, val={}", i, val);
+    }
+}
+```
+
+> **修正**: `Iterator::enumerate` 返回 `(usize, Item)`，索引始终是 `usize`。在需要其他整数类型（如 `i32`、`u8`）的上下文中，必须显式转换。Rust 禁止隐式整数转换，即使是缩小范围（`usize` → `u8`）也需要 `as` 关键字。这消除了 C 中常见的整数截断 bug，但增加了显式转换的代码量。`enumerate` 的索引从 0 开始，不受迭代器跳过元素的影响（如 `skip(5).enumerate()` 的索引仍从 0 开始，而非 5）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 12.2 边界测试：`partition` 与所有权分割（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let data = vec![String::from("a"), String::from("b")];
+    // ❌ 编译错误: `partition` 消耗迭代器，但以下代码试图保留原数据
+    let (evens, odds): (Vec<_>, Vec<_>) = data.into_iter()
+        .partition(|s| s.len() % 2 == 0);
+    // println!("{:?}", data); // data 已被消耗
+}
+
+// 正确: 使用 iter() 借用，但 partition 需要 into_iter()
+fn fixed() {
+    let data = vec!["a", "bb", "ccc"];
+    let (short, long): (Vec<_>, Vec<_>) = data.into_iter()
+        .partition(|s| s.len() <= 2); // ✅ &str 是 Copy
+    println!("short={:?} long={:?}", short, long);
+}
+```
+
+> **修正**: `partition` 将迭代器元素分为两个集合，要求迭代器是 `IntoIterator`（消耗型）。对于非 `Copy` 类型（如 `String`），`partition` 会 move 所有元素，原集合不可用。若需保留原数据，必须先 `clone` 或使用 ` iter()` + `cloned()` + `partition`。这体现了 Rust 所有权系统的严格性——数据不能同时存在于原位置和多个新位置，除非显式复制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.5 边界测试：`Iterator::fold` 的初始值类型与闭包返回类型不匹配（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let nums = vec![1, 2, 3];
+    // ❌ 编译错误: fold 的初始值类型与闭包返回类型不匹配
+    let sum: String = nums.iter().fold(0, |acc, x| acc + x);
+    // 初始值 0 是 i32，但期望 String
+}
+```
+
+> **修正**: `Iterator::fold` 的签名：`fn fold<B, F>(self, init: B, f: F) -> B`，其中 `B` 是累加器类型，`F: FnMut(B, Self::Item) -> B`。编译器从初始值 `init` 推断 `B`，上述代码中 `0` 推断 `B = i32`，但注解 `let sum: String` 要求 `B = String`，类型冲突。正确写法：`nums.iter().fold(String::new(), |mut acc, x| { acc.push_str(&x.to_string()); acc })`。`fold` 是 Rust 迭代器的通用归约操作，类型安全但需确保初始值、闭包参数、闭包返回类型一致。这与 Haskell 的 `foldl`（同样类型严格）或 JavaScript 的 `Array.prototype.reduce`（动态类型，无此检查）不同——Rust 的 `fold` 在编译期验证类型一致性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
+
+### 10.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）
+
+```rust,compile_fail
+fn main() {
+    let v = vec![1, 2, 3, 4, 5];
+    let mut chunks = v.chunks_exact(2);
+    for chunk in &mut chunks {
+        println!("{:?}", chunk); // [1,2] [3,4]
+    }
+    // ⚠️ 逻辑错误: 易忘记处理剩余元素
+    // let remainder = chunks.remainder(); // [5]
+    // println!("remaining: {:?}", remainder);
+}
+```
+
+> **修正**: `chunks_exact(n)` 返回大小严格为 `n` 的块，可能剩余少于 `n` 的元素。迭代 `ChunksExact` 后，需调用 `remainder()` 获取剩余元素——遗漏是常见 bug。替代方法：`chunks(n)` 返回大小至多为 `n` 的块（最后块可能更小），无需单独处理剩余。选择取决于场景：1) 需要固定大小块（如 SIMD 处理）→ `chunks_exact` + `remainder`；2) 可接受变长块 → `chunks`。这与 Python 的 `iterools.grouper`（填充或截断）或 NumPy 的 `array_split`（自动处理剩余）类似——Rust 提供两种语义，让开发者根据需求选择。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

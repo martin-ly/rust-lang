@@ -37,6 +37,9 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：assert\_matches 的编译错误](#十边界测试assert_matches-的编译错误)
+    - [10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）](#101-边界测试assert_matches-在非-optionresult-上使用编译错误)
+    - [10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）](#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
 
 ---
 
@@ -559,3 +562,78 @@ fn main() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十、边界测试：assert_matches 的编译错误
+
+### 10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 42;
+    // ❌ 编译错误: assert_matches! 需要匹配模式
+    // 标准库 assert_matches! 要求右侧是模式表达式
+    assert_matches!(x, 42); // 若未导入或类型不匹配则报错
+}
+
+// 正确: 对枚举类型使用模式匹配
+use std::assert_matches::assert_matches;
+
+fn fixed() {
+    let result: Result<i32, &str> = Ok(42);
+    assert_matches!(result, Ok(_)); // ✅ 匹配 Ok 变体
+}
+```
+
+> **修正**: `assert_matches!`（Rust 1.58+，unstable 到 1.77 stable）专门用于测试枚举变体匹配。它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。在 `assert_matches!` 稳定前，使用 `matches!` 宏或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let opt = Some(Some(5));
+    // ❌ 编译错误: identifier `x` is bound more than once in the same pattern
+    match opt {
+        Some(x) | Some(Some(x)) => println!("{}", x),
+        None => println!("none"),
+    }
+}
+
+// 正确: 避免或模式中的绑定冲突
+fn fixed() {
+    let opt = Some(Some(5));
+    match opt {
+        Some(Some(x)) => println!("nested: {}", x),
+        Some(None) => println!("inner none"),
+        None => println!("none"),
+    }
+}
+```
+
+> **修正**: 在 Rust 模式匹配的 `|`（或模式）中，所有分支必须绑定**相同的变量名和类型**。若一个分支绑定 `x: i32`，另一个分支绑定 `x: Option<i32>`，编译器报错。这是 Rust 模式匹配"穷尽性检查"的一部分——确保每个绑定在所有分支中具有一致性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）
+
+```rust,compile_fail
+#[test]
+fn test_nested_match() {
+    let result: Result<Option<i32>, ()> = Ok(Some(42));
+    // ❌ 编译错误: assert_matches! 对嵌套模式的绑定支持有限
+    // assert_matches!(result, Ok(Some(x)) if x > 0);
+    // 若未启用 unstable feature，不可用
+}
+```
+
+> **修正**: `assert_matches!`（Rust 1.58+ stable）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏外部不可见。`assert_matches!(result, Ok(Some(x)))` 中 `x` 只在宏内部有效，测试代码不能后续使用 `x`。若需提取绑定值，使用 `if let`：`if let Ok(Some(x)) = result { assert!(x > 0); } else { panic!("match failed"); }`。`assert_matches!` 的优势是简洁和良好的失败消息（打印不匹配的值），劣势是绑定不可导出。这与 `matches!` 宏（返回 `bool`，无绑定）或 `insta` 的 snapshot 测试（结构化匹配）互补。`assert_matches!` 的设计体现了 Rust 宏的能力边界：宏生成的代码在词法上封闭，无法将绑定泄露到外部。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：自定义断言失败消息的类型约束（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 5;
+    // ❌ 编译错误: assert! 的消息参数必须实现 Display
+    assert!(x > 10, vec!["failed", "at", "line", "10"]);
+    // Vec<&str> 未实现 Display
+}
+```
+
+> **修正**: `assert!`、`assert_eq!`、`assert_ne!` 的自定义消息参数必须实现 `std::fmt::Display` trait。`Vec<&str>` 未实现 `Display`，因此不能直接作为消息。解决方案：1) 使用 `format!("{:?}", vec)`（`Debug` 实现）；2) 使用 `vec.join(", ")` 转为 `String`；3) 使用 `assert!(..., "message", args...)` 的格式化语法。这与 C 的 `assert`（只接受布尔，无自定义消息）或 Python 的 `assert`（接受任意表达式作为消息）不同——Rust 的断言消息有类型约束，保证错误输出可读。`assert!` 的格式化参数使用与 `println!` 相同的语法，支持 `{}`、`{:?}`、`{:x}` 等格式说明符。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/macro.assert.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

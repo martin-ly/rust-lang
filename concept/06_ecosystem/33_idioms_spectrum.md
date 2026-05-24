@@ -76,6 +76,11 @@
     - [相关概念文件](#相关概念文件)
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
+    - [10.1 边界测试：模式匹配穷尽性检查（编译错误）](#101-边界测试模式匹配穷尽性检查编译错误)
+    - [10.2 边界测试：`?` 运算符的类型转换约束（编译错误）](#102-边界测试-运算符的类型转换约束编译错误)
+    - [10.6 边界测试：`todo!()` 与 `unimplemented!()` 的生产泄露（运行时 panic）](#106-边界测试todo-与-unimplemented-的生产泄露运行时-panic)
+    - [10.7 边界测试：过度使用 `Deref` 进行类型转换（隐式行为困惑）](#107-边界测试过度使用-deref-进行类型转换隐式行为困惑)
 
 ---
 
@@ -1505,3 +1510,78 @@ quadrantChart
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **相关文件**: [A/S/P 标记规范](../00_meta/asp_marking_guide.md) · [问题图谱](../00_meta/problem_graph.md) · [范式转换矩阵](../00_meta/paradigm_transition_matrix.md)
+
+## 十、边界测试：惯用法谱系的编译错误
+
+### 10.1 边界测试：模式匹配穷尽性检查（编译错误）
+
+```rust,compile_fail
+enum Color {
+    Red,
+    Green,
+    Blue,
+}
+
+fn describe(c: Color) -> &'static str {
+    match c {
+        Color::Red => "red",
+        Color::Green => "green",
+        // ❌ 编译错误: 未处理 `Color::Blue`
+    }
+}
+```
+
+> **修正**: Rust 的 match 表达式要求穷尽（exhaustive）——必须覆盖枚举的所有变体。这是 Rust"拒绝不完整的程序"哲学的核心体现：编译器拒绝可能的逻辑遗漏，迫使开发者显式处理所有情况。添加 `Color::Blue => "blue"` 或 `_ => "other"`（通配符）可修复。这与 C 的 `switch`（无默认分支时静默继续）或 Java 的 `switch`（需显式 `default` 但编译器不强制）不同——Rust 将"遗漏分支"从潜在的运行时 bug 转化为编译期错误。在大型重构中（如添加新枚举变体），穷尽检查是强大的安全保障：所有 match 点必须更新，编译器会指出遗漏位置。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-02-match.html)] · [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
+
+### 10.2 边界测试：`?` 运算符的类型转换约束（编译错误）
+
+```rust,compile_fail
+fn may_fail() -> Result<i32, std::io::Error> {
+    Ok(42)
+}
+
+fn caller() -> Result<i32, String> {
+    // ❌ 编译错误: `?` 运算符要求 `From<std::io::Error>` 实现
+    let val = may_fail()?;
+    Ok(val)
+}
+```
+
+> **修正**: `?` 运算符是 Rust 错误传播的核心机制，自动将 `Err(E)` 转换为函数返回类型 `Result<T, F>`，要求 `E: Into<F>`（或 `From<E>` for `F`）。`std::io::Error` 不能自动转换为 `String`，因为二者语义不同。解决方案：1) 使用统一错误类型（`anyhow::Error`、`eyre::Report` 或自定义 `enum Error`）；2) 手动 `map_err(|e| e.to_string())?`；3) 改变返回类型为 `Result<i32, std::io::Error>`。这与 Go 的 `if err != nil { return err }`（手动传播，类型必须完全相同）或 Java 的异常抛出（隐式向上转型）不同——Rust 的错误转换是显式的、类型安全的，通过 `From` trait 实现可扩展的自动转换。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/)]
+
+### 10.6 边界测试：`todo!()` 与 `unimplemented!()` 的生产泄露（运行时 panic）
+
+```rust,compile_fail
+fn critical_function() -> i32 {
+    // ❌ 运行时 panic: 若 TODO 未修复即发布
+    todo!("implement this later")
+}
+
+fn main() {
+    let _ = critical_function();
+}
+```
+
+> **修正**: `todo!()` 和 `unimplemented!()` 是 Rust 的开发占位宏，编译通过但运行时 panic。在原型开发和渐进实现中极有用，但若留在生产代码中是严重 bug。检测工具：1) `clippy` 的 `todo` lint（可配置为警告或错误）；2) `grep -r "todo!\|unimplemented!" src/` 在 CI 中检查；3) `#[cfg(debug_assertions)]` 条件编译仅在 debug 构建中保留 `todo`。这与 C 的 `// TODO` 注释（无运行时影响，易遗漏）或 Java 的 `throw new UnsupportedOperationException()`（类似 `unimplemented!`）类似——Rust 的 `todo!` 是显式的"此处未完成"标记，比注释更醒目，但需确保在发布前处理。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/macro.todo.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.7 边界测试：过度使用 `Deref` 进行类型转换（隐式行为困惑）
+
+```rust,compile_fail
+use std::ops::Deref;
+
+struct Wrapper(String);
+
+impl Deref for Wrapper {
+    type Target = String;
+    fn deref(&self) -> &String { &self.0 }
+}
+
+fn main() {
+    let w = Wrapper(String::from("hello"));
+    // ❌ 隐式行为: Deref 允许 &Wrapper 自动转为 &String
+    // 但 &Wrapper 本身的方法被隐藏，可能导致困惑
+    let _s: &String = &w; // 自动解引用
+}
+```
+
+> **修正**: `Deref` trait 允许自定义类型的**自动解引用**，实现"智能指针"行为。但过度使用导致：1) 类型边界模糊（`Wrapper` 何时是 `Wrapper`，何时是 `String`）；2) 方法解析困惑（`w.len()` 调用 `String::len` 还是 `Wrapper` 的方法）；3) 编译错误信息难读（类型不匹配时建议的自动转换链很长）。Rust 社区共识：仅对真正的智能指针（`Box`、`Rc`、`Arc`、`Cow`）实现 `Deref`，不对领域类型使用。替代方案：显式方法（`wrapper.as_str()`）或 `From`/`Into` trait。这与 C++ 的隐式转换运算符（`operator T()`，更危险，无限制）或 Swift 的 `ExpressibleByStringLiteral`（类似但有限）不同——Rust 的 `Deref` 是受限的自动解引用，但滥用仍导致设计问题。[来源: [Rust API Guidelines — Deref](https://rust-lang.github.io/api-guidelines/predictability.html?highlight=deref#c-deref)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)]

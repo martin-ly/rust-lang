@@ -534,3 +534,62 @@ enum CircuitState {
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 表征空间坐标系
+
+## 十、边界测试：模式组合代数的编译错误
+
+### 10.1 边界测试：状态机组合中的无效转换（编译错误）
+
+```rust,compile_fail
+struct StateA;
+struct StateB;
+
+impl StateA {
+    fn to_b(self) -> StateB { StateB }
+}
+
+fn main() {
+    let a = StateA;
+    let b = a.to_b();
+    // ❌ 编译错误: no method named `to_b` found for struct `StateB`
+    let _c = b.to_b(); // StateB 没有 to_b 方法
+}
+
+// 正确: 使用类型状态模式
+struct Machine<S> { _state: std::marker::PhantomData<S> }
+
+struct Idle;
+struct Running;
+
+impl Machine<Idle> {
+    fn start(self) -> Machine<Running> { Machine { _state: std::marker::PhantomData } }
+}
+
+impl Machine<Running> {
+    fn stop(self) -> Machine<Idle> { Machine { _state: std::marker::PhantomData } }
+}
+```
+
+> **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。这是范畴论中**有限状态机作为类型**的直接应用：状态是类型，转换是函数，可达性由类型系统的可达性保证。与运行时状态检查（switch/case）相比，类型状态消除了运行时开销和遗漏分支的可能。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+
+### 10.2 边界测试：组合子模式的所有权链（编译错误）
+
+```rust,compile_fail
+struct Wrapper<T>(T);
+
+fn main() {
+    let w = Wrapper(String::from("hello"));
+    let inner = w.0; // move 内部值
+    // ❌ 编译错误: borrow of moved value: `w`
+    // w.0 已被 move，w 部分初始化
+    let _ = w.0;
+}
+
+// 正确: 使用解构或引用
+fn fixed() {
+    let w = Wrapper(String::from("hello"));
+    let Wrapper(inner) = w; // ✅ 解构获取所有权
+    println!("{}", inner);
+}
+```
+
+> **修正**: 组合子模式（Combinator Pattern）通过小函数组合构建复杂行为。Rust 的所有权系统要求组合链中的每个中间结果必须正确传递或释放。部分 move（如 `w.0` 被 move 但 `w` 仍被视为整体）会导致编译错误。解构（`let Wrapper(inner) = w`）是安全的替代方案，它明确声明"消耗整个结构体，提取其字段"。这与 Haskell 的无限惰性组合链不同——Rust 的组合是严格的、所有权感知的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

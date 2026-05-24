@@ -761,96 +761,6 @@ timeline
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **补充来源**
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -863,3 +773,79 @@ timeline
 > [来源: [docs.rs](https://docs.rs/)]
 
 > **相关文件**: [工具链](../06_ecosystem/01_toolchain.md) · [演进](../07_future/03_evolution.md) · [质量仪表板](../00_meta/quality_dashboard_v2.md)
+
+### 10.3 边界测试：MSRV 与依赖更新的冲突（编译错误）
+
+```rust,compile_fail
+// Cargo.toml
+// [package]
+// rust-version = "1.70"
+//
+// [dependencies]
+// tokio = "1.40" // 假设 tokio 1.40 要求 Rust 1.75+
+
+#[tokio::main]
+async fn main() {
+    // ❌ 编译错误: tokio 1.40 的 MSRV 高于当前项目的 MSRV
+    println!("hello");
+}
+```
+
+> **修正**: MSRV（Minimum Supported Rust Version）是 Rust 生态的重要实践：库作者声明支持的最低 Rust 版本，帮助下游项目选择兼容的依赖。但 MSRV 管理复杂：1) 依赖更新可能提高 MSRV（如 `tokio` 从 1.37 到 1.40 要求 Rust 1.75）；2) Cargo 不自动检查 MSRV 兼容性（`cargo check` 在旧编译器上直接失败）；3) `rust-version` 字段在 Cargo.toml 中只是声明，不强制。工具支持：`cargo-msrv` 自动测试最低兼容版本，`cargo update --locked` 避免意外升级。这与 Node 的 `engines` 字段（`node >= 18`，npm 警告但不阻止）或 Go 的 `go.mod`（`go 1.21`，编译器检查）类似——Rust 的 MSRV 是社区约定，非编译器强制。Edition 变更（如 2021 → 2024）是更大的 MSRV 跳跃，需要显式迁移。[来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field)] · [来源: [cargo-msrv](https://github.com/foresterre/cargo-msrv)]
+
+### 10.4 边界测试：不稳定特性在稳定编译器上的使用（编译错误）
+
+```rust,compile_fail
+#![feature(generic_const_exprs)]
+
+fn make_array<T, const N: usize>() -> [T; N]
+where
+    T: Default,
+{
+    // ❌ 编译错误: generic_const_exprs 是不稳定特性， stable 编译器拒绝
+    std::array::from_fn(|_| T::default())
+}
+
+fn main() {
+    let _arr = make_array::<i32, 5>();
+}
+```
+
+> **修正**: Rust 的不稳定特性（unstable features）只能在 nightly 编译器上使用，`#![feature(...)]` 在 stable 编译器上是编译错误。这是 Rust"稳定 vs 实验"的分界线：stable 保证向后兼容，nightly 允许语言演进。使用不稳定特性的风险：1) 特性可能在稳定前改变语义或语法；2) 项目锁定在 nightly，不能享受 stable 的长期支持；3) 某些环境（企业 CI、安全审计）只允许 stable。策略：1) 仅在实验性 crate 中使用不稳定特性；2) 通过 `cfg` 条件编译提供 nightly/stable 双路径；3) 关注特性稳定化进度，及时迁移。这与 C++ 的 TS（Technical Specification，实验性标准库）或 Java 的 JEP preview 特性（需在编译器和运行时启用）类似——Rust 的不稳定机制更轻量（纯编译器标志），但生态分裂风险更大。[来源: [The Rust Unstable Book](https://doc.rust-lang.org/unstable-book/index.html)] · [来源: [Rust RFC 507](https://rust-lang.github.io/rfcs/0507-release-channels.html)]
+
+### 10.3 边界测试：Edition 迁移的 cargo fix 限制（编译错误/行为变化）
+
+```rust,compile_fail
+// Edition 2021 代码
+fn main() {
+    let arr = [1, 2, 3];
+    let r = &arr;
+    // Edition 2021: 闭包捕获数组的引用
+    let f = || println!("{:?}", r);
+    f();
+}
+
+// cargo fix --edition 到 2024 后:
+// 闭包捕获规则可能变化，f 可能捕获 arr 而非 r
+// ❌ 行为变化: 若闭包移动而非借用，代码语义改变
+```
+
+> **修正**: `cargo fix --edition` 自动迁移代码到新版 Edition，但并非所有变更都能自动修复。Edition 2024 的闭包捕获规则改进（更精确的生命周期推断）可能导致：1) 某些代码从"编译失败"变为"编译通过"；2) 某些代码从"借用"变为"移动"；3) `cargo fix` 无法自动判断开发者的意图，可能生成不正确的修复。手动审查：1) 运行 `cargo fix --edition` 后检查所有变更；2) 运行完整测试套件验证行为；3) 关注 `cargo fix` 的警告（"此修复可能改变语义"）。这与 Python 的 `2to3`（自动迁移，但许多变更需手动处理）或 C++ 的编译器升级（无自动迁移工具）不同——Rust 的 Edition 机制设计为平滑迁移，但自动化有其边界。[来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)] · [来源: [cargo fix Documentation](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)]
+
+### 10.4 边界测试：MSRV 与 `Cargo.lock` 的版本漂移（编译错误）
+
+```rust,compile_fail
+// Cargo.toml
+// [package]
+// rust-version = "1.70"
+//
+// Cargo.lock 最初在 1.70 上生成
+// 但队友在 1.75 上运行 cargo update，更新了某个依赖
+
+fn main() {
+    // ❌ 编译错误: 更新后的依赖可能使用 1.75 的特性
+    // 在 1.70 上编译失败
+}
+```
+
+> **修正**: `Cargo.lock` 锁定依赖的精确版本，但不锁定**编译器版本**。团队成员使用不同 Rust 版本时，`cargo update` 可能选择依赖的较新版本（要求更高 MSRV），导致在旧编译器上构建失败。解决方案：1) CI 中使用最低支持的 Rust 版本构建（`cargo +1.70.0 build`）；2) 使用 `cargo-msrv` 验证；3) 在 `Cargo.toml` 中声明 `rust-version`，并配置 CI 检查。这与 Node 的 `package-lock.json`（锁定包版本，但不锁定 Node 版本）或 Go 的 `go.mod` + `go.sum`（锁定版本，Go 本身向后兼容）类似——Rust 的快速演进使 MSRV 管理成为生态挑战。`cargo` 正在开发 `rust-version` 的自动检查（拒绝安装 MSRV 过高的依赖）。[来源: [Cargo rust-version](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field)] · [来源: [cargo-msrv](https://github.com/foresterre/cargo-msrv)]

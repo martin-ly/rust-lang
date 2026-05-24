@@ -1756,3 +1756,78 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 > [来源: [crates.io](https://crates.io/)]
 
 > **相关文件**: [能力图谱](../00_meta/competency_graph.md#六工程实践) · [质量仪表板](../00_meta/quality_dashboard_v2.md) · [版本跟踪](../07_future/05_rust_version_tracking.md)
+
+## 十、边界测试：工具链的编译错误
+
+### 10.1 边界测试：`cargo` 特性开关的依赖冲突（编译错误）
+
+```toml
+# Cargo.toml
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+# 若另一依赖引入 serde 无 derive 特性，可能导致冲突
+```
+
+```rust,compile_fail
+// ❌ 编译错误: cannot find derive macro `Deserialize` in this scope
+// 若 Cargo.toml 中未启用 serde 的 derive 特性
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Data {
+    value: i32,
+}
+```
+
+> **修正**: Cargo 的特性（features）是条件编译的核心机制。依赖冲突发生在：crate A 依赖 `serde`（无 `derive`），crate B 依赖 `serde`（有 `derive`），最终特性取并集（`derive` 启用）。但若 crate A 显式禁用 `derive`（`default-features = false`），冲突解决更复杂。Rust 的特性系统是无损的——启用特性不会破坏代码，只增加 API。这与 C++ 的宏或 CMake 的选项不同——Cargo 的特性是声明式的、可组合的。[来源: [Cargo Documentation](https://doc.rust-lang.org/cargo/)]
+
+### 10.2 边界测试：Edition 迁移中的语法变化（编译错误）
+
+```rust,compile_fail
+// Rust 2015 Edition
+extern crate std;
+
+fn main() {
+    // ❌ 编译错误: `try` 在 Rust 2018+ 中是保留关键字
+    // let try = 5; // 在 Edition 2018 中编译错误
+}
+```
+
+> **修正**: Rust 的 Edition 机制允许语言在不破坏向后兼容的情况下演进。2018 Edition 引入了 `async`、`await`、`try` 等新关键字。旧代码若使用这些标识符，需使用 raw identifier（`r#try`）或保持旧 Edition。`cargo fix --edition` 可自动迁移代码。这与 Python 2→3 的破坏性迁移不同——Rust 的 Edition 是 crate 级别的，同一项目中可混合使用 2015 和 2021 Edition 的依赖。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：`cargo` 工作空间的成员路径错误（编译错误）
+
+```rust,compile_fail
+// Cargo.toml (workspace root)
+// [workspace]
+// members = ["crate-a", "crate-b"]
+
+// 若 crate-a/Cargo.toml 中:
+// [dependencies]
+// crate-b = { path = "../crate-b" }
+// ✅ 正确
+
+// 若写成:
+// [dependencies]
+// crate-b = { path = "crate-b" }
+// ❌ 编译错误: 路径解析失败（相对 crate-a 而非 workspace root）
+```
+
+> **修正**: Cargo 工作空间中，成员 crate 的 `path` 依赖解析是**相对于当前 crate 的 `Cargo.toml`**，而非工作区根。这是常见错误源：在 workspace root 中 `crate-b` 路径正确，但在子 crate 中需 `../crate-b`。解决方案：1) 使用 workspace 依赖（`[workspace.dependencies]` + `crate-b = { workspace = true }`），统一版本和路径；2) 统一使用绝对路径（不推荐，破坏可移植性）；3) 仔细验证每个子 crate 的 `Cargo.toml`。Cargo 的 workspace 依赖（1.64+ stable）是最佳实践：在 workspace root 中声明所有共享依赖，子 crate 引用 workspace 定义。这与 npm 的 workspaces（`package.json` 中的 `workspaces` 字段，依赖解析相对 root）或 Gradle 的多项目构建（`settings.gradle` 定义项目层次）类似——Cargo 的 workspace 正在逐步成熟，但路径解析的局部性仍是陷阱。[来源: [Cargo Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
+
+### 10.4 边界测试：`rustc` 的链接时优化（LTO）与动态链接的冲突（编译错误/链接错误）
+
+```rust,compile_fail
+// Cargo.toml
+// [profile.release]
+// lto = true
+// crate-type = ["cdylib"]
+
+// ❌ 编译错误/链接错误: LTO 与 cdylib 可能冲突
+// LTO 内联跨 crate 代码，但 cdylib 需要导出符号供外部使用
+// 若符号被 LTO 内联或消除，动态链接器找不到符号
+
+fn main() {}
+```
+
+> **修正**: 链接时优化（LTO）在链接阶段进行跨 crate 内联和死代码消除，显著提高性能（10-30%）。但 `cdylib`（C-compatible dynamic library）需要**导出符号**供外部程序（C、Python、其他 Rust 程序）使用。LTO 可能内联或消除"未使用"的符号——从 Rust 视角看这些符号无内部调用，但从动态链接视角它们是公共 API。解决方案：1) 对导出的符号标记 `#[no_mangle]` 和 `pub extern "C"`；2) 使用 `#[used]` 强制保留符号；3) 对 cdylib 禁用 LTO 或使用 `thin-lto`（部分内联，保留更多符号）。这与 C/C++ 的 `-flto` + `-shared`（同样问题，需 `-fvisibility=default`）或 Go 的 cgo（无 LTO 概念，但构建复杂）类似——跨语言动态链接与激进优化的矛盾是所有系统语言的共同挑战。[来源: [Cargo Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html)] · [来源: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html)]

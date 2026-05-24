@@ -25,6 +25,9 @@
     - [1.3 Rust 的类型推断扩展](#13-rust-的类型推断扩展)
   - [二、技术细节](#二技术细节)
     - [2.1 统一（Unification）](#21-统一unification)
+  - [十、边界测试：类型推断的编译错误](#十边界测试类型推断的编译错误)
+    - [10.1 边界测试：泛型方法链中的类型推断失败（编译错误）](#101-边界测试泛型方法链中的类型推断失败编译错误)
+    - [10.2 边界测试：闭包参数类型推断的歧义（编译错误）](#102-边界测试闭包参数类型推断的歧义编译错误)
     - [2.2 泛型函数的类型推断](#22-泛型函数的类型推断)
     - [2.3 生命周期推断](#23-生命周期推断)
   - [三、Rust 与 HM 的差异](#三rust-与-hm-的差异)
@@ -35,6 +38,8 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：闭包参数的类型推断歧义（编译错误）](#103-边界测试闭包参数的类型推断歧义编译错误)
+    - [10.4 边界测试：关联类型的投影歧义（编译错误）](#104-边界测试关联类型的投影歧义编译错误)
 
 ---
 
@@ -163,6 +168,50 @@ graph TD
 ### 2.1 统一（Unification）
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：类型推断的编译错误
+
+### 10.1 边界测试：泛型方法链中的类型推断失败（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let v = vec![1, 2, 3];
+    let iter = v.iter();
+    // ❌ 编译错误: type annotations needed
+    // collect() 需要知道目标类型
+    let collected = iter.collect(); // 无法推断 collect 到哪种集合
+}
+
+// 正确: 显式标注类型
+fn fixed() {
+    let v = vec![1, 2, 3];
+    let collected: Vec<_> = v.iter().collect(); // ✅ 目标类型明确
+    // 或使用 turbofish
+    let collected2 = v.iter().collect::<Vec<_>>();
+}
+```
+
+> **修正**: Rust 的类型推断基于 Hindley-Milner 算法扩展，但方法链中的某些位置需要显式类型标注。`collect()` 是最常见的例子——它可返回 `Vec<T>`、`HashSet<T>`、`Result<Vec<T>, E>` 等多种类型，编译器无法从上下文推断时必须显式标注。`::<>`（turbofish）语法允许在方法调用处指定类型参数，避免引入额外变量绑定。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：闭包参数类型推断的歧义（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let closure = |x| x + 1;
+    // ❌ 编译错误: type annotations needed for `|x| x + 1`
+    // 闭包参数 x 的类型无法从单独定义推断
+    println!("{}", closure(5));
+}
+
+// 正确: 在使用处提供足够上下文
+fn fixed() {
+    let closure = |x| x + 1;
+    let result: i32 = closure(5); // ✅ 上下文推断 x: i32
+    println!("{}", result);
+}
+```
+
+> **修正**: 闭包参数的类型推断依赖首次使用处的上下文。若闭包定义后立即调用（如 `let f = |x| x + 1; f(5)`），编译器从 `5` 推断 `x: i32`。但若闭包作为参数传递或存储在变量中，可能需要显式标注参数类型（`|x: i32| x + 1`）。这与 C++14 的泛型 lambda（`auto x`）不同——Rust 的闭包类型推断更严格，要求在首次使用时有足够信息。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 统一算法: 判断两个类型是否兼容，并生成替换
@@ -573,3 +622,39 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 10.3 边界测试：闭包参数的类型推断歧义（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let closure = |x| x + 1;
+    // ❌ 编译错误: 闭包参数 x 的类型无法从上下文推断
+    // 因为 closure 尚未被调用，编译器不知道 x 的类型
+
+    // 正确: 提供类型注解或调用点上下文
+    let closure = |x: i32| x + 1;
+    println!("{}", closure(5));
+}
+```
+
+> **修正**: Rust 的闭包参数类型推断依赖**使用点上下文**：闭包在何处被调用，参数类型从调用处推断。若闭包定义后未被调用（或调用点无足够类型信息），编译器无法推断参数类型。这与 C++ 的 lambda（参数类型必须显式或使用 `auto`）或 JavaScript 的箭头函数（动态类型，无推断问题）不同——Rust 的闭包类型推断是双向的：函数签名可从闭包推断，闭包参数可从调用推断，但若两端都未知，推断失败。`map`、`filter` 等迭代器适配器提供足够的上下文（`Iterator::Item` 类型），因此迭代器闭包通常无需显式标注。独立闭包（未立即使用）需要类型注解。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html)]
+
+### 10.4 边界测试：关联类型的投影歧义（编译错误）
+
+```rust,compile_fail
+trait Container {
+    type Item;
+    fn get(&self) -> Self::Item;
+}
+
+fn process<C: Container>(c: C) -> C::Item {
+    c.get()
+}
+
+fn main() {
+    // ❌ 编译错误: 若多个类型实现 Container，调用 process 时类型不明确
+    // process(vec) // Vec 实现 Container? 不明确
+}
+```
+
+> **修正**: 关联类型（associated types）是 trait 的一部分：`Container::Item` 由具体实现决定。但调用泛型函数 `process` 时，编译器必须知道 `C` 的具体类型才能解析 `C::Item`。若 `C` 无法从参数推断（如上述代码中 `process` 无参数或参数类型不明确），编译错误。解决方案：1) 显式指定类型参数 `process::<Vec<i32>>(vec)`；2) 使用 `impl Trait` 返回类型替代关联类型；3) 确保参数类型提供足够上下文。这与 Haskell 的 type families（`Container a -> Item a`，类型推断类似）或 C++ 的 `typename`（`typename C::Item`，需要显式 `typename` 关键字）类似——Rust 的关联类型推断在复杂场景下需要显式标注。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference — Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html)]

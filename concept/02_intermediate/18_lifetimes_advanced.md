@@ -568,3 +568,100 @@ graph TD
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十、边界测试：高级生命周期的编译错误
+
+### 10.1 边界测试：自引用结构体与 `Pin`（编译错误）
+
+```rust,compile_fail
+struct SelfRef {
+    data: String,
+    ptr: &str, // ❌ 编译错误: expected named lifetime parameter
+}
+
+// 正确: 使用裸指针 + Pin
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfRefFixed {
+    data: String,
+    ptr: *const str,
+    _pin: PhantomPinned,
+}
+
+impl SelfRefFixed {
+    fn new(data: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::new(SelfRefFixed {
+            ptr: std::ptr::null(),
+            data,
+            _pin: PhantomPinned,
+        });
+        let ptr = &boxed.data[..] as *const str;
+        boxed.ptr = ptr;
+        Box::pin(boxed)
+    }
+}
+```
+
+> **修正**: 自引用结构体（字段引用同一结构体的其他字段）在 Rust 的生命周期系统中无法表达，因为结构体的生命周期参数只能引用外部数据。解决方案是使用裸指针（无生命周期约束）+ `Pin`（防止移动）+ `PhantomPinned`（标记为 !Unpin）。这是 Rust 安全边界的典型突破——编译器无法证明的安全属性，由 unsafe 代码承担证明义务。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）
+
+```rust,compile_fail
+fn call_with_ref<F>(f: F)
+where
+    F: Fn(&i32),
+{
+    let x = 5;
+    f(&x);
+}
+
+fn main() {
+    // ❌ 编译错误: implementation of `Fn` is not general enough
+    // 闭包 |x: &i32| 默认推断 x 为特定生命周期，而非对所有生命周期
+    call_with_ref(|x: &i32| println!("{}", x));
+}
+
+// 正确: 显式使用 HRTB
+fn call_with_ref_fixed<F>(f: F)
+where
+    for<'a> F: Fn(&'a i32), // ✅ HRTB
+{
+    let x = 5;
+    f(&x);
+}
+```
+
+> **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当闭包作为参数传递时，默认的生命周期推断可能过于具体（绑定到特定作用域），导致无法满足泛型函数的 trait bound。HRTB 在回调函数、比较器、迭代器适配器等高阶函数场景中至关重要，是 Rust 类型系统表达"多态生命周期"的关键机制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.5 边界测试：闭包捕获引用与 `Fn` trait 的生命周期约束（编译错误）
+
+```rust,compile_fail
+fn make_callback<'a>(s: &'a str) -> impl Fn() + 'a {
+    move || println!("{}", s)
+}
+
+fn main() {
+    let callback;
+    {
+        let s = String::from("hello");
+        callback = make_callback(&s);
+        // ❌ 编译错误: callback 的生命周期与 s 绑定
+        // s 在这里被释放，但 callback 仍被使用
+    }
+    // callback();
+}
+```
+
+> **修正**: `impl Fn() + 'a` 表示闭包本身的生命周期为 `'a`——闭包捕获的引用不能超越 `'a`。`make_callback(&s)` 返回的闭包与 `s` 同生命周期，因此 `s` 释放后闭包失效。若需长生命周期的回调，必须拥有数据：`move || println!("{}", s.clone())` 或 `Arc<str>`。这是 Rust 异步和事件驱动编程的核心约束：回调、future、stream 的生命周期与捕获数据绑定。这与 C++ 的 `std::function`（可捕获引用，但悬垂是 UB）或 Java 的匿名类（捕获 final 引用，GC 管理生命周期）不同——Rust 在编译期防止了回调的悬垂引用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+
+### 10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）
+
+```rust,compile_fail
+fn make_ref<'a>(s: &'a str) -> impl Iterator<Item = &'a char> + 'a {
+    s.chars().collect::<Vec<_>>().iter()
+    // ❌ 编译错误: Vec 在函数内创建，iter() 返回的引用生命周期不够长
+}
+```
+
+> **修正**: `impl Trait` 返回类型可捕获输入参数的生命周期（`+ 'a`），但不能延长局部变量的生命周期。上述代码中，`Vec<char>` 在函数内创建，`iter()` 返回的 `&char` 与 `Vec` 同生命周期——函数返回后 `Vec` 被释放，引用悬垂。解决方案：1) 返回拥有数据的类型（`Vec<char>` 本身，或 `Chars` 迭代器）；2) 让调用者提供缓冲区；3) 使用 `unsafe` 和 `ManuallyDrop`（不推荐）。这与 `async fn` 的生命周期捕获类似：返回的 future 可引用输入参数，但不能引用局部变量。`impl Trait` 的生命周期规则是 Rust 类型系统的核心——它确保返回的抽象不依赖已释放的数据。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]

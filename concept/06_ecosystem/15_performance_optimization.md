@@ -35,6 +35,13 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：性能优化的编译错误](#十边界测试性能优化的编译错误)
+    - [10.1 边界测试：`unsafe` 性能优化的正确性假设（运行时 UB）](#101-边界测试unsafe-性能优化的正确性假设运行时-ub)
+    - [10.2 边界测试：`MaybeUninit` 的未初始化内存（运行时 UB）](#102-边界测试maybeuninit-的未初始化内存运行时-ub)
+    - [10.3 边界测试：`mem::transmute` 的大小不匹配（编译错误）](#103-边界测试memtransmute-的大小不匹配编译错误)
+    - [10.4 边界测试：内联汇编的操作数类型约束（编译错误）](#104-边界测试内联汇编的操作数类型约束编译错误)
+    - [10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）](#106-边界测试inlinealways-与代码膨胀编译错误链接错误)
+    - [10.7 边界测试：`inline(always)` 的代码膨胀（编译后性能下降）](#107-边界测试inlinealways-的代码膨胀编译后性能下降)
 
 ---
 
@@ -627,3 +634,117 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：性能优化的编译错误
+
+### 10.1 边界测试：`unsafe` 性能优化的正确性假设（运行时 UB）
+
+```rust
+fn main() {
+    let mut data = vec![1, 2, 3, 4];
+    let ptr = data.as_mut_ptr();
+    // ⚠️ 运行时 UB: 在 Vec 有效时使用裸指针修改
+    unsafe {
+        *ptr.add(0) = 10; // 可能正确，但以下操作危险
+    }
+    data.push(5); // Vec 可能重新分配，ptr 悬垂
+}
+
+// 正确: 确保 Vec 在裸指针使用期间不重新分配
+fn fixed() {
+    let mut data = vec![1, 2, 3, 4];
+    {
+        let ptr = data.as_mut_ptr();
+        unsafe {
+            *ptr.add(0) = 10; // ✅ 在固定容量期间修改
+        }
+    } // ptr 在此失效
+    data.push(5); // ✅ 现在可以重新分配
+}
+```
+
+> **修正**: 性能优化常涉及 `unsafe` 代码（裸指针、未初始化内存、`mem::transmute`）。这些优化的前提是遵守 Rust 的内存模型——`Vec` 的 `as_mut_ptr()` 返回的指针只在 `Vec` 不重新分配时有效。任何 `push`、`reserve`、`shrink` 都可能导致重新分配，使旧指针悬垂。Miri 可检测此类违规，但无法在编译期完全阻止——这是 unsafe 代码审查的重点。与 C++ 的 `vector::data()` 相同，但 Rust 要求显式 `unsafe` 块，增加审查可见性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：`MaybeUninit` 的未初始化内存（运行时 UB）
+
+```rust
+use std::mem::MaybeUninit;
+
+fn main() {
+    let mut buf: [MaybeUninit<i32>; 4] = [MaybeUninit::uninit(); 4];
+    // ⚠️ 运行时 UB: 读取未初始化内存
+    // let val = unsafe { buf[0].assume_init() }; // UB! 未写入就读取
+
+    // 正确: 先写入，再读取
+    buf[0].write(42);
+    let val = unsafe { buf[0].assume_init() }; // ✅ 已初始化
+    println!("{}", val);
+}
+```
+
+> **修正**: `MaybeUninit<T>` 是 Rust 中处理未初始化内存的安全抽象。`assume_init()` 告诉编译器"此值已初始化"，但实际上若未写入就读取，是未定义行为。编译器可能将未初始化值视为 `undef`（LLVM），导致任意行为。正确使用模式：1) `MaybeUninit::uninit()` 分配空间；2) `ptr.write(val)` 初始化；3) `assume_init()` 读取。这与 C 的 `malloc` + 使用未初始化内存相同，但 Rust 的类型系统追踪初始化状态，Miri 在运行时验证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：`mem::transmute` 的大小不匹配（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: u32 = 0x12345678;
+    // ❌ 编译错误: `u32` 和 `u64` 大小不同，不能 transmute
+    let y: u64 = unsafe { std::mem::transmute(x) };
+    println!("{}", y);
+}
+```
+
+> **修正**: `mem::transmute` 是 Rust 中最危险的 unsafe 操作之一，要求源类型和目标类型大小完全相同（`size_of::<Src>() == size_of::<Dst>()`）。编译器在编译期检查大小相等，不等则报错。`u32`（4字节）→ `u64`（8字节）的转换必须通过显式扩展（`x as u64`）而非 `transmute`。更隐蔽的错误是 `Vec<T>` → `Vec<U>` 的转换：即使 `size_of::<T>() == size_of::<U>()`，内存布局可能不同（如对齐、drop 逻辑），导致 UB。安全替代：`u32::from_le_bytes`、`bytemuck` crate 的 `Pod` trait（要求无填充、对齐兼容）。这与 C 的 `(type)val` 强制转换（无大小检查）形成对比——Rust 将大小不匹配从运行时崩溃转化为编译错误。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.transmute.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/transmutes.html)]
+
+### 10.4 边界测试：内联汇编的操作数类型约束（编译错误）
+
+```rust,compile_fail
+use std::arch::asm;
+
+fn main() {
+    let x: u32 = 42;
+    let mut y: u64 = 0;
+    unsafe {
+        // ❌ 编译错误: 操作数类型与约束不匹配
+        asm!(
+            "mov {0}, {1}",
+            out(reg) y,
+            in(reg) x,
+        );
+    }
+}
+```
+
+> **修正**: Rust 的内联汇编（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。`mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期，自动处理寄存器分配和 clobber 列表。这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统的保护。[来源: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）
+
+```rust,compile_fail
+#[inline(always)]
+fn huge_function() -> [u8; 10000] {
+    [0u8; 10000]
+}
+
+fn main() {
+    let _ = huge_function();
+    // ⚠️ 链接错误风险: inline(always) 强制在每个调用点展开
+    // 若 huge_function 被调用千次，二进制可能超过链接器限制
+}
+```
+
+> **修正**: `#[inline(always)]` 强制编译器在每个调用点内联函数，无论大小。对小函数（getter、setter、简单算术），内联消除函数调用开销。但对大函数，内联导致**代码膨胀**（code bloat）：相同代码复制多次，指令缓存（icache）效率下降，二进制体积激增。极端情况下，链接器可能失败（文件过大）或二进制加载失败。Rust 的 `#[inline]`（无参数）是建议性内联，编译器根据启发式决定；`#[inline(always)]` 应仅用于极小的热点函数。`#[inline(never)]` 强制不内联，用于调试或防止代码膨胀。这与 C 的 `inline`（建议性，`__attribute__((always_inline))` 强制）或 C++ 的 `inline`（链接器合并，非内联指令）类似——Rust 的内联属性直接控制 LLVM 的 inlining 决策。[来源: [Rust Reference — Inline Attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+
+### 10.7 边界测试：`inline(always)` 的代码膨胀（编译后性能下降）
+
+```rust,compile_fail
+#[inline(always)]
+fn tiny_helper(x: i32) -> i32 {
+    x + 1
+}
+
+// ❌ 性能反模式: 过度内联导致指令缓存 miss
+// 若 tiny_helper 在 100 处调用，inline(always) 生成 100 份代码
+```
+
+> **修正**: `#[inline]` 提示编译器内联函数，`#[inline(always)]` 强制内联（忽略启发式）。内联的收益：消除函数调用开销、允许跨函数优化（常量传播、死代码消除）。内联的成本：代码膨胀（instruction cache pressure）、编译时间增加。`always` 的危险：1) 大函数在多处调用 → 二进制膨胀；2) 递归函数 → 编译错误（无法内联无限递归）；3) 跨 crate 边界 → 链接器可能忽略（需 LTO）。内联决策应交由编译器（`#[inline]` 为提示，`always` 仅在微基准验证后使用）。这与 C++ 的 `inline` 关键字（弱提示，链接器决定）或 Go 的编译器自动内联（无注解控制）不同——Rust 的内联注解是强提示，但 `always` 需极度谨慎。[来源: [Rust Reference — Inline](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/inlining.html)]

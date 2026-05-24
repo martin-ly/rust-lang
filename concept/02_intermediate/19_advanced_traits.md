@@ -46,6 +46,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：高级 Trait 的编译错误](#十边界测试高级-trait-的编译错误)
+    - [10.1 边界测试：关联类型与泛型参数冲突（编译错误）](#101-边界测试关联类型与泛型参数冲突编译错误)
+    - [10.2 边界测试：特殊化（Specialization）的不稳定性（编译错误）](#102-边界测试特殊化specialization的不稳定性编译错误)
 
 ---
 
@@ -531,3 +534,95 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：高级 Trait 的编译错误
+
+### 10.1 边界测试：关联类型与泛型参数冲突（编译错误）
+
+```rust,compile_fail
+trait Container {
+    type Item;
+    fn get(&self) -> Self::Item;
+}
+
+struct Wrapper<T>(T);
+
+impl<T> Container for Wrapper<T> {
+    type Item = T;
+    fn get(&self) -> T {
+        // ❌ 编译错误: `T` 未实现 `Clone`，但 trait 未要求
+        // 若 T 不是 Copy，self.0 被 move
+        self.0
+    }
+}
+
+// 正确: 在 trait 或 impl 上添加约束
+impl<T: Clone> Container for Wrapper<T> {
+    type Item = T;
+    fn get(&self) -> T {
+        self.0.clone() // ✅ T: Clone 保证可复制
+    }
+}
+```
+
+> **修正**: 关联类型（associated type）在 trait 实现中只能指定一次，但方法签名必须与此类型一致。若关联类型是泛型参数，方法中对该类型的操作必须满足相应的 trait bound。`Container::get` 返回 `Self::Item`，若 `Item = T` 且 `T` 未实现 `Copy`/`Clone`，则 `self.0` 的返回是 move，可能不符合 trait 的语义预期。在 trait 设计时，应通过 `where Self::Item: Clone` 等约束明确操作要求。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：特殊化（Specialization）的不稳定性（编译错误）
+
+```rust,compile_fail
+#![feature(specialization)] // 不稳定特性
+
+trait Print {
+    fn print(&self);
+}
+
+impl<T> Print for T {
+    default fn print(&self) { // 默认实现
+        println!("default");
+    }
+}
+
+impl Print for i32 {
+    fn print(&self) {
+        println!("i32: {}", self);
+    }
+}
+
+fn main() {
+    42.print();
+}
+```
+
+> **修正**: Trait 特殊化（specialization）允许为具体类型提供优先于泛型默认实现的特化版本，但截至 Rust 1.95+ 仍为**不稳定特性**（`#![feature(specialization)]`）。标准库内部使用 `min_specialization`（简化版）优化性能，但用户代码不能依赖。这与 C++ 的模板特化（template specialization）类似，但 Rust 的设计更保守——特殊化必须保证"始终安全"（始终适用），不能破坏一致性。当前稳定 Rust 中，需通过 blanket impl 的约束或显式类型匹配实现类似效果。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+
+### 10.5 边界测试：关联常量与泛型参数的交互（编译错误）
+
+```rust,compile_fail
+trait Config {
+    const MAX_SIZE: usize;
+}
+
+struct Buffer<C: Config> {
+    data: [u8; C::MAX_SIZE], // ❌ 编译错误: 关联常量不能用于固定大小数组
+}
+```
+
+> **修正**: Rust 的关联常量（associated constants）在 trait 中声明，在实现中定义。但**泛型参数**的关联常量不能在类型定义中用于确定数组大小——`[u8; C::MAX_SIZE]` 中 `C` 是泛型参数，编译器无法在单态化前知道 `MAX_SIZE` 的具体值。这是 Rust 常量泛化的限制：只有具体类型（如 `[u8; 1024]`）或 const 泛型参数（`[u8; N]`）可用于数组大小。Workaround：1) 使用 `GenericArray`（`typenum` crate，通过类型级数字模拟常量）；2) 使用 `Vec<u8>` 替代数组；3) 使用宏为每个具体配置生成代码。这与 C++ 的 `template<size_t N>`（非类型模板参数可用于数组大小）或 Zig 的 `comptime`（编译期常量可用于任何类型位置）不同——Rust 的 const 泛型仍在扩展中。[来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.6 边界测试：trait alias 与 bound 的冗余（编译错误）
+
+```rust,compile_fail
+trait MyTrait: Clone + Send + Sync + 'static {}
+
+fn process<T: MyTrait>(t: T) {
+    let _ = t.clone();
+}
+
+fn main() {
+    // ❌ 编译错误: 若类型未实现 MyTrait，即使实现了 Clone+Send+Sync+'static
+    // 因为 MyTrait 是独立 trait，不自动实现
+    // process(42i32); // i32 未实现 MyTrait
+}
+```
+
+> **修正**: Trait alias（不稳定特性）允许为 trait bound 组合创建别名，但**不自动为符合条件的类型实现**。`MyTrait` 是真实 trait，类型需 `impl MyTrait for Type` 才能使用。这与 C++ 的 `concept`（同样需显式 `requires` 或 `template` 约束）或 Haskell 的 typeclass 别名（同样需显式 `instance`）类似。Workaround：1) 使用 blanket impl：`impl<T: Clone + Send + Sync + 'static> MyTrait for T {}`；2) 使用 `where` 从句直接写 bound，不使用别名；3) 等待 trait alias 稳定（可能包含自动实现语义）。Rust 的设计权衡：trait alias 是语法糖还是新类型？当前倾向语法糖，但自动实现的需求强烈。[来源: [Trait Alias RFC](https://rust-lang.github.io/rfcs/1733-trait-alias.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

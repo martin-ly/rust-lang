@@ -43,6 +43,11 @@
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Open Enums 预览的编译错误](#十边界测试open-enums-预览的编译错误)
+    - [10.1 边界测试：开放枚举的穷尽匹配失效（编译错误）](#101-边界测试开放枚举的穷尽匹配失效编译错误)
+    - [10.2 边界测试：开放枚举的整数转换安全（编译错误/运行时 panic）](#102-边界测试开放枚举的整数转换安全编译错误运行时-panic)
+    - [10.3 边界测试：open enum 的 match 穷尽性检查松弛（编译错误）](#103-边界测试open-enum-的-match-穷尽性检查松弛编译错误)
+    - [10.4 边界测试：open enum 的整数转换与有效性检查（运行时 panic）](#104-边界测试open-enum-的整数转换与有效性检查运行时-panic)
 
 ---
 
@@ -661,3 +666,87 @@ pub enum ConstExample {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：Open Enums 预览的编译错误
+
+### 10.1 边界测试：开放枚举的穷尽匹配失效（编译错误）
+
+```rust,compile_fail
+#[open_enum]
+enum HttpStatus {
+    Ok = 200,
+    NotFound = 404,
+}
+
+fn handle(status: HttpStatus) -> &'static str {
+    match status {
+        HttpStatus::Ok => "success",
+        HttpStatus::NotFound => "missing",
+        // ❌ 编译错误: open enum 可能包含未知变体，match 不穷尽
+    }
+}
+```
+
+> **修正**: `#[open_enum]`（实验性特性）标记枚举为"开放"——允许未来添加变体，或允许从整数值构造未知变体（如 `HttpStatus::from_raw(500)`）。这与 C 的枚举（底层是整数，可任意转换）或 Rust 的常规枚举（封闭、穷尽）都不同。开放枚举要求 match 必须包含 `_ => ...` 分支处理未知情况，强制开发者考虑前向兼容性。使用场景：协议解析（HTTP 状态码、错误码）、文件格式（可能包含未来定义的标记）、 FFI（C 枚举的 Rust 映射）。设计权衡：开放枚举丧失编译期穷尽检查的保护，但获得与 evolving 协议的兼容性。这与 `#[non_exhaustive]` 属性（仅影响外部 crate 的匹配）类似，但语义更强：开放枚举在本 crate 内也允许未知变体。[来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)]
+
+### 10.2 边界测试：开放枚举的整数转换安全（编译错误/运行时 panic）
+
+```rust,compile_fail
+#[open_enum]
+enum Priority {
+    Low = 1,
+    High = 10,
+}
+
+fn main() {
+    // ❌ 运行时 panic: from_raw 可能接收无效值
+    let p = Priority::from_raw(5); // 5 不是已知变体
+    match p {
+        Priority::Low => println!("low"),
+        Priority::High => println!("high"),
+        _ => println!("unknown: {}", p as u8), // 必须处理未知
+    }
+}
+```
+
+> **修正**: 开放枚举的 `from_raw`（或 `try_from`）将整数转换为枚举值。对于未知值，行为由设计决定：1) 创建未知变体（`Priority(5)`，类似 newtype 包装）；2) 返回 `Option<Self>`（`try_from` 模式）；3) panic（`from_raw_unchecked` 模式）。Rust 的类型安全要求：转换操作必须将"可能的无效值"显式化——不能静默允许 `Priority::from_raw(999)` 而不加处理。这与 C 的枚举转换（`(enum Priority)5` 完全合法，无检查）或 Java 的 `Enum.valueOf`（未知名称抛 `IllegalArgumentException`）不同——Rust 倾向于使用类型系统（`Option`、`Result`）而非异常处理无效转换。[来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html)]
+
+### 10.3 边界测试：open enum 的 match 穷尽性检查松弛（编译错误）
+
+```rust,compile_fail
+#[open_enum]
+enum Status {
+    Ok = 200,
+    Error = 500,
+}
+
+fn handle(status: Status) -> &'static str {
+    match status {
+        Status::Ok => "success",
+        Status::Error => "error",
+        // ❌ 编译错误: open enum 要求 _ 分支处理未知变体
+        // 但开发者可能遗漏，认为只有两个变体
+    }
+}
+```
+
+> **修正**: Open enum 的核心设计是**允许未知变体**，因此 `match` 必须包含 `_ => ...` 分支。这与常规 enum 的穷尽检查不同：常规 enum 无 `_` 分支是编译错误（遗漏变体），open enum 无 `_` 分支也是编译错误（未处理未知）。但 open enum 的编译错误信息应明确提示"open enum 需要通配分支"，避免开发者困惑。这与 `#[non_exhaustive]` 属性（仅对外部 crate 强制非穷尽）不同——open enum 在本 crate 内也允许未知变体。使用场景：1) 网络协议的状态码（HTTP 可能有未来定义的状态码）；2) 文件格式的标记（版本升级可能增加新标记）；3) FFI 的 C enum（C 侧可能传递未定义值）。这与 TypeScript 的 string literal unions（可扩展，但无编译期穷尽检查）或 Swift 的 `@unknown default`（类似 open enum 的 `_` 分支）类似。[来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [Swift Unknown Case](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/enumerations/#Associated-Values)]
+
+### 10.4 边界测试：open enum 的整数转换与有效性检查（运行时 panic）
+
+```rust,compile_fail
+#[open_enum]
+enum Priority {
+    Low = 1,
+    High = 10,
+}
+
+fn from_raw(val: u8) -> Priority {
+    // ❌ 运行时问题: 若 open enum 的 from_raw 不检查范围，
+    // 可能创建内部状态不一致的值
+    // 当前设计倾向于 from_raw 是 safe 的，创建未知变体
+    Priority::from_raw(val)
+}
+```
+
+> **修正**: Open enum 的 `from_raw` 转换是设计难点：1) `from_raw(5)` 创建未知变体，是 safe 的（不 panic），但后续 `match` 需处理 `_`；2) `from_raw` 是否应返回 `Option<Self>`（`try_from` 模式），拒绝未知值？3) 未知变体的内部表示：存储原始整数值（`Priority(5)`），还是不存储（仅标记"未知"）？设计决策影响：1) 内存布局（是否需要额外字段存储原始值）；2) `Debug` 输出（能否打印 `"Priority(5)"`）；3) 序列化（未知变体如何 JSON 化）。这与 C 的 enum（整数可任意转换，无检查）或 Java 的 `Enum.valueOf`（字符串名查找，未找到抛异常）不同——Rust 的 open enum 设计需在类型安全、灵活性和性能间权衡。[来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html)]

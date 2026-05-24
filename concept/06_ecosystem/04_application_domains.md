@@ -1648,3 +1648,85 @@ graph TD
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 > [来源: [crates.io](https://crates.io/)]
 > [来源: [docs.rs](https://docs.rs/)]
+
+## 十、边界测试：应用领域的编译错误
+
+### 10.1 边界测试：Web 框架中的状态共享（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+
+struct AppState {
+    counter: Rc<i32>,
+}
+
+// ❌ 编译错误: `Rc<i32>` cannot be sent between threads safely
+// Web 框架（如 Actix、Axum）使用线程池处理请求
+fn handler(state: AppState) {
+    println!("{}", state.counter);
+}
+
+// 正确: 使用 Arc
+use std::sync::Arc;
+
+struct AppStateFixed {
+    counter: Arc<i32>,
+}
+```
+
+> **修正**: Web 服务器通常使用线程池或异步运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用计数，不能跨线程；`Arc<T>` 使用原子操作，是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
+
+### 10.2 边界测试：游戏引擎中的 ECS 组件查询（编译错误）
+
+```rust,compile_fail
+struct Position { x: f32, y: f32 }
+struct Velocity { vx: f32, vy: f32 }
+
+fn update(pos: &mut Position, vel: &Velocity) {
+    pos.x += vel.vx;
+}
+
+fn main() {
+    // ❌ 编译错误: ECS 查询需要正确的组件组合
+    // 若实体只有 Position 没有 Velocity，查询失败
+    // bevy::query::Query<&mut Position, &Velocity>
+}
+```
+
+> **修正**: ECS（Entity-Component-System）是游戏开发的核心架构。Rust 的 ECS 框架（Bevy、hecs、legion）利用类型系统保证查询安全：系统函数签名定义所需的组件组合，编译器验证查询与组件存储的一致性。若系统要求 `Query<&mut Position, &Velocity>`，但某实体缺少 `Velocity`，该实体自动被过滤出查询结果。这与 Unity 的反射式组件访问或 C++ 的手动类型转换不同——Rust 的 ECS 在编译期保证组件类型安全，运行时无类型检查开销。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
+
+### 10.3 边界测试：嵌入式中的 `std` 依赖误用（编译错误）
+
+```rust,compile_fail
+#![no_std]
+
+fn main() {
+    // ❌ 编译错误: no_std 环境中不能使用 std
+    // let v = std::vec::Vec::new();
+
+    // 正确: 使用 alloc（若需要堆分配）或固定大小数组
+    let mut arr = [0u8; 10];
+    arr[0] = 1;
+}
+```
+
+> **修正**: 嵌入式系统（ bare-metal、RTOS、WASM 微内核）通常使用 `#![no_std]`，禁用标准库 `std`（依赖操作系统：文件系统、网络、线程、堆分配）。`no_std`  crate 只能使用 `core`（基本类型、迭代器、选项/结果）和可选的 `alloc`（`Vec`、`String`、`Box`，需全局分配器）。常见错误：1) 依赖的 crate 使用了 `std`（即使是简单的 `println!`）；2) 使用了 `std::collections::HashMap`（需 `std` 的随机数生成器，嵌入式中改用 `heapless::LinearMap`）；3) 使用了 `std::time`（嵌入式中改用 `embassy_time` 或硬件定时器）。`cargo tree` 和 `cargo-nono` 工具帮助检查 `no_std` 兼容性。这与 C 的嵌入式开发（无标准库依赖，直接使用寄存器）或 Arduino 的 C++（简化标准库）类似——Rust 的 `no_std` 提供了现代类型系统在资源受限环境中的应用。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.4 边界测试：Web 服务中的阻塞操作与 async runtime 的冲突（运行时性能崩溃）
+
+```rust,compile_fail
+use tokio::task;
+
+async fn handler() -> String {
+    // ❌ 运行时性能崩溃: 在 async 函数中执行阻塞操作
+    // std::thread::sleep(std::time::Duration::from_secs(10));
+    // 这会阻塞当前线程，使该线程上的所有 async 任务停滞
+
+    // 正确: 使用 tokio 的异步等价物
+    tokio::time::sleep(std::time::Duration::from_secs(10)).await;
+
+    "done".to_string()
+}
+```
+
+> **修正**: Async runtime（tokio、async-std）基于**协作式多任务**：任务在 `.await` 点 yield 控制权，让 runtime 调度其他任务。若在 async 函数中执行**阻塞操作**（`std::thread::sleep`、`std::fs::read`、CPU 密集型计算、数据库同步查询），当前线程被阻塞，该线程上的所有任务都无法执行。在多线程 runtime 中，一个线程阻塞降低整体吞吐；在单线程 runtime 中，整个应用死锁。解决方案：1) 使用异步版本的 API（`tokio::fs`、`tokio::time`）；2) 将阻塞操作放到 `spawn_blocking` 线程池；3) 使用 `tokio::task::yield_now().await` 手动 yield。这与 Node.js 的 event loop（单线程，阻塞操作冻结整个应用）或 Go 的 goroutine（阻塞操作挂起 goroutine，调度器切换到其他 goroutine）不同——Rust 的 async 任务不自动处理阻塞，需要开发者显式选择。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]

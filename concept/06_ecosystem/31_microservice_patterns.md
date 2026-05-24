@@ -36,6 +36,10 @@
   - [十三、来源](#十三来源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：微服务模式的编译错误](#十边界测试微服务模式的编译错误)
+    - [10.1 边界测试：配置注入的生命周期（编译错误）](#101-边界测试配置注入的生命周期编译错误)
+    - [10.2 边界测试：gRPC trait 对象与序列化（编译错误）](#102-边界测试grpc-trait-对象与序列化编译错误)
+    - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#105-边界测试断路器模式的半开状态竞态条件运行时雪崩)
 
 ---
 
@@ -924,3 +928,83 @@ Rust 微服务并非银弹:
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：微服务模式的编译错误
+
+### 10.1 边界测试：配置注入的生命周期（编译错误）
+
+```rust,compile_fail
+struct Config {
+    db_url: String,
+}
+
+struct Service<'a> {
+    config: &'a Config,
+}
+
+fn main() {
+    let service;
+    {
+        let config = Config { db_url: String::from("localhost") };
+        // ❌ 编译错误: `config` does not live long enough
+        // service 引用 config，但 config 在内部作用域 drop
+        service = Service { config: &config };
+    }
+    println!("{}", service.config.db_url);
+}
+
+// 正确: 使用 Arc 共享所有权
+use std::sync::Arc;
+
+struct ServiceFixed {
+    config: Arc<Config>,
+}
+
+fn fixed() {
+    let config = Arc::new(Config { db_url: String::from("localhost") });
+    let service = ServiceFixed { config: Arc::clone(&config) };
+    println!("{}", service.config.db_url); // ✅ Arc 保证生命周期
+}
+```
+
+> **修正**: 微服务中的配置对象通常需要在多个服务间共享。使用引用（`&Config`）会引入生命周期约束，要求配置对象比所有服务更长寿。`Arc<T>`（原子引用计数）允许配置在多个服务间共享，无需显式生命周期标注。这与 Go 的共享指针（垃圾回收）或 Java 的 Spring 单例 bean 不同——Rust 通过类型系统显式表达共享语义，避免隐式全局状态。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：gRPC trait 对象与序列化（编译错误）
+
+```rust,compile_fail
+trait Service {
+    fn handle(&self, req: &str) -> String;
+}
+
+fn route(req: &str, service: &dyn Service) -> String {
+    service.handle(req)
+}
+
+fn main() {
+    // ❌ 编译错误: trait object 不能自动序列化
+    // 微服务间的 gRPC 调用需要 protobuf 序列化，dyn Service 没有 Serialize
+    // let bytes = serialize(service); // 不可能
+}
+
+// 正确: 使用 protobuf 生成的结构体
+// tonic_build 生成 Service trait 和 protobuf 消息类型
+// service.handle 接受 Request 类型，返回 Response 类型
+```
+
+> **修正**: Rust 的 trait object（`dyn Service`）是内存内的动态分发机制，不具跨进程序列化能力。微服务间的 RPC（gRPC/tarpc）需要显式的消息类型（protobuf、JSON），由编译器生成序列化/反序列化代码。这与 Erlang 的透明进程间消息传递或 Go 的 gob 编码不同——Rust 要求服务边界上的类型是"普通数据结构"（`Serialize` + `Deserialize`），而非 trait object。这是分布式系统类型安全的核心：消息类型是契约，编译器验证契约一致性。[来源: [Tonic Documentation](https://docs.rs/tonic/)]
+
+### 10.5 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）
+
+```rust,compile_fail
+// 概念代码: 断路器半开状态的问题
+enum CircuitState {
+    Closed,      // 正常
+    Open,        // 故障，拒绝请求
+    HalfOpen,    // 试探，允许有限请求
+}
+
+// ❌ 运行时风险: 半开状态若多个请求同时通过，可能全部失败，重新打开
+// 需确保半开状态仅允许一个请求通过
+```
+
+> **修正**: 断路器（Circuit Breaker）模式的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。[来源: [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html)] · [来源: [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)]

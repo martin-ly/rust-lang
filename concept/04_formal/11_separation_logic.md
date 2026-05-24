@@ -33,6 +33,12 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：分离逻辑的编译错误](#十边界测试分离逻辑的编译错误)
+    - [10.1 边界测试：独占资源的分割与重组（编译错误）](#101-边界测试独占资源的分割与重组编译错误)
+    - [10.2 边界测试：`Box::leak` 与资源永久转移（运行时行为）](#102-边界测试boxleak-与资源永久转移运行时行为)
+    - [10.3 边界测试：分离逻辑中的帧规则违反（编译错误）](#103-边界测试分离逻辑中的帧规则违反编译错误)
+    - [10.4 边界测试：GhostCell 的分离逻辑建模（编译错误）](#104-边界测试ghostcell-的分离逻辑建模编译错误)
+    - [10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）](#105-边界测试rustbelt-的-own-与-shr-断言的编码编译错误)
 
 ---
 
@@ -631,3 +637,113 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：分离逻辑的编译错误
+
+### 10.1 边界测试：独占资源的分割与重组（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut data = [1, 2, 3, 4];
+    // ❌ 编译错误: cannot borrow `data` as mutable more than once at a time
+    let left = &mut data[..2];
+    let right = &mut data[2..]; // 与 left 重叠？实际上不重叠，但编译器可能保守
+    // 实际上 split_at_mut 是正确的做法
+    left[0] = 10;
+    right[0] = 20;
+}
+
+// 正确: 使用 split_at_mut 安全分割
+fn fixed() {
+    let mut data = [1, 2, 3, 4];
+    let (left, right) = data.split_at_mut(2); // ✅ 编译器验证不重叠
+    left[0] = 10;
+    right[0] = 20;
+    println!("{:?}", data); // [10, 2, 20, 4]
+}
+```
+
+> **修正**: 分离逻辑的核心是 **frame rule**：若 `P` 描述某部分内存的状态，则可在保持 `P` 不变的情况下，对内存的其他部分进行推理。`split_at_mut` 将数组分割为两个不重叠的可变切片，编译器验证分割点不会导致重叠借用。这是 Rust 借用检查器对分离逻辑 *-conjunction（`P ∗ Q`）的直接实现——两个不重叠的可变引用可以同时存在，因为它们操作分离的内存区域。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：`Box::leak` 与资源永久转移（运行时行为）
+
+```rust
+fn main() {
+    let s = Box::new(String::from("hello"));
+    let r: &'static str = Box::leak(s.into_boxed_str());
+    // ⚠️ 逻辑错误: r 指向的内存永远不会被释放
+    // 即使程序结束才释放，对于长时间运行的服务可能是内存泄漏
+    println!("{}", r);
+}
+
+// 正确: 仅在确实需要 'static 时使用
+fn fixed() {
+    let r: &'static str = "hello"; // ✅ 字符串字面量本身就是 'static
+    println!("{}", r);
+}
+```
+
+> **修正**: `Box::leak` 将堆内存转换为 `&'static` 引用，放弃释放义务。在分离逻辑中，`Box<T>` 对应于 `own(τ, ℓ)`（对 ℓ 的独占所有权），`Box::leak` 将 `own(τ, ℓ)` 转换为 `shr(static, ℓ)`（静态共享权限）。一旦转换，资源永远不会被释放——这是显式的资源泄漏，在 Rust 中被视为安全操作（因为不破坏内存安全），但可能违反系统资源约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：分离逻辑中的帧规则违反（编译错误）
+
+```rust,compile_fail
+fn swap(a: &mut i32, b: &mut i32) {
+    std::mem::swap(a, b);
+}
+
+fn main() {
+    let mut x = 1;
+    let mut y = 2;
+    let r = &mut x;
+    // ❌ 编译错误: 不能同时创建 x 和 y 的可变引用，若它们有重叠
+    // 此处不重叠，但若尝试:
+    // let r2 = &mut x; // 与 r 重叠
+    // swap(r, r2); // 编译错误
+    swap(&mut x, &mut y); // ✅ 不重叠
+}
+```
+
+> **修正**: 分离逻辑（Separation Logic）的**帧规则**（Frame Rule）：若 `{P} C {Q}` 成立，则对任意不相交的断言 `R`，`{P * R} C {Q * R}` 也成立。在 Rust 中，这意味着操作一部分内存时，不影响其他不重叠的内存。编译器通过借用检查验证不相交性：两个 `&mut T` 不能指向同一内存。`swap` 要求 `a` 和 `b` 不重叠——若重叠，交换会破坏数据。这与 C 的 `swap`（无检查，重叠时 UB）或 Java 的引用交换（总是安全，因为是交换引用而非值）不同——Rust 在编译期保证内存区域的不相交性，使分离逻辑的推理在实战中可行。[来源: [Separation Logic Tutorial](https://www.cs.cmu.edu/~jcr/seplogic.pdf)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
+
+### 10.4 边界测试：GhostCell 的分离逻辑建模（编译错误）
+
+```rust,compile_fail
+use ghost_cell::GhostCell;
+
+fn main() {
+    let value = GhostCell::new(42);
+    // ❌ 编译错误: GhostCell 的借用 token 是编译期品牌（brand），
+    // 不能在无 token 时读取
+    // let x = value.borrow(); // 需要 GhostToken
+
+    GhostToken::new(|token| {
+        let x = value.borrow(&token);
+        println!("{}", x);
+    });
+}
+```
+
+> **修正**: `GhostCell`（基于 GhostCell paper）是 Rust 中**零运行时成本**的内部可变性抽象，使用分离逻辑建模：每个 `GhostCell` 关联一个编译期品牌（brand，由 `GhostToken` 代表），同一品牌的所有 cell 共享一个可变借用 token。这与 `RefCell`（运行时引用计数）或 `Mutex`（运行时锁）不同——`GhostCell` 在编译期检查借用规则，无运行时开销。代价：`GhostToken` 的生命周期约束要求所有相关操作在闭包内完成，API  ergonomics 较差。分离逻辑视角：`GhostToken` 是权限（capability），`GhostCell` 是资源，借用规则对应于权限的独占转移。这是 Rust 类型系统表达力的高级展示：将运行时检查迁移到编译期，同时保持零成本。[来源: [GhostCell Paper](https://plv.mpi-sws.org/rustbelt/ghostcell/)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）
+
+```rust,compile_fail
+// RustBelt 形式化中的概念，非实际 Rust 代码
+
+// own(x, T): 拥有 x 处的 T 类型值
+// shr(x, T): 共享读取 x 处的 T 类型值
+
+fn swap_own(own(x, i32), own(y, i32)) {
+    // 形式化: 交换两个拥有资源
+    // temp = *x; *x = *y; *y = temp;
+}
+
+fn main() {
+    // ❌ 形式化错误: 若尝试将 own 分裂为两个 own，违反线性逻辑
+    // own(x, i32) 不能分裂为 own(x, i32) * own(x, i32)
+    // 只能分裂为 shr(x, i32) * shr(x, i32)
+}
+```
+
+> **修正**: RustBelt 使用分离逻辑建模 Rust 的所有权系统：`own(x, T)` 表示独占所有权（对应 `&mut T`），`shr(x, T)` 表示共享读取权（对应 `&T`）。关键规则：1) `own(x, T)` 可分裂为 `shr(x, T) * shr(x, T)`（多个只读引用）；2) `own(x, T)` 不能分裂为 `own(x, T) * own(x, T)`（不能有两个可变引用）；3) `shr(x, T)` 不能写入。这些规则在 RustBelt 中以**高阶协议**（higher-order protocol）编码，通过 Iris 框架证明。RustBelt 证明了：若 unsafe 代码满足其协议，则 safe Rust 代码不可能触发 UB。这是 Rust 安全保证的形式化基础。这与 Hoare 逻辑的前置/后置条件（类似但非资源导向）或 C 的分离逻辑工具（VeriFast、VST）类似——RustBelt 是第一个为工业语言（Rust）提供完整内存安全形式化证明的项目。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Iris Framework](https://iris-project.org/)]

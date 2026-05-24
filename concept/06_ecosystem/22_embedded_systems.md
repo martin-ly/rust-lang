@@ -38,6 +38,11 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：嵌入式系统的编译错误](#十边界测试嵌入式系统的编译错误)
+    - [10.1 边界测试：`no_std` 中的 `println!`（编译错误）](#101-边界测试no_std-中的-println编译错误)
+    - [10.2 边界测试：中断处理器的 `static mut`（编译错误）](#102-边界测试中断处理器的-static-mut编译错误)
+    - [10.3 边界测试：临界区的中断禁用与 `unsafe` 的误用（运行时数据竞争）](#103-边界测试临界区的中断禁用与-unsafe-的误用运行时数据竞争)
+    - [10.4 边界测试：`no_std` 中的 `panic` 处理与固件大小（编译错误/链接错误）](#104-边界测试no_std-中的-panic-处理与固件大小编译错误链接错误)
 
 ---
 
@@ -698,3 +703,84 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：嵌入式系统的编译错误
+
+### 10.1 边界测试：`no_std` 中的 `println!`（编译错误）
+
+```rust,compile_fail
+#![no_std]
+
+fn main() {
+    // ❌ 编译错误: `println!` 需要 std 中的 io 模块
+    println!("hello");
+}
+
+// 正确: 使用串口 HAL 或 semihosting
+#![no_std]
+use cortex_m_semihosting::hprintln;
+
+fn fixed() {
+    hprintln!("hello").unwrap(); // ✅ 通过调试接口输出
+}
+```
+
+> **修正**: 嵌入式系统（ARM Cortex-M、RISC-V）通常无操作系统，因此 `#![no_std]` 禁用 `std` 库。`println!`、`Vec`、`String` 等需要 OS 支持的 API 不可用。替代方案：使用 `cortex-m-semihosting`（通过调试器输出）、`rtt-target`（实时传输）、或 UART HAL（硬件串口）。这与 Arduino 的 `Serial.println` 或 ESP-IDF 的 `ESP_LOG` 类似，但 Rust 的嵌入式生态通过 trait 抽象硬件（`embedded-hal`），实现跨平台可移植性。[来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+
+### 10.2 边界测试：中断处理器的 `static mut`（编译错误）
+
+```rust,compile_fail
+#![no_std]
+
+static mut COUNTER: u32 = 0;
+
+#[no_mangle]
+extern "C" fn timer_interrupt() {
+    // ❌ 编译错误: use of mutable static is unsafe and requires unsafe function or block
+    COUNTER += 1;
+}
+```
+
+> **修正**: 嵌入式中断处理器共享全局状态时必须处理并发——中断可能随时抢占主循环。`static mut` 需要 `unsafe` 块访问，且存在数据竞争风险。正确做法：使用 `critical_section`（关中断）、原子类型（`AtomicU32`）、或 RTIC（Real-Time Interrupt-driven Concurrency）框架。RTIC 利用 Rust 的所有权系统，在编译期验证中断与主任务之间的资源分配，消除运行时竞争。这与 C 的 `volatile` + 关中断手动管理不同——Rust 的类型系统提供更高级别的并发安全保证。[来源: [RTIC Documentation](https://rtic.rs/)]
+
+### 10.3 边界测试：临界区的中断禁用与 `unsafe` 的误用（运行时数据竞争）
+
+```rust,compile_fail
+static mut COUNTER: u32 = 0;
+
+fn increment() {
+    // ❌ 运行时数据竞争: 未禁用中断，可能被 ISR 抢占
+    unsafe {
+        COUNTER += 1;
+    }
+}
+
+// 假设中断服务程序也修改 COUNTER
+#[no_mangle]
+unsafe extern "C" fn isr() {
+    COUNTER += 1;
+}
+```
+
+> **修正**: 嵌入式系统中，**中断服务程序**（ISR）可能随时抢占主代码，共享数据需要临界区保护。`unsafe` 块不保证原子性——`COUNTER += 1` 在 ARM Cortex-M 上是"读-改-写"三指令，ISR 可能在中间插入，导致更新丢失。解决方案：1) 使用 `cortex-m::interrupt::free`（禁用中断的临界区）；2) 使用原子类型（`core::sync::atomic::AtomicU32`）；3) 使用 RTIC（Real-Time Interrupt-driven Concurrency）框架（编译期检查资源冲突）。Rust 的嵌入式生态（`cortex-m`、`embedded-hal`、`rtic`）将并发安全引入裸机编程。这与 C 的 `__disable_irq()`/`__enable_irq()`（手动开关中断，易遗漏）或 FreeRTOS 的互斥量（ heavier，需 OS 支持）不同——Rust 的类型系统可帮助管理临界区（如 RTIC 的任务优先级分析）。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [RTIC Documentation](https://rtic.rs/)]
+
+### 10.4 边界测试：`no_std` 中的 `panic` 处理与固件大小（编译错误/链接错误）
+
+```rust,compile_fail
+#![no_std]
+
+fn main() {
+    // ❌ 链接错误: panic_handler 未定义
+    // no_std 环境中必须自定义 panic 行为
+    panic!("boot failure");
+}
+
+// 正确: 提供 panic_handler
+// #[cfg(not(test))]
+// #[panic_handler]
+// fn panic(_info: &core::panic::PanicInfo) -> ! {
+//     loop {}
+// }
+```
+
+> **修正**: `#![no_std]` 环境中，标准库的 panic 处理（栈展开、错误消息打印）不可用。必须提供自定义的 `#[panic_handler]`：1) `loop {}`（最小化，无限循环，适合硬实时系统）；2) 重启系统（`cortex_m::peripheral::SCB::sys_reset()`）；3) 日志记录后 halt（需 UART 驱动）。panic handler 的选择影响固件大小：`panic = "abort"` 比 `panic = "unwind"` 小（无展开代码），自定义 handler 比默认 `core::panicking` 更小。嵌入式开发中，固件大小常受限（如 64KB Flash），每个字节都重要。这与 C 的 `assert`（调用 `abort()`，依赖 libc）或 Arduino 的 `Serial.println` + `while(1)`（类似 Rust 的自定义 handler）类似——Rust 的 `panic_handler` 是显式、可定制的错误终止机制。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute)]

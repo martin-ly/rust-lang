@@ -1474,3 +1474,92 @@ struct ChildOf {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
+
+## 十、边界测试：游戏 ECS 的编译错误
+
+### 10.1 边界测试：Bevy 的 Query 与组件缺失（编译错误）
+
+```rust,compile_fail
+use bevy::prelude::*;
+
+#[derive(Component)]
+struct Position { x: f32, y: f32 }
+
+#[derive(Component)]
+struct Velocity { vx: f32, vy: f32 }
+
+fn movement_system(query: Query<&mut Position, &Velocity>) {
+    for (mut pos, vel) in query.iter_mut() {
+        pos.x += vel.vx;
+    }
+}
+
+// ❌ 编译错误: Query 语法错误，应为 Query<(&mut Position, &Velocity)>
+// Bevy 的 Query 使用元组组合多个组件
+```
+
+> **修正**: Bevy 的 `Query` 使用元组语法组合多个组件：`Query<(&Position, &Velocity)>`。Query 自动过滤缺少任一组件的实体，只返回拥有所有 queried 组件的实体。这与 Unity 的 `GetComponent<T>()`（运行时空引用检查）不同——Bevy 在编译期确定组件类型，运行期通过 archetype 存储实现 O(1) 查询，无类型检查开销。ECS 的内存布局（SOA - Structure of Arrays）优化缓存局部性，Rust 的类型系统保证查询安全。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
+
+### 10.2 边界测试：ECS 中的可变引用冲突（编译错误）
+
+```rust,compile_fail
+use bevy::prelude::*;
+
+#[derive(Component)]
+struct Health(i32);
+
+fn conflicting_system(
+    mut query1: Query<&mut Health>,
+    mut query2: Query<&mut Health>,
+) {
+    // ❌ 编译错误: 两个 Query 可能返回同一实体的可变引用
+    // 导致潜在的数据竞争
+}
+
+// 正确: 使用单一 Query 或 ParamSet
+fn fixed_system(mut query: Query<&mut Health>) {
+    for mut health in query.iter_mut() {
+        health.0 += 10;
+    }
+}
+```
+
+> **修正**: Bevy 的系统函数在编译期检查 Query 的兼容性——两个返回相同组件可变引用的 Query 不能同时存在。`ParamSet` 允许顺序访问冲突的 Query，确保运行时不会同时持有同一组件的多个可变引用。这是 Rust 借用检查器在 ECS 架构中的延伸——编译期保证无数据竞争，即使在高并发游戏循环中。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
+
+### 10.3 边界测试：ECS 的 archetype 变更与引用失效（运行时 panic）
+
+```rust,compile_fail
+// 假设使用 bevy_ecs
+
+fn system(query: Query<&mut Position>) {
+    for mut pos in query.iter_mut() {
+        // ⚠️ 运行时 panic: 若在同一 system 中插入新 archetype
+        // 某些 ECS 实现在 archetype 变更时使迭代器失效
+        pos.x += 1.0;
+    }
+}
+```
+
+> **修正**: ECS（Entity-Component-System）的 **archetype** 是具有相同组件组合的实体集合。添加/移除组件改变实体的 archetype，可能需要将实体移动到不同的存储块。在系统（system）执行期间修改 archetype（如给实体添加 `Velocity` 组件），可能导致迭代器失效——与 C++ 的 `vector` 插入导致迭代器失效类似。Bevy 的解决方案：1) **命令缓冲**（Commands）：延迟 archetype 变更到帧末；2) **分阶段执行**（stages）：先读系统，后写系统；3) **不稳定的 `query.iter_mut()` 与命令缓冲结合**。这与 Unity 的 `GameObject.AddComponent`（运行时修改，无编译期检查）或 C++ 的 EnTT（类似 Bevy，archetype-based）类似——ECS 的性能来自紧密打包的内存布局，但布局变更的成本需要显式管理。[来源: [Bevy ECS Documentation](https://docs.rs/bevy_ecs/)] · [来源: [ECS Pattern](https://en.wikipedia.org/wiki/Entity_component_system)]
+
+### 10.4 边界测试：多线程 ECS 与 `Send`/`Sync` 的组件约束（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+use bevy::prelude::*;
+
+#[derive(Component)]
+struct SharedData {
+    data: Rc<String>, // Rc 不是 Send
+}
+
+fn parallel_system(query: Query<&SharedData>) {
+    // ❌ 编译错误: 若 ECS 调度器尝试在多线程执行此 system，
+    // SharedData 不是 Send，不能跨线程
+    for shared in query.iter() {
+        println!("{}", shared.data);
+    }
+}
+```
+
+> **修正**: Bevy 的 ECS 调度器分析系统间的数据依赖，自动并行化无冲突的系统。但组件类型必须是 `Send`（跨线程）和 `Sync`（多线程共享），才能参与并行调度。`Rc<T>` 不是 `Send`，因此包含 `Rc` 的组件不能放入并行系统。解决方案：1) 使用 `Arc<T>` 替代 `Rc<T>`；2) 将非 `Send` 数据放在资源（`Resource`）中，限制在单线程系统访问；3) 使用 `bevy::ecs::system::NonSend` 标记资源只能在主线程访问。这与 Unity 的 `Component`（无 `Send`/`Sync` 概念，主线程访问）或 Godot 的节点树（单线程）不同——Rust 的 ECS 利用类型系统实现自动并行化，但要求组件满足线程安全约束。[来源: [Bevy ECS Documentation](https://docs.rs/bevy_ecs/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]

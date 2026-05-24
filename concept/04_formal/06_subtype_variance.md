@@ -38,6 +38,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：子类型变异性的编译错误](#十边界测试子类型变异性的编译错误)
+    - [10.1 边界测试：协变与逆变的生命周期误用（编译错误）](#101-边界测试协变与逆变的生命周期误用编译错误)
+    - [10.2 边界测试：`UnsafeCell` 的不变性（编译错误）](#102-边界测试unsafecell-的不变性编译错误)
+    - [10.3 边界测试：逆变与 `fn` 参数的不变性（编译错误）](#103-边界测试逆变与-fn-参数的不变性编译错误)
+    - [10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时 UB）](#104-边界测试unsafecell-的不变性编译错误运行时-ub)
 
 ---
 
@@ -519,3 +524,87 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：子类型变异性的编译错误
+
+### 10.1 边界测试：协变与逆变的生命周期误用（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let r: &str = &s;
+    {
+        let short = &s[..2];
+        // ❌ 编译错误: `short` 的生命周期比 `r` 短
+        // 不能将短生命周期引用赋给长生命周期引用
+        let r2: &'static str = short; // 错误
+    }
+}
+
+// 正确: 协变允许将子类型赋给父类型
+fn fixed() {
+    let s = "hello"; // 'static
+    let r: &'static str = s; // ✅ 'static 是任何生命周期的子类型
+}
+```
+
+> **修正**: 生命周期在 Rust 中是**协变**（covariant）的——较长生命周期是较短生命周期的子类型。`'static: 'a` 对任何 `'a` 成立，因此 `&'static T` 可隐式转为 `&'a T`。但反过来不行：`&'a T` 不能转为 `&'static T`。这与面向对象中的子类型多态（`Dog` 是 `Animal` 的子类型）方向一致——"更具体/更长久"是"更通用/更短暂"的子类型。错误的生命周期假设会导致悬垂引用，编译器通过变异性检查阻止此类转换。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：`UnsafeCell` 的不变性（编译错误）
+
+```rust,compile_fail
+use std::cell::UnsafeCell;
+
+fn main() {
+    let cell: UnsafeCell<&'static i32> = UnsafeCell::new(&42);
+    // ⚠️ UnsafeCell<T> 对 T 是不变的（invariant）
+    // 以下转换在编译期被阻止
+    let cell2: UnsafeCell<&'a i32> = cell; // 错误: 生命周期不匹配
+}
+
+// 正确: UnsafeCell 保持精确的生命周期
+fn fixed() {
+    let x = 42;
+    let cell: UnsafeCell<&i32> = UnsafeCell::new(&x);
+    unsafe {
+        *cell.get() = &x; // ✅ 通过裸指针修改
+    }
+}
+```
+
+> **修正**: `UnsafeCell<T>` 对 `T` 是**不变**（invariant）的——不允许任何生命周期缩短或延长。这是因为 `UnsafeCell` 提供内部可变性，若允许协变，可能将短生命周期引用存储在期望长生命周期的上下文中，导致悬垂引用。`&mut T` 对 `T` 也是不变的，`Box<T>` 对 `T` 是协变的，`*const T` 对 `T` 是协变的，`*mut T` 对 `T` 是不变的。变异性的选择是 Rust 类型系统安全性的关键设计。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：逆变与 `fn` 参数的不变性（编译错误）
+
+```rust,compile_fail
+fn takes_str(_: &str) {}
+
+fn main() {
+    let f: fn(&str) = takes_str;
+    // ❌ 编译错误: fn 参数位置是逆变的，不能将 fn(&'static str) 赋值给 fn(&'a str)
+    // let g: fn(&'static str) = f;
+
+    // 正确理解:
+    // fn(&str) 要求能接受任意生命周期的 &str
+    // fn(&'static str) 只接受 'static 的 &str，能力更弱
+    // 因此 fn(&str) 是 fn(&'static str) 的子类型（协变返回，逆变参数）
+}
+```
+
+> **修正**: 函数指针 `fn(T) -> U` 的**变异性**（variance）：`T` 位置是**逆变**（contravariant），`U` 位置是**协变**（covariant）。逆变意味着：若 `A` 是 `B` 的子类型，则 `fn(B)` 是 `fn(A)` 的子类型。对生命周期而言，`&'static str` 比 `&'a str` 长（`'static: 'a`），因此 `&'static str` 是 `&'a str` 的子类型。逆变的参数位置意味着 `fn(&'a str)` 是 `fn(&'static str)` 的子类型——接受短引用的函数可以接受长引用（能力更强），反之不行。这与 Java 的泛型（默认不变，`? super T` 逆变，`? extends T` 协变）或 Scala 的变型注解（`+T` 协变，`-T` 逆变）类似——Rust 的变异性是隐式的，由类型构造器的位置决定，开发者通常不直接操作，但在高级泛型代码中理解变异性至关重要。[来源: [Rust Reference — Variance](https://doc.rust-lang.org/reference/subtyping.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/subtyping.html)]
+
+### 10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时 UB）
+
+```rust,compile_fail
+use std::cell::UnsafeCell;
+
+fn main() {
+    let cell: UnsafeCell<i32> = UnsafeCell::new(42);
+    let r1: &i32 = unsafe { &*cell.get() };
+    let r2: &mut i32 = unsafe { &mut *cell.get() };
+    // ❌ 运行时 UB: 同时存在共享引用和可变引用指向同一数据
+    println!("{} {}", r1, r2);
+}
+```
+
+> **修正**: `UnsafeCell` 是 Rust 内部可变性的底层原语，它**关闭**了编译器的可变性和别名假设——通过 `UnsafeCell` 获取的指针可同时存在多个读写别名。但 `UnsafeCell` 本身不改变语义：从 `UnsafeCell` 获取的 `&mut T` 和 `&T` 仍不能同时活跃，除非使用 `UnsafeCell` 的特定 API（如 `Cell::get` 的按位复制）。上述代码是 UB，因为 `r1` 和 `r2` 同时存在。正确用法：`UnsafeCell` 应配合显式同步原语（`Mutex`、`RwLock`）或单线程运行时检查（`RefCell`）使用。`UnsafeCell` 的变异性是**不变**（invariant）的：不能将 `UnsafeCell<&'long T>` 赋值给 `UnsafeCell<&'short T>`，因为内部可变可能通过 `&mut` 改变引用的生命周期。这与 Java 的 `Object[]`（数组是协变的，运行时 `ArrayStoreException`）或 C++ 的 `std::vector<T>`（无变异性概念）不同——Rust 的 `UnsafeCell` 不变性防止了通过内部可变性破坏子类型关系。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/interior-mutability.html)]

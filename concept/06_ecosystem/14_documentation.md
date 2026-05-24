@@ -35,6 +35,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：文档工具的编译错误](#十边界测试文档工具的编译错误)
+    - [10.1 边界测试：`doctest` 中的隐式 `main`（编译错误）](#101-边界测试doctest-中的隐式-main编译错误)
+    - [10.2 边界测试：`rustdoc` 的链接解析失败（编译错误）](#102-边界测试rustdoc-的链接解析失败编译错误)
 
 ---
 
@@ -628,3 +631,39 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：文档工具的编译错误
+
+### 10.1 边界测试：`doctest` 中的隐式 `main`（编译错误）
+
+```rust,compile_fail
+/// ```rust
+/// let x = 5;
+/// assert_eq!(x, 5);
+/// ```
+fn documented() {}
+
+// doctest 中以下代码会失败:
+// ```rust,compile_fail
+// fn no_main() {
+//     // ❌ doctest 默认包裹在 fn main() 中
+//     // return 类型不匹配会导致编译错误
+// }
+// ```
+```
+
+> **修正**: Rust 的文档测试（doctest）自动将代码块包裹在 `fn main() { ... }` 中。若代码块包含 `fn main()` 或返回类型，需使用 `no_run` 或 `compile_fail` 属性。`compile_fail` 属性验证代码确实编译失败——这是测试"编译期保证"的独特方式。与 Python 的 doctest（只检查输出）不同，Rust 的 doctest是完整的编译-运行测试，确保文档中的代码始终有效。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：`rustdoc` 的链接解析失败（编译错误）
+
+```rust
+/// See [NonExistent] for more details.
+/// // ❌ rustdoc 警告: unresolved link to `NonExistent`
+pub fn linked() {}
+
+/// See [`String`] for more details.
+/// // ✅ 正确链接到标准库类型
+pub fn linked_fixed() {}
+```
+
+> **修正**: Rust 1.48+ 的 `rustdoc` 支持 intra-doc links——用 `[`Name`]` 语法链接到 crate 内的项或标准库类型。未解析的链接产生编译警告（CI 中可提升为错误）。这要求文档维护者确保所有引用有效，避免死链接。与 JavaDoc 或 Doxygen 的外部链接不同，Rust 的 intra-doc links 在编译期验证目标存在，将文档一致性检查提前到构建阶段。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

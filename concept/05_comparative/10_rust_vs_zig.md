@@ -734,3 +734,94 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：Rust 与 Zig 的编译错误对比
+
+### 10.1 边界测试：Zig 的 comptime vs Rust 的 const generics（编译错误）
+
+```rust,compile_fail
+fn array_size<N>(arr: [i32; N]) -> usize {
+    N
+}
+
+fn main() {
+    let arr = [1, 2, 3];
+    // ❌ 编译错误: cannot infer the value of const parameter `N`
+    // Rust 的 const generics 推断在某些上下文中受限
+    let size = array_size(arr);
+}
+
+// 正确: 显式标注或让编译器推断
+fn fixed() {
+    let arr = [1, 2, 3];
+    let size = array_size::<3>(arr); // 显式标注
+    println!("{}", size);
+}
+```
+
+> **Zig 对比**: Zig 的 `comptime` 是更通用的编译期计算机制——任何参数可标记为 `comptime`，函数在编译期执行。Rust 的 `const generics` 是类型系统的扩展，仅支持特定上下文（数组大小、类型参数）。Zig 的 `comptime` 更灵活，但错误信息可能更复杂（编译期执行可能 panic）。Rust 的 `const generics` 更受限，但类型安全边界更清晰。两者都追求"编译期计算零运行时成本"，但 Zig 采用"通用编译期执行"，Rust 采用"受限常量泛型"。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let ptr = s.as_ptr();
+    drop(s); // 释放 s
+    // ❌ 编译错误: 实际上以下代码在 unsafe 块中可以编译，但运行时 UB
+    // println!("{}", unsafe { *ptr }); // use-after-free!
+}
+
+// 正确: 确保引用有效期间不释放原数据
+fn fixed() {
+    let s = String::from("hello");
+    let r = &s; // 借用
+    println!("{}", r); // ✅ 在 s 有效期间使用
+} // s 在此释放
+```
+
+> **Zig 对比**: Zig 使用显式分配器（`std.heap.page_allocator`）和手动内存管理——没有 GC，也没有 Rust 的所有权系统。Zig 的安全策略是"在调试模式下检测 UB"（边界检查、use-after-free 检测），但在发布模式移除检查。Rust 的安全策略是"编译期阻止 UB"——通过借用检查器在编译期拒绝悬垂引用、use-after-free、数据竞争。Zig 更灵活（可直接操作原始指针），但安全性依赖运行时检查和程序员纪律；Rust 更严格，但编译器保证安全代码无 UB。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 的能力差异（编译错误）
+
+```rust,compile_fail
+const fn factorial(n: u32) -> u32 {
+    // ❌ 编译错误: const fn 中不能使用循环（旧版 Rust）
+    // Rust 1.46+ 允许循环，但仍有诸多限制
+    let mut result = 1;
+    let mut i = 2;
+    while i <= n {
+        result *= i;
+        i += 1;
+    }
+    result
+}
+
+fn main() {
+    const X: u32 = factorial(5);
+    println!("{}", X);
+}
+```
+
+> **修正**: Zig 的 `comptime` 是**图灵完全**的编译期执行：可在编译期使用几乎所有语言特性（循环、递归、分配内存、文件 I/O）。Rust 的 `const fn` 更保守：1) 不能堆分配；2) 不能调用 trait 方法（`const trait impl` 实验中）；3) 不能 panic（旧版，1.57+ 允许 `const panic`）；4) 不能使用 `dyn Trait`。Rust 的保守设计确保编译期执行的确定性和可预测性：编译器必须能完全求值 `const` 上下文，不能有副作用或无限循环。Zig 的 `comptime` 更强大，但允许更复杂的编译期逻辑（和潜在更长的编译时间）。这与 C++ 的 `constexpr`（C++20 允许堆分配和虚函数，类似 Zig 的方向）或 D 的 CTFE（Compile Time Function Execution，图灵完全）类似——Rust 在编译期能力上选择了渐进增强的路径。[来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)] · [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]
+
+### 10.4 边界测试：Zig 的显式内存分配与 Rust 的全局分配器（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // Rust: Vec 使用全局分配器，隐式
+    let v = vec![1, 2, 3];
+    
+    // Zig: 所有分配显式传入分配器
+    // var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    // const allocator = gpa.allocator();
+    // var list = std.ArrayList(i32).init(allocator);
+    // try list.append(1);
+    
+    // ❌ 逻辑错误: 从 Zig 迁移时，可能忽视 Rust 的全局分配器可定制
+    // 但 Rust 的分配器是隐式的，不如 Zig 显式
+    println!("{:?}", v);
+}
+```
+
+> **修正**: Zig 的设计哲学是**显式优于隐式**：每个可能分配的函数接受 `Allocator` 参数，调用者明确控制内存来源。Rust 的默认分配是**隐式**的：`Box::new`、`Vec::push`、`String::push_str` 使用全局分配器（可通过 `#[global_allocator]` 定制）。Zig 的显式分配使资源管理更清晰（尤其在嵌入式、游戏、实时系统），但增加了 API 复杂度。Rust 的隐式分配更符合主流语言习惯，但隐藏了分配点（性能分析困难）。Rust 也支持显式分配器（`Allocator` trait，不稳定），但生态采用率低。这与 C 的 `malloc`/`free`（显式）或 Go 的 GC（完全隐式）不同——Rust 在中间位置：默认隐式，但允许显式控制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.Allocator.html)] · [来源: [Zig Allocator Design](https://ziglang.org/documentation/master/#Choosing-an-Allocator)]

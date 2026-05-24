@@ -36,6 +36,11 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：游戏开发的编译错误](#十边界测试游戏开发的编译错误)
+    - [10.1 边界测试：Bevy 的 Resource 与 System 参数（编译错误）](#101-边界测试bevy-的-resource-与-system-参数编译错误)
+    - [10.2 边界测试：游戏循环中的 `Send` 约束（编译错误）](#102-边界测试游戏循环中的-send-约束编译错误)
+    - [10.3 边界测试：游戏循环中的固定时间步长与渲染解耦（运行时卡顿）](#103-边界测试游戏循环中的固定时间步长与渲染解耦运行时卡顿)
+    - [10.4 边界测试：WGPU 的着色器编译与平台支持差异（运行时 panic）](#104-边界测试wgpu-的着色器编译与平台支持差异运行时-panic)
 
 ---
 
@@ -628,3 +633,94 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：游戏开发的编译错误
+
+### 10.1 边界测试：Bevy 的 Resource 与 System 参数（编译错误）
+
+```rust,compile_fail
+use bevy::prelude::*;
+
+#[derive(Resource)]
+struct Score(i32);
+
+fn update_score(mut score: ResMut<Score>, score2: ResMut<Score>) {
+    // ❌ 编译错误: 同一 Resource 不能同时有两个可变引用
+    score.0 += 10;
+    score2.0 += 20;
+}
+```
+
+> **修正**: Bevy 的 ECS 架构中，**Resource** 是全局唯一状态（如游戏分数、配置）。System 函数通过 `Res<T>`（不可变）和 `ResMut<T>`（可变）访问资源。编译器拒绝同一 System 中对同一资源的多个可变引用，防止数据竞争。这与 Unity 的 `MonoBehaviour`（运行时空引用检查）或 Godot 的节点树（手动管理）不同——Bevy 在编译期保证资源访问的安全性，运行时无检查开销。ECS 的 archetype 存储进一步优化缓存局部性。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
+
+### 10.2 边界测试：游戏循环中的 `Send` 约束（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+use bevy::prelude::*;
+
+#[derive(Component)]
+struct Texture {
+    data: Rc<Vec<u8>>, // Rc 不是 Send
+}
+
+fn load_system(mut commands: Commands) {
+    // ❌ 编译错误: Bevy 的并行调度要求 Component 是 Send + Sync
+    commands.spawn(Texture { data: Rc::new(vec![0; 1024]) });
+}
+```
+
+> **修正**: 游戏引擎通常使用线程池并行执行系统（如渲染、物理、AI 同时更新）。Bevy 要求所有 Component 和 Resource 实现 `Send + Sync`。`Rc<T>` 使用非原子引用计数，不能跨线程；`Arc<T>` 可以。这与单线程游戏引擎（如某些 2D 框架）不同——Bevy 的并行调度是核心特性，类型系统确保并行安全。对于确实不能跨线程的资源（如 GPU 句柄），使用 `NonSend` 和 `NonSendMut` 标记，限制其在主线程系统上访问。[来源: [Bevy Documentation](https://docs.rs/bevy/)]
+
+### 10.3 边界测试：游戏循环中的固定时间步长与渲染解耦（运行时卡顿）
+
+```rust,compile_fail
+use std::time::{Duration, Instant};
+
+fn main() {
+    let mut last = Instant::now();
+    loop {
+        let now = Instant::now();
+        let dt = now - last;
+        last = now;
+
+        // ❌ 运行时卡顿: 若 dt 变化大，物理模拟不稳定
+        update(dt);
+        render();
+
+        // 正确: 固定时间步长
+        // const FIXED_DT: Duration = Duration::from_millis(16); // 60 FPS
+        // accumulator += dt;
+        // while accumulator >= FIXED_DT {
+        //     update(FIXED_DT);
+        //     accumulator -= FIXED_DT;
+        // }
+        // render();
+    }
+}
+
+fn update(_dt: Duration) {}
+fn render() {}
+```
+
+> **修正**: 游戏循环中，**固定时间步长**（fixed timestep）将物理/逻辑更新与渲染帧率解耦：更新按固定间隔（如 60 Hz）执行，渲染按显示刷新率执行。若使用变量 `dt`（实际帧间隔），帧率波动导致物理模拟不稳定（低帧率时物体穿透、高帧率时计算浪费）。Rust 的游戏引擎（Bevy、Fyrox、macroquad）内置固定时间步长支持。这与 Unity 的 `FixedUpdate`（固定 50 Hz，与 `Update` 分离）或 Godot 的 `_physics_process`（类似）相同——游戏开发的经典模式。Rust 的类型系统帮助表达时间单位（`Duration` 而非裸 `f64` 秒），减少单位混淆。[来源: [Game Loop Pattern](https://gameprogrammingpatterns.com/game-loop.html)] · [来源: [Bevy Time Documentation](https://docs.rs/bevy/)]
+
+### 10.4 边界测试：WGPU 的着色器编译与平台支持差异（运行时 panic）
+
+```rust,compile_fail
+// 假设使用 wgpu 进行渲染
+
+fn create_render_pipeline(device: &wgpu::Device) {
+    let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+        label: Some("shader"),
+        source: wgpu::ShaderSource::Wgsl(include_str!("shader.wgsl")),
+    });
+
+    // ❌ 运行时 panic: 若着色器使用目标平台不支持的特性
+    // 如 WebGL2 不支持 compute shader，某些 GPU 不支持 ray tracing
+
+    let _ = shader;
+}
+```
+
+> **修正**: WGPU 是 Rust 的跨平台图形 API（WebGPU 标准的实现），抽象了 Vulkan、Metal、DX12、OpenGL、WebGL。但不同后端的能力不同：1) WebGL2 不支持计算着色器（compute shaders）；2) 旧 GPU 不支持 Vulkan 的某些扩展；3) 某些纹理格式在特定平台上不可用。WGPU 在**适配器创建**时报告能力（`adapter.limits()`、`adapter.features()`），但着色器编译时的错误可能晚于预期。安全模式：1) 运行时检查 `device.features()` 和 `device.limits()`；2) 提供降级着色器（如 compute 的 CPU fallback）；3) 使用 `wgpu::ShaderSource::Glsl` 或 `SpirV` 替代 WGSL（若后端支持更好）。这与 Unity 的 shader variants（自动选择平台特定着色器）或 Unreal 的 RHI（Render Hardware Interface，类似 WGPU）类似——跨平台图形编程的核心挑战是能力差异管理。[来源: [WGPU Documentation](https://docs.rs/wgpu/)] · [来源: [WebGPU Standard](https://www.w3.org/TR/webgpu/)]

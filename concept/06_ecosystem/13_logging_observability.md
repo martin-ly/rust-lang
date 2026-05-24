@@ -39,6 +39,12 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：日志与可观测性的编译错误](#十边界测试日志与可观测性的编译错误)
+    - [10.1 边界测试：`tracing` span 的生命周期（编译错误）](#101-边界测试tracing-span-的生命周期编译错误)
+    - [10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时 panic）](#102-边界测试opentelemetry-的全局提供者设置运行时-panic)
+    - [10.3 边界测试：结构化日志的字段类型不匹配（运行时错误）](#103-边界测试结构化日志的字段类型不匹配运行时错误)
+    - [10.4 边界测试：span 的生命周期与异步代码（编译错误/运行时丢失）](#104-边界测试span-的生命周期与异步代码编译错误运行时丢失)
+    - [10.5 边界测试：`tracing` 的 span 泄漏与内存增长（运行时资源泄漏）](#105-边界测试tracing-的-span-泄漏与内存增长运行时资源泄漏)
 
 ---
 
@@ -520,3 +526,104 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：日志与可观测性的编译错误
+
+### 10.1 边界测试：`tracing` span 的生命周期（编译错误）
+
+```rust,compile_fail
+use tracing::info_span;
+
+fn main() {
+    let span = info_span!("request");
+    // ❌ 编译错误: span 需要被进入（entered）才能记录事件
+    // 仅创建 span 不生效
+    tracing::info!("processing"); // 此事件不在 span 内
+}
+
+// 正确: 进入 span
+fn fixed() {
+    let span = info_span!("request");
+    let _guard = span.enter();
+    tracing::info!("processing"); // ✅ 在 span 内
+}
+```
+
+> **修正**: `tracing` crate 的结构化日志使用 **span** 表示操作上下文。创建 span（`info_span!`）不自动进入——必须调用 `.enter()` 将当前线程的上下文关联到 span。`_guard` 在 drop 时自动退出 span，确保即使 panic 也能正确关闭。这与 OpenTelemetry 的 span 或 Go 的 context 类似，但 Rust 的所有权系统保证 span 生命周期的正确性——不能忘记退出 span（资源泄漏），不能访问已退出的 span。[来源: [tracing Documentation](https://docs.rs/tracing/)]
+
+### 10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时 panic）
+
+```rust
+use opentelemetry::global;
+
+fn main() {
+    // ⚠️ 运行时 panic: global tracer provider 未设置
+    // let tracer = global::tracer("my_app");
+    // 若未先设置 provider，某些操作 panic
+}
+
+// 正确: 先初始化 provider
+fn fixed() {
+    let provider = opentelemetry_sdk::trace::TracerProvider::builder()
+        .with_simple_exporter(opentelemetry_stdout::SpanExporter::default())
+        .build();
+    global::set_tracer_provider(provider);
+    let tracer = global::tracer("my_app"); // ✅ provider 已设置
+}
+```
+
+> **修正**: OpenTelemetry 的全局 API 要求在首次使用前先设置 provider。这与 Go 的 `init()` 或 Java 的静态初始化不同——Rust 没有运行时自动初始化，必须显式调用 `set_tracer_provider`。忘记初始化会导致 panic 或静默丢弃 span。在大型应用中，初始化顺序管理（init order）是常见问题——使用 `once_cell::Lazy` 或 `std::sync::OnceLock` 可确保延迟初始化且线程安全。[来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
+
+### 10.3 边界测试：结构化日志的字段类型不匹配（运行时错误）
+
+```rust,compile_fail
+use tracing::{info, field};
+
+fn main() {
+    let user_id = 42u64;
+    // ❌ 运行时错误/日志解析失败: 字段类型不一致
+    // 若某些日志输出 user_id 为字符串，其他为整数
+    info!(user_id = %user_id, "login"); // % 表示 Display
+    info!(user_id = ?user_id, "logout"); // ? 表示 Debug
+    // 日志收集器（如 ELK、Grafana）可能将同一字段解析为不同类型
+}
+```
+
+> **修正**: `tracing` crate 支持结构化日志（key-value 对），但字段的格式化方式（`%` Display、`?` Debug、无修饰符的 `Value` trait）影响输出格式。在日志聚合系统中，同一字段的不一致格式导致解析失败或类型冲突。最佳实践：1) 定义统一的字段类型（`user_id` 总是 `u64`，用无修饰符形式）；2) 使用 `tracing` 的 `valuable` 集成（类型化结构化数据）；3) 在日志 schema 中显式声明字段类型。这与 OpenTelemetry 的 attribute 类型系统（`string`、`int`、`bool`、`double`）或 JSON 日志（无类型，解析器推断）相关——结构化日志的价值在于机器可解析，类型一致性是前提。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Specification](https://opentelemetry.io/docs/specs/otel/logs/)]
+
+### 10.4 边界测试：span 的生命周期与异步代码（编译错误/运行时丢失）
+
+```rust,compile_fail
+use tracing::{info, info_span, Instrument};
+
+async fn work() {
+    info!("working");
+}
+
+fn main() {
+    let span = info_span!("request", id = 1);
+    // ❌ 运行时丢失: span 未进入，异步任务中不可见
+    let handle = tokio::spawn(work());
+    // 正确: .instrument(span) 将 span 附加到 future
+    // let handle = tokio::spawn(work().instrument(span));
+    handle.await.unwrap();
+}
+```
+
+> **修正**: `tracing` 的 span 代表一个上下文范围（如 HTTP 请求、数据库事务），需显式 `enter()` 或 `.instrument()` 附加到异步任务。未进入的 span 不记录任何事件，导致日志缺乏上下文（难以关联同一请求的事件）。异步代码中的 span 传播：1) `.instrument(span)` 将 span 绑定到 future；2) `#[instrument]` 属性宏自动包装函数；3) `tracing-futures` 的 `WithSubscriber` 传播 subscriber。这与 OpenTelemetry 的 Context（需显式传播）或 Java 的 MDC（Mapped Diagnostic Context，ThreadLocal，不适用于异步）类似——异步代码打破了线程与请求的 1:1 映射，上下文传播需要显式机制。Rust 的 `tracing` 通过 `Instrument` trait 和 `#[instrument]` 宏简化了这一过程。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
+
+### 10.5 边界测试：`tracing` 的 span 泄漏与内存增长（运行时资源泄漏）
+
+```rust,compile_fail
+use tracing::{info, info_span};
+
+fn main() {
+    // ❌ 运行时资源泄漏: 未退出的 span 累积在 dispatcher 中
+    let _span = info_span!("leaky_span").entered();
+    // 忘记 drop: span 在循环中创建且不退出，内存持续增长
+
+    info!("message");
+}
+```
+
+> **修正**: `tracing` crate 的 span 是**结构化日志**的核心：进入 span 时记录开始时间/上下文，退出时记录结束。`span.entered()` 返回 `Entered` guard，drop 时自动退出。若 guard 生命周期过长（如存储在 `static`、循环中创建不退出、跨 await 点持有），span 永不关闭，导致：1) 内存泄漏（span 数据结构累积）；2) 分布式追踪中 trace 不完整；3) 指标计算错误（span 时长无限）。async 场景特别注意：使用 `span.in_scope(|| ...)` 而非 `entered()`，或用 `tracing::Instrument` trait（`.instrument(span)`）。这与 OpenTelemetry 的 span 管理或 Go 的 `context.WithTimeout` 类似——结构化追踪需严格的生命周期管理，泄漏代价高。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)]

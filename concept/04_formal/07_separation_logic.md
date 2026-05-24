@@ -24,6 +24,9 @@
   - [二、技术细节](#二技术细节)
     - [2.1 分离逻辑的基本断言](#21-分离逻辑的基本断言)
     - [2.2 Rust 所有权的形式化映射](#22-rust-所有权的形式化映射)
+  - [十、边界测试：分离逻辑的编译错误](#十边界测试分离逻辑的编译错误)
+    - [10.1 边界测试：资源重复释放与分离合取（编译错误）](#101-边界测试资源重复释放与分离合取编译错误)
+    - [10.2 边界测试：共享权限与独占权限的冲突（编译错误）](#102-边界测试共享权限与独占权限的冲突编译错误)
     - [2.3 Iris 与更高阶分离逻辑](#23-iris-与更高阶分离逻辑)
   - [三、形式化模式矩阵](#三形式化模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -33,6 +36,8 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：并发下的分离逻辑与 `Send`/`Sync`（编译错误）](#103-边界测试并发下的分离逻辑与-sendsync编译错误)
+    - [10.4 边界测试：原子操作与分离逻辑的幻觉（运行时数据竞争）](#104-边界测试原子操作与分离逻辑的幻觉运行时数据竞争)
 
 ---
 
@@ -214,6 +219,52 @@
 ### 2.2 Rust 所有权的形式化映射
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：分离逻辑的编译错误
+
+### 10.1 边界测试：资源重复释放与分离合取（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let v = vec![1, 2, 3];
+    let v2 = v;
+    // ❌ 编译错误: use of moved value: `v`
+    // 所有权已转移，v 不再拥有资源
+    drop(v); // 尝试释放已转移的资源
+    drop(v2); // v2 释放资源
+}
+
+// 正确: 所有权线性传递
+fn fixed() {
+    let v = vec![1, 2, 3];
+    let v2 = v; // ✅ 所有权转移
+    drop(v2); // ✅ 资源释放一次
+}
+```
+
+> **修正**: 分离逻辑（Separation Logic）的核心是 **frame rule** 和 **resource ownership**。`own(τ, ℓ)` 表示对位置 ℓ 上类型 τ 的独占所有权。所有权转移对应于分离逻辑的 * 运算——`own(τ, ℓ₁) ∗ own(τ, ℓ₂)` 表示两个独立资源。Rust 的所有权系统确保每个资源恰好有一个所有者（affine）或至多一个（通过 borrow 实现共享时为零个所有者但多个读者）。重复释放是对 `own` 谓词的双重使用，编译器通过 move 分析阻止。[来源: [Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
+
+### 10.2 边界测试：共享权限与独占权限的冲突（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut data = 42;
+    let shared = &data;
+    // ❌ 编译错误: cannot borrow `data` as mutable more than once at a time
+    let exclusive = &mut data; // 与 shared 冲突
+    println!("{}", shared);
+}
+
+// 正确: 共享借用期间只读
+fn fixed() {
+    let data = 42;
+    let shared1 = &data;
+    let shared2 = &data; // ✅ 多个共享借用共存
+    println!("{} {}", shared1, shared2);
+} // 所有共享借用在此释放
+```
+
+> **修正**: 分离逻辑中的 **points-to** 断言 `ℓ ↦ v` 是独占的。Rust 通过借用检查器将其扩展为两种模式：独占 `own(τ, ℓ)` 和共享 `shr(κ, ℓ)`。共享权限 `shr(κ, ℓ)` 表示"对 ℓ 的只读访问权限，只要 κ 有效"。当存在 `shr(κ, ℓ)` 时，不能创建 `own(τ, ℓ)`——这与分离逻辑的 *-conjunction 一致：`shr(κ, ℓ) ∗ own(τ, ℓ)` 是矛盾（false）。RustBelt 使用 Iris 分离逻辑框架形式化证明了借用检查器与分离逻辑的一致性。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)]
 
 ```text
 Rust 所有权 → 分离逻辑:
@@ -631,3 +682,38 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+### 10.3 边界测试：并发下的分离逻辑与 `Send`/`Sync`（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::thread;
+
+fn main() {
+    let data = Rc::new(42);
+    // ❌ 编译错误: Rc 不是 Send，不能跨线程
+    let handle = thread::spawn(move || {
+        println!("{}", data);
+    });
+    handle.join().unwrap();
+}
+```
+
+> **修正**: 分离逻辑在并发场景下扩展为**并发分离逻辑**（Concurrent Separation Logic，CSL）：每个线程拥有独立的资源（heap fragment），通过**共享资源**（shared resource）和**资源不变式**（resource invariant）交互。Rust 的 `Send` 和 `Sync` trait 是 CSL 的编译期近似：`Send` 表示资源可安全转移到其他线程（独占转移），`Sync` 表示资源可安全被多个线程共享（共享访问）。`Rc` 的引用计数非原子，因此不是 `Send` 也不是 `Sync`——违反并发分离逻辑的"独占或共享"规则。`Arc` 使用原子引用计数，满足 `Send + Sync`。这与 C 的指针（无检查，共享任意）或 Java 的 `Object`（总是共享，通过 `synchronized` 控制）不同——Rust 在类型层面将并发分离逻辑的推理自动化。[来源: [Concurrent Separation Logic](https://www.cs.cmu.edu/~jcr/csl.pdf)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
+
+### 10.4 边界测试：原子操作与分离逻辑的幻觉（运行时数据竞争）
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+static COUNTER: AtomicUsize = AtomicUsize::new(0);
+
+fn main() {
+    // ❌ 运行时数据竞争: Relaxed 顺序不保证可见性顺序
+    COUNTER.fetch_add(1, Ordering::Relaxed);
+    COUNTER.fetch_add(1, Ordering::Relaxed);
+    // 在弱内存模型架构（ARM）上，其他线程可能看到乱序的结果
+}
+```
+
+> **修正**: 原子操作的 `Ordering` 是 Rust 并发编程中最微妙的部分。`Relaxed` 只保证原子性（无撕裂读写），不保证**happens-before 关系**——其他线程可能以不同顺序观察到操作。分离逻辑的视角：`Relaxed` 操作不传递资源所有权，只是"幻觉"上的原子更新。若需要同步（一个线程写，另一个线程读并依赖该值），必须使用 `Release`/`Acquire` 或 `SeqCst`。这与 C/C++ 的 `memory_order_relaxed`（相同语义）或 Java 的 `volatile`（等价于 `SeqCst`，更强）不同——Rust 的 `Ordering` 显式、精细，要求开发者根据内存模型选择。错误选择 `Relaxed` 是多线程 bug 的常见来源：程序在 x86（强内存模型）上正常，在 ARM（弱内存模型）上失败。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html)]

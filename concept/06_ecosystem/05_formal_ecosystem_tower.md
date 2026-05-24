@@ -531,3 +531,83 @@ fn main() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+## 十、边界测试：形式化生态塔的编译错误
+
+### 10.1 边界测试：Prusti 的前置条件验证（编译错误）
+
+```rust,compile_fail
+// #[requires(x > 0)] // Prusti 前置条件
+fn sqrt(x: i32) -> i32 {
+    // ❌ Prusti 验证错误: 若 x < 0，sqrt 无定义
+    // 形式化工具在编译期验证前置条件
+    (x as f64).sqrt() as i32
+}
+
+// 正确: 使用 Result 编码前置条件
+fn sqrt_fixed(x: i32) -> Result<i32, String> {
+    if x < 0 {
+        Err("negative input".to_string())
+    } else {
+        Ok((x as f64).sqrt() as i32)
+    }
+}
+```
+
+> **修正**: 形式化验证工具（Prusti、Creusot、Kani）将程序正确性证明引入编译流程。Prusti 使用 Viper 验证基础设施，要求开发者标注前置条件（`requires`）、后置条件（`ensures`）和循环不变量。若调用者违反前置条件，编译失败。这与传统单元测试不同——形式化验证覆盖**所有**输入，不是抽样检查。Rust 的类型系统已捕获大量错误（空指针、数据竞争），形式化工具进一步验证功能正确性（排序结果有序、除法不溢出等）。[来源: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)]
+
+### 10.2 边界测试：Kani 的循环展开限制（编译错误）
+
+```rust,compile_fail
+fn sum(n: u32) -> u32 {
+    let mut total = 0;
+    let mut i = 0;
+    while i < n {
+        total += i;
+        i += 1;
+    }
+    total
+}
+
+fn main() {
+    // ❌ Kani 错误: 循环需要展开界限
+    // 模型检查器无法验证无界循环
+    // assert!(sum(100) == 4950);
+}
+```
+
+> **修正**: Kani（基于 CBMC）是 Rust 的模型检查器，通过符号执行验证所有执行路径。但模型检查器受限于**状态空间爆炸**——无界循环、无界递归、大数组导致验证不可行。Kani 使用循环展开（loop unwinding）处理循环，需要显式标注展开界限（`#[kani::unwind(10)]`）。这与 Prusti 的归纳验证不同——Kani 更适合验证小状态空间的安全属性（无溢出、无 panic），Prusti 更适合验证带循环不变量的功能正确性。两者互补，覆盖不同验证需求。[来源: [Kani Documentation](https://model-checking.github.io/kani/)]
+
+### 10.3 边界测试：形式化工具链的生态系统碎片化（编译错误）
+
+```rust,compile_fail
+// 假设同时使用 Kani、Prusti、Miri
+
+#[kani::proof]
+#[prusti::requires(x > 0)]
+fn verified_function(x: i32) -> i32 {
+    // ❌ 编译错误/工具冲突: 多个形式化工具的注解可能不兼容
+    // Kani 和 Prusti 的属性宏可能互相干扰
+    x * 2
+}
+```
+
+> **修正**: Rust 的形式化验证生态（Kani、Prusti、Creusot、Miri）各自独立发展，工具链之间**不兼容**：1) Kani 使用 `#[kani::proof]`，Prusti 使用 `#[prusti::requires]`，不能同时使用；2) 各工具对 `unsafe` 代码的支持程度不同；3) 标准库的验证规格不完整（Prusti 需要为 `std` 函数写契约）。形式化生态的碎片化是 Rust 向安全关键领域扩展的障碍：企业需要选择单一工具，或维护多套注解。标准化努力：Rust 验证工具联盟（Rust Verification Tools）推动共享中间表示（MIR 级别的规格），但进展缓慢。这与 Java 的 JML（统一规格语言，但工具支持有限）或 C 的 ACSL（类似 JML）不同——Rust 的形式化生态更年轻，尚未形成统一标准。[来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)] · [来源: [Kani Documentation](https://model-checking.github.io/kani/)]
+
+### 10.4 边界测试：依赖树中的形式化安全与 unsafe 代码传播（编译错误）
+
+```rust,compile_fail
+// crate-a: 经过形式化验证，无 unsafe
+// crate-b: 依赖 crate-a，但自身使用 unsafe
+// crate-c: 依赖 crate-b，用于安全关键系统
+
+// ❌ 逻辑错误: crate-a 的形式化保证不传播到 crate-b
+// crate-b 的 unsafe 代码可能破坏 crate-a 的不变式
+
+fn main() {
+    // 安全关键系统的认证要求: 所有代码（包括依赖）都需审计
+    // 仅验证顶层 crate 不足够
+}
+```
+
+> **修正**: 形式化验证的**组合性**是开放问题：若 crate A 经过验证（如 Prusti 证明无 panic、无溢出），crate B 使用 unsafe 调用 A 的函数，验证保证可能被破坏。Rust 的模块系统不自动传播验证结果——每个 crate 的验证是独立的。安全关键项目需要：1) 审计所有依赖（`cargo vet`）；2) 限制 unsafe 使用（`cargo geiger`）；3) 为关键依赖建立形式化规格（昂贵但必要）。这与数学中的"已证定理可组合"不同——软件的形式化验证受限于规格的不完整性和实现细节。RustBelt 项目试图为 Rust 的核心类型系统建立可组合的形式化基础，但覆盖整个生态仍是长期目标。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [cargo-vet Documentation](https://mozilla.github.io/cargo-vet/)]

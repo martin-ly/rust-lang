@@ -549,3 +549,62 @@ async fn main() {
 > **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 流处理语义空间
+
+## 十、边界测试：流处理语义的编译错误
+
+### 10.1 边界测试：Tokio Stream 与所有权冲突（编译错误）
+
+```rust,compile_fail
+use futures::stream::{self, StreamExt};
+
+async fn bad_stream() {
+    let data = vec![1, 2, 3];
+    let mut s = stream::iter(data);
+    while let Some(item) = s.next().await {
+        // ❌ 编译错误: `data` 已被 move 到 stream 中
+        // 若尝试在循环中使用 data
+        println!("{}", item);
+    }
+    // println!("{:?}", data); // data 已被消耗
+}
+
+// 正确: 使用引用迭代
+async fn fixed_stream() {
+    let data = vec![1, 2, 3];
+    let mut s = stream::iter(&data); // ✅ 借用 data
+    while let Some(item) = s.next().await {
+        println!("{}", item);
+    }
+    println!("{:?}", data); // ✅ data 仍可用
+}
+```
+
+> **修正**: `stream::iter(data)` 消耗 `data` 的所有权，将其转换为流。若需在流消费后继续使用原数据，必须传递引用（`stream::iter(&data)`）。这与迭代器的所有权规则一致——`into_iter` 消耗，`iter` 借用。Rust 的流处理（`Stream` trait）与所有权系统的结合确保了内存安全：流不能产出指向已释放数据的引用。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
+
+### 10.2 边界测试：背压传播中的类型不匹配（编译错误）
+
+```rust,compile_fail
+use tokio::sync::mpsc;
+
+async fn producer(tx: mpsc::Sender<i32>) {
+    for i in 0..100 {
+        tx.send(i).await.unwrap();
+    }
+}
+
+async fn consumer(mut rx: mpsc::Receiver<String>) {
+    // ❌ 编译错误: `i32` 不能发送给 `Receiver<String>`
+    while let Some(msg) = rx.recv().await {
+        println!("{}", msg);
+    }
+}
+
+// 正确: channel 类型一致
+async fn consumer_fixed(mut rx: mpsc::Receiver<i32>) {
+    while let Some(msg) = rx.recv().await {
+        println!("{}", msg); // ✅ i32 可直接打印
+    }
+}
+```
+
+> **修正**: Rust 的 channel（`mpsc::channel<T>`）在类型层面保证发送和接收的类型一致性。编译器拒绝类型不匹配的 channel 连接，将运行时类型错误提前到编译期。这与 Go 的 `chan interface{}` 或 Erlang 的动态消息类型形成对比——Rust 的流处理是类型安全的，但要求在设计时明确消息类型。[来源: [Tokio Documentation](https://docs.rs/tokio/)]

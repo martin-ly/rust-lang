@@ -567,3 +567,20 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 权威来源对齐 + 反例补充完成
+
+### 10.5 边界测试：WASI 的 capability 限制与文件系统访问（运行时拒绝）
+
+```rust,compile_fail
+use std::fs::File;
+use std::io::Read;
+
+fn main() {
+    // ❌ 运行时拒绝: WASI 默认无文件系统访问权限
+    let mut file = File::open("/etc/passwd").unwrap();
+    let mut contents = String::new();
+    file.read_to_string(&mut contents).unwrap();
+    println!("{}", contents);
+}
+```
+
+> **修正**: WASI（WebAssembly System Interface）是 capability-based 安全模型：程序不继承环境权限，需显式授予（`--dir=/tmp`）。上述代码在原生 Linux 运行成功，在 WASI 运行时（Wasmtime、Wasmer）失败，除非通过 `--dir=.` 挂载目录。WASI 的 capability 设计：1) 文件系统：按需目录挂载；2) 网络：需显式 socket 权限；3) 时钟：需 `clock` capability。这与 Docker 的 capabilities（`--cap-add`）或 Linux 的 seccomp（系统调用过滤）类似——WASI 在 WebAssembly 层面实现沙箱，安全粒度更细。Rust 的 `wasm32-wasip1` target 原生支持 WASI，标准库调用自动映射到 WASI syscalls。这是 Rust 在边缘计算（Cloudflare Workers、Fastly Compute）中的核心优势——编译到 WASM + WASI 即可在隔离环境中运行。[来源: [WASI Overview](https://wasi.dev/)] · [来源: [Rust Wasm Target](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip1.html)]

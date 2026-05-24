@@ -35,6 +35,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 Scala 的编译错误对比](#十边界测试rust-与-scala-的编译错误对比)
+    - [10.1 边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译错误）](#101-边界测试scala-的隐式转换与-rust-的显式-trait编译错误)
+    - [10.2 边界测试：Scala 的 null 与 Rust 的 Option（编译错误）](#102-边界测试scala-的-null-与-rust-的-option编译错误)
+    - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）](#103-边界测试scala-的隐式转换与-rust-的显式-frominto编译错误)
+    - [10.4 边界测试：Scala 的 actor 模型与 Rust 的 async/channel 的并发模型差异（运行时死锁）](#104-边界测试scala-的-actor-模型与-rust-的-asyncchannel-的并发模型差异运行时死锁)
 
 ---
 
@@ -715,3 +720,103 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：Rust 与 Scala 的编译错误对比
+
+### 10.1 边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译错误）
+
+```rust,compile_fail
+trait ToJson {
+    fn to_json(&self) -> String;
+}
+
+fn main() {
+    let x = 42;
+    // ❌ 编译错误: `i32` 未实现 `ToJson`
+    // Rust 没有隐式转换，必须显式调用方法
+    // let json = x.to_json();
+}
+
+// 正确: 显式实现 trait
+impl ToJson for i32 {
+    fn to_json(&self) -> String {
+        format!("{}", self)
+    }
+}
+
+fn fixed() {
+    let x = 42;
+    let json = x.to_json(); // ✅ i32 实现了 ToJson
+}
+```
+
+> **Scala 对比**: Scala 的隐式转换（`implicit def`）允许自动将 `Int` 转为 `JsonValue`。Rust 禁止隐式转换——必须显式 `impl Trait for Type`。Scala 的隐式解析在编译期执行，但可能导致意外转换和难以追踪的编译错误。Rust 的显式实现确保每个类型转换都是设计者的有意选择，错误信息更精确。这与 Scala 3 的 `given`/`using`（显式隐式）方向一致——Rust 从一开始就选择了显式路径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：Scala 的 null 与 Rust 的 Option（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: Rust 没有 null
+    // let s: Option<String> = null; // 编译错误
+    let s: Option<String> = None; // ✅ 使用 Option 表示空值
+}
+
+// 正确: Option 的模式匹配
+fn fixed() {
+    let s: Option<String> = Some(String::from("hello"));
+    match s {
+        Some(v) => println!("{}", v),
+        None => println!("empty"),
+    }
+}
+```
+
+> **Scala 对比**: Scala 运行在 JVM 上，与 Java 互操作，因此存在 `null`（`String = null`）。Scala 推荐使用 `Option[T]`，但无法完全禁止 `null`。Rust 没有 `null`——引用类型（`&T`、`Box<T>`）永远指向有效内存，`Option<T>` 是唯一的可空表示。这消除了 NullPointerException 的整个类别，是 Rust 相对于 JVM 语言的核心安全优势。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）
+
+```rust,compile_fail
+struct Meters(u32);
+struct Kilometers(u32);
+
+// Rust: 无隐式转换，必须显式实现 From/Into
+impl From<Kilometers> for Meters {
+    fn from(k: Kilometers) -> Self {
+        Meters(k.0 * 1000)
+    }
+}
+
+fn main() {
+    let k = Kilometers(5);
+    // ❌ 编译错误: 不能隐式转换 Kilometers 为 Meters
+    // let m: Meters = k;
+
+    // 正确: 显式转换
+    let m: Meters = k.into();
+    println!("{}", m.0);
+}
+```
+
+> **修正**: Scala 的**隐式转换**（implicit conversions）允许编译器在类型不匹配时自动插入转换函数：`implicit def kmToM(k: Kilometers): Meters = Meters(k.value * 1000)`。这提供了极大的便利性（如 `5.km` 自动转为 `Meters`），但也导致难以追踪的编译错误（隐式解析失败时的错误信息复杂）和意外行为（不期望的转换被应用）。Rust 的 `From`/`Into` trait 要求**显式** `.into()` 调用，转换点一目了然。这与 C++ 的隐式转换构造函数（单参数构造函数自动成为转换）或 Go 的无转换（必须显式）不同——Rust 选择了 Go 的显式路径，但提供了 `From`/`Into` 的标准化转换接口。Scala 3 的 `given`/`using` 替代了 `implicit`，但隐式转换仍存在（需显式导入）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Scala Implicit Conversions](https://docs.scala-lang.org/topic/implicit-conversions.html)]
+
+### 10.4 边界测试：Scala 的 actor 模型与 Rust 的 async/channel 的并发模型差异（运行时死锁）
+
+```rust,compile_fail
+use tokio::sync::mpsc;
+
+async fn actor_style() {
+    let (tx, mut rx) = mpsc::channel(10);
+
+    // Scala/Akka: actor 有邮箱，消息异步处理，actor 内部单线程
+    // Rust: channel 只是数据传输，接收方需显式处理
+
+    tx.send("hello".to_string()).await.unwrap();
+
+    // ❌ 运行时死锁风险: 若接收方阻塞发送方（同步通道）
+    // 或接收方未运行（异步通道但任务未 spawn）
+    let msg = rx.recv().await.unwrap();
+    println!("{}", msg);
+}
+```
+
+> **修正**: Scala/Akka 的 **Actor 模型** 中，每个 actor 有独立的邮箱和单线程执行上下文，消息发送是 fire-and-forget，actor 按顺序处理消息。Rust 的 `tokio::sync::mpsc` 只是**通道**（channel）：发送和接收是显式操作，无内置的 actor 语义。在 Rust 中实现 actor：1) 用 `tokio::spawn` 创建任务作为 actor；2) 用 `mpsc` 作为邮箱；3) 在任务循环中 `recv().await` 处理消息。这比 Akka 更底层但更灵活：无 actor 层次监督（supervision）、无路由（routing）、无持久化（persistence）。`actix` crate 提供了 Rust 的 actor 框架，但不如 Akka 成熟。这与 Erlang/Elixir 的 OTP（成熟的 actor 框架）或 Go 的 CSP（channel + goroutine，类似 Rust）类似——Rust 的并发原语是底层的，高层抽象由库提供。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Akka Actor Model](https://doc.akka.io/docs/akka/current/typed/actors.html)]

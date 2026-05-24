@@ -1429,3 +1429,107 @@ graph TD
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)
+
+## 十、边界测试：核心 crate 的编译错误
+
+### 10.1 边界测试：`serde` 的派生宏与字段缺失（编译错误）
+
+```rust,compile_fail
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Config {
+    host: String,
+    port: u16,
+}
+
+fn main() {
+    let json = r#"{"host": "localhost"}"#; // 缺少 port
+    // ❌ 编译错误: Serde 在编译期生成反序列化代码，运行期报错
+    // let cfg: Config = serde_json::from_str(json).unwrap(); // panic!
+}
+```
+
+> **修正**: `serde` 的 `Deserialize` derive 宏在编译期生成反序列化逻辑，运行时检查字段存在性。缺失字段返回 `Err`，不是编译错误。这与 Protobuf 的 schema 演化不同——serde 默认严格，不自动填充默认值。使用 `#[serde(default)]` 可使字段可选，使用 `#[serde(default = "default_port")]` 指定默认值。Rust 生态的序列化是"显式契约"——数据结构定义即契约，运行时验证契约一致性。[来源: [Serde Documentation](https://serde.rs/)]
+
+### 10.2 边界测试：`tokio` 运行时未启动时调用 `spawn`（运行时 panic）
+
+```rust
+use tokio::task;
+
+fn main() {
+    // ❌ 运行时 panic: there is no reactor running
+    // let handle = task::spawn(async { 42 });
+}
+
+// 正确: 在 #[tokio::main] 中调用
+#[tokio::main]
+async fn main_fixed() {
+    let handle = task::spawn(async { 42 });
+    let result = handle.await.unwrap();
+    println!("{}", result);
+}
+```
+
+> **修正**: Tokio 的 `spawn` 需要在活跃的运行时上下文中执行。运行时通过线程局部存储维护当前上下文。在主线程直接调用 `spawn` 而不启动运行时会 panic。这与 Go 的 `go` 关键字（隐式全局调度器）不同——Rust 的运行时是显式的，允许一个程序中同时存在多个隔离的运行时实例。这种显式性增加了代码量，但提供了更精细的控制（如为不同工作负载配置不同线程池）。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
+### 10.3 边界测试：`thiserror` 与 `anyhow` 的混用（编译错误）
+
+```rust,compile_fail
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+enum AppError {
+    #[error("io error")]
+    Io(#[from] std::io::Error),
+}
+
+fn may_fail() -> anyhow::Result<i32> {
+    // ❌ 编译错误: anyhow::Result 与自定义 Error 的类型转换
+    let x = std::fs::read_to_string("file.txt")?;
+    Ok(x.parse()?)
+}
+
+fn main() {
+    let _ = may_fail();
+}
+```
+
+> **修正**: `thiserror` 用于库（定义结构化错误类型），`anyhow` 用于应用（快速错误处理）。`anyhow::Result<T>` 是 `Result<T, anyhow::Error>` 的别名，`anyhow::Error` 可自动包裹任何实现 `std::error::Error` 的类型。`may_fail` 中 `?` 从 `std::io::Error` 转换为 `anyhow::Error` 是自动的（通过 `From`），但若函数签名是 `Result<T, AppError>`，`anyhow::Error` 不能自动转换。解决方案：1) 库函数返回 `thiserror` 类型，应用层用 `anyhow` 包裹；2) 统一使用 `anyhow`（牺牲结构化错误）；3) 统一使用 `thiserror`（增加样板）。这与 Go 的 `error` 接口（统一，无结构化）或 Java 的异常层次（结构化，但繁琐）不同——Rust 的错误生态提供分层选择，而非一刀切。[来源: [thiserror Documentation](https://docs.rs/thiserror/)] · [来源: [anyhow Documentation](https://docs.rs/anyhow/)]
+
+### 10.4 边界测试：`tokio` 与 `async-std` 的 channel 不兼容（编译错误）
+
+```rust,compile_fail
+use tokio::sync::mpsc;
+
+async fn tokio_task() {
+    let (tx, mut rx) = mpsc::channel(10);
+    // ❌ 编译错误: 不能在 async-std runtime 中直接使用 tokio 的 channel
+    // async_std::task::spawn(async move {
+    //     tx.send(1).await.unwrap();
+    // });
+    // tokio::sync::mpsc 依赖 tokio 的 reactor
+}
+```
+
+> **修正**: `tokio::sync::mpsc` 的 `send`/`recv` 是异步方法，底层依赖 tokio 的 reactor（epoll/kqueue/IOCP）进行任务唤醒。在 async-std 或 smol 的 runtime 上调用 tokio channel，可能导致任务永不唤醒（deadlock）或 panic。跨 runtime 的互操作性是 Rust 异步生态的分裂点：1) 计算型 future（无 I/O）可跨 runtime 使用；2) I/O 和定时器必须匹配 runtime；3) `async-compat` crate 提供适配层，但有开销。这与 Go 的单一 runtime（所有 goroutine 由 Go scheduler 管理）或 JavaScript 的单一事件循环不同——Rust 的异步生态允许多个 runtime 竞争，但要求开发者明确选择和隔离。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [async-std Documentation](https://docs.rs/async-std/)]
+
+### 10.5 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时性能下降）
+
+```rust,compile_fail
+use rayon::prelude::*;
+
+fn main() {
+    let v: Vec<i32> = (0..100).collect();
+
+    // ⚠️ 性能下降: 任务过小，线程同步开销超过并行收益
+    let sum: i32 = v.par_iter()
+        .map(|x| x * 2)
+        .sum();
+
+    // 正确: 确保任务有足够工作量，或使用 bridge 控制粒度
+    println!("{}", sum);
+}
+```
+
+> **修正**: `rayon` 是 Rust 的数据并行库，基于 work-stealing 线程池自动并行化迭代器。但**任务粒度**是关键：1) 任务太小（如 `x * 2`）→ 线程调度开销 > 并行收益；2) 任务太大 → 负载不均衡，某些线程空闲。`rayon` 的启发式：通过 `join` 递归分割任务，但无法控制最小分割粒度。优化：1) 使用 `par_chunks` 增加每任务工作量；2) 使用 `with_min_len(n)` 设置最小长度；3) 只在计算密集型操作中使用 `par_iter`（I/O 密集型用 `tokio`）。这与 Java 的 `ForkJoinPool`（类似 work-stealing）或 C++ 的 `std::execution::par`（C++17，类似抽象）类似——数据并行的性能取决于任务粒度，无万能配置。[来源: [rayon Documentation](https://docs.rs/rayon/)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]

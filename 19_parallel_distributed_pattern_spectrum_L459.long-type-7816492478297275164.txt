@@ -1,0 +1,1 @@
+{closure@target\tmp\verify_compile_fail\19_parallel_distributed_pattern_spectrum_L459.rs:8:19: 8:26}

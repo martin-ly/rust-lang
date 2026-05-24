@@ -531,3 +531,90 @@ fn main() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+## 十、边界测试：形式化生态塔的编译错误
+
+### 10.1 边界测试：unsafe 抽象的不变式违反（编译错误）
+
+```rust,compile_fail
+pub struct SafeVec<T> {
+    inner: Vec<T>,
+}
+
+impl<T> SafeVec<T> {
+    pub fn new() -> Self {
+        SafeVec { inner: Vec::new() }
+    }
+
+    // 不安全: 公开暴露内部原始指针
+    pub fn as_mut_ptr(&mut self) -> *mut T {
+        self.inner.as_mut_ptr()
+    }
+}
+
+fn main() {
+    let mut v = SafeVec::new();
+    let ptr = v.as_mut_ptr();
+    // ❌ 运行时 UB:  SafeVec 的不变式被外部破坏
+    // 若后续 push 导致重新分配，ptr 悬垂
+    v.inner.push(1);
+    unsafe { *ptr = 2; } // UB!
+}
+```
+
+> **修正**: `SafeVec` 的错误在于公开暴露了内部 `Vec` 的原始指针，破坏了封装不变式（invariant）：指针只在 `Vec` 不重新分配时有效。安全的 unsafe 抽象必须：1) 将 `unsafe` 操作限制在模块内部；2) 文档化不变式；3) 确保公开 API 无法破坏不变式。正确做法：`as_mut_ptr` 应标记为 `unsafe pub fn`，要求调用者承诺遵守不变式，或完全不暴露指针。Rust 的模块系统（`pub` vs `pub(crate)`）是安全边界的关键工具。这与 C++ 的 `private`（可绕过，`friend` 可破坏）或 Java 的 `protected`（子类可访问）不同——Rust 的封装是编译期强制的，配合 unsafe 形成清晰的安全契约。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：FFI 的类型签名不匹配（编译错误/运行时 UB）
+
+```rust,compile_fail
+extern "C" {
+    // 假设 C 库函数: int process(const char* input, size_t len);
+    fn process(input: *const u8, len: usize) -> i32;
+}
+
+fn call_process(s: &str) -> i32 {
+    unsafe {
+        // ❌ 运行时 UB: Rust 的 &str 不是以 NUL 结尾的 C 字符串
+        process(s.as_ptr(), s.len())
+    }
+}
+```
+
+> **修正**: Rust FFI 要求 Rust 声明的函数签名与 C 库的实际签名完全匹配。`&str` 是 UTF-8 字节切片，不以 NUL（`\0`）结尾，而 C 的 `const char*` 通常期望 NUL 终止字符串。直接传递 `s.as_ptr()` 可能导致 C 函数读取越界（寻找 NUL 终止符）。正确做法：使用 `CString::new(s).unwrap()` 分配带 NUL 终止符的 `CString`，传递 `.as_ptr()`，并确保 `CString` 在 C 函数返回前不被释放。更隐蔽的错误是整数类型：`c_int` vs `i32` 在大多数平台相同，但在某些嵌入式平台（16位 `int`）不同。`libc` crate 提供平台无关的 C 类型别名，应优先使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] · [来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)]
+
+### 10.6 边界测试：形式化规格与实现漂移的长期维护（逻辑错误）
+
+```rust,compile_fail
+// 规格（Prusti 注解）:
+// #[requires(n >= 0)]
+// #[ensures(result >= 0)]
+// fn factorial(n: i32) -> i32 { ... }
+
+// 实现更新后，忘记更新规格:
+fn factorial(n: i32) -> i32 {
+    // ❌ 逻辑错误: 若实现改为返回 i64，规格仍说 i32，验证通过但语义漂移
+    // 或实现添加了负数支持，但规格仍要求 n >= 0
+    if n <= 1 { 1 } else { n * factorial(n - 1) }
+}
+```
+
+> **修正**: 形式化规格与代码的**同步**是长期维护的挑战：1) 重构代码时忘记更新规格；2) 规格注释与实现逻辑不一致；3) 新开发者不理解规格语义，修改时破坏不变式。缓解策略：1) CI 中运行形式化验证工具（Kani、Prusti），规格漂移时失败；2) 将规格作为代码审查的强制环节；3) 使用更轻量的契约（`debug_assert!`、`contracts` crate），与实现更接近。这与文档与代码的同步（同样困难）或测试与代码的同步（TDD 要求先写测试）类似——形式化规格是比测试和文档更强的契约，但维护成本也更高。Rust 的宏系统可将规格嵌入代码（`#[requires(...)]`），减少漂移，但无法完全消除。[来源: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Kani Documentation](https://model-checking.github.io/kani/)]
+
+### 10.5 边界测试：形式化生态的工具链碎片化与标准不统一（工程采纳障碍）
+
+```rust,compile_fail
+// ❌ 工程障碍: 形式化工具使用不同规约语言，无法互操作
+// Kani 用 Rust 内联属性; Prusti 用 #[requires]/#[ensures];
+// Creusot 用 WhyML 逻辑; Flux 用精炼类型签名
+
+#[kani::proof]
+#[kani::unwind(5)]
+fn verify_with_kani(x: u32) {
+    assert!(x >= 0); // 总是成立，但 kani 检查有界状态空间
+}
+
+// 同一性质无法用单一工具覆盖所有 Rust 代码
+// 形式化生态的"塔"需要多层互补工具
+```
+
+> **修正**: Rust 形式化生态的**碎片化**是客观现实：1) **模型检查**（Kani）：适合验证有限状态机、协议，自动但受状态爆炸限制；2) **霍尔逻辑**（Prusti）：适合函数契约，需注解但支持循环不变量；3) **分离逻辑**（Creusot）：适合堆数据结构，规约强但学习曲线陡；4) **精炼类型**（Flux）：轻量，与类型系统融合，但表达能力有限。无单一工具覆盖全部场景，工业采纳策略：1) 安全关键模块用最强工具（Prusti/Creusot）；2) 协议层用模型检查（Kani）；3) 通用代码用类型系统 + 测试。这与 Coq/Isabelle（统一证明语言，通用但工程成本高）或 Java 的 KeY（单一工具覆盖）不同——Rust 的形式化生态是**互补工具链**，每层解决不同问题，但互操作性差。标准化方向：aegis（统一前端）、hax（提取到 F*）尝试桥接，但成熟度低。[来源: [Rust Formal Methods](https://rust-formal-methods.github.io/)] · [来源: [Kani + Rust Verification](https://model-checking.github.io/kani/)]

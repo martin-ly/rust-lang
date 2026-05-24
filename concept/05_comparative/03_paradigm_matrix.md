@@ -977,3 +977,111 @@ fn process(data: Vec<String>) -> Vec<String> {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [执行模型同构](./05_execution_model_isomorphism.md) · [类型论](../04_formal/02_type_theory.md)
+
+## 十、边界测试：范式矩阵中的编译错误
+
+### 10.1 边界测试：命令式与函数式的边界（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut sum = 0;
+    let data = vec![1, 2, 3];
+    // ❌ 编译错误: cannot borrow `sum` as mutable more than once
+    // 闭包捕获 &mut sum，但外部也持有 sum
+    data.iter().for_each(|x| {
+        sum += x; // 闭包以 &mut 捕获 sum
+    });
+    println!("{}", sum);
+}
+
+// 正确: 使用 fold（函数式）或释放闭包后访问
+fn fixed() {
+    let data = vec![1, 2, 3];
+    let sum: i32 = data.iter().fold(0, |acc, x| acc + x); // ✅ 函数式
+    println!("{}", sum);
+}
+```
+
+> **修正**: Rust 的所有权系统在命令式编程（可变变量）和函数式编程（纯函数组合）之间建立了严格边界。闭包捕获环境变量时，若需要可变访问，则外部不能同时访问该变量。`fold` 将可变状态封装为累加器参数，避免了共享可变状态的问题。这体现了 Rust 的多范式融合——命令式的性能（无闭包分配）与函数式的安全（无数据竞争）通过所有权系统统一。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：面向对象与 trait 的封装差异（编译错误）
+
+```rust,compile_fail
+mod inner {
+    pub struct Config {
+        pub value: i32, // 公开字段
+    }
+}
+
+fn main() {
+    let c = inner::Config { value: 42 };
+    // ❌ 编译错误: 若 value 改为私有，以下代码失效
+    // Rust 的封装是模块级别的，不是对象级别的
+    println!("{}", c.value);
+}
+
+// 正确: 使用 getter/setter 封装
+mod inner_fixed {
+    pub struct Config {
+        value: i32, // 私有字段
+    }
+    
+    impl Config {
+        pub fn new(v: i32) -> Self { Self { value: v } }
+        pub fn value(&self) -> i32 { self.value }
+    }
+}
+```
+
+> **修正**: Rust 没有 `class` 关键字，封装通过模块（`mod`）和可见性修饰符（`pub`）实现。结构体字段默认私有，方法默认私有。这与 Java/C++ 的"类即封装边界"不同——Rust 的封装边界是模块，一个模块内的多个类型可互相访问私有字段。trait 只定义行为接口，不包含字段。这种设计鼓励"组合优于继承"，通过 trait 实现多态，通过模块实现封装。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：多范式代码的 trait bound 爆炸（编译错误）
+
+```rust,compile_fail
+trait Serialize {}
+trait Deserialize {}
+trait Clone {}
+trait Debug {}
+
+fn process<T>(x: T)
+where
+    T: Serialize + Deserialize + Clone + Debug,
+{
+    println!("{:?}", x);
+}
+
+// ❌ 编译错误/设计问题: 随着需求增加，trait bound 线性增长
+// fn process2<T>(x: T)
+// where
+//     T: Serialize + Deserialize + Clone + Debug + Send + Sync + Default + PartialEq,
+// { }
+```
+
+> **修正**: Rust 的多范式特性（OOP 的 trait、函数式的高阶函数、过程式的显式控制流）在组合时产生**trait bound 爆炸**：复杂函数需要大量 trait bound 约束参数。解决方案：1) 使用**超级 trait**（`trait MyTrait: Serialize + Clone + Debug {}`）封装常用组合；2) 使用 `where` 从句替代内联 bound，提高可读性；3) 使用关联类型减少泛型参数。这与 C++ 的 `concept`（C++20，类似超级 trait，`requires` 约束可组合）或 Haskell 的 typeclass 层次（`class (Eq a, Show a) => Ord a`）类似——Rust 的超级 trait 和 `where` 从句提供了管理复杂约束的工具，但需要显式设计。这与 Go 的隐式接口（无 bound，无爆炸）或 Java 的泛型通配符（`<? extends T & U>` 有限）不同——Rust 的显式约束是类型安全的代价。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+
+### 10.4 边界测试：函数式与命令式的内存布局冲突（逻辑错误）
+
+```rust,compile_fail
+fn functional_style(data: Vec<i32>) -> Vec<i32> {
+    data.into_iter().map(|x| x * 2).collect()
+}
+
+fn imperative_style(data: &mut Vec<i32>) {
+    for x in data.iter_mut() {
+        *x *= 2;
+    }
+}
+
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let v2 = functional_style(v);
+    // ❌ 编译错误: v 被移动到 functional_style，不能再用
+    // imperative_style(&mut v); // v 已移动
+    
+    // 正确: 先命令式修改，或 clone 后函数式处理
+    let mut v3 = vec![1, 2, 3];
+    imperative_style(&mut v3);
+}
+```
+
+> **修正**: 函数式风格（不可变数据、转换生成新值）与命令式风格（可变状态、原地修改）在 Rust 中都有支持，但**所有权模型强制选择**。函数式风格消耗输入（`into_iter` 移动 `Vec`），命令式风格借用输入（`&mut Vec`）。混合使用时的常见错误：先移动后尝试借用。设计权衡：1) 函数式更安全（无别名，无副作用），但可能分配更多内存；2) 命令式更高效（原地修改），但增加认知负担（追踪状态变化）。Rust 的类型系统帮助做出明确选择：函数式 API 接受值（消耗），命令式 API 接受可变引用。这与 Haskell 的纯函数（默认不可变，通过 Monad 模拟状态）或 C 的命令式（默认可变，无函数式支持）不同——Rust 在中间位置，两种范式都可用，但类型系统区分其行为。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]

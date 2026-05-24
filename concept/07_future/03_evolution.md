@@ -1470,3 +1470,99 @@ graph TD
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
 > **相关文件**: [版本跟踪](../07_future/05_rust_version_tracking.md) · [Effects 系统](../07_future/04_effects_system.md) · [能力图谱](../00_meta/competency_graph.md)
+
+## 十、边界测试：语言演进的编译错误
+
+### 10.1 边界测试：Edition 迁移中的关键字冲突（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: `async` 在 Rust 2018+ 中是关键字
+    // 旧代码中可能使用 async 作为变量名
+    let async = 5; // 在 Edition 2018 中编译错误
+}
+
+// 正确: 使用 raw identifier
+fn fixed() {
+    let r#async = 5; // ✅ 使用 r# 前缀保留旧标识符
+    println!("{}", r#async);
+}
+```
+
+> **修正**: Rust 的 Edition 机制允许语言在不破坏向后兼容的情况下演进。新关键字（如 `async`、`await`、`try`）在旧 Edition 中不是关键字，但在新 Edition 中是。通过 **raw identifier**（`r#name`）语法，即使名称与新关键字冲突，仍可继续使用。这是 Rust 多 Edition 共存策略的关键——同一 crate 可以依赖不同 Edition 的库，编译器正确处理关键字差异。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：`const generics` 的泛型参数推断（编译错误）
+
+```rust,compile_fail
+fn array_size<const N: usize>(arr: [i32; N]) -> usize {
+    N
+}
+
+fn main() {
+    let arr = [1, 2, 3];
+    // ❌ 编译错误: cannot infer the value of const parameter `N`
+    // 在 Rust 1.79 之前，const generic 参数有时需要显式标注
+    let size = array_size(arr);
+}
+
+// 正确: 显式标注或让编译器推断
+fn fixed() {
+    let arr = [1, 2, 3];
+    let size = array_size::<3>(arr); // ✅ 显式标注
+    println!("{}", size);
+}
+```
+
+> **修正**: 常量泛型（const generics）从 Rust 1.51 起稳定，但推断能力随版本逐步增强。早期版本在某些上下文中无法推断 `const N: usize`，需要显式标注或使用 `_` 占位符。Rust 1.79+ 通过 `inline const` 和增强推断减少了此类需求。这反映了 Rust 的演进策略：核心功能先稳定（最小可行产品），然后在后续版本中逐步增强人体工程学和推断能力，避免一次性引入过多复杂性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+## 十、边界测试：语言演进的编译错误（续）
+
+### 10.3 边界测试：GAT（泛型关联类型）的不稳定历史（编译错误）
+
+```rust,compile_fail
+trait LendingIterator {
+    type Item<'a> where Self: 'a; // GAT
+    fn next(&mut self) -> Option<Self::Item<'_>>;
+}
+
+// ❌ 编译错误: 在 Rust 1.65 之前，GAT 不稳定
+// 无法定义生命周期依赖的关联类型
+
+// 正确: Rust 1.65+ GAT 稳定
+impl LendingIterator for Vec<String> {
+    type Item<'a> = &'a str where Self: 'a;
+    fn next(&mut self) -> Option<Self::Item<'_>> {
+        self.pop().map(|s| s.leak(..)) // 简化示例
+    }
+}
+```
+
+> **修正**: 泛型关联类型（GAT，Generic Associated Types）是 Rust 类型系统的重大扩展，允许关联类型带有自己的泛型参数（如 `type Item<'a>`）。这在 Rust 1.65（2022-11）稳定。GAT 之前， Lending Iterator（返回对集合内部元素的引用）无法安全表达——`Iterator::Item` 不能有生命周期参数。GAT 的引入是 Rust 从"足够好"向"表达能力接近 Haskell"演进的关键一步，使流式解析器、借用迭代器等模式成为可能。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+
+### 10.4 边界测试： let-else 语法与模式匹配（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let opt = Some(5);
+    // ❌ 编译错误: 在 Rust 1.65 之前，let-else 语法不稳定
+    // let Some(x) = opt else { return; };
+
+    // 旧方式: match
+    match opt {
+        Some(x) => println!("{}", x),
+        None => return,
+    }
+}
+
+// 正确: Rust 1.65+ let-else 稳定
+fn fixed() {
+    let opt = Some(5);
+    let Some(x) = opt else {
+        println!("none");
+        return;
+    };
+    println!("{}", x); // ✅ x 在此作用域可用
+}
+```
+
+> **修正**: `let-else`（Rust 1.65 稳定）是模式匹配的语法糖，允许在绑定失败时执行发散代码块（`return`、`break`、`panic!`）。它简化了"提取值，否则退出"的常见模式，避免了 `match` 或 `if let` 的嵌套。这与 Swift 的 `guard let` 或 Kotlin 的 `?: return` 类似，但 Rust 的版本更通用——支持任意模式（不仅是 `Some`），且 else 块必须是发散的（否则编译错误）。这是 Rust 语法演进中"减少样板代码，但不牺牲显式性"的典范。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

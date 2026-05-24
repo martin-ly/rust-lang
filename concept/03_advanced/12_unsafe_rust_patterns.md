@@ -33,6 +33,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Unsafe Rust 模式的编译错误](#十边界测试unsafe-rust-模式的编译错误)
+    - [10.1 边界测试：自定义 `Drop` 中的 `mem::forget` 循环（运行时 UB）](#101-边界测试自定义-drop-中的-memforget-循环运行时-ub)
+    - [10.2 边界测试：`unsafe impl` 的 trait 契约违反（编译错误 / 运行时 UB）](#102-边界测试unsafe-impl-的-trait-契约违反编译错误--运行时-ub)
 
 ---
 
@@ -699,3 +702,147 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：Unsafe Rust 模式的编译错误
+
+### 10.1 边界测试：自定义 `Drop` 中的 `mem::forget` 循环（运行时 UB）
+
+```rust
+struct BadDrop {
+    ptr: *mut u8,
+}
+
+impl Drop for BadDrop {
+    fn drop(&mut self) {
+        // ⚠️ 运行时 UB: 若 drop 中 panic，且 panic 处理再次访问 self
+        unsafe {
+            std::alloc::dealloc(self.ptr, std::alloc::Layout::new::<u8>());
+        }
+    }
+}
+
+fn main() {
+    let layout = std::alloc::Layout::new::<u8>();
+    let ptr = unsafe { std::alloc::alloc(layout) };
+    let bad = BadDrop { ptr };
+    // bad 离开作用域时 drop → 释放内存
+    // 若之后有 use-after-free，Rust 无法检测
+}
+
+// 正确: 使用 Option 标记是否已释放
+struct SafeDrop {
+    ptr: Option<*mut u8>,
+    layout: std::alloc::Layout,
+}
+
+impl Drop for SafeDrop {
+    fn drop(&mut self) {
+        if let Some(ptr) = self.ptr.take() {
+            unsafe { std::alloc::dealloc(ptr, self.layout); }
+        }
+    }
+}
+```
+
+> **修正**: 自定义 `Drop` 中的 unsafe 操作必须处理 panic 安全（panic safety）。若 `Drop` 中 panic（如 `dealloc` 失败），栈展开会调用其他值的 `Drop`，可能访问已释放内存。使用 `Option::take` 模式确保内存只释放一次，即使 `Drop` 被重复调用（如 panic 后）。这与 C++ 的异常安全（exception safety）基本保证、强保证、不抛异常分级类似。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：`unsafe impl` 的 trait 契约违反（编译错误 / 运行时 UB）
+
+```rust,compile_fail
+use std::sync::Arc;
+
+struct NotThreadSafe {
+    data: std::cell::RefCell<i32>, // RefCell 不是 Sync
+}
+
+// ❌ 编译错误: `RefCell<i32>` cannot be shared between threads safely
+// 即使 unsafe impl，编译器仍可能拒绝明显不安全的实现
+unsafe impl Sync for NotThreadSafe {}
+
+fn main() {
+    let x = Arc::new(NotThreadSafe { data: RefCell::new(0) });
+    let x2 = Arc::clone(&x);
+    std::thread::spawn(move || {
+        x2.data.borrow_mut().add(1); // 数据竞争！
+    });
+}
+
+// 正确: 使用 Mutex 实现线程安全
+use std::sync::Mutex;
+
+struct ThreadSafe {
+    data: Mutex<i32>, // ✅ Mutex 是 Sync
+}
+
+unsafe impl Sync for ThreadSafe {} // 安全，因为 Mutex 保证同步
+```
+
+> **修正**: `unsafe impl Sync` / `unsafe impl Send` 是 Rust 中最危险的操作之一——它告诉编译器"我保证此类型在多线程环境下是安全的"，但编译器**不验证**此保证。`RefCell` 内部使用非原子借用计数，多线程共享会导致数据竞争。正确的线程安全必须通过 `Mutex`、`RwLock`、原子类型等同步原语实现。`unsafe impl Sync` 仅在封装了底层同步机制时使用（如标准库的 `Mutex` 本身）。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：自引用结构的 `Pin` 误用（编译错误/运行时 UB）
+
+```rust,compile_fail
+use std::pin::Pin;
+
+struct SelfRef {
+    data: String,
+    ptr: *const String, // 指向 data
+}
+
+impl SelfRef {
+    fn new() -> Self {
+        let mut s = SelfRef {
+            data: String::from("hello"),
+            ptr: std::ptr::null(),
+        };
+        s.ptr = &s.data;
+        // ❌ 运行时 UB: 返回后 s 被移动，ptr 悬垂
+        s
+    }
+}
+
+fn main() {
+    let _sr = SelfRef::new();
+}
+```
+
+> **修正**: 自引用结构（字段 A 引用字段 B）在 Rust 中无法直接实现，因为 struct 是**可移动的**——赋值、传参、返回都可能改变内存地址，使自引用字段悬垂。`Pin<&mut T>` 是解决方案：`T` 被"固定"在内存中，不能移动（除非 `T: Unpin`）。正确实现：1) `new` 返回 `Pin<Box<SelfRef>>`；2) 使用 `unsafe` 设置自引用指针；3) 确保 `SelfRef: !Unpin`（通过 `std::marker::PhantomPinned`）。这是 Rust 异步生态的核心模式：async 状态机是自引用的（局部变量引用其他局部变量），`Pin` 保证状态机在 `.await` 点不被移动。与 C++ 的 `std::pin`（C++20，类似概念但无 `Unpin` 区分）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 Pin 是类型系统的原生组成部分。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-04-pin.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/pinning.html)]
+
+### 10.4 边界测试：`MaybeUninit` 的数组初始化模式（编译错误）
+
+```rust,compile_fail
+use std::mem::MaybeUninit;
+
+fn main() {
+    // ❌ 编译错误/运行时 UB: 错误使用 MaybeUninit 数组
+    let mut arr: [MaybeUninit<String>; 3] = [MaybeUninit::uninit(); 3];
+    // 初始化第一个元素
+    arr[0].write(String::from("hello"));
+    
+    // 错误: 直接读取未初始化的 arr[1]
+    // let s = unsafe { arr[1].assume_init() }; // UB!
+    
+    // 正确: 只读取已初始化的元素
+    let s0 = unsafe { arr[0].assume_init() };
+    // 但 arr[0] 现在处于"已移动"状态，不能再次 assume_init
+}
+```
+
+> **修正**: `MaybeUninit<T>` 是 Rust 中处理部分初始化结构的底层原语。数组 `[MaybeUninit<T>; N]` 允许逐个元素初始化，但编译器不追踪哪些元素已初始化——这是开发者的责任。常见错误：1) `assume_init` 未初始化元素；2) 对已 `assume_init`（移动）的元素再次读取；3) `drop` 时未区分已初始化和未初始化元素。安全封装：`arrayvec` crate 的 `ArrayVec`（追踪长度），`smallvec` 的 `SmallVec`。对于固定大小数组，手动追踪初始化状态是唯一选择。这与 C 的 `malloc` + 部分初始化（无追踪，完全信任开发者）或 C++ 的 `std::optional<T[]>`（无标准支持）不同——Rust 的 `MaybeUninit` 提供了类型安全的基础，但上层追踪仍需手工实现。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/uninitialized.html)]
+
+### 10.5 边界测试：`std::ptr::read` 的重复读取（运行时 UB）
+
+```rust,compile_fail
+fn main() {
+    let x = String::from("hello");
+    let ptr = &x as *const String;
+    unsafe {
+        let s1 = std::ptr::read(ptr);
+        let s2 = std::ptr::read(ptr);
+        // ❌ 运行时 UB: s1 和 s2 都拥有同一堆内存
+        // 两次 Drop 导致 double free
+    }
+}
+```
+
+> **修正**: `std::ptr::read` 从指针位置按值读取，**复制所有权**（对非 `Copy` 类型）。同一位置的两次 `read` 产生两个拥有相同堆数据的所有者，drop 时双重释放。`read` 的使用前提：1) 指针有效且对齐；2) 读取后原位置不再使用（除非重新写入）；3) 不重复读取同一非 `Copy` 位置。安全替代：`ptr::copy`（移动，源位置失效）、`ptr::copy_nonoverlapping`（非重叠拷贝）、`Clone::clone_from_ptr`（手动克隆）。这与 C 的 `memcpy`（逐字节复制，无所有权概念）或 C++ 的 `std::uninitialized_copy`（类似 `read`，但范围操作）不同——Rust 的 `ptr::read` 在类型系统层面是"按值移动"，需谨慎使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/ptr/fn.read.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]

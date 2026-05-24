@@ -39,6 +39,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust for Linux 的编译错误](#十边界测试rust-for-linux-的编译错误)
+    - [10.1 边界测试：内核模块的 `no_std` 与标准库缺失（编译错误）](#101-边界测试内核模块的-no_std-与标准库缺失编译错误)
+    - [10.2 边界测试：内核锁的原子顺序与 `unsafe` 封装（编译错误）](#102-边界测试内核锁的原子顺序与-unsafe-封装编译错误)
+    - [10.3 边界测试：内核模块的 `no_std` 与 `alloc` 的谨慎使用（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-的谨慎使用编译错误)
+    - [10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时死锁）](#104-边界测试内核锁的-spinlock-与睡眠的互斥运行时死锁)
 
 ---
 
@@ -660,3 +665,84 @@ graph TD
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十、边界测试：Rust for Linux 的编译错误
+
+### 10.1 边界测试：内核模块的 `no_std` 与标准库缺失（编译错误）
+
+```rust,compile_fail
+#![no_std]
+#![no_main]
+
+// ❌ 编译错误: 内核模块不能使用 std
+use std::vec::Vec;
+
+fn init() -> i32 {
+    let mut v = Vec::new(); // Vec 需要全局分配器
+    v.push(1);
+    0
+}
+```
+
+> **修正**: Linux 内核模块使用 `#![no_std]`，标准库（`std`）不可用，只有核心库（`core`）和分配库（`alloc`）。`Vec`、`String`、`Box` 来自 `alloc`，但要求全局分配器——内核中的全局分配器是 `kmalloc`/`kfree` 的 Rust 封装。进一步限制：内核代码不能 panic（或 panic 必须调用 `BUG()`），不能使用 `unwrap()`，必须处理所有错误路径。`rust-for-linux` 项目提供 `kernel` crate，封装内核 API（`printk`、锁、工作队列、设备驱动抽象）。这与用户空间 Rust 开发截然不同——内核 Rust 是"在更严酷的沙盒中编程"，但类型系统仍提供内存安全和数据竞争自由。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Documentation](https://docs.kernel.org/rust/)]
+
+### 10.2 边界测试：内核锁的原子顺序与 `unsafe` 封装（编译错误）
+
+```rust,compile_fail
+use kernel::sync::SpinLock;
+
+struct DeviceData {
+    counter: i32,
+}
+
+static DATA: SpinLock<DeviceData> = SpinLock::new(DeviceData { counter: 0 });
+
+fn increment() {
+    // ❌ 编译错误: SpinLockGuard 的生命周期管理
+    let guard = DATA.lock();
+    guard.counter += 1;
+    // guard 在这里自动释放，但若需要跨函数传递:
+    // send_guard_to_other_context(guard); // 可能死锁或 UAF
+}
+```
+
+> **修正**: `rust-for-linux` 的 `SpinLock` 是内核自旋锁的安全封装：`lock()` 返回 `SpinLockGuard`，实现 `DerefMut` 允许可变访问，Drop 时释放锁。关键约束：1) `SpinLockGuard` 不能跨越 await 点（阻塞上下文）；2) 不能发送到其他 CPU（锁的 CPU 亲和性）；3) 中断上下文中必须使用 `irqsave` 变体（禁用中断防止死锁）。这些约束部分通过类型系统强制（`Send`/`Sync` bound），部分通过文档约定。违反约束不是编译错误，而是运行时死锁或数据损坏——这是内核编程的本质：某些约束无法完全静态检查。与用户空间的 `std::sync::Mutex`（可睡眠、跨线程安全）相比，内核锁更底层、约束更多。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Locking Documentation](https://docs.kernel.org/kernel-hacking/locking.html)]
+
+### 10.3 边界测试：内核模块的 `no_std` 与 `alloc` 的谨慎使用（编译错误）
+
+```rust,compile_fail
+#![no_std]
+
+extern crate alloc;
+use alloc::vec::Vec;
+
+fn init() -> i32 {
+    // ❌ 编译错误/运行时失败: 内核中的 alloc 依赖全局分配器
+    // 若内核配置无 slab allocator 或分配失败，panic
+    let mut v = Vec::new();
+    v.push(1);
+    0
+}
+```
+
+> **修正**: Linux 内核的 Rust 支持允许使用 `alloc`（`Vec`、`String`、`Box`），但内核环境比用户空间更严格：1) 堆分配可能失败（内存紧张），`alloc` 的 `oom=panic` 策略在 kernel 中不可接受；2) 分配是 GFP（Get Free Pages）标志敏感的（`GFP_KERNEL`、`GFP_ATOMIC`），`alloc` 默认使用 `GFP_KERNEL`（可睡眠），在中断上下文中非法；3) 内存碎片问题（内核无用户空间的 `malloc` 自由）。`rust-for-linux` 提供内核特定的分配 API：`kmalloc`（GFP 敏感）、`kzalloc`（零初始化）、`kfree`（释放）。Rust 代码需使用这些 API 替代标准 `alloc`。这与 C 的内核模块（直接使用 `kmalloc`/`kfree`）或 eBPF 的受限内存（无堆分配，仅栈和 map）类似——内核编程的内存管理是核心技能。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Memory Management](https://docs.kernel.org/core-api/memory-allocation.html)]
+
+### 10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时死锁）
+
+```rust,compile_fail
+use kernel::sync::SpinLock;
+
+static DATA: SpinLock<i32> = SpinLock::new(0);
+
+fn buggy_function() {
+    let guard = DATA.lock();
+    // ❌ 运行时死锁: 在持有 spinlock 时睡眠或调度
+    // kernel::sched::schedule(); // 非法!
+
+    // spinlock 是忙等待锁，持有期间不能睡眠
+    // 若需睡眠，应使用 mutex 或 rwsem
+    let _ = *guard;
+}
+```
+
+> **修正**: Linux 内核的锁类型与使用上下文严格绑定：1) **SpinLock**：忙等待，适用于短临界区、中断上下文、不可睡眠场景；2) **Mutex**：可睡眠，适用于长临界区、进程上下文；3) **RWSem**：读写锁，可睡眠。在持有 `SpinLock` 时睡眠是致命错误：当前 CPU 忙等待，调度器无法切换任务，若高优先级任务需同一锁，系统死锁。Rust 的 `rust-for-linux` 通过类型系统部分防止：`SpinLockGuard` 不实现 `Send`（不能跨线程/CPU），但无法静态检测睡眠操作——这需要更高级的效果系统（effect system）。这与用户空间的 `std::sync::Mutex`（总是可睡眠）或 `spin` crate 的 `Mutex`（用户态忙等待，无调度概念）不同——内核锁的上下文敏感性是底层编程的本质。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Locking](https://docs.kernel.org/kernel-hacking/locking.html)]

@@ -1238,3 +1238,120 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
 
 > **相关判定树**: [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树) · [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树)
+
+## 十、边界测试：类型论的编译错误
+
+### 10.1 边界测试：单位类型与空类型的混淆（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: () = (); // 单位类型，有一个值
+    let y: ! = loop {}; // 空类型（never type），无值
+    // ❌ 编译错误: `!` 在某些上下文中不能直接作为类型使用
+    // let z: ! = (); // () 不是 ! 的值
+}
+
+// 正确: 理解单位类型和空类型的区别
+fn unit_vs_never() {
+    let x: () = (); // ✅ 单位类型有一个 inhabitant
+    // let y: ! = panic!(); // ! 是空类型，无 inhabitant，可被强制转为任何类型
+    let z: i32 = panic!(); // ✅ ! → i32
+}
+```
+
+> **修正**: 在类型论中，**单位类型** `()`（unit）有一个值 `()`，对应逻辑中的真（`⊤`）。
+> **空类型** `!`（never）无值，对应逻辑中的假（`⊥`）。
+> `!` 是任何类型的子类型（`! <: T`），因为"假蕴含一切"（ex falso quodlibet）。
+> Rust 的 `!` 类型用于 `panic!()`、`loop {}`、`return` 等不返回的控制流。
+> 区分 `()` 和 `!` 是理解 Rust 错误处理（`Result<T, !>` 表示不会失败）和并发（`JoinHandle<!>` 表示线程永不结束）的关键。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：代数数据类型的穷尽匹配（编译错误）
+
+```rust,compile_fail
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+fn main() {
+    let x = Option::Some(5);
+    // ❌ 编译错误: non-exhaustive patterns: `None` not covered
+    match x {
+        Option::Some(v) => println!("{}", v),
+        // 缺少 None 分支
+    }
+}
+
+// 正确: 覆盖所有变体
+fn fixed() {
+    let x = Option::Some(5);
+    match x {
+        Option::Some(v) => println!("{}", v),
+        Option::None => println!("none"), // ✅ 穷尽匹配
+    }
+}
+```
+
+> **修正**: 代数数据类型（ADT）的 `match` 必须在编译期覆盖所有变体（exhaustiveness check）。
+> 这与类型论中的**和类型**（sum type，对应 `enum`）和**积类型**（product type，对应 `struct`）对应。
+> 和类型的值是"若干选择之一"，模式匹配是"对每个选择给出响应"。
+> 不覆盖所有变体在逻辑上是不完整的——相当于没有定义函数在某些输入上的行为。
+> Rust 编译器通过构造决策树（decision tree）验证穷尽性，这是类型安全的核心保证。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：GAT 与高阶类型（编译错误）
+
+```rust,compile_fail
+trait Iterable {
+    type Item<'a>;
+    type Iter<'a>: Iterator<Item = Self::Item<'a>>;
+
+    fn iter<'a>(&'a self) -> Self::Iter<'a>;
+}
+
+// ❌ 编译错误: GAT 的约束推导在复杂场景下失败
+impl Iterable for Vec<i32> {
+    type Item<'a> = &'a i32;
+    type Iter<'a> = std::slice::Iter<'a, i32>;
+
+    fn iter<'a>(&'a self) -> Self::Iter<'a> {
+        self.iter()
+    }
+}
+```
+
+> **修正**: GAT（Generic Associated Types）是 Rust 1.65 稳定的特性，允许关联类型带有自己的泛型参数。
+> 但 GAT 的**高阶类型**（higher-kinded type）表达能力有限：不能将 `Iterable::Iter` 作为高阶类型参数传递（如 `fn process<I: Iterable, F: for<'a> Fn(I::Iter<'a>)>`）。
+> 这是 Rust 类型系统的已知限制——HKT 在 Haskell 中是原生支持（`Functor f => f a`），在 Rust 中只能通过 GAT 近似。
+> 未来可能的扩展：`type_family` 或 `higher-ranked type constructors`，但设计复杂。
+> 当前 workaround：使用宏生成单态代码，或使用 trait 的关联类型链模拟 HKT。
+> 这与 C++ 的模板模板参数（`template<template<typename> class F>`，类似 HKT）或 Scala 的 higher-kinded types（通过类型构造器实现）不同——Rust 的 GAT 是向 HKT 迈出的半步，但尚未完全到达。
+> [来源: [Rust RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)] ·
+> [来源: [Type Theory](https://en.wikipedia.org/wiki/Type_theory)]
+
+### 10.4 边界测试：依赖类型与数组长度（编译错误）
+
+```rust,compile_fail
+fn array_len<T, const N: usize>(arr: &[T; N]) -> usize {
+    N
+}
+
+fn main() {
+    let arr = [1, 2, 3];
+    println!("{}", array_len(&arr)); // N = 3，编译期已知
+
+    // ❌ 编译错误: 依赖类型在 Rust 中有限
+    // 不能根据运行时值构造不同长度的数组类型
+    // let n = std::env::args().len();
+    // let arr: [i32; n] = [0; n]; // n 非 const
+}
+```
+
+> **修正**: 依赖类型（dependent types）是类型依赖值的类型系统（如 `Vec{n}` 表示长度为 `n` 的向量）。
+> Rust 的常量泛型（`const N: usize`）提供了**轻量级依赖类型**：数组长度 `[T; N]` 是类型的一部分，但 `N` 必须是编译期常量。
+> 运行时值（如 `args().len()`）不能用于类型构造。
+> 这与 Idris、Agda、Coq 的完全依赖类型（任意值可用于类型）或 C++ 的 `std::array<T, N>`（同样编译期常量）不同——Rust 在类型安全性和编译期复杂性间取平衡。
+> 未来可能的扩展：`const` 泛型表达式（`[T; N + 1]`）、依赖 trait bound，但完全依赖类型可能永远不会进入 Rust（与零成本抽象和编译速度冲突）。
+> [来源: [Dependent Types](https://en.wikipedia.org/wiki/Dependent_type)] ·
+> [来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)]

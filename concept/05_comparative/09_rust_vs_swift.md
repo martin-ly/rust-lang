@@ -679,3 +679,85 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：Rust 与 Swift 的编译错误对比
+
+### 10.1 边界测试：Swift 的 ARC 与 Rust 的所有权（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let s2 = s;
+    // ❌ 编译错误: borrow of moved value: `s`
+    // Rust 的所有权转移是显式的，s 被 move 后不可用
+    println!("{}", s);
+}
+
+// 正确: 使用 clone 显式复制
+fn fixed() {
+    let s = String::from("hello");
+    let s2 = s.clone(); // ✅ 显式复制
+    println!("{} {}", s, s2);
+}
+```
+
+> **Swift 对比**: Swift 使用 ARC（Automatic Reference Counting）管理内存——`String` 是引用类型，赋值时增加引用计数，原变量仍可用。Rust 的 `String` 是拥有所有权的值类型，赋值时 move（转移所有权），原变量失效。Swift 的 ARC 类似于 Rust 的 `Rc<T>`（引用计数），但 Swift 默认对所有类实例使用 ARC，而 Rust 默认使用所有权转移。Rust 的 move 语义消除了循环引用风险（除非显式使用 `Rc`），而 Swift 需要 `weak`/`unowned` 打破循环。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）
+
+```rust,compile_fail
+fn may_fail() -> Result<i32, String> {
+    Ok(42)
+}
+
+fn main() {
+    // ❌ 编译错误: `?` 只能在返回 Result/Option 的函数中使用
+    // 与 Swift 的 try? 不同，Rust 的 ? 要求函数签名兼容
+    let val = may_fail()?;
+    println!("{}", val);
+}
+
+// 正确: main 返回 Result
+fn main_fixed() -> Result<(), String> {
+    let val = may_fail()?; // ✅ 传播错误
+    println!("{}", val);
+    Ok(())
+}
+```
+
+> **Swift 对比**: Swift 的 `try?` 可在任何上下文中使用，将 throws 函数的结果转为 Optional（错误时返回 `nil`）。Rust 的 `?` 运算符只能在返回 `Result` 或 `Option` 的函数中使用，将错误自动传播给调用者。Swift 的 `guard let` 和 `if let` 对应 Rust 的 `match` 和 `if let`。Rust 的设计强制错误处理的一致性——不能在忽略错误的函数中悄悄丢弃 `Result`；Swift 更灵活，允许通过 `try?` 静默忽略错误。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用差异（运行时内存泄漏）
+
+```rust,compile_fail
+use std::rc::{Rc, RefCell};
+
+struct Node {
+    next: Option<Rc<RefCell<Node>>>,
+}
+
+fn main() {
+    let a = Rc::new(RefCell::new(Node { next: None }));
+    let b = Rc::new(RefCell::new(Node { next: Some(Rc::clone(&a)) }));
+    a.borrow_mut().next = Some(Rc::clone(&b));
+    // ❌ 运行时内存泄漏: Rc 循环引用，引用计数永不为 0
+    // Swift 的 ARC 同样问题，需 weak/unowned 引用打破循环
+}
+```
+
+> **修正**: Swift 使用 **ARC**（Automatic Reference Counting）管理内存，与 Rust 的 `Rc`/`Arc` 类似。两者都面临**循环引用**问题：强引用循环导致内存泄漏。Swift 的解决：`weak`（弱引用，可选，对象释放后自动 nil）、`unowned`（无主引用，非可选，但对象释放后访问崩溃）。Rust 的解决：`Weak`（弱引用，需 `upgrade()` 转为 `Rc`，可能失败）。Swift 的 ARC 是编译器插入的 retain/release，Rust 的 `Rc` 是显式引用计数类型。关键差异：Swift 的 `weak`/`unowned` 是语言关键字，Rust 的 `Weak` 是标准库类型。这与 Java 的 GC（自动检测循环引用）或 C++ 的 `std::shared_ptr`（`std::weak_ptr` 打破循环）类似——引用计数内存管理都需要开发者显式处理循环。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-06-reference-cycles.html)] · [来源: [Swift ARC Documentation](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/)]
+
+### 10.4 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let opt: Option<Option<i32>> = Some(Some(5));
+    // ❌ 编译错误: Rust 无 Swift 式的 Optional 链语法
+    // Swift: let x = opt??.advanced(by: 1)
+    // Rust 需显式展开:
+    let x = opt.and_then(|inner| inner.map(|v| v + 1));
+    println!("{:?}", x);
+}
+```
+
+> **修正**: Swift 的 **Optional chaining**（`?.`）和 **Optional binding**（`if let`、`guard let`）提供简洁的空安全操作。Rust 的 `?` 运算符和 `Option` 方法（`map`、`and_then`、`unwrap_or`）提供类似功能，但语法更显式。Swift 的 `?.` 可链式调用（`person?.address?.street?.uppercased()`），Rust 需 `person.as_ref()?.address.as_ref()?.street.to_uppercase()`（若使用 `Option` 包装每个字段）。Swift 的语法糖更友好，Rust 的方法链更灵活（可组合任意函数）。这与 Kotlin 的 `?.`、`let`、`run`（类似 Swift）或 Haskell 的 `Maybe` monad（`>>=` 绑定，类似 Rust 的 `and_then`）类似——空安全是现代语言的标配，实现方式因语言哲学而异。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Swift Optional Chaining](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/optionalchaining/)]

@@ -41,6 +41,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：闭包类型的编译错误](#十边界测试闭包类型的编译错误)
+    - [10.1 边界测试：闭包类型推断与 `fn` 指针的不兼容（编译错误）](#101-边界测试闭包类型推断与-fn-指针的不兼容编译错误)
+    - [10.2 边界测试：`dyn Fn` 与泛型闭包的性能差异（逻辑错误）](#102-边界测试dyn-fn-与泛型闭包的性能差异逻辑错误)
 
 ---
 
@@ -517,3 +520,100 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：闭包类型的编译错误
+
+### 10.1 边界测试：闭包类型推断与 `fn` 指针的不兼容（编译错误）
+
+```rust,compile_fail
+fn takes_fn(f: fn(i32) -> i32) -> i32 {
+    f(42)
+}
+
+fn main() {
+    let multiplier = 2;
+    let closure = |x| x * multiplier; // 捕获环境变量
+    // ❌ 编译错误: expected fn pointer, found closure
+    // 闭包捕获环境后不是 fn 指针，而是匿名结构体
+    takes_fn(closure);
+}
+
+// 正确: 不捕获环境的闭包可强制转为 fn 指针
+fn fixed() {
+    let closure = |x: i32| x * 2; // ✅ 不捕获环境
+    takes_fn(closure); // ✅ 强制转换: closure → fn pointer
+}
+```
+
+> **修正**: Rust 的闭包是匿名结构体，实现 `Fn`/`FnMut`/`FnOnce` trait。只有**不捕获环境**的闭包可以强制转换为函数指针（`fn`）。捕获环境变量的闭包有唯一的匿名类型，不能当作 `fn` 使用。这类似于 C++ 的 lambda——捕获变量的 lambda 不能转换为函数指针，无捕获的可以。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：`dyn Fn` 与泛型闭包的性能差异（逻辑错误）
+
+```rust
+fn call_dynamic(f: &dyn Fn(i32) -> i32) -> i32 {
+    f(42) // 动态分发（vtable 查找）
+}
+
+fn call_generic<F: Fn(i32) -> i32>(f: F) -> i32 {
+    f(42) // 静态单态化（内联）
+}
+
+fn main() {
+    let f = |x| x + 1;
+    // ⚠️ 逻辑错误: 不必要的动态分发
+    let r1 = call_dynamic(&f); // 有运行时开销
+    let r2 = call_generic(f);  // 零开销
+    println!("{} {}", r1, r2);
+}
+```
+
+> **修正**: `dyn Fn` 使用动态分发（vtable），有间接调用开销。泛型 `F: Fn` 通过单态化生成直接调用，无运行时开销。在性能关键路径上，优先使用泛型而非 trait object。这与 C++ 的模板 vs 虚函数对比一致——Rust 的零成本抽象要求显式选择静态或动态分发。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：`Fn` trait 的自动实现与 `move` 闭包（编译错误）
+
+```rust,compile_fail
+fn call_fn(f: impl Fn()) {
+    f();
+}
+
+fn main() {
+    let s = String::from("hello");
+    let closure = || {
+        let _t = s; // 在闭包内部移动 s
+    };
+    // ❌ 编译错误: `|| { let _t = s; }` 实现 `FnOnce`，不是 `Fn`
+    call_fn(closure);
+}
+```
+
+> **修正**: 闭包根据捕获变量的使用方式自动实现 `Fn`、`FnMut`、`FnOnce`：只读引用捕获 → `Fn`（可多次调用）；可变引用捕获 → `FnMut`（可多次调用，需 `&mut`）；值捕获/移动 → `FnOnce`（只能调用一次，因为值被消耗）。`let _t = s` 在闭包体内移动 `s`，因此闭包只能调用一次（`FnOnce`）。若需要 `Fn` bound，闭包不能消耗捕获变量——应使用 `let _t = &s` 或 `let _t = s.clone()`。这与 JavaScript 的闭包（总是引用捕获，无所有权概念）或 C++ 的 lambda（值捕获可复制，除非 `std::move`）不同——Rust 的闭包类型系统自动推断最严格的 trait 实现，约束调用方式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ops/trait.Fn.html)]
+
+### 10.4 边界测试：闭包递归的类型推断失败（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: 递归闭包的类型无法推断
+    let fib = |n: i32| -> i32 {
+        if n <= 1 { n } else { fib(n - 1) + fib(n - 2) }
+    };
+    println!("{}", fib(10));
+}
+```
+
+> **修正**: Rust 的闭包类型推断是单向的——编译器需要知道闭包的完整类型才能生成代码，但递归闭包在定义时引用自身，形成循环依赖。解决方案：1) 使用 `fn` 函数（有明确类型）；2) 使用 `Box<dyn Fn(i32) -> i32>` 或 `Rc<dyn Fn(i32) -> i32>` 延迟类型解析；3) 使用 Y 组合子或固定点组合子（函数式编程技巧）。这与 Haskell 的递归 let（`let fib n = ... in fib 10`， Hindley-Milner 类型推断自动处理递归）或 JavaScript（无静态类型，无此问题）不同——Rust 的类型系统要求所有类型在编译期解析，递归闭包的自引用需要通过间接层（指针、trait 对象）打破循环。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html)]
+
+### 10.5 边界测试：闭包在 `match` 臂中的类型推断（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let f = match true {
+        true => |x: i32| x + 1,
+        false => |x: i32| x * 2,
+    };
+    // ❌ 编译错误: 每个闭包有唯一类型，即使签名相同
+    // match 臂要求统一类型
+    println!("{}", f(5));
+}
+```
+
+> **修正**: Rust 中每个闭包表达式有**唯一的匿名类型**，即使捕获环境和签名完全相同。`match` 要求所有臂返回同一类型，因此两个不同的闭包不能直接作为 match 结果。解决方案：1) 使用函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）：`match true { true => (|x: i32| x + 1) as fn(i32) -> i32, ... }`；2) 使用 `Box<dyn Fn(i32) -> i32>`（有堆分配）；3) 使用枚举包装不同闭包，手动分发。这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 可统一）或 JavaScript 的函数（无类型差异）不同——Rust 的闭包类型系统在提供零成本抽象的同时，增加了类型操作的复杂性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]

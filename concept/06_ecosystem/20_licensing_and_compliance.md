@@ -35,6 +35,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：许可证与合规的编译错误](#十边界测试许可证与合规的编译错误)
+    - [10.1 边界测试：`cargo deny` 的许可证冲突（编译错误/构建失败）](#101-边界测试cargo-deny-的许可证冲突编译错误构建失败)
+    - [10.2 边界测试：`#[forbid(unsafe_code)]` 与依赖的 unsafe（编译错误）](#102-边界测试forbidunsafe_code-与依赖的-unsafe编译错误)
+    - [10.6 边界测试：Copyleft 许可证的静态链接传染（法律合规风险）](#106-边界测试copyleft-许可证的静态链接传染法律合规风险)
+    - [10.5 边界测试：GPL 传染与动态链接的边界（法律风险）](#105-边界测试gpl-传染与动态链接的边界法律风险)
 
 ---
 
@@ -634,3 +639,72 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：许可证与合规的编译错误
+
+### 10.1 边界测试：`cargo deny` 的许可证冲突（编译错误/构建失败）
+
+```rust,compile_fail
+// Cargo.toml 依赖链引入 GPL 代码
+
+// [dependencies]
+// proprietary-lib = "1.0" // 依赖 GPL-3.0 库
+
+fn main() {
+    // ❌ 构建失败: cargo deny 检测到许可证不兼容
+    // proprietary 项目不能直接依赖 GPL 代码（传染性）
+    println!("hello");
+}
+```
+
+> **修正**: Rust 生态使用 `cargo-deny` 工具在 CI 中自动检查依赖树的许可证兼容性。GPL-3.0 具有"传染性"——链接 GPL 代码的项目必须也使用 GPL。MIT/Apache-2.0 双许可的 Rust 生态核心与 GPL 不兼容（单向：GPL 项目可用 MIT 代码，反之不可）。`cargo-deny` 配置允许显式允许/拒绝某些许可证，设置例外（exceptions），检查复制文件（sources copied into tree）。这与 npm 的 `license-checker` 或 Python 的 `pip-licenses` 类似，但 `cargo-deny` 集成在构建流程中，可在编译前阻止不合规依赖进入。企业合规要求：所有依赖必须经法务审批，`cargo-deny` 是实现"shift-left compliance"（左移合规）的关键工具。[来源: [cargo-deny Documentation](https://embarkstudios.github.io/cargo-deny/)] · [来源: [Open Source Initiative](https://opensource.org/licenses)]
+
+### 10.2 边界测试：`#[forbid(unsafe_code)]` 与依赖的 unsafe（编译错误）
+
+```rust,compile_fail
+#![forbid(unsafe_code)]
+
+// 依赖中包含 unsafe 代码的 crate
+// [dependencies]
+// some-crate = "1.0" // 内部使用 unsafe
+
+fn main() {
+    // ❌ 编译错误/策略违规: #![forbid(unsafe_code)] 只检查当前 crate
+    // 不阻止依赖中的 unsafe
+    some_crate::safe_api(); // 实际上安全，但底层 unsafe 不可见
+}
+```
+
+> **修正**: `#![forbid(unsafe_code)]` 属性阻止当前 crate 中使用 `unsafe` 关键字，但不检查依赖。对于要求高安全保证的场景（如医疗、航空、金融），需要：1) `cargo-geiger` 统计依赖树中的 unsafe 代码比例；2) `cargo-vet` 审计依赖的供应链安全；3) `miri` 对关键依赖进行 UB 检测；4) `rustc` 的 `-Wunsafe-code` 标志。Rust 的 unsafe 边界是 crate 级别的——一个 crate 的 unsafe 实现可以为另一个 crate 提供安全抽象。合规策略应区分"自己写 unsafe"（高风险）和"使用经过审计的安全抽象"（低风险）。这与 C/C++ 项目的完全不可控 unsafe 代码不同——Rust 至少提供了统计和审计工具。[来源: [cargo-geiger Documentation](https://github.com/rust-secure-code/cargo-geiger)] · [来源: [cargo-vet Documentation](https://mozilla.github.io/cargo-vet/)]
+
+### 10.6 边界测试：Copyleft 许可证的静态链接传染（法律合规风险）
+
+```rust,compile_fail
+// 假设 proprietary 项目依赖 GPL-3.0 库
+
+// [dependencies]
+// gpl-lib = "1.0" // GPL-3.0
+
+fn main() {
+    // ❌ 合规风险: Rust 默认静态链接，GPL 的 copyleft 可能传染到主程序
+    // 要求整个项目开源
+    println!("proprietary code");
+}
+```
+
+> **修正**: GPL（GNU General Public License）的 copyleft 条款要求：若程序链接 GPL 代码，整个程序必须也使用 GPL。Rust 的**静态链接**（默认）使这一条款更严格——所有依赖的代码被编译到同一二进制中，形成"衍生作品"。动态链接（`cdylib`、`dylib`）可能缓解，但 GPL 的解释仍有争议。解决方案：1) 避免依赖 GPL 库（使用 MIT/Apache-2.0 替代品）；2) 使用 `cargo-deny` 扫描依赖许可证；3) 法律审查（对于企业产品）。这与 C/C++ 的静态链接 GPL（同样风险）或 Python 的动态导入（解释器认为不形成衍生作品，但仍有争议）类似——许可证合规是软件供应链的重要环节，Rust 的静态链接默认增加了 copyleft 风险。[来源: [GPL FAQ](https://www.gnu.org/licenses/gpl-faq.html)] · [来源: [cargo-deny](https://embarkstudios.github.io/cargo-deny/)]
+
+### 10.5 边界测试：GPL 传染与动态链接的边界（法律风险）
+
+```rust,compile_fail
+// ❌ 法律风险: 静态链接 GPL 库可能使整个项目变为 GPL
+// [dependencies]
+// gpl_crate = { path = "../gpl_crate" } // GPL-3.0
+
+fn main() {
+    // 若 gpl_crate 以静态链接方式编译进二进制
+    // 根据 GPL，整个二进制需以 GPL 发布
+}
+```
+
+> **修正**: Rust 默认**静态链接**所有依赖（包括标准库），这与 C/C++ 默认动态链接不同。GPL（及 AGPL）的"传染"条款：若程序包含 GPL 代码，整个程序需 GPL 兼容。Rust 的缓解：1) 使用 `dylib` crate type 动态链接 GPL 依赖（但 Rust 的 dylib 支持有限）；2) 避免使用 GPL 依赖，选择 MIT/Apache-2.0 替代品；3) 使用 `cargo-deny` 自动审计许可证兼容性。常见许可证兼容矩阵：MIT ↔ Apache-2.0（兼容）；MIT + GPL（MIT 代码可被 GPL 包含，但反之不行）；Apache-2.0 + GPL-2.0（不兼容，GPL-3.0 兼容）。企业合规工具链：`cargo-about`（生成许可证清单）、`cargo-deny`（禁止特定许可证）、`FOSSA`/`Snyk`（SaaS 扫描）。这与 npm 的 `license-checker` 或 Python 的 `pip-licenses` 类似——Rust 的静态链接使许可证合规更严格。[来源: [GNU GPL FAQ](https://www.gnu.org/licenses/gpl-faq.html)] · [来源: [cargo-deny](https://github.com/EmbarkStudios/cargo-deny)]

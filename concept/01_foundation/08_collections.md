@@ -42,6 +42,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十四、边界测试：集合的编译错误](#十四边界测试集合的编译错误)
+    - [14.1 边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编译错误）](#141-边界测试hashmap-键未实现-hash--eq编译错误)
+    - [14.2 边界测试：迭代器消费后重复使用（编译错误）](#142-边界测试迭代器消费后重复使用编译错误)
 
 ---
 
@@ -589,3 +592,94 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十四、边界测试：集合的编译错误
+
+### 14.1 边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编译错误）
+
+```rust,compile_fail
+use std::collections::HashMap;
+
+#[derive(Debug)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+fn main() {
+    let mut map = HashMap::new();
+    let p = Point { x: 1, y: 2 };
+    // ❌ 编译错误: `Point` cannot be hashed
+    // HashMap 要求键实现 Hash + Eq
+    map.insert(p, "value");
+}
+
+// 正确: 为 Point 实现 Hash 和 Eq
+use std::hash::{Hash, Hasher};
+
+#[derive(Debug, Hash, Eq, PartialEq)] // ✅ derive 自动生成
+struct PointFixed {
+    x: i32,
+    y: i32,
+}
+```
+
+> **修正**: `HashMap` 的键必须实现 `Hash` 和 `Eq`（以及 `PartialEq`）。`Hash` 用于计算哈希值，`Eq` 保证相等性判断的等价关系（自反、对称、传递）。浮点数（`f32`/`f64`）未实现 `Eq`（因 NaN != NaN），不能作为 `HashMap` 键。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 14.2 边界测试：迭代器消费后重复使用（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let v = vec![1, 2, 3];
+    let iter = v.into_iter();
+    let sum: i32 = iter.sum();
+    // ❌ 编译错误: use of moved value: `iter`
+    // into_iter() 消耗集合，迭代器只能使用一次
+    let count = iter.count(); // iter 已被 sum() 消耗
+}
+
+// 正确: 使用引用迭代器避免消耗
+fn fixed() {
+    let v = vec![1, 2, 3];
+    let sum: i32 = v.iter().sum(); // ✅ 不消耗 v
+    let count = v.iter().count();  // ✅ 可再次迭代
+    println!("sum={}, count={}", sum, count);
+}
+```
+
+> **修正**: `into_iter()` 消耗集合所有权，迭代器只能遍历一次。如需多次遍历，使用 `iter()`（共享引用）或 `iter_mut()`（可变引用）。这体现了 Rust 所有权系统与迭代器模式的紧密结合——编译器通过所有权追踪防止"迭代器失效"和"重复消费"。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：`Vec::drain` 的范围越界（运行时 panic）
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3, 4, 5];
+    // ❌ 运行时 panic: drain 范围越界
+    let drained: Vec<_> = v.drain(2..10).collect();
+    // 范围 2..10 超出 vec 长度 5
+}
+```
+
+> **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器。范围必须满足 `start <= end <= len`，否则 panic。`drain` 是高效的批量移除（O(end - start))，因为只需移动尾部元素填充空洞。这与 `Vec::remove`（逐个移除，每次 O(n)）或 `retain`（按条件过滤）不同。安全使用：1) 先检查 `v.len()`；2) 使用 `v.drain(..)`（全部移除）；3) 使用 `split_off`（分割为两个 Vec）。Rust 的边界检查在 `drain` 等批量操作上同样严格，防止内存越界。这与 C++ 的 `vector::erase(first, last)`（范围无效是 UB）不同——Rust 将 UB 转化为 panic。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）
+
+```rust,compile_fail
+use std::collections::HashMap;
+use std::hash::BuildHasherDefault;
+
+fn main() {
+    // ❌ 编译错误: FnvHasher 未实现 Default 或未导入
+    // type FnvHashMap<K, V> = HashMap<K, V, BuildHasherDefault<FnvHasher>>;
+    // FnvHasher 来自 fnv crate，需单独引入
+    
+    // 正确: 使用标准库的 RandomState（默认）
+    let map: HashMap<i32, String> = HashMap::new();
+    
+    // 或引入 fnv crate:
+    // use fnv::FnvBuildHasher;
+    // let map: HashMap<i32, String, FnvBuildHasher> = HashMap::default();
+}
+```
+
+> **修正**: `HashMap` 的第三个泛型参数是哈希器构建器（`S: BuildHasher`），默认 `RandomState`（使用 SipHash 1-3，防 HashDoS）。自定义哈希器（如 `fnv::FnvHasher` 用于小键高性能、`ahash::AHasher` 用于通用高性能）需实现 `BuildHasher` 和 `Hasher` trait。`BuildHasherDefault<H>` 要求 `H: Default + Hasher`，是标准库提供的便捷包装。常见错误：1) 未引入 crate（`fnv`、`ahash`）；2) 混淆 `Hasher`（状态机，产生哈希值）和 `BuildHasher`（工厂，创建 `Hasher`）；3) 在需要 `Send + Sync` 的环境中使用非线程安全的哈希器。这与 Java 的 `HashMap`（固定哈希算法）或 C++ 的 `std::unordered_map`（模板参数 `Hash` 和 `KeyEqual`）类似——Rust 提供编译期可配置的哈希策略。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.HashMap.html)] · [来源: [fnv Crate](https://docs.rs/fnv/)]

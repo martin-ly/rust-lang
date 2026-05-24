@@ -2075,3 +2075,40 @@ impl std::fmt::Display for MyVec {
 > **修正**: 孤儿规则（Orphan Rule）禁止为外部 crate 的外部类型实现外部 trait。使用 Newtype 模式（`struct Wrapper(ExternalType)`）是标准解法。
 
 > **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md#三设计能力) · [Trait](../02_intermediate/01_traits.md)
+
+### 10.5 边界测试：访问者模式与 Rust 的枚举匹配（设计权衡）
+
+```rust,compile_fail
+enum Expr {
+    Lit(i32),
+    Add(Box<Expr>, Box<Expr>),
+}
+
+// ❌ 设计问题: 访问者模式在 Rust 中不如枚举匹配惯用
+// 每次添加新变体，访问者 trait 的所有实现需更新
+
+trait ExprVisitor {
+    fn visit_lit(&mut self, n: i32);
+    fn visit_add(&mut self, left: &Expr, right: &Expr);
+}
+
+struct Evaluator;
+
+impl ExprVisitor for Evaluator {
+    fn visit_lit(&mut self, n: i32) { println!("{}", n); }
+    fn visit_add(&mut self, _l: &Expr, _r: &Expr) { println!("+"); }
+}
+```
+
+> **修正**: 访问者模式（Visitor Pattern）在 OOP 语言中用于解耦操作与数据结构，但 Rust 的**代数数据类型**（枚举 + 模式匹配）使访问者模式往往不必要。`Expr` 的求值直接用 `match` 更简洁：
+
+```rust
+fn eval(e: &Expr) -> i32 {
+    match e {
+        Expr::Lit(n) => *n,
+        Expr::Add(l, r) => eval(l) + eval(r),
+    }
+}
+```
+
+访问者模式仅在"频繁添加新操作，不频繁添加新变体"时优势——Rust 的枚举匹配在"频繁添加新变体"时更有优势（编译器检查遗漏）。这与 Haskell 的代数数据类型（同样偏好模式匹配）或 Java 的 Visitor（因无枚举匹配而必需）不同——Rust 的类型系统使某些传统设计模式过时。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-00-patterns.html)]

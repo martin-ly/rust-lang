@@ -1907,3 +1907,87 @@ graph TD
 > [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 
 > **相关文件**: [RustBelt 谓词映射](../00_meta/rustbelt_predicate_map.md) · [能力图谱](../00_meta/competency_graph.md#五形式化能力) · [RustBelt](../04_formal/04_rustbelt.md)
+
+## 十、边界测试：形式化方法的编译错误
+
+### 10.1 边界测试：Kani 验证的 `unsafe` 假设冲突（编译错误/验证失败）
+
+```rust,compile_fail
+// 假设使用 Kani 模型检查器
+
+unsafe fn unchecked_deref(ptr: *const i32) -> i32 {
+    *ptr // 可能空指针解引用
+}
+
+#[kani::proof]
+fn verify_deref() {
+    let x = 42;
+    let ptr = &x as *const i32;
+    // Kani 验证: ptr 非空且对齐
+    unsafe {
+        let val = unchecked_deref(ptr);
+        assert!(val == 42);
+    }
+}
+
+// 若 unchecked_deref 接收任意指针:
+#[kani::proof]
+fn verify_any_deref() {
+    let ptr: *const i32 = std::ptr::null();
+    // ❌ Kani 验证失败: 空指针解引用
+    unsafe { unchecked_deref(ptr); }
+}
+```
+
+> **修正**: Kani（Rust 的模型检查器）通过符号执行验证 `unsafe` 代码的安全性。在上述例子中，`unchecked_deref` 本身 unsafe，其安全性前提（ptr 非空、已对齐、已初始化）由调用者保证。Kani 自动生成反例（counterexample）展示违反前提的情况（如空指针）。这与 Miri（运行时检测）互补：Miri 在 concrete 输入上执行，Kani 在符号输入上验证所有路径。形式化方法的价值在于将"信任但验证"（trust but verify）应用于 unsafe Rust——开发者声明不变量（invariant），工具机械验证。这与 C 的完全信任开发者或 Java 的无 unsafe 代码不同——Rust 在 unsafe 边界上建立了可验证的契约。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)]
+
+### 10.2 边界测试：Prusti 的前置条件违反（编译错误/验证失败）
+
+```rust,compile_fail
+// 假设使用 Prusti（基于 Viper）
+
+#[prusti::requires(x > 0)]
+fn sqrt(x: f64) -> f64 {
+    x.sqrt()
+}
+
+fn main() {
+    // ❌ Prusti 验证失败: 前置条件 x > 0 不满足
+    let result = sqrt(-1.0);
+    println!("{}", result);
+}
+```
+
+> **修正**: Prusti 允许在 Rust 函数上标注契约（contract）：`requires`（前置条件）、`ensures`（后置条件）、`pure`（无副作用）。验证器在编译期检查所有调用点是否满足前置条件，所有返回路径是否满足后置条件。`sqrt(-1.0)` 违反 `x > 0` 的前提，Prusti 报告验证错误。这与 Rust 的类型系统形成层次化保障：类型系统防止内存不安全（始终启用），Prusti 防止逻辑错误（可选启用）。设计挑战：契约的编写成本、验证时间（指数级路径爆炸）、与标准库的集成。但长期来看，形式化契约是"编译期错误"哲学的终极延伸——不仅检查类型正确，还检查语义正确。[来源: [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic)]
+
+### 10.3 边界测试：形式化规格与实现的不一致（验证失败）
+
+```rust,compile_fail
+// 规格: fn add(a: u32, b: u32) -> u32 { a + b } 永不应溢出
+
+fn add(a: u32, b: u32) -> u32 {
+    a + b // ❌ 验证失败: 若 a + b > u32::MAX，溢出
+}
+
+// 正确实现:
+// fn add(a: u32, b: u32) -> Option<u32> {
+//     a.checked_add(b)
+// }
+```
+
+> **修正**: 形式化验证的关键挑战：**规格是否正确**？上述规格要求"永不应溢出"，但实现使用普通 `+`，在 `u32` 上会溢出。Kani 或 Prusti 验证此规格时会报告失败。但修正规格（返回 `Option<u32>`）改变了 API 契约——调用者需处理 `None`。形式化验证不保证"程序正确"，只保证"程序满足规格"。规格本身可能有漏洞：遗漏边界条件、错误的前置条件、不完整的后置条件。这与数学证明（公理的正确性决定定理的正确性）或法律合同（条款的精确性决定权利义务）类似——形式化方法将"信任"从代码转移到规格。企业应用形式化方法时，需投入大量资源确保规格完整正确。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [Prusti Project](https://www.pm.inf.ethz.ch/research/prusti.html)]
+
+### 10.4 边界测试：形式化工具的编译器版本锁定（编译错误）
+
+```rust,compile_fail
+// 假设项目使用 nightly-2024-01-01 的 Miri
+// 但开发者升级到 nightly-2024-06-01
+
+#![feature(custom_mir)]
+fn main() {
+    // ❌ 编译错误: custom_mir 特性在较新 nightly 中可能变更或移除
+    // Miri 对 nightly 版本敏感，不同版本可能行为不同
+}
+```
+
+> **修正**: Rust 的形式化工具（Miri、Kani、Prusti、Crucible）紧密依赖编译器内部（MIR、HIR、LLVM IR），因此通常**锁定到特定 nightly 版本**。升级编译器可能导致：1) 不稳定特性语法变化；2) 内部 API 变更；3) 工具本身未适配新版本。这与 Clippy、`rustfmt` 等工具类似——它们也需跟随编译器更新。企业采用形式化工具的代价：需维护锁定的工具链版本，或等待工具更新。这与 C 的 static analyzer（如 Coverity，独立于编译器）或 Java 的 SpotBugs（基于字节码，编译器无关）不同——Rust 的形式化生态年轻，尚未建立稳定的跨版本接口。`rustup` 的 toolchain 管理缓解了部分痛苦（`rustup run nightly-2024-01-01 miri`）。[来源: [Miri Documentation](https://github.com/rust-lang/miri)] · [来源: [Rustup Toolchains](https://rust-lang.github.io/rustup/concepts/toolchains.html)]

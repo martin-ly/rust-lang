@@ -195,6 +195,51 @@ TCP vs UDP 语义矩阵:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
+## 十、边界测试：网络编程的编译错误
+
+### 10.1 边界测试：`TcpStream` 的 `move` 与分裂（编译错误）
+
+```rust,compile_fail
+use tokio::net::TcpStream;
+
+async fn bad_split(stream: TcpStream) {
+    // ❌ 编译错误: `split` 需要 &mut self，但后续 move 冲突
+    let (mut read, mut write) = stream.split();
+    // split 后 stream 被借用，不能再使用
+    // drop(stream); // 错误: stream 已被借用
+    tokio::io::copy(&mut read, &mut write).await.unwrap();
+}
+
+// 正确: 使用 into_split 获取独立所有权
+async fn fixed(stream: TcpStream) {
+    let (mut read, mut write) = stream.into_split(); // ✅ 消耗 stream
+    tokio::io::copy(&mut read, &mut write).await.unwrap();
+}
+```
+
+> **修正**: Tokio 的 `TcpStream` 提供两种分裂方式：`split()`（返回 `&mut ReadHalf` / `&mut WriteHalf`，借用原流）和 `into_split()`（返回拥有所有权的 `OwnedReadHalf` / `OwnedWriteHalf`，消耗原流）。`split()` 要求原流在分裂期间保持存活，且分裂引用不能跨 await 点（因 `&mut` 不能 Send）。`into_split()` 将流拆分为两个独立对象，各自拥有内部 `Arc` 引用，可安全移动到不同任务。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
+### 10.2 边界测试：套接字地址类型不匹配（编译错误）
+
+```rust,compile_fail
+use std::net::{SocketAddrV4, SocketAddrV6, TcpListener};
+
+fn main() {
+    let v4 = SocketAddrV4::new([127, 0, 0, 1].into(), 8080);
+    // ❌ 编译错误: expected struct `SocketAddrV6`, found struct `SocketAddrV4`
+    let v6: SocketAddrV6 = v4; // IPv4 不能赋值给 IPv6
+}
+
+// 正确: 使用统一的 SocketAddr
+fn fixed() {
+    let v4 = SocketAddrV4::new([127, 0, 0, 1].into(), 8080);
+    let addr = std::net::SocketAddr::from(v4); // ✅ SocketAddr 可包装 V4 或 V6
+    let listener = TcpListener::bind(addr).unwrap();
+}
+```
+
+> **修正**: Rust 的网络地址类型严格区分 IPv4（`SocketAddrV4`、`Ipv4Addr`）和 IPv6（`SocketAddrV6`、`Ipv6Addr`），两者是不同的类型，不能隐式转换。`SocketAddr` 是一个枚举，可持有 V4 或 V6 地址。`TcpListener::bind` 接受 `ToSocketAddrs` trait 的实现，因此可传入 `"127.0.0.1:8080"`、`SocketAddrV4` 或 `SocketAddr`。这种严格类型区分避免了 C 中 `sockaddr` 指针强制转换导致的地址族混淆漏洞。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
 > **[Tower Service Trait]** The Service trait is an abstraction of a function of the form `fn(Request) -> Future<Output = Response>`.
 > **来源**: <https://docs.rs/tower/latest/tower/trait.Service.html>
 
@@ -797,3 +842,41 @@ graph LR
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 10.3 边界测试：异步 TCP 的 `split` 与 ` reunite` 的所有权（编译错误）
+
+```rust,compile_fail
+use tokio::net::TcpStream;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+
+async fn echo(stream: TcpStream) {
+    let (mut read, mut write) = stream.split();
+    // ❌ 编译错误: split 后 stream 被消耗，不能再次使用
+    // let (r2, w2) = stream.split(); // stream 已移动
+    
+    let mut buf = [0u8; 1024];
+    let n = read.read(&mut buf).await.unwrap();
+    write.write_all(&buf[..n]).await.unwrap();
+    
+    // 正确: reunite 恢复 stream（若 read 和 write 都还存在）
+    // let _stream = read.reunite(write).unwrap();
+}
+```
+
+> **修正**: `TcpStream::split` 将双向流拆分为独立的读半和写半，允许并发读写（如一个任务读，一个任务写）。`split` 消耗 `TcpStream`，返回的 `ReadHalf` 和 `WriteHalf` 是独立的类型，不可复制。`reunite` 在两者都未 drop 时恢复原始的 `TcpStream`。这与 `TcpStream::into_split`（返回 `OwnedReadHalf` 和 `OwnedWriteHalf`，可发送到不同任务）或标准库的 `std::net::TcpStream`（`try_clone` 复制文件描述符）不同——tokio 的 `split` 是零成本的借用拆分，`into_split` 是引用计数的所有权拆分。选择取决于并发模型：单任务内并发用 `split`，跨任务用 `into_split`。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：缓冲区大小与 MTU 的匹配（运行时性能问题）
+
+```rust,compile_fail
+use tokio::net::UdpSocket;
+
+async fn receive(socket: &UdpSocket) {
+    let mut buf = [0u8; 10]; // 仅 10 字节缓冲区
+    // ⚠️ 运行时问题: UDP 数据报可能大于 10 字节，导致截断
+    let (n, addr) = socket.recv_from(&mut buf).await.unwrap();
+    // n 最大为 10，多余数据丢失
+    println!("from {}: {} bytes", addr, n);
+}
+```
+
+> **修正**: UDP 数据报的最大大小（MTU）通常为 1500 字节（以太网）或 65507 字节（IPv4 理论上限）。缓冲区小于数据报时，`recv_from` 截断数据，返回实际接收大小，多余数据丢失。TCP 流式传输无此问题（`read` 返回可用数据，剩余留在内核缓冲区）。网络编程中的缓冲区设计：1) UDP 应使用足够大的缓冲区（`[0u8; 65535]`）；2) TCP 可使用较小缓冲区（流式，多次 `read`）；3) 零拷贝接收（`tokio::net::TcpStream::try_read_buf` 使用 `Vec<u8>` 避免栈拷贝）。这与 C 的 `recvfrom`（同样截断，返回 `MSG_TRUNC` 标志）或 Go 的 `ReadFromUDP`（同样截断）行为相同——Rust 不自动处理缓冲区大小，需开发者根据协议选择。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Unix Network Programming](https://unpbook.com/)]

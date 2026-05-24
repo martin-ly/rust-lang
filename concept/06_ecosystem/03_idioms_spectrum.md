@@ -76,6 +76,13 @@
     - [相关概念文件](#相关概念文件)
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
+    - [10.1 边界测试：`unwrap` 的滥用（运行时 panic）](#101-边界测试unwrap-的滥用运行时-panic)
+    - [10.2 边界测试：`clone` 的隐式成本（逻辑错误）](#102-边界测试clone-的隐式成本逻辑错误)
+    - [10.3 边界测试：Clippy 警告的编译错误等价（编译错误）](#103-边界测试clippy-警告的编译错误等价编译错误)
+    - [10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）](#104-边界测试string-与-str-的类型不匹配编译错误)
+    - [10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）](#105-边界测试defaultdefault-与类型推断的歧义编译错误)
+    - [10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）](#107-边界测试stdmemreplace-与-take-的惯用选择逻辑错误)
 
 ---
 
@@ -1505,3 +1512,129 @@ quadrantChart
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **相关文件**: [A/S/P 标记规范](../00_meta/asp_marking_guide.md) · [问题图谱](../00_meta/problem_graph.md) · [范式转换矩阵](../00_meta/paradigm_transition_matrix.md)
+
+## 十、边界测试：惯用法谱系的编译错误
+
+### 10.1 边界测试：`unwrap` 的滥用（运行时 panic）
+
+```rust
+fn main() {
+    let opt: Option<i32> = None;
+    // ⚠️ 运行时 panic: called `Option::unwrap()` on a `None` value
+    // let val = opt.unwrap(); // panic!
+
+    // 正确: 使用 match 或 if let
+    match opt {
+        Some(v) => println!("{}", v),
+        None => println!("none"), // ✅ 安全处理
+    }
+}
+```
+
+> **修正**: `unwrap()` 是 Rust 中最常见的新手陷阱。它在 `None`/`Err` 上 panic，仅在确定值有效时使用。生产代码应使用 `match`、`if let` 或 `?` 运算符。`unwrap()` 在测试代码和原型开发中常见，但不应出现在健壮的生产代码中。Clippy 提供 `unwrap_used` lint 警告 `unwrap` 的使用。这与 Go 的 `if err != nil` 或 Swift 的 `try!` 类似——Rust 的 `unwrap` 是显式的"我知道这是安全的"断言，失败时立即崩溃而非静默传播错误。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：`clone` 的隐式成本（逻辑错误）
+
+```rust
+fn main() {
+    let data = vec![1, 2, 3];
+    let mut processed = Vec::new();
+    for item in data.clone() { // ⚠️ 克隆了整个 Vec
+        processed.push(item * 2);
+    }
+    println!("{:?}", processed);
+}
+
+// 正确: 使用引用避免克隆
+fn fixed() {
+    let data = vec![1, 2, 3];
+    let processed: Vec<_> = data.iter().map(|x| x * 2).collect();
+    println!("{:?}", processed); // ✅ 无克隆
+}
+```
+
+> **修正**: Rust 的所有权系统强制开发者思考数据克隆的成本。`Vec::clone()` 分配新内存并复制所有元素——O(n) 操作。在性能关键路径上，应使用引用（`&T`）或迭代器（`iter()`）避免克隆。这与 C++ 的拷贝构造函数（隐式调用）或 Java 的对象引用（总是共享）不同——Rust 的 `clone()` 是显式方法调用，提醒开发者注意成本。`Rc<T>` 和 `Arc<T>` 在需要共享时减少克隆，但增加了引用计数开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：Clippy 警告的编译错误等价（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    // ❌ 编译错误: 尝试在匹配后使用已转移所有权的变量
+    match s {
+        ref t => println!("borrowed: {}", t),
+    }
+    println!("{}", s); // s 在 match 中被转移了吗？
+    // 实际上 `ref` 模式创建的是引用，不会转移所有权
+    // 但初学者常混淆 `ref` 和 `&` 的使用场景
+}
+
+// 正确: 使用 & 模式或直接使用引用
+fn fixed() {
+    let s = String::from("hello");
+    match &s {
+        t => println!("borrowed: {}", t),
+    }
+    println!("{}", s); // ✅ s 仍有效
+}
+```
+
+> **修正**: `ref` 绑定模式在模式匹配中创建引用，但在 `match s { ref t => ... }` 中，`s` 仍被按值匹配（转移所有权），而 `t` 是对被转移值的引用。这在逻辑上正确但语义令人困惑。惯用写法是 `match &s { t => ... }`——直接对引用进行匹配，清晰表达意图。Clippy lint `match_ref_pats` 建议将 `match x { ref y => ... }` 改写为 `match &x { y => ... }`。这是 Rust"显式优于隐式"原则的体现：让引用的创建位置一目了然。[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)] · [来源: [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)]
+
+### 10.4 边界测试：`String` 与 `&str` 的类型不匹配（编译错误）
+
+```rust,compile_fail
+fn greet(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn main() {
+    let name = String::from("Alice");
+    greet(name); // ❌ 编译错误: 预期 &str，找到 String
+    // String 不能自动解引用为 &str 在函数参数中？
+    // 实际上 `String: Deref<Target=str>`，自动解引用生效
+    // 但这里 name 被按值传递，类型不匹配
+}
+```
+
+> **修正**: `String` 实现了 `Deref<Target = str>`，因此 `&String` 可自动解引用为 `&str`。但 `greet(name)` 传递的是 `String` 本身，而非 `&String`，自动解引用不适用。正确写法是 `greet(&name)`——显式获取引用，触发 `Deref` 强制转换。这是 Rust 类型系统的**自动解引用**（deref coercion）规则：仅当从引用到引用的转换时自动进行。`String` → `&str` 需要两步：`String` → `&String`（显式 `&`），然后 `&String` → `&str`（自动 `Deref`）。此规则避免了隐式转换带来的不可预测性，同时保持了表达力。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)]
+
+### 10.5 边界测试：`Default::default()` 与类型推断的歧义（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: default() 返回类型无法推断
+    // let x = Default::default();
+
+    // 正确: 显式标注类型
+    let x: i32 = Default::default();
+    let v: Vec<i32> = Default::default();
+
+    // 或在结构体初始化中使用
+    let s = SomeStruct {
+        field: Default::default(),
+        ..Default::default()
+    };
+}
+```
+
+> **修正**: `Default::default()` 是 Rust 中初始化值的惯用方法，但若上下文无法推断返回类型，编译错误。这与 `Vec::new()`（同样需要类型推断上下文）或 `Into::into()`（目标类型决定转换）类似。`Default` trait 的设计：提供类型的"零值"或"空值"，替代 C 的 `memset(&obj, 0, sizeof(obj))`（不安全，可能违反类型不变式）。`#[derive(Default)]` 为 struct 生成 `Default` 实现，所有字段也实现 `Default`。这与 C++ 的 `T()`（值初始化）或 Java 的 `new T()`（对象默认构造）不同——Rust 的 `Default` 是显式 trait，不隐式调用，类型安全。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）
+
+```rust,compile_fail
+use std::mem;
+
+fn main() {
+    let mut s = String::from("hello");
+    // ❌ 逻辑错误: replace 需要显式提供默认值
+    let old = mem::replace(&mut s, String::new());
+
+    // 正确: 若类型实现 Default，使用 take 更简洁
+    // let old = mem::take(&mut s); // 等价于 replace(&mut s, Default::default())
+
+    println!("old: {}, new: {}", old, s);
+}
+```
+
+> **修正**: `std::mem::replace` 将值替换为新值，返回旧值。`std::mem::take` 是 `replace(&mut t, T::default())` 的便捷方法，要求 `T: Default`。`take` 更惯用（语义清晰："取走并留默认值"），但仅适用于实现 `Default` 的类型。对于不实现 `Default` 的类型（如某些自定义 struct），必须使用 `replace` 并显式提供新值。这与 C++ 的 `std::exchange`（C++14，类似 `replace`）或 Swift 的 `swap`（交换两个值，非替换）不同——Rust 的 `take` 是获取所有权并留默认值的惯用模式，常见于 `Option::take`（取走 `Some`，留 `None`）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.take.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

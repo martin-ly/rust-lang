@@ -610,3 +610,96 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：Rust 与 JavaScript 的编译错误对比
+
+### 10.1 边界测试：JavaScript 的隐式转换 vs Rust 的显式转换（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("42");
+    // ❌ 编译错误: expected `i32`, found `String`
+    // Rust 没有隐式类型转换
+    let n: i32 = s;
+}
+
+// 正确: 显式解析
+fn fixed() {
+    let s = String::from("42");
+    let n: i32 = s.parse().unwrap(); // ✅ 显式转换
+    println!("{}", n);
+}
+```
+
+> **JavaScript 对比**: JavaScript 的隐式转换（coercion）允许 `"42" + 1 = "421"` 和 `"42" - 1 = 41`，导致大量意外行为。Rust 禁止所有隐式转换——字符串不能自动转为数字，数字不能自动转为字符串。`parse()` 返回 `Result`，强制处理解析失败。这与 TypeScript 的 `as number` 也不同——TypeScript 的类型断言在编译期检查，但运行期无保护；Rust 的 `parse()` 在运行期验证，返回 `Err` 而非静默失败。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：JavaScript 的闭包变量捕获与 Rust 的所有权（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut count = 0;
+    let increment = || {
+        count += 1; // 闭包以 &mut 捕获 count
+    };
+    // ❌ 编译错误: cannot borrow `count` as mutable more than once at a time
+    count += 1; // 外部同时使用 count
+    increment();
+}
+
+// 正确: 使用 Cell 或释放闭包后访问
+use std::cell::Cell;
+
+fn fixed() {
+    let count = Cell::new(0);
+    let increment = || {
+        count.set(count.get() + 1);
+    };
+    increment();
+    count.set(count.get() + 1); // ✅ Cell 允许内部可变性
+    println!("{}", count.get());
+}
+```
+
+> **JavaScript 对比**: JavaScript 的闭包捕获变量引用，允许在闭包内外同时修改同一变量（`var count = 0; function inc() { count++; }`）。Rust 的闭包根据修改方式捕获环境：若修改变量，则以 `&mut` 捕获，外部不能再访问该变量直到闭包释放。`Cell<T>` 通过内部可变性绕过此限制——`&Cell` 允许修改内部值，因为 `Cell` 禁止获取内部引用。这是 Rust 所有权系统与闭包交互的精妙设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）
+
+```rust,compile_fail
+struct Counter {
+    count: i32,
+}
+
+impl Counter {
+    fn increment(&mut self) {
+        self.count += 1;
+    }
+}
+
+fn main() {
+    let mut c = Counter { count: 0 };
+    let f = c.increment; // ❌ 编译错误: 不能将方法提取为函数指针
+    // Rust 的方法调用是语法糖，f() 需要 self 参数
+    
+    // 正确: 使用闭包捕获 self
+    let mut f = || c.increment();
+    f();
+}
+```
+
+> **修正**: JavaScript 的 `this` 是**动态绑定**的：函数作为方法调用时 `this` 是对象，作为普通函数调用时 `this` 是 `undefined`（严格模式）或全局对象。Rust 无 `this` 概念：方法调用 `c.increment()` 是 `Counter::increment(&mut c)` 的语法糖，`self` 是显式参数。提取方法为函数值需要闭包：`|| c.increment()` 捕获 `c` 的引用。这与 Python 的 `self`（显式参数，但方法可作为 bound method 提取）或 C++ 的 `std::bind`/`lambda`（类似 Rust 闭包）不同——Rust 的方法无隐式绑定，所有参数显式传递，消除了 `this` 的歧义。JavaScript 的箭头函数（词法 `this`）解决了部分问题，但 Rust 从根本上避免了动态绑定。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch05-03-method-syntax.html)] · [来源: [JavaScript this Keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)]
+
+### 10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = "5";
+    // ❌ 编译错误: Rust 不会自动类型转换
+    // let y = x + 3; // "5" + 3 在 JS 中是 "53"
+    
+    // 必须显式转换
+    let y = x.parse::<i32>().unwrap() + 3;
+    println!("{}", y); // 8
+}
+```
+
+> **修正**: JavaScript 的**弱类型**系统允许大量隐式转换：`"5" + 3` → `"53"`、`"5" - 3` → `2`、`true + 1` → `2`。这些规则复杂且易错（`[] + {}` → `"[object Object]"`）。Rust 是**强类型**的：几乎所有操作都要求操作数类型匹配，无隐式转换（`i32` → `u32` 需 `as`，`String` → `&str` 需 `&` 或 `Deref`）。这是设计哲学的根本差异：JavaScript 追求灵活和快速开发，Rust 追求安全和可维护。从 JavaScript 迁移到 Rust 的开发者常感"繁琐"，但类型错误在编译期被捕获，而非运行期成为 Heisenbug。这与 Python 的隐式转换（类似 JavaScript）或 Go 的强类型（类似 Rust，但有隐式接口实现）类似——Rust 在强类型谱系中属于最严格的一端。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [JavaScript Type Coercion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Type_coercion)]

@@ -34,6 +34,11 @@
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：游戏开发的编译错误](#十边界测试游戏开发的编译错误)
+    - [10.1 边界测试：ECS 系统的组件借用冲突（编译错误）](#101-边界测试ecs-系统的组件借用冲突编译错误)
+    - [10.2 边界测试：图形渲染的生命周期与 `Send` 约束（编译错误）](#102-边界测试图形渲染的生命周期与-send-约束编译错误)
+    - [10.6 边界测试：游戏状态序列化的循环引用（运行时栈溢出）](#106-边界测试游戏状态序列化的循环引用运行时栈溢出)
+    - [10.5 边界测试：ECS 的 archetype 变更与迭代器失效（运行时 panic/UB）](#105-边界测试ecs-的-archetype-变更与迭代器失效运行时-panicub)
 
 ---
 
@@ -656,3 +661,83 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：游戏开发的编译错误
+
+### 10.1 边界测试：ECS 系统的组件借用冲突（编译错误）
+
+```rust,compile_fail
+// 假设使用 bevy_ecs 风格 API
+
+struct Position { x: f32, y: f32 }
+struct Velocity { dx: f32, dy: f32 }
+
+fn update_system(query: &mut (Vec<&mut Position>, Vec<&mut Velocity>)) {
+    let (positions, velocities) = query;
+    // ❌ 编译错误: 若同一实体同时拥有 Position 和 Velocity，
+    // 两个 &mut 引用会冲突
+    for (pos, vel) in positions.iter_mut().zip(velocities.iter_mut()) {
+        pos.x += vel.dx;
+        pos.y += vel.dy;
+    }
+}
+```
+
+> **修正**: ECS（Entity-Component-System）架构中，系统（system）函数通过查询（query）获取组件的引用。Bevy 的查询系统在编译期检查借用规则：`Query<&mut Position, &mut Velocity>` 无法在同一系统中共存，因为 Rust 编译器无法证明同一实体的两个组件不会被同时可变借用。Bevy 的解决方案：1) 使用 `Query<&mut Position, Without<Velocity>>` 分离查询；2) 将更新拆分为两个系统（先读 Velocity 计算新位置，再写 Position）；3) 使用命令缓冲（Commands）延迟修改。这与 Unity 的 `GetComponent`（运行时检查）或 C++ 的裸指针（无检查）不同——Rust 在编译期防止 ECS 中的数据竞争。[来源: [Bevy ECS Documentation](https://docs.rs/bevy_ecs/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
+
+### 10.2 边界测试：图形渲染的生命周期与 `Send` 约束（编译错误）
+
+```rust,compile_fail
+use std::thread;
+
+struct Renderer {
+    // 假设包含 GPU 上下文句柄（非 Send）
+    context: *mut (), // 裸指针默认 !Send
+}
+
+fn spawn_render_thread(renderer: Renderer) {
+    // ❌ 编译错误: `Renderer` 未实现 `Send`
+    thread::spawn(move || {
+        // renderer.render(); // 不能在另一个线程使用
+    });
+}
+```
+
+> **修正**: GPU 上下文（Vulkan `VkDevice`、OpenGL `GLContext`、DirectX `ID3D11Device`）通常是线程不安全的，或仅限于创建线程使用。Rust 中，包含这些句柄的类型默认不是 `Send`，因为裸指针 `*mut T` 和 `*const T` 不自动实现 `Send`/`Sync`。若 GPU API 实际上线程安全（如 Vulkan 的 `VkDevice` 可多线程使用），可手动实现 `unsafe impl Send for Renderer {}`。但错误标记 `Send` 会导致运行时崩溃或 UB。这与 C++ 的 `std::thread`（无 Send 检查，开发者自行保证）或 Unity 的主线程限制（运行时检查）不同——Rust 在编译期强制线程亲和性（thread affinity）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.6 边界测试：游戏状态序列化的循环引用（运行时栈溢出）
+
+```rust,compile_fail
+use serde::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]
+struct GameObject {
+    name: String,
+    parent: Option<Box<GameObject>>,
+}
+
+fn main() {
+    let mut root = GameObject { name: "root".to_string(), parent: None };
+    let child = GameObject { name: "child".to_string(), parent: Some(Box::new(root)) };
+    // ❌ 运行时栈溢出: 若存在循环引用，序列化递归无限
+    // root.parent = Some(Box::new(child)); // 循环
+    // let json = serde_json::to_string(&root).unwrap();
+}
+```
+
+> **修正**: 游戏对象树常包含**循环引用**（如双向链接的节点、父子循环）。`serde` 的默认序列化是深度递归，循环引用导致栈溢出。解决方案：1) 使用 `serde` 的 `serialize_with` 自定义序列化，记录已访问对象 ID；2) 使用 `serde_json` 的 `preserve_order` + 手动打破循环；3) 使用 `slotmap` 或 `petgraph` 的图结构替代原生引用。Bevy 的 ECS 避免了这一问题：实体（Entity）是整数 ID，组件是扁平存储，无引用循环。这与 Unity 的 `SerializeReference`（支持循环引用检测）或 Godot 的节点树（使用 NodePath 而非直接引用）类似——游戏引擎的序列化系统设计需处理循环引用。[来源: [serde Documentation](https://serde.rs/)] · [来源: [Bevy ECS Serialization](https://docs.rs/bevy/)]
+
+### 10.5 边界测试：ECS 的 archetype 变更与迭代器失效（运行时 panic/UB）
+
+```rust,compile_fail
+// 概念代码: Bevy ECS 的 archetype 变更
+// ❌ 运行时 panic: 在迭代 query 时添加/移除 component，导致 archetype 迁移
+
+// for (mut transform, mut velocity) in query.iter_mut() {
+//     if velocity.0 > 100.0 {
+//         commands.entity(entity).remove::<Velocity>(); // 迭代中修改 archetype
+//     }
+// }
+```
+
+> **修正**: Bevy 的 ECS 使用 **archetype** 存储：实体按 component 组合分组（如 `(Transform, Velocity)` 是一个 archetype）。添加/移除 component 导致实体**迁移**到新 archetype。在 `Query::iter_mut()` 期间修改 archetype：1) 当前迭代器引用的内存可能被移动 → use-after-free；2) Bevy 检测到后 panic（"cannot mutate entity during iteration"）。解决方案：1) 使用 `Commands` 延迟执行（`commands.entity(e).remove::<C>()` 在阶段末执行）；2) 使用 `Query::iter()` 收集实体 ID，迭代结束后再修改；3) 使用 `RemovedComponents` 事件监听。这与 Unity 的 ECS（类似 archetype 概念，但允许延迟修改）或 flecs（C ECS 库，类似限制）不同——Bevy 的安全模型强制延迟修改，避免内存不安全。这与 Rust 的所有权哲学一致：编译期无法检测的运行时问题，通过 API 设计（`Commands` 缓冲）避免。[来源: [Bevy ECS Documentation](https://bevyengine.org/learn/book/getting-started/ecs/)] · [来源: [Bevy Query](https://docs.rs/bevy_ecs/)]

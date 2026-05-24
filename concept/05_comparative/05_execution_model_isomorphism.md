@@ -847,3 +847,104 @@ graph TD
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **相关文件**: [范式矩阵](./03_paradigm_matrix.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)
+
+## 十、边界测试：执行模型同构的编译错误
+
+### 10.1 边界测试：栈展开与 `panic = abort` 的行为差异（运行时行为）
+
+```rust
+struct Guard;
+
+impl Drop for Guard {
+    fn drop(&mut self) {
+        println!("dropping guard");
+    }
+}
+
+fn main() {
+    let _guard = Guard;
+    // ⚠️ 行为差异: panic = "unwind" 时调用 drop，panic = "abort" 时不调用
+    // panic!("intentional");
+}
+```
+
+> **修正**: Rust 支持两种 panic 策略：`unwind`（栈展开，调用 Drop）和 `abort`（直接终止进程，不调用 Drop）。`unwind` 是默认策略，允许资源清理；`abort` 产生更小的二进制文件，但可能导致资源泄漏。嵌入式环境通常使用 `abort`。执行模型的选择影响资源管理语义——同一 Unsafe Rust 代码在两种策略下可能有不同的安全保证。形式化语义中，`unwind` 对应于带有异常处理的计算，`abort` 对应于底部（⊥）。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：`async` 与线程的执行模型混淆（编译错误）
+
+```rust,compile_fail
+async fn async_task() {
+    // ❌ 编译错误: async fn 不会自动创建新线程
+    // 以下代码仍在当前线程执行，只是可以被挂起
+    println!("running");
+}
+
+fn main() {
+    let future = async_task(); // 创建 Future，不执行
+    // future.await; // 需要 async 上下文
+}
+
+// 正确: 使用 block_on 或 spawn
+use std::future::Future;
+
+fn fixed() {
+    let future = async_task();
+    // tokio::runtime::Runtime::new().unwrap().block_on(future);
+}
+```
+
+> **修正**: `async fn` 创建的是 **Future**（惰性计算描述），不是线程。Future 必须在运行时（runtime）上执行，通过 `await` 挂起和恢复。这与 Go 的 goroutine（轻量级线程，自动调度）或 Erlang 的 process（独立执行单元）不同。Rust 的 async/await 是**零成本抽象**——Future 被编译为状态机，无运行时开销（除非使用运行时如 Tokio）。理解 "Future ≠ Thread" 是正确使用 Rust 异步编程的关键。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：绿色线程与 OS 线程的 API 混用（编译错误）
+
+```rust,compile_fail
+// 假设使用 green-thread 库（如 early Rust 的 libgreen）
+
+fn main() {
+    // ❌ 编译错误/运行时 panic: 绿色线程与 std::thread 混用
+    // std::thread::spawn(|| {
+    //     green_thread::spawn(|| {});
+    // });
+    // OS 线程的栈与绿色线程的栈不兼容
+}
+```
+
+> **修正**: Rust 1.0 之前实验过绿色线程（M:N 调度，用户态线程），但最终移除，改为原生 OS 线程（1:1 调度）。绿色线程与 OS 线程的**执行模型同构性**不成立：1) 栈大小不同（绿色线程的小栈 vs OS 线程的 8MB 栈）；2) TLS（线程局部存储）实现不同；3) 阻塞系统调用的影响不同（绿色线程阻塞会挂起整个 OS 线程，影响同线程的其他绿色线程）。Rust 选择 1:1 线程简化 FFI（C 库假设 OS 线程）、简化调试（栈追踪直接对应 OS 线程）、避免调度器复杂度。这与 Go 的 goroutine（M:N，由运行时调度）或 Erlang 的 process（M:N，由 BEAM VM 调度）不同——Rust 将并发抽象交给库（tokio、async-std），内核保持简单。执行模型同构的关键洞察：不是所有并发模型都能透明映射，选择受生态系统、性能需求、兼容性约束。[来源: [Rust RFC 230](https://rust-lang.github.io/rfcs/0230-remove-runtime.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)]
+
+### 10.4 边界测试：CPS 变换与 Rust 的 `?` 运算符（编译错误）
+
+```rust,compile_fail
+fn cps_style<F>(x: i32, cont: F) -> Result<String, String>
+where
+    F: FnOnce(i32) -> Result<String, String>,
+{
+    if x < 0 {
+        Err("negative".to_string())
+    } else {
+        cont(x * 2)
+    }
+}
+
+fn direct_style(x: i32) -> Result<String, String> {
+    // ❌ 编译错误/逻辑复杂: `?` 运算符直接生成 CPS，但手动 CPS 难以组合
+    let y = x.checked_mul(2).ok_or("overflow")?;
+    Ok(y.to_string())
+}
+```
+
+> **修正**: Rust 的 `?` 运算符是**隐式 CPS 变换**（continuation-passing style）：`expr?` 在 `Err` 时提前返回，在 `Ok` 时继续执行。编译器将 `?` 展开为 `match` 表达式，本质上是 CPS 的语法糖。手动编写 CPS（如 `cps_style`）在 Rust 中极其繁琐，因为 Rust 没有 first-class continuation（如 Scheme 的 `call/cc`）。这与 Haskell 的 `do` 语法（隐式 Monad 绑定，类似 `?`）或 JavaScript 的 `async/await`（隐式 Promise 展开）类似——现代语言通过语法糖隐藏 CPS 复杂性，使顺序代码看起来是直线的，底层是回调/状态机。执行模型同构：直接风格和 CPS 风格在语义上等价，但人类可读性和编译器优化空间不同。[来源: [Continuation-Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-03-improving-our-io-project.html)]
+
+### 10.5 边界测试：CPS 变换中的栈溢出（运行时 panic）
+
+```rust,compile_fail
+fn cps_factorial(n: u64, k: Box<dyn Fn(u64) -> u64>) -> u64 {
+    if n == 0 {
+        k(1)
+    } else {
+        cps_factorial(n - 1, Box::new(move |r| k(n * r)))
+        // ❌ 运行时栈溢出: CPS 递归深度大时，闭包链嵌套过深
+    }
+}
+```
+
+> **修正**: CPS（Continuation-Passing Style）将控制流转换为函数调用，每个"下一步"成为闭包参数。上述代码中，`k` 是累积的闭包链：每次递归包装一层 `move |r| k(n * r)`。`n = 100000` 时，闭包链深 10 万层，`k(1)` 调用时逐层展开，栈溢出。这与直接递归的栈溢出原因相同——CPS 不消除递归，只是改变形式。**尾递归优化**（TCO）可消除尾调用的栈帧，但 Rust 不保证 TCO。真正的 CPS 优化：使用 trampoline（蹦床）模式——返回 "下一步" 闭包而非调用它，外层循环执行。这与 Scheme 的 TCO（语言保证）或 JavaScript 的异步回调（事件循环作为 trampoline）不同——Rust 要求开发者手动实现 trampoline 或使用迭代。[来源: [Continuation-Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

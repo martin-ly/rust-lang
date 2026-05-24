@@ -43,6 +43,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：错误处理的编译错误](#十二边界测试错误处理的编译错误)
+    - [12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时错误）](#121-边界测试unwrap-在-resulterr-上-panic运行时错误)
+    - [12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）](#122-边界测试-在返回--的函数中使用编译错误)
 
 ---
 
@@ -805,3 +808,92 @@ graph TD
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十二、边界测试：错误处理的编译错误
+
+### 12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时错误）
+
+```rust
+fn main() {
+    let result: Result<i32, &str> = Err("something went wrong");
+    // ⚠️ 运行时 panic: called `Result::unwrap()` on an `Err` value
+    // let val = result.unwrap(); // panic!
+    // 正确: 使用 match 或 if let 处理两种状态
+    match result {
+        Ok(v) => println!("{}", v),
+        Err(e) => println!("Error: {}", e), // ✅ 安全处理错误
+    }
+}
+```
+
+> **修正**: `unwrap()` 是"快速失败"策略，仅在确定值为 `Ok` 时使用。生产代码应使用 `match`、`if let` 或 `?` 运算符传播错误。`unwrap()` 在测试代码和原型开发中常见，但不应出现在健壮的生产代码中。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）
+
+```rust,compile_fail
+fn may_fail() -> Result<i32, String> {
+    Ok(42)
+}
+
+fn main() {
+    // ❌ 编译错误: `?` couldn't convert the error to `()`
+    // main 返回 ()，但 `?` 需要函数返回 Result 或 Option
+    let val = may_fail()?;
+    println!("{}", val);
+}
+
+// 正确: main 返回 Result
+fn main_fixed() -> Result<(), String> {
+    let val = may_fail()?; // ✅ main 返回 Result，? 可传播错误
+    println!("{}", val);
+    Ok(())
+}
+```
+
+> **修正**: `?` 运算符只能在返回 `Result`、`Option` 或实现 `Try` trait 的类型的函数中使用。它会将错误值自动转换为函数返回类型（通过 `From` trait）。在 `main` 中如需使用 `?`，将 `main` 的返回类型改为 `Result<(), E>`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）
+
+```rust,compile_fail
+fn may_fail() -> Result<i32, String> {
+    Ok(42)
+}
+
+fn main() {
+    // ❌ 编译错误: `?` 运算符要求 `Result` 或 `Option`，不能混用
+    let val: Option<i32> = Some(may_fail()?);
+    // Result 的 `?` 返回 Err，但外层是 Option，类型不匹配
+}
+```
+
+> **修正**: `?` 运算符在 `Result` 上下文中传播 `Err`，在 `Option` 上下文中传播 `None`，二者不能自动转换。`Result<T, E>` → `Option<T>` 丢失错误信息，`Option<T>` → `Result<T, E>` 需要构造错误值。解决方案：1) `may_fail().ok()?`（`Result` → `Option`）；2) `Some(may_fail()?).transpose()?`（复杂转换）；3) 统一错误类型（`Result<T, E>` 或 `Option<T>`）。这与 Go 的 `if err != nil`（总是显式处理）或 Swift 的 `try?`（自动转换抛出的错误为 `Optional`）不同——Rust 要求显式选择转换策略。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/)]
+
+### 10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）
+
+```rust,compile_fail
+use std::panic::catch_unwind;
+
+fn main() {
+    let mut data = vec![1, 2, 3];
+    // ❌ 编译错误: `&mut Vec<i32>` 不是 `UnwindSafe`
+    let result = catch_unwind(|| {
+        data.push(4);
+        panic!("boom");
+    });
+}
+```
+
+> **修正**: `catch_unwind` 捕获 panic 并恢复执行，但要求闭包实现 `UnwindSafe`——保证 panic 不会破坏共享状态。`&mut T` 不是 `UnwindSafe`，因为 panic 可能在 `push` 中途发生（`Vec` 内部指针已更新但长度未更新），导致 `Vec` 处于不一致状态。解决方案：1) 使用 `AssertUnwindSafe` 包装（承诺手动保证安全）；2) 在闭包内 `clone` 数据；3) 使用 `std::panic::resume_unwind`。`UnwindSafe` 不是内存安全边界（unsafe 代码仍需保证 panic safety），而是防止逻辑不一致的标记 trait。这与 C++ 的异常安全（basic guarantee、strong guarantee、no-throw guarantee）理念相同，但 Rust 通过类型系统部分自动化。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/panic/trait.UnwindSafe.html)]
+
+### 10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）
+
+```rust,compile_fail
+fn main() {
+    let res: Result<i32, &str> = Err("error");
+    // ❌ 运行时 UB: unwrap_unchecked 在 Err 上调用是未定义行为
+    let val = unsafe { res.unwrap_unchecked() };
+    println!("{}", val);
+}
+```
+
+> **修正**: `Result::unwrap_unchecked` 和 `Option::unwrap_unchecked` 是 `unsafe` 方法：调用者必须保证值是 `Ok`/`Some`，否则是 UB。与 `unwrap`（Err 时 panic）不同，`unwrap_unchecked` 无检查、无分支，是零成本的"信任但验证"操作。使用场景：1) 热路径上已通过前置检查确保成功；2) 编译器无法推断但开发者确知的状态；3) 与 C 代码交互（C 函数返回错误码，但 Rust 侧已处理）。风险：错误使用导致任意行为（可能读取无效内存、可能崩溃、可能静默错误）。这与 C 的 `*(int*)NULL`（同样 UB，但编译器可能不警告）或 Swift 的 `try!`（运行时 panic，非 UB）不同——Rust 的 `unwrap_unchecked` 是真正的"无安全网"操作。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/result/enum.Result.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]

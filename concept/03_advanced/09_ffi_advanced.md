@@ -37,6 +37,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：高级 FFI 的编译错误](#十边界测试高级-ffi-的编译错误)
+    - [10.1 边界测试：可变静态变量在 FFI 中的线程安全（编译错误）](#101-边界测试可变静态变量在-ffi-中的线程安全编译错误)
+    - [10.2 边界测试：`Box::into_raw` 后重复释放（运行时 UB）](#102-边界测试boxinto_raw-后重复释放运行时-ub)
 
 ---
 
@@ -734,3 +737,122 @@ graph TD
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十、边界测试：高级 FFI 的编译错误
+
+### 10.1 边界测试：可变静态变量在 FFI 中的线程安全（编译错误）
+
+```rust,compile_fail
+static mut COUNTER: i32 = 0;
+
+extern "C" fn increment() {
+    // ❌ 编译错误: use of mutable static is unsafe and requires unsafe function or block
+    // 即使 FFI 函数，访问 mutable static 仍需 unsafe
+    COUNTER += 1;
+}
+
+// 正确: 使用 Mutex 包装
+use std::sync::Mutex;
+
+static COUNTER_SAFE: Mutex<i32> = Mutex::new(0);
+
+extern "C" fn increment_fixed() {
+    let mut guard = COUNTER_SAFE.lock().unwrap();
+    *guard += 1; // ✅ 无需 unsafe
+}
+```
+
+> **修正**: `static mut` 在 Rust 中几乎永远不应使用。它绕过所有权和借用检查，允许数据竞争。FFI 回调若需维护全局状态，应使用 `Mutex<T>`、`RwLock<T>` 或原子类型。`static mut` 的访问需要 `unsafe`，且即使单线程 FFI 调用也可能因信号处理或重入导致未定义行为。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：`Box::into_raw` 后重复释放（运行时 UB）
+
+```rust
+fn main() {
+    let b = Box::new(42);
+    let ptr = Box::into_raw(b);
+    // ⚠️ 运行时 UB: 若调用两次 free
+    unsafe {
+        drop(Box::from_raw(ptr)); // 第一次释放
+        // drop(Box::from_raw(ptr)); // 二次释放 = double free!
+    }
+}
+
+// 正确: 使用 ManuallyDrop 或明确所有权转移
+fn fixed() {
+    let b = Box::new(42);
+    let ptr = Box::into_raw(b);
+    unsafe {
+        let _ = Box::from_raw(ptr); // 取回 Box，自动 drop
+    } // 不再次访问 ptr
+}
+```
+
+> **修正**: `Box::into_raw` 将 `Box` 转为裸指针，放弃 Rust 的自动内存管理。调用者必须确保：1) 指针最终通过 `Box::from_raw` 或 `drop(Box::from_raw(ptr))` 释放恰好一次；2) 指针在释放后不再使用。双重释放（double free）是严重的内存安全漏洞，可能被利用进行代码执行。这与 C 的 `malloc`/`free` 管理相同——Rust 的 unsafe 边界将责任完全转移给程序员。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：C 变长参数的类型安全（编译错误/运行时 UB）
+
+```rust,compile_fail
+use std::os::raw::{c_char, c_int};
+
+extern "C" {
+    // C 的 printf: int printf(const char* fmt, ...);
+    fn printf(fmt: *const c_char, ...) -> c_int;
+}
+
+fn main() {
+    let fmt = b"%d %s\0".as_ptr() as *const c_char;
+    unsafe {
+        // ❌ 运行时 UB: 变长参数类型不匹配
+        printf(fmt, "42" as *const c_char, 42 as c_int);
+        // 预期: int, char* — 实际传递: char*, int
+    }
+}
+```
+
+> **修正**: C 的变长参数（variadic functions，`...`）无类型检查，调用者必须确保实参类型与格式字符串一致。Rust 的 FFI 声明 `extern "C" { fn printf(fmt: *const c_char, ...) }` 同样无类型保护——`unsafe` 块中的调用完全信任开发者。错误传递参数类型（`char*` vs `int`）导致未定义行为：栈布局错误、格式字符串解析越界、可能的安全漏洞。安全替代：1) 在 Rust 中封装为类型安全的 API（`fn rust_print(args: &[Arg])`）；2) 使用 `libffi` crate 动态构造调用；3) 避免使用 C 的变长参数，改用 struct 指针传递参数。这与 Go 的 `cgo`（同样无变长参数类型检查）或 Java 的 JNA（有类型映射，但仍可能出错）类似——FFI 的边界是类型系统的极限。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] · [来源: [libffi Crate](https://docs.rs/libffi/)]
+
+### 10.4 边界测试：回调函数的生命周期与 `Box::into_raw` 泄漏（编译错误/运行时 UB）
+
+```rust,compile_fail
+use std::os::raw::c_void;
+
+extern "C" {
+    fn register_callback(cb: extern "C" fn(*mut c_void), ctx: *mut c_void);
+}
+
+extern "C" fn callback(ctx: *mut c_void) {
+    unsafe {
+        let _ = Box::from_raw(ctx as *mut String);
+        // 从 raw pointer 恢复 Box，drop 时释放
+    }
+}
+
+fn main() {
+    let ctx = Box::into_raw(Box::new(String::from("data")));
+    unsafe {
+        register_callback(callback, ctx as *mut c_void);
+    }
+    // ❌ 运行时 UB: 若 C 代码未调用 callback，ctx 泄漏
+    // 若 C 代码多次调用 callback，双重释放
+}
+```
+
+> **修正**: 将 Rust 对象通过 `Box::into_raw` 传递给 C 代码时，所有权语义发生断裂：C 代码不理解 Rust 的所有权规则，可能不调用回调、多次调用回调、或在错误线程调用。这是 FFI 的**所有权边界**问题：Rust 侧释放（`Box::from_raw`）要求对调用次数和时机的精确控制。安全模式：1) 使用 `Arc<Mutex<T>>`（引用计数，多线程安全）；2) 在 C API 中明确文档回调调用次数（一次、零次或多次）；3) 使用 `ManuallyDrop` 延迟释放，直到确定安全。这与 C++ 的 `std::shared_ptr` 传递到外代码（同样问题，需要自定义 deleter）或 Swift 的 `Unmanaged<T>`（显式 retain/release）类似——跨语言边界时，自动内存管理让位于显式契约。[来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.5 边界测试：C 的 `long double` 与 Rust 的类型映射缺失（编译错误）
+
+```rust,compile_fail
+use std::os::raw::{c_double, c_longdouble};
+
+extern "C" {
+    // ❌ 编译错误: Rust 标准库无 c_longdouble 类型
+    fn compute_long(x: c_longdouble) -> c_longdouble;
+}
+
+fn main() {
+    // C 的 long double 在 x86 上是 80 位扩展精度，Rust 无直接映射
+    // 需使用 libc crate 或手动定义
+}
+```
+
+> **修正**: C 的 `long double` 是平台相关的浮点类型：x86 上 80 位扩展精度（16 字节对齐），ARM 上 128 位四精度，某些平台上与 `double` 相同。Rust 标准库**无 `c_longdouble` 类型**，`libc` crate 提供平台特定的定义。FFI 中使用 `long double` 需：1) 查询目标平台的 `sizeof(long double)`；2) 使用 `libc::c_longdouble`（若可用）；3) 或避免在 FFI 边界使用 `long double`（改为 `double` 或自定义结构）。这与 C++ 的 `long double`（原生支持）或 Go 的 `C.longdouble`（通过 cgo 支持）不同——Rust 的 FFI 设计优先覆盖常见场景，`long double` 的边缘情况需额外处理。[来源: [libc Crate](https://docs.rs/libc/)] · [来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)]

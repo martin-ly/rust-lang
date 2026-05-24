@@ -1192,3 +1192,107 @@ Rust 所有权系统（仿射变体）:
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **相关谓词映射**: [own(τ) 谓词](../00_meta/rustbelt_predicate_map.md#二所有权谓词-ownτ-映射) · [shr(κ, ℓ) 谓词](../00_meta/rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
+
+## 十、边界测试：线性逻辑的编译错误
+
+### 10.1 边界测试：`!Copy` 类型的隐式移动（编译错误）
+
+```rust,compile_fail
+struct Resource {
+    data: String,
+}
+
+fn use_resource(r: Resource) {
+    println!("{}", r.data);
+}
+
+fn main() {
+    let r = Resource { data: String::from("hello") };
+    use_resource(r);
+    // ❌ 编译错误: value used here after move
+    // Resource 未实现 Copy，赋值/传参时发生 move
+    use_resource(r); // 第二次使用
+}
+
+// 正确: 显式 Clone 或重新构造
+impl Clone for Resource {
+    fn clone(&self) -> Self {
+        Resource { data: self.data.clone() }
+    }
+}
+
+fn fixed() {
+    let r = Resource { data: String::from("hello") };
+    use_resource(r.clone());
+    use_resource(r); // ✅ r 仍可用
+}
+```
+
+> **修正**: 线性逻辑的核心是**资源的一次性使用**。Rust 的默认语义是 move（对非 Copy 类型），即资源在传参时被消耗。这与传统命令式语言的"复制传参"（pass-by-value 复制）或"引用传参"（pass-by-reference）不同——Rust 的传参语义由类型的 `Copy`/`Clone` trait 决定。`String`、`Vec` 等堆分配类型默认 move，避免隐式深拷贝；`i32`、`bool` 等标量类型默认 copy，因为它们的大小固定且拷贝成本低。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：借用与所有权的分权（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut data = vec![1, 2, 3];
+    let r1 = &data;
+    let r2 = &data;
+    // ❌ 编译错误: cannot borrow `data` as mutable more than once at a time
+    let r3 = &mut data; // 与 r1/r2 冲突
+    println!("{} {}", r1[0], r2[0]);
+}
+
+// 正确: 释放共享借用后再获取可变借用
+fn fixed() {
+    let mut data = vec![1, 2, 3];
+    {
+        let r1 = &data;
+        let r2 = &data;
+        println!("{} {}", r1[0], r2[0]);
+    } // r1, r2 在此释放
+    let r3 = &mut data; // ✅ 现在可以可变借用
+    r3.push(4);
+}
+```
+
+> **修正**: 线性逻辑的 **multiplicative conjunction**（`⊗`）对应 Rust 的元组/结构体所有权分割，**additive conjunction**（`&`）对应共享借用。Rust 的借用规则是线性逻辑 **ILL**（Intuitionistic Linear Logic）的实用化变体：独占资源（`own`）可分割为共享权限（`shr`）和独占权限（`own ∗ shr`），但共享权限不能升级为独占权限。这保证了"读取者-写入者"互斥——多个读者或单个写者，永不会同时存在。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)]
+
+### 10.3 边界测试：所有权转移与线性逻辑的析取（编译错误）
+
+```rust,compile_fail
+fn branch(use_a: bool) {
+    let x = String::from("resource");
+    if use_a {
+        consume_a(x);
+    } else {
+        consume_b(x);
+    }
+    // ❌ 编译错误: x 在 if/else 中被移动，但后续代码尝试使用
+    // println!("{}", x);
+}
+
+fn consume_a(_: String) {}
+fn consume_b(_: String) {}
+```
+
+> **修正**: 线性逻辑中的**析取**（disjunction，`A ⊸ (B ∨ C)`）要求资源在使用后消失。Rust 的 `if/else` 分支中，变量在其中一个分支被移动后，在整个表达式后不可用——即使逻辑上"只有一个分支会执行"，编译器仍保守地要求变量在分支后不可用。这是线性逻辑的资源守恒：资源进入分支，在分支内消耗，不能"凭空再生"。这与 C++ 的 `if`（变量在两个分支都可用，因为是复制）或 Haskell 的 `if`（惰性求值，资源按需使用）不同——Rust 的 `if` 是严格求值的，资源在分支点被判定为已消耗。正确做法：在需要保留的分支中 `clone`，或重构代码使分支返回值而非消耗资源。[来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)]
+
+### 10.4 边界测试：`!` 类型与线性逻辑的底（编译错误）
+
+```rust,compile_fail
+fn diverges() -> ! {
+    panic!("never returns");
+}
+
+fn main() {
+    let x = diverges();
+    // ❌ 编译错误: x 的类型是 !，可 coerce 为任意类型，但不能直接使用
+    // println!("{}", x); // ! 未实现 Display
+
+    // 但以下合法:
+    let y: String = diverges(); // ! → String
+    let z: i32 = diverges();    // ! → i32
+}
+```
+
+> **修正**: `!`（never type）在类型论中对应于**底**（bottom，⊥），表示不可达计算。在线性逻辑中，⊥ 是零资源——从 ⊥ 可推导任意命题（ex falso quodlibet）。Rust 中 `!` 可 coerce 为任意类型，因此 `let y: String = diverges()` 合法：编译器知道 `diverges()` 永不返回，赋值永不执行，类型兼容性是形式上的。但 `!` 本身没有值，不能调用方法或打印。`!` 的稳定化（从实验到部分稳定）是 Rust 类型系统的演进标志。这与 Haskell 的 `Void`（无 inhabitant，需 `absurd` 转换）或 TypeScript 的 `never`（类似语义）类似——Rust 的 `!` 在控制流分析中发挥关键作用（`if`/`match` 分支类型统一、 `?` 运算符）。[来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]

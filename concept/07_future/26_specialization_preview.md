@@ -42,6 +42,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：特化（Specialization）的编译错误](#十边界测试特化specialization的编译错误)
+    - [10.1 边界测试：重叠实现与孤儿规则（编译错误）](#101-边界测试重叠实现与孤儿规则编译错误)
+    - [10.2 边界测试：`default` 方法与最终实现的冲突（编译错误）](#102-边界测试default-方法与最终实现的冲突编译错误)
+    - [10.3 边界测试：特化与关联类型的冲突（编译错误）](#103-边界测试特化与关联类型的冲突编译错误)
+    - [10.4 边界测试：特化的交互与 trait 一致性（编译错误）](#104-边界测试特化的交互与-trait-一致性编译错误)
 
 ---
 
@@ -579,3 +584,114 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：特化（Specialization）的编译错误
+
+### 10.1 边界测试：重叠实现与孤儿规则（编译错误）
+
+```rust,compile_fail
+trait Display {
+    fn show(&self);
+}
+
+impl<T> Display for T {
+    default fn show(&self) { println!("generic"); }
+}
+
+impl Display for String {
+    fn show(&self) { println!("string: {}", self); }
+}
+
+// ❌ 编译错误: 若添加与 String 重叠的自定义类型实现
+struct MyString(String);
+
+impl Display for MyString {
+    fn show(&self) { println!("my string"); }
+}
+
+// 若同时: impl<T: Deref<Target=str>> Display for T { ... }
+// 会与 impl Display for String 重叠
+```
+
+> **修正**: 特化（specialization）允许为泛型类型提供默认实现，并为特定类型提供更优实现。但重叠实现（overlapping impls）必须满足**特化序**（specialization order）：一个实现必须是另一个实现的严格子集。`impl<T> Display for T` 是最通用的（顶层），`impl Display for String` 是特化的。若添加 `impl<T: Deref<Target=str>> Display for T`，它与 `impl Display for String` 重叠（`String: Deref<Target=str>`），且 neither 是对方的子集——编译错误。这与 C++ 的模板特化（允许任意重叠，由偏序规则解决）不同——Rust 的特化更保守，确保始终存在唯一最特化实现，避免歧义。[来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：`default` 方法与最终实现的冲突（编译错误）
+
+```rust,compile_fail
+trait Process {
+    fn run(&self);
+}
+
+impl<T> Process for T {
+    default fn run(&self) { println!("default"); }
+}
+
+impl Process for i32 {
+    fn run(&self) { println!("i32: {}", self); }
+}
+
+// ❌ 编译错误: 尝试在特化实现中调用 default 实现
+impl Process for i32 {
+    fn run(&self) {
+        // 无语法访问父实现（如 C++ 的 Base::method()）
+        // self.default_run(); // 不存在!
+        println!("override");
+    }
+}
+```
+
+> **修正**: 特化中的 `default` 关键字标记"可被覆盖的方法"，但 Rust 目前不提供**显式调用父实现**的语法（类似 C++ 的 `Base::method()` 或 Java 的 `super.method()`）。这是设计决策：鼓励组合（composition）而非继承（inheritance）。若需复用默认逻辑，应将共享代码提取为独立函数，在默认实现和特化实现中都调用。这与 Rust 的整体哲学一致—— trait 是接口 + 默认实现，不是类继承层次。特化的主要用例是性能优化（如 `Iterator::nth` 的默认实现 vs `SliceIter::nth` 的 O(1) 实现），而非代码复用。[来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+
+### 10.3 边界测试：特化与关联类型的冲突（编译错误）
+
+```rust,compile_fail
+trait Container {
+    type Item;
+    fn get(&self) -> Self::Item;
+}
+
+impl<T> Container for Vec<T> {
+    default type Item = T;
+    default fn get(&self) -> T {
+        self[0].clone()
+    }
+}
+
+impl Container for Vec<u8> {
+    type Item = &[u8]; // ❌ 编译错误: 特化实现改变关联类型
+    fn get(&self) -> &[u8] {
+        &self[..]
+    }
+}
+```
+
+> **修正**: 特化（specialization）允许为特定类型提供更优实现，但**关联类型**的特化是复杂问题：默认实现声明 `type Item = T`，特化实现能否改为 `type Item = &[u8]`？这会破坏依赖 `Container::Item` 的代码——它们假设 `Vec<u8>: Container<Item = u8>`。当前 Rust 的特化设计限制：1) 关联类型在特化中不能改变（或需满足特定约束）；2) 方法签名可以特化，但返回类型的特化受对象安全约束；3) `default` 关键字标记可被覆盖的项。这与 C++ 的模板特化（可完全改变类定义，包括嵌套类型）或 Java 的泛型（类型擦除，无特化概念）不同——Rust 的特化更保守，优先保证类型一致性。[来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+
+### 10.4 边界测试：特化的交互与 trait 一致性（编译错误）
+
+```rust,compile_fail
+trait Process {
+    fn run(&self);
+}
+
+impl<T> Process for T {
+    default fn run(&self) { println!("generic"); }
+}
+
+impl Process for String {
+    fn run(&self) { println!("string"); }
+}
+
+// ❌ 编译错误: 若再为 &str 特化，与 String 的 Deref<Target=str> 交互可能歧义
+impl Process for &str {
+    fn run(&self) { println!("str"); }
+}
+
+fn main() {
+    let s = String::from("hello");
+    s.run(); // String 的特化
+    (&s as &str).run(); // &str 的特化
+}
+```
+
+> **修正**: 特化实现之间的**交互**是类型系统的复杂点：`String` 和 `&str` 是不同的类型，各自特化合法。但 `String: Deref<Target=str>` 意味着 `&String` 可自动解引用为 `&str`，在方法调用 `s.run()` 中，编译器选择 `String` 的特化（直接匹配），而非 `&str` 的特化（需 Deref）。若添加 `impl Process for &String`，则方法解析更复杂。Rust 的方法解析规则：1) 直接匹配优先；2) 自动解引用（Deref）次之；3) 特化序决定最具体实现。这与 C++ 的 ADL（Argument Dependent Lookup，类似但无特化序）或 Scala 的 implicit resolution（更复杂的优先级规则）类似——Rust 的特化增加了方法解析的复杂度，但设计目标始终是"有唯一最具体实现"。[来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

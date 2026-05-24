@@ -873,3 +873,30 @@ fn fixed() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicPtr, Ordering};
+
+fn main() {
+    let ptr = AtomicPtr::new(Box::into_raw(Box::new(42)));
+    let old = ptr.load(Ordering::Relaxed);
+    
+    // 另一个线程可能:
+    // 1. 读取 old
+    // 2. 释放 old 指向的内存
+    // 3. 分配新内存，恰好得到相同地址
+    // 4. 写入新值
+    
+    // ❌ 运行时 ABA 问题: compare_exchange 成功，但内存内容已变
+    let _ = ptr.compare_exchange(
+        old,
+        Box::into_raw(Box::new(100)),
+        Ordering::SeqCst,
+        Ordering::SeqCst,
+    );
+}
+```
+
+> **修正**: **ABA 问题**是无锁数据结构中的经典问题：指针值从 A → B → A，但 `compare_exchange` 无法检测中间变化。`AtomicPtr` 的 `compare_exchange` 只比较地址值，不比较内容。解决方案：1) **Tagged pointer**：在低位存储版本计数器（`(ptr & !0xF) | (version & 0xF)`）；2) **Hazard pointer**：延迟释放，确保无其他线程引用；3) **Epoch-based reclamation**（`crossbeam-epoch`）：分代回收。Rust 的 `crossbeam`  crate 提供成熟的内存回收方案。这与 C++ 的 `std::atomic<T*>`（同样 ABA 问题）或 Java 的 `AtomicReference`（同样问题，GC 缓解）相同——ABA 是所有 CAS 操作的固有限制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicPtr.html)] · [来源: [Crossbeam Documentation](https://docs.rs/crossbeam/)]

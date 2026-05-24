@@ -548,3 +548,74 @@ fn crdt_commutativity() {
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 表征空间坐标系
+
+## 十、边界测试：并行与分布式模式的编译错误
+
+### 10.1 边界测试：`rayon::join` 闭包返回值生命周期（编译错误）
+
+```rust,compile_fail
+use rayon::join;
+
+fn parallel_bad() {
+    let data = vec![1, 2, 3];
+    let r = &data;
+    // ❌ 编译错误: `r` 的生命周期不够长
+    // join 的两个闭包可能在不同线程执行，引用栈数据不安全
+    join(
+        || println!("{}", r[0]),
+        || println!("{}", r[1]),
+    );
+}
+
+// 正确: 使用所有权转移
+fn parallel_fixed() {
+    let data = vec![1, 2, 3];
+    join(
+        move || println!("{}", data[0]), // ✅ 所有权移入闭包
+        move || println!("{}", data[1]), // ❌ 编译错误: data 被 move 两次
+    );
+}
+
+// 正确: 使用 Arc
+use std::sync::Arc;
+
+fn parallel_arc() {
+    let data = Arc::new(vec![1, 2, 3]);
+    let data2 = Arc::clone(&data);
+    join(
+        move || println!("{}", data[0]),  // ✅ Arc 可 Clone
+        move || println!("{}", data2[1]), // ✅ 两个独立的 Arc
+    );
+}
+```
+
+> **修正**: `rayon::join` 将两个闭包并行执行（若可用），闭包必须满足 `'static` 或从环境中转移所有权。引用栈数据的闭包不能安全传递给 `join`。`rayon` 的并行迭代器（`par_iter()`）通过数据分割避免此问题——每个子闭包处理数据切片，而非共享引用。[来源: [Rayon Documentation](https://docs.rs/rayon/)]
+
+### 10.2 边界测试：分布式 Actor 的消息类型未实现 `Serialize`（编译错误）
+
+```rust,compile_fail
+use serde::Serialize;
+
+struct Message {
+    data: String,
+}
+
+// ❌ 编译错误: `Message` 未实现 `Serialize`
+// 分布式 Actor 系统（如 Actix、Riker）要求消息可序列化
+fn send_message<M: Serialize>(msg: M) {
+    // 序列化后通过网络发送
+}
+
+fn main() {
+    let msg = Message { data: "hello".to_string() };
+    send_message(msg);
+}
+
+// 正确: 为 Message 实现 Serialize
+#[derive(Serialize)] // ✅ serde derive
+struct MessageFixed {
+    data: String,
+}
+```
+
+> **修正**: 分布式系统中的消息传递要求类型可序列化（`Serialize`/`Deserialize`）。Rust 的类型系统通过 trait bound 在编译期强制这一约束——未实现 `Serialize` 的类型不能作为网络消息。这与 Erlang 的动态序列化或 Java 的默认 `Serializable` 不同：Rust 要求显式 opt-in（通过 derive 或手动实现），确保类型变化时序列化格式同步更新，避免版本不兼容导致的运行时错误。[来源: [Serde Documentation](https://serde.rs/)]

@@ -33,6 +33,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：DSL 与嵌入的编译错误](#十边界测试dsl-与嵌入的编译错误)
+    - [10.1 边界测试：构建器模式的链式调用与所有权（编译错误）](#101-边界测试构建器模式的链式调用与所有权编译错误)
+    - [10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）](#102-边界测试状态机-dsl-的非法状态转换编译错误)
 
 ---
 
@@ -653,3 +656,124 @@ graph TD
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
+
+## 十、边界测试：DSL 与嵌入的编译错误
+
+### 10.1 边界测试：构建器模式的链式调用与所有权（编译错误）
+
+```rust,compile_fail
+struct Builder {
+    name: String,
+}
+
+impl Builder {
+    fn new() -> Self {
+        Self { name: String::new() }
+    }
+    fn name(mut self, n: &str) -> Self {
+        self.name = n.to_string();
+        self
+    }
+    fn build(self) -> Product {
+        Product { name: self.name }
+    }
+}
+
+struct Product { name: String }
+
+fn main() {
+    let builder = Builder::new();
+    builder.name("A");
+    // ❌ 编译错误: use of moved value: `builder`
+    // name() 返回新的 Builder，原 builder 被 move
+    builder.name("B"); // builder 已失效
+}
+
+// 正确: 链式调用
+fn fixed() {
+    let product = Builder::new()
+        .name("A")
+        .build(); // ✅ 链式调用
+    println!("{}", product.name);
+}
+```
+
+> **修正**: 构建器模式（Builder Pattern）通过消耗 `self` 的方法链实现不可变构建。每次调用 `.name()` 返回新的 `Builder`（或消耗后返回自身），原实例被 move。忘记链式调用会导致"use of moved value"错误。这与 Java 的构建器（可变对象，方法返回 `this`）不同——Rust 的消耗式构建器在类型层面保证每个字段只设置一次，防止部分初始化的对象被构建。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）
+
+```rust,compile_fail
+struct Idle;
+struct Running;
+struct Stopped;
+
+struct Machine<State> {
+    _state: std::marker::PhantomData<State>,
+}
+
+impl Machine<Idle> {
+    fn start(self) -> Machine<Running> {
+        Machine { _state: std::marker::PhantomData }
+    }
+}
+
+impl Machine<Running> {
+    fn stop(self) -> Machine<Stopped> {
+        Machine { _state: std::marker::PhantomData }
+    }
+}
+
+fn main() {
+    let m = Machine::<Idle> { _state: std::marker::PhantomData };
+    let m = m.start();
+    // ❌ 编译错误: no method named `start` found for struct `Machine<Running>`
+    // Running 状态没有 start 方法
+    let m = m.start();
+}
+
+// 正确: 遵循状态转换图
+fn fixed() {
+    let m = Machine::<Idle> { _state: std::marker::PhantomData };
+    let m = m.start(); // Idle → Running
+    let m = m.stop();  // Running → Stopped ✅
+}
+```
+
+> **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。`Machine<Idle>` 有 `start()` 方法，`Machine<Running>` 有 `stop()` 方法，但 `Machine<Running>` 没有 `start()` 方法——从 Running 再次 start 是非法的。这是 Rust 类型系统的强大应用：将运行时状态机验证转为编译期类型检查，消除整类状态转换错误。这与 Erlang 的 gen_fsm 或 C 的枚举+switch 实现形成对比——Rust 在编译期保证状态转换的合法性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：宏递归深度限制（编译错误）
+
+```rust,compile_fail
+macro_rules! recursive {
+    () => { 0 };
+    ($e:expr $(, $rest:expr)*) => {
+        $e + recursive!($($rest),*)
+    };
+}
+
+fn main() {
+    // ❌ 编译错误: 宏递归超过默认限制（64 层）
+    // let x = recursive!(1, 2, 3, ..., 100);
+    let x = recursive!(1, 2, 3);
+    println!("{}", x);
+}
+```
+
+> **修正**: Rust 的过程宏和声明宏都有**递归深度限制**（默认 64 层），防止宏展开导致编译器栈溢出或无限循环。复杂 DSL（如 `vec![1, 2, ..., 1000]`）的宏实现需考虑此限制：`vec!` 使用内置语法支持（非纯宏递归），因此无此限制。自定义宏的应对：1) 使用迭代而非递归（`$()*` 重复而非递归调用）；2) 增加递归限制 `#![recursion_limit = "256"]`；3) 将工作转移到运行时（宏生成循环代码而非展开所有元素）。这与 C 的预处理器（无递归限制，但宏展开深度有限）或 Lisp 的宏（Turing 完全，无限制，但可能无限展开）不同——Rust 的宏系统是"半图灵完全"的：有限递归但可表达大多数模式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
+
+### 10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）
+
+```rust,compile_fail
+// 假设一个 SQL DSL: sql!(SELECT * FROM users WHERE id = $id)
+
+fn main() {
+    let id = "1; DROP TABLE users;";
+    // ❌ 运行时安全风险: 若 DSL 宏未正确参数化，
+    // 生成的 SQL 可能包含注入攻击
+    // sql!(SELECT * FROM users WHERE id = $id)
+    // 若宏直接将 id 拼接到字符串中，而非使用 prepared statement
+    println!("{}", id);
+}
+```
+
+> **修正**: 内部 DSL（如 `sql!` 宏）的安全性取决于宏的实现。宏可在编译期解析 SQL 语法并验证参数类型，但若参数化不当（字符串拼接而非绑定变量），仍可能产生 SQL 注入。Rust 的 `sqlx` crate 在编译期检查查询和参数，使用 prepared statement 防止注入。但纯宏 DSL（无编译期数据库连接）无法验证参数安全性。这与 Ruby 的 `ActiveRecord`（运行时参数化，安全但有开销）或 C 的字符串拼接 SQL（完全不安全）不同——Rust 的宏 DSL 有潜力在编译期消除注入，但需要正确实现。安全原则：**永不将用户输入直接嵌入到生成的代码/查询中**，无论使用什么抽象层。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [OWASP SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)]

@@ -35,6 +35,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：数值计算的编译错误](#十二边界测试数值计算的编译错误)
+    - [12.1 边界测试：`NonZero*` 类型的零值构造（编译错误）](#121-边界测试nonzero-类型的零值构造编译错误)
+    - [12.2 边界测试：`Wrapping`/`Saturating` 与普通运算混用（编译错误）](#122-边界测试wrappingsaturating-与普通运算混用编译错误)
 
 ---
 
@@ -628,3 +631,85 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十二、边界测试：数值计算的编译错误
+
+### 12.1 边界测试：`NonZero*` 类型的零值构造（编译错误）
+
+```rust,compile_fail
+use std::num::NonZeroU32;
+
+fn main() {
+    // ❌ 编译错误: `NonZeroU32::new` 返回 Option，不能直接解包零值
+    let x = NonZeroU32::new(0).unwrap(); // 运行时 panic!
+    // 或者尝试直接构造:
+    // let x: NonZeroU32 = 0; // 编译错误: expected NonZeroU32, found integer
+}
+
+// 正确: 验证非零后再构造
+fn fixed() {
+    let n = 42u32;
+    if let Some(x) = NonZeroU32::new(n) { // ✅ 验证 n ≠ 0
+        println!("non-zero: {}", x);
+    } else {
+        println!("zero value rejected");
+    }
+}
+```
+
+> **修正**: `NonZeroU32` 等类型在类型层面保证值不为零，用于优化 `Option<NonZeroU32>` 的内存布局（与 `u32` 同大小，用 0 表示 `None`）。构造 `NonZeroU32` 必须通过 `new()`（返回 `Option`），不能从字面量直接构造。这体现了 Rust"使非法状态不可表示"的类型系统设计哲学。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 12.2 边界测试：`Wrapping`/`Saturating` 与普通运算混用（编译错误）
+
+```rust,compile_fail
+use std::num::Wrapping;
+
+fn main() {
+    let a = Wrapping(255u8);
+    let b = 1u8;
+    // ❌ 编译错误: no implementation for `Wrapping<u8> + u8`
+    // Wrapping<T> 与普通 T 不能直接运算
+    let c = a + b;
+}
+
+// 正确: 统一使用 Wrapping 类型
+fn fixed() {
+    let a = Wrapping(255u8);
+    let b = Wrapping(1u8);
+    let c = a + b; // ✅ Wrapping(0)，环绕加法
+    println!("{:?}", c);
+}
+```
+
+> **修正**: `Wrapping<T>`、`Saturating<T>` 是显式语义包装器，与普通整数类型不兼容。这是 Rust"显式优于隐式"设计的体现——运算语义（panic/wrap/saturate）必须在类型层面明确，而非依赖编译模式或隐式转换。与 C 的静默环绕和 Swift 的运行时检查不同，Rust 将溢出策略编码到类型中。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：`f32` 与 `f64` 的精度陷阱（逻辑错误）
+
+```rust,compile_fail
+fn main() {
+    let a: f32 = 0.1;
+    let b: f32 = 0.2;
+    let sum = a + b;
+    // ❌ 逻辑错误: 0.1 + 0.2 != 0.3（浮点精度问题）
+    if sum == 0.3 {
+        println!("equal");
+    } else {
+        println!("not equal: {}", sum); // 0.30000004
+    }
+}
+```
+
+> **修正**: 浮点数的二进制表示无法精确表达十进制小数（如 `0.1`），`==` 比较浮点数几乎总是错误的。正确做法：1) 使用容差比较 `(a - b).abs() < epsilon`；2) 使用 `ordered_float` crate 的 `ApproxEq`；3) 对金融计算使用定点数或十进制类型（`rust_decimal` crate）。Rust 不提供内置的浮点近似比较，因为容差（epsilon）的选择是领域相关的（物理模拟 `1e-6`，金融计算 `1e-10`）。这与 Python 的 `math.isclose()`、MATLAB 的 `==`（近似比较）或 C 的 `FLT_EPSILON` 宏类似——所有语言都面临 IEEE 754 的精度问题，但 Rust 不提供默认近似比较，强制开发者显式选择容差。[来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：移位操作的越界（运行时 panic）
+
+```rust,compile_fail
+fn main() {
+    let x: u32 = 1;
+    // ❌ 运行时 panic: 移位位数 >= 类型位数
+    let y = x << 32; // u32 只有 32 位，移位 32 是 UB/panic
+    println!("{}", y);
+}
+```
+
+> **修正**: Rust 的移位操作（`<<`、`>>`）要求右操作数小于左操作数的位宽。`u32 << 32` 在 debug 模式下 panic，在 release 模式下是 UB（LLVM 的 `poison` value）。这与 C 的移位（`1u << 32` 是 UB，编译器可能不警告）或 Java 的移位（`1 << 32` 对 32 位取模，结果为 `1`）不同——Rust 在 debug 模式下检查并 panic。安全替代：1) 使用 `wrapping_shl`（对位数取模）；2) 预先检查 `shift < 32`；3) 使用 `checked_shl`（返回 `Option`）。移位越界在密码学（位操作）和底层系统编程中常见，Rust 的检查防止了此类低级错误。[来源: [Rust Reference — Arithmetic Operators](https://doc.rust-lang.org/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.u32.html)]

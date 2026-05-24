@@ -36,6 +36,9 @@
   - [五、来源与延伸阅读](#五来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：数值类型的编译错误](#十二边界测试数值类型的编译错误)
+    - [12.1 边界测试：`usize`/`isize` 平台相关大小（编译错误）](#121-边界测试usizeisize-平台相关大小编译错误)
+    - [12.2 边界测试：位运算与逻辑运算混用（编译错误）](#122-边界测试位运算与逻辑运算混用编译错误)
 
 ---
 
@@ -550,3 +553,88 @@ fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十二、边界测试：数值类型的编译错误
+
+### 12.1 边界测试：`usize`/`isize` 平台相关大小（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: usize = 1_000_000_000_000;
+    let y: u64 = x; // 在 64 位平台通过，但在 32 位平台可能截断
+    // 实际上 Rust 中 usize → u64 在 64 位平台是隐式类型转换错误
+    // 以下为更准确的跨平台问题
+    let arr = [0u8; 1_000_000_000_000]; // ❌ 编译错误: array size too large
+}
+
+// 正确: 使用 Vec 避免栈溢出
+fn fixed() {
+    let arr = vec![0u8; 1_000_000]; // ✅ 堆分配
+    println!("len={}", arr.len());
+}
+```
+
+> **修正**: `usize` 在 32 位平台是 32 位，64 位平台是 64 位。依赖 `usize` 精确大小的代码不可移植。数组大小 `[T; N]` 中的 `N` 必须是 `usize`，超大数组在栈上分配会导致栈溢出。对于动态或大数据，始终使用 `Vec<T>`（堆分配）。Rust 的数组大小限制是 `isize::MAX` 字节，但实际受栈大小限制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 12.2 边界测试：位运算与逻辑运算混用（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let a = 0b1010;
+    let b = 0b1100;
+    // ❌ 编译错误: cannot apply binary operator `&&` to type `{integer}`
+    // && 是逻辑与，要求 bool 操作数
+    let c = a && b;
+}
+
+// 正确: 使用位运算符
+fn fixed() {
+    let a = 0b1010;
+    let b = 0b1100;
+    let c = a & b; // ✅ 位与: 0b1000
+    println!("{:b}", c);
+}
+```
+
+> **修正**: Rust 严格区分位运算（`&`、`|`、`^`、`!`）和逻辑运算（`&&`、`||`、`!`）。位运算作用于整数类型，逻辑运算作用于 `bool`。C/C++ 中 `&&` 和 `&` 在某些上下文可互换（非零即真），但 Rust 不允许。这消除了 C 语言中常见的 `if (flags & MASK)` 与 `if (flags && MASK)` 混淆错误。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：`Wrapping` 与 `Saturating` 的语义选择（逻辑错误）
+
+```rust,compile_fail
+use std::num::Wrapping;
+
+fn main() {
+    let a = Wrapping(255u8);
+    let b = Wrapping(1u8);
+    let c = a + b;
+    // ⚠️ 逻辑错误: Wrapping 回绕为 0，可能不是预期行为
+    println!("{}", c.0); // 0
+    
+    // 若预期饱和:
+    let d = 255u8.saturating_add(1);
+    println!("{}", d); // 255
+}
+```
+
+> **修正**: Rust 提供三种整数溢出处理模式：1) **默认**（debug panic，release 回绕）；2) `Wrapping`（显式回绕）；3) `Saturating`（饱和到最大/最小值）；4) `Checked`（返回 `Option`，溢出时 `None`）。选择错误的模式导致逻辑错误：`Wrapping` 在密码学中是预期行为（模运算），但在计数器中是 bug。Rust 的标准库不默认饱和或检查，因为每种场景需求不同。这与 Swift 的整数（默认饱和/检查，溢出 panic）或 C 的整数（无检查，UB）不同——Rust 要求开发者显式选择语义。安全关键代码（航空、医疗）应使用 `checked_*` 或 `saturating_*`，并处理所有 `None` 情况。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：`NonZeroU32` 的构造与优化假设（编译错误/运行时 panic）
+
+```rust,compile_fail
+use std::num::NonZeroU32;
+
+fn main() {
+    // ❌ 编译错误: NonZeroU32::new 返回 Option，不能直接解包（unsafe）
+    // let x = NonZeroU32::new(0).unwrap(); // panic at runtime!
+    
+    // 正确: 使用 unwrap_unchecked（unsafe，但已知非零）或 match
+    let x = NonZeroU32::new(42).unwrap(); // ✅
+    
+    // 优化优势: Option<NonZeroU32> 可用 0 表示 None，占用 4 字节
+    // 而非 Option<u32> 的 8 字节（tag + value）
+    let opt: Option<NonZeroU32> = Some(x);
+    println!("{:?}", opt);
+}
+```
+
+> **修正**: `NonZeroU32`（及 `NonZeroU64`、`NonZeroI32` 等）是 Rust 的**优化类型**：包装整数，编译时保证非零。LLVM 利用此保证优化 `Option<NonZeroU32>` 的布局（niche optimization），用 0 表示 `None`，消除 tag 字节。这在高频 Option 场景（解析器、图算法）中显著减少内存。构造必须通过 `NonZeroU32::new(u32) -> Option<NonZeroU32>`——编译器无法在类型层面证明字面量非零（`NonZeroU32::new(0)` 返回 `None`）。这与 C 的 `assert(x != 0)`（运行时检查，无优化）或 Swift 的 `Nonzero` 类型（无标准支持）不同——Rust 的 `NonZero*` 是标准库类型，与编译器深度集成。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.NonZeroU32.html)] · [来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/type-sizes.html)]

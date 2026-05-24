@@ -826,3 +826,100 @@ async fn good() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+## 十、边界测试：系统可组合性的编译错误
+
+### 10.1 边界测试：trait 对象的组合限制（编译错误）
+
+```rust,compile_fail
+trait Read {}
+trait Write {}
+
+fn compose(rw: &(dyn Read + Write)) {
+    // ❌ 编译错误: trait objects cannot contain multiple auto traits
+    // Rust 不支持任意 trait 组合的对象安全 trait object
+}
+
+// 正确: 使用泛型或自定义组合 trait
+trait ReadWrite: Read + Write {}
+
+fn compose_fixed<T: ReadWrite>(rw: &T) {
+    // ✅ 泛型接受任何实现 Read + Write 的类型
+}
+```
+
+> **修正**: Rust 的 trait object（`dyn Trait`）有对象安全性限制：只能包含一个"主 trait" 和若干 auto trait（`Send`、`Sync` 等）。不能直接写 `dyn TraitA + TraitB`（除非 TraitB 是 auto trait）。这是因为 vtable 只能存储一个主 trait 的方法指针。系统设计中的"接口组合"需通过泛型（`T: TraitA + TraitB`）或创建新的组合 trait（`trait Combo: TraitA + TraitB {}`）实现。这与 Java 的多接口继承或 Go 的隐式接口不同——Rust 在类型安全和运行时效率之间做了明确权衡。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：插件系统的 ABI 稳定性（运行时 UB）
+
+```rust
+// 主机程序
+pub trait Plugin {
+    fn process(&self, input: &str) -> String;
+}
+
+// 插件动态库中的实现
+// ⚠️ 运行时 UB: 若主机和插件使用不同 Rust 编译器版本
+// trait 的 vtable 布局可能不兼容
+
+// 正确: 使用 C ABI 作为稳定接口
+#[repr(C)]
+pub struct PluginVTable {
+    pub process: extern "C" fn(*const c_void, *const c_char) -> *mut c_char,
+}
+```
+
+> **修正**: Rust 的 trait 和泛型**不保证 ABI 稳定性**——不同编译器版本、不同优化级别可能生成不同的 vtable 布局。设计插件系统时，必须使用 `#[repr(C)]` 结构体和 `extern "C"` 函数作为 FFI 边界。这与 COM（Windows）或 GObject（GNOME）的虚表稳定 ABI 不同——Rust 优先类型安全和零成本抽象，牺牲了跨版本二进制兼容性。`abi_stable` crate 提供了一种在 Rust 插件间维持 ABI 稳定的方案，但增加了运行时开销。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：trait 组合子的菱形继承问题（编译错误）
+
+```rust,compile_fail
+trait A { fn method(&self); }
+trait B: A { fn method(&self); }
+trait C: A { fn method(&self); }
+
+struct MyType;
+
+impl A for MyType { fn method(&self) { println!("A"); } }
+impl B for MyType { fn method(&self) { println!("B"); } }
+impl C for MyType { fn method(&self) { println!("C"); } }
+
+fn main() {
+    let t = MyType;
+    // ❌ 编译错误: 调用 t.method() 歧义，B::method 还是 C::method?
+    // t.method();
+
+    // 正确: 显式指定 trait
+    // A::method(&t);
+    // B::method(&t);
+    // <MyType as B>::method(&t);
+}
+```
+
+> **修正**: Rust 的 trait 系统**不允许菱形继承**导致的歧义：若一个类型实现了多个具有同名方法的 trait，调用时必须显式指定 trait（`Trait::method(&obj)` 或 `<Type as Trait>::method(&obj)`）。这与 C++ 的虚继承（解决菱形问题，但复杂）或 Python 的 MRO（Method Resolution Order，线性化继承链）不同——Rust 不自动解决歧义，要求开发者显式选择。这是设计决策：自动选择可能隐藏 bug（开发者不知道调用了哪个方法），显式选择使代码意图清晰。`trait B: A` 表示 B 继承 A 的方法，但 `MyType` 分别实现 `B` 和 `C` 时，两个 `method` 是独立的，无覆盖关系。这与 Java 的接口默认方法（`default` 方法可被覆盖，菱形冲突需显式解决）类似——Rust 和 Java 8+ 都拒绝自动解决，要求显式指定。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
+
+### 10.4 边界测试：组合优于继承时的 boilerplate 问题（逻辑错误）
+
+```rust,compile_fail
+struct Engine {
+    horsepower: u32,
+}
+
+struct Wheels {
+    count: u32,
+}
+
+struct Car {
+    engine: Engine,
+    wheels: Wheels,
+}
+
+// ❌ 逻辑错误/设计问题: 组合导致大量转发方法
+impl Car {
+    fn horsepower(&self) -> u32 { self.engine.horsepower }
+    fn wheel_count(&self) -> u32 { self.wheels.count }
+    // 每增加一个组件，需添加更多转发方法
+}
+```
+
+> **修正**: Rust 不支持继承（无 `class Car extends Vehicle`），强制使用**组合**（composition）。组合的代价是**boilerplate**：需手动编写转发方法暴露内部组件的 API。缓解工具：1) `Deref` 委托（仅适用于智能指针模式，不推荐领域类型）；2) `delegate` crate（宏自动生成转发方法）；3) 公开内部字段（`pub engine: Engine`，牺牲封装）。Rust 的设计哲学：组合更灵活（运行时替换组件）、更安全（无继承层次导致的脆弱基类问题），但确实增加了样板代码。这与 Go 的 struct 嵌入（类似组合，但自动转发方法，是 Go 唯一的"继承"机制）或 Java 的委托模式（手动编写，与 Rust 类似）不同——Rust 正在探索 `#[derive(Delegate)]` 等宏简化组合委托。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-what-is-oo.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]

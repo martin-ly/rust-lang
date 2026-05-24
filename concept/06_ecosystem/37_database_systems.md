@@ -312,4 +312,60 @@ fn query_result() -> &str {
 
 > **修正**: 数据库查询结果通常需要返回拥有所有权的类型（`String`、`Vec<u8>`）或 `Box<str>`，不能返回局部数据的引用。
 
+### 编译错误 4：并发连接池的 `Send` 约束不满足（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::sync::Mutex;
+
+struct Pool {
+    connections: Mutex<Vec<Rc<Connection>>>, // Rc 不是 Send
+}
+
+struct Connection;
+
+fn spawn_pool(pool: Pool) {
+    // ❌ 编译错误: `Rc<Connection>` cannot be sent between threads safely
+    std::thread::spawn(move || {
+        let conns = pool.connections.lock().unwrap();
+        println!("{} connections", conns.len());
+    });
+}
+
+// 正确: 使用 Arc 替代 Rc
+use std::sync::Arc;
+
+struct PoolFixed {
+    connections: Mutex<Vec<Arc<Connection>>>, // ✅ Arc 是 Send + Sync
+}
+```
+
+> **修正**: 数据库连接池通常需要在多线程间共享。`Rc<T>` 使用非原子引用计数，不能跨线程。必须使用 `Arc<T>`（原子引用计数）包装连接对象。这是 Rust 并发模型的基本约束——共享状态必须是 `Send + Sync`。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 编译错误 5：SQLx 查询类型不匹配（编译错误）
+
+```rust,compile_fail
+// 假设表: users (id INTEGER PRIMARY KEY, name TEXT)
+
+async fn bad_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
+    // ❌ 编译错误: sqlx 编译期检查查询与返回类型不匹配
+    let row: (i32, i32) = sqlx::query_as("SELECT id, name FROM users")
+        .fetch_one(pool)
+        .await?;
+    // name 是 TEXT，不能映射到 i32
+    Ok(())
+}
+
+// 正确: 查询类型与数据库 schema 匹配
+async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
+    let row: (i32, String) = sqlx::query_as("SELECT id, name FROM users")
+        .fetch_one(pool)
+        .await?; // ✅ id: INTEGER → i32, name: TEXT → String
+    println!("{}: {}", row.0, row.1);
+    Ok(())
+}
+```
+
+> **修正**: SQLx 的宏（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。[来源: [SQLx Documentation](https://docs.rs/sqlx/)]
+
 ---

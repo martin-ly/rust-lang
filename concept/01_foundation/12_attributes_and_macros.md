@@ -39,6 +39,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：属性与宏的编译错误](#十二边界测试属性与宏的编译错误)
+    - [12.1 边界测试：`derive` 宏的 trait 冲突（编译错误）](#121-边界测试derive-宏的-trait-冲突编译错误)
+    - [12.2 边界测试：宏递归展开溢出（编译错误）](#122-边界测试宏递归展开溢出编译错误)
 
 ---
 
@@ -748,3 +751,100 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十二、边界测试：属性与宏的编译错误
+
+### 12.1 边界测试：`derive` 宏的 trait 冲突（编译错误）
+
+```rust,compile_fail
+#[derive(PartialEq, Eq, PartialOrd, Ord)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+// ❌ 编译错误: `f64` 未实现 `Eq` 和 `Ord`
+// 浮点数因 NaN != NaN 而不满足全序关系
+
+fn main() {
+    let p1 = Point { x: 1.0, y: 2.0 };
+    let p2 = Point { x: 1.0, y: 2.0 };
+    assert_eq!(p1, p2);
+}
+
+// 正确: 只 derive PartialEq + PartialOrd
+#[derive(PartialEq, PartialOrd, Debug)]
+struct PointFixed {
+    x: f64,
+    y: f64,
+}
+```
+
+> **修正**: `#[derive(Eq)]` 要求所有字段实现 `Eq`（等价关系），`#[derive(Ord)]` 要求所有字段实现 `Ord`（全序关系）。`f32`/`f64` 因 IEEE 754 NaN 语义（NaN != NaN，且 NaN 不可比较）未实现 `Eq` 和 `Ord`，只实现 `PartialEq` 和 `PartialOrd`。包含浮点数的结构体只能 derive 后者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 12.2 边界测试：宏递归展开溢出（编译错误）
+
+```rust,compile_fail
+macro_rules! infinite {
+    () => { infinite!() }; // ❌ 无限递归
+}
+
+fn main() {
+    infinite!(); // 编译错误: recursion limit reached
+}
+
+// 正确: 宏必须具有终止条件
+macro_rules! count {
+    () => { 0 };
+    ($head:tt $($tail:tt)*) => { 1 + count!($($tail)*) };
+}
+
+fn fixed() {
+    let n = count!(a b c); // ✅ 3
+    println!("{}", n);
+}
+```
+
+> **修正**: Rust 宏（`macro_rules!`）通过递归展开实现循环/迭代逻辑。编译器设置递归深度上限（默认 128），超过则报错。宏设计必须确保递归有终止分支（base case）。这与函数递归类似，但宏在编译期展开，其递归深度受编译器限制而非运行时栈限制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：过程宏的 hygiene 与标识符捕获（编译错误）
+
+```rust,compile_fail
+// 假设自定义 derive 宏 #[derive(MyDebug)]
+// 宏生成的代码:
+// impl std::fmt::Debug for MyStruct {
+//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+//         write!(f, "MyStruct")
+//     }
+// }
+
+// 在调用 crate 中:
+// use my_crate::MyDebug;
+//
+// struct MyStruct;
+//
+// // ❌ 编译错误: 若宏生成的代码使用绝对路径 `::std::fmt::Debug`，
+// // 但调用者重定义了 `std` 模块
+// mod std { /* ... */ }
+```
+
+> **修正**: Rust 的宏 hygiene 保证宏生成的标识符不会与调用者的标识符意外冲突。`Span::mixed_site()` 和 `Span::call_site()` 控制 hygiene 级别：`mixed_site` 宏生成的标识符在宏定义处解析（防止调用者覆盖），`call_site` 在调用处解析（允许调用者覆盖）。`derive` 宏通常使用绝对路径（`::std::fmt::Debug`），因为标准库路径是稳定的。但边缘情况：`no_std` 环境中 `std` 不可用，应使用 `::core::fmt::Debug`。`proc-macro2` 和 `quote` crate 提供 `$crate` 等价的 `::my_crate` 路径处理。这与 C 的宏（无 hygiene，纯文本替换，极易冲突）或 Scheme 的 hygienic macro（类似 Rust，但基于语法对象）不同——Rust 的 hygiene 是编译期强制的，覆盖了标识符、生命周期、操作符重载。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+
+### 10.4 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）
+
+```rust,compile_fail
+#[cfg(target_os = "linux")]
+fn platform_specific() { println!("linux"); }
+
+#[cfg(target_os = "windows")]
+fn platform_specific() { println!("windows"); }
+
+// ❌ 编译错误: 若 target 既不是 linux 也不是 windows（如 macOS）
+// 两个函数都不存在，调用 platform_specific() 失败
+
+fn main() {
+    platform_specific();
+}
+```
+
+> **修正**: `cfg` 条件编译根据编译目标选择代码。若所有 `cfg` 条件都不满足，函数不存在，调用点编译错误。安全模式：添加无条件的默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "windows")))] fn platform_specific() { panic!("unsupported") }`。`cfg` 的求值在编译期：条件为假时，代码完全被剔除（不解析、不类型检查）。这与 C 的 `#ifdef`（预处理器，条件为假时仍需语法正确）或 Java 的无条件编译（运行时 `if` 检查）不同——Rust 的 `cfg` 允许平台特定的代码使用该平台独有的 API（如 Linux 的 `epoll`、Windows 的 `IOCP`），无需在所有平台上可编译。但这也意味着跨平台代码需仔细设计 `cfg` 覆盖，防止遗漏平台。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch14-05-configuration.html)] · [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]

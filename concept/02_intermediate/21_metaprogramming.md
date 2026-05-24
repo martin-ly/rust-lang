@@ -44,6 +44,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：元编程的编译错误](#十边界测试元编程的编译错误)
+    - [10.1 边界测试：过程宏的 TokenStream 解析失败（编译错误）](#101-边界测试过程宏的-tokenstream-解析失败编译错误)
+    - [10.2 边界测试：常量泛型的非常量表达式（编译错误）](#102-边界测试常量泛型的非常量表达式编译错误)
 
 ---
 
@@ -631,3 +634,90 @@ fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：元编程的编译错误
+
+### 10.1 边界测试：过程宏的 TokenStream 解析失败（编译错误）
+
+```rust,compile_fail
+use proc_macro::TokenStream;
+
+#[proc_macro_derive(MyDerive)]
+pub fn my_derive(input: TokenStream) -> TokenStream {
+    // ❌ 编译错误: 过程宏必须在 proc-macro crate 中定义
+    // 且返回的 TokenStream 必须是有效 Rust 代码
+    "invalid rust code".parse().unwrap()
+}
+
+// 正确: 使用 syn/quote 生成有效代码
+// use syn::{parse_macro_input, DeriveInput};
+// use quote::quote;
+//
+// #[proc_macro_derive(MyDerive)]
+// pub fn my_derive(input: TokenStream) -> TokenStream {
+//     let input = parse_macro_input!(input as DeriveInput);
+//     let expanded = quote! { /* 有效代码 */ };
+//     expanded.into()
+// }
+```
+
+> **修正**: 过程宏（procedural macro）在编译期执行，将输入的 `TokenStream` 转换为输出的 `TokenStream`。输出必须是语法有效的 Rust 代码，否则编译器在展开后报错。`syn` crate 负责将 TokenStream 解析为 AST，`quote` crate 负责从模板生成 TokenStream。过程宏的错误处理具有挑战性——宏内部 panic 会生成不友好的编译错误信息，应使用 `proc_macro::Diagnostic` 或 `syn::Error` 提供结构化错误。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：常量泛型的非常量表达式（编译错误）
+
+```rust,compile_fail
+fn array_size<const N: usize>() -> [u8; N] {
+    // ❌ 编译错误: `N + 1` 在常量泛型上下文中可能不合法
+    // 取决于具体使用场景
+    [0; N]
+}
+
+fn main() {
+    let x = 5;
+    // ❌ 编译错误: `x` 不是常量
+    let arr: [u8; x] = [0; x]; // 数组大小必须是编译期常量
+}
+
+// 正确: 使用 const 泛型参数
+fn fixed<const N: usize>() -> [u8; N] {
+    [0; N] // ✅ N 是常量泛型参数
+}
+```
+
+> **修正**: 数组大小 `[T; N]` 和常量泛型 `const N: usize` 要求 `N` 是编译期可求值的常量表达式。运行时变量不能作为数组大小或常量泛型参数。Rust 1.79+ 放宽了部分 `const` 上下文中的限制（`inline const`），但核心约束不变：类型系统的参数（如数组大小）必须在编译期确定。这与 C++ 的 `std::array<T, N>`（`N` 是模板参数）类似，但 Rust 的常量求值器更严格——某些在 C++ 中允许的表达式在 Rust 中可能需要显式 `const` 块。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：常量泛型的表达式复杂度（编译错误）
+
+```rust,compile_fail
+#![allow(incomplete_features)]
+#![feature(generic_const_exprs)]
+
+struct Array<T, const N: usize>([T; N]);
+
+struct Wrapper<T, const N: usize>(Array<T, { N + 1 }>);
+// ❌ 编译错误: generic_const_exprs 不稳定，复杂表达式受限
+
+fn main() {}
+```
+
+> **修正**: 常量泛型（const generics，`const N: usize`）允许类型参数化数组大小、位掩码宽度等。但常量表达式（`N + 1`、`N * 2`）在泛型位置的使用需要 `generic_const_exprs` 特性（不稳定）。当前稳定的 Rust 只允许简单的常量泛型：1) 单一常量参数（`[T; N]`）；2) 默认参数（`const N: usize = 10`）；3) 关联常量（`Trait::CONST`）。复杂表达式（`N + 1`、`{ N * 2 }`）在稳定编译器上被拒绝。这与 C++ 的模板非类型参数（`template<int N>`，允许任意常量表达式）或 D 的模板参数（类似 C++）不同——Rust 的常量泛型更保守，优先保证编译期求值的确定性和类型系统的稳定性。[来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：`TypeId` 的跨 crate 稳定性（逻辑错误）
+
+```rust,compile_fail
+use std::any::{Any, TypeId};
+
+fn main() {
+    let id1 = TypeId::of::<String>();
+    let id2 = TypeId::of::<String>();
+    assert_eq!(id1, id2); // ✅ 同一编译会话内稳定
+    
+    // ❌ 逻辑错误: TypeId 的哈希值在不同编译会话/不同版本中可能不同
+    // 不能将 TypeId 序列化到磁盘或通过网络传递
+    // let serialized = serialize(&id1);
+    // let deserialized: TypeId = deserialize(&serialized);
+    // assert_eq!(id1, deserialized); // 可能失败!
+}
+```
+
+> **修正**: `TypeId` 是 Rust 运行时的类型标识符，用于 `Any` trait 的向下转型（`downcast_ref`）。`TypeId` 在**同一编译会话**内是确定且可比较的，但不保证跨编译会话、跨 crate 版本、跨编译器版本的一致性。其内部表示是编译器生成的哈希值，可能随编译器版本变化。因此 `TypeId` 不能：1) 序列化到持久存储；2) 通过网络传递；3) 作为长期缓存的键。安全替代：使用自定义类型标签（`enum TypeTag { String, Int, ... }`）或字符串类型名（`std::any::type_name`，不稳定）。这与 Java 的 `Class.getName()`（跨 JVM 稳定）或 C++ 的 `typeid`（同一程序内稳定，跨程序不保证）类似——运行期类型信息的设计受限于编译器实现细节。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/any/struct.TypeId.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

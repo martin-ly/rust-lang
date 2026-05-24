@@ -40,6 +40,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：测试的编译错误](#十边界测试测试的编译错误)
+    - [10.1 边界测试：`cargo test` 的编译失败与测试失败的区分](#101-边界测试cargo-test-的编译失败与测试失败的区分)
+    - [10.2 边界测试：mock 对象的 trait 约束（编译错误）](#102-边界测试mock-对象的-trait-约束编译错误)
+    - [10.3 边界测试：`cargo test` 的测试名称冲突（编译错误）](#103-边界测试cargo-test-的测试名称冲突编译错误)
+    - [10.4 边界测试：doc test 中的 `no_run` 与 `compile_fail` 的误用（编译错误/测试失败）](#104-边界测试doc-test-中的-no_run-与-compile_fail-的误用编译错误测试失败)
 
 ---
 
@@ -593,3 +598,82 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：测试的编译错误
+
+### 10.1 边界测试：`cargo test` 的编译失败与测试失败的区分
+
+```rust,compile_fail
+#[test]
+fn broken_test() {
+    // ❌ 编译错误: 测试代码本身编译失败
+    let x: i32 = "hello"; // 类型不匹配
+}
+```
+
+> **修正**: `cargo test` 首先编译测试代码（包括 `#[test]` 函数和 `tests/` 目录），然后运行测试。编译错误导致**无测试运行**——这与测试失败（assertion 失败）不同。CI 系统需要区分"编译失败"（代码错误）和"测试失败"（逻辑错误）。Rust 的测试框架在编译期检查测试代码的类型安全，确保测试本身无 bug。这与 Python 的动态测试（测试代码错误在运行时发现）或 Java 的反射测试（运行时方法查找）不同——Rust 的测试在编译期就验证完整性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：mock 对象的 trait 约束（编译错误）
+
+```rust,compile_fail
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct MockDb;
+
+    // ❌ 编译错误: MockDb 未实现 Database trait
+    // fn test_query() {
+    //     let service = Service::new(MockDb);
+    // }
+}
+
+trait Database {
+    fn query(&self, sql: &str) -> Vec<String>;
+}
+
+struct Service<T: Database> {
+    db: T,
+}
+
+impl<T: Database> Service<T> {
+    fn new(db: T) -> Self { Self { db } }
+}
+```
+
+> **修正**: Rust 的 mock 对象必须**显式实现**被模拟的 trait。这与 Python 的 `unittest.mock`（动态创建 mock）或 Java 的 Mockito（运行时字节码生成）不同——Rust 没有运行时反射，mock 必须在编译期存在。`mockall` crate 通过过程宏自动生成 mock 实现，但底层仍是"为 trait 生成 struct 并实现"。这增加了测试代码的样板，但保证类型安全——mock 对象的方法签名必须与 trait 完全一致，编译器拒绝不一致的 mock。[来源: [mockall Documentation](https://docs.rs/mockall/)]
+
+### 10.3 边界测试：`cargo test` 的测试名称冲突（编译错误）
+
+```rust,compile_fail
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_add() {}
+}
+
+#[cfg(test)]
+mod more_tests {
+    #[test]
+    fn test_add() {}
+    // ❌ 编译错误: 同一 crate 中测试函数名冲突？
+    // 实际上不冲突，因为模块路径不同: tests::test_add vs more_tests::test_add
+}
+```
+
+> **修正**: Rust 的测试函数名在**模块路径层面**唯一：`tests::test_add` 和 `more_tests::test_add` 是不同的测试。但 `cargo test` 的过滤器 `--test test_add` 会匹配两者，同时运行。真正的命名冲突：1) `#[test]` 函数与 `#[bench]` 函数同名（不冲突，不同命名空间）；2) 集成测试文件（`tests/` 目录）中的模块名与 lib 中的模块名（可能解析歧义）；3) doc test 中的示例函数名与单元测试冲突（罕见）。`cargo test` 的输出显示完整路径，帮助区分。这与 Java 的 JUnit（方法名 + 类名唯一）或 Python 的 `pytest`（模块路径 + 函数名唯一）类似——Rust 的测试命名空间是层次化的，冲突风险低但过滤器匹配需小心。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] · [来源: [Cargo Test Documentation](https://doc.rust-lang.org/cargo/commands/cargo-test.html)]
+
+### 10.4 边界测试：doc test 中的 `no_run` 与 `compile_fail` 的误用（编译错误/测试失败）
+
+```rust,compile_fail
+/// ```no_run
+/// let x = 1 / 0; // 运行时 panic，但 doc test 不执行
+/// ```
+///
+/// ```compile_fail
+/// let x: String = 42; // 应编译错误，若实际编译通过则测试失败
+/// ```
+fn documented() {}
+```
+
+> **修正**: Rust 的 doc test 支持多种属性：1) ` ```rust`（默认，编译 + 运行）；2) ` ```no_run`（编译但不运行，适合有副作用的示例）；3) ` ```compile_fail`（期望编译失败，若编译通过则测试失败）；4) ` ```ignore`（完全忽略）；5) ` ```edition2024`（指定 Edition）。常见误用：1) 将 `compile_fail` 用于运行时错误（应使用 `no_run` 或 `should_panic`）；2) 将 `no_run` 用于纯计算示例（失去运行验证）；3) `compile_fail` 示例因编译器版本变化而意外通过（不稳定）。doc test 是 Rust 的"可执行文档"特性：示例代码在 CI 中自动测试，保证文档与代码同步。这与 Python 的 `doctest`（类似）或 Java 的 Javadoc（无执行验证）不同——Rust 的 doc test 是质量保证的重要工具。[来源: [Rustdoc Documentation](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html)]

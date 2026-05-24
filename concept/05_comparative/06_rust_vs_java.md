@@ -457,3 +457,104 @@ Java → Rust 的渐进迁移策略:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：Rust 与 Java 的编译错误对比
+
+### 10.1 边界测试：Java 的泛型擦除 vs Rust 的单态化（编译错误）
+
+```rust,compile_fail
+fn generic_id<T>(x: T) -> T {
+    x
+}
+
+fn main() {
+    let a = generic_id(42i32);
+    let b = generic_id(3.14f64);
+    // ❌ 编译错误: `a` 和 `b` 是不同类型，不能放入同一 Vec
+    // Rust 的单态化生成独立代码，a 和 b 没有共同类型
+    let v = vec![a, b];
+}
+
+// 正确: 使用枚举或 trait object 统一类型
+enum Number {
+    Int(i32),
+    Float(f64),
+}
+
+fn fixed() {
+    let v = vec![Number::Int(42), Number::Float(3.14)];
+}
+```
+
+> **Java 对比**: Java 的泛型通过**类型擦除**（type erasure）实现——编译后 `List<Integer>` 和 `List<String>` 都是 `List<Object>`，运行时无类型信息。Rust 通过**单态化**（monomorphization）实现泛型——为每个具体类型生成独立代码，`generic_id<i32>` 和 `generic_id<f64>` 是完全不同的函数。Java 的擦除允许运行时类型统一（`List<?>`），但无法获取泛型参数；Rust 的单态化提供零成本抽象，但不同类型不能共存于同质集合（需用 `enum` 或 `Box<dyn Trait>`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: `Option<String>` 不能直接与字符串操作
+    let s: Option<String> = None;
+    // Rust 没有 null，必须显式解包 Option
+    let len = s.len(); // 编译错误
+}
+
+// 正确: 显式处理 Option
+fn fixed() {
+    let s: Option<String> = Some(String::from("hello"));
+    let len = s.map(|v| v.len()).unwrap_or(0); // ✅ 安全处理 None
+    println!("{}", len);
+}
+```
+
+> **Java 对比**: Java 的引用类型默认可为 `null`——`String s = null;` 编译通过，但运行时 `s.length()` 抛出 `NullPointerException`。Rust 的 `Option<T>` 将可空性编码到类型中，`Some` 和 `None` 是两个不同的变体，`match` 强制处理两者。这与 Java 8+ 的 `Optional<T>` 类似，但 Rust 的 `Option` 是语言核心（零开销），而 Java 的 `Optional` 是库类（有对象包装开销）。Rust 消除了十亿美元错误（billion-dollar mistake）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译错误）
+
+```rust,compile_fail
+// Java: List<String> 和 List<Integer> 运行时相同（类型擦除）
+// List list = new ArrayList<String>();
+// list.add(42); // 运行时允许，但可能 ClassCastException
+
+// Rust: Vec<String> 和 Vec<i32> 是完全不同的类型
+fn process_strings(v: Vec<String>) {
+    for s in v {
+        println!("{}", s.len());
+    }
+}
+
+fn main() {
+    let nums = vec![1, 2, 3];
+    // ❌ 编译错误: Vec<i32> 不能传给需要 Vec<String> 的函数
+    // process_strings(nums);
+}
+```
+
+> **修正**: Java 的泛型使用**类型擦除**（type erasure）：编译后 `List<String>` 和 `List<Integer>` 都是 `List<Object>`，泛型信息仅用于编译期检查。Rust 使用**单态化**（monomorphization）：`Vec<String>` 和 `Vec<i32>` 编译为完全不同的机器码，无运行时类型信息。Java 的优势：二进制兼容性（泛型类只需编译一次）、反射可访问泛型信息（通过 `TypeToken`）。Rust 的优势：零成本抽象（无装箱、无类型检查）、编译期错误更精确。Java 的擦除导致运行时 `ClassCastException`，Rust 的单态化在编译期消除此类错误。这与 C++ 的模板（同样单态化）或 C# 的泛型（运行时实例化，保留类型信息）不同——Rust 选择了 C++ 的路径，但增加了类型推断和 trait bound 的安全性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Java Generics Tutorial](https://docs.oracle.com/javase/tutorial/java/generics/)]
+
+### 10.4 边界测试：Java 的 GC 与 Rust 的所有权的资源管理差异（编译错误）
+
+```rust,compile_fail
+struct FileHandle {
+    path: String,
+}
+
+impl Drop for FileHandle {
+    fn drop(&mut self) {
+        println!("closing {}", self.path);
+    }
+}
+
+fn main() {
+    let file = FileHandle { path: "data.txt".to_string() };
+    // ❌ 逻辑错误: 从 Java 迁移时，可能假设 file 在作用域结束时自动关闭
+    // Rust 确实自动调用 drop，但时机是确定性的（作用域结束），
+    // 而非 GC 的非确定性回收
+    
+    // 但若提前移动:
+    let file2 = file;
+    // file 在这里已被移动，drop 将在 file2 结束时调用
+    // 不是 file 的原作用域!
+}
+```
+
+> **修正**: Java 的资源管理依赖**垃圾回收**（GC）：非内存资源（文件句柄、网络连接）通过 `try-finally` 或 `try-with-resources` 显式关闭，否则等待 GC 的**终结器**（finalizer，不确定时机）。Rust 的 `Drop` trait 提供**确定性析构**：资源在值离开作用域时立即释放，无 GC 延迟。但 Rust 的所有权移动改变析构时机：`let file2 = file;` 后，`file` 的所有权转移到 `file2`，`Drop` 在 `file2` 的作用域结束时调用。这与 C++ 的 RAII（同样确定性，但拷贝语义可能多次析构）或 Python 的 `with` 语句（确定性，但依赖开发者使用）不同——Rust 的所有权 + Drop 将资源管理与类型系统绑定，无需显式关闭（大部分情况），也无 GC 不确定性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Java Finalization](https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html)]

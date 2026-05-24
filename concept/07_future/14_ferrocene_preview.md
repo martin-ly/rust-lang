@@ -35,6 +35,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Ferrocene 预览的编译错误](#十边界测试ferrocene-预览的编译错误)
+    - [10.1 边界测试：安全关键子集的 unsafe 禁止（编译错误）](#101-边界测试安全关键子集的-unsafe-禁止编译错误)
+    - [10.2 边界测试：确定性执行与 `HashMap` 的禁用（编译错误）](#102-边界测试确定性执行与-hashmap-的禁用编译错误)
+    - [10.3 边界测试：Ferrocene 子集与标准库的不完全覆盖（编译错误）](#103-边界测试ferrocene-子集与标准库的不完全覆盖编译错误)
+    - [10.4 边界测试：Ferrocene 的确定性执行与浮点数（逻辑错误）](#104-边界测试ferrocene-的确定性执行与浮点数逻辑错误)
 
 ---
 
@@ -435,3 +440,68 @@ fn main() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+## 十、边界测试：Ferrocene 预览的编译错误
+
+### 10.1 边界测试：安全关键子集的 unsafe 禁止（编译错误）
+
+```rust,compile_fail
+#![forbid(unsafe_code)]
+#![ferrocene::compliance = "ISO-26262-ASIL-D"]
+
+fn process(data: &[u8]) -> u32 {
+    // ❌ 编译错误: Ferrocene 安全关键子集禁止裸指针转换
+    let ptr = data.as_ptr() as *const u32;
+    unsafe { *ptr } // 违反 forbid(unsafe_code) 和子集约束
+}
+```
+
+> **修正**: Ferrocene 是 Rust 的 ISO 26262（汽车功能安全）和 IEC 61508（工业功能安全）认证工具链。它定义了**安全关键子集**（safety-critical subset）：禁止 `unsafe` 代码、禁止某些标准库 API（如 `std::mem::transmute`）、要求确定性执行（无 panic、无分配失败）。在安全关键子集中，所有操作都必须在编译期验证为安全。这与 Rust 的常规开发（允许 unsafe 封装底层操作）截然不同——Ferrocene 的目标领域（刹车系统、转向控制、安全气囊）要求最高级别的保证。开发者必须使用纯 safe Rust 实现功能，或将有 unsafe 的代码隔离在非安全关键组件中（通过严格接口契约）。这与 MISRA C（C 的安全关键子集）类似，但 Ferrocene 的约束由 Rust 的类型系统和 borrow checker 强制执行，减少人为审查负担。[来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] · [来源: [ISO 26262 Standard](https://www.iso.org/standard/68383.html)]
+
+### 10.2 边界测试：确定性执行与 `HashMap` 的禁用（编译错误）
+
+```rust,compile_fail
+#![ferrocene::compliance = "IEC-61508-SIL-3"]
+
+use std::collections::HashMap;
+
+fn lookup() -> i32 {
+    // ❌ 编译错误: HashMap 使用随机化哈希（SipHash），非确定性
+    let mut map = HashMap::new();
+    map.insert("key", 42);
+    *map.get("key").unwrap()
+}
+```
+
+> **修正**: `HashMap` 的默认哈希算法（SipHash 1-3）使用随机种子防止 HashDoS 攻击，但导致迭代顺序非确定性——每次运行可能不同。在安全关键系统中，非确定性使测试覆盖率和形式化验证困难：无法保证所有执行路径都被测试。Ferrocene 子集禁止非确定性 API，要求使用 `BTreeMap`（有序、确定性）或固定种子的 `HashMap`（`BuildHasherDefault`）。这与实时系统（RTOS）的确定性要求一致：执行时间、内存使用、行为路径都必须可预测。Rust 的 `BTreeMap` 提供 O(log n) 的确定性操作，是安全关键场景的首选。形式化验证工具也更易处理有序数据结构（状态空间更小）。[来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)]
+
+### 10.3 边界测试：Ferrocene 子集与标准库的不完全覆盖（编译错误）
+
+```rust,compile_fail
+#![ferrocene::compliance = "ISO-26262-ASIL-D"]
+
+use std::collections::HashMap;
+
+fn main() {
+    // ❌ 编译错误: Ferrocene 子集可能排除 HashMap（非确定性迭代顺序）
+    // 需使用 BTreeMap 或固定种子的哈希表
+    let mut map = HashMap::new();
+    map.insert("key", 42);
+}
+```
+
+> **修正**: Ferrocene 的安全关键子集排除某些标准库类型和函数，原因包括：1) **非确定性**：`HashMap` 的迭代顺序依赖哈希种子和插入顺序；2) **panic 风险**：`Vec::swap_remove`、`String::from_utf8` 等可能 panic；3) **堆分配失败**：`Box::new`、`Vec::push` 在内存不足时 panic（或返回 `Result`，视配置而定）。安全关键代码需使用确定性替代：`BTreeMap`（有序）、数组（固定大小）、`Option` 传播错误。这与 MISRA C 的规则（如禁止动态内存分配）或 SPARK Ada 的 Ravenscar profile（限制任务和调度）类似——安全关键子集通过限制语言特性简化验证。Ferrocene 的目标是让 Rust 通过 ISO 26262 工具认证，使汽车制造商可使用 Rust 开发安全关键 ECU。[来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] · [来源: [ISO 26262 Standard](https://www.iso.org/standard/68383.html)]
+
+### 10.4 边界测试：Ferrocene 的确定性执行与浮点数（逻辑错误）
+
+```rust,compile_fail
+#![ferrocene::compliance = "IEC-61508-SIL-3"]
+
+fn compute(x: f64) -> f64 {
+    // ❌ 逻辑错误: 浮点运算在不同编译器/平台上可能产生不同结果
+    // IEEE 754 允许某些操作的精度差异（如 fused multiply-add）
+    x * 2.0 + 1.0
+}
+```
+
+> **修正**: 浮点数的**确定性执行**是形式化验证的难点：1) `x86` 的 80 位扩展精度寄存器与 `arm` 的 64 位寄存器导致中间结果不同；2) FMA（fused multiply-add）指令改变舍入行为；3) `-ffast-math` 等优化破坏 IEEE 754 语义。Ferrocene 可能要求：1) 禁用 FMA（`rustc` 的 `-C target-feature=-fma`）；2) 使用 `strict` 浮点模式；3) 对关键计算使用定点数或有理数（`fixed` crate、`num-rational`）。航空软件（DO-178C）通常禁止浮点数用于安全关键计算，或要求严格的范围分析和精度证明。这与 Ada 的 `Safe_Float`（范围约束）或 MATLAB 的 Fixed-Point Designer（定点转换）类似——浮点数的非确定性使形式化验证复杂化。[来源: [Ferrocene Documentation](https://spec.ferrocene.dev/)] · [来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)]

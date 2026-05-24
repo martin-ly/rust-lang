@@ -37,6 +37,11 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：云原生开发的编译错误](#十边界测试云原生开发的编译错误)
+    - [10.1 边界测试：异步运行时混用（编译错误）](#101-边界测试异步运行时混用编译错误)
+    - [10.2 边界测试：配置结构的反序列化生命周期（编译错误）](#102-边界测试配置结构的反序列化生命周期编译错误)
+    - [10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）](#106-边界测试kubernetes-的优雅关闭与-sigterm-处理运行时数据丢失)
+    - [10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）](#105-边界测试kubernetes-探针配置不当导致的级联重启运行时可用性下降)
 
 ---
 
@@ -642,3 +647,88 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：云原生开发的编译错误
+
+### 10.1 边界测试：异步运行时混用（编译错误）
+
+```rust,compile_fail
+// 假设同时依赖 tokio 和 async-std
+
+async fn task() {
+    println!("running");
+}
+
+fn main() {
+    // ❌ 编译错误/运行时 panic: 在 tokio runtime 中调用 async-std 的 future
+    // tokio::runtime::Runtime::new().unwrap().block_on(async {
+    //     async_std::task::spawn(task()).await; // 可能 panic 或死锁
+    // });
+}
+```
+
+> **修正**: Rust 异步生态存在多个运行时（tokio、async-std、smol、embassy），它们的任务调度器和 I/O 驱动互不兼容。在 tokio runtime 上执行 async-std 的 I/O 操作（如 `async_std::fs::read`）会导致 panic 或死锁，因为 I/O 事件注册到了错误的 reactor。解决方案：1) 统一使用一个运行时；2) 使用 `async-compat` crate 适配；3) 仅混用计算型 future（无 I/O）。这与 Go 的单一运行时（goroutine + netpoller）不同——Rust 的异步生态允许多个运行时竞争，但要求开发者明确选择。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [async-std Documentation](https://docs.rs/async-std/)]
+
+### 10.2 边界测试：配置结构的反序列化生命周期（编译错误）
+
+```rust,compile_fail
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Config<'a> {
+    // ❌ 编译错误: 反序列化无法生成有生命周期的引用
+    host: &'a str,
+    port: u16,
+}
+
+fn main() {
+    let json = r#"{"host":"localhost","port":8080}"#;
+    // let cfg: Config = serde_json::from_str(json).unwrap(); // 编译错误
+}
+```
+
+> **修正**: `serde::Deserialize` 为带有生命周期参数的 struct 生成反序列化实现时，要求生命周期与反序列化器的数据源绑定。但 `serde_json::from_str` 返回的 `Config` 必须拥有独立生命周期——它无法持有对输入字符串的引用（因为输入字符串可能在函数返回后被释放）。正确做法是使用 `String` 而非 `&str`，让 `Config` 拥有数据。这与 Go 的 `json.Unmarshal`（总是复制到目标结构）或 Python 的 `json.loads`（无生命周期概念）不同——Rust 的生命周期系统强制区分"拥有"和"借用"，在反序列化场景中通常要求"拥有"。[来源: [Serde Documentation](https://serde.rs/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+
+### 10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）
+
+```rust,compile_fail
+use tokio::signal;
+
+async fn server() {
+    // ❌ 运行时数据丢失: 若未处理 SIGTERM，Kubernetes 发送 SIGKILL 后强制终止
+    // 正在处理的请求可能中断
+
+    // 正确: 监听 SIGTERM，优雅关闭
+    let mut sigterm = signal::unix::signal(signal::unix::SignalKind::terminate()).unwrap();
+    tokio::select! {
+        _ = run_server() => {},
+        _ = sigterm.recv() => {
+            println!("shutting down gracefully...");
+            // 完成当前请求，关闭连接
+        }
+    }
+}
+```
+
+> **修正**: Kubernetes 的 Pod 终止流程：1) `kubectl delete pod` → Kubelet 发送 `SIGTERM`（默认 30 秒宽限期）；2) 容器未退出 → 发送 `SIGKILL` 强制终止。Rust 的云原生应用必须处理 `SIGTERM`：1) 停止接受新连接；2) 完成正在处理的请求；3) 刷新缓冲区、关闭数据库连接；4) 退出进程。未处理 `SIGTERM` 导致强制终止，数据丢失、连接泄漏。`tokio::signal` 提供跨平台信号处理（Unix 的 `SIGTERM`/`SIGINT`，Windows 的 `Ctrl+C`/`Ctrl+Break`）。这与 Go 的 `signal.Notify`、Node.js 的 `process.on('SIGTERM')` 类似——云原生应用的生命周期管理是可靠性工程的基础。[来源: [Tokio Signal Documentation](https://docs.rs/tokio/)] · [来源: [Kubernetes Pod Lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)]
+
+### 10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）
+
+```rust,compile_fail
+use axum::{routing::get, Router};
+use std::net::SocketAddr;
+
+#[tokio::main]
+async fn main() {
+    let app = Router::new().route("/", get(|| async { "ok" }));
+
+    // ⚠️ 运行时风险: 若 readiness probe 路径未暴露，K8s 认为 pod 未就绪
+    // 但 liveness probe 通过，不会重启——流量不路由到 pod
+    // 更危险: liveness 探针检查慢路径（如 DB 连接），DB 故障导致全部 pod 重启
+
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
+    axum::serve(tokio::net::TcpListener::bind(addr).await.unwrap(), app).await.unwrap();
+}
+```
+
+> **修正**: Kubernetes 的**探针**（probe）决定 pod 的生命周期：1) `livenessProbe`：失败 → kubelet 重启容器（用于检测死锁/无限循环）；2) `readinessProbe`：失败 → 从 service endpoints 移除（用于依赖未就绪时，如 DB 连接中）；3) `startupProbe`：失败 → 重启（用于慢启动应用，避免 liveness 过早触发）。常见反模式：1) liveness 检查外部依赖（DB、缓存）→ 外部故障导致全部 pod 重启，级联故障；2) readiness 和 liveness 相同 → 无法区分"未就绪"和"已死"；3) 超时过短 → 正常慢请求触发重启。Rust 云原生应用应暴露 `/health/live`（简单，仅检查进程存活）、`/health/ready`（检查所有依赖就绪）。这与 Go 的 Kubernetes 客户端或 Java 的 Spring Boot Actuator 类似——探针设计是分布式系统的可靠性基石。[来源: [Kubernetes Probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)] · [来源: [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html)]

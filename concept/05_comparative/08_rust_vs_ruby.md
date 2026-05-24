@@ -685,3 +685,95 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：Rust 与 Ruby 的编译错误对比
+
+### 10.1 边界测试：Ruby 的 duck typing vs Rust 的 trait bound（编译错误）
+
+```rust,compile_fail
+fn print_length<T>(x: T) {
+    // ❌ 编译错误: `T` 没有 `len` 方法
+    // Rust 要求显式 trait bound
+    println!("{}", x.len());
+}
+
+fn main() {
+    print_length(String::from("hello"));
+}
+
+// 正确: 添加 trait bound
+trait HasLength {
+    fn len(&self) -> usize;
+}
+
+fn print_length_fixed<T: HasLength>(x: T) {
+    println!("{}", x.len()); // ✅ T 满足 HasLength
+}
+```
+
+> **Ruby 对比**: Ruby 使用 duck typing——`x.len` 在运行时检查 `x` 是否有 `len` 方法，有则调用，无则抛出 `NoMethodError`。Rust 在编译期通过 trait bound 检查类型是否实现所需方法。Ruby 的灵活性允许更自由的元编程，但错误延迟到运行时；Rust 的严格性在编译期捕获错误，但要求预先定义接口。这与 Go 的隐式接口（structural typing）也不同——Rust 是 nominal typing，必须显式 `impl Trait for Type`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
+
+```rust,compile_fail
+trait Greet {
+    fn greet(&self);
+}
+
+// ❌ 编译错误: only traits defined in the current crate can be implemented for arbitrary types
+// Rust 的孤儿规则阻止为外部类型实现外部 trait
+impl Greet for String {
+    fn greet(&self) {
+        println!("Hello, {}", self);
+    }
+}
+```
+
+> **Ruby 对比**: Ruby 的 open classes 允许在运行时修改任何类：`class String; def greet; ...; end; end`。Rust 的**孤儿规则**（orphan rules）禁止为外部 crate 的类型实现外部 crate 的 trait——这避免了 impl 冲突（两个 crate 为同一类型实现同一 trait）。Rust 允许为外部类型实现本地 trait，或为本地类型实现外部 trait，但不能同时为外部。这与 C# 的扩展方法、Swift 的 extension 不同——Rust 优先考虑类型安全和社会化代码组织，牺牲了部分扩展灵活性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：Ruby 的 duck typing 与 Rust 的 trait bound（编译错误）
+
+```rust,compile_fail
+trait Quacks {
+    fn quack(&self);
+}
+
+struct Duck;
+impl Quacks for Duck {
+    fn quack(&self) { println!("quack"); }
+}
+
+struct Dog;
+// Dog 没有实现 Quacks
+
+fn make_it_quack<Q: Quacks>(q: Q) {
+    q.quack();
+}
+
+fn main() {
+    make_it_quack(Duck);
+    // ❌ 编译错误: Dog 未实现 Quacks，不能传入
+    // make_it_quack(Dog);
+}
+```
+
+> **修正**: Ruby 的**鸭子类型**（duck typing）："如果它走起来像鸭子，叫起来像鸭子，那它就是鸭子"。`make_it_quack(dog)` 在运行时才检查 `dog.quack` 是否存在，不存在则抛 `NoMethodError`。Rust 的**静态分发**要求编译期证明类型实现 trait：`Dog` 未 `impl Quacks for Dog`，因此不能传入 `make_it_quack`。这是编译期 vs 运行期的根本差异：Rust 在编译期拒绝错误程序，Ruby 允许错误程序运行直到触发错误。Ruby 的优势：快速原型、灵活元编程。Rust 的优势：编译期保证、零成本抽象、IDE 支持（自动补全、重构）。这与 Go 的隐式接口（类似鸭子类型，但编译期检查）或 Python 的鸭子类型（运行期检查）不同——Rust 的 trait 是名义化的、编译期检查的契约。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)]
+
+### 10.4 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
+
+```rust,compile_fail
+// Ruby: 可随时为任何类添加方法
+// class String
+//   def shout; upcase + "!"; end
+// end
+
+// Rust: 不能为外部类型实现外部 trait（孤儿规则）
+// impl MyTrait for String { } // 若 MyTrait 和 String 都来自外部 crate，非法
+
+fn main() {
+    // ❌ 编译错误: 违反孤儿规则
+    // 这是为了防止不同 crate 对同一类型+trait 组合提供冲突实现
+}
+```
+
+> **修正**: Ruby 的**开放类**（open classes）允许运行时修改任何类，包括标准库类。这提供了极大的灵活性（DSL、monkey patching），但也导致命名冲突和意外行为（两个 gem 为 `String` 添加同名方法）。Rust 的**孤儿规则**（orphan rule）禁止为外部类型实现外部 trait：至少类型或 trait 之一是本地定义的。这确保了 trait 实现的唯一性：给定 `(类型, trait)` 组合，全局只有一个实现。需要为外部类型扩展功能时，使用**newtype 模式**（`struct MyString(String)`）或**trait 包装**（定义本地 trait，为外部类型实现）。这与 Haskell 的 orphan instance（同样禁止，但可通过模块系统规避）或 Swift 的 extension（可为任何类型添加方法，但 protocol conformance 有类似限制）类似——Rust 的孤儿规则是全局一致性的保证。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)]

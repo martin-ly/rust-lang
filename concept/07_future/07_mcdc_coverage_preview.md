@@ -32,6 +32,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：MCDC 覆盖率预览的编译错误](#十边界测试mcdc-覆盖率预览的编译错误)
+    - [10.1 边界测试：MCDC 测试的条件分解（编译错误/逻辑错误）](#101-边界测试mcdc-测试的条件分解编译错误逻辑错误)
+    - [10.2 边界测试：覆盖率检测的编译器标志冲突（编译错误）](#102-边界测试覆盖率检测的编译器标志冲突编译错误)
+    - [10.3 边界测试：MCDC 与短路求值的复杂交互（逻辑错误）](#103-边界测试mcdc-与短路求值的复杂交互逻辑错误)
+    - [10.4 边界测试：覆盖率工具的 LLVM IR 级别插桩（编译错误/性能下降）](#104-边界测试覆盖率工具的-llvm-ir-级别插桩编译错误性能下降)
 
 ---
 
@@ -353,32 +358,6 @@ graph TD
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **补充来源**
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -391,3 +370,92 @@ graph TD
 > [来源: [docs.rs](https://docs.rs/)]
 > [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 > [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+
+## 十、边界测试：MCDC 覆盖率预览的编译错误
+
+### 10.1 边界测试：MCDC 测试的条件分解（编译错误/逻辑错误）
+
+```rust,compile_fail
+fn decide(a: bool, b: bool, c: bool) -> bool {
+    // ❌ 逻辑错误: 复杂条件难以满足 MCDC 独立影响准则
+    // MCDC 要求每个条件的独立变化必须影响决策结果
+    a && b || c
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_decide() {
+        // 以下测试集不满足 MCDC:
+        assert!(decide(true, true, false));  // T T F -> T
+        assert!(!decide(false, false, false)); // F F F -> F
+        // 缺少: a 独立变化 (T F F -> F), b 独立变化 (T F T -> T)
+    }
+}
+```
+
+> **修正**: MCDC（Modified Condition/Decision Coverage）是 DO-178C（航空软件认证标准）要求的覆盖率级别。它要求：1) 每个决策的所有可能结果至少出现一次；2) 每个条件的所有可能结果至少出现一次；3) 每个条件独立影响决策结果（其他条件固定，仅该条件变化导致决策变化）。`a && b || c` 需要 4 个测试用例满足 MCDC，而简单的分支覆盖（branch coverage）只需 2 个。Rust 的 `grcov` + `llvm-cov` 支持 MCDC 报告（实验性），帮助开发者识别缺失的测试用例。这与常规单元测试（追求路径覆盖）不同——MCDC 是形式化认证的要求，确保逻辑条件的每个独立贡献都被验证。[来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)] · [来源: [grcov Documentation](https://github.com/mozilla/grcov)]
+
+### 10.2 边界测试：覆盖率检测的编译器标志冲突（编译错误）
+
+```rust,compile_fail
+// Cargo.toml
+// [profile.dev]
+// debug = true
+//
+// 编译时标志冲突:
+// RUSTFLAGS="-C instrument-coverage" cargo build
+// 与
+// RUSTFLAGS="-C link-dead-code" cargo test
+// 可能产生冲突的符号表
+
+fn main() {
+    // ❌ 编译错误/链接错误: 覆盖率插桩与某些优化标志不兼容
+    println!("hello");
+}
+```
+
+> **修正**: LLVM 的覆盖率插桩（`-C instrument-coverage`）在编译期插入计数器代码，生成 `.profraw` 文件。该功能与某些编译器标志冲突：1) `-C link-dead-code` 可能产生重复符号；2) LTO（链接时优化）可能内联被插桩函数，导致覆盖率数据丢失；3) `-C opt-level=3` 的激进优化可能删除"不可达"的覆盖计数器。正确配置：使用 `cargo llvm-cov`（自动处理标志），或在 CI 中使用独立的 coverage profile（`[profile.coverage]`）。Rust 的覆盖率基础设施正在快速成熟，目标是达到 C/C++ `gcov`/`lcov` 的成熟度，同时利用 Rust 的元数据生成更精确的源码映射。[来源: [Rust Coverage Documentation](https://doc.rust-lang.org/rustc/instrument-coverage.html)] · [来源: [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov)]
+
+### 10.3 边界测试：MCDC 与短路求值的复杂交互（逻辑错误）
+
+```rust,compile_fail
+fn complex_decision(a: bool, b: bool, c: bool, d: bool) -> bool {
+    // ⚠️ 逻辑注意: 短路使某些条件组合不可达
+    (a && b) || (c && d)
+}
+
+#[test]
+fn test_mcdc_full() {
+    // MC/DC 要求: 每个条件独立影响结果
+    // 但由于短路，某些条件在特定路径上不求值
+    assert!(complex_decision(true, true, false, false));   // T T F F -> T
+    assert!(!complex_decision(false, true, false, false)); // F T F F -> F (a 独立)
+    assert!(!complex_decision(true, false, false, false)); // T F F F -> F (b 独立)
+    assert!(complex_decision(false, false, true, true));   // F F T T -> T (c,d 独立)
+    // 缺少: c 独立变化（c=F 时 a=F, b=any, d=T → F F F T → F? 实际上 (F&&any)||(F&&T)=F）
+}
+```
+
+> **修正**: MC/DC 分析在短路逻辑下更复杂：条件 `c` 和 `d` 仅在 `a && b` 为假时求值，因此 `c` 的独立影响测试需要 `a = false`（或 `b = false`）且 `d = true`。`complex_decision(false, false, false, true)` 返回 `false`，`complex_decision(false, false, true, true)` 返回 `true`——`c` 独立变化影响了结果。完整的 MC/DC 覆盖需要仔细设计测试用例，考虑短路路径。航空软件认证中，MC/DC 是 DO-178C 的 B 级（Level B）要求，测试用例设计需文档化每个条件的独立影响证明。这与 C 的相同代码（相同短路语义）或 Ada 的 `and then`/`or else`（显式短路操作符）相同——MC/DC 是语言无关的覆盖准则，但语言的操作符语义影响测试设计。[来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)] · [来源: [MC/DC Analysis](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]
+
+### 10.4 边界测试：覆盖率工具的 LLVM IR 级别插桩（编译错误/性能下降）
+
+```rust,compile_fail
+#[inline(always)]
+fn hot_path(x: i32) -> i32 {
+    x * 2
+}
+
+fn main() {
+    for i in 0..1_000_000 {
+        // ⚠️ 性能下降: 覆盖率插桩在 LLVM IR 级别插入计数器
+        // inline 函数在每个调用点都有计数器，增加指令缓存压力
+        hot_path(i);
+    }
+}
+```
+
+> **修正**: LLVM 的 `instrument-coverage` 在 IR 级别插入计数器，对每个基本块（basic block）计数。`#[inline(always)]` 函数在每个调用点展开，每个展开实例都有独立的计数器。高频调用路径上的覆盖率插桩导致：1) 指令缓存（icache）污染；2) 分支预测表压力；3) 运行时 10-30% 的性能下降。生产环境通常禁用覆盖率，仅在 CI 的测试构建中启用。优化：1) `#[inline(never)]` 关键函数（减少计数器数量）；2) 使用 `thin-lto`（部分内联，平衡性能和覆盖粒度）；3) 对性能测试使用独立的 `profile.bench`（无插桩）。这与 C/C++ 的 `gcov`（同样 IR 插桩，同样性能影响）或 Java 的 JaCoCo（字节码插桩，运行时 overhead）类似——覆盖率收集的精确性与性能是权衡。[来源: [Rust Coverage Documentation](https://doc.rust-lang.org/rustc/instrument-coverage.html)] · [来源: [LLVM Coverage](https://clang.llvm.org/docs/SourceBasedCodeCoverage.html)]

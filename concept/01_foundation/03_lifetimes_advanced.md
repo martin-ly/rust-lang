@@ -1717,3 +1717,124 @@ enum SafeValue {
 
 > **相关判定树**: [生命周期判定树](../00_meta/concept_definition_decision_forest.md#四生命周期判定树)
 > **相关谓词映射**: [生命周期令牌 [α]₁](../00_meta/rustbelt_predicate_map.md#四生命周期令牌-α₁-映射)
+
+## 十、边界测试：高级生命周期的编译错误
+
+### 10.1 边界测试：`for<'a>` HRTB 在 trait bound 中的误用（编译错误）
+
+```rust,compile_fail
+trait Callback {
+    fn call(&self, x: &i32);
+}
+
+fn with_callback<C>(c: C)
+where
+    C: Callback,
+{
+    let x = 5;
+    c.call(&x);
+}
+
+// ❌ 编译错误: implementation has incompatible lifetime requirements
+// 实现者要求 'a 是具体的，但 trait 定义未约束
+impl Callback for fn(&i32) {
+    fn call(&self, x: &i32) {
+        (self)(x);
+    }
+}
+
+// 正确: 使用 HRTB 标注
+fn with_callback_fixed<F>(f: F)
+where
+    for<'a> F: Fn(&'a i32), // ✅ HRTB: 对所有 'a 有效
+{
+    let x = 5;
+    f(&x);
+}
+```
+
+> **修正**: 高阶 trait bound（HRTB）`for<'a>` 要求实现对所有可能的生命周期 `'a` 有效。当 trait 方法接受引用参数时，默认的生命周期省略可能不足以表达"对所有生命周期有效"的语义。HRTB 在回调函数、比较器、迭代器适配器等场景中至关重要。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：自引用结构体的生命周期标注（编译错误）
+
+```rust,compile_fail
+struct SelfRef<'a> {
+    data: String,
+    ptr: &'a str, // 指向 data 内部
+}
+
+impl<'a> SelfRef<'a> {
+    fn new() -> SelfRef<'a> {
+        let data = String::from("hello");
+        // ❌ 编译错误: `data` does not live long enough
+        // ptr 引用局部变量 data，但 data 在函数返回时 drop
+        SelfRef {
+            data,
+            ptr: &data[..],
+        }
+    }
+}
+
+// 正确: 使用 Pin 和 unsafe 构造自引用
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfRefFixed {
+    data: String,
+    ptr: *const str, // 裸指针，无生命周期约束
+    _pin: PhantomPinned,
+}
+
+impl SelfRefFixed {
+    fn new(data: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::new(SelfRefFixed {
+            ptr: std::ptr::null(),
+            data,
+            _pin: PhantomPinned,
+        });
+        let ptr = &boxed.data[..] as *const str;
+        boxed.ptr = ptr;
+        Box::pin(boxed) // ✅ Pin 保证不移动
+    }
+}
+```
+
+> **修正**: 自引用结构体（字段 A 引用字段 B）在 Rust 的生命周期系统中无法安全表达，因为结构体的生命周期参数只能引用外部数据，不能引用结构体自身字段。解决方案是使用裸指针（`*const T`）+ `Pin` + `PhantomPinned`，完全绕过生命周期系统，转由 unsafe 代码手动保证地址稳定性。这是 Rust 安全边界的典型突破点——编译器无法证明的安全属性，由程序员通过 unsafe 承担证明义务。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：HRTB（高阶 trait bound）的推导失败（编译错误）
+
+```rust,compile_fail
+fn call_with_ref<F>(f: F)
+where
+    F: Fn(&i32),
+{
+    let x = 5;
+    f(&x);
+}
+
+fn main() {
+    // ❌ 编译错误: 闭包的生命周期不匹配 HRTB 要求
+    let s = String::from("hello");
+    call_with_ref(|x| println!("{}", s.len() + *x));
+    // s 被闭包捕获，但 call_with_ref 要求闭包对所有生命周期有效
+}
+```
+
+> **修正**: HRTB（Higher-Ranked Trait Bounds，`for<'a> Fn(&'a i32)`）要求闭包能接受**任意生命周期**的引用。若闭包捕获了局部变量（如 `s: String`），其生成的 future/闭包的生命周期与 `s` 绑定，不能满足 `for<'a>` 的"对所有 'a 有效"。解决方案：1) 不捕获局部变量（纯函数闭包）；2) 使用 `move` + `Arc` 使捕获数据 `'static`；3) 降低 bound 为特定生命周期（非 HRTB）。HRTB 是 Rust 类型系统的高级特性，用于泛型代码（`std::fs::read_dir` 的回调、解析器的输入引用）。这与 Haskell 的 `RankNTypes`（类似的高阶多态）或 C++ 的模板（无生命周期，但有完美转发和万能引用）类似——Rust 的 HRTB 在生命周期层面提供类似的表达能力。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-05-advanced-lifetimes.html)] · [来源: [Rust Reference — Lifetime Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#lifetime-bounds)]
+
+### 10.4 边界测试：NLL（非词法生命周期）的边界（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 5;
+    let y = &x;
+    // NLL 允许 y 在最后一次使用后结束生命周期
+    println!("{}", y);
+    
+    // ❌ 编译错误: 即使使用 NLL，某些情况下借用仍被过度延长
+    let z = &mut x;
+    // y 的生命周期在 NLL 下应已结束，但若 y 在内部作用域中...
+}
+```
+
+> **修正**: NLL（Non-Lexical Lifetimes，Rust 1.31+）将引用的生命周期从"词法作用域"（大括号包围的范围）缩小到"实际使用范围"。但 NLL 仍有边界：1) 条件分支中的借用统一延长到分支结束；2) `match` 中的 arm 借用延长到整个 `match`；3) 闭包捕获的引用生命周期与闭包本身绑定。Polonius（下一代借用检查器）将解决更多 NLL 的边缘情况，但尚未稳定。NLL 的设计体现了 Rust 类型系统的演进：从保守（词法作用域）到精确（数据流分析），逐步接受更多合法程序。这与 C++ 的临时对象生命周期（复杂规则，某些情况延长到语句结束）或 Swift 的 ARC（引用计数，无编译期生命周期）不同——Rust 在编译期通过静态分析确定精确的生命周期。[来源: [NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)] · [来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)]

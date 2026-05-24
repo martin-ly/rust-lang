@@ -460,3 +460,145 @@ fn main() {
 >
 
 ---
+
+## 十、边界测试：迭代器模式的编译错误
+
+### 10.1 边界测试：`Iterator::collect` 的目标类型歧义（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let iter = vec![1, 2, 3].into_iter();
+    // ❌ 编译错误: type annotations needed
+    // collect() 可返回 Vec、HashSet、LinkedList 等多种类型
+    let collected = iter.collect();
+}
+
+// 正确: 显式标注类型或使用 turbofish
+fn fixed() {
+    let collected: Vec<i32> = vec![1, 2, 3].into_iter().collect();
+    // 或
+    let collected2 = vec![1, 2, 3].into_iter().collect::<Vec<i32>>();
+}
+```
+
+> **修正**: `collect()` 是 Rust 中最常见的类型推断失败点之一。它返回 `FromIterator` trait 的实现类型，编译器无法从空上下文推断具体集合类型。turbofish 语法 `::<Type>` 允许在方法链中指定类型参数，避免引入中间变量。这是 Rust 类型系统的"显式优于隐式"原则在迭代器 API 中的体现。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.2 边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）
+
+```rust
+fn main() {
+    let v = vec![1, 2, 3];
+    let iter = v.iter().map(|x| {
+        println!("processing {}", x);
+        x * 2
+    });
+    // ⚠️ 逻辑错误: map 是惰性的，上述代码不会打印任何内容！
+    // 必须调用消耗型方法（collect、sum、for_each）才能触发求值
+    println!("map created");
+    let result: Vec<_> = iter.collect(); // 此时才求值
+    println!("{:?}", result);
+}
+
+// 正确: 立即使用 for_each 进行求值
+fn fixed() {
+    let v = vec![1, 2, 3];
+    v.iter().for_each(|x| {
+        println!("processing {}", x);
+    }); // ✅ 立即求值
+}
+```
+
+> **修正**: Rust 的迭代器适配器（`map`、`filter`、`take` 等）是**惰性**的——它们返回新的迭代器，不立即执行。这类似于 Haskell 的 lazy list 或 Python 的 generator，但 Rust 的惰性是"零成本"的：适配器链在编译期展开为状态机，通过 `next()` 逐个消费。忘记最终消费（如只创建 `map` 而不 `collect`）是常见错误，clippy 会警告 `must_use` 的迭代器结果。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+## 十二、边界测试：迭代器模式的编译错误（续）
+
+### 12.1 边界测试：`skip_while` 与 `take_while` 的互斥性（逻辑错误）
+
+```rust
+fn main() {
+    let data = vec![1, 2, 3, 4, 5];
+    // ⚠️ 逻辑错误: skip_while 和 take_while 组合可能产生意外结果
+    let result: Vec<_> = data.iter()
+        .skip_while(|&&x| x < 3) // 跳过 < 3
+        .take_while(|&&x| x < 5) // 取 < 5
+        .collect();
+    println!("{:?}", result); // [3, 4]
+}
+
+// 正确: 使用 filter 进行更精确的控制
+fn fixed() {
+    let data = vec![1, 2, 3, 4, 5];
+    let result: Vec<_> = data.iter()
+        .filter(|&&x| x >= 3 && x < 5)
+        .collect();
+    println!("{:?}", result); // [3, 4]
+}
+```
+
+> **修正**: `skip_while` 和 `take_while` 是状态ful 的迭代器适配器——它们根据谓词的结果改变内部状态，一旦条件改变就永远改变。`skip_while(|x| x < 3)` 在遇到第一个 ≥ 3 的元素后停止跳过，后续元素无论大小都会被产出。这与 `filter` 不同——`filter` 对每个元素独立应用谓词。混淆两者是常见错误，尤其是在处理有序/无序数据时。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 12.2 边界测试：`cycle` 与无限迭代器（运行时死循环）
+
+```rust
+fn main() {
+    let data = vec![1, 2, 3];
+    // ⚠️ 运行时死循环: cycle 产生无限迭代器
+    // let sum: i32 = data.iter().cycle().sum(); // 永不终止！
+    
+    // 正确: 使用 take 限制迭代次数
+    let sum: i32 = data.iter().cycle().take(10).sum(); // ✅ 取前 10 个
+    println!("{}", sum); // 1+2+3+1+2+3+1+2+3+1 = 19
+}
+```
+
+> **修正**: `cycle()` 将有限迭代器变为无限迭代器，重复循环原序列。若在 `cycle()` 后调用 `sum()`、`collect()` 或 `for_each()` 而不限制数量，将导致无限循环。这与 Python 的 `itertools.cycle` 行为相同。Rust 的 `cycle` 要求底层迭代器实现 `Clone`（因为要重复消费），编译器在类型层面验证此约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：`Iterator::zip` 的长度不一致（逻辑错误）
+
+```rust,compile_fail
+fn main() {
+    let keys = vec!["a", "b", "c"];
+    let values = vec![1, 2];
+    
+    // ⚠️ 逻辑错误: zip 在任一迭代器结束时停止
+    let map: std::collections::HashMap<_, _> = keys.iter()
+        .zip(values.iter())
+        .map(|(k, v)| (*k, *v))
+        .collect();
+    
+    println!("{:?}", map); // {"a": 1, "b": 2} — c 被静默忽略!
+}
+```
+
+> **修正**: `Iterator::zip` 在任一输入迭代器返回 `None` 时结束，不检查长度是否相等。长度不匹配时，较长迭代器的剩余元素被静默丢弃——这是常见的逻辑错误源。检测方法：1) 先比较长度 `assert_eq!(keys.len(), values.len())`；2) 使用 `keys.iter().zip(values.iter().chain(std::iter::repeat(&0)))` 填充缺失值；3) 使用 `itertools::zip_eq`（panic 若长度不等）。这与 Python 的 `zip`（同样静默截断，`zip_longest` 填充）或 Haskell 的 `zip`（同样截断）行为相同。Rust 的标准库不提供 `zip_eq`，但 `itertools` crate 补充了此类便利功能。编译期无法检查迭代器长度（某些迭代器是无限的或动态的），因此这是运行时检查的领域。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [itertools Documentation](https://docs.rs/itertools/)]
+
+### 10.4 边界测试：消耗型适配器与双重迭代（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let data = vec![1, 2, 3];
+    let doubled: Vec<_> = data.iter().map(|x| x * 2).collect();
+    
+    // ❌ 编译错误: `data` 在 collect 后被移动（若 data 是迭代器）
+    // 对于 Vec，iter() 借用它，data 仍可用
+    // 但若:
+    let iter = data.into_iter();
+    let v1: Vec<_> = iter.collect();
+    // let v2: Vec<_> = iter.collect(); // iter 已消耗
+}
+```
+
+> **修正**: 迭代器是**一次性**的——`collect`、`fold`、`for_each` 等消耗型方法获取迭代器所有权，调用后迭代器失效。这与 C++ 的 `std::istream_iterator`（同样一次性）或 Java 的 `Iterator`（同样 `hasNext`/`next` 消耗）类似。Rust 的所有权系统显式追踪迭代器的消耗：调用 `into_iter()` 转移 `Vec` 所有权到迭代器，`collect` 转移迭代器所有权到 `Vec`。若需多次遍历，应 `clone` 底层集合（`data.clone().into_iter()`），或使用非消耗型迭代（`data.iter()` 借用）。`Iterator` trait 的 `by_ref()` 方法可借出迭代器引用，允许部分消耗后继续使用——高级但有用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]
+
+### 10.6 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）
+
+```rust,compile_fail
+fn main() {
+    let mut iter = vec![1, 2, 3].into_iter().fuse();
+    let v1: Vec<_> = iter.by_ref().collect();
+    let v2: Vec<_> = iter.collect(); // fuse 保证空，但逻辑上可能误以为还有数据
+    println!("{:?} {:?}", v1, v2); // [1,2,3] []
+}
+```
+
+> **修正**: `Iterator::fuse` 在底层迭代器返回 `None` 后，后续 `next()` 始终返回 `None`。这在 `select!` 循环中防止对已完成的 future 重复 poll。但 `fuse` 不改变"迭代器是一次性的"本质：`collect` 消耗迭代器，`v2` 为空因为 `v1` 已消耗所有元素。`fuse` 不是"重置"迭代器——没有方法可重置已消耗的迭代器（除非重新创建）。这与 Python 的 `iter()`（同样一次性）或 C++ 的 `std::istream_iterator`（同样一次性）相同——迭代器的单次消费是通用设计。`fuse` 仅保证完成后的行为安全，不允许多次遍历。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]

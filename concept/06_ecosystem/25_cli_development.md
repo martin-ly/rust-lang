@@ -35,6 +35,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：CLI 开发的编译错误](#十边界测试cli-开发的编译错误)
+    - [10.1 边界测试：`clap` 派生宏的字段类型约束（编译错误）](#101-边界测试clap-派生宏的字段类型约束编译错误)
+    - [10.2 边界测试：信号处理与异步代码的交互（编译错误）](#102-边界测试信号处理与异步代码的交互编译错误)
+    - [10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时显示问题）](#106-边界测试终端颜色检测与-no_color-标准运行时显示问题)
+    - [10.7 边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（运行时显示异常）](#107-边界测试ansi-颜色代码与-windows-旧版控制台兼容性问题运行时显示异常)
 
 ---
 
@@ -582,3 +587,76 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：CLI 开发的编译错误
+
+### 10.1 边界测试：`clap` 派生宏的字段类型约束（编译错误）
+
+```rust,compile_fail
+use clap::Parser;
+
+#[derive(Parser)]
+struct Args {
+    #[arg(short, long)]
+    // ❌ 编译错误: `Vec<i32>` 不支持从字符串直接解析（无 FromStr 实现）
+    numbers: Vec<i32>, // clap 的 Vec<T> 仅支持 String 或已实现 ValueEnum 的类型
+}
+
+fn main() {
+    let args = Args::parse();
+    println!("{:?}", args.numbers);
+}
+```
+
+> **修正**: `clap` 的派生宏通过 `FromStr` trait 将命令行参数字符串转换为目标类型。`i32` 实现了 `FromStr`，但 `Vec<i32>` 的解析逻辑要求多次出现同一参数（`--numbers 1 --numbers 2`），且 `clap` v4 中 `Vec<T>` 的 `T` 必须是 `Clone + Send + Sync + 'static`。更常见的问题是自定义类型未实现 `FromStr` 或 `ValueEnum`。这与 Python 的 `argparse`（运行时类型转换，失败时抛异常）不同——Rust 的类型约束在编译期检查，确保所有参数类型可解析。自定义类型需手动实现 `FromStr` 或使用 `clap::ValueEnum` 派生。[来源: [clap Documentation](https://docs.rs/clap/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)]
+
+### 10.2 边界测试：信号处理与异步代码的交互（编译错误）
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicBool, Ordering};
+
+static RUNNING: AtomicBool = AtomicBool::new(true);
+
+fn main() {
+    // ❌ 编译错误/逻辑错误: 信号处理器的非安全操作
+    ctrlc::set_handler(|| {
+        RUNNING.store(false, Ordering::Relaxed);
+        // 在信号处理器中调用非异步安全函数是 UB
+        // println!("shutting down"); // 不可在信号处理器中使用!
+    }).unwrap();
+
+    while RUNNING.load(Ordering::Relaxed) {
+        // 工作循环
+    }
+}
+```
+
+> **修正**:  Unix 信号处理器的执行上下文极受限——只能调用**异步信号安全**（async-signal-safe）的函数。`println!` 涉及锁和内存分配，非信号安全，在信号处理器中调用会导致死锁或数据损坏。Rust 的 `ctrlc` crate 将信号转换为 channel 发送，允许在主线程中安全处理。正确模式：1) 信号处理器仅设置原子标志或写 pipe；2) 主线程通过 `tokio::signal` 或 `crossbeam_channel` 接收通知；3) 在安全的上下文中执行清理。这与 C 的 `signal(2)` 相同约束，但 Rust 的类型系统和高阶抽象（channel、async）使安全处理更易实现。[来源: [Rust Signal Hook Documentation](https://docs.rs/signal-hook/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)]
+
+### 10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时显示问题）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 运行时问题: 若未检查终端能力，在管道或文件重定向时输出 ANSI 转义码
+    // println!("\x1b[31mred text\x1b[0m");
+
+    // 正确: 使用支持 NO_COLOR 的库
+    // if std::env::var_os("NO_COLOR").is_none() && atty::is(atty::Stream::Stdout) {
+    //     println!("\x1b[31mred text\x1b[0m");
+    // }
+}
+```
+
+> **修正**: CLI 程序的**终端颜色**输出需考虑：1) **终端能力**：非 TTY（管道、文件重定向）不应输出 ANSI 转义码；2) **`NO_COLOR`** 环境变量（用户禁用颜色的显式请求）；3) **`CLICOLOR`/`CLICOLOR_FORCE`**（其他颜色控制标准）。`anstyle`、`owo-colors`、`console` crate 自动处理这些条件。Rust 的 CLI 生态遵循 **NO_COLOR 约定**（<https://no-color.org/），这是跨语言的行业标准。未遵守导致：1>) 日志文件包含乱码；2) CI 输出不可读；3) 辅助技术（屏幕阅读器）解析困难。这与 Python 的 `colorama`、Go 的 `fatih/color`、Node 的 `chalk` 类似——现代 CLI 框架内置终端能力检测。[来源: [NO_COLOR Standard](https://no-color.org/)] · [来源: [anstyle Crate](https://docs.rs/anstyle/)]
+
+### 10.7 边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（运行时显示异常）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 运行时显示异常: 纯 ANSI 转义序列在 Windows CMD（旧版）显示为乱码
+    println!("\x1b[31mRed Text\x1b[0m");
+    // Windows 10+ 和 Windows Terminal 支持 ANSI，但旧版 CMD 和 PowerShell 5 不支持
+}
+```
+
+> **修正**: Rust CLI 工具的跨平台颜色输出：1) `ansi_term` → 已废弃；2) `termcolor` → 显式检测终端能力，Windows 旧版使用 WinAPI；3) `owo-colors` → 自动检测 `NO_COLOR` 环境变量。最佳实践：使用 `anstream`（`clap` 生态）或 `supports-color` crate，自动处理平台差异。`NO_COLOR` 标准：环境变量存在时，所有工具应禁用颜色输出。此外：1) `TERM=dumb` 时禁用；2) 非 TTY（管道输出）时默认禁用；3) Windows 上检测 `ENABLE_VIRTUAL_TERMINAL_PROCESSING`。这与 Go 的 `fatih/color` 或 Python 的 `colorama`（专门处理 Windows）类似——Rust 的 `anstream` 是现代解决方案，自动覆盖所有边缘情况。[来源: [NO_COLOR](https://no-color.org/)] · [来源: [anstream crate](https://docs.rs/anstream/)] · [来源: [Rust CLI Guidelines](https://rust-cli-recommendations.sunshowers.io/)]

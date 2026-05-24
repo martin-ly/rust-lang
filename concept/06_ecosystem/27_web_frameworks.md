@@ -45,6 +45,11 @@
   - [九、来源与延伸阅读](#九来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Web 框架的编译错误](#十边界测试web-框架的编译错误)
+    - [10.1 边界测试：axum 处理函数的签名约束（编译错误）](#101-边界测试axum-处理函数的签名约束编译错误)
+    - [10.2 边界测试：共享状态的生命周期与 `Clone` 约束（编译错误）](#102-边界测试共享状态的生命周期与-clone-约束编译错误)
+    - [10.6 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）](#106-边界测试http-请求的-body-大小限制与内存-dos运行时-oom)
+    - [10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）](#105-边界测试axum-的-extractor-顺序与请求体消耗运行时-panic)
 
 ---
 
@@ -878,3 +883,89 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：Web 框架的编译错误
+
+### 10.1 边界测试：axum 处理函数的签名约束（编译错误）
+
+```rust,compile_fail
+use axum::{Router, routing::get};
+
+// ❌ 编译错误: 处理函数必须返回 `impl IntoResponse`
+async fn handler() -> String {
+    "hello".to_string()
+}
+
+// 正确: 使用 impl IntoResponse 或具体类型
+use axum::response::IntoResponse;
+async fn fixed() -> impl IntoResponse {
+    "hello" // &str 实现 IntoResponse
+}
+
+fn app() -> Router {
+    Router::new().route("/", get(handler)) // handler 签名不兼容
+}
+```
+
+> **修正**: axum 的路由系统要求处理函数（handler）返回实现 `IntoResponse` 的类型。`String` 实际上实现了 `IntoResponse`，但此示例展示的是更常见的问题：自定义类型未实现 `IntoResponse`，或函数签名不符合 `Fn(Request) -> Future<Output = Response>`。axum 使用 `tower::Service` trait 抽象处理函数，编译期通过宏生成 `Service` 实现。若类型不匹配，编译错误会指出缺少 `IntoResponse` 实现。这与 Go 的 `http.HandlerFunc`（任何 `func(w, r)` 都可用）或 Python Flask 的返回值（自动 `str()` 转换）不同——Rust Web 框架在编译期验证响应类型可序列化。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [Tower Documentation](https://docs.rs/tower/)]
+
+### 10.2 边界测试：共享状态的生命周期与 `Clone` 约束（编译错误）
+
+```rust,compile_fail
+use axum::{Router, routing::get, extract::State};
+use std::sync::Arc;
+
+struct AppState {
+    db: Vec<String>, // Vec 不是线程安全的共享状态
+}
+
+async fn handler(State(state): State<Arc<AppState>>) -> String {
+    // ❌ 编译错误: 若尝试可变访问共享状态
+    // state.db.push("new".to_string()); // Arc 只提供共享引用
+    state.db[0].clone()
+}
+
+fn app(state: Arc<AppState>) -> Router {
+    Router::new().route("/", get(handler)).with_state(state)
+}
+```
+
+> **修正**: Web 服务器需要在多个请求处理任务间共享状态（数据库连接、配置、缓存）。`Arc<T>` 提供共享所有权，但只给予 `&T` 访问。若需可变修改，必须使用：1) `Arc<Mutex<T>>`（互斥锁）；2) `Arc<RwLock<T>>`（读写锁）；3) 通道（channel）将修改请求发送到单线程执行器。直接修改 `Arc<T>` 内部数据会被编译器阻止——这是 Rust"共享不可变，可变不共享"原则的体现。与 Go 的 `map`（非并发安全，需 `sync.RWMutex` 包裹）或 Node.js 的单线程事件循环（无并发修改问题）不同，Rust 在类型层面要求显式同步原语。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [axum Documentation](https://docs.rs/axum/)]
+
+### 10.6 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）
+
+```rust,compile_fail
+use axum::{Router, routing::post, extract::Json};
+use serde_json::Value;
+
+async fn handler(Json(body): Json<Value>) -> String {
+    // ❌ 运行时 OOM: 若客户端发送超大 JSON，axum 默认读取全部到内存
+    format!("received: {} bytes", body.to_string().len())
+}
+
+fn app() -> Router {
+    Router::new().route("/", post(handler))
+}
+```
+
+> **修正**: Web 框架的默认配置通常**无请求体大小限制**，恶意客户端可发送 GB 级数据导致 OOM。安全模式：1) `axum` 的 `DefaultBodyLimit`（默认 2MB，可配置）；2) 流式处理（`axum::extract::BodyStream` 分块读取）；3) 反向代理（Nginx、Traefik）前置大小限制。Rust 的内存安全不防止 OOM——`Vec::push` 在内存不足时 panic（或 abort）。这与 Node.js 的 `body-parser`（默认 100KB 限制）、Go 的 `http.MaxBytesReader`、Python 的 Flask（`MAX_CONTENT_LENGTH`）类似——生产环境的 Web 服务必须配置请求限制。[来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [OWASP DoS](https://owasp.org/www-community/attacks/Denial_of_Service)]
+
+### 10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）
+
+```rust,compile_fail
+use axum::{extract::Json, routing::post, Router};
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Payload { name: String }
+
+async fn handler(Json(payload): Json<Payload>, /* Json(payload2): Json<Payload> */) {
+    // ❌ 运行时 panic: 请求体只能被消耗一次
+    // 若两个 extractor 都尝试读取 body，第二个会失败
+    println!("{}", payload.name);
+}
+
+// Router::new().route("/", post(handler))
+```
+
+> **修正**: Axum 的 **extractor** 从请求中提取数据：`Path`、`Query`、`Json`、`Form` 等。请求体（body）是**单次消耗**的流：一个 extractor 读取后，后续 extractor 无法再次读取。规则：1) 最多一个 body extractor 每个 handler；2) `Json` 和 `Form` 互斥；3) 若需多次使用 body，先提取为 `Bytes`，再克隆解析。这与 Actix-web（类似 body 限制，但 `web::Json` 和 `web::Form` 同样互斥）或 Rocket（类似，使用 `Data` guard）不同——Axum 的编译期类型安全不保护 body 消耗次数（流性质决定），需运行时检查。axum 0.7+ 的改进：更清晰的错误消息（"body has already been consumed"）。这与 Tower 的 `Service` 抽象一致：body 是 `http_body::Body` trait，消费后不可复用。[来源: [Axum Extractors](https://docs.rs/axum/)] · [来源: [Tower Service](https://docs.rs/tower/)]

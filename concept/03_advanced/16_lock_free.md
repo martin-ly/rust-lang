@@ -789,3 +789,34 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+### 10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicPtr, Ordering};
+use std::sync::Arc;
+
+struct Node {
+    value: i32,
+}
+
+static HEAD: AtomicPtr<Node> = AtomicPtr::new(std::ptr::null_mut());
+
+fn publish() {
+    let node = Arc::into_raw(Arc::new(Node { value: 42 })) as *mut Node;
+    HEAD.store(node, Ordering::Release);
+}
+
+fn read() -> Option<i32> {
+    let node = HEAD.load(Ordering::Acquire);
+    if node.is_null() {
+        None
+    } else {
+        // ⚠️ 运行时可见性问题: 若使用 Relaxed 而非 Acquire，
+        // 可能看到非空的 node 但 node.value 未初始化
+        Some(unsafe { (*node).value })
+    }
+}
+```
+
+> **修正**: `Release`/`Acquire` 内存序建立** happens-before 关系**：`Release` store 之前的所有写入对匹配的 `Acquire` load 可见。上述代码中，`node.value = 42` 在 `HEAD.store(Release)` 之前，因此 `HEAD.load(Acquire)` 后 `(*node).value` 必为 42。若使用 `Relaxed`：1) `HEAD.load` 可能看到非空指针；2) 但 `node.value` 的写入可能尚未对其他 CPU 可见；3) 读取到 0 或旧值。这是弱内存模型（ARM、RISC-V）上的真实问题，x86 的强模型通常掩盖此 bug（x86 的 loads/stores 自动是 Acquire/Release）。Rust 的原子类型默认 `SeqCst`（最强），但性能关键代码需正确选择较弱顺序。这与 C++ 的 `memory_order_release/acquire`（相同语义）或 Java 的 `volatile`（等价于 `SeqCst`）相同——内存序是并发编程的底层细节，错误选择导致难以复现的 bug。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html)]

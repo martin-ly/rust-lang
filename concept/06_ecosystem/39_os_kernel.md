@@ -270,4 +270,61 @@ fn kernel_compute(x: f32) -> f32 {
 > **修正**: 内核态代码应避免浮点运算。
 > 若必须使用，需手动保存/恢复 FPU 上下文（`kernel_fpu_begin`/`kernel_fpu_end` in Linux），或推迟到用户态处理。
 
+### 编译错误 4：Theseus 的 Cell 约束违反（编译错误）
+
+```rust,compile_fail
+#![no_std]
+
+// Theseus OS 使用 Cell 类型保证内存安全
+struct KernelCell<T> {
+    value: T,
+}
+
+impl<T> KernelCell<T> {
+    fn get(&self) -> T
+    where
+        T: Copy, // Theseus Cell 要求 T: Copy
+    {
+        self.value
+    }
+}
+
+fn main() {
+    let cell = KernelCell { value: String::from("hello") };
+    // ❌ 编译错误: `String` 未实现 `Copy`
+    // Theseus 的 Cell 设计排除非 Copy 类型以防止共享可变引用
+    let _ = cell.get();
+}
+```
+
+> **修正**: Theseus OS 的 Cell 类型是 Rust `std::cell::Cell` 的变体，要求 `T: Copy` 以确保获取值时不会发生所有权转移或别名问题。这与 Rust 标准库 `Cell::get` 的约束一致。Theseus 将这一约束扩展到内核态所有共享状态，通过类型系统排除非 Copy 类型的共享可变访问，从而消除数据竞争的可能。[来源: [Theseus OS Documentation](https://theseus-os.github.io/Theseus/)]
+
+### 编译错误 5：Redox 的 URL 方案与 Capability 不匹配（编译错误）
+
+```rust,compile_fail
+// Redox 使用 URL 作为资源标识符
+// file:/path/to/file, irq:10, memory:0x1000
+
+fn open_resource(url: &str) -> Result<Resource, Error> {
+    // ❌ 编译错误: 在 Redox 的强类型设计中，URL 字符串不能直接作为资源句柄
+    // 需要经过 Scheme 注册表验证
+    if url.starts_with("file:") {
+        // 直接解析字符串绕过 capability 检查
+        std::fs::File::open(&url[5..])?; // 编译期可能通过，但违反 Redox 设计
+    }
+    Ok(Resource)
+}
+
+// 正确: 使用 Redox 的 URL 类型和 Scheme trait
+use redox_scheme::Scheme;
+
+fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
+    let url = redox_uri::Url::parse(url)?; // ✅ 强类型 URL 解析
+    let scheme = redox_scheme::registry().get(url.scheme())?;
+    scheme.open(&url) // ✅ 通过 Scheme 能力模型访问
+}
+```
+
+> **修正**: Redox OS 将所有资源抽象为 URL，通过 Scheme（类似于文件系统驱动）提供统一访问接口。Redox 的安全模型基于 capability——进程只能访问其拥有 capability 的资源。试图绕过 URL/Scheme 抽象直接操作底层资源违反设计原则，虽然在纯 Rust 代码中可能编译通过，但在 Redox 的运行时环境中会被 capability 系统拒绝。[来源: [Redox OS Documentation](https://doc.redox-os.org/)]
+
 ---

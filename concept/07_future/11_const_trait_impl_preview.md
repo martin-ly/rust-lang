@@ -35,6 +35,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：const trait impl 的编译错误](#十边界测试const-trait-impl-的编译错误)
+    - [10.1 边界测试：const 上下文中调用非 const 方法（编译错误）](#101-边界测试const-上下文中调用非-const-方法编译错误)
+    - [10.2 边界测试：trait bound 的 const 兼容性（编译错误）](#102-边界测试trait-bound-的-const-兼容性编译错误)
+    - [10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）](#106-边界测试const-bound-与默认实现的交互编译错误)
+    - [10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）](#105-边界测试const-trait-的默认实现与泛型约束编译错误)
 
 ---
 
@@ -422,3 +427,78 @@ graph TD
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+## 十、边界测试：const trait impl 的编译错误
+
+### 10.1 边界测试：const 上下文中调用非 const 方法（编译错误）
+
+```rust,compile_fail
+struct Point { x: i32, y: i32 }
+
+impl Point {
+    fn new(x: i32, y: i32) -> Self {
+        Point { x, y }
+    }
+}
+
+const ORIGIN: Point = Point::new(0, 0); // ❌ 编译错误: `new` 不是 const fn
+
+fn main() {
+    println!("{}, {}", ORIGIN.x, ORIGIN.y);
+}
+```
+
+> **修正**: 在 const 上下文中（`const` 变量、`static` 变量、数组长度、`match` 分支守卫），只能调用 `const fn`。普通 `fn` 可能包含堆分配、I/O、panic 等运行时才允许的操作，因此不能在编译期执行。`const trait impl`（RFC 2632）扩展了这一能力：允许 trait 方法在 const 上下文中调用，但要求 trait 和实现都标记为 `const`。例如 `const impl Add for Point` 允许 `const SUM: Point = A + B;`。这是 Rust"编译期计算"能力的关键扩展，使自定义类型在 const 上下文中的表现力接近内置类型。[来源: [Rust RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：trait bound 的 const 兼容性（编译错误）
+
+```rust,compile_fail
+trait Compute {
+    fn compute(&self) -> i32;
+}
+
+const fn process<T: Compute>(x: T) -> i32 {
+    // ❌ 编译错误: `T: Compute` 不保证 `compute` 是 const fn
+    x.compute()
+}
+```
+
+> **修正**: 在 `const trait impl` 之前，`const fn` 不能调用 trait 方法，因为无法保证实现是 const 的。`const trait impl` 引入 `~const Trait` bound（"maybe const"）：`fn process<T: ~const Compute>(x: T) -> i32` 表示 `T` 可以是 const 或非 const 实现，但仅在 const 上下文中要求 const。这是 Rust 类型系统的复杂扩展：trait bound 现在需要考虑"const 性"（constness），形成类似 effect system 的维度。设计挑战：向后兼容性（现有代码无需修改）、默认行为（trait 默认非 const）、语法简洁性（`~const` 标记）。这与 C++ 的 `constexpr` 虚函数（C++23）方向类似，但 Rust 通过类型系统而非关键字控制编译期/运行时分派。[来源: [Rust RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+
+### 10.6 边界测试：`~const` bound 与默认实现的交互（编译错误）
+
+```rust,compile_fail
+trait Add {
+    fn add(&self, other: &Self) -> Self;
+}
+
+const fn sum<T: ~const Add>(a: T, b: T) -> T {
+    a.add(&b)
+}
+
+// ❌ 编译错误: 若 T 的实现不是 const impl，在 const 上下文中调用失败
+// impl Add for i32 { fn add(&self, other: &Self) -> Self { self + other } }
+// const X: i32 = sum(1, 2); // 若 i32 的 Add 不是 const impl
+```
+
+> **修正**: `~const Trait`（"maybe const"）bound 是 `const trait impl` 的关键语法：它表示"此泛型参数可以是 const 或非 const 实现，但在 const 上下文中要求 const"。这增加了类型系统的维度：trait bound 现在需考虑"const 性"（constness）。设计挑战：1) 向后兼容性：现有代码无需修改；2) 默认行为：trait 默认非 const，需显式 `const trait` 声明；3) 语法简洁性：`~const` 标记是否足够清晰？`const trait impl` 的稳定化将使 Rust 的 const 泛型编程能力大幅提升：自定义类型的常量计算、编译期数据结构、零成本抽象的配置系统。这与 C++ 的 `constexpr` 虚函数（C++23，类似方向）或 D 的 CTFE（编译期完全可用）不同——Rust 选择通过类型系统控制编译期能力，而非全局关键字。[来源: [Rust RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+
+### 10.5 边界测试：const trait 的默认实现与泛型约束（编译错误）
+
+```rust,compile_fail
+#![feature(const_trait_impl)]
+
+pub trait ConstDefault {
+    fn default() -> Self;
+}
+
+// ❌ 编译错误: const trait 的默认实现可能调用非 const 方法
+impl const ConstDefault for i32 {
+    fn default() -> Self { 0 }
+}
+
+// 泛型约束: T: ~const ConstDefault
+// ~const 在 2024 edition 中语义仍在演进
+```
+
+> **修正**: `const trait impl`（RFC 2632）允许 trait 方法在 const 上下文中调用，但**默认实现**是复杂点：1) trait 的默认方法体若调用其他非 const 方法，const impl 中覆盖时可能破坏 const 保证；2) `~const` 边界（"maybe const"）表示"若类型实现 const trait则可用在 const 中"，语义仍在稳定化中。编译错误场景：1) 为类型实现 const trait，但方法体包含非 const 操作（`Vec::push`）；2) 泛型函数声明 `~const` 边界，但调用方传入非 const 实现。当前状态（nightly 1.97）：`const_trait_impl` 已部分可用，但 `~const` 语法和默认实现处理仍在讨论。这与 C++ 的 `constexpr`（类似演进路径：C++11 有限 → C++14 扩展 → C++20 `consteval`）或 D 语言的 `enum` 强制编译期求值不同——Rust 的 const 系统趋向更灵活的泛型支持，但保守推进以避免设计锁定。[来源: [RFC 2632 — const trait impl](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]

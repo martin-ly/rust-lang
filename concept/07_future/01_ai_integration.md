@@ -780,3 +780,75 @@ fn correct_fix(s: &str) -> String {
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 深度重写完成 — 删除产品罗列，增加机制剖析、反例与边界测试、定理分级标注
+
+## 十、边界测试：AI 集成的编译错误
+
+### 10.1 边界测试：ML 模型输入维度不匹配（运行时错误）
+
+```rust
+use ndarray::Array2;
+
+fn predict(model: &dyn Fn(&Array2<f32>) -> Array2<f32>, input: Array2<f32>) {
+    // ⚠️ 运行时错误: 输入形状与模型期望不匹配
+    // Rust 的类型系统无法验证 ndarray 的运行时形状
+    let output = model(&input);
+    println!("{:?}", output);
+}
+
+// 正确: 在运行时验证形状
+fn predict_safe(model: &dyn Fn(&Array2<f32>) -> Array2<f32>, input: Array2<f32>) {
+    assert_eq!(input.shape(), &[1, 784], "expected 1x784 input"); // ✅ 运行时检查
+    let output = model(&input);
+    println!("{:?}", output);
+}
+```
+
+> **修正**: Rust 的类型系统目前无法在编译期验证张量形状（tensor shape）。`ndarray::Array2<f32>` 只保证二维，不保证具体维度大小。这与 Idris 的依赖类型或 Rust 的未来"const generics 扩展"形成对比——目前形状验证必须在运行时进行（`assert_eq!` 或返回 `Result`）。`candle` 等 ML 框架在加载模型时验证形状，但输入数据的形状仍需应用层保证。[来源: [ndarray Documentation](https://docs.rs/ndarray/)]
+
+### 10.2 边界测试：不安全模型加载与所有权（编译错误）
+
+```rust,compile_fail
+use std::sync::Arc;
+
+struct Model {
+    weights: Vec<f32>,
+}
+
+fn load_model(path: &str) -> Arc<Model> {
+    // 假设从文件加载
+    Arc::new(Model { weights: vec![1.0, 2.0] })
+}
+
+fn main() {
+    let model = load_model("model.bin");
+    let model2 = model.clone();
+    // ❌ 编译错误: 尝试获取 Arc 内部的可变引用
+    // 模型权重在加载后通常不应修改
+    let weights = Arc::get_mut(&mut model).unwrap(); // model 不是 mut
+    weights.weights[0] = 3.0;
+}
+
+// 正确: 使用不可变共享
+fn fixed() {
+    let model = load_model("model.bin");
+    let model2 = model.clone();
+    println!("weights: {:?}", model2.weights); // ✅ 只读访问
+}
+```
+
+> **修正**: AI 模型（权重、配置）在加载后通常是只读的。使用 `Arc<T>`（而非 `Arc<Mutex<T>>`）共享模型实例，编译器在类型层面保证不可变性。若需模型微调（fine-tuning），则必须使用 `Arc<RwLock<T>>` 或显式克隆后修改。Rust 的所有权系统帮助区分"推理"（只读）和"训练"（可变）两种模式，防止运行时数据竞争。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.5 边界测试：AI 生成代码的 unsafe 误用与形式化保证缺失（运行时 UB）
+
+```rust,compile_fail
+// AI 生成的代码可能包含微妙的 unsafe 错误
+fn ai_generated_parse(data: &[u8]) -> &[u8] {
+    // ❌ 运行时 UB: AI 可能生成越界切片，未检查长度
+    unsafe {
+        std::slice::from_raw_parts(data.as_ptr().add(8), data.len())
+        // 若 data.len() < 8，add(8) 越界；若剩余长度计算错误，越界
+    }
+}
+```
+
+> **修正**: AI 辅助编程工具（Copilot、CodeWhisperer、ChatGPT）生成 Rust 代码时，**unsafe 块的错误率显著高于 safe 代码**：1) 边界检查遗漏（`slice::from_raw_parts` 的指针算术）；2) 别名规则违反（`&mut` 和 `*mut` 混用）；3) 生命周期误标注（`'static` 滥用）。缓解策略：1) **禁止 AI 生成 unsafe**——人工审核所有 unsafe 代码；2) 使用 `#[forbid(unsafe_code)]` 在 crate 级别禁止；3) 对 AI 生成的代码运行 Miri、Kani、Clippy 的 `undocumented_unsafe_blocks`。这与人类编写的 unsafe 代码同样需要审核，但 AI 的"自信错误"（plausible-looking but wrong）更难发现。未来方向：1) 用形式化工具验证 AI 生成代码（合约生成 + 自动验证）；2) 训练数据中加入 Miri 和 Kani 的反馈，强化学习安全 Rust。这与传统的代码审查或静态分析类似——AI 是加速工具，不是替代人类判断。[来源: [AI-Assisted Rust Programming](https://arxiv.org/)] · [来源: [GitHub Copilot](https://github.com/features/copilot)]

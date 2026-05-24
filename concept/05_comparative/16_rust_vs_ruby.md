@@ -39,6 +39,11 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 Ruby 的编译错误对比](#十边界测试rust-与-ruby-的编译错误对比)
+    - [10.1 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](#101-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
+    - [10.2 边界测试：Ruby 的元编程与 Rust 的宏（编译错误）](#102-边界测试ruby-的元编程与-rust-的宏编译错误)
+    - [10.3 边界测试：Ruby 的元编程与 Rust 的宏系统的表达能力差异（编译错误）](#103-边界测试ruby-的元编程与-rust-的宏系统的表达能力差异编译错误)
+    - [10.4 边界测试：Ruby 的 GIL 与 Rust 的真并行的性能差异（运行时数据竞争）](#104-边界测试ruby-的-gil-与-rust-的真并行的性能差异运行时数据竞争)
 
 ---
 
@@ -685,3 +690,106 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：Rust 与 Ruby 的编译错误对比
+
+### 10.1 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
+
+```rust,compile_fail
+trait Greet {
+    fn greet(&self);
+}
+
+// ❌ 编译错误: only traits defined in the current crate can be implemented for arbitrary types
+// Rust 的孤儿规则阻止为外部类型实现外部 trait
+impl Greet for String {
+    fn greet(&self) {
+        println!("Hello, {}", self);
+    }
+}
+```
+
+> **Ruby 对比**: Ruby 的 open classes 允许在运行时修改任何类：`class String; def greet; ...; end; end`。Rust 的孤儿规则禁止为外部 crate 的类型实现外部 crate 的 trait——这避免了 impl 冲突（两个 crate 为同一类型实现同一 trait）。Rust 允许为外部类型实现本地 trait，或为本地类型实现外部 trait，但不能同时为外部。这与 C# 的扩展方法、Swift 的 extension 不同——Rust 优先考虑类型安全和社会化代码组织。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：Ruby 的元编程与 Rust 的宏（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: Rust 没有 method_missing
+    // 不能在运行时动态响应未定义方法
+    // let obj = SomeType;
+    // obj.undefined_method(); // 编译错误
+}
+
+// 正确: 使用宏在编译期生成代码
+macro_rules! make_getter {
+    ($name:ident) => {
+        fn $name(&self) -> i32 { self.$name }
+    };
+}
+
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Point {
+    make_getter!(x);
+    make_getter!(y);
+}
+```
+
+> **Ruby 对比**: Ruby 的 `method_missing` 允许对象在运行时拦截未定义方法的调用，实现强大的元编程（ActiveRecord 的动态查找器）。Rust 没有运行时元编程——所有代码必须在编译期确定。`macro_rules!` 和过程宏在编译期展开，生成具体代码。这与 C++ 的模板元编程类似，但 Rust 的宏系统更卫生（hygiene），不会意外污染命名空间。Ruby 的灵活性适合快速开发和 DSL，Rust 的静态保证适合系统编程。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：Ruby 的元编程与 Rust 的宏系统的表达能力差异（编译错误）
+
+```rust,compile_fail
+// Ruby: 运行时元编程
+// class Foo
+//   define_method(:bar) { puts "dynamic" }
+// end
+// Foo.new.bar # dynamic
+
+// Rust: 编译期宏，无运行时元编程
+macro_rules! define_method {
+    ($name:ident, $body:expr) => {
+        fn $name() { $body }
+    };
+}
+
+define_method!(bar, println!("static"));
+
+fn main() {
+    bar(); // ✅ 编译期生成
+
+    // ❌ 编译错误: 不能根据运行时值生成方法
+    // let method_name = "bar";
+    // obj.send(method_name); // Ruby 的 send，Rust 无等价物
+}
+```
+
+> **修正**: Ruby 的**元编程**（metaprogramming）是运行时的：可在程序执行中定义类、方法、修改变量。Rust 的**宏**是编译期的：在编译时展开为代码，无运行时开销。这是表达能力的根本差异：Ruby 可在运行时根据用户输入、数据库模式、配置文件生成代码；Rust 必须在编译前确定所有代码结构。Rust 的应对：1) 代码生成工具（`build.rs` 生成 Rust 代码）；2) 过程宏（根据输入生成代码，但输入必须是编译期可解析的 token）；3) `std::any::Any` 的向下转型（有限运行时类型操作）。这与 Lisp 的宏（编译期/运行期同像性，更强大）或 C 的预处理器（纯文本替换，无 AST 操作）不同——Rust 的宏在编译期操作 AST，能力强大但受限于编译期信息。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Ruby Metaprogramming](https://ruby-doc.org/core-3.1.0/Module.html#method-i-define_method)]
+
+### 10.4 边界测试：Ruby 的 GIL 与 Rust 的真并行的性能差异（运行时数据竞争）
+
+```rust,compile_fail
+use std::thread;
+
+fn main() {
+    let mut data = vec![0; 1000];
+
+    // Ruby: GIL（Global Interpreter Lock）保证同一时刻只有一个线程执行 Ruby 代码
+    // 因此 Ruby 线程无数据竞争（但 IO 密集型任务可并发）
+
+    // Rust: 真并行，多个线程同时执行
+    let handles: Vec<_> = data.iter_mut().map(|x| {
+        thread::spawn(move || {
+            *x += 1; // ❌ 编译错误: 不能从多个线程可变借用同一数据
+        })
+    }).collect();
+
+    for h in handles { h.join().unwrap(); }
+}
+```
+
+> **修正**: Ruby 的 **GIL**（Global Interpreter Lock，或 GVL）是性能瓶颈也是安全特性：它防止了 Ruby 层面的数据竞争（同一时刻只有一个线程执行 Ruby 字节码），但 C 扩展仍可能引入数据竞争。Rust 无 GIL：线程是真并行的，编译器通过 `Send`/`Sync` 检查在编译期防止数据竞争。上述代码中，`data.iter_mut()` 生成的多个 `&mut i32` 不能发送到不同线程——这是 Rust 的编译期保证。若需并行修改，使用 `Mutex`、`RwLock` 或原子类型。这与 Python 的 GIL（同样防止数据竞争，但限制多核利用）或 Java 的无 GIL（真并行，通过 `synchronized` 和 `volatile` 防止数据竞争）类似——Rust 的 `Send`/`Sync` 是编译期的、零成本的 GIL 替代。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Ruby GIL/GVL](https://en.wikipedia.org/wiki/Global_interpreter_lock)]

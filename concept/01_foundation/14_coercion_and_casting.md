@@ -39,6 +39,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：类型转换的编译错误](#十边界测试类型转换的编译错误)
+    - [10.1 边界测试：不安全的 `as` 转换导致截断（运行时错误）](#101-边界测试不安全的-as-转换导致截断运行时错误)
+    - [10.2 边界测试：裸指针与引用转换的生命周期丢失（编译错误 / 运行时 UB）](#102-边界测试裸指针与引用转换的生命周期丢失编译错误--运行时-ub)
 
 ---
 
@@ -672,3 +675,94 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：类型转换的编译错误
+
+### 10.1 边界测试：不安全的 `as` 转换导致截断（运行时错误）
+
+```rust
+fn main() {
+    let x: i32 = 300;
+    let y = x as i8; // ⚠️ 截断: 300 -> 44（因为 i8 范围是 -128..127）
+    println!("{}", y); // 输出 44，无运行时 panic
+    // `as` 转换是静默的，可能导致数据丢失
+
+    // 正确: 使用 try_into() 进行安全转换
+    let z: Result<i8, _> = x.try_into();
+    match z {
+        Ok(v) => println!("{}", v),
+        Err(_) => println!("overflow"), // ✅ 检测截断
+    }
+}
+```
+
+> **修正**: `as` 执行截断转换（truncating cast），不检查范围。将大类型转为小类型时，高位被丢弃。如需安全检查，使用 `TryInto::try_into()`（返回 `Result`）。在 Rust 1.60+ 中，`as` 转换 `f64` → `i32` 的未定义行为已被定义为饱和截断（saturating cast），但整数间转换仍静默截断。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：裸指针与引用转换的生命周期丢失（编译错误 / 运行时 UB）
+
+```rust,compile_fail
+fn main() {
+    let x = 42;
+    let r = &x;
+    let ptr = r as *const i32; // 引用 → 裸指针（允许）
+    // ❌ 编译错误: 裸指针不能直接转回引用（需要 unsafe）
+    let r2: &i32 = ptr; // 编译错误: expected `&i32`, found `*const i32`
+}
+
+// 正确: 在 unsafe 块中转换，但需保证指针有效
+unsafe fn ptr_to_ref(ptr: *const i32) -> Option<&'static i32> {
+    if ptr.is_null() {
+        None
+    } else {
+        Some(&*ptr) // ✅ unsafe 解引用
+    }
+}
+```
+
+> **修正**: 引用 → 裸指针是安全操作（隐式转换），但裸指针 → 引用必须在 `unsafe` 块中进行，且程序员必须保证指针有效、对齐、不悬垂。这是 Rust 安全边界的典型设计：从安全区到 unsafe 区容易，从 unsafe 区回到安全区需要显式承诺。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试： trait 对象强制转换的 `Sized` 约束（编译错误）
+
+```rust,compile_fail
+fn to_trait_object<T>(x: T) -> Box<dyn std::fmt::Display> {
+    // ❌ 编译错误: `T` 可能不是 `Sized`，`Box::new` 要求 `Sized`
+    Box::new(x)
+}
+
+fn main() {
+    let s = String::from("hello");
+    let obj = to_trait_object(s);
+    println!("{}", obj);
+}
+```
+
+> **修正**: `Box<dyn Trait>` 的构造要求具体类型 `T` 是 `Sized`，因为 `Box::new` 需要在编译期知道分配大小。对于 DST（`str`、`[T]`、`dyn Trait`），不能直接 `Box::new`，必须使用 `Box::from_raw` 或特殊构造方法。若函数需要接受可能非 `Sized` 的类型，应使用 `?Sized` bound：`fn to_trait_object<T: ?Sized + Display>(x: Box<T>) -> Box<dyn Display>`。这与 C++ 的虚函数指针（总是 `sizeof(void*)`，无需 `Sized` 概念）不同——Rust 的 DST 设计更通用，但需要显式处理大小未知类型。`Box<dyn Trait>` 本身是 DST（胖指针），但构造它需要已知大小的原始值。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)] · [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
+
+### 10.4 边界测试：`as` 关键字的转换限制（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let v = vec![1, 2, 3];
+    // ❌ 编译错误: `as` 不支持任意类型转换
+    let s = v as String;
+}
+```
+
+> **修正**: Rust 的 `as` 关键字支持有限的原语转换：数值类型间（`i32` → `u64`、`f32` → `i32`）、指针间（`*mut T` → `*mut U`）、引用到指针（`&T` → `*const T`）。不支持：1) 任意 struct 间转换；2) `Vec<T>` → `String`；3) `&str` → `String`（需 `.to_string()`）；4)  trait 对象转换（需显式 `as` 或 `From`）。这是 Rust"显式转换"原则的体现：危险的转换（如截断、位重解释）用 `as`，安全的转换用 `From`/`Into`，任意的转换用 `mem::transmute`（unsafe）。这与 C 的 `(type)value`（任意转换）或 C++ 的 `static_cast`/`reinterpret_cast`（更细粒度但仍很强大）不同——Rust 限制隐式/便捷转换，鼓励开发者思考每次转换的语义。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust Reference — Type Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)]
+
+### 10.5 边界测试：`dyn Trait` 到 `dyn Trait` 的跨 trait coercion（编译错误）
+
+```rust,compile_fail
+trait A {}
+trait B: A {}
+
+fn upcast(b: &dyn B) -> &dyn A {
+    // ❌ 编译错误: Rust 不支持直接的 trait object upcasting
+    // b as &dyn A // 错误!
+
+    // 旧版 Rust 需手动实现，1.86+ 支持 trait upcasting（不稳定）
+    todo!()
+}
+```
+
+> **修正**: Trait object 的**向上转型**（upcasting）：`dyn B` → `dyn A`（`B: A`）在 Rust 中长期不支持，因为 vtable 布局问题：`dyn B` 的 vtable 包含 `B` 的方法，`dyn A` 的 vtable 只包含 `A` 的方法，需要额外的 vtable 指针或调整。Rust 1.86+ 引入了 trait upcasting（不稳定特性），允许 `b as &dyn A`。旧版 workaround：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。这与 Java 的接口向上转型（自动，无开销）或 C++ 的多继承（复杂 vtable 调整）不同——Rust 的单一继承 trait + 自动 upcasting 是设计演进的方向。[来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [来源: [Trait Upcasting RFC](https://rust-lang.github.io/rfcs/3324-dyn-upcasting.html)]

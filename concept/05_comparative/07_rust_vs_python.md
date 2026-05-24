@@ -573,3 +573,114 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：Rust 与 Python 的编译错误对比
+
+### 10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 42;
+    // ❌ 编译错误: expected integer, found `&str`
+    // Rust 变量类型在编译期固定，不能重新赋值为不同类型
+    let x = "hello"; // shadowing 创建新变量，不是修改原变量类型
+}
+
+// 正确: 使用枚举表达多种可能类型
+enum Value {
+    Int(i32),
+    Str(String),
+}
+
+fn fixed() {
+    let v = Value::Int(42);
+    let v = Value::Str(String::from("hello")); // ✅ shadowing
+}
+```
+
+> **Python 对比**: Python 是动态类型——变量名只是标签，可以指向任何类型的对象：`x = 42; x = 
+
+## 十、边界测试：Rust 与 Python 的编译错误对比
+
+### 10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 42;
+    // ❌ 编译错误: expected integer, found `&str`
+    // Rust 变量类型在编译期固定，不能重新赋值为不同类型
+    // x = "hello"; // 编译错误
+}
+
+// 正确: 使用枚举表达多种可能类型
+enum Value {
+    Int(i32),
+    Str(String),
+}
+
+fn fixed() {
+    let v = Value::Int(42);
+    let v = Value::Str(String::from("hello")); // shadowing
+}
+```
+
+> **Python 对比**: Python 是动态类型——变量名只是标签，可以指向任何类型的对象：`x = 42; x = "hello"` 完全合法。Rust 是静态类型——变量类型在编译期确定，`x = 42` 后 `x` 的类型是 `i32`，不能再赋值为 `String`。Rust 的 shadowing（`let x = ...`）创建新变量而非修改原变量。这消除了 Python 中常见的类型错误（如 `len(42)`），但增加了类型标注的样板代码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::thread;
+
+fn main() {
+    let data = Rc::new(42);
+    // ❌ 编译错误: `Rc<i32>` cannot be sent between threads safely
+    // Rc 不是 Send，不能跨线程共享
+    thread::spawn(move || {
+        println!("{}", data);
+    }).join().unwrap();
+}
+
+// 正确: 使用 Arc（原子引用计数）
+use std::sync::Arc;
+
+fn fixed() {
+    let data = Arc::new(42);
+    let data2 = Arc::clone(&data);
+    thread::spawn(move || {
+        println!("{}", data2);
+    }).join().unwrap();
+}
+```
+
+> **Python 对比**: Python 通过 **GIL**（Global Interpreter Lock）保证单线程执行字节码，实现"线程安全"——但代价是真正的并行计算受限（CPU 密集型任务无法利用多核）。Rust 没有 GIL，通过**所有权和类型系统**保证线程安全：`Rc<T>`（非原子）不能跨线程，`Arc<T>`（原子）可以。编译器在编译期拒绝数据竞争，无需运行时锁。这使得 Rust 的并发程序既有 C/C++ 的性能，又有 Python 的安全性——但无需全局锁。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）
+
+```rust,compile_fail
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let data = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+    
+    for _ in 0..8 {
+        let d = Arc::clone(&data);
+        handles.push(thread::spawn(move || {
+            for _ in 0..100000 {
+                let mut guard = d.lock().unwrap();
+                *guard += 1;
+            }
+        }));
+    }
+    
+    for h in handles { h.join().unwrap(); }
+    println!("{}", *data.lock().unwrap());
+    
+    // ⚠️ 性能注意: Arc<Mutex<T>> 的争用比 Python GIL 更细粒度
+    // 但 Mutex 开销在高度争用时显著
+}
+```
+
+> **修正**: Python 的 **GIL**（Global Interpreter Lock）使多线程 Python 代码**串行执行**——同一时刻只有一个线程执行 Python 字节码。Rust 的 `Arc<Mutex<T>>` 允许**真并行**，但 `Mutex` 的锁争用（lock contention）在高频访问时成为瓶颈。性能对比：1) Python GIL：无锁开销，但无并行；2) Rust `Mutex`：有锁开销（原子操作 + 内核调度），但可并行；3) Rust `AtomicUsize`：无锁，最高性能。Rust 的优势：开发者可根据场景选择同步原语（`Mutex`、`RwLock`、`Atomic`、无锁结构），Python 无此选择。这与 Java 的 `synchronized`（类似 Mutex，但 JVM 优化更成熟）或 Go 的 `sync.Mutex`（类似 Rust，但 goroutine 调度更轻量）类似——Rust 提供底层控制，但正确使用需要理解内存模型。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [Python GIL](https://wiki.python.org/moin/GlobalInterpreterLock)]

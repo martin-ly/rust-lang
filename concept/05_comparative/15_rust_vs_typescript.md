@@ -36,6 +36,11 @@
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 TypeScript 的编译错误对比](#十边界测试rust-与-typescript-的编译错误对比)
+    - [10.1 边界测试：TypeScript 的 any 与 Rust 的显式类型（编译错误）](#101-边界测试typescript-的-any-与-rust-的显式类型编译错误)
+    - [10.2 边界测试：TypeScript 的可选属性与 Rust 的 Option（编译错误）](#102-边界测试typescript-的可选属性与-rust-的-option编译错误)
+    - [10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）](#103-边界测试typescript-的结构类型与-rust-的名义类型的互操作编译错误)
+    - [10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时 UB）](#104-边界测试typescript-的-any-与-rust-的-unsafe-的语义鸿沟编译错误运行时-ub)
 
 ---
 
@@ -747,3 +752,108 @@ fn main() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+## 十、边界测试：Rust 与 TypeScript 的编译错误对比
+
+### 10.1 边界测试：TypeScript 的 any 与 Rust 的显式类型（编译错误）
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误: Rust 没有 any 类型
+    // 所有类型必须在编译期确定
+    let x = 42;
+    // x = "hello"; // 编译错误: expected integer, found `&str`
+}
+
+// 正确: 使用枚举表达多种类型
+enum Value {
+    Num(i32),
+    Text(String),
+}
+
+fn fixed() {
+    let v = Value::Num(42);
+    let v = Value::Text(String::from("hello")); // shadowing
+}
+```
+
+> **TypeScript 对比**: TypeScript 的 `any` 类型绕过所有类型检查，允许任意操作（`x.foo()` 不会报错，即使 `foo` 不存在）。Rust 没有 `any` 等价物——所有操作必须在编译期验证。`enum` 是 Rust 表达"多种可能类型"的方式，但调用者必须通过 `match` 处理每个变体。这与 TypeScript 的联合类型（`number | string`）类似，但 Rust 的穷尽性检查更严格——必须覆盖所有变体，不能遗漏。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：TypeScript 的可选属性与 Rust 的 Option（编译错误）
+
+```rust,compile_fail
+struct Config {
+    port: u16,
+    host: Option<String>, // 可选配置
+}
+
+fn main() {
+    let cfg = Config { port: 8080, host: None };
+    // ❌ 编译错误: `Option<String>` 不能直接作为 `String` 使用
+    let addr = format!("{}:{}", cfg.host, cfg.port);
+}
+
+// 正确: 显式解包 Option
+fn fixed() {
+    let cfg = Config { port: 8080, host: Some(String::from("localhost")) };
+    let host = cfg.host.as_deref().unwrap_or("0.0.0.0");
+    let addr = format!("{}:{}", host, cfg.port);
+    println!("{}", addr);
+}
+```
+
+> **TypeScript 对比**: TypeScript 的可选属性（`host?: string`）在访问时可能是 `undefined`，但编译器只在 `strictNullChecks` 开启时检查。Rust 的 `Option<T>` 是枚举类型，无论何种编译模式，访问内部值必须通过 `match`、`if let` 或 `unwrap`。这与 TypeScript 4.4+ 的 `--exactOptionalPropertyTypes` 类似，但 Rust 的设计更根本——可空性不是类型的属性，而是独立的类型构造器。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）
+
+```rust,compile_fail
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+struct Point2D {
+    x: i32,
+    y: i32,
+}
+
+fn use_point(p: Point) {
+    println!("{}, {}", p.x, p.y);
+}
+
+fn main() {
+    let p = Point2D { x: 1, y: 2 };
+    // ❌ 编译错误: Point2D 和 Point 结构相同，但名义类型不同
+    // use_point(p); // 不兼容
+
+    // TypeScript 中: interface Point { x: number; y: number; }
+    // interface Point2D { x: number; y: number; }
+    // const p: Point2D = { x: 1, y: 2 };
+    // function usePoint(p: Point) { }
+    // usePoint(p); // ✅ 结构类型兼容
+}
+```
+
+> **修正**: TypeScript 使用**结构类型**（structural typing）：若两个类型有相同的结构（字段和类型），则它们兼容。Rust 使用**名义类型**（nominal typing）：类型兼容性由名称决定，即使结构完全相同。结构类型的优势：灵活性（无需显式转换）、 duck typing 的静态版本。名义类型的优势：类型安全（同名不同义的类型不会混淆）、更好的错误信息、支持 newtype 模式（`struct Meters(u32)` 与 `struct Seconds(u32)` 不兼容）。Rust 的选择与 Java、C#、Haskell 一致，TypeScript 的选择与 Go 的接口（隐式实现，类似结构类型）类似。从 TypeScript 迁移到 Rust 时，需注意：相同字段的 struct 不能互换，必须显式转换或实现 `From`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch05-01-defining-structs.html)] · [来源: [TypeScript Type Compatibility](https://www.typescriptlang.org/docs/handbook/type-compatibility.html)]
+
+### 10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时 UB）
+
+```rust,compile_fail
+fn main() {
+    // TypeScript: any 绕过所有类型检查
+    // const x: any = 5;
+    // x.foo(); // 编译通过，运行时可能错误
+
+    // Rust: 无 any 类型，最接近的是 trait object 或 unsafe
+    let x: Box<dyn std::any::Any> = Box::new(5i32);
+    // ❌ 编译错误: 不能直接在 Any 上调用方法
+    // x.foo();
+
+    // 正确: 向下转型
+    if let Some(n) = x.downcast_ref::<i32>() {
+        println!("{}", n);
+    }
+}
+```
+
+> **修正**: TypeScript 的 `any` 是**类型系统的逃生舱**：禁用所有类型检查，允许任意操作。Rust 无 `any` 等价物——最接近的是 `dyn Any`（运行时类型信息，需向下转型）和 `unsafe`（绕过编译器检查）。`any` 在 TypeScript 中是便利工具（快速原型、迁移遗留代码），但也是 bug 来源（类型安全丧失）。Rust 的设计拒绝 `any`：即使是 `dyn Any`，向下转型也是类型安全的（失败时返回 `None`），不会导致未定义行为。`unsafe` 是更低级的逃逸，但标记了人工审查边界。这与 Python 的动态类型（无 static type，运行时检查）或 C 的 `void*`（无类型，任意转换）不同——Rust 在类型安全上不提供"方便但危险"的捷径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)] · [来源: [TypeScript any Type](https://www.typescriptlang.org/docs/handbook/basic-types.html#any)]

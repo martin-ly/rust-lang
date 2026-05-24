@@ -1102,3 +1102,90 @@ graph TD
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **相关文件**: [失效分析树集](../00_meta/fault_tree_analysis_collection.md) · [边界扩展树](../00_meta/boundary_extension_tree.md) · [Unsafe](../03_advanced/03_unsafe.md)
+
+## 十、边界测试：安全边界的编译错误
+
+### 10.1 边界测试：Safe 与 Unsafe 的边界穿越（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let ptr = 0x1234 as *const i32;
+    // ❌ 编译错误: dereference of raw pointer requires unsafe function or block
+    // Safe Rust 不能解引用裸指针
+    let val = *ptr;
+}
+
+// 正确: 在 unsafe 块中解引用
+fn fixed() {
+    let x = 42;
+    let ptr = &x as *const i32;
+    unsafe {
+        let val = *ptr; // ✅ unsafe 块明确标记
+        println!("{}", val);
+    }
+}
+```
+
+> **修正**: Rust 的安全边界由 `unsafe` 关键字标记。Safe Rust 保证无 UB（无数据竞争、无 use-after-free、无悬垂引用）。Unsafe Rust 放弃这些保证，允许：解引用裸指针、调用 unsafe 函数、访问 union 字段、内联汇编。`unsafe` 块不自动使周围代码 unsafe——它只是告诉编译器"程序员已验证此处的安全性"。安全抽象的目标是将 unsafe 代码封装为 safe API，使调用者无需了解内部 unsafe 细节。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：`unsafe impl` 的 trait 契约（编译错误）
+
+```rust,compile_fail
+use std::sync::Arc;
+use std::thread;
+
+struct MyData {
+    ptr: *mut u8,
+}
+
+// ❌ 编译错误: `*mut u8` 未实现 Send，unsafe impl 可能有问题
+unsafe impl Send for MyData {} // 手动标记 Send
+
+fn main() {
+    let data = Arc::new(MyData { ptr: std::ptr::null_mut() });
+    let d2 = Arc::clone(&data);
+    thread::spawn(move || {
+        // ⚠️ 运行时 UB: 若多个线程同时访问 ptr，数据竞争
+        unsafe { *d2.ptr = 1; }
+    });
+}
+```
+
+> **修正**: `unsafe impl Send` / `unsafe impl Sync` 告诉编译器"我保证此类型可安全跨线程"，但编译器**不验证**此保证。错误标记会导致数据竞争、use-after-free 等严重 UB。正确的做法是通过 `Mutex<T>`、`RwLock<T>`、原子类型等同步原语实现线程安全，而非手动标记。`unsafe impl` 仅在封装底层同步机制时使用（如标准库的 `Mutex` 本身需要 `unsafe impl Sync`）。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：FFI 边界的安全封装缺失（运行时 UB）
+
+```rust,compile_fail
+extern "C" {
+    fn c_api(ptr: *mut u8, len: usize);
+}
+
+fn main() {
+    let mut buf = [0u8; 10];
+    unsafe {
+        // ❌ 运行时 UB: C API 可能写入超过 10 字节
+        // Rust 侧无法验证 C 代码的行为
+        c_api(buf.as_mut_ptr(), 100);
+    }
+}
+```
+
+> **修正**: FFI（Foreign Function Interface）边界是 Rust 安全保证的**终点**：Rust 编译器无法验证 C 代码的内存安全。`unsafe` 块标记"开发者保证此调用安全"，但错误的保证导致 UB。安全封装模式：1) 在 Rust 侧验证所有参数（长度、指针非空、对齐）；2) 使用 `slice::from_raw_parts` 的边界检查版本；3) 使用 `cxx` crate 生成类型安全的 C++ 绑定。这与 Java 的 JNI（同样无法验证 C 代码，但 JVM 有沙箱限制）或 Python 的 `ctypes`/`cffi`（同样依赖开发者正确性）相同——跨语言边界是类型系统的天然弱点。Rust 的优势在于 `unsafe` 块的显式标记：所有 FFI 调用都在审计范围内，不像 C++ 的隐式 unsafe（每行代码都可能是 UB）。[来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.4 边界测试：`unsafe` 代码块的粒度与审计（编译错误/逻辑错误）
+
+```rust,compile_fail
+fn bad_unsafe() {
+    let mut x = 5;
+    let r = &mut x;
+    unsafe {
+        // ❌ 逻辑错误: unsafe 块太大，包含不必要的 safe 代码
+        // 难以审计哪些操作真正需要 unsafe
+        let ptr = r as *mut i32;
+        *ptr = 10;
+        println!("{}", x); // safe 操作，但混在 unsafe 块中
+    }
+}
+```
+
+> **修正**: `unsafe` 块的粒度是代码质量和安全审计的关键因素。最佳实践：1) **最小化 unsafe**：只将真正需要 unsafe 的操作放入 `unsafe` 块；2) **封装 unsafe**：将 unsafe 操作封装在安全函数中，文档化不变式；3) **审计边界**：每个 `unsafe` 块都应有人工审查记录。上述代码中，`println!` 不需要 `unsafe`，放入 `unsafe` 块增加了审计负担。Rust 社区的工具（`cargo geiger` 统计 unsafe 比例、`cargo vet` 审计依赖）帮助管理 unsafe 边界。这与 C/C++ 的"全代码 unsafe"（无边界标记）或 Java 的"无 unsafe"（JVM 保证安全，JNI 除外）不同——Rust 的 unsafe 是 opt-in 的显式契约，使安全审计可聚焦。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] · [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]

@@ -40,6 +40,9 @@
   - [五、来源与延伸阅读](#五来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：范围类型的编译错误](#十边界测试范围类型的编译错误)
+    - [10.1 边界测试：范围模式在非 match 中使用（编译错误）](#101-边界测试范围模式在非-match-中使用编译错误)
+    - [10.2 边界测试：`Range` 与 `RangeInclusive` 的类型不匹配（编译错误）](#102-边界测试range-与-rangeinclusive-的类型不匹配编译错误)
 
 ---
 
@@ -452,3 +455,89 @@ let rev = 10..0;
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+## 十、边界测试：范围类型的编译错误
+
+### 10.1 边界测试：范围模式在非 match 中使用（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 5;
+    // ❌ 编译错误: range patterns are not allowed outside of patterns
+    // 范围模式只能在 match / if let 中使用
+    if 1..=10 = x {
+        println!("in range");
+    }
+}
+
+// 正确: 使用 contains 方法
+fn fixed() {
+    let x = 5;
+    if (1..=10).contains(&x) { // ✅ RangeInclusive::contains
+        println!("in range");
+    }
+}
+```
+
+> **修正**: Rust 的范围语法 `a..b`、`a..=b` 有两种用法：作为表达式（创建 `Range` 类型）和作为模式（在 `match` 中匹配）。作为表达式时，它表示一个迭代器或范围对象；作为模式时，它表示值范围匹配。不能在普通表达式位置使用模式语法。`contains` 方法是检查值是否在范围内的标准方式。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：`Range` 与 `RangeInclusive` 的类型不匹配（编译错误）
+
+```rust,compile_fail
+fn take_range(r: std::ops::Range<i32>) {
+    println!("{}..{}", r.start, r.end);
+}
+
+fn main() {
+    let r = 1..=10; // RangeInclusive<i32>
+    // ❌ 编译错误: expected struct `Range`, found struct `RangeInclusive`
+    take_range(r); // 类型不匹配
+}
+
+// 正确: 使用泛型接受任意范围
+fn take_range_generic<R>(r: R)
+where
+    R: std::ops::RangeBounds<i32>,
+{
+    match r.start_bound() {
+        std::ops::Bound::Included(&n) => println!("start: {}", n),
+        std::ops::Bound::Excluded(&n) => println!("start after: {}", n),
+        std::ops::Bound::Unbounded => println!("unbounded"),
+    }
+}
+```
+
+> **修正**: `Range`（`a..b`，半开区间）、`RangeInclusive`（`a..=b`，闭区间）、`RangeFrom`（`a..`）、`RangeTo`（`..b`）是**不同的类型**。函数参数需明确指定接受哪种范围，或使用 `RangeBounds` trait 泛化。这体现了 Rust"显式优于隐式"的设计哲学——范围语义在类型层面区分，避免 C++ 中 `for (int i = a; i <= b; i++)` 与 `i < b` 的歧义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：`RangeInclusive` 的 `Copy` 缺失（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let range = 1..=5;
+    let r1 = range;
+    let r2 = range;
+    // ❌ 编译错误: RangeInclusive 未实现 Copy，只能移动
+    // Range (1..5) 实现了 Copy，但 RangeInclusive (1..=5) 没有
+    for i in r1 { print!("{}", i); }
+    for i in r2 { print!("{}", i); }
+}
+```
+
+> **修正**: `Range<T>`（半开区间 `start..end`）实现了 `Copy`（若 `T: Copy`），但 `RangeInclusive<T>`（闭区间 `start..=end`）没有。原因是 `RangeInclusive` 需要追踪是否已迭代到 `end`（一个布尔标志 `is_empty: Option<bool>`），使其大小和语义不适合按位复制。这导致不一致：`1..5` 可复制，`1..=5` 不可复制。解决方案：1) 使用引用 `&range` 迭代；2) 显式 `clone()`；3) 使用 `Range` 替代（若语义允许）。这与 Rust 的"一致性"设计目标冲突——范围类型的 `Copy` 实现不一致是历史遗留，可能在未来版本中修正。开发者的应对：记住 `..=` 的范围需要 `clone` 或引用才能复用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/ops/struct.RangeInclusive.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：`Iterator::size_hint` 与无限范围（逻辑错误）
+
+```rust,compile_fail
+fn main() {
+    let range = 0..;
+    // ⚠️ 逻辑注意: size_hint 返回 (usize::MAX, None)
+    // 某些代码假设 size_hint 精确，导致预分配过大内存
+    let (low, high) = range.size_hint();
+    println!("low={}, high={:?}", low, high); // low=184467..., high=None
+    
+    // 危险: collect 到 Vec 可能尝试分配极大内存
+    // let v: Vec<_> = range.take(10).collect(); // ✅ take 限制
+}
+```
+
+> **修正**: `Iterator::size_hint` 返回 `(usize, Option<usize>)`——长度的下界和上界。无限范围 `0..` 的 `size_hint` 返回 `(usize::MAX, None)`，表示"至少 usize::MAX 个元素，可能无限"。某些代码（如 `Iterator::fold` 的优化、`Vec::with_capacity`）依赖 `size_hint` 预分配内存，对无限范围可能分配失败（OOM）。安全模式：1) 在 `collect` 前使用 `.take(n)` 限制；2) 不依赖 `size_hint` 的精确性；3) 对可能无限的迭代器使用 `try_fold` 并检查内存分配。这与 Python 的 `range`（有限，不支持无限）或 Haskell 的 `[0..]`（惰性无限列表）不同——Rust 的迭代器是惰性的，但 `collect` 等操作是严格的（立即消耗），需要显式限制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]

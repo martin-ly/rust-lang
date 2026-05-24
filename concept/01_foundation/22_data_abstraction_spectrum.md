@@ -454,3 +454,110 @@ impl std::fmt::Display for MyVec {
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 通用 PL 基座层
+
+## 十、边界测试：数据抽象的编译错误
+
+### 10.1 边界测试：零大小类型（ZST）的内存布局假设（编译错误 / 运行时 UB）
+
+```rust
+struct ZeroSized; // 零大小类型
+
+fn main() {
+    let z = ZeroSized;
+    let ptr = &z as *const ZeroSized;
+    // ⚠️ ZST 的指针可能不是唯一分配的
+    // 所有 ZeroSized 实例可能共享同一地址
+    let z2 = ZeroSized;
+    let ptr2 = &z2 as *const ZeroSized;
+    assert_eq!(ptr, ptr2); // ✅ 可能相等！
+}
+
+// 正确: 不依赖 ZST 指针的唯一性
+fn fixed() {
+    let _z = ZeroSized;
+    // ZST 适合作为标记类型（phantom type）
+    // 不存储数据，只携带类型信息
+}
+```
+
+> **修正**: 零大小类型（ZST，如 `()`、`PhantomData<T>`、空结构体）不占用内存，其引用可能指向同一虚拟地址。依赖 ZST 指针唯一性（如哈希表键）是未定义行为。ZST 的正确用途是类型级标记（phantom type）、编译期常量、状态机状态标签——利用类型系统传递信息，无运行时开销。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：枚举变体内存布局的不可变性（逻辑错误）
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+}
+
+fn main() {
+    let msg = Message::Move { x: 10, y: 20 };
+    // ⚠️ 逻辑错误: 试图修改枚举变体字段
+    // if let Message::Move { ref mut x, .. } = msg {
+    //     *x = 30; // 需要 msg 是可变的
+    // }
+}
+
+// 正确: 声明 mut 后修改
+fn fixed() {
+    let mut msg = Message::Move { x: 10, y: 20 };
+    if let Message::Move { ref mut x, .. } = msg {
+        *x = 30; // ✅ msg 是 mut，可变借用合法
+    }
+}
+```
+
+> **修正**: 枚举变体的字段默认不可变。即使枚举实例是 `mut`，通过模式匹配获取的可变引用仍需显式 `ref mut`。枚举的内存布局由编译器优化（discriminant 可能内联、 niche optimization），应用代码不应假设枚举的具体内存表示（除非 `#[repr(C)]` 或 `#[repr(u8)]` 显式标记）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：零大小类型的 `Box` 分配（编译错误/运行时差异）
+
+```rust,compile_fail
+struct ZeroSized;
+
+fn main() {
+    // ❌ 运行时差异: Box<ZeroSized> 不实际分配内存
+    let b = Box::new(ZeroSized);
+    let ptr = Box::into_raw(b);
+    // ptr 可能不是有效的堆地址（可能是 align_of::<ZeroSized>()）
+    unsafe { Box::from_raw(ptr); }
+}
+```
+
+> **修正**: 零大小类型（ZST，如 `()`、`PhantomData<T>`、空 struct）的大小为 0，不占用内存。`Box<ZST>` 的 `into_raw` 返回的指针不指向有效堆内存——它是悬垂指针（dangling pointer），但对 ZST 解引用是安全的（不读取任何字节）。这是 Rust 类型系统的边缘情况：内存安全保证不依赖指针的有效性，而依赖访问的字节数。`Box::new(ZeroSized)` 可能不调用分配器（优化为无操作），`Box::from_raw(ptr)` 可能不调用 deallocator。这与 C 的 `malloc(0)`（实现定义行为，可能返回 NULL 或有效指针）不同——Rust 的 ZST 处理是类型系统层面的，不依赖分配器行为。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)] · [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
+
+### 10.4 边界测试：`ManuallyDrop` 的内存泄漏风险（逻辑错误）
+
+```rust,compile_fail
+use std::mem::ManuallyDrop;
+
+fn main() {
+    let mut v = ManuallyDrop::new(vec![1, 2, 3]);
+    // ❌ 逻辑错误: 忘记显式 drop 导致内存泄漏
+    // v 在作用域结束时不会自动调用 Vec 的 drop
+    // 缓冲区 [1,2,3] 泄漏
+
+    // 正确: 显式清理
+    // unsafe { ManuallyDrop::drop(&mut v); }
+}
+```
+
+> **修正**: `ManuallyDrop<T>` 包装类型，阻止编译器自动调用 `Drop::drop`。使用场景：1) 在 `union` 中（编译器不知道哪个变体活跃，不能自动 drop）；2) 自定义内存布局（如自引用结构）；3) 提前手动释放（如 `Vec::set_len(0)` 后手动 dealloc）。风险：忘记显式 `drop` 导致内存泄漏——不是 UB，但资源浪费。Rust 的类型系统不阻止内存泄漏（`Rc` 循环引用、`Mem::forget`、`ManuallyDrop` 都是安全的），但工具（`cargo leak`）和模式（`scopeguard::defer`）可帮助检测。这与 C++ 的 `std::unique_ptr`（必须释放，否则泄漏）或 Java 的 GC（自动回收循环引用... eventually）不同——Rust 的所有权系统通常防止泄漏，但显式控制时责任回归开发者。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html)]
+
+### 10.5 边界测试：单元类型 `()` 的 `Default` 与 `Clone` 的特殊性（编译错误/逻辑错误）
+
+```rust,compile_fail
+fn main() {
+    let unit = ();
+    let unit2 = unit.clone(); // ✅ () 实现 Clone
+    let unit3 = Default::default(); // ✅ () 实现 Default
+
+    // ❌ 逻辑错误: 单元类型的大小为 0，可能产生意外优化行为
+    // Vec<()> 不分配实际存储，长度可任意大但容量为 0
+    let v: Vec<()> = vec![(); 1_000_000];
+    println!("{}", v.len()); // 1_000_000
+    println!("{}", v.capacity()); // 可能为 usize::MAX 或 0
+}
+```
+
+> **修正**: `()`（单元类型）是零大小类型（ZST），`size_of::<()>() == 0`。`Vec<()>` 的每个元素不占用字节，因此 `vec![(); N]` 不分配堆内存（或分配 0 字节），但 `len()` 报告 `N`。这是合法的 Rust，但可能导致意外：1) `v.push(())` 永不分配；2) `v.iter()` 产生 N 个 `&()`，但所有引用可能指向同一地址；3) 内存报告工具显示 `Vec` 占用 0 字节，但逻辑上有 N 个元素。这与 C 的 `void`（不完整类型，不能用于变量）或 Haskell 的 `()`（同样单元类型，但无大小概念）不同——Rust 的 ZST 是完整的类型系统特性，有明确的语义和优化规则。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]

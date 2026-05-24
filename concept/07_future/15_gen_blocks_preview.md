@@ -35,6 +35,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Gen Blocks 预览的编译错误](#十边界测试gen-blocks-预览的编译错误)
+    - [10.1 边界测试：`gen` 块与 `Iterator` trait 的自动实现（编译错误）](#101-边界测试gen-块与-iterator-trait-的自动实现编译错误)
+    - [10.2 边界测试：`gen` 块与借用生命周期的冲突（编译错误）](#102-边界测试gen-块与借用生命周期的冲突编译错误)
+    - [10.3 边界测试：gen 块与 `Pin` 的隐式需求（编译错误）](#103-边界测试gen-块与-pin-的隐式需求编译错误)
+    - [10.4 边界测试：gen 块与异常控制流（`return`、`break`）的语义（编译错误）](#104-边界测试gen-块与异常控制流returnbreak的语义编译错误)
 
 ---
 
@@ -486,3 +491,64 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+## 十、边界测试：Gen Blocks 预览的编译错误
+
+### 10.1 边界测试：`gen` 块与 `Iterator` trait 的自动实现（编译错误）
+
+```rust,compile_fail
+fn numbers() -> impl Iterator<Item = i32> {
+    gen {
+        // ❌ 编译错误: gen 块产生的是 Iterator，但 yield 表达式类型必须匹配
+        yield 1;
+        yield 2;
+        yield "three"; // 类型不匹配: 预期 i32，找到 &str
+    }
+}
+```
+
+> **修正**: `gen` 块（RFC 3513，实验性）是 Rust 的生成器语法糖，编译器将 `yield` 表达式转换为状态机，自动生成 `Iterator` 实现。`gen` 块的返回类型隐式为 `impl Iterator<Item = T>`，其中 `T` 是所有 `yield` 表达式的统一类型。类型不匹配时编译错误，与 `async` 块（所有 `await` 的 future 类型必须统一）类似。这与 Python 的生成器（`yield` 可返回任意类型，动态类型）或 JavaScript 的生成器（同样动态）不同——Rust 保持静态类型安全，生成器的 `Item` 类型在编译期确定。`gen` 块的设计目标：消除手写 `Iterator` 实现的样板代码（`next` 方法 + 手动状态机），同时保持零成本抽象。[来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：`gen` 块与借用生命周期的冲突（编译错误）
+
+```rust,compile_fail
+fn borrow_iter(data: &mut Vec<i32>) -> impl Iterator<Item = &i32> {
+    gen {
+        // ❌ 编译错误: gen 块生成的迭代器生命周期与 data 不匹配
+        for i in 0..data.len() {
+            yield &data[i]; // 引用的生命周期不够长
+        }
+    }
+}
+```
+
+> **修正**: `gen` 块转换为状态机后，其 `next` 方法返回的引用的生命周期与状态机本身绑定。若 `gen` 块借用了外部变量（如 `data: &mut Vec<i32>`），返回的引用必须不超越 `data` 的生命周期。但 `impl Iterator<Item = &i32>` 的隐式生命周期参数无法捕获 `data` 的生命周期——迭代器的 `Item` 类型需要一个显式生命周期参数。正确写法：返回 `impl Iterator<Item = &'_ i32>` 或显式命名生命周期。这与手写 `Iterator` 实现的生命周期问题相同——`gen` 块的便利不消除生命周期约束，只是隐藏了状态机的复杂性。这与 Rust 的 async/await 类似：await 点保存的引用必须满足状态机的生命周期。[来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+
+### 10.3 边界测试：gen 块与 `Pin` 的隐式需求（编译错误）
+
+```rust,compile_fail
+fn self_referential_gen() -> impl Iterator<Item = &str> {
+    gen {
+        let s = String::from("hello");
+        yield &s; // ❌ 编译错误: 返回的引用生命周期不够长
+        // gen 块生成的迭代器可能 'static，但 &s 的生命周期是局部的
+    }
+}
+```
+
+> **修正**: `gen` 块（实验性）编译为状态机，与 `async` 块类似。若 `gen` 块包含自引用（如 `yield &s` 中 `s` 是局部变量），生成的迭代器需要 `Pin` 保证不移动。但 `impl Iterator` 返回类型不隐含 `Pin`——调用者获得普通迭代器，可移动，导致悬垂引用。解决方案：1) 不 yield 局部引用（yield 拥有值如 `String`）；2) 使用 `yield` 的 `'static` 值（如字面量 `&'static str`）；3) 若必须自引用，返回 `Pin<Box<dyn Iterator>>`（复杂且 API 不友好）。这与 `async` 块的自引用问题相同——`async fn` 自动处理 `Pin`，但 `gen` 块的返回类型设计仍在演进。`gen` 块的简化目标（消除手写 Iterator 的样板）与自引用的复杂性形成张力。[来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：gen 块与异常控制流（`return`、`break`）的语义（编译错误）
+
+```rust,compile_fail
+fn early_return() -> impl Iterator<Item = i32> {
+    gen {
+        yield 1;
+        yield 2;
+        return; // ❌ 语义问题: gen 块中的 return 是返回整个函数还是结束迭代？
+        yield 3; //  unreachable?
+    }
+}
+```
+
+> **修正**: `gen` 块中的控制流（`return`、`break`、`continue`）语义是设计中的难点：1) `return` 应结束整个函数（跳出 `gen` 块）还是仅结束迭代器（`yield` 停止）？2) `break` 在嵌套循环中的目标是什么？3) `?` 运算符在 `gen` 块中如何传播错误？当前设计倾向：`return` 结束整个函数（与 `async` 块一致），`break` 和 `continue` 针对最内层循环（与常规块一致），`?` 传播到函数的返回类型（要求函数返回 `Result`/`Option`）。这与 Python 的 generator（`return` 结束 generator，`return value` 成为 `StopIteration` 的 value）或 JavaScript 的 generator（`return` 结束迭代，`yield*` 委托）类似——`gen` 块的设计需与 Rust 的错误处理和控制流哲学一致。[来源: [Rust RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]

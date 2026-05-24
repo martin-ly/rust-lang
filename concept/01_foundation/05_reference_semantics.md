@@ -72,6 +72,9 @@
     - [7.10 名义与结构类型的引用边界](#710-名义与结构类型的引用边界)
   - [来源与延伸阅读（本节）](#来源与延伸阅读本节)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：引用语义的编译错误](#十边界测试引用语义的编译错误)
+    - [10.1 边界测试：多级引用自动解引用层级（编译错误）](#101-边界测试多级引用自动解引用层级编译错误)
+    - [10.2 边界测试：`&str` 与 `String` 的混用（编译错误）](#102-边界测试str-与-string-的混用编译错误)
 
 ---
 
@@ -1570,3 +1573,90 @@ let s: &mut &Secret = &mut &Secret(String::from("x"));
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
+
+## 十、边界测试：引用语义的编译错误
+
+### 10.1 边界测试：多级引用自动解引用层级（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 5;
+    let r = &x;
+    let rr = &r;
+    // ❌ 编译错误: expected `i32`, found `&&{integer}`
+    // Rust 不会无限自动解引用
+    let y: i32 = rr; // 需要显式解引用
+}
+
+// 正确: 显式解引用或使用引用匹配
+fn fixed() {
+    let x = 5;
+    let r = &x;
+    let rr = &r;
+    let y: i32 = **rr; // ✅ 显式解引用两次
+    println!("{}", y);
+}
+```
+
+> **修正**: Rust 的自动解引用（auto-deref）在方法调用时最多递归应用，但在赋值和类型匹配时不会无限解引用。`&&&&T` 不会自动变成 `T`，需要显式使用 `*` 运算符。这保持了类型系统的显式性和可预测性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：`&str` 与 `String` 的混用（编译错误）
+
+```rust,compile_fail
+fn takes_str(s: &str) {
+    println!("{}", s);
+}
+
+fn main() {
+    let s = String::from("hello");
+    takes_str(&s); // ✅ String 可强制转为 &str
+
+    let r: &str = &s;
+    // ❌ 编译错误: expected `str`, found `String`
+    // &String 在某些上下文中不能自动转为 &str
+    let _owned: String = r; // &str 不能赋值给 String
+}
+
+// 正确: 显式转换
+fn fixed() {
+    let s = String::from("hello");
+    let r: &str = &s; // ✅ 自动解引用强制转换（Deref coercion）
+    let owned = r.to_string(); // ✅ 显式创建 String
+    println!("{}", owned);
+}
+```
+
+> **修正**: `String` 实现 `Deref<Target = str>`，因此 `&String` 可自动转为 `&str`（Deref coercion）。但 `&str` 不能自动转为 `String`（需要分配堆内存）。`String` 和 `&str` 的关系类似于 C++ 的 `std::string` 和 `const char*`，但 Rust 的强制转换是显式定义的 trait 行为。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：`&mut` 的重新借用与原始引用失效（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 5;
+    let r1 = &mut x;
+    let r2 = &mut *r1; // 重新借用 r1 指向的内容
+    *r2 = 10;
+    // ❌ 编译错误: r1 在 r2 活跃期间被冻结
+    println!("{}", r1);
+}
+```
+
+> **修正**: `&mut *r1` 是对 `r1` 指向内容的**重新借用**（reborrow）：`r2` 借用 `*r1`，在 `r2` 活跃期间 `r1` 不能被使用（即使 `r1` 是可变的）。这是 Rust 借用检查的精细规则：重新借用的生命周期是原借用的子集，原借用在此期间被"冻结"。重新借用是隐式的——函数调用 `foo(&mut *r1)` 中，`&mut *r1` 是重新借用，允许 `r1` 在函数返回后继续使用。但若显式保存重新借用的引用（`let r2 = &mut *r1`），冻结期延长到 `r2` 的最后使用。这与 C++ 的引用（无重新借用概念，多个引用可同时活跃）或 Java 的引用（无借用检查）不同——Rust 的重新借用是编译器实现函数调用时"临时借用"的关键机制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)] · [来源: [Rust Reference — Mutable References](https://doc.rust-lang.org/reference/expressions.html#mutable-references)]
+
+### 10.4 边界测试：内部可变性与 `&T` 的不可变性矛盾（编译错误/运行时 UB）
+
+```rust,compile_fail
+use std::cell::RefCell;
+
+fn main() {
+    let data = RefCell::new(5);
+    let r = data.borrow(); // 获取 &i32
+    // ❌ 运行时 panic: 通过 RefCell 在持有 &i32 时获取 &mut i32
+    let mut mr = data.borrow_mut();
+    *mr = 10;
+    // r 在这里仍被借用，但 borrow_mut 违反了运行时借用规则
+    println!("{}", r);
+}
+```
+
+> **修正**: `RefCell` 提供**内部可变性**（interior mutability）：通过 `&RefCell<T>`（共享引用）获取 `&mut T`（可变引用）。这是运行时借用检查：`borrow()` 增加共享计数，`borrow_mut()` 检查共享计数为 0，否则 panic。编译器无法静态验证 `RefCell` 的借用规则，因为 `RefCell` 的内部状态是动态的。这与编译期借用检查（`&mut T` 不能从 `&T` 获取）形成对比：内部可变性是"信任的逃脱 hatch"——编译器信任开发者通过运行时检查保证安全。代价：运行时开销（引用计数）和可能的 panic。这与 C++ 的 `mutable` 关键字（突破 const 约束，无运行时检查）或 Java 的 `final` 字段（引用不可变，但对象状态可变）不同——Rust 的内部可变性是显式、有检查的安全机制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]

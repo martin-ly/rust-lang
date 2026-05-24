@@ -1066,3 +1066,114 @@ temp.extend_from_slice(&nums[..]);
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
+
+## 十、边界测试：算法竞赛的编译错误
+
+### 10.1 边界测试：递归深度与栈溢出（运行时 panic）
+
+```rust
+fn dfs(depth: usize) {
+    if depth == 0 { return; }
+    dfs(depth - 1);
+}
+
+fn main() {
+    // ⚠️ 运行时 panic: 栈溢出（Rust 默认栈大小约 8MB）
+    // dfs(1_000_000); // 递归太深
+    dfs(1000); // ✅ 安全深度
+}
+```
+
+> **修正**: Rust 的默认线程栈大小（Linux 上 8MB）对竞赛编程中的深度递归可能不足。栈溢出在 Rust 中是 panic（可捕获）而非段错误（SIGSEGV），但这仍导致程序终止。解决方案：1) 将递归改写为迭代（显式栈 `Vec`）；2) 使用 `#![recursion_limit = "256"]` 增加宏递归限制（不影响运行时递归）；3) 在 `main` 中使用 `std::thread::Builder::new().stack_size(64 * 1024 * 1024).spawn(...)` 增加栈大小。竞赛编程中，Rust 的栈溢出保护比 C++ 更友好（panic 信息明确），但迭代写法仍是最佳实践。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/thread/struct.Builder.html)]
+
+### 10.2 边界测试：`Vec` 索引越界与 `get` 的安全替代（编译错误/运行时 panic）
+
+```rust
+fn main() {
+    let v = vec![1, 2, 3];
+    // ❌ 运行时 panic: index out of bounds
+    // let x = v[10]; // panic!
+
+    // 正确: 使用 get 返回 Option
+    match v.get(10) {
+        Some(x) => println!("{}", x),
+        None => println!("out of bounds"), // ✅ 安全处理
+    }
+}
+```
+
+> **修正**: Rust 的索引操作 `v[i]` 在越界时 panic（与 C 的未定义行为、Python 的 `IndexError` 类似）。但 Rust 提供 `get` 方法返回 `Option<&T>`，允许安全处理越界情况。竞赛编程中，输入数据的不确定性（如边界条件、空数组）要求防御式编程：`v.get(i).copied().unwrap_or(0)` 是常见模式。Rust 的边界检查在 debug 模式下完全启用，release 模式下编译器可能优化掉已证明安全的检查（如迭代器遍历）。这与 C++ 的 `vector::at()`（越界抛异常）或 `operator[]`（无检查）不同——Rust 在安全和性能间提供明确选择：`[]` 快速但 panic，`get` 安全但略慢。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)]
+
+### 10.3 边界测试：自定义排序的比较器错误（编译错误/运行时 panic）
+
+```rust,compile_fail
+fn main() {
+    let mut data = vec![3, 1, 4, 1, 5];
+    // ❌ 运行时 panic: 比较器不满足严格弱序（strict weak ordering）
+    data.sort_by(|a, b| {
+        if a == b { std::cmp::Ordering::Equal }
+        else if a < b { std::cmp::Ordering::Greater }
+        else { std::cmp::Ordering::Less }
+        // 错误: 当 a == b 时返回 Equal，但后续逻辑可能不一致
+    });
+}
+```
+
+> **修正**: `sort_by` 要求比较器实现**严格弱序**（strict weak ordering）：1) 反自反性（`a < a` 为假）；2) 非对称性（`a < b` ⇒ `b < a` 为假）；3) 传递性（`a < b` ∧ `b < c` ⇒ `a < c`）。违反这些性质的比较器导致 `sort` panic（debug 模式）或产生未定义顺序（release 模式）。常见错误：比较浮点数时未处理 `NaN`（`NaN < x` 和 `NaN > x` 都为假，破坏严格弱序）。安全替代：`partial_cmp` 返回 `Option<Ordering>`，`NaN` 时返回 `None`；`sort_by` 的闭包必须返回 `Ordering`（非 `Option`），因此需要显式处理 `NaN`（如映射到特定值或使用 `total_cmp`）。这与 C++ 的 `std::sort`（同样要求严格弱序，违反时 UB）类似，但 Rust 在 debug 模式下检查并 panic。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：大数组栈分配导致的编译错误
+
+```rust,compile_fail
+fn main() {
+    // ❌ 编译错误/链接错误: 栈数组太大（可能超过 LLVM 限制或链接器限制）
+    let huge = [0u8; 1_000_000_000]; // 1GB 栈数组
+    println!("{}", huge[0]);
+}
+```
+
+> **修正**: Rust 的数组 `[T; N]` 在栈上分配，大小为 `N * size_of::<T>()`。过大的数组导致栈溢出（运行时）或编译器/链接器错误（编译时）。LLVM 对单个栈帧大小有限制（通常数 GB），但操作系统线程栈大小通常仅 8MB。竞赛编程中常见陷阱：使用 `let dist = [[0i64; 1000]; 1000];`（8MB，接近栈限制），在递归函数中分配会导致栈溢出。解决方案：1) 使用 `Vec`（堆分配）；2) 使用 `static` 或 `thread_local!`；3) 增加线程栈大小（`thread::Builder::new().stack_size(...)`）。Rust 不限制数组大小本身，但运行时栈大小是硬约束。这与 C 的 `int arr[1000000];`（编译通过，运行时栈溢出或段错误）类似，但 Rust 的 panic 信息更友好。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust Reference — Array Types](https://doc.rust-lang.org/reference/types/array.html)]
+
+### 10.6 边界测试：`binary_search` 的比较器一致性（运行时 panic/逻辑错误）
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![3, 1, 4, 1, 5];
+    // ❌ 运行时 panic: binary_search 要求数组有序
+    v.sort();
+    match v.binary_search(&4) {
+        Ok(i) => println!("found at {}", i),
+        Err(i) => println!("not found, insert at {}", i),
+    }
+
+    // 但若比较器不一致:
+    // let mut v = vec![3, 1, 4, 1, 5];
+    // v.sort_by(|a, b| b.cmp(a)); // 降序
+    // v.binary_search(&4); // 默认升序，结果未定义
+}
+```
+
+> **修正**: `slice::binary_search` 要求切片**按相同顺序排序**（默认升序）。若切片无序或使用不同比较器排序，结果是未定义的（可能返回错误位置、可能 panic）。`binary_search_by` 允许自定义比较器，但比较器必须与排序时使用的比较器一致。这与 C++ 的 `std::binary_search`（同样要求有序，否则 UB）或 Python 的 `bisect`（同样要求有序）相同——二分查找的前提条件。竞赛编程中常见错误：1) 忘记先 `sort`；2) 降序排序后用默认 `binary_search`；3) 自定义比较器与排序不一致。Rust 在 debug 模式下不检查有序性（检查成本 O(n)，抵消二分查找的优势），依赖开发者保证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.7 边界测试：`BinaryHeap` 的 `peek_mut` 与忘记 `drop`（逻辑错误/UB）
+
+```rust,compile_fail
+use std::collections::BinaryHeap;
+
+fn main() {
+    let mut heap = BinaryHeap::new();
+    heap.push(3);
+    heap.push(1);
+    heap.push(4);
+
+    {
+        let mut top = heap.peek_mut().unwrap();
+        *top = 0; // 修改堆顶元素
+        // ❌ 逻辑错误: 忘记 drop PeekMut，堆未重新排序
+        // 必须显式 drop(top) 或让其离开作用域
+    } // 作用域结束自动 drop，正确行为
+
+    assert_eq!(heap.peek(), Some(&0));
+}
+```
+
+> **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 或循环引用阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素。这是 Rust "leak safety" 哲学的一部分：标准库不保证防泄漏（`mem::forget` 是 safe），但泄漏不应导致内存不安全——`PeekMut` 的泄漏仅破坏逻辑不变量，不触发 UB。这与 C++ 的 `std::priority_queue::top()`（返回 const 引用，不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复，但需理解 guard 模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]

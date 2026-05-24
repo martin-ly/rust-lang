@@ -39,6 +39,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：交叉编译的编译错误](#十边界测试交叉编译的编译错误)
+    - [10.1 边界测试：目标平台特性缺失（编译错误）](#101-边界测试目标平台特性缺失编译错误)
+    - [10.2 边界测试：`std` 与 `no_std` 的 API 差异（编译错误）](#102-边界测试std-与-no_std-的-api-差异编译错误)
+    - [10.3 边界测试：交叉编译的链接器缺失（编译错误）](#103-边界测试交叉编译的链接器缺失编译错误)
+    - [10.4 边界测试：`cfg` 条件与目标平台的不一致（编译错误/逻辑错误）](#104-边界测试cfg-条件与目标平台的不一致编译错误逻辑错误)
 
 ---
 
@@ -609,3 +614,81 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+## 十、边界测试：交叉编译的编译错误
+
+### 10.1 边界测试：目标平台特性缺失（编译错误）
+
+```rust,compile_fail
+#[cfg(target_os = "linux")]
+fn linux_only() {}
+
+#[cfg(target_os = "windows")]
+fn windows_only() {}
+
+fn main() {
+    // ❌ 编译错误: 若在 Windows 上编译并调用 linux_only()
+    // #[cfg] 条件编译在编译期过滤代码
+    linux_only(); // 在 Windows 目标上不可用
+}
+```
+
+> **修正**: Rust 的 `#[cfg]` 属性是条件编译的核心机制。`target_os`、`target_arch`、`target_family` 等条件控制代码的编译。交叉编译时（如从 x86_64 Linux 编译到 ARM Android），条件编译根据目标平台而非宿主平台过滤代码。这与 C 的 `#ifdef` 预处理器类似，但 Rust 的 `cfg` 更结构化——编译器在编译期验证条件，提供 `cfg!` 宏在运行期检查，支持复杂的布尔表达式（`all()`、`any()`、`not()`）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.2 边界测试：`std` 与 `no_std` 的 API 差异（编译错误）
+
+```rust,compile_fail
+#![no_std]
+
+fn main() {
+    // ❌ 编译错误: `Vec` 在 `no_std` 环境中不可用
+    // 除非使用 `alloc` crate
+    let v = vec![1, 2, 3];
+}
+
+// 正确: 引入 alloc
+#![no_std]
+extern crate alloc;
+use alloc::vec::Vec;
+
+fn fixed() {
+    let v = Vec::from([1, 2, 3]); // ✅ 使用 alloc::Vec
+}
+```
+
+> **修正**: 嵌入式和内核开发使用 `#![no_std]` 禁用标准库（`std` 依赖操作系统）。`no_std` 环境下，`Vec`、`String`、`Box` 等堆分配类型通过 `alloc` crate 提供；完全不分配的环境（如某些微控制器）连 `alloc` 也不可用。交叉编译时，目标平台可能不支持 `std`（如 `thumbv7em-none-eabihf`），编译器在编译期拒绝 `std` API 的使用。这与 C 的嵌入式开发（通常使用 libc 子集）类似，但 Rust 的 `no_std` 在类型系统层面强制执行，错误信息更精确。[来源: [The Rust Embedded Book](https://docs.rust-embedded.org/book/)]
+
+### 10.3 边界测试：交叉编译的链接器缺失（编译错误）
+
+```rust,compile_fail
+// 目标: aarch64-unknown-linux-gnu
+// 但系统未安装 aarch64-linux-gnu-gcc 链接器
+
+// .cargo/config.toml
+// [target.aarch64-unknown-linux-gnu]
+// linker = "aarch64-linux-gnu-gcc"
+
+fn main() {
+    println!("hello");
+}
+// ❌ 编译错误: linker 程序未找到
+```
+
+> **修正**: 交叉编译需要**目标平台的链接器**：Rust 编译器（`rustc`）生成目标平台的 LLVM IR 和对象文件，但最终的链接步骤需要平台特定的链接器（`gcc`、`ld`、`lld`）。常见错误：1) 未安装交叉编译工具链（`apt install gcc-aarch64-linux-gnu`）；2) 链接器路径配置错误（`.cargo/config.toml` 中的 `linker` 指向不存在的路径）；3) 使用 `cross` 工具但 Docker 镜像未下载。解决方案：1) `cross` 工具（使用 Docker 容器封装交叉编译环境）；2) `cargo-zigbuild`（使用 Zig 作为链接器，内置多目标支持）；3) `lld`（LLVM 链接器，支持多种目标）。这与 Go 的交叉编译（内置链接器，无需外部工具）或 C 的交叉编译（同样需外部工具链）不同——Rust 正在逐步整合 `lld`，未来可能无需外部链接器。[来源: [Cargo Configuration](https://doc.rust-lang.org/cargo/reference/config.html)] · [来源: [Rust Cross Compilation](https://rust-lang.github.io/rustup/cross-compilation.html)]
+
+### 10.4 边界测试：`cfg` 条件与目标平台的不一致（编译错误/逻辑错误）
+
+```rust,compile_fail
+#[cfg(target_os = "linux")]
+fn platform_specific() -> &'static str { "linux" }
+
+#[cfg(target_os = "macos")]
+fn platform_specific() -> &'static str { "macos" }
+
+fn main() {
+    // ❌ 编译错误: 若在 Windows 上编译，两个函数都不存在
+    println!("{}", platform_specific());
+}
+```
+
+> **修正**: `cfg` 条件编译根据目标平台选择代码，但若所有条件都不满足，函数不存在，调用点编译错误。安全模式：添加默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "macos")))] fn platform_specific() -> &'static str { "other" }`。或使用 `cfg!` 宏在运行时检查：`if cfg!(target_os = "linux") { ... } else { ... }`。交叉编译时的常见陷阱：1) 开发在 Linux 上，忘记 Windows 路径；2) `target_family = "unix"` 和 `target_family = "windows"` 的互斥性；3) `target_arch` 的嵌套（`target_arch = "x86_64"` 下还有 `target_feature = "sse2"`）。这与 C 的 `#ifdef _WIN32`（预处理器，相同模式）或 Go 的 `//go:build`（构建约束，类似 `cfg`）类似——跨平台代码的 `cfg` 覆盖是质量保证的关键。[来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

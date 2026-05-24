@@ -365,3 +365,59 @@ fn linear_move() {
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 通用 PL 基座层
+
+### 10.3 边界测试：按值传递与 `Copy` 的交互（编译错误）
+
+```rust,compile_fail
+struct Config {
+    data: Vec<u8>,
+}
+
+fn process(c: Config) {
+    println!("{:?}", c.data);
+}
+
+fn main() {
+    let cfg = Config { data: vec![1, 2, 3] };
+    process(cfg);
+    // ❌ 编译错误: Config 未实现 Copy，cfg 已被移动
+    println!("{:?}", cfg.data);
+}
+```
+
+> **修正**: Rust 的默认参数传递是**按值移动**（move semantics）：未实现 `Copy` 的类型在传参时转移所有权。这与 C 的按值复制（`struct` 按位复制）、Java 的按值引用（对象引用复制，对象共享）、Haskell 的惰性求值（thunk 共享）都不同。`Config` 包含 `Vec<u8>`（堆分配），按值移动只复制栈上的 `Vec` 头（指针、长度、容量），不复制堆数据——这是 Rust 的零成本移动。但移动后原变量失效，若需保留，应传引用（`&Config`）或 `Clone`。Rust 的求值策略可描述为"严格按值 + 移动语义"：参数在调用前求值（严格），传递时移动所有权（非共享）。这与 C++11 的右值引用（`std::move`，显式移动）类似，但 Rust 的移动是默认且自动的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
+
+### 10.4 边界测试：惰性迭代器与严格求值的混合（编译错误/逻辑错误）
+
+```rust,compile_fail
+fn main() {
+    let v = vec![1, 2, 3];
+    let iter = v.iter().map(|x| {
+        println!("computing {}", x);
+        x * 2
+    });
+
+    // ❌ 逻辑错误: map 是惰性的，println 尚未执行
+    println!("mapped created");
+
+    // 只有 collect/for 才触发求值
+    let collected: Vec<_> = iter.collect();
+    println!("{:?}", collected);
+}
+```
+
+> **修正**: Rust 的迭代器适配器（`map`、`filter`、`flat_map`）是**惰性求值**的——它们返回新的迭代器，不立即执行。副作用（`println`、修改外部状态）在迭代器被消费（`collect`、`for_each`、`fold`）时才发生。这是函数式编程的常规模式（Haskell 的惰性列表、Python 的生成器表达式），但 Rust 开发者常误以为 `map` 像 `Vec::map`（立即执行）。严格求值与惰性求值的边界：Rust 的值（非迭代器）是严格求值的，`Iterator` trait 的方法链是惰性求值的。混合时的陷阱：1) 副作用的顺序不确定；2) 迭代器被 `collect` 前，中间状态不反映副作用；3) 多次 `collect` 同一迭代器导致副作用重复执行。这与 C# 的 LINQ（惰性，`ToList()` 触发）或 Java 的 `Stream`（惰性，`collect` 触发）相同。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]
+
+### 10.5 边界测试：惰性求值与 panic 的延迟触发（运行时行为差异）
+
+```rust,compile_fail
+fn main() {
+    let v = vec![1, 2, 3];
+    let bad_index = v.get(10).unwrap_or_else(|| panic!("out of bounds"));
+    // ❌ 运行时 panic: unwrap_or_else 的闭包在 None 时立即求值
+    // 但某些惰性抽象可能延迟 panic 到不可预期时刻
+    println!("{}", bad_index);
+}
+```
+
+> **修正**: Rust 的核心语言是**严格求值**（eager evaluation），但某些抽象引入惰性：1) 迭代器适配器（`map`、`filter`）惰性执行；2) `lazy_static`、`once_cell` 惰性初始化；3) 宏展开在编译期惰性。惰性求值的风险：副作用（panic、I/O、修改状态）的触发时机不确定。`unwrap_or_else(|| panic!(...))` 在 `None` 时立即 panic，因为 `unwrap_or_else` 是严格的（立即调用闭包）。这与 Haskell 的惰性求值（`error` 可能在不可预期时刻触发）或 Swift 的 `@autoclosure`（延迟求值参数）不同——Rust 的惰性仅限于迭代器和高阶函数，核心表达式是严格的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Evaluation Strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)]

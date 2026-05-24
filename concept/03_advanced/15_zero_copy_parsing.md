@@ -35,6 +35,9 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：零拷贝解析的编译错误](#十边界测试零拷贝解析的编译错误)
+    - [10.1 边界测试：`mem::transmute` 的字节对齐假设（运行时 UB）](#101-边界测试memtransmute-的字节对齐假设运行时-ub)
+    - [10.2 边界测试：生命周期过短的零拷贝视图（编译错误）](#102-边界测试生命周期过短的零拷贝视图编译错误)
 
 ---
 
@@ -534,6 +537,67 @@ fn main() {
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
+## 十、边界测试：零拷贝解析的编译错误
+
+### 10.1 边界测试：`mem::transmute` 的字节对齐假设（运行时 UB）
+
+```rust
+fn main() {
+    let bytes = [0u8; 8];
+    // ⚠️ 运行时 UB: bytes 可能未按 u64 对齐
+    let val = unsafe { std::mem::transmute::<[u8; 8], u64>(bytes) };
+    println!("{}", val);
+}
+
+// 正确: 使用 copy_from_slice 或指针读取
+fn fixed() {
+    let bytes = [0u8; 8];
+    let mut val: u64 = 0;
+    unsafe {
+        std::ptr::copy_nonoverlapping(
+            bytes.as_ptr(),
+            &mut val as *mut u64 as *mut u8,
+            8,
+        );
+    }
+    println!("{}", val);
+}
+```
+
+> **修正**: `mem::transmute` 要求源类型和目标类型具有相同大小，且**不要求**对齐匹配。若栈上分配的 `u8` 数组未按 `u64` 对齐，`transmute` 到 `u64` 会产生未对齐访问——UB。零拷贝解析（如 `bytemuck`、`zerocopy` crate）使用 `#[repr(C)]` 和 `align_to` 方法确保对齐，或返回 `&[u8]` 而非直接转换。正确的零拷贝应通过引用转换（`&T` → `&U`）而非值转换，利用编译器的对齐检查。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：生命周期过短的零拷贝视图（编译错误）
+
+```rust,compile_fail
+fn get_header(data: &[u8]) -> &[u8] {
+    // ❌ 编译错误: missing lifetime specifier
+    // 返回引用的生命周期必须与输入关联
+    &data[0..4]
+}
+
+// 正确: 显式标注生命周期
+fn get_header_fixed<'a>(data: &'a [u8]) -> &'a [u8] {
+    &data[0..4] // ✅ 返回引用的生命周期与输入绑定
+}
+
+// 更安全的做法: 使用类型化视图
+#[repr(C)]
+struct Header {
+    magic: [u8; 4],
+    size: u32,
+}
+
+fn parse_header(data: &[u8]) -> Option<&Header> {
+    if data.len() >= std::mem::size_of::<Header>() {
+        Some(unsafe { &*(data.as_ptr() as *const Header) })
+    } else {
+        None
+    }
+}
+```
+
+> **修正**: 零拷贝解析的核心是返回对原始字节切片的引用视图，而非复制数据。这要求视图类型的生命周期与原始数据绑定——任何生命周期不匹配都会导致悬垂引用。使用 `#[repr(C)]` 结构体作为类型化视图时，还需验证：1) 字节长度足够；2) 对齐满足；3) 字节序正确（大端/小端）。`zerocopy` crate 通过 derive 宏自动生成这些验证，是生产环境的首选。[来源: [zerocopy Documentation](https://docs.rs/zerocopy/)]
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
@@ -635,3 +699,54 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+### 10.3 边界测试：`nom` 解析器的生命周期传播（编译错误）
+
+```rust,compile_fail
+// 假设使用 nom 7
+
+use nom::IResult;
+
+fn parse_tag(input: &str) -> IResult<&str, &str> {
+    nom::bytes::complete::tag("hello")(input)
+}
+
+fn parse_combined(input: &str) -> IResult<&str, (&str, &str)> {
+    // ❌ 编译错误: 组合解析器的返回类型生命周期推断失败
+    nom::sequence::tuple((parse_tag, parse_tag))(input)
+}
+```
+
+> **修正**: `nom` 是 Rust 的 parser combinator 库，解析器函数接受输入切片并返回剩余输入 + 解析结果。所有输出（剩余输入和结果）的生命周期与输入绑定。复杂组合（`tuple`、`alt`、`many0`）的类型签名涉及多个生命周期参数，编译器推断可能失败。解决方案：1) 显式标注生命周期：`fn parse<'a>(input: &'a str) -> IResult<&'a str, T>`；2) 使用 `nom::Parser` trait（nom 7+）替代函数签名；3) 简化解析器结构，减少嵌套组合。这与 `pest`（PEG，生成代码，无生命周期问题）或 `serde`（反序列化，一次性解析）不同——parser combinator 的惰性、组合式设计在 Rust 的生命周期系统中增加了类型复杂度，但换取了极致的零拷贝性能。[来源: [nom Documentation](https://docs.rs/nom/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+
+### 10.4 边界测试：零拷贝与字节序的字节对齐（运行时 UB）
+
+```rust,compile_fail
+fn main() {
+    let bytes = [0x12u8, 0x34, 0x56, 0x78];
+    // ❌ 运行时 UB: 未对齐的指针转换
+    let ptr = bytes.as_ptr() as *const u32;
+    let val = unsafe { *ptr }; // 假设大端? 小端?
+    println!("{:08x}", val);
+}
+```
+
+> **修正**: 将字节切片直接转换为多字节整型（`u16`、`u32`、`u64`）涉及两个问题：1) **对齐**：`bytes.as_ptr()` 可能不对齐到 `align_of::<u32>()`（4字节），未对齐解引用是 UB；2) **字节序**：`[0x12, 0x34, 0x56, 0x78]` 解释为 `u32` 时，结果取决于平台字节序（大端：`0x12345678`，小端：`0x78563412`）。安全替代：1) `u32::from_be_bytes(bytes[0..4].try_into().unwrap())`（显式字节序，复制数据）；2) `byteorder` crate 的 `ReadBytesExt`（处理流式读取）；3) 使用 `bytemuck` 的 `Pod` trait（要求对齐）。零拷贝解析（如网络协议）必须在性能和可移植性间权衡——直接指针转换最快但最危险，显式字节操作最安全但有复制开销。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.u32.html)] · [来源: [bytemuck Crate](https://docs.rs/bytemuck/)]
+
+### 10.5 边界测试：零拷贝解析的生命周期与输入缓冲区释放（运行时悬垂）
+
+```rust,compile_fail
+fn parse<'a>(input: &'a [u8]) -> &'a str {
+    std::str::from_utf8(input).unwrap()
+}
+
+fn main() {
+    let data = vec![104, 101, 108, 108, 111]; // "hello"
+    let s = parse(&data);
+    drop(data);
+    // ❌ 运行时悬垂: s 引用已释放的 Vec
+    // println!("{}", s);
+}
+```
+
+> **修正**: 零拷贝解析的核心是**输出引用输入**，但输出的生命周期不能超过输入。上述代码中，`parse` 返回的 `&str` 与 `data` 同生命周期，`drop(data)` 后 `s` 悬垂——编译器应阻止（`s` 在 `data` 之后使用）。更隐蔽的 bug：`data` 是局部变量，函数返回后 `data` 释放，若 `s` 逃离函数（如存入全局结构），悬垂。解决方案：1) 使用 `Cow<'a, str>`（拥有时克隆，借用时零拷贝）；2) 确保输入缓冲区的生命周期长于所有引用；3) 使用 `Arc<[u8]>` 共享拥有。这与 C 的字符串解析（`char*` 指向栈缓冲区，返回后悬垂）或 Go 的切片（引用底层数组，GC 管理生命周期）不同——Rust 的生命周期系统编译期防止大多数悬垂，但跨函数/跨结构的生命周期管理仍需设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)]

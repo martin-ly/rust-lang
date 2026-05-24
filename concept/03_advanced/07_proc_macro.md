@@ -685,3 +685,30 @@ pub fn my_macro(input: String) -> String {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+### 10.5 边界测试：过程宏的 `Span` 与错误定位精度（编译错误/调试困难）
+
+```rust,compile_fail
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, DeriveInput};
+
+#[proc_macro_derive(MyDebug)]
+pub fn my_debug(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    let name = input.ident;
+    
+    // ❌ 调试困难: 若生成的代码有错误，错误信息指向宏调用点
+    // 而非宏定义中的具体生成位置
+    let expanded = quote! {
+        impl std::fmt::Debug for #name {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(f, "{:?}", self.unknown_field) // 假设字段名错误
+            }
+        }
+    };
+    expanded.into()
+}
+```
+
+> **修正**: 过程宏的错误定位是开发体验的关键挑战。`quote!` 生成的代码默认使用 `Span::call_site()`，错误信息指向宏调用处。改善方法：1) 使用 `Span::mixed_site()` 或输入 token 的 span（保留原始位置）；2) `syn::spanned::Spanned` 为生成的 AST 节点附加 span；3) `proc_macro::Diagnostic`（不稳定）自定义错误消息和位置。Rust 1.64+ 的 `Span::error` 和 `Span::warning` 改善了这一状况。这与 C 的宏（错误指向展开后代码，难以追溯）或 Lisp 的宏（同像性，错误在宏展开后的代码中）不同——Rust 的过程宏有源码映射支持，但需宏作者正确使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [proc_macro Diagnostic](https://doc.rust-lang.org/proc_macro/struct.Diagnostic.html)]
