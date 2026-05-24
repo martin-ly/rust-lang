@@ -502,3 +502,27 @@ impl const ConstDefault for i32 {
 ```
 
 > **修正**: `const trait impl`（RFC 2632）允许 trait 方法在 const 上下文中调用，但**默认实现**是复杂点：1) trait 的默认方法体若调用其他非 const 方法，const impl 中覆盖时可能破坏 const 保证；2) `~const` 边界（"maybe const"）表示"若类型实现 const trait则可用在 const 中"，语义仍在稳定化中。编译错误场景：1) 为类型实现 const trait，但方法体包含非 const 操作（`Vec::push`）；2) 泛型函数声明 `~const` 边界，但调用方传入非 const 实现。当前状态（nightly 1.97）：`const_trait_impl` 已部分可用，但 `~const` 语法和默认实现处理仍在讨论。这与 C++ 的 `constexpr`（类似演进路径：C++11 有限 → C++14 扩展 → C++20 `consteval`）或 D 语言的 `enum` 强制编译期求值不同——Rust 的 const 系统趋向更灵活的泛型支持，但保守推进以避免设计锁定。[来源: [RFC 2632 — const trait impl](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]
+
+### 10.3 边界测试：`~const` 边界的语法演进与兼容性（编译错误）
+
+```rust,compile_fail
+#![feature(const_trait_impl)]
+
+pub trait ConstDefault {
+    fn default() -> Self;
+}
+
+impl const ConstDefault for i32 {
+    fn default() -> Self { 0 }
+}
+
+fn use_const<T: ~const ConstDefault>() -> T {
+    T::default()
+}
+
+fn main() {
+    let _x: i32 = use_const();
+}
+```
+
+> **修正**: `~const`（"maybe const"）是 `const trait impl` 的关键语法：表示"若类型实现 const trait，则此函数可在 const 上下文中调用"。语法演进：1) 早期 nightly 使用 `const` 修饰 trait bound；2) 当前使用 `~const`；3) 稳定化后可能变更。编译错误场景：1) 为类型实现 const trait，但方法体包含非 const 操作（`Vec::push`）；2) 泛型函数声明 `~const` 边界，但调用方传入非 const 实现。当前状态（nightly 1.97）：`const_trait_impl` 已部分可用，但 `~const` 语法和默认实现处理仍在讨论。这与 C++ 的 `constexpr`（类似演进路径）或 D 语言的 `enum` 强制编译期求值不同——Rust 的 const 系统趋向更灵活的泛型支持，但保守推进以避免设计锁定。[来源: [RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]

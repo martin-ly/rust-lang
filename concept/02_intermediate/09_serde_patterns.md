@@ -41,6 +41,10 @@
   - [十、边界测试：Serde 模式的编译错误](#十边界测试serde-模式的编译错误)
     - [10.1 边界测试：反序列化时字段缺失（运行时错误）](#101-边界测试反序列化时字段缺失运行时错误)
     - [10.2 边界测试：`#[serde(flatten)]` 与重复字段（编译错误 / 运行时错误）](#102-边界测试serdeflatten-与重复字段编译错误--运行时错误)
+    - [10.3 边界测试：反序列化的 `deny_unknown_fields`（运行时错误）](#103-边界测试反序列化的-deny_unknown_fields运行时错误)
+    - [10.4 边界测试：枚举的 `untagged` 反序列化歧义（运行时错误）](#104-边界测试枚举的-untagged-反序列化歧义运行时错误)
+    - [10.5 边界测试：`serde` 的 `skip_serializing_if` 与 `Option` 的交互（逻辑错误）](#105-边界测试serde-的-skip_serializing_if-与-option-的交互逻辑错误)
+    - [10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）](#103-边界测试serde-的私有字段与反序列化失败运行时错误)
 
 ---
 
@@ -781,7 +785,7 @@ fn main() {
 }
 ```
 
-> **修正**: `#[serde(deny_unknown_fields)]` 在反序列化时检查输入中是否包含 struct 未定义的字段。若存在未知字段，返回 `Err`（`unknown field \`extra\`, expected \`host\` or \`port\``）。这是 API 版本兼容性设计的工具：strict 模式（拒绝未知）防止客户端发送未来版本的字段导致误解；lenient 模式（默认，忽略未知）允许向前兼容。Rust 的 serde 生态通过属性宏控制这些行为，编译期生成对应的反序列化代码。这与 Go 的 `json.Unmarshal`（默认忽略未知字段，`DisallowUnknownFields` 选项开启严格模式）或 Python 的 `dataclasses`（无内置未知字段检查）类似，但 Rust 的配置在编译期固定，无运行时开销。[来源: [Serde Documentation](https://serde.rs/container-attrs.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `#[serde(deny_unknown_fields)]` 在反序列化时检查输入中是否包含 struct 未定义的字段。若存在未知字段，返回 `Err`（`unknown field \`extra\`, expected \`host\` or \`port\``）。这是 API 版本兼容性设计的工具：strict 模式（拒绝未知）防止客户端发送未来版本的字段导致误解；lenient 模式（默认，忽略未知）允许向前兼容。Rust 的 serde 生态通过属性宏控制这些行为，编译期生成对应的反序列化代码。这与 Go 的`json.Unmarshal`（默认忽略未知字段，`DisallowUnknownFields` 选项开启严格模式）或 Python 的 `dataclasses`（无内置未知字段检查）类似，但 Rust 的配置在编译期固定，无运行时开销。[来源: [Serde Documentation](https://serde.rs/container-attrs.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：枚举的 `untagged` 反序列化歧义（运行时错误）
 
@@ -820,7 +824,7 @@ fn main() {
     let cfg = Config { timeout: None };
     let json = serde_json::to_string(&cfg).unwrap();
     // json: "{}" — timeout 字段被跳过
-    
+
     let restored: Config = serde_json::from_str(&json).unwrap();
     // ⚠️ 逻辑错误: 若业务逻辑区分 "未设置" 和 "显式设置为 None"
     // skip_serializing_if 使两者无法区分
@@ -829,3 +833,50 @@ fn main() {
 ```
 
 > **修正**: `skip_serializing_if` 在条件满足时省略字段，反序列化时缺失字段使用默认值（`Option::None`）。这导致**信息丢失**：无法区分"显式设置 None"和"未提供该字段"。解决方案：1) 使用 tri-state 枚举：`enum MaybeTimeout { NotSet, Infinite, Seconds(u32) }`；2) 不使用 `skip_serializing_if`，始终序列化 `null`；3) 使用 `#[serde(default)]` + 自定义默认值。这与 GraphQL 的 nullable vs optional（同样区分）或 Protocol Buffers 的 `has_field()`（可区分未设置和默认值）类似——序列化格式的表达能力影响 API 设计。Rust 的类型系统可帮助建模这些状态（`Option<Option<T>>` 或自定义 enum）。[来源: [Serde Documentation](https://serde.rs/field-attrs.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）
+
+```rust,compile_fail
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize)]
+struct Config {
+    pub name: String,
+    api_key: String, // 私有字段
+}
+
+fn main() {
+    let json = r#"{"name": "app", "api_key": "secret123"}"#;
+    // ❌ 运行时反序列化失败: serde 默认需要所有字段（包括私有）
+    // 若 JSON 缺少 api_key 或字段名不匹配
+    let config: Config = serde_json::from_str(json).unwrap();
+    println!("{}", config.name);
+}
+```
+
+> **修正**: serde 的**字段可见性**不影响反序列化：私有字段同样需要匹配。控制反序列化行为：1) `#[serde(default)]` — 字段缺失时使用 `Default::default()`；2) `#[serde(skip)]` — 完全跳过字段（不序列化也不反序列化）；3) `#[serde(rename = "apiKey")]` — 字段名映射；4) `#[serde(flatten)]` — 嵌套结构扁平化。serde 的 derive 宏生成 `Serialize`/`Deserialize` 实现，支持自定义（手动实现 trait）。安全注意：`Deserialize` 是 unsafe 的潜在来源——恶意输入可能触发 panic 或资源耗尽（深嵌套 JSON 导致栈溢出）。使用 `serde_json::from_str` 时限制输入大小。这与 Python 的 `dataclasses` 或 Go 的 `json` 标签（类似字段控制）相同——serde 是 Rust 生态中最强大的序列化框架。[来源: [serde Documentation](https://serde.rs/)] · [来源: [serde_json](https://docs.rs/serde_json/)]
+
+### 10.4 边界测试：`serde` 的枚举标签与外部标签冲突（运行时反序列化失败）
+
+```rust,compile_fail
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize)]
+#[serde(tag = "type")]
+enum Message {
+    Text { content: String },
+    Image { url: String },
+}
+
+fn main() {
+    let json = r#"{"type": "Text", "content": "hello"}"#;
+    let msg: Message = serde_json::from_str(json).unwrap();
+    println!("{:?}", msg);
+    
+    // ❌ 运行时失败: 若 JSON 缺少 "type" 字段或类型名拼写错误
+    let bad_json = r#"{"content": "hello"}"#;
+    // let msg: Message = serde_json::from_str(bad_json).unwrap();
+}
+```
+
+> **修正**: serde 的**枚举表示**策略：1) **外部标签**（默认）：`{"Text": {"content": "hello"}}`；2) **内部标签**（`#[serde(tag = "type")]`）：`{"type": "Text", "content": "hello"}`；3) **邻接标签**（`#[serde(tag = "t", content = "c")]`）：`{"t": "Text", "c": {"content": "hello"}}`；4) **无标签**（`#[serde(untagged)]`）：按顺序尝试每个变体。内部标签的风险：1) 字段名冲突（`type` 是 Rust 关键字，但 serde 处理正确）；2) 类型名拼写错误 → 反序列化失败；3) 未知类型 → 默认报错（可用 `#[serde(other)]` 捕获）。这与 JSON Schema 的 `oneOf` / `discriminator` 或 Protocol Buffers 的 `oneof` 类似——serde 提供灵活的枚举序列化策略，但需前后端约定一致。[来源: [serde](https://serde.rs/enum-representations.html)] · [来源: [serde_json](https://docs.rs/serde_json/)]

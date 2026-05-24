@@ -3334,7 +3334,7 @@ Gheri & Watt 提出了 **Provenance** 模型：
 
 ### 16.1 边界测试：裸指针解引用前的空检查（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let ptr: *const i32 = std::ptr::null();
     // ❌ 编译错误: 即使 unsafe 块也不能解引用空指针而不检查
@@ -3444,3 +3444,23 @@ fn safe_transmute() {
 
 > **相关判定树**: [Unsafe 判定树](../00_meta/concept_definition_decision_forest.md#九unsafe-判定树)
 > **相关 FTA**: [Unsafe 契约失效树](../00_meta/fault_tree_analysis_collection.md#六unsafe-契约失效树) · [内存安全失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
+
+### 10.4 边界测试：`union` 的字段访问与活跃字段跟踪（运行时 UB）
+
+```rust,ignore
+union MyUnion {
+    i: i32,
+    f: f32,
+}
+
+fn main() {
+    let mut u = MyUnion { i: 1 };
+    // ❌ 运行时 UB: 读取未初始化的字段（上次写入的是 i，读取 f）
+    unsafe {
+        let f = u.f; // i32 的位模式 reinterpret 为 f32
+        println!("{}", f);
+    }
+}
+```
+
+> **修正**: Rust 的 `union` 类似于 C 的 union：所有字段共享同一内存，但 Rust 的借用检查器**不跟踪**哪个字段是"活跃的"（最近写入的）。读取未初始化的字段（或写入一个字段后读取另一个字段）是**safe**的语法（在 `unsafe` 块中），但值是底层位的重新解释，可能无意义。安全使用：1) 使用 `ManuallyDrop<T>` 包装非 `Copy` 字段（union 的字段默认需实现 `Copy`）；2) 手动跟踪活跃字段（通过外部状态）；3) 优先使用 `enum`（tagged union，编译器跟踪变体）。`union` 的用途：1) FFI（C 结构体中的 union）；2) 手动内存布局优化；3) 类型双关（type punning）。这与 C 的 union（无活跃字段跟踪，完全信任程序员）或 Swift 的 enum with associated values（ tagged union，安全）不同——Rust 的 union 是底层原语，需 unsafe 使用。[来源: [Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]

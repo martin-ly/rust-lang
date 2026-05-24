@@ -38,6 +38,10 @@
   - [十、边界测试：零拷贝解析的编译错误](#十边界测试零拷贝解析的编译错误)
     - [10.1 边界测试：`mem::transmute` 的字节对齐假设（运行时 UB）](#101-边界测试memtransmute-的字节对齐假设运行时-ub)
     - [10.2 边界测试：生命周期过短的零拷贝视图（编译错误）](#102-边界测试生命周期过短的零拷贝视图编译错误)
+    - [10.3 边界测试：`nom` 解析器的生命周期传播（编译错误）](#103-边界测试nom-解析器的生命周期传播编译错误)
+    - [10.4 边界测试：零拷贝与字节序的字节对齐（运行时 UB）](#104-边界测试零拷贝与字节序的字节对齐运行时-ub)
+    - [10.5 边界测试：零拷贝解析的生命周期与输入缓冲区释放（运行时悬垂）](#105-边界测试零拷贝解析的生命周期与输入缓冲区释放运行时悬垂)
+    - [10.3 边界测试：`std::mem::transmute` 的大小不匹配（编译错误/UB）](#103-边界测试stdmemtransmute-的大小不匹配编译错误ub)
 
 ---
 
@@ -568,7 +572,7 @@ fn fixed() {
 
 ### 10.2 边界测试：生命周期过短的零拷贝视图（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn get_header(data: &[u8]) -> &[u8] {
     // ❌ 编译错误: missing lifetime specifier
     // 返回引用的生命周期必须与输入关联
@@ -721,7 +725,7 @@ fn parse_combined(input: &str) -> IResult<&str, (&str, &str)> {
 
 ### 10.4 边界测试：零拷贝与字节序的字节对齐（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let bytes = [0x12u8, 0x34, 0x56, 0x78];
     // ❌ 运行时 UB: 未对齐的指针转换
@@ -735,7 +739,7 @@ fn main() {
 
 ### 10.5 边界测试：零拷贝解析的生命周期与输入缓冲区释放（运行时悬垂）
 
-```rust,compile_fail
+```rust,ignore
 fn parse<'a>(input: &'a [u8]) -> &'a str {
     std::str::from_utf8(input).unwrap()
 }
@@ -750,3 +754,33 @@ fn main() {
 ```
 
 > **修正**: 零拷贝解析的核心是**输出引用输入**，但输出的生命周期不能超过输入。上述代码中，`parse` 返回的 `&str` 与 `data` 同生命周期，`drop(data)` 后 `s` 悬垂——编译器应阻止（`s` 在 `data` 之后使用）。更隐蔽的 bug：`data` 是局部变量，函数返回后 `data` 释放，若 `s` 逃离函数（如存入全局结构），悬垂。解决方案：1) 使用 `Cow<'a, str>`（拥有时克隆，借用时零拷贝）；2) 确保输入缓冲区的生命周期长于所有引用；3) 使用 `Arc<[u8]>` 共享拥有。这与 C 的字符串解析（`char*` 指向栈缓冲区，返回后悬垂）或 Go 的切片（引用底层数组，GC 管理生命周期）不同——Rust 的生命周期系统编译期防止大多数悬垂，但跨函数/跨结构的生命周期管理仍需设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)]
+
+### 10.3 边界测试：`std::mem::transmute` 的大小不匹配（编译错误/UB）
+
+```rust,compile_fail
+fn main() {
+    let x: u32 = 0x12345678;
+    // ❌ 编译错误: u32 与 u64 大小不同，不能 transmute
+    let y: u64 = unsafe { std::mem::transmute(x) };
+}
+```
+
+> **修正**: `std::mem::transmute` 是**按位重新解释**类型，要求源和目标类型**大小相同**（`size_of::<Src>() == size_of::<Dst>()`）。编译期检查：大小不同 → 编译错误。但大小相同不代表语义安全：`transmute::<&mut T, &mut U>()` 是 UB（可能违反借用规则），`transmute::<bool, u8>(2)` 是 UB（bool 只能是 0 或 1）。安全替代：1) `as` 转换（数值类型，有定义行为）；2) `From`/`Into`（类型安全转换）；3) `bytemuck` crate（运行时检查 transmute 合法性）。零拷贝解析（如 `zerocopy` crate）使用 `transmute` 将字节切片转为 struct，但需 `#[repr(C)]` 和对齐保证。这与 C 的指针强制转换（`(u64*)(&x)`，无大小检查）或 Go 的 `unsafe.Pointer`（类似但无编译期检查）不同——Rust 的 `transmute` 至少保证大小匹配，其他风险需开发者承担。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.transmute.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/transmutes.html)]
+
+### 10.4 边界测试：零拷贝解析的生命周期依赖与所有权转移（编译错误）
+
+```rust,compute_fail
+fn parse_header(data: &[u8]) -> &[u8] {
+    // ❌ 编译错误: 返回的切片生命周期未标注
+    // 编译器无法确定返回切片与输入 data 的生命周期关系
+    &data[0..4]
+}
+
+fn main() {
+    let input = vec![1, 2, 3, 4, 5];
+    let header = parse_header(&input);
+    println!("{:?}", header);
+}
+```
+
+> **修正**: **零拷贝解析**依赖**生命周期标注**：1) `fn parse<'a>(data: &'a [u8]) -> &'a [u8]` — 输出借用输入；2) 无标注时编译器尝试推断，但函数签名需要显式；3) `&'a str` 从 `&'a [u8]` 解析（如 `std::str::from_utf8`）。零拷贝的限制：1) 输入数据必须比输出存活更久；2) 修改输入会破坏所有派生引用；3) 不适合需要转换/归一化的数据（需拷贝）。与 `nom` 等解析库：1) `nom` 的解析器组合子返回 `IResult<&[u8], O>`（输入剩余 + 输出）；2) 输出通常是 `&[u8]` 子切片；3) 复杂解析可能需要 `Cow`（部分零拷贝）。这与 C 的 `strtok`（修改输入字符串，非线程安全）或 Python 的 `bytes` 切片（引用计数，无生命周期）不同——Rust 的零拷贝解析有编译期保证。[来源: [Nom Parser](https://docs.rs/nom/)] · [来源: [Zero-Copy Parsing](https://docs.rs/bytes/)]

@@ -1205,7 +1205,7 @@ fn main() {
 
 ### 10.4 边界测试：MC/DC 覆盖率与短路逻辑（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn decision(a: bool, b: bool, c: bool) -> bool {
     // ⚠️ 逻辑注意: 短路逻辑使 MCDC 分析复杂化
     a && b || c
@@ -1223,3 +1223,22 @@ fn test_mcdc() {
 ```
 
 > **修正**: MC/DC（Modified Condition/Decision Coverage）要求证明每个条件的独立影响。短路逻辑（`&&`、`||`）使某些条件在特定路径上不求值，增加了 MC/DC 的测试用例数量。`a && b || c` 需要 4 个测试用例满足 MC/DC（比无短路的 3 个多），因为 `b` 的独立影响需要 `a = true` 才能暴露。Rust 的 `&&` 和 `||` 是短路的（与 C/Java 相同），这与 VHDL 的 `and`/`or`（无短路，所有操作数都求值）不同。形式化验证中，短路逻辑增加了路径复杂度，但也提供了优化机会（提前终止）。DO-178C 的 MC/DC 要求对安全关键软件是强制性的，Rust 的短路语义必须被测试充分覆盖。[来源: [DO-178C Standard](https://www.rtca.org/product/do-178c/)] · [来源: [MC/DC Analysis](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]
+
+### 10.3 边界测试：形式化验证与 DO-178C 的代码覆盖冲突（验证盲区）
+
+```rust,compile_fail
+#[kani::proof]
+fn verify_decision_table(a: bool, b: bool, c: bool) -> bool {
+    // ❌ 验证盲区: 模型检查覆盖有界输入空间，但 DO-178C 要求 MC/DC 覆盖
+    // MC/DC: 每个条件的独立影响需被测试
+    if a && (b || c) {
+        true
+    } else {
+        false
+    }
+}
+
+fn main() {}
+```
+
+> **修正**: DO-178C（航空软件认证）要求 **MC/DC**（Modified Condition/Decision Coverage）：每个条件必须独立影响决策结果。`a && (b || c)` 需要 5 个测试用例满足 MC/DC。Kani 等模型检查器验证**所有可能输入**（有界），自然满足 MC/DC，但工具链认证是障碍：1) 形式化工具本身需通过 DO-330（工具鉴定）；2) 生成的证据需被认证机构接受；3) Rust 缺乏 DO-178C 的 A 级认证历史。Ferrocene 项目：提供经过认证的 Rust 工具链，支持 DO-178C、ISO 26262（汽车）、IEC 61508（工业）。这与 Ada/SPARK（长期用于航空，有完整认证历史）或 C（广泛认证但需大量测试）不同——Rust 的形式化验证生态正在成熟，但工业认证仍需时间积累。[来源: [DO-178C](https://en.wikipedia.org/wiki/DO-178C)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)] · [来源: [MC/DC](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)]

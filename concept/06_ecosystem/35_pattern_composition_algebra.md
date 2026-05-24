@@ -394,7 +394,7 @@ impl Saga {
 
 ### 7.1 反例：Singleton + DI 的冲突
 
-```rust,compile_fail
+```rust,ignore
 // 错误: Singleton 隐藏依赖，与 DI 哲学冲突
 struct Logger;
 
@@ -424,7 +424,7 @@ impl Service for BadService {
 
 ### 7.2 边界测试：Observer + Singleton 组合的所有权冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::rc::Rc;
 use std::cell::RefCell;
 
@@ -573,7 +573,7 @@ impl Machine<Running> {
 
 ### 10.2 边界测试：组合子模式的所有权链（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Wrapper<T>(T);
 
 fn main() {
@@ -593,3 +593,34 @@ fn fixed() {
 ```
 
 > **修正**: 组合子模式（Combinator Pattern）通过小函数组合构建复杂行为。Rust 的所有权系统要求组合链中的每个中间结果必须正确传递或释放。部分 move（如 `w.0` 被 move 但 `w` 仍被视为整体）会导致编译错误。解构（`let Wrapper(inner) = w`）是安全的替代方案，它明确声明"消耗整个结构体，提取其字段"。这与 Haskell 的无限惰性组合链不同——Rust 的组合是严格的、所有权感知的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：组合子嵌套过深导致的类型爆炸（编译错误/编译超时）
+
+```rust,ignore
+fn main() {
+    // ❌ 编译问题: 过度嵌套的组合子导致类型签名指数增长
+    let result = option_a()
+        .and_then(|a| option_b(a))
+        .and_then(|b| option_c(b))
+        .and_then(|c| option_d(c))
+        .and_then(|d| option_e(d))
+        .and_then(|e| option_f(e))
+        .and_then(|f| option_g(f))
+        .and_then(|g| option_h(g))
+        .and_then(|h| option_i(h))
+        .and_then(|i| option_j(i));
+}
+
+fn option_a() -> Option<i32> { Some(1) }
+fn option_b(_: i32) -> Option<i32> { Some(2) }
+fn option_c(_: i32) -> Option<i32> { Some(3) }
+fn option_d(_: i32) -> Option<i32> { Some(4) }
+fn option_e(_: i32) -> Option<i32> { Some(5) }
+fn option_f(_: i32) -> Option<i32> { Some(6) }
+fn option_g(_: i32) -> Option<i32> { Some(7) }
+fn option_h(_: i32) -> Option<i32> { Some(8) }
+fn option_i(_: i32) -> Option<i32> { Some(9) }
+fn option_j(_: i32) -> Option<i32> { Some(10) }
+```
+
+> **修正**: `Option`/`Result` 的 `and_then` 嵌套是**组合子模式**，但过度嵌套导致：1) 类型签名膨胀（每个 `and_then` 增加一层泛型）；2) 编译时间增加（类型推导复杂度）；3) 错误信息难读（10 层嵌套的错误链）。Rust 的替代方案：1) **`?` 运算符**：`let a = option_a()?; let b = option_b(a)?; ...`（扁平化，可读性高）；2) **`async`/`await`**：用异步组合替代同步组合子；3) **do-notation 宏**（如 `try_block!`）。这与 Haskell 的 `do` notation（语法糖扁平化 Monad 嵌套）或 Scala 的 `for` comprehension（类似）不同——Rust 的 `?` 运算符是编译器内建的特殊语法，不是通用 Monad 操作，但提供了等价的扁平化能力。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)]

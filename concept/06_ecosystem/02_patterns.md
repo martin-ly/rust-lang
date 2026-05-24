@@ -2112,3 +2112,31 @@ fn eval(e: &Expr) -> i32 {
 ```
 
 访问者模式仅在"频繁添加新操作，不频繁添加新变体"时优势——Rust 的枚举匹配在"频繁添加新变体"时更有优势（编译器检查遗漏）。这与 Haskell 的代数数据类型（同样偏好模式匹配）或 Java 的 Visitor（因无枚举匹配而必需）不同——Rust 的类型系统使某些传统设计模式过时。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-00-patterns.html)]
+
+### 10.3 边界测试：builder 模式的链式调用与移动语义（编译错误）
+
+```rust,compile_fail
+struct Builder {
+    name: Option<String>,
+    age: Option<u32>,
+}
+
+impl Builder {
+    fn new() -> Self { Self { name: None, age: None } }
+    fn name(mut self, n: String) -> Self { self.name = Some(n); self }
+    fn age(mut self, a: u32) -> Self { self.age = Some(a); self }
+    fn build(self) -> Person { Person { name: self.name.unwrap(), age: self.age.unwrap() } }
+}
+
+struct Person { name: String, age: u32 }
+
+fn main() {
+    let builder = Builder::new();
+    builder.name(String::from("Alice"));
+    // ❌ 编译错误: name() 消耗 builder（move），后续不能使用
+    builder.age(30);
+    let _person = builder.build();
+}
+```
+
+> **修正**: Builder 模式的**链式调用**在 Rust 中需处理所有权：`fn name(mut self, ...)` 消耗 `self` 并返回新的 `Self`，旧的 `self` 不可用。修复：1) `fn name(&mut self, ...)` — 借用，支持链式但不返回 `Self`（需分开调用：`builder.name(...); builder.age(...);`）；2) `fn name(mut self, ...) -> Self` — 消耗式，但要求一次性链式调用：`Builder::new().name(...).age(...).build()`；3) `fn name(self, ...) -> Self` — 无 `mut`，在函数内重新绑定。Rust 的 builder 模式通常采用**消耗式**（`mut self`），因为构建完成后 builder 不再需要。这与 Java 的 builder（总是返回 `this`，无所有权问题）或 Python 的 builder（同样无所有权）不同——Rust 的 builder 需显式处理移动语义。[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/creational/builder.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

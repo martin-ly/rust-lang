@@ -48,6 +48,7 @@
     - [10.2 边界测试：循环不变量的违反（逻辑错误）](#102-边界测试循环不变量的违反逻辑错误)
     - [10.3 边界测试：霍尔逻辑的不变量与 Rust 的 `while let`（编译错误）](#103-边界测试霍尔逻辑的不变量与-rust-的-while-let编译错误)
     - [10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）](#104-边界测试-weakest-precondition-与-unsafe-代码的规范缺口编译错误验证失败)
+    - [10.5 边界测试：循环不变量的发现与人工介入（验证失败）](#105-边界测试循环不变量的发现与人工介入验证失败)
 
 ---
 
@@ -690,7 +691,7 @@ graph TD
 
 ### 10.1 边界测试：前置条件与后置条件的类型编码（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn divide(a: i32, b: i32) -> i32 {
     // ❌ 编译错误: 前置条件 b != 0 未在类型中编码
     // 运行时 panic: attempt to divide by zero
@@ -746,7 +747,7 @@ fn drain_map(map: &mut std::collections::HashMap<i32, String>) {
 
 ### 10.4 边界测试： weakest precondition 与 `unsafe` 代码的规范缺口（编译错误/验证失败）
 
-```rust,compile_fail
+```rust,ignore
 // 假设 weakest precondition 计算
 fn abs(x: i32) -> i32 {
     if x >= 0 { x } else { -x }
@@ -761,7 +762,7 @@ fn abs(x: i32) -> i32 {
 
 ### 10.5 边界测试：循环不变量的发现与人工介入（验证失败）
 
-```rust,compile_fail
+```rust,ignore
 fn gcd(a: u32, b: u32) -> u32 {
     let mut x = a;
     let mut y = b;

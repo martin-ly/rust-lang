@@ -695,3 +695,27 @@ fn main() {
 ```
 
 > **修正**: `AsyncDrop` 中的 panic 处理比同步 `Drop` 更复杂：1) 同步 `Drop` 中 panic 导致双重 panic → `abort`（已有行为）；2) `AsyncDrop` 在 `.await` 点可能被取消（任务 abort），取消后是否继续执行 drop 逻辑？3) 若 `AsyncDrop` 在栈展开中被调用，但当前无 async 上下文（无法 `.await`），如何处理？这些问题的答案将决定 `AsyncDrop` 的语义：1) `abort-on-panic`（与同步一致）；2) `ignore-cancel`（drop 必须完成，即使任务取消）；3) `require-async-context`（`AsyncDrop` 只能在 async 上下文中调用）。`async drop` 的实现极具挑战性，是 Rust 语言演进中最复杂的特性之一。[来源: [Rust RFC 3157](https://rust-lang.github.io/rfcs/3157-async-drop.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）
+
+```rust,ignore
+struct AsyncResource;
+
+impl Drop for AsyncResource {
+    fn drop(&mut self) {
+        // ❌ 设计问题: Drop::drop 是同步的，不能 await
+        // 若需要在 drop 时执行异步清理（如关闭网络连接、刷新日志），
+        // 当前 Rust 不支持 async drop
+        println!("synchronous drop");
+    }
+}
+
+async fn use_resource() {
+    let _res = AsyncResource;
+    // _res 在作用域结束时调用同步 drop
+}
+
+fn main() {}
+```
+
+> **修正**: Rust 当前**不支持 async drop**：`Drop::drop` 是同步方法，不能 `await`。异步清理的 workaround：1) **显式 async 方法**：`resource.close().await` + `mem::forget(resource)` 跳过同步 drop；2) **`AsyncDrop` trait**（讨论中）：`async fn drop(&mut self)`，编译器在值离开作用域时生成异步 drop 代码；3) **`scopeguard` crate**：`defer!` 和 `ScopeGuard` 提供可控的清理逻辑。`async drop` 的设计挑战：1) 析构顺序（与同步 drop 相同？）；2) panic 时的行为；3) 与 `Pin` 的交互（`Pin<&mut T>` 的 async drop）。这与 C++ 的析构函数（同步，但可用 `co_await` 在 C++20 协程中）或 Java 的 `AutoCloseable`（`close()` 是同步的，`try-with-resources` 不支持 async）不同——Rust 的 async drop 是活跃的设计领域。[来源: [Async Drop RFC](https://rust-lang.github.io/rfcs/3184-async-drop.html)] · [来源: [Rust Async Working Group](https://rust-lang.github.io/wg-async/)]

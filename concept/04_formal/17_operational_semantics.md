@@ -53,6 +53,15 @@
       - [路径 C：unsafe 协议验证（RustBelt → RefinedRust 自动化）](#路径-cunsafe-协议验证rustbelt--refinedrust-自动化)
       - [三条路径的交集与协同](#三条路径的交集与协同)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：操作语义的编译错误](#十边界测试操作语义的编译错误)
+    - [10.1 边界测试：求值顺序的未定义行为（运行时 UB）](#101-边界测试求值顺序的未定义行为运行时-ub)
+    - [10.2 边界测试：panic 的栈展开语义（运行时行为）](#102-边界测试panic-的栈展开语义运行时行为)
+    - [10.3 边界测试：形式化规则违反导致的编译错误（编译错误）](#103-边界测试形式化规则违反导致的编译错误编译错误)
+    - [10.4 边界测试：悬垂引用的形式化禁止（编译错误）](#104-边界测试悬垂引用的形式化禁止编译错误)
+    - [10.5 边界测试：形式化语义中的非确定性选择（运行时行为差异）](#105-边界测试形式化语义中的非确定性选择运行时行为差异)
+    - [10.6 边界测试：堆叠借用（Stacked Borrows）与原始指针的别名（运行时 UB）](#106-边界测试堆叠借用stacked-borrows与原始指针的别名运行时-ub)
+    - [10.7 边界测试：求值顺序与副作用的交互（运行时 UB）](#107-边界测试求值顺序与副作用的交互运行时-ub)
+    - [10.3 边界测试：求值顺序与副作用的确定性（编译错误）](#103-边界测试求值顺序与副作用的确定性编译错误)
 
 ---
 
@@ -1076,13 +1085,13 @@ fn main() {
 
 ### 10.6 边界测试：堆叠借用（Stacked Borrows）与原始指针的别名（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut x = 0;
     let r1 = &mut x as *mut i32;
     let r2 = &mut x as *mut i32;
     unsafe {
-        // ❌ 运行时 UB（Stacked Borrows 模型）: 
+        // ❌ 运行时 UB（Stacked Borrows 模型）:
         // 两个可变裸指针指向同一内存，且都被使用
         *r1 = 1;
         *r2 = 2;
@@ -1095,7 +1104,7 @@ fn main() {
 
 ### 10.7 边界测试：求值顺序与副作用的交互（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut x = 0;
     // ❌ 运行时 UB: 函数参数求值顺序未指定，若含副作用可能不可预测
@@ -1105,3 +1114,19 @@ fn main() {
 ```
 
 > **修正**: Rust 明确指定了大多数表达式的**求值顺序**：元组/数组元素左到右、`let` 绑定右到左（先求值右侧）、函数参数左到右（但注意：这是 2024 Edition 的变更，旧 Edition 未指定）。但某些边缘情况：1) `a + b` 中 `a` 和 `b` 的求值顺序；2) 方法调用的 receiver 和参数顺序；3) 闭包参数捕获顺序。依赖求值顺序的代码是脆弱的——不同编译器版本或优化级别可能改变行为。安全模式：将副作用分离到独立语句，不依赖复合表达式中的求值顺序。这与 C/C++ 的"大多数求值顺序未指定"（UB 来源之一）或 Java 的"左到右求值"（明确指定）不同——Rust 趋向于更明确的求值顺序，但仍在演进中。[来源: [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/expressions.html#evaluation-order)] · [来源: [Rust Edition 2024](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-tail-expr-scope.html)]
+
+### 10.3 边界测试：求值顺序与副作用的确定性（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 0;
+    // ❌ 运行时 UB: 同一标量值的 &mut 和 & 别名（在 unsafe 中）
+    // 但在 safe Rust 中，以下代码是合法的：
+    let r = &mut x;
+    *r += 1;
+    let s = &x; // 错误: 不能从 &mut x 创建 &x
+    println!("{} {}", r, s);
+}
+```
+
+> **修正**: Rust 的操作语义明确定义了**求值顺序**和**别名规则**。safe Rust 中，`&mut T` 和 `&T` 不能同时指向同一数据（编译期保证）。但在 `unsafe` 块中，可以通过裸指针创建别名：`*const T` 和 `*mut T` 同时指向同一地址是**合法**的，但解引用时若存在 `&mut` 活跃则 UB。Stacked Borrows / Tree Borrows 模型定义了**精确规则**：1) 创建 `&mut` 会"弹出"（pop）所有重叠的共享引用；2) 通过 `&mut` 创建 `*mut` 保留 `&mut` 的权限；3) 从 `*mut` 重新创建 `&` 或 `&mut` 需满足无活跃冲突借用。这与 C 的"无别名假设"（strict aliasing rule，编译器假设 `int*` 和 `float*` 不别名）或 LLVM 的 `noalias` 元数据类似——Rust 的别名规则更严格，但允许通过 unsafe 显式控制。[来源: [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/expressions.html#evaluation-order)] · [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]

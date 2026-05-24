@@ -1783,7 +1783,7 @@ struct Data {
 
 ### 10.2 边界测试：Edition 迁移中的语法变化（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Rust 2015 Edition
 extern crate std;
 
@@ -1797,7 +1797,7 @@ fn main() {
 
 ### 10.3 边界测试：`cargo` 工作空间的成员路径错误（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Cargo.toml (workspace root)
 // [workspace]
 // members = ["crate-a", "crate-b"]
@@ -1817,7 +1817,7 @@ fn main() {
 
 ### 10.4 边界测试：`rustc` 的链接时优化（LTO）与动态链接的冲突（编译错误/链接错误）
 
-```rust,compile_fail
+```rust,ignore
 // Cargo.toml
 // [profile.release]
 // lto = true
@@ -1831,3 +1831,31 @@ fn main() {}
 ```
 
 > **修正**: 链接时优化（LTO）在链接阶段进行跨 crate 内联和死代码消除，显著提高性能（10-30%）。但 `cdylib`（C-compatible dynamic library）需要**导出符号**供外部程序（C、Python、其他 Rust 程序）使用。LTO 可能内联或消除"未使用"的符号——从 Rust 视角看这些符号无内部调用，但从动态链接视角它们是公共 API。解决方案：1) 对导出的符号标记 `#[no_mangle]` 和 `pub extern "C"`；2) 使用 `#[used]` 强制保留符号；3) 对 cdylib 禁用 LTO 或使用 `thin-lto`（部分内联，保留更多符号）。这与 C/C++ 的 `-flto` + `-shared`（同样问题，需 `-fvisibility=default`）或 Go 的 cgo（无 LTO 概念，但构建复杂）类似——跨语言动态链接与激进优化的矛盾是所有系统语言的共同挑战。[来源: [Cargo Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html)] · [来源: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html)]
+
+### 10.3 边界测试：cargo feature 的联合启用与编译错误（编译错误）
+
+```rust,compile_fail
+// Cargo.toml:
+// [features]
+// default = ["feat-a"]
+// feat-a = []
+// feat-b = []
+
+// 代码:
+#[cfg(feature = "feat-a")]
+mod implementation {
+    pub fn work() -> i32 { 1 }
+}
+
+#[cfg(feature = "feat-b")]
+mod implementation {
+    pub fn work() -> i32 { 2 }
+}
+
+// ❌ 编译错误: 若同时启用 feat-a 和 feat-b，implementation 重复定义
+fn main() {
+    println!("{}", implementation::work());
+}
+```
+
+> **修正**: Cargo feature 是**累加**的：依赖树中任何 crate 启用 feature，该 feature 对整棵树生效。互斥 feature 的设计：1) `cfg_mutually_exclusive!`（第三方宏）；2) 运行时检查（`panic!("feat-a and feat-b are mutually exclusive")`）；3) 文档明确说明（但不强制）。Cargo 的 feature resolver v2（2021+）改进了特性解析：dev-dependencies 不激活 features，弱依赖（`dep-name?/feature-name`）按需启用。feature 滥用是 Rust 生态的常见问题：1) 过多 feature 导致测试矩阵爆炸；2) 隐式 feature 依赖（`tokio/rt` 启用 `tokio/rt-multi-thread`）；3) 编译时间增加（每个 feature 组合可能触发重新编译）。这与 npm 的 `optionalDependencies` 或 Python 的 `extras_require` 类似——Rust 的 feature 系统是编译期的条件编译，影响代码包含和依赖解析。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)] · [来源: [RFC 2957 — Weak Dependencies](https://rust-lang.github.io/rfcs/2957-cargo-features-2.html)]

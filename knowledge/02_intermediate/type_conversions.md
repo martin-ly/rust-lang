@@ -1018,3 +1018,16 @@ enum Temperature {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
+
+### 边界测试：`TryFrom` 截断与错误处理（运行时 panic）
+
+```rust,ignore
+fn main() {
+    let x: u32 = 1000;
+    // ❌ 运行时 panic: try_into 返回 Err，unwrap 时 panic
+    let y: u8 = x.try_into().unwrap();
+    println!("{}", y);
+}
+```
+
+> **修正**: `TryFrom`/`TryInto` 是 Rust 的**安全转换** trait：转换可能失败时返回 `Result`。`u32::try_into::<u8>()` 在值 > 255 时返回 `Err(TryFromIntError)`。处理模式：1) `unwrap()` / `expect()` → 确信不会失败时使用（失败时 panic）；2) `unwrap_or(default)` → 提供默认值；3) `match` / `if let` → 显式处理错误；4) `?` 运算符 → 在返回 `Result` 的函数中传播。`TryFrom` 与 `From` 的关系：`From<T>` 自动实现 `Into<T>` 和 `TryFrom<T>`（总是成功）。这提供了类型安全的转换层级：`From`（无损）→ `TryFrom`（可能失败）→ `as`（强制转换，可能截断）。这与 C 的隐式转换（静默截断）或 Java 的强制类型转换（运行时 `ClassCastException`）不同——Rust 在类型系统层面区分转换的安全性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.TryFrom.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]

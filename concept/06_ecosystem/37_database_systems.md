@@ -369,3 +369,23 @@ async fn good_query(pool: &sqlx::SqlitePool) -> Result<(), sqlx::Error> {
 > **修正**: SQLx 的宏（`query!`、`query_as!`）在编译期解析 SQL 并验证返回类型与数据库 schema 的一致性。若类型不匹配，编译错误而非运行时 panic。这是 Rust"将错误提前到编译期"哲学在数据库访问层的典型应用。与 Go/Java 的运行时反射映射相比，SQLx 提供零开销、类型安全的查询接口。[来源: [SQLx Documentation](https://docs.rs/sqlx/)]
 
 ---
+
+### 10.4 边界测试：ORM 中的类型不匹配与编译期查询验证（编译错误/运行时失败）
+
+```rust,ignore
+// 概念代码: Sea-ORM 的实体定义
+// #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
+// #[sea_orm(table_name = "users")]
+// pub struct Model {
+//     #[sea_orm(primary_key)]
+//     pub id: i32,
+//     pub name: String,
+// }
+
+// ❌ 运行时失败: 若数据库 schema 与实体定义不匹配（如 name 列改为 TEXT）
+// Sea-ORM 在运行时检查，编译期无法验证 schema 一致性
+
+fn main() {}
+```
+
+> **修正**: Rust 的 ORM 生态（`Sea-ORM`、`Diesel`、`sqlx`）的 schema 验证：1) **Sea-ORM** — 运行时验证，代码优先（entity 生成 migration）；2) **Diesel** — 编译期验证（`table!` 宏从 migration 生成 Rust 代码，schema 变更需重新运行 migration）；3) **sqlx** — 编译期验证（`query!` 宏在编译时连接数据库检查 SQL）。`sqlx` 的 compile-time checked queries 是 Rust 数据库访问的独特优势：SQL 语法、列名、类型在编译期验证，避免运行时错误。但这要求编译时数据库可访问（CI 中需配置 `SQLX_OFFLINE` + query 缓存文件）。这与 Python 的 SQLAlchemy（运行时反射）或 Java 的 Hibernate（注解 + 运行时验证）不同——Rust 的 ORM 趋向编译期安全。[来源: [Sea-ORM](https://www.sea-ql.org/SeaORM/)] · [来源: [Diesel](https://diesel.rs/)] · [来源: [sqlx](https://docs.rs/sqlx/)]

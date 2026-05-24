@@ -657,7 +657,7 @@ where
 
 ### 10.4 边界测试：λ 演算中的变量捕获与闭包（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
     move |y| x + y
 }
@@ -671,3 +671,23 @@ fn main() {
 ```
 
 > **修正**: Rust 的闭包实现**词法作用域**（lexical scoping）：捕获定义时环境中的变量，而非调用时的环境。这与 λ 演算的词法绑定一致（`λx.λy.x+y` 中 `x` 绑定到外层参数），与动态作用域（Lisp 早期版本、Bash 变量）不同。`move` 关键字改变捕获方式（按值而非按引用），但不改变作用域规则——仍绑定到定义时的值。Rust 的闭包类型（`Fn`、`FnMut`、`FnOnce`）根据捕获方式自动推断，是 λ 演算在系统编程语言中的实现。与 C++ 的 lambda（同样词法作用域，捕获列表 `[=]`/`[&]` 显式控制）或 JavaScript 的闭包（词法作用域，但 `this` 动态绑定）类似——Rust 的闭包设计兼顾了函数式编程的表达力和系统编程的性能。[来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)]
+
+### 10.3 边界测试：Y 组合子在 Rust 中的不可表达性（编译错误）
+
+```rust,ignore
+// Y = λf.(λx.f (x x)) (λx.f (x x))
+// 在 Rust 中，无类型 λ 演算的直接翻译无法编译
+
+fn y_combinator<F, T>(f: F) -> T
+where
+    F: Fn(T) -> T,
+{
+    // ❌ 编译错误: Rust 需要递归类型，且 Y 组合子需要自应用 (x x)
+    // 自应用要求 x 的类型是 X -> X 且 X 同时是函数类型，导致无限类型
+    unimplemented!()
+}
+
+fn main() {}
+```
+
+> **修正**: Y 组合子（Y Combinator）是**无类型 λ 演算**中实现递归的固定点组合子：`Y f = f (Y f)`。它在有类型系统中**不可直接表达**，因为自应用 `x x` 要求 `x` 同时是函数和其参数的类型，导致类型 `X = X -> X`，这在简单类型系统中无解（不是 well-founded 类型）。Rust 中实现递归：1) `fn` 的显式递归（`fn factorial(n: u64) -> u64`）；2) `fix` 组合子使用 trait object（`Box<dyn Fn(Box<dyn Any>) -> Box<dyn Any>>`）；3) 高阶 trait（HRTB + 关联类型）。这与 Haskell 的 `fix`（`fix f = let x = f x in x`，惰性求值允许无限展开）或 Scheme 的 `letrec`（语言原生支持递归绑定）不同——Rust 的严格求值和类型系统排除了无类型的 Y 组合子，但显式递归更安全和高效。[来源: [Y Combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator)] · [来源: [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus)]

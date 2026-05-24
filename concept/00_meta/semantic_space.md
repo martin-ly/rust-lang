@@ -66,6 +66,7 @@
   - [八、定理一致性矩阵（Assertion Consistency Matrix）](#八定理一致性矩阵assertion-consistency-matrix)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [十、待补充与演进方向（TODOs）](#十待补充与演进方向todos)
+    - [10.3 边界测试：术语过载与跨层语义漂移（概念混淆）](#103-边界测试术语过载与跨层语义漂移概念混淆)
 
 > **来源**: [Rust Reference] · [RFCs] · [RustBelt] · [Wikipedia]
 >
@@ -1251,3 +1252,32 @@ graph TD
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+### 10.3 边界测试：术语过载与跨层语义漂移（概念混淆）
+
+```rust,ignore
+// ❌ 概念混淆: "生命周期"在不同上下文中的不同含义
+
+// 上下文 1: 借用检查器中的生命周期（编译期引用 validity）
+fn borrow<'a>(x: &'a str) -> &'a str { x }
+
+// 上下文 2: RAII / 作用域生命周期（运行时的 drop 顺序）
+{
+    let s = String::from("temp");
+} // s 在此 drop（作用域结束）
+
+// 上下文 3: 对象生命周期（OOP 中的创建-使用-销毁）
+struct Resource;
+impl Resource { fn new() -> Self { Self } }
+impl Drop for Resource { fn drop(&mut self) {} }
+
+// 上下文 4: 形式化逻辑中的生命周期（线性逻辑的 ! 模态）
+// !A: A 可以被复制/丢弃（不受线性约束）
+
+fn main() {
+    // 学习者可能混淆这些"生命周期"概念
+    let _r = Resource::new();
+}
+```
+
+> **修正**: Rust 生态系统中的**术语过载**（term overloading）是认知障碍来源。"生命周期"（lifetime）至少四种含义：1) **引用生命周期**（`'a`）：编译期检查引用有效性；2) **作用域生命周期**：变量从声明到 drop 的代码区域；3) **对象生命周期**：OOP 的创建-使用-销毁序列；4) **形式化生命周期**：线性逻辑中的模态算子。精确沟通策略：1) 引用生命周期 → "lifetime annotation"；2) 作用域 → "scope"；3) 对象生命周期 → "object lifetime"；4) 线性逻辑 → "exponential modality"。这与数学中的"域"（field/area/domain）或编程中的"类型"（type/kind/sort）类似——跨学科术语重叠需要上下文消歧。[来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]

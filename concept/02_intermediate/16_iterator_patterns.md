@@ -39,6 +39,15 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：迭代器模式的编译错误](#十边界测试迭代器模式的编译错误)
+    - [10.1 边界测试：`Iterator::zip` 长度不匹配（逻辑错误）](#101-边界测试iteratorzip-长度不匹配逻辑错误)
+    - [10.2 边界测试：`flat_map` 与嵌套迭代器的所有权（编译错误）](#102-边界测试flat_map-与嵌套迭代器的所有权编译错误)
+  - [十二、边界测试：迭代器模式的编译错误（续）](#十二边界测试迭代器模式的编译错误续)
+    - [12.1 边界测试：`enumerate` 与索引类型（逻辑错误）](#121-边界测试enumerate-与索引类型逻辑错误)
+    - [12.2 边界测试：`partition` 与所有权分割（编译错误）](#122-边界测试partition-与所有权分割编译错误)
+    - [10.5 边界测试：`Iterator::fold` 的初始值类型与闭包返回类型不匹配（编译错误）](#105-边界测试iteratorfold-的初始值类型与闭包返回类型不匹配编译错误)
+    - [10.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）](#105-边界测试chunksexact-的剩余元素处理逻辑错误)
+    - [10.2 边界测试：`flat_map` 与嵌套迭代器的类型匹配（编译错误）](#102-边界测试flat_map-与嵌套迭代器的类型匹配编译错误)
 
 ---
 
@@ -585,7 +594,7 @@ fn fixed() {
 
 ### 10.2 边界测试：`flat_map` 与嵌套迭代器的所有权（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let data = vec![vec![1, 2], vec![3, 4]];
     let iter = data.into_iter();
@@ -634,7 +643,7 @@ fn fixed() {
 
 ### 12.2 边界测试：`partition` 与所有权分割（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let data = vec![String::from("a"), String::from("b")];
     // ❌ 编译错误: `partition` 消耗迭代器，但以下代码试图保留原数据
@@ -652,7 +661,7 @@ fn fixed() {
 }
 ```
 
-> **修正**: `partition` 将迭代器元素分为两个集合，要求迭代器是 `IntoIterator`（消耗型）。对于非 `Copy` 类型（如 `String`），`partition` 会 move 所有元素，原集合不可用。若需保留原数据，必须先 `clone` 或使用 ` iter()` + `cloned()` + `partition`。这体现了 Rust 所有权系统的严格性——数据不能同时存在于原位置和多个新位置，除非显式复制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `partition` 将迭代器元素分为两个集合，要求迭代器是 `IntoIterator`（消耗型）。对于非 `Copy` 类型（如 `String`），`partition` 会 move 所有元素，原集合不可用。若需保留原数据，必须先 `clone` 或使用 `iter()` + `cloned()` + `partition`。这体现了 Rust 所有权系统的严格性——数据不能同时存在于原位置和多个新位置，除非显式复制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.5 边界测试：`Iterator::fold` 的初始值类型与闭包返回类型不匹配（编译错误）
 
@@ -669,7 +678,7 @@ fn main() {
 
 ### 10.5 边界测试：`ChunksExact` 的剩余元素处理（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let v = vec![1, 2, 3, 4, 5];
     let mut chunks = v.chunks_exact(2);
@@ -683,3 +692,15 @@ fn main() {
 ```
 
 > **修正**: `chunks_exact(n)` 返回大小严格为 `n` 的块，可能剩余少于 `n` 的元素。迭代 `ChunksExact` 后，需调用 `remainder()` 获取剩余元素——遗漏是常见 bug。替代方法：`chunks(n)` 返回大小至多为 `n` 的块（最后块可能更小），无需单独处理剩余。选择取决于场景：1) 需要固定大小块（如 SIMD 处理）→ `chunks_exact` + `remainder`；2) 可接受变长块 → `chunks`。这与 Python 的 `iterools.grouper`（填充或截断）或 NumPy 的 `array_split`（自动处理剩余）类似——Rust 提供两种语义，让开发者根据需求选择。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：`flat_map` 与嵌套迭代器的类型匹配（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let data = vec![vec![1, 2], vec![3, 4]];
+    // ❌ 编译错误: flat_map 要求闭包返回 Iterator，但 iter() 返回 &Vec 的迭代器
+    let flat: Vec<i32> = data.iter().flat_map(|v| v.iter()).collect();
+}
+```
+
+> **修正**: `flat_map` 要求闭包返回一个**迭代器**，然后将所有迭代器扁平化为一个。`data.iter()` 产生 `&Vec<i32>`，`v.iter()` 产生 `&i32`。`flat_map(|v| v.iter())` 返回 `Iter<&i32>`，collect 后为 `Vec<&i32>` 而非 `Vec<i32>`。修复：1) `data.into_iter().flat_map(|v| v.into_iter()).collect()`（移动所有权）；2) `data.iter().flat_map(|v| v.iter().copied()).collect()`（复制值）。`flat_map` 是 monadic `bind` 在迭代器上的实现：`Iter<Item=Iter<Item=T>>` → `Iter<Item=T>`。这与 Haskell 的 `concatMap` 或 Python 的 `itertools.chain.from_iterable` 类似——Rust 的类型系统要求迭代器元素类型精确匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

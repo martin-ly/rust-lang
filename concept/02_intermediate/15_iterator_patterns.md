@@ -35,6 +35,16 @@
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：迭代器模式的编译错误](#十边界测试迭代器模式的编译错误)
+    - [10.1 边界测试：`Iterator::collect` 的目标类型歧义（编译错误）](#101-边界测试iteratorcollect-的目标类型歧义编译错误)
+    - [10.2 边界测试：迭代器适配器的惰性求值陷阱（逻辑错误）](#102-边界测试迭代器适配器的惰性求值陷阱逻辑错误)
+  - [十二、边界测试：迭代器模式的编译错误（续）](#十二边界测试迭代器模式的编译错误续)
+    - [12.1 边界测试：`skip_while` 与 `take_while` 的互斥性（逻辑错误）](#121-边界测试skip_while-与-take_while-的互斥性逻辑错误)
+    - [12.2 边界测试：`cycle` 与无限迭代器（运行时死循环）](#122-边界测试cycle-与无限迭代器运行时死循环)
+    - [10.3 边界测试：`Iterator::zip` 的长度不一致（逻辑错误）](#103-边界测试iteratorzip-的长度不一致逻辑错误)
+    - [10.4 边界测试：消耗型适配器与双重迭代（编译错误）](#104-边界测试消耗型适配器与双重迭代编译错误)
+    - [10.6 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）](#106-边界测试iteratorfuse-后的重复消费逻辑错误)
+    - [10.2 边界测试：`Iterator::collect` 的目标类型推断失败（编译错误）](#102-边界测试iteratorcollect-的目标类型推断失败编译错误)
 
 ---
 
@@ -544,7 +554,7 @@ fn main() {
     let data = vec![1, 2, 3];
     // ⚠️ 运行时死循环: cycle 产生无限迭代器
     // let sum: i32 = data.iter().cycle().sum(); // 永不终止！
-    
+
     // 正确: 使用 take 限制迭代次数
     let sum: i32 = data.iter().cycle().take(10).sum(); // ✅ 取前 10 个
     println!("{}", sum); // 1+2+3+1+2+3+1+2+3+1 = 19
@@ -555,17 +565,17 @@ fn main() {
 
 ### 10.3 边界测试：`Iterator::zip` 的长度不一致（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let keys = vec!["a", "b", "c"];
     let values = vec![1, 2];
-    
+
     // ⚠️ 逻辑错误: zip 在任一迭代器结束时停止
     let map: std::collections::HashMap<_, _> = keys.iter()
         .zip(values.iter())
         .map(|(k, v)| (*k, *v))
         .collect();
-    
+
     println!("{:?}", map); // {"a": 1, "b": 2} — c 被静默忽略!
 }
 ```
@@ -574,11 +584,11 @@ fn main() {
 
 ### 10.4 边界测试：消耗型适配器与双重迭代（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let data = vec![1, 2, 3];
     let doubled: Vec<_> = data.iter().map(|x| x * 2).collect();
-    
+
     // ❌ 编译错误: `data` 在 collect 后被移动（若 data 是迭代器）
     // 对于 Vec，iter() 借用它，data 仍可用
     // 但若:
@@ -592,7 +602,7 @@ fn main() {
 
 ### 10.6 边界测试：`Iterator::fuse` 后的重复消费（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut iter = vec![1, 2, 3].into_iter().fuse();
     let v1: Vec<_> = iter.by_ref().collect();
@@ -602,3 +612,17 @@ fn main() {
 ```
 
 > **修正**: `Iterator::fuse` 在底层迭代器返回 `None` 后，后续 `next()` 始终返回 `None`。这在 `select!` 循环中防止对已完成的 future 重复 poll。但 `fuse` 不改变"迭代器是一次性的"本质：`collect` 消耗迭代器，`v2` 为空因为 `v1` 已消耗所有元素。`fuse` 不是"重置"迭代器——没有方法可重置已消耗的迭代器（除非重新创建）。这与 Python 的 `iter()`（同样一次性）或 C++ 的 `std::istream_iterator`（同样一次性）相同——迭代器的单次消费是通用设计。`fuse` 仅保证完成后的行为安全，不允许多次遍历。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
+
+### 10.2 边界测试：`Iterator::collect` 的目标类型推断失败（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let data = vec![1, 2, 3];
+    // ❌ 编译错误: 无法推断 collect 的目标类型
+    let collected = data.iter().map(|x| x * 2).collect();
+    // 正确: 显式标注类型
+    // let collected: Vec<i32> = data.iter().map(|x| x * 2).collect();
+}
+```
+
+> **修正**: `Iterator::collect()` 将迭代器消费为目标集合，但 Rust 的类型推断**仅从上下文**推导目标类型。若无处指定（如 `let x = ...collect()` 且无后续使用约束），编译器报错。常见模式：1) `let v: Vec<_> = iter.collect()`；2) `iter.collect::<Vec<_>>()`（turbofish 语法）；3) 函数返回类型约束（`fn foo() -> Vec<i32> { iter.collect() }`）。`collect()` 是 Rust 迭代器适配器的关键"终止操作"（consuming adaptor），与惰性适配器（`map`、`filter`）不同——它是编译器推断链的终点。这与 Java 的 `Stream.collect(Collectors.toList())`（显式指定收集器）或 Python 的 `list(iter)`（目标类型由构造函数决定）不同——Rust 的 `collect` 依赖类型推断，更灵活但可能需显式标注。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]

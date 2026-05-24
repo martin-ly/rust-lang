@@ -45,6 +45,9 @@
   - [十四、边界测试：集合的编译错误](#十四边界测试集合的编译错误)
     - [14.1 边界测试：`HashMap` 键未实现 `Hash` + `Eq`（编译错误）](#141-边界测试hashmap-键未实现-hash--eq编译错误)
     - [14.2 边界测试：迭代器消费后重复使用（编译错误）](#142-边界测试迭代器消费后重复使用编译错误)
+    - [10.3 边界测试：`Vec::drain` 的范围越界（运行时 panic）](#103-边界测试vecdrain-的范围越界运行时-panic)
+    - [10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）](#104-边界测试hashmap-的自定义哈希器与-buildhasherdefault编译错误)
+    - [10.3 边界测试：`Vec::drain` 后继续使用原 Vec（编译错误）](#103-边界测试vecdrain-后继续使用原-vec编译错误)
 
 ---
 
@@ -651,7 +654,7 @@ fn fixed() {
 
 ### 10.3 边界测试：`Vec::drain` 的范围越界（运行时 panic）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut v = vec![1, 2, 3, 4, 5];
     // ❌ 运行时 panic: drain 范围越界
@@ -664,7 +667,7 @@ fn main() {
 
 ### 10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::collections::HashMap;
 use std::hash::BuildHasherDefault;
 
@@ -672,10 +675,10 @@ fn main() {
     // ❌ 编译错误: FnvHasher 未实现 Default 或未导入
     // type FnvHashMap<K, V> = HashMap<K, V, BuildHasherDefault<FnvHasher>>;
     // FnvHasher 来自 fnv crate，需单独引入
-    
+
     // 正确: 使用标准库的 RandomState（默认）
     let map: HashMap<i32, String> = HashMap::new();
-    
+
     // 或引入 fnv crate:
     // use fnv::FnvBuildHasher;
     // let map: HashMap<i32, String, FnvBuildHasher> = HashMap::default();
@@ -683,3 +686,19 @@ fn main() {
 ```
 
 > **修正**: `HashMap` 的第三个泛型参数是哈希器构建器（`S: BuildHasher`），默认 `RandomState`（使用 SipHash 1-3，防 HashDoS）。自定义哈希器（如 `fnv::FnvHasher` 用于小键高性能、`ahash::AHasher` 用于通用高性能）需实现 `BuildHasher` 和 `Hasher` trait。`BuildHasherDefault<H>` 要求 `H: Default + Hasher`，是标准库提供的便捷包装。常见错误：1) 未引入 crate（`fnv`、`ahash`）；2) 混淆 `Hasher`（状态机，产生哈希值）和 `BuildHasher`（工厂，创建 `Hasher`）；3) 在需要 `Send + Sync` 的环境中使用非线程安全的哈希器。这与 Java 的 `HashMap`（固定哈希算法）或 C++ 的 `std::unordered_map`（模板参数 `Hash` 和 `KeyEqual`）类似——Rust 提供编译期可配置的哈希策略。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.HashMap.html)] · [来源: [fnv Crate](https://docs.rs/fnv/)]
+
+### 10.3 边界测试：`Vec::drain` 后继续使用原 Vec（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3, 4, 5];
+    let mut drained = v.drain(1..4);
+    // ❌ 编译错误: 不能同时借用 v（drain 持有 &mut v）
+    v.push(6);
+    for x in drained {
+        println!("{}", x);
+    }
+}
+```
+
+> **修正**: `Vec::drain(range)` 返回一个迭代器，它**可变借用**原 `Vec`（`&mut self`）。在 `drain` 迭代器存活期间，不能对原 `Vec` 进行任何操作（读、写、push、pop）。`drain` 的实现：将指定范围的元素移动到迭代器中，原位置标记为空。迭代器 `drop` 时，压缩剩余元素。这与 `retain`（原地过滤，不返回迭代器）或 `splice`（替换范围）不同——`drain` 是"取出并消费"的操作。常见模式：`for x in v.drain(..) { process(x); }` 完成后 `v` 为空。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

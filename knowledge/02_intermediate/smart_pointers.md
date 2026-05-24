@@ -1191,3 +1191,28 @@ fn main() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
+
+### 边界测试：`Rc<RefCell<T>>` 的循环引用与内存泄漏（运行时泄漏）
+
+```rust,ignore
+use std::cell::RefCell;
+use std::rc::Rc;
+
+struct Node {
+    value: i32,
+    next: Option<Rc<RefCell<Node>>>,
+}
+
+fn main() {
+    let a = Rc::new(RefCell::new(Node { value: 1, next: None }));
+    let b = Rc::new(RefCell::new(Node { value: 2, next: None }));
+
+    // ❌ 运行时内存泄漏: 循环引用导致引用计数永不为 0
+    a.borrow_mut().next = Some(Rc::clone(&b));
+    b.borrow_mut().next = Some(Rc::clone(&a));
+
+    // a 和 b 的引用计数都是 2，离开作用域后都变为 1，永不释放
+}
+```
+
+> **修正**: `Rc<RefCell<T>>` 提供**单线程共享可变访问**，但无法防止**循环引用**。循环引用导致引用计数永不为零，内存泄漏（非 UB，但资源浪费）。解决方案：1) **`Weak<T>`**：`Rc::downgrade` 创建弱引用，不增加引用计数，打破循环；2) **arena 分配**：所有节点由同一分配器管理，一次性释放；3) **显式清理**：在 drop 前手动断开链接。`RefCell` 的运行时借用检查（`borrow()`/`borrow_mut()`）在循环引用场景下可能 panic（若已有 `borrow_mut`，再 `borrow_mut` 同一 `RefCell`）。这与 C++ 的 `std::shared_ptr`（同样循环引用问题，需 `std::weak_ptr`）或 Swift 的 ARC（运行时循环引用检测，但非确定性）不同——Rust 要求开发者显式使用 `Weak` 打破循环。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]

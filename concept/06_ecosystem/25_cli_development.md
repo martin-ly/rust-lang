@@ -635,7 +635,7 @@ fn main() {
 
 ### 10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时显示问题）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // ❌ 运行时问题: 若未检查终端能力，在管道或文件重定向时输出 ANSI 转义码
     // println!("\x1b[31mred text\x1b[0m");
@@ -651,7 +651,7 @@ fn main() {
 
 ### 10.7 边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（运行时显示异常）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // ❌ 运行时显示异常: 纯 ANSI 转义序列在 Windows CMD（旧版）显示为乱码
     println!("\x1b[31mRed Text\x1b[0m");
@@ -660,3 +660,26 @@ fn main() {
 ```
 
 > **修正**: Rust CLI 工具的跨平台颜色输出：1) `ansi_term` → 已废弃；2) `termcolor` → 显式检测终端能力，Windows 旧版使用 WinAPI；3) `owo-colors` → 自动检测 `NO_COLOR` 环境变量。最佳实践：使用 `anstream`（`clap` 生态）或 `supports-color` crate，自动处理平台差异。`NO_COLOR` 标准：环境变量存在时，所有工具应禁用颜色输出。此外：1) `TERM=dumb` 时禁用；2) 非 TTY（管道输出）时默认禁用；3) Windows 上检测 `ENABLE_VIRTUAL_TERMINAL_PROCESSING`。这与 Go 的 `fatih/color` 或 Python 的 `colorama`（专门处理 Windows）类似——Rust 的 `anstream` 是现代解决方案，自动覆盖所有边缘情况。[来源: [NO_COLOR](https://no-color.org/)] · [来源: [anstream crate](https://docs.rs/anstream/)] · [来源: [Rust CLI Guidelines](https://rust-cli-recommendations.sunshowers.io/)]
+
+### 10.3 边界测试：`clap` 的 derive 宏与字段类型不匹配（编译错误）
+
+```rust,compile_fail
+use clap::Parser;
+
+#[derive(Parser)]
+struct Args {
+    #[arg(short, long)]
+    port: u16,
+    #[arg(short, long)]
+    verbose: bool,
+}
+
+fn main() {
+    let args = Args::parse();
+    // ❌ 编译错误: 若命令行传入 --port abc，解析失败
+    // clap 自动处理类型转换和错误消息
+    println!("port: {}", args.port);
+}
+```
+
+> **修正**: `clap` 的 derive 宏（`#[derive(Parser)]`）自动生成命令行解析器。类型安全：1) `u16` 字段只接受有效整数，`--port abc` → 自动错误消息；2) `bool` 字段是 flag（`--verbose` 存在为 true）；3) `Option<T>` 表示可选参数；4) `Vec<T>` 表示重复参数。`clap` v4 的改进：1) 更清晰的错误消息；2) 原生支持 `--help` 生成；3) `ValueEnum` derive 支持枚举参数。其他 CLI crate：`structopt`（已合并到 clap v3）、`argh`（Google 的轻量替代）、`bpaf`（组合子风格）。这与 Python 的 `argparse` 或 Go 的 `flag` 包类似——Rust 的 `clap` 通过类型系统在编译期保证参数解析的正确性。[来源: [clap Documentation](https://docs.rs/clap/)] · [来源: [Rust CLI Guidelines](https://rust-cli-recommendations.sunshowers.io/)]

@@ -667,3 +667,16 @@ pub fn linked_fixed() {}
 ```
 
 > **修正**: Rust 1.48+ 的 `rustdoc` 支持 intra-doc links——用 `[`Name`]` 语法链接到 crate 内的项或标准库类型。未解析的链接产生编译警告（CI 中可提升为错误）。这要求文档维护者确保所有引用有效，避免死链接。与 JavaDoc 或 Doxygen 的外部链接不同，Rust 的 intra-doc links 在编译期验证目标存在，将文档一致性检查提前到构建阶段。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.4 边界测试：`doctest` 的 `compile_fail` 与 `ignore` 的误用（测试失败）
+
+```rust,ignore
+/// ```compile_fail
+/// let x: i32 = "hello";
+/// ```
+fn documented_function() {}
+
+fn main() {}
+```
+
+> **修正**: Rust 的 **doctest**（文档测试）支持 `compile_fail` 属性：代码应编译失败，若编译通过则测试失败。`ignore` 属性：跳过测试（不编译也不运行）。`no_run` 属性：编译但不运行。常见误用：1) `compile_fail` 用于运行时错误代码（应使用 `no_run` 或 `should_panic`）；2) `ignore` 用于依赖外部资源的测试（正确）；3) `compile_fail` 代码实际编译通过（测试失败）。doctest 的编写原则：1) `compile_fail` — 仅用于展示编译错误；2) `no_run` — 用于无限循环或 I/O 代码；3) 无属性 — 正常编译运行；4) `ignore` — 平台特定或需要外部设置的代码。这与 Python 的 doctest（运行示例代码，验证输出）或 Elixir 的 doctests（类似 Python）不同——Rust 的 doctest 支持编译失败验证，是文档即测试的强大工具。[来源: [The Rust Programming Language](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html)] · [来源: [Rustdoc Book](https://doc.rust-lang.org/rustdoc/index.html)]

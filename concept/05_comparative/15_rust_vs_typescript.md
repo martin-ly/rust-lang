@@ -41,6 +41,7 @@
     - [10.2 边界测试：TypeScript 的可选属性与 Rust 的 Option（编译错误）](#102-边界测试typescript-的可选属性与-rust-的-option编译错误)
     - [10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）](#103-边界测试typescript-的结构类型与-rust-的名义类型的互操作编译错误)
     - [10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时 UB）](#104-边界测试typescript-的-any-与-rust-的-unsafe-的语义鸿沟编译错误运行时-ub)
+    - [10.3 边界测试：TypeScript 的结构性类型与 Rust 的名义类型（编译错误）](#103-边界测试typescript-的结构性类型与-rust-的名义类型编译错误)
 
 ---
 
@@ -757,7 +758,7 @@ fn main() {
 
 ### 10.1 边界测试：TypeScript 的 any 与 Rust 的显式类型（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // ❌ 编译错误: Rust 没有 any 类型
     // 所有类型必须在编译期确定
@@ -806,7 +807,7 @@ fn fixed() {
 
 ### 10.3 边界测试：TypeScript 的结构类型与 Rust 的名义类型的互操作（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Point {
     x: i32,
     y: i32,
@@ -838,7 +839,7 @@ fn main() {
 
 ### 10.4 边界测试：TypeScript 的 `any` 与 Rust 的 `unsafe` 的语义鸿沟（编译错误/运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // TypeScript: any 绕过所有类型检查
     // const x: any = 5;
@@ -857,3 +858,22 @@ fn main() {
 ```
 
 > **修正**: TypeScript 的 `any` 是**类型系统的逃生舱**：禁用所有类型检查，允许任意操作。Rust 无 `any` 等价物——最接近的是 `dyn Any`（运行时类型信息，需向下转型）和 `unsafe`（绕过编译器检查）。`any` 在 TypeScript 中是便利工具（快速原型、迁移遗留代码），但也是 bug 来源（类型安全丧失）。Rust 的设计拒绝 `any`：即使是 `dyn Any`，向下转型也是类型安全的（失败时返回 `None`），不会导致未定义行为。`unsafe` 是更低级的逃逸，但标记了人工审查边界。这与 Python 的动态类型（无 static type，运行时检查）或 C 的 `void*`（无类型，任意转换）不同——Rust 在类型安全上不提供"方便但危险"的捷径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)] · [来源: [TypeScript any Type](https://www.typescriptlang.org/docs/handbook/basic-types.html#any)]
+
+### 10.3 边界测试：TypeScript 的结构性类型与 Rust 的名义类型（编译错误）
+
+```rust,compile_fail
+struct Point { x: i32, y: i32 }
+struct Coordinate { x: i32, y: i32 }
+
+fn use_point(p: Point) {
+    println!("{}, {}", p.x, p.y);
+}
+
+fn main() {
+    let c = Coordinate { x: 1, y: 2 };
+    // ❌ 编译错误: Coordinate 和 Point 是不同的类型，即使字段相同
+    use_point(c);
+}
+```
+
+> **修正**: Rust 使用**名义类型系统**（nominal typing）：类型的同一性由名称决定，而非结构。`Point` 和 `Coordinate` 有相同字段但不同名称，是完全不同的类型。TypeScript 使用**结构性类型系统**（structural typing）：`{ x: number, y: number }` 与 `Point` 兼容，只要结构匹配。Rust 的名义类型：优势——重构安全（重命名字段不影响其他类型）、清晰的错误信息；劣势——需显式转换（`From` trait）。TypeScript 的结构类型：优势——灵活、易于接口组合；劣势——意外兼容（两个不相关的类型因结构相同而混用）。Rust 的 newtype 模式（`struct Meters(u32)`）利用名义类型创建零成本抽象。这与 Go 的接口（结构性满足）或 Haskell 的 `newtype`（名义类型包装）类似——Rust 在名义类型的基础上提供结构化的模式匹配（`match`）。

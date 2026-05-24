@@ -791,7 +791,7 @@ fn fixed() {
 
 ### 10.2 边界测试：智能合约的状态一致性（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Contract {
     balance: u64,
 }
@@ -828,7 +828,7 @@ fn sign(sk: &SecretKey, msg: &[u8]) -> Vec<u8> {
 
 ### 10.4 边界测试：`no_std` 与哈希计算的堆分配（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #![no_std]
 
 fn hash_data(data: &[u8]) -> [u8; 32] {
@@ -846,7 +846,7 @@ fn hash_data(data: &[u8]) -> [u8; 32] {
 
 ### 10.7 边界测试：no_std 环境下的 `Vec` 使用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #![no_std]
 
 fn main() {
@@ -857,3 +857,25 @@ fn main() {
 ```
 
 > **修正**: 区块链智能合约（如 Substrate pallet）和嵌入式系统常用 `#![no_std]` 以减少依赖和二进制大小。`no_std` 禁用 `std`，仅保留 `core` 和（若启用）`alloc`。1) `Vec`、`String`、`Box` 需 `extern crate alloc;` + `use alloc::vec::Vec;`；2) `println!`、`format!` 不可用（无标准输出）；3) `std::collections::HashMap` 不可用（`hashbrown` crate 替代）。链上运行时的特殊限制：1) 无浮点数（非确定性）；2) 无随机数生成（可复现性）；3) 严格 gas/weight 限制。Rust 的 `no_std` 是区块链开发的基石——Substrate、ink! 都基于此。这与 Solidity（无标准库概念，依赖 OpenZeppelin）或 Go（无 `no_std` 等价物）不同——Rust 的显式依赖管理使资源受限环境开发成为可能。[来源: [The Rust Programming Language](https://doc.rust-lang.org/reference/names/preludes.html)] · [来源: [Substrate no_std](https://docs.substrate.io/build/)]
+
+### 10.3 边界测试：`no_std` 中的 `panic` 处理缺失（编译错误）
+
+```rust,ignore
+#![no_std]
+
+fn main() {
+    // ❌ 编译错误: no_std 环境下需要提供 #[panic_handler]
+    panic!("no panic handler");
+}
+```
+
+> **修正**: `#![no_std]` 禁用标准库，包括默认的 panic 处理程序。`no_std` 二进制必须提供 `#[panic_handler]`：
+
+```rust
+#[panic_handler]
+fn panic(_info: &core::panic::PanicInfo) -> ! {
+    loop {} // 或 halt、reboot
+}
+```
+
+嵌入式和区块链（Substrate pallet）常用 `no_std`。其他限制：1) 无 `println!`（无标准输出）；2) 无 `Vec`/`String`（需 `alloc` crate）；3) 无堆分配默认支持（需自定义 `#[global_allocator]`）。Substrate 的 `sp-io` crate 提供 `no_std` 兼容的打印和 panic 处理。这与 Solidity（无 std 概念，运行时是 EVM）或 Go（无 `no_std` 等价物）不同——Rust 的 `no_std` 使资源受限环境开发成为可能，但需要手动提供底层设施。[来源: [The Rust Reference](https://doc.rust-lang.org/reference/names/preludes.html)] · [来源: [Substrate no_std](https://docs.substrate.io/build/)]

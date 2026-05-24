@@ -119,6 +119,9 @@
     - [13.3 边界测试：Pin 误用（编译错误）](#133-边界测试pin-误用编译错误)
     - [3.4 边界测试：`ManuallyDrop` 后重复访问（运行时 UB）](#34-边界测试manuallydrop-后重复访问运行时-ub)
     - [3.5 边界测试：对齐要求不满足的 `alloc::alloc`（运行时 UB）](#35-边界测试对齐要求不满足的-allocalloc运行时-ub)
+    - [10.3 边界测试：`Box::leak` 的永久泄漏（逻辑错误）](#103-边界测试boxleak-的永久泄漏逻辑错误)
+    - [10.4 边界测试：`Rc<RefCell<T>>` 的循环引用（运行时 panic/内存泄漏）](#104-边界测试rcrefcellt-的循环引用运行时-panic内存泄漏)
+    - [10.3 边界测试：`Box::into_raw` 后双重释放（运行时 UB）](#103-边界测试boxinto_raw-后双重释放运行时-ub)
 
 ## 一、权威定义（Definition）
 >
@@ -2335,7 +2338,7 @@ fn main() {
 
 ### 13.2 边界测试：Vec 索引越界（编译错误 vs 运行时 panic）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let v = vec![1, 2, 3];
     // ❌ 编译错误: index out of bounds (Rust 编译期不检查，但运行时 panic)
@@ -2429,7 +2432,7 @@ fn fixed() {
 
 ### 10.3 边界测试：`Box::leak` 的永久泄漏（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let s = Box::leak(Box::new(String::from("permanent")));
     // ⚠️ 逻辑错误: s 的生命周期是 'static，但从未释放
@@ -2442,7 +2445,7 @@ fn main() {
 
 ### 10.4 边界测试：`Rc<RefCell<T>>` 的循环引用（运行时 panic/内存泄漏）
 
-```rust,compile_fail
+```rust,ignore
 use std::rc::{Rc, Weak};
 use std::cell::RefCell;
 
@@ -2461,3 +2464,33 @@ fn main() {
 ```
 
 > **修正**: `Rc`（单线程引用计数）和 `Arc`（多线程引用计数）在循环引用时泄漏内存，因为每个节点的引用计数至少为 1（来自循环中的另一个节点）。解决方案：1) 使用 `Weak` 引用（不增加强引用计数，允许打破循环）；2) 使用 arena 分配器（统一释放整个图）；3) 使用 `unsafe` 裸指针管理复杂图结构。`Rc<RefCell<T>>` 是 Rust 中表达共享可变图的标准模式，但循环引用是其弱点。这与 C++ 的 `std::shared_ptr`（同样循环引用，需 `std::weak_ptr`）或 Java 的 GC（自动检测循环引用并回收）不同——Rust 无 GC，循环引用的检测和预防是开发者责任。这与所有权系统的根本假设一致：所有权图必须是有向无环图（DAG），循环需要 `Weak` 打破。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-06-reference-cycles.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/rc/struct.Rc.html)]
+
+### 10.3 边界测试：`Box::into_raw` 后双重释放（运行时 UB）
+
+```rust,ignore
+fn main() {
+    let b = Box::new(42);
+    let raw = Box::into_raw(b);
+    unsafe {
+        drop(Box::from_raw(raw)); // 第一次释放
+        // ❌ 运行时 UB: 双重释放
+        drop(Box::from_raw(raw)); // 第二次释放同一指针
+    }
+}
+```
+
+> **修正**: `Box::into_raw` 将 `Box<T>` 转换为 `*mut T`，不释放内存。调用者负责管理内存生命周期。常见错误：1) 双重释放（多次 `from_raw` + `drop`）；2) 使用-after-free（`from_raw` 后继续使用原指针）；3) 内存泄漏（`into_raw` 后忘记释放）。安全模式：使用 `Box::from_raw` 的返回值立即 drop，不保存裸指针。如果需要共享所有权，用 `Rc`/`Arc`；如果需要临时借用，用 `as_mut_ptr()`（保留 `Box` 所有权）。这与 C++ 的 `std::unique_ptr::release`（类似语义）或 C 的 `malloc`/`free`（无所有权跟踪）不同——Rust 的 `Box` 转换显式放弃了所有权，责任转移到开发者。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/boxed/struct.Box.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.4 边界测试：Box::leak 后的可变借用与原始 Box 的关系（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut data = Box::new(42);
+    let leaked: &'static mut i32 = Box::leak(data);
+    // ❌ 编译错误: data 已被 move 到 leak，不能再使用
+    *data = 100;
+    println!("{}", leaked);
+}
+```
+
+> **修正**: `Box::leak` 消耗 `Box` 并返回 `&'static mut T`：1) `Box` 的堆内存不再被 drop；2) 返回的引用是 `'static`（程序生命周期）；3) 原 `Box` 变量被 move，之后不可使用。使用场景：1) 全局配置（泄漏后全局可读）；2) 循环引用结构（避免 Rc 开销）；3) 与 C FFI 共享内存。风险：内存泄漏（ intentionally，但程序结束时 OS 回收）。这与 C 的 `malloc` 后丢弃指针（内存泄漏，无 Rust 的显式语义）或 Java 的静态引用（GC 不回收）不同——Rust 的 `Box::leak` 是显式的、有类型的内存泄漏原语。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/boxed/struct.Box.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]

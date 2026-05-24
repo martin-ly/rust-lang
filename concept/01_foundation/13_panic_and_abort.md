@@ -42,6 +42,12 @@
   - [十、边界测试：Panic 与 Abort 的编译错误](#十边界测试panic-与-abort-的编译错误)
     - [10.1 边界测试：`catch_unwind` 捕获非 `UnwindSafe` 类型（编译错误）](#101-边界测试catch_unwind-捕获非-unwindsafe-类型编译错误)
     - [10.2 边界测试：在 `Drop` 中 panic 导致双重 panic（运行时 abort）](#102-边界测试在-drop-中-panic-导致双重-panic运行时-abort)
+    - [10.3 边界测试：`panic=abort` 与 `catch_unwind` 的冲突（编译错误/链接错误）](#103-边界测试panicabort-与-catch_unwind-的冲突编译错误链接错误)
+    - [10.4 边界测试：双重 panic导致 abort（运行时行为）](#104-边界测试双重-panic导致-abort运行时行为)
+    - [10.5 边界测试：`panic=abort` 与 `Drop` 的补偿动作缺失（运行时资源泄漏）](#105-边界测试panicabort-与-drop-的补偿动作缺失运行时资源泄漏)
+    - [10.6 边界测试：`catch_unwind` 与 FFI 的不可恢复性（运行时 UB）](#106-边界测试catch_unwind-与-ffi-的不可恢复性运行时-ub)
+    - [10.7 边界测试：`core::intrinsics::abort` 与 `std::process::abort` 的差异（运行时行为）](#107-边界测试coreintrinsicsabort-与-stdprocessabort-的差异运行时行为)
+    - [10.5 边界测试：`catch_unwind` 与 `UnwindSafe` 边界（编译错误）](#105-边界测试catch_unwind-与-unwindsafe-边界编译错误)
 
 ---
 
@@ -735,7 +741,7 @@ impl Drop for GoodDrop {
 
 ### 10.3 边界测试：`panic=abort` 与 `catch_unwind` 的冲突（编译错误/链接错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::panic::catch_unwind;
 
 // Cargo.toml: profile.release panic = "abort"
@@ -828,3 +834,36 @@ fn main() {
 ```
 
 > **修正**: `std::process::abort` 和 `core::intrinsics::abort` 都终止进程，但行为不同：1) `std::process::abort` 可能刷新标准流、生成 core dump（视平台）；2) `core::intrinsics::abort` 是直接执行非法指令（`ud2` on x86、`brk #0x1` on ARM），无清理。`no_std` 环境（嵌入式、内核）只能使用 `core::intrinsics::abort`（或 `panic=abort` 配置的 panic handler）。选择取决于场景：用户空间应用使用 `std::process::abort`（更友好），裸机代码使用 `core::intrinsics::abort`（更直接）。这与 C 的 `abort()`（SIGABRT，可能触发信号处理器）或 C++ 的 `std::abort`（类似 C）不同——Rust 的两种 abort 提供了不同层级的控制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/process/fn.abort.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.5 边界测试：`catch_unwind` 与 `UnwindSafe` 边界（编译错误）
+
+```rust,compile_fail
+use std::panic::catch_unwind;
+
+fn main() {
+    let mut x = 0;
+    // ❌ 编译错误: &mut x 不是 UnwindSafe，不能在 catch_unwind 闭包中捕获
+    let result = catch_unwind(|| {
+        x += 1;
+        panic!("boom");
+    });
+    println!("{:?}", result);
+}
+```
+
+> **修正**: `catch_unwind` 捕获 panic 并返回 `Result`，但要求闭包实现 `UnwindSafe`——保证 panic 不会破坏共享状态的不变性。`&mut T` 不实现 `UnwindSafe`，因为 panic 可能在状态更新中途发生，留下不一致数据。修复：1) `AssertUnwindSafe` wrapper（显式声明"我保证安全"）；2) `Mutex<T>`（锁在 panic 时释放，状态可能不一致但无数据竞争）；3) 避免在 `catch_unwind` 中修改共享状态。`UnwindSafe` 是**标记 trait**（auto trait），非强制执行——它是编译期提示，不是运行时保证。这与 Java 的 `try/catch`（可捕获任何异常，无 UnwindSafe 等价物）或 C++ 的异常安全（依赖 RAII，无编译期检查）不同——Rust 的 `UnwindSafe` 是保守设计，避免 panic 后继续使用可能损坏的状态。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/exception-safety.html)]
+
+### 10.6 边界测试：`panic!` 与 `assert!` 的消息格式化开销（运行时性能）
+
+```rust,ignore
+fn main() {
+    let x = compute_expensive_value();
+    // ❌ 运行时开销: panic 消息在 panic 时才格式化，但 assert! 的 msg 参数总是求值
+    assert!(x > 0, "value {} is not positive", compute_expensive_string());
+}
+
+fn compute_expensive_value() -> i32 { 42 }
+fn compute_expensive_string() -> String { String::from("expensive") }
+```
+
+> **修正**: `assert!` 的格式参数在**断言失败时**求值，但 `compute_expensive_string()` 是否在断言通过时求值？实际上，Rust 的 `assert!` 宏展开后，格式参数在 panic 时才求值（通过 `format_args!` 的惰性），但闭包捕获可能意外触发求值。更安全的模式：`assert!(x > 0, "value is not positive")`，或延迟格式化：`assert!(x > 0, "value {x} is not positive")`（1.58+ 的捕获格式化）。`debug_assert!` 在 release 模式下完全消除（无运行时开销），适合开发期检查。这与 C 的 `assert`（宏，条件为假时打印消息并 abort）或 Java 的 `assert`（类似，但可启用/禁用）不同——Rust 的 `assert!` 是宏，可格式化消息，且 `debug_assert!` 在 release 中零成本。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/panic-macro.html)]

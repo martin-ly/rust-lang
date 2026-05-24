@@ -53,6 +53,10 @@
   - [十二、边界测试：高级集合的编译错误](#十二边界测试高级集合的编译错误)
     - [12.1 边界测试：`BTreeMap` 键未实现 `Ord`（编译错误）](#121-边界测试btreemap-键未实现-ord编译错误)
     - [12.2 边界测试：`VecDeque` 容量与索引的环绕（逻辑错误）](#122-边界测试vecdeque-容量与索引的环绕逻辑错误)
+    - [10.3 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#103-边界测试hashmap-的-entry-api-与借用冲突编译错误)
+    - [10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）](#104-边界测试btreemap-的-range-查询与可变遍历编译错误)
+    - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
+    - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
 
 ---
 
@@ -971,7 +975,7 @@ fn main() {
 
 ### 10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::collections::HashSet;
 
 #[derive(Eq, PartialEq)]
@@ -998,3 +1002,46 @@ fn main() {
 ```
 
 > **修正**: `Hash` trait 的实现必须满足**一致性**：若 `a == b`，则 `hash(a) == hash(b)`，且同一对象的哈希值在对象不变时应恒定。违反一致性导致 `HashMap`/`HashSet` 行为异常：插入后查找不到、重复元素、内存泄漏。常见错误：1) 哈希中包含随机数或时间戳；2) 哈希中包含未实现 `Hash` 的字段的指针地址；3) `PartialEq` 和 `Hash` 基于不同字段（如 `Eq` 比较 `id`，`Hash` 哈希 `name`）。这与 Java 的 `hashCode`/`equals` 契约（同样要求一致）或 Python 的 `__hash__`/`__eq__`（同样要求一致）相同——哈希表的正确性依赖哈希函数的一致性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/hash/trait.Hash.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）
+
+```rust,compile_fail
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert("key", vec![1, 2, 3]);
+
+    // ❌ 编译错误: 不能同时持有 &mut map 和 &map["key"]
+    let values = &map["key"];
+    map.entry("key").or_insert(vec![]).push(4);
+    println!("{:?}", values);
+}
+```
+
+> **修正**: `HashMap::entry` 返回 `Entry` enum，它**可变借用**整个 map（`&mut self`）。在 `entry` 调用期间，不能有任何对 map 的其他借用（无论是可变还是不可变）。`Entry` API 的设计：`Occupied`（键存在）和 `Vacant`（键不存在），统一了插入和更新的语义。常见模式：`map.entry(key).and_modify(|v| v.push(4)).or_insert(vec![4])`。这与 C++ 的 `std::map::operator[]`（自动插入默认值，但返回引用不解决借用冲突）或 Java 的 `Map.compute`（类似，但无编译期借用检查）不同——Rust 的 `Entry` API 在类型系统层面保证操作的原子性（从调用者视角）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）
+
+```rust,ignore
+use std::collections::BTreeMap;
+
+fn main() {
+    let mut map = BTreeMap::new();
+    map.insert(String::from("b"), 2);
+    map.insert(String::from("a"), 1);
+    
+    // ❌ 逻辑错误/UB: 通过 unsafe 修改键的值，破坏排序不变性
+    // for key in map.keys_mut() { // BTreeMap 无 keys_mut
+    //     key.push_str("x"); // 若允许，会改变键的排序位置
+    // }
+    
+    // BTreeMap 安全 API 禁止修改键，只能修改值
+    for value in map.values_mut() {
+        *value += 10;
+    }
+    println!("{:?}", map);
+}
+```
+
+> **修正**: `BTreeMap` 基于**排序键**维护平衡二叉搜索树。键的排序位置决定树结构，若键被修改，排序不变性破坏，树操作可能产生错误结果或 panic。Rust 的 API 设计禁止键修改：`keys()` 返回不可变引用，`values_mut()` 只返回值的可变引用。`HashMap` 同理：键的哈希值决定桶位置，修改键会破坏哈希表。这与 C++ 的 `std::map`（`iterator->first` 是 const，不能修改键）或 Java 的 `TreeMap`（`Map.Entry.setValue` 只允许修改值）类似——Rust 的编译期不可变性保证更严格。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

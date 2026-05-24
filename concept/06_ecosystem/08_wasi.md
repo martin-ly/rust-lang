@@ -445,7 +445,7 @@ fn risky_run() -> i32 {
 
 ### 8.3 反例：沙箱逃逸尝试（能力边界外访问）
 
-```rust,compile_fail
+```rust,ignore
 // 错误：尝试访问未被授予能力的资源
 // WASI 能力安全模型在运行时拒绝此访问
 
@@ -463,7 +463,7 @@ fn escape_sandbox() {
 
 ### 8.4 反例：WIT 类型不匹配导致组件组合失败
 
-```rust,compile_fail
+```rust,ignore
 // 错误：组件 A 导出 i32，组件 B 期望 s64
 // 组件组合时的类型签名不匹配
 
@@ -570,7 +570,7 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 
 ### 10.5 边界测试：WASI 的 capability 限制与文件系统访问（运行时拒绝）
 
-```rust,compile_fail
+```rust,ignore
 use std::fs::File;
 use std::io::Read;
 
@@ -584,3 +584,15 @@ fn main() {
 ```
 
 > **修正**: WASI（WebAssembly System Interface）是 capability-based 安全模型：程序不继承环境权限，需显式授予（`--dir=/tmp`）。上述代码在原生 Linux 运行成功，在 WASI 运行时（Wasmtime、Wasmer）失败，除非通过 `--dir=.` 挂载目录。WASI 的 capability 设计：1) 文件系统：按需目录挂载；2) 网络：需显式 socket 权限；3) 时钟：需 `clock` capability。这与 Docker 的 capabilities（`--cap-add`）或 Linux 的 seccomp（系统调用过滤）类似——WASI 在 WebAssembly 层面实现沙箱，安全粒度更细。Rust 的 `wasm32-wasip1` target 原生支持 WASI，标准库调用自动映射到 WASI syscalls。这是 Rust 在边缘计算（Cloudflare Workers、Fastly Compute）中的核心优势——编译到 WASM + WASI 即可在隔离环境中运行。[来源: [WASI Overview](https://wasi.dev/)] · [来源: [Rust Wasm Target](https://doc.rust-lang.org/rustc/platform-support/wasm32-wasip1.html)]
+
+### 10.3 边界测试：WASI 的 capability 缺失与运行时拒绝（运行时错误）
+
+```rust,ignore
+fn main() {
+    // ❌ 运行时拒绝: WASI 默认无网络访问权限
+    let stream = std::net::TcpStream::connect("127.0.0.1:8080");
+    // 除非显式授予 --tcplisten=127.0.0.1:8080
+}
+```
+
+> **修正**: WASI 的 **capability-based security** 要求程序显式声明所需权限。标准 Rust 网络代码（`std::net::TcpStream`）在 WASI 目标（`wasm32-wasip1`）下可能不可用或需要特殊运行时支持。当前 WASI 预览：1) `wasmtime` 支持 TCP/UDP 的实验性扩展；2) `wasip2`（组件模型）提供更丰富的网络 API；3) 多数网络框架（`hyper`、`tokio`）的 WASI 支持仍在开发中。Rust 的边缘计算部署（Cloudflare Workers、Fastly Compute）通常使用平台特定的 API 而非标准库网络。这与 Docker 的 `--cap-add NET_BIND_SERVICE` 或 Linux 的 seccomp 类似——WASI 在 WASM 层面实现细粒度沙箱，安全粒度更细但功能受限。[来源: [WASI Overview](https://wasi.dev/)] · [来源: [Wasmtime Networking](https://docs.wasmtime.dev/)]

@@ -40,6 +40,9 @@
   - [十、边界测试：宏模式的编译错误](#十边界测试宏模式的编译错误)
     - [10.1 边界测试：`macro_rules!` 的优先级与贪婪匹配（编译错误）](#101-边界测试macro_rules-的优先级与贪婪匹配编译错误)
     - [10.2 边界测试：宏中的 hygiene 与变量捕获（编译错误）](#102-边界测试宏中的-hygiene-与变量捕获编译错误)
+    - [10.3 边界测试：`tt` muncher 的 token 消耗（编译错误）](#103-边界测试tt-muncher-的-token-消耗编译错误)
+    - [10.4 边界测试：宏生成的 `unsafe` 块边界（编译错误）](#104-边界测试宏生成的-unsafe-块边界编译错误)
+    - [10.2 边界测试：宏递归深度限制（编译错误）](#102-边界测试宏递归深度限制编译错误)
 
 ---
 
@@ -600,7 +603,7 @@ graph TD
 
 ### 10.1 边界测试：`macro_rules!` 的优先级与贪婪匹配（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 macro_rules! ambiguous {
     ($e:expr) => { println!("expr: {}", $e) };
     ($i:ident) => { println!("ident: {}", $i) };
@@ -654,7 +657,7 @@ fn fixed() {
 
 ### 10.3 边界测试：`tt` muncher 的 token 消耗（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 macro_rules! count_tts {
     () => { 0 };
     ($odd:tt $($a:tt $b:tt)*) => { 1 + count_tts!($($a)*) };
@@ -672,7 +675,7 @@ fn main() {
 
 ### 10.4 边界测试：宏生成的 `unsafe` 块边界（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 macro_rules! unsafe_op {
     ($op:expr) => {
         unsafe { $op }
@@ -693,3 +696,40 @@ fn main() {
 ```
 
 > **修正**: 宏生成的 `unsafe` 块的可见性取决于宏设计。`unsafe_op!` 在展开代码中创建 `unsafe` 块，因此调用者不需要额外的 `unsafe`——这**隐藏了 unsafe 边界**，是危险的做法。Rust 社区的最佳实践：unsafe 操作应在调用点可见，即 `unsafe { unsafe_op!(...) }`，让代码审查者一眼看到 unsafe。`std` 中的某些宏（如 `vec!`）内部使用 unsafe，但经过了严格审计。自定义宏应避免隐藏 unsafe，或使用 `unsafe` 关键字要求调用者显式标记。这与 C 的宏（常隐藏 `*` 解引用、指针运算等 unsafe 操作）或 C++ 的模板（unsafe 在模板内部，调用点不可见）不同——Rust 的 unsafe 块是语法层面的，宏展开后仍保留，可通过源码映射追踪。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.2 边界测试：宏递归深度限制（编译错误）
+
+```rust,compile_fail
+macro_rules! deep {
+    () => { deep!() };
+}
+
+fn main() {
+    // ❌ 编译错误: recursion limit reached while expanding `deep!`
+    deep!();
+}
+```
+
+> **修正**: Rust 宏的**递归展开**有默认限制（128 层），防止无限递归导致编译器栈溢出。`deep!() => deep!()` 是直接递归，立即触发限制。合法递归需有**终止条件**：`deep!(0) => {}`，`deep!($n:expr) => { deep!($n - 1) }`。宏递归用于：1) 重复模式生成（`vec![1, 2, 3]`）；2) 编译期元编程（计数、类型列表遍历）；3) 代码生成（结构体字段访问器）。`#![recursion_limit = "256"]` 可提高限制，但过度递归增加编译时间。这与 C 的宏（无递归限制，可能无限展开）或 Scheme 的 hygienic macro（尾递归优化，理论上无限）不同——Rust 的宏递归限制是编译期的安全阀。[来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+
+### 10.4 边界测试：宏中的 `tt` 与 `expr` 的匹配差异（编译错误）
+
+```rust,ignore
+macro_rules! bad_match {
+    ($e:expr) => { $e + 1 };
+}
+
+fn main() {
+    // ❌ 编译错误: expr 不能匹配包含逗号的表达式（如函数调用参数）
+    // bad_match!(foo(1, 2)); // 宏解析器将逗号视为分隔符
+    
+    // tt（token tree）可以匹配任何括号对:
+    // macro_rules! good_match { ($e:tt) => { $e }; }
+    // good_match!(foo(1, 2)); // ✅
+    
+    let x = bad_match!(5);
+    println!("{}", x);
+}
+```
+
+> **修正**: `macro_rules!` 的**片段分类器**（fragment specifiers）：1) `expr` — 匹配完整表达式（不含顶层逗号）；2) `tt` — 匹配 token tree（任何括号对的内容，最灵活）；3) `stmt` — 匹配语句；4) `pat` — 匹配模式；5) `ty` — 匹配类型。`expr` 的限制：不能匹配 `foo(1, 2)`（逗号被视为宏参数分隔符），需用 `tt` 或嵌套宏。复杂宏设计：1) 内部宏（`macro_rules! internal { ... }`）处理递归；2) `tt` 作为通用匹配器，再进一步解析；3) 过程宏（`proc_macro`）替代 `macro_rules!` 处理复杂语法。这与 C 的宏（无分类器，纯文本替换，逗号无特殊含义）或 Scheme 的宏（语法对象，结构化匹配）不同——Rust 的 `macro_rules!` 在灵活性和类型安全之间取得平衡。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]

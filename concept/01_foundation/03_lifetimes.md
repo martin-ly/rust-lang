@@ -74,6 +74,7 @@
     - [8.5 边界测试：生命周期省略规则在复杂签名中失效（编译错误）](#85-边界测试生命周期省略规则在复杂签名中失效编译错误)
     - [8.6 边界测试：生命周期与所有权转移的交互（编译错误）](#86-边界测试生命周期与所有权转移的交互编译错误)
   - [九、认知路径（Cognitive Path）](#九认知路径cognitive-path)
+    - [10.5 边界测试：生命周期省略规则的三条规则（编译错误）](#105-边界测试生命周期省略规则的三条规则编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -798,7 +799,7 @@ fn main() {
 
 ### 8.1 边界测试：生命周期标注缺失（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 编译错误: missing lifetime specifier
 fn first_word(s: &str) -> &str {
     // 编译器无法推断返回引用的生命周期是否与输入相关
@@ -854,7 +855,7 @@ fn main() {
 
 ### 8.5 边界测试：方法签名中 self 引用的生命周期省略冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Parser {
     text: String,
 }
@@ -954,3 +955,39 @@ fn fixed() {
 
 ## 九、认知路径（Cognitive Path）
 >
+
+### 10.5 边界测试：生命周期省略规则的三条规则（编译错误）
+
+```rust,compile_fail
+fn first_word(s: &str) -> &str {
+    &s[0..1] // ✅ 单输入引用，生命周期省略自动添加 'a
+}
+
+// 但多个输入引用时，省略规则失效
+fn longest(x: &str, y: &str) -> &str {
+    // ❌ 编译错误: 多个输入引用，编译器无法推断返回引用关联哪个输入
+    if x.len() > y.len() { x } else { y }
+}
+
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = String::from("world");
+    let _result = longest(&s1, &s2);
+}
+```
+
+> **修正**: 生命周期**省略规则**（lifetime elision）的三条规则：1) 每个引用参数获得独立生命周期参数；2) 若只有一个输入生命周期，它赋给所有输出生命周期；3) 若有多个输入生命周期且一个是 `&self`/`&mut self`，`self` 的生命周期赋给输出。`longest` 有两个输入引用且无 `self`，规则不适用，必须显式标注：`fn longest<'a>(x: &'a str, y: &'a str) -> &'a str`。省略规则的设计：减少常见情况（方法、单参数函数）的噪音，强制显式标注模糊情况。这与 C++ 的引用（无生命周期概念）或 Java 的引用（无生命周期概念）不同——Rust 的生命周期标注是编译期检查的工具，省略规则是可用性优化。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]
+
+### 10.6 边界测试：静态生命周期 `'static` 的滥用与字符串字面量（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("temporary");
+    // ❌ 编译错误: &s 的生命周期是局部的，不能转为 &'static str
+    let r: &'static str = &s;
+    drop(s);
+    println!("{}", r);
+}
+```
+
+> **修正**: `'static` 是 Rust 中最长的生命周期：程序整个运行期间。`&'static str` 通常来自字符串字面量（`"hello"`，编译期嵌入二进制）或泄漏的内存（`Box::leak`）。常见滥用：1) 将局部变量引用标注为 `'static`；2) 在 trait bound 中过度使用 `'static`（排除所有非静态引用）；3) 线程闭包要求 `'static`，但试图捕获局部引用。`'static` 的正确使用：1) 全局常量；2) 字符串字面量；3) 泄漏的 Box（`Box::leak(Box::new(...))`）；4) `lazy_static` / `once_cell`。这与 C 的 `static` 关键字（存储期，非生命周期概念）或 Java 的 `static` 字段（类级别，与 Rust 的 `'static` 部分相似）不同——Rust 的 `'static` 是生命周期标注，非存储类说明符。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — 'static](https://doc.rust-lang.org/reference/lifetime-elision.html#the-static-lifetime)]

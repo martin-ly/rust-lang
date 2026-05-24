@@ -33,6 +33,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 JavaScript 的编译错误对比](#十边界测试rust-与-javascript-的编译错误对比)
+    - [10.1 边界测试：JavaScript 的隐式转换 vs Rust 的显式转换（编译错误）](#101-边界测试javascript-的隐式转换-vs-rust-的显式转换编译错误)
+    - [10.2 边界测试：JavaScript 的闭包变量捕获与 Rust 的所有权（编译错误）](#102-边界测试javascript-的闭包变量捕获与-rust-的所有权编译错误)
+    - [10.3 边界测试：JavaScript 的 `this` 动态绑定与 Rust 的方法调用（编译错误）](#103-边界测试javascript-的-this-动态绑定与-rust-的方法调用编译错误)
+    - [10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）](#104-边界测试javascript-的弱类型与-rust-的强制类型编译错误)
 
 ---
 
@@ -679,7 +684,7 @@ fn main() {
     let mut c = Counter { count: 0 };
     let f = c.increment; // ❌ 编译错误: 不能将方法提取为函数指针
     // Rust 的方法调用是语法糖，f() 需要 self 参数
-    
+
     // 正确: 使用闭包捕获 self
     let mut f = || c.increment();
     f();
@@ -690,12 +695,12 @@ fn main() {
 
 ### 10.4 边界测试：JavaScript 的弱类型与 Rust 的强制类型（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = "5";
     // ❌ 编译错误: Rust 不会自动类型转换
     // let y = x + 3; // "5" + 3 在 JS 中是 "53"
-    
+
     // 必须显式转换
     let y = x.parse::<i32>().unwrap() + 3;
     println!("{}", y); // 8

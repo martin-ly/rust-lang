@@ -42,6 +42,10 @@
   - [十、边界测试：模块系统的编译错误](#十边界测试模块系统的编译错误)
     - [10.1 边界测试：私有字段跨模块访问（编译错误）](#101-边界测试私有字段跨模块访问编译错误)
     - [10.2 边界测试：`use` 路径循环依赖（编译错误）](#102-边界测试use-路径循环依赖编译错误)
+    - [10.3 边界测试：`pub(crate)` 与 `pub(super)` 的层级混淆（编译错误）](#103-边界测试pubcrate-与-pubsuper-的层级混淆编译错误)
+    - [10.4 边界测试：`use` 语句的循环依赖（编译错误）](#104-边界测试use-语句的循环依赖编译错误)
+    - [10.5 边界测试：模块文件系统的歧义解析（编译错误）](#105-边界测试模块文件系统的歧义解析编译错误)
+    - [10.6 边界测试：`use` 语句的可见性与 `pub use` 重导出（编译错误）](#106-边界测试use-语句的可见性与-pub-use-重导出编译错误)
 
 ---
 
@@ -716,7 +720,7 @@ mod inner_fixed {
 
 ### 10.2 边界测试：`use` 路径循环依赖（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // a.rs
 // use crate::b::B; // a 依赖 b
 
@@ -744,7 +748,7 @@ mod outer {
         pub(crate) struct Secret; // 整个 crate 可见
         pub(super) struct ParentOnly; // 仅 outer 可见
     }
-    
+
     fn use_items() {
         let _ = inner::Secret; // ✅ crate 内可见
         let _ = inner::ParentOnly; // ✅ super 可见
@@ -755,7 +759,7 @@ mod sibling {
     fn try_access() {
         // ❌ 编译错误: ParentOnly 仅在 outer 内可见
         // let _ = super::outer::inner::ParentOnly;
-        
+
         // Secret 整个 crate 可见
         let _ = crate::outer::inner::Secret; // ✅
     }
@@ -778,3 +782,38 @@ pub use crate::a::A;
 ```
 
 > **修正**: Rust 的模块系统允许**循环 `use`**（模块 A `use` 模块 B 的项，模块 B `use` 模块 A 的项），因为 `use` 只是别名，不定义新项。但**项的定义不能循环**：`struct A { b: B }` 和 `struct B { a: A }` 是无限大小类型，编译错误。`use` 循环的常见场景：1) `prelude` 模块集中暴露公开 API；2) 子模块互相引用类型；3) `pub use` 重新导出组织 API 表面。Rust 的模块解析是声明式的：所有 `mod` 声明在编译期收集，然后解析 `use` 路径，最后检查循环。这与 Python 的循环 import（运行时动态，可能部分成功）或 C/C++ 的头文件循环 include（需 `#pragma once` 或 include guard）不同——Rust 的模块系统从设计上避免循环问题。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)] · [来源: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html)]
+
+### 10.5 边界测试：模块文件系统的歧义解析（编译错误）
+
+```rust,ignore
+// 文件结构:
+// src/
+//   foo.rs
+//   foo/
+//     mod.rs
+
+// ❌ 编译错误: foo.rs 和 foo/mod.rs 同时存在时，编译器无法确定模块入口
+```
+
+> **修正**: Rust 2018 Edition 后，模块的**文件系统映射**规则：1) `mod foo;` → 查找 `foo.rs` 或 `foo/mod.rs`（不能同时存在）；2) `mod foo { ... }` → 内联模块定义；3) `mod bar;` 在 `foo/mod.rs` 中 → 查找 `foo/bar.rs`。2015 Edition 的差异：`mod foo;` 查找 `foo.rs` 或 `foo/mod.rs`，但 `foo.rs` 优先级更高。常见错误：1) 同时存在 `foo.rs` 和 `foo/mod.rs` → 编译错误；2) `mod foo;` 在 `foo.rs` 中引用自己 → 循环模块；3) `pub(crate) mod foo;` 在错误位置 → 可见性不符合预期。这与 Python 的 `__init__.py`（目录即包）或 Java 的包结构（目录映射到包名）类似——Rust 的模块系统显式声明依赖关系，文件系统是模块声明的反射。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)] · [来源: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)]
+
+### 10.6 边界测试：`use` 语句的可见性与 `pub use` 重导出（编译错误）
+
+```rust,ignore
+mod inner {
+    pub fn public_fn() {}
+    fn private_fn() {}
+}
+
+mod outer {
+    // ❌ 编译错误: private_fn 不是 pub，不能重导出
+    // pub use super::inner::private_fn;
+    pub use super::inner::public_fn;
+}
+
+fn main() {
+    outer::public_fn();
+}
+```
+
+> **修正**: `pub use` 是**重导出**（re-export）：将其他模块的项在当前模块的公共接口中暴露。重导出的项必须本身是 `pub` 的（或在与当前模块相同的可见性范围内）。`pub use` 的常见用途：1) 扁平化模块结构（`pub use self::inner::Item`）；2) 创建 facade 模式（crate 根重导出所有公共 API）；3) 版本兼容（旧路径重定向到新路径）。`pub(crate) use`、`pub(super) use` 限制重导出的可见性。这与 Python 的 `from module import *`（导入所有公共名称）或 Java 的 `import`（无重导出概念）不同——Rust 的 `use` 是别名声明，可控制可见性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html)] · [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]

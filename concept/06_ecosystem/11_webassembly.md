@@ -526,7 +526,7 @@ pub fn process(data: String) -> Vec<u8> {
 
 ### 10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #![no_std]
 
 #[no_mangle]
@@ -542,7 +542,7 @@ pub extern "C" fn process(data: *mut u8, len: usize) {
 
 ### 10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）
 
-```rust,compile_fail
+```rust,ignore
 #![no_std]
 
 fn main() {

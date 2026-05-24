@@ -1610,3 +1610,21 @@ struct MyStruct {
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+### 边界测试：`Send` 与 `Sync` 的自动推导边界（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::thread;
+
+fn main() {
+    let data = Rc::new(42);
+    // ❌ 编译错误: Rc<i32> 未实现 Send，不能跨线程传递
+    let handle = thread::spawn(move || {
+        println!("{}", *data);
+    });
+    handle.join().unwrap();
+}
+```
+
+> **修正**: `Rc<T>` 是**单线程引用计数**，内部使用非原子操作（`Cell<usize>`），故不实现 `Send` 和 `Sync`。跨线程共享引用计数需使用 `Arc<T>`（原子引用计数）。`Send` 和 `Sync` 是**自动推导 trait**：若 `T` 的所有字段都实现 `Send`/`Sync`，则 `T` 自动实现；若任一字段不实现，则 `T` 不实现。显式实现：1) `unsafe impl Send for MyType {}`（需保证线程安全）；2) `PhantomData<*const T>` 可取消自动实现（使类型 `!Send` / `!Sync`）。这与 C++ 的线程安全（无编译期检查，依赖文档和约定）或 Java 的引用（所有对象都可跨线程传递，同步由开发者管理）不同——Rust 的 `Send`/`Sync` 在编译期强制执行线程安全边界。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/marker/trait.Send.html)]

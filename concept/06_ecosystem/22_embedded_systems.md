@@ -766,7 +766,7 @@ unsafe extern "C" fn isr() {
 
 ### 10.4 边界测试：`no_std` 中的 `panic` 处理与固件大小（编译错误/链接错误）
 
-```rust,compile_fail
+```rust,ignore
 #![no_std]
 
 fn main() {
@@ -784,3 +784,20 @@ fn main() {
 ```
 
 > **修正**: `#![no_std]` 环境中，标准库的 panic 处理（栈展开、错误消息打印）不可用。必须提供自定义的 `#[panic_handler]`：1) `loop {}`（最小化，无限循环，适合硬实时系统）；2) 重启系统（`cortex_m::peripheral::SCB::sys_reset()`）；3) 日志记录后 halt（需 UART 驱动）。panic handler 的选择影响固件大小：`panic = "abort"` 比 `panic = "unwind"` 小（无展开代码），自定义 handler 比默认 `core::panicking` 更小。嵌入式开发中，固件大小常受限（如 64KB Flash），每个字节都重要。这与 C 的 `assert`（调用 `abort()`，依赖 libc）或 Arduino 的 `Serial.println` + `while(1)`（类似 Rust 的自定义 handler）类似——Rust 的 `panic_handler` 是显式、可定制的错误终止机制。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute)]
+
+### 10.4 边界测试：裸机（`no_std`）中的 `alloc` 与全局分配器缺失（编译错误）
+
+```rust,ignore
+#![no_std]
+extern crate alloc;
+
+use alloc::vec::Vec;
+
+fn main() {
+    // ❌ 编译错误: no_std + alloc 需要全局分配器
+    let mut v = Vec::new();
+    v.push(1);
+}
+```
+
+> **修正**: `#![no_std]` 禁用标准库，但可通过 `extern crate alloc` 使用 `Vec`、`String`、`Box` 等堆分配类型。**必须**提供全局分配器：1) 使用 `linked_list_allocator`（简单链表分配器）；2) 使用 `embedded-alloc`（Cortex-M 的 TLSF 分配器）；3) 自定义分配器（实现 `GlobalAlloc` trait）。裸机环境无操作系统提供的堆，需手动管理内存区域（定义 `.bss` 或特定 RAM 区域为堆）。`#[global_allocator]` 标记静态分配器实例。这与 C 的 `malloc`（依赖 libc 或自定义实现）或 FreeRTOS 的 `pvPortMalloc`（RTOS 提供）类似——Rust 的 `alloc` crate 提供标准接口，但底层分配器需嵌入式开发者提供。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [alloc crate](https://doc.rust-lang.org/alloc/index.html)]

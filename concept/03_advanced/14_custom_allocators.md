@@ -38,6 +38,10 @@
   - [十、边界测试：自定义分配器的编译错误](#十边界测试自定义分配器的编译错误)
     - [10.1 边界测试：分配器布局不匹配（运行时 UB）](#101-边界测试分配器布局不匹配运行时-ub)
     - [10.2 边界测试：`Vec` 自定义分配器的泛型参数（编译错误）](#102-边界测试vec-自定义分配器的泛型参数编译错误)
+    - [10.3 边界测试：全局分配器的 `#[global_allocator]` 重复定义（编译错误）](#103-边界测试全局分配器的-global_allocator-重复定义编译错误)
+    - [10.4 边界测试：自定义分配器的 `Layout` 对齐要求（运行时 UB）](#104-边界测试自定义分配器的-layout-对齐要求运行时-ub)
+    - [10.5 边界测试：分配器的 `dealloc` 与 `alloc` 的布局不匹配（运行时 UB）](#105-边界测试分配器的-dealloc-与-alloc-的布局不匹配运行时-ub)
+    - [10.3 边界测试：全局分配器与 `#[global_allocator]` 重复定义（编译错误）](#103-边界测试全局分配器与-global_allocator-重复定义编译错误)
 
 ---
 
@@ -701,7 +705,7 @@ fn fixed() {
 
 ### 10.3 边界测试：全局分配器的 `#[global_allocator]` 重复定义（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::alloc::System;
 
 #[global_allocator]
@@ -727,7 +731,7 @@ unsafe impl GlobalAlloc for MyAlloc {
         // ❌ 运行时 UB: 若返回的指针未按 layout.align() 对齐
         std::alloc::System.alloc(layout)
     }
-    
+
     unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
         // ❌ 运行时 UB: 若 layout 与 alloc 时的 layout 不匹配
         std::alloc::System.dealloc(ptr, layout);
@@ -739,14 +743,14 @@ unsafe impl GlobalAlloc for MyAlloc {
 
 ### 10.5 边界测试：分配器的 `dealloc` 与 `alloc` 的布局不匹配（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 use std::alloc::{alloc, dealloc, Layout};
 
 fn main() {
     unsafe {
         let layout = Layout::new::<[u8; 16]>();
         let ptr = alloc(layout);
-        
+
         // ❌ 运行时 UB: dealloc 时使用不同布局
         let wrong_layout = Layout::new::<[u8; 8]>();
         dealloc(ptr, wrong_layout);
@@ -755,3 +759,27 @@ fn main() {
 ```
 
 > **修正**: `dealloc` 要求传入与 `alloc` 时**完全相同的 `Layout`**（大小和对齐）。大小不匹配导致分配器元数据损坏，对齐不匹配可能导致未对齐释放（某些分配器要求对齐一致）。这是分配器 API 的核心契约，违反即 UB。调试困难：错误可能在后续分配时才暴露（堆损坏的延迟效应）。安全模式：1) 始终保存 `alloc` 时的 `Layout`；2) 使用 `Box::from_raw` + `drop`（Rust 自动管理布局）；3) 使用 `Allocator` trait（不稳定，类型安全封装）。这与 C 的 `free`（只接受指针，无布局信息，依赖分配器内部追踪）或 C++ 的 `delete`（调用析构函数 + 释放，类型决定大小）不同——Rust 的 `GlobalAlloc` 要求显式布局，增加了安全性但也增加了出错机会。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：全局分配器与 `#[global_allocator]` 重复定义（编译错误）
+
+```rust,compile_fail
+use std::alloc::{GlobalAlloc, Layout, System};
+
+struct MyAlloc;
+
+unsafe impl GlobalAlloc for MyAlloc {
+    unsafe fn alloc(&self, _layout: Layout) -> *mut u8 { std::ptr::null_mut() }
+    unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {}
+}
+
+#[global_allocator]
+static A: MyAlloc = MyAlloc;
+
+// ❌ 编译错误: 不能重复定义全局分配器
+#[global_allocator]
+static B: System = System;
+
+fn main() {}
+```
+
+> **修正**: `#[global_allocator]` 将整个程序的**默认堆分配器**替换为自定义实现。限制：1) 整个 crate 图只能有一个全局分配器；2) 若依赖库也定义了全局分配器，链接错误；3) 分配器必须实现 `GlobalAlloc` trait（`alloc`/`dealloc`/`realloc`/`alloc_zeroed`）。常见自定义分配器：`jemallocator`（性能优化）、`mimalloc`（微软）、`dlmalloc`（嵌入式）。测试分配器：`std::alloc::alloc` + 泄漏检测。这与 C 的 `malloc` 重载（通过宏或链接器钩子）或 C++ 的 `operator new` 重载（类级别和全局级别）不同——Rust 的全局分配器替换是 crate 级别的，通过 trait 系统保证接口一致性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]

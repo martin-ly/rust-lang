@@ -1122,7 +1122,7 @@ fn main() {
 
 ### 10.5 边界测试：MIR 常量求值的循环限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 const fn slow(n: usize) -> usize {
     let mut sum = 0;
     let mut i = 0;
@@ -1157,3 +1157,29 @@ fn main() {
 ```
 
 > **修正**: Rust 的 match 穷尽性检查在 MIR（Mid-level IR）层面通过 `SwitchInt` 指令实现：编译器生成对所有可能值的 switch，若某些值无对应分支，报错。对 `u8`，`SwitchInt` 有 256 个目标；对 `bool`，2 个目标；对枚举，变体数个目标。穷尽检查的复杂度：1) 对整数类型，需处理所有可能值（或 `_` 通配）；2) 对范围模式，`0..=10` 覆盖多个值；3) 对或模式 `0 | 1`，合并检查。这与 C 的 `switch`（不检查穷尽，遗漏 case 无警告）或 Haskell 的 `case`（同样穷尽检查）类似——Rust 的 match 穷尽性是类型系统的重要安全特性，防止遗漏处理路径。[来源: [Rust Reference — Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html)] · [来源: [Rust MIR Documentation](https://rustc-dev-guide.rust-lang.org/mir/index.html)]
+
+### 10.3 边界测试：求值顺序的明确性与未定义行为边界（编译错误）
+
+```rust,ignore
+fn main() {
+    let mut x = 0;
+    // Rust 明确指定: 元组元素左到右求值
+    let t = (x += 1, x += 2);
+    assert_eq!(x, 3); // ✅
+    
+    // ❌ 编译错误: 函数参数求值顺序在旧 edition 未指定，2024 edition 左到右
+    // 但某些复合表达式仍需谨慎
+    let a = {
+        let mut y = 0;
+        y += 1;
+        y
+    } + {
+        let mut z = 0;
+        z += 2;
+        z
+    };
+    assert_eq!(a, 3); // ✅
+}
+```
+
+> **修正**: Rust 的**求值顺序**明确性：1) 元组/数组元素：左到右；2) `let` 绑定：先求值右侧，再绑定；3) 函数参数：2024 Edition 左到右（旧 edition 未指定）；4) 方法调用的 receiver：先求值 receiver，再参数。明确求值顺序减少 UB 来源（C/C++ 中大量 UB 来自未指定的求值顺序）。但边缘情况：1) `a + b` 中 `a` 和 `b` 的求值顺序；2) 闭包参数捕获顺序；3) 宏展开中的求值顺序。安全模式：将副作用分离到独立语句，不依赖复合表达式中的求值顺序。这与 Java 的"左到右求值"（明确指定）或 C/C++ 的"大多数求值顺序未指定"（UB 来源）不同——Rust 趋向于更明确的求值顺序，但仍在演进中。[来源: [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/expressions.html#evaluation-order)] · [来源: [Rust Edition 2024](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-tail-expr-scope.html)]

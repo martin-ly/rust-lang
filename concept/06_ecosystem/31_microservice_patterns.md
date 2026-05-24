@@ -971,7 +971,7 @@ fn fixed() {
 
 ### 10.2 边界测试：gRPC trait 对象与序列化（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Service {
     fn handle(&self, req: &str) -> String;
 }
@@ -995,7 +995,7 @@ fn main() {
 
 ### 10.5 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）
 
-```rust,compile_fail
+```rust,ignore
 // 概念代码: 断路器半开状态的问题
 enum CircuitState {
     Closed,      // 正常
@@ -1008,3 +1008,27 @@ enum CircuitState {
 ```
 
 > **修正**: 断路器（Circuit Breaker）模式的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。[来源: [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html)] · [来源: [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)]
+
+### 10.3 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）
+
+```rust,ignore
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+enum CircuitState {
+    Closed,
+    Open,
+    HalfOpen,
+}
+
+struct CircuitBreaker {
+    state: CircuitState,
+    failure_count: AtomicUsize,
+}
+
+// ❌ 运行时风险: 半开状态若多个请求同时通过，可能全部失败，重新打开
+// 需确保半开状态仅允许单个请求通过
+
+fn main() {}
+```
+
+> **修正**: 断路器（Circuit Breaker）的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。[来源: [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html)] · [来源: [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)]

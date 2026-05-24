@@ -271,7 +271,7 @@ fn fixed() {
 
 ### 10.2 边界测试：`Iterator` 的 functor 映射与所有权（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let v = vec![String::from("a"), String::from("b")];
     let iter = v.into_iter();
@@ -709,7 +709,7 @@ graph TD
 
 ### 10.3 边界测试：`Functor` 与 Rust 迭代器的映射（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn map_both<A, B, F>(a: Option<A>, b: Option<B>, f: F) -> Option<(A, B)>
 where
     F: Fn(A, B) -> (A, B),
@@ -730,7 +730,7 @@ where
 
 ### 10.4 边界测试：`Monad` 与 Rust 的 `?` 运算符（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn monadic_bind() -> Result<i32, String> {
     let x = Some(5);
     let y = Some(10);

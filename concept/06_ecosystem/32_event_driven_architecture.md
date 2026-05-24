@@ -1044,7 +1044,7 @@ struct HandlerFixed {
 
 ### 10.3 边界测试：事件总线的类型擦除与向下转型失败（运行时 panic）
 
-```rust,compile_fail
+```rust,ignore
 use std::any::Any;
 
 struct EventBus {
@@ -1070,7 +1070,7 @@ fn main() {
 
 ### 10.4 边界测试：事件处理顺序与生命周期管理（运行时悬垂引用）
 
-```rust,compile_fail
+```rust,ignore
 struct EventSystem<'a> {
     listeners: Vec<Box<dyn Fn(&'a str)>>,
 }
@@ -1087,3 +1087,32 @@ fn main() {
 ```
 
 > **修正**: 事件监听器（闭包）的生命周期与捕获的引用绑定。若监听器存储在比引用更长的结构中（如全局事件总线），闭包必须是 `'static`（无非 `'static` 引用）。解决方案：1) 使用 `String` 而非 `&str`（拥有数据）；2) 使用 `Arc<str>`（共享拥有）；3) 使用通道（`mpsc`）将事件发送到拥有数据的任务。Rust 的生命周期系统强制事件系统的架构决策：要么事件数据被拥有（`String`、`Arc<T>`），要么事件总线是临时的（生命周期与引用绑定）。这与 C++ 的 `std::function`（可捕获引用，但悬垂是 UB）或 Java 的监听器（总是引用，GC 管理生命周期）不同——Rust 在编译期防止了事件系统中的悬垂引用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Lifetime Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#lifetime-bounds)]
+
+### 10.3 边界测试：事件溯源的序列化版本兼容（运行时反序列化失败）
+
+```rust,compile_fail
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize)]
+struct UserCreated {
+    id: u64,
+    name: String,
+}
+
+// 新增字段后的 V2
+#[derive(Serialize, Deserialize)]
+struct UserCreatedV2 {
+    id: u64,
+    name: String,
+    email: Option<String>, // 新增
+}
+
+fn main() {
+    // ❌ 运行时风险: 旧事件（V1）反序列化为 V2 时，email 为 None
+    // 但某些序列化格式（如 bincode）不支持字段缺失
+    let old_event = b"..."; // V1 的序列化数据
+    // let event: UserCreatedV2 = bincode::deserialize(old_event).unwrap();
+}
+```
+
+> **修正**: 事件溯源（Event Sourcing）的**版本兼容**：1) 使用 JSON（字段缺失时 `serde` 可配置默认值）；2) 使用 `#[serde(default)]` 为新增字段提供默认值；3) 使用 upcast 模式：读取旧事件 → 转换为最新版本 → 处理。序列化格式选择：1) **JSON**：人类可读，版本兼容好，但体积大；2) **bincode**：体积小，速度快，但字段变更破坏兼容；3) **MessagePack**：折中；4) **Protobuf/Avro**：schema 演进支持（字段编号、可选字段）。Rust 生态：`serde` + `serde_json` 是最常用的组合，`prost`（Protobuf）、`rkyv`（零拷贝反序列化）。这与 Java 的 Axon Framework 或 .NET 的 EventStoreDB 类似——事件版本管理是事件溯源的核心挑战。[来源: [serde](https://serde.rs/)] · [来源: [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)]

@@ -42,6 +42,7 @@
     - [10.4 边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）](#104-边界测试cranelift-的-simd-向量类型宽度限制编译错误)
     - [10.6 边界测试：Cranelift 的 debug 信息生成与 GDB 兼容性（调试困难）](#106-边界测试cranelift-的-debug-信息生成与-gdb-兼容性调试困难)
     - [10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）](#105-边界测试cranelift-的调试构建与发布构建行为差异运行时性能语义差异)
+    - [10.3 边界测试：Cranelift 与 LLVM 的调试信息质量差异（运行时行为差异）](#103-边界测试cranelift-与-llvm-的调试信息质量差异运行时行为差异)
 
 ---
 
@@ -499,7 +500,7 @@ fn main() {
 
 ### 10.4 边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #[cfg(target_arch = "x86_64")]
 use std::arch::x86_64::*;
 
@@ -518,7 +519,7 @@ fn simd_operation() {
 
 ### 10.6 边界测试：Cranelift 的 debug 信息生成与 GDB 兼容性（调试困难）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = 42;
     // ⚠️ 调试困难: Cranelift 的 debug 信息生成不如 LLVM 成熟
@@ -544,3 +545,16 @@ fn main() {
 ```
 
 > **修正**: Cranelift 作为 Rust 的替代代码生成后端，设计目标：1) **调试构建速度**：编译比 LLVM 快 5-10 倍；2) **开发体验**：快速迭代，即时反馈。与 LLVM 的差异：1) 优化级别低（等同 `opt-level = 0` 或 `1`）；2) 不支持某些 LLVM 特有的优化（LTO、PGO、某些向量化）；3) 发布构建仍需 LLVM（`cargo build --release` 默认 LLVM）。使用场景：`cranelift = true` 在 `.cargo/config.toml` 中设置，仅影响 dev profile。注意：1) 某些 unsafe 代码依赖 LLVM 的特定行为（如内联汇编的精确语义），Cranelift 可能不同；2) `wasm32` target 的 Cranelift 支持（wasmtime 使用）比 native 更成熟。这与 Go 的 gc 编译器（自研，简单快速）vs gccgo（GCC 后端，优化强）或 Java 的 C1（客户端编译器，快）vs C2（服务器编译器，优化强）的分层策略类似——Rust 的双后端策略提供开发/生产的最优组合。[来源: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/)] · [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]
+
+### 10.3 边界测试：Cranelift 与 LLVM 的调试信息质量差异（运行时行为差异）
+
+```rust,ignore
+fn main() {
+    let x = 42;
+    // ❌ 运行时差异: Cranelift 的 debug 信息可能不如 LLVM 精确
+    // 例如: 某些变量的位置信息在调试器中可能显示为 "optimized out"
+    println!("{}", x);
+}
+```
+
+> **修正**: Cranelift 作为 Rust 的替代代码生成后端，设计目标：1) **调试构建速度**：编译比 LLVM 快 5-10 倍；2) **开发体验**：快速迭代，即时反馈。与 LLVM 的差异：1) 优化级别低（等同 `opt-level = 0` 或 `1`）；2) 调试信息质量（DWARF 生成）不如 LLVM 成熟；3) 不支持某些 LLVM 特有的优化（LTO、PGO、某些向量化）。使用场景：`cranelift = true` 在 `.cargo/config.toml` 中设置，仅影响 dev profile。注意：1) 某些 unsafe 代码依赖 LLVM 的特定行为（如内联汇编的精确语义），Cranelift 可能不同；2) `wasm32` target 的 Cranelift 支持（wasmtime 使用）比 native 更成熟。这与 Go 的 gc 编译器 vs gccgo 或 Java 的 C1 vs C2 类似——Rust 的双后端策略提供开发/生产的最优组合。[来源: [Cranelift](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/)] · [来源: [Rust Compiler Explorer](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)]

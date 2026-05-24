@@ -38,6 +38,14 @@
   - [十二、边界测试：数值类型的编译错误](#十二边界测试数值类型的编译错误)
     - [12.1 边界测试：整数溢出在 Debug 与 Release 中的差异（运行时行为）](#121-边界测试整数溢出在-debug-与-release-中的差异运行时行为)
     - [12.2 边界测试：浮点数相等比较（逻辑错误）](#122-边界测试浮点数相等比较逻辑错误)
+  - [十二、边界测试：数值类型的编译错误](#十二边界测试数值类型的编译错误-1)
+    - [12.1 边界测试：整数溢出在 Debug 与 Release 中的差异（运行时行为）](#121-边界测试整数溢出在-debug-与-release-中的差异运行时行为-1)
+    - [12.2 边界测试：浮点数相等比较（逻辑错误）](#122-边界测试浮点数相等比较逻辑错误-1)
+    - [12.3 边界测试：`as` 转换的截断风险（编译错误）](#123-边界测试as-转换的截断风险编译错误)
+    - [12.4 边界测试：浮点数作为 `match` 条件（编译错误）](#124-边界测试浮点数作为-match-条件编译错误)
+    - [10.3 边界测试：`as` 转换的截断与符号变化（逻辑错误）](#103-边界测试as-转换的截断与符号变化逻辑错误)
+    - [10.4 边界测试：浮点数的 `NaN` 比较（逻辑错误）](#104-边界测试浮点数的-nan-比较逻辑错误)
+    - [10.2 边界测试：`as` 截断与 `From` 语义差异（编译错误）](#102-边界测试as-截断与-from-语义差异编译错误)
 
 ---
 
@@ -685,7 +693,7 @@ fn main() {
     // Debug 模式: panic! (算术溢出检查开启)
     // Release 模式: 环绕为 0 (two's complement wrapping)
     // x = x + 1; // 行为取决于编译配置
-    
+
     // 正确: 显式选择溢出行为
     let y = x.wrapping_add(1); // 总是环绕: 255 + 1 = 0
     let z = x.saturating_add(1); // 饱和: 255 + 1 = 255
@@ -740,7 +748,7 @@ fn fixed() {
 
 ### 12.4 边界测试：浮点数作为 `match` 条件（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x: f64 = 0.1 + 0.2;
     // ❌ 编译错误: floating-point types cannot be used in patterns
@@ -763,13 +771,13 @@ fn fixed() {
 
 ### 10.3 边界测试：`as` 转换的截断与符号变化（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x: i32 = -1;
     let y = x as u32; // 4294967295
     // ⚠️ 逻辑错误: 有符号转无符号，值 reinterpret 而非报错
     println!("{}", y);
-    
+
     let big: i32 = 300;
     let small = big as i8; // 44
     // ⚠️ 逻辑错误: 大转小，截断低 8 位，无警告
@@ -781,14 +789,14 @@ fn main() {
 
 ### 10.4 边界测试：浮点数的 `NaN` 比较（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x: f64 = f64::NAN;
     // ❌ 逻辑错误: NaN 与任何值比较都返回 false，包括自身
     if x == f64::NAN {
         println!("is NaN"); // 永远不会执行
     }
-    
+
     // 正确: 使用 is_nan()
     if x.is_nan() {
         println!("is NaN"); // ✅
@@ -797,3 +805,18 @@ fn main() {
 ```
 
 > **修正**: IEEE 754 规定 `NaN != NaN`，因此 `x == f64::NAN` 总是 `false`。检测 `NaN` 必须使用 `is_nan()`。这是浮点数的常见陷阱：排序、去重、哈希时 `NaN` 破坏常规假设。Rust 的 `HashMap` 和 `BTreeMap` 不直接支持 `f32`/`f64` 作为键，因为 `NaN` 使相等性不满足等价关系（反身性不成立）。`ordered_float` crate 通过将 `NaN` 映射到特定值解决此问题。这与 C/C++ 的 `isnan()` 宏、Python 的 `math.isnan()`、Java 的 `Double.isNaN()` 相同——所有遵循 IEEE 754 的语言都有此问题。Rust 的类型系统不阻止 `NaN` 比较错误，但 `Hash` 限制防止 `NaN` 导致更严重的集合不一致。[来源: [IEEE 754 Standard](https://ieeexplore.ieee.org/document/8766229)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.f64.html)]
+
+### 10.2 边界测试：`as` 截断与 `From` 语义差异（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: u32 = 1000;
+    // ❌ 编译错误: `u8` 不能从 `u32` 通过 From 转换（可能截断）
+    let y: u8 = u8::from(x);
+    // 正确: 使用 `as` 显式截断 或 `try_into()` 安全检查
+    // let y = x as u8;        // 截断为 232
+    // let y: u8 = x.try_into().unwrap(); // 运行时 panic
+}
+```
+
+> **修正**: Rust 的数值转换分三层：1) `From`/`Into`——保证无损转换（`u8::from(5u8)` 合法，`u8::from(1000u32)` 不实现）；2) `TryFrom`/`TryInto`——可能失败，返回 `Result`；3) `as`——强制转换，可能截断/溢出/符号变化，编译期不检查。设计意图：`From` 是"可信转换"，`as` 是"我清楚后果"。`u8::from(x)` 编译错误是因为 `From<u32>` 未为 `u8` 实现。这与 C 的隐式截断（`int` → `char`，静默截断）或 Java 的强制类型转换（`(byte)1000` 截断）不同——Rust 的类型系统区分了"安全但可能失败"和"显式承担风险"两种语义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.From.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]

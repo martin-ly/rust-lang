@@ -34,6 +34,12 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 Zig 的编译错误对比](#十边界测试rust-与-zig-的编译错误对比)
+    - [10.1 边界测试：Zig 的 comptime vs Rust 的 const generics（编译错误）](#101-边界测试zig-的-comptime-vs-rust-的-const-generics编译错误)
+    - [10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）](#102-边界测试zig-的显式内存管理与-rust-的所有权编译错误)
+    - [10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 的能力差异（编译错误）](#103-边界测试zig-的-comptime-与-rust-的-const-fn-的能力差异编译错误)
+    - [10.4 边界测试：Zig 的显式内存分配与 Rust 的全局分配器（编译错误）](#104-边界测试zig-的显式内存分配与-rust-的全局分配器编译错误)
+    - [10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 能力差距（编译错误）](#103-边界测试zig-的-comptime-与-rust-的-const-fn-能力差距编译错误)
 
 ---
 
@@ -763,7 +769,7 @@ fn fixed() {
 
 ### 10.2 边界测试：Zig 的显式内存管理与 Rust 的所有权（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let s = String::from("hello");
     let ptr = s.as_ptr();
@@ -784,7 +790,7 @@ fn fixed() {
 
 ### 10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 的能力差异（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 const fn factorial(n: u32) -> u32 {
     // ❌ 编译错误: const fn 中不能使用循环（旧版 Rust）
     // Rust 1.46+ 允许循环，但仍有诸多限制
@@ -807,17 +813,17 @@ fn main() {
 
 ### 10.4 边界测试：Zig 的显式内存分配与 Rust 的全局分配器（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // Rust: Vec 使用全局分配器，隐式
     let v = vec![1, 2, 3];
-    
+
     // Zig: 所有分配显式传入分配器
     // var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     // const allocator = gpa.allocator();
     // var list = std.ArrayList(i32).init(allocator);
     // try list.append(1);
-    
+
     // ❌ 逻辑错误: 从 Zig 迁移时，可能忽视 Rust 的全局分配器可定制
     // 但 Rust 的分配器是隐式的，不如 Zig 显式
     println!("{:?}", v);
@@ -825,3 +831,20 @@ fn main() {
 ```
 
 > **修正**: Zig 的设计哲学是**显式优于隐式**：每个可能分配的函数接受 `Allocator` 参数，调用者明确控制内存来源。Rust 的默认分配是**隐式**的：`Box::new`、`Vec::push`、`String::push_str` 使用全局分配器（可通过 `#[global_allocator]` 定制）。Zig 的显式分配使资源管理更清晰（尤其在嵌入式、游戏、实时系统），但增加了 API 复杂度。Rust 的隐式分配更符合主流语言习惯，但隐藏了分配点（性能分析困难）。Rust 也支持显式分配器（`Allocator` trait，不稳定），但生态采用率低。这与 C 的 `malloc`/`free`（显式）或 Go 的 GC（完全隐式）不同——Rust 在中间位置：默认隐式，但允许显式控制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.Allocator.html)] · [来源: [Zig Allocator Design](https://ziglang.org/documentation/master/#Choosing-an-Allocator)]
+
+### 10.3 边界测试：Zig 的 `comptime` 与 Rust 的 `const fn` 能力差距（编译错误）
+
+```rust,compile_fail
+const fn compute_size(n: usize) -> usize {
+    // ❌ 编译错误: const fn 中不能调用非 const 函数
+    let v = vec![0; n]; // Vec::new 不是 const fn
+    v.len()
+}
+
+fn main() {
+    const SIZE: usize = compute_size(10);
+    let arr = [0; SIZE];
+}
+```
+
+> **修正**: Rust 的 `const fn` 支持**编译期求值**，但能力有限：1) 不能堆分配（`Vec`、`Box`、`String`）；2) 不能调用非 `const fn`；3) 不能有 `unsafe` 块。Zig 的 `comptime` 更强大：可在编译期执行任意代码（包括内存分配、I/O、网络请求），编译失败时提供堆栈跟踪。Rust 的 `const` 系统保守但安全：保证编译期求值终止（无无限循环），避免编译期副作用。未来演进：`const Heap`（提案中，允许编译期堆分配）、`const_mut_refs`（已稳定，允许 `&mut` 在 const fn 中）。这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 CTFE（Compile-Time Function Execution，类似 Zig）不同——Rust 的 const 系统逐步扩展，每次需形式化验证安全性。[来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] · [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]

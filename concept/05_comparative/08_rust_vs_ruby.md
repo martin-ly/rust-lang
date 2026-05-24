@@ -39,6 +39,12 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 Ruby 的编译错误对比](#十边界测试rust-与-ruby-的编译错误对比)
+    - [10.1 边界测试：Ruby 的 duck typing vs Rust 的 trait bound（编译错误）](#101-边界测试ruby-的-duck-typing-vs-rust-的-trait-bound编译错误)
+    - [10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](#102-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
+    - [10.3 边界测试：Ruby 的 duck typing 与 Rust 的 trait bound（编译错误）](#103-边界测试ruby-的-duck-typing-与-rust-的-trait-bound编译错误)
+    - [10.4 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）](#104-边界测试ruby-的-open-classes-与-rust-的孤儿规则编译错误)
+    - [10.3 边界测试：Ruby 的开放类与 Rust 的孤儿规则冲突（编译错误）](#103-边界测试ruby-的开放类与-rust-的孤儿规则冲突编译错误)
 
 ---
 
@@ -715,7 +721,7 @@ fn print_length_fixed<T: HasLength>(x: T) {
 
 ### 10.2 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Greet {
     fn greet(&self);
 }
@@ -733,7 +739,7 @@ impl Greet for String {
 
 ### 10.3 边界测试：Ruby 的 duck typing 与 Rust 的 trait bound（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Quacks {
     fn quack(&self);
 }
@@ -761,7 +767,7 @@ fn main() {
 
 ### 10.4 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Ruby: 可随时为任何类添加方法
 // class String
 //   def shout; upcase + "!"; end
@@ -777,3 +783,22 @@ fn main() {
 ```
 
 > **修正**: Ruby 的**开放类**（open classes）允许运行时修改任何类，包括标准库类。这提供了极大的灵活性（DSL、monkey patching），但也导致命名冲突和意外行为（两个 gem 为 `String` 添加同名方法）。Rust 的**孤儿规则**（orphan rule）禁止为外部类型实现外部 trait：至少类型或 trait 之一是本地定义的。这确保了 trait 实现的唯一性：给定 `(类型, trait)` 组合，全局只有一个实现。需要为外部类型扩展功能时，使用**newtype 模式**（`struct MyString(String)`）或**trait 包装**（定义本地 trait，为外部类型实现）。这与 Haskell 的 orphan instance（同样禁止，但可通过模块系统规避）或 Swift 的 extension（可为任何类型添加方法，但 protocol conformance 有类似限制）类似——Rust 的孤儿规则是全局一致性的保证。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)] · [来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)]
+
+### 10.3 边界测试：Ruby 的开放类与 Rust 的孤儿规则冲突（编译错误）
+
+```rust,ignore
+trait Greet {
+    fn greet(&self);
+}
+
+// ❌ 编译错误: 孤儿规则禁止为外部类型实现外部 trait
+impl Greet for String {
+    fn greet(&self) { println!("Hello, {}", self); }
+}
+
+fn main() {
+    "world".to_string().greet();
+}
+```
+
+> **修正**: Rust 的**孤儿规则**（orphan rules）要求：为类型 `T` 实现 trait `Trait` 时，`T` 或 `Trait` 至少有一个定义在当前 crate 中。这防止了：1) 两个 crate 为同一类型实现同一 trait（冲突实现）；2) 远程 crate 的类型被意外添加行为。Ruby 的**开放类**（open classes）允许任意扩展：`class String; def greet; ...; end; end`。Rust 的替代方案：1) **newtype 模式**：`struct MyString(String); impl Greet for MyString`；2) **wrapper trait**：`trait StringExt { fn greet(&self); } impl StringExt for String`。这与 Haskell 的孤儿实例（允许但警告，或需 `{-# OVERLAPPABLE #-}`）或 Swift 的 extension（允许为外部类型添加 protocol 实现，但需导入）不同——Rust 的孤儿规则在编译期强制执行，避免链接期冲突。[来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]

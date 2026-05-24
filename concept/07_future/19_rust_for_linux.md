@@ -710,7 +710,7 @@ fn increment() {
 
 ### 10.3 边界测试：内核模块的 `no_std` 与 `alloc` 的谨慎使用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #![no_std]
 
 extern crate alloc;
@@ -746,3 +746,22 @@ fn buggy_function() {
 ```
 
 > **修正**: Linux 内核的锁类型与使用上下文严格绑定：1) **SpinLock**：忙等待，适用于短临界区、中断上下文、不可睡眠场景；2) **Mutex**：可睡眠，适用于长临界区、进程上下文；3) **RWSem**：读写锁，可睡眠。在持有 `SpinLock` 时睡眠是致命错误：当前 CPU 忙等待，调度器无法切换任务，若高优先级任务需同一锁，系统死锁。Rust 的 `rust-for-linux` 通过类型系统部分防止：`SpinLockGuard` 不实现 `Send`（不能跨线程/CPU），但无法静态检测睡眠操作——这需要更高级的效果系统（effect system）。这与用户空间的 `std::sync::Mutex`（总是可睡眠）或 `spin` crate 的 `Mutex`（用户态忙等待，无调度概念）不同——内核锁的上下文敏感性是底层编程的本质。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Locking](https://docs.kernel.org/kernel-hacking/locking.html)]
+
+### 10.3 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）
+
+```rust,ignore
+#![no_std]
+extern crate alloc;
+
+use alloc::vec::Vec;
+
+fn kernel_function() {
+    // ❌ 编译错误: 内核中 alloc 可能失败（OOM），需处理分配失败
+    let mut v = Vec::new();
+    v.push(1);
+}
+
+fn main() {}
+```
+
+> **修正**: Rust for Linux 项目将 Rust 引入 Linux 内核开发。内核环境的特殊限制：1) **无标准库**：`no_std` + 自定义 `alloc`；2) **分配可能失败**：内核 OOM 处理不同于用户空间，`Vec::push` 可能 panic（内核 panic 是致命的）；3) **无浮点数**：内核代码通常禁用浮点单元；4) **并发原语**：使用内核的 `spinlock_t`、`mutex_t` 而非 Rust 的 `std::sync::Mutex`。Rust 内核模块的优势：1) 内存安全（减少 CVE）；2) 零成本抽象（与 C 代码同等性能）；3) 现代类型系统（减少逻辑错误）。挑战：1) ABI 兼容性（与 C 内核代码互操作）；2) 编译时间（内核代码量大）；3) 社区接受度。这与 Linux 内核的 C 代码（40 年历史，大量遗留代码）或 Windows 内核的 Rust 实验（Microsoft 也在探索）不同——Rust for Linux 是操作系统内核现代化的前沿尝试。[来源: [Rust for Linux](https://rust-for-linux.com/)] · [来源: [Linux Kernel Documentation](https://docs.kernel.org/rust/)]

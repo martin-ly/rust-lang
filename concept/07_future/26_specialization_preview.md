@@ -47,6 +47,7 @@
     - [10.2 边界测试：`default` 方法与最终实现的冲突（编译错误）](#102-边界测试default-方法与最终实现的冲突编译错误)
     - [10.3 边界测试：特化与关联类型的冲突（编译错误）](#103-边界测试特化与关联类型的冲突编译错误)
     - [10.4 边界测试：特化的交互与 trait 一致性（编译错误）](#104-边界测试特化的交互与-trait-一致性编译错误)
+    - [10.3 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）](#103-边界测试特化specialization的-soundness-问题与编译错误编译错误)
 
 ---
 
@@ -695,3 +696,30 @@ fn main() {
 ```
 
 > **修正**: 特化实现之间的**交互**是类型系统的复杂点：`String` 和 `&str` 是不同的类型，各自特化合法。但 `String: Deref<Target=str>` 意味着 `&String` 可自动解引用为 `&str`，在方法调用 `s.run()` 中，编译器选择 `String` 的特化（直接匹配），而非 `&str` 的特化（需 Deref）。若添加 `impl Process for &String`，则方法解析更复杂。Rust 的方法解析规则：1) 直接匹配优先；2) 自动解引用（Deref）次之；3) 特化序决定最具体实现。这与 C++ 的 ADL（Argument Dependent Lookup，类似但无特化序）或 Scala 的 implicit resolution（更复杂的优先级规则）类似——Rust 的特化增加了方法解析的复杂度，但设计目标始终是"有唯一最具体实现"。[来源: [Rust RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：特化（specialization）的 soundness 问题与编译错误（编译错误）
+
+```rust,ignore
+#![feature(specialization)]
+
+trait Foo {
+    fn method(&self) -> &'static str;
+}
+
+impl<T> Foo for T {
+    default fn method(&self) -> &'static str { "generic" }
+}
+
+impl Foo for i32 {
+    fn method(&self) -> &'static str { "i32" }
+}
+
+// ❌ 编译错误: specialization 的 soundness 问题导致某些合法代码被拒绝
+// 或: 具体实现与 blanket impl 的冲突在复杂场景下编译器无法正确解析
+
+fn main() {
+    println!("{}", 42i32.method());
+}
+```
+
+> **修正**: **Specialization** 允许为特定类型提供 trait 的**特化实现**，覆盖 blanket impl（`impl<T> Trait for T`）。设计挑战：1) **Soundness**：特化不能破坏类型安全（如 `impl<T> Trait for T` 承诺的性质被 `impl Trait for Concrete` 违反）；2) **重叠规则**：编译器需确定哪个实现"更具体"；3) **关联类型**：特化时关联类型的确定性。当前状态：`specialization` 特性长期停滞（8+ 年），因 soundness 问题未解决。替代方案：1) `min_specialization`（限制性子集，部分 nightly 可用）；2) 类型级编程（`typenum`、`generic-array`）；3) 宏生成特定实现。这与 C++ 的模板特化（完全支持，但无类型安全保证）或 Haskell 的 overlapping instances（可控制重叠）不同——Rust 对 specialization 极其谨慎，宁可不实现也不牺牲 soundness。[来源: [Specialization RFC](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]

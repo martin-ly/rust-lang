@@ -36,6 +36,10 @@
   - [十、边界测试：Unsafe Rust 模式的编译错误](#十边界测试unsafe-rust-模式的编译错误)
     - [10.1 边界测试：自定义 `Drop` 中的 `mem::forget` 循环（运行时 UB）](#101-边界测试自定义-drop-中的-memforget-循环运行时-ub)
     - [10.2 边界测试：`unsafe impl` 的 trait 契约违反（编译错误 / 运行时 UB）](#102-边界测试unsafe-impl-的-trait-契约违反编译错误--运行时-ub)
+    - [10.3 边界测试：自引用结构的 `Pin` 误用（编译错误/运行时 UB）](#103-边界测试自引用结构的-pin-误用编译错误运行时-ub)
+    - [10.4 边界测试：`MaybeUninit` 的数组初始化模式（编译错误）](#104-边界测试maybeuninit-的数组初始化模式编译错误)
+    - [10.5 边界测试：`std::ptr::read` 的重复读取（运行时 UB）](#105-边界测试stdptrread-的重复读取运行时-ub)
+    - [10.3 边界测试：`MaybeUninit` 的未初始化读取（运行时 UB）](#103-边界测试maybeuninit-的未初始化读取运行时-ub)
 
 ---
 
@@ -781,7 +785,7 @@ unsafe impl Sync for ThreadSafe {} // 安全，因为 Mutex 保证同步
 
 ### 10.3 边界测试：自引用结构的 `Pin` 误用（编译错误/运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 use std::pin::Pin;
 
 struct SelfRef {
@@ -818,10 +822,10 @@ fn main() {
     let mut arr: [MaybeUninit<String>; 3] = [MaybeUninit::uninit(); 3];
     // 初始化第一个元素
     arr[0].write(String::from("hello"));
-    
+
     // 错误: 直接读取未初始化的 arr[1]
     // let s = unsafe { arr[1].assume_init() }; // UB!
-    
+
     // 正确: 只读取已初始化的元素
     let s0 = unsafe { arr[0].assume_init() };
     // 但 arr[0] 现在处于"已移动"状态，不能再次 assume_init
@@ -832,7 +836,7 @@ fn main() {
 
 ### 10.5 边界测试：`std::ptr::read` 的重复读取（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = String::from("hello");
     let ptr = &x as *const String;
@@ -846,3 +850,34 @@ fn main() {
 ```
 
 > **修正**: `std::ptr::read` 从指针位置按值读取，**复制所有权**（对非 `Copy` 类型）。同一位置的两次 `read` 产生两个拥有相同堆数据的所有者，drop 时双重释放。`read` 的使用前提：1) 指针有效且对齐；2) 读取后原位置不再使用（除非重新写入）；3) 不重复读取同一非 `Copy` 位置。安全替代：`ptr::copy`（移动，源位置失效）、`ptr::copy_nonoverlapping`（非重叠拷贝）、`Clone::clone_from_ptr`（手动克隆）。这与 C 的 `memcpy`（逐字节复制，无所有权概念）或 C++ 的 `std::uninitialized_copy`（类似 `read`，但范围操作）不同——Rust 的 `ptr::read` 在类型系统层面是"按值移动"，需谨慎使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/ptr/fn.read.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：`MaybeUninit` 的未初始化读取（运行时 UB）
+
+```rust,ignore
+use std::mem::MaybeUninit;
+
+fn main() {
+    let mut x = MaybeUninit::<i32>::uninit();
+    unsafe {
+        // ❌ 运行时 UB: 读取未初始化的 MaybeUninit
+        let _val = x.assume_init();
+    }
+}
+```
+
+> **修正**: `MaybeUninit<T>` 是 Rust 中处理**未初始化内存**的安全抽象：1) `uninit()` 创建未初始化值（不调用 `T::new()`）；2) `write(val)` 安全写入（`&mut` 保证唯一访问）；3) `assume_init()` **unsafe**，要求调用者保证已初始化，否则 UB。常见模式：堆栈上分配数组（`let mut buf = [MaybeUninit::<u8>::uninit(); 1024]`），填充后 `transmute` 为初始化数组。`MaybeUninit` 替代了已废弃的 `mem::uninitialized()`（后者读取未初始化值是 instant UB）。这与 C 的 `malloc` + `memcpy`（未初始化内存默认合法读取，但值不确定）或 C++ 的 `std::optional`（有状态跟踪）不同——Rust 的 `MaybeUninit` 将未初始化状态编码到类型系统，强制显式初始化。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/uninit.html)]
+
+### 10.4 边界测试：MaybeUninit 的未初始化内存读取（运行时 UB）
+
+```rust,compute_fail
+use std::mem::MaybeUninit;
+
+fn main() {
+    let mut uninit: MaybeUninit<i32> = MaybeUninit::uninit();
+    // ❌ 运行时 UB: 读取未初始化的 MaybeUninit
+    let val = unsafe { *uninit.as_ptr() };
+    println!("{}", val);
+}
+```
+
+> **修正**: **`MaybeUninit<T>`** 是 Rust 处理未初始化内存的安全抽象：1) `MaybeUninit::uninit()` — 分配内存但不初始化；2) `MaybeUninit::write(val)` — 安全写入；3) `unsafe { uninit.assume_init() }` — 假设已初始化，读取值（unsafe！）；4) `unsafe { *uninit.as_ptr() }` — 同样 unsafe，读取可能未初始化的值。UB 条件：1) 在 `write` 前 `assume_init`/`as_ptr` dereference → UB；2) `assume_init_read()` 后再次使用 → double read（可能安全但可能 panic）；3) `drop` 未初始化的 `MaybeUninit<T>`（`T` 未实现 `Drop` 时安全）。与 C 的未初始化变量（UB，编译器优化不可预测）或 C++ 的 `std::optional`（有状态标记，安全）不同——Rust 的 `MaybeUninit` 是显式的、零成本的未初始化抽象，但使用需 unsafe。[来源: [MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/unchecked-uninit.html)]

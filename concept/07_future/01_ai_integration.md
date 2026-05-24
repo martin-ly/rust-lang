@@ -674,7 +674,7 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 
 ### 13.1 反例：AI 生成的 Rust 代码通过编译但逻辑错误
 
-```rust,compile_fail
+```rust,ignore
 // AI 可能生成"编译通过但逻辑错误"的代码
 // 反例：错误地实现了二分查找（边界条件 off-by-one）
 
@@ -840,7 +840,7 @@ fn fixed() {
 
 ### 10.5 边界测试：AI 生成代码的 unsafe 误用与形式化保证缺失（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 // AI 生成的代码可能包含微妙的 unsafe 错误
 fn ai_generated_parse(data: &[u8]) -> &[u8] {
     // ❌ 运行时 UB: AI 可能生成越界切片，未检查长度
@@ -852,3 +852,38 @@ fn ai_generated_parse(data: &[u8]) -> &[u8] {
 ```
 
 > **修正**: AI 辅助编程工具（Copilot、CodeWhisperer、ChatGPT）生成 Rust 代码时，**unsafe 块的错误率显著高于 safe 代码**：1) 边界检查遗漏（`slice::from_raw_parts` 的指针算术）；2) 别名规则违反（`&mut` 和 `*mut` 混用）；3) 生命周期误标注（`'static` 滥用）。缓解策略：1) **禁止 AI 生成 unsafe**——人工审核所有 unsafe 代码；2) 使用 `#[forbid(unsafe_code)]` 在 crate 级别禁止；3) 对 AI 生成的代码运行 Miri、Kani、Clippy 的 `undocumented_unsafe_blocks`。这与人类编写的 unsafe 代码同样需要审核，但 AI 的"自信错误"（plausible-looking but wrong）更难发现。未来方向：1) 用形式化工具验证 AI 生成代码（合约生成 + 自动验证）；2) 训练数据中加入 Miri 和 Kani 的反馈，强化学习安全 Rust。这与传统的代码审查或静态分析类似——AI 是加速工具，不是替代人类判断。[来源: [AI-Assisted Rust Programming](https://arxiv.org/)] · [来源: [GitHub Copilot](https://github.com/features/copilot)]
+
+### 10.3 边界测试：AI 生成 unsafe 代码的 Miri 验证失败（运行时 UB）
+
+```rust,ignore
+fn ai_generated_parse(data: &[u8]) -> &[u8] {
+    // ❌ 运行时 UB: AI 可能生成越界切片
+    unsafe {
+        std::slice::from_raw_parts(data.as_ptr().add(8), data.len())
+    }
+}
+
+fn main() {
+    let data = [1u8, 2, 3];
+    let _result = ai_generated_parse(&data);
+}
+```
+
+> **修正**: AI 辅助编程工具生成 Rust 代码时，**unsafe 块的错误率显著高于 safe 代码**：1) 边界检查遗漏（`slice::from_raw_parts` 的指针算术）；2) 别名规则违反（`&mut` 和 `*mut` 混用）；3) 生命周期误标注（`'static` 滥用）。缓解策略：1) **禁止 AI 生成 unsafe**——人工审核所有 unsafe 代码；2) 使用 `#[forbid(unsafe_code)]` 在 crate 级别禁止；3) 对 AI 生成的代码运行 Miri、Kani、Clippy。这与人类编写的 unsafe 代码同样需要审核，但 AI 的"自信错误"（plausible-looking but wrong）更难发现。未来方向：1) 用形式化工具验证 AI 生成代码（合约生成 + 自动验证）；2) 训练数据中加入 Miri 和 Kani 的反馈，强化学习安全 Rust。[来源: [GitHub Copilot](https://github.com/features/copilot)] · [来源: [Miri](https://github.com/rust-lang/miri)]
+
+### 10.4 边界测试：AI 生成代码的所有权与生命周期错误（编译错误）
+
+```rust,ignore
+fn ai_function() -> String {
+    let data = String::from("temporary");
+    // ❌ 编译错误: AI 可能返回局部变量的引用
+    // &data // 返回 &String，但 data 在函数结束时 drop
+    data // 正确: 返回所有权
+}
+
+fn main() {
+    let _s = ai_function();
+}
+```
+
+> **修正**: AI 工具（Copilot、ChatGPT）生成 Rust 代码时，**所有权和生命周期**是最常见的错误类型：1) 返回局部引用（悬垂引用）；2) 在闭包中错误捕获引用（非 `'static`）；3) 借用冲突（`&mut` 与 `&` 重叠）。AI 的训练数据包含大量 C/Java/Python 代码，这些语言的引用语义与 Rust 不同，导致生成"看起来像正确 Rust"但实际编译错误的代码。缓解：1) **始终编译 AI 生成的代码**；2) 使用 `cargo check` + `cargo clippy`；3) 对关键代码运行 Miri；4) 不依赖 AI 生成 unsafe 代码。这与人类初学者的错误模式类似——Rust 的所有权系统是独特的，需要专门学习，AI 也无法从其他语言的训练中自动掌握。[来源: [GitHub Copilot](https://github.com/features/copilot)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

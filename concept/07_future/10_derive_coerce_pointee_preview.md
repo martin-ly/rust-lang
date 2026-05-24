@@ -469,3 +469,21 @@ fn main() {
 ```
 
 > **修正**: `CoercePointee` 不仅涉及类型 coercion（`String` → `str`），还涉及**生命周期 coercion**。`Ref<'a, T>` 的 `'a` 是引用的生命周期，`T` 的变化（`String` → `str`）需保持生命周期约束。`Ref<'short, String>` → `Ref<'long, str>` 要求 `'short: 'long`（短生命周期可 coerce 为长生命周期）。若生命周期不匹配，编译错误。这是 Rust 生命周期系统的常规行为，但 `CoercePointee` 增加了复杂度：coercion 现在同时涉及类型和生命周期两个维度。这与 `&'a String` → `&'a str` 的自动 coercion（Deref coercion）类似——`CoercePointee` 将这一能力扩展到自定义智能指针。[来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+
+### 10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）
+
+```rust,ignore
+// 概念代码: CoercePointee（提案中，1.83+ nightly）
+// #[derive(CoercePointee)]
+// #[repr(transparent)]
+// struct MyBox<T: ?Sized> {
+//     ptr: *const T,
+// }
+
+// ❌ 编译错误: CoercePointee 尚未稳定，需 nightly feature
+// 它允许 MyBox<T> 自动 coerce 为 MyBox<dyn Trait>，类似 Box<dyn Trait>
+
+fn main() {}
+```
+
+> **修正**: **`CoercePointee`** 是 Rust 智能指针生态的重要扩展：1) 允许自定义智能指针（如 `MyBox<T>`）自动转换为 trait object（`MyBox<dyn Trait>`）；2) 当前仅 `Box<T>`、`Rc<T>`、`Arc<T>` 支持此转换（编译器硬编码）；3) `CoercePointee` derive 将此能力扩展到用户定义类型。使用场景：1) 自定义 allocator 的智能指针；2) 领域特定指针类型（`GpuBuffer<T>`）；3) 与 `Pin` 结合的自定义指针。这与 C++ 的隐式转换（`std::shared_ptr<Derived>` → `std::shared_ptr<Base>` 自动）或 Swift 的引用类型（始终支持多态转换）不同——Rust 的 trait object 转换需显式支持，`CoercePointee` 是类型系统的扩展。[来源: [CoercePointee RFC](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] · [来源: [Rust Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]

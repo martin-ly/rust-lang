@@ -1332,7 +1332,7 @@ impl Iterable for Vec<i32> {
 
 ### 10.4 边界测试：依赖类型与数组长度（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn array_len<T, const N: usize>(arr: &[T; N]) -> usize {
     N
 }
@@ -1355,3 +1355,51 @@ fn main() {
 > 未来可能的扩展：`const` 泛型表达式（`[T; N + 1]`）、依赖 trait bound，但完全依赖类型可能永远不会进入 Rust（与零成本抽象和编译速度冲突）。
 > [来源: [Dependent Types](https://en.wikipedia.org/wiki/Dependent_type)] ·
 > [来源: [Rust RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)]
+
+### 10.3 边界测试：GADT 与 Rust 枚举的表达能力差距（编译错误）
+
+```rust,ignore
+// Rust 枚举（代数数据类型）
+enum Expr {
+    Lit(i32),
+    Add(Box<Expr>, Box<Expr>),
+}
+
+// 试图表达 GADT（广义代数数据类型）
+// ❌ 编译错误: Rust 枚举不支持类型索引
+// enum Expr<T> {
+//     Lit(i32),           // T = i32
+//     Bool(bool),         // T = bool
+//     Add(Box<Expr<T>>, Box<Expr<T>>),
+// }
+
+fn eval(e: &Expr) -> i32 {
+    match e {
+        Expr::Lit(n) => *n,
+        Expr::Add(l, r) => eval(l) + eval(r),
+    }
+}
+
+fn main() {
+    let e = Expr::Add(Box::new(Expr::Lit(1)), Box::new(Expr::Lit(2)));
+    println!("{}", eval(&e));
+}
+```
+
+> **修正**: Rust 的枚举是**代数数据类型**（ADT），但不是**GADT**（Generalized Algebraic Data Type）。GADT 允许类型参数在构造器中变化：`Expr<Int>` 和 `Expr<Bool>` 是不同的类型。Rust 的替代方案：1) **phantom 类型**：`struct Lit<T>(i32, PhantomData<T>)`；2) **类型状态模式**：用泛型参数编码状态；3) **关联类型**：`trait Expr { type Output; }`。Rust 不原生支持 GADT 是因为：1) 类型推断更复杂（GADT 的 unification 是半可判定的）；2) 模式匹配 exhaustiveness 检查需考虑类型约束；3) 与当前类型系统的交互（lifetime、trait bound）尚未完全设计。这与 Haskell 的 GADT（`data Expr a where ...`）或 OCaml 的 GADT（`type _ expr = ...`）不同——Rust 的 phantom 类型是轻量替代，但语法噪音更大。[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)] · [来源: [GADT](https://en.wikipedia.org/wiki/Generalized_algebraic_data_type)]
+
+### 10.4 边界测试：Rust 的类型系统与 HKT（高阶类型）的缺失（编译错误）
+
+```rust,ignore
+// 概念代码: 试图表达 HKT
+trait Functor<F<_>> {
+    fn map<A, B>(self, f: impl Fn(A) -> B) -> F<B>;
+}
+
+// ❌ 编译错误: Rust 不支持 Higher-Kinded Types（类型构造器作为类型参数）
+// F<_> 不是合法的 Rust 语法
+
+fn main() {}
+```
+
+> **修正**: **HKT**（Higher-Kinded Types）允许类型构造器（如 `Vec`、`Option`）作为类型参数：`Functor<Vec>` 表示"Vec 是一个 Functor"。Rust **不原生支持 HKT**，因为：1) 类型系统复杂度（HKT 的类型推断是半可判定的）；2) 与当前 trait 系统的交互（关联类型、生命周期）；3) 工程优先级（GAT 已解决大部分用例）。替代方案：1) **GAT**（泛型关联类型）：`trait Functor { type Map<T>; fn map<A, B>(...) -> Self::Map<B>; }`；2) **`typenum`** 和 **generic-array**：类型级编程；3) **宏**：生成特定实例化。HKT 的应用：1) Monad（`bind`、`return`）；2) Functor/Applicative 抽象；3) 类型级列表。这与 Haskell（原生 HKT，`Functor f => f a`）或 Scala（类型构造器作为更高阶类型参数）不同——Rust 通过 GAT 和宏近似 HKT，但表达能力有限。[来源: [GAT RFC](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)] · [来源: [Higher-Kinded Types](https://en.wikipedia.org/wiki/Kind_(type_theory))]

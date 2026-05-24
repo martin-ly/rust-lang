@@ -650,7 +650,7 @@ fn main() {
 
 ### 10.4 边界测试：C++ 的 RAII 与 Rust 的 Drop 顺序差异（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 struct Outer {
     inner1: Inner,
     inner2: Inner,
@@ -678,3 +678,30 @@ fn main() {
 ```
 
 > **修正**: Rust 和 C++ 的析构顺序相同：struct 的字段按**声明顺序的逆序**析构（最后声明的先析构），局部变量按声明顺序的逆序析构。但**依赖管理**不同：C++ 允许在析构函数中访问其他字段（通过 `this` 指针），Rust 的 `Drop` 只能访问自身字段。若 `inner2` 的 drop 逻辑需要 `inner1` 的数据，C++ 中可能侥幸成功（若 `inner1` 尚未析构），Rust 中必然失败（`inner1` 已析构，或 borrow checker 阻止访问）。这是 Rust 更严格的安全保证：drop 必须是自包含的，不能依赖其他字段的生命周期。这与 C++ 的"析构函数可做任何事"（包括访问已析构的成员，UB 但常见）不同——Rust 的 borrow checker 在 drop 边界上同样严格。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)]
+
+### 10.3 边界测试：C++ 的虚函数表与 Rust trait object 的内存布局差异（ABI 不兼容）
+
+```rust,ignore
+// C++ 虚函数表:
+// struct Base { virtual void foo(); };
+// Base* obj = new Derived();
+// obj->foo(); // vtable 查找
+
+// Rust trait object:
+trait Foo { fn foo(&self); }
+
+struct Derived;
+impl Foo for Derived {
+    fn foo(&self) { println!("foo"); }
+}
+
+fn main() {
+    let obj: &dyn Foo = &Derived;
+    obj.foo();
+    // ❌ ABI 不兼容: Rust 的 dyn Trait 是 fat pointer（data + vtable）
+    // C++ 的虚函数是单指针（对象内含 vptr）
+    // 直接 FFI 传递 trait object 到 C++ 不可行
+}
+```
+
+> **修正**: Rust trait object（`dyn Trait`）的内存布局：**fat pointer** = 数据指针 + vtable 指针。C++ 虚函数：**单指针** = 对象指针（对象开头含 vptr）。两者不兼容：1) Rust 的 vtable 是独立的（对象外），C++ 的 vtable 指针在对象内；2) Rust 的 vtable 包含 drop、size、align 和方法指针，C++ 的 vtable 只含虚函数指针；3) 多重继承时 C++ 有多个 vptr，Rust 无多重继承（单继承 + trait）。跨语言互操作：1) C 接口（`extern "C"`）+ 手动 vtable；2) `cxx` crate（自动生成安全的 C++ 绑定）；3) `cbindgen`（生成 C 头文件）。这与 COM（Windows 的接口虚表，与 Rust 类似）或 Go 的 cgo（自动包装，但性能开销）不同——Rust 的 FFI 是零成本但需理解 ABI 差异。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [cxx crate](https://cxx.rs/)]

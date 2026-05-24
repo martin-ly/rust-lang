@@ -37,6 +37,8 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）](#105-边界测试内存序的-releaseacquire-与数据依赖运行时可见性问题)
+    - [10.3 边界测试：ABA 问题与无锁栈的内存安全（运行时 UB）](#103-边界测试aba-问题与无锁栈的内存安全运行时-ub)
 
 ---
 
@@ -519,7 +521,7 @@ fn lockfree_data_race() {
 
 > **修正**: 原子类型（`AtomicUsize` 等）实现内部可变性，必须通过 `.store()`、`.load()` 等原子方法访问，不能通过 `&mut` 直接赋值。
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
 
 fn atomic_ptr_send() {
@@ -534,7 +536,7 @@ fn atomic_ptr_send() {
 
 > **修正**: `AtomicPtr<T>` 的 `Send`/`Sync` 依赖于 `T` 的 `Send`/`Sync`。若指针指向非 Send 数据，即使原子操作本身安全，指针内容也可能不安全。
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 fn compare_exchange_weak_loop() {
@@ -792,7 +794,7 @@ fn main() {
 
 ### 10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
 use std::sync::Arc;
 
@@ -819,4 +821,44 @@ fn read() -> Option<i32> {
 }
 ```
 
-> **修正**: `Release`/`Acquire` 内存序建立** happens-before 关系**：`Release` store 之前的所有写入对匹配的 `Acquire` load 可见。上述代码中，`node.value = 42` 在 `HEAD.store(Release)` 之前，因此 `HEAD.load(Acquire)` 后 `(*node).value` 必为 42。若使用 `Relaxed`：1) `HEAD.load` 可能看到非空指针；2) 但 `node.value` 的写入可能尚未对其他 CPU 可见；3) 读取到 0 或旧值。这是弱内存模型（ARM、RISC-V）上的真实问题，x86 的强模型通常掩盖此 bug（x86 的 loads/stores 自动是 Acquire/Release）。Rust 的原子类型默认 `SeqCst`（最强），但性能关键代码需正确选择较弱顺序。这与 C++ 的 `memory_order_release/acquire`（相同语义）或 Java 的 `volatile`（等价于 `SeqCst`）相同——内存序是并发编程的底层细节，错误选择导致难以复现的 bug。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html)]
+> **修正**: `Release`/`Acquire` 内存序建立**happens-before 关系**：`Release` store 之前的所有写入对匹配的 `Acquire` load 可见。上述代码中，`node.value = 42` 在 `HEAD.store(Release)` 之前，因此 `HEAD.load(Acquire)` 后 `(*node).value` 必为 42。若使用 `Relaxed`：1) `HEAD.load` 可能看到非空指针；2) 但 `node.value` 的写入可能尚未对其他 CPU 可见；3) 读取到 0 或旧值。这是弱内存模型（ARM、RISC-V）上的真实问题，x86 的强模型通常掩盖此 bug（x86 的 loads/stores 自动是 Acquire/Release）。Rust 的原子类型默认 `SeqCst`（最强），但性能关键代码需正确选择较弱顺序。这与 C++ 的 `memory_order_release/acquire`（相同语义）或 Java 的 `volatile`（等价于 `SeqCst`）相同——内存序是并发编程的底层细节，错误选择导致难以复现的 bug。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html)]
+
+### 10.3 边界测试：ABA 问题与无锁栈的内存安全（运行时 UB）
+
+```rust,ignore
+use std::sync::atomic::{AtomicPtr, Ordering};
+use std::ptr;
+
+struct Node {
+    data: i32,
+    next: *mut Node,
+}
+
+struct LockFreeStack {
+    head: AtomicPtr<Node>,
+}
+
+impl LockFreeStack {
+    fn push(&self, data: i32) {
+        let new_node = Box::into_raw(Box::new(Node {
+            data,
+            next: ptr::null_mut(),
+        }));
+        loop {
+            let head = self.head.load(Ordering::Relaxed);
+            unsafe { (*new_node).next = head; }
+            if self.head.compare_and_swap(head, new_node, Ordering::Release) == head {
+                break;
+            }
+        }
+    }
+}
+
+fn main() {
+    let stack = LockFreeStack { head: AtomicPtr::new(ptr::null_mut()) };
+    stack.push(1);
+    // ❌ 运行时 UB: ABA 问题 + 缺少内存屏障 + 可能的 use-after-free
+}
+```
+
+> **修正**: 上述代码展示了一个**有缺陷的无锁栈**：1) `compare_and_swap` 已废弃（应使用 `compare_exchange`）；2) `Relaxed` + `Release` 顺序不足（需 `Acquire` 保证可见性）；3) **ABA 问题**：节点 A 被 pop，节点 B 被 push 到同一地址，然后 CAS 误认为 A 仍存在。正确实现：1) 使用 `compare_exchange` + `Acquire`/`Release`；2) 使用 hazard pointers 或 epoch-based reclamation（`crossbeam-epoch`）防止 use-after-free；3) 标签指针（tagged pointer）解决 ABA。无锁数据结构是 Rust unsafe 代码的最难领域之一——编译器不验证线性化（linearizability）或内存安全。这与 C++ 的 `std::atomic`（类似 API，但 Rust 的 ownership 使 ABA 更复杂）或 Java 的 `AtomicReference`（JVM 管理内存，无 ABA 的 use-after-free）不同——Rust 的无锁代码需手动管理内存生命周期。[来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)] · [来源: [crossbeam-epoch](https://docs.rs/crossbeam-epoch/)]

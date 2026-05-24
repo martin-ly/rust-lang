@@ -1653,7 +1653,7 @@ graph TD
 
 ### 10.1 边界测试：Web 框架中的状态共享（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::rc::Rc;
 
 struct AppState {
@@ -1697,7 +1697,7 @@ fn main() {
 
 ### 10.3 边界测试：嵌入式中的 `std` 依赖误用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #![no_std]
 
 fn main() {

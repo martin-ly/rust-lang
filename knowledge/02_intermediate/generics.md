@@ -1269,3 +1269,24 @@ fn process(items: &[&dyn Display]) {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+### 边界测试：泛型递归类型的大小计算（编译错误）
+
+```rust,compile_fail
+enum List<T> {
+    Cons(T, List<T>), // ❌ 编译错误: 递归类型的大小无限
+    Nil,
+}
+
+// 正确: 使用 Box 引入间接层
+// enum List<T> {
+//     Cons(T, Box<List<T>>),
+//     Nil,
+// }
+
+fn main() {
+    // let list = List::Cons(1, List::Cons(2, List::Nil));
+}
+```
+
+> **修正**: Rust 编译器需要**在编译期确定所有类型的大小**。`enum List<T> { Cons(T, List<T>), Nil }` 的大小递归无限：`size(List<T>) = size(T) + size(List<T>) + tag`，无解。修复：使用**间接层**（indirection）：`Box<List<T>>`（指针，固定大小 8 字节）替代直接递归。其他间接类型：`Rc<List<T>>`、`Arc<List<T>>`、`&List<T>`。这与 C 的 `struct Node { int data; struct Node next; }`（同样无限大小，C 允许不完整类型但需指针）或 Haskell 的递归类型（惰性求值，大小延迟到运行时）不同——Rust 的严格求值和静态大小要求强制使用指针间接层。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-01-box.html)] · [来源: [Rust Reference — Recursive Types](https://doc.rust-lang.org/reference/items/enumerations.html)]

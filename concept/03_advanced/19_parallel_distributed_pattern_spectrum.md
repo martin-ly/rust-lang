@@ -619,3 +619,20 @@ struct MessageFixed {
 ```
 
 > **修正**: 分布式系统中的消息传递要求类型可序列化（`Serialize`/`Deserialize`）。Rust 的类型系统通过 trait bound 在编译期强制这一约束——未实现 `Serialize` 的类型不能作为网络消息。这与 Erlang 的动态序列化或 Java 的默认 `Serializable` 不同：Rust 要求显式 opt-in（通过 derive 或手动实现），确保类型变化时序列化格式同步更新，避免版本不兼容导致的运行时错误。[来源: [Serde Documentation](https://serde.rs/)]
+
+### 10.3 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时性能下降）
+
+```rust,compile_fail
+use rayon::prelude::*;
+
+fn main() {
+    let v: Vec<i32> = (0..100).collect();
+    // ❌ 运行时性能问题: 任务过小，线程同步开销超过并行收益
+    let sum: i32 = v.par_iter()
+        .map(|x| x * 2)
+        .sum();
+    println!("{}", sum);
+}
+```
+
+> **修正**: `rayon` 是 Rust 的数据并行库，基于 **work-stealing** 线程池自动并行化迭代器。但**任务粒度**是关键：1) 任务太小（如 `x * 2`）→ 线程调度开销 > 并行收益；2) 任务太大 → 负载不均衡，某些线程空闲。`rayon` 的启发式：通过 `join` 递归分割任务，但无法控制最小分割粒度。优化：1) `par_chunks` 增加每任务工作量；2) `with_min_len(n)` 设置最小长度；3) 只在计算密集型操作中使用 `par_iter`（I/O 密集型用 `tokio`）。这与 Java 的 `ForkJoinPool`（类似 work-stealing）或 C++ 的 `std::execution::par`（C++17，类似抽象）类似——数据并行的性能取决于任务粒度，无万能配置。[来源: [rayon Documentation](https://docs.rs/rayon/)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]

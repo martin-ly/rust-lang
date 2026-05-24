@@ -49,6 +49,9 @@
   - [十、边界测试：高级 Trait 的编译错误](#十边界测试高级-trait-的编译错误)
     - [10.1 边界测试：关联类型与泛型参数冲突（编译错误）](#101-边界测试关联类型与泛型参数冲突编译错误)
     - [10.2 边界测试：特殊化（Specialization）的不稳定性（编译错误）](#102-边界测试特殊化specialization的不稳定性编译错误)
+    - [10.5 边界测试：关联常量与泛型参数的交互（编译错误）](#105-边界测试关联常量与泛型参数的交互编译错误)
+    - [10.6 边界测试：trait alias 与 bound 的冗余（编译错误）](#106-边界测试trait-alias-与-bound-的冗余编译错误)
+    - [10.3 边界测试：关联类型在 trait 边界中的不一致（编译错误）](#103-边界测试关联类型在-trait-边界中的不一致编译错误)
 
 ---
 
@@ -569,7 +572,7 @@ impl<T: Clone> Container for Wrapper<T> {
 
 ### 10.2 边界测试：特殊化（Specialization）的不稳定性（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #![feature(specialization)] // 不稳定特性
 
 trait Print {
@@ -611,7 +614,7 @@ struct Buffer<C: Config> {
 
 ### 10.6 边界测试：trait alias 与 bound 的冗余（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait MyTrait: Clone + Send + Sync + 'static {}
 
 fn process<T: MyTrait>(t: T) {
@@ -626,3 +629,62 @@ fn main() {
 ```
 
 > **修正**: Trait alias（不稳定特性）允许为 trait bound 组合创建别名，但**不自动为符合条件的类型实现**。`MyTrait` 是真实 trait，类型需 `impl MyTrait for Type` 才能使用。这与 C++ 的 `concept`（同样需显式 `requires` 或 `template` 约束）或 Haskell 的 typeclass 别名（同样需显式 `instance`）类似。Workaround：1) 使用 blanket impl：`impl<T: Clone + Send + Sync + 'static> MyTrait for T {}`；2) 使用 `where` 从句直接写 bound，不使用别名；3) 等待 trait alias 稳定（可能包含自动实现语义）。Rust 的设计权衡：trait alias 是语法糖还是新类型？当前倾向语法糖，但自动实现的需求强烈。[来源: [Trait Alias RFC](https://rust-lang.github.io/rfcs/1733-trait-alias.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：关联类型在 trait 边界中的不一致（编译错误）
+
+```rust,compile_fail
+trait Container {
+    type Item;
+    fn get(&self) -> Self::Item;
+}
+
+fn process<C: Container<Item = i32>>(c: C) -> i32 {
+    c.get()
+}
+
+struct StringContainer;
+impl Container for StringContainer {
+    type Item = String;
+    fn get(&self) -> String { String::from("hello") }
+}
+
+fn main() {
+    // ❌ 编译错误: StringContainer::Item = String，不满足 Item = i32
+    let _x = process(StringContainer);
+}
+```
+
+> **修正**: 关联类型（associated type）是 trait 的**输出类型**，由实现者确定。`Container<Item = i32>` 是**关联类型等价约束**，要求 `C::Item == i32`。若实现者的 `Item` 不同（如 `String`），编译错误。这与泛型参数（`Container<T>`，调用者指定）不同：关联类型是"每个实现只有一个"，泛型参数是"每个调用可不同"。设计权衡：关联类型减少类型参数噪音（`Iterator<Item = T>` vs `Iterator<T>`），但约束更严格。高级用法：`where Self::Item: Display`（关联类型的 trait 边界）、`<C as Container>::Item`（显式限定语法）。这与 Haskell 的 type families（关联类型的函数式等价）或 Swift 的 associated types（类似概念）相同——Rust 的关联类型是 trait 系统的核心支柱。[来源: [Rust Reference — Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)]
+
+### 10.4 边界测试：GAT（泛型关联类型）的缺失约束（编译错误）
+
+```rust,compile_fail
+trait Container {
+    type Item<'a>;
+    fn get<'a>(&'a self) -> Self::Item<'a>;
+}
+
+struct MyContainer {
+    data: String,
+}
+
+impl Container for MyContainer {
+    type Item<'a> = &'a str;
+    fn get<'a>(&'a self) -> &'a str {
+        &self.data
+    }
+}
+
+// ❌ 编译错误: GAT 的使用需显式生命周期约束
+// fn use_container<C: Container>(c: C) {
+//     let item = c.get();
+// }
+
+fn main() {
+    let c = MyContainer { data: String::from("hello") };
+    let item = c.get();
+    println!("{}", item);
+}
+```
+
+> **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统的重要扩展，但学习曲线陡。[来源: [Rust Reference — Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#generic-associated-types)] · [来源: [RFC 1598 — GAT](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)]

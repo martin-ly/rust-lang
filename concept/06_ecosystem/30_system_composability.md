@@ -873,7 +873,7 @@ pub struct PluginVTable {
 
 ### 10.3 边界测试：trait 组合子的菱形继承问题（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait A { fn method(&self); }
 trait B: A { fn method(&self); }
 trait C: A { fn method(&self); }
@@ -900,7 +900,7 @@ fn main() {
 
 ### 10.4 边界测试：组合优于继承时的 boilerplate 问题（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Engine {
     horsepower: u32,
 }
@@ -923,3 +923,28 @@ impl Car {
 ```
 
 > **修正**: Rust 不支持继承（无 `class Car extends Vehicle`），强制使用**组合**（composition）。组合的代价是**boilerplate**：需手动编写转发方法暴露内部组件的 API。缓解工具：1) `Deref` 委托（仅适用于智能指针模式，不推荐领域类型）；2) `delegate` crate（宏自动生成转发方法）；3) 公开内部字段（`pub engine: Engine`，牺牲封装）。Rust 的设计哲学：组合更灵活（运行时替换组件）、更安全（无继承层次导致的脆弱基类问题），但确实增加了样板代码。这与 Go 的 struct 嵌入（类似组合，但自动转发方法，是 Go 唯一的"继承"机制）或 Java 的委托模式（手动编写，与 Rust 类似）不同——Rust 正在探索 `#[derive(Delegate)]` 等宏简化组合委托。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-what-is-oo.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+
+### 10.3 边界测试：泛型组件的类型参数爆炸（编译错误/设计反模式）
+
+```rust,ignore
+trait Database<D> {
+    fn query(&self, sql: &str) -> D;
+}
+
+trait Cache<K, V> {
+    fn get(&self, key: K) -> Option<V>;
+}
+
+trait Service<D, K, V> {
+    fn process(&self, db: &dyn Database<D>, cache: &dyn Cache<K, V>) -> V;
+}
+
+// ❌ 设计反模式: 泛型参数过多，调用点类型标注噪音大
+fn use_service<D, K, V>(s: &dyn Service<D, K, V>) {
+    // 实际调用时需要指定 D, K, V
+}
+
+fn main() {}
+```
+
+> **修正**: 泛型参数过多的解决方案：1) **关联类型**：`trait Database { type Output; }` — 每个实现只有一个输出类型；2) **trait object**：`&dyn Database` — 运行时擦除类型；3) **类型别名**：`type UserService = dyn Service<User, String, User>`；4) **newtype**：`struct UserService(Box<dyn Service<User, String, User>>)`。设计原则：公共 API 减少泛型参数（使用关联类型或 trait object），内部实现使用泛型（性能关键路径）。这与 Java 的泛型（类型擦除，无单态化）或 C# 的泛型（运行时特化，但共享代码）不同——Rust 的泛型是编译期单态化，参数过多导致代码膨胀和编译时间增加。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]

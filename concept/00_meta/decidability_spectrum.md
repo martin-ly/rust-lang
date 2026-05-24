@@ -67,6 +67,7 @@
       - [开放问题 2：关联类型归一化的终止性证明](#开放问题-2关联类型归一化的终止性证明)
       - [开放问题 3：Const Evaluation 的图灵完备性边界（受限堆 + 步数限制）](#开放问题-3const-evaluation-的图灵完备性边界受限堆--步数限制)
       - [开放问题 4：Effects 系统与类型系统可判定性的交互](#开放问题-4effects-系统与类型系统可判定性的交互)
+    - [10.3 边界测试：类型推断的不可判定性与人工标注（编译错误）](#103-边界测试类型推断的不可判定性与人工标注编译错误)
 
 ---
 
@@ -803,3 +804,16 @@ Rust 社区正在逐步探索 effects 系统（如 `const`、`async`、`unsafe` 
 > **文档版本**: 1.0
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 可判定性谱系全景 v1.0
+
+### 10.3 边界测试：类型推断的不可判定性与人工标注（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let v = vec![];
+    // ❌ 编译错误: 无法推断 Vec<T> 的元素类型
+    v.push(1);
+    v.push("hello"); // 若注释上一行，这里也编译错误（类型冲突）
+}
+```
+
+> **修正**: Rust 的类型推断基于 **Hindley-Milner** 算法的扩展，但加入了 trait 约束、生命周期和关联类型。某些情况下推断需要人工提示：1) `vec![]` 无上下文时无法推断 `T`；2) 闭包参数类型在多态上下文中可能模糊；3) `collect()` 的目标类型无处推导时失败。类型推断的复杂度：最坏情况下是指数级（`O(2^n)`），但 Rust 编译器使用启发式限制实际复杂度。这与 Haskell 的 HM（完整且高效，无 trait 约束）或 C++ 的 `auto`（基于表达式类型，无统一变量）不同——Rust 的类型推断在 HM 基础上增加了 trait 系统的约束求解，某些边界情况需人工标注。[来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html)] · [来源: [Hindley-Milner Type Inference](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]

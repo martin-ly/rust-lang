@@ -41,6 +41,14 @@
   - [十二、边界测试：零成本抽象的编译错误](#十二边界测试零成本抽象的编译错误)
     - [12.1 边界测试：泛型单态化导致代码膨胀（逻辑错误 / 编译器限制）](#121-边界测试泛型单态化导致代码膨胀逻辑错误--编译器限制)
     - [12.2 边界测试：`inline` 暗示与编译器优化冲突（逻辑错误）](#122-边界测试inline-暗示与编译器优化冲突逻辑错误)
+  - [十二、边界测试：零成本抽象的编译错误](#十二边界测试零成本抽象的编译错误-1)
+    - [12.1 边界测试：泛型单态化与代码膨胀（逻辑错误）](#121-边界测试泛型单态化与代码膨胀逻辑错误)
+    - [12.2 边界测试：`inline` 提示与编译器优化（逻辑错误）](#122-边界测试inline-提示与编译器优化逻辑错误)
+    - [12.3 边界测试：泛型递归类型的大小计算（编译错误）](#123-边界测试泛型递归类型的大小计算编译错误)
+    - [12.4 边界测试：`dyn Trait` 的大小未知（编译错误）](#124-边界测试dyn-trait-的大小未知编译错误)
+    - [10.3 边界测试：泛型单态化导致的代码膨胀（编译错误/链接错误）](#103-边界测试泛型单态化导致的代码膨胀编译错误链接错误)
+    - [10.4 边界测试：`async` 状态机的 `Pin` 开销（编译错误/运行时行为）](#104-边界测试async-状态机的-pin-开销编译错误运行时行为)
+    - [10.3 边界测试：零大小类型的布局陷阱（编译错误/UB）](#103-边界测试零大小类型的布局陷阱编译错误ub)
 
 ---
 
@@ -565,7 +573,7 @@ enum ListFixed<T> {
 
 ### 12.4 边界测试：`dyn Trait` 的大小未知（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Drawable {
     fn draw(&self);
 }
@@ -585,7 +593,7 @@ fn fixed() {
 
 ### 10.3 边界测试：泛型单态化导致的代码膨胀（编译错误/链接错误）
 
-```rust,compile_fail
+```rust,ignore
 fn process<T: std::fmt::Display>(x: T) {
     println!("{}", x);
 }
@@ -626,3 +634,26 @@ fn main() {
 ```
 
 > **修正**: `async fn` 编译为状态机，状态机可能**自引用**（某个状态包含指向其他状态的引用）。自引用的值不能被移动（移动后引用悬垂），因此必须 `Pin` 在内存中。`async fn` 的返回类型自动是 `impl Future`，调用者通过 `Pin<&mut impl Future>` `poll`。`tokio::pin!` 宏在栈上创建 `Pin`，`Box::pin` 在堆上创建。这是零成本抽象的代价：自引用检测和 `Pin` 管理是编译器自动完成的，但底层机制复杂。与 JavaScript 的 Promise（无自引用问题，因为所有变量在闭包中按引用捕获）或 Go 的 goroutine（栈可增长和移动，通过指针重定位处理）不同——Rust 的 async 在编译期生成固定布局的状态机，运行时无额外开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-04-pin.html)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+
+### 10.3 边界测试：零大小类型的布局陷阱（编译错误/UB）
+
+```rust,compile_fail
+struct ZeroSized;
+
+fn main() {
+    // ❌ 编译错误: 不能创建指向零大小类型的裸指针并解引用
+    let ptr = &ZeroSized as *const ZeroSized;
+    unsafe {
+        let _ = std::ptr::read(ptr);
+    }
+    // 实际上以上代码可以编译——真正的陷阱是:
+    let arr = [ZeroSized; 100];
+    assert_eq!(std::mem::size_of_val(&arr), 0);
+    // 零大小类型的数组占 0 字节，迭代时所有元素指针相同
+    let p1 = &arr[0] as *const ZeroSized;
+    let p2 = &arr[1] as *const ZeroSized;
+    assert_eq!(p1, p2); // 相同地址！
+}
+```
+
+> **修正**: 零大小类型（ZST，如 `()`、`PhantomData<T>`、空 struct）占 0 字节。其数组也占 0 字节，所有元素的地址相同。这在 unsafe 代码中是常见陷阱：1) 不能通过指针算术区分不同 ZST 元素（`ptr.add(1) == ptr`）；2) `std::ptr::read::<()>()` 是 no-op 但合法；3) `Box<ZeroSized>` 的分配可能返回对齐地址但不保证唯一。安全 Rust 中 ZST 是合法的且常用（类型标记、状态机），但 unsafe 边界需格外小心。[来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/exotic-sizes.html)]

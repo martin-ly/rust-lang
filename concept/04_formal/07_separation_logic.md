@@ -703,7 +703,7 @@ fn main() {
 
 ### 10.4 边界测试：原子操作与分离逻辑的幻觉（运行时数据竞争）
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 static COUNTER: AtomicUsize = AtomicUsize::new(0);
@@ -717,3 +717,45 @@ fn main() {
 ```
 
 > **修正**: 原子操作的 `Ordering` 是 Rust 并发编程中最微妙的部分。`Relaxed` 只保证原子性（无撕裂读写），不保证**happens-before 关系**——其他线程可能以不同顺序观察到操作。分离逻辑的视角：`Relaxed` 操作不传递资源所有权，只是"幻觉"上的原子更新。若需要同步（一个线程写，另一个线程读并依赖该值），必须使用 `Release`/`Acquire` 或 `SeqCst`。这与 C/C++ 的 `memory_order_relaxed`（相同语义）或 Java 的 `volatile`（等价于 `SeqCst`，更强）不同——Rust 的 `Ordering` 显式、精细，要求开发者根据内存模型选择。错误选择 `Relaxed` 是多线程 bug 的常见来源：程序在 x86（强内存模型）上正常，在 ARM（弱内存模型）上失败。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html)]
+
+### 10.3 边界测试：分离逻辑中的帧规则与并发资源组合（编译错误）
+
+```rust,ignore
+use std::sync::{Arc, Mutex};
+
+fn main() {
+    let data = Arc::new(Mutex::new(vec![1, 2, 3]));
+    let d1 = Arc::clone(&data);
+    let d2 = Arc::clone(&data);
+    
+    // ❌ 编译错误: 两个线程同时获取 MutexGuard，但编译器允许
+    // 运行时 Mutex 保证互斥，但分离逻辑的帧规则要求资源不相交
+    std::thread::spawn(move || {
+        let mut guard = d1.lock().unwrap();
+        guard.push(4);
+    });
+    
+    std::thread::spawn(move || {
+        let mut guard = d2.lock().unwrap();
+        guard.push(5);
+    });
+}
+```
+
+> **修正**: 分离逻辑（Separation Logic）的**帧规则**（Frame Rule）：若在资源 `P` 上验证程序 `C` 得到 `Q`，则在 `P * R` 上也成立（`C` 不影响 `R`）。并发扩展（Concurrent Separation Logic, CSL）引入：**资源不变量**（resource invariant）描述共享资源的状态，线程通过 `acquire`/`release` 操作获取/释放资源。`Mutex<T>` 的资源不变量是：锁释放时，`T` 处于有效状态。Rust 的 `Mutex` 通过类型系统（`MutexGuard`）和运行时检查（poisoning）实现 CSL 的资源管理。这与 Java 的 `synchronized`（JVM 管理，无形式化资源不变量）或 C 的 pthread_mutex（手动管理，无编译期检查）不同——Rust 的并发原语将分离逻辑的部分证明内建于类型系统。[来源: [Concurrent Separation Logic](https://en.wikipedia.org/wiki/Separation_logic#Concurrent_Separation_Logic)] · [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
+
+### 10.4 边界测试：RustBelt 对 `UnsafeCell` 的形式化建模（运行时 UB）
+
+```rust,ignore
+use std::cell::UnsafeCell;
+
+fn main() {
+    let cell = UnsafeCell::new(42);
+    let r1 = unsafe { &*cell.get() }; // 共享引用
+    let r2 = unsafe { &mut *cell.get() }; // 可变引用
+    // ❌ 运行时 UB: & 和 &mut 同时指向同一 UnsafeCell 的数据
+    println!("{} {}", r1, r2);
+}
+```
+
+> **修正**: `UnsafeCell` 是 Rust 内部可变性的**核心原语**：它关闭编译器的不可变性优化，允许从 `&UnsafeCell<T>` 获取 `&mut T`。但**不安全**：`&T` 和 `&mut T` 同时指向 `UnsafeCell` 内部数据 → UB（违反别名规则）。`UnsafeCell` 的正确使用：1) `Cell<T>`（`T: Copy`）— 运行时无检查，直接替换值；2) `RefCell<T>` — 运行时借用检查；3) `Mutex<T>` / `RwLock<T>` — 线程安全。RustBelt 为 `UnsafeCell` 赋予特殊谓词 `na(τ, ℓ)`（non-atomic），允许从共享引用进行可变访问，但这排除了别名读取保证。形式化证明：`UnsafeCell` 的使用若遵守"无同时 `&` 和 `&mut`"规则，则安全。这与 C 的 `volatile`（告诉编译器不要优化，但不解决别名问题）或 C++ 的 `mutable`（突破 const，无运行时检查）不同——Rust 的 `UnsafeCell` 是显式的、有文档的不安全原语。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)] · [来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)]

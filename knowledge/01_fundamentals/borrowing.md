@@ -46,6 +46,7 @@
   - [思维导图：借用系统全景](#思维导图借用系统全景)
   - [决策树：借用类型选择](#决策树借用类型选择)
   - [权威来源索引](#权威来源索引)
+    - [边界测试：重新借用后的可变引用解冻时机（编译错误）](#边界测试重新借用后的可变引用解冻时机编译错误)
 
 > **Bloom 层级**: 理解
 
@@ -741,3 +742,18 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+### 边界测试：重新借用后的可变引用解冻时机（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut data = vec![1, 2, 3];
+    let r1 = &mut data;
+    // ❌ 编译错误: 重新借用 r1 后，r1 被冻结至 r2 的最后使用点
+    let r2 = &mut *r1;
+    r1.push(4); // r1 仍处于冻结状态
+    r2.push(5);
+}
+```
+
+> **修正**: `&mut *r1` 是对 `r1` 指向内容的重新借用。`r1` 在 `r2` 活跃期间被**冻结**（frozen）：不能读取也不能写入 `r1` 本身，直到 `r2` 的最后使用点。这是 Rust 借用检查的精细规则：重新借用创建临时的子借用，原借用被暂停。安全模式：避免显式保存重新借用的引用——在函数调用中隐式使用（`process(&mut *r1)`）时，重新借用只在函数调用期间有效，函数返回后原借用自动恢复。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)] · [来源: [Rust Reference — Mutable References](https://doc.rust-lang.org/reference/expressions.html#mutable-references)]

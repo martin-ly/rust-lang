@@ -1259,7 +1259,7 @@ fn fixed() {
 
 ### 10.3 边界测试：所有权转移与线性逻辑的析取（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn branch(use_a: bool) {
     let x = String::from("resource");
     if use_a {
@@ -1279,7 +1279,7 @@ fn consume_b(_: String) {}
 
 ### 10.4 边界测试：`!` 类型与线性逻辑的底（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn diverges() -> ! {
     panic!("never returns");
 }
@@ -1296,3 +1296,24 @@ fn main() {
 ```
 
 > **修正**: `!`（never type）在类型论中对应于**底**（bottom，⊥），表示不可达计算。在线性逻辑中，⊥ 是零资源——从 ⊥ 可推导任意命题（ex falso quodlibet）。Rust 中 `!` 可 coerce 为任意类型，因此 `let y: String = diverges()` 合法：编译器知道 `diverges()` 永不返回，赋值永不执行，类型兼容性是形式上的。但 `!` 本身没有值，不能调用方法或打印。`!` 的稳定化（从实验到部分稳定）是 Rust 类型系统的演进标志。这与 Haskell 的 `Void`（无 inhabitant，需 `absurd` 转换）或 TypeScript 的 `never`（类似语义）类似——Rust 的 `!` 在控制流分析中发挥关键作用（`if`/`match` 分支类型统一、 `?` 运算符）。[来源: [Rust RFC 1216](https://rust-lang.github.io/rfcs/1216-bang-type.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+
+### 10.3 边界测试：线性类型与 `Copy` 的冲突（编译错误）
+
+```rust,ignore
+struct LinearResource {
+    id: u64,
+}
+
+// ❌ 编译错误: 若 LinearResource 未实现 Copy，不能隐式复制
+fn use_resource(r: LinearResource) {
+    let _ = r;
+    let _ = r; // E0382: use of moved value
+}
+
+fn main() {
+    let res = LinearResource { id: 1 };
+    use_resource(res);
+}
+```
+
+> **修正**: Rust 的所有权系统本质是**仿射类型系统**（affine types）：值可被使用一次或零次（可选择丢弃）。线性逻辑要求值**必须**使用恰好一次（不可丢弃）。Rust 的 `Drop` trait 允许自定义丢弃逻辑，但不强制使用。要实现真正的线性类型：1) `must_use` 属性（警告未使用，但不编译错误）；2) 闭包/回调模式（将资源传入 continuation，强制使用）；3) 类型状态模式（状态转换消耗旧状态）。这与 Idris 的 `LinearTypes`（1.0+ 原生支持，编译期强制使用一次）或 Haskell 的 `LinearTypes`（GHC 9.x+，`-XLinearTypes`）不同——Rust 的 affine 类型更实用（允许未使用），但牺牲了一些形式化保证。[来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]

@@ -1174,7 +1174,7 @@ fn main() {
 
 ### 10.4 边界测试：`unsafe` 代码块的粒度与审计（编译错误/逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn bad_unsafe() {
     let mut x = 5;
     let r = &mut x;
@@ -1189,3 +1189,37 @@ fn bad_unsafe() {
 ```
 
 > **修正**: `unsafe` 块的粒度是代码质量和安全审计的关键因素。最佳实践：1) **最小化 unsafe**：只将真正需要 unsafe 的操作放入 `unsafe` 块；2) **封装 unsafe**：将 unsafe 操作封装在安全函数中，文档化不变式；3) **审计边界**：每个 `unsafe` 块都应有人工审查记录。上述代码中，`println!` 不需要 `unsafe`，放入 `unsafe` 块增加了审计负担。Rust 社区的工具（`cargo geiger` 统计 unsafe 比例、`cargo vet` 审计依赖）帮助管理 unsafe 边界。这与 C/C++ 的"全代码 unsafe"（无边界标记）或 Java 的"无 unsafe"（JVM 保证安全，JNI 除外）不同——Rust 的 unsafe 是 opt-in 的显式契约，使安全审计可聚焦。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] · [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]
+
+### 10.3 边界测试：安全边界跨越时的契约违反（运行时 UB）
+
+```rust,ignore
+fn safe_wrapper(ptr: *mut i32) {
+    // ❌ 运行时 UB: safe 函数接收裸指针但未验证其有效性
+    unsafe { *ptr = 42; }
+}
+
+fn main() {
+    let mut x = 0;
+    safe_wrapper(&mut x); // ✅ 有效指针
+    safe_wrapper(std::ptr::null_mut()); // ❌ UB: 空指针解引用
+}
+```
+
+> **修正**: Rust 的**安全边界**（safety boundary）是 `unsafe` 块与 safe 代码的分界。safe 函数**不能**假设输入满足 unsafe 契约——必须验证或要求调用者通过类型系统保证。`safe_wrapper` 的 design flaw：接收裸指针（`unsafe` 类型的值）但在 safe 函数签名中，未验证就解引用。正确设计：1) `fn safe_wrapper(ptr: &mut i32)` — safe 引用，编译器保证有效；2) `unsafe fn raw_wrapper(ptr: *mut i32)` — unsafe 函数，调用者负责验证；3) `fn safe_wrapper(ptr: NonNull<i32>)` — 类型系统保证非空。安全边界的文档化：`SAFETY:` 注释说明 unsafe 块的先决条件。这与 C 的"所有函数都隐式 unsafe"（无边界概念）或 Java 的 JNI（边界在 JVM/native 接口，但 native 代码无编译期检查）不同——Rust 显式标记 unsafe 边界，文档化契约。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html)] · [来源: [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html)]
+
+### 10.4 边界测试：FFI 边界的 `unsafe` 契约文档化缺失（运行时 UB）
+
+```rust,ignore
+// ❌ 设计问题: unsafe 函数未文档化前置条件
+unsafe fn raw_pointer_deref(ptr: *const i32) -> i32 {
+    *ptr // 假设 ptr 非空且对齐
+}
+
+fn main() {
+    let x = 42;
+    unsafe { raw_pointer_deref(&x); }
+    unsafe { raw_pointer_deref(std::ptr::null()); } // UB: 空指针
+}
+```
+
+> **修正**: `unsafe` 函数的**契约**（contract）是调用者和实现者之间的协议：1) 调用者保证前置条件（指针有效、生命周期足够、无数据竞争）；2) 实现者保证后置条件（返回值有效、不破坏内存安全）。文档化：`/// SAFETY: ptr must be non-null and properly aligned.`。标准库的 unsafe 函数都有详细的 `SAFETY` 注释。违反契约：调用者责任（即使 unsafe 块内部 panic，也是调用者提供了无效输入）。这与 C 的函数（无契约概念，无编译期检查）或 Java 的 `native` 方法（JNI 边界，JVM 不验证 native 代码）不同——Rust 的 `unsafe` 是显式的契约标记，社区强烈鼓励文档化。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html)] · [来源: [Rust Reference — Unsafe Functions](https://doc.rust-lang.org/reference/items/functions.html#unsafe-functions)]

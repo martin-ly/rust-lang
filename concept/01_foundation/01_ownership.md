@@ -89,6 +89,7 @@
     - [11.5 边界测试：函数返回值的所有权转移（编译错误）](#115-边界测试函数返回值的所有权转移编译错误)
     - [11.6 边界测试：`Copy` 类型在闭包中的捕获（编译错误）](#116-边界测试copy-类型在闭包中的捕获编译错误)
     - [11.7 边界测试：`Vec` 索引越界（运行时 panic）](#117-边界测试vec-索引越界运行时-panic)
+    - [10.5 边界测试：Copy 类型的隐式复制与所有权混淆（编译错误）](#105-边界测试copy-类型的隐式复制与所有权混淆编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -1444,3 +1445,38 @@ fn main() {
 ```
 
 > **修正**: Rust 的索引操作 `v[i]` 在越界时 panic。如需安全访问，使用 `v.get(i)` 返回 `Option<&T>`。这体现了 Rust"显式错误处理"的哲学——不静默失败，也不允许未定义行为。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.5 边界测试：Copy 类型的隐式复制与所有权混淆（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 42; // i32 实现 Copy
+    let y = x;  // 隐式复制，x 仍可用
+    println!("{}", x); // ✅ 可以
+
+    let s = String::from("hello"); // String 不实现 Copy
+    let s2 = s;   // 移动（move）
+    // ❌ 编译错误: s 已移动，不能再次使用
+    println!("{}", s);
+}
+```
+
+> **修正**: `Copy` trait 标记**按位复制语义**的类型：赋值和传参时隐式复制原值，原值仍可用。`Copy` 的条件：1) 所有字段都实现 `Copy`；2) 不包含 `Drop` 实现；3) 通常是标量类型（整数、浮点、布尔、`char`、元组（若元素都 `Copy`））。`String`、`Vec<T>`、`Box<T>` 不实现 `Copy`（它们管理堆内存，复制需深拷贝）。常见陷阱：1) 给自定义 struct 添加 `#[derive(Copy)]` 忘记检查所有字段；2) 为含 `Drop` 的类型派生 `Copy` → 编译错误；3) `&T` 实现 `Copy`（引用是固定大小的指针），但 `&mut T` 不实现（可变引用需独占）。这与 C 的 `memcpy`（无语义区分）或 C++ 的拷贝构造函数（可自定义行为）不同——Rust 的 `Copy` 是编译期标记，保证复制是简单且无副作用的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Copy](https://doc.rust-lang.org/reference/special-types-and-traits.html#copy)]
+
+### 10.6 边界测试：所有权转移与函数返回的隐式 move（编译错误）
+
+```rust,compile_fail
+fn take_ownership(s: String) -> String {
+    s // move 返回
+}
+
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = take_ownership(s1);
+    // ❌ 编译错误: s1 已 move 到函数中，不能再次使用
+    println!("{}", s1);
+    println!("{}", s2);
+}
+```
+
+> **修正**: 函数参数传递默认是**按值移动**（move）：`String` 等不实现 `Copy` 的类型，传入函数后原变量失效。若需保留原变量：1) **返回所有权**：`fn process(s: String) -> String`（C++ 的风格，但 Rust 中更常用引用）；2) **借用**：`fn process(s: &String)` 或 `fn process(s: &mut String)`；3) **clone**：`process(s.clone())`（显式深拷贝）。Rust 的所有权规则使 API 设计更明确：函数签名即文档——`fn foo(s: String)` 消费 `s`，`fn foo(s: &String)` 只读借用，`fn foo(s: &mut String)` 可变借用。这与 C++ 的 const 引用参数（`void foo(const string& s)`，类似 Rust 的 `&String`）或 Java 的对象传递（总是引用传递，无所有权概念）不同——Rust 的参数类型直接反映所有权语义。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)]

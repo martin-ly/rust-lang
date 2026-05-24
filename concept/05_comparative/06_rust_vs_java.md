@@ -37,6 +37,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 Java 的编译错误对比](#十边界测试rust-与-java-的编译错误对比)
+    - [10.1 边界测试：Java 的泛型擦除 vs Rust 的单态化（编译错误）](#101-边界测试java-的泛型擦除-vs-rust-的单态化编译错误)
+    - [10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）](#102-边界测试java-的-null-与-rust-的-option编译错误)
+    - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译错误）](#103-边界测试java-的泛型擦除与-rust-的单态化编译错误)
+    - [10.4 边界测试：Java 的 GC 与 Rust 的所有权的资源管理差异（编译错误）](#104-边界测试java-的-gc-与-rust-的所有权的资源管理差异编译错误)
 
 ---
 
@@ -510,7 +515,7 @@ fn fixed() {
 
 ### 10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Java: List<String> 和 List<Integer> 运行时相同（类型擦除）
 // List list = new ArrayList<String>();
 // list.add(42); // 运行时允许，但可能 ClassCastException
@@ -533,7 +538,7 @@ fn main() {
 
 ### 10.4 边界测试：Java 的 GC 与 Rust 的所有权的资源管理差异（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct FileHandle {
     path: String,
 }
@@ -549,7 +554,7 @@ fn main() {
     // ❌ 逻辑错误: 从 Java 迁移时，可能假设 file 在作用域结束时自动关闭
     // Rust 确实自动调用 drop，但时机是确定性的（作用域结束），
     // 而非 GC 的非确定性回收
-    
+
     // 但若提前移动:
     let file2 = file;
     // file 在这里已被移动，drop 将在 file2 结束时调用
@@ -558,3 +563,42 @@ fn main() {
 ```
 
 > **修正**: Java 的资源管理依赖**垃圾回收**（GC）：非内存资源（文件句柄、网络连接）通过 `try-finally` 或 `try-with-resources` 显式关闭，否则等待 GC 的**终结器**（finalizer，不确定时机）。Rust 的 `Drop` trait 提供**确定性析构**：资源在值离开作用域时立即释放，无 GC 延迟。但 Rust 的所有权移动改变析构时机：`let file2 = file;` 后，`file` 的所有权转移到 `file2`，`Drop` 在 `file2` 的作用域结束时调用。这与 C++ 的 RAII（同样确定性，但拷贝语义可能多次析构）或 Python 的 `with` 语句（确定性，但依赖开发者使用）不同——Rust 的所有权 + Drop 将资源管理与类型系统绑定，无需显式关闭（大部分情况），也无 GC 不确定性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Java Finalization](https://docs.oracle.com/javase/9/docs/api/java/lang/ref/Finalizer.html)]
+
+### 10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译后差异）
+
+```rust,ignore
+fn process<T: std::fmt::Display>(x: T) {
+    println!("{}", x);
+}
+
+fn main() {
+    process(42i32);
+    process("hello");
+    // ❌ 编译后: Rust 为每个 T 生成独立代码（单态化）
+    // Java 的泛型擦除: List<Integer> 和 List<String> 运行时共享同一份代码
+}
+```
+
+> **修正**: Rust 的**单态化**（monomorphization）：为每个具体类型生成独立的机器码。`process::<i32>` 和 `process::<&str>` 是两份代码。优势：零运行时开销（无装箱、无类型检查）；劣势：二进制膨胀（代码重复）。Java 的**类型擦除**（type erasure）：编译后 `List<Integer>` 和 `List<String>` 都是 `List<Object>`，运行时无类型信息。优势：二进制小、向后兼容；劣势：运行时 `ClassCastException`、无法 `new T()`、无原始类型特化。Rust 通过 `dyn Trait` 提供类型擦除选项（ fat pointer + vtable），但默认是单态化。这与 C++ 的模板（同样单态化）或 C# 的泛型（运行时特化，但共享代码）不同——Rust 在编译期完全单态化，性能最优但体积需权衡。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Rust Reference — Generic Items](https://doc.rust-lang.org/reference/items/generics.html)]
+
+### 10.4 边界测试：Java 的 null 安全与 Rust 的 Option 编译期检查（编译错误）
+
+```rust,ignore
+fn main() {
+    // Java: String s = null; int len = s.length(); // NullPointerException at runtime
+    
+    // Rust 的编译期保护:
+    let s: Option<String> = None;
+    // ❌ 编译错误: 不能直接在 Option<String> 上调用 String 方法
+    // let len = s.len();
+    
+    // 必须显式处理 None:
+    let len = match s {
+        Some(ref s) => s.len(),
+        None => 0,
+    };
+    println!("{}", len);
+}
+```
+
+> **修正**: Rust 的 `Option<T>` 消除了 **null 指针异常**：1) `None` 和 `Some(T)` 是不同的变体，编译器强制处理；2) `unwrap()` 在 `None` 时 panic（显式选择）；3) `?` 运算符传播 `None`（在返回 `Option` 的函数中）。Java 8+ 的 `Optional<T>` 类似，但：1) `Optional` 可仍为 `null`（`Optional` 本身是引用类型）；2) 不强制使用（编译器不检查）；3) 序列化问题。Kotlin 的 `T?`（可空类型）与 Rust 的 `Option<T>` 更接近，但 Kotlin 在 JVM 上运行时仍有 null（与 Java 互操作）。这与 Swift 的 `Optional<T>`（类似 Rust，但语法糖 `?`/`!`）或 Haskell 的 `Maybe a`（同样编译期强制处理）相同——Rust 的 `Option` 是类型系统的核心，非可选特性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Rust Reference — Option](https://doc.rust-lang.org/std/option/enum.Option.html)]

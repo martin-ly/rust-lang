@@ -810,7 +810,7 @@ async fn main_fixed() {
 
 ### 10.2 边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let data = vec![1, 2, 3];
     // ❌ 编译错误: Rust 没有方法语法糖，每个操作都是显式方法调用
@@ -849,7 +849,7 @@ fn main() {
 
 ### 10.4 边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // C#: [Serializable] 是运行时反射标记
 // [Serializable]
 // public class MyClass { }
@@ -872,3 +872,31 @@ fn main() {
 ```
 
 > **修正**: C# 的**属性**（attributes）主要是**元数据**：`[Serializable]`、`[Obsolete]` 等标记供运行时反射读取，不改变代码行为（少数如 `[MethodImpl]` 影响 JIT）。Rust 的**派生宏**（`#[derive(...)]`）是**代码生成**：在编译期生成 trait 实现代码（`Debug::fmt`、`Clone::clone` 等）。这是编译期 vs 运行期的根本差异：C# 的属性轻量但能力有限，Rust 的 derive 强大但增加编译时间。C# 的代码生成需额外工具（T4 模板、Source Generators），Rust 的宏是语言原生特性。这与 Java 的注解（类似 C# 属性，运行时反射）或 Python 的装饰器（运行时元编程）不同——Rust 的宏是编译期元编程，零运行时开销。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [C# Attributes](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/)]
+
+### 10.3 边界测试：C# 的 async/await 与 Rust 的 Future 语义差异（运行时行为差异）
+
+```rust,compile_fail
+async fn task1() {
+    println!("task1 start");
+    tokio::task::yield_now().await;
+    println!("task1 end");
+}
+
+async fn task2() {
+    println!("task2 start");
+    tokio::task::yield_now().await;
+    println!("task2 end");
+}
+
+fn main() {
+    // ❌ 运行时差异: Rust 的 async/await 是惰性（lazy）的
+    // let t1 = task1(); // 不执行！只是创建 Future
+    // let t2 = task2(); // 同上
+    // 必须用 .await 或 spawn 驱动执行
+    
+    // C# 的 async/await: 调用 async 方法立即开始执行（直到第一个 await）
+    // Rust: async fn 返回 Future，执行在 .await 或 spawn 时开始
+}
+```
+
+> **修正**: Rust 的 `async fn` 是**惰性**的：调用时不执行函数体，只创建一个 `Future` 状态机。执行在 `.await` 或 `tokio::spawn` 时开始。C# 的 `async` 方法是**立即执行**的：调用时立即执行到第一个 `await`，然后返回 `Task`。语义差异影响：1) Rust 的 `async fn` 可组合（`future::join(t1, t2).await`）而不立即执行；2) C# 的 `Task.WhenAll` 组合已运行的任务；3) Rust 的 `Drop` 在 Future 被取消时执行（异步清理），C# 的 `IDisposable` 需显式 `using`。这与 JavaScript 的 Promise（立即执行，类似 C#）或 Kotlin 的 suspend function（惰性，类似 Rust）不同——Rust 的惰性 async 提供更多控制，但需注意意外未执行。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]

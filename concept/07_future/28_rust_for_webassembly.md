@@ -923,3 +923,23 @@ fn main() {
 ```
 
 > **修正**: WASI Preview 2 是 WASM 的系统接口新一代标准，基于**组件模型**和**能力安全**（capability-based security）。与 WASI Preview 1 不同：1) 不再使用全局预打开（`--dir=.`)，而是通过组件的 `import` 显式传递能力；2) 文件系统是 `wasi:filesystem` 接口，需从环境中获取 `Descriptor`；3) 网络是 `wasi:sockets` 接口，同样需要显式能力。这改变了 WASM 模块的编写方式：模块不再假设拥有文件系统或网络，而是通过接口声明需求，运行时注入能力。这与 Deno 的权限模型（`--allow-read`、`--allow-net`）或 Cloudflare Workers 的隔离（无文件系统，有 fetch API）类似——WASI Preview 2 将 WASM 从"沙箱中的 POSIX"推向"能力安全的组件"。[来源: [WASI Preview 2](https://github.com/WebAssembly/WASI/tree/main/preview2)] · [来源: [Component Model](https://component-model.bytecodealliance.org/)]
+
+### 10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）
+
+```rust,ignore
+#![no_std]
+
+extern crate alloc;
+use alloc::vec::Vec;
+
+fn main() {
+    let mut v = Vec::new();
+    // ❌ 运行时 OOM: WASM 的线性内存（默认 1-2 pages = 64-128KB）
+    // Vec 增长可能超出 WASM 内存限制
+    for i in 0..10000 {
+        v.push(i);
+    }
+}
+```
+
+> **修正**: WebAssembly 的**线性内存**（linear memory）是单一连续的 byte 数组，默认初始大小 1-2 pages（64KB/page），最大 4GB。Rust 的 `Vec` 和 `String` 在 WASM 中运行时：1) `Vec::push` 触发 `memory.grow`（WASM 指令增加内存页数）；2) 若超过环境限制（浏览器可能限制 128MB 或 256MB），`memory.grow` 失败 → `alloc` 返回 null → Rust 的 allocator panic（`alloc_error_handler`）。优化：1) 预分配容量（`Vec::with_capacity(n)`）；2) 使用 `wee_alloc`（小型 allocator，适合 WASM）；3) 数据流处理（不一次性加载全部数据）。WASM 的 `wasm32-unknown-unknown` target 无 `std`，需 `no_std` + `alloc` 或纯 `core`。这与 JavaScript 的 `Array`（V8 自动管理，无显式内存页概念）或 Native 的 `Vec`（操作系统管理虚拟内存）不同——WASM 的内存模型显式且受限。[来源: [WebAssembly Memory](https://webassembly.org/docs/modules/#linear-memory)] · [来源: [WASM Rust](https://rustwasm.github.io/book/)]

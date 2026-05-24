@@ -1563,3 +1563,20 @@ fn parallel_system(query: Query<&SharedData>) {
 ```
 
 > **修正**: Bevy 的 ECS 调度器分析系统间的数据依赖，自动并行化无冲突的系统。但组件类型必须是 `Send`（跨线程）和 `Sync`（多线程共享），才能参与并行调度。`Rc<T>` 不是 `Send`，因此包含 `Rc` 的组件不能放入并行系统。解决方案：1) 使用 `Arc<T>` 替代 `Rc<T>`；2) 将非 `Send` 数据放在资源（`Resource`）中，限制在单线程系统访问；3) 使用 `bevy::ecs::system::NonSend` 标记资源只能在主线程访问。这与 Unity 的 `Component`（无 `Send`/`Sync` 概念，主线程访问）或 Godot 的节点树（单线程）不同——Rust 的 ECS 利用类型系统实现自动并行化，但要求组件满足线程安全约束。[来源: [Bevy ECS Documentation](https://docs.rs/bevy_ecs/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
+
+### 10.4 边界测试：Bevy ECS 的 `Query` 与 `ResMut` 的冲突（编译错误）
+
+```rust,ignore
+// 概念代码: Bevy system 参数冲突
+// fn conflicting_system(
+//     mut query: Query<&mut Transform>,
+//     mut transforms: ResMut<Assets<Transform>>, // ❌ 编译错误
+// ) {
+//     // Query<&mut Transform> 与 ResMut<Assets<Transform>> 不直接冲突
+//     // 但若 Query 和 ResMut 访问同一底层资源，Bevy 的编译期检查可能拒绝
+// }
+
+fn main() {}
+```
+
+> **修正**: Bevy 的 ECS **system 参数冲突**：1) `Query<&mut T>` 与 `Query<&T>` 不能共存（同一组件的可变和不可变查询）；2) `ResMut<R>` 与 `Res<R>` 不能共存（同一资源的可变和不可变引用）；3) `Query<&mut T>` 与 `Commands` 在特定情况下冲突（`Commands` 可能删除实体，影响 Query）。解决：1) `ParamSet` — 显式声明互斥参数集；2) 分多个 system — 通过事件或 `Commands` 通信；3) `Without<T>` 过滤 — 排除特定组件。Bevy 的编译期检查利用 Rust 的类型系统防止 ECS 冲突，是 ECS + Rust 的独特优势。这与 Unity 的 ECS（运行时检查冲突，可能抛出异常）或 flecs（C ECS，类似编译期检查但不完全）不同——Bevy 的编译期保证消除了大量运行时错误。[来源: [Bevy ECS](https://bevyengine.org/learn/book/getting-started/ecs/)] · [来源: [Bevy Query](https://docs.rs/bevy_ecs/)]

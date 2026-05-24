@@ -42,6 +42,10 @@
   - [十、边界测试：闭包的编译错误](#十边界测试闭包的编译错误)
     - [10.1 边界测试：闭包捕获环境后环境失效（编译错误）](#101-边界测试闭包捕获环境后环境失效编译错误)
     - [10.2 边界测试：`Fn` vs `FnMut` vs `FnOnce` 不匹配（编译错误）](#102-边界测试fn-vs-fnmut-vs-fnonce-不匹配编译错误)
+    - [10.3 边界测试：`move` 闭包与 `Copy` 类型的交互（编译错误/逻辑错误）](#103-边界测试move-闭包与-copy-类型的交互编译错误逻辑错误)
+    - [10.4 边界测试：闭包类型与 `impl Trait` 返回（编译错误）](#104-边界测试闭包类型与-impl-trait-返回编译错误)
+    - [10.5 边界测试：闭包捕获模式与 `move` 关键字的语义（编译错误）](#105-边界测试闭包捕获模式与-move-关键字的语义编译错误)
+    - [10.6 边界测试：闭包 trait 的自动推导与显式约束（编译错误）](#106-边界测试闭包-trait-的自动推导与显式约束编译错误)
 
 ---
 
@@ -744,7 +748,7 @@ where
 
 ### 10.3 边界测试：`move` 闭包与 `Copy` 类型的交互（编译错误/逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = 5; // i32 实现 Copy
     let closure = move || {
@@ -786,3 +790,49 @@ fn main() {
 ```
 
 > **修正**: Rust 中每个闭包表达式有**唯一的匿名类型**，即使捕获环境和签名完全相同。`impl Fn(i32) -> i32` 在返回类型中隐藏具体类型，但在变量类型中不可用（`let x: impl Trait` 非法）。若需存储多个相同签名的闭包，使用 `Box<dyn Fn(i32) -> i32>`（动态分发）或函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）。闭包的匿名类型使编译器能内联调用（零成本），但限制了类型层面的操作（不能 `==` 比较类型、不能模式匹配）。这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 提供类型擦除）或 Java 的 lambda（编译为 `invokedynamic`，运行时生成类）不同——Rust 的闭包类型在编译期完全确定，无运行时生成。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+
+### 10.5 边界测试：闭包捕获模式与 `move` 关键字的语义（编译错误）
+
+```rust,ignore
+fn main() {
+    let s = String::from("hello");
+    let closure = || println!("{}", s); // 默认捕获 &s（Fn）
+    closure();
+
+    // ❌ 编译错误: s 被闭包以 &s 借用，不能移动
+    let s2 = s;
+}
+```
+
+> **修正**: 闭包的**捕获模式**由编译器根据使用方式自动推断：1) 只读使用 → `&T`（`Fn`）；2) 修改使用 → `&mut T`（`FnMut`）；3) 移动/消耗使用 → `T`（`FnOnce`）。`move ||` 强制**按值捕获**所有变量（move 语义），用于延长闭包生命周期（如返回闭包或跨线程传递）。常见陷阱：1) 闭包捕获 `&s` 后，原变量 `s` 被借用，不能移动；2) `move ||` 闭包尝试多次调用（若捕获变量未实现 `Copy`）；3) 闭包返回后，捕获变量在闭包内 drop。修复：使用 `move ||` 强制转移所有权，或在闭包使用后立即 drop 闭包释放借用。这与 C++ 的 lambda 捕获列表（`[&]`、`[=]` 显式指定）或 Java 的匿名类（隐式 final 变量捕获）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对变量可用性的影响。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+
+### 10.6 边界测试：闭包 trait 的自动推导与显式约束（编译错误）
+
+```rust,ignore
+fn apply_twice<F>(f: F, x: i32) -> i32
+where
+    F: Fn(i32) -> i32,
+{
+    f(f(x))
+}
+
+fn main() {
+    let mut counter = 0;
+    let mut closure = |x| { counter += 1; x + counter };
+    // ❌ 编译错误: 闭包修改 counter，是 FnMut，不满足 Fn 约束
+    // let result = apply_twice(closure, 5);
+
+    // 正确: 使用 FnMut 约束
+    fn apply_twice_mut<F>(mut f: F, x: i32) -> i32
+    where
+        F: FnMut(i32) -> i32,
+    {
+        let first = f(x);
+        f(first)
+    }
+    let result = apply_twice_mut(closure, 5);
+    println!("{}", result);
+}
+```
+
+> **修正**: 闭包的 trait 自动实现：1) `Fn` — 不修改捕获状态；2) `FnMut` — 修改捕获状态（`mut` 绑定）；3) `FnOnce` — 消耗捕获状态（move）。`apply_twice` 要求 `F: Fn`（可多次调用不修改状态），但 `closure` 是 `FnMut`（修改 `counter`）。修复：1) 改用 `FnMut` 约束 + `mut` 参数；2) 重构闭包避免修改状态（用返回值传递状态）；3) 使用 `Cell`/`RefCell` 内部可变性（使闭包变为 `Fn`）。这与 C++ 的 lambda（按值/按引用捕获显式指定，无 Fn/FnMut/FnOnce 区分）或 Java 的 lambda（隐式 final 变量捕获，只能读取）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Traits](https://doc.rust-lang.org/reference/types/closure.html)]

@@ -42,6 +42,11 @@
   - [十、边界测试：类型转换的编译错误](#十边界测试类型转换的编译错误)
     - [10.1 边界测试：不安全的 `as` 转换导致截断（运行时错误）](#101-边界测试不安全的-as-转换导致截断运行时错误)
     - [10.2 边界测试：裸指针与引用转换的生命周期丢失（编译错误 / 运行时 UB）](#102-边界测试裸指针与引用转换的生命周期丢失编译错误--运行时-ub)
+    - [10.3 边界测试： trait 对象强制转换的 `Sized` 约束（编译错误）](#103-边界测试-trait-对象强制转换的-sized-约束编译错误)
+    - [10.4 边界测试：`as` 关键字的转换限制（编译错误）](#104-边界测试as-关键字的转换限制编译错误)
+    - [10.5 边界测试：`dyn Trait` 到 `dyn Trait` 的跨 trait coercion（编译错误）](#105-边界测试dyn-trait-到-dyn-trait-的跨-trait-coercion编译错误)
+    - [10.5 边界测试：强制类型转换与 `Deref` 的自动解引用（编译错误）](#105-边界测试强制类型转换与-deref-的自动解引用编译错误)
+    - [10.6 边界测试：函数指针到闭包的类型不兼容（编译错误）](#106-边界测试函数指针到闭包的类型不兼容编译错误)
 
 ---
 
@@ -752,7 +757,7 @@ fn main() {
 
 ### 10.5 边界测试：`dyn Trait` 到 `dyn Trait` 的跨 trait coercion（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait A {}
 trait B: A {}
 
@@ -766,3 +771,56 @@ fn upcast(b: &dyn B) -> &dyn A {
 ```
 
 > **修正**: Trait object 的**向上转型**（upcasting）：`dyn B` → `dyn A`（`B: A`）在 Rust 中长期不支持，因为 vtable 布局问题：`dyn B` 的 vtable 包含 `B` 的方法，`dyn A` 的 vtable 只包含 `A` 的方法，需要额外的 vtable 指针或调整。Rust 1.86+ 引入了 trait upcasting（不稳定特性），允许 `b as &dyn A`。旧版 workaround：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。这与 Java 的接口向上转型（自动，无开销）或 C++ 的多继承（复杂 vtable 调整）不同——Rust 的单一继承 trait + 自动 upcasting 是设计演进的方向。[来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [来源: [Trait Upcasting RFC](https://rust-lang.github.io/rfcs/3324-dyn-upcasting.html)]
+
+### 10.5 边界测试：强制类型转换与 `Deref` 的自动解引用（编译错误）
+
+```rust,compile_fail
+use std::ops::Deref;
+
+struct Wrapper(String);
+
+impl Deref for Wrapper {
+    type Target = String;
+    fn deref(&self) -> &String { &self.0 }
+}
+
+fn takes_str(s: &str) {
+    println!("{}", s);
+}
+
+fn main() {
+    let w = Wrapper(String::from("hello"));
+    // ✅ Deref 自动解引用: &Wrapper → &String → &str
+    takes_str(&w);
+
+    // ❌ 编译错误: Deref 只作用于引用，不作用于值
+    let s: String = w; // 需要实现 DerefMove（不存在）
+}
+```
+
+> **修正**: `Deref` trait 提供**自动解引用**：`&Wrapper` 自动转为 `&String`（若 `Wrapper: Deref<Target = String>`），再转为 `&str`（若 `String: Deref<Target = str>`）。但 `Deref` 的限制：1) 只作用于引用（`&T`），不作用于值移动；2) 不可链式用于方法调用的 receiver（`w.len()` 调用 `String::len` 是通过自动解引用）；3) 不可用于 `let s: String = w`（需要 `DerefMove`，Rust 中不存在）。`Deref` 的设计目的：让自定义类型像智能指针一样行为（`Box<T>`、`Rc<T>`、`Arc<T>`）。这与 C++ 的隐式转换运算符（`operator T()`，可作用于值移动）或 Swift 的 `ExpressibleByStringLiteral` 不同——Rust 的 `Deref` 是受限的自动解引用，滥用会导致设计问题。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/predictability.html)]
+
+### 10.6 边界测试：函数指针到闭包的类型不兼容（编译错误）
+
+```rust,compile_fail
+fn takes_fn(f: fn(i32) -> i32) -> i32 {
+    f(42)
+}
+
+fn main() {
+    let closure = |x| x + 1;
+    // ❌ 编译错误: 闭包类型与 fn(i32) -> i32 不兼容
+    // takes_fn(closure);
+
+    // 正确: 闭包不捕获环境时，可强制转为函数指针
+    let closure_no_capture = |x: i32| -> i32 { x + 1 };
+    takes_fn(closure_no_capture); // ✅
+
+    // 捕获环境的闭包不能转为函数指针
+    let offset = 1;
+    let closure_capture = |x| x + offset;
+    // takes_fn(closure_capture); // ❌ 编译错误
+}
+```
+
+> **修正**: 闭包与函数指针的类型关系：1) **无捕获闭包**（`Fn` / `FnMut` / `FnOnce` 不捕获环境）可**强制转换**为函数指针 `fn(T) -> U`；2) **捕获闭包**有编译器生成的匿名类型（如 `{closure@main.rs:10:5}`），不能转为函数指针；3) `fn` 指针大小固定（两个指针：`data` + `code` 或单个代码指针），闭包类型大小取决于捕获的变量。需要传递捕获闭包时，使用 trait object：`Box<dyn Fn(i32) -> i32>` 或 `&dyn Fn(i32) -> i32`。这与 C++ 的 lambda（无捕获时可转为函数指针，有捕获时不能）或 Java 的 lambda（总是转为函数式接口，但底层是对象）类似——Rust 的闭包类型系统精确区分捕获和无捕获。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]

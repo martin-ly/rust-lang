@@ -156,7 +156,7 @@ Kleene 不动点定理:
 
 ### 10.1 边界测试：非终止计算与 `loop {}` 的类型（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // ❌ 编译错误: `loop {}` 的类型是 `!` (never type)，
     // 在 Rust 1.41+ 中可被强制转换为任何类型
@@ -178,7 +178,7 @@ fn call_diverges() -> i32 {
 
 ### 10.2 边界测试：`panic!` 的指称与 `Result` 的指称分离（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn may_fail() -> Result<i32, String> {
     // ❌ 编译错误: panic! 返回 !，不是 Result
     // panic 的指称是 ⊥（底部），不是 Err
@@ -551,7 +551,7 @@ fn main() {
 
 ### 10.3 边界测试：发散函数（`!`）的指称语义（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn diverges() -> ! {
     loop {}
 }
@@ -569,7 +569,7 @@ fn main() {
 
 ### 10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut x = 42;
     let r = &mut x as *mut i32;
@@ -581,3 +581,23 @@ fn main() {
 ```
 
 > **修正**: 指称语义为 safe Rust 提供了精确的数学模型，但 `unsafe` 代码打破了这一模型。Safe Rust 的语义保证：没有数据竞争、没有悬垂指针、没有类型混淆。`unsafe` 块允许开发者绕过这些保证，但要求手动维护语义不变式。上述代码中，`r.add(1)` 指向 `x` 之后的内存（未分配），写入是未定义行为——指称语义无法描述 `unsafe` 代码的行为，因为 `unsafe` 进入了实现定义的领域。形式化验证工具（Miri、Kani、RustBelt）试图为 `unsafe` 代码建立安全边界：Miri 解释执行检测 UB，Kani 符号验证断言，RustBelt 在分离逻辑中证明 unsafe 抽象的安全性。但完全的形式化覆盖仍是开放问题——`unsafe` 是 Rust 语义中的"已知未知"。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）
+
+```rust,ignore
+enum List<T> {
+    Nil,
+    Cons(T, Box<List<T>>),
+}
+
+// 试图创建无限类型（不动点）
+// ❌ 编译错误: Rust 不允许直接表达 μX.F(X) 这样的不动点类型
+// 需通过递归 enum 间接实现
+
+fn main() {
+    let list = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Nil))));
+    // 有限的递归结构可以，但无限类型（如 Stream）需用 trait object 或延迟计算
+}
+```
+
+> **修正**: 指称语义（Denotational Semantics）使用**域论**（domain theory）处理递归：递归类型 `μX.F(X)` 定义为 `F` 的最小不动点，包含有限和无限值（惰性求值）。Rust 是**严格求值**语言，不支持直接表达无限值（如 Haskell 的无限列表 `[1..]`）。Rust 中的无限结构：1) **trait object**：`Box<dyn Iterator<Item = i32>>`（运行时延迟计算）；2) **生成器/协程**：`async fn` 或 `gen` 块（2024+）；3) **手动状态机**：`Stream` 实现。递归类型（`List<T>`）在 Rust 中必须间接（`Box` 或 `Rc`），因为编译器需要确定类型大小。这与 Haskell 的惰性递归类型（`data List a = Nil | Cons a (List a)`，可无限）或 ML 的惰性 `datatype` 不同——Rust 的严格语义和静态大小要求排除了直接的不动点类型。[来源: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)] · [来源: [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)]

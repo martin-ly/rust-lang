@@ -795,3 +795,21 @@ async fn query(pool: &sqlx::PgPool) {
 ```
 
 > **修正**: 数据库连接池（`sqlx`、`deadpool`、`bb8`）管理有限的数据库连接资源。**池耗尽**（pool exhaustion）是高并发系统的常见问题：1) 连接未正确释放（忘记 `drop` guard、长事务）；2) 池大小配置过小（`max_connections = 10` 对应 1000 QPS）；3) 慢查询占用连接过久。`sqlx` 的 `acquire_timeout` 配置获取连接的超时，防止无限等待。异步 Rust 的特殊风险：`await` 持有连接 guard 跨越 await 点 → 其他任务无法获取连接 → 死锁。安全模式：在最小作用域内使用连接，或在 `async` 块开始时获取，结束前释放。这与 Go 的 `sql.DB`（内置连接池，默认无上限）或 Java 的 HikariCP（类似配置）不同——Rust 的显式生命周期使连接泄漏更难发生，但 async/await 引入了新的持有模式。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [PostgreSQL Connection Pooling](https://wiki.postgresql.org/wiki/PgBouncer)]
+
+### 10.3 边界测试：连接池的 `deadpool` 与 async 生命周期（运行时超时/崩溃）
+
+```rust,compile_fail
+use deadpool_postgres::{Client, Config, Manager, ManagerConfig, Pool, RecyclingMethod};
+
+async fn query(pool: &Pool) -> Result<String, Box<dyn std::error::Error>> {
+    // ❌ 运行时风险: Client 从 pool 获取后跨越 await 点持有连接
+    // 若查询慢，连接长时间不释放，其他请求饥饿
+    let client: Client = pool.get().await?;
+    let row = client.query_one("SELECT * FROM users WHERE id = $1", &[&1i32]).await?;
+    Ok(row.get("name"))
+}
+
+fn main() {}
+```
+
+> **修正**: Async 数据库连接池（`deadpool`、`sqlx::Pool`、`bb8`）的管理：1) `pool.get().await` 获取连接，连接 guard 在 drop 时归还；2) 连接跨越多个 `await` 点 → 长时间占用，可能导致池耗尽；3) 慢查询阻塞连接 → 其他请求等待超时。优化：1) 最小作用域使用连接（`{ let client = pool.get().await?; ... }`）；2) 设置 `acquire_timeout`（获取连接的超时）；3) 设置 `max_connections`（根据数据库容量）；4) 使用连接池的 `statement cache` 减少准备开销。`sqlx` 的 compile-time checked queries 是 Rust 数据库访问的独特优势——SQL 在编译期验证，避免运行时语法错误。这与 Go 的 `sql.DB`（内置连接池，默认无上限）或 Java 的 HikariCP（类似配置）不同——Rust 的显式生命周期使连接泄漏更难发生，但 async/await 引入了新的持有模式。[来源: [deadpool](https://docs.rs/deadpool/)] · [来源: [sqlx](https://docs.rs/sqlx/)]

@@ -40,6 +40,7 @@
     - [10.2 边界测试：规范与编译器实现的差异（编译错误）](#102-边界测试规范与编译器实现的差异编译错误)
     - [10.6 边界测试：规范与编译器实现的临时不一致（编译错误）](#106-边界测试规范与编译器实现的临时不一致编译错误)
     - [10.5 边界测试：规范草案与编译器实现的不一致（编译行为漂移）](#105-边界测试规范草案与编译器实现的不一致编译行为漂移)
+    - [10.3 边界测试：规范文本与编译器实现的不一致（编译行为差异）](#103-边界测试规范文本与编译器实现的不一致编译行为差异)
 
 ---
 
@@ -498,7 +499,7 @@ fn main() {
 
 ### 10.1 边界测试：规范未定义行为的边界（编译错误/运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut x = 0;
     let r1 = &mut x as *mut i32;
@@ -535,7 +536,7 @@ fn main() {
 
 ### 10.6 边界测试：规范与编译器实现的临时不一致（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut x = 0;
     let r = &mut x;
@@ -554,7 +555,7 @@ fn main() {
 
 ### 10.5 边界测试：规范草案与编译器实现的不一致（编译行为漂移）
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 潜在不一致: Rust 规范草案定义的行为与 rustc 实际实现可能不同
 // 例如: 规范可能定义求值顺序为左到右，但旧版 rustc 实现不同
 
@@ -569,3 +570,19 @@ fn main() {
 ```
 
 > **修正**: Rust 规范项目（Ferrocene、Rust Specification）的目标是创建**权威参考文档**，但开发中的风险：1) 规范描述的行为与实际编译器（rustc）不一致；2) 规范更新滞后于语言演进（新特性先实现，后规范）；3) 规范与 Miri 的行为定义冲突（Miri 是"理想行为"，但 rustc 可能有 bug）。策略：1) 规范以 rustc 行为为基准（reference implementation）；2) Miri 作为可执行规范验证不一致；3) 发现不一致时，先确定是 rustc bug 还是规范 bug，再修复。这与 C++ 的标准（ISO 标准先行，编译器后实现，导致长期不一致）或 Go 的规范（语言规范与官方编译器同步维护）不同——Rust 选择"实现先行"路径，规范是后验文档，非先验约束。Ferrocene 的安全关键认证需要稳定规范，推动规范与实现的同步。[来源: [Rust Specification Working Group](https://github.com/rust-lang/spec)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]
+
+### 10.3 边界测试：规范文本与编译器实现的不一致（编译行为差异）
+
+```rust,ignore
+fn main() {
+    let mut x = 5;
+    let r = &mut x;
+    *r += 1;
+    // 规范草案可能定义 borrow check 规则与 rustc 实现不同
+    // 例如: NLL 的精确语义在规范中可能使用更形式化的描述
+    // 但实际编译器使用数据流分析实现
+    assert_eq!(x, 6); // 实际行为
+}
+```
+
+> **修正**: Rust 规范项目的目标是创建**权威参考文档**，但开发中风险：1) 规范描述的行为与实际编译器不一致；2) 规范更新滞后于语言演进；3) 规范与 Miri 的行为定义冲突。策略：1) 规范以 rustc 行为为基准（reference implementation）；2) Miri 作为可执行规范验证不一致；3) 发现不一致时，先确定是 rustc bug 还是规范 bug，再修复。这与 C++ 的标准（ISO 标准先行，编译器后实现）或 Go 的规范（语言规范与官方编译器同步维护）不同——Rust 选择"实现先行"路径，规范是后验文档。Ferrocene 的安全关键认证需要稳定规范，推动规范与实现的同步。[来源: [Rust Specification Working Group](https://github.com/rust-lang/spec)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]

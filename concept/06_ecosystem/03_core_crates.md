@@ -1533,3 +1533,53 @@ fn main() {
 ```
 
 > **修正**: `rayon` 是 Rust 的数据并行库，基于 work-stealing 线程池自动并行化迭代器。但**任务粒度**是关键：1) 任务太小（如 `x * 2`）→ 线程调度开销 > 并行收益；2) 任务太大 → 负载不均衡，某些线程空闲。`rayon` 的启发式：通过 `join` 递归分割任务，但无法控制最小分割粒度。优化：1) 使用 `par_chunks` 增加每任务工作量；2) 使用 `with_min_len(n)` 设置最小长度；3) 只在计算密集型操作中使用 `par_iter`（I/O 密集型用 `tokio`）。这与 Java 的 `ForkJoinPool`（类似 work-stealing）或 C++ 的 `std::execution::par`（C++17，类似抽象）类似——数据并行的性能取决于任务粒度，无万能配置。[来源: [rayon Documentation](https://docs.rs/rayon/)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+
+### 10.3 边界测试：`thiserror` 与 `anyhow` 的错误类型混用（编译错误）
+
+```rust,compile_fail
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+enum MyError {
+    #[error("io error")]
+    Io(#[from] std::io::Error),
+}
+
+fn do_something() -> Result<(), MyError> {
+    std::fs::File::open("missing.txt")?;
+    Ok(())
+}
+
+fn main() {
+    // ❌ 编译错误: anyhow::Result 与自定义错误类型不直接兼容
+    // 若某函数返回 anyhow::Result，另一函数返回 Result<(), MyError>，
+    // 需显式转换或统一错误类型
+    let result: Result<(), MyError> = do_something();
+    println!("{:?}", result);
+}
+```
+
+> **修正**: `thiserror` 用于**库**的错误类型定义（派生 `std::error::Error`），`anyhow` 用于**应用**的错误处理（动态类型擦除）。混用场景：1) 库返回 `thiserror` 定义的错误；2) 应用使用 `anyhow::Result` 聚合多个库的错误；3) `anyhow::Error::from(my_error)` 自动转换。`anyhow` 的 `Context` trait 添加错误上下文：`file.open("config.txt").context("failed to read config")?`。`thiserror` 的优势：结构化错误（可匹配具体变体）；`anyhow` 的优势：简洁、动态、自动回溯（backtrace）。这与 Go 的 `error` 接口（简单字符串，无链式上下文）或 Java 的异常链（`cause` 字段）类似——Rust 的错误生态分层明确：`thiserror` 用于类型化错误，`anyhow` 用于运行时错误处理。[来源: [thiserror](https://docs.rs/thiserror/)] · [来源: [anyhow](https://docs.rs/anyhow/)]
+
+### 10.4 边界测试：`tokio` 的 runtime 与 `std::thread::spawn` 混用（运行时性能下降）
+
+```rust,compile_fail
+use tokio::runtime::Runtime;
+
+fn main() {
+    let rt = Runtime::new().unwrap();
+    rt.block_on(async {
+        // ❌ 运行时问题: 在 tokio runtime 中使用 std::thread::spawn 创建阻塞线程
+        // 会占用操作系统线程，降低 async 任务的并发效率
+        std::thread::spawn(|| {
+            std::thread::sleep(std::time::Duration::from_secs(10));
+        });
+        
+        tokio::spawn(async {
+            println!("async task");
+        }).await.unwrap();
+    });
+}
+```
+
+> **修正**: `tokio` 的**任务调度**：1) `tokio::spawn` — 创建异步任务，由 tokio 的线程池调度（非阻塞）；2) `std::thread::spawn` — 创建 OS 线程，阻塞操作占用线程。混用问题：1) 阻塞操作（sleep、文件 IO、CPU 密集）占用 tokio worker 线程 → 其他 async 任务饥饿；2) 应使用 `tokio::task::spawn_blocking` 运行阻塞代码；3) 或使用 `tokio::fs` 替代 `std::fs`（异步文件 IO）。`tokio` 的线程池：默认 worker 线程数 = CPU 核心数，阻塞任务应 offload 到 blocking pool。这与 Go 的 goroutine（调度器自动处理阻塞，无需区分 async/sync）或 Java 的 `CompletableFuture`（默认使用 `ForkJoinPool`，同样需避免阻塞）不同——Rust 的 async runtime 要求开发者显式管理阻塞操作。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]

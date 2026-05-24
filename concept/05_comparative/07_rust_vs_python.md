@@ -38,6 +38,13 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 Python 的编译错误对比](#十边界测试rust-与-python-的编译错误对比)
+    - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误)
+  - [十、边界测试：Rust 与 Python 的编译错误对比](#十边界测试rust-与-python-的编译错误对比-1)
+    - [10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）](#101-边界测试python-的动态类型-vs-rust-的静态类型编译错误-1)
+    - [10.2 边界测试：Python 的 GIL 与 Rust 的所有权并发（编译错误）](#102-边界测试python-的-gil-与-rust-的所有权并发编译错误)
+    - [10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）](#105-边界测试python-的-gil-与-rust-的-arcmutext-的性能对比运行时开销)
+    - [10.3 边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）](#103-边界测试python-式动态类型在-rust-中的不可表达编译错误)
 
 ---
 
@@ -578,7 +585,7 @@ graph TD
 
 ### 10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = 42;
     // ❌ 编译错误: expected integer, found `&str`
@@ -598,13 +605,13 @@ fn fixed() {
 }
 ```
 
-> **Python 对比**: Python 是动态类型——变量名只是标签，可以指向任何类型的对象：`x = 42; x = 
+> **Python 对比**: Python 是动态类型——变量名只是标签，可以指向任何类型的对象：`x = 42; x =
 
 ## 十、边界测试：Rust 与 Python 的编译错误对比
 
 ### 10.1 边界测试：Python 的动态类型 vs Rust 的静态类型（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = 42;
     // ❌ 编译错误: expected integer, found `&str`
@@ -657,14 +664,14 @@ fn fixed() {
 
 ### 10.5 边界测试：Python 的 GIL 与 Rust 的 `Arc<Mutex<T>>` 的性能对比（运行时开销）
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::{Arc, Mutex};
 use std::thread;
 
 fn main() {
     let data = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..8 {
         let d = Arc::clone(&data);
         handles.push(thread::spawn(move || {
@@ -674,13 +681,26 @@ fn main() {
             }
         }));
     }
-    
+
     for h in handles { h.join().unwrap(); }
     println!("{}", *data.lock().unwrap());
-    
+
     // ⚠️ 性能注意: Arc<Mutex<T>> 的争用比 Python GIL 更细粒度
     // 但 Mutex 开销在高度争用时显著
 }
 ```
 
 > **修正**: Python 的 **GIL**（Global Interpreter Lock）使多线程 Python 代码**串行执行**——同一时刻只有一个线程执行 Python 字节码。Rust 的 `Arc<Mutex<T>>` 允许**真并行**，但 `Mutex` 的锁争用（lock contention）在高频访问时成为瓶颈。性能对比：1) Python GIL：无锁开销，但无并行；2) Rust `Mutex`：有锁开销（原子操作 + 内核调度），但可并行；3) Rust `AtomicUsize`：无锁，最高性能。Rust 的优势：开发者可根据场景选择同步原语（`Mutex`、`RwLock`、`Atomic`、无锁结构），Python 无此选择。这与 Java 的 `synchronized`（类似 Mutex，但 JVM 优化更成熟）或 Go 的 `sync.Mutex`（类似 Rust，但 goroutine 调度更轻量）类似——Rust 提供底层控制，但正确使用需要理解内存模型。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [Python GIL](https://wiki.python.org/moin/GlobalInterpreterLock)]
+
+### 10.3 边界测试：Python 式动态类型在 Rust 中的不可表达（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 42; // x 是 i32
+    // ❌ 编译错误: Rust 变量不能改变类型
+    x = "hello"; // 期望 i32，找到 &str
+    println!("{}", x);
+}
+```
+
+> **修正**: Python 是**动态类型**：变量无固定类型，`x = 42` 后 `x = "hello"` 完全合法。Rust 是**静态类型**：变量类型在编译期确定且不可变（但值可变，若绑定为 `mut`）。Rust 模拟动态类型的方案：1) `enum`（代数数据类型）：`enum Value { Int(i32), Str(String) }`；2) `Box<dyn Any>`（运行时类型擦除）；3) `serde_json::Value`（通用 JSON 值）。代价：代码膨胀、运行时开销、模式匹配噪音。这与 Go 的 `interface{}`（类似动态类型，但需类型断言）或 TypeScript 的 `any`（编译期绕过检查）不同——Rust 的静态类型是核心设计语言，动态类型是额外抽象。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)] · [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]

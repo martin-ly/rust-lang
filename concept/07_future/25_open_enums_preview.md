@@ -48,6 +48,7 @@
     - [10.2 边界测试：开放枚举的整数转换安全（编译错误/运行时 panic）](#102-边界测试开放枚举的整数转换安全编译错误运行时-panic)
     - [10.3 边界测试：open enum 的 match 穷尽性检查松弛（编译错误）](#103-边界测试open-enum-的-match-穷尽性检查松弛编译错误)
     - [10.4 边界测试：open enum 的整数转换与有效性检查（运行时 panic）](#104-边界测试open-enum-的整数转换与有效性检查运行时-panic)
+    - [10.3 边界测试：open enum 的穷尽匹配与未知变体（编译错误/运行时 panic）](#103-边界测试open-enum-的穷尽匹配与未知变体编译错误运行时-panic)
 
 ---
 
@@ -750,3 +751,26 @@ fn from_raw(val: u8) -> Priority {
 ```
 
 > **修正**: Open enum 的 `from_raw` 转换是设计难点：1) `from_raw(5)` 创建未知变体，是 safe 的（不 panic），但后续 `match` 需处理 `_`；2) `from_raw` 是否应返回 `Option<Self>`（`try_from` 模式），拒绝未知值？3) 未知变体的内部表示：存储原始整数值（`Priority(5)`），还是不存储（仅标记"未知"）？设计决策影响：1) 内存布局（是否需要额外字段存储原始值）；2) `Debug` 输出（能否打印 `"Priority(5)"`）；3) 序列化（未知变体如何 JSON 化）。这与 C 的 enum（整数可任意转换，无检查）或 Java 的 `Enum.valueOf`（字符串名查找，未找到抛异常）不同——Rust 的 open enum 设计需在类型安全、灵活性和性能间权衡。[来源: [Open Enums RFC Draft](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html)]
+
+### 10.3 边界测试：open enum 的穷尽匹配与未知变体（编译错误/运行时 panic）
+
+```rust,ignore
+// 概念代码: open enum（提案中）
+// #[repr(u8)]
+// open enum StatusCode {
+//     Ok = 200,
+//     NotFound = 404,
+// }
+
+// fn handle_status(code: StatusCode) {
+//     match code {
+//         StatusCode::Ok => println!("ok"),
+//         StatusCode::NotFound => println!("not found"),
+//         // ❌ 编译错误: open enum 要求处理未知变体（_ =>）
+//     }
+// }
+
+fn main() {}
+```
+
+> **修正**: **Open enum**（RFC 开放中）允许枚举在**未来版本中添加新变体**，而不破坏现有代码的穷尽匹配。当前 Rust 的枚举是**封闭的**：添加新变体会使所有 `match` 编译错误（非穷尽）。Open enum 的设计：1) `open enum` 关键字；2) 匹配时必须包含 `_ =>` 处理未知变体；3) 未知变体可通过 `as u8` 等转换获取底层值。使用场景：1) C FFI（C enum 可能在未来扩展）；2) 网络协议（HTTP 状态码、错误码）；3) 序列化格式（向后兼容）。这与 Java 的 enum（可添加新常量，但 `switch` 不强制处理 default）或 C 的 enum（整数常量，无穷尽检查）不同——Rust 的 open enum 在类型安全和向后兼容之间寻求平衡。[来源: [Open Enum RFC](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]

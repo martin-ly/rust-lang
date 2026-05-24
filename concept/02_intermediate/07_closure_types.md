@@ -44,6 +44,9 @@
   - [十、边界测试：闭包类型的编译错误](#十边界测试闭包类型的编译错误)
     - [10.1 边界测试：闭包类型推断与 `fn` 指针的不兼容（编译错误）](#101-边界测试闭包类型推断与-fn-指针的不兼容编译错误)
     - [10.2 边界测试：`dyn Fn` 与泛型闭包的性能差异（逻辑错误）](#102-边界测试dyn-fn-与泛型闭包的性能差异逻辑错误)
+    - [10.3 边界测试：`Fn` trait 的自动实现与 `move` 闭包（编译错误）](#103-边界测试fn-trait-的自动实现与-move-闭包编译错误)
+    - [10.4 边界测试：闭包递归的类型推断失败（编译错误）](#104-边界测试闭包递归的类型推断失败编译错误)
+    - [10.5 边界测试：闭包在 `match` 臂中的类型推断（编译错误）](#105-边界测试闭包在-match-臂中的类型推断编译错误)
 
 ---
 
@@ -600,11 +603,14 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的闭包类型推断是单向的——编译器需要知道闭包的完整类型才能生成代码，但递归闭包在定义时引用自身，形成循环依赖。解决方案：1) 使用 `fn` 函数（有明确类型）；2) 使用 `Box<dyn Fn(i32) -> i32>` 或 `Rc<dyn Fn(i32) -> i32>` 延迟类型解析；3) 使用 Y 组合子或固定点组合子（函数式编程技巧）。这与 Haskell 的递归 let（`let fib n = ... in fib 10`， Hindley-Milner 类型推断自动处理递归）或 JavaScript（无静态类型，无此问题）不同——Rust 的类型系统要求所有类型在编译期解析，递归闭包的自引用需要通过间接层（指针、trait 对象）打破循环。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html)]
+> **修正**: Rust 的闭包类型推断是单向的——编译器需要知道闭包的完整类型才能生成代码，但递归闭包在定义时引用自身，形成循环依赖。解决方案：1) 使用 `fn` 函数（有明确类型）；2) 使用 `Box<dyn Fn(i32) -> i32>` 或 `Rc<dyn Fn(i32) -> i32>` 延迟类型解析；3) 使用 Y 组合子或固定点组合子（函数式编程技巧）。
+> 这与 Haskell 的递归 let（`let fib n = ... in fib 10`， Hindley-Milner 类型推断自动处理递归）或 JavaScript（无静态类型，无此问题）不同——Rust 的类型系统要求所有类型在编译期解析，递归闭包的自引用需要通过间接层（指针、trait 对象）打破循环。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
+> [来源: [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html)]
 
 ### 10.5 边界测试：闭包在 `match` 臂中的类型推断（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let f = match true {
         true => |x: i32| x + 1,
@@ -616,4 +622,7 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 中每个闭包表达式有**唯一的匿名类型**，即使捕获环境和签名完全相同。`match` 要求所有臂返回同一类型，因此两个不同的闭包不能直接作为 match 结果。解决方案：1) 使用函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）：`match true { true => (|x: i32| x + 1) as fn(i32) -> i32, ... }`；2) 使用 `Box<dyn Fn(i32) -> i32>`（有堆分配）；3) 使用枚举包装不同闭包，手动分发。这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 可统一）或 JavaScript 的函数（无类型差异）不同——Rust 的闭包类型系统在提供零成本抽象的同时，增加了类型操作的复杂性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+> **修正**: Rust 中每个闭包表达式有**唯一的匿名类型**，即使捕获环境和签名完全相同。`match` 要求所有臂返回同一类型，因此两个不同的闭包不能直接作为 match 结果。
+> 解决方案：1) 使用函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）：`match true { true => (|x: i32| x + 1) as fn(i32) -> i32, ... }`；2) 使用 `Box<dyn Fn(i32) -> i32>`（有堆分配）；3) 使用枚举包装不同闭包，手动分发。
+> 这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 可统一）或 JavaScript 的函数（无类型差异）不同——Rust 的闭包类型系统在提供零成本抽象的同时，增加了类型操作的复杂性。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]

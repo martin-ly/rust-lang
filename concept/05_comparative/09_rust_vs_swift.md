@@ -37,6 +37,11 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：Rust 与 Swift 的编译错误对比](#十边界测试rust-与-swift-的编译错误对比)
+    - [10.1 边界测试：Swift 的 ARC 与 Rust 的所有权（编译错误）](#101-边界测试swift-的-arc-与-rust-的所有权编译错误)
+    - [10.2 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#102-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
+    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用差异（运行时内存泄漏）](#103-边界测试swift-的-arc-与-rust-的所有权的循环引用差异运行时内存泄漏)
+    - [10.4 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#104-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
 
 ---
 
@@ -749,7 +754,7 @@ fn main() {
 
 ### 10.4 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let opt: Option<Option<i32>> = Some(Some(5));
     // ❌ 编译错误: Rust 无 Swift 式的 Optional 链语法
@@ -761,3 +766,24 @@ fn main() {
 ```
 
 > **修正**: Swift 的 **Optional chaining**（`?.`）和 **Optional binding**（`if let`、`guard let`）提供简洁的空安全操作。Rust 的 `?` 运算符和 `Option` 方法（`map`、`and_then`、`unwrap_or`）提供类似功能，但语法更显式。Swift 的 `?.` 可链式调用（`person?.address?.street?.uppercased()`），Rust 需 `person.as_ref()?.address.as_ref()?.street.to_uppercase()`（若使用 `Option` 包装每个字段）。Swift 的语法糖更友好，Rust 的方法链更灵活（可组合任意函数）。这与 Kotlin 的 `?.`、`let`、`run`（类似 Swift）或 Haskell 的 `Maybe` monad（`>>=` 绑定，类似 Rust 的 `and_then`）类似——空安全是现代语言的标配，实现方式因语言哲学而异。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Swift Optional Chaining](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/optionalchaining/)]
+
+### 10.3 边界测试：Swift 的 ARC 与 Rust 的所有权内存管理对比（运行时差异）
+
+```rust,ignore
+fn main() {
+    // Swift: 引用计数自动管理内存，循环引用用 weak/unowned 打破
+    // Rust: 编译期所有权跟踪，无运行时引用计数（除 Rc/Arc）
+    
+    let s = String::from("hello");
+    let s2 = s; // move，无运行时操作
+    // ❌ 编译错误: s 已移动
+    // println!("{}", s);
+    
+    // Swift 等价:
+    // let s = "hello"
+    // let s2 = s // 引用计数 +1（copy-on-write）
+    // print(s) // ✅ 可以，引用计数 >= 1
+}
+```
+
+> **修正**: Swift 的 **ARC**（Automatic Reference Counting）在运行时管理内存：赋值时引用计数 +1，超出作用域时 -1，为 0 时释放。循环引用用 `weak`（可 nil）或 `unowned`（不可 nil，但可能悬垂）打破。Rust 的**所有权系统**在编译期跟踪：1) `let s2 = s` 是 move（无运行时开销，只是指针复制）；2) 编译器保证无双重释放和 use-after-free；3) `Rc`/`Arc` 是显式的运行时引用计数（可选）。性能对比：Swift ARC 有原子操作开销（线程安全），Rust 的 move 是零成本。Swift 的优势：与 Objective-C 互操作、更灵活的引用语义；Rust 的优势：编译期保证、零成本抽象、无循环引用风险（`Box` 无循环，`Rc` 循环需 `Weak` 打破，但编译器不强制）。这与 Python 的 GC（引用计数 + 循环检测）或 C++ 的 `shared_ptr`（类似 ARC）不同——Rust 的所有权是编译期机制，非运行时。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Swift ARC](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/)]

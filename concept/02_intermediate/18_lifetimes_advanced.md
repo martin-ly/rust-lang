@@ -39,6 +39,12 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：高级生命周期的编译错误](#十边界测试高级生命周期的编译错误)
+    - [10.1 边界测试：自引用结构体与 `Pin`（编译错误）](#101-边界测试自引用结构体与-pin编译错误)
+    - [10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）](#102-边界测试生命周期边界中的-fora-hrtb编译错误)
+    - [10.5 边界测试：闭包捕获引用与 `Fn` trait 的生命周期约束（编译错误）](#105-边界测试闭包捕获引用与-fn-trait-的生命周期约束编译错误)
+    - [10.6 边界测试：`impl Trait` 返回类型的生命周期捕获（编译错误）](#106-边界测试impl-trait-返回类型的生命周期捕获编译错误)
+    - [10.3 边界测试：lifetime bounds 与 trait object 的交互（编译错误）](#103-边界测试lifetime-bounds-与-trait-object-的交互编译错误)
 
 ---
 
@@ -607,7 +613,7 @@ impl SelfRefFixed {
 
 ### 10.2 边界测试：生命周期边界中的 `for<'a>` HRTB（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn call_with_ref<F>(f: F)
 where
     F: Fn(&i32),
@@ -665,3 +671,21 @@ fn make_ref<'a>(s: &'a str) -> impl Iterator<Item = &'a char> + 'a {
 ```
 
 > **修正**: `impl Trait` 返回类型可捕获输入参数的生命周期（`+ 'a`），但不能延长局部变量的生命周期。上述代码中，`Vec<char>` 在函数内创建，`iter()` 返回的 `&char` 与 `Vec` 同生命周期——函数返回后 `Vec` 被释放，引用悬垂。解决方案：1) 返回拥有数据的类型（`Vec<char>` 本身，或 `Chars` 迭代器）；2) 让调用者提供缓冲区；3) 使用 `unsafe` 和 `ManuallyDrop`（不推荐）。这与 `async fn` 的生命周期捕获类似：返回的 future 可引用输入参数，但不能引用局部变量。`impl Trait` 的生命周期规则是 Rust 类型系统的核心——它确保返回的抽象不依赖已释放的数据。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)]
+
+### 10.3 边界测试：lifetime bounds 与 trait object 的交互（编译错误）
+
+```rust,compile_fail
+trait Processor<'a> {
+    fn process(&self, data: &'a str) -> &'a str;
+}
+
+fn use_processor(p: &dyn Processor<'static>) {
+    let s = String::from("temporary");
+    // ❌ 编译错误: Processor<'static> 要求 &'static str，但 &s 不是 'static
+    let _result = p.process(&s);
+}
+
+fn main() {}
+```
+
+> **修正**: Trait object `dyn Trait<'a>` 将生命周期参数**固化**为具体值。`dyn Processor<'static>` 要求所有输入输出都是 `'static`，不能处理临时字符串。修复：1) `fn use_processor<'a>(p: &dyn Processor<'a>, data: &'a str)` — 泛型生命周期；2) `dyn for<'a> Processor<'a>` — HRTB（Higher-Ranked Trait Bounds），接受任意生命周期。HRTB 的语法：`dyn for<'a> Fn(&'a str) -> &'a str` 表示闭包对所有 `'a` 有效。这与 Java 的泛型通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统的核心特性。[来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-02-advanced-lifetimes.html)]

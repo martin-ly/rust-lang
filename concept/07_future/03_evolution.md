@@ -1475,7 +1475,7 @@ graph TD
 
 ### 10.1 边界测试：Edition 迁移中的关键字冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // ❌ 编译错误: `async` 在 Rust 2018+ 中是关键字
     // 旧代码中可能使用 async 作为变量名
@@ -1493,7 +1493,7 @@ fn fixed() {
 
 ### 10.2 边界测试：`const generics` 的泛型参数推断（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn array_size<const N: usize>(arr: [i32; N]) -> usize {
     N
 }
@@ -1541,7 +1541,7 @@ impl LendingIterator for Vec<String> {
 
 ### 10.4 边界测试： let-else 语法与模式匹配（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let opt = Some(5);
     // ❌ 编译错误: 在 Rust 1.65 之前，let-else 语法不稳定

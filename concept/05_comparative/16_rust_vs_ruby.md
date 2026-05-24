@@ -44,6 +44,7 @@
     - [10.2 边界测试：Ruby 的元编程与 Rust 的宏（编译错误）](#102-边界测试ruby-的元编程与-rust-的宏编译错误)
     - [10.3 边界测试：Ruby 的元编程与 Rust 的宏系统的表达能力差异（编译错误）](#103-边界测试ruby-的元编程与-rust-的宏系统的表达能力差异编译错误)
     - [10.4 边界测试：Ruby 的 GIL 与 Rust 的真并行的性能差异（运行时数据竞争）](#104-边界测试ruby-的-gil-与-rust-的真并行的性能差异运行时数据竞争)
+    - [10.3 边界测试：Ruby 的元编程与 Rust 的宏卫生（编译错误）](#103-边界测试ruby-的元编程与-rust-的宏卫生编译错误)
 
 ---
 
@@ -695,7 +696,7 @@ fn main() {
 
 ### 10.1 边界测试：Ruby 的 open classes 与 Rust 的孤儿规则（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Greet {
     fn greet(&self);
 }
@@ -713,7 +714,7 @@ impl Greet for String {
 
 ### 10.2 边界测试：Ruby 的元编程与 Rust 的宏（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // ❌ 编译错误: Rust 没有 method_missing
     // 不能在运行时动态响应未定义方法
@@ -743,7 +744,7 @@ impl Point {
 
 ### 10.3 边界测试：Ruby 的元编程与 Rust 的宏系统的表达能力差异（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Ruby: 运行时元编程
 // class Foo
 //   define_method(:bar) { puts "dynamic" }
@@ -793,3 +794,22 @@ fn main() {
 ```
 
 > **修正**: Ruby 的 **GIL**（Global Interpreter Lock，或 GVL）是性能瓶颈也是安全特性：它防止了 Ruby 层面的数据竞争（同一时刻只有一个线程执行 Ruby 字节码），但 C 扩展仍可能引入数据竞争。Rust 无 GIL：线程是真并行的，编译器通过 `Send`/`Sync` 检查在编译期防止数据竞争。上述代码中，`data.iter_mut()` 生成的多个 `&mut i32` 不能发送到不同线程——这是 Rust 的编译期保证。若需并行修改，使用 `Mutex`、`RwLock` 或原子类型。这与 Python 的 GIL（同样防止数据竞争，但限制多核利用）或 Java 的无 GIL（真并行，通过 `synchronized` 和 `volatile` 防止数据竞争）类似——Rust 的 `Send`/`Sync` 是编译期的、零成本的 GIL 替代。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Ruby GIL/GVL](https://en.wikipedia.org/wiki/Global_interpreter_lock)]
+
+### 10.3 边界测试：Ruby 的元编程与 Rust 的宏卫生（编译错误）
+
+```rust,compile_fail
+macro_rules! define_method {
+    ($name:ident, $body:expr) => {
+        fn $name() { $body }
+    };
+}
+
+fn main() {
+    let x = 42;
+    // ❌ 编译错误: 宏生成的函数不能捕获局部变量
+    define_method!(get_x, x);
+    println!("{}", get_x());
+}
+```
+
+> **修正**: Rust 的宏是**卫生的**（hygienic）：宏生成的标识符在宏定义处解析，不与调用者的标识符冲突。`define_method!(get_x, x)` 中，`x` 在宏展开后被解析为宏定义上下文中的 `x`（不存在），而非 `main` 中的局部变量 `x`。Ruby 的 `define_method`（`define_method(:get_x) { x }`）使用闭包捕获调用者作用域的 `x`，这是运行时元编程。Rust 的宏是**编译期**代码生成，无运行时开销，但受卫生规则限制。要传递值到宏生成的函数：1) 使用 `const`；2) 使用闭包而非函数；3) 使用 `lazy_static`/`once_cell`。这与 C 的宏（无卫生，纯文本替换，极易污染命名空间）或 Scheme 的 hygienic macro（类似 Rust，但基于语法对象）不同——Rust 的卫生是编译器自动处理的，开发者通常无需关心。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)]

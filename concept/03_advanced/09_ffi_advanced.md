@@ -40,6 +40,10 @@
   - [十、边界测试：高级 FFI 的编译错误](#十边界测试高级-ffi-的编译错误)
     - [10.1 边界测试：可变静态变量在 FFI 中的线程安全（编译错误）](#101-边界测试可变静态变量在-ffi-中的线程安全编译错误)
     - [10.2 边界测试：`Box::into_raw` 后重复释放（运行时 UB）](#102-边界测试boxinto_raw-后重复释放运行时-ub)
+    - [10.3 边界测试：C 变长参数的类型安全（编译错误/运行时 UB）](#103-边界测试c-变长参数的类型安全编译错误运行时-ub)
+    - [10.4 边界测试：回调函数的生命周期与 `Box::into_raw` 泄漏（编译错误/运行时 UB）](#104-边界测试回调函数的生命周期与-boxinto_raw-泄漏编译错误运行时-ub)
+    - [10.5 边界测试：C 的 `long double` 与 Rust 的类型映射缺失（编译错误）](#105-边界测试c-的-long-double-与-rust-的类型映射缺失编译错误)
+    - [10.3 边界测试：C 可变参数函数的不安全绑定（运行时 UB）](#103-边界测试c-可变参数函数的不安全绑定运行时-ub)
 
 ---
 
@@ -856,3 +860,53 @@ fn main() {
 ```
 
 > **修正**: C 的 `long double` 是平台相关的浮点类型：x86 上 80 位扩展精度（16 字节对齐），ARM 上 128 位四精度，某些平台上与 `double` 相同。Rust 标准库**无 `c_longdouble` 类型**，`libc` crate 提供平台特定的定义。FFI 中使用 `long double` 需：1) 查询目标平台的 `sizeof(long double)`；2) 使用 `libc::c_longdouble`（若可用）；3) 或避免在 FFI 边界使用 `long double`（改为 `double` 或自定义结构）。这与 C++ 的 `long double`（原生支持）或 Go 的 `C.longdouble`（通过 cgo 支持）不同——Rust 的 FFI 设计优先覆盖常见场景，`long double` 的边缘情况需额外处理。[来源: [libc Crate](https://docs.rs/libc/)] · [来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)]
+
+### 10.3 边界测试：C 可变参数函数的不安全绑定（运行时 UB）
+
+```rust,compile_fail
+use std::os::raw::{c_char, c_int};
+use std::ffi::CString;
+
+extern "C" {
+    // C 的 printf 风格可变参数函数
+    fn sprintf(buf: *mut c_char, fmt: *const c_char, ...) -> c_int;
+}
+
+fn main() {
+    let mut buf = [0u8; 256];
+    let fmt = CString::new("%s %d").unwrap();
+    let msg = CString::new("hello").unwrap();
+    unsafe {
+        // ❌ 运行时 UB: 可变参数类型不匹配（如传递 i32 期望 i64）
+        sprintf(buf.as_mut_ptr() as *mut c_char, fmt.as_ptr(), msg.as_ptr(), 42i32);
+    }
+}
+```
+
+> **修正**: C 的**可变参数函数**（variadic function，如 `printf`、`sprintf`）在 Rust FFI 中绑定是 `unsafe` 的：1) 参数类型不匹配 → UB（如 `i32` 传给期望 `c_int` 的位置，在 LP64 平台上可能正确，但在 ILP32 上可能错误）；2) 格式字符串与参数数量不匹配 → 缓冲区溢出或读取无效内存；3) Rust 字符串（UTF-8）与 C 字符串（null-terminated bytes）的编码差异。安全策略：1) 避免直接绑定 C 可变参数函数；2) 使用 `libc` crate 的标准绑定（已验证）；3) 用 Rust 的 `format!` + `CString::new` 构造参数，再传递。`va_list` 在 Rust 中可通过 `c_variadic` feature（nightly）或 `va_list-rs` crate 处理。这与 Go 的 cgo（CGO 自动处理部分类型转换）或 Java 的 JNI（JVM 管理类型安全）不同——Rust 的 FFI 是零成本但需完全手动验证。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [libc crate](https://docs.rs/libc/)]
+
+### 10.4 边界测试：C 结构体的内存对齐与 Rust 的 `#[repr(C)]`（运行时 ABI 不匹配）
+
+```rust,ignore
+#[repr(C)]
+struct RustStruct {
+    a: u8,
+    b: u32,
+    c: u16,
+}
+
+// C 结构体:
+// struct CStruct {
+//     uint8_t a;
+//     uint32_t b;
+//     uint16_t c;
+// };
+
+fn main() {
+    println!("Rust size: {}", std::mem::size_of::<RustStruct>());
+    // ❌ 运行时 ABI 风险: 若 C 编译器使用不同对齐规则（如 packed）
+    // Rust 的 #[repr(C)] 遵循平台 C ABI，但 pragma pack 可能改变对齐
+}
+```
+
+> **修正**: `#[repr(C)]` 使 Rust struct 遵循**平台 C ABI 的布局规则**：1) 字段按声明顺序排列；2) 对齐要求与 C 相同；3) 大小和对齐是平台相关的（x86_64 上 `u32` 对齐 4 字节）。风险：1) C 代码使用 `#pragma pack(1)` → Rust 需 `#[repr(C, packed)]`；2) C 的位域（bitfields）→ Rust 无直接等价物，需手动掩码；3) C 的 `_Alignas` → Rust 的 `#[repr(align(N))]`。`bindgen` 工具自动从 C 头文件生成 Rust 绑定（含正确的 `repr` 和字段布局）。这与 C++ 的 `extern "C"`（类似 ABI 兼容）或 Go 的 cgo（自动生成，但可能对齐不一致）不同——Rust 的 FFI 要求开发者显式控制内存布局。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/other-reprs.html)] · [来源: [bindgen](https://rust-lang.github.io/rust-bindgen/)]

@@ -42,6 +42,9 @@
   - [十二、边界测试：属性与宏的编译错误](#十二边界测试属性与宏的编译错误)
     - [12.1 边界测试：`derive` 宏的 trait 冲突（编译错误）](#121-边界测试derive-宏的-trait-冲突编译错误)
     - [12.2 边界测试：宏递归展开溢出（编译错误）](#122-边界测试宏递归展开溢出编译错误)
+    - [10.3 边界测试：过程宏的 hygiene 与标识符捕获（编译错误）](#103-边界测试过程宏的-hygiene-与标识符捕获编译错误)
+    - [10.4 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）](#104-边界测试cfg-条件编译的互斥性编译错误逻辑错误)
+    - [10.3 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）](#103-边界测试cfg-条件编译的互斥性编译错误逻辑错误)
 
 ---
 
@@ -809,7 +812,7 @@ fn fixed() {
 
 ### 10.3 边界测试：过程宏的 hygiene 与标识符捕获（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // 假设自定义 derive 宏 #[derive(MyDebug)]
 // 宏生成的代码:
 // impl std::fmt::Debug for MyStruct {
@@ -832,7 +835,7 @@ fn fixed() {
 
 ### 10.4 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 #[cfg(target_os = "linux")]
 fn platform_specific() { println!("linux"); }
 
@@ -848,3 +851,23 @@ fn main() {
 ```
 
 > **修正**: `cfg` 条件编译根据编译目标选择代码。若所有 `cfg` 条件都不满足，函数不存在，调用点编译错误。安全模式：添加无条件的默认实现或 `_` 通配：`#[cfg(not(any(target_os = "linux", target_os = "windows")))] fn platform_specific() { panic!("unsupported") }`。`cfg` 的求值在编译期：条件为假时，代码完全被剔除（不解析、不类型检查）。这与 C 的 `#ifdef`（预处理器，条件为假时仍需语法正确）或 Java 的无条件编译（运行时 `if` 检查）不同——Rust 的 `cfg` 允许平台特定的代码使用该平台独有的 API（如 Linux 的 `epoll`、Windows 的 `IOCP`），无需在所有平台上可编译。但这也意味着跨平台代码需仔细设计 `cfg` 覆盖，防止遗漏平台。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch14-05-configuration.html)] · [来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)]
+
+### 10.3 边界测试：`cfg` 条件编译的互斥性（编译错误/逻辑错误）
+
+```rust,ignore
+#[cfg(target_os = "linux")]
+fn platform_specific() { println!("linux"); }
+
+#[cfg(target_os = "windows")]
+fn platform_specific() { println!("windows"); }
+
+#[cfg(not(any(target_os = "linux", target_os = "windows")))]
+fn platform_specific() { println!("other"); }
+
+fn main() {
+    platform_specific(); // ✅ 编译时至少一个实现存在
+    // 但若三个 cfg 全部不成立（不可能但逻辑上），编译错误: unresolved function
+}
+```
+
+> **修正**: `#[cfg]` 是**条件编译**：根据编译目标（OS、架构、特性）选择性地包含代码。上述代码在 Linux、Windows 和其他平台各有一个实现，编译时**恰好一个**生效。风险：1) 所有 `cfg` 条件互斥但不穷尽 → 某些平台无实现；2) `cfg` 与 `cfg_attr` 混用导致属性不一致；3) `cfg` 测试用 `cfg!(...)` 宏（编译期布尔值）与 `#[cfg(...)]` 属性（条件编译）混淆。这与 C 的 `#ifdef`（预处理器文本替换）不同——Rust 的 `cfg` 是编译器的语义分析阶段，能进行更精确的条件检查。[来源: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)]

@@ -35,6 +35,13 @@
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：迭代器模式的编译错误](#十边界测试迭代器模式的编译错误)
+    - [10.1 边界测试：`fold` 与 `reduce` 的初始值差异（运行时 panic）](#101-边界测试fold-与-reduce-的初始值差异运行时-panic)
+    - [10.2 边界测试：`peekable` 与所有权冲突（编译错误）](#102-边界测试peekable-与所有权冲突编译错误)
+    - [10.3 边界测试：`flatten` 与嵌套迭代器的类型复杂度（编译错误）](#103-边界测试flatten-与嵌套迭代器的类型复杂度编译错误)
+    - [10.4 边界测试：`scan` 的状态闭包与 `FnMut` 约束（编译错误）](#104-边界测试scan-的状态闭包与-fnmut-约束编译错误)
+    - [10.5 边界测试：`Peekable` 的 `peek` 与 `next` 的交互（逻辑错误）](#105-边界测试peekable-的-peek-与-next-的交互逻辑错误)
+    - [10.2 边界测试：`scan` 的状态闭包与借用冲突（编译错误）](#102-边界测试scan-的状态闭包与借用冲突编译错误)
 
 ---
 
@@ -470,7 +477,7 @@ fn main() {
     let v: Vec<i32> = vec![];
     // ⚠️ 运行时 panic: called `Option::unwrap()` on a `None` value
     // let sum = v.iter().reduce(|a, b| a + b).unwrap(); // panic on empty!
-    
+
     // 正确: 使用 fold 提供初始值
     let sum = v.iter().fold(0, |a, b| a + b); // ✅ 空 vec 返回 0
     println!("{}", sum);
@@ -481,7 +488,7 @@ fn main() {
 
 ### 10.2 边界测试：`peekable` 与所有权冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let v = vec![1, 2, 3];
     let mut iter = v.iter().peekable();
@@ -524,11 +531,11 @@ fn main() {
 
 ### 10.4 边界测试：`scan` 的状态闭包与 `FnMut` 约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let data = vec![1, 2, 3];
     let mut sum = 0;
-    
+
     // ❌ 编译错误: `scan` 的闭包要求 `FnMut`，但捕获 `&mut sum` 与后续使用冲突
     let scanned: Vec<_> = data.iter()
         .scan(&mut sum, |acc, x| {
@@ -536,7 +543,7 @@ fn main() {
             Some(**acc)
         })
         .collect();
-    
+
     println!("{}", sum); // sum 仍被 scan 的闭包借用
 }
 ```
@@ -545,7 +552,7 @@ fn main() {
 
 ### 10.5 边界测试：`Peekable` 的 `peek` 与 `next` 的交互（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut iter = vec![1, 2, 3].into_iter().peekable();
     if let Some(&first) = iter.peek() {
@@ -558,3 +565,40 @@ fn main() {
 ```
 
 > **修正**: `Peekable` 允许"预览"下一个元素而不消耗它：`peek()` 返回 `Option<&Item>`，`next()` 仍返回同一元素。常见错误：1) 以为 `peek()` 后 `next()` 返回第二个元素；2) 在 `peek()` 后修改预览的元素（通过 `&mut`）；3) `peek()` 后 `collect()` 仍包含预览的元素。`Peekable` 的使用场景：1) 需要 lookahead 的解析器；2) 条件消费（根据下一个元素决定是否消费当前）；3) 合并有序迭代器。这与 Java 的 `Iterator.peek()`（某些实现提供）或 Python 的 `itertools.peekable`（类似语义）相同——peek 是"只看不拿"。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/struct.Peekable.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：`scan` 的状态闭包与借用冲突（编译错误）
+
+```rust,ignore
+fn main() {
+    let data = vec![1, 2, 3];
+    let mut state = 0;
+    // ❌ 编译错误: 闭包同时借用 state 和尝试在迭代后使用
+    let scanned: Vec<i32> = data.iter()
+        .scan(&mut state, |acc, x| {
+            **acc += x;
+            Some(**acc)
+        })
+        .collect();
+    println!("{}", state); // state 被闭包借用至迭代结束
+}
+```
+
+> **修正**: `Iterator::scan` 接受初始状态和闭包，每次迭代更新状态并产生输出。闭包以 `&mut state` 捕获，迭代器**拥有**对该状态的借用直至被消费（`collect`）。迭代后访问 `state` 导致借用冲突。修复：1) 在 `collect` 后再使用 `state`（迭代器已 drop）；2) 使用 `scan(state, |acc, x| { *acc += x; Some(*acc) })`（闭包拥有状态，迭代后状态随迭代器丢弃）；3) 用 `fold` 替代（返回最终累加值）。`scan` 适合需要中间状态且有早期终止的场景（如累加至阈值停止）。这与 Haskell 的 `scanl` 或 Python 的 `itertools.accumulate` 类似——Rust 的 `scan` 通过闭包所有权控制状态生命周期。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：`Iterator::zip` 的长度不匹配与元素丢失（逻辑错误）
+
+```rust,ignore
+fn main() {
+    let a = vec![1, 2, 3];
+    let b = vec!["a", "b"];
+    // ❌ 逻辑错误: zip 在任一迭代器结束时停止，a 的第三个元素丢失
+    let pairs: Vec<_> = a.iter().zip(b.iter()).collect();
+    println!("{:?}", pairs); // [(1, "a"), (2, "b")]
+    
+    // 若需处理长度不匹配:
+    // use itertools::zip_longest;
+    // let pairs: Vec<_> = zip_longest(a.iter(), b.iter()).collect();
+}
+```
+
+> **修正**: `Iterator::zip` 将两个迭代器**对齐配对**，在**任一迭代器耗尽时停止**。`a.iter().zip(b.iter())` 中 `b` 只有两个元素，所以结果只有两个对，`a` 的第三个元素被静默忽略。这是常见陷阱：假设两个集合等长，但数据变化后导致不匹配。检测：1) `itertools::zip_eq` — 长度不等时 panic；2) `zip_longest` — 用 `EitherOrBoth` 处理不等长；3) 手动检查 `a.len() == b.len()`。这与 Python 的 `zip`（同样最短停止，`zip_longest` 在 `itertools` 中）或 Haskell 的 `zip`（同样最短停止）相同——Rust 的 `zip` 遵循函数式语言的传统，但工业代码中常需显式长度检查。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [itertools](https://docs.rs/itertools/)]

@@ -1116,3 +1116,31 @@ fn foo(x: &mut Vec<&'static str>, y: &'static str) {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
+
+### 边界测试：生命周期省略在方法中的特殊规则（编译错误）
+
+```rust,compile_fail
+struct Parser<'a> {
+    text: &'a str,
+}
+
+impl<'a> Parser<'a> {
+    // ❌ 编译错误: 方法中的生命周期省略规则与函数不同
+    // fn word(&self) -> &str { &self.text[0..1] }
+    // 实际上以上代码可以编译！真正的错误场景:
+    
+    fn first_word(&self, s: &str) -> &str {
+        // 省略规则: 输入生命周期不同，无法推断返回引用关联哪个输入
+        if s.len() > self.text.len() { s } else { self.text }
+    }
+}
+
+fn main() {
+    let text = String::from("hello world");
+    let parser = Parser { text: &text };
+    let word = parser.first_word("hi");
+    println!("{}", word);
+}
+```
+
+> **修正**: 方法中的**生命周期省略**有三条规则：1) `&self` 或 `&mut self` 获得生命周期参数；2) 其他每个引用参数获得独立生命周期；3) 若只有一个输入生命周期（包括 `self`），它赋给所有输出。`first_word(&self, s: &str)` 有两个输入生命周期（`&self` 和 `s`），规则 3 不适用，必须显式标注：`fn first_word<'b>(&self, s: &'b str) -> &'b str` 或 `fn first_word(&self, s: &str) -> &str`（若返回 `self.text` 的生命周期）。这与 C++ 的引用（无生命周期概念）或 Java 的引用（同样无概念）不同——Rust 的方法签名在引用复杂时需显式标注生命周期，编译器提供省略规则减少常见情况的噪音。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)]

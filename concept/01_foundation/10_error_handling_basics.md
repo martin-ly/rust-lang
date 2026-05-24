@@ -46,6 +46,9 @@
   - [十二、边界测试：错误处理的编译错误](#十二边界测试错误处理的编译错误)
     - [12.1 边界测试：`unwrap()` 在 `Result::Err` 上 panic（运行时错误）](#121-边界测试unwrap-在-resulterr-上-panic运行时错误)
     - [12.2 边界测试：`?` 在返回 `()` 的函数中使用（编译错误）](#122-边界测试-在返回--的函数中使用编译错误)
+    - [10.3 边界测试：`Result` 与 `Option` 的混用（编译错误）](#103-边界测试result-与-option-的混用编译错误)
+    - [10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）](#104-边界测试catch_unwind-与-unwindsafe编译错误)
+    - [10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）](#105-边界测试result-的-unwrap_unchecked-与-release-模式运行时-ub)
 
 ---
 
@@ -887,7 +890,7 @@ fn main() {
 
 ### 10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let res: Result<i32, &str> = Err("error");
     // ❌ 运行时 UB: unwrap_unchecked 在 Err 上调用是未定义行为

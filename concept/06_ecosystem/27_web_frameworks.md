@@ -969,3 +969,26 @@ async fn handler(Json(payload): Json<Payload>, /* Json(payload2): Json<Payload> 
 ```
 
 > **修正**: Axum 的 **extractor** 从请求中提取数据：`Path`、`Query`、`Json`、`Form` 等。请求体（body）是**单次消耗**的流：一个 extractor 读取后，后续 extractor 无法再次读取。规则：1) 最多一个 body extractor 每个 handler；2) `Json` 和 `Form` 互斥；3) 若需多次使用 body，先提取为 `Bytes`，再克隆解析。这与 Actix-web（类似 body 限制，但 `web::Json` 和 `web::Form` 同样互斥）或 Rocket（类似，使用 `Data` guard）不同——Axum 的编译期类型安全不保护 body 消耗次数（流性质决定），需运行时检查。axum 0.7+ 的改进：更清晰的错误消息（"body has already been consumed"）。这与 Tower 的 `Service` 抽象一致：body 是 `http_body::Body` trait，消费后不可复用。[来源: [Axum Extractors](https://docs.rs/axum/)] · [来源: [Tower Service](https://docs.rs/tower/)]
+
+### 10.4 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）
+
+```rust,compile_fail
+use axum::{extract::Json, routing::post, Router};
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Payload { name: String }
+
+async fn handler(Json(payload): Json<Payload>) {
+    println!("{}", payload.name);
+}
+
+// ❌ 运行时 panic: 若 handler 有两个 Json extractor，第二个会失败
+// async fn bad_handler(Json(p1): Json<Payload>, Json(p2): Json<Payload>) {
+//     // 请求体只能被消耗一次
+// }
+
+fn main() {}
+```
+
+> **修正**: Axum 的 **extractor** 从请求中提取数据，请求体（body）是**单次消费**的流。`Json(payload)` 读取整个 body 并解析为 JSON，第二个 `Json` extractor 无 body 可读 → panic（"body has already been consumed"）。解决：1) 最多一个 body extractor 每个 handler；2) 若需多次使用 body，先提取为 `Bytes`，再克隆解析；3) 使用 `axum::extract::Request` 直接访问原始请求。这与 Actix-web（类似 body 限制）或 Rocket（类似，使用 `Data` guard）不同——Axum 的编译期类型安全不保护 body 消耗次数（流性质决定），需运行时检查。[来源: [Axum Extractors](https://docs.rs/axum/)] · [来源: [Tower Service](https://docs.rs/tower/)]

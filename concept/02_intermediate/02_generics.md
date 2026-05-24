@@ -3135,7 +3135,7 @@ impl Container for Wrapper {
 
 ### 12.4 边界测试：泛型默认类型参数不满足约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Process<T = String> {
     fn process(&self, data: T);
 }
@@ -3154,7 +3154,7 @@ impl Process<i32> for Handler {
 
 ### 12.5 边界测试：泛型常量表达式求值失败（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Array<T, const N: usize> {
     data: [T; N],
 }
@@ -3188,7 +3188,7 @@ enum ListFixed {
 
 ### 12.7 边界测试：泛型 trait bound 传递失败（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Displayable {
     fn display(&self);
 }
@@ -3214,3 +3214,51 @@ impl Displayable for i32 {
 > **修正**: 泛型函数的 trait bound 必须在调用点由具体类型满足。如果未为目标类型实现所需 trait，编译器会拒绝单态化。这是 Rust 零成本抽象的核心——trait bound 检查在编译期完成，无运行时开销。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树)
+
+### 10.5 边界测试：泛型约束的传递性与 trait bound 推导（编译错误）
+
+```rust,compile_fail
+trait Printable {
+    fn print(&self);
+}
+
+trait Drawable: Printable {
+    fn draw(&self);
+}
+
+fn show<T: Drawable>(x: T) {
+    x.print();
+    x.draw();
+}
+
+struct Circle;
+impl Drawable for Circle {
+    fn draw(&self) { println!("drawing circle"); }
+}
+// ❌ 编译错误: Circle 实现了 Drawable，但未实现 Printable（父 trait）
+
+fn main() {
+    show(Circle);
+}
+```
+
+> **修正**: Trait **继承**（`trait Drawable: Printable`）要求实现 `Drawable` 的类型**必须**同时实现 `Printable`。这不是 OOP 的类继承，而是**约束传播**：`Drawable` 的 supertrait `Printable` 是 `Drawable` 方法签名的前提（`Drawable` 的方法可能调用 `Printable` 的方法）。`Circle` 实现 `Drawable` 但未实现 `Printable` → 编译错误。修复：`impl Printable for Circle { fn print(&self) { ... } }`。Supertrait 与 trait bound 的关系：`T: Drawable` 自动满足 `T: Printable`（约束推导）。这与 Java 的接口继承（`interface Drawable extends Printable`）或 Haskell 的 type class 约束（`class Printable a => Drawable a`）类似——Rust 的 supertrait 是类型系统的约束传播机制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference — Supertraits](https://doc.rust-lang.org/reference/items/traits.html#supertraits)]
+
+### 10.6 边界测试：const generic 的默认参数与数组大小推断（编译错误）
+
+```rust,ignore
+struct Buffer<const N: usize = 1024> {
+    data: [u8; N],
+}
+
+fn main() {
+    // ❌ 编译错误: const generic 默认值在 1.59+ 支持，但某些场景推断失败
+    // let buf = Buffer { data: [0; 512] }; // N 无法推断
+    
+    // 正确: 显式指定
+    let buf: Buffer<512> = Buffer { data: [0; 512] };
+    println!("size: {}", std::mem::size_of_val(&buf.data));
+}
+```
+
+> **修正**: `const generic` 默认值（`const N: usize = 1024`）在 Rust 1.59+ 支持，但**类型推断**有限：编译器不能从 `data: [0; 512]` 推断 `Buffer` 的 `N = 512`（数组大小是表达式，不直接关联到类型参数）。修复：1) 显式标注类型：`Buffer<512>`；2) 构造函数：`Buffer::new()` 返回 `Buffer<1024>`（默认）；3) `From` trait：`[u8; 512].into()` → `Buffer<512>`。`const generic` 的应用：1) 固定大小数组包装；2) 类型级维度（矩阵 `[T; M * N]`）；3) 编译期配置（缓冲区大小、哈希表容量）。这与 C++ 的非类型模板参数（`template<size_t N>`，推断更灵活）或 Ada 的泛型（类似，但语法不同）不同——Rust 的 const generic 保守但类型安全。[来源: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

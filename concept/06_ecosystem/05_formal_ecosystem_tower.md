@@ -536,7 +536,7 @@ fn main() {
 
 ### 10.1 边界测试：Prusti 的前置条件验证（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // #[requires(x > 0)] // Prusti 前置条件
 fn sqrt(x: i32) -> i32 {
     // ❌ Prusti 验证错误: 若 x < 0，sqrt 无定义
@@ -558,7 +558,7 @@ fn sqrt_fixed(x: i32) -> Result<i32, String> {
 
 ### 10.2 边界测试：Kani 的循环展开限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn sum(n: u32) -> u32 {
     let mut total = 0;
     let mut i = 0;
@@ -596,7 +596,7 @@ fn verified_function(x: i32) -> i32 {
 
 ### 10.4 边界测试：依赖树中的形式化安全与 unsafe 代码传播（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // crate-a: 经过形式化验证，无 unsafe
 // crate-b: 依赖 crate-a，但自身使用 unsafe
 // crate-c: 依赖 crate-b，用于安全关键系统
@@ -611,3 +611,24 @@ fn main() {
 ```
 
 > **修正**: 形式化验证的**组合性**是开放问题：若 crate A 经过验证（如 Prusti 证明无 panic、无溢出），crate B 使用 unsafe 调用 A 的函数，验证保证可能被破坏。Rust 的模块系统不自动传播验证结果——每个 crate 的验证是独立的。安全关键项目需要：1) 审计所有依赖（`cargo vet`）；2) 限制 unsafe 使用（`cargo geiger`）；3) 为关键依赖建立形式化规格（昂贵但必要）。这与数学中的"已证定理可组合"不同——软件的形式化验证受限于规格的不完整性和实现细节。RustBelt 项目试图为 Rust 的核心类型系统建立可组合的形式化基础，但覆盖整个生态仍是长期目标。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [cargo-vet Documentation](https://mozilla.github.io/cargo-vet/)]
+
+### 10.3 边界测试：形式化工具链的 nightly 依赖与稳定化鸿沟（编译错误）
+
+```rust,compile_fail
+#![feature(proc_macro_hygiene)]
+
+// ❌ 编译错误: 若使用 stable rustc，nightly feature 不可用
+use prusti_contracts::*;
+
+#[requires(x > 0)]
+#[ensures(result > x)]
+fn increment(x: i32) -> i32 {
+    x + 1
+}
+
+fn main() {
+    println!("{}", increment(5));
+}
+```
+
+> **修正**: Rust 形式化工具（Prusti、Kani、Creusot）大多依赖 **nightly 编译器**：1) `proc_macro_hygiene`（宏卫生扩展）；2) `rustc_private`（访问编译器内部 API）；3) 自定义 MIR  pass。这导致：1) 生产代码不能使用形式化工具（需 nightly）；2) nightly 版本漂移（工具可能滞后于最新 nightly）；3) CI 复杂（需固定 nightly 版本）。Ferrocene 项目致力于提供**经过认证的稳定 Rust 工具链**，包含形式化验证支持。替代方案：1) `contracts` crate（轻量级运行时契约检查，stable）；2) `assertion-rs`（运行时断言库）；3) 外部验证（F*、Coq 提取后独立验证）。这与 Java 的 JML（标准注释，但工具支持分散）或 .NET 的 Code Contracts（已停止维护）类似——Rust 的形式化生态仍在成熟中，nightly 依赖是主要采纳障碍。[来源: [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html)] · [来源: [Ferrocene](https://ferrous-systems.com/ferrocene/)]

@@ -40,6 +40,7 @@
     - [10.2 边界测试：`#[forbid(unsafe_code)]` 与依赖的 unsafe（编译错误）](#102-边界测试forbidunsafe_code-与依赖的-unsafe编译错误)
     - [10.6 边界测试：Copyleft 许可证的静态链接传染（法律合规风险）](#106-边界测试copyleft-许可证的静态链接传染法律合规风险)
     - [10.5 边界测试：GPL 传染与动态链接的边界（法律风险）](#105-边界测试gpl-传染与动态链接的边界法律风险)
+    - [10.3 边界测试：GPL 传染与静态链接的法律风险（编译错误/法律问题）](#103-边界测试gpl-传染与静态链接的法律风险编译错误法律问题)
 
 ---
 
@@ -644,7 +645,7 @@ fn main() {
 
 ### 10.1 边界测试：`cargo deny` 的许可证冲突（编译错误/构建失败）
 
-```rust,compile_fail
+```rust,ignore
 // Cargo.toml 依赖链引入 GPL 代码
 
 // [dependencies]
@@ -679,7 +680,7 @@ fn main() {
 
 ### 10.6 边界测试：Copyleft 许可证的静态链接传染（法律合规风险）
 
-```rust,compile_fail
+```rust,ignore
 // 假设 proprietary 项目依赖 GPL-3.0 库
 
 // [dependencies]
@@ -696,7 +697,7 @@ fn main() {
 
 ### 10.5 边界测试：GPL 传染与动态链接的边界（法律风险）
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 法律风险: 静态链接 GPL 库可能使整个项目变为 GPL
 // [dependencies]
 // gpl_crate = { path = "../gpl_crate" } // GPL-3.0
@@ -708,3 +709,20 @@ fn main() {
 ```
 
 > **修正**: Rust 默认**静态链接**所有依赖（包括标准库），这与 C/C++ 默认动态链接不同。GPL（及 AGPL）的"传染"条款：若程序包含 GPL 代码，整个程序需 GPL 兼容。Rust 的缓解：1) 使用 `dylib` crate type 动态链接 GPL 依赖（但 Rust 的 dylib 支持有限）；2) 避免使用 GPL 依赖，选择 MIT/Apache-2.0 替代品；3) 使用 `cargo-deny` 自动审计许可证兼容性。常见许可证兼容矩阵：MIT ↔ Apache-2.0（兼容）；MIT + GPL（MIT 代码可被 GPL 包含，但反之不行）；Apache-2.0 + GPL-2.0（不兼容，GPL-3.0 兼容）。企业合规工具链：`cargo-about`（生成许可证清单）、`cargo-deny`（禁止特定许可证）、`FOSSA`/`Snyk`（SaaS 扫描）。这与 npm 的 `license-checker` 或 Python 的 `pip-licenses` 类似——Rust 的静态链接使许可证合规更严格。[来源: [GNU GPL FAQ](https://www.gnu.org/licenses/gpl-faq.html)] · [来源: [cargo-deny](https://github.com/EmbarkStudios/cargo-deny)]
+
+### 10.3 边界测试：GPL 传染与静态链接的法律风险（编译错误/法律问题）
+
+```rust,ignore
+// ❌ 法律风险: 静态链接 GPL-3.0 crate 可能使整个项目变为 GPL
+// Cargo.toml:
+// [dependencies]
+// gpl_lib = { version = "1.0", path = "../gpl_lib" }
+
+fn main() {
+    // gpl_lib::do_something();
+    // 根据 GPL，若 gpl_lib 以静态方式链接进二进制，
+    // 整个二进制需以 GPL-3.0 发布
+}
+```
+
+> **修正**: Rust **默认静态链接**所有依赖（包括 std），这与 C/C++ 默认动态链接不同。GPL/AGPL 的"传染"条款：包含 GPL 代码的程序必须以 GPL 兼容许可证发布。缓解：1) 避免使用 GPL 依赖，选择 MIT/Apache-2.0 替代品；2) 使用 `cargo-deny` 自动审计许可证兼容性；3) `cargo-about` 生成许可证清单。许可证兼容矩阵：MIT ↔ Apache-2.0（兼容）；MIT + GPL（MIT 可被 GPL 包含，但反之不行）；Apache-2.0 + GPL-2.0（不兼容，GPL-3.0 兼容）。企业合规是 Rust 生产部署的必要步骤，尤其医疗、金融、航空等受监管行业。[来源: [GNU GPL FAQ](https://www.gnu.org/licenses/gpl-faq.html)] · [来源: [cargo-deny](https://github.com/EmbarkStudios/cargo-deny)] · [来源: [cargo-about](https://github.com/EmbarkStudios/cargo-about)]

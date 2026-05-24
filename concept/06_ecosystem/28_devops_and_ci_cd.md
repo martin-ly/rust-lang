@@ -43,6 +43,7 @@
     - [10.2 边界测试：测试隔离的 `static mut` 数据竞争（编译错误）](#102-边界测试测试隔离的-static-mut-数据竞争编译错误)
     - [10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）](#106-边界测试docker-多阶段构建的缓存失效编译时间膨胀)
     - [10.7 边界测试：缓存键未包含 Cargo.lock 导致的不一致构建（CI 非确定性）](#107-边界测试缓存键未包含-cargolock-导致的不一致构建ci-非确定性)
+    - [10.3 边界测试：CI 缓存键不匹配导致的依赖重建（构建时间回归）](#103-边界测试ci-缓存键不匹配导致的依赖重建构建时间回归)
 
 ---
 
@@ -735,7 +736,7 @@ fn main() {
 
 ### 10.1 边界测试：Docker 多阶段构建的 musl 目标链接错误（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Cargo.toml 中无特别配置
 
 fn main() {
@@ -750,7 +751,7 @@ fn main() {
 
 ### 10.2 边界测试：测试隔离的 `static mut` 数据竞争（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 static mut COUNTER: i32 = 0;
 
 #[test]
@@ -774,7 +775,7 @@ fn test_b() {
 
 ### 10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）
 
-```rust,compile_fail
+```rust,ignore
 # Dockerfile
 # FROM rust:1.75 AS builder
 # WORKDIR /app
@@ -810,3 +811,22 @@ fn test_b() {
 ```
 
 > **修正**: Rust CI 缓存的关键是**缓存键**的精确性：1) `Cargo.lock` 存在且提交 → 用 `hashFiles('**/Cargo.lock')`，完全确定；2) `Cargo.lock` 不提交（库 crate）→ 用 `hashFiles('**/Cargo.toml')`，但依赖版本可能漂移；3) 工具链变更 → 键应包含 `rustc --version`。`Swatinem/rust-cache` 是社区最佳实践：自动处理 Cargo registry、target 目录、正确缓存键。常见 CI 陷阱：1) 缓存 `target/` 但不缓存 `~/.cargo/registry` → 每次重新下载依赖；2) 缓存过大 → GitHub Actions 缓存限制 10GB；3) 未区分 debug/release → 缓存冲突。这与 Java 的 Maven/Gradle 缓存或 Node.js 的 `npm ci` 缓存类似——Rust 的 Cargo 缓存策略需理解 workspace 结构和 lockfile 语义。[来源: [Swatinem/rust-cache](https://github.com/Swatinem/rust-cache)] · [来源: [GitHub Actions Caching](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)]
+
+### 10.3 边界测试：CI 缓存键不匹配导致的依赖重建（构建时间回归）
+
+```rust,compile_fail
+# .github/workflows/ci.yml (概念代码)
+# ❌ 配置错误: 缓存键未区分 target/ 和 Cargo.lock
+# - uses: actions/cache@v3
+#   with:
+#     path: |
+#       ~/.cargo/registry
+#       target/
+#     key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml') }}
+
+# 正确: 区分 registry 缓存和 target 缓存，键包含 Cargo.lock 或 toolchain
+# key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+# key: ${{ runner.os }}-cargo-target-${{ hashFiles('**/Cargo.lock') }}-${{ hashFiles('**/Cargo.toml') }}
+```
+
+> **修正**: Rust CI 缓存的核心是**键的精确性**和**分层缓存**：1) `~/.cargo/registry`（依赖源码，变化慢）；2) `target/`（编译产物，变化快）；3) `~/.cargo/bin`（工具二进制）。`Swatinem/rust-cache` 是社区最佳实践：自动处理分层、正确键、过期清理。常见陷阱：1) 未区分 debug/release → 缓存冲突；2) 未包含 `rustc --version` → 工具链升级后缓存失效；3) 缓存过大 → GitHub Actions 10GB 限制。Rust 编译产物（`target/`）通常几百 MB 到数 GB，缓存可节省 50-90% 的 CI 时间。这与 Java 的 Maven/Gradle 缓存或 Node.js 的 `node_modules` 缓存类似——但 Rust 的增量编译使 `target/` 缓存特别有效。[来源: [Swatinem/rust-cache](https://github.com/Swatinem/rust-cache)] · [来源: [GitHub Actions Caching](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)]

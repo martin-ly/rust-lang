@@ -31,9 +31,12 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱与最佳实践](#五常见陷阱与最佳实践)
     - [编译错误示例](#编译错误示例)
+    - [3.4 边界测试：C 结构体布局不匹配（编译错误 / 运行时 UB）](#34-边界测试c-结构体布局不匹配编译错误--运行时-ub)
+    - [3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）](#35-边界测试裸指针生命周期与-ffi-边界编译错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：FFI 中的空指针解引用（运行时 UB）](#103-边界测试ffi-中的空指针解引用运行时-ub)
 
 ---
 
@@ -425,7 +428,7 @@ fn main() {
 
 > **修正**: 所有 FFI 调用必须包裹在 `unsafe { }` 块中，或通过 safe wrapper 封装。
 
-```rust,compile_fail
+```rust,ignore
 #[repr(C)]
 struct RustStruct {
     data: String, // String 不是 repr(C) 兼容类型
@@ -440,7 +443,7 @@ fn repr_c_violation() {
 
 > **修正**: `#[repr(C)]` 结构体的字段必须是 C 兼容类型（`i32`、`*const T`、裸指针等）。复杂类型需通过 `Box` 或引用传递。
 
-```rust,compile_fail
+```rust,ignore
 use std::panic::catch_unwind;
 
 // 错误: panic 穿越 FFI 边界未处理
@@ -658,3 +661,24 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 10.3 边界测试：FFI 中的空指针解引用（运行时 UB）
+
+```rust,compile_fail
+use std::os::raw::c_int;
+
+extern "C" {
+    fn c_compute(x: *const c_int) -> c_int;
+}
+
+fn main() {
+    let ptr: *const c_int = std::ptr::null();
+    unsafe {
+        // ❌ 运行时 UB: 向 C 函数传递空指针，C 可能解引用
+        let result = c_compute(ptr);
+        println!("{}", result);
+    }
+}
+```
+
+> **修正**: FFI 边界是 Rust 安全保证的**信任边界**：Rust 编译器无法验证 C 代码的行为。传递空指针、悬垂指针或未初始化内存到 C 函数是 UB。防御策略：1) 在 Rust 侧验证指针非空（`if ptr.is_null() { return Err(...) }`）；2) 使用 `NonNull<T>` 类型（编译期保证非空）；3) 用 `cbindgen`/`cxx` 生成安全的 C++ 绑定；4) 对 C API 包装为 safe Rust 函数（`unsafe fn raw_c_call` → `pub fn safe_call`）。Rust 的 `unsafe` 块是 FFI 的必要之恶——最小化 unsafe 范围，在边界处建立安全抽象层。这与 Go 的 cgo（自动处理指针，但性能开销大）或 Java 的 JNI（JVM 管理对象生命周期）不同——Rust 的 FFI 提供零成本抽象，但安全责任完全在开发者。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)]

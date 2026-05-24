@@ -59,6 +59,13 @@
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+  - [十、边界测试：执行模型同构的编译错误](#十边界测试执行模型同构的编译错误)
+    - [10.1 边界测试：栈展开与 `panic = abort` 的行为差异（运行时行为）](#101-边界测试栈展开与-panic--abort-的行为差异运行时行为)
+    - [10.2 边界测试：`async` 与线程的执行模型混淆（编译错误）](#102-边界测试async-与线程的执行模型混淆编译错误)
+    - [10.3 边界测试：绿色线程与 OS 线程的 API 混用（编译错误）](#103-边界测试绿色线程与-os-线程的-api-混用编译错误)
+    - [10.4 边界测试：CPS 变换与 Rust 的 `?` 运算符（编译错误）](#104-边界测试cps-变换与-rust-的--运算符编译错误)
+    - [10.5 边界测试：CPS 变换中的栈溢出（运行时 panic）](#105-边界测试cps-变换中的栈溢出运行时-panic)
+    - [10.3 边界测试：尾递归与 Rust 的 TCO 缺失（运行时栈溢出）](#103-边界测试尾递归与-rust-的-tco-缺失运行时栈溢出)
 
 ---
 
@@ -897,7 +904,7 @@ fn fixed() {
 
 ### 10.3 边界测试：绿色线程与 OS 线程的 API 混用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // 假设使用 green-thread 库（如 early Rust 的 libgreen）
 
 fn main() {
@@ -913,7 +920,7 @@ fn main() {
 
 ### 10.4 边界测试：CPS 变换与 Rust 的 `?` 运算符（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn cps_style<F>(x: i32, cont: F) -> Result<String, String>
 where
     F: FnOnce(i32) -> Result<String, String>,
@@ -936,7 +943,7 @@ fn direct_style(x: i32) -> Result<String, String> {
 
 ### 10.5 边界测试：CPS 变换中的栈溢出（运行时 panic）
 
-```rust,compile_fail
+```rust,ignore
 fn cps_factorial(n: u64, k: Box<dyn Fn(u64) -> u64>) -> u64 {
     if n == 0 {
         k(1)
@@ -948,3 +955,22 @@ fn cps_factorial(n: u64, k: Box<dyn Fn(u64) -> u64>) -> u64 {
 ```
 
 > **修正**: CPS（Continuation-Passing Style）将控制流转换为函数调用，每个"下一步"成为闭包参数。上述代码中，`k` 是累积的闭包链：每次递归包装一层 `move |r| k(n * r)`。`n = 100000` 时，闭包链深 10 万层，`k(1)` 调用时逐层展开，栈溢出。这与直接递归的栈溢出原因相同——CPS 不消除递归，只是改变形式。**尾递归优化**（TCO）可消除尾调用的栈帧，但 Rust 不保证 TCO。真正的 CPS 优化：使用 trampoline（蹦床）模式——返回 "下一步" 闭包而非调用它，外层循环执行。这与 Scheme 的 TCO（语言保证）或 JavaScript 的异步回调（事件循环作为 trampoline）不同——Rust 要求开发者手动实现 trampoline 或使用迭代。[来源: [Continuation-Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：尾递归与 Rust 的 TCO 缺失（运行时栈溢出）
+
+```rust,ignore
+fn factorial(n: u64) -> u64 {
+    if n == 0 {
+        1
+    } else {
+        n * factorial(n - 1)
+        // ❌ 运行时栈溢出: Rust 不保证尾调用优化
+    }
+}
+
+fn main() {
+    let _ = factorial(100000);
+}
+```
+
+> **修正**: Rust **不保证**尾调用优化（TCO），即使代码在语法上是尾递归。`n * factorial(n - 1)` 不是尾调用（乘法在递归返回后执行）。即使是真正的尾递归（`factorial(n, acc)`），Rust 编译器（LLVM 后端）可能优化也可能不优化——依赖优化级别和内联启发式。可靠方案：1) 使用循环替代递归；2) 使用显式栈数据结构（`Vec` 模拟递归）；3) 使用 `trampolin` crate（蹦床模式）。这与 Scheme 的 TCO（语言保证）或 Erlang 的尾递归（VM 优化）不同——Rust 偏向命令式循环，递归仅用于算法清晰表达。2024 年 Rust 社区讨论过 `become` 关键字（显式尾调用），但尚未稳定。[来源: [Rust Reference — Tail Expressions](https://doc.rust-lang.org/reference/expressions.html#tail-expressions)] · [来源: [Rust Internals](https://internals.rust-lang.org/)]

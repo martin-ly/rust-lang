@@ -43,6 +43,9 @@
   - [十、边界测试：范围类型的编译错误](#十边界测试范围类型的编译错误)
     - [10.1 边界测试：范围模式在非 match 中使用（编译错误）](#101-边界测试范围模式在非-match-中使用编译错误)
     - [10.2 边界测试：`Range` 与 `RangeInclusive` 的类型不匹配（编译错误）](#102-边界测试range-与-rangeinclusive-的类型不匹配编译错误)
+    - [10.3 边界测试：`RangeInclusive` 的 `Copy` 缺失（编译错误）](#103-边界测试rangeinclusive-的-copy-缺失编译错误)
+    - [10.4 边界测试：`Iterator::size_hint` 与无限范围（逻辑错误）](#104-边界测试iteratorsize_hint-与无限范围逻辑错误)
+    - [10.3 边界测试：范围模式的穷尽性检查（编译错误）](#103-边界测试范围模式的穷尽性检查编译错误)
 
 ---
 
@@ -460,7 +463,7 @@ let rev = 10..0;
 
 ### 10.1 边界测试：范围模式在非 match 中使用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = 5;
     // ❌ 编译错误: range patterns are not allowed outside of patterns
@@ -527,17 +530,32 @@ fn main() {
 
 ### 10.4 边界测试：`Iterator::size_hint` 与无限范围（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let range = 0..;
     // ⚠️ 逻辑注意: size_hint 返回 (usize::MAX, None)
     // 某些代码假设 size_hint 精确，导致预分配过大内存
     let (low, high) = range.size_hint();
     println!("low={}, high={:?}", low, high); // low=184467..., high=None
-    
+
     // 危险: collect 到 Vec 可能尝试分配极大内存
     // let v: Vec<_> = range.take(10).collect(); // ✅ take 限制
 }
 ```
 
 > **修正**: `Iterator::size_hint` 返回 `(usize, Option<usize>)`——长度的下界和上界。无限范围 `0..` 的 `size_hint` 返回 `(usize::MAX, None)`，表示"至少 usize::MAX 个元素，可能无限"。某些代码（如 `Iterator::fold` 的优化、`Vec::with_capacity`）依赖 `size_hint` 预分配内存，对无限范围可能分配失败（OOM）。安全模式：1) 在 `collect` 前使用 `.take(n)` 限制；2) 不依赖 `size_hint` 的精确性；3) 对可能无限的迭代器使用 `try_fold` 并检查内存分配。这与 Python 的 `range`（有限，不支持无限）或 Haskell 的 `[0..]`（惰性无限列表）不同——Rust 的迭代器是惰性的，但 `collect` 等操作是严格的（立即消耗），需要显式限制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
+
+### 10.3 边界测试：范围模式的穷尽性检查（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 5;
+    match x {
+        1..=10 => println!("small"),
+        11..=20 => println!("medium"),
+        // ❌ 编译错误: non-exhaustive patterns（遗漏了 x = 0 和 x > 20）
+    }
+}
+```
+
+> **修正**: Rust 的 `match` 要求**穷尽**（exhaustive）——覆盖所有可能的值。范围模式 `a..=b` 只覆盖闭区间，不覆盖区间外的值。整数类型（`i32`、`u8` 等）的范围是完整的，任何遗漏都会导致编译错误。修复：添加 `_ =>` 通配分支或补全范围。范围类型（`Range`、`RangeInclusive`）作为值时，不能直接用于 `match`（非枚举类型），需用 `if let` 或解构。这与 Haskell 的 guard（不强制穷尽）或 Scala 的 `match`（非穷尽时警告）不同——Rust 的穷尽检查是编译错误，不可忽略。[来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)]

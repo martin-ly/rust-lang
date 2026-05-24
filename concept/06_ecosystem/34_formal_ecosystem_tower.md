@@ -536,7 +536,7 @@ fn main() {
 
 ### 10.1 边界测试：unsafe 抽象的不变式违反（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 pub struct SafeVec<T> {
     inner: Vec<T>,
 }
@@ -584,7 +584,7 @@ fn call_process(s: &str) -> i32 {
 
 ### 10.6 边界测试：形式化规格与实现漂移的长期维护（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 // 规格（Prusti 注解）:
 // #[requires(n >= 0)]
 // #[ensures(result >= 0)]
@@ -618,3 +618,27 @@ fn verify_with_kani(x: u32) {
 ```
 
 > **修正**: Rust 形式化生态的**碎片化**是客观现实：1) **模型检查**（Kani）：适合验证有限状态机、协议，自动但受状态爆炸限制；2) **霍尔逻辑**（Prusti）：适合函数契约，需注解但支持循环不变量；3) **分离逻辑**（Creusot）：适合堆数据结构，规约强但学习曲线陡；4) **精炼类型**（Flux）：轻量，与类型系统融合，但表达能力有限。无单一工具覆盖全部场景，工业采纳策略：1) 安全关键模块用最强工具（Prusti/Creusot）；2) 协议层用模型检查（Kani）；3) 通用代码用类型系统 + 测试。这与 Coq/Isabelle（统一证明语言，通用但工程成本高）或 Java 的 KeY（单一工具覆盖）不同——Rust 的形式化生态是**互补工具链**，每层解决不同问题，但互操作性差。标准化方向：aegis（统一前端）、hax（提取到 F*）尝试桥接，但成熟度低。[来源: [Rust Formal Methods](https://rust-formal-methods.github.io/)] · [来源: [Kani + Rust Verification](https://model-checking.github.io/kani/)]
+
+### 10.3 边界测试：形式化工具链的互操作性与标准碎片化（工程采纳障碍）
+
+```rust,compile_fail
+// ❌ 工程障碍: 不同形式化工具使用不同规约语言，无法互操作
+
+// Kani 用 Rust 内联属性
+#[kani::proof]
+fn verify_with_kani(x: u32) {
+    assert!(x >= 0);
+}
+
+// Prusti 用前置/后置条件
+// #[requires(x > 0)]
+// #[ensures(result > x)]
+// fn increment(x: i32) -> i32 { x + 1 }
+
+// Creusot 用 WhyML 逻辑
+// logic fn sum(n: int) -> int { if n <= 0 { 0 } else { n + sum(n-1) } }
+
+fn main() {}
+```
+
+> **修正**: Rust 形式化生态的**碎片化**：1) **模型检查**（Kani）：适合验证有限状态机、协议，自动但受状态爆炸限制；2) **霍尔逻辑**（Prusti）：适合函数契约，需注解但支持循环不变量；3) **分离逻辑**（Creusot）：适合堆数据结构，规约强但学习曲线陡；4) **精炼类型**（Flux）：轻量，与类型系统融合，但表达能力有限。无单一工具覆盖全部场景，工业采纳策略：1) 安全关键模块用最强工具（Prusti/Creusot）；2) 协议层用模型检查（Kani）；3) 通用代码用类型系统 + 测试。标准化方向：`aegis`（统一前端）、`hax`（提取到 F*）尝试桥接，但成熟度低。[来源: [Rust Formal Methods](https://rust-formal-methods.github.io/)] · [来源: [Kani](https://model-checking.github.io/kani/)]

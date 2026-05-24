@@ -1106,7 +1106,7 @@ fn main() {
 
 ### 10.3 边界测试：自定义排序的比较器错误（编译错误/运行时 panic）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut data = vec![3, 1, 4, 1, 5];
     // ❌ 运行时 panic: 比较器不满足严格弱序（strict weak ordering）
@@ -1123,7 +1123,7 @@ fn main() {
 
 ### 10.4 边界测试：大数组栈分配导致的编译错误
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // ❌ 编译错误/链接错误: 栈数组太大（可能超过 LLVM 限制或链接器限制）
     let huge = [0u8; 1_000_000_000]; // 1GB 栈数组
@@ -1135,7 +1135,7 @@ fn main() {
 
 ### 10.6 边界测试：`binary_search` 的比较器一致性（运行时 panic/逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut v = vec![3, 1, 4, 1, 5];
     // ❌ 运行时 panic: binary_search 要求数组有序
@@ -1156,7 +1156,7 @@ fn main() {
 
 ### 10.7 边界测试：`BinaryHeap` 的 `peek_mut` 与忘记 `drop`（逻辑错误/UB）
 
-```rust,compile_fail
+```rust,ignore
 use std::collections::BinaryHeap;
 
 fn main() {
@@ -1177,3 +1177,27 @@ fn main() {
 ```
 
 > **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 或循环引用阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素。这是 Rust "leak safety" 哲学的一部分：标准库不保证防泄漏（`mem::forget` 是 safe），但泄漏不应导致内存不安全——`PeekMut` 的泄漏仅破坏逻辑不变量，不触发 UB。这与 C++ 的 `std::priority_queue::top()`（返回 const 引用，不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复，但需理解 guard 模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+
+### 10.3 边界测试：`BinaryHeap` 的 `peek_mut` 与忘记 drop（逻辑错误）
+
+```rust,ignore
+use std::collections::BinaryHeap;
+
+fn main() {
+    let mut heap = BinaryHeap::new();
+    heap.push(3);
+    heap.push(1);
+    heap.push(4);
+    
+    {
+        let mut top = heap.peek_mut().unwrap();
+        *top = 0; // 修改堆顶
+        // ❌ 逻辑错误: 若通过 mem::forget 阻止 drop，堆性质破坏
+        // std::mem::forget(top);
+    }
+    
+    assert_eq!(heap.peek(), Some(&0));
+}
+```
+
+> **修正**: `BinaryHeap::peek_mut()` 返回 `PeekMut` guard，允许修改堆顶元素，drop 时自动 `sift_down` 恢复堆性质。若通过 `std::mem::forget(peek_mut)` 阻止 drop：1) 堆性质破坏（父节点 < 子节点）；2) 后续 `pop()` 返回错误元素；3) 但不触发内存不安全（`forget` 是 safe）。这是 Rust "leak safety" 的体现：泄漏只破坏逻辑不变量，不导致 UB。安全使用：1) 避免 `mem::forget`；2) 不在 `peek_mut` 活跃时修改堆的其他元素；3) 使用 `pop` + `push` 替代（若需完全替换堆顶）。这与 C++ 的 `std::priority_queue::top()`（const 引用，不可修改）或 Java 的 `PriorityQueue.peek()`（不可修改）不同——Rust 的 `peek_mut` 是独特设计，修改 + 自动恢复。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]

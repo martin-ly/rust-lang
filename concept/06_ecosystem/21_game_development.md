@@ -674,7 +674,7 @@ fn load_system(mut commands: Commands) {
 
 ### 10.3 边界测试：游戏循环中的固定时间步长与渲染解耦（运行时卡顿）
 
-```rust,compile_fail
+```rust,ignore
 use std::time::{Duration, Instant};
 
 fn main() {

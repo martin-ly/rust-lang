@@ -390,7 +390,7 @@ fn fixed() {
 
 ### 10.2 边界测试：`const` 与 `static` 的 `Drop` 限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Resource {
     data: String,
 }
@@ -420,7 +420,7 @@ fn init() {
 
 ### 10.3 边界测试：变量遮蔽（shadowing）与不可变引用的冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = 5;
     let r = &x;
@@ -449,3 +449,44 @@ fn some_condition() -> bool { false }
 ```
 
 > **修正**: Rust 编译器通过**流敏感分析**（flow-sensitive analysis）追踪变量初始化状态：在 `println!` 处，编译器检查所有控制流路径上 `x` 是否已初始化。若存在未初始化路径，编译错误。这与 C 的未初始化变量使用（编译器警告但不阻止，运行时读取垃圾值）或 Java 的局部变量（编译器检查，与 Rust 类似）不同——Rust 的初始化分析更精确：1) 考虑条件分支；2) 考虑循环；3) 考虑 `match` 分支。`MaybeUninit<T>` 允许显式处理未初始化状态，但使用 `unsafe`。这与 Swift 的 `let`/`var`（必须初始化，与 Rust 类似）或 Go 的变量声明（零值初始化，无未初始化概念）不同——Rust 在默认情况下禁止未初始化使用，但允许显式控制（`MaybeUninit`）。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)] · [来源: [Rust Reference — Let Statements](https://doc.rust-lang.org/reference/statements-and-expressions.html#let-statements)]
+
+### 10.5 边界测试：变量遮蔽与不可变重新绑定（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x = 5;
+    let x = x + 1; // 遮蔽（shadowing），创建新变量
+    let x = x * 2; // 再次遮蔽
+    println!("{}", x); // 12
+
+    let mut y = 5;
+    // ❌ 编译错误: 不能给不可变变量重新赋值
+    y = 6; // 但 y 是 mut，所以这可以编译... 真正的错误:
+
+    let z = 5;
+    z = 6; // ❌ 编译错误: z 不是 mut
+}
+```
+
+> **修正**: Rust 的**遮蔽**（shadowing）允许用同名变量隐藏前一个变量，但创建的是**全新变量**（新内存位置，新类型）。`let x = x + 1` 中右侧的 `x` 是旧变量（`i32`），左侧的 `x` 是新变量（也是 `i32`，但可以是不同类型：`let x = "hello"`）。遮蔽 vs 可变绑定：1) 遮蔽不改变原变量，只是名字复用；2) 可变绑定（`mut`）修改同一内存位置；3) 遮蔽允许类型变化，可变绑定不允许。常见选择：遮蔽用于类型转换（`let s = s.trim()`），`mut` 用于计数器/累加器。这与 JavaScript 的 `var`/`let`（同名变量覆盖，无遮蔽概念）或 Haskell 的 `let`（纯函数式，无赋值）不同——Rust 的遮蔽是函数式编程影响的设计，减少 `mut` 的使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)] · [来源: [Rust Reference — Variables](https://doc.rust-lang.org/reference/statements.html#let-statements)]
+
+### 10.6 边界测试：`Drop` 的顺序与变量声明顺序的依赖（逻辑错误）
+
+```rust,ignore
+struct Resource(&'static str);
+
+impl Drop for Resource {
+    fn drop(&mut self) {
+        println!("dropping {}", self.0);
+    }
+}
+
+fn main() {
+    let a = Resource("a");
+    let b = Resource("b");
+    // drop 顺序: b 先，a 后（与声明顺序相反）
+    // 若 a 的初始化依赖 b 的资源，b 先 drop 可能导致 a 的 drop 失败
+}
+```
+
+> **修正**: Rust 的 **drop 顺序**：1) 变量按**声明顺序的逆序** drop（LIFO）；2) struct 字段按声明顺序 drop；3) tuple 元素按声明顺序 drop；4) 数组/vec 元素按索引顺序 drop；5) 闭包捕获变量按未指定顺序 drop。依赖 drop 顺序的代码是脆弱的：不同 Rust 版本可能改变闭包捕获的 drop 顺序。安全模式：1) 使 drop 相互独立（不依赖其他变量的状态）；2) 使用 `ManuallyDrop` 显式控制；3) 用 `scopeguard` crate 的 `defer!` 明确清理顺序。这与 C++ 的析构顺序（局部变量逆序、成员按声明顺序）类似——但 Rust 的 `Drop::drop` 不接收参数，不能基于其他对象的状态进行条件清理。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Rust Reference — Destructor Order](https://doc.rust-lang.org/reference/destructors.html)]

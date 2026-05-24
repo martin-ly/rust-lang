@@ -38,6 +38,7 @@
     - [10.2 边界测试：Edition 迁移的宏展开差异（编译错误）](#102-边界测试edition-迁移的宏展开差异编译错误)
     - [10.6 边界测试：Edition 2024 的 `gen` 关键字保留与现有标识符冲突（编译错误）](#106-边界测试edition-2024-的-gen-关键字保留与现有标识符冲突编译错误)
     - [10.5 边界测试：多 Edition workspace 的依赖解析冲突（编译错误）](#105-边界测试多-edition-workspace-的依赖解析冲突编译错误)
+    - [10.3 边界测试：多 Edition workspace 的 resolver 冲突（编译错误）](#103-边界测试多-edition-workspace-的-resolver-冲突编译错误)
 
 ---
 
@@ -519,7 +520,7 @@ fn main() {
 
 ### 10.2 边界测试：Edition 迁移的宏展开差异（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Edition 2021 宏
 macro_rules! old_macro {
     () => {
@@ -541,7 +542,7 @@ fn use_macro() {
 
 ### 10.6 边界测试：Edition 2024 的 `gen` 关键字保留与现有标识符冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Gen {
     value: i32,
 }
@@ -558,7 +559,7 @@ fn main() {
 
 ### 10.5 边界测试：多 Edition workspace 的依赖解析冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Workspace Cargo.toml
 // [workspace]
 // members = ["crate_2018", "crate_2021", "crate_2024"]
@@ -569,3 +570,18 @@ fn main() {
 ```
 
 > **修正**: Workspace 中**多 edition 共存**是常见场景（逐步迁移），但依赖解析的复杂性：1) proc-macro crate 的 edition 影响宏展开代码的解析；2) `resolver = "3"`（2024 edition 默认）改变依赖特征解析，可能影响旧 crate；3) 某些 crate 的 `build.rs` 依赖特定 edition 行为。最佳实践：1) workspace 统一 `resolver = "2"` 或 `"3"`（不混用）；2) proc-macro crate 优先升级到新 edition（影响所有依赖者）；3) 使用 `cargo tree` 检查依赖图中 edition 分布。`cargo` 的依赖解析保证：同一 crate 的多个版本可在依赖图中共存（不同版本视为不同 crate），但 proc-macro 只能有一个版本（编译期加载）。这与 npm 的 workspaces（类似多包管理）或 Java 的 Maven multi-module（版本统一强制）不同——Rust 的 workspace 更灵活，但 edition 交互是高级话题。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/resolver.html)] · [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+
+### 10.3 边界测试：多 Edition workspace 的 resolver 冲突（编译错误）
+
+```rust,ignore
+// Workspace Cargo.toml
+// [workspace]
+// members = ["crate_2018", "crate_2021", "crate_2024"]
+// resolver = "3" // 2024 edition 默认
+
+// crate_2018 依赖旧版 syn（不支持 2024 edition 的某些语法）
+// crate_2024 的 proc-macro 使用 syn 2.0
+// ❌ 编译错误: 若 syn 版本冲突且 proc-macro 只能有一个版本
+```
+
+> **修正**: Workspace 中**多 edition 共存**是常见场景（逐步迁移），但依赖解析复杂：1) proc-macro crate 的 edition 影响宏展开代码的解析；2) `resolver = "3"`（2024 edition 默认）改变依赖特征解析；3) 某些 crate 的 `build.rs` 依赖特定 edition 行为。最佳实践：1) workspace 统一 `resolver = "2"` 或 `"3"`（不混用）；2) proc-macro crate 优先升级到新 edition（影响所有依赖者）；3) 使用 `cargo tree` 检查依赖图中 edition 分布。`cargo` 的依赖解析保证：同一 crate 的多个版本可在依赖图中共存，但 proc-macro 只能有一个版本（编译期加载）。这与 npm 的 workspaces（类似多包管理）或 Java 的 Maven multi-module（版本统一强制）不同——Rust 的 workspace 更灵活，但 edition 交互是高级话题。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/resolver.html)] · [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]

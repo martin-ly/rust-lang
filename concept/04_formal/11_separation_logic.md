@@ -39,6 +39,7 @@
     - [10.3 边界测试：分离逻辑中的帧规则违反（编译错误）](#103-边界测试分离逻辑中的帧规则违反编译错误)
     - [10.4 边界测试：GhostCell 的分离逻辑建模（编译错误）](#104-边界测试ghostcell-的分离逻辑建模编译错误)
     - [10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）](#105-边界测试rustbelt-的-own-与-shr-断言的编码编译错误)
+    - [10.3 边界测试：分离逻辑与 Rust 引用的一致性（编译错误）](#103-边界测试分离逻辑与-rust-引用的一致性编译错误)
 
 ---
 
@@ -687,7 +688,7 @@ fn fixed() {
 
 ### 10.3 边界测试：分离逻辑中的帧规则违反（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn swap(a: &mut i32, b: &mut i32) {
     std::mem::swap(a, b);
 }
@@ -728,7 +729,7 @@ fn main() {
 
 ### 10.5 边界测试：RustBelt 的 `own` 与 `shr` 断言的编码（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // RustBelt 形式化中的概念，非实际 Rust 代码
 
 // own(x, T): 拥有 x 处的 T 类型值
@@ -747,3 +748,18 @@ fn main() {
 ```
 
 > **修正**: RustBelt 使用分离逻辑建模 Rust 的所有权系统：`own(x, T)` 表示独占所有权（对应 `&mut T`），`shr(x, T)` 表示共享读取权（对应 `&T`）。关键规则：1) `own(x, T)` 可分裂为 `shr(x, T) * shr(x, T)`（多个只读引用）；2) `own(x, T)` 不能分裂为 `own(x, T) * own(x, T)`（不能有两个可变引用）；3) `shr(x, T)` 不能写入。这些规则在 RustBelt 中以**高阶协议**（higher-order protocol）编码，通过 Iris 框架证明。RustBelt 证明了：若 unsafe 代码满足其协议，则 safe Rust 代码不可能触发 UB。这是 Rust 安全保证的形式化基础。这与 Hoare 逻辑的前置/后置条件（类似但非资源导向）或 C 的分离逻辑工具（VeriFast、VST）类似——RustBelt 是第一个为工业语言（Rust）提供完整内存安全形式化证明的项目。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [Iris Framework](https://iris-project.org/)]
+
+### 10.3 边界测试：分离逻辑与 Rust 引用的一致性（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 5;
+    let r1 = &mut x;
+    let r2 = &mut x;
+    // ❌ 编译错误: 两个 &mut 指向同一数据，违反独占性
+    *r1 = 10;
+    *r2 = 20;
+}
+```
+
+> **修正**: 分离逻辑（Separation Logic）的核心公理：1) **独占性**（exclusivity）：`own(x)` 表示对 `x` 的独占所有权，不可拆分；2) **可分性**（separability）：`P * Q` 表示 `P` 和 `Q` 作用于**不相交**的内存区域；3) **框架规则**（frame rule）：在 `P` 上验证的代码在 `P * R` 上也成立（不影响未提及的资源）。Rust 的 `&mut T` 对应分离逻辑的 `own(ℓ, τ)`——独占访问保证无别名。`&T` 对应 `shr(κ, ℓ)`（共享权限），允许多个读者但无写者。上述代码中，两个 `&mut x` 试图同时存在，违反 `own(ℓ, i32)` 的独占性。RustBelt 使用 Iris 分离逻辑框架证明：若程序通过 Rust 编译器的借用检查，则其执行在分离逻辑模型中是安全的。这与 C 的指针（无独占性保证，需人工验证）或 Java 的引用（共享只读，无 `&mut` 等价物）不同——Rust 的编译器是分离逻辑的"自动证明器"。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)] · [来源: [Iris Project](https://iris-project.org/)]

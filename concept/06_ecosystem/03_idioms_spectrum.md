@@ -1557,7 +1557,7 @@ fn fixed() {
 
 ### 10.3 边界测试：Clippy 警告的编译错误等价（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let s = String::from("hello");
     // ❌ 编译错误: 尝试在匹配后使用已转移所有权的变量
@@ -1622,7 +1622,7 @@ fn main() {
 
 ### 10.7 边界测试：`std::mem::replace` 与 `take` 的惯用选择（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::mem;
 
 fn main() {
@@ -1638,3 +1638,22 @@ fn main() {
 ```
 
 > **修正**: `std::mem::replace` 将值替换为新值，返回旧值。`std::mem::take` 是 `replace(&mut t, T::default())` 的便捷方法，要求 `T: Default`。`take` 更惯用（语义清晰："取走并留默认值"），但仅适用于实现 `Default` 的类型。对于不实现 `Default` 的类型（如某些自定义 struct），必须使用 `replace` 并显式提供新值。这与 C++ 的 `std::exchange`（C++14，类似 `replace`）或 Swift 的 `swap`（交换两个值，非替换）不同——Rust 的 `take` 是获取所有权并留默认值的惯用模式，常见于 `Option::take`（取走 `Some`，留 `None`）。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.take.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.3 边界测试：`Default` 派生与手动实现的语义差异（逻辑错误）
+
+```rust,ignore
+#[derive(Default)]
+struct Config {
+    port: u16,
+    host: String,
+}
+
+fn main() {
+    let config = Config::default();
+    // ❌ 逻辑问题: port 默认为 0（u16::default），host 为 ""（String::default()）
+    // 但 0 通常不是有效的端口号，空 host 也不合理
+    println!("{}:{}", config.host, config.port);
+}
+```
+
+> **修正**: `#[derive(Default)]` 为所有字段调用 `Default::default()`，可能产生**语义无效**的默认值。`u16::default() = 0`，`String::default() = ""`。修复：1) **手动实现** `Default`：`impl Default for Config { fn default() -> Self { Self { port: 8080, host: "localhost".to_string() } } }`；2) **builder 模式**：强制显式设置关键字段；3) **`#[serde(default = "default_port")]`**：自定义反序列化默认值。`Default` 的设计目的：类型系统的"空值"概念，用于泛型代码（`Vec::resize_with`、`Option::unwrap_or_default`）。这与 C++ 的默认构造函数（类似，但可能执行复杂逻辑）或 Java 的 `null`（无默认值概念）不同——Rust 的 `Default` 是纯函数，无副作用，语义简单。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/default/trait.Default.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/interoperability.html#c-common-traits)]

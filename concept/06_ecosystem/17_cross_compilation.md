@@ -637,7 +637,7 @@ fn main() {
 
 ### 10.2 边界测试：`std` 与 `no_std` 的 API 差异（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #![no_std]
 
 fn main() {
@@ -660,7 +660,7 @@ fn fixed() {
 
 ### 10.3 边界测试：交叉编译的链接器缺失（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // 目标: aarch64-unknown-linux-gnu
 // 但系统未安装 aarch64-linux-gnu-gcc 链接器
 

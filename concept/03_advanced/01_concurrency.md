@@ -105,6 +105,7 @@
   - [十三、边界测试：并发规则的编译错误](#十三边界测试并发规则的编译错误)
     - [13.1 边界测试：`Send` 不满足时跨线程移动（编译错误）](#131-边界测试send-不满足时跨线程移动编译错误)
     - [13.2 边界测试：死锁——嵌套锁顺序不一致（运行时错误 / 逻辑错误）](#132-边界测试死锁嵌套锁顺序不一致运行时错误--逻辑错误)
+    - [10.3 边界测试：`Mutex` 的毒化（poisoning）与错误恢复（运行时 panic）](#103-边界测试mutex-的毒化poisoning与错误恢复运行时-panic)
 
 ## 零、认知路径（Cognitive Path）
 >
@@ -1578,3 +1579,53 @@ fn correct_order() {
 ```
 
 > **修正**: 死锁的四个必要条件之一是"循环等待"。通过强制全局一致的锁获取顺序（如按内存地址排序），可以消除循环等待条件，从而预防死锁。Rust 的编译器无法检测运行时死锁，这是并发安全的静态分析边界。[来源: [Operating Systems: Three Easy Pieces](http://pages.cs.wisc.edu/~remzi/OSTEP/)]
+
+### 10.3 边界测试：`Mutex` 的毒化（poisoning）与错误恢复（运行时 panic）
+
+```rust,compile_fail
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let data = Arc::new(Mutex::new(0));
+    let d = Arc::clone(&data);
+
+    let handle = thread::spawn(move || {
+        let mut guard = d.lock().unwrap();
+        *guard += 1;
+        panic!("intentional panic"); // guard 在 panic 时未释放
+    });
+
+    let _ = handle.join();
+
+    // ❌ 运行时 panic: Mutex 被毒化，lock() 返回 Err(PoisonError)
+    let guard = data.lock().unwrap();
+    println!("{}", *guard);
+}
+```
+
+> **修正**: `std::sync::Mutex` 的**毒化机制**：若持有锁的线程 panic，Mutex 标记为"poisoned"，后续 `lock()` 返回 `Err(PoisonError)`。设计理由：panic 可能使受保护数据处于不一致状态，强制调用者处理。处理模式：1) `lock().unwrap()` — 继续 panic（传播毒化）；2) `lock().unwrap_or_else(|e| e.into_inner())` — 忽略毒化，获取数据；3) `lock().unwrap_or_else(|e| { recover(e); })` — 自定义恢复。`parking_lot::Mutex`（第三方）不实现毒化，性能更好但无 panic 保护。这与 Java 的 `synchronized`（无 poison 概念，死锁检测由 JVM 提供）或 C++ 的 `std::mutex`（无 poison，但 `std::shared_lock` 有类似概念）不同——Rust 的毒化是保守安全设计。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/struct.Mutex.html)] · [来源: [parking_lot](https://docs.rs/parking_lot/)]
+
+### 10.4 边界测试：`std::sync::mpsc` 的多生产者单消费者限制（编译错误）
+
+```rust,compile_fail
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<i32>();
+    
+    let tx2 = tx.clone();
+    thread::spawn(move || { tx.send(1).unwrap(); });
+    thread::spawn(move || { tx2.send(2).unwrap(); });
+    
+    // ❌ 编译错误: 不能克隆 Receiver（mpsc = multiple producer, single consumer）
+    // let rx2 = rx.clone();
+    
+    for _ in 0..2 {
+        println!("{}", rx.recv().unwrap());
+    }
+}
+```
+
+> **修正**: `std::sync::mpsc`（multiple producer, single consumer）的设计：`Sender` 可克隆（多生产者），`Receiver` **不可克隆**（单消费者）。多消费者需求：1) `crossbeam::channel` — 支持多生产者/多消费者；2) `tokio::sync::broadcast` — 广播通道（一发送多接收）；3) `bus` crate — 多消费者广播；4) `Mutex<mpsc::Receiver>` — 用锁包装 Receiver（性能差）。`mpsc` 的选择：1) `std::sync::mpsc` — 标准库，但功能有限；2) `crossbeam::channel` — 性能更好，功能更丰富；3) `flume` — 兼容 sync/async 的通道。这与 Go 的 channel（可多个 goroutine 接收，但值只被一个接收）或 Erlang 的消息邮箱（每个进程一个邮箱，无共享接收）不同——Rust 的通道设计明确区分生产者和消费者角色。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-02-message-passing.html)] · [来源: [crossbeam-channel](https://docs.rs/crossbeam-channel/)]

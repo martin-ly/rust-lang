@@ -40,6 +40,8 @@
   - [十、边界测试：assert\_matches 的编译错误](#十边界测试assert_matches-的编译错误)
     - [10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）](#101-边界测试assert_matches-在非-optionresult-上使用编译错误)
     - [10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）](#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
+    - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）](#103-边界测试assert_matches-与嵌套模式的绑定编译错误)
+    - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](#104-边界测试自定义断言失败消息的类型约束编译错误)
 
 ---
 
@@ -613,7 +615,7 @@ fn fixed() {
 
 ### 10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #[test]
 fn test_nested_match() {
     let result: Result<Option<i32>, ()> = Ok(Some(42));

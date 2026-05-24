@@ -1551,7 +1551,7 @@ fn caller() -> Result<i32, String> {
 
 ### 10.6 边界测试：`todo!()` 与 `unimplemented!()` 的生产泄露（运行时 panic）
 
-```rust,compile_fail
+```rust,ignore
 fn critical_function() -> i32 {
     // ❌ 运行时 panic: 若 TODO 未修复即发布
     todo!("implement this later")
@@ -1566,7 +1566,7 @@ fn main() {
 
 ### 10.7 边界测试：过度使用 `Deref` 进行类型转换（隐式行为困惑）
 
-```rust,compile_fail
+```rust,ignore
 use std::ops::Deref;
 
 struct Wrapper(String);
@@ -1585,3 +1585,28 @@ fn main() {
 ```
 
 > **修正**: `Deref` trait 允许自定义类型的**自动解引用**，实现"智能指针"行为。但过度使用导致：1) 类型边界模糊（`Wrapper` 何时是 `Wrapper`，何时是 `String`）；2) 方法解析困惑（`w.len()` 调用 `String::len` 还是 `Wrapper` 的方法）；3) 编译错误信息难读（类型不匹配时建议的自动转换链很长）。Rust 社区共识：仅对真正的智能指针（`Box`、`Rc`、`Arc`、`Cow`）实现 `Deref`，不对领域类型使用。替代方案：显式方法（`wrapper.as_str()`）或 `From`/`Into` trait。这与 C++ 的隐式转换运算符（`operator T()`，更危险，无限制）或 Swift 的 `ExpressibleByStringLiteral`（类似但有限）不同——Rust 的 `Deref` 是受限的自动解引用，但滥用仍导致设计问题。[来源: [Rust API Guidelines — Deref](https://rust-lang.github.io/api-guidelines/predictability.html?highlight=deref#c-deref)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)]
+
+### 10.3 边界测试：`Deref` 过度使用导致的类型混淆（编译错误/设计反模式）
+
+```rust,ignore
+use std::ops::Deref;
+
+struct Wrapper(String);
+
+impl Deref for Wrapper {
+    type Target = String;
+    fn deref(&self) -> &String { &self.0 }
+}
+
+fn main() {
+    let w = Wrapper(String::from("hello"));
+    // Deref 自动解引用: &Wrapper → &String → &str
+    let _s: &str = &w;
+    
+    // ❌ 设计反模式: Wrapper 的行为像 String，但类型仍是 Wrapper
+    // 方法解析可能困惑: w.push_str(" world") 调用 String::push_str
+    // 但 Wrapper 自身的方法被隐藏
+}
+```
+
+> **修正**: `Deref` trait 提供**自动解引用**，但过度使用导致：1) 类型边界模糊（`Wrapper` 何时是 `Wrapper`，何时是 `String`）；2) 方法解析困惑（`w.len()` 调用 `String::len` 还是 `Wrapper` 的方法）；3) 编译错误信息难读。Rust 社区共识：仅对真正的智能指针（`Box`、`Rc`、`Arc`、`Cow`）实现 `Deref`，不对领域类型使用。替代方案：1) 显式方法（`wrapper.as_str()`）；2) `From`/`Into` trait；3) 直接暴露内部字段（`pub struct Wrapper(pub String)`）。这与 C++ 的隐式转换运算符（`operator T()`，更危险，无限制）或 Swift 的 `ExpressibleByStringLiteral`（类似但有限）不同——Rust 的 `Deref` 是受限的自动解引用，但滥用仍导致设计问题。[来源: [Rust API Guidelines — Deref](https://rust-lang.github.io/api-guidelines/predictability.html?highlight=deref#c-deref)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)]

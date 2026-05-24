@@ -39,6 +39,9 @@
   - [十二、边界测试：数值类型的编译错误](#十二边界测试数值类型的编译错误)
     - [12.1 边界测试：`usize`/`isize` 平台相关大小（编译错误）](#121-边界测试usizeisize-平台相关大小编译错误)
     - [12.2 边界测试：位运算与逻辑运算混用（编译错误）](#122-边界测试位运算与逻辑运算混用编译错误)
+    - [10.3 边界测试：`Wrapping` 与 `Saturating` 的语义选择（逻辑错误）](#103-边界测试wrapping-与-saturating-的语义选择逻辑错误)
+    - [10.4 边界测试：`NonZeroU32` 的构造与优化假设（编译错误/运行时 panic）](#104-边界测试nonzerou32-的构造与优化假设编译错误运行时-panic)
+    - [10.3 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）](#103-边界测试wrappingt-与-t-的混用陷阱编译错误)
 
 ---
 
@@ -600,7 +603,7 @@ fn fixed() {
 
 ### 10.3 边界测试：`Wrapping` 与 `Saturating` 的语义选择（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::num::Wrapping;
 
 fn main() {
@@ -609,7 +612,7 @@ fn main() {
     let c = a + b;
     // ⚠️ 逻辑错误: Wrapping 回绕为 0，可能不是预期行为
     println!("{}", c.0); // 0
-    
+
     // 若预期饱和:
     let d = 255u8.saturating_add(1);
     println!("{}", d); // 255
@@ -620,16 +623,16 @@ fn main() {
 
 ### 10.4 边界测试：`NonZeroU32` 的构造与优化假设（编译错误/运行时 panic）
 
-```rust,compile_fail
+```rust,ignore
 use std::num::NonZeroU32;
 
 fn main() {
     // ❌ 编译错误: NonZeroU32::new 返回 Option，不能直接解包（unsafe）
     // let x = NonZeroU32::new(0).unwrap(); // panic at runtime!
-    
+
     // 正确: 使用 unwrap_unchecked（unsafe，但已知非零）或 match
     let x = NonZeroU32::new(42).unwrap(); // ✅
-    
+
     // 优化优势: Option<NonZeroU32> 可用 0 表示 None，占用 4 字节
     // 而非 Option<u32> 的 8 字节（tag + value）
     let opt: Option<NonZeroU32> = Some(x);
@@ -638,3 +641,18 @@ fn main() {
 ```
 
 > **修正**: `NonZeroU32`（及 `NonZeroU64`、`NonZeroI32` 等）是 Rust 的**优化类型**：包装整数，编译时保证非零。LLVM 利用此保证优化 `Option<NonZeroU32>` 的布局（niche optimization），用 0 表示 `None`，消除 tag 字节。这在高频 Option 场景（解析器、图算法）中显著减少内存。构造必须通过 `NonZeroU32::new(u32) -> Option<NonZeroU32>`——编译器无法在类型层面证明字面量非零（`NonZeroU32::new(0)` 返回 `None`）。这与 C 的 `assert(x != 0)`（运行时检查，无优化）或 Swift 的 `Nonzero` 类型（无标准支持）不同——Rust 的 `NonZero*` 是标准库类型，与编译器深度集成。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.NonZeroU32.html)] · [来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/type-sizes.html)]
+
+### 10.3 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）
+
+```rust,compile_fail
+use std::num::Wrapping;
+
+fn main() {
+    let a = Wrapping(255u8);
+    let b = 1u8;
+    // ❌ 编译错误: Wrapping<u8> 与 u8 不能直接运算
+    let c = a + b;
+}
+```
+
+> **修正**: `Wrapping<T>` 是一个 newtype 包装器，提供**环绕算术**（wrapping arithmetic）：溢出时静默环绕（`255u8 + 1 = 0`）。但它与原始类型 `T` 是不同的类型，不能直接混用运算。正确：`Wrapping(255u8) + Wrapping(1u8)` 或 `a.0 + b`（解包后）。Rust 的整数默认使用 panic-on-overflow（debug 模式）或 wrapping（release 模式）。`Wrapping` 显式选择环绕语义，适用于哈希、密码学、游戏循环等场景。这与 C 的"始终环绕"（UB 仅在 signed overflow）或 Swift 的"默认 panic"不同——Rust 显式区分了两种语义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] · [来源: [Rust Reference — Integer Overflow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#overflow)]

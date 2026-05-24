@@ -563,3 +563,19 @@ fn main() {
 ```
 
 > **修正**: Cargo script（`cargo` shebang）是 Rust 1.79+ 的实验性功能，允许在 `.rs` 文件中内嵌 `Cargo.toml` 元数据。版本冲突的解决：1) Cargo 的语义版本解析通常自动调和兼容版本；2) 精确版本（`"=1.0.150"`）会阻止升级，可能导致冲突；3) 使用 `cargo update -p serde --precise 1.0.150` 锁定特定版本。Cargo script 的限制：1) 无 workspace 共享依赖；2) 每次运行可能重新编译（无增量编译缓存）；3) 不支持复杂构建脚本。这与 Python 的 `pip` + `requirements.txt`（类似冲突）或 Deno 的 URL 导入（无版本冲突，但无版本管理）不同——Cargo 的依赖解析是行业中最成熟的之一，但单文件脚本的限制仍需注意。[来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs/3424-cargo-script.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]
+
+### 10.3 边界测试：cargo script 的 shebang 与 Windows 兼容性（运行时错误）
+
+```rust,compile_fail
+#!/usr/bin/env cargo
+---
+[dependencies]
+serde = "1.0"
+---
+
+fn main() {
+    println!("cargo script demo");
+}
+```
+
+> **修正**: Cargo script 的 **shebang**（`#!/usr/bin/env cargo`）是 Unix 特性，Windows 不支持。Windows 运行 cargo script：1) `cargo +nightly run script.rs`（显式调用）；2) 使用 `cargo-script` crate（已集成到 cargo nightly）；3) 文件关联（将 `.rs` 关联到 cargo）。cargo script 的限制：1) 无 workspace 共享依赖；2) 每次运行可能重新编译（无增量编译缓存）；3) 不支持复杂构建脚本。适用场景：快速原型、单次运行脚本、教学示例。这与 Python 的 shebang（跨平台更成熟）或 Deno 的 `deno run script.ts`（内置脚本运行，无需 shebang）不同——Rust 的 cargo script 是实验性功能，仍在演进。[来源: [Cargo Script RFC](https://rust-lang.github.io/rfcs/3424-cargo-script.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/)]

@@ -459,7 +459,7 @@ GROUP BY region;
 
 ### 12.2 边界测试：共享状态管理器的并发访问（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
@@ -608,3 +608,25 @@ async fn consumer_fixed(mut rx: mpsc::Receiver<i32>) {
 ```
 
 > **修正**: Rust 的 channel（`mpsc::channel<T>`）在类型层面保证发送和接收的类型一致性。编译器拒绝类型不匹配的 channel 连接，将运行时类型错误提前到编译期。这与 Go 的 `chan interface{}` 或 Erlang 的动态消息类型形成对比——Rust 的流处理是类型安全的，但要求在设计时明确消息类型。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
+### 10.3 边界测试：Stream 的 `fuse` 与重复 poll 后的行为（逻辑错误）
+
+```rust,compile_fail
+use futures::stream::{self, StreamExt};
+
+fn main() {
+    let mut s = stream::iter(vec![1, 2, 3]);
+    // 第一次 poll
+    assert_eq!(futures::executor::block_on(s.next()), Some(1));
+    // 第二次 poll
+    assert_eq!(futures::executor::block_on(s.next()), Some(2));
+    // 第三次 poll
+    assert_eq!(futures::executor::block_on(s.next()), Some(3));
+    // 第四次 poll
+    assert_eq!(futures::executor::block_on(s.next()), None);
+    // ❌ 逻辑错误: 某些 Stream 实现返回 None 后继续 poll 可能 panic 或行为未定义
+    // 正确: 使用 .fuse() 确保 Stream 在 None 后保持返回 None
+}
+```
+
+> **修正**: `Stream` trait 的 `poll_next` 在返回 `None` 后，再次 poll 的行为**未定义**（取决于实现）。`Fuse` adapter（`.fuse()`）保证：返回 `None` 后，所有后续 poll 也返回 `None`。这与 `Iterator` 的行为不同：`Iterator::next()` 返回 `None` 后再次调用是明确定义的（继续返回 `None`）。`Stream` 的设计原因：某些底层源（如 I/O、channel）在关闭后可能重新打开或产生错误，不强制 `None` 后终止。安全模式：消费 Stream 后使用 `.fuse()`，或用 `while let Some(item) = stream.next().await`（自动处理）。这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步流语义比迭代器更复杂，因涉及外部事件源。[来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]

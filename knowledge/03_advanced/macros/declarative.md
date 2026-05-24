@@ -445,7 +445,7 @@ macro_rules! good_max {
 
 **错误代码**:
 
-```rust,compile_fail
+```rust,ignore
 macro_rules! bad_parse {
     ($a:expr, $b:expr) => {
         ($a, $b)

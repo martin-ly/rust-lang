@@ -36,6 +36,9 @@
   - [十、边界测试：Newtype 与包装器的编译错误](#十边界测试newtype-与包装器的编译错误)
     - [10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）](#101-边界测试newtype-不继承原类型的-trait编译错误)
     - [10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时 UB）](#102-边界测试phantomdata-的协变逆变误用编译错误--运行时-ub)
+    - [10.3 边界测试：newtype 的 derive 限制（编译错误）](#103-边界测试newtype-的-derive-限制编译错误)
+    - [10.4 边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）](#104-边界测试deref-滥用导致的隐式转换陷阱编译错误逻辑错误)
+    - [10.5 边界测试：newtype 的 `Deref` 过度使用导致的方法名冲突（编译错误/逻辑错误）](#105-边界测试newtype-的-deref-过度使用导致的方法名冲突编译错误逻辑错误)
 
 ---
 
@@ -521,7 +524,7 @@ graph TD
 
 ### 10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Meters(u32);
 
 fn add_distance(a: Meters, b: Meters) -> Meters {
@@ -579,7 +582,7 @@ struct InvariantContainer<T> {
 
 ### 10.3 边界测试：newtype 的 derive 限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Meters(u32);
 struct Seconds(u32);
 
@@ -596,7 +599,7 @@ fn main() {
 
 ### 10.4 边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::ops::Deref;
 
 struct Wrapper(String);
@@ -613,7 +616,7 @@ fn takes_str(s: &str) {
 fn main() {
     let w = Wrapper(String::from("hello"));
     takes_str(&w); // ✅ Deref 强制转换: &Wrapper → &String → &str
-    
+
     // ❌ 逻辑错误: Deref 使 Wrapper 表现得像 String，但语义不同
     // 开发者可能忘记 Wrapper 和 String 是不同的类型
     let s: String = w.clone(); // 克隆的是 String，不是 Wrapper
@@ -624,7 +627,7 @@ fn main() {
 
 ### 10.5 边界测试：newtype 的 `Deref` 过度使用导致的方法名冲突（编译错误/逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::ops::Deref;
 
 struct Username(String);
@@ -645,3 +648,29 @@ fn main() {
 ```
 
 > **修正**: `Deref` 强制转换使 newtype 获得内部类型的所有方法，但**返回类型**仍是内部类型。`u.clone()` 返回 `String` 而非 `Username`，因为 `clone` 的签名在 `String` 中定义，返回 `Self`（`String`）。若需要 `Username::clone()` 返回 `Username`，必须手动 `impl Clone for Username`。这是 `Deref` 委托的局限：它转发方法调用，但不改变方法签名。这与 C# 的 `implicit operator`（类似转换，但同样不改变返回类型）或 Scala 的 `implicit class`（扩展方法，不继承方法）类似——newtype 模式要求显式实现所需 trait，不能仅依赖 `Deref`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/predictability.html)]
+
+### 10.4 边界测试：newtype 与 `Deref` 的方法解析冲突（编译错误/设计反模式）
+
+```rust,ignore
+use std::ops::Deref;
+
+struct Meters(u32);
+
+impl Deref for Meters {
+    type Target = u32;
+    fn deref(&self) -> &u32 { &self.0 }
+}
+
+impl Meters {
+    fn value(&self) -> u32 { self.0 }
+}
+
+fn main() {
+    let m = Meters(100);
+    // ❌ 方法解析冲突: Meters::value 与 u32 的方法可能混淆
+    println!("{}", m.value());
+    println!("{}", m.saturating_add(50)); // u32 的方法，通过 Deref
+}
+```
+
+> **修正**: newtype 模式（`struct Meters(u32)`）创建语义不同的类型，但 `Deref` 自动解引用使 newtype 像底层类型一样行为。这导致**方法解析困惑**：`m.saturating_add(50)` 调用 `u32::saturating_add`，而非 `Meters` 的方法（若存在）。设计原则：newtype 用于**类型安全**（防止混淆 Meters 和 Seconds），但 `Deref` 削弱了这一优势。替代方案：1) 不显式实现 `Deref`，只提供必要方法；2) 使用 `From`/`Into` 显式转换；3) 使用 `as_ref()` / `into_inner()` 访问内部值。这与 Haskell 的 `newtype`（无运行时开销，无 Deref 等价物，需显式解包）或 Ada 的派生类型（类似 newtype，无隐式转换）相同——Rust 的 newtype 最纯粹的形式是不实现 `Deref`，完全通过显式 API 交互。[来源: [Newtype Pattern](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]

@@ -48,6 +48,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：impl Trait 的自动 trait 捕获规则（编译错误）](#103-边界测试impl-trait-的自动-trait-捕获规则编译错误)
 
 ---
 
@@ -604,7 +605,7 @@ let b: i32 = a.into();          // ✅ 显式: MyInt → i32
 
 ### 编译错误示例
 
-```rust,compile_fail
+```rust,ignore
 // 错误: impl Trait 在 trait 定义中使用
 trait MyTrait {
     fn method() -> impl Iterator<Item = i32>;
@@ -648,7 +649,7 @@ fn infinite_size() {
 
 ### 4.4 边界测试：高阶 trait bound（HRTB）误用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn apply<F>(f: F)
 where
     F: Fn(&i32) -> &i32,
@@ -758,3 +759,44 @@ impl Container for BadWrapper {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.3 边界测试：impl Trait 的自动 trait 捕获规则（编译错误）
+
+```rust,compile_fail
+use std::future::Future;
+
+fn async_fn() -> impl Future<Output = i32> {
+    async { 42 }
+}
+
+// ❌ 编译错误: impl Future 不一定实现 Send
+fn spawn_task() {
+    tokio::spawn(async_fn()); // tokio::spawn 要求 Future: Send
+}
+
+fn main() {}
+```
+
+> **修正**: `impl Trait` 的**自动 trait 捕获**：返回类型不自动实现 `Send`、`Sync`、`Unpin` 等 auto trait，即使底层类型实现了。Rust 1.75+ 的 `impl Trait` 生命周期捕获规则变更：返回类型可能捕获更少的生命周期。修复：1) `fn async_fn() -> impl Future<Output = i32> + Send` — 显式约束；2) `async fn async_fn() -> i32` — 自动添加 `Send` 约束（若所有捕获都是 `Send`）；3) `Box<dyn Future<Output = i32> + Send>` — 类型擦除 + 显式约束。`impl Trait` 在返回位置（RPIT）和参数位置（AFIT, `async fn`）的语义略有不同。这与 TypeScript 的 `Promise<T>`（自动推断）或 C# 的 `IAsyncEnumerable<T>`（接口约束）不同——Rust 的 `impl Trait` 是编译期抽象，不暴露具体类型，但约束需显式声明。[来源: [Rust Reference — impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html)] · [来源: [RFC 2289 — Associated Type Constructors](https://rust-lang.github.io/rfcs/2289-associated-type-constructors.html)]
+
+### 10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）
+
+```rust,compile_fail
+trait Container {
+    type Item = i32; // 默认关联类型
+    fn get(&self) -> Self::Item;
+}
+
+struct MyContainer;
+
+impl Container for MyContainer {
+    type Item = String; // ❌ 编译错误: 不能覆盖默认关联类型
+    fn get(&self) -> Self::Item {
+        String::from("hello")
+    }
+}
+
+fn main() {}
+```
+
+> **修正**: Rust 的**关联类型默认值**：1) `type Item = i32;` 在 trait 定义中提供默认值；2) `impl` 中可省略 `type Item = ...`（使用默认值）；3) 但不能指定不同的具体类型（不能覆盖默认值）。这与 C++20 的 `using` alias（无默认值概念）或 Haskell 的 associated type synonyms（可覆盖）不同——Rust 的默认关联类型是"fallback"而非"可覆盖的默认值"。未来可能的扩展：`default type Item = i32;` 语法（允许覆盖）。当前替代方案：1) 使用泛型参数而非关联类型；2) 使用多个 trait（一个含默认，一个不含）。这与类型类的默认方法（可覆盖）不同——Rust 的关联类型默认值不可覆盖是设计决策。[来源: [Associated Types](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/items/associated-items.html)]

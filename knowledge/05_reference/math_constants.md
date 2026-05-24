@@ -401,3 +401,26 @@ let good = x * f32::consts::PI;
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 边界测试：浮点常量精度与 `const fn` 限制（编译错误）
+
+```rust,ignore
+const fn compute_pi() -> f64 {
+    // ❌ 编译错误: const fn 中不能使用某些数学运算
+    // std::f64::consts::PI 是常量，但复杂计算受限
+    let mut sum = 0.0;
+    let mut i = 0;
+    while i < 1000 {
+        sum += 1.0 / ((i * 2 + 1) as f64);
+        i += 1;
+    }
+    sum * 4.0
+}
+
+fn main() {
+    const PI: f64 = compute_pi();
+    println!("{}", PI);
+}
+```
+
+> **修正**: `const fn` 的浮点运算支持：1) 基本四则运算（`+`、`-`、`*`、`/`）已支持；2) `while` 循环（1.46+）和 `mut` 绑定（1.83+）已支持；3) 但 `std::f64::sin()`、`sqrt()` 等非 `const fn` 不可用。高精度数学常量的编译期计算：1) 使用已定义的常量（`std::f64::consts::PI`、`E`、`LN_2` 等）；2) 自定义 `const` 项（`const PI: f64 = 3.141592653589793`）；3) 编译期无法计算的，用 `lazy_static`/`once_cell` 在运行时初始化。这与 C++ 的 `constexpr`（C++23 支持 `std::sqrt` 等数学函数）或 D 的 CTFE（支持浮点数学函数）不同——Rust 的 `const fn` 保守但逐步扩展。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/f64/consts/index.html)] · [来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)]

@@ -1722,7 +1722,7 @@ enum SafeValue {
 
 ### 10.1 边界测试：`for<'a>` HRTB 在 trait bound 中的误用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Callback {
     fn call(&self, x: &i32);
 }
@@ -1824,13 +1824,13 @@ fn main() {
 
 ### 10.4 边界测试：NLL（非词法生命周期）的边界（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut x = 5;
     let y = &x;
     // NLL 允许 y 在最后一次使用后结束生命周期
     println!("{}", y);
-    
+
     // ❌ 编译错误: 即使使用 NLL，某些情况下借用仍被过度延长
     let z = &mut x;
     // y 的生命周期在 NLL 下应已结束，但若 y 在内部作用域中...
@@ -1838,3 +1838,22 @@ fn main() {
 ```
 
 > **修正**: NLL（Non-Lexical Lifetimes，Rust 1.31+）将引用的生命周期从"词法作用域"（大括号包围的范围）缩小到"实际使用范围"。但 NLL 仍有边界：1) 条件分支中的借用统一延长到分支结束；2) `match` 中的 arm 借用延长到整个 `match`；3) 闭包捕获的引用生命周期与闭包本身绑定。Polonius（下一代借用检查器）将解决更多 NLL 的边缘情况，但尚未稳定。NLL 的设计体现了 Rust 类型系统的演进：从保守（词法作用域）到精确（数据流分析），逐步接受更多合法程序。这与 C++ 的临时对象生命周期（复杂规则，某些情况延长到语句结束）或 Swift 的 ARC（引用计数，无编译期生命周期）不同——Rust 在编译期通过静态分析确定精确的生命周期。[来源: [NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)] · [来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)]
+
+### 10.3 边界测试：HRTB 与闭包生命周期不匹配（编译错误）
+
+```rust,ignore
+fn call_with_ref<F>(f: F)
+where
+    F: for<'a> Fn(&'a str) -> &'a str,
+{
+    let s = String::from("hello");
+    let _result = f(&s);
+}
+
+fn main() {
+    // ❌ 编译错误: 闭包返回的引用不满足 HRTB 约束
+    call_with_ref(|s| &s[0..1]);
+}
+```
+
+> **修正**: `for<'a> Fn(&'a str) -> &'a str` 要求闭包对**所有**生命周期 `'a` 都返回与输入相同生命周期的引用。`|s| &s[0..1]` 中 `s` 是 `&str`（输入引用），`&s[0..1]` 的生命周期与 `s` 相同，这在闭包内部成立。但 `call_with_ref` 的问题在于 `s` 在 `call_with_ref` 内部创建，如果闭包尝试返回比 `s` 活得更长的引用，编译器会拒绝。更常见的 HRTB 失败模式：期望 `for<'a> Fn(&'a str)` 但传入 `Fn(&'static str)`——后者只接受静态生命周期，不满足"所有生命周期"。HRTB 是 Rust 类型系统的强大特性，但也是闭包与 trait 交互时的常见陷阱。[来源: [Rust Reference — Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]

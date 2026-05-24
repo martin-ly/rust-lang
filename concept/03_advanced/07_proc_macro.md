@@ -34,6 +34,8 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.5 边界测试：过程宏的 `Span` 与错误定位精度（编译错误/调试困难）](#105-边界测试过程宏的-span-与错误定位精度编译错误调试困难)
+    - [10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
 
 ---
 
@@ -697,7 +699,7 @@ use syn::{parse_macro_input, DeriveInput};
 pub fn my_debug(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
     let name = input.ident;
-    
+
     // ❌ 调试困难: 若生成的代码有错误，错误信息指向宏调用点
     // 而非宏定义中的具体生成位置
     let expanded = quote! {
@@ -712,3 +714,46 @@ pub fn my_debug(input: TokenStream) -> TokenStream {
 ```
 
 > **修正**: 过程宏的错误定位是开发体验的关键挑战。`quote!` 生成的代码默认使用 `Span::call_site()`，错误信息指向宏调用处。改善方法：1) 使用 `Span::mixed_site()` 或输入 token 的 span（保留原始位置）；2) `syn::spanned::Spanned` 为生成的 AST 节点附加 span；3) `proc_macro::Diagnostic`（不稳定）自定义错误消息和位置。Rust 1.64+ 的 `Span::error` 和 `Span::warning` 改善了这一状况。这与 C 的宏（错误指向展开后代码，难以追溯）或 Lisp 的宏（同像性，错误在宏展开后的代码中）不同——Rust 的过程宏有源码映射支持，但需宏作者正确使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [proc_macro Diagnostic](https://doc.rust-lang.org/proc_macro/struct.Diagnostic.html)]
+
+### 10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）
+
+```rust,compile_fail
+use proc_macro::TokenStream;
+use quote::quote;
+
+#[proc_macro_derive(MyTrait)]
+pub fn derive_my_trait(input: TokenStream) -> TokenStream {
+    let expanded = quote! {
+        impl MyTrait for #input {
+            fn method(&self) {}
+        }
+    };
+    expanded.into()
+}
+
+// 使用:
+// use my_crate::MyTrait;
+// #[derive(MyTrait)]
+// struct MyStruct;
+//
+// ❌ 编译错误: 宏生成的 impl MyTrait 使用绝对路径，
+// 但调用者可能重定义了 MyTrait
+```
+
+> **修正**: 过程宏的**hygiene**（卫生）保证宏生成的标识符不会与调用者的标识符冲突。`quote!` 中的 `MyTrait` 在宏定义 crate 中解析，使用绝对路径（`::my_crate::MyTrait`）可确保正确性。但边缘情况：1) `no_std` 环境中 `std` 不可用，应使用 `::core`；2) 调用者重定义了 `std` 模块；3) 宏生成的代码使用相对路径，可能被调用者的模块结构影响。`proc_macro2::Span::mixed_site()` 提供定义处解析（类似 `macro_rules!` 的 hygiene），`Span::call_site()` 提供调用处解析（可能冲突）。`quote::quote_spanned!` 可指定特定 span。这与 C 的宏（无 hygiene，纯文本替换）或 Scheme 的 hygienic macro（基于语法对象，更强大）不同——Rust 的过程宏 hygiene 是编译器自动处理的，开发者通常使用 `mixed_site` 默认行为。[来源: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html)] · [来源: [proc-macro2 Documentation](https://docs.rs/proc-macro2/)]
+
+### 10.4 边界测试：proc_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）
+
+```rust,compile_fail
+use proc_macro::TokenStream;
+use quote::quote;
+
+#[proc_macro_derive(MyDerive)]
+pub fn my_derive(input: TokenStream) -> TokenStream {
+    // ❌ 编译错误: proc_macro crate 只能在 proc-macro crate 中使用
+    // 且 quote! 宏需要 proc-macro2
+    quote! {}.into()
+}
+```
+
+> **修正**: **过程宏**的 crate 类型限制：1) `proc_macro` crate 只能在 `crate-type = ["proc-macro"]` 的 crate 中使用；2) `quote` 和 `syn` 是辅助库（非编译器内置）；3) 过程宏在编译期执行，无运行时开销。TokenStream 的处理：1) `syn::parse` — 将 TokenStream 解析为 AST；2) `quote!` — 从模板生成 TokenStream；3) `proc_macro2::TokenStream` — 可跨线程使用（`proc_macro::TokenStream` 不可 Send）。hygiene：1) `Span::call_site()` — 继承调用方 hygiene；2) `Span::mixed_site()` — 混合 hygiene（宏定义的变量不可被调用方访问）；3) `Span::def_site()` — 定义点 hygiene（最严格）。这与 Lisp 的宏（无 hygiene，易捕获变量）或 C 的宏（纯文本替换）不同——Rust 的过程宏有完善的 hygiene 系统。[来源: [Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]

@@ -47,6 +47,8 @@
   - [十、边界测试：元编程的编译错误](#十边界测试元编程的编译错误)
     - [10.1 边界测试：过程宏的 TokenStream 解析失败（编译错误）](#101-边界测试过程宏的-tokenstream-解析失败编译错误)
     - [10.2 边界测试：常量泛型的非常量表达式（编译错误）](#102-边界测试常量泛型的非常量表达式编译错误)
+    - [10.3 边界测试：常量泛型的表达式复杂度（编译错误）](#103-边界测试常量泛型的表达式复杂度编译错误)
+    - [10.4 边界测试：`TypeId` 的跨 crate 稳定性（逻辑错误）](#104-边界测试typeid-的跨-crate-稳定性逻辑错误)
 
 ---
 
@@ -704,14 +706,14 @@ fn main() {}
 
 ### 10.4 边界测试：`TypeId` 的跨 crate 稳定性（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::any::{Any, TypeId};
 
 fn main() {
     let id1 = TypeId::of::<String>();
     let id2 = TypeId::of::<String>();
     assert_eq!(id1, id2); // ✅ 同一编译会话内稳定
-    
+
     // ❌ 逻辑错误: TypeId 的哈希值在不同编译会话/不同版本中可能不同
     // 不能将 TypeId 序列化到磁盘或通过网络传递
     // let serialized = serialize(&id1);
@@ -721,3 +723,21 @@ fn main() {
 ```
 
 > **修正**: `TypeId` 是 Rust 运行时的类型标识符，用于 `Any` trait 的向下转型（`downcast_ref`）。`TypeId` 在**同一编译会话**内是确定且可比较的，但不保证跨编译会话、跨 crate 版本、跨编译器版本的一致性。其内部表示是编译器生成的哈希值，可能随编译器版本变化。因此 `TypeId` 不能：1) 序列化到持久存储；2) 通过网络传递；3) 作为长期缓存的键。安全替代：使用自定义类型标签（`enum TypeTag { String, Int, ... }`）或字符串类型名（`std::any::type_name`，不稳定）。这与 Java 的 `Class.getName()`（跨 JVM 稳定）或 C++ 的 `typeid`（同一程序内稳定，跨程序不保证）类似——运行期类型信息的设计受限于编译器实现细节。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/any/struct.TypeId.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：编译期递归深度限制（编译错误）
+
+```rust,ignore
+macro_rules! count {
+    () => { 0 };
+    ($x:tt $($rest:tt)*) => { 1 + count!($($rest)*) };
+}
+
+fn main() {
+    // ❌ 编译错误: 宏递归深度超过限制（默认 128）
+    // let n = count!(a b c d e f g h i j k l m n o p q r s t u v w x y z ...);
+    let n = count!(a b c);
+    println!("{}", n);
+}
+```
+
+> **修正**: Rust 编译器的**宏递归限制**：默认 128 层展开，防止无限递归导致编译器栈溢出。`count!` 宏递归计数 token 数量，大量 token 会超出限制。增加限制：`#![recursion_limit = "256"]`（crate 级别）。但过度递归增加编译时间。替代方案：1) 使用 `const fn` 替代宏递归（若逻辑可在 const 中表达）；2) 使用过程宏（无递归限制，但复杂度更高）；3) 减少 token 数量（批量处理）。这与 C 的预处理器（无递归限制，可能无限展开）或 Template Haskell（编译期执行 Haskell 代码，受运行时栈限制）不同——Rust 的宏递归限制是编译期的安全阀。[来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]

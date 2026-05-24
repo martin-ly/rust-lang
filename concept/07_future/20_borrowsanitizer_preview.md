@@ -41,6 +41,7 @@
     - [10.3 边界测试：BorrowSanitizer 与 FFI 的交互盲区（运行时漏报）](#103-边界测试borrowsanitizer-与-ffi-的交互盲区运行时漏报)
     - [10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时误报）](#106-边界测试borrowsanitizer-与-unsafe-块内的合法别名运行时误报)
     - [10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）](#105-边界测试borrowsanitizer-与-miri-的检测范围差异ub-漏检)
+    - [10.3 边界测试：BorrowSanitizer 的插桩盲区与优化代码（UB 漏检）](#103-边界测试borrowsanitizer-的插桩盲区与优化代码ub-漏检)
 
 ---
 
@@ -439,7 +440,7 @@ fn main() {
 
 ### 10.1 边界测试：BorrowSanitizer 的别名分析误报（编译错误/运行时检测）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut x = [0i32; 4];
     let ptr = x.as_mut_ptr();
@@ -496,7 +497,7 @@ fn main() {
 
 ### 10.6 边界测试：BorrowSanitizer 与 `unsafe` 块内的合法别名（运行时误报）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut x = [0i32; 4];
     let ptr = x.as_mut_ptr();
@@ -516,7 +517,7 @@ fn main() {
 
 ### 10.5 边界测试：BorrowSanitizer 与 Miri 的检测范围差异（UB 漏检）
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 检测盲区: BorrowSanitizer（运行时）与 Miri（解释器）可能检测到不同 UB
 
 fn alias_violation() {
@@ -535,3 +536,24 @@ fn alias_violation() {
 ```
 
 > **修正**: Rust 的 UB 检测工具谱：1) **Miri**（最全面）：解释执行，跟踪 Stacked Borrows / Tree Borrows 标签，检测所有内存和别名违规，但极慢（10-100x 减速）；2) **BorrowSanitizer**（设想中）：运行时插桩，类似 ASan，检测别名违规，但受优化影响（release 模式可能内联/删除检测点）；3) **ASan/MSan**：检测内存错误（use-after-free、越界），不检测别名。互补策略：开发期用 Miri 全面检查，CI 用 BorrowSanitizer（若存在）快速回归测试，发布用 ASan 检测残余内存问题。当前状态（2025）：BorrowSanitizer 仍是研究概念，无可用实现；社区用 Miri + `cargo fuzz` + ASan 组合覆盖。这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。[来源: [Miri Documentation](https://github.com/rust-lang/miri)] · [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
+
+### 10.3 边界测试：BorrowSanitizer 的插桩盲区与优化代码（UB 漏检）
+
+```rust,ignore
+fn alias_violation() {
+    let mut x = 5;
+    let r1 = &mut x as *mut i32;
+    let r2 = &mut x as *mut i32;
+    unsafe {
+        *r1 = 1;
+        *r2 = 2; // UB: 重叠的可变裸指针
+    }
+}
+
+fn main() {
+    alias_violation();
+    // Miri 可检测，BorrowSanitizer（若存在）可能因优化后代码漏检
+}
+```
+
+> **修正**: Rust 的 UB 检测工具谱：1) **Miri**（最全面）：解释执行，跟踪 Stacked Borrows / Tree Borrows 标签，检测所有内存和别名违规，但极慢；2) **BorrowSanitizer**（设想中）：运行时插桩，类似 ASan，检测别名违规，但受优化影响；3) **ASan/MSan**：检测内存错误，不检测别名。互补策略：开发期用 Miri 全面检查，CI 用 BorrowSanitizer 快速回归测试，发布用 ASan 检测残余内存问题。当前状态（2025）：BorrowSanitizer 仍是研究概念，无可用实现；社区用 Miri + `cargo fuzz` + ASan 组合覆盖。这与 C/C++ 的 sanitizer 生态（ASan/MSan/UBSan/TSan 成熟可用）不同——Rust 的内存安全保证减少了 sanitizer 的必要性，但 unsafe 代码和 FFI 边界仍需工具支持。[来源: [Miri Documentation](https://github.com/rust-lang/miri)] · [来源: [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]

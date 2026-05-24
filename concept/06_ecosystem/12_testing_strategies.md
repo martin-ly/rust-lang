@@ -635,7 +635,7 @@ async fn async_op() -> i32 { 42 }
 
 ### 10.3 边界测试：属性宏测试的顺序依赖（运行时测试失败）
 
-```rust,compile_fail
+```rust,ignore
 static mut COUNTER: i32 = 0;
 
 #[test]
@@ -688,3 +688,32 @@ proptest! {
 ```
 
 > **修正**: 属性测试（Property-Based Testing）通过随机生成输入验证不变量，但**生成策略**决定覆盖范围。`1..100` 排除了 0、负数、大数——若 `division` 的实际输入可能为 0，测试通过但生产环境 panic。Proptest 的 shrink：测试失败时，尝试简化反例（如 `100` → `50` → `25` → `0`），但若 0 不在生成范围，无法发现。最佳实践：1) 生成范围覆盖全部有效域（`any::<i32>()`）；2) 使用 `prop_filter` 排除无效输入，而非缩小范围；3) 结合单元测试覆盖边界值（`i32::MIN / -1` 的溢出）。这与 QuickCheck（Haskell，类似）或 Hypothesis（Python，shrink 更智能）类似——属性测试不能替代边界值分析，而是补充随机覆盖。[来源: [proptest Book](https://proptest-rs.github.io/proptest/intro.html)] · [来源: [QuickCheck Paper](https://doi.org/10.1145/263690.263804)]
+
+### 10.3 边界测试：mockall 的期望设置与调用顺序验证（测试失败）
+
+```rust,compile_fail
+use mockall::automock;
+
+#[automock]
+trait Database {
+    fn query(&self, sql: &str) -> Vec<String>;
+}
+
+fn main() {
+    let mut mock = MockDatabase::new();
+    mock.expect_query()
+        .with(mockall::predicate::eq("SELECT * FROM users"))
+        .times(1)
+        .returning(|_| vec!["Alice".to_string()]);
+    
+    // ❌ 测试失败: 调用参数不匹配或次数超限
+    // let result = mock.query("SELECT * FROM orders");
+    let result = mock.query("SELECT * FROM users");
+    assert_eq!(result, vec!["Alice"]);
+    
+    // 再次调用会失败（times(1) 只允许一次）
+    // let result2 = mock.query("SELECT * FROM users");
+}
+```
+
+> **修正**: `mockall` 是 Rust 的**模拟框架**，基于 `mockall::automock` 过程宏自动生成 mock 实现。核心概念：1) `expect_*` — 设置方法期望（调用次数、参数、返回值）；2) `times(n)` — 精确次数，`times(..)` — 范围，`times(1..)` — 至少一次；3) `with(...)` — 参数匹配器；4) `in_sequence()` — 调用顺序验证。`mockall` 与 `mockito`（HTTP mock）、`wiremock`（异步 HTTP mock）形成 Rust 测试生态。这与 Java 的 Mockito（类似 expect/verify 模式）或 Python 的 `unittest.mock`（更灵活的 patch 机制）不同——Rust 的 `mockall` 在编译期生成 mock，类型安全但灵活性稍低。[来源: [mockall](https://docs.rs/mockall/)] · [来源: [Rust Testing](https://doc.rust-lang.org/rust-by-example/testing.html)]

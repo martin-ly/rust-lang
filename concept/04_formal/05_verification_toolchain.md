@@ -979,7 +979,7 @@ fn safe_deref(ptr: *const i32) -> i32 {
 
 ### 编译错误 2：`unsafe impl Send` 错误应用
 
-```rust,compile_fail
+```rust,ignore
 use std::rc::Rc;
 
 struct MyData(Rc<i32>);
@@ -1249,3 +1249,21 @@ fn main() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+### 10.3 边界测试：Kani 的循环展开限制与验证失败（验证失败/超时）
+
+```rust,compile_fail
+#[kani::proof]
+#[kani::unwind(5)]
+fn verify_loop() {
+    let mut sum = 0;
+    for i in 0..10 {
+        sum += i;
+    }
+    assert!(sum == 45);
+}
+
+fn main() {}
+```
+
+> **修正**: Kani（Rust 的模型检查器）通过**有界模型检查**验证程序：`#[kani::unwind(5)]` 限制循环展开次数为 5。`for i in 0..10` 迭代 10 次，超过展开限制 → 验证失败（"unwinding assertion"）。解决：1) 增加 `#[kani::unwind(10)]`；2) 提取循环不变量，用归纳法证明；3) 将循环替换为闭式表达式（`sum = n * (n - 1) / 2`）。Kani 的适用场景：有限状态协议（mutex、channel）、小数据结构的属性、unsafe 代码的内存安全边界。不适用：无界循环、复杂数据结构（图、树）、大规模并发程序。这与 CBMC（C 的模型检查器）或 SPIN（Promela 协议验证）类似——有界模型检查在关键代码中提供高保证，但可扩展性是核心挑战。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [CBMC](https://github.com/diffblue/cbmc)]

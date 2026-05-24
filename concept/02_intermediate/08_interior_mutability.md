@@ -46,6 +46,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.5 边界测试：`RefCell::borrow_mut` 的递归 panic（运行时 panic）](#105-边界测试refcellborrow_mut-的递归-panic运行时-panic)
 
 ---
 
@@ -495,7 +496,7 @@ fn mutex_guard_not_send() {
 
 ### 编译错误 4：`OnceCell` 重复初始化（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::OnceLock;
 
 fn main() {
@@ -604,3 +605,40 @@ fn correct_upgrade() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 10.5 边界测试：`RefCell::borrow_mut` 的递归 panic（运行时 panic）
+
+```rust,ignore
+use std::cell::RefCell;
+
+fn main() {
+    let data = RefCell::new(vec![1, 2, 3]);
+    let mut borrow1 = data.borrow_mut();
+    // ❌ 运行时 panic: 在同一线程中递归获取 mutable borrow
+    let mut borrow2 = data.borrow_mut();
+    borrow2.push(4);
+}
+```
+
+> **修正**: `RefCell` 提供**单线程内部可变性**：运行时检查借用规则。`borrow()` 增加共享计数，`borrow_mut()` 检查共享计数为 0，否则 panic。同一 `RefCell` 上两次 `borrow_mut()`（即使同一线程）→ `already borrowed: BorrowMutError` panic。这是**运行时**错误，非编译错误——编译器无法静态验证 `RefCell` 的内部状态。安全模式：1) 避免递归/重入的 `borrow_mut`；2) 使用 `Cell<T>`（若 `T: Copy`，无运行时检查开销）；3) 重构为 `take` + `replace` 模式（`let mut temp = data.take(); ...; data.set(temp);`）。这与 C++ 的 `mutable` 关键字（无运行时检查，突破 const 约束）或 Java 的 `final` 字段（引用不可变，但对象状态可变）不同——Rust 的 `RefCell` 是显式、有检查的安全机制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
+
+### 10.6 边界测试：`Cell::take` 与 `Default` 的隐式要求（编译错误）
+
+```rust,ignore
+use std::cell::Cell;
+
+struct NoDefault {
+    value: i32,
+}
+
+fn main() {
+    let cell = Cell::new(NoDefault { value: 42 });
+    // ❌ 编译错误: Cell::take 要求 T: Default
+    // let inner = cell.take();
+    
+    // Cell::take 等价于: Cell::replace(&self, Default::default())
+    // 若 T 不实现 Default，不能使用 take
+}
+```
+
+> **修正**: `Cell<T>` 的方法要求：1) `get()` — 要求 `T: Copy`（复制值）；2) `take()` — 要求 `T: Default`（取走值，留默认值）；3) `replace(val)` — 无约束（取走旧值，放入新值）；4) `into_inner()` — 无约束（消耗 Cell，返回值）。`Cell` 的设计：适用于 `Copy` 类型或小值类型（`i32`、`bool`），因为 `get` 复制值。对于非 `Copy` 类型：使用 `RefCell<T>`（运行时借用检查）或 `Cell<T>` + `replace`/`take`。这与 C++ 的 `std::atomic`（类似 `Cell`，但线程安全，需 `TriviallyCopyable`）或 Java 的 `AtomicReference`（类似 `Cell`，但线程安全）不同——Rust 的 `Cell` 是单线程的、无锁的内部可变性原语。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.Cell.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)]

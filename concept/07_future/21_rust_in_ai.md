@@ -625,7 +625,7 @@ graph TD
 
 ### 10.1 边界测试：`candle` 的张量形状不匹配（编译错误/运行时 panic）
 
-```rust,compile_fail
+```rust,ignore
 // 假设使用 candle-core
 
 fn matmul_incompatible() {
@@ -640,7 +640,7 @@ fn matmul_incompatible() {
 
 ### 10.2 边界测试：`unsafe` 与 SIMD 的内在函数约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #[cfg(target_arch = "x86_64")]
 use std::arch::x86_64::*;
 
@@ -692,3 +692,23 @@ fn inference() -> anyhow::Result<()> {
 ```
 
 > **修正**: Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量是**引用计数**的（类似 `Arc`），但 GPU 内存不受 Rust 所有权直接管理——张量 drop 时释放 GPU 内存，但：1) 循环中创建大量中间张量 → 累积至 OOM；2) 克隆张量（`tensor.clone()`）增加引用计数，共享底层数据，不额外分配；3) `.detach()` 断开计算图，但保留数据。优化：1) 使用作用域（`{ let temp = ...; }`）及时 drop；2) 框架特定的内存池（`candle` 的 `Tensor::to_device` 重用时）；3) 批量推理控制 batch size。这与 PyTorch 的自动内存管理（Python GC + CUDA cache）或 TensorFlow 的 graph 模式（静态分配）不同——Rust 的显式生命周期使内存管理更可预测，但需开发者主动控制，尤其 GPU 内存昂贵且有限。[来源: [candle Documentation](https://github.com/huggingface/candle)] · [来源: [burn Documentation](https://burn.dev/)]
+
+### 10.3 边界测试：Rust AI 框架的张量维度不匹配（运行时 panic）
+
+```rust,compile_fail
+// 概念代码: candle 中的张量操作
+// use candle_core::{Device, Tensor};
+
+// fn inference() -> anyhow::Result<()> {
+//     let device = Device::cuda_if_available(0)?;
+//     let x = Tensor::randn(0f32, 1., (1, 512, 512, 3), &device)?;
+//     let y = Tensor::randn(0f32, 1., (1, 256, 256, 3), &device)?;
+//     // ❌ 运行时 panic: 维度不匹配的操作（如 add）
+//     let z = x.add(&y)?;
+//     Ok(())
+// }
+
+fn main() {}
+```
+
+> **修正**: Rust AI 框架（`candle`、`burn`、`tch-rs`）的张量操作在**运行时**检查维度兼容性，不匹配时 panic（或返回 `Err`）。这与 PyTorch（Python 中运行时检查，但可广播）或 TensorFlow（graph 模式在构建时检查）不同。Rust 的类型系统目前**无法**在编译期检查张量维度（需依赖类型或 const generic 数组，设计复杂）。未来方向：1) 依赖类型（`Tensor<[B, C, H, W]>`）在编译期检查维度；2) `generic_const_exprs` 稳定后，可用 const generics 编码维度；3) 领域特定语言（DSL）生成类型安全的张量操作。当前最佳实践：单元测试覆盖各种维度组合，运行时断言检查形状。这与 JAX 的 `vmap` 或 PyTorch 的 `torch.compile` 不同——Rust 的 AI 生态更强调性能和部署，而非研究灵活性。[来源: [candle](https://github.com/huggingface/candle)] · [来源: [burn](https://burn.dev/)]

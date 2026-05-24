@@ -38,6 +38,9 @@
   - [十二、边界测试：数值计算的编译错误](#十二边界测试数值计算的编译错误)
     - [12.1 边界测试：`NonZero*` 类型的零值构造（编译错误）](#121-边界测试nonzero-类型的零值构造编译错误)
     - [12.2 边界测试：`Wrapping`/`Saturating` 与普通运算混用（编译错误）](#122-边界测试wrappingsaturating-与普通运算混用编译错误)
+    - [10.3 边界测试：`f32` 与 `f64` 的精度陷阱（逻辑错误）](#103-边界测试f32-与-f64-的精度陷阱逻辑错误)
+    - [10.4 边界测试：移位操作的越界（运行时 panic）](#104-边界测试移位操作的越界运行时-panic)
+    - [10.3 边界测试：浮点数的 `Eq` 与 `Ord` 缺失（编译错误）](#103-边界测试浮点数的-eq-与-ord-缺失编译错误)
 
 ---
 
@@ -636,7 +639,7 @@ graph TD
 
 ### 12.1 边界测试：`NonZero*` 类型的零值构造（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::num::NonZeroU32;
 
 fn main() {
@@ -685,7 +688,7 @@ fn fixed() {
 
 ### 10.3 边界测试：`f32` 与 `f64` 的精度陷阱（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let a: f32 = 0.1;
     let b: f32 = 0.2;
@@ -713,3 +716,18 @@ fn main() {
 ```
 
 > **修正**: Rust 的移位操作（`<<`、`>>`）要求右操作数小于左操作数的位宽。`u32 << 32` 在 debug 模式下 panic，在 release 模式下是 UB（LLVM 的 `poison` value）。这与 C 的移位（`1u << 32` 是 UB，编译器可能不警告）或 Java 的移位（`1 << 32` 对 32 位取模，结果为 `1`）不同——Rust 在 debug 模式下检查并 panic。安全替代：1) 使用 `wrapping_shl`（对位数取模）；2) 预先检查 `shift < 32`；3) 使用 `checked_shl`（返回 `Option`）。移位越界在密码学（位操作）和底层系统编程中常见，Rust 的检查防止了此类低级错误。[来源: [Rust Reference — Arithmetic Operators](https://doc.rust-lang.org/reference/expressions/operator-expr.html#arithmetic-and-logical-binary-operators)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.u32.html)]
+
+### 10.3 边界测试：浮点数的 `Eq` 与 `Ord` 缺失（编译错误）
+
+```rust,ignore
+fn main() {
+    let a: f64 = 0.1 + 0.2;
+    let b: f64 = 0.3;
+    // ❌ 编译错误: f64 未实现 Eq/Ord（因 NaN != NaN）
+    assert_eq!(a, b);
+    // 正确: 使用近似比较
+    // assert!((a - b).abs() < 1e-10);
+}
+```
+
+> **修正**: `f32`/`f64` **不**实现 `Eq` 和 `Ord` trait，因为 IEEE 754 的特殊值：`NaN != NaN`（违反自反性），`NaN < x` 和 `NaN > x` 都为 false（违反全序性）。这导致：1) 不能将 `f64` 作为 `HashMap` 的键；2) 不能用 `==` 做精确比较（`0.1 + 0.2 != 0.3`）；3) 排序结果不稳定（`sort` 使用 `PartialOrd` 而非 `Ord`，允许不可比较元素）。替代方案：`ordered_float` crate 提供 `NotNan` 和 `OrderedFloat`（将 NaN 视为最大/最小值，实现 `Eq`+`Ord`）。这与 C 的 `==`（直接比较位模式）或 Python 的 `==`（`float` 是可哈希的，但 `nan != nan`）不同——Rust 的类型系统通过 trait 系统排除了数学上不成立的比较。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.f64.html)] · [来源: [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)]

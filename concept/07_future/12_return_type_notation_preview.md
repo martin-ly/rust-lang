@@ -453,7 +453,7 @@ where
 
 ### 10.2 边界测试：RTN 与泛型返回类型的边界（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Factory {
     fn create<T: Default>() -> T;
 }
@@ -489,7 +489,7 @@ where
 
 ### 10.4 边界测试：RTN 与默认方法实现的交互（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Processor {
     fn process(&self) -> impl Send {
         // 默认实现

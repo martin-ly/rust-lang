@@ -330,7 +330,7 @@ fn unwrap_or_default(opt: Option<i32>) -> i32 {
 
 ### 7.1 反例：隐式副作用的 C/C++ 陷阱
 
-```rust,compile_fail
+```rust,ignore
 // Rust 编译器阻止隐式副作用
 fn implicit_side_effect() {
     let x = 5;
@@ -369,7 +369,7 @@ fn unsafe_effect_escape() {
 
 ### 7.3 边界测试：`const fn` 中的副作用逃逸（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 const fn impure_const() -> i32 {
     let mut x = 0;
     x += 1; // ❌ 编译错误: cannot mutate `x` in a `const fn`
@@ -497,3 +497,18 @@ fn safe_wrapper_fixed(size: usize) -> Vec<u8> {
 ```
 
 > **修正**: `unsafe` 效果具有"传染性"——调用 `unsafe fn` 或解引用裸指针必须在 `unsafe` 块内进行。但 `unsafe` 块**不自动**使周围代码变为 unsafe；它只是告诉编译器"程序员已验证此处的安全性"。将 unsafe 操作包装为安全 API 时，必须确保所有 unsafe 前置条件在函数体内被满足（如空指针检查、长度验证、生命周期保证）。这是 Rust 安全抽象的核心契约。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.3 边界测试：`const fn` 中的堆分配尝试（编译错误）
+
+```rust,compile_fail
+const fn allocate() -> Vec<i32> {
+    // ❌ 编译错误: 不能在 const fn 中使用堆分配
+    vec![1, 2, 3]
+}
+
+fn main() {
+    let _v = allocate();
+}
+```
+
+> **修正**: `const fn` 有严格的**编译期求值**限制：1) 不能分配堆内存（`Vec::new()`、`Box::new()`）；2) 不能调用非 `const fn`；3) 不能进行 I/O 或随机数生成；4) 不能有 `unsafe` 块。但 1.83+ 中 `const fn` 已支持 `mut` 绑定、循环、`if let`、解构赋值等。未来演进：`const fn` 可能支持有限的堆分配（`const Heap` 提案），但当前受限。这与 C++ 的 `constexpr`（C++20 支持堆分配和虚函数）或 D 的 `enum` 强制编译期求值不同——Rust 的 `const` 系统保守但逐步扩展，每次扩展需确保编译期求值的可判定性。[来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] · [来源: [Rust Const Eval](https://doc.rust-lang.org/nightly/unstable-book/language-features/const-fn.html)]

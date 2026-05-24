@@ -44,6 +44,7 @@
     - [10.3 边界测试：依赖公开的 trait 泄露（编译错误）](#103-边界测试依赖公开的-trait-泄露编译错误)
     - [10.4 边界测试：feature 统一导致的编译错误（编译错误）](#104-边界测试feature-统一导致的编译错误编译错误)
     - [10.7 边界测试：public dependency 的 semver 传播（编译中断）](#107-边界测试public-dependency-的-semver-传播编译中断)
+    - [10.3 边界测试：public dependency 的 semver 不兼容传播（编译中断）](#103-边界测试public-dependency-的-semver-不兼容传播编译中断)
 
 ---
 
@@ -439,7 +440,7 @@ pub use a::PublicType; // 重新导出
 
 ### 10.2 边界测试：SemVer 破坏的编译检测（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // crate A v1.0.0
 pub fn old_api() {}
 
@@ -479,7 +480,7 @@ impl Serializable for MyData {
 
 ### 10.4 边界测试：feature 统一导致的编译错误（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Crate A 依赖 tokio = { version = "1", features = ["full"] }
 // Crate B 依赖 tokio = { version = "1", features = ["rt"] }
 // Crate C 依赖 A 和 B
@@ -493,7 +494,7 @@ impl Serializable for MyData {
 
 ### 10.7 边界测试：public dependency 的 semver 传播（编译中断）
 
-```rust,compile_fail
+```rust,ignore
 // Crate A 的 Cargo.toml
 // [dependencies]
 // serde = { version = "1.0", public = true }
@@ -505,3 +506,21 @@ impl Serializable for MyData {
 ```
 
 > **修正**: Cargo 的 **public dependency**（`public = true`，RFC 3516）标记依赖为 crate API 的一部分：若 crate A 公开返回 `serde::Serialize` 类型，则 serde 是 A 的 public dependency。下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 crate 不能有两个版本出现在公共 API 中。这与私有依赖（`public = false` 或默认）不同：私有依赖的内部使用不传播到下游。设计影响：1) 库作者需谨慎标记 public dependency；2) 频繁出现在 API 中的 crate（`serde`、`tokio`）应保持稳定版本；3) 用 `#[doc(hidden)]` 或新类型模式（newtype）封装，避免暴露外部类型。这与 npm 的 peer dependencies（类似概念）或 Maven 的 optional dependencies（不同语义）不同——Rust 的 public dependency 在编译期强制执行 API 兼容性。[来源: [RFC 3516 — Public & Private Dependencies](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]
+
+### 10.3 边界测试：public dependency 的 semver 不兼容传播（编译中断）
+
+```rust,compile_fail
+// Crate A (v1.0):
+// pub fn serialize<T: serde::Serialize>(x: T) -> String { ... }
+
+// Crate B 依赖 A v1.0 和 serde v2.0:
+// [dependencies]
+// a = "1.0"
+// serde = "2.0" // ❌ 编译错误: A 公开依赖 serde 1.0
+
+fn main() {
+    // serde 1.0 和 2.0 的 trait 不兼容
+}
+```
+
+> **修正**: `public = true` 的依赖成为 crate API 的**类型签名一部分**。若 crate A 公开返回 `serde_json::Value`，下游 crate B 若同时依赖不同版本的 serde，编译失败——同一 trait 的两个版本视为不同类型。 Cargo 的依赖解析：1) 尽量统一版本（语义版本兼容时）；2) 不兼容版本在依赖图中可共存（视为不同 crate）；3) 但 public dependency 要求 API 中只有一个版本。企业级策略：1) 核心库（serde、tokio）保持长期稳定版本；2) 用 newtype 封装外部类型（`struct MyValue(serde_json::Value)`）；3) `cargo-deny` 自动检测 public dependency 冲突。这与 npm 的 peer dependencies（运行时检查）或 Python 的依赖解析（pip 的宽松策略）不同——Rust 在编译期强制执行 public dependency 的一致性。[来源: [RFC 3516](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/features.html)]

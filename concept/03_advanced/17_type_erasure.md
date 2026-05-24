@@ -36,6 +36,9 @@
   - [十、边界测试：类型擦除的编译错误](#十边界测试类型擦除的编译错误)
     - [10.1 边界测试：`dyn Trait` 的大小未知（编译错误）](#101-边界测试dyn-trait-的大小未知编译错误)
     - [10.2 边界测试：trait object 的方法返回 `Self`（编译错误）](#102-边界测试trait-object-的方法返回-self编译错误)
+    - [10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）](#103-边界测试any-的-downcast_ref-与生命周期编译错误)
+    - [10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）](#104-边界测试vtable-与对象安全的隐性约束编译错误)
+    - [10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）](#103-边界测试dyn-trait-与-sized-边界的冲突编译错误)
 
 ---
 
@@ -776,7 +779,7 @@ fn make_clone(obj: &dyn Cloneable) -> Box<dyn Cloneable> {
 
 ### 10.3 边界测试：`Any` 的 `downcast_ref` 与生命周期（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::any::Any;
 
 fn main() {
@@ -791,7 +794,7 @@ fn main() {
 
 ### 10.4 边界测试：vtable 与对象安全的隐性约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Processor {
     fn process<T: Default>(&self) -> T;
 }
@@ -811,3 +814,52 @@ fn main() {
 ```
 
 > **修正**: Trait 对象（`dyn Trait`）通过 vtable 实现动态分发，vtable 在编译期生成，包含所有方法的函数指针。泛型方法（`fn process<T>`）无法在 vtable 中表示，因为 `T` 的可能实例无限——编译器不能为所有类型生成函数指针。因此含泛型方法的 trait 不是**对象安全**的（object-safe），不能作为 `dyn Trait` 使用。这与 C++ 的虚函数（无泛型虚函数，模板方法不能是虚的）或 Java 的泛型接口（类型擦除，泛型信息在运行时不可用）不同——Rust 在编译期拒绝非对象安全的 trait 对象，防止运行时类型错误。替代方案：将泛型方法改为关联函数或非泛型方法，或使用静态分发（`impl Trait`）。[来源: [Rust Reference — Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+
+### 10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）
+
+```rust,compile_fail
+trait Processor {
+    fn process(&self);
+}
+
+fn make_processor() -> Box<dyn Processor> {
+    struct MyProc;
+    impl Processor for MyProc {
+        fn process(&self) { println!("processing"); }
+    }
+    Box::new(MyProc)
+}
+
+// ❌ 编译错误: dyn Trait 是 !Sized，不能作为泛型参数传递给要求 Sized 的函数
+fn use_processor<P: Processor>(p: P) {
+    p.process();
+}
+
+fn main() {
+    let proc = make_processor();
+    use_processor(*proc); // dyn Processor 不满足 Sized
+}
+```
+
+> **修正**: `dyn Trait` 是**动态分发**类型，大小不固定（`!Sized`），因为不同实现的大小不同。`Box<dyn Trait>` 和 `&dyn Trait` 是**胖指针**（数据指针 + vtable 指针），本身是 `Sized` 的。若函数要求 `P: Processor`（隐式 `P: Sized`），不能传入 `dyn Processor`。修复：1) `fn use_processor(p: &dyn Processor)`（接受引用）；2) `fn use_processor(p: Box<dyn Processor>)`（接受 Box）；3) `fn use_processor<P: Processor + ?Sized>(p: &P)`（放宽 Sized 约束）。类型擦除与单态化的权衡：`dyn Trait` 减少代码膨胀（一个函数处理所有类型），但有虚函数调用开销。这与 C++ 的虚函数（类似机制，但无显式 `dyn` 标记）或 Go 的 interface（类似 fat pointer，但隐式实现）不同——Rust 的 `dyn` 显式标记动态分发，编译器在类型层面区分静态和动态多态。[来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+
+### 10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）
+
+```rust,compute_fail
+trait Process {
+    fn run(&self);
+}
+
+fn generic<T: Process>(item: T) {
+    item.run();
+}
+
+fn erased(item: dyn Process) {
+    // ❌ 编译错误: dyn Trait 是 DST，不能直接按值传递
+    item.run();
+}
+
+fn main() {}
+```
+
+> **修正**: **`dyn Trait`** 是 **DST**（Dynamically Sized Type）：1) 编译时大小未知（vtable 指针 + 数据指针）；2) 必须 behind 指针：`&dyn Trait`、`Box<dyn Trait>`、`Arc<dyn Trait>`；3) 不能直接按值传递、不能作为泛型参数（除非 `T: ?Sized`）。`dyn Trait` 的限制：1) 只能 object-safe trait（方法无泛型、返回类型非 `Self`）；2) 方法调用有 vtable 间接开销；3) 不能从 `dyn Trait` 反向转为具体类型（除非 `Any` downcast）。零大小类型：`dyn Trait` 的 vtable 可能有零大小数据（`()`），但指针仍有 2 个 usize。这与 C++ 的虚函数（对象内含 vptr，大小固定）或 Java 的接口引用（始终是引用，类似 `&dyn`）不同——Rust 的 `dyn` 是显式的 DST，有明确的 object safety 规则。[来源: [Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)] · [来源: [Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)]

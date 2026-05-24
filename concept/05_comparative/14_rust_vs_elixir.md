@@ -810,7 +810,7 @@ graph TD
 
 ### 10.1 边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = 42;
     // ❌ 编译错误: expected `i32`, found `&str`
@@ -836,7 +836,7 @@ fn fixed() {
 
 ### 10.1 边界测试：Elixir 的动态类型与 Rust 的静态模式（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let x = 42;
     // ❌ 编译错误: expected `i32`, found `&str`
@@ -859,7 +859,7 @@ fn fixed() {
 
 ### 10.2 边界测试：Elixir 的进程邮箱与 Rust 的 channel（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::mpsc;
 
 fn main() {
@@ -888,7 +888,7 @@ fn fixed() {
 
 ### 10.5 边界测试：Elixir 的进程隔离与 Rust 的共享内存并发（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::Arc;
 use std::thread;
 

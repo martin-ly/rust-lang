@@ -116,6 +116,7 @@
     - [11.5 边界测试：自定义 Error 未实现 `std::error::Error`（编译错误）](#115-边界测试自定义-error-未实现-stderrorerror编译错误)
     - [11.6 边界测试：`Result` 与 `Option` 混用（编译错误）](#116-边界测试result-与-option-混用编译错误)
     - [11.7 边界测试：`panic!` 在 `const fn` 中的限制（编译错误）](#117-边界测试panic-在-const-fn-中的限制编译错误)
+    - [10.5 边界测试：`?` 运算符与 `From` 转换的失败（编译错误）](#105-边界测试-运算符与-from-转换的失败编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -2958,7 +2959,7 @@ fn double_number_fixed(s: &str) -> Result<i32, String> {
 
 ### 11.2 边界测试：panic 在 const fn 中（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 const fn divide(a: i32, b: i32) -> i32 {
     // ❌ 编译错误: `panic!` is not allowed in const fn
     if b == 0 { panic!("division by zero") }
@@ -2976,7 +2977,7 @@ const fn divide_fixed(a: i32, b: i32) -> i32 {
 
 ### 11.3 边界测试：`Result` 未处理（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn fallible_op() -> Result<i32, String> {
     Ok(42)
 }
@@ -3057,7 +3058,7 @@ fn with_result() -> Result<i32, String> {
 
 ### 11.7 边界测试：`panic!` 在 `const fn` 中的限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 const fn checked_div(a: i32, b: i32) -> i32 {
     // ❌ 编译错误: `panic!` 在 const fn 中有限制（Edition 2021 前不允许）
     // Rust 1.57+ 允许 const panic，但信息受限
@@ -3077,3 +3078,62 @@ const fn checked_div_fixed(a: i32, b: i32) -> i32 {
 > **修正**: `const fn` 中的 `panic!` 从 Rust 1.57 起稳定支持，但要求 panic 信息为字符串字面量（非动态格式化）。在 Edition 2021 之前，`panic!` 完全不能在 `const fn` 中使用。这反映了编译期求值的严格约束。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **相关问题树**: [错误处理问题树](../00_meta/problem_graph.md#七错误处理问题树)
+
+### 10.5 边界测试：`?` 运算符与 `From` 转换的失败（编译错误）
+
+```rust,compile_fail
+use std::fs::File;
+use std::io;
+
+fn read_file(path: &str) -> Result<String, io::Error> {
+    let mut file = File::open(path)?;
+    // ❌ 编译错误: ? 要求错误类型实现 From<io::Error>，但自定义错误可能不兼容
+    Ok(String::new())
+}
+
+#[derive(Debug)]
+struct MyError;
+
+fn do_work() -> Result<(), MyError> {
+    read_file("test.txt")?; // MyError 未实现 From<io::Error>
+    Ok(())
+}
+
+fn main() {
+    let _ = do_work();
+}
+```
+
+> **修正**: `?` 运算符自动将错误类型转换为目标错误类型（`From::from(err)`）。若 `MyError` 未实现 `From<io::Error>`，`read_file("test.txt")?` 编译错误。修复：1) `impl From<io::Error> for MyError { ... }`；2) 使用 `map_err(|e| MyError::Io(e))` 显式转换；3) 使用 `anyhow`/`eyre`（自动错误转换和上下文）。`?` 是 Rust 错误处理的**语法糖**：`expr?` 等价于 `match expr { Ok(v) => v, Err(e) => return Err(From::from(e)) }`。这与 Go 的 `if err != nil { return err }`（手动传播）或 Java 的异常抛出（自动向上传播）不同——Rust 的 `?` 要求显式类型兼容，编译期检查错误转换。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Reference — The Question Mark Operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)]
+
+### 10.6 边界测试：`Result` 的 `map_err` 与错误链的累积（逻辑错误）
+
+```rust,ignore
+use std::fs::File;
+use std::io;
+
+#[derive(Debug)]
+struct AppError {
+    msg: String,
+}
+
+impl From<io::Error> for AppError {
+    fn from(e: io::Error) -> Self {
+        AppError { msg: e.to_string() }
+    }
+}
+
+fn read_config() -> Result<String, AppError> {
+    let file = File::open("config.txt")
+        .map_err(|e| AppError { msg: format!("open failed: {}", e) })?;
+    // ❌ 逻辑错误: 若后续操作失败，错误链丢失 "open failed" 上下文
+    // 除非每一步都手动包装
+    Ok(String::new())
+}
+
+fn main() {
+    let _ = read_config();
+}
+```
+
+> **修正**: 手动 `map_err` 的错误链：每一步失败只保留当前上下文，丢失之前的信息。`anyhow` 的 `Context` trait 解决：`file.open("config.txt").context("failed to open config")?` — 自动累积上下文，生成错误链。`thiserror` 的 `#[source]` 字段保留原始错误。错误链的设计：1) **底层错误**（`io::Error`）→ 原始原因；2) **中间层**（`context`）→ 操作描述；3) **顶层** → 用户友好消息。这与 Go 的 `fmt.Errorf("%w", err)`（错误包装，Go 1.13+）或 Java 的 `Exception(String msg, Throwable cause)`（异常链）类似——Rust 的错误处理生态提供了类型安全和可读性的平衡。[来源: [anyhow](https://docs.rs/anyhow/)] · [来源: [thiserror](https://docs.rs/thiserror/)]

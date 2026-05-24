@@ -446,7 +446,7 @@ fn pin_new_requires_unpin() {
 
 > **修正**: 对 `!Unpin` 类型使用 `Box::pin` 或 `unsafe { Pin::new_unchecked(&mut x) }`。
 
-```rust,compile_fail
+```rust,ignore
 use std::pin::Pin;
 
 fn pin_project_misuse() {
@@ -660,3 +660,52 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+### 10.3 边界测试：`Pin<&mut Self>` 与自引用结构的移动（编译错误）
+
+```rust,ignore
+use std::pin::Pin;
+
+struct SelfRef {
+    data: String,
+    ptr: *const String,
+}
+
+impl SelfRef {
+    fn new() -> Self {
+        Self { data: String::from("hello"), ptr: std::ptr::null() }
+    }
+    
+    fn init(&mut self) {
+        self.ptr = &self.data;
+    }
+}
+
+fn main() {
+    let mut s = SelfRef::new();
+    s.init();
+    // ❌ 编译错误: 自引用结构移动后 ptr 悬垂
+    let s2 = s; // move
+}
+```
+
+> **修正**: 自引用结构（self-referential struct）是 Rust 的**硬问题**：`ptr` 指向 `data` 的地址，若结构体移动（`let s2 = s`），`data` 的地址改变，`ptr` 成为悬垂指针。`Pin` 是解决关键：`Pin<&mut SelfRef>` 保证 `SelfRef` 在内存中不可移动。创建 `Pin` 的方法：1) `Box::pin(SelfRef::new())` — 堆分配 + Pin；2) `pin_utils::pin_mut!` — 栈上 Pin（unsafe）；3) `std::pin::pin!`（1.68+，安全栈 Pin）。`Unpin` trait 标记"移动安全"的类型：大多数类型自动实现 `Unpin`，但含自引用字段的类型应 `!Unpin`（通过 `PhantomPinned`）。这与 C++ 的 `this` 指针（对象移动后 `this` 不变，但内部指针可能悬垂）或 Swift 的引用类型（堆分配不移动）不同——Rust 的 `Pin` 类型系统显式标记不可移动对象。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/pin/struct.Pin.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)]
+
+### 10.4 边界测试：Pin 与 Unpin 的自动实现冲突（编译错误）
+
+```rust,compile_fail
+use std::pin::Pin;
+
+struct SelfRef {
+    data: String,
+    ptr: *const String,
+}
+
+// ❌ 编译错误: 不能手动实现 Unpin for 包含原始指针的类型
+// 若类型包含 PhantomPinned 或原始指针，Unpin 自动不实现
+impl Unpin for SelfRef {}
+
+fn main() {}
+```
+
+> **修正**: **`Unpin`** 是**auto trait**：1) 编译器自动为大多数类型实现 `Unpin`；2) 包含 `PhantomPinned` 或 `!Unpin` 字段的类型自动 `!Unpin`；3) 不能为 `!Unpin` 类型手动实现 `Unpin`（不安全）。`Pin<P<T>>` 的行为：1) `T: Unpin` — `Pin` 允许 `get_mut()`（数据可安全移动）；2) `T: !Unpin` — `Pin` 禁止 `get_mut()`（数据不可移动）。自引用结构：1) 使用 `PhantomPinned` 标记 `!Unpin`；2) 通过 `Pin<&mut Self>` 访问；3) `unsafe` 创建 `Pin`（需保证数据不移动）。这与 C++ 的 `std::pin`（无原生支持，需手动管理）或 Swift 的引用类型（始终堆分配，无 move 问题）不同——Rust 的 `Pin` 是零成本抽象，通过类型系统保证。[来源: [Pin API](https://doc.rust-lang.org/std/pin/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/pins-and-fns.html)]

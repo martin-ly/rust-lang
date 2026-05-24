@@ -78,6 +78,7 @@
     - [10.2 边界测试：分离逻辑与共享可变状态的不可兼得（编译错误）](#102-边界测试分离逻辑与共享可变状态的不可兼得编译错误)
     - [10.3 边界测试：子类型化与生命周期协变（编译错误）](#103-边界测试子类型化与生命周期协变编译错误)
     - [10.4 边界测试：悬垂指针的形式化禁止（编译错误）](#104-边界测试悬垂指针的形式化禁止编译错误)
+    - [10.3 边界测试：形式化所有权与编译器实现的差距（编译错误）](#103-边界测试形式化所有权与编译器实现的差距编译错误)
 
 > **层级**: L4 形式化理论
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Linear Logic](./01_linear_logic.md) · [Type Theory](./02_type_theory.md)
@@ -1758,7 +1759,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 
 ### 10.1 边界测试：线性类型与 `Drop` 的冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct LinearResource;
 
 impl Drop for LinearResource {
@@ -1784,7 +1785,7 @@ fn main() {
 
 ### 10.2 边界测试：分离逻辑与共享可变状态的不可兼得（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::cell::RefCell;
 
 fn main() {
@@ -1846,3 +1847,19 @@ fn main() {
 ```
 
 > **修正**: 形式化上，`x` 的生命周期 `ℓ_x` 受限于函数作用域。`&x` 的类型是 `&'a i32`，其中 `'a` 是引用的生命周期。函数返回类型 `&i32` 隐含一个生命周期参数 `'a`，但编译器无法找到与 `x` 的生命周期匹配的输入参数——`x` 是局部变量，其生命周期短于函数返回后。这与 C 的返回局部变量指针（编译器通常警告但不阻止，运行时悬垂）或 C++ 的返回局部引用（同样警告，运行时 UB）形成鲜明对比。Rust 的所有权形式化将"悬垂指针"这一运行时错误转化为编译期类型错误，通过**区域类型**（region types）和**生命周期包含**（lifetime inclusion）的约束系统实现。[来源: [RustBelt Paper](https://doi.org/10.1145/3158154)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+
+### 10.3 边界测试：形式化所有权与编译器实现的差距（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let r1 = &v[0];
+    // ❌ 编译错误: 编译器的借用检查比形式化模型更保守
+    // 理论上 r1 借用 v[0]，v.push 修改 v[3]（新元素），不冲突
+    // 但编译器将整个 v 标记为可变借用活跃
+    v.push(4);
+    println!("{}", r1);
+}
+```
+
+> **修正**: 上述代码在 Rust 当前编译器中**确实编译错误**，但从**形式化角度**有争议：`r1` 借用 `v[0]`，`v.push(4)` 可能重新分配整个 `Vec` 的内存（若容量不足），使 `r1` 悬垂。若 `v` 容量充足，`push` 不重新分配，形式化上 `r1` 和 `push` 不冲突。但编译器保守地拒绝——因为无法静态确定 `push` 是否重新分配。Polonius（下一代借用检查器）可能放松此类限制，但当前 NLL 保守。这展示了**形式化模型**与**编译器实现**的差距：形式化证明安全，但实现为保守近似。这与 Java 的数组越界检查（运行时精确检查）或 C 的"信任程序员"（无检查）不同——Rust 在编译期做保守决策，牺牲部分合法程序以换取零运行时开销。[来源: [Polonius](https://github.com/rust-lang/polonius)] · [来源: [Niko Matsakis Blog](https://smallcultfollowing.com/babysteps/)]

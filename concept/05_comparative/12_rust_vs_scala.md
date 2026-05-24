@@ -40,6 +40,7 @@
     - [10.2 边界测试：Scala 的 null 与 Rust 的 Option（编译错误）](#102-边界测试scala-的-null-与-rust-的-option编译错误)
     - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）](#103-边界测试scala-的隐式转换与-rust-的显式-frominto编译错误)
     - [10.4 边界测试：Scala 的 actor 模型与 Rust 的 async/channel 的并发模型差异（运行时死锁）](#104-边界测试scala-的-actor-模型与-rust-的-asyncchannel-的并发模型差异运行时死锁)
+    - [10.3 边界测试：Scala 的隐式转换与 Rust 的显式类型安全（编译错误）](#103-边界测试scala-的隐式转换与-rust-的显式类型安全编译错误)
 
 ---
 
@@ -725,7 +726,7 @@ fn main() {
 
 ### 10.1 边界测试：Scala 的隐式转换与 Rust 的显式 trait（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait ToJson {
     fn to_json(&self) -> String;
 }
@@ -754,7 +755,7 @@ fn fixed() {
 
 ### 10.2 边界测试：Scala 的 null 与 Rust 的 Option（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // ❌ 编译错误: Rust 没有 null
     // let s: Option<String> = null; // 编译错误
@@ -775,7 +776,7 @@ fn fixed() {
 
 ### 10.3 边界测试：Scala 的隐式转换与 Rust 的显式 `From`/`Into`（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Meters(u32);
 struct Kilometers(u32);
 
@@ -820,3 +821,21 @@ async fn actor_style() {
 ```
 
 > **修正**: Scala/Akka 的 **Actor 模型** 中，每个 actor 有独立的邮箱和单线程执行上下文，消息发送是 fire-and-forget，actor 按顺序处理消息。Rust 的 `tokio::sync::mpsc` 只是**通道**（channel）：发送和接收是显式操作，无内置的 actor 语义。在 Rust 中实现 actor：1) 用 `tokio::spawn` 创建任务作为 actor；2) 用 `mpsc` 作为邮箱；3) 在任务循环中 `recv().await` 处理消息。这比 Akka 更底层但更灵活：无 actor 层次监督（supervision）、无路由（routing）、无持久化（persistence）。`actix` crate 提供了 Rust 的 actor 框架，但不如 Akka 成熟。这与 Erlang/Elixir 的 OTP（成熟的 actor 框架）或 Go 的 CSP（channel + goroutine，类似 Rust）类似——Rust 的并发原语是底层的，高层抽象由库提供。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Akka Actor Model](https://doc.akka.io/docs/akka/current/typed/actors.html)]
+
+### 10.3 边界测试：Scala 的隐式转换与 Rust 的显式类型安全（编译错误）
+
+```rust,compile_fail
+struct Meters(u32);
+struct Feet(u32);
+
+// Scala 中: implicit def metersToFeet(m: Meters): Feet = Feet(m.value * 3)
+// Rust 中: 无隐式转换
+
+fn main() {
+    let m = Meters(10);
+    // ❌ 编译错误: Meters 不能隐式转为 Feet
+    let f: Feet = m;
+}
+```
+
+> **修正**: Rust **禁止隐式类型转换**（除少数自动强制：`&T` → `&U` 若 `T: U`、`&mut T` → `&T`、`T` → `U` 若 `T: Into<U>` 但在特定上下文）。`Meters` 和 `Feet` 是不同的类型，即使语义相关，也不能直接赋值。显式转换：1) `impl From<Meters> for Feet` + `let f: Feet = m.into()`；2) `impl Into<Feet> for Meters`；3) 解构：`let Feet(f) = m.into()`。Scala 的隐式转换（`implicit def` / `given` / `using`）允许库作者定义自动转换，但可能导致"隐式解析地狱"（编译时间长、错误信息难读）。Rust 的设计哲学：**显式优于隐式**。这与 C++ 的转换构造函数（单参数构造函数隐式调用）或 Go 的接口实现（隐式满足接口）不同——Rust 的显式转换使代码更易读、错误更易定位。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]

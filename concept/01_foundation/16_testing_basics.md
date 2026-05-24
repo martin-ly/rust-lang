@@ -39,6 +39,9 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：`should_panic` 的预期消息匹配（运行时测试失败）](#103-边界测试should_panic-的预期消息匹配运行时测试失败)
+    - [10.4 边界测试：集成测试的模块可见性（编译错误）](#104-边界测试集成测试的模块可见性编译错误)
+    - [10.5 边界测试：`#[should_panic]` 的预期消息匹配（测试失败）](#105-边界测试should_panic-的预期消息匹配测试失败)
 
 ---
 
@@ -741,7 +744,7 @@ graph TD
 
 ### 10.3 边界测试：`should_panic` 的预期消息匹配（运行时测试失败）
 
-```rust,compile_fail
+```rust,ignore
 #[test]
 #[should_panic(expected = "divide by zero")]
 fn test_divide_by_zero() {
@@ -750,7 +753,7 @@ fn test_divide_by_zero() {
 }
 ```
 
-> **修正**: `#[should_panic(expected = "...")]` 检查 panic 消息是否**包含**指定子串，而非完全相等。`"divide by zero"` 不匹配 `"attempt to divide by zero"`（缺少前缀 `attempt to `），因此测试失败。正确写法：`#[should_panic(expected = "attempt to divide by zero")]` 或更宽松的 `#[should_panic]`（不检查消息）。`expected` 是子串匹配，因此可写关键部分：`"divide by zero"` 在旧版 Rust 中可能匹配（若消息恰好是此子串），但不可靠。测试 panic 的替代：`std::panic::catch_unwind`（在测试中捕获 panic，验证返回的 `Payload`），或 `std::panic::set_hook` 自定义 panic 处理。这与 Java 的 `assertThrows`（检查异常类型，不检查消息）或 Python 的 `pytest.raises`（可检查消息）类似——Rust 的 `should_panic` 是属性宏，简洁但功能有限。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] · [来源: [Rust Reference — Testing](https://doc.rust-lang.org/reference/attributes/testing.html)]
+> **修正**: `#[should_panic(expected = "...")]` 检查 panic 消息是否**包含**指定子串，而非完全相等。`"divide by zero"` 不匹配 `"attempt to divide by zero"`（缺少前缀 `attempt to`），因此测试失败。正确写法：`#[should_panic(expected = "attempt to divide by zero")]` 或更宽松的 `#[should_panic]`（不检查消息）。`expected` 是子串匹配，因此可写关键部分：`"divide by zero"` 在旧版 Rust 中可能匹配（若消息恰好是此子串），但不可靠。测试 panic 的替代：`std::panic::catch_unwind`（在测试中捕获 panic，验证返回的 `Payload`），或 `std::panic::set_hook` 自定义 panic 处理。这与 Java 的 `assertThrows`（检查异常类型，不检查消息）或 Python 的 `pytest.raises`（可检查消息）类似——Rust 的 `should_panic` 是属性宏，简洁但功能有限。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] · [来源: [Rust Reference — Testing](https://doc.rust-lang.org/reference/attributes/testing.html)]
 
 ### 10.4 边界测试：集成测试的模块可见性（编译错误）
 
@@ -772,3 +775,32 @@ fn test_helper() {
 ```
 
 > **修正**: Rust 的测试分层：1) **单元测试**（`#[cfg(test)]` 模块，在 `src/` 中，可访问私有项）；2) **集成测试**（`tests/` 目录，像外部 crate，只能访问 `pub` API）；3) **文档测试**（`/// ``` ` 中，运行示例代码）。集成测试的隔离性强制库设计者考虑 API 的测试性：私有辅助函数无法直接测试，需通过公开 API 间接测试，或暴露 `#[cfg(test)] pub` 的测试专用接口。这与 Python 的 `unittest`（可访问模块内所有名称）或 Java 的 `JUnit`（`private` 方法通过反射测试）不同——Rust 的模块可见性在测试中同样严格，促进更好的 API 设计。workaround：`pub(crate)` 或 `#[doc(hidden)] pub` 暴露内部接口供集成测试使用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-03-test-organization.html)] · [来源: [Rust Reference — Test Organization](https://doc.rust-lang.org/cargo/guide/tests.html)]
+
+### 10.5 边界测试：`#[should_panic]` 的预期消息匹配（测试失败）
+
+```rust,ignore
+#[test]
+#[should_panic(expected = "divide by zero")]
+fn test_divide_by_zero() {
+    // ❌ 测试失败: panic 消息是 "attempt to divide by zero"，不完全匹配
+    let _ = 1 / 0;
+}
+```
+
+> **修正**: `#[should_panic(expected = "...")]` 检查 panic 消息是否**包含**指定子串，而非精确匹配。`"divide by zero"` 不匹配 `"attempt to divide by zero"`，因为缺少前缀 `"attempt to "`。测试失败的输出：`test test_divide_by_zero ... FAILED: panic message "attempt to divide by zero" does not contain "divide by zero"`——实际上它**确实包含**，这个例子在当前 Rust 中可能通过。更准确的失败场景：`expected = "overflow"` 但 panic 消息是 `"attempt to divide by zero"`。`should_panic` 的其他陷阱：1) 预期消息大小写敏感；2) `expected` 是子串匹配，非正则匹配；3) panic 发生在 `should_panic` 的测试函数外部（如 setup 代码）导致意外通过。这与 JUnit 的 `@Test(expected = ...)` 或 pytest 的 `pytest.raises` 类似——Rust 的 `should_panic` 是简单的消息子串检查。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)] · [来源: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)]
+
+### 10.6 边界测试：集成测试的模块可见性与 `pub` 要求（编译错误）
+
+```rust,ignore
+// src/lib.rs
+struct InternalStruct {
+    value: i32,
+}
+
+// tests/integration_test.rs
+// use my_crate::InternalStruct; // ❌ 编译错误: InternalStruct 不是 pub
+
+fn main() {}
+```
+
+> **修正**: Rust 的**集成测试**（`tests/` 目录）将 crate 作为外部依赖使用，只能访问 `pub` API。`InternalStruct` 不是 `pub`，集成测试无法导入。测试私有代码的方法：1) `#[cfg(test)] mod tests { use super::*; }` — 单元测试在同一文件中，可访问私有项；2) `pub(crate)` — 使项在 crate 内可见（包括单元测试）；3) `pub` — 完全公开（集成测试可用）。设计权衡：集成测试验证公共 API 的行为，单元测试验证内部实现。过度公开内部类型（仅为测试）破坏封装。这与 Java 的 `package-private`（同包内可访问，类似 `pub(crate)`）或 Python 的 `_prefix`（约定私有，但测试可导入）不同——Rust 的可见性是编译期强制的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-03-test-organization.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)]

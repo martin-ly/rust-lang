@@ -627,3 +627,26 @@ fn main() {
 ```
 
 > **修正**: `tracing` crate 的 span 是**结构化日志**的核心：进入 span 时记录开始时间/上下文，退出时记录结束。`span.entered()` 返回 `Entered` guard，drop 时自动退出。若 guard 生命周期过长（如存储在 `static`、循环中创建不退出、跨 await 点持有），span 永不关闭，导致：1) 内存泄漏（span 数据结构累积）；2) 分布式追踪中 trace 不完整；3) 指标计算错误（span 时长无限）。async 场景特别注意：使用 `span.in_scope(|| ...)` 而非 `entered()`，或用 `tracing::Instrument` trait（`.instrument(span)`）。这与 OpenTelemetry 的 span 管理或 Go 的 `context.WithTimeout` 类似——结构化追踪需严格的生命周期管理，泄漏代价高。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)]
+
+### 10.3 边界测试：tracing 的 span 生命周期与异步代码跨越 await（运行时泄漏）
+
+```rust,compile_fail
+use tracing::{info, info_span, Instrument};
+
+async fn async_task() {
+    info!("inside task");
+}
+
+async fn bad_span_usage() {
+    let _span = info_span!("leaky_span").entered();
+    // ❌ 运行时泄漏: entered() guard 跨越 await 点，span 永不退出
+    async_task().await;
+}
+
+fn main() {
+    // tracing_subscriber::fmt::init();
+    // futures::executor::block_on(bad_span_usage());
+}
+```
+
+> **修正**: `tracing` 的 `Span::entered()` 返回 `Entered` guard，drop 时退出 span。在 async 代码中，guard 跨越 `await` 点：1) span 在任务挂起时不退出；2) 其他任务可能看到"活跃"的 span，但当前任务未执行；3) 分布式追踪中 trace 时长错误（包含挂起时间）。正确做法：1) `span.in_scope(|| { ... })` — 同步代码块；2) `.instrument(span)` — 异步 Future 的 span 绑定（进入 poll 时进入 span，poll 结束时退出）；3) `tracing::instrument` 宏 — 自动为 async fn 添加 instrument。这与 OpenTelemetry 的 span 管理或 Go 的 `context.WithTimeout` 类似——结构化追踪需严格的生命周期管理，异步代码尤其敏感。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)]

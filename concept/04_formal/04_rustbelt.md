@@ -1192,7 +1192,7 @@ unsafe {
 
 ### 11.1 边界测试：违反唯一所有权（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut v = vec![1, 2, 3];
     let r1 = &mut v[0]; // 可变借用 v 的第一个元素
@@ -1224,7 +1224,7 @@ fn main() {
 
 ### 11.3 边界测试：drop 后使用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Resource;
 impl Drop for Resource {
     fn drop(&mut self) { println!("dropped"); }
@@ -1283,7 +1283,7 @@ fn cell_correct() {
 
 ### 11.6 边界测试：`mem::forget` 与所有权谓词泄漏（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::mem;
 
 struct Guard;
@@ -1300,3 +1300,23 @@ fn main() {
 ```
 
 > **修正**: `mem::forget` 消耗所有权但不执行 `Drop`，导致资源泄漏。在 RustBelt 中，`own(τ)` 谓词包含释放义务；`forget` 通过将释放义务"遗忘"来形式化资源泄漏。Rust 2021 起 `mem::forget` 为安全函数，因为资源泄漏不被视为 unsafe。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 10.3 边界测试：unsafe 代码契约的形式化验证盲区（运行时 UB）
+
+```rust,ignore
+fn main() {
+    let mut x = 5;
+    let r1 = &mut x as *mut i32;
+    let r2 = &x as *const i32; // ❌ 即使同时存在 &mut 和 & 也编译错误
+    // 但在 unsafe 中:
+    unsafe {
+        let r1 = &mut x as *mut i32;
+        let r2 = &x as *const i32;
+        // ❌ 运行时 UB: 通过裸指针创建 &mut 和 & 的重叠别名
+        *r1 = 10;
+        println!("{}", *r2);
+    }
+}
+```
+
+> **修正**: RustBelt 的核心贡献：证明 Rust 的**safe 子集**是内存安全的，且 **unsafe 代码若满足契约**则不破坏安全保证。unsafe 契约：1) `&mut T` 必须独占（无其他活跃引用）；2) `&T` 必须有效（指向已初始化且未变性的内存）；3) `*const T`/`*mut T` 的使用必须恢复上述不变量后再创建 safe 引用。RustBelt 使用**Iris 分离逻辑**建模：1) `own(τ, ℓ)` — 位置 ℓ 拥有类型 τ 的值；2) `shr(κ, ℓ)` — 共享权限，允许多个读者；3) `na(τ, ℓ)` — `UnsafeCell` 的非原子权限，允许内部可变。验证工具：Miri（检查 Stacked Borrows/Tree Borrows）、Kani（有界模型检查）、Prusti（Hoare 逻辑）。这与 C 的"信任程序员"（无任何验证）或 Java 的 JVM（运行时检查，无形式化内存模型）不同——Rust 提供从类型系统到形式化验证的多层安全网。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]

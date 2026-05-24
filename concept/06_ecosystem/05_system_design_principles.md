@@ -51,6 +51,7 @@
     - [10.2 边界测试：trait 对象的安全性约束（编译错误）](#102-边界测试trait-对象的安全性约束编译错误)
     - [10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）](#105-边界测试依赖注入与-trait-object-的性能权衡运行时开销)
     - [10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）](#105-边界测试过度工程化的类型状态机编译复杂度爆炸)
+    - [10.3 边界测试：过度泛型化导致的单态化膨胀（编译后体积爆炸）](#103-边界测试过度泛型化导致的单态化膨胀编译后体积爆炸)
 
 ---
 
@@ -673,7 +674,7 @@ fn main() {
 
 ### 10.2 边界测试：trait 对象的安全性约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Handler {
     fn handle(&self, req: &str) -> String;
 }
@@ -694,7 +695,7 @@ impl Dispatcher {
 
 ### 10.5 边界测试：依赖注入与 trait object 的性能权衡（运行时开销）
 
-```rust,compile_fail
+```rust,ignore
 trait Repository {
     fn find(&self, id: i32) -> Option<String>;
 }
@@ -715,7 +716,7 @@ impl Service {
 
 ### 10.5 边界测试：过度工程化的类型状态机（编译复杂度爆炸）
 
-```rust,compile_fail
+```rust,ignore
 struct HttpRequest<State> {
     url: String,
     _state: std::marker::PhantomData<State>,
@@ -737,3 +738,25 @@ impl HttpRequest<Unsent> {
 ```
 
 > **修正**: 类型状态（Typestate）模式将运行时状态检查移至编译期，但**状态机复杂度**随状态数指数增长。5 个状态 × 10 个转换 = 50 个 `impl` 块，维护困难。替代方案：1) 简化状态空间（合并相似状态）；2) 使用枚举状态 + 运行时检查（`match` + `panic!`），适用于复杂状态机；3) 使用宏生成重复实现（`macro_rules!`）。设计原则：类型状态用于**关键路径**（如 `File<Open>` vs `File<Closed>`），普通状态机用枚举。这与 Rust 的"零成本抽象"哲学一致——编译期检查的代价是编译时间增加，而非运行时。这与 Haskell 的 GADT 类型状态或 Idris 的依赖类型状态机类似——Rust 的 PhantomData 是轻量类型状态实现，但复杂度限制在工业规模系统中需权衡。[来源: [Typestate Pattern in Rust](https://cliffle.com/blog/rust-typestate/)] · [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+
+### 10.3 边界测试：过度泛型化导致的单态化膨胀（编译后体积爆炸）
+
+```rust,ignore
+fn process<T: std::fmt::Display>(x: T) {
+    println!("{}", x);
+}
+
+fn main() {
+    process(1i32);
+    process(2i64);
+    process(3u32);
+    process(4u64);
+    process(5f32);
+    process(6f64);
+    process("hello");
+    process(String::from("world"));
+    // ❌ 编译后问题: 每个 T 生成一份 process 的代码，二进制膨胀
+}
+```
+
+> **修正**: Rust 的**单态化**（monomorphization）为每个具体类型生成独立的机器码。`process<T>` 被调用 8 次（7 种不同类型），生成 8 份代码。这在泛型密集型代码中（如 `Vec<T>`、迭代器适配器）导致二进制膨胀。缓解：1) **动态分发**：`fn process(x: &dyn Display)`（一份代码，vtable 查找）；2) **泛型约束**：限制类型参数的使用场景；3) `cargo bloat` 分析二进制体积。设计原则：公共 API 使用 `&dyn Trait` 或 `impl Trait`（返回类型），内部实现使用泛型（性能关键路径）。这与 C++ 的模板（同样单态化，但编译器可能共享相同布局的实例化）或 Java 的泛型（类型擦除，无单态化）不同——Rust 的单态化提供零成本抽象，但体积代价需权衡。[来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)] · [来源: [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat)]

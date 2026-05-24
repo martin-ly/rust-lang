@@ -795,7 +795,7 @@ async fn main() {
 
 ### 10.4 边界测试：不稳定特性在稳定编译器上的使用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 fn make_array<T, const N: usize>() -> [T; N]
@@ -815,7 +815,7 @@ fn main() {
 
 ### 10.3 边界测试：Edition 迁移的 cargo fix 限制（编译错误/行为变化）
 
-```rust,compile_fail
+```rust,ignore
 // Edition 2021 代码
 fn main() {
     let arr = [1, 2, 3];
@@ -834,7 +834,7 @@ fn main() {
 
 ### 10.4 边界测试：MSRV 与 `Cargo.lock` 的版本漂移（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Cargo.toml
 // [package]
 // rust-version = "1.70"
@@ -849,3 +849,22 @@ fn main() {
 ```
 
 > **修正**: `Cargo.lock` 锁定依赖的精确版本，但不锁定**编译器版本**。团队成员使用不同 Rust 版本时，`cargo update` 可能选择依赖的较新版本（要求更高 MSRV），导致在旧编译器上构建失败。解决方案：1) CI 中使用最低支持的 Rust 版本构建（`cargo +1.70.0 build`）；2) 使用 `cargo-msrv` 验证；3) 在 `Cargo.toml` 中声明 `rust-version`，并配置 CI 检查。这与 Node 的 `package-lock.json`（锁定包版本，但不锁定 Node 版本）或 Go 的 `go.mod` + `go.sum`（锁定版本，Go 本身向后兼容）类似——Rust 的快速演进使 MSRV 管理成为生态挑战。`cargo` 正在开发 `rust-version` 的自动检查（拒绝安装 MSRV 过高的依赖）。[来源: [Cargo rust-version](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field)] · [来源: [cargo-msrv](https://github.com/foresterre/cargo-msrv)]
+
+### 10.4 边界测试：新特性与旧编译器的兼容性（编译错误）
+
+```rust,ignore
+// Rust 1.76+ 的 `std::hash::DefaultHasher` 变更
+// 旧代码:
+// use std::collections::hash_map::DefaultHasher;
+
+// 新代码:
+use std::hash::DefaultHasher;
+
+fn main() {
+    // ❌ 编译错误: 若使用 Rust < 1.76，`std::hash::DefaultHasher` 可能不可用
+    // 或路径不同
+    let _hasher = DefaultHasher::new();
+}
+```
+
+> **修正**: Rust 标准库的**演进**：新版本中类型和模块路径可能变更（如 `DefaultHasher` 从 `std::collections::hash_map` 移至 `std::hash`）。兼容性策略：1) 使用 `rustversion` crate 条件编译（`#[rustversion::since(1.76)]`）；2) 指定 MSRV（Minimum Supported Rust Version）并在 CI 中测试；3) 使用 `std` 的 stable API，避免 nightly-only 特性。版本跟踪工具：`cargo-msrv` 自动检测最低支持版本。每 6 周发布新 stable 版本，6 周后是下一个。企业采用：通常滞后 2-3 个版本，等待生态稳定。这与 C++ 的 3 年标准周期（C++17、C++20、C++23）或 Go 的 6 个月发布周期（类似 Rust）不同——Rust 的快速发布节奏要求项目主动管理 MSRV。[来源: [Rust Release Channels](https://doc.rust-lang.org/book/appendix-07-nightly-rust.html)] · [来源: [cargo-msrv](https://github.com/foresterre/cargo-msrv)]

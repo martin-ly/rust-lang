@@ -145,6 +145,7 @@
     - [12.4 迁移准备](#124-迁移准备)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
+    - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -2700,3 +2701,50 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **相关判定树**: [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)
+
+### 10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）
+
+```rust,compile_fail
+trait MyTrait {
+    fn do_something(&self);
+}
+
+// ❌ 编译错误: 为外部类型实现外部 trait（孤儿规则）
+impl MyTrait for String {
+    fn do_something(&self) { println!("{}", self); }
+}
+
+// 且 blanket impl 与具体实现冲突
+impl<T> MyTrait for T {
+    fn do_something(&self) { println!("default"); }
+}
+
+fn main() {
+    "hello".to_string().do_something();
+}
+```
+
+> **修正**: Rust 的**孤儿规则**要求：为类型 `T` 实现 trait `Trait` 时，`T` 或 `Trait` 至少有一个定义在当前 crate 中。这防止两个 crate 为同一类型实现同一 trait。`blanket impl`（`impl<T> Trait for T`）为所有类型提供默认实现，但与具体实现冲突时，具体实现优先（若在同一 crate）。跨 crate 时：若 crate A 提供 `impl<T> MyTrait for T`，crate B 提供 `impl MyTrait for String`，编译器报错（冲突实现）。解决：1) newtype 模式；2) wrapper trait；3) 特征对象（`dyn Trait`）。这与 Haskell 的 orphan instances（允许但需 `{-# OVERLAPPABLE #-}`）或 C++ 的模板特化（允许任何地方的特化）不同——Rust 的孤儿规则在编译期强制执行，避免链接期冲突。[来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
+
+### 10.6 边界测试：关联常量与泛型参数的交互（编译错误）
+
+```rust,compile_fail
+trait Config {
+    const MAX_SIZE: usize;
+}
+
+struct MyConfig;
+impl Config for MyConfig {
+    const MAX_SIZE: usize = 1024;
+}
+
+fn use_config<C: Config>() -> [u8; C::MAX_SIZE] {
+    // ❌ 编译错误: 关联常量不能用于 const generic 数组大小
+    // 因为 C::MAX_SIZE 不是 const generic 参数，编译器无法确定数组大小
+    [0; C::MAX_SIZE]
+}
+
+fn main() {}
+```
+
+> **修正**: Rust 的**关联常量**（associated constant）是 trait 的一部分，但**不能**直接用于 `const generic` 数组大小。原因：关联常量依赖于具体实现，而 `const generic` 要求编译期确定的值。变通方案：1) 使用 `generic_const_exprs`（nightly，不稳定）；2) 用宏生成固定大小的数组；3) 使用 `Box<[u8]>` 或 `Vec<u8>`（运行时大小）；4) `typenum` crate（类型级整数）。关联常量的其他用途：1) 配置参数（`MAX_SIZE`、`VERSION`）；2) 类型标识（`const NAME: &'static str`）；3) 与 `const fn` 结合计算派生常量。这与 C++ 的 `static constexpr`（可在模板参数中使用）或 Swift 的 `associatedtype` + `static let`（类似限制）不同——Rust 的关联常量与 const generics 的集成仍在演进。[来源: [Rust Reference — Associated Constants](https://doc.rust-lang.org/reference/items/associated-items.html#associated-constants)] · [来源: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)]

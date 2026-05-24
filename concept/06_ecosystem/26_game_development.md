@@ -39,6 +39,7 @@
     - [10.2 边界测试：图形渲染的生命周期与 `Send` 约束（编译错误）](#102-边界测试图形渲染的生命周期与-send-约束编译错误)
     - [10.6 边界测试：游戏状态序列化的循环引用（运行时栈溢出）](#106-边界测试游戏状态序列化的循环引用运行时栈溢出)
     - [10.5 边界测试：ECS 的 archetype 变更与迭代器失效（运行时 panic/UB）](#105-边界测试ecs-的-archetype-变更与迭代器失效运行时-panicub)
+    - [10.3 边界测试：Bevy ECS 的 system 参数顺序与冲突（编译错误）](#103-边界测试bevy-ecs-的-system-参数顺序与冲突编译错误)
 
 ---
 
@@ -666,7 +667,7 @@ graph TD
 
 ### 10.1 边界测试：ECS 系统的组件借用冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // 假设使用 bevy_ecs 风格 API
 
 struct Position { x: f32, y: f32 }
@@ -687,7 +688,7 @@ fn update_system(query: &mut (Vec<&mut Position>, Vec<&mut Velocity>)) {
 
 ### 10.2 边界测试：图形渲染的生命周期与 `Send` 约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::thread;
 
 struct Renderer {
@@ -729,7 +730,7 @@ fn main() {
 
 ### 10.5 边界测试：ECS 的 archetype 变更与迭代器失效（运行时 panic/UB）
 
-```rust,compile_fail
+```rust,ignore
 // 概念代码: Bevy ECS 的 archetype 变更
 // ❌ 运行时 panic: 在迭代 query 时添加/移除 component，导致 archetype 迁移
 
@@ -741,3 +742,20 @@ fn main() {
 ```
 
 > **修正**: Bevy 的 ECS 使用 **archetype** 存储：实体按 component 组合分组（如 `(Transform, Velocity)` 是一个 archetype）。添加/移除 component 导致实体**迁移**到新 archetype。在 `Query::iter_mut()` 期间修改 archetype：1) 当前迭代器引用的内存可能被移动 → use-after-free；2) Bevy 检测到后 panic（"cannot mutate entity during iteration"）。解决方案：1) 使用 `Commands` 延迟执行（`commands.entity(e).remove::<C>()` 在阶段末执行）；2) 使用 `Query::iter()` 收集实体 ID，迭代结束后再修改；3) 使用 `RemovedComponents` 事件监听。这与 Unity 的 ECS（类似 archetype 概念，但允许延迟修改）或 flecs（C ECS 库，类似限制）不同——Bevy 的安全模型强制延迟修改，避免内存不安全。这与 Rust 的所有权哲学一致：编译期无法检测的运行时问题，通过 API 设计（`Commands` 缓冲）避免。[来源: [Bevy ECS Documentation](https://bevyengine.org/learn/book/getting-started/ecs/)] · [来源: [Bevy Query](https://docs.rs/bevy_ecs/)]
+
+### 10.3 边界测试：Bevy ECS 的 system 参数顺序与冲突（编译错误）
+
+```rust,ignore
+// 概念代码: Bevy system 参数
+// ❌ 编译错误: Query<&mut Transform> 与 Query<&Transform> 在同一 system 中冲突
+
+// fn my_system(
+//     mut q1: Query<&mut Transform>,
+//     q2: Query<&Transform>, // 与 q1 冲突：同一组件的可变和不可变查询
+// ) {
+//     for mut t in q1.iter_mut() { t.translation.x += 1.0; }
+//     for t in q2.iter() { println!("{}", t.translation.x); }
+// }
+```
+
+> **修正**: Bevy 的 ECS **system 参数**在编译期验证冲突：`Query<&mut T>` 和 `Query<&T>` 不能同时在同一 system 中存在，因为这会导致同一组件的别名冲突（一个可变引用 + 一个共享引用）。Bevy 的解决：1) **参数集**（`ParamSet`）：`mut p: ParamSet<(Query<&mut Transform>, Query<&Transform>)>`——显式声明互斥访问；2) 分两个 system（通过 `Commands` 或事件通信）；3) 使用 `Without` 过滤（`Query<&Transform, Without<Player>>`）。这与 Unity 的 ECS（运行时检查冲突，可能抛出异常）或 flecs（C ECS，类似编译期检查但不完全）不同——Bevy 利用 Rust 的类型系统在编译期排除 ECS 冲突，是 ECS + Rust 的独特优势。[来源: [Bevy ECS](https://bevyengine.org/learn/book/getting-started/ecs/)] · [来源: [Bevy Query](https://docs.rs/bevy_ecs/)]

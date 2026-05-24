@@ -1687,3 +1687,179 @@ fn main() {
 
 - [Rust 生产案例研究](case_studies.md)
 - [Rust 知识库建设完成报告](COMPLETION_REPORT_2026_03_1.94.md)
+
+### 边界测试：递归深度与栈溢出（运行时 panic）
+
+```rust,ignore
+fn factorial(n: u64) -> u64 {
+    if n == 0 { 1 } else { n * factorial(n - 1) }
+}
+
+fn main() {
+    // ❌ 运行时栈溢出: 递归深度过大
+    let _ = factorial(100000);
+}
+```
+
+> **修正**: Rust 不优化尾递归，`factorial(100000)` 创建 10 万层栈帧，超出栈大小（通常 1-8MB），触发 `thread '<main>' has overflowed its stack` panic。解决方案：1) **循环替代**：`let mut result = 1; for i in 1..=n { result *= i; }`；2) **显式栈**：用 `Vec` 模拟递归栈；3) **尾递归优化 crate**：`trampolin` 模式（返回闭包而非调用）。`std::thread::Builder::stack_size()` 可增加单个线程的栈大小，但非根本解决。这与 Scheme/Erlang 的尾递归优化（语言保证不增长栈）或 C 的递归（同样栈溢出风险）不同——Rust 偏向命令式循环，递归仅用于算法清晰表达。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html)]
+
+### 边界测试：迭代器消费后的重复使用（编译错误）
+
+```rust,ignore
+fn main() {
+    let v = vec![1, 2, 3];
+    let iter = v.into_iter();
+    let sum: i32 = iter.sum();
+    println!("{}", sum);
+
+    // ❌ 编译错误: into_iter 消耗了 v，iter 也已被消费（sum 是 consuming adaptor）
+    // let product: i32 = iter.product();
+}
+```
+
+> **修正**: Rust 的迭代器是**单次消费**的：`sum()`、`product()`、`collect()` 等终止操作（consuming adaptor）消费迭代器，之后不能再使用。某些迭代器可通过 `clone()` 复制（若底层数据 `Clone`），但通常需重新创建。`into_iter()` 消费集合本身（`Vec` 被 move），之后 `v` 不可用；`iter()` 借用集合，`v` 仍可用但受借用规则限制；`iter_mut()` 可变借用。这与 C++ 的迭代器（可多次遍历同一容器，但失效规则复杂）或 Python 的迭代器（同样单次消费，但 `list` 可多次 `iter()`）类似——Rust 的迭代器模型明确区分消费和借用。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-02-iterators.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]
+
+### 边界测试：模式匹配中的绑定与守卫的变量遮蔽（逻辑错误）
+
+```rust,ignore
+fn main() {
+    let x = Some(5);
+    match x {
+        Some(n) if n > 3 => println!("big: {}", n),
+        Some(n) => println!("small: {}", n),
+        None => println!("none"),
+    }
+
+    let y = Some(5);
+    match y {
+        Some(n) => {
+            let n = n + 1; // 遮蔽
+            println!("{}", n); // 6
+        }
+        None => {},
+    }
+    // ❌ 逻辑问题: 模式绑定中的变量可能被意外遮蔽，导致困惑
+}
+```
+
+> **修正**: 模式匹配中的**绑定**（binding）：`Some(n)` 将内部值绑定到 `n`，`n` 的生命周期限于该匹配臂。`match` 守卫（`if` 条件）中可使用绑定变量：`Some(n) if n > 3`。变量遮蔽在 match 臂内允许：`let n = n + 1` 创建新 `n`，不影响外部的 `n`。这与 Haskell 的 `case`（类似绑定，但无守卫的变量遮蔽问题）或 Scala 的 `match`（类似，但可用 `@` 绑定整个模式）类似——Rust 的模式匹配提供强大的解构能力，但需注意变量作用域和遮蔽。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)] · [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
+
+### 边界测试：`std::mem::swap` 与 `take` 的惯用选择（逻辑错误）
+
+```rust,ignore
+use std::mem;
+
+fn main() {
+    let mut s1 = String::from("hello");
+    let mut s2 = String::from("world");
+    mem::swap(&mut s1, &mut s2);
+    println!("s1 = {}, s2 = {}", s1, s2); // s1 = world, s2 = hello
+
+    let mut opt = Some(String::from("hello"));
+    // ❌ 逻辑问题: 若只想取走值并留 None，swap 不如 take 惯用
+    // let mut temp = None;
+    // mem::swap(&mut opt, &mut temp);
+    // let value = temp.unwrap();
+
+    // 正确:
+    let value = opt.take().unwrap();
+    println!("value = {}, opt = {:?}", value, opt); // value = hello, opt = None
+}
+```
+
+> **修正**: `std::mem::take` 是 `replace(&mut t, T::default())` 的便捷方法：取走值并留默认值。`Option::take` 特别常用：取走 `Some`，留 `None`。`swap` 用于交换两个同类型值，`take` 用于获取值并替换为默认。选择：1) 需要交换两个变量 → `swap`；2) 需要从变量获取值并留默认 → `take`；3) 需要从变量获取值并替换为新值 → `replace`。这与 C++ 的 `std::swap`（类似）或 Python 的 `a, b = b, a`（元组解包交换）不同——Rust 的 `take` 是获取所有权并留默认值的惯用模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.take.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 边界测试：`?` 运算符在 `Option` 与 `Result` 混用时的类型不匹配（编译错误）
+
+```rust,ignore
+fn may_fail() -> Result<i32, String> {
+    Ok(42)
+}
+
+fn may_be_none() -> Option<i32> {
+    Some(42)
+}
+
+fn combine() -> Result<i32, String> {
+    let x = may_fail()?;
+    // ❌ 编译错误: Option 不能直接用 ? 在返回 Result 的函数中
+    // let y = may_be_none()?;
+
+    // 正确: 显式转换
+    let y = may_be_none().ok_or("missing value")?;
+    Ok(x + y)
+}
+
+fn main() {
+    println!("{:?}", combine());
+}
+```
+
+> **修正**: `?` 运算符要求错误类型可转换：`Result<T, E>` 中的 `E` 必须实现 `From<InnerE>`，`Option<T>` 在返回 `Result` 的函数中不能直接用 `?`（无错误类型可转换）。转换方法：1) `opt.ok_or(err)?` — `Option` → `Result`；2) `res.ok()?` — `Result` → `Option`（忽略错误）；3) `opt.ok_or_else(|| make_err())?` — 延迟错误构造。Rust 1.70+ 中 `?` 在 `Option` 和 `Result` 之间有更灵活的转换，但类型不匹配仍需显式处理。这与 Haskell 的 `Maybe` 和 `Either`（需显式 `maybeToEither` 转换）或 Swift 的 `try?` / `try!`（类似但语义不同）不同——Rust 的 `?` 是语法糖，但类型系统严格检查转换可行性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Reference — The Question Mark Operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)]
+
+### 边界测试：trait object 的 `downcast_ref` 与类型安全（运行时 panic）
+
+```rust,ignore
+use std::any::Any;
+
+fn main() {
+    let value: Box<dyn Any> = Box::new(42i32);
+
+    // ❌ 运行时 panic: downcast_ref 到错误类型返回 None，unwrap 时 panic
+    let s = value.downcast_ref::<String>().unwrap();
+    println!("{}", s);
+
+    // 正确:
+    // if let Some(n) = value.downcast_ref::<i32>() {
+    //     println!("{}", n);
+    // }
+}
+```
+
+> **修正**: `Any` trait 提供**运行时类型反射**：`downcast_ref::<T>()` 将 `&dyn Any` 转为 `Option<&T>`。类型安全：1) 类型匹配 → `Some(&T)`；2) 类型不匹配 → `None`；3) 无 UB（运行时检查）。`Any` 的局限：1) 要求 `'static` 边界（因类型标识符是全局静态）；2) 不能用于含借用引用的类型（非 `'static`）；3) 性能开销（vtable 查找 + 类型 ID 比较）。使用场景：1) 错误处理（`Box<dyn Any>` 传递 panic payload）；2) 插件系统（动态类型注册）；3) 序列化框架（类型擦除后恢复）。这与 Java 的 `instanceof` / `cast`（类似运行时检查）或 C++ 的 `dynamic_cast`（类似，但需 RTTI）不同——Rust 的 `Any` 是 opt-in 的，无全局 RTTI 开销。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/any/trait.Any.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
+
+### 边界测试：`std::thread::spawn` 与闭包生命周期（编译错误）
+
+```rust,ignore
+fn main() {
+    let v = vec![1, 2, 3];
+    // ❌ 编译错误: 闭包捕获 &v，但线程可能活得更长
+    // let handle = std::thread::spawn(|| {
+    //     println!("{:?}", v);
+    // });
+
+    // 正确: move 闭包转移所有权
+    let handle = std::thread::spawn(move || {
+        println!("{:?}", v);
+    });
+    handle.join().unwrap();
+}
+```
+
+> **修正**: `std::thread::spawn` 要求闭包实现 `'static`：捕获的数据必须拥有 `'static` 生命周期（或转移所有权）。`move || { ... }` 强制按值捕获变量，将所有权转移到新线程。非 `move` 闭包捕获引用：`|| { println!("{:?}", v); }` 捕获 `&v`，但 `v` 在主线程栈上，新线程可能在其 drop 后访问 → 悬垂引用。编译器拒绝：`closure may outlive the current function, but it borrows v`。这与 Go 的 goroutine（闭包捕获变量是引用，但 goroutine 通常在函数返回前完成，且 GC 管理生命周期）或 C++ 的 `std::thread`（类似 `move`，但可用 `std::ref` 传递引用，需手动保证生命周期）不同——Rust 的编译期检查强制线程闭包的生命周期安全。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Rust Reference — Threads](https://doc.rust-lang.org/reference/runtime.html#threads)]
+
+### 边界测试：`std::sync::mpsc` 的通道关闭检测（运行时逻辑错误）
+
+```rust,ignore
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<i32>();
+
+    thread::spawn(move || {
+        tx.send(1).unwrap();
+        tx.send(2).unwrap();
+        // tx 在作用域结束时 drop，通道关闭
+    });
+
+    // ❌ 逻辑错误: recv 返回 Err(RecvError) 时未处理，unwrap 会 panic
+    // 若发送端 panic 或被 drop 前未发送完消息
+    loop {
+        let msg = rx.recv().unwrap();
+        println!("{}", msg);
+    }
+}
+```
+
+> **修正**: `mpsc::channel` 的关闭语义：1) 所有 `Sender` drop → `Receiver::recv()` 返回 `Err(RecvError)`（Disconnected）；2) `try_recv()` 在无消息时立即返回 `Err(TryRecvError::Empty)`；3) `iter()` 在 channel 关闭且所有消息消费完后终止。安全模式：1) `while let Ok(msg) = rx.recv()` — 优雅处理关闭；2) `for msg in rx` — 使用迭代器接口；3) 多生产者场景确保所有 `Sender` 正确 drop。`mpsc` 是标准库的同步通道，async 场景用 `tokio::sync::mpsc`。这与 Go 的 channel（`range` 迭代自动检测关闭，`close()` 显式关闭）或 Erlang 的消息传递（无显式关闭，进程退出即终止）不同——Rust 的 channel 关闭通过 drop 隐式触发。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-02-message-passing.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/mpsc/)]

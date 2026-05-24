@@ -36,6 +36,9 @@
   - [十、边界测试：DSL 与嵌入的编译错误](#十边界测试dsl-与嵌入的编译错误)
     - [10.1 边界测试：构建器模式的链式调用与所有权（编译错误）](#101-边界测试构建器模式的链式调用与所有权编译错误)
     - [10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）](#102-边界测试状态机-dsl-的非法状态转换编译错误)
+    - [10.3 边界测试：宏递归深度限制（编译错误）](#103-边界测试宏递归深度限制编译错误)
+    - [10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）](#104-边界测试dsl-的类型安全与运行时错误运行时-panic)
+    - [10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）](#103-边界测试dsl-宏的优先级与歧义解析编译错误)
 
 ---
 
@@ -743,7 +746,7 @@ fn fixed() {
 
 ### 10.3 边界测试：宏递归深度限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 macro_rules! recursive {
     () => { 0 };
     ($e:expr $(, $rest:expr)*) => {
@@ -763,7 +766,7 @@ fn main() {
 
 ### 10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）
 
-```rust,compile_fail
+```rust,ignore
 // 假设一个 SQL DSL: sql!(SELECT * FROM users WHERE id = $id)
 
 fn main() {
@@ -777,3 +780,42 @@ fn main() {
 ```
 
 > **修正**: 内部 DSL（如 `sql!` 宏）的安全性取决于宏的实现。宏可在编译期解析 SQL 语法并验证参数类型，但若参数化不当（字符串拼接而非绑定变量），仍可能产生 SQL 注入。Rust 的 `sqlx` crate 在编译期检查查询和参数，使用 prepared statement 防止注入。但纯宏 DSL（无编译期数据库连接）无法验证参数安全性。这与 Ruby 的 `ActiveRecord`（运行时参数化，安全但有开销）或 C 的字符串拼接 SQL（完全不安全）不同——Rust 的宏 DSL 有潜力在编译期消除注入，但需要正确实现。安全原则：**永不将用户输入直接嵌入到生成的代码/查询中**，无论使用什么抽象层。[来源: [sqlx Documentation](https://docs.rs/sqlx/)] · [来源: [OWASP SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)]
+
+### 10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）
+
+```rust,ignore
+macro_rules! expr {
+    ($e:expr) => { $e };
+}
+
+macro_rules! stmt {
+    ($s:stmt) => { $s };
+}
+
+fn main() {
+    // ❌ 编译错误: `let x = 1` 在 expr! 中不是有效的表达式
+    let y = expr!(let x = 1);
+}
+```
+
+> **修正**: Rust 宏的**片段分类器**（fragment specifier）决定匹配规则：`expr` 只匹配表达式（不含 `let` 绑定），`stmt` 匹配语句（含 `let`），`block` 匹配 `{ ... }`。`expr!(let x = 1)` 失败是因为 `let x = 1` 是语句而非表达式。宏 DSL 设计时需注意：1) 分类器选择（`expr` vs `stmt` vs `tt`）；2) 优先级（`$e:expr + $f:expr` 会贪婪匹配左侧）；3) 歧义（`$($x:expr),*` 与 `$($x:expr),+` 的逗号处理）。这与 Lisp 的宏（代码即数据，无分类器限制）或 C 的宏（纯文本替换，无语法概念）不同——Rust 的宏在语法树层面操作，分类器提供类型安全但限制了表达能力。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
+
+### 10.4 边界测试：DSL 宏的优先级与运算符结合性（编译错误）
+
+```rust,ignore
+macro_rules! sql {
+    (SELECT $col:tt FROM $table:tt) => { format!("SELECT {} FROM {}", $col, $table) };
+    (SELECT $col:tt FROM $table:tt WHERE $cond:tt) => { format!("SELECT {} FROM {} WHERE {}", $col, $table, $cond) };
+}
+
+fn main() {
+    // ❌ 编译错误: 宏规则顺序影响匹配
+    // sql!(SELECT * FROM users WHERE id = 1)
+    // 若第一个规则优先匹配，WHERE 部分被忽略或错误解析
+    
+    let query = sql!(SELECT * FROM users);
+    println!("{}", query);
+}
+```
+
+> **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]

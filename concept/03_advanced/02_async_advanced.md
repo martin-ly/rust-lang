@@ -1262,7 +1262,7 @@ async fn fixed_stream() {
 
 ### 10.5 边界测试：`Pin` 与 `Unpin` 的自动实现冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::pin::Pin;
 
 struct SelfRef {

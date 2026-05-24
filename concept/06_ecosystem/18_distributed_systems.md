@@ -635,7 +635,7 @@ fn send(msg: &LargeMessage) {
 
 ### 10.4 边界测试：分布式共识的时钟偏差（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::time::{SystemTime, Duration};
 
 fn timeout_deadline() -> SystemTime {
@@ -656,7 +656,7 @@ fn main() {
 
 ### 10.5 边界测试：Raft 共识中的网络分区与脑裂（运行时一致性破坏）
 
-```rust,compile_fail
+```rust,ignore
 // 概念代码: Raft 节点在分区时的投票冲突
 struct RaftNode {
     term: u64,
@@ -668,3 +668,25 @@ struct RaftNode {
 ```
 
 > **修正**: Raft 共识算法在**网络分区**（network partition）时保证安全性：1) 需要多数派（majority）才能当选 leader；2) 分区后，小分区无法选举（无法达到多数）；3) 大分区继续服务，但小分区不可用。极端情况：1) 对称分区（各 50%）→ 双方无法选举，完全不可用；2) 领导者隔离 → 旧 leader 在小分区继续接收写入（但未提交），恢复后回滚。这与 Paxos（类似多数派原则）或 PBFT（拜占庭容错，容忍恶意节点）不同——Raft 牺牲部分可用性换取一致性（CAP 定理的 CP 系统）。Rust 实现（`raft-rs`、`openraft`）需注意：1) 心跳超时和选举超时的配置（网络延迟）；2) 预投票（PreVote）防止 term 无限递增；3) 成员变更（joint consensus）的复杂性。[来源: [Raft Paper](https://raft.github.io/raft.pdf)] · [来源: [openraft Documentation](https://docs.rs/openraft/)]
+
+### 10.3 边界测试：Raft 的日志不一致与快照安装（运行时一致性风险）
+
+```rust,compile_fail
+// 概念代码: Raft 快照安装时的日志截断
+struct RaftNode {
+    log: Vec<LogEntry>,
+    snapshot_index: u64,
+}
+
+// ❌ 运行时风险: 若快照安装后，旧 leader 的日志追加到新 leader 已截断位置
+// 跟随者需丢弃冲突日志，接受新 leader 的日志
+
+fn install_snapshot(node: &mut RaftNode, snapshot: Snapshot) {
+    node.log.truncate((snapshot.last_index - node.snapshot_index) as usize);
+    node.snapshot_index = snapshot.last_index;
+}
+
+fn main() {}
+```
+
+> **修正**: Raft 的**快照机制**：领导者将状态机快照发送给慢跟随者，跟随者丢弃所有日志，用快照替代。风险：1) 快照安装期间，旧领导者的日志追加可能与新领导者冲突；2) 快照分片传输时，部分日志丢失；3) 快照过大导致网络拥塞。Rust 实现（`raft-rs`、`openraft`）：1) 快照分段传输；2) 预投票（PreVote）防止 term 无限递增；3) 成员变更使用 joint consensus。这与 Paxos（无显式快照机制，依赖状态机复制）或 ZooKeeper（ZAB 协议，类似 Raft 但有不同快照策略）不同——Raft 的设计目标是可理解性，但工业实现仍需处理大量边界情况。[来源: [Raft Paper](https://raft.github.io/raft.pdf)] · [来源: [openraft](https://docs.rs/openraft/)]

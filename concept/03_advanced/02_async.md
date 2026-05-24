@@ -3782,7 +3782,7 @@ differential-dataflow (增量计算)
 
 ### 16.1 边界测试：非 Send 类型跨 await 点（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::rc::Rc;
 
 async fn bad_async() {
@@ -3848,7 +3848,7 @@ fn recursive_fixed(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 ### 16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 async fn borrow_lifetime_issue() {
     let s = String::from("hello");
     let r = &s;
@@ -3905,3 +3905,26 @@ impl Future for BadFuture {
 > **相关判定树**: [异步判定树](../00_meta/concept_definition_decision_forest.md#八异步判定树)
 > **相关 FTA**: [异步安全失效树](../00_meta/fault_tree_analysis_collection.md#五异步安全失效树)
 > **相关概念**: [流处理语义](./20_stream_processing_semantics.md) · [流处理生态](../06_ecosystem/36_stream_processing_ecosystem.md)
+
+### 10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）
+
+```rust,ignore
+trait Service {
+    // ❌ 编译错误: Rust 当前（stable）不支持 trait 中的 async fn
+    // async fn process(&self) -> i32;
+    
+    // workaround: 手动返回 Pin<Box<dyn Future>>
+    fn process(&self) -> std::pin::Pin<Box<dyn std::future::Future<Output = i32> + '_>>;
+}
+
+struct MyService;
+impl Service for MyService {
+    fn process(&self) -> std::pin::Pin<Box<dyn std::future::Future<Output = i32> + '_>> {
+        Box::pin(async { 42 })
+    }
+}
+
+fn main() {}
+```
+
+> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`#[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/)]

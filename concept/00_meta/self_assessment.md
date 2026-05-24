@@ -107,6 +107,7 @@
     - [Q79: SemVer 与 API 演进](#q79-semver-与-api-演进)
     - [Q80: rustdoc Doctest](#q80-rustdoc-doctest)
   - [来源与参考文献](#来源与参考文献)
+    - [10.3 边界测试：Bloom 层级与代码复杂度评估（概念映射）](#103-边界测试bloom-层级与代码复杂度评估概念映射)
 
 > **来源**: [Bloom Taxonomy 2001] · [TRPL] · [Rust Reference] · [concept/知识体系]
 >
@@ -2283,3 +2284,27 @@ pub fn foo() {}
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+### 10.3 边界测试：Bloom 层级与代码复杂度评估（概念映射）
+
+```rust,compile_fail
+// ❌ 设计问题: 试图在 L1 理解层级使用 L4 的形式化抽象
+// 例如: 初学者试图用分离逻辑理解 Vec::push
+
+// L1 理解（记忆/理解）:
+// Vec::push 添加元素到向量末尾
+
+// L4 理解（分析/评价）:
+// push 的操作语义:
+//   - 若 cap > len: *(ptr + len) = elem; len += 1
+//   - 若 cap == len: realloc(ptr, new_cap); 复制旧元素; 写入新元素
+//   - 前置条件: self 是有效的 Vec<T>
+//   - 后置条件: len' = len + 1 ∧ contents' = contents ++ [elem]
+
+fn main() {
+    let mut v = vec![1, 2, 3];
+    v.push(4); // L1: 简单直观; L4: 需证明无内存泄漏和 UB
+}
+```
+
+> **修正**: Bloom 层级是认知复杂度框架：L1（记忆）→ L2（理解）→ L3（应用）→ L4（分析）→ L5（评价）→ L6（创造）。Rust 学习的分层：1) **L1-L2**：语法、基本类型、所有权直觉；2) **L3**：解决实际问题，使用标准库；3) **L4**：理解借用检查器算法、NLL、内部可变性；4) **L5**：评估设计模式、性能权衡、安全性；5) **L6**：设计新抽象、形式化验证、语言扩展。学习策略：匹配当前层级的内容，避免 L1 学习者接触 L4 形式化——认知过载。这与教育心理学中的"最近发展区"（ZPD）一致——有效学习发生在略高于当前能力的区域。[来源: [Bloom's Taxonomy](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy)] · [来源: [Zone of Proximal Development](https://en.wikipedia.org/wiki/Zone_of_proximal_development)]

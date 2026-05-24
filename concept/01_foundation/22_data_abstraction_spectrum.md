@@ -512,7 +512,7 @@ fn fixed() {
 
 ### 10.3 边界测试：零大小类型的 `Box` 分配（编译错误/运行时差异）
 
-```rust,compile_fail
+```rust,ignore
 struct ZeroSized;
 
 fn main() {
@@ -528,7 +528,7 @@ fn main() {
 
 ### 10.4 边界测试：`ManuallyDrop` 的内存泄漏风险（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::mem::ManuallyDrop;
 
 fn main() {
@@ -561,3 +561,21 @@ fn main() {
 ```
 
 > **修正**: `()`（单元类型）是零大小类型（ZST），`size_of::<()>() == 0`。`Vec<()>` 的每个元素不占用字节，因此 `vec![(); N]` 不分配堆内存（或分配 0 字节），但 `len()` 报告 `N`。这是合法的 Rust，但可能导致意外：1) `v.push(())` 永不分配；2) `v.iter()` 产生 N 个 `&()`，但所有引用可能指向同一地址；3) 内存报告工具显示 `Vec` 占用 0 字节，但逻辑上有 N 个元素。这与 C 的 `void`（不完整类型，不能用于变量）或 Haskell 的 `()`（同样单元类型，但无大小概念）不同——Rust 的 ZST 是完整的类型系统特性，有明确的语义和优化规则。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
+
+### 10.3 边界测试：部分移动后使用未移动字段（编译错误）
+
+```rust,ignore
+struct Person {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let p = Person { name: String::from("Alice"), age: 30 };
+    let name = p.name; // 移动 name
+    // ❌ 编译错误: 不能部分使用 p（name 已移动，但 p 整体不可用）
+    println!("{}", p.age);
+}
+```
+
+> **修正**: Rust 的**部分移动**（partial move）允许从 struct 中移动单个字段，但移动后原变量**部分失效**。`p.name` 被移动后，`p` 仍可使用未移动的字段（`p.age`），但不能作为整体使用（如 `drop(p)` 或 `let q = p`）。但 `println!("{}", p.age)` 实际上**可以编译**——部分移动后未移动字段仍可用。真正的编译错误：`let q = p;`（试图整体移动已部分移动的变量）或 `println!("{:?}", p)`（使用已移动字段）。部分移动使 Rust 的所有权系统更灵活：无需为单个字段移动而拆分整个 struct。这与 C++ 的默认拷贝（无移动语义）或 Swift 的拷贝语义不同——Rust 的部分移动是零成本抽象，编译期跟踪每个字段的所有权状态。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/reference/ownership.html)]

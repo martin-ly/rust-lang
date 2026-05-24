@@ -1509,3 +1509,37 @@ impl AuthManager {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+### 边界测试：phantom 类型的状态机转换错误（编译错误）
+
+```rust,ignore
+use std::marker::PhantomData;
+
+struct Connection<State> {
+    _state: PhantomData<State>,
+}
+
+struct Disconnected;
+struct Connected;
+
+impl Connection<Disconnected> {
+    fn new() -> Self { Self { _state: PhantomData } }
+    fn connect(self) -> Connection<Connected> {
+        Connection { _state: PhantomData }
+    }
+}
+
+impl Connection<Connected> {
+    fn send(&self, msg: &str) { println!("{}", msg); }
+}
+
+fn main() {
+    let conn = Connection::new();
+    let conn = conn.connect();
+    // ❌ 编译错误: Connected 的 Connection 不能再次 connect
+    // let conn = conn.connect();
+    conn.send("hello");
+}
+```
+
+> **修正**: **类型状态**（typestate）模式将运行时状态检查移至编译期：`Connection<Disconnected>` 和 `Connection<Connected>` 是不同的类型，只有 `Disconnected` 可以 `connect()`，只有 `Connected` 可以 `send()`。编译器在编译期阻止无效状态转换。限制：1) 状态数增长时，转换矩阵的组合爆炸；2) 需要 `PhantomData` 占位（无运行时开销）；3) 异步状态机（`async fn`）与类型状态的交互复杂。类型状态适用于关键路径（数据库连接、文件句柄、协议状态机），普通状态机用枚举 + 运行时检查。这与 Haskell 的 GADT 类型状态或 Idris 的依赖类型状态机类似——Rust 的 `PhantomData` 是轻量实现，但复杂度限制在工业规模系统中需权衡。[来源: [Typestate Pattern in Rust](https://cliffle.com/blog/rust-typestate/)] · [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]

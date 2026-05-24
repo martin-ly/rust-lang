@@ -3033,3 +3033,41 @@ mod internal {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **相关问题树**: [性能优化问题树](../00_meta/problem_graph.md#六性能优化问题树)
+
+### 10.3 边界测试：过程宏的 `TokenStream` 解析失败（编译错误）
+
+```rust,compile_fail
+use proc_macro::TokenStream;
+
+#[proc_macro_derive(MyDebug)]
+pub fn my_debug(input: TokenStream) -> TokenStream {
+    // ❌ 编译错误: 过程宏 crate 必须是 proc-macro = true
+    // 且 input 必须是有效的 Rust 语法树
+    input
+}
+
+// 使用:
+// #[derive(MyDebug)]
+// struct Point { x: i32, y: i32 }
+```
+
+> **修正**: 过程宏（procedural macro）是 Rust 的**编译期代码生成**机制，三类：1) `#[proc_macro_derive]` — 自定义 derive；2) `#[proc_macro_attribute]` — 自定义属性；3) `#[proc_macro]` — 函数式宏。过程宏 crate 的特殊要求：1) `Cargo.toml` 中 `crate-type = ["proc-macro"]`；2) 只能导出过程宏，无其他公共 API；3) 依赖 `proc_macro` crate（编译器提供的 API）。常见第三方库：`proc-macro2`（与 `proc_macro` 兼容但可测试）、`quote`（生成 TokenStream）、`syn`（解析 TokenStream 为 AST）。过程宏的错误处理：`compile_error!` 在生成的代码中插入编译错误，或使用 `proc_macro::Diagnostic`（nightly）。这与 C 的预处理器宏（纯文本替换）或 Lisp 的宏（代码即数据，同语言操作）不同——Rust 的过程宏操作的是 Token 流，在编译器的宏展开阶段执行。[来源: [The Rust Reference](https://doc.rust-lang.org/reference/procedural-macros.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+
+### 10.4 边界测试：声明宏的 hygiene 与跨 crate 标识符冲突（编译错误）
+
+```rust,ignore
+// crate-a: 定义宏
+// macro_rules! define_struct {
+//     ($name:ident) => {
+//         struct $name { value: i32 }
+//     };
+// }
+
+// crate-b: 使用宏
+// define_struct!(MyStruct);
+// define_struct!(MyStruct); // ❌ 编译错误: 重复定义
+
+fn main() {}
+```
+
+> **修正**: `macro_rules!` 的 **hygiene**（卫生）保护宏生成的标识符不与调用者冲突，但**不保护**调用者传入的标识符。`define_struct!(MyStruct)` 两次传入 `MyStruct` → 重复定义。这与宏内部生成的 `struct Internal`（自动 hygiene 保护）不同。解决方案：1) 过程宏（`proc_macro`）可生成唯一标识符（`__MyStruct_12345`）；2) 使用 `const _: () = { ... }` 匿名作用域隔离；3) 文档说明宏的使用限制（不可重复调用同一标识符）。这与 C 的宏（无 hygiene，传入标识符直接替换，易冲突）或 Scheme 的 hygienic macro（基于语法对象，传入标识符也有 hygiene）不同——Rust 的 `macro_rules!` hygiene 是单向的（保护宏内部，不保护外部传入）。[来源: [Rust Reference — Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]

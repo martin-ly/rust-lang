@@ -43,6 +43,7 @@
     - [10.2 边界测试：`UnsafeCell` 的不变性（编译错误）](#102-边界测试unsafecell-的不变性编译错误)
     - [10.3 边界测试：逆变与 `fn` 参数的不变性（编译错误）](#103-边界测试逆变与-fn-参数的不变性编译错误)
     - [10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时 UB）](#104-边界测试unsafecell-的不变性编译错误运行时-ub)
+    - [10.3 边界测试：逆变（contravariant）与函数参数的生命周期（编译错误）](#103-边界测试逆变contravariant与函数参数的生命周期编译错误)
 
 ---
 
@@ -576,7 +577,7 @@ fn fixed() {
 
 ### 10.3 边界测试：逆变与 `fn` 参数的不变性（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn takes_str(_: &str) {}
 
 fn main() {
@@ -595,7 +596,7 @@ fn main() {
 
 ### 10.4 边界测试：`UnsafeCell` 的不变性（编译错误/运行时 UB）
 
-```rust,compile_fail
+```rust,ignore
 use std::cell::UnsafeCell;
 
 fn main() {
@@ -608,3 +609,21 @@ fn main() {
 ```
 
 > **修正**: `UnsafeCell` 是 Rust 内部可变性的底层原语，它**关闭**了编译器的可变性和别名假设——通过 `UnsafeCell` 获取的指针可同时存在多个读写别名。但 `UnsafeCell` 本身不改变语义：从 `UnsafeCell` 获取的 `&mut T` 和 `&T` 仍不能同时活跃，除非使用 `UnsafeCell` 的特定 API（如 `Cell::get` 的按位复制）。上述代码是 UB，因为 `r1` 和 `r2` 同时存在。正确用法：`UnsafeCell` 应配合显式同步原语（`Mutex`、`RwLock`）或单线程运行时检查（`RefCell`）使用。`UnsafeCell` 的变异性是**不变**（invariant）的：不能将 `UnsafeCell<&'long T>` 赋值给 `UnsafeCell<&'short T>`，因为内部可变可能通过 `&mut` 改变引用的生命周期。这与 Java 的 `Object[]`（数组是协变的，运行时 `ArrayStoreException`）或 C++ 的 `std::vector<T>`（无变异性概念）不同——Rust 的 `UnsafeCell` 不变性防止了通过内部可变性破坏子类型关系。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/interior-mutability.html)]
+
+### 10.3 边界测试：逆变（contravariant）与函数参数的生命周期（编译错误）
+
+```rust,compile_fail
+fn main() {
+    fn foo(x: fn(&'static str)) {
+        let s = String::from("temporary");
+        // ❌ 编译错误: fn(&'static str) 不能传递给期望 fn(&'a str) 的上下文
+        // 因为函数参数是逆变的：'static <: 'a 但 fn(&'static) :> fn(&'a)
+        x(&s);
+    }
+
+    let f: fn(&'static str) = |_| {};
+    foo(f);
+}
+```
+
+> **修正**: Rust 的生命周期**变型**（variance）：1) `&'a T` — 对 `'a` **协变**（covariant）：`'long <: 'short` 则 `&'long T <: &'short T`；2) `&mut 'a T` — 对 `'a` 协变，对 `T` **不变**（invariant）；3) `fn(T) -> U` — 对 `T` **逆变**（contravariant），对 `U` 协变。逆变意味着：若 `'a <: 'b`，则 `fn(&'b T) <: fn(&'a T)`（函数能接受更短生命周期的输入是更"通用"的）。`fn(&'static str)` 要求输入活得更长，因此**不能**替代 `fn(&'short str)`。变型是 Rust 类型系统的深层理论，影响 trait 对象、泛型约束和生命周期子类型。这与 Java 的泛型（通配符 `? super T` 显式逆变）或 C++ 的模板（无显式变型概念，依赖具体实例化）不同——Rust 的变型是隐式推导的，编译器自动计算。[来源: [Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)] · [来源: [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]

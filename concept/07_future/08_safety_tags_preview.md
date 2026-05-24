@@ -478,3 +478,20 @@ fn main() {
 ```
 
 > **修正**: 安全标签是**信任机制**，非**验证机制**：开发者声明代码满足某些安全属性，但编译器不自动验证（除非结合 Kani/Prusti 等工具）。虚假标签比无标签更危险——它给审查者虚假的安全感。最佳实践：1) 每个 `unsafe` 块配详细注释（输入不变式、输出保证、为何安全）；2) 使用 Miri 在测试套件中运行 unsafe 代码；3) 使用 `cargo vet` 审计依赖的 unsafe 使用。这与航空领域的 DO-178C（"已验证"是认证过程的结果，非自我声明）或网络安全领域的 SOC 2（信任但需审计）类似——标签是起点，非终点。Rust 社区正在探索将标签与形式化验证结合：标签声明 + 工具验证 = 可组合的安全保证。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [Rust Secure Code WG](https://github.com/rust-secure-code/wg)]
+
+### 10.4 边界测试：`#[safety::tag]` 的契约验证与工具链支持（编译错误/未来特性）
+
+```rust,ignore
+// 概念代码: Safety Tags（提案中）
+// #[safety::tag("memory-safe")]
+// #[safety::requires("pointer is non-null and aligned")]
+// unsafe fn deref_ptr(ptr: *const i32) -> i32 {
+//     *ptr
+// }
+
+// ❌ 编译错误: safety tags 不是当前 Rust 特性，需第三方工具或 nightly 实验
+
+fn main() {}
+```
+
+> **修正**: **Safety Tags** 是 Rust 形式化验证的前沿方向：1) 在 unsafe 函数上标注**安全契约**（前置条件、后置条件、副作用）；2) 静态分析工具验证调用点满足契约；3) 与 Miri、Kani、Prusti 等工具集成。当前状态：讨论阶段，无 RFC。相关努力：1) `contracts` crate（运行时契约检查）；2) 文档约定（`SAFETY:` 注释）；3) `unsafe-code-guidelines` working group 的形式化规范。Safety Tags 若实现，将使 Rust 的 unsafe 代码从"文档化契约"提升到"工具验证契约"，是向"形式化保证 unsafe 安全"迈出的重要一步。这与 Ada/SPARK 的 contracts（`Pre`/`Post` 条件，工具验证）或 Dafny 的 `requires`/`ensures`（编译期验证）类似——Rust 的安全标签将是语言原生支持或标准化注释。[来源: [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)] · [来源: [Rust Safety Research](https://www.rust-lang.org/governance/wgs)]

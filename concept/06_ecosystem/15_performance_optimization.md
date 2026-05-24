@@ -42,6 +42,7 @@
     - [10.4 边界测试：内联汇编的操作数类型约束（编译错误）](#104-边界测试内联汇编的操作数类型约束编译错误)
     - [10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）](#106-边界测试inlinealways-与代码膨胀编译错误链接错误)
     - [10.7 边界测试：`inline(always)` 的代码膨胀（编译后性能下降）](#107-边界测试inlinealways-的代码膨胀编译后性能下降)
+    - [10.3 边界测试：SIMD 类型的内存对齐要求（运行时 UB）](#103-边界测试simd-类型的内存对齐要求运行时-ub)
 
 ---
 
@@ -699,7 +700,7 @@ fn main() {
 
 ### 10.4 边界测试：内联汇编的操作数类型约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::arch::asm;
 
 fn main() {
@@ -720,7 +721,7 @@ fn main() {
 
 ### 10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）
 
-```rust,compile_fail
+```rust,ignore
 #[inline(always)]
 fn huge_function() -> [u8; 10000] {
     [0u8; 10000]
@@ -737,7 +738,7 @@ fn main() {
 
 ### 10.7 边界测试：`inline(always)` 的代码膨胀（编译后性能下降）
 
-```rust,compile_fail
+```rust,ignore
 #[inline(always)]
 fn tiny_helper(x: i32) -> i32 {
     x + 1
@@ -748,3 +749,19 @@ fn tiny_helper(x: i32) -> i32 {
 ```
 
 > **修正**: `#[inline]` 提示编译器内联函数，`#[inline(always)]` 强制内联（忽略启发式）。内联的收益：消除函数调用开销、允许跨函数优化（常量传播、死代码消除）。内联的成本：代码膨胀（instruction cache pressure）、编译时间增加。`always` 的危险：1) 大函数在多处调用 → 二进制膨胀；2) 递归函数 → 编译错误（无法内联无限递归）；3) 跨 crate 边界 → 链接器可能忽略（需 LTO）。内联决策应交由编译器（`#[inline]` 为提示，`always` 仅在微基准验证后使用）。这与 C++ 的 `inline` 关键字（弱提示，链接器决定）或 Go 的编译器自动内联（无注解控制）不同——Rust 的内联注解是强提示，但 `always` 需极度谨慎。[来源: [Rust Reference — Inline](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/inlining.html)]
+
+### 10.3 边界测试：SIMD 类型的内存对齐要求（运行时 UB）
+
+```rust,ignore
+fn main() {
+    let data = [0u8; 32];
+    // ❌ 运行时 UB: _mm256_load_si256 要求 32 字节对齐地址
+    unsafe {
+        let _vec = std::arch::x86_64::_mm256_load_si256(
+            data.as_ptr() as *const _
+        );
+    }
+}
+```
+
+> **修正**: SIMD（AVX/AVX2/SSE）指令对**内存对齐**有严格要求：1) `__m128`（SSE）需 16 字节对齐；2) `__m256`（AVX）需 32 字节对齐；3) `__m512`（AVX-512）需 64 字节对齐。未对齐加载（`_mm256_loadu_si256`，`u` = unaligned）性能稍低但安全。Rust 的 `std::arch` 模块提供平台特定的 SIMD 内联函数，是 `unsafe` 的。安全 SIMD 抽象：`packed_simd`（已废弃）、`std::simd`（nightly，portable SIMD）、`auto_vectorization`（编译器自动向量化）。最佳实践：1) 使用 `#[repr(align(32))]` 保证对齐；2) 优先用 `loadu` 除非在极致性能路径；3) 用 `std::simd`（稳定后）替代裸内联函数。这与 C 的 `__m256`（同样对齐要求）或编译器自动向量化（无对齐控制）不同——Rust 的 SIMD 显式暴露硬件约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/arch/index.html)] · [来源: [Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)]

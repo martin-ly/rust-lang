@@ -1439,3 +1439,16 @@ fn main() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
+
+### 边界测试：`str::from_utf8` 的无效 UTF-8 序列（运行时 panic）
+
+```rust,ignore
+fn main() {
+    let bytes = vec![0x80, 0x81, 0x82];
+    // ❌ 运行时 panic: from_utf8 返回 Result，unwrap 无效序列时 panic
+    let s = std::str::from_utf8(&bytes).unwrap();
+    println!("{}", s);
+}
+```
+
+> **修正**: Rust 的 `str` 类型要求严格 UTF-8。`str::from_utf8` 将字节切片转为字符串，返回 `Result<&str, Utf8Error>`。无效 UTF-8 时：1) `unwrap()` → panic；2) `unwrap_or("default")` → 提供默认值；3) `String::from_utf8_lossy` → 用 `U+FFFD`（�）替换无效序列，返回 `Cow<str>`。与操作系统字符串（`OsStr`，可能非 UTF-8）的交互：`OsStr::to_str()` 返回 `Option<&str>`（可能失败），`OsString::into_string()` 同样。这与 Python 3 的 `str`（默认 UTF-8，但可用 `errors='replace'` 处理无效序列）或 Go 的 `string`（底层字节序列，可能非 UTF-8）不同——Rust 的 `str` 类型在编译期保证 UTF-8，转换需显式处理失败。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/str/fn.from_utf8.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]

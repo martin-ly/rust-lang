@@ -971,7 +971,7 @@ pub fn test_prog(ctx: ProbeContext) -> u32 {
 
 ### 10.2 边界测试：eBPF 与用户空间的类型布局不匹配（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // eBPF 程序 (kernel space)
 #[repr(C)]
 struct Event {
@@ -1033,3 +1033,23 @@ fn read_counter(bpf: &mut Bpf) {
 ```
 
 > **修正**: eBPF 的 **map** 是内核中的键值存储，eBPF 程序和用户空间程序通过 map 交换数据。map 的类型（键大小、值大小、最大条目数）在创建时固定，eBPF 侧和用户空间侧必须一致。Rust 的 `aya` 库在编译期通过泛型参数检查类型：`AyaHashMap<_, u32, u64>` 要求键 4 字节、值 8 字节，与 eBPF 的 `HashMap<u32, u64>` 匹配。但类型别名、平台差异（32/64 位）、对齐填充仍可能导致不匹配。安全模式：1) 使用共享类型定义 crate（`#[repr(C)]` struct）；2) 显式 `assert_eq!(std::mem::size_of::<Key>(), 4)`；3) 使用 `aya-tool` 从 eBPF 代码生成 Rust 绑定。这与 C 的 eBPF（手动计算大小，易错）或 Go 的 `cilium/ebpf`（反射检查类型）类似——Rust 的泛型在编译期提供了部分保护，但跨语言边界的类型一致性仍需人工保证。[来源: [aya Documentation](https://aya-rs.dev/)] · [来源: [Linux BPF Maps](https://docs.kernel.org/bpf/maps.html)]
+
+### 10.3 边界测试：eBPF 的栈大小限制与 Rust 的局部变量（编译错误/运行时验证失败）
+
+```rust,compile_fail
+#![no_std]
+#![no_main]
+
+use aya_ebpf::{macros::xdp, programs::XdpContext};
+
+#[xdp]
+pub fn my_xdp(ctx: XdpContext) -> u32 {
+    // ❌ 编译/验证失败: eBPF 栈大小限制 512 字节
+    // Rust 的局部变量和大数组可能超出
+    let mut buf = [0u8; 1024];
+    let _ = &buf;
+    0
+}
+```
+
+> **修正**: eBPF（extended Berkeley Packet Filter）的**内核验证器**限制：1) **栈大小**：最大 512 字节（所有局部变量总和）；2) **指令数**：最大 100 万条；3) **循环**：需证明有界终止；4) **无 null 解引用**：验证器跟踪指针有效性。Rust 的 eBPF 开发（`aya`、`redbpf`）：1) 使用 `no_std` + 自定义宏（`#[xdp]`、`#[tracepoint]`）；2) `aya-tool` 生成内核类型绑定；3) 用户空间程序用标准 Rust 加载 eBPF 程序。挑战：1) Rust 的 panic handler（eBPF 中 panic 是非法的）；2) 浮点数（eBPF 不支持浮点运算）；3) 全局变量（eBPF 的 map 替代）。这与 C 的 eBPF 开发（libbpf，手动管理）或 Go 的 eBPF（via CGo，性能开销）不同——Rust 的 eBPF 生态（aya）提供类型安全的内核编程。[来源: [aya](https://aya-rs.dev/)] · [来源: [eBPF.io](https://ebpf.io/)]

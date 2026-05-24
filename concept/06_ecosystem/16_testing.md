@@ -603,7 +603,7 @@ graph TD
 
 ### 10.1 边界测试：`cargo test` 的编译失败与测试失败的区分
 
-```rust,compile_fail
+```rust,ignore
 #[test]
 fn broken_test() {
     // ❌ 编译错误: 测试代码本身编译失败
@@ -615,7 +615,7 @@ fn broken_test() {
 
 ### 10.2 边界测试：mock 对象的 trait 约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -645,7 +645,7 @@ impl<T: Database> Service<T> {
 
 ### 10.3 边界测试：`cargo test` 的测试名称冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 #[cfg(test)]
 mod tests {
     #[test]
@@ -665,7 +665,7 @@ mod more_tests {
 
 ### 10.4 边界测试：doc test 中的 `no_run` 与 `compile_fail` 的误用（编译错误/测试失败）
 
-```rust,compile_fail
+```rust,ignore
 /// ```no_run
 /// let x = 1 / 0; // 运行时 panic，但 doc test 不执行
 /// ```

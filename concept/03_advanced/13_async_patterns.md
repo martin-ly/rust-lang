@@ -883,3 +883,22 @@ async fn demo() {
 ```
 
 > **修正**: `StreamExt::select_next_some` 是 `future` crate 的便利方法：在 `Some(x)` 时返回 `x`，在 `None` 时 panic（设计为与 `select!` 配合使用）。`fuse()` 在底层流返回 `None` 后使后续 `poll` 始终返回 `None`。`select_next_some` 遇到 `None` panic，因此应与 `Fuse` 流配合时谨慎——`fuse` 不消除 `None`，只是重复它。正确使用：1) `while let Some(x) = stream.next().await`（标准循环）；2) `select!` 中配合 `Fuse` 和 `complete` 分支；3) 避免 `select_next_some` 在可能独立使用的地方。这与 `Option::unwrap`（同样 panic on None）或 `Iterator::next().unwrap()`（同样风险）类似——`select_next_some` 是"我确定还有元素"的断言。[来源: [futures Crate](https://docs.rs/futures/)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
+
+### 10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）
+
+```rust,compile_fail
+use futures::stream::{self, StreamExt};
+
+async fn process() {
+    let s = stream::iter(0..1_000_000);
+    // ❌ 运行时问题: buffer_unordered 无界缓冲可能导致内存爆炸
+    s.map(|x| async move { x * 2 })
+     .buffer_unordered(1000)
+     .for_each(|x| async move { println!("{}", x); })
+     .await;
+}
+
+fn main() {}
+```
+
+> **修正**: `Stream::buffer_unordered(n)` 允许最多 `n` 个 future 同时执行，但**不限制总输入速率**。若生产者（`stream::iter`）速度快于消费者（`for_each`），中间结果在缓冲区累积，内存无限增长。**背压**（backpressure）解决：1) 使用有界 channel（`tokio::sync::mpsc::channel(cap)`）限制未处理项数；2) `Stream::ready_chunks(n)` 批量处理；3) 自定义 `Stream` 实现，在 `poll_next` 中返回 `Pending` 直到资源可用。Tokio 的 `Stream` 生态：`tokio_stream::wrappers` 将各种类型转为 Stream，`tokio::time::interval` 生成定时 Stream。这与 Reactive Streams（Java 的 `Flow` API，显式背压协议）或 Node.js 的 stream（自动背压 via `pause`/`resume`）不同——Rust 的 Stream 背压需显式设计。[来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Streams](https://docs.rs/tokio-stream/)]

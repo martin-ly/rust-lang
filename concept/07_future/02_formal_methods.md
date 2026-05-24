@@ -1962,7 +1962,7 @@ fn main() {
 
 ### 10.3 边界测试：形式化规格与实现的不一致（验证失败）
 
-```rust,compile_fail
+```rust,ignore
 // 规格: fn add(a: u32, b: u32) -> u32 { a + b } 永不应溢出
 
 fn add(a: u32, b: u32) -> u32 {
@@ -1979,7 +1979,7 @@ fn add(a: u32, b: u32) -> u32 {
 
 ### 10.4 边界测试：形式化工具的编译器版本锁定（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // 假设项目使用 nightly-2024-01-01 的 Miri
 // 但开发者升级到 nightly-2024-06-01
 

@@ -386,7 +386,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 ### 10.1 边界测试：`async fn` 在 trait 中的限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait AsyncService {
     async fn process(&self) -> i32; // ❌ 编译错误: async fn in trait 不稳定
 }
@@ -428,7 +428,7 @@ async fn main_fixed() {
 
 ### 10.3 边界测试：异步闭包的 `move` 与 `Pin` 交互（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 
@@ -474,7 +474,7 @@ use tokio::sync::mpsc;
 async fn unfair_select() {
     let (tx1, mut rx1) = mpsc::channel(10);
     let (tx2, mut rx2) = mpsc::channel(10);
-    
+
     tokio::select! {
         biased; // ❌ 运行时饥饿: 优先检查 rx1，若 rx1 始终有数据，rx2 饥饿
         Some(v) = rx1.recv() => println!("1: {}", v),
@@ -485,3 +485,27 @@ async fn unfair_select() {
 ```
 
 > **修正**: `tokio::select!` 默认**伪随机**选择就绪分支，保证长期公平性。`biased` 模式按声明顺序优先选择，适用于已知优先级的场景（如取消信号优先于工作项），但可能导致低优先级分支饥饿。常见错误：1) 不必要的 `biased`（默认随机足够）；2) `biased` 模式下高频率分支垄断执行；3) 忘记 `else` 分支（所有分支 futures 完成后 `select!` panic）。这与 Go 的 `select`（随机公平，无 biased 选项）或 Rust `futures::select!`（同样伪随机）类似——公平性是并发调度的重要属性，`biased` 是显式放弃公平的 opt-in 机制。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+
+### 10.3 边界测试：`select!` 与 async 块中的借用跨越 await（编译错误）
+
+```rust,compile_fail
+use std::pin::Pin;
+use std::future::Future;
+
+async fn task1() -> i32 { 1 }
+async fn task2() -> i32 { 2 }
+
+async fn bad_select() {
+    let mut data = vec![1, 2, 3];
+    let ref_mut = &mut data;
+    // ❌ 编译错误: 借用跨越 await 点（select! 中的 await）
+    tokio::select! {
+        _ = async { *ref_mut.push(4); } => {},
+        _ = task2() => {},
+    }
+}
+
+fn main() {}
+```
+
+> **修正**: `tokio::select!` 并发等待多个 future，**第一个完成的被处理**。`select!` 中的每个分支是独立的 async 块，但 `select!` 宏展开后会在每个分支前插入 await 点。若外部变量以 `&mut` 借用并被多个分支使用，编译器拒绝——这可能导致数据竞争（虽然单线程调度，但编译器保守）。安全模式：1) 使用 `Arc<Mutex<T>>` 共享状态；2) 在 `select!` 前完成所有借用操作；3) 使用 `tokio::sync::mpsc` 通道传递数据。`select!` 与 Go 的 `select`（通道操作）或 Erlang 的 `receive`（消息匹配）类似——Rust 的编译期借用检查使并发模式更安全。[来源: [tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)]

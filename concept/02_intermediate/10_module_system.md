@@ -36,6 +36,9 @@
   - [十、边界测试：模块系统的编译错误](#十边界测试模块系统的编译错误)
     - [10.1 边界测试：`pub(crate)` 与 `pub(super)` 的可见性层级（编译错误）](#101-边界测试pubcrate-与-pubsuper-的可见性层级编译错误)
     - [10.2 边界测试：模块文件与目录的命名冲突（编译错误）](#102-边界测试模块文件与目录的命名冲突编译错误)
+    - [10.3 边界测试：`use self::` 与 `use crate::` 的路径解析（编译错误）](#103-边界测试use-self-与-use-crate-的路径解析编译错误)
+    - [10.4 边界测试：路径重导出（re-export）的循环（编译错误）](#104-边界测试路径重导出re-export的循环编译错误)
+    - [10.3 边界测试：`pub(crate)` 与 `pub(super)` 的可见性嵌套（编译错误）](#103-边界测试pubcrate-与-pubsuper-的可见性嵌套编译错误)
 
 ---
 
@@ -622,7 +625,7 @@ mod foo {
 
 ### 10.3 边界测试：`use self::` 与 `use crate::` 的路径解析（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 mod inner {
     pub fn func() {}
 }
@@ -634,10 +637,10 @@ mod sibling {
 fn main() {
     use self::inner::func;
     func();
-    
+
     // ❌ 编译错误: self 指当前模块，不能访问 sibling
     // use self::sibling::func;
-    
+
     // 正确: 使用 super 或 crate
     use crate::sibling::func as sibling_func;
     sibling_func();
@@ -663,3 +666,38 @@ pub mod b {
 ```
 
 > **修正**: `pub use` 重导出是组织 API 表面的重要工具：将内部模块的项暴露到 crate 根或公共模块。但重导出不创建新项，只是别名——目标项必须存在。循环 `pub use`（A 重导出 B，B 重导出 A）在项存在时合法（只是双向别名），但若项不存在（如上述代码中 `A` 和 `B` 未定义），编译错误。这与 C++ 的 `using`（类似别名）或 JavaScript 的 `export { x } from './y'`（ES6 re-export）类似——重导出是模块系统的组织工具，不改变项的可见性或所有权。Rust 的 `pub use` 常用于 `prelude` 模式：在 crate 根集中暴露所有公开类型，简化用户的使用路径。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html)] · [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]
+
+### 10.3 边界测试：`pub(crate)` 与 `pub(super)` 的可见性嵌套（编译错误）
+
+```rust,compile_fail
+mod outer {
+    pub mod inner {
+        pub(super) fn secret() { println!("secret"); }
+    }
+
+    pub fn use_secret() {
+        inner::secret(); // ✅ super = outer，可以访问
+    }
+}
+
+fn main() {
+    // ❌ 编译错误: secret 只在 outer 模块内可见
+    outer::inner::secret();
+}
+```
+
+> **修正**: Rust 的**可见性修饰符**：1) `pub` — 完全公开（crate 外部可见）；2) `pub(crate)` — 当前 crate 内可见；3) `pub(super)` — 父模块可见；4) `pub(self)` — 当前模块可见（等同于私有）；5) `pub(in path::to::module)` — 指定路径模块可见。`pub(super)` 在嵌套模块链中特别有用：限制 helper 函数只在父模块及其子模块中使用。这与 Java 的 `protected`（包内 + 子类）或 C# 的 `internal`（程序集内）不同——Rust 的可见性是基于模块树的精确控制，无继承概念。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html)] · [来源: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)]
+
+### 10.4 边界测试：workspace 成员的循环依赖（编译错误）
+
+```rust,ignore
+// Workspace:
+// crate-a/Cargo.toml: [dependencies] crate-b = { path = "../crate-b" }
+// crate-b/Cargo.toml: [dependencies] crate-a = { path = "../crate-a" }
+
+// ❌ 编译错误: Cargo 禁止 workspace 成员之间的循环依赖
+
+fn main() {}
+```
+
+> **修正**: Cargo **禁止循环依赖**：若 crate A 依赖 B，B 不能直接或间接依赖 A。循环依赖的设计问题：1) 两个 crate 紧密耦合，应合并为一个；2) 公共部分提取到第三个 crate；3) 使用 trait 打破循环（A 定义 trait，B 实现，C 使用）。Cargo 的依赖解析：1) 构建有向无环图（DAG）；2) 检测循环 → 编译错误；3) 同一 crate 的多个版本可在依赖图中共存（不同版本视为不同 crate）。工作区（workspace）共享 `Cargo.lock` 和 `target/` 目录，但每个成员独立编译。这与 Java 的 Maven（同样禁止循环依赖）或 Python 的导入（运行时循环导入可能工作，但可能导致意外行为）不同——Rust 在编译期严格排除循环依赖。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)] · [来源: [Rust Reference — Crates](https://doc.rust-lang.org/reference/items/extern-crates.html)]

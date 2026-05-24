@@ -1,8 +1,8 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-24T16:39:25.276433
+> 生成时间: 2026-05-24T17:14:56.160247
 > 扫描文件数: 208
-> 提取概念定义数: 651
+> 提取概念定义数: 655
 > 跨文件引用数: 170
 
 ## 目录
@@ -58,7 +58,7 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 229 | 74 |
+| unsafe-UB | 233 | 74 |
 | 所有权-Move语义 | 110 | 45 |
 | Send+Sync | 72 | 44 |
 | 所有权-作用域绑定 | 48 | 24 |
@@ -214,7 +214,7 @@
 | concept\05_comparative\12_rust_vs_scala.md | 0 | 0 | 14 |
 | concept\05_comparative\13_rust_vs_csharp.md | 0 | 0 | 14 |
 | concept\05_comparative\14_rust_vs_elixir.md | 0 | 0 | 12 |
-| concept\05_comparative\15_rust_vs_typescript.md | 1 | 0 | 16 |
+| concept\05_comparative\15_rust_vs_typescript.md | 2 | 0 | 16 |
 | concept\05_comparative\16_rust_vs_ruby.md | 0 | 0 | 12 |
 | concept\06_ecosystem\01_toolchain.md | 2 | 0 | 40 |
 | concept\06_ecosystem\02_patterns.md | 4 | 0 | 22 |
@@ -232,7 +232,7 @@
 | concept\06_ecosystem\12_testing_strategies.md | 1 | 0 | 13 |
 | concept\06_ecosystem\13_logging_observability.md | 0 | 0 | 13 |
 | concept\06_ecosystem\14_documentation.md | 0 | 0 | 10 |
-| concept\06_ecosystem\15_performance_optimization.md | 3 | 0 | 14 |
+| concept\06_ecosystem\15_performance_optimization.md | 4 | 0 | 14 |
 | concept\06_ecosystem\16_testing.md | 1 | 0 | 12 |
 | concept\06_ecosystem\17_cross_compilation.md | 0 | 0 | 12 |
 | concept\06_ecosystem\18_distributed_systems.md | 0 | 0 | 13 |
@@ -268,11 +268,11 @@
 | concept\07_future\10_derive_coerce_pointee_preview.md | 0 | 0 | 12 |
 | concept\07_future\11_const_trait_impl_preview.md | 0 | 0 | 12 |
 | concept\07_future\12_return_type_notation_preview.md | 0 | 0 | 12 |
-| concept\07_future\13_unsafe_fields_preview.md | 12 | 0 | 12 |
+| concept\07_future\13_unsafe_fields_preview.md | 13 | 0 | 12 |
 | concept\07_future\14_ferrocene_preview.md | 0 | 0 | 12 |
 | concept\07_future\15_gen_blocks_preview.md | 0 | 0 | 12 |
 | concept\07_future\16_cranelift_backend_preview.md | 2 | 0 | 14 |
-| concept\07_future\17_rust_specification_preview.md | 2 | 0 | 12 |
+| concept\07_future\17_rust_specification_preview.md | 3 | 0 | 12 |
 | concept\07_future\18_async_drop_preview.md | 2 | 0 | 12 |
 | concept\07_future\19_rust_for_linux.md | 1 | 0 | 12 |
 | concept\07_future\20_borrowsanitizer_preview.md | 3 | 0 | 13 |

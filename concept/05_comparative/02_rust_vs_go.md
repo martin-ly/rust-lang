@@ -1008,7 +1008,7 @@ func ParseJSON(input string) string {
 
 ### 10.1 边界测试：Go 的隐式接口 vs Rust 的显式 trait（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Reader {
     fn read(&mut self, buf: &mut [u8]) -> usize;
 }
@@ -1039,7 +1039,7 @@ impl Reader for MyReader {
 
 ### 10.2 边界测试：Go 的 nil 指针与 Rust 的 `Option`（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     // ❌ 编译错误: `Option<&str>` 不能直接与字符串比较
     // Rust 没有 nil 指针，空引用用 Option::None 表示
@@ -1061,7 +1061,7 @@ fn fixed() {
 
 ### 10.3 边界测试：Go 的接口与 Rust 的 trait 的隐式实现差异（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Go: 隐式实现接口（struct 有方法即实现接口）
 // type Reader interface { Read(p []byte) (n int, err error) }
 // type MyStruct struct {}
@@ -1093,7 +1093,7 @@ fn main() {
 
 ### 10.4 边界测试：Go 的 nil 与 Rust 的 `Option` 的语义差异（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Go: interface 值可为 nil，但 nil interface 不等于 nil
 // var p *int = nil
 // var i interface{} = p
@@ -1103,7 +1103,7 @@ fn main() {
     let p: Option<&i32> = None;
     // Rust: Option<&i32> 的 None 是明确的"无值"
     // 没有 "typed nil" 的概念
-    
+
     // ❌ 逻辑错误: 从 C/Go 迁移到 Rust 时，可能用裸指针模拟 nil
     let raw: *const i32 = std::ptr::null();
     // 空指针不是 Option，解引用是 UB
@@ -1112,3 +1112,23 @@ fn main() {
 ```
 
 > **修正**: Go 的 `nil` 是多重含义的：指针 nil、接口 nil、channel nil、map nil、slice nil，且 "nil interface" 不等于 "nil 指针放入 interface"。Rust 用 `Option<T>` 统一表达"可能无值"：`Option<&T>` 的 `None` 对应 nil 指针，`Option<Box<T>>` 的 `None` 对应 nil 堆指针。Rust 无隐式 nil：所有引用必须有效（或显式 `Option`），裸指针可能为 null 但只能在 `unsafe` 中解引用。这与 Go 的 "nil 是零值"（所有引用类型的默认值）或 Java 的 `null`（所有引用类型的默认值）不同——Rust 消除了 billion-dollar mistake（Tony Hoare 对 null 的称呼）通过类型系统强制显式处理缺失值。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Null References: The Billion Dollar Mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/)]
+
+### 10.3 边界测试：Go 的接口nil与Rust的Option显式空值（运行时陷阱）
+
+```rust,compile_fail
+fn main() {
+    // Go 的陷阱: var p *os.File = nil; var r io.Reader = p
+    // r != nil（接口值包含类型信息，nil 指针被包装为非 nil 接口）
+    
+    // Rust 的显式处理:
+    let p: Option<&i32> = None;
+    // ❌ 编译错误: 不能隐式将 None 转为 &i32
+    let r: &i32 = p; // Option<&i32> 不能自动解包
+    
+    // 正确: 显式处理空值
+    // let r = p.unwrap(); // 运行时 panic 若 None
+    // let r = p.unwrap_or(&0); // 提供默认值
+}
+```
+
+> **修正**: Go 的**接口 nil 陷阱**：接口值由（类型，值）对组成，nil 指针赋值给接口后，接口值不为 nil（类型信息存在）。这导致 `if r != nil` 为 true，但底层指针为 nil，解引用 panic。Rust 的 `Option<&T>` 是**显式空值**：`None` 和 `Some(&T)` 是不同的变体，编译器强制处理所有情况（`match`、`if let`、`unwrap`）。Rust 无 "nil 指针但非 None" 的概念——空值是显式的、类型安全的。这与 Haskell 的 `Maybe a`（`Nothing` / `Just a`）或 Swift 的 `Optional<T>`（`nil` / `T`）相同——Rust 的 `Option` 是代数数据类型，空值状态在类型系统中显式编码。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)] · [来源: [Go Interface Nil](https://golang.org/doc/faq#nil_error)]

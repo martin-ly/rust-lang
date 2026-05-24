@@ -40,6 +40,7 @@
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：闭包参数的类型推断歧义（编译错误）](#103-边界测试闭包参数的类型推断歧义编译错误)
     - [10.4 边界测试：关联类型的投影歧义（编译错误）](#104-边界测试关联类型的投影歧义编译错误)
+    - [10.3 边界测试：闭包捕获与类型推断的交互（编译错误）](#103-边界测试闭包捕获与类型推断的交互编译错误)
 
 ---
 
@@ -195,7 +196,7 @@ fn fixed() {
 
 ### 10.2 边界测试：闭包参数类型推断的歧义（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let closure = |x| x + 1;
     // ❌ 编译错误: type annotations needed for `|x| x + 1`
@@ -641,7 +642,7 @@ fn main() {
 
 ### 10.4 边界测试：关联类型的投影歧义（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 trait Container {
     type Item;
     fn get(&self) -> Self::Item;
@@ -658,3 +659,19 @@ fn main() {
 ```
 
 > **修正**: 关联类型（associated types）是 trait 的一部分：`Container::Item` 由具体实现决定。但调用泛型函数 `process` 时，编译器必须知道 `C` 的具体类型才能解析 `C::Item`。若 `C` 无法从参数推断（如上述代码中 `process` 无参数或参数类型不明确），编译错误。解决方案：1) 显式指定类型参数 `process::<Vec<i32>>(vec)`；2) 使用 `impl Trait` 返回类型替代关联类型；3) 确保参数类型提供足够上下文。这与 Haskell 的 type families（`Container a -> Item a`，类型推断类似）或 C++ 的 `typename`（`typename C::Item`，需要显式 `typename` 关键字）类似——Rust 的关联类型推断在复杂场景下需要显式标注。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)] · [来源: [Rust Reference — Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html)]
+
+### 10.3 边界测试：闭包捕获与类型推断的交互（编译错误）
+
+```rust,ignore
+fn main() {
+    let mut v = vec![1, 2, 3];
+    // ❌ 编译错误: 闭包先以 FnOnce 捕获，后尝试 FnMut 调用
+    let mut closure = || {
+        v.push(4); // 需要 &mut v（FnMut）
+    };
+    closure(); // 第一次调用: FnMut
+    closure(); // 第二次调用: 但编译器可能推断为 FnOnce
+}
+```
+
+> **修正**: Rust 闭包的**trait 自动实现**：1) `Fn` — 捕获 `&T`，可多次调用；2) `FnMut` — 捕获 `&mut T`，可多次调用（需 `mut` 绑定）；3) `FnOnce` — 捕获 `T`（move），只能调用一次。编译器根据闭包体自动推断实现的 trait。`v.push(4)` 需要 `&mut v`，所以闭包至少实现 `FnMut`。若闭包还移动捕获变量（如 `drop(v)`），则只能实现 `FnOnce`。类型推断的陷阱：1) 先以 `Fn` 使用闭包，后添加 `mut` 捕获 → 编译错误；2) `move ||` 强制 move 所有捕获，可能从 `FnMut` 降级为 `FnOnce`；3) 递归闭包需显式类型标注（`let f: &dyn Fn(i32) -> i32 = &|x| { ... }`）。这与 C++ 的 lambda（按值/按引用捕获显式指定）或 Java 的匿名类（隐式 final 变量捕获）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]

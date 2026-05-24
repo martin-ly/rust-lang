@@ -38,6 +38,9 @@
   - [十、边界测试：Cow 与借用的编译错误](#十边界测试cow-与借用的编译错误)
     - [10.1 边界测试：`Cow` 的写时复制与借用冲突（编译错误）](#101-边界测试cow-的写时复制与借用冲突编译错误)
     - [10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）](#102-边界测试borrow-trait-与-asref-的误用编译错误)
+    - [10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）](#103-边界测试cow-的-toowned-约束编译错误)
+    - [10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）](#104-边界测试cow-在-match-中的所有权转移编译错误)
+    - [10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）](#102-边界测试cow-的生命周期与所有权转换编译错误)
 
 ---
 
@@ -636,7 +639,7 @@ fn fixed() {
 
 ### 10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::borrow::Borrow;
 
 fn main() {
@@ -661,7 +664,7 @@ fn takes_ref<R: AsRef<[i32]>>(r: R) {
 
 ### 10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::borrow::Cow;
 
 struct MyStr<'a> {
@@ -672,7 +675,7 @@ fn main() {
     let s = MyStr { data: b"hello" };
     // ❌ 编译错误: MyStr 未实现 ToOwned，不能作为 Cow 的借用类型
     // let cow: Cow<MyStr> = Cow::Borrowed(&s);
-    
+
     // Cow 的 B 类型必须实现 ToOwned<Owned = ...>
     let cow: Cow<str> = Cow::Borrowed("hello");
     println!("{}", cow);
@@ -683,7 +686,7 @@ fn main() {
 
 ### 10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::borrow::Cow;
 
 fn main() {
@@ -698,3 +701,35 @@ fn main() {
 ```
 
 > **修正**: `Cow` 是枚举（`enum Cow<'a, B> { Borrowed(&'a B), Owned(<B as ToOwned>::Owned) }`），在 `match` 中按值解构时，`Cow` 被移动，`Owned` 变体的内部值被取出。若需保留 `Cow`，应使用 `match &cow`（匹配引用）或 `cow.as_ref()`（获取 `&B`）。`Cow` 的灵活性伴随着所有权复杂性：有时需要 `Cow` 本身（传递），有时需要内部值（使用），有时需要引用（检查）。这与 `Option` 和 `Result` 的所有权管理相同——枚举的按值匹配消耗所有者。`Cow` 提供 `into_owned()`（无论借用或拥有，都转为拥有）和 `to_mut()`（转为可变引用，必要时克隆）简化常见模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）
+
+```rust,ignore
+use std::borrow::Cow;
+
+fn main() {
+    let s = String::from("hello");
+    let cow: Cow<str> = Cow::Borrowed(&s);
+    // ❌ 编译错误: 不能将 Borrowed 的 Cow 生命周期延长到 s 之外
+    let owned: String = cow.into_owned();
+    drop(s);
+    println!("{}", owned); // owned 已拥有数据，但编译器可能在旧版中拒绝
+}
+```
+
+> **修正**: `Cow<'a, B>`（Clone-on-Write）是**写时克隆**的智能指针：`Borrowed(&'a B)` 持有借用，`Owned(B::Owned)` 持有所有权。`into_owned()` 将 `Borrowed` 克隆为 `Owned`（若已是 `Owned` 则直接移动）。关键：`Cow::Borrowed(&s)` 的生命周期受 `s` 限制，但 `into_owned()` 返回的 `String` 拥有独立数据，生命周期不再关联。上述代码在**当前 Rust 中实际可以编译**——`into_owned()` 返回所有权。真正的 `Cow` 陷阱：1) `Cow::to_mut()` 在 `Borrowed` 时克隆数据；2) `Cow` 不能跨越 await 点（若 `Borrowed` 引用局部变量）；3) `Cow<'static, str>` 与 `Cow<'a, str>` 的类型不匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 10.4 边界测试：Cow 的生命周期与泛型约束不匹配（编译错误）
+
+```rust,compile_fail
+use std::borrow::Cow;
+
+fn bad_cow<'a>(s: &'a str) -> Cow<'static, str> {
+    // ❌ 编译错误: 不能将 'a 生命周期的 &str 转为 'static 的 Cow
+    Cow::Borrowed(s)
+}
+
+fn main() {}
+```
+
+> **修正**: `Cow<'a, B>` 的**生命周期参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]

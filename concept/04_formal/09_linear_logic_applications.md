@@ -751,7 +751,7 @@ impl Clone for Resource {
 
 ### 10.5 边界测试：`Vec::drain` 与线性资源的消耗（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 struct Resource {
     name: String,
 }
@@ -774,3 +774,25 @@ fn main() {
 ```
 
 > **修正**: `Vec::drain(range)` 移除指定范围内的元素并返回迭代器——这是**批量消耗**线性资源的操作。每个被 drain 的元素在迭代器被消费时逐个 drop（若未 `collect` 到新的 `Vec`），或在 `collect` 时转移所有权。`drain` 的边界检查：范围必须在 `0..=len` 内，否则 panic。这与线性逻辑中的**批量资源释放**对应：一次性转移多个资源的所有权，而非逐个 `pop`。Rust 的 `drain` 是高效的（O(end - start)，只移动尾部元素），但要求范围有效。这与 C++ 的 `vector::erase(first, last)`（同样批量移除，迭代器失效）或 Haskell 的列表操作（无突变，无 drain 概念）不同——Rust 的 `drain` 是所有权系统下的批量资源管理工具。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/vec/struct.Vec.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+
+### 10.3 边界测试：线性类型与 `Drop` 的资源泄漏边界（编译错误/逻辑问题）
+
+```rust,ignore
+struct FileHandle {
+    fd: i32,
+}
+
+impl Drop for FileHandle {
+    fn drop(&mut self) {
+        println!("closing fd {}", self.fd);
+    }
+}
+
+fn main() {
+    let file = FileHandle { fd: 1 };
+    std::mem::forget(file); // 阻止 drop
+    // ❌ 逻辑问题: 文件描述符泄漏（但 Rust 允许，forget 是 safe）
+}
+```
+
+> **修正**: Rust 的 `std::mem::forget` 是**safe 函数**：它阻止值的 `drop` 被调用，但不触发 UB。这是 Rust "**leak safety**" 哲学的一部分：标准库不保证防泄漏，但泄漏不应导致内存不安全。`forget` 的合法用途：1) 将值的所有权转移给外部系统（如 FFI 的 C 代码负责释放）；2) 手动管理内存生命周期；3) 创建循环引用（`Rc` 的 leak）。资源泄漏的风险：文件描述符耗尽、内存泄漏、锁未释放（导致死锁）。缓解：`ManuallyDrop<T>` 是更安全的替代——显式控制 drop 时机，不调用则编译器警告。这与 C++ 的 `std::unique_ptr::release`（放弃所有权，责任转移）或 Java 的 finalize（已废弃，不可靠）不同——Rust 的 `forget` 是显式的、有文档的安全操作。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.forget.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]

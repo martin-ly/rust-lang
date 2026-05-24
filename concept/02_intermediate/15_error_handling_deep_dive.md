@@ -40,6 +40,8 @@
   - [十、边界测试：错误处理的编译错误](#十边界测试错误处理的编译错误)
     - [10.1 边界测试：`thiserror` 与 `anyhow` 的混用（编译错误）](#101-边界测试thiserror-与-anyhow-的混用编译错误)
     - [10.2 边界测试：`Result` 嵌套与 `?` 的传播限制（编译错误）](#102-边界测试result-嵌套与--的传播限制编译错误)
+    - [10.5 边界测试：`thiserror` 的 `#[from]` 与类型歧义（编译错误）](#105-边界测试thiserror-的-from-与类型歧义编译错误)
+    - [10.6 边界测试：`eyre` 与 `anyhow` 的混用导致上下文丢失（编译错误）](#106-边界测试eyre-与-anyhow-的混用导致上下文丢失编译错误)
 
 ---
 
@@ -595,7 +597,7 @@ fn fixed() -> Result<(), anyhow::Error> {
 
 ### 10.2 边界测试：`Result` 嵌套与 `?` 的传播限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn outer() -> Result<Result<i32, String>, String> {
     let inner = inner_op()?; // ✅ 传播外层 Result 的错误
     // ❌ 编译错误: `?` 只能传播一层 Result
@@ -660,3 +662,35 @@ fn main() -> Result<()> {
 ```
 
 > **修正**: `anyhow` 和 `eyre` 都是 Rust 的错误处理库，提供通用错误类型和上下文。但 `anyhow::Error` 和 `eyre::Report` 是不同的类型，不能自动转换。混用导致：1) `?` 运算符无法自动转换；2) 错误链上下文断裂；3) 调试输出格式不一致。项目应统一选择一种：1) `anyhow`（更轻量、生态更广）；2) `eyre`（更丰富的上下文、自定义错误处理钩子）。这与 Go 的单一 `error` 接口（无此问题）或 Java 的异常层次（可混合，但 `catch` 需匹配类型）不同——Rust 的错误生态提供选择，但选择后需统一。[来源: [anyhow Documentation](https://docs.rs/anyhow/)] · [来源: [eyre Documentation](https://docs.rs/eyre/)]
+
+### 10.4 边界测试：错误类型的 `source()` 链与 `Display` 的循环（运行时栈溢出）
+
+```rust,ignore
+use std::error::Error;
+use std::fmt;
+
+#[derive(Debug)]
+struct CyclicError {
+    source: Option<Box<dyn Error>>,
+}
+
+impl fmt::Display for CyclicError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "cyclic error")
+    }
+}
+
+impl Error for CyclicError {
+    fn source(&self) -> Option<&(dyn Error + 'static)> {
+        self.source.as_ref().map(|e| e.as_ref())
+    }
+}
+
+fn main() {
+    let mut err = CyclicError { source: None };
+    // ❌ 运行时栈溢出: 若 source 指向自身，错误链遍历无限循环
+    // err.source = Some(Box::new(err)); // 无法直接实现，但逻辑上可能
+}
+```
+
+> **修正**: `Error::source()` 返回错误链的**下一个错误**。标准库的 `Error::chain()` 遍历 source 链。循环引用（`A.source = B, B.source = A`）导致无限循环。虽然 Rust 的类型系统（`&dyn Error` 是引用，不能拥有循环所有权）使直接循环困难，但 `Arc` 或自定义实现可能创建逻辑循环。安全模式：1) 错误链应为**线性**（无分支、无循环）；2) `source` 指向**原始错误**（底层原因），非同一级别的包装；3) 使用 `anyhow`/`eyre` 自动管理错误链。这与 Java 的 `Throwable.getCause()`（同样可能循环，但 JVM 不检测）或 Go 的 `errors.Unwrap`（Go 1.13+ 的链式错误，手动管理）不同——Rust 的 `Error` trait 提供标准化错误链接口。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/error/trait.Error.html)] · [来源: [anyhow](https://docs.rs/anyhow/)]

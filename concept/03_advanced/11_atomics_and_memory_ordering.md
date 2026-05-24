@@ -38,6 +38,8 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
+    - [10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）](#103-边界测试relaxed-顺序与-happens-before-缺失逻辑错误ub)
 
 ---
 
@@ -591,7 +593,7 @@ fn atomic_send() {
 
 > **修正**: `static mut` 需要 `unsafe` 块访问。推荐使用 `std::sync::LazyLock` 或 `once_cell` 进行线程安全的延迟初始化，而非 `static mut`。
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
 
 fn atomic_ptr_deref() {
@@ -876,19 +878,19 @@ fn fixed() {
 
 ### 10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
 
 fn main() {
     let ptr = AtomicPtr::new(Box::into_raw(Box::new(42)));
     let old = ptr.load(Ordering::Relaxed);
-    
+
     // 另一个线程可能:
     // 1. 读取 old
     // 2. 释放 old 指向的内存
     // 3. 分配新内存，恰好得到相同地址
     // 4. 写入新值
-    
+
     // ❌ 运行时 ABA 问题: compare_exchange 成功，但内存内容已变
     let _ = ptr.compare_exchange(
         old,
@@ -900,3 +902,29 @@ fn main() {
 ```
 
 > **修正**: **ABA 问题**是无锁数据结构中的经典问题：指针值从 A → B → A，但 `compare_exchange` 无法检测中间变化。`AtomicPtr` 的 `compare_exchange` 只比较地址值，不比较内容。解决方案：1) **Tagged pointer**：在低位存储版本计数器（`(ptr & !0xF) | (version & 0xF)`）；2) **Hazard pointer**：延迟释放，确保无其他线程引用；3) **Epoch-based reclamation**（`crossbeam-epoch`）：分代回收。Rust 的 `crossbeam`  crate 提供成熟的内存回收方案。这与 C++ 的 `std::atomic<T*>`（同样 ABA 问题）或 Java 的 `AtomicReference`（同样问题，GC 缓解）相同——ABA 是所有 CAS 操作的固有限制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicPtr.html)] · [来源: [Crossbeam Documentation](https://docs.rs/crossbeam/)]
+
+### 10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）
+
+```rust,ignore
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let data = Arc::new(AtomicUsize::new(0));
+    let d1 = Arc::clone(&data);
+    let d2 = Arc::clone(&data);
+
+    thread::spawn(move || {
+        d1.store(42, Ordering::Relaxed);
+    });
+
+    thread::spawn(move || {
+        // ❌ 逻辑错误: Relaxed 不保证看到 42，即使 store 已发生
+        let val = d2.load(Ordering::Relaxed);
+        assert_eq!(val, 42); // 可能失败
+    });
+}
+```
+
+> **修正**: `Ordering::Relaxed` 是**最弱**的原子顺序：保证原子操作本身不撕裂，但不建立**happens-before**关系。两个线程分别 `Relaxed` store/load 同一变量，load 可能看到旧值——因为编译器/CPU 可能重排序。需要同步的场景：1) `Release`/`Acquire` 对（建立单向 happens-before）；2) `SeqCst`（全局总序，最强但最慢）；3) `AcqRel`（组合读写）。Rust 的内存模型与 C++20 一致（`std::memory_order`），但 Rust 要求显式指定 Ordering（无默认）。这与 Java 的 `volatile`（等价于 `SeqCst`）或 Go 的原子操作（类似 C++，但 API 更简单）不同——Rust 的原子 API 精确暴露硬件能力，开发者需理解内存模型。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] · [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]

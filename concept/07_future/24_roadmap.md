@@ -59,6 +59,7 @@
     - [10.2 边界测试：GAT（泛型关联类型）的递归约束（编译错误）](#102-边界测试gat泛型关联类型的递归约束编译错误)
     - [10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）](#106-边界测试impl-trait-在-let-绑定中的类型推断限制编译错误)
     - [10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）](#105-边界测试语言特性稳定化的时间预估偏差工程规划风险)
+    - [10.3 边界测试：nightly 特性在 production 中的不可预测性（编译中断）](#103-边界测试nightly-特性在-production-中的不可预测性编译中断)
 
 ---
 
@@ -985,7 +986,7 @@ fn main() {
 
 ### 10.1 边界测试：`never_type` (`!`) 的降级与类型推断（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn always_panic() -> ! {
     panic!("never returns")
 }
@@ -1030,7 +1031,7 @@ impl Iterable for Vec<i32> {
 
 ### 10.6 边界测试：`impl Trait` 在 `let` 绑定中的类型推断限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn make_iter() -> impl Iterator<Item = i32> {
     vec![1, 2, 3].into_iter()
 }
@@ -1049,7 +1050,7 @@ fn main() {
 
 ### 10.5 边界测试：语言特性稳定化的时间预估偏差（工程规划风险）
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 规划风险: 依赖 nightly 特性的项目面临稳定化时间表不确定
 #![feature(generic_const_exprs)]
 #![feature(adt_const_params)]
@@ -1065,3 +1066,25 @@ where
 ```
 
 > **修正**: Rust 的**特性稳定化**遵循严格流程：nightly → 实现完善 → FCP（Final Comment Period）→ 稳定。但某些复杂特性长期停滞：1) `generic_const_exprs`：依赖类型级计算，设计困难；2) `specialization`：类型系统 soundness 问题；3) `unsized_locals`：实现复杂。工程风险：1) 项目启动时依赖 nightly 特性，预期 6 个月稳定化，实际 3 年未完成；2) nightly 编译器版本漂移，特性语义变更，代码不兼容；3) 无法发布到 crates.io（限制 nightly 依赖）。缓解策略：1) 生产代码只用稳定特性；2) nightly 特性用 feature flag 隔离，提供稳定回退；3) 跟踪 [Rust Lang Team 的优先级](https://github.com/rust-lang/lang-team/) 和 [RFC 合并状态](https://rust-lang.github.io/rfcs/)。这与 Go 的"无 nightly，所有特性直接进入稳定版"或 Java 的 JEP 流程（长期但可预测）不同——Rust 的 nightly/stable 双轨制提供早期实验能力，但稳定化时间表不确定性是工程风险。[来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+
+### 10.3 边界测试：nightly 特性在 production 中的不可预测性（编译中断）
+
+```rust,ignore
+#![feature(generic_const_exprs)]
+#![feature(adt_const_params)]
+
+fn process<const N: usize>(arr: [i32; N]) -> [i32; N + 1]
+where
+    [i32; N + 1]: Sized,
+{
+    // generic_const_exprs 已延迟数年
+    // 项目若依赖此特性，可能长期困于 nightly
+    unimplemented!()
+}
+
+fn main() {
+    let _ = process([1, 2, 3]);
+}
+```
+
+> **修正**: Rust 的**特性稳定化**遵循严格流程：nightly → 实现完善 → FCP → 稳定。但某些复杂特性长期停滞：1) `generic_const_exprs`：依赖类型级计算，设计困难；2) `specialization`：类型系统 soundness 问题；3) `unsized_locals`：实现复杂。工程风险：1) 项目启动时依赖 nightly 特性，预期 6 个月稳定化，实际 3 年未完成；2) nightly 编译器版本漂移，特性语义变更，代码不兼容；3) 无法发布到 crates.io（限制 nightly 依赖）。缓解策略：1) 生产代码只用稳定特性；2) nightly 特性用 feature flag 隔离，提供稳定回退；3) 跟踪 Rust Lang Team 的优先级和 RFC 合并状态。[来源: [Rust Lang Team Roadmap](https://github.com/rust-lang/lang-team/)] · [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]

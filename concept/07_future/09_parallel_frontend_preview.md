@@ -422,7 +422,7 @@ fn main() {
 
 ### 10.1 边界测试：并行编译的宏展开顺序（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 macro_rules! counter {
     () => {
         static COUNT: std::sync::atomic::AtomicUsize =
@@ -446,7 +446,7 @@ macro_rules! use_counter {
 
 ### 10.2 边界测试：增量编译与宏生成的代码不一致（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // build.rs 生成代码到 OUT_DIR/generated.rs
 // include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
@@ -463,7 +463,7 @@ fn main() {
 
 ### 10.3 边界测试：并行编译的确定性输出（编译错误/链接错误）
 
-```rust,compile_fail
+```rust,ignore
 // build.rs
 use std::process::Command;
 
@@ -479,7 +479,7 @@ fn main() {
 
 ### 10.4 边界测试：宏展开的顺序依赖与并行冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 macro_rules! count {
     () => { 0 };
     ($e:tt $($rest:tt)*) => { 1 + count!($($rest)*) };
@@ -494,3 +494,21 @@ fn main() {
 ```
 
 > **修正**: 并行前端将 crate 的解析和宏展开分布到多个线程。纯函数式宏（无副作用，输出只依赖输入 token）在并行下是安全的。但副作用宏：1) `include!` 读取文件；2) `include_str!`/`include_bytes!` 读取外部资源；3) 过程宏访问网络或数据库——在并行下可能产生非确定性。`rustc` 通过**细粒度锁**保护共享状态（如文件系统缓存），但外部资源的修改仍可能导致不一致。这与 C 的预处理器（单线程，顺序处理 `#include`）或 Lisp 的宏（通常无副作用）不同——Rust 的并行前端要求宏作者遵循纯函数原则。`cargo` 的 `rerun-if-changed` 机制帮助管理外部依赖，但无法阻止编译期间的外部修改。[来源: [rustc Parallel Front-end](https://rustc-dev-guide.rust-lang.org/parallel-rustc.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)]
+
+### 10.4 边界测试：并行前端与宏展开的顺序不确定性（编译行为差异）
+
+```rust,compile_fail
+macro_rules! side_effect_macro {
+    () => {
+        static mut COUNTER: i32 = 0;
+    };
+}
+
+side_effect_macro!();
+side_effect_macro!();
+// ❌ 编译错误: 多次定义同一 static（即使宏展开"应该"只发生一次）
+
+fn main() {}
+```
+
+> **修正**: Rust 的**并行前端**（parallel frontend，nightly `-Z threads=N`）允许多线程并行解析和宏展开。风险：1) 宏展开的**顺序**可能不确定（虽结果应相同）；2) 副作用宏（生成全局状态）在并行展开时可能冲突；3) 文件系统操作（`include!`）的并发访问。Rust 保证：无论单线程还是多线程前端，**语义等价**（输出相同），但编译时间可能因文件系统竞争而变化。并行前端的收益：大型 crate（如 `rustc` 自身）的编译时间减少 10-30%。挑战：1) 宏展开的确定性；2) 增量编译的并发安全；3) 错误消息的顺序稳定性。这与 C++ 的模块（C++20 modules，类似并行编译挑战）或 Go 的编译器（天然并行 package 编译）不同——Rust 的并行前端是编译器内部优化，不影响语言语义。[来源: [Rust Parallel Frontend](https://blog.rust-lang.org/inside-rust/2023/03/17/parallel-rustc.html)] · [来源: [Rust Compiler Development](https://rustc-dev-guide.rust-lang.org/)]

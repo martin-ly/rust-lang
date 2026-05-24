@@ -880,3 +880,18 @@ async fn receive(socket: &UdpSocket) {
 ```
 
 > **修正**: UDP 数据报的最大大小（MTU）通常为 1500 字节（以太网）或 65507 字节（IPv4 理论上限）。缓冲区小于数据报时，`recv_from` 截断数据，返回实际接收大小，多余数据丢失。TCP 流式传输无此问题（`read` 返回可用数据，剩余留在内核缓冲区）。网络编程中的缓冲区设计：1) UDP 应使用足够大的缓冲区（`[0u8; 65535]`）；2) TCP 可使用较小缓冲区（流式，多次 `read`）；3) 零拷贝接收（`tokio::net::TcpStream::try_read_buf` 使用 `Vec<u8>` 避免栈拷贝）。这与 C 的 `recvfrom`（同样截断，返回 `MSG_TRUNC` 标志）或 Go 的 `ReadFromUDP`（同样截断）行为相同——Rust 不自动处理缓冲区大小，需开发者根据协议选择。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Unix Network Programming](https://unpbook.com/)]
+
+### 10.3 边界测试：`TcpStream` 的 `set_nonblocking` 与 async 混用（运行时错误）
+
+```rust,ignore
+use std::net::TcpStream;
+
+fn main() {
+    let stream = TcpStream::connect("127.0.0.1:8080").unwrap();
+    // ❌ 运行时错误: 在 tokio/async-std 中将 std::net::TcpStream 设为非阻塞
+    // 并与 async runtime 混用，导致不可预测的 polling 行为
+    stream.set_nonblocking(true).unwrap();
+}
+```
+
+> **修正**: `std::net::TcpStream` 是**同步** API，与 async runtime（tokio、async-std）**不兼容**。异步网络编程应使用：1) `tokio::net::TcpStream` — tokio 的原生异步 TCP；2) `async_std::net::TcpStream` — async-std 的实现；3) `futures::io` 的抽象。混用同步和异步代码：1) `tokio::task::spawn_blocking` — 在独立线程池中运行同步阻塞代码；2) `async_compat` crate — 包装同步 `std::net` 为 async 兼容。`std::net` 的 `set_nonblocking(true)` 只是将阻塞调用改为返回 `WouldBlock` 错误，不解决与 async runtime 的事件循环集成问题。这与 Go 的 `net` 包（自动在 goroutine 中调度，无 sync/async 区分）或 Python 的 `asyncio`（需显式使用 `asyncio.open_connection`，不能用同步 `socket`）不同——Rust 严格区分同步和异步 API。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [async-std](https://docs.rs/async-std/)]

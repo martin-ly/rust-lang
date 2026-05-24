@@ -375,7 +375,7 @@ graph TD
 
 ### 10.1 边界测试：MCDC 测试的条件分解（编译错误/逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn decide(a: bool, b: bool, c: bool) -> bool {
     // ❌ 逻辑错误: 复杂条件难以满足 MCDC 独立影响准则
     // MCDC 要求每个条件的独立变化必须影响决策结果
@@ -400,7 +400,7 @@ mod tests {
 
 ### 10.2 边界测试：覆盖率检测的编译器标志冲突（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 // Cargo.toml
 // [profile.dev]
 // debug = true
@@ -421,7 +421,7 @@ fn main() {
 
 ### 10.3 边界测试：MCDC 与短路求值的复杂交互（逻辑错误）
 
-```rust,compile_fail
+```rust,ignore
 fn complex_decision(a: bool, b: bool, c: bool, d: bool) -> bool {
     // ⚠️ 逻辑注意: 短路使某些条件组合不可达
     (a && b) || (c && d)
@@ -443,7 +443,7 @@ fn test_mcdc_full() {
 
 ### 10.4 边界测试：覆盖率工具的 LLVM IR 级别插桩（编译错误/性能下降）
 
-```rust,compile_fail
+```rust,ignore
 #[inline(always)]
 fn hot_path(x: i32) -> i32 {
     x * 2

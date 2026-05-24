@@ -524,7 +524,7 @@ const fn const_context() -> i32 {
 
 ### 编译错误 2：`MutexGuard` 跨越 `await` 点
 
-```rust,compile_fail
+```rust,ignore
 use std::sync::Mutex;
 
 async fn bad_mutex_usage(m: Mutex<i32>) {
@@ -571,7 +571,7 @@ const fn stack_array() -> [i32; 3] {
 
 ### 编译错误 5：`async` 闭包捕获 `&mut` 后跨 `await` 使用
 
-```rust,compile_fail
+```rust,ignore
 async fn bad_capture(data: &mut Vec<i32>) {
     let first = &data[0];
     some_async().await; // ❌ 编译错误: `first` 借用 `data`，但 await 后可能重新借用

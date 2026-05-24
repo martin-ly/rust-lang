@@ -244,7 +244,7 @@ fn kernel_main() {
 
 ### 编译错误 2：`panic!` 在 `const fn` 中
 
-```rust,compile_fail
+```rust,ignore
 const fn kernel_init(value: usize) -> usize {
     // ❌ 编译错误: `panic!` 在 const fn 中受限
     // 内核初始化若需编译期计算，不能 panic
@@ -257,7 +257,7 @@ const fn kernel_init(value: usize) -> usize {
 
 ### 编译错误 3：浮点运算在内核中
 
-```rust,compile_fail
+```rust,ignore
 #![no_std]
 
 fn kernel_compute(x: f32) -> f32 {

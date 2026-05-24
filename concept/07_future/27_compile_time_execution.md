@@ -41,6 +41,7 @@
     - [10.2 边界测试：过程宏的 TokenStream 解析错误（编译错误）](#102-边界测试过程宏的-tokenstream-解析错误编译错误)
     - [10.3 边界测试：`const fn` 中的浮点数限制（编译错误）](#103-边界测试const-fn-中的浮点数限制编译错误)
     - [10.4 边界测试：编译期堆分配的 `const Heap` 展望（编译错误）](#104-边界测试编译期堆分配的-const-heap-展望编译错误)
+    - [10.3 边界测试：`const fn` 中的浮点运算精度与确定性（编译错误/运行时差异）](#103-边界测试const-fn-中的浮点运算精度与确定性编译错误运行时差异)
 
 ---
 
@@ -702,7 +703,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 
 ### 10.3 边界测试：`const fn` 中的浮点数限制（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 const fn compute_area(r: f64) -> f64 {
     // ❌ 编译错误: const fn 中浮点数操作受限
     // 旧版 Rust 禁止浮点数运算，新版允许但仍有约束
@@ -730,3 +731,20 @@ const fn build_map() -> std::collections::HashMap<i32, i32> {
 ```
 
 > **修正**: `const fn` 当前禁止堆分配（`Box::new`、`Vec::new`、`HashMap::new`），因为编译期的内存管理复杂：1) 分配的内存在编译后如何释放？2) 若 `const` 值嵌入二进制，堆分配的数据需序列化为静态数据；3) 循环引用的 `const` 值如何表示？`const Heap` RFC 提议允许编译期堆分配，但将分配的数据"冻结"为静态只读数据（类似 `let s = const { String::from("hello") }` 在编译期创建 `String`，运行期作为 `&'static str` 使用）。这与 C++ 的 `constexpr` new（C++20，允许编译期分配，但对象需在编译期销毁）或 Zig 的 `comptime` 分配器（编译期分配，结果序列化到二进制）类似——Rust 的 `const Heap` 是语言演进的重要方向，使编译期元编程能力接近 Zig 和 C++20。[来源: [Rust Const Heap RFC](https://github.com/rust-lang/rfcs/)] · [来源: [Rust Internals Forum](https://internals.rust-lang.org/)]
+
+### 10.3 边界测试：`const fn` 中的浮点运算精度与确定性（编译错误/运行时差异）
+
+```rust,ignore
+const fn compute_area(radius: f64) -> f64 {
+    // ❌ 编译错误: const fn 中某些数学函数不可用
+    // std::f64::consts::PI 可用，但 sin/cos/sqrt 不是 const fn
+    radius * radius * std::f64::consts::PI
+}
+
+fn main() {
+    const AREA: f64 = compute_area(1.0);
+    println!("{}", AREA);
+}
+```
+
+> **修正**: `const fn` 的浮点运算：1) 四则运算和常量（`PI`、`E`）可用；2) `sin`、`cos`、`sqrt`、`pow` 等非 `const fn`（需运行时计算或查表）；3) 浮点运算在编译期和运行期的结果**可能不同**（编译期使用软件实现，运行期使用 FPU，舍入模式可能不同）。确定性要求：安全关键系统需确保编译期和运行期浮点结果一致。未来方向：1) `const fn` 扩展更多数学函数；2) 编译期浮点模拟与运行期硬件行为统一；3) `fixed-point` 算术替代（嵌入式常见）。这与 C++ 的 `constexpr`（C++23 支持 `std::sqrt` 等）或 Ada 的浮点模型（严格定义舍入行为）不同——Rust 的 const 浮点运算保守但逐步扩展。[来源: [Rust Reference — const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)] · [来源: [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)]

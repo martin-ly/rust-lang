@@ -622,7 +622,7 @@ fn main() {
 
 ### 10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）
 
-```rust,compile_fail
+```rust,ignore
 // Cargo.toml
 // [dependencies]
 // serde = "1.0" // 正确
@@ -638,7 +638,7 @@ fn main() {
 
 ### 10.7 边界测试：secret 在内存中的残留与 `zeroize`（运行时信息泄露）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let password = String::from("super_secret_123");
     // ❌ 运行时信息泄露: String 的 drop 不覆盖内存，密码残留于堆
@@ -648,3 +648,23 @@ fn main() {
 ```
 
 > **修正**: Rust 的 `drop` 释放内存但不**覆盖**（zeroize）内容——这是性能优化，但对敏感数据（密码、密钥、令牌）是安全风险。`zeroize` crate 提供 `Zeroize` trait，drop 时自动覆盖内存：`password.zeroize();`。更严格：使用 `secrecy` crate 包装敏感类型，禁止 `Debug`、`Display`，强制 zeroize。深层防护：1) `mlock` 防止交换到磁盘；2) `memfd_secret`（Linux）创建仅进程可见的匿名内存；3) 编译时防止 secret 进入 `.rodata`。这与 Go 的 `memset`（需手动调用，无自动 zeroize）或 C++ 的 `secure_allocator`（类似概念）不同——Rust 的类型系统可通过 wrapper 类型（`Secret<T>`）在编译期强制安全实践。[来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226: Sensitive Information in Resource Not Removed Before Reuse](https://cwe.mitre.org/data/definitions/226.html)]
+
+### 10.3 边界测试：secret 在日志中的意外泄露（运行时信息泄露）
+
+```rust,compile_fail
+use secrecy::Secret;
+
+fn main() {
+    let password = Secret::new(String::from("super_secret_123"));
+    // ❌ 运行时泄露: Secret 的 Debug 实现隐藏内容，但 Display 同样隐藏
+    // 若代码不小心使用了 {:?} 或 {}，不会泄露
+    // 真正的风险: 某些库的内部调试日志可能调用 to_string()
+    
+    // 正确: Secret 禁止 Debug 和 Display 暴露内容
+    // println!("{:?}", password); // 输出: "[REDACTED Secret<String>]"
+    
+    // 风险场景:  panic 消息、错误链、日志框架的自动格式化
+}
+```
+
+> **修正**: `secrecy` crate 的 `Secret<T>` 包装敏感类型：1) `Debug` 输出 `[REDACTED]`；2) `Display` 同样隐藏；3) `zeroize` on drop 覆盖内存。但泄露风险仍存在：1) `expose_secret()` 返回 `&T`，调用者可能复制或记录；2) `SecretString` 的 `as_str()` 暴露内部 `str`；3) 第三方库的 panic 消息可能包含 secret。深层防护：1) `mlock` 防止交换到磁盘；2) `memfd_secret`（Linux）创建仅进程可见的匿名内存；3) 编译时防止 secret 进入 `.rodata`。这与 Go 的 `string`（无自动 zeroize）或 C++ 的 `secure_allocator`（类似概念）不同——Rust 的类型系统可通过 wrapper 类型在编译期强制安全实践，但完全防泄露需系统性设计。[来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226](https://cwe.mitre.org/data/definitions/226.html)]

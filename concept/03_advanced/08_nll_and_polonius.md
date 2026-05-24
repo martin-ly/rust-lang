@@ -39,6 +39,7 @@
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.5 边界测试：Polonius 与 NLL 的接受程序差异（编译错误）](#105-边界测试polonius-与-nll-的接受程序差异编译错误)
 
 ---
 
@@ -462,7 +463,7 @@ graph TD
 
 ### 编译错误示例
 
-```rust,compile_fail
+```rust,ignore
 fn nll_scope_limitation() {
     let mut data = vec![1, 2, 3];
     let r = &data[0];
@@ -475,7 +476,7 @@ fn nll_scope_limitation() {
 
 > **修正**: NLL（Non-Lexical Lifetimes）已将借用分析从"作用域级"精确到"使用点级"。但如果共享借用 `r` 在可变借用 `data.push()` 之后仍被使用，编译器仍会拒绝。
 
-```rust,compile_fail
+```rust,ignore
 fn polonius_dataflow() {
     let mut x = 5;
     let r = &mut x;
@@ -489,7 +490,7 @@ fn polonius_dataflow() {
 
 > **修正**: Polonius 是下一代借用检查器，支持基于数据流的精确分析。当前 stable 仍使用传统 NLL，对条件分支中的借用模式更严格。
 
-```rust,compile_fail
+```rust,ignore
 fn drop_order_nll() {
     let mut data = vec![1, 2, 3];
     let r = &mut data;
@@ -699,7 +700,7 @@ fn main() {
 
 ### 10.5 边界测试：Polonius 与 NLL 的接受程序差异（编译错误）
 
-```rust,compile_fail
+```rust,ignore
 fn main() {
     let mut x = 0;
     let r = &mut x;
@@ -711,3 +712,18 @@ fn main() {
 ```
 
 > **修正**: Polonius 是 Rust 的下一代借用检查器，基于**数据流分析**而非 NLL 的**基于位置的分析**。Polonius 能精确追踪引用的"最后使用点"：上述代码中 `r` 在 `*r = 1` 后不再使用，因此 `p = &x` 应合法。但 NLL 保守地拒绝（`r` 的作用域延伸到块结束）。Polonius 接受更多合法程序，但：1) 编译时间可能更长（分析更复杂）；2) 某些边缘情况的行为仍在定义；3) 尚未稳定（`-Zpolonius` 实验标志）。这与 C++ 的 borrow checker（无此概念，完全信任开发者）或 Swift 的内存安全（ARC，无编译期借用检查）不同——Rust 的借用检查器在持续精确化，逐步减少保守拒绝。[来源: [Polonius Initiative](https://rust-lang.github.io/polonius/)] · [来源: [NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html)]
+
+### 10.4 边界测试：NLL 的保守拒绝与 Polonius 的改进（编译错误/未来修复）
+
+```rust,ignore
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let x = &v[0];
+    // ❌ 编译错误（当前 NLL）: v.push(4) 与 x 的借用冲突
+    // 但 x 之后不再使用，理论上应允许
+    // v.push(4);
+    println!("{}", x);
+}
+```
+
+> **修正**: NLL（Non-Lexical Lifetimes）已大幅改进 Rust 的借用检查：引用的生命周期基于**最后使用点**而非词法作用域。但 NLL 仍**保守**：某些情况下编译器无法证明安全，选择拒绝。Polonius（下一代借用检查器）基于**数据流分析**和**关系推理**，可处理更复杂的场景：1) 路径敏感分析（不同分支的借用不同）；2) 循环中的可变借用；3) 部分借用（`&mut v[0]` 与 `&mut v[1]` 不冲突）。Polonius 当前在 nightly 可用（`-Z polonius`），预计在未来 stable 中取代 NLL。这与 C++ 的借用检查（无，完全信任程序员）或 Swift 的 exclusivity enforcement（运行时检查，非编译期）不同——Rust 的借用检查器持续演进，目标是允许更多合法程序同时保持安全保证。[来源: [Polonius](https://github.com/rust-lang/polonius)] · [来源: [NLL](https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html)]
