@@ -70,6 +70,8 @@
     - [8.4 边界测试：生命周期在闭包中的捕获（编译错误）](#84-边界测试生命周期在闭包中的捕获编译错误)
     - [8.5 边界测试：方法签名中 self 引用的生命周期省略冲突（编译错误）](#85-边界测试方法签名中-self-引用的生命周期省略冲突编译错误)
     - [8.3 边界测试：生命周期与泛型冲突（编译错误）](#83-边界测试生命周期与泛型冲突编译错误)
+    - [8.4 边界测试：`'static` 误用（编译错误）](#84-边界测试static-误用编译错误)
+    - [8.5 边界测试：生命周期省略规则在复杂签名中失效（编译错误）](#85-边界测试生命周期省略规则在复杂签名中失效编译错误)
   - [九、认知路径（Cognitive Path）](#九认知路径cognitive-path)
 
 ## 一、权威定义（Definition）
@@ -887,6 +889,41 @@ fn main() {
 ```
 
 > **修正**: 泛型参数的生命周期约束（`T: 'a`）确保被引用数据的生命周期覆盖引用的使用范围。
+
+### 8.4 边界测试：`'static` 误用（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    // ❌ 编译错误: `s` 的生命周期不是 'static
+    let r: &'static str = &s; // E0597: borrowed value does not live long enough
+}
+
+// 正确: 字符串字面量是 'static
+fn fixed() {
+    let r: &'static str = "hello"; // ✅ 字符串字面量具有 'static 生命周期
+    println!("{}", r);
+}
+```
+
+> **修正**: 只有程序整个生命周期存活的数据（如字符串字面量、全局静态变量、`Box::leak` 的堆内存）才具有 `'static` 生命周期。局部变量不能强制转换为 `'static`。`'static` 不等同于"静态分配"，而是"存活到程序结束"。
+
+### 8.5 边界测试：生命周期省略规则在复杂签名中失效（编译错误）
+
+```rust,compile_fail
+fn complex_lifetime(a: &str, b: &str, c: &str) -> (&str, &str) {
+    // ❌ 编译错误: missing lifetime specifier
+    // 多个输入引用时，编译器无法推断返回元组中各元素的生命周期
+    (a, b)
+}
+
+// 正确: 显式标注生命周期
+fn complex_lifetime_fixed<'a, 'b>(a: &'a str, b: &'b str, _c: &str) -> (&'a str, &'b str) {
+    (a, b) // ✅ 返回引用的生命周期与对应输入绑定
+}
+```
+
+> **修正**: 生命周期省略规则仅适用于简单情况（单输入引用 → 单输出引用）。当函数签名涉及多个输入引用和多个输出引用时，编译器无法自动推断生命周期关系，必须显式标注。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 

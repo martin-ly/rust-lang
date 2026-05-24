@@ -1003,6 +1003,53 @@ const fn const_context() {
 
 > **验证映射**: `const` 效果限制了函数可执行的操作集合。这与 Verus 的 `spec`/`exec` 分离、Creusot 的 ghost 投影共享同一哲学——编译期/逻辑期/运行时的严格分层。
 
+### 编译错误 4：生命周期不匹配导致悬垂引用
+
+```rust,compile_fail
+fn dangling_reference() -> &i32 {
+    let x = 42;
+    // ❌ 编译错误: cannot return reference to local variable `x`
+    // 验证工具（Prusti/Creusot）会将此映射为生命周期谓词违反
+    &x
+}
+
+// 正确: 返回所有权或使用静态生命周期
+fn owned_value() -> i32 {
+    let x = 42;
+    x // ✅ 返回所有权，无生命周期问题
+}
+```
+
+> **验证映射**: 悬垂引用是 Rust 编译器通过借用检查器阻止的核心错误类。在形式化验证中，这对应于分离逻辑中的 "points-to" 谓词失效——引用的内存位置在解引用时已不再有效。
+
+### 编译错误 5：`move` 闭包捕获引用后外部继续使用
+
+```rust,compile_fail
+fn main() {
+    let mut s = String::from("hello");
+    let r = &mut s;
+    // ❌ 编译错误: cannot borrow `s` as mutable more than once
+    let f = move || {
+        r.push_str(" world");
+    };
+    s.push_str("!"); // 外部继续使用 s
+    f();
+}
+
+// 正确: 将所有权移入闭包
+fn fixed() {
+    let mut s = String::from("hello");
+    let mut f = move || {
+        s.push_str(" world");
+        s
+    };
+    let s = f(); // ✅ 所有权完全转移
+    println!("{}", s);
+}
+```
+
+> **验证映射**: 闭包捕获分析是 Rust 类型系统的复杂部分。形式化工具（如 RustBelt 的 closure 语义）需要精确建模环境捕获（by-reference / by-value）与借用规则的一致性。编译器的拒绝对应于资源谓词 `own(τ)` 与 `shr(κ, ℓ)` 的不一致分配。
+
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]; 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [来源: Formal Methods Deep Dive]; 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [来源: Web Authority Alignment Sprint]

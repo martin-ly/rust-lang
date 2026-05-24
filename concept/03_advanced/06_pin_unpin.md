@@ -35,6 +35,8 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
+    - [4.4 边界测试：`Pin` 固定栈值后离开作用域（编译错误）](#44-边界测试pin-固定栈值后离开作用域编译错误)
+    - [4.5 边界测试：手动实现 `Unpin` 破坏自引用保证（unsafe 逻辑错误）](#45-边界测试手动实现-unpin-破坏自引用保证unsafe-逻辑错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -471,6 +473,61 @@ fn pin_field_access<T>(pinned: Pin<&Wrapper<T>>) -> &T {
 ```
 
 > **修正**: 结构体字段投影需要 `unsafe` 或 `pin-project` crate。直接访问 `pinned.0` 会绕过 Pin 的地址稳定性保证。
+
+### 4.4 边界测试：`Pin` 固定栈值后离开作用域（编译错误）
+
+```rust,compile_fail
+use std::pin::Pin;
+
+fn pin_stack() -> Pin<&mut i32> {
+    let mut x = 42;
+    // ❌ 编译错误: cannot return reference to local variable `x`
+    // Pin<&mut T> 本质上是引用，不能返回指向局部变量的引用
+    Pin::new(&mut x)
+}
+
+// 正确: 固定到堆上
+fn pin_heap() -> Pin<Box<i32>> {
+    Box::pin(42) // ✅ Pin<Box<T>> 拥有堆内存
+}
+```
+
+> **修正**: `Pin<&mut T>` 是引用，必须保证目标内存的存活。固定栈值后返回 `Pin<&mut T>` 会导致悬垂引用。正确做法是将值固定到堆上（`Box::pin`）或使用 `std::pin::pin!` 宏（Rust 1.68+）在局部作用域内固定。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 4.5 边界测试：手动实现 `Unpin` 破坏自引用保证（unsafe 逻辑错误）
+
+```rust
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfRef {
+    data: String,
+    ptr: *const String, // 指向 data
+    _pin: PhantomPinned,
+}
+
+// ⚠️ 逻辑错误: 为 !Unpin 类型手动实现 Unpin
+unsafe impl Unpin for SelfRef {}
+
+fn main() {
+    let mut s = SelfRef {
+        data: String::from("hello"),
+        ptr: std::ptr::null(),
+        _pin: PhantomPinned,
+    };
+    s.ptr = &s.data; // 自引用
+    let mut pinned = Box::pin(s);
+    // 由于 Unpin，可以安全移动
+    let moved = std::mem::replace(&mut *pinned, SelfRef {
+        data: String::from("new"),
+        ptr: std::ptr::null(),
+        _pin: PhantomPinned,
+    });
+    // s.ptr 现在悬垂！运行时 UB
+}
+```
+
+> **修正**: 为包含自引用的类型手动实现 `Unpin` 是极其危险的。`Unpin` 是一个 "auto trait"，表示"移动是安全的"。手动实现 `Unpin` 等于告诉编译器"此类型即使被移动也是安全的"——如果类型实际包含自引用，移动后指针将悬垂，导致未定义行为。应始终让编译器自动推导 `Unpin`。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
 

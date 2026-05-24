@@ -795,6 +795,8 @@ jobs:
     - [11.2 边界测试：Send/Sync 自动推导失败（编译错误）](#112-边界测试sendsync-自动推导失败编译错误)
     - [11.3 边界测试：drop 后使用（编译错误）](#113-边界测试drop-后使用编译错误)
     - [11.4 边界测试：共享借用期间可变借用（编译错误）](#114-边界测试共享借用期间可变借用编译错误)
+    - [11.5 边界测试：形式化谓词与 `Cell<T>` 的冲突（编译错误）](#115-边界测试形式化谓词与-cellt-的冲突编译错误)
+    - [11.6 边界测试：`mem::forget` 与所有权谓词泄漏（编译错误）](#116-边界测试memforget-与所有权谓词泄漏编译错误)
 
 ## 八、形式化验证工具链映射
 >
@@ -1255,3 +1257,46 @@ fn main() {
 ```
 
 > **修正**: RustBelt 的所有权谓词 `shr(κ, ℓ)` 表示对位置 ℓ 的共享权限。只要存在共享权限，就不能创建独占权限 `own(τ)`。编译器的借用检查器精确实现了这一形式化保证。
+
+### 11.5 边界测试：形式化谓词与 `Cell<T>` 的冲突（编译错误）
+
+```rust,compile_fail
+use std::cell::Cell;
+
+fn main() {
+    let c = Cell::new(42);
+    let r = &c;
+    // ❌ 编译错误: cannot borrow `c` as mutable because it is also borrowed as immutable
+    let r_mut = &mut c; // E0502
+    println!("{}", r.get());
+}
+
+// 正确: Cell 通过 UnsafeCell 提供内部可变性
+fn cell_correct() {
+    let c = Cell::new(42);
+    c.set(100); // ✅ Cell::set(&self, val) 通过 UnsafeCell 实现
+    println!("{}", c.get());
+}
+```
+
+> **修正**: `Cell<T>` 通过 `UnsafeCell` 提供内部可变性，其 `set` 方法接受 `&self`。RustBelt 为 `UnsafeCell` 赋予特殊谓词 `na(τ, ℓ)`（non-atomic），允许从共享引用进行可变访问，但这排除了别名读取保证。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)]
+
+### 11.6 边界测试：`mem::forget` 与所有权谓词泄漏（编译错误）
+
+```rust,compile_fail
+use std::mem;
+
+struct Guard;
+impl Drop for Guard {
+    fn drop(&mut self) { println!("dropped"); }
+}
+
+fn main() {
+    let g = Guard;
+    mem::forget(g); // 消耗所有权，不执行 Drop
+    // ❌ 编译错误: value used here after move
+    let _ = g;
+}
+```
+
+> **修正**: `mem::forget` 消耗所有权但不执行 `Drop`，导致资源泄漏。在 RustBelt 中，`own(τ)` 谓词包含释放义务；`forget` 通过将释放义务"遗忘"来形式化资源泄漏。Rust 2021 起 `mem::forget` 为安全函数，因为资源泄漏不被视为 unsafe。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

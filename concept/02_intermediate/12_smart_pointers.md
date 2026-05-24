@@ -33,6 +33,8 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
+    - [4.4 边界测试：`Rc` 循环引用导致内存泄漏（逻辑错误）](#44-边界测试rc-循环引用导致内存泄漏逻辑错误)
+    - [4.5 边界测试：`Box::leak` 后尝试回收（编译错误）](#45-边界测试boxleak-后尝试回收编译错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -515,6 +517,59 @@ fn pin_mut_after_pin() {
 ```
 
 > **修正**: `Pin<&mut T>` 的设计目的是防止自引用类型在移动后失效。一旦值被 Pin 固定，除非 `T: Unpin`，否则无法获取可变引用。
+
+### 4.4 边界测试：`Rc` 循环引用导致内存泄漏（逻辑错误）
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+struct Node {
+    next: RefCell<Option<Rc<Node>>>,
+}
+
+fn main() {
+    let a = Rc::new(Node { next: RefCell::new(None) });
+    let b = Rc::new(Node { next: RefCell::new(Some(Rc::clone(&a))) });
+    // ⚠️ 逻辑错误: 循环引用导致内存泄漏
+    *a.next.borrow_mut() = Some(Rc::clone(&b)); // a ↔ b 互相引用
+    // Rc 引用计数永远不会归零，Node 永远不会被释放
+}
+
+// 正确: 使用 Weak 打破循环
+use std::rc::Weak;
+
+struct NodeFixed {
+    next: RefCell<Option<Weak<NodeFixed>>>,
+}
+
+fn fixed() {
+    let a = Rc::new(NodeFixed { next: RefCell::new(None) });
+    let b = Rc::new(NodeFixed { next: RefCell::new(Some(Rc::downgrade(&a))) });
+    *a.next.borrow_mut() = Some(Rc::downgrade(&b)); // ✅ Weak 不增加强引用计数
+}
+```
+
+> **修正**: `Rc` 的强引用循环会导致内存泄漏（引用计数永不为零）。使用 `Weak<T>`（弱引用）打破循环——弱引用不阻止对象被释放。这是 Rust 显式内存管理的代价：编译器不检测循环引用，需开发者自行设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+### 4.5 边界测试：`Box::leak` 后尝试回收（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let b = Box::new(42);
+    let r: &'static i32 = Box::leak(b); // 泄漏 Box，获得 'static 引用
+    // ❌ 编译错误: value used here after move
+    println!("{}", b); // b 已被 leak 消耗
+}
+
+// 正确: leak 后只能通过返回的引用访问
+fn fixed() {
+    let r: &'static i32 = Box::leak(Box::new(42));
+    println!("{}", r); // ✅ 通过 'static 引用访问
+}
+```
+
+> **修正**: `Box::leak` 消耗 `Box` 的所有权并返回 `&'static T`。`Box` 本身不再可用。此操作将堆内存转为静态引用，内存永远不会被释放（除非程序结束）。仅在确实需要 `'static` 生命周期时使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ---
 

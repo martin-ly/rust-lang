@@ -37,6 +37,8 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
+    - [4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）](#44-边界测试scopedthread-中引用逃逸编译错误)
+    - [4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）](#45-边界测试condvar-虚假唤醒未处理逻辑错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -545,6 +547,84 @@ fn thread_spawn_lifetime() {
 ```
 
 > **修正**: `thread::spawn` 要求闭包满足 `'static` 生命周期。引用栈数据必须通过 `move` 闭包转移所有权，或使用 `crossbeam::scope` 进行有界线程。
+
+### 4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）
+
+```rust,compile_fail
+use std::thread;
+
+fn scoped_borrow() {
+    let mut data = vec![1, 2, 3];
+    // ❌ 编译错误: `data` 的生命周期不够长
+    // thread::scope 要求闭包在 scope 结束前完成
+    let handle = thread::spawn(|| {
+        data.push(4); // 闭包捕获 &mut data
+    });
+    // handle 可能在 scope 外被 join
+    // 标准库 thread::spawn 要求 'static
+}
+
+// 正确: 使用 crossbeam::scope 或 std::thread::scope (Rust 1.63+)
+fn scoped_fixed() {
+    let mut data = vec![1, 2, 3];
+    std::thread::scope(|s| {
+        s.spawn(|| {
+            data.push(4); // ✅ scope 保证线程在作用域结束前 join
+        });
+    }); // 所有子线程在此 join
+    println!("{:?}", data);
+}
+```
+
+> **修正**: `std::thread::scope`（Rust 1.63+）允许创建非 `'static` 线程，保证所有子线程在 scope 结束时 join。这通过编译期生命周期检查实现——闭包借用栈数据的生命周期与 scope 绑定。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）
+
+```rust
+use std::sync::{Arc, Mutex, Condvar};
+use std::thread;
+
+fn main() {
+    let pair = Arc::new((Mutex::new(false), Condvar::new()));
+    let pair2 = Arc::clone(&pair);
+
+    thread::spawn(move || {
+        let (lock, cvar) = &*pair2;
+        let mut started = lock.lock().unwrap();
+        *started = true;
+        cvar.notify_one();
+    });
+
+    let (lock, cvar) = &*pair;
+    let mut started = lock.lock().unwrap();
+    // ⚠️ 逻辑错误: 直接用 if 检查条件
+    if !*started {
+        let _ = cvar.wait(started).unwrap(); // 虚假唤醒后不会重新检查
+    }
+    // 可能因虚假唤醒而提前退出
+}
+
+// 正确: 始终使用 while 循环
+fn fixed() {
+    let pair = Arc::new((Mutex::new(false), Condvar::new()));
+    let pair2 = Arc::clone(&pair);
+
+    thread::spawn(move || {
+        let (lock, cvar) = &*pair2;
+        let mut started = lock.lock().unwrap();
+        *started = true;
+        cvar.notify_one();
+    });
+
+    let (lock, cvar) = &*pair;
+    let mut started = lock.lock().unwrap();
+    while !*started { // ✅ 虚假唤醒后重新检查条件
+        started = cvar.wait(started).unwrap();
+    }
+}
+```
+
+> **修正**: `Condvar::wait` 可能因"虚假唤醒"（spurious wakeup）而在未被 `notify` 时返回。必须始终使用 `while` 循环而非 `if` 检查条件，确保在虚假唤醒后重新验证条件。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ---
 

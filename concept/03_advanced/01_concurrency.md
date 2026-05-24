@@ -102,6 +102,9 @@
     - [12.1 背压的本质](#121-背压的本质)
     - [12.2 背压与并发原语的映射](#122-背压与并发原语的映射)
     - [12.3 无背压的风险](#123-无背压的风险)
+  - [十三、边界测试：并发规则的编译错误](#十三边界测试并发规则的编译错误)
+    - [13.1 边界测试：`Send` 不满足时跨线程移动（编译错误）](#131-边界测试send-不满足时跨线程移动编译错误)
+    - [13.2 边界测试：死锁——嵌套锁顺序不一致（运行时错误 / 逻辑错误）](#132-边界测试死锁嵌套锁顺序不一致运行时错误--逻辑错误)
 
 ## 零、认知路径（Cognitive Path）
 >
@@ -1514,3 +1517,64 @@ let (tx, mut rx) = mpsc::unbounded_channel::<i32>();
 > **相关判定树**: [并发判定树](../00_meta/concept_definition_decision_forest.md#七并发判定树)
 > **相关 FTA**: [并发安全失效树](../00_meta/fault_tree_analysis_collection.md#三并发安全失效树)
 > **相关概念**: [流处理语义](./20_stream_processing_semantics.md) · [Async/Await](./02_async.md)
+
+## 十三、边界测试：并发规则的编译错误
+
+### 13.1 边界测试：`Send` 不满足时跨线程移动（编译错误）
+
+```rust,compile_fail
+use std::sync::Mutex;
+use std::rc::Rc;
+
+fn main() {
+    let data = Rc::new(Mutex::new(42));
+    // ❌ 编译错误: `Rc<Mutex<i32>>` cannot be sent between threads safely
+    // Rc<T> 不是 Send，即使内部 Mutex 是 Send + Sync
+    std::thread::spawn(move || {
+        let mut guard = data.lock().unwrap();
+        *guard += 1;
+    }).join().unwrap();
+}
+
+// 正确: 使用 Arc<T> 替代 Rc<T>
+fn fixed() {
+    use std::sync::Arc;
+    let data = Arc::new(Mutex::new(42));
+    std::thread::spawn(move || {
+        let mut guard = data.lock().unwrap();
+        *guard += 1; // ✅ Arc<Mutex<T>> 是 Send + Sync
+    }).join().unwrap();
+}
+```
+
+> **修正**: `Rc<T>` 使用非原子引用计数，不能跨线程。`Arc<T>` 使用原子操作，是 `Send + Sync`（当 `T: Send + Sync`）。即使 `T` 是线程安全的（如 `Mutex<i32>`），包装器 `Rc` 也会破坏 `Send` 保证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+
+### 13.2 边界测试：死锁——嵌套锁顺序不一致（运行时错误 / 逻辑错误）
+
+```rust
+use std::sync::Mutex;
+
+fn main() {
+    let a = Mutex::new(1);
+    let b = Mutex::new(2);
+
+    // 线程 1: 先锁 a，再锁 b
+    let _ga = a.lock().unwrap();
+    // ⚠️ 死锁风险: 若另一个线程先锁 b 再锁 a，可能循环等待
+    let _gb = b.lock().unwrap();
+    // 在单线程示例中不会死锁，但展示了不一致的锁顺序模式
+}
+
+// 正确: 全局一致的锁顺序
+fn correct_order() {
+    let a = Mutex::new(1);
+    let b = Mutex::new(2);
+
+    // 始终按固定顺序获取锁：先 a 后 b
+    let _ga = a.lock().unwrap();
+    let _gb = b.lock().unwrap();
+    // 所有线程遵循相同顺序 → 避免循环等待
+}
+```
+
+> **修正**: 死锁的四个必要条件之一是"循环等待"。通过强制全局一致的锁获取顺序（如按内存地址排序），可以消除循环等待条件，从而预防死锁。Rust 的编译器无法检测运行时死锁，这是并发安全的静态分析边界。[来源: [Operating Systems: Three Easy Pieces](http://pages.cs.wisc.edu/~remzi/OSTEP/)]

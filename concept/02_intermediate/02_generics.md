@@ -130,6 +130,8 @@
     - [12.3 边界测试：关联类型实现不一致（编译错误）](#123-边界测试关联类型实现不一致编译错误)
     - [12.4 边界测试：泛型默认类型参数不满足约束（编译错误）](#124-边界测试泛型默认类型参数不满足约束编译错误)
     - [12.5 边界测试：泛型常量表达式求值失败（编译错误）](#125-边界测试泛型常量表达式求值失败编译错误)
+    - [12.6 边界测试：递归类型无限大小（编译错误）](#126-边界测试递归类型无限大小编译错误)
+    - [12.7 边界测试：泛型 trait bound 传递失败（编译错误）](#127-边界测试泛型-trait-bound-传递失败编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -3165,5 +3167,50 @@ fn main() {
 ```
 
 > **修正**: 泛型常量参数 `const N: usize` 必须在实例化时提供具体值。数组大小 `[T; N]` 要求 `N` 是编译期常量。
+
+### 12.6 边界测试：递归类型无限大小（编译错误）
+
+```rust,compile_fail
+// ❌ 编译错误: recursive type `List` has infinite size
+enum List {
+    Cons(i32, List), // 递归包含自身 → 无限大小
+    Nil,
+}
+
+// 正确: 使用 Box 进行间接引用（指针大小固定）
+enum ListFixed {
+    Cons(i32, Box<ListFixed>), // ✅ Box 是指针，大小固定
+    Nil,
+}
+```
+
+> **修正**: Rust 要求所有类型在编译期具有确定大小。递归类型直接包含自身会导致无限递归的大小计算。通过 `Box<T>`、`Rc<T>` 或 `Arc<T>` 进行堆分配间接引用，将递归转为指针（固定大小）。
+
+### 12.7 边界测试：泛型 trait bound 传递失败（编译错误）
+
+```rust,compile_fail
+trait Displayable {
+    fn display(&self);
+}
+
+fn show_all<T: Displayable>(items: &[T]) {
+    for item in items {
+        item.display();
+    }
+}
+
+// ❌ 编译错误: `i32` 未实现 `Displayable`
+fn main() {
+    let nums = vec![1, 2, 3];
+    show_all(&nums); // E0277: i32 doesn't satisfy Displayable
+}
+
+// 正确: 为具体类型实现 trait
+impl Displayable for i32 {
+    fn display(&self) { println!("{}", self); }
+}
+```
+
+> **修正**: 泛型函数的 trait bound 必须在调用点由具体类型满足。如果未为目标类型实现所需 trait，编译器会拒绝单态化。这是 Rust 零成本抽象的核心——trait bound 检查在编译期完成，无运行时开销。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树)

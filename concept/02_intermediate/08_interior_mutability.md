@@ -41,6 +41,8 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
+    - [编译错误 4：`OnceCell` 重复初始化（编译错误）](#编译错误-4oncecell-重复初始化编译错误)
+    - [编译错误 5：`RwLock` 读锁升级写锁（死锁风险）](#编译错误-5rwlock-读锁升级写锁死锁风险)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -490,6 +492,56 @@ fn mutex_guard_not_send() {
 ```
 
 > **修正**: 在 `std::sync::Mutex` 的标准实现中，`MutexGuard` 实际上是 `Send` 的。但在某些自定义实现或 `std::sync::RwLockReadGuard` 中可能不实现。以上为教学性边界示例。
+
+### 编译错误 4：`OnceCell` 重复初始化（编译错误）
+
+```rust,compile_fail
+use std::sync::OnceLock;
+
+fn main() {
+    static CELL: OnceLock<i32> = OnceLock::new();
+    CELL.set(42).unwrap();
+    // ❌ 编译错误: 实际上 set 返回 Result，但以下展示借用冲突
+    // let val = CELL.get_mut().unwrap(); // get_mut 需要 &mut self
+    // *val = 100; // OnceLock 不提供可变访问
+}
+
+// 正确: OnceLock 一旦初始化不可变
+fn correct_usage() {
+    static CELL: OnceLock<i32> = OnceLock::new();
+    CELL.set(42).unwrap();
+    println!("{}", CELL.get().unwrap()); // ✅ 只读访问
+}
+```
+
+> **修正**: `OnceLock` / `lazy_static` 提供"一次性初始化"语义，初始化后值不可变。任何试图在初始化后修改值的操作都被 API 设计阻止。若需延迟初始化 + 可变访问，使用 `Mutex<OnceCell<T>>` 或 `RwLock<T>`。
+
+### 编译错误 5：`RwLock` 读锁升级写锁（死锁风险）
+
+```rust
+use std::sync::RwLock;
+
+fn main() {
+    let lock = RwLock::new(5);
+    let _read = lock.read().unwrap();
+    // ⚠️ 死锁风险: 在读锁持有期间尝试获取写锁
+    // 标准库 `std::sync::RwLock` 不支持锁升级
+    let _write = lock.write().unwrap(); // 可能死锁（取决于实现）
+}
+
+// 正确: 释放读锁后再获取写锁
+fn correct_upgrade() {
+    let lock = RwLock::new(5);
+    {
+        let _read = lock.read().unwrap();
+        // 读取操作...
+    } // 读锁在此释放
+    let mut write = lock.write().unwrap();
+    *write += 1; // ✅ 写锁安全获取
+}
+```
+
+> **修正**: 标准库 `std::sync::RwLock` 不支持读锁升级（read-to-write upgrade）。尝试在持有读锁时获取写锁会导致死锁（写锁需等待所有读锁释放）。某些第三方库（如 `parking_lot::RwLockUpgradableReadGuard`）提供升级支持，但需谨慎使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ---
 

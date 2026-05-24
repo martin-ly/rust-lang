@@ -459,6 +459,60 @@ fn main() {
 
 > **修正**: FFI 回调中必须 `catch_unwind` 防止 panic 跨越语言边界。对于非 `UnwindSafe` 类型，需使用 `AssertUnwindSafe` 包装。
 
+### 3.4 边界测试：C 结构体布局不匹配（编译错误 / 运行时 UB）
+
+```rust
+#[repr(C)]
+struct RustStruct {
+    a: u8,
+    b: u32, // Rust 默认按声明顺序布局，但可能添加 padding
+}
+
+// C 侧对应的结构体
+// struct CStruct { uint8_t a; uint32_t b; }; // 通常有 3 字节 padding
+
+// ⚠️ 运行时 UB: 若假设布局完全相同而不检查
+fn unsafe_assumption() {
+    // 直接使用 transmute 转换指针而不验证布局
+    // let c_ptr: *const CStruct = rust_ptr as *const _; // 危险！
+}
+
+// 正确: 使用 bindgen 或手动验证布局
+use std::mem;
+
+fn verify_layout() {
+    assert_eq!(mem::size_of::<RustStruct>(), 8); // 验证大小
+    assert_eq!(mem::align_of::<RustStruct>(), 4); // 验证对齐
+    // ✅ 使用 static_assertions 或 bindgen 生成验证
+}
+```
+
+> **修正**: `#[repr(C)]` 只保证 Rust 编译器使用 C 兼容的布局规则，但**不保证**与特定 C 编译器的布局完全一致（尤其是 bit field、packing pragma）。跨 FFI 传递结构体时，应使用 `bindgen` 自动生成布局验证，或手动使用 `static_assertions::assert_eq_size!` 检查。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）
+
+```rust,compile_fail
+extern "C" {
+    fn c_returns_pointer() -> *const u8;
+}
+
+fn main() {
+    let ptr = unsafe { c_returns_pointer() };
+    // ❌ 编译错误: 裸指针不能直接解引用，需要 unsafe 块
+    // 但更深层的问题是生命周期
+    let _val = unsafe { *ptr }; // C 返回的指针可能已失效
+}
+
+// 正确: 将裸指针包装为引用时需指定生命周期
+unsafe fn c_get_buffer<'a>() -> &'a [u8] {
+    let ptr = c_returns_pointer();
+    let len = 100; // 假设已知长度
+    std::slice::from_raw_parts(ptr, len) // 'a 生命周期由调用者控制
+}
+```
+
+> **修正**: C 函数返回的裸指针没有生命周期信息。将其转换为 Rust 引用时，必须显式标注生命周期（通常是 `'a` 由调用者提供）。若 C 函数返回的指针指向局部变量或已释放内存，Rust 引用将悬垂——这是 unsafe 边界，编译器无法检测。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
 ---
 
 ## 六、来源与延伸阅读

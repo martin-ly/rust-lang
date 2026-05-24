@@ -122,6 +122,8 @@
     - [12.1 边界测试：类型不匹配（编译错误）](#121-边界测试类型不匹配编译错误)
     - [12.2 边界测试：泛型约束不满足（编译错误）](#122-边界测试泛型约束不满足编译错误)
     - [12.3 边界测试：match 非穷尽（编译错误）](#123-边界测试match-非穷尽编译错误)
+    - [12.4 边界测试：impl Trait 在参数位置与返回位置的差异（编译错误）](#124-边界测试impl-trait-在参数位置与返回位置的差异编译错误)
+    - [12.5 边界测试：生命周期省略规则失效（编译错误）](#125-边界测试生命周期省略规则失效编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -3123,6 +3125,48 @@ fn color_name_fixed(c: Color) -> &'static str {
 ```
 
 > **修正**: Rust 的 `match` 必须覆盖所有可能变体。使用 `_ =>` 作为通配分支（但可能隐藏 bug）。
+
+### 12.4 边界测试：impl Trait 在参数位置与返回位置的差异（编译错误）
+
+```rust,compile_fail
+// ❌ 编译错误: `impl Trait` 在参数位置不允许
+fn bad_param(x: impl Iterator<Item = i32>, y: impl Iterator<Item = i32>) -> i32 {
+    x.chain(y).count() as i32
+}
+
+// 正确: 参数位置使用泛型
+fn good_param<T, U>(x: T, y: U) -> i32
+where
+    T: Iterator<Item = i32>,
+    U: Iterator<Item = i32>,
+{
+    x.chain(y).count() as i32 // ✅ 两个独立的泛型参数
+}
+
+// 或: 返回位置使用 impl Trait
+fn good_return() -> impl Iterator<Item = i32> {
+    vec![1, 2, 3].into_iter() // ✅ 返回位置 impl Trait 隐藏具体类型
+}
+```
+
+> **修正**: `impl Trait` 在参数位置等价于匿名泛型参数，每个 `impl Trait` 参数独立。这意味着两个 `impl Iterator` 参数是**不同类型**，不能假设它们相同。返回位置的 `impl Trait` 则表示"某个实现该 trait 的具体类型"。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 12.5 边界测试：生命周期省略规则失效（编译错误）
+
+```rust,compile_fail
+fn longest(x: &str, y: &str) -> &str {
+    // ❌ 编译错误: missing lifetime specifier
+    if x.len() > y.len() { x } else { y }
+    // 编译器无法推断返回的生命周期与哪个参数关联
+}
+
+// 正确: 显式标注生命周期
+fn longest_fixed<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y } // ✅ 返回生命周期 'a 覆盖两个参数
+}
+```
+
+> **修正**: 生命周期省略规则（lifetime elision）仅适用于简单模式（单个输入引用 → 输出引用与其相同）。当存在多个输入引用且输出引用需要与其中某个关联时，必须显式标注生命周期。省略规则不适用于复杂签名。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 > **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树) · [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)
 > **相关 FTA**: [类型系统失效树](../00_meta/fault_tree_analysis_collection.md#四类型系统失效树)

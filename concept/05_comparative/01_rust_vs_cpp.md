@@ -2682,3 +2682,62 @@ fn add_fixed<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
 ```
 
 > **C++ 对比**: C++ `template<typename T> T add(T a, T b) { return a + b; }` 在实例化失败时产生复杂错误信息（SFINAE 替代失败）。Rust 在定义时就拒绝无约束的泛型操作，错误信息更精确。
+
+### 9.5 边界测试：C++ 多重继承菱形问题 vs Rust Trait 组合（编译错误）
+
+```rust,compile_fail
+trait A { fn method(&self); }
+trait B: A { fn method(&self); }
+trait C: A { fn method(&self); }
+
+struct D;
+impl A for D { fn method(&self) { println!("A"); } }
+impl B for D { fn method(&self) { println!("B"); } }
+impl C for D { fn method(&self) { println!("C"); } }
+
+fn main() {
+    let d = D;
+    // ❌ 编译错误: `D` 的多重 trait 实现导致方法调用歧义
+    // 需要显式指定 d.method() 调用哪个 trait 的方法
+    // <D as B>::method(&d); // 正确: 显式消歧
+}
+
+// 正确: 显式指定 trait 调用
+fn fixed() {
+    let d = D;
+    <D as B>::method(&d); // ✅ 显式消歧
+}
+```
+
+> **C++ 对比**: C++ 多重继承中，菱形继承（diamond inheritance）导致基类子对象重复和方法歧义，需虚继承（`virtual`）解决。Rust 通过 trait 组合避免菱形问题，但当多个 trait 定义同名方法时，调用处必须显式消歧（`<Type as Trait>::method`）。编译器拒绝歧义调用而非静默选择。
+
+### 9.6 边界测试：C++ 隐式析构 vs Rust 显式 Drop（编译错误）
+
+```rust,compile_fail
+struct Resource {
+    data: Vec<u8>,
+}
+
+impl Drop for Resource {
+    fn drop(&mut self) {
+        println!("dropping resource");
+    }
+}
+
+fn main() {
+    let r = Resource { data: vec![1, 2, 3] };
+    let r2 = r; // Move
+    // ❌ 编译错误: borrow of moved value: `r`
+    // Rust 中 move 后原变量失效，Drop 只执行一次
+    drop(r); // 试图再次 drop
+}
+
+// 正确: Drop 自动执行，不能手动调用多次
+fn fixed() {
+    let r = Resource { data: vec![1, 2, 3] };
+    let _r2 = r; // Move
+    // r 的 Drop 在 _r2 离开作用域时执行
+} // _r2 在此 drop
+```
+
+> **C++ 对比**: C++ 拷贝构造函数和析构函数可以隐式调用多次。Rust 的 `Drop` trait 在所有权转移后只执行一次（最终所有者离开作用域时）。试图对已 move 的值调用 `drop` 是编译错误。这消除了 C++ 中常见的"双重释放"和"使用已释放对象"问题。

@@ -87,6 +87,8 @@
     - [11.3 边界测试：循环引用导致所有权无法释放（逻辑错误）](#113-边界测试循环引用导致所有权无法释放逻辑错误)
     - [11.4 边界测试：部分 move 后访问被 move 的字段（编译错误）](#114-边界测试部分-move-后访问被-move-的字段编译错误)
     - [11.5 边界测试：函数返回值的所有权转移（编译错误）](#115-边界测试函数返回值的所有权转移编译错误)
+    - [11.6 边界测试：`Copy` 类型在闭包中的捕获（编译错误）](#116-边界测试copy-类型在闭包中的捕获编译错误)
+    - [11.7 边界测试：`Vec` 索引越界（运行时 panic）](#117-边界测试vec-索引越界运行时-panic)
 
 ## 一、权威定义（Definition）
 >
@@ -1396,3 +1398,49 @@ fn main() {
 ```
 
 > **修正**: 函数参数按值传递时发生 move。如需保留原变量，传递 `s.clone()` 或使用 `&s`。
+
+### 11.6 边界测试：`Copy` 类型在闭包中的捕获（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 5i32;
+    let f = || {
+        // ❌ 编译错误: cannot borrow `x` as mutable more than once at a time
+        // 闭包以可变引用捕获 x，但外部仍持有所有权
+        x += 1;
+    };
+    x += 1; // 外部继续使用 x
+    f();
+}
+
+// 正确: 使用 move 闭包转移所有权（i32 是 Copy，实际是复制）
+fn fixed() {
+    let mut x = 5i32;
+    let mut f = move || {
+        x += 1;
+        x
+    };
+    x += 1; // ✅ x 被复制，外部仍可使用
+    let _ = f();
+}
+```
+
+> **修正**: 闭包默认以引用捕获环境变量。可变引用捕获（`FnMut`）与外部可变访问冲突。使用 `move` 闭包转移所有权，或确保闭包执行前不访问被捕获变量。
+
+### 11.7 边界测试：`Vec` 索引越界（运行时 panic）
+
+```rust
+fn main() {
+    let v = vec![1, 2, 3];
+    // ⚠️ 运行时 panic: index out of bounds
+    // let x = v[100]; // 越界访问触发 panic
+    // 正确: 使用 get() 返回 Option
+    let x = v.get(100); // ✅ 返回 None，不 panic
+    match x {
+        Some(val) => println!("{}", val),
+        None => println!("index out of bounds"),
+    }
+}
+```
+
+> **修正**: Rust 的索引操作 `v[i]` 在越界时 panic。如需安全访问，使用 `v.get(i)` 返回 `Option<&T>`。这体现了 Rust"显式错误处理"的哲学——不静默失败，也不允许未定义行为。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]

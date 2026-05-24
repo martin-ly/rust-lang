@@ -33,6 +33,8 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
+    - [4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）](#44-边界测试原子操作与非原子操作混用数据竞争--运行时-ub)
+    - [4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）](#45-边界测试orderingrelaxed-导致逻辑错误编译通过但语义错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -601,6 +603,64 @@ fn atomic_ptr_deref() {
 ```
 
 > **修正**: `AtomicPtr::load` 返回 `*mut T`，解引用需要 `unsafe` 块。编译器在此处可能给出不同错误——核心点是原子指针加载后仍需 unsafe 才能访问目标内存。
+
+### 4.4 边界测试：原子操作与非原子操作混用（数据竞争 / 运行时 UB）
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::thread;
+
+fn main() {
+    let data = AtomicUsize::new(0);
+
+    let handle = thread::spawn(|| {
+        // ⚠️ 数据竞争: 原子存储与非原子读取混用
+        data.store(42, Ordering::Relaxed);
+    });
+
+    // 非原子读取（通过 UnsafeCell 或裸指针）
+    // let val = unsafe { *(data.as_ptr()) }; // UB！
+
+    handle.join().unwrap();
+}
+```
+
+> **修正**: 同一内存位置的原子访问与非原子访问不能混用。C++20 / Rust 内存模型规定：如果一个线程执行原子操作，另一个线程执行非原子读写同一位置，则构成数据竞争（UB）。所有访问必须通过一致的原子 API 进行。[来源: [C++ Reference — Memory Order](https://en.cppreference.com/w/cpp/atomic/memory_order)]
+
+### 4.5 边界测试：`Ordering::Relaxed` 导致逻辑错误（编译通过但语义错误）
+
+```rust
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::thread;
+
+static READY: AtomicBool = AtomicBool::new(false);
+static DATA: AtomicUsize = AtomicUsize::new(0);
+
+fn main() {
+    thread::spawn(|| {
+        DATA.store(42, Ordering::Relaxed);
+        READY.store(true, Ordering::Relaxed);
+    });
+
+    // ⚠️ 逻辑错误: Relaxed 不保证顺序
+    while !READY.load(Ordering::Relaxed) {}
+    // 可能读到 DATA = 0（存储重排序）！
+    println!("{}", DATA.load(Ordering::Relaxed));
+}
+
+// 正确: 使用 Acquire/Release 建立 happens-before
+fn fixed() {
+    thread::spawn(|| {
+        DATA.store(42, Ordering::Relaxed);
+        READY.store(true, Ordering::Release); // ✅ Release 保证之前的写入可见
+    });
+
+    while !READY.load(Ordering::Acquire) {} // ✅ Acquire 看到 Release 前的所有写入
+    println!("{}", DATA.load(Ordering::Relaxed)); // ✅ 保证读到 42
+}
+```
+
+> **修正**: `Relaxed` 只保证原子性（无撕裂读写），但不保证顺序一致性。在"标志位 + 数据"模式中，必须使用 `Release`（写标志）/ `Acquire`（读标志）建立 happens-before 关系，确保数据在标志可见前已完成写入。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
 

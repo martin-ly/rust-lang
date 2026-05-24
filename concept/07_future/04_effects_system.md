@@ -550,6 +550,46 @@ fn safe_context(ptr: *const i32) -> i32 {
 
 > **效果分析**: `unsafe` 效果标记了"放弃编译器保证"的边界。Safe Rust 中不允许解引用裸指针——编译器将此操作隔离在 `unsafe` 块内，强制开发者承担 safety proof 义务。
 
+### 编译错误 4：`const` 中分配堆内存
+
+```rust,compile_fail
+const fn allocate() -> Vec<i32> {
+    // ❌ 编译错误: `Vec::new` 在 const fn 中允许，但 `push` 不允许
+    // 堆分配在编译期不可行
+    let mut v = Vec::new();
+    v.push(1); // const 上下文中不允许动态分配
+    v
+}
+
+// 正确: 使用数组（栈分配）
+const fn stack_array() -> [i32; 3] {
+    [1, 2, 3] // ✅ 编译期确定的栈分配
+}
+```
+
+> **效果分析**: `const` 效果禁止堆分配（`Box`、`Vec`、`String` 的扩展操作），因为编译期求值器运行在受限环境中，无堆分配器。这体现了效果系统对"可用操作集合"的精确控制。
+
+### 编译错误 5：`async` 闭包捕获 `&mut` 后跨 `await` 使用
+
+```rust,compile_fail
+async fn bad_capture(data: &mut Vec<i32>) {
+    let first = &data[0];
+    some_async().await; // ❌ 编译错误: `first` 借用 `data`，但 await 后可能重新借用
+    println!("{}", first);
+}
+
+async fn some_async() {}
+
+// 正确: 在 await 前完成借用
+async fn good_capture(data: &mut Vec<i32>) {
+    let first = data[0]; // 复制值（i32: Copy）
+    some_async().await;
+    println!("{}", first); // ✅ 不持有引用跨 await
+}
+```
+
+> **效果分析**: `async` 效果将函数拆分为状态机，`await` 点是潜在挂起点。任何跨越 `await` 的引用必须满足 `'static` 或等价约束。这与效果系统中"挂起/恢复"操作的连续性要求一致——状态机中的每个阶段必须独立可序列化。
+
 > **[来源: Plotkin & Pretnar 2009 — Algebraic Effects; Koka Documentation; Eff Language]** Effect 系统概念基于代数效应的经典论文和现代语言实现。✅
 
 > **[来源: Rust Lang Team Blog; Rust Internals Discussion; RFC 3668 AsyncFn]** Rust 效果追踪分析基于语言团队的公开讨论和稳定化的 trait 系统。✅

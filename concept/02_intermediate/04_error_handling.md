@@ -114,6 +114,8 @@
     - [11.3 边界测试：`Result` 未处理（编译错误）](#113-边界测试result-未处理编译错误)
     - [11.4 边界测试：`?` 在闭包中的类型推断失败（编译错误）](#114-边界测试-在闭包中的类型推断失败编译错误)
     - [11.5 边界测试：自定义 Error 未实现 `std::error::Error`（编译错误）](#115-边界测试自定义-error-未实现-stderrorerror编译错误)
+    - [11.6 边界测试：`Result` 与 `Option` 混用（编译错误）](#116-边界测试result-与-option-混用编译错误)
+    - [11.7 边界测试：`panic!` 在 `const fn` 中的限制（编译错误）](#117-边界测试panic-在-const-fn-中的限制编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -3025,5 +3027,53 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 > **修正**: 自定义错误类型必须实现 `std::error::Error`（通常通过 `#[derive(thiserror::Error)]` 或手动实现），才能与 `?` 运算符和 `Box<dyn Error>` 兼容。
+
+### 11.6 边界测试：`Result` 与 `Option` 混用（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let opt: Option<i32> = Some(42);
+    // ❌ 编译错误: `Option<i32>` 不是 `Result` 类型
+    let val = opt?; // `?` 在返回 Result 的函数中不能用于 Option
+    println!("{}", val);
+}
+
+// 正确: 显式转换或返回 Option
+fn with_option() -> Option<i32> {
+    let opt: Option<i32> = Some(42);
+    let val = opt?; // ✅ 函数返回 Option，? 可传播 Option
+    Some(val)
+}
+
+// 或: 使用 ok_or 转换
+fn with_result() -> Result<i32, String> {
+    let opt: Option<i32> = Some(42);
+    let val = opt.ok_or("missing")?; // ✅ Option → Result
+    Ok(val)
+}
+```
+
+> **修正**: `?` 运算符要求被传播的类型与函数返回类型兼容。`Option` 和 `Result` 不能自动混用。从 Rust 1.41 起，`?` 在返回 `Option` 的函数中可用于 `Option`，但在返回 `Result` 的函数中不能直接用 `?` 传播 `Option`。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 11.7 边界测试：`panic!` 在 `const fn` 中的限制（编译错误）
+
+```rust,compile_fail
+const fn checked_div(a: i32, b: i32) -> i32 {
+    // ❌ 编译错误: `panic!` 在 const fn 中有限制（Edition 2021 前不允许）
+    // Rust 1.57+ 允许 const panic，但信息受限
+    if b == 0 {
+        panic!("division by zero"); // 旧版编译器报错
+    }
+    a / b
+}
+
+// 正确: 使用断言（现代 Rust 支持 const panic）
+const fn checked_div_fixed(a: i32, b: i32) -> i32 {
+    assert!(b != 0, "division by zero"); // ✅ Rust 1.57+ 支持
+    a / b
+}
+```
+
+> **修正**: `const fn` 中的 `panic!` 从 Rust 1.57 起稳定支持，但要求 panic 信息为字符串字面量（非动态格式化）。在 Edition 2021 之前，`panic!` 完全不能在 `const fn` 中使用。这反映了编译期求值的严格约束。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **相关问题树**: [错误处理问题树](../00_meta/problem_graph.md#七错误处理问题树)

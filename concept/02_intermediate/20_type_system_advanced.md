@@ -43,6 +43,8 @@
       - [C++ 的隐式类型转换 vs Rust 的显式 Trait](#c-的隐式类型转换-vs-rust-的显式-trait)
     - [7.3 重载决议 vs Trait 解析](#73-重载决议-vs-trait-解析)
     - [编译错误示例](#编译错误示例)
+    - [4.4 边界测试：高阶 trait bound（HRTB）误用（编译错误）](#44-边界测试高阶-trait-boundhrtb误用编译错误)
+    - [4.5 边界测试：关联类型与泛型参数冲突（编译错误）](#45-边界测试关联类型与泛型参数冲突编译错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
@@ -643,6 +645,61 @@ fn infinite_size() {
 ```
 
 > **修正**: 递归类型必须包含间接层（`Box<T>`、`Rc<T>`、`Arc<T>`），使编译器能计算固定大小。
+
+### 4.4 边界测试：高阶 trait bound（HRTB）误用（编译错误）
+
+```rust,compile_fail
+fn apply<F>(f: F)
+where
+    F: Fn(&i32) -> &i32,
+{
+    let x = 5;
+    let r = f(&x);
+    // ❌ 编译错误: `r` 可能引用 `x`，但 `x` 在作用域结束时释放
+    // HRTB 要求闭包对所有生命周期有效，但返回值的生命周期与输入绑定
+    println!("{}", r);
+}
+
+// 正确: 使用 HRTB 显式标注
+fn apply_fixed<F>(f: F)
+where
+    for<'a> F: Fn(&'a i32) -> &'a i32,
+{
+    let x = 5;
+    let r = f(&x);
+    println!("{}", r); // ✅ 生命周期一致
+}
+```
+
+> **修正**: 高阶 trait bound（HRTB，`for<'a>`）要求闭包实现对所有可能生命周期 `'a` 有效。当闭包签名涉及引用时，必须显式使用 HRTB 来正确关联输入和输出的生命周期，否则编译器无法推断返回引用的来源。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 4.5 边界测试：关联类型与泛型参数冲突（编译错误）
+
+```rust,compile_fail
+trait Container {
+    type Item;
+    fn get(&self) -> Self::Item;
+}
+
+struct Wrapper<T>(T);
+
+// ❌ 编译错误: `Container` 的关联类型与泛型参数冲突
+impl<T> Container for Wrapper<T> {
+    type Item = T; // 正确
+    fn get(&self) -> T {
+        self.0
+    }
+}
+
+// 正确: 但在某些 trait 设计中可能冲突
+struct BadWrapper;
+impl Container for BadWrapper {
+    type Item = i32;
+    // fn get(&self) -> String { ... } // 错误: 返回类型与 Item 不匹配
+}
+```
+
+> **修正**: 关联类型（associated type）在 trait 实现中只能指定一次，且必须与实际方法签名一致。试图在同一实现中为关联类型指定多个不同具体类型，或方法返回类型与关联类型不匹配，都会导致编译错误。关联类型的单态化约束保证了类型一致性。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
