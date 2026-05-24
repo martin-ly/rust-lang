@@ -976,5 +976,4 @@ fn process(data: Vec<String>) -> Vec<String> {
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-
 > **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [执行模型同构](./05_execution_model_isomorphism.md) · [类型论](../04_formal/02_type_theory.md)

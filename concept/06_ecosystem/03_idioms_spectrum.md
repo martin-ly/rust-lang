@@ -1504,5 +1504,4 @@ quadrantChart
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-
 > **相关文件**: [A/S/P 标记规范](../00_meta/asp_marking_guide.md) · [问题图谱](../00_meta/problem_graph.md) · [范式转换矩阵](../00_meta/paradigm_transition_matrix.md)

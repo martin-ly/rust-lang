@@ -108,6 +108,9 @@
     - [10.2 C++ 异常 vs Rust `Result` 的 ABI 差异](#102-c-异常-vs-rust-result-的-abi-差异)
     - [10.3 C++23 `std::expected` vs Rust `Result`](#103-c23-stdexpected-vs-rust-result)
     - [10.4 析构函数异常：C++ 的致命陷阱](#104-析构函数异常c-的致命陷阱)
+  - [十一、边界测试：错误处理的编译错误](#十一边界测试错误处理的编译错误)
+    - [11.1 边界测试：? 运算符在错误类型不匹配时使用（编译错误）](#111-边界测试-运算符在错误类型不匹配时使用编译错误)
+    - [11.2 边界测试：panic 在 const fn 中（编译错误）](#112-边界测试panic-在-const-fn-中编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -2920,5 +2923,50 @@ impl Drop for Safe {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+## 十一、边界测试：错误处理的编译错误
+
+### 11.1 边界测试：? 运算符在错误类型不匹配时使用（编译错误）
+
+```rust,compile_fail
+fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
+    s.parse::<i32>() // ✅ ParseIntError
+}
+
+fn double_number(s: &str) -> Result<i32, String> {
+    let n = parse_number(s)?; // ❌ 编译错误: `?` couldn't convert the error
+    // parse_number 返回 ParseIntError，但 double_number 返回 String
+    // 需要实现 From<ParseIntError> for String
+    Ok(n * 2)
+}
+
+// 正确: 统一错误类型或使用 map_err
+fn double_number_fixed(s: &str) -> Result<i32, String> {
+    let n = parse_number(s).map_err(|e| e.to_string())?;
+    Ok(n * 2)
+}
+```
+
+> **修正**: `?` 运算符要求当前函数的返回错误类型实现 `From<E>`，其中 `E` 是被调用函数的错误类型。
+
+### 11.2 边界测试：panic 在 const fn 中（编译错误）
+
+```rust,compile_fail
+const fn divide(a: i32, b: i32) -> i32 {
+    // ❌ 编译错误: `panic!` is not allowed in const fn
+    if b == 0 { panic!("division by zero") }
+    a / b
+}
+
+// 正确: 使用 assert!（在稳定版 Rust 中 const fn 允许 assert）
+const fn divide_fixed(a: i32, b: i32) -> i32 {
+    assert!(b != 0, "division by zero"); // ✅ const fn 中允许
+    a / b
+}
+```
+
+> **修正**: `const fn` 中不允许 `panic!`（除非在编译期可求值的上下文中）。使用 `assert!` 替代。
 
 > **相关问题树**: [错误处理问题树](../00_meta/problem_graph.md#七错误处理问题树)

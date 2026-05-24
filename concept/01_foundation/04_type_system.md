@@ -118,6 +118,10 @@
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：类型系统的编译错误](#十二边界测试类型系统的编译错误)
+    - [12.1 边界测试：类型不匹配（编译错误）](#121-边界测试类型不匹配编译错误)
+    - [12.2 边界测试：泛型约束不满足（编译错误）](#122-边界测试泛型约束不满足编译错误)
+    - [12.3 边界测试：match 非穷尽（编译错误）](#123-边界测试match-非穷尽编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -3056,6 +3060,69 @@ let p: &Point = &Point(1, 2);
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+## 十二、边界测试：类型系统的编译错误
+
+### 12.1 边界测试：类型不匹配（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: i32 = 42;
+    let y: f64 = x; // ❌ 编译错误: expected `f64`, found `i32`
+    // Rust 不允许隐式类型转换
+}
+
+// 正确: 显式转换
+fn main_fixed() {
+    let x: i32 = 42;
+    let y: f64 = x as f64; // ✅ 显式 cast
+}
+```
+
+> **修正**: Rust 禁止隐式类型转换，必须显式使用 `as` 或 `From`/`Into` trait。
+
+### 12.2 边界测试：泛型约束不满足（编译错误）
+
+```rust,compile_fail
+fn print_debug<T>(x: T) {
+    // ❌ 编译错误: `T` doesn't implement `Debug`
+    println!("{:?}", x); // 需要 T: Debug
+}
+
+// 正确: 添加 trait bound
+fn print_debug_fixed<T: std::fmt::Debug>(x: T) {
+    println!("{:?}", x); // ✅ T 满足 Debug bound
+}
+```
+
+> **修正**: 泛型函数使用 trait 方法时，必须在泛型参数上声明对应的 trait bound。
+
+### 12.3 边界测试：match 非穷尽（编译错误）
+
+```rust,compile_fail
+enum Color { Red, Green, Blue }
+
+fn color_name(c: Color) -> &'static str {
+    match c {
+        Color::Red => "red",
+        Color::Green => "green",
+        // ❌ 编译错误: non-exhaustive patterns: `Blue` not covered
+    }
+}
+
+// 正确: 穷尽所有变体
+fn color_name_fixed(c: Color) -> &'static str {
+    match c {
+        Color::Red => "red",
+        Color::Green => "green",
+        Color::Blue => "blue",
+    }
+}
+```
+
+> **修正**: Rust 的 `match` 必须覆盖所有可能变体。使用 `_ =>` 作为通配分支（但可能隐藏 bug）。
 
 > **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树) · [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)
 > **相关 FTA**: [类型系统失效树](../00_meta/fault_tree_analysis_collection.md#四类型系统失效树)

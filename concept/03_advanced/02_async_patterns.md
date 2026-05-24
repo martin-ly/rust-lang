@@ -1,5 +1,7 @@
 # Async 模式与前沿特性
 
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
 > **层次定位**: L3 高级概念 / 异步子域 — 模式与前沿
 > **前置依赖**: [Async/Await 基础](./02_async.md) · [Async 高级主题](./02_async_advanced.md)
 > **定理链编号**: T-055 AFIT 类型安全 ⟹ T-056 AsyncFn 可重入性

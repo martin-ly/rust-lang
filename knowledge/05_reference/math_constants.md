@@ -1,4 +1,5 @@
 # 数学常量
+>
 > **相关概念**: [常量](../../concept/01_foundation/04_type_system.md)
 
 > **Bloom 层级**: 理解

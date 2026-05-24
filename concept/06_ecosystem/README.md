@@ -125,6 +125,7 @@ graph TB
 | [17_cross_compilation.md](./17_cross_compilation.md) | 交叉编译 | 多目标平台、条件编译、no_std、嵌入式、Tier 系统 | ✅ v1.0 | L1 Type System, L3 Unsafe | WASI, WebAssembly |
 | [18_distributed_systems.md](./18_distributed_systems.md) | 分布式系统 | gRPC、Raft、Actor、服务发现、微服务 | ✅ v1.0 | L3 Async, L4 Network | Observability, Wasm |
 | [35_pattern_composition_algebra.md](./35_pattern_composition_algebra.md) | 模式组合代数 | 设计模式的形式化组合、冲突检测、Rust 所有权约束 | ✅ v1.0 | L2 Trait, L3 Concurrency | Software Architecture |
+| [36_stream_processing_ecosystem.md](./36_stream_processing_ecosystem.md) | 流处理生态 | timely/differential dataflow、Materialize、RisingWave、Fluvio | ✅ v1.0 | L3 Stream Processing | Distributed Systems |
 
 ---
 

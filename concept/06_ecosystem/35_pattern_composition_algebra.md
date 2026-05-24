@@ -462,6 +462,8 @@ fn main() {
 
 ### 7.3 边界测试：模式组合的状态空间爆炸
 
+> **[来源: POSA — Pattern-Oriented Software Architecture] · [💡 原创分析] · [Harel & Politi — Statecharts]** ✅
+
 ```rust
 // 边界测试: 当组合的模式数量增加时，状态空间呈指数增长
 

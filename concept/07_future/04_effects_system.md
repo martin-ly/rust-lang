@@ -511,6 +511,200 @@ Q4: 与现有生态的兼容性？
 
 ---
 
+## 三、Koka：Row Polymorphic Effects 的完整实现
+
+> **[来源: Leijen — Koka: Programming with Row Polymorphic Effects, ICFP 2014] · [Koka Documentation](https://koka-lang.github.io/)** ✅
+
+### 3.1 Koka 的核心设计
+
+Koka（Microsoft Research）是第一个将**代数效果（Algebraic Effects）**作为核心语言特性的工业级语言。
+
+```koka
+// Koka: 效果在类型签名中显式声明
+fun divide(x : int, y : int) : exn int  // exn = 可能抛出异常
+  if y == 0 then throw("Division by zero")
+  else x / y
+
+// 错误：忽略异常效果（Koka 编译器拒绝）
+// fun bad_divide(x : int, y : int) : int
+//   divide(x, y)  // ❌ 编译错误: 未处理的 exn 效果
+//                  // Koka 要求显式处理或声明 exn 效果
+
+// 正确：调用者必须处理异常效果
+fun safe-divide(x : int, y : int) : maybe<int>
+  try { Just(divide(x, y)) }  // 捕获 exn 效果
+  catch { Nothing }
+```
+
+**Koka 的效果系统**：
+
+| 特性 | 说明 | Rust 对比 |
+|:---|:---|:---|
+| **Row Polymorphism** | 效果是多态的行（row），如 `<exn,io>` | Rust 无此机制 |
+| **Effect Handlers** | `handler { throw(msg) -> ... }` | 无直接等价（最接近 `catch_unwind`） |
+| **Resume** | 处理器可恢复（resume）被中断的计算 | 无直接等价 |
+| **Zero-Cost** | 效果处理通过编译优化消除运行时开销 | Rust 的 `?`/`async` 有运行时开销 |
+
+### 3.2 Koka 的 Effects vs Rust 的 Approximation
+
+```text
+Koka 效果              Rust 近似
+─────────────────────────────────────────────────
+exn（异常）            Result<T, E> + ?
+io（输入输出）          普通函数（无标记）
+console（控制台）       println!（宏，非类型系统）
+ndet（非确定性）        无直接等价（需外部 RNG）
+async（异步）           async fn + Future
+mut（可变状态）         &mut T + Cell/RefCell
+```
+
+> **关键洞察**: Koka 的效果系统是"显式且完整的"——每个效果都在类型签名中声明，编译器检查效果传播。Rust 的效果是"隐式且碎片化的"——`async`/`unsafe`/`const` 是独立关键字，`Result` 是库级类型，`&mut T` 是类型系统的一部分。Rust 的设计选择是工程折中：显式效果系统需要更复杂的类型推断和编译器实现，Rust 选择用关键字 + trait 的组合实现"足够好"的效果追踪。[来源: 💡 原创分析] · [Leijen, ICFP 2014] ✅
+
+---
+
+## 四、Eff：代数效果与处理器的学术原型
+
+> **[来源: Pretnar — An Introduction to Algebraic Effects and Handlers, 2015] · [Eff Language](https://www.eff-lang.org/)** ✅
+
+Eff 是数学研究所（University of Ljubljana）开发的代数效果语言，是效果系统的学术原型。
+
+```eff
+(* Eff: 定义效果和处理器 *)
+
+effect Exc : string -> empty  (* 异常效果 *)
+
+let divide x y =
+  if y = 0 then perform (Exc "Division by zero")
+  else x / y
+
+(* 处理器捕获异常效果 *)
+let safe_divide x y =
+  handle divide x y with
+  | Exc msg k -> None  (* k = continuation，Eff 允许忽略 k（不恢复） *)
+  | return v -> Some v
+```
+
+**Eff 与 Koka 的关键差异**：
+
+| 维度 | Eff | Koka |
+|:---|:---|:---|
+| **Continuation** | 多 shot（可多次恢复） | 单 shot（仅一次恢复） |
+| **效果类型** | 显式声明 | Row polymorphism |
+| **执行模型** | 解释器 | 编译为 C/JS |
+| **工业应用** | 学术研究 | 工业原型（Microsoft） |
+
+> **关键洞察**: Eff 的"多 shot continuation"是效果系统的理论极限——它允许处理器将同一计算恢复多次（如非确定性搜索的分支）。但这与 Rust 的所有权模型根本冲突：恢复 continuation 意味着重新访问已 move 的资源，违反线性逻辑。因此 Rust 永远无法支持完整的多 shot 代数效果，只能支持"零 shot"（如 `Result`）或"单 shot"（如 `async/await`）近似。[来源: 💡 原创分析] · [Pretnar, 2015] ✅
+
+---
+
+## 五、Flix：效果多态与区域的统一
+
+> **[来源: Madsen et al. — Flix: A Programming Language, OOPSLA 2016] · [Flix Documentation](https://flix.dev/)** ✅
+
+Flix 是将**效果系统**与**Datalog 约束求解**统一的语言，具有独特的"区域（Region）+ 效果"类型系统。
+
+```flix
+def divide(x: Int32, y: Int32): Result[String, Int32] =
+    if (y == 0) Err("Division by zero") else Ok(x / y)
+
+// Flix 的效果多态：函数可以参数化其效果
+def map(f: a -> b \ ef, xs: List[a]): List[b] \ ef =
+    match xs {
+        case Nil => Nil
+        case x :: rs => f(x) :: map(f, rs)
+    }
+
+// `\ ef` 表示 "具有效果 ef"
+// map 本身无额外效果，只传播 f 的效果
+```
+
+**Flix 的独特特性**：
+
+| 特性 | 说明 | Rust 对比 |
+|:---|:---|:---|
+| **效果多态（Effect Polymorphism）** | 高阶函数可参数化其效果 | Rust 无此机制（`async` 无法参数化） |
+| **区域（Region）** | 内存分配的区域追踪 | Rust 的生命周期 `'a` 是静态区域 |
+| **Datalog 集成** | 逻辑约束求解内建于语言 | Rust 无此机制（需外部 Datalog 引擎） |
+| **纯度推断** | 编译器自动推断函数纯度 | Rust 的 `const fn` 需显式标记 |
+
+### 5.1 Flix 的区域系统 vs Rust 的生命周期
+
+```text
+Flix 区域:      let r = region rc { ... }  // 运行时区域
+Rust 生命周期:  fn foo<'a>(x: &'a T)       // 编译期生命周期
+
+差异:
+  - Flix 区域是运行时的，支持动态分配和回收
+  - Rust 生命周期是编译期的，无运行时开销
+  - Flix 区域与效果系统结合：分配内存 = 效果
+  - Rust 生命周期与所有权结合：借用 = 无效果
+```
+
+> **关键洞察**: Flix 的区域系统展示了"如果 Rust 的生命周期是运行时的"会是什么样子。Flix 的区域允许动态内存管理（如 arena allocator），而 Rust 的 `'a` 是纯粹的编译期约束。Flix 的设计更适合需要灵活内存管理的场景（如编译器、数据库），而 Rust 的设计更适合系统编程（零成本抽象）。[来源: 💡 原创分析] · [Madsen et al., OOPSLA 2016] ✅
+
+---
+
+## 六、代数效果的数学基础
+
+> **[来源: Plotkin & Pretnar — Handlers of Algebraic Effects, 2009] · [Plotkin & Power — Algebraic Operations and Generic Effects, 2003]** ✅
+
+### 6.1 代数效果的形式化定义
+
+代数效果由两部分组成：**操作签名（Signature）**和**处理器（Handler）**。
+
+```text
+效果签名 Σ:
+  - 一组操作符号，如 { throw: A → 0, get: 1 → S, put: S → 1 }
+  - 每个操作有参数类型和返回类型
+
+处理器 H:
+  - 为每个操作提供语义
+  - throw(msg)  → 处理异常
+  - get()       → 读取状态
+  - put(s)      → 写入状态
+
+计算语义:
+  - 纯计算: 返回值 v
+  - 效果计算: perform(op, args) 调用处理器
+```
+
+### 6.2 代数效果与 Monad 的关系
+
+| 特性 | Monad（Haskell） | 代数效果（Koka/Eff） |
+|:---|:---|:---|
+| **组合** | Monad 变换器堆叠（复杂） | 效果处理器组合（直观） |
+| **局部性** | 全局 Monad 栈 | 局部效果处理器 |
+| **性能** | 运行时开销（bind 链） | 可零成本（编译期优化） |
+| **表达能力** | 通用（任意计算） | 受限于代数操作 |
+| **推理** | 等式推理困难 | 等式推理自然（代数定律） |
+
+> **关键洞察**: Plotkin 和 Pretnar 的 2009 年论文证明了一个基本定理：**任何代数效果都可以用 Monad 模拟，但并非所有 Monad 都可以表示为代数效果**。这解释了为什么 Haskell 的 `IO` Monad 比 Koka 的效果系统更通用（可以表达任意副作用），但也更难组合和优化。Rust 选择了中间道路：`async` 使用状态机（类似 Monad），`Result` 使用代数结构（类似代数效果），`const fn` 使用效果消除（纯函数子集）。[来源: Plotkin & Pretnar, 2009] ✅
+
+### 6.3 Rust 效果系统的未来演进
+
+```text
+Rust 效果演进路线（推测）:
+
+当前（Rust 1.95）:
+  async fn     → Future 状态机（效果: 异步挂起）
+  const fn     → 编译期求值（效果: 无副作用）
+  unsafe fn    → 放弃安全保证（效果: 未定义行为风险）
+  fn -> Result → 可失败（效果: 异常传播）
+  gen blocks   → 生成器（效果: 惰性求值）
+
+近期（Rust 2027+）:
+  AsyncFn trait  → 效果多态的泛型（fn/afn 统一）
+  gen<yield>     → 统一生成器和协程效果
+  const trait    → trait 的 const 版本（效果约束）
+
+远期（Rust 2030+）:
+  effect 关键字  → 统一效果系统（? 高度推测性）
+  ```
+
+> **关键洞察**: Rust 语言团队在 2024 年的效果系统讨论中明确表示，**短期内不会引入统一的 `effect` 关键字**，而是通过 trait 系统和关键字扩展逐步演化。这与 Koka 的"从零设计完整效果系统"路径完全不同——Rust 选择增量演进，保持向后兼容。这种工程哲学的差异反映了 Rust 的约束：Koka 是研究语言（可自由实验），Rust 是工业语言（稳定性优先）。[来源: Rust Lang Team Blog 2024] ✅
+
+---
+
 ## Wikipedia 概念对齐
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

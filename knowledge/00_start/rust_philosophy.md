@@ -1,4 +1,5 @@
 # Rust 设计哲学
+>
 > **相关概念**: [所有权](../../concept/01_foundation/01_ownership.md)
 
 > **Bloom 层级**: 理解

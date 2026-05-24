@@ -81,6 +81,10 @@
     - [补充章节：跨线程所有权转移（Send）的形式化视角](#补充章节跨线程所有权转移send的形式化视角)
     - [补充章节：所有权与 FFI / unsafe 边界的交互](#补充章节所有权与-ffi--unsafe-边界的交互)
   - [权威来源索引](#权威来源索引)
+  - [十一、边界测试：所有权规则的编译错误](#十一边界测试所有权规则的编译错误)
+    - [11.1 边界测试：use-after-move（编译错误）](#111-边界测试use-after-move编译错误)
+    - [11.2 边界测试：Copy trait 不满足时的赋值（编译错误）](#112-边界测试copy-trait-不满足时的赋值编译错误)
+    - [11.3 边界测试：循环引用导致所有权无法释放（逻辑错误）](#113-边界测试循环引用导致所有权无法释放逻辑错误)
 
 ## 一、权威定义（Definition）
 >
@@ -1298,6 +1302,59 @@ pub unsafe extern "C" fn borrow_to_c(s: *const u8, len: usize) {
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 > [来源: [crates.io](https://crates.io/)]
 > [来源: [docs.rs](https://docs.rs/)]
+
+---
+
+## 十一、边界测试：所有权规则的编译错误
+
+### 11.1 边界测试：use-after-move（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let t = s; // Move: s 的所有权转移到 t
+    // ❌ 编译错误: borrow of moved value: `s`
+    println!("{}", s); // E0382
+}
+```
+
+> **修正**: Move 后原变量不可访问。如需保留原变量，使用 `s.clone()`（若类型实现 `Clone`）。
+
+### 11.2 边界测试：Copy trait 不满足时的赋值（编译错误）
+
+```rust,compile_fail
+struct Point { x: i32, y: i32 }
+// Point 未实现 Copy（需要显式 #[derive(Copy, Clone)]）
+
+fn main() {
+    let p1 = Point { x: 1, y: 2 };
+    let p2 = p1; // Move（因为 Point 不是 Copy）
+    // ❌ 编译错误: borrow of moved value: `p1`
+    println!("{}", p1.x); // E0382
+}
+```
+
+> **修正**: 为 Point 添加 `#[derive(Copy, Clone)]`，或在赋值时使用 `p1.clone()`。
+
+### 11.3 边界测试：循环引用导致所有权无法释放（逻辑错误）
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+struct Node {
+    value: i32,
+    next: Option<Rc<RefCell<Node>>>, // 循环引用风险
+}
+
+fn main() {
+    let a = Rc::new(RefCell::new(Node { value: 1, next: None }));
+    let b = Rc::new(RefCell::new(Node { value: 2, next: Some(a.clone()) }));
+    // 若设置 a.next = Some(b.clone())，则形成循环引用
+    // → Rc 引用计数永不为 0 → 内存泄漏
+    // 修正: 使用 Weak<T> 打破循环
+}
+```
 
 > **相关判定树**: [所有权判定树](../00_meta/concept_definition_decision_forest.md#二所有权判定树) · [内存安全 FTA](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
 > **相关谓词映射**: [own(τ) 谓词](../00_meta/rustbelt_predicate_map.md#二所有权谓词-ownτ-映射)

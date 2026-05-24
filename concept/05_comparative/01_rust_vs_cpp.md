@@ -2608,4 +2608,41 @@ fn main() {
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
+---
+
+## 九、边界测试：Rust 与 C++ 的编译错误对比
+
+### 9.1 边界测试：C++ 隐式转换 vs Rust 显式转换（编译错误）
+
+```rust,compile_fail
+fn main() {
+    let x: i32 = 42;
+    let y: u32 = x; // ❌ 编译错误: expected `u32`, found `i32`
+    // Rust 禁止有符号/无符号之间的隐式转换
+}
+
+// 正确: 显式转换
+fn main_fixed() {
+    let x: i32 = 42;
+    let y: u32 = x as u32; // ✅ 显式 cast
+}
+```
+
+> **C++ 对比**: `int x = 42; unsigned y = x;` 在 C++ 中编译通过但可能产生意外结果（负数变极大正数）。Rust 通过编译错误强制显式处理。
+
+### 9.2 边界测试：C++ 空悬指针 vs Rust 编译期阻止
+
+```rust,compile_fail
+fn main() {
+    let r: &i32;
+    {
+        let x = 5;
+        r = &x; // ❌ 编译错误: `x` does not live long enough
+    } // x drop
+    println!("{}", r); // Rust 编译器阻止悬垂引用
+}
+```
+
+> **C++ 对比**: C++ 允许返回局部变量的引用，运行时产生未定义行为。Rust 在编译期通过生命周期系统阻止此类错误。
+
 > **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [Rust vs Go](./02_rust_vs_go.md) · [执行模型同构](./05_execution_model_isomorphism.md)

@@ -703,6 +703,264 @@ flowchart TD
 
 ---
 
+## 七、验证工具深度原理分析
+
+> **[来源: Viper Tutorial — ETH Zurich] · [Kani Documentation — AWS] · [Verus Tutorial — Microsoft Research] · [Creusot Manual — INRIA] · [Aeneas Paper — ICFP 2022] · [RefinedRust Paper — PLDI 2024]** ✅
+
+### 7.1 Prusti：基于 Viper 的分离逻辑验证
+
+> **[来源: Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html) · [Astrauskas et al. — OOPSLA 2022]** ✅
+
+Prusti 是 ETH Zurich 开发的 Rust 验证工具，基于 **Viper**（Verification Infrastructure for Permission-based Reasoning）中间语言。
+
+**核心原理**：
+
+| 组件 | 功能 | 形式化基础 |
+|:---|:---|:---|
+| **Prusti 前端** | 将 Rust + 合约（`#[requires]`/`#[ensures]`）翻译成 Viper IL | 分离逻辑（Separation Logic） |
+| **Viper 后端** | 符号执行 + SMT 求解（Z3） | 隐式动态帧（Implicit Dynamic Frames） |
+| **权限系统** | `acc(x.f)` 表示对字段 `f` 的写权限 | 分数权限（Fractional Permissions） |
+
+```rust
+// Prusti 示例：前置/后置条件 + 循环不变量
+use prusti_contracts::*;
+
+#[requires(n >= 0)]
+#[ensures(result == n * (n + 1) / 2)]
+fn sum(n: i32) -> i32 {
+    let mut i = 0;
+    let mut s = 0;
+
+    while i < n {
+        body_invariant!(s == i * (i + 1) / 2);
+        body_invariant!(i >= 0 && i <= n);
+        i += 1;
+        s += i;
+    }
+    s
+}
+```
+
+**优势与局限**:
+
+| 维度 | 说明 |
+|:---|:---|
+| **并发支持** | 支持 `std::thread::spawn` 的轻量验证（基于 Viper 的并发分离逻辑） |
+| **Unsafe** | 有限支持，需手动写 Viper 合约 |
+| **泛型** | 支持，但 trait bound 的推理复杂 |
+| **工业应用** | 学术研究为主，未大规模工业部署 |
+| **标注负担** | 高——每个循环需 `body_invariant!`，每个函数需 `#[requires]`/`#[ensures]` |
+
+> **关键洞察**: Prusti 的分离逻辑方法是 Rust 验证的"经典路径"——将 Rust 所有权映射为分离逻辑的权限（permission）。这种映射在概念上优雅，但工程上复杂：Rust 的生命周期（`'a`）和借用（`&T`/`&mut T`）的丰富语义在 Viper IL 中难以精确表达，导致某些合法 Rust 代码无法验证。[来源: Astrauskas et al., OOPSLA 2022] ✅
+
+### 7.2 Kani：基于 CBMC 的有界模型检测
+
+> **[来源: Kani Documentation](https://model-checking.github.io/kani/) · [AWS Kani Blog 2023]** ✅
+
+Kani 是 AWS 开发的 Rust 验证工具，基于 **CBMC**（C Bounded Model Checker）的符号执行引擎。
+
+**核心原理**：
+
+| 组件 | 功能 | 形式化基础 |
+|:---|:---|:---|
+| **Kani 前端** | 将 Rust MIR 翻译成 Goto-C（CBMC 中间语言） | 有界模型检测（BMC） |
+| **CBMC 引擎** | 符号执行 + SAT/SMT 求解 | 谓词抽象 + 位向量理论 |
+| **循环处理** | `#[kani::unwind(n)]` 限制循环展开次数 | 有界验证（非完全） |
+
+```rust
+#[kani::proof]
+fn verify_vec_push() {
+    let mut vec: Vec<i32> = Vec::new();
+    let len: usize = kani::any();
+    kani::assume(len < 100);
+
+    for i in 0..len {
+        vec.push(i as i32);
+    }
+
+    assert!(vec.len() == len);
+    assert!(vec.capacity() >= len);
+}
+```
+
+**Kani 的验证保证**：
+
+```text
+Kani 验证范围（有界模型检测的固有特性）:
+  ✅ 保证: 对于所有输入值（在假设范围内），程序无 panic、无 UB
+  ❌ 不保证: 对于超出假设范围的输入（如 len >= 100）
+  ❌ 不保证: 无限循环（循环必须设置 unwind 上限）
+  ❌ 不保证: 非确定性并发（Kani 当前主要验证单线程代码）
+```
+
+> **关键洞察**: Kani 是"工程师的验证工具"——它的学习曲线比 Prusti/Verus 平缓得多，因为用户只需写 `#[kani::proof]` 和 `kani::assume()`，无需形式化合约语言。但代价是验证的**有界性**——Kani 不证明"对所有 n"，而是证明"对所有 n < 100"。这与 Rust 的"零成本抽象"哲学形成有趣对比：Kani 是"低成本验证"，用有界性换取易用性。[来源: 💡 原创分析] · [AWS Kani Blog] ✅
+
+### 7.3 Verus：基于 Z3 的演绎验证
+
+> **[来源: Verus Documentation](https://verus-lang.github.io/verus/) · [Lorch et al. — SOSP 2024]** ✅
+
+Verus 是 Microsoft Research 开发的 Rust 验证工具，基于 **Z3 SMT 求解器**的演绎验证。
+
+**核心原理**：
+
+| 组件 | 功能 | 形式化基础 |
+|:---|:---|:---|
+| **Verus 前端** | Rust 子集 + spec/ghost/proof 代码 | 霍尔逻辑（Hoare Logic） |
+| **幽灵状态（Ghost）** | `#[spec]` 标记的编译期 erased 代码 | 辅助证明的不可运行状态 |
+| **Z3 后端** | SMT 求解 + 量词实例化 | 一阶逻辑 + 数组理论 |
+| **所有权验证** | `tracked` 权限标记 | 线性类型（Linear Types） |
+
+```rust
+use vstd::prelude::*;
+
+verus! {
+
+fn binary_search(v: &Vec<u64>, key: u64) -> (r: usize)
+    requires
+        forall|i: int, j: int| 0 <= i < j < v.len() ==> v[i] <= v[j], // 数组有序
+    ensures
+        r < v.len() ==> v[r] == key,  // 找到则正确
+        r == v.len() ==> forall|i: int| 0 <= i < v.len() ==> v[i] != key, // 未找到则不存在
+{
+    let mut lo = 0usize;
+    let mut hi = v.len();
+
+    while lo < hi
+        invariant
+            lo <= hi,
+            hi <= v.len(),
+            forall|i: int| 0 <= i < lo ==> v[i] < key,
+            forall|i: int| hi <= i < v.len() ==> v[i] > key,
+    {
+        let mid = lo + (hi - lo) / 2;
+        if v[mid] == key {
+            return mid;
+        } else if v[mid] < key {
+            lo = mid + 1;
+        } else {
+            hi = mid;
+        }
+    }
+    v.len()
+}
+
+} // verus!
+```
+
+**Verus 的独特设计**：
+
+| 特性 | 说明 |
+|:---|:---|
+| **exec / spec / proof 模式** | `exec` 代码编译运行，`spec` 代码仅用于验证（编译期擦除），`proof` 代码仅用于证明（不进入运行时） |
+| **幽灵类型（Ghost Types）** | `Ghost<T>` 和 `Tracked<T>` 允许在证明中携带不可运行的信息 |
+| **线性幽灵（Linear Ghost）** | `tracked` 标记的变量遵循线性逻辑——必须被消耗，不能复制或丢弃 |
+| **并发验证** | 支持 `std::thread::spawn` 的验证，通过线性幽灵传递权限 |
+
+> **关键洞察**: Verus 的 "exec/spec/proof" 三元分离是 Rust 验证工具中最接近"生产代码与验证代码共存"的设计。`spec` 代码在编译期被擦除（零运行时开销），`proof` 代码确保 `exec` 代码的正确性。这与 Rust 的 `const fn` 有哲学上的相似性——两者都区分"编译期计算"和"运行时计算"，但 Verus 将这一区分扩展到形式化证明。[来源: Lorch et al., SOSP 2024] ✅
+
+### 7.4 Creusot：基于 Why3 的契约验证
+
+> **[来源: Creusot Documentation](https://creusot-rs.github.io/) · [Denis et al. — PLDI 2023]** ✅
+
+Creusot 是 INRIA 开发的 Rust 验证工具，基于 **Why3** 平台（SMT 求解器 + 证明辅助器）。
+
+**核心原理**：
+
+| 组件 | 功能 | 形式化基础 |
+|:---|:---|:---|
+| **Creusot 前端** | Rust MIR → Coma（新中间语言）→ Why3 ML | 霍尔逻辑 + 分离逻辑 |
+| **Coma 中间语言** | 2023 年引入，替代旧的 Goto 风格翻译 | 模块化验证（Modular Verification） |
+| **Why3 后端** | SMT（Alt-Ergo, Z3, CVC4）+ Coq 交互式证明 | 一阶逻辑 + 高阶逻辑 |
+| **Trait 合约** | `#[requires]`/`#[ensures]` 可附加到 trait | 行为子类型（Behavioral Subtyping） |
+
+```rust
+use creusot_contracts::*;
+
+#[requires(vec@.len() < usize::MAX)]
+#[ensures(result@ == vec@.len())]
+pub fn vec_len<T>(vec: &Vec<T>) -> usize {
+    vec.len()
+}
+
+// Creusot 的 `vec@` 是 ghost 投影，将运行时 Vec 映射到逻辑序列
+// `vec@.len()` 是逻辑层面的长度（无溢出）
+```
+
+**Coma 中间语言的贡献**:
+
+Coma（Continuation-Oriented Metalanguage for Asserting）是 Creusot 2023 年引入的核心创新：
+
+```text
+传统路径: Rust MIR → Goto-C → SMT
+Creusot 路径: Rust MIR → Coma → Why3 ML → SMT/Coq
+
+Coma 的优势:
+  1. 模块化验证: 每个函数独立验证，无需内联调用者
+  2. Trait 合约传播: trait 的 requires/ensures 自动传播到所有实现
+  3. 借用精确建模: `&T` 和 `&mut T` 的读写权限在 Coma 中精确表达
+```
+
+> **关键洞察**: Creusot 的 Coma 中间语言解决了 Rust 验证的最大工程难题——**trait 的模块化验证**。在传统方法中，验证泛型函数需要内联所有可能的实现；Coma 通过 trait 合约（contract）实现"验证一次，适用所有实现"，这是 Creusot 在 PLDI 2023 论文中的核心贡献。[来源: Denis et al., PLDI 2023] ✅
+
+### 7.5 Aeneas：基于借用的函数式翻译
+
+> **[来源: Aeneas GitHub](https://github.com/AeneasVerif/aeneas) · [Ho & Protzenko — ICFP 2022]** ✅
+
+Aeneas 是 EPFL/Inria 联合开发的 Rust 验证工具，核心创新是将 Rust 程序**翻译为纯函数式语言**（Lean/Coq/F*），然后利用交互式定理证明器验证。
+
+**核心原理**：
+
+| 组件 | 功能 | 形式化基础 |
+|:---|:---|:---|
+| **Aeneas 前端** | Rust MIR → 纯函数式核心语言（LLBC） | 基于借用的程序分析（Borrowing-based Analysis） |
+| **借用翻译** | `&mut T` → 线性类型的 state passing | 线性逻辑（Linear Logic） |
+| **目标后端** | Lean 4 / Coq / F* | 依赖类型 + 交互式证明 |
+| **自动化** | 手动（交互式证明） | 人机协作 |
+
+```rust
+// Aeneas 示例：被翻译成 Lean 的 Rust 函数
+// Rust:
+fn incr(x: &mut u32) {
+    *x += 1;
+}
+
+// Aeneas 翻译到 Lean（简化）:
+// def incr (x: U32) : U32 := x + 1
+// 注意: &mut T 被翻译为 T → T（纯函数）
+```
+
+**Aeneas 的借用翻译**：
+
+Aeneas 的核心创新是**基于借用的函数式提取**（Borrowing-based Functional Extraction）：
+
+```text
+Rust 的可变借用 (&mut T) → 线性类型的状态传递
+Rust 的共享借用 (&T)     → 不可变共享（无需传递）
+Rust 的所有权转移        → 线性逻辑的消耗（consume）
+Rust 的 Copy 类型        → 普通复制（非线性）
+```
+
+> **关键洞察**: Aeneas 选择了与 Prusti/Verus/Creusot 完全不同的验证路径——不是"用 SMT 自动证明"，而是"翻译到定理证明器后手动证明"。这使得 Aeneas 能验证其他工具无法处理的复杂算法（如复杂的数据结构不变量），但代价是极高的证明负担（人天到人周级别）。Aeneas 更适合研究场景，而非工业日常验证。[来源: Ho & Protzenko, ICFP 2022] ✅
+
+### 7.6 验证工具对比矩阵（深度版）
+
+> **[来源: 💡 原创分析]** · 综合上述所有来源 ✅
+
+| 维度 | Prusti | Kani | Verus | Creusot | Aeneas |
+|:---|:---|:---|:---|:---|:---|
+| **验证范式** | 分离逻辑 + SMT | 有界模型检测 | 演绎验证 + SMT | 模块化契约 + SMT | 函数式翻译 + 交互式证明 |
+| **后端** | Viper (Z3) | CBMC (SAT) | Z3 | Why3 (Z3/Alt-Ergo/CVC4) | Lean/Coq/F* |
+| **自动化** | 半自动（需合约） | 半自动（需 harness） | 半自动（需 spec） | 半自动（需契约） | 手动（交互式） |
+| **并发验证** | 有限 | ❌ | ✅ 线性幽灵 | 有限 | 有限 |
+| **Unsafe 验证** | 有限 | ✅ | ⚠️ 部分 | ⚠️ 部分 | ❌ |
+| **泛型验证** | ⚠️ 复杂 | ✅ | ✅ | ✅（Coma） | ✅ |
+| **Trait 验证** | 有限 | ✅ | ✅ | ✅（合约传播） | ✅ |
+| **工业部署** | 研究 | ⭐ AWS 生产 | ⭐ Microsoft 内部 | INRIA 研究 | EPFL 研究 |
+| **证明负担** | 高 | 低 | 中 | 中 | 极高 |
+| **适用场景** | 学术研究、教学 | 安全关键组件测试 | 操作系统/驱动验证 | 算法功能正确性 | 复杂数据结构验证 |
+
+---
+
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]; 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [来源: Formal Methods Deep Dive]; 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [来源: Web Authority Alignment Sprint]

@@ -166,6 +166,7 @@ graph TB
 | [07_proc_macro.md](./07_proc_macro.md) | 过程宏 | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 | Trait + Type System | 生态 (代码生成), DSL |
 | [08_nll_and_polonius.md](./08_nll_and_polonius.md) | NLL 与 Polonius | 非词法生命周期、数据流分析、Origin 模型、借用检查演进 | ✅ v1.0 | Borrowing, Lifetimes | RustBelt, Pin |
 | [19_parallel_distributed_pattern_spectrum.md](./19_parallel_distributed_pattern_spectrum.md) | 并行-分布式谱系 | 线程池→工作窃取→Actor→CSP→数据流→共识的连续体 | ✅ v1.0 | Concurrency, Async | Distributed Systems |
+| [20_stream_processing_semantics.md](./20_stream_processing_semantics.md) | 流处理语义 | Dataflow Model、Watermark、Exactly-Once、Differential Dataflow | ✅ v1.0 | Concurrency, Async | Stream Processing Ecosystem |
 
 ---
 

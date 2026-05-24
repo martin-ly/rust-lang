@@ -327,7 +327,7 @@ Gossip 传播模型:
 
 ### 5.3 CRDT（Conflict-free Replicated Data Types）
 
-> **[来源: Shapiro et al. 2011 — A Comprehensive Study of Convergent and Commutative Replicated Data Types] · [Rust crdt crate]** ✅
+> **[来源: Shapiro et al. 2011 — A Comprehensive Study of Convergent and Commutative Replicated Data Types] · [Rust crdt crate] · [Wikipedia: CRDT](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type)** ✅
 
 CRDT 是**无需同步**即可保证最终一致性的数据结构：
 
@@ -417,6 +417,10 @@ Rust 生态映射:
 | | `tokio::sync::mpsc` | Async CSP | 顺序一致 | 异步通信 |
 | | `actix` | Actor | Actor 内部顺序 | 并发服务 |
 | | `futures::Stream` | 数据流 / 背压 | 顺序一致 | 流处理 |
+| **L2.5 流处理** | `tokio-stream` | 异步流组合子 | 处理时间语义 | 异步应用流管道 |
+| | `timely-dataflow` | 分布式数据流图 | 逻辑时间戳 | 流引擎构建 |
+| | `differential-dataflow` | 增量 diff 代数 | 严格串行化 | 增量查询引擎 |
+| | `fluvio` | 分布式流平台 | 至少一次 | Kafka 替代 |
 | **L3 分布式** | `tikv/raft-rs` | Raft 共识 | 线性一致 | 分布式 KV |
 | | `libp2p` | Gossip / Kademlia | 最终一致 | P2P 网络 |
 | | `crdt` crate | CRDT | 最终一致 | 协同编辑 |

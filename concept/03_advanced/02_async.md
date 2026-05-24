@@ -107,6 +107,14 @@
   - [相关概念链接](#相关概念链接)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
+  - [十五、Stream trait 与流处理语义](#十五stream-trait-与流处理语义)
+    - [15.1 Stream = 异步 Iterator](#151-stream--异步-iterator)
+    - [15.2 Stream 与 Dataflow Model 的映射](#152-stream-与-dataflow-model-的映射)
+    - [15.3 从 Stream 到 differential-dataflow](#153-从-stream-到-differential-dataflow)
+  - [十六、边界测试：异步规则的编译错误](#十六边界测试异步规则的编译错误)
+    - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
+    - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
+    - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
 
 ## 〇、认知路径（Cognitive Path）
 >
@@ -3716,5 +3724,128 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
+---
+
+## 十五、Stream trait 与流处理语义
+
+> **[来源: Akidau et al. — The Dataflow Model, VLDB 2015]** · **[来源: Tokio Documentation]** · **[来源: futures-rs Documentation]** ✅
+
+### 15.1 Stream = 异步 Iterator
+
+`Stream` trait 是 Rust 异步编程中对**流（连续数据序列）**的核心抽象：
+
+```rust
+pub trait Stream {
+    type Item;
+    fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>>;
+}
+```
+
+与 `Iterator` 的区别：`Iterator::next()` 是同步的、阻塞的；`Stream::poll_next()` 是异步的、可挂起的。这使得 `Stream` 成为流处理的天然抽象——每个 `poll_next` 对应一个事件的到来，而 `Pending` 表示"等待更多数据"。
+
+### 15.2 Stream 与 Dataflow Model 的映射
+
+| Dataflow Model 维度 | Rust Stream 表达 |
+|:---|:---|
+| **What**（计算什么） | `Stream::map`, `filter`, `fold` 等组合子 |
+| **Where**（事件时间窗口） | `tokio::time::interval` + 手动窗口状态管理 |
+| **When**（触发时机） | `Stream::buffered`, `ready_chunks` 等背压控制 |
+| **How**（累积模式） | 用户自定义状态（`scan`、`fold`） |
+
+> **关键洞察**: Rust 的标准 `Stream` trait 提供了流处理的**拉取式（pull-based）**基础抽象，但缺少内置的事件时间语义、窗口管理和 Watermark 机制。这与 Flink 的 `DataStream` API 形成对比——后者是"推送式（push-based）"并内建完整的事件时间处理。tokio-stream 和 futures 提供的组合子主要面向"处理时间"语义的流处理，对于需要事件时间窗口的复杂场景，仍需借助 timely-dataflow 或外部框架。[来源: 💡 原创分析] · [futures-rs Documentation] ✅
+
+### 15.3 从 Stream 到 differential-dataflow
+
+```text
+抽象层次对比:
+
+futures::Stream (Rust 标准)
+  └── 拉取式、单线程/多线程、无事件时间
+  └── 适用: 异步应用内的数据管道
+
+tokio-stream (Tokio 生态)
+  └── 异步 + 背压 + 多生产者/消费者
+  └── 适用: 网络服务内的流处理
+
+timely-dataflow (分布式引擎)
+  └── 分布式 + 逻辑时间戳 + 确定性执行
+  └── 适用: 构建流处理系统本身
+
+differential-dataflow (增量计算)
+  └── 基于 timely + diff 代数 + 增量更新
+  └── 适用: 复杂增量查询（Materialize 核心）
+```
+
+---
+
+## 十六、边界测试：异步规则的编译错误
+
+### 16.1 边界测试：非 Send 类型跨 await 点（编译错误）
+
+```rust,compile_fail
+use std::rc::Rc;
+
+async fn bad_async() {
+    let data = Rc::new(42);
+    // ❌ 编译错误: `Rc<i32>` cannot be sent between threads safely
+    // async fn 生成的 Future 必须是 Send，才能在多线程执行器上运行
+    some_async_op().await; // await 点可能导致 Future 在线程间移动
+    println!("{}", data);
+}
+
+async fn some_async_op() {}
+
+// 正确: 使用 Arc<T> 替代 Rc<T>
+async fn good_async() {
+    let data = std::sync::Arc::new(42);
+    some_async_op().await; // ✅ Arc<i32> 是 Send + Sync
+    println!("{}", data);
+}
+```
+
+> **修正**: `async fn` 生成的 `Future` 必须是 `Send` 才能安全跨线程调度。使用 `Rc`、`RefCell` 等类型的变量不能跨越 `await` 点。
+
+### 16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）
+
+```rust
+use std::time::Duration;
+
+async fn bad_practice() {
+    // ⚠️ 逻辑错误: 在 async 上下文中调用阻塞函数
+    std::thread::sleep(Duration::from_secs(1)); // 阻塞整个线程！
+    // 这意味着其他任务无法在该线程上运行
+}
+
+// 正确: 使用非阻塞的异步等价物
+async fn good_practice() {
+    tokio::time::sleep(Duration::from_secs(1)).await; // 非阻塞，线程可调度其他任务
+}
+```
+
+> **修正**: 在 `async` 上下文中始终使用异步版本的 I/O 和定时器操作（`tokio::fs` 替代 `std::fs`、`tokio::time::sleep` 替代 `std::thread::sleep`）。
+
+### 16.3 边界测试：递归 async fn（编译错误）
+
+```rust,compile_fail
+// ❌ 编译错误: recursive `async fn` 需要 Box::pin 包装
+async fn recursive(n: u32) -> u32 {
+    if n == 0 { 1 } else { n + recursive(n - 1).await }
+    // 错误: recursive async fn 的类型大小无限
+}
+
+// 正确: 使用 Box::pin 将递归调用包装为动态分发
+use std::pin::Pin;
+use std::future::Future;
+
+fn recursive_fixed(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
+    Box::pin(async move {
+        if n == 0 { 1 } else { n + recursive_fixed(n - 1).await }
+    })
+}
+```
+
+> **修正**: `async fn` 是语法糖，展开后返回 `impl Future`。递归 `async fn` 会导致无限大的类型，必须使用 `Box::pin<dyn Future>` 进行类型擦除。
+
 > **相关判定树**: [异步判定树](../00_meta/concept_definition_decision_forest.md#八异步判定树)
 > **相关 FTA**: [异步安全失效树](../00_meta/fault_tree_analysis_collection.md#五异步安全失效树)
+> **相关概念**: [流处理语义](./20_stream_processing_semantics.md) · [流处理生态](../06_ecosystem/36_stream_processing_ecosystem.md)

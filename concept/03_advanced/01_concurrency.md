@@ -85,6 +85,10 @@
       - [反命题 4: "Atomic 操作总是线程安全的"](#反命题-4-atomic-操作总是线程安全的)
       - [反命题 5: "Mutex 保证临界区内指令不被重排"](#反命题-5-mutex-保证临界区内指令不被重排)
   - [权威来源索引](#权威来源索引)
+  - [十二、背压（Backpressure）：从并发到流控](#十二背压backpressure从并发到流控)
+    - [12.1 背压的本质](#121-背压的本质)
+    - [12.2 背压与并发原语的映射](#122-背压与并发原语的映射)
+    - [12.3 无背压的风险](#123-无背压的风险)
 
 ## 零、认知路径（Cognitive Path）
 >
@@ -1412,5 +1416,49 @@ graph TD
 
 > **[来源: [docs.rs](https://docs.rs/)]**
 
+---
+
+## 十二、背压（Backpressure）：从并发到流控
+
+> **[来源: Flink Documentation — Backpressure]** · **[来源: Reactive Streams Specification]** · **[来源: Tokio Documentation]** ✅
+
+### 12.1 背压的本质
+
+背压是流系统从下游向上游传播"处理能力不足"信号的机制。在并发编程中，它表现为**有界通道（bounded channel）**的阻塞语义。
+
+```rust
+use tokio::sync::mpsc;
+
+// 有界 channel: 缓冲区满时 send().await 阻塞
+let (tx, mut rx) = mpsc::channel::<i32>(100);
+
+// 生产者速度 > 消费者速度时，第 101 个 send 会等待
+// 这就是背压——生产者的速度被消费者自然限制
+```
+
+### 12.2 背压与并发原语的映射
+
+| 并发原语 | 背压机制 | 缓冲策略 |
+|:---|:---|:---|
+| `std::sync::mpsc::sync_channel(n)` | 阻塞 send | 有界阻塞 |
+| `tokio::sync::mpsc::channel(n)` | 异步等待 send | 有界异步阻塞 |
+| `crossbeam::channel::bounded(n)` | 阻塞/超时 send | 有界阻塞 |
+| `flume::bounded(n)` | 阻塞/异步 send | 有界混合 |
+| `async_channel::bounded(n)` | 异步等待 send | 有界异步阻塞 |
+
+### 12.3 无背压的风险
+
+```rust,compile_fail
+// 错误：无界 channel 导致内存无限增长
+let (tx, mut rx) = mpsc::unbounded_channel::<i32>();
+
+// 若消费者 crash 或极慢，生产者继续发送
+// → 内存泄漏 → OOM
+// 正确的做法：使用有界 channel，让背压自然传播
+```
+
+> **关键洞察**: Rust 的所有权 + `async/await` + 有界 channel = **零成本、类型安全的背压**。与 Java（需 Reactive Streams 显式 `request(n)`）或 Go（channel 有界但无编译期保证）相比，Rust 的背压是"隐式的"——由 `await` 点的挂起自然产生。这是 Rust 并发模型与流处理语义的自然交汇点。[来源: 💡 原创分析] · [Tokio Documentation] ✅
+
 > **相关判定树**: [并发判定树](../00_meta/concept_definition_decision_forest.md#七并发判定树)
 > **相关 FTA**: [并发安全失效树](../00_meta/fault_tree_analysis_collection.md#三并发安全失效树)
+> **相关概念**: [流处理语义](./20_stream_processing_semantics.md) · [Async/Await](./02_async.md)

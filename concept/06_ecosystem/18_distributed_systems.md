@@ -520,8 +520,9 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](../03_advanced/02_async.md) — 异步编程
-- [Async](../03_advanced/02_async.md) — 异步编程
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
+- [Stream Processing Semantics](../03_advanced/20_stream_processing_semantics.md) — 流处理核心语义
+- [Stream Processing Ecosystem](./36_stream_processing_ecosystem.md) — 流处理生态
 - [WebAssembly](./11_webassembly.md) — WebAssembly
 
 ---

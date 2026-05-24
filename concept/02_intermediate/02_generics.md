@@ -124,6 +124,9 @@
   - [十一、相关概念链接](#十一相关概念链接)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
+  - [十二、边界测试：泛型规则的编译错误](#十二边界测试泛型规则的编译错误)
+    - [12.1 边界测试：泛型参数未约束（编译错误）](#121-边界测试泛型参数未约束编译错误)
+    - [12.2 边界测试：递归类型的大小无限（编译错误）](#122-边界测试递归类型的大小无限编译错误)
 
 ## 一、权威定义（Definition）
 >
@@ -3066,5 +3069,44 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+## 十二、边界测试：泛型规则的编译错误
+
+### 12.1 边界测试：泛型参数未约束（编译错误）
+
+```rust,compile_fail
+fn max<T>(a: T, b: T) -> T {
+    // ❌ 编译错误: binary operation `>` cannot be applied to type `T`
+    // T 可以是任意类型，但 not all types implement PartialOrd
+    if a > b { a } else { b }
+}
+
+// 正确: 添加 trait bound
+fn max_fixed<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
+    if a > b { a } else { b } // ✅ T 必须可比较
+}
+```
+
+> **修正**: 泛型函数使用类型特定操作（如 `>`、`+`）时，必须通过 trait bound 约束类型参数。
+
+### 12.2 边界测试：递归类型的大小无限（编译错误）
+
+```rust,compile_fail
+// ❌ 编译错误: recursive type `List` has infinite size
+enum List {
+    Cons(i32, List), // List 包含自身 → 无限递归大小
+    Nil,
+}
+
+// 正确: 使用 Box 进行间接引用（指针大小固定）
+enum ListFixed {
+    Cons(i32, Box<ListFixed>), // Box<T> 是固定大小的指针
+    Nil,
+}
+```
+
+> **修正**: 递归类型必须包含间接层（`Box`、`Rc`、`Arc`），使类型大小有限。
 
 > **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树)
