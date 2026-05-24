@@ -1863,3 +1863,17 @@ fn main() {
 ```
 
 > **修正**: 上述代码在 Rust 当前编译器中**确实编译错误**，但从**形式化角度**有争议：`r1` 借用 `v[0]`，`v.push(4)` 可能重新分配整个 `Vec` 的内存（若容量不足），使 `r1` 悬垂。若 `v` 容量充足，`push` 不重新分配，形式化上 `r1` 和 `push` 不冲突。但编译器保守地拒绝——因为无法静态确定 `push` 是否重新分配。Polonius（下一代借用检查器）可能放松此类限制，但当前 NLL 保守。这展示了**形式化模型**与**编译器实现**的差距：形式化证明安全，但实现为保守近似。这与 Java 的数组越界检查（运行时精确检查）或 C 的"信任程序员"（无检查）不同——Rust 在编译期做保守决策，牺牲部分合法程序以换取零运行时开销。[来源: [Polonius](https://github.com/rust-lang/polonius)] · [来源: [Niko Matsakis Blog](https://smallcultfollowing.com/babysteps/)]
+
+### 10.4 边界测试：形式化所有权与编译器实现的偏差（运行时 UB）
+
+```rust,compile_fail
+fn main() {
+    let mut x = 5;
+    let r1 = &mut x;
+    // ❌ 编译错误: 不能在 &mut x 后同时使用 &x
+    let r2 = &x;
+    println!("{} {}", r1, r2);
+}
+```
+
+> **修正**: Rust 编译器的**借用检查**实现了**所有权形式化模型**的近似：1) 形式化："同一时间只能有一个 `&mut` 或任意数量的 `&`"；2) 编译器：NLL（Non-Lexical Lifetimes）使借用仅在**使用点**检查，而非作用域；3) Polonius（未来）：更精确的流敏感分析，允许更多合法程序。形式化与实现的差距：1) 某些安全程序被拒绝（false positive，如交叉引用循环）；2) 某些 unsafe 代码绕过检查（程序员责任）；3) `RefCell` 运行时检查替代编译期检查。研究：RustBelt 证明标准库的 unsafe 代码在形式化模型下安全；Stacked Borrows / Tree Borrows 定义引用的别名规则（Miri 检查）。这与 C 的内存模型（无形式化，实现定义行为）或 Haskell 的纯度（类似形式化，但无显式所有权）不同——Rust 是形式化理论成功指导工业实践的案例。[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)] · [来源: [Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)]

@@ -1317,3 +1317,25 @@ fn main() {
 ```
 
 > **修正**: Rust 的所有权系统本质是**仿射类型系统**（affine types）：值可被使用一次或零次（可选择丢弃）。线性逻辑要求值**必须**使用恰好一次（不可丢弃）。Rust 的 `Drop` trait 允许自定义丢弃逻辑，但不强制使用。要实现真正的线性类型：1) `must_use` 属性（警告未使用，但不编译错误）；2) 闭包/回调模式（将资源传入 continuation，强制使用）；3) 类型状态模式（状态转换消耗旧状态）。这与 Idris 的 `LinearTypes`（1.0+ 原生支持，编译期强制使用一次）或 Haskell 的 `LinearTypes`（GHC 9.x+，`-XLinearTypes`）不同——Rust 的 affine 类型更实用（允许未使用），但牺牲了一些形式化保证。[来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+
+### 10.4 边界测试：线性类型的 drop 约束与资源泄漏检测（编译错误）
+
+```rust,compile_fail
+struct LinearResource {
+    id: u64,
+}
+
+impl LinearResource {
+    fn new(id: u64) -> Self { LinearResource { id } }
+    fn consume(self) { println!("consumed {}", self.id); }
+}
+
+fn main() {
+    let res = LinearResource::new(1);
+    res.consume();
+    // ❌ 编译错误: res 已被 consume（move），不能再次使用
+    res.consume();
+}
+```
+
+> **修正**: Rust 的 **所有权** 实现了**近似线性类型**（affine type）：1) 值可使用一次（move）或多次（`Copy`）；2) 非 `Copy` 类型 move 后不可再用；3) `Drop` 在值离开作用域时自动调用（除非 `mem::forget`）。纯线性类型（如 Linear Haskell）要求值**必须**使用一次（不能丢弃），Rust 是**affine**（可用零次或一次）。资源管理：1) `File` — `drop` 关闭文件描述符；2) `MutexGuard` — `drop` 释放锁；3) `Box` — `drop` 释放堆内存。显式泄漏：`mem::forget(res)` — 不调用 `drop`，内存/资源泄漏（有时 intentional）。这与 C++ 的 RAII（类似，但允许拷贝和多次使用）或 Java 的 try-with-resources（运行时检查，编译器不保证使用）不同——Rust 的所有权是编译期资源管理。[来源: [Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [来源: [Linear Logic](https://plato.stanford.edu/entries/logic-linear/)]

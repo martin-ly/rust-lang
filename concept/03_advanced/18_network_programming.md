@@ -895,3 +895,20 @@ fn main() {
 ```
 
 > **修正**: `std::net::TcpStream` 是**同步** API，与 async runtime（tokio、async-std）**不兼容**。异步网络编程应使用：1) `tokio::net::TcpStream` — tokio 的原生异步 TCP；2) `async_std::net::TcpStream` — async-std 的实现；3) `futures::io` 的抽象。混用同步和异步代码：1) `tokio::task::spawn_blocking` — 在独立线程池中运行同步阻塞代码；2) `async_compat` crate — 包装同步 `std::net` 为 async 兼容。`std::net` 的 `set_nonblocking(true)` 只是将阻塞调用改为返回 `WouldBlock` 错误，不解决与 async runtime 的事件循环集成问题。这与 Go 的 `net` 包（自动在 goroutine 中调度，无 sync/async 区分）或 Python 的 `asyncio`（需显式使用 `asyncio.open_connection`，不能用同步 `socket`）不同——Rust 严格区分同步和异步 API。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [async-std](https://docs.rs/async-std/)]
+
+### 10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）
+
+```rust,compile_fail
+use std::net::TcpStream;
+
+fn main() {
+    let stream = TcpStream::connect("127.0.0.1:8080").unwrap();
+    // ❌ 编译错误: std::net::TcpStream 没有 async 方法
+    // stream.read_async(&mut buf).await;
+    
+    // 正确: 使用 tokio::net::TcpStream（async 版本）
+    // 或 std::net::TcpStream 的阻塞 IO
+}
+```
+
+> **修正**: **同步 IO** 与 **async IO** 的区分：1) `std::net::TcpStream` — 阻塞 IO（`read`/`write` 阻塞当前线程）；2) `tokio::net::TcpStream` — 异步 IO（`read`/`write` 返回 `Future`）；3) 混用后果：在 async 上下文中使用阻塞 IO → 阻塞 executor 线程 → 其他任务饥饿。`tokio::net::TcpStream` 的创建：1) `TcpStream::connect("addr").await` — 异步连接；2) `listener.accept().await` — 异步接受连接；3) 从 `std::net::TcpStream` 转换：`tokio::net::TcpStream::from_std(std_stream)`（需设置 non-blocking）。这与 Go 的 `net` 包（所有 IO 隐式异步，通过 goroutine 调度）或 Python 的 `asyncio`（显式区分 `socket` 和 `asyncio.open_connection`）不同——Rust 要求显式选择 IO 模型。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/)]

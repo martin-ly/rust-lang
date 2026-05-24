@@ -636,3 +636,20 @@ fn main() {
 ```
 
 > **修正**: `rayon` 是 Rust 的数据并行库，基于 **work-stealing** 线程池自动并行化迭代器。但**任务粒度**是关键：1) 任务太小（如 `x * 2`）→ 线程调度开销 > 并行收益；2) 任务太大 → 负载不均衡，某些线程空闲。`rayon` 的启发式：通过 `join` 递归分割任务，但无法控制最小分割粒度。优化：1) `par_chunks` 增加每任务工作量；2) `with_min_len(n)` 设置最小长度；3) 只在计算密集型操作中使用 `par_iter`（I/O 密集型用 `tokio`）。这与 Java 的 `ForkJoinPool`（类似 work-stealing）或 C++ 的 `std::execution::par`（C++17，类似抽象）类似——数据并行的性能取决于任务粒度，无万能配置。[来源: [rayon Documentation](https://docs.rs/rayon/)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+
+### 10.4 边界测试：rayon 的并行迭代与顺序依赖（运行时逻辑错误）
+
+```rust,compile_fail
+use rayon::prelude::*;
+
+fn main() {
+    let mut sum = 0;
+    // ❌ 编译错误: 不能在 par_iter 闭包中捕获 &mut sum（非 Send + Sync）
+    (0..100).into_par_iter().for_each(|i| {
+        sum += i; // sum 是 &mut i32，不能跨线程共享
+    });
+    println!("{}", sum);
+}
+```
+
+> **修正**: **`rayon`** 的**并行迭代器**：1) `par_iter()` / `into_par_iter()` — 将工作负载分片到线程池；2) 闭包必须是 `Send`（跨线程安全）和 `Fn`（无 `&mut` 环境捕获）；3) 顺序结果需使用 `reduce`、`fold` + `sum`、或原子变量。正确模式：1) `(0..100).into_par_iter().sum::<i32>()` — 内置求和；2) `fold` + `reduce`（分片累积后合并）；3) `AtomicUsize` / `Mutex`（共享可变状态，但不推荐）。`rayon` 的线程池：1) 全局线程池（默认线程数 = CPU 核心数）；2) `ThreadPoolBuilder` 自定义；3) `join`（分治并行）。这与 OpenMP 的 `parallel for`（编译指令，隐式 reduction）或 C++ 的 `std::execution::par`（类似 rayon，但标准库支持）不同——Rust 的 rayon 是库级并行，类型安全。[来源: [Rayon](https://docs.rs/rayon/)] · [来源: [Data Parallelism](https://doc.rust-lang.org/book/)]

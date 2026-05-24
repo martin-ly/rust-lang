@@ -902,3 +902,25 @@ fn main() {}
 ```
 
 > **修正**: `Stream::buffer_unordered(n)` 允许最多 `n` 个 future 同时执行，但**不限制总输入速率**。若生产者（`stream::iter`）速度快于消费者（`for_each`），中间结果在缓冲区累积，内存无限增长。**背压**（backpressure）解决：1) 使用有界 channel（`tokio::sync::mpsc::channel(cap)`）限制未处理项数；2) `Stream::ready_chunks(n)` 批量处理；3) 自定义 `Stream` 实现，在 `poll_next` 中返回 `Pending` 直到资源可用。Tokio 的 `Stream` 生态：`tokio_stream::wrappers` 将各种类型转为 Stream，`tokio::time::interval` 生成定时 Stream。这与 Reactive Streams（Java 的 `Flow` API，显式背压协议）或 Node.js 的 stream（自动背压 via `pause`/`resume`）不同——Rust 的 Stream 背压需显式设计。[来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Streams](https://docs.rs/tokio-stream/)]
+
+### 10.4 边界测试：async fn 在 trait 中的生命周期推断与实现约束（编译错误）
+
+```rust,compile_fail
+trait AsyncTrait {
+    async fn method(&self) -> i32;
+}
+
+struct MyStruct;
+
+impl AsyncTrait for MyStruct {
+    // ❌ 编译错误: async fn in trait 要求 RPITIT
+    // 当前稳定 Rust 已支持（1.75+），但以下模式仍可能失败
+    fn method(&self) -> impl std::future::Future<Output = i32> + '_ {
+        async { 42 }
+    }
+}
+
+fn main() {}
+```
+
+> **修正**: **`async fn` in trait**（稳定于 1.75）：1) `trait T { async fn method(&self) -> i32; }` — trait 定义；2) `impl T for S { async fn method(&self) -> i32 { ... } }` — 实现。底层是 **RPITIT**（Return Position Impl Trait In Traits）：`async fn` 返回 `impl Future<Output = i32>`。限制：1) `async fn` 隐式捕获所有输入 lifetime；2) 不能混用 `async fn` 和返回具体 `Future` 类型；3) `dyn Trait` 不支持 `async fn`（返回类型大小未知）。`dyn Trait` 替代方案：1) `#[async_trait]` 宏（将 `async fn` 转为返回 `Pin<Box<dyn Future>>`）；2) `trait T { fn method(&self) -> impl Future<Output = i32>; }` + 手动 `Box::pin`（复杂）。这与 JavaScript 的 `async` 方法（接口中直接声明，无特殊限制）或 Kotlin 的 `suspend` 函数（类似，但编译器处理）不同——Rust 的 `async fn` in trait 是类型系统的重大扩展。[来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/21/async-fn-rpitit.html)] · [来源: [RPITIT](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)]

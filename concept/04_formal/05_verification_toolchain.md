@@ -1267,3 +1267,21 @@ fn main() {}
 ```
 
 > **修正**: Kani（Rust 的模型检查器）通过**有界模型检查**验证程序：`#[kani::unwind(5)]` 限制循环展开次数为 5。`for i in 0..10` 迭代 10 次，超过展开限制 → 验证失败（"unwinding assertion"）。解决：1) 增加 `#[kani::unwind(10)]`；2) 提取循环不变量，用归纳法证明；3) 将循环替换为闭式表达式（`sum = n * (n - 1) / 2`）。Kani 的适用场景：有限状态协议（mutex、channel）、小数据结构的属性、unsafe 代码的内存安全边界。不适用：无界循环、复杂数据结构（图、树）、大规模并发程序。这与 CBMC（C 的模型检查器）或 SPIN（Promela 协议验证）类似——有界模型检查在关键代码中提供高保证，但可扩展性是核心挑战。[来源: [Kani Documentation](https://model-checking.github.io/kani/)] · [来源: [CBMC](https://github.com/diffblue/cbmc)]
+
+### 10.4 边界测试：Kani 的假设与 Rust 代码的验证边界（验证失败）
+
+```rust,compile_fail
+// Kani 验证代码: 假设输入范围
+#[kani::proof]
+fn verify_overflow() {
+    let x: u32 = kani::any();
+    let y: u32 = kani::any();
+    // ❌ 验证失败: 若 x 和 y 无约束，x + y 可能溢出
+    let z = x + y;
+    assert!(z >= x);
+}
+
+fn main() {}
+```
+
+> **修正**: **Kani**（Rust 的模型检查器）的**验证边界**：1) `kani::any()` — 生成任意值（符号值）；2) `kani::assume(cond)` — 添加约束；3) 无约束的 `any()` 可能导致溢出、越界等。验证失败 ≠ 程序错误：1) 可能假设不足（未限制输入范围）；2) 可能断言过强（如 `assert!(z > x)` 在 `y=0` 时失败）；3) 可能 Kani 不支持某些语言特性（async、某些 std 函数）。Kani 的限制：1) 循环需 `kani::unwind` 限制展开次数；2) 大状态空间可能内存爆炸；3) 不支持浮点精确模型检查。这与 Prusti（基于 Viper，支持更复杂的规范）或 Miri（解释执行，非模型检查）不同——Kani 是 bounded model checking，适合验证特定属性。[来源: [Kani](https://github.com/model-checking/kani)] · [来源: [Rust Verification Tools](https://alastairreid.github.io/rust-verification-tools/)]

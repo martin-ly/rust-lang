@@ -783,3 +783,20 @@ fn main() {}
 ```
 
 > **修正**: `#[global_allocator]` 将整个程序的**默认堆分配器**替换为自定义实现。限制：1) 整个 crate 图只能有一个全局分配器；2) 若依赖库也定义了全局分配器，链接错误；3) 分配器必须实现 `GlobalAlloc` trait（`alloc`/`dealloc`/`realloc`/`alloc_zeroed`）。常见自定义分配器：`jemallocator`（性能优化）、`mimalloc`（微软）、`dlmalloc`（嵌入式）。测试分配器：`std::alloc::alloc` + 泄漏检测。这与 C 的 `malloc` 重载（通过宏或链接器钩子）或 C++ 的 `operator new` 重载（类级别和全局级别）不同——Rust 的全局分配器替换是 crate 级别的，通过 trait 系统保证接口一致性。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+### 10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（运行时 UB）
+
+```rust,compile_fail
+use std::alloc::{alloc, dealloc, Layout};
+
+fn main() {
+    let layout = Layout::new::<u32>();
+    let ptr = unsafe { alloc(layout) };
+    
+    // ❌ 运行时 UB: 使用错误的 Layout dealloc
+    let wrong_layout = Layout::new::<u64>();
+    unsafe { dealloc(ptr, wrong_layout); }
+}
+```
+
+> **修正**: **`alloc`/`dealloc`** 的 **Layout 契约**：1) `alloc(layout)` 返回的指针必须用**相同 layout** 的 `dealloc` 释放；2) layout 的大小和对齐必须匹配；3) 重复释放（double free）→ UB；4) 释放未分配指针 → UB。`GlobalAlloc` trait 的要求：1) `alloc` 返回满足 layout.align 的指针；2) `dealloc` 的 ptr 和 layout 必须与 `alloc` 匹配；3) `realloc` 保持已有数据不变。调试工具：1) `#[cfg(debug_assertions)]` 使用检测分配器；2) Miri 检测 UB；3) AddressSanitizer / Valgrind（Linux）。这与 C 的 `malloc`/`free`（无 layout 概念，大小隐式存储）或 C++ 的 `new`/`delete`（调用析构函数 + 释放内存）不同——Rust 的分配器接口显式传递 layout，更灵活但更需小心。[来源: [GlobalAlloc](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)] · [来源: [Rust Allocator API](https://doc.rust-lang.org/std/alloc/index.html)]
