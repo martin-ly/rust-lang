@@ -107,6 +107,7 @@ assert_eq!(mem::align_of::<u32>(), 4);
 ---
 
 ## 2. 对齐 (Alignment)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 对齐规则
@@ -156,6 +157,7 @@ let ptr = arr.as_ptr().add(1) as *const u32;  // 地址 1，未对齐到 4
 ---
 
 ## 3. 尺寸与布局
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 结构体尺寸计算
@@ -233,6 +235,7 @@ fn main() {
 ---
 
 ## 4. repr 属性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 `#[repr(Rust)]` (默认)
@@ -252,6 +255,7 @@ struct DefaultLayout {
 ```
 
 ### 4.2 `#[repr(C)]` - C 兼容布局
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 字段按声明顺序排列
@@ -269,6 +273,7 @@ assert_eq!(mem::size_of::<CLayout>(), 8);
 ```
 
 ### 4.3 `#[repr(packed)]` - 紧凑布局
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 无填充字节
@@ -290,6 +295,7 @@ let b = unsafe { std::ptr::addr_of!(p.b).read_unaligned() };
 ```
 
 ### 4.4 `#[repr(align(N))]` - 自定义对齐
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -304,6 +310,7 @@ assert_eq!(mem::align_of::<CacheAligned>(), 64);
 **用途**: SIMD、缓存行对齐、硬件要求
 
 ### 4.5 组合使用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -319,9 +326,11 @@ struct AlignedC {
 ---
 
 ## 5. 零尺寸类型 (ZST)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 什么是 ZST
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 占用 0 字节的类型，大小为 0，对齐为 1。
@@ -334,6 +343,7 @@ struct Phantom<T>(std::marker::PhantomData<T>);
 ```
 
 ### 5.2 ZST 的行为
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -349,6 +359,7 @@ let arr: [ZeroSized; 1_000_000] = [ZeroSized; 1_000_000];
 ```
 
 ### 5.3 ZST 的用途
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **标记类型**:
@@ -383,9 +394,11 @@ struct Disconnected;
 ---
 
 ## 6. 动态尺寸类型 (DST)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 什么是 DST
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 大小在编译时未知的类型，必须通过指针访问。
@@ -398,6 +411,7 @@ dyn Trait        // trait 对象
 ```
 
 ### 6.2 胖指针
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 DST 的指针是"胖指针"，包含地址和元数据。
@@ -412,6 +426,7 @@ let t: &dyn Debug = &42;      // 地址 + vtable 指针
 ```
 
 ### 6.3 自定义 DST
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -428,9 +443,11 @@ let slice: &MySlice<i32> = /* ... */;
 ---
 
 ## 7. 布局优化技巧
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 字段排序
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -452,6 +469,7 @@ struct Good {
 ```
 
 ### 7.2 使用枚举代替标记 + 数据
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -469,6 +487,7 @@ enum Good {
 ```
 
 ### 7.3 Box 大字段
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -490,9 +509,11 @@ enum Optimized {
 ---
 
 ## 8. FFI 布局兼容性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 C 结构体映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```c
@@ -517,6 +538,7 @@ assert_eq!(mem::size_of::<RustStruct>(), 12);
 ```
 
 ### 8.2 平台差异
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -531,6 +553,7 @@ struct PlatformDependent {
 ```
 
 ### 8.3 布局验证
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -549,6 +572,7 @@ mod tests {
 ---
 
 ## 参考
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [The Rust Reference - Type Layout](https://doc.rust-lang.org/reference/type-layout.html)
@@ -696,4 +720,3 @@ mod tests {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

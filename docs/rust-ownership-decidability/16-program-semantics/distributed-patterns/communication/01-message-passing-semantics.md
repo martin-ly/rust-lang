@@ -41,6 +41,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 通信模型分类
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -66,6 +67,7 @@
 ```
 
 ### 2.2 形式化定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **消息通道类型:**
@@ -104,6 +106,7 @@ $$
 其中 $\sigma' = \sigma[c \mapsto \text{enqueue}(\sigma(c), v)]$
 
 ### 2.3 可靠性分类
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 级别 | 保证 | 应用场景 |
@@ -115,9 +118,11 @@ $$
 ---
 
 ## 3. Rust 消息传递实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 标准库 mpsc
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -161,6 +166,7 @@ $$
 $$
 
 ### 3.2 异步 tokio::sync::mpsc
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -194,6 +200,7 @@ async fn async_channel_semantics() {
 ```
 
 ### 3.3 oneshot 通道语义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -230,9 +237,11 @@ impl<T> Sender<T> {
 ---
 
 ## 4. 分布式消息传递语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 网络分区下的语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -252,6 +261,7 @@ impl<T> Sender<T> {
 ```
 
 ### 4.2 分布式一致性语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -276,6 +286,7 @@ pub trait ExactlyOnceDelivery {
 ```
 
 ### 4.3 超时与重试语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -310,9 +321,11 @@ impl<T: Clone> ReliableSender<T> {
 ---
 
 ## 5. 形式化验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 消息传递不变量
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **通道安全定理:**
@@ -335,6 +348,7 @@ $$
 $$
 
 ### 5.2 线性类型与通道
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -351,6 +365,7 @@ $$
 ---
 
 ## 6. 与其他模式的关联
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 模式 | 语义关系 | 典型应用 |
@@ -363,6 +378,7 @@ $$
 ---
 
 ## 7. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 消息传递语义是分布式系统的核心，Rust 的所有权模型提供了编译期保证：
@@ -484,4 +500,3 @@ $$
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -1,6 +1,7 @@
 # 11 隐式终止模式 (Implicit Termination)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [11 隐式终止模式 (Implicit Termination)](#11-隐式终止模式-implicit-termination)
@@ -107,6 +108,7 @@ $$
 | 可验证性 | 好 | 困难 |
 
 ## 终止检测算法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Dijkstra-Scholten 算法
@@ -177,6 +179,7 @@ $$
 ```
 
 ## 死锁分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 死锁检测
@@ -249,6 +252,7 @@ fn detect_deadlock(wait_graph: &Graph<ProcessId>) -> Option<Vec<ProcessId>> {
 ```
 
 ## BPMN 2.0 表示
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 在 BPMN 2.0 中，隐式终止是自然行为：
@@ -312,6 +316,7 @@ fn detect_deadlock(wait_graph: &Graph<ProcessId>) -> Option<Vec<ProcessId>> {
 ```
 
 ## 形式化语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 状态机形式化
@@ -359,6 +364,7 @@ Terminated = if deadlock(System) then STOP else RUN
 ```
 
 ## 正确性证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理（终止检测正确性）**: 当且仅当工作流的所有路径都完成时，终止检测算法报告终止。
@@ -394,6 +400,7 @@ Terminated = if deadlock(System) then STOP else RUN
 因此无假阳性。∎
 
 ## Rust 实现示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 基础实现
@@ -615,6 +622,7 @@ pub fn distributed_termination_example() {
 ```
 
 ### 死锁检测实现
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -754,6 +762,7 @@ impl BankersAlgorithm {
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 模式 | 终止方式 | 使用场景 |
@@ -769,6 +778,7 @@ $$
 $$
 
 ## 应用场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **并行计算**：Map-Reduce 任务自然完成
@@ -779,6 +789,7 @@ $$
 6. **工作流引擎**：无显式结束节点的流程
 
 ### 注意事项
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 需要确保所有路径最终都会结束（终止性验证）
@@ -788,6 +799,7 @@ $$
 - 实现终止检测算法监控状态
 
 ## 学术参考
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Dijkstra, E.W., & Scholten, C.S.** (1980). "Termination Detection for Diffusing Computations." *Information Processing Letters*, 11(1), 1-4.
@@ -820,6 +832,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -1080,4 +1093,3 @@ $$
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

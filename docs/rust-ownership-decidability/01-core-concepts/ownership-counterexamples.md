@@ -165,6 +165,7 @@ fn wrong_early_release() {
 ---
 
 ## 2. 借用规则反例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 XOR原则反例: 可变+共享借用共存
@@ -246,6 +247,7 @@ fn fixed_copy_value() {
 ---
 
 ### 2.2 多个可变借用反例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -289,9 +291,11 @@ fn multiple_mutable_borrows() {
 ---
 
 ## 3. 生命周期反例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 生命周期不足反例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -351,6 +355,7 @@ fn borrow_with_lifetime<'a>(input: &'a String) -> &'a str {
 ---
 
 ### 3.2 生命周期不匹配反例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -406,9 +411,11 @@ struct SelfReferential {
 ---
 
 ## 4. Send/Sync反例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 Rc跨线程反例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -472,9 +479,11 @@ fn arc_across_threads() {
 ---
 
 ## 5. 常见逻辑谬误
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 "Clone是免费的"
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -498,6 +507,7 @@ fn efficient_borrow() {
 ```
 
 ### 5.2 "RefCell可以替代所有借用"
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -522,6 +532,7 @@ fn prefer_compile_time() {
 ---
 
 ## 6. 反例总结表
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 反例 | 违反规则 | 错误类型 | 修复方案 |
@@ -705,4 +716,3 @@ fn prefer_compile_time() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

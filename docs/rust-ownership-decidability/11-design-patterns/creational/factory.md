@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Factory Pattern in Rust](#factory-pattern-in-rust)
@@ -92,6 +93,7 @@ let cat = create_animal(AnimalType::Cat, "Whiskers");
 ```
 
 ### 工厂方法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -148,6 +150,7 @@ fn process_data(factory: &dyn ParserFactory, data: &str) -> Result<(), ParseErro
 ---
 
 ## 抽象工厂
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -218,6 +221,7 @@ impl GUIFactory for MacFactory {
 ---
 
 ## 形式化定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -232,6 +236,7 @@ Factory<T> = (args: Args) → T
 ---
 
 ## 使用泛型的零成本抽象
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -277,6 +282,7 @@ where
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [creational 目录](./README.md)
@@ -355,4 +361,3 @@ where
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

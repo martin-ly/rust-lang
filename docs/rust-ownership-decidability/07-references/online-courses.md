@@ -70,6 +70,7 @@
 | **Take your first steps with Rust** | Microsoft Learn | 🟢 | 3 小时 | 微软官方学习路径 | [Microsoft](https://docs.microsoft.com/en-us/learn/paths/rust-first-steps/) |
 
 ### 进阶级课程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 课程名称 | 平台 | 难度 | 时长 | 特点 | 链接 |
@@ -84,6 +85,7 @@
 | **Rust Embedded** | 官方文档 | 🔴 | 自定进度 | 嵌入式开发 | [官方](https://doc.rust-lang.org/stable/embedded-book/) |
 
 ### 高级课程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 课程名称 | 平台 | 难度 | 时长 | 特点 | 链接 |
@@ -98,9 +100,11 @@
 ---
 
 ## 程序语言理论课程
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 大学课程
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 课程名称 | 学校 | 难度 | 时长 | 特点 | 链接 |
@@ -115,6 +119,7 @@
 | **CS 51: Abstraction and Design** | Harvard | 🟡 | 完整学期 | 函数式编程入门 | [Harvard](https://cs51.io/) |
 
 ### 在线 MOOC
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 课程名称 | 平台 | 难度 | 时长 | 特点 | 链接 |
@@ -127,6 +132,7 @@
 | **Build a Modern Computer from First Principles** | Coursera (Hebrew U) | 🟡 | 6 周 | 从 Nand 到 Tetris | [Coursera](https://www.coursera.org/learn/build-a-computer) |
 
 ### 经典教材配套
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 课程/资源 | 配套书籍 | 难度 | 特点 | 链接 |
@@ -140,9 +146,11 @@
 ---
 
 ## 类型系统课程
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 类型理论
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 课程名称 | 讲师/机构 | 难度 | 时长 | 特点 | 链接 |
@@ -155,6 +163,7 @@
 | **Advanced Topics in Type Theory** | 多个研究机构 | 🔴 | 不定 | 高级类型理论 | [各研究机构] |
 
 ### 依赖类型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 课程名称 | 讲师/机构 | 难度 | 时长 | 特点 | 链接 |
@@ -169,9 +178,11 @@
 ---
 
 ## 形式化验证课程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 验证基础
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 课程名称 | 学校/机构 | 难度 | 时长 | 特点 | 链接 |
@@ -184,6 +195,7 @@
 | **Separation Logic** | Imperial College | 🔴 | 不定 | 分离逻辑专题 | [Imperial](https://www.doc.ic.ac.uk/~jv/verification/) |
 
 ### 模型检测
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 课程名称 | 学校/机构 | 难度 | 时长 | 特点 | 链接 |
@@ -194,6 +206,7 @@
 | **Formal Verification of Systems Software** | Stanford | 🔴 | 完整学期 | 系统软件验证 | [Stanford](https://web.stanford.edu/class/cs259/) |
 
 ### Rust 专用验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 课程/资源 | 讲师/机构 | 难度 | 时长 | 特点 | 链接 |
@@ -207,9 +220,11 @@
 ---
 
 ## 学术讲座和研讨会
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### PL 会议讲座
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 会议/活动 | 主题 | 难度 | 特点 | 链接 |
@@ -223,6 +238,7 @@
 | **ICSE** | 软件工程 | 🔴 | 软件工程顶级 | [ACM](https://conf.researchr.org/home/icse-2024) |
 
 ### 夏季学校和讲座
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 活动名称 | 主题 | 难度 | 时间 | 链接 |
@@ -235,6 +251,7 @@
 | **Separation Logic Workshops** | 分离逻辑 | 🔴 | 不定期 | [各研究机构] |
 
 ### 在线讲座系列
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 系列名称 | 主题 | 难度 | 平台 | 链接 |
@@ -249,9 +266,11 @@
 ---
 
 ## 工作坊和训练营
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 动手工作坊
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 工作坊名称 | 主题 | 难度 | 时长 | 链接 |
@@ -263,6 +282,7 @@
 | **Rust Verification Workshop** | Rust 验证 | 🔴 | 1 天 | [RV](https://sites.google.com/view/rustverify2024) |
 
 ### 黑客松和挑战
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 活动名称 | 主题 | 难度 | 频率 | 链接 |
@@ -275,9 +295,11 @@
 ---
 
 ## 学习路径规划
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 路径一：Rust 全栈工程师（6-12 个月）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -307,6 +329,7 @@
 ```
 
 ### 路径二：PL 理论研究者（12-24 个月）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -333,6 +356,7 @@
 ```
 
 ### 路径三：形式化验证工程师（12-18 个月）
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -358,6 +382,7 @@
 ```
 
 ### 路径四：系统安全研究员（18-24 个月）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -390,9 +415,11 @@
 ---
 
 ## 📊 课程统计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 按类别统计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 类别 | 课程数量 | 占比 |
@@ -405,6 +432,7 @@
 | **总计** | **83** | **100%** |
 
 ### 按难度统计
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 难度等级 | 课程数量 | 占比 |
@@ -414,6 +442,7 @@
 | 🔴 高级 | 38 | 46% |
 
 ### 按平台统计
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 平台类型 | 课程数量 | 占比 |
@@ -427,9 +456,11 @@
 ---
 
 ## 🎯 推荐学习顺序
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 快速入门（3 个月）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -449,6 +480,7 @@
 ```
 
 ### 系统学习（12 个月）
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -471,6 +503,7 @@
 ---
 
 ## 🔗 相关资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [书籍和资源索引](./books-resources.md) - 这些课程的配套教材
@@ -581,4 +614,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

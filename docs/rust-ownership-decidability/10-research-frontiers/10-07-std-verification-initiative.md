@@ -64,6 +64,7 @@ Rust 标准库是 Rust 生态系统的基石，被无数应用程序依赖。
 4. **文档价值**: 规格说明作为精确文档
 
 ### 1.2 项目目标
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **主要目标**:
@@ -83,9 +84,11 @@ Rust 标准库是 Rust 生态系统的基石，被无数应用程序依赖。
 ---
 
 ## 2. 验证工具选择
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 工具对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 项目评估了多个验证工具，每个都有其优势和限制:
@@ -97,6 +100,7 @@ Rust 标准库是 Rust 生态系统的基石，被无数应用程序依赖。
 | **Verus** | CMU/VMware | SMT + 资源代数 | 支持并发，系统设计 | 需扩展 Rust 语法 | 并发原语 |
 
 ### 2.2 工具分工
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -121,9 +125,11 @@ Rust 标准库是 Rust 生态系统的基石，被无数应用程序依赖。
 ---
 
 ## 3. 合约语言设计
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 设计原则
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **目标**: 创建一个统一的合约规范语言，兼容多个验证工具。
@@ -136,6 +142,7 @@ Rust 标准库是 Rust 生态系统的基石，被无数应用程序依赖。
 4. **增量采用**: 可以逐步添加到现有代码
 
 ### 3.2 语法提案
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 基于 MCP (Major Change Proposal) 的讨论，提议的合约语法:
@@ -181,9 +188,11 @@ impl<T> Vec<T> {
 ---
 
 ## 4. 验证范围与优先级
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 核心模块
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **第一阶段** (高优先级):
@@ -204,6 +213,7 @@ impl<T> Vec<T> {
 | `core::iter` | 迭代器 | Creusot | 中 |
 
 ### 4.2 验证属性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **安全属性** (必须验证):
@@ -235,9 +245,11 @@ impl<T> Vec<T> {
 ---
 
 ## 5. 技术挑战
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 Unsafe 代码验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **挑战**:
@@ -253,6 +265,7 @@ impl<T> Vec<T> {
 - 建立 unsafe 代码规范指南
 
 ### 5.2 泛型代码验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **挑战**:
@@ -268,6 +281,7 @@ impl<T> Vec<T> {
 - 选择代表性实例进行验证
 
 ### 5.3 性能考虑
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **挑战**:
@@ -285,9 +299,11 @@ impl<T> Vec<T> {
 ---
 
 ## 6. 项目组织
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 团队结构
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **项目负责人**: Celina G. Val
@@ -300,6 +316,7 @@ impl<T> Vec<T> {
 - 形式化方法研究人员
 
 ### 6.2 工作流程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -339,9 +356,11 @@ impl<T> Vec<T> {
 ---
 
 ## 7. 进展跟踪
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 当前状态 (2024年末)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模块 | 状态 | 工具 | 备注 |
@@ -353,6 +372,7 @@ impl<T> Vec<T> {
 | `Mutex::lock` | ⚪ 计划中 | Verus | 需并发支持 |
 
 ### 里程碑
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **2024 Q4**: 完成合约语言 MCP
@@ -364,15 +384,18 @@ impl<T> Vec<T> {
 ---
 
 ## 8. 相关资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 官方文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - **Rust Project Goals 2024H2**
   - 链接: <https://rust-lang.github.io/rust-project-goals/2024h2/std-verification.html>
 
 ### 相关工具
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - **Kani**: <https://github.com/model-checking/kani>
@@ -380,12 +403,14 @@ impl<T> Vec<T> {
 - **Verus**: <https://github.com/verus-lang/verus>
 
 ### 相关项目
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **RustBelt**: 标准库形式化基础
 - **RefinedRust**: 未来的基础性验证可能路径
 
 ### 讨论渠道
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - Rust 内部论坛
@@ -488,4 +513,3 @@ impl<T> Vec<T> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -1,33 +1,5 @@
 # 16 里程碑模式 (Milestone)
 
-## 📑 目录
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-- [16 里程碑模式 (Milestone)](#16-里程碑模式-milestone)
-  - [📑 目录](#-目录)
-  - [📋 目录](#-目录-1)
-  - [模式定义与语义](#模式定义与语义)
-    - [核心语义](#核心语义)
-    - [状态条件语义](#状态条件语义)
-  - [时序逻辑形式化](#时序逻辑形式化)
-    - [LTL 表示](#ltl-表示)
-    - [CTL 表示](#ctl-表示)
-  - [BPMN 2.0 表示](#bpmn-20-表示)
-  - [状态机语义](#状态机语义)
-  - [正确性证明](#正确性证明)
-    - [安全性证明](#安全性证明)
-    - [活性证明](#活性证明)
-  - [Rust 实现示例](#rust-实现示例)
-    - [基础实现](#基础实现)
-    - [组合里程碑](#组合里程碑)
-    - [带超时的里程碑](#带超时的里程碑)
-  - [与其他模式的关系](#与其他模式的关系)
-  - [应用场景](#应用场景)
-    - [注意事项](#注意事项)
-  - [学术参考](#学术参考)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-
 ## 📋 目录
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -100,6 +72,7 @@ $$
 $$
 
 ## 时序逻辑形式化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### LTL 表示
@@ -146,6 +119,7 @@ $$
 $$
 
 ## BPMN 2.0 表示
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 在 BPMN 2.0 中，里程碑可以使用**条件事件（Conditional Event）**或**信号事件（Signal Event）**实现：
@@ -219,6 +193,7 @@ $$
 ```
 
 ## 状态机语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **完整状态机：**
@@ -271,9 +246,11 @@ $$
 ```
 
 ## 正确性证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 安全性证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理（条件检查）**: 活动只有在里程碑达成后才能执行。
@@ -288,6 +265,7 @@ $$
 因此安全性得证。∎
 
 ### 活性证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理（最终执行）**: 如果里程碑最终达成，依赖它的活动最终会被启用。
@@ -304,9 +282,11 @@ $$
 因此活动最终会被执行。∎
 
 ## Rust 实现示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 基础实现
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -438,6 +418,7 @@ impl OrderProcessor {
 ```
 
 ### 组合里程碑
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -532,6 +513,7 @@ pub async fn milestone_example() {
 ```
 
 ### 带超时的里程碑
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -636,6 +618,7 @@ impl<T: Clone + Send + Sync> RevocableMilestone<T> {
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 触发方式 | 状态保持 |
@@ -652,6 +635,7 @@ $$
 $$
 
 ## 应用场景
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **订单处理**：等待支付确认后才能发货
@@ -662,6 +646,7 @@ $$
 6. **流程编排**：协调多个异步操作
 
 ### 注意事项
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 里程碑状态需要持久化以支持故障恢复
@@ -671,6 +656,7 @@ $$
 - 监控里程碑达成时间
 
 ## 学术参考
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Clarke, E.M., Grumberg, O., & Peled, D.A.** (1999). *Model Checking*. MIT Press.
@@ -701,6 +687,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -919,4 +906,3 @@ $$
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

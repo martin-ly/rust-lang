@@ -69,6 +69,7 @@
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -207,6 +208,7 @@ graph LR
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### BPMN 表示
@@ -270,6 +272,7 @@ graph LR
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### CCS 表示
@@ -331,6 +334,7 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现
@@ -523,6 +527,7 @@ pub fn hierarchical_choice(payment: &PaymentMethod) -> &'static str {
 > [来源: tokio docs - select! macro]
 
 ### 5.3 支付处理完整示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -638,9 +643,11 @@ pub fn demonstrate_type_safety(request: PaymentRequest) -> PaymentResult {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 活性 (Liveness)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理**: 若守卫条件满足互斥且完备，则排他选择最终会完成。
@@ -667,6 +674,7 @@ pub fn demonstrate_type_safety(request: PaymentRequest) -> PaymentResult {
 > [来源: POPL - Temporal Logic Verification]
 
 ### 6.2 安全性 (Safety)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定理**: 排他选择保证恰好一个分支被执行。
@@ -690,6 +698,7 @@ $$
 > [来源: RustBelt - PLDI 2015]
 
 ### 6.3 正确性条件
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **完备性** (Exhaustiveness): 所有可能输入都至少匹配一个分支。在 Rust 中由编译器静态验证：
@@ -707,9 +716,11 @@ error[E0004]: non-exhaustive patterns: `BankTransfer` not covered
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 模式层次
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -736,6 +747,7 @@ graph TD
 ```
 
 ### 7.2 形式化关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 $$
@@ -761,6 +773,7 @@ $$
 $$
 
 ### 7.3 与合并模式的配合
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 分割模式 | 推荐合并模式 | 说明 |
@@ -772,9 +785,11 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 电商支付路由
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **场景**: 根据用户选择的支付方式路由到不同处理通道
@@ -801,6 +816,7 @@ pub async fn route_payment(route: PaymentRoute, amount: Decimal) -> Transaction 
 **关键**: `match` 穷尽性检查保证新增支付方式时必须处理，否则编译失败。
 
 ### 8.2 权限控制系统
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **场景**: 根据用户角色授予不同权限
@@ -823,6 +839,7 @@ pub fn get_permissions(role: Role) -> Vec<Permission> {
 **安全保证**: 编译器确保所有角色都被处理，防止权限遗漏。
 
 ### 8.3 动态调度引擎
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **场景**: 根据任务特征选择执行策略
@@ -845,9 +862,11 @@ pub fn select_executor(priority: TaskPriority) -> Box<dyn Executor> {
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 9.1 带默认分支的排他选择
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 当守卫条件可能不完备时，引入默认分支：
@@ -870,6 +889,7 @@ where T: Clone,
 对应 BPMN 中排他网关的 `default` 出边。
 
 ### 9.2 异步排他选择
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 基于事件驱动的动态选择，使用 `futures::select!` 或 `tokio::select!`：
@@ -889,6 +909,7 @@ pub async fn race_branches<T>(
 此变体放宽了静态互斥性，采用"先到先服务"语义。
 
 ### 9.3 嵌套排他选择
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 排他选择的分支本身可以是另一个排他选择：
@@ -928,6 +949,7 @@ pub fn process_nested(payment: PaymentRegion) -> String {
 ---
 
 ## 10. 总结
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 排他选择模式提供了严格的分支决策机制，确保在任何执行路径上恰好有一个分支被激活。其核心优势包括：
@@ -943,6 +965,7 @@ pub fn process_nested(payment: PaymentRegion) -> String {
 ---
 
 ## 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". Distributed and Parallel Databases.
@@ -1232,4 +1255,3 @@ pub fn process_nested(payment: PaymentRegion) -> String {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

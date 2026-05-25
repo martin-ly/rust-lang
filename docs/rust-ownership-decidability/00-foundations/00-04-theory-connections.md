@@ -162,6 +162,7 @@
 ---
 
 ## 3. 仿射逻辑 ↔ Rust所有权
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 语法对应
@@ -224,6 +225,7 @@ Rust借用检查的可判定性:
 ---
 
 ## 4. 分离逻辑 ↔ RustBelt/Iris
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 Iris 的分离逻辑基础
@@ -249,6 +251,7 @@ Iris 扩展:
 ```
 
 ### 4.2 所有权谓词的编码
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -266,6 +269,7 @@ RustBelt 中的类型解释:
 ```
 
 ### 4.3 生命周期逻辑的分离逻辑解释
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -287,9 +291,11 @@ RustBelt 中的类型解释:
 ---
 
 ## 5. 类型理论 ↔ 程序验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 Curry-Howard 扩展
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -309,6 +315,7 @@ Rust的扩展:
 ```
 
 ### 5.2 类型即规范
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -339,9 +346,11 @@ fn with_lifetime<'a>(s: &'a str) -> &'a str {
 ---
 
 ## 6. 可判定性理论的统一视角
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 复杂度谱系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -362,6 +371,7 @@ Rust的设计: 将核心功能保持在可判定区域
 ```
 
 ### 6.2 近似与不可判定性的处理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -390,9 +400,11 @@ Rust编译器处理不可判定性的策略:
 ---
 
 ## 7. 范畴论语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 7.1 张量范畴
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -411,6 +423,7 @@ Rust近似于:
 ```
 
 ### 7.2 仿射范畴
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -428,6 +441,7 @@ Rust近似于:
 ```
 
 ### 7.3 有向图范畴
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -448,9 +462,11 @@ Rust近似于:
 ---
 
 ## 8. 综合论证：为什么 Rust 选择这些理论
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 设计决策分析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -479,6 +495,7 @@ A:
 ```
 
 ### 8.2 理论选择的协同效应
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -495,9 +512,11 @@ A:
 ---
 
 ## 9. 理论联系的实用意义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 9.1 对编译器实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -510,6 +529,7 @@ A:
 ```
 
 ### 9.2 对形式化验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -524,6 +544,7 @@ A:
 ```
 
 ### 9.3 对教学与学习
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -538,9 +559,11 @@ A:
 ---
 
 ## 10. 开放问题与未来方向
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 10.1 理论问题
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Polonius的复杂度**: 精确复杂度类是什么？
@@ -549,6 +572,7 @@ A:
 4. **统一理论**: 能否将所有这些理论统一在一个框架中？
 
 ### 10.2 实践问题
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **验证自动化**: 如何提高自动化程度？
@@ -559,6 +583,7 @@ A:
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. Girard, J.-Y. (1987). Linear Logic. *TCS*.
@@ -710,4 +735,3 @@ A:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

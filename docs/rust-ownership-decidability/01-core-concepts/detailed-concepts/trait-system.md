@@ -121,6 +121,7 @@ T: ?Sized  ≡  T 可以是动态大小类型
 ---
 
 ## 2. 泛型与 Trait Bound
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 基本泛型语法
@@ -266,6 +267,7 @@ identity(String::new()); // 调用 identity_string
 ---
 
 ## 3. 关联类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 关联类型的形式化定义
@@ -373,6 +375,7 @@ impl Shape for Square {
 ---
 
 ## 4. Trait 对象与动态分发
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 Trait 对象的形式化定义
@@ -506,6 +509,7 @@ fn process_dynamic(p: &dyn Processor) {
 ---
 
 ## 5. 高级 Trait 特性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 完全限定语法
@@ -644,6 +648,7 @@ impl !Sync for RawPointer {}
 ---
 
 ## 6. 常见陷阱与解决方案
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 陷阱 1: 孤儿规则 (Orphan Rules)
@@ -734,6 +739,7 @@ fn make_iterator<'a>(data: &'a [i32]) -> impl Iterator<Item = &'a i32> + 'a {
 ```
 
 ### 陷阱 4: 过多的 trait bound
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -760,6 +766,7 @@ where
 ```
 
 ### 陷阱 5: 过度使用动态分发
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -788,9 +795,11 @@ fn process_impl(items: &[impl Drawable]) {
 ---
 
 ## 7. 与其他语言对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 Java: 接口与泛型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **Java 版本**:
@@ -834,6 +843,7 @@ void processAll(List<? extends Drawable> items) {
 | 对象安全 | 编译期检查 | 运行时 |
 
 ### 7.2 C++: 模板与概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **C++20 版本**:
@@ -873,6 +883,7 @@ struct iterator_traits<std::vector<T>::iterator> {
 | 模板元编程 | 类型系统 | SFINAE/concepts |
 
 ### 7.3 Go: 接口
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **Go 版本**:
@@ -914,6 +925,7 @@ func Process(d Drawable) {
 | 性能 | 单态化优化 | 接口调用开销 |
 
 ### 7.4 Haskell: Typeclass
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **Haskell 版本**:
@@ -952,9 +964,11 @@ class Collection c a | c -> a where
 ---
 
 ## 8. 性能影响分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 单态化的代码膨胀
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -985,6 +999,7 @@ fn process_dynamic(items: &[&dyn Drawable]) {
 ```
 
 ### 8.2 静态分发 vs 动态分发性能
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -1021,6 +1036,7 @@ dynamic  time: [2.5 ns]    # vtable 查找开销
 ```
 
 ### 8.3 关联类型的零成本
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 关联类型在编译期解析，无运行时开销：
@@ -1036,6 +1052,7 @@ trait Iterator {
 ```
 
 ### 8.4 泛型缓存优化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -1062,9 +1079,11 @@ where
 ---
 
 ## 9. 设计模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 9.1 类型状态模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -1115,6 +1134,7 @@ impl Post<Published> {
 ```
 
 ### 9.2 Builder 模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -1183,6 +1203,7 @@ let request = HttpRequestBuilder::new()
 ```
 
 ### 9.3 访问者模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -1229,6 +1250,7 @@ impl ExprVisitor for Evaluator {
 ```
 
 ### 9.4 策略模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -1273,6 +1295,7 @@ sorter.sort(&mut data);
 ```
 
 ### 9.5 装饰器模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -1333,6 +1356,7 @@ impl<T: DataSource> DataSource for CompressionDecorator<T> {
 ---
 
 ## 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 的 trait 系统是类型系统的核心，提供了：
@@ -1755,4 +1779,3 @@ Rust 的 trait 系统是类型系统的核心，提供了：
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

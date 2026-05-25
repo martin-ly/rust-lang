@@ -1,5 +1,6 @@
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [📑 目录](#-目录)
@@ -83,6 +84,7 @@ $$
 **不干涉**: 一个命令的执行不破坏另一个命令的前置/后置条件。
 
 ### 7.2 资源不变量
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **思想**: 共享资源由不变量描述，临界区执行时暂时破坏，退出时恢复。
@@ -92,6 +94,7 @@ $$
 $$
 
 ### 7.3 Rely-Guarantee 推理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **Rely 条件** $R$: 环境可能执行的状态转换。
@@ -107,9 +110,11 @@ $$
 ---
 
 ## 8. 在 Rust 中的应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 Rust 的前置/后置条件
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **类型作为轻量级规约**:
@@ -129,6 +134,7 @@ fn divide(x: i32, y: i32) -> Option<i32> {
 ```
 
 ### 8.2 所有权作为分离逻辑
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **所有权 = 独占访问权限**:
@@ -148,6 +154,7 @@ $$
 $$
 
 ### 8.3 Prusti 验证工具
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **Prusti**: Rust 程序的形式验证器。
@@ -168,6 +175,7 @@ fn double(x: i32) -> i32 {
 - `forall`, `exists`: 量词
 
 ### 8.4 不安全代码契约
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **不安全块的前置/后置**:
@@ -183,9 +191,11 @@ unsafe fn read_ptr<T>(ptr: *const T) -> T {
 ---
 
 ## 9. 霍尔逻辑的扩展
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 完全正确性 (Total Correctness)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **需要终止性证明**。
@@ -197,6 +207,7 @@ $$
 $$
 
 ### 9.2 过程/函数
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **过程规约**:
@@ -210,6 +221,7 @@ $$
 **递归过程**: 使用归纳法。
 
 ### 9.3 异常/错误
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **三元组扩展**: $\{P\}\ c\ \{Q\}_E$
@@ -227,9 +239,11 @@ fn may_fail() -> Result<i32, Error> { ... }
 ---
 
 ## 10. 工具与实践
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 10.1 验证工具链
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 工具 | 语言 | 特性 |
@@ -241,6 +255,7 @@ fn may_fail() -> Result<i32, Error> { ... }
 | **Creusot** | Rust | 基于Why3 |
 
 ### 10.2 验证流程
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -258,6 +273,7 @@ fn may_fail() -> Result<i32, Error> { ... }
 ---
 
 ## 11. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 概念 | 含义 | Rust应用 |
@@ -273,6 +289,7 @@ fn may_fail() -> Result<i32, Error> { ... }
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. Hoare, C. A. R. (1969). "An Axiomatic Basis for Computer Programming".
@@ -304,6 +321,7 @@ fn may_fail() -> Result<i32, Error> { ... }
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [00-foundations 目录](./README.md)
@@ -361,4 +379,3 @@ fn may_fail() -> Result<i32, Error> { ... }
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -66,6 +66,7 @@
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -175,6 +176,7 @@ Base Case: 基准情形变迁
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 BPMN 表示
@@ -256,6 +258,7 @@ Base Case: 基准情形变迁
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 CCS 表示
@@ -306,6 +309,7 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现
@@ -585,9 +589,11 @@ impl DirectoryWalker {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 活性 (Liveness)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理**: 若递归函数满足收敛条件，则递归最终会终止。
@@ -609,6 +615,7 @@ impl DirectoryWalker {
 **结论**: 递归满足活性。
 
 ### 6.2 安全性 (Safety)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理**: 递归函数不会访问无效内存或产生数据竞争。
@@ -623,6 +630,7 @@ impl DirectoryWalker {
 4. 不存在共享可变状态，因此无数据竞争
 
 ### 6.3 正确性条件
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **终止性**: 必须存在良基关系保证递归终止。
@@ -634,9 +642,11 @@ impl DirectoryWalker {
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 模式层次
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -658,6 +668,7 @@ Workflow Control Patterns
 ```
 
 ### 7.2 形式化关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 $$
@@ -676,6 +687,7 @@ $$
 - $g(x) = body(x)$
 
 ### 7.3 与循环模式的配合
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 等价关系 | 说明 |
@@ -687,9 +699,11 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 递归目录遍历
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **场景**: 遍历文件系统目录树
@@ -706,6 +720,7 @@ fn find_files(pattern: &str, dir: &Path) -> Vec<PathBuf> {
 **实现**: 使用递归遍历目录树，基准情形为文件或空目录。
 
 ### 8.2 树形数据结构处理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **场景**: 抽象语法树 (AST) 求值
@@ -727,6 +742,7 @@ fn eval(expr: &Expr) -> f64 {
 ```
 
 ### 8.3 语法解析器
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **场景**: 递归下降解析器
@@ -736,9 +752,11 @@ fn eval(expr: &Expr) -> f64 {
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 尾递归优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 编译器**不保证**尾递归优化 (TCO)：
@@ -746,6 +764,7 @@ Rust 编译器**不保证**尾递归优化 (TCO)：
 Rust 编译器不保证尾递归优化，推荐在深度递归场景使用迭代替代。
 
 ### 9.2 结构递归 vs 生成递归
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **结构递归**: 输入数据类型直接决定递归结构（如链表长度计算）。
@@ -755,6 +774,7 @@ Rust 编译器不保证尾递归优化，推荐在深度递归场景使用迭代
 ---
 
 ## 10. 总结
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 递归模式提供了自引用的过程执行机制，通过基准情形和递归情形的组合实现复杂问题的分解。其核心优势包括：
@@ -769,6 +789,7 @@ Rust 编译器不保证尾递归优化，推荐在深度递归场景使用迭代
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". Distributed and Parallel Databases.
@@ -837,164 +858,3 @@ Rust 编译器不保证尾递归优化，推荐在深度递归场景使用迭代
 >
 
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

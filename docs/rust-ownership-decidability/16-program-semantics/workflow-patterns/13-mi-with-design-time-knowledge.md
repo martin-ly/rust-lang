@@ -69,6 +69,7 @@
 Russell 等人 (2006) 进一步补充了 WCP15，形成完整的多实例模式谱系。WCP13 的核心特征在于实例数量 $N$ 是流程建模阶段即可确定的常量。
 
 ### 1.2 问题定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 WCP13 解决的核心问题是：**如何在保证类型安全和编译期优化的前提下，并行执行设计时已知数量的同质活动实例？**
@@ -83,6 +84,7 @@ WCP13 解决的核心问题是：**如何在保证类型安全和编译期优化
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 概念定义
@@ -137,6 +139,7 @@ $$
 $$
 
 ### 2.3 形式化表示
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 2.3.1 状态机表示
@@ -183,6 +186,7 @@ join: 变迁，需要 N 个输入令牌
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 BPMN 表示
@@ -251,6 +255,7 @@ flowchart LR
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 CCS 表示
@@ -290,6 +295,7 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 基础实现
@@ -569,6 +575,7 @@ pub fn verify_array_size<const N: usize>() {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 活性 (Liveness)
@@ -606,6 +613,7 @@ $$
 $$
 
 ### 6.3 正确性条件
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **完备性**: 所有 $N$ 个设计时确定的实例都被创建并执行。
@@ -619,9 +627,11 @@ $$
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 模式层次
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -654,6 +664,7 @@ $$
 $$
 
 ### 7.3 与合并模式的配合
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 分割模式 | 推荐合并模式 | 说明 |
@@ -665,6 +676,7 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 并行信贷核查
@@ -705,9 +717,11 @@ impl Pipeline<4> {
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 9.1 部分完成即汇合
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 允许在 $k$ 个实例完成后即汇合（$k \leq N$）：
@@ -720,6 +734,7 @@ impl<const N: usize, const K: usize> PartialJoinDesignTime<N, K> {
 ```
 
 ### 9.2 异构实例集合
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 通过 trait object 实现有限异构：
@@ -732,6 +747,7 @@ pub struct HeterogeneousMI<const N: usize, R> {
 ```
 
 ### 9.3 递归固定展开
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 利用 const generics 实现编译期递归展开：
@@ -752,6 +768,7 @@ pub const fn parallel_reduce<const N: usize>(values: [f64; N]) -> f64 {
 ---
 
 ## 10. 总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 多实例先验设计时知识模式（WCP13）是工作流多实例模式家族中静态特性最强的一种。其核心优势来源于实例数量 $N$ 在设计时即已确定：
@@ -766,6 +783,7 @@ pub const fn parallel_reduce<const N: usize>(values: [f64; N]) -> f64 {
 ---
 
 ## 参考文献
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". *Distributed and Parallel Databases*.
@@ -1012,4 +1030,3 @@ pub const fn parallel_reduce<const N: usize>(values: [f64; N]) -> f64 {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

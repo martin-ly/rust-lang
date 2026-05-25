@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Decorator Pattern in Rust](#decorator-pattern-in-rust)
@@ -132,6 +133,7 @@ fn main() {
 ---
 
 ## 实战: HTTP 中间件链
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -228,6 +230,7 @@ fn main() {
 ---
 
 ## 形式化定义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -259,6 +262,7 @@ Decorator<C: Component> = Component + AddedBehavior
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [structural 目录](./README.md)
@@ -335,4 +339,3 @@ Decorator<C: Component> = Component + AddedBehavior
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

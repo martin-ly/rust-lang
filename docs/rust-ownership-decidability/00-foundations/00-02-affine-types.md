@@ -44,6 +44,7 @@
 判定复杂度: TOWER-Complete (非初等递归，但可判定)
 
 ### 1.2 与线性逻辑的对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | 线性逻辑 | 仿射逻辑 |

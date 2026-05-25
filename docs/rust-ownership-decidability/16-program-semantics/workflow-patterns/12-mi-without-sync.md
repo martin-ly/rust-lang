@@ -1,6 +1,7 @@
 # 12 多实例无同步模式 (Multiple Instances Without Synchronization)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [12 多实例无同步模式 (Multiple Instances Without Synchronization)](#12-多实例无同步模式-multiple-instances-without-synchronization)
@@ -102,6 +103,7 @@ $$
 $$
 
 ## BPMN 2.0 表示
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 在 BPMN 2.0 中，多实例无同步使用**多实例活动（Multi-Instance Activity）**配合 `isSequential="false"` 和 `completionCondition` 实现：
@@ -212,6 +214,7 @@ $$
 | 性能 | 低 | 高 |
 
 ## 形式化语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 状态机形式化
@@ -274,9 +277,11 @@ Instance(c, item) ::= process(item).c<result>.0
 ```
 
 ## 正确性证明
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 活性证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **定理（实例创建活性）**: 对于 $n$ 个需要创建的实例，系统将创建所有 $n$ 个实例。
@@ -305,6 +310,7 @@ Instance(c, item) ::= process(item).c<result>.0
 因此所有实例都会完成。∎
 
 ### 资源安全性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理（资源上限）**: 同时活跃的实例数不会超过系统资源限制。
@@ -321,9 +327,11 @@ Instance(c, item) ::= process(item).c<result>.0
 因此不会发生资源耗尽。∎
 
 ## Rust 实现示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 基础实现
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -453,6 +461,7 @@ pub async fn multi_instance_example() {
 ```
 
 ### 动态实例池
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -521,6 +530,7 @@ pub enum MIError {
 ```
 
 ### 流式处理实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -631,6 +641,7 @@ where
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模式 | 同步 | 实例数确定时机 |
@@ -647,6 +658,7 @@ $$
 $$
 
 ## 应用场景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **批量处理**：处理大量独立记录
@@ -657,6 +669,7 @@ $$
 6. **事件处理**：独立处理每个事件
 
 ### 注意事项
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 注意资源限制，避免创建过多实例
@@ -667,6 +680,7 @@ $$
 - 实现优雅关闭处理
 
 ## 学术参考
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Russell, N., ter Hofstede, A.H.M., van der Aalst, W.M.P., & Mulyar, N.** (2006). "Workflow Control-Flow Patterns: A Revised View." *BPM Center Report* BPM-06-22.
@@ -697,6 +711,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
@@ -911,4 +926,3 @@ $$
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

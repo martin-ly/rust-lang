@@ -89,6 +89,7 @@ A ⊸ A ⊕ A    (不可行 - 不能免费复制资源)
 ---
 
 ## 2. 线性逻辑的连接词体系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 乘法连接词 (Multiplicatives)
@@ -200,6 +201,7 @@ println!("{}", data);
 ---
 
 ## 3. Curry-Howard 对应与编程语言
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 证明即程序
@@ -262,6 +264,7 @@ fn bad_linear_usage() {
 ---
 
 ## 4. 证明网
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 证明网作为计算模型
@@ -321,9 +324,11 @@ Danos-Regnier 标准:
 ---
 
 ## 5. 与Rust所有权的深层联系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 所有权即线性类型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -339,6 +344,7 @@ Drop trait                    线性逻辑的duality
 ```
 
 ### 5.2 仿射类型的引入
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Rust实际是**仿射类型系统**（Affine Type System）而非严格线性：
@@ -361,9 +367,11 @@ let x = String::from("hello");
 ---
 
 ## 6. 形式化语义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 线性λ演算
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -402,6 +410,7 @@ fn id<T>(x: T) -> T { x }  // T ⊸ T
 ```
 
 ### 6.2 操作语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -416,9 +425,11 @@ let (x,y) = (v₁,v₂) in t  ⟶  t[v₁/x, v₂/y]   (张量消除)
 ---
 
 ## 7. 实例与反例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 线性类型的正确用法
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **示例 1: 文件句柄管理**:
@@ -470,6 +481,7 @@ fn transform(data: Vec<u8>) -> Vec<u8> {
 ```
 
 ### 7.2 反例：违反线性性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **反例 1: 双重释放 (如果无Drop保护)**:
@@ -508,9 +520,11 @@ fn dangling_reference() -> &String {  // 编译错误！
 ---
 
 ## 8. 与其他理论的联系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 与分离逻辑的关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -539,6 +553,7 @@ Iris 框架将两者结合用于 Rust 验证
 | !A | 持久断言 | Copy类型 |
 
 ### 8.2 与范畴论的关系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -559,19 +574,23 @@ Rust类型系统近似于:
 ---
 
 ## 9. 研究前沿与扩展
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 微分线性逻辑
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > Ehrhard & Regnier (2003) - 引入微分算子到线性逻辑
 
 ### 9.2 带递归的线性逻辑
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 类型等式的可判定性成为关键问题
 
 ### 9.3 模态线性逻辑
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -585,6 +604,7 @@ Rust类型系统近似于:
 ---
 
 ## 10. 参考文献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. Girard, J.-Y. (1987). Linear Logic. *Theoretical Computer Science*, 50:1-102.
@@ -756,4 +776,3 @@ Rust类型系统近似于:
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

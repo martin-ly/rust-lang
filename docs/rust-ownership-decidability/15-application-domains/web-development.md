@@ -74,6 +74,7 @@ Web 开发是 Rust 应用最广泛的领域之一。
 ---
 
 ## 后端框架详解
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Axum 框架
@@ -705,6 +706,7 @@ async fn main() -> std::io::Result<()> {
 ---
 
 ## WebAssembly 开发
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### wasm-bindgen 基础
@@ -1203,6 +1205,7 @@ fn main() {
 ---
 
 ## 全栈框架
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Leptos 全栈应用
@@ -1447,6 +1450,7 @@ fn main() {
 ---
 
 ## API 设计与实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### REST API 最佳实践
@@ -1746,6 +1750,7 @@ async fn main() {
 ---
 
 ## 数据库集成
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### SQLx 异步数据库
@@ -1975,6 +1980,7 @@ impl<'a> Transaction<'a> {
 ---
 
 ## 认证与授权
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### JWT 认证
@@ -2146,6 +2152,7 @@ impl PermissionChecker {
 ---
 
 ## 实时通信
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### WebSocket 实现
@@ -2357,6 +2364,7 @@ async fn handle_socket(socket: WebSocket, manager: Arc<ConnectionManager>) {
 ---
 
 ## 部署与运维
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### Docker 部署
@@ -2442,6 +2450,7 @@ spec:
 ---
 
 ## 最佳实践
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 1. 错误处理
@@ -2546,6 +2555,7 @@ impl Settings {
 ---
 
 ## 总结
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 在 Web 开发领域提供了：
@@ -2624,7 +2634,6 @@ Rust 在 Web 开发领域提供了：
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
-
 
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design]**
@@ -3576,4 +3585,3 @@ Rust 在 Web 开发领域提供了：
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

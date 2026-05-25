@@ -167,6 +167,7 @@ The RustBelt project uses Iris, a higher-order concurrent separation logic frame
 ---
 
 ## 2. Separation Logic Foundations
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 Assertion Language
@@ -354,6 +355,7 @@ This is used for describing arrays, lists, and other data structures.
 ---
 
 ## 3. Hoare Triples with Separation
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Basic Syntax
@@ -529,6 +531,7 @@ This theorem formalizes the principle that well-behaved commands only touch memo
 ---
 
 ## 4. RustBelt Connection
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 The Iris Framework
@@ -730,6 +733,7 @@ where:
 ---
 
 ## 5. Verification Examples
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Linked List Verification
@@ -904,6 +908,7 @@ array(dst, i, n-i, _)
 ---
 
 ## 6. Counter-Examples and Common Pitfalls
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 This section presents 12+ common errors in separation logic reasoning, each with an explanation of why it violates soundness.
@@ -1301,6 +1306,7 @@ The later modality is essential for step-indexed logical relations.
 ---
 
 ## 7. Advanced Topics
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 Concurrent Separation Logic
@@ -1418,6 +1424,7 @@ Used for reasoning about data structures with sharing, like graphs with cycles.
 ---
 
 ## 8. Mechanization in Coq
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 Iris in Coq
@@ -1606,6 +1613,7 @@ Qed.
 ---
 
 ## 9. Case Study: Rust Vec Verification
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 Vec Specification
@@ -1880,6 +1888,7 @@ The sequence of elements after operations matches the expected mathematical oper
 ---
 
 ## 10. References
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 10.1 Foundational Papers
@@ -1948,6 +1957,7 @@ The sequence of elements after operations matches the expected mathematical oper
 ---
 
 ## Appendix A: Notation Summary
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | Symbol | Meaning |
@@ -1967,6 +1977,7 @@ The sequence of elements after operations matches the expected mathematical oper
 | `Star_{i in S} P(i)` | Iterated separating conjunction |
 
 ## Appendix B: Inference Rules Summary
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Structural Rules
@@ -2012,6 +2023,7 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 ---
 
 ## Appendix C: Theorems Summary
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Core Theorems
@@ -2036,6 +2048,7 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 | 9.2 | Vec Functional Correctness | 9.5 |
 
 ## Appendix D: Counter-Examples Index
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | # | Name | Error Type | Section |
@@ -2721,4 +2734,3 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

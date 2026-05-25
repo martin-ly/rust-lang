@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Command Pattern in Rust](#command-pattern-in-rust)
@@ -154,6 +155,7 @@ impl CommandManager {
 ```
 
 ### 闭包命令 (Rust 风格)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -212,6 +214,7 @@ fn main() {
 ---
 
 ## 形式化定义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -244,6 +247,7 @@ Command = (execute: () → (), undo: () → ())
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [behavioral 目录](./README.md)
@@ -314,4 +318,3 @@ Command = (execute: () → (), undo: () → ())
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

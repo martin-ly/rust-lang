@@ -523,7 +523,6 @@ async fn weighted_semaphore() {
 
 > **[来源: ACM - Software Design Patterns]**
 
-
 > **[来源: Wikipedia - Asynchronous I/O]**
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**

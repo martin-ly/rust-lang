@@ -73,6 +73,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 线性类型系统
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -99,6 +100,7 @@ t ::= x                     变量
 ```
 
 ### 2.2 仿射类型系统
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -122,9 +124,11 @@ t ::= x | λx.t | t₁ t₂ | let x = t₁ in t₂ | drop x
 ```
 
 ## 3. 代码对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 资源使用模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -147,6 +151,7 @@ linearExample file world
 ```
 
 ### 3.2 复制与共享
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -167,9 +172,11 @@ linearShare s
 ```
 
 ## 4. 可判定性对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 形式化结果
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 属性 | 线性逻辑 | 仿射逻辑 |
@@ -180,6 +187,7 @@ linearShare s
 | 完整高阶 | 不可判定 | 不可判定 |
 
 ### 4.2 Kopylov定理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -198,9 +206,11 @@ linearShare s
 ```
 
 ## 5. 编程实践对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 资源管理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -225,6 +235,7 @@ linearShare s
 ```
 
 ### 5.2 编译器复杂性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 方面 | 线性类型编译器 | 仿射类型编译器 (Rust) |
@@ -235,9 +246,11 @@ linearShare s
 | 运行时支持 | 最小化 | 需要Drop glue |
 
 ## 6. Rust的设计选择
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 为什么是仿射而非线性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -262,6 +275,7 @@ Rust选择仿射类型的原因:
 ```
 
 ### 6.2 向线性的接近
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -281,9 +295,11 @@ fn important_result() -> Result<(), Error> { ... }
 ```
 
 ## 7. 理论基础对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 范畴论语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -303,6 +319,7 @@ fn important_result() -> Result<(), Error> { ... }
 ```
 
 ### 7.2 证明论对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -324,6 +341,7 @@ sequent演算对比:
 ```
 
 ## 8. 总结
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特性 | 线性类型 | 仿射类型 |
@@ -338,6 +356,7 @@ sequent演算对比:
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. Kopylov, A.P. (2001). Decidability of Linear Affine Logic. *Information and Computation*.
@@ -430,4 +449,3 @@ sequent演算对比:
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

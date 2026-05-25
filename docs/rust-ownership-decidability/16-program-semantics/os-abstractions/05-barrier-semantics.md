@@ -1,6 +1,7 @@
 # 屏障的形式化语义
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [屏障的形式化语义](#屏障的形式化语义)
@@ -119,6 +120,7 @@
 ```
 
 ## 3. 同步屏障的形式化语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 单次屏障的语义
@@ -207,6 +209,7 @@ fn single_barrier_example() {
 ```
 
 ## 4. CyclicBarrier 的形式化语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 循环屏障的定义
@@ -358,9 +361,11 @@ fn cyclic_barrier_example() {
 ```
 
 ## 5. 栅栏模式的应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 并行分阶段计算
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -383,6 +388,7 @@ fn cyclic_barrier_example() {
 ```
 
 ### 5.2 并行排序示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -468,9 +474,11 @@ fn merge(left: &[i32], right: &[i32]) -> Vec<i32> {
 ```
 
 ## 6. 屏障与 Happens-Before 关系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 同步语义的形式化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -491,6 +499,7 @@ fn merge(left: &[i32], right: &[i32]) -> Vec<i32> {
 ```
 
 ### 6.2 内存序分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -533,9 +542,11 @@ fn memory_ordering_example() {
 ```
 
 ## 7. 屏障的高级模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 可中断屏障
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -612,6 +623,7 @@ pub struct BarrierBrokenError;
 ```
 
 ### 7.2 带动作的屏障
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -650,9 +662,11 @@ impl BarrierWithAction {
 ```
 
 ## 8. 综合安全论证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 屏障的正确性定理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -678,6 +692,7 @@ impl BarrierWithAction {
 ```
 
 ### 8.2 不变式总结
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -701,6 +716,7 @@ I5 (循环屏障一致性):
 ```
 
 ## 9. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档完整形式化了屏障的语义：
@@ -731,6 +747,7 @@ I5 (循环屏障一致性):
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
@@ -945,4 +962,3 @@ I5 (循环屏障一致性):
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

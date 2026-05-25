@@ -1,6 +1,7 @@
 # 10 任意循环模式 (Arbitrary Cycles)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [10 任意循环模式 (Arbitrary Cycles)](#10-任意循环模式-arbitrary-cycles)
@@ -106,6 +107,7 @@ $$
 $$
 
 ## 固定点理论
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Kleene 固定点定理
@@ -140,6 +142,7 @@ $$
 $$
 
 ## 递归语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### μ-演算表示
@@ -167,6 +170,7 @@ Cycle ::= μX.(Entry1 → Body1 ; X)
 ```
 
 ## 状态机形式化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **扩展状态机：**
@@ -188,6 +192,7 @@ G = (V, E), \quad E = E_{\text{forward}} \cup E_{\text{back}} \\
 $$
 
 ## BPMN 2.0 表示
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 在 BPMN 2.0 中，任意循环可以通过**序列流的回连**实现：
@@ -289,6 +294,7 @@ $$
 ```
 
 ## 正确性证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 终止性证明
@@ -330,6 +336,7 @@ $$
 因此可达性等价于存在路径。∎
 
 ## Rust 实现示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 基础实现
@@ -594,6 +601,7 @@ impl StateMachineFlow {
 ```
 
 ### 带循环检测的实现
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -731,6 +739,7 @@ impl<T> LabeledFlow<T> {
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 模式 | 结构 | 表达能力 |
@@ -747,6 +756,7 @@ $$
 $$
 
 ## 应用场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **复杂业务规则**：需要多入口多出口的业务流程
@@ -757,6 +767,7 @@ $$
 6. **协议实现**：网络协议的状态机
 
 ### 注意事项
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 非结构化代码难以理解和维护
@@ -766,6 +777,7 @@ $$
 - 需要循环检测和最大迭代限制
 
 ## 学术参考
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Böhm, C., & Jacopini, G.** (1966). "Flow Diagrams, Turing Machines and Languages with Only Two Formation Rules." *Communications of the ACM*, 9(5), 366-371.
@@ -798,6 +810,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -1052,4 +1065,3 @@ $$
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

@@ -71,6 +71,7 @@
 | First-class Polymorphism with Type Inference | Jones | 1997 | POPL | 🔴 | [ACM DL](https://dl.acm.org/doi/10.1145/263699.263748) |
 
 ### 高级类型系统特性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -89,9 +90,11 @@
 ---
 
 ## 线性逻辑与仿射类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 线性逻辑基础
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -106,6 +109,7 @@
 | Light Linear Logic | Girard | 1995 | Inf. & Computation | 🔴 | [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0890540185710426) |
 
 ### 线性类型在编程中的应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -123,9 +127,11 @@
 ---
 
 ## Rust 所有权与借用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Rust 语义形式化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -142,6 +148,7 @@
 | Modular Information Flow through Ownership | Disney & Flanagan | 2012 | PLAS | 🔴 | [ACM DL](https://dl.acm.org/doi/10.1145/2435377.2435381) |
 
 ### 借用检查与生命周期
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -158,9 +165,11 @@
 ---
 
 ## 形式化验证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 分离逻辑基础
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -175,6 +184,7 @@
 | The Future is Ours: Prophecy Variables in Separation Logic | Jung et al. | 2020 | POPL | 🔴 | [MPI-SWS](https://plv.mpi-sws.org/prophecies/) |
 
 ### 并发验证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -191,9 +201,11 @@
 ---
 
 ## Rust 验证工具研究
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 验证器论文
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -213,6 +225,7 @@
 | MirChecker: Detecting Bugs in Rust Programs via Static Analysis | Li et al. | 2021 | ICSE | 🔴 | [GitHub](https://github.com/wcventure/MirChecker) |
 
 ### 验证方法学
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -226,9 +239,11 @@
 ---
 
 ## 并发与内存模型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 内存模型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -243,6 +258,7 @@
 | A Tutorial Introduction to the ARM and POWER Relaxed Memory Models | Alglave et al. | 2011 | arXiv | 🟡 | [arXiv](https://arxiv.org/abs/1207.5868) |
 
 ### 并发类型系统
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -257,9 +273,11 @@
 ---
 
 ## 类型推断与可判定性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 类型推断算法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -272,6 +290,7 @@
 | Type Inference for Systems F and F-omega | Giannini et al. | 1993 | TCS | 🔴 | [ScienceDirect](https://www.sciencedirect.com/science/article/pii/0304397593900679) |
 
 ### 可判定性理论
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -286,9 +305,11 @@
 ---
 
 ## 程序分析与抽象解释
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 静态分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -300,6 +321,7 @@
 | A Brief Introduction to Static Analysis | Smaragdakis | 2020 | SN Computer Science | 🟡 | [Springer](https://link.springer.com/article/10.1007/s42979-020-00262-y) |
 
 ### 形状分析与指针分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 论文标题 | 作者 | 年份 | 会议/期刊 | 难度 | 链接 |
@@ -314,9 +336,11 @@
 ---
 
 ## 📊 论文统计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 按年份分布
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 年份区间 | 论文数量 | 主要趋势 |
@@ -329,6 +353,7 @@
 | 2020-2024 | 35 | 验证工具、实际应用、基础形式化 |
 
 ### 按难度分布
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 难度等级 | 论文数量 | 占比 |
@@ -338,6 +363,7 @@
 | 🔴 高级 | 102 | 80% |
 
 ### 按主题分布
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 主题 | 论文数量 | 占比 |
@@ -353,9 +379,11 @@
 ---
 
 ## 🎓 阅读建议
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 初学者路径
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Damas & Milner (1982)** - 理解 HM 类型推断
@@ -364,6 +392,7 @@
 4. **Weiss et al. (2020) Oxide** - Rust 语义初探
 
 ### 进阶路径
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Girard (1987) Linear Logic** - 线性逻辑基础
@@ -372,6 +401,7 @@
 4. **Lattuada et al. (2024) Aeneas** - 最新验证技术
 
 ### 研究路径
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **O'Hearn et al. (2001)** - 分离逻辑起源
@@ -382,6 +412,7 @@
 ---
 
 ## 🔗 相关资源
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [书籍和资源索引](./books-resources.md) - 配套教材
@@ -460,4 +491,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

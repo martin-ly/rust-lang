@@ -1,6 +1,7 @@
 # 14 延迟选择模式 (Deferred Choice)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [14 延迟选择模式 (Deferred Choice)](#14-延迟选择模式-deferred-choice)
@@ -106,6 +107,7 @@ $$
 $$
 
 ## BPMN 2.0 表示
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 在 BPMN 2.0 中，延迟选择使用**基于事件的网关（Event-Based Gateway）**实现：
@@ -200,6 +202,7 @@ $$
 ```
 
 ## 形式化语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 状态机形式化
@@ -259,9 +262,11 @@ Timeout(t) = WAIT(t) -> E3 -> SKIP  -- 超时作为默认分支
 ```
 
 ## Race Condition 分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 竞态条件检测
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **竞态条件类型：**
@@ -301,6 +306,7 @@ impl RaceDetector {
 ```
 
 ### 冲突解决策略
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 策略 | 描述 | 适用场景 |
@@ -311,6 +317,7 @@ impl RaceDetector {
 | 合并 | 同时处理多个 | 可并行处理 |
 
 ## 超时处理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 超时是延迟选择的重要方面：
@@ -341,9 +348,11 @@ $$
 ```
 
 ## 正确性证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 互斥性证明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理（互斥选择）**: 延迟选择保证只有一个分支被执行。
@@ -362,6 +371,7 @@ $$
 因此只有一个分支被执行。∎
 
 ### 活性证明
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理（最终选择）**: 如果至少有一个事件最终发生，延迟选择最终会做出选择。
@@ -383,9 +393,11 @@ $$
 因此系统最终会继续执行。∎
 
 ## Rust 实现示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 基础实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -535,6 +547,7 @@ pub async fn race_choice<T>(receivers: Vec<oneshot::Receiver<T>>) -> Option<T> {
 ```
 
 ### 外部事件处理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -588,6 +601,7 @@ pub async fn approval_workflow() -> ApprovalEvent {
 ```
 
 ### 超时处理实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -684,6 +698,7 @@ impl<T: Send + 'static, R: Send + 'static> CancellableDeferredChoice<T, R> {
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 模式 | 决策时机 | 触发方式 |
@@ -700,6 +715,7 @@ $$
 $$
 
 ## 应用场景
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **用户决策**：等待用户从多个选项中选择
@@ -710,6 +726,7 @@ $$
 6. **消息路由**：根据消息类型路由到不同处理器
 
 ### 注意事项
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 确保事件源能够正确发送信号
@@ -719,6 +736,7 @@ $$
 - 记录选择决策用于审计
 
 ## 学术参考
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Hoare, C.A.R.** (1985). *Communicating Sequential Processes*. Prentice Hall.
@@ -751,6 +769,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
@@ -979,4 +998,3 @@ $$
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

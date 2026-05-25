@@ -42,6 +42,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 核心概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -75,6 +76,7 @@ H: Handler: E × S → Action
 ```
 
 ### 2.2 事件语义分类
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 语义类型 | 特性 | 示例 |
@@ -86,9 +88,11 @@ H: Handler: E × S → Action
 ---
 
 ## 3. 发布-订阅语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 基本语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -142,6 +146,7 @@ impl<T: Clone + Send> PubSub<T> for EventBus<T> {
 ```
 
 ### 3.2 多播语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -191,9 +196,11 @@ impl<T: Clone> MulticastEventBus<T> {
 ---
 
 ## 4. 事件溯源语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 基本模型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -263,6 +270,7 @@ impl EventSourcing for Account {
 ```
 
 ### 4.2 事件存储
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -305,9 +313,11 @@ struct RecordedEvent<E> {
 ---
 
 ## 5. CQRS 与事件驱动
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 读写分离语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -361,9 +371,11 @@ struct EventualConsistency {
 ---
 
 ## 6. 事件顺序与一致性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 事件排序语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -396,6 +408,7 @@ impl<T> CausalEvent<T> {
 ```
 
 ### 6.2 事务性事件发布
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -452,9 +465,11 @@ impl OutboxPattern {
 ---
 
 ## 7. 形式化保证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 事件系统不变量
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -470,6 +485,7 @@ impl OutboxPattern {
 ```
 
 ### 7.2 背压语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -508,6 +524,7 @@ impl<T> BackpressureStream<T> {
 ---
 
 ## 8. 总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 事件驱动语义核心要点:
@@ -689,4 +706,3 @@ $$
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

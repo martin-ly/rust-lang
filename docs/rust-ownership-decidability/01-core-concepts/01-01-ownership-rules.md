@@ -73,6 +73,7 @@
 ```
 
 ### 1.2 形式化表示
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -91,9 +92,11 @@
 ---
 
 ## 2. 规则1：每个值都有一个所有者
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 所有权建立
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -105,6 +108,7 @@ fn main() {
 ```
 
 ### 2.2 形式化解释
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -120,9 +124,11 @@ let s: String = String::from("hello");
 ---
 
 ## 3. 规则2：所有者唯一性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 Move语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -136,6 +142,7 @@ fn main() {
 ```
 
 ### 3.2 形式化：Move as Linear Implication
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -153,6 +160,7 @@ String ⊸ String  (消耗一个String产生一个String)
 ```
 
 ### 3.3 Copy vs Move
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -173,6 +181,7 @@ let s2 = s1;  // 转移所有权
 | Move | String, Vec, Box | 转移 | A (线性) |
 
 ### 3.4 反例：使用已Move的值
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -193,9 +202,11 @@ fn use_after_move() {
 ---
 
 ## 4. 规则3：作用域与Drop
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 RAII模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -206,6 +217,7 @@ fn use_after_move() {
 ```
 
 ### 4.2 形式化：生命周期与作用域
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -220,6 +232,7 @@ fn use_after_move() {
 ```
 
 ### 4.3 Drop trait的形式语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -237,6 +250,7 @@ Drop谓词: Drop(T) ≡ ∀v. [T].own(t, v) ⊢ ∃w. v ↦ w * Dealloc(v)
 ```
 
 ### 4.4 反例：忘记释放资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -259,9 +273,11 @@ fn explicit_leak() -> &'static i32 {
 ---
 
 ## 5. 所有权的函数语义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 函数参数传递
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -285,6 +301,7 @@ fn main() {
 ```
 
 ### 5.2 返回值与所有权
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -301,9 +318,11 @@ fn takes_and_gives_back(s: String) -> String {
 ---
 
 ## 6. 所有权与内存模型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 栈与堆
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -329,6 +348,7 @@ fn takes_and_gives_back(s: String) -> String {
 ```
 
 ### 6.2 内存安全保证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Rust所有权系统保证的内存安全：
@@ -340,6 +360,7 @@ Rust所有权系统保证的内存安全：
 ---
 
 ## 7. 概念矩阵：所有权的多维视角
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 视角 | 概念 | Rust语法 | 类型理论 |
@@ -354,9 +375,11 @@ Rust所有权系统保证的内存安全：
 ---
 
 ## 8. 常见模式与反例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 模式：使用Clone显式复制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -366,6 +389,7 @@ let s2 = s1.clone();  // 显式深拷贝
 ```
 
 ### 8.2 反例：使用已Move的值
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -375,6 +399,7 @@ println!("{}", s);  // 编译错误: use of moved value
 ```
 
 ### 8.3 模式：函数式更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -387,6 +412,7 @@ fn update(mut s: String) -> String {
 ---
 
 ## 9. 与形式化验证的接口
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -407,6 +433,7 @@ RustBelt中的所有权的语义模型:
 ---
 
 ## 10. 参考文献
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. Klabnik, S., & Nichols, C. (2018). *The Rust Programming Language*. No Starch Press.
@@ -504,4 +531,3 @@ RustBelt中的所有权的语义模型:
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

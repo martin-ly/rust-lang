@@ -402,6 +402,7 @@ fn main() {
 ---
 
 ## 2. 生命周期变型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 变型类型
@@ -700,6 +701,7 @@ Rust 编译器推导的变型与形式化变型定义一致。
 ---
 
 ## 3. 生命周期子类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 子类型规则
@@ -868,6 +870,7 @@ where
 ---
 
 ## 4. 反例集
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 反例 1：变型违反
@@ -1541,6 +1544,7 @@ mod crossbeam_advanced_failure {
 ---
 
 ## 5. 高级生命周期模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 PhantomData 生命周期
@@ -1904,6 +1908,7 @@ where
 ---
 
 ## 6. 泛型代码中的生命周期
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 生命周期参数 vs 类型参数
@@ -2074,6 +2079,7 @@ async fn async_with_bounds<'a, T: 'a>(value: T) -> T {
 ---
 
 ## 7. 案例研究：Arena 分配器
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 Arena 设计原理
@@ -2750,6 +2756,7 @@ mod game_ecs_arena {
 ---
 
 ## 8. 定理汇总
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定理 8.1：约束传递性 (CONSTRAINT-TRANSITIVITY)
@@ -2865,6 +2872,7 @@ Rust 的 for<'a> 是全称量词。
 ---
 
 ## 9. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 核心概念回顾
@@ -3948,4 +3956,3 @@ Rust 的 for<'a> 是全称量词。
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

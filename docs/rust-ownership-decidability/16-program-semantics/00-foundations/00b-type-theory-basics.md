@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型理论基础 (Type Theory Foundations)](#类型理论基础-type-theory-foundations)
@@ -106,6 +107,7 @@ fn absurd() -> ! {
 ---
 
 ## 3. 多态性 (Polymorphism)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 参数多态 (System F)
@@ -166,6 +168,7 @@ fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B)
 ---
 
 ## 4. 子类型与变型 (Subtyping & Variance)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 子类型关系
@@ -187,6 +190,7 @@ fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B)
 ```
 
 ### 4.2 变型 (Variance)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定义 4.2** (变型)
@@ -218,6 +222,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut String { x }
 ```
 
 ### 4.3 生命周期子类型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -231,9 +236,11 @@ fn nested<'a, 'b: 'a>(x: &'b &'a str) -> &'a str { x }
 ---
 
 ## 5. 递归类型 (Recursive Types)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 μ-类型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定义 5.1** (递归类型)
@@ -249,6 +256,7 @@ fn nested<'a, 'b: 'a>(x: &'b &'a str) -> &'a str { x }
 ```
 
 ### 5.2 Rust 中的递归类型
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -278,9 +286,11 @@ impl<T> List<T> {
 ---
 
 ## 6. 线性类型与所有权
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 线性逻辑
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定义 6.1** (线性类型)
@@ -294,6 +304,7 @@ impl<T> List<T> {
 ```
 
 ### 6.2 仿射类型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 仿射类型允许值**最多使用一次**（可以丢弃）：
@@ -318,6 +329,7 @@ println!("{} {}", s1, s2); // OK
 ```
 
 ### 6.3 分离合取 (Separating Conjunction)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定义 6.2** (分离逻辑)
@@ -344,9 +356,11 @@ let r1 = &data;
 ---
 
 ## 7. 高阶类型 (Higher-Kinded Types)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 Kind 系统
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定义 7.1** (Kind)
@@ -366,6 +380,7 @@ Kind 是"类型的类型"：
 | Monad | (*→*) → * | `Monad<M<_>>` (不完全支持) |
 
 ### 7.2 Rust 的限制与 workaround
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -390,9 +405,11 @@ impl Functor for Option<i32> {
 ---
 
 ## 8. 类型安全定理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 进展性 (Progress)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理 8.1** (进展性)
@@ -400,6 +417,7 @@ impl Functor for Option<i32> {
 如果 ⊢ M : τ，则 M 是值，或存在 M' 使得 M → M'。
 
 ### 8.2 保持性 (Preservation)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理 8.2** (保持性/主题归约)
@@ -407,6 +425,7 @@ impl Functor for Option<i32> {
 如果 Γ ⊢ M : τ 且 M → M'，则 Γ ⊢ M' : τ。
 
 ### 8.3 Rust 的类型安全
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 的类型系统保证：
@@ -430,9 +449,11 @@ fn unsafe_attempt() {
 ---
 
 ## 9. 总结
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 核心概念速查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 概念 | 理论 | Rust 实现 |
@@ -445,6 +466,7 @@ fn unsafe_attempt() {
 | 高阶类型 | κ | GAT |
 
 ### 9.2 延伸阅读
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. *Types and Programming Languages* - Pierce
@@ -474,6 +496,7 @@ fn unsafe_attempt() {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [00-foundations 目录](./README.md)
@@ -575,4 +598,3 @@ fn unsafe_attempt() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

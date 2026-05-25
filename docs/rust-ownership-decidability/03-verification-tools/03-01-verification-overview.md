@@ -83,9 +83,11 @@
 | **RefinedRust** | MPI-SWS | Iris, 精细化类型 | 中 | Safe + Unsafe | ⭐⭐⭐⭐⭐ PLDI 2024 ⭐ 基础性证明 |
 
 ## 3. 各工具核心特性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 Creusot
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -108,6 +110,7 @@ fn abs(x: i32) -> i32 {
 - **Rust 1.95兼容性**: 需要检查最新发布版本，可能需使用nightly工具链
 
 ### 3.2 Prusti
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -133,6 +136,7 @@ while i < n {
 - **Rust 1.95兼容性**: 项目处于维护模式，可能停留在1.94或更旧版本，建议考虑Verus
 
 ### 3.3 RustHorn
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -153,6 +157,7 @@ fn max(x: i32, y: i32) -> i32 {
 - **Rust 1.95兼容性**: 研究原型，功能有限
 
 ### 3.4 Verus
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -180,6 +185,7 @@ verus! {
 - **Rust 1.95兼容性**: 活跃开发，推荐用于新项目
 
 ### 3.5 Kani
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -200,9 +206,11 @@ fn check_abs() {
 - **Rust 1.95兼容性**: Amazon官方维护，预计支持最新稳定版
 
 ## 4. 方法学对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 内存建模方法
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 工具 | 内存模型 | 可变借用处理 |
@@ -214,6 +222,7 @@ fn check_abs() {
 | Verus | SMT数组 | 资源代数 |
 
 ### 4.2 证明自动化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -234,9 +243,11 @@ fn check_abs() {
 ```
 
 ## 5. 实践选择指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 场景匹配
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -261,6 +272,7 @@ fn check_abs() {
 ```
 
 ### 5.2 成熟度评估
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具 | 标准库覆盖率 | 文档 | 社区 | 持续维护 | Rust 1.95 |
@@ -273,6 +285,7 @@ fn check_abs() {
 | RustBelt | 核心语言 | 研究级 | 学术 | 是 | 研究级 |
 
 ## 6. 验证工具与编译器集成
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -295,9 +308,11 @@ HIR (高级IR)
 ```
 
 ## 7. Rust 1.95 版本兼容性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 工具链要求
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 工具 | 最低Rust版本 | 1.95支持状态 | 说明 |
@@ -309,6 +324,7 @@ HIR (高级IR)
 | **Aeneas** | 1.72+ | ✅ 支持 | 持续更新 |
 
 ### 7.2 安装建议 (Rust 1.95)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
@@ -330,6 +346,7 @@ cargo install cargo-creusot --locked
 ```
 
 ### 7.3 已知限制
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **并发支持**: Verus > Creusot > Kani
@@ -340,6 +357,7 @@ cargo install cargo-creusot --locked
 ---
 
 ## 参考文献
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. Denis, X., et al. (2022). Creusot: A Foundry for the Deductive Verification of Rust Programs. *ICFEM*.
@@ -442,4 +460,3 @@ cargo install cargo-creusot --locked
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

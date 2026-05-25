@@ -116,6 +116,7 @@ fn process(input: Option<String>) -> String {
 ---
 
 ## 2. Option组合子模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Option是Rust处理可能缺失值的惯用方式。
@@ -284,6 +285,7 @@ fn process_user_input(input: &str) -> Result<String, String> {
 ---
 
 ## 3. Result传播模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 ?操作符
@@ -459,6 +461,7 @@ fn read_config(path: &str) -> Result<String, ContextualError> {
 ---
 
 ## 4. 借用与转换模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 AsRef模式
@@ -550,6 +553,7 @@ where
 ---
 
 ## 5. 类型转换模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 From/Into
@@ -654,6 +658,7 @@ fn process_bytes<B: AsRef<[u8]>>(buffer: B) -> usize {
 ---
 
 ## 6. 迭代器模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 惰性求值
@@ -795,9 +800,11 @@ println!("{:?}", fib); // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ---
 
 ## 7. 闭包与函数式模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 Fn/FnMut/FnOnce
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -847,6 +854,7 @@ apply_fn_once(consume, 10);
 ```
 
 ### 7.2 高阶函数
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -881,6 +889,7 @@ assert_eq!(add_one_then_double(5), 12);
 ```
 
 ### 7.3 闭包捕获
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -909,9 +918,11 @@ let result = handle.join().unwrap();
 ---
 
 ## 8. 智能指针模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 8.1 Box
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -952,6 +963,7 @@ impl Drawable for Rectangle {
 ```
 
 ### 8.2 Rc/Arc
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -983,6 +995,7 @@ for handle in handles {
 ```
 
 ### 8.3 RefCell/Mutex/RwLock
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -1018,6 +1031,7 @@ let data = RwLock::new(vec![1, 2, 3]);
 ```
 
 ### 8.4 Cow
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -1052,9 +1066,11 @@ fn process_bytes<B: AsRef<[u8]>>(input: B) -> Cow<'static, [u8]> {
 ---
 
 ## 9. 生命周期模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 9.1 生命周期省略
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -1075,6 +1091,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 ### 9.2 生命周期约束
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -1112,6 +1129,7 @@ where
 ```
 
 ### 9.3 'static
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -1140,9 +1158,11 @@ thread::spawn(move || {
 ---
 
 ## 10. 最佳实践总结
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 错误处理检查清单
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 使用`?`传播错误，而非显式match
@@ -1151,6 +1171,7 @@ thread::spawn(move || {
 - [ ] 使用`thiserror`或`anyhow`简化错误处理
 
 ### Option使用检查清单
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 优先使用组合子而非match
@@ -1159,6 +1180,7 @@ thread::spawn(move || {
 - [ ] 避免在库代码中使用`unwrap()`
 
 ### 类型设计检查清单
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 为自定义类型实现`Default`
@@ -1167,6 +1189,7 @@ thread::spawn(move || {
 - [ ] 为泛型接口实现`AsRef`/`AsMut`
 
 ### 迭代器检查清单
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 利用惰性求值，避免中间集合
@@ -1175,6 +1198,7 @@ thread::spawn(move || {
 - [ ] 实现自定义`Iterator`时考虑`DoubleEndedIterator`和`ExactSizeIterator`
 
 ### 性能检查清单
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 使用`Cow`避免不必要克隆
@@ -1185,6 +1209,7 @@ thread::spawn(move || {
 ---
 
 ## 参考资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [The Rust Programming Language - 迭代器](https://doc.rust-lang.org/book/ch13-02-iterators.html)
@@ -1538,4 +1563,3 @@ thread::spawn(move || {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

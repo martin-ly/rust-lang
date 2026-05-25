@@ -88,6 +88,7 @@ fn calculate_length(s: &String) -> usize {
 ```
 
 ### 1.2 借用规则
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -110,9 +111,11 @@ fn calculate_length(s: &String) -> usize {
 ---
 
 ## 2. 不可变借用 (&T)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 基本语法
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -128,6 +131,7 @@ fn main() {
 ```
 
 ### 2.2 形式化：共享借用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -141,6 +145,7 @@ fn main() {
 ```
 
 ### 2.3 示例：多读者模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -165,9 +170,11 @@ fn read_config(config: &Config) {
 ---
 
 ## 3. 可变借用 (&mut T)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 独占访问
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -183,6 +190,7 @@ fn main() {
 ```
 
 ### 3.2 形式化：可变借用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -198,6 +206,7 @@ fn main() {
 ```
 
 ### 3.3 反例：同时多个可变借用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -218,9 +227,11 @@ fn multiple_mut_borrows() {
 ---
 
 ## 4. 借用规则的形式化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 别名互斥规则
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -236,6 +247,7 @@ fn multiple_mut_borrows() {
 ```
 
 ### 4.2 借用检查器的判断
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -256,9 +268,11 @@ loan(ℓ, Mut, r) ∈ L  ∧  loan(ℓ', _, r') ∈ L
 ---
 
 ## 5. 悬挂引用预防
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 编译时检查
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -279,6 +293,7 @@ error[E0106]: missing lifetime specifier
 ```
 
 ### 5.2 反例：返回局部引用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -292,6 +307,7 @@ fn dangling_reference() -> &i32 {
 ```
 
 ### 5.3 解决方案
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -309,9 +325,11 @@ fn get_static() -> &'static str {
 ---
 
 ## 6. 重新借用 (Reborrowing)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -328,6 +346,7 @@ fn main() {
 ```
 
 ### 6.2 形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -343,9 +362,11 @@ fn main() {
 ---
 
 ## 7. 借用与模式匹配
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 7.1 解构借用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -367,6 +388,7 @@ fn main() {
 ```
 
 ### 7.2 部分借用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -386,9 +408,11 @@ fn main() {
 ---
 
 ## 8. 借用检查算法的演进
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 词法生命周期
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -405,6 +429,7 @@ fn lexical_example() {
 ```
 
 ### 8.2 非词法生命周期 (NLL)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -425,6 +450,7 @@ NLL的关键：生命周期基于**使用位置**而非**作用域范围**。
 ---
 
 ## 9. 借用系统的类型理论总结
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | Rust概念 | 类型理论对应 | 形式化表示 |
@@ -438,9 +464,11 @@ NLL的关键：生命周期基于**使用位置**而非**作用域范围**。
 ---
 
 ## 10. 实例与案例分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 10.1 链表迭代
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -461,6 +489,7 @@ fn iterate_list<T>(head: &Node<T>) {
 ```
 
 ### 10.2 树遍历
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -483,6 +512,7 @@ fn inorder_traversal<T>(root: &TreeNode<T>) {
 ```
 
 ### 10.3 并发读取
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -510,6 +540,7 @@ fn concurrent_reads() {
 ---
 
 ## 11. 与其他理论的联系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -532,6 +563,7 @@ fn concurrent_reads() {
 ---
 
 ## 12. 参考文献
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. Weiss, A., Patterson, D., & Ahmed, A. (2020). Oxide: The Essence of Rust. *arXiv:1903.00982*.
@@ -669,4 +701,3 @@ fn concurrent_reads() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

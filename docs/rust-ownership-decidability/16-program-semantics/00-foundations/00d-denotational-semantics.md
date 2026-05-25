@@ -115,6 +115,7 @@ $$
 ---
 
 ## 3. 简单表达式的指称语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 算术表达式
@@ -169,6 +170,7 @@ $$
 ---
 
 ## 4. 域论基础 (Domain Theory)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 偏序集 (Partially Ordered Sets)
@@ -186,6 +188,7 @@ $$
 **直觉**: $d_1 \sqsubseteq d_2$ 表示 $d_1$ 比 $d_2$ "更少信息"或"更未定义"。
 
 ### 4.2 完全偏序 (Complete Partial Orders, CPO)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **链** (Chain): 递增序列 $d_0 \sqsubseteq d_1 \sqsubseteq d_2 \sqsubseteq ...$
@@ -201,6 +204,7 @@ $$
 **底部元素** ($\bot$): 最小元素，表示"完全未定义"。
 
 ### 4.3 提升 (Lifting)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定义**: 对集合 $S$，其提升 $S_\bot$ 添加底部元素：
@@ -218,6 +222,7 @@ $$
 **用途**: 表示计算可能不终止。
 
 ### 4.4 连续函数
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **单调函数**: $d_1 \sqsubseteq d_2 \Rightarrow f(d_1) \sqsubseteq f(d_2)$
@@ -233,9 +238,11 @@ $$
 ---
 
 ## 5. 不动点理论 (Fixed Point Theory)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 不动点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定义**: $d$ 是 $f$ 的不动点，如果 $f(d) = d$。
@@ -249,6 +256,7 @@ $$
 **定理** (Kleene): 若 $f$ 是连续函数，则 $\text{fix}(f)$ 是 $f$ 的最小不动点。
 
 ### 5.2 在递归中的应用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **递归函数语义**:
@@ -268,6 +276,7 @@ fact = rec f(n). if n=0 then 1 else n * f(n-1)
 ```
 
 ### 5.3 展开计算
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -286,9 +295,11 @@ $$
 ---
 
 ## 6. λ演算的指称语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 值域
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **困难**: 需要域 $D$ 满足 $D \cong [D \rightarrow D]$（函数空间）。
@@ -296,6 +307,7 @@ $$
 **解决方案**: Dana Scott 发现的**域的逆极限构造**。
 
 ### 6.2 语义方程
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **环境模型**:
@@ -309,6 +321,7 @@ $$
 $$
 
 ### 6.3 类型化 λ演算
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **语义**:
@@ -322,9 +335,11 @@ $$
 ---
 
 ## 7. 命令式语言的指称语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 存储模型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **存储** $\sigma$: 位置到值的映射。
@@ -332,6 +347,7 @@ $$
 **存储域**: $\text{Store} = \text{Loc} \rightarrow_{fin} \text{Val}$
 
 ### 7.2 命令的语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **语义类型**: $\llbracket c \rrbracket : \text{Store} \rightarrow \text{Store}_\bot$
@@ -368,9 +384,11 @@ $$
 ---
 
 ## 8. 完全抽象 (Full Abstraction)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 8.1 观察等价
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定义**: 两个程序观察等价，如果它们在所有上下文中表现相同。
@@ -380,6 +398,7 @@ e_1 \approx_{obs} e_2 \iff \forall C. C[e_1] \Downarrow v \Leftrightarrow C[e_2]
 $$
 
 ### 8.2 完全抽象性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **定义**: 语义是完全抽象的，如果：
@@ -395,9 +414,11 @@ $$
 ---
 
 ## 9. 在 Rust 中的应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 所有权作为线性逻辑
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **线性类型指称**:
@@ -416,6 +437,7 @@ $$
 - `move`: 线性消耗（对应 $A \multimap B$）
 
 ### 9.2 生命周期的域论模型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **区域**: 程序点的集合，表示值的有效期。
@@ -429,6 +451,7 @@ $$
 $$
 
 ### 9.3 类型系统的语义 soundness
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理**: Rust 的类型系统 sound（相对于操作语义）。
@@ -442,9 +465,11 @@ $$
 ---
 
 ## 10. 与其他语义的关系
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 10.1 操作语义 vs 指称语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | 操作语义 | 指称语义 |
@@ -455,6 +480,7 @@ $$
 | 适用证明 | 实现、优化 | 等价性、抽象 |
 
 ### 10.2 一致性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理**: 操作语义和指称语义一致。
@@ -464,6 +490,7 @@ e \Downarrow v \Rightarrow \llbracket e \rrbracket = \llbracket v \rrbracket
 $$
 
 ### 10.3 公理语义 vs 指称语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **关系**: 公理语义可以看作指称语义的逻辑视角。
@@ -475,14 +502,17 @@ $$
 ---
 
 ## 11. 现代发展
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 11.1 游戏语义 (Game Semantics)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 将程序交互建模为游戏，完全解决了 PCF 的完全抽象问题。
 
 ### 11.2 概率指称语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 扩展以处理随机计算：
@@ -492,6 +522,7 @@ $$
 $$
 
 ### 11.3 微分指称语义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 用于机器学习中的自动微分。
@@ -499,6 +530,7 @@ $$
 ---
 
 ## 12. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 概念 | 含义 | 在 Rust 中 |
@@ -514,6 +546,7 @@ $$
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. Scott, D. S., & Strachey, C. (1971). "Towards a Mathematical Semantics for Computer Languages".
@@ -636,4 +669,3 @@ $$
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

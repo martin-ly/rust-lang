@@ -53,9 +53,11 @@
 ---
 
 ## 共识算法
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Raft 算法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Raft 通过选举领导者来实现共识。
@@ -176,6 +178,7 @@ impl RaftNode {
 ```
 
 ### 使用示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -201,9 +204,11 @@ if nodes[0].is_leader() {
 ---
 
 ## 一致性级别
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 线性一致性 (Linearizability)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 最强的单个对象一致性，所有操作看起来是原子的。
@@ -240,6 +245,7 @@ impl LinearizableStore {
 ```
 
 ### 最终一致性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 弱一致性，保证如果没有更新，最终所有副本一致。
@@ -282,9 +288,11 @@ impl GossipNode {
 ---
 
 ## Rust 实现考量
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 所有权与分布式状态
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -317,6 +325,7 @@ pub async fn node_loop(mut node: RaftNode, mut rx: mpsc::Receiver<Message>) {
 ```
 
 ### 错误处理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -339,6 +348,7 @@ pub enum ConsensusError {
 ---
 
 ## 参考
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Raft Paper](https://raft.github.io/raft.pdf)
@@ -460,4 +470,3 @@ pub enum ConsensusError {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

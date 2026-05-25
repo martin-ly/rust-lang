@@ -153,6 +153,7 @@ unsafe impl Sync for SystemBuffer {}
 ---
 
 ## 内存管理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 物理内存管理
@@ -463,6 +464,7 @@ impl AddressSpace {
 ---
 
 ## 操作系统开发
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 引导加载程序
@@ -580,6 +582,7 @@ fn panic(info: &PanicInfo) -> ! {
 ---
 
 ## 设备驱动
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 字符设备驱动
@@ -750,6 +753,7 @@ impl AhciController {
 ---
 
 ## 文件系统
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 简单文件系统实现
@@ -866,6 +870,7 @@ pub enum FsError { InvalidMagic, InodeNotFound, BlockNotFound, NoSpace, NotImple
 ---
 
 ## 网络协议栈
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### TCP/IP 实现
@@ -984,6 +989,7 @@ pub struct TcpPacket { header: TcpHeader, data: Vec<u8> }
 ---
 
 ## 虚拟化与容器
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### OCI 容器运行时
@@ -1099,6 +1105,7 @@ impl From<serde_json::Error> for ContainerError {
 ---
 
 ## 性能优化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 零拷贝技术
@@ -1211,6 +1218,7 @@ pub fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
 ---
 
 ## 最佳实践
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 1. 错误处理
@@ -1349,6 +1357,7 @@ impl<'a, T> Drop for SpinLockGuard<'a, T> {
 ---
 
 ## 总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 在系统编程领域提供了独特的优势：
@@ -1364,6 +1373,7 @@ Rust 在系统编程领域提供了独特的优势：
 ---
 
 ## 参考资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust OSDev Wiki](https://wiki.osdev.org/Rust)
@@ -1419,7 +1429,6 @@ Rust 在系统编程领域提供了独特的优势：
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
-
 
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
@@ -1849,4 +1858,3 @@ Rust 在系统编程领域提供了独特的优势：
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

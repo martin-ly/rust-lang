@@ -52,11 +52,13 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 依赖规则
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 代码依赖只能向内，不能向外。
 
 ### 2. 抽象在内，实现在外
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 领域定义接口（端口），外层提供实现（适配器）。
@@ -64,9 +66,11 @@
 ---
 
 ## Rust 实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 端口与适配器
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -106,6 +110,7 @@ impl OrderRepository for SqliteOrderRepository {
 ```
 
 ### DI 配置
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -131,6 +136,7 @@ async fn main() -> std::io::Result<()> {
 ---
 
 ## 领域驱动设计要素
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -200,6 +206,7 @@ impl PricingService {
 ---
 
 ## 错误处理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -237,6 +244,7 @@ impl ResponseError for AppError {
 ---
 
 ## 测试
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -283,6 +291,7 @@ fn test_create_order_use_case() {
 ---
 
 ## 对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | 分层架构 | 清洁架构 |
@@ -389,4 +398,3 @@ fn test_create_order_use_case() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Proxy Pattern in Rust](#proxy-pattern-in-rust)
@@ -100,6 +101,7 @@ impl Image for ProxyImage {
 ```
 
 ### 2. 保护代理 (访问控制)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -167,6 +169,7 @@ impl Document for ProtectedDocument {
 ```
 
 ### 3. 智能引用 (引用计数)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -204,6 +207,7 @@ impl<T> Deref for SmartPointer<T> {
 ---
 
 ## 形式化定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -233,6 +237,7 @@ Proxy<T> ≈ T (在接口上)
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [structural 目录](./README.md)
@@ -289,4 +294,3 @@ Proxy<T> ≈ T (在接口上)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

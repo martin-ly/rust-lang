@@ -298,6 +298,7 @@ impl AsyncFileReader {
 ---
 
 ## 2. 任务调度
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 运行时架构
@@ -596,6 +597,7 @@ async fn log_request() {
 ---
 
 ## 3. 并发原语
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 异步 Mutex
@@ -1433,4 +1435,3 @@ impl<T: Clone + Send + Sync + 'static> StateMonitor<T> {
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

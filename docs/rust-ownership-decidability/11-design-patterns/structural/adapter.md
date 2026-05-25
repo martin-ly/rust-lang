@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Adapter Pattern in Rust](#adapter-pattern-in-rust)
@@ -84,6 +85,7 @@ fn main() {
 ```
 
 ### 泛型适配器 (零成本)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -132,6 +134,7 @@ fn display<T: Renderable>(item: &T) {
 ---
 
 ## 实战: 日志库适配
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -213,6 +216,7 @@ impl Application {
 ---
 
 ## 形式化定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -244,6 +248,7 @@ Adapter: Source → Target
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [structural 目录](./README.md)
@@ -312,4 +317,3 @@ Adapter: Source → Target
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

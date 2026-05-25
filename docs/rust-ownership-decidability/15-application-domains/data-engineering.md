@@ -71,6 +71,7 @@
 ---
 
 ## 数据处理框架
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Polars 高性能 DataFrame
@@ -436,6 +437,7 @@ async fn main() -> Result<(), DataFusionError> {
 ---
 
 ## 流处理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Tokio 流处理管道
@@ -720,6 +722,7 @@ impl KafkaProcessor {
 ---
 
 ## 数据库开发
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 嵌入式数据库
@@ -951,6 +954,7 @@ impl ColumnStore {
 ---
 
 ## 序列化与存储格式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Apache Arrow
@@ -1082,6 +1086,7 @@ use parquet::basic::ZstdLevel;
 ---
 
 ## ETL 管道
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 完整 ETL 实现
@@ -1253,6 +1258,7 @@ where
 ---
 
 ## 实时分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 实时指标计算
@@ -1373,6 +1379,7 @@ fn current_time_ms() -> u64 {
 ---
 
 ## 最佳实践
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 1. 内存管理
@@ -1464,6 +1471,7 @@ pub type Result<T> = std::result::Result<T, DataError>;
 ---
 
 ## 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 在数据工程领域提供了：
@@ -1518,7 +1526,6 @@ Rust 在数据工程领域提供了：
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
-
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -2064,4 +2071,3 @@ Rust 在数据工程领域提供了：
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

@@ -213,6 +213,7 @@ impl Connection<Connected> {
 ---
 
 ## 2. 创建型模式 (Creational Patterns)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 构建者模式 (Builder Pattern)
@@ -658,6 +659,7 @@ impl PrototypeRegistry {
 ---
 
 ## 3. 结构型模式 (Structural Patterns)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 适配器模式 (Adapter Pattern)
@@ -1131,6 +1133,7 @@ impl CachedImageProxy {
 ---
 
 ## 4. 行为型模式 (Behavioral Patterns)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 命令模式 (Command Pattern)
@@ -2285,6 +2288,7 @@ fn main() {
 ---
 
 ## 5. Rust特有模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Newtype模式
@@ -2628,6 +2632,7 @@ fn main() {
 ---
 
 ## 6. 反模式与陷阱
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 过度使用 `Rc<RefCell<T>>`
@@ -2700,6 +2705,7 @@ let value = some_option.unwrap_or(default);
 ---
 
 ## 7. 最佳实践总结
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 设计模式选择指南
@@ -2728,6 +2734,7 @@ let value = some_option.unwrap_or(default);
 ---
 
 ## 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. Rust Design Patterns: <https://rust-unofficial.github.io/patterns/>
@@ -3785,4 +3792,3 @@ let value = some_option.unwrap_or(default);
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

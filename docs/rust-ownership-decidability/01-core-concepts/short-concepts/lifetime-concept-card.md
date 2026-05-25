@@ -112,6 +112,7 @@ Rust编译器通过生命周期分析拒绝这段代码。
 ---
 
 ## 2. 形式化理论
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 生命周期作为区域
@@ -187,6 +188,7 @@ x ∈ Live(p) ⟺ 存在从p到x的使用的路径，且路径上无x的重新�
 ---
 
 ## 3. 生命周期标注
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 显式标注语法
@@ -282,9 +284,11 @@ trait Parser<'input> {
 ---
 
 ## 4. 省略规则
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 生命周期省略规则
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Rust编译器自动推断生命周期，遵循三条规则：
@@ -313,6 +317,7 @@ impl Person {
 ```
 
 ### 4.2 无法省略的情况
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -324,6 +329,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 
 ### 4.3 方法中的生命周期
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -348,9 +354,11 @@ impl<'a> Buffer<'a> {
 ---
 
 ## 5. 高级特性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 NLL (Non-Lexical Lifetimes)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 2018+ 引入NLL，生命周期在**最后使用处**结束。
@@ -380,6 +388,7 @@ x.push(4);      ────┘ OK！y已不再使用
 ```
 
 ### 5.2 生命周期约束
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **where子句约束**:
@@ -406,6 +415,7 @@ where
 ```
 
 ### 5.3 Higher-Ranked Trait Bounds (HRTB)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -422,6 +432,7 @@ where
 ```
 
 ### 5.4 匿名生命周期
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 2021+ 引入匿名生命周期 `'_`:
@@ -446,9 +457,11 @@ impl Foo<'_> {
 ---
 
 ## 6. 常见模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 迭代器模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -469,6 +482,7 @@ impl<'a, T> Iterator for Iter<'a, T> {
 ```
 
 ### 6.2 智能指针模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -489,6 +503,7 @@ impl<'a, T> Copy for Ref<'a, T> {}
 ```
 
 ### 6.3 访问者模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -503,6 +518,7 @@ struct Ast<'a> {
 ```
 
 ### 6.4 缓存模式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -520,9 +536,11 @@ impl<'k, 'v, K: Eq + Hash, V> Cache<'k, 'v, K, V> {
 ---
 
 ## 7. 错误诊断
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 生命周期太短
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -547,6 +565,7 @@ fn good() -> String {
 ```
 
 ### 7.2 生命周期不匹配
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -562,6 +581,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 
 ### 7.3 同时借用冲突
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -585,9 +605,11 @@ data.push(4);
 ---
 
 ## 8. 最佳实践
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 优先使用省略
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -599,6 +621,7 @@ fn first_explicit<'a>(items: &'a [i32]) -> Option<&'a i32>
 ```
 
 ### 8.2 显式标注复杂情况
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -610,6 +633,7 @@ fn parse<'input>(input: &'input str) -> ParseResult<'input>
 ```
 
 ### 8.3 文档说明生命周期
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -624,6 +648,7 @@ fn longest_line(content: &str) -> &str {
 ```
 
 ### 8.4 避免过度约束
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -637,6 +662,7 @@ fn flexible<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
 ---
 
 ## 总结
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 生命周期是Rust编译时 borrow checker 的核心机制：
@@ -814,4 +840,3 @@ fn flexible<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

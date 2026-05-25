@@ -63,6 +63,7 @@
 ```
 
 ### 2.2 与强一致性的对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -90,9 +91,11 @@
 ---
 
 ## 3. 反熵机制
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Gossip 协议
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -159,6 +162,7 @@ impl<T: Hash + Eq + Clone> AntiEntropySync<T> {
 ```
 
 ### 3.2 读修复与 hinted handoff
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -242,9 +246,11 @@ impl HintedHandoff {
 ---
 
 ## 4. 向量时钟
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 向量时钟原理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -271,6 +277,7 @@ impl HintedHandoff {
 ```
 
 ### 4.2 Rust 实现
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -344,9 +351,11 @@ struct VersionedValue<T> {
 ---
 
 ## 5. CRDT 数据类型
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 CRDT 基础
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -369,6 +378,7 @@ CRDT (Conflict-free Replicated Data Types):
 ```
 
 ### 5.2 常见 CRDT 实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -505,9 +515,11 @@ impl<T: Hash + Eq + Clone> LWWSet<T> {
 ---
 
 ## 6. 冲突解决策略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 冲突检测与解决
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -574,9 +586,11 @@ fn merge_carts(cart1: &ShoppingCart, cart2: &ShoppingCart) -> ShoppingCart {
 ---
 
 ## 7. 形式化保证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 最终一致性属性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -601,6 +615,7 @@ fn merge_carts(cart1: &ShoppingCart, cart2: &ShoppingCart) -> ShoppingCart {
 ---
 
 ## 8. 总结
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 机制 | 适用场景 | 复杂度 |
@@ -824,4 +839,3 @@ $$
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

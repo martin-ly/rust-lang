@@ -179,6 +179,7 @@ MIRI_TREE_BORROWS=1 cargo miri run
 ---
 
 ## 3. 形式化定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 未定义行为 (UB) 的数学定义
@@ -242,6 +243,7 @@ $$\text{active}(&mut\ T) \Rightarrow \neg\exists p: A(p, &mut\ T) \land \text{ac
 ---
 
 ## 4. 安装与配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 安装 Miri
@@ -273,6 +275,7 @@ flags = ["-Zmiri-disable-isolation"]
 ---
 
 ## 5. 核心检测能力
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 使用未初始化内存
@@ -548,6 +551,7 @@ fn main() {
 ---
 
 ## 6. 高级使用技巧
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 与 FFI 代码交互
@@ -639,6 +643,7 @@ cargo miri test test_unsafe_ptr_ops
 ---
 
 ## 7. 实战案例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 自定义智能指针验证
@@ -815,6 +820,7 @@ mod tests {
 ---
 
 ## 8. Miri 与其他工具对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | Miri | Kani | Prusti | Valgrind (Memcheck) | AddressSanitizer |
@@ -839,6 +845,7 @@ mod tests {
 ---
 
 ## 9. 最佳实践与常见陷阱
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 9.1 最佳实践
@@ -946,6 +953,7 @@ fn platform_specific() {
 ---
 
 ## 10. 限制与未来方向
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 当前限制
@@ -970,6 +978,7 @@ fn platform_specific() {
 ---
 
 ## 参考
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Miri GitHub](https://github.com/rust-lang/miri)
@@ -1295,4 +1304,3 @@ fn platform_specific() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

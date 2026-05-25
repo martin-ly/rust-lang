@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Observer Pattern in Rust](#observer-pattern-in-rust)
@@ -135,6 +136,7 @@ fn main() {
 ```
 
 ### 类型安全的事件系统
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -204,6 +206,7 @@ impl Event for OrderPlacedEvent {
 ---
 
 ## 形式化定义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -235,6 +238,7 @@ Rust 特殊性:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [behavioral 目录](./README.md)
@@ -301,4 +305,3 @@ Rust 特殊性:
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

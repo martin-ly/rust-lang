@@ -44,6 +44,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 核心概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -69,6 +70,7 @@
 ```
 
 ### 2.2 形式化定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -104,9 +106,11 @@ $$
 ---
 
 ## 3. 注册语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 服务注册模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -142,6 +146,7 @@ enum ServiceChange {
 ```
 
 ### 3.2 自注册 vs 第三方注册
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -197,9 +202,11 @@ impl<R: ServiceRegistry> SidecarRegistration<R> {
 ---
 
 ## 4. 发现语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 客户端发现
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -257,6 +264,7 @@ impl<R: ServiceRegistry, L: LoadBalancer> ClientSideDiscovery<R, L> {
 ```
 
 ### 4.2 服务端发现
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -286,9 +294,11 @@ impl ServerSideDiscovery {
 ---
 
 ## 5. 一致性语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 CAP 权衡
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -308,6 +318,7 @@ impl ServerSideDiscovery {
 ```
 
 ### 5.2 一致性级别
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -352,9 +363,11 @@ impl ServiceRegistry for ConsistentRegistry {
 ---
 
 ## 6. 健康检查语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 健康检查策略
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -395,6 +408,7 @@ impl HealthChecker {
 ```
 
 ### 6.2 故障转移
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -431,9 +445,11 @@ impl<R: ServiceRegistry> FailoverDiscovery<R> {
 ---
 
 ## 7. 形式化保证
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 服务发现不变量
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -453,6 +469,7 @@ impl<R: ServiceRegistry> FailoverDiscovery<R> {
 ```
 
 ### 7.2 活性保证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -467,9 +484,11 @@ impl<R: ServiceRegistry> FailoverDiscovery<R> {
 ---
 
 ## 8. Rust 实现示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 8.1 基于 etcd 的服务发现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -527,6 +546,7 @@ impl ServiceRegistry for EtcdServiceRegistry {
 ---
 
 ## 9. 总结
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | 关键选择 | 形式化 |
@@ -704,4 +724,3 @@ $$
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [λ演算基础 (Lambda Calculus Foundations)](#λ演算基础-lambda-calculus-foundations)
@@ -76,6 +77,7 @@ let result = f(5);  // (λx.x+1) 5
 ```
 
 ### 2.2 变量与绑定
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定义 2.2** (自由变量与绑定变量)
@@ -105,6 +107,7 @@ fn example() {
 ```
 
 ### 2.3 α-等价 (Alpha Equivalence)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **定义 2.3** (α-转换)
@@ -131,6 +134,7 @@ let f3 = |z| z + 1;
 ```
 
 ### 2.4 β-归约 (Beta Reduction)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定义 2.4** (β-归约)
@@ -166,6 +170,7 @@ let add3 = make_adder(3);  // λy.3+y
 ```
 
 ### 2.5 求值策略
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **定义 2.5** (求值策略)
@@ -191,9 +196,11 @@ f({ println!("evaluated!"); 2 + 3 });  // 立即打印 "evaluated!"
 ---
 
 ## 3. 简单类型 λ演算 (Simply Typed Lambda Calculus)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 类型语法
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定义 3.1** (类型)
@@ -217,6 +224,7 @@ where
 ```
 
 ### 3.2 类型规则
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定义 3.2** (类型判断)
@@ -249,6 +257,7 @@ let result = f(5);  // 类型: i32
 ```
 
 ### 3.3 Curry-Howard 对应
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理 3.3** (Curry-Howard 同构)
@@ -284,9 +293,11 @@ enum Or<A, B> {
 ---
 
 ## 4. 归约与范式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 归约关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **定义 4.1** (归约关系 →)
@@ -307,6 +318,7 @@ M → M'                               (cong-λ)
 ```
 
 ### 4.2 Church-Rosser 定理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定理 4.2** (Church-Rosser / 合流性)
@@ -326,6 +338,7 @@ M → M'                               (cong-λ)
 **意义**: 无论选择何种归约顺序，最终结果都相同（如果存在）。
 
 ### 4.3 范式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **定义 4.3** (β-范式)
@@ -342,9 +355,11 @@ M → M'                               (cong-λ)
 ---
 
 ## 5. 与 Rust 的深层联系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 闭包即 λ抽象
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -356,6 +371,7 @@ let closure = |x| x + env;  // λx.x+env，其中 env 来自环境
 ```
 
 ### 5.2 泛型即多态
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -366,6 +382,7 @@ fn identity<T>(x: T) -> T { x }
 ```
 
 ### 5.3 所有权即线性类型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 λ演算的线性版本（Linear Logic）与 Rust 的所有权系统直接对应：
@@ -380,9 +397,11 @@ let y = x;  // x 被移动，不能再使用
 ---
 
 ## 6. 形式化总结
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 核心概念速查
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 概念 | λ演算 | Rust |
@@ -396,6 +415,7 @@ let y = x;  // x 被移动，不能再使用
 | 自由变量 | FV(M) | 捕获变量 |
 
 ### 6.2 推荐阅读
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. *Types and Programming Languages* - Benjamin C. Pierce (TAPL)
@@ -425,6 +445,7 @@ let y = x;  // x 被移动，不能再使用
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [00-foundations 目录](./README.md)
@@ -524,4 +545,3 @@ let y = x;  // x 被移动，不能再使用
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

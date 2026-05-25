@@ -75,6 +75,7 @@
 ---
 
 ## 2. 微服务架构模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### API Gateway模式
@@ -189,6 +190,7 @@ impl<S> SidecarMiddleware<S> {
 ---
 
 ## 3. 服务发现与注册
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Consul集成
@@ -312,6 +314,7 @@ impl LoadBalancer {
 ---
 
 ## 4. 分布式一致性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Raft共识 (使用raft-rs)
@@ -445,6 +448,7 @@ where
 ---
 
 ## 5. 分布式事务
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Saga模式
@@ -544,6 +548,7 @@ async fn saga_example() {
 ---
 
 ## 6. 消息队列模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 发布-订阅模式
@@ -706,6 +711,7 @@ impl Order {
 ---
 
 ## 7. 熔断与限流
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 熔断器模式
@@ -885,6 +891,7 @@ impl RateLimitedService {
 ---
 
 ## 8. 可观测性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 分布式追踪
@@ -977,6 +984,7 @@ async fn check_external_api() -> bool {
 ---
 
 ## 参考文献
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. Designing Data-Intensive Applications (Martin Kleppmann)
@@ -1019,7 +1027,6 @@ async fn check_external_api() -> bool {
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
-
 
 > **[来源: ACM - Systems Programming Languages]**
 
@@ -1333,4 +1340,3 @@ async fn check_external_api() -> bool {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

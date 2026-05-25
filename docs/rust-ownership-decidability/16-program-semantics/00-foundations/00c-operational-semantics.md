@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [操作语义 (Operational Semantics)](#操作语义-operational-semantics)
@@ -62,6 +63,7 @@
 ```
 
 ### 2.2 算术表达式语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **语法**:
@@ -100,6 +102,7 @@ fn eval(e: Expr, env: &Env) -> Value {
 ```
 
 ### 2.3 变量与环境
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **语义规则**:
@@ -128,9 +131,11 @@ let x = compute_value();
 ---
 
 ## 3. 小步语义 (Small-Step / Structural Semantics)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 基本思想
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 小步语义描述**单个归约步骤**，更适合分析并发和中间状态：
@@ -140,6 +145,7 @@ let x = compute_value();
 ```
 
 ### 3.2 求值上下文
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定义 3.1** (求值上下文 E)
@@ -164,6 +170,7 @@ let result = if { condition() } { branch1 } else { branch2 };
 ```
 
 ### 3.3 小步规则
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -177,6 +184,7 @@ let result = if { condition() } { branch1 } else { branch2 };
 ```
 
 ### 3.4 与 Rust 的执行模型对应
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -196,9 +204,11 @@ where
 ---
 
 ## 4. Rust 的操作语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 所有权转移语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **大步语义规则**:
@@ -218,6 +228,7 @@ let y = x;               // move x → y
 ```
 
 ### 4.2 借用语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **小步规则**:
@@ -240,6 +251,7 @@ let r = &mut y;  // BORROW-MUT: 创建可变引用
 ```
 
 ### 4.3 Drop 语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **大步规则**:
@@ -262,9 +274,11 @@ let r = &mut y;  // BORROW-MUT: 创建可变引用
 ---
 
 ## 5. 并发操作语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 交错语义 (Interleaving Semantics)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 并发程序的执行是线程动作的**交错**：
@@ -275,6 +289,7 @@ let r = &mut y;  // BORROW-MUT: 创建可变引用
 ```
 
 ### 5.2 Rust 的线程语义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -285,6 +300,7 @@ let t2 = thread::spawn(|| { /* ... */ });
 ```
 
 ### 5.3 内存模型语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **Release-Acquire**:
@@ -312,9 +328,11 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 ---
 
 ## 6. 形式化属性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 确定性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理 6.1** (确定性)
@@ -324,6 +342,7 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 **Rust**: 单线程执行是确定性的，并发执行是非确定性的（交错）。
 
 ### 6.2 合流性 (Confluence)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **定理 6.2** (Church-Rosser)
@@ -331,6 +350,7 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 如果 e →*e₁ 且 e →* e₂，则存在 e' 使得 e₁ →*e' 且 e₂ →* e'。
 
 ### 6.3 类型安全
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定理 6.3** (类型安全)
@@ -341,6 +361,7 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 ---
 
 ## 7. 总结
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 语义风格 | 适用场景 | Rust 应用 |
@@ -372,6 +393,7 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [00-foundations 目录](./README.md)
@@ -447,4 +469,3 @@ let v = x.load(Ordering::Acquire);  // 读操作，同步 happens-before
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

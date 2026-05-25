@@ -91,6 +91,7 @@ RefinedRust 做出了以下关键贡献:
 ---
 
 ## 2. 理论基础
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 精细化所有权类型
@@ -170,6 +171,7 @@ let mut z = 1;
 ---
 
 ## 3. 核心技术
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Borrow Names: 可变引用的数学建模
@@ -262,6 +264,7 @@ fn get_unchecked_mut<'a, T>(
 ---
 
 ## 4. 类型系统详解
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 类型语法
@@ -331,6 +334,7 @@ stratify(place_(int × int), #(1, 2)) = (place_(int × int), (1, 2))
 ---
 
 ## 5. 验证流程
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 前端架构
@@ -407,6 +411,7 @@ Lithium 是 Iris 分离逻辑的一个片段，专门设计用于高效证明搜
 ---
 
 ## 6. 实际案例: Vec 验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 Vec 表示不变量
@@ -479,6 +484,7 @@ unsafe fn get_unchecked_mut<'a, T>(
 ---
 
 ## 7. 与其他工具对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 工具对比矩阵
@@ -532,6 +538,7 @@ RefinedRust (2024)
 ```
 
 ### 7.3 与 Creusot/Prusti 的对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **Creusot**:
@@ -558,9 +565,11 @@ RefinedRust (2024)
 ---
 
 ## 8. 限制与未来工作
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 当前限制
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 RefinedRust 原型目前**不支持**:
@@ -576,6 +585,7 @@ RefinedRust 原型目前**不支持**:
 | 指针-整数转换 | ⚠️ | 不完全支持 |
 
 ### 8.2 未来研究方向
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **扩展语言支持**:
@@ -600,9 +610,11 @@ RefinedRust 原型目前**不支持**:
 ---
 
 ## 9. 实践指南
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 9.1 何时使用 RefinedRust
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **推荐使用**:
@@ -618,6 +630,7 @@ RefinedRust 原型目前**不支持**:
 - ❌ 并发代码验证
 
 ### 9.2 入门资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **论文**: RefinedRust (PLDI 2024)
@@ -633,6 +646,7 @@ RefinedRust 原型目前**不支持**:
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. Gaher, L., Sammler, M., Jung, R., Krebbers, R., & Dreyer, D. (2024). **RefinedRust: A Type System for High-Assurance Verification of Rust Programs**. *PLDI 2024*.
@@ -829,4 +843,3 @@ RefinedRust 原型目前**不支持**:
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

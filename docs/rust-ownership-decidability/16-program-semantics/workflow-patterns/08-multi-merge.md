@@ -1,33 +1,5 @@
 # 08 多路合并模式 (Multi-Merge)
 
-## 📑 目录
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-- [08 多路合并模式 (Multi-Merge)](#08-多路合并模式-multi-merge)
-  - [📑 目录](#-目录)
-  - [📋 目录](#-目录-1)
-  - [模式定义与语义](#模式定义与语义)
-    - [核心语义](#核心语义)
-    - [触发计数语义](#触发计数语义)
-  - [BPMN 2.0 表示](#bpmn-20-表示)
-    - [OR-Join 实现](#or-join-实现)
-  - [形式化语义](#形式化语义)
-    - [状态机形式化](#状态机形式化)
-    - [进程代数 (CSP)](#进程代数-csp)
-  - [正确性证明](#正确性证明)
-    - [安全性](#安全性)
-    - [活性](#活性)
-  - [Rust 实现示例](#rust-实现示例)
-    - [基础实现](#基础实现)
-    - [广播通道实现](#广播通道实现)
-    - [复杂工作流示例](#复杂工作流示例)
-  - [与其他模式的关系](#与其他模式的关系)
-  - [应用场景](#应用场景)
-    - [注意事项](#注意事项)
-  - [学术参考](#学术参考)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-
 ## 📋 目录
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -93,6 +65,7 @@ $$
 $$
 
 ## BPMN 2.0 表示
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 在 BPMN 2.0 中，多路合并可以使用**无网关（No Gateway）**的多个序列流指向同一活动来表示：
@@ -171,6 +144,7 @@ $$
 ```
 
 ### OR-Join 实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 也可以使用非排他性 OR-Join：
@@ -198,9 +172,11 @@ $$
 ```
 
 ## 形式化语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 状态机形式化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **扩展状态机：**
@@ -224,6 +200,7 @@ $$
 $$
 
 ### 进程代数 (CSP)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 <!-- markdown-link-check-disable -->
@@ -274,9 +251,11 @@ Q(x) ::= process(x).0
 ```
 
 ## 正确性证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 安全性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定理 1（独立触发安全性）**: 多路合并保证每个分支完成都独立触发后续活动，且不会遗漏任何分支。
@@ -294,6 +273,7 @@ Q(x) ::= process(x).0
 因此每个分支完成都被正确处理。∎
 
 ### 活性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理 2（活性保证）**: 如果分支 $P_i$ 完成，则后续活动 $Q_i$ 最终会被执行。
@@ -321,9 +301,11 @@ Q(x) ::= process(x).0
 因此分支完成不会被阻塞。∎
 
 ## Rust 实现示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 基础实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -388,6 +370,7 @@ impl<'a, T: Send, R: Send> BranchHandler<'a, T, R> {
 ```
 
 ### 广播通道实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -465,6 +448,7 @@ pub async fn broadcast_example() {
 ```
 
 ### 复杂工作流示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -585,6 +569,7 @@ pub async fn order_processing_example() {
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 模式 | 同步性 | 触发次数 |
@@ -626,6 +611,7 @@ $$
 ```
 
 ## 应用场景
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **消息广播**：多个消息源独立触发同一处理逻辑
@@ -636,6 +622,7 @@ $$
 6. **数据流处理**：每个数据包独立处理
 
 ### 注意事项
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 后续活动需要处理并发执行的情况
@@ -645,6 +632,7 @@ $$
 - 考虑批量处理优化性能
 
 ## 学术参考
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Russell, N., ter Hofstede, A.H.M., van der Aalst, W.M.P., & Mulyar, N.** (2006). "Workflow Control-Flow Patterns: A Revised View." *BPM Center Report* BPM-06-22.
@@ -675,6 +663,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -883,4 +872,3 @@ $$
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

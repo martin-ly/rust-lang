@@ -125,6 +125,7 @@ conn.query("SELECT 1");  // 编译错误！Disconnected状态没有query方法
 ---
 
 ## 2. 核心概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### PhantomData
@@ -209,6 +210,7 @@ impl Process<Running> {
 ---
 
 ## 3. 基础实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 最简单的类型状态机
@@ -349,6 +351,7 @@ impl Client<Connected> {
 ---
 
 ## 4. 实战案例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 案例1：数据库连接
@@ -1033,6 +1036,7 @@ fn main() -> Result<(), PaymentError> {
 ---
 
 ## 5. 高级技巧
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 可逆状态转换
@@ -1237,6 +1241,7 @@ async fn example() -> Result<(), Error> {
 ---
 
 ## 6. 权衡与局限
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 代码复杂度
@@ -1315,6 +1320,7 @@ conn.connect();  // 运行时检查当前状态
 ---
 
 ## 7. 最佳实践
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 何时使用
@@ -1387,6 +1393,7 @@ pub struct Connection<State> { ... }
 ---
 
 ## 8. 对比其他语言
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### C++
@@ -1432,6 +1439,7 @@ type Connection<State> = {
 ```
 
 ### Haskell
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Haskell与Rust最接近，使用类型类和代数数据类型：
@@ -1457,6 +1465,7 @@ query _ = return []
 ---
 
 ## 9. 总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 类型状态模式是Rust类型系统的强大应用，它将运行时检查转移到编译时，提供：
@@ -1469,6 +1478,7 @@ query _ = return []
 然而，它也带来了复杂性和局限性。合理权衡后，在适当场景下使用类型状态模式，可以显著提升代码质量和可靠性。
 
 ### 学习检查清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 理解PhantomData的作用
@@ -1478,6 +1488,7 @@ query _ = return []
 - [ ] 能权衡类型状态与运行时检查
 
 ### 进一步阅读
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust Design Patterns - Type State](https://rust-unofficial.github.io/patterns/patterns/behavioural/type-state.html)
@@ -1976,4 +1987,3 @@ query _ = return []
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

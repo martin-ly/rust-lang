@@ -104,6 +104,7 @@ P * Q  表示: P和Q分别在不同的、不相交的内存区域成立
 ---
 
 ## 2. 分离逻辑断言语言
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 基本断言
@@ -178,6 +179,7 @@ P * Q 的性质:
 ---
 
 ## 3. Hoare三元组与推理规则
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 基本命令的规范
@@ -247,6 +249,7 @@ fn frame_example() {
 ---
 
 ## 4. 分离逻辑与Rust所有权
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 所有权作为分离逻辑
@@ -347,6 +350,7 @@ fn permission_flow() {
 ---
 
 ## 5. Iris：高阶并发分离逻辑
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Iris的核心创新
@@ -452,6 +456,7 @@ RustBelt在Iris中的类型解释:
 ---
 
 ## 6. 验证工具中的分离逻辑
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 Prusti的Viper后端
@@ -523,9 +528,11 @@ verus! {
 ---
 
 ## 7. 实例与验证案例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 链表验证
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -571,6 +578,7 @@ impl<T> LinkedList<T> {
 ```
 
 ### 7.2 树结构验证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -619,9 +627,11 @@ impl<T: Ord> TreeNode<T> {
 ---
 
 ## 8. 与其他理论的联系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 8.1 与线性逻辑的关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -650,6 +660,7 @@ Iris 框架将两者结合用于 Rust 验证
 | !A | 持久断言 | Copy类型 |
 
 ### 8.2 与Hoare逻辑的关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -669,9 +680,11 @@ Hoare三元组: {P} C {Q}
 ---
 
 ## 9. 高级主题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 分数权限
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -694,6 +707,7 @@ Rust应用:
 ```
 
 ### 9.2 幽灵状态
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -717,6 +731,7 @@ fn ghost_example(x: u64) -> u64 {
 ---
 
 ## 10. 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. Reynolds, J.C. (2002). Separation Logic: A Logic for Shared Mutable Data Structures. *LICS*.
@@ -944,4 +959,3 @@ fn ghost_example(x: u64) -> u64 {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

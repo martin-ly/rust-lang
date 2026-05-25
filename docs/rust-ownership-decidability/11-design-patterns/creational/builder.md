@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Builder Pattern in Rust](#builder-pattern-in-rust)
@@ -109,9 +110,11 @@ let request = HttpRequestBuilder::new()
 ---
 
 ## 高级实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Type State 模式 (编译时验证)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -177,9 +180,11 @@ pub struct Request {
 ---
 
 ## 形式化定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 构建过程的类型理论
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -194,6 +199,7 @@ Builder<T> = Π (fields: Field*). T
 ```
 
 ### 不变量
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -205,6 +211,7 @@ Invariant BUILDER_VALID:
 ---
 
 ## 实战: 数据库连接配置
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -287,6 +294,7 @@ pub enum ConfigError {
 ---
 
 ## 对比分析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 实现方式 | 优点 | 缺点 |
@@ -298,6 +306,7 @@ pub enum ConfigError {
 ---
 
 ## 推荐 crates
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **derive_builder**: `#[derive(Builder)]`
@@ -322,6 +331,7 @@ pub enum ConfigError {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [creational 目录](./README.md)
@@ -408,4 +418,3 @@ pub enum ConfigError {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

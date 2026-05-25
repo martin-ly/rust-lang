@@ -118,6 +118,7 @@ struct Array<T, const N: usize>([T; N]);
 ---
 
 ## 2. 基础语法
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 声明常量泛型
@@ -231,6 +232,7 @@ let buf3: MultiBuffer<i32, 8, 512> = MultiBuffer { inner: [[0; 512]; 8] };
 ---
 
 ## 3. 类型级编程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 类型作为计算
@@ -296,6 +298,7 @@ const fn length<T>(_: &T) -> usize {
 ---
 
 ## 4. 可判定性分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 停机问题
@@ -381,6 +384,7 @@ const fn fib<const N: usize>() -> usize {
 ---
 
 ## 5. 内存布局优化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 静态大小优化
@@ -428,6 +432,7 @@ impl Buffer<{1024 * 1024}> for Box<[u8; 1024 * 1024]> {
 ```
 
 ### 5.3 SIMD优化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -452,9 +457,11 @@ impl SimdVec<f32, 8> {
 ---
 
 ## 6. 高级模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 类型状态模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -484,6 +491,7 @@ impl Connection<CONNECTED> {
 ```
 
 ### 6.2 编译期配置
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -511,6 +519,7 @@ type DebugFeatures = Features<0b0111>;
 ```
 
 ### 6.3 维度分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -553,9 +562,11 @@ let velocity: Velocity = distance / time;  // 编译期维度检查！
 ---
 
 ## 7. 与依赖类型对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 依赖类型简介
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **依赖类型(Dependent Types)** 允许类型依赖于值：
@@ -571,6 +582,7 @@ head : Vect (S n) a -> a  -- 只接受非空向量
 ```
 
 ### 7.2 Rust常量泛型的限制
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -583,6 +595,7 @@ struct Vec<T, const N: usize>([T; N]);
 ```
 
 ### 7.3 对比表
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | Rust常量泛型 | 依赖类型(Idris/Agda) |
@@ -595,6 +608,7 @@ struct Vec<T, const N: usize>([T; N]);
 | 工业应用 | ✅ 广泛 | ⚠️ 有限 |
 
 ### 7.4 为什么Rust选择受限设计
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **可判定性**: 保持类型检查可判定
@@ -605,9 +619,11 @@ struct Vec<T, const N: usize>([T; N]);
 ---
 
 ## 8. 实践案例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 固定大小环形缓冲
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -657,6 +673,7 @@ buf.push(1).unwrap();
 ```
 
 ### 8.2 编译期解析器
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -681,6 +698,7 @@ assert!(email.is_match("test@example.com"));
 ```
 
 ### 8.3 单位系统
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -735,9 +753,11 @@ let f: Force<f64> = calculate_force(m, a);  // 98 N，编译期维度检查！
 ---
 
 ## 9. Rust 1.94 新特性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 9.1 常量泛型默认值
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Rust 1.94 正式稳定了常量泛型默认值，这是一项期待已久的功能：
@@ -799,6 +819,7 @@ struct ThreadPool<const N: usize = 4> {
 ```
 
 ### 9.2 增强的常量表达式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 1.94 放宽了常量表达式的一些限制：
@@ -821,6 +842,7 @@ impl<const N: usize> PowerOfTwo for [u8; N] {
 ```
 
 ### 9.3 泛型关联常量（预览）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 虽然还在完善中，但 Rust 1.94 为泛型关联常量奠定了基础：
@@ -843,9 +865,11 @@ impl Config for DefaultConfig {
 ---
 
 ## 10. 限制与未来
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 10.1 当前限制
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **1. 参数类型受限**:
@@ -881,6 +905,7 @@ trait Config {
 ```
 
 ### 10.2 即将支持的功能
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **1. 更多常量类型** (adt_const_params)
@@ -911,6 +936,7 @@ trait Container {
 ```
 
 ### 10.3 使用建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **应该使用**:
@@ -929,6 +955,7 @@ trait Container {
 ---
 
 ## 总结
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 常量泛型是Rust类型系统的强大扩展：
@@ -1199,4 +1226,3 @@ trait Container {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

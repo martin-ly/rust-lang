@@ -1,6 +1,7 @@
 # 条件变量的形式化语义
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [条件变量的形式化语义](#条件变量的形式化语义)
@@ -95,6 +96,7 @@
 ```
 
 ## 3. Wait/Notify 的精确语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Wait 操作的详细语义
@@ -186,6 +188,7 @@ fn condvar_basic_example() {
 ```
 
 ## 4. 与互斥锁的交互语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 监视器模式的形式化
@@ -307,6 +310,7 @@ fn producer_consumer_example() {
 ```
 
 ## 5. 虚假唤醒的处理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 虚假唤醒的形式化定义
@@ -365,6 +369,7 @@ fn producer_consumer_example() {
 ```
 
 ### 5.3 安全论证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -402,9 +407,11 @@ fn producer_consumer_example() {
 ```
 
 ## 6. 超时等待的语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 WaitTimeout 的形式化定义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -432,6 +439,7 @@ wait_timeout(cv, mutex, timeout):
 ```
 
 ### 6.2 Rust 代码示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -465,9 +473,11 @@ fn timeout_example() {
 ```
 
 ## 7. 多条件变量的协调
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 多 Condvar 共享一个 Mutex
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -531,6 +541,7 @@ impl MultiCondvarSystem {
 ```
 
 ### 7.2 形式化分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -551,9 +562,11 @@ impl MultiCondvarSystem {
 ```
 
 ## 8. 综合安全论证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 条件变量的正确性定理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -572,6 +585,7 @@ impl MultiCondvarSystem {
 ```
 
 ### 8.2 不变式总结
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -594,6 +608,7 @@ I5 (互斥保证):
 ```
 
 ## 9. 总结
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档完整形式化了 Rust 条件变量的语义：
@@ -624,6 +639,7 @@ I5 (互斥保证):
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -792,4 +808,3 @@ I5 (互斥保证):
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

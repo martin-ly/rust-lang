@@ -47,6 +47,7 @@
 | **内存安全** | ✅ 完全 | ✅ 完全 | ⚠️ 部分 | ⚠️ 部分 |
 
 ### 1.2 Rust类型特性矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -71,9 +72,11 @@
 ```
 
 ## 2. 可判定性谱系矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 逻辑系统可判定性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 逻辑系统 | 可判定性 | 复杂度 | Rust对应部分 |
@@ -86,6 +89,7 @@
 | 高阶类型系统 | ❌ 不可判定 | - | 高级类型特性 |
 
 ### 2.2 Rust编译器组件可判定性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -111,9 +115,11 @@
 ```
 
 ## 3. 形式化工具对比矩阵
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 验证工具多维度对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 工具 | 形式化基础 | 自动化程度 | unsafe支持 | 并发支持 | 后端证明器 | 成熟度 |
@@ -128,6 +134,7 @@
 | **RefinedC** | Lithium | ⭐⭐⭐ | ✅ | ❌ | Coq | ⭐⭐⭐ |
 
 ### 3.2 内存建模方法矩阵
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -169,9 +176,11 @@
 ```
 
 ## 4. 所有权语义多维映射
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 所有权操作与数学结构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 操作 | Rust语法 | 范畴论语义 | 分离逻辑 | 线性逻辑 |
@@ -183,6 +192,7 @@
 | 释放 | drop(x) | 终结子 | 释放权限 | 对偶 |
 
 ### 4.2 生命周期关系矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -212,9 +222,11 @@
 ```
 
 ## 5. 并发安全矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 Send与Sync的组合矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | | Sync: Yes | Sync: No |
@@ -223,6 +235,7 @@
 | **Send: No** | ! (不可能) | `Rc<T>`, `RefCell<T>` |
 
 ### 5.2 线程安全与所有权
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -251,6 +264,7 @@
 ```
 
 ## 6. 错误类型与检查阶段矩阵
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 错误类型 | 检查阶段 | 检测方法 | 示例 |
@@ -264,6 +278,7 @@
 ---
 
 ## 使用说明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 这些矩阵用于:
@@ -340,4 +355,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

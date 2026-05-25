@@ -1,33 +1,5 @@
 # 09 鉴别器模式 (Discriminator)
 
-## 📑 目录
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-- [09 鉴别器模式 (Discriminator)](#09-鉴别器模式-discriminator)
-  - [📑 目录](#-目录)
-  - [📋 目录](#-目录-1)
-  - [模式定义与语义](#模式定义与语义)
-    - [核心语义](#核心语义)
-    - [First-Wins 语义](#first-wins-语义)
-  - [BPMN 2.0 表示](#bpmn-20-表示)
-    - [Cancel Event 实现](#cancel-event-实现)
-  - [进程代数形式化](#进程代数形式化)
-  - [超时语义](#超时语义)
-  - [状态机语义](#状态机语义)
-  - [正确性证明](#正确性证明)
-    - [安全性证明](#安全性证明)
-    - [活性证明](#活性证明)
-  - [Rust 实现示例](#rust-实现示例)
-    - [基础鉴别器](#基础鉴别器)
-    - [带超时处理的鉴别器](#带超时处理的鉴别器)
-    - [Race Condition 处理](#race-condition-处理)
-  - [与其他模式的关系](#与其他模式的关系)
-  - [应用场景](#应用场景)
-    - [实现要点](#实现要点)
-  - [学术参考](#学术参考)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-
 ## 📋 目录
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -86,6 +58,7 @@ $$
 其中 $\Box$ 是外部选择算子，$\text{cancel}_{\neq i}$ 表示取消所有非获胜分支。
 
 ## BPMN 2.0 表示
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 在 BPMN 2.0 中，鉴别器可以使用**复杂网关（Complex Gateway）**或**基于事件的网关（Event-Based Gateway）**配合**取消事件（Cancel Event）**实现：
@@ -207,6 +180,7 @@ $$
 ```
 
 ## 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **CSP 形式化：**
@@ -266,6 +240,7 @@ FirstWinner(c1,...,cn) ::=
 ```
 
 ## 超时语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 鉴别器的超时处理：
@@ -284,6 +259,7 @@ Q & \text{if } t \text{ elapsed}
 $$
 
 ## 状态机语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **完整状态机：**
@@ -348,6 +324,7 @@ $$
 ```
 
 ## 正确性证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 安全性证明
@@ -407,6 +384,7 @@ $$
 因此系统最终会继续执行。∎
 
 ## Rust 实现示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 基础鉴别器
@@ -728,6 +706,7 @@ where
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 模式 | 等待策略 | 结果处理 |
@@ -762,6 +741,7 @@ $$
 ```
 
 ## 应用场景
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **竞速查询**：从多个数据源获取同一数据，采用最快响应
@@ -772,6 +752,7 @@ $$
 6. **分布式锁竞争**：第一个获取锁的获胜
 
 ### 实现要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 正确取消正在执行的其他任务
@@ -782,6 +763,7 @@ $$
 - 监控获胜者分布以优化性能
 
 ## 学术参考
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **van der Aalst, W.M.P., ter Hofstede, A.H.M., Kiepuszewski, B., & Barros, A.P.** (2003). "Workflow Patterns." *Distributed and Parallel Databases*, 14(1), 5-51.
@@ -814,6 +796,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -1080,4 +1063,3 @@ $$
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Strategy Pattern in Rust](#strategy-pattern-in-rust)
@@ -173,6 +174,7 @@ fn main() {
 ---
 
 ## 零成本抽象: 泛型实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -203,6 +205,7 @@ let cart = EfficientCart::new(CreditCardPayment::new("1234", "123"));
 ---
 
 ## 形式化定义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -233,6 +236,7 @@ Context 与 Strategy 解耦:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [behavioral 目录](./README.md)
@@ -299,4 +303,3 @@ Context 与 Strategy 解耦:
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

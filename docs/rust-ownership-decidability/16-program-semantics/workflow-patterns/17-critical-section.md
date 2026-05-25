@@ -1,6 +1,7 @@
 # 17 临界区模式 (Critical Section)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [17 临界区模式 (Critical Section)](#17-临界区模式-critical-section)
@@ -56,6 +57,7 @@ $$
 $$
 
 ## Rust 实现示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -293,6 +295,7 @@ pub async fn safe_nested_locks() {
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模式 | 互斥范围 | 并发度 |
@@ -309,6 +312,7 @@ $$
 $$
 
 ## 应用场景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **数据一致性**：保护共享数据修改
@@ -317,6 +321,7 @@ $$
 4. **限流控制**：控制系统并发度
 
 ### 注意事项
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 避免长时间持有锁
@@ -343,6 +348,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -449,4 +455,3 @@ $$
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

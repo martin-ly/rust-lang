@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.93.0 特性深度分析](#rust-1930-特性深度分析)
@@ -596,6 +597,7 @@ macro_rules! offset_of {
 ---
 
 ## 2. 迁移指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 破坏性变更检查清单
@@ -610,6 +612,7 @@ macro_rules! offset_of {
 ```
 
 ### 2.2 BTreeMap::append 行为变更
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -629,6 +632,7 @@ Rust 1.93:
 ---
 
 ## 3. 性能影响分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 性能影响 | 使用场景 |
@@ -641,6 +645,7 @@ Rust 1.93:
 ---
 
 ## 4. 安全强化总结
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -682,6 +687,7 @@ Rust 1.93 安全改进:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [10-research-frontiers 目录](./README.md)
@@ -897,4 +903,3 @@ Rust 1.93 安全改进:
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

@@ -1,6 +1,7 @@
 ﻿# Rust 形式化工程系统 - 主索引
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 形式化工程系统 - 主索引](#rust-形式化工程系统---主索引)
@@ -65,6 +66,7 @@
 ---
 
 ## 编程范式 (02_programming_paradigms)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 子模块 | 映射目标 | 说明 |
@@ -76,6 +78,7 @@
 ---
 
 ## 设计模式 (03_design_patterns)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 子模块 | 映射目标 |
@@ -85,6 +88,7 @@
 ---
 
 ## 工具链生态 (06_toolchain_ecosystem)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 子模块 | 映射目标 |
@@ -96,6 +100,7 @@
 ---
 
 ## 软件工程 (05_software_engineering)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 子模块 | 映射目标 |
@@ -105,6 +110,7 @@
 ---
 
 ## 研究议程 (09_research_agenda)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 子模块 | 映射目标 |
@@ -113,6 +119,7 @@
 ---
 
 ## 质量保障 (10_quality_assurance)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 映射目标 |
@@ -122,6 +129,7 @@
 ---
 
 ## 证明与公理→定理链
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 资源 | 说明 |
@@ -131,6 +139,7 @@
 ---
 
 ## 返回
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [形式化工程系统 README](./README.md)
@@ -150,6 +159,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [rust-formal-engineering-system 目录](./README.md)
@@ -196,4 +206,3 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

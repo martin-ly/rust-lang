@@ -1,6 +1,7 @@
 # 15 交错路由模式 (Interleaved Routing)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [15 交错路由模式 (Interleaved Routing)](#15-交错路由模式-interleaved-routing)
@@ -94,6 +95,7 @@ $$
 | 临界区 | 真并行 | 区域内 | 无 |
 
 ## 偏序约束
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 偏序关系定义
@@ -139,6 +141,7 @@ $$
 $$
 
 ## BPMN 2.0 表示
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 在 BPMN 2.0 中，交错路由可以使用**任务（Task）**配合**顺序流（Sequence Flow）**的特定模式实现：
@@ -217,6 +220,7 @@ $$
 ```
 
 ## 形式化语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 状态机形式化
@@ -281,9 +285,11 @@ Interleaved ::= A1 ||| A2 ||| A3
 ```
 
 ## 正确性证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 互斥性证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理（执行互斥）**: 交错路由保证任意时刻只有一个活动处于执行状态。
@@ -304,6 +310,7 @@ Interleaved ::= A1 ||| A2 ||| A3
 因此任意时刻只有一个活动在执行。∎
 
 ### 活性证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理（最终完成）**: 所有活动最终都会执行并完成。
@@ -320,9 +327,11 @@ Interleaved ::= A1 ||| A2 ||| A3
 因此所有活动最终完成。∎
 
 ## Rust 实现示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 基础实现
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -452,6 +461,7 @@ pub async fn interleaved_example() {
 ```
 
 ### 顺序执行器
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -504,6 +514,7 @@ pub async fn sequential_executor_example() {
 ```
 
 ### 优先级交错
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -618,6 +629,7 @@ impl<T: Clone + Send + 'static, R: Send + 'static> DependencyAwareInterleaved<T,
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 并发性 | 互斥性 |
@@ -634,6 +646,7 @@ $$
 $$
 
 ## 应用场景
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **单资源访问**：多个任务需要独占访问同一资源
@@ -644,6 +657,7 @@ $$
 6. **测试执行**：确保测试用例串行执行
 
 ### 注意事项
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 使用信号量或互斥锁保证互斥
@@ -653,6 +667,7 @@ $$
 - 避免优先级反转
 
 ## 学术参考
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Hoare, C.A.R.** (1978). "Communicating Sequential Processes." *Communications of the ACM*, 21(8), 666-677.
@@ -685,10 +700,10 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
-
 
 ---
 
@@ -892,4 +907,3 @@ $$
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

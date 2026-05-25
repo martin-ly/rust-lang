@@ -115,6 +115,7 @@
 ---
 
 ## 3. 自适应超时算法
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 基于 EWMA 的自适应超时
@@ -191,6 +192,7 @@
 ---
 
 ## 4. Rust 实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 基础超时框架
@@ -830,6 +832,7 @@ impl PropagatedTimeout {
 ---
 
 ## 5. 形式化验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 超时正确性
@@ -854,6 +857,7 @@ impl PropagatedTimeout {
 ```
 
 ### 5.2 自适应收敛性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -884,6 +888,7 @@ EWMA 收敛:
 ---
 
 ## 6. 性能考量
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -922,6 +927,7 @@ EWMA 收敛:
 ---
 
 ## 7. 总结
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 超时类型 | 适用场景 | 推荐值 |
@@ -1289,4 +1295,3 @@ $$
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-
