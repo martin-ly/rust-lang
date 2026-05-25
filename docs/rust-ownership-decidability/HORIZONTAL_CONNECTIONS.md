@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [横向关联论证：主题间的深层联系](#横向关联论证主题间的深层联系)
@@ -196,6 +197,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 ---
 
 ## 二、定理关联网络
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 五大定理的依赖关系
@@ -351,6 +353,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 ---
 
 ## 三、证明技术的关联
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 证明方法的协同
@@ -473,6 +476,7 @@ Linearizable(Γ)  ⟹  借用检查终止
 ---
 
 ## 四、语义层面的关联
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 静态与动态的联系
@@ -553,6 +557,7 @@ E_Assign: 赋值                 T_Assign: 检查可变性
 ---
 
 ## 五、Rust 语言特性的关联
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 语言特性的理论基础
@@ -650,6 +655,7 @@ trait                       类型类 (Type Classes)
 ---
 
 ## 六、跨理论的关联
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 与 Featherweight Rust 的关联
@@ -669,6 +675,7 @@ trait                       类型类 (Type Classes)
 - 更完整的示例验证
 
 ### 6.2 与 Oxide 的关联
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **共同点**：
@@ -683,6 +690,7 @@ trait                       类型类 (Type Classes)
 - Oxide 目标是精确建模，本工作目标是教学理解
 
 ### 6.3 与 RustBelt 的关联
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **共同点**：
@@ -708,9 +716,11 @@ RustBelt：精确但复杂，覆盖 unsafe
 ---
 
 ## 七、应用层面的关联
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 对 Rust 编程的指导
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **理论 → 实践**：
@@ -730,6 +740,7 @@ RustBelt：精确但复杂，覆盖 unsafe
 ```
 
 ### 7.2 对编译器开发的指导
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **理论 → 实现**：
@@ -741,6 +752,7 @@ RustBelt：精确但复杂，覆盖 unsafe
 ```
 
 ### 7.3 对形式化验证的指导
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **理论 → 验证**：
@@ -753,9 +765,11 @@ RustBelt：精确但复杂，覆盖 unsafe
 ---
 
 ## 八、总结：关联网络的价值
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 为什么关联性重要？
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **孤立看每个定理**：
@@ -777,6 +791,7 @@ RustBelt：精确但复杂，覆盖 unsafe
 - 可以**预测**修改某部分的影响
 
 ### 8.2 关联网络的三个层次
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **层次1：概念关联**
@@ -795,6 +810,7 @@ RustBelt：精确但复杂，覆盖 unsafe
 - 与其他形式化工作的关联
 
 ### 8.3 完整图景
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -835,6 +851,7 @@ RustBelt：精确但复杂，覆盖 unsafe
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -1076,4 +1093,3 @@ RustBelt：精确但复杂，覆盖 unsafe
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

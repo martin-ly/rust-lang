@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [高级所有权模式](#高级所有权模式)
@@ -134,6 +135,7 @@ fn use_parser() {
 ---
 
 ## 2. 所有权递归模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 链表实现
@@ -236,6 +238,7 @@ impl Graph {
 ---
 
 ## 3. 类型擦除与所有权
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 Trait对象
@@ -331,6 +334,7 @@ impl Drop for ErasedHandle {
 ---
 
 ## 4. 编译时所有权检查
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 类型状态高级模式
@@ -426,9 +430,11 @@ async fn use_connection() -> Result<(), Error> {
 ---
 
 ## 5. 零拷贝模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 视图与切片
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -479,6 +485,7 @@ impl<'a> Packet<'a> {
 ```
 
 ### 5.2 IoSlice
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -508,9 +515,11 @@ pub fn write_vectored(fd: RawFd, buffers: &[&[u8]]) -> io::Result<usize> {
 ---
 
 ## 6. 所有权与异步
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 Pin的深入理解
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -552,6 +561,7 @@ impl Future for ReadFile {
 ```
 
 ### 6.2 Stream模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -599,9 +609,11 @@ impl Stream for Interval {
 ---
 
 ## 7. 内存布局优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 7.1 内存对齐
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -638,6 +650,7 @@ fn aligned_alloc<T>(align: usize) -> *mut T {
 ```
 
 ### 7.2 SoA vs AoS
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -679,9 +692,11 @@ impl SoAParticles {
 ---
 
 ## 8. 所有权与FFI
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 安全封装
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -761,6 +776,7 @@ impl Drop for SecureContext {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -997,4 +1013,3 @@ impl Drop for SecureContext {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

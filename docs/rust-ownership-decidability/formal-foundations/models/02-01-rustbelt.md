@@ -64,6 +64,7 @@
 ```
 
 ### 1.2 核心架构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -90,9 +91,11 @@ RustBelt架构层次:
 ```
 
 ## 2. λRust: Rust核心语言
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 语法定义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -125,6 +128,7 @@ e ∈ Expr ::=
 ```
 
 ### 2.2 操作语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -144,9 +148,11 @@ fork e  ↦  创建新线程执行e
 ```
 
 ## 3. Iris分离逻辑基础
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 核心概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Iris是一个**高阶并发分离逻辑**框架：
@@ -172,6 +178,7 @@ Iris的关键特性:
 ```
 
 ### 3.2 分离逻辑断言
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -191,9 +198,11 @@ Own(γ, a)    - 拥有幽灵状态γ的值a
 ```
 
 ## 4. 类型的语义模型
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 所有权谓词
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -222,6 +231,7 @@ Own(γ, a)    - 拥有幽灵状态γ的值a
 ```
 
 ### 4.2 Box类型的详细解释
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -243,9 +253,11 @@ let b: Box<i32> = Box::new(42);
 ```
 
 ## 5. 生命周期逻辑
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 生命周期的语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -263,6 +275,7 @@ Region α ⊆ CFG  (控制流图的子集)
 ```
 
 ### 5.2 借用命题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -280,9 +293,11 @@ Region α ⊆ CFG  (控制流图的子集)
 ```
 
 ## 6. Send与Sync的语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 Send Trait
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -301,6 +316,7 @@ pub unsafe auto trait Send { }
 ```
 
 ### 6.2 Sync Trait
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -319,6 +335,7 @@ pub unsafe auto trait Sync { }
 ```
 
 ### 6.3 示例分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 类型 | Send | Sync | 原因 |
@@ -331,9 +348,11 @@ pub unsafe auto trait Sync { }
 | `Mutex<T>` | ✓ | ✗ | 提供同步，但本身需Send |
 
 ## 7. 形式化验证流程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 验证Safe API
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -361,6 +380,7 @@ pub fn swap<T>(x: &mut T, y: &mut T) {
 ```
 
 ### 7.2 发现的标准库Bug
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -375,9 +395,11 @@ impl<T> Borrow<T> for RefCell<T> {
 ```
 
 ## 8. RustBelt的扩展
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 RustHornBelt
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 RustHornBelt = RustBelt + RustHorn
@@ -387,6 +409,7 @@ RustHornBelt = RustBelt + RustHorn
 - 预言变量编码可变借用
 
 ### 8.2 Aeneas
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - 从LLBC提取纯函数
@@ -396,6 +419,7 @@ RustHornBelt = RustBelt + RustHorn
 ---
 
 ## 参考文献
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. Jung, R., et al. (2018). RustBelt: Securing the Foundations of the Rust Programming Language. *POPL*.
@@ -439,65 +463,3 @@ RustHornBelt = RustBelt + RustHorn
 > **[来源: ACM - Formal Verification]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

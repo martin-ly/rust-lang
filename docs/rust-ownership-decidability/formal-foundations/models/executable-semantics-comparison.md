@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 可执行语义形式化对比分析](#rust-可执行语义形式化对比分析)
@@ -52,6 +53,7 @@
 ---
 
 ## 摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档对比分析三种主要的 Rust 可执行语义形式化方法：
@@ -65,6 +67,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 可执行语义（Executable Semantics）是指可以被解释器直接执行的程序语言形式化定义。与纸面形式化相比，可执行语义允许：
@@ -82,6 +85,7 @@ Rust 的可执行语义形式化面临独特挑战：
 ---
 
 ## 2. KRust (2018)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概述
@@ -119,6 +123,7 @@ syntax Expr ::= Int
 - **热图/冷图**：控制求值顺序
 
 ### 2.3 覆盖的语言特性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 KRust 覆盖了 Rust 的核心特性：
@@ -144,6 +149,7 @@ rule <k> borrow X => Reference(X, Tag, Mutable) ... </k>
 ```
 
 ### 2.4 测试与验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 KRust 使用两组测试验证语义正确性：
@@ -159,6 +165,7 @@ KRust 使用两组测试验证语义正确性：
 ```
 
 ### 2.5 局限性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 KRust 明确未实现的特性：
@@ -175,9 +182,11 @@ KRust 明确未实现的特性：
 ---
 
 ## 3. RustSEM (2024)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 概述
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **RustSEM** 由新加坡理工大学 Chen Zhe 等人开发，是一个内存级的 Rust 可执行操作语义。
@@ -189,6 +198,7 @@ KRust 明确未实现的特性：
 - **可复用性**：不绑定 Rust 特定构造，可移植到其他语言
 
 ### 3.2 内存级形式化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 不同于在语言构造级别形式化 OBS，RustSEM 将类型系统的 OBS 不变量映射到内存布局：
@@ -221,6 +231,7 @@ struct Point {
 ```
 
 ### 3.3 覆盖范围
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 RustSEM 覆盖的显著语言构造：
@@ -239,6 +250,7 @@ RustSEM 覆盖的显著语言构造：
 | 混合 safe/unsafe | ❌ | ✅ |
 
 ### 3.4 与 Rust 编译器的对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 RustSEM 通过与 rustc 对比验证语义正确性：
@@ -256,6 +268,7 @@ RustSEM 通过与 rustc 对比验证语义正确性：
 ```
 
 ### 3.5 应用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 RustSEM 的潜在应用：
@@ -268,9 +281,11 @@ RustSEM 的潜在应用：
 ---
 
 ## 4. Aeneas
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 概述
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **Aeneas** 由 MSR (Microsoft Research) 的 Son Ho 和 Jonathan Protzenko 开发，采用不同的方法：将 Rust 翻译为纯函数式语言进行验证。
@@ -282,6 +297,7 @@ RustSEM 的潜在应用：
 - 使用成熟的函数式验证工具
 
 ### 4.2 函数式翻译方法
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Aeneas 不是直接形式化 Rust 的操作语义，而是：
@@ -310,6 +326,7 @@ Fixpoint sum (v: list i32) : i32 :=
 ```
 
 ### 4.3 LLBC 中间语言
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 LLBC 是 Aeneas 的中间表示，核心特性：
@@ -338,6 +355,7 @@ end_loan p;           // 恢复 x
 ```
 
 ### 4.4 验证流程
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 Aeneas 的完整验证流程：
@@ -369,9 +387,11 @@ Aeneas 的完整验证流程：
 ---
 
 ## 5. 对比分析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 特性覆盖对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | KRust | RustSEM | Aeneas |
@@ -386,6 +406,7 @@ Aeneas 的完整验证流程：
 | 宏 | ❌ | ❌ | ❌ |
 
 ### 5.2 验证能力对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 能力 | KRust | RustSEM | Aeneas |
@@ -397,6 +418,7 @@ Aeneas 的完整验证流程：
 | 自动化程度 | 中 | 中 | 高 |
 
 ### 5.3 工具链集成对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 方面 | KRust | RustSEM | Aeneas |
@@ -409,9 +431,11 @@ Aeneas 的完整验证流程：
 ---
 
 ## 6. 形式化方法对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 操作语义风格
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **KRust/RustSEM - 小步操作语义**：
@@ -435,6 +459,7 @@ Aeneas 的完整验证流程：
 - 抽象程度更高
 
 ### 6.2 内存模型表示
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 项目 | 内存模型 | 所有权跟踪 |
@@ -444,6 +469,7 @@ Aeneas 的完整验证流程：
 | Aeneas | 符号化状态 | Borrow/Loan 显式化 |
 
 ### 6.3 所有权跟踪机制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **KRust**：
@@ -472,9 +498,11 @@ BorrowState := Map<Place, LoanId>
 ---
 
 ## 7. 实际应用建议
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 教育与学习
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **推荐**：RustSEM
@@ -483,6 +511,7 @@ BorrowState := Map<Place, LoanId>
 - 理解 OBS 与内存安全的联系
 
 ### 7.2 运行时调试
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **推荐**：Miri (基于 Tree Borrows)
@@ -491,6 +520,7 @@ BorrowState := Map<Place, LoanId>
 - 集成在 Cargo 工具链中
 
 ### 7.3 形式化验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **推荐**：Aeneas
@@ -500,6 +530,7 @@ BorrowState := Map<Place, LoanId>
 - 活跃的开发和社区
 
 ### 7.4 语言研究
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **推荐**：参考所有三个项目
@@ -511,19 +542,23 @@ BorrowState := Map<Place, LoanId>
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### KRust
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Wang, F., Song, F., Zhang, M., Zhu, X., & Zhang, J.** (2018). KRust: A Formal Executable Semantics of Rust. *TASE 2018*.
 
 ### RustSEM
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Chen, Z., et al.** (2024). Formally Understanding Rust's Ownership and Borrowing System at the Memory Level. *Formal Methods in System Design*.
 
 ### Aeneas
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **Ho, S., & Protzenko, J.** (2022). Aeneas: Rust Verification by Functional Translation. *POPL '22*.
@@ -531,6 +566,7 @@ BorrowState := Map<Place, LoanId>
 2. **Ho, S., Fromherz, A., & Protzenko, J.** (2024). Sound Borrow-Checking for Rust via Symbolic Semantics. *POPL '24*.
 
 ### K-Framework
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Roşu, G., & Şerbănută, T. F.** (2010). An overview of the K semantic framework. *Journal of Logic and Algebraic Programming*.
@@ -551,11 +587,9 @@ BorrowState := Map<Place, LoanId>
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -578,93 +612,3 @@ BorrowState := Map<Place, LoanId>
 > **[来源: ACM - Formal Verification]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

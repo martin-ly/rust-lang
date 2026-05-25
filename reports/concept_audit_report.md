@@ -1,20 +1,20 @@
 # 概念知识体系自动化审计报告 v2.0
 
-> 生成时间: 2026-05-25T09:56
-> 扫描文件数: 225
+> 生成时间: 2026-05-25T11:18
+> 扫描文件数: 229
 > 版本对齐: Rust 1.95.0 stable
 
 ## 摘要
 
 | 指标 | 数值 | 状态 |
 |:---|:---|:---|
-| 扫描文件数 | 225 | — |
-| 跨文件链接 ≥3 | 204/225 | ⚠️ |
+| 扫描文件数 | 229 | — |
+| 跨文件链接 ≥3 | 208/229 | ⚠️ |
 | 死链接文件 | 1 | ❌ |
-| 命名规范符合 | 224/225 | ⚠️ |
+| 命名规范符合 | 228/229 | ⚠️ |
 | 代码块问题文件 | 0 | ✅ |
-| 显式 Bloom 标注 | 205/225 | ✅ |
-| 平均来源标注率 | 15.7% | ✅ |
+| 显式 Bloom 标注 | 209/229 | ✅ |
+| 平均来源标注率 | 15.6% | ✅ |
 | TODO 待完成 | 0 | ✅ |
 | TODO 已完成 | 242 | — |
 
@@ -93,6 +93,8 @@
 | concept/06_ecosystem/07_game_ecs.md | 44 | 258 | 9.2% |
 | concept/06_ecosystem/30_system_composability.md | 23 | 155 | 9.1% |
 | concept/06_ecosystem/31_microservice_patterns.md | 24 | 118 | 9.4% |
+| concept/06_ecosystem/33_cqrs_event_sourcing.md | 5 | 176 | 1.2% |
+| concept/06_ecosystem/35_architecture_patterns.md | 0 | 150 | 0.0% |
 | concept/06_ecosystem/35_pattern_composition_algebra.md | 6 | 107 | 3.0% |
 | concept/06_ecosystem/37_database_systems.md | 16 | 75 | 9.6% |
 | concept/06_ecosystem/39_os_kernel.md | 11 | 60 | 6.9% |

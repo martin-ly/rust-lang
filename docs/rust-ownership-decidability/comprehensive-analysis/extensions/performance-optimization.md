@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust性能优化深度指南](#rust性能优化深度指南)
@@ -125,6 +126,7 @@ pub fn optimized_search(arr: &[i32], target: i32) -> Option<usize> {
 ---
 
 ## 2. 内存优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 内存布局优化
@@ -226,6 +228,7 @@ pub fn parse_headers(data: &[u8]) -> Vec<&[u8]> {
 ---
 
 ## 3. 并发性能
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 无锁数据结构
@@ -356,6 +359,7 @@ struct AlignedBuffer([f32; 256]);
 ---
 
 ## 4. 异步性能
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 减少分配
@@ -403,6 +407,7 @@ pub async fn process_batch(items: Vec<Item>) -> Vec<Result> {
 ```
 
 ### 4.2 优化Waker使用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -440,9 +445,11 @@ impl OptimizedWaker {
 ---
 
 ## 5. I/O优化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 缓冲策略
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -506,6 +513,7 @@ impl<R: io::Read> PrefetchReader<R> {
 ```
 
 ### 5.2 io_uring (Linux)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -562,9 +570,11 @@ impl UringDriver {
 ---
 
 ## 6. 算法优化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 缓存友好算法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -605,6 +615,7 @@ fn matmul_fast(a: &[f32], b: &[f32], c: &mut [f32], n: usize) {
 ```
 
 ### 6.2 哈希表优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -638,9 +649,11 @@ pub fn count_frequencies(items: &[u64]) -> FxHashMap<u64, usize> {
 ---
 
 ## 7. 测量与分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 7.1 Criterion基准测试
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -665,6 +678,7 @@ criterion_main!(benches);
 ```
 
 ### 7.2 性能分析工具
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
@@ -686,6 +700,7 @@ heaptrack_gui heaptrack.myapp.xxx.gz
 ```
 
 ### 7.3 运行时性能监控
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -742,6 +757,7 @@ fn process() {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -960,4 +976,3 @@ fn process() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

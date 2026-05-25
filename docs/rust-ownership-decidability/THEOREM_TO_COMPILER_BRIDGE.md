@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化定理到编译器实现桥梁文档](#形式化定理到编译器实现桥梁文档)
@@ -141,6 +142,7 @@ impl<'tcx> BorrowCheckContext<'tcx> {
 ---
 
 ## 二、类型安全定理 ↔ rustc 类型检查
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 形式化定理
@@ -245,6 +247,7 @@ T-App:    Γ ⊢ e₁ : τ₁ → τ₂    Γ ⊢ e₂ : τ₁
 ---
 
 ## 三、可判定性定理 ↔ 编译流程
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 形式化定理
@@ -300,6 +303,7 @@ pub fn compile_input(
 ```
 
 ### 3.3 映射关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 形式化 | rustc 实现 | 含义 |
@@ -310,6 +314,7 @@ pub fn compile_input(
 | `Linearizable` | 前置条件检查 | 确保可判定 |
 
 ### 3.4 为什么可判定性重要？
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **理论保证**: 编译器总能给出答案（接受或拒绝）
@@ -319,9 +324,11 @@ pub fn compile_input(
 ---
 
 ## 四、保持性定理 ↔ 优化正确性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 形式化定理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```coq
@@ -335,6 +342,7 @@ Theorem preservation :
 ```
 
 ### 4.2 rustc 对应实现
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **rustc 优化流程**:
@@ -366,6 +374,7 @@ fn verify_preservation(original: &Body, optimized: &Body) {
 ```
 
 ### 4.3 映射关系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 形式化 | rustc 实现 | 含义 |
@@ -377,9 +386,11 @@ fn verify_preservation(original: &Body, optimized: &Body) {
 ---
 
 ## 五、借用检查等价性 ↔ MIR 分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 形式化定理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```coq
@@ -391,6 +402,7 @@ Theorem borrow_check_equivalence :
 ```
 
 ### 5.2 rustc 对应实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **rustc 借用检查详细流程**:
@@ -435,6 +447,7 @@ fn do_dataflow_analysis(body: &Body<'_>, borrow_set: &BorrowSet<'_>) -> FlowStat
 ```
 
 ### 5.3 映射关系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 形式化 | rustc 实现 | 含义 |
@@ -446,9 +459,11 @@ fn do_dataflow_analysis(body: &Body<'_>, borrow_set: &BorrowSet<'_>) -> FlowStat
 ---
 
 ## 六、定理组合保证编译器正确性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 完整保证链
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -472,6 +487,7 @@ Linearizability 检查
 ```
 
 ### 6.2 编译器正确性声明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 基于形式化证明，我们可以声明：
@@ -488,6 +504,7 @@ Linearizability 检查
 ```
 
 ### 6.3 实际意义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **对开发者**:
@@ -508,9 +525,11 @@ Linearizability 检查
 ---
 
 ## 七、形式化与实现的差异
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 简化与完整
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 形式化 | rustc | 差异 |
@@ -520,6 +539,7 @@ Linearizability 检查
 | 终止性假设 | 资源限制 | 实际编译器有超时机制 |
 
 ### 7.2 为什么简化是必要的？
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -543,6 +563,7 @@ Linearizability 检查
 ```
 
 ### 7.3 从简化到完整的路径
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -564,9 +585,11 @@ Featherweight Rust (本工作)
 ---
 
 ## 八、验证 rustc 实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 使用形式化验证编译器
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **现状**: rustc 尚未完全形式化验证
@@ -585,6 +608,7 @@ Featherweight Rust (本工作)
 ```
 
 ### 8.2 开发者如何使用形式化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -608,9 +632,11 @@ unsafe fn verified_unsafe(ptr: *mut T) {
 ---
 
 ## 九、总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 映射总览
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 形式化定理 | rustc 模块 | 保证 |
@@ -622,6 +648,7 @@ unsafe fn verified_unsafe(ptr: *mut T) {
 | 借用等价性 | 借用检查 | 内存安全 |
 
 ### 9.2 理论到实践的桥梁价值
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **理解编译器**: 知道 rustc 为什么这样工作
@@ -650,6 +677,7 @@ unsafe fn verified_unsafe(ptr: *mut T) {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -797,4 +825,3 @@ unsafe fn verified_unsafe(ptr: *mut T) {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

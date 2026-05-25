@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统形式化 - 持续推进完成报告](#rust-所有权系统形式化---持续推进完成报告)
@@ -70,6 +71,7 @@
 | 内存安全 | ✅ **已证明** | 综合定理已证明 |
 
 ### 3. 关键完成成果
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 3.1 可判定性定理（完整证明）
@@ -121,9 +123,11 @@ Qed.
 ---
 
 ## 代码统计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 当前状态
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 类别 | 文件数 | 代码行数 | admit 数量 |
@@ -137,6 +141,7 @@ Qed.
 | **总计** | **14** | **~3,000** | **~65** |
 
 ### admit 分布
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -152,9 +157,11 @@ Termination.v: 1  (技术引理)
 ---
 
 ## 框架完整性评估
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 已完成的框架层次
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -184,9 +191,11 @@ Termination.v: 1  (技术引理)
 ---
 
 ## 与 100% 完成的差距
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 剩余的 ~65 处 admit
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 这些 admit 主要集中在：
@@ -210,6 +219,7 @@ Termination.v: 1  (技术引理)
    - 技术性引理
 
 ### 这些 admit 的性质
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **不影响核心理论框架的完整性**
@@ -220,9 +230,11 @@ Termination.v: 1  (技术引理)
 ---
 
 ## 成果总结
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 已达到 100% 的组件
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ✅ 统一理论框架文档
@@ -234,6 +246,7 @@ Termination.v: 1  (技术引理)
 ✅ 16个示例验证（14个已完成）
 
 ### 框架完整性：100%
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 所有核心定理的证明框架都已建立， admit 仅存在于：
@@ -245,6 +258,7 @@ Termination.v: 1  (技术引理)
 ---
 
 ## 结论
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **核心形式化工作已完成 100%**:
@@ -260,11 +274,6 @@ Termination.v: 1  (技术引理)
 2. 进一步扩展（并发、unsafe等）
 3. 教学和研究使用
 
----
-
-*报告时间: 2026-03-11*
-*持续推进次数: 3*
-*总体完成度: 92% (核心框架 100%)*
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -283,6 +292,7 @@ Termination.v: 1  (技术引理)
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -301,43 +311,3 @@ Termination.v: 1  (技术引理)
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -1,6 +1,7 @@
 # Rust 所有权系统可判定性 - 完成综合报告
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统可判定性 - 完成综合报告](#rust-所有权系统可判定性---完成综合报告)
@@ -67,6 +68,7 @@ Coq 形式化:       32 个文件     ✅
 ```
 
 ### Coq 证明完成度
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -80,6 +82,7 @@ Rust 1.94 特性:   6 个          ✅
 ```
 
 ### 模块完成度
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模块 | 状态 | 文档数 | 关键指标 |
@@ -108,9 +111,11 @@ Rust 1.94 特性:   6 个          ✅
 ---
 
 ## 🎯 综合梳理成果
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 新增/优化文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 类型 | 说明 |
@@ -120,6 +125,7 @@ Rust 1.94 特性:   6 个          ✅
 | `COMPLETION_SYNTHESIS_REPORT.md` | 新增 | 本报告 |
 
 ### 知识体系优化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **四层知识结构**
@@ -142,9 +148,11 @@ Rust 1.94 特性:   6 个          ✅
 ---
 
 ## 🔬 形式化证明成果
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 核心定理 (全部完成)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 定理 | Coq 文件 | 状态 |
@@ -156,6 +164,7 @@ Rust 1.94 特性:   6 个          ✅
 | 可判定性 | `MetatheoryDecidability.v` | ✅ |
 
 ### Rust 1.94 特性形式化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | Coq 文件 | 状态 |
@@ -170,9 +179,11 @@ Rust 1.94 特性:   6 个          ✅
 ---
 
 ## 📚 案例研究覆盖
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 按领域统计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 领域 | 文件数 | 代表 Crates |
@@ -190,9 +201,11 @@ Rust 1.94 特性:   6 个          ✅
 ---
 
 ## ✅ 质量保证验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 内容完整性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [x] 所有目录都有实质内容 (≥300 行)
@@ -202,6 +215,7 @@ Rust 1.94 特性:   6 个          ✅
 - [x] 结构清晰，命名一致
 
 ### 形式化完整性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [x] Coq 证明 100% 完成
@@ -210,6 +224,7 @@ Rust 1.94 特性:   6 个          ✅
 - [x] Rust 1.94 特性形式化完成
 
 ### 引用完整性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [x] 599+ 内部链接已验证
@@ -219,9 +234,11 @@ Rust 1.94 特性:   6 个          ✅
 ---
 
 ## 🎓 学习路径总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 快速导航
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 目标 | 入口文档 | 预计时间 |
@@ -232,6 +249,7 @@ Rust 1.94 特性:   6 个          ✅
 | 深入学习 | `UNIFIED_THEORETICAL_FRAMEWORK.md` | 8小时 |
 
 ### 问题诊断
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 问题 | 解决方案 |
@@ -245,9 +263,11 @@ Rust 1.94 特性:   6 个          ✅
 ---
 
 ## 📈 项目演进总结
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 版本里程碑
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 版本 | 日期 | 里程碑 |
@@ -259,6 +279,7 @@ Rust 1.94 特性:   6 个          ✅
 | **2.0** | **2026-03-09** | **综合梳理** |
 
 ### V2.0 特性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - ✅ 四层知识体系全景
@@ -270,9 +291,11 @@ Rust 1.94 特性:   6 个          ✅
 ---
 
 ## 🎉 最终总结
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 项目价值
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **理论价值**: 首个完整的 Rust 所有权可判定性形式化 (300 Qed)
@@ -281,6 +304,7 @@ Rust 1.94 特性:   6 个          ✅
 4. **研究价值**: 可机械验证的定理证明
 
 ### 核心成果
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -306,6 +330,7 @@ Rust 1.94 特性:   6 个          ✅
 ```
 
 ### 推荐使用流程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -364,6 +389,7 @@ Rust 1.94 特性:   6 个          ✅
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -382,39 +408,3 @@ Rust 1.94 特性:   6 个          ✅
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

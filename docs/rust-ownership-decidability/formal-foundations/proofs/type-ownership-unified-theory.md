@@ -194,6 +194,7 @@
 ---
 
 ## 2. 背景知识
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 类型系统回顾
@@ -396,6 +397,7 @@ $$
 ---
 
 ## 3. 统一框架
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 统一判断体系
@@ -609,6 +611,7 @@ $$
 ---
 
 ## 4. 核心定理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 类型蕴含所有权安全
@@ -842,6 +845,7 @@ fn example<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32
 ---
 
 ## 5. 证明详情
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 结构归纳框架
@@ -1179,6 +1183,7 @@ $$
 ---
 
 ## 6. Rust 标准库建模
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 Vec<T> 的所有权模型
@@ -1387,6 +1392,7 @@ $$
 ---
 
 ## 7. Coq 形式化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 统一判断定义
@@ -1929,6 +1935,7 @@ Admitted.
 ---
 
 ## 附录 A: 符号表
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 符号 | 名称 | 含义 |
@@ -1952,6 +1959,7 @@ Admitted.
 ---
 
 ## 附录 B: 定理依赖图
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -1989,6 +1997,7 @@ Admitted.
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Jung, R., et al.** (2018). *RustBelt: Securing the Foundations of the Rust Programming Language*. POPL 2018.
@@ -2014,6 +2023,7 @@ Admitted.
 ---
 
 ## 文档元数据
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **创建日期**: 2026-03-06
@@ -2778,4 +2788,3 @@ Admitted.
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

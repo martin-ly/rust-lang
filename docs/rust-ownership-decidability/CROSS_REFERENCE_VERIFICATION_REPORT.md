@@ -3,6 +3,7 @@
 **Generated**: 2026-03-06T11:41:17.918883
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cross-Reference Verification Report](#cross-reference-verification-report)
@@ -60,6 +61,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 <!-- markdown-link-check-enable -->
 
 ## Missing Cross-References
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Files that mention key concepts but don't link to them:
@@ -118,9 +120,11 @@ Files that mention key concepts but don't link to them:
 | 10-research-frontiers/10-05-ai-integration.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |
 
 ## Recommendations
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### For Improving Navigation
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Add 'See Also' sections** to key documents linking related concepts
@@ -249,4 +253,3 @@ Files that mention key concepts but don't link to them:
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

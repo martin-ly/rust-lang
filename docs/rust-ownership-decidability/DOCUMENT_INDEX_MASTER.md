@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 文档总索引](#rust-所有权系统---文档总索引)
@@ -76,6 +77,7 @@
 | [CONTENT_ASSOCIATION_ANALYSIS.md](./CONTENT_ASSOCIATION_ANALYSIS.md) | 关联分析 |
 
 ### 三级索引 (桥梁文档 - 关键创新)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 作用 |
@@ -88,9 +90,11 @@
 ---
 
 ## 按模块索引
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 00-foundations/ (理论基础 - 13 文件)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文件 | 主题 |
@@ -104,6 +108,7 @@
 | 00-04-theory-connections.md | 理论联系 |
 
 ### 01-core-concepts/ (核心概念 - 11 文件)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文件 | 主题 |
@@ -139,6 +144,7 @@
 | trait-system.md | 1.5小时 |
 
 ### coq-formalization/ (Coq 形式化 - 32 文件)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### theories/Syntax/ (语法)
@@ -187,6 +193,7 @@
 - NewLints.v
 
 ### case-studies/ (案例研究 - 137 文件)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 主要案例分析
@@ -218,6 +225,7 @@
 - media/ (音视频)
 
 ### 11-design-patterns/ (设计模式 - 15+ 文件)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### creational/ (创建型)
@@ -248,6 +256,7 @@
 - README.md
 
 ### 12-concurrency-patterns/ (并发模式 - 14 文件)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 文件 | 主题 |
@@ -268,6 +277,7 @@
 | 12-07-distributed-patterns-deep.md | 分布式深入 |
 
 ### 学习资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### exercises/ (练习 - 10+ 文件)
@@ -284,6 +294,7 @@
 - ERROR_DIAGNOSTICS_GUIDE.md (错误诊断)
 
 ### 形式化理论
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### formal-foundations/
@@ -307,9 +318,11 @@
 ---
 
 ## 快速导航
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 按难度导航
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **初学者** (🟢)
@@ -330,6 +343,7 @@
 → 10-research-frontiers/
 
 ### 按主题导航
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **理论基础**
@@ -357,6 +371,7 @@
 ---
 
 ## 文档统计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -372,6 +387,7 @@
 ---
 
 ## 更新日志
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 日期 | 版本 | 更新 |
@@ -401,6 +417,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -502,4 +519,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

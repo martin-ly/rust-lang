@@ -10,30 +10,6 @@
 
 ---
 
-## 📑 目录
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-- [Rust 术语标准化文档](#rust-术语标准化文档)
-  - [📑 目录](#-目录)
-  - [📋 目录](#-目录-1)
-  - [简介](#简介)
-    - [术语表使用说明](#术语表使用说明)
-  - [所有权相关术语](#所有权相关术语)
-  - [类型系统术语](#类型系统术语)
-  - [并发相关术语](#并发相关术语)
-  - [异步相关术语](#异步相关术语)
-  - [宏系统术语](#宏系统术语)
-  - [FFI/Unsafe 术语](#ffiunsafe-术语)
-  - [生命周期术语](#生命周期术语)
-  - [版本演进术语](#版本演进术语)
-  - [参考资源](#参考资源)
-    - [官方文档引用格式说明](#官方文档引用格式说明)
-    - [相关文档](#相关文档)
-    - [Ferrocene FLS 标准对照](#ferrocene-fls-标准对照)
-  - [更新历史](#更新历史)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-
 ## 📋 目录
 >
 > **[来源: Rust Official Docs]**
@@ -62,6 +38,7 @@
 ---
 
 ## 简介
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档旨在为 Rust 学习项目提供标准化的术语对照体系，确保中英文术语使用的一致性和准确性。所有术语定义均对齐 **Ferrocene Language Specification (FLS)** 标准，并引用官方文档（The Book、Reference、RFC）作为权威来源。
@@ -80,6 +57,7 @@
 ---
 
 ## 所有权相关术语
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
@@ -106,6 +84,7 @@
 ---
 
 ## 类型系统术语
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
@@ -147,6 +126,7 @@
 ---
 
 ## 并发相关术语
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
@@ -183,6 +163,7 @@
 ---
 
 ## 异步相关术语
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
@@ -217,6 +198,7 @@
 ---
 
 ## 宏系统术语
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
@@ -244,6 +226,7 @@
 ---
 
 ## FFI/Unsafe 术语
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
@@ -277,6 +260,7 @@
 ---
 
 ## 生命周期术语
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
@@ -305,6 +289,7 @@
 ---
 
 ## 版本演进术语
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
@@ -337,6 +322,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 官方文档引用格式说明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档中的官方来源引用采用以下格式：
@@ -352,6 +338,7 @@
 | Rust Forge | 贡献者文档 | <https://forge.rust-lang.org/> |
 
 ### 相关文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [研究笔记术语表](./research_notes/GLOSSARY.md) - 形式化方法和研究相关术语
@@ -360,6 +347,7 @@
 - [错误码映射](./02_reference/ERROR_CODE_MAPPING.md) - 编译器错误码详解
 
 ### Ferrocene FLS 标准对照
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本术语表与 Ferrocene Language Specification (FLS) 对齐的关键点：
@@ -373,6 +361,7 @@
 ---
 
 ## 更新历史
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 版本 | 日期 | 更新内容 | 作者 |
@@ -396,6 +385,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [docs 目录](./README.md)
@@ -538,4 +528,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

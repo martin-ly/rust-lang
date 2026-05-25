@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权可判定性内容更新报告](#rust-所有权可判定性内容更新报告)
@@ -62,6 +63,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 网络资源对齐分析报告
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **文件**: `AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md`
@@ -82,6 +84,7 @@
 ---
 
 ### 2. RefinedRust 深度解析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **文件**: `03-verification-tools/03-07-refinedrust-deep-dive.md`
@@ -111,6 +114,7 @@ RefinedRust 突破:
 ---
 
 ### 3. Gillian-Rust 介绍
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **文件**: `03-verification-tools/03-08-gillian-rust.md`
@@ -127,6 +131,7 @@ RefinedRust 突破:
 ---
 
 ### 4. Rust 标准库验证计划
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **文件**: `10-research-frontiers/10-07-std-verification-initiative.md`
@@ -143,9 +148,11 @@ RefinedRust 突破:
 ---
 
 ## 更新文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5. 学术参考文献更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **文件**: `07-references/academic-papers.md`
@@ -161,6 +168,7 @@ RefinedRust 突破:
 ---
 
 ### 6. 验证工具概览更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **文件**: `03-verification-tools/03-01-verification-overview.md`
@@ -175,9 +183,11 @@ RefinedRust 突破:
 ---
 
 ## 研究覆盖更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 顶级会议论文覆盖
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 会议 | 年份 | 论文 | 覆盖状态 |
@@ -189,6 +199,7 @@ RefinedRust 突破:
 | - | 2024 | 标准库验证计划 | ✅ 新增覆盖 |
 
 ### 工具状态更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 工具 | 之前状态 | 更新后状态 | 来源 |
@@ -201,9 +212,11 @@ RefinedRust 突破:
 ---
 
 ## 持续推进计划
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Phase 1: 已完成 ✅
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [x] 创建网络资源对齐分析报告
@@ -214,6 +227,7 @@ RefinedRust 突破:
 - [x] 更新验证工具对比
 
 ### Phase 2: 建议执行 (未来 2-4 周)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 更新 Tree Borrows 完整文档
@@ -222,6 +236,7 @@ RefinedRust 突破:
 - [ ] 创建 RefinedRust 与 RustBelt 对比专题
 
 ### Phase 3: 长期维护 (持续)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 建立学术文献季度追踪机制
@@ -232,9 +247,11 @@ RefinedRust 突破:
 ---
 
 ## 内容质量评估
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 新增内容质量
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 文档 | 技术深度 | 完整性 | 实用性 | 引用准确性 |
@@ -245,6 +262,7 @@ RefinedRust 突破:
 | 标准库验证 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 
 ### 与网络资源对齐度
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 研究领域 | 对齐前 | 对齐后 | 主要差距来源 |
@@ -257,9 +275,11 @@ RefinedRust 突破:
 ---
 
 ## 参考资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 主要引用来源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **RefinedRust** (PLDI 2024)
@@ -281,6 +301,7 @@ RefinedRust 突破:
 ---
 
 ## 结论
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本次更新成功将 `rust-ownership-decidability` 文件夹与网络上最新、最全面的权威资源对齐。新增内容涵盖了:
@@ -366,4 +387,3 @@ RefinedRust 突破:
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

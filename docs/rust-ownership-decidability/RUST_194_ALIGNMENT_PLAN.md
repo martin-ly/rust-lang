@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 特性对齐计划](#rust-194-特性对齐计划)
@@ -96,6 +97,7 @@
 - **Edition 迁移工具** - 持续改进
 
 ### 1.2 与形式化相关的特性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **高优先级**（直接影响所有权系统形式化）：
@@ -115,9 +117,11 @@
 ---
 
 ## 二、当前形式化的覆盖分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 已覆盖的 Rust 子集
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ✅ **已完整覆盖**：
@@ -145,6 +149,7 @@
 - 宏系统
 
 ### 2.2 与 Rust 1.94 的差距
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | Rust 1.94 | 当前形式化 | 差距 |
@@ -158,9 +163,11 @@
 ---
 
 ## 三、对齐策略
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 策略原则
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **原则1：核心优先**
@@ -194,6 +201,7 @@
 ```
 
 ### 3.2 实现路线图
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### 阶段1：基础扩展（4-6周）
@@ -308,9 +316,11 @@
 ---
 
 ## 四、技术实现细节
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 Reborrow Trait 形式化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Rust 概念**：
@@ -343,6 +353,7 @@ Inductive expr :=
 ```
 
 ### 4.2 CoerceShared Trait 形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **Rust 概念**：
@@ -365,6 +376,7 @@ trait CoerceShared<T: Copy> {}
 ```
 
 ### 4.3 常量泛型形式化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **Rust 概念**：
@@ -394,6 +406,7 @@ Inductive const_expr :=
 ```
 
 ### 4.4 精确捕获形式化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **Rust 概念**：
@@ -426,9 +439,11 @@ Definition check_use_clause (uc : use_clause) (e : expr) : bool :=
 ---
 
 ## 五、文件结构规划
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 新文件
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -451,6 +466,7 @@ coq-formalization/theories/
 ```
 
 ### 5.2 修改的文件
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -463,9 +479,11 @@ Semantics/OperationalSemantics.v - 添加新语义
 ---
 
 ## 六、验证和测试计划
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 单元测试
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 每个新特性都有：
@@ -475,12 +493,14 @@ Semantics/OperationalSemantics.v - 添加新语义
 - 反例测试（应该被拒绝的程序）
 
 ### 6.2 集成测试
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 组合多个新特性的测试
 - 与现有特性的交互测试
 
 ### 6.3 定理验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 终止性仍然成立
@@ -491,6 +511,7 @@ Semantics/OperationalSemantics.v - 添加新语义
 ---
 
 ## 七、时间线
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 阶段 | 时间 | 主要任务 | 状态 |
@@ -504,9 +525,11 @@ Semantics/OperationalSemantics.v - 添加新语义
 ---
 
 ## 八、风险和缓解
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 风险识别
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **风险1：复杂性爆炸**
@@ -531,6 +554,7 @@ Semantics/OperationalSemantics.v - 添加新语义
 ```
 
 ### 8.2 质量保证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 每个新特性都有完整文档
@@ -540,9 +564,11 @@ Semantics/OperationalSemantics.v - 添加新语义
 ---
 
 ## 九、文档更新计划
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 更新现有文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 更新内容 |
@@ -553,6 +579,7 @@ Semantics/OperationalSemantics.v - 添加新语义
 | PROOF_STRATEGIES | 添加新证明策略 |
 
 ### 9.2 新文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 内容 |
@@ -564,6 +591,7 @@ Semantics/OperationalSemantics.v - 添加新语义
 ---
 
 ## 十、结论
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 对齐 Rust 1.94 是一个重大但可行的任务。关键是：
@@ -597,6 +625,7 @@ Semantics/OperationalSemantics.v - 添加新语义
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -738,4 +767,3 @@ Semantics/OperationalSemantics.v - 添加新语义
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

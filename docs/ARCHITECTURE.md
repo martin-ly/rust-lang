@@ -36,6 +36,7 @@
 ---
 
 ## 架构总览
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -104,9 +105,11 @@ graph TB
 ---
 
 ## Crate 关系图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 详细依赖关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -145,6 +148,7 @@ flowchart LR
 ```
 
 ### Crate 特性矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Crate | 核心概念 | 外部依赖 | 特性标志 | 示例数量 |
@@ -165,9 +169,11 @@ flowchart LR
 ---
 
 ## 模块依赖图
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 内部模块结构
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -257,9 +263,11 @@ graph TB
 ---
 
 ## 数据流图
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 学习路径数据流
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
@@ -296,6 +304,7 @@ flowchart LR
 ```
 
 ### 运行时数据流（以异步模块为例）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -320,9 +329,11 @@ sequenceDiagram
 ---
 
 ## 架构决策记录
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### ADR-001: Workspace 结构
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **状态**: 已接受
@@ -337,6 +348,7 @@ sequenceDiagram
 - 并行编译优化
 
 ### ADR-002: Common Crate
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **状态**: 已接受
@@ -351,6 +363,7 @@ sequenceDiagram
 - 可配置特性标志
 
 ### ADR-003: 渐进式特性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **状态**: 已接受
@@ -367,9 +380,11 @@ sequenceDiagram
 ---
 
 ## 技术栈
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 核心运行时
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - **Tokio**: 异步运行时 (v1.51+)
@@ -377,12 +392,14 @@ sequenceDiagram
 - **Crossbeam**: 并发原语 (v0.8+)
 
 ### 序列化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **Serde**: 通用序列化 (v1.0+)
 - **Serde JSON**: JSON 支持 (v1.0+)
 
 ### 网络
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **Hyper**: HTTP 底层 (v1.9+)
@@ -390,6 +407,7 @@ sequenceDiagram
 - **Tungstenite**: WebSocket (v0.29+)
 
 ### 日志与追踪
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **Tracing**: 结构化日志 (v0.1+)
@@ -398,6 +416,7 @@ sequenceDiagram
 ---
 
 ## 参考资料
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Cargo Workspace 文档](https://doc.rust-lang.org/cargo/reference/workspaces.html)
@@ -523,4 +542,3 @@ sequenceDiagram
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

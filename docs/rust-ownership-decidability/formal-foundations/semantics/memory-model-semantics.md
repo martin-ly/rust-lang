@@ -1,6 +1,7 @@
 # Rust 内存模型语义形式化理论
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 内存模型语义形式化理论](#rust-内存模型语义形式化理论)
@@ -88,12 +89,14 @@
 ---
 
 ## 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 的内存模型是其内存安全保证的核心基础。
 不同于传统系统语言（如 C/C++），Rust 在编译期通过所有权系统强制执行严格的内存访问规则，从而避免了空指针解引用、双重释放、数据竞争等内存错误。
 
 ### 形式化目标
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档旨在形式化 Rust 内存模型的以下方面：
@@ -118,6 +121,7 @@ Rust 的内存模型是其内存安全保证的核心基础。
 ---
 
 ## 内存模型基础
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 内存抽象
@@ -214,6 +218,7 @@ valid_val(v, Box<τ>) :=
 ---
 
 ## 栈语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 栈帧结构
@@ -323,6 +328,7 @@ panic!(msg):
 ---
 
 ## 堆语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 堆分配
@@ -460,6 +466,7 @@ drop(rc):
 ---
 
 ## 内存布局与对齐
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 类型布局计算
@@ -565,9 +572,11 @@ ZST 特性：
 ---
 
 ## 借用与别名模型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 借用规则
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 6.1.1 基本借用规则（Rust 保证）
@@ -594,6 +603,7 @@ Permissions ::= Location → BorrowState
 ```
 
 ### 6.2 Stacked Borrows 模型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 6.2.1 栈结构
@@ -654,6 +664,7 @@ use(ptr, access_kind):
 ```
 
 ### 6.3 Tree Borrows 模型
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### 6.3.1 树结构
@@ -691,6 +702,7 @@ validate_access(tree, tag, access):
 ```
 
 ### 6.4 内部可变性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 6.4.1 Cell<T> 语义
@@ -738,9 +750,11 @@ RefCell::borrow_mut(&self):
 ---
 
 ## 形式化语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 小步操作语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 7.1.1 配置定义
@@ -783,6 +797,7 @@ Permissions ::= Location → BorrowStack
 ```
 
 ### 7.2 内存安全定理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 7.2.1 类型安全保证
@@ -818,9 +833,11 @@ Permissions ::= Location → BorrowStack
 ---
 
 ## 证明概要
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 所有权正确性证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理 8.1 (所有权唯一性)**：
@@ -834,6 +851,7 @@ Permissions ::= Location → BorrowStack
 4. 通过类型系统强制检查
 
 ### 8.2 借用安全性证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理 8.2 (借用隔离)**：
@@ -846,6 +864,7 @@ Permissions ::= Location → BorrowStack
 3. 两者都保证互斥性质
 
 ### 8.3 无数据竞争证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定理 8.3 (无数据竞争)**：
@@ -859,6 +878,7 @@ Safe Rust 代码不会出现数据竞争。
 4. 内部可变性需要 Sync 实现
 
 ### 8.4 内存泄漏安全
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **注意**：Rust 不保证无内存泄漏，但保证：
@@ -875,9 +895,11 @@ Safe Rust 代码不会出现数据竞争。
 ---
 
 ## 参考文献
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Rust 内存模型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **Jung, R., et al.** (2019). Stacked Borrows: An aliasing model for Rust. *POPL '20*.
@@ -893,6 +915,7 @@ Safe Rust 代码不会出现数据竞争。
    - 所有权系统入门
 
 ### 内存安全形式化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **RustBelt Team.** (2018). RustBelt: Securing the foundations of Rust. *POPL '18*.
@@ -905,6 +928,7 @@ Safe Rust 代码不会出现数据竞争。
    - 内存安全接口的形式化
 
 ### 别名分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Horn, D. V., & Might, M.** (2010). Abstracting abstract machines. *ICFP '10*.
@@ -917,6 +941,7 @@ Safe Rust 代码不会出现数据竞争。
     - 分离逻辑基础
 
 ### 类型系统与内存
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Pierce, B. C.** (2002). *Types and Programming Languages*. MIT Press.
@@ -929,6 +954,7 @@ Safe Rust 代码不会出现数据竞争。
     - 线性类型与区域
 
 ### 并发与同步
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Vafeiadis, V.** (2010). RGSep action inference. *VMCAI '10*.
@@ -940,9 +966,11 @@ Safe Rust 代码不会出现数据竞争。
 ---
 
 ## 附录 A：内存布局示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### A.1 结构体布局
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -967,6 +995,7 @@ struct Example {
 ```
 
 ### A.2 枚举布局
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -994,9 +1023,11 @@ union of variants:
 ---
 
 ## 附录 B：借用检查示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### B.1 基本借用检查
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -1032,11 +1063,9 @@ L3: z: SharedBorrow(L0)  [invalid: MutBorrow active]
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -1292,4 +1321,3 @@ L3: z: SharedBorrow(L0)  [invalid: MutBorrow active]
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

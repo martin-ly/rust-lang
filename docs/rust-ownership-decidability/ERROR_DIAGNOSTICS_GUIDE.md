@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 错误诊断完全指南](#rust-所有权系统---错误诊断完全指南)
@@ -66,6 +67,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### E0382: 使用已移动的值
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **错误信息**:
@@ -111,6 +113,7 @@ graph TD
 ---
 
 ### E0499: 多重可变借用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **错误信息**:
@@ -175,6 +178,7 @@ data.borrow_mut().push(5);  // 可以
 ---
 
 ### E0502: 可变与不可变借用冲突
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **错误信息**:
@@ -216,6 +220,7 @@ data.retain(|&x| {
 ---
 
 ### E0597: 引用生命周期不够长
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **错误信息**:
@@ -278,9 +283,11 @@ fn get_static() -> &'static str {
 ---
 
 ## 生命周期相关错误
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### E0621: 显式生命周期要求
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **错误信息**:
@@ -311,6 +318,7 @@ fn first(x: &str) -> &str {  // 自动推断
 ---
 
 ### E0106: 缺少生命周期说明符
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **错误信息**:
@@ -341,9 +349,11 @@ struct Parser {
 ---
 
 ## 智能指针相关错误
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### E0500: 闭包同时需要可变和不可变借用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **错误信息**:
@@ -372,6 +382,7 @@ let add = || x.borrow_mut().push(4);
 ---
 
 ### E0716: 临时值生命周期太短
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **错误信息**:
@@ -400,9 +411,11 @@ let r: &'static str = "hello";
 ---
 
 ## 并发相关错误
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### E0277: 类型未实现 Send
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **错误信息**:
@@ -434,6 +447,7 @@ thread::spawn(move || {
 ---
 
 ### E0596: 无法通过共享引用修改
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **错误信息**:
@@ -457,9 +471,11 @@ data.lock().unwrap().push(4);  // OK
 ---
 
 ## 诊断工具
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 使用 rustc 详细输出
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
@@ -471,6 +487,7 @@ RUST_BACKTRACE=1 cargo run
 ```
 
 ### 使用 Clippy
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -485,6 +502,7 @@ cargo clippy -- -W clippy::all
 ```
 
 ### 使用 rust-analyzer
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 实时错误提示
@@ -494,6 +512,7 @@ cargo clippy -- -W clippy::all
 ---
 
 ## 错误快速参考表
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 错误码 | 描述 | 快速修复 |
@@ -511,9 +530,11 @@ cargo clippy -- -W clippy::all
 ---
 
 ## 预防性编程
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 所有权友好的 API 设计
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -551,9 +572,11 @@ fn find_order(id: OrderId) -> Order;
 ---
 
 ## 练习
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 练习 1: 诊断并修复
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -582,6 +605,7 @@ fn main() {
 </details>
 
 ### 练习 2: 诊断并修复
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -610,6 +634,7 @@ fn get_static() -> &'static str {
 ---
 
 ## 更多资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md)
@@ -634,6 +659,7 @@ fn get_static() -> &'static str {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -809,4 +835,3 @@ fn get_static() -> &'static str {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

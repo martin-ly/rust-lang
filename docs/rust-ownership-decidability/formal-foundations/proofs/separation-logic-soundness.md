@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [分离逻辑可靠性证明](#分离逻辑可靠性证明)
@@ -60,9 +61,11 @@
 ---
 
 ## 1. 背景介绍
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是分离逻辑
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 分离逻辑(Separation Logic)是一种用于推理**共享可变状态**的程序逻辑。由John Reynolds (2002) 和 Peter O'Hearn 等人发展，最初用于验证指针操作程序，现在广泛应用于：
@@ -115,6 +118,7 @@
 ---
 
 ## 2. 基础定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 堆(Heap)的数学定义
@@ -177,6 +181,7 @@ s ∈ Store = Var → Value
 ---
 
 ## 3. 断言语言
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 语法
@@ -263,6 +268,7 @@ tree(x) ::= x = null ∧ emp
 ---
 
 ## 4. 可靠性定理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 Hoare三元组
@@ -323,6 +329,7 @@ tree(x) ::= x = null ∧ emp
 ---
 
 ## 5. 完整证明
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 证明策略
@@ -468,6 +475,7 @@ h' = ∅，所以满足emp。✓
 - 所以 (s', h') ⊨ x ↦ e ✓
 
 ### 5.3 复合命令的证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 5.3.1 顺序组合
@@ -532,9 +540,11 @@ h' = ∅，所以满足emp。✓
 ---
 
 ## 6. 关键引理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 框架规则 (Frame Rule)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理 6.1** (框架规则):
@@ -556,6 +566,7 @@ h' = ∅，所以满足emp。✓
 - 所以(s, h₁' • h₂) ⊨ Q * R ✓
 
 ### 6.2 局部性规则 (Rule of Consequence)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定理 6.2**:
@@ -569,6 +580,7 @@ P' ⇒ P    {P} C {Q}    Q ⇒ Q'
 **含义**: 可以强化前置条件，弱化后置条件。
 
 ### 6.3 分配规则 (Rule of Disjunction)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理 6.3**:
@@ -580,6 +592,7 @@ P' ⇒ P    {P} C {Q}    Q ⇒ Q'
 ```
 
 ### 6.4 存在规则 (Rule of Existential)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理 6.4**:
@@ -593,9 +606,11 @@ P' ⇒ P    {P} C {Q}    Q ⇒ Q'
 ---
 
 ## 7. Rust的扩展
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 7.1 标准分离逻辑的局限
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 标准分离逻辑假设：
@@ -612,6 +627,7 @@ let r2 = &x;  // 另一个共享引用
 ```
 
 ### 7.2 分数权限 (Fractional Permissions)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **Boyland (2003)** 引入分数权限：
@@ -633,6 +649,7 @@ let r2 = &x;  // 另一个共享引用
 ```
 
 ### 7.3 生命周期作为时序逻辑
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **扩展**: 将分离逻辑与时序逻辑结合
@@ -652,6 +669,7 @@ fn borrow<'a>(x: &'a T) -> &'a U
 对应：返回的引用与输入引用有相同的生命周期约束。
 
 ### 7.4 RustBelt的Iris框架
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **Iris** 是一个高阶分离逻辑框架，用于验证Rust程序。
@@ -685,9 +703,11 @@ swap(x, y)
 ---
 
 ## 8. 实际应用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 验证链表操作
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **插入操作**:
@@ -708,6 +728,7 @@ insert(head, v)
 ```
 
 ### 8.2 验证无数据竞争
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理**: 如果程序在分离逻辑中可证，则无数据竞争。
@@ -719,6 +740,7 @@ insert(head, v)
 - 共享访问(π<1)时只有读访问
 
 ### 8.3 自动化验证工具
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 工具 | 用途 | 状态 |
@@ -731,9 +753,11 @@ insert(head, v)
 ---
 
 ## 9. 结论
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 核心贡献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 分离逻辑为Rust提供了：
@@ -744,6 +768,7 @@ insert(head, v)
 4. **工具基础**: Creusot, Prusti等验证工具
 
 ### 9.2 与Rust的关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -756,6 +781,7 @@ Rust程序 ──► 分离逻辑规范 ──► 形式化证明
 ```
 
 ### 9.3 未来方向
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **自动化**: 减少手动证明负担
@@ -766,6 +792,7 @@ Rust程序 ──► 分离逻辑规范 ──► 形式化证明
 ---
 
 ## 参考文献
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **Reynolds, J. C.** (2002). Separation Logic: A Logic for Shared Mutable Data Structures. *LICS*.
@@ -780,7 +807,7 @@ Rust程序 ──► 分离逻辑规范 ──► 形式化证明
 
 ---
 
-**关键要点**: 分离逻辑通过分离合取(*)提供强大的局部推理能力，为Rust的所有权系统提供了坚实的数学基础，确保了内存安全和数据竞争自由的形式化保证。
+**关键要点**: 分离逻辑通过分离合取(*)提供强大的局部推理能力，为Rust的所有权系统提供了坚实的数学基础，确保了内存安全和数据竞争自由的形式化保证
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -792,11 +819,9 @@ Rust程序 ──► 分离逻辑规范 ──► 形式化证明
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -996,4 +1021,3 @@ Rust程序 ──► 分离逻辑规范 ──► 形式化证明
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

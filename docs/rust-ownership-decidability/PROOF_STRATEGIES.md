@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [证明策略详解](#证明策略详解)
@@ -200,6 +201,7 @@ Qed.
 ---
 
 ## 二、特定定理的证明策略
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 终止性定理的证明策略
@@ -380,6 +382,7 @@ Qed.
 ```
 
 ### 2.3 进展定理的证明策略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **核心挑战**：
@@ -453,6 +456,7 @@ auto.
 ```
 
 ### 2.4 可判定性定理的证明策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **核心挑战**：
@@ -541,9 +545,11 @@ Qed.
 ---
 
 ## 三、完成 admit 的实用指南
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 常见 admit 模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **模式1：技术性辅助引理**
@@ -579,6 +585,7 @@ apply some_unproven_lemma.
 ```
 
 ### 3.2 完成 admit 的步骤
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **步骤1：理解上下文**
@@ -619,6 +626,7 @@ apply helper_lemma.
 ```
 
 ### 3.3 具体 admit 完成示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **示例1：环境扩展保持良好性**
@@ -664,9 +672,11 @@ eapply star_step_trans.
 ---
 
 ## 四、高级技巧
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 使用 Ltac 自动化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```coq
@@ -685,6 +695,7 @@ Qed.
 ```
 
 ### 4.2 处理复杂的 induction
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```coq
@@ -701,6 +712,7 @@ apply (mutual_induction_principle
 ```
 
 ### 4.3 使用 ssreflect
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```coq
@@ -717,9 +729,11 @@ Qed.
 ---
 
 ## 五、常见错误和解决方案
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 错误：Induction 过早
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```coq
@@ -733,6 +747,7 @@ induction H.
 ```
 
 ### 5.2 错误：Hypothesis 太具体
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```coq
@@ -747,6 +762,7 @@ apply H.
 ```
 
 ### 5.3 错误：忘记 inversion
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```coq
@@ -763,6 +779,7 @@ inversion H; subst; clear H.
 ---
 
 ## 六、总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 证明策略的核心原则：
@@ -778,11 +795,13 @@ inversion H; subst; clear H.
 ---
 
 ## 🆕 Rust 1.94 所有权系统更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 新特性对所有权系统的影响
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | 所有权影响 | 可判定性 |
@@ -792,6 +811,7 @@ inversion H; subst; clear H.
 | LazyCell/LazyLock | 延迟初始化 | ✅ Send/Sync 检查 |
 
 ### 形式化更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - rray_windows 的边界安全证明
@@ -817,6 +837,7 @@ inversion H; subst; clear H.
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -1066,4 +1087,3 @@ inversion H; subst; clear H.
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

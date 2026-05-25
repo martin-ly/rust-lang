@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [并发模型选择决策树](#并发模型选择决策树)
@@ -100,6 +101,7 @@
 ```
 
 ### 2.2 Async运行时选择
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -126,6 +128,7 @@
 ```
 
 ### 2.3 共享状态选择
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -157,6 +160,7 @@
 ```
 
 ### 2.4 同步原语选择
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -182,6 +186,7 @@
 ---
 
 ## 3. 场景匹配表
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 场景 | 推荐模型 | 具体实现 | 理由 |
@@ -198,6 +203,7 @@
 ---
 
 ## 4. 性能对比决策
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -222,6 +228,7 @@
 ---
 
 ## 5. 安全性优先决策
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -245,9 +252,11 @@
 ---
 
 ## 6. 快速决策检查表
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 检查清单
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```markdown
@@ -262,6 +271,7 @@
 ```
 
 ### 6.2 常见错误避免
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```markdown
@@ -283,11 +293,6 @@
 
 ---
 
-**维护者**: Rust Concurrency Guide Team
-**更新日期**: 2026-03-05
-**适用版本**: Rust 1.75+
----
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
@@ -304,6 +309,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
@@ -380,4 +386,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

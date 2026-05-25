@@ -1,6 +1,7 @@
 # Rust所有权系统 - 思维导图
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust所有权系统 - 思维导图](#rust所有权系统---思维导图)
@@ -178,6 +179,7 @@ mindmap
 ---
 
 ## 概念依赖关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -227,6 +229,7 @@ mindmap
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
@@ -293,4 +296,3 @@ mindmap
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

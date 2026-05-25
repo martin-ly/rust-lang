@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust设计模式综合论证](#rust设计模式综合论证)
@@ -242,9 +243,11 @@ let request = HttpRequestBuilder::new()
 ---
 
 ## 3. 结构型模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Newtype模式 (零成本抽象)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **问题**: 如何为现有类型添加语义同时保持性能？
@@ -277,6 +280,7 @@ $$
 $$
 
 ### 3.2 Deref多态模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **问题**: 如何在保持封装的同时提供透明访问？
@@ -310,9 +314,11 @@ buf.extend_from_slice(b"data"); // 通过DerefMut，modified = true
 ---
 
 ## 4. 行为型模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 类型状态模式 (编译时状态机)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **问题**: 如何在编译时确保状态转换正确？
@@ -382,9 +388,11 @@ $$
 ---
 
 ## 5. 并发模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 `Arc<Mutex<T>>`模式 (共享可变状态)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **问题**: 如何在多线程间安全共享可变状态？
@@ -424,6 +432,7 @@ $$
 $$
 
 ### 5.2 Channel模式 (消息传递)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **问题**: 如何避免共享状态？
@@ -457,9 +466,11 @@ $$
 ---
 
 ## 6. Unsafe模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 自引用结构模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **问题**: 如何安全创建自引用结构？
@@ -512,6 +523,7 @@ Pin<Box<Self>>保证:
 ---
 
 ## 7. 模式选择决策树
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -545,6 +557,7 @@ Pin<Box<Self>>保证:
 ---
 
 ## 8. 模式与所有权的关系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | 所有权策略 | 借用策略 | 典型应用 |
@@ -580,6 +593,7 @@ Pin<Box<Self>>保证:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [comprehensive-analysis 目录](./README.md)
@@ -757,4 +771,3 @@ Pin<Box<Self>>保证:
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

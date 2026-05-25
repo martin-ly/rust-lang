@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权可判定性项目 - 全面审计报告](#rust-所有权可判定性项目---全面审计报告)
@@ -97,6 +98,7 @@ docs/rust-ownership-decidability/
 ```
 
 ### 1.2 文档行数分布
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 行数范围 | 文件数 | 占比 | 说明 |
@@ -112,9 +114,11 @@ docs/rust-ownership-decidability/
 ---
 
 ## 二、内容深度评估
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 深度评级标准
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -125,6 +129,7 @@ docs/rust-ownership-decidability/
 ```
 
 ### 2.2 各模块深度分布
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模块 | L3 | L2 | L1 | L0 | 主要问题 |
@@ -146,9 +151,11 @@ docs/rust-ownership-decidability/
 ---
 
 ## 三、与权威资源对齐分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 The Rust Book (1.90.0) 覆盖检查
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | Book 章节 | 项目覆盖 | 对齐度 | 差距 |
@@ -166,6 +173,7 @@ docs/rust-ownership-decidability/
 **总体对齐度**: 约 75%
 
 ### 3.2 The Rust Reference 覆盖检查
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | Reference 章节 | 项目覆盖 | 对齐度 | 状态 |
@@ -181,6 +189,7 @@ docs/rust-ownership-decidability/
 **总体对齐度**: 约 55%
 
 ### 3.3 The Rustonomicon 覆盖检查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | Nomicon 章节 | 项目覆盖 | 对齐度 | 状态 |
@@ -199,9 +208,11 @@ docs/rust-ownership-decidability/
 ---
 
 ## 四、关键缺失内容识别
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 高优先级缺失 🔴
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 缺失主题 | 重要性 | 原因 | 建议位置 |
@@ -214,6 +225,7 @@ docs/rust-ownership-decidability/
 | **Inline Assembly** | 中 | Reference 标准内容 | `08-advanced-topics/inline-asm.md` |
 
 ### 4.2 中优先级缺失 🟡
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 缺失主题 | 重要性 | 建议位置 |
@@ -230,6 +242,7 @@ docs/rust-ownership-decidability/
 | - 状态模式、迭代器模式 | | |
 
 ### 4.3 低优先级缺失 🟢
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 更多应用域案例
@@ -239,9 +252,11 @@ docs/rust-ownership-decidability/
 ---
 
 ## 五、内容质量评估
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 优势
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **形式化深度突出**: Coq 形式化 (~5,500 行) 是同类项目罕见的
@@ -250,6 +265,7 @@ docs/rust-ownership-decidability/
 4. **程序语义完整**: 16-program-semantics 非常系统
 
 ### 5.2 劣势
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **Unsafe 内容严重不足**: 仅占应有内容的 20%
@@ -260,9 +276,11 @@ docs/rust-ownership-decidability/
 ---
 
 ## 六、优先级修复计划
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 阶段一: 填补关键缺失 (4周) 🔴
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 周 | 任务 | 预计产出 |
@@ -277,6 +295,7 @@ docs/rust-ownership-decidability/
 | 4 | Inline Assembly | `inline-asm.md` |
 
 ### 阶段二: 内容深化 (4周) 🟡
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 周 | 任务 | 目标 |
@@ -287,6 +306,7 @@ docs/rust-ownership-decidability/
 | 8 | 案例研究深化 | 添加 10 个深度案例分析 |
 
 ### 阶段三: 对齐优化 (4周) 🟢
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 周 | 任务 | 目标 |
@@ -297,9 +317,11 @@ docs/rust-ownership-decidability/
 ---
 
 ## 七、可持续维护计划
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 内容质量保证流程
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -307,6 +329,7 @@ docs/rust-ownership-decidability/
 ```
 
 ### 7.2 定期审查机制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 频率 | 检查项 | 负责人 |
@@ -317,6 +340,7 @@ docs/rust-ownership-decidability/
 | 每半年 | 全面内容深度审查 | 专家评审 |
 
 ### 7.3 内容深度标准 (新文档必须满足)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```markdown
@@ -332,9 +356,11 @@ docs/rust-ownership-decidability/
 ---
 
 ## 八、建议与意见
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 8.1 架构建议
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **新建 `17-unsafe-rust/` 目录**: 系统化整理 Unsafe 内容
@@ -342,6 +368,7 @@ docs/rust-ownership-decidability/
 3. **扩展 `05-comparative-study/`**: 增加与其他语言的对比
 
 ### 8.2 内容建议
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Unsafe 专题是最高优先级**: 当前差距最大
@@ -349,6 +376,7 @@ docs/rust-ownership-decidability/
 3. **Unwinding/Panic 是生产代码必备**: 异常安全不可忽视
 
 ### 8.3 维护建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **引入内容质量门控**: 新文档必须满足 L2 标准
@@ -358,9 +386,11 @@ docs/rust-ownership-decidability/
 ---
 
 ## 九、结论
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 当前状态: 70% 完成度
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - ✅ **形式化部分**: 非常完整 (Coq 代码 + 证明)
@@ -371,6 +401,7 @@ docs/rust-ownership-decidability/
 - 🔴 **底层细节**: 缺失较多 (Data Layout, Unwinding)
 
 ### 达到 100% 的关键路径
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **Unsafe Rust 专题** (4周) - 填补最大缺口
@@ -403,6 +434,7 @@ docs/rust-ownership-decidability/
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -460,4 +492,3 @@ docs/rust-ownership-decidability/
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

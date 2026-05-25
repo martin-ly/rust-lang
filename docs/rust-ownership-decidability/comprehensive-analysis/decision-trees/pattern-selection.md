@@ -1,6 +1,7 @@
 # 设计模式选择决策树
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [设计模式选择决策树](#设计模式选择决策树)
@@ -102,6 +103,7 @@
 ```
 
 ### 2. 并发模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -131,6 +133,7 @@
 ```
 
 ### 3. 错误处理模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -153,6 +156,7 @@
 ---
 
 ## 快速选择表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 问题 | 答案 | 推荐模式 |
@@ -171,9 +175,11 @@
 ---
 
 ## 模式组合建议
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 常见组合
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -202,10 +208,6 @@ select! {
 }
 ```
 
----
-
-**维护者**: Rust Design Patterns Team
-**更新日期**: 2026-03-05
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -279,4 +281,3 @@ select! {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

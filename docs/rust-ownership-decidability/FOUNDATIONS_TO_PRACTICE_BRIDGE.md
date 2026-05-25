@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [理论基础到实践桥梁文档](#理论基础到实践桥梁文档)
@@ -145,6 +146,7 @@ Inductive ty : Type :=
 ---
 
 ## 二、仿射类型 → 借用系统
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 理论概念
@@ -252,6 +254,7 @@ Definition borrow_valid (mode: borrow_mode) (active: list borrow_mode) : bool :=
 ---
 
 ## 三、区域类型 → 生命周期
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 理论概念
@@ -278,6 +281,7 @@ T^ρ   : 类型 T 在区域 ρ 内有效
 | `T^static` | `&'static T` | 引用在整个程序期间有效 |
 
 ### 3.3 代码示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -319,6 +323,7 @@ impl<'a> BorrowedData<'a> {
 ```
 
 ### 3.4 形式化对应
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```coq
@@ -339,9 +344,11 @@ Inductive lifetime :=
 ---
 
 ## 四、分离逻辑 → 内存安全
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 理论概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **分离逻辑 (Separation Logic)**:
@@ -356,6 +363,7 @@ x ↦ v    : x 指向值为 v 的内存
 ```
 
 ### 4.2 Rust 映射
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 分离逻辑 | Rust 概念 | 含义 |
@@ -366,6 +374,7 @@ x ↦ v    : x 指向值为 v 的内存
 | `emp` | `()` | 空类型，不持有资源 |
 
 ### 4.3 代码示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -411,6 +420,7 @@ fn frame_rule_example() {
 ```
 
 ### 4.4 形式化对应
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```coq
@@ -430,9 +440,11 @@ Lemma frame_rule : forall P Q R C,
 ---
 
 ## 五、类型论 → Rust 类型系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 理论概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **类型论 (Type Theory)**:
@@ -446,6 +458,7 @@ A → B       : 函数类型
 ```
 
 ### 5.2 Rust 映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类型论 | Rust 代码 | 含义 |
@@ -456,6 +469,7 @@ A → B       : 函数类型
 | `α` | `T` | 类型参数 |
 
 ### 5.3 代码示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -488,9 +502,11 @@ impl Show for i32 {
 ---
 
 ## 六、完整映射示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 复杂 Rust 代码的理论解读
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -529,6 +545,7 @@ where
 ```
 
 ### 6.2 编译错误的理论解释
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -556,9 +573,11 @@ fn bad<'a>(x: &'a str, y: &str) -> &'a str {
 ---
 
 ## 七、学习路径
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 从理论到实践的学习顺序
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -581,9 +600,11 @@ fn bad<'a>(x: &'a str, y: &str) -> &'a str {
 ---
 
 ## 八、总结
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 映射总览
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 数学理论 | Rust 概念 | 核心文件 |
@@ -595,6 +616,7 @@ fn bad<'a>(x: &'a str, y: &str) -> &'a str {
 | 类型论 | 类型系统 | `meta-model/` |
 
 ### 8.2 实践价值
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 理解这些映射后：
@@ -625,6 +647,7 @@ fn bad<'a>(x: &'a str, y: &str) -> &'a str {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -776,4 +799,3 @@ fn bad<'a>(x: &'a str, y: &str) -> &'a str {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

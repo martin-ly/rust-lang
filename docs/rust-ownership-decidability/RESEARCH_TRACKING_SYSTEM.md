@@ -62,6 +62,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 顶级会议
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 会议 | 时间 | 重点追踪内容 | 优先级 |
@@ -82,6 +83,7 @@
 3. 追踪已知研究团队的论文
 
 ### 2.2 预印本与期刊
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **arXiv 追踪**:
@@ -96,6 +98,7 @@
 - JFP (Journal of Functional Programming)
 
 ### 2.3 官方渠道
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **Rust Formal Methods Interest Group**:
@@ -115,6 +118,7 @@
 - Ralf Jung's Blog: <https://www.ralfj.de/blog/>
 
 ### 2.4 工业动态
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **GitHub 监控**:
@@ -130,6 +134,7 @@
 ---
 
 ## 3. 季度审查流程
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -170,9 +175,11 @@ Q4 (10-12月) 审查:
 ---
 
 ## 4. 重要研究跟踪
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 当前活跃项目
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 项目 | 机构 | 负责人 | 状态 | 预期完成 |
@@ -185,6 +192,7 @@ Q4 (10-12月) 审查:
 | **Verus** | CMU/VMware | Andrea Lattuada | 活跃 | 持续 |
 
 ### 4.2 预期发布
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **2025 年预期**:
@@ -204,9 +212,11 @@ Q4 (10-12月) 审查:
 ---
 
 ## 5. 工具版本跟踪
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 版本监控矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 工具 | 最新版本 | 最后检查 | 文档版本 | 同步状态 |
@@ -219,6 +229,7 @@ Q4 (10-12月) 审查:
 | Miri |  nightly | 2026-03 | nightly | ✅ 同步 |
 
 ### 版本检查脚本
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
@@ -245,9 +256,11 @@ echo "检查完成，请对比文档中的版本信息"
 ---
 
 ## 6. 文档更新流程
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 发现新研究后的处理流程
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -273,6 +286,7 @@ echo "检查完成，请对比文档中的版本信息"
 ```
 
 ### 更新类型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 类型 | 处理方式 | 时间要求 |
@@ -286,9 +300,11 @@ echo "检查完成，请对比文档中的版本信息"
 ---
 
 ## 7. 历史更新记录
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 2026-03-12 大规模更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **触发原因**: 网络资源对齐
@@ -312,6 +328,7 @@ echo "检查完成，请对比文档中的版本信息"
 ---
 
 ### 未来更新计划
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **2025 Q2 预期**:
@@ -333,26 +350,31 @@ echo "检查完成，请对比文档中的版本信息"
 ---
 
 ## 附录：快速检查清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 每日检查
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] arXiv Rust 相关新论文
 
 ### 每周检查
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] RFMIG 会议更新
 - [ ] 主要工具 GitHub 动态
 
 ### 每月检查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 官方博客更新
 - [ ] 工具新版本发布
 
 ### 季度检查
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 完整会议论文列表
@@ -450,4 +472,3 @@ echo "检查完成，请对比文档中的版本信息"
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

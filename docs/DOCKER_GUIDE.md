@@ -3,6 +3,7 @@
 本文档介绍如何使用 Docker 和 Docker Compose 构建和运行本项目。
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Docker 使用指南](#docker-使用指南)
@@ -47,6 +48,7 @@ docker build -t rust-lang .
 ```
 
 ### 运行容器
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -54,6 +56,7 @@ docker run -it --rm rust-lang
 ```
 
 ### 使用 Docker Compose
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
@@ -68,6 +71,7 @@ docker-compose down
 ```
 
 ## 多阶段构建
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Dockerfile 使用多阶段构建优化镜像大小:
@@ -76,9 +80,11 @@ Dockerfile 使用多阶段构建优化镜像大小:
 2. **Runtime 阶段**: 使用精简的 `debian:bookworm-slim` 运行
 
 ## Docker Compose 配置
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 生产环境
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
@@ -86,6 +92,7 @@ docker-compose up rust-lang
 ```
 
 ### 开发环境（热重载）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
@@ -95,6 +102,7 @@ docker-compose --profile dev up rust-lang-dev
 开发模式使用 `cargo-watch` 监视文件变化并自动重新编译。
 
 ## 卷挂载
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - `./:/app` - 源代码挂载
@@ -102,6 +110,7 @@ docker-compose --profile dev up rust-lang-dev
 - `target-cache` - 编译目标缓存（仅开发模式）
 
 ## 环境变量
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 在 `docker-compose.yml` 中配置:
@@ -111,6 +120,7 @@ docker-compose --profile dev up rust-lang-dev
 | `RUST_LOG` | 日志级别 | `info` |
 
 ## 常用命令
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -128,9 +138,11 @@ docker-compose build --no-cache
 ```
 
 ## 故障排除
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 权限问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 如果遇到文件权限问题，确保宿主机用户有正确的权限:
@@ -141,6 +153,7 @@ sudo chown -R $(id -u):$(id -g) .
 ```
 
 ### 编译缓慢
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 首次构建会下载依赖，可能较慢。后续构建会利用缓存加速。
@@ -227,4 +240,3 @@ sudo chown -R $(id -u):$(id -g) .
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

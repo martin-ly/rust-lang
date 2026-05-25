@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全性分析多维矩阵](#安全性分析多维矩阵)
@@ -79,6 +80,7 @@
 ---
 
 ## 矩阵4: 验证工具能力对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 工具 | 验证类型 | 自动化 | 学习曲线 | 误报率 | 适用范围 | 成熟度 |
@@ -95,6 +97,7 @@
 ---
 
 ## 矩阵5: 错误处理安全性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 错误类型 | panic风险 | 数据丢失风险 | 安全泄漏风险 | 推荐模式 | 回滚机制 |
@@ -110,6 +113,7 @@
 ---
 
 ## 矩阵6: 网络/IO安全性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 协议/场景 | Rust库 | 内存安全 | 并发安全 | DoS防护 | TLS支持 |
@@ -126,6 +130,7 @@
 ---
 
 ## 矩阵7: 序列化/反序列化安全性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 格式 | 库 | 内存DoS防护 | 递归深度限制 | 类型安全 | 零拷贝支持 |
@@ -142,6 +147,7 @@
 ---
 
 ## 矩阵8: 密码学安全性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 算法类别 | 推荐库 | 侧信道防护 | 常量时间 | 审计状态 | 标准合规 |
@@ -257,4 +263,3 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [内存安全性定理完整证明](#内存安全性定理完整证明)
@@ -76,6 +77,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 引理陈述
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -84,6 +86,7 @@
 ```
 
 ### 证明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **步骤1: 定义数据竞争**
@@ -137,9 +140,11 @@
 ---
 
 ## 引理2: 所有权保证无悬垂指针
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 引理陈述
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -148,6 +153,7 @@
 ```
 
 ### 证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **步骤1: 定义悬垂指针**
@@ -207,9 +213,11 @@
 ---
 
 ## 引理3: 生命周期保证无use-after-free
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 引理陈述
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -218,6 +226,7 @@
 ```
 
 ### 证明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **步骤1: 定义use-after-free**
@@ -273,9 +282,11 @@
 ---
 
 ## 引理4: RAII保证无双重释放
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 引理陈述
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -284,6 +295,7 @@
 ```
 
 ### 证明
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **步骤1: 定义双重释放**
@@ -358,9 +370,11 @@ move(v, from, to) →
 ---
 
 ## 主定理证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理 MEMORY-SAFETY-1
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -371,6 +385,7 @@ move(v, from, to) →
 ```
 
 ### 证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -408,9 +423,11 @@ move(v, from, to) →
 ---
 
 ## 推论
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 推论1: 类型安全蕴含内存安全
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -422,6 +439,7 @@ move(v, from, to) →
 ```
 
 ### 推论2: 并发安全
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -432,6 +450,7 @@ move(v, from, to) →
 ```
 
 ### 推论3: Unsafe代码隔离
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -447,6 +466,7 @@ move(v, from, to) →
 ---
 
 ## 证明可靠性分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -492,6 +512,7 @@ move(v, from, to) →
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -618,4 +639,3 @@ move(v, from, to) →
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

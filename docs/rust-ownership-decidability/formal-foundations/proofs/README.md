@@ -8,6 +8,7 @@
 本目录包含 Rust 所有权系统的形式化证明文档。
 
 ## 文件列表
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 描述 |
@@ -26,10 +27,12 @@
 | [type-ownership-unified-theory.md](./type-ownership-unified-theory.md) | 类型-所有权统一理论 |
 
 ## 相关目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [形式化模型](../models/README.md) - 所有权类型和借用模型
 - [语义定义](../semantics/README.md) - 操作语义和逻辑关系
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -40,6 +43,5 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 </details>

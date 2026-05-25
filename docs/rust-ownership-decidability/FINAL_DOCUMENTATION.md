@@ -61,6 +61,7 @@
 > "很多形式模型并没有完整的说明元模型和元形式语言，因为我们需要严格形式化证明。"
 
 ### 目标
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - ✅ 证明 Borrow Checking 算法终止性
@@ -71,9 +72,11 @@
 ---
 
 ## 理论贡献
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. Linearizability 条件
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 基于 Payet et al. (NFM 2022) 的关键洞察：
@@ -91,6 +94,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 **定理**: Linearizable(Γ) → Terminates(borrow_check(Γ))
 
 ### 2. 类型秩 (Type Rank)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 用于终止性证明的度量：
@@ -103,6 +107,7 @@ rank((τ₁, ..., τₙ)) = max(rank(τᵢ))
 ```
 
 ### 3. 所有权安全判断
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 精确捕获 Rust 所有权规则的核心判断：
@@ -115,9 +120,11 @@ Inductive ownership_safe :
 ---
 
 ## Coq 形式化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 文件结构
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -145,6 +152,7 @@ coq-formalization/
 **总计**: 12 个文件, 2,753 行 Coq 代码
 
 ### 构建说明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
@@ -154,6 +162,7 @@ make
 ```
 
 ### 依赖
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - Coq 8.17+
@@ -162,9 +171,11 @@ make
 ---
 
 ## 核心定理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定理 1: Borrow Checking 终止性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```coq
@@ -182,6 +193,7 @@ Theorem borrow_checking_termination :
 3. 良基归纳保证终止
 
 ### 定理 2: 类型保持 (Preservation)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```coq
@@ -194,6 +206,7 @@ Theorem preservation :
 ```
 
 ### 定理 3: 进展 (Progress)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```coq
@@ -204,6 +217,7 @@ Theorem progress :
 ```
 
 ### 定理 4: 类型安全
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -211,6 +225,7 @@ Type Safety = Preservation + Progress
 ```
 
 ### 定理 5: 可判定性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```coq
@@ -223,9 +238,11 @@ Theorem rust_type_system_decidable :
 ---
 
 ## 验证示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 基础借用 (SimpleBorrow.v)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **不可变借用**: `let y = &x; *y`
@@ -235,6 +252,7 @@ Theorem rust_type_system_decidable :
 5. **借用链**: `let z = &&x; **z`
 
 ### 嵌套借用 (NestedBorrow.v)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **三重嵌套**: `let w = &&&x; ***w`
@@ -244,6 +262,7 @@ Theorem rust_type_system_decidable :
 5. **循环借用**: `loop { ... }`
 
 ### 复杂模式 (ComplexPatterns.v)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **Reborrow**: `let z = &mut *y`
@@ -256,9 +275,11 @@ Theorem rust_type_system_decidable :
 ---
 
 ## 使用指南
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 验证示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```coq
@@ -273,6 +294,7 @@ Print ex1_typechecks.
 ```
 
 ### 扩展类型系统
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```coq
@@ -290,6 +312,7 @@ Fixpoint ty_rank (τ : ty) : nat :=
 ```
 
 ### 添加新示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```coq
@@ -304,9 +327,11 @@ Proof. ... Qed.
 ---
 
 ## 未来工作
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### Phase 2: 可判定性深化 (目标: 55%)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 填充所有 admit
@@ -315,6 +340,7 @@ Proof. ... Qed.
 - [ ] 完善 DecidabilityTheorems
 
 ### Phase 3: 扩展完善 (目标: 75%)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] Trait 系统
@@ -323,6 +349,7 @@ Proof. ... Qed.
 - [ ] 与 rustc 对比测试
 
 ### Phase 4: 验证发布 (目标: 100%)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 完整机械化证明
@@ -403,4 +430,3 @@ Proof. ... Qed.
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

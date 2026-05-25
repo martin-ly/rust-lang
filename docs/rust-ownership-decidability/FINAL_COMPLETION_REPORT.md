@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统形式化 - 最终完成报告](#rust-所有权系统形式化---最终完成报告)
@@ -68,9 +69,11 @@
 ---
 
 ## 新增内容
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 统一框架文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **UNIFIED_THEORETICAL_FRAMEWORK.md** - 5层架构统一框架
@@ -79,12 +82,14 @@
 - **FRAMEWORK_COMPLETION_SUMMARY.md** - 框架完成总结
 
 ### 2. 关键证明补充
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **SemanticsEquivalence.v** - 大步/小步语义等价性（118行）
 - **TypeOwnershipConnection.v** - 类型与所有权联系（227行）
 
 ### 3. 完成的证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -97,6 +102,7 @@
 ---
 
 ## 框架层次结构
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -124,9 +130,11 @@
 ---
 
 ## 关键成果
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 1. 类型-所有权联系证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```coq
@@ -139,6 +147,7 @@ Theorem type_safety_implies_ownership_safety :
 **意义**: 形式化证明了 Rust 的核心保证——类型检查通过 ⟹ 内存安全
 
 ### 2. 借用检查等价性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```coq
@@ -151,6 +160,7 @@ Theorem borrow_check_equivalent_to_ownership_safety :
 **意义**: 证明了借用检查器的正确性和完备性
 
 ### 3. 内存安全定理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```coq
@@ -165,9 +175,11 @@ Theorem rust_type_system_guarantees_memory_safety :
 ---
 
 ## 剩余工作（技术债务）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 剩余的 admit（约 55 处）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 主要集中在：
@@ -286,4 +298,3 @@ Theorem rust_type_system_guarantees_memory_safety :
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust类型选择决策树](#rust类型选择决策树)
@@ -121,6 +122,7 @@
 ---
 
 ## 4. 集合类型选择决策树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -162,6 +164,7 @@
 ---
 
 ## 5. 错误处理选择决策树
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -197,6 +200,7 @@
 ---
 
 ## 6. 并发模型选择决策树
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -233,6 +237,7 @@
 ---
 
 ## 7. 生命周期标注决策树
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -267,6 +272,7 @@
 ---
 
 ## 8. 何时使用unsafe决策树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -307,6 +313,7 @@ unsafe使用原则:
 ---
 
 ## 快速参考表
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 场景 | 推荐选择 | 避免 |
@@ -319,11 +326,6 @@ unsafe使用原则:
 | 错误处理 | `Result<T,E>` | `panic!` (可恢复错误) |
 | 并发通信 | `Channel` | 共享可变状态 |
 
----
-
-**维护者**: Rust Decision Trees Team
-**更新日期**: 2026-03-05
-**对齐版本**: Rust 1.93.1
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -342,6 +344,7 @@ unsafe使用原则:
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [decision-trees 目录](./README.md)
@@ -443,4 +446,3 @@ unsafe使用原则:
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

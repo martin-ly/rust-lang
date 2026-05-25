@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [所有权基础练习](#所有权基础练习)
@@ -61,9 +62,11 @@ fn main() {
 ---
 
 ## 练习 2: 借用规则
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 题目
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 修复以下代码：
@@ -80,6 +83,7 @@ fn main() {
 ```
 
 ### 答案
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -99,6 +103,7 @@ fn main() {
 ---
 
 ## 练习 3: 生命周期
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 题目
@@ -193,7 +198,6 @@ impl<T> Drop for MyBox<T> {
 - [exercises 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -228,4 +232,3 @@ impl<T> Drop for MyBox<T> {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

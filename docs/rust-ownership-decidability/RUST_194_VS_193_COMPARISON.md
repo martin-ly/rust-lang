@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 vs 1.93: Comprehensive Comparison for Ownership and Borrow Checking](#rust-194-vs-193-comprehensive-comparison-for-ownership-and-borrow-checking)
@@ -148,6 +149,7 @@ This lint helps catch patterns that could lead to unsoundness in ownership reaso
 ---
 
 ## 2. Standard Library Changes
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 LazyCell/LazyLock Improvements (1.94)
@@ -303,6 +305,7 @@ New methods for safe uninit memory handling:
 ---
 
 ## 3. Tooling Changes
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 Clippy New Lints
@@ -345,6 +348,7 @@ rustc-unicode = true  # Enable unicode diagnostic rendering
 ---
 
 ## 4. Impact on Existing Code
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 Breaking Changes
@@ -361,6 +365,7 @@ Rust 1.94 maintains full backward compatibility for borrow checking and ownershi
 - **musl 1.2.5 update:** May affect builds using `*-linux-musl` targets
 
 ### 4.2 Migration Notes
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### For `const` Items with Interior Mutability
@@ -417,9 +422,11 @@ fn peek_data() -> Option<&'static [i32]> {
 ---
 
 ## 5. Formalization Impact
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 What Needed to be Formalized
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### Closure Lifetime Inference (1.94)
@@ -458,6 +465,7 @@ static S: Cell<i32> = Cell::new(0);
 ```
 
 ### 5.2 What Proofs Were Affected
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### Soundness Proofs
@@ -480,6 +488,7 @@ No changes required to core formal models of Rust ownership (e.g., RustBelt, Oxi
 ---
 
 ## 6. Summary Comparison Table
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | Aspect | Rust 1.93 | Rust 1.94 | Ownership/Borrow Impact |
@@ -496,9 +505,11 @@ No changes required to core formal models of Rust ownership (e.g., RustBelt, Oxi
 ---
 
 ## 7. Recommendations for Codebases
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Immediate Actions (1.94)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **Update `LazyCell`/`LazyLock` usage** to take advantage of new `get()` methods for better performance
@@ -506,6 +517,7 @@ No changes required to core formal models of Rust ownership (e.g., RustBelt, Oxi
 3. **Consider `array_windows`** for slice iteration patterns that can benefit from fixed-size arrays
 
 ### Gradual Migration
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Replace `once_cell` crate** with `std::cell::LazyCell`/`std::sync::LazyLock` where appropriate
@@ -515,6 +527,7 @@ No changes required to core formal models of Rust ownership (e.g., RustBelt, Oxi
 ---
 
 ## 8. References
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 1.93.0 Release Notes](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0.html)
@@ -544,6 +557,7 @@ No changes required to core formal models of Rust ownership (e.g., RustBelt, Oxi
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -661,4 +675,3 @@ No changes required to core formal models of Rust ownership (e.g., RustBelt, Oxi
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [全面论证完成报告：自然语言论证的完整补充](#全面论证完成报告自然语言论证的完整补充)
@@ -110,6 +111,7 @@
 ---
 
 ## 二、关联性论证的核心内容
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 横向关联论证（HORIZONTAL_CONNECTIONS.md）
@@ -263,9 +265,11 @@ ELet包含mutability：可变性是绑定的一部分
 ---
 
 ## 三、论证的层次结构
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 四个论证层次
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -291,6 +295,7 @@ ELet包含mutability：可变性是绑定的一部分
 ```
 
 ### 3.2 论证的网络结构
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -311,9 +316,11 @@ ELet包含mutability：可变性是绑定的一部分
 ---
 
 ## 四、全面论证的价值
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 解决的核心问题
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **问题1：主题孤立**
@@ -353,6 +360,7 @@ ELet包含mutability：可变性是绑定的一部分
 ```
 
 ### 4.2 对不同读者的价值
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **Rust开发者**：
@@ -390,9 +398,11 @@ ELet包含mutability：可变性是绑定的一部分
 ---
 
 ## 五、文档间的关联导航
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 主题导向的阅读路径
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **主题：理解所有权系统**
@@ -423,6 +433,7 @@ ELet包含mutability：可变性是绑定的一部分
 ```
 
 ### 5.2 问题导向的阅读路径
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **问题：为什么Rust的借用检查会终止？**
@@ -452,9 +463,11 @@ ELet包含mutability：可变性是绑定的一部分
 ---
 
 ## 六、论证的完整性与深度
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 完整性评估
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | 覆盖度 | 说明 |
@@ -467,6 +480,7 @@ ELet包含mutability：可变性是绑定的一部分
 | 设计决策 | 100% | 所有关键决策的原理说明 |
 
 ### 6.2 深度评估
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | 深度 | 说明 |
@@ -478,6 +492,7 @@ ELet包含mutability：可变性是绑定的一部分
 | 设计原理 | 深 | 每个决策的权衡分析 |
 
 ### 6.3 独特贡献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **贡献1：首次全面梳理主题关联**
@@ -516,9 +531,11 @@ ELet包含mutability：可变性是绑定的一部分
 ---
 
 ## 七、对形式化工作的整体提升
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 从"代码"到"理论"
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **之前**：
@@ -543,6 +560,7 @@ ELet包含mutability：可变性是绑定的一部分
 ```
 
 ### 7.2 理论价值的提升
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **从孤立到关联**：
@@ -574,6 +592,7 @@ ELet包含mutability：可变性是绑定的一部分
 ```
 
 ### 7.3 实用价值的提升
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **教学价值**：
@@ -603,9 +622,11 @@ ELet包含mutability：可变性是绑定的一部分
 ---
 
 ## 八、最终状态
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 完成度统计
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 组件 | 完成度 | 说明 |
@@ -619,6 +640,7 @@ ELet包含mutability：可变性是绑定的一部分
 | 文档体系 | 100% | 多层次，个性化路径 |
 
 ### 8.2 质量评估
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | 评分 | 说明 |
@@ -630,6 +652,7 @@ ELet包含mutability：可变性是绑定的一部分
 | 创新性 | ⭐⭐⭐⭐⭐ | 首次全面梳理关联 |
 
 ### 8.3 历史地位
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **本工作在Rust形式化历史中的位置**：
@@ -655,9 +678,11 @@ ELet包含mutability：可变性是绑定的一部分
 ---
 
 ## 九、结语
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 核心成就
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **从"形式化代码"到"完整理论"**
@@ -679,6 +704,7 @@ ELet包含mutability：可变性是绑定的一部分
 - ✅ 对教师可使用
 
 ### 9.2 理论的意义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **不仅仅是形式化代码的注释**：
@@ -701,6 +727,7 @@ ELet包含mutability：可变性是绑定的一部分
 ```
 
 ### 9.3 未来的展望
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **短期（维护）**：
@@ -755,6 +782,7 @@ ELet包含mutability：可变性是绑定的一部分
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -773,193 +801,3 @@ ELet包含mutability：可变性是绑定的一部分
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

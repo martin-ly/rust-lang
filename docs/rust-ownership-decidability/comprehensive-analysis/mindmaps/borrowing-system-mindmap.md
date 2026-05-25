@@ -1,6 +1,7 @@
 # Rust借用系统 - 思维导图
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust借用系统 - 思维导图](#rust借用系统---思维导图)
@@ -186,6 +187,7 @@ mindmap
 ---
 
 ## 借用检查演进
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -211,6 +213,7 @@ mindmap
 ---
 
 ## 借用模式速查表
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模式 | 语法 | 约束 | 典型应用 |
@@ -244,6 +247,7 @@ mindmap
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -314,4 +318,3 @@ mindmap
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

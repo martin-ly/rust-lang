@@ -1,6 +1,7 @@
 # Rust 操作语义形式化理论
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 操作语义形式化理论](#rust-操作语义形式化理论)
@@ -103,6 +104,7 @@
 ---
 
 ## 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 操作语义通过定义程序如何一步步执行来描述编程语言的含义。
@@ -114,6 +116,7 @@
 - panic 和栈展开
 
 ### 形式化目标
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档形式化 Rust 的操作语义：
@@ -138,6 +141,7 @@ E[e]                求值上下文：E 是包含洞 e 的上下文
 ---
 
 ## 小步操作语义 (SOS)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 配置定义
@@ -450,6 +454,7 @@ match_pattern(p, v) = None
 ---
 
 ## 大步操作语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 求值关系
@@ -549,6 +554,7 @@ e ⇓ Pointer(loc)    heap[loc] = v
 ---
 
 ## 结构化操作语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 抽象机结构
@@ -578,6 +584,7 @@ Frame ::=
 ```
 
 ### 4.2 CEK 机器
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 CEK 机器（Control, Environment, Kontinuation）是经典的抽象机模型。
@@ -624,6 +631,7 @@ Control ::= Expr | Value
 ```
 
 ### 4.3 环境恢复
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **返回处理**：
@@ -641,9 +649,11 @@ Control ::= Expr | Value
 ---
 
 ## 求值上下文
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 上下文定义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 求值上下文 E 描述了表达式中下一个将要归约的位置。
@@ -676,6 +686,7 @@ E[e] 表示将 e 填入 E 的洞 □ 中
 ```
 
 ### 5.2 上下文语义规则
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### 5.2.1 上下文归约
@@ -691,6 +702,7 @@ E[e] → E[e']
 这个规则说明：如果子表达式 e 可以归约为 e'，则在任何上下文 E 中都可以进行此归约。
 
 ### 5.3 求值策略
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 5.3.1 调用约定
@@ -714,9 +726,11 @@ E[e] → E[e']
 ---
 
 ## Rust 特化语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 所有权转移语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 6.1.1 移动的形式化
@@ -737,6 +751,7 @@ check_use(x):
 ```
 
 ### 6.2 借用语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 6.2.1 共享借用创建
@@ -770,6 +785,7 @@ use_ref(r, access):
 ```
 
 ### 6.3 生命周期语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 6.3.1 生命周期结束
@@ -791,6 +807,7 @@ nll_check:
 ```
 
 ### 6.4 Drop 语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 6.4.1 隐式 Drop
@@ -812,6 +829,7 @@ drop(e):
 ```
 
 ### 6.5 Panic 语义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 6.5.1 Panic 传播
@@ -840,9 +858,11 @@ unwind_to_target(target_frame):
 ---
 
 ## 并发操作语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 线程模型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 7.1.1 线程配置
@@ -867,6 +887,7 @@ SharedMemory ::= Location → (Value, MutexState)
 ```
 
 ### 7.2 线程创建
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 7.2.1 spawn 语义
@@ -880,6 +901,7 @@ spawn(f):
 ```
 
 ### 7.3 同步原语
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 7.3.1 Mutex 语义
@@ -927,6 +949,7 @@ cv.notify_one():
 ```
 
 ### 7.4 原子操作
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 7.4.1 内存排序
@@ -959,9 +982,11 @@ atomic.store(value, order):
 ---
 
 ## 证明概要
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 确定性定理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理 8.1 (确定性)**：
@@ -975,6 +1000,7 @@ atomic.store(value, order):
 3. 或者多条规则产生相同结果
 
 ### 8.2 合流性定理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理 8.2 (合流性)**：
@@ -988,6 +1014,7 @@ atomic.store(value, order):
 3. 证明终止性：定义适当的良基度量
 
 ### 8.3 类型保持性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定理 8.3 (保持性)**：
@@ -1001,6 +1028,7 @@ atomic.store(value, order):
 - 状态转换不改变相关变量的类型
 
 ### 8.4 进展性定理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理 8.4 (进展性)**：
@@ -1016,9 +1044,11 @@ atomic.store(value, order):
 ---
 
 ## 参考文献
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 操作语义经典
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **Plotkin, G. D.** (1981). A structural approach to operational semantics. *Technical Report*.
@@ -1034,6 +1064,7 @@ atomic.store(value, order):
    - 类型安全的形式化证明方法
 
 ### Rust 语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Jung, R., et al.** (2018). RustBelt: Securing the foundations of Rust. *POPL '18*.
@@ -1046,6 +1077,7 @@ atomic.store(value, order):
    - Rust 未定义行为语义
 
 ### 并发语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Milner, R.** (1999). *Communicating and Mobile Systems: The π-Calculus*. Cambridge University Press.
@@ -1058,6 +1090,7 @@ atomic.store(value, order):
     - 并发内存模型计算
 
 ### 抽象机
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Landin, P. J.** (1964). The mechanical evaluation of expressions. *Computer Journal*.
@@ -1070,6 +1103,7 @@ atomic.store(value, order):
     - 求值器与抽象机的对应
 
 ### 内存模型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Batty, M., et al.** (2011). Mathematizing C++ concurrency. *POPL '11*.
@@ -1081,6 +1115,7 @@ atomic.store(value, order):
 ---
 
 ## 附录 A：求值规则速查表
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 规则名 | 前提 | 结论 |
@@ -1097,6 +1132,7 @@ atomic.store(value, order):
 ---
 
 ## 附录 B：上下文优先级
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -1128,11 +1164,9 @@ atomic.store(value, order):
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -1411,4 +1445,3 @@ atomic.store(value, order):
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

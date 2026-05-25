@@ -164,6 +164,7 @@ $$
 ---
 
 ## 2. 数学基础
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 类型论基础
@@ -379,6 +380,7 @@ $$
 ---
 
 ## 3. 元模型统一描述
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 语法统一视图
@@ -604,6 +606,7 @@ $$
 ---
 
 ## 4. 定理体系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 定理依赖网络
@@ -910,6 +913,7 @@ $$
 ---
 
 ## 5. 证明策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 结构归纳法模式
@@ -1055,6 +1059,7 @@ split; auto.
 ---
 
 ## 6. 理论-实践映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 Rust 表面语法 → 核心语言
@@ -1136,6 +1141,7 @@ drop                   权限回收
 ```
 
 ### 6.3 形式化证明 → 实际代码验证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **验证工具链**:
@@ -1179,9 +1185,11 @@ Lemma swap_correct : forall (x y : loc) (v1 v2 : val),
 ---
 
 ## 7. 未来方向
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 异步 Rust 形式化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **研究问题**:
@@ -1209,6 +1217,7 @@ $$
 ```
 
 ### 7.2 Unsafe 代码边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **研究问题**:
@@ -1237,6 +1246,7 @@ $$
 $$
 
 ### 7.3 并发模型扩展
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **研究问题**:
@@ -1263,9 +1273,11 @@ $$
 ---
 
 ## 附录
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 附录 A: 符号表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 符号 | LaTeX | 含义 |
@@ -1302,6 +1314,7 @@ $$
 | $h$ | `h` | 堆 |
 
 ### 附录 B: 定理索引
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 定理编号 | 名称 | 陈述 |
@@ -1315,6 +1328,7 @@ $$
 | 4.7 | TypeSafety + Termination → Decidability | $\text{TS} \land \text{T} \implies \text{Decidable}$ |
 
 ### 附录 C: 参考文献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Jung, R., et al.** (2018). RustBelt: Securing the foundations of Rust. *POPL '18*.
@@ -1335,11 +1349,13 @@ $$
 ---
 
 ## 🆕 Rust 1.94 所有权系统更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 新特性对所有权系统的影响
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | 所有权影响 | 可判定性 |
@@ -1349,6 +1365,7 @@ $$
 | LazyCell/LazyLock | 延迟初始化 | ✅ Send/Sync 检查 |
 
 ### 形式化更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - rray_windows 的边界安全证明
@@ -1770,4 +1787,3 @@ $$
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

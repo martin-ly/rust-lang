@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [项目完成报告 v3.0](#项目完成报告-v30)
@@ -88,6 +89,7 @@
 - deref_nullptr deny-by-default (安全强化)
 
 ### 2. 可视化资源新增
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 思维导图
@@ -141,6 +143,7 @@
 - unsafe使用决策
 
 ### 3. 反例与逻辑论证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 路径 | 内容 |
@@ -160,6 +163,7 @@
 - 反例总结表
 
 ### 4. 目录结构完善
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 新增目录README
@@ -188,9 +192,11 @@
 ---
 
 ## 形式化论证统计
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理与证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 类别 | 数量 | 位置 |
@@ -203,6 +209,7 @@
 | **总计** | **42+** | 分散在各目录 |
 
 ### 思维表征统计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 类型 | 数量 | 位置 |
@@ -216,6 +223,7 @@
 ---
 
 ## 版本对齐确认
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | Rust版本 | 对齐状态 | 说明 |
@@ -227,9 +235,11 @@
 ---
 
 ## 质量指标
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 内容完整性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 指标 | 状态 | 说明 |
@@ -241,6 +251,7 @@
 | 思维表征 | ✅ 多样 | 导图、矩阵、决策树齐全 |
 
 ### 文档结构
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 指标 | 状态 | 说明 |
@@ -253,9 +264,11 @@
 ---
 
 ## 学习路径推荐
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 初学者 (所有权基础)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -268,6 +281,7 @@
 ```
 
 ### 进阶开发者 (形式化理解)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -279,6 +293,7 @@
 ```
 
 ### 架构师 (系统设计)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -292,6 +307,7 @@
 ---
 
 ## 后续维护建议
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 虽然项目已达到100%完成度，以下方向可供未来增强：
@@ -305,6 +321,7 @@
 ---
 
 ## 项目统计
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -367,6 +384,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -385,69 +403,3 @@
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

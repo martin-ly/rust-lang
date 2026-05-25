@@ -1,6 +1,7 @@
 # Rust 类型系统形式化理论
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Type System]** · **[来源: Wikipedia - Type Theory]** · **[来源: ACM - Type System Formalization]** · **[来源: IEEE - Type Safety Proofs]**
 
 - [Rust 类型系统形式化理论](#rust-类型系统形式化理论)
@@ -80,12 +81,14 @@
 ---
 
 ## 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 的类型系统是建立在 Hindley-Milner (HM) 类型推断基础上的高级扩展系统。
 它通过引入所有权、生命周期和 Trait 系统，在保持类型推断能力的同时，提供了强大的内存安全保证。
 
 ### 形式化目标
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 我们旨在形式化 Rust 类型系统的以下方面：
@@ -111,6 +114,7 @@ Rust 的类型系统是建立在 Hindley-Milner (HM) 类型推断基础上的高
 ---
 
 ## HM 类型推断系统
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 语法定义
@@ -331,6 +335,7 @@ W(Γ, let x = e₁ in e₂) =
 ---
 
 ## 多态类型系统
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 System F (多态 λ 演算)
@@ -463,6 +468,7 @@ fn foo<F>() where F: for<'a> Fn(&'a T) -> &'a U
 ---
 
 ## 约束求解
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 约束生成
@@ -562,9 +568,11 @@ SCC(G):
 ---
 
 ## Rust 类型系统扩展
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 生命周期参数
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 5.1.1 生命周期语法
@@ -605,6 +613,7 @@ Constraint ::= ... | ℓ₁ : ℓ₂    (生命周期包含)
 ```
 
 ### 5.2 所有权类型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 5.2.1 所有权修饰
@@ -636,6 +645,7 @@ ownership ::= Own | Borrow(ℓ) | MutBorrow(ℓ)
 ```
 
 ### 5.3 关联类型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 5.3.1 关联类型语法
@@ -669,9 +679,11 @@ Trait Iterator = (Item: Type, next: &mut Self → Option<Item>)
 ---
 
 ## 证明概要
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 类型安全性定理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理 6.1 (类型安全性)**：
@@ -711,6 +723,7 @@ Trait Iterator = (Item: Type, next: &mut Self → Option<Item>)
 由抽象规则和应用规则可得。
 
 ### 6.2 类型推断的终止性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理 6.2 (算法 W 终止性)**：
@@ -723,6 +736,7 @@ Trait Iterator = (Item: Type, next: &mut Self → Option<Item>)
 3. 递归深度受表达式大小限制
 
 ### 6.3 约束求解的完备性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **定理 6.3 (约束求解完备性)**：
@@ -737,9 +751,11 @@ Trait Iterator = (Item: Type, next: &mut Self → Option<Item>)
 ---
 
 ## 参考文献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 经典类型理论
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Damas, L., & Milner, R.** (1982). Principal type-schemes for functional programs. *POPL '82*.
@@ -755,6 +771,7 @@ Trait Iterator = (Item: Type, next: &mut Self → Option<Item>)
    - 限定多态的完整理论
 
 ### Rust 类型系统
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Matsakis, N. D., & Klock, F. S.** (2014). The Rust language. *ACM SIGAda Ada Letters*.
@@ -770,6 +787,7 @@ Trait Iterator = (Item: Type, next: &mut Self → Option<Item>)
    - 所有权系统教程
 
 ### 约束求解
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Pottier, F., & Rémy, D.** (2005). The essence of ML type inference. *Advanced Topics in Types and Programming Languages*.
@@ -785,6 +803,7 @@ Trait Iterator = (Item: Type, next: &mut Self → Option<Item>)
     - Trait 系统的原始论文
 
 ### 形式化证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **Nipkow, T., & Klein, G.** (2014). *Concrete Semantics with Isabelle/HOL*. Springer.
@@ -799,6 +818,7 @@ Trait Iterator = (Item: Type, next: &mut Self → Option<Item>)
 ---
 
 ## 附录 A：Rust 类型系统特性映射
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | Rust 特性 | 理论对应 | 形式化难度 |
@@ -812,6 +832,7 @@ Trait Iterator = (Item: Type, next: &mut Self → Option<Item>)
 | const 泛型 | 依赖类型 | ★★★★★ |
 
 ## 附录 B：形式化工具链
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -848,11 +869,9 @@ LLVM IR
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -1056,4 +1075,3 @@ LLVM IR
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

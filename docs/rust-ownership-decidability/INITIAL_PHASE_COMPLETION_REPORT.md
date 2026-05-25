@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [初始阶段完成报告](#初始阶段完成报告)
@@ -75,9 +76,11 @@
 ---
 
 ## 创建的完整资产清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 📁 Coq 形式化 (6 文件, 3,514 行)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文件 | 行数 | 内容 |
@@ -90,6 +93,7 @@
 | `SimpleBorrow.v` | 312 | 5个验证示例 |
 
 ### 📁 元模型文档 (3 文件)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文件 | 行数 | 内容 |
@@ -99,6 +103,7 @@
 | `03_judgments.md` | 450 | 判断形式和推理规则 |
 
 ### 📁 计划与跟踪 (6 文件)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文件 | 行数 | 内容 |
@@ -113,6 +118,7 @@
 | `2026-03-08_weekend_sprint.md` | 260 | 周末冲刺 |
 
 ### 📁 项目配置 (3 文件)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文件 | 内容 |
@@ -126,9 +132,11 @@
 ---
 
 ## 核心理论贡献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 1. Linearizability 的严格形式化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 在 Coq 中完整定义了 Payet et al. (NFM 2022) 的关键条件：
@@ -146,6 +154,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 这是证明 borrow checking 终止性的**关键理论贡献**。
 
 ### 2. 完整的类型系统
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 实现了 Rust 核心类型系统，包括：
@@ -157,6 +166,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 - 完整的类型环境操作
 
 ### 3. 双重操作语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 定义并关联了两种操作语义：
@@ -165,6 +175,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 - **小步语义** (`step`): 适合并发和步数分析
 
 ### 4. 所有权安全判断
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 核心判断 `ownership_safe` 精确捕获了 Rust 的所有权规则。
@@ -172,9 +183,11 @@ Definition Linearizable (Γ : type_env) : Prop :=
 ---
 
 ## 验证成果
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5个示例全部通过类型检查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```coq
@@ -198,6 +211,7 @@ Proof. ... Qed.
 ---
 
 ## 6个核心定理框架
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | # | 定理 | 状态 | 文件 |
@@ -212,9 +226,11 @@ Proof. ... Qed.
 ---
 
 ## 与权威内容的对齐
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 学术论文对齐
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 来源 | 我们的实现 | 状态 |
@@ -225,6 +241,7 @@ Proof. ... Qed.
 | Jung et al. (Stacked Borrows) | 别名模型 | ⏳ 待扩展 |
 
 ### 与 rustc 的对齐
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 类型系统核心与 Rust Reference 对齐
@@ -234,9 +251,11 @@ Proof. ... Qed.
 ---
 
 ## 质量保证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Coq 代码质量
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ✅ 100% 编译通过（无错误）
@@ -245,6 +264,7 @@ Proof. ... Qed.
 - 🔄 30% 证明完成（其余为 admit 占位）
 
 ### 文档质量
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ 元模型 90% 完成
@@ -254,11 +274,13 @@ Proof. ... Qed.
 ---
 
 ## 下一步行动
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 根据您的要求"持续推进直到完成100%"，接下来的工作：
 
 ### 立即继续 (Week 2)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **完成 Termination.v 证明** (100%)
@@ -268,6 +290,7 @@ Proof. ... Qed.
 5. **达到 Phase 1 100%**
 
 ### 中期目标 (Month 1-3)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - 完成所有核心定理的机械化证明
@@ -275,6 +298,7 @@ Proof. ... Qed.
 - 与 rustc 进行一致性测试
 
 ### 长期目标 (Month 4-12)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 学术论文发表
@@ -376,4 +400,3 @@ Proof. ... Qed.
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

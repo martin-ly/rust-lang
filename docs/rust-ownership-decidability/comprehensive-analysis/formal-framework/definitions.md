@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化定义框架](#形式化定义框架)
@@ -85,9 +86,11 @@
 ---
 
 ## 2. 所有权核心定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 所有权公理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -108,6 +111,7 @@
 ```
 
 ### 2.2 借用规则
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -135,9 +139,11 @@
 ---
 
 ## 3. 生命周期形式化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 生命周期关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -158,6 +164,7 @@
 ```
 
 ### 3.2 生命周期约束
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -181,9 +188,11 @@ c ∈ Constraint ::=
 ---
 
 ## 4. 内存安全定义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 内存状态
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -203,6 +212,7 @@ valid_access(μ, a, κ) ⇔
 ```
 
 ### 4.2 安全属性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -226,9 +236,11 @@ valid_access(μ, a, κ) ⇔
 ---
 
 ## 5. 类型系统规则
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 子类型关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -245,6 +257,7 @@ valid_access(μ, a, κ) ⇔
 ```
 
 ### 5.2 类型推导
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -276,9 +289,11 @@ valid_access(μ, a, κ) ⇔
 ---
 
 ## 6. 效果系统
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 效果类型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -295,6 +310,7 @@ valid_access(μ, a, κ) ⇔
 ```
 
 ### 6.2 效果规则
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -321,9 +337,11 @@ valid_access(μ, a, κ) ⇔
 ---
 
 ## 7. 并发形式化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 Send与Sync定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -345,6 +363,7 @@ valid_access(μ, a, κ) ⇔
 ```
 
 ### 7.2 并发安全性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -368,9 +387,11 @@ valid_access(μ, a, κ) ⇔
 ---
 
 ## 8. 异步形式化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 Future语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -388,6 +409,7 @@ State ::=
 ```
 
 ### 8.2 async/await语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -408,9 +430,11 @@ State ::=
 ---
 
 ## 9. 验证条件
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 9.1 程序验证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -430,6 +454,7 @@ State ::=
 ```
 
 ### 9.2 不变式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -468,6 +493,7 @@ State ::=
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -570,4 +596,3 @@ State ::=
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

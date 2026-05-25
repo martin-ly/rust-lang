@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [概念映射：从 Rust 代码到形式化理论](#概念映射从-rust-代码到形式化理论)
@@ -94,6 +95,7 @@ Inductive mutability :=
 ```
 
 ### 1.3 生命周期（Lifetime）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | Rust 代码 | 直觉概念 | 形式化定义 |
@@ -120,9 +122,11 @@ Inductive ty :=
 ---
 
 ## 二、类型系统的映射
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 基础类型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Rust 类型 | 形式化类型 | 运行时值 |
@@ -133,6 +137,7 @@ Inductive ty :=
 | `String` | `TBase TStr` | `RVString s` |
 
 ### 2.2 复合类型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | Rust 类型 | 形式化类型 | 构造方式 |
@@ -143,6 +148,7 @@ Inductive ty :=
 | `&mut i32` | `TRef ρ Uniq TI32` | `EBorrow ρ Uniq p` |
 
 ### 2.3 用户定义类型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | Rust 代码 | 形式化表示 |
@@ -153,9 +159,11 @@ Inductive ty :=
 ---
 
 ## 三、表达式映射
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 3.1 变量和值
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | Rust 代码 | 形式化表达式 | 求值规则 |
@@ -165,6 +173,7 @@ Inductive ty :=
 | `true` | `EValue (VBool true)` | `E_Value` |
 
 ### 3.2 借用和解引用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | Rust 代码 | 形式化 | 语义 |
@@ -175,6 +184,7 @@ Inductive ty :=
 | `Box::new(v)` | `EBox (EValue v)` | 堆分配 |
 
 ### 3.3 控制流
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | Rust 代码 | 形式化 | 语义 |
@@ -186,9 +196,11 @@ Inductive ty :=
 ---
 
 ## 四、判断的映射
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 类型判断
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 自然语言 | Rust 编译器 | 形式化 |
@@ -209,6 +221,7 @@ Inductive ty :=
 ```
 
 ### 4.2 语义判断
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自然语言 | 运行时行为 | 形式化 |
@@ -231,6 +244,7 @@ Inductive ty :=
 ```
 
 ### 4.3 安全性判断
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 自然语言 | 含义 | 形式化 |
@@ -242,9 +256,11 @@ Inductive ty :=
 ---
 
 ## 五、从 Rust 程序到形式化证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 完整示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **Rust 程序**：
@@ -294,6 +310,7 @@ ELet Shrd "x" TI32
 ```
 
 ### 5.2 定理应用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **应用保持性定理**：
@@ -333,9 +350,11 @@ ELet Shrd "x" TI32
 ---
 
 ## 六、概念层次图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 从具体到抽象
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -363,6 +382,7 @@ Rust 源代码
 ```
 
 ### 6.2 形式化层次
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -405,9 +425,11 @@ Rust 源代码
 ---
 
 ## 七、常见模式和对应
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 所有权转移模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | Rust 模式 | 形式化 | 含义 |
@@ -417,6 +439,7 @@ Rust 源代码
 | `drop(x);` | `heap_remove h ℓ` | 释放内存 |
 
 ### 7.2 借用模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | Rust 模式 | 形式化 | 约束 |
@@ -426,6 +449,7 @@ Rust 源代码
 | `&*r` | `EBorrow ρ ω (PDeref p)` | reborrow，解引用后借用 |
 
 ### 7.3 生命周期模式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | Rust 模式 | 形式化 | 约束 |
@@ -437,9 +461,11 @@ Rust 源代码
 ---
 
 ## 八、从形式化回到 Rust
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 8.1 形式化结果的解释
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理：类型安全**
@@ -476,6 +502,7 @@ Rust 源代码
 ```
 
 ### 8.2 形式化对 Rust 编程的指导
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **理解编译器错误**：
@@ -523,6 +550,7 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }  // 显式生命周期
 ---
 
 ## 九、总结
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 这份概念映射文档建立了三个层次之间的联系：
@@ -557,6 +585,7 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }  // 显式生命周期
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -575,119 +604,3 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }  // 显式生命周期
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

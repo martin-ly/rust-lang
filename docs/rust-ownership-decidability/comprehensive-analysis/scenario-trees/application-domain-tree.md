@@ -1,6 +1,7 @@
 # 应用领域解决方案树
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [应用领域解决方案树](#应用领域解决方案树)
@@ -100,6 +101,7 @@ Web服务架构
 ```
 
 ### Web解决方案
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 框架 | 数据库 | 部署 |
@@ -113,6 +115,7 @@ Web服务架构
 ---
 
 ## 3. 分布式系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -134,6 +137,7 @@ Web服务架构
 ```
 
 ### 分布式解决方案
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 实现 | 容错 | 一致性 |
@@ -147,6 +151,7 @@ Web服务架构
 ---
 
 ## 4. 数据处理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -174,6 +179,7 @@ Web服务架构
 ```
 
 ### 数据处理方案
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景 | 库 | 特性 | 性能 |
@@ -187,6 +193,7 @@ Web服务架构
 ---
 
 ## 5. 网络基础设施
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -211,6 +218,7 @@ Web服务架构
 ```
 
 ### 网络解决方案
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 组件 | 实现 | 协议 | 特点 |
@@ -225,6 +233,7 @@ Web服务架构
 ---
 
 ## 6. 系统工具
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -250,6 +259,7 @@ Web服务架构
 ```
 
 ### 系统工具方案
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 库 | 功能 |
@@ -263,6 +273,7 @@ Web服务架构
 ---
 
 ## 7. 游戏开发
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -284,6 +295,7 @@ Web服务架构
 ```
 
 ### 游戏开发方案
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模块 | 库 | 特性 |
@@ -297,6 +309,7 @@ Web服务架构
 ---
 
 ## 8. 区块链/加密货币
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -317,6 +330,7 @@ Web服务架构
 ```
 
 ### 区块链方案
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 组件 | 实现 | 用途 |
@@ -330,6 +344,7 @@ Web服务架构
 ---
 
 ## 9. AI/机器学习
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -350,6 +365,7 @@ AI/ML
 ```
 
 ### AI/ML方案
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 场景 | 库 | 特点 |
@@ -363,9 +379,11 @@ AI/ML
 ---
 
 ## 10. 跨领域最佳实践
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 通用架构建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -418,6 +436,7 @@ AI/ML
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
@@ -520,4 +539,3 @@ AI/ML
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

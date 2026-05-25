@@ -4,7 +4,16 @@
 
 > **[来源: Rust Reference - Formal Semantics]**
 >
-> **[来源: Rust Reference - Type System]** · **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: POPL 2018 - RustBelt]** · **[来源: PLDI 2023 - Aeneas]** · **[来源: Iris Project - iris-project.org]** · **[来源: Wikipedia - Formal Methods]** · **[来源: Wikipedia - Denotational Semantics]** · **[来源: IEEE - Formal Verification Standards]** · **[来源: ACM - Programming Language Semantics]**
+> **[来源: Rust Reference - Type System]** ·
+> **[来源: Wikipedia - Type Theory]** ·
+> **[来源: Wikipedia - Operational Semantics]** ·
+> **[来源: POPL 2018 - RustBelt]** ·
+> **[来源: PLDI 2023 - Aeneas]** ·
+> **[来源: Iris Project - iris-project.org]** ·
+> **[来源: Wikipedia - Formal Methods]** ·
+> **[来源: Wikipedia - Denotational Semantics]** ·
+> **[来源: IEEE - Formal Verification Standards]** ·
+> **[来源: ACM - Programming Language Semantics]**
 
 - [Rust Formal Semantics: A Comprehensive Deep Dive](#rust-formal-semantics-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -251,7 +260,9 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-Rust's type system represents one of the most sophisticated static analysis systems in modern programming languages. Its unique ownership and borrowing mechanisms ensure memory safety without requiring a garbage collector. This document provides a comprehensive formal treatment of Rust's semantics, from core type theory to advanced verification techniques.
+Rust's type system represents one of the most sophisticated static analysis systems in modern programming languages.
+Its unique ownership and borrowing mechanisms ensure memory safety without requiring a garbage collector.
+This document provides a comprehensive formal treatment of Rust's semantics, from core type theory to advanced verification techniques.
 
 ### 1.1 Motivation
 
@@ -4256,4 +4267,3 @@ Borrowing rules are enforced at compile time.
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

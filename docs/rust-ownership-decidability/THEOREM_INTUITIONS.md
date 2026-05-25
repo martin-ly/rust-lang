@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [定理的直观理解与解释](#定理的直观理解与解释)
@@ -166,6 +167,7 @@ Linearizable(Γ) =>
 ---
 
 ## 二、保持性定理（Preservation Theorem）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 定理陈述
@@ -304,6 +306,7 @@ e = ELet ω x τ₁ e₁ e₂
 ---
 
 ## 三、进展定理（Progress Theorem）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 定理陈述
@@ -460,6 +463,7 @@ Definition is_stuck (e : expr) : Prop :=
 ---
 
 ## 四、类型安全定理（Type Safety）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 定理陈述
@@ -541,6 +545,7 @@ let x: &i32;
 ---
 
 ## 五、可判定性定理（Decidability）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 定理陈述
@@ -623,6 +628,7 @@ type_check(Δ, Γ, Θ, e, τ):
 ---
 
 ## 六、借用检查等价性定理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 定理陈述
@@ -640,6 +646,7 @@ Theorem borrow_check_equivalent_to_ownership_safety :
 > 表达式 e 通过借用检查，当且仅当 e 是所有权安全的（在所有可能的环境中都不会违反所有权规则）。
 
 ### 6.2 直观理解
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **这个定理是 Rust 的核心！**
@@ -658,6 +665,7 @@ Theorem borrow_check_equivalent_to_ownership_safety :
 理想情况下，考试（借用检查）能准确评估能力（所有权安全）。
 
 ### 6.3 双向证明的解释
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **方向1：借用检查通过 ⟹ 所有权安全**
@@ -677,6 +685,7 @@ Theorem borrow_check_equivalent_to_ownership_safety :
 - 这是设计选择，不是理论限制
 
 ### 6.4 为什么这个定理重要？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **编译器可信度的理论基础**：
@@ -693,9 +702,11 @@ Theorem borrow_check_equivalent_to_ownership_safety :
 ---
 
 ## 七、内存安全定理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 定理陈述
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```coq
@@ -709,6 +720,7 @@ Theorem rust_type_system_guarantees_memory_safety :
 > 如果程序通过 Rust 的类型检查，那么这个程序是内存安全的。
 
 ### 7.2 内存安全的定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```coq
@@ -729,6 +741,7 @@ Definition memory_safe (e : expr) : Prop :=
 ```
 
 ### 7.3 直观理解
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **内存安全的三个支柱**：
@@ -781,6 +794,7 @@ Definition memory_safe (e : expr) : Prop :=
 - 编译器检查引用的有效期
 
 ### 7.4 定理的重要性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **这是 Rust 的"杀手锏"**：
@@ -798,9 +812,11 @@ Definition memory_safe (e : expr) : Prop :=
 ---
 
 ## 八、语义等价性定理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 定理陈述
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```coq
@@ -813,6 +829,7 @@ Theorem big_step_equiv_star_step :
 > 大步求值（直接得到结果）和小步求值（一步一步执行）是等价的。
 
 ### 8.2 直观理解
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **两种视角**：
@@ -838,6 +855,7 @@ Theorem big_step_equiv_star_step :
 > 两种视角描述的是同一个计算过程。
 
 ### 8.3 为什么需要两种语义？
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **大步语义**：
@@ -856,6 +874,7 @@ Theorem big_step_equiv_star_step :
 - 选择更方便的语义进行证明
 
 ### 8.4 证明的挑战
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **挑战1：大步 ⟹ 小步**
@@ -871,9 +890,11 @@ Theorem big_step_equiv_star_step :
 ---
 
 ## 九、定理间的逻辑关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 依赖图
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -889,6 +910,7 @@ Lineariz. ───┘
 ```
 
 ### 9.2 证明顺序
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **推荐的阅读/证明顺序**：
@@ -904,6 +926,7 @@ Lineariz. ───┘
 ---
 
 ## 十、总结
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 这七个核心定理构成了 Rust 所有权系统的理论基础：
@@ -923,11 +946,13 @@ Lineariz. ───┘
 ---
 
 ## 🆕 Rust 1.94 所有权系统更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 新特性对所有权系统的影响
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | 所有权影响 | 可判定性 |
@@ -937,6 +962,7 @@ Lineariz. ───┘
 | LazyCell/LazyLock | 延迟初始化 | ✅ Send/Sync 检查 |
 
 ### 形式化更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - rray_windows 的边界安全证明
@@ -962,6 +988,7 @@ Lineariz. ───┘
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -1190,4 +1217,3 @@ Lineariz. ───┘
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

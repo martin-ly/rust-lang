@@ -1,6 +1,7 @@
 # Rust 逻辑关系形式化理论
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 逻辑关系形式化理论](#rust-逻辑关系形式化理论)
@@ -102,12 +103,14 @@
 ---
 
 ## 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 逻辑关系（Logical Relations）是编程语言理论中用于证明类型系统性质的核心技术。
 它通过将语法类型解释为语义关系，建立起类型与行为之间的深层联系。
 
 ### 形式化目标
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档旨在形式化 Rust 相关逻辑关系理论：
@@ -133,6 +136,7 @@
 ---
 
 ## 逻辑关系基础
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 语义解释
@@ -236,6 +240,7 @@ Context C ::= □ | C e | v C | λx.C | ...
 ---
 
 ## 步进索引逻辑关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 动机
@@ -314,6 +319,7 @@ m ≤ n ⟹ ⟦τ⟧ₙ ⊆ ⟦τ⟧ₘ
 ---
 
 ## Kripke 逻辑关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 可能世界语义
@@ -383,6 +389,7 @@ W ⊑ W' ⟹ ⟦τ⟧(W) ⊆ ⟦τ⟧(W')
 ---
 
 ## 表达能力与完备性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 表达能力层级
@@ -415,6 +422,7 @@ Rust ≈ System F + 限定类型 + 区域参数
 ```
 
 ### 5.2 完备性概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 5.2.1 语义完备性
@@ -434,6 +442,7 @@ Rust ≈ System F + 限定类型 + 区域参数
 ```
 
 ### 5.3 不完备性结果
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 5.3.1 类型推断的边界
@@ -458,9 +467,11 @@ Rust 类型系统 = System F 的子集 + 显式类型标注
 ---
 
 ## 类型安全性证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 进展性定理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### 6.1.1 定理陈述
@@ -490,6 +501,7 @@ Rust 类型系统 = System F 的子集 + 显式类型标注
 - let x = e₁ in e₂：类似处理
 
 ### 6.2 保持性定理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 6.2.1 定理陈述
@@ -522,6 +534,7 @@ Rust 类型系统 = System F 的子集 + 显式类型标注
 ```
 
 ### 6.3 类型安全性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 6.3.1 综合定理
@@ -542,9 +555,11 @@ Rust 类型系统 = System F 的子集 + 显式类型标注
 ---
 
 ## Rust 专用逻辑关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 7.1 所有权逻辑关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 7.1.1 所有权解释
@@ -563,6 +578,7 @@ move : ⟦τ^Own⟧(W) → ⟦τ^Owned⟧(W')
 ```
 
 ### 7.2 借用逻辑关系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 7.2.1 共享借用
@@ -587,6 +603,7 @@ move : ⟦τ^Own⟧(W) → ⟦τ^Owned⟧(W')
 ```
 
 ### 7.3 生命周期逻辑关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 7.3.1 生命周期包含
@@ -603,6 +620,7 @@ move : ⟦τ^Own⟧(W) → ⟦τ^Owned⟧(W')
 ```
 
 ### 7.4 Iris 中的 Rust 语义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 7.4.1 Iris 资源代数
@@ -633,9 +651,11 @@ Lifetime(ℓ, P) :=
 ---
 
 ## 证明概要
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 基本引理的详细证明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 8.1.1 变量情况
@@ -660,6 +680,7 @@ Lifetime(ℓ, P) :=
 ```
 
 ### 8.2 兼容性证明
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 8.2.1 应用兼容性
@@ -678,6 +699,7 @@ Lifetime(ℓ, P) :=
 ```
 
 ### 8.3 步进索引完备性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 8.3.1 极限存在性
@@ -691,6 +713,7 @@ Lifetime(ℓ, P) :=
 ```
 
 ### 8.4 RustBelt 证明策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 8.4.1 协议验证
@@ -716,9 +739,11 @@ Vec<T> 的不变式：
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 逻辑关系经典
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Tait, W. W.** (1967). Intensional interpretations of functionals of finite type I. *Journal of Symbolic Logic*.
@@ -734,6 +759,7 @@ Vec<T> 的不变式：
    - 编程语言理论的逻辑关系
 
 ### 步进索引
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Appel, A. W., & McAllester, D.** (2001). An indexed model of recursive types for foundational proof-carrying code. *TOPLAS*.
@@ -746,6 +772,7 @@ Vec<T> 的不变式：
    - 步进索引逻辑关系
 
 ### Kripke 语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **Kripke, S. A.** (1965). Semantical analysis of intuitionistic logic I. *Formal Systems and Recursive Functions*.
@@ -755,6 +782,7 @@ Vec<T> 的不变式：
    - 局部状态的 Kripke 逻辑关系
 
 ### Iris 和分离逻辑
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Jung, R., et al.** (2018). Iris from the ground up: A modular foundation for higher-order concurrent separation logic. *JFP*.
@@ -767,6 +795,7 @@ Vec<T> 的不变式：
     - Iris 中的高阶幽灵状态
 
 ### Rust 形式化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Jung, R., et al.** (2018). RustBelt: Securing the foundations of the Rust programming language. *POPL '18*.
@@ -779,6 +808,7 @@ Vec<T> 的不变式：
     - Rust 别名模型
 
 ### 完备性与表达能力
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **Friedman, H.** (1975). Equality between functionals. *Logic Colloquium*.
@@ -791,6 +821,7 @@ Vec<T> 的不变式：
     - 类型 λ 演算的完备性理论
 
 ### 证明理论
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Harper, R.** (2016). *Practical Foundations for Programming Languages* (2nd ed.). Cambridge University Press.
@@ -805,6 +836,7 @@ Vec<T> 的不变式：
 ---
 
 ## 附录 A：逻辑关系构造速查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类型 | 值关系 ⟦τ⟧ | 表达式关系 ⟦τ⟧^E |
@@ -818,6 +850,7 @@ Vec<T> 的不变式：
 | &mut ℓ τ | 引用同一位置 + 唯一性 | 标准 |
 
 ## 附录 B：重要定理关系图
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -833,9 +866,11 @@ Vec<T> 的不变式：
 ```
 
 ## 附录 C：Iris 谓词示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### Vec<T> 不变式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```coq
@@ -847,6 +882,7 @@ Definition vec_inv (v: val) (xs: list val) : iProp :=
 ```
 
 ### 借用谓词
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```coq
@@ -873,11 +909,9 @@ Definition borrow (ℓ: lifetime) (P: iProp) : iProp :=
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -1063,4 +1097,3 @@ Definition borrow (ℓ: lifetime) (P: iProp) : iProp :=
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

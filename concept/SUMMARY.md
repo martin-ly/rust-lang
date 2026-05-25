@@ -60,6 +60,9 @@
   - [Ownership Formalization（所有权形式化）](04_formal/03_ownership_formal.md)
   - [RustBelt & Verification Toolchain（RustBelt 与验证工具链）](04_formal/04_rustbelt.md)
   - [Verification Toolchain Selection Guide（验证工具链选择指南）](04_formal/05_verification_toolchain.md)
+  - [Operational Semantics（操作语义）](04_formal/17_operational_semantics.md)
+  - [Axiomatic Semantics（公理语义）](04_formal/20_axiomatic_semantics.md)
+  - [Type Semantics（类型语义）](04_formal/21_type_semantics.md)
 
 - [L5 对比分析层索引（Comparative Analysis Layer Index）](05.md)
 
@@ -85,6 +88,10 @@
   - [WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）](06_ecosystem/08_wasi.md)
   - [Cargo Script：单文件 Rust 程序](06_ecosystem/09_cargo_script.md)
   - [Public/Private Dependencies：可见性控制的工程化](06_ecosystem/10_public_private_deps.md)
+  - [微服务架构模式 (Microservice Architecture Patterns)](06_ecosystem/31_microservice_patterns.md)
+  - [事件驱动架构 (Event-Driven Architecture)](06_ecosystem/32_event_driven_architecture.md)
+  - [CQRS & Event Sourcing（命令查询职责分离与事件溯源）](06_ecosystem/33_cqrs_event_sourcing.md)
+  - [Architecture Patterns（架构设计模式）](06_ecosystem/35_architecture_patterns.md)
 
 - [L7 前沿趋势层索引（Future & Trends Layer Index）](07.md)
 

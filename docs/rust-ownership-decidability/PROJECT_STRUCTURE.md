@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权可判定性 - 项目结构](#rust-所有权可判定性---项目结构)
@@ -75,6 +76,7 @@ Rust核心所有权概念的学习资源。
 ```
 
 ### 2. 形式化基础 (formal-foundations/)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust所有权的严格形式化理论。
@@ -103,6 +105,7 @@ formal-foundations/
 ```
 
 ### 3. Coq形式化 (coq-formalization/)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整的Coq机械证明代码。
@@ -138,6 +141,7 @@ coq-formalization/
 ```
 
 ### 4. Rust 1.94 对齐文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -151,6 +155,7 @@ coq-formalization/
 ```
 
 ### 5. 元模型 (meta-model/)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 形式化的元模型定义。
@@ -166,6 +171,7 @@ meta-model/
 ```
 
 ### 6. 其他重要目录
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 目录 | 内容 | README |
@@ -192,6 +198,7 @@ meta-model/
 | `exercises/` | 练习题 | ✅ |
 
 ### 7. 专题研究
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 目录 | 内容 |
@@ -201,6 +208,7 @@ meta-model/
 | `extensions/` | 扩展内容 |
 
 ### 8. 项目文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 目录 | 内容 |
@@ -212,9 +220,11 @@ meta-model/
 ---
 
 ## 📊 统计信息
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 文件类型分布
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 类型 | 数量 | 说明 |
@@ -225,6 +235,7 @@ meta-model/
 | 其他 | ~20 | 配置文件等 |
 
 ### 代码统计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 类别 | 行数 | 文件数 |
@@ -235,9 +246,11 @@ meta-model/
 ---
 
 ## 🎯 快速导航
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 入门推荐
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **概念学习**: `01-core-concepts/README.md`
@@ -246,6 +259,7 @@ meta-model/
 4. **Coq代码**: `coq-formalization/theories/Advanced/`
 
 ### 核心证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 定理 | 文件 |
@@ -259,6 +273,7 @@ meta-model/
 ---
 
 ## ✅ 质量保证
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [x] 无空文件夹
@@ -288,6 +303,7 @@ meta-model/
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -337,4 +353,3 @@ meta-model/
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

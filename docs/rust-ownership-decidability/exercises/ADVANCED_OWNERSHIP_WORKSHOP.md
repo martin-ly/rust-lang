@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 高级实践工作坊](#rust-所有权系统---高级实践工作坊)
@@ -590,6 +591,7 @@ mod tests {
 ---
 
 ## 🔧 挑战任务
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 挑战 1: 实现 Send 和 Sync (60分钟)
@@ -657,6 +659,7 @@ impl<T> Drop for LockFreeStack<T> {
 ---
 
 ## 📚 参考答案与解析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 所有练习的详细答案和解析可在 `solutions/` 目录找到。
@@ -675,6 +678,7 @@ impl<T> Drop for LockFreeStack<T> {
 ---
 
 ## 🎓 学习检查点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 完成本工作坊后，你应该能够：
@@ -688,6 +692,7 @@ impl<T> Drop for LockFreeStack<T> {
 ---
 
 ## 📖 延伸阅读
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [内部可变性深入](../01-core-concepts/detailed-concepts/interior-mutability.md)
@@ -712,11 +717,11 @@ impl<T> Drop for LockFreeStack<T> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [exercises 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 
@@ -729,7 +734,6 @@ impl<T> Drop for LockFreeStack<T> {
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
-
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
@@ -946,4 +950,3 @@ impl<T> Drop for LockFreeStack<T> {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

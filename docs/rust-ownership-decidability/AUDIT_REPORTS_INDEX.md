@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [全面审计报告索引](#全面审计报告索引)
@@ -64,6 +65,7 @@
 | [CONTENT_TEMPLATE_L2.md](./CONTENT_TEMPLATE_L2.md) | L2 深度文档模板 | 新文档编写 |
 
 ### 本次审计新增内容
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文件 | 描述 | 状态 |
@@ -73,9 +75,11 @@
 ---
 
 ## 🎯 核心发现摘要
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 当前完成度
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -90,6 +94,7 @@
 ```
 
 ### 关键差距 (按优先级)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 🔴 P0 (立即处理)
@@ -114,9 +119,11 @@
 ---
 
 ## 📅 建议执行顺序
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 第 1 周: 基础准备
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. 阅读 [EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md](./EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md)
@@ -124,6 +131,7 @@
 3. 设置 CI/CD 基础流程
 
 ### 第 2-4 周: 关键内容填补
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. 编写 Unsafe 基础文档
@@ -131,6 +139,7 @@
 3. 编写 Uninitialized Memory 文档
 
 ### 第 5-8 周: 内容扩展
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. 扩展验证工具文档
@@ -138,6 +147,7 @@
 3. 深化设计模式
 
 ### 第 9-16 周: 对齐优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. 与 The Rust Book 对齐
@@ -147,6 +157,7 @@
 ---
 
 ## 📋 使用指南
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 如果你是项目维护者
@@ -219,10 +230,6 @@
 
 ---
 
-*索引版本: 1.0*
-*最后更新: 2026-03-07*
----
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
@@ -252,27 +259,3 @@
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

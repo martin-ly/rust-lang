@@ -124,6 +124,10 @@ graph TB
 | [16_testing.md](./16_testing.md) | 测试生态 | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ v1.0 | L2 Error, L3 Macros | Formal Methods, Miri |
 | [17_cross_compilation.md](./17_cross_compilation.md) | 交叉编译 | 多目标平台、条件编译、no_std、嵌入式、Tier 系统 | ✅ v1.0 | L1 Type System, L3 Unsafe | WASI, WebAssembly |
 | [18_distributed_systems.md](./18_distributed_systems.md) | 分布式系统 | gRPC、Raft、Actor、服务发现、微服务 | ✅ v1.0 | L3 Async, L4 Network | Observability, Wasm |
+| [31_microservice_patterns.md](./31_microservice_patterns.md) | 微服务架构模式 | 服务发现、熔断、Saga、API Gateway、配置中心 | ✅ v1.0 | L3 Async, L4 Network | CQRS, 事件驱动 |
+| [32_event_driven_architecture.md](./32_event_driven_architecture.md) | 事件驱动架构 | 发布-订阅、消息队列、Reactive Streams、幂等处理 | ✅ v1.0 | L3 Async, L2 Trait | CQRS, 分布式系统 |
+| [33_cqrs_event_sourcing.md](./33_cqrs_event_sourcing.md) | CQRS & 事件溯源 | 命令查询分离、事件溯源、Saga 编排、Outbox 模式 | ✅ v1.0 | L3 Async, L2 Trait | 微服务, 事件驱动 |
+| [35_architecture_patterns.md](./35_architecture_patterns.md) | 架构设计模式 | 分层/六边形/洋葱/整洁架构、Serverless/FaaS | ✅ v1.0 | L2 Trait, L1 Lifetime | 微服务, CQRS |
 | [35_pattern_composition_algebra.md](./35_pattern_composition_algebra.md) | 模式组合代数 | 设计模式的形式化组合、冲突检测、Rust 所有权约束 | ✅ v1.0 | L2 Trait, L3 Concurrency | Software Architecture |
 | [36_stream_processing_ecosystem.md](./36_stream_processing_ecosystem.md) | 流处理生态 | timely/differential dataflow、Materialize、RisingWave、Fluvio | ✅ v1.0 | L3 Stream Processing | Distributed Systems |
 | [37_database_systems.md](./37_database_systems.md) | 数据库系统 | TiKV/Percolator、Materialize、Meilisearch、SurrealDB | ✅ v1.0 | L3 Concurrency | Stream Processing |

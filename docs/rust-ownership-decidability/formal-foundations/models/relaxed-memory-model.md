@@ -116,6 +116,7 @@ fn thread2() {
 ---
 
 ## 2. 内存模型基础
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 内存排序
@@ -188,6 +189,7 @@ Acquire: 阻止前序加载被重排序到屏障之后
 ---
 
 ## 3. Rust 内存模型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 与 C++ 内存模型的关系
@@ -207,6 +209,7 @@ Rust Ordering ≈ C++ memory_order
 - Rust 的 `Sync` trait 标记线程安全共享
 
 ### 3.2 Atomic 类型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -222,6 +225,7 @@ FLAG.compare_exchange(false, true, Ordering::AcqRel, Ordering::Relaxed);
 ```
 
 ### 3.3 Ordering 枚举
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -237,9 +241,11 @@ pub enum Ordering {
 ---
 
 ## 4. ORC11: Operational Relaxed C11
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 事件结构
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ORC11 使用事件结构表示程序执行：
@@ -259,6 +265,7 @@ ORC11 使用事件结构表示程序执行：
 ```
 
 ### 4.2 视图语义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **每个线程维护一个视图**：
@@ -289,6 +296,7 @@ ORC11 使用事件结构表示程序执行：
 ```
 
 ### 4.3 操作语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **小步语义**：
@@ -333,9 +341,11 @@ e = Write(loc, val, Release, tid)
 ---
 
 ## 5. iRC11: Iris for RC11
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 资源代数扩展
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 iRC11 扩展 Iris 的资源代数：
@@ -350,6 +360,7 @@ H ::= List<(Timestamp, Value, View)>
 ```
 
 ### 5.2 视图资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **视图资源表示线程对内存的可见性**：
@@ -369,6 +380,7 @@ acquire_load(ℓ)
 ```
 
 ### 5.3 同步幽灵状态
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **核心创新：Synchronized Ghost State**
@@ -404,9 +416,11 @@ Protocol(γ) ::=
 ---
 
 ## 6. RustBelt for Relaxed Memory
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 库验证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 在 relaxed memory 下重新验证 RustBelt 的库：
@@ -421,6 +435,7 @@ Protocol(γ) ::=
 | `RefCell` | ✅ | ✅ | 借用检查 |
 
 ### 6.2 Arc 库的数据竞争
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **发现的问题**：
@@ -466,6 +481,7 @@ fn clone(&self) -> Arc<T> {
 ```
 
 ### 6.3 资源回收
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **挑战**：在 relaxed memory 下确定何时可以安全释放内存
@@ -492,9 +508,11 @@ Thread 1 (最后一个持有者):          Thread 2 (尝试获取):
 ---
 
 ## 7. 形式化结果
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 安全性定理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理 (内存安全)**：
@@ -518,6 +536,7 @@ Thread 1 (最后一个持有者):          Thread 2 (尝试获取):
 ```
 
 ### 7.2 优化正确性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **编译器优化在 Relaxed Memory 下的正确性**：
@@ -537,6 +556,7 @@ Thread 1 (最后一个持有者):          Thread 2 (尝试获取):
 ---
 
 ## 参考文献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Dang, H. H., Jourdan, J. H., Kaiser, J. O., & Dreyer, D.** (2020). RustBelt Meets Relaxed Memory. *POPL '20*.
@@ -592,123 +612,3 @@ Thread 1 (最后一个持有者):          Thread 2 (尝试获取):
 > **[来源: Wikipedia - Formal Methods]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
->
-> **[来源: [Rust Memory Model](https://doc.rust-lang.org/nomicon/memory.html)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

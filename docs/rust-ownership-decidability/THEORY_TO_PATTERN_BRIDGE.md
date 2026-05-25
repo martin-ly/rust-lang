@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [理论到设计模式桥梁文档](#理论到设计模式桥梁文档)
@@ -210,6 +211,7 @@ impl Connection<Connected> {
 ---
 
 ## 二、借用约束与设计模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 借用规则 → 访问者模式
@@ -310,6 +312,7 @@ fn example() {
 ---
 
 ## 三、生命周期约束与设计模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 生命周期约束 → 零拷贝模式
@@ -406,9 +409,11 @@ fn anywhere_in_program() -> &'static str {
 ---
 
 ## 四、Send/Sync 约束与并发模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 Send 约束 → 线程池模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **理论基础**: Send 表示可以跨线程转移所有权
@@ -457,6 +462,7 @@ impl Worker {
 ```
 
 ### 4.2 Sync 约束 → 读写锁模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **理论基础**: Sync 表示可以跨线程共享引用
@@ -494,6 +500,7 @@ impl<K: Eq + Hash, V: Clone> Cache<K, V> {
 ---
 
 ## 五、模式选择决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -526,9 +533,11 @@ impl<K: Eq + Hash, V: Clone> Cache<K, V> {
 ---
 
 ## 六、模式组合
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 RAII + 类型状态
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -549,6 +558,7 @@ impl Drop for Connection<Closed> {
 ```
 
 ### 6.2 Builder + 内部可变性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -566,9 +576,11 @@ impl SharedConfigBuilder {
 ---
 
 ## 七、总结
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 7.1 映射总览
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 理论约束 | 设计模式 | 核心思想 |
@@ -584,6 +596,7 @@ impl SharedConfigBuilder {
 | Sync | 读写锁 | 共享引用 |
 
 ### 7.2 设计建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **从约束出发**: 理解理论约束，让约束指导设计
@@ -612,6 +625,7 @@ impl SharedConfigBuilder {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
@@ -791,4 +805,3 @@ impl SharedConfigBuilder {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
