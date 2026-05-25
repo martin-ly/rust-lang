@@ -1,3 +1,12 @@
+# Rust in Space Preview
+
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **双维定位**: P×Eva — 评价 Rust 在太空环境中的适用性
+> **前置依赖**: [Embedded](../06_ecosystem/22_embedded_systems.md) · [Unsafe](../03_advanced/03_unsafe.md)
+> **后置延伸**: [Rust for Linux](./19_rust_for_linux.md)
+
+> **来源**: [Ferrocene](https://ferrocene.dev/) · [Rust Embedded WG](https://github.com/rust-embedded/wg)
 
 ### 10.4 边界测试：太空环境的单事件翻转（SEU）与 Rust 的内存安全（运行时错误）
 

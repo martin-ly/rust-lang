@@ -1,3 +1,12 @@
+# Gen Blocks Preview
+
+> **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A** — Application
+> **双维定位**: F×App — 应用 gen 块构建迭代器
+> **前置依赖**: [Iterator](../02_intermediate/15_iterator_patterns.md) · [Async](../03_advanced/02_async.md)
+> **后置延伸**: [Async Gen](./15_gen_blocks_preview.md)
+
+> **来源**: [RFC 3513](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)
 
 ### 10.4 边界测试：`gen` block 与 `async gen` 的类型推断（编译错误/未来特性）
 

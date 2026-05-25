@@ -91,7 +91,11 @@
   - [微服务架构模式 (Microservice Architecture Patterns)](06_ecosystem/31_microservice_patterns.md)
   - [事件驱动架构 (Event-Driven Architecture)](06_ecosystem/32_event_driven_architecture.md)
   - [CQRS & Event Sourcing（命令查询职责分离与事件溯源）](06_ecosystem/33_cqrs_event_sourcing.md)
+  - [Reactive Programming & FRP（响应式编程与函数式响应编程）](06_ecosystem/40_reactive_programming.md)
   - [Architecture Patterns（架构设计模式）](06_ecosystem/35_architecture_patterns.md)
+  - [Workflow Theory & Formalization（工作流理论与形式化）](06_ecosystem/41_workflow_theory.md)
+  - [API Design Patterns（API 设计模式）](06_ecosystem/42_api_design_patterns.md)
+  - [Security & Cryptography（安全与密码学）](06_ecosystem/43_security_cryptography.md)
 
 - [L7 前沿趋势层索引（Future & Trends Layer Index）](07.md)
 

@@ -1,3 +1,12 @@
+# WASM Target Evolution Preview
+
+> **Bloom 层级**: 理解 → 分析
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: P×Ana — 分析 WASM 目标的演进方向
+> **前置依赖**: [WASI](../06_ecosystem/08_wasi.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
+> **后置延伸**: [Rust for WebAssembly](./28_rust_for_webassembly.md)
+
+> **来源**: [WebAssembly Spec](https://webassembly.github.io/spec/) · [WASI Preview 2](https://github.com/WebAssembly/WASI/blob/main/preview2/README.md)
 
 ### 10.4 边界测试：WASI 的 capability-based security 与文件系统访问（运行时拒绝）
 

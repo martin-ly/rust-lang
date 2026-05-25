@@ -4,12 +4,21 @@
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计事件驱动架构
 > **定位**: 从系统架构视角分析 Rust 实现事件驱动架构的核心模式——类型安全事件总线、消息队列集成、幂等处理、背压传播——揭示所有权系统与不可变事件流的深层契合。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [微服务架构模式](./31_microservice_patterns.md) · [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
-> **后置概念**: [分布式系统](./18_distributed_systems.md) · [云原生](./24_cloud_native.md)
+> **前置概念**: [Async](../03_advanced/02_async.md) ·
+> [微服务架构模式](./31_microservice_patterns.md) ·
+> [泛型](../02_intermediate/02_generics.md) ·
+> [Trait](../02_intermediate/01_traits.md)
+> **后置概念**: [分布式系统](./18_distributed_systems.md) ·
+> [云原生](./24_cloud_native.md)
 
 ---
 
-> **来源**: [Tokio](https://tokio.rs/) · [Tokio Broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html) · [lapin crate](https://docs.rs/lapin/latest/lapin/) · [rdkafka crate](https://docs.rs/rdkafka/latest/rdkafka/) · [NATS](https://docs.rs/nats/latest/nats/) · [Reactive Streams Specification](https://www.reactive-streams.org/)
+> **来源**: [Tokio](https://tokio.rs/) ·
+> [Tokio Broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html) ·
+> [lapin crate](https://docs.rs/lapin/latest/lapin/) ·
+> [rdkafka crate](https://docs.rs/rdkafka/latest/rdkafka/) ·
+> [NATS](https://docs.rs/nats/latest/nats/) ·
+> [Reactive Streams Specification](https://www.reactive-streams.org/)
 
 ## 📑 目录
 >
@@ -119,7 +128,7 @@ async fn main() {
 ```
 
 | 特性 | `tokio::sync::broadcast` | `tokio::sync::mpsc` | `tokio::sync::watch` |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | 模式 | 1:N 广播 | 1:1 或 M:N | 1:N 仅最新值 |
 | 缓冲区 | 有界环形缓冲 | 有界队列 | 单值覆盖 |
 | 背压 | 慢消费者丢消息 | 阻塞/错误 | 总是最新 |
@@ -734,106 +743,11 @@ async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Ar
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：事件驱动架构的编译错误
 

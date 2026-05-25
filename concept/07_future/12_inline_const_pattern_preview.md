@@ -1,3 +1,12 @@
+# Inline Const Pattern Preview
+
+> **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A** — Application
+> **双维定位**: F×App — 应用 const 块于模式匹配
+> **前置依赖**: [Const Generics](../02_intermediate/02_generics.md) · [Pattern Matching](../01_foundation/07_control_flow.md)
+> **后置延伸**: [Const Trait](./17_const_trait_preview.md)
+
+> **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [RFC 2920](https://rust-lang.github.io/rfcs/2920-inline-const.html)
 
 ### 10.4 边界测试：`const {}` 块在 pattern 中的使用（编译错误/未来特性）
 

@@ -1,3 +1,12 @@
+# `must_not_suspend` Lint Preview
+
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **P** — Procedure
+> **双维定位**: F×Eva — 评价跨 await 点的借用安全性
+> **前置依赖**: [Async/Await](../03_advanced/02_async.md) · [Interior Mutability](../02_intermediate/08_interior_mutability.md)
+> **后置延伸**: [Async Drop](./18_async_drop_preview.md)
+
+> **来源**: [RFC 3014](https://rust-lang.github.io/rfcs/3014-must-not-suspend-lint.html) · [Tracking Issue](https://github.com/rust-lang/rust/issues/83310)
 
 ### 10.4 边界测试：`must_not_suspend` 与跨 await 点的借用（运行时错误）
 

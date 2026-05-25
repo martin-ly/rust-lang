@@ -1,3 +1,12 @@
+# RPITIT Preview
+
+> **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: F×App — 应用 RPITIT 于 trait 设计
+> **前置依赖**: [Trait](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
+> **后置延伸**: [Type Alias Impl Trait](./16_type_alias_impl_trait_preview.md)
+
+> **来源**: [Rust Reference — Impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) · [Rust Blog — AFIT](https://blog.rust-lang.org/2023/12/21/async-fn-rpitit.html)
 
 ### 10.4 边界测试：RPITIT（Return Position Impl Trait In Traits）的实现一致性（编译错误）
 

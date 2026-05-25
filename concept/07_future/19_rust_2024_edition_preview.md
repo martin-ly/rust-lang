@@ -1,3 +1,12 @@
+# Rust 2024 Edition Preview
+
+> **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: F×App — 应用 Rust 2024 Edition 的语法变更
+> **前置依赖**: [Edition](../06_ecosystem/01_toolchain.md) · [Async](../03_advanced/02_async.md)
+> **后置延伸**: [Edition Guide](./22_edition_guide.md)
+
+> **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
 
 ### 10.4 边界测试：Rust 2024 Edition 的语法变更与迁移（编译错误）
 

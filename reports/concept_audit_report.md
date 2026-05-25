@@ -1,20 +1,20 @@
 # 概念知识体系自动化审计报告 v2.0
 
-> 生成时间: 2026-05-25T11:18
-> 扫描文件数: 229
+> 生成时间: 2026-05-25T12:22
+> 扫描文件数: 233
 > 版本对齐: Rust 1.95.0 stable
 
 ## 摘要
 
 | 指标 | 数值 | 状态 |
 |:---|:---|:---|
-| 扫描文件数 | 229 | — |
-| 跨文件链接 ≥3 | 208/229 | ⚠️ |
-| 死链接文件 | 1 | ❌ |
-| 命名规范符合 | 228/229 | ⚠️ |
+| 扫描文件数 | 233 | — |
+| 跨文件链接 ≥3 | 226/233 | ⚠️ |
+| 死链接文件 | 0 | ✅ |
+| 命名规范符合 | 232/233 | ⚠️ |
 | 代码块问题文件 | 0 | ✅ |
-| 显式 Bloom 标注 | 209/229 | ✅ |
-| 平均来源标注率 | 15.6% | ✅ |
+| 显式 Bloom 标注 | 233/233 | ✅ |
+| 平均来源标注率 | 14.7% | ⚠️ |
 | TODO 待完成 | 0 | ✅ |
 | TODO 已完成 | 242 | — |
 
@@ -23,61 +23,16 @@
 | 文件 | 链接数 | 现有链接目标 |
 |:---|:---|:---|
 | concept/00_meta/03_bloom_taxonomy.md | 0 | 无 |
-| concept/00_meta/05_cross_reference_matrix.md | 1 | nonexistent_file.md |
+| concept/00_meta/05_cross_reference_matrix.md | 1 | ./README.md |
 | concept/00_meta/08_concept_audit_guide.md | 0 | 无 |
 | concept/03_advanced/02_async_programming.md | 2 | ./02_async.md, ./02_async_patterns.md |
-| concept/03_advanced/03_unsafe_rust.md | 0 | 无 |
-| concept/03_advanced/05_macros.md | 0 | 无 |
-| concept/03_advanced/08_zero_cost_abstractions.md | 0 | 无 |
 | concept/03_advanced/13_async_patterns.md | 1 | ./02_async_patterns.md |
 | concept/04_formal/07_separation_logic.md | 1 | ./11_separation_logic.md |
 | concept/04_formal/09_operational_semantics.md | 1 | ./17_operational_semantics.md |
-| concept/07_future/11_stable_abi_preview.md | 0 | 无 |
-| concept/07_future/12_inline_const_pattern_preview.md | 0 | 无 |
-| concept/07_future/13_must_not_suspend_preview.md | 0 | 无 |
-| concept/07_future/14_lifetime_capture_preview.md | 0 | 无 |
-| concept/07_future/15_rpitit_preview.md | 0 | 无 |
-| concept/07_future/16_type_alias_impl_trait_preview.md | 0 | 无 |
-| concept/07_future/17_const_trait_preview.md | 0 | 无 |
-| concept/07_future/19_rust_2024_edition_preview.md | 0 | 无 |
-| concept/07_future/22_gen_blocks_preview.md | 0 | 无 |
-| concept/07_future/24_wasm_target_evolution.md | 0 | 无 |
-| concept/07_future/26_rust_in_space.md | 0 | 无 |
-
-## 死链接检测
-
-| 源文件 | 链接文本 | 死链接目标 |
-|:---|:---|:---|
-| concept/00_meta/05_cross_reference_matrix.md | 不存在的概念 | `nonexistent_file.md` |
 
 ## 命名不规范的文件
 
 - concept/07_future/19_rust_2024_edition_preview.md
-
-## 缺少 Bloom 层级标注的文件
-
-| 文件 | 检测到的 Bloom 关键词 |
-|:---|:---|
-| concept/00_meta/05_cross_reference_matrix.md | 分析, 评价 |
-| concept/00_meta/08_concept_audit_guide.md | 无 |
-| concept/03_advanced/02_async_programming.md | 无 |
-| concept/03_advanced/03_unsafe_rust.md | 应用 |
-| concept/03_advanced/05_macros.md | 应用 |
-| concept/03_advanced/08_zero_cost_abstractions.md | 应用 |
-| concept/03_advanced/13_async_patterns.md | 无 |
-| concept/04_formal/07_separation_logic.md | 无 |
-| concept/04_formal/09_operational_semantics.md | 无 |
-| concept/07_future/11_stable_abi_preview.md | 无 |
-| concept/07_future/12_inline_const_pattern_preview.md | 应用 |
-| concept/07_future/13_must_not_suspend_preview.md | 应用 |
-| concept/07_future/14_lifetime_capture_preview.md | 应用 |
-| concept/07_future/15_rpitit_preview.md | 无 |
-| concept/07_future/16_type_alias_impl_trait_preview.md | 应用 |
-| concept/07_future/17_const_trait_preview.md | 应用 |
-| concept/07_future/19_rust_2024_edition_preview.md | 无 |
-| concept/07_future/22_gen_blocks_preview.md | 应用 |
-| concept/07_future/24_wasm_target_evolution.md | 无 |
-| concept/07_future/26_rust_in_space.md | 无 |
 
 ## 来源标注率偏低的文件 (< 10%)
 
@@ -98,6 +53,13 @@
 | concept/06_ecosystem/35_pattern_composition_algebra.md | 6 | 107 | 3.0% |
 | concept/06_ecosystem/37_database_systems.md | 16 | 75 | 9.6% |
 | concept/06_ecosystem/39_os_kernel.md | 11 | 60 | 6.9% |
+| concept/06_ecosystem/40_reactive_programming.md | 0 | 160 | 0.0% |
+| concept/06_ecosystem/41_workflow_theory.md | 1 | 144 | 0.2% |
+| concept/06_ecosystem/42_api_design_patterns.md | 10 | 151 | 2.0% |
+| concept/06_ecosystem/43_security_cryptography.md | 28 | 124 | 8.9% |
+| concept/07_future/19_rust_2024_edition_preview.md | 2 | 7 | 8.7% |
+| concept/07_future/24_wasm_target_evolution.md | 2 | 7 | 8.7% |
+| concept/07_future/26_rust_in_space.md | 2 | 7 | 8.7% |
 | concept/07_future/29_ebpf_rust.md | 16 | 143 | 6.1% |
 
 ## 方法论说明

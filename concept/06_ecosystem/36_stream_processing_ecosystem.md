@@ -306,6 +306,48 @@ async fn correct_process<S: Stream<Item = i32> + Unpin>(mut stream: S) {
       └── → rdkafka (Rust 客户端) + 自定义处理
 ```
 
+### 8.5 Kafka 生态与 Rust 客户端
+>
+
+Apache Kafka 是工业界最广泛使用的分布式流平台。Rust 生态通过 `rdkafka`（librdkafka 的绑定）和纯 Rust 实现与 Kafka 集成。
+
+```rust,ignore
+use rdkafka::config::ClientConfig;
+use rdkafka::consumer::{Consumer, StreamConsumer};
+use rdkafka::message::Message;
+
+async fn kafka_consumer() {
+    let consumer: StreamConsumer = ClientConfig::new()
+        .set("group.id", "my-group")
+        .set("bootstrap.servers", "localhost:9092")
+        .set("auto.offset.reset", "earliest")
+        .create().expect("Consumer creation failed");
+
+    consumer.subscribe(&["topic-name"]).expect("Subscribe failed");
+
+    let mut message_stream = consumer.stream();
+    while let Some(result) = message_stream.next().await {
+        match result {
+            Ok(msg) => {
+                let payload = msg.payload().unwrap_or(b"");
+                process_message(payload).await;
+                consumer.commit_message(&msg, rdkafka::consumer::CommitMode::Async).unwrap();
+            }
+            Err(e) => eprintln!("Kafka error: {}", e),
+        }
+    }
+}
+```
+
+| **Kafka 客户端** | **实现语言** | **特点** | **适用场景** |
+|:---|:---|:---|:---|
+| **rdkafka** | C (librdkafka) + Rust 绑定 | 功能完整、性能高、生产验证 | 生产环境 Kafka 集成 |
+| **kafka-rust** | 纯 Rust | 轻量、但功能不完整 | 简单场景、学习用途 |
+| **redpanda** | C++ | Kafka API 兼容、无 ZooKeeper | Kafka 替代、云原生部署 |
+| **fluvio** | 纯 Rust | Kafka API 子集、轻量级 | 边缘计算、IoT |
+
+> **与 Reactive Programming 的关系**: Kafka Consumer 的 `Stream` 接口与 `40_reactive_programming.md` 中的 `Stream` trait 概念一致——都是拉模型（pull-based）的异步数据流抽象。Kafka 的 consumer lag 指标是应用层背压的信号。[来源: [rdkafka crate](https://docs.rs/rdkafka/latest/rdkafka/)] · [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
+
 ---
 
 ## 九、知识来源关系

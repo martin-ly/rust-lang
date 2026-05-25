@@ -1,3 +1,12 @@
+# Const Trait Preview
+
+> **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价 const trait 的设计权衡
+> **前置依赖**: [Trait](../02_intermediate/01_traits.md) · [Const Generics](../02_intermediate/02_generics.md)
+> **后置延伸**: [Const Trait Impl](./11_const_trait_impl_preview.md)
+
+> **来源**: [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632](https://rust-lang.github.io/rfcs/2632-const-trait-impl.html)
 
 ### 10.4 边界测试：const trait 与泛型 const 求值（编译错误/未来特性）
 
