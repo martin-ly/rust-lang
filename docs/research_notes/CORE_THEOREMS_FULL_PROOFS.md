@@ -13,6 +13,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [核心定理完整证明（L2 级）](#核心定理完整证明l2-级)
@@ -45,6 +46,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录 {#-目录}
 >
@@ -80,6 +82,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -244,6 +247,7 @@
 ---
 
 ## 四、类型定理 T-TY3（类型安全）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理 T-TY3**：$\Gamma \vdash e : \tau \rightarrow \neg\exists e': e \to^* e' \land \text{type\_error}(e')$。
@@ -277,6 +281,7 @@
 ---
 
 ## 五、引理与定理编号汇总
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 编号 | 内容 | 来源 |
@@ -297,6 +302,7 @@
 ---
 
 ## 六、与子文档的对应
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 本文档 | 子文档 |
@@ -306,6 +312,7 @@
 | §4 T-TY3 | [type_system_foundations](type_theory/type_system_foundations.md) 定理 3 |
 
 ## 七、形式语言与英文摘要
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md) — 形式语言（推理规则、操作语义、判定形式）、形式证明推导树
@@ -314,6 +321,7 @@
 ---
 
 ## 八、Rust 示例衔接
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 定理 | crates 示例 | 说明 |
@@ -327,6 +335,7 @@
 ---
 
 ## 四、Send/Sync 定理（形式化专篇）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理 SEND-T1**：若 $T : \text{Send}$，则将 $v:T$ 从线程 $t_1$ 转移至 $t_2$ 后，程序在 borrow/ownership 意义下保持内存安全与数据竞争自由。
@@ -352,12 +361,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -403,6 +414,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [research_notes 目录](./README.md)
@@ -509,4 +521,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -28,7 +28,6 @@
 >
 - [类型系统基础](#类型系统基础)
   - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
@@ -139,128 +138,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
-
-## 📊 目录 {#-目录}
-
-> **[来源: Wikipedia - Type System]**
->
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Lambda Calculus]** · **[来源: ACM - Type Systems for Memory Safety]** · **[来源: IEEE - Advanced Type System Features]**
-
-- [类型系统基础](#类型系统基础)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
-    - [核心问题](#核心问题)
-    - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
-    - [类型系统核心概念](#类型系统核心概念)
-    - [相关概念](#相关概念)
-    - [相关理论](#相关理论)
-    - [理论背景](#理论背景)
-    - [Curry-Howard 对应 (Stanford CS242 Lecture 16-20)](#curry-howard-对应-stanford-cs242-lecture-16-20)
-      - [完整的 Curry-Howard 对应表](#完整的-curry-howard-对应表)
-      - [Rust 代码示例](#rust-代码示例)
-      - [对应关系的理论意义](#对应关系的理论意义)
-      - [扩展的 Rust 代码示例](#扩展的-rust-代码示例)
-      - [依赖类型与 Rust 的 const 泛型](#依赖类型与-rust-的-const-泛型)
-    - [类型理论的基础知识](#类型理论的基础知识)
-    - [类型推导的理论基础](#类型推导的理论基础)
-    - [类型安全的理论基础](#类型安全的理论基础)
-      - [Stanford CS242 形式化定义 (Lecture 6-10) {#-形式化定义}](#stanford-cs242-形式化定义-lecture-6-10--形式化定义)
-      - [原有形式化定义](#原有形式化定义)
-    - [相关学术论文的详细分析](#相关学术论文的详细分析)
-      - [1. Types and Programming Languages (TAPL)](#1-types-and-programming-languages-tapl)
-      - [2. The RustBelt Project: Formalizing Rust's Type System](#2-the-rustbelt-project-formalizing-rusts-type-system)
-  - [欧洲大学课程对齐](#欧洲大学课程对齐)
-    - [ETH Zurich (瑞士联邦理工学院)](#eth-zurich-瑞士联邦理工学院)
-    - [University of Cambridge (剑桥大学)](#university-of-cambridge-剑桥大学)
-    - [EPFL (瑞士洛桑联邦理工学院)](#epfl-瑞士洛桑联邦理工学院)
-    - [欧洲大学课程对比总结](#欧洲大学课程对比总结)
-  - [🔬 形式化定义](#-形式化定义)
-    - [1. 类型环境与类型判断](#1-类型环境与类型判断)
-    - [2. 基本类型规则](#2-基本类型规则)
-    - [3. 类型安全](#3-类型安全)
-    - [4. 系统 F (System F) 的完整形式化定义](#4-系统-f-system-f-的完整形式化定义)
-      - [4.1 语法定义](#41-语法定义)
-      - [4.2 类型规则](#42-类型规则)
-      - [4.3 求值规则](#43-求值规则)
-      - [4.4 类型替换引理](#44-类型替换引理)
-      - [4.5 System F 的 Curry-Howard 对应](#45-system-f-的-curry-howard-对应)
-      - [4.6 与 Rust 泛型的对应](#46-与-rust-泛型的对应)
-      - [4.7 系统 F 的类型安全](#47-系统-f-的类型安全)
-    - [5. Hindley-Milner 类型推导算法](#5-hindley-milner-类型推导算法)
-      - [5.1 HM 类型系统的特征](#51-hm-类型系统的特征)
-      - [5.2 类型、类型方案与约束](#52-类型类型方案与约束)
-      - [5.3 Hindley-Milner 类型推导算法 (Algorithm W)](#53-hindley-milner-类型推导算法-algorithm-w)
-      - [5.4 统一算法 (Unification)](#54-统一算法-unification)
-      - [5.5 约束生成与求解的详细算法](#55-约束生成与求解的详细算法)
-      - [5.6 类型推导示例](#56-类型推导示例)
-      - [5.7 HM 算法的正确性](#57-hm-算法的正确性)
-    - [6. 高级类型特性](#6-高级类型特性)
-  - [⚠️ 反例：类型错误与类型推导失败 {#️-反例类型错误类型检查拒绝}](#️-反例类型错误与类型推导失败-️-反例类型错误类型检查拒绝)
-    - [反例概览](#反例概览)
-    - [反例 1: 类型不匹配函数应用](#反例-1-类型不匹配函数应用)
-    - [反例 2: 未绑定变量](#反例-2-未绑定变量)
-    - [反例 3: 类型推导冲突（无限类型）](#反例-3-类型推导冲突无限类型)
-    - [反例 4: 多态限制违反](#反例-4-多态限制违反)
-    - [反例 5: 类型不安全操作（运行时错误）](#反例-5-类型不安全操作运行时错误)
-    - [反例 6: 约束求解失败](#反例-6-约束求解失败)
-    - [反例 7: 生命周期错误（类型系统扩展）](#反例-7-生命周期错误类型系统扩展)
-    - [反例 8: Trait 解析失败](#反例-8-trait-解析失败)
-    - [反例总结表](#反例总结表)
-  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
-  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
-    - [待证明的性质](#待证明的性质)
-    - [证明方法](#证明方法)
-  - [💻 代码示例与实践 {#-代码示例与实践}](#-代码示例与实践--代码示例与实践)
-    - [示例 1: 基本类型](#示例-1-基本类型)
-    - [示例 2: 函数类型](#示例-2-函数类型)
-    - [示例 3: 泛型类型](#示例-3-泛型类型)
-    - [示例 4: 类型约束](#示例-4-类型约束)
-    - [示例 5: 类型推导与推断](#示例-5-类型推导与推断)
-    - [示例 6: 类型安全保证](#示例-6-类型安全保证)
-    - [示例 7: 泛型类型推导](#示例-7-泛型类型推导)
-    - [示例 8: 类型错误检测](#示例-8-类型错误检测)
-    - [示例 5: 类型推导与推断（原示例保留）](#示例-5-类型推导与推断原示例保留)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
-    - [Stanford CS242 课程参考](#stanford-cs242-课程参考)
-    - [学术论文](#学术论文)
-    - [官方文档](#官方文档)
-    - [相关代码](#相关代码)
-    - [工具资源](#工具资源)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
-    - [进行中 🔄（已完成）](#进行中-已完成)
-    - [计划中 📋（已完成）](#计划中-已完成)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
-    - [与 Trait 系统的集成](#与-trait-系统的集成)
-    - [与生命周期的集成](#与生命周期的集成)
-    - [实际应用案例](#实际应用案例)
-  - [🆕 Rust 1.93.0 更新内容 {#-rust-1930-更新内容}](#-rust-1930-更新内容--rust-1930-更新内容)
-    - [MaybeUninit API 增强](#maybeuninit-api-增强)
-    - [切片到数组转换](#切片到数组转换)
-    - [const 上下文增强（Rust 1.91.1+）](#const-上下文增强rust-1911)
-    - [类型系统改进](#类型系统改进)
-    - [Rust 1.93.0 补充](#rust-1930-补充)
-    - [低优先级扩展（形式化占位）](#低优先级扩展形式化占位)
-  - [🆕 Rust 1.94.0 更新内容 {#-rust-1940-更新内容}](#-rust-1940-更新内容--rust-1940-更新内容)
-    - [1. ControlFlow::ok() - 控制流与Option转换](#1-controlflowok---控制流与option转换)
-    - [2. RangeToInclusive 类型](#2-rangetoinclusive-类型)
-    - [3. int\_format\_into - 高性能整数格式化](#3-int_format_into---高性能整数格式化)
-    - [4. 其他类型系统相关改进](#4-其他类型系统相关改进)
-      - [VecDeque::truncate\_front](#vecdequetruncate_front)
-  - [形式化影响总结](#形式化影响总结)
-  - [文档增强摘要](#文档增强摘要)
-    - [本次更新内容](#本次更新内容)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [权威来源索引](#权威来源索引)
-
----
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🎯 研究目标 {#-研究目标}
 
@@ -1016,7 +894,8 @@ $$\Gamma \vdash e : \tau \rightarrow e \text{ is value} \lor \exists e': e \to e
 
 **完整证明**:
 
-我们使用结构归纳法对表达式 $e$ 的结构进行归纳证明。设 $P(e)$ 为命题："如果 $\Gamma \vdash e : \tau$，则 $e$ 是值或存在 $e'$ 使 $e \to e'$"。
+我们使用结构归纳法对表达式 $e$ 的结构进行归纳证明。
+设 $P(e)$ 为命题："如果 $\Gamma \vdash e : \tau$，则 $e$ 是值或存在 $e'$ 使 $e \to e'$"。
 
 ---
 
@@ -1030,7 +909,8 @@ $$\Gamma \vdash e : \tau \rightarrow e \text{ is value} \lor \exists e': e \to e
 - 如果 $x$ 是自由变量，则它不能在闭式程序中类型化
 - 在求值上下文中，变量已被绑定到值，因此 $x$ 会被替换为值
 
-形式化地，对于闭式表达式（无自由变量），变量规则仅在 $x$ 已被替换时适用。因此基础情况中变量不构成阻碍。
+形式化地，对于闭式表达式（无自由变量），变量规则仅在 $x$ 已被替换时适用。
+因此基础情况中变量不构成阻碍。
 
 **情况 2: 值 $v$**
 
@@ -1449,7 +1329,8 @@ $$
 
 **类型错误的形式化定义**:
 
-在类型化 Lambda 演算中，**卡住表达式 (Stuck Expression)** 是指不是值但无法继续求值的表达式。类型错误表现为程序求值到一个卡住状态。
+在类型化 Lambda 演算中，**卡住表达式 (Stuck Expression)** 是指不是值但无法继续求值的表达式。
+类型错误表现为程序求值到一个卡住状态。
 
 **定义**: 表达式 $e$ 是**卡住**的，如果：
 
@@ -1540,17 +1421,21 @@ $$e \to^n e'' \to e'$$
 **类型安全的直观解释**:
 
 $$
-\boxed{\text{Type Safety} = \text{Progress} + \text{Preservation}}$$
+\boxed{\text{Type Safety} = \text{Progress} + \text{Preservation}}
+$$
 
 **1. 进展性的作用**: 确保程序"不会卡住"
+
 - 在每一步求值时，进展性保证程序要么已完成（是值），要么有定义好的下一步
 - 没有进展性，程序可能在某个中间状态既非值又无法继续（如 $42(5)$ - 将整数作为函数应用）
 
 **2. 保持性的作用**: 确保类型"代代相传"
+
 - 在每一步求值后，保持性保证结果仍然是良型的
 - 没有保持性，即使初始程序良型，求值后可能变成不良型表达式（如 $(\lambda x:\text{bool}. \text{if } x \text{ then } 1 \text{ else } 0)(5)$ 如果允许求值会违反类型）
 
 **3. 二者结合**:
+
 - 进展性保证程序总能推进直到成为值
 - 保持性保证类型在求值过程中不会丢失
 - 因此，良型程序的最终结果必定是与初始类型一致的有效值
@@ -1651,6 +1536,7 @@ $$\text{infer}(\Gamma, e) = \tau \leftrightarrow \Gamma \vdash e : \tau$$
 $$\tau ::= \alpha \mid \tau_1 \to \tau_2 \mid \forall \alpha. \tau \mid \text{Int} \mid \text{Bool} \mid \text{Unit}$$
 
 其中：
+
 - $\alpha$：类型变量
 - $\tau_1 \to \tau_2$：函数类型
 - $\forall \alpha. \tau$：全称类型（泛型类型）
@@ -1661,6 +1547,7 @@ $$\tau ::= \alpha \mid \tau_1 \to \tau_2 \mid \forall \alpha. \tau \mid \text{In
 $$e ::= x \mid \lambda x:\tau. e \mid e_1(e_2) \mid \Lambda \alpha. e \mid e[\tau] \mid n \mid b \mid () \mid \text{if } e_1 \text{ then } e_2 \text{ else } e_3$$
 
 其中：
+
 - $x$：变量
 - $\lambda x:\tau. e$：项抽象（函数）
 - $e_1(e_2)$：函数应用
@@ -1757,6 +1644,7 @@ System F 对应于**二阶直觉主义逻辑**（Second-Order Intuitionistic Log
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **Rust 泛型函数**:
+
 ```rust
 fn identity<T>(x: T) -> T {
     x
@@ -1767,6 +1655,7 @@ fn identity<T>(x: T) -> T {
 $$\text{identity} = \Lambda \alpha. \lambda x:\alpha. x : \forall \alpha. \alpha \to \alpha$$
 
 **Rust 实例化**:
+
 ```rust,ignore
 let x = identity(5i32);  // T = i32
 ```
@@ -1790,6 +1679,7 @@ $$(\Lambda \alpha. \lambda x:\alpha. x)[\text{Int}] = \lambda x:\text{Int}. x : 
 系统 F 是类型安全的（由定理 F-1 和 F-2 得出）。
 
 **与简单类型 Lambda 演算的区别**:
+
 - 需要额外的归纳情况处理类型抽象和应用
 - 类型替换引理是保持性证明的关键
 - 求值包括类型层面的归约
@@ -1809,12 +1699,14 @@ Hindley-Milner (HM) 类型系统是一种支持自动类型推导的多态类型
 > **[来源: POPL - Programming Languages Research]**
 
 **特点**：
+
 1. **完全类型推导**：无需显式类型标注即可推导出最一般的类型
 2. **参数多态**：支持泛型（类似于 System F）
 3. **let 多态**：`let` 绑定的变量可以有多态类型
 4. **可判定性**：类型推导是可判定的（尽管是指数级复杂度）
 
 **HM 与 System F 的区别**：
+
 - HM 只允许 let 绑定变量有多态类型，Lambda 绑定变量没有
 - HM 类型推导是可判定的，完整 System F 不是
 - Rust 的类型推导基于 HM 的扩展
@@ -1993,11 +1885,13 @@ solve({C(τ₁,...) = C'(τ₁',...)} ∪ C) =
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **示例 1: 恒等函数**:
+
 ```rust,ignore
 fn identity(x) { x }
 ```
 
 推导过程：
+
 1. $W(\Gamma, \lambda x. x)$
 2. 生成新变量 $\beta$
 3. $W(\Gamma \cup \{x:\beta\}, x) = ([], \beta)$
@@ -2007,11 +1901,13 @@ fn identity(x) { x }
 结果: `fn identity<T>(x: T) -> T`
 
 **示例 2: 复合函数**:
+
 ```rust,ignore
 fn compose(f, g, x) { f(g(x)) }
 ```
 
 推导过程：
+
 1. 约束：$f : \beta \to \gamma$, $g : \alpha \to \beta$, $x : \alpha$
 2. $g(x) : \beta$（由应用规则）
 3. $f(g(x)) : \gamma$（由应用规则）
@@ -2102,6 +1998,7 @@ $$\text{Type}<\text{const } N: \text{usize}>$$
 ---
 
 ## ⚠️ 反例：类型错误与类型推导失败 {#️-反例类型错误类型检查拒绝}
+>
 > **[来源: Rust Official Docs]**
 
 ### 反例概览
@@ -2124,6 +2021,7 @@ $$\text{Type}<\text{const } N: \text{usize}>$$
 > **[来源: TRPL - The Rust Programming Language]**
 
 **错误代码**:
+
 ```rust,ignore
 fn add(x: i32, y: i32) -> i32 {
     x + y
@@ -2139,17 +2037,20 @@ fn main() {
 表达式：$\text{add}(5, "hello")$
 
 类型环境：
+
 - $\Gamma = \{\text{add} : \text{Int} \times \text{Int} \to \text{Int}, 5 : \text{Int}, "hello" : \&\text{Str}\}$
 
 推导尝试：
 $$\frac{\Gamma \vdash \text{add} : \text{Int} \times \text{Int} \to \text{Int} \quad \Gamma \vdash (5, "hello") : \text{Int} \times \&\text{Str}}{\Gamma \vdash \text{add}(5, "hello") : ?}$$
 
 约束冲突：
+
 - 参数类型：$\text{Int} \times \&\text{Str}$
 - 期望类型：$\text{Int} \times \text{Int}$
 - 约束：$\text{Int} = \text{Int}$ ✓, $\&\text{Str} = \text{Int}$ ✗
 
 **错误信息**:
+
 ```
 error[E0308]: mismatched types
   --> src/main.rs:6:23
@@ -2167,6 +2068,7 @@ error[E0308]: mismatched types
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **错误代码**:
+
 ```rust,ignore
 fn main() {
     let x = y + 5;  // 错误: y 未定义
@@ -2185,6 +2087,7 @@ $$\frac{y : \text{Int} \in \Gamma}{\Gamma \vdash y : \text{Int}}$$
 但 $y \notin \text{dom}(\Gamma)$，因此变量规则无法应用。
 
 **错误信息**:
+
 ```
 error[E0425]: cannot find value `y` in this scope
  --> src/main.rs:2:13
@@ -2202,6 +2105,7 @@ error[E0425]: cannot find value `y` in this scope
 > **[来源: ACM - Systems Programming Languages]**
 
 **错误代码**:
+
 ```rust,ignore
 // 尝试构造 Omega 组合子
 fn omega<F>(f: F) -> !
@@ -2215,6 +2119,7 @@ where
 **形式化分析**:
 
 尝试推导类型：
+
 - $f : \tau_f$
 - 从 $f(f)$ 得到约束：$\tau_f = \tau_f \to \bot$
 
@@ -2223,6 +2128,7 @@ where
 在 Hindley-Milner 类型系统中，这违反了**出现检查 (Occurs Check)**。
 
 **错误信息**:
+
 ```
 error[E0277]: the trait bound `F: FnOnce<(F,)>` is not satisfied
   --> src/main.rs:5:5
@@ -2232,11 +2138,13 @@ error[E0277]: the trait bound `F: FnOnce<(F,)>` is not satisfied
 ```
 
 **理论解释**:
+
 - 约束 $\alpha = \alpha \to \beta$ 会导致无限类型
 - 统一算法通过出现检查拒绝此类约束
 - 这防止了 Y 组合子（不动点组合子）的直接表达，除非显式使用递归类型
 
 **正确写法（使用 trait object）**:
+
 ```rust,ignore
 fn omega(f: Box<dyn Fn(Box<dyn Fn(_) -> !>) -> !>) -> ! {
     f(f)
@@ -2250,6 +2158,7 @@ fn omega(f: Box<dyn Fn(Box<dyn Fn(_) -> !>) -> !>) -> ! {
 > **[来源: IEEE - Programming Language Standards]**
 
 **错误代码**:
+
 ```rust
 fn bad_poly<F>(f: F)
 where
@@ -2263,6 +2172,7 @@ where
 ```
 
 **更隐蔽的例子**:
+
 ```rust
 fn lambda_poly() {
     // 尝试在 lambda 中使用多态
@@ -2286,6 +2196,7 @@ let id = λx. x in        // id : ∀α. α → α (多态)
 ```
 
 **理论解释**:
+
 - **let 多态**: `let x = e₁ in e₂` 中，$x$ 可以被实例化为不同类型
 - **Lambda 限制**: `(λx. e)` 中的 $x$ 在整个作用域只有一个类型
 - 这保持了类型推导的可判定性
@@ -2297,6 +2208,7 @@ let id = λx. x in        // id : ∀α. α → α (多态)
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **Unsafe Rust 示例**:
+
 ```rust
 use std::ptr;
 
@@ -2309,6 +2221,7 @@ unsafe fn bad_deref() {
 **形式化分析**:
 
 在 Safe Rust 中，进展性保证以下情况不会发生：
+
 - 解引用空指针
 - 使用悬垂引用
 - 数组越界访问
@@ -2336,6 +2249,7 @@ unsafe fn unsafe_operations() {
 ```
 
 **理论解释**:
+
 - **类型安全** $\neq$ **无运行时错误**
 - 类型安全保证："不会以类型系统不允许的方式使用值"
 - `panic` 是安全的（程序有序终止）
@@ -2348,6 +2262,7 @@ unsafe fn unsafe_operations() {
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **复杂类型推导失败**:
+
 ```rust
 fn complex_failure<T, U, V>(
     f: impl Fn(T) -> U,
@@ -2372,6 +2287,7 @@ fn use_complex() {
 **约束分析**:
 
 生成的约束：
+
 - $f : T \to U = \text{Int} \to \text{String}$
 - $g : U \to V = \text{String} \to \text{Bool}$
 - $h : V \to T = \text{Bool} \to \text{Float}$
@@ -2389,6 +2305,7 @@ fn use_complex() {
 > **[来源: POPL - Programming Languages Research]**
 
 **悬垂引用**:
+
 ```rust,ignore
 fn dangling_reference() -> &i32 {
     let x = 5;
@@ -2402,6 +2319,7 @@ fn dangling_reference() -> &i32 {
 $$\&'a \tau \quad \text{(引用类型)}$$
 
 推导：
+
 - $x : \text{Int}$，生命周期为 `'local`
 - `&x : &'local Int`
 - 返回类型期望：$\&'static \text{Int}$ 或更一般 $\&'a \text{Int}$
@@ -2410,6 +2328,7 @@ $$\&'a \tau \quad \text{(引用类型)}$$
 但 $'local$ 在当前作用域结束，无法满足 outlives 约束。
 
 **错误信息**:
+
 ```
 error[E0106]: missing lifetime specifier
 error[E0515]: cannot return reference to local variable `x`
@@ -2422,6 +2341,7 @@ error[E0515]: cannot return reference to local variable `x`
 > **[来源: PLDI - Programming Language Design]**
 
 **Orphan 规则违反**:
+
 ```rust
 // 错误: 违反孤儿规则
 trait MyTrait {}
@@ -2432,6 +2352,7 @@ impl MyTrait for String {}  // 可以: 当前 crate 的 trait
 ```
 
 **矛盾实现**:
+
 ```rust,ignore
 trait Same<T> {
     fn is_same(&self, other: &T) -> bool;
@@ -2455,6 +2376,7 @@ impl<T> Same<T> for T {
 ```
 
 **理论解释**:
+
 - **孤儿规则**: 防止 impl 冲突，保证 trait 解析的一致性
 - **一致性**: 对于任何类型，最多只有一个 impl 适用
 - 这是保证类型安全（特别是泛型代码的 monomorphization 安全）的关键
@@ -2479,6 +2401,7 @@ impl<T> Same<T> for T {
 ---
 
 ## 🌳 公理-定理证明树 {#-公理-定理证明树}
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -2502,6 +2425,7 @@ impl<T> Same<T> for T {
 ---
 
 ## ✅ 证明目标 {#-证明目标}
+>
 > **[来源: Rust Official Docs]**
 
 ### 待证明的性质
@@ -2523,6 +2447,7 @@ impl<T> Same<T> for T {
 ---
 
 ## 💻 代码示例与实践 {#-代码示例与实践}
+>
 > **[来源: Rust Official Docs]**
 
 ### 示例 1: 基本类型
@@ -2769,6 +2694,7 @@ fn main() {
 ---
 
 ## 📖 参考文献 {#-参考文献}
+>
 > **[来源: Rust Official Docs]**
 
 ### Stanford CS242 课程参考
@@ -2830,6 +2756,7 @@ fn main() {
 ---
 
 ## 🔄 研究进展 {#-研究进展}
+>
 > **[来源: Rust Official Docs]**
 
 ### 已完成 ✅ {#已完成-}
@@ -2859,6 +2786,7 @@ fn main() {
 ---
 
 ## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+>
 > **[来源: Rust Official Docs]**
 
 ### 与 Trait 系统的集成
@@ -2895,6 +2823,7 @@ fn main() {
 ---
 
 ## 🆕 Rust 1.93.0 更新内容 {#-rust-1930-更新内容}
+>
 > **[来源: Rust Official Docs]**
 
 ### MaybeUninit API 增强
@@ -3365,6 +3294,7 @@ fn truncate_front(&mut self, len: usize)
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档中的所有Rust代码示例均已：
+
 - ✅ 使用Rust 1.94语法验证
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
@@ -3470,7 +3400,6 @@ fn truncate_front(&mut self, len: usize)
 > **[来源: ACM - Type Systems]**
 
 > **[来源: PLDI - Programming Language Design]**
-
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -4557,4 +4486,3 @@ fn truncate_front(&mut self, len: usize)
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

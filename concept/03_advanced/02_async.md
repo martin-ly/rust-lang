@@ -115,6 +115,9 @@
     - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
     - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
     - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
+    - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
+    - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
+    - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
 
 ## 〇、认知路径（Cognitive Path）
 >
@@ -3912,7 +3915,7 @@ impl Future for BadFuture {
 trait Service {
     // ❌ 编译错误: Rust 当前（stable）不支持 trait 中的 async fn
     // async fn process(&self) -> i32;
-    
+
     // workaround: 手动返回 Pin<Box<dyn Future>>
     fn process(&self) -> std::pin::Pin<Box<dyn std::future::Future<Output = i32> + '_>>;
 }

@@ -1109,12 +1109,12 @@ fn main() {
     let mut v = vec![1, 2, 3];
     // ❌ 编译错误: 试图在 map 闭包中修改外部状态
     // let doubled: Vec<i32> = v.iter().map(|x| { v.push(x * 2); x * 2 }).collect();
-    
+
     // 正确: 命令式风格
     for x in &v {
         println!("{}", x * 2);
     }
-    
+
     // 或函数式风格（不修改外部状态）
     let doubled: Vec<i32> = v.iter().map(|x| x * 2).collect();
 }

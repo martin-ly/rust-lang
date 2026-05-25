@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust形式化生态思维导图](#rust形式化生态思维导图)
@@ -25,6 +26,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 生态系统层次
 >
@@ -99,6 +101,7 @@
 ---
 
 ## 形式化语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -120,6 +123,7 @@
 ---
 
 ## 研究项目
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -141,6 +145,7 @@
 ---
 
 ## 应用路径
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -165,6 +170,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -223,6 +229,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -309,4 +316,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

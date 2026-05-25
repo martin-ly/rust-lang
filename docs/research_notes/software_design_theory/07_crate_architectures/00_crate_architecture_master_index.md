@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 工业级 Crate 架构解构总索引](#rust-工业级-crate-架构解构总索引)
@@ -26,6 +27,7 @@
     - [路径 G：可观测性与系统监控（推荐优先级：高）](#路径-g可观测性与系统监控推荐优先级高)
     - [路径 G：高性能并发与数据结构（推荐优先级：高）](#路径-g高性能并发与数据结构推荐优先级高)
   - [七、与其他概念文件的交叉引用](#七与其他概念文件的交叉引用)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -50,6 +52,7 @@
 ---
 
 ## 二、Crate 架构全景矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 编号 | Crate | 领域 | 核心抽象 | 类型系统关键利用 | 零成本特性 | 文件链接 |
@@ -81,6 +84,7 @@
 ---
 
 ## 三、按层次分类的架构图谱
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -158,6 +162,7 @@ graph TD
 ---
 
 ## 四、设计模式横切分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 设计模式 | 应用 Crate | Rust 类型系统如何支持 |
@@ -176,6 +181,7 @@ graph TD
 ---
 
 ## 五、类型系统利用对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 技术维度 | Serde | Tower | Diesel | Bevy | Tokio |
@@ -208,9 +214,11 @@ graph TD
 ---
 
 ## 六、学习路径推荐
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 路径 A：异步 Web 全栈（推荐优先级：高）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Tokio** → 理解异步运行时核心（调度、IO、Timer）
@@ -219,6 +227,7 @@ graph TD
 4. **Axum** 或 **Actix-web** → 理解 Web 框架如何将上述组件组装为应用层
 
 ### 路径 B：数据密集型系统（推荐优先级：高）
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **Serde** → 类型安全序列化基础
@@ -227,6 +236,7 @@ graph TD
 4. **nalgebra/ndarray** → 数值计算与科学计算
 
 ### 路径 C：系统编程与图形（推荐优先级：中）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Tokio** → 异步基础
@@ -234,6 +244,7 @@ graph TD
 3. **Bevy** → ECS 架构在游戏引擎中的极致运用
 
 ### 路径 D：工具与 CLI（推荐优先级：中）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Clap** → 声明式 CLI 解析
@@ -241,6 +252,7 @@ graph TD
 3. **Reqwest** → 与外部 API 的 HTTP 交互
 
 ### 路径 E：分布式 RPC 与 WASM（推荐优先级：中）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **Tonic** → gRPC 服务定义与流式通信
@@ -248,6 +260,7 @@ graph TD
 3. **Tower** → 中间件组合与横切关注点
 
 ### 路径 F：底层系统编程（推荐优先级：高）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **mio** → IO 多路复用与事件驱动基础
@@ -255,6 +268,7 @@ graph TD
 3. **Crossbeam** → 无锁并发原语补充
 
 ### 路径 G：可观测性与系统监控（推荐优先级：高）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Tracing** → 结构化日志与分布式追踪基础
@@ -262,6 +276,7 @@ graph TD
 3. **Ratatui** → 构建终端监控面板与交互式调试工具
 
 ### 路径 G：高性能并发与数据结构（推荐优先级：高）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Crossbeam** → 无锁并发原语与 EBR 内存回收
@@ -271,6 +286,7 @@ graph TD
 ---
 
 ## 七、与其他概念文件的交叉引用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [concept L6: 设计模式](../../../../concept/06_ecosystem/02_patterns.md) — GoF 23 种模式与 crate 级架构的对应关系
@@ -376,4 +392,3 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -1,6 +1,7 @@
 ﻿# 充分表达 vs 非充分表达论证
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [充分表达 vs 非充分表达论证](#充分表达-vs-非充分表达论证)
@@ -33,6 +34,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -75,6 +77,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -241,6 +244,7 @@
 ---
 
 ## 工作流形式化与引擎表达力（D3.1–D3.3）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Def WF1（工作流）**：工作流 = 多步骤业务过程 + 状态转换 + 可选补偿 + 可选人工任务 + 超时/重试。与 23/43 构建块正交；与执行模型（同步/异步/并发/分布式）为不同维度。
@@ -268,6 +272,7 @@
 ---
 
 ## 等价表达示例（代码级）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模式 | GoF 风格 | Rust 等价 |
@@ -333,6 +338,7 @@ impl<R: Renderer> Page<R> {
 ---
 
 ## 近似表达示例（代码级）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | GoF 风格 | Rust 近似 | 差异 |
@@ -399,6 +405,7 @@ impl Originator {
 ---
 
 ## 选择建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 需求 | 建议 |
@@ -411,6 +418,7 @@ impl Originator {
 ---
 
 ## 不可表达边界的替代策略
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 不可表达 | 替代策略 |
@@ -423,6 +431,7 @@ impl Originator {
 ---
 
 ## 表达边界与性能
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 表达类型 | 性能特征 |
@@ -434,6 +443,7 @@ impl Originator {
 ---
 
 ## 与理论衔接
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)：边界定理 EB1–EB6
@@ -443,6 +453,7 @@ impl Originator {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -501,6 +512,7 @@ impl Originator {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [02_workflow_safe_complete_models 目录](./README.md)
@@ -525,7 +537,6 @@ impl Originator {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
-
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -658,4 +669,3 @@ impl Originator {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

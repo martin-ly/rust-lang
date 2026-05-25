@@ -40,6 +40,7 @@
     - [10.2 边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）](#102-边界测试c-的-linq-与-rust-的迭代器编译错误)
     - [10.3 边界测试：C# 的 async/await 与 Rust 的 `?` 在 async 中的交互（编译错误）](#103-边界测试c-的-asyncawait-与-rust-的--在-async-中的交互编译错误)
     - [10.4 边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误）](#104-边界测试c-的属性与-rust-的派生宏的编译期差异编译错误)
+    - [10.3 边界测试：C# 的 async/await 与 Rust 的 Future 语义差异（运行时行为差异）](#103-边界测试c-的-asyncawait-与-rust-的-future-语义差异运行时行为差异)
 
 ---
 
@@ -893,7 +894,7 @@ fn main() {
     // let t1 = task1(); // 不执行！只是创建 Future
     // let t2 = task2(); // 同上
     // 必须用 .await 或 spawn 驱动执行
-    
+
     // C# 的 async/await: 调用 async 方法立即开始执行（直到第一个 await）
     // Rust: async fn 返回 Future，执行在 .await 或 spawn 时开始
 }

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [应用树](#应用树)
@@ -43,6 +44,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -81,6 +83,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -190,6 +193,7 @@ mindmap
 ---
 
 ## 三、网络服务应用树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 概念树
@@ -299,9 +303,11 @@ mindmap
 ---
 
 ## 四、数据系统应用树
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 概念树
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -363,6 +369,7 @@ mindmap
 ```
 
 ### 4.2 数据系统层次
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 层次 | 组件 | 关键技术 | Rust生态 |
@@ -373,6 +380,7 @@ mindmap
 | **服务层** | 协议、API | PostgreSQL协议 | pgwire |
 
 ### 4.3 数据库开发技能树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -407,9 +415,11 @@ mindmap
 ---
 
 ## 五、跨领域通用能力
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 通用技能矩阵
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 技能 | 系统编程 | 网络服务 | 数据系统 | 重要度 |
@@ -424,6 +434,7 @@ mindmap
 | **测试策略** | ✅ | ✅ | ✅ | ⭐⭐⭐ |
 
 ### 5.2 跨领域架构模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -453,9 +464,11 @@ mindmap
 ---
 
 ## 六、相关资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 学习路径文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 领域 | 入门文档 | 进阶文档 |
@@ -465,6 +478,7 @@ mindmap
 | 数据系统 | [TYPE_SYSTEM](./TUTORIAL_TYPE_SYSTEM.md) | [UNSAFE_RUST](../05_guides/UNSAFE_RUST_GUIDE.md) |
 
 ### 6.2 领域特定资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 领域 | 关键 Crate | 示例项目 |
@@ -474,6 +488,7 @@ mindmap
 | 数据系统 | datafusion, polars, sled | TiKV, MeiliSearch |
 
 ### 6.3 应用树总览
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -508,11 +523,13 @@ Rust 应用领域总览
 ---
 
 ## 🆕 Rust 1.94 研究更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 核心研究点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - rray_windows 的形式化语义
@@ -527,12 +544,14 @@ Rust 应用领域总览
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -578,6 +597,7 @@ Rust 应用领域总览
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [research_notes 目录](./README.md)
@@ -777,4 +797,3 @@ Rust 应用领域总览
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

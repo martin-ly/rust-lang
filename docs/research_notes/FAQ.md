@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [常见问题解答 (FAQ)](#常见问题解答-faq)
@@ -49,6 +50,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录 {#-目录}
 >
@@ -93,6 +95,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -279,6 +282,7 @@
 ---
 
 ## ✍️ 贡献相关问题 {#️-贡献相关问题}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Q7: 我可以贡献哪些内容？🔵
@@ -342,6 +346,7 @@
 ---
 
 ## 🛠️ 工具使用问题 {#️-工具使用问题}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Q10: 我应该使用哪些研究工具？🟢
@@ -405,6 +410,7 @@
 ---
 
 ## 📖 文档相关问题 {#-文档相关问题}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Q13: 研究笔记的格式要求是什么？🔵
@@ -470,6 +476,7 @@
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 核心文档
@@ -498,6 +505,7 @@
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -509,6 +517,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -561,6 +570,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -716,4 +726,3 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

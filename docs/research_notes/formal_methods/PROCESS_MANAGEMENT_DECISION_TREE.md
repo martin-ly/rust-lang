@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [进程管理决策树](#进程管理决策树)
@@ -26,6 +27,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 IPC 机制选择决策树
 >
@@ -166,6 +168,7 @@ fn unix_domain_socket_server() {
 ---
 
 ## 🔄 进程同步决策
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 同步原语选择
@@ -209,6 +212,7 @@ fn process_sync() {
 ---
 
 ## ⚡ 性能优化决策
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 大数据传输优化
@@ -224,6 +228,7 @@ fn process_sync() {
 ```
 
 ### 代码示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -253,6 +258,7 @@ fn message_passing() {
 ---
 
 ## 🔗 相关文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [C07 主索引](../../../crates/c07_process/docs/tier_01_foundations/02_主索引导航.md)
@@ -277,6 +283,7 @@ fn message_passing() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [formal_methods 目录](./README.md)
@@ -386,4 +393,3 @@ fn message_passing() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

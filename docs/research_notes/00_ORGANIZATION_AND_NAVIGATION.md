@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [research\_notes 组织架构与导航](#research_notes-组织架构与导航)
@@ -29,6 +30,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 一、从这里开始（单入口）
 >
@@ -127,6 +129,7 @@ research_notes/
 ---
 
 ## 四、文档角色速查
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 角色 | 文档 | 何时用 |
@@ -142,6 +145,7 @@ research_notes/
 ---
 
 ## 五、常见困惑与解答
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 困惑 | 解答 |
@@ -156,6 +160,7 @@ research_notes/
 ---
 
 ## 六、权威来源与版本约定
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本目录文档与 Rust 1.93 完全对齐，引用以下权威来源时统一采用下列版本说明：
@@ -172,6 +177,7 @@ research_notes/
 ---
 
 ## 七、与顶层 docs 的衔接
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | docs 入口 | research_notes 对应 |
@@ -188,6 +194,7 @@ research_notes/
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -246,6 +253,7 @@ research_notes/
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -341,4 +349,3 @@ research_notes/
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

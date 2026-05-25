@@ -1,6 +1,7 @@
 # 监管环境与认证审批
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [监管环境与认证审批](#监管环境与认证审批)
@@ -151,6 +152,7 @@
 ---
 
 ## 2. 认证审批流程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 汽车ISO 26262认证
@@ -222,9 +224,11 @@ Rust特定挑战:
 ---
 
 ## 3. 成功案例分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 Ferrocene认证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -249,6 +253,7 @@ Rust特定挑战:
 ```
 
 ### 3.2 汽车ECU项目
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -274,9 +279,11 @@ Rust特定挑战:
 ---
 
 ## 4. 监管趋势
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 内存安全法规
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -302,6 +309,7 @@ Rust特定挑战:
 ```
 
 ### 4.2 行业指导更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -327,9 +335,11 @@ IEC/TC65 (工业):
 ---
 
 ## 5. 监管沟通策略
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 预沟通
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -347,6 +357,7 @@ IEC/TC65 (工业):
 ```
 
 ### 5.2 认证过程管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -366,9 +377,11 @@ IEC/TC65 (工业):
 ---
 
 ## 6. 区域差异
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 主要市场对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 市场 | 成熟度 | 接受度 | 时间 | 成本 |
@@ -379,6 +392,7 @@ IEC/TC65 (工业):
 | **日本** | 高 | 中 | 长 | 高 |
 
 ### 6.2 市场准入策略
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -422,6 +436,7 @@ IEC/TC65 (工业):
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
@@ -564,4 +579,3 @@ IEC/TC65 (工业):
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

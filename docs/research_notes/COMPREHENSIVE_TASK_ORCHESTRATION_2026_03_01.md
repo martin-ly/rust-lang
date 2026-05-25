@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Research Notes 全面任务编排文档](#research-notes-全面任务编排文档)
@@ -42,6 +43,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 真实状态盘点
 >
@@ -228,6 +230,7 @@
 ---
 
 ## 📋 任务编排
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Phase 0: 全面审计与清理 (1天)
@@ -267,6 +270,7 @@
 | P2-T5 | 补充边界情况分析 | 4h | ⏳ |
 
 ### Phase 3: 思维表征增强 (4天)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
@@ -278,6 +282,7 @@
 | P3-T5 | 扩展决策树分支(4个) | 8h | ⏳ |
 
 ### Phase 4: 教程与实用内容 (3天)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
@@ -289,6 +294,7 @@
 | P4-T5 | 添加练习题与答案 | 4h | ⏳ |
 
 ### Phase 5: Coq骨架与L3证明 (5天 - 可选)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
@@ -300,6 +306,7 @@
 | P5-T5 | 编写Coq证明指南 | 4h | ⏳ |
 
 ### Phase 6: 索引与导航完善 (2天)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
@@ -310,6 +317,7 @@
 | P6-T4 | 添加搜索标签 | 4h | ⏳ |
 
 ### Phase 7: 最终验证与报告 (1天)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
@@ -321,6 +329,7 @@
 ---
 
 ## 📈 进度追踪
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -337,6 +346,7 @@ Phase 7: 验证报告      [░░░░░░░░░░] 0%  ⏳ 待开始
 ---
 
 ## 🎯 成功标准
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 标准 | 目标 | 测量方式 |
@@ -359,12 +369,14 @@ Phase 7: 验证报告      [░░░░░░░░░░] 0%  ⏳ 待开始
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -410,6 +422,7 @@ Phase 7: 验证报告      [░░░░░░░░░░] 0%  ⏳ 待开始
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [research_notes 目录](./README.md)
@@ -515,4 +528,3 @@ Phase 7: 验证报告      [░░░░░░░░░░] 0%  ⏳ 待开始
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

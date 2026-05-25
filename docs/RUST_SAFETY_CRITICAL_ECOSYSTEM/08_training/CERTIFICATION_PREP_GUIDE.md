@@ -1,6 +1,7 @@
 # 功能安全认证备考指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [功能安全认证备考指南](#功能安全认证备考指南)
@@ -346,9 +347,11 @@ Rust特定:
 ---
 
 ## IEC 61508 认证备考
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 与ISO 26262的主要差异
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -367,6 +370,7 @@ Rust特定:
 ```
 
 ### Part 3: 软件要求 (重点)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -387,6 +391,7 @@ Rust实现:
 ```
 
 ### 表格A.1 - 技术措施 (Rust映射)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 措施 | 描述 | Rust实现 | SIL |
@@ -404,9 +409,11 @@ Rust实现:
 ---
 
 ## DO-178C 认证备考
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Rust在DO-178C中的特殊考虑
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -424,6 +431,7 @@ Rust实现:
 ```
 
 ### 软件等级与验证方法
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 等级 | 错误影响 | Rust适用性 | 验证强度 |
@@ -435,6 +443,7 @@ Rust实现:
 | **E** | 无安全影响 | 高 | 最低 |
 
 ### 目标与Rust实现
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -458,9 +467,11 @@ Rust特定活动:
 ---
 
 ## 考试策略
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 时间管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -483,6 +494,7 @@ ISO 26262考试 (3小时):
 ```
 
 ### 答题技巧
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -506,6 +518,7 @@ ISO 26262考试 (3小时):
 ```
 
 ### 复习计划
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -540,9 +553,11 @@ ISO 26262考试 (3小时):
 ---
 
 ## 实用工具
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 学习工具
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -561,6 +576,7 @@ ISO 26262考试 (3小时):
 ```
 
 ### 练习资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -580,9 +596,11 @@ ISO 26262考试 (3小时):
 ---
 
 ## 考试当天
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 准备清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -601,6 +619,7 @@ ISO 26262考试 (3小时):
 ```
 
 ### 注意事项
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -644,6 +663,7 @@ ISO 26262考试 (3小时):
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -811,4 +831,3 @@ ISO 26262考试 (3小时):
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

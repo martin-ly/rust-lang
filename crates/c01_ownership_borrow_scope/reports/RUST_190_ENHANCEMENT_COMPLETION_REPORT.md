@@ -48,6 +48,7 @@
     - [中期规划 / Medium-term Planning](#中期规划--medium-term-planning)
     - [长期愿景 / Long-term Vision](#长期愿景--long-term-vision)
   - [总结 / Summary](#总结--summary)
+  - [**测试覆盖 / Test Coverage**: ⭐⭐⭐⭐⭐ 全面 / Comprehensive](#测试覆盖--test-coverage--全面--comprehensive)
 
 ## 项目概述 / Project Overview
 

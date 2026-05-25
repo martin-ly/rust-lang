@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [分布式模式矩阵](#分布式模式矩阵)
@@ -38,6 +39,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -306,6 +308,7 @@ let result = with_retry(|| async {
 ---
 
 ## 反模式警示
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 反模式 | 问题 | 解决方案 |
@@ -319,6 +322,7 @@ let result = with_retry(|| async {
 ---
 
 ## 形式化验证视角
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模式 | 可验证属性 | 验证方法 |
@@ -331,6 +335,7 @@ let result = with_retry(|| async {
 ---
 
 ## 推荐技术栈
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -361,6 +366,7 @@ prost = "0.13"         # Protocol Buffers
 ---
 
 ## 分布式模式对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | 一致性 | 可用性 | 分区容错 | 复杂度 | 延迟 | Rust实现 |
@@ -378,6 +384,7 @@ prost = "0.13"         # Protocol Buffers
 ---
 
 ## 模式适用场景
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景 | 推荐模式 | 理由 |
@@ -392,6 +399,7 @@ prost = "0.13"         # Protocol Buffers
 ---
 
 ## CAP权衡
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -406,6 +414,7 @@ Saga/CQRS/Event Sourcing → AP (可用+分区容忍)
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -464,6 +473,7 @@ Saga/CQRS/Event Sourcing → AP (可用+分区容忍)
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [formal_methods 目录](./README.md)
@@ -598,4 +608,3 @@ Saga/CQRS/Event Sourcing → AP (可用+分区容忍)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

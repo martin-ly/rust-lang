@@ -42,6 +42,8 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：`crossbeam::channel` 的关闭检测与迭代终止（逻辑错误）](#103-边界测试crossbeamchannel-的关闭检测与迭代终止逻辑错误)
+    - [10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）](#104-边界测试sendsync-的-auto-trait-边界与线程安全编译错误)
 
 ---
 
@@ -808,11 +810,11 @@ use crossbeam::channel::bounded;
 
 fn main() {
     let (tx, rx) = bounded::<i32>(10);
-    
+
     tx.send(1).unwrap();
     tx.send(2).unwrap();
     drop(tx); // 关闭发送端
-    
+
     // ❌ 逻辑错误: 未检测 channel 关闭，迭代器提前终止不通知
     for msg in rx.iter() {
         println!("{}", msg);

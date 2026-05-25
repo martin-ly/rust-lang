@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [多维概念矩阵对比文档](#多维概念矩阵对比文档)
@@ -57,6 +58,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录 {#-目录}
 >
@@ -109,6 +111,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -239,6 +242,7 @@
 ---
 
 ## 🔍 技术选型矩阵 {#-技术选型矩阵}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 内存管理选型矩阵
@@ -323,6 +327,7 @@
 ---
 
 ## ⚡ 性能对比矩阵 {#-性能对比矩阵}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 数据结构性能矩阵
@@ -364,6 +369,7 @@
 ---
 
 ## ⚠️ Rust 1.93 行为变更影响（性能矩阵补充） {#️-rust-193-行为变更影响性能矩阵补充}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **Copy specialization 移除**：Rust 1.93 中 `Copy` trait 的实现不再依赖编译器内部 specialization，可能导致部分 `Vec<T>`、迭代器复制等热点路径的轻微性能回归。建议在性能关键路径上使用 `criterion` 做 A/B 对比；若发现回归，可尝试显式 `clone()` 或调整数据布局。
@@ -376,6 +382,7 @@
 ---
 
 ## 📐 形式化理论概念对比矩阵 {#-形式化理论概念对比矩阵}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > 用于梳理概念定义、公理、定理、证明方法与反例的对应关系。
@@ -420,6 +427,7 @@
 | 算法正确性 | 双向证明 | 充分性+必要性 | 类型推导 |
 
 ### 设计机制论证矩阵（新增）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > 用于梳理「为何如此设计」的理由与完整论证。详见 [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md)。
@@ -435,6 +443,7 @@
 | Trait 对象 | 运行时多态 | vtable、对象安全 | trait_system_formalization | 反例 |
 
 ### 执行模型边界矩阵（扩展）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > 五模型 × 三维边界。详见 [06_boundary_analysis](../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md)。
@@ -448,6 +457,7 @@
 | 分布式 | Safe/unsafe | 库 | 近似 | Distributed |
 
 ### 设计模式边界矩阵（扩展）
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > 23 模式 × 三维边界。详见 [04_boundary_matrix](../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)。
@@ -459,6 +469,7 @@
 | 行为型 | Chain, Command, Iterator, Mediator, State, Strategy | Interpreter, Memento, Observer, Template Method, Visitor | |
 
 ### 公理-定理依赖矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 定理 | 依赖公理/规则 | 证明方法 | 文档 |
@@ -479,6 +490,7 @@
 ---
 
 ## 🛡️ 安全性对比矩阵 {#️-安全性对比矩阵}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 机制           | 内存安全   | 类型安全   | 线程安全   | 适用场景 | 推荐度     |
@@ -491,6 +503,7 @@
 ---
 
 ## 📚 相关文档 {#-相关文档}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [验证工具对比矩阵](../research_notes/formal_methods/VERIFICATION_TOOLS_MATRIX.md) - Kani/Prusti/Miri 等工具对比
@@ -511,11 +524,13 @@
 ---
 
 ## Rust 1.95+ 思维表征更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 新增思维表征
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 新特性可扩展思维表征方式：
@@ -527,6 +542,7 @@ Rust 新特性可扩展思维表征方式：
 | LazyCell/LazyLock | 状态图 | 延迟初始化的状态转换 |
 
 ### 示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 `
@@ -543,12 +559,14 @@ ust
 ---
 
 ## Rust 1.95+ 持续更新更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -594,6 +612,7 @@ ust
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [04_thinking 目录](./README.md)
@@ -737,4 +756,3 @@ ust
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

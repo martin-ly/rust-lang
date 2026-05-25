@@ -1,6 +1,7 @@
 ﻿# Rust 核心特性完整链：定义→示例→论证→证明
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 核心特性完整链：定义→示例→论证→证明](#rust-核心特性完整链定义示例论证证明)
@@ -29,6 +30,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -68,6 +70,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -108,6 +111,7 @@
 ---
 
 ## 3. 生命周期
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 维度 | 内容 |
@@ -125,6 +129,7 @@
 ---
 
 ## 4. Pin
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 维度 | 内容 |
@@ -142,6 +147,7 @@
 ---
 
 ## 5. Send/Sync
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | 内容 |
@@ -159,6 +165,7 @@
 ---
 
 ## 6. Future
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | 内容 |
@@ -176,6 +183,7 @@
 ---
 
 ## 7. Trait
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | 内容 |
@@ -193,6 +201,7 @@
 ---
 
 ## 8. 泛型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 维度 | 内容 |
@@ -210,6 +219,7 @@
 ---
 
 ## 9. match
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 维度 | 内容 |
@@ -227,6 +237,7 @@
 ---
 
 ## 10. for
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 内容 |
@@ -244,6 +255,7 @@
 ---
 
 ## 11. Option/Result
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 维度 | 内容 |
@@ -261,6 +273,7 @@
 ---
 
 ## 12. 闭包
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 维度 | 内容 |
@@ -278,6 +291,7 @@
 ---
 
 ## 13. ? 操作符
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | 内容 |
@@ -309,6 +323,7 @@
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 用途 |
@@ -326,6 +341,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -384,6 +400,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -497,4 +514,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

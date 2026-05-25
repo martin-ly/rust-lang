@@ -31,6 +31,7 @@
   - [📖 引用信息](#-引用信息)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -202,6 +203,7 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
 VerusBelt 的研究成果对以下领域有直接影响：
 
 ### 1. 操作系统内核验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - Verus 已被用于验证 **Ironclad Apps** (Microsoft Research)
@@ -209,18 +211,21 @@ VerusBelt 的研究成果对以下领域有直接影响：
 - 与 **Rust for Linux** 项目潜在关联：未来可能用 Verus 验证内核模块
 
 ### 2. 密码学实现验证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 常量时间验证 (constant-time verification)
 - 防止侧信道漏洞的形式化保证
 
 ### 3. 分布式系统协议
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - Verus 已用于验证分布式共识协议
 - VerusBelt 保证 proof 代码不会污染 exec 代码
 
 ### 4. 行业标准
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 标准 | 要求 | Verus/VerusBelt 适用性 |
@@ -232,6 +237,7 @@ VerusBelt 的研究成果对以下领域有直接影响：
 ---
 
 ## 📖 引用信息
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **APA 格式**:
@@ -289,6 +295,7 @@ Design and Implementation (PLDI 2026).
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -390,4 +397,3 @@ Design and Implementation (PLDI 2026).
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

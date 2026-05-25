@@ -69,6 +69,7 @@
     - [10.3 边界测试：WASM 模块的大小限制与 `wee_alloc`（运行时错误）](#103-边界测试wasm-模块的大小限制与-wee_alloc运行时错误)
     - [10.3 边界测试：WASM 组件模型（Component Model）的类型映射（编译错误）](#103-边界测试wasm-组件模型component-model的类型映射编译错误)
     - [10.4 边界测试：WASI Preview 2 的功能性权限（运行时错误）](#104-边界测试wasi-preview-2-的功能性权限运行时错误)
+    - [10.3 边界测试：WASM 模块的线性内存与 Rust 的 Vec 增长策略（运行时 OOM）](#103-边界测试wasm-模块的线性内存与-rust-的-vec-增长策略运行时-oom)
 
 ---
 

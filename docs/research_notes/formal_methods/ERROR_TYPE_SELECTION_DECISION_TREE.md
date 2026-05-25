@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [错误类型选择决策树](#错误类型选择决策树)
@@ -47,6 +48,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -236,6 +238,7 @@ fn main() -> Result<()> {
 ---
 
 ## 分支四：错误类型对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### anyhow vs thiserror
@@ -264,6 +267,7 @@ fn main() -> Result<()> {
 ---
 
 ## 分支五：特殊场景
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 异步错误处理
@@ -352,6 +356,7 @@ fn connect_database(url: &str) -> Result<Connection> {
 ---
 
 ## 错误处理最佳实践
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### DO
@@ -394,6 +399,7 @@ Result<T, ()>  // 没有错误信息
 ---
 
 ## 决策速查表
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 场景 | 推荐方案 | 示例 |
@@ -408,6 +414,7 @@ Result<T, ()>  // 没有错误信息
 ---
 
 ## 与形式化方法关联
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 概念 | 形式化表示 | 相关文档 |
@@ -419,6 +426,7 @@ Result<T, ()>  // 没有错误信息
 ---
 
 ## 决策流程
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -457,6 +465,7 @@ Result<T, ()>  // 没有错误信息
 ---
 
 ## 错误类型对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 类型 | 适用场景 | 性能 | 灵活性 |
@@ -469,6 +478,7 @@ Result<T, ()>  // 没有错误信息
 ---
 
 ## anyhow示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -484,6 +494,7 @@ fn read_config() -> Result<Config> {
 ```
 
 ## thiserror示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -507,6 +518,7 @@ pub enum ConfigError {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -565,6 +577,7 @@ pub enum ConfigError {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [formal_methods 目录](./README.md)
@@ -718,4 +731,3 @@ pub enum ConfigError {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

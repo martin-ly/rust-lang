@@ -1,6 +1,7 @@
 ﻿# 与 ownership/borrow/trait 的衔接
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [与 ownership/borrow/trait 的衔接](#与-ownershipborrowtrait-的衔接)
@@ -31,6 +32,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -71,6 +73,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -303,6 +306,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 ---
 
 ## 多层次组合链条（实质内容）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 链条 1：Builder + Factory + Repository
@@ -470,6 +474,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 ---
 
 ## 跨模块边界最佳实践
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 实践 | 说明 |
@@ -483,6 +488,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 ---
 
 ## 引用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) § 1.2 理论族依赖
@@ -491,6 +497,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -549,6 +556,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [04_compositional_engineering 目录](./README.md)
@@ -731,4 +739,3 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

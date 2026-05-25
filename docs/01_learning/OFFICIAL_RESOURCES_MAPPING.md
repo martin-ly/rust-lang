@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [本项目概念与官方资源映射表](#本项目概念与官方资源映射表)
@@ -86,6 +87,7 @@
       - [相关文档](#相关文档-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 官方资源入口
 >
@@ -439,6 +441,7 @@
 ---
 
 ## 差距分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 官方覆盖但本项目缺失的内容
@@ -471,6 +474,7 @@
 | **所有权模型可视化** | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 官方无形式化描述 |
 
 ### 版本差异说明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | 官方版本 | 本项目版本 | 差异说明 |
@@ -485,9 +489,11 @@
 ---
 
 ## 学习路径优化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 路径一：新手入门路径（零基础 → 能写简单项目）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **预计时间**: 4-6 周
@@ -502,6 +508,7 @@
 | **Week 6: 复习 + 测试** | Book Ch 11 Testing | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) | 为项目添加测试 |
 
 ### 路径二：中级进阶路径（能写项目 → 深入理解）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **预计时间**: 6-8 周
@@ -518,6 +525,7 @@
 | **Week 8: Unsafe 基础** | Book Ch 20.1 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) § 基础 | FFI 绑定 |
 
 ### 路径三：高级专家路径（深入原理 → 形式化理解）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **预计时间**: 持续学习
@@ -534,9 +542,11 @@
 ---
 
 ## 速查索引
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 按主题索引
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 主题 | 官方章节 | 本项目速查 | 形式化文档 |
@@ -561,6 +571,7 @@
 | **Cargo** | Book Ch 14 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) | - |
 
 ### 按官方章节快速跳转
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | Book 章节 | 快速链接 | 本项目文档 |
@@ -578,6 +589,7 @@
 | Ch 20 - Advanced/Unsafe | [Book](https://doc.rust-lang.org/book/ch20-00-advanced-features.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
 
 ### 按 Rust by Example 主题索引
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | RBE 主题 | 快速链接 | 本项目对应 |
@@ -597,6 +609,7 @@
 ---
 
 ## 小节级映射与「本项目补充」
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 官方章节 | 小节 | 本项目补充内容 |
@@ -617,6 +630,7 @@
 ---
 
 ## 核心概念映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 概念 | 本项目速查卡 | Book 章节 | RBE |
@@ -632,6 +646,7 @@
 ---
 
 ## RBE 练习与 Rustlings 映射
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - **RBE 练习**：上表「RBE 练习（可点击）」列提供各模块对应的 RBE 章节链接，可直接点击进入练习
@@ -640,9 +655,11 @@
 ---
 
 ## 📋 官方资源使用场景指南
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 学习场景对照表
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 你的情况 | 推荐资源 | 使用方式 |
@@ -659,6 +676,7 @@
 ---
 
 ## 🌳 资源选择决策树
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -704,9 +722,11 @@
 ---
 
 ## 🎯 按目标选择资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 目标: 通过 Rust 面试
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **推荐路径**:
@@ -716,6 +736,7 @@
 3. [Compiler Error Index](https://doc.rust-lang.org/error-index.html) - 熟悉常见错误
 
 ### 目标: 开发生产项目
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **推荐路径**:
@@ -726,6 +747,7 @@
 4. [Rustonomicon](https://doc.rust-lang.org/nomicon/) - unsafe 代码
 
 ### 目标: 贡献 Rust 编译器
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **推荐路径**:
@@ -735,6 +757,7 @@
 3. [Ferrocene FLS](https://spec.ferrocene.dev/) - 形式化规范
 
 ### 目标: 学术研究（形式化验证）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **推荐路径**:
@@ -746,9 +769,11 @@
 ---
 
 ## 🎓 高校课程资源映射（权威对齐）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### Stanford
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 课程 | 链接 | 主要内容 | 本项目对应 |
@@ -756,6 +781,7 @@
 | **CS340R: Rusty Systems** | <https://web.stanford.edu/class/cs340r/> | Rust 系统编程、3 周基础 + 7 周系统重实现项目 | [05_guides/](../05_guides/README.md)、[C05 线程](../02_reference/quick_reference/threads_concurrency_cheatsheet.md)、[C10 网络](../02_reference/quick_reference/network_programming_cheatsheet.md) |
 
 ### CMU
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 课程 | 链接 | 主要内容 | 本项目对应 |
@@ -764,6 +790,7 @@
 | **17-770: WebAssembly** | <https://www.cs.cmu.edu/~wasm/cs17-770/> | WebAssembly 引擎，支持 Rust 实现 | [C12 WASM](../02_reference/quick_reference/wasm_cheatsheet.md) |
 
 ### 其他高校（参考）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 课程 | 机构 | 链接 | 说明 |
@@ -775,9 +802,11 @@
 ---
 
 ## 🔗 形式化文档链接
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 形式化证明体系（2026-02-14）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 资源 | 说明 | 形式化链接 |
@@ -787,6 +816,7 @@
 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际对标 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)、[Ferrocene FLS](https://spec.ferrocene.dev/) |
 
 ### 官方形式化资源映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 官方资源 | 本项目形式化文档 |
@@ -804,9 +834,11 @@
 ---
 
 ## 在线课程资源映射（edX + Coursera）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### edX 课程与项目内容对齐
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 课程 | 机构 | 链接 | 主要内容 | 本项目对应路径 |
@@ -816,6 +848,7 @@
 | Programming with Rust | W3C | <https://www.edx.org/learn/rust/w3cx-programming-with-rust> | 语法速查、模式匹配、标准库 | [02_reference/quick_reference/](../02_reference/quick_reference/README.md) - 速查卡 |
 
 ### Coursera 课程与项目内容对齐
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 课程 | 机构 | 链接 | 主要内容 | 本项目对应路径 |
@@ -826,6 +859,7 @@
 | Rust Programming Specialization | Duke | <https://www.coursera.org/specializations/rust-programming> | 系统编程、数据工程、Linux、DevOps、LLM、云、MLOps | [05_guides/](../05_guides/README.md)、[CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) |
 
 ### 学习路径建议
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **初学者路径** (Microsoft课程 → 本项目):
@@ -843,6 +877,7 @@
 ---
 
 ## 相关文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [文档中心](../README.md)
@@ -854,11 +889,13 @@
 ---
 
 ## Rust 1.95+ 学习路径
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 1.95+ 新特性学习要点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 学习难度 | 推荐顺序 |
@@ -869,6 +906,7 @@
 | Peekable::next_if_map | ⭐ | 第4周 |
 
 ### 学习资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 1.95+ 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
@@ -879,12 +917,14 @@
 ---
 
 ## Rust 1.95+ 持续更新更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -925,6 +965,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [01_learning 目录](./README.md)
@@ -1132,4 +1173,3 @@
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

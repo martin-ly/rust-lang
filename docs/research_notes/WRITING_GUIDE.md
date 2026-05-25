@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记写作指南](#研究笔记写作指南)
@@ -485,6 +486,7 @@
 ---
 
 ## 📐 格式规范 {#-格式规范}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 1. Markdown 格式
@@ -621,6 +623,7 @@
 ---
 
 ## 🔍 内容组织 {#-内容组织}
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 1. 逻辑结构
@@ -677,6 +680,7 @@
 ---
 
 ## ✅ 质量检查 {#-质量检查}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 1. 内容检查
@@ -692,6 +696,7 @@
 - [ ] 参考文献充分
 
 ### 2. 格式检查
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **检查清单**:
@@ -703,6 +708,7 @@
 - [ ] 标题层级正确
 
 ### 3. 链接检查
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **检查清单**:
@@ -715,9 +721,11 @@
 ---
 
 ## 💡 写作示例 {#-写作示例}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 示例 1: 研究目标
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **好的示例**:
@@ -765,6 +773,7 @@
 ```
 
 ### 示例 2: 形式化定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **好的示例**:
@@ -799,6 +808,7 @@
 ```
 
 ### 示例 3: 代码示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **好的示例**:
@@ -833,9 +843,11 @@
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 核心文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [研究笔记主索引](./README.md)
@@ -844,6 +856,7 @@
 - [质量检查清单](./QUALITY_CHECKLIST.md)
 
 ### 贡献和质量
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [贡献指南](./CONTRIBUTING.md)
@@ -851,6 +864,7 @@
 - [快速参考](./QUICK_REFERENCE.md)
 
 ### 工具和资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [研究工具使用指南](./TOOLS_GUIDE.md)
@@ -865,12 +879,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -1138,4 +1154,3 @@
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Axum 深度解析](#axum-深度解析)
@@ -36,6 +37,7 @@
   - [**状态**: ✅ 已完成](#状态--已完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -67,6 +69,7 @@
   - [**状态**: ✅ 已完成](#状态--已完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -445,6 +448,7 @@ fn create_app() -> Router {
 ---
 
 ## 🚀 高级用法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 状态管理
@@ -702,6 +706,7 @@ async fn handle_socket(socket: WebSocket, state: Arc<AppState>) {
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 基准数据
@@ -747,6 +752,7 @@ let pool = PgPoolOptions::new()
 ---
 
 ## 🧪 测试
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -783,6 +789,7 @@ async fn test_get_user() {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Axum 官方文档](https://docs.rs/axum/latest/axum/)
@@ -813,6 +820,7 @@ async fn test_get_user() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -1088,4 +1096,3 @@ async fn test_get_user() {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

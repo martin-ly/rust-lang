@@ -1,6 +1,7 @@
 # 性能优化指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [性能优化指南](#性能优化指南)
@@ -81,6 +82,7 @@ pub fn sum_of_squares(nums: &[i32]) -> i32 {
 ---
 
 ## 2. 内存布局优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 结构体布局
@@ -154,9 +156,11 @@ impl ParticleSoA {
 ---
 
 ## 3. 编译时计算
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 常量泛型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -210,6 +214,7 @@ static CRC32_TABLE: [u32; 256] = crc32_table();
 ```
 
 ### 3.2 常量求值
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -226,9 +231,11 @@ const MAX_BUFFER_SIZE: usize = validate_config(512, 16);
 ---
 
 ## 4. 运行时优化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 分支预测提示
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -260,6 +267,7 @@ pub fn process_safe(value: Option<i32>) -> i32 {
 ```
 
 ### 4.2 SIMD向量化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -291,9 +299,11 @@ pub fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
 ---
 
 ## 5. 嵌入式特定优化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 无分配设计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -339,6 +349,7 @@ impl<'a, T> Drop for PoolRef<'a, T> {
 ```
 
 ### 5.2 中断延迟优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -368,9 +379,11 @@ impl MinimalCriticalSection {
 ---
 
 ## 6. 性能测量
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 基准测试
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -394,6 +407,7 @@ criterion_main!(benches);
 ```
 
 ### 6.2 运行时性能监控
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -437,9 +451,11 @@ impl Drop for PerformanceCounter {
 ---
 
 ## 7. 优化检查清单
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 编译时优化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 使用release模式 (`--release`)
@@ -449,6 +465,7 @@ impl Drop for PerformanceCounter {
 - [ ] 启用panic = "abort"
 
 ### 代码优化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 避免动态分配
@@ -458,6 +475,7 @@ impl Drop for PerformanceCounter {
 - [ ] 内联关键函数
 
 ### 嵌入式优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 使用no_std
@@ -492,6 +510,7 @@ impl Drop for PerformanceCounter {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
@@ -635,4 +654,3 @@ impl Drop for PerformanceCounter {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

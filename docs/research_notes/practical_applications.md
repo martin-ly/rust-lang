@@ -1,6 +1,7 @@
 ﻿# 实际应用案例研究
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实际应用案例研究](#实际应用案例研究)
@@ -56,6 +57,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -121,6 +123,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -1118,6 +1121,7 @@ impl<T> Drop for SafeVec<T> {
 | 综合示例 | Web 服务器, 数据处理, SafeVec | 案例 1, 2, 3        |
 
 ### 与形式化衔接的案例索引（层次推进）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 案例 | 形式化定理 | 衔接要点 |
@@ -1141,6 +1145,7 @@ impl<T> Drop for SafeVec<T> {
 > **[来源: Rust Official Docs]**
 
 ### 实际项目
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Tokio](https://tokio.rs/) - 异步运行时
@@ -1148,12 +1153,14 @@ impl<T> Drop for SafeVec<T> {
 - [Rocket](https://rocket.rs/) - Web 框架
 
 ### 相关文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 异步编程](https://rust-lang.github.io/async-book/)
 - [Rust 性能指南](https://nnethercote.github.io/perf-book/)
 
 ### 工具资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Cargo](https://doc.rust-lang.org/cargo/) - 包管理器
@@ -1175,6 +1182,7 @@ impl<T> Drop for SafeVec<T> {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -1224,6 +1232,7 @@ impl<T> Drop for SafeVec<T> {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -1601,4 +1610,3 @@ impl<T> Drop for SafeVec<T> {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

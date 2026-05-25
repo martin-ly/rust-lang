@@ -133,6 +133,7 @@ impl<T> Register<T> {
 - [Cargo build-std 文档](https://doc.rust-lang.org/cargo/reference/unstable.html#build-std)
 - [The Embedonomicon - build-std](https://docs.rust-embedded.org/embedonomicon/build-std.html)
 - [Rust Embedded Working Group](https://github.com/rust-embedded/wg)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

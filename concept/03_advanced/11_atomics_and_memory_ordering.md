@@ -59,15 +59,15 @@ Rust 原子类型 (std::sync::atomic):
 
   整数类型:
   ┌─────────────────┬─────────────────┬─────────────────┐
-  │ 类型            │ 大小            │ 主要操作        │
+  │ 类型             │ 大小            │ 主要操作        │
   ├─────────────────┼─────────────────┼─────────────────┤
   │ AtomicBool      │ 1 字节          │ swap, fetch_and │
   │ AtomicU8/I8     │ 1 字节          │ fetch_add, CAS  │
   │ AtomicU16/I16   │ 2 字节          │ fetch_or, fetch_xor│
-  │ AtomicU32/I32   │ 4 字节          │ 完整操作集      │
-  │ AtomicU64/I64   │ 8 字节          │ 完整操作集      │
-  │ AtomicUsize/Isize│ 指针大小       │ 索引/计数      │
-  │ AtomicPtr<T>    │ 指针大小        │ 指针 CAS        │
+  │ AtomicU32/I32   │ 4 字节          │ 完整操作集       │
+  │ AtomicU64/I64   │ 8 字节          │ 完整操作集       │
+  │ AtomicUsize/Isize│ 指针大小       │ 索引/计数        │
+  │ AtomicPtr<T>    │ 指针大小        │ 指针 CAS         │
   └─────────────────┴─────────────────┴─────────────────┘
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
@@ -725,154 +725,6 @@ fn fixed() {
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **补充来源**
-
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
@@ -902,7 +754,17 @@ fn main() {
 }
 ```
 
-> **修正**: **ABA 问题**是无锁数据结构中的经典问题：指针值从 A → B → A，但 `compare_exchange` 无法检测中间变化。`AtomicPtr` 的 `compare_exchange` 只比较地址值，不比较内容。解决方案：1) **Tagged pointer**：在低位存储版本计数器（`(ptr & !0xF) | (version & 0xF)`）；2) **Hazard pointer**：延迟释放，确保无其他线程引用；3) **Epoch-based reclamation**（`crossbeam-epoch`）：分代回收。Rust 的 `crossbeam`  crate 提供成熟的内存回收方案。这与 C++ 的 `std::atomic<T*>`（同样 ABA 问题）或 Java 的 `AtomicReference`（同样问题，GC 缓解）相同——ABA 是所有 CAS 操作的固有限制。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicPtr.html)] · [来源: [Crossbeam Documentation](https://docs.rs/crossbeam/)]
+> **修正**: **ABA 问题**是无锁数据结构中的经典问题：指针值从 A → B → A，但 `compare_exchange` 无法检测中间变化。
+> `AtomicPtr` 的 `compare_exchange` 只比较地址值，不比较内容。
+> 解决方案：
+>
+> 1) **Tagged pointer**：在低位存储版本计数器（`(ptr & !0xF) | (version & 0xF)`）；
+> 2) **Hazard pointer**：延迟释放，确保无其他线程引用；
+> 3) **Epoch-based reclamation**（`crossbeam-epoch`）：分代回收。
+> Rust 的 `crossbeam`  crate 提供成熟的内存回收方案。
+> 这与 C++ 的 `std::atomic<T*>`（同样 ABA 问题）或 Java 的 `AtomicReference`（同样问题，GC 缓解）相同——ABA 是所有 CAS 操作的固有限制。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicPtr.html)] ·
+> [来源: [Crossbeam Documentation](https://docs.rs/crossbeam/)]
 
 ### 10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）
 

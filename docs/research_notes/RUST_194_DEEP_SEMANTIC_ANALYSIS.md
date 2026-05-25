@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 深度语义分析](#rust-194-深度语义分析)
@@ -296,6 +297,7 @@ fn benchmark_windows(c: &mut Criterion) {
 ---
 
 ## 2. ControlFlow - 控制流的形式化抽象
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 类型定义与语义
@@ -455,6 +457,7 @@ where T: Clone
 ---
 
 ## 3. LazyCell/LazyLock 新方法 - 延迟初始化的语义完善
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 API演进分析
@@ -579,9 +582,11 @@ fn record_metric(name: &str, value: f64) {
 ---
 
 ## 4. Peekable 增强 - 迭代器组合子的语义扩展
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 next_if_map 语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -597,6 +602,7 @@ impl<I: Iterator> Peekable<I> {
 **语义**: 条件消费 + 映射 的组合操作。
 
 ### 4.2 与现有方法对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 方法 | 操作 | 返回 |
@@ -606,6 +612,7 @@ impl<I: Iterator> Peekable<I> {
 | `next_if_map(f)` | 条件消费+映射 | `Option<R>` |
 
 ### 4.3 实际应用: 词法分析器
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -653,9 +660,11 @@ impl<I: Iterator<Item = char>> Lexer<I> {
 ---
 
 ## 5. 数学常量 - 数值语义的精确化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 新增常量
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -669,6 +678,7 @@ pub const GOLDEN_RATIO: f64 = 1.6180339887498948482_f64;
 ```
 
 ### 5.2 应用场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 欧拉-马歇罗尼常数
@@ -717,9 +727,11 @@ where F: Fn(f64) -> f64
 ---
 
 ## 6. TOML 1.1 - 配置语义的现代化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 关键变更
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```toml
@@ -743,6 +755,7 @@ include = [
 ```
 
 ### 6.2 Cargo.toml 应用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```toml
@@ -773,6 +786,7 @@ include = [
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. [Rust 1.94.0 Release Notes](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/)
@@ -790,12 +804,14 @@ include = [
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -841,6 +857,7 @@ include = [
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](./README.md)
@@ -1077,4 +1094,3 @@ include = [
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

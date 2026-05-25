@@ -1,6 +1,7 @@
 ﻿# Rust 1.93 相关反例与边界集中索引
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.93 相关反例与边界集中索引](#rust-193-相关反例与边界集中索引)
@@ -23,26 +24,6 @@
 > **状态**: ✅ 已完成
 > **用途**: 集中列出与 Rust 1.93 变更相关的反例与边界情况，便于迁移与形式化文档交叉引用
 > **上位**: [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)、FORMAT_AND_CONTENT_ALIGNMENT_PLAN
-
----
-
-## 📊 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [Rust 1.93 相关反例与边界集中索引](#rust-193-相关反例与边界集中索引)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [1.93 新增/变更相关反例](#193-新增变更相关反例)
-  - [与形式化/设计文档的衔接](#与形式化设计文档的衔接)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -81,12 +62,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -132,6 +115,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [research_notes 目录](./README.md)
@@ -199,4 +183,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

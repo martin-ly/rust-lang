@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 语义概念体系完整梳理](#rust-194-语义概念体系完整梳理)
@@ -522,6 +523,7 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 ---
 
 ## 📖 概念定义全集
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 所有权相关概念
@@ -552,6 +554,7 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 | **自动 Trait** | 编译器自动派生的 Trait | 结构化派生、marker | 字段有→类型有 | Send, Sync, Copy | 手动实现风险 |
 
 ### 3.3 并发概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 概念 | 定义 | 属性 | 关系 | 示例 | 反例 |
@@ -566,9 +569,11 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 ---
 
 ## 📊 属性分析矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 语言特性属性矩阵
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -594,6 +599,7 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 ```
 
 ### 4.2 类型系统表达力矩阵
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 类型特性 | Rust 1.94 | C++20 | Java 21 | Go 1.22 | TypeScript 5.3 |
@@ -610,9 +616,11 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 ---
 
 ## 🕸️ 关系映射网络
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 概念关系图
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
@@ -659,6 +667,7 @@ graph TB
 ```
 
 ### 5.2 依赖关系矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 概念 | 依赖概念 | 被依赖概念 | 关系类型 |
@@ -674,9 +683,11 @@ graph TB
 ---
 
 ## 💡 示例/实例/反例库
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 所有权语义示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -734,6 +745,7 @@ fn mutable_borrow_conflict() {
 ```
 
 ### 6.2 Rust 1.94 特性示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -823,9 +835,11 @@ fn lazy_semantic() {
 ---
 
 ## 🆕 Rust 1.94 特性语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 新 API 语义详解
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | API | 语义类别 | 形式化签名 | 关键语义 |
@@ -838,6 +852,7 @@ fn lazy_semantic() {
 | `char→usize` | 类型转换 | `impl TryFrom<char> for usize` | Unicode 标量值转换 |
 
 ### 7.2 语义影响分析
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -871,9 +886,11 @@ fn lazy_semantic() {
 ---
 
 ## 🔬 形式化语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 操作语义 (Operational Semantics)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -905,6 +922,7 @@ fn lazy_semantic() {
 ```
 
 ### 8.2 类型规则 (Typing Rules)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -940,6 +958,7 @@ fn lazy_semantic() {
 ```
 
 ### 8.3 可靠性定理 (Soundness Theorem)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -970,6 +989,7 @@ fn lazy_semantic() {
 ---
 
 ## ✅ 完成状态
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -1001,12 +1021,14 @@ fn lazy_semantic() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -1052,6 +1074,7 @@ fn lazy_semantic() {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -1374,4 +1397,3 @@ fn lazy_semantic() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

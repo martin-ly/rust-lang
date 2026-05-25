@@ -1,6 +1,7 @@
 ﻿# 类型理论完备性缺口：形式化论证不充分声明
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型理论完备性缺口：形式化论证不充分声明](#类型理论完备性缺口形式化论证不充分声明)
@@ -27,6 +28,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -63,6 +65,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 宗旨
 >
@@ -91,6 +94,7 @@
 ---
 
 ## 1. Rust 1.93 类型系统特性缺口
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
@@ -108,6 +112,7 @@
 ---
 
 ## 2. 组合法则缺口
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **组合法则**：类型、Trait、生命周期等如何组合的规则；组合后性质如何保持。
@@ -140,6 +145,7 @@
 ---
 
 ## 3. Trait 特性缺口
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Trait 特性 | 状态 | 缺口说明 | 应补充 |
@@ -158,6 +164,7 @@
 ---
 
 ## 4. 类型系统特性缺口
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | 状态 | 缺口说明 | 应补充 |
@@ -174,6 +181,7 @@
 ---
 
 ## 5. 缺口汇总与优先级
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -201,6 +209,7 @@
 ---
 
 ## 6. 与已有文档的衔接
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 文档 | 已覆盖 | 缺口所在 |
@@ -214,6 +223,7 @@
 ---
 
 ## 7. 补全路线图
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 阶段 | 目标 | 产出 |
@@ -229,6 +239,7 @@
 ---
 
 ## 引用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [construction_capability](./construction_capability.md) — 类型构造能力；§ 类型理论缺口对构造能力的影响 与本缺口对应
@@ -240,6 +251,7 @@
 ---
 
 ## 8. 国际对标缺口（与阶段 1 交付物联动）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
@@ -253,6 +265,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -311,6 +324,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [type_theory 目录](./README.md)
@@ -414,4 +428,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

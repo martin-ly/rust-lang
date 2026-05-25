@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Unsafe Rust 安全证明树](#unsafe-rust-安全证明树)
@@ -36,6 +37,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🎯 证明目标
 >
@@ -277,6 +279,7 @@ unsafe fn race_condition() {
 ---
 
 ## ✅ 安全模式证明
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 模式 1: 初始化检查
@@ -399,6 +402,7 @@ impl<T> Drop for UniquePtr<T> {
 ---
 
 ## 📊 安全检查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 编写 Unsafe 代码前
@@ -412,6 +416,7 @@ impl<T> Drop for UniquePtr<T> {
 - [ ] 外部函数契约是否已文档化？
 
 ### 代码审查清单
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 每个 `unsafe` 块是否有安全注释？
@@ -423,6 +428,7 @@ impl<T> Drop for UniquePtr<T> {
 ---
 
 ## 🔗 相关文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Unsafe Rust 指南](../../../docs/05_guides/UNSAFE_RUST_GUIDE.md)
@@ -448,6 +454,7 @@ impl<T> Drop for UniquePtr<T> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [formal_methods 目录](./README.md)
@@ -583,4 +590,3 @@ impl<T> Drop for UniquePtr<T> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

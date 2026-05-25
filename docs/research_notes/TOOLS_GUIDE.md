@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究工具使用指南](#研究工具使用指南)
@@ -483,6 +484,7 @@ heaptrack_gui heaptrack.my_program.12345.gz
 ---
 
 ## 🧪 测试工具 {#-测试工具}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### cargo test
@@ -585,6 +587,7 @@ mod tests {
 ---
 
 ## 📚 代码分析工具 {#-代码分析工具}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Clippy
@@ -687,6 +690,7 @@ cargo expand > expanded.rs
 ---
 
 ## 💡 使用建议 {#-使用建议}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 工具选择
@@ -724,6 +728,7 @@ cargo expand > expanded.rs
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [研究方法论](./research_methodology.md) - 研究方法概述
@@ -739,6 +744,7 @@ cargo expand > expanded.rs
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -797,6 +803,7 @@ cargo expand > expanded.rs
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -1032,4 +1039,3 @@ cargo expand > expanded.rs
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

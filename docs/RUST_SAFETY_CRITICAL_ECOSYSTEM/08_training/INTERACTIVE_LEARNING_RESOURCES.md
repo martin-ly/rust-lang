@@ -1,6 +1,7 @@
 # 交互式学习资源
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [交互式学习资源](#交互式学习资源)
@@ -91,6 +92,7 @@ Rust官方:
 ---
 
 ## 2. 虚拟实验室
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 在线实验环境
@@ -133,6 +135,7 @@ docker run -it rust:1.81-slim
 ```
 
 ### 2.3 实验项目
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -165,9 +168,11 @@ fn main() -> ! {
 ---
 
 ## 3. 交互式教程
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 渐进式学习路径
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -198,6 +203,7 @@ Level 5: 形式化验证 (4小时)
 ```
 
 ### 3.2 交互式代码示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -236,9 +242,11 @@ mod tests {
 ---
 
 ## 4. 社区学习
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 讨论平台
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -267,6 +275,7 @@ mod tests {
 ```
 
 ### 4.2 学习小组
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -286,9 +295,11 @@ mod tests {
 ---
 
 ## 5. 实践项目库
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 渐进式项目
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -318,6 +329,7 @@ mod tests {
 ```
 
 ### 5.2 开源贡献机会
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -343,9 +355,11 @@ mod tests {
 ---
 
 ## 6. 评估与认证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 自测平台
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -377,6 +391,7 @@ fn quiz_lifetime() {
 ```
 
 ### 6.2 技能验证
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -397,9 +412,11 @@ fn quiz_lifetime() {
 ---
 
 ## 7. 学习工具推荐
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 开发环境
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -421,6 +438,7 @@ fn quiz_lifetime() {
 ```
 
 ### 7.2 辅助工具
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -440,9 +458,11 @@ fn quiz_lifetime() {
 ---
 
 ## 8. 持续更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 8.1 资源维护
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -485,6 +505,7 @@ fn quiz_lifetime() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -618,4 +639,3 @@ fn quiz_lifetime() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

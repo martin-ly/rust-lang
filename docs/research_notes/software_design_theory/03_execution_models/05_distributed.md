@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [分布式执行模型形式化](#分布式执行模型形式化)
@@ -48,6 +49,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录 {#-目录}
 >
@@ -89,6 +91,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -267,6 +270,7 @@ let parsed: Request = serde_json::from_slice(&bytes)?;
 ---
 
 ## RPC 与 Actor 对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模型 | 通信 | 语义 | 典型库 |
@@ -278,6 +282,7 @@ let parsed: Request = serde_json::from_slice(&bytes)?;
 ---
 
 ## 重试与熔断
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -303,6 +308,7 @@ where
 ---
 
 ## 安全边界与 FFI
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 边界 | 说明 |
@@ -314,6 +320,7 @@ where
 ---
 
 ## 分布式+并发组合（R1-02 最小交付）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **定理 DI-CONC-T1（Saga + Send/Sync 组合）**：Saga 编排式实现中，各步骤闭包若跨线程传递，须满足 `Send + Sync`；
@@ -330,6 +337,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 ---
 
 ## 与形式化基础衔接
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 模型 | 引用 |
@@ -341,6 +349,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 ---
 
 ## 边界
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 维度 | 分类 |
@@ -352,6 +361,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 1.93 特性 | 与本模型 | 说明 |
@@ -362,6 +372,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -376,6 +387,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 ---
 
 ## 分布式专用模式形式化（D2.1 扩展）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Event Sourcing
@@ -452,6 +464,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -510,6 +523,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_execution_models 目录](./README.md)
@@ -637,4 +651,3 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

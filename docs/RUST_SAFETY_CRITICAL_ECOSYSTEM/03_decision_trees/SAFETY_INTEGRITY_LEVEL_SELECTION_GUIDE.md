@@ -1,6 +1,7 @@
 # 安全完整性等级选择指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全完整性等级选择指南](#安全完整性等级选择指南)
@@ -277,6 +278,7 @@ impl OneOutOfTwo {
 ---
 
 ## 4. Rust实现建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 ASIL A实现
@@ -459,9 +461,11 @@ impl AsilDProcessor {
 ---
 
 ## 5. 降级与升级策略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 等级降级条件
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -479,6 +483,7 @@ impl AsilDProcessor {
 ```
 
 ### 5.2 等级升级触发
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -493,9 +498,11 @@ impl AsilDProcessor {
 ---
 
 ## 6. 检查清单
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### ASIL确定检查表
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 危害分析完成
@@ -508,6 +515,7 @@ impl AsilDProcessor {
 - [ ] 利益相关方评审
 
 ### 等级实现检查表
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### ASIL A
@@ -567,6 +575,7 @@ impl AsilDProcessor {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
@@ -749,4 +758,3 @@ impl AsilDProcessor {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

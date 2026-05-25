@@ -40,6 +40,7 @@
     - [10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）](#102-边界测试多字段-struct-的-coercepointee-尝试编译错误)
     - [10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）](#103-边界测试coercepointee-与自定义-dst-的元数据编译错误)
     - [10.4 边界测试：`PhantomData` 与 CoercePointee 的生命周期交互（编译错误）](#104-边界测试phantomdata-与-coercepointee-的生命周期交互编译错误)
+    - [10.4 边界测试：`CoercePointee` 与智能指针的自动转换（编译错误/未来特性）](#104-边界测试coercepointee-与智能指针的自动转换编译错误未来特性)
 
 ---
 

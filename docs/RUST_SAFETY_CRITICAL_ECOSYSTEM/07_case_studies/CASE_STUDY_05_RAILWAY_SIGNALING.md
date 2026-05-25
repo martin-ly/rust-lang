@@ -1,6 +1,7 @@
 # 案例研究05: 铁路信号系统 (EN 50128/50129)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [案例研究05: 铁路信号系统 (EN 50128/50129)](#案例研究05-铁路信号系统-en-5012850129)
@@ -726,6 +727,7 @@ mod verification {
 ---
 
 ## 认证与评估
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 评估机构审查
@@ -762,6 +764,7 @@ mod verification {
 ---
 
 ## 关键经验
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 成功因素
@@ -807,6 +810,7 @@ mod verification {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -1091,4 +1095,3 @@ mod verification {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

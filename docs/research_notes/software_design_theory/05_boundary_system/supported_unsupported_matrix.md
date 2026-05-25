@@ -1,6 +1,7 @@
 ﻿# 支持 vs 不支持边界矩阵
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [支持 vs 不支持边界矩阵](#支持-vs-不支持边界矩阵)
@@ -32,6 +33,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -230,6 +232,7 @@
 ---
 
 ## `no_std` 与嵌入式支持
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 环境 | 支持边界 | 说明 |
@@ -244,6 +247,7 @@
 ---
 
 ## Cargo 特性与可选依赖
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 依赖类型 | 说明 |
@@ -255,6 +259,7 @@
 ---
 
 ## 版本兼容性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 策略 | 说明 |
@@ -266,6 +271,7 @@
 ---
 
 ## 场景化决策示例（层次推进）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 示例 1：是否需要第三方 crate
@@ -304,6 +310,7 @@ async fn serve() {
 ---
 
 ## 引用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)
@@ -312,6 +319,7 @@ async fn serve() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -368,6 +376,7 @@ async fn serve() {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [05_boundary_system 目录](./README.md)
@@ -475,4 +484,3 @@ async fn serve() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

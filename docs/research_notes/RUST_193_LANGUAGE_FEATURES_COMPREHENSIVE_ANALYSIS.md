@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
@@ -39,6 +40,7 @@
   - [权威来源索引](#权威来源索引)
 
 ## 📚 权威来源对齐<a id="权威来源对齐"></a> {#-权威来源对齐}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 来源 | 链接 | 用途 |
@@ -295,6 +297,7 @@
 ---
 
 ## 8. 常量与编译期族
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
@@ -309,6 +312,7 @@
 ---
 
 ## 9. FFI 与不安全族
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
@@ -323,6 +327,7 @@
 ---
 
 ## 10. Rust 1.93 新增/变更特性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **权威链接**：[releases.rs 1.93.0](https://releases.rs/docs/1.93.0/) § Language、[Rust 1.93 发布说明](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
@@ -351,6 +356,7 @@
 ---
 
 ## 📚 相关文档<a id="相关文档"></a> {#-相关文档}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文档 | 用途 |
@@ -375,6 +381,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -427,6 +434,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -582,4 +590,3 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

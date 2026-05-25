@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [工作流引擎能力矩阵](#工作流引擎能力矩阵)
@@ -134,6 +135,7 @@
 ---
 
 ## 三、核心能力矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 建模能力矩阵
@@ -165,6 +167,7 @@
 | **消息任务** | ❌ | ✅ | ❌ | ✅ |
 
 ### 3.3 网关能力矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 网关类型 | 分裂 | 合并 | 特点 | 使用频率 |
@@ -178,9 +181,11 @@
 ---
 
 ## 四、模式支持矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 BPMN 模式支持
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | 描述 | 支持度 | 实现复杂度 |
@@ -197,6 +202,7 @@
 | **Deferred Choice** | 延迟选择 | 70% | 高 |
 
 ### 4.2 高级模式支持
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 模式 | 描述 | 支持度 | 难度 |
@@ -211,9 +217,11 @@
 ---
 
 ## 五、事务能力矩阵
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 事务特性矩阵
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | Saga支持 | 补偿支持 | 持久化 | 恢复能力 |
@@ -225,6 +233,7 @@
 | **超时处理** | ✅ | ✅ | ✅ | ✅ |
 
 ### 5.2 补偿能力矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 能力 | 描述 | 实现复杂度 | 必要性 |
@@ -236,6 +245,7 @@
 | **补偿监控** | 补偿过程可视 | 中 | 推荐 |
 
 ### 5.3 持久化矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 持久化级别 | 描述 | 性能影响 | 可靠性 |
@@ -248,9 +258,11 @@
 ---
 
 ## 六、相关资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 内部文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [WORKFLOW_CONCEPT_MINDMAP](./WORKFLOW_CONCEPT_MINDMAP.md) — 概念族谱
@@ -258,6 +270,7 @@
 - [CONCEPT_AXIOM_THEOREM_MATRIX](./CONCEPT_AXIOM_THEOREM_MATRIX.md) — 定理映射
 
 ### 6.2 工作流定义文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 路径 | 描述 |
@@ -267,6 +280,7 @@
 | 长事务 | `02_workflow/03_long_running_transaction.md` | 事务管理 |
 
 ### 6.3 能力评估框架
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -300,12 +314,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -351,6 +367,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](./README.md)
@@ -462,4 +479,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

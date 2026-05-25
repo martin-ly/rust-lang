@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [项目完成度矩阵](#项目完成度矩阵)
@@ -24,6 +25,7 @@
   - [**更新流程**: 每轮扩展后由执行代理同步更新](#更新流程-每轮扩展后由执行代理同步更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 总体概览
 >
@@ -78,6 +80,7 @@
 | **总计** | **23** | **31** | **74%** |
 
 ### 详细清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### emerging/
@@ -122,6 +125,7 @@
 ---
 
 ## 📝 Docs 完成度
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 目录 | 文件数 | 状态 |
@@ -137,6 +141,7 @@
 ---
 
 ## ⚠️ 已知问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 问题 | 影响 | 优先级 | 状态 |
@@ -167,6 +172,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [07_project 目录](./README.md)
@@ -246,4 +252,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

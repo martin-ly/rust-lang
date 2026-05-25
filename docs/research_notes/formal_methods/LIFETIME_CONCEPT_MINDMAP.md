@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [生命周期概念族谱](#生命周期概念族谱)
@@ -131,6 +132,7 @@
 ---
 
 ## 二、生命周期关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 包含关系
@@ -187,9 +189,11 @@
 ---
 
 ## 三、特殊生命周期
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 'static
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -212,6 +216,7 @@
 ```
 
 ### 3.2 匿名生命周期
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -226,9 +231,11 @@
 ---
 
 ## 四、生命周期省略
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 三条规则
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -244,6 +251,7 @@ fn method(&self, x: &str) -> &str
 ```
 
 ### 4.2 何时需要显式标注
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -261,9 +269,11 @@ fn method(&self, x: &str) -> &str
 ---
 
 ## 五、生命周期在类型中
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 引用类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -279,6 +289,7 @@ fn method(&self, x: &str) -> &str
 ```
 
 ### 5.2 结构体
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -294,6 +305,7 @@ fn method(&self, x: &str) -> &str
 ```
 
 ### 5.3 Trait
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -311,9 +323,11 @@ Trait生命周期
 ---
 
 ## 六、NLL (非词法生命周期)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -336,9 +350,11 @@ NLL
 ---
 
 ## 七、常见模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 模式1: 相同生命周期
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -346,6 +362,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 
 ### 7.2 模式2: 独立生命周期
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -353,6 +370,7 @@ fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str
 ```
 
 ### 7.3 模式3: 返回self引用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -364,6 +382,7 @@ impl<'a> Parser<'a> {
 ---
 
 ## 八、与所有权的关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -382,6 +401,7 @@ impl<'a> Parser<'a> {
 ---
 
 ## 九、学习路径
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -412,12 +432,14 @@ impl<'a> Parser<'a> {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -463,6 +485,7 @@ impl<'a> Parser<'a> {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [formal_methods 目录](./README.md)
@@ -590,4 +613,3 @@ impl<'a> Parser<'a> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

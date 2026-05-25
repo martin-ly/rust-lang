@@ -51,6 +51,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 快速开始
 >
@@ -176,6 +177,7 @@ difficulty = "基础"
 在 `book/src/quiz-index.md` 中添加新测验信息。
 
 ## 测验编写最佳实践
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 1. 题目质量
@@ -215,6 +217,7 @@ difficulty = "基础"
 - **填空题**：代码补全，考察实践能力
 
 ## 测验格式规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 单选题 (SingleChoice)
@@ -307,6 +310,7 @@ difficulty = "进阶"
 注意使用三引号（'''）来支持多行字符串。
 
 ## 测验文件结构示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```toml
@@ -326,9 +330,11 @@ difficulty = "进阶"
 ```
 
 ## 常见问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Q: mdbook-quiz 和 mdbook 版本不兼容怎么办？
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 A: 确保两者都使用最新版本：
@@ -339,6 +345,7 @@ cargo install mdbook-quiz --force
 ```
 
 ### Q: 测验不显示怎么办？
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 A: 检查以下几点：
@@ -348,24 +355,29 @@ A: 检查以下几点：
 3. `book.toml` 中是否正确配置了预处理器
 
 ### Q: 如何添加图片到题目中？
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 A: 当前 mdbook-quiz 不支持直接嵌入图片。可以将图片放在 `book/src/assets/` 目录，在 prompt 中使用 Markdown 图片语法引用。
 
 ### Q: 可以限制答题次数吗？
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 A: mdbook-quiz 本身不限制答题次数。如果需要，可以通过自定义 JavaScript 实现。
 
 ### Q: 如何导出测验结果？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Storage 查看保存的答案，或扩展插件实现导出功能。
 
 ## 贡献指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 提交新测验
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. 创建新的分支
@@ -374,6 +386,7 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 4. 提交 PR，说明测验覆盖的内容
 
 ### 代码审查清单
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 题目技术准确性
@@ -384,6 +397,7 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 - [ ] Markdown 格式正确
 
 ## 参考资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [mdbook 官方文档](https://rust-lang.github.io/mdBook/)
@@ -398,11 +412,13 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 ---
 
 ## Rust 1.95+ 学习路径
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 1.95+ 新特性学习要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 特性 | 学习难度 | 推荐顺序 |
@@ -413,6 +429,7 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 | Peekable::next_if_map | ⭐ | 第4周 |
 
 ### 学习资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust 1.95+ 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
@@ -423,12 +440,14 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 ---
 
 ## Rust 1.95+ 持续更新更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -561,4 +580,3 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

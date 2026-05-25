@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [宏系统使用指南](#宏系统使用指南)
@@ -64,13 +65,14 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
 > **[来源: Rust Official Docs]**
 
 - [宏系统使用指南](#宏系统使用指南)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [📋 概述](#-概述)
   - [🚀 快速开始](#-快速开始)
@@ -122,6 +124,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -322,6 +325,7 @@ my_function_macro!(some input);
 ---
 
 ## 🔧 实用宏示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 调试宏
@@ -397,6 +401,7 @@ let config = Config::new()
 ---
 
 ## 🔬 声明宏完整示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 示例 1: 模式匹配与重复
@@ -505,6 +510,7 @@ platform_specific! {
 ---
 
 ## 🔧 过程宏完整示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 示例 1: 自定义 Derive 宏
@@ -683,6 +689,7 @@ pub fn sql(input: TokenStream) -> TokenStream {
 ---
 
 ## ⚠️ 宏的常见陷阱与调试技巧
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 陷阱 1: 卫生性问题 (Hygiene)
@@ -871,6 +878,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## ⚡ 最佳实践
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 1. 宏命名
@@ -883,6 +891,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 - 过程宏 crate 名通常以 `_derive` 或 `_macros` 结尾
 
 ### 2. 文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ````rust,ignore
@@ -906,6 +915,7 @@ macro_rules! my_vec {
 ````
 
 ### 3. 错误处理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -933,6 +943,7 @@ macro_rules! min {
 ```
 
 ### 4. 可见性控制
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -952,6 +963,7 @@ macro_rules! public_macro {
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [完整文档](../../crates/c11_macro_system/README.md)
@@ -960,23 +972,26 @@ macro_rules! public_macro {
 - [宏系统思维导图](../research_notes/formal_methods/MACRO_SYSTEM_MINDMAP.md) - 宏扩展过程的形式化分析
 
 ## 🆕 Rust 1.95+ 特性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 新特性概览
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Rust 1.95+ 带来了以下重要更新：
 
 - **rray_windows** - 固定大小的数组窗口迭代器
 - **ControlFlow** - 控制流抽象类型
-- **LazyCell/LazyLock 新方法** - get(), get_mut(), 
+- **LazyCell/LazyLock 新方法** - get(), get_mut(),
 orce_mut()
 - **Peekable::next_if_map** - 条件映射迭代
 - **TryFrom<char> for usize** - Unicode 标量值转换
 
 ### 代码示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 `
@@ -1006,11 +1021,13 @@ let result = items.iter().try_for_each(|&n| {
 ---
 
 ## Rust 1.95+ 在宏系统中的应用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### array_windows 在宏展开优化中的应用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -1031,6 +1048,7 @@ macro_rules! sliding_window_match {
 ```
 
 ### LazyLock 在宏编译缓存中的应用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -1049,6 +1067,7 @@ pub fn get_cached_expansion(macro_name: &str) -> Option<TokenStream> {
 ```
 
 ### ControlFlow 在宏错误处理中的应用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -1090,6 +1109,7 @@ fn validate_macro_rules(rules: &[MacroRule]) -> ControlFlow<MacroError, ()> {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [05_guides 目录](./README.md)
@@ -1412,4 +1432,3 @@ fn validate_macro_rules(rules: &[MacroRule]) -> ControlFlow<MacroError, ()> {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

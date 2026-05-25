@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cargo 1.94 新特性指南](#cargo-194-新特性指南)
@@ -50,6 +51,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -217,6 +219,7 @@ rust-version = "1.94"  # 需要 1.94+ 来解析 TOML 1.1
 ---
 
 ## 三、pubtime 字段
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 特性描述
@@ -244,14 +247,17 @@ cargo add serde --time "2026-01-01..2026-03-01"
 ---
 
 ## 四、`CARGO_BIN_EXE_<crate>` 运行时可用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 特性描述
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 `CARGO_BIN_EXE_<crate>` 环境变量现在在运行时也可用，而不仅限于构建脚本。
 
 ### 4.2 使用示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -266,6 +272,7 @@ let output = std::process::Command::new(tool_path)
 ```
 
 ### 4.3 测试示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -284,9 +291,11 @@ fn test_cli_tool() {
 ---
 
 ## 五、性能改进
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 cargo clean 优化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 `cargo clean -p` 和 `cargo clean --workspace` 现在更快了。
@@ -302,6 +311,7 @@ cargo clean --workspace
 ---
 
 ## 六、完整配置示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```toml
@@ -341,9 +351,11 @@ protocol = "sparse"
 ---
 
 ## 七、迁移指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 从旧版本迁移
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **更新 Rust**: `rustup update stable`
@@ -351,6 +363,7 @@ protocol = "sparse"
 3. **使用新特性**: 逐步采用 TOML 1.1 和 config inclusion
 
 ### 7.2 兼容性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 向后兼容 | 说明 |
@@ -363,6 +376,7 @@ protocol = "sparse"
 ---
 
 ## 八、相关资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Cargo 1.94 开发周期报告](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94/)
@@ -379,6 +393,7 @@ protocol = "sparse"
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **最新版本**: Rust 1.94.0 (2026-03-05)
@@ -394,12 +409,14 @@ protocol = "sparse"
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -445,6 +462,7 @@ protocol = "sparse"
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](./README.md)
@@ -548,4 +566,3 @@ protocol = "sparse"
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

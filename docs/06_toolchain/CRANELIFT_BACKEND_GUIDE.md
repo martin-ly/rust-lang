@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cranelift 后端实用指南](#cranelift-后端实用指南)
@@ -37,6 +38,7 @@
   - [📖 参考文献](#-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -69,6 +71,7 @@
   - [📖 参考文献](#-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -274,6 +277,7 @@ cargo +nightly build -v
 ---
 
 ## 📊 当前状态
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -316,6 +320,7 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 ---
 
 ## ✅ 何时使用 vs 🚫 何时不使用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### ✅ 推荐使用 Cranelift
@@ -357,6 +362,7 @@ flowchart TD
 ---
 
 ## 🔧 实战配置模板
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 推荐 `.cargo/config.toml`
@@ -414,6 +420,7 @@ test-dev:
 ---
 
 ## 📖 参考文献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Wasmtime Team**. "Cranelift: A Compiled Code Generator". Bytecode Alliance.
@@ -454,6 +461,7 @@ test-dev:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [06_toolchain 目录](./README.md)
@@ -589,4 +597,3 @@ test-dev:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

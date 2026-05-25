@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [逻辑基础](#逻辑基础)
@@ -46,6 +47,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -271,9 +273,11 @@ Result : Type → Type → Type
 ---
 
 ## 四、模态逻辑 (Modal Logic)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 基本模态算子
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **必然性 (□)**:
@@ -294,6 +298,7 @@ Result : Type → Type → Type
 ```
 
 ### 4.2 在程序验证中的应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **霍尔逻辑**:
@@ -310,6 +315,7 @@ Result : Type → Type → Type
 ```
 
 ### 4.3 在Rust中的应用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **安全性保证**:
@@ -327,9 +333,11 @@ Result : Type → Type → Type
 ---
 
 ## 五、等式逻辑
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 等式规则
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **自反性**:
@@ -364,6 +372,7 @@ Result : Type → Type → Type
 ```
 
 ### 5.2 在Rust形式化中的应用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **语义等价**:
@@ -381,9 +390,11 @@ T₁ = T₂    (类型T₁和T₂相等)
 ---
 
 ## 六、归纳逻辑
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 结构归纳
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **原理**: 要证明性质P对所有归纳定义的值成立，只需证明：
@@ -404,6 +415,7 @@ T₁ = T₂    (类型T₁和T₂相等)
 ```
 
 ### 6.2 自然数归纳
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **原理**:
@@ -419,6 +431,7 @@ P(0)    ∀n. P(n) → P(n+1)
 ---
 
 ## 七、逻辑系统选择指南
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 逻辑系统 | 表达能力 |  decidability | 适用场景 |
@@ -432,9 +445,11 @@ P(0)    ∀n. P(n) → P(n+1)
 ---
 
 ## 八、与Rust形式化的联系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 类型即命题
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **Curry-Howard同构**:
@@ -467,6 +482,7 @@ enum Result<T, E> {
 ```
 
 ### 8.2 所有权即线性逻辑
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **线性逻辑**:
@@ -495,12 +511,14 @@ Copy ≃ !A (可复制)
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -546,6 +564,7 @@ Copy ≃ !A (可复制)
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [formal_methods 目录](./README.md)
@@ -694,4 +713,3 @@ Copy ≃ !A (可复制)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

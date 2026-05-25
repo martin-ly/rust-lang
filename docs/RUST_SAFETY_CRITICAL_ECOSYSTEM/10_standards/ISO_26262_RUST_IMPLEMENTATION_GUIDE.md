@@ -590,6 +590,7 @@ mod asil_d_tests {
 ---
 
 ## 工具链鉴定
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### TCL (Tool Confidence Level) 确定
@@ -639,6 +640,7 @@ mod tool_qualification {
 ---
 
 ## 认证检查表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### ASIL D项目检查表
@@ -699,7 +701,6 @@ mod tool_qualification {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
-
 
 > **[来源: Wikipedia - Type System]**
 
@@ -913,4 +914,3 @@ mod tool_qualification {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

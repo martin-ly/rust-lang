@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 10: 数据处理管道](#实践项目-10-数据处理管道)
@@ -19,6 +20,7 @@
   - [完整参考实现位于: `examples/data-pipeline/`](#完整参考实现位于-examplesdata-pipeline)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -44,6 +46,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 管道模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -67,6 +70,7 @@ impl Pipeline {
 ---
 
 ## 参考实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/data-pipeline/`
@@ -88,6 +92,7 @@ impl Pipeline {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_practice 目录](./README.md)

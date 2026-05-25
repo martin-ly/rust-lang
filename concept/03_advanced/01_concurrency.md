@@ -1614,14 +1614,14 @@ use std::thread;
 
 fn main() {
     let (tx, rx) = mpsc::channel::<i32>();
-    
+
     let tx2 = tx.clone();
     thread::spawn(move || { tx.send(1).unwrap(); });
     thread::spawn(move || { tx2.send(2).unwrap(); });
-    
+
     // ❌ 编译错误: 不能克隆 Receiver（mpsc = multiple producer, single consumer）
     // let rx2 = rx.clone();
-    
+
     for _ in 0..2 {
         println!("{}", rx.recv().unwrap());
     }

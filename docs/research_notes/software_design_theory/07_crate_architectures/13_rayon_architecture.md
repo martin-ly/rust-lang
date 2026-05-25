@@ -9,6 +9,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rayon 是 Rust 生态中数据并行计算的标志性库，其设计哲学极其简洁：**将顺序迭代器调用替换为并行迭代器调用，即可自动获得多核并行加速**。这一承诺的背后，是一个精密的工作窃取 (work-stealing) 线程池与一套零成本类型安全保证。
@@ -28,9 +29,11 @@ Rayon 不引入新的并发原语（如锁或通道），而是**复用 Rust 已
 ---
 
 ## 2. 核心抽象
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 `ParallelIterator` Trait
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 `ParallelIterator` 是 Rayon 的核心 trait，其设计目标是**镜像标准库 `Iterator`**，使开发者几乎无需学习成本即可上手：
@@ -66,6 +69,7 @@ pub trait ParallelIterator: Sized + Send {
 关键观察：`ParallelIterator` 要求 `Item: Send`，这意味着迭代产生的每个元素都必须是线程安全的。这不是运行时检查，而是编译期由 Rust 类型系统强制保证的。
 
 ### 2.2 从 `Iterator` 到 `ParallelIterator`
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -86,6 +90,7 @@ let sum: u64 = (0..1_000_000)
 Rayon 的 `ParallelIterator` 支持几乎所有标准库迭代器方法：`map`、`filter`、`fold`、`reduce`、`sum`、`min_by`、`collect`、`find_any` 等。其中 `find_any` 和 `position_any` 是并行特化的（返回"任意"匹配结果即可，无需确定性顺序）。
 
 ### 2.3 `join(f, g)` — 分叉-汇合并行
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 `join` 是 Rayon 最底层的 API，直接暴露工作窃取调度：
@@ -113,11 +118,13 @@ fn fibonacci(n: u32) -> u32 {
 ---
 
 ## 3. 工作窃取调度
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Rayon 的性能魔法来自其工作窃取调度器。理解这一机制，是正确使用 Rayon 的关键。
 
 ### 3.1 线程池架构
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -160,6 +167,7 @@ flowchart TD
 ```
 
 ### 3.2 工作窃取的三条规则
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 操作 | 位置 | 策略 | 原因 |
@@ -172,6 +180,7 @@ flowchart TD
 > [来源: Rayon 文档 — ThreadPool](https://docs.rs/rayon/latest/rayon/struct.ThreadPool.html)
 
 ### 3.3 为什么工作窃取高效？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **负载均衡**: 忙碌线程继续处理自己的工作，空闲线程从他人处窃取，无需中央调度器
@@ -181,11 +190,13 @@ flowchart TD
 ---
 
 ## 4. 类型安全保证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rayon 将 Rust 的所有权系统发挥到极致，在编译期消除数据并行中的所有风险。
 
 ### 4.1 `Send` 与 `Sync` 的强制约束
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -202,6 +213,7 @@ let bad: Vec<Rc<i32>> = vec![Rc::new(1)];
 > [来源: Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html)
 
 ### 4.2 `ParallelIterator` 的 trait bounds
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -220,6 +232,7 @@ pub trait ParallelIterator: Sized + Send {
 这些约束保证了：**在 Rayon 的并行迭代中，不可能出现数据竞争**。
 
 ### 4.3 可变并行迭代：`par_iter_mut()`
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -236,11 +249,13 @@ nums.par_iter_mut().for_each(|x| {
 ---
 
 ## 5. 与标准库的集成
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Rayon 通过扩展 trait（`ParallelSlice`、`ParallelSliceMut`、`ParallelIterator` 等）为标准库集合类型添加并行能力。
 
 ### 5.1 `Vec` 的并行操作
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -263,6 +278,7 @@ let squares: Vec<u64> = data.into_par_iter()
 > [来源: Rayon 文档 — `ParallelSliceMut`](https://docs.rs/rayon/latest/rayon/slice/trait.ParallelSliceMut.html)
 
 ### 5.2 零成本顺序回退
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rayon 的一个重要特性是**自适应并行**：当数据量太小或线程池忙碌时，它会自动回退到顺序执行。
@@ -289,9 +305,11 @@ fn parallel_sum(nums: &[u32]) -> u32 {
 ---
 
 ## 6. `scope()` API 与自定义线程池
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 `rayon::scope()` — 嵌套并行
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `scope` 允许在当前上下文中产生多个并行任务，并保证所有任务在 scope 结束前完成：
@@ -322,6 +340,7 @@ fn process_data(data: &[u64]) -> Vec<u64> {
 > [来源: Rayon 文档 — `scope`](https://docs.rs/rayon/latest/rayon/fn.scope.html)
 
 ### 6.2 `ThreadPoolBuilder` — 自定义线程池
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -352,6 +371,7 @@ pool.install(|| {
 ---
 
 ## 7. 与标准库并行扩展的对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | Rayon `par_iter()` | 标准库 `iter()` |
@@ -366,6 +386,7 @@ pool.install(|| {
 ---
 
 ## 8. 来源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 来源 | 类型 | 引用位置 |
@@ -387,6 +408,7 @@ pool.install(|| {
 ---
 
 ## 相关架构与延伸阅读
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Bevy 游戏引擎架构](./05_bevy_architecture.md)
@@ -483,4 +505,3 @@ pool.install(|| {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

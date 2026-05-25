@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [证明树：Send/Sync 安全](#证明树sendsync-安全)
@@ -34,6 +35,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 定理陈述
 >
@@ -231,9 +233,11 @@ graph TD
 ---
 
 ## Rust 代码验证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Send 示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -262,6 +266,7 @@ fn not_send_example() {
 ```
 
 ### Sync 示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -303,6 +308,7 @@ fn not_sync_example() {
 ---
 
 ## 与其他定理的关系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -321,12 +327,14 @@ Send/Sync 安全 (SEND-T1, SYNC-T1)
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -372,6 +380,7 @@ Send/Sync 安全 (SEND-T1, SYNC-T1)
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [formal_methods 目录](./README.md)
@@ -476,4 +485,3 @@ Send/Sync 安全 (SEND-T1, SYNC-T1)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

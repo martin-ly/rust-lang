@@ -44,6 +44,7 @@
     - [10.2 边界测试：异步析构与 panic 的交互（运行时 UB）](#102-边界测试异步析构与-panic-的交互运行时-ub)
     - [10.3 边界测试：async drop 与 `std::mem::forget` 的交互（内存泄漏）](#103-边界测试async-drop-与-stdmemforget-的交互内存泄漏)
     - [10.4 边界测试：async drop 在 panic 时的双重取消（运行时 UB）](#104-边界测试async-drop-在-panic-时的双重取消运行时-ub)
+    - [10.3 边界测试：async drop 与同步 Drop 的语义冲突（编译错误/设计问题）](#103-边界测试async-drop-与同步-drop-的语义冲突编译错误设计问题)
 
 ---
 

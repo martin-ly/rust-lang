@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Tree Borrows 详解](#tree-borrows-详解)
@@ -31,6 +32,7 @@
   - [**状态**: 🔄 学术前沿跟踪中](#状态--学术前沿跟踪中)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -57,6 +59,7 @@
   - [**状态**: 🔄 学术前沿跟踪中](#状态--学术前沿跟踪中)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -87,6 +90,7 @@ Tree Borrows (新模型)
 ---
 
 ## 📊 与 Stacked Borrows 对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特性 | Stacked Borrows | Tree Borrows |
@@ -117,6 +121,7 @@ fn example() {
 ---
 
 ## 🌳 核心概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 树结构
@@ -138,6 +143,7 @@ Tree Borrows 视图:
 ```
 
 ### 权限模型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -151,6 +157,7 @@ enum Permission {
 ```
 
 ### 状态转换
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -180,9 +187,11 @@ enum Permission {
 ---
 
 ## 💡 实际影响
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 更多代码合法
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -217,6 +226,7 @@ struct SelfReferential<'a> {
 ```
 
 ### 直观性提升
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -237,9 +247,11 @@ fn intuitive_code() {
 ---
 
 ## 🔄 迁移指南
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 测试代码兼容性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -251,6 +263,7 @@ MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test
 ```
 
 ### 常见问题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 问题 | 原因 | 解决方案 |
@@ -262,6 +275,7 @@ MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [论文 PDF](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
@@ -292,6 +306,7 @@ MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [academic 目录](./README.md)
@@ -393,4 +408,3 @@ MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

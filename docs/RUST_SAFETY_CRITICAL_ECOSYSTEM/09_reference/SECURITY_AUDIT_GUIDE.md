@@ -1,6 +1,7 @@
 # 安全审计指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全审计指南](#安全审计指南)
@@ -273,6 +274,7 @@ cargo tree --edges normal --prefix none | sort | uniq
 ---
 
 ## 4. 运行时安全监控
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 安全事件检测
@@ -395,6 +397,7 @@ impl IntrusionDetector {
 ---
 
 ## 5. 审计报告模板
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 执行摘要
@@ -442,6 +445,7 @@ impl IntrusionDetector {
 ```
 
 ### 5.2 详细审计清单
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -470,9 +474,11 @@ impl IntrusionDetector {
 ---
 
 ## 6. 持续安全监控
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 CI集成
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```yaml
@@ -519,6 +525,7 @@ jobs:
 ```
 
 ### 6.2 安全指标仪表板
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -569,6 +576,7 @@ impl SecurityMetrics {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -743,4 +751,3 @@ impl SecurityMetrics {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

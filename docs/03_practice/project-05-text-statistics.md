@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 05: 文本统计工具](#实践项目-05-文本统计工具)
@@ -19,6 +20,7 @@
   - [完整参考实现位于: `examples/text-statistics/`](#完整参考实现位于-examplestext-statistics)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -44,6 +46,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 迭代器处理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -117,4 +120,3 @@ fn count_lines(text: &str) -> usize {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

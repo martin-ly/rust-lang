@@ -1,6 +1,7 @@
 # 部署与维护指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [部署与维护指南](#部署与维护指南)
@@ -419,6 +420,7 @@ impl FaultResponseSystem {
 ```
 
 ### 4.2 补丁管理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -482,9 +484,11 @@ impl PatchManager {
 ---
 
 ## 5. 数据管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 配置管理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -540,6 +544,7 @@ impl ConfigurationManager {
 ```
 
 ### 5.2 数据备份
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -563,9 +568,11 @@ impl ConfigurationManager {
 ---
 
 ## 6. 退役和替换
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 系统退役
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -617,6 +624,7 @@ impl ConfigurationManager {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -835,4 +843,3 @@ impl ConfigurationManager {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

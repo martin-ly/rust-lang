@@ -1,6 +1,7 @@
 # 项目模板
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [项目模板](#项目模板)
@@ -563,6 +564,7 @@ jobs:
 ---
 
 ## 3. 快速启动命令
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 创建新项目
@@ -635,6 +637,7 @@ echo "   4. Run 'cargo test' to run tests"
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [检查清单与模板](./CHECKLISTS_AND_TEMPLATES.md)
@@ -659,7 +662,6 @@ echo "   4. Run 'cargo test' to run tests"
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
-
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
@@ -855,4 +857,3 @@ echo "   4. Run 'cargo test' to run tests"
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

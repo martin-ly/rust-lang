@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [证明树可视化完整版](#证明树可视化完整版)
@@ -37,6 +38,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -70,6 +72,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 证明树 1: 所有权唯一性定理 (T1)
 >
@@ -369,6 +372,7 @@ graph TD
 ---
 
 ## 证明树 5: 异步状态机安全
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定理陈述5
@@ -497,6 +501,7 @@ async fn some_async() {}
 ---
 
 ## 使用说明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 如何阅读证明树
@@ -539,6 +544,7 @@ cargo build --features formal_verification
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -597,6 +603,7 @@ cargo build --features formal_verification
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](./README.md)
@@ -778,4 +785,3 @@ cargo build --features formal_verification
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

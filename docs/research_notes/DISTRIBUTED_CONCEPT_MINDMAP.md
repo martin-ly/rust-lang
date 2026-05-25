@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [分布式系统概念族谱](#分布式系统概念族谱)
@@ -31,6 +32,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概念族谱概览
 >
@@ -171,6 +173,7 @@ impl ConsistentHash {
 ---
 
 ## Rust 分布式系统工具链
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 异步运行时对比
@@ -206,6 +209,7 @@ graph LR
 ---
 
 ## 分布式模式实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 熔断器模式
@@ -261,6 +265,7 @@ impl RateLimiter {
 ---
 
 ## 相关文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [分布式架构决策树](./DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md)
@@ -275,12 +280,14 @@ impl RateLimiter {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -326,6 +333,7 @@ impl RateLimiter {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -447,4 +455,3 @@ impl RateLimiter {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

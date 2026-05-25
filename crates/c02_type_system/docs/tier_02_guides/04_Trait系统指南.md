@@ -88,6 +88,7 @@
   - [🧪 类型状态模式（高级）](#-类型状态模式高级)
     - [构建器的类型安全](#构建器的类型安全)
   - [🏆 完整实战案例：HTTP客户端](#-完整实战案例http客户端)
+  - [**作者**: C02 Trait System Advanced Team](#作者-c02-trait-system-advanced-team)
 
 ---
 

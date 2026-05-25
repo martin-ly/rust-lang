@@ -1,6 +1,7 @@
 ﻿# Composite 形式化分析
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Composite 形式化分析](#composite-形式化分析)
@@ -39,6 +40,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -91,6 +93,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -336,6 +339,7 @@ borrow_checker_proof
 ---
 
 ## 典型场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
@@ -349,6 +353,7 @@ borrow_checker_proof
 ---
 
 ## 完整场景示例：文件系统树（File/Directory）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **场景**：文件与目录组成树；目录可含子文件/子目录；递归计算大小。
@@ -387,6 +392,7 @@ assert_eq!(tree.size(), 600);
 ---
 
 ## 相关模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
@@ -398,6 +404,7 @@ assert_eq!(tree.size(), 600);
 ---
 
 ## 实现变体
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
@@ -409,6 +416,7 @@ assert_eq!(tree.size(), 600);
 ---
 
 ## 反例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **反例**：父子循环引用（父→子→父）在 Rust 中无法用普通所有权表达；需 `Rc`/`Weak` 或重构为无环结构，否则所有权无法建立。
@@ -432,6 +440,7 @@ struct Node {
 ---
 
 ## 选型决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -445,6 +454,7 @@ struct Node {
 ---
 
 ## 与 GoF 对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | GoF | Rust 对应 | 差异 |
@@ -456,6 +466,7 @@ struct Node {
 ---
 
 ## 边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 分类 |
@@ -467,6 +478,7 @@ struct Node {
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
@@ -477,6 +489,7 @@ struct Node {
 ---
 
 ## 思维导图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -504,6 +517,7 @@ mindmap
 ---
 
 ## 与其他模式的关系图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -522,6 +536,7 @@ graph LR
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -536,6 +551,7 @@ graph LR
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -594,6 +610,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [02_structural 目录](./README.md)
@@ -761,4 +778,3 @@ graph LR
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

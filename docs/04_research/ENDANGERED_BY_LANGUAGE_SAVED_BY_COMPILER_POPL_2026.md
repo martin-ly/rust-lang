@@ -34,6 +34,7 @@
     - [6.3 论文在学术脉络中的定位](#63-论文在学术脉络中的定位)
   - [7. 引用信息](#7-引用信息)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -209,6 +210,7 @@ flowchart LR
 ---
 
 ## 5. 实践意义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 对安全关键系统开发的启示
@@ -237,6 +239,7 @@ flowchart LR
 ---
 
 ## 6. 学术脉络：从 RustBelt 到 VerusBelt
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 技术谱系
@@ -285,6 +288,7 @@ flowchart TD
 ---
 
 ## 7. 引用信息
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **APA 格式**:
@@ -436,4 +440,3 @@ Programming Languages (POPL 2026).
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

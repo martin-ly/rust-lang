@@ -9,7 +9,7 @@ fn main() {
         // const { 40 + 2 } => println!("forty-two"),
         _ => println!("other"),
     }
-    
+
     // 正确: 使用字面量或 const item
     const ANSWER: i32 = 42;
     match x {

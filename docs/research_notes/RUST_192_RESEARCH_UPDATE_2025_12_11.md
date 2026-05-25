@@ -1,6 +1,7 @@
 ﻿# Rust 1.92.0 研究更新报告（历史记录）
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.92.0 研究更新报告（历史记录）](#rust-1920-研究更新报告历史记录)
@@ -308,6 +309,7 @@ fn api_stabilization_examples() {
 ---
 
 ## 📝 研究笔记系统更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 已更新的文档
@@ -340,6 +342,7 @@ fn api_stabilization_examples() {
 ---
 
 ## 🔗 相关资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 外部链接
@@ -389,6 +392,7 @@ fn api_stabilization_examples() {
 | T-TY3 | [coq_skeleton/TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
 ### 相关研究笔记
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 类别 | 文档 | 链接 |
@@ -401,6 +405,7 @@ fn api_stabilization_examples() {
 | 实验研究 | 性能基准测试 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) |
 
 ### 项目文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 链接 | 内容 |
@@ -418,12 +423,14 @@ fn api_stabilization_examples() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -469,6 +476,7 @@ fn api_stabilization_examples() {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -608,4 +616,3 @@ fn api_stabilization_examples() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [算法选择决策树速查卡](#算法选择决策树速查卡)
@@ -18,6 +19,7 @@
   - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 排序算法
 >
@@ -67,6 +69,7 @@
 ---
 
 ## 📊 动态规划
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特征 | 适用 DP | 不适用（尝试贪心） |
@@ -85,6 +88,7 @@
 ---
 
 ## 🔗 参考
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [c08_algorithm_decision_trees](../../../crates/c08_algorithms/src/algorithm_decision_trees.rs)
@@ -112,6 +116,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [quick_reference 目录](./README.md)
@@ -163,4 +168,3 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

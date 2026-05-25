@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Send/Sync 形式化](#sendsync-形式化)
@@ -37,6 +38,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录 {#-目录}
 >
@@ -67,6 +69,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -112,6 +115,7 @@
 **与 Rc/Arc/Cell 的关系**：见 [ownership_model](./ownership_model.md) Def RC1/ARC1/CELL1。`Rc: !Send`（非原子计数）；`Arc: Send + Sync` 当 $T: \text{Send} + \text{Sync}$；`Cell: !Sync`（内部可变无同步）。
 
 ## 权威来源对齐
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 来源 | 内容 | 本文档对应 | 对齐状态 |
@@ -262,6 +266,7 @@ Def SEND1, SYNC1
 ---
 
 ## 🔗 与 spawn/Future/Arc 衔接 {#-与-spawnfuturearc-衔接}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **thread::spawn**：[async_state_machine](./async_state_machine.md) Def SPAWN1、定理 SPAWN-T1。闭包需 `Send + 'static`；由 SEND-T1 保证转移后数据竞争自由。
@@ -287,6 +292,7 @@ Def SEND1, SYNC1
 ---
 
 ## 📖 参考文献 {#-参考文献}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Ferrocene FLS Ch. 17.1 Send and Sync](https://spec.ferrocene.dev/concurrency.html#send-and-sync)
@@ -304,6 +310,7 @@ Def SEND1, SYNC1
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -362,6 +369,7 @@ Def SEND1, SYNC1
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [formal_methods 目录](./README.md)
@@ -473,4 +481,3 @@ Def SEND1, SYNC1
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

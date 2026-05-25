@@ -11,6 +11,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 平台支持矩阵（截至 Rust 1.95.0）](#rust-平台支持矩阵截至-rust-1950)
@@ -31,6 +32,7 @@
   - [四、本项目支持的目标](#四本项目支持的目标)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 一、Rust 1.95.0 新增 / 变更的平台支持
 >
@@ -72,6 +74,7 @@
 ---
 
 ## 二、完整平台支持速查表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Tier 1（保证可用 + 主机工具 + CI 测试）
@@ -127,6 +130,7 @@
 | `riscv64imac-unknown-none-elf` | RISC-V 64 嵌入式 | |
 
 ### Tier 3（社区维护，无官方保证）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 目标 | 说明 |
@@ -137,9 +141,11 @@
 ---
 
 ## 三、嵌入式 / 裸机开发注意事项
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 JSON Target Specs 变更（1.95.0）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 1.95.0 将自定义 JSON target specification 从 stable 通道移除。
@@ -164,6 +170,7 @@ rustc -Z unstable-options --target my_custom_target.json
 - 使用自定义目标的裸机/嵌入式开发者：**需要 nightly 或等待官方目标升级**
 
 ### 3.2 Apple 嵌入式平台开发
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Rust 1.95.0 新增 6 个 Apple 嵌入式 Tier 2 目标，意味着：
@@ -185,6 +192,7 @@ cargo build --target aarch64-apple-visionos
 **要求**：macOS + Xcode + Apple Developer 工具链。
 
 ### 3.3 PowerPC64 musl 支持
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 `powerpc64-unknown-linux-musl` 提升至 Tier 2 with host tools：
@@ -203,6 +211,7 @@ cargo build --target powerpc64-unknown-linux-musl
 ---
 
 ## 四、本项目支持的目标
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本项目 `rust-toolchain.toml` 当前配置的目标：
@@ -239,6 +248,7 @@ targets = [
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [02_reference 目录](./README.md)
@@ -320,4 +330,3 @@ targets = [
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

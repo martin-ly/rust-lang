@@ -1,6 +1,7 @@
 ﻿# 研究笔记内容完善指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记内容完善指南](#研究笔记内容完善指南)
@@ -49,6 +50,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -183,6 +185,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -317,6 +320,7 @@
 ---
 
 ## 🔬 形式化定义部分完善 {#-形式化定义部分完善}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 完善形式化定义
@@ -375,9 +379,11 @@ let s2 = s1;  // 所有权转移: s1 → s2
 ---
 
 ## 💻 代码示例部分完善 {#-代码示例部分完善}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 添加更多示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **完善步骤**:
@@ -404,6 +410,7 @@ fn main() {
 **说明**: 这是最基本的所有权转移示例。`s1` 的所有权转移到 `s2` 后，`s1` 不再可用。
 
 ### 示例 2: 函数参数的所有权转移
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -421,6 +428,7 @@ fn main() {
 **说明**: 当值作为函数参数传递时，所有权也会转移。
 
 ### 2. 添加复杂场景
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **完善步骤**:
@@ -430,6 +438,7 @@ fn main() {
 3. **详细解释**: 解释复杂场景的工作原理
 
 ### 3. 添加错误示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **完善步骤**:
@@ -472,9 +481,11 @@ error[E0382]: borrow of moved value: `s1`
 ---
 
 ## 📖 参考文献部分完善 {#-参考文献部分完善}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 补充学术论文
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **完善步骤**:
@@ -505,6 +516,7 @@ error[E0382]: borrow of moved value: `s1`
 ```
 
 ### 2. 添加官方文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **完善步骤**:
@@ -529,6 +541,7 @@ error[E0382]: borrow of moved value: `s1`
 ```
 
 ### 3. 链接相关代码
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **完善步骤**:
@@ -554,9 +567,11 @@ error[E0382]: borrow of moved value: `s1`
 ---
 
 ## ✅ 完善检查清单 {#-完善检查清单}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 理论基础部分
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 所有重要概念都有定义
@@ -565,6 +580,7 @@ error[E0382]: borrow of moved value: `s1`
 - [ ] 有足够的例子说明
 
 ### 形式化定义部分
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 所有重要概念都有形式化定义
@@ -573,6 +589,7 @@ error[E0382]: borrow of moved value: `s1`
 - [ ] 有足够的代码示例
 
 ### 代码示例部分
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 有基础示例
@@ -581,6 +598,7 @@ error[E0382]: borrow of moved value: `s1`
 - [ ] 所有示例都有说明
 
 ### 参考文献部分
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 有学术论文引用
@@ -589,6 +607,7 @@ error[E0382]: borrow of moved value: `s1`
 - [ ] 有工具资源链接
 
 ### 整体质量
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 内容准确无误
@@ -599,9 +618,11 @@ error[E0382]: borrow of moved value: `s1`
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 核心文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [研究笔记主索引](./README.md)
@@ -610,6 +631,7 @@ error[E0382]: borrow of moved value: `s1`
 - [质量检查清单](./QUALITY_CHECKLIST.md)
 
 ### 完善工具
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [研究工具使用指南](./TOOLS_GUIDE.md)
@@ -617,6 +639,7 @@ error[E0382]: borrow of moved value: `s1`
 - [最佳实践](./BEST_PRACTICES.md)
 
 ### 参考示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [研究笔记示例](./EXAMPLE.md)
@@ -632,12 +655,14 @@ error[E0382]: borrow of moved value: `s1`
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -835,4 +860,3 @@ error[E0382]: borrow of moved value: `s1`
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

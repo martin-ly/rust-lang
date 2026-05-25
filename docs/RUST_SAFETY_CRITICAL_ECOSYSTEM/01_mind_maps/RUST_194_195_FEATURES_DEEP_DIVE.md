@@ -1,6 +1,7 @@
 # Rust 1.94/1.95 特性深度解析
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94/1.95 特性深度解析](#rust-194195-特性深度解析)
@@ -408,6 +409,7 @@ fn next_deadline(base: Duration) -> Duration {
 ---
 
 ## Rust 1.95.0 预览特性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 Impl Trait in Associated Type (ITIAT)
@@ -461,6 +463,7 @@ impl GpioPort for PortB {
 ```
 
 ### 2.2 异步闭包改进
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -480,9 +483,11 @@ trait Sensor {
 ---
 
 ## 版本迁移指南
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 从1.93迁移到1.94
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 检查清单
@@ -524,6 +529,7 @@ use std::sync::LazyLock;
 ```
 
 ### 准备1.95
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```toml
@@ -538,9 +544,11 @@ unstable = []  # 不稳定特性开关
 ---
 
 ## 性能基准测试
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 测试环境
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - CPU: Intel Xeon Platinum 8480+ (Sapphire Rapids)
@@ -549,6 +557,7 @@ unstable = []  # 不稳定特性开关
 - Rust: 1.94.0
 
 ### 测试结果
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 基准测试 | 1.93 | 1.94 | 提升 |
@@ -562,9 +571,11 @@ unstable = []  # 不稳定特性开关
 ---
 
 ## 安全关键系统建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 立即采用 (1.94)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | 安全等级 | 建议 |
@@ -575,6 +586,7 @@ unstable = []  # 不稳定特性开关
 | Duration运算 | 所有等级 | 简化代码 |
 
 ### 等待验证 (1.95)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 状态 | 建议 |
@@ -585,6 +597,7 @@ unstable = []  # 不稳定特性开关
 ---
 
 ## 参考资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 1.94 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.94.0)
@@ -614,6 +627,7 @@ unstable = []  # 不稳定特性开关
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -792,4 +806,3 @@ unstable = []  # 不稳定特性开关
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

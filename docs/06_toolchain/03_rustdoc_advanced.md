@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rustdoc 高级功能与文档生成](#rustdoc-高级功能与文档生成)
@@ -76,6 +77,7 @@
   - [**最后更新**: 2026-05-08 (添加 1.95+ 引用)](#最后更新-2026-05-08-添加-195-引用)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录
 >
@@ -147,6 +149,7 @@
   - [**最后更新**: 2026-05-08 (添加 1.95+ 引用)](#最后更新-2026-05-08-添加-195-引用)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🎯 文档说明
 >
@@ -463,6 +466,7 @@ pub struct MyType;
 ---
 
 ## 4. 文档链接
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 Intra-doc Links
@@ -535,6 +539,7 @@ pub fn external_links() {}
 ---
 
 ## 5. 文档组织
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 模块级文档
@@ -630,6 +635,7 @@ pub fn documented_function() {}
 ---
 
 ## 6. JSON 输出 (Rust 1.54+)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 生成 JSON
@@ -690,6 +696,7 @@ rustdoc src/lib.rs -Z unstable-options --output-format json
 ---
 
 ## 7. 主题与定制
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 自定义 CSS
@@ -752,9 +759,11 @@ rustdoc-args = ["--html-in-header", "header.html"]
 ---
 
 ## 8. 文档属性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 `#[doc]` 属性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **基础用法**:
@@ -778,6 +787,7 @@ pub fn add(a: i32, b: i32) -> i32 {  // 搜索别名
 ---
 
 ### 8.2 条件文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -791,9 +801,11 @@ pub async fn async_function() {}  // 显示需要的 feature
 ---
 
 ## 9. 私有项文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 文档化私有项
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -811,6 +823,7 @@ fn private_helper() {
 ---
 
 ### 9.2 内部文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -825,9 +838,11 @@ pub(crate) fn crate_internal() {}
 ---
 
 ## 10. 搜索与索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 10.1 搜索功能
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **搜索索引自动生成**: `search-index.js`
@@ -841,6 +856,7 @@ pub(crate) fn crate_internal() {}
 ---
 
 ### 10.2 搜索别名
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -856,9 +872,11 @@ pub fn add(a: i32, b: i32) -> i32 {
 ---
 
 ## 11. CI/CD 集成
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 11.1 自动化文档生成
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **GitHub Actions 示例**:
@@ -890,6 +908,7 @@ jobs:
 ---
 
 ### 11.2 文档部署
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **docs.rs 自动部署**:
@@ -911,9 +930,11 @@ docs.example.com
 ---
 
 ## 12. 最佳实践
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### ✅ 推荐做法
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **示例代码**: 为每个公开 API 提供示例
@@ -924,6 +945,7 @@ docs.example.com
 6. **使用 Intra-doc Links**: 链接到相关项
 
 ### ⚠️ 避免
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **重复代码签名**: Rustdoc 会自动显示签名
@@ -934,6 +956,7 @@ docs.example.com
 ---
 
 ## 13. 实战案例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **完整示例**:
@@ -1058,9 +1081,11 @@ struct Config;
 ---
 
 ## 14. 故障排查
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 常见问题
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **1. 文档链接失效**:
@@ -1088,9 +1113,11 @@ cargo +nightly rustdoc -- -Z unstable-options --output-format json
 ---
 
 ## 15. 相关资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 📚 官方文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rustdoc Book](https://doc.rust-lang.org/rustdoc/)
@@ -1098,12 +1125,14 @@ cargo +nightly rustdoc -- -Z unstable-options --output-format json
 - [The Rust Book - Documentation](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html)
 
 ### 🔗 相关文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [01_compiler_features.md](./01_compiler_features.md)
 - [02_cargo_workspace_guide.md](../archive/deprecated_20260318/02_cargo_workspace_guide.md)
 
 ### 📦 推荐工具
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **mdBook**: 创建书籍格式的文档
@@ -1114,9 +1143,11 @@ cargo +nightly rustdoc -- -Z unstable-options --output-format json
 ---
 
 ## 16. 代码示例与形式化链接
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 16.1 完整文档测试示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -1197,6 +1228,7 @@ pub fn multiply(a: i32, b: i32) -> i32 {
 ```
 
 ### 16.2 文档测试高级用法
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -1241,6 +1273,7 @@ pub fn process(input: &str) -> Result<String, Error> {
 ```
 
 ### 16.3 形式化文档链接
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -1290,6 +1323,7 @@ impl<T: Clone + Default> MyType<T> {
 ```
 
 ### 16.4 条件文档示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -1319,6 +1353,7 @@ pub fn x86_64_optimized() -> i32 {
 ```
 
 ### 16.5 形式化规范链接
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 概念 | 形式化文档链接 |
@@ -1334,9 +1369,11 @@ pub fn x86_64_optimized() -> i32 {
 ---
 
 ## 17. 形式化文档资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Rust 形式化规范
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Ferrocene Language Specification](https://spec.ferrocene.dev/) - Rust 语言的工业级形式化规范
@@ -1344,6 +1381,7 @@ pub fn x86_64_optimized() -> i32 {
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/) - 不安全 Rust 的黑暗艺术
 
 ### 类型理论与形式化方法
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust Belt](https://plv.mpi-sws.org/rustbelt/) - Rust 形式化验证研究项目
@@ -1359,6 +1397,7 @@ pub fn x86_64_optimized() -> i32 {
 ---
 
 ## Rust 1.95+ 更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **最新版本**: Rust 1.95.0+ (2026-03-05)
@@ -1382,6 +1421,7 @@ pub fn x86_64_optimized() -> i32 {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [06_toolchain 目录](./README.md)
@@ -1794,4 +1834,3 @@ pub fn x86_64_optimized() -> i32 {
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

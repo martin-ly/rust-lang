@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式语言与形式证明](#形式语言与形式证明)
@@ -44,6 +45,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 一、形式语言总览
 >
@@ -210,9 +212,11 @@ $$
 ---
 
 ## 五、形式证明（数学级）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 定理 T-OW2（所有权唯一性）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **陈述**：$\forall v, S: |\{x \mid \Omega_S(x)=\text{Owned} \land \Gamma_S(x)=v\}| \leq 1$
@@ -232,6 +236,7 @@ $$
 由归纳，$\forall S: P(S)$。∎
 
 ### 5.2 定理 T-BR1（数据竞争自由）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **陈述**：$\text{BorrowCheck}(P)=\text{OK} \rightarrow \text{DataRaceFree}(P)$
@@ -254,6 +259,7 @@ $$
 故 $\neg\exists m,t_1,t_2: \text{DataRace}(m,t_1,t_2)$。∎
 
 ### 5.3 定理 T-TY3（类型安全）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **陈述**：$\Gamma \vdash e : \tau \rightarrow \neg\exists e': e \to^* e' \land \text{type\_error}(e')$
@@ -275,9 +281,11 @@ $$
 ---
 
 ## 六、推导树示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### T-OW2 归纳步（move）的推导
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 $$
@@ -290,6 +298,7 @@ $$
 $$
 
 ### T-BR1 情况 1 的推导
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 $$
@@ -304,6 +313,7 @@ $$
 ---
 
 ## 七、与 Coq 的对应
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 形式语言 | Coq 骨架 |
@@ -319,6 +329,7 @@ $$
 ---
 
 ## 八、引用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) — 完整证明（L2）
@@ -333,6 +344,7 @@ $$
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -344,12 +356,14 @@ $$
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -395,6 +409,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [research_notes 目录](./README.md)
@@ -489,4 +504,3 @@ $$
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

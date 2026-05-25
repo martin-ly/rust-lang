@@ -1,6 +1,7 @@
 ﻿# 设计模式边界矩阵汇总
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [设计模式边界矩阵汇总](#设计模式边界矩阵汇总)
@@ -28,6 +29,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -277,6 +279,7 @@ flowchart TB
 ---
 
 ## 模式组合约束 DAG（D1.5）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Def BMP-DAG1（模式组合约束）**：设 $P_1 \to P_2$ 表示 $P_1$ 可组合于 $P_2$（$P_1$ 产出作为 $P_2$ 输入）。
@@ -322,6 +325,7 @@ Observer ──→ Command
 ---
 
 ## 与 43 完全模型衔接
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 扩展 20 种模式见 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)；
@@ -332,6 +336,7 @@ Observer ──→ Command
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -390,6 +395,7 @@ Observer ──→ Command
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [01_design_patterns_formal 目录](./README.md)
@@ -406,7 +412,6 @@ Observer ──→ Command
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
-
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
@@ -516,4 +521,3 @@ Observer ──→ Command
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

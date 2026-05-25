@@ -1,6 +1,7 @@
 # 形式化验证实战指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化验证实战指南](#形式化验证实战指南)
@@ -380,6 +381,7 @@ fn verify_with_stub() {
 ---
 
 ## Verus定理证明
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 概述
@@ -498,6 +500,7 @@ verus! {
 ---
 
 ## 验证策略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 分层验证方法
@@ -547,6 +550,7 @@ Level 5: 定理证明 (Verus)
 ---
 
 ## 实战案例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 案例1: 安全关键状态机
@@ -638,6 +642,7 @@ fn verify_state_machine() {
 ```
 
 ### 案例2: 加密算法验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -675,9 +680,11 @@ fn verify_constant_time() {
 ---
 
 ## 最佳实践
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 1. 从简单开始
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -690,6 +697,7 @@ fn verify_simple_property() {
 ```
 
 ### 2. 逐步增加复杂度
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -705,6 +713,7 @@ fn verify_with_assumptions() {
 ```
 
 ### 3. 处理循环
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -724,6 +733,7 @@ fn verify_with_loop() {
 ```
 
 ### 4. 在CI中集成
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```yaml
@@ -754,9 +764,11 @@ jobs:
 ---
 
 ## 故障排除
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Kani超时
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -777,6 +789,7 @@ fn fast_proof() {
 ```
 
 ### Miri堆溢出
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -807,6 +820,7 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -1044,4 +1058,3 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

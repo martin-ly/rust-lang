@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [快速入门指南](#快速入门指南)
@@ -52,6 +53,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录 {#-目录}
 >
@@ -99,6 +101,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -213,6 +216,7 @@
 ---
 
 ## 📝 第三步：阅读研究笔记 {#-第三步阅读研究笔记}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 选择研究主题
@@ -251,6 +255,7 @@
 ---
 
 ## ✍️ 第四步：创建研究笔记 {#️-第四步创建研究笔记}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 查看研究路线图
@@ -292,6 +297,7 @@
 ---
 
 ## 🤝 第五步：贡献研究 {#-第五步贡献研究}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 阅读贡献指南
@@ -306,6 +312,7 @@
 - 检查清单
 
 ### 5.2 选择贡献类型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 根据您的能力选择贡献类型：
@@ -316,6 +323,7 @@
 - **翻译工作** - 翻译研究笔记
 
 ### 5.3 提交贡献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 按照贡献流程提交您的贡献：
@@ -328,9 +336,11 @@
 ---
 
 ## 💡 学习路径建议 {#-学习路径建议}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 初学者路径
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **了解系统** → 阅读 [主索引](./README.md) 和 [系统总结](./SYSTEM_SUMMARY.md)
@@ -340,6 +350,7 @@
 5. **实践应用** → 查看 [实际应用案例](./practical_applications.md) 的案例 1–3（含 Axum、mpsc、SafeVec 代码）
 
 ### 进阶路径
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **深入研究** → 阅读 [形式化方法研究](./formal_methods/README.md) 和 [类型理论研究](./type_theory/README.md)
@@ -348,6 +359,7 @@
 4. **贡献研究** → 参考 [贡献指南](./CONTRIBUTING.md) 开始贡献
 
 ### 专家路径
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **形式化研究** → 深入研究形式化方法，使用 Coq、Lean 等工具
@@ -358,9 +370,11 @@
 ---
 
 ## ❓ 需要帮助？ {#-需要帮助}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 常见问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 查看 [常见问题解答](./FAQ.md) 获取常见问题的答案。
@@ -374,6 +388,7 @@
 - 文档相关问题
 
 ### 获取帮助
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 如有问题或需要帮助，请：
@@ -383,6 +398,7 @@
 - 📧 联系维护团队
 
 ### 相关资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [主索引](./README.md) - 完整的研究笔记索引
@@ -403,12 +419,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -454,6 +472,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](./README.md)
@@ -555,4 +574,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -1,6 +1,7 @@
 # DO-178C Rust合规路径
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [DO-178C Rust合规路径](#do-178c-rust合规路径)
@@ -568,6 +569,7 @@ mod tests {
 ---
 
 ## DO-330工具鉴定
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 工具鉴定等级
@@ -647,6 +649,7 @@ pub enum TestResult {
 ---
 
 ## 适航认证检查表
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Level A软件完整检查表
@@ -737,6 +740,7 @@ pub enum TestResult {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -984,4 +988,3 @@ pub enum TestResult {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

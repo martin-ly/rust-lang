@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [综合项目报告](#综合项目报告)
@@ -50,6 +51,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -194,6 +196,7 @@ L3: 机器检查 (Coq骨架)
 ```
 
 ### 2. 五维概念矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 系统化的Rust概念组织框架：
@@ -205,6 +208,7 @@ L3: 机器检查 (Coq骨架)
 - 并发维度
 
 ### 3. 形式化-工程桥梁
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 每个形式化概念都配有：
@@ -217,9 +221,11 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 使用统计
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 目标受众
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 受众 | 预期用途 | 推荐入口 |
@@ -231,6 +237,7 @@ L3: 机器检查 (Coq骨架)
 | 教育工作者 | 教学资源 | 00_COMPREHENSIVE_SUMMARY.md |
 
 ### 预计学习时间
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 路径 | 内容 | 时间 |
@@ -243,9 +250,11 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 项目影响
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 教育价值
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 提供了系统化的Rust学习资源
@@ -253,6 +262,7 @@ L3: 机器检查 (Coq骨架)
 - 支持了多层次的受众需求
 
 ### 技术价值
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 形式化了Rust核心概念
@@ -260,6 +270,7 @@ L3: 机器检查 (Coq骨架)
 - 提供了设计模式参考
 
 ### 社区价值
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 开源共享，社区驱动
@@ -269,9 +280,11 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 技术债务与未来工作
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 已完成
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ 核心形式化文档
@@ -280,6 +293,7 @@ L3: 机器检查 (Coq骨架)
 - ✅ 实用资源
 
 ### 可选增强
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 项目 | 优先级 | 预估工时 |
@@ -292,9 +306,11 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 致谢
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 贡献者
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - Rust Formal Methods Research Team
@@ -302,6 +318,7 @@ L3: 机器检查 (Coq骨架)
 - Rust社区的形式化方法研究者
 
 ### 参考资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - The Rust Programming Language
@@ -312,6 +329,7 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 许可证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本项目采用 MIT/Apache-2.0 双许可证。
@@ -319,6 +337,7 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 联系方式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 项目主页: <https://github.com/rust-formal-methods/research-notes>
@@ -335,11 +354,13 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 🆕 Rust 1.94 研究更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 核心研究点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - rray_windows 的形式化语义
@@ -354,12 +375,14 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -405,6 +428,7 @@ L3: 机器检查 (Coq骨架)
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -494,4 +518,3 @@ L3: 机器检查 (Coq骨架)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

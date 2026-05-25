@@ -52,6 +52,7 @@
 - **速查卡**: [type_system](../../../docs/02_reference/quick_reference/type_system.md) | [generics_cheatsheet](../../../docs/02_reference/quick_reference/generics_cheatsheet.md)
 - **RBE 练习**: [Custom Types](https://doc.rust-lang.org/rust-by-example/custom_types.html) · [Traits](https://doc.rust-lang.org/rust-by-example/trait.html) · [Conversion](https://doc.rust-lang.org/rust-by-example/conversion.html)
 - **Rustlings**: [04_primitive_types](https://github.com/rust-lang/rustlings/tree/main/exercises/04_primitive_types) · [07_structs](https://github.com/rust-lang/rustlings/tree/main/exercises/07_structs) · [08_enums](https://github.com/rust-lang/rustlings/tree/main/exercises/08_enums) · [15_traits](https://github.com/rust-lang/rustlings/tree/main/exercises/15_traits)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

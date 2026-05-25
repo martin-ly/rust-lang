@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [定理 ↔ Rust 示例完整映射](#定理--rust-示例完整映射)
@@ -237,6 +238,7 @@ fn theorem_ty2_generic_monomorphization<T: std::fmt::Display>(x: T) {
 ---
 
 ## 🧬 生命周期定理映射
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### T-LT1: 生命周期包含定理
@@ -277,6 +279,7 @@ fn theorem_lt2_subtyping<'a>(s: &'a str) -> &'static str {
 ---
 
 ## 🧬 并发安全定理映射
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### T-SS1: Send 安全性定理
@@ -346,6 +349,7 @@ fn theorem_mt1_mutex_safety() {
 ---
 
 ## 🧬 异步编程定理映射
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### T-FU1: Future 进展定理
@@ -413,6 +417,7 @@ fn theorem_pi1_pin_safety() {
 ---
 
 ## 🧬 分布式系统定理映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### T-SG1: Saga 最终一致性定理
@@ -462,9 +467,11 @@ impl CircuitBreaker {
 ---
 
 ## 🧬 工作流引擎定理映射
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### T-WF1: 工作流活性定理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -487,6 +494,7 @@ fn theorem_wf1_workflow_liveness() {
 ```
 
 ### T-CC1: 补偿一致性定理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -504,9 +512,11 @@ async fn theorem_cc1_compensation_consistency() {
 ---
 
 ## 📊 映射完整性验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 验证清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [x] 每个定理都有对应 Rust 示例
@@ -516,6 +526,7 @@ async fn theorem_cc1_compensation_consistency() {
 - [x] 覆盖所有核心定理 (42个)
 
 ### 统计信息
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 类别 | 定理 | 示例 | 代码行数 |
@@ -528,6 +539,7 @@ async fn theorem_cc1_compensation_consistency() {
 ---
 
 ## 🔗 相关文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md)
@@ -538,12 +550,14 @@ async fn theorem_cc1_compensation_consistency() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -589,6 +603,7 @@ async fn theorem_cc1_compensation_consistency() {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -737,4 +752,3 @@ async fn theorem_cc1_compensation_consistency() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

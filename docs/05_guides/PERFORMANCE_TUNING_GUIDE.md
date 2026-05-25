@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [性能调优完整指南](#性能调优完整指南)
@@ -66,6 +67,7 @@
   - [**最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 语义)](#最后更新-2026-05-08-深度整合-rust-195-语义)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -127,6 +129,7 @@
   - [**最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 语义)](#最后更新-2026-05-08-深度整合-rust-195-语义)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -334,6 +337,7 @@ impl<T: Send> ObjectPool<T> {
 ---
 
 ## ⚡ 运行时优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 迭代器优化
@@ -459,6 +463,7 @@ use std::arch::aarch64::*;
 ---
 
 ## 🔄 并发优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 使用 Arc 而非 Rc
@@ -582,6 +587,7 @@ let sum: f64 = data.par_iter().map(|x| x * 2.0).sum();
 ---
 
 ## 🌐 异步优化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. 使用 select! 而非 join
@@ -706,6 +712,7 @@ async fn read_file(path: &str) -> Result<String, io::Error> {
 ---
 
 ## 📊 性能分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 1. 使用 criterion 基准测试
@@ -798,6 +805,7 @@ valgrind --leak-check=full ./target/debug/my_app
 ---
 
 ## 🎯 优化策略
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 1. 测量优先
@@ -846,6 +854,7 @@ let _enter = span.enter();
 ```
 
 ### 3. 渐进优化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -872,9 +881,11 @@ fn optimized_implementation(data: &[i32]) -> i32 {
 ---
 
 ## 使用场景
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 场景1: 编译时优化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 优化编译产物大小和运行速度：
@@ -888,6 +899,7 @@ codegen-units = 1
 ```
 
 ### 场景2: 内存密集型应用优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 优化大数据处理应用的内存使用：
@@ -897,6 +909,7 @@ codegen-units = 1
 - 实施 [内存池模式](#5-内存池模式) 复用对象
 
 ### 场景3: 高并发系统优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 提升多线程/异步应用性能：
@@ -906,6 +919,7 @@ codegen-units = 1
 - 实施 [并行迭代器](#5-并行迭代器) 加速计算
 
 ### 场景4: 性能瓶颈定位
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 使用分析工具定位性能瓶颈：
@@ -917,6 +931,7 @@ codegen-units = 1
 ---
 
 ## 形式化链接
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 链接类型 | 目标文档 |
@@ -934,6 +949,7 @@ codegen-units = 1
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
@@ -946,11 +962,13 @@ codegen-units = 1
 - [BEST_PRACTICES.md](./BEST_PRACTICES.md)
 
 ## 🆕 Rust 1.95+ 特性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 新特性深度解析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 1.95+ 带来了多个影响运行时性能的重要更新。本节提供**可测量的性能改进**指导和**实际生产场景**的使用模式。
@@ -1097,6 +1115,7 @@ where
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [05_guides 目录](./README.md)
@@ -1419,4 +1438,3 @@ where
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

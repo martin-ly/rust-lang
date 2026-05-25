@@ -39,6 +39,7 @@
       - [相关文档](#相关文档-1)
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -205,6 +206,7 @@
 ---
 
 ## DevOps 与 CI
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 应用场景 | 技术选型 | 论证依据 |
@@ -219,6 +221,7 @@
 ---
 
 ## 跨场景选型矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -258,6 +261,7 @@ flowchart LR
 ---
 
 ## 跨场景选型矩阵（表格式）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 场景 | 执行模型 | 运行时 | 网络 | 数据 | 形式化引用 |
@@ -273,6 +277,7 @@ flowchart LR
 ---
 
 ## 选型冲突与化解
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 冲突 | 化解 |
@@ -284,6 +289,7 @@ flowchart LR
 ---
 
 ## 与形式化体系衔接
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 应用场景 | 形式化定理 | 文档 |
@@ -296,6 +302,7 @@ flowchart LR
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [思维表征方式](./THINKING_REPRESENTATION_METHODS.md) - 决策树、转换树
@@ -308,6 +315,7 @@ flowchart LR
 ---
 
 ## Rust 1.95+ 思维表征更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -341,6 +349,7 @@ Rust 新特性可扩展思维表征方式：
 ---
 
 ## Rust 1.95+ 持续更新更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
@@ -510,4 +519,3 @@ Rust 新特性可扩展思维表征方式：
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

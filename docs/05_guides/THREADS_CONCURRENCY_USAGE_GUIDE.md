@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [线程与并发使用指南](#线程与并发使用指南)
@@ -65,6 +66,7 @@
   - [**状态**: ✅ 完整实现](#状态--完整实现)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -124,6 +126,7 @@
   - [**状态**: ✅ 完整实现](#状态--完整实现)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -1682,6 +1685,7 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [05_guides 目录](./README.md)
@@ -1714,7 +1718,6 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 > **[来源: TRPL Ch. 16 - Fearless Concurrency]**
 > **[来源: Rust Reference - std::sync]**
 > **[来源: ACM - Concurrent Programming]**
-
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
@@ -2301,4 +2304,3 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

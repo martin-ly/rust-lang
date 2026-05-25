@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [教程：理解借用检查器](#教程理解借用检查器)
@@ -270,6 +271,7 @@ Rust阻止这种情况，保证内存安全。
 ---
 
 ## 第五部分：可变与不可变借用冲突
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 典型的冲突场景
@@ -324,6 +326,7 @@ r3.push_str(" world");
 ---
 
 ## 第六部分：NLL (非词法生命周期)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 什么是NLL
@@ -366,6 +369,7 @@ r2.push_str(" world");
 ---
 
 ## 第七部分：借用与数据结构
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 结构体中的借用
@@ -413,6 +417,7 @@ struct SelfRef {
 ---
 
 ## 第八部分：常见编译错误与解决
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 错误1: 值被移动后使用
@@ -469,6 +474,7 @@ fn good2() -> &'static str {
 ---
 
 ## 第九部分：内部可变性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 当借用规则太严格时
@@ -502,6 +508,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 ---
 
 ## 第十部分：形式化视角
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 借用检查器的保证
@@ -528,6 +535,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 ---
 
 ## 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -551,6 +559,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 ```
 
 ## 引言
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 借用检查器(Borrow Checker)是Rust编译器的核心组件。它确保你的代码内存安全，无需垃圾回收器。本教程将解释借用检查器的工作原理。
@@ -558,6 +567,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 ---
 
 ## 第一部分：为什么需要借用检查器？
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 内存安全问题
@@ -582,6 +592,7 @@ free(ptr);
 ---
 
 ## 第二部分：借用检查器的核心规则
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 规则1: 要么多个不可变借用，要么一个可变借用
@@ -618,6 +629,7 @@ let r;
 ---
 
 ## 第三部分：工作原理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 借用检查算法
@@ -648,9 +660,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 ## 第四部分：常见错误与解决
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 错误1: 借用冲突
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -668,6 +682,7 @@ let r2 = &mut x;  // OK
 ```
 
 ### 错误2: 悬垂引用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -686,9 +701,11 @@ fn not_dangling() -> String {
 ---
 
 ## 第五部分：高级特性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### NLL (非词法生命周期)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -700,6 +717,7 @@ let z = &mut x;  // OK！NLL允许
 ```
 
 ### 内部可变性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -715,9 +733,11 @@ let z = x.borrow_mut(); // 运行时错误！已有借用
 ---
 
 ## 第六部分：形式化视角
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 T-BR1
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **借用检查器保证数据竞争自由。**
@@ -735,6 +755,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ---
 
 ## 总结
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -763,12 +784,14 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -814,6 +837,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -1004,4 +1028,3 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

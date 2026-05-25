@@ -51,6 +51,7 @@
 - **速查卡**: [generics_cheatsheet](../../../docs/02_reference/quick_reference/generics_cheatsheet.md)
 - **RBE 练习**: [Generics](https://doc.rust-lang.org/rust-by-example/generics.html)
 - **Rustlings**: [14_generics](https://github.com/rust-lang/rustlings/tree/main/exercises/14_generics)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

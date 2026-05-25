@@ -1,6 +1,7 @@
 ﻿# Decorator 形式化分析
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Decorator 形式化分析](#decorator-形式化分析)
@@ -39,6 +40,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -91,6 +93,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -321,6 +324,7 @@ borrow_checker_proof
 ---
 
 ## 典型场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
@@ -332,6 +336,7 @@ borrow_checker_proof
 ---
 
 ## 完整场景示例：HTTP 客户端装饰链（日志 + 重试）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **场景**：底层 client 发请求；LogDecorator 记录请求；RetryDecorator 失败重试；同接口叠加。
@@ -378,6 +383,7 @@ impl<C: HttpClient> HttpClient for RetryDecorator<C> {
 ---
 
 ## 相关模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
@@ -389,6 +395,7 @@ impl<C: HttpClient> HttpClient for RetryDecorator<C> {
 ---
 
 ## 实现变体
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
@@ -400,6 +407,7 @@ impl<C: HttpClient> HttpClient for RetryDecorator<C> {
 ---
 
 ## 反例：违反委托链
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **错误**：装饰器不委托 inner，直接返回固定值，破坏透明性。
@@ -415,6 +423,7 @@ impl<C: Coffee> Coffee for BadDecorator<C> {
 ---
 
 ## 选型决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -427,6 +436,7 @@ impl<C: Coffee> Coffee for BadDecorator<C> {
 ---
 
 ## 与 GoF 对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | GoF | Rust 对应 | 差异 |
@@ -438,6 +448,7 @@ impl<C: Coffee> Coffee for BadDecorator<C> {
 ---
 
 ## 边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 分类 |
@@ -449,6 +460,7 @@ impl<C: Coffee> Coffee for BadDecorator<C> {
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
@@ -459,6 +471,7 @@ impl<C: Coffee> Coffee for BadDecorator<C> {
 ---
 
 ## 思维导图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -486,6 +499,7 @@ mindmap
 ---
 
 ## 与其他模式的关系图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -504,6 +518,7 @@ graph LR
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -518,6 +533,7 @@ graph LR
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -576,6 +592,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [02_structural 目录](./README.md)
@@ -730,4 +747,3 @@ graph LR
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

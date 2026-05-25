@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 概念关联网络](#rust-概念关联网络)
@@ -57,6 +58,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录 {#-目录}
 >
@@ -108,6 +110,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -322,6 +325,7 @@
 ---
 
 ## 关联矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### L1-L2 关联矩阵
@@ -390,6 +394,7 @@
 ---
 
 ## 知识图谱
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 全局概念图谱
@@ -572,6 +577,7 @@ graph TB
 ---
 
 ## 导航索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 概念到文档映射
@@ -732,6 +738,7 @@ C6 共享借用 ⊥ C7 可变借用
 ---
 
 ## 📊 关系统计 {#-关系统计}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 关系类型 | 数量 | 占比 | 主要分布 |
@@ -747,6 +754,7 @@ C6 共享借用 ⊥ C7 可变借用
 ---
 
 ## 📚 相关文档 {#-相关文档}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文档 | 关系类型 | 用途 |
@@ -765,11 +773,13 @@ C6 共享借用 ⊥ C7 可变借用
 ---
 
 ## 🆕 Rust 1.94 研究更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 核心研究点
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - rray_windows 的形式化语义
@@ -784,12 +794,14 @@ C6 共享借用 ⊥ C7 可变借用
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -835,6 +847,7 @@ C6 共享借用 ⊥ C7 可变借用
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [research_notes 目录](./README.md)
@@ -1091,4 +1104,3 @@ C6 共享借用 ⊥ C7 可变借用
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

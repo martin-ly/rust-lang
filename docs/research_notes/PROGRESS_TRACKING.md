@@ -1,6 +1,7 @@
 ﻿# 研究进展跟踪
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究进展跟踪](#研究进展跟踪)
@@ -279,6 +280,7 @@
 ---
 
 ## 🔬 类型理论研究进展 {#-类型理论研究进展}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 类型系统基础
@@ -389,6 +391,7 @@
 ---
 
 ## ⚡ 实验研究进展 {#-实验研究进展}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 性能基准测试
@@ -436,6 +439,7 @@
 ---
 
 ### 编译器优化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **文档**: [compiler_optimizations.md](./experiments/compiler_optimizations.md)
@@ -456,6 +460,7 @@
 ---
 
 ### 并发性能研究
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **文档**: [concurrency_performance.md](./experiments/concurrency_performance.md)
@@ -476,6 +481,7 @@
 ---
 
 ### 宏展开性能分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **文档**: [macro_expansion_performance.md](./experiments/macro_expansion_performance.md)
@@ -496,9 +502,11 @@
 ---
 
 ## 🌐 综合研究进展 {#-综合研究进展}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 实际应用案例研究
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **文档**: [practical_applications.md](./practical_applications.md)
@@ -519,6 +527,7 @@
 ---
 
 ### 研究方法论
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **文档**: [research_methodology.md](./research_methodology.md)
@@ -538,9 +547,11 @@
 ---
 
 ## 📈 总体进展统计 {#-总体进展统计}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 按研究领域统计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 研究领域 | 研究笔记数 | 平均完成度 | 状态 |
@@ -552,6 +563,7 @@
 | **总计**       | 17个       | 100%       | ✅ 已完成 |
 
 ### 按优先级统计
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 优先级      | 研究笔记数 | 平均完成度 |
@@ -561,6 +573,7 @@
 | 🟢 低优先级 | 3个        | 100%       |
 
 ### 按任务状态统计
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 任务状态  | 数量         | 占比 |
@@ -572,21 +585,25 @@
 ---
 
 ## 🎯 下一步计划 {#-下一步计划}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 短期目标 (1-2 周)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - **全部研究笔记已达 100%**：形式化、类型理论、实验、综合均已完成。
 - **可选项**：按「数据收集执行指南」与「结果分析模板」执行 `cargo bench`、Valgrind、Miri 等，填入实测数据；对形式化文档做 Prusti/Kani/Coq 的补充验证。
 
 ### 中期目标 (1-3 个月)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **Rust 新版本跟进**：Rust 1.93+ 的 thread_local 分配器、MaybeUninit、asm!、musl、状态机 codegen 等，在性能基准、内存分析、并发、宏展开、编译器优化中按文档计划重跑并更新结论。
 - **案例与方法论扩展**：在 practical_applications 中按「案例报告模板」增加新项目；在 research_methodology 中根据新工具/新方法更新「工具集成与案例研究索引」。
 
 ### 长期目标 (3-6 个月)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **形式化工具链**：深化 Prusti、Creusot、Kani 在所有权、借用、生命周期文档中的应用。
@@ -595,9 +612,11 @@
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 核心文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [研究笔记主索引](./README.md)
@@ -606,6 +625,7 @@
 - [快速参考](./QUICK_REFERENCE.md)
 
 ### 贡献和质量
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [贡献指南](./CONTRIBUTING.md)
@@ -613,6 +633,7 @@
 - [研究笔记模板](./TEMPLATE.md)
 
 ### 工具和资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [研究工具使用指南](./TOOLS_GUIDE.md)
@@ -637,12 +658,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -688,6 +711,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -836,4 +860,3 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

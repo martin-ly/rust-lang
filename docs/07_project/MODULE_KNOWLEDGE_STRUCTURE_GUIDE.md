@@ -1,6 +1,7 @@
 ﻿# 模块知识结构补充指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [模块知识结构补充指南](#模块知识结构补充指南)
@@ -65,6 +66,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
@@ -139,6 +141,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -653,6 +656,7 @@ fn main() {
 ---
 
 ## 🗺️ 思维表征方式补充
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 思维导图补充
@@ -697,6 +701,7 @@ fn main() {
 ```
 
 ### 3. 决策图网补充
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 模板
@@ -714,6 +719,7 @@ fn main() {
 ````
 
 ### 4. 证明图网补充
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 模板
@@ -733,9 +739,11 @@ fn main() {
 ---
 
 ## 📊 模块文档知识结构
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 1. C01: 所有权与借用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 核心概念知识结构
@@ -753,6 +761,7 @@ fn main() {
 - **关系**: 依赖所有权、与生命周期相关
 
 ### 2. C02: 类型系统
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 核心概念知识结构
@@ -770,6 +779,7 @@ fn main() {
 - **关系**: 与泛型、类型系统相关
 
 ### 3. C05: 线程与并发
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### 核心概念知识结构
@@ -787,6 +797,7 @@ fn main() {
 - **关系**: 与并发、共享状态相关
 
 ### 4. C06: 异步编程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 核心概念知识结构
@@ -804,6 +815,7 @@ fn main() {
 - **关系**: 与 Future、运行时相关
 
 ### 5. C07: 进程管理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 核心概念知识结构
@@ -831,6 +843,7 @@ fn main() {
 - **关系**: 与进程、IPC、Unix 系统调用相关
 
 ### 6. C08: 算法与数据结构
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 核心概念知识结构
@@ -848,6 +861,7 @@ fn main() {
 - **关系**: 与算法、性能相关
 
 ### 7. C09: 设计模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 核心概念知识结构
@@ -865,6 +879,7 @@ fn main() {
 - **关系**: 与创建型、行为型模式相关
 
 ### 8. C10: 网络编程
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 核心概念知识结构
@@ -882,6 +897,7 @@ fn main() {
 - **关系**: 与异步编程、网络编程相关
 
 ### 9. C11: 宏系统
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 核心概念知识结构
@@ -907,6 +923,7 @@ fn main() {
 - **关系**: 与宏系统、过程宏、编译器实现相关
 
 ### 10. C12: WASM
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 核心概念知识结构
@@ -926,6 +943,7 @@ fn main() {
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [知识结构框架](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 完整知识结构体系
@@ -943,12 +961,14 @@ fn main() {
 ---
 
 ## Rust 1.95+ 持续更新更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -994,6 +1014,7 @@ fn main() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [07_project 目录](./README.md)
@@ -1274,4 +1295,3 @@ fn main() {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

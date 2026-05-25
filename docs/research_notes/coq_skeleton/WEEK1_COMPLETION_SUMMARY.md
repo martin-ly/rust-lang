@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Week 1 完成总结与持续执行计划](#week-1-完成总结与持续执行计划)
@@ -36,6 +37,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Week 1 完成情况
 >
@@ -71,6 +73,7 @@
 ---
 
 ## 持续推进执行计划
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 执行策略: 滚动推进
@@ -92,6 +95,7 @@
 ---
 
 ## 关键路径 (Critical Path)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -117,6 +121,7 @@ Week 17-20: Aeneas对接
 ---
 
 ## 下一批执行任务
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 立即执行 (今明两天)
@@ -145,6 +150,7 @@ Week 17-20: Aeneas对接
 ---
 
 ## 资源准备清单
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 工具安装 (Week 2前)
@@ -171,6 +177,7 @@ Week 17-20: Aeneas对接
 ---
 
 ## 质量保证检查点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 每任务检查清单
@@ -194,6 +201,7 @@ Week 17-20: Aeneas对接
 ---
 
 ## 风险应对
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 风险 | 应对策略 |
@@ -206,6 +214,7 @@ Week 17-20: Aeneas对接
 ---
 
 ## 持续推进承诺
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -229,12 +238,14 @@ Week 17-20: Aeneas对接
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -280,6 +291,7 @@ Week 17-20: Aeneas对接
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [coq_skeleton 目录](./README.md)
@@ -363,4 +375,3 @@ Week 17-20: Aeneas对接
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

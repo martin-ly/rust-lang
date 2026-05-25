@@ -1,6 +1,7 @@
 ﻿# 研究方法论
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究方法论](#研究方法论)
@@ -379,6 +380,7 @@ Qed.
 ---
 
 ## 🔬 研究工具 {#-研究工具}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 分析工具
@@ -420,6 +422,7 @@ Qed.
 ---
 
 ## 💻 实践指南 {#-实践指南}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 研究设计
@@ -432,6 +435,7 @@ Qed.
 4. **计划制定**: 制定详细的研究计划
 
 ### 数据收集
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **数据源识别**: 确定数据来源
@@ -440,6 +444,7 @@ Qed.
 4. **数据存储**: 安全存储数据
 
 ### 结果分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **数据整理**: 整理和清洗数据
@@ -448,6 +453,7 @@ Qed.
 4. **结论推导**: 推导研究结论
 
 ### 报告撰写
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **结构设计**: 设计报告结构
@@ -458,9 +464,11 @@ Qed.
 ---
 
 ## 📐 质量评估标准与研究模板 {#-质量评估标准与研究模板}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 质量评估标准
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **可重复性**：环境、命令、版本可复现；实验类需「数据收集执行指南」+「结果分析模板」。
@@ -470,6 +478,7 @@ Qed.
 - **时效性**：注明 Rust 版本（如 1.93.1+）；若依赖未稳定特性，需标出。
 
 ### 研究模板
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **形式化/理论**：目标 → 符号与定义 → 规则/公理 → 定理与证明草图 → 代码示例 → 与它文档的关联。
@@ -481,9 +490,11 @@ Qed.
 ---
 
 ## 🔗 工具集成与案例研究索引 {#-工具集成与案例研究索引}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 工具集成
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **与 [TOOLS_GUIDE.md](./TOOLS_GUIDE.md)**：本「研究工具」中的 Clippy、Miri、Criterion、Valgrind、perf 等，安装、常用参数与样例见 TOOLS_GUIDE。
@@ -496,6 +507,7 @@ Qed.
 - **与形式化**：Prusti、Creusot、Kani 的用法见各形式化文档的「工具验证」；Coq/Lean 示例见「1.1 形式化研究方法详解」。
 
 ### 工具使用要点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **Clippy**：`cargo clippy -- -W clippy::all`；在 CI 中固定 `clippy::version`。
@@ -505,6 +517,7 @@ Qed.
 - **cargo expand / bloat**：宏展开与二进制体积分析；见 [macro_expansion_performance](./experiments/macro_expansion_performance.md)。
 
 ### 案例研究索引
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类型 | 文档 | 说明 |
@@ -517,15 +530,18 @@ Qed.
 ---
 
 ## 📖 参考文献 {#-参考文献}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 方法论文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [研究方法索引](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md)
 - [研究工具指南](../rust-formal-engineering-system/09_research_agenda/04_research_methods/README.md)
 
 ### 工具文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [研究工具使用指南](./TOOLS_GUIDE.md) - 详细的工具安装和使用方法
@@ -534,6 +550,7 @@ Qed.
 - [Prusti 文档](https://viperproject.github.io/prusti-dev/README.md)
 
 ### 最佳实践
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 研究最佳实践](https://doc.rust-lang.org/book/README.md)
@@ -543,9 +560,11 @@ Qed.
 ---
 
 ## 🔄 研究进展 {#-研究进展}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 已完成 ✅ {#已完成-}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [x] 研究方法框架（包括优势说明）
@@ -554,6 +573,7 @@ Qed.
 - [x] 理论基础整理（包括理论背景和相关概念）
 
 ### 进行中 🔄（已完成）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [x] 详细方法文档（2.1 实验、3.1 实证、4.1 理论要点 + 各文档索引）
@@ -561,6 +581,7 @@ Qed.
 - [x] 案例研究（案例研究索引 + practical_applications）
 
 ### 计划中 📋（已完成）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [x] 质量评估标准（见「质量评估标准与研究模板」）
@@ -576,12 +597,14 @@ Qed.
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -757,4 +780,3 @@ Qed.
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

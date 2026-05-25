@@ -1,6 +1,7 @@
 # 案例研究04: 医疗设备软件 (IEC 62304)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [案例研究04: 医疗设备软件 (IEC 62304)](#案例研究04-医疗设备软件-iec-62304)
@@ -543,6 +544,7 @@ mod verification {
 ---
 
 ## 认证经验
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### IEC 62304符合性
@@ -606,6 +608,7 @@ mod verification {
 ---
 
 ## 关键指标
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 代码度量
@@ -637,6 +640,7 @@ mod verification {
 ---
 
 ## 经验教训
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 成功因素
@@ -662,6 +666,7 @@ mod verification {
 ---
 
 ## 结论
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本案例证明Rust完全可以用于IEC 62304 Class C医疗设备开发。关键成功因素包括:
@@ -697,6 +702,7 @@ mod verification {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -925,4 +931,3 @@ mod verification {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

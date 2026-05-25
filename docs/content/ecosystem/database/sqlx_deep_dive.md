@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [SQLx 深度解析](#sqlx-深度解析)
@@ -33,6 +34,7 @@
   - [**状态**: ✅ 已完成](#状态--已完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -61,6 +63,7 @@
   - [**状态**: ✅ 已完成](#状态--已完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -415,6 +418,7 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
 ---
 
 ## 📊 性能优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 基准数据
@@ -464,6 +468,7 @@ let pool = PgPoolOptions::new()
 ---
 
 ## 🧪 测试
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -506,6 +511,7 @@ mod tests {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [SQLx 官方文档](https://docs.rs/sqlx/latest/sqlx/)
@@ -535,6 +541,7 @@ mod tests {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -717,4 +724,3 @@ mod tests {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

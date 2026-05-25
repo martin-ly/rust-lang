@@ -3,6 +3,7 @@
 本文件对照 [The Rustonomicon](https://doc.rust-lang.org/nomicon/) 的章节，列出本项目已覆盖和未覆盖的内容，并标注对应的 crate 位置。
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [The Rustonomicon 内容对齐](#the-rustonomicon-内容对齐)
@@ -16,6 +17,7 @@
   - [参考资源](#参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 已覆盖内容
 >
@@ -52,18 +54,21 @@
 - **覆盖**: `size_of`、`align_of`、`offset_of`、`#[repr(C)]`、`#[repr(packed)]`、ZST/DST、padding 计算
 
 ### c12: FFI 高级用法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **文件**: `crates/c12_wasm/src/ffi_advanced.rs`
 - **覆盖**: 不透明结构体、回调封装（trampoline）、RAII 封装、动态库加载概念、可变参数
 
 ### c13: 裸指针、volatile、内联汇编
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **文件**: `crates/c13_embedded/src/raw_pointers_advanced.rs`
 - **覆盖**: `*const`/`*mut` 别名规则、`read_volatile`/`write_volatile`、MMIO 操作、`core::arch::asm!`、x86_64 cpuid/rdtsc
 
 ## 待补充内容
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 章节 | 说明 | 计划 |
@@ -76,6 +81,7 @@
 | 10.2 Arc/Weak 实现 | 引用计数实现 | 未覆盖 |
 
 ## 参考资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [The Rustonomicon - 官方文档](https://doc.rust-lang.org/nomicon/)
@@ -142,4 +148,3 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

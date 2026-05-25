@@ -1,6 +1,7 @@
 ﻿# 并发性能研究
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [并发性能研究](#并发性能研究)
@@ -50,6 +51,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-02-28
@@ -109,6 +111,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -294,6 +297,7 @@
 ---
 
 ## 💻 代码示例 {#-代码示例}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例 1：Mutex vs RwLock 性能测试
@@ -462,6 +466,7 @@ async fn async_task_benchmark() {
 ---
 
 ## 📊 实验结果 {#-实验结果}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 同步原语性能对比
@@ -538,6 +543,7 @@ async fn async_task_benchmark() {
 ---
 
 ## 📋 数据收集执行指南 {#-数据收集执行指南}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 环境要求
@@ -559,6 +565,7 @@ async fn async_task_benchmark() {
 ---
 
 ## 📐 性能优化建议与工具改进 {#-性能优化建议与工具改进}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 性能优化建议
@@ -571,6 +578,7 @@ async fn async_task_benchmark() {
 - **Rust 1.93**：`thread_local` 分配器可降低多线程分配竞争，重跑并发基准以更新基线。
 
 ### 原子内存顺序选型决策树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景 | 推荐 Ordering | 说明 |
@@ -582,6 +590,7 @@ async fn async_task_benchmark() {
 **引用**：[ownership_model](../../research_notes/formal_methods/ownership_model.md) Def ATOMIC1；[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证。
 
 ### 死锁检测与运行时验证工具
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 工具 | 用途 | 说明 |
@@ -594,6 +603,7 @@ async fn async_task_benchmark() {
 **说明**：死锁无法静态判定；见 [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证。
 
 ### 工具改进
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **loom**：做并发顺序与数据竞争的模型检查，与 bench 互补。
@@ -601,6 +611,7 @@ async fn async_task_benchmark() {
 - **Criterion**：用 `BenchmarkId` 区分 THREADS、MESSAGES、TASKS 等维度，便于做可复现的并发报告。
 
 ### 性能报告
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 按「结果分析模板」+ 各原语/通道/异步的 bench 曲线，可形成并发性能报告；建议包含「同步 vs 通道 vs 异步的选型」「线程数与扩展性」「与 1.93 的兼容性」三部分。
@@ -608,21 +619,25 @@ async fn async_task_benchmark() {
 ---
 
 ## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 与形式化方法的集成
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **异步状态机**：见 [async_state_machine.md](../../research_notes/formal_methods/async_state_machine.md)。异步任务的 Poll、Waker 与状态转换，可与本研究的 async 基准对应；并发安全定理与「无数据竞争」可共同验证。
 - **借用检查器**：见 [borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md)。Rust 的并发原语（Mutex、Arc、channel）在类型与借用层面保证数据竞争自由，本研究的性能数据不改变该结论，但可指导「在安全前提下选更快实现」。
 
 ### 与实验研究的集成
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。并发一节与本文的 Mutex/RwLock、通道、async 可共用 `cargo bench` 与 Criterion 流程。
 - **内存分析**：见 [memory_analysis.md](./memory_analysis.md)。`Arc`、有界通道的缓冲、Tokio 任务队列与 `thread_local` 分配器会影响内存；分析时需区分配置（线程数、任务数、通道容量）。
 
 ### 实际应用案例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **服务端**：Mutex/RwLock 用于共享缓存；crossbeam 用于工作池任务队列；Tokio 用于 I/O 并发；按「结果分析模板」做上线前基准。
@@ -632,9 +647,11 @@ async fn async_task_benchmark() {
 ---
 
 ## 📖 参考文献 {#-参考文献}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 学术论文
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **并发性能优化研究**
@@ -642,12 +659,14 @@ async fn async_task_benchmark() {
    - 摘要: 并发原语性能分析和优化
 
 ### 官方文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust 并发文档](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 - [Tokio 性能指南](https://tokio.rs/tokio/tutorial/performance)
 
 ### 相关代码
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [并发性能测试代码](../../../crates/c05_threads/docs/README.md)
@@ -662,12 +681,14 @@ async fn async_task_benchmark() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -889,4 +910,3 @@ async fn async_task_benchmark() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

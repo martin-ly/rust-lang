@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust形式化方法学习路径](#rust形式化方法学习路径)
@@ -56,6 +57,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 学习路径总览
 >
@@ -247,6 +249,7 @@
 ---
 
 ## 路径三：专家（8-24周）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 目标受众
@@ -258,6 +261,7 @@
 - 验证工具开发者
 
 ### 学习目标
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 理解L3机器证明
@@ -265,6 +269,7 @@
 - 能够开发验证工具
 
 ### 学习路径
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 第1-4周：Coq基础
@@ -308,9 +313,11 @@
 ---
 
 ## 学习资源索引
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 必读文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文档 | 难度 | 路径 | 说明 |
@@ -320,6 +327,7 @@
 | [认知论证框架](./COGNITIVE_ARGUMENTATION_FRAMEWORK.md) | ⭐⭐ | 全部 | 方法论 |
 
 ### 思维导图
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 导图 | 难度 | 用途 |
@@ -329,6 +337,7 @@
 | 分布式概念族谱 | ⭐⭐⭐ | 分布式模式 |
 
 ### 决策树
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 决策树 | 用途 |
@@ -338,6 +347,7 @@
 | 工作流引擎选型 | 系统设计 |
 
 ### 外部资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **官方**:
@@ -355,9 +365,11 @@
 ---
 
 ## 学习检验
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 初学者检验
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **问题1**: 为什么这段代码编译失败？
@@ -371,6 +383,7 @@ println!("{}", x);
 **问题2**: Send和Sync有什么区别？
 
 ### 进阶者检验
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **问题3**: 解释T-BR1定理的核心思想。
@@ -378,6 +391,7 @@ println!("{}", x);
 **问题4**: 什么是进展性定理？为什么重要？
 
 ### 专家检验
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **问题5**: 如何在Iris中表示所有权？
@@ -393,6 +407,7 @@ println!("{}", x);
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -404,12 +419,14 @@ println!("{}", x);
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -455,6 +472,7 @@ println!("{}", x);
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](./README.md)
@@ -560,4 +578,3 @@ println!("{}", x);
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

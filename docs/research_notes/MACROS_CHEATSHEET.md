@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [宏速查卡](#宏速查卡)
@@ -44,6 +45,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 声明宏 (macro_rules!)
 >
@@ -264,6 +266,7 @@ include_bytes!("path/to/file.bin");  // 包含为&[u8]
 ---
 
 ## 宏调试技巧
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 查看展开
@@ -293,6 +296,7 @@ trace_macros!(false);
 ---
 
 ## 宏卫生性 (Hygiene)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -310,6 +314,7 @@ let four = using_a!(a / 10);  // 错误! a在宏外不可见
 ---
 
 ## 递归宏
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -325,6 +330,7 @@ count_exprs!(1, 2, 3);  // 3
 ---
 
 ## 条件编译宏
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -341,6 +347,7 @@ struct MyStruct;
 ---
 
 ## 编译器内置宏
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 宏 | 用途 |
@@ -357,6 +364,7 @@ struct MyStruct;
 ---
 
 ## 常用宏
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 宏 | 用途 | 示例 |
@@ -372,6 +380,7 @@ struct MyStruct;
 ---
 
 ## 派生宏
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -384,6 +393,7 @@ struct Point { x: i32, y: i32 }
 ---
 
 ## 属性宏
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -400,6 +410,7 @@ struct Point { x: i32, y: i32 }
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -456,6 +467,7 @@ struct Point { x: i32, y: i32 }
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [research_notes 目录](./README.md)
@@ -569,4 +581,3 @@ struct Point { x: i32, y: i32 }
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

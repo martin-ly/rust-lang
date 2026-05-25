@@ -1,6 +1,7 @@
 # 案例研究1: Ferrocene认证工具链
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [案例研究1: Ferrocene认证工具链](#案例研究1-ferrocene认证工具链)
@@ -77,6 +78,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ---
 
 ## 技术架构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -121,6 +123,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ---
 
 ## 认证详情
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 认证标准与等级
@@ -135,6 +138,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 | **ISO 61508** | 工业 | SIL 2 (core库) | 2025年12月 |
 
 ### core库SIL 2认证详情 (2025年12月)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **认证范围**:
@@ -156,9 +160,11 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ---
 
 ## 开发流程
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 质量保证流程
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -190,6 +196,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ```
 
 ### 发布周期
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 发布类型 | 频率 | 支持周期 | 认证更新 |
@@ -201,9 +208,11 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ---
 
 ## 实际应用案例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 案例1: Sonair 3D超声ADAR传感器
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **应用**: 工业机器人避障系统
@@ -219,6 +228,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 - 故障安全模式
 
 ### 案例2: OxyPrem NOAH新生儿组织氧监测
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **应用**: 医疗设备
@@ -234,6 +244,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 - 长时间稳定运行
 
 ### 案例3: Kite Shield UWB采矿安全系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **应用**: 采矿设备碰撞避免
@@ -251,9 +262,11 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ---
 
 ## 关键成功因素
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. 开源基础
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 基于上游Rust编译器
@@ -262,6 +275,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 - 安全手册开源
 
 ### 2. 严格测试
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 100% FLS语句覆盖
@@ -270,6 +284,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 - 回归测试自动化
 
 ### 3. 长期支持
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - 10年LTS承诺
@@ -278,6 +293,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 - 技术债务管理
 
 ### 4. 生态系统
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 专业咨询服务
@@ -288,9 +304,11 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ---
 
 ## 经验教训
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 成功因素
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **早期规划**: 从项目开始就考虑认证要求
@@ -299,6 +317,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 4. **持续投入**: 认证是持续过程，非一次性工作
 
 ### 挑战与解决
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 挑战 | 解决方案 |
@@ -311,9 +330,11 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ---
 
 ## 对其他项目的启示
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 适用于
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 需要功能安全认证的Rust项目
@@ -322,6 +343,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 - 需要工具链认证的组织
 
 ### 关键借鉴点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **规范先行**: 投资语言/接口规范文档
@@ -332,6 +354,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ---
 
 ## 参考资源
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Ferrocene官网](https://ferrocene.dev)
@@ -362,6 +385,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -460,4 +484,3 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

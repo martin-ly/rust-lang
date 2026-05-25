@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Unsafe Fields 预览指南](#unsafe-fields-预览指南)
@@ -30,6 +31,7 @@
   - [📖 参考文献](#-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -55,6 +57,7 @@
   - [📖 参考文献](#-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -284,6 +287,7 @@ Unsafe Fields 模型:
 ---
 
 ## 🔧 与 Rust for Linux 的关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
@@ -311,6 +315,7 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 ```
 
 ### 为什么内核特别需要这个特性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 内核场景 | 当前问题 | Unsafe Fields 解决方案 |
@@ -325,6 +330,7 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 ---
 
 ## 📖 参考文献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Rust Project Goals 2026**. "Safer Unsafe Rust: Unsafe Fields".
@@ -364,6 +370,7 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [05_guides 目录](./README.md)
@@ -483,4 +490,3 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

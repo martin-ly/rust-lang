@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究资源汇总](#研究资源汇总)
@@ -311,6 +312,7 @@
 ---
 
 ## 📝 社区资源 {#-社区资源}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 社区论坛
@@ -344,6 +346,7 @@
 ---
 
 ## 🎓 学习资源 {#-学习资源}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 在线课程
@@ -378,6 +381,7 @@
 ---
 
 ## 📰 新闻和博客 {#-新闻和博客}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方博客
@@ -407,6 +411,7 @@
 ---
 
 ## 资源与形式化衔接
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 资源类型 | 形式化文档 | 可验证/支撑的定理 |
@@ -424,6 +429,7 @@
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 核心文档
@@ -435,6 +441,7 @@
 - [术语表](./GLOSSARY.md) - 专业术语解释
 
 ### 研究笔记
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [形式化方法研究](./formal_methods/README.md) - 形式化方法索引
@@ -442,6 +449,7 @@
 - [实验研究](./experiments/README.md) - 实验研究索引
 
 ### 形式化证明体系（2026-02-14）
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [批判性分析与推进计划](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 阶段 1–3 完成总结
@@ -460,12 +468,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -511,6 +521,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [research_notes 目录](./README.md)
@@ -648,4 +659,3 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

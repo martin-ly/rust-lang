@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型安全证明树 (Proof Tree: Type Safety)](#类型安全证明树-proof-tree-type-safety)
@@ -146,6 +147,7 @@ Proof:
 ---
 
 ## 🎯 Rust 代码验证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -172,6 +174,7 @@ fn type_safety_theorem() {
 ---
 
 ## 📊 类型系统规则
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -199,6 +202,7 @@ fn type_safety_theorem() {
 ---
 
 ## 📊 证明复杂度
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 指标 | 值 |
@@ -212,6 +216,7 @@ fn type_safety_theorem() {
 ---
 
 ## 🔗 相关证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [所有权证明树](./PROOF_TREE_OWNERSHIP.md)
@@ -221,6 +226,7 @@ fn type_safety_theorem() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -275,6 +281,7 @@ fn type_safety_theorem() {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -382,4 +389,3 @@ fn type_safety_theorem() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

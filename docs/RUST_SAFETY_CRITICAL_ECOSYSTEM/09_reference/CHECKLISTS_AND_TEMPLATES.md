@@ -1,6 +1,7 @@
 # Rust安全关键系统 - 检查清单与模板
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust安全关键系统 - 检查清单与模板](#rust安全关键系统---检查清单与模板)
@@ -175,6 +176,7 @@ _________________________________
 ---
 
 ## 认证准备检查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### ISO 26262准备清单
@@ -257,6 +259,7 @@ _________________________________
 ---
 
 ## 发布前检查清单
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```markdown
@@ -316,9 +319,11 @@ _________________________________
 ---
 
 ## 文档模板
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 安全需求规格模板
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```markdown
@@ -409,6 +414,7 @@ _________________________________
 ```
 
 ### 设计文档模板
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```markdown
@@ -452,46 +458,56 @@ pub fn function_name(arg: Type) -> Result<Output, Error>;
 - 自检: ...
 
 ## 3. 数据流
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 正常操作
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 [数据流图]
 
 ### 3.2 错误处理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 [错误处理流]
 
 ## 4. 资源使用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 内存
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 栈使用: X bytes
 - 堆使用: Y bytes (如适用)
 
 ### 4.2 时间
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 最坏情况执行时间: X μs
 
 ## 5. 安全分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 假设
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ...
 
 ### 5.2 依赖
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ...
 
 ### 5.3 风险
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ...
@@ -820,4 +836,3 @@ debug = true
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

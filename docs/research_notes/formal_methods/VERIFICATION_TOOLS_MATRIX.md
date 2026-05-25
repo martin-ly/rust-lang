@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [验证工具矩阵](#验证工具矩阵)
@@ -42,6 +43,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -85,6 +87,7 @@
 ---
 
 ## 二、静态分析工具
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 代码质量与lint
@@ -113,6 +116,7 @@
 ---
 
 ## 三、测试工具
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 单元与集成测试
@@ -138,6 +142,7 @@
 | **bolero** | 混合 | fuzz+属性 | 深度验证 |
 
 ### 性能测试
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具 | 类型 | 能力 |
@@ -150,6 +155,7 @@
 ---
 
 ## 四、工具选型决策树
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -173,9 +179,11 @@
 ---
 
 ## 五、工具详细对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Kani vs MIRAI vs Prusti
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 维度 | Kani | MIRAI | Prusti |
@@ -188,6 +196,7 @@
 | 适用场景 | 快速检查 | 数据分析 | 精确验证 |
 
 ### Coq vs Lean vs Isabelle
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 维度 | Coq | Lean 4 | Isabelle |
@@ -201,6 +210,7 @@
 ---
 
 ## 六、与形式化方法层次的对应
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 层次 | 工具 | 输出 |
@@ -213,9 +223,11 @@
 ---
 
 ## 七、验证工具链集成
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### CI/CD 集成示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```yaml
@@ -250,6 +262,7 @@ jobs:
 ---
 
 ## 八、国际项目对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 项目 | 工具 | 规模 | 成果 |
@@ -262,9 +275,11 @@ jobs:
 ---
 
 ## 九、选择建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 按场景推荐
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景 | 推荐工具 | 理由 |
@@ -278,6 +293,7 @@ jobs:
 ---
 
 ## 十、扩展阅读
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
@@ -293,12 +309,14 @@ jobs:
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -344,6 +362,7 @@ jobs:
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [formal_methods 目录](./README.md)
@@ -433,4 +452,3 @@ jobs:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Tokio 运行时深度解析](#tokio-运行时深度解析)
@@ -34,6 +35,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -63,6 +65,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -300,6 +303,7 @@ async fn slow_operation() -> String {
 ---
 
 ## 🚀 高级用法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 运行时配置
@@ -446,6 +450,7 @@ async fn shared_state() {
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 最佳实践
@@ -520,6 +525,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/)
@@ -549,6 +555,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -726,4 +733,3 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

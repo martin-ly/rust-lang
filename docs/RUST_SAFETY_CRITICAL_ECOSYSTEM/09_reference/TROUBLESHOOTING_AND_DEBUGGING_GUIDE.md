@@ -1,6 +1,7 @@
 # 故障排除与调试指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [故障排除与调试指南](#故障排除与调试指南)
@@ -385,6 +386,7 @@ impl DeadlockDetector {
 ---
 
 ## 3. 工具链问题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Miri常见问题
@@ -464,6 +466,7 @@ allow = [
 ---
 
 ## 4. 性能问题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 二进制大小优化
@@ -516,6 +519,7 @@ pub fn cache_warmup<T>(data: &[T]) {
 ---
 
 ## 5. 认证相关问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 覆盖率不达标
@@ -586,6 +590,7 @@ mod tool_qualification {
 ---
 
 ## 6. 调试技巧
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 日志记录
@@ -669,6 +674,7 @@ trait Invariant {
 ---
 
 ## 7. 常见问题速查
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 问题 | 快速解决方案 |
@@ -708,6 +714,7 @@ trait Invariant {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
@@ -931,4 +938,3 @@ trait Invariant {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

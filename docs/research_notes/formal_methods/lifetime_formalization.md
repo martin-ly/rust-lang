@@ -1365,4 +1365,3 @@ $\text{lft}(r) \subseteq \text{lft}(\text{target}(r))$：引用寿命不超过�
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

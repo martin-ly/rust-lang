@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [research\_notes 全面梳理](#research_notes-全面梳理)
@@ -129,6 +130,7 @@ research_notes/
 ---
 
 ## 四、入口与索引关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 角色 | 何时用 |
@@ -144,6 +146,7 @@ research_notes/
 ---
 
 ## 五、版本与元数据约定
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **默认版本**：所有 research_notes 下文档元数据统一为 **Rust 1.93.1+ (Edition 2024)**（历史归档保留原版本）。
@@ -154,6 +157,7 @@ research_notes/
 ---
 
 ## 六、formal_methods 文件清单（概览）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 除六篇核心（ownership、borrow、lifetime、async、pin、send_sync）外，本目录还包含：
@@ -172,6 +176,7 @@ research_notes/
 ---
 
 ## 七、维护检查清单
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 新增文档时：在 INDEX.md 对应分类下添加条目；若为 formal_methods，在 formal_methods/README 或本文件 § 六 补充
@@ -182,6 +187,7 @@ research_notes/
 ---
 
 ## 八、100% 完成检查项（2026-02-28）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [x] 实际目录与 README/INDEX 一致，入口统一 00_ORGANIZATION 与 README
@@ -201,6 +207,7 @@ research_notes/
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -259,6 +266,7 @@ research_notes/
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -356,4 +364,3 @@ research_notes/
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -1,6 +1,7 @@
 # IEC 61508 Rust实施指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [IEC 61508 Rust实施指南](#iec-61508-rust实施指南)
@@ -415,6 +416,7 @@ fn enter_safe_state() {
 ---
 
 ## Part 7: 技术和措施
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 系统性能力(SCL)评估
@@ -501,6 +503,7 @@ impl Voter {
 ---
 
 ## 工业协议集成
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Modbus RTU/TCP
@@ -635,6 +638,7 @@ impl SafetyOpcUaServer {
 ---
 
 ## 开发检查表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### SIL 4项目完整检查表
@@ -707,6 +711,7 @@ impl SafetyOpcUaServer {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -957,4 +962,3 @@ impl SafetyOpcUaServer {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

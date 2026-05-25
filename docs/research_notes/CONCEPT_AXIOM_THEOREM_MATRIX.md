@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [概念-公理-定理五维矩阵](#概念-公理-定理五维矩阵)
@@ -30,6 +31,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 五维矩阵概览
 >
@@ -76,6 +78,7 @@
 ---
 
 ## 🧬 并发安全矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 概念 | 定义 | 公理 | 定理 | 证明 | Rust示例 |
@@ -88,6 +91,7 @@
 ---
 
 ## 🧬 异步编程矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 概念 | 定义 | 公理 | 定理 | 证明 | Rust示例 |
@@ -100,6 +104,7 @@
 ---
 
 ## 🧬 分布式系统矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 概念 | 定义 | 公理 | 定理 | 证明 | Rust示例 |
@@ -116,6 +121,7 @@
 ---
 
 ## 🧬 工作流引擎矩阵
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 概念 | 定义 | 公理 | 定理 | 证明 | Rust示例 |
@@ -127,6 +133,7 @@
 ---
 
 ## 📈 完成度统计
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 领域 | 定义 | 公理 | 定理 | 证明 | 完成度 |
@@ -142,6 +149,7 @@
 ---
 
 ## 🔗 相关文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [所有权概念族谱](./OWNERSHIP_CONCEPT_MINDMAP.md)
@@ -152,6 +160,7 @@
 ---
 
 ## 🆕 Rust 1.94 研究更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -172,6 +181,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -226,6 +236,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [research_notes 目录](./README.md)
@@ -307,4 +318,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

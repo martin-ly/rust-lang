@@ -75,19 +75,19 @@ fn process_message(msg: Message) {
 ```rust
 fn main() {
     let x = 4;
-    
+
     // 捕获环境变量 x
     let equal_to_x = |z| z == x;
-    
+
     let y = 4;
     assert!(equal_to_x(y));
-    
+
     // 使用泛型存储闭包
     let mut operations: Vec<Box<dyn Fn(i32) -> i32>> = vec![
         Box::new(|x| x + 1),
         Box::new(|x| x * 2),
     ];
-    
+
     for op in &operations {
         println!("{}", op(5));
     }
@@ -116,9 +116,11 @@ fn read_username_from_file_short() -> Result<String, io::Error> {
 ## 依赖关系
 
 ### 上游依赖
+
 - `c02_type_system`: 类型系统基础
 
 ### 外部依赖
+
 ```toml
 [dependencies]
 tokio = { workspace = true }
@@ -153,6 +155,7 @@ cargo run -p c03_control_fn --example control_flow_example
 
 - [Rust Book - Control Flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html)
 - [Rust Book - Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

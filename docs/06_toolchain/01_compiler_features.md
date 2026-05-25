@@ -14,6 +14,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 编译器特性与优化](#rust-编译器特性与优化)
@@ -79,6 +80,7 @@
   - [**最后更新**: 2026-05-08 (添加 1.95+ 引用)](#最后更新-2026-05-08-添加-195-引用)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录
 >
@@ -147,6 +149,7 @@
   - [**最后更新**: 2026-05-08 (添加 1.95+ 引用)](#最后更新-2026-05-08-添加-195-引用)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🎯 文档说明
 >
@@ -407,6 +410,7 @@ opt-level = 0  # 自己的 crate 保持无优化
 ---
 
 ## 4. Link-Time Optimization (LTO)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 LTO 类型
@@ -485,6 +489,7 @@ lto = true  # 所有依赖包也启用 LTO
 ---
 
 ## 5. Profile-Guided Optimization (PGO)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 PGO 工作流程
@@ -582,6 +587,7 @@ cargo build --release
 ---
 
 ## 6. 代码生成选项
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 目标 CPU 和特性
@@ -642,6 +648,7 @@ RUSTFLAGS="-C code-model=large" cargo build --release
 ---
 
 ## 7. 调试信息
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 调试信息级别
@@ -703,6 +710,7 @@ RUSTFLAGS="-C debuginfo=2 -C dwarf-version=4" cargo build
 ---
 
 ## 8. 编译缓存
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 Sccache
@@ -764,6 +772,7 @@ export SCCACHE_REGION="us-west-2"
 ---
 
 ## 9. 编译时间优化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 9.1 并行编译
@@ -844,6 +853,7 @@ pub mod everything_in_one_file; // 10000+ lines
 ---
 
 ## 10. 编译器插件与扩展
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 10.1 Procedural Macros
@@ -893,6 +903,7 @@ cargo +nightly miri test
 ---
 
 ## 11. 高级编译技术
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 11.1 Polly (LLVM 优化器)
@@ -929,6 +940,7 @@ fn main() {
 ---
 
 ## 12. 实战案例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 12.1 生产环境优化配置
@@ -960,6 +972,7 @@ cargo build --release
 ---
 
 ### 12.2 开发环境优化配置
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```toml
@@ -976,6 +989,7 @@ opt-level = 2          # 依赖包使用 O2
 ---
 
 ## 13. 性能基准
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **编译时间对比** (1000 LOC 项目):
@@ -989,9 +1003,11 @@ opt-level = 2          # 依赖包使用 O2
 ---
 
 ## 14. 故障排查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 常见问题
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **1. 编译错误: out of memory**:
@@ -1023,9 +1039,11 @@ codegen-units = 16  # 增加代码生成单元
 ---
 
 ## 15. 编译器特性的形式化分析
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 15.1 编译过程的形式化模型
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 编译器可以形式化地建模为一系列程序转换：
@@ -1070,6 +1088,7 @@ fn compile(source: SourceCode) -> Result<ObjectCode, CompileError> {
 ```
 
 ### 15.2 借用检查的形式化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 借用检查器确保内存安全的形式化保证：
@@ -1113,6 +1132,7 @@ fn borrow_check_example() {
 ```
 
 ### 15.3 优化级别的形式化语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 不同优化级别对应不同的程序转换强度：
@@ -1167,6 +1187,7 @@ impl OptimizationLevel {
 ```
 
 ### 15.4 LTO 的形式化分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Link-Time Optimization 的形式化效果：
@@ -1200,6 +1221,7 @@ pub fn caller_lto() -> i32 {
 ```
 
 ### 15.5 PGO 的形式化模型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Profile-Guided Optimization 的数学模型：
@@ -1239,9 +1261,11 @@ fn pgo_workflow() {
 ---
 
 ## 16. 相关资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 📚 官方文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rustc Book](https://doc.rust-lang.org/rustc/)
@@ -1249,12 +1273,14 @@ fn pgo_workflow() {
 - [LLVM Documentation](https://llvm.org/docs/)
 
 ### 🔗 相关文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [02_cargo_workspace_guide.md](../archive/deprecated_20260318/02_cargo_workspace_guide.md)
 - [03_rustdoc_advanced.md](./03_rustdoc_advanced.md)
 
 ### 🔗 形式化理论文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [所有权模型形式化](../research_notes/formal_methods/ownership_model.md)
@@ -1263,6 +1289,7 @@ fn pgo_workflow() {
 - [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
 
 ### 📦 推荐工具
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **sccache**: 编译缓存
@@ -1281,6 +1308,7 @@ fn pgo_workflow() {
 ---
 
 ## Rust 1.95+ 更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **最新版本**: Rust 1.95.0+ (2026-03-05)
@@ -1304,6 +1332,7 @@ fn pgo_workflow() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [06_toolchain 目录](./README.md)
@@ -1669,4 +1698,3 @@ fn pgo_workflow() {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

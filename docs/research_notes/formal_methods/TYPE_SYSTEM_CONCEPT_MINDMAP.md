@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型系统概念族谱](#类型系统概念族谱)
@@ -42,6 +43,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 类型系统概念全景
 >
@@ -138,6 +140,7 @@
 ---
 
 ## 二、复合类型详解
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 struct
@@ -181,6 +184,7 @@ enum
 ```
 
 ### 2.3 集合类型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -198,9 +202,11 @@ enum
 ---
 
 ## 三、抽象类型详解
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 泛型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -223,6 +229,7 @@ enum
 ```
 
 ### 3.2 Trait
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -256,6 +263,7 @@ Trait
 ```
 
 ### 3.3 impl Trait vs dyn Trait
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -276,6 +284,7 @@ impl Trait vs dyn Trait
 ---
 
 ## 四、型变(Variance)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -309,9 +318,11 @@ impl Trait vs dyn Trait
 ---
 
 ## 五、类型安全
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 类型安全保证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -327,6 +338,7 @@ impl Trait vs dyn Trait
 ```
 
 ### 5.2 类型推导
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -344,9 +356,11 @@ impl Trait vs dyn Trait
 ---
 
 ## 六、特殊类型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1  never类型 (!)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -364,6 +378,7 @@ never类型 (!)
 ```
 
 ### 6.2 PhantomData
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -379,6 +394,7 @@ PhantomData<T>
 ```
 
 ### 6.3 Sized与?Sized
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -398,6 +414,7 @@ Sized trait
 ---
 
 ## 七、类型关系
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -418,6 +435,7 @@ Sized trait
 ---
 
 ## 八、与其他概念族的关系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -439,6 +457,7 @@ Sized trait
 ---
 
 ## 九、学习路径
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -469,12 +488,14 @@ Sized trait
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -520,6 +541,7 @@ Sized trait
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](./README.md)
@@ -691,4 +713,3 @@ Sized trait
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

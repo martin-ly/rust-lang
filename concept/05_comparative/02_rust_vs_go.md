@@ -1119,12 +1119,12 @@ fn main() {
 fn main() {
     // Go 的陷阱: var p *os.File = nil; var r io.Reader = p
     // r != nil（接口值包含类型信息，nil 指针被包装为非 nil 接口）
-    
+
     // Rust 的显式处理:
     let p: Option<&i32> = None;
     // ❌ 编译错误: 不能隐式将 None 转为 &i32
     let r: &i32 = p; // Option<&i32> 不能自动解包
-    
+
     // 正确: 显式处理空值
     // let r = p.unwrap(); // 运行时 panic 若 None
     // let r = p.unwrap_or(&0); // 提供默认值

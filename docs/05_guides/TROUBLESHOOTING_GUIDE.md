@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [故障排查指南](#故障排查指南)
@@ -59,6 +60,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -113,6 +115,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -363,6 +366,7 @@ cargo flamegraph --bin my_app
 ---
 
 ## 🔌 网络问题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 连接超时
@@ -462,6 +466,7 @@ while retries > 0 {
 ---
 
 ## 🧪 测试问题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 测试失败
@@ -500,6 +505,7 @@ async fn test_async() {
 ---
 
 ## 📚 调试技巧
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. 使用 println
@@ -545,6 +551,7 @@ error!("错误: {}", value);
 ---
 
 ## 🔍 常见问题 FAQ
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Q: 如何查看详细的编译错误？
@@ -566,6 +573,7 @@ A: 使用 `cargo clean` 清理所有编译产物
 A: 使用 `cargo update` 更新依赖版本
 
 ### Q: 如何查看依赖树？
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 A: 使用 `cargo tree` 查看依赖关系
@@ -573,6 +581,7 @@ A: 使用 `cargo tree` 查看依赖关系
 ---
 
 ## 错误码快速查找
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 常见错误码 → 本项目文档映射见 [ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md)。
@@ -580,9 +589,11 @@ A: 使用 `cargo tree` 查看依赖关系
 ---
 
 ## 使用场景
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 场景1: 编译错误排查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 遇到编译错误时快速定位解决：
@@ -592,6 +603,7 @@ A: 使用 `cargo tree` 查看依赖关系
 3. 使用 [调试技巧](#-调试技巧) 辅助定位
 
 ### 场景2: 运行时问题诊断
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 程序运行异常时的排查流程：
@@ -601,6 +613,7 @@ A: 使用 `cargo tree` 查看依赖关系
 - 应用 [调试技巧](#-调试技巧) 逐步定位
 
 ### 场景3: 性能问题优化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 程序性能不达标的排查：
@@ -610,6 +623,7 @@ A: 使用 `cargo tree` 查看依赖关系
 3. 检查是否存在 [编译时间过长](#1-编译时间过长) 问题
 
 ### 场景4: 生产环境问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 生产环境故障应急处理：
@@ -621,6 +635,7 @@ A: 使用 `cargo tree` 查看依赖关系
 ---
 
 ## 形式化链接
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 链接类型 | 目标文档 |
@@ -638,6 +653,7 @@ A: 使用 `cargo tree` 查看依赖关系
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust 错误索引](https://doc.rust-lang.org/error-index.html)
@@ -645,23 +661,26 @@ A: 使用 `cargo tree` 查看依赖关系
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
 
 ## 🆕 Rust 1.95+ 特性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 新特性概览
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 1.95+ 带来了以下重要更新：
 
 - **rray_windows** - 固定大小的数组窗口迭代器
 - **ControlFlow** - 控制流抽象类型
-- **LazyCell/LazyLock 新方法** - get(), get_mut(), 
+- **LazyCell/LazyLock 新方法** - get(), get_mut(),
 orce_mut()
 - **Peekable::next_if_map** - 条件映射迭代
 - **TryFrom<char> for usize** - Unicode 标量值转换
 
 ### 代码示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 `
@@ -691,11 +710,13 @@ let result = items.iter().try_for_each(|&n| {
 ---
 
 ## Rust 1.95+ 故障排查指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### LazyLock 初始化问题排查
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **问题**: `LazyLock` 初始化时 panic
@@ -717,6 +738,7 @@ pub fn get_config() -> Option<&'static Config> {
 ```
 
 ### array_windows 边界问题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **问题**: 数组长度不足导致 empty iterator
@@ -741,6 +763,7 @@ fn process(data: &[i32]) -> Vec<i32> {
 ```
 
 ### ControlFlow 类型推断问题
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **问题**: 编译器无法推断 ControlFlow 类型参数
@@ -787,6 +810,7 @@ fn search(items: &[i32]) -> ControlFlow<i32, ()> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [05_guides 目录](./README.md)
@@ -995,4 +1019,3 @@ fn search(items: &[i32]) -> ControlFlow<i32, ()> {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

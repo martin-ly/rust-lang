@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Coq of Rust 集成计划（已归档）](#coq-of-rust-集成计划已归档)
@@ -22,6 +23,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🆕 Rust 1.94 深度整合更新
 >
@@ -79,6 +81,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [research_notes 目录](./README.md)
@@ -122,4 +125,3 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

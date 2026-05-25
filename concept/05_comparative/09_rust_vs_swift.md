@@ -42,6 +42,7 @@
     - [10.2 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#102-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
     - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权的循环引用差异（运行时内存泄漏）](#103-边界测试swift-的-arc-与-rust-的所有权的循环引用差异运行时内存泄漏)
     - [10.4 边界测试：Swift 的 Optional 链与 Rust 的 `?` 运算符（编译错误）](#104-边界测试swift-的-optional-链与-rust-的--运算符编译错误)
+    - [10.3 边界测试：Swift 的 ARC 与 Rust 的所有权内存管理对比（运行时差异）](#103-边界测试swift-的-arc-与-rust-的所有权内存管理对比运行时差异)
 
 ---
 
@@ -773,12 +774,12 @@ fn main() {
 fn main() {
     // Swift: 引用计数自动管理内存，循环引用用 weak/unowned 打破
     // Rust: 编译期所有权跟踪，无运行时引用计数（除 Rc/Arc）
-    
+
     let s = String::from("hello");
     let s2 = s; // move，无运行时操作
     // ❌ 编译错误: s 已移动
     // println!("{}", s);
-    
+
     // Swift 等价:
     // let s = "hello"
     // let s2 = s // 引用计数 +1（copy-on-write）

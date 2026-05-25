@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [生命周期速查卡](#生命周期速查卡)
@@ -56,6 +57,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 生命周期语法
 >
@@ -243,6 +245,7 @@ trait Read {}
 ---
 
 ## 型变与生命周期
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -261,6 +264,7 @@ fn example() {
 ---
 
 ## 与泛型结合
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -284,6 +288,7 @@ where
 ---
 
 ## 自我引用结构
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -318,6 +323,7 @@ impl SelfReferential {
 ---
 
 ## 快速诊断
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -335,6 +341,7 @@ impl SelfReferential {
 ```
 
 ## 生命周期基础
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 生命周期关系
@@ -359,6 +366,7 @@ T: 'a   // T 中所有引用至少存活 'a
 ---
 
 ## 生命周期省略规则
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 三条规则
@@ -390,6 +398,7 @@ fn method(&self, x: &str) -> &str { self.0 }
 ---
 
 ## 常见生命周期模式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 模式1: 输入输出相同
@@ -425,9 +434,11 @@ fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str {
 ---
 
 ## 生命周期约束
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### HRTB (高阶trait bound)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -435,6 +446,7 @@ F: for<'a> Fn(&'a str) -> &'a str
 ```
 
 ### 多重约束
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -448,9 +460,11 @@ where
 ---
 
 ## 常见错误
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 错误1: 返回局部引用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -467,6 +481,7 @@ fn good() -> String {
 ```
 
 ### 错误2: 生命周期不匹配
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -480,6 +495,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { ... }
 ---
 
 ## 结构体生命周期
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -496,6 +512,7 @@ let p = Person { name: &name };
 ---
 
 ## 生命周期与子类型
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -514,9 +531,11 @@ fn take_str<'a>(s: &'a str) {}
 ---
 
 ## 技巧
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 技巧1: `'static`默认
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -527,6 +546,7 @@ struct OwnedData {
 ```
 
 ### 技巧2: 生命周期推断
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -535,6 +555,7 @@ let r = &x;  // 编译器自动推断
 ```
 
 ### 技巧3: 显式drop
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -549,6 +570,7 @@ let r = &x;  // 编译器自动推断
 ---
 
 ## 快速决策
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -571,6 +593,7 @@ let r = &x;  // 编译器自动推断
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -582,12 +605,14 @@ let r = &x;  // 编译器自动推断
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -633,6 +658,7 @@ let r = &x;  // 编译器自动推断
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](./README.md)
@@ -791,4 +817,3 @@ let r = &x;  // 编译器自动推断
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

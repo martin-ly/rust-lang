@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Linux Foundation Certified Rust Programmer (LFRS) 认证映射](#linux-foundation-certified-rust-programmer-lfrs-认证映射)
@@ -52,6 +53,7 @@
   - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 考点总览
 >
@@ -103,6 +105,7 @@
 ---
 
 ## 考点 2: Ownership、Borrowing 与 Lifetimes
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **掌握程度**: ✅ 完整
@@ -136,6 +139,7 @@
 ---
 
 ## 考点 3: Structs、Enums 与模式匹配
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **掌握程度**: ✅ 完整
@@ -163,6 +167,7 @@
 ---
 
 ## 考点 4: 模块与 Crates
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **掌握程度**: ✅ 完整
@@ -188,11 +193,13 @@
 ---
 
 ## 考点 5: 集合与字符串
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **掌握程度**: ✅ 完整
 
 ### 映射文件
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 子主题 | 项目文件路径 | 说明 |
@@ -205,6 +212,7 @@
 | 迭代器 | `docs/02_reference/quick_reference/collections_iterators_cheatsheet.md` | 迭代器适配器 |
 
 ### 练习验证
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - `exercises/src/type_system/ex02_struct_methods.rs` (Easy, String 使用)
@@ -214,11 +222,13 @@
 ---
 
 ## 考点 6: 错误处理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **掌握程度**: ✅ 完整
 
 ### 映射文件
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 子主题 | 项目文件路径 | 说明 |
@@ -230,6 +240,7 @@
 | anyhow / thiserror | `docs/05_guides/BEST_PRACTICES.md` | 生态库推荐 |
 
 ### 练习验证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - `exercises/src/error_handling/ex01_result_option.rs` (Easy)
@@ -239,11 +250,13 @@
 ---
 
 ## 考点 7: Traits 与泛型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **掌握程度**: ✅ 完整
 
 ### 映射文件
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 子主题 | 项目文件路径 | 说明 |
@@ -256,6 +269,7 @@
 | 运算符重载 | `crates/c04_generic/src/trait_bound/operations.rs` | std::ops 特质 |
 
 ### 练习验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - `exercises/src/generics_traits/ex01_trait_bounds.rs` (Easy)
@@ -271,11 +285,13 @@
 ---
 
 ## 考点 8: 测试
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **掌握程度**: ✅ 完整
 
 ### 映射文件
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 子主题 | 项目文件路径 | 说明 |
@@ -289,6 +305,7 @@
 | 覆盖率 | `docs/03_guides/TEST_COVERAGE.md` | tarpaulin 使用 |
 
 ### 练习验证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 每道练习题都包含完整测试用例
@@ -297,11 +314,13 @@
 ---
 
 ## 考点 9: 闭包、迭代器与 Smart Pointers
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **掌握程度**: ⚠️ 部分 (85%)
 
 ### 映射文件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 子主题 | 项目文件路径 | 说明 | 状态 |
@@ -316,12 +335,14 @@
 | 自定义智能指针 | — | Deref/Drop 实现 | ❌ 缺失 |
 
 ### 补充计划
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 增加 `exercises/src/ownership_borrowing/ex06_cow.rs` (Cow 练习)
 - 增加 `exercises/src/ownership_borrowing/ex07_custom_smart_pointer.rs` (Deref/Drop)
 
 ### 练习验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - `exercises/src/ownership_borrowing/ex05_smart_pointer_rc.rs` (Medium)
@@ -331,11 +352,13 @@
 ---
 
 ## 考点 10: 并发（线程 / 通道 / async）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **掌握程度**: ⚠️ 部分 (90%)
 
 ### 映射文件
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 子主题 | 项目文件路径 | 说明 | 状态 |
@@ -353,12 +376,14 @@
 | async trait | — | async-trait crate | ⚠️ 部分 |
 
 ### 缺失内容
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - `async fn` in trait（Rust 1.75+ 原生支持，项目已有但分散）
 - 更系统的 async 错误处理模式专题
 
 ### 练习验证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - `exercises/src/concurrency/ex01_thread_spawn.rs` (Easy)
@@ -375,9 +400,11 @@
 ---
 
 ## 学习路径建议
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 路径 A：按 LFRS 考点顺序学习
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. 考点 1 → `crates/c03_control_fn/` + `crates/c02_type_system/`
@@ -392,6 +419,7 @@
 10. 考点 10 → `crates/c05_threads/` + `crates/c06_async/`
 
 ### 路径 B：以练习驱动
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. 完成 `exercises/rustlings_style/` 中的 10 道编译修复题
@@ -402,6 +430,7 @@
 ---
 
 ## 量化评估标准
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 掌握度 | 定义 | 行动建议 |
@@ -413,6 +442,7 @@
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [GOOGLE_RUST_MAPPING.md](./GOOGLE_RUST_MAPPING.md) - Google Comprehensive Rust 映射
@@ -434,6 +464,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [01_learning 目录](./README.md)
@@ -521,4 +552,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

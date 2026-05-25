@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 版本增量更新流程](#rust-版本增量更新流程)
@@ -42,6 +43,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录 {#-目录}
 >
@@ -78,10 +80,12 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
 ## 触发条件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **Rust 新版本发布**（如 1.94.0、1.95.0）
@@ -263,9 +267,11 @@ fn api_stabilization_example() {
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 核心流程文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文档 | 用途 | 链接 |
@@ -275,6 +281,7 @@ fn api_stabilization_example() {
 | FEATURE_TEMPLATE | 新特性精简模板 | [FEATURE_TEMPLATE.md](./FEATURE_TEMPLATE.md) |
 
 ### 形式化方法文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 用途 | 链接 |
@@ -283,6 +290,7 @@ fn api_stabilization_example() {
 | type_theory/00_completeness_gaps | 类型理论缺口 | [type_theory/00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) |
 
 ### 更新记录文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文档 | 用途 | 链接 |
@@ -292,6 +300,7 @@ fn api_stabilization_example() {
 | CHANGELOG | 更新日志 | [CHANGELOG.md](./CHANGELOG.md) |
 
 ### 形式化证明文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 文档 | 用途 | 链接 |
@@ -302,6 +311,7 @@ fn api_stabilization_example() {
 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 
 ### 研究笔记索引
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 类别 | 文档 | 链接 |
@@ -319,6 +329,7 @@ fn api_stabilization_example() {
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -330,12 +341,14 @@ fn api_stabilization_example() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -381,6 +394,7 @@ fn api_stabilization_example() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [research_notes 目录](./README.md)
@@ -482,4 +496,3 @@ fn api_stabilization_example() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

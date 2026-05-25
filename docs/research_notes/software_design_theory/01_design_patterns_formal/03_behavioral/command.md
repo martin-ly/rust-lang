@@ -1,6 +1,7 @@
 ﻿# Command 形式化分析
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Command 形式化分析](#command-形式化分析)
@@ -39,6 +40,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -91,6 +93,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -313,6 +316,7 @@ Send/Sync
 ---
 
 ## 典型场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
@@ -325,6 +329,7 @@ Send/Sync
 ---
 
 ## 完整场景示例：可撤销文本编辑器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **场景**：插入/删除字符；支持 undo/redo 栈；命令对象封装操作与逆操作。
@@ -377,6 +382,7 @@ impl Editor {
 ---
 
 ## 相关模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
@@ -388,6 +394,7 @@ impl Editor {
 ---
 
 ## 实现变体
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
@@ -400,6 +407,7 @@ impl Editor {
 ---
 
 ## 反例：命令副作用不可逆
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **错误**：命令执行 I/O、网络请求等不可逆操作，`undo` 无法恢复。
@@ -416,6 +424,7 @@ impl ReversibleCommand for SendEmailCommand {
 ---
 
 ## 选型决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -429,6 +438,7 @@ impl ReversibleCommand for SendEmailCommand {
 ---
 
 ## 与 GoF 对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | GoF | Rust 对应 | 差异 |
@@ -440,6 +450,7 @@ impl ReversibleCommand for SendEmailCommand {
 ---
 
 ## 边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 分类 |
@@ -451,6 +462,7 @@ impl ReversibleCommand for SendEmailCommand {
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
@@ -461,6 +473,7 @@ impl ReversibleCommand for SendEmailCommand {
 ---
 
 ## 思维导图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -488,6 +501,7 @@ mindmap
 ---
 
 ## 与其他模式的关系图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -506,6 +520,7 @@ graph LR
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -520,6 +535,7 @@ graph LR
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -578,6 +594,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [03_behavioral 目录](./README.md)
@@ -735,4 +752,3 @@ graph LR
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

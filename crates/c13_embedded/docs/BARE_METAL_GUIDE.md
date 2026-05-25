@@ -40,6 +40,7 @@
     - [Q: 如何在 Windows 上测试 ARM 代码？](#q-如何在-windows-上测试-arm-代码)
     - [Q: `unsafe` 在嵌入式中是不可避免的吗？](#q-unsafe-在嵌入式中是不可避免的吗)
     - [Q: 固定容量的 `FixedRingBuffer` 和 `heapless::Vec` 有什么区别？](#q-固定容量的-fixedringbuffer-和-heaplessvec-有什么区别)
+  - [*本文档最后更新：2026-04-24*](#本文档最后更新2026-04-24)
 
 ---
 

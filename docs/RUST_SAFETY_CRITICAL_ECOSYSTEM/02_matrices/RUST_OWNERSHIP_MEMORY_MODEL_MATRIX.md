@@ -1,6 +1,7 @@
 # Rust所有权与内存模型矩阵
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust所有权与内存模型矩阵](#rust所有权与内存模型矩阵)
@@ -284,6 +285,7 @@ fn lock_free_counter() {
 ---
 
 ## 安全关键系统内存管理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 堆分配 vs 栈分配
@@ -346,6 +348,7 @@ fn use_pool() {
 ```
 
 ### 内存对齐和填充
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -393,9 +396,11 @@ struct PackedSensorData {
 ---
 
 ## 零成本抽象验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 抽象开销对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -418,6 +423,7 @@ fn manual_sum(values: &[i32]) -> i32 {
 ```
 
 ### 编译器优化验证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
@@ -431,9 +437,11 @@ cargo rustc --release -- --emit=asm
 ---
 
 ## 形式化语义基础
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 操作语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -459,6 +467,7 @@ cargo rustc --release -- --emit=asm
 ```
 
 ### 类型系统规则
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 规则 | 表达式 | 条件 | 结果类型 |
@@ -473,9 +482,11 @@ cargo rustc --release -- --emit=asm
 ---
 
 ## 安全关键系统建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 内存使用规范
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -510,6 +521,7 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 ```
 
 ### 内存安全检查清单
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 所有数组访问都有边界检查
@@ -543,6 +555,7 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -707,4 +720,3 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

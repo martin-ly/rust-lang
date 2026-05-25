@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Kubernetes 部署完整指南](#kubernetes-部署完整指南)
@@ -40,6 +41,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -75,6 +77,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -534,6 +537,7 @@ spec:
 ---
 
 ## 📈 可观测性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Metrics
@@ -630,6 +634,7 @@ spec:
 ---
 
 ## 🛡️ 安全性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### NetworkPolicy
@@ -700,6 +705,7 @@ spec:
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 资源优化
@@ -776,6 +782,7 @@ async fn graceful_shutdown() {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Kubernetes 官方文档](https://kubernetes.io/docs/)
@@ -805,6 +812,7 @@ async fn graceful_shutdown() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [production 目录](./README.md)
@@ -1077,4 +1085,3 @@ async fn graceful_shutdown() {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

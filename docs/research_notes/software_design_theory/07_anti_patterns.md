@@ -1,6 +1,7 @@
 ﻿# 反模式与边界
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [反模式与边界](#反模式与边界)
@@ -33,6 +34,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -231,6 +233,7 @@ where
 ---
 
 ## 五、反模式规避策略（实质指南）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 反模式类 | 规避策略 | 工具/模式 |
@@ -244,6 +247,7 @@ where
 ---
 
 ## 六、与 05_boundary_system 衔接
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)：SBM-L2 反模式边界
@@ -253,6 +257,7 @@ where
 ---
 
 ## 七、引用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)
@@ -262,6 +267,7 @@ where
 ---
 
 ## 八、完整规避示例（场景→反模式→正确写法）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 场景 1：需要共享可变
@@ -347,6 +353,7 @@ let x = match result {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -403,6 +410,7 @@ let x = match result {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [software_design_theory 目录](./README.md)
@@ -514,4 +522,3 @@ let x = match result {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

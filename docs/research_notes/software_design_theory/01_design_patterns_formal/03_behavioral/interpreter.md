@@ -1,6 +1,7 @@
 ﻿# Interpreter 形式化分析
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Interpreter 形式化分析](#interpreter-形式化分析)
@@ -39,6 +40,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -91,6 +93,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -310,6 +313,7 @@ type_system
 ---
 
 ## 典型场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
@@ -321,6 +325,7 @@ type_system
 ---
 
 ## 完整 DSL 示例：简易查询语言
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -367,6 +372,7 @@ fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Opti
 ---
 
 ## 相关模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
@@ -378,6 +384,7 @@ fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Opti
 ---
 
 ## 实现变体
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
@@ -389,6 +396,7 @@ fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Opti
 ---
 
 ## 反例：AST 含环或无限递归
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **错误**：自引用表达式导致 `eval` 无限递归。
@@ -402,6 +410,7 @@ fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Opti
 ---
 
 ## 选型决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -415,6 +424,7 @@ fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Opti
 ---
 
 ## 与 GoF 对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 GoF 用继承定义 AST 节点；Rust 用枚举更简洁，且穷尽匹配保证完备性。
@@ -422,6 +432,7 @@ GoF 用继承定义 AST 节点；Rust 用枚举更简洁，且穷尽匹配保证
 ---
 
 ## 边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 分类 |
@@ -433,6 +444,7 @@ GoF 用继承定义 AST 节点；Rust 用枚举更简洁，且穷尽匹配保证
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
@@ -443,6 +455,7 @@ GoF 用继承定义 AST 节点；Rust 用枚举更简洁，且穷尽匹配保证
 ---
 
 ## 思维导图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -470,6 +483,7 @@ mindmap
 ---
 
 ## 与其他模式的关系图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -488,6 +502,7 @@ graph LR
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -502,6 +517,7 @@ graph LR
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -560,6 +576,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [03_behavioral 目录](./README.md)
@@ -708,4 +725,3 @@ graph LR
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

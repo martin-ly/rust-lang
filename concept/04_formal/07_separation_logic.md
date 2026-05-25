@@ -38,6 +38,8 @@
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：并发下的分离逻辑与 `Send`/`Sync`（编译错误）](#103-边界测试并发下的分离逻辑与-sendsync编译错误)
     - [10.4 边界测试：原子操作与分离逻辑的幻觉（运行时数据竞争）](#104-边界测试原子操作与分离逻辑的幻觉运行时数据竞争)
+    - [10.3 边界测试：分离逻辑中的帧规则与并发资源组合（编译错误）](#103-边界测试分离逻辑中的帧规则与并发资源组合编译错误)
+    - [10.4 边界测试：RustBelt 对 `UnsafeCell` 的形式化建模（运行时 UB）](#104-边界测试rustbelt-对-unsafecell-的形式化建模运行时-ub)
 
 ---
 
@@ -727,14 +729,14 @@ fn main() {
     let data = Arc::new(Mutex::new(vec![1, 2, 3]));
     let d1 = Arc::clone(&data);
     let d2 = Arc::clone(&data);
-    
+
     // ❌ 编译错误: 两个线程同时获取 MutexGuard，但编译器允许
     // 运行时 Mutex 保证互斥，但分离逻辑的帧规则要求资源不相交
     std::thread::spawn(move || {
         let mut guard = d1.lock().unwrap();
         guard.push(4);
     });
-    
+
     std::thread::spawn(move || {
         let mut guard = d2.lock().unwrap();
         guard.push(5);

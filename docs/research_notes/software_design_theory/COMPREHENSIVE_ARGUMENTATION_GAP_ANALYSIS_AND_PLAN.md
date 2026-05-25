@@ -1,6 +1,7 @@
 ﻿# 设计模式、分布式模式、工作流模式全面论证缺口分析与推进计划
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [设计模式、分布式模式、工作流模式全面论证缺口分析与推进计划](#设计模式分布式模式工作流模式全面论证缺口分析与推进计划)
@@ -30,6 +31,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-02-28
@@ -164,6 +166,7 @@
 | D2.5 | 分布式+并发组合定理 | 明确跨模型组合的 Send/Sync、CE 保持条件 | 📋 与 03_integration_theory IT-T2 衔接；可后续补 |
 
 ### 3.3 阶段 D3：工作流模式全面论证（优先级 P1）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 序号 | 任务 | 交付物 | 状态 |
@@ -174,6 +177,7 @@
 | D3.4 | 23/43 与工作流关系 | 02_workflow README 新增关系小节 | ✅ [02_workflow README § 23/43 与工作流关系](02_workflow_safe_complete_models/README.md#2343-与工作流关系d34) |
 
 ### 3.4 阶段 D4：交叉整合与验证（优先级 P2）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 序号 | 任务 | 交付物 | 预计 |
@@ -185,6 +189,7 @@
 ---
 
 ## 四、任务依赖与建议顺序
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -206,6 +211,7 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 ---
 
 ## 五、与现有文档的衔接
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 与本计划的关系 |
@@ -221,6 +227,7 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 ---
 
 ## 六、简要检查清单（执行时用）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [x] 设计模式：4 篇 L2 证明、组合定理、等价规则、反例映射、依赖 DAG
@@ -231,6 +238,7 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 ---
 
 ## 七、已完成交付物索引
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 交付物 | 位置 |
@@ -252,12 +260,14 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -303,6 +313,7 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [software_design_theory 目录](./README.md)
@@ -386,4 +397,3 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

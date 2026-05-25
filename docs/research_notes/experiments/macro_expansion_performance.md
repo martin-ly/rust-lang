@@ -1,6 +1,7 @@
 ﻿# 宏展开性能研究
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [宏展开性能研究](#宏展开性能研究)
@@ -46,6 +47,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-02-28
@@ -101,6 +103,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -264,6 +267,7 @@
 ---
 
 ## 💻 代码示例 {#-代码示例}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例 1：声明式宏性能测试
@@ -351,6 +355,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## 📊 实验结果 {#-实验结果}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 编译时间对比
@@ -426,6 +431,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## 📋 数据收集执行指南 {#-数据收集执行指南}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 环境要求
@@ -448,6 +454,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## 📐 性能优化建议与工具改进 {#-性能优化建议与工具改进}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 性能优化建议
@@ -468,6 +475,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 - **cargo-bench**：对「宏 vs 手写」做稳定 bench，纳入 CI 防止宏引入性能回退。
 
 ### 性能报告
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 按「结果分析模板」+ 编译时间曲线、展开行数、bloat 列表，可形成宏展开性能报告；建议包含「编译时间 vs 宏类型」「运行时代价」「与 1.93 的兼容性」三部分。
@@ -475,21 +483,25 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 与类型系统的集成
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **类型系统基础**：见 [type_system_foundations.md](../type_theory/type_system_foundations.md)。宏在类型检查之前展开，其生成的类型与 trait 需满足类型规则；复杂宏可先 `cargo expand` 再交给类型系统分析。
 - **Trait 系统**：见 [trait_system_formalization.md](../type_theory/trait_system_formalization.md)。派生宏（`#[derive]`）生成 trait 实现，其正确性与 hygiene 可对照 Trait 形式化；`Serialize`/`Deserialize` 等是过程宏的典型应用。
 
 ### 与实验研究的集成
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **编译器优化**：见 [compiler_optimizations.md](./compiler_optimizations.md)。宏展开后的代码参与后续优化（内联、死代码消除）；分析优化效果时需区分「宏生成」与「手写」路径。
 - **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。宏生成代码的运行时 bench 可纳入同一 `cargo bench` 流程；编译时间可用 `time cargo build` 与 CI 集成。
 
 ### 实际应用案例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **库作者**：对 `#[derive]` 与 `macro_rules!` 做「有无」对照的编译时间与二进制大小测试；在 README 中注明「heavy derives」的 feature 开关。
@@ -499,15 +511,18 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## 📖 参考文献 {#-参考文献}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 官方文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 宏文档](https://doc.rust-lang.org/book/ch19-06-macros.html)
 - [过程宏文档](https://doc.rust-lang.org/reference/procedural-macros.html)
 
 ### 工具资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [cargo-expand](https://github.com/dtolnay/cargo-expand): 查看宏展开结果
@@ -522,12 +537,14 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -710,4 +727,3 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记快速查找](#研究笔记快速查找)
@@ -296,6 +297,7 @@
 | [宏展开性能分析](./experiments/macro_expansion_performance.md) | 分析宏展开性能，识别性能瓶颈                     | ✅ 已完成 | 100%   |
 
 ### 综合研究
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **研究领域**: 实际应用和综合研究
@@ -308,15 +310,18 @@
 ---
 
 ## 🎯 按研究目标查找 {#-按研究目标查找}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 我想看完整总结与论证脉络
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **完整总结综合** → [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)（项目全貌、三大支柱、知识地图、论证总览）
 - **论证脉络关系** → [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md)（论证五步法、概念→定理 DAG、文档依赖、论证思路示例）
 
 ### 我想看批判性意见与改进计划
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **批判性分析与可持续改进计划** → RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
@@ -324,6 +329,7 @@
 - **层次化映射总结** → [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)（文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖）
 
 ### 我想证明某个性质
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **形式化证明体系**（2026-02-14 完成）:
@@ -345,6 +351,7 @@
 - **形式化方法完备性** → [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
 
 ### 我想理解某个概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **类型理论研究**:
@@ -367,6 +374,7 @@
 - **反模式与边界** → [13 反例、规避策略](./software_design_theory/07_anti_patterns.md)
 
 ### 我想优化性能
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **实验研究**:
@@ -378,6 +386,7 @@
 - **宏优化** → [宏展开性能分析](./experiments/macro_expansion_performance.md)
 
 ### 我想学习研究方法
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **综合研究**:
@@ -390,9 +399,11 @@
 ---
 
 ## 📊 按优先级查找 {#-按优先级查找}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 高优先级研究
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **预计完成时间**: 2-3 周
@@ -403,6 +414,7 @@
 4. [类型系统基础](./type_theory/type_system_foundations.md) - 40% 完成度
 
 ### 中优先级研究
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **预计完成时间**: 3-4 周
@@ -419,6 +431,7 @@
 10. [型变理论](./type_theory/variance_theory.md) - 30% 完成度
 
 ### 低优先级研究
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **预计完成时间**: 4-6 周
@@ -430,9 +443,11 @@
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 核心文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [研究笔记主索引](./README.md)
@@ -441,6 +456,7 @@
 - [研究路线图](./RESEARCH_ROADMAP.md)
 
 ### 进展跟踪
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [研究进展跟踪](./PROGRESS_TRACKING.md)
@@ -448,6 +464,7 @@
 - [系统统计报告](./STATISTICS.md)
 
 ### 工具和指南
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [研究工具使用指南](./TOOLS_GUIDE.md)
@@ -463,12 +480,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -514,6 +533,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [research_notes 目录](./README.md)
@@ -643,4 +663,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

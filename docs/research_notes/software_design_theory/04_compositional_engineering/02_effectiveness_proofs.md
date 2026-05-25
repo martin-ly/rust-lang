@@ -1,6 +1,7 @@
 ﻿# 组合软件工程有效性定理与证明
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [组合软件工程有效性定理与证明](#组合软件工程有效性定理与证明)
@@ -30,6 +31,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -69,6 +71,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -241,6 +244,7 @@ fn main() {
 ---
 
 ## 验证方法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 定理 | 验证手段 |
@@ -254,6 +258,7 @@ fn main() {
 ---
 
 ## 组合有效性验证工作流（实质指南）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 新增模块纳入组合时的检查清单
@@ -325,6 +330,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 ---
 
 ## 与 PROOF_INDEX 衔接
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本部分定理纳入 [PROOF_INDEX](../../PROOF_INDEX.md)，按「组合软件工程」领域分类。
@@ -332,6 +338,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -384,6 +391,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [04_compositional_engineering 目录](./README.md)
@@ -507,4 +515,3 @@ impl<S: OrderServiceTrait> OrderController<S> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

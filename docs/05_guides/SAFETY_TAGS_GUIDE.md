@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Safety Tags 预研指南](#safety-tags-预研指南)
@@ -22,6 +23,7 @@
   - [行动建议](#行动建议)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 
@@ -57,9 +59,11 @@ Safety Tags 愿景:
 ---
 
 ## 提议设计（草案阶段）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Tag 语法设想
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -80,6 +84,7 @@ struct RawSlice<T> {
 ```
 
 ### 标准 Tag 库设想
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Tag | 语义 | 适用场景 |
@@ -94,6 +99,7 @@ struct RawSlice<T> {
 ---
 
 ## 与现有工具的协同
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -128,6 +134,7 @@ Safety Tags 生态:
 ---
 
 ## 行动建议
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **跟踪** [Rust Internals 论坛](https://internals.rust-lang.org/) 的 Safety Tags 讨论
@@ -146,6 +153,7 @@ Safety Tags 生态:
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [05_guides 目录](./README.md)
@@ -196,4 +204,3 @@ Safety Tags 生态:
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

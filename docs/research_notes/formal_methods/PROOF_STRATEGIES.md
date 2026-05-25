@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [证明策略](#证明策略)
@@ -49,6 +50,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -260,6 +262,7 @@ s₁ R s₂ 且 s₂ → s₂'  ⇒  ∃s₁'. s₁ → s₁' 且 s₁' R s₂'
 ---
 
 ## 四、构造性证明
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 存在性构造
@@ -292,9 +295,11 @@ impl MyTrait for MyType {
 ---
 
 ## 五、不变式证明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 循环不变式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定义**: 在循环每次迭代前后都成立的性质
@@ -332,6 +337,7 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 ```
 
 ### 5.2 资源不变式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **在分离逻辑中**:
@@ -345,9 +351,11 @@ I是资源不变式，在命令前后都保持
 ---
 
 ## 六、抽象与精化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 数据抽象
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **原理**: 用抽象状态代替具体表示
@@ -366,6 +374,7 @@ I是资源不变式，在命令前后都保持
 ```
 
 ### 6.2 精化关系
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定义**: 具体实现C精化抽象规范A
@@ -377,9 +386,11 @@ C ⊑ A  ⟺  C的行为是A行为的子集
 ---
 
 ## 七、组合证明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 模块化证明
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **原理**: 分而治之，分别验证模块，再组合
@@ -405,6 +416,7 @@ mod B {
 ```
 
 ### 7.2 组合规则
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **顺序组合**:
@@ -426,9 +438,11 @@ mod B {
 ---
 
 ## 八、自动化策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 决策过程
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **可判定理论**:
@@ -438,6 +452,7 @@ mod B {
 - 数组理论: SMT求解器
 
 ### 8.2 证明搜索
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **策略**:
@@ -447,6 +462,7 @@ mod B {
 - 中间引理发现
 
 ### 8.3 在Rust工具中的应用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 工具 | 自动化程度 | 策略 |
@@ -459,6 +475,7 @@ mod B {
 ---
 
 ## 九、证明策略选择指南
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 问题类型 | 推荐策略 | 工具 |
@@ -479,12 +496,14 @@ mod B {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -530,6 +549,7 @@ mod B {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [formal_methods 目录](./README.md)
@@ -662,4 +682,3 @@ mod B {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

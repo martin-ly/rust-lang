@@ -9,11 +9,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 概念层次体系框架](#rust-概念层次体系框架)
   - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 概述 {#-概述}](#-概述--概述)
   - [五层概念体系](#五层概念体系)
     - [L1: 元概念层](#l1-元概念层)
@@ -50,52 +50,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-
-## 📊 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [Rust 概念层次体系框架](#rust-概念层次体系框架)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
-  - [五层概念体系](#五层概念体系)
-    - [L1: 元概念层](#l1-元概念层)
-    - [L2: 核心概念族](#l2-核心概念族)
-      - [L2.1: 所有权概念族](#l21-所有权概念族)
-      - [L2.2: 类型概念族](#l22-类型概念族)
-      - [L2.3: 并发概念族](#l23-并发概念族)
-    - [L3: 具体概念](#l3-具体概念)
-      - [L3.1: 所有权具体概念](#l31-所有权具体概念)
-      - [L3.2: 借用具体概念](#l32-借用具体概念)
-      - [L3.3: 生命周期具体概念](#l33-生命周期具体概念)
-    - [L4: 实现机制](#l4-实现机制)
-    - [L5: 代码实践](#l5-代码实践)
-      - [L5.1: 基础代码模式](#l51-基础代码模式)
-      - [L5.2: 高级代码模式](#l52-高级代码模式)
-      - [L5.3: 代码-概念追溯](#l53-代码-概念追溯)
-  - [层间关系映射](#层间关系映射)
-    - [自顶向下映射](#自顶向下映射)
-    - [自底向上映射](#自底向上映射)
-  - [概念与文档映射](#概念与文档映射)
-    - [按层次组织的文档树](#按层次组织的文档树)
-    - [文档层次完整性检查表](#文档层次完整性检查表)
-  - [概念与定理映射](#概念与定理映射)
-    - [概念-定理对应表](#概念-定理对应表)
-    - [定理层次 DAG](#定理层次-dag)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
-    - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-
----
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🎯 概述 {#-概述}
 >
@@ -339,9 +294,11 @@ println!("{}", r);               // L2: 借用规则
 ---
 
 ## 层间关系映射
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 自顶向下映射
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -364,6 +321,7 @@ L5 代码实践 → 编写代码
 ```
 
 ### 自底向上映射
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -388,9 +346,11 @@ L1 元概念 → 理解本质原理
 ---
 
 ## 概念与文档映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 按层次组织的文档树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -425,6 +385,7 @@ L5 代码实践
 ```
 
 ### 文档层次完整性检查表
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 概念 | L2 文档 | L3 文档 | L4 文档 | L5 文档 | 完整 |
@@ -440,9 +401,11 @@ L5 代码实践
 ---
 
 ## 概念与定理映射
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 概念-定理对应表
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 概念 (L3) | 相关定理 | 定理文档 | 证明状态 |
@@ -456,6 +419,7 @@ L5 代码实践
 | Send/Sync 安全 | SEND-T1, SYNC-T1 | send_sync_formalization.md | ✅ 完整 |
 
 ### 定理层次 DAG
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -495,6 +459,7 @@ graph BT
 ---
 
 ## 📚 相关文档 {#-相关文档}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 用途 | 层次 |
@@ -513,11 +478,13 @@ graph BT
 ---
 
 ## 🆕 Rust 1.94 研究更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 核心研究点
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - rray_windows 的形式化语义
@@ -532,12 +499,14 @@ graph BT
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -583,6 +552,7 @@ graph BT
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -737,4 +707,3 @@ graph BT
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

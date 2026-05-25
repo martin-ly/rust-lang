@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究路线图](#研究路线图)
@@ -264,6 +265,7 @@
 ---
 
 ## 📚 阶段三：实验研究 {#-阶段三实验研究}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **目标**: 通过实验验证理论假设，优化实践
@@ -320,6 +322,7 @@
 ---
 
 ## 📚 阶段四：综合应用 {#-阶段四综合应用}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **目标**: 将理论研究应用于实际项目
@@ -348,6 +351,7 @@
 **预期成果**: 研究方法论体系
 
 ### 4.3 高级主题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [x] [高级类型特性](./type_theory/advanced_types.md) ✅ 100%
@@ -365,9 +369,11 @@
 ---
 
 ## 🔄 研究优先级 {#-研究优先级}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 高优先级 🔴 {#高优先级-}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **类型系统基础** - 所有研究的基础
@@ -375,6 +381,7 @@
 3. **性能基准测试** - 实践验证
 
 ### 中优先级 🟡 {#中优先级-}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Trait 系统形式化** - 类型系统扩展
@@ -382,6 +389,7 @@
 3. **内存分析** - 性能优化
 
 ### 低优先级 🟢 {#低优先级-}
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **高级类型特性** - 高级主题
@@ -391,9 +399,11 @@
 ---
 
 ## 📅 时间规划 {#-时间规划}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 短期目标 (1-3 个月) ✅ {#短期目标-1-3-个月-}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [x] 完成基础理论研究框架
@@ -401,6 +411,7 @@
 - [x] 开始性能实验研究
 
 ### 中期目标 (3-6 个月) ✅ {#中期目标-3-6-个月-}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [x] 完成核心机制的形式化证明
@@ -408,6 +419,7 @@
 - [x] 收集实际应用案例
 
 ### 长期目标 (6-12 个月) ✅ {#长期目标-6-12-个月-}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [x] 完成所有研究主题
@@ -417,9 +429,11 @@
 ---
 
 ## 🎯 成功标准 {#-成功标准}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 理论研究
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ✅ 所有核心机制都有形式化定义
@@ -427,6 +441,7 @@
 - ✅ 理论模型与实际实现一致
 
 ### 实验研究
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - ✅ 建立完整的实验框架
@@ -434,6 +449,7 @@
 - ✅ 形成优化最佳实践
 
 ### 综合应用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - ✅ 收集足够的实际案例
@@ -443,6 +459,7 @@
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [主索引](./README.md) - 完整的研究笔记索引
@@ -458,12 +475,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -509,6 +528,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [research_notes 目录](./README.md)
@@ -622,4 +642,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [并发速查卡](#并发速查卡)
@@ -40,6 +41,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Send与Sync
 >
@@ -259,6 +261,7 @@ counter.compare_exchange(
 ---
 
 ## 线程同步
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Barrier
@@ -307,6 +310,7 @@ while !*started {
 ---
 
 ## 线程局部存储
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -325,6 +329,7 @@ COUNTER.with(|c| {
 ---
 
 ## 常见模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 线程池
@@ -361,6 +366,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 ---
 
 ## 死锁预防
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -374,6 +380,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 ---
 
 ## 性能检查清单
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -393,6 +400,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 ---
 
 ## 🆕 Rust 1.94 研究更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -413,6 +421,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -467,6 +476,7 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](./README.md)
@@ -604,4 +614,3 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

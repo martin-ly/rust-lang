@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Generic Const Expressions (泛型常量表达式)](#generic-const-expressions-泛型常量表达式)
@@ -34,6 +35,7 @@
   - [**状态**: 🧪 不稳定特性，需要 nightly](#状态--不稳定特性需要-nightly)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -63,6 +65,7 @@
   - [**状态**: 🧪 不稳定特性，需要 nightly](#状态--不稳定特性需要-nightly)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -373,6 +376,7 @@ let node: BTreeNode<i32, String, 4> = BTreeNode::new();
 ---
 
 ## ⚠️ 限制与注意事项
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 当前限制
@@ -422,6 +426,7 @@ where
 ---
 
 ## 🔄 与现有方案对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 对比: 使用 const generics vs generic_const_exprs
@@ -464,6 +469,7 @@ where
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [RFC: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)
@@ -492,6 +498,7 @@ where
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [emerging 目录](./README.md)
@@ -655,4 +662,3 @@ where
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

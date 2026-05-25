@@ -42,6 +42,8 @@
     - [10.2 边界测试：Java 的 null 与 Rust 的 `Option`（编译错误）](#102-边界测试java-的-null-与-rust-的-option编译错误)
     - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译错误）](#103-边界测试java-的泛型擦除与-rust-的单态化编译错误)
     - [10.4 边界测试：Java 的 GC 与 Rust 的所有权的资源管理差异（编译错误）](#104-边界测试java-的-gc-与-rust-的所有权的资源管理差异编译错误)
+    - [10.3 边界测试：Java 的泛型擦除与 Rust 的单态化（编译后差异）](#103-边界测试java-的泛型擦除与-rust-的单态化编译后差异)
+    - [10.4 边界测试：Java 的 null 安全与 Rust 的 Option 编译期检查（编译错误）](#104-边界测试java-的-null-安全与-rust-的-option-编译期检查编译错误)
 
 ---
 
@@ -586,12 +588,12 @@ fn main() {
 ```rust,ignore
 fn main() {
     // Java: String s = null; int len = s.length(); // NullPointerException at runtime
-    
+
     // Rust 的编译期保护:
     let s: Option<String> = None;
     // ❌ 编译错误: 不能直接在 Option<String> 上调用 String 方法
     // let len = s.len();
-    
+
     // 必须显式处理 None:
     let len = match s {
         Some(ref s) => s.len(),

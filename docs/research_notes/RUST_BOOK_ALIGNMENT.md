@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Book 逐章对标映射表](#rust-book-逐章对标映射表)
@@ -87,6 +88,7 @@
 ---
 
 ### Ch 4: 所有权 (核心章节)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | Book 主题 | 本项目位置 | 形式化定理 | 差距分析 |
@@ -106,6 +108,7 @@
 ---
 
 ### Ch 10-11: 泛型与 Trait
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | Book 主题 | 本项目位置 | 形式化内容 | 差距分析 |
@@ -126,6 +129,7 @@
 ---
 
 ### Ch 15: 智能指针
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Book 主题 | 本项目位置 | 形式化定义 | Rust 1.94 更新 |
@@ -143,6 +147,7 @@
 ---
 
 ### Ch 16: 无畏并发
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | Book 主题 | 本项目位置 | 形式化定理 | 覆盖度 |
@@ -162,9 +167,11 @@
 ---
 
 ## 形式化内容覆盖度
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 按类型统计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 内容类型 | Book 中提及 | 本项目形式化 | 覆盖率 |
@@ -179,9 +186,11 @@
 ---
 
 ## 差距与补全计划
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 已识别差距
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 差距ID | 描述 | 优先级 | 计划完成 |
@@ -192,6 +201,7 @@
 | GAP-04 | 闭包捕获形式化 | P2 | Week 3 |
 
 ### 补全路线图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -211,9 +221,11 @@ Week 3
 ---
 
 ## 引用索引
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Rust Book → 本项目映射
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Book 章节 | 快速跳转 |
@@ -235,12 +247,14 @@ Week 3
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -286,6 +300,7 @@ Week 3
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -376,4 +391,3 @@ Week 3
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

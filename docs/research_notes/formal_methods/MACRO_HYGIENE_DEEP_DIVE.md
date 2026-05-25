@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [宏卫生性 (Macro Hygiene) 深度解析](#宏卫生性-macro-hygiene-深度解析)
@@ -41,6 +42,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 卫生性机制概述
 >
@@ -226,6 +228,7 @@ mixed_context!(y);
 ---
 
 ## 5. 跨 Crate 卫生性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Def CROSS-CRATE（跨 Crate 卫生性）
@@ -273,6 +276,7 @@ macro_rules! use_internal {
 ---
 
 ## 6. 非卫生性操作
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 某些宏操作**故意不卫生**，用于元编程：
@@ -297,6 +301,7 @@ macro_rules! check_hygiene {
 ---
 
 ## 7. 实战：打破卫生性（谨慎使用）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 使用 `#[macro_export]` + 组合
@@ -340,6 +345,7 @@ let val = const_hygiene_break!(MyConst);
 ---
 
 ## 8. 过程宏的卫生性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 过程宏使用 `Span` 系统实现卫生性：
@@ -371,6 +377,7 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 ---
 
 ## 9. 总结
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 概念 | 关键点 |
@@ -389,6 +396,7 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -447,6 +455,7 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [formal_methods 目录](./README.md)
@@ -564,4 +573,3 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

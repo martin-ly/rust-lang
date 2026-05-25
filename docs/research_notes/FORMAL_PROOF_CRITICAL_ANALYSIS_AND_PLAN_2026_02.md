@@ -1,6 +1,7 @@
 ﻿# 形式化证明批判性分析与计划 2026-02
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化证明批判性分析与计划 2026-02](#形式化证明批判性分析与计划-2026-02)
@@ -18,6 +19,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-01
 > **最后更新**: 2026-02-28
@@ -45,6 +47,7 @@
 - 工具链成熟度评估
 
 ### 推进计划
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 短期目标（1-3个月）
@@ -52,6 +55,7 @@
 - 长期目标（6-12个月）
 
 ## 相关文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [形式化证明系统指南](./FORMAL_PROOF_SYSTEM_GUIDE.md)
@@ -64,12 +68,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -163,4 +169,3 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

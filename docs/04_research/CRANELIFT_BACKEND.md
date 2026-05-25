@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cranelift 后端编译加速跟踪报告](#cranelift-后端编译加速跟踪报告)
@@ -36,6 +37,7 @@
   - [7. 参考文献](#7-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. Cranelift 简介
 >
@@ -216,6 +218,7 @@ cargo +nightly build --profile dev
 ```
 
 ### 3.4 验证是否生效
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -229,9 +232,11 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 ---
 
 ## 4. 已知限制与注意事项
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 当前限制 (2026-04)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 限制 | 状态 | 说明 |
@@ -245,6 +250,7 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 | proc-macro | ✅ 支持 | 通过 fallback 到 LLVM |
 
 ### 4.2 与本项目的集成建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本项目包含 13 个 workspace crate，建议：
@@ -256,9 +262,11 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 ---
 
 ## 5. 配置模板
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 推荐的 `.cargo/config.toml` 配置
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本项目已优化的 `.cargo/config.toml` 可以在 `[unstable]` 段添加 Cranelift 支持：
@@ -282,6 +290,7 @@ codegen-backend = true
 > 需要时在命令行显式启用。
 
 ### 5.2 快速切换脚本
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```powershell
@@ -299,9 +308,11 @@ cargo +nightly build
 ---
 
 ## 6. 跟踪状态
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 关键 Issue 与 PR
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 链接 | 状态 | 描述 |
@@ -311,6 +322,7 @@ cargo +nightly build
 | bjorn3/rustc_codegen_cranelift | 活跃 | 社区驱动的 Cranelift 后端实现 |
 
 ### 6.2 预计稳定化时间
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **2025-2026**: `codegen-backend` 特性稳定化评估
@@ -320,6 +332,7 @@ cargo +nightly build
 ---
 
 ## 7. 参考文献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Wasmtime Team**. "Cranelift: A Compiled Code Generator". Bytecode Alliance, 2019-present.
@@ -360,6 +373,7 @@ cargo +nightly build
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -454,4 +468,3 @@ cargo +nightly build
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

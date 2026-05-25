@@ -41,6 +41,7 @@
     - [10.2 边界测试：Kotlin 的 data class 与 Rust 的 derive（编译错误）](#102-边界测试kotlin-的-data-class-与-rust-的-derive编译错误)
     - [10.3 边界测试：Kotlin 的协程与 Rust 的 async 的调度模型差异（运行时死锁）](#103-边界测试kotlin-的协程与-rust-的-async-的调度模型差异运行时死锁)
     - [10.4 边界测试：Kotlin 的 null safety 与 Rust 的 `Option` 的语法差异（编译错误）](#104-边界测试kotlin-的-null-safety-与-rust-的-option-的语法差异编译错误)
+    - [10.3 边界测试：Kotlin 的 nullable 类型与 Rust 的 Option 显式处理（编译错误）](#103-边界测试kotlin-的-nullable-类型与-rust-的-option-显式处理编译错误)
 
 ---
 
@@ -870,7 +871,7 @@ fn main() {
     let s: Option<String> = None;
     // ❌ 编译错误: 不能直接在 Option<String> 上调用 String 方法
     // let len = s.len();
-    
+
     // 正确: 显式解包
     let len = s.as_ref().map(|s| s.len()).unwrap_or(0);
     // 或: let len = match s { Some(ref s) => s.len(), None => 0 };

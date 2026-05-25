@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [所有权证明树 (Proof Tree: Ownership)](#所有权证明树-proof-tree-ownership)
@@ -111,6 +112,7 @@ let b = a;  // move
 ---
 
 ## 🔍 关键引理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Lemma 1: 移动后原所有者不可用
@@ -147,6 +149,7 @@ Proof:
 ---
 
 ## 🎯 Rust 代码验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -171,6 +174,7 @@ fn ownership_uniqueness_theorem() {
 ---
 
 ## 📊 证明复杂度
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 指标 | 值 |
@@ -183,6 +187,7 @@ fn ownership_uniqueness_theorem() {
 ---
 
 ## 🔗 相关证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [借用证明树](./PROOF_TREE_BORROW.md)
@@ -192,12 +197,14 @@ fn ownership_uniqueness_theorem() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -243,6 +250,7 @@ fn ownership_uniqueness_theorem() {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -334,4 +342,3 @@ fn ownership_uniqueness_theorem() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

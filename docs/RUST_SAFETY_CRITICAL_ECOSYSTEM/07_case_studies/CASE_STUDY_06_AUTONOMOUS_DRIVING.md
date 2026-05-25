@@ -1,6 +1,7 @@
 # 案例研究06: 自动驾驶感知系统
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [案例研究06: 自动驾驶感知系统](#案例研究06-自动驾驶感知系统)
@@ -455,6 +456,7 @@ impl SafetyMonitor {
 ---
 
 ## 验证与确认
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 仿真测试
@@ -541,6 +543,7 @@ mod verification {
 ---
 
 ## 关键指标
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 性能指标
@@ -591,6 +594,7 @@ mod verification {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -790,4 +794,3 @@ mod verification {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

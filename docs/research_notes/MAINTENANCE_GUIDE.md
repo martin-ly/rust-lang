@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记系统维护指南](#研究笔记系统维护指南)
@@ -67,6 +68,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录 {#-目录}
 >
@@ -129,6 +131,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -256,6 +259,7 @@
 ---
 
 ## 🔍 质量检查 {#-质量检查}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 内容质量检查
@@ -310,6 +314,7 @@
 ---
 
 ## 🔄 更新流程 {#-更新流程}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 更新研究笔记
@@ -365,6 +370,7 @@
 ---
 
 ## 🚨 问题处理 {#-问题处理}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 问题发现
@@ -386,6 +392,7 @@
 - **建议问题**: 改进建议和优化建议
 
 ### 问题处理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **严重问题**: 立即处理，24小时内解决
@@ -394,6 +401,7 @@
 - **建议问题**: 评估后处理，1个月内解决
 
 ### 问题跟踪
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 记录问题类型和优先级
@@ -404,9 +412,11 @@
 ---
 
 ## 📈 持续改进 {#-持续改进}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 用户反馈收集
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 收集用户使用反馈
@@ -415,6 +425,7 @@
 - 实施改进措施
 
 ### 技术栈更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 跟踪 Rust 版本更新
@@ -423,6 +434,7 @@
 - 更新工具和依赖
 
 ### 社区建设
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 鼓励社区贡献
@@ -431,6 +443,7 @@
 - 建立反馈机制
 
 ### 质量提升
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 定期质量评估
@@ -441,9 +454,11 @@
 ---
 
 ## 🛠️ 维护工具 {#️-维护工具}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 链接检查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 <!-- markdown-link-check-disable -->
@@ -455,6 +470,7 @@ find docs/research_notes -name "*.md" -exec grep -l "\[.*\](.*)" {} \;
 <!-- markdown-link-check-enable -->
 
 ### 格式检查
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
@@ -463,6 +479,7 @@ markdownlint docs/research_notes/**/*.md
 ```
 
 ### 代码验证
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
@@ -471,6 +488,7 @@ cargo check --examples
 ```
 
 ### 统计信息
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
@@ -484,9 +502,11 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 ---
 
 ## 📋 维护检查清单 {#-维护检查清单}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 日常检查清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 检查新提交的贡献
@@ -495,6 +515,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 - [ ] 更新更新日志
 
 ### 周度检查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 审查新创建的研究笔记
@@ -504,6 +525,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 - [ ] 检查文档格式一致性
 
 ### 月度检查清单
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 全面检查所有文档
@@ -515,6 +537,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 - [ ] 验证所有代码示例
 
 ### 季度检查清单
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 审查研究路线图
@@ -526,6 +549,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 - [ ] 全面格式检查
 
 ### 年度检查清单
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 全面审查系统架构
@@ -539,6 +563,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 ---
 
 ## 📦 Rust 版本增量更新 {#-rust-版本增量更新}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **每 Rust 新版本发布后**，按 [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md) 执行：
@@ -553,9 +578,11 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 核心文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [主索引](./README.md) - 完整的研究笔记索引
@@ -564,6 +591,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 - [质量检查清单](./QUALITY_CHECKLIST.md) - 质量检查标准
 
 ### 维护相关
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [更新日志](./CHANGELOG.md) - 系统变更历史
@@ -579,12 +607,14 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -630,6 +660,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [research_notes 目录](./README.md)
@@ -758,4 +789,3 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

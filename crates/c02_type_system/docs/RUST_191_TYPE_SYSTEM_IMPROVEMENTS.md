@@ -457,6 +457,7 @@ Rust 1.91 在类型系统方面带来了显著的改进：
 - **最后更新**: 2025-01-27
 - **维护者**: 项目团队
 - **下次更新**: Rust 1.92 发布时
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

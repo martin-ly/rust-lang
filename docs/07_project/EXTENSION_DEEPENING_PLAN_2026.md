@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 学习项目 100% 完成度扩展与深化计划](#rust-学习项目-100-完成度扩展与深化计划)
@@ -37,6 +38,7 @@
   - [**版本**: v1.0](#版本-v10)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 执行摘要
 >
@@ -152,6 +154,7 @@
 ---
 
 ## 🎯 第二阶段：证明树可视化增强 (Week 1-2)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 需要创建的证明树
@@ -206,6 +209,7 @@
 ---
 
 ## 🎯 第三阶段：Rust 1.94/1.95 新特性整合 (Week 2-3)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 Rust 1.94 稳定化特性
@@ -260,9 +264,11 @@
 ---
 
 ## 🎯 第四阶段：权威内容全面对标 (Week 3-4)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 官方文档映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 确保每个主题都与官方权威文档对齐：
@@ -277,6 +283,7 @@
 | rustdoc Book | docs/06_toolchain/ | 文档工具 |
 
 ### 4.2 学术资源对标
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 论文/资源 | 主题 | 本项目覆盖 |
@@ -289,9 +296,11 @@
 ---
 
 ## 🎯 第五阶段：缺失主题补充 (Week 4)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 识别缺失主题
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 与官方 Book 对比发现的可能缺失：
@@ -326,6 +335,7 @@
 ---
 
 ## 📊 实施时间表
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -357,6 +367,7 @@ Week 4 (03/22-03/28): 完善与验证
 ---
 
 ## ✅ 成功标准
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 项目达到 100% 完成的定义：
@@ -399,6 +410,7 @@ Week 4 (03/22-03/28): 完善与验证
 ---
 
 ## 📈 持续维护计划
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 达到 100% 后的维护策略：
@@ -433,6 +445,7 @@ Week 4 (03/22-03/28): 完善与验证
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [07_project 目录](./README.md)
@@ -524,4 +537,3 @@ Week 4 (03/22-03/28): 完善与验证
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

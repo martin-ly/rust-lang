@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [代码覆盖率测试指南](#代码覆盖率测试指南)
@@ -34,6 +35,7 @@
   - [8. 参考资源](#8-参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 覆盖率工具选择
 >
@@ -108,6 +110,7 @@ cargo tarpaulin --workspace --timeout 300
 ---
 
 ## 3. cargo-llvm-cov 使用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 安装
@@ -140,6 +143,7 @@ cargo llvm-cov --workspace --all-features --html --open
 ---
 
 ## 4. CI 集成
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本项目 CI 已配置覆盖率生成（`.github/workflows/ci.yml`）：
@@ -187,6 +191,7 @@ coverage:
 ---
 
 ## 5. 覆盖率目标
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 等级 | 行覆盖率 | 说明 |
@@ -210,6 +215,7 @@ cargo tarpaulin --workspace --all-features --engine llvm --out html
 ---
 
 ## 6. 提高覆盖率的策略
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **先覆盖核心路径**: 优先测试最常用的公共 API
@@ -221,6 +227,7 @@ cargo tarpaulin --workspace --all-features --engine llvm --out html
 ---
 
 ## 7. 常见问题
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Q: tarpaulin 在 Windows 上失败？
@@ -234,6 +241,7 @@ cargo tarpaulin --engine llvm --out xml
 ```
 
 ### Q: 覆盖率报告包含测试代码本身？
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 A: 使用 `--exclude-files` 排除测试文件：
@@ -243,6 +251,7 @@ cargo tarpaulin --exclude-files "*/tests/*" --exclude-files "*/benches/*"
 ```
 
 ### Q: async 代码覆盖率不准确？
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 A: 这是已知问题。尝试：
@@ -253,6 +262,7 @@ A: 这是已知问题。尝试：
 ---
 
 ## 8. 参考资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [cargo-tarpaulin 文档](https://github.com/xd009642/tarpaulin)
@@ -274,6 +284,7 @@ A: 这是已知问题。尝试：
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -360,4 +371,3 @@ A: 这是已知问题。尝试：
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.95 预览特性](#rust-195-预览特性)
@@ -24,6 +25,7 @@
   - [**状态**: 🧪 Beta 预览](#状态--beta-预览)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -44,6 +46,7 @@
   - [**状态**: 🧪 Beta 预览](#状态--beta-预览)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -64,6 +67,7 @@ Rust 1.95 主要聚焦于：
 > **[来源: Rust Official Docs]**
 
 ### 1. Impl Trait in Associated Type (稳定)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **描述**: 允许在 trait 的关联类型中使用 `impl Trait`
@@ -110,6 +114,7 @@ impl AsyncIterator for Counter {
 - 更好的 API 封装
 
 ### 2. 新的 API 稳定化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -128,6 +133,7 @@ let mapped = RefCell::try_map(cell.borrow(), |opt| opt.as_ref());
 ```
 
 ### 3. 编译器性能改进
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 场景 | 1.94 | 1.95 | 提升 |
@@ -139,6 +145,7 @@ let mapped = RefCell::try_map(cell.borrow(), |opt| opt.as_ref());
 ---
 
 ## 📊 与 1.94 对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | 1.94 | 1.95 | 影响 |
@@ -152,9 +159,11 @@ let mapped = RefCell::try_map(cell.borrow(), |opt| opt.as_ref());
 ---
 
 ## 🔄 迁移指南
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 从手动 Future 类型到 impl Trait
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -184,6 +193,7 @@ impl MyAsyncTrait for MyStruct {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust 1.95 Release Notes (Draft)](https://releases.rs/docs/1.95.0/)
@@ -211,6 +221,7 @@ impl MyAsyncTrait for MyStruct {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [emerging 目录](./README.md)
@@ -296,4 +307,3 @@ impl MyAsyncTrait for MyStruct {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

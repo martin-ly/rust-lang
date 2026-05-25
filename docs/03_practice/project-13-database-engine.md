@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 13: 简易数据库引擎](#实践项目-13-简易数据库引擎)
@@ -19,6 +20,7 @@
   - [完整参考实现位于: `examples/database-engine/`](#完整参考实现位于-examplesdatabase-engine)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -45,6 +47,7 @@
 > **[来源: Rust Official Docs]**
 
 ### B-Tree实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust

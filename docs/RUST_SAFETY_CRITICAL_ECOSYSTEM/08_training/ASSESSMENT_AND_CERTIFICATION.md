@@ -1,6 +1,7 @@
 # 评估与认证体系
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [评估与认证体系](#评估与认证体系)
@@ -282,6 +283,7 @@ Level 3: Center of Excellence
 ---
 
 ## 4. 样题示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 L1样题
@@ -409,6 +411,7 @@ impl StateMachine<Running> {
 ---
 
 ## 5. 学习路径
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 自学路径
@@ -465,6 +468,7 @@ impl StateMachine<Running> {
 ---
 
 ## 6. 认证维护
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 续证要求
@@ -508,6 +512,7 @@ L4续证 (每5年):
 ---
 
 ## 7. 全球认可
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 地区认证
@@ -522,6 +527,7 @@ L4续证 (每5年):
 | **日本** | JAB | RSCD-L3+ | 互认 |
 
 ### 7.2 行业认可
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -568,6 +574,7 @@ L4续证 (每5年):
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
@@ -744,4 +751,3 @@ L4续证 (每5年):
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Async Closures (异步闭包)](#async-closures-异步闭包)
@@ -33,6 +34,7 @@
   - [**状态**: 🧪 不稳定特性，需要 nightly](#状态--不稳定特性需要-nightly)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -61,6 +63,7 @@
   - [**状态**: 🧪 不稳定特性，需要 nightly](#状态--不稳定特性需要-nightly)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -441,6 +444,7 @@ async fn middleware_example() {
 ---
 
 ## 🔍 实现细节
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### AsyncFn Trait
@@ -470,6 +474,7 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 ---
 
 ## ⚠️ 注意事项
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 当前限制
@@ -499,6 +504,7 @@ let f = async || {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Tracking Issue](https://github.com/rust-lang/rust/issues/62290)
@@ -526,6 +532,7 @@ let f = async || {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [emerging 目录](./README.md)
@@ -697,4 +704,3 @@ let f = async || {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

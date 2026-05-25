@@ -46,6 +46,7 @@
     - [数学常量在 SIMD 优化中的应用](#数学常量在-simd-优化中的应用)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -231,6 +232,7 @@ assert_eq!(result, 1);
 ---
 
 ## 汇编选项
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 选项 | 含义 | 使用场景 |
@@ -275,6 +277,7 @@ unsafe fn exit_process(code: i32) -> ! {
 ---
 
 ## 平台特定指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### x86/x86_64
@@ -396,6 +399,7 @@ mod riscv_examples {
 ---
 
 ## 实战示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 系统调用封装
@@ -526,6 +530,7 @@ impl AtomicU64 {
 ---
 
 ## 与 naked 函数配合
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 裸函数（`#[naked]`）与内联汇编结合，可以完全控制函数 prologue/epilogue：
@@ -584,6 +589,7 @@ extern "C" fn handle_syscall() {
 ---
 
 ## 常见陷阱
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 陷阱 1: 忘记标记 clobbered 寄存器
@@ -657,6 +663,7 @@ unsafe {
 ```
 
 ### 陷阱 4: 平台假设
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -705,6 +712,7 @@ pub fn get_cycle_count() -> u64 {
 ---
 
 ## 总结
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 主题 | 关键点 |
@@ -723,11 +731,13 @@ pub fn get_cycle_count() -> u64 {
 ---
 
 ## Rust 1.95+ 在内联汇编中的应用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### LazyLock 在汇编优化缓存中的应用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -756,6 +766,7 @@ pub fn optimized_memcpy(dst: *mut u8, src:*const u8, len: usize) {
 ```
 
 ### ControlFlow 在汇编错误处理中的应用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -773,6 +784,7 @@ fn validate_asm_result(result: u64) -> ControlFlow<AsmError, ()> {
 ```
 
 ### 数学常量在 SIMD 优化中的应用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -1066,4 +1078,3 @@ pub fn aligned_buffer_size(min_size: usize) -> usize {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

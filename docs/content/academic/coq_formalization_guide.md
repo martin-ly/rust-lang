@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Coq 形式化验证指南](#coq-形式化验证指南)
@@ -28,6 +29,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -51,6 +53,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -119,6 +122,7 @@ rust_formalization/
 ---
 
 ## 💡 核心概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 所有权形式化
@@ -299,9 +303,11 @@ Qed.
 ---
 
 ## 🚀 高级主题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 分离逻辑
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```coq
@@ -345,6 +351,7 @@ Qed.
 ```
 
 ### 并发验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```coq
@@ -394,6 +401,7 @@ Qed.
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Coq 官方文档](https://coq.inria.fr/documentation)
@@ -424,6 +432,7 @@ Qed.
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [academic 目录](./README.md)
@@ -591,4 +600,3 @@ Qed.
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -1,6 +1,7 @@
 # 度量与测量指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [度量与测量指南](#度量与测量指南)
@@ -106,6 +107,7 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 ---
 
 ## 2. 测试覆盖率度量
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 覆盖率类型
@@ -170,6 +172,7 @@ mod coverage {
 ---
 
 ## 3. 缺陷度量
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 缺陷密度
@@ -206,6 +209,7 @@ mod coverage {
 ---
 
 ## 4. 过程度量
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 开发效率
@@ -241,6 +245,7 @@ mod coverage {
 ---
 
 ## 5. 安全特定度量
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 安全分析
@@ -255,6 +260,7 @@ mod coverage {
 | **诊断覆盖** | 故障检测比例 | > 99% | FMEDA |
 
 ### 5.2 形式化验证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -279,9 +285,11 @@ mod coverage {
 ---
 
 ## 6. 工具链度量
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 构建性能
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 度量 | 目标 | 测量 | 优化 |
@@ -292,6 +300,7 @@ mod coverage {
 | **覆盖率** | < 5分钟 | llvm-cov | 增量 |
 
 ### 6.2 CI/CD度量
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -306,9 +315,11 @@ mod coverage {
 ---
 
 ## 7. 度量报告模板
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 周报模板
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```markdown
@@ -340,6 +351,7 @@ mod coverage {
 ```
 
 ### 7.2 月度报告模板
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```markdown
@@ -369,9 +381,11 @@ mod coverage {
 ---
 
 ## 8. 度量工具
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 自动收集
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```yaml
@@ -389,6 +403,7 @@ mod coverage {
 ```
 
 ### 8.2 可视化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -426,6 +441,7 @@ mod coverage {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -530,4 +546,3 @@ mod coverage {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

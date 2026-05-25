@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [五维概念矩阵](#五维概念矩阵)
@@ -44,6 +45,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -214,6 +216,7 @@
 ---
 
 ## 五维交叉分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 所有权 × 借用
@@ -252,6 +255,7 @@
 ---
 
 ## 综合决策矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -273,6 +277,7 @@
 ---
 
 ## 五维与核心定理对应
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | 核心定理 | 证明文件 |
@@ -286,6 +291,7 @@
 ---
 
 ## 与Rust 1.93对应
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 1.93特性 | 五维影响 |
@@ -298,6 +304,7 @@
 ---
 
 ## 扩展阅读
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [CONCEPT_AXIOM_THEOREM_MATRIX](./CONCEPT_AXIOM_THEOREM_MATRIX.md) - 概念-公理-定理映射
@@ -308,6 +315,7 @@
 ---
 
 ## 矩阵结构
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 概念 | 公理 | 定理 | 证明策略 | 反例 |
@@ -321,6 +329,7 @@
 ---
 
 ## 概念-公理对应
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 概念域 | 核心公理 | 数学表达 |
@@ -334,6 +343,7 @@
 ---
 
 ## 定理-证明映射
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 定理 | 难度 | 证明方法 | 状态 |
@@ -347,6 +357,7 @@
 ---
 
 ## 反例汇编
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 概念 | 错误模式 | 后果 | 检测 |
@@ -360,6 +371,7 @@
 ---
 
 ## 学习路径
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -381,6 +393,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -439,6 +452,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](./README.md)
@@ -553,4 +567,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化工具验证指南](#形式化工具验证指南)
@@ -51,6 +52,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 目录 {#-目录}
 >
@@ -97,6 +99,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -287,6 +290,7 @@ formal_verification/
 ---
 
 ## 🔬 验证实施步骤 {#-验证实施步骤}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 步骤 1: 所有权模型验证
@@ -506,6 +510,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 ---
 
 ## 📋 验证任务清单 {#-验证任务清单}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 所有权模型验证
@@ -577,6 +582,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 学习资源
@@ -627,6 +633,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -638,12 +645,14 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -689,6 +698,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -891,4 +901,3 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

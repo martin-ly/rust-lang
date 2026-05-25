@@ -1,6 +1,7 @@
 ﻿# 异步执行模型形式化
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [异步执行模型形式化](#异步执行模型形式化)
@@ -28,6 +29,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -67,6 +69,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -274,6 +277,7 @@ handle.abort();  // 显式取消
 ---
 
 ## 反例与边界
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 反例 | 后果 | 说明 |
@@ -286,6 +290,7 @@ handle.abort();  // 显式取消
 ---
 
 ## 边界
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 维度 | 分类 |
@@ -297,6 +302,7 @@ handle.abort();  // 显式取消
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 1.93 特性 | 与本模型 | 说明 |
@@ -307,6 +313,7 @@ handle.abort();  // 显式取消
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -321,6 +328,7 @@ handle.abort();  // 显式取消
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -379,6 +387,7 @@ handle.abort();  // 显式取消
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [03_execution_models 目录](./README.md)
@@ -490,4 +499,3 @@ handle.abort();  // 显式取消
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

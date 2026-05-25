@@ -96,12 +96,12 @@ fn main() {
     let processor = TransformProcessor {
         transform: |x: i32| x * 2,
     };
-    
+
     let input = vec![1, 2, 3, 4, 5];
     let output: Vec<i32> = processor
         .process_stream(input.into_iter())
         .collect();
-    
+
     assert_eq!(output, vec![2, 4, 6, 8, 10]);
 }
 ```
@@ -137,7 +137,7 @@ struct BufferLender<'a, T> {
 
 impl<'a, T> LendingIterator<'a> for BufferLender<'a, T> {
     type Item = &'a mut T;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         if self.position < self.buffer.len() {
             let idx = self.position;
@@ -170,7 +170,7 @@ impl Context {
         let config = self.config.clone();
         move || config.clone()
     }
-    
+
     /// use<> 确保完全不捕获
     fn get_pure_function() -> impl Fn(i32) -> i32 + use<> {
         |x| x * 2
@@ -189,19 +189,19 @@ impl Context {
 fn enhanced_inference_example() {
     // 编译器能更好地推断复杂泛型
     let data: Vec<Option<i32>> = vec![Some(1), None, Some(3)];
-    
+
     // 不再需要显式类型标注
     let filtered: Vec<i32> = data
         .into_iter()
         .filter_map(|x| x)  // 自动推断 Option<i32> -> i32
         .map(|x| x * 2)      // 自动推断 i32 -> i32
         .collect();          // 自动推断 Vec<i32>
-    
+
     // 闭包参数推断
     let process = |items: Vec<_>| -> Vec<_> {
         items.iter().map(|&x| x as f64).collect()
     };
-    
+
     let result = process(vec![1, 2, 3]);
     assert_eq!(result, vec![1.0, 2.0, 3.0]);
 }
@@ -227,7 +227,7 @@ fn process_with_early_exit<T, E>(
     validator: impl Fn(&T) -> bool,
 ) -> ControlFlow<E, Vec<T>> {
     let mut results = Vec::with_capacity(items.len());
-    
+
     for item in items {
         match processor(item) {
             Ok(processed) => {
@@ -242,7 +242,7 @@ fn process_with_early_exit<T, E>(
             Err(e) => return ControlFlow::Break(e),
         }
     }
-    
+
     ControlFlow::Continue(results)
 }
 
@@ -296,7 +296,7 @@ impl QueryBuilder<Empty, Empty, Empty, Empty> {
             where_clause: Empty,
         }
     }
-    
+
     pub fn from_table(self, table: &str) -> QueryBuilder<WithTable, Empty, Empty, Empty> {
         QueryBuilder {
             table: WithTable(table.to_string()),
@@ -358,15 +358,15 @@ fn builder_example() {
         .from_table("users")
         .select(["id", "name", "email"])
         .build();
-    
+
     assert_eq!(query, "SELECT id, name, email FROM users");
-    
+
     let query_with_where = QueryBuilder::new()
         .from_table("users")
         .select(["id", "name"])
         .where_clause("active = true")
         .build();
-    
+
     assert_eq!(query_with_where, "SELECT id, name FROM users WHERE active = true");
 }
 ```
@@ -414,14 +414,14 @@ where
     ) -> impl Future<Output = Vec<Output>> + use<Self> {
         async move {
             let mut results = Vec::with_capacity(input.len());
-            
+
             for chunk in input.chunks(self.batch_size) {
                 for item in chunk {
                     let result = self.inner.process(item.clone()).await;
                     results.push(result);
                 }
             }
-            
+
             results
         }
     }
@@ -466,11 +466,11 @@ pub fn verify_zero_cost() {
         .map(|x| x * 2)
         .filter(|&x| x > 100)
         .collect();
-    
+
     // impl Trait 版本 - 生成相同的汇编代码
     let impl_trait_result: Vec<i32> = process_items_generic(0..1000)
         .collect();
-    
+
     assert_eq!(generic_result, impl_trait_result);
 }
 
@@ -489,6 +489,7 @@ where
 - [Rust 1.94 发布说明](../../../docs/06_toolchain/16_rust_1.94_release_notes.md)
 - [C04 泛型主索引](../00_MASTER_INDEX.md)
 - [RPITIT 详解](../tier_03_references/rpitit_guide.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

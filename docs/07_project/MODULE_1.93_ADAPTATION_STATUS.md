@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [C01–C12 1.93 适配状态 - 重定向](#c01c12-193-适配状态---重定向)
@@ -22,6 +23,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Rust 1.95+ 持续更新更新
 >
@@ -79,6 +81,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [07_project 目录](./README.md)
@@ -122,4 +125,3 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

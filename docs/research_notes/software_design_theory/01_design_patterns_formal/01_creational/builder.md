@@ -1,6 +1,7 @@
 ﻿# Builder 形式化分析
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Builder 形式化分析](#builder-形式化分析)
@@ -40,6 +41,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -93,6 +95,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -343,6 +346,7 @@ ownership_model T2
 ---
 
 ## 典型场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
@@ -355,6 +359,7 @@ ownership_model T2
 ---
 
 ## 完整场景示例：HTTP 请求构建器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **场景**：构建 HTTP 请求；URL 必填，headers/body 可选；链式调用 + `ok_or` 校验。
@@ -406,6 +411,7 @@ let req = HttpRequestBuilder::new()
 ---
 
 ## 相关模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
@@ -417,6 +423,7 @@ let req = HttpRequestBuilder::new()
 ---
 
 ## 实现变体
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
@@ -428,6 +435,7 @@ let req = HttpRequestBuilder::new()
 ---
 
 ## 反例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **反例**：`build()` 在必填字段未设置时调用 → 返回 `Err` 或 panic。类型状态模式可强制编译期检查。
@@ -443,6 +451,7 @@ let config = ConfigBuilder::new()
 ---
 
 ## 错误处理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 `build()` 返回 `Result<Config, String>` 时，缺必填字段用 `ok_or("host required")?` 传播 Err；调用方用 `?` 或 `match` 处理。避免 `unwrap()` 导致不可恢复 panic。
@@ -450,6 +459,7 @@ let config = ConfigBuilder::new()
 ---
 
 ## 选型决策树
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -463,6 +473,7 @@ let config = ConfigBuilder::new()
 ---
 
 ## 与 GoF 对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | GoF | Rust 对应 | 差异 |
@@ -474,6 +485,7 @@ let config = ConfigBuilder::new()
 ---
 
 ## 边界
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 维度 | 分类 |
@@ -485,6 +497,7 @@ let config = ConfigBuilder::new()
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
@@ -495,6 +508,7 @@ let config = ConfigBuilder::new()
 ---
 
 ## 思维导图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -523,6 +537,7 @@ mindmap
 ---
 
 ## 与其他模式的关系图
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -541,6 +556,7 @@ graph LR
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -555,6 +571,7 @@ graph LR
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -613,6 +630,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [01_creational 目录](./README.md)
@@ -777,4 +795,3 @@ graph LR
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [操作语义](#操作语义)
@@ -51,6 +52,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -254,6 +256,7 @@ l ∉ dom(σ₂)
 ```
 
 ### 3.3 与Rust的对应
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **栈帧**:
@@ -273,9 +276,11 @@ l ∉ dom(σ₂)
 ---
 
 ## 四、类型化操作语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 类型保持
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定理 (保持性)**:
@@ -294,6 +299,7 @@ l ∉ dom(σ₂)
 ```
 
 ### 4.2 Rust类型规则
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **移动规则**:
@@ -329,9 +335,11 @@ l ∉ dom(σ₂)
 ---
 
 ## 五、并发操作语义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 线程模型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **配置**: `⟨t₁ | t₂ | ... | tₙ, σ⟩`
@@ -343,6 +351,7 @@ l ∉ dom(σ₂)
 ```
 
 ### 5.2 共享内存
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **原子读**:
@@ -358,6 +367,7 @@ l ∉ dom(σ₂)
 ```
 
 ### 5.3 消息传递
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **发送**:
@@ -375,9 +385,11 @@ l ∉ dom(σ₂)
 ---
 
 ## 六、语义等价
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 上下文等价
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **定义**:
@@ -387,6 +399,7 @@ e₁ ≅ e₂  当且仅当  对所有上下文C，C[e₁]和C[e₂]行为相同
 ```
 
 ### 6.2 模拟关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **模拟**: R是模拟如果
@@ -399,6 +412,7 @@ e₁ ≅ e₂  当且仅当  对所有上下文C，C[e₁]和C[e₂]行为相同
 **双模拟**: 互模拟关系
 
 ### 6.3 在Rust优化中的应用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **编译器优化**:
@@ -421,9 +435,11 @@ print!("{}", 3);
 ---
 
 ## 七、与形式化验证的联系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 霍尔三元组
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定义**:
@@ -440,6 +456,7 @@ print!("{}", 3);
 ```
 
 ### 7.2 最弱前置条件
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定义**:
@@ -457,9 +474,11 @@ wp(C, Q) = λσ. ∀v, σ'. ⟨C, σ⟩ ⇓ ⟨v, σ'⟩ → Q(v, σ')
 ---
 
 ## 八、实际应用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 8.1 MIR语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust的中间表示(MIR)操作语义：
@@ -471,6 +490,7 @@ Rust的中间表示(MIR)操作语义：
 ```
 
 ### 8.2 优化验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 使用操作语义验证编译器优化的正确性。
@@ -484,12 +504,14 @@ Rust的中间表示(MIR)操作语义：
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -535,6 +557,7 @@ Rust的中间表示(MIR)操作语义：
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [formal_methods 目录](./README.md)
@@ -663,4 +686,3 @@ Rust的中间表示(MIR)操作语义：
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

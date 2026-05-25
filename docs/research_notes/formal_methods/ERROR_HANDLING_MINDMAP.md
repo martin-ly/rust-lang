@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [错误处理概念思维导图](#错误处理概念思维导图)
@@ -45,6 +46,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 错误处理全景
 >
@@ -310,6 +312,7 @@ fn get_or_default<T: Default>(opt: Option<T>) -> T {
 ---
 
 ## 错误处理模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 模式1: 立即处理
@@ -346,6 +349,7 @@ let result = primary_op()
 ```
 
 ### 模式4: 聚合错误
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -362,6 +366,7 @@ if !errors.is_empty() {
 ---
 
 ## 性能考虑
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 机制 | 成功路径开销 | 错误路径开销 | 使用建议 |
@@ -373,6 +378,7 @@ if !errors.is_empty() {
 ---
 
 ## 错误处理层次
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -392,6 +398,7 @@ if !errors.is_empty() {
 ---
 
 ## Result类型详解
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -423,6 +430,7 @@ Result<T, E>
 ---
 
 ## Option类型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -440,6 +448,7 @@ Option<T>
 ---
 
 ## 错误类型设计
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -459,6 +468,7 @@ Option<T>
 ---
 
 ## ?操作符机制
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -476,6 +486,7 @@ Option<T>
 ---
 
 ## 最佳实践
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -494,12 +505,14 @@ Option<T>
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -545,6 +558,7 @@ Option<T>
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](./README.md)
@@ -708,4 +722,3 @@ Option<T>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

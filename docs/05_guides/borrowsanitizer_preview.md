@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [BorrowSanitizer 预览](#borrowsanitizer-预览)
@@ -20,6 +21,7 @@
   - [参考](#参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 
@@ -63,6 +65,7 @@ BorrowSanitizer:
 ---
 
 ## 检测能力
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 违规类型 | 示例 | 检测状态 |
@@ -76,6 +79,7 @@ BorrowSanitizer:
 ---
 
 ## 与 Miri 的互补关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -111,6 +115,7 @@ CI/测试:          BorrowSanitizer + Miri
 ---
 
 ## 参考
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust Project Goals: Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
@@ -129,6 +134,7 @@ CI/测试:          BorrowSanitizer + Miri
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [05_guides 目录](./README.md)

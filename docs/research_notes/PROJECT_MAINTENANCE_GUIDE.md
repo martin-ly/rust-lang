@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [项目维护指南](#项目维护指南)
@@ -215,6 +216,7 @@ TUTORIAL_<topic>.md
 ---
 
 ## 质量控制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 自动化检查
@@ -280,6 +282,7 @@ echo "=== 检查完成 ==="
 ---
 
 ## 社区贡献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 贡献流程
@@ -328,6 +331,7 @@ echo "=== 检查完成 ==="
 ---
 
 ## 版本管理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 版本号规则
@@ -366,9 +370,11 @@ echo "=== 检查完成 ==="
 ---
 
 ## 备份与归档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 备份策略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 类型 | 频率 | 保留期 |
@@ -378,6 +384,7 @@ echo "=== 检查完成 ==="
 | 版本发布 | 每次 | 永久 |
 
 ### 归档规则
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 废弃内容移至 `archive/deprecated/`
@@ -387,6 +394,7 @@ echo "=== 检查完成 ==="
 ---
 
 ## 联系信息
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 事项 | 联系方式 |
@@ -405,12 +413,14 @@ echo "=== 检查完成 ==="
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -456,6 +466,7 @@ echo "=== 检查完成 ==="
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -557,4 +568,3 @@ echo "=== 检查完成 ==="
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

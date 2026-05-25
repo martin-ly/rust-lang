@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化论证完成报告](#形式化论证完成报告)
@@ -36,6 +37,7 @@
   - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -91,6 +93,7 @@
 - 并发语义
 
 ### 三、证明技术 (2篇) ✅
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 大小 | 内容深度 | 特色 |
@@ -107,6 +110,7 @@
 - 组合证明
 
 ### 四、方法学 (3篇) ✅
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 大小 | 内容深度 | 特色 |
@@ -126,6 +130,7 @@
 ---
 
 ## 理论体系架构
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -158,6 +163,7 @@
 ---
 
 ## 理论 → Rust映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 理论概念 | Rust应用 | 文档位置 |
@@ -175,9 +181,11 @@
 ---
 
 ## 学习路径
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 初学者路径 (20小时)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -195,6 +203,7 @@ Week 3: 霍尔逻辑
 ```
 
 ### 进阶者路径 (40小时)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -211,6 +220,7 @@ Week 8: 方法比较
 ```
 
 ### 专家路径 (80小时)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -230,9 +240,11 @@ Week 13-14: 工具实践
 ---
 
 ## 与原有内容的整合
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 与核心形式化文档的衔接
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 原有文档 | 新增理论支持 | 衔接点 |
@@ -244,6 +256,7 @@ Week 13-14: 工具实践
 | send_sync_formalization.md | 模态逻辑 | 并发安全性 |
 
 ### 与设计模式的联系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 设计模式 | 形式化基础 | 文档 |
@@ -255,9 +268,11 @@ Week 13-14: 工具实践
 ---
 
 ## 质量指标
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 内容深度
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | 目标 | 实际 | 状态 |
@@ -268,6 +283,7 @@ Week 13-14: 工具实践
 | 案例数量 | 6个案例 | 6个 | ✅ |
 
 ### 学术水平
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 指标 | 评估 |
@@ -280,6 +296,7 @@ Week 13-14: 工具实践
 ---
 
 ## 项目总览 (更新后)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -314,6 +331,7 @@ Week 13-14: 工具实践
 ---
 
 ## 结论
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本次更新建立了**完整的形式化论证理论体系**，使项目从"Rust语言文档"提升为"形式化方法理论与实践的综合资源"。
@@ -342,6 +360,7 @@ Week 13-14: 工具实践
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -363,6 +382,7 @@ Week 13-14: 工具实践
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [research_notes 目录](./README.md)
@@ -469,4 +489,3 @@ Week 13-14: 工具实践
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

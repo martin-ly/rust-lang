@@ -1,6 +1,7 @@
 # Rust生态系统多维概念矩阵对比
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust生态系统多维概念矩阵对比](#rust生态系统多维概念矩阵对比)
@@ -76,6 +77,7 @@
 ---
 
 ## 矩阵4: Rust认证工具链能力矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 能力维度 | Ferrocene (Ferrous Systems) | AdaCore GNAT Pro | High Assurance Rust | Kani (AWS) | Verus (VMware) |
@@ -94,6 +96,7 @@
 ---
 
 ## 矩阵5: 航天国防应用领域矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 应用领域 | 典型项目 | Rust应用 | 关键标准 | 安全等级 | 合作伙伴 | 当前状态 |
@@ -110,6 +113,7 @@
 ---
 
 ## 矩阵6: MISRA C:2025 Addendum 6 规则映射矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | MISRA C规则类别 | 总规则数 | Rust自动强制 | Rust编译器保证 | 需额外工具 | 不适用 | 备注 |
@@ -132,6 +136,7 @@
 ---
 
 ## 矩阵7: 时间线演进矩阵 (2020-2026)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 年份 | 学术里程碑 | 工具链发展 | 工业应用 | 标准化进展 |
@@ -147,6 +152,7 @@
 ---
 
 ## 矩阵8: 风险评估与缓解矩阵
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 风险类别 | 风险描述 | 影响程度 | 发生概率 | 缓解策略 | 责任方 |
@@ -162,9 +168,11 @@
 ---
 
 ## 矩阵使用说明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 如何使用这些矩阵
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **技术选型**: 使用矩阵1和矩阵4对比语言特性和工具链
@@ -174,6 +182,7 @@
 5. **战略规划**: 使用矩阵7制定技术路线图
 
 ### 更新频率建议
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **矩阵1,2,4**: 每季度审查
@@ -200,6 +209,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -276,4 +286,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

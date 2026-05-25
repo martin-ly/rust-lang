@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Miri 实战指南：Rust 未定义行为检测工具](#miri-实战指南rust-未定义行为检测工具)
@@ -38,13 +39,14 @@
   - [📖 参考文献](#-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
 > **[来源: Rust Official Docs]**
 
 - [Miri 实战指南：Rust 未定义行为检测工具](#miri-实战指南rust-未定义行为检测工具)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🔬 什么是 Miri](#-什么是-miri)
   - [⚙️ 安装与运行](#️-安装与运行)
@@ -71,6 +73,7 @@
   - [📖 参考文献](#-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -288,6 +291,7 @@ fn aliasing_violation() {
 ---
 
 ## 🌲 Tree Borrows vs Stacked Borrows
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Miri 支持两种不同的内存别名模型，通过 `-Zmiri-tree-borrows` 切换。
@@ -354,6 +358,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 ---
 
 ## ✍️ 编写 Miri 友好测试的实战流程
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 步骤 1：隔离 unsafe 代码到独立测试
@@ -451,6 +456,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 ---
 
 ## ⚠️ Miri 的局限性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 局限 | 说明 | 影响 |
@@ -480,6 +486,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 ---
 
 ## 🔧 CI 集成
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 由于 Miri 仅支持 nightly，CI 配置需要单独设置：
@@ -532,6 +539,7 @@ CI 策略矩阵:
 ---
 
 ## 📖 参考文献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Ralf Jung, et al.** "Miri: Practical UB Detection for Rust". *POPL 2026*.
@@ -575,6 +583,7 @@ CI 策略矩阵:
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [05_guides 目录](./README.md)
@@ -600,7 +609,6 @@ CI 策略矩阵:
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
-
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 > **[来源: Wikipedia - Rust (programming language)]**
@@ -744,4 +752,3 @@ CI 策略矩阵:
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [错误处理速查卡](#错误处理速查卡)
@@ -25,6 +26,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Result与Option
 >
@@ -69,6 +71,7 @@ res.and_then(|v| ...) // 链式操作
 ---
 
 ## ?操作符
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -82,6 +85,7 @@ fn may_fail() -> Result<T, Error> {
 ---
 
 ## 错误转换
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -97,6 +101,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ---
 
 ## panic vs Result
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 情况 | 使用 |
@@ -115,6 +120,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -126,6 +132,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -180,6 +187,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -247,4 +255,3 @@ let file = File::open("file")?;  // IOError自动转为MyError
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

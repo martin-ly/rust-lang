@@ -1,6 +1,7 @@
 ﻿# 类型系统构造能力
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型系统构造能力](#类型系统构造能力)
@@ -23,6 +24,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -56,6 +58,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -98,6 +101,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## TCON 矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 类型族 × 构造方式 × 确定性
@@ -125,6 +129,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## Rust 1.93 新增类型/表达式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 以下 Rust 1.93 新增或变更的特性影响类型构造能力；详见 [07_rust_1.93_full_changelog](../../06_toolchain/07_rust_1.93_full_changelog.md)、[00_completeness_gaps](./00_completeness_gaps.md)。
@@ -142,6 +147,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 类型理论缺口对构造能力的影响
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 [00_completeness_gaps](./00_completeness_gaps.md) 中 ⚠️ 部分缺口可能影响类型构造路径；本表标注其对 TCON 的影响。
@@ -157,6 +163,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 类型构造决策树
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 给定目标类型 → 构造路径选择
@@ -195,6 +202,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 确定性判定
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 情形 | 确定性 | 处理 |
@@ -216,6 +224,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 与已有证明衔接
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 文档 | 衔接点 |
@@ -229,6 +238,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 相关文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 文档 | 用途 |
@@ -247,6 +257,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -305,6 +316,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [type_theory 目录](./README.md)
@@ -415,4 +427,3 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

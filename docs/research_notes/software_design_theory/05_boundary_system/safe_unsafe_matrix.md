@@ -1,6 +1,7 @@
 ﻿# 安全 vs 非安全边界矩阵
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全 vs 非安全边界矩阵](#安全-vs-非安全边界矩阵)
@@ -30,6 +31,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -235,6 +237,7 @@
 ---
 
 ## 常见错误与排查
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 错误 | 原因 | 解决 |
@@ -247,6 +250,7 @@
 ---
 
 ## 场景化决策完整示例（实质内容）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 示例 1：需全局配置的单例
@@ -308,6 +312,7 @@ impl PaymentGateway for FFIPaymentGateway {
 ---
 
 ## 引用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)
@@ -316,6 +321,7 @@ impl PaymentGateway for FFIPaymentGateway {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -374,6 +380,7 @@ impl PaymentGateway for FFIPaymentGateway {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [05_boundary_system 目录](./README.md)
@@ -484,4 +491,3 @@ impl PaymentGateway for FFIPaymentGateway {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

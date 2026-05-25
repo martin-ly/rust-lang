@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [测试覆盖率指南](#测试覆盖率指南)
@@ -56,6 +57,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录 {#-目录}
 >
@@ -107,6 +109,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -252,6 +255,7 @@ cargo llvm-cov --exclude '*/tests/*'
 ---
 
 ## 📝 测试类型 {#-测试类型}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 单元测试
@@ -326,6 +330,7 @@ async fn test_async_function() {
 ---
 
 ## 🔧 提高覆盖率 {#-提高覆盖率}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 测试边界情况
@@ -400,6 +405,7 @@ fn test_concurrent_access() {
 ---
 
 ## 📊 覆盖率报告 {#-覆盖率报告}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 生成报告
@@ -433,9 +439,11 @@ open coverage/tarpaulin-report.html
 ---
 
 ## 🎯 最佳实践 {#-最佳实践}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 1. 持续集成
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```yaml
@@ -458,6 +466,7 @@ jobs:
 ```
 
 ### 2. 覆盖率阈值
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```toml
@@ -467,6 +476,7 @@ fail-under = 80  # 覆盖率低于 80% 时失败
 ```
 
 ### 3. 排除文件
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```toml
@@ -482,6 +492,7 @@ exclude-files = [
 ---
 
 ## 📚 相关资源 {#-相关资源}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [cargo-tarpaulin 文档](https://github.com/xd009642/tarpaulin)
@@ -491,9 +502,11 @@ exclude-files = [
 ---
 
 ## 使用场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 场景1: 新模块测试策略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 为新开发的模块建立测试体系：
@@ -503,6 +516,7 @@ exclude-files = [
 3. 使用 [文档测试](#3-文档测试) 保证示例可用
 
 ### 场景2: CI/CD 集成
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 在持续集成中集成覆盖率检查：
@@ -513,6 +527,7 @@ exclude-files = [
 ```
 
 ### 场景3: 覆盖率提升
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 系统性地提高项目测试覆盖率：
@@ -523,6 +538,7 @@ exclude-files = [
 - 验证 [并发场景](#3-测试并发场景)
 
 ### 场景4: 发布前质量验证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 在版本发布前验证测试质量：
@@ -535,6 +551,7 @@ exclude-files = [
 ---
 
 ## 形式化链接
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 链接类型 | 目标文档 |
@@ -549,18 +566,20 @@ exclude-files = [
 | :--- | :--- |
 
 ## 🆕 Rust 1.95+ 特性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 新特性概览
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 1.95+ 带来了以下重要更新：
 
 - **rray_windows** - 固定大小的数组窗口迭代器
 - **ControlFlow** - 控制流抽象类型
-- **LazyCell/LazyLock 新方法** - get(), get_mut(), 
+- **LazyCell/LazyLock 新方法** - get(), get_mut(),
 orce_mut()
 - **Peekable::next_if_map** - 条件映射迭代
 - **TryFrom<char> for usize** - Unicode 标量值转换
@@ -577,11 +596,13 @@ orce_mut()
 ---
 
 ## Rust 1.95+ 在测试开发中的应用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### array_windows 在测试数据生成中的应用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -601,6 +622,7 @@ fn test_sliding_window_processing() {
 ```
 
 ### ControlFlow 在测试验证管道中的应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -622,6 +644,7 @@ fn validate_test_results(results: &[TestResult]) -> ControlFlow<Vec<TestFailure>
 ```
 
 ### LazyLock 在测试固件管理中的应用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -659,6 +682,7 @@ pub fn is_test_db_ready() -> bool {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [05_guides 目录](./README.md)
@@ -825,4 +849,3 @@ pub fn is_test_db_ready() -> bool {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

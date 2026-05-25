@@ -31,6 +31,7 @@
   - [技术成就](#技术成就)
   - [未来发展方向](#未来发展方向)
   - [总结](#总结)
+  - [这是一个真正意义上的 Rust 1.89 泛型编程综合学习资源，为 Rust 生态系统的发展做出了重要贡献](#这是一个真正意义上的-rust-189-泛型编程综合学习资源为-rust-生态系统的发展做出了重要贡献)
 
 ## 项目概述
 
@@ -232,7 +233,7 @@ crates/c04_generic/
 - 了解泛型在实际项目中的应用
 - 提升 Rust 代码质量和性能
 
-这是一个真正意义上的 Rust 1.89 泛型编程综合学习资源，为 Rust 生态系统的发展做出了重要贡献。
+这是一个真正意义上的 Rust 1.89 泛型编程综合学习资源，为 Rust 生态系统的发展做出了重要贡献
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -1,6 +1,7 @@
 ﻿# 研究笔记分类体系
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记分类体系](#研究笔记分类体系)
@@ -24,6 +25,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -74,6 +76,7 @@
 ---
 
 ## 三、按主题域分类
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 主题域 | 子域 | 文档 |
@@ -90,6 +93,7 @@
 ---
 
 ## 四、按研究领域分类（扩展）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 领域 | 文档数 | 子目录/文档 |
@@ -103,6 +107,7 @@
 ---
 
 ## 五、扩展路线
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 内容扩展
@@ -117,6 +122,7 @@
 | **国际权威** | RustBelt、Stacked Borrows、Tree Borrows、FLS | 新论文、规范 |
 
 ### 5.2 分类扩展
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 方向 | 当前 | 可扩展 |
@@ -126,6 +132,7 @@
 | **按依赖** | 分散 | 依赖图、学习顺序 |
 
 ### 5.3 索引扩展
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 方向 | 当前 | 可扩展 |
@@ -137,6 +144,7 @@
 ---
 
 ## 六、快速查找指引
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 我想… | 入口 |
@@ -153,6 +161,7 @@
 ---
 
 ## 引用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [INDEX](./INDEX.md) — 完整索引
@@ -162,12 +171,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -213,6 +224,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [research_notes 目录](./README.md)
@@ -290,4 +302,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

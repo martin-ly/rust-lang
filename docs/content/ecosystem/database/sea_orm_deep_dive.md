@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Sea-ORM 深度解析](#sea-orm-深度解析)
@@ -42,6 +43,7 @@
   - [**状态**: ✅ 已完成](#状态--已完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -79,6 +81,7 @@
   - [**状态**: ✅ 已完成](#状态--已完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -308,6 +311,7 @@ pub struct Model {
 ---
 
 ## 💾 CRUD 操作
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Create
@@ -426,6 +430,7 @@ user::Entity::delete_many()
 ---
 
 ## 🔗 关联查询
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Eager Loading
@@ -476,6 +481,7 @@ let posts: Vec<post::Model> = user.find_related(post::Entity)
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 连接池
@@ -498,6 +504,7 @@ let db = Database::connect(opt).await?;
 ```
 
 ### 查询优化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -531,6 +538,7 @@ let results = db.query_all(
 ---
 
 ## 🧪 测试策略
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -565,6 +573,7 @@ mod tests {
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Sea-ORM 官方文档](https://www.sea-ql.org/SeaORM/)
@@ -595,6 +604,7 @@ mod tests {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -777,4 +787,3 @@ mod tests {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

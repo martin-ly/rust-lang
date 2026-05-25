@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [借用证明树 (Proof Tree: Borrowing)](#借用证明树-proof-tree-borrowing)
@@ -132,6 +133,7 @@ Proof:
 ---
 
 ## 🎯 Rust 代码验证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -161,6 +163,7 @@ fn borrowing_safety_theorem() {
 ---
 
 ## 📊 借用检查器算法
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -178,6 +181,7 @@ BorrowCheck(程序 P):
 ---
 
 ## 📊 证明复杂度
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 指标 | 值 |
@@ -190,6 +194,7 @@ BorrowCheck(程序 P):
 ---
 
 ## 🔗 相关证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [所有权证明树](./PROOF_TREE_OWNERSHIP.md)
@@ -199,6 +204,7 @@ BorrowCheck(程序 P):
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -257,6 +263,7 @@ BorrowCheck(程序 P):
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -347,4 +354,3 @@ BorrowCheck(程序 P):
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

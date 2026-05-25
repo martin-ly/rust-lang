@@ -11,6 +11,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 研究笔记：完整总结综合](#rust-研究笔记完整总结综合)
@@ -33,6 +34,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 一、项目全貌（一句话）
 >
@@ -113,6 +115,7 @@
 ---
 
 ## 四、论证脉络关系总览
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **论证思路**：定义先行 → 公理链闭环 → 论证可追溯 → 证明结构化 → 边界有反例。
@@ -137,6 +140,7 @@
 ---
 
 ## 五、各文档职责与定位
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 职责 | 论证角色 |
@@ -157,6 +161,7 @@
 ---
 
 ## 六、推荐阅读路径
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 目标 | 路径 |
@@ -170,6 +175,7 @@
 ---
 
 ## 七、完成度与缺口
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | 状态 |
@@ -193,6 +199,7 @@
 ---
 
 ## 🆕 Rust 1.94 研究更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -213,6 +220,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -267,6 +275,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -368,4 +377,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

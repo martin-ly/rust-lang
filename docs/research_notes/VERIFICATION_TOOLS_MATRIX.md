@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [验证工具对比矩阵](#验证工具对比矩阵)
@@ -131,6 +132,7 @@ fn find_min(arr: &[i32]) -> usize {
 ---
 
 ## 验证能力矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 功能覆盖对比
@@ -175,6 +177,7 @@ graph TD
 ---
 
 ## 选择决策树
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -192,6 +195,7 @@ graph TD
 ---
 
 ## 与 Rust 版本兼容性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具 | 1.70 | 1.75 | 1.80 | 1.90 | 1.94 |
@@ -204,6 +208,7 @@ graph TD
 ---
 
 ## 集成示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### CI/CD 配置
@@ -234,6 +239,7 @@ jobs:
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [验证工具选型决策树](./VERIFICATION_TOOLS_DECISION_TREE.md)
@@ -248,6 +254,7 @@ jobs:
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -302,6 +309,7 @@ jobs:
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -407,4 +415,3 @@ jobs:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

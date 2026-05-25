@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 03: 表达式计算器](#实践项目-03-表达式计算器)
@@ -19,6 +20,7 @@
   - [完整参考实现位于: `examples/calculator/`](#完整参考实现位于-examplescalculator)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -44,6 +46,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 递归下降解析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -65,6 +68,7 @@ fn eval(expr: &Expr) -> f64 {
 ---
 
 ## 参考实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/calculator/`
@@ -128,4 +132,3 @@ fn eval(expr: &Expr) -> f64 {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

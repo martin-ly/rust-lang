@@ -1574,7 +1574,7 @@ fn main() {
         std::thread::spawn(|| {
             std::thread::sleep(std::time::Duration::from_secs(10));
         });
-        
+
         tokio::spawn(async {
             println!("async task");
         }).await.unwrap();

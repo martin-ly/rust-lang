@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [内存模型概念思维导图](#内存模型概念思维导图)
@@ -47,6 +48,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 内存模型全景
 >
@@ -320,6 +322,7 @@ struct Resource {
 ---
 
 ## Unsafe内存操作
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 安全抽象边界
@@ -355,6 +358,7 @@ pub fn safe_interface() {
 ---
 
 ## 内存序与原子操作
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 内存序对比
@@ -392,6 +396,7 @@ if FLAG.load(Ordering::Acquire) {     // Acquire: 能看到Release前的操作
 ---
 
 ## 内存泄漏与避免
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 泄漏场景
@@ -425,6 +430,7 @@ struct Node {
 ---
 
 ## 形式化关联
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 概念 | 形式化定义 | 定理 |
@@ -436,6 +442,7 @@ struct Node {
 | Sync | `T: Sync` | 线程安全共享 |
 
 ## 内存模型层次
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -455,6 +462,7 @@ struct Node {
 ---
 
 ## Stacked Borrows
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -482,6 +490,7 @@ struct Node {
 ---
 
 ## 内存区域
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -505,6 +514,7 @@ struct Node {
 ---
 
 ## 指针类型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -523,6 +533,7 @@ struct Node {
 ---
 
 ## 内存安全保证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -540,6 +551,7 @@ struct Node {
 ---
 
 ## 与形式化验证的关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -564,6 +576,7 @@ struct Node {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -618,6 +631,7 @@ struct Node {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](./README.md)
@@ -803,4 +817,3 @@ struct Node {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

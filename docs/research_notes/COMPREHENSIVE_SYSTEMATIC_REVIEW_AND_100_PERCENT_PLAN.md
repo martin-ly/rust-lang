@@ -9,11 +9,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Research Notes: 全面系统梳理与100%完成计划](#rust-research-notes-全面系统梳理与100完成计划)
   - [📑 目录](#-目录)
-  - [📋 目录](#-目录-1)
   - [一、执行摘要](#一执行摘要)
     - [1.1 项目背景](#11-项目背景)
     - [1.2 当前完成度评估](#12-当前完成度评估)
@@ -88,36 +88,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-
-## 📋 目录
->
-> **[来源: Rust Official Docs]**
-
-- [一、执行摘要](#一执行摘要)
-- [二、现状全面分析](#二现状全面分析)
-  - [2.1 文档体系结构](#21-文档体系结构)
-  - [2.2 形式化论证覆盖度评估](#22-形式化论证覆盖度评估)
-  - [2.3 思维表征覆盖度评估](#23-思维表征覆盖度评估)
-  - [2.4 论证缺口详细识别](#24-论证缺口详细识别)
-- [三、国际权威对标分析](#三国际权威对标分析)
-  - [3.1 RustBelt 对标](#31-rustbelt-对标)
-  - [3.2 Aeneas 对标](#32-aeneas-对标)
-  - [3.3 其他验证工具对标](#33-其他验证工具对标)
-- [四、缺口分类与优先级](#四缺口分类与优先级)
-  - [4.1 缺口四维分类体系](#41-缺口四维分类体系)
-  - [4.2 优先级矩阵](#42-优先级矩阵)
-- [五、100%完成路线图](#五100完成路线图)
-  - [5.1 阶段规划总览](#51-阶段规划总览)
-  - [5.2 详细任务分解](#52-详细任务分解)
-- [六、思维表征完善计划](#六思维表征完善计划)
-  - [6.1 思维导图体系](#61-思维导图体系)
-  - [6.2 多维矩阵体系](#62-多维矩阵体系)
-  - [6.3 证明树与决策树](#63-证明树与决策树)
-  - [6.4 应用树图](#64-应用树图)
-- [七、可持续推进机制](#七可持续推进机制)
-- [八、验收标准与验证方法](#八验收标准与验证方法)
-
----
+  - [权威来源索引](#权威来源索引-1)
 
 ## 一、执行摘要
 >
@@ -357,6 +328,7 @@ research_notes/
 ---
 
 ## 三、国际权威对标分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 RustBelt 对标
@@ -417,6 +389,7 @@ research_notes/
 ---
 
 ## 四、缺口分类与优先级
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 缺口四维分类体系
@@ -467,6 +440,7 @@ research_notes/
 ---
 
 ## 五、100%完成路线图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 阶段规划总览
@@ -579,6 +553,7 @@ Phase 4 (持续): 维护与扩展
 ---
 
 ## 六、思维表征完善计划
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 思维导图体系
@@ -613,6 +588,7 @@ Phase 4 (持续): 维护与扩展
 | 证明技术概念族谱 | ❌ | 新建 | P2 |
 
 ### 6.2 多维矩阵体系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 6.2.1 核心矩阵（已存在，需更新）
@@ -633,6 +609,7 @@ Phase 4 (持续): 维护与扩展
 | 验证工具对比矩阵 | Kani/Prusti/Creusot/... | P2 |
 
 ### 6.3 证明树与决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 6.3.1 证明树完善
@@ -669,6 +646,7 @@ Phase 4 (持续): 维护与扩展
 | 验证工具选型决策树 | ❌ | 新建 | P2 |
 
 ### 6.4 应用树图
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### 6.4.1 应用场景映射树（需新建）
@@ -701,9 +679,11 @@ Rust应用场景
 ---
 
 ## 七、可持续推进机制
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 质量保证机制
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 7.1.1 代码/证明审查流程
@@ -750,6 +730,7 @@ Rust应用场景
 - [ ] 社区反馈处理
 
 ### 7.2 版本演进机制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 7.2.1 Rust版本跟进流程
@@ -795,6 +776,7 @@ Rust新版本发布
 | 框架文档 | TBD | TBD | 按需 |
 
 ### 7.3 社区协作机制
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 7.3.1 贡献者引导流程
@@ -828,9 +810,11 @@ Rust新版本发布
 ---
 
 ## 八、验收标准与验证方法
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 100%完成验收标准
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 8.1.1 形式化论证验收标准
@@ -862,6 +846,7 @@ Rust新版本发布
 | **国际对标** | 与RustBelt主要定理有映射 | 专家审查 |
 
 ### 8.2 验证自动化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 8.2.1 持续集成检查
@@ -898,9 +883,11 @@ verification_pipeline:
 ---
 
 ## 九、附录
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 关键资源索引
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 资源 | 链接 | 用途 |
@@ -912,6 +899,7 @@ verification_pipeline:
 | Tree Borrows | <https://plv.mpi-sws.org/rustbelt/stacked-borrows/> | 借用模型最新研究 |
 
 ### 9.2 术语表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 术语 | 定义 |
@@ -926,6 +914,7 @@ verification_pipeline:
 | **Corollary** | 推论：由定理直接推导 |
 
 ### 9.3 变更日志
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 日期 | 版本 | 变更 |
@@ -941,6 +930,7 @@ verification_pipeline:
 ---
 
 ## 思维导图：本计划全貌
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -966,12 +956,14 @@ verification_pipeline:
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -1017,6 +1009,7 @@ verification_pipeline:
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -1299,4 +1292,3 @@ verification_pipeline:
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

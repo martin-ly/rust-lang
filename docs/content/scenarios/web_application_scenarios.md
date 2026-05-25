@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Web 应用开发场景树](#web-应用开发场景树)
@@ -18,6 +19,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🌳 Web 应用场景树
 >
@@ -117,6 +119,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 ---
 
 ## 🔗 相关文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Axum 深度解析](../ecosystem/web_frameworks/axum_deep_dive.md)
@@ -140,6 +143,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
@@ -206,4 +210,3 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

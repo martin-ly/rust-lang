@@ -42,9 +42,11 @@ async fn process_request(req: Request) -> Response {
 ---
 
 ## 2. 核心架构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 整体架构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Tracing 的架构可分解为**生产者-分发器-消费者**三层：
@@ -84,6 +86,7 @@ graph TB
 > [来源: Tracing Docs — Subscriber](https://docs.rs/tracing-subscriber/latest/tracing_subscriber/)
 
 ### 2.2 Span 生命周期状态机
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 `Span` 是 Tracing 最核心的抽象，其生命周期被严格建模为状态机：
@@ -119,9 +122,11 @@ stateDiagram-v2
 ---
 
 ## 3. 类型系统关键利用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 `Value` Trait：类型安全的结构化字段
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Tracing 的字段系统通过 `Value` trait 实现**编译期类型检查 + 运行时结构化输出**：
@@ -149,6 +154,7 @@ info!(data = vec![1,2,3]);      // ❌ 编译错误：Vec<i32> 未实现 Value
 > [来源: Tracing Docs — `Value` trait](https://docs.rs/tracing-core/latest/tracing_core/field/trait.Value.html)
 
 ### 3.2 `#[instrument]` 宏：零成本自动埋点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 `#[instrument]` 过程宏通过编译期代码生成，在函数入口/出口自动创建 Span：
@@ -174,6 +180,7 @@ async fn handle_request(req: Request, _ctx: Context) -> Result<Response, Error> 
 > [来源: Tracing Docs — `#[instrument]`](https://docs.rs/tracing/latest/tracing/attr.instrument.html)
 
 ### 3.3 `Layer` 组合：Tower 模式的遥测复用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 Tracing-Subscriber 直接复用 Tower 的 `Layer` trait 模式：
@@ -203,9 +210,11 @@ subscriber.init();
 ---
 
 ## 4. 零成本抽象证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 无操作 (No-op) 路径
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 当没有 Subscriber 注册，或当前 `Level` 低于过滤阈值时：
@@ -233,6 +242,7 @@ subscriber.init();
 > [来源: Rust Reference — Dead Code Elimination](https://doc.rust-lang.org/rustc/codegen-options/index.html)
 
 ### 4.2 静态 Metadata
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 所有 `span!` / `event!` 宏在展开时都会生成**静态 `Metadata<'static>` 常量**：
@@ -260,9 +270,11 @@ static MY_EVENT_METADATA: Metadata<'static> = Metadata::new(
 ---
 
 ## 5. 安全保证机制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 `Send` / `Sync` 与跨线程 Span 传递
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 `Span` 本身不持有线程局部状态，可以安全地跨线程传递：
@@ -285,6 +297,7 @@ std::thread::spawn(move || {
 > [来源: Tracing Docs — Thread Safety](https://docs.rs/tracing/latest/tracing/span/struct.Span.html)
 
 ### 5.2 内存安全：无泄漏保证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Tracing 的 `Span` 使用**引用计数 + 弱引用**管理生命周期：
@@ -310,6 +323,7 @@ struct Inner {
 ---
 
 ## 6. 与 OpenTelemetry 的集成
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Tracing 通过 `tracing-opentelemetry` crate 成为 OTel 生态的一等公民：
@@ -346,6 +360,7 @@ sequenceDiagram
 ---
 
 ## 7. 性能特征对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 指标 | `log` crate | Tracing (no subscriber) | Tracing (with fmt Layer) | Tracing (with OTel Layer) |
@@ -362,6 +377,7 @@ sequenceDiagram
 ---
 
 ## 相关架构与延伸阅读
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Tokio 异步运行时架构](./06_tokio_architecture.md)
@@ -454,4 +470,3 @@ sequenceDiagram
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

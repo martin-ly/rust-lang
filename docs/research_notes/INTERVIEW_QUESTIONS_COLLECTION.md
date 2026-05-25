@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust形式化方法面试题集锦](#rust形式化方法面试题集锦)
@@ -48,6 +49,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 使用指南
 >
@@ -1199,6 +1201,7 @@ trait EventStore {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [research_notes 目录](./README.md)
@@ -1593,4 +1596,3 @@ trait EventStore {
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

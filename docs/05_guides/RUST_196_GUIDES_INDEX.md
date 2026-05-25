@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.96 指南文档语义梳理索引](#rust-196-指南文档语义梳理索引)
@@ -24,6 +25,7 @@
   - [**负责人**: 系统化梳理团队](#负责人-系统化梳理团队)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 指南文档清单与梳理状态
 >
@@ -80,6 +82,7 @@
 ---
 
 ## 📝 统一更新模板
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Rust 1.96 内容模板
@@ -200,6 +203,7 @@ done
 ```
 
 ### 检查 1.96 特性覆盖
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -228,6 +232,7 @@ grep -r "isqrt\|get_disjoint_mut\|if let guards\|async Fn" docs/05_guides/ | wc 
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [05_guides 目录](./README.md)
@@ -307,4 +312,3 @@ grep -r "isqrt\|get_disjoint_mut\|if let guards\|async Fn" docs/05_guides/ | wc 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

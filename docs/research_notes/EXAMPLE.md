@@ -1,6 +1,7 @@
 ﻿# 研究笔记示例
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记示例](#研究笔记示例)
@@ -53,6 +54,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -115,6 +117,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -268,6 +271,7 @@ lifetime('a) : 'a
 ---
 
 ## ✅ 证明目标 {#-证明目标}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 待证明的性质
@@ -289,6 +293,7 @@ lifetime('a) : 'a
 ---
 
 ## 💻 代码示例 {#-代码示例}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 示例 1: 所有权转移
@@ -356,6 +361,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 ## 📖 参考文献 {#-参考文献}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 学术论文
@@ -389,6 +395,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [所有权系统实现](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)
 
 ### 工具资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) - Rust 的形式化验证工具
@@ -397,9 +404,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 ## 🔄 研究进展 {#-研究进展}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 已完成 ✅ {#已完成-}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [x] 所有权转移的形式化定义
@@ -408,6 +417,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [x] 代码示例收集
 
 ### 进行中 🔄 {#进行中-}
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 内存安全性质的证明
@@ -416,6 +426,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [ ] 形式化定义的完善
 
 ### 计划中 📋 {#计划中-}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 使用 Coq 进行形式化证明
@@ -432,9 +443,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 ## 💡 编写提示 {#-编写提示}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 研究目标
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ✅ 明确说明研究目的
@@ -442,6 +455,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 定义预期成果
 
 ### 2. 理论基础
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ 解释相关概念
@@ -449,6 +463,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 引用相关文献
 
 ### 3. 形式化定义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - ✅ 使用清晰的数学符号
@@ -456,6 +471,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 解释语义含义
 
 ### 4. 代码示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ✅ 提供可运行的代码
@@ -463,6 +479,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 说明关键概念
 
 ### 5. 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - ✅ 引用学术论文
@@ -470,6 +487,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - ✅ 提供工具资源
 
 ### 6. 研究进展
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - ✅ 记录已完成的工作
@@ -479,9 +497,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 ## 🔗 相关资源 {#-相关资源}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 核心文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [研究笔记模板](./TEMPLATE.md) - 研究笔记模板
@@ -489,6 +509,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 - [质量检查清单](./QUALITY_CHECKLIST.md) - 质量检查标准
 
 ### 研究笔记
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [所有权模型形式化](./formal_methods/ownership_model.md) - 实际研究笔记
@@ -503,12 +524,14 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -671,4 +694,3 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

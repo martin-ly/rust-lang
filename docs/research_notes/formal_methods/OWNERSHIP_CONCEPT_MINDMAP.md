@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [所有权概念族谱](#所有权概念族谱)
@@ -38,6 +39,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 所有权概念全景
 >
@@ -154,6 +156,7 @@ Rule 2: 引用必须始终有效
 ---
 
 ## 二、派生概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 Move语义
@@ -204,9 +207,11 @@ Drop trait
 ---
 
 ## 三、相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 Send与Sync
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -235,6 +240,7 @@ Send与Sync
 | Mutex<T> | ✅ | ✅ |
 
 ### 3.2 Pin与Unpin
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -253,6 +259,7 @@ Pin与Unpin
 ---
 
 ## 四、概念关系图
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -273,6 +280,7 @@ Pin与Unpin
 ---
 
 ## 五、学习路径
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -297,6 +305,7 @@ Pin与Unpin
 ---
 
 ## 六、与其他概念族的关系
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -318,9 +327,11 @@ Pin与Unpin
 ---
 
 ## 七、反例索引
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 所有权相关反例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 反例ID | 描述 | 编译器错误 |
@@ -336,9 +347,11 @@ Pin与Unpin
 ---
 
 ## 八、形式化链接
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 相关定理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 定理 | 描述 | 位置 |
@@ -347,6 +360,7 @@ Pin与Unpin
 | T-OW3 | 内存安全 | [定理汇编](../THEOREMS_AND_PROOF_STRATEGIES.md) §1 |
 
 ### 相关证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - L-OW1: 初始唯一性
@@ -363,12 +377,14 @@ Pin与Unpin
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -414,6 +430,7 @@ Pin与Unpin
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [formal_methods 目录](./README.md)
@@ -551,4 +568,3 @@ Pin与Unpin
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

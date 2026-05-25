@@ -1,6 +1,7 @@
 ﻿# 编译器优化研究
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [编译器优化研究](#编译器优化研究)
@@ -52,6 +53,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-02-28
@@ -113,6 +115,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -250,6 +253,7 @@
 ---
 
 ## 💻 代码示例 {#-代码示例}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例 1：内联优化测试
@@ -314,6 +318,7 @@ fn dead_code_elimination() {
 ```
 
 ## 💻 代码示例（完整基准测试）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 以下为含 Criterion 的完整基准测试代码，可与上方简化示例对照；运行 `cargo bench` 可复现「实验结果」中的示例数据。
@@ -454,6 +459,7 @@ fn dead_code_example() {
 ---
 
 ## 📊 实验结果 {#-实验结果}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 优化级别效果
@@ -525,6 +531,7 @@ fn dead_code_example() {
 ---
 
 ## 📋 数据收集执行指南 {#-数据收集执行指南}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 环境要求
@@ -546,6 +553,7 @@ fn dead_code_example() {
 ---
 
 ## 📐 优化建议与工具改进 {#-优化建议与工具改进}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 优化建议
@@ -558,6 +566,7 @@ fn dead_code_example() {
 - **Rust 1.93**：关注 codegen 与 LTO 的变更，重跑基准以更新基线。
 
 ### 工具改进
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - **Compiler Explorer (godbolt.org)**：对比 `opt-level`、`-C target-cpu` 的汇编，验证内联与向量化。
@@ -565,6 +574,7 @@ fn dead_code_example() {
 - **opt-report**：`-C llvm-args=-opt-report` 可辅助理解 LLVM 优化决策（若需深入）。
 
 ### 优化报告
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 按「结果分析模板」+ 各 `opt-level` 的 bench 曲线、bloat 列表，可形成编译器优化报告；建议包含「推荐 profile」「内联与大小权衡」「与 1.93 的兼容性」三部分。
@@ -572,21 +582,25 @@ fn dead_code_example() {
 ---
 
 ## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 与类型系统的集成
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **类型系统基础**：见 [type_system_foundations.md](../type_theory/type_system_foundations.md)。类型与单态化直接影响内联与死代码消除；泛型与 `impl Trait` 的 codegen 可在此验证。
 - **Trait 系统**：见 [trait_system_formalization.md](../type_theory/trait_system_formalization.md)。动态分发 (`dyn`) vs 静态分发对 `#[inline]` 与优化级别敏感，可纳入对照实验。
 
 ### 与实验研究的集成
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。同一 `cargo bench` 流程下，可切换 `opt-level`、`codegen-units` 做 A/B 比较。
 - **内存分析**：见 [memory_analysis.md](./memory_analysis.md)。`opt-level` 影响内联与栈使用，分析内存时需固定编译选项。
 
 ### 实际应用案例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **库作者**：提供 `opt-level=2` 与 `lto` 的推荐配置；对热点路径标注 `#[inline]` 并附 bench。
@@ -596,9 +610,11 @@ fn dead_code_example() {
 ---
 
 ## 📖 参考文献 {#-参考文献}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 学术论文
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **"LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation"**
@@ -606,12 +622,14 @@ fn dead_code_example() {
    - 摘要: LLVM 编译器框架
 
 ### 官方文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Rust 编译器优化](https://doc.rust-lang.org/rustc/codegen-options/index.html#optimization-level)
 - [LLVM 优化文档](https://llvm.org/docs/Passes.html)
 
 ### 工具资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Cargo 优化选项](https://doc.rust-lang.org/cargo/reference/profiles.html)
@@ -626,12 +644,14 @@ fn dead_code_example() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -835,4 +855,3 @@ fn dead_code_example() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

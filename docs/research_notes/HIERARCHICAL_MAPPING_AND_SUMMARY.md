@@ -10,11 +10,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [research\_notes 层次化梳理与映射总结](#research_notes-层次化梳理与映射总结)
   - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
   - [一、按三大支柱的文档树](#一按三大支柱的文档树)
   - [二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表](#二概念族--文档--defaxiom定理-映射表)
     - [2.1 支柱 1（公理判定）](#21-支柱-1公理判定)
@@ -34,35 +34,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-
-## 📊 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [research\_notes 层次化梳理与映射总结](#research_notes-层次化梳理与映射总结)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [一、按三大支柱的文档树](#一按三大支柱的文档树)
-  - [二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表](#二概念族--文档--defaxiom定理-映射表)
-    - [2.1 支柱 1（公理判定）](#21-支柱-1公理判定)
-    - [2.2 支柱 2（语言表达力）](#22-支柱-2语言表达力)
-    - [2.3 支柱 3（组件组合）](#23-支柱-3组件组合)
-  - [三、文档 ↔ 思维表征 映射表](#三文档--思维表征-映射表)
-    - [3.1 按文档 → 思维表征](#31-按文档--思维表征)
-    - [3.2 按思维表征 → 文档（入口）](#32-按思维表征--文档入口)
-  - [四、文档依赖关系（简表）](#四文档依赖关系简表)
-  - [五、使用说明](#五使用说明)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-
----
+  - [权威来源索引](#权威来源索引-1)
 
 ## 一、按三大支柱的文档树
 >
@@ -170,6 +142,7 @@ research_notes/
 ---
 
 ## 三、文档 ↔ 思维表征 映射表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 以下为 research_notes 文档与思维表征（思维导图、多维矩阵、证明树、决策树）的对应关系；思维表征主文档位于 [04_thinking](../04_thinking/README.md)。
@@ -212,6 +185,7 @@ research_notes/
 ---
 
 ## 四、文档依赖关系（简表）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 A | 依赖/引用 | 文档 B |
@@ -227,6 +201,7 @@ research_notes/
 ---
 
 ## 五、使用说明
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **按支柱/层级查文档**：用 § 一 文档树。
@@ -244,6 +219,7 @@ research_notes/
 ---
 
 ## 🆕 Rust 1.94 更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+
@@ -255,6 +231,7 @@ research_notes/
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -309,6 +286,7 @@ research_notes/
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -422,4 +400,3 @@ research_notes/
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

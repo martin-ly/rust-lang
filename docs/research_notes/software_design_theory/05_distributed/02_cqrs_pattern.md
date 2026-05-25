@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [CQRS 模式形式化定义](#cqrs-模式形式化定义)
@@ -32,6 +33,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 概念定义 (Def)
 >
@@ -83,6 +85,7 @@ Consistency_Boundary := Δt ∈ Time
 ---
 
 ## 2. 基本假设 (Axiom)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Axiom CQ1: 命令不可重复
@@ -118,6 +121,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 ---
 
 ## 3. 定理 (Theorem)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Theorem CQ1: 读写无冲突
@@ -153,6 +157,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 ---
 
 ## 4. Rust 实现示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -213,6 +218,7 @@ impl<E, S> ProjectionSync<E, S> {
 ---
 
 ## 5. 与其他模式的关系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | 关系 | 说明 |
@@ -231,6 +237,7 @@ impl<E, S> ProjectionSync<E, S> {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -285,6 +292,7 @@ impl<E, S> ProjectionSync<E, S> {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [05_distributed 目录](./README.md)
@@ -375,4 +383,3 @@ impl<E, S> ProjectionSync<E, S> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

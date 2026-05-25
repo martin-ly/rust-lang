@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [cargo-semver-checks 集成指南](#cargo-semver-checks-集成指南)
@@ -33,6 +34,7 @@
   - [7. 参考资源](#7-参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 什么是 cargo-semver-checks？
 >
@@ -77,6 +79,7 @@ cargo-semver-checks 基于 rustdoc JSON 输出进行分析，可检测：
 ---
 
 ## 2. 安装
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -92,9 +95,11 @@ cargo semver-checks --version
 ---
 
 ## 3. 基本使用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 检查当前工作目录的 crate
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
@@ -103,6 +108,7 @@ cargo semver-checks
 ```
 
 ### 检查 workspace 中的特定 crate
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -110,6 +116,7 @@ cargo semver-checks -p c10_networks
 ```
 
 ### 与 baseline 版本比较
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
@@ -124,6 +131,7 @@ cargo semver-checks -p c10_networks --baseline-rev main
 ```
 
 ### 本地开发工作流
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
@@ -140,6 +148,7 @@ cargo semver-checks
 ---
 
 ## 4. CI 集成
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 参见 `.github/workflows/pr-checks.yml` 中的 `semver-checks` 任务：
@@ -165,6 +174,7 @@ semver-checks:
 ```
 
 ### CI 策略
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **PR 检查**: 与 `main` 分支比较，阻止无意的 breaking change
@@ -174,9 +184,11 @@ semver-checks:
 ---
 
 ## 5. 处理误报和例外
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 场景 1: 新增字段但已使用 `#[non_exhaustive]`
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -188,6 +200,7 @@ pub struct Config {
 ```
 
 ### 场景 2: 有意进行 breaking change（MAJOR 版本升级）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
@@ -197,6 +210,7 @@ cargo semver-checks --baseline-version 0.1.0
 ```
 
 ### 场景 3: 内部 API 被误判
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -208,6 +222,7 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 ---
 
 ## 6. 最佳实践
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **给所有公共 struct 添加 `#[non_exhaustive]`**（如果计划未来扩展）
@@ -219,6 +234,7 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 ---
 
 ## 7. 参考资源
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [cargo-semver-checks 文档](https://github.com/obi1kenobi/cargo-semver-checks)
@@ -239,6 +255,7 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -297,4 +314,3 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 决策图网 / Decision Graph Network](#rust-决策图网--decision-graph-network)
@@ -64,6 +65,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录 {#-目录}
 >
@@ -123,6 +125,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -1210,6 +1213,7 @@ ust
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [04_thinking 目录](./README.md)
@@ -1579,4 +1583,3 @@ ust
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

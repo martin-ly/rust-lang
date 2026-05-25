@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [反例汇编 (Counter-Examples Compendium)](#反例汇编-counter-examples-compendium)
@@ -40,6 +41,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 如何使用本文档
 >
@@ -524,6 +526,7 @@ thread::spawn(move || {
 ---
 
 ## 五、异步反例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 反例 5.1: 跨await持有锁
@@ -571,6 +574,7 @@ async fn good() {
 ---
 
 ## 六、设计模式反例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 反例 6.1: 尝试实现经典单例
@@ -613,6 +617,7 @@ fn get_instance() -> &'static Singleton {
 ---
 
 ## 七、反例索引表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 反例ID | 概念 | 难度 | 出现频率 |
@@ -631,6 +636,7 @@ fn get_instance() -> &'static Singleton {
 ---
 
 ## 八、从反例学习
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 反例的教育价值
@@ -660,6 +666,7 @@ fn get_instance() -> &'static Singleton {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -712,6 +719,7 @@ fn get_instance() -> &'static Singleton {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -946,4 +954,3 @@ fn get_instance() -> &'static Singleton {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

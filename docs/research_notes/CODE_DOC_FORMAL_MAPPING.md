@@ -1,11 +1,11 @@
 ﻿# 代码-文档-形式化完整映射
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [代码-文档-形式化完整映射](#代码-文档-形式化完整映射)
   - [📑 目录](#-目录)
-  - [📋 目录 {#-目录}](#-目录--目录)
   - [1. 代码到概念的映射](#1-代码到概念的映射)
     - [1.1 所有权与移动语义](#11-所有权与移动语义)
     - [1.2 借用与引用](#12-借用与引用)
@@ -57,73 +57,13 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 建立代码模式、文档位置与形式化定义之间的完整映射关系
-
----
-
-## 📋 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [代码-文档-形式化完整映射](#代码-文档-形式化完整映射)
-  - [📑 目录](#-目录)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [1. 代码到概念的映射](#1-代码到概念的映射)
-    - [1.1 所有权与移动语义](#11-所有权与移动语义)
-    - [1.2 借用与引用](#12-借用与引用)
-    - [1.3 生命周期](#13-生命周期)
-    - [1.4 Trait 与泛型](#14-trait-与泛型)
-    - [1.5 并发与同步](#15-并发与同步)
-    - [1.6 错误处理](#16-错误处理)
-  - [2. 代码到文档的映射](#2-代码到文档的映射)
-    - [2.1 所有权系统文档映射](#21-所有权系统文档映射)
-    - [2.2 生命周期文档映射](#22-生命周期文档映射)
-    - [2.3 泛型与 Trait 文档映射](#23-泛型与-trait-文档映射)
-    - [2.4 并发文档映射](#24-并发文档映射)
-    - [2.5 标准库 API 文档映射](#25-标准库-api-文档映射)
-  - [3. 代码到形式化的映射](#3-代码到形式化的映射)
-    - [3.1 所有权转移的形式化](#31-所有权转移的形式化)
-    - [3.2 借用的形式化](#32-借用的形式化)
-    - [3.3 生命周期的形式化](#33-生命周期的形式化)
-    - [3.4 类型系统的形式化](#34-类型系统的形式化)
-    - [3.5 并发的形式化](#35-并发的形式化)
-    - [3.6 异步的形式化](#36-异步的形式化)
-  - [4. 错误代码映射](#4-错误代码映射)
-    - [4.1 所有权错误 (E03xx)](#41-所有权错误-e03xx)
-    - [4.2 借用错误 (E04xx, E05xx)](#42-借用错误-e04xx-e05xx)
-    - [4.3 生命周期错误 (E05xx)](#43-生命周期错误-e05xx)
-    - [4.4 类型系统错误 (E02xx, E03xx)](#44-类型系统错误-e02xx-e03xx)
-    - [4.5 并发错误 (E0xxx)](#45-并发错误-e0xxx)
-    - [4.6 错误码快速修复索引](#46-错误码快速修复索引)
-  - [5. API映射](#5-api映射)
-    - [5.1 所有权相关 API](#51-所有权相关-api)
-    - [5.2 借用相关 API](#52-借用相关-api)
-    - [5.3 集合 API](#53-集合-api)
-    - [5.4 并发 API](#54-并发-api)
-    - [5.5 异步 API](#55-异步-api)
-    - [5.6 I/O API](#56-io-api)
-  - [6. 快速查找索引](#6-快速查找索引)
-    - [6.1 按代码模式查找](#61-按代码模式查找)
-    - [6.2 按错误码查找](#62-按错误码查找)
-    - [6.3 按文档类型查找](#63-按文档类型查找)
-    - [6.4 按形式化主题查找](#64-按形式化主题查找)
-  - [相关文档](#相关文档)
-    - [项目内部文档](#项目内部文档)
-    - [形式化文档](#形式化文档)
-    - [外部资源](#外部资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -289,6 +229,7 @@
 ---
 
 ## 3. 代码到形式化的映射
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 所有权转移的形式化
@@ -322,6 +263,7 @@
 | `'static` | Lifetime('static) = [0, infinity) | [定义 - 静态生命周期](./formal_methods/lifetime_formalization.md#定义-静态生命周期) |
 
 ### 3.4 类型系统的形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 代码 | 形式化定义 | 相关定理/证明 |
@@ -331,6 +273,7 @@
 | `dyn Trait` | dyn Trait = exists T. T: Trait && vtable(T) | [类型规则 - Trait 对象](./type_theory/type_system_foundations.md#类型规则-trait-对象) |
 
 ### 3.5 并发的形式化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 代码 | 形式化定义 | 相关定理/证明 |
@@ -342,6 +285,7 @@
 | `Sync` trait | Sync(T) <=> forall r: &T. Send(r) | [定义 - Sync](./formal_methods/send_sync_formalization.md#定义-sync) |
 
 ### 3.6 异步的形式化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 代码 | 形式化定义 | 相关定理/证明 |
@@ -353,9 +297,11 @@
 ---
 
 ## 4. 错误代码映射
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 所有权错误 (E03xx)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
@@ -366,6 +312,7 @@
 | **E0507** | `let x = *r;` (r 是借用) | 从借用内容移动 | [C01 借用检查器](../02_reference/quick_reference/ownership_cheatsheet.md) | 规则 1 - 借用规则 |
 
 ### 4.2 借用错误 (E04xx, E05xx)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
@@ -376,6 +323,7 @@
 | **E0506** | `*r = value;` (while borrowed) | 给借用赋值 | [C01 借用](../02_reference/quick_reference/ownership_cheatsheet.md) | 规则 1 - 借用规则 |
 
 ### 4.3 生命周期错误 (E05xx)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
@@ -385,6 +333,7 @@
 | **E0373** | `move \|_\| x` in closure | 闭包生命周期 | [C06 异步](../02_reference/quick_reference/async_patterns.md) | 捕获变量生命周期约束 |
 
 ### 4.4 类型系统错误 (E02xx, E03xx)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
@@ -396,6 +345,7 @@
 | **E0325** | 递归 trait bound | 溢出求值要求 | [C04 泛型](../02_reference/quick_reference/generics_cheatsheet.md) | 类型系统一致性 |
 
 ### 4.5 并发错误 (E0xxx)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
@@ -404,6 +354,7 @@
 | **E0381** | 跨 await 持锁 | 异步借用错误 | [C06 异步](../05_guides/TROUBLESHOOTING_GUIDE.md) | 借用有效性跨 await |
 
 ### 4.6 错误码快速修复索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 错误码 | 常见原因 | 快速修复 | 形式化规则 | 相关定理 |
@@ -419,9 +370,11 @@
 ---
 
 ## 5. API映射
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 所有权相关 API
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
@@ -433,6 +386,7 @@
 | `mem::take(&mut T)` | 取出默认值 | 取出值并用 Default 替换 | take: &mut T -> T && T: Default && old = return && *ref = default() |
 
 ### 5.2 借用相关 API
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
@@ -444,6 +398,7 @@
 | `to_owned()` | 转为拥有值 | 从引用创建拥有值 | to_owned: &T -> T && Omega(result) = Owned |
 
 ### 5.3 集合 API
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
@@ -456,6 +411,7 @@
 | `map.get(&k)` | 获取值 | 按键查找 | get: &K -> Option<&V> && if k in keys(map) then Some(&map[k]) |
 
 ### 5.4 并发 API
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
@@ -468,6 +424,7 @@
 | `channel()` | 消息通道 | 线程间通信 | Channel<T> = (Sender<T>, Receiver<T>) && queue |
 
 ### 5.5 异步 API
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
@@ -479,6 +436,7 @@
 | `select!` | 选择完成 | 等待任一 Future | select: {F_i} -> T_j && j = min { i | F_i ready } |
 
 ### 5.6 I/O API
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
@@ -492,9 +450,11 @@
 ---
 
 ## 6. 快速查找索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 按代码模式查找
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -511,6 +471,7 @@ Trait Bound      -> 1.4, E0277
 ```
 
 ### 6.2 按错误码查找
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -531,6 +492,7 @@ Trait Bound      -> 1.4, E0277
 ```
 
 ### 6.3 按文档类型查找
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -542,6 +504,7 @@ Trait Bound      -> 1.4, E0277
 ```
 
 ### 6.4 按形式化主题查找
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -556,9 +519,11 @@ Trait Bound      -> 1.4, E0277
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 项目内部文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md) - 编译错误码详细映射
@@ -569,6 +534,7 @@ Trait Bound      -> 1.4, E0277
 - [C04 泛型与 Trait](../02_reference/quick_reference/generics_cheatsheet.md) - 泛型编程
 
 ### 形式化文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ownership_model.md](./formal_methods/ownership_model.md) - 所有权模型形式化
@@ -579,6 +545,7 @@ Trait Bound      -> 1.4, E0277
 - [type_system_foundations.md](./type_theory/type_system_foundations.md) - 类型理论基础
 
 ### 外部资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 官方文档](https://doc.rust-lang.org/)
@@ -588,12 +555,14 @@ Trait Bound      -> 1.4, E0277
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -639,6 +608,7 @@ Trait Bound      -> 1.4, E0277
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
@@ -771,4 +741,3 @@ Trait Bound      -> 1.4, E0277
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

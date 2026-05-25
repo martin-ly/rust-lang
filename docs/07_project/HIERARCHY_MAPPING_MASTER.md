@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [知识体系全局层次映射总表](#知识体系全局层次映射总表)
@@ -21,10 +22,12 @@
   - [相关概念](#相关概念)
   - [六、变更日志](#六变更日志)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
 ## 一、L0-L7 全局架构速查
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -99,6 +102,7 @@ graph TB
 ---
 
 ## 二、30 个核心文件层次映射矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | # | 文件路径 | 层次定位 | 前置依赖 | 后置延伸 | 跨层映射 | 定理链 |
@@ -137,6 +141,7 @@ graph TB
 ---
 
 ## 三、定理链全局索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 链编号 | 名称 | 起点 | 终点 | 穿越层次 | 状态 |
@@ -162,6 +167,7 @@ graph TB
 ---
 
 ## 四、跨层映射关系图谱
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -192,6 +198,7 @@ graph LR
 ---
 
 ## 五、思维表征覆盖矩阵
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 表征类型 | concept/ (8) | knowledge/ (8) | docs/ (14) | 总计 |
@@ -207,6 +214,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [concept/ 跨层知识图谱](../../concept/00_meta/inter_layer_map.md)
@@ -218,6 +226,7 @@ graph LR
 ---
 
 ## 六、变更日志
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 版本 | 日期 | 变更 |
@@ -309,4 +318,3 @@ graph LR
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

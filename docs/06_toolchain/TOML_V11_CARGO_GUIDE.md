@@ -40,6 +40,7 @@
     - [相关工具](#相关工具)
   - [复查记录](#复查记录)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -259,6 +260,7 @@ opt-level = 2          # 测试运行更快，编译仍可接受
 ---
 
 ## 4. 与 TOML v1.0 的兼容性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 向后兼容性保证
@@ -301,6 +303,7 @@ rust-version = "1.95.0"  # ← 低于 1.96：暗示使用 TOML v1.0 语法
 ---
 
 ## 5. Cargo 1.96 的 TOML 解析改进
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 底层解析器升级
@@ -353,6 +356,7 @@ Caused by:
 ---
 
 ## 6. 最佳实践与反模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 ✅ 推荐做法
@@ -421,9 +425,11 @@ flowchart TD
 ---
 
 ## 7. 参考文献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### TOML 规范
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [TOML v1.1.0 Specification](https://toml.io/en/v1.1.0)
@@ -431,6 +437,7 @@ flowchart TD
 - [TOML GitHub Repository](https://github.com/toml-lang/toml)
 
 ### Cargo 文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [The Cargo Book — Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html)
@@ -438,6 +445,7 @@ flowchart TD
 - [Rust 1.96 Release Notes — Cargo Changes](https://releases.rs/docs/1.96.0/)
 
 ### 相关工具
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [toml_edit](https://docs.rs/toml_edit) — Cargo 底层使用的 TOML 解析库
@@ -446,6 +454,7 @@ flowchart TD
 ---
 
 ## 复查记录
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 日期 | 复查人 | 版本 | 状态 |
@@ -591,4 +600,3 @@ flowchart TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

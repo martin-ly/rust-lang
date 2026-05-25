@@ -1,6 +1,7 @@
 # Rust安全关键系统 - 常见问题与故障排除
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust安全关键系统 - 常见问题与故障排除](#rust安全关键系统---常见问题与故障排除)
@@ -298,6 +299,7 @@ evidence_package/
 ---
 
 ## 工具链问题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Q10: 标准Rust编译器和Ferrocene有什么区别？
@@ -394,6 +396,7 @@ fn verify_with_loop() {
 ---
 
 ## 性能问题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Q13: Rust二进制比C大，怎么优化？
@@ -451,6 +454,7 @@ let slice = &buffer[0..10];  // 无运行时开销
 ---
 
 ## 故障排除
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 问题: Cargo构建失败，依赖冲突
@@ -573,6 +577,7 @@ cargo update -p vulnerable-crate
 ---
 
 ## 更多资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 社区支持
@@ -619,6 +624,7 @@ cargo update -p vulnerable-crate
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -803,4 +809,3 @@ cargo update -p vulnerable-crate
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

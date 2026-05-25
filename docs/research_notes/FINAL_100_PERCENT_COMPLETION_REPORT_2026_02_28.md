@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Research Notes 100% 完成报告](#research-notes-100-完成报告)
@@ -43,6 +44,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🎉 完成摘要
 >
@@ -205,6 +207,7 @@
 - TUTORIAL_CONCURRENCY_MODELS.md (7KB) ✅
 
 ### 五、索引与框架 (15篇) ✅
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 00_COMPREHENSIVE_SUMMARY.md ✅
@@ -226,6 +229,7 @@
 ---
 
 ## 📈 统计摘要
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 指标 | 数值 |
@@ -247,9 +251,11 @@
 ---
 
 ## ✅ 质量验收
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 形式化论证质量
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | 标准 | 状态 |
@@ -261,6 +267,7 @@
 | Rust 衔接 | 每定理有示例引用 | ✅ 通过 |
 
 ### 思维表征质量
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | 标准 | 状态 |
@@ -272,6 +279,7 @@
 | 应用树 | 8 个应用树 | ✅ 通过 |
 
 ### 文档质量标准
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 维度 | 评分 | 状态 |
@@ -285,6 +293,7 @@
 ---
 
 ## 🎯 项目目标达成
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **原始目标**: 创建"给人看的"形式化论证内容
@@ -300,21 +309,25 @@
 ---
 
 ## 🚀 后续建议
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 维护阶段
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 跟踪 Rust 新版本特性
 - 根据反馈更新内容
 
 ### 可选增强
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 完善 Coq 证明 (L3 机器可检查)
 - 添加更多交互式示例
 
 ### 社区建设
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 收集用户反馈
@@ -323,6 +336,7 @@
 ---
 
 ## 📝 结论
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **Rust Formal Methods Research Notes 已达到 100% 目标完成度。**
@@ -385,12 +399,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -436,6 +452,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
@@ -561,4 +578,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

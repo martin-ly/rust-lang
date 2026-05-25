@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [分离逻辑](#分离逻辑)
@@ -49,6 +50,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -244,6 +246,7 @@ let y = x;
 ```
 
 ### 3.2 借用建模
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **不可变借用**:
@@ -271,6 +274,7 @@ borrow_mut(x) * borrow_immut(x) ⊢ ⊥
 ```
 
 ### 3.3 资源共享
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **引用计数**:
@@ -288,9 +292,11 @@ arc(x, n) ≃ x ↦ₐ (v, n) * (if n > 0 then threadsafe_shared(v) else emp)
 ---
 
 ## 四、Iris分离逻辑框架
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 资源代数
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **资源代数定义**:
@@ -311,6 +317,7 @@ l₁ ↦ v₁ • l₂ ↦ v₂  有效 (当 l₁ ≠ l₂)
 ```
 
 ### 4.2 模态断言
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **持久性 (□)**:
@@ -337,6 +344,7 @@ l₁ ↦ v₁ • l₂ ↦ v₂  有效 (当 l₁ ≠ l₂)
 ```
 
 ### 4.3 在RustBelt中的应用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **协议状态机**:
@@ -354,9 +362,11 @@ lifetime(κ) = ▷(κ_alive) * ...
 ---
 
 ## 五、高级推理模式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 幽灵状态
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **幽灵变量**: 只在规范中存在，不影响程序执行
@@ -373,6 +383,7 @@ C
 - 验证协议遵守
 
 ### 5.2 视图移位 (View Shift)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -384,6 +395,7 @@ P ={E}=∗ Q
 **应用**: 资源重新解释
 
 ### 5.3 原子性推理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **原子命令**:
@@ -403,9 +415,11 @@ x.fetch_add(1, Relaxed)
 ---
 
 ## 六、证明模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 所有权证明模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **唯一性证明**:
@@ -421,6 +435,7 @@ x.fetch_add(1, Relaxed)
 ```
 
 ### 6.2 借用证明模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **无数据竞争证明**:
@@ -438,6 +453,7 @@ x.fetch_add(1, Relaxed)
 ---
 
 ## 七、与其他逻辑的对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 逻辑 | 资源处理 | 适用场景 | 工具支持 |
@@ -450,9 +466,11 @@ x.fetch_add(1, Relaxed)
 ---
 
 ## 八、形式化验证工具
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 Iris (Coq)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```coq
@@ -468,6 +486,7 @@ Lemma assign_spec (l: loc) (v: val):
 ```
 
 ### 8.2 VeriFast
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```c
@@ -492,12 +511,14 @@ void assign(int* x, int v)
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -543,6 +564,7 @@ void assign(int* x, int v)
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](./README.md)
@@ -681,4 +703,3 @@ void assign(int* x, int v)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

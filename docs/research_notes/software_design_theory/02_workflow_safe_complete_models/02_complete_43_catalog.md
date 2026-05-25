@@ -1,6 +1,7 @@
 ﻿# 43 种完全模型索引
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [43 种完全模型索引](#43-种完全模型索引)
@@ -47,6 +48,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -103,6 +105,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -115,6 +118,7 @@
 ---
 
 ## 构成方案
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 来源 | 数量 | 模式 |
@@ -633,6 +637,7 @@ impl App {
 ```
 
 ### Optimistic Offline Lock
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -660,6 +665,7 @@ pub fn update_optimistic(
 ---
 
 ## 安全边界
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 子集 | 安全边界 |
@@ -670,6 +676,7 @@ pub fn update_optimistic(
 ---
 
 ## 与 23 安全的关系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 23 安全 ⊆ 43 完全
@@ -678,6 +685,7 @@ pub fn update_optimistic(
 ---
 
 ## 与 23 安全的分层关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -697,6 +705,7 @@ pub fn update_optimistic(
 ---
 
 ## 扩展模式选型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 需求 | 推荐模式 |
@@ -712,6 +721,7 @@ pub fn update_optimistic(
 ---
 
 ## 扩展模式选型决策树
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -746,6 +756,7 @@ pub fn update_optimistic(
 ---
 
 ## 扩展模式形式化对应（深入）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 模式 | 形式化对应 | 与 23 安全组合 |
@@ -774,6 +785,7 @@ pub fn update_optimistic(
 ---
 
 ## 扩展模式典型场景（实质内容）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模式 | 典型场景 | 实际项目示例 |
@@ -792,6 +804,7 @@ pub fn update_optimistic(
 ---
 
 ## 权威来源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Fowler EAA Catalog](https://martinfowler.com/eaaCatalog/)
@@ -800,12 +813,14 @@ pub fn update_optimistic(
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -851,6 +866,7 @@ pub fn update_optimistic(
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [02_workflow_safe_complete_models 目录](./README.md)
@@ -1103,4 +1119,3 @@ pub fn update_optimistic(
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

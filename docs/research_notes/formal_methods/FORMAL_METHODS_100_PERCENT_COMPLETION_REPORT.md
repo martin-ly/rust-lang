@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [formal\_methods 100% 完成报告](#formal_methods-100-完成报告)
@@ -30,6 +31,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🎉 完成摘要
 >
@@ -90,6 +92,7 @@ formal_methods 目录已达到 **100% 完成度**！
 ---
 
 ## 📊 最终统计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 文档统计
@@ -124,6 +127,7 @@ formal_methods 目录已达到 **100% 完成度**！
 ---
 
 ## 🏆 100% 达成标准
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [x] 所有证明树完成可视化
@@ -135,6 +139,7 @@ formal_methods 目录已达到 **100% 完成度**！
 ---
 
 ## 📝 结论
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **formal_methods 目录已达到真正的 100% 完成度。**
@@ -159,6 +164,7 @@ formal_methods 目录已达到 **100% 完成度**！
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -211,6 +217,7 @@ formal_methods 目录已达到 **100% 完成度**！
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [formal_methods 目录](./README.md)
@@ -286,4 +293,3 @@ formal_methods 目录已达到 **100% 完成度**！
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

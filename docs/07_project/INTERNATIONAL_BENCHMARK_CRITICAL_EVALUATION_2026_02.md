@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [国际化对标批判性评估 - 重定向](#国际化对标批判性评估---重定向)
@@ -18,6 +19,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Rust 1.95+ 持续更新更新
 >
@@ -75,6 +77,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [07_project 目录](./README.md)
@@ -116,4 +119,3 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

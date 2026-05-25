@@ -1,6 +1,7 @@
 # 供应链安全指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [供应链安全指南](#供应链安全指南)
@@ -72,6 +73,7 @@
 ```
 
 ### 1.2 Rust特定风险
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 风险 | 严重性 | 可能性 | 缓解措施 |
@@ -84,9 +86,11 @@
 ---
 
 ## 2. 依赖管理策略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 依赖选择标准
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -117,6 +121,7 @@ impl DependencyCriteria {
 ```
 
 ### 2.2 最小依赖原则
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```toml
@@ -145,9 +150,11 @@ embedded = ["cortex-m"]
 ---
 
 ## 3. 安全构建流程
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 可重现构建
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```toml
@@ -166,6 +173,7 @@ profile = "minimal"
 ```
 
 ### 3.2 构建环境锁定
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```dockerfile
@@ -189,9 +197,11 @@ RUN sha256sum target/release/my-binary > checksum.txt
 ---
 
 ## 4. 依赖验证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 校验和验证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -207,6 +217,7 @@ find ~/.cargo/registry/cache -name "*.crate" -exec sha256sum {} \;
 ```
 
 ### 4.2 源码审查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -237,9 +248,11 @@ find ~/.cargo/registry/cache -name "*.crate" -exec sha256sum {} \;
 ---
 
 ## 5. 私有Registry
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 搭建私有Registry
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -259,6 +272,7 @@ cargo publish --registry my-company
 ```
 
 ### 5.2 镜像配置
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```toml
@@ -281,9 +295,11 @@ registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 ---
 
 ## 6. 安全更新管理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 更新策略
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -306,6 +322,7 @@ registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 ```
 
 ### 6.2 自动化更新流程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```yaml
@@ -343,9 +360,11 @@ jobs:
 ---
 
 ## 7. 事件响应
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 漏洞响应流程
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -373,6 +392,7 @@ jobs:
 ```
 
 ### 7.2 应急响应检查表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -429,6 +449,7 @@ jobs:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -560,4 +581,3 @@ jobs:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

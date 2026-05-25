@@ -31,6 +31,7 @@
   - [6. 限制与注意事项](#6-限制与注意事项)
   - [参考资源](#参考资源)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -238,6 +239,7 @@ fn main() {
 ---
 
 ## 4. 与现有工具的对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -266,9 +268,11 @@ graph LR
 ---
 
 ## 5. 实际应用场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 场景 1：替代 Python 系统脚本
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -293,11 +297,13 @@ fn main() {
 ```
 
 ### 场景 2：教学与演示
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 单文件示例消除了 Cargo 项目的认知负担，学生可以专注于语言本身。
 
 ### 场景 3：CI/CD 流水线
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```yaml
@@ -309,6 +315,7 @@ fn main() {
 ---
 
 ## 6. 限制与注意事项
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 限制 | 说明 | 替代方案 |
@@ -321,6 +328,7 @@ fn main() {
 ---
 
 ## 参考资源
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Frontmatter Stabilization PR](https://github.com/rust-lang/rust/pull/148605)
@@ -436,4 +444,3 @@ fn main() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

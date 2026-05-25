@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [超时模式形式化定义](#超时模式形式化定义)
@@ -33,6 +34,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 概念定义 (Def)
 >
@@ -82,6 +84,7 @@ TimeoutType :=
 ---
 
 ## 2. 基本假设 (Axiom)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Axiom TO1: 超时确定性
@@ -117,6 +120,7 @@ Timeout → resources_released
 ---
 
 ## 3. 定理 (Theorem)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Theorem TO1: 资源占用有界
@@ -150,6 +154,7 @@ Timeout → system_continues
 ---
 
 ## 4. Rust 实现示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -237,6 +242,7 @@ impl TimeoutHttpClient {
 ---
 
 ## 5. 超时配置建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 场景 | 连接超时 | 请求超时 | 说明 |
@@ -249,6 +255,7 @@ impl TimeoutHttpClient {
 ---
 
 ## 6. 与重试模式的关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 超时常与重试配合使用：
@@ -267,6 +274,7 @@ impl TimeoutHttpClient {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -319,6 +327,7 @@ impl TimeoutHttpClient {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [05_distributed 目录](./README.md)
@@ -423,4 +432,3 @@ impl TimeoutHttpClient {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

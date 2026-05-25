@@ -1,6 +1,7 @@
 ﻿# Rust 安全与非安全全面论证与分析
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 安全与非安全全面论证与分析](#rust-安全与非安全全面论证与分析)
@@ -264,6 +265,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 ---
 
 ## 四、UB 分类与反例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 UB 分类
@@ -305,6 +307,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 ---
 
 ## 五、安全抽象论证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 定义
@@ -352,9 +355,11 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 ---
 
 ## 六、安全 vs 非安全多维矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 按维度
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | 安全子集 | unsafe 拓展 | 边界 |
@@ -366,6 +371,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | **FFI** | 无 | extern、extern "C" | 无 vs 完全手动 |
 
 ### 6.2 按操作类型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 操作类型 | 安全 | unsafe | 说明 |
@@ -382,6 +388,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 ---
 
 ## 📚 相关文档 {#-相关文档}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 文档 | 用途 |
@@ -402,12 +409,14 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -453,6 +462,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [research_notes 目录](./README.md)
@@ -574,4 +584,3 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

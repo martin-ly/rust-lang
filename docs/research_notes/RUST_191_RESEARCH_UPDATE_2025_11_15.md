@@ -1,6 +1,7 @@
 ﻿# Rust 1.91.1 研究更新报告
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.91.1 研究更新报告](#rust-1911-研究更新报告)
@@ -288,14 +289,17 @@ fn small_object_allocation() {
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 外部资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 1.91.1 发布说明](https://blog.rust-lang.org/2025/11/10/Rust-1.91.1/)
 
 ### 内部文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文档 | 链接 | 说明 |
@@ -308,6 +312,7 @@ fn small_object_allocation() {
 | 内存分析 | [./experiments/memory_analysis.md](./experiments/memory_analysis.md) | 内存实验 |
 
 ### 形式化链接
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | 形式化文档 | 定理/定义 |
@@ -317,6 +322,7 @@ fn small_object_allocation() {
 | 内存分配 | [ownership_model.md](./formal_methods/ownership_model.md) | Axiom A1-A8 |
 
 ### 核心定理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 定理 | 文档 | 说明 |
@@ -326,6 +332,7 @@ fn small_object_allocation() {
 | T-TY3 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 类型安全 |
 
 ### Coq 证明骨架
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 定理 | Coq 文件 | 状态 |
@@ -335,6 +342,7 @@ fn small_object_allocation() {
 | T-TY3 | [coq_skeleton/TYPE_SAFETY.v](./coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
 ### 相关研究笔记
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 类别 | 文档 | 链接 |
@@ -354,12 +362,14 @@ fn small_object_allocation() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -405,6 +415,7 @@ fn small_object_allocation() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [research_notes 目录](./README.md)
@@ -522,4 +533,3 @@ fn small_object_allocation() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
