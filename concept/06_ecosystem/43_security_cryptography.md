@@ -8,7 +8,15 @@
 
 ---
 
-> **来源**: [NIST FIPS 197](https://csrc.nist.gov/publications/detail/fips/197/final) · [NIST FIPS 180-4](https://csrc.nist.gov/publications/detail/fips/180/4/final) · [NIST FIPS 186-5](https://csrc.nist.gov/publications/detail/fips/186/5/final) · [RFC 8439 — ChaCha20-Poly1305](https://tools.ietf.org/html/rfc8439) · [RFC 8446 — TLS 1.3](https://tools.ietf.org/html/rfc8446) · [RFC 9106 — Argon2](https://tools.ietf.org/html/rfc9106) · [ring crate](https://briansmith.org/rustdoc/ring/) · [rustls](https://docs.rs/rustls/latest/rustls/) · [dalek-cryptography](https://docs.rs/ed25519-dalek/latest/ed25519_dalek/)
+> **来源**: [NIST FIPS 197](https://csrc.nist.gov/publications/detail/fips/197/final) ·
+> [NIST FIPS 180-4](https://csrc.nist.gov/publications/detail/fips/180/4/final) ·
+> [NIST FIPS 186-5](https://csrc.nist.gov/publications/detail/fips/186/5/final) ·
+> [RFC 8439 — ChaCha20-Poly1305](https://tools.ietf.org/html/rfc8439) ·
+> [RFC 8446 — TLS 1.3](https://tools.ietf.org/html/rfc8446) ·
+> [RFC 9106 — Argon2](https://tools.ietf.org/html/rfc9106) ·
+> [ring crate](https://briansmith.org/rustdoc/ring/) ·
+> [rustls](https://docs.rs/rustls/latest/rustls/) ·
+> [dalek-cryptography](https://docs.rs/ed25519-dalek/latest/ed25519_dalek/)
 
 ## 📑 目录
 >
