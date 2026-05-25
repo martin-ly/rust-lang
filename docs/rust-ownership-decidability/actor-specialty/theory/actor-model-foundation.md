@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actor模型理论基础](#actor模型理论基础)
@@ -112,6 +113,7 @@ $$
 - $State$ : 内部状态 (对其他Actor不可见)
 
 ### 1.3 Actor公理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Axiom 1: 封装 (Encapsulation)**:
@@ -143,9 +145,11 @@ $$
 ---
 
 ## 2. 形式化语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 操作语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **配置 (Configuration)**:
@@ -163,6 +167,7 @@ $$
 其中 $\mathcal{C}'$ 更新Actor状态和可能产生的新消息。
 
 ### 2.2 Actor演算
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -200,6 +205,7 @@ Patterns:
 ```
 
 ### 2.3 类型系统
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -222,9 +228,11 @@ type Effect<S> =
 ---
 
 ## 3. Actor与其他并发模型对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 3.1 模型对比矩阵
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | Actor | CSP | 共享内存 | Async/Future |
@@ -239,6 +247,7 @@ type Effect<S> =
 | **学习曲线** | 中等 | 低 | 低 | 中等 |
 
 ### 3.2 与CSP对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -270,6 +279,7 @@ $$
 $$
 
 ### 3.3 与共享内存对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -300,9 +310,11 @@ Actor: 无共享、无锁、天然分布式
 ---
 
 ## 4. Actor模型优势
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 无锁并发
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定理 ACTOR-LOCKFREE-1**:
@@ -321,6 +333,7 @@ $$
 4. ∴ 无数据竞争
 
 ### 4.2 容错性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **监督树 (Supervision Tree)**:
@@ -350,6 +363,7 @@ $$
 ```
 
 ### 4.3 位置透明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -369,9 +383,11 @@ remote_actor.tell(msg, None);  // 透明序列化/网络传输
 ---
 
 ## 5. Actor模型限制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 回调地狱风险
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -392,6 +408,7 @@ impl Handler<GetUser> for UserService {
 ```
 
 ### 5.2 死锁可能性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 虽然Actor模型避免了数据竞争死锁，但仍有逻辑死锁:
@@ -411,6 +428,7 @@ Actor A: 收到msg2，但无法处理，因为还在等待reply1
 3. 使用Future组合
 
 ### 5.3 消息排序
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **问题**: 消息可能乱序到达
@@ -429,9 +447,11 @@ Actor B接收: [msg1, msg3, msg2]  (网络延迟)
 ---
 
 ## 6. 现代Actor理论扩展
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 Typed Actors
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -453,6 +473,7 @@ impl Actor<UserMsg> for UserActor {
 ```
 
 ### 6.2 流式Actor
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -475,6 +496,7 @@ impl StreamHandler<Data> for SensorActor {
 ```
 
 ### 6.3 函数式Actor
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -515,6 +537,7 @@ fn counter_actor() -> impl Actor<CounterMsg> {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
@@ -647,4 +670,3 @@ fn counter_actor() -> impl Actor<CounterMsg> {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

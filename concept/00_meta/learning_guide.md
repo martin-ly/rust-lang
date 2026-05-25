@@ -9,49 +9,44 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 知识体系学习指南（Learning Guide）](#rust-知识体系学习指南learning-guide)
   - [📑 目录](#-目录)
-    - [〇、学习路径选择全景](#〇学习路径选择全景)
+  - [〇、学习路径选择全景](#〇学习路径选择全景)
   - [一、如何使用本指南](#一如何使用本指南)
-    - [1.1 选择你的起点](#11-选择你的起点)
-    - [1.2 选择你的目标](#12-选择你的目标)
+  - [1.1 选择你的起点](#11-选择你的起点)
+  - [1.2 选择你的目标](#12-选择你的目标)
   - [二、按背景的详细起点指南](#二按背景的详细起点指南)
-    - [2.1 完全新手路径（无系统编程经验） \[来源: TRPL Ch1-3; Rust by Example; 前置依赖: 无; 认知负荷管理参照 Sweller — *Cognitive Load Theory* / 1988\]](#21-完全新手路径无系统编程经验-来源-trpl-ch1-3-rust-by-example-前置依赖-无-认知负荷管理参照-sweller--cognitive-load-theory--1988)
-    - [2.2 C/C++ 开发者路径 \[来源: 概念迁移理论 — 已有 RAII/指针/内存管理知识可作为正向迁移; ISO C++20 § 作为对比基准\]](#22-cc-开发者路径-来源-概念迁移理论--已有-raii指针内存管理知识可作为正向迁移-iso-c20--作为对比基准)
-    - [2.3 Java/Go 开发者路径 \[来源: Java JLS § — GC 背景下的所有权概念缺失; Go Language Specification — CSP 并发模型与 Rust 所有权并发的对比\]](#23-javago-开发者路径-来源-java-jls---gc-背景下的所有权概念缺失-go-language-specification--csp-并发模型与-rust-所有权并发的对比)
-    - [2.4 Haskell/ML 开发者路径 \[来源: Hindley-Milner 类型推断的已有知识可作为类型系统学习的前置; Wadler — *Theorems for Free!* / 1989; GHC User's Guide\]](#24-haskellml-开发者路径-来源-hindley-milner-类型推断的已有知识可作为类型系统学习的前置-wadler--theorems-for-free--1989-ghc-users-guide)
+ [2.1 完全新手路径（无系统编程经验） \](#21-完全新手路径无系统编程经验) [2.2 C/C++ 开发者路径 \](#22-cc-开发者路径) [2.3 Java/Go 开发者路径 \](#23-javago-开发者路径) [2.4 Haskell/ML 开发者路径 \](#24-haskellml-开发者路径)
   - [三、27 文件阅读指南](#三27-文件阅读指南)
-    - [L0 元层（3 文件）](#l0-元层3-文件)
-    - [L1 基础层（4 文件）](#l1-基础层4-文件)
-    - [L2 进阶层（4 文件）](#l2-进阶层4-文件)
-    - [L3 高级层（4 文件）](#l3-高级层4-文件)
-    - [L4 形式化层（4 文件）](#l4-形式化层4-文件)
-    - [L5 对比层（4 文件）](#l5-对比层4-文件)
-    - [L6 生态层（4 文件）](#l6-生态层4-文件)
-    - [L7 前沿层（3 文件）](#l7-前沿层3-文件)
+  - [L0 元层（3 文件）](#l0-元层3-文件)
+  - [L1 基础层（4 文件）](#l1-基础层4-文件)
+  - [L2 进阶层（4 文件）](#l2-进阶层4-文件)
+  - [L3 高级层（4 文件）](#l3-高级层4-文件)
+  - [L4 形式化层（4 文件）](#l4-形式化层4-文件)
+  - [L5 对比层（4 文件）](#l5-对比层4-文件)
+  - [L6 生态层（4 文件）](#l6-生态层4-文件)
+  - [L7 前沿层（3 文件）](#l7-前沿层3-文件)
   - [四、阅读策略与技巧](#四阅读策略与技巧)
-    - [4.1 三遍阅读法](#41-三遍阅读法)
-    - [4.2 间隔重复建议](#42-间隔重复建议)
-    - [4.3 代码实践建议](#43-代码实践建议)
+  - [4.1 三遍阅读法](#41-三遍阅读法)
+  - [4.2 间隔重复建议](#42-间隔重复建议)
+  - [4.3 代码实践建议](#43-代码实践建议)
   - [五、常见困难与突破建议](#五常见困难与突破建议)
-    - [5.1 "生命周期理解不了"](#51-生命周期理解不了)
-    - [5.2 "async 太抽象"](#52-async-太抽象)
-    - [5.3 "形式化部分看不懂"](#53-形式化部分看不懂)
-    - [5.4 "读了就忘"](#54-读了就忘)
+  - [5.1 "生命周期理解不了"](#51-生命周期理解不了)
+  - [5.2 "async 太抽象"](#52-async-太抽象)
+  - [5.3 "形式化部分看不懂"](#53-形式化部分看不懂)
+  - [5.4 "读了就忘"](#54-读了就忘)
   - [六、进阶：从学习者到贡献者](#六进阶从学习者到贡献者)
   - [七、编译错误码诊断索引（Error Code → Concept）](#七编译错误码诊断索引error-code--concept)
-    - [按错误类别分组](#按错误类别分组)
-      - [生命周期类错误（L1 基础概念）](#生命周期类错误l1-基础概念)
-      - [所有权与借用类错误（L1 基础概念）](#所有权与借用类错误l1-基础概念)
-      - [Trait 与泛型类错误（L2 进阶概念）](#trait-与泛型类错误l2-进阶概念)
-      - [并发类错误（L3 高级概念）](#并发类错误l3-高级概念)
-      - [Unsafe 与 FFI 类错误（L3 高级概念）](#unsafe-与-ffi-类错误l3-高级概念)
-      - [泛型与常量类错误（L2 进阶概念）](#泛型与常量类错误l2-进阶概念)
-    - [诊断路径速查](#诊断路径速查)
+  - [按错误类别分组](#按错误类别分组)
+  - [生命周期类错误（L1 基础概念）](#生命周期类错误l1-基础概念)
+  - [所有权与借用类错误（L1 基础概念）](#所有权与借用类错误l1-基础概念)
+  - [Trait 与泛型类错误（L2 进阶概念）](#trait-与泛型类错误l2-进阶概念)
+  - [并发类错误（L3 高级概念）](#并发类错误l3-高级概念)
+  - [Unsafe 与 FFI 类错误（L3 高级概念）](#unsafe-与-ffi-类错误l3-高级概念)
+  - [泛型与常量类错误（L2 进阶概念）](#泛型与常量类错误l2-进阶概念)
+  - [诊断路径速查](#诊断路径速查)
 
 > **[来源: Bloom Taxonomy 2001; 认知科学前置依赖原则]** 学习路径基于认知层级和前置依赖设计。
 
@@ -110,10 +105,6 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ## 一、如何使用本指南
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 选择你的起点
 
@@ -148,10 +139,6 @@ graph TD
 > **[来源: TRPL 官方文档; Rust by Example]** 不同背景的学习者有不同的概念迁移路径。
 
 ## 二、按背景的详细起点指南
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 完全新手路径（无系统编程经验） [来源: TRPL Ch1-3; Rust by Example; 前置依赖: 无; 认知负荷管理参照 Sweller — *Cognitive Load Theory* / 1988]
 
@@ -249,7 +236,6 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 
 ## 三、27 文件阅读指南
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下对每个核心文件提供：预计时间 → 前置文件 → 核心收获 → Checkpoint 问题。
 
@@ -328,8 +314,6 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > **[来源: Make It Stick (Brown et al. 2014); 间隔重复研究]** 三遍阅读法和间隔重复基于认知科学证据。
 
 ## 四、阅读策略与技巧
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 三遍阅读法
 
@@ -340,13 +324,11 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > - 时间：每文件 10-15 分钟
 
 > **第二遍：建立直觉（精读）**
->
 > - 深入代码示例，亲手编译运行
 > - 目标：理解"为什么这个代码能编译/不能编译"
 > - 时间：每文件 30-60 分钟
 
 > **第三遍：建立批判思维（回顾）**
->
 > - 阅读反命题决策树，思考"什么情况下这个定理不成立"
 > - 追溯来源标注，区分"权威结论"和"原创推断"
 > - 时间：每文件 20-30 分钟
@@ -374,8 +356,6 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > **[来源: Rust 社区常见学习障碍调查; Rust Internals 论坛]** 常见困难基于社区反馈统计。
 
 ## 五、常见困难与突破建议
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 "生命周期理解不了"
 
@@ -420,8 +400,6 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 ---
 
 ## 六、进阶：从学习者到贡献者
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 当你完成所有 27 个文件的阅读并通过自测后，可以考虑：
 
@@ -437,8 +415,6 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > **[来源: rustc 错误码索引; Rust Compiler Error Index]** 错误码映射基于 rustc 官方文档和概念知识体系的一致性标注。
 
 ## 七、编译错误码诊断索引（Error Code → Concept）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: rustc 错误码大全; Rust Compiler Error Index]** 本索引将最常见的 Rust 编译错误码映射到概念知识体系中的定义文件和修复路径，实现"遇到错误 → 定位概念 → 理解原理 → 修复代码"的闭环。
 
@@ -516,7 +492,6 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

@@ -11,9 +11,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust vs Zig：现代系统语言的两种哲学](#rust-vs-zig现代系统语言的两种哲学)
   - [📑 目录](#-目录)
@@ -45,13 +43,10 @@
 
 ## 一、核心对比
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 编译期计算
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 编译期计算对比:
@@ -108,7 +103,6 @@
 
 ### 1.2 错误处理哲学
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 错误处理对比:
@@ -169,7 +163,6 @@
 
 ### 1.3 内存管理
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 内存管理对比:
@@ -221,14 +214,9 @@
 ---
 
 ## 二、工程实践差异
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 构建系统
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 构建系统对比:
@@ -259,8 +247,6 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
-> [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]
-
 > **构建洞察**: **Zig 的构建系统是语言的延伸**——用 Zig 代码定义构建逻辑，而非学习新的配置语言。
 > [来源: [Zig Build System](https://ziglang.org/learn/build-system/)]
 
@@ -268,7 +254,6 @@
 
 ### 2.2 交叉编译
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 交叉编译对比:
@@ -310,7 +295,6 @@
 
 ### 2.3 C 互操作
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 C 互操作对比:
@@ -356,10 +340,6 @@ C 互操作对比:
 ---
 
 ## 三、互补使用场景
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 互补使用:
@@ -392,14 +372,9 @@ C 互操作对比:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -417,13 +392,11 @@ graph TD
 
 > **认知功能**: **安全需求选 Rust，控制需求选 Zig**——两者在现代系统编程中各有不可替代的位置。
 > [来源: [Zig vs Rust Discussion](https://news.ycombinator.com/item?id=27608507)]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 生态成熟度
@@ -464,7 +437,6 @@ graph TD
 
 ## 五、常见陷阱
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 用 Zig 写 Rust 风格的代码
@@ -504,13 +476,10 @@ graph TD
 ```
 
 > **陷阱总结**: Rust vs Zig 的陷阱主要与**风格模仿**、**defer 顺序**、**unsafe 滥用**、**comptime 混淆**和**错误处理**相关。
-> [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]
 
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -532,8 +501,6 @@ fn main() {
 ```
 
 ### 编译验证示例
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 const fn make_array<const N: usize>() -> [i32; N] {
@@ -561,10 +528,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权系统
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
@@ -586,160 +549,15 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ## 十、边界测试：Rust 与 Zig 的编译错误对比
 

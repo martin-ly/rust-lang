@@ -11,7 +11,6 @@
 
 ## 📑 目录
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](#rust-vs-typescript静态类型系统的两种哲学--编译期证明与渐进式工程)
   - [📑 目录](#-目录)
@@ -47,11 +46,9 @@
 
 ## 一、权威定义与核心概念
 >
-> [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)]
 
 ### 1.1 TypeScript 权威定义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[TypeScript Handbook]** TypeScript is JavaScript with syntax for types. TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 > **来源**: <https://www.typescriptlang.org/docs/handbook/intro.html>
@@ -88,7 +85,6 @@ TypeScript 核心特征:
 
 ### 1.2 类型系统哲学对比
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 类型系统哲学对比:
@@ -133,7 +129,6 @@ TypeScript 核心特征:
 
 ### 1.3 编译模型差异
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 编译模型对比:
@@ -155,7 +150,6 @@ TypeScript 核心特征:
   ├── 运行时: 无（或最小运行时）
   ├── 启动: 毫秒级（已编译为机器码）
   └── 部署: 单二进制文件
-  > [来源: [TRPL](https://doc.rust-lang.org/book/)] · [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
   性能特征:
   ┌─────────────────┬─────────────────────┬─────────────────────┐
@@ -178,7 +172,6 @@ TypeScript 核心特征:
 
 ### 1.4 内存模型：所有权 vs GC
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 内存管理对比:
@@ -216,12 +209,9 @@ TypeScript 核心特征:
 ---
 
 ## 二、技术细节
->
-> [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)]
 
 ### 2.1 类型系统对比矩阵
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 类型系统深度对比:
@@ -264,7 +254,6 @@ TypeScript 核心特征:
 
 ### 2.2 异步模型对比
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 异步模型对比:
@@ -308,7 +297,6 @@ TypeScript 核心特征:
 
 ### 2.3 错误处理：Result vs Throw
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 错误处理对比:
@@ -359,7 +347,6 @@ TypeScript 核心特征:
 
 ### 2.4 WASM 互操作
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 WASM 互操作模型:
@@ -412,7 +399,6 @@ WASM 互操作模型:
 
 ## 三、选型决策矩阵
 >
-> [来源: [TypeScript Design Goals](https://github.com/microsoft/TypeScript/wiki/TypeScript-Design-Goals)]
 
 ```text
 工程选型决策矩阵:
@@ -431,7 +417,6 @@ WASM 互操作模型:
   │ 快速原型/MVP        │ ✓✓✓ 开发速度        │ △ 编译时间 + 借用学习 │
   │ 团队技能迁移        │ ✓✓✓ JS 团队易上手   │ △ 需系统学习周期     │
   └─────────────────────┴─────────────────────┴─────────────────────┘
-  > [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)] · [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   混合架构建议:
   ├── 前端: TypeScript / React / Vue
@@ -447,12 +432,8 @@ WASM 互操作模型:
 ---
 
 ## 四、思维导图（Mermaid）
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 4.1 类型系统哲学对比图
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TB
@@ -500,8 +481,6 @@ graph TB
 ---
 
 ### 4.2 工程选型决策树
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TD
@@ -539,19 +518,14 @@ graph TD
 ```
 
 > **认知功能**: 此决策树从"性能是否关键"出发，通过团队背景、交付周期、维护周期等维度引导至最优选择。
-> [来源: 💡 原创分析]
 > **使用建议**: WASM 场景是两者的**交汇点**——Rust 负责计算密集型模块，TypeScript 负责 UI 和协调层。
 > [来源: [Rust and WASM](https://rustwasm.github.io/book/)]
 
 ---
 
 ## 五、反命题与边界分析
->
-> [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)]
 
 ### 5.1 反命题树
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 反命题分析:
@@ -568,7 +542,6 @@ graph TD
   │   └── 需通过 wasm-bindgen 胶水层
   ├── 反例: Web 生态（React/Vue/Next.js）是 TS/JS 原生
   └── 结论: ❌ 错误 — Rust 是 TS 在性能层的补充，不是替代
-  > [来源: [Rust and WASM](https://rustwasm.github.io/book/)]
 
   命题: "TypeScript 的 any 类型是安全的"
   ├── 反例: any 禁用所有类型检查
@@ -590,8 +563,6 @@ graph TD
 ---
 
 ### 5.2 边界极限
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 边界极限测试:
@@ -624,8 +595,6 @@ graph TD
 ---
 
 ## 六、常见陷阱
->
-> [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)]
 
 ```text
 常见陷阱:
@@ -665,8 +634,6 @@ graph TD
 ---
 
 ## 七、来源与延伸阅读
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -697,7 +664,6 @@ fn main() {
 
 ## 相关概念文件
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust vs C++](./01_rust_vs_cpp.md) — 系统编程语言对比
 - [Rust vs JavaScript](./08_rust_vs_javascript.md) — Rust 与 JavaScript 对比
@@ -719,40 +685,26 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ## 十、边界测试：Rust 与 TypeScript 的编译错误对比
 

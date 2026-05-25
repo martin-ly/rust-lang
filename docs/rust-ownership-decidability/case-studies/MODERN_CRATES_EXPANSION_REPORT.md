@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [现代Rust库形式化扩展报告](#现代rust库形式化扩展报告)
@@ -63,6 +64,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理与定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 库 | 定义数 | 定理数 | 核心安全保证 |
@@ -78,6 +80,7 @@
 | **总计** | **47** | **27** | |
 
 ### 代码示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 总计: **25个完整示例**
@@ -86,23 +89,27 @@
 ---
 
 ## 现代Rust特性覆盖
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本次扩展重点覆盖了现代Rust的高级特性：
 
 ### GATs (Generic Associated Types)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **sea-orm**: Entity关联类型
 - **axum**: Handler关联类型
 
 ### RPITIT (Return Position Impl Trait In Trait)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - **axum**: `async fn handler() -> impl IntoResponse`
 - **tokio**: `async fn` 在trait中
 
 ### 异步Trait
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - **sea-orm**: `ActiveModelTrait` 异步方法
@@ -210,7 +217,6 @@ Thm PYO3-T1: 无GIL时不访问Python对象
 - [case-studies 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -253,4 +259,3 @@ Thm PYO3-T1: 无GIL时不访问Python对象
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -12,9 +12,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Public/Private Dependencies：可见性控制的工程化](#publicprivate-dependencies可见性控制的工程化)
   - [📑 目录](#-目录)
@@ -49,10 +47,6 @@
 ---
 
 ## 〇、依赖可见性控制全景
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
 graph TD
@@ -86,14 +80,9 @@ graph TD
 ---
 
 ## 一、问题背景：依赖泄漏
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 什么是依赖泄漏
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 在 Rust 中，当 crate `A` 依赖 crate `B`，并将 `B` 的类型暴露在自己的公共 API 中时，`B` 成为了 `A` 的**传递公共依赖**：
 
@@ -122,7 +111,6 @@ let x = B::SomeType::new();  // 能编译，因为 A 泄漏了 B
 
 ### 1.2 实际危害
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 后果 |
 |:---|:---|
@@ -134,7 +122,6 @@ let x = B::SomeType::new();  // 能编译，因为 A 泄漏了 B
 
 ## 二、核心机制
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 RFC 3516 引入 `public = true/false` 字段，显式标记依赖的**可见性契约**。该特性已被纳入 Rust 2026 Project Goals，但当前标记为 **Help Wanted** — 需要社区贡献者推动 MVP 实现和稳定化。
 
@@ -151,7 +138,6 @@ C = { version = "2.0", public = false }
 
 ### 2.1 编译器可见性规则
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
 // Crate A (public = true for B, public = false for C)
@@ -168,7 +154,6 @@ pub fn foo(x: C::Internal)  // ❌ 错误：C 是私有依赖，不能出现在 
 
 ### 2.2 传递性规则
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 A ──public──► B ──public──► D
@@ -183,12 +168,9 @@ A ──public──► B ──public──► D
 ---
 
 ## 三、SemVer 兼容性影响
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 变更矩阵
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变更 | `public = true` | `public = false` |
 |:---|:---:|:---:|
@@ -201,7 +183,6 @@ A ──public──► B ──public──► D
 
 ### 3.2 cargo-semver-checks 集成
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 `cargo-semver-checks` 已计划利用 `public` 标记优化分析：
 
@@ -215,12 +196,9 @@ cargo semver-checks
 ---
 
 ## 四、工程实践
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 依赖可见性决策流程
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 flowchart TD
@@ -250,11 +228,9 @@ flowchart TD
 ```
 
 > **认知功能**: 此决策树将 RFC 3516 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.2 默认策略
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```toml
 [dependencies]
@@ -266,8 +242,6 @@ serde = { version = "1", public = true }  # 若 pub struct 包含 serde 类型
 ```
 
 ### 4.2 重构路径：从泄漏到隔离
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **步骤 1: 识别泄漏**:
 
@@ -296,8 +270,6 @@ B = { version = "1.0", public = false }  # ✅ 安全：B 不再泄漏
 ```
 
 ### 4.3 与 Workspace 的协同
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```toml
 # Workspace Cargo.toml
@@ -309,8 +281,6 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ---
 
 ## 五、与 L1-L4 的关系映射
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | L1-L4 概念 | Public/Private Deps 映射 |
 |:---|:---|
@@ -322,8 +292,6 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - **一级**: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516)（目标 2026 稳定）
 - **一级**: [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) [来源: [crates.io](https://crates.io/)]
@@ -334,9 +302,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 
 ## 相关概念文件
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [工具链总览](./01_toolchain.md) — SemVer 兼容性与 Cargo 工作空间
 - [核心 Crate 选型](./03_core_crates.md) — 依赖可见性对 API 设计的影响
@@ -347,10 +313,6 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ---
 
 ## Wikipedia 概念对齐
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。
 
@@ -373,52 +335,32 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ## 十、边界测试：公共/私有依赖的编译错误
 

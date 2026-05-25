@@ -1,5 +1,5 @@
-# AI [来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)] × Rust：生成-验证闭环与确定性容器
-
+# AI × Rust：生成-验证闭环与确定性容器
+>
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **P** — Procedure（策略决策）
 > **双维定位**: P×Cre — 设计 AI × Rust 集成策略
@@ -36,11 +36,8 @@
 
 ---
 
-> **[来源: Kani AWS Blog; Formal Verification + AI]** ✅
-
 ### 2.1 人工智能（Artificial Intelligence）
 >
-> **[来源: [crates.io](https://crates.io/)]**
 >
 > **来源**: [Wikipedia — Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)
 
@@ -48,7 +45,6 @@
 
 ### 2.2 大语言模型（Large Language Model, LLM）
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 >
 > **来源**: [Wikipedia — Large language model](https://en.wikipedia.org/wiki/Large_language_model)
 
@@ -56,7 +52,6 @@
 
 ### 2.3 强化学习（Reinforcement Learning, RL）
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 > **来源**: [Wikipedia — Reinforcement learning](https://en.wikipedia.org/wiki/Reinforcement_learning)
 
@@ -65,8 +60,6 @@
 ---
 
 ## 三、三层闭环模型
-
-> **[来源: Deterministic Execution Research]** ✅
 
 三层闭环模型描述了人类架构师、AI 生成引擎与 Rust 形式系统之间的协同关系：
 
@@ -93,7 +86,6 @@ graph TD
 
 ### 3.1 第一层：Prompt-Level（规约层）
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **技术细节**：人类架构师使用形式化规约或强类型约束作为 AI 的"护栏"。在 Rust 语境下，这表现为：
 
@@ -106,7 +98,6 @@ graph TD
 
 ### 3.2 第二层：Code-Level（代码层）
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **技术细节**：AI 在 Rust 语法空间内生成代码，编译器作为第一道防线：
 
@@ -119,7 +110,6 @@ graph TD
 
 ### 3.3 第三层：System-Level（系统层）
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **技术细节**：对超越单函数的协议和分布式属性进行验证：
 
@@ -132,8 +122,6 @@ graph TD
 ---
 
 ## 四、AI + Rust 的结构性优势
-
-> **[来源: LLM Code Generation Studies 2024]** ✅
 
 | **维度** | **AI + C++** | **AI + Rust** |
 |:---|:---|:---|
@@ -148,8 +136,6 @@ graph TD
 ## 五、AI + Rust 工具链详解
 
 ## 五、AI 辅助 Rust 编程的机制剖析
-
-> **[来源: RustRepair-RL, ETH Zurich, 2024] · [Compiler-Guided Fine-Tuning, CMU, 2025]** ✅
 
 ### 5.1 编译器作为确定性 RL 环境
 
@@ -202,7 +188,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 > **命题 P-001** [Tier 3]: AI 生成 Rust 代码的编译通过率是其"逻辑正确率"的下界估计。
 >
 > **论证**: RustBelt 证明 Safe Rust 的内存安全（无 UAF/DF），因此编译通过 ⟹ 内存安全。但编译通过 ⇏ 逻辑正确（功能 bug 仍可能存在）。
->
 > **数据支撑**: Compiler-Guided Fine-Tuning (CMU 2025) 报告显示，在 LLM 解码过程中集成 rustc 类型检查器，可将生成代码的编译通过率从 34% 提升至 71%。[来源: PLDI 2024/2025] ⚠️ 前沿
 
 ### 5.3 工具选择决策树
@@ -221,16 +206,11 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 
 ---
 
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 > **Bloom 层级**: 分析 → 创造
->
 > **[来源: Compiler-assisted AI / RL on Compiler Feedback] · [PLDI/ICML/NeurIPS Papers]** 强化学习（RL）在编译器错误修复中的应用，本质上是将编译器视为一个**确定性环境**（deterministic environment）：给定源代码输入，编译器输出结构化诊断反馈，这种反馈可作为 RL agent 的密集奖励信号。与传统监督学习依赖大量标注数据不同，RL 通过"生成-编译-修复"的迭代循环自主学习修复策略。✅
 
 ### 6.1 研究背景与问题定义
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 传统 LLM 通过监督学习在代码语料上训练，但编译错误作为一种强信号被严重低估。编译器提供的错误信息具有三个关键特性，使其成为理想的 RL 环境：
 
@@ -244,7 +224,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 
 ### 6.2 状态空间、动作空间与奖励函数
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 将编译错误修复形式化为马尔可夫决策过程（MDP）：
 
@@ -273,7 +252,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 ```
 
 > **[来源: Gupta et al., AAAI 2019 — Deep RL for Syntactic Error Repair]** 在学生程序修复任务中，使用编译通过作为最终奖励，中间奖励为错误数量变化，agent 在 5,156 个错误消息上训练，成功完全修复 1,625 个程序。✅
->
 > **语义等价验证**：编译通过仅是必要条件。工业级 RL 系统还需运行 `cargo test` 或 Miri 验证修复的语义等价性，避免"通过编译但逻辑错误"的补丁。[来源: Monperrus, Living Review on Automated Program Repair]
 
 ### 6.3 代表性研究
@@ -281,8 +259,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 ### 6.3 代表性研究（方法论迁移视角）
 
 > ⚠️ **重要说明**: 以下研究主要针对 Java、C 和学生程序（非 Rust），但其方法论（anti-unification、GNN、RL 环境设计）可直接迁移至 Rust 编译器错误修复场景。Rust 特异性的 RL 研究见 §6.6。
-
-> **[来源: Bader et al., Proceedings of the ACM on Programming Languages 3(OOPSLA), 2019]**
 
 **Getafix** 是首个在 Facebook 生产环境中大规模部署的自动错误修复系统。它通过**层次聚类**（hierarchical clustering）与**反统一**（anti-unification）从历史代码变更中学习修复模式。
 
@@ -297,8 +273,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 
 #### 6.3.2 DeepDelta（Google，ESEC/FSE 2019）
 
-> **[来源: Mesbah et al., ESEC/FSE 2019 — DeepDelta: Learning to Repair Compilation Errors]**
-
 **DeepDelta** 是 Google 针对构建错误（build errors）提出的神经机器翻译方法。它将编译错误修复视为**从错误 AST 到正确 AST 的序列到序列转换**。
 
 **技术细节**：
@@ -311,8 +285,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 > **局限**：DeepDelta 属于监督学习，依赖大量 `<错误, 修复>` 标注对。其后续工作 Graph2Diff 通过 GNN 改进了局部化精度。[来源: Mesbah et al., ESEC/FSE 2019]
 
 #### 6.3.3 Graph2Diff（Google，ICSE Workshop 2020）
-
-> **[来源: Tarlow et al., ICSE Workshops 2020 — Learning to Fix Build Errors with Graph2Diff Neural Networks]**
 
 **Graph2Diff** 是 Google 对 DeepDelta 的重大升级，核心创新是将**源代码、构建配置与编译器诊断信息统一表示为图**（heterogeneous graph），然后使用图神经网络（GNN）预测代码修改（diff）。
 
@@ -335,8 +307,6 @@ AI 生成空间 = 所有语法合法的 Rust 程序（超大规模）
 
 #### 6.3.4 Break-It-Fix-It / DrRepair（Stanford，ICML 2020/2021）
 
-> **[来源: Yasunaga & Liang, ICML 2020 — Graph-based, Self-supervised Program Repair from Diagnostic Feedback] · [Yasunaga & Liang, ICML 2021 — Break-It-Fix-It: Unsupervised Learning for Program Repair]**
-
 **DrRepair（ICML 2020）** 提出**Program-Feedback Graph**：将编译器诊断中的符号（变量名、类型）与代码中的对应位置对齐，构建对齐图后使用 GNN 生成修复代码。
 
 **Break-It-Fix-It（ICML 2021）** 进一步提出**无监督修复框架**：
@@ -358,8 +328,6 @@ Break-It-Fix-It 训练循环:
 
 #### 6.3.5 DeepFix & Deep RL（IISc Bangalore / IIT Kanpur，AAAI 2017/2019）
 
-> **[来源: Gupta et al., AAAI 2017 — DeepFix: Fixing Common C Language Errors by Deep Learning] · [Gupta et al., AAAI 2019 — Deep Reinforcement Learning for Syntactic Error Repair in Student Programs]**
-
 **DeepFix（AAAI 2017）** 是首个端到端修复 C 语言编译错误的深度学习系统。它将程序视为 token 序列，使用编码器-解码器网络直接预测修复后的完整程序。
 
 **Deep RL 扩展（AAAI 2019）** 将问题重新建模为 RL：
@@ -373,15 +341,11 @@ Break-It-Fix-It 训练循环:
 
 #### 6.3.6 DeepTune（University of Edinburgh，PACT 2017）
 
-> **[来源: Cummins et al., PACT 2017 — End-to-End Deep Learning of Optimization Heuristics]**
-
 **DeepTune** 是编译器优化领域深度学习的奠基性工作（常被误记为 MIT 工作，实际来自 University of Edinburgh）。它使用 LSTM 语言模型直接从原始 OpenCL 源代码中提取特征，预测最优优化决策（设备映射与线程粗化因子）。
 
 > **与错误修复的区别**：DeepTune 解决的是**编译器优化**（optimization）而非**错误修复**（repair）问题。但其"端到端学习 + 编译器反馈"的范式直接启发了后续的 RL-based 修复研究。通过迁移学习（transfer learning），DeepTune 在语言模型层学到的代码表示可跨优化任务复用——这一思想被后续的 RustRepair-RL 等工具继承。[来源: Cummins et al., PACT 2017]
 
 #### 6.3.7 Prophet（MIT，POPL 2016）
-
-> **[来源: Long & Rinard, POPL 2016 — Automatic Patch Generation by Learning Correct Code]**
 
 **Prophet** 是 MIT 提出的基于机器学习的程序修复系统。它从 777 个开源项目的历史补丁中学习"正确代码的通用属性"，然后为新的 bug 生成候选补丁并按正确概率排序。
 
@@ -395,7 +359,6 @@ Break-It-Fix-It 训练循环:
 
 ### 6.4 Rust 编译器错误信息的结构化优势
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，使其成为 RL 环境的理想选择：
 
@@ -449,7 +412,6 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 
 ### 6.5 与 LLM-based 修复的对比
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **维度** | **RL on Compiler Errors** | **LLM-based 修复（Copilot / ChatGPT）** |
 |:---|:---|:---|
@@ -465,8 +427,6 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 > **关键洞察**：RL 与 LLM 不是竞争关系，而是**互补层次**。LLM 负责生成候选修复（探索），RL 负责在编译器反馈下精炼修复（利用）。最新研究方向（如 Compiler-Guided Fine-Tuning）将两者结合：LLM 生成 token，编译器在解码过程中过滤类型不合法的候选（constrained decoding），实现"神经生成 + 符号验证"的闭环。[来源: PLDI 2024/2025 Compiler-Guided Code Generation] · [Yasunaga & Liang, ICML 2021]
 
 ### 6.6 最新研究进展（2024-2026）
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Rust-specific RL 微调**：
 
@@ -500,11 +460,8 @@ python -m rust_rl_repair --env rustc --reward compile+test \
 
 > **来源**: [RustRepair-RL, ETH Zurich, 2024] · [Compiler-Guided Fine-Tuning, CMU, 2025] · [Error2Learn, MPI-SWS] · [PLDI 2024/2025 Compiler-Guided Code Generation] · [rustc JSON Diagnostic Format]
 
-> **[来源: Kani AWS Blog; Formal Verification + AI]** ✅
-
 ### 7.1 概念定义
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 > **来源**: [Deterministic Container Concepts] · [Nix / Reproducible Builds]
 
@@ -517,8 +474,6 @@ python -m rust_rl_repair --env rustc --reward compile+test \
 ```
 
 ### 7.2 为什么对 AI 重要
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 AI 生成代码具有统计不确定性：同一 Prompt 多次调用可能产生不同实现。确定性容器通过以下方式约束：
 
@@ -528,8 +483,6 @@ AI 生成代码具有统计不确定性：同一 Prompt 多次调用可能产生
 - **源码级锁定**：AI 生成的代码必须提交到版本控制，而非每次重新生成
 
 ### 7.3 Rust 生态实践
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | **工具** | **作用** | **来源** |
 |:---|:---|:---|
@@ -541,8 +494,6 @@ AI 生成代码具有统计不确定性：同一 Prompt 多次调用可能产生
 ---
 
 ## 八、AI × Rust 生态图
-
-> **[来源: Deterministic Execution Research]** ✅
 
 ```mermaid
 graph LR
@@ -591,7 +542,6 @@ graph LR
 ```
 
 > **认知功能**: 全景呈现AI辅助Rust开发的分层验证架构与工具链映射。
-> [来源: [Rust ML]]
 > **功能定位**：将人类需求、AI生成、Rust编译、形式验证和运行时监控串联为完整流水线。
 > **使用建议**：根据开发阶段选择工具层——Copilot加速生成，Kani/Creusot保障正确性。
 > **关键洞察**：运行时反馈回路使形式验证结果能够回流至架构设计，实现持续对齐。[来源: 💡 原创分析]
@@ -599,8 +549,6 @@ graph LR
 ---
 
 ## 九、形式化视角
-
-> **[来源: LLM Code Generation Studies 2024]** ✅
 
 ```text
 AI 生成空间 = 语法合法的程序集合（超大规模）
@@ -617,11 +565,8 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 
 ## 十、学术论文与研究方向
 
-> **[来源: GitHub Copilot Docs; ChatGPT API Docs]** ✅
-
 ### 10.1 LLM for Code Generation
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 >
 > **来源**: [arXiv:2302.05319] · [Google DeepMind AlphaCode] · [OpenAI Codex Paper]
 
@@ -633,8 +578,6 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 
 ### 10.2 Compiler-Guided LLM
 >
-> **[来源: [crates.io](https://crates.io/)]**
->
 > **来源**: [Compiler-Guided Code Generation, PLDI 2024/2025] · [Type-Directed Program Synthesis]
 
 核心思想：
@@ -644,8 +587,6 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 - 在 Rust 中，这意味着生成的代码在语法和类型层面始终合法，显著降低后修复成本
 
 ### 10.3 研究前沿
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | **方向** | **描述** | **来源** |
 |:---|:---|:---|
@@ -656,8 +597,6 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 ---
 
 ## 十一、反向依赖：L7 → L1-L3 的约束
-
-> **[来源: Rust Reference; Rustonomicon]** ✅
 
 | AI 需求 | 驱动的下层变化 | 关联文件 | 约束类型 |
 |:---|:---|:---|:---|
@@ -775,7 +714,6 @@ fn correct_fix(s: &str) -> String {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [PLDI 2024/2025 Compiler-Guided Code Generation] · [RustRepair-RL, ETH Zurich, 2024]
->
 > **文档版本**: 2.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24

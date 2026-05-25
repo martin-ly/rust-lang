@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actor模型安全性定理与证明](#actor模型安全性定理与证明)
@@ -87,9 +88,11 @@
 ---
 
 ## 2. 核心安全定理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定理1: Actor无数据竞争
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -116,6 +119,7 @@ QED
 ```
 
 ### 定理2: Actor无显式锁
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -146,6 +150,7 @@ QED
 ```
 
 ### 定理3: Actor局部一致性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -174,9 +179,11 @@ QED
 ---
 
 ## 3. 容错定理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理4: 监督树故障隔离
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -210,6 +217,7 @@ QED
 ```
 
 ### 定理5: 最终一致性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -238,9 +246,11 @@ QED
 ---
 
 ## 4. 与CSP和共享内存的关系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理6: Actor包含CSP
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -277,6 +287,7 @@ QED
 ```
 
 ### 定理7: Actor优于共享内存
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -306,9 +317,11 @@ QED
 ---
 
 ## 5. Rust Actor实现安全
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理8: Rust + Actor 内存安全
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -344,6 +357,7 @@ QED
 ```
 
 ### 定理9: 消息类型安全
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -375,9 +389,11 @@ QED
 ---
 
 ## 6. 分布式Actor定理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定理10: 位置透明性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -406,6 +422,7 @@ QED
 ```
 
 ### 定理11: 分片一致性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -434,9 +451,11 @@ QED
 ---
 
 ## 7. 实际推论
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 推论1: Web服务安全
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -452,6 +471,7 @@ QED
 ```
 
 ### 推论2: 游戏服务器安全
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -471,6 +491,7 @@ Actor游戏服务器保证玩家状态一致性
 ```
 
 ### 推论3: 金融系统安全
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -511,6 +532,7 @@ Saga协调器:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -643,4 +665,3 @@ Saga协调器:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

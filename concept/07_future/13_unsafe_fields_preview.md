@@ -13,9 +13,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Unsafe Fields 预研：字段级安全边界的精确标注](#unsafe-fields-预研字段级安全边界的精确标注)
   - [📑 目录](#-目录)
@@ -45,13 +43,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：unsafe 块的过度扩张
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 当前 Rust 中，`unsafe` 的粒度是**代码块**（block）。即使只有一行代码需要 unsafe，整个块都被标记为 unsafe：
 
@@ -78,7 +73,6 @@ unsafe {
 
 ### 1.2 `unsafe` 字段提案
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TD
@@ -110,7 +104,6 @@ graph TD
 
 ### 1.3 与现有 unsafe 模型的对比
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Rust unsafe 模型的演进层次:
@@ -138,14 +131,9 @@ Rust unsafe 模型的演进层次:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 语法与语义
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // 声明 unsafe 字段
@@ -176,13 +164,11 @@ impl RawBuffer {
 > 2. `unsafe` 字段的**地址取址**（`&self.unsafe_field`）也需要 unsafe
 > 3. 结构体的**字面量构造**中初始化 unsafe 字段需要 unsafe 块
 > 4. `unsafe` 不影响字段的**类型**，只影响**访问权限**
-> [来源: [Rust RFC 3458](https://github.com/rust-lang/rfcs/pull/3458)]
 
 ---
 
 ### 2.2 不变量契约
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 unsafe 字段的不变量模式:
@@ -206,7 +192,6 @@ unsafe 字段的不变量模式:
 
 ### 2.3 与 Safety Tags 的协同
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph LR
@@ -225,17 +210,12 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 unsafe fields 与 Safety Tags 的**互补关系**——unsafe fields 解决"哪些代码需要审查"的问题，Safety Tags 解决"如何自动验证"的问题。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: unsafe fields 是 Safety Tags 的**前置基础设施**——没有字段级标记，自动化工具难以精确关联契约与代码位置。
 > [来源: [Safety Tags Preview](./08_safety_tags_preview.md)]
 
 ---
 
 ## 三、使用模式
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 原始指针封装
@@ -273,14 +253,9 @@ graph LR
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -297,7 +272,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否应将字段标记为 unsafe。核心判断标准是**外部可访问性**和**safe API 封装程度**。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 公开结构体中所有原始指针字段都应 unsafe；私有结构体中若通过 safe 方法完全封装，可酌情省略。
 > **关键洞察**: unsafe 字段的价值与**封装程度**成反比——完全封装的内部字段不需要 unsafe 标记，因为外部无法直接访问。
 > [来源: 💡 原创分析]
@@ -306,7 +280,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: unsafe 字段不保证安全
@@ -336,10 +309,6 @@ graph TD
 ---
 
 ## 五、演进路线
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -356,7 +325,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -380,10 +348,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust 与内存安全
 - [Ownership](../01_foundation/01_ownership.md) — 所有权与借用
@@ -394,7 +358,6 @@ graph TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -406,70 +369,18 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 >
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ## 十、边界测试：Unsafe Fields 预览的编译错误
 

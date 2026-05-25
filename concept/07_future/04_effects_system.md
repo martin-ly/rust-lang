@@ -20,9 +20,7 @@ $entry
 
 ## 〇、Effect System 概念全景
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 mindmap
@@ -58,11 +56,7 @@ mindmap
 
 ## 一、Effect 系统是什么？
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
-
-> **[来源: Plotkin & Pretnar 2009; Koka Documentation; Wikipedia: Effect System]** ✅
 
 > **[学术来源: Plotkin & Pretnar 2009 — Algebraic Effects; Koka Language]**
 
@@ -81,7 +75,6 @@ mindmap
 
 ### 1.2 代数效应（Algebraic Effects）vs 类型效应（Type Effects）
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 代数效应（Plotkin & Pretnar 2009）:
@@ -105,13 +98,9 @@ mindmap
 
 ## 二、Rust 中的现有 Effect 表达
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实现了效果的隐性追踪**。
-
-> **[来源: Rust Reference; RFC 3668 AsyncFn; RFC 3762 Const Trait]** ✅
 
 | 效果类别 | 当前 Rust 语法 | 效果语义 | 追踪方式 | 多态支持 |
 |:---|:---|:---|:---|:---|
@@ -123,7 +112,6 @@ Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实
 
 ### 2.2 `async` 作为效果的原型
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
 // 当前 Rust: async 是语法关键字，不是类型系统效果
@@ -147,7 +135,6 @@ fn fetch() -> Data effect Async { ... }
 
 ### 2.3 效果状态转换图
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 stateDiagram-v2
@@ -184,11 +171,8 @@ stateDiagram-v2
 ```
 
 > **认知功能**: 此状态图将"效果污染"的抽象概念转化为可视化的状态转换。关键洞察：**效果不是终点，而是需要被处理（poll/await）或消除（block_on）的中间状态**。`async` → `await` → `Future 完成` 的三段式与 `unsafe` → `unsafe {} 验证` → `安全边界确认` 形成对偶——前者是计算挂起效果，后者是安全责任效果。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.3 `AsyncFn`：Effect 多态的第一次尝试
-
-> **[来源: RFC 3668; Rust 1.85 Release Notes]**
 
 Rust 1.85 稳定的 `AsyncFn` trait 家族可视为**效果多态（effect polymorphism）**的原型：
 
@@ -214,11 +198,7 @@ where
 
 ## 三、跨语言对比
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
-> **[来源: Koka; Eff Language; Haskell GHC; Java Exceptions]** ✅
 
 | 语言 | 效果模型 | 表达力 | 运行时成本 | 与 Rust 的关系 |
 |:---|:---|:---|:---|:---|
@@ -231,7 +211,6 @@ where
 
 ### 3.2 效果模型谱系图
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph TD
@@ -270,11 +249,9 @@ graph TD
 ```
 
 > **认知功能**: 此谱系图揭示 Effect System 的"理论-语言"双层结构。**代数效应**（Koka/Eff）与 **Monad**（Haskell）是两条独立的理论路线，而 **类型效应**（Java/Rust）是工程化的折中方案。Rust 当前处于"类型效应"象限，但正在向"统一语法"方向移动。颜色的深浅提示：浅色为理论原型，暖色为工程实践，粉色为未来方向。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.2 为什么 Rust 拒绝 Monad？
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Haskell 效果模型:
@@ -297,10 +274,6 @@ Rust 的替代方案:
 ---
 
 ## 四、对 Rust 类型系统的潜在影响
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **[来源: Rust Internals Discussion; Type Theory Research]** ⚠️ 推测性
 的可能性
@@ -330,7 +303,6 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 
 ### 4.2 与 Trait 系统的整合挑战
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 挑战 1: Trait bound 与效果约束的交互
@@ -350,7 +322,6 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 
 ### 4.2 效果传播时序图
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 sequenceDiagram
@@ -387,8 +358,6 @@ sequenceDiagram
 
 ### 4.3 `gen` blocks 与效果叠加
 
-> **[来源: rust-lang/rust #117078]**
-
 `gen` blocks（生成器）是 Rust 正在探索的另一个效果：
 
 ```rust,ignore
@@ -416,11 +385,9 @@ let iter = gen {
 
 ## 五、演进路线图与开放问题
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 语言团队已知讨论（公开信息）
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 时间 | 事件 | 状态 |
 |:---|:---|:---|
@@ -433,8 +400,6 @@ let iter = gen {
 | 202? | 统一 `effect` 关键字 | 🔮 远期可能 |
 
 ### 5.2 开放问题（Research Questions）
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Q1: Rust 需要完整的代数效应，还是类型效应就足够了？
@@ -455,8 +420,6 @@ Q4: 与现有生态的兼容性？
 ```
 
 ### 5.3 概念预研 → 工业落地的条件
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 必要条件:
@@ -470,10 +433,6 @@ Q4: 与现有生态的兼容性？
 ---
 
 ## 六、相关概念链接
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -482,8 +441,6 @@ Q4: 与现有生态的兼容性？
 ---
 
 ## 七、定理一致性矩阵（效果系统类型安全）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源类型: 原创分析; Koka; Plotkin & Pretnar 2009]** 以下矩阵梳理效果系统的类型安全保证与 Rust 的渐进式实现。
 
@@ -734,8 +691,6 @@ Rust 生命周期:  fn foo<'a>(x: &'a T)       // 编译期生命周期
 
 ## 六、代数效果的数学基础
 
-> **[来源: Plotkin & Pretnar — Handlers of Algebraic Effects, 2009] · [Plotkin & Power — Algebraic Operations and Generic Effects, 2003]** ✅
-
 ### 6.1 代数效果的形式化定义
 
 代数效果由两部分组成：**操作签名（Signature）**和**处理器（Handler）**。
@@ -794,10 +749,6 @@ Rust 效果演进路线（推测）:
 ---
 
 ## Wikipedia 概念对齐
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。
 
@@ -820,15 +771,10 @@ Rust 效果演进路线（推测）:
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 > **相关文件**: [异步](../03_advanced/02_async.md) · [类型论](../04_formal/02_type_theory.md) · [问题图谱](../00_meta/problem_graph.md)

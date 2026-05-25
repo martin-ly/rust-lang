@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [MaybeUninit 完全指南](#maybeuninit-完全指南)
@@ -32,11 +33,13 @@
 ---
 
 ## 1. MaybeUninit 是什么
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `MaybeUninit<T>` 是一个**可能已初始化也可能未初始化**的类型。它是 Rust 中处理未初始化内存的唯一安全方式。
 
 ### 1.1 核心特性
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -58,9 +61,11 @@ assert_eq!(std::mem::size_of::<MaybeUninit<i32>>(), 4);
 ---
 
 ## 2. 基本用法
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 创建与初始化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -79,6 +84,7 @@ let slot = MaybeUninit::new(x);  // x 被移动
 ```
 
 ### 2.2 读取值
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -98,6 +104,7 @@ let s = unsafe { slot.assume_init() };
 ```
 
 ### 2.3 部分初始化数组
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -128,9 +135,11 @@ fn partial_init_example() {
 ---
 
 ## 3. 高级模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 类型级未初始化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -179,6 +188,7 @@ println!("{}", slot.get());  // 42
 ```
 
 ### 3.2 延迟初始化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -211,9 +221,11 @@ impl<T> Lazy<T> {
 ---
 
 ## 4. 实现原理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 Union 实现
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -231,6 +243,7 @@ pub union MaybeUninit<T> {
 - 允许未初始化状态
 
 ### 4.2 repr(transparent)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -246,9 +259,11 @@ assert_eq!(
 ---
 
 ## 5. 性能考量
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 零成本抽象
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -261,6 +276,7 @@ let y = unsafe { x.assume_init() };
 ```
 
 ### 5.2 避免不必要的初始化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -278,6 +294,7 @@ read_data_into_uninit(&mut vec);
 ---
 
 ## 参考
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)
@@ -296,11 +313,9 @@ read_data_into_uninit(&mut vec);
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -356,4 +371,3 @@ read_data_into_uninit(&mut vec);
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

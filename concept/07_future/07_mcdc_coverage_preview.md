@@ -13,7 +13,6 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](#mcdc-coverage-概念预研安全关键-rust-的覆盖率验证)
   - [📑 目录](#-目录)
@@ -42,13 +41,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 覆盖率等级的层次结构
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 软件测试中的覆盖率形成严格的**层次包含关系**：
 
@@ -72,7 +68,6 @@ graph BT
 
 ### 1.2 MC/DC 的数学定义
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 MC/DC（Modified Condition/Decision Coverage）要求：
 
@@ -81,7 +76,6 @@ MC/DC（Modified Condition/Decision Coverage）要求：
 > 1. 该条件的取值不同（true vs false）
 > 2. 其他所有条件的取值相同
 > 3. 决策的结果不同
->
 > 即：每个条件必须**独立影响**决策结果。
 > [来源: [DO-178C Annex MC](https://www.rtca.org/product/do-178c/)]
 
@@ -111,7 +105,6 @@ MC/DC（Modified Condition/Decision Coverage）要求：
 
 ### 1.3 Rust 编译器实现路径
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 编译器通过 `llvm-cov` 基础设施实现覆盖率检测。MC/DC 支持的实现路径：
 
@@ -138,12 +131,9 @@ Rust 编译器通过 `llvm-cov` 基础设施实现覆盖率检测。MC/DC 支持
 ---
 
 ## 二、形式化语义
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 独立影响的形式化
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph TD
@@ -165,16 +155,13 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 MC/DC 的核心机制——通过精心设计的测试用例对，验证每个条件是否**独立影响**决策结果。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 编写 MC/DC 测试时，按此图方法为每个条件构造一对测试用例，确保三要素（条件变、其他不变、结果变）同时满足。
 > **关键洞察**: MC/DC 的测试用例数随条件数线性增长（n+1 对），而非 MCC 的指数增长（2ⁿ 对）。这是"修改后"（Modified）的含义——在完整条件覆盖和测试可行性之间取得平衡。
-> [来源: [DO-178C Annex MC](https://www.rtca.org/product/do-178c/)]
 
 ---
 
 ### 2.2 与编译器优化的冲突
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // 源代码
@@ -191,15 +178,10 @@ fn decision(a: bool, b: bool, c: bool) -> bool {
 > **定理**: 编译器优化可能消除 MC/DC 要求的条件独立性验证目标。
 > **证明**: 常量传播将 `A && B` 中 `A=true` 替换为 `B`。此时原条件 A 不再存在于生成的代码中，MC/DC 要求验证 A 的独立影响变得不可能（或需要回溯到源代码级别）。
 > **解决方案**: MC/DC 插桩必须在**源代码级别**或**优化前 IR 级别**进行，而非优化后的机器码。
-> [来源: [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656)]
 
 ---
 
 ## 三、跨语言对比
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 语言/工具 | MC/DC 支持 | 实现方式 | 标准合规 |
 |:---|:---:|:---|:---:|
@@ -214,14 +196,9 @@ fn decision(a: bool, b: bool, c: bool) -> bool {
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph TD
@@ -242,7 +219,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助项目管理者判断是否需要 MC/DC。核心判断标准是安全等级和是否有形式化验证替代。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: DO-178C Level A/B 或 ISO 26262 ASIL-D 项目必须 MC/DC；低等级项目可用分支覆盖替代；使用 Kani/Creusot 形式化验证的项目可用证明替代测试覆盖。
 > **关键洞察**: MC/DC 不是目的，而是**安全论证的手段**。形式化验证提供更强的保证，在某些场景下可替代 MC/DC。
 > [来源: 💡 原创分析]
@@ -251,7 +227,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 边界 1: 短路求值与 MC/DC
@@ -271,13 +246,10 @@ graph TD
 ```
 
 > **边界要点**: Rust 的独特语言特性（模式匹配、短路求值、异步状态机）为 MC/DC 实现带来额外挑战，需要在通用 MC/DC 框架上扩展 Rust 特定的分析。
-> [来源: [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656)]
 
 ---
 
 ## 五、演进路线与预测
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 里程碑 | 状态 | 预计时间 | 依赖 |
 |:---|:---:|:---|:---|
@@ -294,8 +266,6 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -320,10 +290,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — 安全关键代码的 unsafe 边界
 - [Formal Methods](./02_formal_methods.md) — 形式化验证替代方案
@@ -333,7 +299,6 @@ graph TD
 ---
 
 > **权威来源**: [DO-178C](https://www.rtca.org/product/do-178c/), [ISO 26262](https://www.iso.org/standard/68383.html), [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -345,31 +310,15 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
 > **补充来源**
-
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
-> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
-> [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
-> [来源: [crates.io](https://crates.io/)]
-> [来源: [docs.rs](https://docs.rs/)]
-> [来源: [This Week in Rust](https://this-week-in-rust.org/)]
-> [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
 
 ## 十、边界测试：MCDC 覆盖率预览的编译错误
 

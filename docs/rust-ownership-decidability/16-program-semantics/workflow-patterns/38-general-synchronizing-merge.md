@@ -55,6 +55,7 @@
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -148,6 +149,7 @@ All Reachable Done: 所有可达分支完成
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 BPMN 表示
@@ -207,6 +209,7 @@ All Reachable Done: 所有可达分支完成
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 CCS 表示
@@ -240,9 +243,11 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -357,6 +362,7 @@ impl<T: Send + Clone + 'static> GeneralSynchronizingMerge<T> {
 ```
 
 ### 5.2 带错误处理的高级实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -541,6 +547,7 @@ impl<'a> GraphAnalyzer<'a> {
 ```
 
 ### 5.3 通用工作流引擎完整示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -719,6 +726,7 @@ engine:
 ```
 
 ### 8.2 动态拓扑分布式系统
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **场景**: 节点动态加入/离开的分布式系统
@@ -734,9 +742,11 @@ distributed:
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 9.1 超时通用同步合并
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -749,6 +759,7 @@ struct TimeoutGeneralSyncMerge<T> {
 ```
 
 ### 9.2 层次化通用同步合并
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 嵌套合并结构：
@@ -766,6 +777,7 @@ GenSyncMerge (Level 0)
 ---
 
 ## 10. 总结
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 通用同步合并模式提供了最通用的同步合并机制，支持任意复杂的流程拓扑。其核心优势包括：
@@ -780,6 +792,7 @@ GenSyncMerge (Level 0)
 ---
 
 ## 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". Distributed and Parallel Databases.
@@ -1024,4 +1037,3 @@ GenSyncMerge (Level 0)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

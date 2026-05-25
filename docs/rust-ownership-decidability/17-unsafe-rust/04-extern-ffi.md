@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [FFI 与外部代码交互](#ffi-与外部代码交互)
@@ -38,9 +39,11 @@
 ---
 
 ## 1. FFI 基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是 FFI
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 FFI (Foreign Function Interface) 允许 Rust 代码与其他语言（主要是 C）交互。
@@ -59,6 +62,7 @@ unsafe {
 ```
 
 ### 1.2 ABI 类型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -79,9 +83,11 @@ extern "C-unwind" {    // 支持栈展开 (Rust 1.71+)
 ---
 
 ## 2. 调用 C 代码
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 基本示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```c
@@ -109,6 +115,7 @@ fn main() {
 ```
 
 ### 2.2 字符串处理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -141,6 +148,7 @@ fn call_c_function(input: &str) -> String {
 ```
 
 ### 2.3 结构体传递
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```c
@@ -181,9 +189,11 @@ fn main() {
 ---
 
 ## 3. 被 C 调用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 创建 C 兼容库
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -230,6 +240,7 @@ pub extern "C" fn rust_free_string(s: *mut c_char) {
 ```
 
 ### 3.2 C 头文件
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```c
@@ -258,9 +269,11 @@ void rust_free_string(char* s);
 ---
 
 ## 4. 类型映射
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 基本类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | C 类型 | Rust 类型 | 说明 |
@@ -274,6 +287,7 @@ void rust_free_string(char* s);
 | `bool` (C99) | `bool` | 布局可能不同 |
 
 ### 4.2 字符串类型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -291,9 +305,11 @@ let rstr: &str = cstr.to_str()?;
 ---
 
 ## 5. 内存管理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 所有权规则
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -309,6 +325,7 @@ let rstr: &str = cstr.to_str()?;
 ```
 
 ### 5.2 安全包装示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -350,9 +367,11 @@ impl Drop for CVector {
 ---
 
 ## 6. 常见模式与陷阱
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 Panic 安全
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -376,6 +395,7 @@ pub extern "C" fn safe_function() -> c_int {
 ```
 
 ### 6.2 空指针检查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -397,6 +417,7 @@ pub extern "C" fn safe_func(ptr: *const c_char) -> c_int {
 ```
 
 ### 6.3 线程安全
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -422,6 +443,7 @@ pub extern "C" fn increment() {
 ---
 
 ## 参考
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [The Rustonomicon - FFI](https://doc.rust-lang.org/nomicon/ffi.html)
@@ -443,11 +465,9 @@ pub extern "C" fn increment() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -557,4 +577,3 @@ pub extern "C" fn increment() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

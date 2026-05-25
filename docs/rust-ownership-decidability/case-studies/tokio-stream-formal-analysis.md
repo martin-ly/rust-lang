@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Tokio-Stream形式化分析](#tokio-stream形式化分析)
@@ -41,6 +42,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Tokio-Stream特点：
@@ -53,9 +55,11 @@ Tokio-Stream特点：
 ---
 
 ## 2. Stream trait
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 STREAM-1 ( 核心trait )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -72,6 +76,7 @@ $$
 $$
 
 ### 定义 STREAM-2 ( 终止 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 $$
@@ -85,9 +90,11 @@ $$
 ---
 
 ## 3. 流组合子
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 COMBINATOR-1 ( Map )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -99,6 +106,7 @@ $$
 $$
 
 ### 定义 COMBINATOR-2 ( Filter )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -106,6 +114,7 @@ stream.filter(|x| x > 0)
 ```
 
 ### 定义 COMBINATOR-3 ( Fold )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -115,9 +124,11 @@ stream.fold(0, |acc, x| async move { acc + x }).await
 ---
 
 ## 4. 背压控制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 BACKPRESSURE-1 ( Buffer )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -129,6 +140,7 @@ $$
 $$
 
 ### 定义 BACKPRESSURE-2 ( Throttle )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -136,6 +148,7 @@ stream.throttle(Duration::from_millis(100))
 ```
 
 ### 定理 BACKPRESSURE-T1 ( 流量控制 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 上游产生速率受下游控制。
@@ -147,9 +160,11 @@ $$
 ---
 
 ## 5. 超时与限制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 TIMEOUT-1 ( 流超时 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -157,6 +172,7 @@ stream.timeout(Duration::from_secs(5))
 ```
 
 ### 定义 LIMIT-1 ( 数量限制 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -166,9 +182,11 @@ stream.take(100)
 ---
 
 ## 6. 合并与选择
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 MERGE-1 ( 合并流 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -176,6 +194,7 @@ stream1.merge(stream2)
 ```
 
 ### 定义 SELECT-1 ( 选择 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -188,9 +207,11 @@ select! {
 ---
 
 ## 7. 定理与证明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 STREAM-T1 ( 顺序保持 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 有序流组合子保持顺序。
@@ -200,6 +221,7 @@ $$
 $$
 
 ### 定理 STREAM-T2 ( 终止传播 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 流终止正确传播。
@@ -323,11 +345,9 @@ async fn merged_streams() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -387,4 +407,3 @@ async fn merged_streams() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

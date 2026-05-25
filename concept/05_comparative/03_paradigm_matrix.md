@@ -20,7 +20,6 @@
 
 ## 认知路径：六步递进理解范式矩阵
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 Step 1: 为什么需要范式矩阵？
@@ -42,12 +41,9 @@ Step 6: 怎么在代码中选择范式？
 ---
 
 ## 一、权威定义
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Wikipedia 权威定义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: Programming paradigm]** A programming paradigm is a relatively high-level way to conceptualize and structure the implementation of a computer program.
 > **来源**: <https://en.wikipedia.org/wiki/Programming_paradigm>
@@ -67,13 +63,10 @@ Step 6: 怎么在代码中选择范式？
 
 ## 二、多语言形式化对比矩阵
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 核心维度矩阵（带 ⟹ 推理链）
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | **维度** | **Rust** | **C** | **C++** | **Go** | **Haskell** | **Java** | **Swift** | **TypeScript** | **Zig** |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
@@ -132,7 +125,6 @@ GC (Go/Java/Haskell/TS)
 
 ### 2.2 设计哲学谱系
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 形式化强度轴: C/汇编 → C++ → Zig → Go → Java → Rust → Haskell → 依赖类型
@@ -142,7 +134,6 @@ Rust 独特位置: 同时拥有 "底层控制" 和 "编译期证明安全"
 
 ### 2.3 编程语言类型系统谱系图
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph LR
@@ -197,8 +188,6 @@ graph LR
 ---
 
 ## 三、适用域决策矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | **场景** | **首选** | **次选** | **避免** |
 |:---|:---|:---|:---|
@@ -232,8 +221,6 @@ graph LR
 ---
 
 ## 四、思维导图
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 graph TD
@@ -262,13 +249,10 @@ graph TD
 ```
 
 > **认知功能**: 从类型系统、内存模型、并发模型、抽象成本四个维度构建范式分类框架。根据问题域的约束优先级（安全/性能/并发）选择对应谱系分支。Rust 的独特性在于同时满足"高抽象安全"与"零运行时开销"这对传统矛盾。 [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **过渡**: 思维导图展示四谱系分类，Rust 的独特性在于同时满足一组强约束。
 
 ## 五、定理：Rust 的不可压缩性
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 定理 (Rust's Unique Position):
@@ -284,8 +268,6 @@ graph TD
 > **过渡**: 不可压缩性定理确定 Rust 的坐标，一致性矩阵将其锚定到 L1-L4 知识体系。
 
 ## 六、定理一致性矩阵（范式定位）— 带 ⟹ 推理链
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 范式维度 | Rust 定位 | 形式化根基 | 对应 L1-L4 文件 | 一致性状态 |
 |:---|:---|:---|:---|:---|
@@ -341,14 +323,9 @@ const fn / const 泛型
 > **过渡**: 一致性矩阵证明自洽性，但科学严谨性要求主动寻找反命题和边界条件。
 
 ## 七、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.1 反命题: "Rust 是系统编程的最优解"
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -367,11 +344,9 @@ graph TD
 ```
 
 > **认知功能**: 通过决策树揭示"最优解"命题的边界条件，训练批判性思维。遇到"X 是最好的语言"论断时，用约束条件逐层分解反例。不存在普适最优，Rust 的竞争力取决于"硬实时/内核集成/开发速度"的具体权衡。 [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.2 反命题: "Rust 是纯函数式语言"
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph TD
@@ -390,13 +365,11 @@ graph TD
 ```
 
 > **认知功能**: 澄清 Rust 的多范式本质，区分"支持函数式"与"纯函数式"。在 Rust 中按需使用函数式风格，但警惕 `mut`/`unsafe`/IO 的副作用。将 Rust 误判为纯函数式语言会导致 `unsafe` 边界和并发模型的系统性误用。 [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **边界分析**: Rust 借鉴了 Haskell/ML 的代数数据类型、模式匹配，但 `mut`/`unsafe`/无约束 IO 明确表明它不是纯函数式语言。误判这一点会导致 `unsafe` 边界和并发模型的误用。
 
 ### 7.3 反命题: "多范式总是好的"
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -415,13 +388,11 @@ graph TD
 ```
 
 > **认知功能**: 揭示多范式的隐性成本——范式冲突、认知超载、风格分裂。在项目层面制定编码规范，限制同一模块内混用的范式数量。多范式的收益取决于一致性约束的强度，而非范式的数量。 [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **边界分析**: 多范式≠多收益。缺乏统一原则时，范式冲突会成为技术债务。成功的 Rust 项目通过编码规范、架构分层、代码审查来约束范式选择。
 
 ### 7.4 反命题: "类型系统限制表达力"
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
 graph TD
@@ -440,7 +411,6 @@ graph TD
 ```
 
 > **认知功能**: 将"限制"重新框架为"保护"，展示类型系统对 bug 类别的消除作用。用"非法状态不可表示"原则驱动类型设计，将不变式编码进类型。Curry-Howard 同构证明类型即命题——类型系统的约束无损于表达力，只排除错误程序。 [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **边界分析**: 类型系统限制"可编译的程序集合"，但排除的是运行时会出错的子集。`unsafe` 作为逃逸舱，恰恰证明类型系统是"默认安全网"而非牢笼。
 
@@ -449,14 +419,8 @@ graph TD
 ---
 
 ## 八、扩展内容：形式化谱系与更多语言对比
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.1 编程语言形式化谱系
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -490,11 +454,8 @@ graph TD
 ```
 
 > **认知功能**: 从命令式、函数式、托管、逻辑四个传统谱系定位 Rust 的交叉影响来源。将 Rust 的设计视为多谱系的融合实验，理解其 borrow checker 的跨范式创新。Rust 不是单一传统的继承者，而是系统/函数式/证明辅助三条线索的交汇点。 [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.2 扩展对比矩阵（6 语言）
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 维度 | C | C++ | Rust | Go | Java | Haskell |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -511,16 +472,10 @@ graph TD
 ---
 
 ## 九、新兴语言趋势分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **过渡**: 从静态矩阵对比延伸到动态演进——新兴语言的设计趋势揭示 Rust 所有权模型的行业影响力。
 
 ### 9.1 内存安全成为系统语言标配
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 趋势 1: 所有权/借用机制扩散
@@ -549,8 +504,6 @@ graph TD
 > **来源**: [Swift Evolution SE-0377] · [Odin Docs] · [Kotlin/Native Memory Model] · [PLDI 2024 Trends]
 
 ### 9.2 扩展语言矩阵（Swift、Kotlin、Odin）
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **维度** | **Swift** | **Kotlin** | **Odin** |
 |:---|:---|:---|:---|
@@ -569,12 +522,9 @@ graph TD
 > **Swift 的所有权演进**: Swift 5.9+ 引入 `borrowing`/`consuming`/`mutating` 参数所有权修饰符，明确向 Rust 的所有权模型靠拢，但保留 ARC 作为默认策略。 [来源: Swift Evolution SE-0377 / Swift Blog]
 >
 > **Kotlin 的多平台策略**: Kotlin Multiplatform 允许共享业务逻辑（JVM/Native/JS），但 Kotlin/Native 的内存模型（2019 年前为严格隔离，2021 年后放宽）仍与 Rust 的所有权并发有本质差距。 [来源: Kotlin Docs / Kotlin/Native Memory Model]
->
 > **Odin 的设计哲学**: Odin 明确拒绝 Rust 的借用检查器，主张"显式优于隐式"——程序员通过 `context.allocator` 控制内存，通过 `defer` 管理资源。与 Zig 类似，Odin 追求 C 的简单性 + 现代类型系统。 [来源: Odin Lang Docs / GingerBill Blog]
 
 ### 9.3 Rust 在范式谱系中的精确定位
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -611,7 +561,6 @@ graph TD
 ```
 
 > **认知功能**: 将 Rust 锚定在系统编程、应用编程、函数式、移动/嵌入式四个交叉谱系的中心。根据目标平台的生态（Apple/嵌入式/JVM/C 生态）选择 Rust 的互操作策略。Rust 正从"系统语言"向"通用安全基础设施"扩展，其影响力通过 FFI、WASM、`no_std` 向全栈渗透。 [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **Rust 的范式坐标**:
 >
@@ -622,30 +571,22 @@ graph TD
 ---
 
 ## 十、学术参考文献
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **Cardelli, L., & Wegner, P. (1985).** *On understanding types, data abstraction, and polymorphism.* ACM Computing Surveys (CSUR), 17(4), 471-522. [来源: ACM Computing Surveys]
->
 > 这篇经典综述首次系统性地建立了类型理论的分类框架，将多态性划分为参数多态、包含多态和特设多态，为后世编程语言类型系统的设计提供了统一的术语基础和理论谱系。
 
 > **Van Roy, P. (2009).** *Programming Paradigms for Dummies: What Every Programmer Should Know.* In Encyclopedia of Computer Science and Engineering. [来源: Van Roy 2009 / Wikipedia: Programming paradigm]
->
 > 该文献提出了编程范式的多维分类法，将语言特性映射到不同的计算模型，解释了为什么现代语言（包括 Rust）趋向于多范式融合。
 
 > **Hoare, C.A.R. (1978).** *Communicating Sequential Processes.* Communications of the ACM, 21(8), 666-677. [来源: CACM]
->
 > CSP 过程代数的形式化奠基之作，为理解 Go 的 channel-based 并发模型与 Rust 的 ownership-based 并发模型之间的语义差异提供了数学基础。
 
 > **Cardelli, L. (1989).** *Typeful Programming.* In Lecture Notes for the IFIP Advanced Seminar on Formal Methods in Programming Language Semantics. [来源: Cardelli 1989]
->
 > 提出了"类型丰富编程"（Typeful Programming）的概念，主张类型系统不仅是错误检测工具，更是程序设计的第一类媒介，深刻影响了 Rust、Haskell、OCaml 等现代语言的类型设计理念。
 
 ---
 
 ## 十一、知识来源关系（Provenance）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -663,8 +604,6 @@ graph TD
 ---
 
 ### 8.3 新兴语言对比：Vale、Hylo、Mojo
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 2023-2025 年涌现了一批受 Rust 启发的新语言，它们在内存安全和性能之间探索不同路径：
 
@@ -724,8 +663,6 @@ fn borrow_mut(x: inout String):
 > **来源**: [Vale 语言文档] · [Hylo 语言文档] · [Mojo 文档] · [Swift 6 Concurrency] · [Carbon 设计文档]
 
 ### 8.4 编程范式在 AI 辅助编程时代的演化
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 AI 辅助编程（GitHub Copilot、ChatGPT、Claude）正在改变编程语言的设计权衡：
 
@@ -755,16 +692,11 @@ fn process(data: Vec<String>) -> Vec<String> {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > **悖论**：AI 越强大，类型系统的价值反而越高——因为 AI 生成的代码需要类型系统来验证其正确性。弱类型语言中 AI 生成的错误更难发现。
->
 > **来源**: [GitHub Copilot 研究报告] · [Microsoft AI 编程研究] · [Rust 用户调查 2023] · [PLDI 2024: LLM for Code Generation]
 
 ---
 
 ## 十二、相关概念链接
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -779,8 +711,6 @@ fn process(data: Vec<String>) -> Vec<String> {
 ---
 
 ## 十三、待补充与演进方向（TODOs）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [x] **TODO**: 补充具体 benchmark 数据链接
 - [x] **TODO**: 补充语言演进趋势分析（内存安全成为系统语言标配、Swift/Kotlin/Odin 扩展矩阵）
@@ -795,7 +725,6 @@ fn process(data: Vec<String>) -> Vec<String> {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -807,174 +736,15 @@ fn process(data: Vec<String>) -> Vec<String> {
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [执行模型同构](./05_execution_model_isomorphism.md) · [类型论](../04_formal/02_type_theory.md)
 

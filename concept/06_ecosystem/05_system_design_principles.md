@@ -17,7 +17,6 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust 系统设计原则与国际权威对齐](#rust-系统设计原则与国际权威对齐)
   - [📑 目录](#-目录)
@@ -57,9 +56,7 @@
 
 ## 零、TL;DR —— 系统设计原则速查
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 原则                    Rust 机制                      国际权威对应                    设计意图
@@ -77,10 +74,6 @@
 ---
 
 ## 一、权威来源与设计原则分类学
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 原则 | 国际权威来源 | 权威类型 | 应用领域 |
 |:---|:---|:---|:---|
@@ -96,11 +89,8 @@
 
 ## 二、七项核心设计原则
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> [来源: NIST SP 800-207, SEL4, Stroustrup 1994, Armstrong 2003]
 
 ### 2.1 内存安全：Capability-Based Security
 
@@ -184,7 +174,6 @@ trait Service<Request> {
 
 ### 2.5 分布式一致性：从所有权到共识的隐喻
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **核心隐喻**: Rust 的所有权转移（move）在分布式系统中对应**状态的唯一主节点（single primary）**——任何时刻，数据的所有权只存在于一个节点，避免了分布式系统中的 split-brain 问题。
 
@@ -258,15 +247,11 @@ impl Worker {
 
 ## 三、系统设计决策矩阵
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> [来源: Rust Performance Book, Systems Design Interview, CAP Theorem]
 
 ### 3.1 安全-性能-可维护性帕累托前沿
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -301,7 +286,6 @@ graph LR
 
 ### 3.2 场景驱动的设计选择
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 场景 | 推荐架构 | Rust 生态 | 关键原则 |
 |:---|:---|:---|:---|
@@ -317,9 +301,7 @@ graph LR
 
 ## 四、从 Rust 类型到分布式协议的隐喻映射
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> [来源: Lamport Paxos, Brewer CAP, Rust Ownership Semantics]
 
 ```mermaid
 graph TD
@@ -339,7 +321,6 @@ graph TD
 ```
 
 > **认知功能**: 通过 Rust 类型系统的已有直觉，建立对分布式协议的快速认知桥梁。读者可将编译期已熟悉的所有权、借用、生命周期等概念，迁移理解为分布式系统中的主从复制、锁机制和租约协议。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 **隐喻映射表**:
 
@@ -358,9 +339,7 @@ graph TD
 
 ## 五、五层形式化扩展模型
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> [来源: Kani Docs, Creusot, TLA+, Why3]
 
 Rust 系统设计的形式化验证可按五层扩展模型组织：
 
@@ -375,7 +354,6 @@ graph TD
 ```
 
 > **认知功能**: 将形式化验证的抽象层级结构化，帮助读者根据项目安全需求和资源投入选择验证深度。关键洞察：L0 是「免费午餐」（编译器自动保证），L4 是「高级定制」（需额外标注和工具投入），跳过中间层直接追求 L5 往往事倍功半。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 层级 | 验证目标 | 工具/方法 | 形式化程度 | 覆盖率 |
 |:---|:---|:---|:---:|:---|
@@ -389,12 +367,9 @@ graph TD
 ---
 
 ## 六、思维表征体系
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 设计原则依赖图
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph TD
@@ -412,11 +387,9 @@ graph TD
 ```
 
 > **认知功能**: 揭示七项设计原则之间的支撑关系，帮助读者建立「内存安全是基础、零成本抽象是杠杆、组件组合是放大器」的系统观。绿色节点标识根原则——它们不依赖其他原则，是整个设计体系的公理。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.2 系统架构决策树
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -438,17 +411,13 @@ graph TD
 ```
 
 > **认知功能**: 将架构设计的多维判断转化为可遍历的决策路径。读者可根据项目约束（性能敏感、容错需求、安全等级）快速定位推荐架构模式。注意：决策树的分支是经验法则而非绝对规则，边界场景需结合定量基准测试验证。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 七、定理推理链
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 定理一致性矩阵（系统设计专集）
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 编号 | 定理 | 前提 | 结论 | L4 公理依赖 | 失效条件 | 错误码映射 |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -461,14 +430,9 @@ graph TD
 ---
 
 ## 八、相关概念链接（L0-L7 映射）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L0-L7 纵向映射
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
@@ -482,7 +446,6 @@ graph TD
 
 ### 相关概念文件
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [L7 形式化方法工业化](../07_future/02_formal_methods.md) —— 五层形式化扩展的详细展开
 - [L3 并发](../03_advanced/01_concurrency.md) —— Send/Sync 与 fearless concurrency
@@ -495,10 +458,6 @@ graph TD
 - [L0 表达力多视角](../00_meta/expressiveness_multiview.md) —— 安全语义视角
 
 ## 七、系统设计决策的知识流动图
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **设计决策如何在系统各层之间流动？**
 
@@ -537,7 +496,6 @@ graph LR
 ```
 
 > **认知功能**: 强调系统设计不是线性瀑布，而是带有反馈回路的迭代过程。验证层的结果（如 Miri 发现的数据竞争、Kani 证伪的不变式）应回流需求层，驱动需求精化和架构修正。虚线箭头是「V 模型」在 Rust 生态中的特化表达。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **思维表征说明**: 知识流动图是 `inter_layer_topology.md` 中「知识流动」概念在**系统设计场景**的具体化——它展示的不是概念之间的静态关系，而是**设计决策在系统各层之间的动态传播**。与 `graph TD` 流程图（展示结构）不同，知识流动图强调**反馈回路**（VERIFY → REQ 的虚线箭头）——设计不是一次性的，验证结果会反馈到需求层，驱动迭代优化。这是系统工程中「V 模型」的 Rust 特化版本。 [来源: Systems Engineering V-Model; ISO/IEC/IEEE 15288]
 
@@ -554,101 +512,57 @@ graph LR
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md) · [安全边界](../05_comparative/04_safety_boundaries.md)
 

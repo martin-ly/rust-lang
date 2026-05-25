@@ -13,9 +13,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Return Type Notation 预研：精确捕获的显式控制](#return-type-notation-预研精确捕获的显式控制)
   - [📑 目录](#-目录)
@@ -45,13 +43,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：隐式捕获的生命周期泄漏
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 在 Rust 中，异步函数和返回 `impl Trait` 的函数**隐式捕获**所有输入生命周期：
 
@@ -75,7 +70,6 @@ async fn borrow<'a>(x: &'a str) -> &'a str {
 
 ### 1.2 `use<..>` 精确捕获语法
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -105,7 +99,6 @@ graph LR
 
 ### 1.3 RPITIT 与 AFIT 的上下文
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 术语澄清:
@@ -128,14 +121,9 @@ RTN 的应用场景:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 语法形式与语义
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 use<..> 语法形式:
@@ -159,7 +147,6 @@ use<..> 语法形式:
 
 ### 2.2 与生命周期省略的对比
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 场景 | 生命周期省略 | `use<..>` 精确捕获 | 效果 |
 |:---|:---|:---|:---|
@@ -175,7 +162,6 @@ use<..> 语法形式:
 
 ### 2.3 版本迁移：Edition 2021 → 2024
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Edition 2021 行为:
@@ -201,10 +187,6 @@ Edition 2024 行为:
 ---
 
 ## 三、使用模式
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 最小捕获（推荐）
@@ -238,14 +220,9 @@ Edition 2024 行为:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -266,7 +243,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否需要在函数签名中添加 `use<..>`。核心判断标准是**Edition 版本**、**是否为库代码**和**生命周期复杂度**。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 库代码（尤其 public API）在 Edition 2024 中强烈推荐显式 `use<..>`；应用代码在简单场景可依赖编译器默认。
 > **关键洞察**: `use<..>` 的价值与**API 稳定性需求**成正比。内部代码可以使用默认规则，但公开 API 应显式声明以提供长期稳定性保证。
 > [来源: 💡 原创分析]
@@ -275,7 +251,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 不能捕获不存在的东西
@@ -305,10 +280,6 @@ graph TD
 ---
 
 ## 五、演进路线
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -320,13 +291,11 @@ graph TD
 | 生态广泛采用 | 🟡 | 2025-2027 | 标准库和主流 crate 迁移 |
 
 > **预测**: `use<..>` 是 Rust 2024 Edition 的**核心语法特性**之一。到 2027 年，大多数活跃维护的 crate 将采用显式 `use<..>`，成为异步和泛型 API 的标配。
-> [来源: [Rust Edition Guide 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)]
 
 ---
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -340,10 +309,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期与借用检查
 - [Async](../03_advanced/02_async.md) — 异步编程与 Future
@@ -353,7 +318,6 @@ graph TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -365,70 +329,18 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
 >
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ## 十、边界测试：Return Type Notation 预览的编译错误
 

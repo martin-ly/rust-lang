@@ -8,7 +8,6 @@
 
 ### 8.8 Waker 契约与活性
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。二者共同构成异步执行的生命周期闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
 
@@ -68,7 +67,6 @@ graph TD
 
 > **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Pin](https://doc.rust-lang.org/reference/types/pin.html)]
-> [来源: [Rust Async Book]]
 
 > **[Async Book: Waker]** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
 >
@@ -78,7 +76,6 @@ graph TD
 
 ### 8.9 Waker/Context 的底层机制
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **章节过渡**：取消安全与 Waker 契约从语义层面描述了 Future 的生命周期，但 Waker 本身是如何实现的？理解 Waker 的 VTable 机制、Context 与 Waker 的关系，以及自定义 Waker 的实现方式，是手写 Future 和构建自定义运行时的必备知识。
 
@@ -346,7 +343,6 @@ impl UringReactor {
 
 ### 8.10 `Stream` / `Sink` trait 完整分析
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
 
@@ -507,7 +503,6 @@ Stream::poll_next 的语义层级:
   - Stream::next() 返回的 Future 必须被 .await 后才能消费元素
 ```
 
-> **[来源: futures-rs: StreamExt::next 源码]** `next()` 通过 `Next` 结构体实现 `Future` trait，其 `poll` 方法直接委托给底层 `Stream::poll_next`。[来源: Rust Async Book: Streams]
 
 **`Sink` 状态机完整分析**
 
@@ -555,7 +550,6 @@ where
 }
 ```
 
-> **[来源: futures-rs: Sink trait 文档]** `Sink` 的设计灵感来自 `Iterator` 的逆过程，但增加了异步缓冲和刷新阶段。`send` 是 `poll_ready` + `start_send` + `poll_flush` 的组合子，确保每次发送后数据不滞留缓冲。[来源: RFC 2394 附录: Async I/O 抽象]
 
 **`futures::stream` 与 `tokio_stream` 生态对比**
 
@@ -613,7 +607,6 @@ async fn pipeline() {
 
 ### 8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **章节过渡**：定理 T1 声称 async/await 是零成本抽象，但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
 
@@ -764,7 +757,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 └── 否 → impl Future（默认最优路径）
 ```
 
-> **[来源: Tokio 文档: Task spawning internals]** Tokio 的任务调度器在内部使用 `Pin<Box<dyn Future + Send + 'static>>` 存储任务，这是类型擦除的必要代价。但 Tokio 的 `spawn` API 接受 `impl Future`，仅在入队时进行一次 Box 包装，用户代码仍享受单态化优化。[来源: RFC 2592: futures 0.3 设计原则]
 
 > **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
 
@@ -772,7 +764,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 ### 8.12 `loom` 并发模型检测工具
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **章节过渡**：异步代码的正确性不仅依赖类型系统，还依赖并发执行的时序。`loom` 通过穷举所有可能的线程交错（interleaving），在测试中发现数据竞争和死锁，是验证并发原语（如自定义 Mutex、Channel）的利器。
 
@@ -1028,7 +1019,6 @@ mod tests {
 }
 ```
 
-> **[来源: loom 官方示例; Rust Atomics and Locks by Mara Bos]** 自定义并发原语（自旋锁、无锁队列、RCU）是 loom 的核心应用场景。loom 会系统地探索 `compare_exchange_weak` 的失败路径、线程切换时机以及 Drop 的顺序，从而发现手工难以构造的边界情况。[来源: Tokio 内部 loom 测试套件]
 
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
 
@@ -1077,7 +1067,6 @@ help: alloc232 was deallocated here:
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
 [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
-> [来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)]
 >
 #### 场景 2：无效值检测（非法 bool 构造）
 
@@ -1104,7 +1093,6 @@ error: Undefined Behavior: constructing invalid value of type bool:
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
 [来源: [Tokio Docs](https://tokio.rs/)]
 
-> [来源: [Rust Async Book: Cancellation](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
 >
 #### 场景 3：async 状态机中的未初始化内存
 
@@ -1138,7 +1126,6 @@ warning: the type `bool` does not permit being left uninitialized
 > **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
 [来源: [TRPL](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
 
-> [来源: [Tokio Docs: Cancellation](https://tokio.rs/tokio/topics/cancellation)]
 >
 #### Miri 与 async 状态机的特殊关联
 
@@ -1164,7 +1151,6 @@ Miri 的局限（与 loom 互补）:
 
 ## 九、知识来源关系（Provenance）
 >
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：所有论断均有出处。以下表格明确每条核心论断的来源与可信度等级，便于读者追溯与验证。
 

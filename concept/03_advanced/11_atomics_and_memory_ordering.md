@@ -13,9 +13,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
   - [📑 目录](#-目录)
@@ -46,13 +44,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 原子类型全景
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Rust 原子类型 (std::sync::atomic):
@@ -93,7 +88,6 @@ Rust 原子类型 (std::sync::atomic):
 
 ### 1.2 内存序的层次
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 内存序 (Memory Ordering):
@@ -138,7 +132,6 @@ Rust 原子类型 (std::sync::atomic):
 
 ### 1.3 Happens-Before 关系
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Happens-Before 关系:
@@ -179,14 +172,9 @@ Happens-Before 关系:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 原子操作详解
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering, AtomicBool};
@@ -270,7 +258,6 @@ impl SpinLock {
 
 ### 2.2 内存序选择指南
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 内存序选择决策树:
@@ -298,7 +285,6 @@ impl SpinLock {
   │ 全局顺序敏感           │ SeqCst                 │
   │ 不确定                 │ SeqCst                 │
   └────────────────────────┴────────────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   性能影响:
   ├── Relaxed: 最快，接近普通操作
@@ -313,7 +299,6 @@ impl SpinLock {
 
 ### 2.3 无锁算法基础
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
 // 无锁栈（Treiber Stack）
@@ -390,10 +375,6 @@ impl<T> LockFreeStack<T> {
 ---
 
 ## 三、原子模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 原子类型 → 内存序 → 模式
@@ -435,14 +416,9 @@ impl<T> LockFreeStack<T> {
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -468,7 +444,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: ABA 问题
@@ -508,10 +483,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: Relaxed 的误用
@@ -669,7 +640,6 @@ fn fixed() {
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
@@ -687,10 +657,6 @@ fn fixed() {
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Concurrency](./01_concurrency.md) — 并发基础
 - [Unsafe](./03_unsafe.md) — 不安全代码
@@ -712,22 +678,14 @@ fn fixed() {
 
 ## 权威来源索引
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 >
-> **[来源: [Rust Memory Model](https://doc.rust-lang.org/nomicon/memory.html)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）
 
@@ -757,14 +715,12 @@ fn main() {
 > **修正**: **ABA 问题**是无锁数据结构中的经典问题：指针值从 A → B → A，但 `compare_exchange` 无法检测中间变化。
 > `AtomicPtr` 的 `compare_exchange` 只比较地址值，不比较内容。
 > 解决方案：
->
 > 1) **Tagged pointer**：在低位存储版本计数器（`(ptr & !0xF) | (version & 0xF)`）；
 > 2) **Hazard pointer**：延迟释放，确保无其他线程引用；
 > 3) **Epoch-based reclamation**（`crossbeam-epoch`）：分代回收。
 > Rust 的 `crossbeam`  crate 提供成熟的内存回收方案。
 > 这与 C++ 的 `std::atomic<T*>`（同样 ABA 问题）或 Java 的 `AtomicReference`（同样问题，GC 缓解）相同——ABA 是所有 CAS 操作的固有限制。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicPtr.html)] ·
-> [来源: [Crossbeam Documentation](https://docs.rs/crossbeam/)]
 
 ### 10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）
 

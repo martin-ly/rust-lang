@@ -46,6 +46,7 @@
 | [distributed/distributed-actors-formal.md](distributed/distributed-actors-formal.md) | 413 | CAP定理、一致性模型 |
 
 ### 可视化资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 类型 | 文档 | 内容 |
@@ -56,6 +57,7 @@
 | 场景树 | [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) | 6大应用领域 |
 
 ### 实现与模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 行数 | 内容 |
@@ -65,6 +67,7 @@
 | [patterns/actor-design-patterns-expanded.md](patterns/actor-design-patterns-expanded.md) | 339 | 形式化定义+定理 |
 
 ### 分布式与案例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 行数 | 内容 |
@@ -77,9 +80,11 @@
 ---
 
 ## 核心定理汇总
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 基础定理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -96,6 +101,7 @@ Thm ACTOR-CONTAINS-CSP: Actor模型包含CSP
 ```
 
 ### 容错定理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -109,6 +115,7 @@ Thm SUPERVISION-EVENTUAL-RECOVERY: 最终恢复
 ```
 
 ### 安全定理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -122,6 +129,7 @@ Thm RUST-ACTOR-TYPE-SAFETY: 消息类型安全
 ```
 
 ### 分布式定理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -140,6 +148,7 @@ Thm SAGA-EVENTUAL-CONSISTENCY: Saga最终一致性
 ---
 
 ## 目录结构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -186,6 +195,7 @@ actor-specialty/
 ---
 
 ## 统计信息
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -208,9 +218,11 @@ actor-specialty/
 ---
 
 ## 质量保证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 内容标准
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | 标准 | 状态 |
@@ -223,6 +235,7 @@ actor-specialty/
 | 完整性 | 无stub内容，全实质内容 | ✅ |
 
 ### 学术对齐
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 来源 | 对齐文档 |
@@ -237,9 +250,11 @@ actor-specialty/
 ---
 
 ## 学习路径
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 初学者
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. [mindmaps/actor-model-mindmap.md](mindmaps/actor-model-mindmap.md) - 概念建立
@@ -248,6 +263,7 @@ actor-specialty/
 4. [examples/chat-system-example.md](examples/chat-system-example.md) - 动手实践
 
 ### 进阶开发者
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. [formal-proofs/actor-safety-theorems.md](formal-proofs/actor-safety-theorems.md) - 安全保证
@@ -255,6 +271,7 @@ actor-specialty/
 3. [case-studies/actix-web-production.md](case-studies/actix-web-production.md) - 生产实践
 
 ### 架构师
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. [distributed/distributed-actors-formal.md](distributed/distributed-actors-formal.md) - 分布式理论
@@ -264,6 +281,7 @@ actor-specialty/
 ---
 
 ## 版本历史
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 版本 | 日期 | 变更 |
@@ -362,4 +380,3 @@ actor-specialty/
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

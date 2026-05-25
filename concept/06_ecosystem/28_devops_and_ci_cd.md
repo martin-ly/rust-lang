@@ -13,49 +13,44 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Cargo Book]]
 
 - [DevOps 与 CI/CD：Rust 的持续交付工程实践](#devops-与-cicdrust-的持续交付工程实践)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 CI/CD 管道与 Rust 构建特性](#11-cicd-管道与-rust-构建特性)
-    - [1.2 工具链矩阵](#12-工具链矩阵)
-    - [1.3 安全审计在 DevOps 中的定位](#13-安全审计在-devops-中的定位)
+  - [1.1 CI/CD 管道与 Rust 构建特性](#11-cicd-管道与-rust-构建特性)
+  - [1.2 工具链矩阵](#12-工具链矩阵)
+  - [1.3 安全审计在 DevOps 中的定位](#13-安全审计在-devops-中的定位)
   - [二、技术细节](#二技术细节)
-    - [2.1 GitHub Actions 工作流设计](#21-github-actions-工作流设计)
-    - [2.2 Docker 多阶段构建优化](#22-docker-多阶段构建优化)
-    - [2.3 交叉编译 CI 集成](#23-交叉编译-ci-集成)
-    - [2.4 缓存策略与增量构建](#24-缓存策略与增量构建)
+  - [2.1 GitHub Actions 工作流设计](#21-github-actions-工作流设计)
+  - [2.2 Docker 多阶段构建优化](#22-docker-多阶段构建优化)
+  - [2.3 交叉编译 CI 集成](#23-交叉编译-ci-集成)
+  - [2.4 缓存策略与增量构建](#24-缓存策略与增量构建)
   - [三、DevOps 决策矩阵](#三devops-决策矩阵)
-    - [3.1 发布自动化决策](#31-发布自动化决策)
-    - [3.2 安全策略矩阵](#32-安全策略矩阵)
+  - [3.1 发布自动化决策](#31-发布自动化决策)
+  - [3.2 安全策略矩阵](#32-安全策略矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
+  - [4.1 反命题树](#41-反命题树)
+  - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：DevOps 与 CI/CD 的编译错误](#十边界测试devops-与-cicd-的编译错误)
-    - [10.1 边界测试：Docker 多阶段构建的 musl 目标链接错误（编译错误）](#101-边界测试docker-多阶段构建的-musl-目标链接错误编译错误)
-    - [10.2 边界测试：测试隔离的 `static mut` 数据竞争（编译错误）](#102-边界测试测试隔离的-static-mut-数据竞争编译错误)
-    - [10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）](#106-边界测试docker-多阶段构建的缓存失效编译时间膨胀)
-    - [10.7 边界测试：缓存键未包含 Cargo.lock 导致的不一致构建（CI 非确定性）](#107-边界测试缓存键未包含-cargolock-导致的不一致构建ci-非确定性)
-    - [10.3 边界测试：CI 缓存键不匹配导致的依赖重建（构建时间回归）](#103-边界测试ci-缓存键不匹配导致的依赖重建构建时间回归)
+  - [10.1 边界测试：Docker 多阶段构建的 musl 目标链接错误（编译错误）](#101-边界测试docker-多阶段构建的-musl-目标链接错误编译错误)
+  - [10.2 边界测试：测试隔离的 `static mut` 数据竞争（编译错误）](#102-边界测试测试隔离的-static-mut-数据竞争编译错误)
+  - [10.6 边界测试：Docker 多阶段构建的缓存失效（编译时间膨胀）](#106-边界测试docker-多阶段构建的缓存失效编译时间膨胀)
+  - [10.7 边界测试：缓存键未包含 Cargo.lock 导致的不一致构建（CI 非确定性）](#107-边界测试缓存键未包含-cargolock-导致的不一致构建ci-非确定性)
+  - [10.3 边界测试：CI 缓存键不匹配导致的依赖重建（构建时间回归）](#103-边界测试ci-缓存键不匹配导致的依赖重建构建时间回归)
 
 ---
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 CI/CD 管道与 Rust 构建特性
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 的编译模型对 CI/CD 设计有深远影响：
 
@@ -91,7 +86,6 @@ Rust CI/CD 核心约束:
 
 ### 1.2 工具链矩阵
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 Rust DevOps 工具全景:
@@ -127,7 +121,6 @@ Rust DevOps 工具全景:
 
 ### 1.3 安全审计在 DevOps 中的定位
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 安全审计的 DevOps 集成点:
@@ -161,13 +154,10 @@ Rust DevOps 工具全景:
 
 ## 二、技术细节
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [GitHub Actions Docs](https://docs.github.com/en/actions)]
 
 ### 2.1 GitHub Actions 工作流设计
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 典型 Rust CI 工作流（分层设计）:
@@ -196,8 +186,7 @@ Rust DevOps 工具全景:
 
 ```yaml
 # .github/workflows/ci.yml 示例框架
-# [来源: GitHub Actions Docs] · [来源: dtolnay/rust-toolchain]
-name: CI
+# ·name: CI
 
 on: [push, pull_request]
 
@@ -236,13 +225,11 @@ jobs:
 
 > **认知功能**: CI 工作流的**分层设计**原则——将快速反馈（format/lint）与慢速验证（测试矩阵/交叉编译）分离，确保开发者能在最短时间内获得主要问题的信号。
 > [来源: [GitHub Actions — Workflow Syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)]
-> [来源: [dtolnay/rust-toolchain](https://github.com/dtolnay/rust-toolchain)]
 
 ---
 
 ### 2.2 Docker 多阶段构建优化
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Rust Docker 优化策略:
@@ -271,8 +258,7 @@ Rust Docker 优化策略:
 ```
 
 ```dockerfile
-# 多阶段构建示例 [来源: Docker Docs]
-# 阶段 1: 构建
+# 多阶段构建示例# 阶段 1: 构建
 FROM rust:1.96-slim-bookworm AS builder
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
@@ -289,13 +275,11 @@ ENTRYPOINT ["myapp"]
 
 > **认知功能**: Docker 多阶段构建的**核心洞察**——Rust 的静态链接特性使其天然适合 distroless 镜像，最终产物可以小于 20MB 且无需任何运行时依赖。
 > [来源: [Google Distroless](https://github.com/GoogleContainerTools/distroless)]
-> [来源: [Docker Multi-stage Builds](https://docs.docker.com/build/building/multi-stage/)]
 
 ---
 
 ### 2.3 交叉编译 CI 集成
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 CI 交叉编译策略:
@@ -336,7 +320,6 @@ CI 交叉编译策略:
 
 ### 2.4 缓存策略与增量构建
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 Rust CI 缓存层次:
@@ -376,19 +359,13 @@ graph LR
 
 > **认知功能**: 缓存策略的**核心权衡**——缓存越大命中率越高，但恢复时间也越长；rust-cache 通过智能键选择和定期清理实现了平衡点。
 > [来源: [Swatinem/rust-cache](https://github.com/Swatinem/rust-cache)]
-> [来源: [Mozilla sccache](https://github.com/mozilla/sccache)]
 
 ---
 
 ## 三、DevOps 决策矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Cargo Book]]
 
 ### 3.1 发布自动化决策
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | **场景** | **工具** | **配置复杂度** | **适用规模** |
 |:---|:---|:---:|:---|
@@ -399,8 +376,6 @@ graph LR
 | 企业级供应链合规 | cargo-vet + cargo-deny | 高 | 企业/安全关键 |
 
 ### 3.2 安全策略矩阵
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **策略** | **工具** | **CI 阶段** | **阻止发布** |
 |:---|:---|:---:|:---:|
@@ -416,14 +391,8 @@ graph LR
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 反命题 1: "Rust 的静态链接使部署总是简单的"
@@ -457,8 +426,6 @@ graph LR
 ---
 
 ### 4.2 边界极限
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 边界 1: 缓存上限
@@ -485,9 +452,7 @@ graph LR
 
 ## 五、常见陷阱
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 缓存键设计不当
@@ -515,7 +480,6 @@ graph LR
      // name = "ring"
      // allow = ["OpenSSL"]
      // reason = "ring uses OpenSSL license for some files"
-> [来源: [cargo-deny Book](https://embarkstudios.github.io/cargo-deny/)]
 
 陷阱 4: 在 CI 中使用默认 profile
   ❌ cargo build
@@ -524,7 +488,6 @@ graph LR
   ✅ 明确使用 --release
      // cargo build --release
      // 配合 strip = true 和 lto = "thin"
-> [来源: [Cargo Book — Profiles](https://doc.rust-lang.org/cargo/reference/profiles.html)]
 
 陷阱 5: 安全审计仅在新版本发布时运行
   ❌ 仅在 release workflow 中运行 cargo audit
@@ -542,10 +505,6 @@ graph LR
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Cargo Book]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -597,10 +556,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](./01_toolchain.md) — Cargo 与 Rust 工具链
 - [Cross Compilation](./17_cross_compilation.md) — 交叉编译技术
@@ -623,114 +578,63 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ## 十、边界测试：DevOps 与 CI/CD 的编译错误
 

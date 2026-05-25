@@ -186,6 +186,7 @@ $$
 ---
 
 ## 3. Promise/Future对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 JavaScript Promise
@@ -256,6 +257,7 @@ $$
 ---
 
 ## 4. Actor模型对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 Erlang/Akka Actor
@@ -333,6 +335,7 @@ $$
 ---
 
 ## 5. CSP对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 Go CSP
@@ -361,6 +364,7 @@ $$
 $$
 
 ### 5.2 Rust Async Channels
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -385,6 +389,7 @@ $$
 $$
 
 ### 5.3 Go vs Rust并发模型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | Go Goroutine | Rust Async |
@@ -405,9 +410,11 @@ $$
 ---
 
 ## 6. 操作系统线程对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 线程模型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -430,6 +437,7 @@ $$
 $$
 
 ### 6.2 Async模型
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -452,6 +460,7 @@ $$
 $$
 
 ### 6.3 性能对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 指标 | OS Thread | Rust Async |
@@ -472,9 +481,11 @@ $$
 ---
 
 ## 7. 形式化语义对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 操作语义对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -495,6 +506,7 @@ Async模型 (Rust):
 ```
 
 ### 7.2 类型系统对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 系统 | 并发安全保证 | 机制 |
@@ -511,6 +523,7 @@ $$
 $$
 
 ### 7.3 内存模型对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -530,9 +543,11 @@ Rust内存模型:
 ---
 
 ## 8. 性能特征分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 微基准对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -553,6 +568,7 @@ Rust Async:    █                      ~100B
 ```
 
 ### 8.2 扩展性分析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -580,9 +596,11 @@ Rust Async:
 ---
 
 ## 9. 选择决策框架
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 决策树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -608,6 +626,7 @@ Rust Async:
 ```
 
 ### 9.2 场景矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 场景 | 推荐模型 | 理由 |
@@ -620,6 +639,7 @@ Rust Async:
 | 系统编程 | Rust Async | 零成本，安全 |
 
 ### 9.3 混合策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -648,9 +668,11 @@ $$
 ---
 
 ## 10. 结论
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 核心洞见
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Async不是银弹**: 适合高并发IO，不适合CPU密集
@@ -659,6 +681,7 @@ $$
 4. **生态整合**: Tokio/async-std提供完整运行时
 
 ### 形式化优势总结
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 特性 | Rust Async | 其他模型 |
@@ -859,4 +882,3 @@ $$
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

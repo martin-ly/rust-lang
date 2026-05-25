@@ -1,5 +1,4 @@
-# Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）
->
+# Async/Await（异步编程）
 > **层次定位**: L3 高级概念 / 异步子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
@@ -30,98 +29,95 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Async Book]]
 
-- [Async/Await（异步 \[来源: Async Rust\]编程）](#asyncawait异步-来源-async-rust编程)
+ [Async/Await（异步 \编程）](#asyncawait异步)
   - [📑 目录](#-目录)
   - [〇、认知路径（Cognitive Path）](#〇认知路径cognitive-path)
   - [一、权威定义（Definition）](#一权威定义definition)
-    - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
-    - [1.2 官方文档定义](#12-官方文档定义)
-    - [1.3 形式化定义](#13-形式化定义)
+  - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
+  - [1.2 官方文档定义](#12-官方文档定义)
+  - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-    - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
-    - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
-    - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
+  - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
+  - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
+  - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
-    - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
-    - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
-      - [状态机类型归纳定义](#状态机类型归纳定义)
-      - [poll 作为状态转移函数](#poll-作为状态转移函数)
-      - [.await 的 CPS 变换规则](#await-的-cps-变换规则)
-      - [Pin 约束在操作语义中的体现](#pin-约束在操作语义中的体现)
-    - [3.2 Pin 的形式化语义](#32-pin-的形式化语义)
-    - [3.2b Pin 的 LTL 形式化（异步状态机语境）](#32b-pin-的-ltl-形式化异步状态机语境)
-      - [不动性公理（Immobility Axiom）](#不动性公理immobility-axiom)
-      - [Unpin 豁免（Exemption）](#unpin-豁免exemption)
-      - [在 poll 递归调用链中的验证](#在-poll-递归调用链中的验证)
-      - [与 §3.1b 操作语义的衔接](#与-31b-操作语义的衔接)
-    - [3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程](#35-调度模型对比抢占式-vs-协作式-vs-绿色线程)
-    - [3.5·补充：跨语言异步机制对比](#35补充跨语言异步机制对比)
+  - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
+  - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
+  - [状态机类型归纳定义](#状态机类型归纳定义)
+  - [poll 作为状态转移函数](#poll-作为状态转移函数)
+  - [.await 的 CPS 变换规则](#await-的-cps-变换规则)
+  - [Pin 约束在操作语义中的体现](#pin-约束在操作语义中的体现)
+  - [3.2 Pin 的形式化语义](#32-pin-的形式化语义)
+  - [3.2b Pin 的 LTL 形式化（异步状态机语境）](#32b-pin-的-ltl-形式化异步状态机语境)
+  - [不动性公理（Immobility Axiom）](#不动性公理immobility-axiom)
+  - [Unpin 豁免（Exemption）](#unpin-豁免exemption)
+  - [在 poll 递归调用链中的验证](#在-poll-递归调用链中的验证)
+  - [与 §3.1b 操作语义的衔接](#与-31b-操作语义的衔接)
+  - [3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程](#35-调度模型对比抢占式-vs-协作式-vs-绿色线程)
+  - [3.5·补充：跨语言异步机制对比](#35补充跨语言异步机制对比)
   - [四、思维导图（Mind Map）](#四思维导图mind-map)
   - [五、定理一致性矩阵（Theorem Consistency Matrix）](#五定理一致性矩阵theorem-consistency-matrix)
-    - [5.1 定理矩阵（10 行，含 ⟹ 推理链）](#51-定理矩阵10-行含--推理链)
-    - [5.2 推理链层级图](#52-推理链层级图)
+  - [5.1 定理矩阵（10 行，含 ⟹ 推理链）](#51-定理矩阵10-行含--推理链)
+  - [5.2 推理链层级图](#52-推理链层级图)
   - [六、反命题决策树（Counter-proposition Decision Trees）](#六反命题决策树counter-proposition-decision-trees)
-    - [6.1 反命题: "async/await 总是零成本"](#61-反命题-asyncawait-总是零成本)
-    - [6.2 反命题: "Future 一旦 poll 就一定完成"](#62-反命题-future-一旦-poll-就一定完成)
-    - [6.3 反命题: "async fn 等价于返回 Future 的 fn"](#63-反命题-async-fn-等价于返回-future-的-fn)
+  - [6.1 反命题: "async/await 总是零成本"](#61-反命题-asyncawait-总是零成本)
+  - [6.2 反命题: "Future 一旦 poll 就一定完成"](#62-反命题-future-一旦-poll-就一定完成)
+  - [6.3 反命题: "async fn 等价于返回 Future 的 fn"](#63-反命题-async-fn-等价于返回-future-的-fn)
   - [七、决策/边界判定树（Decision / Boundary Tree）](#七决策边界判定树decision--boundary-tree)
-    - [7.1 "Async vs Thread？" 决策树](#71-async-vs-thread-决策树)
-    - [7.2 Pin 使用边界](#72-pin-使用边界)
+  - [7.1 "Async vs Thread？" 决策树](#71-async-vs-thread-决策树)
+  - [7.2 Pin 使用边界](#72-pin-使用边界)
   - [八、示例与反例（Examples \& Counter-examples）](#八示例与反例examples--counter-examples)
-    - [8.1 正确示例：async fn + .await](#81-正确示例async-fn--await)
-    - [8.2 正确示例：并发执行](#82-正确示例并发执行)
-    - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
-    - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
-    - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
-    - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
-    - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
-    - [8.8 Waker 契约与活性](#88-waker-契约与活性)
-    - [8.9 Waker/Context 的底层机制](#89-wakercontext-的底层机制)
-    - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
-    - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
-    - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
-      - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
-      - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
-      - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
-      - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
+  - [8.1 正确示例：async fn + .await](#81-正确示例async-fn--await)
+  - [8.2 正确示例：并发执行](#82-正确示例并发执行)
+  - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
+  - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
+  - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
+  - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
+  - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
+  - [8.8 Waker 契约与活性](#88-waker-契约与活性)
+  - [8.9 Waker/Context 的底层机制](#89-wakercontext-的底层机制)
+  - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
+  - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
+  - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
+  - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+  - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
+  - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
+  - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
+  - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [十、待补充与演进方向（TODOs）](#十待补充与演进方向todos)
-    - [补充章节：AFIT（Async Fn In Traits）与 RPITIT](#补充章节afitasync-fn-in-traits与-rpitit)
-      - [问题与解决方案演进](#问题与解决方案演进)
-      - [当前最佳实践](#当前最佳实践)
-      - [限制与注意事项](#限制与注意事项)
-      - [生命周期陷阱](#生命周期陷阱)
+  - [补充章节：AFIT（Async Fn In Traits）与 RPITIT](#补充章节afitasync-fn-in-traits与-rpitit)
+  - [问题与解决方案演进](#问题与解决方案演进)
+  - [当前最佳实践](#当前最佳实践)
+  - [限制与注意事项](#限制与注意事项)
+  - [生命周期陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
   - [十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
-    - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
-    - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
-    - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
-    - [12.4 效果系统原型](#124-效果系统原型)
+  - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
+  - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
+  - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
+  - [12.4 效果系统原型](#124-效果系统原型)
   - [十三、`gen` blocks：同步协程的语义定位](#十三gen-blocks同步协程的语义定位)
-    - [13.1 语法与语义](#131-语法与语义)
-    - [13.2 与 `async` 的对偶关系](#132-与-async-的对偶关系)
-    - [13.3 形式化定位](#133-形式化定位)
+  - [13.1 语法与语义](#131-语法与语义)
+  - [13.2 与 `async` 的对偶关系](#132-与-async-的对偶关系)
+  - [13.3 形式化定位](#133-形式化定位)
   - [相关概念链接](#相关概念链接)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
   - [十五、Stream trait 与流处理语义](#十五stream-trait-与流处理语义)
-    - [15.1 Stream = 异步 Iterator](#151-stream--异步-iterator)
-    - [15.2 Stream 与 Dataflow Model 的映射](#152-stream-与-dataflow-model-的映射)
-    - [15.3 从 Stream 到 differential-dataflow](#153-从-stream-到-differential-dataflow)
+  - [15.1 Stream = 异步 Iterator](#151-stream--异步-iterator)
+  - [15.2 Stream 与 Dataflow Model 的映射](#152-stream-与-dataflow-model-的映射)
+  - [15.3 从 Stream 到 differential-dataflow](#153-从-stream-到-differential-dataflow)
   - [十六、边界测试：异步规则的编译错误](#十六边界测试异步规则的编译错误)
-    - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
-    - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
-    - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
-    - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
-    - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
-    - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
+  - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
+  - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
+  - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
+  - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
+  - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
+  - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
 
 ## 〇、认知路径（Cognitive Path）
->
-> [来源: [Rust Async Book]]
 
 > **导读**：以下六步构成从直觉困惑到形式验证的完整递进链条。建议按顺序阅读，每步锚定后续章节的特定内容，形成"问题驱动→场景具象→模式抽象→规则形式→代码验证→边界测试"的闭环。
 
@@ -164,22 +160,17 @@ Step 6: "什么时候会阻塞？"
 ```
 
 > **[TRPL: Ch17 + Async Book]** 认知类比：`Future` 像"待办事项单"——每次 `poll` 是处理一件事，处理不完就记下当前进度（状态机）。`Pin` 像"胶水"——把待办单粘在桌上，防止进度记录错位。✅ 已验证
->
 > **[Rust Reference: Async]** 反直觉点：`async fn` 看起来像普通函数，但实际上返回一个编译器生成的**匿名状态机**，而非直接结果。✅ 已验证
->
 > **形式化过渡**: 从"await 暂停" → "状态机转换" → "续体传递风格 (CPS)" → "效果系统 (Effect Systems)" 💡 原创分析
 
 ---
 
 ## 一、权威定义（Definition）
->
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：在深入 Rust 的 async/await 之前，需先建立跨语言的语义坐标系。以下定义从 Wikipedia 的通用概念出发，收敛到 Rust 官方文档的精确语义，最终形式化为状态机与 trait 系统。三层定义形成"宽泛→精确→可执行"的漏斗。
 
 ### 1.1 Wikipedia 权威定义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: Asynchronous programming]** Asynchronous programming is a means of parallel programming in which a unit of work runs separately from the main application thread and notifies the calling thread of its completion, failure or progress. It is a programming paradigm that enables non-blocking operations.
 
@@ -189,21 +180,18 @@ Step 6: "什么时候会阻塞？"
 
 ### 1.2 官方文档定义
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[Async Book]** Asynchronous code allows us to run multiple tasks concurrently on the same OS thread. In Rust, asynchronous code is lazy: it does nothing until it is actively executed by calling `.await`.
 
 > **[TRPL: Ch17]** A future is an asynchronous computation that can produce a value. `async fn` returns a future. When you call an `async fn`, it returns a future that is a suspended computation, not the result. Futures are lazy: they don't do any work until you await them.
 
 > **[Rust Reference: Async await]** `async fn` 被编译器转换为返回 `impl Future<Output = T>` 的函数，`.await` 被转换为对 `Future::poll` 的循环调用。✅ 已验证
->
 > **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。 ✅ 已验证
 
 > **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on RFC 2394, with the `Pin` type introduced in RFC 2349 to support self-referential async state machines. ✅ 已验证
 
 ### 1.3 形式化定义
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 `async/await` 可以形式化为**基于状态机的协程**（coroutines）或**可恢复函数**（resumable functions）：
 
@@ -235,8 +223,6 @@ Poll 类型:
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
->
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：定义之后需辨析 async 在并发光谱中的精确位置。以下矩阵将 async 与线程、并行对比，澄清"异步≠并行≠并发"的常见误解；随后给出 Future 组合子与运行时选型矩阵，为工程决策提供依据。
 
@@ -244,7 +230,6 @@ Poll 类型:
 
 ### 2.1 异步 vs 并发 vs 并行对比矩阵
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **维度** | **Async（异步）** | **Threading（线程）** | **Parallel（并行）** |
 |:---|:---|:---|:---|
@@ -261,7 +246,6 @@ Poll 类型:
 
 ### 2.2 Future 组合子矩阵
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | **组合子** | **签名** | **语义** | **类比** |
 |:---|:---|:---|:---|
@@ -277,7 +261,6 @@ Poll 类型:
 
 ### 2.3 运行时对比矩阵
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | **运行时** | **调度策略** | **线程池** | **生态** | **适用场景** |
 |:---|:---|:---|:---|:---|
@@ -292,21 +275,16 @@ Poll 类型:
 ---
 
 ## 三、形式化理论根基（Formal Foundation）
->
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：属性矩阵回答了"是什么"，本节回答"为什么安全"。Rust 的 async/await 安全性建立在两个形式化支柱上：(1) 编译器将 async fn 转换为状态机，(2) Pin 保证该状态机在挂起期间内存地址恒定。二者共同构成"零成本 + 内存安全"的基石。
 
 > **[Rust Reference: Async fn desugaring]** 编译器将 async fn 转换为匿名状态机类型（匿名 enum/struct），实现 Future trait，每个 await 点对应一个状态转换。✅ 已验证
->
 > **[TRPL: Ch17]** async fn 返回的 Future 是惰性的（lazy），直到被 .await 或执行器 poll 才会执行。✅ 已验证
 
 ### 3.1 async fn 作为状态机：精确推导
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 > **[Rust Reference: Async fn desugaring]** 编译器将 async fn 转换为匿名状态机类型（匿名 enum/struct），实现 Future trait，每个 await 点对应一个状态转换。✅ 已验证
->
 > **[TRPL: Ch17]** async fn 返回的 Future 是惰性的（lazy），直到被 .await 或执行器 poll 才会执行。✅ 已验证
 
 ```rust,ignore
@@ -362,16 +340,13 @@ Pin<&mut Self> 的内存布局约束:
 > **来源**: [RFC 2349 §3: Pin invariants] · [TRPL: Ch17] · [Rustonomicon: Pinning]
 
 > **[RFC 2349]** Pin 被引入以支持自引用结构：Pin<&mut T> 保证 T 的内存地址不会被改变，除非 T: Unpin。✅ 已验证
->
 > **[TRPL: Ch17]** Pin 是 async/await 安全的关键——编译器生成的状态机可能包含自引用（局部变量的引用），Pin 防止状态机被 move 后引用失效。✅ 已验证
->
 > **[Phil-opp OS blog]** 自引用结构在操作系统开发中常见（如页表自引用），Pin 提供了类型系统级别的安全保证。✅ 已验证
 
 > **[RFC 2349: Pin]** `Pin<P<T>>` was introduced to guarantee that `!Unpin` values cannot be moved, providing the formal foundation for safe self-referential async state machines. ✅ 已验证
 
 ### 3.1b 状态机操作语义（Operational Semantics）
 
-> **[来源: Rust Compiler: rustc_mir_transform::async_lowering; RFC 2394 §3.2; without.boats blog: Pinning in Rust Futures]**
 
 §3.1 展示了编译器变换的**结果**（enum 结构），本节补充变换的**形式化规则**——将 async fn 视为一个受控的、带挂起点的小步操作语义系统。
 
@@ -462,7 +437,6 @@ stateDiagram-v2
 
 > **认知功能**: 状态转移可视化工具——将编译器生成的匿名 enum 状态机映射为可读的状态图。读者可将此图作为阅读 MIR lowering 输出的"导航地图"，每个节点对应一个 enum 变体，每条边对应一次 poll 调用。关键洞察：Pin 约束不是装饰，而是 Suspend 状态期间地址恒定性的形式化保证。[来源: 💡 原创分析]
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
-> [来源: [Rust Async Book]]
 
 > **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; RFC 2394 §3.2]
 
@@ -519,7 +493,6 @@ stateDiagram-v2
 
 ### 3.2 Pin 的形式化语义
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 Pin<P<T>> 保证 T 在内存中不移动:
@@ -541,7 +514,6 @@ Pin<P<T>> 保证 T 在内存中不移动:
 
 ### 3.2b Pin 的 LTL 形式化（异步状态机语境）
 
-> **[来源: `04_formal/03_ownership_formal.md` §9.5; RFC 2349 §3; RustBelt Pin 证明; Vardi & Wolper 1986 — LTL]**
 
 §3.2 给出了 Pin 的直觉定义（"保证不移动"）。本节将其形式化为**线性时序逻辑（LTL）**命题，使其在 async 状态机的挂起-恢复周期中可验证。
 
@@ -637,8 +609,6 @@ async 状态机的 Pin 验证场景:
 ---
 
 ### 3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **章节过渡**：状态机变换展示了编译器如何将 async fn 翻译为协作式 Future，但为什么 Rust 选择这条路径而非其他？需将协作式调度置于操作系统线程与绿色线程的三维比较中，方能理解 Rust "零成本抽象"承诺的实质——它不是所有场景下的最优解，而是在延迟、吞吐量与内存约束下的刻意权衡。
 
@@ -652,9 +622,7 @@ async 状态机的 Pin 验证场景:
 | **Rust 排除原因** | —（基准模型） | ✅ **零成本抽象，无运行时依赖** | ❌ 运行时依赖（RFC 230 明确拒绝） |
 
 > **[without.boats blog]** Rust 明确拒绝绿色线程（green threads / M:N 线程），因为"每个零成本抽象都必须有不用不付钱的路径；绿色线程的运行时负担与 Rust 的系统编程定位冲突"。✅ 已验证
->
 > **[RFC 230]** Rust 曾实验性支持绿色线程（Rust 1.0 前），后因运行时复杂性与 FFI 互操作困难被移除。✅ 已验证
->
 > **[Async Book]** async/await 的协作式调度意味着"任务自己决定何时让出"——在 `.await` 点主动返回 Pending，而非被外部强制中断。✅ 已验证
 
 ```mermaid
@@ -677,7 +645,6 @@ graph LR
 
 > **认知功能**: 工程权衡决策辅助——在三维设计空间中定位不同并发模型的优劣。读者在技术选型时，可对照延迟、内存、吞吐量三个维度的项目需求优先级，判断 Rust 的协作式选择是否为最优解。关键洞察：零成本抽象是刻意 trade-off，用程序员的显式挂起标注换取对底层硬件的最大控制。[来源: 💡 原创分析]
 > [来源: [Tokio Docs](https://tokio.rs/)]
-> [来源: [Rust Async Book]]
 
 **关键洞察**：协作式调度的零成本并非无代价——它要求程序员显式标注所有挂起点（`.await`），且阻塞调用会惩罚整个执行器。Rust 接受这一 trade-off，以换取对底层硬件的最大控制和 FFI 的完美兼容。
 
@@ -686,8 +653,6 @@ graph LR
 ---
 
 ### 3.5·补充：跨语言异步机制对比
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 维度 | Rust `async/await` | C++20 Coroutines | Haskell `async` / `IO` | Go Goroutine |
 |:---|:---|:---|:---|:---|
@@ -707,8 +672,6 @@ graph LR
 ---
 
 ## 四、思维导图（Mind Map）
->
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：理论根基建立后，以下思维导图以可视化方式整合同步概念体系，从 Future Trait 出发，辐射到语法糖、Pin 语义、运行时与组合子四个维度。
 
@@ -743,25 +706,18 @@ graph TD
 
 > **认知功能**: 概念拓扑速查图——以树状结构展示 async 知识体系的层级关系。读者遇到陌生子概念（如 Waker、Stream）时，可先在图中定位其所属分支，再追溯至文件对应章节。关键洞察：Future Trait 是整个异步子域的根节点，Pin 是连接"零成本"与"内存安全"的核心桥梁。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Async/Await](https://doc.rust-lang.org/reference/expressions/await-expr.html)]
-> [来源: [Rust Async Book]]
 
 ---
 
 ## 五、定理一致性矩阵（Theorem Consistency Matrix）
->
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：思维导图提供概念拓扑，而定理矩阵提供严格的推理链条。以下 10 条定理按"语言层（L）→ 变换层（T）→ 约束层（C）→ 运行时层（P）→ 抽象层（A）→ 系统层（S）"递进排列，每行均含"⟹"推理链，展示从前提到结论的必然性。
 
 > **[Rust Reference: Pin]** 一致性检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证
->
 > **[🔍 待验证]** async 的完整形式化（包括 Waker 契约、执行器正确性）仍是活跃研究领域，目前仅有部分片段被形式化验证。
->
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.3 "async 正确性"
 
 ### 5.1 定理矩阵（10 行，含 ⟹ 推理链）
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 编号 | 定理陈述（⟹ 推理链） | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 后果 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
@@ -779,8 +735,6 @@ graph TD
 > **来源**: [Rust Reference: Async fn desugaring] · [RFC 2394] · [RFC 2349] · [Async Book: Execution model] · [Tokio Documentation: Runtime internals]
 
 ### 5.2 推理链层级图
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 语言层 (L)
@@ -809,14 +763,10 @@ graph TD
 ---
 
 ## 六、反命题决策树（Counter-proposition Decision Trees）
->
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：定理矩阵回答"什么必然为真"，反命题决策树则揭示"什么看似为真实则不然"。以下三组反命题分别针对零成本、完成性与等价性三个常见误解，反例节点以红色标注，展示从直觉到谬误再到修正的完整路径。
 
 ### 6.1 反命题: "async/await 总是零成本"
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **误解来源**: 官方宣传"zero-cost abstraction"被简化为"绝对零开销"。
 
@@ -838,7 +788,6 @@ graph TD
 
 > **认知功能**: 谬误诊断工具——针对"async/await 总是零成本"这一常见误解的系统性排查路径。读者在性能调优或技术辩论时，可按此树逐项检验前提条件（静态分发、状态机大小、递归深度）。关键洞察：零成本的成立需要三个前提同时满足，任意一个被违反都会导致性能退化。[来源: 💡 原创分析]
 > [来源: [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
-> [来源: [Rust Async Book]]
 
 **修正认知**：
 
@@ -852,8 +801,6 @@ graph TD
 > **来源**: [TRPL: Ch17] · [RFC 2394 §2: Zero-cost abstraction] · [Rust Performance Book]
 
 ### 6.2 反命题: "Future 一旦 poll 就一定完成"
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **误解来源**: 同步思维惯性——函数调用即执行到返回。
 
@@ -875,7 +822,6 @@ graph TD
 
 > **认知功能**: 生命周期认知修正器——打破"函数调用即执行到返回"的同步思维惯性。读者在设计取消安全（cancellation safety）时，应将此图作为检查清单，确保所有可能导致 Future 提前终止的路径都被处理。关键洞察：poll 是协作式请求而非命令式保证，取消是一等公民。[来源: 💡 原创分析]
 > [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)]
-> [来源: [Rust Async Book]]
 
 **修正认知**：
 
@@ -889,8 +835,6 @@ Future 的生命周期独立于 poll 调用：
 > **来源**: [Async Book: Cancellation] · [RFC 2394 §5: Cancellation semantics] · [Tokio Documentation: Cancellation safety]
 
 ### 6.3 反命题: "async fn 等价于返回 Future 的 fn"
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 > **误解来源**: 语法脱糖后的表面相似性——`async fn foo() -> T` 看起来像 `fn foo() -> impl Future<Output = T>`。
 
@@ -912,7 +856,6 @@ graph TD
 
 > **认知功能**: 语义差异探测器——揭示 `async fn` 与 `fn → impl Future` 在表面语法相似下的深层语义差异。读者在 trait 设计或生命周期标注遇到意外编译错误时，可对照此图排查生命周期捕获、环境捕获、trait 兼容性三个维度。关键洞察：语法糖触发的编译器特定转换路径，可能引入手写代码中不存在的约束。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Future trait](https://doc.rust-lang.org/std/future/trait.Future.html)]
-> [来源: [Rust Async Book]]
 
 **修正认知**：
 
@@ -929,14 +872,10 @@ graph TD
 ---
 
 ## 七、决策/边界判定树（Decision / Boundary Tree）
->
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：反命题破除了常见神话，而决策树则提供正向的工程判断框架。以下两棵树分别解决"何时用 async"和"何时用 Pin"的选择问题，为实际编码提供可操作的判定路径。
 
 ### 7.1 "Async vs Thread？" 决策树
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
 graph TD
@@ -955,11 +894,8 @@ graph TD
 
 > **认知功能**: 技术选型向导——从任务特征（IO/CPU 密集度、并发规模、状态共享需求）出发的决策树。读者在新项目架构设计时，可从根节点出发回答两个关键问题，得到推荐的并发模型。关键洞察：选择 async 还是 thread 的本质是回答"任务是否以挂起等待为主"。[来源: 💡 原创分析]
 > [来源: [Rust Async Book: Execution](https://rust-lang.github.io/async-book/02_execution/01_chapter.html)]
-> [来源: [Rust Async Book]]
 
 ### 7.2 Pin 使用边界
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -974,19 +910,14 @@ graph TD
 
 > **认知功能**: 类型安全判定器——为手写 Future 或设计自引用结构提供 Pin 使用的判定流程。读者只需回答"是否包含自引用"和"是否需要地址稳定"两个问题，即可确定是否需要 Pin。关键洞察：自引用是 Pin 的充分条件而非必要条件，某些非自引用场景（如与硬件 DMA 交互）同样需要地址稳定。[来源: 💡 原创分析]
 > [来源: [Tokio Docs: Runtime](https://tokio.rs/tokio/topics/runtime)]
-> [来源: [Rust Async Book]]
 
 ---
 
 ## 八、示例与反例（Examples & Counter-examples）
->
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：理论最终需落地为代码。以下示例从正确用法出发，逐步深入到常见陷阱与边界极限测试，覆盖"阻塞误用→Send 约束→取消安全→生命周期"四个维度。
 
 ### 8.1 正确示例：async fn + .await
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
 // ✅ 正确: async/await 基本用法
@@ -1008,8 +939,6 @@ async fn main() {
 ```
 
 ### 8.2 正确示例：并发执行
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
 // ✅ 正确: join! 并发等待
@@ -1025,8 +954,6 @@ async fn fetch_all() -> (String, String) {
 ```
 
 ### 8.3 正确示例：Stream 异步迭代
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // ✅ 正确: Stream 异步迭代
@@ -1042,8 +969,6 @@ async fn process_stream() {
 ```
 
 ### 8.4 反例：在 async 中阻塞线程
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // ❌ 反例: 在 async 中执行阻塞操作
@@ -1075,8 +1000,6 @@ async fn cpu_intensive() -> i32 {
 ```
 
 ### 8.5 反例：未 Pin 的自引用 Future
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,compile_fail
 // ❌ 反例: 尝试移动已 Pin 的 Future（编译错误）
@@ -1101,8 +1024,6 @@ fn main() {
 > **来源**: [Rust Reference: Pin methods] · [RFC 2349 §3: Pin invariants] · [TRPL: Ch17]
 
 ### 8.6 边界极限测试：跨越 await 的 Send 约束
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // 边界: 跨越 await 的 Send 约束
@@ -1132,8 +1053,6 @@ fn main() {
 > **来源**: [TRPL: Ch17] · [Rust Reference: Send and Sync] · [Tokio Documentation: Spawning]
 
 ### 8.7 边界极限测试：取消安全系统分析
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 > **章节过渡**：Send 约束确保状态机可安全跨线程迁移，但当 Future 被主动丢弃（如 `select!` 分支落选）时，状态机的局部效应如何处理？取消安全（cancellation safety）是 async 编程中最易被忽视的正确性维度——每个 `.await` 都是一个潜在的取消点。
 
@@ -1245,8 +1164,6 @@ async fn graceful_shutdown(token: CancellationToken) {
 > **[Async Book: Cancellation]** 取消安全不是自动保证的——Future 的取消语义等价于在任意 await 点注入 `return`，程序员需显式设计每个 await 边界的状态一致性。✅ 已验证
 
 ### 8.8 Waker 契约与活性
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **章节过渡**：取消安全回答了"Future 被丢弃时会发生什么"，而 Waker 契约则回答"Future 被挂起后如何复活"。二者共同构成异步执行的生命周期闭环：从 poll 到 Pending，从 wake 到再 poll，任何一环断裂都会导致活锁或资源泄漏。
 
@@ -1306,17 +1223,13 @@ graph TD
 
 > **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。[来源: 💡 原创分析]
 > [来源: [Rust Reference: Pin](https://doc.rust-lang.org/reference/types/pin.html)]
-> [来源: [Rust Async Book]]
 
 > **[Async Book: Waker]** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
->
 > **[without.boats blog]** Waker 的设计刻意与具体执行器解耦：任何实现了 `Wake` trait 的类型均可作为 Waker，这使得同一个 Future 可在不同运行时之间复用。✅ 已验证
 
 ---
 
 ### 8.9 Waker/Context 的底层机制
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **章节过渡**：取消安全与 Waker 契约从语义层面描述了 Future 的生命周期，但 Waker 本身是如何实现的？理解 Waker 的 VTable 机制、Context 与 Waker 的关系，以及自定义 Waker 的实现方式，是手写 Future 和构建自定义运行时的必备知识。
 
@@ -1583,8 +1496,6 @@ impl UringReactor {
 ---
 
 ### 8.10 `Stream` / `Sink` trait 完整分析
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **章节过渡**：Future 表示单个异步计算，但许多场景需要处理异步序列（如网络数据包流、消息队列）。`Stream` 将异步能力扩展到迭代器领域，`Sink` 则提供异步生产者抽象。理解它们与 `Iterator`、`Future` 的关系，是构建异步管道的关键。
 
@@ -1745,7 +1656,6 @@ Stream::poll_next 的语义层级:
   - Stream::next() 返回的 Future 必须被 .await 后才能消费元素
 ```
 
-> **[来源: futures-rs: StreamExt::next 源码]** `next()` 通过 `Next` 结构体实现 `Future` trait，其 `poll` 方法直接委托给底层 `Stream::poll_next`。[来源: Rust Async Book: Streams]
 
 **`Sink` 状态机完整分析**
 
@@ -1793,7 +1703,6 @@ where
 }
 ```
 
-> **[来源: futures-rs: Sink trait 文档]** `Sink` 的设计灵感来自 `Iterator` 的逆过程，但增加了异步缓冲和刷新阶段。`send` 是 `poll_ready` + `start_send` + `poll_flush` 的组合子，确保每次发送后数据不滞留缓冲。[来源: RFC 2394 附录: Async I/O 抽象]
 
 **`futures::stream` 与 `tokio_stream` 生态对比**
 
@@ -1850,8 +1759,6 @@ async fn pipeline() {
 ---
 
 ### 8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **章节过渡**：定理 T1 声称 async/await 是零成本抽象，但实践中我们常常看到 `Box::pin` 和 `dyn Future`。理解静态分发与动态分发的边界、栈 pinning 与堆 pinning 的差异，是判断"何时零成本成立"的关键。
 
@@ -2002,15 +1909,12 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 └── 否 → impl Future（默认最优路径）
 ```
 
-> **[来源: Tokio 文档: Task spawning internals]** Tokio 的任务调度器在内部使用 `Pin<Box<dyn Future + Send + 'static>>` 存储任务，这是类型擦除的必要代价。但 Tokio 的 `spawn` API 接受 `impl Future`，仅在入队时进行一次 Box 包装，用户代码仍享受单态化优化。[来源: RFC 2592: futures 0.3 设计原则]
 
 > **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
 
 ---
 
 ### 8.12 `loom` 并发模型检测工具
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **章节过渡**：异步代码的正确性不仅依赖类型系统，还依赖并发执行的时序。`loom` 通过穷举所有可能的线程交错（interleaving），在测试中发现数据竞争和死锁，是验证并发原语（如自定义 Mutex、Channel）的利器。
 
@@ -2266,7 +2170,6 @@ mod tests {
 }
 ```
 
-> **[来源: loom 官方示例; Rust Atomics and Locks by Mara Bos]** 自定义并发原语（自旋锁、无锁队列、RCU）是 loom 的核心应用场景。loom 会系统地探索 `compare_exchange_weak` 的失败路径、线程切换时机以及 Drop 的顺序，从而发现手工难以构造的边界情况。[来源: Tokio 内部 loom 测试套件]
 
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
 
@@ -2315,7 +2218,6 @@ help: alloc232 was deallocated here:
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
 [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
-> [来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)]
 >
 #### 场景 2：无效值检测（非法 bool 构造）
 
@@ -2342,7 +2244,6 @@ error: Undefined Behavior: constructing invalid value of type bool:
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
 [来源: [Tokio Docs](https://tokio.rs/)]
 
-> [来源: [Rust Async Book: Cancellation](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
 >
 #### 场景 3：async 状态机中的未初始化内存
 
@@ -2376,7 +2277,6 @@ warning: the type `bool` does not permit being left uninitialized
 > **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
 [来源: [TRPL](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
 
-> [来源: [Tokio Docs: Cancellation](https://tokio.rs/tokio/topics/cancellation)]
 >
 #### Miri 与 async 状态机的特殊关联
 
@@ -2401,8 +2301,6 @@ Miri 的局限（与 loom 互补）:
 ---
 
 ## 九、知识来源关系（Provenance）
->
-> [来源: [Rust Async Book]]
 
 > **章节过渡**：所有论断均有出处。以下表格明确每条核心论断的来源与可信度等级，便于读者追溯与验证。
 
@@ -2433,8 +2331,6 @@ Miri 的局限（与 loom 互补）:
 ---
 
 ## 十、待补充与演进方向（TODOs）
->
-> [来源: [Rust Async Book]]
 
 - [x] **TODO**: 补充 Waker/Context 的底层机制 —— 已完成: 2026-05-14
 - [x] **TODO**: 补充 `Stream` / `Sink` trait 完整分析 —— 已完成: 2026-05-14
@@ -2442,8 +2338,6 @@ Miri 的局限（与 loom 互补）:
 - [x] **TODO**: 补充 `loom` 并发模型检测工具 —— 已完成: 2026-05-14
 
 ### 补充章节：AFIT（Async Fn In Traits）与 RPITIT
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **层次一致性标注**：本节内容属于 L3 向 L4 过渡地带，涉及 trait 系统与存在类型的交互，需在理解 §3.1 状态机变换与 §5.1 定理 A1 后阅读。
 
@@ -2546,8 +2440,6 @@ trait DataProvider<'a> {
 ---
 
 ## 十一、国际课程与论文对齐
->
-> [来源: [Rust Async Book]]
 
 | 来源 | 核心内容 | 与本文件对应 |
 |:---|:---|:---|
@@ -2558,23 +2450,17 @@ trait DataProvider<'a> {
 | **[PLDI 2024: RefinedRust]** | Pin 不动性的形式化语义 | Pin 定理 §5.1 L2 |
 
 > **过渡: L3 → L4**
->
 > `async/await` 的编译期正确性依赖于状态机的自引用安全性，而 `Pin<&mut Self>` 保证的"地址不变性"在类型论中对应于 **location stability** 约束。当前 borrow checker 对自引用的分析存在过度保守的问题，Polonius 的下一代 Datalog 求解器正试图用路径敏感的 loan-based 语义精确刻画这一边界。
->
 > 形式化视角见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §9.2（Polonius）与 [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §4.1（存在类型与 `impl Trait`）。
 
 ---
 
 ## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）
->
-> [来源: [Rust Async Book]]
 
 > **稳定版本**: Rust 1.85 (stable) · **适用 Edition**: 所有 Edition（非 Edition-gated）
 > **形式化意义**: 高阶函数的异步扩展——效果系统（Effect System）的原型
 
 ### 12.1 问题：异步闭包的类型真空
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 在 1.85 之前，异步闭包 `async |x| { ... }` 无法直接作为 trait bound 使用：
 
@@ -2596,8 +2482,6 @@ async fn process_batch(
 > **来源**: [RFC 3668] · [Rust Reference: Async closures] · [Rust 1.85 Release Notes]
 
 ### 12.2 `AsyncFn` 家族层级
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 AsyncFnOnce<Args>     // 异步调用一次，消耗所有权
@@ -2615,8 +2499,6 @@ AsyncFn<Args>         // 异步多次调用，不可变借用
 | 捕获模式 | `&self` / `&mut self` / `self` | 同左，但返回 Future |
 
 ### 12.3 关键形式化特性：可重入性限制
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 `AsyncFn` 的 `call` 方法返回 `impl Future`，该 Future 可能**借用**闭包捕获的状态。因此：
 
@@ -2635,8 +2517,6 @@ let fut2 = closure("world");  // ✅ 现在可以再次调用
 > **来源**: [RFC 3668] · [Rust Reference: Async closures] · [Rust 1.85 Release Notes]
 
 ### 12.4 效果系统原型
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `AsyncFn` 可视为 Rust 向**显式效果追踪**迈出的第一步：
 
@@ -2660,15 +2540,11 @@ async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
 ---
 
 ## 十三、`gen` blocks：同步协程的语义定位
->
-> [来源: [Rust Async Book]]
 
 > **稳定版本**: Rust 1.95 (stable，需 nightly feature gate) · **预计全面稳定**: 1.98+
 > **形式化意义**: 同步协程（Coroutine）的语法糖——`Iterator` 状态机的自动化生成
 
 ### 13.1 语法与语义
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
 // 手动状态机（旧模式）
@@ -2695,8 +2571,6 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 ```
 
 ### 13.2 与 `async` 的对偶关系
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | `async` block | `gen` block |
 |:---|:---|:---|
@@ -2707,8 +2581,6 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 | 返回实现 | `impl Future<Output = T>` | `impl Iterator<Item = T>` |
 
 ### 13.3 形式化定位
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 `gen` block 是 **Continuation** 的受限形式：
 
@@ -2732,8 +2604,6 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 ---
 
 ## 相关概念链接
->
-> [来源: [Rust Async Book]]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -2748,23 +2618,17 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | Unsafe 权限分离 | [](../03_advanced/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 
 > **过渡: L3 → L2**
->
 > `async fn` 的本质是状态机——编译器将 `await` 点转换为 enum 变体。这种转换依赖于泛型（`impl Future<Output = T>`）和 Trait（`Future::poll`）的协同。理解 async 的底层实现，需要回到泛型和 Trait 的基础。
->
 > 底层机制见 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 定义）与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型单态化）。
 
 > **过渡: L3 → L5**
->
 > 异步编程不是 Rust 的发明——JavaScript 的 Promise、C# 的 async/await、Go 的 goroutine 都解决了类似问题。但 Rust 的 `Future` 是零成本的：编译后的状态机没有运行时调度器开销，这与 Go 的 goroutine（M:N 调度）形成鲜明对比。
->
 > 对比分析见 [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md)（并发模型对比）。
 ---
 
 ---
 
 ## Wikipedia 概念对齐
->
-> [来源: [Rust Async Book]]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。
 
@@ -2778,7 +2642,6 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | **Promise (programming)** | [Promise (programming)](https://en.wikipedia.org/wiki/Promise_(programming)) | Promise |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -2790,948 +2653,483 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 ## 权威来源索引
 
-> **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]**
 >
-> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
 ## 十五、Stream trait 与流处理语义
 
-> **[来源: Akidau et al. — The Dataflow Model, VLDB 2015]** · **[来源: Tokio Documentation]** · **[来源: futures-rs Documentation]** ✅
 
 ### 15.1 Stream = 异步 Iterator
 

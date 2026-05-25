@@ -12,9 +12,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Cargo Script：单文件 Rust 程序](#cargo-script单文件-rust-程序)
   - [📑 目录](#-目录)
@@ -46,15 +44,12 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 Cargo Script（RFC 3502 + RFC 3503）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：RFC 3502 定义单文件 manifest 格式，RFC 3503 定义 frontmatter 语法。当前 nightly 已实现核心支持，目标 2026 年稳定化。
 
 ### 1.1 三种执行方式
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
 # 方式 A: cargo 原生支持 (Rust 1.79+ 稳定)
@@ -70,7 +65,6 @@ rust-script script.rs
 
 ### 1.2 嵌入式 Manifest
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 单文件通过 frontmatter 或 Markdown 代码块声明依赖与元数据：
 
@@ -117,14 +111,9 @@ fn main() { /* ... */ }
 ---
 
 ## 二、Frontmatter 语法详解
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 完整字段支持
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 字段 | 必需 | 说明 | 示例 |
 |:---|:---:|:---|:---|
@@ -136,7 +125,6 @@ fn main() { /* ... */ }
 
 ### 2.2 依赖解析机制
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Cargo Script 的依赖解析**等价于**一个隐式生成的 `Cargo.toml`：
 
@@ -156,10 +144,6 @@ edition = "2024"     # 默认当前 edition
 ---
 
 ## 三、与传统 Cargo 项目的对比
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 维度 | `cargo new` 项目 | Cargo Script 单文件 |
 |:---|:---|:---|
@@ -233,21 +217,15 @@ graph TD
 ```
 
 > **认知功能**：此决策树提供工程场景下的工具选择启发式——当项目规模、依赖复杂度或构建需求突破单文件边界时，应果断迁移至传统 Cargo 项目。建议在面对"这个脚本该用 Cargo Script 还是 cargo new？"的抉择时激活此判断框架。关键洞察：Cargo Script 的适用域是"快速验证与分享"，而非"长期维护与协作"；gist 友好的背后是 workspace 和 build.rs 等高级功能的缺失。[来源: 💡 原创分析]
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **思维表征说明**: 此决策树帮助程序员在「Cargo Script」和「传统 Cargo 项目」之间做出**工程化的选择**——不是「Cargo Script 可以替代所有项目」，而是「根据项目规模、依赖复杂度、构建需求选择适当的工具」。叶子节点的颜色编码（绿色=传统项目，黄色=Cargo Script）直观传达了推荐倾向。 [来源: RFC 3503 §Motivation; Cargo Book — When to use scripts]
 
 ---
 
 ## 四、工程实践
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 4.1 快速 CLI 原型
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 #!/usr/bin/env cargo
@@ -277,7 +255,6 @@ fn main() {
 ```
 
 ### 4.2 CI/CD 辅助脚本
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
 # GitHub Actions 中直接执行
@@ -292,7 +269,6 @@ Cargo Script 的**自包含性**使其成为 CI 脚本的理想选择：
 
 ### 4.3 数据处理与临时任务
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
 #!/usr/bin/env cargo
@@ -324,10 +300,8 @@ fn main() {
 ---
 
 ## 五、形式化定位
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 匿名 Crate 语义
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 单文件脚本在 Cargo 的形式化模型中等价于一个**匿名 crate**：
 
@@ -338,7 +312,6 @@ $$
 > [来源: [Cargo 源码 — `ops/script.rs`](https://github.com/rust-lang/cargo/blob/master/src/cargo/ops/script.rs) — 单文件脚本在 Cargo 内部通过 `to_manifest()` 转换为标准 `Manifest`，然后走常规编译流程。
 
 ### 5.2 与模块系统的关系
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 传统项目:  Crate → Module Tree → Files
@@ -351,7 +324,6 @@ Cargo Script:  File = Crate (单模块，无子模块)
 
 ## 六、与 L1-L4 的关系映射
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | L1-L4 概念 | Cargo Script 映射 |
 |:---|:---|
@@ -363,8 +335,6 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## 七、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - **一级**: [RFC 3503 — Cargo Script](https://github.com/rust-lang/rfcs/pull/3503)（FCP 完成，目标 2026 稳定）
 - **一级**: [Cargo Book — Unstable Features / Script](https://doc.rust-lang.org/cargo/reference/unstable.html#script)
@@ -376,10 +346,6 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [工具链总览](./01_toolchain.md) — Cargo 工作空间与编译器生态
 - [核心 Crate 选型](./03_core_crates.md) — 脚本中常用依赖的选择策略
@@ -390,10 +356,6 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## Wikipedia 概念对齐
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。
 
@@ -416,80 +378,46 @@ Cargo Script:  File = Crate (单模块，无子模块)
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ## 十、边界测试：Cargo Script 的编译错误
 

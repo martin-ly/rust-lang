@@ -7,40 +7,35 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [方法论：思维表征与知识结构规范](#方法论思维表征与知识结构规范)
   - [📑 目录](#-目录)
-    - [〇、方法论体系全景](#〇方法论体系全景)
+  - [〇、方法论体系全景](#〇方法论体系全景)
   - [一、内容结构模板（强制）](#一内容结构模板强制)
-    - [1.1 各章节内容规范](#11-各章节内容规范)
+  - [1.1 各章节内容规范](#11-各章节内容规范)
   - [二、思维表征规范](#二思维表征规范)
-    - [2.1 概念定义属性关系矩阵（Concept-Attribute-Relation Matrix） \[来源: 概念属性矩阵方法论参照知识图谱表示学习 — Bordes et al. *Translating Embeddings for Modeling Multi-Relational Data* (NIPS 2013); 知识表示的三元组结构 (实体-关系-实体)\]](#21-概念定义属性关系矩阵concept-attribute-relation-matrix-来源-概念属性矩阵方法论参照知识图谱表示学习--bordes-et-al-translating-embeddings-for-modeling-multi-relational-data-nips-2013-知识表示的三元组结构-实体-关系-实体)
-    - [2.2 思维导图（Mind Map） \[来源: Buzan, T. — *The Mind Map Book*. BBC Books, 1993; 思维导图作为放射性思维的可视化工具; 认知科学中的图式理论 (Schema Theory)\]](#22-思维导图mind-map-来源-buzan-t--the-mind-map-book-bbc-books-1993-思维导图作为放射性思维的可视化工具-认知科学中的图式理论-schema-theory)
-    - [2.3 决策树图（Decision Tree） \[来源: 决策树方法论参照 Quinlan, J.R. — *Induction of Decision Trees*. Machine Learning, 1986; 信息增益与熵减作为决策分支的标准\]](#23-决策树图decision-tree-来源-决策树方法论参照-quinlan-jr--induction-of-decision-trees-machine-learning-1986-信息增益与熵减作为决策分支的标准)
-    - [2.4 定理推理判断树（Theorem Inference Tree） \[来源: 定理证明方法论参照 Gentzen 的自然演绎 (Natural Deduction) 系统; 推理规则的树形结构化表示\]](#24-定理推理判断树theorem-inference-tree-来源-定理证明方法论参照-gentzen-的自然演绎-natural-deduction-系统-推理规则的树形结构化表示)
-    - [2.5 边界判定树（Boundary Decision Tree） \[来源: 边界分析方法参照 Torchiano et al. (2018) 软件工程知识库边界分析研究; 反事实推理 (Counterfactual Reasoning) 在程序分析中的应用\]](#25-边界判定树boundary-decision-tree-来源-边界分析方法参照-torchiano-et-al-2018-软件工程知识库边界分析研究-反事实推理-counterfactual-reasoning-在程序分析中的应用)
+ [2.1 概念定义属性关系矩阵（Concept-Attribute-Relation Matrix） \](#21-概念定义属性关系矩阵concept-attribute-relation-matrix) [2.2 思维导图（Mind Map） \](#22-思维导图mind-map) [2.3 决策树图（Decision Tree） \](#23-决策树图decision-tree) [2.4 定理推理判断树（Theorem Inference Tree） \](#24-定理推理判断树theorem-inference-tree) [2.5 边界判定树（Boundary Decision Tree） \](#25-边界判定树boundary-decision-tree)
   - [三、知识结构层级规范](#三知识结构层级规范)
-    - [3.1 理论-模型-实践三层结构 \[来源: 知识组织三层模型参照布鲁纳 (Bruner) 的表征理论 — 动作表征 (Enactive) / 图像表征 (Iconic) / 符号表征 (Symbolic); 对应概念文件的 L4 理论 / L2 模型 / L1 实践映射\]](#31-理论-模型-实践三层结构-来源-知识组织三层模型参照布鲁纳-bruner-的表征理论--动作表征-enactive--图像表征-iconic--符号表征-symbolic-对应概念文件的-l4-理论--l2-模型--l1-实践映射)
-    - [3.2 层级标注规范](#32-层级标注规范)
+ [3.1 理论-模型-实践三层结构 \](#31-理论-模型-实践三层结构)
+  - [3.2 层级标注规范](#32-层级标注规范)
   - [四、来源引用规范](#四来源引用规范)
-    - [4.1 引用格式](#41-引用格式)
-    - [4.2 来源可信度标注](#42-来源可信度标注)
+  - [4.1 引用格式](#41-引用格式)
+  - [4.2 来源可信度标注](#42-来源可信度标注)
   - [五、代码示例规范](#五代码示例规范)
-    - [5.1 代码块格式](#51-代码块格式)
-    - [6.2 变更日志](#62-变更日志)
+  - [5.1 代码块格式](#51-代码块格式)
+  - [6.2 变更日志](#62-变更日志)
   - [七、关系规范（新增 v1.1）](#七关系规范新增-v11)
-    - [7.1 语义链接类型](#71-语义链接类型)
-    - [7.2 跨层映射规范](#72-跨层映射规范)
-    - [7.3 交叉概念一致性](#73-交叉概念一致性)
+  - [7.1 语义链接类型](#71-语义链接类型)
+  - [7.2 跨层映射规范](#72-跨层映射规范)
+  - [7.3 交叉概念一致性](#73-交叉概念一致性)
   - [八、定理一致性规范（新增 v1.1）](#八定理一致性规范新增-v11)
-    - [8.1 定理一致性矩阵格式](#81-定理一致性矩阵格式)
-    - [8.2 反命题树格式](#82-反命题树格式)
+  - [8.1 定理一致性矩阵格式](#81-定理一致性矩阵格式)
+  - [8.2 反命题树格式](#82-反命题树格式)
   - [九、认知路径规范（新增 v1.1）](#九认知路径规范新增-v11)
-    - [9.1 认知路径格式](#91-认知路径格式)
+  - [9.1 认知路径格式](#91-认知路径格式)
   - [十、质量控制检查清单（v1.1 更新）](#十质量控制检查清单v11-更新)
-    - [基础质量](#基础质量)
-    - [关系质量（v1.1 新增）](#关系质量v11-新增)
+  - [基础质量](#基础质量)
+  - [关系质量（v1.1 新增）](#关系质量v11-新增)
   - [相关概念文件](#相关概念文件)
 
 ### 〇、方法论体系全景
@@ -80,8 +75,6 @@ mindmap
 > **认知路径**: 本 mindmap 展示 `concept/` 知识体系的**元规范**。三个主分支对应文件生产的三个阶段："内容结构模板"定义写什么，"思维表征规范"定义怎么可视化，"质量控制"定义怎么验证。所有概念文件必须遵循此模板，确保跨文件的一致性和可比较性。
 
 ## 一、内容结构模板（强制）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 每个概念文件必须遵循以下结构：
 
@@ -98,7 +91,6 @@ mindmap
 
 ## 一、权威定义（Definition）
 ## 二、概念属性矩阵（Attribute Matrix）
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 ## 三、形式化理论根基（Formal Foundation）
 ## 四、思维导图（Mind Map）
 ## 五、决策/边界判定树（Decision / Boundary Tree）
@@ -106,7 +98,6 @@ mindmap
 ## 七、示例与反例（Examples & Counter-examples）
 ## 八、知识来源关系（Provenance）
 ## 九、待补充与演进方向（TODOs）
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 ```
 
 ### 1.1 各章节内容规范
@@ -126,8 +117,6 @@ mindmap
 ---
 
 ## 二、思维表征规范
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 概念定义属性关系矩阵（Concept-Attribute-Relation Matrix） [来源: 概念属性矩阵方法论参照知识图谱表示学习 — Bordes et al. *Translating Embeddings for Modeling Multi-Relational Data* (NIPS 2013); 知识表示的三元组结构 (实体-关系-实体)]
 
@@ -157,7 +146,6 @@ graph TD
 ```
 
 > **认知功能**: 本图展示概念思维导图的标准拓扑结构，用于将抽象概念展开为可导航的层级网络。建议在绘制新主题思维导图时遵循"中心→子概念→属性"三级展开模式。关键洞察：放射状层级结构对应认知科学中的图式激活，符合工作记忆的组块限制。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.3 决策树图（Decision Tree） [来源: 决策树方法论参照 Quinlan, J.R. — *Induction of Decision Trees*. Machine Learning, 1986; 信息增益与熵减作为决策分支的标准]
 
@@ -173,7 +161,6 @@ graph TD
 ```
 
 > **认知功能**: 本图提供"何时使用/如何判断"类问题的标准决策树模板，将条件判断转化为可执行的路径选择。建议在构建决策树时保持"条件→分支→结论"的严格二叉结构，避免多分支混淆。关键洞察：决策树的每个分支应对应编译器或运行时的真实判定边界。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.4 定理推理判断树（Theorem Inference Tree） [来源: 定理证明方法论参照 Gentzen 的自然演绎 (Natural Deduction) 系统; 推理规则的树形结构化表示]
 
@@ -208,13 +195,10 @@ graph TD
 ```
 
 > **认知功能**: 本图展示边界判定树的标准格式，用于可视化概念的合法区域与非法区域。建议在分析新概念时，优先绘制其边界树以明确编译错误与运行时 panic 的触发条件。关键洞察：边界树本质是反事实推理的可视化——它回答"如果条件不成立，会发生什么"。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 三、知识结构层级规范
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 理论-模型-实践三层结构 [来源: 知识组织三层模型参照布鲁纳 (Bruner) 的表征理论 — 动作表征 (Enactive) / 图像表征 (Iconic) / 符号表征 (Symbolic); 对应概念文件的 L4 理论 / L2 模型 / L1 实践映射]
 
@@ -238,8 +222,6 @@ graph TD
 ---
 
 ## 四、来源引用规范
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 引用格式
 
@@ -264,8 +246,6 @@ graph TD
 ---
 
 ## 五、代码示例规范
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 代码块格式
 
@@ -288,7 +268,6 @@ fn main() {
 ---
 
 ## 六、持续演进标记
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 TODO 标记
 
@@ -311,8 +290,6 @@ fn main() {
 ---
 
 ## 七、关系规范（新增 v1.1）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.1 语义链接类型
 
@@ -351,8 +328,6 @@ fn main() {
 ---
 
 ## 八、定理一致性规范（新增 v1.1）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.1 定理一致性矩阵格式
 
@@ -393,7 +368,6 @@ fn main() {
     ```
 
     > **认知功能**: 本图展示反命题与边界分析的标准模板，将命题的真值判定转化为条件分支的可视化路径。建议在分析新概念时，用此模板穷尽命题的失效条件并标注典型错误码。关键洞察：反命题树的价值不在于证明命题成立，而在于系统地发现命题何时不成立。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```
 
@@ -408,8 +382,6 @@ fn main() {
 ---
 
 ## 九、认知路径规范（新增 v1.1）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 9.1 认知路径格式
 
@@ -442,8 +414,6 @@ fn main() {
 ---
 
 ## 十、质量控制检查清单（v1.1 更新）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 在提交任何概念文件前，检查：
 
@@ -474,9 +444,7 @@ fn main() {
 
 ## 相关概念文件
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [概念一致性检查清单](./audit_checklist.md) — 质量门禁与审计标准
 - [语义表达力全景梳理](./semantic_expressiveness.md) — 横向语义维度框架
@@ -485,7 +453,6 @@ fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

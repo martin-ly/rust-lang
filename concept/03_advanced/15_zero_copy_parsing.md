@@ -11,9 +11,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [零拷贝解析与序列化优化](#零拷贝解析与序列化优化)
   - [📑 目录](#-目录)
@@ -49,13 +47,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 零拷贝原理
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 零拷贝（Zero-Copy）:
@@ -94,7 +89,6 @@
 
 ### 1.2 生命周期约束
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 零拷贝的生命周期挑战:
@@ -131,14 +125,9 @@
 ---
 
 ## 二、关键技术
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 bytes crate
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 bytes::Bytes:
@@ -172,7 +161,6 @@ bytes::Bytes:
 
 ### 2.2 zerocopy crate
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 zerocopy:
@@ -214,7 +202,6 @@ zerocopy:
 
 ### 2.3 memmap2
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 内存映射文件:
@@ -247,14 +234,9 @@ zerocopy:
 ---
 
 ## 三、序列化优化
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 rkyv
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 rkyv — 零拷贝反序列化:
@@ -291,7 +273,6 @@ rkyv — 零拷贝反序列化:
 
 ### 3.2 flatbuffers / capnp
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 FlatBuffers / Cap'n Proto:
@@ -325,14 +306,9 @@ FlatBuffers / Cap'n Proto:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
 graph TD
@@ -356,8 +332,6 @@ graph TD
 ---
 
 ### 4.2 边界极限
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 边界 1: 内存安全
@@ -392,10 +366,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 生命周期逃逸
@@ -448,7 +418,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -479,8 +448,6 @@ fn main() {
 ```
 
 ### 编译验证示例
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 fn main() {
@@ -499,10 +466,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理基础
 - [Unsafe Rust](./03_unsafe.md) — unsafe Rust
@@ -524,24 +487,16 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ## 十、边界测试：零拷贝解析的编译错误
 
@@ -604,37 +559,22 @@ fn parse_header(data: &[u8]) -> Option<&Header> {
 
 > **修正**: 零拷贝解析的核心是返回对原始字节切片的引用视图，而非复制数据。这要求视图类型的生命周期与原始数据绑定——任何生命周期不匹配都会导致悬垂引用。使用 `#[repr(C)]` 结构体作为类型化视图时，还需验证：1) 字节长度足够；2) 对齐满足；3) 字节序正确（大端/小端）。`zerocopy` crate 通过 derive 宏自动生成这些验证，是生产环境的首选。[来源: [zerocopy Documentation](https://docs.rs/zerocopy/)]
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 10.3 边界测试：`nom` 解析器的生命周期传播（编译错误）
 

@@ -60,6 +60,7 @@ Diesel是Rust的编译时SQL检查ORM：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 DSL-1 ( 查询DSL )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -73,6 +74,7 @@ $$
 $$
 
 ### 定义 DSL-2 ( 表达式类型 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 表达式 | 类型 | 返回 |
@@ -83,6 +85,7 @@ $$
 | `col.desc()` | `Desc<Column>` | `Order` |
 
 ### 定理 DSL-T1 ( 类型一致 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 比较操作要求类型兼容。
@@ -94,9 +97,11 @@ $$
 ---
 
 ## 3. 查询构建
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 QUERY-1 ( Select查询 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -108,6 +113,7 @@ $$
 $$
 
 ### 定义 QUERY-2 ( 类型推断 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -119,6 +125,7 @@ $$
 $$
 
 ### 定理 QUERY-T1 ( 返回类型安全 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 查询返回类型在编译时确定。
@@ -130,9 +137,11 @@ $$
 ---
 
 ## 4. Schema推理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定义 SCHEMA-1 ( Table定义 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 diesel.toml + migrations → schema.rs
@@ -148,6 +157,7 @@ table! {
 ```
 
 ### 定义 SCHEMA-2 ( 关联类型 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -163,9 +173,11 @@ $$
 ---
 
 ## 5. 迁移系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 MIGRATION-1 ( 迁移结构 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -180,6 +192,7 @@ DROP TABLE users;
 ```
 
 ### 定理 MIGRATION-T1 ( 幂等性 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 迁移可重复执行。
@@ -191,9 +204,11 @@ $$
 ---
 
 ## 6. 连接管理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 CONN-1 ( 连接池 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -202,6 +217,7 @@ let pool = Pool::builder().build(manager)?;
 ```
 
 ### 定理 CONN-T1 ( 线程安全 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 连接池自动管理并发。
@@ -213,9 +229,11 @@ $$
 ---
 
 ## 7. 定理与证明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 DIESEL-T1 ( 编译时SQL验证 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 无效SQL在编译时捕获。
@@ -227,6 +245,7 @@ $$
 **证明**: DSL将查询编码为类型，类型检查即SQL验证。$\square$
 
 ### 定理 DIESEL-T2 ( 零成本抽象 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 生成SQL无运行时开销。
@@ -238,6 +257,7 @@ $$
 ---
 
 ## 8. 代码示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 示例1: CRUD操作
@@ -392,4 +412,3 @@ struct Status;
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

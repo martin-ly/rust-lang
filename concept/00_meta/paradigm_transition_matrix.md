@@ -9,9 +9,7 @@
 > **来源**: [Microsoft RustTraining — github.com/microsoft/RustTraining · C++ Case Studies]
 >
 > **来源**: [Google — *Rust in Chromium* 技术报告]
->
 > **来源**: [Linux Kernel — *Rust for Linux* 文档]
->
 > **来源**: [Ferrous Systems — *Rust Migration Guide*]
 
 ## 📑 目录
@@ -67,7 +65,6 @@ mindmap
 
 ## 一、C++ → Rust 转换矩阵
 
-> [来源: Microsoft RustTraining · Google Chromium Rust · CppCoreGuidelines]
 
 ### 1.1 核心转换模式
 
@@ -109,7 +106,6 @@ graph TD
 
 ## 二、Java → Rust 转换矩阵
 
-> [来源: Rust for Java Developers · Android Rust 指南]
 
 | Java 模式 | Rust 模式 | 转换影响 | 学习难点 | 权威来源 |
 |:---|:---|:---:|:---|:---|
@@ -128,7 +124,6 @@ graph TD
 
 ## 三、Go → Rust 转换矩阵
 
-> [来源: Rust vs Go 对比 · Go 惯用法迁移指南]
 
 | Go 模式 | Rust 模式 | 转换影响 | 学习难点 | 权威来源 |
 |:---|:---|:---:|:---|:---|
@@ -147,7 +142,6 @@ graph TD
 
 ## 四、Python → Rust 转换矩阵
 
-> [来源: PyO3 文档 · Rust for Pythonistas]
 
 | Python 模式 | Rust 模式 | 转换影响 | 学习难点 | 权威来源 |
 |:---|:---|:---:|:---|:---|
@@ -166,7 +160,6 @@ graph TD
 
 ## 五、转换影响评估模型
 
-> [来源: Microsoft RustTraining 案例研究数据 · 工业迁移经验]
 
 ```mermaid
 quadrantChart
@@ -193,7 +186,6 @@ quadrantChart
 ```
 
 > **认知功能**: 四象限图帮助迁移项目**优先级排序**：
->
 > - **第一象限**（高影响/高难度）：GC→所有权、继承→Trait+Enum — 需要最多的培训和重构投入
 > - **第二象限**（高影响/低难度）：异常→Result — 收益大且相对容易，应优先转换
 > - **第三象限**（低影响/低难度）：RAII→Drop、defer→Drop — 几乎无缝过渡
@@ -204,7 +196,6 @@ quadrantChart
 
 ## 六、学习难点与认知陷阱
 
-> [来源: Rust 学习者社区调研 · Rust Learning Survey 2024]
 
 ### 6.1 通用认知陷阱
 

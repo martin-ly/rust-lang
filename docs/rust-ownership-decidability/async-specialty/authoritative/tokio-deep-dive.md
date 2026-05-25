@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Tokio深度解读 - 权威来源整合](#tokio深度解读---权威来源整合)
@@ -229,9 +230,11 @@ fn worker_loop(&self) {
 ---
 
 ## 3. IO Driver详解
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 跨平台抽象
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -270,6 +273,7 @@ pub struct IocpDriver {
 ```
 
 ### 3.2 epoll实现细节
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -338,6 +342,7 @@ impl EpollDriver {
 ```
 
 ### 3.3 IO资源生命周期
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -373,9 +378,11 @@ TcpStream创建流程:
 ---
 
 ## 4. Timer实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 分层时间轮
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -411,6 +418,7 @@ pub struct Wheel {
 ```
 
 ### 4.2 Timer操作
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -470,9 +478,11 @@ impl Timer {
 ---
 
 ## 5. 与标准库集成
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 AsyncRead/AsyncWrite trait
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -499,6 +509,7 @@ pub trait AsyncWrite {
 ```
 
 ### 5.2 与std::io的桥梁
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -550,9 +561,11 @@ impl<T: Read + Send + 'static> AsyncRead for BlockingReader<T> {
 ---
 
 ## 6. 性能优化技巧
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 批处理模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -576,6 +589,7 @@ if !buf.is_empty() {
 ```
 
 ### 6.2 避免任务切换
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -596,6 +610,7 @@ for batch in (0..1_000_000).step_by(BATCH_SIZE) {
 ```
 
 ### 6.3 内存池
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -627,9 +642,11 @@ fn put_buffer(mut buf: BytesMut) {
 ---
 
 ## 7. 调试与可观测性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 Tokio Console
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -648,6 +665,7 @@ async fn main() {
 ```
 
 ### 7.2 Tracing集成
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -692,6 +710,7 @@ async fn handle_request(req: Request) -> Response {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
@@ -902,4 +921,3 @@ async fn handle_request(req: Request) -> Response {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

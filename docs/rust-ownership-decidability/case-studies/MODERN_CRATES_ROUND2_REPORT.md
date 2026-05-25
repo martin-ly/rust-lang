@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [现代Rust库形式化扩展第二轮报告](#现代rust库形式化扩展第二轮报告)
@@ -64,6 +65,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 数据库安全
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -75,6 +77,7 @@ SQLX-T1: 强类型行
 ```
 
 ### Actor模型安全
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -83,6 +86,7 @@ ACTIX-T2: 无数据竞争
 ```
 
 ### HTTP保证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -91,6 +95,7 @@ HYPER-T2: HTTP/2多路复用
 ```
 
 ### 错误处理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -101,6 +106,7 @@ ERR-T1: 零运行时开销
 ---
 
 ## 形式化内容统计
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 库 | 定义数 | 定理数 | 代码示例 |
@@ -126,6 +132,7 @@ ERR-T1: 零运行时开销
 ---
 
 ## 特性覆盖矩阵
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 特性 | 覆盖库 |
@@ -140,9 +147,11 @@ ERR-T1: 零运行时开销
 ---
 
 ## 安全保证分类
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 内存安全
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - ✅ wasm-bindgen: FFI边界内存安全
@@ -150,6 +159,7 @@ ERR-T1: 零运行时开销
 - ✅ hyper: 流背压防止OOM
 
 ### 类型安全
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - ✅ diesel/sqlx: 编译时SQL验证
@@ -157,6 +167,7 @@ ERR-T1: 零运行时开销
 - ✅ tonic: 协议缓冲区类型安全
 
 ### 并发安全
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ✅ tokio: Send约束传播
@@ -280,4 +291,3 @@ ERR-T1: 零运行时开销
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

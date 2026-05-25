@@ -13,9 +13,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [类型推断：Hindley-Milner 算法与 Rust 的工业实现](#类型推断hindley-milner-算法与-rust-的工业实现)
   - [📑 目录](#-目录)
@@ -48,13 +46,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 从显式类型到隐式推断
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 类型系统的演进:
@@ -91,7 +86,6 @@
 
 ### 1.2 Hindley-Milner 算法
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 HM 算法的核心思想:
@@ -127,7 +121,6 @@ HM 算法的核心思想:
 
 ### 1.3 Rust 的类型推断扩展
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 graph TD
@@ -163,14 +156,9 @@ graph TD
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 统一（Unification）
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ## 十、边界测试：类型推断的编译错误
 
@@ -245,7 +233,6 @@ fn fixed() {
 
 ### 2.2 泛型函数的类型推断
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // Rust 泛型推断示例
@@ -279,7 +266,6 @@ v.push(42);  // 推断 Vec<i32>
 
 ### 2.3 生命周期推断
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 生命周期推断的两层:
@@ -308,10 +294,6 @@ v.push(42);  // 推断 Vec<i32>
 ---
 
 ## 三、Rust 与 HM 的差异
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 Rust 对 HM 的关键扩展:
@@ -358,14 +340,9 @@ Rust 对 HM 的关键扩展:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -382,7 +359,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示类型推断的**最佳实践**。核心原则是：**公共 API 显式标注，私有代码允许推断**。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: 显式类型是**文档**——在公共接口上，类型标注比推断更有价值。
 > [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)]
 
@@ -390,7 +366,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 循环引用类型
@@ -431,7 +406,6 @@ graph TD
 
 ## 五、常见陷阱
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 过度推断导致可读性下降
@@ -478,8 +452,6 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -492,10 +464,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type Theory](./02_type_theory.md) — 类型论基础
 - [Generics](../02_intermediate/02_generics.md) — 泛型系统
@@ -517,114 +485,63 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 >
-> **[来源: [Iris Project](https://iris-project.org/)]**
 >
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
 >
-> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 10.3 边界测试：闭包参数的类型推断歧义（编译错误）
 
@@ -678,7 +595,6 @@ fn main() {
 
 > **修正**:
 > Rust 闭包的**trait 自动实现**：
->
 > 1) `Fn` — 捕获 `&T`，可多次调用；
 > 2) `FnMut` — 捕获 `&mut T`，可多次调用（需 `mut` 绑定）；
 > 3) `FnOnce` — 捕获 `T`（move），只能调用一次。编译器根据闭包体自动推断实现的 trait。`v.push(4)` 需要 `&mut v`，所以闭包至少实现 `FnMut`。若闭包还移动捕获变量（如 `drop(v)`），则只能实现 `FnOnce`。
@@ -699,7 +615,6 @@ fn main() {
 ```
 
 > **修正**: Rust 的 **Hindley-Milner 类型推断** 变体：
->
 > 1) 局部变量类型通常可推断；
 > 2) 函数签名需显式标注（除非是 closure）；
 > 3) `collect()` 的目标类型需显式指定（`collect::<Vec<_>>()` 或 `let v: Vec<_>`）。
@@ -713,7 +628,6 @@ fn main() {
 > 9) API 边界（公共接口必须显式）。
 > 这与 Haskell 的完全类型推断（几乎无需标注，但复杂程序可能需要）或 C++ 的 `auto`（有限推断，模板参数从调用推断）不同——Rust 的平衡点是"局部推断 + 接口显式"。
 > [来源: [Type Inference](https://doc.rust-lang.org/reference/type-inference.html)] ·
-> [来源: [Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 
 ### 10.5 边界测试：类型不匹配的基础错误
 

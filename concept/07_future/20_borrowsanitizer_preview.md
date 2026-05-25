@@ -13,9 +13,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [BorrowSanitizer 概念预研：运行时借用检查工业化](#borrowsanitizer-概念预研运行时借用检查工业化)
   - [📑 目录](#-目录)
@@ -47,13 +45,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题定义：编译期检查的边界
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 的所有权系统通过**编译期检查**消除数据竞争和内存安全问题：
 
@@ -78,7 +73,6 @@ fn main() {
 
 ### 1.2 Miri：解释执行的 UB 检测
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Miri 是 Rust 的 MIR（Mid-level IR）解释器，通过**逐条指令解释执行**检测未定义行为：
 
@@ -91,7 +85,6 @@ Miri 检测的 UB 类别:
 ```
 
 > **Miri 的局限**:
->
 > - **速度**: 解释执行比原生代码慢 100-1000 倍
 > - **覆盖**: 只能执行实际运行的代码路径
 > - **外部调用**: 不支持所有外部函数（如某些系统调用）
@@ -101,7 +94,6 @@ Miri 检测的 UB 类别:
 
 ### 1.3 BorrowSanitizer 的设计目标
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 BorrowSanitizer 旨在填补编译期检查与 Miri 之间的空白：
 
@@ -129,7 +121,6 @@ graph LR
 
 ### 1.4 Shadow Stack 与 Lock-and-Key 策略
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 BorrowSanitizer 的核心机制是 **Shadow Stack**（影子栈）配合 **Lock-and-Key**（锁钥）运行时检测：
 
@@ -165,10 +156,6 @@ Miri 使用 tracing GC（stop-the-world 扫描所有可达 provenance）。Borro
 ---
 
 ## 二、与现有工具的对比矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 工具 | 检测范围 | 运行方式 | 性能开销 | FFI | Tree Borrows | 适用阶段 |
 |:---|:---|:---|:---:|:---:|:---:|:---|
@@ -180,19 +167,13 @@ Miri 使用 tracing GC（stop-the-world 扫描所有可达 provenance）。Borro
 | **Kani** | 形式化验证 | 模型检查 | 极高 | ❌ | 部分 | 安全关键验证 |
 
 > **关键差异**: Miri 通过解释执行维护精确内存模型，精度最高但速度极慢；BorrowSanitizer 通过 LLVM 插桩实现运行时检测，速度显著提升（初步测试显示显著快于 Miri，对数尺度），且原生支持 FFI。AddressSanitizer 检测的是内存错误（use-after-free、缓冲区溢出），不检测别名违规——两者可叠加使用。
-> [来源: [borrowsanitizer.com/status/february_2026.html](https://borrowsanitizer.com/status/february_2026.html)]
 
 ---
 
 ## 三、形式化语义
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 借用标签的生命周期
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 BorrowSanitizer 的 Shadow Stack 是 Tree Borrows 模型的**运行时实现**：
 
@@ -214,7 +195,6 @@ Tree Borrows 核心规则（简化）:
 
 ### 3.2 从 Tree Borrows 到运行时检测
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph TD
@@ -232,22 +212,15 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Tree Borrows 形式模型如何分支为三个不同的工程实现：编译器（静态）、Miri（解释）、BorrowSanitizer（运行时插桩）。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 形式模型研究者关注 Tree Borrows 论文；工具开发者关注 Miri 和 BorrowSanitizer 的实现差异。
 > **关键洞察**: 三个实现共享同一**形式化语义**，但在**工程权衡**上不同——静态分析追求零开销，解释执行追求精确性，运行时检测追求可部署性。
-> [来源: 💡 原创分析]
 
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -265,16 +238,13 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助项目决策者判断 BorrowSanitizer 是否适合其场景。核心判断标准是"精确性要求"和"性能预算"。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: CI 集成测试使用 BorrowSanitizer；深度安全审计仍使用 Miri；生产环境依赖编译器保证。
 > **关键洞察**: BorrowSanitizer 不是 Miri 的替代，而是**Miri 的工业级近似**——覆盖 80% 的 UB 场景，但可集成到标准测试流程中。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: BorrowSanitizer 无法检测的 UB
@@ -295,10 +265,6 @@ graph TD
 ---
 
 ## 五、演进路线与预测
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 来源 |
 |:---|:---:|:---|:---|
@@ -317,9 +283,7 @@ graph TD
 | 稳定化 | 🔴 远期 | 2027+ | 项目目标 |
 
 > **2026 年度目标**: BorrowSanitizer 是 Rust 2026 年 **33 个旗舰目标之一**（3.8 号目标）。核心目标是从研究原型过渡到**可用工具**。三个关键特性待实现：垃圾回收、错误报告、原子内存访问支持。
->
 > **上游化计划**: 采用分阶段策略——先上游化 LLVM 组件（定义外层 API、shadow memory 管理、错误报告），再通过弱符号被 Rust 运行时覆盖。LLVM 运行时单独测试时为空操作（no-op）。
->
 > **预测**: BorrowSanitizer 的工业化路径参考 AddressSanitizer。最大技术挑战是 **Shadow Stack 的性能优化**（当前仍与 Miri 同数量级，缺乏 GC 是主因）和 **LLVM RFC 的推进**。
 > [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)] · [borrowsanitizer.com](https://borrowsanitizer.com/)]
 
@@ -327,7 +291,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -348,10 +311,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用规则
 - [Ownership](../01_foundation/01_ownership.md) — 所有权系统的形式化根基
@@ -363,7 +322,6 @@ fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Miri](https://github.com/rust-lang/miri), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -375,66 +333,39 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 >
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
 >
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ## 十、边界测试：BorrowSanitizer 预览的编译错误
 

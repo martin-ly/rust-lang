@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust标准库 智能指针形式化分析](#rust标准库-智能指针形式化分析)
@@ -57,6 +58,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust智能指针提供高级内存管理:
@@ -69,12 +71,15 @@ Rust智能指针提供高级内存管理:
 ---
 
 ## 2. `Box<T>` 堆分配
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 唯一所有权
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 2.1 (Box)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -82,6 +87,7 @@ pub struct Box<T: ?Sized>(Unique<T>);
 ```
 
 ### 定理 2.1 (Box唯一所有权)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > `Box<T>` 保证对堆数据有且只有一个所有者。
@@ -101,9 +107,11 @@ let b2 = b;  // 移动所有权
 ∎
 
 ### 2.2 Deref与解引用强制
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 2.2 (Deref强制)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > `Box<T>` 自动解引用为 &T 或 &mut T。
@@ -138,9 +146,11 @@ foo(&b);  // 自动解引用: &Box<i32> -> &i32
 ∎
 
 ### 2.3 递归类型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 2.3 (递归类型)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > Box使递归类型成为可能。
@@ -161,12 +171,15 @@ enum List<T> {
 ---
 
 ## 3. `Rc<T>` 引用计数
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 3.1 共享所有权
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 3.1 (Rc)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -183,6 +196,7 @@ struct RcInner<T: ?Sized> {
 ```
 
 ### 定理 3.1 (Rc共享所有权)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > `Rc<T>` 允许多个所有者共享堆数据。
@@ -201,9 +215,11 @@ let rc3 = rc2.clone();  // 引用计数+1
 ∎
 
 ### 3.2 非线程安全
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 3.2 (Rc非线程安全)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > `Rc<T>` 不是 Send 也不是 Sync。
@@ -224,9 +240,11 @@ impl<T: ?Sized> !Sync for Rc<T> {}
 ∎
 
 ### 3.3 循环引用问题
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 3.3 (Rc循环引用泄漏)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > Rc循环引用导致内存泄漏。
@@ -255,12 +273,15 @@ node1.borrow_mut().next = Some(node2.clone());
 ---
 
 ## 4. `Arc<T>` 原子引用计数
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 线程安全共享
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 4.1 (Arc线程安全)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > `Arc<T>` 是 Send + Sync(如果T是Send + Sync)。
@@ -278,9 +299,11 @@ unsafe impl<T: ?Sized + Sync + Send> Sync for Arc<T> {}
 ∎
 
 ### 4.2 内存序保证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 4.2 (Arc内存序)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > Arc使用Acquire-Release保证数据可见性。
@@ -313,12 +336,15 @@ impl<T> Drop for Arc<T> {
 ---
 
 ## 5. `Cell<T>` 与 `RefCell<T>`
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 内部可变性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 5.1 (Cell)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -328,6 +354,7 @@ pub struct Cell<T: ?Sized> {
 ```
 
 ### 定理 5.1 (Cell内部可变性)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > `Cell<T>` 允许通过不可变引用修改值。
@@ -354,9 +381,11 @@ impl<T: Copy> Cell<T> {
 ∎
 
 ### 5.2 运行时借用检查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 5.2 (RefCell)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -367,6 +396,7 @@ pub struct RefCell<T: ?Sized> {
 ```
 
 ### 定理 5.2 (RefCell运行时检查)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > RefCell在运行时强制执行借用规则。
@@ -402,6 +432,7 @@ impl<T: ?Sized> RefCell<T> {
 ---
 
 ## 6. 智能指针对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 智能指针 | 所有权 | 线程安全 | Copy | 适用场景 |
@@ -415,9 +446,11 @@ impl<T: ?Sized> RefCell<T> {
 ---
 
 ## 7. 内存布局分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### `Box<T>`
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -428,6 +461,7 @@ Stack          Heap
 ```
 
 ### `Rc<T>/Arc<T>`
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -442,9 +476,11 @@ Stack          Heap
 ---
 
 ## 8. 反例与陷阱
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 反例 8.1 (Rc多线程)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -461,6 +497,7 @@ thread::spawn(move || {
 ```
 
 ### 反例 8.2 (RefCell panic)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -470,6 +507,7 @@ let r2 = cell.borrow_mut();  // panic! 已有不可变借用
 ```
 
 ### 反例 8.3 (Box泄漏)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -485,6 +523,7 @@ drop(b);
 ---
 
 ## 参考文献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Rust Standard Library.** (2024). `std::boxed::Box`, `std::rc::Rc`, `std::sync::Arc`. <https://doc.rust-lang.org/std/>
@@ -510,11 +549,9 @@ drop(b);
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -604,4 +641,3 @@ drop(b);
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

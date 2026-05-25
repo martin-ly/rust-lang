@@ -15,9 +15,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [宏模式：编译期代码生成的工程实践](#宏模式编译期代码生成的工程实践)
   - [📑 目录](#-目录)
@@ -48,13 +46,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 宏的工程价值
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 宏解决的核心问题:
@@ -97,7 +92,6 @@
 
 ### 1.2 声明宏 vs 过程宏
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 宏类型对比:
@@ -134,7 +128,6 @@
 
 ### 1.3 宏的卫生性工程
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 卫生性（Hygiene）的工程影响:
@@ -174,14 +167,9 @@
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 DRY 代码生成
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // 为多个类型实现相同 Trait
@@ -247,7 +235,6 @@ define_enum_with_display! {
 
 ### 2.2 条件编译模式
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // cfg 与宏结合的条件编译
@@ -304,7 +291,6 @@ macro_rules! log {
 
 ### 2.3 编译期计算
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // 编译期计算的宏技巧
@@ -362,10 +348,6 @@ const SIZE: usize = const_max(10, 20);
 ---
 
 ## 三、宏模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 宏类型 → 示例
@@ -400,19 +382,13 @@ Builder 生成:
 ```
 
 > **模式矩阵**: 宏的**选择逻辑**是：简单模式匹配用 `macro_rules!`，复杂 AST 操作用 `proc_macro`，能用类型系统解决的不用宏。
-> [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)]
 
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -435,7 +411,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 编译时间
@@ -475,10 +450,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 宏参数多次求值
@@ -540,7 +511,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -553,10 +523,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) — 属性与宏基础
 - [Proc Macros](../03_advanced/07_proc_macro.md) — 过程宏
@@ -578,26 +544,17 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)]**
 >
-> **[来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)]**
 >
-> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十、边界测试：宏模式的编译错误
 

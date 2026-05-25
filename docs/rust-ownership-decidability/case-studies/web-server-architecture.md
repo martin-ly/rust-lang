@@ -59,6 +59,7 @@
 - WebSocket 升级
 
 ### 1.2 非功能需求
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 指标 | 目标值 | 说明 |
@@ -70,6 +71,7 @@
 | 可用性 | 99.99% | 全年停机<1小时 |
 
 ### 1.3 技术约束
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 零成本抽象
@@ -80,9 +82,11 @@
 ---
 
 ## 2. 架构设计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 整体架构
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -122,6 +126,7 @@
 ```
 
 ### 2.2 架构决策树
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -156,9 +161,11 @@
 ---
 
 ## 3. 所有权与并发模型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 连接所有权设计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -214,6 +221,7 @@ pub enum ConnectionState {
 ```
 
 ### 3.2 连接池共享所有权
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -287,6 +295,7 @@ impl ConnectionPool {
 ```
 
 ### 3.3 请求处理生命周期
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -354,9 +363,11 @@ impl RequestHandler {
 ---
 
 ## 4. 内存管理策略
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 缓冲区池
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -426,6 +437,7 @@ fn handle_request(pool: &BufferPool) {
 ```
 
 ### 4.2 Arena分配器
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -474,9 +486,11 @@ async fn process_request(mut req: Request) -> Response {
 ---
 
 ## 5. 关键组件实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 异步运行时配置
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -497,6 +511,7 @@ pub fn create_runtime() -> Runtime {
 ```
 
 ### 5.2 零拷贝发送
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -531,9 +546,11 @@ pub async fn send_file(
 ---
 
 ## 6. 性能优化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 CPU优化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -561,6 +578,7 @@ pub async fn batch_process(
 ```
 
 ### 6.2 内存优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 技术 | 效果 | 实现 |
@@ -573,9 +591,11 @@ pub async fn batch_process(
 ---
 
 ## 7. 压力测试结果
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 7.1 测试环境
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - CPU: AMD EPYC 7702 (64核)
@@ -584,6 +604,7 @@ pub async fn batch_process(
 - Rust: 1.93.1
 
 ### 7.2 结果对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 指标 | nginx | Go net/http | Rust (本架构) |
@@ -595,6 +616,7 @@ pub async fn batch_process(
 | CPU使用 | 80% | 90% | 60% |
 
 ### 7.3 火焰图分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -609,9 +631,11 @@ pub async fn batch_process(
 ---
 
 ## 8. 最佳实践总结
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 所有权设计原则
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **每个连接一个所有者** - 使用Arc<RwLock<>>共享
@@ -620,6 +644,7 @@ pub async fn batch_process(
 4. **缓冲区复用** - 对象池减少分配
 
 ### 8.2 并发模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Tokio多线程** - 工作窃取调度
@@ -628,6 +653,7 @@ pub async fn batch_process(
 4. **背压控制** - 防止内存爆炸
 
 ### 8.3 内存策略
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **预分配** - Vec::with_capacity
@@ -638,6 +664,7 @@ pub async fn batch_process(
 ---
 
 ## 结论
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust的所有权模型使得构建高性能Web服务器既安全又高效：
@@ -839,4 +866,3 @@ Rust的所有权模型使得构建高性能Web服务器既安全又高效：
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

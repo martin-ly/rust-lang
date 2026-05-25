@@ -67,6 +67,7 @@
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -157,6 +158,7 @@ m 在运行时才确定
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 BPMN 表示
@@ -210,6 +212,7 @@ m 在运行时才确定
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 CCS 表示
@@ -257,9 +260,11 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -383,6 +388,7 @@ impl<T: Send + 'static> CounterBasedANDJoin<T> {
 ```
 
 ### 5.2 带错误处理的高级实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -502,6 +508,7 @@ impl<T: Send + Clone + 'static> ResilientGeneralisedANDJoin<T> {
 ```
 
 ### 5.3 动态工作流完整示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -591,9 +598,11 @@ async fn aggregate_results(results: &HashMap<BranchId, TaskResult>) {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 活性 (Liveness)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理**: 若动态发现的所有分支最终完成，则广义AND合并最终会触发。
@@ -615,6 +624,7 @@ async fn aggregate_results(results: &HashMap<BranchId, TaskResult>) {
 **结论**: 广义AND合并满足活性。
 
 ### 6.2 安全性 (Safety)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理**: 只有动态发现集合中的分支才需要完成才能触发合并。
@@ -630,6 +640,7 @@ $$
 执行器只等待 $\text{Required}$ 中分支完成，外部分支不影响合并。
 
 ### 6.3 正确性条件
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **完备性**: 所有动态发现的分支完成后才触发。
@@ -641,9 +652,11 @@ $$
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 7.1 模式层次
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -659,6 +672,7 @@ Merge Patterns
 ```
 
 ### 7.2 形式化关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 $$
@@ -674,6 +688,7 @@ $$
 其中 $S = \{B_1, ..., B_n\}$ 在编译时确定。
 
 ### 7.3 与分割模式的配合
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 分割模式 | 推荐合并模式 | 说明 |
@@ -685,9 +700,11 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 动态工作流引擎
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **场景**: BPMN引擎中动态创建子流程
@@ -701,6 +718,7 @@ workflow:
 ```
 
 ### 8.2 自适应数据处理管道
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **场景**: 根据数据特征动态选择处理步骤
@@ -714,6 +732,7 @@ pipeline:
 ```
 
 ### 8.3 插件化任务系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **场景**: 根据可用插件动态创建执行分支
@@ -729,9 +748,11 @@ plugins:
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 带超时的广义AND合并
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -743,6 +764,7 @@ struct TimeoutGeneralisedANDJoin<T> {
 ```
 
 ### 9.2 加权广义AND合并
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 不同分支有不同权重要求：
@@ -755,6 +777,7 @@ struct WeightedGenANDJoin<T> {
 ```
 
 ### 9.3 层次化广义AND合并
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 分支本身可以是动态合并：
@@ -772,6 +795,7 @@ GenANDJoin
 ---
 
 ## 10. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 广义AND合并模式提供了灵活的动态同步机制，允许在运行时确定需要合并的分支集合。其核心优势包括：
@@ -786,6 +810,7 @@ GenANDJoin
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". Distributed and Parallel Databases.
@@ -1026,4 +1051,3 @@ GenANDJoin
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

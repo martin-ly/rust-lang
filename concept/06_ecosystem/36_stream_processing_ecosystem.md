@@ -48,8 +48,6 @@ Rust Stream Processing Ecosystem
 
 ## 二、timely-dataflow：Rust 的分布式数据流引擎
 
-> **[来源: Murray et al. — Naiad, SOSP 2013]** · **[来源: Timely Dataflow GitHub]** ✅
-
 ### 2.1 核心设计
 
 timely-dataflow（TD）是 Microsoft Research Naiad 系统的 Rust 重新实现。其核心设计包括：
@@ -80,8 +78,6 @@ fn main() {
 ---
 
 ## 三、differential-dataflow：增量计算的 diff 代数
-
-> **[来源: McSherry et al. — Differential Dataflow, CIDR 2013]** · **[来源: Differential Dataflow GitHub]** ✅
 
 ### 3.1 核心抽象
 
@@ -185,8 +181,6 @@ Fluvio 是一个用 Rust 从头构建的分布式流处理平台，定位为 Kaf
 ---
 
 ## 六、Materialize：流式 SQL 数据库
-
-> **[来源: Materialize Documentation](https://materialize.com/docs/)** · **[来源: SE-Radio Episode 504 — Frank McSherry]** ✅
 
 ### 6.1 架构三层
 

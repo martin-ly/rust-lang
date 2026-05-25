@@ -102,6 +102,7 @@ Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Se
 ---
 
 ## 2. 自引用问题背景
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 什么是自引用结构体
@@ -212,6 +213,7 @@ impl<'a> Document<'a> {
 ---
 
 ## 3. 宏工作原理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 self_referencing宏生成分析
@@ -324,6 +326,7 @@ impl DataWithSlice {
 ---
 
 ## 4. 借用投影机制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 with_*方法设计原理
@@ -432,6 +435,7 @@ struct DataWithSlice {
 ---
 
 ## 5. Pin保证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 !Unpin实现机制
@@ -502,6 +506,7 @@ pub struct DataWithSlice {
 ---
 
 ## 6. 生命周期处理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 'this生命周期参数
@@ -587,6 +592,7 @@ struct ComplexDoc<'a, T> {
 ---
 
 ## 7. 高级特性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 or_shared变体
@@ -698,6 +704,7 @@ impl TreeNode {
 ---
 
 ## 8. 性能考虑
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 堆分配策略
@@ -769,6 +776,7 @@ data.with_slice(|s| s.len())
 ---
 
 ## 9. 实际应用案例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 解析器实现
@@ -812,6 +820,7 @@ fn main() {
 ```
 
 ### 9.2 缓存设计
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 实现带索引的缓存结构：
@@ -857,6 +866,7 @@ impl IndexedCache {
 ```
 
 ### 9.3 树结构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 实现父子双向引用的树：
@@ -906,9 +916,11 @@ impl Tree {
 ---
 
 ## 10. 与Pin-project对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 10.1 使用场景差异
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | Ouroboros | pin-project |
@@ -920,6 +932,7 @@ impl Tree {
 | **适用场景** | 复杂自引用数据 | Future 和流式处理 |
 
 ### 10.2 选型建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **选择 Ouroboros 当**:
@@ -937,6 +950,7 @@ impl Tree {
 - 与 async/await 深度集成
 
 ### 10.3 互操作性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 两者可以协同使用：
@@ -980,9 +994,11 @@ impl Future for DataProcessor {
 ---
 
 ## 11. 完整代码示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 11.1 基本自引用模式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -1009,6 +1025,7 @@ fn main() {
 ```
 
 ### 11.2 多字段相互引用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -1065,6 +1082,7 @@ impl DocumentStore {
 ```
 
 ### 11.3 复杂数据结构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -1144,9 +1162,11 @@ fn demo() {
 ---
 
 ## 12. 形式化定理汇总
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 2.1 (宏生成安全性)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **`#[self_referencing]` 宏生成的代码在构造期保证所有自引用字段的有效性。**
@@ -1161,6 +1181,7 @@ fn demo() {
 ∎
 
 ### 定理 3.1 (投影函数安全性)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **`with_*` 方法提供的闭包 API 保证自引用访问期间不会出现悬垂引用。**
@@ -1175,6 +1196,7 @@ fn demo() {
 ∎
 
 ### 定理 4.1 (不可移动不变式)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **Ouroboros 生成的类型实现 `!Unpin`，确保实例的内存地址在其生命周期内保持不变。**
@@ -1189,6 +1211,7 @@ fn demo() {
 ∎
 
 ### 定理 6.1 (生命周期完备性)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **`'this` 生命周期参数正确表达了自引用字段与结构体实例之间的生命周期依赖关系。**
@@ -1203,6 +1226,7 @@ fn demo() {
 ∎
 
 ### 定理 8.1 (零成本抽象)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **在优化编译下，Ouroboros 的自引用访问不产生运行时开销。**
@@ -1219,6 +1243,7 @@ fn demo() {
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. [Ouroboros Documentation](https://docs.rs/ouroboros)
@@ -1582,4 +1607,3 @@ fn demo() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

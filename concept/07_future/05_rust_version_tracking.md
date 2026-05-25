@@ -13,9 +13,7 @@
 >
 ## 〇、形式模型演进认知入口
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Release Notes]]
 
 ```mermaid
 mindmap
@@ -49,7 +47,6 @@ mindmap
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > **使用建议**: 作为目录式入口按需展开；内存安全研究者优先关注"所有权与别名模型"，类型系统研究者优先关注"类型系统扩展"。
->
 > **关键洞察**: `&raw`、`use<..>`、`unsafe_op_in_unsafe_fn` 分别代表别名模型、存在类型、安全契约三个核心方向的契约化演进。 [来源: 💡 原创分析]
 
 > **认知路径**: 本 mindmap 将 1.79–1.97+ 的演进按**五维形式模型**组织。读者可按自身关注领域选择入口：内存安全研究者从"所有权与别名模型"进入，类型系统研究者从"类型系统扩展"进入，系统编程工程师从"Unsafe 边界精细化"进入。每个叶节点的后缀标注版本号，便于快速定位稳定状态。
@@ -57,10 +54,6 @@ mindmap
 ---
 
 ## 一、演进总览：五个形式模型维度
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Release Notes]]
 
 ```mermaid
 graph TD
@@ -95,23 +88,15 @@ graph TD
 ```
 
 > **认知功能**: 此 graph 将五维演进转化为**层级树状结构**，清晰展示特性归属与维度边界，建立"特性→维度→版本"的三级索引。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
 > **使用建议**: 对照后续各维度详细章节使用，快速定位特定版本的形式模型变更归属。
->
 > **关键洞察**: "编译期计算能力"正在渗透其他维度（如 `const` in asm 影响 Unsafe 边界），预示 Rust 形式模型向统一化演进。 [来源: 💡 原创分析]
 
 ---
 
 ## 二、维度一：所有权与别名模型
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Release Notes]]
 
 ### 2.1 `&raw const` / `&raw mut`（1.82 stable，RFC 2582）
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **语法**: `&raw const expr` / `&raw mut expr` → `*const T` / `*mut T`
 
@@ -130,7 +115,6 @@ graph TD
 
 ### 2.2 `if let` guards in match arms（1.95 stable）
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **语法**: `pattern if let Some(x) = expr => { ... }`
 
@@ -148,7 +132,6 @@ graph TD
 
 ### 2.3 `let chains`（1.88 stable in 2024 Edition，RFC 2497）
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **语法**: `if let Some(x) = foo && let Some(y) = bar && x > y { ... }`
 
@@ -166,7 +149,6 @@ graph TD
 
 ### 2.4 集合 API 的借用模型创新（1.85–1.95）
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | API | 版本 | 形式化意义 |
 |:---|:---|:---|
@@ -181,14 +163,9 @@ graph TD
 ---
 
 ## 三、维度二：类型系统扩展
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Release Notes]]
 
 ### 3.1 `+ use<'lt>` precise capturing（1.82 stable，RFC 3617）
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **语法**: `fn f() -> impl Trait + use<'a>`
 
@@ -208,7 +185,6 @@ graph TD
 
 ### 3.2 Trait object upcasting（1.86 stable）
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **语法**: `dyn SubTrait` → `dyn SuperTrait`（隐式强制转换）
 
@@ -226,7 +202,6 @@ graph TD
 
 ### 3.3 `_` 推断 const generics 参数（1.89 stable）
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 **语法**: `let x: Foo<_> = ...`（`_` 可由编译器推断为 const 参数）
 
@@ -243,7 +218,6 @@ graph TD
 
 ### 3.4 Bounds on associated types in bounds（1.79 stable）
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 **语法**: `trait CopyIterator: Iterator<Item: Copy> {}`
 
@@ -256,14 +230,8 @@ graph TD
 ---
 
 ## 四、维度三：异步与效果系统
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Release Notes]]
 
 ### 4.1 Async closures（1.85 stable，RFC 3668）
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **语法**: `async |x| { x.await }`
 
@@ -290,8 +258,6 @@ graph TD
 ---
 
 ### 4.2 Rust 2024 Edition：RPIT lifetime capture 默认行为变更
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **形式化意义**: 2024 Edition 的最核心 breaking change。`impl Trait` 返回类型现在**默认捕获所有输入生命周期**，此前不捕获。
 
@@ -307,8 +273,6 @@ graph TD
 ---
 
 ### 4.3 `gen` blocks（1.95 nightly，tracking）
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **语法**: `gen move { yield expr; }` → `impl Iterator<Item = T>`
 
@@ -326,11 +290,8 @@ graph TD
 
 ## 五、维度四：Unsafe 边界精细化
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 `unsafe extern` blocks + `safe` 关键字（1.82 stable，RFC 3484）
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **语法**:
 
@@ -353,8 +314,6 @@ unsafe extern "C" {
 ---
 
 ### 5.2 `naked_functions`（1.88 stable）
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **语法**: `#[naked] fn f() { asm!(...); }`
 
@@ -370,8 +329,6 @@ unsafe extern "C" {
 ---
 
 ### 5.3 `unsafe_op_in_unsafe_fn`（2024 Edition 默认行为）
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **形式化意义**: **调用者权限与实现者权限的分离**。在 2021 Edition 及之前，`unsafe fn` 的函数体隐式是 unsafe 的。2024 Edition 要求 `unsafe fn` 体内的 unsafe 操作仍需显式包裹在 `unsafe {}` 块中。
 
@@ -387,8 +344,6 @@ unsafe extern "C" {
 ---
 
 ### 5.4 `as_ref_unchecked` / `as_mut_unchecked`（1.95 stable）
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 **语法**: `ptr.as_ref_unchecked()` → `&T`
 
@@ -404,12 +359,8 @@ unsafe extern "C" {
 ---
 
 ## 六、维度五：编译期计算能力
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 Inline const blocks（1.79 stable）
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 **语法**: `[u8; const { 4 + 4 }]` / `let x = const { std::mem::size_of::<u64>() };`
 
@@ -423,8 +374,6 @@ unsafe extern "C" {
 ---
 
 ### 6.2 Const in inline assembly（1.82/1.87 stable）
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 1.82: `const` immediates in inline assembly
 - 1.87: jumps to Rust code from inline assembly
@@ -434,8 +383,6 @@ unsafe extern "C" {
 ---
 
 ### 6.3 `core::hint::cold_path`（1.95 stable）
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **语法**: `core::hint::cold_path()`
 
@@ -447,9 +394,7 @@ unsafe extern "C" {
 
 ## 七、版本对比矩阵（形式模型视角）
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 形式模型维度 | 1.79 | 1.82 | 1.85 | 1.88 | 1.95 | 前沿（nightly）|
 |:---|:---|:---|:---|:---|:---|:---|
@@ -462,8 +407,6 @@ unsafe extern "C" {
 ---
 
 ## 七、版本演进时间线
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 timeline
@@ -486,43 +429,34 @@ timeline
 ```
 
 > **认知功能**: 此 timeline 将版本矩阵的**空间对比**转化为**时间演进**，揭示三个节奏：
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > 1. **稳定节奏**：每 6 周一个 stable release，小步快跑
 > 2. **Edition 节奏**：2024 Edition 是形式模型契约化的里程碑（RPIT capture、unsafe_op、let chains 三箭齐发）
 > 3. **前沿节奏**：nightly 实验（gen blocks、Effects、Safety Tags）到 stable 通常需要 1–3 年
->
 > 时间轴上的密度分布提示：2024 Q3–Q4 和 2025 Q1–Q2 是形式模型变更最密集的两个窗口，对应 Rust 2024 Edition 的发布周期。
 
 ---
 
 ## 八、形式化洞察：三个趋势
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 趋势 1：从隐式推断到显式契约
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 > `use<..>` precise capturing、2024 Edition RPIT 捕获规则、`unsafe_op_in_unsafe_fn` 都指向同一方向：Rust 类型系统从"编译器自动推断"向"程序员显式声明契约"演进。这使得形式化验证更容易（契约即规约），但增加了学习曲线。
 
 ### 趋势 2：效果系统（Effect System）的原型化
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 >
 > `AsyncFn` trait 家族、`gen` blocks、`const {}` blocks 都在向**显式效果追踪**靠拢。虽然 Rust 尚未引入正式的 `effect` 关键字，但类型系统已经在通过 trait 和 edition 机制实现效果的分层。
 
 ### 趋势 3：Unsafe 边界的模块化与内推
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
 > `unsafe extern` + `safe`、`unsafe_op_in_unsafe_fn`、`as_ref_unchecked` 表明 Unsafe 边界正在从"粗粒度块"向"细粒度函数/操作"演进。形式化验证工具（Kani/Verus）将因此获得更精确的验证目标。
 
 ---
 
 ## 九、待跟踪前沿（nightly / RFC 阶段）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 特性 | 状态 | 形式化意义 |
 |:---|:---|:---|
@@ -558,8 +492,6 @@ timeline
 > **1.96 Beta 已知变更**: `target.'cfg(..)'.rustdocflags` Cargo 配置支持；嵌套子命令 manpage 显示；`term.progress.term-integration` 支持 Ptyxis / iTerm 终端；`build-dir` 并发文件锁优化；依赖多位置支持 `git` + 替代 registry；`cargo-clean` 安全改进（防止误删非目标目录）；macOS 排除 iCloud Drive 同步；`-Zcargo-lints` 新增 `unused_dependencies` lint。
 
 ### 9.2 Rust 1.96 Beta 稳定化 API 详情
-
-> **[来源: Rust 1.96.0 beta release notes 2026-05-18; doc.rust-lang.org/beta/releases.html]**
 
 **标准库稳定化**:
 
@@ -639,9 +571,6 @@ timeline
 
 ## 十、1.97 Nightly 前瞻跟踪
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
-> **[来源: releases.rs 2026-05-18; rust-lang/rust GitHub]**
 
 **预计稳定日期**: 2026-07-09 (约 52 天后)
 
@@ -668,9 +597,6 @@ timeline
 
 ## 十二、Rust 1.96.0 Beta 跟踪（2026-05-28 预计稳定）
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
-> **[来源: GitHub rust-lang/rust #156512]** · **[来源: releases.rs]** · **[来源: Inside Rust Blog 2026-05-18]** ✅
 
 **已确定稳定的新特性**:
 
@@ -698,8 +624,6 @@ timeline
 ---
 
 ## 十一、长期演进跟踪表（P2 优先级）
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | 当前状态 | 预计稳定 | 项目覆盖 | 跟踪文件 |
 |:---|:---:|:---:|:---:|:---|
@@ -716,8 +640,6 @@ timeline
 ---
 
 ## 十一、变更日志
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 | 版本 | 日期 | 变更 |
 |:---|:---|:---|
@@ -738,7 +660,6 @@ timeline
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.8
@@ -750,27 +671,13 @@ timeline
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 > **补充来源**
-
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
-> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
-> [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
-> [来源: [crates.io](https://crates.io/)]
-> [来源: [docs.rs](https://docs.rs/)]
 
 > **相关文件**: [工具链](../06_ecosystem/01_toolchain.md) · [演进](../07_future/03_evolution.md) · [质量仪表板](../00_meta/quality_dashboard_v2.md)
 

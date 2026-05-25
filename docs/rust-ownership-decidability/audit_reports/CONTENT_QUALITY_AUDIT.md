@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust所有权与可判定性文档 - 内容质量审计报告](#rust所有权与可判定性文档---内容质量审计报告)
@@ -63,6 +64,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 形式化证明文档 (formal-proofs/)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文件 | 问题 | 严重程度 |
@@ -73,6 +75,7 @@
 | `separation-logic-soundness.md` | 需要检查是否存在 | ⚪ 待确认 |
 
 ### 2. 理论基础文档 (00-foundations/)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文件 | 问题 | 严重程度 |
@@ -83,6 +86,7 @@
 | `00-04-theory-connections.md` | 需要检查 | ⚪ 待确认 |
 
 ### 3. 形式模型文档 (02-formal-models/)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文件 | 问题 | 严重程度 |
@@ -94,6 +98,7 @@
 | `02-05-move-analysis.md` | 需要检查 | ⚪ 待确认 |
 
 ### 4. 可判定性分析 (04-decidability-analysis/)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文件 | 问题 | 严重程度 |
@@ -102,6 +107,7 @@
 | `04-02-borrow-checking.md` | 10705字节，需要完整性证明 | 🟡 中等 |
 
 ### 5. 案例研究 (case-studies/)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文件 | 问题 | 严重程度 |
@@ -114,6 +120,7 @@
 ---
 
 ## 改进优先级矩阵
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -132,9 +139,11 @@
 ---
 
 ## 必须解决的核心问题
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 1. 添加完整的形式化语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 需要为以下概念提供严格的数学定义：
@@ -159,6 +168,7 @@
   - Trait求解过程
 
 ### 2. 可判定性理论深度内容
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 当前文档缺少：
@@ -179,6 +189,7 @@
   - 与图可达性问题的归约
 
 ### 3. 机器检验证明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 参考标准：
@@ -196,9 +207,11 @@
 ---
 
 ## 建议的文档重写计划
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Phase 1: 核心形式化基础 (优先级: P0)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **重写 `formal-proofs/memory-safety-proof.md`**
@@ -217,6 +230,7 @@
    - 类型安全性定理
 
 ### Phase 2: 可判定性深度分析 (优先级: P1)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **重写 `04-decidability-analysis/04-01-type-inference.md`**
@@ -230,6 +244,7 @@
    - 区域推断的可判定性
 
 ### Phase 3: 案例研究形式化 (优先级: P2)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 将现有案例研究从"使用教程"提升为"形式化分析"：
@@ -241,6 +256,7 @@
 ---
 
 ## 成功标准
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **形式化内容占比** ≥ 60%
@@ -319,4 +335,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -11,7 +11,6 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust vs Elixir](#rust-vs-elixir)
   - [📑 目录](#-目录)
@@ -44,13 +43,10 @@
 
 ## 一、设计哲学对比
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 错误处理哲学
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 错误处理哲学对比:
@@ -116,7 +112,6 @@ fn main() {
 }
 ```
 
-> [来源: [Erlang/OTP](https://www.erlang.org/)]
 
 > **认知功能**: **Rust 和 Elixir 对错误的根本态度不同**——Rust 在编译期预防，Elixir 在运行时恢复。
 > [来源: [Elixir Error Handling](https://elixir-lang.org/getting-started/try-catch-and-rescue.html)]
@@ -125,7 +120,6 @@ fn main() {
 
 ### 1.2 并发模型对比
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 并发模型核心差异:
@@ -155,7 +149,6 @@ fn main() {
 > [来源: [Elixir Official]]
 ```
 
-> [来源: [Elixir Official](https://elixir-lang.org/)]
 
 > **并发洞察**: **Elixir 的轻量进程和消息传递适合超高并发场景**——Rust 则在共享状态并发上提供编译期安全。
 > [来源: [Erlang Processes](https://www.erlang.org/doc/reference_manual/processes.html)]
@@ -163,12 +156,9 @@ fn main() {
 ---
 
 ## 二、并发模型
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 BEAM 并发模型
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 BEAM (Erlang VM) 并发:
@@ -213,7 +203,6 @@ BEAM (Erlang VM) 并发:
 
 ### 2.2 Rust 并发模型
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 Rust 并发模型:
@@ -272,12 +261,9 @@ Rust 并发模型:
 ---
 
 ## 三、类型系统
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 静态 vs 动态
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 类型系统对比:
@@ -307,7 +293,6 @@ Rust 并发模型:
   └─────────────────┴─────────────────┴─────────────────┘
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
-> [来源: [Elixir Typespecs](https://hexdocs.pm/elixir/typespecs.html)]
 
   Elixir 类型规范:
 
@@ -324,7 +309,6 @@ Rust 并发模型:
 
 ### 3.2 模式匹配
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 模式匹配对比:
@@ -400,8 +384,6 @@ fn main() {
 ---
 
 ## 四、运行时与部署
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **来源**: [Elixir Mix Deploy](https://hexdocs.pm/mix/Mix.Tasks.Deploy.html) · [Rust Compilation](https://doc.rust-lang.org/cargo/guide/build-cache.html)
 
@@ -433,18 +415,14 @@ fn main() {
   │ 跨平台          │ 编译目标        │ VM 抽象         │
   │ 容器化          │ 优秀            │ 良好            │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [Elixir Official]]
 ```
 
 > **部署洞察**: **Rust 的零运行时适合静态部署，Elixir 的热更新适合长运行服务**。
 > [来源: [Elixir Deployment Guide](https://hexdocs.pm/mix/Mix.Tasks.Deploy.html)]
-> [来源: [Rust Deployment](https://doc.rust-lang.org/cargo/guide/build-cache.html)]
 
 ---
 
 ## 五、互操作
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **来源**: [Rustler GitHub](https://github.com/rusterlium/rustler)
 
@@ -472,7 +450,6 @@ Rust ↔ Elixir 互操作:
 
   rustler::init!("my_nif", [add]);
 
-> [来源: [Rustler NIF](https://github.com/rusterlium/rustler)]
 
   Elixir 端代码:
 
@@ -489,12 +466,9 @@ Rust ↔ Elixir 互操作:
 ---
 
 ## 六、反命题与适用场景
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -515,14 +489,11 @@ graph TD
 
 > **选择洞察**: **极致性能 + 编译期安全选 Rust，超高并发 + 热更新选 Elixir**。
 > [来源: [Rust Official](https://www.rust-lang.org/)]
-> [来源: [Rust vs Elixir](https://www.rust-lang.org/)]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ### 6.2 适用场景矩阵
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 适用场景:
@@ -553,8 +524,6 @@ graph TD
 ---
 
 ## 七、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **来源**: [Rust NIF Safety](https://www.erlang.org/doc/tutorial/nif.html)
 
@@ -597,13 +566,10 @@ graph TD
 
 > **陷阱总结**: Rust 与 Elixir 的陷阱主要与**错误处理哲学**、**并发模型**、**类型系统**和**运行时差异**相关。
 > [来源: [Rustler NIF Safety](https://www.erlang.org/doc/tutorial/nif.html)]
-> [来源: [Rustler NIF](https://github.com/rusterlium/rustler)]
 
 ---
 
 ## 八、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -618,10 +584,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust vs Go](02_rust_vs_go.md) — Rust vs Go
 - [Rust vs Haskell](03_paradigm_matrix.md) — Rust vs Haskell
@@ -643,168 +605,90 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十、边界测试：Rust 与 Elixir 的编译错误对比
 

@@ -145,6 +145,7 @@ $$
 ---
 
 ## 3. Serialize Trait 形式语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 序列化协议
@@ -209,6 +210,7 @@ $$
 由派生宏自动生成的实现，确保所有字段都被处理。∎
 
 ### 定理 3.2 (序列化一致性)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 同一值多次序列化产生相同结果(确定性)。
@@ -223,12 +225,15 @@ Serde提供 `collect_seq` 等辅助方法处理非确定性集合。∎
 ---
 
 ## 4. Deserialize Trait 形式语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 Visitor模式分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 4.1 (Visitor模式)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -261,6 +266,7 @@ $$
 - 两者都应产生目标类型的值
 
 ### 定理 4.1 (Visitor完备性)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > Visitor必须处理数据模型中的所有可能输入。
@@ -277,9 +283,11 @@ $$
 派生宏自动为所有相关方法生成默认实现(返回错误)，确保运行时不会遗漏。∎
 
 ### 4.2 生命周期管理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 4.2 (反序列化生命周期)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -298,6 +306,7 @@ $$
 $$
 
 ### 定理 4.2 (反序列化生命周期安全)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > Serde确保反序列化产生的引用不会比输入数据活得更长。
@@ -330,12 +339,15 @@ fn deserialize<'a>(data: &'a str) -> BorrowedData<'a> {
 ---
 
 ## 5. 派生宏的形式化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 代码生成正确性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 5.1 (派生宏展开)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -392,6 +404,7 @@ impl<'de> Deserialize<'de> for Point {
 ```
 
 ### 定理 5.1 (派生宏正确性)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > `#[derive(Serialize)]` 和 `#[derive(Deserialize)]` 生成的实现保持类型语义。
@@ -413,9 +426,11 @@ impl<'de> Deserialize<'de> for Point {
 由派生宏的代码生成逻辑，这些性质得到保证。∎
 
 ### 5.2 零成本抽象证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 5.2 (零成本抽象)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > Serde派生宏生成的代码与手写优化的代码性能相同。
@@ -453,12 +468,15 @@ serializer.serialize_i32(self.x)?;  // 直接内联为格式特定的写操作
 ---
 
 ## 6. 零拷贝反序列化
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 BorrowedStr与生命周期
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 6.1 (零拷贝反序列化)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -476,6 +494,7 @@ $$
 $$
 
 ### 定理 6.1 (零拷贝安全性)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > 零拷贝反序列化不会复制数据，但保证引用有效性。
@@ -515,9 +534,11 @@ impl<'de: 'a, 'a> Deserialize<'de> for &'a str {
 由Rust生命周期系统，`msg.content` 不能比 `json` 活得更长。∎
 
 ### 6.2 内存安全保证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 6.2 (反序列化内存安全)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > Serde反序列化不会导致内存不安全。
@@ -534,9 +555,11 @@ impl<'de: 'a, 'a> Deserialize<'de> for &'a str {
 ---
 
 ## 7. 复杂度分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 时间复杂度
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 操作 | 时间复杂度 | 说明 |
@@ -549,6 +572,7 @@ impl<'de: 'a, 'a> Deserialize<'de> for &'a str {
 | 反序列化String | $O(n)$ | 需要UTF-8验证 |
 
 ### 7.2 空间复杂度
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 场景 | 空间复杂度 | 说明 |
@@ -560,9 +584,11 @@ impl<'de: 'a, 'a> Deserialize<'de> for &'a str {
 ---
 
 ## 8. 反例与限制
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 反例 8.1 (循环结构)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -578,6 +604,7 @@ struct Node {
 **解决**: 使用 `Rc::try_unwrap` 或使用 `serde_rc` crate。
 
 ### 反例 8.2 (非确定性反序列化)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -589,6 +616,7 @@ let v: Value = serde_json::from_str(json)?;
 **问题**: JSON标准允许重复键，行为未定义。
 
 ### 限制 8.3 (泛型递归)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -604,6 +632,7 @@ struct Recursive {
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Serde Contributors.** (2024). *Serde Documentation*. <https://serde.rs/>
@@ -785,4 +814,3 @@ struct Recursive {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

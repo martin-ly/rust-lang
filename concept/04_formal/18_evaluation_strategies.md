@@ -22,7 +22,6 @@
 
 ### 2.1 严格 vs 非严格求值
 
-> **[来源: Harper PFPL, Part III — Dynamic Typing]** ✅
 
 | 策略类别 | 核心特征 | 典型语言 |
 |:---|:---|:---|
@@ -44,7 +43,6 @@ fn strict_example() {
 
 ### 2.2 四种核心求值策略
 
-> **[来源: Pierce TAPL, §11] · [Wadler 1984]** ✅
 
 ```text
 Call-by-Value (CBV)     → 参数求值后再传递（值拷贝/移动）
@@ -68,7 +66,6 @@ Call-by-Reference (CBR) → 传递参数的地址/引用
 
 ### 3.1 默认策略：Call-by-Value + 严格求值
 
-> **[来源: Rust Reference — §6.2.13 Evaluation order]** ✅
 
 Rust 默认采用**严格 Call-by-Value**：函数参数在调用前求值，然后以值的形式传递。
 
@@ -132,7 +129,6 @@ fn main() {
 
 ### 3.3 短路求值：非严格性的局部表达
 
-> **[来源: Rust Reference — §8.2.4 Logical operators]** ✅
 
 Rust 的 `&&` 和 `||` 运算符采用**短路求值**（short-circuit evaluation），这是非严格求值的局部表达：
 
@@ -191,7 +187,6 @@ let fut = async { println!("lazy"); }; // 未执行
 
 ### 4.1 三种归约策略
 
-> **[来源: Barendregt — The Lambda Calculus, §11] · [Pierce TAPL, §5.1]** ✅
 
 在 λ 演算中，归约策略决定"先归约哪个 redex"：
 
@@ -212,7 +207,6 @@ let fut = async { println!("lazy"); }; // 未执行
 
 ### 4.2 Rust 的求值顺序
 
-> **[来源: Rust Reference — §6.2.13]** ✅
 
 Rust 明确规定了表达式的求值顺序：
 
@@ -240,7 +234,6 @@ Rust 明确规定了表达式的求值顺序：
 
 ### 5.1 严格性 vs 类型系统表达能力
 
-> **[来源: Harper PFPL, §22] · [Moggi 1989 — Computational Lambda-Calculus and Monads]** ✅
 
 | 语言 | 求值策略 | 类型系统特征 |
 |:---|:---|:---|
@@ -262,7 +255,6 @@ fn mutate(x: &mut i32) {
 ```
 
 > **形式化命题** [Tier 2]: Rust 的 `&mut T` 在类型系统中编码了**局部可变性效果**（local mutation effect），等价于将 CBR 的可变性限制在线性逻辑框架内。
->
 > **证明草图**: `&mut T` 满足线性逻辑的 `⊗`（张量积）规则：创建 `&mut T` 消耗 `T` 的所有权，归还 `&mut T` 恢复 `T` 的所有权。在此区间内，存储被独占修改，无别名干扰。[来源: RustBelt POPL 2018, §4]
 
 ---
@@ -360,7 +352,6 @@ fn linear_move() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Harper PFPL](https://www.cs.cmu.edu/~rwh/pfpl/) · [Barendregt — The Lambda Calculus](https://www.amazon.com/Lambda-Calculus-Its-Syntax-Studies/dp/0444875085) · [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
->
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24

@@ -48,6 +48,7 @@ FFI绑定工具:
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (类型映射)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | C类型 | Rust类型 |

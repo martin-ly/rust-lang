@@ -56,6 +56,7 @@ wasm-bindgen功能：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 TYPEMAP-1 ( 基本类型 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | Rust | JavaScript | 传递方式 |
@@ -68,6 +69,7 @@ wasm-bindgen功能：
 | JsValue | any | 引用 |
 
 ### 定义 TYPEMAP-2 ( 复杂类型 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -82,9 +84,11 @@ $$
 ---
 
 ## 3. 内存管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 MEM-1 ( wasm内存模型 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 $$
@@ -92,6 +96,7 @@ $$
 $$
 
 ### 定义 MEM-2 ( 所有权转移 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -103,6 +108,7 @@ impl Point {
 ```
 
 ### 定理 MEM-T1 ( 无泄漏 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 导出类型正确drop。
@@ -114,9 +120,11 @@ $$
 ---
 
 ## 4. 导出函数
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 EXPORT-1 ( 导出语法 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -329,4 +337,3 @@ pub async fn fetch_json(url: String) -> Result<JsValue, JsValue> {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

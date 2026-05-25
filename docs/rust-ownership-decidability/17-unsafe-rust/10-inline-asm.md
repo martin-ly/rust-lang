@@ -56,6 +56,7 @@ unsafe {
 ```
 
 ### 1.2 完整结构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -74,9 +75,11 @@ unsafe {
 ---
 
 ## 2. 操作数类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 寄存器约束
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -94,6 +97,7 @@ assert_eq!(x, 10);
 ```
 
 ### 2.2 具体寄存器
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -108,6 +112,7 @@ unsafe {
 ```
 
 ### 2.3 内存操作数
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -126,9 +131,11 @@ assert_eq!(arr[1], 12);
 ---
 
 ## 3. 输入输出
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 简单输入输出
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -149,6 +156,7 @@ fn add(a: u64, b: u64) -> u64 {
 ```
 
 ### 3.2 读写同一变量
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -167,6 +175,7 @@ fn multiply_by_2(x: u64) -> u64 {
 ```
 
 ### 3.3 多个输出
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -190,9 +199,11 @@ fn div_rem(dividend: u64, divisor: u64) -> (u64, u64) {
 ---
 
 ## 4. 实战示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 获取 CPU ID
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -222,6 +233,7 @@ fn main() {
 ```
 
 ### 4.2 RDTSC (读取时间戳计数器)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -253,6 +265,7 @@ where
 ```
 
 ### 4.3 原子操作实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -275,9 +288,11 @@ fn atomic_add(ptr: *mut u64, val: u64) -> u64 {
 ---
 
 ## 5. 注意事项
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 安全注意事项
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -301,6 +316,7 @@ fn safe_asm_op(arr: &mut [u64], index: usize) {
 ```
 
 ### 5.2 平台差异
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -322,6 +338,7 @@ fn arch_specific() {
 ```
 
 ### 5.3 选项说明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -341,6 +358,7 @@ unsafe {
 ---
 
 ## 参考
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [The Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)
@@ -441,4 +459,3 @@ unsafe {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -59,6 +59,7 @@ Tower特点：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 SERVICE-1 ( 核心trait )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -79,6 +80,7 @@ $$
 $$
 
 ### 定义 SERVICE-2 ( 就绪检查 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 $$
@@ -86,6 +88,7 @@ $$
 $$
 
 ### 定理 SERVICE-T1 ( 就绪前置条件 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 服务就绪后才能调用。
@@ -97,9 +100,11 @@ $$
 ---
 
 ## 3. Layer系统
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 LAYER-1 ( Layer trait )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -110,6 +115,7 @@ trait Layer<S> {
 ```
 
 ### 定义 LAYER-2 ( 组合 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -127,9 +133,11 @@ $$
 ---
 
 ## 4. 组合模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 COMPOSE-1 ( AndThen )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -137,6 +145,7 @@ service.and_then(|response| async { /* process */ })
 ```
 
 ### 定义 COMPOSE-2 ( 映射 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -147,9 +156,11 @@ service.map_request(|req| transform(req))
 ---
 
 ## 5. 背压处理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定义 BACKPRESSURE-1 ( 限流 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -161,6 +172,7 @@ $$
 $$
 
 ### 定义 BACKPRESSURE-2 ( 并发控制 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -174,9 +186,11 @@ $$
 ---
 
 ## 6. 超时与重试
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定义 TIMEOUT-1 ( 超时层 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -188,6 +202,7 @@ $$
 $$
 
 ### 定义 RETRY-1 ( 重试策略 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -201,9 +216,11 @@ $$
 ---
 
 ## 7. 定理与证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定理 TOWER-T1 ( 组合封闭性 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 服务组合仍为服务。
@@ -213,6 +230,7 @@ $$
 $$
 
 ### 定理 TOWER-T2 ( 背压传播 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 背压在服务链中传播。
@@ -224,6 +242,7 @@ $$
 ---
 
 ## 8. 代码示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 示例1: 完整服务栈
@@ -409,4 +428,3 @@ where
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

@@ -26,7 +26,6 @@
 
 ## 📑 目录
 >
-> [来源: [TRPL — Error Handling]]
 
 - [Error Handling（错误处理）](#error-handling错误处理)
   - [📑 目录](#-目录)
@@ -119,18 +118,14 @@
     - [10.5 边界测试：`?` 运算符与 `From` 转换的失败（编译错误）](#105-边界测试-运算符与-from-转换的失败编译错误)
 
 ## 一、权威定义（Definition）
->
-> [来源: [TRPL — Error Handling]]
 
 ### 1.1 Wikipedia 对齐定义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: Exception handling]** Exception handling is the process of responding to the occurrence of exceptions – anomalous or exceptional conditions requiring special processing – during the execution of a program. Rust does not use exceptions; instead, it uses the algebraic data types `Option<T>` and `Result<T, E>` for error handling, with the `?` operator for ergonomic propagation.
 
 ### 1.2 TRPL 官方定义
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[TRPL: Ch9.0]** Rust groups errors into two major categories: recoverable and unrecoverable errors. For a recoverable error, we most likely want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, and we want to immediately stop the program.
 
@@ -138,7 +133,6 @@
 
 ### 1.3 形式化定义
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[Haskell: Either Monad] · [类型论: Monad 定律]** Option/Result 对应单子中的 Maybe 和 Either。 ✅ 已验证
 
@@ -164,12 +158,9 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
->
-> [来源: [TRPL — Error Handling]]
 
 ### 2.1 错误处理机制矩阵
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **机制** | **类型** | **可恢复** | **栈展开** | **使用场景** |
 |:---|:---|:---|:---|:---|
@@ -182,7 +173,6 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 
 ### 2.2 Rust vs 其他语言错误处理对比
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | **维度** | **Rust (Result)** | **Go (error value)** | **Java (Exception)** | **Haskell (Either)** | **C (errno)** |
 |:---|:---|:---|:---|:---|:---|
@@ -195,7 +185,6 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 
 ### 2.3 `Result` 组合子矩阵
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | **方法** | **签名** | **语义** | **类比** |
 |:---|:---|:---|:---|
@@ -211,8 +200,6 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 ---
 
 ## 三、思维导图（Mind Map）
->
-> [来源: [TRPL — Error Handling]]
 
 ```mermaid
 graph TD
@@ -249,12 +236,9 @@ graph TD
 ---
 
 ## 四、定理推理链（Theorem Chain）
->
-> [来源: [TRPL — Error Handling]]
 
 ### 4.1 引理：Result<T,E> ⟹ 和类型强制错误处理
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 > **[TRPL: Ch9] · [Rust Reference: Enums]** Result<T, E> 作为和类型（sum type），编译器通过穷尽性检查强制处理所有分支。 ✅ 已验证
 
@@ -273,7 +257,6 @@ graph TD
 
 ### 4.2 定理：? 运算符 ⟹ 错误传播自动化
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[TRPL: Ch9.2] · [Rust Reference: The ? operator]** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
 
@@ -294,8 +277,6 @@ graph TD
 ```
 
 ### 4.3 推论：panic ⟹ 不可恢复错误的显式边界
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[TRPL: Ch9] · [Rust Reference: panic]** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
 
@@ -316,8 +297,6 @@ graph TD
 ```
 
 ### 4.4 类型安全错误处理
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[Rust Reference: Enums] · [TRPL: Ch9]** Result 的错误类型在编译期确定，match 穷尽性检查保证处理完备性。 ✅ 已验证
 
@@ -332,8 +311,6 @@ graph TD
 ```
 
 ### 4.5 定理一致性矩阵
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[原创分析] · [TRPL: Ch9] · [Rust Reference: The ? operator]** 错误处理定理矩阵基于和类型、Monad bind 和 Rust 编译器检查。 💡 原创分析
 
@@ -357,12 +334,8 @@ graph TD
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
->
-> [来源: [TRPL — Error Handling]]
 
 ### 5.1 正确示例：`?` 运算符链式传播
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // ✅ 正确: ? 运算符使错误传播简洁
@@ -385,8 +358,6 @@ fn read_username() -> Result<String, io::Error> {
 ```
 
 ### 5.2 正确示例：自定义错误类型
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // ✅ 正确: thiserror 风格自定义错误
@@ -428,8 +399,6 @@ fn load_config() -> Result<i32, AppError> {
 ```
 
 ### 5.3 反例：`?` 在错误返回类型中不匹配
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
 // ❌ 反例: ? 的错误类型无法自动转换
@@ -463,8 +432,6 @@ fn parse_or_zero(s: &str) -> Result<i32> {
 ```
 
 ### 5.4 反例：忽略 Result 导致 bug
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // ❌ 反例: 忽略 Result 返回值
@@ -489,8 +456,6 @@ fn main() {
 ```
 
 ### 5.5 边界示例：`Option` 与 `Result` 互转
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 // ✅ 边界: Option 与 Result 的优雅互转
@@ -514,8 +479,6 @@ fn maybe_port() -> Option<u16> {
 ---
 
 ### 5.5 补充：异步错误处理与 `poll_fn` / `TryFuture` 模式
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[RFC 243]** · **[futures-rs 文档]** · **[Rust Reference: Async]** 异步错误处理不是同步 `Result` 的简单平移——`Future` 的惰性求值、取消（cancellation）和 `Waker` 驱动模型引入了新的错误传播边界。✅
 
@@ -586,14 +549,11 @@ let result = select! {
 ```
 
 > **关键洞察**: 异步错误处理有**两个维度**：1) `Result` 维度的业务错误（IO 失败、解析错误）；2) **取消维度**的生命周期错误（Future 被 `select!` 丢弃时资源未清理）。`Drop` 实现负责后者，`?` 运算符负责前者，但两者在 `unsafe` 或 FFI 边界处可能交互产生 UB。
->
 > **来源**: [Tokio 文档: Cancellation Safety] · [RFC 243: ? in main] · [futures-rs: TryFutureExt]
 
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
->
-> [来源: [TRPL — Error Handling]]
 
 > **[TRPL: Ch9] · [Rust API Guidelines] · [RFC 243]** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
 
@@ -629,13 +589,10 @@ graph TD
 ```
 
 > **认知功能**: 交互式策略选择器——将"当前函数应如何返回"这一工程决策转化为可遍历的条件判断流程。读者遇到"函数可能失败"的场景时，可沿决策节点逐层下行，最终到达对应 Rust 惯用法（Result/panic/Option）的叶子节点。核心洞察：颜色编码（绿=推荐，红=避免）将 Rust API Guidelines 的规范性建议转化为视觉即时判断。[来源: 💡 原创分析]
-> [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
 > **思维表征说明**: 此 `graph TD` 决策树将错误处理的**策略选择**形式化为可遍历的判断流程——从「是否可能失败」开始，经过「失败类型」「调用方处理方式」等决策节点，最终到达叶子节点的具体 Rust 惯用法。与 ASCII 决策树相比，Mermaid 图的优势在于**可视化层次结构**和**颜色编码**（绿色=推荐，黄色=谨慎，红色=避免），帮助读者快速定位当前场景的正确策略。 [来源: TRPL §9; Rust API Guidelines; RFC 243]
 
 ### 6.1 反命题 1: "Result 消除了所有错误"
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 运行时层 — Result 消除了静默错误忽略，但 unwrap 和 panic 仍是错误爆发的通道。
 
@@ -659,7 +616,6 @@ graph TD
 ```
 
 > **认知功能**: 反事实验证器——通过系统化枚举定理失效的精确路径，帮助读者建立"Result 的强制处理边界"。读者可沿分支逐一检验自己代码中是否存在 unwrap、let _ = result 或 unsafe 绕过等反模式。核心洞察：Result 的 `#[must_use]` 仅是弱强制；unwrap 和 unsafe 是类型系统安全性的两个主要逃逸通道。[来源: 💡 原创分析]
-> [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
 **四层分析**:
 
@@ -671,8 +627,6 @@ graph TD
 | 工程 | clippy 有 `unwrap_used` lint，anyhow/thiserror 是标准 | ✅ 可缓解 |
 
 ### 6.2 反命题 2: "? 运算符总是正确传播"
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > 编译期层 — ? 运算符有明确的类型约束，违反时编译失败。
 
@@ -698,7 +652,6 @@ graph TD
 ```
 
 > **认知功能**: 类型约束诊断图——将 ? 运算符的编译期类型检查逻辑可视化为决策节点。读者在遭遇 E0277 错误时，可对照此图定位是"返回类型不匹配"还是"From 实现缺失"。核心洞察：? 的"自动化"并非魔法，而是 monadic bind + From trait 的语法糖；闭包中的限制源于 return 目标函数的歧义。[来源: 💡 原创分析]
-> [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
 **四层分析**:
 
@@ -710,8 +663,6 @@ graph TD
 | 工程 | map_err 或 anyhow 是标准 workaround | ✅ 可解 |
 
 ### 6.3 反命题 3: "panic 只应在完全不可能时发生"
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > 工程层 — panic 的"不可恢复"定义在实践中存在灰色地带。
 
@@ -738,7 +689,6 @@ graph TD
 ```
 
 > **认知功能**: 工程伦理校准器——揭示 panic 与 Result 之间的灰色地带，帮助读者在"内部不变量违反""用户输入无效""外部资源不可用"等模糊场景中做出正确决策。核心洞察：panic 的使用边界不是"是否可能"，而是"调用者是否有意义地恢复"；库代码应优先返回 Result，将崩溃决策权交还调用方。[来源: 💡 原创分析]
-> [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
 **四层分析**:
 
@@ -750,8 +700,6 @@ graph TD
 | 工程 | 库代码应返回 Result，应用代码可酌情 panic | ✅ 有指导原则 |
 
 ### 6.4 反命题 4: "Option<T> 完全替代 null"
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > 语义层 — Option 替代了空指针，但 unwrap 重新引入了 null 解引用的等价风险。
 
@@ -775,7 +723,6 @@ graph TD
 ```
 
 > **认知功能**: 语义等价性检验器——澄清 Option 替代 null 的精确语义边界，揭示 unwrap 如何重新引入 null 解引用的等价风险。读者可用此图审查代码中 Option 的使用是否真正遵循类型安全路径。核心洞察：Option 在编译期替代了 null，但 unwrap 在运行期将"有定义的行为（panic）"重新暴露为崩溃风险；模式匹配和组合子才是安全替代。[来源: 💡 原创分析]
-> [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
 **四层分析**:
 
@@ -791,12 +738,8 @@ graph TD
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
->
-> [来源: [TRPL — Error Handling]]
 
 ### 7.1 测试 1: ? 运算符在闭包中的限制
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 use std::num::ParseIntError;
@@ -826,8 +769,6 @@ fn process(items: Vec<&str>) -> Result<i32, ParseIntError> {
 ```
 
 ### 7.2 测试 2: From 转换链的边界
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
 use std::fmt;
@@ -879,8 +820,6 @@ fn may_fail_anyhow() -> anyhow::Result<i32> {
 ```
 
 ### 7.3 测试 3: panic 边界与 catch_unwind
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 use std::panic;
@@ -901,8 +840,6 @@ fn test_catch_unwind() {
 ```
 
 ### 7.4 测试 4: Result 与 Option 的组合边界
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // 边界: Result<Option<T>, E> 与 Option<Result<T, E>> 的精确语义
@@ -946,14 +883,10 @@ fn nested_result_option() {
 ---
 
 ## 八、认知路径（Cognitive Path）
->
-> [来源: [TRPL — Error Handling]]
 
 > **[原创分析] · [TRPL: Ch9]** 认知路径从"如何处理错误"直觉到和类型 + Error Monad 形式化的渐进映射。 💡 原创分析
 
 ### Step 1: 直觉类比 — "快递包裹"
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **核心问题**: "Rust 没有异常，那错误怎么处理？"
 
@@ -968,8 +901,6 @@ fn nested_result_option() {
 ```
 
 ### Step 2: 语法熟悉 — Result/Option 与 match
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **核心问题**: "怎么写错误处理代码？match 太啰嗦怎么办？"
 
@@ -998,8 +929,6 @@ fn caller() -> Result<i32, String> {
 ```
 
 ### Step 3: 传播自动化 — ? 运算符与 From
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **核心问题**: "不同函数返回不同错误类型，怎么统一？"
 
@@ -1018,8 +947,6 @@ fn caller() -> Result<i32, String> {
 ```
 
 ### Step 4: 自定义错误 — thiserror 与 anyhow
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[crates.io: thiserror / anyhow]** `thiserror` is the standard choice for libraries that need structured error types, while `anyhow` is preferred in applications for ergonomic error propagation. ✅ 已验证
 
@@ -1040,8 +967,6 @@ fn caller() -> Result<i32, String> {
 ```
 
 ### Step 5: 边界认知 — panic 与不可恢复错误
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **核心问题**: "什么时候用 panic？什么时候用 Result？"
 
@@ -1056,8 +981,6 @@ fn caller() -> Result<i32, String> {
 ```
 
 ### Step 6: 形式化掌控 — Monad 与类型级错误处理
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 **核心问题**: "Result 在数学上是什么？为什么 ? 能自动传播？"
 
@@ -1080,8 +1003,6 @@ Monad 定律验证:
 ---
 
 ## 九、知识来源关系（Provenance）
->
-> [来源: [TRPL — Error Handling]]
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -1100,8 +1021,6 @@ Monad 定律验证:
 ---
 
 ### 9.1 补充：`Termination` trait 与 `main` 返回 `Result`
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[Rust Reference: Termination]** · **[RFC 1937]** Rust 程序入口 `main` 可以返回 `Result<T, E>` 或 `()`，这由 `Termination` trait 统一处理。该 trait 定义了程序退出时的**退出码转换规则**和**错误报告行为**。✅
 
@@ -1153,8 +1072,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 > **来源**: [Rust Reference: Termination] · [RFC 1937: const fn] · [TRPL: Ch12.6] · [Wikipedia: Exit status]
 
 ### 9.2 补充：`Result<T, !>` 与 `!` (never type) 在错误处理中的使用
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
 // ✅ Result<T, !> 表示"不可能失败"的操作
@@ -1176,15 +1093,11 @@ where
 ```
 
 > **关键洞察**: `Result<T, !>` 将"不可能出错"这一信息编码进类型系统。当泛型函数要求 `Result<T, E>` 时，传入 `Result<T, !>` 完全合法——因为 `!` 是任意类型的子类型，`Result<T, !>` 自然满足 `Result<T, E>` 的约束（当 `E` 接收 `!` 时）。这是子类型多态在错误处理中的优雅应用。
->
 > **来源**: [Rust Reference: Never type] · [RFC 1216: Never type] · [TAPL Ch.11: Bottom type]
 
 ### 9.3 `std::backtrace::Backtrace` 与错误追踪
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **Bloom 层级**: 应用 → 分析
->
 > **[Rust Standard Library: Backtrace]** · **[RFC 2504: Catch Unwind]** Rust 1.65 将 `std::backtrace::Backtrace` 纳入 stable，使得可恢复错误也能携带完整的调用栈上下文，填补了"错误发生点"与"错误报告点"之间的信息鸿沟。 ✅
 
 #### 9.3.1 基本获取与显示
@@ -1413,7 +1326,6 @@ graph TD
 ```
 
 > **认知功能**: 工程权衡决策器——在"完整调用链"与"精确源点"两个定位维度间提供结构化选择框架。读者可根据生产环境的性能约束和调试精度需求，快速确定使用 Backtrace、`#[track_caller]` 还是纯错误消息。核心洞察：定位精度与运行时开销呈正相关；大多数场景只需 `#[track_caller]` 的单点定位，Backtrace 应保留给故障审计。[来源: 💡 原创分析]
-> [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
 > **[来源: Rust Standard Library: panic::Location]** `panic::Location` 是 `const` 友好的轻量级定位机制，与 Backtrace 的运行时重定位形成鲜明对比。 ✅
 
@@ -1454,7 +1366,6 @@ fn parse_config_bad(path: &str) -> Result<Config, AppError> {
 ```
 
 > **[来源: Rust Standard Library: Backtrace]** `Backtrace` 采用惰性求值策略：构造时仅捕获原始帧指针，格式化时才解析符号。但即使如此，栈展开本身仍有不可忽略的开销。 ✅
->
 > **[来源: RFC 2504]** Backtrace 稳定化 RFC 明确要求"在默认情况下不产生开销"，因此 `capture()` 在环境变量未启用时返回 `disabled`。 ✅
 
 **跨层映射**: Backtrace 的运行时成本 ↔ [§9.3.6](#936-与-paniclocation-的对比) `Location` 的编译期零成本 ↔ [../04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) §3 "运行时与编译期保证的边界"
@@ -1462,11 +1373,8 @@ fn parse_config_bad(path: &str) -> Result<Config, AppError> {
 ---
 
 ### 9.4 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **Bloom 层级**: 应用 → 分析
->
 > **[来源: eyre docs] · [color-eyre docs] · [miette docs] · [snafu docs] · [Rust CLI Book] · [thiserror docs] · [anyhow docs]** Rust 错误处理生态在 `anyhow` / `thiserror` 之外，已形成多个专攻不同场景的库：`eyre` 强调可定制的报告格式，`color-eyre` 提供富媒体诊断输出，`miette` 专注于源码级诊断标注，`snafu` 则强制显式上下文附件。以下逐一分析其设计哲学、API 风格与适用边界。✅
 
 #### 9.4.1 `eyre`：可定制报告的错误处理
@@ -1502,7 +1410,6 @@ fn main() -> Result<()> {
 | 与 anyhow 互操作 | — | ✅ 提供兼容 re-export（`Context` → `WrapErr`） |
 
 > **[来源: eyre docs]** `eyre::Report` 要求底层错误实现 `Send + Sync + 'static`，并以窄指针（single word）表示，与 `anyhow::Error` 的内存布局一致。✅
->
 > **设计定理**：`eyre` 将"错误类型统一"（anyhow 哲学）与"报告格式可插拔"分离，使应用可以在不修改错误构造代码的前提下，通过更换 handler 实现从纯文本到 JSON/结构化日志的迁移。
 
 #### 9.4.2 `color-eyre`：彩色诊断与链式回溯
@@ -1710,20 +1617,15 @@ graph TD
 ```
 
 > **认知功能**: 生态选型导航器——将六库对比矩阵的高维信息降维为"库代码 vs 应用代码"首分叉的决策路径。读者在项目初始化或重构阶段，可沿此树在 3-4 步内确定最适合的错误处理策略。核心洞察：Rust 错误处理生态的核心张力是"静态结构化（thiserror/snafu）"与"动态统一（anyhow/eyre）"的权衡；miette 与 color-eyre 则是在诊断体验维度的垂直深化。[来源: 💡 原创分析]
-> [来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
 > **定理**：Rust 错误处理生态的分化反映了"**静态结构化**"（`thiserror`/`snafu`）与"**动态统一**"（`anyhow`/`eyre`）的两极张力，而 `miette` 与 `color-eyre` 分别在**诊断精度**与**报告体验**维度上做了垂直深化。库作者应选择静态类型以暴露契约；应用作者应选择动态类型以加速迭代；当错误面向终端用户时，`miette`/`color-eyre` 的诊断可视化能力不可替代。
->
 > **来源**: [eyre docs] · [color-eyre docs] · [miette docs] · [snafu docs] · [anyhow docs] · [thiserror docs] · [Rust CLI Book] · [GreptimeDB Blog]
 
 ---
 
 ### 9.5 `#[track_caller]` 与错误定位优化
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **Bloom 层级**: 应用 → 分析
->
 > **[Rust Reference: The track_caller attribute]** · **[RFC 2091: Implicit caller location]** · **[Rust Standard Library: core::panic::Location]** `#[track_caller]` 在 Rust 1.46 稳定化，它通过修改函数的调用约定（calling convention），在编译期隐式注入调用者位置信息，使 panic、错误包装器和断言宏能够报告**调用点**而非被调用函数内部位置。✅
 
 #### 9.5.1 工作原理：编译器隐式传递 `Location`
@@ -1791,7 +1693,6 @@ fn main() {
 ```
 
 > **[来源: Rust Standard Library: Location::caller]** `Location::caller()` 在 `#[track_caller]` 函数内部返回调用者的 `Location`；在普通函数中返回自身位置。 ✅
->
 > **[来源: Rust Standard Library: PanicInfo]** `PanicInfo::location()` 返回 panic 实际发生的位置；当 panic 源自 `#[track_caller]` 函数时，该位置已被替换为调用者位置。 ✅
 
 #### 9.5.3 在自定义错误类型中使用 `#[track_caller]` 实现轻量级定位
@@ -1996,8 +1897,6 @@ fn ensure_nonzero(x: i32) -> i32 {
 ---
 
 ### 9.6 `Try` trait 与自定义 `?` 行为（稳定化中）
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 `Try` trait（Tracking: RFC 3058）将 `?` 运算符泛化到任意类型：
 
@@ -2073,16 +1972,12 @@ fn compute() -> Maybe<i32> {
 ```
 
 > **定理**：`Try` trait 将 `?` 从 `Result`/`Option` 的语法糖提升为**通用的控制流抽象**。任何满足代数结构的类型（含成功/失败两种分支）都可实现 `Try`。
->
 > **边界**：`Try` trait 当前尚未完全稳定（`Residual` 关联类型在演进中）。`ControlFlow` 本身已稳定（Rust 1.55+），但直接实现 `Try` 需要 nightly。
->
 > **来源**: [RFC 3058: Try trait v2] · [Rust Reference: The ? operator] · [Rust Standard Library: ControlFlow]
 
 ---
 
 ## 十、相关概念链接
->
-> [来源: [TRPL — Error Handling]]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -2097,8 +1992,6 @@ fn compute() -> Maybe<i32> {
 ---
 
 ## 十一、待补充与演进方向（TODOs）
->
-> [来源: [TRPL — Error Handling]]
 
 - [x] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 已完成 §9.3 (2026-05-14)
 - [x] **TODO**: 补充 `Termination` trait 与 main 返回 Result —— 优先级: 中 —— 已完成 §9.1
@@ -2116,8 +2009,6 @@ fn compute() -> Maybe<i32> {
 ---
 
 ## Wikipedia 概念对齐
->
-> [来源: [TRPL — Error Handling]]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。
 
@@ -2130,7 +2021,6 @@ fn compute() -> Maybe<i32> {
 | **Panic (computing)** | [Panic (computing)](https://en.wikipedia.org/wiki/Panic_(computing)) | Panic |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -2142,20 +2032,15 @@ fn compute() -> Maybe<i32> {
 
 ## 权威来源索引
 
-> **[来源: [Rust Error Handling Guidelines](https://doc.rust-lang.org/rust-by-example/error.html)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
 ## 十、C++ 异常安全 vs Rust 错误处理
 
-> **[来源: Brown University CRP — Exceptions] · [Google Comprehensive Rust — C++ Exception] · [C++ Standard — §15] · [Rustonomicon — Exception Safety]** ✅
 
 ### 10.1 异常安全保证等级
 
@@ -2244,691 +2129,351 @@ impl Drop for Safe {
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ---
 

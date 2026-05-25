@@ -22,7 +22,6 @@
 
 ### 2.1 环境模型（Environment Model）
 
-> **[来源: SICP — Structure and Interpretation of Computer Programs, Ch. 3]** ✅
 
 在环境模型中，变量绑定将**名字**映射到**值**。
 赋值操作改变的是变量在当前环境中的绑定关系。
@@ -42,7 +41,6 @@
 
 ### 2.2 存储模型（Store Model）
 
-> **[来源: Pierce TAPL, §13 References]** ✅
 
 在存储模型中，变量绑定将**名字**映射到**存储地址**，存储地址再指向**值**。
 赋值操作改变的是存储中的内容。
@@ -63,7 +61,6 @@
 
 ### 2.3 Rust 的所有权：存储模型的线性扩展
 
-> **[来源: RustBelt: POPL 2018, §3] · [Linear Logic, Girard 1987]** ✅
 
 Rust 在存储模型之上增加了**线性约束**（所有权规则）：
 
@@ -92,7 +89,6 @@ Rust 在存储模型之上增加了**线性约束**（所有权规则）：
 
 ### 3.1 C++ 的值类别体系
 
-> **[来源: C++ Standard — §7.2.1 Value category]** ✅
 
 C++11 引入了精细的值类别体系：
 
@@ -110,7 +106,6 @@ C++11 引入了精细的值类别体系：
 
 ### 3.2 Rust 的表达式分类
 
-> **[来源: Rust Reference — §8.2.8 Place Expressions and Value Expressions]** ✅
 
 Rust 采用更简化的二元分类：
 
@@ -145,7 +140,6 @@ let s2 = s1; // s1 的所有权转移到 s2
 
 ### 4.1 通用 PL 谱系
 
-> **[来源: Wikipedia: Value semantics and reference semantics]** ✅
 
 | 语义 | 赋值含义 | 典型语言 | 特征 |
 | :--- | :--- | :--- | :--- |
@@ -187,7 +181,6 @@ auto y = std::move(x); // y 获得资源，x 变为"有效但未指定状态"
 
 ### 5.1 操作语义中的环境-存储模型
 
-> **[来源: Pierce TAPL, §13.5 — Store Typing]** ✅
 
 在形式化语义中，程序状态由二元组 `(E, S)` 表示：
 
@@ -223,9 +216,7 @@ BorrowState: None | Shared(usize) | Exclusive
 | `drop(x)` | `E(x).ownership = Own` | `S(l)` 释放，`E(x).ownership = Moved` |
 
 > **定理** [Tier 2]: 在上述模型中，若程序通过 borrow checker，则运行时永远不会出现 use-after-free 或 double-free。
->
 > **证明草图**:
->
 > 1. `Moved` 状态禁止任何读取/写入/借用操作（编译期拒绝）
 > 2. `Exclusive` 借用期间禁止其他借用或移动（编译期拒绝）
 > 3. `Shared` 借用期间禁止 `Exclusive` 借用或移动（编译期拒绝）
@@ -238,14 +229,12 @@ BorrowState: None | Shared(usize) | Exclusive
 
 ### 6.1 C 语言的 L/R-value 起源
 
-> **[来源: C Standard — §6.3.2.1 Lvalues, arrays, and function designators]** ✅
 
 - **L-value**: 可以出现在赋值左侧的表达式（有地址的对象）
 - **R-value**: 只能出现在赋值右侧的表达式（值本身）
 
 ### 6.2 Rust 的 place expression 与 value expression
 
-> **[来源: Rust Reference — §8.2.8]** ✅
 
 | C/C++ | Rust |
 | :--- | :--- | :--- |
@@ -360,7 +349,6 @@ fn reference_vs_pointer() {
 > [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [SICP](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book.html)
->
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24

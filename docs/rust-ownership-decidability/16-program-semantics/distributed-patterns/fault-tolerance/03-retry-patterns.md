@@ -113,6 +113,7 @@
 ---
 
 ## 3. 数学模型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 指数退避分析
@@ -198,6 +199,7 @@ P_collision_jitter ≈ P_collision / jitter_factor
 ---
 
 ## 4. Rust 实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 核心重试框架
@@ -838,6 +840,7 @@ impl<S: RetryStrategy> TimeoutRetry<S> {
 ---
 
 ## 5. 形式化验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 终止性保证
@@ -890,6 +893,7 @@ impl<S: RetryStrategy> TimeoutRetry<S> {
 ---
 
 ## 6. 性能与最佳实践
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -930,6 +934,7 @@ impl<S: RetryStrategy> TimeoutRetry<S> {
 ---
 
 ## 7. 总结
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 策略 | 延迟公式 | 适用场景 |
@@ -987,7 +992,6 @@ $$
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
-
 
 > **[来源: Wikipedia - Memory Safety]**
 > **[来源: Wikipedia - Type System]**
@@ -1306,4 +1310,3 @@ $$
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

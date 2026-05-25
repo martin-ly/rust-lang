@@ -126,6 +126,7 @@ $$
 > **[来源: Wikipedia - Memory Safety]**
 
 ### 定理 2.1 (String内存布局)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > String具有与`Vec<u8>`相同的内存布局，附加UTF-8不变式。
@@ -155,12 +156,15 @@ $$
 ---
 
 ## 3. UTF-8编码安全性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 UTF-8有效性保证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 3.1 (String始终有效UTF-8)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > 所有Safe Rust操作保证String包含有效的UTF-8序列。
@@ -205,14 +209,17 @@ impl String {
 ∎
 
 ### 3.2 字符边界安全
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定义 3.1 (字符边界)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 UTF-8字符串的**字符边界**是有效UTF-8序列的起始位置。
 
 ### 定理 3.2 (切片操作的安全性)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > String切片操作(`slice`/`slice_mut`)要求字符边界，防止产生无效UTF-8。
@@ -261,9 +268,11 @@ pub fn is_char_boundary(&self, index: usize) -> bool {
 ---
 
 ## 4. 操作语义与复杂度
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 创建与克隆
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 操作 | 时间复杂度 | 空间复杂度 | 说明 |
@@ -275,9 +284,11 @@ pub fn is_char_boundary(&self, index: usize) -> bool {
 | `to_string()` | $O(n)$ | $O(n)$ | 从&str创建 |
 
 ### 4.2 追加与修改
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定理 4.1 (push追加复杂度)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > `String::push` 均摊时间复杂度为 $O(1)$，最坏情况 $O(n)$ (触发扩容)。
@@ -298,9 +309,11 @@ push操作基于Vec::push，均摊分析相同:
 ∎
 
 ### 4.3 切片操作
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 4.2 (切片操作复杂度)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > 字符串切片操作时间复杂度为 $O(1)$。
@@ -321,12 +334,15 @@ let s: &str = &string[1..5];
 ---
 
 ## 5. 零拷贝设计
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 AsRef与Borrow
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 5.1 (转换trait)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -345,6 +361,7 @@ impl Deref for String {
 ```
 
 ### 定理 5.1 (零拷贝借用)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > `String` 到 `&str` 的转换是零拷贝的。
@@ -372,9 +389,11 @@ impl Deref for String {
 ∎
 
 ### 5.2 `Cow<str>`写时复制
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定义 5.2 (Cow - Clone on Write)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -387,6 +406,7 @@ where B: ToOwned,
 ```
 
 ### 定理 5.2 (Cow写时复制正确性)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > `Cow<str>` 在读取时零拷贝，修改时才复制。
@@ -437,12 +457,15 @@ impl Cow<'_, str> {
 ---
 
 ## 6. 迭代器安全性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 字符迭代
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 6.1 (Char迭代器)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -452,6 +475,7 @@ pub struct Chars<'a> {
 ```
 
 ### 定理 6.1 (字符迭代正确性)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > `chars()` 迭代器总是返回有效的Unicode标量值。
@@ -488,9 +512,11 @@ impl Iterator for Chars<'_> {
 ∎
 
 ### 6.2 行迭代与分割
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 6.2 (Lines迭代器正确性)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > `lines()` 返回的子串都是有效的UTF-8。
@@ -512,6 +538,7 @@ pub fn lines(&self) -> Lines<'_> {
 ---
 
 ## 7. 与其他语言对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | Rust | C++ | Java | Python |
@@ -525,9 +552,11 @@ pub fn lines(&self) -> Lines<'_> {
 ---
 
 ## 8. 反例与常见错误
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 反例 8.1 (非法UTF-8序列)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -546,6 +575,7 @@ match String::from_utf8(invalid_bytes) {
 ```
 
 ### 反例 8.2 (不安全切片)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -555,6 +585,7 @@ let slice = &s[1..2];  // OK - 字符边界
 ```
 
 ### 反例 8.3 (索引混淆)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -576,6 +607,7 @@ let ch = s.chars().nth(0);  // 返回 '你'
 ---
 
 ## 参考文献
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **Rust Standard Library.** (2024). `std::string::String`. <https://doc.rust-lang.org/std/string/struct.String.html>
@@ -743,4 +775,3 @@ let ch = s.chars().nth(0);  // 返回 '你'
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

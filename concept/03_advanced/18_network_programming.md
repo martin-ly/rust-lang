@@ -11,7 +11,6 @@
 
 ## 📑 目录
 >
-> [来源: [Tokio Documentation](https://tokio.rs/)]
 
 - [Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象](#rust-网络编程tokio-tcpudp异步-io-与-tower-服务抽象)
   - [📑 目录](#-目录)
@@ -48,12 +47,9 @@
 ---
 
 ## 一、权威定义与核心概念
->
-> [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ### 1.1 异步网络 IO 模型
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: Asynchronous I/O]** Asynchronous I/O (AIO) is a form of input/output processing that permits other processing to continue before the transmission has finished.
 > **来源**: <https://en.wikipedia.org/wiki/Asynchronous_I/O>
@@ -99,7 +95,6 @@
 
 ### 1.2 Tokio Runtime 架构
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 Tokio Runtime 架构:
@@ -152,7 +147,6 @@ Tokio Runtime 架构:
 
 ### 1.3 TCP vs UDP 语义差异
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[RFC 793 — TCP]** The Transmission Control Protocol (TCP) is intended for use as a highly reliable host-to-host protocol between hosts in packet-switched computer communication networks.
 > **来源**: <https://tools.ietf.org/html/rfc793>
@@ -201,7 +195,6 @@ TCP vs UDP 语义矩阵:
 
 ### 1.4 Tower Service 抽象
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ## 十、边界测试：网络编程的编译错误
 
@@ -295,12 +288,9 @@ Tower 核心抽象:
 ---
 
 ## 二、技术细节
->
-> [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ### 2.1 Tokio TCP 服务端实现
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 use tokio::net::{TcpListener, TcpStream};
@@ -342,7 +332,6 @@ async fn main() -> tokio::io::Result<()> {
 
 ### 2.2 Tokio UDP 编程模型
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 use tokio::net::UdpSocket;
@@ -364,13 +353,11 @@ async fn main() -> tokio::io::Result<()> {
 ```
 
 > **代码解读**: UDP 的**无连接**特性意味着单个 UdpSocket 可与任意数量的对端通信——`recv_from` 返回数据和对端地址，`send_to` 指定目标地址发送。
-> [来源: [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html)]
 
 ---
 
 ### 2.3 Socket 选项与调优
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 关键 Socket 选项:
@@ -399,7 +386,6 @@ async fn main() -> tokio::io::Result<()> {
   socket.set_reuseaddr(true)?;
   socket.bind("0.0.0.0:8080".parse()?)?;
   let listener = socket.listen(1024)?;
-  > [来源: [Tokio TcpSocket Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpSocket.html)]
 ```
 
 > **性能洞察**: `TCP_NODELAY` 与 `TCP_CORK` 是一对矛盾选项——NODELAY 降低延迟，CORK 提高吞吐量（合并小数据包）。Tokio 默认启用 NODELAY，适合大多数 async 服务场景。
@@ -409,7 +395,6 @@ async fn main() -> tokio::io::Result<()> {
 
 ### 2.4 Tower 中间件栈
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 use tower::{Service, ServiceBuilder, BoxError};
@@ -450,8 +435,6 @@ let service = ServiceBuilder::new()
 ---
 
 ## 三、选型决策矩阵
->
-> [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ```text
 网络编程选型矩阵:
@@ -488,12 +471,8 @@ let service = ServiceBuilder::new()
 ---
 
 ## 四、思维导图（Mermaid）
->
-> [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ### 4.1 Tokio 网络 IO 架构图
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TB
@@ -539,8 +518,6 @@ graph TB
 ---
 
 ### 4.2 Tower Service 中间件栈
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -578,17 +555,12 @@ graph LR
 > **认知功能**: Tower 中间件形成**洋葱式调用链**——请求从外层向内层传递，响应从内层向外层返回。每个中间件可在请求方向和响应方向执行不同逻辑。
 > [来源: [Tower Middleware](https://docs.rs/tower/latest/tower/)]
 > **关键洞察**: `poll_ready` 的背压传播方向与请求方向**相反**——内层服务未就绪时，外层中间件通过返回 Pending 阻止请求流入，形成自底向上的流量控制。
-> [来源: [Tower Service — Backpressure](https://docs.rs/tower/latest/tower/trait.Service.html)]
 
 ---
 
 ## 五、反命题与边界分析
->
-> [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ### 5.1 反命题树
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 反命题分析:
@@ -599,20 +571,17 @@ graph LR
   ├── 反例: CPU 密集型任务占主导
   │   └── Tokio 的协作式调度无法加速计算
   └── 结论: ❌ 错误 — Tokio 的优势在高并发 IO 密集型场景
-  > [来源: [Tokio Runtime Docs](https://tokio.rs/tokio/topics/runtime)]
 
   命题: "async fn 等价于多线程"
   ├── 反例: 单线程 runtime 上所有任务在一个 OS 线程
   ├── 反例: 阻塞操作会阻塞整个 worker 线程
   │   └── 必须使用 spawn_blocking
   └── 结论: ❌ 错误 — async 是并发模型，不是并行模型
-  > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
   命题: "Tower Service 必须每次都 poll_ready"
   ├── 反例: 某些中间件（如 Timeout）的 ready 总是立即返回
   ├── 反例: 内层 Service 已就绪时 poll_ready 是 O(1)
   └── 结论: ❌ 错误 — poll_ready 是机会，不是义务；但忽略背压可能导致过载
-  > [来源: [Tower Service Docs](https://docs.rs/tower/latest/tower/trait.Service.html)]
 
   命题: "UDP 不需要任何可靠性机制"
   ├── 反例: 丢包、乱序、重复在 UDP 中常见
@@ -627,8 +596,6 @@ graph LR
 ---
 
 ### 5.2 边界极限
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 边界极限测试:
@@ -651,7 +618,6 @@ graph LR
   ├── 跨 .await 持有的变量需 Send
   ├── Rc<T>、非 Send 锁跨越 await 导致编译错误
   └── 解决: 改用 Arc、tokio::sync::Mutex
-  > [来源: [Tokio Spawning Tasks](https://tokio.rs/tokio/tutorial/spawning)]
 
   边界 4: Tower Service 的 Clone 要求
   ├── Service 通常需 Clone（每请求一实例）
@@ -663,8 +629,6 @@ graph LR
 ---
 
 ## 六、常见陷阱
->
-> [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ```text
 常见陷阱:
@@ -692,7 +656,6 @@ graph LR
   ├── 症状: 直接 call() 导致内层服务过载
   ├── 修复: 确保 poll_ready 返回 Ready 后再 call
   └── 简化: 使用 ServiceBuilder 自动处理
-  > [来源: [Tower Service Docs](https://docs.rs/tower/latest/tower/trait.Service.html)]
 
   陷阱 5: 在 select! 中丢失 Waker
   ├── 症状: Future 永远不被唤醒
@@ -704,8 +667,6 @@ graph LR
 ---
 
 ## 七、来源与延伸阅读
->
-> [来源: [Tokio Documentation](https://tokio.rs/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -729,7 +690,6 @@ graph LR
 
 ## 相关概念文件
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async/Await](./02_async.md) — 异步编程基础
 - [Concurrency](./01_concurrency.md) — 并发模型与同步原语
@@ -752,104 +712,58 @@ graph LR
 
 ## 权威来源索引
 
-> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
 >
-> **[来源: [Hyper Documentation](https://hyper.rs/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 10.3 边界测试：异步 TCP 的 `split` 与 `reunite` 的所有权（编译错误）
 

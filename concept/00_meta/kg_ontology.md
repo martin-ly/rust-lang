@@ -9,11 +9,8 @@
 > **来源**: [W3C — *RDF 1.1 Concepts and Abstract Syntax*]
 >
 > **来源**: [W3C — *OWL 2 Web Ontology Language*]
->
 > **来源**: [Stanford CS520 — *What is a Knowledge Graph*, 2020]
->
 > **来源**: [Collins, A.M. & Quillian, M.R. (1969) — "Retrieval Time from Semantic Memory". *Journal of Verbal Learning and Verbal Behavior*, 8(2), 240-247]
->
 > **来源**: [Bordes, A. et al. (2013) — "Translating Embeddings for Modeling Multi-Relational Data". NIPS 2013]
 
 ## 📑 目录
@@ -67,7 +64,6 @@ mindmap
 
 ## 一、本体设计原则
 
-> [来源: W3C OWL 最佳实践 · Stanford CS520]
 
 1. **显式优于隐式**: 所有关系必须标注类型，禁止无标签链接
 2. **可验证性**: 每个三元组必须可追溯至权威来源
@@ -92,7 +88,6 @@ mindmap
 
 ## 三、关系类型（Edge Types）
 
-> [来源: W3C RDF · Stanford CS520 · `inter_layer_topology.md` 符号约定]
 
 | 关系类型 | 符号 | 逆关系 | 定义 | 示例 |
 |:---|:---:|:---|:---|:---|
@@ -124,7 +119,6 @@ mindmap
 
 ## 四、三元组实例
 
-> [来源: `concept/` 核心概念文件 · `inter_layer_map.md` · `intra_layer_model_map.md`]
 
 ### L1 基础概念层三元组
 
@@ -212,7 +206,6 @@ ex:Creusot      ex:refines      ex:Kani .
 
 ## 五、知识图谱可视化
 
-> [来源: `inter_layer_map.md` · `intra_layer_model_map.md`]
 
 ```mermaid
 graph TD
@@ -260,7 +253,6 @@ graph TD
 
 ## 六、与现有符号系统的对照
 
-> [来源: `inter_layer_topology.md` · `intra_layer_model_map.md` · `concept_index.md`]
 
 | 现有符号 | 知识图谱关系 | 说明 |
 |:---:|:---:|:---|
@@ -278,7 +270,6 @@ graph TD
 
 ## 七、机器可解析格式规范
 
-> [来源: W3C RDF/Turtle · JSON-LD]
 
 ### Turtle 格式示例
 

@@ -200,6 +200,7 @@ impl Handler<Increment> for MyActor {
 ---
 
 ## 3. Handler系统分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 消息处理类型安全
@@ -251,9 +252,11 @@ async fn handler(
 编译器验证所有类型正确。∎
 
 ### 3.2 状态转换正确性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定义 3.2 (Actor生命周期)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -263,6 +266,7 @@ Starting ──► Started ──► Running ──► Stopping ──► Stoppe
 ```
 
 ### 定理 3.2 (生命周期回调正确性)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > Actor生命周期回调按确定顺序调用。
@@ -297,12 +301,15 @@ impl Actor for MyActor {
 ---
 
 ## 4. 提取器(Extractor)系统
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 FromRequest trait
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 4.1 (FromRequest)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -315,6 +322,7 @@ trait FromRequest: Sized {
 ```
 
 ### 定理 4.1 (提取器可组合性)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > 任意实现了FromRequest的类型都可以作为Handler参数。
@@ -347,9 +355,11 @@ async fn handler(token: UserToken) -> impl Responder {
 ∎
 
 ### 4.2 类型驱动路由
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 4.2 (App路由配置)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -362,6 +372,7 @@ App::new()
 ```
 
 ### 定理 4.2 (路由类型安全)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > 路由配置与Handler签名在编译时匹配。
@@ -388,12 +399,15 @@ async fn get_user(id: web::Path<u32>) -> impl Responder {
 ---
 
 ## 5. 中间件链形式化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Transform trait
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定义 5.1 (Transform)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -410,9 +424,11 @@ trait Transform<S, B> {
 ```
 
 ### 5.2 组合性证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定理 5.1 (中间件组合性)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > 中间件可以链式组合，类型系统保证正确性。
@@ -459,6 +475,7 @@ Response (反向传播)
 ∎
 
 ### 定理 5.2 (中间件顺序重要性)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > 中间件顺序影响请求处理顺序。
@@ -488,12 +505,15 @@ app.wrap(Compress).wrap(Logger)
 ---
 
 ## 6. 并发模型分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 线程池与Actor调度
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 6.1 (Arbiter)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -504,6 +524,7 @@ pub struct Arbiter {
 ```
 
 ### 定理 6.1 (Actor调度保证)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > 每个Actor在单线程上顺序处理消息，无并发问题。
@@ -530,9 +551,11 @@ Arbiter::new().exec_fn(|| {
 ∎
 
 ### 6.2 背压控制
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 6.2 (消息队列背压)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > 有界消息队列提供背压，防止内存无限增长。
@@ -556,9 +579,11 @@ Addr::builder()
 ---
 
 ## 7. 内存安全保证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定理 7.1 (Actor状态隔离的内存安全)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > Actor模型确保无数据竞争。
@@ -581,6 +606,7 @@ Addr::builder()
 ∎
 
 ### 定理 7.2 (请求处理的内存安全)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > HTTP请求处理无内存泄漏和UAF。
@@ -608,6 +634,7 @@ async fn handler(body: web::Json<Data>) -> impl Responder {
 ---
 
 ## 8. 与Hyper/Tokio对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | Actix-web | Hyper | Axum |
@@ -623,6 +650,7 @@ async fn handler(body: web::Json<Data>) -> impl Responder {
 ---
 
 ## 参考文献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Actix Contributors.** (2024). *Actix-web Documentation*. <https://actix.rs/docs>
@@ -804,4 +832,3 @@ async fn handler(body: web::Json<Data>) -> impl Responder {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust标准库 Vec 形式化分析](#rust标准库-vec-形式化分析)
@@ -59,6 +60,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `Vec<T>` 是Rust最核心的集合类型，提供了动态大小的数组功能。它展示了Rust如何在零成本抽象的同时保证内存安全。
@@ -73,6 +75,7 @@
 ---
 
 ## 2. Vec 的形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 内存表示
@@ -140,6 +143,7 @@ $$
 ---
 
 ## 3. 操作语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 创建操作
@@ -167,6 +171,7 @@ $$
 $$
 
 ### 定义 3.2 (Vec::with_capacity)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -182,9 +187,11 @@ $$
 $$
 
 ### 3.2 索引访问
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 3.3 (Index操作)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -204,6 +211,7 @@ $$
 $$
 
 ### 定理 3.1 (索引安全性)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > Vec的索引操作在编译时保证不越界。
@@ -231,9 +239,11 @@ Rust提供两种索引方式:
 由Rust类型系统，safe Rust中所有索引操作要么成功返回有效引用，要么panic。∎
 
 ### 3.3 扩容机制
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 3.4 (扩容操作)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 当 `len == cap` 时，`push` 触发扩容:
@@ -264,12 +274,15 @@ $$
 ---
 
 ## 4. 内存安全性证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 无越界访问
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 4.1 (无越界访问)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 在Safe Rust中，Vec不会发生越界访问。
@@ -301,9 +314,11 @@ $$
 因此，Safe Rust中无越界访问。∎
 
 ### 4.2 无使用已释放内存
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 4.2 (无使用已释放内存)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > Vec不会访问已释放的内存。
@@ -348,9 +363,11 @@ v.push(4);  // 可能触发扩容
 由借用检查器，这些场景要么编译错误，要么引用保持有效。∎
 
 ### 4.3 无内存泄漏
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理 4.3 (无内存泄漏)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > Vec在离开作用域时正确释放所有内存。
@@ -387,9 +404,11 @@ $$
 ---
 
 ## 5. 复杂度分析
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 时间复杂度
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 操作 | 最坏情况 | 均摊 | 说明 |
@@ -403,9 +422,11 @@ $$
 | `len()` | $O(1)$ | $O(1)$ | 字段访问 |
 
 ### 5.2 均摊分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 5.1 (push均摊 $O(1)$)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 从空Vec开始，$n$ 次 `push` 操作的总时间为 $O(n)$。
@@ -437,9 +458,11 @@ $$
 因此，`push` 均摊时间复杂度为 $O(1)$。∎
 
 ### 5.3 空间复杂度
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 5.2 (空间复杂度)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > 存储 $n$ 个元素的Vec使用 $O(n)$ 空间。
@@ -463,12 +486,15 @@ $$
 ---
 
 ## 6. 所有权与借用分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 索引方法的借用模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 6.1 (借用模式对比)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 方法 | 签名 | 借用类型 | 使用场景 |
@@ -479,6 +505,7 @@ $$
 | `get_mut` | `&mut self, usize -> Option<&mut T>` | 可变借用 | 安全修改 |
 
 ### 定理 6.1 (借用正确性)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > Vec的索引方法正确维护Rust借用规则。
@@ -505,9 +532,11 @@ let r: &i32;
 编译器拒绝此代码，确保借用正确性。∎
 
 ### 6.2 迭代器的所有权转移
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 6.2 (Vec迭代器)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -541,12 +570,15 @@ $$
 ---
 
 ## 7. 反例分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 7.1 越界访问反例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 反例 7.1 (C++风格越界)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **C++代码 (不安全)**:
@@ -575,9 +607,11 @@ unsafe {
 **关键区别**: Rust将不安全操作限制在 `unsafe` 块中，明确责任边界。
 
 ### 7.2 迭代器失效反例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 反例 7.2 (C++迭代器失效)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **C++代码 (危险)**:
@@ -617,6 +651,7 @@ v.push_back(4);  // OK
 ---
 
 ## 8. 与其他语言对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | Rust Vec | C++ vector | Java ArrayList | Go slice |
@@ -631,6 +666,7 @@ v.push_back(4);  // OK
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Rust Standard Library.** (2024). `std::vec::Vec`. <https://doc.rust-lang.org/std/vec/struct.Vec.html>
@@ -668,11 +704,9 @@ v.push_back(4);  // OK
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -824,4 +858,3 @@ v.push_back(4);  // OK
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

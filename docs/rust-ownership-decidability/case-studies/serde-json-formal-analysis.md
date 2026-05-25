@@ -51,6 +51,7 @@ serde_json提供:
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (类型一致性)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > Serialize实现保证类型一致的JSON输出。
@@ -70,6 +71,7 @@ $$
 ∎
 
 ### 定理 2.2 (逃逸安全)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 字符串自动转义，防止注入。
@@ -249,4 +251,3 @@ struct Data {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

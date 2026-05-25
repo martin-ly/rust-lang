@@ -20,9 +20,7 @@ $entry
 
 ## 一、权威定义
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [WASI Spec]]
 
 > **[Wikipedia: WebAssembly]** WebAssembly (Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
 > **来源**: <https://en.wikipedia.org/wiki/WebAssembly>
@@ -36,38 +34,27 @@ $entry
 ---
 
 ## 二、认知路径（Cognitive Path）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [WASI Spec]]
 
 > **学习递进**: 从"Wasm 是什么"的直觉，深入到"Component Model 如何用能力安全模型替代传统系统调用"的形式化理解。
 
 ### 第 1 步：为什么需要 WASI？
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 WebAssembly 最初为浏览器设计，但**沙箱化**使其成为服务端和嵌入式的理想目标——前提是有安全的系统接口。WASI 提供了这个接口，且核心设计原则是**能力安全（Capability Security）**：程序只能访问显式被授予的能力。
 
 ### 第 2 步：Component Model 与传统 Wasm 模块有何不同？
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 传统 Wasm 模块是**扁平的**——导入/导出通过低级的整数索引。Component Model 引入了**接口类型（Interface Types）**、**世界（World）**和**组件组合**——将 Wasm 从汇编级抽象提升到软件组件级抽象。
 
 ### 第 3 步：Rust 在 Wasm 生态中的独特地位？
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 的 `wasm32-unknown-unknown` 和 `wasm32-wasi` 目标使 Rust 成为 Wasm 生态的**首选语言**。`cargo` 与 `wasm-pack`/`wit-bindgen` 的集成，以及 Rust 的零成本抽象，使其在 Wasm 运行时性能上具有显著优势。
 
 ---
 
 ## 〇、WASI 架构全景
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [WASI Spec]]
 
 ```mermaid
 graph TD
@@ -119,14 +106,9 @@ graph TD
 ---
 
 ## 三、WASI 架构与能力安全
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [WASI Spec]]
 
 ### 3.1 WASI 的三层架构
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 ┌─────────────────────────────────────────┐
@@ -178,13 +160,10 @@ let dir_cap = preopen_dir("/sandbox/data")?;
 
 ## 四、Component Model 核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 能力传递时序图
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 sequenceDiagram
@@ -211,11 +190,9 @@ sequenceDiagram
 ```
 
 > **认知功能**: 此序列图将 WASI 的**能力安全模型**与 Rust 的**所有权模型**进行同构映射。步骤 1-2 对应所有权转移（`move`），步骤 3-4 对应正常借用（`&T`），步骤 5-6 对应越界访问被拒绝（编译错误），步骤 7-8 对应 `drop` 析构。这种可视化帮助 Rust 程序员利用已有的所有权直觉理解 WASI 的安全模型。
-> [来源: [WASI Spec]]
 
 ### 4.2 WIT（Wasm Interface Types）
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 WIT 是 Component Model 的接口定义语言（IDL），用于描述组件间的契约：
 
@@ -270,7 +247,6 @@ fn calc(input: CalcInput) -> Result<i32, String> {
 
 ### 4.3 世界（World）与组件组合
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 World = 导入接口集 + 导出接口集
@@ -287,14 +263,9 @@ World = 导入接口集 + 导出接口集
 ---
 
 ## 五、Rust `wasm32-wasi` 目标
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [WASI Spec]]
 
 ### 5.1 `no_std` + `wasm32` 的约束与模式
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 的 `wasm32-wasi` 目标默认使用 `no_std` + `alloc`：
 
@@ -320,8 +291,6 @@ use wasi::cli::stdout::OutputStream;
 | Rust 生态 | `wasm-bindgen` | `wit-bindgen` + `cargo component` |
 
 ### 5.2 错误处理跨边界
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 WIT 的 `result` 类型与 Rust 的 `Result` 的映射确保了错误不会静默丢失：
 
@@ -350,9 +319,7 @@ impl GuestFile for File {
 
 ## 六、定理一致性矩阵（Wasm 安全层）
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **[来源类型: 原创分析; WASI Spec; WebAssembly Spec]** 以下矩阵梳理 Wasm/Component Model 的安全保证与 Rust 的映射关系。
 
@@ -369,10 +336,6 @@ impl GuestFile for File {
 ---
 
 ## 七、相关概念链接
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -404,8 +367,6 @@ impl GuestFile for File {
 
 ## 八、反例与边界测试（Examples & Counter-examples）
 >
-> **[来源: [WASI Preview 2 Docs](https://wasi.dev)]**
-> **[来源: [WebAssembly Component Model Spec](https://component-model.bytecodealliance.org)]**
 
 ### 8.1 正确示例：安全的 wit-bindgen 组件
 
@@ -500,7 +461,6 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 ```
 
 > **边界洞察**: Resource 句柄的 move 语义与 Rust 的所有权完全一致。但 Wasm 组件边界上的 move 是**运行时行为**（句柄表索引转移），而非编译期检查。这意味着：
->
 > 1. 同组件内的 Resource 传递由 Rust 编译器检查
 > 2. 跨组件的 Resource 传递由 Wasm 运行时检查
 > 3. 两者都保证"无句柄 = 无访问权"，但检查时机不同
@@ -509,8 +469,6 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 
 ## 九、WASI 与 Rust 的形式化同构
 >
-> **[来源: [Capability-Based Security Research](https://en.wikipedia.org/wiki/Capability-based_security)]**
-> **[来源: [WASI Preview 2 Docs](https://wasi.dev)]**
 
 ### 9.1 所有权 ↔ 能力安全 的同构映射
 
@@ -524,14 +482,11 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 | 编译期检查 | 运行时检查 | 检查时机不同，安全保证等价 |
 
 > **形式化命题** [Tier 3]: WASI 的能力安全模型是 Rust 所有权模型的**运行时模拟**。
->
 > **论证**:
->
 > - Rust 编译器通过类型系统保证内存安全（无 UAF、无 DF）
 > - WASI 运行时通过能力检查器保证沙箱安全（无越权访问）
 > - 两者都基于"资源唯一标识 + 显式转移"的核心原则
 > - 关键差异：Rust 在编译期检查，WASI 在运行时检查
->
 > **局限性**: 此同构是概念层面的类比，而非数学上的严格同构。Rust 的所有权有线性逻辑的完整形式化（RustBelt），而 WASI 的能力安全目前缺乏同等深度的形式化证明。[来源: 💡 原创分析]
 
 ### 9.2 形式化验证的空白与挑战
@@ -562,7 +517,6 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 ---
 
 > **权威来源**: [WASI Preview 2 Docs](https://wasi.dev) · [WebAssembly Component Model Spec](https://component-model.bytecodealliance.org) · [wit-bindgen Docs](https://github.com/bytecodealliance/wit-bindgen) · [WASMtime Docs](https://docs.wasmtime.dev)
->
 > **文档版本**: 1.2
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24

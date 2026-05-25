@@ -13,9 +13,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [`assert_matches!`：模式匹配断言的形式化语义](#assert_matches模式匹配断言的形式化语义)
   - [📑 目录](#-目录)
@@ -48,13 +46,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 `matches!`：模式匹配的布尔化
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 1.42 引入 `matches!` 宏，将模式匹配从**控制流**转化为**布尔表达式**：
 
@@ -91,7 +86,6 @@ assert!(matches!(x, Some(n) if n > 100)); // ❌ 失败
 
 ### 1.2 `assert_matches!`：从判断到断言
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 1.96 稳定化 `assert_matches!`，将 `matches!` 的布尔结果**提升为断言契约**：
 
@@ -108,7 +102,6 @@ assert_matches!(result, Ok(n) => {
 ```
 
 > **语义核心**: `assert_matches!(e, p => block)` 执行以下操作：
->
 > 1. 计算表达式 `e`
 > 2. 尝试将 `e` 与模式 `p` 匹配
 > 3. 若匹配成功：执行 `block`（绑定在 block 作用域内有效）
@@ -131,13 +124,11 @@ assert_matches!(result, Ok(n) if n > 10 => {
 ```
 
 > **关键差异**: `assert_matches!` 在匹配成功时**保留绑定**，允许在断言通过后继续使用模式绑定的变量。这是 `assert!(matches!(...))` 无法实现的——后者在 `matches!` 返回后绑定已丢失。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 1.3 `debug_assert_matches!`：编译期条件断言
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 与 `assert!` / `debug_assert!` 的关系一致：
 
@@ -160,14 +151,9 @@ debug_assert_matches!(config, Config::Debug { verbose: true } => {
 ---
 
 ## 二、形式化语义
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 与 `assert!` / `assert_eq!` 的对比
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph LR
@@ -189,7 +175,6 @@ graph LR
 > [来源: [Rust Reference — Patterns]]
 > **使用建议**: 在测试枚举类型时，优先选择 `assert_matches!` 而非 `assert_eq!`——前者验证结构形状，后者仅验证相等性。
 > **关键洞察**: 断言系统的演进轨迹是**从具体值到抽象模式**：`assert!`（任意布尔）→ `assert_eq!`（部分相等）→ `assert_matches!`（结构模式）。
-> [来源: 💡 原创分析]
 
 **形式化对比表**:
 
@@ -206,7 +191,6 @@ graph LR
 
 ### 2.2 绑定捕获与作用域
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```ignore
 enum Message {
@@ -229,7 +213,6 @@ assert_matches!(msg, Message::Coord { x, y } => {
 ```
 
 > **形式化规则**: `assert_matches!(e, p => block)` 创建**模式绑定作用域**。
->
 > - 设 `p` 中的绑定变量集合为 `Vars(p)`
 > - 则 `Vars(p)` 的作用域仅限于 `block`
 > - 这与 `if let p = e { block }` 的作用域规则完全一致
@@ -238,14 +221,9 @@ assert_matches!(msg, Message::Coord { x, y } => {
 ---
 
 ## 三、使用场景与最佳实践
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 测试中的 Result/Option 断言
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```ignore
 #[test]
@@ -263,13 +241,11 @@ fn parse_config() {
 ```
 
 > **最佳实践**: 在测试中，使用 `assert_matches!` 验证**结构形状**（是否为 `Ok`），然后使用 `assert_eq!` 验证**具体值**。分层断言使测试失败信息更精确。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 3.2 复杂枚举变体验证
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```ignore
 #[derive(Debug)]
@@ -296,7 +272,6 @@ fn state_machine_transition() {
 
 ### 3.3 与 `if let` 的互补关系
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
 flowchart TD
@@ -313,22 +288,14 @@ flowchart TD
 ```
 
 > **认知功能**: 此决策树帮助开发者在 `if let` 和 `assert_matches!` 之间选择。核心判断标准是"失败是否应导致 panic"。
-> [来源: [Rust Reference — Patterns]]
 > **使用建议**: 生产代码中的可选处理用 `if let`；测试和不变量检查用 `assert_matches!`。
 > **关键洞察**: `assert_matches!` 本质上是 **"panic-if-no-match + if-let"** 的语法糖，将两个操作压缩为单一表达式。
-> [来源: 💡 原创分析]
 
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -352,16 +319,12 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助测试编写者在 `assert_matches!`、`assert_eq!` 和 `if let` 之间选择最合适的工具。
-> [来源: [Rust Reference — Patterns]]
 > **使用建议**: 对简单标量相等检查，使用 `assert_eq!` 更简洁；对结构匹配和绑定提取，使用 `assert_matches!`。
 > **关键洞察**: 工具选择的本质是**信息粒度**的权衡——`assert_eq!` 验证值，`assert_matches!` 验证形状 + 提取成分。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 4.2 边界极限
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```ignore
 // 边界 1: 嵌套模式
@@ -388,13 +351,11 @@ let x = 42;
 ```
 
 > **边界要点**: `assert_matches!` 支持所有标准模式语法（嵌套、或模式、`..`、守卫条件），但**不可反驳模式**（irrefutable patterns）会触发编译器警告——因为断言在此情况下永不为假。
-> [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
 
 ---
 
 ## 五、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -416,8 +377,6 @@ fn main() {
 ```
 
 ### 编译验证示例
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 fn main() {
@@ -439,10 +398,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 模式匹配的形式化根基
 - [Error Handling](./04_error_handling.md) — Result/Option 测试断言实践
@@ -452,7 +407,6 @@ fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0 (Edition 2024)
 
 **文档版本**: 1.0
@@ -464,107 +418,59 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ## 十、边界测试：assert_matches 的编译错误
 

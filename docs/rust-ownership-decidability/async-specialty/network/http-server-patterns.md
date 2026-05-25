@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [HTTP服务器模式](#http服务器模式)
@@ -157,9 +158,11 @@ async fn main() -> std::io::Result<()> {
 ---
 
 ## 2. 中间件链模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 认证中间件
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -203,6 +206,7 @@ let app = Router::new()
 ```
 
 ### 2.2 限流中间件
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -260,9 +264,11 @@ async fn rate_limit_middleware<B>(
 ---
 
 ## 3. 错误处理模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 统一错误响应
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -333,6 +339,7 @@ async fn handler() -> Result<Json<Data>, AppError> {
 ```
 
 ### 3.2 请求验证
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -364,9 +371,11 @@ async fn create_user(
 ---
 
 ## 4. 流式响应
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 SSE (Server-Sent Events)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -399,6 +408,7 @@ let app = Router::new()
 ```
 
 ### 4.2 文件流式下载
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -436,6 +446,7 @@ async fn download_file(
 ---
 
 ## 5. 优雅关闭
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -504,10 +515,10 @@ async fn shutdown_signal() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
-
 
 ---
 
@@ -663,4 +674,3 @@ async fn shutdown_signal() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -22,9 +22,7 @@
 
 ## 一、一级来源：Rust 官方与形式化 [来源: 来源分级方法论基于证据金字塔模型 — 官方标准 > 学术论文 > 社区权威 > 实践经验]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -43,9 +41,7 @@
 
 ## 二、二级来源：跨语言权威入口 [来源: 跨语言对比方法论参照 concept/05_comparative/ 系列文件的对比框架]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### C++
 
@@ -68,10 +64,6 @@
 ---
 
 ## 三、网络权威锚点（永久链接） [来源: 永久链接选择标准: 域名稳定性 > 版本归档 > 社区镜像; 参照 PURL (Persistent Uniform Resource Locator) 标准和 DOI 数字对象标识符的设计原则]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### Rust 官方
 
@@ -106,10 +98,6 @@ dtolnay:               https://dtolnay.github.io/
 ---
 
 ## 四、执行批次 [来源: Authority Source Sprint 执行记录; 对齐方法论参照 AGENTS.md 质量铁三角 — Bloom 层级 100%、来源标注率 ≥15%、跨文件链接 ≥3/文件]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 批次 | 目标文件 | 核心补全内容 |
 |:---|:---|:---|
@@ -127,7 +115,6 @@ dtolnay:               https://dtolnay.github.io/
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

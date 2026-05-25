@@ -10,11 +10,8 @@
 > **来源**: [Gentzen, G. — *Untersuchungen über das logische Schließen*. 1935; 自然演绎系统]
 >
 > **来源**: [Novak, J.D. & Cañas, A.J. — *The Theory Underlying Concept Maps*. Technical Report, Florida Institute for Human and Machine Cognition, 2008]
->
 > **来源**: [Torchiano et al. (2018) — 软件工程知识库边界分析研究]
->
 > **来源**: [Rust Reference — 类型系统判断规则]
->
 > **来源**: [RustBelt (Jung et al., POPL 2018) — 安全性充分条件]
 
 ## 📑 目录
@@ -82,8 +79,6 @@ mindmap
 
 ## 一、判定树格式规范
 
-> [来源: Gentzen 自然演绎系统 · 决策树方法论 Quinlan (1986)]
-
 每棵判定树包含四个层次：
 
 ```
@@ -121,8 +116,6 @@ mindmap
 ---
 
 ## 二、所有权判定树
-
-> [来源: [Rust Reference — Ownership]] · [RustBelt POPL 2018 — Ownership Predicate] · [The Rustonomicon — Move Semantics]
 
 ### 2.1 判定链
 
@@ -219,8 +212,6 @@ graph TD
 
 ### 2.3 失效条件矩阵
 
-> [来源: [Rust Reference — Ownership]] · [RustBelt — Soundness Bug 案例]
-
 | 失效模式 | 判定条件 | 错误信息（典型） | 修复方向 | 安全影响 |
 |:---|:---|:---|:---|:---:|
 | **使用已移动值** (Use After Move) | C1 = "赋值后原变量仍被访问" | "use of moved value" | 实现 `Clone` / 使用引用 / 重新设计所有权 | 编译期阻止 |
@@ -232,8 +223,6 @@ graph TD
 ---
 
 ## 三、借用判定树
-
-> [来源: [Rust Reference — References and Borrowing]] · [RustBelt — Borrow Propositions] · [O'Hearn — Separation Logic]
 
 ### 3.1 判定链
 
@@ -335,8 +324,6 @@ graph TD
 ---
 
 ## 四、生命周期判定树
-
-> [来源: [Rust Reference — Lifetimes]] · [Tofte & Talpin (1994) — Region-Based Memory Management] · [Rust Reference — Lifetime Elision]
 
 ### 4.1 判定链
 
@@ -448,8 +435,6 @@ graph TD
 
 ## 五、Trait 判定树
 
-> [来源: [Rust Reference — Traits]] · [Rust Reference — Orphan Rules] · [Rust Reference — Object Safety]
-
 ### 5.1 判定链
 
 ```
@@ -558,8 +543,6 @@ graph TD
 
 ## 六、泛型判定树
 
-> [来源: [Rust Reference — Generics]] · [System F — Girard/Reynolds] · [Rust Reference — Type Inference]
-
 ### 6.1 判定链
 
 ```
@@ -665,8 +648,6 @@ graph TD
 
 ## 七、并发判定树
 
-> [来源: [Rust Reference — Concurrency]] · [RustBelt — Send/Sync 形式化] · [Fearless Concurrency 模型]
-
 ### 7.1 判定链
 
 ```
@@ -771,8 +752,6 @@ graph TD
 ---
 
 ## 八、异步判定树
-
-> [来源: [Rust Reference — Async/Await]] · [Tokio 文档] · [Without Boats — Async Foundations]
 
 ### 8.1 判定链
 
@@ -885,8 +864,6 @@ graph TD
 
 ## 九、Unsafe 判定树
 
-> [来源: [Rust Reference — Unsafe Blocks]] · [The Rustonomicon] · [RustBelt — Unsafe Contract]
-
 ### 9.1 判定链
 
 ```
@@ -997,8 +974,6 @@ graph TD
 
 ## 十、判定森林交叉一致性
 
-> [来源: `theorem_inference_forest.md` — 跨树关联] · [RustBelt — 统一安全模型]
-
 八棵判定树并非独立——它们在多个节点上相互约束：
 
 ```mermaid
@@ -1031,8 +1006,6 @@ graph TD
 ---
 
 ## 十一、与定理推理森林的对照
-
-> [来源: `theorem_inference_forest.md`]
 
 | 维度 | 定理推理森林 (`theorem_inference_forest.md`) | 概念定义判定森林 (本文件) |
 |:---|:---|:---|

@@ -3,7 +3,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统讲解 **Hoare 逻辑（霍尔逻辑）**——从前置条件、后置条件、循环不变量的经典形式化，到最弱前置条件演算，揭示 Hoare 逻辑如何为 Rust 的 unsafe 代码契约、内部不变量和形式化验证工具提供理论基础。
 > **前置概念**: [Ownership Formalization](./03_ownership_formal.md) · [Verification Toolchain](./05_verification_toolchain.md)
-> **后置概念**: [Separation Logic](./07_separation_logic.md) · [RustBelt](./04_rustbelt.md)
+> **后置概念**: [Separation Logic](./11_separation_logic.md) · [RustBelt](./04_rustbelt.md)
 
 ---
 
@@ -19,9 +19,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](#hoare-逻辑程序验证的形式化基础与-rust-契约)
   - [📑 目录](#-目录)
@@ -55,13 +53,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576)]
 
 ### 1.1 Hoare 三元组
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Hoare 三元组的形式化定义:
@@ -101,13 +96,11 @@ Hoare 三元组的形式化定义:
 
 > **认知功能**: Hoare 三元组是**程序验证的原子单位**——它将"程序正确性"这一模糊概念转化为可验证的数学陈述：给定前提，执行代码，得到保证。这与 Rust 类型系统的"给定输入类型，执行函数，得到输出类型"在结构上同构。
 > [来源: [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1093/comjnl/12.4.576)]
-> [来源: [TAPL — Chapter 6](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 
 ---
 
 ### 1.2 最弱前置条件（Weakest Precondition）
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 最弱前置条件（WP）演算:
@@ -139,13 +132,11 @@ Hoare 三元组的形式化定义:
 
 > **认知功能**: WP 演算的**核心洞察**——它不是"验证程序是否满足规格"，而是"从规格反向推导出程序必须满足的前提"，这种"反向推理"是自动化验证的基础。
 > [来源: [Dijkstra 1976 — A Discipline of Programming](https://dl.acm.org/doi/book/10.5555/1243380)]
-> [来源: [Wikipedia — Predicate Transformer Semantics](https://en.wikipedia.org/wiki/Predicate_transformer_semantics)]
 
 ---
 
 ### 1.3 循环不变量
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 循环不变量（Loop Invariant）:
@@ -178,19 +169,15 @@ Hoare 三元组的形式化定义:
 
 > **认知功能**: 循环不变量的**本质**——它不是"循环做什么"的操作描述，而是"循环维护了什么性质"的逻辑刻画。找到好的不变量需要理解循环的"目的"而非"步骤"。
 > [来源: [Floyd 1967 — Assigning Meanings to Programs](https://doi.org/10.1007/978-94-011-1793-7_4)]
-> [来源: [Wikipedia — Loop Invariant](https://en.wikipedia.org/wiki/Loop_invariant)]
 
 ---
 
 ## 二、技术细节
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]
 
 ### 2.1 Hoare 逻辑推理规则
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 经典 Hoare 逻辑规则系统:
@@ -229,13 +216,11 @@ Hoare 三元组的形式化定义:
 
 > **认知功能**: Hoare 规则系统的**组合性**——复杂程序的正确性可以从简单命令的正确性推导而来，这与 Rust 类型系统的"从小类型构建大类型"（组合子逻辑）在方法论上同构。
 > [来源: [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576)]
-> [来源: [TAPL — Chapter 6](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 
 ---
 
 ### 2.2 从 Hoare 逻辑到分离逻辑
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Hoare 逻辑的局限性 → 分离逻辑的扩展:
@@ -277,13 +262,11 @@ graph LR
 
 > **认知功能**: 从 Hoare 到分离逻辑的演进揭示了**形式化方法如何响应实践需求**——经典 Hoare 逻辑无法优雅处理别名，分离逻辑通过"资源分离"的原语解决了这一问题，而 Rust 的 ownership 系统可以看作是分离逻辑的工程化实现。
 > [来源: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf)]
-> [来源: [O'Hearn 2019 — Separation Logic](https://doi.org/10.1145/3211968)]
 
 ---
 
 ### 2.3 Rust unsafe 契约的 Hoare 视角
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Rust unsafe 代码的 Hoare 三元组视角:
@@ -325,19 +308,15 @@ Rust unsafe 代码的 Hoare 三元组视角:
 
 > **认知功能**: 用 Hoare 逻辑审视 unsafe Rust，可以发现**借用检查器本质上是一个自动化的 Hoare 验证器**——它为 safe Rust 自动生成并验证前置/后置条件，而 unsafe Rust 将这些责任显式交还给开发者。
 > [来源: [The Rustonomicon — What Unsafe Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)]
-> [来源: [RustBelt — POPL 2018](https://doi.org/10.1145/3158154)]
 
 ---
 
 ## 三、形式化方法矩阵
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Verification Toolchain](https://www.rust-lang.org/)]
 
 ### 3.1 验证工具的形式化基础
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 | **工具** | **形式化基础** | **规格语言** | **自动化程度** |
 |:---|:---|:---|:---:|
@@ -350,7 +329,6 @@ Rust unsafe 代码的 Hoare 三元组视角:
 
 ### 3.2 规格表达能力的递进
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 形式化规格的表达能力光谱:
@@ -378,19 +356,14 @@ Rust unsafe 代码的 Hoare 三元组视角:
 
 > **认知功能**: 形式化验证的**成本-精度权衡**——完全自动化但能力受限（类型系统），到表达能力无限但需人工证明（Coq），中间存在连续光谱，工具选择取决于安全关键程度和时间预算。
 > [来源: [Verification Toolchain Selection Guide](./05_verification_toolchain.md)]
-> [来源: [SOSP 2024 — Verus](https://www.microsoft.com/en-us/research/publication/verus/)]
 
 ---
 
 ## 四、反命题与边界分析
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 反命题 1: "Hoare 逻辑可以证明所有程序正确"
@@ -425,8 +398,6 @@ Rust unsafe 代码的 Hoare 三元组视角:
 ---
 
 ### 4.2 边界极限
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 边界 1: 表达能力边界
@@ -450,15 +421,10 @@ Rust unsafe 代码的 Hoare 三元组视角:
 
 > **认知功能**: 边界极限指明了从 Hoare 逻辑到工业验证的**现实差距**——理论上的"可验证"不等于实践中的"已验证"，工具链、规格工程和人类洞察都是关键瓶颈。
 > [来源: [RustBelt — Limitations](https://plv.mpi-sws.org/rustbelt/)]
-> [来源: [VSTTE — Verified Software Challenge](https://www.verifythis.org/)]
 
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 混淆部分正确性与完全正确性
@@ -514,9 +480,7 @@ Rust unsafe 代码的 Hoare 三元组视角:
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Cargo Book]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -559,14 +523,10 @@ graph TD
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership Formalization](./03_ownership_formal.md) — 所有权形式化理论
 - [Verification Toolchain](./05_verification_toolchain.md) — 验证工具链选型
-- [Separation Logic](./07_separation_logic.md) — 分离逻辑与 Rust 内存模型
+- [Separation Logic](./11_separation_logic.md) — 分离逻辑与 Rust 内存模型
 - [RustBelt](./04_rustbelt.md) — Rust 类型系统的 Iris 形式化证明
 - [Linear Logic](./01_linear_logic.md) — 线性逻辑基础
 
@@ -585,108 +545,60 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 >
-> **[来源: [Iris Project](https://iris-project.org/)]**
 >
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ## 十、边界测试：Hoare 逻辑的编译错误
 

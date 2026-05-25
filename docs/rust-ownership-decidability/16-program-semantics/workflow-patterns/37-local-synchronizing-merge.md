@@ -67,6 +67,7 @@
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -157,6 +158,7 @@ n 在局部上下文中确定
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 BPMN 表示
@@ -210,6 +212,7 @@ n 在局部上下文中确定
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 CCS 表示
@@ -262,9 +265,11 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -340,6 +345,7 @@ macro_rules! local_sync_merge {
 ```
 
 ### 5.2 带错误处理的高级实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -425,6 +431,7 @@ impl ResilientLocalSyncMerge {
 ```
 
 ### 5.3 本地数据聚合完整示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -531,9 +538,11 @@ async fn join_all_aggregation() {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 活性 (Liveness)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理**: 若所有局部固定分支最终完成，则局部同步合并最终会触发。
@@ -555,6 +564,7 @@ async fn join_all_aggregation() {
 **结论**: 局部同步合并满足活性。
 
 ### 6.2 安全性 (Safety)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理**: 只有局部上下文中的分支参与同步。
@@ -570,6 +580,7 @@ $$
 `tokio::join!` 和 `join_all` 仅等待传入的 future，外部分支不影响同步。
 
 ### 6.3 正确性条件
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **完备性**: 所有局部分支完成后才触发。
@@ -581,9 +592,11 @@ $$
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 7.1 模式层次
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -601,6 +614,7 @@ Merge Patterns
 ```
 
 ### 7.2 形式化关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 $$
@@ -614,6 +628,7 @@ $$
 $$
 
 ### 7.3 与分割模式的配合
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 分割模式 | 推荐合并模式 | 说明 |
@@ -625,9 +640,11 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 本地数据聚合
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **场景**: 从固定数量的本地数据源聚合
@@ -640,6 +657,7 @@ sources:
 ```
 
 ### 8.2 编译期并行任务
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **场景**: 编译时确定的并行构建任务
@@ -652,6 +670,7 @@ build:
 ```
 
 ### 8.3 固定传感器网络
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **场景**: 工业控制中固定传感器的数据采集
@@ -666,9 +685,11 @@ sensors:
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 超时局部同步合并
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -690,6 +711,7 @@ impl<const N: usize> TimeoutLocalSyncMerge<N> {
 ```
 
 ### 9.2 有序局部同步合并
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 保持结果按固定顺序返回：
@@ -704,6 +726,7 @@ where
 ```
 
 ### 9.3 嵌套局部同步合并
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -719,6 +742,7 @@ LocalSyncMerge
 ---
 
 ## 10. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 局部同步合并模式提供了高效的无环局部同步机制，适用于编译时或局部范围内确定分支数量的场景。其核心优势包括：
@@ -733,6 +757,7 @@ LocalSyncMerge
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". Distributed and Parallel Databases.
@@ -951,4 +976,3 @@ LocalSyncMerge
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -59,6 +59,7 @@ Pin-project解决的问题：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 PIN-1 ( Pin保证 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -72,6 +73,7 @@ $$
 $$
 
 ### 定义 PIN-2 ( Unpin trait )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -83,6 +85,7 @@ $$
 $$
 
 ### 定理 PIN-T1 ( Pin传播 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 结构被Pin后字段也被Pin。
@@ -94,9 +97,11 @@ $$
 ---
 
 ## 3. 自引用结构
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 SELFREF-1 ( 自引用定义 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -107,6 +112,7 @@ struct SelfReferential {
 ```
 
 ### 定义 SELFREF-2 ( 不安全移动 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 $$
@@ -116,9 +122,11 @@ $$
 ---
 
 ## 4. 投影安全
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 PROJECTION-1 ( 安全投影 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -131,6 +139,7 @@ struct Foo {
 ```
 
 ### 定义 PROJECTION-2 ( 投影类型 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 字段标记 | 投影结果 | 说明 |
@@ -139,6 +148,7 @@ struct Foo {
 | 无标记 | `&mut U` | 解Pin |
 
 ### 定理 PROJECTION-T1 ( 安全保证 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 投影不改变Pin语义。
@@ -150,9 +160,11 @@ $$
 ---
 
 ## 5. 宏实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 MACRO-1 ( pin_project! )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -187,9 +199,11 @@ impl MyFuture {
 ---
 
 ## 6. Drop安全
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定义 DROP-1 ( PinnedDrop )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -208,6 +222,7 @@ impl PinnedDrop for Foo {
 ```
 
 ### 定理 DROP-T1 ( Drop安全 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 PinnedDrop保证在Pin状态下drop。
@@ -219,9 +234,11 @@ $$
 ---
 
 ## 7. 定理与证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定理 PINPROJECT-T1 ( 内存安全 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 宏生成代码内存安全。
@@ -231,6 +248,7 @@ $$
 $$
 
 ### 定理 PINPROJECT-T2 ( 投影正确性 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 投影保持Pin不变量。
@@ -242,9 +260,11 @@ $$
 ---
 
 ## 8. 代码示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 示例1: 基础自引用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -281,6 +301,7 @@ impl SelfReferential {
 ```
 
 ### 示例2: 异步组合器
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -319,6 +340,7 @@ impl<F: Future> Future for Timeout<F> {
 ```
 
 ### 示例3: 流适配器
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -366,6 +388,7 @@ impl<S: FusedStream, F> FusedStream for Filter<S, F> {
 ```
 
 ### 示例4: PinnedDrop
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -497,4 +520,3 @@ impl PinnedDrop for Buffer {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

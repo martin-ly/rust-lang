@@ -66,6 +66,7 @@
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -164,6 +165,7 @@ $$
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 BPMN 表示
@@ -241,6 +243,7 @@ $$
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 CCS 表示
@@ -309,6 +312,7 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现：JoinSet 与 AbortHandle
@@ -555,9 +559,11 @@ struct JobTracking {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 活性 (Liveness)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理**: 若至少一个守卫条件为真，则取消操作不会导致系统死锁，剩余实例最终会完成。
@@ -579,6 +585,7 @@ struct JobTracking {
 **结论**: 取消多实例活动满足活性。
 
 ### 6.2 安全性 (Safety)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **定理**: 只有满足取消条件的实例会被取消，其他实例不受影响。
@@ -594,6 +601,7 @@ $$
 取消器仅创建 $\text{Cancelled}$ 中分支的任务，因此仅条件为真的分支被执行。
 
 ### 6.3 取消正确性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **定理**: 取消操作是幂等的——对同一实例多次取消等效于一次取消。
@@ -612,9 +620,11 @@ handle.abort(); // 第二次：无效果
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 模式层次
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -632,6 +642,7 @@ Multiple Instances without Synchronization
 ```
 
 ### 7.2 形式化关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 $$
@@ -645,6 +656,7 @@ $$
 $$
 
 ### 7.3 与多实例模式的配合
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 多实例模式 | 取消模式 | 说明 |
@@ -656,9 +668,11 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 批量数据处理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **场景**: 大规模数据批处理中，取消超时或失败的分片任务
@@ -671,6 +685,7 @@ rules:
 ```
 
 ### 8.2 分布式爬虫
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **场景**: 爬虫任务中取消重复或低价值的 URL 抓取
@@ -683,6 +698,7 @@ instances:
 ```
 
 ### 8.3 金融对账系统
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **场景**: 对账作业中取消已确认无误的批次，集中资源处理异常批次
@@ -697,9 +713,11 @@ conditions:
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 超时自动取消
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 实例运行超过指定时间后自动取消：
@@ -715,6 +733,7 @@ pub async fn auto_cancel_with_timeout(
 ```
 
 ### 9.2 级联取消
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 取消一个实例时，级联取消依赖它的实例：
@@ -746,6 +765,7 @@ pub fn cancel_with_dependencies(
 ---
 
 ## 10. 总结
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 取消多实例活动模式提供了对多实例活动的细粒度控制能力，其核心优势包括：
@@ -760,6 +780,7 @@ pub fn cancel_with_dependencies(
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". Distributed and Parallel Databases.
@@ -984,4 +1005,3 @@ pub fn cancel_with_dependencies(
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

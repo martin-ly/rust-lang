@@ -13,9 +13,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 语言规范预研：从参考文档到形式化规范](#rust-语言规范预研从参考文档到形式化规范)
   - [📑 目录](#-目录)
@@ -46,13 +44,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：参考文档的局限性
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 当前 Rust 的权威定义分散在多个文档中：
 
@@ -85,7 +80,6 @@
 
 ### 1.2 规范的多层次需求
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TD
@@ -116,7 +110,6 @@ graph TD
 
 ### 1.3 Ferrocene 规范的先行探索
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Ferrocene 项目在实践中探索了 Rust 技术规范的形态：
 
@@ -151,14 +144,9 @@ Ferrocene 规范的局限:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 规范的内容层次
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 理想的 Rust 规范分层:
@@ -191,7 +179,6 @@ Ferrocene 规范的局限:
 
 ### 2.2 与形式化验证的衔接
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph LR
@@ -217,7 +204,6 @@ graph LR
 ```
 
 > **认知功能**: 此图展示语言规范作为**形式化验证和工业认证的共同基础**——一个精确的规范使验证工具和认证证据能够建立在同一语义基础上。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: 当前形式化验证工具各自维护对 Rust 语义的**独立理解**，导致结果不可比较。统一规范将解决这一碎片化问题。
 > [来源: [Formal Methods Preview](./02_formal_methods.md)]
 
@@ -225,7 +211,6 @@ graph LR
 
 ### 2.3 维护挑战
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Rust 规范维护的核心挑战:
@@ -257,10 +242,6 @@ Rust 规范维护的核心挑战:
 ---
 
 ## 三、社区视角
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 利益相关方 | 对规范的需求 | 当前痛点 | 优先级 |
 |:---|:---|:---|:---:|
@@ -277,14 +258,9 @@ Rust 规范维护的核心挑战:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -306,7 +282,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树评估编写完整形式化规范的**时机和方式**。核心判断标准是语言稳定性、资源可用性和需求紧迫性。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 当前阶段（2026）应采取**渐进策略**——先完善 L1/L2（Reference + 技术规范），在语言更稳定后再推进 L3/L4（形式化/可执行规约）。
 > **关键洞察**: Ferrocene 的先行探索证明了"渐进可行"——从认证需要的子集开始，逐步扩展，而非等待"一次性完整规范"。
 > [来源: 💡 原创分析]
@@ -315,7 +290,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 规范的完备性不可能
@@ -348,7 +322,6 @@ graph TD
 
 ## 五、演进路线
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -360,13 +333,10 @@ graph TD
 | 完整规范 v1.0 | ⬜ | 2030+ | 覆盖 stable Rust 的语言规范 |
 
 > **预测**: Rust 的完整技术规范可能在 **2030 年左右** 达到可用状态。这不是因为技术困难，而是因为**优先级和社区资源分配**。在此之前，Ferrocene 规范和 gccrs 的独立努力将填补部分空白。
-> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
 
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -387,10 +357,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Formal Methods](./02_formal_methods.md) — 形式化方法工业化
 - [RustBelt](../04_formal/04_rustbelt.md) — Rust 所有权的形式化模型
@@ -412,88 +378,17 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ## 十、边界测试：Rust 规范预览的编译错误
 

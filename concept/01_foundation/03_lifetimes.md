@@ -22,7 +22,6 @@
 
 ## 📑 目录
 >
-> [来源: [TRPL — Lifetimes]]
 
 - [Lifetimes（生命周期）](#lifetimes生命周期)
   - [📑 目录](#-目录)
@@ -77,24 +76,19 @@
     - [10.5 边界测试：生命周期省略规则的三条规则（编译错误）](#105-边界测试生命周期省略规则的三条规则编译错误)
 
 ## 一、权威定义（Definition）
->
-> [来源: [TRPL — Lifetimes]]
 
 ### 1.1 TRPL 官方定义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[TRPL: Ch10.3]** Lifetimes are another kind of generic that we've already been using. Rather than ensuring that a type has the behavior we want, lifetimes ensure that references are valid as long as we need them to be. Every reference in Rust has a lifetime, which is the scope for which that reference is valid.
 
 ### 1.2 Wikipedia 对齐定义
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[Wikipedia: Region-based memory management]** Region-based memory management is a type of memory management in which each allocated object is assigned to a region. A region, also called a zone, arena, area, or memory context, is a collection of allocated objects that can be efficiently deallocated all at once. In Rust, lifetimes are a form of **static region inference** where regions are associated with references and checked at compile time.
 
 ### 1.3 形式化定义（区域类型）
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[Wikipedia: Region-based memory management]** Rust uses a system of lifetimes that can be understood as **region types** (Tofte & Talpin, 1994) adapted for an imperative, non-GC language. Each reference `&'a T` is parameterized by a lifetime `'a` representing the region during which the reference is guaranteed to be valid.
 
@@ -216,14 +210,11 @@ Polonius 的改进:
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
->
-> [来源: [TRPL — Lifetimes]]
 
 生命周期不仅是语法标注，更是一组可组合的编译期约束。以下矩阵覆盖了标注形式、关系语义与推导规则的完整空间。
 
 ### 2.1 生命周期标注矩阵
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **标注形式** | **含义** | **使用场景** | **省略规则（Elision）** |
 |:---|:---|:---|:---|
@@ -235,7 +226,6 @@ Polonius 的改进:
 
 ### 2.2 生命周期关系矩阵
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | **关系** | **语法** | **语义** | **示例** |
 |:---|:---|:---|:---|
@@ -246,7 +236,6 @@ Polonius 的改进:
 
 ### 2.3 生命周期省略规则（Elision Rules）
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | **规则** | **条件** | **自动推导** | **示例** |
 |:---|:---|:---|:---|
@@ -259,8 +248,6 @@ Polonius 的改进:
 > **过渡**: 属性矩阵展示了生命周期规则的静态特征，接下来需要建立概念之间的关联网络——生命周期如何与借用、泛型、异步等机制交织，形成完整的引用安全体系。
 
 ## 三、思维导图（Mind Map）
->
-> [来源: [TRPL — Lifetimes]]
 
 生命周期的全部知识可以组织为"标注—推断—关系—验证—特殊形式"五个维度。
 
@@ -302,14 +289,11 @@ graph TD
 > **过渡**: 思维导图呈现了生命周期的静态知识结构，而定理推理链则回答"为什么能这么保证"——通过区域类型、子类型、约束可满足性的层层演绎，建立引用有效性的形式化保证。
 
 ## 四、定理推理链（Theorem Chain）
->
-> [来源: [TRPL — Lifetimes]]
 
 生命周期的安全保障不是单一规则，而是一组从引理到定理再到推论的严密链条。每一步都以上一步为前提，形成"⟹"标注的完整推理路径。
 
 ### 4.1 引理：引用不能比数据活得更久 ⟹ 悬垂指针在编译期被消除
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 引理 L1: 引用不能比数据活得更久
@@ -325,7 +309,6 @@ graph TD
 
 ### 4.2 引理：生命周期构成偏序集 ⟹ outlives 关系可传递
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 引理 L2: 生命周期构成偏序集 (Lifetimes, ⊑)
@@ -362,11 +345,8 @@ graph BT
 ```
 
 > **认知功能**: 此 Hasse 图将抽象的「生命周期偏序关系」转化为**可视化的层次结构**。读者可直观理解三个核心事实：(1) 'static 是「祖宗」，outlives 一切；(2) 生命周期形成从顶到底的偏序链；(3) 并列节点（如 'a 和 'b）不可比较，不能互相替代。此图特别有助于理解协变/逆变：协变 = 沿箭头向下替换安全，逆变 = 沿箭头向上替换安全。建议读者在编写泛型约束时，将此图作为「哪个生命周期可以替代哪个」的参考。 [来源: Davey & Priestley, *Introduction to Lattices and Order*; Tofte & Talpin 1994]
-> [来源: [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ### 4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 定理 T1: Elision 推导正确性
@@ -381,8 +361,6 @@ graph BT
 > **[来源: Rust Reference: Lifetime elision]** 三条省略规则基于 Hindley-Milner 风格的模式推导，覆盖 90% 以上函数签名场景。✅
 
 ### 4.4 定理：NLL 流敏感安全 ⟹ 比词法作用域更精确的存活期
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 定理 T2: NLL 流敏感安全
@@ -397,8 +375,6 @@ graph BT
 > **[来源: RFC 2094]** NLL 将生命周期从词法作用域扩展到基于数据流的实际使用期，减少不必要的借用冲突。✅
 
 ### 4.5 定理：Variance 子类型安全 ⟹ 生命周期替换的合法性
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 定理 T3: Variance 子类型安全
@@ -413,8 +389,6 @@ graph BT
 > **[来源: Rust Reference: Variance]** 生命周期协变/逆变/不变的类型系统规则基于子类型理论。✅
 
 ### 4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 推论 C1: 'static 安全性
@@ -429,8 +403,6 @@ graph BT
 > **[来源: TRPL: Ch10.3]** 'static 作为最长生命周期，可安全 coercion 为任意较短生命周期。✅
 
 ### 4.7 推论：HRTB 全称量化 ⟹ 高阶回调的类型安全
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 推论 C2: HRTB 全称量化
@@ -445,8 +417,6 @@ graph BT
 > **[来源: Rust Reference: HRTB]** HRTB `for<'a>` 对应高阶逻辑中的全称量词 ∀。✅
 
 ### 4.8 推论：GATs + where Self: 'a ⟹ 自引用集合的表达能力
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 推论 C3: GATs 生命周期自洽
@@ -461,8 +431,6 @@ graph BT
 > **[来源: RFC 1598 (GATs)]** GATs 中 `where Self: 'a` 确保关联类型的生命周期自洽。✅
 
 ### 4.9 定理一致性矩阵
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -482,14 +450,10 @@ graph BT
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
->
-> [来源: [TRPL — Lifetimes]]
 
 定理链条的正确性需要通过代码实例来验证。以下示例覆盖正确用法、编译期反例与运行时边界。
 
 ### 5.1 正确示例：显式生命周期标注
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 // ✅ 正确: 显式标注返回值与参数的生命周期关联
@@ -506,8 +470,6 @@ fn main() {
 ```
 
 ### 5.2 正确示例：结构体中的生命周期
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // ✅ 正确: 结构体持有引用时必须标注生命周期
@@ -526,8 +488,6 @@ fn main() {
 ```
 
 ### 5.3 反例：返回局部引用（E0106 / E0716）
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
 // ❌ 反例: 返回悬垂引用
@@ -563,8 +523,6 @@ fn borrow_from_input<'a>(s: &'a str) -> &'a str {
 ```
 
 ### 5.4 反例：生命周期不匹配（E0597）
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
 // ❌ 反例: 结构体引用比数据活得长
@@ -595,8 +553,6 @@ fn main() {
 ```
 
 ### 5.5 边界示例：NLL 减少借用冲突
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // ✅ NLL 使此代码合法（在 NLL 之前为编译错误）
@@ -613,14 +569,10 @@ fn main() {
 ---
 
 ## 六、反命题与边界分析（Inverse Propositions & Boundary Analysis）
->
-> [来源: [TRPL — Lifetimes]]
 
 任何定理都有成立边界。以下通过决策树系统分析三个核心命题的成立条件与反例分布。
 
 ### 6.1 命题: "生命周期约束保证无悬垂指针"
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -639,7 +591,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树按**危险层级**排列生命周期的失效路径：unsafe（编译器完全放弃检查，最危险）→ 自引用未 Pin（Safe Rust 边界情况，编译器本应阻止但自引用结构特殊）→ Rc 循环（非悬垂，但资源泄漏）。关键认知：生命周期系统不是「万能防悬垂盾」，它的保证有明确边界——unsafe 和特殊结构（自引用）是主要缺口。底部的「四层分类」表格进一步系统化这些边界，帮助读者从「编译错误」反向定位违规层次。 [来源: 💡 原创分析]
-> [来源: [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 **四层分类**：
 
@@ -651,8 +602,6 @@ graph TD
 | 工程 | Box::leak 制造的 'static | 安全但不可回收，非悬垂 |
 
 ### 6.2 命题: "生命周期标注总是必要的"
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph TD
@@ -674,13 +623,10 @@ graph TD
 ```
 
 > **认知功能**: 此图是 Elision 规则的**反向验证器**。四个绿色节点覆盖了「无需显式标注」的全部场景，红色节点标记了唯一例外。读者可从此图中提炼出极简记忆法则：「无引用 → 不标；单输入 → 不标；方法 &self → 不标；多输入多输出非方法 → 必须标」。这消除了「何时需要写 <'a>」的犹豫，将生命周期标注从「凭经验猜测」转化为「按条件判定」。 [来源: 💡 原创分析]
-> [来源: [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 **核心洞察**：Elision 的三条规则覆盖了绝大多数函数签名，只有在"多输入生命周期 + 返回引用 + 非方法"的交集处才需要显式标注。
 
 ### 6.3 命题: "'static 意味着永远存活"
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -701,19 +647,14 @@ graph TD
 ```
 
 > **认知功能**: 此图解构了 'static 的**多重身份**。四种合法来源（字符串字面量、全局常量、Box::leak、LazyLock）本质不同——有的来自静态数据段，有的来自故意泄漏，有的来自延迟初始化——但类型系统将它们统一为 'static。关键认知：'static 不是「存储位置」的约束，而是「存活时间」的约束。两个反例展示了试图「伪造」'static 的后果：编译期拦截（局部变量）或运行时 UB（unsafe 伪造）。这帮助读者理解 'static 的语义本质：它是「时间」的 ⊤，而非「空间」的全局。 [来源: 💡 原创分析]
-> [来源: [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ---
 
 ## 七、边界极限测试代码（Boundary Stress Tests）
->
-> [来源: [TRPL — Lifetimes]]
 
 边界测试是验证定理在极限场景下是否仍然成立的关键手段。以下三个测试分别挑战生命周期偏序、HRTB 灵活性与 'static 构造。
 
 ### 7.1 边界：生命周期偏序的传递链
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 // 测试: 'a: 'b 且 'b: 'c  ⟹  'a: 'c 的传递性
@@ -735,8 +676,6 @@ fn main() {
 ```
 
 ### 7.2 边界：HRTB 与闭包生命周期的极限
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // 测试: HRTB 允许闭包接受任意短生命周期
@@ -763,8 +702,6 @@ fn main() {
 ```
 
 ### 7.3 边界：'static 的构造与协变收窄
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use std::sync::LazyLock;
@@ -954,7 +891,6 @@ fn fixed() {
 ---
 
 ## 九、认知路径（Cognitive Path）
->
 
 ### 10.5 边界测试：生命周期省略规则的三条规则（编译错误）
 

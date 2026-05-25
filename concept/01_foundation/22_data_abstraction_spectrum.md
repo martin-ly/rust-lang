@@ -26,7 +26,6 @@
 
 ### 2.1 第一层：内存布局抽象（C struct）
 
-> **[来源: C Standard — §6.7.2.1 Structure and union specifiers] · [K&R C, Ch. 6]** ✅
 
 C 的 `struct` 是**最底层的数据抽象**——仅定义内存中字段的顺序和类型：
 
@@ -48,7 +47,6 @@ struct Point {
 
 ### 2.2 第二层：行为封装（C++ class）
 
-> **[来源: Stroustrup — The C++ Programming Language, Ch. 16] · [C++ Standard — §11.4 Class declaration]** ✅
 
 C++ 将数据与行为绑定，引入访问控制和构造函数：
 
@@ -72,7 +70,6 @@ public:
 
 ### 2.3 第三层：接口与实现分离（Java interface + class）
 
-> **[来源: Gosling et al. — The Java Language Specification, Ch. 9] · [Wikipedia: Interface (Java)]** ✅
 
 Java 将数据抽象分为两个正交维度：
 
@@ -99,7 +96,6 @@ class Circle implements Drawable {
 
 ### 2.4 第四层：代数数据类型（Haskell/ML enum/variant）
 
-> **[来源: Pierce TAPL, §11 — Algebraic Datatypes] · [Wikipedia: Algebraic data type]** ✅
 
 函数式语言将数据抽象为**代数数据类型**——通过积类型（product）和和类型（sum）的组合构造复杂数据：
 
@@ -131,7 +127,6 @@ area (Triangle a b c) = ...
 
 ### 2.5 第五层：Rust 的 enum + trait（代数类型 + 行为契约）
 
-> **[来源: Rust Reference — §4.2.1 Enumerations] · [TRPL — Ch. 6 Enums and Pattern Matching] · [RFC 0003 — Attributes]** ✅
 
 Rust 将 Haskell 的代数数据类型与 Java 的接口契约融合：
 
@@ -233,7 +228,6 @@ Rust + Ownership    → 代数类型 + 行为契约 + 资源安全保证
 
 ### 3.1 开放/封闭原则的差异
 
-> **[来源: Meyer — Object-Oriented Software Construction] · [Wikipedia: Open–closed principle]** ✅
 
 | 原则 | C++ 继承 | Rust trait |
 |:---|:---|:---|
@@ -261,7 +255,6 @@ impl Colored for Point {
 
 ### 3.2 多继承与 Trait 组合
 
-> **[来源: C++ Standard — §11.7 Multiple inheritance] · [Rust Reference — §4.2.5 Trait objects]** ✅
 
 C++ 的多继承：
 
@@ -308,7 +301,6 @@ fn process<T: Drawable + Serializable>(item: T) {
 
 ### 4.1 消除空指针：Option<T> 替代 nullable
 
-> **[来源: Hoare 2009 — Null References: The Billion Dollar Mistake] · [Rust Reference — §4.2.1]** ✅
 
 | 语言 | nullable 表示 | 安全性 |
 |:---|:---|:---:|
@@ -449,7 +441,6 @@ impl std::fmt::Display for MyVec {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Pierce TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner 1985](https://dl.acm.org/doi/10.1145/6041.6042) · [Stroustrup — The C++ Programming Language](https://www.stroustrup.com/4th.html) · [JLS](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
->
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24

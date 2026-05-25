@@ -52,9 +52,11 @@ Tokio-Util提供:
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Encoder特质
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 2.1 (Encoder)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -67,6 +69,7 @@ pub trait Encoder<Item> {
 ```
 
 ### 定理 2.1 (编码不变式)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > 成功编码后，dst包含完整的编码消息。
@@ -87,9 +90,11 @@ impl Encoder<MyMessage> for MyCodec {
 ∎
 
 ### 2.2 Decoder特质
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 2.2 (Decoder)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -268,4 +273,3 @@ spawn(async move {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

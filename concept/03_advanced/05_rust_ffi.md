@@ -11,9 +11,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust FFI：与外部代码的安全边界](#rust-ffi与外部代码的安全边界)
   - [📑 目录](#-目录)
@@ -43,13 +41,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 FFI 的基本模型
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 通过 FFI 与外部代码交互时，安全保证在边界处**显式截断**：
 
@@ -82,7 +77,6 @@ graph LR
 
 ### 1.2 ABI 与调用约定
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 ABI (Application Binary Interface) 决定:
@@ -113,7 +107,6 @@ Rust 支持的 ABI:
 
 ### 1.3 类型映射与布局兼容
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | Rust 类型 | C 类型 | 布局保证 | 注意 |
 |:---|:---|:---:|:---|
@@ -139,14 +132,9 @@ Rust 支持的 ABI:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 extern 块的完整语法
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // 声明外部函数
@@ -186,7 +174,6 @@ unsafe {
 
 ### 2.2 不透明类型与封装
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // 模式: 不透明指针（Opaque Pointer）
@@ -232,7 +219,6 @@ impl Drop for SafeConnection {
 
 ### 2.3 回调与闭包传递
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
 // 将 Rust 闭包传递给 C 的回调机制
@@ -269,7 +255,6 @@ where
 ```
 
 > **回调难点**:
->
 > 1. C 回调必须是 `extern "C" fn`（函数指针），不能是闭包
 > 2. 需要通过 `user_data` 参数传递闭包环境
 > 3. **生命周期管理复杂**——谁释放 `user_data`？何时释放？
@@ -279,10 +264,6 @@ where
 ---
 
 ## 三、工具链生态
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
 graph TD
@@ -303,21 +284,15 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust FFI 生态的**工具链层次**——从自动生成绑定到运行时动态加载，再到验证工具。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 优先使用 `bindgen`/`cbindgen` 自动生成绑定，减少手工错误；复杂场景使用 `libloading` 动态加载；所有 FFI 代码应用 Miri 和 valgrind 验证。
 > [来源: [bindgen User Guide](https://rust-lang.github.io/rust-bindgen/)]
 
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -335,7 +310,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树评估 C 库是否适合被 Rust 安全封装。核心判断标准是**不变量的文档化程度**和**可表达性**。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 优先封装有清晰 API 契约的 C 库（如 OpenSSL、SQLite）；避免封装内部行为不透明的遗留代码。
 > **关键洞察**: FFI 安全封装的本质是**将 C 的不变量映射到 Rust 的类型系统**。如果 C 库本身没有明确的不变量，映射就不可能完整。
 > [来源: 💡 原创分析]
@@ -344,7 +318,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 类型系统的不匹配
@@ -370,13 +343,11 @@ graph TD
 ```
 
 > **边界要点**: FFI 的边界不是 Rust 语言的限制，而是**两种语言语义模型差异**的必然结果。安全封装需要深入理解两边的语义。
-> [来源: [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html)]
 
 ---
 
 ## 五、常见陷阱与最佳实践
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: CString 生命周期
@@ -520,8 +491,6 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -535,10 +504,6 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe](./03_unsafe.md) — unsafe Rust 与内存安全
 - [Type System](../01_foundation/04_type_system.md) — Rust 类型系统基础
@@ -548,7 +513,6 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -560,108 +524,60 @@ unsafe fn c_get_buffer<'a>() -> &'a [u8] {
 
 ## 权威来源索引
 
-> **[来源: [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)]**
 >
-> **[来源: [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 10.3 边界测试：FFI 中的空指针解引用（运行时 UB）
 

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [USB-Device协议栈形式化分析](#usb-device协议栈形式化分析)
@@ -37,6 +38,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 usb-device为嵌入式USB设备提供：
@@ -49,9 +51,11 @@ usb-device为嵌入式USB设备提供：
 ---
 
 ## 2. USB状态机
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 USB-STATE-1 ( 设备状态 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -71,6 +75,7 @@ Suspended -> Configured (恢复信号)
 ```
 
 ### 定义 USB-STATE-2 ( 枚举流程 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 $$
@@ -78,6 +83,7 @@ $$
 $$
 
 ### 定理 USB-T1 ( 状态安全 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 状态转换只能在特定请求后发生。
@@ -89,9 +95,11 @@ $$
 ---
 
 ## 3. 端点管理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 EP-1 ( 端点类型 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类型 | 方向 | 用途 |
@@ -102,6 +110,7 @@ $$
 | Isochronous | 双向 | 实时数据 |
 
 ### 定义 EP-2 ( 端点状态 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 $$
@@ -114,6 +123,7 @@ $$
 $$
 
 ### 定义 EP-3 ( 端点操作 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 $$
@@ -127,9 +137,11 @@ $$
 ---
 
 ## 4. 描述符安全
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定义 DESC-1 ( 描述符链 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -152,6 +164,7 @@ struct UsbDeviceDescriptor {
 ```
 
 ### 定理 DESC-T1 ( 描述符完整性 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 所有描述符必须满足USB规范约束。
@@ -163,9 +176,11 @@ $$
 ---
 
 ## 5. 类实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 CLASS-1 ( CDC ACM )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 通信设备类 - 虚拟串口。
@@ -180,6 +195,7 @@ $$
 $$
 
 ### 定义 CLASS-2 ( HID )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 人机接口设备 - 键盘/鼠标。
@@ -195,9 +211,11 @@ $$
 ---
 
 ## 6. 定理与证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 USB-T2 ( 端点隔离 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 不同端点的数据传输相互隔离。
@@ -209,6 +227,7 @@ $$
 **证明**: 端点有独立硬件缓冲区和地址。$\square$
 
 ### 定理 USB-T3 ( 控制传输优先 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 控制端点(EP0)优先于其他端点。
@@ -220,9 +239,11 @@ $$
 ---
 
 ## 7. 代码示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 示例1: USB串口(CDC)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -268,6 +289,7 @@ fn usb_cdc_example() {
 ```
 
 ### 示例2: USB HID键盘
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -319,6 +341,7 @@ fn usb_hid_keyboard() {
 ```
 
 ### 示例3: 自定义USB类
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -375,11 +398,9 @@ impl<B: UsbBus> UsbClass<B> for CustomClass<'_, B> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -459,4 +480,3 @@ impl<B: UsbBus> UsbClass<B> for CustomClass<'_, B> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

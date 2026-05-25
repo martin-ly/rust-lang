@@ -10,36 +10,34 @@
 >
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [概念一致性检查清单（Concept Consistency Audit Checklist）](#概念一致性检查清单concept-consistency-audit-checklist)
   - [📑 目录](#-目录)
-    - [〇、质量门禁流程](#〇质量门禁流程)
-  - [一、关系清晰度检查（Inter-File Consistency） \[来源: 跨文件一致性审计方法论 — 确保概念定义在不同层级文件中保持逻辑等价; 参照 IEEE 1012 验证标准\]](#一关系清晰度检查inter-file-consistency-来源-跨文件一致性审计方法论--确保概念定义在不同层级文件中保持逻辑等价-参照-ieee-1012-验证标准)
-    - [1.1 跨层关系](#11-跨层关系)
-    - [1.2 层内关系](#12-层内关系)
-    - [1.3 交叉概念一致性](#13-交叉概念一致性)
-  - [二、定理一致性检查（Theorem Consistency） \[来源: 形式化验证中的定理证明一致性 — 参照 TAPL (Pierce, 2002) 类型系统元理论; RustBelt (Jung et al., POPL 2018) 的协议验证框架\]](#二定理一致性检查theorem-consistency-来源-形式化验证中的定理证明一致性--参照-tapl-pierce-2002-类型系统元理论-rustbelt-jung-et-al-popl-2018-的协议验证框架)
-    - [2.1 每个核心文件的定理链](#21-每个核心文件的定理链)
-    - [2.2 跨文件定理一致性](#22-跨文件定理一致性)
-  - [三、反例与边界完备性检查（Counter-example Completeness） \[来源: 边界测试方法论 — 参照 Torchiano et al. (2018) 关于软件工程知识库边界分析的研究\]](#三反例与边界完备性检查counter-example-completeness-来源-边界测试方法论--参照-torchiano-et-al-2018-关于软件工程知识库边界分析的研究)
-    - [3.1 每个核心概念的反例覆盖](#31-每个核心概念的反例覆盖)
-    - [3.2 否定命题分析](#32-否定命题分析)
-  - [四、认知路径检查（Cognitive Path） \[来源: 认知路径设计参照建构主义学习理论 — Bruner (1961) 发现学习理论; Ausubel (1968) 有意义学习理论; 概念文件的认知路径章节要求渐进式推导\]](#四认知路径检查cognitive-path-来源-认知路径设计参照建构主义学习理论--bruner-1961-发现学习理论-ausubel-1968-有意义学习理论-概念文件的认知路径章节要求渐进式推导)
-    - [4.1 渐进式推导](#41-渐进式推导)
-  - [五、来源与可信度检查（Provenance） \[来源: 来源可信度分级 — 一级: Rust Reference/RFCs/学术论文; 二级: Rust Internals/开发者博客; 三级: TRPL/Rustonomicon; 参照证据金字塔模型\]](#五来源与可信度检查provenance-来源-来源可信度分级--一级-rust-referencerfcs学术论文-二级-rust-internals开发者博客-三级-trplrustonomicon-参照证据金字塔模型)
-    - [5.1 来源标注](#51-来源标注)
-  - [六、跨引用密度检查（Cross-reference Density） \[来源: 跨引用密度 ≥3/文件的要求参照 hypertext 认知负荷研究 — 适度链接促进概念网络形成，过度链接导致导航迷失; 本知识体系采用 3-5 个核心跨文件链接作为平衡点\]](#六跨引用密度检查cross-reference-density-来源-跨引用密度-3文件的要求参照-hypertext-认知负荷研究--适度链接促进概念网络形成过度链接导致导航迷失-本知识体系采用-3-5-个核心跨文件链接作为平衡点)
+  - [〇、质量门禁流程](#〇质量门禁流程)
+ [一、关系清晰度检查（Inter-File Consistency） \](#一关系清晰度检查inter-file-consistency)
+  - [1.1 跨层关系](#11-跨层关系)
+  - [1.2 层内关系](#12-层内关系)
+  - [1.3 交叉概念一致性](#13-交叉概念一致性)
+ [二、定理一致性检查（Theorem Consistency） \](#二定理一致性检查theorem-consistency)
+  - [2.1 每个核心文件的定理链](#21-每个核心文件的定理链)
+  - [2.2 跨文件定理一致性](#22-跨文件定理一致性)
+ [三、反例与边界完备性检查（Counter-example Completeness） \](#三反例与边界完备性检查counter-example-completeness)
+  - [3.1 每个核心概念的反例覆盖](#31-每个核心概念的反例覆盖)
+  - [3.2 否定命题分析](#32-否定命题分析)
+ [四、认知路径检查（Cognitive Path） \](#四认知路径检查cognitive-path)
+  - [4.1 渐进式推导](#41-渐进式推导)
+ [五、来源与可信度检查（Provenance） \](#五来源与可信度检查provenance)
+  - [5.1 来源标注](#51-来源标注)
+ [六、跨引用密度检查（Cross-reference Density） \](#六跨引用密度检查cross-reference-density)
   - [七、自动化检查脚本（已实现）](#七自动化检查脚本已实现)
-  - [八、审计周期 \[来源: Rust 6 周发布周期驱动文档审计频率; 重大修改后立即执行审计，参照 AGENTS.md 维护规范第 4 条\]](#八审计周期-来源-rust-6-周发布周期驱动文档审计频率-重大修改后立即执行审计参照-agentsmd-维护规范第-4-条)
+ [八、审计周期 \](#八审计周期)
   - [九、当前审计状态摘要](#九当前审计状态摘要)
   - [十、TODO](#十todo)
   - [十一、外部专家评审流程指南](#十一外部专家评审流程指南)
-    - [评审目标](#评审目标)
-    - [评审周期](#评审周期)
-    - [评审检查单](#评审检查单)
+  - [评审目标](#评审目标)
+  - [评审周期](#评审周期)
+  - [评审检查单](#评审检查单)
   - [相关概念文件](#相关概念文件)
 
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
@@ -91,9 +89,7 @@ flowchart TD
 
 ## 一、关系清晰度检查（Inter-File Consistency） [来源: 跨文件一致性审计方法论 — 确保概念定义在不同层级文件中保持逻辑等价; 参照 IEEE 1012 验证标准]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 跨层关系
 
@@ -127,10 +123,6 @@ flowchart TD
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
 ## 二、定理一致性检查（Theorem Consistency） [来源: 形式化验证中的定理证明一致性 — 参照 TAPL (Pierce, 2002) 类型系统元理论; RustBelt (Jung et al., POPL 2018) 的协议验证框架]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 每个核心文件的定理链
 
@@ -154,10 +146,6 @@ flowchart TD
 ---
 
 ## 三、反例与边界完备性检查（Counter-example Completeness） [来源: 边界测试方法论 — 参照 Torchiano et al. (2018) 关于软件工程知识库边界分析的研究]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 每个核心概念的反例覆盖
 
@@ -180,10 +168,6 @@ flowchart TD
 ---
 
 ## 四、认知路径检查（Cognitive Path） [来源: 认知路径设计参照建构主义学习理论 — Bruner (1961) 发现学习理论; Ausubel (1968) 有意义学习理论; 概念文件的认知路径章节要求渐进式推导]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 渐进式推导
 
@@ -197,10 +181,6 @@ flowchart TD
 ---
 
 ## 五、来源与可信度检查（Provenance） [来源: 来源可信度分级 — 一级: Rust Reference/RFCs/学术论文; 二级: Rust Internals/开发者博客; 三级: TRPL/Rustonomicon; 参照证据金字塔模型]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 5.1 来源标注
 
@@ -214,10 +194,6 @@ flowchart TD
 ---
 
 ## 六、跨引用密度检查（Cross-reference Density） [来源: 跨引用密度 ≥3/文件的要求参照 hypertext 认知负荷研究 — 适度链接促进概念网络形成，过度链接导致导航迷失; 本知识体系采用 3-5 个核心跨文件链接作为平衡点]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 检查项 | 检查方法 | 通过标准 | 状态 |
 |:---|:---|:---|:---|
@@ -229,10 +205,6 @@ flowchart TD
 ---
 
 ## 七、自动化检查脚本（已实现）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```bash
 # 概念一致性自动检查（已部署脚本）
@@ -259,7 +231,6 @@ python scripts/cross_concept_diff.py
 
 ## 八、审计周期 [来源: Rust 6 周发布周期驱动文档审计频率; 重大修改后立即执行审计，参照 AGENTS.md 维护规范第 4 条]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 审计类型 | 频率 | 负责人 | 输出 |
 |:---|:---|:---|:---|
@@ -270,8 +241,6 @@ python scripts/cross_concept_diff.py
 ---
 
 ## 九、当前审计状态摘要
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 维度 | 完成度 | 主要缺口 |
 |:---|:---|:---|
@@ -291,8 +260,6 @@ python scripts/cross_concept_diff.py
 ---
 
 ## 十、TODO
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [x] **高**: 实现自动化检查脚本 —— 已完成 `scripts/concept_audit.py` + `scripts/code_block_compiler.py`
 - [x] **高**: 为所有文件补充跨文件链接至 ≥3 个 —— 概念层 33/33 文件达标，元层 12 个文件无需链接
@@ -303,8 +270,6 @@ python scripts/cross_concept_diff.py
 ---
 
 ## 十一、外部专家评审流程指南
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 评审目标
 
@@ -330,16 +295,11 @@ python scripts/cross_concept_diff.py
 | 认知路径 | 6 步递进，无跳跃 |
 
 > **说明**: 外部专家评审流程指南已建立，但当前阶段不具备外部专家资源条件。评审工作由核心维护者通过自动化脚本 + 周期性人工审计完成。
->
 > **来源**: [Rust 社区治理] · [Rust Foundation] · [开源项目评审最佳实践]
 
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [知识体系方法论](./methodology.md) — 内容结构与思维表征规范
 - [权威来源清单](./sources.md) — 来源分级与引用规范
@@ -348,7 +308,6 @@ python scripts/cross_concept_diff.py
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1

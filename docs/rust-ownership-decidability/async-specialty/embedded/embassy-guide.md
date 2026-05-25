@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Embassy框架完整指南](#embassy框架完整指南)
@@ -232,6 +233,7 @@ spawner.spawn(button_task(button)).unwrap();
 ---
 
 ## 3. 异步外设使用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 UART with DMA
@@ -330,6 +332,7 @@ impl<'a> SpiDevice<'a> {
 ---
 
 ## 4. 无堆设计 (Heapless)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 静态任务分配
@@ -402,6 +405,7 @@ async fn consumer() {
 ---
 
 ## 5. 电源管理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Tickless Idle
@@ -462,6 +466,7 @@ async fn sleep_until_event() {
 ---
 
 ## 6. 并发模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 共享资源
@@ -551,6 +556,7 @@ async fn consumer_ch(receiver: Receiver<'static, ThreadModeRawMutex, Data, 10>) 
 ---
 
 ## 7. USB设备开发
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -592,9 +598,11 @@ async fn cdc_task(mut class: CdcAcmClass<'static>) {
 ---
 
 ## 8. 调试技巧
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 defmt日志
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -618,6 +626,7 @@ async fn debug_task() {
 ```
 
 ### 8.2 堆栈分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```toml
@@ -668,6 +677,7 @@ async fn stack_heavy_task() {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -866,4 +876,3 @@ async fn stack_heavy_task() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

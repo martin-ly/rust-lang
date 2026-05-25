@@ -17,9 +17,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [生命周期高级主题：从 HRTB 到自引用类型](#生命周期高级主题从-hrtb-到自引用类型)
   - [📑 目录](#-目录)
@@ -50,13 +48,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 高阶生命周期（HRTB）
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 HRTB (Higher-Ranked Trait Bounds):
@@ -95,7 +90,6 @@ HRTB (Higher-Ranked Trait Bounds):
 
 ### 1.2 生命周期省略规则
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 生命周期省略（Lifetime Elision）:
@@ -137,7 +131,6 @@ HRTB (Higher-Ranked Trait Bounds):
 
 ### 1.3 变型（Variance）
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 变型: 子类型关系在泛型参数上的传播
@@ -182,14 +175,9 @@ HRTB (Higher-Ranked Trait Bounds):
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 HRTB 的实际应用
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // HRTB 的实际应用
@@ -252,7 +240,6 @@ where F: for<'a> Fn(&'a str)
 
 ### 2.2 自引用与 Pin
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // 自引用结构: 结构体包含指向自身的引用
@@ -312,7 +299,6 @@ impl SelfReferential {
 
 ### 2.3 生命周期与闭包
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // 闭包捕获与生命周期
@@ -361,10 +347,6 @@ fn closure_lifetimes() {
 ---
 
 ## 三、生命周期模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 方案 → 代码模式
@@ -400,14 +382,9 @@ fn closure_lifetimes() {
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -430,7 +407,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 生命周期传染性
@@ -470,10 +446,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 返回局部引用
@@ -521,7 +493,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -534,10 +505,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期基础
 - [Pin](../03_advanced/06_pin_unpin.md) — Pin 与 Unpin
@@ -559,21 +526,14 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ## 十、边界测试：高级生命周期的编译错误
 

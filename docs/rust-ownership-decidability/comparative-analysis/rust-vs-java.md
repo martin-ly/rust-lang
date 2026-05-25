@@ -1,6 +1,7 @@
 # Rust vs Java：全面对比分析
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust vs Java：全面对比分析](#rust-vs-java全面对比分析)
@@ -52,6 +53,7 @@
   - [总结](#总结)
 
 ## 概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 和 Java 代表了两种截然不同的内存管理和运行时哲学：
@@ -60,6 +62,7 @@ Rust 和 Java 代表了两种截然不同的内存管理和运行时哲学：
 - **Rust**: 现代系统语言，通过所有权系统在编译期保证内存安全，零运行时开销
 
 ### 历史与定位
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 方面 | Java | Rust |
@@ -71,6 +74,7 @@ Rust 和 Java 代表了两种截然不同的内存管理和运行时哲学：
 | 设计哲学 | 企业级开发，生产力优先 | 系统编程，零成本抽象 |
 
 ## GC vs 所有权系统
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Java 垃圾回收
@@ -168,6 +172,7 @@ fn calculate_length(s: &String) -> usize {
 | 暂停时间 | 0.5ms - 100ms+ | 无暂停 |
 
 ## 性能基准测试
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 测试环境
@@ -223,6 +228,7 @@ Rust (Actix-web):
 ```
 
 ## 内存管理深度对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Java 内存模型
@@ -390,6 +396,7 @@ fn forget_leak() {
 ```
 
 ## 并发模型对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Java 并发
@@ -523,6 +530,7 @@ async fn async_example() {
 | 线程创建成本 | ~1MB 栈 | ~8KB 栈 |
 
 ## 类型系统比较
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Java 类型系统
@@ -653,6 +661,7 @@ fn use_option() {
 | 模式匹配 | switch 表达式（Java 17+） | match（完整） |
 
 ## 生态系统对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Java 生态系统
@@ -722,9 +731,11 @@ async fn main() {
 ```
 
 ## 代码示例对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 文件处理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### Java
@@ -788,6 +799,7 @@ async fn read_file_async(path: &str) -> tokio::io::Result<String> {
 ```
 
 ### REST API 服务
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### Java (Spring Boot)
@@ -906,9 +918,11 @@ async fn main() {
 ```
 
 ## 适用场景分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 选择 Java 的场景
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **企业级应用开发**
@@ -942,6 +956,7 @@ public class OrderService {
 ```
 
 ### 选择 Rust 的场景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **高性能服务**
@@ -978,6 +993,7 @@ async fn main() -> tokio::io::Result<()> {
 ```
 
 ### 混合架构建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -997,9 +1013,11 @@ async fn main() -> tokio::io::Result<()> {
 ```
 
 ## 迁移指南
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 从 Java 迁移到 Rust
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 逐步迁移策略
@@ -1043,6 +1061,7 @@ public class NativeLib {
 ```
 
 ### 思维转换
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | Java 概念 | Rust 等效 |
@@ -1056,6 +1075,7 @@ public class NativeLib {
 | `static` | `const` / `lazy_static` |
 
 ## 总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | Java | Rust |
@@ -1074,6 +1094,7 @@ public class NativeLib {
 - 如果优先考虑**快速开发、生态成熟、团队经验**，选择 **Java**
 - 如果优先考虑**性能、资源效率、内存安全**，选择 **Rust**
 - 在大型企业环境中，两者可以通过服务边界共存
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1085,11 +1106,9 @@ public class NativeLib {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -1418,4 +1437,3 @@ public class NativeLib {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

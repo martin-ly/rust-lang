@@ -206,6 +206,7 @@ async fn serve_connection<I, S>(
 ---
 
 ## 3. Service Trait 形式化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 Tower抽象层
@@ -241,6 +242,7 @@ $$
 > **[来源: Wikipedia - Concurrency]**
 
 ### 定理 3.1 (Service组合性)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > Service可以组合成处理链，类型系统保证组合正确。
@@ -273,12 +275,15 @@ let service = RateLimit::new(service, 100);
 ---
 
 ## 4. Body抽象与流控制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 HTTP/2流控制
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 4.1 (HTTP/2流控制窗口)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -308,6 +313,7 @@ $$
 $$
 
 ### 定理 4.1 (流控制安全性)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > HTTP/2流控制防止接收方被发送方淹没。
@@ -333,14 +339,17 @@ $$
 ∎
 
 ### 4.2 背压(Backpressure)分析
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 4.2 (背压)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 背压是流控制的一种形式，慢消费者可以减慢快生产者。
 
 ### 定理 4.2 (Hyper背压传播)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > Hyper的Body抽象正确传播背压从消费者到生产者。
@@ -384,12 +393,15 @@ trait Body {
 ---
 
 ## 5. 并发模型分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 连接池管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 5.1 (连接池)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -402,6 +414,7 @@ struct Pool<K, V> {
 ```
 
 ### 定理 5.1 (连接池正确性)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > Hyper的连接池正确复用连接，避免重复创建。
@@ -441,9 +454,11 @@ fn put_connection(&mut self, key: K, conn: V) {
 ∎
 
 ### 5.2 超时与取消
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 5.2 (超时语义)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -455,6 +470,7 @@ enum TimeoutState {
 ```
 
 ### 定理 5.2 (取消安全性)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > Hyper的请求取消不会导致资源泄漏。
@@ -486,12 +502,15 @@ async fn request(&self, req: Request<Body>) -> Result<Response<Body>> {
 ---
 
 ## 6. 内存安全保证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 零拷贝解析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定理 6.1 (零拷贝解析)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > Hyper的HTTP解析器最小化内存复制。
@@ -519,9 +538,11 @@ fn parse_request(buf: &[u8]) -> ParseResult {
 ∎
 
 ### 6.2 请求生命周期管理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 6.2 (请求生命周期)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -541,6 +562,7 @@ fn parse_request(buf: &[u8]) -> ParseResult {
 ```
 
 ### 定理 6.2 (生命周期安全)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > Hyper的请求/响应生命周期管理保证无内存泄漏。
@@ -573,9 +595,11 @@ async fn serve_request(req: Request<Body>) -> Response<Body> {
 ---
 
 ## 7. 与Tokio集成分析
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定理 7.1 (Tokio集成正确性)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > Hyper与Tokio的集成保持异步安全性。
@@ -610,9 +634,11 @@ async fn serve_request(req: Request<Body>) -> Response<Body> {
 ---
 
 ## 8. 反例与错误处理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 反例 8.1 (Body未完全消费)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -632,6 +658,7 @@ async fn handler(req: Request<Body>) -> Response<Body> {
 **Hyper自动处理**: Hyper在后台drain未消费的Body。
 
 ### 反例 8.2 (错误的Keep-Alive处理)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -657,6 +684,7 @@ loop {
 ```
 
 ### 错误处理 8.3 (超时与资源清理)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -676,6 +704,7 @@ tokio::select! {
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Hyper Contributors.** (2024). *Hyper Documentation*. <https://hyper.rs/>
@@ -885,4 +914,3 @@ tokio::select! {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

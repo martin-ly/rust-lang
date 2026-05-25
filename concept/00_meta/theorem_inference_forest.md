@@ -16,7 +16,6 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust 知识体系定理推理森林](#rust-知识体系定理推理森林)
   - [📑 目录](#-目录)
@@ -86,8 +85,6 @@ mindmap
 > **认知路径**: 本 mindmap 展示六棵定理树的**公理-定理对应关系**。每棵树的根是 L4 形式化公理，叶节点是 L1-L3 安全定理。跨树的关联（如 A5 同时支撑所有权树和并发树）揭示了 Rust 安全保证的**统一数学根基**——分离逻辑和 Iris 框架同时解释了内存安全和并发安全。
 
 ## 一、推理森林总览
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 graph TD
@@ -147,13 +144,10 @@ graph TD
 ```
 
 > **认知功能**: 本图将抽象的「定理森林」转译为**层级化的推导地图**，清晰展示每棵定理树如何从 L4 公理生长到 L1-L3 的实用安全保证。**使用建议**: 阅读具体定理时，对照此图确认其上游公理和下游推论，避免「只见树叶不见森林」的碎片化理解。**关键洞察**: 几乎所有 L3 高级定理（Send/Sync、Future、Pin）都同时依赖多条 L1-L2 定理链——高级特性安全的本质是多个基础定理的「合取」。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 二、所有权定理树
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 推理链
 
@@ -187,8 +181,6 @@ graph TD
 ---
 
 ## 三、借用定理树
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 推理链
 
@@ -219,8 +211,6 @@ graph TD
 ---
 
 ## 四、生命周期定理树
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 推理链
 
@@ -251,8 +241,6 @@ graph TD
 ---
 
 ## 五、类型系统定理树
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 推理链
 
@@ -283,8 +271,6 @@ graph TD
 ---
 
 ## 六、并发定理树
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 推理链
 
@@ -316,8 +302,6 @@ graph TD
 ---
 
 ## 七、异步定理树
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.1 推理链
 
@@ -348,8 +332,6 @@ graph TD
 ---
 
 ## 八、跨树关联与一致性
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.1 核心定理依赖图
 
@@ -367,7 +349,6 @@ graph TD
 ```
 
 > **认知功能**: 本图剥离层级外壳，专注于**定理之间的纯逻辑依赖**，揭示哪些定理是「枢纽」（被多条链依赖）、哪些是「末梢」。**使用建议**: 在验证复杂代码时，优先确认枢纽定理（如 T-010 AXM、T-040 Send/Sync）在你的场景中成立，再检查下游推论。**关键洞察**: T-040（Send/Sync）是跨树连接的「超级节点」——它同时合并了所有权树（T-001）和借用树（T-010）的结论，是 Rust 「fearless concurrency」的工程化交汇点。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.2 一致性检查清单
 
@@ -383,8 +364,6 @@ graph TD
 ---
 
 ## 九、定理一致性矩阵（全局）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 编号 | 定理 | 前提 | 结论 | L4 公理 | 失效条件 | 所在文件 |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -400,9 +379,7 @@ graph TD
 
 ## 十、相关概念链接
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [跨层依赖拓扑](inter_layer_topology.md) —— L0-L7 纵向关系
 - [层次内模型映射](intra_layer_model_map.md) —— 同层模型横向关系
@@ -414,8 +391,6 @@ graph TD
 - [L3 并发](../03_advanced/01_concurrency.md) —— T-040 / T-041 / T-042
 
 ## 十一、遍历定理森林的认知路径
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **如何阅读和验证定理推理森林？**
 

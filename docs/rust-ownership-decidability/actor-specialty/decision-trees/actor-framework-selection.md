@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actor框架选择决策树](#actor框架选择决策树)
@@ -96,6 +97,7 @@
 ```
 
 ### 2.2 容错需求决策
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -117,6 +119,7 @@
 ```
 
 ### 2.3 Web集成决策
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -138,6 +141,7 @@ Web集成
 ```
 
 ### 2.4 性能优先决策
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -160,9 +164,11 @@ Web集成
 ---
 
 ## 3. 场景匹配决策
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 应用场景树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -207,9 +213,11 @@ Web集成
 ---
 
 ## 4. 技术约束决策
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 团队经验
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -229,6 +237,7 @@ Web集成
 ```
 
 ### 4.2 运维要求
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -250,9 +259,11 @@ Web集成
 ---
 
 ## 5. 决策检查清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 需求澄清问题
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```markdown
@@ -284,6 +295,7 @@ Web集成
 ```
 
 ### 5.2 技术选型速查表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 如果... | 选择 | 避免 |
@@ -298,9 +310,11 @@ Web集成
 ---
 
 ## 6. 迁移决策
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 从其他语言迁移
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -347,6 +361,7 @@ Web集成
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
@@ -429,4 +444,3 @@ Web集成
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

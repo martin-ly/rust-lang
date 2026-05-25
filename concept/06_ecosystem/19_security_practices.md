@@ -1,5 +1,4 @@
-# 安全 [来源: [OWASP](https://owasp.org/)]实践：Rust 代码的防御性编程
-
+# 安全 实践：Rust 代码的防御性编程
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估安全实践和审计策略
@@ -18,46 +17,41 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
-- [安全 \[来源: OWASP\]实践：Rust 代码的防御性编程](#安全-来源-owasp实践rust-代码的防御性编程)
+ [安全 \实践：Rust 代码的防御性编程](#安全)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 Rust 的安全基础](#11-rust-的安全基础)
-    - [1.2 不安全边界的管理](#12-不安全边界的管理)
-    - [1.3 供应链安全](#13-供应链安全)
+  - [1.1 Rust 的安全基础](#11-rust-的安全基础)
+  - [1.2 不安全边界的管理](#12-不安全边界的管理)
+  - [1.3 供应链安全](#13-供应链安全)
   - [二、技术细节](#二技术细节)
-    - [2.1 输入验证与清洗](#21-输入验证与清洗)
-    - [2.2 加密与安全原语](#22-加密与安全原语)
-    - [2.3 审计工具链](#23-审计工具链)
+  - [2.1 输入验证与清洗](#21-输入验证与清洗)
+  - [2.2 加密与安全原语](#22-加密与安全原语)
+  - [2.3 审计工具链](#23-审计工具链)
   - [三、安全模式矩阵](#三安全模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
+  - [4.1 反命题树](#41-反命题树)
+  - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：安全实践的编译错误](#十边界测试安全实践的编译错误)
-    - [10.1 边界测试：密码学常量时间操作（运行时风险）](#101-边界测试密码学常量时间操作运行时风险)
-    - [10.2 边界测试：`unsafe` 代码的审计边界（编译错误）](#102-边界测试unsafe-代码的审计边界编译错误)
-    - [10.3 边界测试：`zeroize` 与编译器优化的冲突（逻辑错误）](#103-边界测试zeroize-与编译器优化的冲突逻辑错误)
-    - [10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）](#104-边界测试依赖供应链的-typo-squatting运行时安全风险)
-    - [10.7 边界测试：secret 在内存中的残留与 `zeroize`（运行时信息泄露）](#107-边界测试secret-在内存中的残留与-zeroize运行时信息泄露)
+  - [10.1 边界测试：密码学常量时间操作（运行时风险）](#101-边界测试密码学常量时间操作运行时风险)
+  - [10.2 边界测试：`unsafe` 代码的审计边界（编译错误）](#102-边界测试unsafe-代码的审计边界编译错误)
+  - [10.3 边界测试：`zeroize` 与编译器优化的冲突（逻辑错误）](#103-边界测试zeroize-与编译器优化的冲突逻辑错误)
+  - [10.4 边界测试：依赖供应链的 typo-squatting（运行时安全风险）](#104-边界测试依赖供应链的-typo-squatting运行时安全风险)
+  - [10.7 边界测试：secret 在内存中的残留与 `zeroize`（运行时信息泄露）](#107-边界测试secret-在内存中的残留与-zeroize运行时信息泄露)
 
 ---
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 的安全基础
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Rust 提供的安全保证:
@@ -101,7 +95,6 @@ Rust 提供的安全保证:
 
 ### 1.2 不安全边界的管理
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 unsafe 代码的安全策略:
@@ -138,7 +131,6 @@ unsafe 代码的安全策略:
 
 ### 1.3 供应链安全
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Rust 供应链风险:
@@ -176,14 +168,9 @@ Rust 供应链风险:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 输入验证与清洗
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // 输入验证模式
@@ -250,7 +237,6 @@ where D: serde::Deserializer<'de>
 
 ### 2.2 加密与安全原语
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Rust 密码学生态:
@@ -295,7 +281,6 @@ Rust 密码学生态:
 
 ### 2.3 审计工具链
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Rust 安全审计工具:
@@ -339,10 +324,6 @@ Rust 安全审计工具:
 ---
 
 ## 三、安全模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 方案 → 工具
@@ -384,14 +365,9 @@ Secrets 管理:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -414,7 +390,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 侧信道攻击
@@ -454,10 +429,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 假设 safe Rust 完全安全
@@ -503,7 +474,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -527,10 +497,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
@@ -552,15 +518,10 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ## 十、边界测试：安全实践的编译错误

@@ -17,9 +17,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [迭代器模式：Rust 的惰性计算与零成本抽象](#迭代器模式rust-的惰性计算与零成本抽象)
   - [📑 目录](#-目录)
@@ -54,13 +52,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Iterator Trait 的设计
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
 // Iterator trait 的核心定义
@@ -101,7 +96,6 @@ pub trait Iterator {
 
 ### 1.2 惰性计算链
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // 迭代器的惰性计算
@@ -144,7 +138,6 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 
 ### 1.3 消费者与适配器
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 迭代器方法分类:
@@ -184,14 +177,9 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 自定义迭代器
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // 自定义迭代器: Fibonacci 序列
@@ -248,7 +236,6 @@ where I::Item: Clone
 
 ### 2.2 迭代器优化
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 编译器对迭代器的优化:
@@ -293,7 +280,6 @@ where I::Item: Clone
 
 ### 2.3 IntoIterator 与 for 循环
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
 // IntoIterator: 使任何类型可 for 循环
@@ -349,10 +335,6 @@ for x in &mut v { /* x 是 &mut i32 */ }
 ---
 
 ## 三、迭代器模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 迭代器方法 → 说明
@@ -394,14 +376,9 @@ for x in &mut v { /* x 是 &mut i32 */ }
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -424,7 +401,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 编译时间
@@ -464,10 +440,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 忘记 collect
@@ -513,7 +485,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -526,10 +497,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Trait](./01_traits.md) — Trait 系统
 - [Generics](./02_generics.md) — 泛型
@@ -551,22 +518,15 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十、边界测试：迭代器模式的编译错误
 

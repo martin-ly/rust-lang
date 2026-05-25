@@ -13,9 +13,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [派生 CoercePointee 预研：智能指针的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
   - [📑 目录](#-目录)
@@ -46,13 +44,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：自定义智能指针的样板代码
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 在 Rust 中，自定义智能指针（如 `Rc<T>`、`Box<T>` 的替代实现）需要手动实现 `CoerceUnsized` 和 `DispatchFromDyn` 才能支持**自动类型强制**（如 `SmartPtr<T>` → `SmartPtr<dyn Trait>`）：
 
@@ -88,7 +83,6 @@ where
 
 ### 1.2 CoerceUnsized 与 DispatchFromDyn
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TD
@@ -121,7 +115,6 @@ graph TD
 
 ### 1.3 `#[derive(CoercePointee)]` 方案
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
 // 使用派生宏 —— 零 unsafe 代码！（需要 nightly + 不稳定特性）
@@ -141,19 +134,13 @@ struct MyBox<T: ?Sized> {
 > 1. `#[pointee(T)]` 显式标记**哪个类型参数**参与强制转换
 > 2. 编译器分析字段布局，生成**确定性**的 impl
 > 3. 生成的代码经过编译器验证，**无需 unsafe**
-> [来源: [Rust RFC 3621](https://github.com/rust-lang/rfcs/pull/3621)]
 
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 派生宏的展开逻辑
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 #[derive(CoercePointee)]
@@ -181,7 +168,6 @@ struct SmartPtr<T: ?Sized> {
 
 ### 2.2 约束条件
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 约束 | 说明 | 违反后果 |
 |:---|:---|:---|
@@ -197,7 +183,6 @@ struct SmartPtr<T: ?Sized> {
 
 ### 2.3 与现有 Trait 的交互
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph LR
@@ -221,7 +206,6 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 `CoercePointee` 在智能指针 Trait 生态中的**边界**——它只自动化与类型强制相关的两个 Trait，其他 Trait（Deref、AsRef、Borrow）仍需手动实现。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: `CoercePointee` 是智能指针实现的**补充**而非替代。完整的智能指针仍需实现 Deref、DerefMut 等。
 > **关键洞察**: Rust 的标准库智能指针（Box、Rc、Arc）未来也可能使用 `#[derive(CoercePointee)]` 简化实现，降低维护负担。
 > [来源: 💡 原创分析]
@@ -229,10 +213,6 @@ graph LR
 ---
 
 ## 三、安全分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 安全收益分析:
@@ -257,14 +237,9 @@ graph LR
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -282,16 +257,13 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否可以使用 `#[derive(CoercePointee)]`。核心判断标准是结构体是否满足约束条件以及是否需要特殊的强制行为。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 对于绝大多数自定义智能指针（如引用计数、自定义 Box），派生宏完全足够；仅在非常规布局（如分片存储、内联小对象优化）时需要手动实现。
 > **关键洞察**: `CoercePointee` 覆盖约 **80-90%** 的自定义智能指针场景，剩余场景需要手动 unsafe 实现。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 无法处理的结构体
@@ -316,10 +288,6 @@ graph TD
 ---
 
 ## 五、演进路线
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -336,7 +304,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -350,10 +317,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — Rust 类型系统基础
 - [Generics](../02_intermediate/02_generics.md) — 泛型与 Trait Bounds
@@ -364,7 +327,6 @@ graph TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -376,15 +338,10 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ## 十、边界测试：CoercePointee 派生的编译错误

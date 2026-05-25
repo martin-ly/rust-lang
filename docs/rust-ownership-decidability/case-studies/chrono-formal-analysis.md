@@ -60,6 +60,7 @@ Chrono特点：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 TIME-1 ( NaiveDateTime )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 无时区的日期时间：
@@ -69,6 +70,7 @@ $$
 $$
 
 ### 定义 TIME-2 ( DateTime<Tz> )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 带时区的时间点：
@@ -78,6 +80,7 @@ $$
 $$
 
 ### 定理 TIME-T1 ( 有效性 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 无效日期无法构造。
@@ -89,9 +92,11 @@ $$
 ---
 
 ## 3. 持续时间
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 DURATION-1 ( TimeDelta )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -103,6 +108,7 @@ $$
 $$
 
 ### 定理 DURATION-T1 ( 单调性 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 持续时间加法单调。
@@ -114,9 +120,11 @@ $$
 ---
 
 ## 4. 时区处理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 TZ-1 ( 时区转换 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -128,6 +136,7 @@ $$
 $$
 
 ### 定义 TZ-2 ( 本地时间 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -135,6 +144,7 @@ $$
 $$
 
 ### 定理 TZ-T1 ( 夏令时安全 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 模糊时间显式处理。
@@ -146,9 +156,11 @@ $$
 ---
 
 ## 5. 格式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 FORMAT-1 ( 格式化模式 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -156,6 +168,7 @@ let formatted = now.format("%Y-%m-%d %H:%M:%S");
 ```
 
 ### 定理 FORMAT-T1 ( 解析可逆 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 格式化和解析可逆（对于有效输入）。
@@ -167,6 +180,7 @@ $$
 ---
 
 ## 6. 算术运算
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 ARITH-1 ( 日期算术 )
@@ -343,4 +357,3 @@ fn countdown(target: NaiveDate) -> TimeDelta {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

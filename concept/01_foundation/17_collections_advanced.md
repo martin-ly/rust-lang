@@ -24,7 +24,6 @@
 
 ## 📑 目录
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](#高级集合类型btreemapvecdequebinaryheap-与自定义-hasher-深度分析)
   - [📑 目录](#-目录)
@@ -62,11 +61,9 @@
 
 ## 一、权威定义与核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 BTreeMap/BTreeSet：有序关联容器
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: B-tree]** A B-tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
 > **来源**: <https://en.wikipedia.org/wiki/B-tree>
@@ -102,7 +99,6 @@ BTreeMap 核心特征:
 
 ### 1.2 VecDeque：循环缓冲双端队列
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[std::collections::VecDeque]** A double-ended queue implemented with a growable ring buffer.
 > **来源**: <https://doc.rust-lang.org/std/collections/struct.VecDeque.html>
@@ -138,7 +134,6 @@ VecDeque 核心特征:
 
 ### 1.3 BinaryHeap：二叉堆优先队列
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[Wikipedia: Binary Heap]** A binary heap is a heap data structure that takes the form of a binary tree. Binary heaps are a common way of implementing priority queues.
 > **来源**: <https://en.wikipedia.org/wiki/Binary_heap>
@@ -170,13 +165,11 @@ BinaryHeap 核心特征:
 > **认知功能**: BinaryHeap 在**仅需访问极值**的场景下比 BTreeMap 更高效——虽然两者都是 O(log n) 插入，但 BinaryHeap 常数因子更小，且无需存储键的比较结构。
 > [来源: [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)]
 > **关键洞察**: BinaryHeap 不支持高效的中途删除或更新——如果需要 decrease-key 操作，应使用具有额外索引结构的堆（如 `priority-queue` crate）。
-> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/collections.html)]
 
 ---
 
 ### 1.4 HashMap 自定义 Hasher
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[std::hash::BuildHasher]** A trait for creating instances of Hasher. A BuildHasher is typically used as a factory for creating multiple instances of Hasher for a specific hash algorithm.
 > **来源**: <https://doc.rust-lang.org/std/hash/trait.BuildHasher.html>
@@ -225,12 +218,9 @@ Rust HashMap 的 Hasher 生态:
 ---
 
 ## 二、内存布局与性能特征
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 BTreeMap 节点布局
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 BTreeMap 节点结构（B=6，即 6-11 键/节点）:
@@ -266,7 +256,6 @@ BTreeMap 节点结构（B=6，即 6-11 键/节点）:
 
 ### 2.2 VecDeque 环形缓冲区布局
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 VecDeque<T> 内存布局:
@@ -308,7 +297,6 @@ VecDeque<T> 内存布局:
 
 ### 2.3 BinaryHeap 数组表示
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 BinaryHeap<T> 数组表示（最大堆）:
@@ -343,7 +331,6 @@ BinaryHeap<T> 数组表示（最大堆）:
 
 ### 2.4 自定义 Hasher 的性能影响
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 Hasher 性能基准对比（64-bit key，单线程）:
@@ -373,7 +360,6 @@ Hasher 性能基准对比（64-bit key，单线程）:
 
 ## 三、选型决策矩阵
 >
-> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/collections.html)]
 
 ```text
 集合选型决策矩阵:
@@ -404,7 +390,6 @@ Hasher 性能基准对比（64-bit key，单线程）:
   │ 有序遍历            │ ✗         │ ✓         │
   └─────────────────────┴───────────┴───────────┘
   * BinaryHeap 不支持直接更新/删除非极值元素
-  > [来源: [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)]
 ```
 
 > **选型原则**: 默认使用 **Vec** 和 **HashMap**；需要**双端操作**时用 **VecDeque**；需要**有序性**时用 **BTreeMap**；仅需**极值访问**时用 **BinaryHeap**。
@@ -413,12 +398,8 @@ Hasher 性能基准对比（64-bit key，单线程）:
 ---
 
 ## 四、思维导图（Mermaid）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 集合选型决策树
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -451,15 +432,11 @@ graph TD
 ```
 
 > **认知功能**: 此决策树从"是否需要按键访问"这一根本问题出发，引导至最优集合选择。每个分支对应一个不可替代的特征需求。
-> [来源: 💡 原创分析]
 > **使用建议**: 从顶部开始，依次回答每个问题。默认分支（否）通常指向更通用的解决方案。
-> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/collections.html)]
 
 ---
 
 ### 4.2 内存布局对比图
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -499,17 +476,12 @@ graph LR
 > **认知功能**: 此图揭示四种集合的**内存分配模式**差异——VecDeque、HashMap、BinaryHeap 都是单一连续分配（缓存友好），而 BTreeMap 是多节点分散分配（范围查询能力强）。
 > [来源: [hashbrown implementation](https://github.com/rust-lang/hashbrown)] · [来源: [std::collections internals](https://doc.rust-lang.org/std/collections/index.html)]
 > **关键洞察**: 缓存友好性不是唯一指标——BTreeMap 的非连续布局换来的有序性，在范围查询场景下能弥补缓存劣势。
-> [来源: 💡 原创分析]
 
 ---
 
 ## 五、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题树
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 反命题分析:
@@ -519,7 +491,6 @@ graph LR
   │   └── HashMap 的范围查询需要全表扫描 O(n)
   │   └── 当 k << n 时，BTreeMap 更快
   └── 结论: ❌ 错误 — 取决于访问模式
-  > [来源: [std::collections::BTreeMap](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)]
 
   命题: "VecDeque 完全替代 Vec"
   ├── 反例: VecDeque 的随机访问需模运算（head + index）% cap
@@ -528,31 +499,25 @@ graph LR
   ├── 反例: VecDeque 不支持 Deref to [T]
   │   └── 需调用 make_contiguous() 获取 &mut [T]
   └── 结论: ❌ 错误 — Vec 仍是默认选择
-  > [来源: [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html)]
 
   命题: "BinaryHeap 可替代 BTreeMap 做优先队列"
   ├── 反例: BinaryHeap 不支持 decrease-key / 删除非极值元素
   │   └── Dijkstra 中更新距离需要删除旧值，BinaryHeap 为 O(n)
   ├── 反例: BinaryHeap 不支持有序遍历
   └── 结论: ❌ 错误 — 标准库 BinaryHeap 是"简化版"优先队列
-  > [来源: [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)]
 
   命题: "fxhash 总是比默认 SipHash 快"
   ├── 反例: 攻击者可构造碰撞输入导致 HashDoS
   │   └── 不可信输入下 SipHash 是安全底线
   ├── 反例: ahash 在多数场景下接近 fxhash 速度且更安全
   └── 结论: ❌ 错误 — 安全性与速度需权衡
-  > [来源: [Rust Performance Book — Hashing](https://nnethercote.github.io/perf-book/hashing.html)]
 ```
 
 > **层次一致性**: 反命题分析建立在对数据结构**边界条件**的精确理解上——没有 universally optimal 的集合，只有特定约束下的最优解。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 5.2 边界极限
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 边界极限测试:
@@ -567,13 +532,11 @@ graph LR
   ├── 模运算优化为位与: index & (cap - 1)
   ├── cap 必须为 2^k，即使请求容量为 3，实际分配 4
   └── 内存可能轻微浪费，换取运算速度
-  > [来源: [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html)]
 
   边界 3: HashMap 负载因子阈值
   ├── hashbrown 默认最大负载因子: 0.875
   ├── 超过阈值触发 resize: cap *= 2
   └── 大量插入时，resize 期间的摊销成本需考虑
-  > [来源: [hashbrown crate](https://github.com/rust-lang/hashbrown)]
 
   边界 4: BinaryHeap 的从零构建 vs 逐个插入
   ├── 逐个插入 n 个元素: O(n log n)
@@ -585,8 +548,6 @@ graph LR
 ---
 
 ## 六、常见陷阱
->
-> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/collections.html)]
 
 ```text
 常见陷阱:
@@ -595,38 +556,31 @@ graph LR
   ├── 症状: insert(0, x) 导致 O(n) 性能
   ├── 修复: 改用 VecDeque::push_front
   └── 检测: cargo flamegraph 显示 memmove 占主导
-  > [来源: [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html)]
 
   陷阱 2: 用 HashMap 键排序后遍历
   ├── 症状: 每次遍历前调用 .keys().collect::<Vec<_>>().sort()
   ├── 修复: 直接使用 BTreeMap
   └── 成本: 排序 O(n log n) vs BTreeMap 迭代 O(n)
-  > [来源: [std::collections::BTreeMap](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)]
 
   陷阱 3: BinaryHeap 中更新元素后未重建堆
   ├── 症状: 修改堆中元素后堆性质破坏
   ├── 修复: 使用 priority-queue crate 的 DecreaseKey 支持
   └── 标准库方案: 标记删除 + 插入新值
-  > [来源: [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html)]
 
   陷阱 4: 不可信输入使用 fxhash
   ├── 症状: 恶意输入构造哈希碰撞，导致 O(n) 查找
   ├── 修复: 用户输入、网络数据使用默认 SipHash
   └── 检测: cargo audit 可标记部分 hasher 选择
-  > [来源: [Rust Performance Book — Hashing](https://nnethercote.github.io/perf-book/hashing.html)]
 
   陷阱 5: VecDeque::make_contiguous 的 O(n) 开销
   ├── 症状: 频繁调用 make_contiguous() 进行随机访问
   ├── 修复: 设计算法避免连续依赖，或使用 Vec
   └── 认知: make_contiguous 是 O(n) 重排操作
-  > [来源: [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html)]
 ```
 
 ---
 
 ## 七、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -660,8 +614,6 @@ fn main() {
 ```
 
 ### 编译验证示例
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 use std::collections::BTreeMap;
@@ -702,8 +654,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](./04_type_system.md) — 类型系统基础
 - [Collections](./08_collections.md) — 基础集合类型
@@ -725,151 +675,81 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ## 十二、边界测试：高级集合的编译错误
 

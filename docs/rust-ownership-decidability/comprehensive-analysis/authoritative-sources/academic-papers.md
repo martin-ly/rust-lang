@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [学术论文权威来源对齐](#学术论文权威来源对齐)
@@ -150,6 +151,7 @@ drop(y);  // 显式丢弃
 ---
 
 ## 2. 所有权与借用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 区域类型系统 (Region-Based Memory Management)
@@ -202,6 +204,7 @@ fn nll_example() {
 ---
 
 ### 2.2 所有权类型系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```yaml
@@ -252,9 +255,11 @@ impl Owner {
 ---
 
 ## 3. 分离逻辑 (Separation Logic)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 基础分离逻辑
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```yaml
@@ -305,6 +310,7 @@ fn update(a: &mut i32, b: &mut i32) {
 ---
 
 ### 3.2 并发分离逻辑
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```yaml
@@ -352,9 +358,11 @@ handle2.join();
 ---
 
 ## 4. Rust专用研究
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 RustBelt
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```yaml
@@ -399,6 +407,7 @@ RustBelt形式化框架:
 ---
 
 ### 4.2 Stacked Borrows / Tree Borrows
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```yaml
@@ -454,6 +463,7 @@ fn tree_borrows_ok() {
 ---
 
 ### 4.3 Rust中的模式类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```yaml
@@ -482,9 +492,11 @@ fn tree_borrows_ok() {
 ---
 
 ## 5. 验证工具论文
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 Creusot
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```yaml
@@ -517,6 +529,7 @@ impl<T> Vec<T> {
 ---
 
 ### 5.2 Prusti
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```yaml
@@ -548,9 +561,11 @@ fn sorted(s: &[i32]) -> bool {
 ---
 
 ## 6. 并发理论
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 Relaxed Memory Models
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```yaml
@@ -577,6 +592,7 @@ Rust内存模型基于:
 ---
 
 ## 7. 论文引用图谱
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -608,6 +624,7 @@ Rust内存模型基于:
 ---
 
 ## 8. 对齐摘要
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 论文 | 核心概念 | Rust对应 |
@@ -643,6 +660,7 @@ Rust内存模型基于:
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -835,4 +853,3 @@ Rust内存模型基于:
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

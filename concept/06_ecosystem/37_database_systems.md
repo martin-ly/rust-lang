@@ -51,8 +51,6 @@ Rust 数据库生态谱系:
 
 ## 二、TiKV：分布式事务与 Percolator 协议
 
-> **[来源: Percolator 论文 — Google, OSDI 2010] · [TiKV 官方文档](https://tikv.org/docs/) · [PingCAP Blog]** ✅
-
 ### 2.1 Percolator 事务模型
 
 TiKV 的事务层基于 Google 的 **Percolator** 协议，采用 **乐观并发控制（OCC）** + **两阶段提交（2PC）**：
@@ -108,8 +106,6 @@ impl Txn {
 ---
 
 ## 三、Materialize：流式 SQL 与增量视图维护
-
-> **[来源: Materialize Documentation](https://materialize.com/docs/) · [McSherry et al. — Differential Dataflow, CIDR 2013]** ✅
 
 Materialize 已在 `36_stream_processing_ecosystem.md` 中详述。本节聚焦于其**数据库语义**：
 

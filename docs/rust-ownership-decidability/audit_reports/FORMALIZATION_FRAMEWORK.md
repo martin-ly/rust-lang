@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust所有权与可判定性 - 形式化框架规范](#rust所有权与可判定性---形式化框架规范)
@@ -85,6 +86,7 @@
 | e | 表达式 | e ∈ Expr |
 
 ### 2.2 逻辑符号
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 符号 | LaTeX | 含义 | 读法 |
@@ -104,6 +106,7 @@
 | ≜ | \triangleq | 定义为 | "defined to be" |
 
 ### 2.3 分离逻辑符号
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 符号 | LaTeX | 含义 | 读法 |
@@ -117,6 +120,7 @@
 | ∅ | \emptyset | 空资源 | "emp" |
 
 ### 2.4 类型理论符号
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 符号 | LaTeX | 含义 | 读法 |
@@ -137,9 +141,11 @@
 ---
 
 ## 3. 形式化定义模板
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 语法定义模板
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```markdown
@@ -169,6 +175,7 @@
 ```
 
 ### 3.2 操作语义模板
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```markdown
@@ -194,6 +201,7 @@ $$
 ```
 
 ### 3.3 类型规则模板
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```markdown
@@ -262,9 +270,11 @@ $$
 ---
 
 ## 4. 可判定性分析模板
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 复杂度类定义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```markdown
@@ -293,6 +303,7 @@ $$
 ```
 
 ### 4.2 可判定性证明模板
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```markdown
@@ -332,9 +343,11 @@ $$
 ---
 
 ## 5. 引用格式规范
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 学术论文引用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```markdown
@@ -350,6 +363,7 @@ $$
 ```
 
 ### 5.2 书籍引用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```markdown
@@ -366,9 +380,11 @@ $$
 ---
 
 ## 6. 图示规范
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 推导树
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -378,6 +394,7 @@ $$
 ```
 
 ### 6.2 状态转换图
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -392,6 +409,7 @@ $$
 ```
 
 ### 6.3 层次架构图
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -411,9 +429,11 @@ $$
 ---
 
 ## 7. 代码块规范
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 数学代码 (伪代码)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 使用 ` ``` ` 或明确的语言标识:
@@ -429,6 +449,7 @@ unify (TCon c1 ts1) (TCon c2 ts2)
 ```
 
 ### 7.2 Rust代码
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -440,6 +461,7 @@ fn example<T: Clone>(x: T) -> (T, T) {
 ```
 
 ### 7.3 Coq/Lean证明代码
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```coq
@@ -482,6 +504,7 @@ theorem progress {e τ} (h : ∅ ⊢ e : τ) :
 ---
 
 ## 8. 质量检查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 在发布每个文档前，检查:
@@ -517,6 +540,7 @@ theorem progress {e τ} (h : ∅ ⊢ e : τ) :
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [audit_reports 目录](./README.md)
@@ -636,4 +660,3 @@ theorem progress {e τ} (h : ∅ ⊢ e : τ) :
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

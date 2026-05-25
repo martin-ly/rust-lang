@@ -57,6 +57,7 @@ embedded-storage为嵌入式存储设备提供统一trait：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 STORAGE-1 ( 只读存储 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -83,6 +84,7 @@ $$
 $$
 
 ### 定义 STORAGE-2 ( 可擦除存储 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -111,9 +113,11 @@ $$
 ---
 
 ## 3. NOR Flash模型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 NOR-1 ( 字节可编程 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 NOR Flash允许字节级读取和按字编程。
@@ -131,6 +135,7 @@ $$
 **约束**: 只能从1变为0。
 
 ### 定理 NOR-T1 ( 编程限制 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 NOR Flash位只能从1编程为0，不能直接改写。
@@ -144,9 +149,11 @@ $$
 ---
 
 ## 4. NAND Flash模型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 NAND-1 ( 块擦除 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 NAND Flash以页为单位读取，以块为单位擦除。
@@ -162,6 +169,7 @@ $$
 $$
 
 ### 定义 NAND-2 ( 坏块管理 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 $$
@@ -169,6 +177,7 @@ $$
 $$
 
 ### 定理 NAND-T1 ( 顺序编程 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 NAND Flash页必须顺序编程。
@@ -180,9 +189,11 @@ $$
 ---
 
 ## 5. 磨损均衡
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定义 WEAR-1 ( 擦除计数 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 $$
@@ -190,6 +201,7 @@ $$
 $$
 
 ### 定义 WEAR-2 ( 磨损均衡算法 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 $$
@@ -200,6 +212,7 @@ $$
 $$
 
 ### 定理 WEAR-T1 ( 寿命延长 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 磨损均衡将擦除操作均匀分布，延长存储寿命。
@@ -211,9 +224,11 @@ $$
 ---
 
 ## 6. 定理与证明
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 STORAGE-T1 ( 原子性 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 存储操作是原子的或支持回滚。
@@ -223,6 +238,7 @@ $$
 $$
 
 ### 定理 STORAGE-T2 ( 幂等性 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 擦除操作是幂等的。
@@ -236,9 +252,11 @@ $$
 ---
 
 ## 7. 代码示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 示例1: Flash驱动实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -315,6 +333,7 @@ impl NorFlash for MyFlash {
 ```
 
 ### 示例2: 文件系统抽象
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -344,6 +363,7 @@ impl<S: Storage> BlockDevice<S> {
 ```
 
 ### 示例3: 配置存储
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -489,4 +509,3 @@ impl<F: NorFlash> ConfigStorage<F> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

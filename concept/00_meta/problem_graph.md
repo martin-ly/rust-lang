@@ -10,9 +10,7 @@
 > **来源**: [ACM — *Multidimensional Course Knowledge Graph Framework*, 2024]
 >
 > **来源**: [Stanford CS520 — *What is a Knowledge Graph*, 2020]
->
 > **来源**: [Rutgers — *CD-Learning: Conditional Decision Learning in Programming Education*]
->
 > **来源**: [Microsoft RustTraining — github.com/microsoft/RustTraining]
 
 ## 📑 目录
@@ -81,7 +79,6 @@ mindmap
 
 ## 一、问题图谱格式规范
 
-> [来源: ACM 多维课程图谱框架 · CD-Learning 决策树]
 
 每个问题树使用三层分解结构：
 
@@ -106,7 +103,6 @@ mindmap
 
 ## 二、内存安全设计问题树
 
-> [来源: [Rust Reference — Memory Model]] · [RustBelt — Ownership Safety] · [High Assurance Rust]
 
 ### 全局层问题
 
@@ -153,7 +149,6 @@ graph TD
 
 ## 三、并发系统设计问题树
 
-> [来源: [Rust Reference — Concurrency]] · [RustBelt — Thread Safety] · [Fearless Concurrency]
 
 ### 全局层问题
 
@@ -200,7 +195,6 @@ graph TD
 
 ## 四、异步系统设计问题树
 
-> [来源: [Rust Reference — Async/Await]] · [Tokio 文档] · [Without Boats — Async Foundations]
 
 ### 全局层问题
 
@@ -246,7 +240,6 @@ graph TD
 
 ## 五、FFI 互操作问题树
 
-> [来源: [Rust Reference — FFI]] · [The Rustonomicon — FFI] · [bindgen 文档]
 
 ### 全局层问题
 
@@ -292,7 +285,6 @@ graph TD
 
 ## 六、性能优化问题树
 
-> [来源: [Rust Performance Book]] · [Criterion.rs 文档] · [Zero-Cost Abstractions]
 
 ### 全局层问题
 
@@ -338,7 +330,6 @@ graph TD
 
 ## 七、错误处理问题树
 
-> [来源: [Rust Reference — Error Handling]] · [RFC 243 — Trait Based Exception Handling] · [thiserror / anyhow]
 
 ### 全局层问题
 
@@ -384,7 +375,6 @@ graph TD
 
 ## 八、问题图谱与概念文件的交叉索引
 
-> [来源: `concept/` 全部核心概念文件]
 
 | 全局问题 | 核心概念文件 | 方法层工具/Crate |
 |:---|:---|:---|

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [现代Rust库形式化分析索引](#现代rust库形式化分析索引)
@@ -68,6 +69,7 @@
 | [tower](./tower-formal-analysis.md) | 服务抽象 | 组合子、背压 | ✅ |
 
 ### 数据库 (3个)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 库名 | 领域 | 关键形式化 | 状态 |
@@ -169,7 +171,6 @@
 
 - [case-studies 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

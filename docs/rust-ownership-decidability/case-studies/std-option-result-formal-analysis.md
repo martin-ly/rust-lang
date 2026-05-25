@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust标准库 Option \& Result 形式化分析](#rust标准库-option--result-形式化分析)
@@ -56,6 +57,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `Option<T>` 和 `Result<T, E>` 是Rust错误处理的核心，将可能的缺失值和错误显式编码在类型系统中。
@@ -70,6 +72,7 @@
 ---
 
 ## 2. `Option<T>` 代数结构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 类型定义
@@ -251,6 +254,7 @@ opt.and_then(f).and_then(g)
 ---
 
 ## 3. Result<T, E> 错误处理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 错误传播机制
@@ -344,6 +348,7 @@ impl<T, E> Result<T, E> {
 ---
 
 ## 4. ?运算符形式语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 早期返回机制
@@ -443,6 +448,7 @@ fn mixed() -> Result<T, Error> {
 ---
 
 ## 5. 组合子分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 map与and_then
@@ -472,6 +478,7 @@ opt.and_then(|y| Some(f(y)))
 ∎
 
 ### 定理 5.2 (组合子的幂等性)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > `map(id)` 和 `and_then(Some)` 都是幂等的。
@@ -492,9 +499,11 @@ opt.and_then(|x| Some(x))
 ∎
 
 ### 5.2 unwrap_or与unwrap_or_else
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理 5.3 (unwrap_or的正确性)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > `unwrap_or` 在None时返回默认值，在Some时返回包含的值。
@@ -518,6 +527,7 @@ impl<T> Option<T> {
 ∎
 
 ### 定理 5.4 (unwrap_or vs unwrap_or_else)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > `unwrap_or_else` 只在需要时计算默认值，更高效。
@@ -542,9 +552,11 @@ opt.unwrap_or_else(|| expensive_computation())
 ---
 
 ## 6. 零成本抽象证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定理 6.1 (Option的零成本)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > `Option<T>` 的运行时表示与手动null检查相同，无额外开销。
@@ -588,6 +600,7 @@ if let Some(value) = maybe_value {
 LLVM优化后生成相同的机器码。∎
 
 ### 定理 6.2 (Result的零成本)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > Result<T, E> 使用标签联合(tagged union)表示，开销最小。
@@ -619,6 +632,7 @@ Result<(), Box<Error>>
 ---
 
 ## 7. 与异常处理对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | Rust (Option/Result) | C++ (异常) | Java (异常) |
@@ -631,6 +645,7 @@ Result<(), Box<Error>>
 | **性能** | ✅ 预测性好 | ❌ 异常路径慢 | ❌ 异常路径慢 |
 
 ### 定理 7.1 (错误处理的完备性)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > Rust的Result系统可以表达所有可恢复错误，不可恢复使用panic。
@@ -647,9 +662,11 @@ Result<(), Box<Error>>
 ---
 
 ## 8. 反例与最佳实践
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 反例 8.1 (滥用unwrap)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -668,6 +685,7 @@ let x = some_option.unwrap_or(default);
 ```
 
 ### 反例 8.2 (忽略Result)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -688,6 +706,7 @@ let _ = fs::write("file.txt", data);
 ```
 
 ### 反例 8.3 (过度嵌套)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -709,6 +728,7 @@ fn process(opt: Option<i32>) -> Option<String> {
 ```
 
 ### 最佳实践 8.4 (自定义错误类型)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -735,6 +755,7 @@ fn do_something() -> Result<Data, MyError> {
 ---
 
 ## 参考文献
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Rust Standard Library.** (2024). `std::option::Option`, `std::result::Result`. <https://doc.rust-lang.org/std/>
@@ -772,11 +793,9 @@ fn do_something() -> Result<Data, MyError> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -976,4 +995,3 @@ fn do_something() -> Result<Data, MyError> {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

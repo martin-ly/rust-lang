@@ -35,9 +35,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](#rust-for-webassembly从-wasm-bindgen-到前端框架的深度技术栈)
   - [📑 目录](#-目录)
@@ -74,14 +72,9 @@
 ---
 
 ## 一、权威定义与核心概念
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 Rust → Wasm 的编译模型
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 编译到 WebAssembly 采用 LLVM 后端路径，通过 `wasm32-unknown-unknown` 等目标三元组生成符合 Wasm MVP 规范的二进制：
 
@@ -138,7 +131,6 @@ graph LR
 
 ### 1.2 wasm-bindgen 的互操作语义
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `wasm-bindgen` 是 Rust 与 JavaScript 之间的**FFI 桥接层**，通过过程宏在编译期生成双向绑定：
 
@@ -200,7 +192,6 @@ wasm-bindgen 的类型映射规则:
 
 ### 1.3 wasm-pack 的工程化角色
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 `wasm-pack` 是 Rust Wasm 项目的**构建与发布工具**，封装了编译、打包、npm 发布的完整工作流：
 
@@ -230,14 +221,9 @@ wasm-pack 工作流:
 ---
 
 ## 二、前端框架深度对比
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Yew：React 范式的 Rust 实现
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Yew 是受 React 启发的 Rust 前端框架，采用**虚拟 DOM（VDOM）**与**组件化**架构：
 
@@ -268,7 +254,6 @@ fn Counter() -> Html {
 
 ### 2.2 Leptos：细粒度响应式与性能优先
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Leptos 采用**信号（Signals）**驱动的细粒度响应式系统，避免 VDOM 的全树 diff 开销：
 
@@ -297,7 +282,6 @@ fn Counter() -> impl IntoView {
 
 ### 2.3 框架选型矩阵
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | Yew | Leptos | 备注 |
 |:---|:---|:---|:---|
@@ -315,11 +299,9 @@ fn Counter() -> impl IntoView {
 
 ## 三、性能特征与 Wasm 内存模型
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 Rust Wasm vs JavaScript 性能边界
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 性能对比场景矩阵:
@@ -364,7 +346,6 @@ graph LR
 
 ### 3.2 线性内存模型与所有权映射
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 WebAssembly 采用**单一连续线性内存（Linear Memory）**模型，所有数据存储在一个可增长的字节数组中：
 
@@ -409,8 +390,6 @@ pub fn deallocate_vec(ptr: *mut u8, size: usize) {
 ---
 
 ### 3.3 JS ↔ Wasm 互操作开销分析
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 互操作开销构成:
@@ -437,12 +416,8 @@ pub fn deallocate_vec(ptr: *mut u8, size: usize) {
 ---
 
 ## 四、工具链与工程实践
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 目标三元组与编译配置
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 Rust Wasm 目标三元组对比:
@@ -469,8 +444,6 @@ Rust Wasm 目标三元组对比:
 ---
 
 ### 4.2 调试与测试策略
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Wasm 调试工具链:
@@ -497,12 +470,8 @@ Wasm 调试工具链:
 ---
 
 ## 五、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题决策树
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **反命题 1**: "Rust Wasm 总是比 JavaScript 快"
 
@@ -540,8 +509,6 @@ Wasm 调试工具链:
 ---
 
 ### 5.2 边界极限测试
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **边界 1: Wasm 模块大小**
 
@@ -579,8 +546,6 @@ Rust panic in Wasm:
 ---
 
 ## 六、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 忽略 wasm32 的 usize = 32 位
@@ -611,8 +576,6 @@ Rust panic in Wasm:
 ---
 
 ## 七、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -634,8 +597,6 @@ Rust panic in Wasm:
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust 路线图](./24_roadmap.md) — Rust 语言演进方向与 Wasm 目标支持策略
 - [WebAssembly 生态](../06_ecosystem/11_webassembly.md) — Wasm 通用生态与工具链概览
@@ -658,161 +619,86 @@ Rust panic in Wasm:
 
 ## 权威来源索引
 
-> **[来源: [WebAssembly Documentation](https://webassembly.org/)]**
 >
-> **[来源: [Wasmtime](https://wasmtime.dev/)]**
 >
-> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
 >
-> **[来源: [Hyper Documentation](https://hyper.rs/)]**
 >
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ## 十、边界测试：WebAssembly 的编译错误
 

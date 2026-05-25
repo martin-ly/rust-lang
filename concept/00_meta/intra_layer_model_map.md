@@ -16,9 +16,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 知识体系层次内模型间映射图](#rust-知识体系层次内模型间映射图)
   - [📑 目录](#-目录)
@@ -41,9 +39,7 @@
 
 ## 一、L1 基础概念层：所有权 · 借用 · 生命周期 · 类型系统
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 四元关系拓扑
 
@@ -84,10 +80,6 @@ graph TD
 ---
 
 ## 二、L2 进阶概念层：Trait · 泛型 · 内存管理 · 错误处理
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 四元关系拓扑
 
@@ -108,7 +100,6 @@ graph TD
 ```
 
 > **认知功能**: 本图展示 L2 进阶概念的**组合威力**——Trait、泛型、内存管理与错误处理不是独立工具，而是相互增强的抽象机制。
-> [来源: [Rust Reference]]
 > **使用建议**: 设计 API 时，从 Trait 抽象出发，通过泛型参数化，利用错误处理传播约束，最终由内存管理保证资源安全。
 > **关键洞察**: `?` 运算符能无缝工作，本质上是错误处理（Result）→ Trait（From）→ 泛型（约束传播）这一链条的工程化封装。[来源: 💡 原创分析]
 
@@ -127,10 +118,6 @@ graph TD
 ---
 
 ## 三、L3 高级概念层：并发 · 异步 · Unsafe · 宏
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 四元关系拓扑
 
@@ -150,10 +137,8 @@ graph TD
 ```
 
 > **认知功能**: 本图映射 L3 高级概念的**循环依赖网络**，说明为何并发安全无法脱离 Unsafe 理解，async 也无法脱离宏机制。
-> [来源: [Rust Reference]]
 > **使用建议**: 在排查 async 性能问题或并发 bug 时，将视线扩展至相邻节点——async 的 Pin 依赖 Unsafe，并发的 Send/Sync 也常由 unsafe 实现。
 > **关键洞察**: 这四个概念的虚线同构边全部指向形式化理论（CCS/CSP/CPS/操作语义），表明 L3 的「高级」本质上是「更接近底层语义」。
-> [来源: 💡 原创分析]
 
 ### 3.2 四元关系矩阵
 
@@ -171,10 +156,6 @@ graph TD
 ---
 
 ## 四、L4 形式化层：线性逻辑 · 类型论 · 所有权形式化 · RustBelt · 验证工具链
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 4.1 五元关系拓扑
 
@@ -194,10 +175,8 @@ graph TD
 ```
 
 > **认知功能**: 本图呈现 Rust 安全保证的**数学基础设施**，将抽象的形式化理论转化为可追踪的依赖网络。
-> [来源: [Rust Reference]]
 > **使用建议**: 当需要为 unsafe 代码编写安全规约时，沿图从 RustBelt 向上追溯至线性逻辑和分离逻辑，找到最匹配的公理系统。
 > **关键洞察**: 验证工具链（Kani/Creusot）与 RustBelt 构成「证明-反例」循环——工具链试图自动证明 RustBelt 提出的验证条件，而 RustBelt 的理论边界决定了工具能走多远。
-> [来源: 💡 原创分析]
 
 ### 4.2 五元关系矩阵
 
@@ -214,10 +193,6 @@ graph TD
 ---
 
 ## 五、模型间映射的形式化核心
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 5.1 L1-L4 核心同构链
 
@@ -240,10 +215,6 @@ Rust 并发     ≡  并发分离逻辑  （Iris: own + shr + 协议验证）
 ---
 
 ## 六、相关概念链接
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [跨层依赖拓扑](inter_layer_topology.md) —— L0-L7 纵向关系
 - [定理推理森林](theorem_inference_forest.md) —— 模型内定理链
@@ -255,7 +226,6 @@ Rust 并发     ≡  并发分离逻辑  （Iris: own + shr + 协议验证）
 
 ## 五、层内模型认知路径
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **如何在同一层级内选择正确的模型？**——以 L1 基础层为例的决策路径。
 
@@ -285,7 +255,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树是层内模型选择的**可操作导航器**。面对具体问题时（如「内存泄漏」「并发冲突」「类型不匹配」），按图从左到右回答问题即可定位到正确的 Rust 机制。
-> [来源: [Rust Reference]]
 > 它将抽象的「模型映射」转化为工程师可执行的诊断流程。
 > 关键认知：同一层内的概念不是孤立的——所有权、借用、生命周期、类型系统形成相互定义的网络，此决策树将这个网络的「遍历路径」显性化。
 > 建议在调试时作为「问题分类 → 机制匹配」的检查清单。 [来源: 💡 原创分析]

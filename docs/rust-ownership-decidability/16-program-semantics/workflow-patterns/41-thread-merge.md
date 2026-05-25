@@ -95,6 +95,7 @@ Rust 的线程合并设计在确保安全方面独树一帜：
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -226,6 +227,7 @@ $$
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 BPMN 表示
@@ -296,6 +298,7 @@ graph TD
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 CCS 表示
@@ -375,6 +378,7 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现：thread::scope 自动汇合
@@ -635,6 +639,7 @@ pub fn explicit_join_merge() -> Vec<String> {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 活性 (Liveness)
@@ -715,6 +720,7 @@ $$
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 模式层次
@@ -763,6 +769,7 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 认证与授权合并决策
@@ -966,6 +973,7 @@ fn link_objects(objects: &[PathBuf]) -> Result<BuildArtifact, BuildError> {
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 超时合并
@@ -1063,6 +1071,7 @@ pub fn cascading_merge<T: Send + Clone>(
 ---
 
 ## 10. 总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 线程合并模式是并发编程中将分散的并行计算重新汇聚为单一执行路径的核心机制。其核心贡献包括：
@@ -1084,6 +1093,7 @@ pub fn cascading_merge<T: Send + Clone>(
 ---
 
 ## 参考文献
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". *Distributed and Parallel Databases*, 14(1), 5-51.
@@ -1398,4 +1408,3 @@ pub fn cascading_merge<T: Send + Clone>(
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

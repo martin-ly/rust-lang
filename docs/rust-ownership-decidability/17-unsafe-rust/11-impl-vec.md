@@ -55,6 +55,7 @@ pub struct MyVec<T> {
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 结构定义与创建
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -106,6 +107,7 @@ impl<T> MyVec<T> {
 ```
 
 ### 2.2 Push 操作
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -164,6 +166,7 @@ impl<T> MyVec<T> {
 ```
 
 ### 2.3 Pop 操作
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -184,6 +187,7 @@ impl<T> MyVec<T> {
 ```
 
 ### 2.4 索引访问
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -207,6 +211,7 @@ impl<T> IndexMut<usize> for MyVec<T> {
 ---
 
 ## 3. Drop 实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -235,6 +240,7 @@ impl<T> Drop for MyVec<T> {
 ---
 
 ## 4. 迭代器实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -292,6 +298,7 @@ impl<T> IntoIterator for MyVec<T> {
 ---
 
 ## 5. 测试与验证
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -354,6 +361,7 @@ mod tests {
 ---
 
 ## 6. Miri 验证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
@@ -370,6 +378,7 @@ Miri 检查:
 ---
 
 ## 完整代码
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -524,4 +533,3 @@ pub struct MyVec<T> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

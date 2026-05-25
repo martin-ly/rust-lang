@@ -237,6 +237,7 @@ fn unlock(&self) {
 ---
 
 ## 3. RwLock优化分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 读者计数压缩
@@ -353,6 +354,7 @@ $$
 ---
 
 ## 4. 条件变量实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 等待队列管理
@@ -395,9 +397,11 @@ fn wait<'a, T>(&self, guard: MutexGuard<'a, T>) -> LockResult<MutexGuard<'a, T>>
 ```
 
 ### 4.2 唤醒语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 4.1 (唤醒可靠性)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > parking_lot的条件变量保证:
@@ -427,12 +431,15 @@ fn notify_one(&self) {
 ---
 
 ## 5. 性能形式化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 空间效率
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 5.1 (空间复杂度)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > parking_lot原语的空间复杂度为 $O(1)$，与竞争程度无关。
@@ -452,9 +459,11 @@ fn notify_one(&self) {
 - 等待队列由运行时全局管理
 
 ### 5.2 时间效率
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定理 5.2 (无竞争lock复杂度)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > 无竞争情况下，parking_lot::Mutex::lock 为 $O(1)$。
@@ -480,6 +489,7 @@ if self.state.compare_exchange(0, 1, Acquire, Relaxed).is_ok() {
 ∎
 
 ### 定理 5.3 (有竞争lock复杂度)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 有竞争情况下，parking_lot::Mutex::lock 为 $O(1)$ 均摊。
@@ -515,12 +525,15 @@ loop {
 ---
 
 ## 6. 公平性分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 饥饿自由度
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 6.1 (Mutex饥饿自由)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > parking_lot::Mutex支持公平模式，确保无饥饿。
@@ -555,6 +568,7 @@ $$
 这保证了先到先服务(FCFS)，无饥饿。∎
 
 ### 定理 6.2 (非公平模式吞吐量)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > 非公平模式提供更高的吞吐量，但可能产生饥饿。
@@ -574,9 +588,11 @@ $$
 - 吞吐量略低，但延迟可预测
 
 ### 6.2 优先级继承
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 6.1 (优先级继承)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 解决优先级反转问题的机制:
@@ -594,6 +610,7 @@ T_low 临时提升到 T_high 的优先级
 ```
 
 ### 定理 6.3 (parking_lot优先级继承)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > parking_lot支持优先级继承(在支持的平台上)。
@@ -617,6 +634,7 @@ unsafe fn lock_contended(&self) {
 ---
 
 ## 7. 与标准库对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特性 | parking_lot | std::sync | 说明 |
@@ -635,9 +653,11 @@ unsafe fn lock_contended(&self) {
 ---
 
 ## 8. 反例与限制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 反例 8.1 (中毒检测缺失)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -657,6 +677,7 @@ let guard = mutex.lock();  // 总是成功，即使之前有panic
 3. 可以外部实现
 
 ### 反例 8.2 (过度优化风险)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -674,6 +695,7 @@ for _ in 0..1_000_000 {
 ```
 
 ### 限制 8.3 (不支持静态初始化器)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -687,6 +709,7 @@ static MUTEX: Mutex<i32> = Mutex::new(0);  // ✅ 现在支持
 ---
 
 ## 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **parking_lot Contributors.** (2024). *parking_lot Documentation*. <https://docs.rs/parking_lot/>
@@ -892,4 +915,3 @@ static MUTEX: Mutex<i32> = Mutex::new(0);  // ✅ 现在支持
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -61,6 +61,7 @@ Tokio是Rust异步生态核心运行时：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 RUNTIME-1 ( 运行时配置 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -84,6 +85,7 @@ $$
 - $T$: 定时器
 
 ### 定义 RUNTIME-2 ( 运行时类型 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 类型 | 线程模型 | 适用场景 |
@@ -94,9 +96,11 @@ $$
 ---
 
 ## 3. 任务调度
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 TASK-1 ( 任务创建 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -112,6 +116,7 @@ $$
 $$
 
 ### 定义 TASK-2 ( 工作窃取 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 $$
@@ -122,6 +127,7 @@ $$
 $$
 
 ### 定理 TASK-T1 ( 负载均衡 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 工作窃取保证任务分布均匀。
@@ -133,9 +139,11 @@ $$
 ---
 
 ## 4. IO驱动
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 IO-1 ( 异步IO操作 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -151,6 +159,7 @@ $$
 $$
 
 ### 定义 IO-2 ( Reactor模式 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -158,6 +167,7 @@ $$
 $$
 
 ### 定理 IO-T1 ( 无阻塞 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 IO操作不阻塞工作线程。
@@ -169,9 +179,11 @@ $$
 ---
 
 ## 5. 时间系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 TIME-1 ( 定时器 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -183,6 +195,7 @@ $$
 $$
 
 ### 定义 TIME-2 ( Interval )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -190,6 +203,7 @@ let mut interval = tokio::time::interval(Duration::from_secs(1));
 ```
 
 ### 定理 TIME-T1 ( 精确性 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 定时器误差有界。
@@ -201,9 +215,11 @@ $$
 ---
 
 ## 6. 同步原语
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 SYNC-1 ( MPSC Channel )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -215,6 +231,7 @@ $$
 $$
 
 ### 定义 SYNC-2 ( Mutex )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -223,6 +240,7 @@ let mut guard = data.lock().await;
 ```
 
 ### 定理 SYNC-T1 ( 异步安全 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 锁获取期间可让步。
@@ -234,9 +252,11 @@ $$
 ---
 
 ## 7. 定理与证明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 TOKIO-T1 ( Send约束传播 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 spawn要求Future为Send。
@@ -248,6 +268,7 @@ $$
 **证明**: 任务可能在任意工作线程执行。$\square$
 
 ### 定理 TOKIO-T2 ( 优雅关闭 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 运行时drop等待所有任务完成。
@@ -400,4 +421,3 @@ async fn coordinated_work(n_workers: usize) {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [分布式Actor形式化分析](#分布式actor形式化分析)
@@ -88,9 +89,11 @@ Exactly-once (恰好一次):
 ---
 
 ## 2. CAP定理与Actor
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 CAP定理形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -111,6 +114,7 @@ Exactly-once (恰好一次):
 ```
 
 ### 2.2 Actor系统CAP选择
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 系统类型 | C | A | P | 适用场景 |
@@ -120,6 +124,7 @@ Exactly-once (恰好一次):
 | **CA Actor** | ✅ | ✅ | ❌ | 单数据中心系统 |
 
 ### 2.3 定理 ACTOR-CAP-TRADE-OFF
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -148,9 +153,11 @@ AP选择 (如Akka Cluster):
 ---
 
 ## 3. 一致性模型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 一致性谱系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -168,6 +175,7 @@ Actor系统通常选择:
 ```
 
 ### 3.2 因果一致性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -187,6 +195,7 @@ Happens-before关系:
 ```
 
 ### 3.3 Vector Clocks实现
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -235,9 +244,11 @@ impl VectorClock {
 ---
 
 ## 4. 分布式协议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 Gossip协议
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -263,6 +274,7 @@ impl VectorClock {
 ```
 
 ### 4.2 Raft共识
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -287,6 +299,7 @@ impl VectorClock {
 ```
 
 ### 4.3 CRDTs (无冲突复制数据类型)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -365,9 +378,11 @@ impl PNCounter {
 ---
 
 ## 5. Saga分布式事务
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 Saga形式化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -397,6 +412,7 @@ Saga = (T, C, ≺)
 ```
 
 ### 5.2 Saga与2PC对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | Saga | 2PC |
@@ -409,6 +425,7 @@ Saga = (T, C, ≺)
 | 适用 | 长事务 | 短事务 |
 
 ### 5.3 Saga协调器Actor
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -471,9 +488,11 @@ impl SagaCoordinator {
 ---
 
 ## 6. 网络分区处理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 分区检测
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -498,6 +517,7 @@ Phi累积失败检测:
 ```
 
 ### 6.2 分区恢复策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 策略 | 描述 | 优点 | 缺点 |
@@ -510,9 +530,11 @@ Phi累积失败检测:
 ---
 
 ## 7. coerce框架分布式特性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 集群架构
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -542,6 +564,7 @@ async fn main() {
 ```
 
 ### 7.2 分片配置
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -586,10 +609,10 @@ async fn handle_user_command(cmd: UserCmd, cluster: &Cluster) {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
-
 
 ---
 
@@ -741,4 +764,3 @@ async fn handle_user_command(cmd: UserCmd, cluster: &Cluster) {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

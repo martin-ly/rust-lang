@@ -53,9 +53,11 @@ Slog提供:
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Drain特质
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 2.1 (Drain Trait)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -69,6 +71,7 @@ pub trait Drain {
 ```
 
 ### 定理 2.1 (Drain组合)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > Drain可通过组合器构建复杂管道。
@@ -83,6 +86,7 @@ pub trait Drain {
 ∎
 
 ### 2.2 组合器
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 2.2 (过滤器组合)
@@ -263,4 +267,3 @@ for i in 0..1000 {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

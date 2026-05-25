@@ -54,6 +54,7 @@ STM32F4xx HAL特点：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 CLOCK-1 ( 时钟源 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -61,6 +62,7 @@ $$
 $$
 
 ### 定义 CLOCK-2 ( 时钟树 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 $$
@@ -74,6 +76,7 @@ $$
 $$
 
 ### 定理 CLOCK-T1 ( 时钟安全 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 无效时钟配置在编译或初始化时被检测。
@@ -85,9 +88,11 @@ $$
 ---
 
 ## 3. DMA流管理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 DMA-1 ( 流与通道 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 STM32F4有2个DMA控制器，每个16个流。
@@ -97,6 +102,7 @@ $$
 $$
 
 ### 定义 DMA-2 ( 双缓冲 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 $$
@@ -104,6 +110,7 @@ $$
 $$
 
 ### 定理 DMA-T1 ( 无冲突 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 同一时间一个流只能服务一个外设。
@@ -115,6 +122,7 @@ $$
 ---
 
 ## 4. 中断优先级
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定义 IRQ-1 ( 优先级分组 )
@@ -300,4 +308,3 @@ fn pwm_example(dp: pac::Peripherals) {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

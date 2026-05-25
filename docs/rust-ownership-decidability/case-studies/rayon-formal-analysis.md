@@ -56,6 +56,7 @@ Rayon特点：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 PAR-ITER-1 ( ParallelIterator )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -72,6 +73,7 @@ $$
 $$
 
 ### 定义 PAR-ITER-2 ( 分块策略 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 $$
@@ -79,6 +81,7 @@ $$
 $$
 
 ### 定理 PAR-ITER-T1 ( 顺序等价 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 并行迭代器与顺序迭代器结果相同。
@@ -90,9 +93,11 @@ $$
 ---
 
 ## 3. join模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 JOIN-1 ( 并行递归 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -113,6 +118,7 @@ $$
 $$
 
 ### 定义 JOIN-2 ( 停止条件 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 $$
@@ -125,9 +131,11 @@ $$
 ---
 
 ## 4. 作用域线程
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 SCOPE-1 ( scope创建 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -145,6 +153,7 @@ $$
 $$
 
 ### 定理 SCOPE-T1 ( 借用安全 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 作用域内可引用外部数据。
@@ -156,9 +165,11 @@ $$
 ---
 
 ## 5. 确定性保证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定义 DETERM-1 ( 确定性 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 $$
@@ -166,6 +177,7 @@ $$
 $$
 
 ### 定理 DETERM-T1 ( 无竞态 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 纯函数操作无竞态条件。
@@ -177,9 +189,11 @@ $$
 ---
 
 ## 6. 定理与证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理 RAYON-T1 ( 线程安全 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 操作自动满足Send + Sync。
@@ -189,6 +203,7 @@ $$
 $$
 
 ### 定理 RAYON-T2 ( 负载自适应 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 线程数自动适应CPU核心。
@@ -354,4 +369,3 @@ fn parallel_matmul(a: &[Vec<f64>], b: &[Vec<f64>]) -> Vec<Vec<f64>> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

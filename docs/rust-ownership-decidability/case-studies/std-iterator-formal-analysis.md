@@ -205,6 +205,7 @@ impl Iterator for Range<usize> {
 ---
 
 ## 3. 迭代器组合子
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 map与filter
@@ -309,6 +310,7 @@ where
 ```
 
 ### 定理 3.2 (Fold的结合性)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > fold可以并行化(用于rayon::iter)。
@@ -321,9 +323,11 @@ where
 ∎
 
 ### 3.3 take与skip
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 3.3 (Take的短路)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > take(n)在消费n个元素后停止，不消耗剩余迭代器。
@@ -352,12 +356,15 @@ impl<I: Iterator> Iterator for Take<I> {
 ---
 
 ## 4. 迭代器适配器形式语义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 惰性求值保证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 4.1 (惰性求值)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > 迭代器适配器是惰性的，直到消费操作才执行。
@@ -385,9 +392,11 @@ for x in iter {
 ∎
 
 ### 4.2 融合迭代器(FusedIterator)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定义 4.2 (FusedIterator)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -399,6 +408,7 @@ pub trait FusedIterator: Iterator {}
 一旦返回 `None`，后续所有 `next()` 调用也返回 `None`。
 
 ### 定理 4.2 (FusedIterator优化)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > FusedIterator允许编译器优化边界检查。
@@ -426,9 +436,11 @@ impl<I: FusedIterator> Iterator for Fuse<I> {
 ---
 
 ## 5. DoubleEndedIterator
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 5.1 (DoubleEndedIterator)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -438,6 +450,7 @@ pub trait DoubleEndedIterator: Iterator {
 ```
 
 ### 定理 5.1 (双端迭代正确性)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > 从两端交替消费应保持顺序。
@@ -458,9 +471,11 @@ assert_eq!(iter.next(), Some(3));       // 最后
 ---
 
 ## 6. ExactSizeIterator与TrustedLen
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 6.1 (ExactSizeIterator)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -470,6 +485,7 @@ pub trait ExactSizeIterator: Iterator {
 ```
 
 ### 定理 6.1 (ExactSizeIterator正确性)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > len()返回的值等于实际剩余元素数。
@@ -482,6 +498,7 @@ pub trait ExactSizeIterator: Iterator {
 ∎
 
 ### 定义 6.2 (TrustedLen)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -496,9 +513,11 @@ pub unsafe trait TrustedLen: Iterator {}
 ---
 
 ## 7. IntoIterator与for循环
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定义 7.1 (IntoIterator)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -511,6 +530,7 @@ pub trait IntoIterator {
 ```
 
 ### 定理 7.1 (for循环展开)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > `for x in iter` 等价于 `IntoIterator::into_iter` + `Iterator::next`。
@@ -540,9 +560,11 @@ for x in vec {
 ---
 
 ## 8. 内存安全分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理 8.1 (迭代器借用安全)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > 迭代器在借用期间不修改被迭代集合。
@@ -564,6 +586,7 @@ for x in &v {
 ∎
 
 ### 定理 8.2 (消耗性迭代器)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > IntoIterator消耗集合，后续访问编译错误。
@@ -583,6 +606,7 @@ for x in v {  // 消耗v
 ---
 
 ## 9. 复杂度分析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 操作 | 时间 | 空间 | 说明 |
@@ -598,9 +622,11 @@ for x in v {  // 消耗v
 ---
 
 ## 10. 反例与陷阱
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 反例 10.1 (修改被迭代集合)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -611,6 +637,7 @@ for x in &v {
 ```
 
 ### 反例 10.2 (迭代器失效)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -622,6 +649,7 @@ v.push(4);  // 可能重新分配，使iter悬垂
 ```
 
 ### 反例 10.3 (无限迭代器)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -633,6 +661,7 @@ take(100).sum()  // 限制数量
 ```
 
 ### 反例 10.4 (忘记collect)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -645,6 +674,7 @@ vec.iter().map(|x| x * 2).collect::<Vec<_>>();
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Rust Standard Library.** (2024). `std::iter::Iterator`. <https://doc.rust-lang.org/std/iter/trait.Iterator.html>
@@ -818,4 +848,3 @@ vec.iter().map(|x| x * 2).collect::<Vec<_>>();
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

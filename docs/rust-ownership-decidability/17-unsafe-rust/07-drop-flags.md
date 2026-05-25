@@ -66,6 +66,7 @@ fn main() {
 ```
 
 ### 1.2 Drop 顺序
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -93,9 +94,11 @@ fn main() {
 ---
 
 ## 2. Drop Check (dropck)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 dropck 的目的
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 确保在 Drop 实现中访问的引用总是有效的。
@@ -118,6 +121,7 @@ fn main() {
 ```
 
 ### 2.2 规则解释
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -127,6 +131,7 @@ dropck 规则：
 ```
 
 ### 2.3 使用 PhantomData
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -158,9 +163,11 @@ fn main() {
 ---
 
 ## 3. 生命周期与 Drop
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 结构体生命周期
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -178,6 +185,7 @@ impl<'a, T> Drop for Container<'a, T> {
 ```
 
 ### 3.2 泛型与 Drop
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -196,9 +204,11 @@ impl<T> Drop for GenericDrop<T> {
 ---
 
 ## 4. 常见陷阱
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 双 Drop 风险
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -225,6 +235,7 @@ impl<T> Drop for DoubleDrop<T> {
 ```
 
 ### 4.2 遗忘 Drop
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -247,6 +258,7 @@ impl<T> Drop for MustDrop<T> {
 ```
 
 ### 4.3 循环引用与 Drop
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -274,6 +286,7 @@ fn create_cycle() {
 ---
 
 ## 5. 实战：实现安全容器
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -347,6 +360,7 @@ unsafe impl<T: Sync> Sync for SafeArray<T> {}
 ---
 
 ## 参考
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [The Rustonomicon - Drop Check](https://doc.rust-lang.org/nomicon/dropck.html)
@@ -460,4 +474,3 @@ unsafe impl<T: Sync> Sync for SafeArray<T> {}
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

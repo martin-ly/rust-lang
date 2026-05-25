@@ -41,6 +41,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 故障类型谱系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -69,6 +70,7 @@
 ```
 
 ### 2.2 形式化定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -103,9 +105,11 @@
 ---
 
 ## 3. 故障检测器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 故障检测器分类
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -133,6 +137,7 @@
 ```
 
 ### 3.2 Rust 实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -277,9 +282,11 @@ impl PhiAccrualFailureDetector {
 ---
 
 ## 4. 超时机制
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 超时设计原则
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -376,9 +383,11 @@ impl TieredTimeout {
 ---
 
 ## 5. 故障恢复策略
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 重启策略
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -443,6 +452,7 @@ impl Supervisor {
 ```
 
 ### 5.2 检查点与恢复
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -493,9 +503,11 @@ impl<P: Checkpointable> CheckpointManager<P> {
 ---
 
 ## 6. 容错设计模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 断路器模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -503,6 +515,7 @@ impl<P: Checkpointable> CheckpointManager<P> {
 ```
 
 ### 6.2 舱壁隔离
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -561,9 +574,11 @@ impl Bulkhead {
 ---
 
 ## 7. 形式化保证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 容错系统属性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -593,6 +608,7 @@ impl Bulkhead {
 ---
 
 ## 8. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 故障类型 | 检测难度 | 处理策略 |
@@ -815,4 +831,3 @@ $$
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

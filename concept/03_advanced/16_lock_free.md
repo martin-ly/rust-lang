@@ -11,9 +11,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [无锁编程与内存模型](#无锁编程与内存模型)
   - [📑 目录](#-目录)
@@ -45,13 +43,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 无锁 vs 无等待
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 非阻塞算法分类:
@@ -92,7 +87,6 @@
 
 ### 1.2 ABA 问题
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 ABA 问题:
@@ -138,7 +132,6 @@ ABA 问题:
 
 ### 1.3 内存序选择
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 内存序（Memory Ordering）:
@@ -177,14 +170,9 @@ ABA 问题:
 ---
 
 ## 二、关键数据结构
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Treiber Stack
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 Treiber Stack:
@@ -239,7 +227,6 @@ Treiber Stack:
 
 ### 2.2 Michael-Scott Queue
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Michael-Scott Queue:
@@ -278,7 +265,6 @@ Michael-Scott Queue:
 
 ### 2.3 Hazard Pointer
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Hazard Pointer:
@@ -312,14 +298,9 @@ Hazard Pointer:
 ---
 
 ## 三、Rust 无锁生态
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 crossbeam
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 crossbeam 生态:
@@ -354,7 +335,6 @@ crossbeam 生态:
 
 ### 3.2 lockfree
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 lockfree crate:
@@ -387,14 +367,8 @@ lockfree crate:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -417,8 +391,6 @@ graph TD
 ---
 
 ### 4.2 边界极限
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 边界 1: 内存回收
@@ -454,7 +426,6 @@ graph TD
 
 ## 五、常见陷阱
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 忘记内存序
@@ -504,7 +475,6 @@ graph TD
 ```
 
 > **陷阱总结**: 无锁编程的陷阱主要与**内存序**、**ABA**、**内存泄漏**、**自旋**和**数据竞争**相关。
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 编译错误示例
 
@@ -555,8 +525,6 @@ fn compare_exchange_weak_loop() {
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -589,8 +557,6 @@ fn main() {
 ```
 
 ### 编译验证示例
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -613,10 +579,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
 - [Atomics](./11_atomics_and_memory_ordering.md) — 原子操作
@@ -638,24 +600,16 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）
 

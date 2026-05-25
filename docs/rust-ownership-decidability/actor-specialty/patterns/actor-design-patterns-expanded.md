@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actor设计模式 - 扩展版](#actor设计模式---扩展版)
@@ -138,6 +139,7 @@ Ask模式 (Request-Response):
 ---
 
 ## 2. 监督树模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 形式化定义
@@ -199,6 +201,7 @@ failure(n) ⇒ impact(n) ⊆ subtree(parent(n))
 ---
 
 ## 3. Circuit Breaker 模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 形式化定义
@@ -253,6 +256,7 @@ HalfOpen状态下的试探请求成功
 ```
 
 ### 3.3 参数选择矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 参数 | 敏感服务 | 容错服务 | 外部依赖 |
@@ -265,9 +269,11 @@ HalfOpen状态下的试探请求成功
 ---
 
 ## 4. 路由模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 一致性哈希路由
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -290,6 +296,7 @@ HalfOpen状态下的试探请求成功
 ```
 
 ### 4.2 定理 ROUTING-CONSISTENCY
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -308,6 +315,7 @@ HalfOpen状态下的试探请求成功
 ```
 
 ### 4.3 路由策略对比矩阵
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 策略 | 负载均衡 | 状态亲和 | 实现复杂度 | 适用场景 |
@@ -321,9 +329,11 @@ HalfOpen状态下的试探请求成功
 ---
 
 ## 5. 状态机模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 形式化定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -353,6 +363,7 @@ Actor实现:
 ```
 
 ### 5.2 定理 FSM-SAFETY
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -372,6 +383,7 @@ Actor实现:
 ```
 
 ### 5.3 状态机复杂度矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 复杂度 | 状态数 | 转换数 | 适用场景 |
@@ -383,9 +395,11 @@ Actor实现:
 ---
 
 ## 6. Event Sourcing 模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 形式化定义
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -407,6 +421,7 @@ Actor实现:
 ```
 
 ### 6.2 定理 EVENT-SOURCING-PROPERTIES
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -424,6 +439,7 @@ Actor实现:
 ```
 
 ### 6.3 事件溯源 vs CRUD 矩阵
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | Event Sourcing | CRUD |
@@ -438,9 +454,11 @@ Actor实现:
 ---
 
 ## 7. Pub-Sub 模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 形式化定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -468,6 +486,7 @@ Actor实现:
 ```
 
 ### 7.2 定理 PUB-SUB-SCALABILITY
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -488,9 +507,11 @@ Actor实现:
 ---
 
 ## 8. Saga 模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 形式化定义
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -520,6 +541,7 @@ Step = {
 ```
 
 ### 8.2 定理 SAGA-CONSISTENCY
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -540,9 +562,11 @@ Step = {
 ---
 
 ## 模式组合建议
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 常用组合
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 组合 | 模式 | 应用场景 |
@@ -575,6 +599,7 @@ Step = {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
@@ -701,4 +726,3 @@ Step = {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

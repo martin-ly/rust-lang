@@ -17,9 +17,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL]]
 
 - [Rust 测试策略：从单元测试到属性验证](#rust-测试策略从单元测试到属性验证)
   - [📑 目录](#-目录)
@@ -50,13 +48,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 测试生态全景
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -92,7 +87,6 @@ graph TD
 
 ### 1.2 测试金字塔的 Rust 映射
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 传统测试金字塔 vs Rust:
@@ -105,7 +99,6 @@ graph TD
     ├─────────────┤
     │  单元测试   │  ← 大量，快
     └─────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   Rust（编译期 + 测试）:
     ┌─────────────┐
@@ -121,7 +114,6 @@ graph TD
     ├─────────────┤
     │  类型系统   │  ← 编译期（Rust 特有层）
     └─────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 Rust 的额外优势:
   - 类型系统消除了 70%+ 的传统单元测试需求
@@ -136,7 +128,6 @@ Rust 的额外优势:
 
 ### 1.3 编译期即测试
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
 // 在 Rust 中，以下代码在编译期就证明了安全属性:
@@ -168,14 +159,9 @@ fn share(data: Arc<Mutex<Vec<i32>>>) {
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL]]
 
 ### 2.1 内置测试框架
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // 单元测试（同一文件）
@@ -232,7 +218,6 @@ fn test_public_api() {
 
 ### 2.2 属性测试与模糊测试
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // proptest: 属性测试
@@ -265,7 +250,6 @@ fuzz_target!(|data: &[u8]| {
 ```
 
 > **属性测试 vs 模糊测试**:
->
 > - **属性测试**（proptest）：基于性质定义，生成随机输入验证不变量
 > - **模糊测试**（cargo-fuzz）：无特定性质，生成随机/变异输入寻找 crash
 > - **互补使用**：属性测试验证设计意图，模糊测试发现未预见的边缘情况
@@ -275,7 +259,6 @@ fuzz_target!(|data: &[u8]| {
 
 ### 2.3 Miri：未定义行为检测
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Miri 的核心能力:
@@ -308,10 +291,6 @@ Miri 的局限:
 ---
 
 ## 三、分层测试策略
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL]]
 
 | 层级 | 工具/方法 | 目标 | 频率 | 成本 |
 |:---|:---|:---|:---:|:---:|
@@ -330,14 +309,9 @@ Miri 的局限:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -355,7 +329,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树评估 Rust 代码的测试需求。核心判断标准是**unsafe 使用**和**业务逻辑复杂度**。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: Rust 的类型系统保证**内存安全**和**线程安全**，但不保证**逻辑正确性**。业务逻辑、算法实现、边界条件仍需充分测试。
 > **关键洞察**: Rust 的编译期保证减少了**安全相关测试**的需求，但不减少**功能正确性测试**的需求。
 > [来源: 💡 原创分析]
@@ -364,7 +337,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 编译器不验证的属性
@@ -398,10 +370,6 @@ graph TD
 ---
 
 ## 五、CI/CD 集成
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL]]
 
 ```yaml
 # .github/workflows/test.yml 示例
@@ -439,10 +407,6 @@ jobs:
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -456,10 +420,6 @@ jobs:
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](./01_toolchain.md) — Rust 工具链
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust
@@ -469,7 +429,6 @@ jobs:
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -481,110 +440,61 @@ jobs:
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Test Documentation](https://doc.rust-lang.org/rustc/tests/index.html)]**
 >
-> **[来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ## 十、边界测试：测试策略的编译错误
 

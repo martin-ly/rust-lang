@@ -51,6 +51,7 @@ nom提供:
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 2.1 (IResult)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -59,6 +60,7 @@ type IResult<I, O, E = Error<I>> = Result<(I, O), Err<E>>;
 ```
 
 ### 定理 2.1 (剩余输入传递)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 解析器返回剩余输入供后续解析。
@@ -195,11 +197,9 @@ use nom::character::complete::take;
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -243,4 +243,3 @@ use nom::character::complete::take;
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

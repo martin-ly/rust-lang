@@ -24,9 +24,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [高级 Trait 主题：从关联类型到特化](#高级-trait-主题从关联类型到特化)
   - [📑 目录](#-目录)
@@ -57,13 +55,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 关联类型（Associated Types）
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // 关联类型: Trait 中的类型占位符
@@ -120,7 +115,6 @@ pub trait Graph {
 
 ### 1.2 泛型关联类型（GATs）
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
 // GATs: Generic Associated Types (Rust 1.65+)
@@ -168,7 +162,6 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
 
 ### 1.3 特化（Specialization）
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 特化: 为特定类型提供优化的 Trait 实现
@@ -212,14 +205,9 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 关联类型 vs 泛型参数
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // 对比: 何时用关联类型，何时用泛型参数
@@ -257,7 +245,6 @@ impl Convert<OsString> for String { ... }
 
 ### 2.2 负 Trait 实现
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // 负实现: 显式声明类型不实现某个 Trait
@@ -297,7 +284,6 @@ impl<T> !Sync for MyType<T> {}  // 明确非 Sync
 
 ### 2.3 Trait 别名
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
 // Trait 别名: 简化复杂的 Trait Bound
@@ -331,10 +317,6 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
 ---
 
 ## 三、Trait 模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 特性 → 代码模式
@@ -370,14 +352,9 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -397,7 +374,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 特化的 soundness
@@ -437,10 +413,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 关联类型与泛型混用导致歧义
@@ -487,7 +459,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -500,10 +471,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Traits](./01_traits.md) — Trait 基础
 - [Generics](./02_generics.md) — 泛型系统
@@ -513,7 +480,6 @@ graph TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
->
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
 **文档版本**: 1.0
@@ -525,18 +491,12 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十、边界测试：高级 Trait 的编译错误
 

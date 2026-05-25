@@ -16,9 +16,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 知识体系跨层依赖与蕴含拓扑图](#rust-知识体系跨层依赖与蕴含拓扑图)
   - [📑 目录](#-目录)
@@ -33,10 +31,6 @@
   - [六、跨层认知路径（导航指南）](#六跨层认知路径导航指南)
 
 ## 一、跨层拓扑总图
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
 graph TD
@@ -162,10 +156,6 @@ graph TD
 ---
 
 ## 二、层次间关系矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 纵向依赖矩阵（学习路径）
 
@@ -208,7 +198,6 @@ graph TD
 
 ## 三、知识流动图
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 graph LR
@@ -248,13 +237,10 @@ graph LR
 ```
 
 > **认知功能**: 本图揭示知识从权威来源到工程实践的**转化链路**，帮助学习者识别当前处于「消费知识」还是「生产知识」的阶段。**使用建议**: 当遇到理解困难时，向上游回溯至 L0 元信息或 L4 形式化层寻找更严密的定义。**关键洞察**: L7 前沿通过「反馈」箭头回流至权威来源，形成闭环——这意味着今天的「前沿」就是明天的「基础」。[来源: 💡 原创分析]
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ---
 
 ## 四、主题-层级交叉映射
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 主题 | L1 | L2 | L3 | L4 | L5 | L6 | L7 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
@@ -268,9 +254,7 @@ graph LR
 
 ## 五、相关概念链接
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [L0 可判定性谱系](decidability_spectrum.md) —— 全链路判定边界
 - [L0 表达力多视角](expressiveness_multiview.md) —— 七视角表达力深化
@@ -284,8 +268,6 @@ graph LR
 - [PLAN.md](../PLAN.md) —— 项目演进计划
 
 ## 六、跨层认知路径（导航指南）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **如何根据当前水平选择正确的学习层级？**
 
@@ -332,7 +314,6 @@ graph TD
 ```
 
 > **认知功能**: 此图是跨层学习的**常见误解纠偏器**。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > 四个绿色节点标记了 Rust 学习者最典型的认知偏差：
 > unsafe = 关闭检查器、async = 自动并行、Send/Sync = 防死锁、生命周期 = 运行时检查。
 > 每个纠偏都指向具体文件，形成「发现问题 → 定位纠正资源」的闭环。

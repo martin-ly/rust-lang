@@ -9,9 +9,7 @@
 > **来源**: [ACM — *Competency Graph for Programming Education*]
 >
 > **来源**: [Bloom et al. (2001) — *Taxonomy of Educational Objectives*]
->
 > **来源**: [Dreyfus, S.E. — *The Five-Stage Model of Adult Skill Acquisition*. Bulletin of Science, Technology & Society, 2004]
->
 > **来源**: [Microsoft RustTraining — 能力评估与认证体系]
 
 ## 📑 目录
@@ -70,8 +68,6 @@ mindmap
 
 ## 一、六维能力模型
 
-> [来源: Bloom 修订版 2001 · Dreyfus 技能模型 · Microsoft RustTraining]
-
 | 维度 | 定义 | A/S/P | 可自动化 | 典型表现 |
 |:---|:---|:---:|:---:|:---|
 | **C1 — 语法能力** (Syntax Proficiency) | 掌握 Rust 语法、关键字、标准库 API | A | 🟢 高 | 无需查阅文档即可写出符合语法的代码；熟悉常用 trait 的方法签名 |
@@ -97,8 +93,6 @@ mindmap
 ---
 
 ## 二、Dreyfus 技能层级映射
-
-> [来源: Dreyfus, S.E. (2004) — *The Five-Stage Model of Adult Skill Acquisition*]
 
 Dreyfus 模型将技能获取分为五个阶段，映射到 Rust 能力的六维模型：
 
@@ -229,8 +223,6 @@ graph LR
 
 ## 四、薄弱点诊断与训练路径
 
-> [来源: `cognitive_dimension_matrix.md` · `problem_graph.md`]
-
 ### 薄弱点 → 训练路径映射
 
 ```mermaid
@@ -274,8 +266,6 @@ graph LR
 
 ## 五、背景定制能力路径
 
-> [来源: `learning_guide.md` — 按背景导航] · [Microsoft RustTraining — C++→Rust 转换]
-
 ### 路径 A：C++ 背景
 
 | 当前能力 | 薄弱点 | 快速提升策略 |
@@ -312,8 +302,6 @@ graph LR
 ---
 
 ## 六、能力图谱与 A/S/P 标记的整合
-
-> [来源: `asp_marking_guide.md`]
 
 ```markdown
 能力维度 → A/S/P 映射:

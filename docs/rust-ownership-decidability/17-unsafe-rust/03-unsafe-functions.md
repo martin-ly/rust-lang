@@ -61,6 +61,7 @@ fn main() {
 ```
 
 ### 1.2 安全包装器模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -86,6 +87,7 @@ pub fn safe_read(maybe_ptr: Option<&i32>) -> Option<i32> {
 ```
 
 ### 1.3 Unsafe 函数指针
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -99,9 +101,11 @@ fn call_unsafe(f: UnsafeFn, ptr: *const i32) -> i32 {
 ---
 
 ## 2. Unsafe Trait
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 定义与实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -117,6 +121,7 @@ unsafe impl Sync for MyType {}
 ```
 
 ### 2.2 自定义 Unsafe Trait
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -140,9 +145,11 @@ unsafe impl RawReadable for u32 {
 ---
 
 ## 3. 安全抽象模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 类型状态模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -188,6 +195,7 @@ impl<T> SafeBuffer<T, Init> {
 ```
 
 ### 3.2 不变量封装
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -226,9 +234,11 @@ impl SafeString {
 ---
 
 ## 4. 常见模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 延迟初始化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -252,6 +262,7 @@ fn expensive_init() -> String {
 ```
 
 ### 4.2 自定义 Drop
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -275,9 +286,11 @@ impl Drop for RawBuffer {
 ---
 
 ## 5. 文档与契约
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Safety 文档规范
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -306,6 +319,7 @@ unsafe fn read_ptr<T: Copy>(ptr: *const T) -> T {
 ```
 
 ### 5.2 不变量文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -436,4 +450,3 @@ impl<T: PartialEq> UniqueVec<T> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

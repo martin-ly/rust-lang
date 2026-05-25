@@ -3109,7 +3109,6 @@ Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
 
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design]**

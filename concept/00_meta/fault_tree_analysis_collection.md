@@ -10,11 +10,8 @@
 > **来源**: [IEC 61025 — *Fault Tree Analysis*]
 >
 > **来源**: [NASA — *Fault Tree Handbook with Aerospace Applications*]
->
 > **来源**: [RustBelt (Jung et al., POPL 2018) — Safety Theorem & Counterexamples]
->
 > **来源**: [The Rustonomicon — *What Unsafe Rust Can Do*]
->
 > **来源**: [Miri — Undefined Behavior Detection]
 
 ## 📑 目录
@@ -84,8 +81,6 @@ mindmap
 
 ## 一、FTA 格式规范
 
-> [来源: IEC 61025 · NASA FTA 手册]
-
 ### 1.1 符号系统
 
 | 符号 | 名称 | Mermaid 表示 | 含义 |
@@ -119,8 +114,6 @@ mindmap
 ---
 
 ## 二、内存安全失效树
-
-> [来源: [Rust Reference — Memory Model]] · [RustBelt — UAF Theorem] · [The Rustonomicon — Dangling Pointers]
 
 ### 2.1 顶事件
 
@@ -216,8 +209,6 @@ graph TD
 ---
 
 ## 三、并发安全失效树
-
-> [来源: [Rust Reference — Concurrency]] · [RustBelt — Thread Safety Proof] · [Data Race Definition — C++ / LLVM]
 
 ### 3.1 顶事件
 
@@ -320,8 +311,6 @@ graph TD
 
 ## 四、类型系统失效树
 
-> [来源: [Rust Reference — Type System]] · [RustBelt — Type Safety Theorem] · [RFC 1023 — Rebalancing Coherence]
-
 ### 4.1 顶事件
 
 **⬡ 顶事件：Rust 类型系统保证失效（Coherence 破坏 / unsound impl / 类型推断歧义导致运行时错误）**
@@ -419,8 +408,6 @@ graph TD
 
 ## 五、异步安全失效树
 
-> [来源: [Rust Reference — Async/Await]] · [Tokio — Pin Contract] · [Without Boats — Self-Referential Structs]
-
 ### 5.1 顶事件
 
 **⬡ 顶事件：Rust 异步程序发生运行时安全违规（Pin 契约违反 / 自引用悬垂 / Future 状态损坏）**
@@ -510,8 +497,6 @@ graph TD
 ---
 
 ## 六、Unsafe 契约失效树
-
-> [来源: [Rust Reference — Unsafe Blocks]] · [The Rustonomicon — Undefined Behavior] · [Miri — UB 分类]
 
 ### 6.1 顶事件
 
@@ -641,8 +626,6 @@ graph TD
 
 ## 七、跨树关联分析
 
-> [来源: `concept_definition_decision_forest.md` — 交叉一致性]
-
 五棵失效树之间存在**因果关系**和**共用基本事件**：
 
 ```mermaid
@@ -669,8 +652,6 @@ graph TD
 ---
 
 ## 八、与概念判定森林的对照
-
-> [来源: `concept_definition_decision_forest.md`]
 
 | 维度 | 概念定义判定森林 | 失效分析树集（本文件） |
 |:---|:---|:---|

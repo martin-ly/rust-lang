@@ -58,6 +58,7 @@ Tonic特点：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 SERVICE-1 ( proto定义 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```protobuf
@@ -76,6 +77,7 @@ $$
 $$
 
 ### 定义 SERVICE-2 ( 生成trait )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -91,9 +93,11 @@ trait Greeter {
 ---
 
 ## 3. 编解码器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 CODEC-1 ( Protobuf编解码 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -106,6 +110,7 @@ trait Codec {
 ```
 
 ### 定理 CODEC-T1 ( 序列化正确性 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 编码解码可逆。
@@ -117,9 +122,11 @@ $$
 ---
 
 ## 4. 流处理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 STREAM-1 ( 流类型 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 模式 | 请求 | 响应 | Tonic类型 |
@@ -130,6 +137,7 @@ $$
 | Bidirectional | 流 | 流 | `Streaming<T>` → `Streaming<U>` |
 
 ### 定义 STREAM-2 ( 背压控制 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 $$
@@ -139,9 +147,11 @@ $$
 ---
 
 ## 5. 拦截器
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 INTERCEPT-1 ( Interceptor )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -149,6 +159,7 @@ type Interceptor = fn(Request<()>) -> Result<Request<()>, Status>;
 ```
 
 ### 定理 INTERCEPT-T1 ( 链式调用 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 拦截器可组合。
@@ -160,9 +171,11 @@ $$
 ---
 
 ## 6. 传输安全
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 TLS-1 ( 证书验证 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -173,6 +186,7 @@ Server::builder()
 ```
 
 ### 定理 TLS-T1 ( 安全通道 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 TLS保证机密性和完整性。
@@ -184,9 +198,11 @@ $$
 ---
 
 ## 7. 定理与证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定理 TONIC-T1 ( 协议合规 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 实现符合gRPC规范。
@@ -196,6 +212,7 @@ $$
 $$
 
 ### 定理 TONIC-T2 ( 流安全 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 流结束正确传播。
@@ -207,9 +224,11 @@ $$
 ---
 
 ## 8. 代码示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例1: 基础服务
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -252,6 +271,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 示例2: 流服务
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -301,6 +321,7 @@ impl Greeter for MyGreeter {
 ```
 
 ### 示例3: 拦截器
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -401,4 +422,3 @@ Server::builder()
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

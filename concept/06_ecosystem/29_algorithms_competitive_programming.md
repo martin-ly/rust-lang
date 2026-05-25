@@ -19,7 +19,6 @@
 
 ## 权威定义
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: CLRS — Introduction to Algorithms, 4th Edition]** An algorithm is any well-defined computational procedure that takes some value, or set of values, as input and produces some value, or set of values, as output.
 > **来源**: <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>
@@ -34,31 +33,26 @@
 
 ## 认知路径（Cognitive Path）
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **学习递进**: 从"Rust 能不能打竞赛"的直觉质疑，深入到"所有权模型如何在不牺牲性能的前提下消除算法实现中的内存错误"的形式化理解。
 
 ### 第 1 步：为什么 Rust 在算法竞赛中被低估？
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 编译期借用检查、显式生命周期、没有垃圾回收——这些特性在快速原型阶段似乎增加了认知负担。但换来的零成本抽象和无运行时错误，在复杂数据结构和图算法中反而是**可靠性倍增器**。
 
 ### 第 2 步：所有权模型如何重塑算法实现范式？
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 链表反转不再担心 use-after-free，图遍历不再担心缓冲区溢出，线段树的下标访问由编译期边界检查守护。Rust 的 `Option<T>` 和 `Result<T, E>` 强制处理所有边界条件。
 
 ### 第 3 步：竞赛编程的 Rust 工程化策略是什么？
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Fast I/O、内存池复用、零分配算法、位运算压缩——这些惯用法将 Rust 的性能推向 C++ 级别，同时保持内存安全。核心策略：**用类型系统编码不变量，用迭代替代递归避免栈溢出**。
 
 ### 第 4 步：形式验证能在算法竞赛中落地吗？
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 VeriContest 证明：946 道经典竞赛题的 Rust 实现可通过 Verus 形式验证。Kani 可在 CI 中自动验证数组边界、无溢出、循环不变量——从"写对算法"进化到"证明算法正确"。
 
@@ -66,11 +60,9 @@ VeriContest 证明：946 道经典竞赛题的 Rust 实现可通过 Verus 形式
 
 ## 一、Rust 在算法竞赛中的定位
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 1.1 安全性 vs 速度 vs 表达力
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 | 维度 | Rust | C++ | Python |
 |:---|:---|:---|:---|
@@ -100,11 +92,8 @@ VeriContest 证明：946 道经典竞赛题的 Rust 实现可通过 Verus 形式
 
 ## 二、算法范式分类与 Rust 实现
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 2.1 分治 (Divide & Conquer)
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **理论复杂度**: $T(n) = aT(n/b) + f(n)$，主定理判定。归并排序 $O(n \log n)$，快速选择 $O(n)$ 期望。
 
@@ -148,8 +137,6 @@ pub fn par_merge_sort<T: Ord + Send + Clone>(arr: &mut [T]) {
 ---
 
 ### 2.2 贪心 (Greedy)
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **理论核心**: 每一步局部最优选择必须满足**最优子结构**和**贪心选择性质**。
 
@@ -195,8 +182,6 @@ pub fn dijkstra(graph: &[Vec<(usize, u64)>], start: usize) -> Vec<u64> {
 ---
 
 ### 2.3 动态规划 (DP)
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **理论核心**: 最优子结构 + 重叠子问题。时间复杂度 = 状态数 × 转移代价。
 
@@ -248,8 +233,6 @@ pub fn tsp(dist: &[Vec<u64>]) -> u64 {
 ---
 
 ### 2.4 图论 (Graph Algorithms)
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **Rust 核心支持**: `VecDeque<T>`（BFS）、`BinaryHeap<T>`（Dijkstra）、邻接表 `Vec<Vec<(usize, Weight)>>`。
 
@@ -328,8 +311,6 @@ pub fn topological_sort(graph: &[Vec<usize>], indegree: &mut [usize]) -> Option<
 ---
 
 ### 2.5 字符串 (String Algorithms)
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **Rust 核心优势**: `str::as_bytes()` 提供 O(1) 随机访问；滚动哈希利用 `u64` / `u128` 溢出实现模 $2^{64}$ 自然取模。
 
@@ -398,8 +379,6 @@ impl Trie {
 ---
 
 ### 2.6 计算几何 (Computational Geometry)
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **Rust 实现要点**: 坐标压缩、`i64` 交叉乘积避免浮点精度、Graham Scan / Andrew's Monotone Chain $O(n \log n)$。
 
@@ -446,12 +425,8 @@ pub fn coordinate_compress(coords: &[i64]) -> Vec<usize> {
 ---
 
 ## 三、竞赛编程惯用法
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ### 3.1 Fast I/O
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 use std::io::{self, BufRead, Write};
@@ -490,8 +465,6 @@ impl<R: BufRead> FastScanner<R> {
 > [来源: [Rust Competitive Programming Guide](https://github.com/aepsil0n/acropolis)] 竞赛编程中 I/O 优化是 TLE 的第一道防线；`BufRead::read_until` 比逐字符解析快 5-10 倍。
 
 ### 3.2 零分配算法
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 反模式 | 替代方案 | 收益 |
 |:---|:---|:---|
@@ -521,8 +494,6 @@ fn partition(arr: &mut [i32]) -> usize {
 ```
 
 ### 3.3 位运算技巧
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 pub fn bit_tricks() {
@@ -546,8 +517,6 @@ pub fn bit_tricks() {
 > [来源: [LeetCode 191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)] `count_ones()` 编译为 CPU `POPCNT` 指令，O(1) 硬件级性能。
 
 ### 3.4 模运算安全
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 pub const MOD: u64 = 1_000_000_007;
@@ -580,12 +549,8 @@ pub fn pow_mod(mut base: u64, mut exp: u64) -> u64 {
 ---
 
 ## 四、复杂度在类型系统中的编码
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 Const Generics 编码数组边界
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 /// 固定大小矩阵乘法：编译期维度检查
@@ -609,8 +574,6 @@ pub fn mat_mul<const N: usize, const M: usize, const P: usize>(
 > [来源: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html)] Const generics 稳定于 Rust 1.51，允许数组大小编码进类型。
 
 ### 4.2 Type-Level 自然数（概念性）
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 /// Peano 算术：概念性类型级自然数
@@ -630,8 +593,6 @@ impl<T: Fib + 'static> Fib for S<S<T>> where S<T>: Fib {
 > [来源: [typenum crate](https://docs.rs/typenum)] 生产环境推荐使用 `typenum`，已广泛应用于 `nalgebra` 等科学计算库。
 
 ### 4.3 Iterator `size_hint` 作为复杂度提示
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 pub struct RangeIter { start: usize, end: usize }
@@ -653,8 +614,6 @@ impl ExactSizeIterator for RangeIter {}
 ---
 
 ## 五、形式验证与算法
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 VeriContest 案例研究
 
@@ -678,8 +637,6 @@ impl ExactSizeIterator for RangeIter {}
 ```
 
 ### 5.2 Kani 验证
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 #[cfg(kani)]
@@ -705,8 +662,6 @@ mod verification {
 > [来源: [AWS Kani Docs](https://model-checking.github.io/kani/)] Kani 使用 CBMC 作为后端，支持符号执行验证有界程序属性。
 
 ### 5.3 何时值得形式验证？
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 验证工具 | ROI 评估 |
 |:---|:---|:---|
@@ -721,8 +676,6 @@ mod verification {
 ---
 
 ## 六、LeetCode 模式矩阵
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模式 | Rust 核心工具 | 典型题号 | 复杂度 |
 |:---|:---|:---|:---|
@@ -750,12 +703,8 @@ mod verification {
 ---
 
 ## 七、边界与反模式
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 7.1 递归深度限制
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 默认线程栈大小通常为 2MB（Linux）或 1MB（Windows）。$n = 10^5$ 的递归 DFS 必然栈溢出。
 
@@ -781,8 +730,6 @@ pub fn iterative_dfs(graph: &[Vec<usize>], start: usize) -> Vec<usize> {
 ```
 
 ### 7.2 `usize` / `isize` 的平台依赖性
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // ❌ 错误：假设 usize 为 64 位
@@ -799,8 +746,6 @@ let idx = n as i32;
 > [来源: [Rust Reference — Integer Types](https://doc.rust-lang.org/reference/types/numeric.html)] `usize` 宽度取决于目标平台指针大小；竞赛编程中处理大数时应显式使用 `u64` / `i64`。
 
 ### 7.3 浮点精度陷阱
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
 // ❌ 错误：直接比较
@@ -814,8 +759,6 @@ if (a - 0.3).abs() < EPS { /* 视为相等 */ }
 ```
 
 ### 7.4 过度 `clone()` 导致 TLE
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
 // ❌ 反模式：循环中克隆整个 Vec
@@ -831,12 +774,8 @@ temp.extend_from_slice(&nums[..]);
 ---
 
 ## 八、总结与相关链接
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 8.1 核心要点回顾
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Rust 的竞赛竞争力**: 零成本抽象 + 编译期内存安全，使 Rust 在复杂数据结构中比 C++ 更不易出错，性能同级。
 2. **所有权即算法约束**: `split_at_mut` 替代危险指针算术，`Option<T>` 强制处理空节点，`VecDeque` 提供安全双端队列。
@@ -845,8 +784,6 @@ temp.extend_from_slice(&nums[..]);
 5. **类型系统编码不变量**: Const generics 将数组维度编码进类型，迭代器 `size_hint` 指导预分配，将运行时错误转化为编译期拒绝。
 
 ### 8.2 相关概念文件
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文件 | 关系 |
 |:---|:---|
@@ -872,200 +809,106 @@ temp.extend_from_slice(&nums[..]);
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
 ## 十、边界测试：算法竞赛的编译错误
 

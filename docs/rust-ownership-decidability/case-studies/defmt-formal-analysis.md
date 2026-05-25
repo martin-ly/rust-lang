@@ -330,6 +330,7 @@ $$
 ---
 
 ## 3. 形式化语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 日志级别过滤的形式化
@@ -570,6 +571,7 @@ $$
 ---
 
 ## 4. 定理和证明
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 传输带宽定理
@@ -887,6 +889,7 @@ $$
 ---
 
 ## 5. 类型系统分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 Format trait的形式化定义
@@ -1083,6 +1086,7 @@ defmt::info!("msg = {}", s.as_str());
 ---
 
 ## 6. 内存安全分析
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 栈分配保证
@@ -1259,6 +1263,7 @@ $$
 ---
 
 ## 7. 性能模型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 时间复杂度分析
@@ -1413,6 +1418,7 @@ $$
 ---
 
 ## 8. 形式化验证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 解码正确性证明
@@ -1547,6 +1553,7 @@ $$
 ---
 
 ## 9. 反例和边界情况
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 9.1 浮点格式化陷阱
@@ -1740,6 +1747,7 @@ fn format_iter(&self, f: &mut Formatter) {
 ---
 
 ## 10. 最佳实践
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 10.1 日志级别设计
@@ -1864,6 +1872,7 @@ defmt::info!("operation took {} cycles", end - start);
 ---
 
 ## 11. 参考
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 学术论文
@@ -2510,4 +2519,3 @@ defmt::info!("operation took {} cycles", end - start);
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

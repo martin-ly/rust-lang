@@ -1,6 +1,7 @@
 # 07 同步合并模式 (Synchronizing Merge)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [07 同步合并模式 (Synchronizing Merge)](#07-同步合并模式-synchronizing-merge)
@@ -101,6 +102,7 @@ $$
 其中 $\triangleright$ 表示同步汇合操作。
 
 ## BPMN 2.0 表示
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 在 BPMN 2.0 中，同步合并使用**包容性网关（Inclusive Gateway, OR-Join）**表示：
@@ -197,6 +199,7 @@ $$
 ```
 
 ## 进程代数形式化 (CSP/CCS)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **CSP (Communicating Sequential Processes) 表示：**
@@ -254,6 +257,7 @@ Merger'(k) ::= if k=n then continue else Merger(k)
 ```
 
 ## 状态机语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **扩展状态机表示：**
@@ -316,6 +320,7 @@ $$
 ```
 
 ## 正确性证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 安全性证明
@@ -367,6 +372,7 @@ $$
 因此不存在永久等待的状态。∎
 
 ## Rust 实现示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -687,6 +693,7 @@ pub async fn dynamic_sync_example() {
 ```
 
 ## 与其他模式的关系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 模式 | 特点 | 区别 |
@@ -725,6 +732,7 @@ $$
 ```
 
 ## 应用场景
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **分布式计算**：等待所有 Map 任务完成后进行 Reduce
@@ -735,6 +743,7 @@ $$
 6. **CI/CD 流水线**：等待多个并行构建完成
 
 ### 实现要点
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 动态计数活跃分支数量
@@ -745,6 +754,7 @@ $$
 - 支持优雅降级
 
 ## 学术参考
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **van der Aalst, W.M.P.** (1998). "The Application of Petri Nets to Workflow Management." *Journal of Circuits, Systems and Computers*, 8(1), 21-66.
@@ -779,6 +789,7 @@ $$
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)

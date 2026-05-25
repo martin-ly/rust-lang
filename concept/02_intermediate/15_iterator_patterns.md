@@ -14,9 +14,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 迭代器模式](#rust-迭代器模式)
   - [📑 目录](#-目录)
@@ -50,14 +48,9 @@
 ---
 
 ## 一、核心概念
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 Iterator Trait
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Iterator Trait:
@@ -90,7 +83,6 @@ Iterator Trait:
 
 ### 1.2 适配器链
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 适配器链:
@@ -132,7 +124,6 @@ Iterator Trait:
 
 ### 1.3 惰性求值
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 惰性求值:
@@ -160,7 +151,6 @@ Iterator Trait:
   │ 显式循环        │ 无              │ 接近            │
   │ 中间 Vec        │ 多次分配        │ 较差            │
   └─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL — Iterators]]
 ```
 
 > **认知功能**: **惰性求值让迭代器链既高效又可读**——没有中间分配，编译器优化为单一循环。
@@ -169,14 +159,9 @@ Iterator Trait:
 ---
 
 ## 二、常用模式
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 map-filter-collect
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 map-filter-collect:
@@ -199,13 +184,11 @@ map-filter-collect:
 ```
 
 > **认知功能**: **map-filter-collect 是 Rust 迭代器的经典模式**——声明式数据处理。
-> [来源: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ---
 
 ### 2.2 fold 与归约
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 fold 与归约:
@@ -238,7 +221,6 @@ fold 与归约:
 
 ### 2.3 zip 与并行迭代
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 zip: 并行迭代多个序列
@@ -269,7 +251,6 @@ zip: 并行迭代多个序列
 
 ## 三、自定义迭代器
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 自定义迭代器:
@@ -310,8 +291,6 @@ zip: 并行迭代多个序列
 ---
 
 ## 四、性能权衡
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 性能对比:
@@ -324,7 +303,6 @@ zip: 并行迭代多个序列
   │ 递归            │ 中              │ 差（无 TCO）    │ 中              │
   │ 索引访问        │ 低              │ 中              │ 低              │
   └─────────────────┴─────────────────┴─────────────────┴─────────────────┘
-> [来源: [TRPL — Iterators]]
 
   性能洞察:
   ├── 适配器链编译为与手写循环相同的机器码
@@ -334,13 +312,10 @@ zip: 并行迭代多个序列
 ```
 
 > **性能洞察**: **迭代器适配器链与手写循环性能相同**——编译器会内联整个链。
-> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ---
 
 ## 五、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 反命题:
@@ -362,8 +337,6 @@ zip: 并行迭代多个序列
 ---
 
 ## 六、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 多次消费迭代器
@@ -401,13 +374,10 @@ zip: 并行迭代多个序列
 ```
 
 > **陷阱总结**: 迭代器的陷阱主要与**多次消费**、**外部状态**、**不必要 collect**和**Option 处理**相关。
-> [来源: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)]
 
 ---
 
 ## 七、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -437,8 +407,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 - [Generics](../02_intermediate/02_generics.md) — 泛型
@@ -461,13 +429,9 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---

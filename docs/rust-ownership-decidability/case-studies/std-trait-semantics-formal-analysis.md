@@ -74,9 +74,11 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 析构语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 2.1 (Drop trait)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -86,6 +88,7 @@ pub trait Drop {
 ```
 
 ### 定理 2.1 (RAII保证)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > 值离开作用域时自动调用drop。
@@ -105,9 +108,11 @@ $$
 ∎
 
 ### 2.2 Drop顺序
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 2.2 (Drop顺序规则)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > 变量按相反于声明顺序drop。
@@ -132,9 +137,11 @@ struct S { a: A, b: B, c: C }
 ∎
 
 ### 2.3 析构保证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 2.3 (析构幂等性)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > 值被drop后不应再次使用。
@@ -164,12 +171,15 @@ impl Drop for MyType {
 ---
 
 ## 3. Clone trait
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 3.1 拷贝语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 3.1 (Clone trait)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -180,6 +190,7 @@ pub trait Clone: Sized {
 ```
 
 ### 定理 3.1 (Clone语义)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > clone()产生独立副本，不共享所有权。
@@ -201,9 +212,11 @@ let c = a.clone(); // 复制，独立所有权
 ∎
 
 ### 3.2 Clone vs Copy
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 3.2 (Copy trait)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -211,6 +224,7 @@ pub trait Copy: Clone { }
 ```
 
 ### 定理 3.2 (Copy的隐式性)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > Copy类型在赋值时隐式复制，Clone需要显式调用。
@@ -238,12 +252,15 @@ $$
 ---
 
 ## 4. Send与Sync
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 线程安全边界
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定义 4.1 (Send与Sync)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -252,6 +269,7 @@ pub unsafe auto trait Sync { }
 ```
 
 ### 定理 4.1 (Send语义)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > T: Send表示T可以安全地移动到另一个线程。
@@ -272,6 +290,7 @@ $$
 ∎
 
 ### 定理 4.2 (Sync语义)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > T: Sync表示&T可以安全地在线程间共享。
@@ -292,9 +311,11 @@ $$
 ∎
 
 ### 4.2 自动实现规则
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 4.3 (自动实现)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > Send和Sync是自动trait，默认实现。
@@ -319,12 +340,15 @@ struct MyType {
 ---
 
 ## 5. Any trait
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 类型擦除
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 5.1 (Any trait)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -334,6 +358,7 @@ pub trait Any: 'static {
 ```
 
 ### 定理 5.1 (类型擦除)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > Any允许将具体类型擦除为动态类型。
@@ -357,9 +382,11 @@ fn handle_error(err: Box<dyn Any>) {
 ∎
 
 ### 5.2 向下转换
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定理 5.2 (downcast_ref安全性)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > downcast_ref在类型匹配时成功，否则返回None。
@@ -387,9 +414,11 @@ fn downcast_ref<T: Any>(&self) -> Option<&T> {
 ---
 
 ## 6. Sized与?Sized
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 6.1 (Sized)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -399,6 +428,7 @@ pub trait Sized {
 ```
 
 ### 定理 6.1 (?Sized类型)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > ?Sized类型编译时大小未知，只能通过引用使用。
@@ -424,9 +454,11 @@ fn bar<T: ?Sized>(t: &T) {} // T可能!Sized
 ---
 
 ## 7. 反例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 反例 7.1 (自定义Drop后使用)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -436,6 +468,7 @@ drop(v);
 ```
 
 ### 反例 7.2 (Rc跨线程)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -446,6 +479,7 @@ thread::spawn(move || {
 ```
 
 ### 反例 7.3 (Any非'static)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -457,6 +491,7 @@ let r = &x;
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **Rust Standard Library.** (2024). `std::ops::Drop`, `std::clone::Clone`, `std::marker::{Send, Sync}`. <https://doc.rust-lang.org/std/>
@@ -560,4 +595,3 @@ let r = &x;
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

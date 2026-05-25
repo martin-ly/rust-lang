@@ -17,9 +17,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Cargo Book]]
 
 - [交叉编译：多目标平台支持与条件编译](#交叉编译多目标平台支持与条件编译)
   - [📑 目录](#-目录)
@@ -49,13 +47,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Target Triple 的语义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Target Triple 格式: <arch><sub>-<vendor>-<sys>-<abi>
@@ -90,7 +85,6 @@ Target Triple 格式: <arch><sub>-<vendor>-<sys>-<abi>
 
 ### 1.2 条件编译与 cfg
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // cfg 属性: 条件编译
@@ -131,7 +125,6 @@ if cfg!(target_endian = "little") {
 
 ### 1.3 std 与 no_std
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Rust 的两种运行模式:
@@ -166,14 +159,9 @@ Rust 的两种运行模式:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Cargo Book]]
 
 ### 2.1 交叉编译工具链
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 交叉编译的步骤:
@@ -212,7 +200,6 @@ Rust 的两种运行模式:
 
 ### 2.2 自定义 Target
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```json
 // 自定义 target 规范（JSON 文件）
@@ -255,7 +242,6 @@ Rust 的两种运行模式:
 
 ### 2.3 嵌入式目标
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 嵌入式 Rust 生态:
@@ -283,15 +269,10 @@ Rust 的两种运行模式:
 ```
 
 > **嵌入式洞察**: Rust 的 **嵌入式生态**是语言安全优势的最直接体现——在无法调试的硬件上，编译期保证的价值被放大到极致。
-> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)]
 
 ---
 
 ## 三、平台支持矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Cargo Book]]
 
 ```text
 主流目标平台:
@@ -305,7 +286,6 @@ Rust 的两种运行模式:
   │ aarch64-apple-darwin   │ 1       │ ✅      │ Apple   │
   │ aarch64-unknown-linux-gnu│ 2     │ ✅      │ ARM 服务器│
   └────────────────────────┴─────────┴─────────┴─────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   移动:
   ┌────────────────────────┬─────────┬─────────┬─────────┐
@@ -315,7 +295,6 @@ Rust 的两种运行模式:
   │ x86_64-apple-ios       │ 2       │ ✅      │ iOS 模拟器│
   │ aarch64-apple-ios      │ 2       │ ✅      │ iOS 真机│
   └────────────────────────┴─────────┴─────────┴─────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   嵌入式 (no_std):
   ┌────────────────────────┬─────────┬─────────┬─────────┐
@@ -325,7 +304,6 @@ Rust 的两种运行模式:
   │ riscv32imac-unknown-none-elf│ 2  │ ❌      │ RISC-V  │
   │ avr-unknown-gnu-atmega328│ 3    │ ❌      │ Arduino │
   └────────────────────────┴─────────┴─────────┴─────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   Web:
   ┌────────────────────────┬─────────┬─────────┬─────────┐
@@ -343,14 +321,9 @@ Rust 的两种运行模式:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -370,7 +343,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: C 依赖的交叉编译
@@ -410,10 +382,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Cargo Book]]
 
 ```text
 陷阱 1: 忘记安装 target
@@ -463,10 +431,6 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Cargo Book]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -481,10 +445,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](./01_toolchain.md) — Cargo 与工具链
 - [WASI](./08_wasi.md) — WASI 与 Wasm
@@ -506,114 +466,63 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ## 十、边界测试：交叉编译的编译错误
 

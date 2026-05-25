@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actix-web 生产环境案例分析](#actix-web-生产环境案例分析)
@@ -96,9 +97,11 @@ Actix-web 在Web生态中的位置:
 ---
 
 ## 2. Actor架构实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 连接管理Actor
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -150,6 +153,7 @@ impl Handler<Response> for Worker {
 ```
 
 ### 2.2 服务器Actor架构
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -188,9 +192,11 @@ impl Handler<NewConnection> for Server {
 ---
 
 ## 3. 性能特征分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 基准测试数据
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景 | Requests/sec | Latency (p99) | 内存/连接 |
@@ -201,6 +207,7 @@ impl Handler<NewConnection> for Server {
 | WebSocket | 1M+ connections | - | ~2KB/conn |
 
 ### 3.2 与其他框架对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 框架 | 语言 | Plain Text (rps) | JSON (rps) |
@@ -215,9 +222,11 @@ impl Handler<NewConnection> for Server {
 ---
 
 ## 4. 路由与处理器
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 Actor-based路由
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -256,6 +265,7 @@ HttpServer::new(|| {
 ```
 
 ### 4.2 WebSocket Actor
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -303,9 +313,11 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for ChatSession {
 ---
 
 ## 5. 中间件系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 Actor-based中间件
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -364,9 +376,11 @@ where
 ---
 
 ## 6. 生产环境最佳实践
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 配置优化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -384,6 +398,7 @@ HttpServer::new(app_factory)
 ```
 
 ### 6.2 错误处理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -419,9 +434,11 @@ async fn handler() -> Result<HttpResponse, AppError> {
 ---
 
 ## 7. 形式化安全分析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 内存安全保证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -447,6 +464,7 @@ async fn handler() -> Result<HttpResponse, AppError> {
 ```
 
 ### 7.2 并发安全保证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -472,6 +490,7 @@ async fn handler() -> Result<HttpResponse, AppError> {
 ---
 
 ## 8. 与其他框架对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | actix-web | Axum | Rocket |
@@ -506,6 +525,7 @@ async fn handler() -> Result<HttpResponse, AppError> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -642,4 +662,3 @@ async fn handler() -> Result<HttpResponse, AppError> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

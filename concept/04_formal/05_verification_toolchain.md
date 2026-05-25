@@ -20,7 +20,6 @@
 
 ## 零、TL;DR —— 30 秒选型
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 你的场景 | 首选工具 | 次选 | 绝对不要 |
 |:---|:---|:---|:---|
@@ -40,14 +39,11 @@
 ---
 
 ## 一、工具链全景矩阵（选型版）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust; Rust Project Goals 2026]** 以下矩阵聚焦于"选择维度"，而非工具内部原理。内部原理见 [`04_rustbelt.md`](./04_rustbelt.md) §7–§8。
 
 ### 1.1 八维选型矩阵
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **维度** | **Miri** | **Kani** | **Verus** | **Creusot** | **Prusti** | **Aeneas** | **RefinedRust** | **a-mir-formality** |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|
@@ -62,7 +58,6 @@
 
 ### 1.2 覆盖强度光谱
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 覆盖强度: 弱 ──────────────────────────────→ 强
@@ -80,7 +75,6 @@ a-mir-formality:[████████░░] 类型系统规范验证
 
 ### 1.3 验证工具层次类图
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 classDiagram
@@ -194,9 +188,7 @@ classDiagram
 
 ## 二、Wikipedia 概念对齐
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 以下将各验证工具映射到其背后的计算机科学基础概念。
 
@@ -213,7 +205,6 @@ classDiagram
 
 ### 2.1 验证工具 ↔ 形式化基础映射图
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph LR
@@ -267,19 +258,15 @@ graph LR
 ```
 
 > **认知功能**: 此映射图将每个验证工具锚定到其**数学基础**，揭示工具之间的理论亲缘关系。例如：Verus 和 Creusot 虽然都是"演绎验证"，但 Verus 基于 Hoare 逻辑 + SMT，Creusot 基于最弱前置条件 + Why3——这解释了为什么 Creusot 在代数数据类型的功能正确性上更强，而 Verus 在并发系统验证上更优。颜色的暖冷梯度从"找反例"（冷色）过渡到"证明正确性"（暖色）。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 三、a-mir-formality：Rust 类型系统规范
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **[来源: Rust Project Goals 2026 — a-mir-formality]** · **[来源: rustc-dev-guide]** · **[来源: POPL 2023 类型系统形式化论文]** ✅
 
 ### 3.1 为什么需要类型系统规范？
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 当前 Rust 的类型系统规则分散在：
 
@@ -291,7 +278,6 @@ graph LR
 
 ### 3.2 技术架构
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Rust 源代码
@@ -311,7 +297,6 @@ a-mir-formality (Coq/Lean)
 
 ### 3.3 与验证工具链的关系
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 | 角色 | 说明 |
 |:---|:---|
@@ -321,7 +306,6 @@ a-mir-formality (Coq/Lean)
 
 ### 3.4 当前状态（2026-05）
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 里程碑 | 状态 | 预计 |
 |:---|:---:|:---:|
@@ -334,16 +318,10 @@ a-mir-formality (Coq/Lean)
 ---
 
 ## 四、ROI 分析框架
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源类型: 原创分析]** 💡 以下框架帮助团队量化形式化验证的投入产出比。
 
 ### 4.1 ROI 公式
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 验证 ROI = (避免的缺陷成本 × 检测概率) / (工具学习成本 + 标注成本 + 运行成本 + 维护成本)
@@ -359,8 +337,6 @@ a-mir-formality (Coq/Lean)
 | **维护成本** | 规格随代码演化的同步成本 | 低 (Miri) – 高 (手写证明) |
 
 ### 4.2 场景化 ROI 评估
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 场景 A: 安全关键网络协议（如 TLS/QUIC 实现）
 
@@ -420,8 +396,6 @@ ROI: ★★☆☆☆ 低–中 — 仅限学术/核心基础设施 [来源: ICFP
 ```
 
 ### 4.3 决策阈值
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 当以下任一条件成立时，形式化验证值得投入：
@@ -443,12 +417,8 @@ ROI: ★★☆☆☆ 低–中 — 仅限学术/核心基础设施 [来源: ICFP
 ---
 
 ## 五、分层验证策略
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 五层防御模型
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 Layer 1 ──→ Layer 2 ──→ Layer 3 ──→ Layer 4 ──→ Layer 5
@@ -467,8 +437,6 @@ Layer 1 ──→ Layer 2 ──→ Layer 3 ──→ Layer 4 ──→ Layer 5
 | **L5 协议** | `TLA+` / `P` | 分布式安全 | 设计阶段 | 中 |
 
 ### 5.2 组合策略：AWS s2n-quic 实践
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```yaml
 # .github/workflows/verification.yml (简化)
@@ -512,8 +480,6 @@ jobs:
 > **来源**: [AWS s2n-quic Kani Integration] · [AWS Security Blog 2023]
 
 ### 5.3 分层验证流程时序图
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 sequenceDiagram
@@ -560,13 +526,10 @@ sequenceDiagram
 ```
 
 > **认知功能**: 此序列图将"五层防御"的静态表格转化为**时间维度的流程**。每个矩形框的底色与验证强度对应：冷色（编译期）→ 暖色（契约验证）。**关键洞察**：验证不是一次性事件，而是与开发工作流绑定的持续过程——L1-L3 在开发者本地完成（反馈延迟 < 30min），L4-L5 在 CI/设计阶段完成（反馈延迟小时级到天级）。箭头方向揭示信息流动：从开发者到工具的是"待验证代码"，从工具到开发者的是"验证结果"。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 六、工具选择决策树
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 flowchart TD
@@ -596,15 +559,12 @@ flowchart TD
 ```
 
 > **认知功能**: 此决策树将选型矩阵转化为**交互式路径剪枝**，通过 "unsafe → 功能正确 → 团队背景" 三个问题在 30 秒内收敛到最优工具。**使用建议**: 按图从左到右回答，不要跳过 "团队背景" 评估——它是项目成败的最强预测因子。**关键洞察**: 多数 Rust 项目实际落在最左侧分支（Miri 或无需验证），决策树的最大价值恰恰是明确告诉你"何时不需要形式化验证"。 [来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 七、2026 工具状态更新
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **[来源: 各工具官方文档 2026-05]**
 
 | 工具 | 最新版本 | 关键更新 | 跟踪 |
 |:---|:---:|:---|:---|
@@ -622,8 +582,6 @@ flowchart TD
 ---
 
 ## 八、工业案例速查
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 项目 | 组件 | 工具 | 验证目标 | 结果 |
 |:---|:---|:---|:---|:---|
@@ -644,14 +602,8 @@ flowchart TD
 ---
 
 ## 九、常见误区与反模式
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 误区一："验证工具可以互相替代"
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 ❌ 错误: "我们用 Kani 了，不需要 Miri"
@@ -662,8 +614,6 @@ flowchart TD
 ```
 
 ### 误区二："形式化验证是一次性投入"
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 ❌ 错误: 验证一次，永远安全
@@ -672,8 +622,6 @@ flowchart TD
 ```
 
 ### 误区三："零标注工具 = 零成本"
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 ❌ 错误: RefinedRust 零标注，所以零成本
@@ -686,10 +634,6 @@ flowchart TD
 ---
 
 ## 十、相关概念链接
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -705,11 +649,9 @@ flowchart TD
 
 ## 七、验证工具深度原理分析
 
-> **[来源: Viper Tutorial — ETH Zurich] · [Kani Documentation — AWS] · [Verus Tutorial — Microsoft Research] · [Creusot Manual — INRIA] · [Aeneas Paper — ICFP 2022] · [RefinedRust Paper — PLDI 2024]** ✅
 
 ### 7.1 Prusti：基于 Viper 的分离逻辑验证
 
-> **[来源: Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html) · [Astrauskas et al. — OOPSLA 2022]** ✅
 
 Prusti 是 ETH Zurich 开发的 Rust 验证工具，基于 **Viper**（Verification Infrastructure for Permission-based Reasoning）中间语言。
 
@@ -755,7 +697,6 @@ fn sum(n: i32) -> i32 {
 
 ### 7.2 Kani：基于 CBMC 的有界模型检测
 
-> **[来源: Kani Documentation](https://model-checking.github.io/kani/) · [AWS Kani Blog 2023]** ✅
 
 Kani 是 AWS 开发的 Rust 验证工具，基于 **CBMC**（C Bounded Model Checker）的符号执行引擎。
 
@@ -797,7 +738,6 @@ Kani 验证范围（有界模型检测的固有特性）:
 
 ### 7.3 Verus：基于 Z3 的演绎验证
 
-> **[来源: Verus Documentation](https://verus-lang.github.io/verus/) · [Lorch et al. — SOSP 2024]** ✅
 
 Verus 是 Microsoft Research 开发的 Rust 验证工具，基于 **Z3 SMT 求解器**的演绎验证。
 
@@ -860,7 +800,6 @@ fn binary_search(v: &Vec<u64>, key: u64) -> (r: usize)
 
 ### 7.4 Creusot：基于 Why3 的契约验证
 
-> **[来源: Creusot Documentation](https://creusot-rs.github.io/) · [Denis et al. — PLDI 2023]** ✅
 
 Creusot 是 INRIA 开发的 Rust 验证工具，基于 **Why3** 平台（SMT 求解器 + 证明辅助器）。
 
@@ -904,7 +843,6 @@ Coma 的优势:
 
 ### 7.5 Aeneas：基于借用的函数式翻译
 
-> **[来源: Aeneas GitHub](https://github.com/AeneasVerif/aeneas) · [Ho & Protzenko — ICFP 2022]** ✅
 
 Aeneas 是 EPFL/Inria 联合开发的 Rust 验证工具，核心创新是将 Rust 程序**翻译为纯函数式语言**（Lean/Coq/F*），然后利用交互式定理证明器验证。
 
@@ -1051,7 +989,6 @@ fn fixed() {
 > **验证映射**: 闭包捕获分析是 Rust 类型系统的复杂部分。形式化工具（如 RustBelt 的 closure 语义）需要精确建模环境捕获（by-reference / by-value）与借用规则的一致性。编译器的拒绝对应于资源谓词 `own(τ)` 与 `shr(κ, ℓ)` 的不一致分配。
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]; 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [来源: Formal Methods Deep Dive]; 2026-05-22 网络权威内容对齐：Miri POPL 2026、KVerus arXiv 2026、AutoVerus OOPSLA 2025、Vest USENIX Security 2025、Rustlantis OOPSLA 2024、Kani+VeriFast 联合 std 验证 [来源: Web Authority Alignment Sprint]
 
 **文档版本**: 1.2
@@ -1083,172 +1020,92 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
 >
-> **[来源: [Iris Project](https://iris-project.org/)]**
 >
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 10.3 边界测试：Kani 的循环展开限制与验证失败（验证失败/超时）
 

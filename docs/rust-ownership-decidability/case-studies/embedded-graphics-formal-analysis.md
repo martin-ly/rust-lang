@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Embedded-Graphics显示库形式化分析](#embedded-graphics显示库形式化分析)
@@ -35,6 +36,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 embedded-graphics特点：
@@ -47,9 +49,11 @@ embedded-graphics特点：
 ---
 
 ## 2. 绘制原语
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 PRIMITIVE-1 ( 基本图形 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -57,6 +61,7 @@ $$
 $$
 
 ### 定义 PRIMITIVE-2 ( 像素迭代 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 每个原语生成像素迭代器。
@@ -68,9 +73,11 @@ $$
 ---
 
 ## 3. 迭代器模型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 ITER-1 ( 惰性求值 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 绘制操作不立即执行，而是返回迭代器。
@@ -80,6 +87,7 @@ $$
 $$
 
 ### 定理 ITER-T1 ( 零分配 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 绘制迭代器不分配堆内存。
@@ -91,9 +99,11 @@ $$
 ---
 
 ## 4. 显示目标
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 TARGET-1 ( DrawTarget trait )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -105,6 +115,7 @@ trait DrawTarget {
 ```
 
 ### 定义 TARGET-2 ( 帧缓冲 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 $$
@@ -114,9 +125,11 @@ $$
 ---
 
 ## 5. 变换与样式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 STYLE-1 ( 样式属性 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 $$
@@ -124,6 +137,7 @@ $$
 $$
 
 ### 定义 TRANSFORM-1 ( 仿射变换 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 $$
@@ -133,9 +147,11 @@ $$
 ---
 
 ## 6. 定理与证明
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 CLIP-T1 ( 裁剪正确性 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 裁剪确保像素在显示边界内。
@@ -147,9 +163,11 @@ $$
 ---
 
 ## 7. 代码示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 示例1: 基本绘制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -201,6 +219,7 @@ fn draw_example<D: DrawTarget<Color = Rgb565>>(
 ```
 
 ### 示例2: 显示驱动实现
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -249,6 +268,7 @@ impl<SPI, DC, RST> ST7735<SPI, DC, RST> {
 ```
 
 ### 示例3: 动画与双缓冲
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -282,6 +302,7 @@ fn animation_example() {
 ```
 
 ### 示例4: 进度条组件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -333,11 +354,9 @@ impl ProgressBar {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -397,4 +416,3 @@ impl ProgressBar {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

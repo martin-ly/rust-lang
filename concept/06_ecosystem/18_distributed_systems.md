@@ -1,5 +1,4 @@
-# 分布式 [来源: [Distributed Systems](https://en.wikipedia.org/wiki/Distributed_computing)]系统：Rust 在微服务 [来源: [Microservices](https://microservices.io/)]与集群中的工程实践
-
+# 分布式 系统：Rust 在微服务 与集群中的工程实践
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计分布式系统架构
@@ -20,24 +19,22 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Book]]
 
-- [分布式 \[来源: Distributed Systems\]系统：Rust 在微服务 \[来源: Microservices\]与集群中的工程实践](#分布式-来源-distributed [来源: [Rust Distributed Systems](https://rust-lang-nursery.github.io/rust-cookbook/web/clients.html)]-systems系统rust-在微服务-来源-microservices与集群中的工程实践)
+ [分布式 \系统：Rust 在微服务 \与集群中的工程实践](#分布式 -systems系统rust-在微服务)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 Rust 在分布式系统中的定位](#11-rust-在分布式系统中的定位)
-    - [1.2 异步运行时作为分布式基础](#12-异步运行时作为分布式基础)
-    - [1.3 服务发现与负载均衡](#13-服务发现与负载均衡)
+  - [1.1 Rust 在分布式系统中的定位](#11-rust-在分布式系统中的定位)
+  - [1.2 异步运行时作为分布式基础](#12-异步运行时作为分布式基础)
+  - [1.3 服务发现与负载均衡](#13-服务发现与负载均衡)
   - [二、技术细节](#二技术细节)
-    - [2.1 gRPC 与 Protocol Buffers](#21-grpc-与-protocol-buffers)
-    - [2.2 分布式共识与 Raft](#22-分布式共识与-raft)
-    - [2.3 Actor 模型与消息传递](#23-actor-模型与消息传递)
+  - [2.1 gRPC 与 Protocol Buffers](#21-grpc-与-protocol-buffers)
+  - [2.2 分布式共识与 Raft](#22-分布式共识与-raft)
+  - [2.3 Actor 模型与消息传递](#23-actor-模型与消息传递)
   - [三、分布式模式矩阵](#三分布式模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
+  - [4.1 反命题树](#41-反命题树)
+  - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
@@ -46,13 +43,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 在分布式系统中的定位
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 分布式系统的语言选择:
@@ -91,7 +85,6 @@
 
 ### 1.2 异步运行时作为分布式基础
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 Rust async 运行时的分布式价值:
@@ -130,7 +123,6 @@ Rust async 运行时的分布式价值:
 
 ### 1.3 服务发现与负载均衡
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 服务发现模式:
@@ -164,14 +156,9 @@ Rust async 运行时的分布式价值:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Book]]
 
 ### 2.1 gRPC 与 Protocol Buffers
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // Tonic: Rust 的 gRPC 实现
@@ -228,7 +215,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.2 分布式共识与 Raft
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 分布式共识算法:
@@ -260,7 +246,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.3 Actor 模型与消息传递
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
 // Actix: Rust 的 Actor 框架
@@ -320,10 +305,6 @@ async fn main() {
 ---
 
 ## 三、分布式模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 方案 → Rust 生态
@@ -365,14 +346,9 @@ async fn main() {
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -396,7 +372,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 生态成熟度
@@ -436,10 +411,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Book]]
 
 ```text
 陷阱 1: 超时级联
@@ -485,10 +456,6 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Book]]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -514,10 +481,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](../03_advanced/02_async.md) — 异步编程
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
@@ -542,9 +505,6 @@ graph TD
 
 > **补充来源**
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ## 十、边界测试：分布式系统的编译错误
 

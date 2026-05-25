@@ -179,6 +179,7 @@ async fn main(spawner: Spawner) {
 ---
 
 ## 2. 核心概念与技术原理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 Async/Await基础
@@ -397,6 +398,7 @@ async fn button_handler() {
 ---
 
 ## 3. Trait设计与类型系统运用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Future Trait详解
@@ -562,6 +564,7 @@ impl<M: RawMutex, T, const N: usize> Channel<M, T, N> {
 ---
 
 ## 4. 使用场景与实际案例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 传感器数据采集
@@ -882,6 +885,7 @@ async fn core1_main_task() {
 ---
 
 ## 5. 与其他方案的对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 与RTOS的对比
@@ -926,6 +930,7 @@ async fn core1_main_task() {
 ---
 
 ## 6. 完整代码示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 完整的传感器系统
@@ -1307,6 +1312,7 @@ async fn upload_pending_data() {
 ---
 
 ## 7. 性能分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 内存占用分析
@@ -1377,6 +1383,7 @@ async fn good_task() {
 ---
 
 ## 8. 最佳实践
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 任务设计原则
@@ -1479,6 +1486,7 @@ where
 ```
 
 ### 8.4 调试技巧
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -1518,9 +1526,11 @@ fn check_stack_usage() {
 ---
 
 ## 9. 形式化定理与证明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 任务安全定理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理 9.1** (Task Safety)
@@ -1538,6 +1548,7 @@ fn check_stack_usage() {
 因此，数据竞争不可能发生。
 
 ### 9.2 调度公平性定理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **定理 9.2** (Scheduling Fairness)
@@ -1553,6 +1564,7 @@ fn check_stack_usage() {
 因此无任务被无限期饿死。
 
 ### 9.3 内存安全定理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定理 9.3** (Memory Safety)
@@ -1571,9 +1583,11 @@ fn check_stack_usage() {
 ---
 
 ## 10. 反例与边界情况
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 10.1 阻塞操作陷阱
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -1591,6 +1605,7 @@ fn TIMER_IRQ() {
 ```
 
 ### 10.2 递归Spawn限制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -1606,6 +1621,7 @@ const MAX_DEPTH: usize = 5;
 ```
 
 ### 10.3 优先级反转
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -2216,4 +2232,3 @@ async fn greedy_task() {
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

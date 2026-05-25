@@ -16,9 +16,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 范围类型语义：`std::ops::Range` → `core::range`](#rust-范围类型语义stdopsrange--corerange)
   - [📑 目录](#-目录)
@@ -52,13 +50,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 范围类型的数学语义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 在数学中，区间（interval）是一个**纯值**：
 
@@ -75,7 +70,6 @@
 
 ### 1.2 `std::ops::Range`：运行时迭代器语义
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 1.0 至今，`std::ops::Range` 直接实现 `Iterator`：
 
@@ -102,7 +96,6 @@ for i in r {
 
 ### 1.3 `core::range`：编译期值语义
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 1.96 引入 `core::range::Range`，将范围从**迭代器**重构为**纯值**：
 
@@ -122,7 +115,6 @@ for i in r { // ✅ 再次迭代 — r 仍可用
 ```
 
 > **关键差异**:
->
 > | 特性 | `std::ops::Range` | `core::range::Range` |
 > |:---|:---|:---|
 > | 实现 | `Iterator` | `IntoIterator` |
@@ -135,7 +127,6 @@ for i in r { // ✅ 再次迭代 — r 仍可用
 
 ### 1.4 `IntoIterator` vs `Iterator`：设计权衡
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph LR
@@ -161,14 +152,9 @@ graph LR
 ---
 
 ## 二、形式化语义
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 `Copy` 的语义影响
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // 当前行为：Range 不实现 Copy
@@ -183,7 +169,6 @@ let r2 = r; // r 被移动
 ```
 
 > **形式化规则**:
->
 > - 设 `T` 为范围元素类型
 > - 若 `T: Copy`，则 `Range<T>: Copy`
 > - `Copy` 语义保证：赋值后原值仍可用（按位复制）
@@ -194,7 +179,6 @@ let r2 = r; // r 被移动
 
 ### 2.2 与 `for` 循环的交互
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // for 循环的脱糖（desugar）:
@@ -216,19 +200,13 @@ for i in r { /* r 被消费 */ }
 
 > **定理**: `core::range::Range` 的 `Copy` 实现保证 `for` 循环不会消费范围值。
 > **证明**: `for` 循环脱糖调用 `IntoIterator::into_iter(self)`。若 `Range: Copy`，则 `self` 被按位复制传入，`into_iter` 接收的是副本，原值保留。
-> [来源: 💡 原创分析]
 
 ---
 
 ## 三、跨语言对比
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 Python：`range()` 函数
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```python
 r = range(0, 10)
@@ -250,7 +228,6 @@ for i in r:  # ✅ 再次迭代
 
 ### 3.2 C++20：`std::ranges`
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```cpp
 // C++20 范围库
@@ -267,8 +244,6 @@ auto r = std::views::iota(0, 10);
 ---
 
 ### 3.3 Rust：`core::range::Range`
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```ignore
 // Rust 1.96+ 设计
@@ -287,19 +262,12 @@ assert_eq!(sum1, sum2);
 ```
 
 > **关键洞察**: Rust 的新范围设计融合了 Python 的"不可变纯值"语义和 C++ 的"解耦迭代"架构，同时保持 Rust 的零成本抽象原则。
-> [来源: 💡 原创分析]
 
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TD
@@ -320,16 +288,12 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助开发者在 `std::ops::Range` 和 `core::range::Range` 之间选择。核心判断标准是"是否需要保存迭代进度"。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 新代码优先使用 `core::range::Range`（若 1.96+ 可用）；需要保存进度的场景（如 `break` 后恢复）保留 `std::ops::Range`。
 > **关键洞察**: `core::range::Range` 不是 `std::ops::Range` 的替代，而是**语义分层**——前者是"纯值"，后者是"有状态迭代器"。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 4.2 边界极限
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // 边界 1: 空范围
@@ -351,10 +315,6 @@ let rev = 10..0;
 ---
 
 ## 五、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -367,10 +327,6 @@ let rev = 10..0;
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统的形式化根基
 - [Generics](./02_generics.md) — 泛型与 trait bound
@@ -379,7 +335,6 @@ let rev = 10..0;
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [RFC 3550](https://github.com/rust-lang/rfcs/pull/3550), [The Rust Programming Language](https://doc.rust-lang.org/book/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0 (Edition 2024)
 
 **文档版本**: 1.0
@@ -391,74 +346,43 @@ let rev = 10..0;
 
 ## 权威来源索引
 
-> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十、边界测试：范围类型的编译错误
 

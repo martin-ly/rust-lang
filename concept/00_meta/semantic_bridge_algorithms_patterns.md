@@ -31,7 +31,6 @@
 
 ### 2.1 统一抽象框架
 
-> **[来源: arXiv 2605.07788 — Multilingual Shared Semantic Space] · [💡 原创分析]** ✅
 
 ```text
 统一语义框架:
@@ -126,22 +125,17 @@ impl<T: Ord + Clone> DataStructure<T> for Node<T> {
 > **形式化命题** [Tier 3]: 归并排序、Composite 模式的分治遍历、以及 Parallel Split + Synchronization 工作流模式，在语义上等价于 **"二叉树的后序遍历 + 节点聚合"**。
 >
 > **论证**:
->
 > - 归并排序: 递归将数组二分（构建二叉树），排序后合并（后序遍历聚合）
 > - Composite: 递归访问叶子节点（基例），内部节点聚合子结果（后序遍历）
 > - Parallel Split: 将任务分解为并行子任务（构建执行树），同步后合并结果
->
 > **统一结构**:
->
 > ```text
 > Tree<T> = Leaf(T) | Node(Tree<T>, Tree<T>)
->
 > postorder_map: (T → U) × (U × U → U) → Tree<T> → U
 > postorder_map(f, g, Leaf(x))   = f(x)
 > postorder_map(f, g, Node(l, r)) = g(postorder_map(f, g, l), postorder_map(f, g, r))
 > ```
 >
-> [来源: 💡 原创分析] · [Category Theory for Programmers] · [Wikipedia: Tree traversal]
 
 ---
 
@@ -204,18 +198,13 @@ impl MemoizedFib {
 ### 4.4 统一语义
 
 > **形式化命题** [Tier 3]: 动态规划、Memoization 设计模式、和 Deferred Choice 工作流模式，在语义上等价于 **"有向无环图的拓扑序遍历 + 记忆化求值"**。
->
 > **论证**:
->
 > - DP 的递推关系定义了 DAG：节点 = 子问题，边 = 依赖关系
 > - Memoization 模式 = DAG 节点的惰性求值 + 结果缓存
 > - Deferred Choice = 运行时根据条件选择执行路径（对应 DAG 的条件分支节点）
->
 > **统一结构**:
->
 > ```text
 > DAG<V, E> where E: V × V (依赖边)
->
 > eval(v):
 >   if memo.contains(v): return memo[v]
 >   result = aggregate({ eval(u) | (u, v) ∈ E })
@@ -284,7 +273,6 @@ impl MemoizedFib {
 > [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition) ·
 > [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) ·
 > [Wikipedia: Workflow patterns](https://en.wikipedia.org/wiki/Workflow_patterns)
->
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24

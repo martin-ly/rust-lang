@@ -278,6 +278,7 @@ $$
 ---
 
 ## 3. Mutex (互斥锁)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 形式化规范
@@ -440,6 +441,7 @@ T3被T1阻塞，但T2在运行(优先级介于两者之间)。
 ---
 
 ## 4. RwLock (读写锁)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 读者-写者问题形式化
@@ -531,6 +533,7 @@ Rust的RwLock实现策略:
 ---
 
 ## 5. Condvar (条件变量)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 等待-通知协议
@@ -538,6 +541,7 @@ Rust的RwLock实现策略:
 > **[来源: Wikipedia - Memory Safety]**
 
 ### 定义 5.1 (Condvar操作)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -565,6 +569,7 @@ $$
 3. 返回时锁已持有
 
 ### 定理 5.1 (Condvar正确性)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > Condvar确保:
@@ -612,12 +617,15 @@ $$
 ---
 
 ## 6. 内存序与 happens-before
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 C11内存模型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 6.1 (内存序)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 内存序 | 说明 | 使用场景 |
@@ -629,9 +637,11 @@ $$
 | `SeqCst` | 全局顺序 | 需要全局可见性 |
 
 ### 6.2 Rust中的映射
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 6.1 (内存序正确使用)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > Rust标准库同步原语使用适当的内存序保证线程间可见性。
@@ -648,9 +658,11 @@ $$
 ---
 
 ## 7. 反例分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 反例 7.1 (Arc循环引用泄漏)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -671,6 +683,7 @@ let node2 = Arc::new(Node { next: Some(node1.clone()) });
 **解决方案**: 使用 `Weak<T>` 打破循环。
 
 ### 反例 7.2 (MutexGuard越界使用)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -688,6 +701,7 @@ let ref1 = &*mutex.lock();  // 临时guard在分号后drop
 ```
 
 ### 反例 7.3 (不正确使用Atomic代替Mutex)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -715,6 +729,7 @@ if FLAG.compare_exchange(false, true, AcqRel, Relaxed).is_ok() {
 ---
 
 ## 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Rust Standard Library.** (2024). `std::sync`. <https://doc.rust-lang.org/std/sync/>
@@ -946,4 +961,3 @@ if FLAG.compare_exchange(false, true, AcqRel, Relaxed).is_ok() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

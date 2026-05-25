@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [原子操作与内存序](#原子操作与内存序)
@@ -35,9 +36,11 @@
 ---
 
 ## 1. 原子操作基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是原子操作
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 原子操作是**不可中断**的操作，即使在多线程环境下也表现出单一、不可分割的执行效果。
@@ -54,6 +57,7 @@ fn increment() {
 ```
 
 ### 1.2 为什么需要原子操作
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -69,9 +73,11 @@ unsafe {
 ---
 
 ## 2. 内存序
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 Ordering 枚举
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -85,6 +91,7 @@ pub enum Ordering {
 ```
 
 ### 2.2 选择指南
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -107,9 +114,11 @@ pub enum Ordering {
 ---
 
 ## 3. 原子类型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 整数类型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -134,6 +143,7 @@ counter.compare_exchange(
 ```
 
 ### 3.2 布尔类型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -149,6 +159,7 @@ flag.compare_exchange(false, true, Ordering::SeqCst, Ordering::Relaxed);
 ```
 
 ### 3.3 指针类型
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -174,9 +185,11 @@ ptr.compare_exchange(
 ---
 
 ## 4. 常见模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 自旋锁
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -240,6 +253,7 @@ impl<T> Drop for SpinLockGuard<'_, T> {
 ```
 
 ### 4.2 无锁队列 (简化)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -300,9 +314,11 @@ impl<T> LockFreeQueue<T> {
 ---
 
 ## 5. 内存序详解
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Relaxed
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 只保证操作的原子性，**不保证**内存顺序。
@@ -317,6 +333,7 @@ fn count() {
 ```
 
 ### 5.2 Acquire-Release
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 建立 happens-before 关系。
@@ -342,6 +359,7 @@ fn consume() {
 ```
 
 ### 5.3 SeqCst
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 最强的内存序，所有线程以相同的顺序看到操作。
@@ -354,6 +372,7 @@ fn consume() {
 ---
 
 ## 参考
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/)
@@ -373,11 +392,9 @@ fn consume() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -467,4 +484,3 @@ fn consume() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

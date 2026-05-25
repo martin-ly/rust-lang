@@ -1,5 +1,4 @@
-# Newtype [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype)] 与包装器模式：类型安全的零成本抽象
-
+# Newtype 与包装器模式：类型安全的零成本抽象
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时开销。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Trait](./01_traits.md) · [Generics](./02_generics.md)
@@ -11,46 +10,41 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
-- [Newtype \[来源: Rust API Guidelines\] 与包装器模式：类型安全的零成本抽象](#newtype-来源-rust-api-guidelines-与包装器模式类型安全的零成本抽象)
+ [Newtype \ 与包装器模式：类型安全的零成本抽象](#newtype)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 Newtype 模式的本质](#11-newtype-模式的本质)
-    - [1.2 单位类型与物理量](#12-单位类型与物理量)
-    - [1.3 与类型别名（type alias）的区别](#13-与类型别名type-alias的区别)
+  - [1.1 Newtype 模式的本质](#11-newtype-模式的本质)
+  - [1.2 单位类型与物理量](#12-单位类型与物理量)
+  - [1.3 与类型别名（type alias）的区别](#13-与类型别名type-alias的区别)
   - [二、技术细节](#二技术细节)
-    - [2.1 Deref 与自动解引用](#21-deref-与自动解引用)
-    - [2.2 孤儿规则与 Newtype](#22-孤儿规则与-newtype)
-    - [2.3 包装器类型谱系](#23-包装器类型谱系)
+  - [2.1 Deref 与自动解引用](#21-deref-与自动解引用)
+  - [2.2 孤儿规则与 Newtype](#22-孤儿规则与-newtype)
+  - [2.3 包装器类型谱系](#23-包装器类型谱系)
   - [三、设计模式矩阵](#三设计模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
+  - [4.1 反命题树](#41-反命题树)
+  - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Newtype 与包装器的编译错误](#十边界测试newtype-与包装器的编译错误)
-    - [10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）](#101-边界测试newtype-不继承原类型的-trait编译错误)
-    - [10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时 UB）](#102-边界测试phantomdata-的协变逆变误用编译错误--运行时-ub)
-    - [10.3 边界测试：newtype 的 derive 限制（编译错误）](#103-边界测试newtype-的-derive-限制编译错误)
-    - [10.4 边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）](#104-边界测试deref-滥用导致的隐式转换陷阱编译错误逻辑错误)
-    - [10.5 边界测试：newtype 的 `Deref` 过度使用导致的方法名冲突（编译错误/逻辑错误）](#105-边界测试newtype-的-deref-过度使用导致的方法名冲突编译错误逻辑错误)
+  - [10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）](#101-边界测试newtype-不继承原类型的-trait编译错误)
+  - [10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时 UB）](#102-边界测试phantomdata-的协变逆变误用编译错误--运行时-ub)
+  - [10.3 边界测试：newtype 的 derive 限制（编译错误）](#103-边界测试newtype-的-derive-限制编译错误)
+  - [10.4 边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）](#104-边界测试deref-滥用导致的隐式转换陷阱编译错误逻辑错误)
+  - [10.5 边界测试：newtype 的 `Deref` 过度使用导致的方法名冲突（编译错误/逻辑错误）](#105-边界测试newtype-的-deref-过度使用导致的方法名冲突编译错误逻辑错误)
 
 ---
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Newtype 模式的本质
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // Newtype: 单字段元组结构体
@@ -94,7 +88,6 @@ impl std::ops::Add for Meters {
 
 ### 1.2 单位类型与物理量
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 物理量 Newtype 的价值:
@@ -131,7 +124,6 @@ impl std::ops::Add for Meters {
 
 ### 1.3 与类型别名（type alias）的区别
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
 // 类型别名: 只是语法糖
@@ -168,14 +160,9 @@ let b = SecondsNewtype(10.0);
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Deref 与自动解引用
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 use std::ops::Deref;
@@ -217,7 +204,6 @@ impl Users {
 
 ### 2.2 孤儿规则与 Newtype
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // 孤儿规则: 不能为外部类型实现外部 Trait
@@ -248,7 +234,6 @@ impl SerializableError {
 
 ### 2.3 包装器类型谱系
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Rust 中的包装器类型:
@@ -284,10 +269,6 @@ Rust 中的包装器类型:
 ---
 
 ## 三、设计模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 模式 → 实现方式
@@ -329,14 +310,9 @@ Rust 中的包装器类型:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -353,14 +329,12 @@ graph TD
 ```
 
 > **认知功能**: Newtype 的**核心判断**是"是否需要语义区分"。频繁计算的数值类型（如循环计数器）通常不需要 Newtype。
-> [来源: [Rust API Guidelines]]
 > [source: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype)]
 
 ---
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 运算符重载的样板代码
@@ -400,10 +374,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 过度使用 Deref
@@ -453,7 +423,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -477,10 +446,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 - [Trait](./01_traits.md) — Trait 系统
@@ -502,23 +467,15 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ## 十、边界测试：Newtype 与包装器的编译错误
 

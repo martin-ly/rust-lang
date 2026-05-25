@@ -21,8 +21,6 @@
 
 ## 一、Rust for Linux：内核中的 Rust 代码
 
-> **[来源: Linux Kernel Documentation — Rust] · [Rust for Linux Website] · [Greg Kroah-Hartman — LWN 2022]** ✅
-
 ### 1.1 里程碑
 
 Rust for Linux 是 Linux 内核社区自 2022 年起正式接受的实验性项目：
@@ -153,8 +151,6 @@ Redox 是 Rust 编写的**类 Unix 微内核操作系统**，目标是替代 Lin
 ---
 
 ## 四、eBPF 与内核可编程
-
-> **[来源: eBPF.io](https://ebpf.io/) · [Aya-rs Documentation](https://aya-rs.dev/) · [Cilium Blog]** ✅
 
 eBPF 已在前文 `38_network_protocols.md` 中详述。本节聚焦于 eBPF 在**操作系统层面的应用**：
 

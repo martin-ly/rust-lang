@@ -1,5 +1,5 @@
-# Ferrocene [来源: [Ferrous Systems Ferrocene](https://ferrous-systems.com/ferrocene/)] [来源: [Ferrous Systems](https://ferrous-systems.com/ferrocene/)] 预研：Rust 的安全关键认证之路
-
+# Ferrocene 预研：Rust 的安全关键认证之路
+>
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估 Ferrocene 安全认证
@@ -13,45 +13,41 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
-- [Ferrocene \[来源: Ferrous Systems Ferrocene\] \[来源: Ferrous Systems\] 预研：Rust 的安全关键认证之路](#ferrocene-来源-ferrous-systems-ferrocene-来源-ferrous-systems-预研rust-的安全关键认证之路)
+ [Ferrocene \ \ 预研：Rust 的安全关键认证之路](#ferrocene)
   - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 安全关键软件的认证挑战](#11-安全关键软件的认证挑战)
-    - [1.2 Ferrocene 的定位](#12-ferrocene-的定位)
-    - [1.3 认证范围与限制](#13-认证范围与限制)
-  - [二、技术细节](#二技术细节)
-    - [2.1 认证工具链的构成](#21-认证工具链的构成)
-    - [2.2 与上游 Rust 的关系](#22-与上游-rust-的关系)
-    - [2.3 证据包与审计追踪](#23-证据包与审计追踪)
-  - [三、行业应用分析](#三行业应用分析)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、演进路线](#五演进路线)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Ferrocene 预览的编译错误](#十边界测试ferrocene-预览的编译错误)
-    - [10.1 边界测试：安全关键子集的 unsafe 禁止（编译错误）](#101-边界测试安全关键子集的-unsafe-禁止编译错误)
-    - [10.2 边界测试：确定性执行与 `HashMap` 的禁用（编译错误）](#102-边界测试确定性执行与-hashmap-的禁用编译错误)
-    - [10.3 边界测试：Ferrocene 子集与标准库的不完全覆盖（编译错误）](#103-边界测试ferrocene-子集与标准库的不完全覆盖编译错误)
-    - [10.4 边界测试：Ferrocene 的确定性执行与浮点数（逻辑错误）](#104-边界测试ferrocene-的确定性执行与浮点数逻辑错误)
+
+- [一、核心概念](#一核心概念)
+  - [1.1 安全关键软件的认证挑战](#11-安全关键软件的认证挑战)
+  - [1.2 Ferrocene 的定位](#12-ferrocene-的定位)
+  - [1.3 认证范围与限制](#13-认证范围与限制)
+- [二、技术细节](#二技术细节)
+  - [2.1 认证工具链的构成](#21-认证工具链的构成)
+  - [2.2 与上游 Rust 的关系](#22-与上游-rust-的关系)
+  - [2.3 证据包与审计追踪](#23-证据包与审计追踪)
+- [三、行业应用分析](#三行业应用分析)
+- [四、反命题与边界分析](#四反命题与边界分析)
+  - [4.1 反命题树](#41-反命题树)
+  - [4.2 边界极限](#42-边界极限)
+- [五、演进路线](#五演进路线)
+- [六、来源与延伸阅读](#六来源与延伸阅读)
+- [相关概念文件](#相关概念文件)
+- [权威来源索引](#权威来源索引)
+- [十、边界测试：Ferrocene 预览的编译错误](#十边界测试ferrocene-预览的编译错误)
+  - [10.1 边界测试：安全关键子集的 unsafe 禁止（编译错误）](#101-边界测试安全关键子集的-unsafe-禁止编译错误)
+  - [10.2 边界测试：确定性执行与 `HashMap` 的禁用（编译错误）](#102-边界测试确定性执行与-hashmap-的禁用编译错误)
+  - [10.3 边界测试：Ferrocene 子集与标准库的不完全覆盖（编译错误）](#103-边界测试ferrocene-子集与标准库的不完全覆盖编译错误)
+  - [10.4 边界测试：Ferrocene 的确定性执行与浮点数（逻辑错误）](#104-边界测试ferrocene-的确定性执行与浮点数逻辑错误)
 
 ---
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 安全关键软件的认证挑战
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 安全关键系统（汽车 ECU、航空飞控、医疗设备）要求软件通过严格的**功能安全认证**：
 
@@ -78,7 +74,6 @@
 
 ### 1.2 Ferrocene 的定位
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TD
@@ -113,7 +108,6 @@ graph TD
 
 ### 1.3 认证范围与限制
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Ferrocene 的认证范围（当前）:
@@ -136,14 +130,9 @@ Ferrocene 的认证范围（当前）:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 认证工具链的构成
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 组件 | 上游来源 | 认证状态 | 说明 |
 |:---|:---|:---:|:---|
@@ -162,7 +151,6 @@ Ferrocene 的认证范围（当前）:
 
 ### 2.2 与上游 Rust 的关系
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph LR
@@ -185,7 +173,6 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Ferrocene 与上游 Rust 的**版本延迟关系**——认证需要时间，Ferrocene 总是落后上游 6-12 个月。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 这种延迟是**设计上的必然**——认证不能加速，因为它涉及第三方审计机构的独立审查。安全关键项目接受这种延迟以换取可信性。
 > [来源: [Ferrous Systems — Ferrocene Update](https://ferrous-systems.com/blog/)]
 
@@ -193,7 +180,6 @@ graph LR
 
 ### 2.3 证据包与审计追踪
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Ferrocene 证据包构成:
@@ -221,10 +207,6 @@ Ferrocene 证据包构成:
 ---
 
 ## 三、行业应用分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 行业 | 标准 | Rust/Ferrocene 价值 | 当前状态 |
 |:---|:---|:---|:---:|
@@ -240,14 +222,9 @@ Ferrocene 证据包构成:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -269,7 +246,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助评估 Ferrocene 是否适合特定项目。核心判断标准是**std 依赖**、**目标平台支持**和**功能延迟容忍度**。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 裸机/RTOS 嵌入式项目优先考虑 Ferrocene；需要 std 或异步运行时的项目需评估替代方案。
 > **关键洞察**: Ferrocene 的**不适用场景**同样重要——明确边界避免项目在选择工具链时做出错误决策。
 > [来源: 💡 原创分析]
@@ -278,7 +254,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 认证不等于无缺陷
@@ -308,10 +283,6 @@ graph TD
 ---
 
 ## 五、演进路线
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -329,7 +300,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -361,10 +331,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — Rust 工具链
 - [Formal Methods](./02_formal_methods.md) — 形式化方法工业化
@@ -386,60 +352,17 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ## 十、边界测试：Ferrocene 预览的编译错误
 

@@ -63,6 +63,7 @@
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -177,6 +178,7 @@ $$
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 BPMN 表示
@@ -248,6 +250,7 @@ graph TD
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 CCS 表示
@@ -306,6 +309,7 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现
@@ -554,6 +558,7 @@ async fn main() {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 活性 (Liveness)
@@ -626,6 +631,7 @@ $$
 因此，不存在孤儿任务。$\square$
 
 ### 6.3 正确性条件
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 条件 | 描述 | Rust 保障 |
@@ -639,6 +645,7 @@ $$
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 模式层次
@@ -681,6 +688,7 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 物流协调区域取消
@@ -776,6 +784,7 @@ pub async fn run_test_group(tests: Vec<TestCase>) -> TestGroupResult {
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 9.1 嵌套取消区域
@@ -852,6 +861,7 @@ impl PartialCancelRegion {
 ---
 
 ## 10. 总结
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 取消区域模式是工作流系统中管理并发活动生命周期的核心模式，提供了一种粒度适中的取消机制。其核心贡献包括：
@@ -872,6 +882,7 @@ impl PartialCancelRegion {
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". *Distributed and Parallel Databases*, 14(1), 5-51.
@@ -1157,4 +1168,3 @@ impl PartialCancelRegion {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

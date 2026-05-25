@@ -162,6 +162,7 @@ embedded-hal的解决方案:
 ---
 
 ## 2. 核心设计原则
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 硬件无关性
@@ -225,6 +226,7 @@ pa0.set_high().unwrap();
 ---
 
 ## 3. GPIO抽象详解
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 InputPin与OutputPin Trait
@@ -394,6 +396,7 @@ pub trait OutputPin {
 ---
 
 ## 4. 串口通信
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 阻塞式串口
@@ -520,6 +523,7 @@ impl<UART: Read + Write> ModbusRTU<UART> {
 ---
 
 ## 5. SPI总线
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 SPI设备抽象
@@ -611,6 +615,7 @@ sensor2.transaction(...)?;
 ---
 
 ## 6. I2C总线
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 I2c Trait设计
@@ -713,6 +718,7 @@ impl<I2C: I2c> Mpu6050<I2C> {
 ---
 
 ## 7. 定时器抽象
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 Delay trait
@@ -831,6 +837,7 @@ fn fade_led<PWM: SetDutyCycle>(pwm: &mut PWM) -> Result<(), PWM::Error> {
 ---
 
 ## 8. ADC与DAC
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 ADC转换
@@ -911,6 +918,7 @@ fn generate_sine_wave<DAC: SetValue>(
 ---
 
 ## 9. 驱动可移植性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 驱动架构
@@ -976,6 +984,7 @@ let mut mpu = Mpu6050::new(i2c);  // 驱动代码完全不变！
 ---
 
 ## 10. no_std支持
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 10.1 核心trait设计
@@ -1045,6 +1054,7 @@ pub fn read_buffer<'a, I2C: I2c>(
 ---
 
 ## 11. 与Embassy/RTIC的关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 11.1 生态配合
@@ -1106,9 +1116,11 @@ async fn main(spawner: Spawner) {
 ---
 
 ## 12. 实际应用案例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 12.1 传感器驱动
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 BMP280气压传感器驱动:
@@ -1181,6 +1193,7 @@ impl<I2C: I2c, DELAY: DelayNs> Bmp280<I2C, DELAY> {
 ```
 
 ### 12.2 显示驱动
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 SSD1306 OLED驱动:
@@ -1291,9 +1304,11 @@ impl<I2C: I2c, RST: OutputPin, DELAY: DelayNs> Ssd1306<I2C, RST, DELAY> {
 ---
 
 ## 13. 完整代码示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 13.1 跨平台LED闪烁
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -1398,6 +1413,7 @@ fn main() -> ! {
 ```
 
 ### 13.2 传感器读取
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -1483,9 +1499,11 @@ impl<I2C: I2c, DELAY: DelayNs, LED: OutputPin> SensorHub<I2C, DELAY, LED> {
 ---
 
 ## 14. 形式化定理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 1: 硬件无关性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理**: 基于embedded-hal trait编写的驱动代码可以在任何实现了这些trait的平台上运行，无需修改。
@@ -1504,6 +1522,7 @@ Driver<Platform> 类型正确 ⟹ 可编译且行为一致
 ∎
 
 ### 定理 2: 类型状态安全
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **定理**: 使用类型状态机的HAL实现可以在编译期防止非法状态转换。
@@ -1518,6 +1537,7 @@ let pin: PA0<Input<Floating>> = gpioa.pa0.into_floating_input();
 ∎
 
 ### 定理 3: 零成本抽象
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **定理**: embedded-hal trait的使用不引入运行时开销。
@@ -1535,6 +1555,7 @@ let pin: PA0<Input<Floating>> = gpioa.pa0.into_floating_input();
 ∎
 
 ### 定理 4: 事务原子性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **定理**: SpiDevice::transaction保证操作序列的原子性。
@@ -1552,9 +1573,11 @@ let pin: PA0<Input<Floating>> = gpioa.pa0.into_floating_input();
 ---
 
 ## 15. 限制与注意事项
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 15.1 错误处理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 不同的HAL实现可能返回不同的错误类型:
@@ -1568,6 +1591,7 @@ fn use_i2c<I: I2c>(i2c: &mut I) -> Result<(), MyError> {
 ```
 
 ### 15.2 性能差异
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 不同HAL实现的性能可能有差异:
@@ -1578,6 +1602,7 @@ fn use_i2c<I: I2c>(i2c: &mut I) -> Result<(), MyError> {
 | I2C写入 | 硬件 | 软件位bang | 实现方式差异 |
 
 ### 15.3 资源限制
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 某些trait需要特定硬件支持:
@@ -1588,6 +1613,7 @@ fn use_i2c<I: I2c>(i2c: &mut I) -> Result<(), MyError> {
 ```
 
 ### 15.4 反例：错误模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **反例 1: 共享可变状态**
@@ -2169,4 +2195,3 @@ let dev2 = RefCellDevice::new(&bus)?;
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

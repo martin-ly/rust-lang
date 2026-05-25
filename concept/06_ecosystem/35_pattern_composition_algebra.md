@@ -25,8 +25,6 @@
 
 ### 2.1 四种组合原语
 
-> **[来源: POSA — Pattern Languages for Pattern Application] · [💡 原创分析]** ✅
-
 借鉴范畴论的态射复合思想，定义模式组合的四种基本操作：
 
 ```text
@@ -152,8 +150,6 @@ impl StrategyCommand {
 | **Actor + Channel** | 并发消息传递 | Actor 封装状态，Channel 保证消息顺序 | `actix::Actor` + `tokio::sync::mpsc` |
 
 ### 3.2 冲突矩阵（Conflict Matrix）
-
-> **[来源: POSA — Pattern Languages] · [💡 原创分析]** ✅
 
 | 模式 A | 模式 B | 冲突类型 | 说明 | 解决方案 |
 |:---|:---|:---:|:---|:---|
@@ -462,8 +458,6 @@ fn main() {
 
 ### 7.3 边界测试：模式组合的状态空间爆炸
 
-> **[来源: POSA — Pattern-Oriented Software Architecture] · [💡 原创分析] · [Harel & Politi — Statecharts]** ✅
-
 ```rust
 // 边界测试: 当组合的模式数量增加时，状态空间呈指数增长
 
@@ -503,11 +497,9 @@ enum CircuitState {
 > **论证**: Rust 的所有权系统保证不相交的数据集不能被同时可变借用。若 A 和 B 只读取共享数据，或各自操作独立数据，则 `A ⊗ B` 无数据竞争。
 
 > **定理 C-002** [Tier 3]: 若模式 A 的输出类型 `T_A` 满足模式 B 的输入约束 `C_B[T]`，则 `A ∘ B`（串行复合）是类型安全的。
->
 > **论证**: Rust 的类型系统保证函数复合的类型一致性。若 `A: Fn() -> T_A` 且 `B: Fn(T) -> U where T: C_B`，则当 `T_A: C_B` 时，`B(A())` 类型正确。
 
 > **定理 C-003** [Tier 3]: Singleton 与 Dependency Injection 在逻辑上互斥——Singleton 隐藏全局依赖，DI 要求依赖显式化。
->
 > **论证**: Singleton 模式通过全局访问点隐藏了依赖关系；DI 模式通过构造函数/参数显式注入依赖。二者对"依赖可见性"的哲学相反，不能在同一设计层级同时使用而不引入矛盾。
 
 ---
@@ -529,7 +521,6 @@ enum CircuitState {
 > [POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) ·
 > [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
 > [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
->
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24

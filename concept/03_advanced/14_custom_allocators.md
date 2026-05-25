@@ -11,9 +11,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [自定义分配器与内存布局优化](#自定义分配器与内存布局优化)
   - [📑 目录](#-目录)
@@ -49,13 +47,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 GlobalAlloc Trait
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 GlobalAlloc:
@@ -100,7 +95,6 @@ GlobalAlloc:
 
 ### 1.2 分配器属性
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 分配器关键属性:
@@ -127,14 +121,9 @@ GlobalAlloc:
 ---
 
 ## 二、实践模式
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 bumpalo — Bump 分配器
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Bump Allocation:
@@ -168,7 +157,6 @@ Bump Allocation:
 
 ### 2.2 jemalloc / mimalloc
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 高性能分配器对比:
@@ -203,7 +191,6 @@ Bump Allocation:
 
 ### 2.3 arena 分配器
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Arena 分配器模式:
@@ -235,14 +222,9 @@ Arena 分配器模式:
 ---
 
 ## 三、内存布局与对齐
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 Layout
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 内存布局:
@@ -279,7 +261,6 @@ Arena 分配器模式:
 
 ### 3.2 对齐约束
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 对齐约束:
@@ -313,14 +294,9 @@ Arena 分配器模式:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
 graph TD
@@ -344,8 +320,6 @@ graph TD
 ---
 
 ### 4.2 边界极限
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 边界 1: unsafe 风险
@@ -375,10 +349,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: Layout 不匹配
@@ -426,7 +396,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -467,8 +436,6 @@ fn main() {
 ```
 
 ### 编译验证示例
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use std::alloc::Layout;
@@ -498,10 +465,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理基础
 - [Unsafe Rust](./03_unsafe.md) — unsafe Rust 基础
@@ -523,34 +486,21 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 >
-> **[来源: [Rust Memory Model](https://doc.rust-lang.org/nomicon/memory.html)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十、边界测试：自定义分配器的编译错误
 

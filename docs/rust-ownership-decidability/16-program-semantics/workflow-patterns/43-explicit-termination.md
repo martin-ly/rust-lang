@@ -78,6 +78,7 @@
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -221,6 +222,7 @@ $$
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 BPMN 表示
@@ -265,6 +267,7 @@ graph TD
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 CCS 表示
@@ -332,6 +335,7 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现
@@ -563,6 +567,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 活性 (Liveness)
@@ -630,6 +635,7 @@ $$
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 模式层次
@@ -676,6 +682,7 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 服务器优雅关闭
@@ -805,6 +812,7 @@ struct CardInfo { token: String }
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 多终止节点
@@ -851,6 +859,7 @@ pub fn terminate_at(case: &mut Case, node: EndNode) -> TerminationResult {
 ---
 
 ## 10. 总结
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 显式终止模式是工作流系统中定义案例生命周期的核心模式，强调了终止作为一等语义的重要性。其核心贡献包括：
@@ -870,6 +879,7 @@ pub fn terminate_at(case: &mut Case, node: EndNode) -> TerminationResult {
 ---
 
 ## 参考文献
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". *Distributed and Parallel Databases*, 14(1), 5-51.
@@ -901,6 +911,7 @@ pub fn terminate_at(case: &mut Case, node: EndNode) -> TerminationResult {
 ---
 
 ## 权威来源索引
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ---
@@ -1123,4 +1134,3 @@ pub fn terminate_at(case: &mut Case, node: EndNode) -> TerminationResult {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

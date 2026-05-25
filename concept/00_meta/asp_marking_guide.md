@@ -10,9 +10,7 @@
 > **来源**: [Microsoft RustTraining — github.com/microsoft/RustTraining]
 >
 > **来源**: [arxiv 2604.06331v1 — *Knowledge Markers (A/S/P) in Programming Education*]
->
 > **来源**: [Krathwohl, D.R. (2002) — *A Revision of Bloom's Taxonomy: An Overview*]
->
 > **来源**: [Bloom, B.S. et al. (2001) — *Taxonomy of Educational Objectives*]
 
 ## 📑 目录
@@ -76,8 +74,6 @@ mindmap
 
 ### 1.1 A — Application（应用）
 
-> [来源: Microsoft RustTraining · arxiv 2604.06331v1]
-
 | 属性 | 定义 |
 |:---|:---|
 | **全称** | Application（应用） |
@@ -92,8 +88,6 @@ mindmap
 
 ### 1.2 S — Structure（结构）
 
-> [来源: Microsoft RustTraining · arxiv 2604.06331v1]
-
 | 属性 | 定义 |
 |:---|:---|
 | **全称** | Structure（结构） |
@@ -107,8 +101,6 @@ mindmap
 > **Rust 示例**: 理解 "所有权 = 线性逻辑的资源消耗"、解释为什么 `&mut T` 与 `&T` 不能共存、分析 `Pin` 不动性对自引用结构的必要性 —— 这些都属于 S 类技能。
 
 ### 1.3 P — Procedure（程序）
-
-> [来源: Microsoft RustTraining · arxiv 2604.06331v1]
 
 | 属性 | 定义 |
 |:---|:---|
@@ -170,8 +162,6 @@ graph TB
 
 ### 2.1 文件头部标注格式
 
-> [来源: `concept/` 现有文件头部规范 — `methodology.md`]
-
 每个概念文件的头部信息块增加 `**A/S/P 标记**` 字段：
 
 ```markdown
@@ -197,15 +187,11 @@ graph TB
 
 ### 2.2 多标记组合规则
 
-> [来源: 标记组合逻辑参照集合论 — 主导标记原则]
-
 1. **主导原则**: 每个文件必须有**至少一个**主导标记（即该文件最主要培养的技能类型）。多标记组合时，第一个标记为主导。
 2. **最少标记原则**: 避免过度标记。若文件以 S 为主、A 为辅，则标记 `S+A` 而非 `A+S+P`。
 3. **层级递增原则**: L1 基础层以 A/S 为主，L4 形式化层以 S/P 为主，L6 生态层以 P 为主。
 
 ### 2.3 与现有 Bloom 标注的整合
-
-> [来源: `concept/` 现有 Bloom 标注 — 100% 覆盖]
 
 | 现有 Bloom 层级 | 推荐 A/S/P 标记 | 理由 |
 |:---:|:---:|:---|
@@ -219,8 +205,6 @@ graph TB
 ---
 
 ## 三、Rust 知识体系全量标记
-
-> [来源: 基于 `concept/` 全部 58 个核心概念文件的内容分析]
 
 ### 3.1 L1 基础概念层
 
@@ -388,8 +372,6 @@ graph TB
 
 ## 五、认知自动化边界分析
 
-> [来源: [arxiv 2604.06331v1] · [AI 辅助编程教育研究 2024-2025]]
-
 ```mermaid
 graph LR
     subgraph AI[AI 辅助能力]
@@ -414,13 +396,10 @@ graph LR
 > - **A 外包给 AI**: 语法速查、模板代码、API 记忆 → 使用 Copilot / Kimi / 文档工具
 > - **S 必须内化**: 所有权心智模型、借用检查直觉、生命周期推理 → 不可跳过，需刻意练习
 > - **P 人类主导**: 架构决策、安全评估、验证策略 → AI 可提供建议，但最终责任在人类
-> [来源: 💡 原创分析]
 
 ---
 
 ## 六、与概念索引的整合
-
-> [来源: `concept/00_meta/concept_index.md` — 全局概念索引]
 
 `concept_index.md` 的索引表格增加 `A/S/P` 列：
 

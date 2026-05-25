@@ -67,6 +67,7 @@
 ---
 
 ## 2. 模式定义与语义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 概念定义
@@ -163,6 +164,7 @@ Cancel: 取消剩余分支（发送终止信号）
 ---
 
 ## 3. BPMN 与标准规范
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 BPMN 表示
@@ -220,6 +222,7 @@ Cancel: 取消剩余分支（发送终止信号）
 ---
 
 ## 4. 进程代数形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 CCS 表示
@@ -276,9 +279,11 @@ $$
 ---
 
 ## 5. Rust 实现
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 基础实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -381,6 +386,7 @@ impl<T: Send + 'static> CancellingPartialJoinFuturesUnordered<T> {
 ```
 
 ### 5.2 带错误处理的高级实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -489,6 +495,7 @@ impl<T: Send + 'static> ResilientCancellingPartialJoin<T> {
 ```
 
 ### 5.3 数据中心竞速完整示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -578,9 +585,11 @@ async fn select_based_cancelling_example() {
 ---
 
 ## 6. 正确性证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 活性 (Liveness)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **定理**: 若至少 $N$ 个分支最终完成，则取消部分合并最终会触发后续活动。
@@ -602,6 +611,7 @@ async fn select_based_cancelling_example() {
 **结论**: 取消部分合并满足活性。
 
 ### 6.2 安全性 (Safety)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定理**: 剩余分支在触发后会被取消，不会继续执行。
@@ -617,6 +627,7 @@ $$
 Rust 的 `JoinSet::abort_all()` 发送取消信号，`FuturesUnordered` 的 `drop` 取消未完成的 future，因此剩余分支被安全终止。
 
 ### 6.3 正确性条件
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **完备性**: 恰好收集 $N$ 个结果后触发。
@@ -628,9 +639,11 @@ Rust 的 `JoinSet::abort_all()` 发送取消信号，`FuturesUnordered` 的 `dro
 ---
 
 ## 7. 与其他模式的关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 7.1 模式层次
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -648,6 +661,7 @@ Merge Patterns
 ```
 
 ### 7.2 形式化关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 $$
@@ -661,6 +675,7 @@ $$
 $$
 
 ### 7.3 与分割模式的配合
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 分割模式 | 推荐合并模式 | 说明 |
@@ -672,9 +687,11 @@ $$
 ---
 
 ## 8. 应用场景与案例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 8.1 多数据中心竞速
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **场景**: 向多个数据中心查询，取最快响应
@@ -687,6 +704,7 @@ datacenters:
 ```
 
 ### 8.2 实时报价聚合
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **场景**: 金融系统中从多个交易所获取报价
@@ -699,6 +717,7 @@ exchanges:
 ```
 
 ### 8.3 分布式锁竞争
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **场景**: 多个节点竞争分布式锁
@@ -713,9 +732,11 @@ nodes:
 ---
 
 ## 9. 变体与扩展
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 9.1 超时取消部分合并
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 引入超时机制：
@@ -730,6 +751,7 @@ struct TimeoutCancellingPartialJoin<T> {
 ```
 
 ### 9.2 优先级取消部分合并
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 按优先级选择结果：
@@ -743,6 +765,7 @@ struct PriorityCancellingPartialJoin<T> {
 ```
 
 ### 9.3 嵌套取消部分合并
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -756,6 +779,7 @@ CancelPartialJoin(N=2, M=3)
 ---
 
 ## 10. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 取消部分合并模式提供了高效的竞速合并机制，允许在达到指定阈值时快速响应并取消剩余分支。其核心优势包括：
@@ -770,6 +794,7 @@ CancelPartialJoin(N=2, M=3)
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. van der Aalst, W.M.P., et al. (2003). "Workflow Patterns". Distributed and Parallel Databases.
@@ -1004,4 +1029,3 @@ CancelPartialJoin(N=2, M=3)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

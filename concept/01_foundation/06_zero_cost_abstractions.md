@@ -16,9 +16,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [零成本抽象：Rust 的性能哲学](#零成本抽象rust-的性能哲学)
   - [📑 目录](#-目录)
@@ -55,13 +53,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 零成本抽象的定义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 零成本抽象的核心原则:
@@ -95,7 +90,6 @@
 
 ### 1.2 单态化：泛型的零成本实现
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -130,7 +124,6 @@ graph LR
 
 ### 1.3 迭代器与循环消除
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // 高层抽象代码
@@ -159,14 +152,9 @@ for x in 0..100 {
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 编译期优化管道
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 Rust 编译优化管道:
@@ -207,7 +195,6 @@ Rust 编译优化管道:
 
 ### 2.2 Trait 对象的运行时开销
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Trait 对象: Rust 中"非零成本"的抽象
@@ -226,7 +213,6 @@ Trait 对象: Rust 中"非零成本"的抽象
   │ &dyn Trait       │ vtable 间接  │ ❌ 无法内联  │
   │ Box<dyn Trait>   │ vtable + 堆   │ ❌ 无法内联  │
   └─────────────────┴──────────────┴──────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   何时使用 dyn Trait:
   - 需要运行时多态（集合中混存不同类型）
@@ -241,7 +227,6 @@ Trait 对象: Rust 中"非零成本"的抽象
 
 ### 2.3 闭包的零成本实现
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
 // 闭包的编译期展开
@@ -270,10 +255,6 @@ impl<'a> FnMut(&i32) -> i32 for __Closure_1<'a> {
 ---
 
 ## 三、抽象层次分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 抽象层 | 机制 | 运行时开销 | 使用建议 |
 |:---|:---|:---:|:---|
@@ -293,14 +274,9 @@ impl<'a> FnMut(&i32) -> i32 for __Closure_1<'a> {
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -318,7 +294,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树判断 Rust 抽象是否有运行时成本。核心判断标准是**是否使用动态分发或运行时管理机制**。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 性能关键路径使用泛型 + 迭代器；需要运行时灵活性时接受 dyn Trait 的成本；避免在热路径使用 Rc/Arc/Mutex。
 > **关键洞察**: Rust 的**设计哲学**是"零成本抽象优先，运行时成本显式"。有成本的抽象（dyn Trait、Rc）在类型系统中明确标记，不会意外引入。
 > [来源: 💡 原创分析]
@@ -327,7 +302,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 编译时间成本
@@ -356,15 +330,10 @@ graph TD
 ```
 
 > **边界要点**: 零成本抽象是**目标而非保证**——编译器尽力消除开销，但复杂场景下可能需要人工辅助（如 `#[inline]`、`unsafe` 块、或手写汇编）。
-> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ---
 
 ## 五、性能测量方法
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 Rust 性能分析工具链:
@@ -404,7 +373,6 @@ Rust 性能分析工具链:
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -417,10 +385,6 @@ Rust 性能分析工具链:
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Generics](../02_intermediate/02_generics.md) — 泛型与单态化
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统与动态分发
@@ -443,20 +407,13 @@ Rust 性能分析工具链:
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
 > **补充来源**
-
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十二、边界测试：零成本抽象的编译错误
 

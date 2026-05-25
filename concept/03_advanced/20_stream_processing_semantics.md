@@ -25,7 +25,6 @@
 
 ## 一、核心命题：流处理的本质
 
-> **[来源: Akidau et al. — The Dataflow Model, VLDB 2015]** ✅
 
 流处理不是"快速批处理"，而是对**无界数据（unbounded data）**的连续计算。
 批处理（batch）与流处理（streaming）的根本差异不在于速度，而在于**数据的有界性**：
@@ -46,7 +45,6 @@
 
 ## 二、时间域：事件时间 vs 处理时间 vs 摄取时间
 
-> **[来源: Akidau et al. — The Dataflow Model, VLDB 2015]** · **[来源: Flink Documentation — Time Characteristics]** ✅
 
 ### 2.1 三种时间语义
 
@@ -83,7 +81,6 @@
 
 ## 三、窗口语义：在事件时间中划界
 
-> **[来源: Akidau et al. — The Dataflow Model, VLDB 2015]** · **[来源: Flink Documentation — Windows]** ✅
 
 窗口（Window）是将无界数据切分为有界子集进行聚合的机制。
 窗口策略回答 Dataflow Model 的 **Where** 维度。
@@ -133,7 +130,6 @@ Session  [0,3)     [6,9)          [14,18)
 
 ## 四、Watermark：事件时间进度的推断机制
 
-> **[来源: Akidau et al. — The Dataflow Model, VLDB 2015]** · **[来源: Flink Documentation — Watermarks]** ✅
 
 ### 4.1 Watermark 的形式化定义
 
@@ -172,7 +168,6 @@ Akidau 等人指出 Watermark 存在两种系统性失败：
 
 ## 五、Trigger：结果物化的时机控制
 
-> **[来源: Akidau et al. — The Dataflow Model, VLDB 2015]** ✅
 
 Trigger 回答 Dataflow Model 的 **When** 维度：在何时将窗口的中间结果输出。
 
@@ -215,7 +210,6 @@ Accumulating+Retracting: [10] ── [-10,25] ── [-25,30] (下游需 retract
 
 ## 六、容错语义：Exactly-Once 的形式化
 
-> **[来源: Chandy & Lamport — Distributed Snapshots, 1985]** · **[来源: Carbone et al. — Apache Flink, IEEE BigData 2015]** · **[来源: Kafka Documentation — Exactly-Once Semantics]** ✅
 
 ### 6.1 三种处理保证
 
@@ -263,7 +257,6 @@ Checkpoint-1 完成（一致性全局快照）
 
 ## 七、状态管理：Operator State vs Keyed State
 
-> **[来源: Flink Documentation — State Backends]** · **[来源: Carbone et al. — State Management in Apache Flink]** ✅
 
 ### 7.1 状态类型
 
@@ -288,7 +281,6 @@ Checkpoint-1 完成（一致性全局快照）
 
 ## 八、背压（Backpressure）：流量控制的语义
 
-> **[来源: Flink Documentation — Backpressure]** · **[来源: Reactive Streams Specification]** ✅
 
 ### 8.1 背压的本质
 
@@ -332,7 +324,6 @@ tx.send(42).await?;
 
 ## 九、增量计算：Differential Dataflow 的 diff 代数
 
-> **[来源: McSherry et al. — Differential Dataflow, CIDR 2013]** · **[来源: Murray et al. — Naiad, SOSP 2013]** ✅
 
 ### 9.1 核心抽象：Collection = Stream of Diffs
 
@@ -383,7 +374,6 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 
 ## 十、物化视图与 CDC：流式 SQL 的语义
 
-> **[来源: Materialize Documentation]** · **[来源: Kreps et al. — Kafka, ACM Queue 2012]** ✅
 
 ### 10.1 从批处理 SQL 到流式 SQL
 

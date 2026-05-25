@@ -1,5 +1,4 @@
-# WebAssembly [来源: [WebAssembly.org](https://webassembly.org/)] 生态：Rust 的浏览器外运行时
-
+# WebAssembly 生态：Rust 的浏览器外运行时
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Eva — 评估 WASM 与 Rust 的集成策略
@@ -17,45 +16,40 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
-- [WebAssembly \[来源: WebAssembly.org\] 生态：Rust 的浏览器外运行时](#webassembly-来源-webassemblyorg-生态rust-的浏览器外运行时)
+ [WebAssembly \ 生态：Rust 的浏览器外运行时](#webassembly)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 WebAssembly 的设计哲学](#11-webassembly-的设计哲学)
-    - [1.2 Rust → Wasm 的编译模型](#12-rust--wasm-的编译模型)
-    - [1.3 为什么 Rust 是 Wasm 的首选语言](#13-为什么-rust-是-wasm-的首选语言)
+  - [1.1 WebAssembly 的设计哲学](#11-webassembly-的设计哲学)
+  - [1.2 Rust → Wasm 的编译模型](#12-rust--wasm-的编译模型)
+  - [1.3 为什么 Rust 是 Wasm 的首选语言](#13-为什么-rust-是-wasm-的首选语言)
   - [二、技术细节](#二技术细节)
-    - [2.1 wasm32 目标三元组](#21-wasm32-目标三元组)
-    - [2.2 wasm-bindgen 与 JS 互操作](#22-wasm-bindgen-与-js-互操作)
-    - [2.3 Wasm 组件模型](#23-wasm-组件模型)
+  - [2.1 wasm32 目标三元组](#21-wasm32-目标三元组)
+  - [2.2 wasm-bindgen 与 JS 互操作](#22-wasm-bindgen-与-js-互操作)
+  - [2.3 Wasm 组件模型](#23-wasm-组件模型)
   - [三、应用场景分析](#三应用场景分析)
   - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
+  - [4.1 反命题树](#41-反命题树)
+  - [4.2 边界极限](#42-边界极限)
   - [五、工具链与运行时](#五工具链与运行时)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
-    - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](#101-边界测试wasm32-目标的标准库限制编译错误)
-    - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](#102-边界测试wasm-bindgen-的类型映射编译错误)
-    - [10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）](#103-边界测试wasm-的线性内存与-rust-引用的不兼容性编译错误)
-    - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
+  - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](#101-边界测试wasm32-目标的标准库限制编译错误)
+  - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](#102-边界测试wasm-bindgen-的类型映射编译错误)
+  - [10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）](#103-边界测试wasm-的线性内存与-rust-引用的不兼容性编译错误)
+  - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
 
 ---
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 WebAssembly 的设计哲学
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 WebAssembly 是一种**可移植、安全、高效**的低级字节码格式：
 
@@ -81,7 +75,6 @@ Wasm 的内存模型:
 
 ### 1.2 Rust → Wasm 的编译模型
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -112,7 +105,6 @@ graph LR
 
 ### 1.3 为什么 Rust 是 Wasm 的首选语言
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 维度 | Rust | C/C++ | Go | AssemblyScript |
 |:---|:---|:---|:---|:---|
@@ -129,14 +121,9 @@ graph LR
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 wasm32 目标三元组
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 Rust 的 Wasm 目标:
@@ -169,7 +156,6 @@ Rust 的 Wasm 目标:
 
 ### 2.2 wasm-bindgen 与 JS 互操作
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // wasm-bindgen 示例: Rust 函数暴露给 JS
@@ -214,7 +200,6 @@ impl Point {
 
 ### 2.3 Wasm 组件模型
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph TD
@@ -244,10 +229,6 @@ graph TD
 ---
 
 ## 三、应用场景分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 场景 | 技术栈 | Rust 价值 | 代表项目 |
 |:---|:---|:---|:---|
@@ -264,14 +245,9 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -289,7 +265,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树评估 Rust + Wasm 的适用性。核心判断标准是**宿主交互频率**和**二进制大小敏感度**。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 计算密集型、沙箱化需求高的场景优先 Rust + Wasm；与宿主频繁交互的场景需评估跨边界开销。
 > **关键洞察**: Wasm 的**跨边界调用**（Wasm ↔ Host）有固定开销（序列化/边界检查）。如果应用是"细粒度频繁调用"型，原生实现可能更优。
 > [来源: [Wasm Performance Guide](https://webassembly.org/docs/portability-and-performance/)]
@@ -298,7 +273,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 单线程模型
@@ -329,10 +303,6 @@ graph TD
 ---
 
 ## 五、工具链与运行时
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 Rust Wasm 工具链:
@@ -369,7 +339,6 @@ Rust Wasm 工具链:
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 
@@ -389,10 +358,6 @@ Rust Wasm 工具链:
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](./01_toolchain.md) — Rust 工具链
 - [WASI](./08_wasi.md) — WebAssembly System Interface
@@ -402,7 +367,6 @@ Rust Wasm 工具链:
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -414,76 +378,44 @@ Rust Wasm 工具链:
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [WebAssembly Documentation](https://webassembly.org/)]**
 >
-> **[来源: [Wasmtime](https://wasmtime.dev/)]**
 >
-> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
 >
-> **[来源: [Hyper Documentation](https://hyper.rs/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ## 十、边界测试：WebAssembly 的编译错误
 

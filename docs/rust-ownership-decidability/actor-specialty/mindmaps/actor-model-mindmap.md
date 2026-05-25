@@ -1,6 +1,7 @@
 # Actor模型 - 思维导图
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actor模型 - 思维导图](#actor模型---思维导图)
@@ -182,6 +183,7 @@ mindmap
 ---
 
 ## Actor与其他模型关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -212,6 +214,7 @@ mindmap
 ---
 
 ## 分布式Actor架构
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -267,6 +270,7 @@ mindmap
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -347,4 +351,3 @@ mindmap
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

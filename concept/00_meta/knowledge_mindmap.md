@@ -16,9 +16,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 知识体系全局思维导图（Knowledge Mindmap）](#rust-知识体系全局思维导图knowledge-mindmap)
   - [📑 目录](#-目录)
@@ -28,10 +26,6 @@
   - [四、相关概念链接](#四相关概念链接)
 
 ## 一、L0-L7 全局知识体系 Mindmap
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
 mindmap
@@ -132,10 +126,6 @@ mindmap
 ---
 
 ## 二、五维主线 Mindmap
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
 mindmap
@@ -192,11 +182,9 @@ mindmap
 ```
 
 > **认知功能**: 此 mindmap 从**五维主线**视角重组知识体系——不是按 L0-L7 的纵向层次，而是按「可判定性—表达力—惯用法—执行模型—系统设计」的横向维度。
-> [来源: [Wikipedia — Knowledge Graph]]
 > 它与上面的 L0-L7 mindmap 形成互补：前者帮助「按层次递进」，后者帮助「按主题深入」。
 > 当学习者在某个维度上遇到瓶颈时，可切换到另一个 mindmap 寻找关联概念。
 > 关键认知：五维主线是知识体系的「另一种索引」——同一概念可从层次视角（L1-L7）和主题视角（五维）两个维度访问，建立这种双向索引是深度理解的标志。
-> [来源: 💡 原创分析]
 > **思维表征说明**: 此 mindmap 从**五维主线**视角重组知识体系——不是按 L0-L7 的纵向层次，而是按「可判定性—表达力—惯用法—执行模型—系统设计」的横向维度。
 > 两个 mindmap 形成互补：前者帮助学习者「按层次递进」，后者帮助学习者「按主题深入」。
 > 当学习者在某个维度上遇到瓶颈时，可以切换到另一个 mindmap 寻找关联概念。
@@ -206,7 +194,6 @@ mindmap
 
 ## 三、Mindmap 与四层关系图谱的关联
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 表征文件 | 认知功能 | 适用场景 |
 |:---|:---|:---|
@@ -220,9 +207,7 @@ mindmap
 
 ## 四、相关概念链接
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [跨层依赖拓扑](./inter_layer_topology.md) —— L0-L7 纵向导航
 - [层内模型映射](./intra_layer_model_map.md) —— 同层模型横向选择

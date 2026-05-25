@@ -1,525 +1,753 @@
-# Async 模式与前沿特性
+# 异步模式：从 Future 到生产级并发
 
 > **Bloom 层级**: 分析 → 评价
-> **A/S/P 标记**: **S** — Structure
-> **层次定位**: L3 高级概念 / 异步子域 — 模式与前沿
-> **前置依赖**: [Async/Await 基础](./02_async.md) · [Async 高级主题](./02_async_advanced.md)
-> **定理链编号**: T-055 AFIT 类型安全 ⟹ T-056 AsyncFn 可重入性
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Ana — 分析异步模式的状态机变换
+> **定位**: 深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时开销下实现高效并发。
+> **前置概念**: [Async](./02_async.md) · [Pin](./06_pin_unpin.md) · [Concurrency](./01_concurrency.md)
+> **后置概念**: [Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Tokio](https://tokio.rs/)
 
 ---
 
-## 十、待补充与演进方向（TODOs）
+> **来源**: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Rust Book](https://rust-lang.github.io/async-book/) · [tokio.rs](https://tokio.rs/) · [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Wikipedia — Futures and Promises](https://en.wikipedia.org/wiki/Futures_and_promises)
+
+## 📑 目录
 >
-> [来源: [Rust Async Book]]
 
-- [x] **TODO**: 补充 Waker/Context 的底层机制 —— 已完成: 2026-05-14
-- [x] **TODO**: 补充 `Stream` / `Sink` trait 完整分析 —— 已完成: 2026-05-14
-- [x] **TODO**: 补充 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异 —— 已完成: 2026-05-14
-- [x] **TODO**: 补充 `loom` 并发模型检测工具 —— 已完成: 2026-05-14
+- [异步模式：从 Future 到生产级并发](#异步模式从-future-到生产级并发)
+  - [📑 目录](#-目录)
+  - [一、核心概念](#一核心概念)
+    - [1.1 Future 与状态机](#11-future-与状态机)
+    - [1.2 Pin 与自引用](#12-pin-与自引用)
+    - [1.3 Waker 与执行器](#13-waker-与执行器)
+  - [二、技术细节](#二技术细节)
+    - [2.1 并发执行模式](#21-并发执行模式)
+    - [2.2 取消与超时](#22-取消与超时)
+  - [十、边界测试：异步模式的编译错误](#十边界测试异步模式的编译错误)
+    - [10.1 边界测试：`Stream` 与 `Future` 的所有权混淆（编译错误）](#101-边界测试stream-与-future-的所有权混淆编译错误)
+    - [10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）](#102-边界测试取消安全cancellation-safety违反逻辑错误)
+    - [2.3 背压与流控制](#23-背压与流控制)
+  - [三、异步模式矩阵](#三异步模式矩阵)
+  - [四、反命题与边界分析](#四反命题与边界分析)
+    - [4.1 反命题树](#41-反命题树)
+    - [4.2 边界极限](#42-边界极限)
+  - [五、常见陷阱](#五常见陷阱)
+  - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
+    - [10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时行为）](#103-边界测试取消安全性cancellation-safety的违反运行时行为)
+    - [10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）](#104-边界测试tokiospawn-的-send-约束与-rc编译错误)
+    - [10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时 panic）](#105-边界测试stream-的-fuse-与-select_next_some-的交互运行时-panic)
+    - [10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）](#103-边界测试stream-的背压与缓冲区溢出运行时内存增长)
+    - [10.4 边界测试：async fn 在 trait 中的生命周期推断与实现约束（编译错误）](#104-边界测试async-fn-在-trait-中的生命周期推断与实现约束编译错误)
 
-### 补充章节：AFIT（Async Fn In Traits）与 RPITIT
+---
+
+## 一、核心概念
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
 
-> **层次一致性标注**：本节内容属于 L3 向 L4 过渡地带，涉及 trait 系统与存在类型的交互，需在理解 §3.1 状态机变换与 §5.1 定理 A1 后阅读。
-
-#### 问题与解决方案演进
+### 1.1 Future 与状态机
+>
 
 ```text
-问题（Rust < 1.75）:
-  trait 中不能写 async fn
-   workaround: 手动返回关联 Future 类型或使用 async-trait crate
+Future 的本质:
 
-解决方案 1: async-trait crate（宏模拟）
-  #[async_trait]
-  trait MyTrait {
-      async fn method(&self);
-  }
-  // 宏展开: fn method(&self) -> Pin<Box<dyn Future<Output = ()> + Send + '_>>
-  // 代价: 每次调用都 Box + 动态分发
+  定义:
+  ├── Future 是" eventually 产生值的计算"
+  ├── 惰性: 创建时不执行
+  ├── 轮询驱动: 执行器 poll 时才推进
+  └── 状态机: async fn 编译为状态机
 
-解决方案 2: RPITIT（Return Position Impl Trait In Traits）
-  trait MyTrait {
-      fn method(&self) -> impl Future<Output = ()> + Send;
-  }
-  // Rust 1.75 前不稳定
+  async fn 的脱糖:
+  async fn foo() -> i32 { 42 }
 
-最终方案: AFIT（Rust 1.75+ 稳定）
-  trait MyTrait {
-      async fn method(&self);
+  // 等价于:
+  fn foo() -> impl Future<Output = i32> {
+      async { 42 }
   }
-  // 编译器自动展开为 RPITIT 形式
+
+  状态机结构:
+  enum FooFuture {
+      Start,
+      Waiting1(/* 捕获的局部变量 */),
+      Waiting2(/* 捕获的局部变量 */),
+      Done,
+  }
+
+  执行流程:
+  1. 调用 async fn，返回 Future（未启动）
+  2. 执行器 poll Future
+  3. Future 执行到第一个 .await，返回 Pending
+  4. 当等待的任务完成，Waker 唤醒执行器
+  5. 执行器再次 poll，从上次暂停点继续
+  6. 重复直到 Future 返回 Ready
+
+  零成本特性:
+  ├── 编译后状态机与手写等价
+  ├── 无运行时分配（除非 Box::pin）
+  ├── 与同步代码相同的性能
+  └── 只需执行器提供调度
 ```
 
-#### 当前最佳实践
+> **认知功能**: **Future 是"可暂停的函数"**——编译器将 async/await 转换为状态机，使代码看起来像同步但执行是异步的。
+> [来源: [Async Rust Book — Future](https://rust-lang.github.io/async-book/02_execution/02_future.html)]
+
+---
+
+### 1.2 Pin 与自引用
+>
 
 ```rust,ignore
-// ✅ Rust 1.75+ 原生 AFIT
-trait AsyncProcessor {
-    async fn process(&self, data: &[u8]) -> Result<Vec<u8>, Error>;
+// Pin: 保证 Future 的内存位置不变
+
+use std::pin::Pin;
+use std::future::Future;
+use std::task::{Context, Poll};
+
+// async fn 内部可能有自引用:
+async fn example() {
+    let s = String::from("hello");
+    let r = &s;  // r 引用 s
+    some_async_op().await;  // 可能暂停，但 r 必须继续有效
+    println!("{}", r);
 }
 
-// 等价的显式写法:
-trait AsyncProcessorExplicit {
-    fn process(&self, data: &[u8]) -> impl Future<Output = Result<Vec<u8>, Error>> + Send + '_;
+// 编译后的状态机:
+struct ExampleFuture {
+    s: String,
+    r: *const String,  // 自引用指针！
+    state: u8,
 }
 
-// 实现:
-struct MyProcessor;
+// Pin 保证:
+// ├── Pin<&mut T> 阻止 T 被移动
+// ├── 自引用指针保持有效
+// ├── 内存位置不变
+// └── 但允许通过 &mut T 修改内容
 
-impl AsyncProcessor for MyProcessor {
-    async fn process(&self, data: &[u8]) -> Result<Vec<u8>, Error> {
-        Ok(data.to_vec())
+// 使用 Pin:
+fn poll_future(future: Pin<&mut dyn Future<Output = ()>>) {
+    let mut cx = Context::from_waker(...);
+    let _ = future.poll(&mut cx);
+}
+
+// Box::pin: 将 Future Pin 到堆上
+let future = Box::pin(async { /* ... */ });
+```
+
+> **Pin 洞察**: **Pin 是 Rust async 的基石**——它解决了状态机自引用问题，使编译器生成的状态机可以安全地跨越 await 点。
+> [来源: [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
+
+---
+
+### 1.3 Waker 与执行器
+>
+
+```text
+Waker: 异步通知机制
+
+  角色:
+  ├── Future 返回 Pending 时，注册 Waker
+  ├── 当资源就绪（IO 完成、定时器到期），调用 Waker
+  ├── Waker 通知执行器重新 poll Future
+  └── 避免忙等待
+
+  执行器（Executor）:
+  ├── Tokio: 生产级执行器（多线程）
+  ├── async-std: 标准库风格的执行器
+  ├── smol: 小型执行器
+  └── 自定义: 可针对特定场景优化
+
+  Tokio 执行器:
+  ├── 多线程工作窃取调度
+  ├── 任务队列: run queue + LIFO slot
+  ├── IO 驱动: epoll/kqueue/IOCP
+  ├── 定时器: 时间轮
+  └── 阻塞任务: spawn_blocking
+
+  执行模型:
+  1. 任务提交到执行器
+  2. 工作线程从队列获取任务
+  3. poll Future 直到 Pending
+  4. 注册 Waker（关联到 IO/定时器）
+  5. IO 就绪 → Waker 唤醒 → 重新调度
+  6. Future 完成 → 输出结果
+```
+
+> **Waker 洞察**: **Waker 是"按需唤醒"的优化**——没有它，执行器需要不断轮询所有任务（忙等待）。
+> [来源: [tokio.rs — Runtime](https://tokio.rs/tokio/topics/runtime)]
+
+---
+
+## 二、技术细节
+
+### 2.1 并发执行模式
+>
+
+```rust,ignore
+// 异步并发模式
+
+use tokio::task;
+
+// 1. join: 等待所有完成
+async fn fetch_all() -> (String, String) {
+    let a = fetch_url("url1");
+    let b = fetch_url("url2");
+    tokio::join!(a, b)  // 同时执行，等待两者
+}
+
+// 2. select: 等待任一完成
+async fn race() -> String {
+    let a = fetch_url("url1");
+    let b = fetch_url("url2");
+    tokio::select! {
+        result = a => result,
+        result = b => result,
+    }
+}
+
+// 3. spawn: 创建独立任务
+async fn spawn_tasks() {
+    let handle1 = task::spawn(async {
+        // 在后台执行
+        do_work().await
+    });
+
+    let handle2 = task::spawn(async {
+        do_other_work().await
+    });
+
+    let result1 = handle1.await.unwrap();
+    let result2 = handle2.await.unwrap();
+}
+
+// 4. 并发限制 (Semaphore)
+use tokio::sync::Semaphore;
+
+async fn limited_concurrency(urls: Vec<String>) {
+    let sem = Arc::new(Semaphore::new(10));  // 最多 10 并发
+
+    let futures = urls.into_iter().map(|url| {
+        let sem = sem.clone();
+        async move {
+            let _permit = sem.acquire().await.unwrap();
+            fetch_url(&url).await
+        }
+    });
+
+    let results: Vec<_> = futures::future::join_all(futures).await;
+}
+
+// 5. 流式处理 (Streams)
+use tokio_stream::StreamExt;
+
+async fn process_stream() {
+    let mut stream = tokio_stream::iter(0..100);
+
+    while let Some(item) = stream.next().await {
+        println!("{}", item);
     }
 }
 ```
 
-#### 限制与注意事项
-
-```text
-1. AFIT 方法不能直接用 dyn Trait（类型擦除问题）
-   解决: 使用 trait_variant crate 或手动 Box::pin
-
-2. 关联类型生命周期推断可能复杂
-   解决: 显式标注或简化签名
-
-3. Send 约束需显式声明（默认非 Send）
-   trait MyTrait {
-       async fn method(&self);  // 默认 Future 非 Send
-   }
-
-   // 修正:
-   trait MyTrait {
-       async fn method(&self) where Self: Sync;  // 或外部约束
-   }
-```
-
-> **来源**: [RFC 3185] · [Rust Reference: RPITIT] · [TRPL: Ch17]
-
-#### 生命周期陷阱
-
-```rust,ignore
-// ❌ 常见错误: 返回内部引用
-trait DataProvider {
-    async fn get_data(&self) -> &str;  // 隐式生命周期复杂
-}
-
-// 实际展开:
-// fn get_data(&self) -> impl Future<Output = &str> + '_;
-// 问题: Output = &str 的生命周期与 &self 绑定，但不明显
-
-// ✅ 修正: 显式标注或使用 owned 类型
-trait DataProvider {
-    async fn get_data(&self) -> String;  // 返回所有权
-}
-
-// 或
-trait DataProvider<'a> {
-    async fn get_data(&'a self) -> &'a str;
-}
-```
+> **并发洞察**: **tokio::join! 和 tokio::select! 是异步并发的核心原语**——它们对应同步并发中的 join 和 select 系统调用。
+> [来源: [tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html)]
 
 ---
 
-## 十一、国际课程与论文对齐
+### 2.2 取消与超时
 >
-> [来源: [Rust Async Book]]
 
-| 来源 | 核心内容 | 与本文件对应 |
-|:---|:---|:---|
-| **[CMU 17-350: Safe Systems Programming]** | async/await、Future、Pin、运行时 | L3 Async 完整覆盖 |
-| **[Stanford CS340R: Rusty Systems]** | 并发模型、异步系统编程 | L3 Concurrency → Async |
-| **[RFC 2394: async/await]** | 生成器状态机转换语义 | 形式化根基 §3 |
-| **[RFC 3185: Return Position Impl Trait in Trait]** | AFIT/RPITIT 设计 | Trait 中的异步 §10 |
-| **[PLDI 2024: RefinedRust]** | Pin 不动性的形式化语义 | Pin 定理 §5.1 L2 |
+## 十、边界测试：异步模式的编译错误
 
-> **过渡: L3 → L4**
->
-> `async/await` 的编译期正确性依赖于状态机的自引用安全性，而 `Pin<&mut Self>` 保证的"地址不变性"在类型论中对应于 **location stability** 约束。当前 borrow checker 对自引用的分析存在过度保守的问题，Polonius 的下一代 Datalog 求解器正试图用路径敏感的 loan-based 语义精确刻画这一边界。
->
-> 形式化视角见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §9.2（Polonius）与 [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §4.1（存在类型与 `impl Trait`）。
+### 10.1 边界测试：`Stream` 与 `Future` 的所有权混淆（编译错误）
 
----
+```rust,compile_fail
+use futures::stream::{self, StreamExt};
+use futures::future::FutureExt;
 
-## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）
->
-> [来源: [Rust Async Book]]
+async fn bad_mix() {
+    let s = stream::iter(vec![1, 2, 3]);
+    // ❌ 编译错误: `stream::Iter` 不是 `Future`
+    // Stream 和 Future 是不同的 trait，不能混用
+    let val = s.await; // Stream 需要 next().await
+}
 
-> **稳定版本**: Rust 1.85 (stable) · **适用 Edition**: 所有 Edition（非 Edition-gated）
-> **形式化意义**: 高阶函数的异步扩展——效果系统（Effect System）的原型
-
-### 12.1 问题：异步闭包的类型真空
->
-> **[来源: [crates.io](https://crates.io/)]**
-
-在 1.85 之前，异步闭包 `async |x| { ... }` 无法直接作为 trait bound 使用：
-
-```rust,ignore
-// 旧模式：verbose 的 workaround
-async fn process_batch<F, Fut>(items: Vec<String>, callback: F)
-where
-    F: Fn(String) -> Fut,
-    Fut: Future<Output = Result<(), Error>>,
-{ ... }
-
-// 新模式：clean 的 AsyncFn bound
-async fn process_batch(
-    items: Vec<String>,
-    callback: impl AsyncFn(String) -> Result<(), Error>,
-) { ... }
+// 正确: 使用 next() 从 Stream 获取 Future
+async fn fixed() {
+    let mut s = stream::iter(vec![1, 2, 3]);
+    while let Some(val) = s.next().await { // ✅ StreamExt::next 返回 Future
+        println!("{}", val);
+    }
+}
 ```
 
-> **来源**: [RFC 3668] · [Rust Reference: Async closures] · [Rust 1.85 Release Notes]
+> **修正**: `Stream` 和 `Future` 是 Rust 异步生态中的两个核心 trait。`Future` 代表**单次**异步计算，`Stream` 代表**多次**异步值序列。`Stream` 不实现 `Future`，必须通过 `StreamExt::next()` 获取 `Future<Item = Option<T>>`。这与 JavaScript 的 `AsyncIterator`（`for await...of`）类似，但 Rust 的区分更严格——编译器拒绝将 Stream 直接 await。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
 
-### 12.2 `AsyncFn` 家族层级
->
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-```text
-AsyncFnOnce<Args>     // 异步调用一次，消耗所有权
-    ↑
-AsyncFnMut<Args>      // 异步多次调用，可变借用
-    ↑
-AsyncFn<Args>         // 异步多次调用，不可变借用
-```
-
-| 维度 | 同步 `Fn` | 异步 `AsyncFn` |
-|:---|:---|:---|
-| 调用语法 | `f(args)` | `f(args).await` |
-| 返回类型 | `R` | `impl Future<Output = R>` |
-| 可重入性 | 调用后立即可再次调用 | Future 完成前不可重入 |
-| 捕获模式 | `&self` / `&mut self` / `self` | 同左，但返回 Future |
-
-### 12.3 关键形式化特性：可重入性限制
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-`AsyncFn` 的 `call` 方法返回 `impl Future`，该 Future 可能**借用**闭包捕获的状态。因此：
-
-```rust,ignore
-let closure = async |s| { db.save(s).await };
-
-let fut1 = closure("hello");  // Future 借用了 closure 内部状态
-// let fut2 = closure("world");  // ❌ 编译错误：closure 已被借用
-
-fut1.await;  // Future 完成后，借用释放
-let fut2 = closure("world");  // ✅ 现在可以再次调用
-```
-
-**形式化洞察**: `AsyncFn` 将闭包的**同步可重入性**（`Fn` 的 `&self`）与**异步借用生命周期**（Future 的存活期）耦合。这是 Rust 借用检查器在**高阶异步函数**上的自然扩展。
-
-> **来源**: [RFC 3668] · [Rust Reference: Async closures] · [Rust 1.85 Release Notes]
-
-### 12.4 效果系统原型
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-`AsyncFn` 可视为 Rust 向**显式效果追踪**迈出的第一步：
+### 10.2 边界测试：取消安全（Cancellation Safety）违反（逻辑错误）
 
 ```rust
-// 同步：无效果
-fn sync_fn(f: impl Fn(i32) -> i32) -> i32 { f(42) }
+use tokio::sync::mpsc;
 
-// 异步：携带 "async 效果"
-async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
+async fn bad_cancel_safe() {
+    let (tx, mut rx) = mpsc::channel::<i32>(1);
+    tx.send(1).await.unwrap();
 
-// 未来可能的 Effects 语法（讨论中）
-// fn effect_fn(f: impl Fn(i32) -> i32) -> i32 async { f(42).await }
+    // ⚠️ 逻辑错误: 非取消安全的操作
+    // 若此 future 在 recv().await 时被取消，消息可能已消费但未处理
+    let val = rx.recv().await.unwrap();
+    // 若取消发生在 recv 返回后但 val 使用前，消息丢失
+    println!("{}", val);
+}
+
+// 正确: 使用 cancel-safe 的 channel 或立即处理
+async fn fixed() {
+    let (tx, mut rx) = mpsc::channel::<i32>(1);
+    tx.send(1).await.unwrap();
+
+    // tokio::select! 中必须使用 cancel-safe 操作
+    tokio::select! {
+        Some(val) = rx.recv() => {
+            println!("{}", val); // ✅ 在 select 分支内立即处理
+        }
+        else => println!("channel closed"),
+    }
+}
 ```
 
-**形式化洞察**: `AsyncFn` 不是独立的类型系统扩展，而是 `Fn` + `Future` 的组合。但它在**函数签名层面**显式标记了"异步效果"，为未来的 `effect` 关键字提供了设计原型。
-
-> **[来源: RFC 3668]** Async closures trait family.
-> **[来源: Rust 1.85 Release Notes]** Async closures stabilized.
-> **[来源: rustify.rs 2026]** "`AsyncFn` 是 Rust 异步编程的类型系统拼图的最后一块。"
-
----
-
-## 十三、`gen` blocks：同步协程的语义定位
->
-> [来源: [Rust Async Book]]
-
-> **稳定版本**: Rust 1.95 (stable，需 nightly feature gate) · **预计全面稳定**: 1.98+
-> **形式化意义**: 同步协程（Coroutine）的语法糖——`Iterator` 状态机的自动化生成
-
-### 13.1 语法与语义
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **修正**: 取消安全（cancellation safety）指 async 操作在 future 被取消后仍保持正确状态。`tokio::sync::mpsc::Receiver::recv` 是取消安全的——若 future 在 `await` 时被丢弃，消息保留在 channel 中。但自定义组合操作可能不 cancel-safe：若在 `await` 前后有状态变更，取消可能导致状态不一致。Tokio 文档明确标注每个 API 的取消安全性，这是 Rust 异步编程相比其他语言更严格的契约。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ```rust,ignore
-// 手动状态机（旧模式）
-struct Fibonacci { a: u64, b: u64 }
-impl Iterator for Fibonacci {
-    type Item = u64;
-    fn next(&mut self) -> Option<Self::Item> {
-        let val = self.a;
-        (self.a, self.b) = (self.b, self.a + self.b);
-        Some(val)
+// 取消和超时控制
+
+use tokio::time::{timeout, Duration};
+
+// 1. 超时
+async fn fetch_with_timeout() -> Result<String, &'static str> {
+    match timeout(Duration::from_secs(5), fetch_url("slow")).await {
+        Ok(result) => Ok(result),
+        Err(_) => Err("timeout"),
     }
 }
 
-// gen block（新模式）
-fn fibonacci() -> impl Iterator<Item = u64> {
-    gen move {
-        let (mut a, mut b) = (0u64, 1u64);
-        loop {
-            yield a;
-            (a, b) = (b, a + b);
+// 2. 结构化取消: CancellationToken
+use tokio_util::sync::CancellationToken;
+
+async fn cancellable_task(token: CancellationToken) {
+    loop {
+        tokio::select! {
+            _ = token.cancelled() => {
+                println!("Cancelled!");
+                break;
+            }
+            _ = do_work() => {}
+        }
+    }
+}
+
+// 3. 优雅关闭
+async fn graceful_shutdown() {
+    let token = CancellationToken::new();
+    let child_token = token.child_token();
+
+    let handle = tokio::spawn(cancellable_task(child_token));
+
+    // 触发取消
+    token.cancel();
+
+    // 等待任务完成清理
+    handle.await.unwrap();
+}
+
+// 4. Drop 取消: 当 Future 被 drop，async 块中的资源被清理
+async fn auto_cancel() {
+    let guard = scopeguard::guard((), |_| {
+        println!("Cleanup on cancel");
+    });
+
+    long_operation().await;
+
+    scopeguard::ScopeGuard::into_inner(guard);
+}
+```
+
+> **取消洞察**: **Rust 的取消通过 Drop 传播**——当 Future 被 drop，所有已获取的资源自动清理，无需显式取消回调。
+> [来源: [Async Cancellation](https://rust-lang.github.io/async-book/08_workarounds/03_cancel_safe.html)]
+
+---
+
+### 2.3 背压与流控制
+>
+
+```rust,ignore
+// 背压: 防止生产者压倒消费者
+
+use tokio::sync::mpsc;
+
+// 1. 有界通道（内置背压）
+async fn bounded_channel_example() {
+    let (tx, mut rx) = mpsc::channel(100);  // 缓冲 100 个消息
+
+    // 生产者: 当通道满时，send().await 阻塞
+    tokio::spawn(async move {
+        for i in 0..1000 {
+            tx.send(i).await.unwrap();  // 背压在这里！
+        }
+    });
+
+    // 消费者: 按自己的节奏处理
+    while let Some(msg) = rx.recv().await {
+        process(msg).await;
+    }
+}
+
+// 2. 限流 (Rate Limiting)
+use tokio::time::{interval, Duration};
+
+async fn rate_limited() {
+    let mut interval = interval(Duration::from_millis(100));
+
+    loop {
+        interval.tick().await;  // 每 100ms 允许一次
+        make_request().await;
+    }
+}
+
+// 3. 批量处理
+use tokio::time::timeout;
+
+async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
+    let mut batch = Vec::new();
+
+    loop {
+        match timeout(Duration::from_millis(50), rx.recv()).await {
+            Ok(Some(item)) => {
+                batch.push(item);
+                if batch.len() >= 100 {
+                    process_batch(std::mem::take(&mut batch)).await;
+                }
+            }
+            _ => {
+                if !batch.is_empty() {
+                    process_batch(std::mem::take(&mut batch)).await;
+                }
+            }
         }
     }
 }
 ```
 
-### 13.2 与 `async` 的对偶关系
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+> **背压洞察**: **有界通道是异步背压的核心机制**——它使系统在生产者和消费者之间自动平衡负载。
+> [来源: [tokio::sync::mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)]
 
-| 维度 | `async` block | `gen` block |
-|:---|:---|:---|
-| 状态机类型 | `Future`（协作式多任务） | `Iterator`（协作式生成） |
-| 暂停关键字 | `.await`（等待外部 Future） | `yield`（产生值给调用者） |
-| 恢复方式 | 运行时 poll | 调用者 `next()` |
-| 异步能力 | ✅ 可用 `.await` | ❌ 不可用 `.await` |
-| 返回实现 | `impl Future<Output = T>` | `impl Iterator<Item = T>` |
+---
 
-### 13.3 形式化定位
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-`gen` block 是 **Continuation** 的受限形式：
+## 三、异步模式矩阵
 
 ```text
-async block  =  λ(). suspend(await) → Future   // 协作式多任务
-gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
+场景 → 模式 → 工具
 
-两者的编译期降阶（desugaring）共享同一套状态机转换框架：
-    - 暂停点 → enum 变体
-    - 局部变量 → 状态机字段
-    - 恢复执行 → match 分支 + 状态跳转
+并发请求:
+  → tokio::join!
+  → 等待多个 Future 完成
+  → let (a, b) = tokio::join!(fa, fb);
+
+竞争/超时:
+  → tokio::select! + timeout
+  → 取最先完成的
+  → select! { r = fa => ..., _ = sleep(5s) => ... }
+
+后台任务:
+  → tokio::spawn
+  → 独立生命周期
+  → let handle = spawn(async { ... });
+
+限流:
+  → Semaphore
+  → 控制并发数
+  → Semaphore::new(10)
+
+背压:
+  → 有界 channel
+  → 防止内存爆炸
+  → mpsc::channel(100)
+
+流处理:
+  → Stream
+  → 异步迭代
+  → stream.next().await
 ```
 
-**关键限制**: `gen` block 是**同步的**。异步生成器（`Stream`，支持 `.await` + `yield`）仍在 RFC 讨论中。
-
-> **来源**: [RFC 2394 §3: Generator transform] · [rust-lang/rust #117078] · [Rust 1.95 Release Notes]
-
-> **[来源: rust-lang/rust #117078]** Gen blocks tracking issue.
-> **[来源: Rust 1.95 Release Notes]** `gen` blocks stabilized with feature gate.
+> **模式矩阵**: Rust 异步的**核心模式可以归纳为 6 类**——覆盖从简单并发到复杂流处理的大部分场景。
+> [来源: [Async Patterns](https://rust-lang.github.io/async-book/09_workarounds/00_intro.html)]
 
 ---
 
-## 相关概念链接
->
-> [来源: [Rust Async Book]]
+## 四、反命题与边界分析
 
-| 概念 | 文件 | 关系 |
-|:---|:---|:---|
-| 所有权 | [](../01_foundation/01_ownership.md) | Pin 根基 |
-| 生命周期 | [](../01_foundation/03_lifetimes.md) | async fn 捕获规则 |
-| Traits | [](../02_intermediate/01_traits.md) | Future trait 定义 |
-| 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发对比 |
-| Unsafe | [](../03_advanced/03_unsafe.md) | Pin 内部实现 |
-| 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |
-| Rust 版本特性演进 | [](../07_future/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
-| 泛型与类型系统 | [](../02_intermediate/02_generics.md) | `use<..>` precise capturing、GATs |
-| Unsafe 权限分离 | [](../03_advanced/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
+### 4.1 反命题树
+>
 
-> **过渡: L3 → L2**
->
-> `async fn` 的本质是状态机——编译器将 `await` 点转换为 enum 变体。这种转换依赖于泛型（`impl Future<Output = T>`）和 Trait（`Future::poll`）的协同。理解 async 的底层实现，需要回到泛型和 Trait 的基础。
->
-> 底层机制见 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 定义）与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型单态化）。
+```mermaid
+graph TD
+    ROOT["命题: 所有 IO 都应使用 async"]
+    ROOT --> Q1{"是否是 CPU 密集型?"}
+    Q1 -->|是| Q2{"是否需要与其他任务协作?"}
+    Q1 -->|否| ASYNC["✅ async 适合"]
+    Q2 -->|是| ASYNC2["✅ async + spawn_blocking"]
+    Q2 -->|否| SYNC["✅ 同步代码足够"]
 
-> **过渡: L3 → L5**
->
-> 异步编程不是 Rust 的发明——JavaScript 的 Promise、C# 的 async/await、Go 的 goroutine 都解决了类似问题。但 Rust 的 `Future` 是零成本的：编译后的状态机没有运行时调度器开销，这与 Go 的 goroutine（M:N 调度）形成鲜明对比。
->
-> 对比分析见 [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md)（并发模型对比）。
----
+    style ASYNC fill:#c8e6c9
+    style ASYNC2 fill:#c8e6c9
+    style SYNC fill:#c8e6c9
+```
+
+> **认知功能**: **async 适合 IO 密集型，CPU 密集型需要 spawn_blocking 或 rayon**——混合使用是关键。
+> [来源: [Async Rust Book — CPU Bound](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
 
 ---
 
-## Wikipedia 概念对齐
+### 4.2 边界极限
 >
-> [来源: [Rust Async Book]]
 
-> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+```text
+边界 1: 异步递归
+├── async fn 递归需要 Box::pin
+├── 每次递归产生类型爆炸
+├── 编译错误难以诊断
+└── 缓解: 使用 Box<dyn Future> 或迭代替代
 
-| 概念 | Wikipedia 词条 | 说明 |
-|:---|:---|:---|
-| **Async/await** | [Async/await](https://en.wikipedia.org/wiki/Async/await) | 异步/等待 |
-| **Future (programming)** | [Future (programming)](https://en.wikipedia.org/wiki/Future_(programming)) | Future 模式 |
-| **Coroutine** | [Coroutine](https://en.wikipedia.org/wiki/Coroutine) | 协程 |
-| **Cooperative multitasking** | [Cooperative multitasking](https://en.wikipedia.org/wiki/Cooperative_multitasking) | 协作式多任务 |
-| **Event loop** | [Event loop](https://en.wikipedia.org/wiki/Event_loop) | 事件循环 |
-| **Promise (programming)** | [Promise (programming)](https://en.wikipedia.org/wiki/Promise_(programming)) | Promise |
+边界 2: 调用栈深度
+├── async fn 状态机在堆上分配
+├── 但执行栈仍有限
+├── 深层递归可能导致栈溢出
+└── 缓解: 限制递归深度，使用循环
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+边界 3: 取消安全
+├── 某些操作在取消点可能处于不一致状态
+├── select! 可能取消未完成分支
+├── 需要显式处理清理
+└── 缓解: 使用 scopeguard，避免在 select! 中做非原子操作
+
+边界 4: 调试困难
+├── 异步堆栈跟踪复杂
+├── 跨越 await 点的调试信息丢失
+├── 并发 bug 难以复现
+└── 缓解: tokio-console, tracing
+
+边界 5: 生态碎片化
+├── Tokio vs async-std vs smol
+├── 不同运行时互不兼容
+├── 库选择受运行时约束
+└── 缓解: Tokio 是事实标准
+```
+
+> **边界要点**: 异步的边界主要与**递归**、**调用栈**、**取消安全**、**调试**和**生态**相关。
+> [来源: [Async Rust Book — Workarounds](https://rust-lang.github.io/async-book/09_workarounds/00_intro.html)]
+
+---
+
+## 五、常见陷阱
+
+```text
+陷阱 1: 在 async 中阻塞
+  ❌ async fn bad() {
+         std::thread::sleep(Duration::from_secs(10));  // 阻塞线程！
+     }
+
+  ✅ async fn good() {
+         tokio::time::sleep(Duration::from_secs(10)).await;  // 非阻塞
+     }
+
+陷阱 2: 忘记 await
+  ❌ async fn bad() {
+         do_something();  // 返回 Future 但未 await！
+     }
+
+  ✅ async fn good() {
+         do_something().await;
+     }
+
+陷阱 3: select! 中的资源泄漏
+  ❌ select! {
+         _ = read_file() => {},
+         _ = timeout => {},
+     }
+     // read_file 可能正在读取，但结果丢失
+
+  ✅ 使用 CancellationToken 或结构化并发
+
+陷阱 4: 在 async 中使用非 Send 类型
+  ❌ async fn bad() {
+         let rc = Rc::new(5);
+         spawn(async move { *rc }).await;  // Rc 不是 Send！
+     }
+
+  ✅ 使用 Arc 替代 Rc
+     // 或使用 tokio::task::LocalSet
+
+陷阱 5: 无界通道导致内存泄漏
+  ❌ let (tx, rx) = mpsc::unbounded_channel();
+     // 生产者快于消费者时内存无限增长
+
+  ✅ let (tx, rx) = mpsc::channel(100);
+     // 有界通道提供背压
+```
+
+> **陷阱总结**: 异步陷阱主要与**阻塞**、**await 遗漏**、**取消安全**、**Send 约束**和**背压**相关。
+> [来源: [Common Async Mistakes](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
+
+---
+
+## 六、来源与延伸阅读
+
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [Async Rust Book](https://rust-lang.github.io/async-book/) | ✅ 一级 | 异步权威 |
+| [tokio.rs](https://tokio.rs/) | ✅ 一级 | Tokio 文档 |
+| [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ 一级 | 设计 RFC |
+| [TRPL — Async](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ 一级 | 基础教程 |
+| [tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html) | ✅ 一级 | 并发原语 |
+| [Rust Reference — Await](https://doc.rust-lang.org/reference/expressions/await-expr.html) | ✅ 一级 | 语言参考 |
+| [RFC 2592 — Pin](https://rust-lang.github.io/rfcs/2592-pin.html) | ✅ 一级 | Pin 设计 RFC |
+| [std::task::Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) | ✅ 一级 | 标准库 API |
+
+---
+
+## 相关概念文件
+
+- [Async](./02_async.md) — 异步基础
+- [Pin](./06_pin_unpin.md) — Pin 与 Unpin
+- [Concurrency](./01_concurrency.md) — 并发基础
+- [Distributed Systems](../06_ecosystem/18_distributed_systems.md) — 分布式系统
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-22
+**状态**: ✅ 概念文件创建完成
 
 ---
 
 ## 权威来源索引
 
-> **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]**
 >
-> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
 >
 
 ---
 
-> **相关判定树**: [异步判定树](../00_meta/concept_definition_decision_forest.md#八异步判定树)
-> **相关 FTA**: [异步安全失效树](../00_meta/fault_tree_analysis_collection.md#五异步安全失效树)
 
-## 十、边界测试：异步模式的编译错误
 
-### 10.1 边界测试：`async fn` 在 trait 中的限制（编译错误）
 
-```rust,ignore
-trait AsyncService {
-    async fn process(&self) -> i32; // ❌ 编译错误: async fn in trait 不稳定
+
+
+### 10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时行为）
+
+```rust,compile_fail
+use tokio::sync::mpsc;
+
+async fn receiver() {
+    let (tx, mut rx) = mpsc::channel(1);
+    tx.send(1).await.unwrap();
+
+    // ⚠️ 运行时风险: 非取消安全的 future 在 select 中可能丢失数据
+    tokio::select! {
+        val = rx.recv() => {
+            println!("received: {:?}", val);
+        }
+        _ = tokio::time::sleep(std::time::Duration::from_secs(1)) => {
+            println!("timeout");
+            // rx.recv() 被取消，若未实现 CancelSafe，消息可能丢失
+        }
+    }
 }
-
-// 正确: 使用 async_trait 宏或返回 impl Future
-use std::future::Future;
-
-trait AsyncServiceFixed {
-    fn process(&self) -> impl Future<Output = i32>; // ✅ RPITIT
-}
-
-// 或: 使用 async_trait crate
-// #[async_trait]
-// trait AsyncService { async fn process(&self) -> i32; }
 ```
 
-> **修正**: `async fn` 在 trait 中直到 Rust 1.75 才稳定（通过 `impl Future` 返回类型推断，RPITIT）。在旧版本或需要对象安全时，使用 `async-trait` crate 将异步方法转换为返回 `Pin<Box<dyn Future>>` 的普通方法。`async fn in trait` 的实现涉及编译器将 `async fn` 语法糖展开为 `impl Future` 的返回类型，并在 trait 的 vtable 中存储 future 的生成逻辑。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 取消安全性（cancellation safety）指 future 在被 `select!` 或 `AbortHandle` 取消后，不处于部分完成的不一致状态。`tokio::sync::mpsc::Receiver::recv` 是取消安全的——若被取消，消息仍在通道中，下次 `recv` 可获取。但许多操作不是取消安全的：1) `tokio::io::AsyncReadExt::read`（部分读取后取消，已读数据丢失）；2) 自定义 future 在 `poll` 中修改状态后返回 `Pending`。安全模式：使用 `tokio::select!` 的 `biased` 模式控制优先级，或将非取消安全操作包装为原子事务。这与 Go 的 `select`（goroutine 不会取消，只是阻塞）或 JavaScript 的 `Promise.race`（Promise 不可取消，只是忽略结果）不同——Rust 的 `select!` 实际取消未完成的分支，要求开发者考虑取消语义。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
-### 10.2 边界测试：Tokio 运行时未启动时调用 `spawn`（运行时 panic）
+### 10.4 边界测试：`tokio::spawn` 的 `Send` 约束与 `Rc`（编译错误）
 
-```rust
+```rust,compile_fail
+use std::rc::Rc;
 use tokio::task;
 
-fn main() {
-    // ⚠️ 运行时 panic: there is no reactor running, must be called from the context of a Tokio runtime
-    // let handle = task::spawn(async { 42 }); // panic!
-}
-
-// 正确: 在 #[tokio::main] 或 Runtime::block_on 中调用
-#[tokio::main]
-async fn main_fixed() {
-    let handle = task::spawn(async { 42 }); // ✅ 在 Tokio 运行时内
-    let result = await.handle.unwrap();
-    println!("{}", result);
+async fn work() {
+    let data = Rc::new(42);
+    // ❌ 编译错误: `Rc<i32>` 不是 `Send`，不能跨线程 spawn
+    let handle = task::spawn(async move {
+        println!("{}", data);
+    });
+    handle.await.unwrap();
 }
 ```
 
-> **修正**: Tokio 的 `spawn` 需要在活跃的运行时（runtime）上下文中执行。运行时通过线程局部存储（thread-local）维护当前上下文，`spawn` 检查此上下文以确定将任务加入哪个调度器。在主线程直接调用 `spawn` 而不启动运行时会 panic。这与 Go 的 `go` 关键字（隐式全局调度器）不同——Rust 的运行时是显式的，允许一个程序中同时存在多个隔离的运行时实例。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**: `tokio::spawn` 将 future 发送到线程池执行，要求 future 是 `Send + 'static`。`Rc<T>` 不是 `Send`（引用计数非原子），因此不能出现在 spawn 的闭包中。解决方案：1) 使用 `Arc<T>`（原子引用计数，`Send + Sync`）；2) 在单线程执行器（`tokio::runtime::Builder::new_current_thread()`）中使用 `task::spawn_local`（不要求 `Send`）；3) 使用 `tokio::sync::Mutex` 而非 `std::sync::Mutex`（异步友好的锁）。这与 Go 的 goroutine（任何变量都可共享，通过 channel 同步）或 JavaScript 的 Worker（通过 `postMessage` 传递结构化克隆数据）不同——Rust 在编译期阻止非线程安全数据跨线程，即使通过异步抽象。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)]
 
-### 10.3 边界测试：异步闭包的 `move` 与 `Pin` 交互（编译错误）
-
-```rust,ignore
-use std::future::Future;
-use std::pin::Pin;
-
-fn spawn<F>(f: F) where F: Future<Output = ()> + Send + 'static {
-    // spawn 任务
-}
-
-fn main() {
-    let data = vec![1, 2, 3];
-    // ❌ 编译错误: async move 闭包可能不是 'static
-    let task = async move {
-        println!("{:?}", data);
-    };
-    spawn(task);
-}
-```
-
-> **修正**: `async move` 闭包捕获环境变量，生成的 future 的生命周期与捕获变量绑定。若捕获变量不是 `'static`（如局部引用），future 也不是 `'static`，不能发送到 `'static` bound 的任务执行器（`tokio::spawn`、`async_std::task::spawn`）。解决方案：1) 确保只捕获 `'static` 数据（`String`、`Vec<T>`、`Arc<T>`）；2) 使用 `async` 块（非 `move`），只捕获引用，但 future 的生命周期与引用绑定，不能 spawn；3) 使用 `tokio::task::local_set`（非 `'static` 任务）。这是 Rust 异步与所有权系统的核心张力：异步任务通常需要 `'static`，但闭包自然捕获局部引用。与 Go 的 goroutine（闭包捕获变量，GC 管理生命周期）或 JavaScript 的 Promise（闭包捕获引用，无生命周期概念）不同——Rust 在编译期验证异步任务的安全性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
-
-### 10.4 边界测试：Stream 的 `fuse` 与重复 poll（编译错误/运行时 panic）
+### 10.5 边界测试：`Stream` 的 `fuse` 与 `select_next_some` 的交互（运行时 panic）
 
 ```rust,compile_fail
 use futures::stream::{self, StreamExt};
 
 async fn demo() {
-    let mut s = stream::iter(vec![1, 2, 3]).fuse();
-    while let Some(x) = s.next().await {
+    let mut s = stream::iter(vec![Some(1), Some(2), None]).fuse();
+
+    // ⚠️ 运行时问题: select_next_some 在 None 后 panic（若未 fuse）
+    // 但 fuse 后返回 Poll::Pending  forever
+    while let Some(x) = s.select_next_some().await {
         println!("{}", x);
     }
-    // ⚠️ 运行时行为: fuse 后再次 poll 返回 Poll::Ready(None)
-    // 但不会 panic（与未 fuse 的 Stream 不同）
-    // 若未 fuse，某些 Stream 再次 poll 是 UB
 }
 ```
 
-> **修正**: `Stream::fuse` 包装流，在流结束后（`Poll::Ready(None)`）再次 `poll` 时仍返回 `None`，而非 panic 或 UB。这是防御式编程：某些 `Stream` 实现（如手动实现的 future）在结束后再次 poll 是未定义行为。`fuse` 的代价是一个布尔标志（`terminated: bool`），可忽略。Rust 的异步生态广泛使用 `fuse`：1) `select!` 宏内部自动 fuse 分支；2) `StreamExt::fuse` 显式包装；3) `FusedFuture`/`FusedStream` trait 标记"可安全重复 poll"。这与 Tokio 的 `select!`（要求 future 实现 `FusedFuture`）或 async-std 的 `stream::fuse` 相同——fuse 是 Rust 异步的安全基石。忘记 fuse 在 `select!` 循环中可能导致 panic：`select!` 在分支完成后移除它，但若 future 未正确报告完成，可能重复 poll。[来源: [futures Crate Documentation](https://docs.rs/futures/)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**: `StreamExt::select_next_some` 是 `future` crate 的便利方法：在 `Some(x)` 时返回 `x`，在 `None` 时 panic（设计为与 `select!` 配合使用）。`fuse()` 在底层流返回 `None` 后使后续 `poll` 始终返回 `None`。`select_next_some` 遇到 `None` panic，因此应与 `Fuse` 流配合时谨慎——`fuse` 不消除 `None`，只是重复它。正确使用：1) `while let Some(x) = stream.next().await`（标准循环）；2) `select!` 中配合 `Fuse` 和 `complete` 分支；3) 避免 `select_next_some` 在可能独立使用的地方。这与 `Option::unwrap`（同样 panic on None）或 `Iterator::next().unwrap()`（同样风险）类似——`select_next_some` 是"我确定还有元素"的断言。[来源: [futures Crate](https://docs.rs/futures/)] · [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
-### 10.5 边界测试：`tokio::select!` 的 `biased` 模式与公平性（运行时饥饿）
+### 10.3 边界测试：`Stream` 的背压与缓冲区溢出（运行时内存增长）
 
 ```rust,compile_fail
-use tokio::sync::mpsc;
+use futures::stream::{self, StreamExt};
 
-async fn unfair_select() {
-    let (tx1, mut rx1) = mpsc::channel(10);
-    let (tx2, mut rx2) = mpsc::channel(10);
-
-    tokio::select! {
-        biased; // ❌ 运行时饥饿: 优先检查 rx1，若 rx1 始终有数据，rx2 饥饿
-        Some(v) = rx1.recv() => println!("1: {}", v),
-        Some(v) = rx2.recv() => println!("2: {}", v),
-        else => println!("no data"),
-    }
+async fn process() {
+    let s = stream::iter(0..1_000_000);
+    // ❌ 运行时问题: buffer_unordered 无界缓冲可能导致内存爆炸
+    s.map(|x| async move { x * 2 })
+     .buffer_unordered(1000)
+     .for_each(|x| async move { println!("{}", x); })
+     .await;
 }
+
+fn main() {}
 ```
 
-> **修正**: `tokio::select!` 默认**伪随机**选择就绪分支，保证长期公平性。`biased` 模式按声明顺序优先选择，适用于已知优先级的场景（如取消信号优先于工作项），但可能导致低优先级分支饥饿。常见错误：1) 不必要的 `biased`（默认随机足够）；2) `biased` 模式下高频率分支垄断执行；3) 忘记 `else` 分支（所有分支 futures 完成后 `select!` panic）。这与 Go 的 `select`（随机公平，无 biased 选项）或 Rust `futures::select!`（同样伪随机）类似——公平性是并发调度的重要属性，`biased` 是显式放弃公平的 opt-in 机制。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+> **修正**: `Stream::buffer_unordered(n)` 允许最多 `n` 个 future 同时执行，但**不限制总输入速率**。若生产者（`stream::iter`）速度快于消费者（`for_each`），中间结果在缓冲区累积，内存无限增长。**背压**（backpressure）解决：1) 使用有界 channel（`tokio::sync::mpsc::channel(cap)`）限制未处理项数；2) `Stream::ready_chunks(n)` 批量处理；3) 自定义 `Stream` 实现，在 `poll_next` 中返回 `Pending` 直到资源可用。Tokio 的 `Stream` 生态：`tokio_stream::wrappers` 将各种类型转为 Stream，`tokio::time::interval` 生成定时 Stream。这与 Reactive Streams（Java 的 `Flow` API，显式背压协议）或 Node.js 的 stream（自动背压 via `pause`/`resume`）不同——Rust 的 Stream 背压需显式设计。[来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Streams](https://docs.rs/tokio-stream/)]
 
-### 10.3 边界测试：`select!` 与 async 块中的借用跨越 await（编译错误）
+### 10.4 边界测试：async fn 在 trait 中的生命周期推断与实现约束（编译错误）
 
-```rust,compile_fail
-use std::pin::Pin;
-use std::future::Future;
+```rust,ignore
+trait AsyncTrait {
+    async fn method(&self) -> i32;
+}
 
-async fn task1() -> i32 { 1 }
-async fn task2() -> i32 { 2 }
+struct MyStruct;
 
-async fn bad_select() {
-    let mut data = vec![1, 2, 3];
-    let ref_mut = &mut data;
-    // ❌ 编译错误: 借用跨越 await 点（select! 中的 await）
-    tokio::select! {
-        _ = async { *ref_mut.push(4); } => {},
-        _ = task2() => {},
+impl AsyncTrait for MyStruct {
+    // ❌ 编译错误: async fn in trait 要求 RPITIT
+    // 当前稳定 Rust 已支持（1.75+），但以下模式仍可能失败
+    fn method(&self) -> impl std::future::Future<Output = i32> + '_ {
+        async { 42 }
     }
 }
 
 fn main() {}
 ```
 
-> **修正**: `tokio::select!` 并发等待多个 future，**第一个完成的被处理**。`select!` 中的每个分支是独立的 async 块，但 `select!` 宏展开后会在每个分支前插入 await 点。若外部变量以 `&mut` 借用并被多个分支使用，编译器拒绝——这可能导致数据竞争（虽然单线程调度，但编译器保守）。安全模式：1) 使用 `Arc<Mutex<T>>` 共享状态；2) 在 `select!` 前完成所有借用操作；3) 使用 `tokio::sync::mpsc` 通道传递数据。`select!` 与 Go 的 `select`（通道操作）或 Erlang 的 `receive`（消息匹配）类似——Rust 的编译期借用检查使并发模式更安全。[来源: [tokio Documentation](https://docs.rs/tokio/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html)]
-
-### 10.4 边界测试：返回局部变量的悬垂引用
-
-```rust,compile_fail
-fn get_ref() -> &i32 {
-    let x = 42;
-    // ❌ 编译错误: 返回局部变量的引用
-    &x
-}
-
-fn main() {}
-```
-
-> **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。
+> **修正**: **`async fn` in trait**（稳定于 1.75）：1) `trait T { async fn method(&self) -> i32; }` — trait 定义；2) `impl T for S { async fn method(&self) -> i32 { ... } }` — 实现。底层是 **RPITIT**（Return Position Impl Trait In Traits）：`async fn` 返回 `impl Future<Output = i32>`。限制：1) `async fn` 隐式捕获所有输入 lifetime；2) 不能混用 `async fn` 和返回具体 `Future` 类型；3) `dyn Trait` 不支持 `async fn`（返回类型大小未知）。`dyn Trait` 替代方案：1) `#[async_trait]` 宏（将 `async fn` 转为返回 `Pin<Box<dyn Future>>`）；2) `trait T { fn method(&self) -> impl Future<Output = i32>; }` + 手动 `Box::pin`（复杂）。这与 JavaScript 的 `async` 方法（接口中直接声明，无特殊限制）或 Kotlin 的 `suspend` 函数（类似，但编译器处理）不同——Rust 的 `async fn` in trait 是类型系统的重大扩展。[来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/21/async-fn-rpitit.html)] · [来源: [RPITIT](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)]

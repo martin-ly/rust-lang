@@ -10,9 +10,7 @@
 > **来源**: [Bloom, B.S. et al. — *Taxonomy of Educational Objectives: The Classification of Educational Goals*. Handbook I: Cognitive Domain. Longman, 1956 (revised 2001)]
 >
 > **来源**: [Krathwohl, D.R. — *A Revision of Bloom's Taxonomy: An Overview*. Theory into Practice, 41(4), 2002, pp.212-218]
->
 > **来源**: [Microsoft RustTraining — github.com/microsoft/RustTraining]
->
 > **来源**: [arxiv 2604.06331v1 — *Knowledge Markers (A/S/P) in Programming Education*]
 
 ## 📑 目录
@@ -74,8 +72,6 @@ mindmap
 
 ### 1.1 Krathwohl 知识维度（纵轴）
 
-> [来源: Krathwohl, D.R. (2002) *A Revision of Bloom's Taxonomy: An Overview*]
-
 | 维度 | 定义 | Rust 知识体系中的典型内容 | 可自动化程度 |
 |:---|:---|:---|:---:|
 | **A. 事实性知识** (Factual) | 术语、具体细节、基本元素的知识 | `&T` 语法、`Box::new`、`Result` 枚举变体、关键字列表 | 🟢 高 |
@@ -87,8 +83,6 @@ mindmap
 
 ### 1.2 Bloom 认知过程维度（横轴）
 
-> [来源: Bloom et al. (1956, revised 2001) *Taxonomy of Educational Objectives*]
-
 | 层级 | 认知动词 | Rust 典型表现 | 已有标注 |
 |:---|:---|:---|:---:|
 | **1. 记忆** (Remember) | 回忆、识别、列举 | 说出 `Copy` vs `Clone` 的区别、列举 `Vec` 的方法 | 部分 |
@@ -99,8 +93,6 @@ mindmap
 | **6. 创造** (Create) | 设计、构造、综合 | 设计新的类型安全 API、构造无锁数据结构 | ✅ 100% |
 
 ### 1.3 双维交叉的认知目标语法
-
-> [来源: 教育目标分类学标准表述 — Anderson & Krathwohl (2001)]
 
 每个交叉单元格的认知目标使用标准语法表示：
 
@@ -120,8 +112,6 @@ mindmap
 
 ### 2.1 L1 基础概念层映射
 
-> [来源: [Rust Reference] · [TRPL] · [Rustonomicon]]
-
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
 |:---|:---|:---|:---|:---|
 | **01_ownership** | F×Mem: `Drop` / `Copy` trait 名称 F×App: `mem::forget` 用法 | C×Und: 所有权唯一性心智模型 C×Ana: Move 语义 vs 浅拷贝分析 | P×App: 实现自定义 `Drop` P×Eva: 评估 `Rc` 引入的循环引用风险 | M×Und: 识别自身对 Move 的误解模式 |
@@ -130,8 +120,6 @@ mindmap
 | **04_type_system** | F×Mem: `enum` / `struct` / `union` 定义 F×App: 模式匹配语法 | C×Und: ADT = 和类型 + 积类型 C×Ana: 分析 `dyn Trait` vs `impl Trait` 差异 | P×App: 设计类型状态 API P×Eva: 评估泛型约束的完备性 | M×Cre: 设计类型驱动的错误消除策略 |
 
 ### 2.2 L2 进阶概念层映射
-
-> [来源: [Rust Reference] · [TRPL] · [Rust Internals]]
 
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
 |:---|:---|:---|:---|:---|
@@ -142,8 +130,6 @@ mindmap
 
 ### 2.3 L3 高级概念层映射
 
-> [来源: [Rust Reference] · [Rustonomicon] · [Tokio 文档]]
-
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
 |:---|:---|:---|:---|:---|
 | **01_concurrency** | F×Mem: `Send` / `Sync` auto trait 定义 F×App: `Mutex::lock` / `thread::spawn` 用法 | C×Und: fearless concurrency = 类型系统保证 C×Ana: 分析 `Atomic` memory ordering 的影响 | P×App: 实现无锁数据结构 P×Eva: 评估 crossbeam vs std::sync 选型 | M×Cre: 设计并发安全的学习验证实验 |
@@ -152,8 +138,6 @@ mindmap
 | **04_macros** | F×Mem: `macro_rules!` / `proc_macro` API F×App: 声明宏匹配规则编写 | C×Und: 卫生宏 = gensym 的 Rust 实现 C×Ana: 分析宏展开与类型检查的顺序 | P×App: 实现自定义 derive 宏 P×Eva: 评估宏 vs 泛型的可维护性 | M×Cre: 设计 DSL 嵌入策略 |
 
 ### 2.4 L4 形式化层映射
-
-> [来源: [RustBelt POPL 2018] · [Oxide] · [线性逻辑 Girard 1987]]
 
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
 |:---|:---|:---|:---|:---|
@@ -164,8 +148,6 @@ mindmap
 
 ### 2.5 L5-L7 层映射
 
-> [来源: [Microsoft RustTraining] · [Stanford CS520] · [Rust Internals]]
-
 | 层级 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
 |:---|:---|:---|:---|:---|
 | **L5 对比层** | F×Mem: 各语言特性对照表 F×App: 编写跨语言等价代码 | C×Und: 范式差异的本体论根源 C×Ana: 分析 Rust vs C++ 内存模型同构性 | P×App: 执行 C++→Rust 范式转换 P×Eva: 评估技术选型的形式化论据 | M×Eva: 评估自身语言偏见的认知影响 |
@@ -175,8 +157,6 @@ mindmap
 ---
 
 ## 三、核心概念双维定位详表
-
-> [来源: 本表基于 `concept/` 全部 58 个核心概念文件的内容分析]
 
 以下表格将交叉单元格压缩为**主导维度**（该概念文件最主要培养的知识类型和认知层级），用于快速定位：
 
@@ -205,8 +185,6 @@ mindmap
 ---
 
 ## 四、双维矩阵与 A/S/P 标记的整合
-
-> [来源: [Microsoft RustTraining] · [arxiv 2604.06331v1]]
 
 A/S/P 标记（Application / Structure / Procedure）是双维矩阵的**简化应用层映射**，将 4×6 矩阵压缩为 3 个 actionable 标签：
 
@@ -259,8 +237,6 @@ graph LR
 
 ## 五、认知路径规划应用
 
-> [来源: 认知路径设计参照 Bruner (1966) 螺旋式课程理论 · Vygotsky 最近发展区理论]
-
 双维矩阵可用于**个性化学习路径规划**。以下是针对不同背景的推荐路径：
 
 ### 路径 1：C++ 背景开发者
@@ -296,8 +272,6 @@ graph LR
 ---
 
 ## 六、与现有 Bloom 标注的对照
-
-> [来源: `concept/` 现有 Bloom 标注统计 — 45/45 文件 100% 覆盖]
 
 | 现有 Bloom 层级 | 主要对应双维交叉 | 知识维度分布 | A/S/P 分布 |
 |:---:|:---|:---|:---|

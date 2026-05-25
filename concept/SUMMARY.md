@@ -47,6 +47,8 @@
 - [L3 高级概念](03_advanced/README.md)
   - [Concurrency（并发模型）](03_advanced/01_concurrency.md)
   - [Async/Await（异步编程）](03_advanced/02_async.md)
+  - [Async 高级主题](03_advanced/02_async_advanced.md)
+  - [Async 模式](03_advanced/02_async_patterns.md)
   - [Unsafe Rust](03_advanced/03_unsafe.md)
   - [Macros（宏系统）](03_advanced/04_macros.md)
 

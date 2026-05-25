@@ -719,6 +719,7 @@ fn simd_semantics() {
 ---
 
 ## 3. 设计模式语义分类
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 创建型模式语义
@@ -1885,6 +1886,7 @@ fn memory_model_semantics() {
 ---
 
 ## 5. 异步语义模型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 Future 语义
@@ -2810,6 +2812,7 @@ impl Crdt for GCounter {
 ---
 
 ## 7. 运行时行为语义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 7.1 内存模型语义
@@ -3362,6 +3365,7 @@ async fn batch_async_io(urls: Vec<&str>) -> Vec<Result<String, reqwest::Error>> 
 ---
 
 ## 8. 形式化语义表示
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 操作语义
@@ -3663,6 +3667,7 @@ impl Session<Privileged> {
 ---
 
 ## 9. 语义分析工具
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 9.1 静态分析语义
@@ -4042,6 +4047,7 @@ fn no_memory_leak() {
 ---
 
 ## 10. 总结与展望
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 10.1 语义框架回顾
@@ -4108,6 +4114,7 @@ docs/rust-ownership-decidability/
 ---
 
 ## 附录：符号说明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 符号 | 含义 |
@@ -4130,6 +4137,7 @@ docs/rust-ownership-decidability/
 ---
 
 ## 参考文献
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. Harper, R. (2016). *Practical Foundations for Programming Languages*. Cambridge University Press.
@@ -4203,7 +4211,6 @@ docs/rust-ownership-decidability/
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
-
 
 > **[来源: TRPL - The Rust Programming Language]**
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
@@ -5682,4 +5689,3 @@ docs/rust-ownership-decidability/
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

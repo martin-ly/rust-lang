@@ -18,7 +18,6 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](#rust-执行模型同构性矩阵同步--异步--并发--并行)
   - [📑 目录](#-目录)
@@ -70,8 +69,6 @@
 ---
 
 ## 零、TL;DR —— 执行模型速查
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模型            Rust 实现               理论根基                Go 对应              同构度    关键差异
@@ -89,8 +86,6 @@ Actor          actix / ractor          Hewitt Actor 1973       无原生        
 ---
 
 ## 一、权威来源与同构性方法论
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 同构性的定义
 
@@ -106,7 +101,6 @@ Actor          actix / ractor          Hewitt Actor 1973       无原生        
 
 ### 1.2 执行模型分类学
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 执行模型可按三个维度分类：
 
@@ -134,8 +128,6 @@ graph TD
 ---
 
 ## 二、执行模型总览矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 执行模型 | 调度方式 | 内存模型 | 通信机制 | Rust 代表库 | Go 对应 | 理论根基 |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -150,8 +142,6 @@ graph TD
 ---
 
 ## 三、同步模型
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: TRPL §16, Rust Reference §18]：OS 线程
 
@@ -177,7 +167,6 @@ handle.join().unwrap();
 
 ### 3.2 与 Go M:N 调度的对比
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特征 | Rust 1:1 | Go M:N (GMP) |
 |:---|:---|:---|
@@ -194,8 +183,6 @@ handle.join().unwrap();
 ---
 
 ## 四、异步模型
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: RFC 2394, Async Book, Tokio Tutorial]：Future 与无栈协程
 
@@ -244,7 +231,6 @@ impl Future for ExampleFuture {
 
 ### 4.2 Poll 契约与 Waker 机制
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **Poll 契约**: `Future::poll` 必须满足：
 >
@@ -275,11 +261,9 @@ sequenceDiagram
 ```
 
 > **认知功能**: 可视化 Future 的惰性执行与唤醒协议，揭示异步调度的核心机制。使用建议：确保在 `Pending` 路径中正确注册 Waker，避免在 `poll` 中执行阻塞操作。关键洞察：Rust 异步的本质不是"运行"而是"被询问是否就绪"——这与 goroutine 的立即调度形成根本语义差异。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.3 与 Go goroutine 的本质差异
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特征 | Rust async/await | Go goroutine |
 |:---|:---|:---|
@@ -296,8 +280,6 @@ sequenceDiagram
 ---
 
 ## 五、并行模型
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: rayon docs, Blumofe 1999]：Fork-Join 与工作窃取
 
@@ -337,8 +319,6 @@ fn parallel_merge_sort<T: Ord + Send>(data: &mut [T]) {
 ---
 
 ## 六、CSP 模型
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Hoare 1978, Milner π-Calculus 1992]：Channel 与所有权转移
 
@@ -373,7 +353,6 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 
 ### 6.2 与 Go channel 的同构与差异
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特征 | Rust channel | Go channel |
 |:---|:---|:---|
@@ -390,8 +369,6 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 ---
 
 ## 七、Actor 模型
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Hewitt 1973, Actix docs]：命名实体与异步邮箱
 
@@ -427,7 +404,6 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 
 ### 7.2 Actor vs CSP 的形式化区分
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | CSP | Actor |
 |:---|:---|:---|
@@ -443,8 +419,6 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 ---
 
 ## 八、内存共享模型
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Boehm & Adve PLDI 2008, Rust Reference §18.4]：原子性与 happens-before
 
@@ -464,7 +438,6 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 
 ### 8.2 Acquire-Release 的语义精化
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // 惯用：Release-Acquire 建立 happens-before
@@ -490,8 +463,6 @@ fn consumer() {
 ---
 
 ## 九、事件驱动模型
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Stevens UNP, Tokio Internals]：Reactor 与 Proactor
 
@@ -507,14 +478,11 @@ Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio
 ---
 
 ## 十、Rust ↔ Go
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: rustvsgo.com, SPAA 2024] 执行模型全面对比
 
 ### 10.1 并发模型哲学
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 维度 | Rust | Go |
 |:---|:---|:---|
@@ -526,8 +494,6 @@ Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio
 | 生态复杂度 | 高（需选择 Tokio/async-std/rayon） | 低（标准库即完整） |
 
 ### 10.2 性能特征对比
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 场景 | Rust | Go | 理论解释 |
 |:---|:---|:---|:---|
@@ -543,9 +509,6 @@ Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio
 
 ## 十一、async/await / CPS / 状态机
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
-> [来源: RFC 2394, Danvy & Filinski 1990] 三重等价性
 
 > **定理 T-EM-003（三重等价性）**: 对任意 well-typed 的 `async fn`，以下三种形式在「poll 语义」下行为等价：
 >
@@ -575,8 +538,6 @@ CPS:               fn f(k: impl FnOnce(T) -> R) -> R {
 ---
 
 ## 十二、执行模型选择决策树
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 graph TD
@@ -603,17 +564,12 @@ graph TD
 ```
 
 > **认知功能**: 提供工程实践中的执行模型选型决策路径，将抽象理论转化为可操作的判断流程。使用建议：先判断任务类型（CPU/I/O/状态机/共享状态），再按数据依赖、连接规模、容错需求逐层细化。关键洞察：不存在"最佳"执行模型，只有与问题特征最匹配的模型——选型错误是并发系统性能瓶颈的常见根因。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 十三、思维表征体系
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 13.1 执行模型维度雷达图
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 radar
@@ -627,11 +583,8 @@ radar
 ```
 
 > **认知功能**: 多维量化对比不同语言/运行时的执行模型特征，将抽象权衡转化为可直观比较的形状。使用建议：用雷达图识别技术选型的核心 trade-off——Rust 强在内存效率与并行表达力，Go 强在调度透明性与生态一致性。关键洞察：语言设计哲学直接决定雷达图轮廓——无 GC 带来内存效率优势，但也以启动速度和调度透明性为代价。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 13.2 内存-计算-通信 三维模型空间
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph TD
@@ -658,17 +611,12 @@ graph TD
 ```
 
 > **认知功能**: 将执行模型映射到"内存-计算-通信"正交维度，帮助理解不同语言抽象在模型空间中的占据位置。使用建议：当系统混合多种并发模型时，用三维空间定位各组件的交互界面与潜在冲突点。关键洞察：Rust 提供横跨整个三维空间的原语（thread/async/channel/rayon），而 Go 的 goroutine 主要集中于"消息传递+异步"象限，体现了不同的设计哲学。[来源: 💡 原创分析]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 十四、定理推理链
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理一致性矩阵（执行模型同构性专集）
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 编号 | 定理 | 前提 | 结论 | L4 公理依赖 | 失效条件 | 错误码映射 |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -682,12 +630,8 @@ graph TD
 ---
 
 ## 十五、相关概念链接（L0-L7 映射）
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L0-L7 纵向映射
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
@@ -700,8 +644,6 @@ graph TD
 | 事件驱动 | — | — | `mio` / `tokio` | Reactor 模式 | vs Go netpoller | 网络框架 | io_uring |
 
 ### 相关概念文件
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [L3 并发编程](../03_advanced/01_concurrency.md) —— Send/Sync / Mutex / 内存模型
 - [L3 异步编程](../03_advanced/02_async.md) —— Future / Pin / async/await
@@ -715,7 +657,6 @@ graph TD
 ---
 
 > **权威来源**: [Rust Async Book](https://rust-lang.github.io/async-book/) · [Tokio Tutorial](https://tokio.rs/tokio/tutorial/async) · [Hoare *Communicating Sequential Processes*](https://doi.org/10.1145/359576.359585) · [Milner *The Polyadic π-Calculus*](https://doi.org/10.1007/BFb0030902) · [Hewitt et al. *A Universal Modular ACTOR Formalism*](https://doi.org/10.1145/1624775.1624804) · [Boehm & Adve PLDI 2008](https://doi.org/10.1145/1375581.1375595) · [Blumofe & Leiserson *Work Stealing*](https://doi.org/10.1145/324133.324234) · [SPAA 2024 Rust Parallelism](https://www.eecg.utoronto.ca/~mcj/talks/2024.rpb.slides.spaa.pdf)
->
 > **Rust 版本**: 1.95.0 stable (Edition 2024)
 > **文档版本**: 1.0
 > **最后更新**: 2026-05-21
@@ -725,133 +666,17 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **相关文件**: [范式矩阵](./03_paradigm_matrix.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)
 

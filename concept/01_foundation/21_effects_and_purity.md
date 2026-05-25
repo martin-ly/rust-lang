@@ -22,7 +22,6 @@
 
 ### 2.1 定义
 
-> **[来源: Quine 1960 — Word and Object] · [Haskell Wiki — Referential Transparency]** ✅
 
 一个表达式是**引用透明**的，当且仅当：在程序的任何位置，该表达式都可以被其计算结果替换，而不改变程序的行为。
 
@@ -59,7 +58,6 @@
 
 ### 3.1 副作用的通用分类
 
-> **[来源: Moggi 1989 — Computational Lambda-Calculus and Monads] · [Peyton Jones & Wadler 1993 — Imperative Functional Programming]** ✅
 
 | 副作用类别 | 描述 | 典型操作 | Rust 表达 |
 |:---|:---|:---|:---|
@@ -118,7 +116,6 @@ fn process_unsafe(ptr: *mut i32) {  // unsafe 块表示未定义效果
 
 ### 4.1 `&mut T` 作为写效果（Write Effect）
 
-> **[来源: Rust Reference — §4.1.9 Borrowing] · [RustBelt POPL 2018, §4]** ✅
 
 在 Rust 中，任何函数若要修改外部状态，必须显式地接受 `&mut T` 参数：
 
@@ -149,7 +146,6 @@ increment(&mut x); // 调用者明确知道 x 会被修改
 
 ### 4.2 `unsafe` 作为未定义效果（Undefined Effect）
 
-> **[来源: Rustonomicon] · [Rust Reference — §7.9]** ✅
 
 `unsafe` 块标记了编译器无法验证的副作用边界：
 
@@ -169,7 +165,6 @@ unsafe fn raw_access(ptr: *const i32, offset: isize) -> i32 {
 
 ### 4.3 `Result<T, E>` 作为异常效果（Exception Effect）
 
-> **[来源: Rust Reference — §4.5.6 The question mark operator] · [RFC 0243]** ✅
 
 Rust 将异常效果编码在返回类型中：
 
@@ -198,7 +193,6 @@ fn compose() -> Result<i32, Error> {
 
 ### 4.4 `async` 作为并发效果（Concurrency Effect）
 
-> **[来源: RFC 2394] · [ASB — Asynchronous Programming in Rust]** ✅
 
 `async fn` 将并发效果编码在返回类型中：
 
@@ -222,7 +216,6 @@ let data = fetch_data().await;
 
 ### 5.1 纯函数的定义
 
-> **[来源: Wikipedia: Pure function] · [Haskell Wiki — Pure functions]** ✅
 
 一个函数是纯函数，当且仅当：
 
@@ -271,7 +264,6 @@ fn sum(data: &[i32]) -> i32 {
 
 ### 6.1 两种范型的核心差异
 
-> **[来源: Harper PFPL, Part I] · [Wadler 1995 — Monads for Functional Programming]** ✅
 
 | 维度 | 命令式范型（C/C++/Java/Rust） | 函数式范型（Haskell/ML） |
 |:---|:---|:---|
@@ -430,7 +422,6 @@ fn closure_effect() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Moggi 1989 — Computational Lambda-Calculus and Monads](https://www.disi.unige.it/person/MoggiE/ftp/ic.pdf) · [Wadler 1992 — The Essence of Functional Programming](https://dl.acm.org/doi/10.1145/143165.143169) · [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
->
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24

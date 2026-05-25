@@ -80,6 +80,7 @@
 ---
 
 ## 2. 架构对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 高层架构
@@ -171,6 +172,7 @@
 ---
 
 ## 3. 形式化模型对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 编程语言抽象
@@ -228,6 +230,7 @@ fn get_unchecked_mut<T>(
 - Place 访问 (x.f, x[i] 等)
 
 ### 3.2 内存模型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **RustBelt 内存模型**:
@@ -263,6 +266,7 @@ let y = x + x;  // 溢出!
 ```
 
 ### 3.3 类型系统
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **RustBelt 类型**:
@@ -301,9 +305,11 @@ let y = x + x;  // 溢出!
 ---
 
 ## 4. 验证方法对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 证明自动化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **RustBelt: 完全手动**
@@ -349,6 +355,7 @@ fn push(&mut self, value: T) { ... }
 | 专业知识 | 需要 Iris 专家 | 需要形式化基础 |
 
 ### 4.2 用户工作流
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **RustBelt 工作流**:
@@ -388,9 +395,11 @@ fn push(&mut self, value: T) { ... }
 ---
 
 ## 5. 能力对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 功能矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 能力 | RustBelt | RefinedRust |
@@ -407,6 +416,7 @@ fn push(&mut self, value: T) { ... }
 | **证明复用** | 困难 | 模块化 |
 
 ### 5.2 限制对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **RustBelt 限制**:
@@ -426,9 +436,11 @@ fn push(&mut self, value: T) { ... }
 ---
 
 ## 6. 设计决策分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 为什么 RefinedRust 支持 Places
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **问题**: Rust 的 "places" (也称为 lvalues) 是什么？
@@ -459,6 +471,7 @@ arr[index] = value;      // arr[index] 是 place
 - 需要处理 field offsets、数组索引等
 
 ### 6.2 为什么 RustBelt 使用 λRust
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **设计决策原因**:
@@ -474,6 +487,7 @@ arr[index] = value;      // arr[index] 是 place
 - ❌ 难以扩展到真实代码验证
 
 ### 6.3 自动化 vs 基础性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **RustBelt 选择**: 基础性 + 手动
@@ -496,9 +510,11 @@ arr[index] = value;      // arr[index] 是 place
 ---
 
 ## 7. 协作关系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 技术传承
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **RustBelt → RefinedRust**:
@@ -526,6 +542,7 @@ RefinedC (2021)
 ```
 
 ### 7.2 当前协作
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **共同作者**: Ralf Jung
@@ -546,6 +563,7 @@ RefinedC (2021)
 ---
 
 ## 8. 选择指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **选择 RustBelt 如果您**:
@@ -571,6 +589,7 @@ RefinedC (2021)
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **RustBelt Paper**
@@ -770,4 +789,3 @@ RefinedC (2021)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

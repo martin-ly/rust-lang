@@ -13,7 +13,6 @@
 
 ## 📑 目录
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [微服务架构模式 (Microservice Architecture Patterns)](#微服务架构模式-microservice-architecture-patterns)
   - [📑 目录](#-目录)
@@ -45,7 +44,6 @@
 
 ## 一、引言
 
-> [来源: [The Twelve-Factor App methodology](https://12factor.net/)]
 
 ```text
 Rust 微服务核心竞争力:
@@ -89,11 +87,9 @@ graph TD
 
 ## 二、服务发现与注册
 
-> [来源: [Microservices Patterns (Chris Richardson)](https://microservices.io/patterns/server-side-discovery.html)]
 
 ### 2.1 Consul / etcd 客户端集成
 
-> [来源: [Consul Documentation](https://developer.hashicorp.com/consul/docs)] · [来源: [etcd Documentation](https://etcd.io/docs/)]
 
 ```rust,compile_fail
 use consul::{Client, Config};
@@ -128,7 +124,6 @@ async fn discover_service() -> Result<Vec<String>, Box<dyn std::error::Error>> {
 
 ### 2.2 Tower::discover 动态服务列表
 
-> [来源: [Tower Docs](https://docs.rs/tower/latest/tower/)]
 
 Tower 的 `Discover` trait 将服务发现抽象为异步流，支持动态上下线感知：
 
@@ -165,7 +160,6 @@ impl Stream for ConsulDiscover {
 
 ## 三、API 网关模式
 
-> [来源: [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway)]
 
 API 网关是微服务的统一入口，承担路由、认证、限流、熔断等横切关注点。
 
@@ -207,7 +201,6 @@ async fn rate_limit_layer<B>(req: Request<B>, next: Next<B>)
 }
 ```
 
-> [来源: [Axum Docs](https://docs.rs/axum/latest/axum/)]
 
 | 网关职责 | Rust 实现 | 关键 Crate |
 |:---|:---|:---|
@@ -225,11 +218,9 @@ async fn rate_limit_layer<B>(req: Request<B>, next: Next<B>)
 
 ## 四、熔断器
 
-> [来源: [Release It! (Michael Nygard)](https://pragprog.com/titles/mnee2/release-it-second-edition/)]
 
 ### 4.1 状态机模型 (Closed/Open/Half-Open)
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 stateDiagram-v2
@@ -247,11 +238,9 @@ stateDiagram-v2
 | **Half-Open** | 允许少量探测请求 | Open 持续一段时间后 |
 
 > **熔断核心原理**: 熔断器不是"重试"——它是**快速失败**机制，将同步阻塞转换为瞬时错误，保护线程池和连接池不被耗尽。
-> [来源: [Release It! (Michael Nygard)](https://pragprog.com/titles/mnee2/release-it-second-edition/)]
 
 ### 4.2 failsafe crate 实现
 
-> [来源: [failsafe crate docs](https://docs.rs/failsafe/latest/failsafe/)]
 
 ```rust,ignore
 use failsafe::{Config, CircuitBreaker, Error};
@@ -309,7 +298,6 @@ impl CircuitBreaker {
 }
 ```
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **状态机洞察**: 熔断器的本质是**有状态代理**——将无状态的 HTTP 客户端包装为状态感知的服务拦截器。Rust 的 `async fn` + `RwLock` 使状态转换无数据竞争。
 > [来源: [failsafe crate](https://docs.rs/failsafe/latest/failsafe/)]
@@ -318,7 +306,6 @@ impl CircuitBreaker {
 
 ## 五、重试与退避
 
-> [来源: [AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)] · [来源: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)]
 
 重试必须与熔断器配合使用，避免对故障服务造成"重试风暴"。
 
@@ -351,7 +338,6 @@ let client = tower::ServiceBuilder::new()
     .service(http_client);
 ```
 
-> [来源: [Tower Docs](https://docs.rs/tower/latest/tower/retry/index.html)]
 
 | 退避策略 | 延迟计算 | 适用场景 | 风险 |
 |:---|:---|:---|:---|
@@ -367,7 +353,6 @@ let client = tower::ServiceBuilder::new()
 
 ## 六、Saga 模式
 
-> [来源: [Microservices Patterns (Chris Richardson)](https://microservices.io/patterns/data/saga.html)]
 
 Saga 处理跨服务的分布式事务，通过**补偿操作**保证最终一致性。
 
@@ -418,7 +403,6 @@ impl Saga {
 }
 ```
 
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | Saga 类型 | 协调方式 | 复杂度 | Rust 实现 |
 |:---|:---|:---:|:---|
@@ -426,13 +410,11 @@ impl Saga {
 | 编排式 (Orchestration) | 中心 Saga 协调器 | 高 | `JoinSet` + 状态机 |
 
 > **Saga 洞察**: Saga 的补偿链是**不可逆操作的安全网**——每个正向操作必须设计对应的逆向操作。Rust 的 `Drop` 语义可类比：Saga 的补偿是业务层的 "Drop"。
-> [来源: [Microservices Patterns (Chris Richardson)](https://microservices.io/patterns/data/saga.html)]
 
 ---
 
 ## 七、事件溯源
 
-> [来源: [Kafka Documentation](https://kafka.apache.org/documentation/)] · [来源: [Microservices Patterns (Chris Richardson)](https://microservices.io/patterns/data/event-sourcing.html)]
 
 事件溯源将系统状态存储为**不可变事件流**，而非当前状态快照。
 
@@ -471,7 +453,6 @@ fn rebuild_order_state(events: &[OrderEvent]) -> Option<OrderState> {
 }
 ```
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 特性 | 优势 | 挑战 |
 |:---|:---|:---|
@@ -487,7 +468,6 @@ fn rebuild_order_state(events: &[OrderEvent]) -> Option<OrderState> {
 
 ## 八、CQRS
 
-> [来源: [Microservices Patterns (Chris Richardson)](https://microservices.io/patterns/data/cqrs.html)] · [来源: [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)]
 
 CQRS (Command Query Responsibility Segregation) 将**写模型**与**读模型**分离，各自优化。
 
@@ -527,7 +507,6 @@ async fn get_order_query(redis: &mut redis::aio::MultiplexedConnection, order_id
 }
 ```
 
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 维度 | 命令端 (Command) | 查询端 (Query) |
 |:---|:---|:---|
@@ -543,7 +522,6 @@ async fn get_order_query(redis: &mut redis::aio::MultiplexedConnection, order_id
 
 ## 九、服务网格 Sidecar
 
-> [来源: [Kubernetes Documentation](https://kubernetes.io/docs/concepts/architecture/)] · [来源: [Envoy Proxy Documentation](https://www.envoyproxy.io/docs/envoy/latest/)]
 
 Rust 在服务网格中的代表性实现是 **Linkerd2-proxy**，一个零拷贝、内存安全的 sidecar 代理。
 
@@ -577,7 +555,6 @@ Rust sidecar 优势:
 
 ## 十、综合示例
 
-> [来源: [Axum Docs](https://docs.rs/axum/latest/axum/)] · [来源: [Tower Docs](https://docs.rs/tower/latest/tower/)]
 
 ```rust,ignore
 use axum::{routing::post, Router, http::StatusCode, Json};
@@ -660,7 +637,6 @@ async fn main() {
 }
 ```
 
-> [来源: [Kafka Documentation](https://kafka.apache.org/documentation/)]
 
 > **综合示例洞察**: 该示例展示了 Rust 微服务的**组合式架构**——Axum 路由 + Tower 重试 + 手写熔断 + Kafka 事件发布。每个组件都是独立、可测试、可替换的模块。
 > [来源: [Axum Examples](https://github.com/tokio-rs/axum/tree/main/examples)]
@@ -669,7 +645,6 @@ async fn main() {
 
 ## 十一、反命题与边界
 
-> [来源: [The Twelve-Factor App methodology](https://12factor.net/)] · [来源: [Microservices Patterns (Chris Richardson)](https://microservices.io/book/)]
 
 ```text
 Rust 微服务并非银弹:
@@ -685,7 +660,6 @@ Rust 微服务并非银弹:
       └── 否。重试风暴可能加剧故障。缓解: 退避 + 限流
 ```
 
-> [来源: [Release It! (Michael Nygard)](https://pragprog.com/titles/mnee2/release-it-second-edition/)]
 
 > **边界洞察**: Rust 微服务的边界不是技术边界，而是**组织边界**——当团队规模、技能储备不足时，性能优势无法抵消开发成本。
 > [来源: [Microservices Prerequisites (Martin Fowler)](https://martinfowler.com/bliki/MicroservicePrerequisites.html)]
@@ -694,7 +668,6 @@ Rust 微服务并非银弹:
 
 ## 十二、常见陷阱
 
-> [来源: [AWS Architecture Blog](https://aws.amazon.com/blogs/architecture/)] · [来源: [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/patterns/)]
 
 ```text
 陷阱 1: 网关层无超时  →  ❌ 永久阻塞  ✅ tokio::time::timeout(...)
@@ -704,7 +677,6 @@ Rust 微服务并非银弹:
 陷阱 5: CQRS 双写不一致→  ❌ 数据丢失  ✅ Outbox 模式同一事务写入
 ```
 
-> [来源: [Google SRE Book](https://sre.google/sre-book/table-of-contents/)] · [来源: [Designing Data-Intensive Applications (Martin Kleppmann)](https://dataintensive.net/)]
 
 > **陷阱总结**: 微服务的陷阱多与**分布式系统的固有复杂性**相关，而非 Rust 特有。Rust 通过类型安全减少了一类错误，但设计层面的陷阱仍需架构纪律。
 > [来源: [Designing Data-Intensive Applications (Martin Kleppmann)](https://dataintensive.net/)]
@@ -713,7 +685,6 @@ Rust 微服务并非银弹:
 
 ## 十三、来源
 
-> [来源: [Microservices Patterns (Chris Richardson)](https://microservices.io/book/)] · [来源: [Kubernetes Documentation](https://kubernetes.io/docs/home/)] · [来源: [Envoy Proxy Documentation](https://www.envoyproxy.io/docs/envoy/latest/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -732,7 +703,6 @@ Rust 微服务并非银弹:
 
 ## 相关概念
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [事件驱动架构](./32_event_driven_architecture.md) — 事件总线、消息队列、Reactive Streams
 - [分布式系统](./18_distributed_systems.md) — gRPC、Raft、Actor 模型
@@ -756,178 +726,95 @@ Rust 微服务并非银弹:
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ## 十、边界测试：微服务模式的编译错误
 

@@ -17,9 +17,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [高级类型系统：从关联类型到类型级编程](#高级类型系统从关联类型到类型级编程)
   - [📑 目录](#-目录)
@@ -56,13 +54,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 impl Trait 的演进
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
 // impl Trait: 隐藏具体类型，暴露行为
@@ -107,7 +102,6 @@ trait Foo {
 
 ### 1.2 Const Generics
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
 // Const Generics: 泛型参数可以是常量值
@@ -163,7 +157,6 @@ impl<T, const R: usize, const C: usize> Matrix<T, R, C> {
 
 ### 1.3 类型推断与约束求解
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Rust 的类型推断机制:
@@ -198,14 +191,9 @@ Rust 的类型推断机制:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 impl Trait 在参数位置
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // impl Trait 参数 vs 泛型参数的对比
@@ -250,7 +238,6 @@ trait Parser {
 
 ### 2.2 Const Generics 实战
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // Const Generics 实战示例
@@ -313,7 +300,6 @@ impl<T: Copy, const N: usize> Stack<T, N> {
 
 ### 2.3 类型别名与类型族
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
 // 类型别名: 简化复杂类型
@@ -361,10 +347,6 @@ impl AddOne for std::marker::U0 { type Result = std::marker::U1; }
 ---
 
 ## 三、类型系统模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 特性 → 代码模式
@@ -401,14 +383,9 @@ impl AddOne for std::marker::U0 { type Result = std::marker::U1; }
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -431,7 +408,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 递归类型限制
@@ -471,10 +447,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: impl Trait 参数与返回混淆
@@ -523,7 +495,6 @@ graph TD
 
 ## 七、C++ 运算符重载/类型转换 vs Rust Trait 系统
 
-> **[来源: C++ Standard — §13.5 Overloaded operators] · [Rust Reference — §4.2.3 Operator expressions] · [TRPL — Ch. 19.2]** ✅
 
 ### 7.1 运算符重载机制对比
 
@@ -708,7 +679,6 @@ impl Container for BadWrapper {
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -721,10 +691,6 @@ impl Container for BadWrapper {
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统基础
 - [Generics](./02_generics.md) — 泛型系统
@@ -746,21 +712,15 @@ impl Container for BadWrapper {
 
 ## 权威来源索引
 
-> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
 > **补充来源**
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：impl Trait 的自动 trait 捕获规则（编译错误）
 

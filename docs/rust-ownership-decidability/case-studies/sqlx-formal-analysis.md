@@ -70,9 +70,11 @@ SQLx是Rust的异步SQL框架，提供:
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 宏扩展过程
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 2.1 (query!宏)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -93,6 +95,7 @@ let users = sqlx::query!("SELECT id, name FROM users")
 ```
 
 ### 定理 2.1 (编译时验证)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > SQL错误在编译时捕获。
@@ -117,9 +120,11 @@ sqlx::query!("SELECT name FROM users");
 ∎
 
 ### 2.2 类型推导
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 2.2 (结果类型推导)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > 宏自动生成与查询结果匹配的类型。
@@ -147,12 +152,15 @@ let row = sqlx::query!("SELECT id, name FROM users WHERE id = $1", 1i32)
 ---
 
 ## 3. 连接池管理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 获取与释放
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 3.1 (Pool)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -163,6 +171,7 @@ pub struct Pool<DB: Database> {
 ```
 
 ### 定理 3.1 (连接获取)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > `Pool::acquire` 返回可用的数据库连接。
@@ -193,9 +202,11 @@ impl<DB: Database> Pool<DB> {
 ∎
 
 ### 3.2 生命周期管理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定理 3.2 (自动释放)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > 连接在drop时自动返回池。
@@ -223,12 +234,15 @@ impl<DB: Database> Drop for PoolConnection<DB> {
 ---
 
 ## 4. 查询接口
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 query_as
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定义 4.1 (FromRow)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -238,6 +252,7 @@ trait FromRow<'r, R: Row> {
 ```
 
 ### 定理 4.1 (结构化映射)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > `query_as!` 自动映射到自定义类型。
@@ -265,6 +280,7 @@ let users: Vec<User> = sqlx::query_as!(User, "SELECT id, name FROM users")
 ∎
 
 ### 4.2 fetch/fetch_one/fetch_all
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 方法 | 返回 | 说明 |
@@ -275,6 +291,7 @@ let users: Vec<User> = sqlx::query_as!(User, "SELECT id, name FROM users")
 | `fetch_optional` | `Result<Option<T>, Error>` | 0或1行 |
 
 ### 定理 4.2 (流式处理)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > `fetch` 返回Stream，支持大结果集处理。
@@ -301,12 +318,15 @@ while let Some(row) = rows.try_next().await? {
 ---
 
 ## 5. 事务语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 ACID保证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 5.1 (Transaction)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -317,6 +337,7 @@ pub struct Transaction<'c, DB: Database> {
 ```
 
 ### 定理 5.1 (原子性)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > 事务内的操作要么全部提交，要么全部回滚。
@@ -343,9 +364,11 @@ async fn transfer(pool: &Pool<Postgres>) -> Result<(), Error> {
 ∎
 
 ### 5.2 嵌套事务
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定理 5.2 (Savepoint)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > 支持嵌套事务(savepoint)。
@@ -378,9 +401,11 @@ tx.commit().await?;
 ---
 
 ## 6. 迁移系统
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定义 6.1 (Migration)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -390,6 +415,7 @@ sqlx::migrate!("./migrations")
 ```
 
 ### 定理 6.1 (迁移原子性)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 每个迁移在事务中执行。
@@ -405,9 +431,11 @@ sqlx::migrate!("./migrations")
 ---
 
 ## 7. 反例与最佳实践
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 反例 7.1 (SQL注入)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -422,6 +450,7 @@ sqlx::query!("SELECT * FROM users WHERE name = $1", user_input)
 ```
 
 ### 反例 7.2 (忘记await)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -434,6 +463,7 @@ let result = sqlx::query!("SELECT * FROM users").fetch_all(&pool).await?;
 ```
 
 ### 反例 7.3 (连接泄漏)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -453,6 +483,7 @@ tokio::time::sleep(Duration::from_secs(60)).await;
 ---
 
 ## 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **SQLx Contributors.** (2024). *SQLx Documentation*. <https://docs.rs/sqlx/>
@@ -574,4 +605,3 @@ tokio::time::sleep(Duration::from_secs(60)).await;
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

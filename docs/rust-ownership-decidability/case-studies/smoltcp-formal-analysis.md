@@ -59,6 +59,7 @@ Smoltcp是专为嵌入式系统设计的TCP/IP协议栈：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 TCP-STACK-1 ( 协议栈组成 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -72,6 +73,7 @@ $$
 - $\text{Device}$: 硬件设备抽象
 
 ### 定义 TCP-STACK-2 ( 接口状态 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 $$
@@ -86,9 +88,11 @@ $$
 ---
 
 ## 3. 套接字状态机
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 SOCKET-1 ( TCP状态机 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -123,6 +127,7 @@ $$
 $$
 
 ### 定义 SOCKET-2 ( 状态转换 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 $$
@@ -137,6 +142,7 @@ $$
 - $\delta(\text{Established}, \text{close}) = \text{FinWait1}$
 
 ### 定理 SOCKET-T1 ( TCP状态机正确性 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 TCP状态机保证连接的正确建立和终止。
@@ -150,9 +156,11 @@ $$
 ---
 
 ## 4. 零拷贝机制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 ZERO-COPY-1 ( 数据包借用 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 $$
@@ -160,6 +168,7 @@ $$
 $$
 
 ### 定义 ZERO-COPY-2 ( 发送队列 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -167,6 +176,7 @@ $$
 $$
 
 ### 定理 ZERO-COPY-T1 ( 无分配保证 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Smoltcp在数据路径上无堆分配。
@@ -185,9 +195,11 @@ $$
 ---
 
 ## 5. 内存池管理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 POOL-1 ( 包缓冲区池 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -202,6 +214,7 @@ $$
 $$
 
 ### 定义 POOL-2 ( 分配策略 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 $$
@@ -212,6 +225,7 @@ $$
 $$
 
 ### 定理 POOL-T1 ( 无碎片 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 固定大小的包缓冲区池无外部碎片。
@@ -225,9 +239,11 @@ $$
 ---
 
 ## 6. 定理与证明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定理 TCP-T1 ( 无死锁 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Smoltcp协议栈内部无死锁。
@@ -244,6 +260,7 @@ $$
 - 因此无死锁。$\square$
 
 ### 定理 TCP-T2 ( 内存安全 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 数据包处理无越界访问。
@@ -257,9 +274,11 @@ $$
 ---
 
 ## 7. 代码示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例1: 基本TCP服务器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -332,6 +351,7 @@ fn tcp_server() {
 ```
 
 ### 示例2: UDP通信
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -368,6 +388,7 @@ fn udp_example() {
 ```
 
 ### 示例3: DHCP客户端
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -397,6 +418,7 @@ fn dhcp_example() {
 ```
 
 ### 示例4: 多协议支持
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -569,4 +591,3 @@ fn multi_protocol() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

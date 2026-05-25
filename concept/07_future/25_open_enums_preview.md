@@ -13,9 +13,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [RFC]]
 
 - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](#open-enums-概念预研从-non_exhaustive-到可扩展枚举)
   - [📑 目录](#-目录)
@@ -54,13 +52,10 @@
 
 ## 一、核心概念：封闭 vs 开放枚举
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 封闭枚举（Closed Enums）
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 默认枚举是**封闭的**——定义后变体集合固定：
 
@@ -88,7 +83,6 @@ fn handle(status: HttpStatus) {
 
 ### 1.2 `#[non_exhaustive]`：兼容性层面的开放
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 1.40 引入 `#[non_exhaustive]`，在**不改变运行时语义**的前提下，向外部 crate 隐藏枚举的"完整性"：
 
@@ -131,7 +125,6 @@ fn handle_error(kind: ErrorKind) {
 
 ### 1.3 开放枚举（Open Enums）的设计空间
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 真正的"开放枚举"允许**运行时扩展**变体集合，这是 Rust 当前未支持的特性：
 
@@ -159,19 +152,13 @@ extend enum Event {
 | Rust 现状 | 默认 | 稳定（1.40+） | 无计划 |
 
 > **关键洞察**: Rust 的设计哲学倾向于"编译期可知性"。`#[non_exhaustive]` 是在"向后兼容"和"编译期安全"之间做的**最小侵入式妥协**，而非向动态开放性的让步。
-> [来源: 💡 原创分析]
 
 ---
 
 ## 二、`#[non_exhaustive]` 的形式化语义
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [RFC]]
 
 ### 2.1 编译期影响：穷尽性检查的弱化
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 flowchart TD
@@ -195,13 +182,11 @@ flowchart TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 在评估是否对公共 API 枚举使用 `#[non_exhaustive]` 时，参考此图理解对下游用户的强制成本（必须保留 `_` 分支）。
 > **关键洞察**: `#[non_exhaustive]` 的约束是**单向传播**的——定义 crate 知道全部变体，消费 crate 必须假设未知变体存在。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 2.2 运行时语义：无变化
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 #[non_exhaustive]
@@ -220,7 +205,6 @@ pub enum Color { Red, Green, Blue }
 
 ### 2.3 与模式匹配的交互
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 #[non_exhaustive]
@@ -254,19 +238,13 @@ fn process_external(r: Response) -> String {
 > - 在定义 crate 中：穷尽性条件 = `∪ patterns == V(E)`
 > - 在外部 crate 中：穷尽性条件 = `∪ patterns == V(E) ∪ {UNKNOWN}`
 > - `UNKNOWN` 为编译器隐式添加的**未知变体占位符**
-> [来源: 💡 原创分析]
 
 ---
 
 ## 三、跨语言对比：开放枚举的多种形态
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 Scala：Sealed Traits + 子类
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```scala
 // Scala 的 sealed trait 实现封闭/开放的灵活组合
@@ -288,7 +266,6 @@ final case class Key(c: Char) extends Event
 
 ### 3.2 Haskell：Open Data Types
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```haskell
 -- Haskell 的 open data type（需要语言扩展）
@@ -308,8 +285,6 @@ data AnyEvent = forall e. EventClass e => AnyEvent e
 ---
 
 ### 3.3 OCaml：Polymorphic Variants
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```ocaml
 (* OCaml 的多态变体 — 真正的开放枚举 *)
@@ -330,8 +305,6 @@ let handle_extended = function
 ---
 
 ### 3.4 Rust 当前方案：`#[non_exhaustive]` + 新变体
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -348,19 +321,12 @@ graph LR
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 设计公共 API 时，若枚举代表可能扩展的概念域（错误类型、协议消息、事件），优先使用 `#[non_exhaustive]`。
 > **关键洞察**: Rust 选择"编译期失败 + 显式处理"而非"运行时开放"，体现了**Fail-Safe** 设计哲学。
-> [来源: 💡 原创分析]
 
 ---
 
 ## 四、API 设计中的开放枚举模式
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 错误码枚举
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 #[non_exhaustive]
@@ -394,8 +360,6 @@ impl std::error::Error for DatabaseError {
 ---
 
 ### 4.2 事件/消息类型
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 #[non_exhaustive]
@@ -414,8 +378,6 @@ trait EventHandler {
 ---
 
 ### 4.3 配置/选项枚举
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 #[non_exhaustive]
@@ -431,14 +393,8 @@ pub enum LogLevel {
 ---
 
 ## 五、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题树
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph TD
@@ -459,16 +415,12 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助 API 设计者判断何时应使用 `#[non_exhaustive]`，区分"适合"、"不适合"和"需谨慎"三种场景。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 对公共库中的枚举类型，按此树决策；内部枚举（`pub(crate)`）通常不需要。
 > **关键洞察**: `#[non_exhaustive]` 的代价是**消除穷尽性检查的保护**——下游代码失去编译器对 match 完备性的验证。
-> [来源: 💡 原创分析]
 
 ---
 
 ### 5.2 边界极限
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // 边界 1: #[non_exhaustive] 对内部使用无影响
@@ -502,10 +454,6 @@ pub enum ConstExample {
 ---
 
 ## 六、演进路线与预测
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [RFC]]
 
 | 特性 | 当前状态 | 预计稳定 | 影响 |
 |:---|:---|:---:|:---|
@@ -521,10 +469,6 @@ pub enum ConstExample {
 ---
 
 ## 七、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [RFC]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -539,10 +483,6 @@ pub enum ConstExample {
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 枚举类型的形式化根基
 - [Traits](../02_intermediate/01_traits.md) — Sealed Traits 与开放/封闭设计
@@ -553,7 +493,6 @@ pub enum ConstExample {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [RFC 2008](https://github.com/rust-lang/rfcs/pull/2008), [The Rust Programming Language](https://doc.rust-lang.org/book/)
->
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
 
 **文档版本**: 1.0
@@ -565,108 +504,60 @@ pub enum ConstExample {
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ## 十、边界测试：Open Enums 预览的编译错误
 

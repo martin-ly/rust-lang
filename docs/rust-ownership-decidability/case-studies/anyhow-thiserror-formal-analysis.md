@@ -52,9 +52,11 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Anyhow: 动态错误
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 2.1 (anyhow::Error)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -64,6 +66,7 @@ pub struct Error {
 ```
 
 ### 定理 2.1 (类型擦除)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > anyhow::Error擦除具体错误类型，提供统一接口。
@@ -82,9 +85,11 @@ pub struct Error {
 ∎
 
 ### 2.2 Thiserror: 静态生成
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 2.2 (派生宏)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -99,6 +104,7 @@ pub enum MyError {
 ```
 
 ### 定理 2.2 (零开销抽象)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > thiserror生成的代码等价于手写实现。
@@ -130,9 +136,11 @@ impl std::error::Error for MyError {
 ---
 
 ## 3. 上下文传播
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定理 3.1 (上下文附加)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > Anyhow支持运行时添加上下文。
@@ -164,6 +172,7 @@ Caused by:
 ---
 
 ## 4. ?操作符集成
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 4.1 (自动转换)
@@ -310,4 +319,3 @@ fn do_work() -> Result<()> {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

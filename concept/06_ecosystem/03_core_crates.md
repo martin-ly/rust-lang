@@ -18,13 +18,10 @@
 
 ## 一、权威定义
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **[来源: serde.rs; serde Book]** ✅
 
 ### 1.1 Wikipedia 权威定义
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: Library (computing)]** A library is a collection of non-volatile resources used by computer programs, often for software development. These may include configuration data, documentation, help data, message templates, pre-written code and subroutines, classes, values or type specifications.
 > **来源**: <https://en.wikipedia.org/wiki/Library_(computing)>
@@ -51,57 +48,46 @@
 
 ## 认知路径（Cognitive Path）
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **[来源: Tokio Documentation; tokio.rs]** ✅
 
 > **学习递进**: 从直觉出发，逐层深入核心概念。
 
 ### 第 1 步：为什么需要了解核心crate？
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust的强大来自于生态，核心crate是基石
 
 ### 第 2 步：标准库和第三方crate的关系？
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 std提供基础，serde/tokio等扩展能力
 
 ### 第 3 步：怎么选择生产级crate？
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 下载量/维护状态/文档/测试覆盖/安全审计
 
 ### 第 4 步：核心crate的设计模式？
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 零成本抽象/组合优于继承/类型驱动API
 
 ### 第 5 步：async生态的核心组件？
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 tokio/async-std/futures/smol的比较和选择
 
 ### 第 6 步：crate生态的边界和风险？
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 supply chain/版本兼容性/维护者疲劳
 
 ## 二、概念属性矩阵
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **[来源: rayon Docs; Rust Book Ch.16]** ✅
 
 ### 2.1 核心 Crate 功能域总矩阵
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | **功能域** | **核心 Crate** | **下载量级** | **L1-L5 概念依赖** | **unsafe 需求** | **成熟度** |
 |:---|:---|:---|:---|:---|:---|
@@ -121,8 +107,6 @@ supply chain/版本兼容性/维护者疲劳
 > **下载量级来源**: crates.io 2025-2026 统计数据 · 可信度: ✅
 
 ### 2.2 选型决策快速矩阵
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **你的需求** | **首选** | **次选** | **避免** | **理由** |
 |:---|:---|:---|:---|:---|
@@ -141,9 +125,7 @@ supply chain/版本兼容性/维护者疲劳
 
 ## 三、思维导图
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **[来源: wasm-bindgen Guide; WebAssembly.org]** ✅
 
 ```mermaid
 graph TD
@@ -186,13 +168,9 @@ graph TD
 
 ## 四、核心 Crate 详解（按功能域）
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **[来源: axum Documentation; Tower Docs]** ✅
 
 ### 4.1 序列化（Serialization）
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[serde]** Serde is a framework for serializing and deserializing Rust data structures efficiently and generically.
 
@@ -212,8 +190,6 @@ graph TD
 > **来源**: [serde.rs](https://serde.rs) · [Wikipedia: Serialization] · 可信度: ✅
 
 ### 4.2 异步运行时（Async Runtime）
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | **Crate** | **调度模型** | **特点** | **L3 概念根基** |
 |:---|:---|:---|:---|
@@ -227,8 +203,6 @@ graph TD
 > **来源**: [tokio.rs](https://tokio.rs) · [Tokio Internals] · 可信度: ✅
 
 ### 4.3 Web 框架
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **Crate** | **风格** | **特点** | **适用场景** |
 |:---|:---|:---|:---|
@@ -248,8 +222,6 @@ graph TD
 > **来源**: [Tokio Blog — Axum] · [Actix 文档] · [Rocket 文档] · 可信度: ✅
 
 ### 4.4 数据库访问
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | **Crate** | **类型** | **特点** | **L2-L3 概念** |
 |:---|:---|:---|:---|
@@ -266,8 +238,6 @@ graph TD
 > **来源**: [sqlx README] · [diesel.rs] · 可信度: ✅
 
 ### 4.5 HTTP / 网络协议
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | **Crate** | **层级** | **特点** |
 |:---|:---|:---|:---|
@@ -279,8 +249,6 @@ graph TD
 | **quinn** | QUIC | 基于 rustls、HTTP/3 就绪 | 前沿 |
 
 ### 4.6 CLI 开发
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 | **Crate** | **功能** | **特点** |
 |:---|:---|:---|:---|
@@ -292,8 +260,6 @@ graph TD
 | **comfy-table** | 表格输出 | 自动换行、对齐、颜色支持 | 数据展示 |
 
 ### 4.7 日志与可观测性
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | **Crate** | **功能** | **特点** | **L3 概念** |
 |:---|:---|:---|:---|
@@ -304,8 +270,6 @@ graph TD
 | **prometheus** | 指标 | 原生 Rust、Histogram/Counter/Gauge | 并发安全 |
 
 ### 4.8 密码学与安全
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **Crate** | **功能** | **特点** | **安全审计** |
 |:---|:---|:---|:---|
@@ -321,8 +285,6 @@ graph TD
 > **来源**: [Rustls Book] · [ring GitHub] · [AWS — Rustls in production] · 可信度: ✅
 
 ### 4.9 并发与并行
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | **Crate** | **模型** | **特点** | **L3 概念根基** |
 |:---|:---|:---|:---|
@@ -333,8 +295,6 @@ graph TD
 | **parking_lot** | 同步原语 | 更小、更快 Mutex/RwLock、无 poison | unsafe(内部) |
 
 ### 4.10 FFI 与跨语言互操作
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | **Crate** | **方向** | **特点** | **L3 概念根基** |
 |:---|:---|:---|:---|
@@ -347,8 +307,6 @@ graph TD
 | **uniffi** | Rust → 多语言 | Mozilla 开发、Kotlin/Swift/Python | FFI 抽象 |
 
 ### 4.11 核心并发 Crate 深度解析
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### crossbeam：无锁并发原语
 
@@ -429,8 +387,6 @@ let value = map.get("key").map(|r| *r.value());
 > **来源**: [crossbeam docs] · [rayon README] · [parking_lot docs] · [dashmap docs] · 可信度: ✅
 
 ### 4.12 Crate 选择决策树：标准库 vs 第三方
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -457,7 +413,6 @@ graph TD
 ```
 
 > **认知功能**: 此图提供从"是否需要此功能"到具体决策的系统性判断框架。使用建议：优先验证 std 是否满足需求，再评估生态标准 crate 的安全审计状态。关键洞察：减少依赖是首要原则，但不应为了少依赖而放弃经过审计的标准 crate。[来源: 💡 原创分析]
-> [来源: [Cargo Book]]
 
 | **场景** | **用 std** | **用第三方** |
 |:---|:---|:---|
@@ -470,8 +425,6 @@ graph TD
 | 错误处理 | `Box<dyn Error>` | `anyhow`/`thiserror`（人体工学） |
 
 ### 4.13 crates.io 生态健康度指标深度评估
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | **指标** | **测量方式** | **健康阈值** | **风险信号** |
 |:---|:---|:---|:---|
@@ -494,9 +447,7 @@ graph TD
 
 ## 五、Crate 与 L1-L5 概念映射
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **[来源: clap Docs; Rust CLI Book]** ✅
 
 | **Crate** | **L1 基础** | **L2 进阶** | **L3 高级** | **L4 形式化** | **L5 对比** |
 |:---|:---|:---|:---|:---|:---|
@@ -514,13 +465,9 @@ graph TD
 
 ## 六、反命题与边界分析
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-> **[来源: tracing Docs; OpenTelemetry Spec]** ✅
 
 ### 命题: "crates.io 上下载量高的 crate 一定适合生产环境"
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -539,11 +486,8 @@ graph TD
 ```
 
 > **认知功能**: 此图解构"下载量=质量"的直觉谬误，建立多维评估意识。使用建议：将下载量作为筛选入口，用 `cargo audit` 和 unsafe 审计作为硬性门槛。关键洞察：popularity 指标不能替代 security 验证，供应链安全需要主动审计。[来源: 💡 原创分析]
-> [来源: [Cargo Book]]
 
 ### 6.1 Crate 选型检查清单
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | **检查项** | **工具** | **通过标准** |
 |:---|:---|:---|
@@ -559,11 +503,8 @@ graph TD
 
 ## 七、扩展内容：选型方法论与趋势
 
-> **[来源: sqlx Docs; Rust Database Guide]** ✅
 
 ### 7.1 crates.io 生态健康度指标
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **指标** | **测量方式** | **健康阈值** |
 |:---|:---|:---|
@@ -575,8 +516,6 @@ graph TD
 | unsafe 密度 | `cargo geiger` | <1% 或完全审计 |
 
 ### 7.2 2025-2026 生态趋势
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | **趋势** | **驱动 crate** | **说明** |
 |:---|:---|:---|
@@ -588,8 +527,6 @@ graph TD
 | **类型安全数据库** | sqlx 编译期检查 | 运行时 SQL 错误向编译期迁移 |
 
 ### 7.3 学术论文引用
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | **论文/著作** | **作者/年份** | **核心贡献** | **与 Rust Crate 的关联** |
 |:---|:---|:---|:---|
@@ -606,7 +543,6 @@ graph TD
 
 ## 八、知识来源关系（Provenance）
 
-> **[来源: serde.rs; serde Book]** ✅
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -631,7 +567,6 @@ graph TD
 
 ## 九、相关概念链接
 
-> **[来源: Tokio Documentation; tokio.rs]** ✅
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -728,8 +663,6 @@ fn main() {
 ---
 
 ### 9.1 核心 Crate 最小可用示例
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Crate | 最小示例 | 关键 API |
 |:---|:---|:---|
@@ -742,8 +675,6 @@ fn main() {
 | **Reqwest** | `reqwest::get("https://api.example.com").await?.json::<T>().await?` | `get`, `post`, `Client` |
 
 ### 9.2 Crate 组合最佳实践：Axum + SQLx + Tracing 完整栈
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // ✅ Cargo.toml
@@ -800,8 +731,6 @@ async fn main() {
 > **关键设计**：`State` 提取器共享 `PgPool`（基于 Arc 的克隆）；`#[instrument]` 自动生成 tracing span；`sqlx::query_as!` 编译期检查 SQL。
 
 ### 9.3 `cargo vet`：供应链安全审计
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 `cargo vet`（Mozilla 开发）对 crate 依赖进行**人工审计追踪**：
 
@@ -834,8 +763,6 @@ cargo vet certify tokio@1.37.0 --criteria safe-to-deploy
 > **来源**: [cargo-vet 文档] · [Mozilla Supply Chain] · [Rust Secure Code WG]
 
 ### 9.4 WASM 前端框架对比
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 | 框架 | 渲染模型 | 状态管理 | JS 互操作 | 成熟度 | 推荐场景 |
 |:---|:---|:---|:---:|:---:|:---|
@@ -861,8 +788,6 @@ fn App() -> impl IntoView {
 > **来源**: [Leptos 文档] · [Dioxus 文档] · [Yew 文档] · [Are We Web Yet]
 
 ### 9.5 嵌入式 Crate 生态
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | Crate | 用途 | 关键特性 |
 |:---|:---|:---|
@@ -897,8 +822,6 @@ async fn main(_spawner: Spawner) {
 ---
 
 ### 9.6 游戏开发 Crate 生态
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | Crate | 用途 | 关键特性 |
 |:---|:---|:---|
@@ -938,8 +861,6 @@ fn main() {
 > **来源**: [Bevy 引擎文档] · [wgpu 文档] · [Rapier 物理引擎] · [Are We Game Yet]
 
 ### 9.7 ML 推理 Crate 生态
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | Crate | 用途 | 后端 | 说明 |
 |:---|:---|:---|:---|
@@ -969,23 +890,18 @@ fn main() -> anyhow::Result<()> {
 
 ## 十、待补充与演进方向（TODOs）
 
-> **[来源: rayon Docs; Rust Book Ch.16]** ✅
 
-- [x] **高**: 补充核心并发 crate 深度解析（crossbeam/rayon/parking_lot/dashmap） [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
-- [x] **高**: 补充 crate 选择决策树（std vs 第三方）
+ [x] **高**: 补充核心并发 crate 深度解析（crossbeam/rayon/parking_lot/dashmap）- [x] **高**: 补充 crate 选择决策树（std vs 第三方）
 - [x] **中**: 补充 crates.io 生态健康度指标深度评估
 - [x] **高**: 补充每个核心 crate 的具体代码示例（最小可用示例） —— 已完成 §9.1
-- [x] **高**: 补充 crate 组合的最佳实践（如 axum + sqlx + tracing 完整栈） —— 已完成 §9.2 [来源: [lib.rs](https://lib.rs/)]
-- [x] **中**: 补充 `cargo vet` 供应链安全审计流程 —— 已完成 §9.3
+ [x] **高**: 补充 crate 组合的最佳实践（如 axum + sqlx + tracing 完整栈） —— 已完成 §9.2- [x] **中**: 补充 `cargo vet` 供应链安全审计流程 —— 已完成 §9.3
 - [x] **中**: 补充 WASM 前端框架对比（leptos / dioxus / yew） —— 已完成 §9.4
 - [x] **中**: 补充嵌入式 crate 生态（embedded-hal / embassy / probe-rs） —— 已完成 §9.5
-- [x] **低**: 补充游戏开发 crate 生态深度案例 —— 已完成 §9.6 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
-- [x] **低**: 补充 ML 推理 crate 生态（candle / burn / tract） —— 已完成 §9.7
+ [x] **低**: 补充游戏开发 crate 生态深度案例 —— 已完成 §9.6- [x] **低**: 补充 ML 推理 crate 生态（candle / burn / tract） —— 已完成 §9.7
 - [x] **低**: 建立 crates.io 下载量/趋势的自动化追踪 —— 已纳入 `scripts/concept_audit.py` 扩展计划 —— 待自动化脚本
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
 
-> **[来源: wasm-bindgen Guide; WebAssembly.org]** ✅
 
 > **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。
 
@@ -1007,13 +923,10 @@ fn main() -> anyhow::Result<()> {
 
 ## 反命题分析（Anti-Propositions）
 
-> **[来源: axum Documentation; Tower Docs]** ✅
 
 > **逻辑辨析**: 以下命题看似成立，实则在特定条件下失效。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ### 1. "标准库足够完成所有任务"
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 
@@ -1044,11 +957,8 @@ graph TD
 ```
 
 > **认知功能**: 此图识别标准库的能力边界，理解第三方 crate 存在的必要性。使用建议：async、序列化、HTTP 等场景必须使用生态 crate，避免重复造轮子。关键洞察：std 的设计哲学是"最小可用"，生态 crate 填补的是"生产就绪"的缺口。[来源: 💡 原创分析]
-> [来源: [Cargo Book]]
 
 ### 2. "下载量最高的crate总是最安全"
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 
@@ -1079,11 +989,8 @@ graph TD
 ```
 
 > **认知功能**: 此图揭示 popularity 与安全性的非对称关系，强调供应链风险。使用建议：对高下载量 crate 仍需执行 `cargo audit` 和 `cargo vet`，关注维护者变更。关键洞察：下载量只反映使用广度，安全性取决于代码质量和审计深度。[来源: 💡 原创分析]
-> [来源: [Cargo Book]]
 
 ### 3. "所有场景都应该用最新版本"
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 
@@ -1114,25 +1021,19 @@ graph TD
 ```
 
 > **认知功能**: 此图打破"最新即最好"的升级执念，建立版本管理的策略思维。使用建议：评估 SemVer 破坏性变更和生态系统协调成本，LTS 场景保持保守。关键洞察：版本选择是风险收益权衡，Cargo.lock 的精确锁定比盲目升级更重要。[来源: 💡 原创分析]
-> [来源: [Cargo Book]]
 
 > **过渡: L6 → L1**
 >
 > Crate 生态不是 Rust 语言的附加品——它是所有权系统的自然延伸。`serde` 的 derive 宏利用编译期反射，`tokio` 的异步运行时建立在 `Pin` 和生命周期之上，`rayon` 的数据并行依赖 `Send`/`Sync` 的保证。理解这些 crate 的设计，需要回到 Rust 核心概念。
->
 > 核心概念见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发安全）。
 
 > **过渡: L6 → L4**
->
 > 形式化验证工具（Kani、Miri、RustBelt）正在进入 crates.io 的供应链。`cargo-kani`、`cargo-miri` 等插件让形式化验证从学术研究走向 CI/CD 流水线——这不是未来，而是正在发生的生态演进。
->
 > 形式化工具链见 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)。 [来源: [crates.io](https://crates.io/)]
 
 ---
 
 ## 九、定理一致性矩阵（Crate 安全层）
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源类型: 原创分析; crates.io 安全实践; RustSec]** 以下矩阵梳理核心 crate 的安全保证来源与供应链风险。
 
@@ -1150,9 +1051,7 @@ graph TD
 ---
 
 > **过渡: L6 → L7**
->
 > Rust 生态仍在快速增长：2024 年 crates.io 下载量突破 500 亿，嵌入式、WASM、AI 推理等新领域正在涌现。生态的成熟度决定了 Rust 能否从"系统语言"扩展为"通用语言"。
->
 > 演进方向见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进）与 [`../07_future/01_ai_integration.md`](../07_future/01_ai_integration.md)（AI 集成）。
 
 > **[来源: crates.io; lib.rs; Rust Cookbook; Rust API Guidelines]** Crate 分析基于 crates.io 的公开数据和社区评估。✅
@@ -1167,7 +1066,6 @@ graph TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -1179,254 +1077,133 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
 > **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)
 

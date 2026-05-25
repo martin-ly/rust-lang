@@ -56,6 +56,7 @@ nRF HAL为Nordic nRF52/nRF53/nRF91系列提供：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 PERIPH-1 ( 外设分区 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -71,6 +72,7 @@ let uart = Uarte::new(p.UARTE0, ...);
 ```
 
 ### 定理 OWN-T1 ( 外设唯一性 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 每个外设实例在编译时唯一。
@@ -82,9 +84,11 @@ $$
 ---
 
 ## 3. 低功耗模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 POWER-1 ( 功耗模式 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 功耗 | 唤醒源 |
@@ -95,6 +99,7 @@ $$
 | System OFF | ~1μA | RESET, GPIO, LPcomp |
 
 ### 定义 POWER-2 ( 模式转换 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 $$
@@ -104,9 +109,11 @@ $$
 ---
 
 ## 4. PPI可编程外设互联
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 PPI-1 ( 通道模型 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 $$
@@ -116,6 +123,7 @@ $$
 **连接**: 事件触发任务，无需CPU介入。
 
 ### 定义 PPI-2 ( 通道组 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -129,6 +137,7 @@ $$
 $$
 
 ### 定理 PPI-T1 ( 零延迟 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 PPI事件到任务延迟是确定性的。
@@ -140,9 +149,11 @@ $$
 ---
 
 ## 5. EasyDMA
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定义 DMA-1 ( 缓冲区安全 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 EasyDMA要求缓冲区在DMA传输期间有效。
@@ -152,6 +163,7 @@ $$
 $$
 
 ### 定理 DMA-T1 ( 安全传输 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 EasyDMA传输不会访问无效内存。
@@ -163,9 +175,11 @@ $$
 ---
 
 ## 6. 定理与证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理 SAFE-T1 ( 配置安全 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 无效外设配置在编译时被拒绝。
@@ -177,6 +191,7 @@ $$
 ---
 
 ## 7. 代码示例
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 示例1: UART with EasyDMA
@@ -349,4 +364,3 @@ fn saadc_example(p: pac::Peripherals) {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

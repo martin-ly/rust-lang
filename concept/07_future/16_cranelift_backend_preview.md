@@ -1,5 +1,5 @@
-# Cranelift [来源: [Wasmtime](https://wasmtime.dev/)] [来源: [Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift)] 后端预研：Rust 编译器的快速调试编译
-
+# Cranelift 后端预研：Rust 编译器的快速调试编译
+>
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 Cranelift 后端预览特性
@@ -13,48 +13,44 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
-- [Cranelift \[来源: Wasmtime\] \[来源: Cranelift\] 后端预研：Rust 编译器的快速调试编译](#cranelift-来源-wasmtime-来源-cranelift-后端预研rust-编译器的快速调试编译)
+ [Cranelift \ \ 后端预研：Rust 编译器的快速调试编译](#cranelift)
   - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 问题：LLVM 的编译时间瓶颈](#11-问题llvm-的编译时间瓶颈)
-    - [1.2 Cranelift 的定位与设计哲学](#12-cranelift-的定位与设计哲学)
-    - [1.3 rustc\_codegen\_cranelift](#13-rustc_codegen_cranelift)
-  - [二、技术细节](#二技术细节)
-    - [2.1 架构对比：LLVM vs Cranelift](#21-架构对比llvm-vs-cranelift)
-    - [2.2 优化级别权衡](#22-优化级别权衡)
-    - [2.3 与并行前端的协同](#23-与并行前端的协同)
-  - [三、使用场景分析](#三使用场景分析)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、演进路线](#五演进路线)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Cranelift 后端预览的编译错误](#十边界测试cranelift-后端预览的编译错误)
-    - [10.1 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时差异）](#101-边界测试cranelift-的调试构建与-llvm-的语义差异运行时差异)
-    - [10.2 边界测试：Cranelift 不支持的平台特定内联汇编（编译错误）](#102-边界测试cranelift-不支持的平台特定内联汇编编译错误)
-    - [10.3 边界测试：Cranelift 的尾调用优化缺失（运行时栈溢出）](#103-边界测试cranelift-的尾调用优化缺失运行时栈溢出)
-    - [10.4 边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）](#104-边界测试cranelift-的-simd-向量类型宽度限制编译错误)
-    - [10.6 边界测试：Cranelift 的 debug 信息生成与 GDB 兼容性（调试困难）](#106-边界测试cranelift-的-debug-信息生成与-gdb-兼容性调试困难)
-    - [10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）](#105-边界测试cranelift-的调试构建与发布构建行为差异运行时性能语义差异)
-    - [10.3 边界测试：Cranelift 与 LLVM 的调试信息质量差异（运行时行为差异）](#103-边界测试cranelift-与-llvm-的调试信息质量差异运行时行为差异)
+
+- [一、核心概念](#一核心概念)
+  - [1.1 问题：LLVM 的编译时间瓶颈](#11-问题llvm-的编译时间瓶颈)
+  - [1.2 Cranelift 的定位与设计哲学](#12-cranelift-的定位与设计哲学)
+  - [1.3 rustc\_codegen\_cranelift](#13-rustc_codegen_cranelift)
+- [二、技术细节](#二技术细节)
+  - [2.1 架构对比：LLVM vs Cranelift](#21-架构对比llvm-vs-cranelift)
+  - [2.2 优化级别权衡](#22-优化级别权衡)
+  - [2.3 与并行前端的协同](#23-与并行前端的协同)
+- [三、使用场景分析](#三使用场景分析)
+- [四、反命题与边界分析](#四反命题与边界分析)
+  - [4.1 反命题树](#41-反命题树)
+  - [4.2 边界极限](#42-边界极限)
+- [五、演进路线](#五演进路线)
+- [六、来源与延伸阅读](#六来源与延伸阅读)
+- [相关概念文件](#相关概念文件)
+- [权威来源索引](#权威来源索引)
+- [十、边界测试：Cranelift 后端预览的编译错误](#十边界测试cranelift-后端预览的编译错误)
+  - [10.1 边界测试：Cranelift 的调试构建与 LLVM 的语义差异（运行时差异）](#101-边界测试cranelift-的调试构建与-llvm-的语义差异运行时差异)
+  - [10.2 边界测试：Cranelift 不支持的平台特定内联汇编（编译错误）](#102-边界测试cranelift-不支持的平台特定内联汇编编译错误)
+  - [10.3 边界测试：Cranelift 的尾调用优化缺失（运行时栈溢出）](#103-边界测试cranelift-的尾调用优化缺失运行时栈溢出)
+  - [10.4 边界测试：Cranelift 的 SIMD 向量类型宽度限制（编译错误）](#104-边界测试cranelift-的-simd-向量类型宽度限制编译错误)
+  - [10.6 边界测试：Cranelift 的 debug 信息生成与 GDB 兼容性（调试困难）](#106-边界测试cranelift-的-debug-信息生成与-gdb-兼容性调试困难)
+  - [10.5 边界测试：Cranelift 的调试构建与发布构建行为差异（运行时性能/语义差异）](#105-边界测试cranelift-的调试构建与发布构建行为差异运行时性能语义差异)
+  - [10.3 边界测试：Cranelift 与 LLVM 的调试信息质量差异（运行时行为差异）](#103-边界测试cranelift-与-llvm-的调试信息质量差异运行时行为差异)
 
 ---
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：LLVM 的编译时间瓶颈
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 编译器使用 **LLVM** 作为代码生成后端。LLVM 提供卓越的优化能力，但编译时间长：
 
@@ -84,7 +80,6 @@ LLVM 后端编译时间分解（典型中型 crate）:
 
 ### 1.2 Cranelift 的定位与设计哲学
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -118,7 +113,6 @@ graph LR
 
 ### 1.3 rustc_codegen_cranelift
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 rustc_codegen_cranelift 项目:
@@ -140,14 +134,9 @@ rustc_codegen_cranelift 项目:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 架构对比：LLVM vs Cranelift
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | LLVM | Cranelift | 影响 |
 |:---|:---|:---|:---|
@@ -166,7 +155,6 @@ rustc_codegen_cranelift 项目:
 
 ### 2.2 优化级别权衡
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -197,7 +185,6 @@ graph TD
 
 ### 2.3 与并行前端的协同
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 编译时间优化组合拳:
@@ -219,10 +206,6 @@ graph TD
 ---
 
 ## 三、使用场景分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 场景 | 推荐后端 | 理由 |
 |:---|:---:|:---|
@@ -240,14 +223,9 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -269,7 +247,6 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否使用 Cranelift。核心判断标准是**构建类型**、**平台支持**和**LTO 需求**。
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 开发迭代默认使用 Cranelift；Release 构建、交叉编译、LTO 场景使用 LLVM。
 > **关键洞察**: Cranelift 的**边界非常清晰**——它是 Debug 编译的专用工具，不试图替代 LLVM 的通用地位。
 > [来源: 💡 原创分析]
@@ -278,7 +255,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 平台支持
@@ -308,10 +284,6 @@ graph TD
 ---
 
 ## 五、演进路线
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -330,7 +302,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -362,10 +333,6 @@ fn main() {
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — Rust 工具链
 - [Parallel Frontend](./09_parallel_frontend_preview.md) — 并行前端编译
@@ -386,62 +353,17 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ## 十、边界测试：Cranelift 后端预览的编译错误
 

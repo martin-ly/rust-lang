@@ -159,6 +159,7 @@ let data = SensorData::read_from(&bytes).unwrap();
 ---
 
 ## 2. 核心概念与技术原理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 内存布局基础
@@ -335,6 +336,7 @@ header.sequence_number += 1;
 ---
 
 ## 3. Trait设计与类型系统运用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 FromBytes Trait详解
@@ -530,6 +532,7 @@ struct BatchData {
 ---
 
 ## 4. 使用场景与实际案例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 网络协议解析
@@ -861,6 +864,7 @@ impl<'a> ZeroCopyDeserializer<'a> {
 ---
 
 ## 5. 与其他方案的对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 与Bytemuck的对比
@@ -967,6 +971,7 @@ fn parse_safe(bytes: &[u8]) -> Option<&PacketHeader> {
 ---
 
 ## 6. 完整代码示例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 完整的网络数据包处理
@@ -1702,6 +1707,7 @@ struct ComplexData<'a> {
 ---
 
 ## 7. 性能分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 零拷贝性能优势
@@ -1807,6 +1813,7 @@ struct PackedExample {
 ---
 
 ## 8. 最佳实践
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 类型设计原则
@@ -2018,6 +2025,7 @@ mod tests {
 ---
 
 ## 9. 形式化定理与证明
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 FromBytes安全定理
@@ -2100,6 +2108,7 @@ $$
 ---
 
 ## 10. 反例与边界情况
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 10.1 非法字节值问题
@@ -2282,7 +2291,6 @@ impl Message {
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
-
 
 > **[来源: Wikipedia - Concurrency]**
 > **[来源: Wikipedia - Asynchronous I/O]**
@@ -3063,4 +3071,3 @@ impl Message {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

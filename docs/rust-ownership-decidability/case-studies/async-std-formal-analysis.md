@@ -165,12 +165,15 @@ async fn my_code() {
 ---
 
 ## 3. Task系统分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 spawn语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 定义 3.1 (Task生命周期)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -179,6 +182,7 @@ Created ──► Spawned ──► Running ──► Completed
 ```
 
 ### 定理 3.1 (spawn内存安全)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > `task::spawn` 确保Future及其输出满足Send约束。
@@ -203,9 +207,11 @@ where
 ∎
 
 ### 3.2 任务取消
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定义 3.2 (取消机制)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -219,6 +225,7 @@ impl<T> JoinHandle<T> {
 ```
 
 ### 定理 3.2 (取消传播)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > 任务取消通过Drop实现，确保资源清理。
@@ -251,12 +258,15 @@ async fn cancellable() {
 ---
 
 ## 4. Stream特质
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 与Iterator对应
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 4.1 (Stream trait)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -277,6 +287,7 @@ trait Stream {
 | `fold` | `fold` | 异步 |
 
 ### 定理 4.1 (Stream Monad定律)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > Stream满足Functor和Monad定律(在异步上下文中)。
@@ -305,9 +316,11 @@ impl<S: Stream> Stream for Map<S, F> {
 ∎
 
 ### 4.2 背压传播
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定理 4.2 (Stream背压)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > Stream消费者可以控制生产者速率。
@@ -336,12 +349,15 @@ while let Some(v) = s.next().await {
 ---
 
 ## 5. 同步原语
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 async Mutex/RwLock
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定理 5.1 (async Mutex安全性)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > async-std的Mutex保证互斥且不阻塞线程。
@@ -381,9 +397,11 @@ impl<T> Mutex<T> {
 ∎
 
 ### 5.2 Channel
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定义 5.1 (Channel类型)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -391,6 +409,7 @@ pub fn channel<T>(cap: usize) -> (Sender<T>, Receiver<T>);
 ```
 
 ### 定理 5.2 (Channel有界性)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > 有界Channel提供背压。
@@ -417,12 +436,15 @@ async fn producer(tx: Sender<Data>) {
 ---
 
 ## 6. 文件系统与IO
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 异步文件操作
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理 6.1 (异步文件IO)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > async-std的文件操作不阻塞执行器线程。
@@ -452,9 +474,11 @@ pub async fn read(path: impl AsRef<Path>) -> Result<Vec<u8>> {
 ∎
 
 ### 6.2 零拷贝优化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 定理 6.2 (零拷贝网络)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > async-std的TcpStream支持零拷贝传输。
@@ -476,9 +500,11 @@ async fn zero_copy_sendfile(from: File, to: TcpStream) -> Result<()> {
 ---
 
 ## 7. 与Tokio互操作
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 7.1 (运行时兼容性限制)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > async-std和Tokio代码直接混用可能导致问题。
@@ -515,9 +541,11 @@ async fn main() {
 ---
 
 ## 8. 反例与兼容性陷阱
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 反例 8.1 (阻塞操作)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -533,6 +561,7 @@ async fn good() {
 ```
 
 ### 反例 8.2 (运行时混用)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -552,6 +581,7 @@ async fn main() {
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **async-std Contributors.** (2024). *async-std Documentation*. <https://docs.rs/async-std/>
@@ -707,4 +737,3 @@ async fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

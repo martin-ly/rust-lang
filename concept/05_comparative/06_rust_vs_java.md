@@ -15,9 +15,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust vs Java：系统编程与托管运行时的范式对比](#rust-vs-java系统编程与托管运行时的范式对比)
   - [📑 目录](#-目录)
@@ -49,13 +47,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 内存管理：所有权 vs GC
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph LR
@@ -86,7 +81,6 @@ graph LR
 
 ### 1.2 类型系统：静态显式 vs 静态推断
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 类型系统对比:
@@ -112,7 +106,6 @@ graph LR
 
 ### 1.3 并发模型：所有权约束 vs JMM
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 graph TD
@@ -133,7 +126,6 @@ graph TD
 ```
 
 > **认知功能**: 此图对比两种语言的**并发安全模型**——Rust 通过类型系统（Send/Sync）在编译期消除数据竞争；Java 通过 JMM 和开发者约定在运行时管理并发。
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 高并发系统（微服务、网络服务）选 Rust（编译期安全）；遗留系统或需大量共享状态的系统选 Java（成熟的并发库生态）。
 > **关键洞察**: Rust 的 `Send`/`Sync` 是**类型系统的并发安全标记**——与 Java 的 `synchronized` 不同，它们不引入运行时开销，只是编译期的约束检查。
 > [来源: [Rustnomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)] · [JLS — Memory Model](https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html)
@@ -141,14 +133,9 @@ graph TD
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 运行时架构对比
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | Rust | Java |
 |:---|:---|:---|
@@ -160,8 +147,6 @@ graph TD
 | **动态加载** | 复杂（需 dlopen 等） | 原生（ClassLoader） |
 | **调试** | LLDB/GDB | JDWP/JVM TI |
 
-> [来源: [Wikipedia — Java (programming language)](https://en.wikipedia.org/wiki/Java_(programming_language))]
-
 > **架构洞察**: Rust 的**零运行时**设计使其适合资源受限环境（嵌入式、边缘计算、无服务器冷启动）。Java 的**富运行时**（JIT、GC、反射）使其适合长生命周期的服务端应用。
 > [来源: [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se21/html/index.html)] · [Rust Runtime](https://doc.rust-lang.org/reference/runtime.html)
 
@@ -169,7 +154,6 @@ graph TD
 
 ### 2.2 异常处理哲学
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 异常处理对比:
@@ -204,7 +188,6 @@ graph TD
 
 ### 2.3 泛型实现：单态化 vs 擦除
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // Rust: 泛型单态化（Monomorphization）
@@ -231,10 +214,6 @@ public static <T> T identity(T x) { return x; }
 ---
 
 ## 三、场景适用矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 场景 | Rust | Java | 推荐 |
 |:---|:---|:---|:---:|
@@ -249,22 +228,15 @@ public static <T> T identity(T x) { return x; }
 | **金融高频交易** | ✅ 零分配，确定延迟 | ❌ GC 不可接受 | **Rust** |
 | **企业级应用** | ⚠️ 生态待成熟 | ✅ Spring, Jakarta EE | **Java** |
 
-> [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
-
 > **场景洞察**: Rust 在**系统边界**（底层基础设施、延迟敏感）有绝对优势；Java 在**应用层**（业务系统、大数据）生态更成熟。两者在**微服务层**正在竞争。
 > [来源: [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/)]
 
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -291,7 +263,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 学习曲线
@@ -322,7 +293,6 @@ graph TD
 
 ## 五、迁移路径
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 Java → Rust 的渐进迁移策略:
@@ -353,8 +323,6 @@ Java → Rust 的渐进迁移策略:
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -370,10 +338,6 @@ Java → Rust 的渐进迁移策略:
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust vs C++](./01_rust_vs_cpp.md) — Rust 与 C++ 的对比
 - [Rust vs Go](./02_rust_vs_go.md) — Rust 与 Go 的对比
@@ -396,74 +360,15 @@ Java → Rust 的渐进迁移策略:
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ## 十、边界测试：Rust 与 Java 的编译错误对比
 

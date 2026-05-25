@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Async Rust 全面专题 - 完成报告](#async-rust-全面专题---完成报告)
@@ -79,6 +80,7 @@
 | [README.md](./README.md) | 11页 | 专题导航与概览 |
 
 ### 权威来源整合 (authoritative/)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 页数 | 内容 |
@@ -86,6 +88,7 @@
 | [tokio-deep-dive.md](./authoritative/tokio-deep-dive.md) | 18页 | Tokio架构、Scheduler、IO Driver、Timer |
 
 ### 网络编程 (network/)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 页数 | 内容 |
@@ -93,6 +96,7 @@
 | [http-server-patterns.md](./network/http-server-patterns.md) | 10页 | Axum/Actix模式、中间件、错误处理、SSE |
 
 ### 嵌入式 (embedded/)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文档 | 页数 | 内容 |
@@ -100,6 +104,7 @@
 | [embassy-guide.md](./embedded/embassy-guide.md) | 17页 | Embassy完整指南、无堆设计、USB、电源管理 |
 
 ### 最佳实践 (practices/)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 页数 | 内容 |
@@ -107,6 +112,7 @@
 | [best-practices.md](../../archive/deprecated_20260318/best-practices.md) | 15页 | 代码组织、错误处理、资源管理、测试策略 |
 
 ### 形式化分析 (formal-proofs/)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文档 | 页数 | 内容 |
@@ -121,9 +127,11 @@
 ---
 
 ## 覆盖内容矩阵
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 语法层面 (100%)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - ✅ `async fn` / `async ||` / `async { }` / `async move`
@@ -131,6 +139,7 @@
 - ✅ async + trait / 泛型 / const / unsafe
 
 ### 编译转换 (100%)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - ✅ 完整编译管道
@@ -139,6 +148,7 @@
 - ✅ 生命周期嵌入状态机
 
 ### 运行时架构 (100%)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - ✅ Tokio Scheduler（工作窃取、多级队列）
@@ -147,6 +157,7 @@
 - ✅ 任务生命周期
 
 ### 网络编程 (100%)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ✅ HTTP服务器模式（Axum函数式、Actix Actor）
@@ -156,6 +167,7 @@
 - ✅ 优雅关闭
 
 ### 嵌入式 (100%)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ Embassy框架完整指南
@@ -168,6 +180,7 @@
 - ✅ USB设备开发
 
 ### 最佳实践 (100%)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - ✅ 代码组织（项目结构、模块设计）
@@ -180,6 +193,7 @@
 - ✅ 可观测性（日志、指标、追踪）
 
 ### 设计模式 (100%)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ✅ Tower Service Pattern
@@ -192,6 +206,7 @@
 ---
 
 ## 代码示例统计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 类别 | 数量 |
@@ -209,9 +224,11 @@
 ---
 
 ## 关键洞见总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 1. Rust Async vs 其他语言
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | Rust Async | Go | Erlang | JS Promise | C# |
@@ -222,6 +239,7 @@
 | 嵌入式支持 | ✅ Embassy | ❌ | ❌ | ❌ | ⚠️ |
 
 ### 2. 性能数据
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -376,4 +394,3 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

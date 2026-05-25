@@ -1,5 +1,4 @@
-# Rust 在 AI [来源: [Rust AI Ecosystem](https://www.arewelearningyet.com/)] 与机器学习中的新兴角色
-
+# Rust 在 AI 与机器学习中的新兴角色
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure
 > **双维定位**: P×Eva — 评估 Rust 在 AI 领域的应用
@@ -18,46 +17,41 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust ML]]
 
-- [Rust 在 AI \[来源: Rust AI Ecosystem\] 与机器学习中的新兴角色](#rust-在-ai-来源-rust-ai-ecosystem-与机器学习中的新兴角色)
+ [Rust 在 AI \ 与机器学习中的新兴角色](#rust-在-ai)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 为什么 AI 需要 Rust](#11-为什么-ai-需要-rust)
-    - [1.2 Rust ML 生态概览](#12-rust-ml-生态概览)
-    - [1.3 推理 vs 训练](#13-推理-vs-训练)
+  - [1.1 为什么 AI 需要 Rust](#11-为什么-ai-需要-rust)
+  - [1.2 Rust ML 生态概览](#12-rust-ml-生态概览)
+  - [1.3 推理 vs 训练](#13-推理-vs-训练)
   - [二、技术细节](#二技术细节)
-    - [2.1 Candle：纯 Rust ML 框架](#21-candle纯-rust-ml-框架)
-    - [2.2 ONNX Runtime 集成](#22-onnx-runtime-集成)
-    - [2.3 WebAssembly 推理](#23-webassembly-推理)
+  - [2.1 Candle：纯 Rust ML 框架](#21-candle纯-rust-ml-框架)
+  - [2.2 ONNX Runtime 集成](#22-onnx-runtime-集成)
+  - [2.3 WebAssembly 推理](#23-webassembly-推理)
   - [三、应用场景矩阵](#三应用场景矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
+  - [4.1 反命题树](#41-反命题树)
+  - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Rust in AI 的编译错误](#十边界测试rust-in-ai-的编译错误)
-    - [10.1 边界测试：`candle` 的张量形状不匹配（编译错误/运行时 panic）](#101-边界测试candle-的张量形状不匹配编译错误运行时-panic)
-    - [10.2 边界测试：`unsafe` 与 SIMD 的内在函数约束（编译错误）](#102-边界测试unsafe-与-simd-的内在函数约束编译错误)
-    - [10.6 边界测试：AI 模型的序列化与版本兼容性（运行时加载失败）](#106-边界测试ai-模型的序列化与版本兼容性运行时加载失败)
-    - [10.5 边界测试：Rust AI 推理框架的张量生命周期与 GPU 内存管理（运行时 OOM）](#105-边界测试rust-ai-推理框架的张量生命周期与-gpu-内存管理运行时-oom)
-    - [10.3 边界测试：Rust AI 框架的张量维度不匹配（运行时 panic）](#103-边界测试rust-ai-框架的张量维度不匹配运行时-panic)
+  - [10.1 边界测试：`candle` 的张量形状不匹配（编译错误/运行时 panic）](#101-边界测试candle-的张量形状不匹配编译错误运行时-panic)
+  - [10.2 边界测试：`unsafe` 与 SIMD 的内在函数约束（编译错误）](#102-边界测试unsafe-与-simd-的内在函数约束编译错误)
+  - [10.6 边界测试：AI 模型的序列化与版本兼容性（运行时加载失败）](#106-边界测试ai-模型的序列化与版本兼容性运行时加载失败)
+  - [10.5 边界测试：Rust AI 推理框架的张量生命周期与 GPU 内存管理（运行时 OOM）](#105-边界测试rust-ai-推理框架的张量生命周期与-gpu-内存管理运行时-oom)
+  - [10.3 边界测试：Rust AI 框架的张量维度不匹配（运行时 panic）](#103-边界测试rust-ai-框架的张量维度不匹配运行时-panic)
 
 ---
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 为什么 AI 需要 Rust
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 AI 基础设施的挑战:
@@ -100,7 +94,6 @@ AI 基础设施的挑战:
 
 ### 1.2 Rust ML 生态概览
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 Rust ML 生态分层:
@@ -141,7 +134,6 @@ Rust ML 生态分层:
 
 ### 1.3 推理 vs 训练
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Rust 在 AI 流水线中的定位:
@@ -177,14 +169,9 @@ Rust 在 AI 流水线中的定位:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust ML]]
 
 ### 2.1 Candle：纯 Rust ML 框架
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // Candle 示例：简单推理
@@ -225,7 +212,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.2 ONNX Runtime 集成
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // ort: ONNX Runtime Rust 绑定
@@ -271,7 +257,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.3 WebAssembly 推理
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 WASM 推理的优势:
@@ -307,10 +292,6 @@ WASM 推理的优势:
 ---
 
 ## 三、应用场景矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust ML]]
 
 ```text
 场景 → 方案 → Rust 生态
@@ -347,14 +328,9 @@ WASM 推理的优势:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -377,7 +353,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: CUDA 生态
@@ -417,10 +392,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust ML]]
 
 ```text
 陷阱 1: 过早优化推理性能
@@ -465,10 +436,6 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust ML]]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
@@ -486,10 +453,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [AI Integration](./01_ai_integration.md) — AI 集成
 - [WebAssembly](../06_ecosystem/11_webassembly.md) — WebAssembly
@@ -511,116 +474,64 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ## 十、边界测试：Rust in AI 的编译错误
 

@@ -57,6 +57,7 @@ println!("{}", x);  // 编译错误！
 ```
 
 ### 1.2 什么时候会遇到
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -76,9 +77,11 @@ extern "C" {
 ---
 
 ## 2. 为什么危险
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 未定义行为 (UB)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -95,6 +98,7 @@ println!("{}", y);  // 可能导致：
 ```
 
 ### 2.2 LLVM 的假设
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Rust 编译器使用 LLVM，它对未初始化内存有严格假设：
@@ -107,9 +111,11 @@ LLVM 假设：任何读取的位都是已初始化的
 ---
 
 ## 3. 安全处理方法
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 使用 write 而非赋值
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -128,6 +134,7 @@ assert_eq!(init, 42);
 ```
 
 ### 3.2 批量初始化模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -155,9 +162,11 @@ where
 ---
 
 ## 4. MaybeUninit 深度解析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 类型定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -175,6 +184,7 @@ pub union MaybeUninit<T> {
 - `repr(transparent)` 保证与 T 相同布局
 
 ### 4.2 核心方法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -199,6 +209,7 @@ impl<T> MaybeUninit<T> {
 ```
 
 ### 4.3 读写操作
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -221,9 +232,11 @@ let s = unsafe { slot.assume_init() };
 ---
 
 ## 5. 实战模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 实现 ArrayVec
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -273,6 +286,7 @@ impl<T, const N: usize> Drop for ArrayVec<T, N> {
 ```
 
 ### 5.2 FFI 缓冲区
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -318,9 +332,11 @@ impl Drop for FfiBuffer {
 ---
 
 ## 6. 常见陷阱
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 错误：批量 assume_init
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -338,6 +354,7 @@ for elem in &arr {
 ```
 
 ### 6.2 错误：忘记析构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -349,6 +366,7 @@ let b: BoxMaybe<String> = Box::new(MaybeUninit::new(String::from("hello")));
 ```
 
 ### 6.3 正确检查清单
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -367,6 +385,7 @@ unsafe {
 ---
 
 ## 参考
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)
@@ -475,4 +494,3 @@ unsafe {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

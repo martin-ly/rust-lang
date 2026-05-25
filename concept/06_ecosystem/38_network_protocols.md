@@ -20,8 +20,6 @@
 
 ## 一、QUIC：基于 UDP 的安全传输协议
 
-> **[来源: RFC 9000] · [RFC 9001 — QUIC-TLS] · [Langley et al. — The QUIC Transport Protocol, 2017]** ✅
-
 ### 1.1 QUIC 的设计动机
 
 QUIC 解决了 TCP+TLS 的四个根本问题：
@@ -90,8 +88,6 @@ impl Connection {
 
 ## 二、HTTP/3：基于 QUIC 的应用层协议
 
-> **[来源: RFC 9114] · [RFC 9204 — QPACK]** ✅
-
 ### 2.1 HTTP/3 与 HTTP/2 的对比
 
 | 维度 | HTTP/2 (over TCP) | HTTP/3 (over QUIC) |
@@ -124,8 +120,6 @@ QPACK 解决:
 ---
 
 ## 三、eBPF：内核可编程与 Rust
-
-> **[来源: eBPF.io Documentation](https://ebpf.io/) · [aya-rs Documentation](https://aya-rs.dev/) · [RFC 793 — TCP] · [RFC 8312 — CUBIC]** ✅
 
 ### 3.1 eBPF 的本质
 

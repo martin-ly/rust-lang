@@ -1,5 +1,5 @@
-# Rust for Linux [来源: [Rust for Linux](https://rust-for-linux.com/)]：操作系统内核中的内存安全
-
+# Rust for Linux ：操作系统内核中的内存安全
+>
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Cre — 设计 Rust for Linux 架构
@@ -17,46 +17,43 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust for Linux]]
 
-- [Rust for Linux \[来源: Rust for Linux\]：操作系统内核中的内存安全](#rust-for-linux-来源-rust-for-linux操作系统内核中的内存安全)
-  - [📑 目录](#-目录)
-  - [一、核心概念](#一核心概念)
-    - [1.1 为什么内核需要 Rust](#11-为什么内核需要-rust)
-    - [1.2 Rust for Linux 架构](#12-rust-for-linux-架构)
-    - [1.3 内核中的 unsafe 边界](#13-内核中的-unsafe-边界)
-  - [二、技术细节](#二技术细节)
-    - [2.1 C 互操作与绑定生成](#21-c-互操作与绑定生成)
-    - [2.2 内核抽象层](#22-内核抽象层)
-    - [2.3 驱动程序开发模型](#23-驱动程序开发模型)
-  - [三、采用状态矩阵](#三采用状态矩阵)
-  - [四、反命题与边界分析](#四反命题与边界分析)
-    - [4.1 反命题树](#41-反命题树)
-    - [4.2 边界极限](#42-边界极限)
-  - [五、常见陷阱](#五常见陷阱)
-  - [六、来源与延伸阅读](#六来源与延伸阅读)
-  - [相关概念文件](#相关概念文件)
-  - [权威来源索引](#权威来源索引)
-  - [十、边界测试：Rust for Linux 的编译错误](#十边界测试rust-for-linux-的编译错误)
-    - [10.1 边界测试：内核模块的 `no_std` 与标准库缺失（编译错误）](#101-边界测试内核模块的-no_std-与标准库缺失编译错误)
-    - [10.2 边界测试：内核锁的原子顺序与 `unsafe` 封装（编译错误）](#102-边界测试内核锁的原子顺序与-unsafe-封装编译错误)
-    - [10.3 边界测试：内核模块的 `no_std` 与 `alloc` 的谨慎使用（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-的谨慎使用编译错误)
-    - [10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时死锁）](#104-边界测试内核锁的-spinlock-与睡眠的互斥运行时死锁)
-    - [10.3 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-限制编译错误)
+ [Rust for Linux \：操作系统内核中的内存安全](#rust-for-linux)
+
+- [📑 目录](#-目录)
+
+- [一、核心概念](#一核心概念)
+  - [1.1 为什么内核需要 Rust](#11-为什么内核需要-rust)
+  - [1.2 Rust for Linux 架构](#12-rust-for-linux-架构)
+  - [1.3 内核中的 unsafe 边界](#13-内核中的-unsafe-边界)
+- [二、技术细节](#二技术细节)
+  - [2.1 C 互操作与绑定生成](#21-c-互操作与绑定生成)
+  - [2.2 内核抽象层](#22-内核抽象层)
+  - [2.3 驱动程序开发模型](#23-驱动程序开发模型)
+- [三、采用状态矩阵](#三采用状态矩阵)
+- [四、反命题与边界分析](#四反命题与边界分析)
+  - [4.1 反命题树](#41-反命题树)
+  - [4.2 边界极限](#42-边界极限)
+- [五、常见陷阱](#五常见陷阱)
+- [六、来源与延伸阅读](#六来源与延伸阅读)
+- [相关概念文件](#相关概念文件)
+- [权威来源索引](#权威来源索引)
+- [十、边界测试：Rust for Linux 的编译错误](#十边界测试rust-for-linux-的编译错误)
+  - [10.1 边界测试：内核模块的 `no_std` 与标准库缺失（编译错误）](#101-边界测试内核模块的-no_std-与标准库缺失编译错误)
+  - [10.2 边界测试：内核锁的原子顺序与 `unsafe` 封装（编译错误）](#102-边界测试内核锁的原子顺序与-unsafe-封装编译错误)
+  - [10.3 边界测试：内核模块的 `no_std` 与 `alloc` 的谨慎使用（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-的谨慎使用编译错误)
+  - [10.4 边界测试：内核锁的 `spinlock` 与睡眠的互斥（运行时死锁）](#104-边界测试内核锁的-spinlock-与睡眠的互斥运行时死锁)
+  - [10.3 边界测试：内核模块的 `no_std` 与 alloc 限制（编译错误）](#103-边界测试内核模块的-no_std-与-alloc-限制编译错误)
 
 ---
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 为什么内核需要 Rust
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Linux 内核的安全现状:
@@ -93,7 +90,6 @@ Linux 内核的安全现状:
 
 ### 1.2 Rust for Linux 架构
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 Rust for Linux 项目结构:
@@ -128,7 +124,6 @@ Rust for Linux 项目结构:
 
 ### 1.3 内核中的 unsafe 边界
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 内核中的 unsafe 使用原则:
@@ -168,14 +163,9 @@ Rust for Linux 项目结构:
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust for Linux]]
 
 ### 2.1 C 互操作与绑定生成
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 绑定生成流程:
@@ -219,7 +209,6 @@ Rust for Linux 项目结构:
 
 ### 2.2 内核抽象层
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // Rust 内核抽象示例（概念性）
@@ -280,7 +269,6 @@ impl FileOperations for MyDevice {
 
 ### 2.3 驱动程序开发模型
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Rust 驱动 vs C 驱动的对比:
@@ -319,10 +307,6 @@ Rust 驱动 vs C 驱动的对比:
 ---
 
 ## 三、采用状态矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust for Linux]]
 
 ```text
 Rust for Linux 采用状态 (2024+):
@@ -369,14 +353,9 @@ Rust for Linux 采用状态 (2024+):
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -399,7 +378,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 启动代码
@@ -439,10 +417,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust for Linux]]
 
 ```text
 陷阱 1: 忽视 C 绑定的不安全性
@@ -487,10 +461,6 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust for Linux]]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
@@ -508,10 +478,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码
 - [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口
@@ -533,139 +499,19 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
 >
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **补充来源**
-
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ## 十、边界测试：Rust for Linux 的编译错误
 

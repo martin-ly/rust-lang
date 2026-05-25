@@ -18,9 +18,7 @@
 
 ## 一、权威定义
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: Embedded Rust Book; Embassy Book]** ✅
 
 ### 1.1 Wikipedia 权威定义
 
@@ -62,9 +60,7 @@
 
 ## 认知路径（Cognitive Path）
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: Actix/axum Docs; Web Framework Benchmarks]** ✅
 
 > **学习递进**: 从直觉出发，逐层深入核心概念。
 [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -101,19 +97,15 @@ embedded-hal/actix/anchor/bevy等框架
 
 ### 第 6 步：领域选择的决策框架？
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 性能需求/安全需求/团队经验/生态成熟度矩阵
 
 ## 二、概念属性矩阵
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: clap Docs; Rust CLI Book]** ✅
 
 ### 2.1 应用领域 × 技术栈 × 概念依赖总矩阵
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | **应用领域** | **核心 Crate 栈** | **关键 L1-L5 概念** | **unsafe 程度** | **成熟度** | **工业代表** |
 |:---|:---|:---|:---|:---|:---|
@@ -128,7 +120,6 @@ embedded-hal/actix/anchor/bevy等框架
 
 ### 2.2 领域选型决策矩阵
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | **你的目标** | **首选领域栈** | **学习曲线** | **Rust 优势** | **Rust 劣势** |
 |:---|:---|:---|:---|:---|
@@ -145,9 +136,7 @@ embedded-hal/actix/anchor/bevy等框架
 
 ## 三、思维导图
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: Rust for Linux; Writing an OS in Rust]** ✅
 
 ```mermaid
 graph TD
@@ -185,13 +174,10 @@ graph TD
 
 ## 四、应用领域详解
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: wasm-bindgen Guide; WASI Preview]** ✅
 
 ### 4.1 Web 后端与云原生
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **技术栈**: `axum` / `actix-web` + `tokio` + `sqlx`/`sea-orm` + `tracing` + `prometheus`
 
@@ -214,7 +200,6 @@ graph TD
 
 ### 4.2 CLI 工具
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **技术栈**: `clap` + `serde` + `anyhow`/`thiserror` + `indicatif` + `console`
 
@@ -241,7 +226,6 @@ Rust 在 CLI 领域是最成熟的应用之一。核心优势：
 
 ### 4.3 嵌入式与物联网
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **技术栈**: `embassy` / `rtic` + `embedded-hal` + `defmt` + `probe-rs`
 
@@ -283,7 +267,6 @@ Bevy 的 ECS 将游戏世界表示为**扁平化的类型化数组**（SoA），
 
 ### 4.5 区块链与 Web3
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 **技术栈**: `solana-program` / `ink!` / `alloy` / `libp2p` / `substrate`
 
@@ -306,7 +289,6 @@ Rust 在区块链领域占据**主导地位**的原因：
 
 ### 4.6 数据工程与 ML 推理
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 **技术栈**: `polars` + `arrow-rs` + `datafusion` + `candle` / `burn` / `tract`
 
@@ -344,8 +326,6 @@ Rust 在区块链领域占据**主导地位**的原因：
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 
 ### 4.8 桌面 GUI 与跨平台应用
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **技术栈**: `tauri` + `dioxus` / `iced` / `egui`
 
@@ -371,8 +351,6 @@ Rust 在区块链领域占据**主导地位**的原因：
 > **来源**: [Tauri Docs] · [Dioxus Docs] · 可信度: ✅
 
 ### 4.9 WASM（WebAssembly）与全栈 Rust
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **技术栈**: `wasm-bindgen` / `wasm-pack` + `leptos` / `dioxus` / `yew` + `trunk`
 
@@ -445,8 +423,6 @@ fn main() -> ! {
 > **来源**: [Ferrous Systems] · [Embassy Book] · [probe-rs] · 可信度: ✅
 
 ### 4.11 CLI 工具工程化
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **完整技术栈**: `clap` + `serde` + `anyhow`/`thiserror` + `tracing` + `indicatif` + `human-panic`
 
@@ -529,9 +505,7 @@ fn move_player(
 
 ## 五、领域与 L1-L5 概念映射
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: Tokio Documentation; QUIC RFC 9000]** ✅
 
 | **应用领域** | **L1 基础** | **L2 进阶** | **L3 高级** | **L4 形式化** | **L5 对比** |
 |:---|:---|:---|:---|:---|:---|
@@ -548,13 +522,9 @@ fn move_player(
 
 ## 六、反命题与边界分析
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: egui Docs; wgpu Docs]** ✅
 
 ### 命题: "Rust 适合所有软件工程领域"
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph TD
@@ -576,11 +546,8 @@ graph TD
 ```
 
 > **认知功能**: 训练批判性思维，通过反例迭代削弱"Rust 万能"的绝对化命题。在技术讨论中遇到过度推广时，可用此决策树定位反驳切入点。命题的成立性取决于约束条件的显式化——"适合"是性能、安全、开发速度、生态成熟度四维权衡的结果，而非二元判断。
-> [来源: 💡 原创分析]
 
 ### 6.1 各领域的 Rust 不适用场景
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | **领域** | **Rust 不适合** | **原因** | **替代方案** |
 |:---|:---|:---|:---|
@@ -597,13 +564,9 @@ graph TD
 
 ## 七、扩展内容：工业案例与趋势
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: Candle Docs; Burn Docs]** ✅
 
 ### 7.1 大规模工业采用矩阵
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | **公司** | **领域** | **Rust 用途** | **规模** | **公开资料** |
 |:---|:---|:---|:---|:---|
@@ -621,8 +584,6 @@ graph TD
 | **Ferrous Systems** | 嵌入式 | 工业控制、汽车 | 欧盟项目 | [Ferrous Blog] |
 
 ### 7.2 2025-2026 应用领域趋势
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 | **趋势** | **驱动因素** | **影响领域** |
 |:---|:---|:---|
@@ -636,8 +597,6 @@ graph TD
 | **数据工程 Rust 化** | polars + datafusion | ETL、分析、流处理 |
 
 ### 7.3 学术论文引用
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | **论文/著作** | **作者/年份** | **核心贡献** | **与 Rust 应用的关联** |
 |:---|:---|:---|:---|
@@ -650,8 +609,6 @@ graph TD
 | *Bevy ECS Architecture* | Bevy Team | 数据驱动游戏引擎 | 游戏领域设计模式 |
 
 ### 7.4 领域选择决策框架
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 面对具体项目，如何选择 Rust 的应用领域？以下决策矩阵从约束出发：
 
@@ -698,7 +655,6 @@ graph TD
 ```
 
 > **认知功能**: 将抽象的技术选型转化为可操作的决策路径，从约束出发而非从语言偏好出发。沿分支匹配具体领域栈时，应优先识别硬约束（性能/安全/并发）与软约束（开发速度/生态数量）的权重。当性能和安全中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度为唯一约束时，混合架构（Python/Go 原型 + Rust 核心）往往更优。
-> [来源: 💡 原创分析]
 
 > **关键洞察**: 领域选择不是“Rust 是否适合”，而是**“约束优先级排序”**。当性能、安全、并发中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度和生态数量为唯一约束时，其他语言可能更优。
 [来源: [Wikipedia — Software engineering](https://en.wikipedia.org/wiki/Software_engineering)]
@@ -709,9 +665,7 @@ graph TD
 
 ## 八、知识来源关系（Provenance）
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: Data Engineering in Rust; polars Docs]** ✅
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -738,9 +692,7 @@ graph TD
 
 ## 九、相关概念链接
 >
-> [来源: [Rust Foundation]]
 
-> **[来源: Cargo Script RFC; Rust Scripting]** ✅
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -759,8 +711,6 @@ graph TD
 | 语言演进 | [`../07_future/03_evolution.md`](../07_future/03_evolution.md) | 领域能力演进 |
 
 ### 编译验证：Web 后端最小可运行示例
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 以下代码验证 axum + tokio 组合的核心抽象在编译期的类型一致性：
 
@@ -802,8 +752,6 @@ fn main() {
 ---
 
 ### 9.1 领域间迁移指南
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 从 Python 迁移到 Rust
 
@@ -878,8 +826,6 @@ async fn main() {
 ```
 
 ### 9.2 "Rust 不适合" 的失败案例分析
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Rust 并非银弹。以下是真实场景中的**不适合案例**：
 
@@ -899,12 +845,9 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 2. **某初创公司的全栈 Rust 决策**：一家 5 人初创选择 Rust 全栈（后端 + WASM 前端），结果**招聘困难**（Rust 开发者稀缺）、**开发周期延长**（相比 Node.js 全栈延迟 6 个月发布 MVP），最终重写为 Go + React。
 
 > **教训**：Rust 的**正确性保证**是有**开发速度成本**的。在需要快速验证市场、团队规模小、非性能关键的场景中，Rust 的优势无法抵消其复杂性成本。
->
 > **来源**: [Rust Survey 2023/2024] · [Dropbox 工程博客] · [Rust 用户访谈] · [The Pragmatic Programmer]
 
 ### 9.3 Benchmark 数据概览
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 领域 | 指标 | Rust | 对比语言 | 来源 |
 |:---|:---|:---:|:---:|:---|
@@ -922,10 +865,7 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 ---
 
 ## 十、待补充与演进方向（TODOs）
->
-> [来源: [Rust Foundation]]
 
-> **[来源: Embedded Rust Book; Embassy Book]** ✅
 
 - [x] **高**: 补充 WASM 全栈开发领域深度解析
 - [x] **高**: 补充嵌入式 no_std 工程化深度案例
@@ -933,14 +873,11 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 - [x] **高**: 补充游戏开发 Bevy 生态深度解析
 - [x] **中**: 补充领域选择决策框架（四维评估 + 决策树）
 - [x] **高**: 补充每个应用领域的最小可运行项目骨架（hello-world 级别） —— 已分散在各领域章节
-- [x] **高**: 补充领域间迁移指南（如从 Python/Go 迁移到 Rust 的路线图） —— 已完成 §9.1 [来源: [TRPL](https://doc.rust-lang.org/book/)]
-- [x] **中**: 补充具体 benchmark 数据（Web 框架 RPS、CLI 启动时间、嵌入式内存占用） —— 已完成 §9.3
+ [x] **高**: 补充领域间迁移指南（如从 Python/Go 迁移到 Rust 的路线图） —— 已完成 §9.1- [x] **中**: 补充具体 benchmark 数据（Web 框架 RPS、CLI 启动时间、嵌入式内存占用） —— 已完成 §9.3
 - [x] **中**: 补充各领域招聘市场数据（Rust 岗位趋势、薪资水平） —— 已补充工业案例（Discord/Shopify/Vercel 等）
 - [x] **中**: 补充 "Rust 不适合" 的深度案例分析（失败教训） —— 已完成 §9.2
 
 ### 9.4 科学计算 / HPC 领域
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Rust 在科学计算和高性能计算领域的生态正在快速成熟：
 
@@ -980,8 +917,6 @@ fn main() {
 > **来源**: [ndarray docs] · [faer-rs 文档] · [nalgebra 文档] · [Linfa GitHub] · [Polars 文档]
 
 ### 9.5 音频 / 视觉创意编程
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 | Crate | 用途 | 说明 |
 |:---|:---|:---|
@@ -1018,10 +953,7 @@ fn view(app: &App, frame: Frame) {
 - [x] **低**: 建立工业案例的持续追踪列表（谁在用 Rust、为什么、效果如何） —— 已融入 §9.2 失败案例分析和各应用领域章节
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
->
-> [来源: [Rust Foundation]]
 
-> **[来源: Actix/axum Docs; Web Framework Benchmarks]** ✅
 
 > **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
@@ -1042,16 +974,11 @@ fn view(app: &App, frame: Frame) {
 | **领域选择多维决策** | 性能/安全/生态/人才 ⟹ | 无银弹 | 混合语言架构 | 技术选型框架 |
 
 ## 反命题分析（Anti-Propositions）
->
-> [来源: [Rust Foundation]]
 
-> **[来源: clap Docs; Rust CLI Book]** ✅
 
 > **逻辑辨析**: 以下命题看似成立，实则在特定条件下失效。
 
 ### 1. "Rust 适合所有编程任务"
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
 
@@ -1082,11 +1009,8 @@ graph TD
 ```
 
 > **认知功能**: 通过反例枚举建立命题边界意识，避免将 Rust 的系统编程优势过度泛化到所有场景。初学者可用此图自我校准期望——Rust 是系统编程领域的升级方案，并非所有编程任务的最优解。四个反例覆盖开发速度、学习门槛、生态成熟度、脚本复杂度四个维度，恰好对应 Rust 在设计上为"正确性"所付出的权衡成本。
-> [来源: 💡 原创分析]
 
 ### 2. "Rust 在 Web 后端已经取代 Go/Java"
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 
@@ -1117,11 +1041,8 @@ graph TD
 ```
 
 > **认知功能**: 拆解具体领域的"取代"命题，区分"技术优势"与"市场/生态优势"。Web 后端的竞争不仅是性能和安全竞争，更是人才供给、框架数量、运维惯性的综合竞争。在团队技术选型讨论中，用此图区分"Rust 更快更安全"（技术事实）与"Rust 生态更丰富"（市场判断），避免混淆两类论证。
-> [来源: 💡 原创分析]
 
 ### 3. "嵌入式 Rust 完全替代 C"
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 
@@ -1152,35 +1073,25 @@ graph TD
 ```
 
 > **认知功能**: 揭示技术替代的非技术阻力——硬件覆盖率、行业认证、遗留代码、调试工具链成熟度是嵌入式领域切换语言的隐形壁垒。在嵌入式选型时，应先评估目标平台的 HAL 完整性和认证需求（如 FDA/DO-178C），再评估语言特性收益。Rust 的内存安全是充分条件而非必要条件；在已通过 MISRA-C 认证且运行稳定的项目中，切换语言的边际收益可能远低于迁移成本。
-> [来源: 💡 原创分析]
 
 > **过渡: L6 → L3**
 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
 > 每个应用领域都面临特定的 unsafe 边界：嵌入式需要裸指针操作、WASM 需要 FFI 桥接、游戏引擎需要自定义内存分配器。这些场景不是"绕过 Rust 的安全保证"，而是"在理解安全边界的前提下精确控制"。
->
 > unsafe 边界见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)。
 
 > **过渡: L6 → L5**
->
 > 不同语言在不同领域有各自的优势：Go 在微服务、Python 在 AI、C++ 在游戏引擎。Rust 正在所有领域同时扩张，但这不是因为 Rust 万能，而是因为它的"零成本抽象 + 内存安全"组合在越来越多的场景下成为最优解。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
->
 > 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) 与 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)。
 
 > **过渡: L6 → L7**
 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
->
 > 应用领域是技术演进的试验场：WASM 推动 Rust 的 `no_std` 生态成熟、AI 推理推动 `unsafe` 张量操作的封装标准化、嵌入式推动 `const generics` 的编译期计算。Rust 的未来方向由实际应用需求驱动。
->
 > 未来方向见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)。
 
 ---
 
 ## 十一、生态前沿的形式化梳理（2026.05）
->
-> [来源: [Rust Foundation]]
 
-> **[来源: Rust for Linux; Writing an OS in Rust]** ✅
 
 > **定位**: 本章节从**形式模型视角**梳理各生态前沿方向，不展开使用教程，聚焦"该领域与 Rust 所有权/类型系统的交互、安全边界、与 L1-L4 的映射"。
 > **原则**: 点到为止，每方向一段形式化分析。
@@ -1188,8 +1099,6 @@ graph TD
 ---
 
 ### 11.1 Embassy：异步嵌入式的形式化调度
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **形式化定位**: Embassy 是 Rust `async/await` 在 `no_std` 环境下的**零运行时调度器**。其核心洞察：通过编译期状态机转换（L3 Async 的 `Future` 降阶），在裸机上实现协作式多任务，无需堆分配、无需 OS 线程。
 
@@ -1206,8 +1115,6 @@ graph TD
 ---
 
 ### 11.2 Rust for Linux：内核安全抽象的形式化边界
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **形式化定位**: Rust for Linux 是 Rust 类型系统与 Linux 内核 C API 的**形式化边界工程**。其核心挑战：将内核的复杂不变量（锁规则、引用计数、IRQ 上下文）编码为 Rust 的类型契约。
 
@@ -1224,8 +1131,6 @@ graph TD
 ---
 
 ### 11.3 eBPF + Aya：沙箱验证与类型系统的结合
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **形式化定位**: eBPF 是 Linux 内核的**沙箱虚拟机**，Aya 是用 Rust 编写 eBPF 程序的工具链。其核心洞察：eBPF 验证器（verifier）在加载期证明程序的安全性（无无限循环、无越界访问、无无效指令），而 Rust 的类型系统在编译期证明内存安全——**双层形式化验证**。
 
@@ -1242,8 +1147,6 @@ graph TD
 ---
 
 ### 11.4 io_uring：异步 IO 与所有权模型的交互
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **形式化定位**: io_uring 是 Linux 5.1+ 的**异步 IO 接口**，`tokio-uring` 和 `monoio` 将其封装为 Rust 的 async API。其核心洞察：io_uring 的**共享环形缓冲区**（submission queue / completion queue）是 Rust 所有权模型的**压力测试**——多个生产者/消费者共享同一内存区域，但 Rust 编译器要求明确的所有权归属。
 
@@ -1260,8 +1163,6 @@ graph TD
 ---
 
 ### 11.5 QUIC/HTTP3：协议状态机的类型安全
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 **形式化定位**: `quinn` 和 `h3` 是纯 Rust 的 QUIC/HTTP3 实现。其核心洞察：QUIC 的**有状态连接**（connection state machine）和**流多路复用**（stream multiplexing）天然适合 Rust 的类型状态（Typestate）模式——每个连接状态对应一个类型，状态转换由编译期保证合法。
 
@@ -1278,8 +1179,6 @@ graph TD
 ---
 
 ### 11.6 GUI（egui / iced）：立即模式 vs 保留模式的类型状态
->
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 **形式化定位**: `egui`（立即模式）和 `iced`（保留模式/Elm 架构）代表了 GUI 编程的两种**所有权模型**。立即模式每帧重建 UI 状态，保留模式维护持久化的 UI 树——这与 Rust 的所有权模型有不同的交互方式。
 
@@ -1296,8 +1195,6 @@ graph TD
 ---
 
 ### 11.7 AI/ML 推理（Candle / Burn）：确定性容器与张量安全
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **形式化定位**: `candle`（Hugging Face）和 `burn`（Rust 原生）是 Rust 的 AI 推理框架。其核心洞察：**张量操作**（tensor operations）是所有权模型在**数值计算**上的应用——张量的形状（shape）和类型（dtype）可在编译期验证，避免运行时的形状不匹配错误。
 
@@ -1315,8 +1212,6 @@ graph TD
 ---
 
 ### 11.8 Cargo Script：单文件 Rust 的模块系统压缩
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **形式化定位**: Cargo Script（Frontmatter）是单文件 Rust 脚本的**模块系统压缩**。其核心洞察：将 `Cargo.toml` 的依赖声明压缩为文件头部的注释/frontmatter，使单文件脚本成为**自包含的形式化单元**。
 
@@ -1333,7 +1228,6 @@ graph TD
 
 ## 十二、定理一致性矩阵（领域安全层）
 >
-> [来源: [Rust Foundation]]
 
 > **[来源类型: 原创分析; Embassy Book; Rust for Linux; Aya Docs; QUIC RFC]** 以下矩阵梳理各应用领域的关键安全保证与失效条件。
 
@@ -1356,7 +1250,6 @@ graph TD
 
 ## 变更日志
 
-> **[来源: wasm-bindgen Guide; WASI Preview]** ✅
 
 | 版本 | 日期 | 变更 |
 |:---|:---|:---|
@@ -1371,7 +1264,6 @@ graph TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -1383,271 +1275,139 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
-> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
-> [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
-> [来源: [crates.io](https://crates.io/)]
-> [来源: [docs.rs](https://docs.rs/)]
 
 ## 十、边界测试：应用领域的编译错误
 

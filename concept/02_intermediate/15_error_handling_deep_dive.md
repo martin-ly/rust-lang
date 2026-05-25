@@ -15,9 +15,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [错误处理深入：从 Result 到自定义错误生态](#错误处理深入从-result-到自定义错误生态)
   - [📑 目录](#-目录)
@@ -47,13 +45,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Result 与 Option 的组合代数
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Option<T> 和 Result<T, E> 是 Rust 错误处理的代数数据类型:
@@ -93,7 +88,6 @@ Option<T> 和 Result<T, E> 是 Rust 错误处理的代数数据类型:
 
 ### 1.2 ? 运算符与错误传播
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
 // ? 运算符: 自动错误传播
@@ -131,7 +125,6 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
 
 ### 1.3 Error Trait 与错误类型
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
 // std::error::Error trait (核心)
@@ -154,7 +147,6 @@ pub trait Error: Debug + Display {
 │ sync::PoisonError  │ Mutex 毒化                      │
 │ alloc::AllocError  │ 内存分配                        │
 └────────────────────┴─────────────────────────────────┘
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 // Error trait 的演进:
 // - 1.0: 基础 Error trait
@@ -168,14 +160,9 @@ pub trait Error: Debug + Display {
 ---
 
 ## 二、技术细节
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 错误转换与 From Trait
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
 // From/Into 实现错误自动转换
@@ -219,7 +206,6 @@ fn read_and_parse() -> Result<i32, AppError> {
 
 ### 2.2 自定义错误类型
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
 // 使用 thiserror 自动生成 Error trait（推荐）
@@ -276,7 +262,6 @@ impl std::error::Error for ManualError {
 
 ### 2.3 错误处理框架
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 错误处理生态:
@@ -321,10 +306,6 @@ impl std::error::Error for ManualError {
 ---
 
 ## 三、错误处理模式矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 方案 → 代码示例
@@ -366,14 +347,9 @@ impl std::error::Error for ManualError {
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -396,7 +372,6 @@ graph TD
 
 ### 4.2 边界极限
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: panic 与 Result 的混用
@@ -436,10 +411,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 滥用 unwrap
@@ -501,7 +472,6 @@ graph TD
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -515,10 +485,6 @@ graph TD
 ---
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 - [Traits](./01_traits.md) — Trait 系统
@@ -540,26 +506,17 @@ graph TD
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
-> **[来源: [Rust Error Handling Guidelines](https://doc.rust-lang.org/rust-by-example/error.html)]**
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十、边界测试：错误处理的编译错误
 

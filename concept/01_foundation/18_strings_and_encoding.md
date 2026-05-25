@@ -19,9 +19,7 @@
 
 ## 📑 目录
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [字符串与编码：Rust 的文本处理类型系统](#字符串与编码rust-的文本处理类型系统)
   - [📑 目录](#-目录)
@@ -55,13 +53,10 @@
 
 ## 一、核心概念
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 String vs &str：所有权谱系
 >
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Rust 字符串类型的所有权谱系:
@@ -112,7 +107,6 @@ fn main() {
 
 ### 1.2 UTF-8：Rust 的编码选择
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 Rust 强制 UTF-8 的设计决策:
@@ -145,13 +139,11 @@ Rust 强制 UTF-8 的设计决策:
 
 > **认知功能**: UTF-8 选择的**核心权衡**——牺牲了 O(1) 字符索引（实际上 Unicode 的 combining characters 使"字符"概念本身复杂），换取了与现有生态（Web、文件系统、C 库）的无缝兼容。
 > [来源: [UTF-8 RFC 3629](https://tools.ietf.org/html/rfc3629)]
-> [来源: [Unicode Standard — UTF-8](https://www.unicode.org/versions/Unicode15.0.0/UnicodeStandard-15.0.pdf)]
 
 ---
 
 ### 1.3 平台字符串：OsString 与 CString
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Rust 的字符串类型全景:
@@ -191,20 +183,15 @@ Rust 的字符串类型全景:
 
 > **认知功能**: Rust 的**多字符串类型设计**反映了对不同"字符串契约"的精确建模——str 保证 UTF-8，OsStr 不保证但支持平台原生编码，CStr 保证 NUL 终止。每次转换都是潜在的失败点，强制开发者显式处理编码不匹配。
 > [来源: [std::ffi::OsString](https://doc.rust-lang.org/std/ffi/struct.OsString.html)]
-> [来源: [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504)]
-> [来源: [std::ffi::CString](https://doc.rust-lang.org/std/ffi/struct.CString.html)]
 
 ---
 
 ## 二、技术细节
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Unicode Standard](https://www.unicode.org/standard/standard.html)]
 
 ### 2.1 字符串切片与字符边界
 >
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 字符串切片的边界规则:
@@ -250,13 +237,11 @@ fn char_at(s: &str, n: usize) -> Option<char> {
 
 > **认知功能**: 字符串切片的**边界安全设计**——Rust 选择让越界切片 panic（或通过 get 返回 Option），而非像某些语言那样静默产生无效 UTF-8，这是对"数据完整性"优先于"操作便利性"的价值选择。
 > [来源: [std::str — Slicing](https://doc.rust-lang.org/std/primitive.str.html#slicing)]
-> [来源: [TRPL — String Slices](https://doc.rust-lang.org/book/ch08-02-strings.html#slicing-strings)]
 
 ---
 
 ### 2.2 Grapheme Clusters 与文本分割
 >
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Unicode 文本分割的三个层次:
@@ -299,13 +284,11 @@ graph TD
 
 > **认知功能**: Grapheme Cluster 的**三层抽象**揭示了"什么是字符"这一看似简单的问题在 Unicode 世界中的复杂性——Rust 的 char 是"标量值"，不等于"用户看到的字符"，真正的文本处理需要更高层抽象。
 > [来源: [Unicode Standard — Text Segmentation](https://www.unicode.org/reports/tr29/)]
-> [来源: [unicode-segmentation crate](https://docs.rs/unicode-segmentation/latest/unicode_segmentation/trait.UnicodeSegmentation.html)]
 
 ---
 
 ### 2.3 Unicode Normalization
 >
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Unicode Normalization（规范化）:
@@ -340,19 +323,13 @@ Unicode Normalization（规范化）:
 
 > **认知功能**: Unicode Normalization 的**必要性**——在不规范化的世界里，"看起来相同的字符串"在字节层面可能完全不同，这会导致安全漏洞（如绕过用户名验证）和数据不一致。
 > [来源: [Unicode Standard — Normalization](https://www.unicode.org/reports/tr15/)]
-> [来源: [unicode-normalization crate](https://docs.rs/unicode-normalization/latest/unicode_normalization/trait.UnicodeNormalization.html)]
 
 ---
 
 ## 三、选型决策矩阵
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 字符串类型选型
 >
-> **[来源: [crates.io](https://crates.io/)]**
 
 | **场景** | **推荐类型** | **避免** | **原因** |
 |:---|:---|:---|:---|
@@ -366,7 +343,6 @@ Unicode Normalization（规范化）:
 
 ### 3.2 编码转换策略
 >
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 | **源 → 目标** | **方法** | **失败处理** |
 |:---|:---|:---|
@@ -382,14 +358,8 @@ Unicode Normalization（规范化）:
 ---
 
 ## 四、反命题与边界分析
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 反命题 1: "String.len() 返回字符数"
@@ -423,8 +393,6 @@ Unicode Normalization（规范化）:
 ---
 
 ### 4.2 边界极限
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 边界 1: UTF-8 验证开销
@@ -451,15 +419,10 @@ Unicode Normalization（规范化）:
 
 > **认知功能**: 边界极限指明了标准字符串类型的**适用疆域**——在性能极致、平台抽象、编译期计算等场景下，需要借助外部 crate 或 unsafe 代码突破标准库的约束。
 > [来源: [Rust Reference — str](https://doc.rust-lang.org/reference/types/textual.html)]
-> [来源: [smol_str crate](https://docs.rs/smol_str/latest/smol_str/)]
 
 ---
 
 ## 五、常见陷阱
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 字节索引混淆
@@ -514,9 +477,7 @@ Unicode Normalization（规范化）:
 
 ## 六、来源与延伸阅读
 >
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
-> [来源: [Cargo Book]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -567,10 +528,6 @@ classDiagram
 ```
 
 ## 相关概念文件
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership](./01_ownership.md) — 所有权系统基础
 - [Type System](./04_type_system.md) — 类型系统基础
@@ -602,118 +559,65 @@ fn main() {
 
 ## 权威来源索引
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-> **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
 
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ---
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **补充来源**
 
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ## 十二、边界测试：字符串编码的编译错误
 

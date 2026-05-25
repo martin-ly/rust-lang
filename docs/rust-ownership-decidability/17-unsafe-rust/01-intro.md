@@ -76,6 +76,7 @@ unsafe {
 ```
 
 ### 1.2 为什么需要 Unsafe
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 场景 | 为什么需要 Unsafe | 示例 |
@@ -87,6 +88,7 @@ unsafe {
 | **并发原语** | 原子操作 | Mutex, Arc |
 
 ### 1.3 安全契约模型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -109,11 +111,13 @@ unsafe {
 ---
 
 ## 2. Unsafe 的五种超能力
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 的 `unsafe` 关键字提供了五种编译器无法验证安全的超能力：
 
 ### 2.1 解引用原始指针
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -137,6 +141,7 @@ unsafe {
 | 解引用 | 安全 | 需要 `unsafe` |
 
 ### 2.2 调用 Unsafe 函数或方法
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -152,6 +157,7 @@ fn main() {
 ```
 
 ### 2.3 实现 Unsafe Trait
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -163,6 +169,7 @@ unsafe impl Send for MyType {}
 ```
 
 ### 2.4 访问或修改可变静态变量
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -178,6 +185,7 @@ fn increment() {
 **警告**: 可变静态变量不是线程安全的！
 
 ### 2.5 访问 Union 的字段
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -197,9 +205,11 @@ fn main() {
 ---
 
 ## 3. Unsafe 的形式化定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 操作语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -217,6 +227,7 @@ Unsafe 上下文 U 是一个程序区域，其中以下操作被允许:
 ```
 
 ### 3.2 类型系统扩展
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -231,6 +242,7 @@ unsafe { unsafe_fn(5) }; // OK
 ```
 
 ### 3.3 安全性不变量
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -253,9 +265,11 @@ unsafe { unsafe_fn(5) }; // OK
 ---
 
 ## 4. Unsafe 块与 Unsafe 函数
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 Unsafe 块
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -294,6 +308,7 @@ fn good_split_at_mut(slice: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) 
 ```
 
 ### 4.2 Unsafe 函数
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -315,6 +330,7 @@ unsafe {
 **文档要求**: Unsafe 函数必须有 `# Safety` 文档节。
 
 ### 4.3 Unsafe Trait
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -331,9 +347,11 @@ unsafe impl Send for MyType {
 ---
 
 ## 5. 安全抽象的设计
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 核心原则
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -356,6 +374,7 @@ unsafe impl Send for MyType {
 ```
 
 ### 5.2 实战: 实现安全的原始指针包装
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -415,6 +434,7 @@ fn main() {
 ```
 
 ### 5.3 不变量的封装
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -454,9 +474,11 @@ impl ImmutableString {
 ---
 
 ## 6. 常见陷阱与 UB
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 未定义行为 (UB) 列表
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -495,6 +517,7 @@ unsafe {
 ```
 
 ### 6.2 调试技巧
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -512,9 +535,11 @@ debug_assert!(ptr.is_aligned(), "指针应对齐");
 ---
 
 ## 7. 调试与验证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 Miri - Rust 的内存检查器
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -537,6 +562,7 @@ Miri 可以检测:
 - 类型双关错误
 
 ### 7.2 静态分析工具
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 工具 | 用途 | 命令 |
@@ -548,9 +574,11 @@ Miri 可以检测:
 ---
 
 ## 8. 参考资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 官方文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/) - Unsafe Rust 权威指南
@@ -559,6 +587,7 @@ Miri 可以检测:
 - [std::mem](https://doc.rust-lang.org/std/mem/)
 
 ### 学术论文
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. Jung et al. (2018). RustBelt: Securing the Foundations of Rust. *POPL*.
@@ -566,6 +595,7 @@ Miri 可以检测:
 3. Vytiniotis et al. (2011). Modular Type Inference with Local Assumptions. *JFP*.
 
 ### 相关文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [02-raw-pointers.md](./02-raw-pointers.md) - 原始指针深度解析
@@ -575,6 +605,7 @@ Miri 可以检测:
 ---
 
 ## 检查清单
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 理解 Unsafe Rust 的核心概念
@@ -737,4 +768,3 @@ Miri 可以检测:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

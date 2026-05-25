@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actor设计模式](#actor设计模式)
@@ -97,9 +98,11 @@ impl Handler<CreateOrder> for OrderActor {
 ---
 
 ## 2. 监督模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 监督者模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -142,6 +145,7 @@ async fn worker_actor(ctx: BastionContext) -> Result<()> {
 ```
 
 ### 2.2 Circuit Breaker模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -206,9 +210,11 @@ impl Handler<CallRequest> for CircuitBreakerActor {
 ---
 
 ## 3. 路由模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 负载均衡路由
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -251,6 +257,7 @@ impl Handler<Task> for LoadBalancerActor {
 ```
 
 ### 3.2 一致性哈希路由
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -285,9 +292,11 @@ impl Handler<UserCommand> for ShardedActorSystem {
 ---
 
 ## 4. 状态管理模式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 有限状态机 (FSM)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -334,6 +343,7 @@ impl Actor for OrderActor {
 ```
 
 ### 4.2 Event Sourcing
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -377,9 +387,11 @@ impl EventSourcedActor {
 ---
 
 ## 5. 通信模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 Pub-Sub模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -406,6 +418,7 @@ impl PubSubActor {
 ```
 
 ### 5.2 请求管道
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -456,6 +469,7 @@ let stage_a = PipelineStage::new(processor_a, Some(stage_b));
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
@@ -588,4 +602,3 @@ let stage_a = PipelineStage::new(processor_a, Some(stage_b));
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

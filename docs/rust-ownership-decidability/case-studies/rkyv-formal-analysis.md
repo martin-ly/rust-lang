@@ -145,6 +145,7 @@ pub trait Deserialize<D: Fallible>: Archive {
 ---
 
 ## 2. 相对指针详解
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 绝对指针 vs 相对指针
@@ -287,6 +288,7 @@ fn demonstrate_position_independence() {
 ---
 
 ## 3. 存档格式与 Archive Trait
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Archive Trait 设计哲学
@@ -485,6 +487,7 @@ impl<S: Serializer> Serialize<S> for CachedString {
 ---
 
 ## 4. 验证机制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 check_archived_root 原理
@@ -596,6 +599,7 @@ fn boundary_validation() {
 ---
 
 ## 5. 安全模式与 Valid Trait
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 严格模式 vs 不安全模式
@@ -707,6 +711,7 @@ mod safety_strategy {
 ---
 
 ## 6. 性能分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 零拷贝优势
@@ -866,6 +871,7 @@ fn controlled_allocation() {
 ---
 
 ## 7. 跨平台支持
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 字节序处理
@@ -986,6 +992,7 @@ mod v2 {
 ---
 
 ## 8. 使用场景
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 配置文件缓存
@@ -1184,6 +1191,7 @@ impl ZeroCopyQueue {
 ---
 
 ## 9. 局限性与注意事项
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 存档修改风险
@@ -1324,6 +1332,7 @@ struct TypeErased {
 ---
 
 ## 10. 完整代码示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 10.1 复杂类型序列化
@@ -1738,6 +1747,7 @@ impl RkyvDatabase {
 ---
 
 ## 定理总结
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 定理 | 描述 | 重要性 |
@@ -2379,4 +2389,3 @@ impl RkyvDatabase {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

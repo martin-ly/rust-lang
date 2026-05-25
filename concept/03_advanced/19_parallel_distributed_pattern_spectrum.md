@@ -53,7 +53,6 @@ L4: 广域网/边缘
 
 ### 2.2 统一分析框架
 
-> **[来源: Herlihy & Shavit — The Art of Multiprocessor Programming, Ch. 1] · [Lynch — Distributed Algorithms, §1] · [💡 原创分析]** ✅
 
 所有并行/分布式模式都可以通过四个维度分析：
 
@@ -70,7 +69,6 @@ L4: 广域网/边缘
 
 ### 3.1 线程池模式
 
-> **[来源: Rust std::thread] · [rayon docs] · [Java ThreadPoolExecutor]** ✅
 
 ```rust
 use rayon::ThreadPoolBuilder;
@@ -100,7 +98,6 @@ pool.spawn(|| {
 
 ### 3.2 Fork-Join 模式
 
-> **[来源: CLRS — Introduction to Algorithms, Ch. 27] · [rayon::join]** ✅
 
 ```rust
 use rayon::prelude::*;
@@ -132,7 +129,6 @@ fn parallel_sum_v2(data: &[i32]) -> i32 {
 
 ### 3.3 无锁数据结构
 
-> **[来源: Herlihy & Shavit, Ch. 10-11] · [Rust Atomics and Locks, Ch. 7] · [crossbeam docs]** ✅
 
 ```rust
 use crossbeam::queue::ArrayQueue;
@@ -161,7 +157,6 @@ let value = queue.pop();
 
 ### 4.1 Actor 模型
 
-> **[来源: Hewitt et al. 1973 — A Universal Modular Actor Formalism] · [Actix docs] · [Erlang/OTP]** ✅
 
 ```rust
 use actix::prelude::*;
@@ -208,7 +203,6 @@ impl Handler<Increment> for Counter {
 
 ### 4.2 CSP（Communicating Sequential Processes）
 
-> **[来源: Hoare 1978 — Communicating Sequential Processes] · [Go channels] · [Rust std::sync::mpsc]** ✅
 
 ```rust
 use std::sync::mpsc;
@@ -245,7 +239,6 @@ for received in rx { // 接收消息
 
 ### 4.3 数据流与背压（Backpressure）
 
-> **[来源: Reactive Streams Specification] · [tokio::sync::mpsc] · [futures::Stream]** ✅
 
 ```rust
 use tokio::sync::mpsc;
@@ -274,7 +267,6 @@ while let Some(value) = rx.recv().await {
 
 ### 5.1 共识算法：Raft
 
-> **[来源: Ongaro & Ousterhout 2014 — In Search of an Understandable Consensus Algorithm (USENIX ATC)] · [Raft Consensus Paper]** ✅
 
 ```rust
 // Raft 的核心状态机（简化概念模型）
@@ -301,7 +293,6 @@ Raft 是 **CP 系统**（Consistency + Partition tolerance，牺牲 Availability
 
 ### 5.2 Gossip 协议
 
-> **[来源: Demers et al. 1987 — Epidemic Algorithms for Replicated Database Maintenance] · [SWIM 协议] · [Cassandra Gossip]** ✅
 
 Gossip 协议是 **AP 系统**（Availability + Partition tolerance，牺牲 Consistency）：
 
@@ -367,7 +358,6 @@ CRDT 必须满足:
 
 ### 6.1 从并发到分布式的统一连续体
 
-> **[来源: Lynch — Distributed Algorithms, §1.2] · [💡 原创分析]** ✅
 
 并行与分布式计算的区别不是二元的，而是连续谱系：
 
@@ -384,7 +374,6 @@ CRDT 必须满足:
 
 ### 6.2 一致性谱系
 
-> **[来源: Brewer 2000 — CAP Twelve Years Later] · [Viotti & Vukolić 2016 — Consistency in Non-Transactional Distributed Storage]** ✅
 
 ```text
 一致性强度谱系（从强到弱）:
@@ -543,7 +532,6 @@ fn crdt_commutativity() {
 ---
 
 > **权威来源**: [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.cs.brown.edu/~mph/HerlihyShavit/) · [Lynch — Distributed Algorithms](https://mitpress.mit.edu/books/distributed-algorithms) · [Ongaro & Ousterhout — Raft](https://raft.github.io/raft.pdf) · [Shapiro et al. — CRDT](https://hal.inria.fr/hal-00932836/document) · [Rust Atomics and Locks](https://marabos.nl/atomics/)
->
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Thiserror/Anyhow错误处理形式化分析](#thiserroranyhow错误处理形式化分析)
@@ -34,6 +35,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 错误处理双雄：
@@ -44,9 +46,11 @@
 ---
 
 ## 2. Thiserror
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 ERROR-1 ( 派生宏 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -68,6 +72,7 @@ $$
 $$
 
 ### 定义 ERROR-2 ( 自动实现 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 $$
@@ -75,6 +80,7 @@ $$
 $$
 
 ### 定理 ERROR-T1 ( 类型安全 )
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 错误类型在编译时确定。
@@ -86,9 +92,11 @@ $$
 ---
 
 ## 3. Anyhow
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 ANYHOW-1 ( Result别名 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -100,6 +108,7 @@ $$
 $$
 
 ### 定义 ANYHOW-2 ( 上下文 )
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -108,6 +117,7 @@ fs::read(path)
 ```
 
 ### 定理 ANYHOW-T1 ( 自动转换 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 任何错误可转换为anyhow::Error。
@@ -119,9 +129,11 @@ $$
 ---
 
 ## 4. 组合使用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定义 COMBINE-1 ( 边界设计 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -137,6 +149,7 @@ fn main() -> anyhow::Result<()> {
 ```
 
 ### 定理 COMBINE-T1 ( 无缝转换 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 库错误自动转换为anyhow错误。
@@ -148,9 +161,11 @@ $$
 ---
 
 ## 5. 定理与证明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 ERR-T1 ( 零运行时开销 )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Thiserror生成零开销代码。
@@ -272,11 +287,9 @@ fn print_error_chain(err: &Error) {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -328,4 +341,3 @@ fn print_error_chain(err: &Error) {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

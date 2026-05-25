@@ -40,6 +40,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 为什么需要分布式锁
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -70,6 +71,7 @@
 ```
 
 ### 2.2 形式化定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -94,9 +96,11 @@ Liveness (活性):
 ---
 
 ## 3. 基于 Redis 的分布式锁
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 Redlock 算法
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -230,6 +234,7 @@ async fn critical_section(redlock: &Redlock) {
 ```
 
 ### 3.2 续租机制
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -294,9 +299,11 @@ impl Drop for LockGuard {
 ---
 
 ## 4. 基于 etcd/ZooKeeper 的锁
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 etcd 分布式锁
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -368,6 +375,7 @@ impl EtcdDistributedLock {
 ```
 
 ### 4.2 ZooKeeper 分布式锁
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -458,9 +466,11 @@ impl Drop for ZkLockGuard {
 ---
 
 ## 5. 分布式读写锁
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 读写锁语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -539,9 +549,11 @@ impl Drop for RwLockGuard {
 ---
 
 ## 6. 形式化性质
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 安全性证明
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -562,6 +574,7 @@ impl Drop for RwLockGuard {
 ```
 
 ### 6.2 活性分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -580,9 +593,11 @@ impl Drop for RwLockGuard {
 ---
 
 ## 7. 最佳实践
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 锁使用准则
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -643,6 +658,7 @@ enum LockGranularity {
 ---
 
 ## 8. 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 实现 | 一致性 | 容错性 | 性能 | 适用场景 |
@@ -889,4 +905,3 @@ $$
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

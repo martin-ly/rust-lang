@@ -50,6 +50,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 POOL-1 ( 内存池 )
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 $$
@@ -57,6 +58,7 @@ $$
 $$
 
 ### 定义 POOL-2 ( 块分配 )
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -75,9 +77,11 @@ $$
 ---
 
 ## 3. 分配器接口
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 ALLOC-1 ( GlobalAlloc trait )
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -95,6 +99,7 @@ $$
 $$
 
 ### 定理 ALLOC-T1 ( 分配器安全 )
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 分配器满足Rust内存安全要求。
@@ -106,9 +111,11 @@ $$
 ---
 
 ## 4. 内存碎片分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 定义 FRAG-1 ( 外部碎片 )
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 $$
@@ -116,6 +123,7 @@ $$
 $$
 
 ### 定理 FRAG-T1 ( 固定块无外部碎片 )
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 固定大小块分配器无外部碎片。
@@ -129,6 +137,7 @@ $$
 ---
 
 ## 5. 定理与证明
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 OOM-T1 ( OOM处理 )
@@ -310,4 +319,3 @@ impl<A: GlobalAlloc> GlobalAlloc for InstrumentedAllocator<A> {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
