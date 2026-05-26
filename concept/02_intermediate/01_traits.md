@@ -1,4 +1,5 @@
 # Traits（Trait 系统）
+>
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Orphan Rule 的设计意图
@@ -46,102 +47,103 @@
 
 ## 📑 目录
 
- [Trait \s（Trait 系统）](#trait)
+- [Traits（Trait 系统）](#traitstrait-系统)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
-  - [1.1 Wikipedia 对齐定义](#11-wikipedia-对齐定义)
-  - [1.2 TRPL 与 RFC 官方定义](#12-trpl-与-rfc-官方定义)
-  - [1.3 形式化定义](#13-形式化定义)
+    - [1.1 Wikipedia 对齐定义](#11-wikipedia-对齐定义)
+    - [1.2 TRPL 与 RFC 官方定义](#12-trpl-与-rfc-官方定义)
+    - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-  - [2.1 Trait 类型分类矩阵](#21-trait-类型分类矩阵)
-  - [2.2 Trait vs 其他语言机制对比](#22-trait-vs-其他语言机制对比)
-  - [2.3 Orphan Rule 判定矩阵](#23-orphan-rule-判定矩阵)
+    - [2.1 Trait 类型分类矩阵](#21-trait-类型分类矩阵)
+    - [2.2 Trait vs 其他语言机制对比](#22-trait-vs-其他语言机制对比)
+    - [2.3 Orphan Rule 判定矩阵](#23-orphan-rule-判定矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
-  - [4.1 引理：Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl](#41-引理orphan-rule--coherence--全局唯一-impl)
-  - [4.1b Coherence 的形式化逻辑基础](#41b-coherence-的形式化逻辑基础)
-  - [Coherence 作为类型论一致性公理](#coherence-作为类型论一致性公理)
-  - [Orphan Rule 的数学边界条件](#orphan-rule-的数学边界条件)
-  - [与 System F 子类型化的对接](#与-system-f-子类型化的对接)
-  - [Blanket impl 与 Horn 子句可满足性](#blanket-impl-与-horn-子句可满足性)
-  - [4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性](#42-定理trait-对象安全条件--dyn-trait-可行性)
-  - [4.3 推论：Auto Trait 结构化推导 ⟹ Send/Sync 自动实现](#43-推论auto-trait-结构化推导--sendsync-自动实现)
-  - [定义与语法](#定义与语法)
-  - [自动推导规则](#自动推导规则)
-  - [`unsafe impl` 的例外情况](#unsafe-impl-的例外情况)
-  - [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)
-  - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
+    - [4.1 引理：Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl](#41-引理orphan-rule--coherence--全局唯一-impl)
+    - [4.1b Coherence 的形式化逻辑基础](#41b-coherence-的形式化逻辑基础)
+      - [Coherence 作为类型论一致性公理](#coherence-作为类型论一致性公理)
+      - [Orphan Rule 的数学边界条件](#orphan-rule-的数学边界条件)
+      - [与 System F 子类型化的对接](#与-system-f-子类型化的对接)
+      - [Blanket impl 与 Horn 子句可满足性](#blanket-impl-与-horn-子句可满足性)
+    - [4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性](#42-定理trait-对象安全条件--dyn-trait-可行性)
+    - [4.3 推论：Auto Trait 结构化推导 ⟹ Send/Sync 自动实现](#43-推论auto-trait-结构化推导--sendsync-自动实现)
+      - [定义与语法](#定义与语法)
+      - [自动推导规则](#自动推导规则)
+      - [`unsafe impl` 的例外情况](#unsafe-impl-的例外情况)
+    - [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)
+    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
-  - [5.1 正确示例：Trait 定义与实现](#51-正确示例trait-定义与实现)
-  - [5.2 正确示例：关联类型](#52-正确示例关联类型)
-  - [5.3 反例：违反 Orphan Rule（E0117）](#53-反例违反-orphan-rulee0117)
-  - [5.4 反例：重叠实现（E0119）](#54-反例重叠实现e0119)
-  - [5.5 边界示例：`impl Trait` 作为存在类型](#55-边界示例impl-trait-作为存在类型)
-  - [5.6 正确示例：Generic Associated Types (GATs)](#56-正确示例generic-associated-types-gats)
-  - [语法与动机](#语法与动机)
-  - [与 HKT（Higher-Kinded Types）的关系](#与-hkthigher-kinded-types的关系)
-  - [Lending Iterator 示例](#lending-iterator-示例)
-  - [为什么 GATs 解决了关联类型不能泛型的问题](#为什么-gats-解决了关联类型不能泛型的问题)
-  - [5.7 正确示例：Specialization（特化）的语义与边界](#57-正确示例specialization特化的语义与边界)
-  - [问题与默认实现](#问题与默认实现)
-  - [特化实现：为具体类型提供更优路径](#特化实现为具体类型提供更优路径)
-  - [编译器如何裁决重叠 impl](#编译器如何裁决重叠-impl)
-  - [与 C++ 模板特化的对比](#与-c-模板特化的对比)
-  - [编译错误：非法重叠](#编译错误非法重叠)
-  - [5.8 SFINAE 与 Trait Bounds 的深度对比](#58-sfinae-与-trait-bounds-的深度对比)
+    - [5.1 正确示例：Trait 定义与实现](#51-正确示例trait-定义与实现)
+    - [5.2 正确示例：关联类型](#52-正确示例关联类型)
+    - [5.3 反例：违反 Orphan Rule（E0117）](#53-反例违反-orphan-rulee0117)
+    - [5.4 反例：重叠实现（E0119）](#54-反例重叠实现e0119)
+    - [5.5 边界示例：`impl Trait` 作为存在类型](#55-边界示例impl-trait-作为存在类型)
+    - [5.6 正确示例：Generic Associated Types (GATs)](#56-正确示例generic-associated-types-gats)
+      - [语法与动机](#语法与动机)
+      - [与 HKT（Higher-Kinded Types）的关系](#与-hkthigher-kinded-types的关系)
+      - [Lending Iterator 示例](#lending-iterator-示例)
+      - [为什么 GATs 解决了关联类型不能泛型的问题](#为什么-gats-解决了关联类型不能泛型的问题)
+    - [5.7 正确示例：Specialization（特化）的语义与边界](#57-正确示例specialization特化的语义与边界)
+      - [问题与默认实现](#问题与默认实现)
+      - [特化实现：为具体类型提供更优路径](#特化实现为具体类型提供更优路径)
+      - [编译器如何裁决重叠 impl](#编译器如何裁决重叠-impl)
+      - [与 C++ 模板特化的对比](#与-c-模板特化的对比)
+      - [编译错误：非法重叠](#编译错误非法重叠)
+    - [5.8 SFINAE 与 Trait Bounds 的深度对比](#58-sfinae-与-trait-bounds-的深度对比)
   - [六、反命题与边界分析（Counter-proposition \& Boundary Analysis）](#六反命题与边界分析counter-proposition--boundary-analysis)
-  - [6.1 反命题 1: "Trait 实现总是无冲突的"](#61-反命题-1-trait-实现总是无冲突的)
-  - [6.2 反命题 2: "Blanket impl 覆盖所有类型"](#62-反命题-2-blanket-impl-覆盖所有类型)
-  - [6.3 反命题 3: "`dyn Trait` 和 `impl Trait` 等价"](#63-反命题-3-dyn-trait-和-impl-trait-等价)
-  - [6.4 反命题 4: "Trait 对象安全等价于 Trait 可用"](#64-反命题-4-trait-对象安全等价于-trait-可用)
+    - [6.1 反命题 1: "Trait 实现总是无冲突的"](#61-反命题-1-trait-实现总是无冲突的)
+    - [6.2 反命题 2: "Blanket impl 覆盖所有类型"](#62-反命题-2-blanket-impl-覆盖所有类型)
+    - [6.3 反命题 3: "`dyn Trait` 和 `impl Trait` 等价"](#63-反命题-3-dyn-trait-和-impl-trait-等价)
+    - [6.4 反命题 4: "Trait 对象安全等价于 Trait 可用"](#64-反命题-4-trait-对象安全等价于-trait-可用)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
-  - [7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界](#71-测试-1-orphan-rule--coherence-多层嵌套边界)
-  - [7.2 测试 2: Trait 对象安全 + dyn/impl 分发边界](#72-测试-2-trait-对象安全--dynimpl-分发边界)
-  - [7.3 测试 3: Blanket impl + 关联类型递归 + Auto Trait 推导边界](#73-测试-3-blanket-impl--关联类型递归--auto-trait-推导边界)
-  - [7.5 编译错误示例](#75-编译错误示例)
+    - [7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界](#71-测试-1-orphan-rule--coherence-多层嵌套边界)
+    - [7.2 测试 2: Trait 对象安全 + dyn/impl 分发边界](#72-测试-2-trait-对象安全--dynimpl-分发边界)
+    - [7.3 测试 3: Blanket impl + 关联类型递归 + Auto Trait 推导边界](#73-测试-3-blanket-impl--关联类型递归--auto-trait-推导边界)
+    - [7.5 编译错误示例](#75-编译错误示例)
   - [八、认知路径（Cognitive Path）](#八认知路径cognitive-path)
-  - [Step 1: 直觉类比 — "Trait 像岗位描述"](#step-1-直觉类比--trait-像岗位描述)
-  - [Step 2: 语法熟悉 — 定义、实现、约束](#step-2-语法熟悉--定义实现约束)
-  - [Step 3: 规则困惑 — Orphan Rule 与 Coherence](#step-3-规则困惑--orphan-rule-与-coherence)
-  - [Step 4: 类型论映射 — Curry-Howard 与 Type Class](#step-4-类型论映射--curry-howard-与-type-class)
-  - [Step 5: 工程权衡 — 静态分发 vs 动态分发](#step-5-工程权衡--静态分发-vs-动态分发)
-  - [Step 6: 形式化掌控 — 定理链与设计验证](#step-6-形式化掌控--定理链与设计验证)
+    - [Step 1: 直觉类比 — "Trait 像岗位描述"](#step-1-直觉类比--trait-像岗位描述)
+    - [Step 2: 语法熟悉 — 定义、实现、约束](#step-2-语法熟悉--定义实现约束)
+    - [Step 3: 规则困惑 — Orphan Rule 与 Coherence](#step-3-规则困惑--orphan-rule-与-coherence)
+    - [Step 4: 类型论映射 — Curry-Howard 与 Type Class](#step-4-类型论映射--curry-howard-与-type-class)
+    - [Step 5: 工程权衡 — 静态分发 vs 动态分发](#step-5-工程权衡--静态分发-vs-动态分发)
+    - [Step 6: 形式化掌控 — 定理链与设计验证](#step-6-形式化掌控--定理链与设计验证)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [十、相关概念链接](#十相关概念链接)
-  - [补充章节：`impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）](#补充章节impl-trait-在-trait-定义中的使用rpitit--afit)
-  - [Rust 1.75+ AFIT 语法](#rust-175-afit-语法)
-  - [与显式关联类型的对比](#与显式关联类型的对比)
-  - [编译器如何处理 `impl Trait` 返回](#编译器如何处理-impl-trait-返回)
-  - [限制：不能用于 trait object](#限制不能用于-trait-object)
-  - [形式化语义：存在类型 vs 全称类型](#形式化语义存在类型-vs-全称类型)
-  - [高阶边界：RPITIT 与 HRTB / 生命周期参数](#高阶边界rpitit-与-hrtb--生命周期参数)
-  - [补充章节：Const Trait 与 `~const` 实验特性](#补充章节const-trait-与-const-实验特性)
-  - [问题背景：const fn 中的 Trait Bound 限制](#问题背景const-fn-中的-trait-bound-限制)
-  - [`~const` 语法与 `#[const_trait]`](#const-语法与-const_trait)
-  - [编译器如何保证 const 安全性](#编译器如何保证-const-安全性)
-  - [反例：非 const impl 不满足 ~const bound](#反例非-const-impl-不满足-const-bound)
-  - [`impl const Trait` 与 `~const` 的区别](#impl-const-trait-与-const-的区别)
-  - [替代方案：当前稳定 Rust 的 workaround](#替代方案当前稳定-rust-的-workaround)
-  - [补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外](#补充章节fundamental-attribute-与-orphan-rule-例外)
-  - [目的：为智能指针和引用打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
-  - [哪些类型是 fundamental](#哪些类型是-fundamental)
-  - [为什么这些类型是 fundamental：对下游 crate 的"透明性"](#为什么这些类型是-fundamental对下游-crate-的透明性)
-  - [与 `#[non_exhaustive]` 的对比](#与-non_exhaustive-的对比)
-  - [形式化判定规则](#形式化判定规则)
-  - [边界与反例：滥用 fundamental 会破坏 coherence](#边界与反例滥用-fundamental-会破坏-coherence)
-  - [补充章节：Negative Impls（`impl !Trait for T`）的形式化语义](#补充章节negative-implsimpl-trait-for-t的形式化语义)
-  - [形式化语义：负向公理](#形式化语义负向公理)
-  - [Auto Trait 的负向实现](#auto-trait-的负向实现)
-  - [与 Coherence 的交互：阻止下游 impl](#与-coherence-的交互阻止下游-impl)
-  - [反例：Negative impl 不能与普通 impl 重叠](#反例negative-impl-不能与普通-impl-重叠)
+    - [补充章节：`impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）](#补充章节impl-trait-在-trait-定义中的使用rpitit--afit)
+      - [Rust 1.75+ AFIT 语法](#rust-175-afit-语法)
+      - [与显式关联类型的对比](#与显式关联类型的对比)
+      - [编译器如何处理 `impl Trait` 返回](#编译器如何处理-impl-trait-返回)
+      - [限制：不能用于 trait object](#限制不能用于-trait-object)
+      - [形式化语义：存在类型 vs 全称类型](#形式化语义存在类型-vs-全称类型)
+      - [高阶边界：RPITIT 与 HRTB / 生命周期参数](#高阶边界rpitit-与-hrtb--生命周期参数)
+    - [补充章节：Const Trait 与 `~const` 实验特性](#补充章节const-trait-与-const-实验特性)
+      - [问题背景：const fn 中的 Trait Bound 限制](#问题背景const-fn-中的-trait-bound-限制)
+      - [`~const` 语法与 `#[const_trait]`](#const-语法与-const_trait)
+      - [编译器如何保证 const 安全性](#编译器如何保证-const-安全性)
+      - [反例：非 const impl 不满足 ~const bound](#反例非-const-impl-不满足-const-bound)
+      - [`impl const Trait` 与 `~const` 的区别](#impl-const-trait-与-const-的区别)
+      - [替代方案：当前稳定 Rust 的 workaround](#替代方案当前稳定-rust-的-workaround)
+    - [补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外](#补充章节fundamental-attribute-与-orphan-rule-例外)
+      - [目的：为智能指针和引用打开 impl 空间](#目的为智能指针和引用打开-impl-空间)
+      - [哪些类型是 fundamental](#哪些类型是-fundamental)
+      - [为什么这些类型是 fundamental：对下游 crate 的"透明性"](#为什么这些类型是-fundamental对下游-crate-的透明性)
+      - [与 `#[non_exhaustive]` 的对比](#与-non_exhaustive-的对比)
+      - [形式化判定规则](#形式化判定规则)
+      - [边界与反例：滥用 fundamental 会破坏 coherence](#边界与反例滥用-fundamental-会破坏-coherence)
+    - [补充章节：Negative Impls（`impl !Trait for T`）的形式化语义](#补充章节negative-implsimpl-trait-for-t的形式化语义)
+      - [形式化语义：负向公理](#形式化语义负向公理)
+      - [Auto Trait 的负向实现](#auto-trait-的负向实现)
+      - [与 Coherence 的交互：阻止下游 impl](#与-coherence-的交互阻止下游-impl)
+      - [反例：Negative impl 不能与普通 impl 重叠](#反例negative-impl-不能与普通-impl-重叠)
   - [十二、补充章节：Next-generation Trait Solver（2026 旗舰稳定化目标）](#十二补充章节next-generation-trait-solver2026-旗舰稳定化目标)
-  - [12.1 为什么需要新 Solver？](#121-为什么需要新-solver)
-  - [12.2 Next Solver 的核心改进](#122-next-solver-的核心改进)
-  - [12.3 对语言特性的解锁效应](#123-对语言特性的解锁效应)
-  - [12.4 迁移准备](#124-迁移准备)
+    - [12.1 为什么需要新 Solver？](#121-为什么需要新-solver)
+    - [12.2 Next Solver 的核心改进](#122-next-solver-的核心改进)
+    - [12.3 对语言特性的解锁效应](#123-对语言特性的解锁效应)
+    - [12.4 迁移准备](#124-迁移准备)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
   - [权威来源索引](#权威来源索引)
-  - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
+    - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
+    - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
 
 ## 一、权威定义（Definition）
 
@@ -189,7 +191,9 @@ Trait 作为逻辑命题:
   定理: "对所有满足 Monoid 的类型 T，reduce 成立"
 ```
 
-> **过渡到属性矩阵**: 从定义出发，Trait 系统并非单一概念，而是由多种子类型（自动 Trait、标记 Trait、泛型 Trait 等）构成的层次化体系。下一节通过属性矩阵对这些子类型进行系统分类，并与其他语言的类似机制进行正交对比。属性矩阵回答"Trait 有哪些种类"，为后续定理推理链提供概念基础。
+> **过渡到属性矩阵**: 从定义出发，Trait 系统并非单一概念，而是由多种子类型（自动 Trait、标记 Trait、泛型 Trait 等）构成的层次化体系。
+> 下一节通过属性矩阵对这些子类型进行系统分类，并与其他语言的类似机制进行正交对比。
+> 属性矩阵回答"Trait 有哪些种类"，为后续定理推理链提供概念基础。
 
 ---
 
@@ -198,7 +202,7 @@ Trait 作为逻辑命题:
 ### 2.1 Trait 类型分类矩阵
 
 | **Trait 类型** | **定义方式** | **实现方式** | **动态分发** | **典型示例** |
-|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- |
 | **普通 Trait** | `trait Foo { fn bar(&self); }` | `impl Foo for Type` | `dyn Foo` | `Display`、`Debug` |
 | **自动 Trait** | `unsafe auto trait Send {}` | 编译器自动推导 | ❌ | `Send`、`Sync`、`Sized` |
 | **标记 Trait** | `trait Marker {}` | 空实现 | 视情况 | `Copy`、`Sized` |
@@ -211,7 +215,7 @@ Trait 作为逻辑命题:
 ### 2.2 Trait vs 其他语言机制对比
 
 | **维度** | **Rust Trait** | **Haskell Type Class** | **C++ Concepts** | **Java Interface** | **Go Interface** |
-|:---|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **多态类型** | Ad hoc + 参数化 | Ad hoc + 参数化 | 参数化（约束） | Ad hoc | Structural（隐式） |
 | **实现方式** | 显式 `impl` | 显式 `instance` | 自动匹配（duck typing） | 显式 `implements` | 隐式（结构匹配） |
 | **孤儿规则** | ✅ 严格 | ✅ 严格 | ❌ 无 | ❌ 无 | ❌ 无 |
@@ -228,7 +232,7 @@ Trait 作为逻辑命题:
 ### 2.3 Orphan Rule 判定矩阵
 
 | **场景** | **类型来源** | **Trait 来源** | **允许 impl?** | **原因** |
-|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- |
 | 标准类型 + 标准 Trait | `std` | `std` | ❌ | 双方均非本地 |
 | 本地类型 + 标准 Trait | `crate` | `std` | ✅ | 类型是本地的 |
 | 标准类型 + 本地 Trait | `std` | `crate` | ✅ | Trait 是本地的 |
@@ -236,8 +240,8 @@ Trait 作为逻辑命题:
 | 外部 A 类型 + 外部 B Trait | `crate_a` | `crate_b` | ❌ | 双方均非本地（孤儿） |
 
 > **[来源: RFC 1023 §3; Rust Reference: Orphan Rules]** Orphan Rule 要求 impl 中至少有一方（类型或 Trait）定义在当前 crate，防止跨 crate 的 impl 冲突，是 Coherence 的工程基础。
-
-> **过渡到思维导图**: 属性矩阵展示了 Trait 系统的静态分类，但未能表达概念间的动态关联。思维导图通过拓扑结构揭示 Trait 从定义、约束到分发的完整概念网络，为后续定理推理链提供直观的概念地图。
+> **过渡到思维导图**: 属性矩阵展示了 Trait 系统的静态分类，但未能表达概念间的动态关联。
+> 思维导图通过拓扑结构揭示 Trait 从定义、约束到分发的完整概念网络，为后续定理推理链提供直观的概念地图。
 
 ---
 
@@ -280,8 +284,8 @@ graph TD
 > **使用建议**: 作为学习导航锚点，每掌握一个子概念后回到图中定位其拓扑位置，避免碎片化记忆。
 > **关键洞察**: Trait 系统的设计精髓是"接口定义、泛型约束、分发机制"的三层正交分离，Orphan Rule 是连接三层的保险装置。
 [来源: [TRPL](https://doc.rust-lang.org/book/ch10-02-traits.html)]
-
-> **过渡到定理推理链**: 思维导图呈现了 Trait 系统的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链，将 Orphan Rule、Coherence、对象安全、Auto Trait 推导等核心命题形式化为可验证的推理网络，建立从编译规则到运行行为的完整因果链。
+> **过渡到定理推理链**: 思维导图呈现了 Trait 系统的概念拓扑，但缺乏严格的逻辑推导关系。
+> 下一节通过"⟹"标注的定理链，将 Orphan Rule、Coherence、对象安全、Auto Trait 推导等核心命题形式化为可验证的推理网络，建立从编译规则到运行行为的完整因果链。
 
 ---
 
@@ -291,7 +295,9 @@ graph TD
 
 ### 4.1 引理：Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl
 
-> **[RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)** · **[Rust Reference: Coherence](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence)** Orphan Rule 限制 impl 的声明位置，是 Coherence（全局一致性）的必要前提。 ✅ 已验证
+> **[RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)** ·
+> **[Rust Reference: Coherence](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence)**
+> Orphan Rule 限制 impl 的声明位置，是 Coherence（全局一致性）的必要前提。 ✅ 已验证
 
 ```text
 前提 1: Orphan Rule 要求 impl 中至少有一方（类型或 Trait）定义在当前 crate
@@ -307,7 +313,6 @@ graph TD
 > **[来源: RFC 1023; Rust Reference: Coherence]** Orphan Rule 与 Coherence 的交互确保编译器在全局范围内能唯一确定每个 (Type, Trait) 对的实现。
 
 ### 4.1b Coherence 的形式化逻辑基础
-
 
 §4.1 给出了 Orphan Rule ⟹ Coherence 的直觉推理，本节将其置于**类型论和逻辑编程**的框架中，使 Coherence 不仅是工程规则，而是可证明的数学定理。
 
@@ -782,7 +787,6 @@ impl Foo for Vec<u8> { fn foo() {} }       // ⚠️ 更特化
 ---
 
 ### 5.8 SFINAE 与 Trait Bounds 的深度对比
-
 
 SFINAE（Substitution Failure Is Not An Error）是 C++ 模板元编程的核心机制：
 
@@ -1895,7 +1899,6 @@ impl !Foo for Bar<String> {}     // ❌ 错误：与正向 impl 重叠
 
 ## 十二、补充章节：Next-generation Trait Solver（2026 旗舰稳定化目标）
 
-
 ### 12.1 为什么需要新 Solver？
 
 Rust 的现有 trait solver（`rustc_trait_selection`）自 1.0 以来已服务十余年，但在复杂泛型场景下积累了大量技术债务：
@@ -1983,303 +1986,11 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 > **相关判定树**: [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)
 

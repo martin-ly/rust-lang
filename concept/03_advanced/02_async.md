@@ -1,4 +1,5 @@
 # Async/Await（异步编程）
+>
 > **层次定位**: L3 高级概念 / 异步子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
@@ -20,7 +21,7 @@
 
 - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
 - v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
-- v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器与生产者）、§8.11 Pin<Box<dyn Future>> vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
+- v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器与生产者）、§8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
 - v3.0 (2026-05-13): 深度重构——新增§3.5调度模型对比（含三维Mermaid图）、§3.1状态机变换精确推导（含Pin内存布局约束）、§8.7取消安全系统分析（含3种安全模式与形式化定义）、§8.8 Waker契约与活性（含决策树），建立异步语义模型完整推理链
 - v2.0 (2026-05-13): 定理一致性矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Future 状态机模型、async/await 语法糖解析、Pin 分析、思维导图、示例反例
@@ -28,94 +29,93 @@
 ---
 
 ## 📑 目录
->
 
- [Async/Await（异步 \编程）](#asyncawait异步)
+- [Async/Await（异步编程）](#asyncawait异步编程)
   - [📑 目录](#-目录)
   - [〇、认知路径（Cognitive Path）](#〇认知路径cognitive-path)
   - [一、权威定义（Definition）](#一权威定义definition)
-  - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
-  - [1.2 官方文档定义](#12-官方文档定义)
-  - [1.3 形式化定义](#13-形式化定义)
+    - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
+    - [1.2 官方文档定义](#12-官方文档定义)
+    - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
-  - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
-  - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
-  - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
+    - [2.1 异步 vs 并发 vs 并行对比矩阵](#21-异步-vs-并发-vs-并行对比矩阵)
+    - [2.2 Future 组合子矩阵](#22-future-组合子矩阵)
+    - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
-  - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
-  - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
-  - [状态机类型归纳定义](#状态机类型归纳定义)
-  - [poll 作为状态转移函数](#poll-作为状态转移函数)
-  - [.await 的 CPS 变换规则](#await-的-cps-变换规则)
-  - [Pin 约束在操作语义中的体现](#pin-约束在操作语义中的体现)
-  - [3.2 Pin 的形式化语义](#32-pin-的形式化语义)
-  - [3.2b Pin 的 LTL 形式化（异步状态机语境）](#32b-pin-的-ltl-形式化异步状态机语境)
-  - [不动性公理（Immobility Axiom）](#不动性公理immobility-axiom)
-  - [Unpin 豁免（Exemption）](#unpin-豁免exemption)
-  - [在 poll 递归调用链中的验证](#在-poll-递归调用链中的验证)
-  - [与 §3.1b 操作语义的衔接](#与-31b-操作语义的衔接)
-  - [3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程](#35-调度模型对比抢占式-vs-协作式-vs-绿色线程)
-  - [3.5·补充：跨语言异步机制对比](#35补充跨语言异步机制对比)
+    - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
+    - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
+      - [状态机类型归纳定义](#状态机类型归纳定义)
+      - [poll 作为状态转移函数](#poll-作为状态转移函数)
+      - [.await 的 CPS 变换规则](#await-的-cps-变换规则)
+      - [Pin 约束在操作语义中的体现](#pin-约束在操作语义中的体现)
+    - [3.2 Pin 的形式化语义](#32-pin-的形式化语义)
+    - [3.2b Pin 的 LTL 形式化（异步状态机语境）](#32b-pin-的-ltl-形式化异步状态机语境)
+      - [不动性公理（Immobility Axiom）](#不动性公理immobility-axiom)
+      - [Unpin 豁免（Exemption）](#unpin-豁免exemption)
+      - [在 poll 递归调用链中的验证](#在-poll-递归调用链中的验证)
+      - [与 §3.1b 操作语义的衔接](#与-31b-操作语义的衔接)
+    - [3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程](#35-调度模型对比抢占式-vs-协作式-vs-绿色线程)
+    - [3.5·补充：跨语言异步机制对比](#35补充跨语言异步机制对比)
   - [四、思维导图（Mind Map）](#四思维导图mind-map)
   - [五、定理一致性矩阵（Theorem Consistency Matrix）](#五定理一致性矩阵theorem-consistency-matrix)
-  - [5.1 定理矩阵（10 行，含 ⟹ 推理链）](#51-定理矩阵10-行含--推理链)
-  - [5.2 推理链层级图](#52-推理链层级图)
+    - [5.1 定理矩阵（10 行，含 ⟹ 推理链）](#51-定理矩阵10-行含--推理链)
+    - [5.2 推理链层级图](#52-推理链层级图)
   - [六、反命题决策树（Counter-proposition Decision Trees）](#六反命题决策树counter-proposition-decision-trees)
-  - [6.1 反命题: "async/await 总是零成本"](#61-反命题-asyncawait-总是零成本)
-  - [6.2 反命题: "Future 一旦 poll 就一定完成"](#62-反命题-future-一旦-poll-就一定完成)
-  - [6.3 反命题: "async fn 等价于返回 Future 的 fn"](#63-反命题-async-fn-等价于返回-future-的-fn)
+    - [6.1 反命题: "async/await 总是零成本"](#61-反命题-asyncawait-总是零成本)
+    - [6.2 反命题: "Future 一旦 poll 就一定完成"](#62-反命题-future-一旦-poll-就一定完成)
+    - [6.3 反命题: "async fn 等价于返回 Future 的 fn"](#63-反命题-async-fn-等价于返回-future-的-fn)
   - [七、决策/边界判定树（Decision / Boundary Tree）](#七决策边界判定树decision--boundary-tree)
-  - [7.1 "Async vs Thread？" 决策树](#71-async-vs-thread-决策树)
-  - [7.2 Pin 使用边界](#72-pin-使用边界)
+    - [7.1 "Async vs Thread？" 决策树](#71-async-vs-thread-决策树)
+    - [7.2 Pin 使用边界](#72-pin-使用边界)
   - [八、示例与反例（Examples \& Counter-examples）](#八示例与反例examples--counter-examples)
-  - [8.1 正确示例：async fn + .await](#81-正确示例async-fn--await)
-  - [8.2 正确示例：并发执行](#82-正确示例并发执行)
-  - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
-  - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
-  - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
-  - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
-  - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
-  - [8.8 Waker 契约与活性](#88-waker-契约与活性)
-  - [8.9 Waker/Context 的底层机制](#89-wakercontext-的底层机制)
-  - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
-  - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
-  - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
-  - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
-  - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
-  - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
-  - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
-  - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
+    - [8.1 正确示例：async fn + .await](#81-正确示例async-fn--await)
+    - [8.2 正确示例：并发执行](#82-正确示例并发执行)
+    - [8.3 正确示例：Stream 异步迭代](#83-正确示例stream-异步迭代)
+    - [8.4 反例：在 async 中阻塞线程](#84-反例在-async-中阻塞线程)
+    - [8.5 反例：未 Pin 的自引用 Future](#85-反例未-pin-的自引用-future)
+    - [8.6 边界极限测试：跨越 await 的 Send 约束](#86-边界极限测试跨越-await-的-send-约束)
+    - [8.7 边界极限测试：取消安全系统分析](#87-边界极限测试取消安全系统分析)
+    - [8.8 Waker 契约与活性](#88-waker-契约与活性)
+    - [8.9 Waker/Context 的底层机制](#89-wakercontext-的底层机制)
+    - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
+    - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
+    - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
+    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+      - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
+      - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
+      - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
+      - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [十、待补充与演进方向（TODOs）](#十待补充与演进方向todos)
-  - [补充章节：AFIT（Async Fn In Traits）与 RPITIT](#补充章节afitasync-fn-in-traits与-rpitit)
-  - [问题与解决方案演进](#问题与解决方案演进)
-  - [当前最佳实践](#当前最佳实践)
-  - [限制与注意事项](#限制与注意事项)
-  - [生命周期陷阱](#生命周期陷阱)
+    - [补充章节：AFIT（Async Fn In Traits）与 RPITIT](#补充章节afitasync-fn-in-traits与-rpitit)
+      - [问题与解决方案演进](#问题与解决方案演进)
+      - [当前最佳实践](#当前最佳实践)
+      - [限制与注意事项](#限制与注意事项)
+      - [生命周期陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
   - [十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
-  - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
-  - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
-  - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
-  - [12.4 效果系统原型](#124-效果系统原型)
+    - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
+    - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
+    - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
+    - [12.4 效果系统原型](#124-效果系统原型)
   - [十三、`gen` blocks：同步协程的语义定位](#十三gen-blocks同步协程的语义定位)
-  - [13.1 语法与语义](#131-语法与语义)
-  - [13.2 与 `async` 的对偶关系](#132-与-async-的对偶关系)
-  - [13.3 形式化定位](#133-形式化定位)
+    - [13.1 语法与语义](#131-语法与语义)
+    - [13.2 与 `async` 的对偶关系](#132-与-async-的对偶关系)
+    - [13.3 形式化定位](#133-形式化定位)
   - [相关概念链接](#相关概念链接)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
   - [十五、Stream trait 与流处理语义](#十五stream-trait-与流处理语义)
-  - [15.1 Stream = 异步 Iterator](#151-stream--异步-iterator)
-  - [15.2 Stream 与 Dataflow Model 的映射](#152-stream-与-dataflow-model-的映射)
-  - [15.3 从 Stream 到 differential-dataflow](#153-从-stream-到-differential-dataflow)
+    - [15.1 Stream = 异步 Iterator](#151-stream--异步-iterator)
+    - [15.2 Stream 与 Dataflow Model 的映射](#152-stream-与-dataflow-model-的映射)
+    - [15.3 从 Stream 到 differential-dataflow](#153-从-stream-到-differential-dataflow)
   - [十六、边界测试：异步规则的编译错误](#十六边界测试异步规则的编译错误)
-  - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
-  - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
-  - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
-  - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
-  - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
-  - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
+    - [16.1 边界测试：非 Send 类型跨 await 点（编译错误）](#161-边界测试非-send-类型跨-await-点编译错误)
+    - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
+    - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
+    - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
+    - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
+    - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
 
 ## 〇、认知路径（Cognitive Path）
 
@@ -347,7 +347,6 @@ Pin<&mut Self> 的内存布局约束:
 
 ### 3.1b 状态机操作语义（Operational Semantics）
 
-
 §3.1 展示了编译器变换的**结果**（enum 结构），本节补充变换的**形式化规则**——将 async fn 视为一个受控的、带挂起点的小步操作语义系统。
 
 #### 状态机类型归纳定义
@@ -513,7 +512,6 @@ Pin<P<T>> 保证 T 在内存中不移动:
 > **来源**: [RFC 2349 §3: Pin invariants] · [Rust Reference: Pin] · [Rustonomicon: Pinning]
 
 ### 3.2b Pin 的 LTL 形式化（异步状态机语境）
-
 
 §3.2 给出了 Pin 的直觉定义（"保证不移动"）。本节将其形式化为**线性时序逻辑（LTL）**命题，使其在 async 状态机的挂起-恢复周期中可验证。
 
@@ -1656,7 +1654,6 @@ Stream::poll_next 的语义层级:
   - Stream::next() 返回的 Future 必须被 .await 后才能消费元素
 ```
 
-
 **`Sink` 状态机完整分析**
 
 `Sink` 的四个方法构成严格的状态转换协议。错误的状态序列会导致 panic 或数据丢失：
@@ -1702,7 +1699,6 @@ where
     Ok(())
 }
 ```
-
 
 **`futures::stream` 与 `tokio_stream` 生态对比**
 
@@ -1908,7 +1904,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 ├── 是 → Pin<Box<dyn Future>> 打破递归
                 └── 否 → impl Future（默认最优路径）
 ```
-
 
 > **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
 
@@ -2169,7 +2164,6 @@ mod tests {
     }
 }
 ```
-
 
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
 
@@ -2661,475 +2655,15 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 
 ## 十五、Stream trait 与流处理语义
-
 
 ### 15.1 Stream = 异步 Iterator
 

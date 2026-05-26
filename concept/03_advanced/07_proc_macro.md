@@ -7,11 +7,14 @@
 
 ---
 
-> **来源**: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) · [TRPL Ch19 — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [proc-macro2 crate](https://docs.rs/proc-macro2/latest/proc_macro2/) · [syn crate](https://docs.rs/syn/latest/syn/) · [quote crate](https://docs.rs/quote/latest/quote/) · [RFC 1566 — Proc Macro](https://github.com/rust-lang/rfcs/pull/1566)
+> **来源**: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) ·
+> [TRPL Ch19 — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
+> [proc-macro2 crate](https://docs.rs/proc-macro2/latest/proc_macro2/) ·
+> [syn crate](https://docs.rs/syn/latest/syn/) ·
+> [quote crate](https://docs.rs/quote/latest/quote/) ·
+> [RFC 1566 — Proc Macro](https://github.com/rust-lang/rfcs/pull/1566)
 
 ## 📑 目录
->
->
 
 - [过程宏：编译期代码生成的元编程工具](#过程宏编译期代码生成的元编程工具)
   - [📑 目录](#-目录)
@@ -535,66 +538,6 @@ pub fn my_macro(input: String) -> String {
 >
 >
 >
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
 
 ### 10.5 边界测试：过程宏的 `Span` 与错误定位精度（编译错误/调试困难）
 

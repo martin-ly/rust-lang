@@ -281,6 +281,8 @@ impl Order {
 }
 ```
 
+> **来源**: [来源: [Fowler — EAA](https://martinfowler.com/books/eaa.html)]
+
 ### 3.2 依赖规则
 >
 
@@ -348,6 +350,8 @@ pub trait PaymentGateway {
     async fn charge(&self, amount: f64, currency: &str) -> Result<PaymentResult, PaymentError>;
 }
 ```
+
+> **来源**: [来源: [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/)]
 
 ### 4.2 适配器（Adapters）
 >
@@ -419,6 +423,8 @@ impl EventPublisher for KafkaEventPublisher {
     }
 }
 ```
+
+> **来源**: [来源: [Cockburn — Ports & Adapters](https://alistair.cockburn.us/hexagonal-architecture/)]
 
 ### 4.3 Rust 实现
 >
@@ -565,6 +571,8 @@ impl OrderRepository for PostgresOrderRepository {
 }
 ```
 
+> **来源**: [来源: [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)]
+
 ### 5.2 依赖方向
 >
 
@@ -622,6 +630,8 @@ Frameworks & Drivers（最外层）
   └── UI: CLI, Web, Mobile
 ```
 
+> **来源**: [来源: [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)]
+
 ### 6.2 依赖规则
 >
 
@@ -663,6 +673,8 @@ impl From<OrderRow> for Order {
     }
 }
 ```
+
+> **来源**: [来源: [Martin — Clean Architecture Book](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)]
 
 ### 6.3 与六边形/洋葱的关系
 >
@@ -715,6 +727,8 @@ Rust 实现共性: 所有四种架构都可以用 Rust 的 trait + 模块系统�
 | **冷启动** | 无 | 有（首次调用延迟）|
 | **执行时长限制** | 无限制 | 有限制（通常 15min）|
 | **Rust 支持** | 原生 | cargo-lambda, serverless framework |
+
+> **来源**: [来源: [AWS — Serverless](https://aws.amazon.com/serverless/)]
 
 ### 7.2 Rust 在 Serverless 中的实践
 >
@@ -776,6 +790,8 @@ async fn handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error> {
     }))
 }
 ```
+
+> **来源**: [来源: [cargo-lambda](https://www.cargo-lambda.info/)]
 
 ### 7.3 冷启动与性能优化
 >
@@ -839,6 +855,8 @@ async fn optimized_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Er
 | **学习曲线** | 低 | 中 | 中 | 高 | 低 |
 | **Rust 实现复杂度** | 低 | 中 | 中 | 中 | 低 |
 | **部署灵活性** | 高 | 高 | 高 | 高 | 低（平台锁定）|
+
+> **来源**: [来源: [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/)]
 
 ### 8.2 架构模式适用场景
 >
@@ -904,6 +922,8 @@ async fn optimized_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Er
 │   └── 缺少架构守护（如 ArchUnit 测试）→ 规则被逐渐破坏
 └── 根结论: ❌ 架构模式提供结构，但需要纪律和自动化测试来维护
 ```
+
+> **来源**: [来源: [Fowler — Over-Engineering](https://martinfowler.com/bliki/OverEngineering.html)]
 
 ### 9.2 边界极限
 >

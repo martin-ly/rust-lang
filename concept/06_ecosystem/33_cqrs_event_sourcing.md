@@ -908,6 +908,8 @@ pub struct OrderItem {
 }
 ```
 
+> **来源**: [来源: [serde Documentation](https://serde.rs/)]
+
 ### 6.2 命令处理器
 >
 
@@ -984,6 +986,8 @@ impl<ES: EventStore + Send + Sync> CommandHandler<PlaceOrderCommand> for PlaceOr
     }
 }
 ```
+
+> **来源**: [来源: [Axon Framework — Commands](https://docs.axoniq.io/reference-guide/axon-framework/commands/command-handlers.html)]
 
 ### 6.3 事件存储与投影
 >
@@ -1062,6 +1066,8 @@ impl EventStore for PostgresEventStore {
     }
 }
 ```
+
+> **来源**: [来源: [EventStoreDB — Projections](https://developers.eventstore.com/server/v24.10/projections.html)]
 
 ### 6.4 完整 CQRS+ES 微服务骨架
 >
@@ -1171,6 +1177,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 └── 根结论: ❌ Outbox 保证至少一次（At-Least-Once），不是恰好一次（Exactly-Once）
          消费者必须实现幂等性
 ```
+
+> **来源**: [来源: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)]
 
 ### 7.2 边界极限
 >

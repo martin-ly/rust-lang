@@ -1074,6 +1074,8 @@ async fn recover_workflow(
 └── 根结论: ❌ 形式化验证提高置信度，但不能替代测试和监控
 ```
 
+> **来源**: [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)]
+
 ### 7.2 边界极限
 
 | **边界** | **现状** | **理论极限** | **工程影响** |

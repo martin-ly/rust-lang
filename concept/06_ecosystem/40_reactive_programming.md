@@ -336,6 +336,8 @@ let results: Vec<_> = pipeline.collect().await;
 | **Rate Limit** | 生产者限速 | 可预测 | 需要调参 | `tokio::time::interval` |
 | **Credit-Based** | 消费者授予配额 | 精确控制 | 协议复杂 | 手动实现 |
 
+> **来源**: [来源: [Reactive Streams — Backpressure](https://www.reactive-streams.org/)]
+
 ### 4.2 Rust 实现
 >
 
@@ -579,6 +581,8 @@ Rust 的所有权系统与 FRP 的**有状态信号**存在根本张力：
   }
 ```
 
+> **来源**: [来源: [Tokio Internals](https://tokio.rs/tokio/topics/internals)]
+
 ### 6.2 与 Rust Stream 的对应
 >
 
@@ -636,6 +640,8 @@ let pipeline = stream
     .timeout(Duration::from_secs(5));  // tokio-stream 扩展
 ```
 
+> **来源**: [来源: [tokio-stream](https://docs.rs/tokio-stream/latest/tokio_stream/)]
+
 ### 7.2 async-stream
 >
 
@@ -672,6 +678,8 @@ let network_stream = stream! {
     }
 };
 ```
+
+> **来源**: [来源: [async-stream](https://docs.rs/async-stream/latest/async_stream/)]
 
 ### 7.3 完整数据流处理骨架
 >
@@ -776,6 +784,8 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 │   └── "性能更好"只在消费者能追上的短暂窗口成立
 └── 根结论: ❌ 无界 channel 是反模式。生产环境应始终使用有界 channel + 背压策略。
 ```
+
+> **来源**: [来源: [Reactive Streams Spec](https://www.reactive-streams.org/)]
 
 ### 8.2 边界极限
 >

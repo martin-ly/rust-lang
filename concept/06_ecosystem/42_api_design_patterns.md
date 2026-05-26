@@ -1020,6 +1020,8 @@ async fn proxy_to_user_service(req: Request<Body>) -> Result<Response<Body>, Sta
 └── 根结论: ❌ URL 版本化是可行的但非最优。优先采用向后兼容的演进策略，仅在破坏性变更时使用版本化。
 ```
 
+> **来源**: [来源: [GraphQL vs REST](https://www.howtographql.com/basics/1-graphql-is-the-better-rest/)]
+
 ### 9.2 边界极限
 
 | **边界** | **现状** | **理论极限** | **工程影响** |

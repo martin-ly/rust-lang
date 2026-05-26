@@ -23,9 +23,11 @@
   - [二、关键 crate](#二关键-crate)
     - [2.1 clap](#21-clap)
     - [2.2 交互与输出](#22-交互与输出)
+    - [2.3 配置管理](#23-配置管理)
   - [三、打包与分发](#三打包与分发)
     - [3.1 单一二进制](#31-单一二进制)
     - [3.2 安装方式](#32-安装方式)
+    - [3.3 Shell 补全与文档生成](#33-shell-补全与文档生成)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -38,6 +40,7 @@
     - [10.2 边界测试：信号处理与异步代码的交互（编译错误）](#102-边界测试信号处理与异步代码的交互编译错误)
     - [10.6 边界测试：终端颜色检测与 `NO_COLOR` 标准（运行时显示问题）](#106-边界测试终端颜色检测与-no_color-标准运行时显示问题)
     - [10.7 边界测试：ANSI 颜色代码与 Windows 旧版控制台兼容性问题（运行时显示异常）](#107-边界测试ansi-颜色代码与-windows-旧版控制台兼容性问题运行时显示异常)
+    - [10.3 边界测试：`clap` 的 derive 宏与字段类型不匹配（编译错误）](#103-边界测试clap-的-derive-宏与字段类型不匹配编译错误)
 
 ---
 
@@ -225,6 +228,55 @@ clap 生态:
 > **交互洞察**: **Rust CLI 的交互生态成熟且类型安全**——进度条、提示、颜色都通过 trait 抽象。
 > [来源: [indicatif](https://docs.rs/indicatif/latest/indicatif/)] · [来源: [dialoguer](https://docs.rs/dialoguer/latest/dialoguer/)]
 
+### 2.3 配置管理
+>
+
+```text
+配置管理生态:
+  ├── serde + toml/json/yaml: 结构化配置解析
+  ├── config: 分层配置（文件 + 环境变量 + 默认值）
+  ├── directories: XDG / 平台标准配置路径
+  └── envy: 环境变量反序列化到 struct
+
+配置优先级（从高到低）:
+  1. 命令行参数（--config key=value）
+  2. 环境变量（MYAPP_KEY=value）
+  3. 本地配置文件（./.myapp.toml）
+  4. 用户配置文件（~/.config/myapp/config.toml）
+  5. 系统配置文件（/etc/myapp/config.toml）
+  6. 默认值（代码中硬编码）
+```
+
+```rust,ignore
+use serde::{Deserialize, Serialize};
+use config::{Config, ConfigError, Environment, File};
+
+#[derive(Debug, Deserialize, Serialize)]
+struct AppConfig {
+    #[serde(default = "default_port")]
+    port: u16,
+    #[serde(default = "default_host")]
+    host: String,
+    #[serde(default)]
+    verbose: bool,
+}
+
+fn load_config() -> Result<AppConfig, ConfigError> {
+    let s = Config::builder()
+        .add_source(File::with_name("/etc/myapp/config").required(false))
+        .add_source(File::with_name("~/.config/myapp/config").required(false))
+        .add_source(File::with_name(".myapp").required(false))
+        .add_source(Environment::with_prefix("MYAPP"))
+        .build()?;
+    s.try_deserialize()
+}
+
+fn default_port() -> u16 { 8080 }
+fn default_host() -> String { "localhost".to_string() }
+```
+
+> **配置洞察**: Rust CLI 的配置管理遵循 **XDG Base Directory Specification**，通过 `directories` crate 获取平台标准路径（Linux: ~/.config/, macOS: ~/Library/Application Support/, Windows: %APPDATA%）。分层配置设计允许用户、系统和项目级覆盖。[来源: [config crate](https://docs.rs/config/latest/config/)] · [XDG Spec](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+
 ---
 
 ## 三、打包与分发
@@ -298,6 +350,50 @@ clap 生态:
 
 > **分发洞察**: **Rust CLI 工具的分发生态已经成熟**——从 cargo install 到系统包管理器全覆盖。
 > [来源: [cargo-binstall](https://github.com/cargo-bins/cargo-binstall)]
+
+### 3.3 Shell 补全与文档生成
+>
+
+```text
+CLI 文档生成生态:
+  ├── clap_complete: 自动生成 Bash/Zsh/Fish/PowerShell 补全脚本
+  ├── clap_mangen: 自动生成 man page（roff 格式）
+  ├── roff: roff 格式处理
+  └── help2man: 从 --help 输出生成 man page
+```
+
+```rust,ignore
+use clap::{Command, Parser};
+use clap_complete::{generate, Generator, Shell};
+use clap_mangen::Man;
+use std::io;
+
+#[derive(Parser)]
+#[command(name = "myapp")]
+#[command(about = "A sample CLI app")]
+struct Cli {
+    #[arg(short, long)]
+    config: Option<String>,
+}
+
+fn print_completions<G: Generator>(gen: G, cmd: &mut Command) {
+    generate(gen, cmd, cmd.get_name().to_string(), &mut io::stdout());
+}
+
+fn print_man_page(cmd: Command) {
+    let man = Man::new(cmd);
+    let mut buffer: Vec<u8> = Default::default();
+    man.render(&mut buffer).unwrap();
+    println!("{}", String::from_utf8(buffer).unwrap());
+}
+
+// 生成补全脚本:
+// myapp completions bash > /usr/share/bash-completion/completions/myapp
+// myapp completions zsh > /usr/share/zsh/site-functions/_myapp
+// myapp completions fish > /usr/share/fish/vendor_completions.d/myapp.fish
+```
+
+> **文档洞察**: 现代 Rust CLI 工具应**自动生成 shell 补全和 man page**，而非手动维护。clap 的 derive 宏自动提取参数信息，`clap_complete` 和 `clap_mangen` 将其转换为目标格式。这确保了文档与代码的同步——添加新参数时，补全和手册自动更新。[来源: [clap_complete](https://docs.rs/clap_complete/latest/clap_complete/)] · [clap_mangen](https://docs.rs/clap_mangen/latest/clap_mangen/)
 
 ---
 
@@ -462,48 +558,9 @@ fn main() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
 
 ## 十、边界测试：CLI 开发的编译错误
 

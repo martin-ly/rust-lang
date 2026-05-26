@@ -96,6 +96,8 @@
   - [Workflow Theory & Formalization（工作流理论与形式化）](06_ecosystem/41_workflow_theory.md)
   - [API Design Patterns（API 设计模式）](06_ecosystem/42_api_design_patterns.md)
   - [Security & Cryptography（安全与密码学）](06_ecosystem/43_security_cryptography.md)
+  - [Compiler Internals（Rust 编译器内部原理）](06_ecosystem/45_compiler_internals.md)
+  - [Machine Learning Ecosystem（机器学习生态）](06_ecosystem/46_machine_learning_ecosystem.md)
 
 - [L7 前沿趋势层索引（Future & Trends Layer Index）](07.md)
 

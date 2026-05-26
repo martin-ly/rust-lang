@@ -132,6 +132,7 @@ graph TB
 | [41_workflow_theory.md](./41_workflow_theory.md) | 工作流理论与形式化 | WfMC、Petri 网、π 演算、CTL/LTL、Rust async 同构 | ✅ v1.0 | L3 Async, L4 Formal | 分布式系统, 事件溯源 |
 | [42_api_design_patterns.md](./42_api_design_patterns.md) | API 设计模式 | REST/GraphQL/gRPC、OpenAPI、版本化、API 网关 | ✅ v1.0 | L3 Async, L2 Trait | 微服务, 事件驱动 |
 | [43_security_cryptography.md](./43_security_cryptography.md) | 安全与密码学 | AES-GCM/ChaCha20、Ed25519、Argon2、ring/rustls、后量子 | ✅ v1.0 | L3 Unsafe, L2 Trait | 区块链, 网络协议 |
+| [45_compiler_internals.md](./45_compiler_internals.md) | 编译器内部原理 | rustc 管线、HIR/MIR、类型系统、NLL/Polonius、LLVM | ✅ v1.0 | L3 Unsafe, L4 Formal | 类型系统, 宏系统 |
 | [35_pattern_composition_algebra.md](./35_pattern_composition_algebra.md) | 模式组合代数 | 设计模式的形式化组合、冲突检测、Rust 所有权约束 | ✅ v1.0 | L2 Trait, L3 Concurrency | Software Architecture |
 | [36_stream_processing_ecosystem.md](./36_stream_processing_ecosystem.md) | 流处理生态 | timely/differential dataflow、Materialize、RisingWave、Fluvio | ✅ v1.0 | L3 Stream Processing | Distributed Systems |
 | [37_database_systems.md](./37_database_systems.md) | 数据库系统 | TiKV/Percolator、Materialize、Meilisearch、SurrealDB | ✅ v1.0 | L3 Concurrency | Stream Processing |

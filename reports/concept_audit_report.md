@@ -1,20 +1,20 @@
 # 概念知识体系自动化审计报告 v2.0
 
-> 生成时间: 2026-05-25T12:22
-> 扫描文件数: 233
+> 生成时间: 2026-05-26T10:45
+> 扫描文件数: 235
 > 版本对齐: Rust 1.95.0 stable
 
 ## 摘要
 
 | 指标 | 数值 | 状态 |
 |:---|:---|:---|
-| 扫描文件数 | 233 | — |
-| 跨文件链接 ≥3 | 226/233 | ⚠️ |
+| 扫描文件数 | 235 | — |
+| 跨文件链接 ≥3 | 228/235 | ⚠️ |
 | 死链接文件 | 0 | ✅ |
-| 命名规范符合 | 232/233 | ⚠️ |
+| 命名规范符合 | 234/235 | ⚠️ |
 | 代码块问题文件 | 0 | ✅ |
-| 显式 Bloom 标注 | 233/233 | ✅ |
-| 平均来源标注率 | 14.7% | ⚠️ |
+| 显式 Bloom 标注 | 235/235 | ✅ |
+| 平均来源标注率 | 15.8% | ✅ |
 | TODO 待完成 | 0 | ✅ |
 | TODO 已完成 | 242 | — |
 
@@ -38,28 +38,21 @@
 
 | 文件 | 标注数 | 估算段落数 | 标注率 |
 |:---|:---|:---|:---|
-| concept/00_meta/kg_ontology.md | 3 | 41 | 2.8% |
 | concept/00_meta/semantic_bridge_algorithms_patterns.md | 4 | 38 | 2.6% |
-| concept/03_advanced/11_atomics_and_memory_ordering.md | 24 | 130 | 9.2% |
-| concept/03_advanced/19_parallel_distributed_pattern_spectrum.md | 8 | 125 | 3.7% |
-| concept/03_advanced/20_stream_processing_semantics.md | 18 | 121 | 6.0% |
-| concept/05_comparative/01_rust_vs_cpp.md | 48 | 493 | 6.5% |
+| concept/03_advanced/11_atomics_and_memory_ordering.md | 25 | 130 | 9.6% |
+| concept/03_advanced/19_parallel_distributed_pattern_spectrum.md | 9 | 125 | 4.1% |
+| concept/03_advanced/20_stream_processing_semantics.md | 19 | 121 | 6.3% |
+| concept/05_comparative/01_rust_vs_cpp.md | 54 | 493 | 7.3% |
 | concept/05_comparative/02_cpp_abi_object_model.md | 22 | 114 | 8.5% |
-| concept/06_ecosystem/07_game_ecs.md | 44 | 258 | 9.2% |
 | concept/06_ecosystem/30_system_composability.md | 23 | 155 | 9.1% |
-| concept/06_ecosystem/31_microservice_patterns.md | 24 | 118 | 9.4% |
-| concept/06_ecosystem/33_cqrs_event_sourcing.md | 5 | 176 | 1.2% |
-| concept/06_ecosystem/35_architecture_patterns.md | 0 | 150 | 0.0% |
+| concept/06_ecosystem/31_microservice_patterns.md | 25 | 118 | 9.8% |
+| concept/06_ecosystem/33_cqrs_event_sourcing.md | 28 | 180 | 6.4% |
+| concept/06_ecosystem/35_architecture_patterns.md | 37 | 160 | 8.6% |
 | concept/06_ecosystem/35_pattern_composition_algebra.md | 6 | 107 | 3.0% |
-| concept/06_ecosystem/37_database_systems.md | 16 | 75 | 9.6% |
-| concept/06_ecosystem/39_os_kernel.md | 11 | 60 | 6.9% |
-| concept/06_ecosystem/40_reactive_programming.md | 0 | 160 | 0.0% |
-| concept/06_ecosystem/41_workflow_theory.md | 1 | 144 | 0.2% |
-| concept/06_ecosystem/42_api_design_patterns.md | 10 | 151 | 2.0% |
-| concept/06_ecosystem/43_security_cryptography.md | 28 | 124 | 8.9% |
-| concept/07_future/19_rust_2024_edition_preview.md | 2 | 7 | 8.7% |
-| concept/07_future/24_wasm_target_evolution.md | 2 | 7 | 8.7% |
-| concept/07_future/26_rust_in_space.md | 2 | 7 | 8.7% |
+| concept/06_ecosystem/39_os_kernel.md | 12 | 60 | 7.5% |
+| concept/06_ecosystem/40_reactive_programming.md | 28 | 165 | 7.2% |
+| concept/06_ecosystem/41_workflow_theory.md | 24 | 145 | 5.1% |
+| concept/06_ecosystem/42_api_design_patterns.md | 35 | 152 | 7.1% |
 | concept/07_future/29_ebpf_rust.md | 16 | 143 | 6.1% |
 
 ## 方法论说明
