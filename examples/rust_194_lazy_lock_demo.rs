@@ -190,20 +190,20 @@ fn lazy_cell_demo() {
     });
 
     // 使用 get() 检查是否已初始化
-    println!("初始状态: {:?}", cell.get());
+    println!("初始状态: {:?}", LazyCell::get(&cell));
 
     // 强制初始化
     let value: &String = &cell;
-    println!("初始化后: {:?}", cell.get());
+    println!("初始化后: {:?}", LazyCell::get(&cell));
     println!("值: {}", value);
 
     // 可变访问 (如果未初始化，会先初始化)
-    let mut_cell: LazyCell<Vec<i32>> = LazyCell::new(|| {
+    let mut mut_cell: LazyCell<Vec<i32>> = LazyCell::new(|| {
         println!("  [LazyCell] 初始化 Vec");
         vec![1, 2, 3]
     });
 
-    if let Some(vec) = mut_cell.get_mut() {
+    if let Some(vec) = LazyCell::get_mut(&mut mut_cell) {
         vec.push(4);
         println!("修改后: {:?}", vec);
     }
@@ -315,17 +315,17 @@ fn math_constants_demo() {
     println!("\n=== 数学常量示例 ===");
 
     // 欧拉-马歇罗尼常数
-    println!("欧拉-马歇罗尼常数 (γ): {}", f64::consts::EULER_GAMMA);
+    println!("欧拉-马歇罗尼常数 (γ): {}", std::f64::consts::EULER_GAMMA);
 
     // 黄金比例
-    println!("黄金比例 (φ): {}", f64::consts::GOLDEN_RATIO);
+    println!("黄金比例 (φ): {}", std::f64::consts::GOLDEN_RATIO);
 
     // 黄金分割搜索示例
     fn golden_section_search<F>(f: F, mut a: f64, mut b: f64, eps: f64) -> f64
     where
         F: Fn(f64) -> f64,
     {
-        let phi = f64::consts::GOLDEN_RATIO;
+        let phi = std::f64::consts::GOLDEN_RATIO;
         let resphi = 2.0 - phi;
 
         let mut x1 = a + resphi * (b - a);

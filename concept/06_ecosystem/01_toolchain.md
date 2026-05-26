@@ -57,6 +57,7 @@
     - [5.3 cargo-audit](#53-cargo-audit)
     - [5.4 cargo-deny](#54-cargo-deny)
     - [5.5 cargo-nextest](#55-cargo-nextest)
+    - [5.6 repotoire — 图驱动代码分析](#56-repotoire--图驱动代码分析)
   - [六、Mermaid 图：Rust 工具链架构图（从源码到二进制）](#六mermaid-图rust-工具链架构图从源码到二进制)
   - [七、国际来源：Rust 编译器架构](#七国际来源rust-编译器架构)
     - [7.1 rustc\_driver](#71-rustc_driver)
@@ -956,6 +957,26 @@ cargo nextest run
 
 > **来源**: [nextest Docs](https://nexte.st/) · 可信度: ✅
 
+### 5.6 repotoire — 图驱动代码分析
+
+**[Zach Hammad, 2026]** `repotoire` 是一个 Rust 编写的**图驱动代码分析 CLI 工具**，通过 tree-sitter AST 解析构建代码的依赖图和调用图，支持 100+ 种检测器（detector）分析代码质量、安全风险和架构债务。
+
+| **能力维度** | **功能** |
+|:---|:---|
+| **图构建** | tree-sitter AST → 调用边、继承边、包含边；支持 30,000+ 边秒级分析 |
+| **代码质量** | 死代码、重复块、样板代码、命名模式检测 |
+| **安全检测** | 污点分析、输入验证、隐藏耦合、变更传播瓶颈 |
+| **AI 集成** | AIChurnDetector（函数级变更分析）、AIDuplicateBlockDetector（跨文件克隆检测） |
+| **增量分析** | 持久化图缓存（bincode），支持增量重新分析 |
+| **部署** | CLI（`repotoire analyze`）、MCP Server、REST API |
+
+```bash
+cargo install repotoire
+repotoire analyze --path ./src --format json
+```
+
+> **repotoire 洞察**: **repotoire 代表了 Rust 在开发者工具链中的新前沿**——利用 Rust 的性能和内存安全构建大规模代码分析基础设施。其图驱动的架构（代码即图）与 Rust 的所有权模型天然契合：图节点的生命周期由分析引擎精确管理，避免传统 C/C++ 代码分析工具中常见的内存泄漏和悬垂指针问题。[来源: [repotoire GitHub](https://github.com/Zach-hammad/repotoire)] · 可信度: 🟡（项目早期，快速发展中）
+
 > **过渡**：工具的价值最终体现在从源码到二进制的高效、正确转换。下图可视化 Rust 编译器从 `.rs` 文件到可执行文件的完整管线。
 
 ---
@@ -1082,9 +1103,14 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 
 > **权衡分析**: Cranelift 不替代 LLVM，而是**互补定位**——debug 构建用 Cranelift 缩短反馈循环，release 构建仍用 LLVM 获取最佳性能。这与 Firefox 的 WebAssembly 编译策略（Cranelift 用于 JIT，LLVM 用于 AOT 优化）一致。对大型 Rust 项目（如 `rustc` 自身编译），Cranelift 可将 debug 构建从 30 分钟缩短到 5-8 分钟，显著改善开发者体验。
 
-> ⚠️ **2025H2 周期状态更新**: Production-ready Cranelift backend 目标在 2025H2 周期结束时标记为 **"Not completed (lack of funding)"**。核心开发者 Folkert de Vries 和 bjorn3（由 Trifecta Tech Foundation 资助）因资金不足未能完成 Tier 2 稳定化。社区正在寻求新的资助渠道（包括 Rust Foundation 和工业赞助）。这凸显了 Rust 基础设施的**可持续资助挑战**——与 LLVM（由 Apple/Google/Meta 等大公司长期资助）不同，Cranelift 的商业支持生态仍在建设中。
+> ⚠️ **2025H2 周期状态更新**: Production-ready Cranelift backend 目标在 2025H2 周期结束时标记为 **"Not completed (lack of funding)"**。
+> 核心开发者 Folkert de Vries 和 bjorn3（由 Trifecta Tech Foundation 资助）因资金不足未能完成 Tier 2 稳定化。社区正在寻求新的资助渠道（包括 Rust Foundation 和工业赞助）。
+> 这凸显了 Rust 基础设施的**可持续资助挑战**——与 LLVM（由 Apple/Google/Meta 等大公司长期资助）不同，Cranelift 的商业支持生态仍在建设中。
 
-> **来源**: [Rust Project Goals 2026 — Cranelift Backend](https://rust-lang.github.io/rust-project-goals/2026h1/cranelift.html) · [rustc_codegen_cranelift GitHub](https://github.com/rust-lang/rustc_codegen_cranelift) · [Bytecode Alliance — Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · 可信度: ✅
+> **来源**: [Rust Project Goals 2026 — Cranelift Backend](https://rust-lang.github.io/rust-project-goals/2026h1/cranelift.html) ·
+> [rustc_codegen_cranelift GitHub](https://github.com/rust-lang/rustc_codegen_cranelift) ·
+> [Bytecode Alliance — Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift) ·
+> [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · 可信度: ✅
 
 ### 7.4 gccrs — GCC 前端替代实现
 

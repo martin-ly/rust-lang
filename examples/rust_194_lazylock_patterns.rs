@@ -38,7 +38,7 @@ impl AppConfig {
 ///
 /// 如果配置已初始化，直接返回；不会触发初始化
 pub fn get_config_fast() -> Option<&'static AppConfig> {
-    APP_CONFIG.get()
+    LazyLock::get(&APP_CONFIG)
 }
 
 /// 标准访问方式（可能触发初始化）
@@ -114,7 +114,7 @@ impl LocalCache {
 
     /// ✅ Rust 1.94: get() - 安全读取，不触发初始化
     pub fn peek(&self) -> Option<&[u8]> {
-        self.data.get().map(|v| v.as_slice())
+        LazyCell::get(&self.data).map(|v| v.as_slice())
     }
 
     /// 读取或触发初始化
@@ -125,7 +125,7 @@ impl LocalCache {
     /// ✅ Rust 1.94: force_mut() - 强制初始化并获取可变引用
     pub fn update(&mut self, new_data: Vec<u8>) {
         println!("[UPDATE] 替换缓存数据");
-        let cache = self.data.force_mut();
+        let cache = LazyCell::force_mut(&mut self.data);
         *cache = new_data;
     }
 
@@ -134,7 +134,7 @@ impl LocalCache {
     }
 
     pub fn is_initialized(&self) -> bool {
-        self.data.get().is_some()
+        LazyCell::get(&self.data).is_some()
     }
 }
 

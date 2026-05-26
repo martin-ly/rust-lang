@@ -12,7 +12,7 @@ fn bench_parallel_vs_serial_sum(c: &mut Criterion) {
 
     c.bench_function("serial_square_sum", |b| {
         b.iter(|| {
-            let result: i32 = data.iter().map(|x| x * x).sum();
+            let result: i64 = data.iter().map(|x| (*x) as i64 * (*x) as i64).sum();
             let _ = std::hint::black_box(result);
         });
     });

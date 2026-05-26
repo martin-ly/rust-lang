@@ -178,8 +178,8 @@ pub mod ecosystem_examples {
     }
 
     // 2) rayon: 并行 map/reduce 示例
-    pub fn parallel_square_sum(input: IntSlice<'_>) -> i32 {
-        input.par_iter().map(|x| x * x).sum()
+    pub fn parallel_square_sum(input: IntSlice<'_>) -> i64 {
+        input.par_iter().map(|x| (*x) as i64 * (*x) as i64).sum()
     }
 
     // 3) serde: 序列化/反序列化
@@ -227,7 +227,7 @@ pub mod ecosystem_examples {
         #[cfg_attr(miri, ignore)]
         fn test_parallel_square_sum() {
             let v = (1..=1000).collect::<Vec<_>>();
-            let seq: i32 = v.iter().map(|x| x * x).sum();
+            let seq: i64 = v.iter().map(|x| (*x) as i64 * (*x) as i64).sum();
             let par = parallel_square_sum(&v);
             assert_eq!(seq, par);
         }

@@ -1,6 +1,6 @@
 # 提示: 字符串 Slice
 
-find(' ') 返回 Option<usize>，使用 match 或 if let 处理。返回 &str 避免所有权转移。
+find(' ') 返回 `Option<usize>`，使用 match 或 if let 处理。返回 &str 避免所有权转移。
 
 ## 相关阅读
 
