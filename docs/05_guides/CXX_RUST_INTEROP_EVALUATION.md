@@ -9,9 +9,7 @@
 ---
 
 ## 📑 目录
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
+
 - [C++ ↔ Rust 互操作评估](#c--rust-互操作评估)
   - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)

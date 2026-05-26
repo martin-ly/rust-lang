@@ -19,7 +19,8 @@
 ### Tier 4 高级文档 (2025-10-30 新增)
 
 | 文档                                                                       | 内容                           | 难度       | 时长     |
-| :--- | :--- | :--- | :--- || [06\_容器技术深度集成](./docs/tier_04_advanced/06_容器技术深度集成.md)     | Docker/K8s/containerd 完整集成 | ⭐⭐⭐⭐⭐ | 2-3 小时 |
+| :--- | :--- | :--- | :--- |
+| [06\_容器技术深度集成](./docs/tier_04_advanced/06_容器技术深度集成.md)     | Docker/K8s/containerd 完整集成 | ⭐⭐⭐⭐⭐ | 2-3 小时 |
 | [07\_云原生CI_CD实践](./docs/tier_04_advanced/07_云原生CI_CD实践.md)       | GitHub Actions/GitLab CI 流程  | ⭐⭐⭐⭐⭐ | 1-2 小时 |
 | [08\_监控与可观测性实践](./docs/tier_04_advanced/08_监控与可观测性实践.md) | Prometheus/Grafana/Loki/Jaeger | ⭐⭐⭐⭐⭐ | 2-3 小时 |
 

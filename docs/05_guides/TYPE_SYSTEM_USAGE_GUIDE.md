@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型系统使用指南](#类型系统使用指南)
@@ -29,6 +30,7 @@
   - [🔗 相关文档](#-相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -52,6 +54,7 @@
   - [🔗 相关文档](#-相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -254,6 +257,7 @@ fn main() {
 ---
 
 ## 🔧 错误处理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `advanced_error_handling/` 模块提供类型安全的错误处理模式：
@@ -277,6 +281,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 ---
 
 ## 🐛 常见问题与解决方案
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 问题 | 原因 | 解决方案 |
@@ -289,6 +294,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 ---
 
 ## 🔗 相关文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **速查卡**: [type_system.md](../02_reference/quick_reference/type_system.md)
@@ -310,6 +316,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [05_guides 目录](./README.md)
@@ -421,4 +428,3 @@ fn robust_operation() -> Result<(), ContextualError> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

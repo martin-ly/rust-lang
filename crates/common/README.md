@@ -121,6 +121,7 @@ cargo test -p common
 2. **可选特性**: 通过特性标志控制依赖
 3. **零成本抽象**: 不引入运行时开销
 4. **文档完善**: 所有公共 API 都有文档
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

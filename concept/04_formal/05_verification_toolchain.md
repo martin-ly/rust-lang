@@ -82,7 +82,7 @@
 >
 
 | 你的场景 | 首选工具 | 次选 | 绝对不要 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | 日常 unsafe 代码开发 | **Miri** | Kani | 手动推理 |
 | 安全关键组件（crypto/网络栈） | **Kani** | Verus | 仅单元测试 |
 | 操作系统/驱动/嵌入式 | **Verus** | Kani | Prusti |
@@ -100,13 +100,13 @@
 
 ## 一、工具链全景矩阵（选型版）
 
-> **[来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust; Rust Project Goals 2026]** 以下矩阵聚焦于"选择维度"，而非工具内部原理。内部原理见 [`04_rustbelt.md`](./04_rustbelt.md) §7–§8。
+> **[来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust; Rust Project Goals 2026]** 以下矩阵聚焦于"选择维度"，而非工具内部原理。
+> 内部原理见 [`04_rustbelt.md`](./04_rustbelt.md) §7–§8。
 
 ### 1.1 八维选型矩阵
->
 
 | **维度** | **Miri** | **Kani** | **Verus** | **Creusot** | **Prusti** | **Aeneas** | **RefinedRust** | **a-mir-formality** |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **验证类型** | 动态 UB 检测 | 有界模型检测 | 演绎验证 (SMT) | 演绎验证 (Why3) | 分离逻辑 (Viper) | 函数式翻译 | 自动分离逻辑 | 类型系统形式化 |
 | **自动化** | 全自动 | 半自动 (harness) | 半自动 (spec) | 半自动 (contract) | 半自动 (contract) | 手动 (骨架) | 自动 (零标注) | 手动 (Coq) |
 | **并发** | ❌ 单线程 | ✅ 符号化并发 | ✅ 线性幽灵类型 | ⚠️ 有限 | ⚠️ 有限 | ⚠️ 有限 | ❌ 当前不支持 | ❌ 当前不支持 |
@@ -134,7 +134,6 @@ a-mir-formality:[████████░░] 类型系统规范验证
 > **关键洞察**: 从左到右，保证强度递增，但**时间成本不是单调的**——Verus 的 SMT 后端在某些场景下比 Kani 的模型检测更快，因为符号执行的剪枝效率取决于问题结构。
 
 ### 1.3 验证工具层次类图
->
 
 ```mermaid
 classDiagram
@@ -241,19 +240,19 @@ classDiagram
     }
 ```
 
-> **认知功能**: 此类图将验证工具按**验证范式**（动态执行、模型检测、演绎验证、类型规范）进行层次分类。关键洞察：**演绎验证**分支下又细分为**自动化演绎**（Verus/Creusot/Prusti/RefinedRust）和**交互式证明**（Aeneas），二者共享"规格+证明"的核心模式，但人机分工不同。Miri 和 Kani 处于"找反例"阵营，而 a-mir-formality 是唯一不验证具体程序、而是验证编译器本身的元工具。
+> **认知功能**: 此类图将验证工具按**验证范式**（动态执行、模型检测、演绎验证、类型规范）进行层次分类。
+> 关键洞察：**演绎验证**分支下又细分为**自动化演绎**（Verus/Creusot/Prusti/RefinedRust）和**交互式证明**（Aeneas），二者共享"规格+证明"的核心模式，但人机分工不同。
+> Miri 和 Kani 处于"找反例"阵营，而 a-mir-formality 是唯一不验证具体程序、而是验证编译器本身的元工具。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 二、Wikipedia 概念对齐
->
->
 
 > **[来源: Wikipedia]** 以下将各验证工具映射到其背后的计算机科学基础概念。
 
 | 工具 | Wikipedia 核心概念 | 相关词条 | 形式化基础 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | **Miri** | [Interpreter (computing)](https://en.wikipedia.org/wiki/Interpreter_(computing)) · [Undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior) | 解释器、动态分析、别名分析 | Stacked Borrows / Tree Borrows |
 | **Kani** | [Model checking](https://en.wikipedia.org/wiki/Model_checking) · [Symbolic execution](https://en.wikipedia.org/wiki/Symbolic_execution) | CBMC、SAT solver、SMT | Bounded Model Checking (BMC) |
 | **Verus** | [Hoare logic](https://en.wikipedia.org/wiki/Hoare_logic) · [SMT solver](https://en.wikipedia.org/wiki/Satisfiability_modulo_theories) | Dafny、F*、分离逻辑 | SMT + 线性类型 + 幽灵状态 |
@@ -264,7 +263,6 @@ classDiagram
 | **a-mir-formality** | [Operational semantics](https://en.wikipedia.org/wiki/Operational_semantics) · [Type safety](https://en.wikipedia.org/wiki/Type_safety) | Felleisen、Plotkin、类型规则 | 小步操作语义 + 类型规则 |
 
 ### 2.1 验证工具 ↔ 形式化基础映射图
->
 
 ```mermaid
 graph LR
@@ -317,15 +315,16 @@ graph LR
     style AMIR fill:#fff8e1
 ```
 
-> **认知功能**: 此映射图将每个验证工具锚定到其**数学基础**，揭示工具之间的理论亲缘关系。例如：Verus 和 Creusot 虽然都是"演绎验证"，但 Verus 基于 Hoare 逻辑 + SMT，Creusot 基于最弱前置条件 + Why3——这解释了为什么 Creusot 在代数数据类型的功能正确性上更强，而 Verus 在并发系统验证上更优。颜色的暖冷梯度从"找反例"（冷色）过渡到"证明正确性"（暖色）。
+> **认知功能**: 此映射图将每个验证工具锚定到其**数学基础**，揭示工具之间的理论亲缘关系。
+> 例如：Verus 和 Creusot 虽然都是"演绎验证"，但 Verus 基于 Hoare 逻辑 + SMT，Creusot 基于最弱前置条件 + Why3
+> ——这解释了为什么 Creusot 在代数数据类型的功能正确性上更强，而 Verus 在并发系统验证上更优。
+> 颜色的暖冷梯度从"找反例"（冷色）过渡到"证明正确性"（暖色）。
 
 ---
 
 ## 三、a-mir-formality：Rust 类型系统规范
->
 
 ### 3.1 为什么需要类型系统规范？
->
 
 当前 Rust 的类型系统规则分散在：
 
@@ -336,7 +335,6 @@ graph LR
 **a-mir-formality** 是 Rust 官方正在构建的**机器可检查的 MIR 形式化规范**，目标成为 Rust 类型系统的"单一真相源"。
 
 ### 3.2 技术架构
->
 
 ```text
 Rust 源代码
@@ -355,19 +353,17 @@ a-mir-formality (Coq/Lean)
 - 与 `rustc` 的 trait solver 行为逐一对齐
 
 ### 3.3 与验证工具链的关系
->
 
 | 角色 | 说明 |
-|:---|:---|
+| :--- | :--- |
 | **规范基础** | a-mir-formality 定义"合法 Rust 程序"的精确边界 |
 | **验证前提** | Kani/Verus/Creusot 的正确性依赖于 rustc 的类型系统正确性 |
 | **循环验证** | a-mir-formality 验证 rustc → rustc 编译 a-mir-formality |
 
 ### 3.4 当前状态（2026-05）
->
 
 | 里程碑 | 状态 | 预计 |
-|:---|:---:|:---:|
+| :--- | :---: | :---: |
 | Core type system | 🟡 推进中 | 2026–2027 |
 | Trait solver alignment | 🟡 推进中 | 2026–2027 |
 | Unsafe Rust rules | 🔴 早期 | 2027+ |
@@ -387,7 +383,7 @@ a-mir-formality (Coq/Lean)
 ```
 
 | 因子 | 估算方法 | 典型范围 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **避免的缺陷成本** | CVE 修复成本 × 影响面；生产事故损失 | $10K – $10M |
 | **检测概率** | 工具对该类缺陷的理论覆盖率 | 30% – 99% |
 | **学习成本** | 工程师掌握工具所需人天 | 1 天 (Miri) – 6 月 (Coq) |
@@ -488,7 +484,7 @@ Layer 1 ──→ Layer 2 ──→ Layer 3 ──→ Layer 4 ──→ Layer 5
 ```
 
 | 层级 | 工具 | 目标 | 频率 | 成本 |
-|:---|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- | :--- |
 | **L1 编译期** | `rustc` + `clippy` + `a-mir-formality` | 类型安全、lint、规范对齐 | 每次保存 | 零 |
 | **L2 动态** | `cargo test` + `Miri` | UB 检测、回归 | 每次提交 | 低 |
 | **L3 符号** | `Kani` + `cargo-fuzz` | 边界条件、反例 | 每次 PR / nightly | 中 |
@@ -584,7 +580,10 @@ sequenceDiagram
     Note over Dev,L5: 五层防御的累积保证<br/>每层补上一层的盲区<br/>L1 类型安全 ⊂ L2 UB 检测 ⊂ L3 边界覆盖 ⊂ L4 功能正确 ⊂ L5 协议安全
 ```
 
-> **认知功能**: 此序列图将"五层防御"的静态表格转化为**时间维度的流程**。每个矩形框的底色与验证强度对应：冷色（编译期）→ 暖色（契约验证）。**关键洞察**：验证不是一次性事件，而是与开发工作流绑定的持续过程——L1-L3 在开发者本地完成（反馈延迟 < 30min），L4-L5 在 CI/设计阶段完成（反馈延迟小时级到天级）。箭头方向揭示信息流动：从开发者到工具的是"待验证代码"，从工具到开发者的是"验证结果"。
+> **认知功能**: 此序列图将"五层防御"的静态表格转化为**时间维度的流程**。
+> 每个矩形框的底色与验证强度对应：冷色（编译期）→ 暖色（契约验证）。
+> **关键洞察**：验证不是一次性事件，而是与开发工作流绑定的持续过程——L1-L3 在开发者本地完成（反馈延迟 < 30min），L4-L5 在 CI/设计阶段完成（反馈延迟小时级到天级）。
+> 箭头方向揭示信息流动：从开发者到工具的是"待验证代码"，从工具到开发者的是"验证结果"。
 
 ---
 
@@ -617,7 +616,10 @@ flowchart TD
     Done1 --> ROI7["ROI: 基线<br/>成本: 零<br/>收益: 编译器保证"]
 ```
 
-> **认知功能**: 此决策树将选型矩阵转化为**交互式路径剪枝**，通过 "unsafe → 功能正确 → 团队背景" 三个问题在 30 秒内收敛到最优工具。**使用建议**: 按图从左到右回答，不要跳过 "团队背景" 评估——它是项目成败的最强预测因子。**关键洞察**: 多数 Rust 项目实际落在最左侧分支（Miri 或无需验证），决策树的最大价值恰恰是明确告诉你"何时不需要形式化验证"。 [来源: 💡 原创分析]
+> **认知功能**: 此决策树将选型矩阵转化为**交互式路径剪枝**，通过 "unsafe → 功能正确 → 团队背景" 三个问题在 30 秒内收敛到最优工具。
+> **使用建议**: 按图从左到右回答，不要跳过 "团队背景" 评估——它是项目成败的最强预测因子。
+> **关键洞察**: 多数 Rust 项目实际落在最左侧分支（Miri 或无需验证），决策树的最大价值恰恰是明确告诉你"何时不需要形式化验证"。
+> [来源: 💡 原创分析]
 
 ---
 
@@ -749,7 +751,9 @@ fn sum(n: i32) -> i32 {
 | **工业应用** | 学术研究为主，未大规模工业部署 |
 | **标注负担** | 高——每个循环需 `body_invariant!`，每个函数需 `#[requires]`/`#[ensures]` |
 
-> **关键洞察**: Prusti 的分离逻辑方法是 Rust 验证的"经典路径"——将 Rust 所有权映射为分离逻辑的权限（permission）。这种映射在概念上优雅，但工程上复杂：Rust 的生命周期（`'a`）和借用（`&T`/`&mut T`）的丰富语义在 Viper IL 中难以精确表达，导致某些合法 Rust 代码无法验证。[来源: Astrauskas et al., OOPSLA 2022] ✅
+> **关键洞察**: Prusti 的分离逻辑方法是 Rust 验证的"经典路径"——将 Rust 所有权映射为分离逻辑的权限（permission）。
+> 这种映射在概念上优雅，但工程上复杂：Rust 的生命周期（`'a`）和借用（`&T`/`&mut T`）的丰富语义在 Viper IL 中难以精确表达，导致某些合法 Rust 代码无法验证。
+> [来源: Astrauskas et al., OOPSLA 2022] ✅
 
 ### 7.2 Kani：基于 CBMC 的有界模型检测
 
@@ -936,7 +940,9 @@ Coma 的优势:
   3. 借用精确建模: `&T` 和 `&mut T` 的读写权限在 Coma 中精确表达
 ```
 
-> **关键洞察**: Creusot 的 Coma 中间语言解决了 Rust 验证的最大工程难题——**trait 的模块化验证**。在传统方法中，验证泛型函数需要内联所有可能的实现；Coma 通过 trait 合约（contract）实现"验证一次，适用所有实现"，这是 Creusot 在 PLDI 2023 论文中的核心贡献。[来源: Denis et al., PLDI 2023] ✅
+> **关键洞察**: Creusot 的 Coma 中间语言解决了 Rust 验证的最大工程难题——**trait 的模块化验证**。
+> 在传统方法中，验证泛型函数需要内联所有可能的实现；Coma 通过 trait 合约（contract）实现"验证一次，适用所有实现"，这是 Creusot 在 PLDI 2023 论文中的核心贡献。
+> [来源: Denis et al., PLDI 2023] ✅
 
 ### 7.5 Aeneas：基于借用的函数式翻译
 
@@ -974,7 +980,9 @@ Rust 的所有权转移        → 线性逻辑的消耗（consume）
 Rust 的 Copy 类型        → 普通复制（非线性）
 ```
 
-> **关键洞察**: Aeneas 选择了与 Prusti/Verus/Creusot 完全不同的验证路径——不是"用 SMT 自动证明"，而是"翻译到定理证明器后手动证明"。这使得 Aeneas 能验证其他工具无法处理的复杂算法（如复杂的数据结构不变量），但代价是极高的证明负担（人天到人周级别）。Aeneas 更适合研究场景，而非工业日常验证。[来源: Ho & Protzenko, ICFP 2022] ✅
+> **关键洞察**: Aeneas 选择了与 Prusti/Verus/Creusot 完全不同的验证路径——不是"用 SMT 自动证明"，而是"翻译到定理证明器后手动证明"。
+> 这使得 Aeneas 能验证其他工具无法处理的复杂算法（如复杂的数据结构不变量），但代价是极高的证明负担（人天到人周级别）。
+> Aeneas 更适合研究场景，而非工业日常验证。[来源: Ho & Protzenko, ICFP 2022] ✅
 
 ### 7.6 验证工具对比矩阵（深度版）
 
@@ -995,13 +1003,14 @@ Rust 的 Copy 类型        → 普通复制（非线性）
 
 ### 7.7 RefinedRust：基于 Liquid Types 的自动分离逻辑验证
 
-**[PLDI 2024]** RefinedRust 是由 Aarhus University / MPI-SWS 团队开发的 Rust 验证工具，其核心创新在于**零用户标注的自动分离逻辑推导**。与 Prusti、Creusot 等需要开发者编写前置/后置条件不同，RefinedRust 通过**类型精化（Refinement Types）**和**Liquid Types 推断**自动生成程序规约。
+**[PLDI 2024]** RefinedRust 是由 Aarhus University / MPI-SWS 团队开发的 Rust 验证工具，其核心创新在于**零用户标注的自动分离逻辑推导**。
+与 Prusti、Creusot 等需要开发者编写前置/后置条件不同，RefinedRust 通过**类型精化（Refinement Types）**和**Liquid Types 推断**自动生成程序规约。
 
 **核心原理**：
 
 | 组件 | 功能 | 形式化基础 |
 |:---|:---|:---|
-| **类型精化前端** | 将 Rust 类型扩展为带谓词的精化类型（如 `{i32 | x > 0}`） | Liquid Types（PLDI 2008） |
+| **类型精化前端** | 将 Rust 类型扩展为带谓词的精化类型（如 `{i32 \| x > 0}`） | Liquid Types（PLDI 2008） |
 | **分离逻辑推导引擎** | 自动推断所有权、借用和内存分离约束 | Iris 高阶分离逻辑（POPL 2018） |
 | **约束求解** | 将精化谓词转化为 Horn 子句，通过 Z3 求解 | Houdini（PLDI 2001）+ Z3 |
 
