@@ -550,7 +550,7 @@ timeline
 
 | 漏洞编号 | 影响组件 | 严重性 | 描述 | 修复版本 | 知识库覆盖 |
 |:---|:---|:---:|:---|:---|:---|
-| **CVE-2026-5222** | **Cargo** (sparse registry) | Low | Cargo 错误规范化 sparse registry URL（`.git` 后缀），攻击者可窃取同一域名下其他 registry 用户的凭证 | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
+| **CVE-2026-5222** | **Cargo** (sparse registry) | Low | Cargo 错误规范化 sparse registry URL：`.git` 后缀被剥离，攻击者在极特殊的共享域名托管条件下可窃取同一 registry 其他用户的凭证。影响 Cargo 1.68–1.95 | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
 | **CVE-2026-5223** | **Cargo** | **Medium** | Cargo 错误处理 crate tarball 中的 symlink：恶意 crate 可通过构造特殊 tar 文件将内容提取到自身缓存目录的**下一级**，从而覆盖同注册表中其他 crate 的缓存。crates.io 用户**不受影响**（crates.io 禁止上传含 symlink 的 crate），第三方注册表用户有风险 | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
 | **CVE-2026-33056** | `tar` (Cargo 依赖) | Medium | 第三方 `tar` crate 漏洞：恶意 crate 可在 Cargo 解压时更改文件系统任意目录权限 | Rust 1.94.1+ | `concept/06_ecosystem/01_toolchain.md` |
 | **CVE-2026-33056** | `hickory-dns` | High | DNSSEC 验证绕过，恶意响应可导致缓存投毒 | ≥0.25.0 | `docs/04_research/security_advisory_tracking.md` |
@@ -558,7 +558,9 @@ timeline
 | **RUSTSEC-2026-0118** | `hickory-proto` | High | NSEC3 closest-encloser 验证无限循环（跨区响应） | 无修复版本（上游 libp2p 依赖） | `c10_networks` 依赖链 |
 | **RUSTSEC-2026-0119** | `hickory-proto` | High | CPU 耗尽：O(n²) 名称压缩 | ≥0.26.1 | `c10_networks` 依赖链 |
 | **RUSTSEC-2023-0071** | `rsa` | High | Marvin Attack：定时侧信道密钥恢复 | 无修复版本 | 间接依赖 |
-| **CVE-2026-XXXXX** | `openssl-sys` (待定) | Medium | X.509 路径验证绕过 (待 RustSec 确认) | 待定 | 🟡 待更新 |
+| **RUSTSEC-2026-0149** | `wasmtime-wasi` | **High** | WASI `path_open(TRUNCATE)` 绕过 `FilePerms::WRITE` 主机限制，来宾可截断只读文件 | ≥29.0.0 | `c12_wasm` / WASI 运行时 |
+| **RUSTSEC-2026-0141** | `lettre` | **Critical** | Boring TLS 后端布尔值反转 bug 导致 TLS 主机名验证被禁用，中间人攻击风险。CVSS 9.1 | ≥0.11.15 | 邮件/网络基础设施 |
+| **CVE-2026-25727** | `time` | Medium | 解析恶意 RFC 2822 日期字符串导致栈耗尽 DoS。影响 0.3.6–0.3.46 | ≥0.3.47 | 时间解析依赖链 |
 | **RUSTSEC-2026-0012** | `tokio` (mpsc) | Medium | 边界条件导致内存泄漏，长时间运行服务受影响 | ≥1.44.0 | `concept/03_advanced/02_async.md` |
 
 **已弃用/未维护依赖**（`cargo audit` 2026-05-23）：
@@ -866,6 +868,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 | v1.16 | 2026-05-26 | 权威内容对齐 R16：① nvptx64-nvidia-cuda 基线提升（PTX ISA 7.0 / SM 7.0+，Rust 1.97 起 Maxwell/Pascal 支持终止） [来源: Rust Blog 2026-05-01]；② Tonic 正式加入 gRPC 官方项目（CNCF 治理，`grpc` crate 长期规划） [来源: gRPC Blog 2026-05-21]
 | v1.17 | 2026-05-26 | 权威内容对齐 R17：① CVE-2026-5223 完整安全公告（Cargo symlink 缓存覆盖漏洞，Medium 严重性，crates.io 不受影响，第三方注册表用户需关注） [来源: Rust Security Advisory 2026-05-25]；② 1.96.0 pre-release 状态更新（2026-05-26 已可用，最终稳定版 2026-05-28） [来源: Inside Rust 2026-05-26]
 | v1.18 | 2026-05-26 | 权威内容对齐 R18：① Rust Foundation 加入包注册表可持续性联盟（应对 AI 流量/bot 攻击/治理碎片化） [来源: Rust Foundation 2026-05-06]；② Rust Project 首次 Outreachy 参与（4 名实习生：C++ 互操作/编译器覆盖率/a-mir-formality fuzzing/GA 安全） [来源: Rust Blog 2026-05-04]
+| v1.19 | 2026-05-26 | 权威内容对齐 R19：安全公告全景补充——① CVE-2026-5222 完善（影响 Cargo 1.68–1.95）；② RUSTSEC-2026-0149 wasmtime-wasi FilePerms 绕过；③ RUSTSEC-2026-0141 lettre TLS 主机名验证失效（CVSS 9.1 Critical）；④ CVE-2026-25727 `time` crate DoS [来源: Rust Security Advisory 2026-05; rustsec.org]
 
 ---
 
