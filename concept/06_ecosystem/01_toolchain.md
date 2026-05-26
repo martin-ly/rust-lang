@@ -14,11 +14,11 @@
 
 - v1.0 (2026-05-12): 初始版本
 - v1.1 (2026-05-12): Wave 3 扩展——Wikipedia 定义、Clippy/优化矩阵、Cargo 深层机制、交叉编译、工具详解、LLVM IR
+- v1.2 (2026-05-26): 权威内容对齐：新增 §7.4 gccrs（GCC 前端替代实现，RustConf 2026 演讲已接受，目标编译 Linux 内核）和 §7.5 `rustc_codegen_gcc`（GCC 后端集成，已实现自举 Rust 编译器）
 
 ---
 
 ## 📑 目录
->
 
 - [Toolchain（工具链与 Cargo）](#toolchain工具链与-cargo)
   - [📑 目录](#-目录)
@@ -61,6 +61,9 @@
   - [七、国际来源：Rust 编译器架构](#七国际来源rust-编译器架构)
     - [7.1 rustc\_driver](#71-rustc_driver)
     - [7.2 LLVM IR](#72-llvm-ir)
+    - [7.3 Cranelift 后端（Rust 2026 Project Goal）](#73-cranelift-后端rust-2026-project-goal)
+    - [7.4 gccrs — GCC 前端替代实现](#74-gccrs--gcc-前端替代实现)
+    - [7.5 `rustc_codegen_gcc` — GCC 后端集成](#75-rustc_codegen_gcc--gcc-后端集成)
   - [八、思维导图](#八思维导图)
   - [九、决策树](#九决策树)
   - [十、反命题决策树](#十反命题决策树)
@@ -114,7 +117,6 @@ graph LR
 
 > **认知功能**: 此图建立从"为什么需要工具链"到"生态边界在哪"的递进式认知框架，建议按六步路径逐层推进以避免概念断层；工具链学习的终点不是掌握每个命令，而是理解"工程约束优先于工具本身"。[来源: 💡 原创分析]
 > [来源: [Cargo Book]]
-
 > **层次一致性**：本节为 L6 生态工程的总览路径；各步对应 L1-L3 的具体机制，详见后文"与 L1-L4 的关系映射"节。
 
 ---
@@ -270,7 +272,6 @@ graph LR
 ## 三、Cargo 深层机制
 
 ### 3.1 Workspace 高级用法
->
 
 **[Cargo Book]** A workspace is a collection of one or more packages that share the same `Cargo.lock` and output directory. Workspaces help manage multiple related packages developed in tandem.
 
@@ -1058,6 +1059,7 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 | LTO / PGO | 完整支持 | 不支持（debug 场景不需要） |
 
 > **Rust 2026 Project Goal — "Flexible, fast(er) compilation"** 将 Cranelift 后端正式列为旗舰目标。核心里程碑：
+>
 > 1. **稳定化 `rustc_codegen_cranelift`**：将实验性后端提升为 Tier 2 支持目标；
 > 2. **cargo 集成**：`cargo build --backend=cranelift` 等原生支持；
 > 3. **架构扩展**：增加 ARM64、RISC-V 支持；
@@ -1068,6 +1070,53 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 > ⚠️ **2025H2 周期状态更新**: Production-ready Cranelift backend 目标在 2025H2 周期结束时标记为 **"Not completed (lack of funding)"**。核心开发者 Folkert de Vries 和 bjorn3（由 Trifecta Tech Foundation 资助）因资金不足未能完成 Tier 2 稳定化。社区正在寻求新的资助渠道（包括 Rust Foundation 和工业赞助）。这凸显了 Rust 基础设施的**可持续资助挑战**——与 LLVM（由 Apple/Google/Meta 等大公司长期资助）不同，Cranelift 的商业支持生态仍在建设中。
 
 > **来源**: [Rust Project Goals 2026 — Cranelift Backend](https://rust-lang.github.io/rust-project-goals/2026h1/cranelift.html) · [rustc_codegen_cranelift GitHub](https://github.com/rust-lang/rustc_codegen_cranelift) · [Bytecode Alliance — Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · 可信度: ✅
+
+### 7.4 gccrs — GCC 前端替代实现
+
+**[GNU Compiler Collection]** gccrs 是一个完整的、独立的 Rust 编译器前端实现，基于 GCC 基础设施开发（C++ 编写），目标是成为 GNU 工具链的官方 Rust 前端。与 `rustc_codegen_gcc`（复用 rustc 前端，仅替换后端）不同，gccrs 是**从零实现的完整编译器**，不依赖 rustc 的任何代码。
+
+**2026 年里程碑**（RustConf 2026 已接受演讲 "Compiling the Linux kernel with gccrs"）：
+
+| **里程碑** | **目标** | **状态** |
+|:---|:---|:---|
+| 嵌入式 Rust 编译器 | 支持 `core` 及仅依赖 `core` 的 crate | 🟡 进行中 |
+| Rust for Linux 编译器 | 支持 `alloc` + Rust-for-Linux 全部 crate | 🔴 2026H2 目标 |
+| 通用目的编译器 | 完整支持标准库及 crates.io 生态 | 🔴 远期 |
+
+**当前技术进展**（2026-03 月度报告）：
+
+- `compiler_builtins` 已加入支持列表，内核 `ffi` crate 仅剩少数问题待解决
+- 新增 `-Zcrate-attr` 等价命令行选项，支持 `#![no_core]` 编译无 `core` 依赖代码
+- 路径解析数据结构调整：发现 imports/modules 始终插入 types namespace，需优先在 types namespace 解析
+- 2026 年 GSoC 收到 7 份高质量提案
+
+**战略意义**: gccrs 消除 Rust 对 LLVM 的单一依赖，对以下场景至关重要：
+
+1. **架构支持**: GCC 支持 LLVM 不覆盖的嵌入式/遗留架构（如某些 RISC-V 变体、IBM s390、旧 ARM）
+2. **混合编译**: C/C++/Rust 项目可在单一工具链内编译，无需在 LLVM 和 GCC 生态间切换
+3. **安全关键认证**: 政府承包商、航空/汽车供应商通常深度嵌入 GNU 工具链，gccrs 消除结构性采纳障碍
+4. **Debian 集成**: Debian 计划 2026-05 起在 APT 中纳入"严格 Rust 要求"，要求内核可用 Debian 自带 Rust 版本编译
+
+> ⚠️ **关键区别**: gccrs（独立前端+GCC 后端）与 `rustc_codegen_gcc`（rustc 前端+GCC 后端）是**两个独立项目**。后者由 rust-lang 官方维护，进度更快；前者是长期完整的替代实现，但开发量更大。[来源: [gccrs March 2026 Monthly Report](https://rust-gcc.github.io/2026/04/13/2026-03-monthly-report.html)] · [来源: [Rust-GCC/gccrs GitHub](https://github.com/Rust-GCC/gccrs)] · 可信度: ✅
+
+### 7.5 `rustc_codegen_gcc` — GCC 后端集成
+
+**[rust-lang 官方项目]** `rustc_codegen_gcc` 是 rustc 的替代代码生成后端，使用 GCC 的 `libgccjit` 库将 MIR 翻译为机器码，而非 LLVM IR。它是 rust-lang 组织内的**官方实验项目**，由 Antoni Boucher 等人维护。
+
+**2025-2026 重大突破**: 该项目已实现**使用 GCC 后端自举 Rust 编译器**（即：用 `rustc_codegen_gcc` 编译出的 rustc 可再次编译自身）。这是 Rust 编译器生态从 LLVM 单极走向多后端的关键一步。
+
+| **维度** | **LLVM 后端** | **`rustc_codegen_gcc`** |
+|:---|:---|:---|
+| 前端来源 | rustc（Rust 编写） | rustc（Rust 编写） |
+| 后端来源 | LLVM（C++） | GCC / `libgccjit`（C） |
+| 架构覆盖 | x86_64、ARM、AArch64、RISC-V、WASM | **GCC 支持的全部架构**（包括 LLVM 未覆盖的） |
+| 编译速度 | 基准 | 略慢（JIT 层开销） |
+| 优化等级 | 极致（LTO、PGO） | 依赖 GCC 优化管线 |
+| 项目状态 | Tier 1 稳定 | 实验性，已可自举 |
+
+**解决的问题**: 128 位整数 `SwitchInt` 终结符实现（`libgccjit` 的 `gcc_jit_context_new_rvalue_from_long` 仅接受 64 位参数）、未对齐加载的类型对齐重复调用问题。
+
+> **关键洞察**: `rustc_codegen_gcc` 和 gccrs 共同构成 Rust 的 **"GCC 双轨战略"**：前者是短期务实的路径（复用成熟前端，快速扩展架构支持），后者是长期独立的替代方案（完整自主权，不绑定 rustc 演进）。对企业和嵌入式开发者而言，这意味着 Rust 不再被 LLVM 的支持矩阵"门禁"。[来源: [rustc_codegen_gcc GitHub](https://github.com/rust-lang/rustc_codegen_gcc)] · [来源: [LWN.net — A 2025 Retrospective](https://lwn.net/Articles/1053187/)] · [来源: [Building the Rust compiler with GCC](https://fractalfir.github.io/generated_html/cg_gcc_bootstrap.html)] · 可信度: ✅
 
 > **过渡**：从编译器内部回到生态系统全局，以下思维导图将前述所有工具按功能域组织，便于快速定位。
 
@@ -1090,6 +1139,9 @@ graph TD
 
     C --> C1[rustc]
     C --> C2[LLVM Backend]
+    C --> C2a[Cranelift Backend]
+    C --> C2b[GCC Backend]
+    C --> C2c[gccrs Frontend]
     C --> C3[Cross-compilation]
 
     D --> D1[Clippy]

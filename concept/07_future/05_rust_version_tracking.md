@@ -10,10 +10,8 @@
 ---
 
 > **Bloom 层级**: 分析 → 应用
->
+
 ## 〇、形式模型演进认知入口
->
->
 
 ```mermaid
 mindmap
@@ -657,11 +655,13 @@ timeline
 | 对演进速度满意 | 57.6% | 57.9% | — | 稳定 |
 
 **最大担忧**（多选）：
+
 1. **Rust 在科技行业使用不足** — 42.1%（2024: 45.5%）
 2. **Rust 可能变得过于复杂** — 41.6%（2024: 45.2%）
 3. **开发者/维护者未得到足够支持** — 38.4%（2024: 35.4%）
 
 **生产力障碍**（重大问题）：
+
 - **编译速度慢** — 27.9%（持续多周期首位）
 - **磁盘空间占用高** — 22.24%
 - **调试体验差** — 19.90%
@@ -675,18 +675,68 @@ timeline
 **[Rust Blog, 2026-04-04]** Rust 1.96（2026-05-28 稳定）将对 WebAssembly 目标进行两项 breaking change：
 
 **① 移除 `--allow-undefined` 默认标志**：
+
 - **影响**: 所有 WebAssembly 目标（`wasm32-unknown-unknown`、`wasm32-wasip1` 等）
 - **变更**: 链接时未定义符号将从**静默允许**变为**编译错误**
 - **理由**: 与原生平台行为一致，防止因函数名拼写错误或依赖缺失导致的运行时"幽灵"导入问题
 - **迁移**: 若确实需要未定义符号（如动态链接场景），需显式使用 `--allow-undefined` 或 `-Clink-arg=--allow-undefined`
 
 **② docs.rs 默认构建目标缩减**：
+
 - **生效日期**: 2026-05-01
 - **变更**: docs.rs 默认仅从 5 个目标缩减为 **1 个目标**（`x86_64-unknown-linux-gnu`）
 - **影响**: 构建队列等待时间预计减少 ~40%
 - **自定义**: 开发者可在 `Cargo.toml` 中通过 `default-target` 或 `targets` 字段指定所需目标
 
 > **来源**: [Rust Blog — Changes to WebAssembly targets](https://blog.rust-lang.org/2026/04/04/c-abi-changes-for-wasm32-unknown-unknown.html) · [Rust Blog — docs.rs building fewer targets](https://blog.rust-lang.org/2026/04/04/docs-rs-building-fewer-targets-by-default.html) · 可信度: ✅
+
+### 12.3 Rust Foundation 2026–2028 战略发布
+
+**[Rust Foundation, 2026-01-27]** Rust 基金会发布了 2025 年度报告和 2026–2028 三年战略规划，标志着 Rust 从"项目驱动"向"机构化可持续支持"的转型：
+
+| **战略优先领域** | **核心目标** | **与 Project 的关联** |
+|:---|:---|:---|
+| 稳定、安全的基础设施 | crates.io、docs.rs、CI 系统的长期可靠运行 | 基础设施团队 2026 Q1/Q2 计划直接承接 |
+| 维护者的可持续支持 | 全职维护者资助、 grants 项目、活动支持 | 2025 年投入 $2.7M（其中 $2.0M 直接用于维护工作） |
+| 负责任的采用增长 | 企业级采纳支持、培训认证生态 | 放弃个人认证课程，优先认证现有培训提供商 |
+| 依赖 Rust 的组织的深度参与 | 会员扩展、工业赞助渠道建设 | 2025 年筹集 $5.1M，需持续增长 |
+| 强大、互联的全球社区 | RustConf/EuroRust、Rust-Edu、Outreachy/GSoC | RustConf 2026 已公布演讲者，注册开放 |
+
+**财务摘要（2025）**：
+
+- 总筹款：**$5.1M**
+- 直接投入 Project 和社区：**$2.7M**（其中 $2.0M 为全职维护者成本）
+- 治理/运营/合规：**$2.4M**
+
+**关键行动**：
+
+- **C++ 互操作倡议**: 基金会聘请 teor 加速互操作问题空间映射，已列出 ~30 个问题陈述和用例；与 ISO WG21（C++ 标准委员会）建立合作，共识方向是为 C++ 提供内存安全机制（预计多年周期）
+- **Trusted Publishing**: GitLab 支持进入公测；漏洞扫描 RFC 进入最终评议期
+- **Rust-Edu Refresh 2026**: 征集培训提供商认证，替代个人认证课程
+
+> **深层意义**: 基金会的三年战略反映了 Rust 的成熟阶段——不再只是"语言设计"问题，而是**生态可持续性**问题。Cranelift 资金不足、gccrs 的长期投入需求、安全关键认证的工业推动，都需要基金会在企业和社区之间搭建桥梁。2025 年 $5.1M 的筹款规模与 LLVM（Apple/Google/Meta 等数千万美元级资助）相比仍有差距，但方向正确。[来源: [Rust Foundation — 2025 Annual Report & Strategy](https://rustfoundation.org/media/annual-report-strategy-2025/)] · [来源: [Inside Rust — Foundation Annual Report PD Update](https://blog.rust-lang.org/inside-rust/2026/01/27/2025-rust-foundation-annual-report/)] · [来源: [Inside Rust — Program Management Update April 2026](https://blog.rust-lang.org/inside-rust/2026/05/13/program-management-update--april-2026/)] · 可信度: ✅
+
+### 12.4 aarch64-pc-windows-msvc 晋升 Tier 1 RFC
+
+**[Rust RFC, 2026-05]** 新 RFC 提案将 `aarch64-pc-windows-msvc`（ARM64 Windows）从 Tier 2 with host tools 晋升为 **Tier 1 with host tools**。这是 Rust 平台支持矩阵的重大扩展，反映了 ARM64 Windows 设备（Surface Pro X、Windows Dev Kit 2023、Copilot+ PC）的市场增长。
+
+| **维度** | `aarch64-pc-windows-msvc` | 对比 `x86_64-pc-windows-msvc` |
+|:---|:---|:---|
+| 当前层级 | Tier 2 with host tools | Tier 1 with host tools |
+| 测试覆盖 | 部分 CI 测试 | 每 PR 强制测试 |
+| 安装方式 | `rustup target add` | `rustup` 默认安装 |
+| 应用场景 | Windows on ARM 设备原生开发 | 主流 Windows 开发 |
+
+**晋升条件**（根据 Target Tier Policy）：
+
+1. ✅ 有专门的维护者团队承诺长期支持
+2. ✅ 构建和测试基础设施到位
+3. 🟡 每 PR 测试的 CI 资源（ARM64 Windows runner 成本较高）
+4. 🟡 生态成熟度（部分 crate 未测试 ARM64 Windows）
+
+**背景**: 同期 `i686-pc-windows-gnu` 从 Tier 1 降级为 Tier 2（RFC 3771，Rust 1.88.0），反映 Rust 平台策略的"优胜劣汰"——资源向高价值目标集中，低使用率目标逐步降级。
+
+> **来源**: [Rust RFC — Promote aarch64-pc-windows-msvc to Tier 1](https://github.com/rust-lang/rfcs/pull/...) · [Rust Blog — Demoting i686-pc-windows-gnu](https://blog.rust-lang.org/2025/05/26/demoting-i686-pc-windows-gnu/) · [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) · 可信度: 🟡（RFC 编号待稳定后更新）
 
 ---
 
@@ -709,6 +759,7 @@ timeline
 | v1.10 | 2026-05-23 | Miri 重大突破：c05_threads 从"Windows 超时"变为 288 passed（rayon/crossbeam 测试排除）；Miri 验证扩展至 13/15 crate（2,365 测试通过）；代码块编译器扩展至 knowledge/（967/1434 通过）；cargo audit 漏洞跟踪更新（§9.3）；来源标注重复清理；cargo doc 0 警告 |
 | v1.11 | 2026-05-23 | 代码块编译器历史性突破：全项目 **931/931 通过（100%）**，knowledge/ 编译失败块系统标记为 `ignore`/`compile_fail`；Miri 报告补充 cargo test 验证状态（c11_proc / c12_wasm）
 | v1.12 | 2026-05-26 | 社区生态动态：补充 2025 State of Rust Survey 关键发现（生产采用率 48.8%、LLM 学习路径迁移）、WebAssembly 1.96 breaking changes（移除 `--allow-undefined`、docs.rs 默认单目标） [来源: Rust Blog 2026-03/04]
+| v1.13 | 2026-05-26 | 权威内容对齐：Rust Foundation 2026–2028 三年战略（五大优先领域、C++ 互操作倡议）、aarch64-pc-windows-msvc Tier 1 RFC 提案 [来源: Rust Foundation 2026-01; Rust RFC Tracker]
 
 ---
 
