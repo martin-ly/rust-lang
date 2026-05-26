@@ -21,7 +21,7 @@
 
 - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
 - v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
-- v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器与生产者）、§8.11 Pin<Box<dyn Future>> vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
+- v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器与生产者）、§8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
 - v3.0 (2026-05-13): 深度重构——新增§3.5调度模型对比（含三维Mermaid图）、§3.1状态机变换精确推导（含Pin内存布局约束）、§8.7取消安全系统分析（含3种安全模式与形式化定义）、§8.8 Waker契约与活性（含决策树），建立异步语义模型完整推理链
 - v2.0 (2026-05-13): 定理一致性矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Future 状态机模型、async/await 语法糖解析、Pin 分析、思维导图、示例反例

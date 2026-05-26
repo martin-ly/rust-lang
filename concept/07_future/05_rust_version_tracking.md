@@ -642,6 +642,54 @@ timeline
 
 ---
 
+## 十二、社区与生态动态（2025–2026）
+
+### 12.1 2025 State of Rust Survey 关键发现
+
+**[Rust Survey Team, 2026-03-02]** 2025 年 Rust 状态调查（7,156 份回复，2025-11-17 至 2025-12-17）揭示了 Rust 生态系统的结构性成熟：
+
+| 指标 | 2025 | 2024 | 2023 | 趋势 |
+|:---|:---:|:---:|:---:|:---|
+| 组织生产使用 Rust | **48.8%** | — | 38.7% | ⬆️ +10.1pp（两年内） |
+| 日常使用 Rust | **55.1%** | — | — | 历史新高 |
+| 自评高效 Rust 写作者 | **56.8%** | — | 42.3% | ⬆️ +14.5pp |
+| 个人使用 Rust | 91.7% | 92.5% | — | ⬇️ 轻微回落（社区成熟化） |
+| 对演进速度满意 | 57.6% | 57.9% | — | 稳定 |
+
+**最大担忧**（多选）：
+1. **Rust 在科技行业使用不足** — 42.1%（2024: 45.5%）
+2. **Rust 可能变得过于复杂** — 41.6%（2024: 45.2%）
+3. **开发者/维护者未得到足够支持** — 38.4%（2024: 35.4%）
+
+**生产力障碍**（重大问题）：
+- **编译速度慢** — 27.9%（持续多周期首位）
+- **磁盘空间占用高** — 22.24%
+- **调试体验差** — 19.90%
+
+> **关键洞察**: Rust 已从"爱好者和系统程序员的语言"转变为**结构性市场存在**。最引人注目的趋势是开发者获取帮助方式的转变：开源回复中 ChatGPT、Claude、Gemini 的出现频率与传统资源（TRPL、官方文档）并驾齐驱，社区 meetup/论坛出席率明显下降。这预示着 LLM 正在重塑 Rust 学习路径——从"社区驱动"向"AI 辅助自学"迁移。
+
+> **来源**: [Rust Blog — 2025 State of Rust Survey Results](https://blog.rust-lang.org/2026/03/02/2025-State-Of-Rust-Survey.html) · [The New Stack 分析](https://thenewstack.io/rust-enterprise-developers/) · [InfoWorld 分析](https://www.infoworld.com/article/4139528/rust-developers-have-three-big-worries-survey.html) · 可信度: ✅
+
+### 12.2 WebAssembly 目标重大变更（Rust 1.96）
+
+**[Rust Blog, 2026-04-04]** Rust 1.96（2026-05-28 稳定）将对 WebAssembly 目标进行两项 breaking change：
+
+**① 移除 `--allow-undefined` 默认标志**：
+- **影响**: 所有 WebAssembly 目标（`wasm32-unknown-unknown`、`wasm32-wasip1` 等）
+- **变更**: 链接时未定义符号将从**静默允许**变为**编译错误**
+- **理由**: 与原生平台行为一致，防止因函数名拼写错误或依赖缺失导致的运行时"幽灵"导入问题
+- **迁移**: 若确实需要未定义符号（如动态链接场景），需显式使用 `--allow-undefined` 或 `-Clink-arg=--allow-undefined`
+
+**② docs.rs 默认构建目标缩减**：
+- **生效日期**: 2026-05-01
+- **变更**: docs.rs 默认仅从 5 个目标缩减为 **1 个目标**（`x86_64-unknown-linux-gnu`）
+- **影响**: 构建队列等待时间预计减少 ~40%
+- **自定义**: 开发者可在 `Cargo.toml` 中通过 `default-target` 或 `targets` 字段指定所需目标
+
+> **来源**: [Rust Blog — Changes to WebAssembly targets](https://blog.rust-lang.org/2026/04/04/c-abi-changes-for-wasm32-unknown-unknown.html) · [Rust Blog — docs.rs building fewer targets](https://blog.rust-lang.org/2026/04/04/docs-rs-building-fewer-targets-by-default.html) · 可信度: ✅
+
+---
+
 ## 十一、变更日志
 
 | 版本 | 日期 | 变更 |
@@ -660,6 +708,7 @@ timeline
 | v1.9 | 2026-05-23 | 质量深化：68 个核心概念文件来源标注率修复至 ≥15%（全项目核心文件 100% 达标）、knowledge/ 新增 40 个 concept/ 交叉引用（129/129 达标）、docs/ 代码块编译失败修复 29 个块 |
 | v1.10 | 2026-05-23 | Miri 重大突破：c05_threads 从"Windows 超时"变为 288 passed（rayon/crossbeam 测试排除）；Miri 验证扩展至 13/15 crate（2,365 测试通过）；代码块编译器扩展至 knowledge/（967/1434 通过）；cargo audit 漏洞跟踪更新（§9.3）；来源标注重复清理；cargo doc 0 警告 |
 | v1.11 | 2026-05-23 | 代码块编译器历史性突破：全项目 **931/931 通过（100%）**，knowledge/ 编译失败块系统标记为 `ignore`/`compile_fail`；Miri 报告补充 cargo test 验证状态（c11_proc / c12_wasm）
+| v1.12 | 2026-05-26 | 社区生态动态：补充 2025 State of Rust Survey 关键发现（生产采用率 48.8%、LLM 学习路径迁移）、WebAssembly 1.96 breaking changes（移除 `--allow-undefined`、docs.rs 默认单目标） [来源: Rust Blog 2026-03/04]
 
 ---
 
