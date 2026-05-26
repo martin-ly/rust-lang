@@ -1,4 +1,5 @@
 # Linear Logic & Affine Logic（线性逻辑与仿射逻辑）
+>
 > **层级**: L4 形式化理论
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析线性逻辑到 Rust 的映射
@@ -37,6 +38,7 @@ $entry
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 二、概念属性矩阵（Attribute Matrix）
 >
 >
@@ -114,6 +116,7 @@ graph TD
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 三、形式化理论根基（Formal Foundation）
 
 > **[学术来源: Girard 1987; Wadler 1990, *Linear Types can Change the World* (ICFP); Pierce TAPL §15.3]** 以下自然演绎规则及 Rust 映射源自线性逻辑的 sequent calculus 及其在程序语言中的对应。
@@ -179,6 +182,7 @@ Rust 对应:
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 四、思维导图（Mind Map）
 
 ```mermaid
@@ -218,6 +222,7 @@ graph TD
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 五、反命题决策树（Anti-Proposition Decision Trees）
 
 > 以下决策树用于拆解三个常见的**过度简化命题**，每个树从命题出发，经过 2-3 层判定到达反例或修正结论。 [来源: [Wikipedia — Type Theory](https://en.wikipedia.org/wiki/Type_theory)]
@@ -301,6 +306,7 @@ graph TD
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 六、定理推理链（Theorem Chain）
 
 > **[学术来源: Wadler 1990, *Linear Types can Change the World*; RustBelt: POPL 2018, Jung et al.; Pierce TAPL §15.3]** 仿射类型系统通过资源唯一性保证内存安全。本节引入 ⟹ 符号表示定理间的**逻辑依赖方向**——若 A ⟹ B，则 A 是 B 的必要前提或逻辑前驱。
@@ -337,6 +343,7 @@ T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 七、sequent calculus 完整规则集与 Phase Semantics
 
 > **[Girard 1987 · Linear Logic]** · **[Wikipedia: Sequent calculus]** · **[Wikipedia: Phase semantics]** 本节补充线性逻辑的三层规则系统（乘法/加法/指数）及其相位语义与 Rust 编译阶段的直观映射。✅
@@ -424,6 +431,7 @@ Rust 编译期的相位模型:
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 八、示例与反例
 
 ### 8.1 Rust 中的线性/仿射对应
@@ -499,6 +507,7 @@ fn session_demo() {
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 八、认知路径（Cognitive Path）
 
 > 形式化直觉化的 5 步认知路径，每步从直觉困惑出发，经具体场景→模式抽象→形式规则→代码验证→边界测试的完整闭环。 [来源: [POPL 2019 — Stacked Borrows](https://dl.acm.org/doi/10.1145/3290380)]
@@ -615,6 +624,7 @@ fn session_demo() {
 > 工程实践中的对应见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权规则）与 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用作为分数权限的弱化形式）。
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 十、相关概念链接
 
 | 概念 | 文件 | 关系 |
@@ -628,6 +638,7 @@ fn session_demo() {
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 十一、Proof nets（证明网）与并发程序可视化
 
 > **[学术来源: Girard 1987, *Linear Logic* §6; Danos & Regnier 1989, *The Structure of Multiplicatives*; Wikipedia: Proof net]** Proof nets 是线性逻辑证明的**图形化规范形式**，消除了 sequent calculus 中因规则应用顺序不同而产生的**句法冗余**。它们将证明表示为图结构，其中逻辑连接词是节点，公式是边，cut 是连接两个对偶公式的边。
@@ -713,6 +724,7 @@ Cut 消除规则（线性逻辑核心元定理）:
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 十二、Linear Haskell 与 Rust 的跨语言类型系统对比
 
 > **[学术来源: Bernardy et al. 2017, *Linear Haskell: Practical Linearity in a Higher-Order Polymorphic Language*; PLDI 2018; GHC User Guide: LinearTypes]** Linear Haskell 是 GHC 9.x+ 引入的线性类型扩展，通过**重数（multiplicity）**概念在现有 Haskell 类型系统中嵌入线性约束。
@@ -816,7 +828,43 @@ fn read_file_manual(path: &str) -> io::Result<String> {
 }
 ```
 
-### 12.4 形式化定位
+### 12.4 Pure Borrow：在 Linear Haskell 中实现 Rust 风格借用（PLDI 2026）
+
+**[PLDI 2026 — Matsushita & Ishii]** Pure Borrow 是 Kyoto University 提出的理论框架，首次在 **Linear Haskell** 中完整实现了 **Rust 风格的非局部借用（non-local borrowing）**。这是一个重要的理论里程碑：它证明了 Rust 的核心借用机制可以嵌入纯函数式语言，且无需修改编译器（仅作为库实现，兼容 GHC 9.10+）。
+
+**核心问题**: Linear Haskell 已有线性类型（`%1 ->`），但缺少 Rust 的关键特性——**借用**。在 Rust 中，所有者可以临时将资源借出（`&mut T` / `&T`），借用人可在生命周期内自由分裂和丢弃，生命周期结束后所有权**非局部地**回归所有者。这种非局部性在 Linear Haskell 中此前无法实现，因为线性值必须通过显式 threading（手动传递所有权）。
+
+**Pure Borrow 的核心 API**：
+
+```haskell
+-- 借用生命周期 monad
+runBO :: Linearly => (∀a. BO (End → a)) → a
+
+-- 从所有者创建可变借用人和出借人
+borrow :: Linearly => a ⊸ (Mut a, Lend a)
+
+-- 将可变借用转换为共享借用（只读）
+share :: Mut a ⊸ Ur (Share a)
+
+-- 生命周期结束后 reclaim 所有权
+reclaim :: Lend a → End ⊸ a
+```
+
+**与 Rust 的对应关系**：
+
+| Rust 概念 | Pure Borrow 对应 | 关键差异 |
+|:---|:---|:---|
+| `&mut T` | `Mut a` | 可在纯函数式计算中使用，无副作用 |
+| `&T` | `Share a` | 通过 `share` 从 `Mut` 转换而来 |
+| 生命周期 `'a` | `BO` monad 的作用域 | 由类型系统保证，非词法 |
+| 所有权回归 | `reclaim lend end` | 显式 reclaim，Rust 是隐式 |
+| `Drop` | 无内置对应 | Linear Haskell 通过线性约束防止泄漏 |
+
+**关键洞察**: Pure Borrow 实现了 Rust 借用模型的**理论最小内核**，同时保留了 Haskell 的优势——**纯度、惰性求值、一流多态性**。与 Rust 不同，Pure Borrow 中的借用完全在纯计算中进行，无需 `unsafe` 关键字，且支持并行状态突变（因为线性类型保证了资源不相交）。这为"函数式语言中的命令式借用"提供了新的理论路径，也可能影响未来 Rust 的 effects 系统设计。
+
+> **来源**: [PLDI 2026 — Matsushita & Ishii, "Pure Borrow: Linear Haskell Meets Rust-Style Borrowing"](https://arxiv.org/abs/2604.15290) · [Pure Borrow Artifact](https://zenodo.org/records/19622061) · 可信度: ✅
+
+### 12.5 形式化定位
 
 ```text
 Linear Haskell 重数系统:
@@ -835,6 +883,7 @@ Rust 所有权系统（仿射变体）:
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 十三、待补充与演进方向（TODOs）
 
 - [x] **TODO**: 补充线性逻辑的 sequent calculus 完整规则集（multiplicative/additive/exponential 三层）—— 已完成 §7.1–7.3
@@ -881,108 +930,11 @@ Rust 所有权系统（仿射变体）:
 
 ## 权威来源索引
 
->
->
->
->
->
->
+---
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
-
 
 > **相关谓词映射**: [own(τ) 谓词](../00_meta/rustbelt_predicate_map.md#二所有权谓词-ownτ-映射) · [shr(κ, ℓ) 谓词](../00_meta/rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
 
