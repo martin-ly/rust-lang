@@ -1056,3 +1056,7 @@ mindmap
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+> [来源: [Rust Benchmarking with Criterion](https://bheisler.github.io/criterion.rs/book/)]
+
+> [来源: [Rust Fuzz Book](https://rust-fuzz.github.io/book/)]
