@@ -14,6 +14,7 @@
 ---
 
 > **来源**: [Fielding 2000 — Architectural Styles and the Design of Network-based Software Architectures](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) ·
+> [来源: [Fielding 2000](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)] · [来源: [GraphQL Spec](https://spec.graphql.org/)]
 > [GraphQL Spec](https://spec.graphql.org/) ·
 > [gRPC Documentation](https://grpc.io/docs/) ·
 > [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) ·
@@ -61,6 +62,8 @@
 > **Bloom 层级**: 应用 → 评价
 **变更日志**:
 
+> **补充来源**: [来源: [axum Documentation](https://docs.rs/axum/latest/axum/)] · [来源: [Swagger UI](https://swagger.io/tools/swagger-ui/)]
+
 - v1.0 (2026-05-25): 初始创建——REST/GraphQL/gRPC API 设计模式，覆盖资源建模、版本化、错误处理、Schema 设计、流式 RPC、API 网关
 
 ---
@@ -90,6 +93,7 @@ RESTful API 设计:
 ```
 
 > **来源**: [Fielding 2000](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) · [RFC 7231](https://tools.ietf.org/html/rfc7231) · [Richardson Maturity Model](https://martinfowler.com/articles/richardsonMaturityModel.html)
+> [来源: [gRPC Documentation](https://grpc.io/docs/)] · [来源: [RFC 7231](https://tools.ietf.org/html/rfc7231)]
 
 ### 1.2 GraphQL：查询语言与运行时
 
@@ -132,6 +136,7 @@ query GetUserWithOrders($userId: ID!) {
 ```
 
 > **来源**: [GraphQL Spec](https://spec.graphql.org/) ·
+> [来源: [RFC 7807](https://tools.ietf.org/html/rfc7807)] · [来源: [tonic](https://docs.rs/tonic/latest/tonic/)]
 > [GraphQL Best Practices](https://graphql.org/learn/best-practices/) ·
 > [Apollo Server Documentation](https://www.apollographql.com/docs/apollo-server/)
 
@@ -883,6 +888,8 @@ Server::builder()
 
 ## 七、API 网关模式
 
+> **来源**: [Microsoft — API Gateway](https://docs.microsoft.com/en-us/azure/architecture/microservices/design/gateway) · [Traefik](https://doc.traefik.io/traefik/)
+
 ```text
 API 网关架构:
                     ┌─────────────────┐
@@ -957,6 +964,8 @@ async fn proxy_to_user_service(req: Request<Body>) -> Result<Response<Body>, Sta
 ---
 
 ## 八、对比矩阵
+
+> **来源**: [GraphQL vs REST](https://www.howtographql.com/basics/1-graphql-is-the-better-rest/)
 
 | **决策维度** | **REST** | **GraphQL** | **gRPC** |
 | :--- | :--- | :--- | :--- |
@@ -1152,6 +1161,8 @@ struct UserV2 {
 > [Stripe API Compatibility](https://stripe.com/docs/api/versioning)
 
 ---
+
+> **补充来源索引**: [来源: [async-graphql](https://docs.rs/async-graphql/latest/async_graphql/)] · [来源: [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)]
 
 ## 相关概念文件
 

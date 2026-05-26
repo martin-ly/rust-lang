@@ -8,19 +8,29 @@
 
 ---
 
-> **来源**: [Martin Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) · [Martin Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) · [Young — Implementing Domain-Driven Design](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577) · [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [EventStoreDB Documentation](https://developers.eventstore.com/server/v24.10/) · [Axon Framework Reference](https://docs.axoniq.io/reference-guide/)
+> **来源**: [Martin Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) ·
+> [Martin Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) ·
+> [Young — Implementing Domain-Driven Design](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577) ·
+> [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) ·
+> [EventStoreDB Documentation](https://developers.eventstore.com/server/v24.10/) ·
+> [Axon Framework Reference](https://docs.axoniq.io/reference-guide/)
+> [来源: [Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)] ·
+> [来源: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))]
+> [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)] ·
+> [来源: [Axon Framework](https://docs.axoniq.io/reference-guide/)]
 
 ## 📑 目录
 >
 >
 
-- [CQRS & Event Sourcing（命令查询职责分离与事件溯源）](#cqrs--event-sourcing命令查询职责分离与事件溯源)
+- [CQRS \& Event Sourcing（命令查询职责分离与事件溯源）](#cqrs--event-sourcing命令查询职责分离与事件溯源)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 CQRS：命令与查询的分离](#11-cqrs命令与查询的分离)
     - [1.2 事件溯源：不可变事件流](#12-事件溯源不可变事件流)
     - [1.3 CQRS+ES 的协同关系](#13-cqrses-的协同关系)
   - [二、概念属性矩阵](#二概念属性矩阵)
+    - [2.1 CQRS+ES 模式对比矩阵](#21-cqrses-模式对比矩阵)
   - [三、CQRS 核心](#三cqrs-核心)
     - [3.1 命令端：写模型优化](#31-命令端写模型优化)
     - [3.2 查询端：读模型优化](#32-查询端读模型优化)
@@ -49,6 +59,8 @@
 
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
+
+> **来源**: [EventStoreDB](https://developers.eventstore.com/server/v24.10/) · [Microsoft CQRS](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 - v1.0 (2026-05-25): 初始创建——CQRS+ES 合并专题，覆盖命令端/查询端分离、事件溯源、Saga 编排、Outbox 模式、Rust 实现骨架
 
@@ -169,6 +181,7 @@ impl BankAccountState {
 > - `&Event` 的共享只读访问对应于多个投影处理器并发读取事件流而不需要锁
 >
 > **来源**: [Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) · [EventStoreDB Documentation](https://developers.eventstore.com/server/v24.10/)
+> [来源: [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)] · [来源: [EventStoreDB Documentation](https://developers.eventstore.com/server/v24.10/)]
 
 ### 1.3 CQRS+ES 的协同关系
 >
@@ -217,6 +230,7 @@ graph TB
 ```
 
 > **来源**: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)
+> [来源: [Axon Framework Reference](https://docs.axoniq.io/reference-guide/)] · [来源: [Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)]
 
 ---
 
@@ -1248,7 +1262,11 @@ async fn another_bad_example(db: &PgPool, kafka: &FutureProducer, cmd: CreateOrd
 }
 ```
 
-> **修正**: **Outbox 模式**是唯一的可靠解决方案：将数据库写入和事件记录放在**同一事务**中。事务的原子性保证：要么两者都成功，要么两者都失败。独立的网络调用（如直接发 Kafka）无法保证与数据库事务的一致性。[来源: [Microsoft — Outbox Pattern](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events-in-background-worker-with-iactionscope)] · [Udi Dahan — Reliable Messaging](https://udidahan.com/2009/06/14/the-fault-is-in-the-outbox/)
+> **修正**: **Outbox 模式**是唯一的可靠解决方案：将数据库写入和事件记录放在**同一事务**中。
+> 事务的原子性保证：要么两者都成功，要么两者都失败。
+> 独立的网络调用（如直接发 Kafka）无法保证与数据库事务的一致性。
+> [来源: [Microsoft — Outbox Pattern](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/subscribe-events-in-background-worker-with-iactionscope)] ·
+> [Udi Dahan — Reliable Messaging](https://udidahan.com/2009/06/14/the-fault-is-in-the-outbox/)
 
 ### 10.3 边界测试：事件模式演化破坏反序列化（编译/运行时错误）
 
@@ -1305,6 +1323,21 @@ fn good_deserialization() {
 > **来源**: [Axon Framework — Event Versioning](https://docs.axoniq.io/reference-guide/axon-framework/events/event-versioning) · [serde 文档](https://serde.rs/)
 
 ---
+
+> [来源: [EventStoreDB Documentation](https://developers.eventstore.com/server/v24.10/)]
+> [来源: [Microsoft — CQRS Journey](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))]
+> [来源: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)]
+> [来源: [Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)]
+> [来源: [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)]
+> [来源: [Evans — Domain-Driven Design](https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)]
+> [来源: [Axon Framework Reference](https://docs.axoniq.io/reference-guide/)]
+> [来源: [AWS — CQRS Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)]
+> [来源: [Debezium — Outbox](https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html)]
+> [来源: [Vogels — Eventually Consistent](https://www.allthingsdistributed.com/2008/12/eventually_consistent.html)]
+
+> [来源: [EventStoreDB — Projection Best Practices](https://developers.eventstore.com/server/v24.10/projections.html)]
+> [来源: [Microsoft — Event Sourcing Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)]
+> [来源: [AWS — CQRS Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html)]
 
 ## 相关概念文件
 

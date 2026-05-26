@@ -26,7 +26,6 @@
 ## 权威定义
 >
 
-
 > **[Wikipedia — Entity component system]** Entity component system (ECS) is a software architectural pattern mostly used in video game development for the representation of game world objects. An ECS comprises entities composed from components of data, with systems which read and update component data.
 > **来源**: <https://en.wikipedia.org/wiki/Entity_component_system>
 
@@ -37,7 +36,6 @@
 
 ## 认知路径（Cognitive Path）
 >
-
 
 > **学习递进**: 从"ECS 是什么"的游戏开发直觉，深入到"所有权模型如何使 System 调度在编译期可验证"的形式化理解。
 
@@ -65,7 +63,6 @@
 
 ## 一、ECS 架构与 Rust 的契合度
 >
-
 
 ### 1.1 ECS 三要素的形式化对应
 >
@@ -228,7 +225,6 @@ Bevy 的 Archetype 存储将相同组件组合的实体数据**连续存放**（
 ## 二、Rust 游戏引擎生态
 >
 
-
 ### 2.1 引擎对比矩阵（2026 现状）
 >
 
@@ -290,7 +286,6 @@ queue.submit(std::iter::once(encoder.finish()));
 > **来源**: [wgpu Documentation] · [WebGPU Spec]
 
 ### 2.4 `no_std` 游戏开发与 ECS 约束
-
 
 > **Bloom 层级**: 应用 → 分析
 
@@ -562,7 +557,6 @@ fn blit_sprite(_fb: &mut FrameBuffer, _pos: &Position, _sprite: &Sprite) {
 ## 三、所有权模型在 ECS 中的表达
 >
 
-
 ### 3.1 `&mut Component` ⟹ System 独占访问
 
 在 Bevy 中，以下代码在**编译期**被拒绝：
@@ -609,7 +603,6 @@ fn spawn_enemy(
 
 ## 四、数据导向设计 (DOD) 与 Rust 零成本抽象的协同
 
-
 ### 4.1 零成本抽象的 DOD 验证
 
 | 抽象层次 | 手写 C++ 等价物 | Rust/Bevy 抽象 | 成本 |
@@ -642,7 +635,6 @@ pub fn update_positions_simd(
 ---
 
 ## 五、并发渲染：Send/Sync 在多线程游戏循环中的保证
-
 
 ### 5.1 多线程渲染管线
 
@@ -684,7 +676,6 @@ fn extract_sprites(
 ---
 
 ## 六、Bevy RenderGraph 与 wgpu 的所有权交互
-
 
 Bevy 的渲染管线通过 `RenderGraph` 将 GPU 资源管理抽象为**节点依赖图**，其设计与 Rust 所有权模型深度同构——每个渲染节点声明其资源需求（读/写），图调度器在编译期（节点注册时）和运行期（图执行时）双重验证资源生命周期安全。
 
@@ -817,7 +808,6 @@ let pass: RenderPass;
 ---
 
 ## 七、确定性模拟与回滚网络（Rollback Netcode）
-
 
 格斗游戏、平台格斗（如《任天堂明星大乱斗》）和快节奏竞技游戏对网络延迟极度敏感。**回滚网络（Rollback Netcode）**通过**确定性模拟**实现帧级同步：所有客户端在相同输入下必须产生完全相同的世界状态，从而允许本地预测 + 远程校正。
 
@@ -955,7 +945,6 @@ struct PlayerInput {
 
 ## 八、Bevy 关系型 ECS（Relations）与所有权模型扩展
 
-
 Bevy 0.15 引入了 **Relations（关系型 ECS）**，将传统 ECS 的"Entity 拥有 Component"模型扩展为"Entity 之间可以存在带数据的关系"。这是对 ECS 架构的重大演进，也对 Rust 所有权模型提出了新的表达需求。
 
 ### 8.1 从传统 ECS 到关系型 ECS
@@ -1056,7 +1045,6 @@ struct ChildOf {
 
 ## 八、与 L1-L4 的关系映射
 
-
 | L1-L4 核心概念 | 在 ECS 游戏引擎中的表达 | 性能/安全效应 |
 |:---|:---|:---|
 | **L1 借用检查** | `Query<&mut T>` vs `Query<&T>` 的冲突检测 | System 调度在启动期验证无数据竞争 |
@@ -1070,7 +1058,6 @@ struct ChildOf {
 
 ## 九、待补充与演进方向（TODOs）
 
-
 - [x] **高**: 补充 Bevy 的 `RenderGraph` 与 wgpu 的所有权交互细节 —— 已完成 §六 —— 2026-05-14
 - [x] **高**: 补充确定性模拟（deterministic simulation）在 Rust ECS 中的实现（如回合制/格斗游戏回滚网络） —— 已完成 §七 —— 2026-05-14
 - [x] **中**: 补充 `no_std` 游戏开发（嵌入式/掌机）的 ECS 约束 —— 已完成 §2.4 —— 2026-05-14
@@ -1079,7 +1066,6 @@ struct ChildOf {
 ---
 
 ## 相关概念链接
-
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -1121,146 +1107,9 @@ struct ChildOf {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
-
 
 ## 十、边界测试：游戏 ECS 的编译错误
 

@@ -686,7 +686,6 @@ fn fixed() {
 
 ---
 
-
 ### 10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）
 
 ```rust,ignore
@@ -715,6 +714,7 @@ fn main() {
 > **修正**: **ABA 问题**是无锁数据结构中的经典问题：指针值从 A → B → A，但 `compare_exchange` 无法检测中间变化。
 > `AtomicPtr` 的 `compare_exchange` 只比较地址值，不比较内容。
 > 解决方案：
+>
 > 1) **Tagged pointer**：在低位存储版本计数器（`(ptr & !0xF) | (version & 0xF)`）；
 > 2) **Hazard pointer**：延迟释放，确保无其他线程引用；
 > 3) **Epoch-based reclamation**（`crossbeam-epoch`）：分代回收。
@@ -763,3 +763,6 @@ fn main() {
 ```
 
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
+
+> [来源: [The Rust Programming Language — Match](https://doc.rust-lang.org/book/ch06-02-match.html)]
+> [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]

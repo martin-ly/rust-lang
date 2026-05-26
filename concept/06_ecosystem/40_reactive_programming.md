@@ -12,6 +12,7 @@
 ---
 
 > **来源**: [Reactive Manifesto](https://www.reactivemanifesto.org/) ·
+> [来源: [Reactive Streams Spec](https://www.reactive-streams.org/)] · [来源: [Elliott & Hudak 1997](https://haskell.cs.yale.edu/wp-content/uploads/2011/02/frp.pdf)]
 > [Reactive Streams Specification](https://www.reactive-streams.org/) ·
 > [Elliott & Hudak 1997 — Functional Reactive Animation](https://haskell.cs.yale.edu/wp-content/uploads/2011/02/frp.pdf) ·
 > [Elliott 2009 — Push-Pull FRP](https://conal.net/papers/push-pull-frp/push-pull-frp.pdf) ·
@@ -21,13 +22,14 @@
 
 ## 📑 目录
 
-- [Reactive Programming & FRP（响应式编程与函数式响应编程）](#reactive-programming--frp响应式编程与函数式响应编程)
+- [Reactive Programming \& FRP（响应式编程与函数式响应编程）](#reactive-programming--frp响应式编程与函数式响应编程)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Reactive Manifesto：响应式系统的四大特质](#11-reactive-manifesto响应式系统的四大特质)
     - [1.2 Reactive Streams：背压感知的异步数据流](#12-reactive-streams背压感知的异步数据流)
     - [1.3 FRP：函数式响应编程](#13-frp函数式响应编程)
   - [二、概念属性矩阵](#二概念属性矩阵)
+    - [2.1 Reactive 编程模型对比矩阵](#21-reactive-编程模型对比矩阵)
   - [三、Reactive Streams 核心](#三reactive-streams-核心)
     - [3.1 四元接口模型](#31-四元接口模型)
     - [3.2 Rust 中的 Stream trait](#32-rust-中的-stream-trait)
@@ -57,6 +59,10 @@
 
 > **Bloom 层级**: 应用 → 评价
 **变更日志**:
+
+> **补充来源**: [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm) · [Tokio Stream Internals](https://tokio.rs/tokio/topics/internals)
+
+> **补充来源**: [来源: [RxRust](https://docs.rs/rxrust/latest/rxrust/)] · [来源: [futures-signals](https://docs.rs/futures-signals/latest/futures_signals/)]
 
 - v1.0 (2026-05-25): 初始创建——Reactive Streams、FRP、数据流编程专题，覆盖背压机制、Stream trait 组合子、Rust 实现骨架
 
@@ -92,6 +98,7 @@ Reactive Manifesto 四特质（2014）:
 > - **消息驱动**（Message Driven）是前两者实现的**基础机制**——通过异步、非阻塞、背压感知的消息传递解耦组件
 >
 > **来源**: [Reactive Manifesto](https://www.reactivemanifesto.org/) · [Reactive Streams Specification](https://www.reactive-streams.org/)
+> [来源: [Elliott 2009 — Push-Pull FRP](https://conal.net/papers/push-pull-frp/push-pull-frp.pdf)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/latest/tokio_stream/)]
 
 ### 1.2 Reactive Streams：背压感知的异步数据流
 
@@ -128,6 +135,7 @@ Processor<T,R>:
 ```
 
 > **来源**: [Reactive Streams Specification](https://www.reactive-streams.org/) ·
+> [来源: [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)] · [来源: [Tokio mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)]
 > [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm)
 
 ### 1.3 FRP：函数式响应编程
@@ -560,6 +568,8 @@ Rust 的所有权系统与 FRP 的**有状态信号**存在根本张力：
 
 ## 六、数据流编程
 
+> **来源**: [Tokio Internals](https://tokio.rs/tokio/topics/internals)
+
 ### 6.1 推模型 vs 拉模型
 >
 
@@ -607,6 +617,8 @@ Rust Stream = Pull-based 的数据流抽象
 ---
 
 ## 七、Rust 实现
+
+> **来源**: [async-stream](https://docs.rs/async-stream/latest/async_stream/) · [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
 
 ### 7.1 tokio-stream
 >
@@ -937,6 +949,11 @@ fn circular_signal_deadlock() {
 > [FRP Cyclic Dependencies](https://wiki.haskell.org/Functional_Reactive_Programming)
 
 ---
+
+> **补充来源索引**: [来源: [Reactive Streams JVM](https://github.com/reactive-streams/reactive-streams-jvm)] · [来源: [Tokio broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)]
+
+> **来源**: [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
+> **来源**: [Tokio mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)
 
 ## 相关概念文件
 

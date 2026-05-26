@@ -8,7 +8,14 @@
 
 ---
 
-> **来源**: [Hexagonal Architecture — Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/) · [Onion Architecture — Jeffrey Palermo](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) · [Clean Architecture — Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) · [Martin Fowler — Enterprise Architecture Patterns](https://martinfowler.com/books/eaa.html) · [Serverless Architectures — AWS](https://aws.amazon.com/serverless/) · [AWS Lambda Best Practices](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
+> **来源**: [Hexagonal Architecture — Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/) ·
+> [Onion Architecture — Jeffrey Palermo](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) ·
+> [Clean Architecture — Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) ·
+> [Martin Fowler — Enterprise Architecture Patterns](https://martinfowler.com/books/eaa.html) ·
+> [Serverless Architectures — AWS](https://aws.amazon.com/serverless/) ·
+> [AWS Lambda Best Practices](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
+> [来源: [Fowler — EAA](https://martinfowler.com/books/eaa.html)] ·
+> [来源: [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/)]
 
 ## 📑 目录
 >
@@ -18,7 +25,7 @@
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 分层架构（Layered Architecture）](#11-分层架构layered-architecture)
-    - [1.2 六边形架构 / 端口与适配器（Hexagonal / Ports & Adapters）](#12-六边形架构--端口与适配器hexagonal--ports--adapters)
+    - [1.2 六边形架构 / 端口与适配器（Hexagonal / Ports \& Adapters）](#12-六边形架构--端口与适配器hexagonal--ports--adapters)
     - [1.3 洋葱架构（Onion Architecture）](#13-洋葱架构onion-architecture)
     - [1.4 整洁架构（Clean Architecture）](#14-整洁架构clean-architecture)
     - [1.5 Serverless / FaaS（无服务器/函数即服务）](#15-serverless--faas无服务器函数即服务)
@@ -27,8 +34,8 @@
     - [3.1 经典四层模型](#31-经典四层模型)
     - [3.2 依赖规则](#32-依赖规则)
   - [四、六边形架构](#四六边形架构)
-    - [4.1 端口（Ports）](#41-ports)
-    - [4.2 适配器（Adapters）](#42-adapters)
+    - [4.1 端口（Ports）](#41-端口ports)
+    - [4.2 适配器（Adapters）](#42-适配器adapters)
     - [4.3 Rust 实现](#43-rust-实现)
   - [五、洋葱架构](#五洋葱架构)
     - [5.1 层次结构](#51-层次结构)
@@ -42,6 +49,8 @@
     - [7.2 Rust 在 Serverless 中的实践](#72-rust-在-serverless-中的实践)
     - [7.3 冷启动与性能优化](#73-冷启动与性能优化)
   - [八、对比矩阵](#八对比矩阵)
+    - [8.1 架构模式决策矩阵](#81-架构模式决策矩阵)
+    - [8.2 架构模式适用场景](#82-架构模式适用场景)
   - [九、反命题与边界](#九反命题与边界)
     - [9.1 反命题树](#91-反命题树)
     - [9.2 边界极限](#92-边界极限)
@@ -80,6 +89,7 @@
 ```
 
 > **来源**: [Fowler — EAA](https://martinfowler.com/books/eaa.html) · [Evans — DDD](https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)
+> [来源: [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)] · [来源: [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)]
 
 ### 1.2 六边形架构 / 端口与适配器（Hexagonal / Ports & Adapters）
 >
@@ -117,6 +127,7 @@
 ```
 
 > **来源**: [Cockburn — Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) · [Cockburn — Ports & Adapters Pattern](https://alistair.cockburn.us/hexagonal-architecture/)
+> [来源: [AWS — Serverless](https://aws.amazon.com/serverless/)] · [来源: [Evans — DDD](https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)]
 
 ### 1.3 洋葱架构（Onion Architecture）
 >
@@ -1072,6 +1083,11 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 > **来源**: [AWS Lambda — Best Practices](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html) · [AWS — Lambda Timeouts](https://docs.aws.amazon.com/lambda/latest/dg/configuration-timeout.html) · [DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html)
 
 ---
+
+> **补充来源索引**: [来源: [Martin — Clean Architecture Book](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)]
+
+> [来源: [Martin — Clean Architecture Book](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)]
+> [来源: [Fowler — Patterns of Enterprise Application Architecture](https://martinfowler.com/eaaCatalog/)]
 
 ## 相关概念文件
 

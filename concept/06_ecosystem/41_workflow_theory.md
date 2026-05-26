@@ -14,17 +14,19 @@
 ---
 
 > **来源**: [Workflow Management Coalition — Terminology & Glossary](https://www.wfmc.org/standards/terminology) ·
+> [来源: [WfMC — Terminology](https://www.wfmc.org/standards/terminology)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)]
 > [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507) ·
 > [Petri Nets](https://www.informatik.uni-hamburg.de/TGI/PetriNets/) ·
 > [Milner — Communicating and Mobile Systems: The π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691) ·
 > [Clarke & Emerson — Design and Synthesis of Synchronization Skeletons](https://dl.acm.org/doi/10.1145/567446.567462) ·
 > [Rust async-book](https://rust-lang.github.io/async-book/)
+> [来源: [WfMC — Reference Model](https://www.wfmc.org/standards/reference-model)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)] · [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
 
 ## 📑 目录
 >
 >
 
-- [Workflow Theory & Formalization（工作流理论与形式化）](#workflow-theory--formalization工作流理论与形式化)
+- [Workflow Theory \& Formalization（工作流理论与形式化）](#workflow-theory--formalization工作流理论与形式化)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 工作流管理联盟（WfMC）定义](#11-工作流管理联盟wfmc定义)
@@ -93,6 +95,7 @@ WfMC 工作流参考模型（1995）:
 ```
 
 > **来源**: [WfMC — Reference Model](https://www.wfmc.org/standards/reference-model) ·
+> [来源: [Milner — π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691)] · [来源: [Clarke & Emerson 1981](https://dl.acm.org/doi/10.1145/567446.567462)]
 > [WfMC — XPDL](https://www.wfmc.org/standards/xpdl)
 
 ### 1.2 工作流模型分类
@@ -152,6 +155,7 @@ where F: FnMut() -> Fut, Fut: Future<Output = Result<Output>>
 ```
 
 > **来源**: [WfMC — Workflow Patterns](http://www.workflowpatterns.com/) ·
+> [来源: [Plotkin — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf)] · [来源: [Rust async-book](https://rust-lang.github.io/async-book/)]
 > [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)
 
 ### 1.3 BPMN 与形式化语义
@@ -1238,6 +1242,28 @@ async fn unbounded_backoff() -> Result<Output> {
 > [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html)
 
 ---
+
+> [来源: [WfMC — Terminology](https://www.wfmc.org/standards/terminology)]
+> [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)]
+> [来源: [Milner — π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691)]
+> [来源: [Clarke & Emerson 1981](https://dl.acm.org/doi/10.1145/567446.567462)]
+> [来源: [Plotkin — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf)]
+> [来源: [Winskel — Formal Semantics](https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/)]
+> [来源: [Petri Nets World](https://www.informatik.uni-hamburg.de/TGI/PetriNets/)]
+> [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
+> [来源: [OMG BPMN 2.0](https://www.omg.org/spec/BPMN/2.0/)]
+> [来源: [Rust async-book](https://rust-lang.github.io/async-book/)]
+
+> [来源: [Petri Nets World](https://www.informatik.uni-hamburg.de/TGI/PetriNets/)]
+> [来源: [Milner — π-Calculus](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691)]
+> [来源: [Rust async-book](https://rust-lang.github.io/async-book/)]
+
+> [来源: [WfMC — XPDL Specification](https://www.wfmc.org/standards/xpdl)]
+> [来源: [van der Aalst — Workflow Patterns](http://www.workflowpatterns.com/)]
+> [来源: [BPMN 2.0 Specification](https://www.omg.org/spec/BPMN/2.0/)]
+> [来源: [Rust RFC — async/await](https://rust-lang.github.io/async-book/)]
+> [来源: [Clarke — Model Checking](https://mitpress.mit.edu/9780262037883/model-checking/)]
+> [来源: [Winskel — Event Structures](https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/)]
 
 ## 相关概念文件
 

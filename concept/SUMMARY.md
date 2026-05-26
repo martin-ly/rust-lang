@@ -98,6 +98,10 @@
   - [Security & Cryptography（安全与密码学）](06_ecosystem/43_security_cryptography.md)
   - [Compiler Internals（Rust 编译器内部原理）](06_ecosystem/45_compiler_internals.md)
   - [Machine Learning Ecosystem（机器学习生态）](06_ecosystem/46_machine_learning_ecosystem.md)
+  - [Formal Verification Tools（形式化验证工具生态）](06_ecosystem/47_formal_verification_tools.md)
+  - [Data Engineering（数据工程）](06_ecosystem/48_data_engineering.md)
+  - [Game Engine Internals（游戏引擎内部原理）](06_ecosystem/49_game_engine_internals.md)
+  - [Distributed Consensus（分布式共识）](06_ecosystem/50_distributed_consensus.md)
 
 - [L7 前沿趋势层索引（Future & Trends Layer Index）](07.md)
 

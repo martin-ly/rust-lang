@@ -39,11 +39,11 @@
     - [10.1 边界测试：配置注入的生命周期（编译错误）](#101-边界测试配置注入的生命周期编译错误)
     - [10.2 边界测试：gRPC trait 对象与序列化（编译错误）](#102-边界测试grpc-trait-对象与序列化编译错误)
     - [10.5 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#105-边界测试断路器模式的半开状态竞态条件运行时雪崩)
+    - [10.3 边界测试：断路器模式的半开状态竞态条件（运行时雪崩）](#103-边界测试断路器模式的半开状态竞态条件运行时雪崩)
 
 ---
 
 ## 一、引言
-
 
 ```text
 Rust 微服务核心竞争力:
@@ -87,9 +87,7 @@ graph TD
 
 ## 二、服务发现与注册
 
-
 ### 2.1 Consul / etcd 客户端集成
-
 
 ```rust,compile_fail
 use consul::{Client, Config};
@@ -123,7 +121,6 @@ async fn discover_service() -> Result<Vec<String>, Box<dyn std::error::Error>> {
 > [来源: [Consul Documentation](https://developer.hashicorp.com/consul/docs)]
 
 ### 2.2 Tower::discover 动态服务列表
-
 
 Tower 的 `Discover` trait 将服务发现抽象为异步流，支持动态上下线感知：
 
@@ -159,7 +156,6 @@ impl Stream for ConsulDiscover {
 ---
 
 ## 三、API 网关模式
-
 
 API 网关是微服务的统一入口，承担路由、认证、限流、熔断等横切关注点。
 
@@ -201,7 +197,6 @@ async fn rate_limit_layer<B>(req: Request<B>, next: Next<B>)
 }
 ```
 
-
 | 网关职责 | Rust 实现 | 关键 Crate |
 |:---|:---|:---|
 | 路由 | Axum 路由匹配 | `axum` |
@@ -217,7 +212,6 @@ async fn rate_limit_layer<B>(req: Request<B>, next: Next<B>)
 ---
 
 ## 四、熔断器
-
 
 ### 4.1 状态机模型 (Closed/Open/Half-Open)
 >
@@ -240,7 +234,6 @@ stateDiagram-v2
 > **熔断核心原理**: 熔断器不是"重试"——它是**快速失败**机制，将同步阻塞转换为瞬时错误，保护线程池和连接池不被耗尽。
 
 ### 4.2 failsafe crate 实现
-
 
 ```rust,ignore
 use failsafe::{Config, CircuitBreaker, Error};
@@ -298,14 +291,12 @@ impl CircuitBreaker {
 }
 ```
 
-
 > **状态机洞察**: 熔断器的本质是**有状态代理**——将无状态的 HTTP 客户端包装为状态感知的服务拦截器。Rust 的 `async fn` + `RwLock` 使状态转换无数据竞争。
 > [来源: [failsafe crate](https://docs.rs/failsafe/latest/failsafe/)]
 
 ---
 
 ## 五、重试与退避
-
 
 重试必须与熔断器配合使用，避免对故障服务造成"重试风暴"。
 
@@ -338,7 +329,6 @@ let client = tower::ServiceBuilder::new()
     .service(http_client);
 ```
 
-
 | 退避策略 | 延迟计算 | 适用场景 | 风险 |
 |:---|:---|:---|:---|
 | 固定间隔 | `delay` | 网络抖动 | 同步重试风暴 |
@@ -352,7 +342,6 @@ let client = tower::ServiceBuilder::new()
 ---
 
 ## 六、Saga 模式
-
 
 Saga 处理跨服务的分布式事务，通过**补偿操作**保证最终一致性。
 
@@ -403,7 +392,6 @@ impl Saga {
 }
 ```
 
-
 | Saga 类型 | 协调方式 | 复杂度 | Rust 实现 |
 |:---|:---|:---:|:---|
 | 编排式 (Choreography) | 事件驱动，无中心 | 低 | `tokio::sync::broadcast` |
@@ -414,7 +402,6 @@ impl Saga {
 ---
 
 ## 七、事件溯源
-
 
 事件溯源将系统状态存储为**不可变事件流**，而非当前状态快照。
 
@@ -453,7 +440,6 @@ fn rebuild_order_state(events: &[OrderEvent]) -> Option<OrderState> {
 }
 ```
 
-
 | 特性 | 优势 | 挑战 |
 |:---|:---|:---|
 | 审计 | 完整历史，不可篡改 | 存储成本高 |
@@ -467,7 +453,6 @@ fn rebuild_order_state(events: &[OrderEvent]) -> Option<OrderState> {
 ---
 
 ## 八、CQRS
-
 
 CQRS (Command Query Responsibility Segregation) 将**写模型**与**读模型**分离，各自优化。
 
@@ -507,7 +492,6 @@ async fn get_order_query(redis: &mut redis::aio::MultiplexedConnection, order_id
 }
 ```
 
-
 | 维度 | 命令端 (Command) | 查询端 (Query) |
 |:---|:---|:---|
 | 数据库 | PostgreSQL (规范化) | Redis / Elasticsearch |
@@ -521,7 +505,6 @@ async fn get_order_query(redis: &mut redis::aio::MultiplexedConnection, order_id
 ---
 
 ## 九、服务网格 Sidecar
-
 
 Rust 在服务网格中的代表性实现是 **Linkerd2-proxy**，一个零拷贝、内存安全的 sidecar 代理。
 
@@ -554,7 +537,6 @@ Rust sidecar 优势:
 ---
 
 ## 十、综合示例
-
 
 ```rust,ignore
 use axum::{routing::post, Router, http::StatusCode, Json};
@@ -637,14 +619,12 @@ async fn main() {
 }
 ```
 
-
 > **综合示例洞察**: 该示例展示了 Rust 微服务的**组合式架构**——Axum 路由 + Tower 重试 + 手写熔断 + Kafka 事件发布。每个组件都是独立、可测试、可替换的模块。
 > [来源: [Axum Examples](https://github.com/tokio-rs/axum/tree/main/examples)]
 
 ---
 
 ## 十一、反命题与边界
-
 
 ```text
 Rust 微服务并非银弹:
@@ -660,14 +640,12 @@ Rust 微服务并非银弹:
       └── 否。重试风暴可能加剧故障。缓解: 退避 + 限流
 ```
 
-
 > **边界洞察**: Rust 微服务的边界不是技术边界，而是**组织边界**——当团队规模、技能储备不足时，性能优势无法抵消开发成本。
 > [来源: [Microservices Prerequisites (Martin Fowler)](https://martinfowler.com/bliki/MicroservicePrerequisites.html)]
 
 ---
 
 ## 十二、常见陷阱
-
 
 ```text
 陷阱 1: 网关层无超时  →  ❌ 永久阻塞  ✅ tokio::time::timeout(...)
@@ -677,14 +655,12 @@ Rust 微服务并非银弹:
 陷阱 5: CQRS 双写不一致→  ❌ 数据丢失  ✅ Outbox 模式同一事务写入
 ```
 
-
 > **陷阱总结**: 微服务的陷阱多与**分布式系统的固有复杂性**相关，而非 Rust 特有。Rust 通过类型安全减少了一类错误，但设计层面的陷阱仍需架构纪律。
 > [来源: [Designing Data-Intensive Applications (Martin Kleppmann)](https://dataintensive.net/)]
 
 ---
 
 ## 十三、来源
-
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -735,86 +711,9 @@ Rust 微服务并非银弹:
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 ## 十、边界测试：微服务模式的编译错误
 
@@ -919,3 +818,6 @@ fn main() {}
 ```
 
 > **修正**: 断路器（Circuit Breaker）的三个状态：1) **Closed**：正常服务，记录失败率；2) **Open**：失败率超阈值，快速失败，避免雪崩；3) **HalfOpen**：超时后允许**单个**请求试探，成功则关闭，失败则重新打开。关键：**半开状态的并发控制**。若半开时多个请求通过：1) 服务仍可能过载；2) 全部失败后断路器重新打开，恢复时间延长。Rust 实现（`backon`、`rust-circuit-breaker`）：使用原子操作或锁确保半开状态单请求通过。这与 Hystrix（Java，原始实现）、Polly（C#）或 Go 的 `gobreaker` 类似——断路器的可靠性取决于状态转换的原子性。服务网格（Istio、Linkerd）的断路器在 sidecar 层实现，语言无关，但粒度粗（服务级别 vs 方法级别）。[来源: [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html)] · [来源: [Release It!](https://pragprog.com/titles/mnee2/release-it-second-edition/)]
+
+> [来源: [Istio Circuit Breaker](https://istio.io/latest/docs/tasks/traffic-management/circuit-breaking/)]
+> [来源: [Linkerd Documentation](https://linkerd.io/2.14/features/circuit-breaking/)]

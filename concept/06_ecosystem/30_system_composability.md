@@ -18,17 +18,13 @@
 
 ## 权威定义
 
-
 **可组合性 (Composability)**：软件组件通过明确定义的接口相互连接，形成更大系统的性质，且组合后的行为是各组件行为的确定性函数。
 
-
 Rust 的类型系统通过**零成本抽象 (Zero-Cost Abstractions)** 使可组合性成为工程现实：组合不仅在语义层面成立，更在编译期被完全展开为高效机器码，运行时无虚拟分发、无动态类型检查、无额外内存分配。
-
 
 ---
 
 ## 认知路径（Cognitive Path）
-
 
 ### 第 1 步：为什么 Rust 特别适合可组合系统？
 >
@@ -49,7 +45,6 @@ Rust 的类型系统通过**零成本抽象 (Zero-Cost Abstractions)** 使可组
 
 ## 一、引言：类型系统赋能的零成本组合抽象
 
-
 在传统面向对象语言中，组件组合常依赖运行时多态（虚函数表、反射）或动态类型转换，带来不可消除的性能开销和运行时错误风险。Rust 通过以下机制实现了编译期可验证的零成本组合：
 
 | 机制 | 作用 | 组合性保障 |
@@ -60,16 +55,13 @@ Rust 的类型系统通过**零成本抽象 (Zero-Cost Abstractions)** 使可组
 | **Trait 关联类型** | 接口契约编码输出类型 | 管道阶段的输出自动匹配下一阶段输入 |
 | `Send`/`Sync` | 跨线程/异步边界的能力标记 | 编译期拒绝不安全并发组合 |
 
-
 这些机制使得 Rust 的组合不仅是**工程实践**，更是**数学结构**的编程语言实现。下文将系统阐述四种工业级可组合模式及其背后的代数定理。
 
 ---
 
 ## 二、四大可组合模式
 
-
 ### 2.1 管道-过滤器 (Pipe-and-Filter)
-
 
 管道-过滤器是最经典的可组合模式：数据流顺序通过一系列处理阶段（过滤器），每个阶段的输出作为下一阶段的输入。Rust 的 `Iterator` trait 是此模式的零成本实现。
 
@@ -96,7 +88,6 @@ let result: Vec<i32> = [1, 2, 3, 4, 5]
 
 每个组合子（`filter`、`map`）返回一个新的 `Iterator` 实现，其 `Item` 关联类型精确描述输出元素类型。编译器在组合点验证类型匹配——若将 `.map(|x| x.to_string())` 插入 `.filter()` 之后，`.collect::<Vec<i32>>()` 将产生编译错误，因为管道类型已变为 `Iterator<Item = String>`。
 
-
 **并行管道：rayon**
 
 `rayon` 将顺序迭代器无缝升级为并行数据流，保持相同的组合接口：
@@ -112,7 +103,6 @@ let sum_of_squares: i32 = [1, 2, 3, 4, 5]
 ```
 
 `rayon` 的并行管道基于**工作窃取 (Work-Stealing)** 调度：每个阶段的数据被划分为小任务，线程池动态平衡负载。组合接口与标准库一致，但底层执行模型完全不同——这是**接口稳定性与实现可替换性**的典范。
-
 
 **通道作为有界/无界管道**
 
@@ -134,11 +124,9 @@ let (tx2, rx2) = unbounded::<i32>();
 | `unbounded()` | 动态增长 | 永不阻塞（内存耗尽除外） | 事件总线、日志收集 |
 | `flume::bounded(n)` | 固定 `n` | 异步/同步双接口 | async 生态互操作 |
 
-
 ---
 
 ### 2.2 数据流管道 (Dataflow Pipeline)
-
 
 异步数据流管道处理的是**随时间到达的数据序列**。`futures::Stream` trait 是异步版本的 `Iterator`，支持背压感知 (backpressure-aware) 的组合。
 
@@ -167,7 +155,6 @@ let s = stream::iter(1..=100)
 
 `buffered(n)` 将 `Stream<Item = impl Future<Output = T>>` 转换为 `Stream<Item = T>`，同时限制并发度为 `n`。这是**资源受限的组合**——类型系统不仅保证数据正确性，还编码了执行策略约束。
 
-
 **背压传播：tokio::sync::mpsc**
 
 ```rust
@@ -192,7 +179,6 @@ while let Some(data) = rx.recv().await {
 }
 ```
 
-
 **生命周期防止 use-after-close**：Rust 的借用检查器确保管道关闭后无法再发送数据。`tx.send()` 返回 `Result`，而编译器拒绝在 `rx` 被 `drop` 后继续持有引用——这是**协议安全性**的类型系统保证。
 
 **async_stream 宏**：生成自定义 Stream 的声明式方式
@@ -212,11 +198,9 @@ let s = stream! {
 let sum: i32 = s.fold(0, |acc, x| async move { acc + x }).await;
 ```
 
-
 ---
 
 ### 2.3 事件驱动组合 (Event-Driven Composition)
-
 
 事件驱动架构中，多个独立事件源通过**多路复用器 (multiplexer)** 汇聚到处理逻辑。`tokio::select!` 是 Rust 中最强大的事件多路复用原语。
 
@@ -263,7 +247,6 @@ loop {
 
 `select!` 的每个分支都是**编译期类型检查**的：分支的 Future 输出类型无需一致，因为每个分支有独立的处理逻辑。这与 Go 的 `select`（基于接口和运行时反射）形成对比——Rust 的版本在编译期验证所有事件类型的完备处理。
 
-
 **发布-订阅 (Pub/Sub) 模式**
 
 `bus` crate 提供了广播通道，实现一对多事件分发：
@@ -306,11 +289,9 @@ impl<E> EventBus<E> {
 }
 ```
 
-
 ---
 
 ### 2.4 层组合 (Layer Composition)
-
 
 Tower 的 `Service` 和 `Layer` trait 是 Rust 生态中最接近**数学组合**的工业实现。它将 HTTP/RPC 处理抽象为请求-响应的态射 (morphism)，中间件作为高阶函数复合。
 
@@ -341,7 +322,6 @@ pub trait Service<Request> {
 }
 ```
 
-
 **`Layer` Trait —— 服务的函子**：
 
 ```rust
@@ -366,7 +346,6 @@ let service = ServiceBuilder::new()
     .service(core_service);
 ```
 
-
 **Layer 的幺半群结构**：
 
 | 性质 | 说明 | Tower 对应 |
@@ -375,11 +354,9 @@ let service = ServiceBuilder::new()
 | **结合律** | `(A ∘ B) ∘ C = A ∘ (B ∘ C)` | `ServiceBuilder::layer()` 按顺序应用 |
 | **单位元** | 存在不改变服务的层 | `Identity` layer（透传） |
 
-
 ---
 
 ## 三、组合性定理
-
 
 以下定理形式化 Rust 可组合模式的代数性质。这些定理不是"数学幻想"，而是直接影响编译器优化和运行时行为的工程事实。
 
@@ -411,7 +388,6 @@ let v2: Vec<i32> = (0..10)
     .collect(); // 注意：filter 条件需调整，但结合律仍成立
 ```
 
-
 **定理 1.2（单位元）**：`into_iter()`（或 `iter()`）本身作为单位元：
 
 ```
@@ -419,7 +395,6 @@ I.into_iter() ∘ id = id ∘ I.into_iter() = I.into_iter()
 ```
 
 其中 `id` 可以是 `.map(|x| x)` 或 `.filter(|_| true)`，不改变元素。
-
 
 ### 定理 2：Tower Layer 组合形成幺半群
 >
@@ -439,7 +414,6 @@ use tower::layer::util::Identity;
 // Identity.layer(S) ≅ S
 // L.layer(Identity.layer(S)) ≅ L.layer(S)
 ```
-
 
 ### 定理 3：有界通道组合保持背压
 >
@@ -462,11 +436,9 @@ loop {
 }
 ```
 
-
 ---
 
 ## 四、反模式
-
 
 ### 4.1 过度组合导致的类型爆炸
 >
@@ -498,7 +470,6 @@ let service: BoxService<Request, Response, Error> = ServiceBuilder::new()
     .boxed();
 ```
 
-
 ### 4.2 `dyn Trait` 在热路径上破坏单态化
 >
 
@@ -524,7 +495,6 @@ where
 | 编译时间 | 较快 | 较慢（代码膨胀） |
 | 适用场景 | 类型异构集合、插件系统 | 热路径、性能敏感管道 |
 
-
 ### 4.3 忽视编译时间成本
 
 过度使用泛型组合（如 Tower 的深层 Layer 栈）会导致编译时间指数增长。工程上的平衡策略：
@@ -532,7 +502,6 @@ where
 - 开发期：使用泛型保持类型安全
 - 发布期：在边界处使用 `.boxed()` 减少单态化爆炸
 - 关键路径：用 `cargo bench` 测量 `dyn` vs 单态化的实际差异
-
 
 ### 4.4 通道组合中的死锁风险
 
@@ -559,11 +528,9 @@ async fn good() {
 }
 ```
 
-
 ---
 
 ## 五、组合模式选型决策矩阵
-
 
 | 场景特征 | 推荐模式 | 关键 crate | 背压策略 |
 |:---|:---|:---|:---|
@@ -573,11 +540,9 @@ async fn good() {
 | HTTP/RPC 中间件 | 层组合 | `tower`, `axum` | `poll_ready` 级联 |
 | 混合场景 | 模式组合 | Tower + Stream + Channel | 多层背压叠加 |
 
-
 ---
 
 ## 六、来源与知识来源关系（Provenance）
-
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---:|
@@ -621,82 +586,11 @@ async fn good() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：系统可组合性的编译错误
 
@@ -819,3 +713,8 @@ fn main() {}
 ```
 
 > **修正**: 泛型参数过多的解决方案：1) **关联类型**：`trait Database { type Output; }` — 每个实现只有一个输出类型；2) **trait object**：`&dyn Database` — 运行时擦除类型；3) **类型别名**：`type UserService = dyn Service<User, String, User>`；4) **newtype**：`struct UserService(Box<dyn Service<User, String, User>>)`。设计原则：公共 API 减少泛型参数（使用关联类型或 trait object），内部实现使用泛型（性能关键路径）。这与 Java 的泛型（类型擦除，无单态化）或 C# 的泛型（运行时特化，但共享代码）不同——Rust 的泛型是编译期单态化，参数过多导致代码膨胀和编译时间增加。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+> [来源: [Effective Rust](https://www.lurklurk.org/effective-rust/)]
+> [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
+> [来源: [Rust By Example — Traits](https://doc.rust-lang.org/rust-by-example/trait.html)]
