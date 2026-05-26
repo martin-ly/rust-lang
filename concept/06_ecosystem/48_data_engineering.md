@@ -805,6 +805,9 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 > [来源: [Delta Lake Documentation](https://docs.delta.io/latest/index.html)]
 > [来源: [Debezium Documentation](https://debezium.io/documentation/reference/stable/index.html)]
 > [来源: [Arrow DataFusion](https://arrow.apache.org/datafusion/)]
+> [来源: [Apache Arrow](https://arrow.apache.org/)]
+> [来源: [Apache Parquet](https://parquet.apache.org/)]
+> [来源: [Kafka Documentation](https://kafka.apache.org/documentation/)]
 
 ## 相关概念文件
 

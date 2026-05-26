@@ -1264,6 +1264,9 @@ async fn unbounded_backoff() -> Result<Output> {
 > [来源: [Rust RFC — async/await](https://rust-lang.github.io/async-book/)]
 > [来源: [Clarke — Model Checking](https://mitpress.mit.edu/9780262037883/model-checking/)]
 > [来源: [Winskel — Event Structures](https://mitpress.mit.edu/9780262731034/the-formal-semantics-of-programming-languages/)]
+> [来源: [Milner — Communicating and Mobile Systems](https://www.amazon.com/Communicating-Mobile-Systems-Calculus-Cambridge/dp/0521658691)]
+> [来源: [Hoare — Communicating Sequential Processes](https://www.amazon.com/Communicating-Sequential-Processes-Prentice-Hall-International/dp/0131532715)]
+> [来源: [Petri Nets — Formal Definition](https://www.informatik.uni-hamburg.de/TGI/PetriNets/)]
 
 ## 相关概念文件
 
