@@ -41,6 +41,8 @@
   算法步骤    ↔  设计模式中的消息/方法调用  ↔  工作流活动
   算法控制流  ↔  设计模式中的交互时序      ↔  工作流控制流模式
   算法数据结构 ↔ 设计模式中的对象结构       ↔  工作流数据对象
+
+> **语义桥洞察**: 算法、设计模式和工作流模式在语义空间中是同构的——三者都可以用"输入 → 变换 → 输出"的抽象统一描述。[来源: [Wikipedia — Algorithm](https://en.wikipedia.org/wiki/Algorithm)] · [来源: [Wikipedia — Software Design Pattern](https://en.wikipedia.org/wiki/Software_design_pattern)]
 ```
 
 ### 2.2 同构映射表
@@ -62,7 +64,7 @@
 
 ## 三、分治算法 ↔ Composite + Parallel Split 的完整同构
 
-### 3.1 算法层：归并排序
+### 3.1 算法层：归并排序[来源: [CLRS — Introduction to Algorithms, 4th Ed.](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)]
 
 ```rust
 fn merge_sort<T: Ord + Clone>(data: &[T]) -> Vec<T> {
@@ -119,7 +121,7 @@ impl<T: Ord + Clone> DataStructure<T> for Node<T> {
                                         [结束]
 ```
 
-### 3.4 统一语义
+### 3.4 统一语义[来源: [Category Theory for Programmers — Bartosz Milewski](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
 
 > **形式化命题** [Tier 3]: 归并排序、Composite 模式的分治遍历、以及 Parallel Split + Synchronization 工作流模式，在语义上等价于 **"二叉树的后序遍历 + 节点聚合"**。
 >
@@ -140,7 +142,7 @@ impl<T: Ord + Clone> DataStructure<T> for Node<T> {
 
 ---
 
-## 四、动态规划 ↔ Memoization + Deferred Choice
+## 四、动态规划 ↔ Memoization + Deferred Choice[来源: [Wikipedia — Dynamic Programming](https://en.wikipedia.org/wiki/Dynamic_programming)]
 
 ### 4.1 算法层：斐波那契 DP
 
@@ -217,7 +219,7 @@ impl MemoizedFib {
 
 ---
 
-## 五、图遍历 ↔ Visitor + Arbitrary Cycles
+## 五、图遍历 ↔ Visitor + Arbitrary Cycles[来源: [Wikipedia — Graph Traversal](https://en.wikipedia.org/wiki/Graph_traversal)]
 
 ### 5.1 统一语义
 
@@ -232,7 +234,7 @@ impl MemoizedFib {
 
 ---
 
-## 六、语义桥的价值与应用
+## 六、语义桥的价值与应用[来源: [Workflow Patterns — van der Aalst](https://www.workflowpatterns.com/)]
 
 ### 6.1 跨域学习迁移
 

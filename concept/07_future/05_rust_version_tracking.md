@@ -865,6 +865,48 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 
 > **深层意义**: Outreachy 参与标志着 Rust Project 在**贡献者多样性**上的主动投入。四个项目中，a-mir-formality fuzzing 直接关联 Rust 类型系统的**形式化正确性**——如果 fuzzing 发现了类型检查器与形式化规约之间的偏差，那将是 Rust 语义基础的重大发现。[来源: [Rust Blog — Outreachy May 2026](https://blog.rust-lang.org/2026/05/04/outreachy-2026-may/)] · 可信度: ✅
 
+### 12.8 Toasty 正式发布——Tokio 团队的异步 ORM（2026-04-03）
+
+**[Tokio Blog, 2026-04-03]** Tokio 团队发布了 **Toasty**——一个面向 Rust 的异步 ORM，定位为"应用级查询引擎"（Application-level Query Engine），而非传统的 SQL 生成工具。这是 Rust 异步数据库生态的里程碑事件：
+
+| **维度** | **Toasty** | **Diesel** | **SeaORM** |
+|:---|:---|:---|:---|
+| **开发团队** | Tokio 官方团队 | 社区 | 社区 |
+| **API 风格** | `#[derive(toasty::Model)]` 宏驱动 | Query Builder | ActiveRecord |
+| **异步支持** | ✅ 原生 async | 需适配 | ✅ 原生 async |
+| **NoSQL 支持** | ✅ DynamoDB | ❌ | ❌ |
+| **Schema 方式** | derive 宏推断（无独立 Schema 文件） | migration 文件 | entity 优先 |
+| **设计哲学** | 应用 Schema 与数据库 Schema 解耦 | 编译期类型安全 | 开发效率优先 |
+| **成熟度** | 早期（v0.x，API 不稳定） | 成熟 | 中 |
+
+**核心设计决策**：
+
+1. **应用-数据库 Schema 解耦**: Toasty 语句针对应用 Schema（图结构）编写，查询引擎根据目标数据库能力转换为最优操作。这使得同一套 API 可适配 SQL（PostgreSQL, MySQL, SQLite/Turso）和 NoSQL（DynamoDB）。
+
+2. **宏驱动模型定义**: 与早期设计的独立 Schema 文件不同，Toasty 最终采用 `#[derive(toasty::Model)]` 方案，模型直接作为 Rust struct 定义，属性控制主键、唯一索引、关系等。[来源: [Tokio Blog — Toasty Released](https://tokio.rs/blog/2026-04-03-toasty-released)]
+
+3. **AI 辅助编程友好**: Tokio 项目 lead Carl Lerche 指出，Rust 强类型系统对 AI 辅助编程（vibe coding）是重要资产——类型系统的 guardrails 可限制 AI 生成代码的错误范围，而高层库（如 ORM）的强约定进一步缩小"slop radius"。
+
+> **深层意义**: Toasty 填补了 Rust 异步 ORM 生态的"官方级"空白。Tokio 团队过往项目（tokio, axum, tracing, prost）几乎都成了各自领域的标准选择，Toasty 有望复制这一成功模式。其应用级查询引擎的定位超越了传统 ORM 的"SQL 生成"范畴，为多数据库统一抽象提供了新的架构范式。但当前处于 0.x 早期阶段，API 不稳定，不适合生产关键系统。[来源: [Tokio Blog](https://tokio.rs/blog/2026-04-03-toasty-released)] · [来源: [Toasty GitHub](https://github.com/tokio-rs/toasty)] · 可信度: ✅
+
+### 12.9 新兴项目动态：Kreuzberg 文档智能框架与 dial9 Flight Recorder
+
+**Kreuzberg（2026-05）**: 一个以 Rust 为核心的多语言文档智能框架，支持从 90+ 文件格式和 300+ 编程语言中提取文本、元数据和代码智能（code intelligence）。
+
+| **特性** | **说明** |
+|:---|:---|
+| **核心语言** | Rust（pure-Rust PDF 解析、SIMD 优化） |
+| **语言绑定** | Python, Node.js, Go, Java, Kotlin, C#, Ruby, PHP, Elixir, R, Dart, Swift, Zig, C, WASM |
+| **文档格式** | PDF, Office（DOCX/XLSX/PPTX）, 图片, HTML, XML, 邮件, 压缩包, LaTeX 等 90+ |
+| **代码智能** | tree-sitter 驱动，提取函数、类、导入、符号、文档字符串（306 语言） |
+| **OCR 支持** | Tesseract, PaddleOCR, EasyOCR, VLM OCR（143 个 LLM 提供商） |
+| **部署模式** | 库、CLI、REST API、MCP Server、Docker |
+| **许可证** | Elastic License 2.0（开源 + 商业限制） |
+
+Kreuzberg 的架构体现了 Rust 在跨语言基础设施中的优势：Rust 核心提供性能和内存安全，通过 FFI/NAPI-RS/WASM 等技术向多语言生态暴露统一 API。其 TOON wire format（比 JSON 节省 30–50% token）专为 LLM/RAG 管道优化。[来源: [Kreuzberg GitHub](https://github.com/kreuzberg-dev/kreuzberg)] · 可信度: ✅
+
+**dial9（2026-04）**: Tokio 团队发布的**flight recorder**（飞行记录器）工具，用于诊断生产环境中的异步运行时问题。类似于 Java 的 Java Flight Recorder 或 eBPF 的追踪能力，dial9 可捕获 Tokio 运行时的任务调度、资源使用和延迟分布，帮助开发者诊断异步代码中的性能瓶颈和死锁。这进一步巩固了 Tokio 在 Rust 异步生态中的工具链领导地位。[来源: [Tokio Blog — dial9](https://tokio.rs/blog/2026-04-dial9-flight-recorder)] · 可信度: 🟡（项目早期，待更多实践验证）
+
 ---
 
 ## 十一、变更日志
@@ -898,16 +940,17 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 | v1.22 | 2026-05-26 | 权威内容对齐 R23：供应链安全——① TrapDoor 跨平台攻击（crates.io 被植入 34 恶意包，隐形 Unicode 污染 AI 上下文）；② CVE-2026-31431 Copy Fail（9 年内核 bug，AI 辅助发现，Rust exploit 公开）；③ Debian APT 硬依赖 Rust（Linux 发行版核心基础设施转折点） [来源: Socket.dev 2026-05-22; Debian Rust Team]
 | v1.23 | 2026-05-26 | 权威内容对齐 R24：① RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论；② 更新 build-std RFC 3874 FCP 完成待合并、RFC 3962 FCP 中；③ 补充 8 个 PFCP/FCP 完成稳定化 PR（CoercePointee、c-variadic、alignment_type、rustdoc merge、supertrait shadowing、stack-protector、breakpoint） [来源: Rust Project Goals; Rust Internals; releases.rs]
 | v1.24 | 2026-05-26 | 权威内容对齐 R25：生态里程碑——① bevy 0.19.0-rc.2（2026-05-22，渲染管线/ECS/资产系统）；② Servo v0.1.0 on crates.io（2026-04-13，6 个月 LTS 策略，浏览器引擎独立分发） [来源: bevy releases; Servo Blog]
+| v1.25 | 2026-05-26 | 权威内容对齐 R27：生态新兴项目——① Toasty 异步 ORM 正式发布（Tokio 团队，2026-04-03，SQL+NoSQL 统一抽象）；② Kreuzberg 多语言文档智能框架（Rust 核心，90+ 格式/300+ 语言，Elastic-2.0 License）；③ dial9 flight recorder（Tokio 运行时诊断工具） [来源: Tokio Blog; Kreuzberg GitHub]
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.17
+**文档版本**: 1.18
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-26
-**状态**: ✅ R17 权威来源对齐 / 0 死链接 / Miri 验证通过
+**状态**: ✅ R27 权威来源对齐 / 0 死链接 / Miri 验证通过
 
 ---
 

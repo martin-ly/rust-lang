@@ -21,6 +21,7 @@
     - [1.1 SQLx — 编译期检查](#11-sqlx--编译期检查)
     - [1.2 Diesel — 类型安全 ORM](#12-diesel--类型安全-orm)
     - [1.3 SeaORM — 异步 ORM](#13-seaorm--异步-orm)
+    - [1.4 Toasty — Tokio 团队的异步 ORM](#14-toasty--tokio-团队的异步-orm)
   - [二、查询模式](#二查询模式)
     - [2.1 原始 SQL](#21-原始-sql)
     - [2.2 查询构建器](#22-查询构建器)
@@ -173,6 +174,61 @@ SeaORM:
 
 > **SeaORM 洞察**: **SeaORM 是 Rust 异步 ORM 的首选**——牺牲了部分类型安全换取开发效率。
 > [来源: [SeaORM](https://www.sea-ql.org/SeaORM/)] · [来源: [Tokio Docs](https://tokio.rs/)]
+
+---
+
+### 1.4 Toasty — Tokio 团队的异步 ORM
+>
+
+```text
+Toasty:
+
+  设计: 应用级查询引擎（Application-level Query Engine）
+  ├── 由 Tokio 团队开发，2026-04 正式发布
+  ├── #[derive(toasty::Model)] 定义模型（无独立 Schema 文件）
+  ├── SQL + NoSQL 统一抽象（SQLite, PostgreSQL, MySQL, DynamoDB）
+  ├── 应用 Schema 与数据库 Schema 完全解耦
+  └── async-first，与 Tokio 生态原生融合
+
+  代码示例:
+
+  #[derive(Debug, toasty::Model)]
+  struct User {
+      #[key]
+      #[auto]
+      id: u64,
+      name: String,
+      #[unique]
+      email: String,
+      #[has_many]
+      todos: toasty::HasMany<Todo>,
+  }
+
+  // 创建
+  toasty::create!(User {
+      name: "John Doe",
+      email: "john@example.com",
+  }).exec(&mut db).await?;
+
+  // 按唯一键查询
+  let user = User::get_by_email(&mut db, "john@example.com").await?;
+
+  对比现有 ORM:
+  ┌─────────────────┬─────────────────┬─────────────────┬─────────────────┐
+  │ 方面            │ Diesel          │ SeaORM          │ Toasty          │
+  ├─────────────────┼─────────────────┼─────────────────┼─────────────────┤
+  │ API 风格        │ Query Builder   │ ActiveRecord    │ derive 宏驱动   │
+  │ 异步            │ 需适配          │ 原生            │ 原生            │
+  │ 类型安全        │ 强              │ 中              │ 强              │
+  │ Schema 方式     │ migration 文件  │ entity 优先     │ derive 宏推断   │
+  │ NoSQL 支持      │ ❌              │ ❌              │ ✅ DynamoDB     │
+  │ 成熟度          │ 高              │ 中              │ 早期（v0.x）    │
+  │ 官方背景        │ 社区            │ 社区            │ Tokio 团队      │
+  └─────────────────┴─────────────────┴─────────────────┴─────────────────┘
+```
+
+> **Toasty 洞察**: **Toasty 是 Rust ORM 的"官方级"尝试**——由 Tokio 团队主导，定位为"应用级查询引擎"而非纯 SQL 生成器。应用 Schema 与数据库 Schema 解耦的设计使其能统一 SQL 和 NoSQL 语义，但 API 尚未稳定（0.x 阶段），不建议用于生产关键系统。
+> [来源: [Tokio Blog — Toasty Released](https://tokio.rs/blog/2026-04-03-toasty-released)] · [来源: [Toasty GitHub](https://github.com/tokio-rs/toasty)] · [来源: [Toasty crates.io](https://crates.io/crates/toasty)]
 
 ---
 
@@ -485,6 +541,7 @@ graph TD
 | [SeaORM](https://www.sea-ql.org/SeaORM/) | ✅ 二级 | 异步 ORM |
 | [Rust Database Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/database.html) | ✅ 二级 | 数据库指南 |
 | [deadpool](https://docs.rs/deadpool/latest/deadpool/) | ✅ 二级 | 连接池 |
+| [Toasty](https://tokio.rs/blog/2026-04-03-toasty-released) | ✅ 一级 | Tokio 团队异步 ORM |
 | [Rust Book](https://doc.rust-lang.org/book/) | ✅ 一级 | 官方教程 |
 
 ---
@@ -533,7 +590,7 @@ fn main() {
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-22
+**最后更新**: 2026-05-26
 **状态**: ✅ 概念文件创建完成
 
 ---

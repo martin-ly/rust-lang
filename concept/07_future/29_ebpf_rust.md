@@ -45,7 +45,7 @@ eBPF 程序类型决定了代码在内核中的挂载点和执行上下文。不
 
 ## 3. Aya 框架深度分析
 
-Aya 是第一个实现**纯 Rust eBPF 工具链**的框架，其核心设计目标是让 eBPF 开发完全融入 Rust/Cargo 生态。
+Aya 是第一个实现**纯 Rust eBPF 工具链**的框架，其核心设计目标是让 eBPF 开发完全融入 Rust/Cargo 生态。[来源: [Aya Documentation](https://aya-rs.dev/)] · [来源: [eBPF.io — Aya](https://ebpf.io/projects/#aya)]
 
 ### 3.1 架构概览
 >

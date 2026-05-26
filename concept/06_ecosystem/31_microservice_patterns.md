@@ -64,7 +64,7 @@ Rust 微服务核心竞争力:
 ```
 
 > **认知功能**: Rust 的微服务优势不仅是"快"，而是**可靠性工程**——将分布式系统中最难调试的内存错误和并发错误前移至编译期。
-> [来源: [Why Rust for Microservices](https://www.pingcap.com/blog/why-rust/)]
+> [来源: [Why Rust for Microservices](https://www.pingcap.com/blog/why-rust/)] · [来源: [AWS Rust Microservices](https://aws.amazon.com/blogs/opensource/rust-microservices/)]
 
 ```mermaid
 graph TD

@@ -25,7 +25,7 @@
 
 ### 2.1 四种组合原语
 
-借鉴范畴论的态射复合思想，定义模式组合的四种基本操作：
+借鉴范畴论的态射复合思想，定义模式组合的四种基本操作：[来源: [Milewski — Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
 
 ```text
 模式组合代数:
@@ -35,7 +35,7 @@
   → (精炼/细化):    Pattern A → Pattern B = A 是 B 的特化或实现细节
 ```
 
-### 2.2 并行组合（⊗）：独立共存
+### 2.2 并行组合（⊗）：独立共存[来源: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)]
 
 ```rust
 // Observer ⊗ Factory: 事件通知与对象创建独立运行
@@ -76,7 +76,7 @@ fn process_request(req: Request) -> Result<Response, Error> {
 }
 ```
 
-**组合不变量**: 若 Pattern A 的输出类型满足 Pattern B 的输入约束，则 A ∘ B 类型安全。
+**组合不变量**: 若 Pattern A 的输出类型满足 Pattern B 的输入约束，则 A ∘ B 类型安全。[来源: [Rust Type System — Trait Bounds](https://doc.rust-lang.org/reference/type-system.html)]
 
 ### 2.4 选择和（⊕）：条件分支
 
@@ -103,7 +103,7 @@ impl ResilienceStrategy {
 }
 ```
 
-### 2.5 精炼（→）：实现细化
+### 2.5 精炼（→）：实现细化[来源: [Refactoring Guru — Design Patterns](https://refactoring.guru/design-patterns)]
 
 ```rust
 // Strategy → Command: 策略的执行被封装为命令
