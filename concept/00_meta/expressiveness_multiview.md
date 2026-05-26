@@ -16,7 +16,6 @@
 ---
 
 ## 📑 目录
->
 
 - [Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）](#rust-语义表达力多视角深化multiview-expressiveness-analysis)
   - [📑 目录](#-目录)

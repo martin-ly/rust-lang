@@ -16,8 +16,6 @@
 ---
 
 ## 📑 目录
->
->
 
 - [Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）](#rust-semantic-expressiveness-a-panoramic-surveyrust-语义表达力全景梳理)
   - [📑 目录](#-目录)

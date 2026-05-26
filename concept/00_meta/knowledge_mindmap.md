@@ -15,8 +15,6 @@
 ---
 
 ## 📑 目录
->
->
 
 - [Rust 知识体系全局思维导图（Knowledge Mindmap）](#rust-知识体系全局思维导图knowledge-mindmap)
   - [📑 目录](#-目录)
