@@ -3,7 +3,7 @@
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.13（2026-05-26 更新，对齐 Rust 1.95.0 stable，1.96 release notes draft 已基于 GitHub tracking issue 对齐。核心概念来源标注率 100% 达标。⚠️ 1.96 stable 权威来源待 2026-05-28 发布后最终确认）
+> **状态**: v1.16（2026-05-26 更新，对齐 Rust 1.95.0 stable，1.96 release notes draft 已基于 GitHub tracking issue 对齐。核心概念来源标注率 100% 达标。⚠️ 1.96 stable 权威来源待 2026-05-28 发布后最终确认）
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Evolution](./03_evolution.md)
 
@@ -601,6 +601,20 @@ timeline
 - `negative_impls` / `auto_traits`: c02_type_system、c04_generic 形式化演示
 - `adt_const_params` / `min_generic_const_args`: c04_generic 扩展预览
 
+**NVIDIA GPU 目标基线提升（Rust 1.97）**:
+
+**[Rust Blog, 2026-05-01]** `nvptx64-nvidia-cuda`（NVIDIA GPU 的 PTX 目标）将在 Rust 1.97（预计 2026-07-09 稳定）提升硬件基线：
+
+| 维度 | 旧基线 | 新基线（1.97+） | 影响 |
+|:---|:---|:---|:---|
+| **PTX ISA** | 6.0 | **7.0** | 新指令集特性可用，旧编译器无法生成兼容代码 |
+| **SM 架构** | 5.0+ (Maxwell/Pascal) | **7.0+ (Volta+)** | Maxwell (SM 5.x) 和 Pascal (SM 6.x) GPU 不再支持 |
+| **最低 GPU** | GTX 750 Ti / GTX 1060 | V100 / RTX 20 系列 | 数据中心和桌面级 Volta+ GPU 成为最低要求 |
+
+**形式模型意义**: PTX 是 NVIDIA GPU 的中间表示（类似 LLVM IR），Rust 通过 `nvptx64-nvidia-cuda` 目标将 Rust MIR 编译为 PTX 指令。基线提升意味着：1) Rust 编译器可以假设 PTX 7.0 的新语义（如独立线程调度、协作组原语）；2) 旧 GPU 的兼容层被移除，减少了目标平台的验证表面积；3) 与 CUDA Toolkit 的基线策略保持一致——NVIDIA 自身也在逐步淘汰旧架构支持。
+
+> **来源**: [Rust Blog — Raising the baseline for nvptx64-nvidia-cuda](https://blog.rust-lang.org/2026/05/01/raising-the-baseline-for-nvptx64-nvidia-cuda.html) · 可信度: ✅
+
 **Miri 验证状态**: 12 个 crate 2,212+ 测试通过（Tree Borrows），详见 `reports/MIRI_VALIDATION_2026_05_18_COMPREHENSIVE.md`
 
 ---
@@ -768,6 +782,27 @@ timeline
 
 > **来源**: [async-std v1.13.1 Release Notes](https://github.com/async-rs/async-std/releases) · [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) · [corrode.dev — The State of Async Rust](https://corrode.dev/blog/async/) · [Fedora Change Proposal](https://fedoraproject.org/wiki/Changes/Deprecate_async-std) · 可信度: ✅
 
+### 12.6 Tonic 正式加入 gRPC 官方项目
+
+**[gRPC Blog, 2026-05-21]** Rust 生态中最重要的 gRPC 实现 **Tonic** 已正式移入 **gRPC 官方项目**（`grpc/grpc-rust`），在 CNCF 治理下运营。这是 Rust 进入主流云原生基础设施治理体系的历史性里程碑。
+
+| 维度 | 现状 | 中长期规划 |
+|:---|:---|:---|
+| **短期维护** | Tonic 继续维护，但仅限 bug 修复 | 保持 API 稳定，不引入重大变更 |
+| **中长期替代** | 计划发布 `grpc` crate | 作为 Tonic 的替代品，支持高级特性（xDS 服务发现、 Proxyless Service Mesh） |
+| **治理模式** | CNCF 下 gRPC 项目统一治理 | 与 Go、Java、C++ 的 gRPC 实现同等级别 |
+| **API 兼容性** | Tonic 的 `tonic::transport` 等模块 | `grpc` crate 将提供不同的 API 设计，迁移需适配 |
+
+**对 Rust 生态的结构性影响**:
+
+1. **云原生基础设施认可**: Tonic 加入 gRPC 官方项目意味着 Rust 在 CNCF 云原生栈中的地位从"社区实现"提升为"官方支持语言"，与 Go、Java、C++ 并列。这直接影响企业技术选型——许多组织的"仅使用 CNCF 毕业项目"政策现在可以覆盖 Rust gRPC。
+
+2. **生态系统整合**: 长期来看，`grpc` crate 将统一 Rust 的 gRPC 服务发现（xDS）和 Service Mesh 集成，解决当前 Tonic 生态中这些高级特性依赖第三方实验性实现（如 `tonic-xds`）的碎片化问题。
+
+3. **迁移路径**: 现有 Tonic 用户短期内无需迁移，但新开发建议关注 `grpc` crate 的进展。Tonic 团队承诺在 `grpc` crate 达到功能对等前继续维护 Tonic。
+
+> **来源**: [gRPC Blog — Tonic is joining the gRPC project](https://grpc.io/blog/tonic-joins-grpc-project/) · 可信度: ✅
+
 ---
 
 ## 十一、变更日志
@@ -792,16 +827,17 @@ timeline
 | v1.13 | 2026-05-26 | 权威内容对齐：Rust Foundation 2026–2028 三年战略（五大优先领域、C++ 互操作倡议）、aarch64-pc-windows-msvc Tier 1 RFC 提案 [来源: Rust Foundation 2026-01; Rust RFC Tracker]
 | v1.14 | 2026-05-26 | 1.96 Release Notes Draft 对齐：补充语言特性稳定化（`expr`→`cfg`、ManuallyDrop 模式、never type 元组强制、s390x vector asm）、标准库 API（assert_matches!、NonZero range iter、core::range 完整迭代器）、Cargo 1.96 特性 [来源: Rust 1.96.0 Release Notes Draft GitHub #156512]
 | v1.15 | 2026-05-26 | 社区生态动态：补充 async-std 停止维护（2025-03-01 discontinued，RUSTSEC-2025-0052，1,754 crate 受影响，推荐 smol/Tokio 迁移） [来源: async-std Release Notes; corrode.dev; Fedora Change Proposal]
+| v1.16 | 2026-05-26 | 权威内容对齐 R16：① nvptx64-nvidia-cuda 基线提升（PTX ISA 7.0 / SM 7.0+，Rust 1.97 起 Maxwell/Pascal 支持终止） [来源: Rust Blog 2026-05-01]；② Tonic 正式加入 gRPC 官方项目（CNCF 治理，`grpc` crate 长期规划） [来源: gRPC Blog 2026-05-21]
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.8
+**文档版本**: 1.16
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-23
-**状态**: ✅ 100% 完成度冲刺收尾 / 0 死链接 / Miri 验证通过
+**最后更新**: 2026-05-26
+**状态**: ✅ R16 权威来源对齐 / 0 死链接 / Miri 验证通过
 
 ---
 

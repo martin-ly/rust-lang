@@ -23,6 +23,7 @@
 - v1.2 (2026-05-14): 补充完整 Edition 变更清单（2015→2018→2021→2024）、Edition 与 rustc 版本解耦、`cargo fix --edition` 自动迁移机制、跨 Edition 代码示例、未来 Edition 方向（2027+）
 - v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [来源: Web Authority Alignment Sprint]
 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 Project Goals 2026 年度旗舰目标（Polonius Alpha、Safety-Critical Rust、cargo-script）、Effects 系统 `gen<yield>` 跟踪、Ferrocene ASIL B/SIL 2 认证动态
+- v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std RFC 3873/3874 已合并状态、Cranelift 资金不足未完成确认 [来源: Rust Blog — Project Goals Update: April 2026]
 
 ---
 
@@ -1191,7 +1192,18 @@ fn fixed() {
 
 > **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]** Rust 项目每年定义旗舰级工作方向，2026 年聚焦四大主题：超越引用、灵活编译、高阶抽象、Trait 解放。
 
-2025H2 项目目标周期已结束，41 个 Project Goals 中 13 个为旗舰目标。以下从**形式模型影响**维度解析四大旗舰方向及其对 Rust 语义空间的结构性扩展。
+2025H2 项目目标周期已结束，41 个 Project Goals 中 13 个为旗舰目标。2026 年 5 月 18 日，Rust Blog 发布了 2025H2 周期的最终状态报告，确认了以下关键结果：
+
+| 旗舰方向 | 关键结果 | 状态 |
+|:---|:---|:---:|
+| **Beyond the `&`** | Pin 人机工程、字段投影、Reborrow Traits 继续推进；lang team 对 Field Representing Types 实验反应积极 | 🟢 继续 |
+| **灵活编译** | Cranelift backend **因资金不足未完成**；build-std RFC 3873/3874 已合并；cargo-script 已在 1.85+ 稳定 | 🟡 部分完成 |
+| **高阶 Rust** | Ergonomic ref-counting RFC 决策中；cargo-script 已稳定 | 🟢 继续 |
+| **释放沉睡 Trait** | Polonius 继续推进 nightly 评估；Next-gen Trait Solver 逐步替换旧 solver | 🟢 继续 |
+
+> **[来源: [Rust Blog — Project Goals Update: April 2026](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04.html)]** 2025H2 是 Rust Project Goals 机制的第一个完整半年周期。41 个目标中，旗舰目标集中在借用系统改进、编译速度、高阶抽象和类型系统解放四个方向。Cranelift backend 的未完成凸显了大型基础设施项目对持续资金支持的依赖——Trifecta Tech Foundation 的资金不足直接影响了生产就绪目标的达成。[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
+
+以下从**形式模型影响**维度解析四大旗舰方向及其对 Rust 语义空间的结构性扩展。
 
 ### 6.1 旗舰一：Beyond the `&`（超越引用）
 
@@ -1211,7 +1223,7 @@ fn fixed() {
 
 | 子目标 | 状态 | 形式模型意义 |
 |:---|:---|:---|
-| **build-std** | RFC 推进中 | RFC 3873 已合并，3874 完成 FCP 待合并，3875 处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库"。cargo#16675 已有早期实现草图 |
+| **build-std** | **RFC 3873/3874 已合并** | RFC 3873（自定义标准库编译目标）和 3874（Cargo 集成）已合并，3875 处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库"。cargo#16675 已有早期实现草图 |
 | **Cranelift Backend** | ⚠️ **未完成（资金不足）** | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时分发的边界**。2025H2 周期因 Trifecta Tech Foundation 资金不足未能完成生产就绪目标，社区正在寻求新的资助渠道 |
 | **Parallel Frontend** | 实现中 | 并行解析和类型检查；对 trait solver 的并发安全提出新要求 |
 | **Relink don't Rebuild** | 设计阶段 | 增量链接优化；通过精确依赖追踪减少全量重编译 |
