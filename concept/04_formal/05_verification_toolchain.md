@@ -1056,6 +1056,52 @@ fn main() {
 
 > **来源**: [Rustlantis OOPSLA 2024](https://rustlantis.github.io/) · [ETH PLF Lab](https://pl.ethz.ch/) · [Differential Testing](https://en.wikipedia.org/wiki/Differential_testing) · 可信度: ✅
 
+### 7.9 rustc Bug 实证研究：Rust 特有编译器缺陷分析（OOPSLA 2025）
+
+**[OOPSLA 2025 — Liu et al., Nanjing University / ETH Zurich / CUHK]** 这是首个对 rustc 编译器中 **Rust 特有 bug** 进行大规模系统性实证研究的论文。研究团队人工分析了 2022–2024 年间的 **301 个有效 issue**，从症状、原因、编译阶段和测试用例特征四个维度分类。
+
+**Bug 症状分布**：
+
+| 症状类别 | 占比 | 说明 | Rust 独有？ |
+|:---|:---:|:---|:---:|
+| **Crash (ICE)** | 36.51% | 内部编译器错误，通常以 panic 终止（而非 segfault） | 部分 |
+| **Correctness** | 25.91% | 编译器错误地接受/拒绝合法程序 | 否 |
+| ├─ Completeness | 18.60% | 错误拒绝合法程序（false error） | 否 |
+| └─ Soundness | 7.31% | 错误接受非法程序（false pass） | 否 |
+| **Miscompilation** | 9.97% | 生成错误机器码 | 否 |
+| **Inconsistent Output** | 5.98% | debug/release 模式输出不一致 | 否 |
+| **Safe Rust → UB** | **3.99%** | 安全 Rust 代码产生未定义行为 | **✅ 独有** |
+| **Misoptimization** | 4.98% | 优化后的 MIR 与预期不符 | 否 |
+
+> **Rust 独有发现**: rustc 的 ICE 通常以 **panic + 安全清理** 终止，而非传统编译器的 segfault——这是 Rust 的"fail-safe"设计在编译器自身的体现。更严重的是 **"Safe Rust → UB"** 症状：若 rustc bug 导致安全 Rust 代码在运行时产生未定义行为，则直接违反了 Rust 的核心安全保证。这类 bug 极为罕见但后果严重。
+
+**Bug 根本原因分布**：
+
+| 原因 | 占比 | 典型场景 |
+|:---|:---:|:---|
+| **General errors** | 40.86% | 基础结构处理错误、错误报告误导、OS/后端兼容问题 |
+| **Type system** | 30.23% | 泛型推断失败、trait 解析错误、opaque type 作用域问题 |
+| **MIR optimization** | 15.28% | 常量传播、死代码消除、SimplifyLocals 等优化 pass 错误 |
+| **Ownership & lifetime** | 13.62% | 借用检查器误报/漏报、生命周期推断错误 |
+| **Trait & bound** | 12.29% | trait bound 匹配失败、关联类型解析错误 |
+| **Opaque types** | 12.62% | `impl Trait`、关联类型的作用域解析问题 |
+| **New trait solver** | 2.33% | 新 solver 过渡期的兼容性问题 |
+
+**关键洞察 — 编译阶段分布**：
+
+```
+HIR (高级中间表示):  ████████████████████ 44.85%
+MIR (中级中间表示):  ████████████████░░░░ 35.22%
+Front-end (解析/宏):  ████░░░░░░░░░░░░░░░░ 14.95%
+Back-end (LLVM/CodeGen): █░░░░░░░░░░░░░░░░░░░ 5.98%
+```
+
+> **核心发现**: HIR 和 MIR 占据了 **80.07%** 的 rustc bug——这正是 Rust 独特语言机制（类型系统、借用检查、所有权分析）最集中的阶段。与传统编译器（通常 AST → LLVM IR）不同，rustc 引入 HIR 和 MIR 进行高级类型和生命周期分析，这些复杂检查器成为错误高发区。这解释了为什么 Rustlantis、CRUST-Bench 等工具专注于生成能深入 HIR/MIR 的测试用例。
+
+> **对验证工具的启示**: 形式化验证工具（Kani、Verus、Creusot）依赖 rustc 的正确性——如果 rustc 自身有 soundness bug，则"编译通过 → 安全"的推理链断裂。Miri 和 Rustlantis 的存在正是为了检测这类 rustc 内部缺陷，形成"验证工具验证被验证程序，测试工具验证验证工具依赖的编译器"的多层信任链。
+
+> **来源**: [OOPSLA 2025 — Liu et al., "An Empirical Study of Rust-Specific Bugs in the rustc Compiler"](https://arxiv.org/abs/2503.23985) · 可信度: ✅
+
 ---
 
 ## 八、验证边界：编译错误示例
