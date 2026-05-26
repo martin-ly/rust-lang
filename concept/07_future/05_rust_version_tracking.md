@@ -543,6 +543,9 @@ timeline
 
 | 漏洞编号 | 影响组件 | 严重性 | 描述 | 修复版本 | 知识库覆盖 |
 |:---|:---|:---:|:---|:---|:---|
+| **CVE-2026-5222** | **Cargo** (sparse registry) | Low | Cargo 错误规范化 sparse registry URL（`.git` 后缀），攻击者可窃取同一域名下其他 registry 用户的凭证 | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
+| **CVE-2026-5223** | **Cargo** | Low | Cargo 安全响应（与 CVE-2026-5222 同日发布，具体细节待披露） | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
+| **CVE-2026-33056** | `tar` (Cargo 依赖) | Medium | 第三方 `tar` crate 漏洞：恶意 crate 可在 Cargo 解压时更改文件系统任意目录权限 | Rust 1.94.1+ | `concept/06_ecosystem/01_toolchain.md` |
 | **CVE-2026-33056** | `hickory-dns` | High | DNSSEC 验证绕过，恶意响应可导致缓存投毒 | ≥0.25.0 | `docs/04_research/security_advisory_tracking.md` |
 | **CVE-2026-42254** | `hickory-dns` | Critical | 资源耗尽 DoS，特定查询模式导致无限循环 | ≥0.25.1 | `docs/04_research/security_advisory_tracking.md` |
 | **RUSTSEC-2026-0118** | `hickory-proto` | High | NSEC3 closest-encloser 验证无限循环（跨区响应） | 无修复版本（上游 libp2p 依赖） | `c10_networks` 依赖链 |
@@ -650,6 +653,7 @@ timeline
 | v1.4 | 2026-05-19 | 权威来源对齐冲刺完成：全项目 ~2,300+ Markdown 文件完成权威来源标注，concept/knowledge/docs/crates 100% 覆盖 |
 | v1.5 | 2026-05-22 | 网络权威内容对齐：Cargo 1.96 新特性补充、Tree Borrows 链接修正、Miri POPL 2026 预印本跟踪 |
 | v1.5 | 2026-05-21 | 新增 `open_enums_preview.md` 概念预研文件；更新 Open Enums 跟踪状态为 ✅ 已创建；补充 GitHub #156628 跟踪来源 |
+| v1.6 | 2026-05-26 | 权威内容对齐：补充 Cargo 安全公告 CVE-2026-5222（sparse registry URL 规范化）、CVE-2026-5223、CVE-2026-33056（`tar` crate 目录权限） [来源: Rust Security Advisory 2026-03/05]
 | v1.6 | 2026-05-22 | 网络权威内容对齐 Batch 9: RfL 社区争议、Effects `gen<yield>` 跟踪、并行前端 SALSA 3.0、Cranelift unwind/debuginfo、安全漏洞跟踪 (§9.3) |
 | v1.7 | 2026-05-22 | 1.96 Stable 冲刺准备：更新 beta.8 状态（最终候选）、补充 Ferrocene 26.02.0 认证交叉引用、全项目来源标注 100% 达标 |
 | v1.8 | 2026-05-23 | 100% 完成度冲刺收尾：0 死链接确认（全项目 1,493 文件）、Miri c09/c08 修复并行测试兼容性（rayon 排除）、代码块编译器 367/367 通过、concept_audit.py 死链接检测增强 |

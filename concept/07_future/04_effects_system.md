@@ -13,14 +13,11 @@
 **变更日志**:
 
 - v1.0 (2026-05-13): 初始版本。建立 Effect 系统概念框架、Rust 现有 effect 映射、AsyncFn 作为原型、跨语言对比、演进路线图
-- v1.1 (2026-05-22): 网络权威内容对齐：添加 `gen<yield>` effects 跟踪、Lang Team 2026 季度更新
-$entry
+- v1.1 (2026-05-22): 网络权威内容对齐：添加 `gen<yield>` effects 跟踪、Lang Team 2026 季度更新$entry
 
 ---
 
 ## 〇、Effect System 概念全景
->
->
 
 ```mermaid
 mindmap
