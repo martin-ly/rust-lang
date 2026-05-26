@@ -53,6 +53,7 @@
 > **Bloom 层级**: 分析 → 评价
 > **变更日志**:
 >
+> - v1.1 (2026-05-26): 补充 Generic Refinement Types (POPL 2025) — Flux 泛型精化类型扩展 [来源: Web Authority Alignment Sprint]
 > - v1.0 (2026-05-26): 初始创建——覆盖模型检验（Kani/MIRI）、演绎验证（Prusti/Creusot/Verus）、精化类型（Flux）、前沿框架（RefinedRust/RustBelt）、选型决策矩阵
 
 ---
@@ -468,6 +469,8 @@ Flux 精化类型:    Vec<i32{v: v>0}>  →  编译期还保证所有元素 > 0
 ```
 
 > **来源**: [Flux GitHub](https://github.com/liquid-rust/flux) · [Liquid Types — PLDI 2008](https://goto.ucsd.edu/~rjhala/papers/liquid_types_pldi08.pdf) · [Refinement Types Survey](https://arxiv.org/abs/2010.07763)
+
+> **2025 最新进展 — Generic Refinement Types (POPL 2025)**: Flux 团队将精化类型扩展到**泛型上下文**，解决了原始 Flux 无法处理泛型函数（如 `fn max<T: Ord>(a: T, b: T) -> T`）的精化谓词问题。Generic Refinement Types 允许类型参数携带精化约束（如 `T{v: v >= 0}`），并通过**约束抽象**（Constraint Abstraction）在实例化时求解具体谓词。这是精化类型从"特定类型上的轻量验证"向"通用库级验证"的关键跃迁。[来源: [POPL 2025 — Lehmann et al., "Generic Refinement Types"](https://dl.acm.org/doi/10.1145/3704886)]
 
 ### 5.2 Aeneas：向函数式语言的转换
 
