@@ -1202,7 +1202,7 @@ fn fixed() {
 | 子目标 | 状态 | 形式模型意义 |
 |:---|:---|:---|
 | **Pin Ergonomics** | 实验阶段 | `Pin<&mut T>` 的自引用场景（如异步状态机）需要显式 `unsafe` 解包；新设计旨在用类型系统自动证明"不会移动"，消除手动 `unsafe` |
-| **Field Projections** | 设计中 | 允许 `&mut self.field` 在更复杂的嵌套结构中自动重新借用，减少生命周期标注；本质是**别名分析的局部精确化** |
+| **Field Projections** | 语言实验获积极反馈 | 允许 `&mut self.field` 在更复杂的嵌套结构中自动重新借用，减少生命周期标注；本质是**别名分析的局部精确化**。lang team 对 Field Representing Types PR 的实验性合并反应积极，Tyler Mandry 创建了 Beyond References wiki 统筹所有相关提案（含 Alice Ryhl 的 In-place Initialization 新提案） |
 | **Reborrow Traits** | RFC 阶段 | 将重新借用规则从编译器硬编码提升为 trait 系统的一部分，使自定义智能指针也能享受 `&mut` 的自动重借语义 |
 
 > **关键洞察**: "Beyond the `&`" 标志着 Rust 类型系统从"编译器内置规则"向"用户可扩展规则"演进。如果成功，`Pin` 将成为普通库类型（而非魔法类型），字段投影将支持用户自定义逻辑——这类似于 C++ 的 `operator->` 但更类型安全。[来源: [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
@@ -1213,8 +1213,8 @@ fn fixed() {
 
 | 子目标 | 状态 | 形式模型意义 |
 |:---|:---|:---|
-| **build-std** | nightly 推进 | 允许自定义编译 `core`/`std`；为嵌入式和形式化验证提供"可剪裁的标准库" |
-| **Cranelift Backend** | 接近生产就绪 | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时分发的边界** |
+| **build-std** | RFC 推进中 | RFC 3873 已合并，3874 完成 FCP 待合并，3875 处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库"。cargo#16675 已有早期实现草图 |
+| **Cranelift Backend** | ⚠️ **未完成（资金不足）** | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时分发的边界**。2025H2 周期因 Trifecta Tech Foundation 资金不足未能完成生产就绪目标，社区正在寻求新的资助渠道 |
 | **Parallel Frontend** | 实现中 | 并行解析和类型检查；对 trait solver 的并发安全提出新要求 |
 | **Relink don't Rebuild** | 设计阶段 | 增量链接优化；通过精确依赖追踪减少全量重编译 |
 
@@ -1255,4 +1255,37 @@ fn fixed() {
 | **Rust Vision Document** | 语言哲学 | 社区驱动的 Rust 长期愿景文档，定义 2030 年的 Rust 应该是什么样 |
 | **SVE / SME on AArch64** | 平台扩展 | 可伸缩向量扩展（SVE）和矩阵扩展（SME）的 Rust 绑定；高性能计算的新前沿 |
 
-> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Cranelift Documentation](https://cranelift.dev/) · [Rust Internals Forum](https://internals.rust-lang.org/)
+### 6.6 Safety-Critical Rust：从原型到认证的鸿沟
+
+**[Rust Blog, 2026-01-14]** Rust 已通过 Vision Doc 用户研究深入安全关键领域（汽车、航空、医疗、工业自动化）。研究发现：Rust 的编译器强制保证覆盖了功能安全工程师 90% 的防错工作，但**生态系统支持在高完整性级别急剧变薄**。
+
+**已部署的生产案例**：
+
+| 领域 | 标准 | 应用 | 关键引用 |
+|:---|:---|:---|:---|
+| 移动机器人 | IEC 61508 **SIL 2** | 安全系统固件 | "Rust 编译器做了过去需要外部栈分析工具检查的 90% 工作" |
+| 医疗设备 | IEC 62304 **Class B** | ICU 脑电分析软件 | "从 Python 迁移到 Rust 获得 100 倍速度提升" |
+| 汽车 OEM | ISO 26262 **QM~ASIL D** | 中间件、ADAS | "Edition 系统对汽车行业的增量迁移是黄金标准" |
+
+**完整性级别的采用差异**：
+
+- **QM（低完整性）**：自由使用 crates.io 生态，快速原型后硬化；
+- **ASIL B+（高完整性）**：第三方依赖难以论证，团队通常重写、内化或构建抽象层以备替换；
+- **航空航天**："必须拥有每一行代码"——控制整个栈的本能最强。
+
+> **核心 tension**: 安全关键领域的 Rust 采用不仅是"能否为目标编译"，而是"能否组装证据友好的软件栈并在长产品生命周期中保持稳定"。
+
+**六大挑战与社区响应**：
+
+| 挑战 | 现状 | 2026 进展 |
+|:---|:---|:---|
+| **工具链认证** | 需要编译器资质证明 | **Ferrocene Language Specification (FLS)** 已从行业努力转变为 Rust Project 官方维护；Ferrocene 编译器获 ASIL B / SIL 2 认证 |
+| **MC/DC 覆盖率** | rustc 不支持修改条件/判定覆盖 | Safety-Critical Rust Consortium 正在推动 2026 Project Goal，与 Rust Project 协作实现 |
+| **MSRV 依赖漂移** | 固定工具链与最新 crate 的冲突 | 社区探索 LTS 发布方案 + 生态范围的 MSRV 约定 |
+| **Async Runtime 认证** | 缺少 ISO 26262 质量工件的运行时 | 正在定义 "safety-case friendly async runtime" 的具体要求 |
+| **FFI 边界安全** | C/C++ 互操作是安全故事的关键部分 | Rust for Linux 目标中包含 `register_tool`、`-Zdirect-access-external-data` 等编译器特性 |
+| **目标平台支持** | QNX 等 RTOS 支持有限（如 QNX 8.0 仅 `no_std`） | 目标就绪检查清单（readiness checklist）正在由 Safety-Critical Rust Consortium 牵头制定 |
+
+> **来源**: [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html) · [Ferrocene](https://ferrocene.dev/) · [Safety-Critical Rust Consortium](https://rustfoundation.org/) · 可信度: ✅
+
+> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Cranelift Documentation](https://cranelift.dev/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [Rust Blog — Safety-Critical Rust 2026-01-14](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)

@@ -1065,7 +1065,9 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 
 > **权衡分析**: Cranelift 不替代 LLVM，而是**互补定位**——debug 构建用 Cranelift 缩短反馈循环，release 构建仍用 LLVM 获取最佳性能。这与 Firefox 的 WebAssembly 编译策略（Cranelift 用于 JIT，LLVM 用于 AOT 优化）一致。对大型 Rust 项目（如 `rustc` 自身编译），Cranelift 可将 debug 构建从 30 分钟缩短到 5-8 分钟，显著改善开发者体验。
 
-> **来源**: [Rust Project Goals 2026 — Cranelift Backend](https://rust-lang.github.io/rust-project-goals/2026h1/cranelift.html) · [rustc_codegen_cranelift GitHub](https://github.com/rust-lang/rustc_codegen_cranelift) · [Bytecode Alliance — Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift) · [Rust Internals — Cranelift Update 2025](https://internals.rust-lang.org/) · 可信度: ✅
+> ⚠️ **2025H2 周期状态更新**: Production-ready Cranelift backend 目标在 2025H2 周期结束时标记为 **"Not completed (lack of funding)"**。核心开发者 Folkert de Vries 和 bjorn3（由 Trifecta Tech Foundation 资助）因资金不足未能完成 Tier 2 稳定化。社区正在寻求新的资助渠道（包括 Rust Foundation 和工业赞助）。这凸显了 Rust 基础设施的**可持续资助挑战**——与 LLVM（由 Apple/Google/Meta 等大公司长期资助）不同，Cranelift 的商业支持生态仍在建设中。
+
+> **来源**: [Rust Project Goals 2026 — Cranelift Backend](https://rust-lang.github.io/rust-project-goals/2026h1/cranelift.html) · [rustc_codegen_cranelift GitHub](https://github.com/rust-lang/rustc_codegen_cranelift) · [Bytecode Alliance — Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · 可信度: ✅
 
 > **过渡**：从编译器内部回到生态系统全局，以下思维导图将前述所有工具按功能域组织，便于快速定位。
 
