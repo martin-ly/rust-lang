@@ -12,8 +12,6 @@
 > **来源**: [Rust RFC — Gen Blocks](https://github.com/rust-lang/rfcs/pull/3513) · [Rust Reference — Generators](https://doc.rust-lang.org/reference/expressions/generator-expr.html) · [Tracking Issue #93132](https://github.com/rust-lang/rust/issues/93132) · [Iterator RFCs](https://github.com/rust-lang/rfcs/labels/T-libs-api)
 
 ## 📑 目录
->
->
 
 - [Gen Blocks 预研：超越异步的泛化生成器](#gen-blocks-预研超越异步的泛化生成器)
   - [📑 目录](#-目录)

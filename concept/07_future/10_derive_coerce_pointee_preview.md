@@ -12,8 +12,6 @@
 > **来源**: [Rust RFC — Derive CoercePointee](https://github.com/rust-lang/rfcs/pull/3621) · [Rust Reference — Coercion](https://doc.rust-lang.org/reference/type-coercions.html) · [The Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html) · [Tracking Issue #123430](https://github.com/rust-lang/rust/issues/123430)
 
 ## 📑 目录
->
->
 
 - [派生 CoercePointee 预研：智能指针的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
   - [📑 目录](#-目录)

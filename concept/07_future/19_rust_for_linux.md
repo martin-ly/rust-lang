@@ -16,10 +16,6 @@
 > [Google — Rust in the Linux Kernel](https://security.googleblog.com/2021/04/rust-in-linux-kernel.html)
 
 ## 📑 目录
->
->
-
- [Rust for Linux \：操作系统内核中的内存安全](#rust-for-linux)
 
 - [Rust for Linux ：操作系统内核中的内存安全](#rust-for-linux-操作系统内核中的内存安全)
   - [📑 目录](#-目录)

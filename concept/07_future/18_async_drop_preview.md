@@ -16,8 +16,6 @@
 > [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-04-pin.html)
 
 ## 📑 目录
->
->
 
 - [Async Drop：异步资源的优雅销毁](#async-drop异步资源的优雅销毁)
   - [📑 目录](#-目录)

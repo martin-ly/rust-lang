@@ -12,10 +12,6 @@
 > **来源**: [Ferrocene Project](https://ferrocene.dev/) · [Ferrocene Specification](https://spec.ferrocene.dev/) · [ISO 26262 Standard](https://www.iso.org/standard/68383.html) · [DO-178C Standard](https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification) · [Ferrous Systems Blog](https://ferrous-systems.com/blog/)
 
 ## 📑 目录
->
->
-
- [Ferrocene \ \ 预研：Rust 的安全关键认证之路](#ferrocene)
 
 - [Ferrocene 预研：Rust 的安全关键认证之路](#ferrocene-预研rust-的安全关键认证之路)
   - [📑 目录](#-目录)

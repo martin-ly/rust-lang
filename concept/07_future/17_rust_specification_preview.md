@@ -12,8 +12,6 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Ferrocene Specification](https://spec.ferrocene.dev/) · [Rust Language Specification RFC](https://github.com/rust-lang/rfcs/pull/3355) · [Rust Compiler Team — Specification](https://github.com/rust-lang/compiler-team/issues/)
 
 ## 📑 目录
->
->
 
 - [Rust 语言规范预研：从参考文档到形式化规范](#rust-语言规范预研从参考文档到形式化规范)
   - [📑 目录](#-目录)

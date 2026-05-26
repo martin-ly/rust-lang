@@ -12,10 +12,6 @@
 > **来源**: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md) · [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) · [Bytecode Alliance](https://bytecodealliance.org/) · [Rust Compiler Team — Cranelift](https://github.com/rust-lang/compiler-team/issues/)
 
 ## 📑 目录
->
->
-
- [Cranelift \ \ 后端预研：Rust 编译器的快速调试编译](#cranelift)
 
 - [Cranelift 后端预研：Rust 编译器的快速调试编译](#cranelift-后端预研rust-编译器的快速调试编译)
   - [📑 目录](#-目录)

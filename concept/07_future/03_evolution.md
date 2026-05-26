@@ -27,7 +27,6 @@
 ---
 
 ## 〇、Rust 语言演进认知全景
->
 
 ```mermaid
 mindmap

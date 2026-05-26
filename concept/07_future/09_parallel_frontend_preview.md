@@ -12,10 +12,6 @@
 > **来源**: [Rust Compiler Team — Parallel Frontend](https://github.com/rust-lang/compiler-team/issues/) · [Rust Internals — Parallel Compilation](https://internals.rust-lang.org/) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Cargo Parallel Compilation](https://doc.rust-lang.org/cargo/reference/profiles.html)
 
 ## 📑 目录
->
->
-
- [并行 \前端编译预研：Rust 编译器 \的多核扩展](#并行)
 
 - [并行 前端编译预研：Rust 编译器 的多核扩展](#并行-前端编译预研rust-编译器-的多核扩展)
   - [📑 目录](#-目录)
