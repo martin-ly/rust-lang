@@ -202,3 +202,14 @@ L5 的综合分析输出到：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 参考来源
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Wikipedia — Programming Language Comparison](https://en.wikipedia.org/wiki/Comparison_of_programming_languages)]
+> [来源: [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)]
+> [来源: [Rust Foundation](https://foundation.rust-lang.org/)]

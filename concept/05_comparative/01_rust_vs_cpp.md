@@ -2056,3 +2056,18 @@ fn main() {
 ```
 
 > **修正**: Rust 的 trait 实现**一致性检查**：1) 无冲突实现（同一类型不能有同一 trait 的两个实现）；2) 孤儿规则（实现者或 trait 定义在当前 crate）；3) 重叠检查（blanket impl 与具体 impl 不能冲突）。C++ 的模板特化：1) 允许任意地方的特化；2) 部分特化（`template<class T> class Foo<T*>`）；3) 特化可能冲突（ODR 违规，链接错误）。Rust 更严格但更安全：编译期排除冲突，无链接期惊喜。替代方案：1) 使用具体类型包装（newtype）；2) 使用 trait object（运行时分发）；3) 使用 `min_specialization`（nightly，限制性子集）。这与 Haskell 的 overlapping instances（可控制重叠）或 Scala 的 implicit resolution（最具体匹配）不同——Rust 宁可拒绝合法程序也不允许冲突。[来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
+
+---
+
+## 参考来源
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [C++ Reference](https://en.cppreference.com/)]
+> [来源: [ISO C++ Standard](https://isocpp.org/)]
+> [来源: [Wikipedia — RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)]
+> [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+> [来源: [Wikipedia — Type System](https://en.wikipedia.org/wiki/Type_system)]
+> [来源: [Wikipedia — Programming Language](https://en.wikipedia.org/wiki/Programming_language)]
+> [来源: [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))]

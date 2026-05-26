@@ -1484,3 +1484,16 @@ fn main() {
 ```
 
 > **修正**: Rust 的形式化工具（Miri、Kani、Prusti、Crucible）紧密依赖编译器内部（MIR、HIR、LLVM IR），因此通常**锁定到特定 nightly 版本**。升级编译器可能导致：1) 不稳定特性语法变化；2) 内部 API 变更；3) 工具本身未适配新版本。这与 Clippy、`rustfmt` 等工具类似——它们也需跟随编译器更新。企业采用形式化工具的代价：需维护锁定的工具链版本，或等待工具更新。这与 C 的 static analyzer（如 Coverity，独立于编译器）或 Java 的 SpotBugs（基于字节码，编译器无关）不同——Rust 的形式化生态年轻，尚未建立稳定的跨版本接口。`rustup` 的 toolchain 管理缓解了部分痛苦（`rustup run nightly-2024-01-01 miri`）。[来源: [Miri Documentation](https://github.com/rust-lang/miri)] · [来源: [Rustup Toolchains](https://rust-lang.github.io/rustup/concepts/toolchains.html)]
+
+---
+
+## 参考来源
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Wikipedia — Formal Verification](https://en.wikipedia.org/wiki/Formal_verification)]
+> [来源: [Wikipedia — Model Checking](https://en.wikipedia.org/wiki/Model_checking)]
+> [来源: [Wikipedia — Theorem Proving](https://en.wikipedia.org/wiki/Automated_theorem_proving)]
+> [来源: [POPL 2024 — Verus](https://verus-lang.github.io/)]
+> [来源: [AWS Kani](https://github.com/model-checking/kani)]

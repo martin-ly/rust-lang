@@ -205,3 +205,14 @@ L7 的预测和反向约束影响：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 参考来源
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+> [来源: [Rust Blog](https://blog.rust-lang.org/)]
+> [来源: [Inside Rust](https://blog.rust-lang.org/inside-rust/)]

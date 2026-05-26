@@ -615,3 +615,15 @@ fn option_j(_: i32) -> Option<i32> { Some(10) }
 ```
 
 > **修正**: `Option`/`Result` 的 `and_then` 嵌套是**组合子模式**，但过度嵌套导致：1) 类型签名膨胀（每个 `and_then` 增加一层泛型）；2) 编译时间增加（类型推导复杂度）；3) 错误信息难读（10 层嵌套的错误链）。Rust 的替代方案：1) **`?` 运算符**：`let a = option_a()?; let b = option_b(a)?; ...`（扁平化，可读性高）；2) **`async`/`await`**：用异步组合替代同步组合子；3) **do-notation 宏**（如 `try_block!`）。这与 Haskell 的 `do` notation（语法糖扁平化 Monad 嵌套）或 Scala 的 `for` comprehension（类似）不同——Rust 的 `?` 运算符是编译器内建的特殊语法，不是通用 Monad 操作，但提供了等价的扁平化能力。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)]
+
+---
+
+## 参考来源
+
+> [来源: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Wikipedia — Category Theory](https://en.wikipedia.org/wiki/Category_theory)]
+> [来源: [Wikipedia — Monad](https://en.wikipedia.org/wiki/Monad_(functional_programming))]
+> [来源: [Wikipedia — Functor](https://en.wikipedia.org/wiki/Functor)]
+> [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]

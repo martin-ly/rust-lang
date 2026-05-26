@@ -682,3 +682,15 @@ fn main() {
 ```
 
 > **修正**: Rust trait object（`dyn Trait`）的内存布局：**fat pointer** = 数据指针 + vtable 指针。C++ 虚函数：**单指针** = 对象指针（对象开头含 vptr）。两者不兼容：1) Rust 的 vtable 是独立的（对象外），C++ 的 vtable 指针在对象内；2) Rust 的 vtable 包含 drop、size、align 和方法指针，C++ 的 vtable 只含虚函数指针；3) 多重继承时 C++ 有多个 vptr，Rust 无多重继承（单继承 + trait）。跨语言互操作：1) C 接口（`extern "C"`）+ 手动 vtable；2) `cxx` crate（自动生成安全的 C++ 绑定）；3) `cbindgen`（生成 C 头文件）。这与 COM（Windows 的接口虚表，与 Rust 类似）或 Go 的 cgo（自动包装，但性能开销）不同——Rust 的 FFI 是零成本但需理解 ABI 差异。[来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)] · [来源: [cxx crate](https://cxx.rs/)]
+
+---
+
+## 参考来源
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]
+> [来源: [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI)]
+> [来源: [Wikipedia — Application Binary Interface](https://en.wikipedia.org/wiki/Application_binary_interface)]
+> [来源: [Wikipedia — Name Mangling](https://en.wikipedia.org/wiki/Name_mangling)]
+> [来源: [Wikipedia — Virtual Method Table](https://en.wikipedia.org/wiki/Virtual_method_table)]

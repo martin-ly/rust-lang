@@ -646,6 +646,14 @@ fn main() {}
 
 ## 参考来源
 
+> [来源: [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.cs.brown.edu/~mph/HerlihyShavit/)]
+> [来源: [Lynch — Distributed Algorithms](https://mitpress.mit.edu/books/distributed-algorithms)]
+> [来源: [Ongaro & Ousterhout — Raft](https://raft.github.io/raft.pdf)]
+> [来源: [Shapiro et al. — CRDT](https://hal.inria.fr/hal-00932836/document)]
+> [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
 > [来源: [RFC 2349 — Async Closures](https://rust-lang.github.io/rfcs/)]
 
 > [来源: [Data Parallelism in Rust](https://doc.rust-lang.org/std/thread/)]

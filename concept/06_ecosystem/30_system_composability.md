@@ -713,3 +713,14 @@ fn main() {}
 ```
 
 > **修正**: 泛型参数过多的解决方案：1) **关联类型**：`trait Database { type Output; }` — 每个实现只有一个输出类型；2) **trait object**：`&dyn Database` — 运行时擦除类型；3) **类型别名**：`type UserService = dyn Service<User, String, User>`；4) **newtype**：`struct UserService(Box<dyn Service<User, String, User>>)`。设计原则：公共 API 减少泛型参数（使用关联类型或 trait object），内部实现使用泛型（性能关键路径）。这与 Java 的泛型（类型擦除，无单态化）或 C# 的泛型（运行时特化，但共享代码）不同——Rust 的泛型是编译期单态化，参数过多导致代码膨胀和编译时间增加。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-01-syntax.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+
+---
+
+## 参考来源
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Wikipedia — System Design](https://en.wikipedia.org/wiki/Systems_design)]
+> [来源: [Wikipedia — Software Architecture](https://en.wikipedia.org/wiki/Software_architecture)]
+> [来源: [RFCs — Rust Language](https://rust-lang.github.io/rfcs/)]

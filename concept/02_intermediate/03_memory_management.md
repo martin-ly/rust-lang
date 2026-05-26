@@ -122,7 +122,16 @@
     - [10.3 边界测试：`Box::into_raw` 后双重释放（运行时 UB）](#103-边界测试boxinto_raw-后双重释放运行时-ub)
     - [10.4 边界测试：Box::leak 后的可变借用与原始 Box 的关系（编译错误）](#104-边界测试boxleak-后的可变借用与原始-box-的关系编译错误)
     - [10.3 边界测试：返回局部变量的悬垂引用](#103-边界测试返回局部变量的悬垂引用)
-  - [参考来源](#参考来源)
+  - [参考来源](#参考来源
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language — Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)]
+> [来源: [Wikipedia — Smart Pointer](https://en.wikipedia.org/wiki/Smart_pointer)]
+> [来源: [Wikipedia — Reference Counting](https://en.wikipedia.org/wiki/Reference_counting)]
+> [来源: [RFC 1857 — Non-Lexical Lifetimes](https://rust-lang.github.io/rfcs/1857-nll.html)]
+> [来源: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html)])
 
 ## 一、权威定义（Definition）
 
