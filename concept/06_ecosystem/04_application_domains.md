@@ -322,6 +322,23 @@ Rust 在区块链领域占据**主导地位**的原因：
 - 2022: Linux 5.14 合并实验支持
 - 2024: Android Binder 驱动 Rust 实现
 - 2025+: 更多子系统（GPU、存储、网络）采用 Rust
+- **2026: Rust for Linux 进入 Rust Project Goals 官方轨道**，编译器特性和语言特性双线推进
+
+**2026 关键进展（Rust Project Goals 跟踪）**：
+
+| 特性 | 状态 | 对内核的意义 |
+|:---|:---|:---|
+| `#![register_tool]` | RFC#3808 FCP 中 | 允许内核注册自定义编译器插件（如静态分析工具） |
+| `-Zdebuginfo-compression` | 稳定化提案中 | 减小内核调试信息体积，嵌入式场景关键 |
+| `-Zdirect-access-external-data` | **已合并** (rust#150494) | 优化外部数据访问，提升内核模块性能 |
+| `--emit=noreturn` | 高优先级需求 | 帮助 objtool 识别无返回函数，替代手动检查 |
+| `-Zsanitizer=kernel-hwaddress` | **已合并** (rust#153049) | aarch64 内核硬件地址消毒器，内存安全加固 |
+| `-Zharden-sls` | 开发中 | 直线推测（Straight-Line Speculation）硬化，安全关键 |
+| `derive(CoercePointee)` | 稳定化推进 | 智能指针类型强制转换，简化内核抽象封装 |
+| `cold_path` | 即将稳定 | 替代 `likely`/`unlikely`，与内核现有优化模式对齐 |
+| **New Trait Solver** | 长期阻塞 | 阻塞 unmovable types、guaranteed destructors、TAIT、const traits 等内核急需特性 |
+
+> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。[来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/)] · [来源: [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/)] · 可信度: ✅
 
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 
