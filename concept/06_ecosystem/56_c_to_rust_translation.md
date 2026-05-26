@@ -138,6 +138,42 @@ C AST → 指针关系图 → SMT 约束（Z3）→ 最优 Rust 类型分配 →
 
 > **关键洞察**: His2Trans 认识到现有工具的核心失败模式——"初始选择错误导致后续级联失败"。通过先建立类型一致的骨架，His2Trans 将全局构建失败转化为局部修复任务，这是从"研究原型"到"工业工具"的关键跃迁。[来源: [arXiv 2026 — "His2Trans: A Skeleton-First Framework for Self-Evolving C-to-Rust Translation"](https://arxiv.org/abs/2603.02617)]
 
+### 3.4 Cpp2Rust：C++ → Safe Rust 的自动翻译（PLDI 2026）
+
+**[INESC-ID / Google]** Cpp2Rust 是首个能自动将 **C++ 程序翻译为功能等价且内存安全的 Rust 代码** 的系统，发表于 PLDI 2026。与 C→Rust 翻译相比，C++→Rust 面临更严峻的挑战：C++ 拥有类、继承、虚调用、模板、异常和 STL，其**无限制别名模型**与 Rust 的所有权模型存在根本性冲突。
+
+**核心策略 — 运行时安全检查（Runtime-Enforced Safety）**：
+
+Cpp2Rust 不尝试在编译期证明 C++ 的别名模式符合 Rust 的借用规则（这是不可判定的），而是将所有权和可变性检查**推迟到运行时**：
+
+| C++ 特性 | Cpp2Rust 翻译策略 | 运行时开销 |
+|:---|:---|:---|
+| 原始指针 `T*` | 自定义 `Ptr<T>` 类型（引用计数 + 借用检查） | 引用计数增减 |
+| 引用 `T&` | `Ptr<T>` 的不可变借用视图 | 动态可变性检查 |
+| 指针算术 | `Ptr<T>` 的偏移操作（边界检查） | 边界检查 |
+| 类/继承/虚调用 | Rust trait + vtable 模拟 | 动态分发 |
+| 部分 STL（`std::vector`, `std::string`） | 对应 Rust 标准库类型 | 无额外开销 |
+
+**Source-to-Source 优化器**：
+
+Cpp2Rust 包含一个 Rust→Rust 优化器（3.6k LOC），通过静态分析消除冗余的运行时检查：
+- **单所有权消除**：当分析证明某个 `Ptr<T>` 始终只有一个所有者时，移除引用计数；
+- **静态可变性提升**：当分析证明某个 `Ptr<T>` 的可变性模式固定时，将动态检查转换为静态 `&mut T`；
+- **内联与死代码消除**：标准编译器优化。
+
+**评估结果（真实世界 C++ 程序）**：
+
+| 程序 | 领域 | C++ LOC | Cpp2Rust safe LOC | 性能损失（优化后） | 备注 |
+|:---|:---|:---:|:---:|:---:|:---|
+| **WOFF2** | 字体压缩 | 4.7k | 7.7k | **压缩 2%** / 解压 21% | 与 C++ 版本字节级一致 |
+| **Brunsli** | JPEG 无损压缩 | ~8k | — | **6× 更慢** | 大量指针算术，优化器难以消除动态检查 |
+
+> **关键对比**: Google 工程师手动将 WOFF2 从 C++ 移植到 Rust 花费了 **12 天机械翻译 + 8 天惯用化重构**，且引入了 **20 个 bug**（整数溢出、运行时可变性违规、panic、语义不匹配）。Cpp2Rust 在**几秒钟内**完成机械翻译，输出零 unsafe 代码，并通过字节级输出验证正确性。
+
+> **核心洞察**: Cpp2Rust 的"运行时安全"策略与 Scylla/&inator 的"编译期安全"策略形成互补。对于**性能不敏感的安全关键组件**（如解析器、配置加载器），Cpp2Rust 提供了一条"自动翻译→运行正确→逐步优化"的实用路径；对于**性能敏感的核心路径**，仍需 Scylla/&inator 的静态分析或人工重写。这类似于 Rust 自身的设计哲学：默认安全，允许局部 unsafe 优化。
+
+> **来源**: [PLDI 2026 — Popescu et al., "Cpp2Rust: Automatic Translation of C++ to Safe Rust"](https://web.ist.utl.pt/nuno.lopes/pubs/cpp2rust-pldi26.pdf) · [Cpp2Rust GitHub](https://github.com/Cpp2Rust/cpp2rust) · 可信度: ✅
+
 ---
 
 ## 四、现有工具链
