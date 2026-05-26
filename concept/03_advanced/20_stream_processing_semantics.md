@@ -25,7 +25,6 @@
 
 ## 一、核心命题：流处理的本质
 
-
 流处理不是"快速批处理"，而是对**无界数据（unbounded data）**的连续计算。
 批处理（batch）与流处理（streaming）的根本差异不在于速度，而在于**数据的有界性**：
 
@@ -44,7 +43,6 @@
 ---
 
 ## 二、时间域：事件时间 vs 处理时间 vs 摄取时间
-
 
 ### 2.1 三种时间语义
 
@@ -80,7 +78,6 @@
 ---
 
 ## 三、窗口语义：在事件时间中划界
-
 
 窗口（Window）是将无界数据切分为有界子集进行聚合的机制。
 窗口策略回答 Dataflow Model 的 **Where** 维度。
@@ -130,7 +127,6 @@ Session  [0,3)     [6,9)          [14,18)
 
 ## 四、Watermark：事件时间进度的推断机制
 
-
 ### 4.1 Watermark 的形式化定义
 
 **理想 Watermark**: `W_ideal(t) = min{ τ(e) | e 已到达系统 }`。
@@ -167,7 +163,6 @@ Akidau 等人指出 Watermark 存在两种系统性失败：
 ---
 
 ## 五、Trigger：结果物化的时机控制
-
 
 Trigger 回答 Dataflow Model 的 **When** 维度：在何时将窗口的中间结果输出。
 
@@ -209,7 +204,6 @@ Accumulating+Retracting: [10] ── [-10,25] ── [-25,30] (下游需 retract
 ---
 
 ## 六、容错语义：Exactly-Once 的形式化
-
 
 ### 6.1 三种处理保证
 
@@ -257,7 +251,6 @@ Checkpoint-1 完成（一致性全局快照）
 
 ## 七、状态管理：Operator State vs Keyed State
 
-
 ### 7.1 状态类型
 
 | 状态类型 | 作用域 | 分区方式 | 典型用途 |
@@ -280,7 +273,6 @@ Checkpoint-1 完成（一致性全局快照）
 ---
 
 ## 八、背压（Backpressure）：流量控制的语义
-
 
 ### 8.1 背压的本质
 
@@ -323,7 +315,6 @@ tx.send(42).await?;
 ---
 
 ## 九、增量计算：Differential Dataflow 的 diff 代数
-
 
 ### 9.1 核心抽象：Collection = Stream of Diffs
 
@@ -373,7 +364,6 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 ---
 
 ## 十、物化视图与 CDC：流式 SQL 的语义
-
 
 ### 10.1 从批处理 SQL 到流式 SQL
 
@@ -620,3 +610,18 @@ fn main() {
 ```
 
 > **修正**: `Stream` trait 的 `poll_next` 在返回 `None` 后，再次 poll 的行为**未定义**（取决于实现）。`Fuse` adapter（`.fuse()`）保证：返回 `None` 后，所有后续 poll 也返回 `None`。这与 `Iterator` 的行为不同：`Iterator::next()` 返回 `None` 后再次调用是明确定义的（继续返回 `None`）。`Stream` 的设计原因：某些底层源（如 I/O、channel）在关闭后可能重新打开或产生错误，不强制 `None` 后终止。安全模式：消费 Stream 后使用 `.fuse()`，或用 `while let Some(item) = stream.next().await`（自动处理）。这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步流语义比迭代器更复杂，因涉及外部事件源。[来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]
+
+> [来源: [futures-rs Documentation](https://docs.rs/futures/)]
+> [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]
+> [来源: [Tokio Tutorial — Streams](https://tokio.rs/tokio/tutorial/streams)]
+> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+> [来源: [Reactive Streams Specification](https://www.reactive-streams.org/)]
+> [来源: [Rayon Documentation](https://docs.rs/rayon/)]
+> [来源: [Crossbeam Channel](https://docs.rs/crossbeam-channel/)]
+> [来源: [async-stream Crate](https://docs.rs/async-stream/)]
+> [来源: [futures-rs Sink](https://docs.rs/futures/latest/futures/sink/trait.Sink.html)]
+> [来源: [StreamExt — BufStream](https://docs.rs/tokio-stream/latest/tokio_stream/trait.StreamExt.html)]
+> [来源: [Tokio — Framed](https://docs.rs/tokio-util/latest/tokio_util/codec/struct.Framed.html)]
+> [来源: [Pin and Suffering](https://blog.yoshuawuyts.com/pin-and-suffering/)]
+> [来源: [Futures Explained](https://fasterthanli.me/articles/understanding-rust-futures-by-going-deep-into-the)]
+> [来源: [Rust Pinning](https://doc.rust-lang.org/std/pin/index.html)]

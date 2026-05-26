@@ -854,3 +854,6 @@ fn factorial(n: Int) -> Int {
 - [RustBelt 与验证工具链](./04_rustbelt.md) — 高阶幽灵状态、验证工具生态
 - [验证工具链选择指南](./05_verification_toolchain.md) — Prusti/Creusot/Kani/Miri 选型
 - [线性逻辑与仿射逻辑](./01_linear_logic.md) — 资源敏感性基础
+
+
+> [来源: [Axiomatic Basis — Hoare (CACM 1969)](https://dl.acm.org/doi/10.1145/363235.363259)]

@@ -722,3 +722,12 @@ fn main() {
 ```
 
 > **修正**: `OsStr`/`OsString` 是平台相关的字符串类型，可能包含非 UTF-8 序列（Windows 的 WTF-8、Unix 的字节序列）。`str`/`String` 要求严格 UTF-8。两者不能直接比较或转换：`OsStr` → `str` 需 `to_str()`（返回 `Option<&str>`，可能失败）；`str` → `OsStr` 通过 `OsStr::new()`（总是成功，因为 UTF-8 是平台字符串的子集）。设计原因：Rust 强制处理平台字符串的编码不确定性，避免假设所有路径/环境变量都是 UTF-8。这与 Go 的 `string`（底层是字节切片，可能非 UTF-8）或 Python 3 的 `str`（强制 Unicode）不同——Rust 的分离类型系统显式标记了编码风险。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/ffi/struct.OsStr.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
+
+
+> [来源: [Unicode Standard 15.0](https://www.unicode.org/versions/Unicode15.0.0/)]
+
+
+> [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]
+
+
+> [来源: [ISO/IEC 10646 — UCS](https://www.iso.org/standard/76835.html)]

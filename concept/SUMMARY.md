@@ -102,6 +102,11 @@
   - [Data Engineering（数据工程）](06_ecosystem/48_data_engineering.md)
   - [Game Engine Internals（游戏引擎内部原理）](06_ecosystem/49_game_engine_internals.md)
   - [Distributed Consensus（分布式共识）](06_ecosystem/50_distributed_consensus.md)
+  - [Quantum Computing in Rust（量子计算）](06_ecosystem/51_quantum_computing_rust.md)
+  - [Robotics & ROS2 in Rust（机器人与 ROS2）](06_ecosystem/52_robotics.md)
+  - [Embedded Graphics in Rust（嵌入式图形）](06_ecosystem/53_embedded_graphics.md)
+  - [Advanced WebAssembly in Rust（高级 WebAssembly）](06_ecosystem/54_webassembly_advanced.md)
+  - [Rust for Data Science（数据科学）](06_ecosystem/55_rust_for_data_science.md)
 
 - [L7 前沿趋势层索引（Future & Trends Layer Index）](07.md)
 

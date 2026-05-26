@@ -669,3 +669,9 @@ fn main() {
 ```
 
 > **修正**: 分离逻辑（Separation Logic）的核心公理：1) **独占性**（exclusivity）：`own(x)` 表示对 `x` 的独占所有权，不可拆分；2) **可分性**（separability）：`P * Q` 表示 `P` 和 `Q` 作用于**不相交**的内存区域；3) **框架规则**（frame rule）：在 `P` 上验证的代码在 `P * R` 上也成立（不影响未提及的资源）。Rust 的 `&mut T` 对应分离逻辑的 `own(ℓ, τ)`——独占访问保证无别名。`&T` 对应 `shr(κ, ℓ)`（共享权限），允许多个读者但无写者。上述代码中，两个 `&mut x` 试图同时存在，违反 `own(ℓ, i32)` 的独占性。RustBelt 使用 Iris 分离逻辑框架证明：若程序通过 Rust 编译器的借用检查，则其执行在分离逻辑模型中是安全的。这与 C 的指针（无独占性保证，需人工验证）或 Java 的引用（共享只读，无 `&mut` 等价物）不同——Rust 的编译器是分离逻辑的"自动证明器"。[来源: [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/)] · [来源: [Iris Project](https://iris-project.org/)]
+
+
+> [来源: [Separation Logic — Reynolds (LICS 2002)](https://dl.acm.org/doi/10.1109/LICS.2002.1029817)]
+
+
+> [来源: [Iris — Jung et al. (POPL 2018)](https://dl.acm.org/doi/10.1145/3158154)]

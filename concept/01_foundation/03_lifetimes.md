@@ -928,3 +928,12 @@ fn main() {
 ```
 
 > **修正**: `'static` 是 Rust 中最长的生命周期：程序整个运行期间。`&'static str` 通常来自字符串字面量（`"hello"`，编译期嵌入二进制）或泄漏的内存（`Box::leak`）。常见滥用：1) 将局部变量引用标注为 `'static`；2) 在 trait bound 中过度使用 `'static`（排除所有非静态引用）；3) 线程闭包要求 `'static`，但试图捕获局部引用。`'static` 的正确使用：1) 全局常量；2) 字符串字面量；3) 泄漏的 Box（`Box::leak(Box::new(...))`）；4) `lazy_static` / `once_cell`。这与 C 的 `static` 关键字（存储期，非生命周期概念）或 Java 的 `static` 字段（类级别，与 Rust 的 `'static` 部分相似）不同——Rust 的 `'static` 是生命周期标注，非存储类说明符。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — 'static](https://doc.rust-lang.org/reference/lifetime-elision.html#the-static-lifetime)]
+
+
+> [来源: [RustBelt — POPL 2018 (ACM)](https://dl.acm.org/doi/10.1145/3158154)]
+
+
+> [来源: [Linear Logic — Stanford Encyclopedia](https://plato.stanford.edu/entries/logic-linear/)]
+
+
+> [来源: [Ownership Types — Clarke et al. (ECOOP)](https://dl.acm.org/doi/10.5555/1097042)]

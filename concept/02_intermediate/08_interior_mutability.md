@@ -598,3 +598,6 @@ fn main() {
 ```
 
 > **修正**: `Cell<T>` 的方法要求：1) `get()` — 要求 `T: Copy`（复制值）；2) `take()` — 要求 `T: Default`（取走值，留默认值）；3) `replace(val)` — 无约束（取走旧值，放入新值）；4) `into_inner()` — 无约束（消耗 Cell，返回值）。`Cell` 的设计：适用于 `Copy` 类型或小值类型（`i32`、`bool`），因为 `get` 复制值。对于非 `Copy` 类型：使用 `RefCell<T>`（运行时借用检查）或 `Cell<T>` + `replace`/`take`。这与 C++ 的 `std::atomic`（类似 `Cell`，但线程安全，需 `TriviallyCopyable`）或 Java 的 `AtomicReference`（类似 `Cell`，但线程安全）不同——Rust 的 `Cell` 是单线程的、无锁的内部可变性原语。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.Cell.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)]
+
+
+> [来源: [ISO/IEC TR 24772 — Memory Safety](https://www.iso.org/standard/71091.html)]

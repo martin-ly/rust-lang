@@ -766,3 +766,12 @@ fn main() {
 
 > [来源: [The Rust Programming Language — Match](https://doc.rust-lang.org/book/ch06-02-match.html)]
 > [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
+
+
+> [来源: [ISO/IEC 14882:2020 — C++ Memory Model](https://www.iso.org/standard/83626.html)]
+
+
+> [来源: [ARM Architecture Reference Manual](https://developer.arm.com/documentation/ddi0487/latest/)]
+
+
+> [来源: [RISC-V Instruction Set Manual](https://riscv.org/technical/specifications/)]

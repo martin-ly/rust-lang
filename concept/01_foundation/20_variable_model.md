@@ -478,3 +478,6 @@ fn main() {
 ```
 
 > **修正**: Rust 的 **drop 顺序**：1) 变量按**声明顺序的逆序** drop（LIFO）；2) struct 字段按声明顺序 drop；3) tuple 元素按声明顺序 drop；4) 数组/vec 元素按索引顺序 drop；5) 闭包捕获变量按未指定顺序 drop。依赖 drop 顺序的代码是脆弱的：不同 Rust 版本可能改变闭包捕获的 drop 顺序。安全模式：1) 使 drop 相互独立（不依赖其他变量的状态）；2) 使用 `ManuallyDrop` 显式控制；3) 用 `scopeguard` crate 的 `defer!` 明确清理顺序。这与 C++ 的析构顺序（局部变量逆序、成员按声明顺序）类似——但 Rust 的 `Drop::drop` 不接收参数，不能基于其他对象的状态进行条件清理。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Rust Reference — Destructor Order](https://doc.rust-lang.org/reference/destructors.html)]
+
+
+> [来源: [ISO/IEC 14882:2020 — C++ Exceptions](https://www.iso.org/standard/83626.html)]

@@ -17,7 +17,6 @@ Rust 通过 **Aya** 和 **Rex** 两个项目提供了类型安全的替代方案
 | **Aya** | 用户态 + 内核态 Rust eBPF 框架 | 纯 Rust 工具链，`cargo` 直接编译 eBPF | 生产可用，活跃维护 |
 | **Rex** | 学术研究项目（arXiv 2025-2026） | 以 Rust 编译器替代 eBPF 验证器 | 原型阶段，论文验证 |
 
-
 ---
 
 ## 2. eBPF 程序类型矩阵 × Rust 支持状态
@@ -42,11 +41,9 @@ eBPF 程序类型决定了代码在内核中的挂载点和执行上下文。不
 
 **状态图例：** ✅ 完整支持（文档完善 + 示例可用） / ⚠️ 部分支持 / ❌ 未支持
 
-
 ---
 
 ## 3. Aya 框架深度分析
-
 
 Aya 是第一个实现**纯 Rust eBPF 工具链**的框架，其核心设计目标是让 eBPF 开发完全融入 Rust/Cargo 生态。
 
@@ -121,7 +118,6 @@ CO-RE 的关键依赖：
 | `vmlinux.h` | 内核类型的 C 头文件 | `aya-tool generate` 转换为 `vmlinux.rs` |
 | Relocation | 运行时的字段偏移调整 | Aya 加载器自动处理 |
 
-
 ### 3.3 BPF Map 类型与 Rust API
 >
 
@@ -153,7 +149,6 @@ pub fn xdp_firewall(ctx: XdpContext) -> u32 {
     xdp_action::XDP_PASS
 }
 ```
-
 
 ### 3.4 `#[aya_ebpf]` 宏系统
 >
@@ -213,7 +208,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 ```
-
 
 ---
 
@@ -316,11 +310,9 @@ Rex 的关键安全属性：
 | Panic 处理 | 未定义行为（C panic = abort） | 编译期 panic 消除或安全回退 |
 | 循环终止 | 验证器强制有界 | 编译期类型级约束（WIP） |
 
-
 ---
 
 ## 5. Rust for Linux 中的 eBPF
-
 
 **Rust for Linux** 项目致力于将 Rust 作为一等公民引入内核开发，其与 eBPF 的交集主要体现在两个方向：
 
@@ -362,11 +354,9 @@ impl kernel::Module for MyBpfModule {
 | Rust 替代 eBPF 验证器 | 🔬 研究阶段 | Rex 项目，尚未进入主线 |
 | 内核 eBPF 子系统 Rust 化 | ❌ 远期目标 | 社区讨论中，无明确时间表 |
 
-
 ---
 
 ## 6. Rust 实现示例
-
 
 ### 6.1 Aya XDP 程序骨架（内核态）
 
@@ -438,7 +428,6 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 }
 ```
 
-
 ### 6.2 Aya 用户态加载器
 
 ```rust
@@ -494,7 +483,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-
 ### 6.3 Map 交互：内核态 ↔ 用户态
 
 ```rust,ignore
@@ -536,7 +524,6 @@ async fn aggregate_counts(bpf: &mut Ebpf) -> Result<HashMap<u32, u64>, Box<dyn E
 ---
 
 ## 7. 安全模型对比
-
 
 eBPF 生态中存在三种层次的安全保证，形成渐进增强的安全光谱：
 
@@ -592,11 +579,9 @@ graph LR
 2. 证明该子集的编译输出天然满足 eBPF 的执行约束
 3. 内核信任编译器的输出（类似 WebAssembly 的信任模型）
 
-
 ---
 
 ## 8. 边界与限制
-
 
 ### 8.1 eBPF 指令复杂度限制
 
@@ -652,7 +637,6 @@ Rust 的编译时延在 eBPF 开发中尤为明显：
 | 验证器检查 | 内核 verifier 分析 | 无直接缓解，需简化代码 |
 | BTF 生成 | 调试信息处理 | 仅在 release 构建启用 |
 
-
 ---
 
 ## 9. 相关概念链接
@@ -702,90 +686,11 @@ Rust 的编译时延在 eBPF 开发中尤为明显：
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：eBPF Rust 的编译错误
 
@@ -897,3 +802,17 @@ pub fn my_xdp(ctx: XdpContext) -> u32 {
 ```
 
 > **修正**: eBPF（extended Berkeley Packet Filter）的**内核验证器**限制：1) **栈大小**：最大 512 字节（所有局部变量总和）；2) **指令数**：最大 100 万条；3) **循环**：需证明有界终止；4) **无 null 解引用**：验证器跟踪指针有效性。Rust 的 eBPF 开发（`aya`、`redbpf`）：1) 使用 `no_std` + 自定义宏（`#[xdp]`、`#[tracepoint]`）；2) `aya-tool` 生成内核类型绑定；3) 用户空间程序用标准 Rust 加载 eBPF 程序。挑战：1) Rust 的 panic handler（eBPF 中 panic 是非法的）；2) 浮点数（eBPF 不支持浮点运算）；3) 全局变量（eBPF 的 map 替代）。这与 C 的 eBPF 开发（libbpf，手动管理）或 Go 的 eBPF（via CGo，性能开销）不同——Rust 的 eBPF 生态（aya）提供类型安全的内核编程。[来源: [aya](https://aya-rs.dev/)] · [来源: [eBPF.io](https://ebpf.io/)]
+
+> [来源: [eBPF.io — What is eBPF](https://ebpf.io/what-is-ebpf/)]
+> [来源: [BPF and XDP Reference Guide](https://docs.cilium.io/en/stable/bpf/)]
+> [来源: [Linux Kernel — BPF Documentation](https://www.kernel.org/doc/html/latest/bpf/)]
+> [来源: [aya-rs Documentation](https://aya-rs.dev/)]
+> [来源: [redbpf GitHub](https://github.com/foniod/redbpf)]
+> [来源: [libbpf Documentation](https://libbpf.readthedocs.io/)]
+> [来源: [Cilium eBPF Guide](https://docs.cilium.io/en/stable/bpf/)]
+> [来源: [IO Visor — BCC Tools](https://iovisor.github.io/bcc/)]
+> [来源: [Falco — Runtime Security](https://falco.org/)]
+> [来源: [Katran — L4 Load Balancer](https://github.com/facebookincubator/katran)]
+> [来源: [eBPF Summit](https://ebpf.io/summit-2023/)]
+> [来源: [BPF CO-RE Reference](https://facebookmicrosites.github.io/bpf/blog/2020/02/19/bpf-portability-and-co-re.html)]
+> [来源: [Rust Reference — FFI](https://doc.rust-lang.org/reference/items/external-blocks.html)]

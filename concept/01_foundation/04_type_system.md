@@ -2372,3 +2372,9 @@ fn main() {
 ```
 
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
+
+
+> [来源: [ISO/IEC TR 24772 — Secure Software](https://www.iso.org/standard/71091.html)]
+
+
+> [来源: [Types and Programming Languages — Pierce](https://www.cis.upenn.edu/~bcpierce/tapl/)]

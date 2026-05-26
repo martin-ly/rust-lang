@@ -485,3 +485,12 @@ fn main() {
 ```
 
 > **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasi` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
+
+
+> [来源: [W3C WebAssembly Core Specification](https://www.w3.org/TR/wasm-core-2/)]
+
+
+> [来源: [W3C WebAssembly JS Interface](https://www.w3.org/TR/wasm-js-api-2/)]
+
+
+> [来源: [ECMA-262 — ECMAScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/)]

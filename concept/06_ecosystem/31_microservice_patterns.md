@@ -821,3 +821,9 @@ fn main() {}
 
 > [来源: [Istio Circuit Breaker](https://istio.io/latest/docs/tasks/traffic-management/circuit-breaking/)]
 > [来源: [Linkerd Documentation](https://linkerd.io/2.14/features/circuit-breaking/)]
+
+
+> [来源: [ISO/IEC 25010 — Quality Models](https://www.iso.org/standard/35733.html)]
+
+
+> [来源: [NIST SP 800-204 — Microservices Security](https://csrc.nist.gov/publications/detail/sp/800-204/final)]

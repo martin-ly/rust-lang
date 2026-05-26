@@ -2436,3 +2436,6 @@ fn main() {
 ```
 
 > **修正**: `const generic` 默认值（`const N: usize = 1024`）在 Rust 1.59+ 支持，但**类型推断**有限：编译器不能从 `data: [0; 512]` 推断 `Buffer` 的 `N = 512`（数组大小是表达式，不直接关联到类型参数）。修复：1) 显式标注类型：`Buffer<512>`；2) 构造函数：`Buffer::new()` 返回 `Buffer<1024>`（默认）；3) `From` trait：`[u8; 512].into()` → `Buffer<512>`。`const generic` 的应用：1) 固定大小数组包装；2) 类型级维度（矩阵 `[T; M * N]`）；3) 编译期配置（缓冲区大小、哈希表容量）。这与 C++ 的非类型模板参数（`template<size_t N>`，推断更灵活）或 Ada 的泛型（类似，但语法不同）不同——Rust 的 const generic 保守但类型安全。[来源: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+
+> [来源: [Type Classes in Haskell — Wadler & Blott (POPL)](https://dl.acm.org/doi/10.1145/75277.75283)]

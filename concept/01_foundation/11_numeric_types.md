@@ -572,3 +572,12 @@ fn main() {
 ```
 
 > **修正**: `Wrapping<T>` 是一个 newtype 包装器，提供**环绕算术**（wrapping arithmetic）：溢出时静默环绕（`255u8 + 1 = 0`）。但它与原始类型 `T` 是不同的类型，不能直接混用运算。正确：`Wrapping(255u8) + Wrapping(1u8)` 或 `a.0 + b`（解包后）。Rust 的整数默认使用 panic-on-overflow（debug 模式）或 wrapping（release 模式）。`Wrapping` 显式选择环绕语义，适用于哈希、密码学、游戏循环等场景。这与 C 的"始终环绕"（UB 仅在 signed overflow）或 Swift 的"默认 panic"不同——Rust 显式区分了两种语义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] · [来源: [Rust Reference — Integer Overflow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#overflow)]
+
+
+> [来源: [Unicode Standard 15.0](https://www.unicode.org/versions/Unicode15.0.0/)]
+
+
+> [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]
+
+
+> [来源: [ISO/IEC 10646 — UCS](https://www.iso.org/standard/76835.html)]

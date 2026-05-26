@@ -702,3 +702,9 @@ fn main() {
 ```
 
 > **修正**: `#![no_std]` 禁用标准库，但可通过 `extern crate alloc` 使用 `Vec`、`String`、`Box` 等堆分配类型。**必须**提供全局分配器：1) 使用 `linked_list_allocator`（简单链表分配器）；2) 使用 `embedded-alloc`（Cortex-M 的 TLSF 分配器）；3) 自定义分配器（实现 `GlobalAlloc` trait）。裸机环境无操作系统提供的堆，需手动管理内存区域（定义 `.bss` 或特定 RAM 区域为堆）。`#[global_allocator]` 标记静态分配器实例。这与 C 的 `malloc`（依赖 libc 或自定义实现）或 FreeRTOS 的 `pvPortMalloc`（RTOS 提供）类似——Rust 的 `alloc` crate 提供标准接口，但底层分配器需嵌入式开发者提供。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/)] · [来源: [alloc crate](https://doc.rust-lang.org/alloc/index.html)]
+
+
+> [来源: [ISO/IEC 9899:2018 — C Standard](https://www.iso.org/standard/74528.html)]
+
+
+> [来源: [ARM Architecture Reference Manual](https://developer.arm.com/documentation/ddi0487/latest/)]

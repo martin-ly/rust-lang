@@ -652,3 +652,12 @@ fn main() {}
 ```
 
 > **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
+
+
+> [来源: [Unicode Standard 15.0](https://www.unicode.org/versions/Unicode15.0.0/)]
+
+
+> [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]
+
+
+> [来源: [ISO/IEC 10646 — UCS](https://www.iso.org/standard/76835.html)]

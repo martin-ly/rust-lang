@@ -900,3 +900,9 @@ fn main() {
 ```
 
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
+
+
+> [来源: [Structural Operational Semantics — Plotkin](https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf)]
+
+
+> [来源: [The Formal Semantics of Programming Languages — Winskel](https://mitpress.mit.edu/9780262731034/)]

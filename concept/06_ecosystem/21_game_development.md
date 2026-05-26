@@ -634,3 +634,6 @@ fn create_render_pipeline(device: &wgpu::Device) {
 ```
 
 > **修正**: WGPU 是 Rust 的跨平台图形 API（WebGPU 标准的实现），抽象了 Vulkan、Metal、DX12、OpenGL、WebGL。但不同后端的能力不同：1) WebGL2 不支持计算着色器（compute shaders）；2) 旧 GPU 不支持 Vulkan 的某些扩展；3) 某些纹理格式在特定平台上不可用。WGPU 在**适配器创建**时报告能力（`adapter.limits()`、`adapter.features()`），但着色器编译时的错误可能晚于预期。安全模式：1) 运行时检查 `device.features()` 和 `device.limits()`；2) 提供降级着色器（如 compute 的 CPU fallback）；3) 使用 `wgpu::ShaderSource::Glsl` 或 `SpirV` 替代 WGSL（若后端支持更好）。这与 Unity 的 shader variants（自动选择平台特定着色器）或 Unreal 的 RHI（Render Hardware Interface，类似 WGPU）类似——跨平台图形编程的核心挑战是能力差异管理。[来源: [WGPU Documentation](https://docs.rs/wgpu/)] · [来源: [WebGPU Standard](https://www.w3.org/TR/webgpu/)]
+
+
+> [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]

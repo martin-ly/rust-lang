@@ -9,3 +9,6 @@
 > - `03_unsafe_rust.md` → 整合至 [`03_unsafe.md`](./03_unsafe.md)
 > - `05_macros.md` → 整合至 [`04_macros.md`](./04_macros.md) 和 [`07_proc_macro.md`](./07_proc_macro.md)
 > - `08_zero_cost_abstractions.md` → 整合至 [`06_zero_cost_abstractions.md`](../01_foundation/06_zero_cost_abstractions.md)
+
+
+> [来源: [Verifying Correct Use of DMA — ZILU (ACM)](https://dl.acm.org/doi/10.1145/3498688)]

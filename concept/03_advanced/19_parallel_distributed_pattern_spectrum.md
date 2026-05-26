@@ -53,7 +53,6 @@ L4: 广域网/边缘
 
 ### 2.2 统一分析框架
 
-
 所有并行/分布式模式都可以通过四个维度分析：
 
 | 维度 | 说明 | 线程池 | Actor | Raft | CRDT |
@@ -68,7 +67,6 @@ L4: 广域网/边缘
 ## 三、L1 单机共享内存模式
 
 ### 3.1 线程池模式
-
 
 ```rust
 use rayon::ThreadPoolBuilder;
@@ -97,7 +95,6 @@ pool.spawn(|| {
 | 适用场景 | CPU 密集型 | IO 密集型 / 需要隔离的场景 |
 
 ### 3.2 Fork-Join 模式
-
 
 ```rust
 use rayon::prelude::*;
@@ -129,7 +126,6 @@ fn parallel_sum_v2(data: &[i32]) -> i32 {
 
 ### 3.3 无锁数据结构
 
-
 ```rust
 use crossbeam::queue::ArrayQueue;
 
@@ -156,7 +152,6 @@ let value = queue.pop();
 ## 四、L2 单机消息传递模式
 
 ### 4.1 Actor 模型
-
 
 ```rust
 use actix::prelude::*;
@@ -203,7 +198,6 @@ impl Handler<Increment> for Counter {
 
 ### 4.2 CSP（Communicating Sequential Processes）
 
-
 ```rust
 use std::sync::mpsc;
 use std::thread;
@@ -239,7 +233,6 @@ for received in rx { // 接收消息
 
 ### 4.3 数据流与背压（Backpressure）
 
-
 ```rust
 use tokio::sync::mpsc;
 
@@ -267,7 +260,6 @@ while let Some(value) = rx.recv().await {
 
 ### 5.1 共识算法：Raft
 
-
 ```rust
 // Raft 的核心状态机（简化概念模型）
 enum NodeState {
@@ -292,7 +284,6 @@ Raft 是 **CP 系统**（Consistency + Partition tolerance，牺牲 Availability
 - 保证强一致性（线性一致性）
 
 ### 5.2 Gossip 协议
-
 
 Gossip 协议是 **AP 系统**（Availability + Partition tolerance，牺牲 Consistency）：
 
@@ -358,7 +349,6 @@ CRDT 必须满足:
 
 ### 6.1 从并发到分布式的统一连续体
 
-
 并行与分布式计算的区别不是二元的，而是连续谱系：
 
 ```text
@@ -373,7 +363,6 @@ CRDT 必须满足:
 ```
 
 ### 6.2 一致性谱系
-
 
 ```text
 一致性强度谱系（从强到弱）:
@@ -654,3 +643,21 @@ fn main() {}
 ```
 
 > **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
+
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
+> [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
+> [来源: [Rayon Documentation](https://docs.rs/rayon/)]
+> [来源: [Crossbeam Documentation](https://docs.rs/crossbeam/)]
+> [来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> [来源: [async-std Documentation](https://docs.rs/async-std/)]
+> [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
+> [来源: [Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
+> [来源: [Data Parallelism in Rust](https://doc.rust-lang.org/book/ch16-02-message-passing.html)]
+> [来源: [Rust RFC — Send and Sync](https://rust-lang.github.io/rfcs/0458-send-sync.html)]
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+> [来源: [Pinning in Rust](https://doc.rust-lang.org/std/pin/index.html)]
+> [来源: [Futures and Async](https://rust-lang.github.io/async-book/)]
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
+> [来源: [Effective Rust](https://www.lurklurk.org/effective-rust/)]

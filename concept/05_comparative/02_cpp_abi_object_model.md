@@ -688,3 +688,9 @@ fn main() {
 > [来源: [The Rust Reference — ABI](https://doc.rust-lang.org/reference/items/external-blocks.html#abi)]
 > [来源: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]
 > [来源: [Microsoft C++ ABI](https://docs.microsoft.com/en-us/cpp/build/x64-calling-convention)]
+
+
+> [来源: [ISO/IEC 14882:2020 — C++ Standard](https://www.iso.org/standard/83626.html)]
+
+
+> [来源: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]

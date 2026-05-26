@@ -1014,3 +1014,6 @@ enum AssetState {
 - [网络协议](./38_network_protocols.md) — QUIC、UDP、序列化
 - [嵌入式系统](./22_embedded_systems.md) — `#![no_std]`、资源受限
 - [架构设计模式](./35_architecture_patterns.md) — 分层/六边形架构
+
+
+> [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]

@@ -650,3 +650,6 @@ fn main() {}
 ```
 
 > **修正**: Raft 的**快照机制**：领导者将状态机快照发送给慢跟随者，跟随者丢弃所有日志，用快照替代。风险：1) 快照安装期间，旧领导者的日志追加可能与新领导者冲突；2) 快照分片传输时，部分日志丢失；3) 快照过大导致网络拥塞。Rust 实现（`raft-rs`、`openraft`）：1) 快照分段传输；2) 预投票（PreVote）防止 term 无限递增；3) 成员变更使用 joint consensus。这与 Paxos（无显式快照机制，依赖状态机复制）或 ZooKeeper（ZAB 协议，类似 Raft 但有不同快照策略）不同——Raft 的设计目标是可理解性，但工业实现仍需处理大量边界情况。[来源: [Raft Paper](https://raft.github.io/raft.pdf)] · [来源: [openraft](https://docs.rs/openraft/)]
+
+
+> [来源: [CAP Twelve Years Later — Brewer](https://sites.cs.ucsb.edu/~rich/class/cs293b-cloud/papers/brewer-cap.pdf)]

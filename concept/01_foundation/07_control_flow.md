@@ -682,3 +682,6 @@ fn main() {
 ```
 
 > **修正**: `match` 的**模式守卫**（pattern guard，`if` 条件）在绑定后执行，但守卫中的借用可能与后续臂冲突。`ref` 关键字创建引用绑定（`&T` 而非 `T`），避免 move。`ref mut` 创建可变引用绑定。模式守卫的限制：1) 守卫中不能引入新绑定；2) 守卫中的变量是引用而非值（若使用 `ref`）；3) 守卫不移动值，但若守卫失败，后续臂可能获得 move 绑定。这与 Haskell 的 `case` guard（类似，但 Haskell 是惰性求值，守卫语义不同）或 Scala 的 `match` with `if` guard（类似，但无所有权影响）不同——Rust 的模式守卫需考虑所有权和借用的交互。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)] · [来源: [Rust Reference — Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)]
+
+
+> [来源: [C++ ISO/IEC 14882:2020](https://www.iso.org/standard/83626.html)]

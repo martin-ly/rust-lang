@@ -740,3 +740,9 @@ fn undefined_behavior() {
 - [NLL 与 Polonius](../03_advanced/08_nll_and_polonius.md) — 借用检查演进
 - [形式化验证](../04_formal/05_verification_toolchain.md) — Kani、Prusti、MIRI
 - [工具链](../06_ecosystem/01_toolchain.md) — Cargo、编译器标志、目标平台
+
+
+> [来源: [LLVM Compiler Infrastructure](https://llvm.org/)]
+
+
+> [来源: [The Dragon Book — Aho et al.](https://dl.acm.org/doi/book/10.5555/1177220)]

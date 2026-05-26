@@ -1216,3 +1216,12 @@ fn main() {
 ```
 
 > **修正**: 函数参数传递默认是**按值移动**（move）：`String` 等不实现 `Copy` 的类型，传入函数后原变量失效。若需保留原变量：1) **返回所有权**：`fn process(s: String) -> String`（C++ 的风格，但 Rust 中更常用引用）；2) **借用**：`fn process(s: &String)` 或 `fn process(s: &mut String)`；3) **clone**：`process(s.clone())`（显式深拷贝）。Rust 的所有权规则使 API 设计更明确：函数签名即文档——`fn foo(s: String)` 消费 `s`，`fn foo(s: &String)` 只读借用，`fn foo(s: &mut String)` 可变借用。这与 C++ 的 const 引用参数（`void foo(const string& s)`，类似 Rust 的 `&String`）或 Java 的对象传递（总是引用传递，无所有权概念）不同——Rust 的参数类型直接反映所有权语义。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)]
+
+
+> [来源: [RustBelt — POPL 2018 (ACM)](https://dl.acm.org/doi/10.1145/3158154)]
+
+
+> [来源: [Linear Logic — Stanford Encyclopedia](https://plato.stanford.edu/entries/logic-linear/)]
+
+
+> [来源: [Ownership Types — Clarke et al. (ECOOP)](https://dl.acm.org/doi/10.5555/1097042)]

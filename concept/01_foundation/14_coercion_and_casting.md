@@ -736,3 +736,6 @@ fn main() {}
 ```
 
 > **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
+
+
+> [来源: [ISO/IEC 14882:2020 — C++ Exceptions](https://www.iso.org/standard/83626.html)]

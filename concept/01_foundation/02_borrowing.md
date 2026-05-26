@@ -1331,3 +1331,12 @@ fn main() {
 ```
 
 > **修正**: `slice::split_at_mut` 是标准库提供的**安全分割**：将可变 slice 分为两个不重叠的可变引用。编译器允许，因为 `split_at_mut` 内部使用 `unsafe` 和指针算术，但对外暴露安全接口。直接使用索引借用：`&mut v[0..2]` 和 `&mut v[2..4]` 在某些情况下可能被 NLL 保守拒绝——因为编译器不分析索引表达式的值是否重叠。Polonius（下一代借用检查器）可能放松此类限制。安全模式：使用 `split_at_mut`、`chunks_mut`、`windows` 等标准库方法，而非手动索引分割。这与 C 的数组（无借用检查，完全信任程序员）或 Swift 的 ArraySlice（类似，但无编译期互斥保证）不同——Rust 的标准库方法封装了经过验证的 unsafe 操作，提供安全抽象。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
+
+
+> [来源: [RustBelt — POPL 2018 (ACM)](https://dl.acm.org/doi/10.1145/3158154)]
+
+
+> [来源: [Linear Logic — Stanford Encyclopedia](https://plato.stanford.edu/entries/logic-linear/)]
+
+
+> [来源: [Ownership Types — Clarke et al. (ECOOP)](https://dl.acm.org/doi/10.5555/1097042)]

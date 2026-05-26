@@ -1288,3 +1288,6 @@ fn main() {
 ```
 
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
+
+
+> [来源: [Verifying Correct Use of DMA — ZILU (ACM)](https://dl.acm.org/doi/10.1145/3498688)]

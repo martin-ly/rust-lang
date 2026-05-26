@@ -781,3 +781,15 @@ fn weak_hash_password(password: &str) -> String {
 - [内存管理](../02_intermediate/03_memory_management.md) — 密钥材料的内存管理
 - [并发编程](../03_advanced/01_concurrency.md) — 密码学操作的线程安全
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 密码学实现的形式化证明
+
+
+> [来源: [NIST FIPS 197 — AES](https://csrc.nist.gov/pubs/fips/197/final)]
+
+
+> [来源: [NIST FIPS 180-4 — SHA](https://csrc.nist.gov/pubs/fips/180-4/final)]
+
+
+> [来源: [RFC 8446 — TLS 1.3](https://datatracker.ietf.org/doc/html/rfc8446)]
+
+
+> [来源: [ISO/IEC 19790 — Cryptographic Modules](https://www.iso.org/standard/72515.html)]

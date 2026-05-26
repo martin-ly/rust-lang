@@ -2099,3 +2099,6 @@ fn main() {}
 ```
 
 > **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。
+
+
+> [来源: [ISO/IEC TR 24772 — Memory Safety](https://www.iso.org/standard/71091.html)]

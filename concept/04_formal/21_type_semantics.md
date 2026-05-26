@@ -725,3 +725,6 @@ fn pinned_self_ref() {
 - [Trait 系统](../02_intermediate/01_traits.md) — 类型类的 Rust 表达
 - [泛型系统](../02_intermediate/02_generics.md) — 参数多态与约束
 - [RustBelt 与验证工具链](./04_rustbelt.md) — 高阶幽灵状态、验证工具生态
+
+
+> [来源: [Types and Programming Languages — Pierce](https://www.cis.upenn.edu/~bcpierce/tapl/)]

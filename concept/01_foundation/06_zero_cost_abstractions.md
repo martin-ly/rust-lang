@@ -628,3 +628,6 @@ fn main() {
 ```
 
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
+
+
+> [来源: [C++ ISO/IEC 14882:2020](https://www.iso.org/standard/83626.html)]

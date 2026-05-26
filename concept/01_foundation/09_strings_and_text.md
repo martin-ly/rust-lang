@@ -593,3 +593,12 @@ fn main() {
 ```
 
 > **修正**: `String::from_utf8` 将 `Vec<u8>` 转为 `String`，要求严格 UTF-8。无效序列时：1) `unwrap()` → panic；2) `from_utf8_lossy` → 用 `U+FFFD`（�）替换无效字节，返回 `Cow<'_, str>`；3) `from_utf8` 返回 `Result<String, FromUtf8Error>`，可恢复原始 `Vec`。`String::from_utf8` 的所有权语义：成功时消耗 `Vec<u8>`（无额外分配），失败时返回 `Err` 包含原始 `Vec`。这与 `str::from_utf8`（`&[u8]` → `&str`，不消耗输入）或 Python 的 `bytes.decode('utf-8', errors='replace')` 类似——Rust 提供严格转换和损失转换两种选择。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
+
+
+> [来源: [Unicode Standard 15.0](https://www.unicode.org/versions/Unicode15.0.0/)]
+
+
+> [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]
+
+
+> [来源: [ISO/IEC 10646 — UCS](https://www.iso.org/standard/76835.html)]

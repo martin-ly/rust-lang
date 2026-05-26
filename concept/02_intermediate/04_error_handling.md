@@ -2682,3 +2682,6 @@ fn main() {
 ```
 
 > **修正**: 手动 `map_err` 的错误链：每一步失败只保留当前上下文，丢失之前的信息。`anyhow` 的 `Context` trait 解决：`file.open("config.txt").context("failed to open config")?` — 自动累积上下文，生成错误链。`thiserror` 的 `#[source]` 字段保留原始错误。错误链的设计：1) **底层错误**（`io::Error`）→ 原始原因；2) **中间层**（`context`）→ 操作描述；3) **顶层** → 用户友好消息。这与 Go 的 `fmt.Errorf("%w", err)`（错误包装，Go 1.13+）或 Java 的 `Exception(String msg, Throwable cause)`（异常链）类似——Rust 的错误处理生态提供了类型安全和可读性的平衡。[来源: [anyhow](https://docs.rs/anyhow/)] · [来源: [thiserror](https://docs.rs/thiserror/)]
+
+
+> [来源: [ISO/IEC TR 24772 — Memory Safety](https://www.iso.org/standard/71091.html)]

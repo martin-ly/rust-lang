@@ -328,5 +328,7 @@ fn open_resource_fixed(url: &str) -> Result<Resource, Error> {
 > [来源: [Tock OS](https://tockos.org/documentation/)]
 > [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 > [来源: [Rust OSDev Wiki](https://wiki.osdev.org/Rust)]
+> [来源: [Hubris OS](https://hubris.oxide.computer/)]
+> [来源: [Theseus OS — Rust OS Research](https://theseus-os.github.io/Theseus/book/)]
 
 ---

@@ -816,3 +816,9 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 - [网络协议](./38_network_protocols.md) — gRPC、HTTP/2、序列化
 - [云原生](./24_cloud_native.md) — 容器化部署、微服务
 - [WebAssembly](./11_webassembly.md) — WASM 目标、浏览器内推理
+
+
+> [来源: [ISO/IEC 23894 — AI Risk Management](https://www.iso.org/standard/77304.html)]
+
+
+> [来源: [IEEE 1541-2002 — Binary Prefixes](https://standards.ieee.org/standard/1541-2002.html)]

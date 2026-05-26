@@ -1423,3 +1423,9 @@ fn main() {
 ```
 
 > **修正**: `std::sync::mpsc`（multiple producer, single consumer）的设计：`Sender` 可克隆（多生产者），`Receiver` **不可克隆**（单消费者）。多消费者需求：1) `crossbeam::channel` — 支持多生产者/多消费者；2) `tokio::sync::broadcast` — 广播通道（一发送多接收）；3) `bus` crate — 多消费者广播；4) `Mutex<mpsc::Receiver>` — 用锁包装 Receiver（性能差）。`mpsc` 的选择：1) `std::sync::mpsc` — 标准库，但功能有限；2) `crossbeam::channel` — 性能更好，功能更丰富；3) `flume` — 兼容 sync/async 的通道。这与 Go 的 channel（可多个 goroutine 接收，但值只被一个接收）或 Erlang 的消息邮箱（每个进程一个邮箱，无共享接收）不同——Rust 的通道设计明确区分生产者和消费者角色。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-02-message-passing.html)] · [来源: [crossbeam-channel](https://docs.rs/crossbeam-channel/)]
+
+
+> [来源: [The Art of Multiprocessor Programming — Herlihy & Shavit](https://dl.acm.org/doi/book/10.5555/2385452)]
+
+
+> [来源: [Java Memory Model — Manson et al. (POPL 2005)](https://dl.acm.org/doi/10.1145/1047659.1040336)]
