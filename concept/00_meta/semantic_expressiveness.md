@@ -199,7 +199,6 @@ graph LR
 ## 三、D1 计算表达力（Computational Expressiveness）
 >
 
-
 ### 3.1 核心问题
 
 Rust 能计算什么？常量求值的边界在哪？编译期计算与运行时计算的界限如何划分？
@@ -280,7 +279,6 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
 
 ## 四、D2 类型表达力（Type Expressiveness）
 >
-
 
 ### 4.1 核心问题
 
@@ -376,7 +374,6 @@ Rust 削减:
 ## 五、D3 控制流表达力（Control Flow Expressiveness）
 >
 
-
 ### 5.1 核心问题
 
 Rust 如何表达计算的控制结构？从结构化控制到异常处理到异步到生成器，控制流的表达能力如何分层？
@@ -464,7 +461,6 @@ Rust 如何表达计算的控制结构？从结构化控制到异常处理到异
 
 ## 六、D4 内存与资源表达力（Memory & Resource Expressiveness）
 >
-
 
 ### 6.1 核心问题
 
@@ -570,7 +566,6 @@ A ⊸ B            fn(T) -> U —— 消耗 T 产生 U
 ## 七、D5 并发与并行表达力（Concurrency & Parallelism Expressiveness）
 >
 
-
 ### 7.1 核心问题
 
 Rust 如何表达并发和并行？从共享状态到消息传递到数据并行，Rust 的并发模型覆盖了哪些范式、排除了哪些范式？
@@ -674,7 +669,6 @@ unsafe impl Sync for MyType {}   // MyType 可跨线程共享引用（&MyType: S
 ## 八、D6 抽象与组合表达力（Abstraction & Composition Expressiveness）
 >
 
-
 ### 8.1 核心问题
 
 Rust 如何组合代码、隐藏实现细节、创建可复用抽象？从函数到模块到 trait 到宏，抽象机制的表达能力如何分层？
@@ -763,7 +757,6 @@ Rust 的宏系统分为两层：
 
 ## 九、D7 安全边界表达力（Safety Boundary Expressiveness）
 >
-
 
 ### 9.1 核心问题
 
@@ -1034,9 +1027,14 @@ mindmap
       不保证终止
 ```
 
-> **认知功能**: 此 mindmap 是七维表达力光谱的**放射式紧凑视图**。与正文中逐项展开的矩阵和雷达图形成互补——mindmap 适合「快速回顾」场景，读者可在 10 秒内扫视全部七个维度及其核心边界特征，建立整体认知锚点。关键认知：每个维度都同时标注了「Rust 能做到什么」和「Rust 刻意不做什么」，这种「能力 + 边界」的双面标注是 Rust 设计哲学的缩影——不是追求表达力的最大化，而是追求「有纪律的表达力」。 [来源: 💡 原创分析]
-
-> **思维表征说明**: 此 `mindmap` 是七维光谱的**放射式紧凑视图**——与正文中逐项展开的矩阵和雷达图形成互补。mindmap 适合「快速回顾」场景：读者可在 10 秒内扫视全部七个维度及其核心边界特征，建立整体认知锚点，然后根据需要深入对应章节。 [来源: Tony Buzan, *The Mind Map Book*; 双编码理论 — Paivio 1986]
+> **认知功能**: 此 mindmap 是七维表达力光谱的**放射式紧凑视图**。
+> 与正文中逐项展开的矩阵和雷达图形成互补——mindmap 适合「快速回顾」场景，读者可在 10 秒内扫视全部七个维度及其核心边界特征，建立整体认知锚点。
+> 关键认知：每个维度都同时标注了「Rust 能做到什么」和「Rust 刻意不做什么」，这种「能力 + 边界」的双面标注是 Rust 设计哲学的缩影
+> ——不是追求表达力的最大化，而是追求「有纪律的表达力」。
+> [来源: 💡 原创分析]
+> **思维表征说明**: 此 `mindmap` 是七维光谱的**放射式紧凑视图**——与正文中逐项展开的矩阵和雷达图形成互补。
+> mindmap 适合「快速回顾」场景：读者可在 10 秒内扫视全部七个维度及其核心边界特征，建立整体认知锚点，然后根据需要深入对应章节。
+> [来源: Tony Buzan, *The Mind Map Book*; 双编码理论 — Paivio 1986]
 
 ---
 
@@ -1058,5 +1056,4 @@ mindmap
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 > [来源: [Rust Benchmarking with Criterion](https://bheisler.github.io/criterion.rs/book/)]
-
 > [来源: [Rust Fuzz Book](https://rust-fuzz.github.io/book/)]

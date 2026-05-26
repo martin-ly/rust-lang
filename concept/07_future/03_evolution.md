@@ -22,6 +22,7 @@
 $entry
 - v1.1 (2026-05-12): Wave 3 扩展——补充定义、关键趋势、Edition 机制、RFC 流程、演进路线图、官方来源
 - v1.2 (2026-05-14): 补充完整 Edition 变更清单（2015→2018→2021→2024）、Edition 与 rustc 版本解耦、`cargo fix --edition` 自动迁移机制、跨 Edition 代码示例、未来 Edition 方向（2027+）
+- v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [来源: Web Authority Alignment Sprint]
 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 Project Goals 2026 年度旗舰目标（Polonius Alpha、Safety-Critical Rust、cargo-script）、Effects 系统 `gen<yield>` 跟踪、Ferrocene ASIL B/SIL 2 认证动态
 
 ---
@@ -1185,3 +1186,73 @@ fn fixed() {
 ```
 
 > **修正**: `let-else`（Rust 1.65 稳定）是模式匹配的语法糖，允许在绑定失败时执行发散代码块（`return`、`break`、`panic!`）。它简化了"提取值，否则退出"的常见模式，避免了 `match` 或 `if let` 的嵌套。这与 Swift 的 `guard let` 或 Kotlin 的 `?: return` 类似，但 Rust 的版本更通用——支持任意模式（不仅是 `Some`），且 else 块必须是发散的（否则编译错误）。这是 Rust 语法演进中"减少样板代码，但不牺牲显式性"的典范。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+---
+
+## 六、Rust 2026 Project Goals 旗舰目标详解
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]** Rust 项目每年定义旗舰级工作方向，2026 年聚焦四大主题：超越引用、灵活编译、高阶抽象、Trait 解放。
+
+2025H2 项目目标周期已结束，41 个 Project Goals 中 13 个为旗舰目标。以下从**形式模型影响**维度解析四大旗舰方向及其对 Rust 语义空间的结构性扩展。
+
+### 6.1 旗舰一：Beyond the `&`（超越引用）
+
+**核心命题**：解决 Rust 中最顽固的借用系统痛点——`Pin` 的人机工程学、`&mut` 的字段投影限制、以及重新借用（reborrow）的隐式复杂性。
+
+| 子目标 | 状态 | 形式模型意义 |
+|:---|:---|:---|
+| **Pin Ergonomics** | 实验阶段 | `Pin<&mut T>` 的自引用场景（如异步状态机）需要显式 `unsafe` 解包；新设计旨在用类型系统自动证明"不会移动"，消除手动 `unsafe` |
+| **Field Projections** | 设计中 | 允许 `&mut self.field` 在更复杂的嵌套结构中自动重新借用，减少生命周期标注；本质是**别名分析的局部精确化** |
+| **Reborrow Traits** | RFC 阶段 | 将重新借用规则从编译器硬编码提升为 trait 系统的一部分，使自定义智能指针也能享受 `&mut` 的自动重借语义 |
+
+> **关键洞察**: "Beyond the `&`" 标志着 Rust 类型系统从"编译器内置规则"向"用户可扩展规则"演进。如果成功，`Pin` 将成为普通库类型（而非魔法类型），字段投影将支持用户自定义逻辑——这类似于 C++ 的 `operator->` 但更类型安全。[来源: [Rust Project Goals 2026 — Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+
+### 6.2 旗舰二：Flexible, fast(er) compilation（灵活快速编译）
+
+**核心命题**：打破 rustc 的单体编译模型，实现模块化、并行化、可替换后端。
+
+| 子目标 | 状态 | 形式模型意义 |
+|:---|:---|:---|
+| **build-std** | nightly 推进 | 允许自定义编译 `core`/`std`；为嵌入式和形式化验证提供"可剪裁的标准库" |
+| **Cranelift Backend** | 接近生产就绪 | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时分发的边界** |
+| **Parallel Frontend** | 实现中 | 并行解析和类型检查；对 trait solver 的并发安全提出新要求 |
+| **Relink don't Rebuild** | 设计阶段 | 增量链接优化；通过精确依赖追踪减少全量重编译 |
+
+> **关键洞察**: Cranelift backend 的成功将改变 Rust 的工具链格局——debug 构建用 Cranelift（快），release 构建用 LLVM（优）。这要求 Rust 的中间表示（MIR）成为**真正的后端无关规范**，为形式化验证工具（如 Kani、Miri）提供统一的语义锚点。[来源: [Rust Project Goals 2026 — Compilation](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+
+### 6.3 旗舰三：Higher-level Rust（高阶 Rust）
+
+**核心命题**：降低高级抽象的门槛，使 `Arc`/`Rc` 克隆、闭包捕获等常见模式更自然。
+
+| 子目标 | 状态 | 形式模型意义 |
+|:---|:---|:---|
+| **Ergonomic Ref-counting** | RFC 决策中 | 自动识别"廉价克隆"类型（如 `Arc<T>`），允许闭包自动克隆而非移动；本质是**所有权语义的效果推断** |
+| **cargo-script stable** | 1.85+ 已稳定 | 单文件 Rust 脚本（`cargo +nightly -Zscript` 的前身），降低原型开发门槛 |
+
+> **关键洞察**: Ergonomic ref-counting 是 Rust 向"更高表达力"演进的关键一步。如果编译器能自动推断"这个类型应该克隆而非移动"，则 Rust 的类型系统实际上在进行**轻量级效果推断**——这是 Effects 系统（§6.4）的简化预览。[来源: [Rust Project Goals 2026 — Higher-level Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+
+### 6.4 旗舰四：Unblocking Dormant Traits（释放沉睡 Trait）
+
+**核心命题**：解决长期阻塞的类型系统特性——specialization、trait solver 性能、Polonius 借用检查。
+
+| 子目标 | 状态 | 形式模型意义 |
+|:---|:---|:---|
+| **Next-gen Trait Solver** | 逐步替换旧 solver | 新 solver（基于 chalk/SLG）支持更复杂的关联类型推理；对形式化可判定性边界有影响 |
+| **Stabilizable Polonius** | nightly 评估 | 基于数据流分析的借用检查，替代当前的基于区域的算法；解决 NLL 无法处理的复杂借用模式 |
+| **In-place Initialization** | 设计中 | 允许未初始化内存的安全使用（如 `Box::new_uninit` 的泛化）；扩展 Rust 的**初始化语义** |
+| **Evolving Trait Hierarchies** | 长期研究 | 允许 trait 添加默认方法而不破坏下游实现；涉及**行为子类型的向后兼容理论** |
+
+> **关键洞察**: Polonius 的 stabilizable 支持是 Rust 借用检查器的第二代核心算法。与第一代（基于作用域）和 NLL（基于数据流点）相比，Polonius 使用**关系代数**表达借用关系，理论上更精确但计算成本更高。其稳定化将解决当前大量 "lifetime too short" 的误报，但也可能引入新的 soundness 边界——这是形式化验证社区密切关注的焦点。[来源: [Polonius README](https://github.com/rust-lang/polonius)] · [来源: [Rust Project Goals 2026 — Dormant Traits](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)]
+
+### 6.5 其他值得关注的 2026 目标
+
+| 目标 | 领域 | 形式模型意义 |
+|:---|:---|:---|
+| **C++/Rust Interop Problem Space Mapping** | FFI | 系统梳理 C++ 与 Rust 的语义鸿沟，为自动化绑定生成（如 `autocxx`、`cxx`）提供理论基础 |
+| **Unsafe Fields** | Unsafe 边界 | 允许字段级 `unsafe` 标注，精确到字段而非整个结构体；细化 Rust 的**安全契约粒度** |
+| **Const Generics 完善** | 编译期计算 | `generic_const_exprs` 和 `const_trait_impl` 的稳定化，使编译期计算 Turing-complete |
+| **MemorySanitizer / ThreadSanitizer** | 运行时安全 | 将 MSan/TSan 支持稳定化，与 Miri 形成"静态+动态"的 UB 检测双保险 |
+| **Rust Vision Document** | 语言哲学 | 社区驱动的 Rust 长期愿景文档，定义 2030 年的 Rust 应该是什么样 |
+| **SVE / SME on AArch64** | 平台扩展 | 可伸缩向量扩展（SVE）和矩阵扩展（SME）的 Rust 绑定；高性能计算的新前沿 |
+
+> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Cranelift Documentation](https://cranelift.dev/) · [Rust Internals Forum](https://internals.rust-lang.org/)

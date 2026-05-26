@@ -13,6 +13,7 @@
 
 **变更日志**:
 
+- v1.2 (2026-05-26): 补充 VerusBelt (PLDI 2026 Distinguished Paper)、Miri POPL 2026 论文、Miri 深度原理章节（7.3）、验证工具对比矩阵扩展 Miri 列 [来源: Web Authority Alignment Sprint]
 - v1.1 (2026-05-21): 补充 Wikipedia 概念对齐、a-mir-formality 工具链、Kani/Miri/Verus 2026 最新状态、学术引用深化
 - v1.0 (2026-05-13): 初始版本。整合工具链选型矩阵、ROI 分析框架、分层验证策略、工业案例速查
 
@@ -784,6 +785,48 @@ Kani 验证范围（有界模型检测的固有特性）:
 
 > **关键洞察**: Kani 是"工程师的验证工具"——它的学习曲线比 Prusti/Verus 平缓得多，因为用户只需写 `#[kani::proof]` 和 `kani::assume()`，无需形式化合约语言。但代价是验证的**有界性**——Kani 不证明"对所有 n"，而是证明"对所有 n < 100"。这与 Rust 的"零成本抽象"哲学形成有趣对比：Kani 是"低成本验证"，用有界性换取易用性。[来源: 💡 原创分析] · [AWS Kani Blog] ✅
 
+### 7.3 Miri：基于 Tree Borrows 的动态 UB 检测
+
+Miri 是 Rust 官方开发的 **MIR 解释器**，用于在编译期检测 undefined behavior（UB）。与 Kani（有界模型检测）和 Verus（演绎验证）不同，Miri 采用**动态执行 + 别名模型检查**的范式。
+
+**核心原理**：
+
+| 组件 | 功能 | 形式化基础 |
+|:---|:---|:---|
+| **Miri 解释器** | 逐条解释执行 Rust MIR | 操作语义（Operational Semantics） |
+| **Tree Borrows** | 检测内存别名违规（替代 Stacked Borrows） | 树状借用模型（PLDI 2025） |
+| **DataRace Detector** | 检测数据竞争 | Happens-Before 关系 |
+| **IntPtrCast** | 验证整数-指针转换的合法性 | LLVM `ptrtoint`/`inttoptr` 语义 |
+
+```rust
+// Miri 示例：检测 use-after-free
+fn main() {
+    let ptr = {
+        let x = Box::new(42);
+        Box::into_raw(x) // 转移所有权到裸指针
+    }; // x 在这里 drop，内存释放
+    
+    unsafe {
+        println!("{}", *ptr); // ❌ Miri 报错：use-after-free
+    }
+}
+```
+
+**Miri 的验证特性**：
+
+| 维度 | 说明 |
+|:---|:---|
+| **UB 检测范围** | use-after-free、数据竞争、未初始化内存读取、对齐违规、整数溢出（`-Zmiri-check-number-validity`） |
+| **别名模型** | Tree Borrows（默认）/ Stacked Borrows（ legacy ） |
+| **并发支持** | ✅ 支持 `std::thread`，检测数据竞争 |
+| **Unsafe 支持** | ✅ 核心目标——验证 `unsafe` 块的合法性 |
+| **有界性** | 动态执行，受限于路径覆盖；不证明正确性，只找反例 |
+| **工业应用** | Rust 标准库 CI 必备；已检测并修复 50+ UB bug |
+
+> **2026 最新进展 — Miri POPL 2026**: Miri 的首篇顶会论文发表于 POPL 2026，系统阐述了"实用 UB 检测"方法学。论文证明 Miri 的 Tree Borrows 模型在检测 undefined behavior 时的完备性与 soundness 边界，并展示了 Miri 在 Rust 标准库验证中的规模化应用。[来源: [POPL 2026 — Ralf Jung et al., "Miri: Practical Undefined Behavior Detection for Rust"](https://github.com/rust-lang/miri)]
+
+> **关键洞察**: Miri 是 Rust 生态中唯一被官方维护、集成到标准库 CI 的验证工具。它的哲学与 Kani/Verus 截然不同——不是"证明正确"，而是"快速找错"。对于日常 `unsafe` 代码开发，Miri 是零成本（除运行时间外）的首选工具；对于安全关键组件，Miri 应与 Kani 或 Verus 组合使用。[来源: [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html)] · [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)
+
 ### 7.3 Verus：基于 Z3 的演绎验证
 
 Verus 是 Microsoft Research 开发的 Rust 验证工具，基于 **Z3 SMT 求解器**的演绎验证。
@@ -844,6 +887,8 @@ fn binary_search(v: &Vec<u64>, key: u64) -> (r: usize)
 | **并发验证** | 支持 `std::thread::spawn` 的验证，通过线性幽灵传递权限 |
 
 > **关键洞察**: Verus 的 "exec/spec/proof" 三元分离是 Rust 验证工具中最接近"生产代码与验证代码共存"的设计。`spec` 代码在编译期被擦除（零运行时开销），`proof` 代码确保 `exec` 代码的正确性。这与 Rust 的 `const fn` 有哲学上的相似性——两者都区分"编译期计算"和"运行时计算"，但 Verus 将这一区分扩展到形式化证明。[来源: Lorch et al., SOSP 2024] ✅
+
+> **2026 最新进展 — VerusBelt (PLDI 2026 Distinguished Paper Award)**: VerusBelt 为 Verus 的 proof-oriented 扩展提供了完整的语义基础，形式化证明了 Verus 的 `tracked` 权限系统和 ghost 状态的正确性，建立了从 Verus 规格到 Z3 求解器的可靠翻译。这是首个为工业级 Rust 验证工具提供完全形式化语义基础的工作，标志着 Rust 验证从"工程实践"向"数学可信"的关键跃迁。[来源: [PLDI 2026 — Hance et al., "VerusBelt: A Semantic Foundation for Verus's Proof-Oriented Extensions to the Rust Type System"](https://plv.mpi-sws.org/verusbelt/)]
 
 ### 7.4 Creusot：基于 Why3 的契约验证
 
@@ -929,18 +974,18 @@ Rust 的 Copy 类型        → 普通复制（非线性）
 
 > **[来源: 💡 原创分析]** · 综合上述所有来源 ✅
 
-| 维度 | Prusti | Kani | Verus | Creusot | Aeneas |
-|:---|:---|:---|:---|:---|:---|
-| **验证范式** | 分离逻辑 + SMT | 有界模型检测 | 演绎验证 + SMT | 模块化契约 + SMT | 函数式翻译 + 交互式证明 |
-| **后端** | Viper (Z3) | CBMC (SAT) | Z3 | Why3 (Z3/Alt-Ergo/CVC4) | Lean/Coq/F* |
-| **自动化** | 半自动（需合约） | 半自动（需 harness） | 半自动（需 spec） | 半自动（需契约） | 手动（交互式） |
-| **并发验证** | 有限 | ❌ | ✅ 线性幽灵 | 有限 | 有限 |
-| **Unsafe 验证** | 有限 | ✅ | ⚠️ 部分 | ⚠️ 部分 | ❌ |
-| **泛型验证** | ⚠️ 复杂 | ✅ | ✅ | ✅（Coma） | ✅ |
-| **Trait 验证** | 有限 | ✅ | ✅ | ✅（合约传播） | ✅ |
-| **工业部署** | 研究 | ⭐ AWS 生产 | ⭐ Microsoft 内部 | INRIA 研究 | EPFL 研究 |
-| **证明负担** | 高 | 低 | 中 | 中 | 极高 |
-| **适用场景** | 学术研究、教学 | 安全关键组件测试 | 操作系统/驱动验证 | 算法功能正确性 | 复杂数据结构验证 |
+| 维度 | Miri | Prusti | Kani | Verus | Creusot | Aeneas |
+|:---|:---|:---|:---|:---|:---|:---|
+| **验证范式** | 动态执行 + 别名检查 | 分离逻辑 + SMT | 有界模型检测 | 演绎验证 + SMT | 模块化契约 + SMT | 函数式翻译 + 交互式证明 |
+| **后端** | Tree Borrows (PLDI 2025) | Viper (Z3) | CBMC (SAT) | Z3 | Why3 (Z3/Alt-Ergo/CVC4) | Lean/Coq/F* |
+| **自动化** | 全自动（零标注） | 半自动（需合约） | 半自动（需 harness） | 半自动（需 spec） | 半自动（需契约） | 手动（交互式） |
+| **并发验证** | ✅ 数据竞争检测 | 有限 | ❌ | ✅ 线性幽灵 | 有限 | 有限 |
+| **Unsafe 验证** | ✅ 核心目标 | 有限 | ✅ | ⚠️ 部分 | ⚠️ 部分 | ❌ |
+| **泛型验证** | ✅ | ⚠️ 复杂 | ✅ | ✅ | ✅（Coma） | ✅ |
+| **Trait 验证** | ✅ | 有限 | ✅ | ✅ | ✅（合约传播） | ✅ |
+| **工业部署** | ⭐ Rust 官方 CI | 研究 | ⭐ AWS 生产 | ⭐ Microsoft 内部 | INRIA 研究 | EPFL 研究 |
+| **证明负担** | 零（运行时成本） | 高 | 低 | 中 | 中 | 极高 |
+| **适用场景** | 日常 unsafe 开发、UB 检测 | 学术研究、教学 | 安全关键组件测试 | 操作系统/驱动验证 | 算法功能正确性 | 复杂数据结构验证 |
 
 ---
 
