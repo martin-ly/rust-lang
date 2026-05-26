@@ -870,6 +870,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 | v1.18 | 2026-05-26 | 权威内容对齐 R18：① Rust Foundation 加入包注册表可持续性联盟（应对 AI 流量/bot 攻击/治理碎片化） [来源: Rust Foundation 2026-05-06]；② Rust Project 首次 Outreachy 参与（4 名实习生：C++ 互操作/编译器覆盖率/a-mir-formality fuzzing/GA 安全） [来源: Rust Blog 2026-05-04]
 | v1.19 | 2026-05-26 | 权威内容对齐 R19：安全公告全景补充——① CVE-2026-5222 完善（影响 Cargo 1.68–1.95）；② RUSTSEC-2026-0149 wasmtime-wasi FilePerms 绕过；③ RUSTSEC-2026-0141 lettre TLS 主机名验证失效（CVSS 9.1 Critical）；④ CVE-2026-25727 `time` crate DoS [来源: Rust Security Advisory 2026-05; rustsec.org]
 | v1.20 | 2026-05-26 | 权威内容对齐 R22：学术论文补充——① Miri POPL 2026（已有，确认引用）；② Rusted Types ICSE 2026（类型混淆静态检测）；③ SmartC2Rust ICSE 2026（LLM C→Rust 翻译）；④ Android AOSP FSE 2026（Rust 集成实证）；⑤ Cargo Scan ESOP 2026（大规模 crate 审计） [来源: POPL/ICSE/FSE/ESOP 2026]
+| v1.21 | 2026-05-26 | 权威内容对齐 R20+R21：① Crate 生态动态（sqlx 0.9.0 MSRV 1.94、tokio 1.52.2/1.52.3 安全修复、reqwest aws-lc-rs FIPS、arrow-rs 整数溢出修复）；② Rust for Linux 进展（Linux 7.1-rc5、NOVA 驱动 6.15、DRM Rust Mandate ~2026-12） [来源: crate releases; kernel.org]
 
 ---
 

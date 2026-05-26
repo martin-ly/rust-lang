@@ -194,6 +194,17 @@ graph TD
 
 > **来源**: [Discord Blog — Rust at Discord] · [Cloudflare Blog] · [AWS Firecracker] · 可信度: ✅
 
+**2026 年 5 月生态动态**:
+
+| **Crate** | **版本/事件** | **影响** | **来源** |
+|:---|:---|:---|:---|
+| **sqlx** | **0.9.0** (2026-05-06) | 重大版本：新 `sqlx.toml` 配置格式、MSRV 提升至 1.94.0、仓库移交 `transact-rs` 组织、SQLite/MySQL/PostgreSQL 重大变更 | [sqlx CHANGELOG](https://docs.rs/crate/sqlx/latest/source/CHANGELOG.md) |
+| **tokio** | **1.52.2/1.52.3** (2026-05-04/08) | 回退 LIFO slot stealing（性能退化）、修复 mpsc channel underflow、`RwLock` max_readers 验证 | [tokio releases](https://github.com/tokio-rs/tokio/releases) |
+| **reqwest** | **0.13.3** (2026-05) | TLS 后端迁移至 `aws-lc-rs`，为 FIPS 140-3 合规奠定基础 | [reqwest releases](https://github.com/seanmonstar/reqwest/releases) |
+| **arrow-rs** | **58.3.0 + 补丁** (2026-05-07) | 多处整数溢出修复（`BufferBuilder`、`ArrayData::slice`、`FixedSizeBinaryArray`） | [arrow-rs releases](https://github.com/apache/arrow-rs/releases) |
+
+> **关键洞察**: sqlx 0.9.0 的 MSRV 提升至 1.94.0 反映了 Rust 生态的**快速演进压力**——核心基础设施 crate 的 MSRV 提升会迫使下游项目跟进，否则被锁定在旧版本。这与 Go 的向后兼容性承诺（Go 1 兼容性保证）形成对比：Rust 的快速语言演进带来了表达力优势，但也增加了生态维护负担。tokio 的 LIFO slot stealing 回退则展示了**生产环境性能回归的敏感性**——即使在最流行的异步运行时中，看似微小的调度策略变更也可能引发大规模性能问题。[来源: 💡 原创分析]
+
 ### 4.2 CLI 工具
 >
 
@@ -332,9 +343,11 @@ Rust 在区块链领域占据**主导地位**的原因：
 - 2022: Linux 5.14 合并实验支持
 - 2024: Android Binder 驱动 Rust 实现
 - 2025+: 更多子系统（GPU、存储、网络）采用 Rust
-- **2026: Rust for Linux 进入 Rust Project Goals 官方轨道**，编译器特性和语言特性双线推进
+- **2026-01: Rust 成为 Linux 内核核心非实验语言**，标志着从"实验特性"到"一等公民"的正式转变
+- **2026-05: Linux 7.1-rc5** 中 Rust 代码继续增长，NOVA 开源 NVIDIA GPU 驱动（RTX 2000+，GSP-only）已合入内核 6.15
+- **2026-05: DRM 子系统计划要求新驱动使用 Rust**（Dave Airlie，目标 ~2026-12）
 
-**2026 关键进展（Rust Project Goals 跟踪）**：
+**2026 关键进展（Rust Project Goals 跟踪）：**
 
 | 特性 | 状态 | 对内核的意义 |
 |:---|:---|:---|
