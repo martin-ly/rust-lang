@@ -315,18 +315,3 @@ async fn fixed_udp2(socket: &UdpSocket) {
 > **修正**: Tokio 的 `UdpSocket` 严格区分"已连接"和"未连接"模式。`connect` 后必须使用 `send`/`recv`（无需地址），未连接时必须使用 `send_to`/`recv_from`（需显式地址）。这是操作系统 UDP socket API 的 Rust 类型安全封装——编译器通过 API 设计阻止非法调用，而非运行时返回错误。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ---
-
-
-> [来源: [RFC 2616 — HTTP/1.1](https://datatracker.ietf.org/doc/html/rfc2616)]
-
-
-> [来源: [RFC 7540 — HTTP/2](https://datatracker.ietf.org/doc/html/rfc7540)]
-
-
-> [来源: [RFC 9000 — QUIC](https://datatracker.ietf.org/doc/html/rfc9000)]
-
-
-> [来源: [RFC 8446 — TLS 1.3](https://datatracker.ietf.org/doc/html/rfc8446)]
-
-
-> [来源: [IEEE 802.3 — Ethernet](https://standards.ieee.org/standard/802.3-2022.html)]

@@ -13,9 +13,3 @@
 - [公理语义](./20_axiomatic_semantics.md) — Hoare 逻辑、 weakest precondition
 - [类型语义](./21_type_semantics.md) — Progress & Preservation
 - [形式化验证工具](../06_ecosystem/47_formal_verification_tools.md) — Kani、Prusti、Creusot
-
-
-> [来源: [Separation Logic — Reynolds (LICS 2002)](https://dl.acm.org/doi/10.1109/LICS.2002.1029817)]
-
-
-> [来源: [Iris — Jung et al. (POPL 2018)](https://dl.acm.org/doi/10.1145/3158154)]

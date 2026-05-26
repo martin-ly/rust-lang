@@ -116,6 +116,7 @@
     - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
     - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
+  - [参考来源](#参考来源)
 
 ## 〇、认知路径（Cognitive Path）
 
@@ -2210,7 +2211,6 @@ help: alloc232 was deallocated here:
 ```
 
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
-[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
 >
 #### 场景 2：无效值检测（非法 bool 构造）
@@ -2236,7 +2236,6 @@ error: Undefined Behavior: constructing invalid value of type bool:
 ```
 
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
-[来源: [Tokio Docs](https://tokio.rs/)]
 
 >
 #### 场景 3：async 状态机中的未初始化内存
@@ -2269,7 +2268,6 @@ warning: the type `bool` does not permit being left uninitialized
 ```
 
 > **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
-[来源: [TRPL](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
 
 >
 #### Miri 与 async 状态机的特殊关联
@@ -2864,5 +2862,14 @@ fn main() {}
 
 > **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`#[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/)]
 
+## 参考来源
 
-> [来源: [Verifying Correct Use of DMA — ZILU (ACM)](https://dl.acm.org/doi/10.1145/3498688)]
+> [来源: [Rust Reference — Async/Await](https://doc.rust-lang.org/reference/expressions/await-expr.html)]
+
+> [来源: [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async-await.html)]
+
+> [来源: [RFC 3185 — Static Async Fn](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html)]
+
+> [来源: [Tokio Documentation](https://tokio.rs/)]
+
+> [来源: [async-std crate](https://docs.rs/async-std/)]

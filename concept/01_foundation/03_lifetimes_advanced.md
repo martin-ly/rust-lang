@@ -1228,12 +1228,3 @@ fn main() {
 ```
 
 > **修正**: `for<'a> Fn(&'a str) -> &'a str` 要求闭包对**所有**生命周期 `'a` 都返回与输入相同生命周期的引用。`|s| &s[0..1]` 中 `s` 是 `&str`（输入引用），`&s[0..1]` 的生命周期与 `s` 相同，这在闭包内部成立。但 `call_with_ref` 的问题在于 `s` 在 `call_with_ref` 内部创建，如果闭包尝试返回比 `s` 活得更长的引用，编译器会拒绝。更常见的 HRTB 失败模式：期望 `for<'a> Fn(&'a str)` 但传入 `Fn(&'static str)`——后者只接受静态生命周期，不满足"所有生命周期"。HRTB 是 Rust 类型系统的强大特性，但也是闭包与 trait 交互时的常见陷阱。[来源: [Rust Reference — Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]
-
-
-> [来源: [RustBelt — POPL 2018 (ACM)](https://dl.acm.org/doi/10.1145/3158154)]
-
-
-> [来源: [Linear Logic — Stanford Encyclopedia](https://plato.stanford.edu/entries/logic-linear/)]
-
-
-> [来源: [Ownership Types — Clarke et al. (ECOOP)](https://dl.acm.org/doi/10.5555/1097042)]

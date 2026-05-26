@@ -1,4 +1,5 @@
 # 并发 模式：从消息 传递到锁自由的数据结构
+>
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析并发模式的设计意图
@@ -16,31 +17,31 @@
 
 ## 📑 目录
 >
->
 
- [并发 \模式：从消息 \传递到锁自由的数据结构](#并发)
+- [并发 模式：从消息 传递到锁自由的数据结构](#并发-模式从消息-传递到锁自由的数据结构)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-  - [1.1 所有权与并发的统一](#11-所有权与并发的统一)
-  - [1.2 Send 与 Sync：编译期并发安全](#12-send-与-sync编译期并发安全)
-  - [1.3 共享状态 vs 消息传递](#13-共享状态-vs-消息传递)
+    - [1.1 所有权与并发的统一](#11-所有权与并发的统一)
+    - [1.2 Send 与 Sync：编译期并发安全](#12-send-与-sync编译期并发安全)
+    - [1.3 共享状态 vs 消息传递](#13-共享状态-vs-消息传递)
   - [二、技术细节](#二技术细节)
-  - [2.1 通道模式](#21-通道模式)
-  - [2.2 无锁数据结构](#22-无锁数据结构)
-  - [2.3 内存顺序](#23-内存顺序)
+    - [2.1 通道模式](#21-通道模式)
+    - [2.2 无锁数据结构](#22-无锁数据结构)
+    - [2.3 内存顺序](#23-内存顺序)
   - [三、并发模式矩阵](#三并发模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
-  - [4.1 反命题树](#41-反命题树)
-  - [4.2 边界极限](#42-边界极限)
+    - [4.1 反命题树](#41-反命题树)
+    - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
-  - [编译错误示例](#编译错误示例)
-  - [4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）](#44-边界测试scopedthread-中引用逃逸编译错误)
-  - [4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）](#45-边界测试condvar-虚假唤醒未处理逻辑错误)
+    - [编译错误示例](#编译错误示例)
+    - [4.4 边界测试：`ScopedThread` 中引用逃逸（编译错误）](#44-边界测试scopedthread-中引用逃逸编译错误)
+    - [4.5 边界测试：`Condvar` 虚假唤醒未处理（逻辑错误）](#45-边界测试condvar-虚假唤醒未处理逻辑错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
-  - [10.3 边界测试：`crossbeam::channel` 的关闭检测与迭代终止（逻辑错误）](#103-边界测试crossbeamchannel-的关闭检测与迭代终止逻辑错误)
-  - [10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）](#104-边界测试sendsync-的-auto-trait-边界与线程安全编译错误)
+    - [10.3 边界测试：`crossbeam::channel` 的关闭检测与迭代终止（逻辑错误）](#103-边界测试crossbeamchannel-的关闭检测与迭代终止逻辑错误)
+    - [10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）](#104-边界测试sendsync-的-auto-trait-边界与线程安全编译错误)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -649,64 +650,9 @@ fn fixed() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 ### 10.3 边界测试：`crossbeam::channel` 的关闭检测与迭代终止（逻辑错误）
 
@@ -747,8 +693,12 @@ fn main() {
 
 > **修正**: **`Send`** 和 **`Sync`** 是 auto trait：1) `Send` — 类型可安全转移到其他线程；2) `Sync` — 类型可安全被多线程共享引用（`&T` 是 `Send`）；3) `Rc<T>` 既不是 `Send` 也不是 `Sync`（引用计数非原子）。线程安全替代：1) `Arc<T>` — 原子引用计数，实现 `Send + Sync`（若 `T: Send + Sync`）；2) `Mutex<T>` / `RwLock<T>` — 互斥访问；3) `mpsc` / `crossbeam` channel — 消息传递。自定义类型的线程安全：1) 包含 `Send` 字段 → 自动 `Send`；2) 包含 `Rc` / `Cell` / `RefCell` → 自动 `!Send`；3) 可 `unsafe impl Send for MyType {}`（需手动保证）。这与 Go 的 goroutine（所有数据可共享，通过 channel 或 mutex 协调）或 Java 的 `synchronized`（所有对象有 monitor，编译器不检查线程安全）不同——Rust 的 `Send`/`Sync` 是编译期线程安全检查。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)]
 
+## 参考来源
 
-> [来源: [The Art of Multiprocessor Programming — Herlihy & Shavit](https://dl.acm.org/doi/book/10.5555/2385452)]
+> [来源: [Tokio Concurrency Primitives](https://tokio.rs/tokio/tutorial/shared-state)]
 
+> [来源: [Rustonomicon — Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)]
 
-> [来源: [Java Memory Model — Manson et al. (POPL 2005)](https://dl.acm.org/doi/10.1145/1047659.1040336)]
+> [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
+
+> [来源: [RFC 0458 — Send and Sync](https://rust-lang.github.io/rfcs/0458-send-sync.html)]

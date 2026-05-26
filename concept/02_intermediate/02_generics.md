@@ -132,6 +132,7 @@
     - [12.7 边界测试：泛型 trait bound 传递失败（编译错误）](#127-边界测试泛型-trait-bound-传递失败编译错误)
     - [10.5 边界测试：泛型约束的传递性与 trait bound 推导（编译错误）](#105-边界测试泛型约束的传递性与-trait-bound-推导编译错误)
     - [10.6 边界测试：const generic 的默认参数与数组大小推断（编译错误）](#106-边界测试const-generic-的默认参数与数组大小推断编译错误)
+  - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
 
@@ -646,8 +647,6 @@ fn padded_array<T: Default + Copy, const N: usize>() -> [T; { N + 4 }] {
 }
 ```
 
-[来源: Rust Reference: Const Generics]
-
 然而，上述表达式能力仅限于**简单算术**和**字面量组合**。更复杂的类型级计算（如条件分支、递归常量函数结果作为类型参数、关联类型作为常量参数）需要 `generic_const_exprs` 不稳定特性：[来源: RFC 2920 — generic_const_exprs]
 
 ```rust,ignore
@@ -680,8 +679,6 @@ impl<T, const N: usize> Matrix<T, N, N> {
 | 关联类型作为 const 参数 | `Foo<{ <T as Trait>::CONST }>` | ❌ 需 `generic_const_exprs` |
 | 类型级条件分支 | `impl<T> Foo for Bar where [(); N - 1]: Sized` | ❌ 需 `generic_const_exprs` |
 | 递归 const fn 驱动类型构造 | `const fn fib(n: usize) -> usize` | ⚠️ `const fn` 稳定，复杂递归受限 |
-
-[来源: Rust Reference: Const Generics] [来源: RFC 2920 — generic_const_exprs]
 
 > **L4 映射**: `generic_const_exprs` 将 Const Generics 从"常量值的类型参数化"扩展为"类型级计算"，对应依赖类型理论中 **索引类型（Indexed Types）** 的有限形式。但与完整依赖类型（如 Coq、Idris）不同，Rust 的常量表达式必须在编译期完全求值，且不能依赖运行时信息。详见 [L4 形式化验证](../04_formal/04_rustbelt.md) §2 "索引类型与依赖类型的边界"。
 
@@ -717,8 +714,6 @@ where
 
 `where [T; N]: Sized` 的语义是：**对于所有满足约束的 T 和 N，数组 [T; N] 必须是 Sized 的**。虽然数组默认就是 Sized，但此约束在更复杂的场景（如泛型关联类型、条件实现）中是必要的显式契约。
 
-[来源: Rust Reference: Where Clauses]
-
 更进阶的用法是利用 `where` 子句实现**类型级条件实现（Type-level Conditional Impl）**，这是类型状态机的基础：
 
 ```rust
@@ -742,8 +737,6 @@ where
 
 > **⚠️ 注意**: 上述 `[(); N - 1]: Sized` 技巧依赖 `generic_const_exprs`，且编译器错误信息晦涩（E0080 常量求值失败）。工程实践中应谨慎使用，优先通过枚举或运行时检查处理条件逻辑。
 
-[来源: Rust Reference: Const Evaluation] [来源: Tracking Issue #76560]
-
 #### 5.7.3 默认 const generic 参数
 
 const generics 支持默认值，省略时自动填充（1.59+）：[来源: Rust Reference: Generic Parameters]
@@ -766,8 +759,6 @@ impl<T: Default + Copy, const N: usize> Array<T, N> {
     }
 }
 ```
-
-[来源: Rust Reference: Generic Parameters]
 
 #### 5.7.4 与 const fn 协同：编译期计算
 
@@ -812,8 +803,6 @@ impl<T: Default, const CAP: usize> RingBuffer<T, CAP> {
 type RingBuffer256<T> = RingBuffer<T, 256>;
 ```
 
-[来源: Rust Reference: Const Functions] [来源: 原创分析]
-
 #### 5.7.5 Const Generics 与泛型关联类型的交互
 
 Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：[来源: RFC 2000 / RFC 1598]
@@ -838,8 +827,6 @@ impl<T: Copy, const N: usize> Row<N> for Matrix<T, N, N> {
     type Output = [T; N];  // 方阵的主对角线
 }
 ```
-
-[来源: RFC 1598 — Generic Associated Types]
 
 更深入的交互体现在**类型级状态机**中：const generic 参数可作为编译期计数器，驱动状态转换的类型约束：
 
@@ -878,8 +865,6 @@ fn main() {
     // s2.advance();           // ❌ 编译错误: State<2> 没有 advance 方法
 }
 ```
-
-[来源: 原创分析] [来源: Rust Reference: Const Generics]
 
 > **跨层映射**: 类型状态机的编译期保证 ↔ [L3 异步状态机](../03_advanced/02_async.md) §3 "async/await 状态转换" 的运行时状态机形成对比：前者将状态合法性证明推至编译期，后者在运行时管理状态。Const Generics 的类型状态机是**零运行时开销**的，所有状态转换在类型层面完成验证。
 
@@ -949,8 +934,6 @@ fn main() {
 }
 ```
 
-[来源: RFC 2000 — Const Generics] [来源: 原创分析]
-
 > **工程洞察**: 固定大小数组的数学运算库（如 `nalgebra`、`cgmath`）在 Const Generics 稳定前依赖 `typenum`（见 §9.4）进行类型级维度编码，导致编译时间膨胀和错误信息晦涩。Const Generics 将此能力原生化，编译器可直接报告 "expected `Vector<f64, 3>`, found `Vector<f64, 4>`" 而非 typenum 的二进制编码类型错配。
 
 #### 5.7.7 与 C++ 模板非类型参数的对比
@@ -968,8 +951,6 @@ C++ 模板自 C++98 起支持非类型模板参数（NTTP, Non-Type Template Par
 | **浮点支持** | ❌ 不支持（NaN 不可全序比较） | ✅ C++20 起支持 |
 | **字符串支持** | ❌ 不支持 | ✅ C++20 起支持字面量类类型 |
 | **编译期调试** | `const_evaluatable_checked`（不稳定） | `static_assert`、`concept` 约束失败 |
-
-[来源: RFC 2000 — Const Generics] [来源: C++ Reference: Non-type template parameter] [来源: 原创分析]
 
 **核心差异的语义根源**: [来源: RFC 2000 — Const Generics]
 
@@ -991,8 +972,6 @@ std::array<T, N + 1> foo(std::array<T, N> arr) {
     // SFINAE 可用于提前排除无效实例
 }
 ```
-
-[来源: RFC 2000 — Const Generics] [来源: C++20 Standard: Concepts]
 
 **C++ Concepts 与 Rust where 子句的对比**:
 
@@ -1033,8 +1012,6 @@ impl<T, const N: usize> RingBuffer<T, N> {
     }
 }
 ```
-
-[来源: RFC 2000] [来源: Rust Reference: Constant Evaluation]
 
 > **关键洞察**: C++ 模板的"文本替换"语义赋予其更强的编译期元编程能力（如 Boost.MPL、Boost.Fusion），但代价是错误信息晦涩和类型安全边界模糊。Rust 的 Const Generics 刻意限制为"类型系统内的常量参数化"，通过两阶段类型检查换取错误信息的清晰性和类型安全的可判定性。这体现了 Rust 的设计哲学：**表达能力与可维护性的权衡中，偏向后者**。
 
@@ -2437,5 +2414,12 @@ fn main() {
 
 > **修正**: `const generic` 默认值（`const N: usize = 1024`）在 Rust 1.59+ 支持，但**类型推断**有限：编译器不能从 `data: [0; 512]` 推断 `Buffer` 的 `N = 512`（数组大小是表达式，不直接关联到类型参数）。修复：1) 显式标注类型：`Buffer<512>`；2) 构造函数：`Buffer::new()` 返回 `Buffer<1024>`（默认）；3) `From` trait：`[u8; 512].into()` → `Buffer<512>`。`const generic` 的应用：1) 固定大小数组包装；2) 类型级维度（矩阵 `[T; M * N]`）；3) 编译期配置（缓冲区大小、哈希表容量）。这与 C++ 的非类型模板参数（`template<size_t N>`，推断更灵活）或 Ada 的泛型（类似，但语法不同）不同——Rust 的 const generic 保守但类型安全。[来源: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
+## 参考来源
 
-> [来源: [Type Classes in Haskell — Wadler & Blott (POPL)](https://dl.acm.org/doi/10.1145/75277.75283)]
+> [来源: [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs/0195-associated-items.html)]
+
+> [来源: [RFC 0448 — Associated Types](https://rust-lang.github.io/rfcs/0448-associated-types.html)]
+
+> [来源: [JFP 2023 — Rust Generic Type System](https://www.cambridge.org/core/journals/journal-of-functional-programming)]
+
+> [来源: [Rust Reference — Type Parameters](https://doc.rust-lang.org/reference/items/generics.html)]

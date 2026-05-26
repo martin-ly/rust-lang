@@ -1,4 +1,5 @@
 # Newtype 与包装器模式：类型安全的零成本抽象
+>
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时开销。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Trait](./01_traits.md) · [Generics](./02_generics.md)
@@ -13,29 +14,33 @@
 >
 
  [Newtype \ 与包装器模式：类型安全的零成本抽象](#newtype)
+
+- [Newtype 与包装器模式：类型安全的零成本抽象](#newtype-与包装器模式类型安全的零成本抽象)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-  - [1.1 Newtype 模式的本质](#11-newtype-模式的本质)
-  - [1.2 单位类型与物理量](#12-单位类型与物理量)
-  - [1.3 与类型别名（type alias）的区别](#13-与类型别名type-alias的区别)
+    - [1.1 Newtype 模式的本质](#11-newtype-模式的本质)
+    - [1.2 单位类型与物理量](#12-单位类型与物理量)
+    - [1.3 与类型别名（type alias）的区别](#13-与类型别名type-alias的区别)
   - [二、技术细节](#二技术细节)
-  - [2.1 Deref 与自动解引用](#21-deref-与自动解引用)
-  - [2.2 孤儿规则与 Newtype](#22-孤儿规则与-newtype)
-  - [2.3 包装器类型谱系](#23-包装器类型谱系)
+    - [2.1 Deref 与自动解引用](#21-deref-与自动解引用)
+    - [2.2 孤儿规则与 Newtype](#22-孤儿规则与-newtype)
+    - [2.3 包装器类型谱系](#23-包装器类型谱系)
   - [三、设计模式矩阵](#三设计模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
-  - [4.1 反命题树](#41-反命题树)
-  - [4.2 边界极限](#42-边界极限)
+    - [4.1 反命题树](#41-反命题树)
+    - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：Newtype 与包装器的编译错误](#十边界测试newtype-与包装器的编译错误)
-  - [10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）](#101-边界测试newtype-不继承原类型的-trait编译错误)
-  - [10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时 UB）](#102-边界测试phantomdata-的协变逆变误用编译错误--运行时-ub)
-  - [10.3 边界测试：newtype 的 derive 限制（编译错误）](#103-边界测试newtype-的-derive-限制编译错误)
-  - [10.4 边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）](#104-边界测试deref-滥用导致的隐式转换陷阱编译错误逻辑错误)
-  - [10.5 边界测试：newtype 的 `Deref` 过度使用导致的方法名冲突（编译错误/逻辑错误）](#105-边界测试newtype-的-deref-过度使用导致的方法名冲突编译错误逻辑错误)
+    - [10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）](#101-边界测试newtype-不继承原类型的-trait编译错误)
+    - [10.2 边界测试：PhantomData 的协变/逆变误用（编译错误 / 运行时 UB）](#102-边界测试phantomdata-的协变逆变误用编译错误--运行时-ub)
+    - [10.3 边界测试：newtype 的 derive 限制（编译错误）](#103-边界测试newtype-的-derive-限制编译错误)
+    - [10.4 边界测试：`Deref` 滥用导致的隐式转换陷阱（编译错误/逻辑错误）](#104-边界测试deref-滥用导致的隐式转换陷阱编译错误逻辑错误)
+    - [10.5 边界测试：newtype 的 `Deref` 过度使用导致的方法名冲突（编译错误/逻辑错误）](#105-边界测试newtype-的-deref-过度使用导致的方法名冲突编译错误逻辑错误)
+    - [10.4 边界测试：newtype 与 `Deref` 的方法解析冲突（编译错误/设计反模式）](#104-边界测试newtype-与-deref-的方法解析冲突编译错误设计反模式)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -476,7 +481,6 @@ graph TD
 
 > **补充来源**
 
-
 ## 十、边界测试：Newtype 与包装器的编译错误
 
 ### 10.1 边界测试：Newtype 不继承原类型的 trait（编译错误）
@@ -631,3 +635,11 @@ fn main() {
 ```
 
 > **修正**: newtype 模式（`struct Meters(u32)`）创建语义不同的类型，但 `Deref` 自动解引用使 newtype 像底层类型一样行为。这导致**方法解析困惑**：`m.saturating_add(50)` 调用 `u32::saturating_add`，而非 `Meters` 的方法（若存在）。设计原则：newtype 用于**类型安全**（防止混淆 Meters 和 Seconds），但 `Deref` 削弱了这一优势。替代方案：1) 不显式实现 `Deref`，只提供必要方法；2) 使用 `From`/`Into` 显式转换；3) 使用 `as_ref()` / `into_inner()` 访问内部值。这与 Haskell 的 `newtype`（无运行时开销，无 Deref 等价物，需显式解包）或 Ada 的派生类型（类似 newtype，无隐式转换）相同——Rust 的 newtype 最纯粹的形式是不实现 `Deref`，完全通过显式 API 交互。[来源: [Newtype Pattern](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+
+## 参考来源
+
+> [来源: [Rust Reference — Newtype Idiom](https://doc.rust-lang.org/reference/types/struct.html)]
+
+> [来源: [RFC 0738 — Variadic](https://rust-lang.github.io/rfcs/0738-variance.html)]
+
+> [来源: [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines/)]

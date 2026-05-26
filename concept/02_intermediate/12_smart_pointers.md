@@ -37,6 +37,8 @@
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
     - [10.3 边界测试：`Pin<&mut Self>` 在 trait 方法中的约束（编译错误）](#103-边界测试pinmut-self-在-trait-方法中的约束编译错误)
+    - [10.4 边界测试：`Arc<RefCell<T>>` 的线程安全幻觉（编译错误）](#104-边界测试arcrefcellt-的线程安全幻觉编译错误)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -591,66 +593,9 @@ fn fixed() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 ### 10.3 边界测试：`Pin<&mut Self>` 在 trait 方法中的约束（编译错误）
 
@@ -692,12 +637,12 @@ fn main() {
     let data = Arc::new(RefCell::new(0));
     let d1 = Arc::clone(&data);
     let d2 = Arc::clone(&data);
-    
+
     // ❌ 编译错误: RefCell 未实现 Sync，不能跨线程共享
     thread::spawn(move || {
         *d1.borrow_mut() += 1;
     });
-    
+
     thread::spawn(move || {
         *d2.borrow_mut() += 1;
     });
@@ -706,5 +651,12 @@ fn main() {
 
 > **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时借用检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统通过 `Send`/`Sync` 在编译期排除不安全的线程共享。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
 
+## 参考来源
 
-> [来源: [ISO/IEC TR 24772 — Memory Safety](https://www.iso.org/standard/71091.html)]
+> [来源: [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html)]
+
+> [来源: [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html)]
+
+> [来源: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)]
+
+> [来源: [Rustonomicon — Rc and Arc](https://doc.rust-lang.org/nomicon/rc-mostly.html)]

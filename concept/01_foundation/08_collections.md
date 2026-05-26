@@ -47,6 +47,7 @@
     - [10.4 边界测试：`HashMap` 的自定义哈希器与 `BuildHasherDefault`（编译错误）](#104-边界测试hashmap-的自定义哈希器与-buildhasherdefault编译错误)
     - [10.3 边界测试：`Vec::drain` 后继续使用原 Vec（编译错误）](#103-边界测试vecdrain-后继续使用原-vec编译错误)
     - [10.4 边界测试：不可变借用与可变借用的冲突](#104-边界测试不可变借用与可变借用的冲突)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -584,5 +585,10 @@ fn main() {
 
 > **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
 
+## 参考来源
 
-> [来源: [C++ ISO/IEC 14882:2020](https://www.iso.org/standard/83626.html)]
+> [来源: [Rustonomicon — Collections](https://doc.rust-lang.org/nomicon/vec/vec.html)]
+
+> [来源: [Rust Reference — Generic Collections](https://doc.rust-lang.org/reference/items/generics.html)]
+
+> [来源: [Algorithmica — Rust Collections](https://en.algorithmica.org/hpc/)]

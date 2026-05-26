@@ -943,9 +943,3 @@ unsafe extern "C" fn touch_isr() {
 ```
 
 > **修正**: **中断服务程序（ISR）必须尽可能短**——在 Cortex-M 中，硬实时要求 ISR 执行时间在微秒级。阻塞 SPI 传输需要数百个时钟周期，若在中断中执行，将延迟所有同级和更低优先级中断。**解决方案**: 1) ISR 中仅设置原子标志；2) 主循环检测到标志后执行 SPI 通信；3) 使用 SPI + DMA，ISR 中启动 DMA，在 DMA 完成中断中处理数据。embassy 框架的 `async` 模型通过 `Future` 和 `Waker` 将中断安全桥接到异步任务。这与 C 的 ISR 尽量短原则一致，但 Rust 的类型系统可帮助确保共享状态的安全访问。[来源: [RTIC Documentation](https://rtic.rs/)] · [来源: [embassy Interrupts](https://embassy.dev/book/#_interrupts)] · [来源: [ARM Cortex-M Interrupt Handling](https://developer.arm.com/documentation/100240/latest/)] · [来源: [Ferrous Systems — Real-Time](https://ferrous-systems.com/)]
-
-
-> [来源: [ISO/IEC 9899:2018 — C Standard](https://www.iso.org/standard/74528.html)]
-
-
-> [来源: [ARM Architecture Reference Manual](https://developer.arm.com/documentation/ddi0487/latest/)]

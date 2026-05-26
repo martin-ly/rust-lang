@@ -802,17 +802,3 @@ pub fn my_xdp(ctx: XdpContext) -> u32 {
 ```
 
 > **修正**: eBPF（extended Berkeley Packet Filter）的**内核验证器**限制：1) **栈大小**：最大 512 字节（所有局部变量总和）；2) **指令数**：最大 100 万条；3) **循环**：需证明有界终止；4) **无 null 解引用**：验证器跟踪指针有效性。Rust 的 eBPF 开发（`aya`、`redbpf`）：1) 使用 `no_std` + 自定义宏（`#[xdp]`、`#[tracepoint]`）；2) `aya-tool` 生成内核类型绑定；3) 用户空间程序用标准 Rust 加载 eBPF 程序。挑战：1) Rust 的 panic handler（eBPF 中 panic 是非法的）；2) 浮点数（eBPF 不支持浮点运算）；3) 全局变量（eBPF 的 map 替代）。这与 C 的 eBPF 开发（libbpf，手动管理）或 Go 的 eBPF（via CGo，性能开销）不同——Rust 的 eBPF 生态（aya）提供类型安全的内核编程。[来源: [aya](https://aya-rs.dev/)] · [来源: [eBPF.io](https://ebpf.io/)]
-
-> [来源: [eBPF.io — What is eBPF](https://ebpf.io/what-is-ebpf/)]
-> [来源: [BPF and XDP Reference Guide](https://docs.cilium.io/en/stable/bpf/)]
-> [来源: [Linux Kernel — BPF Documentation](https://www.kernel.org/doc/html/latest/bpf/)]
-> [来源: [aya-rs Documentation](https://aya-rs.dev/)]
-> [来源: [redbpf GitHub](https://github.com/foniod/redbpf)]
-> [来源: [libbpf Documentation](https://libbpf.readthedocs.io/)]
-> [来源: [Cilium eBPF Guide](https://docs.cilium.io/en/stable/bpf/)]
-> [来源: [IO Visor — BCC Tools](https://iovisor.github.io/bcc/)]
-> [来源: [Falco — Runtime Security](https://falco.org/)]
-> [来源: [Katran — L4 Load Balancer](https://github.com/facebookincubator/katran)]
-> [来源: [eBPF Summit](https://ebpf.io/summit-2023/)]
-> [来源: [BPF CO-RE Reference](https://facebookmicrosites.github.io/bpf/blog/2020/02/19/bpf-portability-and-co-re.html)]
-> [来源: [Rust Reference — FFI](https://doc.rust-lang.org/reference/items/external-blocks.html)]

@@ -820,9 +820,3 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 - [数据库系统](./37_database_systems.md) — 存储引擎、事务、索引
 - [网络协议](./38_network_protocols.md) — HTTP/2、gRPC、对象存储协议
 - [安全与密码学](./43_security_cryptography.md) — 数据加密、合规性
-
-
-> [来源: [ISO/IEC 23894 — AI Risk Management](https://www.iso.org/standard/77304.html)]
-
-
-> [来源: [IEEE 1541-2002 — Binary Prefixes](https://standards.ieee.org/standard/1541-2002.html)]

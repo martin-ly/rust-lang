@@ -280,19 +280,3 @@ impl MemoizedFib {
 > **对应 Rust 版本**: 1.90.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 表征空间坐标系
-
-> [来源: [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)]
-> [来源: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
-> [来源: [Wikipedia — Algorithm](https://en.wikipedia.org/wiki/Algorithm)]
-> [来源: [Wikipedia — Design Pattern](https://en.wikipedia.org/wiki/Software_design_pattern)]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
-> [来源: [Algorithmica](https://en.algorithmica.org/)]
-> [来源: [Competitive Programmer's Handbook](https://cses.fi/book/book.pdf)]
-> [来源: [Grokking Algorithms](https://www.manning.com/books/grokking-algorithms)]
-> [来源: [MIT OpenCourseWare — Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/)]
-> [来源: [arXiv — Quantum Algorithms](https://arxiv.org/list/quant-ph/recent)]
-> [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
-> [来源: [OMG BPMN 2.0](https://www.omg.org/spec/BPMN/2.0/)]
-> [来源: [Petri Nets World](https://www.informatik.uni-hamburg.de/TGI/PetriNets/)]

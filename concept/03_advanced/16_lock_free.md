@@ -38,6 +38,7 @@
     - [10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）](#105-边界测试内存序的-releaseacquire-与数据依赖运行时可见性问题)
     - [10.3 边界测试：ABA 问题与无锁栈的内存安全（运行时 UB）](#103-边界测试aba-问题与无锁栈的内存安全运行时-ub)
     - [10.5 边界测试：返回局部变量的悬垂引用](#105-边界测试返回局部变量的悬垂引用)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -606,11 +607,6 @@ fn main() {
 
 ---
 
-
-
-
-
-
 ### 10.5 边界测试：内存序的 `Release`/`Acquire` 与数据依赖（运行时可见性问题）
 
 ```rust,ignore
@@ -695,3 +691,13 @@ fn main() {}
 ```
 
 > **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。
+
+## 参考来源
+
+> [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
+
+> [来源: [RFC 1543 — Compare and Exchange Weak](https://rust-lang.github.io/rfcs/1543-compare-exchange-weak.html)]
+
+> [来源: [LLVM AtomicRMW](https://llvm.org/docs/LangRef.html#atomicrmw-instruction)]
+
+> [来源: [Lock-free Algorithms — Michael Scott](https://dl.acm.org/doi/10.1145/248052.248106)]

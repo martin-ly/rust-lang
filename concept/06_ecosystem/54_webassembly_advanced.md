@@ -757,12 +757,3 @@ fn main() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-26
 **状态**: ✅ 概念文件创建完成
-
-
-> [来源: [W3C WebAssembly Core Specification](https://www.w3.org/TR/wasm-core-2/)]
-
-
-> [来源: [W3C WebAssembly JS Interface](https://www.w3.org/TR/wasm-js-api-2/)]
-
-
-> [来源: [ECMA-262 — ECMAScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/)]

@@ -39,6 +39,7 @@
     - [10.5 边界测试：`AtomicPtr` 的 `compare_exchange` ABA 问题（运行时逻辑错误）](#105-边界测试atomicptr-的-compare_exchange-aba-问题运行时逻辑错误)
     - [10.3 边界测试：`Relaxed` 顺序与 happens-before 缺失（逻辑错误/UB）](#103-边界测试relaxed-顺序与-happens-before-缺失逻辑错误ub)
     - [10.9 边界测试：match 分支返回类型不一致](#109-边界测试match-分支返回类型不一致)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -764,14 +765,12 @@ fn main() {
 
 > **修正**: **Match 表达式**：1) 所有 arm 必须返回相同类型；2) `Some(n) => n`（`i32`）与 `None => "none"`（`&str`）冲突；3) 解决：统一类型或使用 `Option` 包装。
 
-> [来源: [The Rust Programming Language — Match](https://doc.rust-lang.org/book/ch06-02-match.html)]
-> [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
+## 参考来源
 
+> [来源: [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html)]
 
-> [来源: [ISO/IEC 14882:2020 — C++ Memory Model](https://www.iso.org/standard/83626.html)]
+> [来源: [C++ Memory Model — ISO/IEC 14882](https://www.iso.org/standard/83626.html)]
 
+> [来源: [RFC 1505 — Atomic Ordering](https://rust-lang.github.io/rfcs/1505-ordering-atomic-ops.html)]
 
-> [来源: [ARM Architecture Reference Manual](https://developer.arm.com/documentation/ddi0487/latest/)]
-
-
-> [来源: [RISC-V Instruction Set Manual](https://riscv.org/technical/specifications/)]
+> [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]

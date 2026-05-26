@@ -503,7 +503,6 @@ Stream::poll_next 的语义层级:
   - Stream::next() 返回的 Future 必须被 .await 后才能消费元素
 ```
 
-
 **`Sink` 状态机完整分析**
 
 `Sink` 的四个方法构成严格的状态转换协议。错误的状态序列会导致 panic 或数据丢失：
@@ -549,7 +548,6 @@ where
     Ok(())
 }
 ```
-
 
 **`futures::stream` 与 `tokio_stream` 生态对比**
 
@@ -756,7 +754,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
                 ├── 是 → Pin<Box<dyn Future>> 打破递归
                 └── 否 → impl Future（默认最优路径）
 ```
-
 
 > **交叉链接**: 单态化机制见 [../02_intermediate/02_generics.md](../02_intermediate/02_generics.md) §4.5（泛型单态化与代码膨胀）；trait 对象的内存布局见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §4.3（trait object 与 vtable）。
 
@@ -1019,7 +1016,6 @@ mod tests {
 }
 ```
 
-
 > **Bloom 层级**: 应用 —— 使用 loom 验证并发原语是生产级 Rust 并发编程的标准实践。
 
 > **交叉链接**: 内存序模型见 [../02_intermediate/01_traits.md](../02_intermediate/01_traits.md) §5.4（`Atomic*` 与内存序）；unsafe 边界见 [../03_advanced/03_unsafe.md](../03_advanced/03_unsafe.md) §2（`UnsafeCell` 与内部可变性）。
@@ -1065,7 +1061,6 @@ help: alloc232 was deallocated here:
 ```
 
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
-[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
 >
 #### 场景 2：无效值检测（非法 bool 构造）
@@ -1091,7 +1086,6 @@ error: Undefined Behavior: constructing invalid value of type bool:
 ```
 
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
-[来源: [Tokio Docs](https://tokio.rs/)]
 
 >
 #### 场景 3：async 状态机中的未初始化内存
@@ -1124,7 +1118,6 @@ warning: the type `bool` does not permit being left uninitialized
 ```
 
 > **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
-[来源: [TRPL](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
 
 >
 #### Miri 与 async 状态机的特殊关联
@@ -1289,5 +1282,14 @@ fn main() {
 
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
 
+## 参考来源
 
-> [来源: [Verifying Correct Use of DMA — ZILU (ACM)](https://dl.acm.org/doi/10.1145/3498688)]
+> [来源: [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks)]
+
+> [来源: [RFC 2515 — Pinning](https://rust-lang.github.io/rfcs/2515-pin.html)]
+
+> [来源: [Pin API Documentation](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
+
+> [来源: [Futures crate](https://docs.rs/futures/)]
+
+> [来源: [Tokio Internals](https://tokio.rs/tokio/topics/runtime)]

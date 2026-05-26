@@ -669,12 +669,3 @@ fn main() {
 ```
 
 > **修正**: Rust 的数值转换分三层：1) `From`/`Into`——保证无损转换（`u8::from(5u8)` 合法，`u8::from(1000u32)` 不实现）；2) `TryFrom`/`TryInto`——可能失败，返回 `Result`；3) `as`——强制转换，可能截断/溢出/符号变化，编译期不检查。设计意图：`From` 是"可信转换"，`as` 是"我清楚后果"。`u8::from(x)` 编译错误是因为 `From<u32>` 未为 `u8` 实现。这与 C 的隐式截断（`int` → `char`，静默截断）或 Java 的强制类型转换（`(byte)1000` 截断）不同——Rust 的类型系统区分了"安全但可能失败"和"显式承担风险"两种语义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.From.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
-
-
-> [来源: [Unicode Standard 15.0](https://www.unicode.org/versions/Unicode15.0.0/)]
-
-
-> [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]
-
-
-> [来源: [ISO/IEC 10646 — UCS](https://www.iso.org/standard/76835.html)]

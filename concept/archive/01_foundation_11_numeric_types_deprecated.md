@@ -542,16 +542,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **补充来源**
-
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
-
-
-> [来源: [Unicode Standard 15.0](https://www.unicode.org/versions/Unicode15.0.0/)]
-
-
-> [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]
-
-
-> [来源: [ISO/IEC 10646 — UCS](https://www.iso.org/standard/76835.html)]

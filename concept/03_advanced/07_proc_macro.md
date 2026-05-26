@@ -39,6 +39,7 @@
     - [10.3 边界测试：过程宏的 hygiene 与路径解析（编译错误）](#103-边界测试过程宏的-hygiene-与路径解析编译错误)
     - [10.4 边界测试：proc\_macro 的 TokenStream 与 hygiene 标识符生成（编译错误）](#104-边界测试proc_macro-的-tokenstream-与-hygiene-标识符生成编译错误)
     - [10.6 边界测试：不可变借用与可变借用的冲突](#106-边界测试不可变借用与可变借用的冲突)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -622,3 +623,15 @@ fn main() {
 ```
 
 > **修正**: **借用规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
+
+## 参考来源
+
+> [来源: [RFC 1566 — Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)]
+
+> [来源: [syn crate](https://docs.rs/syn/)]
+
+> [来源: [quote crate](https://docs.rs/quote/)]
+
+> [来源: [proc-macro2 crate](https://docs.rs/proc-macro2/)]
+
+> [来源: [Rust Compiler Development Guide — Proc Macros](https://rustc-dev-guide.rust-lang.org/)]

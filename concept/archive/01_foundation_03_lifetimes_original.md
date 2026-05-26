@@ -2544,12 +2544,3 @@ enum SafeValue {
 
 > **相关判定树**: [生命周期判定树](../00_meta/concept_definition_decision_forest.md#四生命周期判定树)
 > **相关谓词映射**: [生命周期令牌 [α]₁](../00_meta/rustbelt_predicate_map.md#四生命周期令牌-α₁-映射)
-
-
-> [来源: [RustBelt — POPL 2018 (ACM)](https://dl.acm.org/doi/10.1145/3158154)]
-
-
-> [来源: [Linear Logic — Stanford Encyclopedia](https://plato.stanford.edu/entries/logic-linear/)]
-
-
-> [来源: [Ownership Types — Clarke et al. (ECOOP)](https://dl.acm.org/doi/10.5555/1097042)]

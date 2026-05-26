@@ -615,22 +615,3 @@ fn option_j(_: i32) -> Option<i32> { Some(10) }
 ```
 
 > **修正**: `Option`/`Result` 的 `and_then` 嵌套是**组合子模式**，但过度嵌套导致：1) 类型签名膨胀（每个 `and_then` 增加一层泛型）；2) 编译时间增加（类型推导复杂度）；3) 错误信息难读（10 层嵌套的错误链）。Rust 的替代方案：1) **`?` 运算符**：`let a = option_a()?; let b = option_b(a)?; ...`（扁平化，可读性高）；2) **`async`/`await`**：用异步组合替代同步组合子；3) **do-notation 宏**（如 `try_block!`）。这与 Haskell 的 `do` notation（语法糖扁平化 Monad 嵌套）或 Scala 的 `for` comprehension（类似）不同——Rust 的 `?` 运算符是编译器内建的特殊语法，不是通用 Monad 操作，但提供了等价的扁平化能力。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)]
-
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
-> [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
-> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
-> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
-> [来源: [Effective Rust](https://www.lurklurk.org/effective-rust/)]
-> [来源: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)]
-> [来源: [Functor in Rust](https://docs.rs/functor/)]
-> [来源: [Monads in Rust](https://docs.rs/futures/latest/futures/)]
-> [来源: [Iterator Trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html)]
-> [来源: [Option and Result](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)]
-> [来源: [Closures in Rust](https://doc.rust-lang.org/book/ch13-01-closures.html)]
-> [来源: [Type System Reference](https://doc.rust-lang.org/reference/types.html)]
-> [来源: [Generics in Rust](https://doc.rust-lang.org/book/ch10-01-syntax.html)]
-> [来源: [Higher-Ranked Trait Bounds](https://doc.rust-lang.org/nomicon/hrtb.html)]
-> [来源: [Associated Types](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)]
-> [来源: [Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]

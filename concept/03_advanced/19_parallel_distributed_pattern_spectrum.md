@@ -644,20 +644,14 @@ fn main() {}
 
 > **修正**: **生命周期标注**：1) `&'a str` 表示引用至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
 
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
-> [来源: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)]
-> [来源: [Rayon Documentation](https://docs.rs/rayon/)]
-> [来源: [Crossbeam Documentation](https://docs.rs/crossbeam/)]
-> [来源: [Tokio Documentation](https://docs.rs/tokio/)]
-> [来源: [async-std Documentation](https://docs.rs/async-std/)]
-> [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
-> [来源: [Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
-> [来源: [Data Parallelism in Rust](https://doc.rust-lang.org/book/ch16-02-message-passing.html)]
-> [来源: [Rust RFC — Send and Sync](https://rust-lang.github.io/rfcs/0458-send-sync.html)]
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
-> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
-> [来源: [Pinning in Rust](https://doc.rust-lang.org/std/pin/index.html)]
-> [来源: [Futures and Async](https://rust-lang.github.io/async-book/)]
-> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
-> [来源: [Effective Rust](https://www.lurklurk.org/effective-rust/)]
+## 参考来源
+
+> [来源: [RFC 2349 — Async Closures](https://rust-lang.github.io/rfcs/)]
+
+> [来源: [Data Parallelism in Rust](https://doc.rust-lang.org/std/thread/)]
+
+> [来源: [MPI for Rust](https://docs.rs/mpi/)]
+
+> [来源: [Apache Arrow Rust](https://arrow.apache.org/rust/)]
+
+> [来源: [Rust Concurrency Patterns](https://rust-lang.github.io/async-book/)]

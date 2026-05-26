@@ -2056,35 +2056,3 @@ fn main() {
 ```
 
 > **修正**: Rust 的 trait 实现**一致性检查**：1) 无冲突实现（同一类型不能有同一 trait 的两个实现）；2) 孤儿规则（实现者或 trait 定义在当前 crate）；3) 重叠检查（blanket impl 与具体 impl 不能冲突）。C++ 的模板特化：1) 允许任意地方的特化；2) 部分特化（`template<class T> class Foo<T*>`）；3) 特化可能冲突（ODR 违规，链接错误）。Rust 更严格但更安全：编译期排除冲突，无链接期惊喜。替代方案：1) 使用具体类型包装（newtype）；2) 使用 trait object（运行时分发）；3) 使用 `min_specialization`（nightly，限制性子集）。这与 Haskell 的 overlapping instances（可控制重叠）或 Scala 的 implicit resolution（最具体匹配）不同——Rust 宁可拒绝合法程序也不允许冲突。[来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
-
-> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
-> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
-> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
-> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
-> [来源: [Effective Rust](https://www.lurklurk.org/effective-rust/)]
-> [来源: [C++ Reference — RAII](https://en.cppreference.com/w/cpp/language/raii)]
-> [来源: [C++ Reference — Move Semantics](https://en.cppreference.com/w/cpp/language/move_constructor)]
-> [来源: [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)]
-> [来源: [Stroustrup — The C++ Programming Language](https://www.stroustrup.com/4th.html)]
-> [来源: [Meyers — Effective Modern C++](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/)]
-> [来源: [Meyers — Effective C++](https://www.oreilly.com/library/view/effective-c/0321334876/)]
-> [来源: [Rust RFC Book](https://rust-lang.github.io/rfcs/)]
-> [来源: [Rust for Linux](https://rust-for-linux.com/)]
-> [来源: [cxx.rs Documentation](https://cxx.rs/)]
-> [来源: [cbindgen Documentation](https://docs.rs/cbindgen/)]
-> [来源: [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)]
-> [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
-> [来源: [Rustup Documentation](https://rust-lang.github.io/rustup/)]
-> [来源: [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)]
-> [来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/)]
-> [来源: [Unsafe Rust Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
-> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
-> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
-
-
-> [来源: [ISO/IEC 14882:2020 — C++ Standard](https://www.iso.org/standard/83626.html)]
-
-
-> [来源: [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)]

@@ -817,98 +817,9 @@ temp.extend_from_slice(&nums[..]);
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
 
 ## 十、边界测试：算法竞赛的编译错误
 
@@ -1031,14 +942,14 @@ fn main() {
     heap.push(3);
     heap.push(1);
     heap.push(4);
-    
+
     {
         let mut top = heap.peek_mut().unwrap();
         *top = 0; // 修改堆顶
         // ❌ 逻辑错误: 若通过 mem::forget 阻止 drop，堆性质破坏
         // std::mem::forget(top);
     }
-    
+
     assert_eq!(heap.peek(), Some(&0));
 }
 ```

@@ -1383,9 +1383,3 @@ graph TD
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **相关文件**: [能力图谱](../00_meta/competency_graph.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Rust in AI](../07_future/21_rust_in_ai.md)
-
-
-> [来源: [ISO/IEC 23894 — AI Risk Management](https://www.iso.org/standard/77304.html)]
-
-
-> [来源: [IEEE 2857-2024 — LLM Benchmarking](https://standards.ieee.org/standard/2857-2024.html)]

@@ -385,9 +385,3 @@ fn main() {}
 ```
 
 > **修正**: Rust 的 ORM 生态（`Sea-ORM`、`Diesel`、`sqlx`）的 schema 验证：1) **Sea-ORM** — 运行时验证，代码优先（entity 生成 migration）；2) **Diesel** — 编译期验证（`table!` 宏从 migration 生成 Rust 代码，schema 变更需重新运行 migration）；3) **sqlx** — 编译期验证（`query!` 宏在编译时连接数据库检查 SQL）。`sqlx` 的 compile-time checked queries 是 Rust 数据库访问的独特优势：SQL 语法、列名、类型在编译期验证，避免运行时错误。但这要求编译时数据库可访问（CI 中需配置 `SQLX_OFFLINE` + query 缓存文件）。这与 Python 的 SQLAlchemy（运行时反射）或 Java 的 Hibernate（注解 + 运行时验证）不同——Rust 的 ORM 趋向编译期安全。[来源: [Sea-ORM](https://www.sea-ql.org/SeaORM/)] · [来源: [Diesel](https://diesel.rs/)] · [来源: [sqlx](https://docs.rs/sqlx/)]
-
-
-> [来源: [ISO/IEC 9075 — SQL Standard](https://www.iso.org/standard/63555.html)]
-
-
-> [来源: [ACID — Haerder & Reuter (ACM)](https://dl.acm.org/doi/10.1145/2894.2895)]

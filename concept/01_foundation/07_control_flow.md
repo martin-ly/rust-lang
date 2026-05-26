@@ -43,6 +43,8 @@
     - [10.3 边界测试：`loop` 表达式的类型推断（编译错误）](#103-边界测试loop-表达式的类型推断编译错误)
     - [10.4 边界测试：`?` 运算符在 `main` 中的返回类型（编译错误）](#104-边界测试-运算符在-main-中的返回类型编译错误)
     - [10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（编译错误）](#105-边界测试loop-返回值与-break-的类型一致性编译错误)
+    - [10.6 边界测试：`match` 臂中的变量绑定与模式守卫（编译错误）](#106-边界测试match-臂中的变量绑定与模式守卫编译错误)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -683,5 +685,10 @@ fn main() {
 
 > **修正**: `match` 的**模式守卫**（pattern guard，`if` 条件）在绑定后执行，但守卫中的借用可能与后续臂冲突。`ref` 关键字创建引用绑定（`&T` 而非 `T`），避免 move。`ref mut` 创建可变引用绑定。模式守卫的限制：1) 守卫中不能引入新绑定；2) 守卫中的变量是引用而非值（若使用 `ref`）；3) 守卫不移动值，但若守卫失败，后续臂可能获得 move 绑定。这与 Haskell 的 `case` guard（类似，但 Haskell 是惰性求值，守卫语义不同）或 Scala 的 `match` with `if` guard（类似，但无所有权影响）不同——Rust 的模式守卫需考虑所有权和借用的交互。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)] · [来源: [Rust Reference — Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)]
 
+## 参考来源
 
-> [来源: [C++ ISO/IEC 14882:2020](https://www.iso.org/standard/83626.html)]
+> [来源: [The Rust Programming Language, Ch. 3.5](https://doc.rust-lang.org/book/ch03-05-control-flow.html)]
+
+> [来源: [RFC 1210 — `impl Trait`](https://rust-lang.github.io/rfcs/1210-impl-trait-for-all.html)]
+
+> [来源: [RFC 2497 — if let chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html)]

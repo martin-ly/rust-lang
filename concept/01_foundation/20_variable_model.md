@@ -22,7 +22,6 @@
 
 ### 2.1 环境模型（Environment Model）
 
-
 在环境模型中，变量绑定将**名字**映射到**值**。
 赋值操作改变的是变量在当前环境中的绑定关系。
 
@@ -40,7 +39,6 @@
 - 多个名字可以引用同一个值（共享/别名）
 
 ### 2.2 存储模型（Store Model）
-
 
 在存储模型中，变量绑定将**名字**映射到**存储地址**，存储地址再指向**值**。
 赋值操作改变的是存储中的内容。
@@ -60,7 +58,6 @@
 - 指针/引用 = 存储地址的显式操作
 
 ### 2.3 Rust 的所有权：存储模型的线性扩展
-
 
 Rust 在存储模型之上增加了**线性约束**（所有权规则）：
 
@@ -89,7 +86,6 @@ Rust 在存储模型之上增加了**线性约束**（所有权规则）：
 
 ### 3.1 C++ 的值类别体系
 
-
 C++11 引入了精细的值类别体系：
 
 ```text
@@ -105,7 +101,6 @@ C++11 引入了精细的值类别体系：
 **核心用途**: 确定表达式是否可以被移动、是否可以取地址、是否可以绑定到引用。
 
 ### 3.2 Rust 的表达式分类
-
 
 Rust 采用更简化的二元分类：
 
@@ -139,7 +134,6 @@ let s2 = s1; // s1 的所有权转移到 s2
 ## 四、值语义 vs 引用语义
 
 ### 4.1 通用 PL 谱系
-
 
 | 语义 | 赋值含义 | 典型语言 | 特征 |
 | :--- | :--- | :--- | :--- |
@@ -181,7 +175,6 @@ auto y = std::move(x); // y 获得资源，x 变为"有效但未指定状态"
 
 ### 5.1 操作语义中的环境-存储模型
 
-
 在形式化语义中，程序状态由二元组 `(E, S)` 表示：
 
 ```text
@@ -217,6 +210,7 @@ BorrowState: None | Shared(usize) | Exclusive
 
 > **定理** [Tier 2]: 在上述模型中，若程序通过 borrow checker，则运行时永远不会出现 use-after-free 或 double-free。
 > **证明草图**:
+>
 > 1. `Moved` 状态禁止任何读取/写入/借用操作（编译期拒绝）
 > 2. `Exclusive` 借用期间禁止其他借用或移动（编译期拒绝）
 > 3. `Shared` 借用期间禁止 `Exclusive` 借用或移动（编译期拒绝）
@@ -229,12 +223,10 @@ BorrowState: None | Shared(usize) | Exclusive
 
 ### 6.1 C 语言的 L/R-value 起源
 
-
 - **L-value**: 可以出现在赋值左侧的表达式（有地址的对象）
 - **R-value**: 只能出现在赋值右侧的表达式（值本身）
 
 ### 6.2 Rust 的 place expression 与 value expression
-
 
 | C/C++ | Rust |
 | :--- | :--- | :--- |
@@ -479,5 +471,12 @@ fn main() {
 
 > **修正**: Rust 的 **drop 顺序**：1) 变量按**声明顺序的逆序** drop（LIFO）；2) struct 字段按声明顺序 drop；3) tuple 元素按声明顺序 drop；4) 数组/vec 元素按索引顺序 drop；5) 闭包捕获变量按未指定顺序 drop。依赖 drop 顺序的代码是脆弱的：不同 Rust 版本可能改变闭包捕获的 drop 顺序。安全模式：1) 使 drop 相互独立（不依赖其他变量的状态）；2) 使用 `ManuallyDrop` 显式控制；3) 用 `scopeguard` crate 的 `defer!` 明确清理顺序。这与 C++ 的析构顺序（局部变量逆序、成员按声明顺序）类似——但 Rust 的 `Drop::drop` 不接收参数，不能基于其他对象的状态进行条件清理。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-03-drop.html)] · [来源: [Rust Reference — Destructor Order](https://doc.rust-lang.org/reference/destructors.html)]
 
+## 参考来源
 
-> [来源: [ISO/IEC 14882:2020 — C++ Exceptions](https://www.iso.org/standard/83626.html)]
+> [来源: [LLVM mem2reg Pass](https://llvm.org/docs/Passes.html#mem2reg-promote-memory-to-register)]
+
+> [来源: [SSA Form — Cytron et al., POPL 1991](https://dl.acm.org/doi/10.1145/115372.115320)]
+
+> [来源: [Rust Reference — Mutability](https://doc.rust-lang.org/reference/items/static-items.html)]
+
+> [来源: [The Rust Programming Language, Ch. 3.1](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)]

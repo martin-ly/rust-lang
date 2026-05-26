@@ -144,6 +144,7 @@
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：trait 的孤儿规则与 blanket impl 冲突（编译错误）](#105-边界测试trait-的孤儿规则与-blanket-impl-冲突编译错误)
     - [10.6 边界测试：关联常量与泛型参数的交互（编译错误）](#106-边界测试关联常量与泛型参数的交互编译错误)
+  - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
 
@@ -283,7 +284,6 @@ graph TD
 > [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 作为学习导航锚点，每掌握一个子概念后回到图中定位其拓扑位置，避免碎片化记忆。
 > **关键洞察**: Trait 系统的设计精髓是"接口定义、泛型约束、分发机制"的三层正交分离，Orphan Rule 是连接三层的保险装置。
-[来源: [TRPL](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **过渡到定理推理链**: 思维导图呈现了 Trait 系统的概念拓扑，但缺乏严格的逻辑推导关系。
 > 下一节通过"⟹"标注的定理链，将 Orphan Rule、Coherence、对象安全、Auto Trait 推导等核心命题形式化为可验证的推理网络，建立从编译规则到运行行为的完整因果链。
 
@@ -782,7 +782,6 @@ impl Foo for Vec<u8> { fn foo() {} }       // ⚠️ 更特化
 **原因**: `Vec<u8>` 同时满足 `Vec<T>`（T=u8）和 `Vec<u8>`，但两者不是严格的子类型关系。`min_specialization` 要求特化链必须是**全序（total order）**，禁止这种菱形重叠。
 
 > **关键洞察**: Specialization 不是"多继承"的替代物。它的语义是"为更具体的类型提供更高效的实现"，而非"为同一类型附加多个行为"。这与 C++ 模板特化的"代码选择"机制同构，但受 Coherence 公理约束。
-[来源: [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html)]
 
 ---
 
@@ -879,7 +878,6 @@ graph TD
 > **认知功能**: 反事实推理工具——通过决策树形式化展示"定理何时成立、何时失效"的逻辑边界，将 E0119 的触发条件转化为可遍历的路径。
 > **使用建议**: 遇到 E0119 错误时，沿树节点自查：是否存在 blanket impl？是否与具体 impl 重叠？两个 blanket 是否冲突？
 > **关键洞察**: Coherence 不是自动保证的——blanket impl 的存在会引入系统性冲突风险，specialization 只是缓解而非消除。
-[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 **四层分析**:
 
@@ -913,7 +911,6 @@ graph TD
 > **认知功能**: 量词语义可视化——揭示全称量词 `∀T` 在具体类型和特化机制面前的精确边界，将 Horn 子句可满足性转化为直觉判断。
 > **使用建议**: 编写 `impl<T> Foo for T` 前，先检查目标类型是否已有具体 impl；若需分层行为，评估 specialization 的适用性。
 > **关键洞察**: Blanket impl 的"全覆盖"是理想化的数学语义，工程现实中它必须与具体 impl 形成偏序关系才能共存。
-[来源: [Wikipedia — Type class](https://en.wikipedia.org/wiki/Type_class)]
 
 **四层分析**:
 
@@ -951,7 +948,6 @@ graph TD
 > **认知功能**: 类型论对偶辨析——区分存在类型的两种擦除层次（编译期擦除 vs 运行时擦除）及其工程后果。
 > **使用建议**: 返回单一实现用 `impl Trait`，异构集合用 `dyn Trait`；遇到 E0746 时沿树回溯检查分发方式选择。
 > **关键洞察**: `impl Trait` 和 `dyn Trait` 在类型论中不等价——前者是 ∃T.编译期已知(Trait(T))，后者是 ∃T.运行时已知(Trait(T))，信息隐藏的时机决定了能力边界。
-[来源: [TRPL](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 
 **四层分析**:
 
@@ -989,7 +985,6 @@ graph TD
 > **认知功能**: 概念纠偏工具——破除"对象安全 = Trait 可用"的直觉谬误，明确对象安全仅为 dyn Trait 的充要条件。
 > **使用建议**: 设计 Trait 时若需支持 dyn，将 `Self: Sized` 方法拆分到独立 Trait（如 Iterator vs ExactSizeIterator）。
 > **关键洞察**: Clone 等非对象安全 Trait 在泛型约束中完全可用——对象安全限制的是运行时多态能力，而非编译期接口契约能力。
-[来源: [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html)]
 
 **四层分析**:
 
@@ -1805,7 +1800,6 @@ struct Wrapper<T>(T);
 ```
 
 > **关键洞察**: `#[fundamental]` 是 Orphan Rule 的**安全阀**（safety valve），而非通用工具。它仅授予那些"语义上完全透明"的类型（引用、Box），因为这些类型的行为完全由其内容类型决定。将 `#[fundamental]` 开放给任意用户定义类型会导致 coherence 的系统性崩溃。
-[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 > **来源**: [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) · [Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules) · [RFC 2451](https://rust-lang.github.io/rfcs/2451-re-rebalancing-coherence.html)
 
@@ -1891,7 +1885,6 @@ impl !Foo for Bar<String> {}     // ❌ 错误：与正向 impl 重叠
 **原因**: Negative impl 必须满足与正向 impl 相同的 non-overlapping 约束。在 specialization 稳定之前，同一类型不能同时存在正负实现。
 
 > **关键洞察**: Negative impl 是 Rust trait 系统从**纯归纳定义**（只有正向规则）向**经典逻辑**（允许否定公理）的扩展。它为 unsafe 代码的形式化验证提供了关键基础设施——通过 `impl !Send for T`，开发者可以向编译器证明"此类型永远不会被发送到其他线程"，这是数据竞争自由证明的基石。
-[来源: [Wikipedia — Type class](https://en.wikipedia.org/wiki/Type_class)]
 
 > **来源**: [RFC 683](https://rust-lang.github.io/rfcs/0683-trait-system-refactor.html) · [Tracking Issue #68318](https://github.com/rust-lang/rust/issues/68318) · [Rust Unstable Book: negative_impls](https://doc.rust-lang.org/beta/unstable-book/language-features/negative-impls.html)
 
@@ -1951,7 +1944,6 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 - 一些 previously-rejected 的合法代码会被正确接受
 
 > **关键洞察**: Next solver 不是"新功能"，而是"基础设施升级"。它不会立即改变你能写的 Rust 代码，但它是 GATs、TAIT、specialization 等特性从 "能用但有 bug" 走向 "稳定且可靠" 的必要条件。这类似于 2024 Edition 的 `unsafe_op_in_unsafe_fn` ——表面上是小改动，实际上是对语言契约的深层强化。
-[来源: [TRPL](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 
 > **来源**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/flagships.html) · [rustc-next-trait-solver 源码](https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
 
@@ -2041,5 +2033,12 @@ fn main() {}
 
 > **修正**: Rust 的**关联常量**（associated constant）是 trait 的一部分，但**不能**直接用于 `const generic` 数组大小。原因：关联常量依赖于具体实现，而 `const generic` 要求编译期确定的值。变通方案：1) 使用 `generic_const_exprs`（nightly，不稳定）；2) 用宏生成固定大小的数组；3) 使用 `Box<[u8]>` 或 `Vec<u8>`（运行时大小）；4) `typenum` crate（类型级整数）。关联常量的其他用途：1) 配置参数（`MAX_SIZE`、`VERSION`）；2) 类型标识（`const NAME: &'static str`）；3) 与 `const fn` 结合计算派生常量。这与 C++ 的 `static constexpr`（可在模板参数中使用）或 Swift 的 `associatedtype` + `static let`（类似限制）不同——Rust 的关联常量与 const generics 的集成仍在演进。[来源: [Rust Reference — Associated Constants](https://doc.rust-lang.org/reference/items/associated-items.html#associated-constants)] · [来源: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)]
 
+## 参考来源
 
-> [来源: [Type Classes in Haskell — Wadler & Blott (POPL)](https://dl.acm.org/doi/10.1145/75277.75283)]
+> [来源: [RFC 0447 — Noisy Fields](https://rust-lang.github.io/rfcs/0447-noisy-fields.html)]
+
+> [来源: [RFC 1210 — Specialization](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)]
+
+> [来源: [RFC 0443 — Derive](https://rust-lang.github.io/rfcs/0443-derives.html)]
+
+> [来源: [PLDI 2023 — Rust Traits Formalization](https://dl.acm.org/doi/10.1145/3591285)]

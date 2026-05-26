@@ -611,17 +611,14 @@ fn main() {
 
 > **修正**: `Stream` trait 的 `poll_next` 在返回 `None` 后，再次 poll 的行为**未定义**（取决于实现）。`Fuse` adapter（`.fuse()`）保证：返回 `None` 后，所有后续 poll 也返回 `None`。这与 `Iterator` 的行为不同：`Iterator::next()` 返回 `None` 后再次调用是明确定义的（继续返回 `None`）。`Stream` 的设计原因：某些底层源（如 I/O、channel）在关闭后可能重新打开或产生错误，不强制 `None` 后终止。安全模式：消费 Stream 后使用 `.fuse()`，或用 `while let Some(item) = stream.next().await`（自动处理）。这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步流语义比迭代器更复杂，因涉及外部事件源。[来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]
 
-> [来源: [futures-rs Documentation](https://docs.rs/futures/)]
-> [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]
-> [来源: [Tokio Tutorial — Streams](https://tokio.rs/tokio/tutorial/streams)]
-> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+## 参考来源
+
+> [来源: [Tokio Streams](https://docs.rs/tokio-stream/)]
+
 > [来源: [Reactive Streams Specification](https://www.reactive-streams.org/)]
-> [来源: [Rayon Documentation](https://docs.rs/rayon/)]
-> [来源: [Crossbeam Channel](https://docs.rs/crossbeam-channel/)]
-> [来源: [async-stream Crate](https://docs.rs/async-stream/)]
-> [来源: [futures-rs Sink](https://docs.rs/futures/latest/futures/sink/trait.Sink.html)]
-> [来源: [StreamExt — BufStream](https://docs.rs/tokio-stream/latest/tokio_stream/trait.StreamExt.html)]
-> [来源: [Tokio — Framed](https://docs.rs/tokio-util/latest/tokio_util/codec/struct.Framed.html)]
-> [来源: [Pin and Suffering](https://blog.yoshuawuyts.com/pin-and-suffering/)]
-> [来源: [Futures Explained](https://fasterthanli.me/articles/understanding-rust-futures-by-going-deep-into-the)]
-> [来源: [Rust Pinning](https://doc.rust-lang.org/std/pin/index.html)]
+
+> [来源: [RFC 2996 — Async Iteration](https://rust-lang.github.io/rfcs/2996-async-iterator.html)]
+
+> [来源: [Stream Processing — Akka Streams](https://doc.akka.io/docs/akka/current/stream/)]
+
+> [来源: [Apache Flink — Stream Semantics](https://nightlies.apache.org/flink/flink-docs-stable/)]

@@ -13,9 +13,3 @@
 - [类型语义](./21_type_semantics.md) — 类型系统形式化
 - [分离逻辑](./11_separation_logic.md) — 内存分离逻辑
 - [形式化验证工具](../06_ecosystem/47_formal_verification_tools.md) — 模型检测与定理证明
-
-
-> [来源: [Structural Operational Semantics — Plotkin](https://homepages.inf.ed.ac.uk/gdp/publications/Structural_Operational_Semantics.pdf)]
-
-
-> [来源: [The Formal Semantics of Programming Languages — Winskel](https://mitpress.mit.edu/9780262731034/)]

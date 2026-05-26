@@ -48,6 +48,7 @@
     - [10.4 边界测试：`async` 状态机的 `Pin` 开销（编译错误/运行时行为）](#104-边界测试async-状态机的-pin-开销编译错误运行时行为)
     - [10.3 边界测试：零大小类型的布局陷阱（编译错误/UB）](#103-边界测试零大小类型的布局陷阱编译错误ub)
     - [10.3 边界测试：所有权移动后的再次使用](#103-边界测试所有权移动后的再次使用)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -629,5 +630,10 @@ fn main() {
 
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
 
+## 参考来源
 
-> [来源: [C++ ISO/IEC 14882:2020](https://www.iso.org/standard/83626.html)]
+> [来源: [The Rust Programming Language, Ch. 13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)]
+
+> [来源: [LLVM Language Reference](https://llvm.org/docs/LangRef.html)]
+
+> [来源: [C++ Zero-Cost Abstractions — Stroustrup](https://www.stroustrup.com/)]

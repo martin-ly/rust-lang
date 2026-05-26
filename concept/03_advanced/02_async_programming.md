@@ -13,6 +13,3 @@
 - [并发编程](./01_concurrency.md) — Send/Sync、线程、锁
 - [Futures 与 Streams](./02_async.md) — 异步状态机、流处理
 - [Tokio 运行时](./02_async.md) — 异步执行器与任务调度
-
-
-> [来源: [Verifying Correct Use of DMA — ZILU (ACM)](https://dl.acm.org/doi/10.1145/3498688)]

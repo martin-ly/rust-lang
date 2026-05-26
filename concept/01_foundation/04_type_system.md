@@ -124,6 +124,7 @@
     - [12.4 边界测试：impl Trait 在参数位置与返回位置的差异（编译错误）](#124-边界测试impl-trait-在参数位置与返回位置的差异编译错误)
     - [12.5 边界测试：生命周期省略规则失效（编译错误）](#125-边界测试生命周期省略规则失效编译错误)
     - [10.1 边界测试：类型不匹配的基础错误](#101-边界测试类型不匹配的基础错误)
+  - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
 
@@ -2373,8 +2374,10 @@ fn main() {
 
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
 
+## 参考来源
 
-> [来源: [ISO/IEC TR 24772 — Secure Software](https://www.iso.org/standard/71091.html)]
+> [来源: [RFC 0401 — Coercions](https://rust-lang.github.io/rfcs/0401-coercions.html)]
 
+> [来源: [RFC 1214 — WF](https://rust-lang.github.io/rfcs/1214-projections-lifetimes-and-wf.html)]
 
-> [来源: [Types and Programming Languages — Pierce](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+> [来源: [The Rust Programming Language, Ch. 3.2](https://doc.rust-lang.org/book/ch03-02-data-types.html)]

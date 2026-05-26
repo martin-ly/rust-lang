@@ -22,7 +22,6 @@
 
 ### 2.1 定义
 
-
 一个表达式是**引用透明**的，当且仅当：在程序的任何位置，该表达式都可以被其计算结果替换，而不改变程序的行为。
 
 ```text
@@ -57,7 +56,6 @@
 ## 三、副作用的分类与模型
 
 ### 3.1 副作用的通用分类
-
 
 | 副作用类别 | 描述 | 典型操作 | Rust 表达 |
 |:---|:---|:---|:---|
@@ -116,7 +114,6 @@ fn process_unsafe(ptr: *mut i32) {  // unsafe 块表示未定义效果
 
 ### 4.1 `&mut T` 作为写效果（Write Effect）
 
-
 在 Rust 中，任何函数若要修改外部状态，必须显式地接受 `&mut T` 参数：
 
 ```rust
@@ -146,7 +143,6 @@ increment(&mut x); // 调用者明确知道 x 会被修改
 
 ### 4.2 `unsafe` 作为未定义效果（Undefined Effect）
 
-
 `unsafe` 块标记了编译器无法验证的副作用边界：
 
 ```rust
@@ -164,7 +160,6 @@ unsafe fn raw_access(ptr: *const i32, offset: isize) -> i32 {
 **关键设计**: `unsafe` 不是关闭类型系统，而是**显式声明"此处的效果超出编译器验证范围"**。这与 C/C++ 的默认 unsafe 形成鲜明对比。
 
 ### 4.3 `Result<T, E>` 作为异常效果（Exception Effect）
-
 
 Rust 将异常效果编码在返回类型中：
 
@@ -193,7 +188,6 @@ fn compose() -> Result<i32, Error> {
 
 ### 4.4 `async` 作为并发效果（Concurrency Effect）
 
-
 `async fn` 将并发效果编码在返回类型中：
 
 ```rust
@@ -215,7 +209,6 @@ let data = fetch_data().await;
 ## 五、纯函数与不纯函数
 
 ### 5.1 纯函数的定义
-
 
 一个函数是纯函数，当且仅当：
 
@@ -263,7 +256,6 @@ fn sum(data: &[i32]) -> i32 {
 ## 六、命令式 vs 函数式范型
 
 ### 6.1 两种范型的核心差异
-
 
 | 维度 | 命令式范型（C/C++/Java/Rust） | 函数式范型（Haskell/ML） |
 |:---|:---|:---|
@@ -514,3 +506,15 @@ fn main() {
 ```
 
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
+
+## 参考来源
+
+> [来源: [ICFP 2014 — Extensible Effects](https://dl.acm.org/doi/10.1145/2628136.2628161)]
+
+> [来源: [Haskell — IO Monad](https://www.haskell.org/tutorial/io.html)]
+
+> [来源: [Rust RFC 2593 — Effects](https://rust-lang.github.io/rfcs/)]
+
+> [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]
+
+> [来源: [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]

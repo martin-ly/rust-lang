@@ -40,6 +40,7 @@
     - [10.2 边界测试：配置结构的反序列化生命周期（编译错误）](#102-边界测试配置结构的反序列化生命周期编译错误)
     - [10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）](#106-边界测试kubernetes-的优雅关闭与-sigterm-处理运行时数据丢失)
     - [10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）](#105-边界测试kubernetes-探针配置不当导致的级联重启运行时可用性下降)
+    - [10.3 边界测试：Kubernetes 的 readiness 与 liveness 探针混淆（运行时可用性下降）](#103-边界测试kubernetes-的-readiness-与-liveness-探针混淆运行时可用性下降)
 
 ---
 
@@ -508,54 +509,9 @@ fn main() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
 
 ## 十、边界测试：云原生开发的编译错误
 
@@ -652,7 +608,7 @@ async fn main() {
     let app = Router::new()
         .route("/", get(|| async { "ok" }))
         .route("/health", get(health_check));
-    
+
     // ❌ 运行时风险: readiness 和 liveness 使用同一端点
     // 无法区分"未就绪"和"已死"
 }
@@ -664,9 +620,3 @@ async fn health_check() -> &'static str {
 ```
 
 > **修正**: Kubernetes 探针的区分：1) **livenessProbe**：检测死锁/无限循环，失败 → 重启容器；2) **readinessProbe**：检测依赖就绪，失败 → 从 service endpoints 移除（不重启）；3) **startupProbe**：保护慢启动应用，失败 → 重启。反模式：1) 同一端点处理两种探针 → 无法区分状态；2) liveness 检查外部依赖 → 外部故障导致全部 pod 重启，级联故障；3) 超时过短 → 正常慢请求触发重启。Rust 云原生应用应暴露 `/health/live`（简单存活检查）和 `/health/ready`（依赖就绪检查）。这与 Go 的 Kubernetes 客户端或 Java 的 Spring Boot Actuator 类似——探针设计是分布式系统可靠性的基石。[来源: [Kubernetes Probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)] · [来源: [AWS Well-Architected](https://docs.aws.amazon.com/wellarchitected/latest/health-safety-pillar/welcome.html)]
-
-
-> [来源: [ISO/IEC 25010 — Quality Models](https://www.iso.org/standard/35733.html)]
-
-
-> [来源: [NIST SP 800-204 — Microservices Security](https://csrc.nist.gov/publications/detail/sp/800-204/final)]

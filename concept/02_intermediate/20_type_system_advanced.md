@@ -495,7 +495,6 @@ graph TD
 
 ## 七、C++ 运算符重载/类型转换 vs Rust Trait 系统
 
-
 ### 7.1 运算符重载机制对比
 
 | 运算符 | C++（成员/友元函数） | Rust（Trait） |
@@ -773,9 +772,3 @@ fn main() {}
 ```
 
 > **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
-
-
-> [来源: [ISO/IEC TR 24772 — Secure Software](https://www.iso.org/standard/71091.html)]
-
-
-> [来源: [Types and Programming Languages — Pierce](https://www.cis.upenn.edu/~bcpierce/tapl/)]

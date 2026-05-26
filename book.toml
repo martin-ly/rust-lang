@@ -1,25 +1,28 @@
 [book]
 title = "Rust 分层概念知识体系"
-authors = ["Rust Lang Knowledge Team"]
-description = "L0-L7 八层架构，从入门直觉到形式化验证的 Rust 概念知识体系"
+authors = ["Rust Concept Knowledge Base Team"]
+description = "Rust 分层概念知识体系 — 从入门直觉到形式化验证"
 src = "concept"
-language = "zh-CN"
-
-[build]
 build-dir = "book"
-create-missing = false
+language = "zh"
 
 [output.html]
 default-theme = "rust"
-git-repository-url = "https://github.com/rust-lang/rust"
-site-url = "/rust-lang/"
-# additional-js paths are relative to src; theme/ files are copied to output root
-
-[output.html.playground]
-editable = true
-line-numbers = true
+preferred-dark-theme = "ayu"
+mathjax-support = true
+copy-fonts = true
+additional-js = ["theme/mermaid-init.js"]
 
 [output.html.search]
 enable = true
 limit-results = 30
 teaser-word-count = 30
+use-boolean-and = true
+
+[preprocessor.toc]
+command = "mdbook-toc"
+marker = "<!-- toc -->"
+
+[output.html.fold]
+enable = true
+level = 1

@@ -863,9 +863,3 @@ impl GoodNode {
 - [机器学习生态](./46_machine_learning_ecosystem.md) — 感知算法、神经网络推理
 - [形式化验证工具](./47_formal_verification_tools.md) — 模型检查、定理证明、Kani
 - [分布式共识](./50_distributed_consensus.md) — 多机器人协同、一致性
-
-
-> [来源: [ISO/IEC 9899:2018 — C Standard](https://www.iso.org/standard/74528.html)]
-
-
-> [来源: [ARM Architecture Reference Manual](https://developer.arm.com/documentation/ddi0487/latest/)]

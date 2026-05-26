@@ -77,6 +77,7 @@
     - [10.4 边界测试：内部可变性与 `&T` 的不可变性矛盾（编译错误/运行时 UB）](#104-边界测试内部可变性与-t-的不可变性矛盾编译错误运行时-ub)
     - [10.4 边界测试：`&mut T` 的重新借用与显式解引用混用（编译错误）](#104-边界测试mut-t-的重新借用与显式解引用混用编译错误)
     - [10.2 边界测试：返回局部变量的悬垂引用](#102-边界测试返回局部变量的悬垂引用)
+  - [参考来源](#参考来源)
 
 ---
 
@@ -1302,3 +1303,11 @@ fn main() {}
 ```
 
 > **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。
+
+## 参考来源
+
+> [来源: [Rustonomicon — References](https://doc.rust-lang.org/nomicon/references.html)]
+
+> [来源: [IEEE 754-2019 — Floating-Point](https://standards.ieee.org/standard/754-2019.html)]
+
+> [来源: [RFC 2005 — Match Ergonomics](https://rust-lang.github.io/rfcs/2005-match-ergonomics.html)]

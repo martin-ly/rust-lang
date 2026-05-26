@@ -150,6 +150,7 @@
     - [16.5 边界测试：裸指针算术越界（运行时 UB）](#165-边界测试裸指针算术越界运行时-ub)
     - [16.6 边界测试：`std::mem::transmute` 类型大小不匹配（编译错误）](#166-边界测试stdmemtransmute-类型大小不匹配编译错误)
     - [10.4 边界测试：`union` 的字段访问与活跃字段跟踪（运行时 UB）](#104-边界测试union-的字段访问与活跃字段跟踪运行时-ub)
+  - [参考来源](#参考来源)
 
 <!-- L3::权威定义 -->
 
@@ -2695,5 +2696,14 @@ fn main() {
 
 > **修正**: Rust 的 `union` 类似于 C 的 union：所有字段共享同一内存，但 Rust 的借用检查器**不跟踪**哪个字段是"活跃的"（最近写入的）。读取未初始化的字段（或写入一个字段后读取另一个字段）是**safe**的语法（在 `unsafe` 块中），但值是底层位的重新解释，可能无意义。安全使用：1) 使用 `ManuallyDrop<T>` 包装非 `Copy` 字段（union 的字段默认需实现 `Copy`）；2) 手动跟踪活跃字段（通过外部状态）；3) 优先使用 `enum`（tagged union，编译器跟踪变体）。`union` 的用途：1) FFI（C 结构体中的 union）；2) 手动内存布局优化；3) 类型双关（type punning）。这与 C 的 union（无活跃字段跟踪，完全信任程序员）或 Swift 的 enum with associated values（ tagged union，安全）不同——Rust 的 union 是底层原语，需 unsafe 使用。[来源: [Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
+## 参考来源
 
-> [来源: [Verifying Correct Use of DMA — ZILU (ACM)](https://dl.acm.org/doi/10.1145/3498688)]
+> [来源: [RFC 2585 — Unsafe Op in Unsafe Fn](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)]
+
+> [来源: [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
+
+> [来源: [Miri — Undefined Behavior Detection](https://github.com/rust-lang/miri)]
+
+> [来源: [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
+
+> [来源: [Tree Borrows](https://perso.crans.org/vanille/treebor/)]

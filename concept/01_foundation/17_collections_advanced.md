@@ -56,6 +56,7 @@
     - [10.4 边界测试：`BTreeMap` 的 range 查询与可变遍历（编译错误）](#104-边界测试btreemap-的-range-查询与可变遍历编译错误)
     - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
     - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
+    - [10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）](#106-边界测试btreemap-的键修改与排序不变性破坏逻辑错误ub)
 
 ---
 
@@ -681,75 +682,11 @@ fn main() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 > **补充来源**
-
 
 ## 十二、边界测试：高级集合的编译错误
 
@@ -910,12 +847,12 @@ fn main() {
     let mut map = BTreeMap::new();
     map.insert(String::from("b"), 2);
     map.insert(String::from("a"), 1);
-    
+
     // ❌ 逻辑错误/UB: 通过 unsafe 修改键的值，破坏排序不变性
     // for key in map.keys_mut() { // BTreeMap 无 keys_mut
     //     key.push_str("x"); // 若允许，会改变键的排序位置
     // }
-    
+
     // BTreeMap 安全 API 禁止修改键，只能修改值
     for value in map.values_mut() {
         *value += 10;

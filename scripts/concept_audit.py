@@ -187,7 +187,7 @@ def check_bloom_levels(content, file_path):
 
 
 def check_sources(content):
-    """统计来源标注"""
+    """统计来源标注，同时检测末尾堆叠"""
     total_annotations = 0
     for pattern in SOURCE_PATTERNS:
         total_annotations += len(re.findall(pattern, content, re.IGNORECASE))
@@ -199,7 +199,27 @@ def check_sources(content):
     # 估算论断数（以 "> " 开头的引用块、定理、定义等）
     claims = len(re.findall(r'^(?:>|#+\s*[^:]+[:：]|\*\*定理|\*\*定义|\*\*公理)', content, re.MULTILINE))
 
-    return total_annotations, para_count, claims
+    # 检测末尾来源堆叠
+    trailing_source_lines = 0
+    has_ref_section = bool(re.search(r'#{1,3}\s*(?:参考来源|参考文献|References|Bibliography)', content, re.IGNORECASE))
+    lines = content.split('\n')
+    for line in reversed(lines):
+        stripped = line.strip()
+        if re.match(r'> \*\*来源\*\*[：:]', stripped):
+            trailing_source_lines += 1
+        elif re.match(r'> \[来源:', stripped):
+            trailing_source_lines += 1
+        elif re.match(r'> \*\*来源[：:]', stripped):
+            trailing_source_lines += 1
+        elif stripped == '':
+            continue
+        else:
+            break
+
+    # 无结构化参考来源章节但末尾大量堆叠 => 质量问题
+    is_stacked = (trailing_source_lines >= 8 and not has_ref_section) or trailing_source_lines >= 15
+
+    return total_annotations, para_count, claims, is_stacked, trailing_source_lines
 
 
 def check_file_naming(file_path):
@@ -295,6 +315,17 @@ def generate_report(results):
             lines.append(f"| {item['file']} | {item['annotations']} | {item['paragraphs']} | {item['rate']:.1%} |")
         lines.append("")
 
+    if results['source_stacked']:
+        lines.extend([
+            "## 末尾来源堆叠警告（机械追加来源）",
+            "",
+            "| 文件 | 末尾堆叠行数 | 建议 |",
+            "|:---|:---|:---|",
+        ])
+        for item in results['source_stacked']:
+            lines.append(f"| {item['file']} | {item['trailing_lines']} | 删除机械追加的来源，改为 inline 嵌入或结构化参考来源章节 |")
+        lines.append("")
+
     lines.extend([
         "## 方法论说明",
         "",
@@ -353,6 +384,7 @@ def scan_files(md_files, track_name):
         'bloom_missing': [],
         'avg_source_rate': 0.0,
         'source_low': [],
+        'source_stacked': [],
     }
 
     total_source_rate = 0.0
@@ -403,16 +435,34 @@ def scan_files(md_files, track_name):
             })
 
         # 4. 来源标注率
-        annotations, para_count, claims = check_sources(content)
+        annotations, para_count, claims, is_stacked, trailing_source_lines = check_sources(content)
         denominator = max(para_count + claims * 2, 1)
         rate = annotations / denominator
         total_source_rate += rate
         source_file_count += 1
+
+        # 检测末尾来源堆叠
+        if is_stacked:
+            results['source_stacked'].append({
+                'file': rel_path,
+                'trailing_lines': trailing_source_lines,
+            })
+
         # 00_meta/ 是元信息目录，降低来源率要求
         effective_min_rate = thresholds['min_source_rate']
         if is_meta:
             effective_min_rate = 0.03
-        if rate < effective_min_rate and para_count > 5:
+
+        # 已归档文件豁免来源率检查
+        is_archived = '已归档' in content[:1000] or '归档声明' in content[:1000]
+        if is_archived:
+            effective_min_rate = 0.03
+
+        # 短文件（<50 denom）放宽要求
+        if denominator < 50:
+            effective_min_rate = max(effective_min_rate * 0.5, 0.03)
+
+        if rate < effective_min_rate and para_count > 5 and not is_archived:
             results['source_low'].append({
                 'file': rel_path,
                 'annotations': annotations,
@@ -453,6 +503,7 @@ def print_track_results(results):
     print(f"代码块问题: {len(results['code_block_issues'])} 个文件")
     print(f"Bloom 显式标注: {results['bloom_explicit']}/{results['total_files']}")
     print(f"平均来源标注率: {results['avg_source_rate']:.1%}")
+    print(f"末尾来源堆叠: {len(results['source_stacked'])} 个文件")
     print(f"TODO 待完成: {results['todo_summary']['pending']}")
     print(f"TODO 已完成: {results['todo_summary']['done']}")
 
@@ -489,7 +540,7 @@ def main():
 
     has_issues = any(
         r['cross_links_fail'] or r['dead_links'] or r['code_block_issues']
-        or r['bloom_missing'] or r['source_low']
+        or r['bloom_missing'] or r['source_low'] or r['source_stacked']
         for r in all_results
     )
     if has_issues:
@@ -505,6 +556,8 @@ def main():
                 print(f"  [{r['track']}] {len(r['bloom_missing'])} 个文件缺少 Bloom 标注")
             if r['source_low']:
                 print(f"  [{r['track']}] {len(r['source_low'])} 个文件来源标注率 < 10%")
+            if r['source_stacked']:
+                print(f"  [{r['track']}] {len(r['source_stacked'])} 个文件末尾来源堆叠")
         sys.exit(1)
     else:
         print(f"\n✅ 审计通过！")

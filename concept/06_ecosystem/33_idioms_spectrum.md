@@ -80,6 +80,7 @@
     - [10.2 边界测试：`?` 运算符的类型转换约束（编译错误）](#102-边界测试-运算符的类型转换约束编译错误)
     - [10.6 边界测试：`todo!()` 与 `unimplemented!()` 的生产泄露（运行时 panic）](#106-边界测试todo-与-unimplemented-的生产泄露运行时-panic)
     - [10.7 边界测试：过度使用 `Deref` 进行类型转换（隐式行为困惑）](#107-边界测试过度使用-deref-进行类型转换隐式行为困惑)
+    - [10.3 边界测试：`Deref` 过度使用导致的类型混淆（编译错误/设计反模式）](#103-边界测试deref-过度使用导致的类型混淆编译错误设计反模式)
 
 ---
 
@@ -240,7 +241,6 @@ graph TD
 
 ## 三、L0 词法级惯用法
 
-
 ### 3.1
 
 > [来源: Rust Reference §6.13] `?` 传播运算符
@@ -344,7 +344,6 @@ for &n in &numbers {
 ---
 
 ## 四、L1 类型级惯用法
-
 
 ### 4.1
 
@@ -454,7 +453,6 @@ impl FileHandle<WritePermission> {
 
 ## 五、L2 接口级惯用法
 
-
 ### 5.1
 
 > [来源: Rust API Guidelines C-CONV] Into/From 转换链
@@ -546,7 +544,6 @@ greeting(&"Rust".to_owned());    // &String
 
 ## 六、L3 资源级惯用法
 
-
 ### 6.1
 
 > [来源: Rust Reference §10.8] RAII 守卫模式
@@ -635,7 +632,6 @@ impl SelfReferential {
 ---
 
 ## 七、L4 控制级惯用法
-
 
 ### 7.1
 
@@ -729,7 +725,6 @@ let squares = (0..10).map(|n| n * n).collect::<Vec<i32>>();
 ---
 
 ## 八、L5 并发级惯用法
-
 
 ### 8.1
 
@@ -830,7 +825,6 @@ fn pop<T>(head: &Atomic<Node<T>>) -> Option<T> {
 ---
 
 ## 九、L6 架构级惯用法
-
 
 ### 9.1
 
@@ -1159,160 +1153,9 @@ quadrantChart
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
-
-
 
 > **相关文件**: [A/S/P 标记规范](../00_meta/asp_marking_guide.md) · [问题图谱](../00_meta/problem_graph.md) · [范式转换矩阵](../00_meta/paradigm_transition_matrix.md)
 
@@ -1407,7 +1250,7 @@ fn main() {
     let w = Wrapper(String::from("hello"));
     // Deref 自动解引用: &Wrapper → &String → &str
     let _s: &str = &w;
-    
+
     // ❌ 设计反模式: Wrapper 的行为像 String，但类型仍是 Wrapper
     // 方法解析可能困惑: w.push_str(" world") 调用 String::push_str
     // 但 Wrapper 自身的方法被隐藏

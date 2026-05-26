@@ -1,4 +1,5 @@
 # WebAssembly 生态：Rust 的浏览器外运行时
+>
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Eva — 评估 WASM 与 Rust 的集成策略
@@ -19,28 +20,30 @@
 >
 
  [WebAssembly \ 生态：Rust 的浏览器外运行时](#webassembly)
+
+- [WebAssembly 生态：Rust 的浏览器外运行时](#webassembly-生态rust-的浏览器外运行时)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-  - [1.1 WebAssembly 的设计哲学](#11-webassembly-的设计哲学)
-  - [1.2 Rust → Wasm 的编译模型](#12-rust--wasm-的编译模型)
-  - [1.3 为什么 Rust 是 Wasm 的首选语言](#13-为什么-rust-是-wasm-的首选语言)
+    - [1.1 WebAssembly 的设计哲学](#11-webassembly-的设计哲学)
+    - [1.2 Rust → Wasm 的编译模型](#12-rust--wasm-的编译模型)
+    - [1.3 为什么 Rust 是 Wasm 的首选语言](#13-为什么-rust-是-wasm-的首选语言)
   - [二、技术细节](#二技术细节)
-  - [2.1 wasm32 目标三元组](#21-wasm32-目标三元组)
-  - [2.2 wasm-bindgen 与 JS 互操作](#22-wasm-bindgen-与-js-互操作)
-  - [2.3 Wasm 组件模型](#23-wasm-组件模型)
+    - [2.1 wasm32 目标三元组](#21-wasm32-目标三元组)
+    - [2.2 wasm-bindgen 与 JS 互操作](#22-wasm-bindgen-与-js-互操作)
+    - [2.3 Wasm 组件模型](#23-wasm-组件模型)
   - [三、应用场景分析](#三应用场景分析)
   - [四、反命题与边界分析](#四反命题与边界分析)
-  - [4.1 反命题树](#41-反命题树)
-  - [4.2 边界极限](#42-边界极限)
+    - [4.1 反命题树](#41-反命题树)
+    - [4.2 边界极限](#42-边界极限)
   - [五、工具链与运行时](#五工具链与运行时)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：WebAssembly 的编译错误](#十边界测试webassembly-的编译错误)
-  - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](#101-边界测试wasm32-目标的标准库限制编译错误)
-  - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](#102-边界测试wasm-bindgen-的类型映射编译错误)
-  - [10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）](#103-边界测试wasm-的线性内存与-rust-引用的不兼容性编译错误)
-  - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
+    - [10.1 边界测试：`wasm32` 目标的标准库限制（编译错误）](#101-边界测试wasm32-目标的标准库限制编译错误)
+    - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](#102-边界测试wasm-bindgen-的类型映射编译错误)
+    - [10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）](#103-边界测试wasm-的线性内存与-rust-引用的不兼容性编译错误)
+    - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
 
 ---
 
@@ -389,33 +392,9 @@ Rust Wasm 工具链:
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
 ---
-
-
-
 
 ## 十、边界测试：WebAssembly 的编译错误
 
@@ -485,12 +464,3 @@ fn main() {
 ```
 
 > **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasi` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
-
-
-> [来源: [W3C WebAssembly Core Specification](https://www.w3.org/TR/wasm-core-2/)]
-
-
-> [来源: [W3C WebAssembly JS Interface](https://www.w3.org/TR/wasm-js-api-2/)]
-
-
-> [来源: [ECMA-262 — ECMAScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/)]

@@ -646,11 +646,6 @@ graph TD
 
 ---
 
-
-
-
-
-
 ### 10.3 边界测试：取消安全性（Cancellation Safety）的违反（运行时行为）
 
 ```rust,compile_fail
@@ -751,6 +746,3 @@ fn main() {}
 ```
 
 > **修正**: **`async fn` in trait**（稳定于 1.75）：1) `trait T { async fn method(&self) -> i32; }` — trait 定义；2) `impl T for S { async fn method(&self) -> i32 { ... } }` — 实现。底层是 **RPITIT**（Return Position Impl Trait In Traits）：`async fn` 返回 `impl Future<Output = i32>`。限制：1) `async fn` 隐式捕获所有输入 lifetime；2) 不能混用 `async fn` 和返回具体 `Future` 类型；3) `dyn Trait` 不支持 `async fn`（返回类型大小未知）。`dyn Trait` 替代方案：1) `#[async_trait]` 宏（将 `async fn` 转为返回 `Pin<Box<dyn Future>>`）；2) `trait T { fn method(&self) -> impl Future<Output = i32>; }` + 手动 `Box::pin`（复杂）。这与 JavaScript 的 `async` 方法（接口中直接声明，无特殊限制）或 Kotlin 的 `suspend` 函数（类似，但编译器处理）不同——Rust 的 `async fn` in trait 是类型系统的重大扩展。[来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/21/async-fn-rpitit.html)] · [来源: [RPITIT](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)]
-
-
-> [来源: [Verifying Correct Use of DMA — ZILU (ACM)](https://dl.acm.org/doi/10.1145/3498688)]
