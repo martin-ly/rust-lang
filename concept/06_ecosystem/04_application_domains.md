@@ -360,6 +360,19 @@ Rust 在区块链领域占据**主导地位**的原因：
 
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 
+### 4.7-B Android AOSP：Rust 集成的实证研究（FSE 2026）
+
+**[HUST, 2026]** Fan 等人在 FSE 2026 发表了 Rust 在 Android 开源项目（AOSP）中集成的**大规模实证分析**，系统评估了 Rust 在数十亿级设备生态系统中的实际采用模式、安全收益和迁移挑战。
+
+**核心发现**：
+
+1. **采用规模**: AOSP 中 Rust 代码量持续增长，覆盖 Binder IPC、DNS 解析、加密库、系统守护进程等关键子系统
+2. **安全收益量化**: Rust 组件的内存安全漏洞密度显著低于同等功能 C/C++ 组件（与 Google 内部的 "Memory Safe Languages" 倡议数据一致）
+3. **迁移模式**: 大多数 Rust 集成采用"增量替换"策略——在现有 C/C++ 代码库中逐步引入 Rust 组件，而非全量重写
+4. **跨语言边界风险**: FFI 边界（Rust ↔ C/C++）成为新的漏洞高发区，需要额外的静态分析和模糊测试覆盖
+
+> **来源**: [FSE 2026 — Fan et al., "An Empirical Analysis of Rust Integration in Android Open Source Project"](https://conf.researchr.org/track/fse-2026/fse-2026-research-papers) · 可信度: ✅
+
 ### 4.7-A Google Pixel：Rust 进入蜂窝基带固件
 
 **[Google Security Blog, 2026-04-10]** Pixel 10 系列是**首款在蜂窝基带（cellular baseband/modem）固件中集成内存安全语言**的智能手机。Google 选择从 **DNS 解析器**入手，使用 Rust 重写 modem 中的 DNS 解析组件，以消除内存安全漏洞类别。

@@ -904,6 +904,21 @@ cargo audit
 
 > **来源**: [RustSec/cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit) · 可信度: ✅
 
+**2026 学术进展 — Cargo Scan（ESOP 2026）**:
+
+**[UC Davis / UC San Diego, 2026]** Cargo Scan 是一种**大规模 Rust crate 审计工具**，发表于 ESOP 2026（ETAPS 卫星会议）。与 `cargo audit`（依赖已知漏洞数据库）不同，Cargo Scan 通过**静态分析 crate 源码**识别潜在的安全敏感模式——包括 `unsafe` 使用情况、FFI 边界、文件系统操作、网络请求、进程执行等——而**不依赖预先报告的漏洞**。
+
+**核心能力**：
+
+| 检测维度 | 示例模式 | 意义 |
+|:---|:---|:---|
+| **Unsafe 使用密度** | `unsafe` 块数量 / 总 LOC | 评估 crate 的安全边界范围 |
+| **FFI 边界** | `extern` 函数声明、`#[no_mangle]` | 识别跨语言调用点 |
+| **能力敏感操作** | 文件读写、网络请求、环境变量访问 | 识别供应链攻击的潜在利用点 |
+| **依赖传递风险** | 间接依赖中的敏感操作 | 发现深层依赖链中的隐藏风险 |
+
+> **来源**: [ESOP 2026 — Zoghbi et al., "Auditing Rust Crates Effectively"](https://arxiv.org/abs/2602.06466)] · 可信度: ✅
+
 ### 5.4 cargo-deny
 
 **[Embark Studios]** A cargo plugin that lets you lint your project's dependency graph to ensure all your dependencies conform to your requirements.
