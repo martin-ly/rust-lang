@@ -895,6 +895,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 | v1.21 | 2026-05-26 | 权威内容对齐 R20+R21：① Crate 生态动态（sqlx 0.9.0 MSRV 1.94、tokio 1.52.2/1.52.3 安全修复、reqwest aws-lc-rs FIPS、arrow-rs 整数溢出修复）；② Rust for Linux 进展（Linux 7.1-rc5、NOVA 驱动 6.15、DRM Rust Mandate ~2026-12） [来源: crate releases; kernel.org]
 | v1.22 | 2026-05-26 | 权威内容对齐 R23：供应链安全——① TrapDoor 跨平台攻击（crates.io 被植入 34 恶意包，隐形 Unicode 污染 AI 上下文）；② CVE-2026-31431 Copy Fail（9 年内核 bug，AI 辅助发现，Rust exploit 公开）；③ Debian APT 硬依赖 Rust（Linux 发行版核心基础设施转折点） [来源: Socket.dev 2026-05-22; Debian Rust Team]
 | v1.23 | 2026-05-26 | 权威内容对齐 R24：① RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论；② 更新 build-std RFC 3874 FCP 完成待合并、RFC 3962 FCP 中；③ 补充 8 个 PFCP/FCP 完成稳定化 PR（CoercePointee、c-variadic、alignment_type、rustdoc merge、supertrait shadowing、stack-protector、breakpoint） [来源: Rust Project Goals; Rust Internals; releases.rs]
+| v1.24 | 2026-05-26 | 权威内容对齐 R25：生态里程碑——① bevy 0.19.0-rc.2（2026-05-22，渲染管线/ECS/资产系统）；② Servo v0.1.0 on crates.io（2026-04-13，6 个月 LTS 策略，浏览器引擎独立分发） [来源: bevy releases; Servo Blog]
 
 ---
 
