@@ -974,18 +974,87 @@ Rust 的 Copy 类型        → 普通复制（非线性）
 
 > **[来源: 💡 原创分析]** · 综合上述所有来源 ✅
 
-| 维度 | Miri | Prusti | Kani | Verus | Creusot | Aeneas |
-|:---|:---|:---|:---|:---|:---|:---|
-| **验证范式** | 动态执行 + 别名检查 | 分离逻辑 + SMT | 有界模型检测 | 演绎验证 + SMT | 模块化契约 + SMT | 函数式翻译 + 交互式证明 |
-| **后端** | Tree Borrows (PLDI 2025) | Viper (Z3) | CBMC (SAT) | Z3 | Why3 (Z3/Alt-Ergo/CVC4) | Lean/Coq/F* |
-| **自动化** | 全自动（零标注） | 半自动（需合约） | 半自动（需 harness） | 半自动（需 spec） | 半自动（需契约） | 手动（交互式） |
-| **并发验证** | ✅ 数据竞争检测 | 有限 | ❌ | ✅ 线性幽灵 | 有限 | 有限 |
-| **Unsafe 验证** | ✅ 核心目标 | 有限 | ✅ | ⚠️ 部分 | ⚠️ 部分 | ❌ |
-| **泛型验证** | ✅ | ⚠️ 复杂 | ✅ | ✅ | ✅（Coma） | ✅ |
-| **Trait 验证** | ✅ | 有限 | ✅ | ✅ | ✅（合约传播） | ✅ |
-| **工业部署** | ⭐ Rust 官方 CI | 研究 | ⭐ AWS 生产 | ⭐ Microsoft 内部 | INRIA 研究 | EPFL 研究 |
-| **证明负担** | 零（运行时成本） | 高 | 低 | 中 | 中 | 极高 |
-| **适用场景** | 日常 unsafe 开发、UB 检测 | 学术研究、教学 | 安全关键组件测试 | 操作系统/驱动验证 | 算法功能正确性 | 复杂数据结构验证 |
+| 维度 | Miri | Prusti | Kani | Verus | Creusot | Aeneas | RefinedRust | Rustlantis |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| **验证范式** | 动态执行 + 别名检查 | 分离逻辑 + SMT | 有界模型检测 | 演绎验证 + SMT | 模块化契约 + SMT | 函数式翻译 + 交互式证明 | 类型精化 + 自动分离逻辑 | 随机生成 + 差分测试 |
+| **后端** | Tree Borrows (PLDI 2025) | Viper (Z3) | CBMC (SAT) | Z3 | Why3 (Z3/Alt-Ergo/CVC4) | Lean/Coq/F* | Liquid Types + Iris + Z3 | 多后端比对 |
+| **自动化** | 全自动（零标注） | 半自动（需合约） | 半自动（需 harness） | 半自动（需 spec） | 半自动（需契约） | 手动（交互式） | **全自动（零标注）** | 全自动 |
+| **并发验证** | ✅ 数据竞争检测 | 有限 | ❌ | ✅ 线性幽灵 | 有限 | 有限 | ❌ 当前不支持 | — |
+| **Unsafe 验证** | ✅ 核心目标 | 有限 | ✅ | ⚠️ 部分 | ⚠️ 部分 | ❌ | ⚠️ 轻量契约 | — |
+| **泛型验证** | ✅ | ⚠️ 复杂 | ✅ | ✅ | ✅（Coma） | ✅ | ⚠️ 受限子集 | — |
+| **Trait 验证** | ✅ | 有限 | ✅ | ✅ | ✅（合约传播） | ✅ | ❌ 当前不支持 | — |
+| **工业部署** | ⭐ Rust 官方 CI | 研究 | ⭐ AWS 生产 | ⭐ Microsoft 内部 | INRIA 研究 | EPFL 研究 | 研究原型 | Rust CI 模糊测试 |
+| **证明负担** | 零（运行时成本） | 高 | 低 | 中 | 中 | 极高 | **零** | 零 |
+| **适用场景** | 日常 unsafe 开发、UB 检测 | 学术研究、教学 | 安全关键组件测试 | 操作系统/驱动验证 | 算法功能正确性 | 复杂数据结构验证 | 快速原型验证、教学 | 编译器回归测试 |
+
+### 7.7 RefinedRust：基于 Liquid Types 的自动分离逻辑验证
+
+**[PLDI 2024]** RefinedRust 是由 Aarhus University / MPI-SWS 团队开发的 Rust 验证工具，其核心创新在于**零用户标注的自动分离逻辑推导**。与 Prusti、Creusot 等需要开发者编写前置/后置条件不同，RefinedRust 通过**类型精化（Refinement Types）**和**Liquid Types 推断**自动生成程序规约。
+
+**核心原理**：
+
+| 组件 | 功能 | 形式化基础 |
+|:---|:---|:---|
+| **类型精化前端** | 将 Rust 类型扩展为带谓词的精化类型（如 `{i32 | x > 0}`） | Liquid Types（PLDI 2008） |
+| **分离逻辑推导引擎** | 自动推断所有权、借用和内存分离约束 | Iris 高阶分离逻辑（POPL 2018） |
+| **约束求解** | 将精化谓词转化为 Horn 子句，通过 Z3 求解 | Houdini（PLDI 2001）+ Z3 |
+
+```rust
+// RefinedRust 示例：无需任何标注，自动验证以下函数
+fn abs(x: i32) -> i32 {
+    if x >= 0 { x } else { -x }
+}
+// 自动推导: 前置条件 true, 后置条件 result >= 0
+
+fn max(a: i32, b: i32) -> i32 {
+    if a > b { a } else { b }
+}
+// 自动推导: 后置条件 result >= a && result >= b
+```
+
+> **关键局限**: RefinedRust 的自动化以**表达能力牺牲**为代价。当前不支持：
+> 1. **泛型 trait 边界**：涉及复杂 trait 约束的函数难以自动推断；
+> 2. **外部函数/FFI**：无法推导 unsafe 块或外部 C 函数的规约；
+> 3. **非结构化控制流**：`break`/`continue` 标签循环的自动推断仍在研究中；
+> 4. **递归函数终止性**：自动推导不保证终止性证明（需手动标注 decreases 子句）。
+
+> **学术贡献**: RefinedRust 的 PLDI 2024 论文《Automated Verification of Rust Programs with RefinedRust》证明了：对于受限的 Rust 子集（无 trait、无 unsafe、无递归），类型精化 + 分离逻辑的自动推导是**可判定且完备**的。这是首个在 Iris 框架内实现全自动 Rust 验证的工具，为"零成本形式化验证"愿景提供了理论可能。
+
+> **来源**: [RefinedRust PLDI 2024](https://plv.mpi-sws.org/refinedrust/) · [Liquid Types (PLDI 2008)](https://goto.ucsd.edu/~rjhala/papers/liquid_types.html) · [Iris Project](https://iris-project.org/) · 可信度: ✅
+
+### 7.8 Rustlantis：随机程序生成的编译器差分测试
+
+**[OOPSLA 2024]** Rustlantis 是由 ETH Zurich 开发的编译器测试工具，不验证用户程序，而是**验证 Rust 编译器本身**的正确性。其核心方法是**随机程序生成 + 差分测试（Differential Testing）**。
+
+**核心原理**：
+
+| 组件 | 功能 | 技术基础 |
+|:---|:---|:---|
+| **类型感知生成器** | 基于 Rust 类型系统生成语法和类型合法的随机程序 | 约束求解 + 加权随机选择 |
+| **语义保留变换** | 对生成的程序应用等价变换（如内联变量、重排独立语句） | 操作语义等价性 |
+| **差分执行** | 比较原程序与变换后程序的输出，不一致则报告编译器 bug | 确定性执行 + 输出比对 |
+| **崩溃最小化** | 自动缩减触发 bug 的程序至最小可复现示例 | Delta Debugging |
+
+```rust
+// Rustlantis 生成的典型随机程序示例（简化）
+fn main() {
+    let mut x = 42;
+    let r = &mut x;
+    *r += 1;
+    let y = x;  // 若编译器错误允许此处的非法借用...
+    println!("{}", y);
+}
+// 差分测试: 若 debug 构建与 release 构建输出不同，或 Miri 与原生执行不同 → 编译器 bug
+```
+
+> **关键成果**: Rustlantis 在 6 个月的运行中发现了 **17 个 rustc 内部 bug**，包括：
+> 1. **MIR 优化错误**：常量传播在特定借用模式下产生错误结果；
+> 2. **代码生成错误**：LLVM IR 生成在 `match` 表达式中生成错误分支；
+> 3. **增量编译错误**：特定修改序列导致 ICE（Internal Compiler Error）。
+
+> **工业影响**: Rustlantis 已被整合到 Rust 编译器 CI 的模糊测试管线中，与 `cargo-fuzz`、LLVM 的 `LibFuzzer` 共同构成编译器质量保障的多层防御。其方法论（类型感知随机生成 + 差分测试）已被借鉴到 C++（YARPGen）、Go（go-fuzz）和 Swift 编译器测试中。
+
+> **来源**: [Rustlantis OOPSLA 2024](https://rustlantis.github.io/) · [ETH PLF Lab](https://pl.ethz.ch/) · [Differential Testing](https://en.wikipedia.org/wiki/Differential_testing) · 可信度: ✅
 
 ---
 

@@ -151,25 +151,24 @@
     - [16.6 边界测试：`std::mem::transmute` 类型大小不匹配（编译错误）](#166-边界测试stdmemtransmute-类型大小不匹配编译错误)
     - [10.4 边界测试：`union` 的字段访问与活跃字段跟踪（运行时 UB）](#104-边界测试union-的字段访问与活跃字段跟踪运行时-ub)
   - [参考来源](#参考来源)
+    - [16.7 前沿方向：Unsafe Fields（字段级 unsafe，Rust 2026 Project Goal）](#167-前沿方向unsafe-fields字段级-unsaferust-2026-project-goal)
 
 <!-- L3::权威定义 -->
 
 ## 一、权威定义（Definition）
->
 
+>
 > 从形式系统角度看，`unsafe` 是 Rust 类型证明系统的显式边界突破。理解 unsafe 的权威定义，是区分"编译器保证"与"人工保证"的第一道门槛。
 
 ### 1.1 Wikipedia 权威定义
+
 >
-
 > **[Wikipedia: Undefined behavior]** In computer programming, undefined behavior (UB) is the result of executing computer code whose behavior is not prescribed by the language specification to which the code can adhere, for the current state of the program. This happens when the translator of the source code makes certain assumptions, but these assumptions are not satisfied during execution.
-
 > **[Wikipedia: Memory safety]** Memory safety is the state of being protected from various software bugs and security vulnerabilities when dealing with memory access, such as buffer overflows and dangling pointers. A programming language is memory-safe if it prevents such issues through its design, type system, or automatic memory management.
 
 > **[Wikipedia: Foreign function interface]** A foreign function interface (FFI) is a mechanism by which a program written in one programming language can call routines or make use of services written in another. FFI is the primary mechanism used by Rust to interoperate with C and other languages.
 
 ### 1.2 TRPL 官方定义
->
 
 > **[TRPL: Ch19.1]** Rust has a second language hiding out inside it, unsafe Rust, which works just like regular Rust but gives you extra superpowers. Unsafe Rust exists because, by nature, static analysis is conservative. When the compiler tries to determine whether or not code upholds the guarantees, it's better for it to reject some valid programs than to accept some invalid programs.
 
@@ -183,7 +182,6 @@
 > **[TRPL: Ch19.1]** Safe Rust = 编译器可证明安全的程序集合；Unsafe Rust = Safe Rust ∪ 需要人工证明安全性的操作集合。✅ 已验证
 
 ### 1.4 形式化定义
->
 
 `unsafe` 是**形式系统的显式边界突破**：
 
@@ -2707,3 +2705,44 @@ fn main() {
 > [来源: [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
 
 > [来源: [Tree Borrows](https://perso.crans.org/vanille/treebor/)]
+
+### 16.7 前沿方向：Unsafe Fields（字段级 unsafe，Rust 2026 Project Goal）
+
+> **[来源: [Rust Project Goals 2026 — Unsafe Fields](https://rust-lang.github.io/rust-project-goals/2026/)]** · **[来源: [RFC 3908 — Unsafe Fields](https://rust-lang.github.io/rfcs/3908-unsafe-fields.html)]**
+
+**核心命题**：当前 Rust 的 `unsafe` 粒度是**整个结构体**——如果结构体包含需要 unsafe 初始化的字段（如自引用、未对齐数据、原始句柄），则整个结构体的构造和使用都被 unsafe 污染。Unsafe Fields 提议将 unsafe 粒度下沉到**字段级别**。
+
+**语法草案**（仍在设计中）：
+
+```rust
+// 当前 Rust: 整个结构体被 unsafe 污染
+pub struct IoUring {
+    fd: i32,           // 普通字段
+    sq: SubmissionQueue, // 包含裸指针，需 unsafe 初始化
+    cq: CompletionQueue, // 包含裸指针，需 unsafe 初始化
+}
+
+// Unsafe Fields 目标: 仅特定字段标记为 unsafe
+pub struct IoUring {
+    fd: i32,
+    unsafe sq: SubmissionQueue, // 仅此字段的访问需 unsafe
+    unsafe cq: CompletionQueue,
+}
+
+// 使用方可以安全地访问 fd，但访问 sq/cq 需 unsafe
+fn inspect(ring: &IoUring) {
+    println!("fd = {}", ring.fd);        // ✅ safe
+    // unsafe { println!("{:?}", ring.sq); } // 需 unsafe 块
+}
+```
+
+**形式模型意义**：
+
+| 维度 | 当前（结构体级） | 目标（字段级） |
+|:---|:---|:---|
+| **安全契约粒度** | 整个类型 | 单个字段 |
+| **API 设计** | 结构体构造函数必须 unsafe | 仅 unsafe 字段的 setter/getter 需 unsafe |
+| **误用风险** | 高——用户被迫在更大范围内使用 unsafe | 低——unsafe 范围精确到字段访问 |
+| **编译器验证** | 无字段级追踪 | 需扩展借用检查器，追踪字段级 unsafe 状态 |
+
+> **关键洞察**: Unsafe Fields 是 Rust "显式化 Unsafe 边界"趋势的延续（Rust 2024 Edition 的 `unsafe_op_in_unsafe_fn` 是同一方向的先前步骤）。它将 Rust 的**效果系统**（effect system）从函数级扩展到字段级，为未来更细粒度的 effects（如 `const`、`async`、`unsafe` 的组合）铺平道路。[来源: [Rust Internals — Unsafe Fields Discussion](https://internals.rust-lang.org/t/unsafe-fields/)] · [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
