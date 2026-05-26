@@ -3,7 +3,7 @@
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.9（2026-05-26 更新，对齐 Rust 1.95.0 stable。核心概念来源标注率 100% 达标。⚠️ 1.96+ 特性基于 nightly/unstable 文档，stable 权威来源待更新）
+> **状态**: v1.13（2026-05-26 更新，对齐 Rust 1.95.0 stable，1.96 release notes draft 已基于 GitHub tracking issue 对齐。核心概念来源标注率 100% 达标。⚠️ 1.96 stable 权威来源待 2026-05-28 发布后最终确认）
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Evolution](./03_evolution.md)
 
@@ -468,7 +468,7 @@ timeline
 
 ### 9.1 Rust 1.96 特性待跟踪表
 
-> **[来源: Rust beta 1.96.0-beta.8 2026-05-20; releases.rs; Cargo Book nightly; RFC tracking issues]** Rust 1.96.0 预计 2026-05-28 进入 stable，目前处于 beta.8 阶段（最终 beta 候选），无已知 release blocker。
+> **[来源: Rust 1.96.0 release notes draft (GitHub #156512) 2026-05-12; Rust beta 1.96.0-beta.8 2026-05-20; releases.rs]** Rust 1.96.0 预计 2026-05-28 进入 stable，release notes draft 已发布，无已知 release blocker。关键稳定化特性已确认。
 
 | 特性 | 当前状态 | 影响维度 | 概念文件 | 优先级 | 1.96 预期 |
 |:---|:---|:---|:---|:---:|:---|
@@ -513,6 +513,15 @@ timeline
 | `core::range::Range` / `RangeFrom` / `RangeToInclusive` + `*Iter` | 类型/迭代器 | 范围类型的完整迭代器支持，for 循环与函数式 API 统一 |
 | `NonZero` 整数范围迭代 (`impl Iterator for Range<NonZero*>`) | trait impl | 非零类型的编译期优化范围遍历 |
 | `assert_matches!` / `debug_assert_matches!` | 宏 | 模式匹配断言，测试代码的声明式验证 |
+
+**语言特性稳定化/变更**:
+
+| 特性 | 形式化意义 |
+|:---|:---|
+| `expr` metavariable 支持 `cfg` | 宏规则中 `expr` 片段可传递给 `cfg` 属性，宏系统与条件编译的互操作增强 |
+| `ManuallyDrop` 常量作为模式 | `const MANUALLY_DROP: ManuallyDrop<T>` 可在 match 模式中直接使用，修复 1.94.0 回归 |
+| never type 在元组表达式中强制转换 | `(!, i32)` 自动强制为 `(T, i32)`，类型系统对 never type 的语义一致性增强 |
+| s390x vector registers inline asm | 内联汇编支持 SystemZ 向量寄存器，嵌入式/大型机领域扩展 |
 
 **Cargo 稳定化**:
 
@@ -760,6 +769,7 @@ timeline
 | v1.11 | 2026-05-23 | 代码块编译器历史性突破：全项目 **931/931 通过（100%）**，knowledge/ 编译失败块系统标记为 `ignore`/`compile_fail`；Miri 报告补充 cargo test 验证状态（c11_proc / c12_wasm）
 | v1.12 | 2026-05-26 | 社区生态动态：补充 2025 State of Rust Survey 关键发现（生产采用率 48.8%、LLM 学习路径迁移）、WebAssembly 1.96 breaking changes（移除 `--allow-undefined`、docs.rs 默认单目标） [来源: Rust Blog 2026-03/04]
 | v1.13 | 2026-05-26 | 权威内容对齐：Rust Foundation 2026–2028 三年战略（五大优先领域、C++ 互操作倡议）、aarch64-pc-windows-msvc Tier 1 RFC 提案 [来源: Rust Foundation 2026-01; Rust RFC Tracker]
+| v1.14 | 2026-05-26 | 1.96 Release Notes Draft 对齐：补充语言特性稳定化（`expr`→`cfg`、ManuallyDrop 模式、never type 元组强制、s390x vector asm）、标准库 API（assert_matches!、NonZero range iter、core::range 完整迭代器）、Cargo 1.96 特性 [来源: Rust 1.96.0 Release Notes Draft GitHub #156512]
 
 ---
 
