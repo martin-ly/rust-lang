@@ -158,17 +158,57 @@ C AST → 指针关系图 → SMT 约束（Z3）→ 最优 Rust 类型分配 →
 
 ---
 
+## 四-A、评估基准与近期学术成果
+
+### CRUST-Bench：C-to-Safe-Rust 翻译的系统性评估（COLM 2025 Spotlight）
+
+**[UT Austin / NYU]** CRUST-Bench 是由 Khatry 等人提出的首个**仓库级** C-to-Rust 翻译基准测试，填补了此前仅评估单函数翻译的空白。它包含 **100 个真实 C 仓库**（平均 958 LOC，多文件），每个仓库配有人工编写的 **safe Rust 接口**（规定签名、类型和所有权约束）和 **Rust 测试用例**（验证功能正确性）。
+
+**评估协议的四重约束**：
+1. **接口匹配**： transpiled 代码必须遵循给定的 safe Rust 接口；
+2. **编译通过**：通过 rustc 借用检查器；
+3. **零 unsafe / 零 FFI**：接口层不允许 `unsafe` 块或外部函数调用；
+4. **测试通过**：全部测试用例执行成功。
+
+**LLM 评估结果（关键发现）**：
+
+| 模型 | 单次成功率 | 迭代修复成功率 | 备注 |
+|:---|:---:|:---:|:---|
+| OpenAI o3 | **19%** | **48%** | 最强闭源模型，修复循环利用编译错误和测试失败反馈 |
+| Claude Opus 4 | 13-22% | 32-48% | 与 o3 同量级 |
+| Claude 3.7 Sonnet | 13-22% | 32-48% | 同量级 |
+| Virtuoso-Medium-32B | <10% | ~20% | 最强开源模型，但仍显著落后闭源模型 |
+| SWE-agent 等 Agentic 系统 | — | < 修复循环 | 未超过简单的 "generate-then-repair" 循环 |
+
+> **关键洞察**: 即使是最先进的 LLM（OpenAI o3）在**严格的 safe Rust 约束**下，迭代修复后也只能达到 48% 的成功率。这揭示了 C-to-Rust 翻译的核心瓶颈不在语法转换，而在**所有权语义推断**——将 C 的自由指针模型映射到 Rust 的受限借用模型需要超越模式匹配的深层推理。CRUST-Bench 的严格协议（零 unsafe）使其成为衡量"真正的安全翻译"而非"语法转写"的黄金标准。
+
+> **来源**: [CRUST-Bench (COLM 2025 Spotlight)](https://arxiv.org/abs/2504.15254) · [CRUST-Bench GitHub](https://github.com/anirudhkhatry/CRUST-bench) · 可信度: ✅
+
+### 近期学术进展补充
+
+| 论文 | 会议 | 核心贡献 | 与 C-to-Rust 翻译的关联 |
+|:---|:---|:---|:---|
+| **"Don't Write, but Return"** (Hong & Ryu) | PLDI 2024 | 将 C 的输出参数替换为 Rust 的代数数据类型（ADT）返回 | 解决 C 中常见的 "out-parameter" 模式到 Rust 的惯用转换 |
+| **"To Tag, or Not to Tag"** (Hong & Ryu) | ASE 2024 | C union 到 Rust tagged union 的自动翻译策略 | 解决 C union 的内存布局与 Rust enum 的类型安全之间的语义映射 |
+| **"Compiling C to Safe Rust, Formalized"** (Fromherz & Protzenko) | arXiv 2024 | C 到 safe Rust 的形式化编译框架 | 提供翻译正确性的数学基础，与 Scylla/&inator 互补 |
+| **"Hayroll"** | PLDI 2026 | C 宏到 Rust 的模块化包装器翻译 | 解决 C 预处理器宏（最顽固的翻译障碍之一）的自动化处理 |
+
+> **来源**: [Hong & Ryu, PLDI 2024](https://doi.org/10.1145/3656406) · [Hong & Ryu, ASE 2024](https://doi.org/10.1145/3691620.3694985) · [Fromherz & Protzenko, arXiv 2024](https://arxiv.org/abs/2412.15042) · [Hayroll, PLDI 2026](https://homes.cs.washington.edu/~mernst/pubs/c-rust-macros-pldi2026.pdf) · 可信度: ✅
+
+---
+
 ## 五、挑战与未来方向
 
 | 挑战 | 当前状态 | 未来方向 |
 |:---|:---|:---|
 | **指针算术 → 切片/索引** | 部分解决（&inator, Scylla） | 需要更精确的数组大小推断 |
 | **动态别名 → 借用** | 未解决 | 可能需要运行时检查（如 RefCell） |
-| **union/位域 → Rust 枚举** | 手动处理 | 自动化语义映射 |
-| **宏/条件编译** | C2Rust 部分支持 | 预处理标准化 |
-| **验证翻译正确性** | TRACTOR / ForCLift 目标 | 组合式验证 + LLM 辅助 |
+| **union/位域 → Rust 枚举** | 手动处理（Hong & Ryu 2024 有进展） | 自动化语义映射 |
+| **宏/条件编译** | C2Rust 部分支持（Hayroll PLDI 2026 有进展） | 预处理标准化 |
+| **验证翻译正确性** | CRUST-Bench 提供评估框架 | 组合式验证 + LLM 辅助 |
+| **LLM 安全翻译上限** | o3 迭代修复 48%（CRUST-Bench） | 需要结合符号执行和类型推断的混合方法 |
 
-> **权威来源**: [DARPA TRACTOR](https://www.darpa.mil/research/programs/translating-all-c-to-rust) · [Scylla (OOPSLA 2026)](https://arxiv.org/abs/2412.15042) · [&inator (PLDI 2026)](https://arxiv.org/abs/2604.17261) · [His2Trans (arXiv 2026)](https://arxiv.org/abs/2603.02617) · [C2Rust](https://c2rust.com/) · [Crown](https://arxiv.org/abs/2305.02287) · [Laertes](https://arxiv.org/abs/2103.15450)
+> **权威来源**: [DARPA TRACTOR](https://www.darpa.mil/research/programs/translating-all-c-to-rust) · [Scylla (OOPSLA 2026)](https://arxiv.org/abs/2412.15042) · [&inator (PLDI 2026)](https://arxiv.org/abs/2604.17261) · [His2Trans (arXiv 2026)](https://arxiv.org/abs/2603.02617) · [CRUST-Bench (COLM 2025)](https://arxiv.org/abs/2504.15254) · [C2Rust](https://c2rust.com/) · [Crown](https://arxiv.org/abs/2305.02287) · [Laertes](https://arxiv.org/abs/2103.15450)
 
 ---
 
