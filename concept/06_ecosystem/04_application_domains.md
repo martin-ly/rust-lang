@@ -13,6 +13,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，覆盖 8 大应用领域、工业案例、技术栈矩阵、L1-L5 概念映射
+- v1.1 (2026-05-26): 权威内容对齐：补充 esp-hal 1.0.0（首个厂商官方支持 Rust SDK，Espressif 付费团队维护）、Linux 内核 v7.0-rc4 pin-init 安全修复（InitOk token、未对齐字段初始化移除） [来源: Web Authority Alignment Batch 15]
 
 ---
 
@@ -239,6 +240,20 @@ Rust 在嵌入式领域的独特价值：
 | **nRF52** | `nrf-hal` + `embassy-nrf` | BLE 协议栈、低功耗 |
 | **STM32** | `stm32-hal` | 最成熟的 HAL 生态 |
 
+**里程碑 — esp-hal 1.0.0（2025-10-30）**：
+
+**[Espressif Systems]** `esp-hal` 成为**首个厂商官方支持的 Rust SDK**（由 Espressif 付费开发团队维护），标志着 Rust 嵌入式从社区驱动进入**工业级支持**阶段。
+
+| **维度** | **详情** |
+|:---|:---|
+| 稳定化范围 | `esp_hal::init`、GPIO、UART、SPI、I2C（Blocking + Async）、time 模块、`#[main]` 宏 |
+| 不稳定特性 | WiFi/BLE（`esp-radio`/`esp-wifi`）、其他外设驱动需启用 `unstable` feature |
+| 支持芯片 | ESP32、ESP32-C2/C3/C5/C6/C61、ESP32-H2、ESP32-S2/S3（Xtensa + RISC-V） |
+| 工具链 | `esp-generate` 项目生成器、`espflash` 烧录工具 |
+| 下载量 | ~39k/月（2026-05），93 个下游 crate 依赖 |
+
+**战略意义**: Espressif 的正式背书消除了企业采用 Rust 嵌入式的最大障碍——**厂商支持不确定性**。此前 STM32/Nordic 的 HAL 均为社区维护，而 Espressif 的付费团队承诺长期维护，为其他芯片厂商树立了先例。这与 ARM 的 CMSIS、Nordic 的 SDK 策略形成对比：Espressif 选择直接支持 Rust 而非仅提供 C SDK + FFI 绑定。
+
 **关键洞察**：embassy 的 `async` 在 `no_std` 环境下的实现，证明了 Rust 的 async/await 不是运行时的专利——通过编译期状态机转换，裸机上也能获得协作式多任务，且无堆分配。
 
 > **来源**: [Ferrous Systems — Embedded Rust] · [Embassy Book] · 可信度: ✅
@@ -333,7 +348,15 @@ Rust 在区块链领域占据**主导地位**的原因：
 | `cold_path` | 即将稳定 | 替代 `likely`/`unlikely`，与内核现有优化模式对齐 |
 | **New Trait Solver** | 长期阻塞 | 阻塞 unmovable types、guaranteed destructors、TAIT、const traits 等内核急需特性 |
 
-> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。[来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/)] · [来源: [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/)] · 可信度: ✅
+**Linux 内核 v7.0-rc4 中的 Rust 安全加固**（2026-03）：
+
+| **修复** | **问题** | **解决方案** |
+|:---|:---|:---|
+| **pin-init InitOk token** | 初始化闭包可能在所有字段初始化前返回，导致部分初始化结构体的 soundness 漏洞 | 用不可外部构造的 `InitOk` token 替换脆弱的 name-shadowing 守卫 |
+| **移除未对齐字段初始化 escape hatch** | `#[disable_initialized_field_access]` 静默允许未对齐字段的就地初始化，产生运行时 UB | 移除该 escape hatch，依赖它的代码现在编译失败而非静默产生 UB |
+| **`unused_features` lint 兼容** | Rust 1.96 重新启用 `unused_features` lint，内核全局启用的 feature 列表触发大量警告 | 内核构建系统全局允许该 lint，避免逐 crate 修改 |
+
+> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。[来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/)] · [来源: [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/)] · [来源: [Linux Kernel v7.0-rc4](https://lexplain.net/release-notes/v7.0-rc4)] · 可信度: ✅
 
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 

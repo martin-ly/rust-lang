@@ -747,6 +747,27 @@ timeline
 
 > **来源**: [Rust RFC — Promote aarch64-pc-windows-msvc to Tier 1](https://github.com/rust-lang/rfcs/pull/...) · [Rust Blog — Demoting i686-pc-windows-gnu](https://blog.rust-lang.org/2025/05/26/demoting-i686-pc-windows-gnu/) · [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) · 可信度: 🟡（RFC 编号待稳定后更新）
 
+### 12.5 async-std 停止维护与 Async 生态整合
+
+**[async-rs, 2025-03-01]** `async-std`  crate 在发布 v1.13.1 时正式宣布**停止维护**（discontinued），RUSTSEC-2025-0052 安全公告于 2025-08 发布。这一事件标志着 Rust async 运行时生态从"多极竞争"进入"Tokio 主导 + 细分场景专用运行时"的新阶段。
+
+| **运行时** | **定位** | **状态** | **适用场景** |
+|:---|:---|:---|:---|
+| **Tokio** | 工业级通用异步运行时 | ✅ 活跃，生态主导 | 网络服务、数据库、Web 后端 |
+| **smol** | 轻量级显式运行时 | ✅ 活跃，async-std 推荐替代 | 嵌入式、低资源环境、库开发 |
+| **async-std** | 类 std 异步运行时 | ❌ **2025-03-01 停止维护** | 迁移至 smol 或 Tokio |
+| **embassy** | `no_std` 嵌入式异步 | ✅ 活跃，stable Rust 支持 | 裸机/RTOS 嵌入式 |
+| **glommio** | io_uring 每核运行时 | ✅ 活跃 | 高性能存储/网络（Linux） |
+
+**影响评估**：
+- **1,754 个公共 crate** 仍直接依赖 `async-std`（2026-05 数据）
+- 推荐迁移路径：`async-std` → `smol`（API 更接近）或 `tokio`（生态更丰富）
+- `surf` 等构建在 async-std 上的库面临维护困境
+
+**深层意义**: async-std 的落幕并非失败，而是**成功完成了其历史使命**——证明"类 std 的异步 API"是可行且有价值的。其设计理念（接近 std 的 API、显式运行时）已深刻影响了 Rust 标准库的 async 演进方向。Tokio 的主导地位则反映了网络服务领域对成熟生态的刚性需求——正如 Java 的 Netty、Go 的 goroutine 运行时，异步生态最终趋向单一主导 + 边缘细分。
+
+> **来源**: [async-std v1.13.1 Release Notes](https://github.com/async-rs/async-std/releases) · [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) · [corrode.dev — The State of Async Rust](https://corrode.dev/blog/async/) · [Fedora Change Proposal](https://fedoraproject.org/wiki/Changes/Deprecate_async-std) · 可信度: ✅
+
 ---
 
 ## 十一、变更日志
@@ -770,6 +791,7 @@ timeline
 | v1.12 | 2026-05-26 | 社区生态动态：补充 2025 State of Rust Survey 关键发现（生产采用率 48.8%、LLM 学习路径迁移）、WebAssembly 1.96 breaking changes（移除 `--allow-undefined`、docs.rs 默认单目标） [来源: Rust Blog 2026-03/04]
 | v1.13 | 2026-05-26 | 权威内容对齐：Rust Foundation 2026–2028 三年战略（五大优先领域、C++ 互操作倡议）、aarch64-pc-windows-msvc Tier 1 RFC 提案 [来源: Rust Foundation 2026-01; Rust RFC Tracker]
 | v1.14 | 2026-05-26 | 1.96 Release Notes Draft 对齐：补充语言特性稳定化（`expr`→`cfg`、ManuallyDrop 模式、never type 元组强制、s390x vector asm）、标准库 API（assert_matches!、NonZero range iter、core::range 完整迭代器）、Cargo 1.96 特性 [来源: Rust 1.96.0 Release Notes Draft GitHub #156512]
+| v1.15 | 2026-05-26 | 社区生态动态：补充 async-std 停止维护（2025-03-01 discontinued，RUSTSEC-2025-0052，1,754 crate 受影响，推荐 smol/Tokio 迁移） [来源: async-std Release Notes; corrode.dev; Fedora Change Proposal]
 
 ---
 
