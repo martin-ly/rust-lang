@@ -24,6 +24,7 @@
 - v1.4 (2026-05-26): 补充 Rust 2026 Project Goals 四大旗舰目标详解（Beyond the &、灵活编译、高阶 Rust、释放沉睡 Trait）及子目标矩阵 [来源: Web Authority Alignment Sprint]
 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 Project Goals 2026 年度旗舰目标（Polonius Alpha、Safety-Critical Rust、cargo-script）、Effects 系统 `gen<yield>` 跟踪、Ferrocene ASIL B/SIL 2 认证动态
 - v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std RFC 3873/3874 已合并状态、Cranelift 资金不足未完成确认 [来源: Rust Blog — Project Goals Update: April 2026]
+- v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy RFC 3936（Rust 首个项目级 AI 使用政策） [来源: TWiR 650]
 
 ---
 
@@ -1264,6 +1265,9 @@ fn fixed() {
 | **MemorySanitizer / ThreadSanitizer** | 运行时安全 | 将 MSan/TSan 支持稳定化，与 Miri 形成"静态+动态"的 UB 检测双保险 |
 | **Rust Vision Document** | 语言哲学 | 社区驱动的 Rust 长期愿景文档，定义 2030 年的 Rust 应该是什么样 |
 | **SVE / SME on AArch64** | 平台扩展 | 可伸缩向量扩展（SVE）和矩阵扩展（SME）的 Rust 绑定；高性能计算的新前沿 |
+| **Project-wide LLM Policy** (RFC 3936) | 社区治理 | 定义 Rust Project 空间内 LLM/AI 生成贡献的边界，防止 "slop" 污染；首个项目级 AI 使用政策，影响 issue/PR/rfc 的审核标准和知识产权归属 |
+
+> **[来源: [RFC 3936 — Project-wide LLM Policy](https://github.com/rust-lang/rfcs/pull/3936)]** 随着 LLM 生成内容在开源社区激增，Rust Project 正在制定首个项目级 AI 使用政策。核心议题包括：1) AI 生成的代码/文本在 RFC/PR/issue 中的披露义务；2) 训练数据是否包含 Rust 项目内容的知识产权边界；3) "slop"（低质量 AI 生成内容）对技术讨论的稀释效应。这与 Rust 社区此前 State of Rust Survey 2025 发现的"LLM 学习路径迁移"趋势（§12.1）形成呼应——技术政策正在追赶技术现实。[来源: [This Week in Rust 650](https://this-week-in-rust.org/blog/2026/05/06/this-week-in-rust-650/)] · 可信度: 🟡（RFC 审议中）
 
 ### 6.6 Safety-Critical Rust：从原型到认证的鸿沟
 

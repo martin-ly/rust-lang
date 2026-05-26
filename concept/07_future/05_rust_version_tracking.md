@@ -750,6 +750,18 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 
 > **深层意义**: 基金会的三年战略反映了 Rust 的成熟阶段——不再只是"语言设计"问题，而是**生态可持续性**问题。Cranelift 资金不足、gccrs 的长期投入需求、安全关键认证的工业推动，都需要基金会在企业和社区之间搭建桥梁。2025 年 $5.1M 的筹款规模与 LLVM（Apple/Google/Meta 等数千万美元级资助）相比仍有差距，但方向正确。[来源: [Rust Foundation — 2025 Annual Report & Strategy](https://rustfoundation.org/media/annual-report-strategy-2025/)] · [来源: [Inside Rust — Foundation Annual Report PD Update](https://blog.rust-lang.org/inside-rust/2026/01/27/2025-rust-foundation-annual-report/)] · [来源: [Inside Rust — Program Management Update April 2026](https://blog.rust-lang.org/inside-rust/2026/05/13/program-management-update--april-2026/)] · 可信度: ✅
 
+**包注册表可持续性联盟（2026-05-06）**:
+
+**[Rust Foundation, 2026-05-06]** Rust 基金会作为创始成员加入 Linux Foundation 的 **"Sustainable Package Registry Working Group"**，与 PyPI、npm、Maven Central 等包注册表领导者联合应对开源基础设施的可持续性危机。
+
+| **挑战** | **影响** | **联盟响应** |
+|:---|:---|:---|
+| **AI 流量激增** | crates.io 等注册表的自动化下载请求（LLM 训练数据抓取、依赖解析 bot）导致带宽和存储成本急剧上升 | 跨注册表共享流量模式数据，制定差异化计费策略 |
+| **Bot 攻击与滥用** | 恶意上传、名称抢注、加密货币挖矿依赖注入 | 建立集体安全防御机制（共享威胁情报、统一漏洞响应协议） |
+| **治理碎片化** | 各注册表独立制定服务条款、DMCA 政策、内容审核标准 | 共享治理框架和标准条款模板 |
+
+> **深层意义**: 这是首个跨基金会的包注册表基础设施合作。对 Rust 而言，crates.io 的可持续性直接关系到整个语言的生态系统健康——如果注册表因资金不足而服务质量下降，所有 Rust 开发者的日常 workflow（`cargo build`、`cargo update`）都会受到影响。与 PyPI/npm 的联合也意味着 Rust 安全问题可以更快获得跨生态的响应资源。[来源: [Rust Foundation — Package Registry Sustainability Alliance](https://rustfoundation.org/media/rust-foundation-and-package-registry-leaders-unite-to-address-open-source-sustainability-crisis/)] · 可信度: ✅
+
 ### 12.4 aarch64-pc-windows-msvc 晋升 Tier 1 RFC
 
 **[Rust RFC, 2026-05]** 新 RFC 提案将 `aarch64-pc-windows-msvc`（ARM64 Windows）从 Tier 2 with host tools 晋升为 **Tier 1 with host tools**。这是 Rust 平台支持矩阵的重大扩展，反映了 ARM64 Windows 设备（Surface Pro X、Windows Dev Kit 2023、Copilot+ PC）的市场增长。
@@ -814,6 +826,19 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 
 > **来源**: [gRPC Blog — Tonic is joining the gRPC project](https://grpc.io/blog/tonic-joins-grpc-project/) · 可信度: ✅
 
+### 12.7 Rust Project 首次参与 Outreachy（2026-05-04）
+
+**[Rust Blog, 2026-05-04]** Rust Project 首次正式参与 **Outreachy**（开源实习项目，专注于为技术领域代表性不足的群体提供带薪实习机会），指导 **4 名实习生** 参与 2026-05 至 2026-08  cohort。
+
+| **实习项目** | **技术领域** | **形式模型意义** |
+|:---|:---|:---|
+| **C++ 重载函数从 Rust 调用** | FFI / C++ 互操作 | 解决 Rust-C++ 边界中最复杂的重载解析问题，为 `autocxx`/`cxx` 等工具提供理论基础 |
+| **编译器代码覆盖率规模化** | 编译器测试基础设施 | 提高 rustc 测试覆盖率的可观测性，间接提升形式化验证工具（如 Miri、Kani）的基准测试质量 |
+| **a-mir-formality 类型系统 fuzzing** | 类型系统形式化 | a-mir-formality 是 Rust 类型系统的官方形式化规范；fuzzing 可发现类型检查器与形式化语义之间的不一致 |
+| **Rust Project GitHub Actions 安全** | 供应链安全 | CI/CD 管道的安全加固，防止供应链攻击（如恶意 action、凭证泄露） |
+
+> **深层意义**: Outreachy 参与标志着 Rust Project 在**贡献者多样性**上的主动投入。四个项目中，a-mir-formality fuzzing 直接关联 Rust 类型系统的**形式化正确性**——如果 fuzzing 发现了类型检查器与形式化规约之间的偏差，那将是 Rust 语义基础的重大发现。[来源: [Rust Blog — Outreachy May 2026](https://blog.rust-lang.org/2026/05/04/outreachy-2026-may/)] · 可信度: ✅
+
 ---
 
 ## 十一、变更日志
@@ -840,6 +865,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 | v1.15 | 2026-05-26 | 社区生态动态：补充 async-std 停止维护（2025-03-01 discontinued，RUSTSEC-2025-0052，1,754 crate 受影响，推荐 smol/Tokio 迁移） [来源: async-std Release Notes; corrode.dev; Fedora Change Proposal]
 | v1.16 | 2026-05-26 | 权威内容对齐 R16：① nvptx64-nvidia-cuda 基线提升（PTX ISA 7.0 / SM 7.0+，Rust 1.97 起 Maxwell/Pascal 支持终止） [来源: Rust Blog 2026-05-01]；② Tonic 正式加入 gRPC 官方项目（CNCF 治理，`grpc` crate 长期规划） [来源: gRPC Blog 2026-05-21]
 | v1.17 | 2026-05-26 | 权威内容对齐 R17：① CVE-2026-5223 完整安全公告（Cargo symlink 缓存覆盖漏洞，Medium 严重性，crates.io 不受影响，第三方注册表用户需关注） [来源: Rust Security Advisory 2026-05-25]；② 1.96.0 pre-release 状态更新（2026-05-26 已可用，最终稳定版 2026-05-28） [来源: Inside Rust 2026-05-26]
+| v1.18 | 2026-05-26 | 权威内容对齐 R18：① Rust Foundation 加入包注册表可持续性联盟（应对 AI 流量/bot 攻击/治理碎片化） [来源: Rust Foundation 2026-05-06]；② Rust Project 首次 Outreachy 参与（4 名实习生：C++ 互操作/编译器覆盖率/a-mir-formality fuzzing/GA 安全） [来源: Rust Blog 2026-05-04]
 
 ---
 
