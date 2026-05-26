@@ -354,7 +354,7 @@ graph TD
 | **下载量透明度** | 公开统计 | 公开统计 |
 | **yank 机制** | 可 yank（阻止新下载），但已有 lock 仍可用 | npm deprecate / PyPI yank |
 | **命名空间** | 扁平命名空间，无组织前缀 | npm 支持组织（`@scope`） |
-| **恶意包历史** | 2022 年 `rustdecimal` 等 typosquatting 事件 | npm 事件更频繁 |
+| **恶意包历史** | 2022 年 `rustdecimal` 等 typosquatting 事件；**2026-05 TrapDoor 跨平台攻击**（crates.io 被植入恶意包） | npm 事件更频繁 |
 | **审计覆盖** | ~500 个 crate 通过 cargo-vet 审计 | 无统一审计体系 |
 
 > **来源**: [crates.io policies] · [RustSec Advisory Database] · [OpenSSF Scorecard]
@@ -388,6 +388,27 @@ deny = [{ name = "crate-name", version = "<1.0.0" }]
 > 2. **锁定版本**: `Cargo.lock` 提交到版本控制，避免自动升级引入漏洞。
 > 3. **CI 集成**: `cargo audit` 作为 CI 步骤，漏洞发现即阻断合并。
 > 4. **组织审计**: `cargo vet` 建立"允许列表"，只有被团队审查过的 crate 才能进入构建。 [来源: cargo-audit docs / cargo-vet docs / Mozilla Supply Chain]
+
+### 7.3 重大供应链安全事件：TrapDoor 跨平台攻击（2026-05-22）
+
+**[Socket.dev, 2026-05-22]** 一场名为 **TrapDoor** 的协调供应链攻击同时波及 **npm、PyPI 和 crates.io**，攻击者植入了 **34 个恶意包**（涉及 384+ 版本）。这是 **crates.io 首次被确认卷入大规模跨平台供应链攻击**。
+
+**攻击手法**：
+
+1. **隐形 Unicode 污染**：恶意包使用不可见的 Unicode 控制字符（如零宽空格、双向文本覆盖字符）污染 AI 编码工具（GitHub Copilot、Cursor 等）的上下文文件
+2. **AI 投毒**：当开发者使用 AI 助手生成代码时，被污染的上下文会诱导 AI 生成包含后门的代码片段
+3. **跨平台同步**：同一攻击者在三个注册表上发布名称相似的恶意包，扩大覆盖面
+
+**影响评估**：
+
+| **维度** | **详情** |
+|:---|:---|
+| **受影响的注册表** | npm（主要目标）、PyPI、**crates.io** |
+| **恶意包数量** | 34 个包，384+ 版本 |
+| **crates.io 响应** | 相关包已被移除；Trusted Publishing 机制持续加固 |
+| **攻击窗口** | 2026-05-15 至 2026-05-22（发现后数小时内移除） |
+
+> **深层意义**: TrapDoor 攻击揭示了一个新型威胁向量——**AI 辅助开发工具的供应链攻击**。传统的 `cargo audit` 和 RustSec 数据库只能检测已知的 CVE，但 TrapDoor 利用的是"AI 上下文污染"，这在现有安全工具链中没有直接对应检测手段。这要求 Rust 生态在三个层面加强防御：1) 注册表层面（更严格的包内容扫描，包括 Unicode 异常检测）；2) 工具层面（AI 编码助手的上下文隔离）；3) 开发者层面（对 AI 生成代码的审计意识）。[来源: [Socket.dev — TrapDoor Supply Chain Attack](https://socket.dev/blog/trapdoor-supply-chain-attack)] · 可信度: ✅
 
 ---
 

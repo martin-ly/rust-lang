@@ -579,6 +579,20 @@ timeline
 > 3. 对安全关键项目，启用 `cargo-deny` 自动阻断已知漏洞依赖
 > [来源: [Rust Security Policy](https://www.rust-lang.org/policies/security)]
 
+**CVE-2026-31431 "Copy Fail" — AI 辅助发现的 9 年内核 Bug（2026-05）**:
+
+**[Linux Kernel, 2026-05-01]** 一个存在于 Linux 内核 AF_ALG 子系统中 **9 年的 bug**（2017 年引入）被 **AI 辅助发现**。该 bug 允许通过 `copy_from_user()` 的失败路径绕过安全边界。更具标志性的是：漏洞公开后**数日内**，**Rust 和 Go 的 exploit 出现在公开仓库中**——这是首次观察到 Rust exploit 在 Linux 内核漏洞披露后如此快速地公开出现。
+
+| **维度** | **详情** |
+|:---|:---|
+| **漏洞位置** | Linux 内核 AF_ALG 子系统 (`crypto/af_alg.c`) |
+| **引入时间** | 2017 年（9 年未被发现） |
+| **发现方式** | AI 辅助分析（具体工具未披露） |
+| **公开后影响** | Rust + Go exploit 在 GitHub 上公开出现 |
+| **修复状态** | 已修补，补丁已回传 stable 分支 |
+
+> **深层意义**: 此事件标志着 **AI 辅助漏洞发现** 进入主流，同时也揭示了一个令人担忧的趋势：**内存安全语言（Rust/Go）的 exploit 开发速度正在追赶 C/C++**。Rust 的内存安全保证阻止了 UAF/溢出等"经典"漏洞，但逻辑错误（如 `copy_from_user()` 返回值检查遗漏）仍然可被利用。这要求 Rust 内核开发者不仅关注内存安全，还要关注**逻辑正确性的形式化验证**。[来源: [Linux Kernel Mailing List](https://lore.kernel.org/linux-crypto/)] · [来源: [CVE-2026-31431](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-31431)] · 可信度: ✅
+
 ---
 
 ## 十、1.97 Nightly 前瞻跟踪
@@ -799,6 +813,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 | **glommio** | io_uring 每核运行时 | ✅ 活跃 | 高性能存储/网络（Linux） |
 
 **影响评估**：
+
 - **1,754 个公共 crate** 仍直接依赖 `async-std`（2026-05 数据）
 - 推荐迁移路径：`async-std` → `smol`（API 更接近）或 `tokio`（生态更丰富）
 - `surf` 等构建在 async-std 上的库面临维护困境
@@ -871,6 +886,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 | v1.19 | 2026-05-26 | 权威内容对齐 R19：安全公告全景补充——① CVE-2026-5222 完善（影响 Cargo 1.68–1.95）；② RUSTSEC-2026-0149 wasmtime-wasi FilePerms 绕过；③ RUSTSEC-2026-0141 lettre TLS 主机名验证失效（CVSS 9.1 Critical）；④ CVE-2026-25727 `time` crate DoS [来源: Rust Security Advisory 2026-05; rustsec.org]
 | v1.20 | 2026-05-26 | 权威内容对齐 R22：学术论文补充——① Miri POPL 2026（已有，确认引用）；② Rusted Types ICSE 2026（类型混淆静态检测）；③ SmartC2Rust ICSE 2026（LLM C→Rust 翻译）；④ Android AOSP FSE 2026（Rust 集成实证）；⑤ Cargo Scan ESOP 2026（大规模 crate 审计） [来源: POPL/ICSE/FSE/ESOP 2026]
 | v1.21 | 2026-05-26 | 权威内容对齐 R20+R21：① Crate 生态动态（sqlx 0.9.0 MSRV 1.94、tokio 1.52.2/1.52.3 安全修复、reqwest aws-lc-rs FIPS、arrow-rs 整数溢出修复）；② Rust for Linux 进展（Linux 7.1-rc5、NOVA 驱动 6.15、DRM Rust Mandate ~2026-12） [来源: crate releases; kernel.org]
+| v1.22 | 2026-05-26 | 权威内容对齐 R23：供应链安全——① TrapDoor 跨平台攻击（crates.io 被植入 34 恶意包，隐形 Unicode 污染 AI 上下文）；② CVE-2026-31431 Copy Fail（9 年内核 bug，AI 辅助发现，Rust exploit 公开）；③ Debian APT 硬依赖 Rust（Linux 发行版核心基础设施转折点） [来源: Socket.dev 2026-05-22; Debian Rust Team]
 
 ---
 
