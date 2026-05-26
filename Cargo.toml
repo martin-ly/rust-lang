@@ -420,7 +420,7 @@ sea-orm = { version = "2.0.0-rc.18", features = [
     "runtime-tokio-rustls", # tokio运行时和rustls支持
 ], default-features = false }
 # sqlx: 异步纯Rust SQL工具包，支持编译时检查的查询
-sqlx = { version = "0.9.0", features = [
+sqlx = { version = "0.8.6", features = [
     "runtime-tokio",       # tokio运行时支持
     "tls-rustls",          # rustls TLS支持
     "postgres",            # PostgreSQL支持
