@@ -19,7 +19,6 @@
 ## 一、权威定义
 >
 
-
 ### 1.1 Wikipedia 权威定义
 
 [来源: [Async Book](https://rust-lang.github.io/async-book/)]
@@ -60,7 +59,6 @@
 
 ## 认知路径（Cognitive Path）
 >
-
 
 > **学习递进**: 从直觉出发，逐层深入核心概念。
 [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -103,7 +101,6 @@ embedded-hal/actix/anchor/bevy等框架
 ## 二、概念属性矩阵
 >
 
-
 ### 2.1 应用领域 × 技术栈 × 概念依赖总矩阵
 >
 
@@ -136,7 +133,6 @@ embedded-hal/actix/anchor/bevy等框架
 
 ## 三、思维导图
 >
-
 
 ```mermaid
 graph TD
@@ -174,7 +170,6 @@ graph TD
 
 ## 四、应用领域详解
 >
-
 
 ### 4.1 Web 后端与云原生
 >
@@ -341,6 +336,41 @@ Rust 在区块链领域占据**主导地位**的原因：
 > **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。[来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/2026/)] · [来源: [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/)] · 可信度: ✅
 
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
+
+### 4.7-A Google Pixel：Rust 进入蜂窝基带固件
+
+**[Google Security Blog, 2026-04-10]** Pixel 10 系列是**首款在蜂窝基带（cellular baseband/modem）固件中集成内存安全语言**的智能手机。Google 选择从 **DNS 解析器**入手，使用 Rust 重写 modem 中的 DNS 解析组件，以消除内存安全漏洞类别。
+
+**为什么选择基带 DNS 解析器？**
+
+- 基带固件有**数十 MB 可执行代码**，传统上以 C/C++ 编写，内存不安全；
+- DNS 协议解析**不可信的外部输入**，是漏洞高发区（如 CVE-2024-27227）；
+- Google Project Zero 曾通过互联网远程代码执行攻击 Pixel 基带；
+- 现代蜂窝通信中，连**呼叫转移**都依赖 DNS 服务。
+
+**技术实现挑战与解决方案**：
+
+| 挑战 | 解决方案 | 细节 |
+|:---|:---|:---|
+| **裸机环境（`no_std`）** | 为 `hickory-proto` 及其依赖添加 `no_std` 支持 | 上游 PR: hickory-dns#2104, rust-url#831, ipnet#58 |
+| **构建系统集成** | 直接使用 `rustc`（非 cargo），通过 Pigweed/GN 驱动 | 避免多 staticlib 链接的符号重复；使用 Fuchsia 的 `cargo-gnaw` 生成 GN 规则 |
+| **内存分配** | `alloc` 通过 FFI 调用 C 分配器 | 实现 `GlobalAlloc`，桥接 modem 专用分配器 |
+| **崩溃处理统一** | `panic_handler` 通过 FFI 调用 C 崩溃后端 | 统一 Rust 和 C/C++ 的崩溃处理流程 |
+| **弱符号冲突** | 链接前 strip `compiler_builtin` 的 `memset`/`memcpy` | Rust 的 `compiler_builtin` 弱符号意外覆盖了 modem 优化的内存操作实现，导致性能和功耗回退 |
+| **FFI 回调** | bindgen 自动生成 C 回调的 Rust 绑定 | DNS 解析结果需写回 C 结构体，回调类型复杂 |
+
+**代码体积分析**：
+
+| 组件 | 大小 | 备注 |
+|:---|:---:|:---|
+| Rust shim（调用 hickory-proto） | 4 KB | 一次性 |
+| `core` + `alloc` + `compiler_builtins` | 17 KB | 可复用基础 |
+| `hickory-proto` + 30+ 依赖 | 350 KB | 非为嵌入式优化，未来可精简 |
+| **总计** | **371 KB** | Pixel modem 内存不紧张，优先社区支持和代码质量 |
+
+> **关键洞察**: Google Pixel 基带 Rust 集成是 **"现有固件代码库中渐进式引入 Rust"** 的教科书级案例。它展示了在**没有操作系统**（bare-metal）、**没有标准库**（`no_std`）、**现有 C/C++ 构建系统**（Pigweed/GN）的极端约束下，如何将 Rust 组件嵌入现有固件。与 Rust for Linux（内核子系统）不同，基带场景更苛刻：无 `std`、无 `cargo`、30+ 第三方 crate 依赖、弱符号冲突等。这为嵌入式/IoT/汽车电子等领域提供了可复制的迁移 playbook。
+
+> **来源**: [Google Security Blog — Bringing Rust to the Pixel Baseband](https://blog.google/security/bringing-rust-to-the-pixel-baseband/) · [Help Net Security](https://www.helpnetsecurity.com/2026/04/13/google-pixel-rust-baseband-modem-security/) · 可信度: ✅
 
 ### 4.8 桌面 GUI 与跨平台应用
 
@@ -523,7 +553,6 @@ fn move_player(
 ## 五、领域与 L1-L5 概念映射
 >
 
-
 | **应用领域** | **L1 基础** | **L2 进阶** | **L3 高级** | **L4 形式化** | **L5 对比** |
 |:---|:---|:---|:---|:---|:---|
 | **Web 后端** | 所有权 + 生命周期 | Trait (Handler) | async/await + Send/Sync | — | Go/Java 并发模型 |
@@ -539,7 +568,6 @@ fn move_player(
 
 ## 六、反命题与边界分析
 >
-
 
 ### 命题: "Rust 适合所有软件工程领域"
 
@@ -581,7 +609,6 @@ graph TD
 
 ## 七、扩展内容：工业案例与趋势
 >
-
 
 ### 7.1 大规模工业采用矩阵
 
@@ -683,7 +710,6 @@ graph TD
 ## 八、知识来源关系（Provenance）
 >
 
-
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
 | Rust 适合系统编程 | [TRPL] · [Wikipedia: Systems programming] | ✅ |
@@ -709,7 +735,6 @@ graph TD
 
 ## 九、相关概念链接
 >
-
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -883,7 +908,6 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 
 ## 十、待补充与演进方向（TODOs）
 
-
 - [x] **高**: 补充 WASM 全栈开发领域深度解析
 - [x] **高**: 补充嵌入式 no_std 工程化深度案例
 - [x] **高**: 补充 CLI 工具工程化完整技术栈
@@ -971,7 +995,6 @@ fn view(app: &App, frame: Frame) {
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
 
-
 > **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 | 断言 | 前提条件 | 结论 | 反例/边界条件 | 典型场景 |
@@ -991,7 +1014,6 @@ fn view(app: &App, frame: Frame) {
 | **领域选择多维决策** | 性能/安全/生态/人才 ⟹ | 无银弹 | 混合语言架构 | 技术选型框架 |
 
 ## 反命题分析（Anti-Propositions）
-
 
 > **逻辑辨析**: 以下命题看似成立，实则在特定条件下失效。
 
@@ -1108,7 +1130,6 @@ graph TD
 ---
 
 ## 十一、生态前沿的形式化梳理（2026.05）
-
 
 > **定位**: 本章节从**形式模型视角**梳理各生态前沿方向，不展开使用教程，聚焦"该领域与 Rust 所有权/类型系统的交互、安全边界、与 L1-L4 的映射"。
 > **原则**: 点到为止，每方向一段形式化分析。
@@ -1267,7 +1288,6 @@ graph TD
 
 ## 变更日志
 
-
 | 版本 | 日期 | 变更 |
 |:---|:---|:---|
 | v1.0 | 2026-05-12 | 初始版本 |
@@ -1300,131 +1320,11 @@ graph TD
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：应用领域的编译错误
 
