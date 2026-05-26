@@ -3,7 +3,7 @@
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.16（2026-05-26 更新，对齐 Rust 1.95.0 stable，1.96 release notes draft 已基于 GitHub tracking issue 对齐。核心概念来源标注率 100% 达标。⚠️ 1.96 stable 权威来源待 2026-05-28 发布后最终确认）
+> **状态**: v1.17（2026-05-26 更新，对齐 Rust 1.95.0 stable，1.96 pre-release 已可用、最终稳定版 2026-05-28 发布。核心概念来源标注率 100% 达标。⚠️ 1.96 stable 权威来源待发布后最终确认）
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Evolution](./03_evolution.md)
 
@@ -551,7 +551,7 @@ timeline
 | 漏洞编号 | 影响组件 | 严重性 | 描述 | 修复版本 | 知识库覆盖 |
 |:---|:---|:---:|:---|:---|:---|
 | **CVE-2026-5222** | **Cargo** (sparse registry) | Low | Cargo 错误规范化 sparse registry URL（`.git` 后缀），攻击者可窃取同一域名下其他 registry 用户的凭证 | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
-| **CVE-2026-5223** | **Cargo** | Low | Cargo 安全响应（与 CVE-2026-5222 同日发布，具体细节待披露） | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
+| **CVE-2026-5223** | **Cargo** | **Medium** | Cargo 错误处理 crate tarball 中的 symlink：恶意 crate 可通过构造特殊 tar 文件将内容提取到自身缓存目录的**下一级**，从而覆盖同注册表中其他 crate 的缓存。crates.io 用户**不受影响**（crates.io 禁止上传含 symlink 的 crate），第三方注册表用户有风险 | Rust 1.96+ | `concept/06_ecosystem/01_toolchain.md` |
 | **CVE-2026-33056** | `tar` (Cargo 依赖) | Medium | 第三方 `tar` crate 漏洞：恶意 crate 可在 Cargo 解压时更改文件系统任意目录权限 | Rust 1.94.1+ | `concept/06_ecosystem/01_toolchain.md` |
 | **CVE-2026-33056** | `hickory-dns` | High | DNSSEC 验证绕过，恶意响应可导致缓存投毒 | ≥0.25.0 | `docs/04_research/security_advisory_tracking.md` |
 | **CVE-2026-42254** | `hickory-dns` | Critical | 资源耗尽 DoS，特定查询模式导致无限循环 | ≥0.25.1 | `docs/04_research/security_advisory_tracking.md` |
@@ -644,6 +644,17 @@ timeline
 - **C++/Rust Interop**: Overloading 实验 PR 完成两轮 review
 - **Safety-Critical Rust**: Consortium (2024-03 成立) 推动 MC/DC 支持、FLS 维护、Clippy 安全关键 lints
 - **Ferrocene**: core 子集获 IEC 61508 SIL 2 (2025-12) 和 ISO 26262 ASIL B (2026-03) 认证
+
+**Pre-release 状态（2026-05-26）**:
+
+**[Inside Rust, 2026-05-26]** 1.96.0 pre-release 已准备好测试，最终稳定版按计划于 **2026-05-28** 发布。
+
+```bash
+# 本地测试 pre-release
+RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
+```
+
+> **来源**: [Inside Rust — 1.96.0 pre-release testing](https://blog.rust-lang.org/inside-rust/2026/05/26/1.96.0-prerelease/) · 可信度: ✅
 
 ---
 
@@ -828,16 +839,17 @@ timeline
 | v1.14 | 2026-05-26 | 1.96 Release Notes Draft 对齐：补充语言特性稳定化（`expr`→`cfg`、ManuallyDrop 模式、never type 元组强制、s390x vector asm）、标准库 API（assert_matches!、NonZero range iter、core::range 完整迭代器）、Cargo 1.96 特性 [来源: Rust 1.96.0 Release Notes Draft GitHub #156512]
 | v1.15 | 2026-05-26 | 社区生态动态：补充 async-std 停止维护（2025-03-01 discontinued，RUSTSEC-2025-0052，1,754 crate 受影响，推荐 smol/Tokio 迁移） [来源: async-std Release Notes; corrode.dev; Fedora Change Proposal]
 | v1.16 | 2026-05-26 | 权威内容对齐 R16：① nvptx64-nvidia-cuda 基线提升（PTX ISA 7.0 / SM 7.0+，Rust 1.97 起 Maxwell/Pascal 支持终止） [来源: Rust Blog 2026-05-01]；② Tonic 正式加入 gRPC 官方项目（CNCF 治理，`grpc` crate 长期规划） [来源: gRPC Blog 2026-05-21]
+| v1.17 | 2026-05-26 | 权威内容对齐 R17：① CVE-2026-5223 完整安全公告（Cargo symlink 缓存覆盖漏洞，Medium 严重性，crates.io 不受影响，第三方注册表用户需关注） [来源: Rust Security Advisory 2026-05-25]；② 1.96.0 pre-release 状态更新（2026-05-26 已可用，最终稳定版 2026-05-28） [来源: Inside Rust 2026-05-26]
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.16
+**文档版本**: 1.17
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-26
-**状态**: ✅ R16 权威来源对齐 / 0 死链接 / Miri 验证通过
+**状态**: ✅ R17 权威来源对齐 / 0 死链接 / Miri 验证通过
 
 ---
 
