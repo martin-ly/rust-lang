@@ -339,6 +339,11 @@ Rust 在区块链领域占据**主导地位**的原因：
 | **原生训练** | candle (HF) | PyTorch | 纯 Rust、LLaMA 就绪、无 C++ 依赖 |
 | **训练框架** | burn | PyTorch/JAX | 类型安全、后端无关(CPU/CUDA/WGPU) |
 
+**2026 年 5 月生态动态**:
+
+- **burn 0.21.0** (2026-05): 深度学习框架重大更新，框架开销降低至 **8×**，新增可微分集合通信、改进内核性能。[来源: [TWiR 651](https://this-week-in-rust.org/blog/2026/05/13/this-week-in-rust-651/)]
+- **iroh 1.0.0-rc.0** (2026-05): 分布式系统库首个发布候选，支持 P2P 网络、内容寻址和端到端加密。[来源: [TWiR 651](https://this-week-in-rust.org/blog/2026/05/13/this-week-in-rust-651/)]
+
 **关键洞察**：Hugging Face 的 `candle` 证明了 Rust 可以替代 PyTorch 进行 LLM 推理——`candle` 运行 LLaMA 模型无需 Python 环境，单二进制即可部署，且性能接近 PyTorch。
 
 > **来源**: [Polars Docs] · [Hugging Face Candle] · [Burn Book] · 可信度: ✅

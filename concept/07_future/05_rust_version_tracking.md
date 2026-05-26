@@ -561,6 +561,8 @@ timeline
 | **RUSTSEC-2026-0149** | `wasmtime-wasi` | **High** | WASI `path_open(TRUNCATE)` 绕过 `FilePerms::WRITE` 主机限制，来宾可截断只读文件 | ≥29.0.0 | `c12_wasm` / WASI 运行时 |
 | **RUSTSEC-2026-0141** | `lettre` | **Critical** | Boring TLS 后端布尔值反转 bug 导致 TLS 主机名验证被禁用，中间人攻击风险。CVSS 9.1 | ≥0.11.15 | 邮件/网络基础设施 |
 | **CVE-2026-25727** | `time` | Medium | 解析恶意 RFC 2822 日期字符串导致栈耗尽 DoS。影响 0.3.6–0.3.46 | ≥0.3.47 | 时间解析依赖链 |
+| **CVE-2026-23400** | Linux `rust_binder` | Medium | `dead_binder_done()` 锁范围问题导致死锁，Rust Binder 驱动实现 | 内核补丁 | `concept/06_ecosystem/04_application_domains.md` |
+| **CVE-2026-23194** | Linux `rust_binder` | Medium | `skip == 0` 模式导致的缓冲区溢出，已替换为 Rust enum 类型 | 内核补丁 | `concept/06_ecosystem/04_application_domains.md` |
 | **RUSTSEC-2026-0012** | `tokio` (mpsc) | Medium | 边界条件导致内存泄漏，长时间运行服务受影响 | ≥1.44.0 | `concept/03_advanced/02_async.md` |
 
 **已弃用/未维护依赖**（`cargo audit` 2026-05-23）：
@@ -769,7 +771,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 
 - **C++ 互操作倡议**: 基金会聘请 teor 加速互操作问题空间映射，已列出 ~30 个问题陈述和用例；与 ISO WG21（C++ 标准委员会）建立合作，共识方向是为 C++ 提供内存安全机制（预计多年周期）
 - **Trusted Publishing**: GitLab 支持进入公测；漏洞扫描 RFC 进入最终评议期
-- **Rust-Edu Refresh 2026**: 征集培训提供商认证，替代个人认证课程
+- **Rust-Edu Refresh 2026**: 征集培训提供商认证，替代个人认证课程；2026-05 发布 **Call for Proposals (CFP)**，征集 Rust 教育新倡议 [来源: [Rust Foundation — Rust-Edu Refresh CFP](https://rustfoundation.org/media/guest-post-announcing-the-2026-rust-edu-refresh-and-cfp/)]
 
 > **深层意义**: 基金会的三年战略反映了 Rust 的成熟阶段——不再只是"语言设计"问题，而是**生态可持续性**问题。Cranelift 资金不足、gccrs 的长期投入需求、安全关键认证的工业推动，都需要基金会在企业和社区之间搭建桥梁。2025 年 $5.1M 的筹款规模与 LLVM（Apple/Google/Meta 等数千万美元级资助）相比仍有差距，但方向正确。[来源: [Rust Foundation — 2025 Annual Report & Strategy](https://rustfoundation.org/media/annual-report-strategy-2025/)] · [来源: [Inside Rust — Foundation Annual Report PD Update](https://blog.rust-lang.org/inside-rust/2026/01/27/2025-rust-foundation-annual-report/)] · [来源: [Inside Rust — Program Management Update April 2026](https://blog.rust-lang.org/inside-rust/2026/05/13/program-management-update--april-2026/)] · 可信度: ✅
 

@@ -1268,6 +1268,9 @@ fn fixed() {
 | **SVE / SME on AArch64** | 平台扩展 | 可伸缩向量扩展（SVE）和矩阵扩展（SME）的 Rust 绑定；高性能计算的新前沿 |
 | **Project-wide LLM Policy** (RFC 3936) | 社区治理 | 定义 Rust Project 空间内 LLM/AI 生成贡献的边界，防止 "slop" 污染；首个项目级 AI 使用政策，影响 issue/PR/rfc 的审核标准和知识产权归属 |
 | **Documentation Interpolation** (RFC 3962) | 文档工具 | Rustdoc 文档插值 RFC 进入 Final Comment Period；允许在文档字符串中嵌入动态内容（如版本号、特性状态），减少文档与代码的同步维护成本 |
+| **Cargo Min Publish Age** (RFC 3923) | Cargo 生态 | **已批准**（2026-05-20）：为 Cargo 引入最小发布年龄机制，防止恶意包快速发布和撤销，增强供应链安全 |
+| **Rust Foundation Maintainer Fund** (RFC 3931) | 社区治理 | **已批准**（2026-05-13）：基金会维护者基金的新资金机制，为 Rust 核心维护者提供可持续的资助渠道 |
+| **Inheriting Default-Features** (RFC 3945) | Cargo 生态 | **已批准**（2026-05-13）：允许 Cargo 依赖继承默认特性，简化特性配置和依赖管理 |
 
 > **[来源: [RFC 3936 — Project-wide LLM Policy](https://github.com/rust-lang/rfcs/pull/3936)]** 随着 LLM 生成内容在开源社区激增，Rust Project 正在制定首个项目级 AI 使用政策。核心议题包括：1) AI 生成的代码/文本在 RFC/PR/issue 中的披露义务；2) 训练数据是否包含 Rust 项目内容的知识产权边界；3) "slop"（低质量 AI 生成内容）对技术讨论的稀释效应。这与 Rust 社区此前 State of Rust Survey 2025 发现的"LLM 学习路径迁移"趋势（§12.1）形成呼应——技术政策正在追赶技术现实。[来源: [This Week in Rust 650](https://this-week-in-rust.org/blog/2026/05/06/this-week-in-rust-650/)] · 可信度: 🟡（RFC 审议中）
 
@@ -1309,7 +1312,7 @@ fn fixed() {
 
 | 挑战 | 现状 | 2026 进展 |
 |:---|:---|:---|
-| **工具链认证** | 需要编译器资质证明 | **Ferrocene Language Specification (FLS)** 已从行业努力转变为 Rust Project 官方维护；Ferrocene 编译器获 ASIL B / SIL 2 认证 |
+| **工具链认证** | 需要编译器资质证明 | **Ferrocene Language Specification (FLS)** 已从行业努力转变为 Rust Project 官方维护；Ferrocene 编译器获 ASIL B / SIL 2 认证；**Ferrocene 25.05.0** 新增两个合格目标：`thumbv7em-none-eabi` / `thumbv7em-none-eabihf`（Armv7E-M 裸机软浮点/硬浮点），首个通过 ISO 26262 ASIL D、IEC 61508 SIL 3、IEC 62304 Class C 认证的 Rust 工具链 |
 | **MC/DC 覆盖率** | rustc 不支持修改条件/判定覆盖 | Safety-Critical Rust Consortium 正在推动 2026 Project Goal，与 Rust Project 协作实现 |
 | **MSRV 依赖漂移** | 固定工具链与最新 crate 的冲突 | 社区探索 LTS 发布方案 + 生态范围的 MSRV 约定 |
 | **Async Runtime 认证** | 缺少 ISO 26262 质量工件的运行时 | 正在定义 "safety-case friendly async runtime" 的具体要求 |
