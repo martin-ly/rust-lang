@@ -25,6 +25,7 @@
 - v1.3 (2026-05-22): 网络权威内容对齐 Batch 9：补充 Project Goals 2026 年度旗舰目标（Polonius Alpha、Safety-Critical Rust、cargo-script）、Effects 系统 `gen<yield>` 跟踪、Ferrocene ASIL B/SIL 2 认证动态
 - v1.5 (2026-05-26): 权威内容对齐 R16：补充 2025H2 Project Goals 最终状态报告（Rust Blog 2026-05-18）；更新 build-std RFC 3873/3874 已合并状态、Cranelift 资金不足未完成确认 [来源: Rust Blog — Project Goals Update: April 2026]
 - v1.6 (2026-05-26): 权威内容对齐 R18：补充 Project-wide LLM Policy RFC 3936（Rust 首个项目级 AI 使用政策） [来源: TWiR 650]
+- v1.7 (2026-05-26): 权威内容对齐 R24：① 更新 build-std RFC 3874 FCP 完成待合并；② 补充 RFC 3962 Documentation interpolation（FCP 中）；③ 补充 RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论 [来源: Rust Project Goals Update; Rust Internals]
 
 ---
 
@@ -1224,7 +1225,7 @@ fn fixed() {
 
 | 子目标 | 状态 | 形式模型意义 |
 |:---|:---|:---|
-| **build-std** | **RFC 3873/3874 已合并** | RFC 3873（自定义标准库编译目标）和 3874（Cargo 集成）已合并，3875 处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库"。cargo#16675 已有早期实现草图 |
+| **build-std** | **RFC 3874 FCP 完成待合并** | RFC 3873（自定义标准库编译目标）已合并，3874（`build-std: always`）FCP 已完成待合并，3875（显式依赖）处理反馈中；允许自定义编译 `core`/`std`，为嵌入式、安全关键和形式化验证提供"可剪裁的标准库" |
 | **Cranelift Backend** | ⚠️ **未完成（资金不足）** | 用 Cranelift（Wasmtime 的 JIT 编译器）替代 LLVM 作为 debug 编译后端，编译速度提升 2-5x；不改变语义，但改变**编译期验证与运行时分发的边界**。2025H2 周期因 Trifecta Tech Foundation 资金不足未能完成生产就绪目标，社区正在寻求新的资助渠道 |
 | **Parallel Frontend** | 实现中 | 并行解析和类型检查；对 trait solver 的并发安全提出新要求 |
 | **Relink don't Rebuild** | 设计阶段 | 增量链接优化；通过精确依赖追踪减少全量重编译 |
@@ -1266,10 +1267,25 @@ fn fixed() {
 | **Rust Vision Document** | 语言哲学 | 社区驱动的 Rust 长期愿景文档，定义 2030 年的 Rust 应该是什么样 |
 | **SVE / SME on AArch64** | 平台扩展 | 可伸缩向量扩展（SVE）和矩阵扩展（SME）的 Rust 绑定；高性能计算的新前沿 |
 | **Project-wide LLM Policy** (RFC 3936) | 社区治理 | 定义 Rust Project 空间内 LLM/AI 生成贡献的边界，防止 "slop" 污染；首个项目级 AI 使用政策，影响 issue/PR/rfc 的审核标准和知识产权归属 |
+| **Documentation Interpolation** (RFC 3962) | 文档工具 | Rustdoc 文档插值 RFC 进入 Final Comment Period；允许在文档字符串中嵌入动态内容（如版本号、特性状态），减少文档与代码的同步维护成本 |
 
 > **[来源: [RFC 3936 — Project-wide LLM Policy](https://github.com/rust-lang/rfcs/pull/3936)]** 随着 LLM 生成内容在开源社区激增，Rust Project 正在制定首个项目级 AI 使用政策。核心议题包括：1) AI 生成的代码/文本在 RFC/PR/issue 中的披露义务；2) 训练数据是否包含 Rust 项目内容的知识产权边界；3) "slop"（低质量 AI 生成内容）对技术讨论的稀释效应。这与 Rust 社区此前 State of Rust Survey 2025 发现的"LLM 学习路径迁移"趋势（§12.1）形成呼应——技术政策正在追赶技术现实。[来源: [This Week in Rust 650](https://this-week-in-rust.org/blog/2026/05/06/this-week-in-rust-650/)] · 可信度: 🟡（RFC 审议中）
 
-### 6.6 Safety-Critical Rust：从原型到认证的鸿沟
+### 6.6 RustWeek 2026 / All Hands — 关键 RFC 集中讨论（Utrecht, 2026-05-18 至 05-23）
+
+**[Rust Project, 2026-05-18~23]** RustWeek 2026（原 Rust All Hands）在荷兰乌得勒支举行，语言团队、编译器团队、Cargo 团队和 Leadership Council 的核心成员集中讨论了多个长期阻塞的 RFC：
+
+| **讨论议题** | **当前状态** | **形式模型意义** |
+|:---|:---|:---|
+| **`build-std` 系列 (3874/3875)** | 3874 FCP 完成待合并，3875 反馈处理中 | 自定义编译 `core`/`std`，为安全关键和形式化验证提供可剪裁标准库 |
+| **In-place Initialization** | 设计语言实验中 | 允许未初始化内存的安全使用，扩展 Rust 的**初始化语义** |
+| **`Sized Hierarchy` / `Pointee` 命名** | lang team 设计会议 | 统一 `?Sized` 相关 trait 的命名和层级，影响 Rust 类型系统的可扩展性 |
+| **`null-ptr-deref` guarantees** | MCP 计划中 | 定义空指针解引用的保证语义，为 Miri 和编译器优化提供明确的 UB 边界 |
+| **zerocopy traits** (`NoCell` / `Freeze`) | 积极讨论 | 定义"可安全按位复制"的类型类，为内核和网络协议栈提供零拷贝抽象 |
+
+> **来源**: [Rust Project Goals — April 2026 Update](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · [Rust Internals — All Hands 2026](https://internals.rust-lang.org/) · 可信度: 🟡（基于会议纪要和官方博客的综合）
+
+### 6.7 Safety-Critical Rust：从原型到认证的鸿沟
 
 **[Rust Blog, 2026-01-14]** Rust 已通过 Vision Doc 用户研究深入安全关键领域（汽车、航空、医疗、工业自动化）。研究发现：Rust 的编译器强制保证覆盖了功能安全工程师 90% 的防错工作，但**生态系统支持在高完整性级别急剧变薄**。
 

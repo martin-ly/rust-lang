@@ -609,6 +609,13 @@ timeline
 | `refcell_try_map` | #152122 | 102 天 · 等待作者 · 需 FCP | `RefCell::try_map` 允许在 borrow 期间进行条件性映射，函数式状态管理的安全抽象 |
 | `proc_macro_value` | #152092 | 104 天 · 等待评审 · 需 FCP | 过程宏中获取字面量值的稳定 API，编译期元编程能力扩展 |
 | `VecDeque::retain_back` (from `truncate_front`) | #151973 | 118 天 | 双端队列的后端保留/截断操作，与 `retain` 对称的 API 补全 |
+| `derive(CoercePointee)` | #139673 | FCP 完成 | 智能指针类型强制转换，简化内核抽象封装 |
+| c-variadic 函数定义 | #155942 | PFCP | C 可变参数函数的安全 Rust 绑定，FFI 互操作关键特性 |
+| `ptr_alignment_type` / `alignment_type` | #154065 | PFCP | 指针对齐类型显式表达，为 `zerocopy` 和内核安全抽象提供类型基础 |
+| rustdoc `--merge`/`--parts-out-dir` | #153261 | PFCP | 文档模块化构建，大型项目文档生成性能优化 |
+| `supertrait_item_shadowing` | #150055 | PFCP | 超 trait 条目遮蔽规则，trait 层次演化的向后兼容 |
+| stack-protector | #148051 | PFCP | 栈保护编译器支持，安全加固 |
+| `breakpoint` 内建函数 | #142824 | PFCP | 调试断点内建函数，开发体验优化 |
 
 **已在本 workspace 验证的 nightly 特性**:
 
@@ -887,6 +894,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 | v1.20 | 2026-05-26 | 权威内容对齐 R22：学术论文补充——① Miri POPL 2026（已有，确认引用）；② Rusted Types ICSE 2026（类型混淆静态检测）；③ SmartC2Rust ICSE 2026（LLM C→Rust 翻译）；④ Android AOSP FSE 2026（Rust 集成实证）；⑤ Cargo Scan ESOP 2026（大规模 crate 审计） [来源: POPL/ICSE/FSE/ESOP 2026]
 | v1.21 | 2026-05-26 | 权威内容对齐 R20+R21：① Crate 生态动态（sqlx 0.9.0 MSRV 1.94、tokio 1.52.2/1.52.3 安全修复、reqwest aws-lc-rs FIPS、arrow-rs 整数溢出修复）；② Rust for Linux 进展（Linux 7.1-rc5、NOVA 驱动 6.15、DRM Rust Mandate ~2026-12） [来源: crate releases; kernel.org]
 | v1.22 | 2026-05-26 | 权威内容对齐 R23：供应链安全——① TrapDoor 跨平台攻击（crates.io 被植入 34 恶意包，隐形 Unicode 污染 AI 上下文）；② CVE-2026-31431 Copy Fail（9 年内核 bug，AI 辅助发现，Rust exploit 公开）；③ Debian APT 硬依赖 Rust（Linux 发行版核心基础设施转折点） [来源: Socket.dev 2026-05-22; Debian Rust Team]
+| v1.23 | 2026-05-26 | 权威内容对齐 R24：① RustWeek 2026 All Hands（Utrecht, 5.18–5.23）关键 RFC 讨论；② 更新 build-std RFC 3874 FCP 完成待合并、RFC 3962 FCP 中；③ 补充 8 个 PFCP/FCP 完成稳定化 PR（CoercePointee、c-variadic、alignment_type、rustdoc merge、supertrait shadowing、stack-protector、breakpoint） [来源: Rust Project Goals; Rust Internals; releases.rs]
 
 ---
 
