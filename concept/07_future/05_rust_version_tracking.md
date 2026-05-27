@@ -663,10 +663,11 @@ timeline
 - **流程变更**: Project Goals 从半年制改为**年度制**（2026 Goals），13 个旗舰目标 + 41 个项目目标
 - **Polonius Alpha**: Location-sensitive Polonius 已进入 nightly，2026 目标为稳定化；解决 NLL problem case #3 和 lending iterator 模式
 - **cargo-script**: Cargo FCP 已结束，blocker 为 edition policy
-- **BorrowSanitizer**: Shadow Stack 策略，RFC 起草中，RustConf 2026 演讲已入选
-- **Const Generics**: `min_adt_const_params` 接近 RFC 最终规格
-- **Rust for Linux**: 2026 RfL Roadmap 取代原目标
-- **C++/Rust Interop**: Overloading 实验 PR 完成两轮 review
+- **BorrowSanitizer**: Shadow Stack 策略，80% Miri 测试通过，LLVM retag intrinsics PR 准备提交，RFC 起草中，RustConf 2026 演讲已入选
+- **Const Generics**: `min_adt_const_params` 接近 RFC 最终规格；mGCA 支持扩展至 const constructors、tuple constructors、array expressions、associated const equality；`dyn` trait 兼容改进
+- **Rust for Linux**: 2026 RfL Roadmap 取代原目标；`zerocopy` 需要 `KnownLayout`（`ptr_metadata`）和 `Immutable`（`NoCell`/`Freeze`）稳定化
+- **C++/Rust Interop**: Overloading 实验 PR 完成两轮 review，等待修订和 rebase；RustWeek 2026 All Hands 设有专门session
+- **Field Projections**: `field_of!` 宏和 Field Representing Types (FRTs) 实验 PR #152730 已合并；2026 计划三阶段：a-mir-formality 形式化 → 编译器实现 → 生态实验（Linux kernel / crubit / stdlib）
 - **Safety-Critical Rust**: Consortium (2024-03 成立) 推动 MC/DC 支持、FLS 维护、Clippy 安全关键 lints
 - **Ferrocene**: core 子集获 IEC 61508 SIL 2 (2025-12) 和 ISO 26262 ASIL B (2026-03) 认证
 
@@ -688,6 +689,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 | 特性 | 当前状态 | 预计稳定 | 项目覆盖 | 跟踪文件 |
 |:---|:---:|:---:|:---:|:---|
 | **Open Enums** | nightly 实验 (GitHub #156628) | 2027+ | ✅ 已创建 | [`concept/07_future/open_enums_preview.md`](./25_open_enums_preview.md) |
+| **Field Projections** | 实验阶段（`field_of!` + FRTs，PR #152730 已合并） | 2027+ | 🟡 跟踪 | Rust Project Goals 2026 Flagship |
 | **BorrowSanitizer** | 原型阶段（~80% Miri 测试通过） | 2027+ | ✅ 已创建 | [`concept/07_future/borrowsanitizer_preview.md`](./20_borrowsanitizer_preview.md) · [borrowsanitizer.com](https://borrowsanitizer.com/) |
 | **MC/DC Coverage** | rustc 跟踪中 (rust#124656) | 2026–2027 | ✅ 已创建 | [`concept/07_future/07_mcdc_coverage_preview.md`](./07_mcdc_coverage_preview.md) · `docs/04_research/safety_critical_alignment_2026.md` §5 |
 | **cargo-semver-checks** | 社区工具，计划合并 cargo | 2026–2027 | 🔴 缺失 | 待加入工具链跟踪 |
