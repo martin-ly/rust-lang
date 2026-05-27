@@ -110,9 +110,9 @@
 | [async_patterns](./02_reference/quick_reference/async_patterns.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](./05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
 | [threads_concurrency_cheatsheet](./02_reference/quick_reference/threads_concurrency_cheatsheet.md) | [THREADS_CONCURRENCY_USAGE_GUIDE](./05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) | [send_sync_formalization](./research_notes/formal_methods/send_sync_formalization.md) |
 | [generics_cheatsheet](./02_reference/quick_reference/generics_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](./05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | [trait_system_formalization](./research_notes/type_theory/trait_system_formalization.md) |
-| [design_patterns_cheatsheet](archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md) | [DESIGN_PATTERNS_USAGE_GUIDE](./05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | [01_design_patterns_formal](./research_notes/software_design_theory/01_design_patterns_formal/README.md) |
+| design_patterns_cheatsheet | [DESIGN_PATTERNS_USAGE_GUIDE](./05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | [01_design_patterns_formal](./research_notes/software_design_theory/01_design_patterns_formal/README.md) |
 | [error_handling_cheatsheet](./02_reference/quick_reference/error_handling_cheatsheet.md) | [TROUBLESHOOTING_GUIDE](./05_guides/TROUBLESHOOTING_GUIDE.md) | [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
-| [macros_cheatsheet](archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](./05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | [trait_system_formalization](./research_notes/type_theory/trait_system_formalization.md) |
+| macros_cheatsheet | [MACRO_SYSTEM_USAGE_GUIDE](./05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | [trait_system_formalization](./research_notes/type_theory/trait_system_formalization.md) |
 | [testing_cheatsheet](./02_reference/quick_reference/testing_cheatsheet.md) | [TESTING_COVERAGE_GUIDE](./05_guides/TESTING_COVERAGE_GUIDE.md) | [formal_methods](./research_notes/formal_methods/README.md) |
 | [control_flow_functions_cheatsheet](./02_reference/quick_reference/control_flow_functions_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](./05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | [formal_methods/README](./research_notes/formal_methods/README.md) §A-CF1 |
 | [collections_iterators_cheatsheet](./02_reference/quick_reference/collections_iterators_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](05_guides/PERFORMANCE_TUNING_GUIDE.md) | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
@@ -217,8 +217,8 @@
 | :--- | :--- | :--- |
 | [ASYNC_PROGRAMMING_USAGE_GUIDE.md](./05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 异步编程使用指南 | ← [async_patterns](./02_reference/quick_reference/async_patterns.md) ← [async_state_machine](./research_notes/formal_methods/async_state_machine.md) ← [pin_self_referential](./research_notes/formal_methods/pin_self_referential.md) |
 | [THREADS_CONCURRENCY_USAGE_GUIDE.md](./05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) | 线程与并发使用指南 | ← [threads_concurrency_cheatsheet](./02_reference/quick_reference/threads_concurrency_cheatsheet.md) ← [send_sync_formalization](./research_notes/formal_methods/send_sync_formalization.md) ← [06_boundary_analysis](./research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) |
-| [DESIGN_PATTERNS_USAGE_GUIDE.md](./05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | 设计模式使用指南 | ← [design_patterns_cheatsheet](archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md) ← [01_design_patterns_formal](./research_notes/software_design_theory/01_design_patterns_formal/README.md) ← [04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
-| [MACRO_SYSTEM_USAGE_GUIDE.md](./05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | 宏系统使用指南 | ← [macros_cheatsheet](archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) ← [trait_system_formalization](./research_notes/type_theory/trait_system_formalization.md) |
+| [DESIGN_PATTERNS_USAGE_GUIDE.md](./05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | 设计模式使用指南 | ← design_patterns_cheatsheet ← [01_design_patterns_formal](./research_notes/software_design_theory/01_design_patterns_formal/README.md) ← [04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
+| [MACRO_SYSTEM_USAGE_GUIDE.md](./05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | 宏系统使用指南 | ← macros_cheatsheet ← [trait_system_formalization](./research_notes/type_theory/trait_system_formalization.md) |
 | [WASM_USAGE_GUIDE.md](./05_guides/WASM_USAGE_GUIDE.md) | WASM 使用指南 | ← [wasm_cheatsheet](./02_reference/quick_reference/wasm_cheatsheet.md) ← [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
 | [UNSAFE_RUST_GUIDE.md](./05_guides/UNSAFE_RUST_GUIDE.md) | Unsafe Rust 专题 | ← [ownership_cheatsheet](./02_reference/quick_reference/ownership_cheatsheet.md) ← [ownership_model](./research_notes/formal_methods/ownership_model.md) ← [SAFE_UNSAFE_ANALYSIS](./research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | [AI_RUST_ECOSYSTEM_GUIDE.md](./05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) | AI+Rust 生态（Burn/Candle/LLM） | ← [ai_ml_cheatsheet](./02_reference/quick_reference/ai_ml_cheatsheet.md) ← [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
@@ -242,7 +242,7 @@
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
 | [06_toolchain/](./06_toolchain/README.md) | 编译器、Cargo、rustdoc、Rust 1.89–1.93 版本演进 | ← [type_theory/type_system_foundations](./research_notes/type_theory/type_system_foundations.md) ← [cargo_cheatsheet](./02_reference/quick_reference/cargo_cheatsheet.md) |
-| [00_rust_2024_edition_learning_impact.md](archive/deprecated_20260318/00_rust_2024_edition_learning_impact.md) | Rust 2024 Edition 对学习路径的影响 | ← [01_learning/LEARNING_PATH_PLANNING](./01_learning/LEARNING_PATH_PLANNING.md) |
+| 00_rust_2024_edition_learning_impact.md | Rust 2024 Edition 对学习路径的影响 | ← [01_learning/LEARNING_PATH_PLANNING](./01_learning/LEARNING_PATH_PLANNING.md) |
 
 **Rust 1.92 版本文档**（已归档）:
 
@@ -270,7 +270,7 @@
 | [INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md](07_project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md) | 国际化对标与全面批判性评估 | ←→ [formal_methods/](./research_notes/formal_methods/README.md) |
 | [ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md](07_project/ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md) | 对齐知识批判性评估与推进方案 | ←→ [ALIGNMENT_GUIDE](./02_reference/ALIGNMENT_GUIDE.md) |
 | DOCUMENTATION_THEME_ORGANIZATION_PLAN.md | 文档主题梳理与重组规划 | ←→ DOCS_STRUCTURE_OVERVIEW |
-| [archive/process_reports/](archive/deprecated_20260318/README.md) | 改进总结、计划实施、链接修复、Crates 计划等过程性文档 | ←→ 所有主要文档 |
+| archive/process_reports/ | 改进总结、计划实施、链接修复、Crates 计划等过程性文档 | ←→ 所有主要文档 |
 
 ---
 
@@ -330,8 +330,8 @@
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [archive/](./archive/README.md) | 归档文件 | ←→ [archive/process_reports/](archive/deprecated_20260318/README.md) |
-| [backup/](archive/deprecated_20260318/README.md) | 备份文件（.rar/.zip，非日常查阅） | - |
+| [archive/](./archive/README.md) | 归档文件 | ←→ archive/process_reports/ |
+| backup/ | 备份文件（.rar/.zip，非日常查阅） | - |
 
 ---
 

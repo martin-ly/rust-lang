@@ -127,7 +127,7 @@ enum List {
 
 ## 主索引
 
-[00_MASTER_INDEX.md](../00_MASTER_INDEX.md)
+[00_MASTER_INDEX.md](../00_master_index.md)
 
 ---
 

@@ -274,8 +274,8 @@
 
 5. **第 9-10 周: 新特性巩固**
    - exercises: [Rust 1.95 特性练习](../../exercises/src/rust_195_feature_exercises.rs)（`if let` guards、`cfg_select!`、`Atomic::update` 等）
-   - content/emerging/: [前沿特性跟踪](../../content/emerging/README.md)（Generic Const Expressions、Async Closures 等）
-   - content/ecosystem/: [生态深度](../../content/ecosystem/README.md)（Tokio、Axum、SQLx 内部原理）
+   - content/emerging/: 前沿特性跟踪（Generic Const Expressions、Async Closures 等）
+   - content/ecosystem/: 生态深度（Tokio、Axum、SQLx 内部原理）
    - 实践: 综合运用新特性重构旧代码
 
 6. **第 11-12 周: 综合项目**
@@ -319,8 +319,8 @@
    - 系统编程
 
 4. **前沿特性跟踪（本轮新增）**
-   - content/emerging/: [前沿特性跟踪](../../content/emerging/README.md)（Async Closures、Generic Const Expressions、TAIT 等）
-   - content/ecosystem/: [生态深度](../../content/ecosystem/README.md)（Tokio 运行时、Axum 服务抽象、SQLx 编译时检查）
+   - content/emerging/: 前沿特性跟踪（Async Closures、Generic Const Expressions、TAIT 等）
+   - content/ecosystem/: 生态深度（Tokio 运行时、Axum 服务抽象、SQLx 编译时检查）
    - 跟踪最新稳定版本特性，保持技术敏锐度
 
 5. **形式化与验证（研究者路径）**
@@ -901,8 +901,8 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 | **c02 `type_system_frontier.rs`** | 类型系统前沿 | 掌握泛型与 Trait | 路径 3+ 第 7 周起 | [`crates/c02_type_system/src/type_system_frontier.rs`](../../crates/c02_type_system/src/type_system_frontier.rs) |
 | **c08 `algorithm_decision_trees.rs`** | 算法选择 | 掌握基础算法 | 路径 2+ 第 7 周起 | [`crates/c08_algorithms/src/algorithm_decision_trees.rs`](../../crates/c08_algorithms/src/algorithm_decision_trees.rs) |
 | **exercises `rust_195_feature_exercises.rs`** | 1.95 特性练习 | 完成基础学习 | 所有路径巩固阶段 | [`exercises/src/rust_195_feature_exercises.rs`](../../exercises/src/rust_195_feature_exercises.rs) |
-| **content/emerging/** | 前沿特性跟踪 | 中级以上 | 路径 3+ 持续学习 | [`content/emerging/README.md`](../../content/emerging/README.md) |
-| **content/ecosystem/** | 生态深度 | 中级以上 | 路径 3+ 持续学习 | [`content/ecosystem/README.md`](../../content/ecosystem/README.md) |
+| **content/emerging/** | 前沿特性跟踪 | 中级以上 | 路径 3+ 持续学习 | `content/emerging/README.md` |
+| **content/ecosystem/** | 生态深度 | 中级以上 | 路径 3+ 持续学习 | `content/ecosystem/README.md` |
 
 #### 学习路径递进关系
 
@@ -941,7 +941,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [Rust 1.95+ 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.95+ 迁移指南
 - [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 学习路径)
@@ -980,7 +980,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 #### 相关文档
 
-- [Rust 1.95+ 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.95+ 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

@@ -21,7 +21,7 @@
 
 **适用场景**：系统编程、遗留系统集成、性能关键型库开发
 
-### 2. [过程宏开发](../../archive/deprecated_20260318/proc-macros.md)
+### 2. 过程宏开发
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 

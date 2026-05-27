@@ -63,10 +63,10 @@ distributed-patterns/
 | 模式 | 解决的问题 | 核心机制 |
 |------|-----------|----------|
 | [故障模型](./fault-tolerance/01-failure-models.md) | 故障分类与检测 | 故障检测器、超时机制 |
-| [断路器](../../../archive/deprecated_20260318/02-circuit-breaker-patterns.md) | 故障传播 | 状态机、快速失败 |
+| 断路器 | 故障传播 | 状态机、快速失败 |
 | [重试](./fault-tolerance/03-retry-patterns.md) | 瞬时故障恢复 | 退避策略、幂等性 |
 | [超时](./fault-tolerance/04-timeout-patterns.md) | 资源无限等待 | 自适应超时、取消传播 |
-| [降级](../../../archive/deprecated_20260318/05-degradation-patterns.md) | 过载保护 | 功能降级、回退机制 |
+| 降级 | 过载保护 | 功能降级、回退机制 |
 
 ### 通信模式 (Communication Patterns)
 
@@ -84,17 +84,17 @@ distributed-patterns/
 | [CAP 定理](./consistency/01-cap-theorem.md) | 一致性权衡 | CP/AP 选择 |
 | [共识算法](./consistency/02-consensus-algorithms.md) | 一致性达成 | Paxos/Raft |
 | [最终一致性](./consistency/03-eventual-consistency.md) | 可用性优先 | 冲突解决、向量时钟 |
-| [分布式事务](../../../archive/deprecated_20260318/04-transaction-semantics.md) | ACID 保证 | 2PC/Saga/TCC |
+| 分布式事务 | ACID 保证 | 2PC/Saga/TCC |
 | [分布式锁](./consistency/05-distributed-locks.md) | 互斥访问 | Redis/ZooKeeper |
 
 ### 微服务模式 (Microservices Patterns)
 
 | 模式 | 解决的问题 | 核心机制 |
 |------|-----------|----------|
-| [API 网关](../../../archive/deprecated_20260318/01-api-gateway-semantics.md) | 统一入口 | 路由、认证、限流 |
-| [负载均衡](../../../archive/deprecated_20260318/02-load-balancing-semantics.md) | 流量分配 | 轮询、一致性哈希 |
-| [限流](../../../archive/deprecated_20260318/03-rate-limiting-semantics.md) | 过载保护 | 令牌桶、滑动窗口 |
-| [服务网格](../../../archive/deprecated_20260318/04-service-mesh-semantics.md) | 通信治理 | Sidecar、mTLS |
+| API 网关 | 统一入口 | 路由、认证、限流 |
+| 负载均衡 | 流量分配 | 轮询、一致性哈希 |
+| 限流 | 过载保护 | 令牌桶、滑动窗口 |
+| 服务网格 | 通信治理 | Sidecar、mTLS |
 | [舱壁隔离](./microservices/05-bulkhead-pattern.md) | 故障隔离 | 资源池隔离 |
 
 ---
@@ -145,15 +145,15 @@ $$
 ### 初学者路径
 
 1. 从 [故障模型](./fault-tolerance/01-failure-models.md) 开始了解分布式系统的基本挑战
-2. 学习 [断路器](../../../archive/deprecated_20260318/02-circuit-breaker-patterns.md) 和 [重试](./fault-tolerance/03-retry-patterns.md) 掌握基础容错技巧
+2. 学习 断路器 和 [重试](./fault-tolerance/03-retry-patterns.md) 掌握基础容错技巧
 3. 理解 [CAP 定理](./consistency/01-cap-theorem.md) 建立一致性直觉
-4. 探索 [API 网关](../../../archive/deprecated_20260318/01-api-gateway-semantics.md) 了解微服务入口设计
+4. 探索 API 网关 了解微服务入口设计
 
 ### 进阶路径
 
 1. 深入研究 [共识算法](./consistency/02-consensus-algorithms.md) 理解分布式一致性本质
-2. 学习 [服务网格](../../../archive/deprecated_20260318/04-service-mesh-semantics.md) 掌握现代服务治理
-3. 研究 [分布式事务](../../../archive/deprecated_20260318/04-transaction-semantics.md) 处理复杂业务场景
+2. 学习 服务网格 掌握现代服务治理
+3. 研究 分布式事务 处理复杂业务场景
 4. 实践 [舱壁隔离](./microservices/05-bulkhead-pattern.md) 构建高可用系统
 
 ### 主题研究

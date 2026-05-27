@@ -620,7 +620,7 @@
 6. **Def EB-DET1 (执行确定性)** ✅ — Sequential/Interleaved/Parallel/Distributed；[证明位置](./software_design_theory/03_execution_models/06_boundary_analysis.md)
 7. **定理 EB-DET-T1 (确定性蕴涵数据竞争自由)** ✅ — 满足 borrow T1、Send/Sync 则无数据竞争；[证明位置](./software_design_theory/03_execution_models/06_boundary_analysis.md)
 8. **推论 EB-DET-C1 (控制确定性判定)** ✅ — 需求→模型选型；[证明位置](./software_design_theory/03_execution_models/06_boundary_analysis.md)
-9. **Def SB1、定理 SB1–SB3、推论 SB-C1、引理 SB-L1 (边界冲突可化解)** ✅ — 语义边界图；[证明位置](../archive/deprecated_20260318/03_semantic_boundary_map.md)
+9. **Def SB1、定理 SB1–SB3、推论 SB-C1、引理 SB-L1 (边界冲突可化解)** ✅ — 语义边界图；证明位置
 
 #### 语义与表达能力
 
@@ -990,7 +990,7 @@
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

@@ -286,7 +286,7 @@ pub fn push(&self, value: T) {
 
 **适合读者**: 追求极致性能的底层开发者
 
-**📚 深度阅读**: [12-04-lock-free-patterns-deep.md](../../archive/deprecated_20260318/12-04-lock-free-patterns-deep.md) - 形式化无锁语义、所有权分析、9个形式化定理、9个反例、Chase-Lev工作窃取队列完整实现
+**📚 深度阅读**: 12-04-lock-free-patterns-deep.md - 形式化无锁语义、所有权分析、9个形式化定理、9个反例、Chase-Lev工作窃取队列完整实现
 
 ---
 
@@ -474,7 +474,7 @@ impl RaftNode {
 
 **适合读者**: 分布式系统开发者、SRE
 
-**📚 深度阅读**: [12-07-distributed-patterns-deep.md](../../archive/deprecated_20260318/12-07-distributed-patterns-deep.md) - CAP定理形式化、Raft安全性证明、消息传递保证、熔断器模式、分布式追踪、完整KV存储案例研究
+**📚 深度阅读**: 12-07-distributed-patterns-deep.md - CAP定理形式化、Raft安全性证明、消息传递保证、熔断器模式、分布式追踪、完整KV存储案例研究
 
 ---
 

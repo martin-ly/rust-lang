@@ -1276,7 +1276,7 @@ fn pgo_workflow() {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [02_cargo_workspace_guide.md](../archive/deprecated_20260318/02_cargo_workspace_guide.md)
+- 02_cargo_workspace_guide.md
 - [03_rustdoc_advanced.md](./03_rustdoc_advanced.md)
 
 ### 🔗 形式化理论文档

@@ -724,7 +724,7 @@ async fn good_deferred_choice(rx: &mut tokio::sync::mpsc::Receiver<i32>) -> i32 
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [工作流模式总览](08-workflow-patterns.md)
-- [工作流模式主索引](workflow-patterns/00-workflow-patterns-master-index.md)
+- 工作流模式主索引
 - [并发编程模型](../../../concept/03_advanced/01_concurrency.md)
 - [异步编程模型](../../../concept/03_advanced/02_async.md)
 - [形式化操作语义](../../../concept/04_formal/09_operational_semantics.md)

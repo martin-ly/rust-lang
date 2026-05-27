@@ -230,7 +230,7 @@ c##_module_name/
 └── benches/            # 基准测试（部分模块）
 ```
 
-**入口文档**: 每个模块的 `docs/00_MASTER_INDEX.md` 是学习的起点！
+**入口文档**: 每个模块的 `docs/00_master_index.md` 是学习的起点！
 
 ---
 
@@ -341,7 +341,7 @@ scripts/
 #### 查找资料
 
 1. **快速查询** → [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) 或 [速查卡目录](./docs/02_reference/quick_reference/README.md)
-2. **深入学习** → 各模块的 `docs/00_MASTER_INDEX.md`
+2. **深入学习** → 各模块的 `docs/00_master_index.md`
 3. **常见问题** → 各模块的 `docs/FAQ.md`
 4. **术语查询** → 各模块的 `docs/Glossary.md`
 5. **所有文档** → [文档中心](./docs/README.md)

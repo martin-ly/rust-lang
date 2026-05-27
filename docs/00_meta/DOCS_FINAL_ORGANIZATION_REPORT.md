@@ -161,7 +161,7 @@ docs/
 | 查看学术引用 | `docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md` |
 | 规划学习路径 | `docs/01_learning/LEARNING_PATH_GUIDE_2025_10_24.md` |
 | 迁移到新版 | `docs/MIGRATION_GUIDE_2026.md` |
-| 查看文档索引 | `docs/00_MASTER_INDEX.md` 或 `docs/README.md` |
+| 查看文档索引 | `docs/00_master_index.md` 或 `docs/README.md` |
 
 ---
 
@@ -170,7 +170,7 @@ docs/
 ### 短期（本周）
 
 - [ ] 验证所有内部链接有效
-- [ ] 更新 `docs/00_MASTER_INDEX.md` 索引
+- [ ] 更新 `docs/00_master_index.md` 索引
 
 ### 中期（本月）
 

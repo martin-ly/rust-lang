@@ -17,7 +17,7 @@
 
 | 文档 | 描述 | 推荐人群 |
 |------|------|---------|
-| [00_MASTER_INDEX.md](./00_MASTER_INDEX.md) | 文档总索引 | 所有人 |
+| [00_MASTER_INDEX.md](./00_master_index.md) | 文档总索引 | 所有人 |
 | [2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md](./2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md) | **2026生态梳理（权威引用版）** | 所有开发者 |
 | [AUTHORITATIVE_SOURCES_AND_CITATIONS.md](./AUTHORITATIVE_SOURCES_AND_CITATIONS.md) | 学术论文引用汇总 | 研究人员 |
 | [MIGRATION_GUIDE_2026.md](./MIGRATION_GUIDE_2026.md) | 2026迁移指南 | 升级用户 |
@@ -154,7 +154,7 @@ docs/
 ---
 
 **返回项目主页**: [../README.md](../README.md)
-**贡献指南**: [../CONTRIBUTING.md](../CONTRIBUTING.md)
+**贡献指南**: CONTRIBUTING.md
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

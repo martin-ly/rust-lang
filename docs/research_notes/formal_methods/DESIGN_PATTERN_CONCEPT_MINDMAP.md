@@ -104,7 +104,7 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [01_design_patterns_formal](../software_design_theory/01_design_patterns_formal/README.md) - 23 模式形式化
-- [DESIGN_PATTERNS_BOUNDARY_MATRIX](../../archive/deprecated_20260318/DESIGN_PATTERNS_BOUNDARY_MATRIX.md) - 等价/近似边界
+- DESIGN_PATTERNS_BOUNDARY_MATRIX - 等价/近似边界
 - [04_expressiveness_boundary](../software_design_theory/02_workflow_safe_complete_models/04_expressiveness_boundary.md) - 表达力边界
 
 ---
@@ -146,7 +146,7 @@
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

@@ -461,7 +461,7 @@ git checkout -- .
 - [详细特性文档](./06_toolchain/19_rust_1.96_features.md)
 - [特性速查表](./02_reference/quick_reference/rust_196_features_cheatsheet.md)
 
-**详细指南**: [2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md](archive/deprecated_20260318/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md)
+**详细指南**: 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

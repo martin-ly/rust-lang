@@ -43,7 +43,7 @@
 |:-:|:-----|:----:|:---------|
 | 1 | [README.md](./README.md) | 3 | 主索引与导航系统 |
 | 2 | [design-patterns-comprehensive.md](./design-patterns-comprehensive.md) | 12 | 设计模式深度分析 (8个模式形式化) |
-| 3 | [architecture-models-comparison.md](../../archive/deprecated_20260318/architecture-models-comparison.md) | 15 | 架构模型综合对比 (5种架构) |
+| 3 | architecture-models-comparison.md | 15 | 架构模型综合对比 (5种架构) |
 | 4 | [open-source-analysis.md](./open-source-analysis.md) | 18 | 开源库深度分析 (8个核心库) |
 
 ### 可视化资源
@@ -88,7 +88,7 @@
 |:---|:---|:---|
 | 高级所有权模式 | [extensions/advanced-ownership-patterns.md](./extensions/advanced-ownership-patterns.md) | 自引用、递归、类型擦除 |
 | 性能优化 | [extensions/performance-optimization.md](./extensions/performance-optimization.md) | 编译器、内存、并发优化 |
-| 研究前沿 | [extensions/research-frontiers.md](../../archive/deprecated_20260318/research-frontiers.md) | GATs、验证工具、路线图 |
+| 研究前沿 | extensions/research-frontiers.md | GATs、验证工具、路线图 |
 
 ---
 

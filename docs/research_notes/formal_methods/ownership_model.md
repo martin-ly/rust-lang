@@ -3055,7 +3055,7 @@ $\text{Scope}(r) \subseteq \text{lft}(r)$：借用 $r$ 的活跃区间由生命�
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

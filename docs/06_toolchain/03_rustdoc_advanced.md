@@ -1129,7 +1129,7 @@ cargo +nightly rustdoc -- -Z unstable-options --output-format json
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [01_compiler_features.md](./01_compiler_features.md)
-- [02_cargo_workspace_guide.md](../archive/deprecated_20260318/02_cargo_workspace_guide.md)
+- 02_cargo_workspace_guide.md
 
 ### 📦 推荐工具
 >

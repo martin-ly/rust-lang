@@ -80,7 +80,7 @@ let arch_str = cfg_select! {
 
 在 `match` arm 守卫中使用 `if let`：
 
-> 📎 知识文档: [`knowledge/02_intermediate/control_flow/if_let_guards.md`](../../../knowledge/02_intermediate/control_flow/if_let_guards.md)
+> 📎 知识文档: [`knowledge/02_intermediate/control_flow/01_if_let_guards.md`](../../../knowledge/02_intermediate/control_flow/01_if_let_guards.md)
 
 ```rust,ignore
 match value {

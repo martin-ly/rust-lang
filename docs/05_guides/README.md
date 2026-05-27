@@ -214,7 +214,7 @@ let v = vec_mac![1, 2, 3];
 >
 > **[来源: Rust Official Docs]**
 
-[00_MASTER_INDEX.md](../00_MASTER_INDEX.md)
+[00_MASTER_INDEX.md](../00_master_index.md)
 
 ---
 

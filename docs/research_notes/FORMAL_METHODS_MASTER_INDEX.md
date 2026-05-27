@@ -85,7 +85,7 @@
 | [WORKFLOW_CONCEPT_MINDMAP](./formal_methods/WORKFLOW_CONCEPT_MINDMAP.md) | 导图 | 工作流概念族 | 🆕 完整 |
 | [CONCEPT_AXIOM_THEOREM_MATRIX](./formal_methods/CONCEPT_AXIOM_THEOREM_MATRIX.md) | 矩阵 | 五维矩阵 | 🆕 完整 |
 | [VERIFICATION_TOOLS_MATRIX](./formal_methods/VERIFICATION_TOOLS_MATRIX.md) | 矩阵 | 验证工具对比 | 🆕 完整 |
-| [DESIGN_PATTERNS_BOUNDARY_MATRIX](../archive/deprecated_20260318/DESIGN_PATTERNS_BOUNDARY_MATRIX.md) | 矩阵 | 设计模式边界 | 🆕 完整 |
+| DESIGN_PATTERNS_BOUNDARY_MATRIX | 矩阵 | 设计模式边界 | 🆕 完整 |
 
 ### 决策树文档
 
@@ -514,7 +514,7 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

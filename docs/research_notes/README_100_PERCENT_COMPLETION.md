@@ -58,7 +58,7 @@
 | :--- | :--- |
 | **全面梳理与计划总览** | 本文档 |
 | **详细100%完成计划** | [COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN](./COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN.md) |
-| **思维表征完善计划** | [MIND_REPRESENTATION_COMPLETION_PLAN](../archive/deprecated_20260318/MIND_REPRESENTATION_COMPLETION_PLAN.md) |
+| **思维表征完善计划** | MIND_REPRESENTATION_COMPLETION_PLAN |
 | **L3机器证明实施指南** | [L3_MACHINE_PROOF_GUIDE](./L3_MACHINE_PROOF_GUIDE.md) |
 | **核心定理完整证明** | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) |
 | **论证缺口索引** | [ARGUMENTATION_GAP_INDEX](./ARGUMENTATION_GAP_INDEX.md) |
@@ -408,7 +408,7 @@ Week 21-24: 国际对标
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

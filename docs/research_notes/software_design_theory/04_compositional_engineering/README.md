@@ -315,7 +315,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 **衔接**：与 [02_workflow_safe_complete_models](../02_workflow_safe_complete_models/README.md)、
 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)、
 [05_boundary_system](../05_boundary_system/README.md) 三维矩阵一致；
-选型决策树见 [03_semantic_boundary_map](../../../archive/deprecated_20260318/03_semantic_boundary_map.md)。
+选型决策树见 03_semantic_boundary_map。
 
 ---
 
@@ -342,7 +342,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 | **不可表达** | 规避；重构为等价/近似 | 同上 |
 
 **引用**：[04_expressiveness_boundary](../02_workflow_safe_complete_models/04_expressiveness_boundary.md) 等价/近似/不可表达表；
-~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN~~（已归档至 [../../../archive/process_reports/](../../../archive/deprecated_20260318/README.md)）支柱 2+3；
+~~RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN~~（已归档至 ../../../archive/process_reports/）支柱 2+3；
 现参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](../../../research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md)。
 
 ---
@@ -542,7 +542,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-- [Rust 1.94 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

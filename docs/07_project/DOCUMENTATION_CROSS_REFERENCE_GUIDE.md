@@ -352,8 +352,8 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md` | ←→ [design_patterns_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md) |
-| **速查卡** | [design_patterns_cheatsheet.md](../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md) | → [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) → [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |
+| **主索引** | `crates/c09_design_pattern/docs/tier_01_foundations/02_主索引导航.md` | ←→ design_patterns_cheatsheet |
+| **速查卡** | design_patterns_cheatsheet.md | → [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) → [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | **形式化** | [01_design_patterns_formal/](../research_notes/software_design_theory/01_design_patterns_formal/README.md) | ←→ [ownership_model](../research_notes/formal_methods/ownership_model.md) ←→ [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | **指南** | [DESIGN_PATTERNS_USAGE_GUIDE.md](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | ← [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) ← [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | **思维表征** | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §设计模式 | ←→ [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) |
@@ -374,9 +374,9 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c11_macro_system/README.md` | ←→ [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
-| **速查卡** | [macros_cheatsheet.md](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | → [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) → [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
-| **指南** | [MACRO_SYSTEM_USAGE_GUIDE.md](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | ← [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
+| **主索引** | `crates/c11_macro_system/README.md` | ←→ macros_cheatsheet |
+| **速查卡** | macros_cheatsheet.md | → [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) → [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
+| **指南** | [MACRO_SYSTEM_USAGE_GUIDE.md](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | ← macros_cheatsheet |
 
 ### C12 - WASM
 >
@@ -498,8 +498,8 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [async_patterns](../02_reference/quick_reference/async_patterns.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 语法 ↔ 应用 |
 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) | [THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) | 语法 ↔ 应用 |
 | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | 泛型 ↔ 宏系统 |
-| [design_patterns_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md) | [DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | 模式速查 ↔ 模式应用 |
-| [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | 语法 ↔ 应用 |
+| design_patterns_cheatsheet | [DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | 模式速查 ↔ 模式应用 |
+| macros_cheatsheet | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | 语法 ↔ 应用 |
 | [wasm_cheatsheet](../02_reference/quick_reference/wasm_cheatsheet.md) | [WASM_USAGE_GUIDE](../05_guides/WASM_USAGE_GUIDE.md) | 语法 ↔ 应用 |
 | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) | [TESTING_COVERAGE_GUIDE](../05_guides/TESTING_COVERAGE_GUIDE.md) | 测试语法 ↔ 测试策略 |
 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) | 工具 ↔ 应用 |
@@ -525,7 +525,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [async_patterns](../02_reference/quick_reference/async_patterns.md) | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) | 语法 ↔ 状态机形式化 |
 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | 语法 ↔ 并发安全 |
 | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) | [trait_system_formalization](../research_notes/type_theory/trait_system_formalization.md) | 泛型 ↔ Trait系统 |
-| [design_patterns_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md) | [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) | 模式 ↔ 形式化模式 |
+| design_patterns_cheatsheet | [01_design_patterns_formal](../research_notes/software_design_theory/01_design_patterns_formal/README.md) | 模式 ↔ 形式化模式 |
 | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) | [ownership_model](../research_notes/formal_methods/ownership_model.md) §智能指针 | 指针 ↔ 所有权模型 |
 | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) §Result类型 | 错误处理 ↔ 类型系统 |
 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | [formal_methods/README](../research_notes/formal_methods/README.md) §控制流形式化 | 控制流 ↔ A-CF1公理 |
@@ -926,7 +926,7 @@ struct LinkValidator {
 | 文档 | 说明 | 路径 |
 | :--- | :--- | :--- |
 | **CROSS_REFERENCE_INDEX** | 详细跨文档映射网络 | [research_notes/CROSS_REFERENCE_INDEX.md](../research_notes/CROSS_REFERENCE_INDEX.md) |
-| **00_MASTER_INDEX** | 文档中心主索引 | [00_MASTER_INDEX.md](../00_MASTER_INDEX.md) |
+| **00_MASTER_INDEX** | 文档中心主索引 | [00_MASTER_INDEX.md](../00_master_index.md) |
 | **PROOF_INDEX** | 公理-定理-证明索引 | [research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) |
 | **HIERARCHICAL_MAPPING** | 层次化映射与总结 | [research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md](../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) |
 | **ARGUMENTATION_CHAIN** | 论证脉络关系 | [research_notes/ARGUMENTATION_CHAIN_AND_FLOW.md](../research_notes/ARGUMENTATION_CHAIN_AND_FLOW.md) |
@@ -982,7 +982,7 @@ struct LinkValidator {
 
 #### 相关文档
 
-- [Rust 1.95+ 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.95+ 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

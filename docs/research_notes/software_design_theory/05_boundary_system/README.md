@@ -13,7 +13,7 @@
 
 本目录提供软件设计理论体系的三维边界分析。
 **层次推进**：先读本 README 与 Def B1–B3，再查各矩阵决策树，
-最后按 [03_semantic_boundary_map](../../../archive/deprecated_20260318/03_semantic_boundary_map.md) 模式选取示例实践。
+最后按 03_semantic_boundary_map 模式选取示例实践。
 
 1. **安全 vs 非安全**：模式/模型在 Rust 中的安全子集边界
 2. **支持 vs 不支持**：语言/库的原生支持程度
@@ -101,7 +101,7 @@
 | **组合约束** | 子模式 Safe 则组合 Safe | 定理 B-T1、SBM-C2；见 [04_compositional_engineering](../04_compositional_engineering/02_effectiveness_proofs.md) CE-T1–T3 |
 | **执行模型** | 同步/异步/并发/并行/分布式 | [03_execution_models/06_boundary_analysis](../03_execution_models/06_boundary_analysis.md) 决策树 |
 
-**选型流程**：需求 → [03_semantic_boundary_map](../../../archive/deprecated_20260318/03_semantic_boundary_map.md) 模式选取示例 → 查 Safe/支持/表达 → 确定实现路径。
+**选型流程**：需求 → 03_semantic_boundary_map 模式选取示例 → 查 Safe/支持/表达 → 确定实现路径。
 
 ---
 
@@ -111,7 +111,7 @@
 
 **场景**：需跨平台 UI 组件族（按钮、文本框）；运行时根据平台选择。
 
-**步骤 1**：按需求查模式 → [03_semantic_boundary_map](../../../archive/deprecated_20260318/03_semantic_boundary_map.md) 按需求反向查 → **Abstract Factory**。
+**步骤 1**：按需求查模式 → 03_semantic_boundary_map 按需求反向查 → **Abstract Factory**。
 
 **步骤 2**：判安全 → [safe_unsafe_matrix](./safe_unsafe_matrix.md) 创建型表 → **纯 Safe**。
 
@@ -119,7 +119,7 @@
 
 **步骤 4**：判表达 → [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) → **等价**。
 
-**结论**：可零依赖、纯 Safe、等价实现。代码见 [03_semantic_boundary_map 示例 1](../../../archive/deprecated_20260318/research_notes/software_design_theory/02_workflow_safe_complete_models/03_semantic_boundary_map.md#示例-1跨平台-ui-组件族)。
+**结论**：可零依赖、纯 Safe、等价实现。代码见 03_semantic_boundary_map 示例 1。
 
 ---
 
@@ -197,7 +197,7 @@
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

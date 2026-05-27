@@ -93,7 +93,7 @@ lto = true
 >
 > **[来源: Rust Official Docs]**
 
-#### 0. [Rust 2024 Edition 学习影响](../archive/deprecated_20260318/00_rust_2024_edition_learning_impact.md) 🆕
+#### 0. Rust 2024 Edition 学习影响 🆕
 
 > **[来源: IEEE - Programming Language Standards]**
 >
@@ -130,7 +130,7 @@ lto = true
 - 生产环境配置
 - 调试和 profiling
 
-#### 2. [Cargo 工作空间与依赖管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md)
+#### 2. Cargo 工作空间与依赖管理
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
@@ -174,7 +174,7 @@ lto = true
 - 文档质量提升
 - 文档部署
 
-#### 4. [Rust 1.91 vs 1.90 全面对比分析（对齐官方发布说明）](../archive/deprecated_20260318/04_rust_1.91_vs_1.90_comparison.md)
+#### 4. Rust 1.91 vs 1.90 全面对比分析（对齐官方发布说明）
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
@@ -231,10 +231,10 @@ lto = true
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-- [Workspace 管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md#2-创建和配置-workspace)
-- [依赖管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md#3-依赖管理)
-- [Feature 管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md#5-feature-管理)
-- [构建优化](../archive/deprecated_20260318/02_cargo_workspace_guide.md#7-构建优化)
+- Workspace 管理
+- 依赖管理
+- Feature 管理
+- 构建优化
 
 #### 文档生成
 
@@ -265,7 +265,7 @@ lto = true
 
 **文档**: [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md)
 
-#### 6. [Rust 1.93 兼容性注意事项](../archive/deprecated_20260318/06_rust_1.93_compatibility_notes.md) 🆕
+#### 6. Rust 1.93 兼容性注意事项 🆕
 
 > **[来源: ACM - Systems Programming Languages]**
 
@@ -338,7 +338,7 @@ lto = true
 - **稳定 API**: 以 release notes 的 “Stabilized APIs” 列表为准
 - **与 1.90 的关键差异**: 1.90 引入 LLD 默认链接器与 `cargo publish --workspace`
 
-**文档**: [04_rust_1.91_vs_1.90_comparison.md](../archive/deprecated_20260318/04_rust_1.91_vs_1.90_comparison.md)
+**文档**: 04_rust_1.91_vs_1.90_comparison.md
 
 ---
 
@@ -413,7 +413,7 @@ serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.0", features = ["full"] }
 ```
 
-**详细指南**: [02_cargo_workspace_guide.md#2](../archive/deprecated_20260318/02_cargo_workspace_guide.md#2-创建和配置-workspace)
+**详细指南**: 02_cargo_workspace_guide.md#2
 
 ---
 
@@ -468,13 +468,13 @@ pub fn function(a: i32, b: i32) -> i32 {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-- [Rust 2024 Edition 学习影响](../archive/deprecated_20260318/00_rust_2024_edition_learning_impact.md) 🆕
+- Rust 2024 Edition 学习影响 🆕
 - [编译器特性](./01_compiler_features.md)
-- [Cargo 工作空间](../archive/deprecated_20260318/02_cargo_workspace_guide.md)
+- Cargo 工作空间
 - [Rustdoc 高级](./03_rustdoc_advanced.md)
-- [Rust 1.91 vs 1.90 对比分析（对齐官方发布说明）](../archive/deprecated_20260318/04_rust_1.91_vs_1.90_comparison.md)
+- Rust 1.91 vs 1.90 对比分析（对齐官方发布说明）
 - [Rust 1.93 vs 1.92 对比分析](./05_rust_1.93_vs_1.92_comparison.md) 🆕
-- [Rust 1.93 兼容性注意事项](../archive/deprecated_20260318/06_rust_1.93_compatibility_notes.md) 🆕
+- Rust 1.93 兼容性注意事项 🆕
 - [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md) 🆕
 - [Rust 版本演进链 1.89–1.93](../archive/2026_05_historical_docs/08_rust_version_evolution_1.89_to_1.93.md)（已归档）
 - [Rust 1.93 兼容性深度解析](./09_rust_1.93_compatibility_deep_dive.md) 🆕
@@ -485,7 +485,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.94 完整发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md) 🆕
 - [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md) 🆕
 - [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md) 🆕
-- [Rust 1.95+ 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md) 🆕
+- Rust 1.95+ 迁移指南 🆕
 - [Rust 1.94 研究笔记](../research_notes/RUST_194_RESEARCH_UPDATE.md) 🆕
 - [Rust 1.94 速查卡](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)（已归档）
 - [Cranelift 后端指南](./CRANELIFT_BACKEND_GUIDE.md) ⭐ (Rust 1.96+)
@@ -567,7 +567,7 @@ resolver = "2"  # 使用 Resolver 2
 tokio = { version = "1.0", features = ["full"] }
 ```
 
-**参考**: [02_cargo_workspace_guide.md#3.3](../archive/deprecated_20260318/02_cargo_workspace_guide.md#33-依赖版本统一)
+**参考**: 02_cargo_workspace_guide.md#3.3
 
 ---
 

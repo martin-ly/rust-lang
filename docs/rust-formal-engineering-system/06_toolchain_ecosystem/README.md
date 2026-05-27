@@ -298,7 +298,7 @@ fn main() {
 | :--- | :--- | :--- |
 | 工具链文档 | 完整工具链指南 | [../../06_toolchain/](../../06_toolchain/README.md) |
 | 编译器特性 | 完整编译器指南 | [../../06_toolchain/01_compiler_features.md](../../06_toolchain/01_compiler_features.md) |
-| Cargo 工作空间 | 工作空间配置 | [../../06_toolchain/02_cargo_workspace_guide.md](../../archive/deprecated_20260318/02_cargo_workspace_guide.md) |
+| Cargo 工作空间 | 工作空间配置 | ../../06_toolchain/02_cargo_workspace_guide.md |
 | Rustdoc 高级 | 文档生成高级用法 | [../../06_toolchain/03_rustdoc_advanced.md](../../06_toolchain/03_rustdoc_advanced.md) |
 | 编译器优化实验 | 优化分析 | [../../research_notes/experiments/compiler_optimizations.md](../../research_notes/experiments/compiler_optimizations.md) |
 | 性能基准 | 性能测试方法论 | [../../research_notes/experiments/performance_benchmarks.md](../../research_notes/experiments/performance_benchmarks.md) |

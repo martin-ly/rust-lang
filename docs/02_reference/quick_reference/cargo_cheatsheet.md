@@ -870,7 +870,7 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [工具链文档索引](../../06_toolchain/README.md)
-- [Cargo 工作空间指南](../../archive/deprecated_20260318/02_cargo_workspace_guide.md)
+- Cargo 工作空间指南
 - [Cargo 包管理与工作空间索引（项目内）](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
 
 ## 🧩 相关示例代码 {#-相关示例代码}
@@ -908,7 +908,7 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 
 - [Cargo 包管理完整文档](../../../crates/c02_type_system/docs/cargo_package_management/README.md)
 - [工具链文档](../../06_toolchain/README.md)
-- [Cargo 工作空间指南](../../archive/deprecated_20260318/02_cargo_workspace_guide.md)
+- Cargo 工作空间指南
 
 ## 🎯 使用场景 {#-使用场景}
 >
@@ -1071,7 +1071,7 @@ $ cargo bloat --release
 - [模块系统速查卡](./modules_cheatsheet.md) - Crate 和模块
 - [测试速查卡](./testing_cheatsheet.md) - Cargo 测试命令
 - [类型系统速查卡](./type_system.md) - 依赖类型管理
-- [反模式速查卡](../../archive/deprecated_20260318/ANTI_PATTERN_TEMPLATE.md) - Cargo 配置反模式
+- 反模式速查卡 - Cargo 配置反模式
 
 ---
 

@@ -210,7 +210,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文件**: [macros_cheatsheet.md](../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md)
+**文件**: macros_cheatsheet.md
 
 **内容**:
 
@@ -415,7 +415,7 @@
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-**文件**: [design_patterns_cheatsheet.md](../../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md)
+**文件**: design_patterns_cheatsheet.md
 
 **内容**:
 
@@ -519,7 +519,7 @@
 - **覆盖主题**: Rust 核心概念全覆盖（包括系统编程、网络编程、算法、设计模式、WASM）
 - **交叉引用**: ✅ 所有20个速查卡已统一添加"相关资源"部分，包含官方文档、项目内部文档和相关速查卡链接
 - **相关示例代码**: ✅ 20 个速查卡（含 AI/ML，2026-02-13）
-- **反例速查**: ✅ 20/20 速查卡已补全「反例速查」小节（错误示例 + 原因 + 修正），模板见 [ANTI_PATTERN_TEMPLATE.md](../../archive/deprecated_20260318/ANTI_PATTERN_TEMPLATE.md)（2026-02-12）
+- **反例速查**: ✅ 20/20 速查卡已补全「反例速查」小节（错误示例 + 原因 + 修正），模板见 ANTI_PATTERN_TEMPLATE.md（2026-02-12）
 - **版本一致性**: ✅ 所有速查卡已更新到 Rust 1.95.0+
 
 ---

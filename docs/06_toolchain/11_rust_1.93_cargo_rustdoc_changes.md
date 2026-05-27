@@ -161,7 +161,7 @@ cargo clean --workspace
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md)
-- [Rust 1.93 兼容性注意事项](../archive/deprecated_20260318/06_rust_1.93_compatibility_notes.md)
+- Rust 1.93 兼容性注意事项
 - [Cargo 速查卡](../02_reference/quick_reference/cargo_cheatsheet.md)
 - [rustdoc 高级用法](./03_rustdoc_advanced.md)
 

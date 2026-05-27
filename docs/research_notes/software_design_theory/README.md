@@ -19,7 +19,7 @@
 | **L2 进阶** | 23 安全/43 完全、语义边界图、三维边界矩阵 | [02_workflow_safe_complete_models](02_workflow_safe_complete_models/README.md)、[05_boundary_system](05_boundary_system/README.md) |
 | **L3 深入** | 执行模型、组合工程、扩展模式代码、反模式与规避 | [03_execution_models](03_execution_models/README.md)、[04_compositional_engineering](04_compositional_engineering/README.md)、[07_anti_patterns](./07_anti_patterns.md) |
 
-**实操入口**：执行模型 + 设计模式可运行示例见 [03_execution_models 可运行示例](03_execution_models/README.md#可运行示例层次推进)；语义边界 Safe 决策 3 例见 [03_semantic_boundary_map 场景 7–9](../../archive/deprecated_20260318/research_notes/software_design_theory/02_workflow_safe_complete_models/03_semantic_boundary_map.md#场景化-safe-决策-3-例)。
+**实操入口**：执行模型 + 设计模式可运行示例见 [03_execution_models 可运行示例](03_execution_models/README.md#可运行示例层次推进)；语义边界 Safe 决策 3 例见 03_semantic_boundary_map 场景 7–9。
 
 **全面论证推进**：设计模式、分布式模式、工作流模式论证深化见 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md)。
 
@@ -45,7 +45,7 @@
 
 | 目录 | 内容 |
 | :--- | :--- |
-| [00_MASTER_INDEX](./00_MASTER_INDEX.md) | 主索引、层次、边界、扩展路线 |
+| [00_MASTER_INDEX](../../00_master_index.md) | 主索引、层次、边界、扩展路线 |
 | [01_design_patterns_formal](01_design_patterns_formal/README.md) | 设计模式形式分析（GoF 23） |
 | [02_workflow_safe_complete_models](02_workflow_safe_complete_models/README.md) | 23 安全 vs 43 完全模型 |
 | [03_execution_models](03_execution_models/README.md) | 同步/异步/并发/并行/分布式 |
@@ -235,7 +235,7 @@
 
 > **[来源: IEEE - Programming Language Standards]**
 
-- [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

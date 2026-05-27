@@ -71,7 +71,7 @@
 
 | 主题 | 入口 | 说明 |
 | :--- | :--- | :--- |
-| **提示词模板** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) | 概念解释、代码审查、错误修复 |
+| **提示词模板** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) | 概念解释、代码审查、错误修复 |
 | **RAG 与项目结合** | 同上 | 速查卡、00_MASTER_INDEX、决策树纳入检索 |
 | **错误码上下文** | [ERROR_CODE_MAPPING](../02_reference/ERROR_CODE_MAPPING.md) | 编译错误 → 文档映射 |
 | **练习推荐** | [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) | 模块 ↔ 习题对应 |
@@ -132,7 +132,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-1. 使用 [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) 的提示词模板
+1. 使用 [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) 的提示词模板
 2. 结合 [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) 让 AI 推荐习题
 3. 遇到错误时附带 [ERROR_CODE_MAPPING](../02_reference/ERROR_CODE_MAPPING.md)
 
@@ -556,7 +556,7 @@ type Result<T> = std::result::Result<T, AIError>;
 | :--- | :--- |
 | **进阶主题** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
 | :--- | :--- |
-| **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) |
+| **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) |
 | :--- | :--- |
 | **参考文档** | [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) |
 | :--- | :--- |
@@ -567,7 +567,7 @@ type Result<T> = std::result::Result<T, AIError>;
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [AI 辅助编程指南](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md)
+- [AI 辅助编程指南](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 - [guides/README](../../guides/README.md)
 - [官方资源映射](../01_learning/OFFICIAL_RESOURCES_MAPPING.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)

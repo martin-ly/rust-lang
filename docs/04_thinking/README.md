@@ -100,7 +100,7 @@ fn verify_memory_safety() -> bool {
 
 ## 主索引
 
-[00_MASTER_INDEX.md](../00_MASTER_INDEX.md)
+[00_MASTER_INDEX.md](../00_master_index.md)
 
 ---
 
@@ -136,7 +136,7 @@ fn verify_memory_safety() -> bool {
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

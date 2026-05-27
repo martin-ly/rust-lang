@@ -38,7 +38,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 针对「设计模式、分布式设计模式、工作流设计模式」全面论证不足，输出批判性意见与建议、可持续推进计划
-> **上位文档**: [00_MASTER_INDEX](./00_MASTER_INDEX.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
+> **上位文档**: [00_MASTER_INDEX](../../00_master_index.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
 
 ---
 
@@ -291,7 +291,7 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

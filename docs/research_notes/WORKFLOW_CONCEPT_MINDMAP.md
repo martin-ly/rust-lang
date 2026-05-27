@@ -33,6 +33,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概念族谱概览
 >
@@ -313,7 +314,7 @@ impl EventDrivenWorkflow {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [工作流引擎决策树](../archive/deprecated_20260318/WORKFLOW_ENGINE_DECISION_TREE.md)
+- 工作流引擎决策树
 - [工作流引擎矩阵](./formal_methods/WORKFLOW_ENGINES_MATRIX.md)
 - [软件设计理论 - 工作流](./software_design_theory/02_workflow_safe_complete_models/README.md)
 
@@ -356,7 +357,7 @@ impl EventDrivenWorkflow {
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
