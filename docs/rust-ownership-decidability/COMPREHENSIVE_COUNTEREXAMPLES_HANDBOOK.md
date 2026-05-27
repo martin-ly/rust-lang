@@ -1023,3 +1023,11 @@ This handbook covered:
 *Sections: 15+*
 
 ---
+
+## 相关文档
+
+- [所有权可判定性研究](./FINAL_MASTER_INDEX.md)
+- [Rust 安全关键生态系统](../RUST_SAFETY_CRITICAL_ECOSYSTEM/00_RUST_SAFETY_CRITICAL_ECOSYSTEM_MASTER_INDEX.md)
+- [概念：所有权基础](../../concept/01_foundation/01_ownership.md)
+
+---

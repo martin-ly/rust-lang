@@ -97,3 +97,10 @@
 
 > **[来源: Rust Release Schedule](https://forge.rust-lang.org/release/release-notes.html)**
 > **[来源: releases.rs](https://releases.rs/)**
+
+---
+
+## 相关文档
+
+- [Rust 版本跟踪](../../concept/07_future/05_rust_version_tracking.md)
+- [迁移指南](../MIGRATION_GUIDE_2026.md)
