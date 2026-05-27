@@ -23,7 +23,6 @@
     - [阻塞操作](#阻塞操作)
     - [批处理 I/O](#批处理-io)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -255,11 +254,6 @@ while let Some(result) = set.join_next().await {
 - [项目 C06 异步模块](../../crates/c06_async/src/lib.rs)
 - [项目 Async Closures 指南](../../crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

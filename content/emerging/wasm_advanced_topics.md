@@ -31,7 +31,6 @@
     - [wasm-tools](#wasm-tools)
     - [工具链对比](#工具链对比)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: 🔄 持续跟踪](#状态--持续跟踪)
 
 ---
 
@@ -424,11 +423,6 @@ Rust 源码
 - [项目内 component_model.rs](../../crates/c12_wasm/src/component_model.rs)
 - [项目内 web_frameworks 文档](../../content/ecosystem/web_frameworks/)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: 🔄 持续跟踪
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -23,7 +23,6 @@
     - [模式 2: 双指针技巧](#模式-2-双指针技巧)
     - [陷阱: 父指针在子指针活跃时被使用](#陷阱-父指针在子指针活跃时被使用)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -220,11 +219,6 @@ unsafe {
 - [项目 Miri 测试集](../../crates/c01_ownership_borrow_scope/src/miri_tests.rs)
 - [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -24,7 +24,6 @@
   - [🗃️ 迁移系统 (sqlx-cli)](#️-迁移系统-sqlx-cli)
   - [📊 与 Sea-ORM / Diesel 对比](#-与-sea-orm--diesel-对比)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -413,11 +412,6 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
 - [Sea-ORM 深度解析](./sea_orm_deep_dive.md)
 - [项目 C02 类型系统模块](../../crates/c02_type_system/)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

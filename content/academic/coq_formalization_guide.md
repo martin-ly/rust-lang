@@ -23,7 +23,6 @@
     - [分离逻辑](#分离逻辑)
     - [并发验证](#并发验证)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 100% 完成](#状态--100-完成)
 
 ---
 
@@ -355,11 +354,6 @@ Qed.
 - [Iris 教程](https://iris-project.org/tutorial.html)
 - [RustBelt 论文](https://plv.mpi-sws.org/rustbelt/popl18/)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 100% 完成
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

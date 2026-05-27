@@ -28,7 +28,6 @@
   - [⚠️ 注意事项](#️-注意事项)
     - [当前限制](#当前限制)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: 🧪 不稳定特性，需要 nightly](#状态--不稳定特性需要-nightly)
 
 ---
 
@@ -429,10 +428,6 @@ let f = async || {
 - [Tracking Issue](https://github.com/rust-lang/rust/issues/62290)
 - [RFC: Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
 
----
-
-**最后更新**: 2026-03-15
-**状态**: 🧪 不稳定特性，需要 nightly
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

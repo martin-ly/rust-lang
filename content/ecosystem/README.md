@@ -30,7 +30,6 @@
   - [📈 监控与可观测性](#-监控与可观测性)
     - [Tracing 生态系统](#tracing-生态系统)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: 🔄 持续扩充中](#状态--持续扩充中)
 
 ---
 
@@ -539,11 +538,6 @@ fn init_tracing() {
 - [Rust Weekly](https://this-week-in-rust.org/) - 社区动态
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) - API 设计指南
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: 🔄 持续扩充中
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

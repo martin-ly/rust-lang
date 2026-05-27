@@ -25,7 +25,6 @@
     - [GitHub Actions 矩阵交叉编译](#github-actions-矩阵交叉编译)
   - [📦 多平台发布矩阵](#-多平台发布矩阵)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -438,11 +437,6 @@ jobs:
 - [dtolnay/rust-toolchain](https://github.com/dtolnay/rust-toolchain)
 - [Cargo 配置文件](https://doc.rust-lang.org/cargo/reference/config.html)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

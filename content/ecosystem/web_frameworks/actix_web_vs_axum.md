@@ -19,7 +19,6 @@
     - [Axum (Tower)](#axum-tower)
   - [📐 选择决策树](#-选择决策树)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -164,11 +163,6 @@ Router::new()
 - [Tower 文档](https://docs.rs/tower)
 - [项目 C10 网络模块](../../crates/c10_networks/)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

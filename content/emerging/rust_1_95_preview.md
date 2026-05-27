@@ -37,7 +37,6 @@
     - [CAS 循环 → `Atomic::update`](#cas-循环--atomicupdate)
   - [📁 项目内对应示例](#-项目内对应示例)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ Stable 已发布](#状态--stable-已发布)
 
 ---
 
@@ -320,10 +319,6 @@ let new = counter.update(|old| old + 1);
 - [Cargo Script 指南](../../docs/06_toolchain/cargo_script_guide.md)
 - [Safety Tags 预研](../../docs/05_guides/SAFETY_TAGS_GUIDE.md)
 
----
-
-**最后更新**: 2026-05-08
-**状态**: ✅ Stable 已发布
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

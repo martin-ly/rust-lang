@@ -62,7 +62,6 @@
     - [学术论文](#学术论文)
     - [官方资源](#官方资源)
     - [项目内部资源](#项目内部资源)
-  - [**状态**: ✅ 权威指南 v1.0](#状态--权威指南-v10)
 
 ---
 
@@ -809,11 +808,6 @@ fn use_abstractions() {
 - `docs/rust-ownership-decidability/formal-foundations/models/tree-borrows-comprehensive.md` - 形式化分析
 - `crates/c01_ownership_borrow_scope/src/` - 实践示例
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-18
-**状态**: ✅ 权威指南 v1.0
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

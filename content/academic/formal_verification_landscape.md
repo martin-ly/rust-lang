@@ -26,7 +26,6 @@
     - [官方文档](#官方文档)
     - [学术论文](#学术论文)
     - [教程与课程](#教程与课程)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -387,11 +386,6 @@ RustBelt 理论框架:
 - [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
 - [The Formal Semantics of Rust](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/mir/)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

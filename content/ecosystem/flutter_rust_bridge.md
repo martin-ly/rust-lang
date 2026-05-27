@@ -25,7 +25,6 @@
     - [线程模型差异](#线程模型差异)
   - [⚡ 性能优化建议](#-性能优化建议)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -323,11 +322,6 @@ final summary = await processBatch(ids: List.generate(100, (i) => i));
 - [Rust 交叉编译指南](https://rust-lang.github.io/rustup/cross-compilation.html)
 - [项目 crate: c12_wasm](../../crates/c12_wasm/) — WASM 相关示例
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

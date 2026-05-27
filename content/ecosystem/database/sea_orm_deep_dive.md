@@ -22,7 +22,6 @@
   - [🔄 迁移系统](#-迁移系统)
   - [📊 与 SQLx 对比](#-与-sqlx-对比)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -262,11 +261,6 @@ Migrator::down(&db, Some(1)).await?;  // 回退 1 步
 - [项目 C10 网络模块](../../crates/c10_networks/)
 - [SQLx 深度解析](./sqlx_deep_dive.md)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

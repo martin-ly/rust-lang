@@ -35,7 +35,6 @@
     - [学术论文](#学术论文)
     - [形式化工具](#形式化工具)
     - [在线课程](#在线课程)
-  - [**状态**: 🔄 持续整合学术前沿](#状态--持续整合学术前沿)
 
 ---
 
@@ -434,11 +433,6 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 - [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
 - [Type Theory Foundations](https://www.coursera.org/learn/type-theory)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: 🔄 持续整合学术前沿
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

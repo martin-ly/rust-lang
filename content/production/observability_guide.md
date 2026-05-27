@@ -26,7 +26,6 @@
     - [异步任务追踪](#异步任务追踪)
   - [📊 与 Go/Java 对比](#-与-gojava-对比)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -302,11 +301,6 @@ tokio::spawn(
 - [项目 C06 异步模块](../../crates/c06_async/)
 - [Kubernetes 部署指南](./kubernetes_deployment_guide.md)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

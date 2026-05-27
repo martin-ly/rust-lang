@@ -31,7 +31,6 @@
     - [优化建议](#优化建议)
   - [🧪 测试](#-测试)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完成](#状态--已完成)
 
 ---
 
@@ -705,11 +704,6 @@ async fn test_get_user() {
 - [Tower 文档](https://docs.rs/tower/latest/tower/)
 - [Hyper 文档](https://docs.rs/hyper/latest/hyper/)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 已完成
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

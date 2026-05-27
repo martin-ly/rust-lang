@@ -19,7 +19,6 @@
   - [🔄 与 Miri 对比](#-与-miri-对比)
   - [⚠️ 限制与注意事项](#️-限制与注意事项)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -226,11 +225,6 @@ pub fn binary_search(array: &[i32], target: i32) -> Option<usize> {
 - [项目 Miri 指南](../../docs/MIRI_GUIDE.md)
 - [项目 academic/ 目录](../academic/)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
