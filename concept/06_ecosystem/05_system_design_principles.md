@@ -16,7 +16,6 @@
 ---
 
 ## 📑 目录
->
 
 - [Rust 系统设计原则与国际权威对齐](#rust-系统设计原则与国际权威对齐)
   - [📑 目录](#-目录)
@@ -88,9 +87,6 @@
 ---
 
 ## 二、七项核心设计原则
->
->
-
 
 ### 2.1 内存安全：Capability-Based Security
 
@@ -249,7 +245,6 @@ impl Worker {
 >
 >
 
-
 ### 3.1 安全-性能-可维护性帕累托前沿
 >
 
@@ -302,7 +297,6 @@ graph LR
 ## 四、从 Rust 类型到分布式协议的隐喻映射
 >
 
-
 ```mermaid
 graph TD
     A[Rust 类型系统] --> B[分布式系统隐喻]
@@ -339,7 +333,6 @@ graph TD
 
 ## 五、五层形式化扩展模型
 >
-
 
 Rust 系统设计的形式化验证可按五层扩展模型组织：
 
@@ -495,13 +488,23 @@ graph LR
     VERIFY -.->|反馈| REQ
 ```
 
-> **认知功能**: 强调系统设计不是线性瀑布，而是带有反馈回路的迭代过程。验证层的结果（如 Miri 发现的数据竞争、Kani 证伪的不变式）应回流需求层，驱动需求精化和架构修正。虚线箭头是「V 模型」在 Rust 生态中的特化表达。[来源: 💡 原创分析]
-
-> **思维表征说明**: 知识流动图是 `inter_layer_topology.md` 中「知识流动」概念在**系统设计场景**的具体化——它展示的不是概念之间的静态关系，而是**设计决策在系统各层之间的动态传播**。与 `graph TD` 流程图（展示结构）不同，知识流动图强调**反馈回路**（VERIFY → REQ 的虚线箭头）——设计不是一次性的，验证结果会反馈到需求层，驱动迭代优化。这是系统工程中「V 模型」的 Rust 特化版本。 [来源: Systems Engineering V-Model; ISO/IEC/IEEE 15288]
+> **认知功能**: 强调系统设计不是线性瀑布，而是带有反馈回路的迭代过程。
+> 验证层的结果（如 Miri 发现的数据竞争、Kani 证伪的不变式）应回流需求层，驱动需求精化和架构修正。
+> 虚线箭头是「V 模型」在 Rust 生态中的特化表达。[来源: 💡 原创分析]
+> **思维表征说明**: 知识流动图是 `inter_layer_topology.md` 中「知识流动」概念在**系统设计场景**的具体化——它展示的不是概念之间的静态关系，而是**设计决策在系统各层之间的动态传播**。
+> 与 `graph TD` 流程图（展示结构）不同，知识流动图强调**反馈回路**（VERIFY → REQ 的虚线箭头）——设计不是一次性的，验证结果会反馈到需求层，驱动迭代优化。
+> 这是系统工程中「V 模型」的 Rust 特化版本。 [来源: Systems Engineering V-Model; ISO/IEC/IEEE 15288]
 
 ---
 
-> **权威来源**: [NIST SP 800-207](https://doi.org/10.6028/NIST.SP.800-207) · [SEL4 Formal Verification](https://sel4.systems/) · [WASI Specification](https://wasi.dev/) · [Armstrong 2003](https://erlang.org/download/armstrong_thesis_2003.pdf) · [Stroustrup 1994](https://www.stroustrup.com/dne.html) · [Brewer CAP](https://doi.org/10.1109/MC.2012.37) · [Lamport Paxos](https://doi.org/10.1145/3335772.3335939) · [Wadler Propositions as Sessions](https://doi.org/10.1145/2364527.2364568)
+> **权威来源**: [NIST SP 800-207](https://doi.org/10.6028/NIST.SP.800-207) ·
+> [SEL4 Formal Verification](https://sel4.systems/) ·
+> [WASI Specification](https://wasi.dev/) ·
+> [Armstrong 2003](https://erlang.org/download/armstrong_thesis_2003.pdf) ·
+> [Stroustrup 1994](https://www.stroustrup.com/dne.html) ·
+> [Brewer CAP](https://doi.org/10.1109/MC.2012.37) ·
+> [Lamport Paxos](https://doi.org/10.1145/3335772.3335939) ·
+> [Wadler Propositions as Sessions](https://doi.org/10.1145/2364527.2364568)
 >
 > **Rust 版本**: 1.95.0 stable (Edition 2024)
 > **文档版本**: 1.1
@@ -512,57 +515,10 @@ graph LR
 
 ## 权威来源索引
 
->
->
->
->
->
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 
 > **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md) · [安全边界](../05_comparative/04_safety_boundaries.md)
 

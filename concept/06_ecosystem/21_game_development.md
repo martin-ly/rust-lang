@@ -12,8 +12,6 @@
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [WGPU](https://wgpu.rs/) · [Rust GameDev Working Group](https://gamedev.rs/) · [Are We Game Yet?](https://arewegameyet.rs/) · [Wikipedia — Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system)
 
 ## 📑 目录
->
->
 
 - [Rust 游戏开发生态](#rust-游戏开发生态)
   - [📑 目录](#-目录)

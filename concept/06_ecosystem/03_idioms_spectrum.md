@@ -16,7 +16,6 @@
 ---
 
 ## 📑 目录
->
 
 - [Rust 惯用法谱系全景（Idioms Spectrum）](#rust-惯用法谱系全景idioms-spectrum)
   - [📑 目录](#-目录)
@@ -243,7 +242,6 @@ graph TD
 
 ## 三、L0 词法级惯用法
 
-
 ### 3.1
 
 > [来源: Rust Reference §6.13] `?` 传播运算符
@@ -347,7 +345,6 @@ for &n in &numbers {
 ---
 
 ## 四、L1 类型级惯用法
-
 
 ### 4.1
 
@@ -457,7 +454,6 @@ impl FileHandle<WritePermission> {
 
 ## 五、L2 接口级惯用法
 
-
 ### 5.1
 
 > [来源: Rust API Guidelines C-CONV] Into/From 转换链
@@ -549,7 +545,6 @@ greeting(&"Rust".to_owned());    // &String
 
 ## 六、L3 资源级惯用法
 
-
 ### 6.1
 
 > [来源: Rust Reference §10.8] RAII 守卫模式
@@ -638,7 +633,6 @@ impl SelfReferential {
 ---
 
 ## 七、L4 控制级惯用法
-
 
 ### 7.1
 
@@ -732,7 +726,6 @@ let squares = (0..10).map(|n| n * n).collect::<Vec<i32>>();
 ---
 
 ## 八、L5 并发级惯用法
-
 
 ### 8.1
 
@@ -833,7 +826,6 @@ fn pop<T>(head: &Atomic<Node<T>>) -> Option<T> {
 ---
 
 ## 九、L6 架构级惯用法
-
 
 ### 9.1
 
@@ -1162,160 +1154,9 @@ quadrantChart
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
-
-
 
 > **相关文件**: [A/S/P 标记规范](../00_meta/asp_marking_guide.md) · [问题图谱](../00_meta/problem_graph.md) · [范式转换矩阵](../00_meta/paradigm_transition_matrix.md)
 

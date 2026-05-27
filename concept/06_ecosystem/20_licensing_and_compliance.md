@@ -12,8 +12,6 @@
 > **来源**: [Rust FAQ — Why MIT/Apache-2.0](https://www.rust-lang.org/policies/licenses) · [Choose a License](https://choosealicense.com/) · [SPDX License List](https://spdx.org/licenses/) · [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) · [OSI Approved Licenses](https://opensource.org/licenses) · [Wikipedia — Software License](https://en.wikipedia.org/wiki/Software_license)
 
 ## 📑 目录
->
->
 
 - [许可证与合规：Rust 项目的法律工程](#许可证与合规rust-项目的法律工程)
   - [📑 目录](#-目录)

@@ -17,10 +17,6 @@
 > [Rust ML Ecosystem](https://www.arewelearningyet.com/)
 
 ## 📑 目录
->
->
-
- [Rust 在 AI \ 与机器学习中的新兴角色](#rust-在-ai)
 
 - [Rust 在 AI 与机器学习中的新兴角色](#rust-在-ai-与机器学习中的新兴角色)
   - [📑 目录](#-目录)

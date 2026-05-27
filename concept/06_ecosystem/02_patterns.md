@@ -17,8 +17,6 @@
 ---
 
 ## 一、权威定义
->
-
 
 > **[Rust Design Patterns]** Rust design patterns are recurring solutions to common problems in software design using the Rust programming language. They leverage Rust's unique features such as ownership, traits, and the type system.
 
@@ -45,7 +43,6 @@
 
 ## 二、模式分类矩阵
 >
-
 
 ### 2.1 已有模式扩展
 
@@ -97,7 +94,6 @@
 ## 三、Mermaid 图：模式关系图
 >
 
-
 ```mermaid
 graph TD
     A[Design Patterns] --> B[创建型 Creational]
@@ -133,7 +129,6 @@ graph TD
 
 ## 四、各模式详解
 >
-
 
 ### 4.1 Command 模式
 
@@ -1238,7 +1233,6 @@ fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
 ## 六、反命题决策树 {L6}
 >
 
-
 ### 命题一："设计模式是语言缺陷的补丁"
 
 ```mermaid
@@ -1389,7 +1383,6 @@ fn main() {
 
 ## 七、与 L1-L3 的概念映射 {L6}
 
-
 | 设计模式 | 依赖的 Rust 概念 | 概念来源文件 | 形式化意义 |
 |:---|:---|:---|:---|
 | RAII | L1 所有权 + Drop trait | `01_foundation/01_ownership.md` | 线性逻辑资源消耗 |
@@ -1408,7 +1401,6 @@ fn main() {
 
 ## 八、学术来源 {L6}
 
-
 | **论文/著作** | **作者** | **核心贡献** | **与 Rust 的关联** |
 |:---|:---|:---|:---|
 | *Design Patterns: Elements of Reusable Object-Oriented Software* (GoF, 1994) | Gamma, Helm, Johnson, Vlissides | 系统化了 23 种经典设计模式 | Rust 社区对 GoF 模式进行了零成本抽象改写 |
@@ -1421,7 +1413,6 @@ fn main() {
 ---
 
 ## 九、知识来源关系（Provenance） {L6}
-
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -1449,7 +1440,6 @@ fn main() {
 
 ## 十、相关概念链接 {L6}
 
-
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权 / Drop | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | RAII 根基 |
@@ -1466,7 +1456,6 @@ fn main() {
 
 ## 十一、待补充与演进方向（TODOs） {L6}
 >
-
 
 ### 8.1 设计模式 Benchmark 对比
 
@@ -1544,201 +1533,11 @@ fn main() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 > **补充来源**
-
 
 ---
 

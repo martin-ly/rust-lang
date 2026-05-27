@@ -17,11 +17,8 @@
 ---
 
 ## 一、权威定义
->
-
 
 ### 1.1 Wikipedia 权威定义
->
 
 > **[Wikipedia: Library (computing)]** A library is a collection of non-volatile resources used by computer programs, often for software development. These may include configuration data, documentation, help data, message templates, pre-written code and subroutines, classes, values or type specifications.
 > **来源**: <https://en.wikipedia.org/wiki/Library_(computing)>
@@ -48,7 +45,6 @@
 
 ## 认知路径（Cognitive Path）
 >
-
 
 > **学习递进**: 从直觉出发，逐层深入核心概念。
 
@@ -84,7 +80,6 @@ supply chain/版本兼容性/维护者疲劳
 
 ## 二、概念属性矩阵
 >
-
 
 ### 2.1 核心 Crate 功能域总矩阵
 >
@@ -125,7 +120,6 @@ supply chain/版本兼容性/维护者疲劳
 
 ## 三、思维导图
 >
-
 
 ```mermaid
 graph TD
@@ -168,7 +162,6 @@ graph TD
 
 ## 四、核心 Crate 详解（按功能域）
 >
-
 
 ### 4.1 序列化（Serialization）
 
@@ -448,7 +441,6 @@ graph TD
 ## 五、Crate 与 L1-L5 概念映射
 >
 
-
 | **Crate** | **L1 基础** | **L2 进阶** | **L3 高级** | **L4 形式化** | **L5 对比** |
 |:---|:---|:---|:---|:---|:---|
 | **serde** | 类型系统 (ADT) | Trait (derive) | 过程宏 | — | C++ 无等价 |
@@ -465,7 +457,6 @@ graph TD
 
 ## 六、反命题与边界分析
 >
-
 
 ### 命题: "crates.io 上下载量高的 crate 一定适合生产环境"
 
@@ -502,7 +493,6 @@ graph TD
 ---
 
 ## 七、扩展内容：选型方法论与趋势
-
 
 ### 7.1 crates.io 生态健康度指标
 
@@ -543,7 +533,6 @@ graph TD
 
 ## 八、知识来源关系（Provenance）
 
-
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
 | serde 是 Rust 序列化标准 | [crates.io 下载量] · [serde.rs] | ✅ |
@@ -566,7 +555,6 @@ graph TD
 ---
 
 ## 九、相关概念链接
-
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -890,8 +878,8 @@ fn main() -> anyhow::Result<()> {
 
 ## 十、待补充与演进方向（TODOs）
 
-
  [x] **高**: 补充核心并发 crate 深度解析（crossbeam/rayon/parking_lot/dashmap）- [x] **高**: 补充 crate 选择决策树（std vs 第三方）
+
 - [x] **中**: 补充 crates.io 生态健康度指标深度评估
 - [x] **高**: 补充每个核心 crate 的具体代码示例（最小可用示例） —— 已完成 §9.1
  [x] **高**: 补充 crate 组合的最佳实践（如 axum + sqlx + tracing 完整栈） —— 已完成 §9.2- [x] **中**: 补充 `cargo vet` 供应链安全审计流程 —— 已完成 §9.3
@@ -901,7 +889,6 @@ fn main() -> anyhow::Result<()> {
 - [x] **低**: 建立 crates.io 下载量/趋势的自动化追踪 —— 已纳入 `scripts/concept_audit.py` 扩展计划 —— 待自动化脚本
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
-
 
 > **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。
 
@@ -922,7 +909,6 @@ fn main() -> anyhow::Result<()> {
 | **cargo audit 检测漏洞** | Advisory DB ⟹ | 供应链安全 | 零日漏洞延迟 | CI必需步骤 |
 
 ## 反命题分析（Anti-Propositions）
-
 
 > **逻辑辨析**: 以下命题看似成立，实则在特定条件下失效。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
@@ -1085,125 +1071,9 @@ graph TD
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
-
-
 
 > **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)
 

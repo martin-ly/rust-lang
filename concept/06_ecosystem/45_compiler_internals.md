@@ -11,8 +11,6 @@
 > **来源**: [Rustc Development Guide](https://rustc-dev-guide.rust-lang.org/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Niko Matsakis — Rust Blog](https://smallcultfollowing.com/babysteps/) · [Polonius — OOPSLA 2018](https://hal.inria.fr/hal-03827702/) · [Chalk — Rust PL](https://rust-lang.github.io/chalk/book/) · [LLVM](https://llvm.org/docs/) · [rustc_driver API](https://doc.rust-lang.org/nightly/nightly-rustc/rustc_driver/)
 
 ## 📑 目录
->
->
 
 - [Compiler Internals（Rust 编译器内部原理）](#compiler-internalsrust-编译器内部原理)
   - [📑 目录](#-目录)

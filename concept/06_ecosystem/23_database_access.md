@@ -12,8 +12,6 @@
 > **来源**: [SQLx](https://github.com/launchbadge/sqlx) · [Diesel](https://diesel.rs/) · [SeaORM](https://www.sea-ql.org/SeaORM/) · [Rust Database Guide](https://rust-lang-nursery.github.io/rust-cookbook/database.html) · [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)
 
 ## 📑 目录
->
->
 
 - [Rust 数据库访问生态](#rust-数据库访问生态)
   - [📑 目录](#-目录)

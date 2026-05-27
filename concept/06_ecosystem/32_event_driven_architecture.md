@@ -21,7 +21,6 @@
 > [Reactive Streams Specification](https://www.reactive-streams.org/)
 
 ## 📑 目录
->
 
 - [事件驱动架构 (Event-Driven Architecture)](#事件驱动架构-event-driven-architecture)
   - [📑 目录](#-目录)

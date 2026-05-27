@@ -12,7 +12,6 @@
 > **来源**: [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) · [Rust Blog — Edition 2024](https://blog.rust-lang.org/) · [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia — Software Release Life Cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)
 
 ## 📑 目录
->
 
 - [Edition 2024 完全指南：新特性与迁移策略](#edition-2024-完全指南新特性与迁移策略)
   - [📑 目录](#-目录)

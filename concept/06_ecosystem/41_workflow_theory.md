@@ -23,8 +23,6 @@
 > [来源: [WfMC — Reference Model](https://www.wfmc.org/standards/reference-model)] · [来源: [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507)] · [来源: [Workflow Patterns](http://www.workflowpatterns.com/)]
 
 ## 📑 目录
->
->
 
 - [Workflow Theory \& Formalization（工作流理论与形式化）](#workflow-theory--formalization工作流理论与形式化)
   - [📑 目录](#-目录)

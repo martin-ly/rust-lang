@@ -12,8 +12,6 @@
 > **来源**: [embedded-graphics](https://docs.rs/embedded-graphics/latest/) · [LVGL](https://lvgl.io/) · [Slint UI](https://slint-ui.com/) · [egui](https://docs.rs/egui/latest/) · [embedded-hal](https://docs.rs/embedded-hal/latest/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/)
 
 ## 📑 目录
->
->
 
 - [Rust 嵌入式图形系统开发](#rust-嵌入式图形系统开发)
   - [📑 目录](#-目录)

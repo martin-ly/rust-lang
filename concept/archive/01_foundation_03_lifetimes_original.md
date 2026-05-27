@@ -25,8 +25,6 @@
 ---
 
 ## 📑 目录
->
-> [来源: [TRPL — Lifetimes]]
 
 - [Lifetimes（生命周期）](#lifetimes生命周期)
   - [📑 目录](#-目录)

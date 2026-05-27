@@ -18,8 +18,6 @@
 > [来源: [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/)]
 
 ## 📑 目录
->
->
 
 - [Architecture Patterns（架构设计模式）](#architecture-patterns架构设计模式)
   - [📑 目录](#-目录)

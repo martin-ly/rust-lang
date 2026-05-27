@@ -10,18 +10,14 @@
 > **Bloom 层级**: 评价
 **变更日志**:
 
-- v1.0 (2026-05-13): 初始版本——从归档文件 `02.md` 结构化重组，纳入 L6 生态层规范体系
-$entry
+- v1.0 (2026-05-13): 初始版本——从归档文件 `02.md` 结构化重组，纳入 L6 生态层规范体系$entry
 - v1.1 (2026-05-13): 补充层级标记、来源标注、知识来源关系、待补充方向
 
 ---
 
 ## 权威定义
->
->
 
 ### Wikipedia 权威定义
->
 
 > **[Wikipedia: Software framework]** A software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software.
 > **来源**: <https://en.wikipedia.org/wiki/Software_framework>
@@ -39,22 +35,18 @@ $entry
 > **学习递进**: 从"哪个 crate 好用"的直觉，深入到"生态系统的形式化结构"的元视角。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 第 1 步：为什么需要形式化视角评估生态？
->
 
 工程选型不仅看功能和性能，还要看**组合性**（能否与其他组件代数组合）和**可验证性**（能否超越编译器保证功能正确）。
 
 ### 第 2 步：什么是"形式化分层塔"？
->
 
 Rust 生态从 L0 编译器安全到 L4 功能正确性证明，形成了清晰的层级。理解这个层级，才能做出符合项目可靠性需求的选型。
 
 ### 第 3 步：如何阅读形式化成熟度矩阵？
->
 
 工业采用度 ≠ 形式化深度。某些库虽 stars 不高，但在可组合性或可验证性维度上处于生态顶端。
 
 ### 第 4 步：黄金组合的逻辑是什么？
->
 
 不是选"最好的单个库"，而是选"能形成同态链的组合"——类型安全在层与层之间传递。
 

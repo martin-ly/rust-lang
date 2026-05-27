@@ -12,8 +12,6 @@
 > **来源**: [Rust RFC — Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458) · [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Internals — Unsafe Field Discussion](https://internals.rust-lang.org/)
 
 ## 📑 目录
->
->
 
 - [Unsafe Fields 预研：字段级安全边界的精确标注](#unsafe-fields-预研字段级安全边界的精确标注)
   - [📑 目录](#-目录)

@@ -12,8 +12,6 @@
 > **来源**: [Rust Internals — BorrowSanitizer Discussion](https://internals.rust-lang.org/) · [Miri: An Interpreter for Rust's Mid-level IR](https://github.com/rust-lang/miri) · [AddressSanitizer Wiki](https://github.com/google/sanitizers/wiki/AddressSanitizer) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/) · [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
 ## 📑 目录
->
->
 
 - [BorrowSanitizer 概念预研：运行时借用检查工业化](#borrowsanitizer-概念预研运行时借用检查工业化)
   - [📑 目录](#-目录)

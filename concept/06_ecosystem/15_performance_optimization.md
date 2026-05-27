@@ -12,8 +12,6 @@
 > **来源**: [Criterion [来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)].rs](<https://bokeh.github.io/criterion.rs/book/>) · [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) · [Rust SIMD Guide](https://doc.rust-lang.org/std/simd/index.html) · [Coherence Cache Lines](https://en.wikipedia.org/wiki/CPU_cache) · [TRPL — Optimization](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
 ## 📑 目录
->
->
 
 - [性能优化：Rust 代码的测量与调优](#性能优化rust-代码的测量与调优)
   - [📑 目录](#-目录)
@@ -492,60 +490,11 @@ graph TD
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：性能优化的编译错误
 

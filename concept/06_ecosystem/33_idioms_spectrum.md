@@ -16,7 +16,6 @@
 ---
 
 ## 📑 目录
->
 
 - [Rust 惯用法谱系全景（Idioms Spectrum）](#rust-惯用法谱系全景idioms-spectrum)
   - [📑 目录](#-目录)

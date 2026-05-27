@@ -18,7 +18,6 @@
 ---
 
 ## 权威定义
->
 
 > **[来源: CLRS — Introduction to Algorithms, 4th Edition]** An algorithm is any well-defined computational procedure that takes some value, or set of values, as input and produces some value, or set of values, as output.
 > **来源**: <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>

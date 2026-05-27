@@ -12,7 +12,6 @@
 > **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Tower](https://docs.rs/tower/latest/tower/) · [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) · [Microservices Patterns (Chris Richardson)](https://microservices.io/book/) · [Kafka Documentation](https://kafka.apache.org/documentation/)
 
 ## 📑 目录
->
 
 - [微服务架构模式 (Microservice Architecture Patterns)](#微服务架构模式-microservice-architecture-patterns)
   - [📑 目录](#-目录)

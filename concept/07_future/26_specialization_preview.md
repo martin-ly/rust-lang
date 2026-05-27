@@ -19,8 +19,6 @@
 > **来源**: [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) · [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) · [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/2021/09/06/Separating-contract-and-implementation.html) · [Rust Reference — Trait Implementations](https://doc.rust-lang.org/reference/items/implementations.html) · [Wikipedia — Multiple Dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
 
 ## 📑 目录
->
->
 
 - [Specialization：Trait 实现的精确化与重叠解析](#specializationtrait-实现的精确化与重叠解析)
   - [📑 目录](#-目录)

@@ -12,8 +12,6 @@
 > **来源**: [rustdoc Documentation](https://doc.rust-lang.org/rustdoc/) · [RFC 1574 — API Documentation](https://github.com/rust-lang/rfcs/pull/1574) · [mdBook Guide](https://rust-lang.github.io/mdBook/) · [RFC 1946 — Intra-rustdoc links](https://github.com/rust-lang/rfcs/pull/1946) · [docs.rs](https://docs.rs/about)
 
 ## 📑 目录
->
->
 
 - [文档生态：rustdoc、文档测试与 API 文档规范](#文档生态rustdoc文档测试与-api-文档规范)
   - [📑 目录](#-目录)
@@ -36,6 +34,7 @@
   - [十、边界测试：文档工具的编译错误](#十边界测试文档工具的编译错误)
     - [10.1 边界测试：`doctest` 中的隐式 `main`（编译错误）](#101-边界测试doctest-中的隐式-main编译错误)
     - [10.2 边界测试：`rustdoc` 的链接解析失败（编译错误）](#102-边界测试rustdoc-的链接解析失败编译错误)
+    - [10.4 边界测试：`doctest` 的 `compile_fail` 与 `ignore` 的误用（测试失败）](#104-边界测试doctest-的-compile_fail-与-ignore-的误用测试失败)
 
 ---
 
@@ -483,63 +482,9 @@ graph TD
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 ## 十、边界测试：文档工具的编译错误
 

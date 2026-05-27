@@ -12,8 +12,6 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Wikipedia — Compile Time](https://en.wikipedia.org/wiki/Compile_time) · [Rust Blog — Const Evaluation](https://blog.rust-lang.org/)
 
 ## 📑 目录
->
->
 
 - [编译期执行与常量求值](#编译期执行与常量求值)
   - [📑 目录](#-目录)

@@ -12,8 +12,6 @@
 > **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg) · [Wikipedia — Embedded System](https://en.wikipedia.org/wiki/Embedded_system) · [Ferrous Systems](https://ferrous-systems.com/)
 
 ## 📑 目录
->
->
 
 - [Rust 嵌入式系统开发](#rust-嵌入式系统开发)
   - [📑 目录](#-目录)

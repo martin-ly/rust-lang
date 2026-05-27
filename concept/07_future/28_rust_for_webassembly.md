@@ -34,8 +34,6 @@
 ---
 
 ## 📑 目录
->
->
 
 - [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](#rust-for-webassembly从-wasm-bindgen-到前端框架的深度技术栈)
   - [📑 目录](#-目录)

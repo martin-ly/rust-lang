@@ -12,8 +12,6 @@
 > **来源**: [Rust RFC: Safety Tags](https://github.com/rust-lang/rfcs/pull/) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Internals — Safety Annotations](https://internals.rust-lang.org/) · [Rust for Linux](https://rust-for-linux.com/) · [Prusti: Deductive Verification for Rust](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf)
 
 ## 📑 目录
->
->
 
 - [Safety Tags 概念预研：Unsafe 契约的机器可读标注](#safety-tags-概念预研unsafe-契约的机器可读标注)
   - [📑 目录](#-目录)

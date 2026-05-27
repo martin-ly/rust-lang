@@ -12,8 +12,6 @@
 > **来源**: [clap](https://docs.rs/clap/latest/clap/) · [Rust CLI Book](https://rust-cli.github.io/book/index.html) · [Command Line Applications in Rust](https://rust-cli.github.io/book/index.html) · [Wikipedia — Command-line Interface](https://en.wikipedia.org/wiki/Command-line_interface) · [Cargo](https://doc.rust-lang.org/cargo/)
 
 ## 📑 目录
->
->
 
 - [Rust CLI 开发生态](#rust-cli-开发生态)
   - [📑 目录](#-目录)

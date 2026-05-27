@@ -20,8 +20,6 @@
 > [来源: [Axon Framework](https://docs.axoniq.io/reference-guide/)]
 
 ## 📑 目录
->
->
 
 - [CQRS \& Event Sourcing（命令查询职责分离与事件溯源）](#cqrs--event-sourcing命令查询职责分离与事件溯源)
   - [📑 目录](#-目录)

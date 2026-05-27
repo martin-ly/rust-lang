@@ -16,8 +16,6 @@
 > [Kani Documentation](https://model-checking.github.io/kani/)
 
 ## 📑 目录
->
->
 
 - [Rust 测试策略：从单元测试到属性验证](#rust-测试策略从单元测试到属性验证)
   - [📑 目录](#-目录)
@@ -43,6 +41,7 @@
     - [10.3 边界测试：属性宏测试的顺序依赖（运行时测试失败）](#103-边界测试属性宏测试的顺序依赖运行时测试失败)
     - [10.4 边界测试：`mockall` 的泛型 mock 限制（编译错误）](#104-边界测试mockall-的泛型-mock-限制编译错误)
     - [10.5 边界测试：属性测试的 shrink 陷阱（测试覆盖盲区）](#105-边界测试属性测试的-shrink-陷阱测试覆盖盲区)
+    - [10.3 边界测试：mockall 的期望设置与调用顺序验证（测试失败）](#103-边界测试mockall-的期望设置与调用顺序验证测试失败)
 
 ---
 
@@ -250,6 +249,7 @@ fuzz_target!(|data: &[u8]| {
 ```
 
 > **属性测试 vs 模糊测试**:
+>
 > - **属性测试**（proptest）：基于性质定义，生成随机输入验证不变量
 > - **模糊测试**（cargo-fuzz）：无特定性质，生成随机/变异输入寻找 crash
 > - **互补使用**：属性测试验证设计意图，模糊测试发现未预见的边缘情况
@@ -450,51 +450,9 @@ jobs:
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
 
 ## 十、边界测试：测试策略的编译错误
 
@@ -615,12 +573,12 @@ fn main() {
         .with(mockall::predicate::eq("SELECT * FROM users"))
         .times(1)
         .returning(|_| vec!["Alice".to_string()]);
-    
+
     // ❌ 测试失败: 调用参数不匹配或次数超限
     // let result = mock.query("SELECT * FROM orders");
     let result = mock.query("SELECT * FROM users");
     assert_eq!(result, vec!["Alice"]);
-    
+
     // 再次调用会失败（times(1) 只允许一次）
     // let result2 = mock.query("SELECT * FROM users");
 }

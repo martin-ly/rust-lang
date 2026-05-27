@@ -12,13 +12,11 @@
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
-- v1.0 (2026-05-13): 初始版本——覆盖 Rust 区块链生态、合约安全形式化、Kani 验证与 L1-L4 映射
-$entry
+- v1.0 (2026-05-13): 初始版本——覆盖 Rust 区块链生态、合约安全形式化、Kani 验证与 L1-L4 映射$entry
 
 ---
 
 ## 权威定义
->
 
 > **[Wikipedia — Blockchain]** A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.
 > **来源**: <https://en.wikipedia.org/wiki/Blockchain>
@@ -295,7 +293,6 @@ mod verification {
 >
 >
 
-
 Move 语言（最初为 Diem 设计，现由 Sui 和 Aptos 生态主导）将**资源导向编程（Resource-Oriented Programming）**作为核心安全机制。其设计理念与 Rust 的所有权模型高度同构，但在区块链语境下有独特的表达形式。
 
 ### 4.0 Move vs Rust 合约类型层次对比
@@ -475,7 +472,6 @@ public fun split(coin: Coin, amount: u64): (Coin, Coin) {
 ## 五、形式化验证工具在 Substrate Pallet 中的实际案例
 >
 
-
 ### 5.1 Interlay: 使用 Kani 验证 BRC-20 桥接 Pallet
 
 Interlay（比特币-波卡桥接协议）在其 Substrate pallet 中引入 Kani 验证，覆盖以下关键不变量：
@@ -577,7 +573,6 @@ fn verify_weight_calculation_does_not_overflow() {
 
 ## 八、Rust 区块链语言规范的形式化语义进展
 >
-
 
 区块链合约不仅需要源代码级别的安全，还需要**字节码级别**的可验证性。Solana 的 SBF（Solana Bytecode Format）和 Polkadot 的 PVF（Parachain Validation Function）代表了两种将 Rust 程序转化为可验证字节码的路径，其形式化语义研究正在推进。
 

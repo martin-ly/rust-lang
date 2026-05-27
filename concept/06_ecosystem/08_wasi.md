@@ -461,6 +461,7 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 ```
 
 > **边界洞察**: Resource 句柄的 move 语义与 Rust 的所有权完全一致。但 Wasm 组件边界上的 move 是**运行时行为**（句柄表索引转移），而非编译期检查。这意味着：
+>
 > 1. 同组件内的 Resource 传递由 Rust 编译器检查
 > 2. 跨组件的 Resource 传递由 Wasm 运行时检查
 > 3. 两者都保证"无句柄 = 无访问权"，但检查时机不同
@@ -483,6 +484,7 @@ let sub_result = subcomponent::analyze(file); // 再次 move
 
 > **形式化命题** [Tier 3]: WASI 的能力安全模型是 Rust 所有权模型的**运行时模拟**。
 > **论证**:
+>
 > - Rust 编译器通过类型系统保证内存安全（无 UAF、无 DF）
 > - WASI 运行时通过能力检查器保证沙箱安全（无越权访问）
 > - 两者都基于"资源唯一标识 + 显式转移"的核心原则

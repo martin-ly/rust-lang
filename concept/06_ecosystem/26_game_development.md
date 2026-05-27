@@ -12,8 +12,6 @@
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://wgpu.rs/) · [Rust GameDev WG](https://gamedev.rs/) · [Wikipedia — Game Engine](https://en.wikipedia.org/wiki/Game_engine)
 
 ## 📑 目录
->
->
 
 - [Rust 游戏开发](#rust-游戏开发)
   - [📑 目录](#-目录)

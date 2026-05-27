@@ -12,10 +12,6 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) · [Rust Blog — Edition 2024](https://blog.rust-lang.org/) · [Wikipedia — Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
 
 ## 📑 目录
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Edition Guide]]
 
 - [Rust Edition 机制与迁移指南](#rust-edition-机制与迁移指南)
   - [📑 目录](#-目录)

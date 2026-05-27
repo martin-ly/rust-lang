@@ -17,10 +17,6 @@
 > [Wikipedia — Defense in Depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing))
 
 ## 📑 目录
->
->
-
- [安全 \实践：Rust 代码的防御性编程](#安全)
 
 - [安全 实践：Rust 代码的防御性编程](#安全-实践rust-代码的防御性编程)
   - [📑 目录](#-目录)
