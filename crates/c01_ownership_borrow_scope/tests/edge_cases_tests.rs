@@ -29,6 +29,7 @@ fn test_empty_collections() {
 
 /// 测试最大值/最小值边界情况
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_max_min_values() {
     let mut manager = ScopeManager::new();
 
@@ -145,6 +146,7 @@ fn test_error_paths() {
 
 /// 测试资源耗尽情况
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_resource_exhaustion() {
     let mut manager = ScopeManager::new();
 

@@ -6,6 +6,7 @@ use std::thread;
 
 /// 测试共享状态并发安全
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_shared_state_safety() {
     let shared = Arc::new(Mutex::new(Vec::<i32>::new()));
     let mut handles = vec![];

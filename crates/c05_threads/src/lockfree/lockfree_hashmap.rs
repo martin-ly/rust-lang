@@ -8,8 +8,8 @@
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
 use std::ptr;
-use std::sync::atomic::{AtomicPtr, AtomicUsize, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicPtr, AtomicUsize, Ordering};
 //use std::mem;
 //use crossbeam_epoch::{
 //self,
@@ -242,6 +242,21 @@ where
         }
 
         println!("哈希表大小: {}", map.len());
+    }
+}
+
+impl<K, V> Drop for LockFreeHashMap<K, V> {
+    fn drop(&mut self) {
+        for bucket in &self.buckets {
+            let mut current = bucket.load(Ordering::Acquire);
+            while !current.is_null() {
+                unsafe {
+                    let next = (*current).next.load(Ordering::Acquire);
+                    drop(Box::from_raw(current));
+                    current = next;
+                }
+            }
+        }
     }
 }
 

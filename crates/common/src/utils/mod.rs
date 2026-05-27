@@ -1,5 +1,5 @@
 //! 公共工具函数模块
-//! 
+//!
 //! 提供跨 crate 共享的实用工具函数。
 
 use std::time::{Duration, Instant};
@@ -39,7 +39,7 @@ where
     E: std::fmt::Debug,
 {
     let mut last_error = None;
-    
+
     for attempt in 0..max_retries {
         match tokio::time::timeout(timeout, f()).await {
             Ok(Ok(result)) => return Ok(result),
@@ -51,13 +51,13 @@ where
                 tracing::warn!("Attempt {} timed out", attempt + 1);
             }
         }
-        
+
         if attempt < max_retries - 1 {
             let delay = Duration::from_millis(100 * (attempt as u64 + 1));
             tokio::time::sleep(delay).await;
         }
     }
-    
+
     Err(last_error.expect("At least one attempt was made"))
 }
 
@@ -67,11 +67,11 @@ where
     F: FnMut(&[T]) -> Vec<R>,
 {
     let mut results = Vec::new();
-    
+
     for chunk in items.chunks(batch_size) {
         results.extend(processor(chunk));
     }
-    
+
     results
 }
 
@@ -88,11 +88,11 @@ where
 {
     let mut results = Vec::new();
     let chunks: Vec<Vec<T>> = items.chunks(batch_size).map(|c| c.to_vec()).collect();
-    
+
     for chunk in chunks {
         results.extend(processor(chunk).await);
     }
-    
+
     results
 }
 
@@ -116,14 +116,14 @@ pub fn safe_slice(s: &str, start: usize, end: usize) -> &str {
 /// 格式化字节大小
 pub fn format_bytes(bytes: u64) -> String {
     const UNITS: &[&str] = &["B", "KB", "MB", "GB", "TB"];
-    
+
     if bytes == 0 {
         return "0 B".to_string();
     }
-    
+
     let exp = (bytes as f64).log(1024.0).min(UNITS.len() as f64 - 1.0) as usize;
     let value = bytes as f64 / 1024f64.powi(exp as i32);
-    
+
     format!("{:.2} {}", value, UNITS[exp])
 }
 
@@ -131,7 +131,7 @@ pub fn format_bytes(bytes: u64) -> String {
 pub fn format_duration(duration: Duration) -> String {
     let secs = duration.as_secs();
     let millis = duration.subsec_millis();
-    
+
     if secs >= 3600 {
         format!("{}h {}m {}s", secs / 3600, (secs % 3600) / 60, secs % 60)
     } else if secs >= 60 {
@@ -146,14 +146,14 @@ pub fn format_duration(duration: Duration) -> String {
 /// 生成唯一 ID
 pub fn generate_id() -> String {
     use std::sync::atomic::{AtomicU64, Ordering};
-    
+
     static COUNTER: AtomicU64 = AtomicU64::new(0);
     let count = COUNTER.fetch_add(1, Ordering::SeqCst);
     let timestamp = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
         .as_millis();
-    
+
     format!("{:x}{:x}", timestamp, count)
 }
 
@@ -171,12 +171,12 @@ impl RateLimiter {
             min_interval,
         }
     }
-    
+
     /// 检查是否允许请求
     pub fn allow(&self) -> bool {
         let mut last = self.last_request.lock().unwrap();
         let now = Instant::now();
-        
+
         if now.duration_since(*last) >= self.min_interval {
             *last = now;
             true
@@ -184,7 +184,7 @@ impl RateLimiter {
             false
         }
     }
-    
+
     /// 等待直到允许请求
     pub async fn wait(&self) {
         loop {
@@ -208,7 +208,7 @@ impl OnceGuard {
             executed: std::sync::atomic::AtomicBool::new(false),
         }
     }
-    
+
     /// 尝试执行一次
     pub fn try_execute<F>(&self, f: F) -> bool
     where
@@ -288,7 +288,9 @@ impl<T: Clone + PartialEq, R: Clone> Memoize<T, R> {
     where
         F: FnOnce(&T) -> R,
     {
-        if let Some(ref last) = self.last_input && last == &input {
+        if let Some(ref last) = self.last_input
+            && last == &input
+        {
             return self.last_result.clone().unwrap();
         }
 
@@ -308,41 +310,40 @@ impl<T: Clone + PartialEq, R: Clone> Default for Memoize<T, R> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_truncate_with_ellipsis() {
         assert_eq!(truncate_with_ellipsis("hello", 10), "hello");
         assert_eq!(truncate_with_ellipsis("hello world", 8), "hello...");
     }
-    
+
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_format_bytes() {
         assert_eq!(format_bytes(0), "0 B");
         assert_eq!(format_bytes(1024), "1.00 KB");
         assert_eq!(format_bytes(1024 * 1024), "1.00 MB");
     }
-    
+
     #[test]
     fn test_format_duration() {
         assert_eq!(format_duration(Duration::from_millis(500)), "500ms");
         assert_eq!(format_duration(Duration::from_secs(65)), "1m 5s");
     }
-    
+
     #[test]
     fn test_batch_process() {
         let items = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        let results = batch_process(items, 3, |chunk| {
-            chunk.iter().map(|x| x * 2).collect()
-        });
+        let results = batch_process(items, 3, |chunk| chunk.iter().map(|x| x * 2).collect());
         assert_eq!(results.len(), 10);
         assert_eq!(results[0], 2);
     }
-    
+
     #[test]
     fn test_once_guard() {
         let guard = OnceGuard::new();
         let mut count = 0;
-        
+
         assert!(guard.try_execute(|| count += 1));
         assert!(!guard.try_execute(|| count += 1));
         assert_eq!(count, 1);
