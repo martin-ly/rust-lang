@@ -298,6 +298,70 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 }
 ```
 
+### 4.2 Effect Generics：消除 API 重复的关键机制
+>
+
+**[来源: RustConf 2023 — Extending Rust's Effect System (Yoshua Wuyts)]**
+
+Rust 中 effects 的最大工程挑战不是单个效果的实现，而是**效果不匹配（effect mismatch）导致的 API 重复爆炸**——即业界熟知的"函数着色问题"（Function Coloring Problem）。
+
+#### 4.2.1 组合爆炸的量化分析
+
+对 Rust 1.70 stdlib 的分析揭示了效果的结构性影响：
+
+| 效果 | stdlib 交互比例 | 说明 |
+|:---|:---:|:---|
+| `const` | ~75% | 编译期求值约束广泛影响 trait 和方法 |
+| `async` | ~65% | IO 相关 trait（Read/Write/Iterator）均受波及 |
+| `try` (`Result`/`?`) | ~30% | 错误处理路径需要重复 API |
+| **至少一个效果** | ~100% | 几乎所有 stdlib API 与某种效果交互 |
+| **两个及以上效果** | ~50% | 效果交叉导致组合爆炸 |
+
+组合爆炸的数学本质：若 stdlib 需要为每个效果提供独立 trait 变体，则五个效果将产生 **2⁵ × 3 = 96 个 trait**（仅 `Fn` 家族就已从 3 个膨胀至潜在 96 个）。Effect generics 通过"效果变量"将指数级重复降阶为线性参数。
+
+#### 4.2.2 `maybe(async)`：效果泛型的语法设想
+
+```rust,ignore
+// 当前 Rust：必须为 sync/async 各写一版
+fn copy_sync<R: Read, W: Write>(r: &mut R, w: &mut W) -> io::Result<()> { ... }
+async fn copy_async<R: AsyncRead, W: AsyncWrite>(r: &mut R, w: &mut W) -> io::Result<()> { ... }
+
+// 理想效果泛型：单一函数，效果由调用点推断
+#[maybe(async)]
+pub fn copy<R, W>(reader: &mut R, writer: &mut W) -> io::Result<()>
+where
+    R: #[maybe(async)] Read,
+    W: #[maybe(async)] Write,
+{
+    // 若编译为 async，.await 保留；若编译为 sync，.await 自动抹除
+    let mut buf = vec![0; 4096];
+    loop {
+        match reader.read(&mut buf).await? {
+            0 => return Ok(()),
+            n => writer.write_all(&buf[..n]).await?,
+        }
+    }
+}
+
+// 调用点自动推断
+copy(reader, writer)?;                // 推断 sync
+copy(reader, writer).await?;          // 推断 async
+copy::<async>(reader, writer).await?; // 显式指定 async
+```
+
+> **关键洞察**: `maybe(async)` 不是"可选 async"，而是**编译期条件化 desugar**——效果由调用上下文推断，trait bound 与函数效果同步实例化。这与 `const fn` 的"maybe-const"语义一致（`const fn` 本身已是效果泛型的雏形）。
+
+#### 4.2.3 Carried vs Uncarried Effects
+
+Rust 语言团队将效果分为两类，影响泛化策略：
+
+| 类别 | 效果 | 类型系统表现 | 泛化难度 |
+|:---|:---|:---|:---:|
+| **Carried** | `async`, `try`/`Result`, `gen` | Desugar 为实际类型（`Future`, `Result`, `Iterator`） | 低 — 类型系统已承载效果信息 |
+| **Uncarried** | `const`, `unsafe` | 仅编译期标记，不体现在类型签名中 | 高 — 需要扩展类型系统 |
+
+Effect generics 对 carried effects 相对直接（已有 `AsyncFn` 作为原型），但对 uncarried effects 需要深层编译器重构——这也是 `const` trait 长期 unstable 的根本原因。
+
 ### 4.2 与 Trait 系统的整合挑战
 >
 
