@@ -1,5 +1,7 @@
 # Chrono时间处理形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 日期和时间处理
 > **形式化框架**: 日历系统 + 时区 + 持续时间
 > **参考**: Chrono Documentation (<https://docs.rs/chrono>)

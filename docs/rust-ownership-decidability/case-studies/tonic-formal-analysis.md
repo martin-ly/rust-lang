@@ -1,5 +1,7 @@
 # Tonic gRPC框架形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 异步gRPC实现
 > **形式化框架**: 协议缓冲区 + 服务契约 + 流处理
 > **参考**: Tonic Documentation (<https://docs.rs/tonic>)

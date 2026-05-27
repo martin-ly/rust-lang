@@ -1,5 +1,7 @@
 # Cross-Reference Verification Report
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 **Generated**: 2026-03-06T11:41:17.918883
 
 ## 📑 目录

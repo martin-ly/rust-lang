@@ -1,5 +1,7 @@
 # Polonius: 下一代 Rust 借用检查器
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **项目状态**: 活跃开发中 (2024-2025)
 > **目标**: Rust 2024 Edition / 2025
 > **负责人**: lqd, Amanda Stjerna, Niko Matsakis

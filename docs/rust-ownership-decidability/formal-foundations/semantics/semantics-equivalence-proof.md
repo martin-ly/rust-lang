@@ -1,5 +1,7 @@
 # 大步语义与小步语义等价性证明
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Bisimulation]** · **[来源: ACM - Semantic Equivalence Verification]** · **[来源: IEEE - Formal Proof Standards]**

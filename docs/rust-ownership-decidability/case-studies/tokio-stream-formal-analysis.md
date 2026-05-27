@@ -1,5 +1,7 @@
 # Tokio-Stream形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 异步流处理
 > **形式化框架**: Stream trait + 组合子 + 背压
 > **参考**: Tokio-Stream Documentation (<https://docs.rs/tokio-stream>)

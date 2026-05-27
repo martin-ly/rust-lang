@@ -1,5 +1,7 @@
 # Message Passing Patterns: Formal Deep Dive
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **Rust Version**: 1.95.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12
 > **Scope**: Channel semantics, ownership transfer theorems, message passing patterns, async channels

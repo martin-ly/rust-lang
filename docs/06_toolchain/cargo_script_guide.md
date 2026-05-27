@@ -1,5 +1,7 @@
 # Cargo Script / Frontmatter 指南
 
+> **Bloom 层级**: L3 (应用)
+
 > **状态**: Frontmatter 已通过 FCP，预计 **Rust 1.96.0 (2026-05-28)** 稳定
 > **RFC**: [Frontmatter Stabilization PR #148605](https://github.com/rust-lang/rust/pull/148605)
 > **最后更新**: 2026-05-08

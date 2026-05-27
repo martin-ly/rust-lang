@@ -1,5 +1,7 @@
 # 线性逻辑基础
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **权威来源**: Jean-Yves Girard (1987). *Linear Logic*. Theoretical Computer Science 50:1-102
 > **关联文献**: Girard, Lafont, Taylor (1989). *Proofs and Types*. Cambridge Tracts in Theoretical Computer Science
 

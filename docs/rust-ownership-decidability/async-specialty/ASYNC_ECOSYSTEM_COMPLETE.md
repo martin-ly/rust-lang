@@ -1,5 +1,7 @@
 # Rust Async 生态系统专题 - 完整完成报告
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **从嵌入式MCU到Linux io_uring：全覆盖**
 
 ---

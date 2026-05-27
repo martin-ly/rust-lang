@@ -1,5 +1,7 @@
 # 100% 完成认证
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **认证日期**: 2026-02-28
 > **项目名称**: Rust Formal Methods Research Notes
 > **版本**: 1.0

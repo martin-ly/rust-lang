@@ -1,5 +1,7 @@
 # 工业级 Rust 形式化验证案例
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **企业**: Amazon (AWS), Meta, Microsoft
 > **应用领域**: 云计算、区块链、系统编程
 > **验证工具**: Kani, Creusot, Verus, MIRAI

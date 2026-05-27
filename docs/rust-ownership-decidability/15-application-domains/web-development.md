@@ -1,5 +1,7 @@
 # Rust Web 开发
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 Web 开发是 Rust 应用最广泛的领域之一。
 从高性能的 HTTP 服务器到 WebAssembly 前端应用，Rust 正在改变 Web 开发的技术栈。
 本文档将深入介绍 Rust 在 Web 开发领域的应用。

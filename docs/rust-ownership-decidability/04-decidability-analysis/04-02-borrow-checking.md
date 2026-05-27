@@ -1,5 +1,7 @@
 # Rust借用检查的可判定性
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **定理**: Rust借用检查是P完全的
 >
 > **算法**: NLL (Non-Lexical Lifetimes) / Polonius

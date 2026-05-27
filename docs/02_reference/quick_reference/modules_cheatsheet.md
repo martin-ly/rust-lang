@@ -528,6 +528,8 @@ fn main() {
 
 ```toml
 # Cargo.toml
+
+> **Bloom 层级**: L2 (理解)
 [dependencies]
 serde = "1.0"
 tokio = { version = "1", features = ["full"] }

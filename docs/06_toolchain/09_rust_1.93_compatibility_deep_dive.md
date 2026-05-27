@@ -76,6 +76,8 @@
 
 ```bash
 # 链接时传递 -fwasm-exceptions 给链接器
+
+> **Bloom 层级**: L3 (应用)
 clang -fwasm-exceptions -o output.wasm rust_obj.o c_obj.o
 ```
 

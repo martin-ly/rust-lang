@@ -1,5 +1,7 @@
 # Rust 可执行语义形式化对比分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **覆盖**: KRust (2018), RustSEM (2024), Aeneas
 > **框架**: K-Framework, Coq, 符号执行
 > **难度**: 🔴 高级

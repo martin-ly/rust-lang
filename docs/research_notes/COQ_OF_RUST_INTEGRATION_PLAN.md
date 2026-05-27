@@ -1,5 +1,7 @@
 # Coq of Rust 集成计划（已归档）
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **归档说明**: 本文档已迁至 [archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md)
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 

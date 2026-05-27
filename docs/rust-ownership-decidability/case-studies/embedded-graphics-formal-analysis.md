@@ -1,5 +1,7 @@
 # Embedded-Graphics显示库形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 嵌入式图形绘制
 > **形式化框架**: 绘制原语 + 迭代器 + 零分配
 > **参考**: embedded-graphics crate (<https://github.com/embedded-graphics/embedded-graphics>)

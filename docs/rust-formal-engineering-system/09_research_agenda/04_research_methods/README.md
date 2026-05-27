@@ -46,6 +46,8 @@
 ```markdown
 # 研究笔记模板
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 问题陈述
 > **[来源: Rust Official Docs]**
 - 研究什么问题

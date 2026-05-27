@@ -1,5 +1,7 @@
 # Rust 1.94 vs 1.93: Comprehensive Comparison for Ownership and Borrow Checking
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **Document Version:** 1.0
 > **Last Updated:** 2026-03-06
 > **Verified Against:** Official Rust 1.93.0 (2026-01-22) and 1.94.0 (2026-03-05) Release Notes

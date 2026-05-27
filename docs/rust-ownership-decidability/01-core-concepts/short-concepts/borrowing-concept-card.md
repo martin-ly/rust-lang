@@ -1,5 +1,7 @@
 # 借用概念卡片 (Borrowing Concept Card)
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > Rust所有权系统的核心机制 - 临时访问而不转移所有权
 
 ---

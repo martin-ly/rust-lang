@@ -1,5 +1,7 @@
 # Workflow 控制流模式完整索引 (Workflow Control-Flow Patterns Master Index)
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **[来源: van der Aalst et al., "Workflow Patterns", Distributed and Parallel Databases 2003]** · **[来源: Russell et al., "Workflow Control-Flow Patterns: A Revised View", Springer 2006]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Tokio Documentation]**
 
 ## 目录

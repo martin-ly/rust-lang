@@ -1,5 +1,7 @@
 # array_windows 语义分析 [Stable 1.94]
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **稳定版本**: Rust 1.94 (2026年3月5日)
 > **标准库**: `core::slice` / `std::slice`
 > **跟踪 Issue**: #75027

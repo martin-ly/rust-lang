@@ -107,6 +107,8 @@ pub const FEATURES: &[&str] = &["std", "alloc"];
 
 ```bash
 # cargo-make：任务运行器
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 cargo install cargo-make
 cargo make build
 cargo make test

@@ -1,5 +1,7 @@
 # Async执行模型 - 并发范式对比分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: Async vs 其他并发模型的形式化对比
 > **范围**: 回调、Promise/Future、Actor、CSP、线程
 

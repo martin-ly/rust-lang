@@ -1,4 +1,6 @@
 # Rust 编译器错误码映射文档
+
+> **Bloom 层级**: L2 (理解)
 >
 > **层次定位**: L1-L3 基础-高级 / 编译器诊断参考
 > **前置依赖**: [docs 核心概念](../01_core/README.md) · [concept L1 所有权](../../concept/01_foundation/01_ownership.md)

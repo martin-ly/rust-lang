@@ -1,5 +1,7 @@
 # 数据流与控制流分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 
 > **[来源: Rust Reference - Control Flow]**

@@ -1,5 +1,7 @@
 # 工作流控制流模式总索引 (WCP1-WCP43)
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 
 > **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **[来源: van der Aalst et al. (2003)]** · **[来源: Russell et al. (2006)]** · **[来源: Rust Reference]** · **[来源: TRPL]**

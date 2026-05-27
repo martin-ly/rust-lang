@@ -1,5 +1,7 @@
 # Slice类型形式化
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **创建日期**: 2026-03-05
 > **Rust版本**: 1.94.0+
 > **Rust Book对应**: Ch 4.3 The Slice Type

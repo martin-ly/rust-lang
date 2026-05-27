@@ -1,6 +1,8 @@
 
 # 设计模式语义分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 >
 > **[来源: Rust Design Patterns Book]** · **[来源: Wikipedia - Software Design Pattern]** · **[来源: GoF - Design Patterns]** · **[来源: TRPL Ch. 17]** · **[来源: Rust Reference - Traits]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - Formal Semantics]** · **[来源: ACM - Pattern Formalization]** · **[来源: IEEE - Certified Design Patterns]**

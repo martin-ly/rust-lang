@@ -1,4 +1,6 @@
 # Rust所有权系统深度解析：形式语义、定理与反例
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 所有权深度分析
 > **前置依赖**: [concept L1 所有权](../../../concept/01_foundation/01_ownership.md) · [concept L4 所有权形式化](../../../concept/04_formal/03_ownership_formal.md)

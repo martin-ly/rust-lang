@@ -1,5 +1,7 @@
 # wasm-bindgen形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: Rust-WebAssembly互操作
 > **形式化框架**: FFI边界 + JS类型映射 + 内存管理
 > **参考**: wasm-bindgen Guide (<https://rustwasm.github.io/wasm-bindgen>)

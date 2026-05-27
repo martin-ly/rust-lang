@@ -96,6 +96,8 @@
 
 ```bash
 # 创建二进制项目
+
+> **Bloom 层级**: L2 (理解)
 cargo new my_project
 
 # 创建库项目

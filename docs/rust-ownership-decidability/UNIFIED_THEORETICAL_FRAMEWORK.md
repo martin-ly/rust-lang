@@ -1,5 +1,7 @@
 # Rust 所有权系统统一理论框架
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## Unified Theoretical Framework for Rust Ownership System
 >
 > **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Separation Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Pierce 2002 - TAPL]** · **[来源: Iris Project - iris-project.org] · **[来源: Wikipedia - Unified Theory]** · **[来源: Wikipedia - Formal Methods]** · **[来源: ACM - Unified Program Analysis]** · **[来源: IEEE - Integrated Verification Frameworks]**

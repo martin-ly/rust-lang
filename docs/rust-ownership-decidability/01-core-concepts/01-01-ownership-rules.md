@@ -1,5 +1,7 @@
 # Rust所有权三大规则
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **权威来源**: The Rust Programming Language (Book), Chapter 4
 > **形式化参考**: Jung et al. (2018). RustBelt: Securing the Foundations of the Rust Programming Language. POPL
 

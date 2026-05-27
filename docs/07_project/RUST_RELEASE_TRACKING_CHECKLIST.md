@@ -1,5 +1,7 @@
 # Rust 新版本发布追踪 Checklist - 重定向
 
+> **Bloom 层级**: L4-L5 (分析/评价)
+
 > **说明**: 此文档已迁移至归档目录。
 > **当前入口**: [archive/process_reports/2026_02/project/RUST_RELEASE_TRACKING_CHECKLIST.md](./RUST_RELEASE_TRACKING_CHECKLIST.md)
 

@@ -4,6 +4,8 @@
 
 # Rust 2024 Edition RPIT Lifetime Capture 迁移指南
 
+> **Bloom 层级**: L2-L3 (理解/应用)
+
 ## 📑 目录
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

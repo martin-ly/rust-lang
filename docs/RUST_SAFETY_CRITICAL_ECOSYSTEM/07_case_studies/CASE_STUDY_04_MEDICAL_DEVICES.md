@@ -1,5 +1,7 @@
 # 案例研究04: 医疗设备软件 (IEC 62304)
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 📑 目录
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

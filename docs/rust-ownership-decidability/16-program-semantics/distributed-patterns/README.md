@@ -1,5 +1,7 @@
 # 分布式系统模式语义 (Distributed Systems Patterns Semantics)
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 本文档目录包含分布式系统核心设计模式的形式化语义分析与 Rust 实现。
 
 ---

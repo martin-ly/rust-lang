@@ -1,4 +1,6 @@
 # 异步编程使用指南
+
+> **Bloom 层级**: L3-L4 (应用/分析)
 >
 > **层次定位**: L3-L6 高级-生态 / 异步工程实践
 > **前置依赖**: [concept L3 Async](../../concept/03_advanced/02_async.md) · [docs 设计模式](./DESIGN_PATTERNS_USAGE_GUIDE.md)

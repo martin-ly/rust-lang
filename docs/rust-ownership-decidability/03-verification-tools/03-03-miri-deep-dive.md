@@ -1,5 +1,7 @@
 # Miri 深度解析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **工具类型**: 运行时 UB 检测 (Undefined Behavior Detection)
 > **难度**: 🟡 中等 → 🔴 高级
 > **应用场景**: 检测未定义行为、调试 Unsafe 代码、验证内存安全

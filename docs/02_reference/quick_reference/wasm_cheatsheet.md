@@ -70,6 +70,8 @@
 
 ```bash
 # 安装 wasm-pack
+
+> **Bloom 层级**: L2 (理解)
 cargo install wasm-pack
 
 # 创建项目

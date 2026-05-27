@@ -1,5 +1,7 @@
 # Thiserror/Anyhow错误处理形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 错误处理库
 > **形式化框架**: 错误派生 + 上下文传播
 > **参考**: Thiserror/Anyhow Documentation

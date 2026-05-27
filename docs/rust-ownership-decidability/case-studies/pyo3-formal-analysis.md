@@ -1,5 +1,7 @@
 # PyO3 Python绑定形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: Rust-Python互操作
 > **形式化框架**: Python C-API + GIL + 类型转换
 > **参考**: PyO3 Documentation (<https://pyo3.rs>)

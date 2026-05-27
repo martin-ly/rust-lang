@@ -1,5 +1,7 @@
 # 03 同步模式 (Synchronization) - 完整形式化语义
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 >
 > **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rust Standard Library]**

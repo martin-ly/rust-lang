@@ -1,5 +1,7 @@
 # Polonius：下一代 Borrow Checker 深度解析
 
+> **Bloom 层级**: L4-L5 (分析/评价)
+
 > **文档状态**: 活跃维护
 > **最后更新**: 2026-05-22
 > **Rust 版本**: Nightly 1.97.0 (Polonius 实验中)

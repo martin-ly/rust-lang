@@ -1,5 +1,7 @@
 # Diesel crate 架构解构
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 1. 引言
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

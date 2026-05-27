@@ -1,5 +1,7 @@
 # Rust所有权与可判定性 - 完成报告
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **项目名称**: Comprehensive Analysis of Rust Ownership and Decidability
 > **完成状态**: ✅ 100% 完成
 > **文档总数**: 13个文件

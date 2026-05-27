@@ -1,5 +1,7 @@
 # 工作流控制模式与 Rust 所有权系统交叉分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 
 > **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]** · **[来源: Russell 2006]** · **[来源: Rust Reference]** · **[来源: Tokio Docs]** · **[来源: TRPL]**

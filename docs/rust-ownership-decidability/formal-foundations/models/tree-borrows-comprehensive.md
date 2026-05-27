@@ -1,5 +1,7 @@
 # Tree Borrows: Rust 别名模型的全面分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **来源**: PLDI 2025 (ACM SIGPLAN Conference on Programming Language Design and Implementation)
 > **作者**: Ralf Jung 团队 (ETH Zürich, MPI-SWS)
 > **难度**: 🔴 高级

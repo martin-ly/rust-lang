@@ -1,5 +1,7 @@
 # Pin-project形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 自引用结构投影
 > **形式化框架**: Pin + 投影 + 安全封装
 > **参考**: Pin-project Documentation (<https://docs.rs/pin-project>)

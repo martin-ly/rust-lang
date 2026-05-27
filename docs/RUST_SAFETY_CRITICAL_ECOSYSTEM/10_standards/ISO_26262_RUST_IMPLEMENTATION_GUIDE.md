@@ -1,5 +1,7 @@
 # ISO 26262 Rust实施指南
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 概述
 >
 > **[来源: Rust Official Docs]**

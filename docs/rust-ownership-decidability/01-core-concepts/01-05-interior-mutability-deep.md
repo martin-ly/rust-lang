@@ -1,5 +1,7 @@
 # Interior Mutability Deep Dive
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## Table of Contents
 >
 > **[来源: Rust Reference - Interior Mutability]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - Interior Mutability]** · **[来源: TRPL Ch. 15]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: Rust Standard Library - std::cell]** · **[来源: Wikipedia - Mutual Exclusion]** · **[来源: ACM - Interior Pointer Analysis]** · **[来源: IEEE - Safe Concurrency Primitives]**

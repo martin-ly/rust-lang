@@ -1,5 +1,7 @@
 # Actor Model in Rust: Formal Deep Dive
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **Comprehensive Analysis with Formal Semantics, Proofs, and Counter-Examples**
 > **Rust Version**: 1.95.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12.0+ (Edition 2024)

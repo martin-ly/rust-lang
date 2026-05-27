@@ -1,5 +1,7 @@
 # Tower服务抽象形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 服务组合与中间件
 > **形式化框架**: Service trait + Layer系统 + 组合子
 > **参考**: Tower Documentation (<https://docs.rs/tower>)

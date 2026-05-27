@@ -1,5 +1,7 @@
 # Rust 对齐知识综合指南
 
+> **Bloom 层级**: L2 (理解)
+
 > **创建日期**: 2026-02-13
 > > **权威来源**: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html), [Rustonomicon — Data Layout](https://doc.rust-lang.org/nomicon/data.html), [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-ownership.html)
 >

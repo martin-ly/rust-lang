@@ -1,5 +1,7 @@
 # Endangered by Language, Saved by Compiler (POPL 2026) 研究笔记
 
+> **Bloom 层级**: L4-L5 (分析/评价)
+
 > **文档状态**: 活跃维护
 > **创建日期**: 2026-05-08
 > **最后更新**: 2026-05-08

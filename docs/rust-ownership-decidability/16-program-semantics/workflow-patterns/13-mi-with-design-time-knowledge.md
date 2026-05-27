@@ -1,5 +1,7 @@
 # 13 多实例先验设计时知识模式 (Multiple Instances With a priori Design-Time Knowledge) - 完整形式化语义
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 >
 > **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]** · **[来源: Russell 2006]** · **[来源: Rust Reference]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**

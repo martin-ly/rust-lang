@@ -192,6 +192,8 @@ fn connect_to_server() -> Result<(), Box<dyn std::error::Error>> {
 
 ```toml
 # Cargo.toml
+
+> **Bloom 层级**: L3 (应用)
 [dependencies]
 libc = "0.2.146"  # 或更新版本
 ```

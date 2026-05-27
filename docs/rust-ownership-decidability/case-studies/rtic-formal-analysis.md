@@ -1,5 +1,7 @@
 # RTIC实时中断驱动框架形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 实时中断驱动并发
 > **形式化框架**: 资源模型 + 优先级 Ceiling Protocol
 > **参考**: RTIC Book (<https://rtic.rs>)

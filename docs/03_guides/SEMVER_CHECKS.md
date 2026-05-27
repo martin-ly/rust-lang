@@ -4,6 +4,8 @@
 
 # cargo-semver-checks 集成指南
 
+> **Bloom 层级**: L2-L3 (理解/应用)
+
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— API 兼容性保护。
 > 参考: Rust Foundation API 兼容性指南、Microsoft 版本管理规范。
 

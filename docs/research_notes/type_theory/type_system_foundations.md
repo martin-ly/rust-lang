@@ -1,4 +1,6 @@
 # 类型系统基础
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 类型论基础研究
 > **前置依赖**: [concept L4 类型论](../../../concept/04_formal/02_type_theory.md) · [concept L2 泛型](../../../concept/02_intermediate/02_generics.md)

@@ -1,5 +1,7 @@
 # 生命周期概念卡片 (Lifetime Concept Card)
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > Rust引用的有效性保证机制
 
 ---

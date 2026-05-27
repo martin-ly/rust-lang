@@ -1,5 +1,7 @@
 # RefinedRust: 高保证验证的类型系统
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **来源**: PLDI 2024 (ACM SIGPLAN Conference on Programming Language Design and Implementation)
 > **作者**: Leon Gahrler, Michael Sammler, Ralf Jung, Robbert Krebbers, Derek Dreyer
 > **难度**: 🔴 高级

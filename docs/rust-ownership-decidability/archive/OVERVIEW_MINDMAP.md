@@ -1,5 +1,7 @@
 # Rust所有权与可判定性 - 总体脉络思维导图
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ```mermaid
 mindmap
   root((Rust所有权与可判定性))

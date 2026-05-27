@@ -1,5 +1,7 @@
 # 借用语义的形式化：共享借用与可变借用
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **理论来源**: RustBelt (Jung et al., 2018), Oxide (Weiss et al., 2020)
 > **核心原则**: Aliasing XOR Mutation (别名与变异互斥)
 

@@ -1,5 +1,7 @@
 # Rayon并行计算形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 数据并行计算
 > **形式化框架**: 工作窃取 + 分治算法 + 确定性保证
 > **参考**: Rayon Documentation (<https://docs.rs/rayon>)

@@ -1,5 +1,7 @@
 # Rust for Linux：从实验到生产
 
+> **Bloom 层级**: L4-L5 (分析/评价)
+
 > **里程碑时间**: 2025 年底 – 2026 年初（实验阶段正式结束）
 > **权威来源**: [Linux Kernel Mailing List (LKML)](https://lore.kernel.org/lkml/) | [Rust for Linux 官方仓库](https://github.com/Rust-for-Linux/linux) | [Rust Foundation Blog](https://foundation.rust-lang.org/)
 

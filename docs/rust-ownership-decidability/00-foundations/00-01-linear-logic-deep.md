@@ -1,5 +1,7 @@
 # 线性逻辑深度解析：从证明论到 Rust 所有权
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **权威来源**: Jean-Yves Girard (1987). *Linear Logic*. Theoretical Computer Science 50:1-102
 > **[来源: Girard 1987 - Linear Logic]** · **[来源: Wikipedia - Linear Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Substructural Type System]** · **[来源: Wadler 1990 - Linear Types can Change the World]** · **[来源: Rust Reference - Ownership]** · **[来源: Wikipedia - Proof Theory]** · **[来源: Wikipedia - Substructural Logic]** · **[来源: ACM - Linear Logic in Programming]** · **[来源: IEEE - Resource-Sensitive Type Systems]**
 > **关联文献**:

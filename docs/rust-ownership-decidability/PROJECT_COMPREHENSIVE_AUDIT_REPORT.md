@@ -1,5 +1,7 @@
 # Rust 所有权可判定性项目 - 全面审计报告
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **审计日期**: 2026-03-07
 > **审计范围**: docs/rust-ownership-decidability/ 全部内容
 > **审计依据**: The Rust Book, The Rust Reference, The Rustonomicon, 学术论文

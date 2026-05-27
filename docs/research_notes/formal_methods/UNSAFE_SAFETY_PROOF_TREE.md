@@ -1,5 +1,7 @@
 # Unsafe Rust 安全证明树
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **模块**: Unsafe Rust / FFI
 > **用途**: Unsafe 代码安全边界形式化证明
 > **完备度**: 100%

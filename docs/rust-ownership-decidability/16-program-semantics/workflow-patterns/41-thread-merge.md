@@ -1,5 +1,7 @@
 # 41 线程合并模式 (Thread Merge) - 完整形式化语义
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 >
 > **[来源: Rust Reference]** · **[来源: TRPL Ch. 16 - Concurrency]** · **[来源: Rust Standard Library - std::thread]** · **[来源: Tokio Docs - docs.rs/tokio]** · **[来源: crossbeam - docs.rs/crossbeam]** · **[来源: futures - docs.rs/futures]**

@@ -1,5 +1,7 @@
 # Gillian-Rust: 混合方法验证 Unsafe Rust
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **来源**: Rust Formal Methods Interest Group (RFMIG) 2024年5月会议
 > **方法**: 符号执行 + 分离逻辑混合验证
 > **项目**: Gillian 框架的 Rust 扩展

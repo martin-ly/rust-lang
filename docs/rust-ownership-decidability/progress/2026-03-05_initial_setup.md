@@ -1,5 +1,7 @@
 # 进度报告: 2026-03-05 初始设置完成
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 📑 目录
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >

@@ -1,4 +1,6 @@
 # 设计模式使用指南
+
+> **Bloom 层级**: L3-L4 (应用/分析)
 >
 > **层次定位**: L2-L6 进阶-生态 / 设计模式应用
 > **前置依赖**: [concept L2 Trait](../../concept/02_intermediate/01_traits.md) · [docs 最佳实践](./BEST_PRACTICES.md)

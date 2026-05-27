@@ -1,5 +1,7 @@
 # WebAssembly (WASM) 开发指南
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > Rust是构建WebAssembly应用的首选语言
 
 ---

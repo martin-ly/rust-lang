@@ -539,6 +539,8 @@ criterion_main!(benches);
 
 ```bash
 # 运行所有基准测试
+
+> **Bloom 层级**: L2 (理解)
 cargo bench
 
 # 运行特定基准测试

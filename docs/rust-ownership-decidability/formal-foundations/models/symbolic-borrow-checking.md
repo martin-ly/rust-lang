@@ -1,5 +1,7 @@
 # Sound Borrow-Checking via Symbolic Semantics
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **来源**: POPL 2024 (ACM SIGPLAN Symposium on Principles of Programming Languages)
 > **作者**: Son Ho, Aymeric Fromherz, Jonathan Protzenko (Microsoft Research)
 > **难度**: 🔴 高级

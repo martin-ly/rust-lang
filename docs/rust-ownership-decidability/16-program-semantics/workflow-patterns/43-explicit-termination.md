@@ -1,5 +1,7 @@
 # 43 显式终止模式 (Explicit Termination) - 完整形式化语义
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 >
 > **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]** · **[来源: Russell 2006]** · **[来源: Rust Reference]** · **[来源: TRPL Ch. 9 - Error Handling]**

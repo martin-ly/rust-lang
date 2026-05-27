@@ -1,5 +1,7 @@
 # Smoltcp嵌入式TCP/IP栈形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 无分配TCP/IP协议栈
 > **形式化框架**: 协议状态机 + 零拷贝 + 内存池
 > **参考**: smoltcp Documentation (<https://github.com/smoltcp-rs/smoltcp>)

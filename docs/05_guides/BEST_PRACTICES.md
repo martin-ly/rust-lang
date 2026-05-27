@@ -950,6 +950,8 @@ pub struct Config {
 
 ```bash
 # 运行 clippy
+
+> **Bloom 层级**: L3-L4 (应用/分析)
 cargo clippy
 
 # 更严格的检查

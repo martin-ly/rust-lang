@@ -1,5 +1,7 @@
 # RustSEM 操作语义
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **创建日期**: 2026-03-10
 > **版本**: v1.0
 > **描述**: RustSEM (Rust Semantic Model) 操作语义定义

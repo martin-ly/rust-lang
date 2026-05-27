@@ -1,5 +1,7 @@
 # Rust 类型系统形式化理论
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Type System]** · **[来源: Wikipedia - Type Theory]** · **[来源: ACM - Type System Formalization]** · **[来源: IEEE - Type Safety Proofs]**

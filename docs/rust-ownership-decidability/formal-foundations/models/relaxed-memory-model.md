@@ -1,5 +1,7 @@
 # Rust Relaxed Memory 模型形式化
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **来源**: POPL 2020 "RustBelt Meets Relaxed Memory"
 > **作者**: Hoang-Hai Dang, Jacques-Henri Jourdan, Jan-Oliver Kaiser, Derek Dreyer
 > **难度**: 🔴🔴 专家级

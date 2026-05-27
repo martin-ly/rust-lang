@@ -1,5 +1,7 @@
 # RefinedRust 深度解析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **RefinedRust: A Type System for High-Assurance Verification of Rust Programs**
 > PLDI 2024 (Programming Language Design and Implementation)
 > 作者: Lennard Gaher, Michael Sammler, Ralf Jung, Robbert Krebbers, Derek Dreyer

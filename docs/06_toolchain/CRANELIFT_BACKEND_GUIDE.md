@@ -1,5 +1,7 @@
 # Cranelift 后端实用指南
 
+> **Bloom 层级**: L3 (应用)
+
 > **创建日期**: 2026-05-08
 > **最后更新**: 2026-05-08
 > **Rust 版本**: nightly (Cranelift 无 stable 版本)

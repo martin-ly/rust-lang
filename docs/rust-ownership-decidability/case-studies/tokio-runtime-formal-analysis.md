@@ -1,5 +1,7 @@
 # Tokio运行时形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 异步运行时
 > **形式化框架**: 协作调度 + IO多路复用 + 任务系统
 > **参考**: Tokio Documentation (<https://tokio.rs>)

@@ -1,5 +1,7 @@
 # Rust Formal Semantics: A Comprehensive Deep Dive
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## Table of Contents
 
 > **[来源: Rust Reference - Formal Semantics]**

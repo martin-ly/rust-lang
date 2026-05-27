@@ -1,5 +1,7 @@
 # 25 取消区域模式 (Cancel Region) - 完整形式化语义
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 >
 > **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst 2003]** · **[来源: Rust Reference]** · **[来源: Tokio Docs - tokio_util::sync]**

@@ -1,5 +1,7 @@
 # Clap crate 架构解构
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 1. 引言
 
 Clap（**C**ommand **L**ine **A**rgument **P**arser）是 Rust 生态中占绝对主导地位的命令行参数解析库，年下载量超过 3 亿次 [来源: crates.io 统计, 2025]，是 `cargo`、`ripgrep`、`bat`、`fd` 等明星项目的底层依赖。

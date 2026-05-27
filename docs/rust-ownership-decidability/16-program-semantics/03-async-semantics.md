@@ -1,4 +1,6 @@
 # Rust 异步执行模型语义深度分析
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 异步语义深度分析
 > **前置依赖**: [ROD 借用系统](../01-core-concepts/01-02-borrowing-system-deep.md) · [concept L3 Async](../../../concept/03_advanced/02_async.md)

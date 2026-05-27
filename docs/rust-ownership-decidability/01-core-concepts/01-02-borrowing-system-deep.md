@@ -1,4 +1,6 @@
 # 01-02: The Rust Borrowing System - A Formal Deep Dive
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 借用系统深度分析
 > **前置依赖**: [ROD 所有权规则](./01-01-ownership-rules-deep.md) · [concept L4 线性逻辑](../../../concept/04_formal/01_linear_logic.md)

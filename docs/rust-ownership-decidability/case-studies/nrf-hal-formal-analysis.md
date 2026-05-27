@@ -1,5 +1,7 @@
 # nRF HAL硬件抽象层形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: Nordic nRF系列芯片HAL
 > **形式化框架**: 外设状态机 + 低功耗模式 + PPI
 > **参考**: nrf-hal crate (<https://github.com/nrf-rs/nrf-hal>)

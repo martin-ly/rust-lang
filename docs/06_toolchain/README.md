@@ -18,6 +18,8 @@
 
 ```bash
 # 创建新项目
+
+> **Bloom 层级**: L3 (应用)
 cargo new my_project
 cd my_project
 

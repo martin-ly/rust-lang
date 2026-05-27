@@ -1,5 +1,7 @@
 # Embedded-Storage存储抽象形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 嵌入式存储trait抽象
 > **形式化框架**: NOR/NAND Flash trait + 块擦除 + 磨损均衡
 > **参考**: embedded-storage crate

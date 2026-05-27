@@ -1,4 +1,6 @@
 # Rust 编译器特性与优化
+
+> **Bloom 层级**: L3 (应用)
 >
 > **层次定位**: L6-L7 生态-前沿 / 编译器特性
 > **前置依赖**: [concept L2 泛型](../../concept/02_intermediate/02_generics.md) · [docs 核心概念](../01_core/README.md)

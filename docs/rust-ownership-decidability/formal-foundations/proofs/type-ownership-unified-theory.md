@@ -1,5 +1,7 @@
 # 类型-所有权统一理论
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## Type-Ownership Unified Theory
 >
 > **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Separation Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Pierce 2002 - TAPL]** · **[来源: Jung et al. 2018 - RustBelt Paper]** · **[来源: Iris Project - iris-project.org]** · **[来源: Wikipedia - Proof Assistant]** · **[来源: ACM - Unified Type-Ownership Theory]** · **[来源: IEEE - Formal Proof Methods]**

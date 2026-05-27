@@ -1,5 +1,7 @@
 # Serde Serialization Framework: Formal Analysis and Deep Dive
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## Table of Contents
 
 > **[来源: serde.rs Documentation]**

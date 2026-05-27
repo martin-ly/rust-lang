@@ -1,5 +1,7 @@
 # Rust Async 全面专题
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **Rust的核心优势：Zero-Cost Async Programming**
 >
 > 整合权威来源 | 惯用法 | 设计模式 | 网络 | 嵌入式 | 最佳实践

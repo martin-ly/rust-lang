@@ -1,5 +1,7 @@
 # 02 并行分裂模式 (Parallel Split) - 完整形式化语义
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 目录
 >
 > **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rust Standard Library]**

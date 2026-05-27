@@ -1,5 +1,7 @@
 # 所有权系统思维导图
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ```mermaid
 graph TD
     A[所有权 Ownership] --> B[核心规则]

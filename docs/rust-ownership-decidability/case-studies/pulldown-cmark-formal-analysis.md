@@ -1,5 +1,7 @@
 # Pulldown-CMark Markdown形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 快速Markdown解析
 >
 > **形式化框架**: 拉取解析 + 事件流

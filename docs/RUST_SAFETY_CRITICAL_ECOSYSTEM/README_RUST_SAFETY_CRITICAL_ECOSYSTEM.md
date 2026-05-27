@@ -1,5 +1,7 @@
 # Rust安全关键系统生态系统 - 完整文档集
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 📑 目录
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

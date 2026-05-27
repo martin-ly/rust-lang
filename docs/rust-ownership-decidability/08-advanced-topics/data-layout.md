@@ -1,5 +1,7 @@
 # Data Layout 与内存布局
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **权威来源**: The Rust Reference (Type Layout), The Rustonomicon (Data Layout)
 > **Rust 版本**: 1.95.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12.0

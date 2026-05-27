@@ -1,5 +1,7 @@
 # 16 里程碑模式 (Milestone)
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 📋 目录
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**

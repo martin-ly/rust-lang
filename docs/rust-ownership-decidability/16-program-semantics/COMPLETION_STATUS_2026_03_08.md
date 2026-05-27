@@ -1,5 +1,7 @@
 # 16-program-semantics 完成状态报告
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **检查日期**: 2026-03-08
 > **评估标准**: TOPIC_COVERAGE_MATRIX.md
 

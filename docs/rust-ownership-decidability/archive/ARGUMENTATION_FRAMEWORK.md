@@ -1,5 +1,7 @@
 # Rust所有权系统论证框架 - 多维度分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 一、论证推理树图
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**

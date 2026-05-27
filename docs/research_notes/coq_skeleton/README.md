@@ -1,5 +1,7 @@
 # Coq 证明骨架 - 已归档
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **归档日期**: 2026-02-26
 > **当前位置**: [archive/deprecated/coq_skeleton](../../archive/deprecated/coq_skeleton/README.md)
 > **原因**: L3 机器证明不纳入 100% 目标；聚焦数学风格形式化论证 + Rust 示例

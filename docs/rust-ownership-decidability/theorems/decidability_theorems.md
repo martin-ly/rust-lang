@@ -1,5 +1,7 @@
 # Rust 所有权系统可判定性 - 核心定理
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 📑 目录
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >

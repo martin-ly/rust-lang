@@ -1,5 +1,7 @@
 # RefinedRust vs RustBelt: 深入对比分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **RefinedRust** (PLDI 2024) 和 **RustBelt** (POPL 2018) 是 Rust 形式化验证领域最重要的两个基础性工作。
 > 本文档详细对比两者的技术路线、能力范围和设计决策。
 

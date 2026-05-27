@@ -1,5 +1,7 @@
 # FFI 互操作性
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 Foreign Function Interface (FFI) 是 Rust 与外部代码交互的核心机制。本章节深入探讨如何使用 Rust 调用 C/C++ 库，以及如何用 Rust 编写可以被其他语言调用的库。
 
 ## 目录

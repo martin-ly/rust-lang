@@ -1,5 +1,7 @@
 # Rust安全关键系统 - 可持续推进路线图与计划
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 📑 目录
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >

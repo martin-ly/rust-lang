@@ -1,5 +1,7 @@
 # 综合项目报告
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **报告日期**: 2026-02-28
 > **项目**: Rust Formal Methods Research Notes
 > **版本**: 1.0

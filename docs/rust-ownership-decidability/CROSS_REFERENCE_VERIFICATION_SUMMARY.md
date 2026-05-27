@@ -1,5 +1,7 @@
 # Cross-Reference Verification Summary
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 **Date**: 2026-03-06
 **Task**: Update and verify all cross-references in docs/rust-ownership-decidability
 **Status**: ✅ **COMPLETE**

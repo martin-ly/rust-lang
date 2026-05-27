@@ -1,5 +1,7 @@
 # Rust借用系统深度分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **权威来源**: The Rust Programming Language, Chapter 4.2
 > **形式化参考**: Weiss et al. (2020). Oxide: The Essence of Rust
 

@@ -1,5 +1,7 @@
 # Rust 所有权系统可判定性 - 完整知识库
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 [![Completion](https://img.shields.io/badge/Completion-100%25-brightgreen)](FINAL_100_PERCENT_COMPLETION_REPORT.md)
 [![Rust Version](https://img.shields.io/badge/Rust-1.95-blue)](#)
 [![Documentation](https://img.shields.io/badge/Docs-586%20files%20|%20600K%2B%20words-informational)](FINAL_MASTER_INDEX.md)

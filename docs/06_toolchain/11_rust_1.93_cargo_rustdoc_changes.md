@@ -64,6 +64,8 @@
 
 ```bash
 # 长格式变量示例
+
+> **Bloom 层级**: L3 (应用)
 cargo tree --format "{p} {l} {r}"
 ```
 

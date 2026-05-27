@@ -1,5 +1,7 @@
 # Generic-Array 泛型数组形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 类型级大小数组 (Type-Level Sized Arrays)
 >
 > **形式化框架**: typenum + 零成本抽象 + 内存安全

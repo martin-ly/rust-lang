@@ -1,5 +1,7 @@
 # The Rustonomicon 内容对齐
 
+> **Bloom 层级**: L2 (理解)
+
 本文件对照 [The Rustonomicon](https://doc.rust-lang.org/nomicon/) 的章节，列出本项目已覆盖和未覆盖的内容，并标注对应的 crate 位置。
 
 ## 📑 目录

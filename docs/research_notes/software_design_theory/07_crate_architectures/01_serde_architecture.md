@@ -1,5 +1,7 @@
 # Serde crate 架构解构
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## 1. 引言
 
 Serde（**Ser**ialization / **De**serialization）是 Rust 生态中序列化与反序列化的事实标准库，年下载量超过 2 亿次 [来源: crates.io 统计, 2025]。它通过一套精心设计的 trait 体系，将数据格式的具体细节与 Rust 数据结构的序列化逻辑彻底解耦，使得同一套数据类型可以在 JSON、YAML、TOML、MessagePack、Bincode 等数十种格式间无缝转换，而无需修改数据结构定义本身。

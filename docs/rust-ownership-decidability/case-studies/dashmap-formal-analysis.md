@@ -1,5 +1,7 @@
 # DashMap并发HashMap形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 并发安全的HashMap
 > **形式化框架**: 分片锁 + 读优化 + 迭代安全
 > **参考**: DashMap Documentation (<https://docs.rs/dashmap>)

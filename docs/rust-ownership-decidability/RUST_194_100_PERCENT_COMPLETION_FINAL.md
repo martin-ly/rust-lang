@@ -1,5 +1,7 @@
 # Rust 1.94 Alignment - 100% Completion Final Report
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **Project**: rust-ownership-decidability
 > **Alignment Target**: Rust 1.94 (Released March 5, 2026)
 > **Report Date**: March 6, 2026

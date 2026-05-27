@@ -4,6 +4,8 @@
 
 # Rust 平台支持矩阵（截至 Rust 1.95.0）
 
+> **Bloom 层级**: L2 (理解)
+
 > **更新日期**: 2026-04-16
 > **Rust 版本**: 1.95.0 stable
 > **来源**: [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)

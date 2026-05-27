@@ -1,5 +1,7 @@
 # RustBelt: Rust的形式化基础
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **权威来源**: Ralf Jung et al. (2018). *RustBelt: Securing the Foundations of the Rust Programming Language*. POPL 2018
 > **扩展工作**: RustHornBelt (2022), Iris Separation Logic
 

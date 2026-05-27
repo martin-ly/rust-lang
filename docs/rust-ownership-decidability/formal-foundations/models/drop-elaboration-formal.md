@@ -1,5 +1,7 @@
 # Rust Drop Elaboration 形式化理论
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **来源**: ETH Zürich, Bachelor Thesis, 2024
 > **作者**: Viktor Fukala
 > **导师**: Isaac van Bakel, Prof. Dr. Ralf Jung

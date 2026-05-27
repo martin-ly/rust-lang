@@ -1,5 +1,7 @@
 # 所有权概念卡片 - 全面深度解析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **概念**: Ownership (所有权)
 > **领域**: Rust编程语言核心机制
 > **理论基础**: 仿射类型系统 (Affine Type System)、线性逻辑 (Linear Logic)

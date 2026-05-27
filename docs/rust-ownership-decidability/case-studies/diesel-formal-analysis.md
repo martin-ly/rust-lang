@@ -1,5 +1,7 @@
 # Diesel ORM形式化分析
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **主题**: 编译时SQL检查的ORM
 > **形式化框架**: 类型安全查询 + 编译时验证 + 连接管理
 > **参考**: Diesel Documentation (<https://diesel.rs>)

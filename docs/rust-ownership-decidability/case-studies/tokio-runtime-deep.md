@@ -1,5 +1,7 @@
 # Tokio Runtime: Formal Analysis and Deep Dive
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 ## Table of Contents
 >
 > **[来源: Tokio Documentation - tokio.rs]** · **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: TRPL Ch. 17]** · **[来源: Wikipedia - Reactor Pattern]** · **[来源: Rust Standard Library - std::sync]** · **[来源: Wikipedia - Event Loop]** · **[来源: ACM - Async Runtime Design Patterns]**

@@ -1,5 +1,7 @@
 # 移动语义分析：资源转移与Drop检查
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **理论来源**: 仿射类型理论, Rust所有权系统
 > **Rust对应**: Move语义、Drop trait、mem::drop
 
