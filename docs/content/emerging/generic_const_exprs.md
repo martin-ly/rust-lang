@@ -1,5 +1,7 @@
 # Generic Const Expressions (泛型常量表达式)
 
+> **Bloom 层级**: L4-L5 (分析/评价)
+
 > **特性**: `generic_const_exprs`
 > **状态**: 🧪 不稳定 (Unstable)
 > **预计稳定**: Rust 1.96+

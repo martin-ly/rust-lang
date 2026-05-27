@@ -18,9 +18,16 @@ bloom_map = {
     'docs/06_toolchain/': 'L3 (应用)',
     'docs/07_future/': 'L4-L5 (分析/评价)',
     'docs/07_project/': 'L4-L5 (分析/评价)',
+    'docs/content/academic/': 'L5-L6 (分析/评价/创造)',
+    'docs/content/ecosystem/': 'L3-L4 (应用/分析)',
+    'docs/content/emerging/': 'L4-L5 (分析/评价)',
+    'docs/content/production/': 'L3-L4 (应用/分析)',
+    'docs/content/representations/': 'L4-L5 (分析/评价)',
+    'docs/content/scenarios/': 'L3-L4 (应用/分析)',
+    'docs/content/': 'L2-L3 (理解/应用)',
 }
 
-skip_dirs = ['docs/archive/', 'docs/templates/', 'docs/content/']
+skip_dirs = ['docs/archive/', 'docs/templates/']
 
 count = 0
 for f in sorted(Path('docs').rglob('*.md')):

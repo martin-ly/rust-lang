@@ -1,5 +1,7 @@
 # Tree Borrows 详解
 
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
 > **论文**: Tree Borrows: An Aliasing Model for Rust
 > **会议**: PLDI 2025 (Distinguished Paper Award)
 > **作者**: Neven Villani, Ralf Jung, et al.
