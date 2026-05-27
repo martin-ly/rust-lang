@@ -1,7 +1,7 @@
 # Unsafe Rust
 >
 > **层次定位**: L3 高级概念 / Unsafe 子域索引
-> **前置依赖**: [knowledge 所有权](../../01_fundamentals/ownership.md) · [knowledge 借用](../../01_fundamentals/borrowing.md)
+> **前置依赖**: [knowledge 所有权](../../01_fundamentals/04_ownership.md) · [knowledge 借用](../../01_fundamentals/01_borrowing.md)
 > **后置延伸**: [knowledge 专家层](../../04_expert/) · [concept L3 Unsafe](../../../concept/03_advanced/03_unsafe.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 底层控制
 > **定理链编号**: T-060 unsafe 块 ↔ safe 抽象层可靠性
@@ -26,19 +26,19 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [unsafe_rust.md](unsafe_rust.md) | Unsafe Rust 基础与安全抽象 | ⭐⭐⭐⭐ |
-| [ffi.md](ffi.md) | 外部函数接口 (FFI) | ⭐⭐⭐⭐ |
-| [maybe_uninit.md](maybe_uninit.md) | 未初始化内存管理 | ⭐⭐⭐⭐ |
-| [inline_asm.md](inline_asm.md) | 内联汇编 | ⭐⭐⭐⭐⭐ |
+| [unsafe_rust.md](04_unsafe_rust.md) | Unsafe Rust 基础与安全抽象 | ⭐⭐⭐⭐ |
+| [ffi.md](01_ffi.md) | 外部函数接口 (FFI) | ⭐⭐⭐⭐ |
+| [maybe_uninit.md](03_maybe_uninit.md) | 未初始化内存管理 | ⭐⭐⭐⭐ |
+| [inline_asm.md](02_inline_asm.md) | 内联汇编 | ⭐⭐⭐⭐⭐ |
 
 ## 🎯 学习路径
 >
 > **[来源: Rust Official Docs]**
 
-1. **Unsafe 基础** → [unsafe_rust.md](unsafe_rust.md)
-2. **C 互操作** → [ffi.md](ffi.md)
-3. **未初始化内存** → [maybe_uninit.md](maybe_uninit.md)
-4. **底层优化** → [inline_asm.md](inline_asm.md)
+1. **Unsafe 基础** → [unsafe_rust.md](04_unsafe_rust.md)
+2. **C 互操作** → [ffi.md](01_ffi.md)
+3. **未初始化内存** → [maybe_uninit.md](03_maybe_uninit.md)
+4. **底层优化** → [inline_asm.md](02_inline_asm.md)
 
 ## ⚠️ 安全提醒
 >
@@ -50,8 +50,8 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [04_expert/unsafe_audit.md](../../04_expert/unsafe_audit.md) - Unsafe 代码审计方法论
-- [04_expert/tree_borrows.md](../../04_expert/miri/tree_borrows.md) - 别名模型与内存规则
+- [04_expert/unsafe_audit.md](../../04_expert/02_unsafe_audit.md) - Unsafe 代码审计方法论
+- [04_expert/tree_borrows.md](../../04_expert/miri/01_tree_borrows.md) - 别名模型与内存规则
 
 ---
 

@@ -1,7 +1,7 @@
 # Concurrency 并发编程
 >
 > **层次定位**: L3 高级概念 / 并发子域索引
-> **前置依赖**: [knowledge 泛型](../../02_intermediate/generics.md) · [knowledge Trait](../../02_intermediate/traits.md)
+> **前置依赖**: [knowledge 泛型](../../02_intermediate/03_generics.md) · [knowledge Trait](../../02_intermediate/06_traits.md)
 > **后置延伸**: [knowledge Async](../async/README.md) · [concept L3 并发](../../../concept/03_advanced/01_concurrency.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 系统编程
 > **定理链编号**: T-040 Send 类型安全 → T-041 Sync 数据竞争自由
@@ -26,24 +26,24 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [threads.md](threads.md) | 线程基础与 Send/Sync | ⭐⭐⭐ |
-| [atomics.md](atomics.md) | 原子操作与内存序 | ⭐⭐⭐⭐ |
-| [synchronization.md](synchronization.md) | 同步原语（Mutex、RwLock、Barrier）| ⭐⭐⭐⭐ |
+| [threads.md](03_threads.md) | 线程基础与 Send/Sync | ⭐⭐⭐ |
+| [atomics.md](01_atomics.md) | 原子操作与内存序 | ⭐⭐⭐⭐ |
+| [synchronization.md](02_synchronization.md) | 同步原语（Mutex、RwLock、Barrier）| ⭐⭐⭐⭐ |
 
 ## 🎯 学习路径
 >
 > **[来源: Rust Official Docs]**
 
-1. **线程基础** → [threads.md](threads.md)
-2. **原子操作** → [atomics.md](atomics.md)
-3. **高级同步** → [synchronization.md](synchronization.md)
+1. **线程基础** → [threads.md](03_threads.md)
+2. **原子操作** → [atomics.md](01_atomics.md)
+3. **高级同步** → [synchronization.md](02_synchronization.md)
 
 ## 🚀 相关层
 >
 > **[来源: Rust Official Docs]**
 
 - [03_advanced/async/](../async/) - 异步编程
-- [06_ecosystem/deep_dives/tokio_deep_dive.md](../../06_ecosystem/deep_dives/tokio_deep_dive.md) - Tokio 运行时
+- [06_ecosystem/deep_dives/tokio_deep_dive.md](../../06_ecosystem/deep_dives/02_tokio_deep_dive.md) - Tokio 运行时
 
 ---
 

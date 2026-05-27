@@ -1,8 +1,8 @@
 # Macros 宏系统
 >
 > **层次定位**: L3 高级概念 / 宏子域索引
-> **前置依赖**: [knowledge Trait](../../02_intermediate/traits.md) · [knowledge 泛型](../../02_intermediate/generics.md)
-> **后置延伸**: [knowledge 编译器内部](../../04_expert/compiler_internals.md) · [concept L3 宏](../../../concept/03_advanced/04_macros.md)
+> **前置依赖**: [knowledge Trait](../../02_intermediate/06_traits.md) · [knowledge 泛型](../../02_intermediate/03_generics.md)
+> **后置延伸**: [knowledge 编译器内部](../../04_expert/01_compiler_internals.md) · [concept L3 宏](../../../concept/03_advanced/04_macros.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 元编程
 > **定理链编号**: T-070 宏卫生性 → T-071 展开正确性
 
@@ -25,22 +25,22 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [declarative.md](declarative.md) | 声明式宏 (macro_rules!) | ⭐⭐⭐ |
-| [procedural.md](procedural.md) | 过程宏 (Derive/Attribute/Function-like) | ⭐⭐⭐⭐ |
+| [declarative.md](01_declarative.md) | 声明式宏 (macro_rules!) | ⭐⭐⭐ |
+| [procedural.md](02_procedural.md) | 过程宏 (Derive/Attribute/Function-like) | ⭐⭐⭐⭐ |
 
 ## 🎯 学习路径
 >
 > **[来源: Rust Official Docs]**
 
-1. **声明式宏** → [declarative.md](declarative.md)
-2. **过程宏** → [procedural.md](procedural.md)
+1. **声明式宏** → [declarative.md](01_declarative.md)
+2. **过程宏** → [procedural.md](02_procedural.md)
 
 ## 🚀 相关层
 >
 > **[来源: Rust Official Docs]**
 
-- [03_advanced/type_driven_correctness.md](../type_driven_correctness.md) - 类型驱动设计
-- [06_ecosystem/emerging/generic_const_exprs.md](../../06_ecosystem/emerging/generic_const_exprs.md) - 类型级编程替代方案
+- [03_advanced/type_driven_correctness.md](../06_type_driven_correctness.md) - 类型驱动设计
+- [06_ecosystem/emerging/generic_const_exprs.md](../../06_ecosystem/emerging/02_generic_const_exprs.md) - 类型级编程替代方案
 
 ---
 

@@ -10,15 +10,15 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [tree_borrows_authoritative_guide.md](tree_borrows_authoritative_guide.md) | Tree Borrows 权威指南 | ⭐⭐⭐⭐⭐ |
-| [coq_formalization_guide.md](coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
+| [tree_borrows_authoritative_guide.md](02_tree_borrows_authoritative_guide.md) | Tree Borrows 权威指南 | ⭐⭐⭐⭐⭐ |
+| [coq_formalization_guide.md](01_coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
 
 ## 🎯 前置要求
 >
 > **[来源: Rust Official Docs]**
 
-- [03_advanced/type_driven_correctness.md](../../03_advanced/type_driven_correctness.md) - 类型驱动正确性
-- [04_expert/miri/tree_borrows.md](../miri/tree_borrows.md) - Tree Borrows 基础
+- [03_advanced/type_driven_correctness.md](../../03_advanced/06_type_driven_correctness.md) - 类型驱动正确性
+- [04_expert/miri/tree_borrows.md](../miri/01_tree_borrows.md) - Tree Borrows 基础
 
 ---
 

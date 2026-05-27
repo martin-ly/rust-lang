@@ -10,8 +10,8 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [sqlx_deep_dive.md](sqlx_deep_dive.md) | SQLx 编译时检查查询 | ⭐⭐⭐ |
-| [sea_orm_deep_dive.md](sea_orm_deep_dive.md) | SeaORM 异步 ORM | ⭐⭐⭐ |
+| [sqlx_deep_dive.md](02_sqlx_deep_dive.md) | SQLx 编译时检查查询 | ⭐⭐⭐ |
+| [sea_orm_deep_dive.md](01_sea_orm_deep_dive.md) | SeaORM 异步 ORM | ⭐⭐⭐ |
 
 ## 🎯 选型建议
 >
@@ -28,8 +28,8 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [03_advanced/async/async_await.md](../../03_advanced/async/async_await.md) - 异步基础
-- [02_intermediate/error_handling.md](../../02_intermediate/error_handling.md) - 错误处理
+- [03_advanced/async/async_await.md](../../03_advanced/async/01_async_await.md) - 异步基础
+- [02_intermediate/error_handling.md](../../02_intermediate/02_error_handling.md) - 错误处理
 
 ---
 

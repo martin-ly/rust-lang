@@ -10,10 +10,10 @@
 
 | 文档 | 主题 | 难度 | 状态 |
 |------|------|------|------|
-| [generic_const_exprs.md](generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ | 🧪 不稳定 |
-| [async_closures.md](async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ | 🧪 不稳定 |
-| [rust_1_95.md](rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ | ✅ 已发布 |
-| [rust_1_96_preview.md](rust_1_96_preview.md) | Rust 1.96 预览 | ⭐⭐⭐ | 🧪 Beta |
+| [generic_const_exprs.md](02_generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ | 🧪 不稳定 |
+| [async_closures.md](01_async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ | 🧪 不稳定 |
+| [rust_1_95.md](03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ | ✅ 已发布 |
+| [rust_1_96_preview.md](05_rust_1_96_preview.md) | Rust 1.96 预览 | ⭐⭐⭐ | 🧪 Beta |
 
 ## ⚠️ 使用警告
 >
@@ -30,7 +30,7 @@
 > **[来源: Rust Official Docs]**
 
 - [03_advanced/](../../03_advanced/) - 高级语言特性基础
-- [06_ecosystem/edition_2024.md](../edition_2024.md) - 已稳定的新特性
+- [06_ecosystem/edition_2024.md](../02_edition_2024.md) - 已稳定的新特性
 
 ---
 

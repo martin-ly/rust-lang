@@ -25,10 +25,10 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [cargo_basics.md](./cargo_basics.md) | Cargo 基础与工作空间 | ⭐⭐ |
-| [edition_2024.md](./edition_2024.md) | Edition 2024 迁移指南 | ⭐⭐⭐ |
-| [emerging/rust_1_95.md](./emerging/rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
-| [emerging/rust_1_96_preview.md](./emerging/rust_1_96_preview.md) | Rust 1.96 预览 | ⭐⭐⭐ |
+| [cargo_basics.md](01_cargo_basics.md) | Cargo 基础与工作空间 | ⭐⭐ |
+| [edition_2024.md](02_edition_2024.md) | Edition 2024 迁移指南 | ⭐⭐⭐ |
+| [emerging/rust_1_95.md](./emerging/03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
+| [emerging/rust_1_96_preview.md](./emerging/05_rust_1_96_preview.md) | Rust 1.96 预览 | ⭐⭐⭐ |
 
 ### 深度解析
 >
@@ -36,11 +36,11 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [deep_dives/tokio_deep_dive.md](./deep_dives/tokio_deep_dive.md) | Tokio 运行时深度解析 | ⭐⭐⭐⭐ |
-| [deep_dives/axum_deep_dive.md](./deep_dives/axum_deep_dive.md) | Axum Web 框架深度解析 | ⭐⭐⭐⭐ |
-| [databases/sqlx_deep_dive.md](./databases/sqlx_deep_dive.md) | SQLx 数据库访问 | ⭐⭐⭐ |
-| [databases/sea_orm_deep_dive.md](./databases/sea_orm_deep_dive.md) | SeaORM ORM 框架 | ⭐⭐⭐ |
-| [deployment/kubernetes_deployment_guide.md](./deployment/kubernetes_deployment_guide.md) | Kubernetes 部署指南 | ⭐⭐⭐⭐ |
+| [deep_dives/tokio_deep_dive.md](./deep_dives/02_tokio_deep_dive.md) | Tokio 运行时深度解析 | ⭐⭐⭐⭐ |
+| [deep_dives/axum_deep_dive.md](./deep_dives/01_axum_deep_dive.md) | Axum Web 框架深度解析 | ⭐⭐⭐⭐ |
+| [databases/sqlx_deep_dive.md](./databases/02_sqlx_deep_dive.md) | SQLx 数据库访问 | ⭐⭐⭐ |
+| [databases/sea_orm_deep_dive.md](./databases/01_sea_orm_deep_dive.md) | SeaORM ORM 框架 | ⭐⭐⭐ |
+| [deployment/kubernetes_deployment_guide.md](./deployment/01_kubernetes_deployment_guide.md) | Kubernetes 部署指南 | ⭐⭐⭐⭐ |
 
 ### 前沿特性
 >
@@ -48,9 +48,9 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [emerging/generic_const_exprs.md](./emerging/generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ |
-| [emerging/async_closures.md](./emerging/async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ |
-| [emerging/rust_1_95.md](./emerging/rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
+| [emerging/generic_const_exprs.md](./emerging/02_generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ |
+| [emerging/async_closures.md](./emerging/01_async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ |
+| [emerging/rust_1_95.md](./emerging/03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 
@@ -97,7 +97,7 @@
 
 ## 相关概念
 
-- [Cargo 基础](./cargo_basics.md)
+- [Cargo 基础](01_cargo_basics.md)
 
 ---
 

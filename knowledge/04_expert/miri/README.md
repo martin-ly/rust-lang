@@ -10,14 +10,14 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [tree_borrows.md](tree_borrows.md) | Tree Borrows 别名模型 | ⭐⭐⭐⭐⭐ |
+| [tree_borrows.md](01_tree_borrows.md) | Tree Borrows 别名模型 | ⭐⭐⭐⭐⭐ |
 
 ## 🎯 前置要求
 >
 > **[来源: Rust Official Docs]**
 
-- [03_advanced/unsafe/unsafe_rust.md](../../03_advanced/unsafe/unsafe_rust.md) - Unsafe Rust 基础
-- [04_expert/unsafe_audit.md](../unsafe_audit.md) - Unsafe 代码审计
+- [03_advanced/unsafe/unsafe_rust.md](../../03_advanced/unsafe/04_unsafe_rust.md) - Unsafe Rust 基础
+- [04_expert/unsafe_audit.md](../02_unsafe_audit.md) - Unsafe 代码审计
 
 ## 🚀 相关层
 >

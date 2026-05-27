@@ -21,11 +21,11 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [compiler_internals.md](./compiler_internals.md) | 编译器内部机制 | ⭐⭐⭐⭐⭐ |
-| [unsafe_audit.md](./unsafe_audit.md) | Unsafe 代码审计方法论 | ⭐⭐⭐⭐⭐ |
-| [miri/tree_borrows.md](./miri/tree_borrows.md) | Tree Borrows 别名模型 | ⭐⭐⭐⭐⭐ |
-| [academic/tree_borrows_authoritative_guide.md](./academic/tree_borrows_authoritative_guide.md) | Tree Borrows 权威指南 | ⭐⭐⭐⭐⭐ |
-| [academic/coq_formalization_guide.md](./academic/coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
+| [compiler_internals.md](01_compiler_internals.md) | 编译器内部机制 | ⭐⭐⭐⭐⭐ |
+| [unsafe_audit.md](02_unsafe_audit.md) | Unsafe 代码审计方法论 | ⭐⭐⭐⭐⭐ |
+| [miri/tree_borrows.md](./miri/01_tree_borrows.md) | Tree Borrows 别名模型 | ⭐⭐⭐⭐⭐ |
+| [academic/tree_borrows_authoritative_guide.md](./academic/02_tree_borrows_authoritative_guide.md) | Tree Borrows 权威指南 | ⭐⭐⭐⭐⭐ |
+| [academic/coq_formalization_guide.md](./academic/01_coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 >
@@ -79,4 +79,4 @@
 
 ## 相关概念
 
-- [不安全代码审计](./unsafe_audit.md)
+- [不安全代码审计](02_unsafe_audit.md)

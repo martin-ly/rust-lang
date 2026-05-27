@@ -1,7 +1,7 @@
 # Async 异步编程
 >
 > **层次定位**: L3 高级概念 / 异步子域索引
-> **前置依赖**: [knowledge 泛型](../../02_intermediate/generics.md) · [knowledge Trait](../../02_intermediate/traits.md)
+> **前置依赖**: [knowledge 泛型](../../02_intermediate/03_generics.md) · [knowledge Trait](../../02_intermediate/06_traits.md)
 > **后置延伸**: [knowledge Unsafe](../unsafe/README.md) · [concept L3 Async](../../../concept/03_advanced/02_async.md)
 > **跨层映射**: knowledge→concept 直觉映射 | L3 系统编程
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性
@@ -25,24 +25,24 @@
 
 | 文档 | 主题 | 难度 | 说明 |
 |------|------|------|------|
-| [async_await.md](async_await.md) | async/await 基础 | ⭐⭐⭐⭐ | 10 模块完整教学 |
-| [async_closure.md](async_closure.md) | 异步闭包 | ⭐⭐⭐⭐ | 10 模块完整教学（Rust 1.85+）|
-| [async_closures_2024.md](async_closures_2024.md) | 2024 Edition 异步闭包速览 | ⭐⭐⭐ | 快速参考 |
+| [async_await.md](01_async_await.md) | async/await 基础 | ⭐⭐⭐⭐ | 10 模块完整教学 |
+| [async_closure.md](02_async_closure.md) | 异步闭包 | ⭐⭐⭐⭐ | 10 模块完整教学（Rust 1.85+）|
+| [async_closures_2024.md](01_async_closures_2024.md) | 2024 Edition 异步闭包速览 | ⭐⭐⭐ | 快速参考 |
 
 ## 🎯 学习路径
 >
 > **[来源: Rust Official Docs]**
 
-1. **async/await 基础** → 先学习 [async_await.md](async_await.md)
-2. **异步闭包** → 再学习 [async_closure.md](async_closure.md)
-3. **快速查阅** → 参考 [async_closures_2024.md](async_closures_2024.md)
+1. **async/await 基础** → 先学习 [async_await.md](01_async_await.md)
+2. **异步闭包** → 再学习 [async_closure.md](02_async_closure.md)
+3. **快速查阅** → 参考 [async_closures_2024.md](01_async_closures_2024.md)
 
 ## 🚀 相关层
 >
 > **[来源: Rust Official Docs]**
 
 - [03_advanced/concurrency/](../concurrency/) - 线程、原子操作、同步原语
-- [06_ecosystem/deep_dives/tokio_deep_dive.md](../../06_ecosystem/deep_dives/tokio_deep_dive.md) - Tokio 运行时
+- [06_ecosystem/deep_dives/tokio_deep_dive.md](../../06_ecosystem/deep_dives/02_tokio_deep_dive.md) - Tokio 运行时
 
 ---
 

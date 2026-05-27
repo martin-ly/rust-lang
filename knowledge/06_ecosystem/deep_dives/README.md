@@ -10,8 +10,8 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [tokio_deep_dive.md](tokio_deep_dive.md) | Tokio 异步运行时 | ⭐⭐⭐⭐ |
-| [axum_deep_dive.md](axum_deep_dive.md) | Axum Web 框架 | ⭐⭐⭐⭐ |
+| [tokio_deep_dive.md](02_tokio_deep_dive.md) | Tokio 异步运行时 | ⭐⭐⭐⭐ |
+| [axum_deep_dive.md](01_axum_deep_dive.md) | Axum Web 框架 | ⭐⭐⭐⭐ |
 
 ## 🎯 学习路径
 >
@@ -47,4 +47,4 @@
 
 ## 相关概念
 
-- [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
+- [Rust 标准库速查](../../05_reference/03_std_library_cheatsheet.md)

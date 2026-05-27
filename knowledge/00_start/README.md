@@ -21,10 +21,10 @@
 
 按顺序学习以下文档：
 
-1. [installation.md](installation.md) - 安装和环境配置
-2. [hello_world.md](hello_world.md) - 第一个程序
-3. [rust_philosophy.md](rust_philosophy.md) - Rust 设计哲学
-4. [learning_roadmap.md](learning_roadmap.md) - 学习路线图
+1. [02_installation.md](02_installation.md) - 安装和环境配置
+2. [01_hello_world.md](01_hello_world.md) - 第一个程序
+3. [04_rust_philosophy.md](04_rust_philosophy.md) - Rust 设计哲学
+4. [03_learning_roadmap.md](03_learning_roadmap.md) - 学习路线图
 
 ## ⏱️ 预计时间
 >
@@ -76,4 +76,4 @@
 
 ## 相关概念
 
-- [安装 Rust](./installation.md)
+- [安装 Rust](./02_installation.md)

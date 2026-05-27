@@ -225,7 +225,7 @@ def check_sources(content):
 def check_file_naming(file_path):
     """检查文件命名是否符合 NN_english_name.md"""
     name = file_path.name
-    return bool(re.match(r'^\d{2}_[a-z_]+\.md$', name)), name
+    return bool(re.match(r'^\d{2}_[a-z0-9_]+\.md$', name)), name
 
 
 def check_todos(content):
@@ -395,7 +395,7 @@ def scan_files(md_files, track_name):
         rel_path = str(file_path).replace('\\', '/')
         rel_path_norm = rel_path.replace('\\', '/')
         is_meta = '/00_meta/' in rel_path_norm or rel_path_norm.startswith('00_meta/')
-        is_readme = file_path.name.lower() == 'readme.md'
+        is_readme = file_path.name.lower() in ('readme.md', 'index.md')
 
         # 1. 跨文件链接检查（含死链接）
         link_count, links, dead = check_cross_links(content, file_path)

@@ -21,10 +21,10 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [ownership.md](./ownership.md) | 所有权系统 | ⭐⭐ |
-| [borrowing.md](./borrowing.md) | 借用与引用 | ⭐⭐ |
-| [lifetimes.md](./lifetimes.md) | 生命周期 | ⭐⭐⭐ |
-| [iterators.md](./iterators.md) | 迭代器 | ⭐⭐ |
+| [ownership.md](04_ownership.md) | 所有权系统 | ⭐⭐ |
+| [borrowing.md](01_borrowing.md) | 借用与引用 | ⭐⭐ |
+| [lifetimes.md](03_lifetimes.md) | 生命周期 | ⭐⭐⭐ |
+| [iterators.md](02_iterators.md) | 迭代器 | ⭐⭐ |
 
 ## ⏱️ 预计时间
 >
@@ -75,4 +75,4 @@
 
 ## 相关概念
 
-- [所有权深入](./ownership.md)
+- [所有权深入](04_ownership.md)

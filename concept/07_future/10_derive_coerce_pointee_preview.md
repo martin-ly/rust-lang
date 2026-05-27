@@ -336,12 +336,6 @@ graph TD
 
 ## 权威来源索引
 
->
->
->
->
->
-
 ## 十、边界测试：CoercePointee 派生的编译错误
 
 ### 10.1 边界测试：非 `#[repr(transparent)]` 类型的 CoercePointee（编译错误）
@@ -361,7 +355,13 @@ fn main() {
 }
 ```
 
-> **修正**: `CoercePointee`（RFC 3621，Rust 1.95+）允许自定义智能指针参与**强制点转换**（unsized coercion），如 `MyBox<String>` → `MyBox<str>`（通过 `Deref`）。关键约束：智能指针类型必须是 `#[repr(transparent)]`——保证其内存布局与内部指针完全相同。这是编译器进行强制转换的前提：转换只需修改类型标记，无需调整内存。`Box<T>`、`Rc<T>`、`Arc<T>` 都满足此约束。非透明包装（如包含额外字段的 struct）不能派生 `CoercePointee`，因为强制转换会改变字段布局。这与 C++ 的 `std::shared_ptr`（通过虚函数表和类型擦除实现多态）不同——Rust 的 unsized coercion 是零成本编译期转换。[来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)]
+> **修正**: `CoercePointee`（RFC 3621，Rust 1.95+）允许自定义智能指针参与**强制点转换**（unsized coercion），如 `MyBox<String>` → `MyBox<str>`（通过 `Deref`）。
+> 关键约束：智能指针类型必须是 `#[repr(transparent)]`——保证其内存布局与内部指针完全相同。
+> 这是编译器进行强制转换的前提：转换只需修改类型标记，无需调整内存。
+> `Box<T>`、`Rc<T>`、`Arc<T>` 都满足此约束。非透明包装（如包含额外字段的 struct）不能派生 `CoercePointee`，因为强制转换会改变字段布局。
+> 这与 C++ 的 `std::shared_ptr`（通过虚函数表和类型擦除实现多态）不同——Rust 的 unsized coercion 是零成本编译期转换。
+> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)]
 
 ### 10.2 边界测试：多字段 struct 的 CoercePointee 尝试（编译错误）
 

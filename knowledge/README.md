@@ -36,15 +36,15 @@
 
 | 特性 | 文档位置 | 状态 |
 |------|---------|------|
-| `cfg_select!` | [03_advanced/macros/declarative.md](03_advanced/macros/declarative.md) | ✅ 已更新 |
-| `if let guards` | [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/if_let_guards.md) | ✅ 已更新 |
-| `Atomic*::update/try_update` | [03_advanced/concurrency/atomics.md](03_advanced/concurrency/atomics.md) | ✅ 已更新 |
-| `Vec::push_mut` / `insert_mut` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ 已更新 |
-| `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/performance_optimization.md) | ✅ 已更新 |
-| `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/type_conversions.md) | ✅ 已更新 |
-| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/maybe_uninit.md) | ✅ 已更新 |
-| PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/inline_asm.md) | ✅ 已更新 |
-| `core::range` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ 已更新 |
+| `cfg_select!` | [03_advanced/macros/declarative.md](03_advanced/macros/01_declarative.md) | ✅ 已更新 |
+| `if let guards` | [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/01_if_let_guards.md) | ✅ 已更新 |
+| `Atomic*::update/try_update` | [03_advanced/concurrency/atomics.md](03_advanced/concurrency/01_atomics.md) | ✅ 已更新 |
+| `Vec::push_mut` / `insert_mut` | [02_intermediate/collections.md](02_intermediate/01_collections.md) | ✅ 已更新 |
+| `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/05_performance_optimization.md) | ✅ 已更新 |
+| `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md) | ✅ 已更新 |
+| `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/03_maybe_uninit.md) | ✅ 已更新 |
+| PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/02_inline_asm.md) | ✅ 已更新 |
+| `core::range` | [02_intermediate/collections.md](02_intermediate/01_collections.md) | ✅ 已更新 |
 
 ## 🔮 预览版本跟踪
 >
