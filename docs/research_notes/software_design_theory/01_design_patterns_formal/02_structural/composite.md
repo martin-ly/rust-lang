@@ -1,4 +1,6 @@
-﻿# Composite 形式化分析
+# Composite 形式化分析
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
 >

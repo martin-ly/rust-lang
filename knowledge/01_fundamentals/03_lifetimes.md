@@ -1128,7 +1128,7 @@ impl<'a> Parser<'a> {
     // ❌ 编译错误: 方法中的生命周期省略规则与函数不同
     // fn word(&self) -> &str { &self.text[0..1] }
     // 实际上以上代码可以编译！真正的错误场景:
-    
+
     fn first_word(&self, s: &str) -> &str {
         // 省略规则: 输入生命周期不同，无法推断返回引用关联哪个输入
         if s.len() > self.text.len() { s } else { self.text }

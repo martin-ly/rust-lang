@@ -1,4 +1,6 @@
-﻿# Core Theorems — English Summary
+# Core Theorems — English Summary
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
 >

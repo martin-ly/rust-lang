@@ -1,4 +1,6 @@
-﻿# 软件设计理论体系：主索引
+# 软件设计理论体系：主索引
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

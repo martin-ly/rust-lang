@@ -1,4 +1,6 @@
-﻿# 与 ownership/borrow/trait 的衔接
+# 与 ownership/borrow/trait 的衔接
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
 >

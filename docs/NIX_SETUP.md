@@ -1,5 +1,7 @@
 # Nix 设置指南
 
+> **Bloom 层级**: L2-L3 (理解/应用)
+
 本项目支持使用 Nix 进行开发环境管理，确保所有开发者使用一致的 Rust 工具链。
 
 ## 📑 目录
@@ -159,22 +161,3 @@ nix flake update
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
-
----
-
-## 权威来源索引
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

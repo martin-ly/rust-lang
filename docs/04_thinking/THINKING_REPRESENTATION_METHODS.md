@@ -1,4 +1,6 @@
-﻿# Rust 思维表征方式文档 / Thinking Representation Methods Documentation
+# Rust 思维表征方式文档 / Thinking Representation Methods Documentation
+
+> **Bloom 层级**: L4-L5 (分析/评价)
 
 ## 📑 目录
 >

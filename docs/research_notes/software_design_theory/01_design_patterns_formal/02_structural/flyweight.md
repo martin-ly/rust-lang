@@ -1,4 +1,6 @@
-﻿# Flyweight 形式化分析
+# Flyweight 形式化分析
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

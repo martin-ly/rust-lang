@@ -1,5 +1,7 @@
 # 2026年国际权威对齐报告
 
+> **Bloom 层级**: L2-L3 (理解/应用)
+
 > **报告日期**: 2026-03-18
 > **对齐标准**: 国际权威来源（ACM/IEEE/POPL/PLDI/Rust官方）
 > **覆盖范围**: Rust生态全栈
@@ -90,6 +92,7 @@
   - [\[^26\]: The Update Framework (TUF). "crates.io TUF Integration." Rust Foundation. 2026. https://foundation.rust-lang.org/security/](#26-the-update-framework-tuf-cratesio-tuf-integration-rust-foundation-2026-httpsfoundationrust-langorgsecurity)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >

@@ -7,11 +7,13 @@ bloom_map = {
     'docs/00_meta/': 'L2 (理解)',
     'docs/01_core/': 'L1-L2 (记忆/理解)',
     'docs/01_learning/': 'L1-L2 (记忆/理解)',
+    'docs/02_reference/quick_reference/': 'L2-L3 (理解/速查)',
     'docs/02_reference/': 'L2 (理解)',
     'docs/03_guides/': 'L2-L3 (理解/应用)',
     'docs/03_practice/': 'L3 (应用)',
     'docs/04_research/': 'L4-L5 (分析/评价)',
     'docs/04_thinking/': 'L4-L5 (分析/评价)',
+    'docs/05_guides/workflow/': 'L3-L4 (应用/分析)',
     'docs/05_guides/': 'L3-L4 (应用/分析)',
     'docs/06_toolchain/': 'L3 (应用)',
     'docs/07_future/': 'L4-L5 (分析/评价)',
@@ -27,6 +29,8 @@ for f in sorted(Path('docs').rglob('*.md')):
         continue
     
     content = f.read_text(encoding='utf-8', errors='ignore')
+    # Strip BOM if present
+    content = content.lstrip('\ufeff')
     if 'Bloom' in content:
         continue
     
@@ -41,6 +45,9 @@ for f in sorted(Path('docs').rglob('*.md')):
         # Default for research_notes, rust-formal-engineering-system, etc.
         if 'research_notes' in path_str or 'rust-formal' in path_str or 'rust-ownership-decidability' in path_str or 'RUST_SAFETY_CRITICAL' in path_str:
             bloom = 'L5-L6 (分析/评价/创造)'
+        elif path_str.count('/') == 1 and path_str.startswith('docs/'):
+            # Root-level docs files
+            bloom = 'L2-L3 (理解/应用)'
         else:
             continue
     
