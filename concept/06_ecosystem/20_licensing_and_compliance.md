@@ -3,13 +3,20 @@
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+P** — ApplicationProcedure
 > **双维定位**: P×Eva — 评估许可证合规性
-> **定位**: 系统讲解 Rust **开源许可证选择**、**依赖合规**和**版权管理**——从 MIT [来源: [MIT License](https://opensource.org/licenses/MIT)]/Apache [来源: [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)]-2.0 双许可到 cargo-deny 的许可证审计，揭示如何在工程实践中管理法律风险。
+> **定位**: 系统讲解 Rust **开源许可证选择**、**依赖合规**和**版权管理**
+> ——从 MIT [来源: [MIT License](https://opensource.org/licenses/MIT)]/Apache [来源: [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)]
+> -2.0 双许可到 cargo-deny 的许可证审计，揭示如何在工程实践中管理法律风险。
 > **前置概念**: [Toolchain](./01_toolchain.md) · [Cargo](./01_toolchain.md) · [Security Practices](./19_security_practices.md)
 > **后置概念**: [Cross Compilation](./17_cross_compilation.md) · [Distributed Systems](./18_distributed_systems.md)
 
 ---
 
-> **来源**: [Rust FAQ — Why MIT/Apache-2.0](https://www.rust-lang.org/policies/licenses) · [Choose a License](https://choosealicense.com/) · [SPDX License List](https://spdx.org/licenses/) · [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) · [OSI Approved Licenses](https://opensource.org/licenses) · [Wikipedia — Software License](https://en.wikipedia.org/wiki/Software_license)
+> **来源**: [Rust FAQ — Why MIT/Apache-2.0](https://www.rust-lang.org/policies/licenses) ·
+> [Choose a License](https://choosealicense.com/) ·
+> [SPDX License List](https://spdx.org/licenses/) ·
+> [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) ·
+> [OSI Approved Licenses](https://opensource.org/licenses) ·
+> [Wikipedia — Software License](https://en.wikipedia.org/wiki/Software_license)
 
 ## 📑 目录
 

@@ -23,7 +23,6 @@
     - [Supply Chain](#supply-chain)
   - [🚀 部署安全](#-部署安全)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -229,11 +228,6 @@ ENTRYPOINT ["/usr/local/bin/myapp"]
 - [OWASP Rust Security](https://owasp.org/www-project-developer-guide/draft/foundational-technology-and-programming-languages/rust/)
 - [项目 Miri 指南](../../docs/MIRI_GUIDE.md)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

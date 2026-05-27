@@ -26,7 +26,6 @@
   - [🌲 决策树：选择哪个平台](#-决策树选择哪个平台)
   - [📊 平台对比矩阵](#-平台对比矩阵)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ✅ 已完善](#状态--已完善)
 
 ---
 
@@ -385,11 +384,6 @@ twiggy top -n 10 pkg/worker_bg.wasm
 - [worker-rs 文档](https://docs.rs/worker/latest/worker/)
 - [Rust Serverless Optimization Guide](https://github.com/john-shaffer/rust-serverless)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ✅ 已完善
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -45,11 +45,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 SQLx — 编译期检查
->
 
 ```text
 SQLx:
@@ -89,7 +86,6 @@ SQLx:
 ---
 
 ### 1.2 Diesel — 类型安全 ORM
->
 
 ```text
 Diesel:
@@ -132,7 +128,6 @@ Diesel:
 ---
 
 ### 1.3 SeaORM — 异步 ORM
->
 
 ```text
 SeaORM:

@@ -26,7 +26,7 @@
   - [三、与传统 Cargo 项目的对比](#三与传统-cargo-项目的对比)
   - [四、工程实践](#四工程实践)
     - [4.1 快速 CLI 原型](#41-快速-cli-原型)
-- [\[derive(Parser)\]](#deriveparser-1)
+    - [4.2 CI/CD 辅助脚本](#42-cicd-辅助脚本)
     - [4.3 数据处理与临时任务](#43-数据处理与临时任务)
 - [\[derive(Deserialize)\]](#derivedeserialize)
   - [六、与 L1-L4 的关系映射](#六与-l1-l4-的关系映射)
@@ -226,14 +226,13 @@ graph TD
 ## 四、工程实践
 
 ### 4.1 快速 CLI 原型
->
 
 ```rust,ignore
 #!/usr/bin/env cargo
-```cargo
-[dependencies]
-clap = { version = "4", features = ["derive"] }
-```
+    ```cargo
+    [dependencies]
+    clap = { version = "4", features = ["derive"] }
+    ```
 
 use clap::Parser;
 

@@ -17,16 +17,13 @@
 ---
 
 ## 一、权威定义
->
 
 ### 1.1 设计哲学对比
->
 
 > **[TRPL]** Rust's central feature is ownership — a set of rules checked by the compiler that govern how a Rust program manages memory.
 > **[Effective Go]** Go's approach to concurrency differs from Rust's. Go communicates by sharing memory (via channels), while Rust shares memory by communicating (through ownership transfer).
 
 ### 1.2 核心命题
->
 
 | **维度** | **Rust** | **Go** |
 |:---|:---|:---|

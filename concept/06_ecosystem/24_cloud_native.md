@@ -43,11 +43,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 云原生定义
->
 
 ```text
 云原生（Cloud Native）:
@@ -81,7 +78,6 @@
 ---
 
 ### 1.2 Rust 优势
->
 
 ```text
 Rust 云原生优势:
@@ -127,7 +123,6 @@ Rust 云原生优势:
 ## 二、Web 框架
 
 ### 2.1 Axum
->
 
 ```text
 Axum:
@@ -177,7 +172,6 @@ Axum:
 ---
 
 ### 2.2 Actix-web
->
 
 ```text
 Actix-web:
@@ -224,7 +218,6 @@ Actix-web:
 ## 三、基础设施
 
 ### 3.1 服务网格
->
 
 ```text
 服务网格（Service Mesh）:
@@ -254,7 +247,6 @@ Actix-web:
 ---
 
 ### 3.2 容器运行时
->
 
 ```text
 容器运行时:
@@ -295,7 +287,6 @@ Actix-web:
 ---
 
 ### 3.3 可观测性
->
 
 ```text
 可观测性工具:
@@ -337,7 +328,6 @@ Actix-web:
 ## 四、反命题与边界分析
 
 ### 4.1 反命题树
->
 
 ```mermaid
 graph TD
@@ -530,7 +520,16 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 异步生态存在多个运行时（tokio、async-std、smol、embassy），它们的任务调度器和 I/O 驱动互不兼容。在 tokio runtime 上执行 async-std 的 I/O 操作（如 `async_std::fs::read`）会导致 panic 或死锁，因为 I/O 事件注册到了错误的 reactor。解决方案：1) 统一使用一个运行时；2) 使用 `async-compat` crate 适配；3) 仅混用计算型 future（无 I/O）。这与 Go 的单一运行时（goroutine + netpoller）不同——Rust 的异步生态允许多个运行时竞争，但要求开发者明确选择。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [async-std Documentation](https://docs.rs/async-std/)]
+> **修正**: Rust 异步生态存在多个运行时（tokio、async-std、smol、embassy），它们的任务调度器和 I/O 驱动互不兼容。
+> 在 tokio runtime 上执行 async-std 的 I/O 操作（如 `async_std::fs::read`）会导致 panic 或死锁，因为 I/O 事件注册到了错误的 reactor。
+> 解决方案：
+>
+> 1) 统一使用一个运行时；
+> 2) 使用 `async-compat` crate 适配；
+> 3) 仅混用计算型 future（无 I/O）。
+> 这与 Go 的单一运行时（goroutine + netpoller）不同——Rust 的异步生态允许多个运行时竞争，但要求开发者明确选择。
+> [来源: [Tokio Documentation](https://docs.rs/tokio/)] ·
+> [来源: [async-std Documentation](https://docs.rs/async-std/)]
 
 ### 10.2 边界测试：配置结构的反序列化生命周期（编译错误）
 
@@ -550,7 +549,13 @@ fn main() {
 }
 ```
 
-> **修正**: `serde::Deserialize` 为带有生命周期参数的 struct 生成反序列化实现时，要求生命周期与反序列化器的数据源绑定。但 `serde_json::from_str` 返回的 `Config` 必须拥有独立生命周期——它无法持有对输入字符串的引用（因为输入字符串可能在函数返回后被释放）。正确做法是使用 `String` 而非 `&str`，让 `Config` 拥有数据。这与 Go 的 `json.Unmarshal`（总是复制到目标结构）或 Python 的 `json.loads`（无生命周期概念）不同——Rust 的生命周期系统强制区分"拥有"和"借用"，在反序列化场景中通常要求"拥有"。[来源: [Serde Documentation](https://serde.rs/)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+> **修正**: `serde::Deserialize` 为带有生命周期参数的 struct 生成反序列化实现时，要求生命周期与反序列化器的数据源绑定。
+> 但 `serde_json::from_str` 返回的 `Config` 必须拥有独立生命周期——它无法持有对输入字符串的引用（因为输入字符串可能在函数返回后被释放）。
+> 正确做法是使用 `String` 而非 `&str`，让 `Config` 拥有数据。
+> 这与 Go 的 `json.Unmarshal`（总是复制到目标结构）或 Python 的 `json.loads`（无生命周期概念）不同
+> ——Rust 的生命周期系统强制区分"拥有"和"借用"，在反序列化场景中通常要求"拥有"。
+> [来源: [Serde Documentation](https://serde.rs/)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ### 10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）
 
