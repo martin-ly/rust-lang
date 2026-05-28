@@ -145,7 +145,7 @@ nix build
 nix develop
 ```
 
-更多详情参见 [NIX_SETUP.md](./NIX_SETUP.md)
+更多详情参见 [01_nix_setup.md](./01_nix_setup.md)
 
 ## 环境配置
 >

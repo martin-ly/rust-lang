@@ -681,3 +681,6 @@ fn main() {
 > 这与 Python 的 `from module import *`（导入所有公共名称）或 Java 的 `import`（无重导出概念）不同——Rust 的 `use` 是别名声明，可控制可见性。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html)] ·
 > [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
