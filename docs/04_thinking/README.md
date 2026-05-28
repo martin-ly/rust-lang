@@ -1,7 +1,6 @@
 # 思维表征
 
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -14,7 +13,7 @@
 ---
 
 ## 快速开始示例
->
+
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -46,7 +45,7 @@ fn verify_memory_safety() -> bool {
 ---
 
 ## 文档列表
->
+
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 用途 |
@@ -61,7 +60,7 @@ fn verify_memory_safety() -> bool {
 ---
 
 ## 使用场景
->
+
 > **[来源: Rust Official Docs]**
 
 ### 何时使用这些文档
@@ -162,17 +161,10 @@ fn verify_memory_safety() -> bool {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**

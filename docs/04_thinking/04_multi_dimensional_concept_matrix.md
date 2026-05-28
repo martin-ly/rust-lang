@@ -1,7 +1,6 @@
 # 多维概念矩阵对比文档
 
 > **Bloom 层级**: L4-L5 (分析/评价)
-
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -15,7 +14,6 @@
 >
 - [多维概念矩阵对比文档](#多维概念矩阵对比文档)
   - [📑 目录](#-目录)
-  - [📋 目录 {#-目录}](#-目录--目录)
   - [🎯 文档概述 {#-文档概述}](#-文档概述--文档概述)
   - [📊 核心概念矩阵 {#-核心概念矩阵}](#-核心概念矩阵--核心概念矩阵)
     - [1. 所有权机制对比矩阵](#1-所有权机制对比矩阵)
@@ -57,65 +55,8 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
-
-## 📋 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [多维概念矩阵对比文档](#多维概念矩阵对比文档)
-  - [📑 目录](#-目录)
-  - [📋 目录 {#-目录}](#-目录--目录)
-  - [🎯 文档概述 {#-文档概述}](#-文档概述--文档概述)
-  - [📊 核心概念矩阵 {#-核心概念矩阵}](#-核心概念矩阵--核心概念矩阵)
-    - [1. 所有权机制对比矩阵](#1-所有权机制对比矩阵)
-    - [2. 类型系统特性对比矩阵](#2-类型系统特性对比矩阵)
-    - [3. 并发模型对比矩阵](#3-并发模型对比矩阵)
-    - [4. 同步原语对比矩阵](#4-同步原语对比矩阵)
-    - [5. 异步运行时对比矩阵](#5-异步运行时对比矩阵)
-    - [6. 算法复杂度对比矩阵](#6-算法复杂度对比矩阵)
-    - [7. 设计模式对比矩阵](#7-设计模式对比矩阵)
-    - [8. 网络协议对比矩阵](#8-网络协议对比矩阵)
-  - [🔍 技术选型矩阵 {#-技术选型矩阵}](#-技术选型矩阵--技术选型矩阵)
-    - [1. 内存管理选型矩阵](#1-内存管理选型矩阵)
-    - [2. 并发方案选型矩阵](#2-并发方案选型矩阵)
-    - [3. 错误处理选型矩阵](#3-错误处理选型矩阵)
-    - [4. 序列化方案选型矩阵](#4-序列化方案选型矩阵)
-    - [5. 错误处理对比矩阵（扩展）](#5-错误处理对比矩阵扩展)
-    - [6. 测试选型矩阵](#6-测试选型矩阵)
-    - [7. 序列化格式对比矩阵（扩展）](#7-序列化格式对比矩阵扩展)
-  - [⚡ 性能对比矩阵 {#-性能对比矩阵}](#-性能对比矩阵--性能对比矩阵)
-    - [1. 数据结构性能矩阵](#1-数据结构性能矩阵)
-    - [2. 算法性能矩阵](#2-算法性能矩阵)
-    - [3. 并发原语性能矩阵](#3-并发原语性能矩阵)
-  - [⚠️ Rust 1.93 行为变更影响（性能矩阵补充） {#️-rust-193-行为变更影响性能矩阵补充}](#️-rust-193-行为变更影响性能矩阵补充-️-rust-193-行为变更影响性能矩阵补充)
-  - [📐 形式化理论概念对比矩阵 {#-形式化理论概念对比矩阵}](#-形式化理论概念对比矩阵--形式化理论概念对比矩阵)
-    - [表达能力边界矩阵（新增）](#表达能力边界矩阵新增)
-    - [型变概念对比矩阵](#型变概念对比矩阵)
-    - [证明方法决策矩阵](#证明方法决策矩阵)
-    - [设计机制论证矩阵（新增）](#设计机制论证矩阵新增)
-    - [执行模型边界矩阵（扩展）](#执行模型边界矩阵扩展)
-    - [设计模式边界矩阵（扩展）](#设计模式边界矩阵扩展)
-    - [公理-定理依赖矩阵](#公理-定理依赖矩阵)
-  - [🛡️ 安全性对比矩阵 {#️-安全性对比矩阵}](#️-安全性对比矩阵-️-安全性对比矩阵)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [Rust 1.95+ 思维表征更新](#rust-195-思维表征更新)
-    - [新增思维表征](#新增思维表征)
-    - [示例](#示例)
-  - [Rust 1.95+ 持续更新更新](#rust-195-持续更新更新)
-    - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
-
----
 
 ## 🎯 文档概述 {#-文档概述}
 >
@@ -598,10 +539,6 @@ ust
 
 ---
 
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)
----
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
@@ -641,120 +578,3 @@ ust
 > **[来源: Rustonomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
