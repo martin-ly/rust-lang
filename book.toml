@@ -22,8 +22,11 @@ use-boolean-and = true
 # [preprocessor.toc]
 # command = "mdbook-toc"
 # marker = "<!-- toc -->"
-# NOTE: mdbook-toc v0.15.4 fails with "Unable to parse the input" on some
-# concept/ markdown files. Disabled until upstream fix. No files use <!-- toc -->.
+# NOTE: mdbook-toc v0.15.4 is INCOMPATIBLE with mdbook v0.4.52.
+# It fails with "Unable to parse the input" even on minimal books
+# (single file, no toc markers). Upstream regression; tracked at
+# https://github.com/badboy/mdbook-toc/issues. Disabled until fix.
+# No files in this project use <!-- toc --> markers.
 
 [output.html.fold]
 enable = true
