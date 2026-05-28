@@ -23,7 +23,6 @@
 > [ahash crate](https://docs.rs/ahash/latest/ahash/)
 
 ## 📑 目录
->
 
 - [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](#高级集合类型btreemapvecdequebinaryheap-与自定义-hasher-深度分析)
   - [📑 目录](#-目录)
@@ -61,10 +60,8 @@
 ---
 
 ## 一、权威定义与核心概念
->
 
 ### 1.1 BTreeMap/BTreeSet：有序关联容器
->
 
 > **[Wikipedia: B-tree]** A B-tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
 > **来源**: <https://en.wikipedia.org/wiki/B-tree>
@@ -99,7 +96,6 @@ BTreeMap 核心特征:
 ---
 
 ### 1.2 VecDeque：循环缓冲双端队列
->
 
 > **[std::collections::VecDeque]** A double-ended queue implemented with a growable ring buffer.
 > **来源**: <https://doc.rust-lang.org/std/collections/struct.VecDeque.html>
@@ -134,7 +130,6 @@ VecDeque 核心特征:
 ---
 
 ### 1.3 BinaryHeap：二叉堆优先队列
->
 
 > **[Wikipedia: Binary Heap]** A binary heap is a heap data structure that takes the form of a binary tree. Binary heaps are a common way of implementing priority queues.
 > **来源**: <https://en.wikipedia.org/wiki/Binary_heap>
@@ -170,7 +165,6 @@ BinaryHeap 核心特征:
 ---
 
 ### 1.4 HashMap 自定义 Hasher
->
 
 > **[std::hash::BuildHasher]** A trait for creating instances of Hasher. A BuildHasher is typically used as a factory for creating multiple instances of Hasher for a specific hash algorithm.
 > **来源**: <https://doc.rust-lang.org/std/hash/trait.BuildHasher.html>
@@ -221,7 +215,6 @@ Rust HashMap 的 Hasher 生态:
 ## 二、内存布局与性能特征
 
 ### 2.1 BTreeMap 节点布局
->
 
 ```text
 BTreeMap 节点结构（B=6，即 6-11 键/节点）:
@@ -256,7 +249,6 @@ BTreeMap 节点结构（B=6，即 6-11 键/节点）:
 ---
 
 ### 2.2 VecDeque 环形缓冲区布局
->
 
 ```text
 VecDeque<T> 内存布局:
@@ -297,7 +289,6 @@ VecDeque<T> 内存布局:
 ---
 
 ### 2.3 BinaryHeap 数组表示
->
 
 ```text
 BinaryHeap<T> 数组表示（最大堆）:
@@ -331,7 +322,6 @@ BinaryHeap<T> 数组表示（最大堆）:
 ---
 
 ### 2.4 自定义 Hasher 的性能影响
->
 
 ```text
 Hasher 性能基准对比（64-bit key，单线程）:
@@ -360,7 +350,6 @@ Hasher 性能基准对比（64-bit key，单线程）:
 ---
 
 ## 三、选型决策矩阵
->
 
 ```text
 集合选型决策矩阵:

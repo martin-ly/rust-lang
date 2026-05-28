@@ -183,7 +183,7 @@ timeline
 | 区域 | 状态 | 关键问题 |
 |------|------|---------|
 | `docs/01_core` | 已有基础 | OWNERSHIP_BORROWING_LIFETIMES.md 已存在 |
-| `docs/02_reference` | 较新 | 版本标注 1.95.0+ |
+| `docs/02_reference` | 较新 | 版本标注 1.96.0+ |
 | `docs/03_guides` | 中 | 缺少 1.95 特性专项指南 |
 | `docs/04_research` | 中 | 形式化工程系统较完善 |
 | `knowledge/` | 72% | 02_intermediate/03_advanced 引用需修复 |
@@ -611,6 +611,6 @@ gantt
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

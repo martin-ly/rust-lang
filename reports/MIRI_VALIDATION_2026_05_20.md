@@ -3,7 +3,7 @@
 ## 执行环境
 
 - **日期**: 2026-05-20
-- **Rust 版本**: 1.95.0+
+- **Rust 版本**: 1.96.0+
 - **Miri**: 已安装 (miri-x86_64-pc-windows-msvc)
 - **MIRIFLAGS**: `-Zmiri-tree-borrows` (默认)
 

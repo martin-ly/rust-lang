@@ -102,6 +102,7 @@ assert_matches!(result, Ok(n) => {
 ```
 
 > **语义核心**: `assert_matches!(e, p => block)` 执行以下操作：
+>
 > 1. 计算表达式 `e`
 > 2. 尝试将 `e` 与模式 `p` 匹配
 > 3. 若匹配成功：执行 `block`（绑定在 block 作用域内有效）
@@ -213,6 +214,7 @@ assert_matches!(msg, Message::Coord { x, y } => {
 ```
 
 > **形式化规则**: `assert_matches!(e, p => block)` 创建**模式绑定作用域**。
+>
 > - 设 `p` 中的绑定变量集合为 `Vars(p)`
 > - 则 `Vars(p)` 的作用域仅限于 `block`
 > - 这与 `if let p = e { block }` 的作用域规则完全一致
@@ -424,53 +426,11 @@ fn main() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：assert_matches 的编译错误
 

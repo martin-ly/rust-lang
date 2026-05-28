@@ -3,7 +3,7 @@
 ## 执行环境
 
 - **日期**: 2026-05-23
-- **Rust 版本**: 1.95.0+ (nightly 1.97)
+- **Rust 版本**: 1.96.0+ (nightly 1.97)
 - **Miri**: miri-x86_64-pc-windows-msvc
 - **MIRIFLAGS**: `-Zmiri-ignore-leaks` (c08_algorithms 线程泄漏已知非 UB)
 

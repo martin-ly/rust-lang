@@ -2607,7 +2607,7 @@ graph TD
 
 *文档版本: v1.0-draft*
 *生成日期: 2026-05-08*
-*对应 Rust 版本: 1.95.0 (stable) / 1.96.0-beta.8 (最终候选) / 1.97.0 (nightly)*
+*对应 Rust 版本: 1.96.0 (stable) / 1.97.0 (beta) / 1.98.0 (nightly)*
 *项目 MSRV: 1.96.0+ (Edition 2024)*
 ---
 

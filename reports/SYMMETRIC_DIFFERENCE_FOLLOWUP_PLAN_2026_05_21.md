@@ -1,7 +1,7 @@
 # 对称差分析与后续任务计划（2026-05-21）
 
 > **生成日期**: 2026-05-21
-> **基准版本**: Rust 1.95.0+ (Edition 2024)
+> **基准版本**: Rust 1.96.0+ (Edition 2024)
 > **对应报告**: `RUST_195_EVOLUTION_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_08.md` v2.0
 
 ---

@@ -3,7 +3,7 @@
 > **定位**: 本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `02_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。
 > **原则**: 每个惯用法必须展示「非惯用写法 → 惯用写法」的等价变换，并标注效率特征与认知负荷。
 > **对齐来源**: [Rust API Guidelines] · [Rust Design Patterns] · [Rust Style Guide] · [Clippy Lints] · [TRPL 惯用章节]
-> **基准版本**: Rust 1.95.0 stable (Edition 2024)
+> **基准版本**: Rust 1.96.0 stable (Edition 2024)
 
 ---
 
@@ -1135,7 +1135,7 @@ quadrantChart
 
 > **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/idioms/) · [Rust Style Guide](https://doc.rust-lang.org/style-guide/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html) · [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
 >
-> **Rust 版本**: 1.95.0 stable (Edition 2024)
+> **Rust 版本**: 1.96.0 stable (Edition 2024)
 > **文档版本**: 1.1
 > **最后更新: 2026-05-21
 > **状态**: ✅ 惯用法谱系全景 v1.1 — 新增认知路径

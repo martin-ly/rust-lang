@@ -2,7 +2,7 @@
 
 > **扫描工具**: `cargo audit`
 > **扫描范围**: workspace 全部依赖 (848 crate dependencies)
-> **Rust 版本**: 1.95.0+
+> **Rust 版本**: 1.96.0+
 
 ---
 

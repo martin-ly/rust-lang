@@ -2,7 +2,7 @@
 
 > **创建日期**: 2025-10-30
 > **最后更新**: 2026-02-12
-> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **WASM 版本**: WASM 2.0 + WASI 0.2
 > **状态**: ✅ 100% 完成
 > **概念说明**: WebAssembly 是一种可移植、高性能的二进制指令格式，本文档提供 Rust 编译到 WASM 的完整指南，涵盖 wasm-bindgen、WASI、性能优化和实战应用。
@@ -356,6 +356,6 @@ cargo test -p c12_wasm
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

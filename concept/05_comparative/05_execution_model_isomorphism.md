@@ -4,7 +4,7 @@
 > **原则**: 不做"并发编程教程"，聚焦"Rust 的执行模型在数学上与什么同构、与什么不同构、同构的精确条件是什么"。
 > **对齐来源**: [Rust Async Book] · [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] · [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]
 > **对比语言**: Rust · Go · Erlang · C++ · Java
-> **基准版本**: Rust 1.95.0 stable (Edition 2024)
+> **基准版本**: Rust 1.96.0 stable (Edition 2024)
 
 ---
 
@@ -657,7 +657,7 @@ graph TD
 ---
 
 > **权威来源**: [Rust Async Book](https://rust-lang.github.io/async-book/) · [Tokio Tutorial](https://tokio.rs/tokio/tutorial/async) · [Hoare *Communicating Sequential Processes*](https://doi.org/10.1145/359576.359585) · [Milner *The Polyadic π-Calculus*](https://doi.org/10.1007/BFb0030902) · [Hewitt et al. *A Universal Modular ACTOR Formalism*](https://doi.org/10.1145/1624775.1624804) · [Boehm & Adve PLDI 2008](https://doi.org/10.1145/1375581.1375595) · [Blumofe & Leiserson *Work Stealing*](https://doi.org/10.1145/324133.324234) · [SPAA 2024 Rust Parallelism](https://www.eecg.utoronto.ca/~mcj/talks/2024.rpb.slides.spaa.pdf)
-> **Rust 版本**: 1.95.0 stable (Edition 2024)
+> **Rust 版本**: 1.96.0 stable (Edition 2024)
 > **文档版本**: 1.0
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 执行模型同构性矩阵 v1.0

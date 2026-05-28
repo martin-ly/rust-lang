@@ -12,8 +12,6 @@
 > **来源**: [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html) · [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) · [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) · [std::cell::RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html) · [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)
 
 ## 📑 目录
->
->
 
 - [智能指针：堆内存管理与共享语义](#智能指针堆内存管理与共享语义)
   - [📑 目录](#-目录)

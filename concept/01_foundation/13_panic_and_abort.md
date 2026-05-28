@@ -16,8 +16,6 @@
 > [Wikipedia — Crash-only Software](https://en.wikipedia.org/wiki/Crash-only_software)
 
 ## 📑 目录
->
->
 
 - [Panic 与 Abort：不可恢复错误的处理机制](#panic-与-abort不可恢复错误的处理机制)
   - [📑 目录](#-目录)
@@ -51,11 +49,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 Panic 的语义
->
 
 ```text
 Panic 的定义:
@@ -93,7 +88,6 @@ Panic 的定义:
 ---
 
 ### 1.2 Panic vs Result
->
 
 ```text
 何时 Panic，何时 Result?
@@ -137,7 +131,6 @@ Panic 的定义:
 ---
 
 ### 1.3 Panic 传播与栈展开
->
 
 ```text
 Panic 传播机制:
@@ -188,7 +181,6 @@ Panic 传播机制:
 ## 二、技术细节
 
 ### 2.1 自定义 Panic 处理
->
 
 ```rust
 // 自定义 panic 行为

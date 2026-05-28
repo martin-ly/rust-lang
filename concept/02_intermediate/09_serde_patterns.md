@@ -43,6 +43,7 @@
     - [10.4 边界测试：枚举的 `untagged` 反序列化歧义（运行时错误）](#104-边界测试枚举的-untagged-反序列化歧义运行时错误)
     - [10.5 边界测试：`serde` 的 `skip_serializing_if` 与 `Option` 的交互（逻辑错误）](#105-边界测试serde-的-skip_serializing_if-与-option-的交互逻辑错误)
     - [10.3 边界测试：serde 的私有字段与反序列化失败（运行时错误）](#103-边界测试serde-的私有字段与反序列化失败运行时错误)
+    - [10.4 边界测试：`serde` 的枚举标签与外部标签冲突（运行时反序列化失败）](#104-边界测试serde-的枚举标签与外部标签冲突运行时反序列化失败)
 
 ---
 
@@ -523,74 +524,11 @@ graph TD
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：Serde 模式的编译错误
 
@@ -767,7 +705,7 @@ fn main() {
     let json = r#"{"type": "Text", "content": "hello"}"#;
     let msg: Message = serde_json::from_str(json).unwrap();
     println!("{:?}", msg);
-    
+
     // ❌ 运行时失败: 若 JSON 缺少 "type" 字段或类型名拼写错误
     let bad_json = r#"{"content": "hello"}"#;
     // let msg: Message = serde_json::from_str(bad_json).unwrap();

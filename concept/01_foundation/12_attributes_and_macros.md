@@ -16,8 +16,6 @@
 > [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro)
 
 ## 📑 目录
->
->
 
 - [属性与声明宏：编译期元编程基础](#属性与声明宏编译期元编程基础)
   - [📑 目录](#-目录)
@@ -48,11 +46,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 属性系统全景
->
 
 ```text
 Rust 属性分类:

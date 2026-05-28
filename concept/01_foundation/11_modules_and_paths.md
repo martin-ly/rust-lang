@@ -637,7 +637,19 @@ pub use crate::a::A;
 // ❌ 编译错误: foo.rs 和 foo/mod.rs 同时存在时，编译器无法确定模块入口
 ```
 
-> **修正**: Rust 2018 Edition 后，模块的**文件系统映射**规则：1) `mod foo;` → 查找 `foo.rs` 或 `foo/mod.rs`（不能同时存在）；2) `mod foo { ... }` → 内联模块定义；3) `mod bar;` 在 `foo/mod.rs` 中 → 查找 `foo/bar.rs`。2015 Edition 的差异：`mod foo;` 查找 `foo.rs` 或 `foo/mod.rs`，但 `foo.rs` 优先级更高。常见错误：1) 同时存在 `foo.rs` 和 `foo/mod.rs` → 编译错误；2) `mod foo;` 在 `foo.rs` 中引用自己 → 循环模块；3) `pub(crate) mod foo;` 在错误位置 → 可见性不符合预期。这与 Python 的 `__init__.py`（目录即包）或 Java 的包结构（目录映射到包名）类似——Rust 的模块系统显式声明依赖关系，文件系统是模块声明的反射。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)] · [来源: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)]
+> **修正**: Rust 2018 Edition 后，模块的**文件系统映射**规则：
+>
+> 1) `mod foo;` → 查找 `foo.rs` 或 `foo/mod.rs`（不能同时存在）；
+> 2) `mod foo { ... }` → 内联模块定义；
+> 3) `mod bar;` 在 `foo/mod.rs` 中 → 查找 `foo/bar.rs`。
+> 2015 Edition 的差异：`mod foo;` 查找 `foo.rs` 或 `foo/mod.rs`，但 `foo.rs` 优先级更高。
+> 常见错误：
+> 4) 同时存在 `foo.rs` 和 `foo/mod.rs` → 编译错误；
+> 5) `mod foo;` 在 `foo.rs` 中引用自己 → 循环模块；
+> 6) `pub(crate) mod foo;` 在错误位置 → 可见性不符合预期。
+> 这与 Python 的 `__init__.py`（目录即包）或 Java 的包结构（目录映射到包名）类似——Rust 的模块系统显式声明依赖关系，文件系统是模块声明的反射。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)] ·
+> [来源: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)]
 
 ### 10.6 边界测试：`use` 语句的可见性与 `pub use` 重导出（编译错误）
 
@@ -658,4 +670,14 @@ fn main() {
 }
 ```
 
-> **修正**: `pub use` 是**重导出**（re-export）：将其他模块的项在当前模块的公共接口中暴露。重导出的项必须本身是 `pub` 的（或在与当前模块相同的可见性范围内）。`pub use` 的常见用途：1) 扁平化模块结构（`pub use self::inner::Item`）；2) 创建 facade 模式（crate 根重导出所有公共 API）；3) 版本兼容（旧路径重定向到新路径）。`pub(crate) use`、`pub(super) use` 限制重导出的可见性。这与 Python 的 `from module import *`（导入所有公共名称）或 Java 的 `import`（无重导出概念）不同——Rust 的 `use` 是别名声明，可控制可见性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html)] · [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]
+> **修正**: `pub use` 是**重导出**（re-export）：将其他模块的项在当前模块的公共接口中暴露。
+> 重导出的项必须本身是 `pub` 的（或在与当前模块相同的可见性范围内）。
+> `pub use` 的常见用途：
+>
+> 1) 扁平化模块结构（`pub use self::inner::Item`）；
+> 2) 创建 facade 模式（crate 根重导出所有公共 API）；
+> 3) 版本兼容（旧路径重定向到新路径）。
+> `pub(crate) use`、`pub(super) use` 限制重导出的可见性。
+> 这与 Python 的 `from module import *`（导入所有公共名称）或 Java 的 `import`（无重导出概念）不同——Rust 的 `use` 是别名声明，可控制可见性。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html)] ·
+> [来源: [Rust Reference — Use Declarations](https://doc.rust-lang.org/reference/items/use-declarations.html)]

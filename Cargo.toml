@@ -30,7 +30,7 @@ exclude = [
 
 [workspace.package]
 edition = "2024"
-rust-version = "1.95.0"
+rust-version = "1.96.0"
 
 [profile.release]
 
@@ -172,8 +172,8 @@ codegen-units = 1024
 panic = "abort"
 
 # 工作区级别的依赖版本统一
-# 2026-04-24: Rust 1.95.0/1.97.0-nightly 同步更新
-# rust-version: 1.95.0
+# 2026-05-28: Rust 1.96.0 stable / 1.98.0-nightly 同步更新
+# rust-version: 1.96.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 本地 crate

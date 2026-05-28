@@ -16,8 +16,6 @@
 > [Wikipedia — Closure (computer programming)](https://en.wikipedia.org/wiki/Closure_(computer_programming))
 
 ## 📑 目录
->
->
 
 - [闭包基础：捕获环境与匿名函数](#闭包基础捕获环境与匿名函数)
   - [📑 目录](#-目录)
@@ -48,11 +46,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 闭包的语法与捕获
->
 
 ```rust
 // 闭包的基本语法
@@ -92,7 +87,6 @@ let process = |x: i32| -> i32 {
 ---
 
 ### 1.2 Fn / FnMut / FnOnce
->
 
 ```rust
 // 三种闭包 trait
@@ -192,7 +186,6 @@ println!("{}", x);  // ✅ i32 是 Copy
 ## 二、技术细节
 
 ### 2.1 闭包作为函数参数
->
 
 ```rust
 // 高阶函数：接受闭包作为参数
@@ -545,7 +538,8 @@ fn make_closure_fixed() -> impl Fn() -> i32 {
 }
 ```
 
-> **修正**: 默认闭包以引用捕获环境变量。若闭包的生命周期超过被捕获变量的生命周期（如返回闭包），必须使用 `move` 关键字转移所有权。`move` 闭包将环境变量复制/移动到闭包自身中，脱离原作用域。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: 默认闭包以引用捕获环境变量。若闭包的生命周期超过被捕获变量的生命周期（如返回闭包），必须使用 `move` 关键字转移所有权。
+> `move` 闭包将环境变量复制/移动到闭包自身中，脱离原作用域。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：`Fn` vs `FnMut` vs `FnOnce` 不匹配（编译错误）
 
@@ -576,7 +570,10 @@ where
 }
 ```
 
-> **修正**: 闭包根据捕获方式分为三类：`Fn`（共享借用）、`FnMut`（可变借用）、`FnOnce`（所有权消耗）。接受闭包的函数必须声明正确的 trait bound。若闭包消耗捕获变量（如 `drop`），则只能实现 `FnOnce`，不能传递给要求 `Fn` 或 `FnMut` 的函数。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: 闭包根据捕获方式分为三类：`Fn`（共享借用）、`FnMut`（可变借用）、`FnOnce`（所有权消耗）。
+> 接受闭包的函数必须声明正确的 trait bound。
+> 若闭包消耗捕获变量（如 `drop`），则只能实现 `FnOnce`，不能传递给要求 `Fn` 或 `FnMut` 的函数。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`move` 闭包与 `Copy` 类型的交互（编译错误/逻辑错误）
 
@@ -599,7 +596,17 @@ fn main() {
 }
 ```
 
-> **修正**: `move` 关键字强制闭包**按值捕获**所有环境变量。对 `Copy` 类型（`i32`、`bool`、`&T`），按值捕获即复制，原变量仍可用。对非 `Copy` 类型（`String`、`Vec<T>`），按值捕获即移动，原变量失效。这是 Rust 所有权系统的统一规则，但初学者常困惑：`move` 不总是"移动"，而是"按值捕获"。`move` 的使用场景：1) 闭包返回或发送到其他线程（需要 `'static`）；2) 闭包的生命周期长于被捕获的引用；3) 明确表达"闭包拥有数据"的意图。这与 C++ 的 lambda capture `[=]`（按值复制，即使是非可复制类型也调用拷贝构造）或 JavaScript 的闭包（总是引用捕获，无所有权概念）不同——Rust 的 `move` 与 `Copy` trait 交互，产生微妙但一致的行为。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html)]
+> **修正**: `move` 关键字强制闭包**按值捕获**所有环境变量。对 `Copy` 类型（`i32`、`bool`、`&T`），按值捕获即复制，原变量仍可用。
+> 对非 `Copy` 类型（`String`、`Vec<T>`），按值捕获即移动，原变量失效。
+> 这是 Rust 所有权系统的统一规则，但初学者常困惑：`move` 不总是"移动"，而是"按值捕获"。
+> `move` 的使用场景：
+>
+> 1) 闭包返回或发送到其他线程（需要 `'static`）；
+> 2) 闭包的生命周期长于被捕获的引用；
+> 3) 明确表达"闭包拥有数据"的意图。
+> 这与 C++ 的 lambda capture `[=]`（按值复制，即使是非可复制类型也调用拷贝构造）或 JavaScript 的闭包（总是引用捕获，无所有权概念）不同——Rust 的 `move` 与 `Copy` trait 交互，产生微妙但一致的行为。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
+> [来源: [Rust Reference — Closure Expressions](https://doc.rust-lang.org/reference/expressions/closure-expr.html)]
 
 ### 10.4 边界测试：闭包类型与 `impl Trait` 返回（编译错误）
 
@@ -621,7 +628,14 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 中每个闭包表达式有**唯一的匿名类型**，即使捕获环境和签名完全相同。`impl Fn(i32) -> i32` 在返回类型中隐藏具体类型，但在变量类型中不可用（`let x: impl Trait` 非法）。若需存储多个相同签名的闭包，使用 `Box<dyn Fn(i32) -> i32>`（动态分发）或函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）。闭包的匿名类型使编译器能内联调用（零成本），但限制了类型层面的操作（不能 `==` 比较类型、不能模式匹配）。这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 提供类型擦除）或 Java 的 lambda（编译为 `invokedynamic`，运行时生成类）不同——Rust 的闭包类型在编译期完全确定，无运行时生成。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+> **修正**: Rust 中每个闭包表达式有**唯一的匿名类型**，即使捕获环境和签名完全相同。
+> `impl Fn(i32) -> i32` 在返回类型中隐藏具体类型，但在变量类型中不可用（`let x: impl Trait` 非法）。
+> 若需存储多个相同签名的闭包，使用 `Box<dyn Fn(i32) -> i32>`（动态分发）或函数指针 `fn(i32) -> i32`（仅适用于无捕获闭包）。
+> 闭包的匿名类型使编译器能内联调用（零成本），但限制了类型层面的操作（不能 `==` 比较类型、不能模式匹配）。
+> 这与 C++ 的 lambda（每个 lambda 有唯一类型，但 `std::function` 提供类型擦除）或 Java 的 lambda（编译为 `invokedynamic`，运行时生成类）不同
+> ——Rust 的闭包类型在编译期完全确定，无运行时生成。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
+> [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ### 10.5 边界测试：闭包捕获模式与 `move` 关键字的语义（编译错误）
 
@@ -636,7 +650,21 @@ fn main() {
 }
 ```
 
-> **修正**: 闭包的**捕获模式**由编译器根据使用方式自动推断：1) 只读使用 → `&T`（`Fn`）；2) 修改使用 → `&mut T`（`FnMut`）；3) 移动/消耗使用 → `T`（`FnOnce`）。`move ||` 强制**按值捕获**所有变量（move 语义），用于延长闭包生命周期（如返回闭包或跨线程传递）。常见陷阱：1) 闭包捕获 `&s` 后，原变量 `s` 被借用，不能移动；2) `move ||` 闭包尝试多次调用（若捕获变量未实现 `Copy`）；3) 闭包返回后，捕获变量在闭包内 drop。修复：使用 `move ||` 强制转移所有权，或在闭包使用后立即 drop 闭包释放借用。这与 C++ 的 lambda 捕获列表（`[&]`、`[=]` 显式指定）或 Java 的匿名类（隐式 final 变量捕获）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对变量可用性的影响。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+> **修正**: 闭包的**捕获模式**由编译器根据使用方式自动推断：
+>
+> 1) 只读使用 → `&T`（`Fn`）；
+> 2) 修改使用 → `&mut T`（`FnMut`）；
+> 3) 移动/消耗使用 → `T`（`FnOnce`）。
+> `move ||` 强制**按值捕获**所有变量（move 语义），用于延长闭包生命周期（如返回闭包或跨线程传递）。
+> 常见陷阱：
+> 4) 闭包捕获 `&s` 后，原变量 `s` 被借用，不能移动；
+> 5) `move ||` 闭包尝试多次调用（若捕获变量未实现 `Copy`）；
+> 6) 闭包返回后，捕获变量在闭包内 drop。
+> 修复：使用 `move ||` 强制转移所有权，或在闭包使用后立即 drop 闭包释放借用。
+> 这与 C++ 的 lambda 捕获列表（`[&]`、`[=]` 显式指定）或 Java 的匿名类（隐式 final 变量捕获）不同
+> ——Rust 的闭包推断是自动的，但开发者需理解捕获模式对变量可用性的影响。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
+> [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ### 10.6 边界测试：闭包 trait 的自动推导与显式约束（编译错误）
 

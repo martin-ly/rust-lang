@@ -3,7 +3,7 @@
 > **定位**: Rust 函数在主流 Serverless 平台的部署与优化
 > **适用**: AWS Lambda、Azure Functions、Cloudflare Workers
 > **工具链**: cargo-lambda, azure-functions-rs, worker
-> **Rust 版本**: 1.95.0+
+> **Rust 版本**: 1.96.0+
 
 ---
 
@@ -391,6 +391,6 @@ twiggy top -n 10 pkg/worker_bg.wasm
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

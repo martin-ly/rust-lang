@@ -1,4 +1,5 @@
 # DSL 与嵌入 式设计：Rust 中的领域特定语言
+>
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rust-lang.github.io/rustc-dev-guide/grammar.html)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。
 > **前置概念**: [Macros](../03_advanced/04_macros.md) · [Proc Macro](../03_advanced/07_proc_macro.md) · [Trait](./01_traits.md)
@@ -9,33 +10,32 @@
 > **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [nom Parser Combinators](https://docs.rs/nom/latest/nom/) · [serde DSL Design](https://serde.rs/) · [Rust API Guidelines — DSLs](https://rust-lang.github.io/api-guidelines/predictability.html) · [Wikipedia — Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
 ## 📑 目录
->
->
 
- [DSL \ 与嵌入 \式设计：Rust 中的领域特定语言](#dsl)
+- [DSL 与嵌入 式设计：Rust 中的领域特定语言](#dsl-与嵌入-式设计rust-中的领域特定语言)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-  - [1.1 内嵌 DSL vs 外部 DSL](#11-内嵌-dsl-vs-外部-dsl)
-  - [1.2 宏驱动的内嵌 DSL](#12-宏驱动的内嵌-dsl)
-  - [1.3 Builder 模式作为 DSL](#13-builder-模式作为-dsl)
+    - [1.1 内嵌 DSL vs 外部 DSL](#11-内嵌-dsl-vs-外部-dsl)
+    - [1.2 宏驱动的内嵌 DSL](#12-宏驱动的内嵌-dsl)
+    - [1.3 Builder 模式作为 DSL](#13-builder-模式作为-dsl)
   - [二、技术细节](#二技术细节)
-  - [2.1 Parser Combinators](#21-parser-combinators)
-  - [2.2 类型安全的 DSL](#22-类型安全的-dsl)
-  - [2.3 编译期验证的 DSL](#23-编译期验证的-dsl)
+    - [2.1 Parser Combinators](#21-parser-combinators)
+    - [2.2 类型安全的 DSL](#22-类型安全的-dsl)
+    - [2.3 编译期验证的 DSL](#23-编译期验证的-dsl)
   - [三、设计模式矩阵](#三设计模式矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
-  - [4.1 反命题树](#41-反命题树)
-  - [4.2 边界极限](#42-边界极限)
+    - [4.1 反命题树](#41-反命题树)
+    - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：DSL 与嵌入的编译错误](#十边界测试dsl-与嵌入的编译错误)
-  - [10.1 边界测试：构建器模式的链式调用与所有权（编译错误）](#101-边界测试构建器模式的链式调用与所有权编译错误)
-  - [10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）](#102-边界测试状态机-dsl-的非法状态转换编译错误)
-  - [10.3 边界测试：宏递归深度限制（编译错误）](#103-边界测试宏递归深度限制编译错误)
-  - [10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）](#104-边界测试dsl-的类型安全与运行时错误运行时-panic)
-  - [10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）](#103-边界测试dsl-宏的优先级与歧义解析编译错误)
+    - [10.1 边界测试：构建器模式的链式调用与所有权（编译错误）](#101-边界测试构建器模式的链式调用与所有权编译错误)
+    - [10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）](#102-边界测试状态机-dsl-的非法状态转换编译错误)
+    - [10.3 边界测试：宏递归深度限制（编译错误）](#103-边界测试宏递归深度限制编译错误)
+    - [10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）](#104-边界测试dsl-的类型安全与运行时错误运行时-panic)
+    - [10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）](#103-边界测试dsl-宏的优先级与歧义解析编译错误)
+    - [10.4 边界测试：DSL 宏的优先级与运算符结合性（编译错误）](#104-边界测试dsl-宏的优先级与运算符结合性编译错误)
 
 ---
 
@@ -499,68 +499,11 @@ graph TD
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：DSL 与嵌入的编译错误
 
@@ -714,7 +657,7 @@ fn main() {
     // ❌ 编译错误: 宏规则顺序影响匹配
     // sql!(SELECT * FROM users WHERE id = 1)
     // 若第一个规则优先匹配，WHERE 部分被忽略或错误解析
-    
+
     let query = sql!(SELECT * FROM users);
     println!("{}", query);
 }

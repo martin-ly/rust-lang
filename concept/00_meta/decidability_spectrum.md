@@ -3,7 +3,7 @@
 > **定位**: 本文件从**纵向判定链路**梳理 Rust 编译器在全编译流程中的可判定性问题，与 `semantic_expressiveness.md` 的横向七维光谱形成正交互补。
 > **原则**: 不做"编译器实现手册"，聚焦"什么问题 Rust 编译器能在编译期判定、什么不能、不能时的补偿机制是什么"。
 > **对齐来源**: [Rust Reference] · [Rust RFCs] · [RustBelt/Oxide] · [POPL 类型论文] · [计算理论]
-> **基准版本**: Rust 1.95.0 stable (Edition 2024)
+> **基准版本**: Rust 1.96.0 stable (Edition 2024)
 
 ---
 
@@ -657,7 +657,7 @@ graph TD
 
 ### 10.2 Rust 特性可判定性状态 1.95+
 
-下表更新至 Rust 1.95.0 stable，评估新引入或稳定的语言特性对类型系统可判定性的影响：
+下表更新至 Rust 1.96.0 stable，评估新引入或稳定的语言特性对类型系统可判定性的影响：
 
 | 特性 | 稳定版本 | 可判定性状态 | 论证 |
 |:---|:---:|:---:|:---|
@@ -744,7 +744,7 @@ Rust 社区正在逐步探索 effects 系统（如 `const`、`async`、`unsafe` 
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [RFC 1560](https://rust-lang.github.io/rfcs/1560-name-resolution.html) · [RFC 1665](https://rust-lang.github.io/rfcs/1665-where-clause-reasoning.html) · [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) · [RFC 911](https://rust-lang.github.io/rfcs/0911-const-fn.html) · [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf) · [Oxide arXiv 2019](https://arxiv.org/abs/1903.00982) · [Pierce *TAPL*](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Sipser *ITOC*](https://math.mit.edu/~sipser/book.html)
 >
-> **Rust 版本**: 1.95.0 stable (Edition 2024)
+> **Rust 版本**: 1.96.0 stable (Edition 2024)
 > **文档版本**: 1.0
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 可判定性谱系全景 v1.0

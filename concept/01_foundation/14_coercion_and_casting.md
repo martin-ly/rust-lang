@@ -16,8 +16,6 @@
 > [Wikipedia — Type Conversion](https://en.wikipedia.org/wiki/Type_conversion)
 
 ## 📑 目录
->
->
 
 - [类型强制与转换：显式与隐式的边界](#类型强制与转换显式与隐式的边界)
   - [📑 目录](#-目录)
@@ -50,11 +48,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 强制（Coercion）与转换（Cast）的区别
->
 
 ```text
 Rust 中的类型变换:
@@ -95,7 +90,6 @@ Rust 中的类型变换:
 ---
 
 ### 1.2 Deref 强制
->
 
 ```rust
 // Deref 强制: 最常用的 coercion
@@ -142,7 +136,6 @@ takes_mut(&mut string);  // &mut String → &mut str
 ---
 
 ### 1.3 子类型强制
->
 
 ```text
 子类型强制（Subtype Coercion）:
@@ -182,7 +175,6 @@ takes_mut(&mut string);  // &mut String → &mut str
 ## 二、技术细节
 
 ### 2.1 as 转换的完整矩阵
->
 
 ```rust
 // as 转换: 显式、可能截断
@@ -222,7 +214,6 @@ let void_ptr = fn_ptr as *const ();  // fn() → *const ()
 ---
 
 ### 2.2 From/Into 与 TryFrom/TryInto
->
 
 ```rust,ignore
 // 安全转换: From/Into
@@ -282,7 +273,6 @@ let err = NonZeroU8::try_from(0)?;  // ❌ Err
 ---
 
 ### 2.3 指针转换
->
 
 ```rust,ignore
 // 指针转换的安全与危险
@@ -537,7 +527,11 @@ fn main() {
 }
 ```
 
-> **修正**: `as` 执行截断转换（truncating cast），不检查范围。将大类型转为小类型时，高位被丢弃。如需安全检查，使用 `TryInto::try_into()`（返回 `Result`）。在 Rust 1.60+ 中，`as` 转换 `f64` → `i32` 的未定义行为已被定义为饱和截断（saturating cast），但整数间转换仍静默截断。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `as` 执行截断转换（truncating cast），不检查范围。
+> 将大类型转为小类型时，高位被丢弃。
+> 如需安全检查，使用 `TryInto::try_into()`（返回 `Result`）。
+> 在 Rust 1.60+ 中，`as` 转换 `f64` → `i32` 的未定义行为已被定义为饱和截断（saturating cast），但整数间转换仍静默截断。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 边界测试：裸指针与引用转换的生命周期丢失（编译错误 / 运行时 UB）
 
@@ -560,7 +554,9 @@ unsafe fn ptr_to_ref(ptr: *const i32) -> Option<&'static i32> {
 }
 ```
 
-> **修正**: 引用 → 裸指针是安全操作（隐式转换），但裸指针 → 引用必须在 `unsafe` 块中进行，且程序员必须保证指针有效、对齐、不悬垂。这是 Rust 安全边界的典型设计：从安全区到 unsafe 区容易，从 unsafe 区回到安全区需要显式承诺。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: 引用 → 裸指针是安全操作（隐式转换），但裸指针 → 引用必须在 `unsafe` 块中进行，且程序员必须保证指针有效、对齐、不悬垂。
+> 这是 Rust 安全边界的典型设计：从安全区到 unsafe 区容易，从 unsafe 区回到安全区需要显式承诺。
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试： trait 对象强制转换的 `Sized` 约束（编译错误）
 
@@ -577,7 +573,13 @@ fn main() {
 }
 ```
 
-> **修正**: `Box<dyn Trait>` 的构造要求具体类型 `T` 是 `Sized`，因为 `Box::new` 需要在编译期知道分配大小。对于 DST（`str`、`[T]`、`dyn Trait`），不能直接 `Box::new`，必须使用 `Box::from_raw` 或特殊构造方法。若函数需要接受可能非 `Sized` 的类型，应使用 `?Sized` bound：`fn to_trait_object<T: ?Sized + Display>(x: Box<T>) -> Box<dyn Display>`。这与 C++ 的虚函数指针（总是 `sizeof(void*)`，无需 `Sized` 概念）不同——Rust 的 DST 设计更通用，但需要显式处理大小未知类型。`Box<dyn Trait>` 本身是 DST（胖指针），但构造它需要已知大小的原始值。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)] · [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
+> **修正**: `Box<dyn Trait>` 的构造要求具体类型 `T` 是 `Sized`，因为 `Box::new` 需要在编译期知道分配大小。
+> 对于 DST（`str`、`[T]`、`dyn Trait`），不能直接 `Box::new`，必须使用 `Box::from_raw` 或特殊构造方法。
+> 若函数需要接受可能非 `Sized` 的类型，应使用 `?Sized` bound：`fn to_trait_object<T: ?Sized + Display>(x: Box<T>) -> Box<dyn Display>`。
+> 这与 C++ 的虚函数指针（总是 `sizeof(void*)`，无需 `Sized` 概念）不同——Rust 的 DST 设计更通用，但需要显式处理大小未知类型。
+> `Box<dyn Trait>` 本身是 DST（胖指针），但构造它需要已知大小的原始值。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-04-advanced-types.html)] ·
+> [来源: [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html)]
 
 ### 10.4 边界测试：`as` 关键字的转换限制（编译错误）
 
@@ -589,7 +591,12 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 `as` 关键字支持有限的原语转换：数值类型间（`i32` → `u64`、`f32` → `i32`）、指针间（`*mut T` → `*mut U`）、引用到指针（`&T` → `*const T`）。不支持：1) 任意 struct 间转换；2) `Vec<T>` → `String`；3) `&str` → `String`（需 `.to_string()`）；4)  trait 对象转换（需显式 `as` 或 `From`）。这是 Rust"显式转换"原则的体现：危险的转换（如截断、位重解释）用 `as`，安全的转换用 `From`/`Into`，任意的转换用 `mem::transmute`（unsafe）。这与 C 的 `(type)value`（任意转换）或 C++ 的 `static_cast`/`reinterpret_cast`（更细粒度但仍很强大）不同——Rust 限制隐式/便捷转换，鼓励开发者思考每次转换的语义。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust Reference — Type Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)]
+> **修正**: Rust 的 `as` 关键字支持有限的原语转换：数值类型间（`i32` → `u64`、`f32` → `i32`）、指针间（`*mut T` → `*mut U`）、引用到指针（`&T` → `*const T`）。
+> 不支持：1) 任意 struct 间转换；2) `Vec<T>` → `String`；3) `&str` → `String`（需 `.to_string()`）；4)  trait 对象转换（需显式 `as` 或 `From`）。
+> 这是 Rust"显式转换"原则的体现：危险的转换（如截断、位重解释）用 `as`，安全的转换用 `From`/`Into`，任意的转换用 `mem::transmute`（unsafe）。
+> 这与 C 的 `(type)value`（任意转换）或 C++ 的 `static_cast`/`reinterpret_cast`（更细粒度但仍很强大）不同——Rust 限制隐式/便捷转换，鼓励开发者思考每次转换的语义。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] ·
+> [来源: [Rust Reference — Type Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)]
 
 ### 10.5 边界测试：`dyn Trait` 到 `dyn Trait` 的跨 trait coercion（编译错误）
 
@@ -606,7 +613,12 @@ fn upcast(b: &dyn B) -> &dyn A {
 }
 ```
 
-> **修正**: Trait object 的**向上转型**（upcasting）：`dyn B` → `dyn A`（`B: A`）在 Rust 中长期不支持，因为 vtable 布局问题：`dyn B` 的 vtable 包含 `B` 的方法，`dyn A` 的 vtable 只包含 `A` 的方法，需要额外的 vtable 指针或调整。Rust 1.86+ 引入了 trait upcasting（不稳定特性），允许 `b as &dyn A`。旧版 workaround：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。这与 Java 的接口向上转型（自动，无开销）或 C++ 的多继承（复杂 vtable 调整）不同——Rust 的单一继承 trait + 自动 upcasting 是设计演进的方向。[来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [来源: [Trait Upcasting RFC](https://rust-lang.github.io/rfcs/3324-dyn-upcasting.html)]
+> **修正**: Trait object 的**向上转型**（upcasting）：`dyn B` → `dyn A`（`B: A`）在 Rust 中长期不支持，因为 vtable 布局问题：`dyn B` 的 vtable 包含 `B` 的方法，`dyn A` 的 vtable 只包含 `A` 的方法，需要额外的 vtable 指针或调整。
+> Rust 1.86+ 引入了 trait upcasting（不稳定特性），允许 `b as &dyn A`。
+> 旧版 workaround：1) 在 trait 中定义 `as_a(&self) -> &dyn A` 方法；2) 使用泛型而非 trait object；3) 使用 `downcast_ref`（若具体类型已知）。
+> 这与 Java 的接口向上转型（自动，无开销）或 C++ 的多继承（复杂 vtable 调整）不同——Rust 的单一继承 trait + 自动 upcasting 是设计演进的方向。
+> [来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] ·
+> [来源: [Trait Upcasting RFC](https://rust-lang.github.io/rfcs/3324-dyn-upcasting.html)]
 
 ### 10.5 边界测试：强制类型转换与 `Deref` 的自动解引用（编译错误）
 
@@ -634,7 +646,16 @@ fn main() {
 }
 ```
 
-> **修正**: `Deref` trait 提供**自动解引用**：`&Wrapper` 自动转为 `&String`（若 `Wrapper: Deref<Target = String>`），再转为 `&str`（若 `String: Deref<Target = str>`）。但 `Deref` 的限制：1) 只作用于引用（`&T`），不作用于值移动；2) 不可链式用于方法调用的 receiver（`w.len()` 调用 `String::len` 是通过自动解引用）；3) 不可用于 `let s: String = w`（需要 `DerefMove`，Rust 中不存在）。`Deref` 的设计目的：让自定义类型像智能指针一样行为（`Box<T>`、`Rc<T>`、`Arc<T>`）。这与 C++ 的隐式转换运算符（`operator T()`，可作用于值移动）或 Swift 的 `ExpressibleByStringLiteral` 不同——Rust 的 `Deref` 是受限的自动解引用，滥用会导致设计问题。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/predictability.html)]
+> **修正**: `Deref` trait 提供**自动解引用**：`&Wrapper` 自动转为 `&String`（若 `Wrapper: Deref<Target = String>`），再转为 `&str`（若 `String: Deref<Target = str>`）。
+> 但 `Deref` 的限制：
+>
+> 1) 只作用于引用（`&T`），不作用于值移动；
+> 2) 不可链式用于方法调用的 receiver（`w.len()` 调用 `String::len` 是通过自动解引用）；
+> 3) 不可用于 `let s: String = w`（需要 `DerefMove`，Rust 中不存在）。
+> `Deref` 的设计目的：让自定义类型像智能指针一样行为（`Box<T>`、`Rc<T>`、`Arc<T>`）。
+> 这与 C++ 的隐式转换运算符（`operator T()`，可作用于值移动）或 Swift 的 `ExpressibleByStringLiteral` 不同——Rust 的 `Deref` 是受限的自动解引用，滥用会导致设计问题。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-02-deref.html)] ·
+> [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/predictability.html)]
 
 ### 10.6 边界测试：函数指针到闭包的类型不兼容（编译错误）
 
@@ -659,7 +680,16 @@ fn main() {
 }
 ```
 
-> **修正**: 闭包与函数指针的类型关系：1) **无捕获闭包**（`Fn` / `FnMut` / `FnOnce` 不捕获环境）可**强制转换**为函数指针 `fn(T) -> U`；2) **捕获闭包**有编译器生成的匿名类型（如 `{closure@main.rs:10:5}`），不能转为函数指针；3) `fn` 指针大小固定（两个指针：`data` + `code` 或单个代码指针），闭包类型大小取决于捕获的变量。需要传递捕获闭包时，使用 trait object：`Box<dyn Fn(i32) -> i32>` 或 `&dyn Fn(i32) -> i32`。这与 C++ 的 lambda（无捕获时可转为函数指针，有捕获时不能）或 Java 的 lambda（总是转为函数式接口，但底层是对象）类似——Rust 的闭包类型系统精确区分捕获和无捕获。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
+> **修正**: 闭包与函数指针的类型关系：
+>
+> 1) **无捕获闭包**（`Fn` / `FnMut` / `FnOnce` 不捕获环境）可**强制转换**为函数指针 `fn(T) -> U`；
+> 2) **捕获闭包**有编译器生成的匿名类型（如 `{closure@main.rs:10:5}`），不能转为函数指针；
+> 3) `fn` 指针大小固定（两个指针：`data` + `code` 或单个代码指针），闭包类型大小取决于捕获的变量。
+> 需要传递捕获闭包时，使用 trait object：`Box<dyn Fn(i32) -> i32>` 或 `&dyn Fn(i32) -> i32`。
+> 这与 C++ 的 lambda（无捕获时可转为函数指针，有捕获时不能）或 Java 的 lambda（总是转为函数式接口，但底层是对象）类似
+> ——Rust 的闭包类型系统精确区分捕获和无捕获。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
+> [来源: [Rust Reference — Closure Types](https://doc.rust-lang.org/reference/types/closure.html)]
 
 ### 10.8 边界测试：const fn 中的非编译期操作
 
@@ -673,4 +703,8 @@ const fn foo(x: i32) -> i32 {
 fn main() {}
 ```
 
-> **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
+> **修正**: **Const fn**：
+>
+> 1) 函数体必须是编译期可计算的；
+> 2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；
+> 3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。

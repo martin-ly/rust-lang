@@ -122,7 +122,7 @@ AI 集成文件 1,385 行中，40%+ 篇幅用于工具介绍（Copilot、Codeium
 | `03_unsafe.md` §5.5 | "Stacked Borrows 是 Miri 的别名模型" | Tree Borrows 自 2024 年末起为 Miri 默认 |
 | `02_generics.md` §5.7 | `generic_const_exprs` 作为"进阶用法"大量展示 | 仍为不稳定特性，不应占如此高比例 |
 | `01_borrowing.md` §3.3 | Tree Borrows 介绍缺少与 Stacked Borrows 的具体代码差异示例 | 需补充对比代码 |
-| `07_future/05_rust_version_tracking.md` | 需核对 1.95.0+ 声称 | 权威来源显示 Reference 对应 1.90.0 |
+| `07_future/05_rust_version_tracking.md` | 需核对 1.96.0+ 声称 | 权威来源显示 Reference 对应 1.90.0 |
 
 **2. 来源标注的形式主义（🟡 中等）**
 

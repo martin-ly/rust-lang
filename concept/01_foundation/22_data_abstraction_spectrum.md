@@ -26,7 +26,6 @@
 
 ### 2.1 第一层：内存布局抽象（C struct）
 
-
 C 的 `struct` 是**最底层的数据抽象**——仅定义内存中字段的顺序和类型：
 
 ```c
@@ -46,7 +45,6 @@ struct Point {
 - 多态 = 无
 
 ### 2.2 第二层：行为封装（C++ class）
-
 
 C++ 将数据与行为绑定，引入访问控制和构造函数：
 
@@ -69,7 +67,6 @@ public:
 - 类型安全 = 编译期（但允许隐式转换和 void* 绕过）
 
 ### 2.3 第三层：接口与实现分离（Java interface + class）
-
 
 Java 将数据抽象分为两个正交维度：
 
@@ -95,7 +92,6 @@ class Circle implements Drawable {
 **关键创新**: 接口与实现的**完全分离**。一个类可实现多个接口（mixin 风格的多态）。
 
 ### 2.4 第四层：代数数据类型（Haskell/ML enum/variant）
-
 
 函数式语言将数据抽象为**代数数据类型**——通过积类型（product）和和类型（sum）的组合构造复杂数据：
 
@@ -126,7 +122,6 @@ area (Triangle a b c) = ...
 **关键创新**: **和类型（Sum Type）**——一个值可以是多种形态之一，编译器强制处理所有可能性。
 
 ### 2.5 第五层：Rust 的 enum + trait（代数类型 + 行为契约）
-
 
 Rust 将 Haskell 的代数数据类型与 Java 的接口契约融合：
 
@@ -228,7 +223,6 @@ Rust + Ownership    → 代数类型 + 行为契约 + 资源安全保证
 
 ### 3.1 开放/封闭原则的差异
 
-
 | 原则 | C++ 继承 | Rust trait |
 |:---|:---|:---|
 | **对扩展开放** | 通过继承（子类化） | 通过 impl（为已有类型实现新 trait） |
@@ -254,7 +248,6 @@ impl Colored for Point {
 ```
 
 ### 3.2 多继承与 Trait 组合
-
 
 C++ 的多继承：
 
@@ -300,7 +293,6 @@ fn process<T: Drawable + Serializable>(item: T) {
 ## 四、代数数据类型的工程价值
 
 ### 4.1 消除空指针：Option<T> 替代 nullable
-
 
 | 语言 | nullable 表示 | 安全性 |
 |:---|:---|:---:|

@@ -1,7 +1,7 @@
 # AI 辅助 Rust 编程指南 2026 版
 
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.95.0+ (MSRV) / Edition 2024
+> **Rust 版本**: 1.96.0+ (MSRV) / Edition 2024
 > **目的**: 结合 AI 工具高效学习 Rust 与构建项目
 > **相比 2025 版更新**: 新增 1.95+ 特性提示词、Async Closures、Cargo Script、多维思维表征
 
@@ -196,7 +196,7 @@ Rust 在 AI/ML 领域的生态持续演进：
 ## 6. 注意事项（2026 版更新）
 
 1. **验证输出**: AI 生成的 Rust 代码务必 `cargo build` 和 `cargo test` 验证
-2. **版本一致**: 明确指定 **Rust 1.95.0+** 和 **Edition 2024**
+2. **版本一致**: 明确指定 **Rust 1.96.0+** 和 **Edition 2024**
 3. **引用权威**: 对关键概念要求 AI 引用 The Rust Book、Reference、RFC
 4. **安全性**: AI 生成的 unsafe 代码需人工复核 SAFETY 注释
 5. **前沿特性**: 询问 nightly 特性时，要求 AI 标注 `#![feature(...)]` 和稳定性状态
@@ -222,6 +222,6 @@ Rust 在 AI/ML 领域的生态持续演进：
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
