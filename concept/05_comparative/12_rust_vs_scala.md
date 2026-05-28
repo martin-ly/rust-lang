@@ -10,8 +10,6 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Scala Documentation](https://docs.scala-lang.org/) · [Scala Book](https://docs.scala-lang.org/scala3/book/introduction.html) · [Wikipedia — Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 ## 📑 目录
->
->
 
 - [Rust vs Scala：类型系统的两种哲学](#rust-vs-scala类型系统的两种哲学)
   - [📑 目录](#-目录)
@@ -547,73 +545,9 @@ fn main() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 ## 十、边界测试：Rust 与 Scala 的编译错误对比
 

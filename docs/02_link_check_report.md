@@ -48,8 +48,8 @@
 | docs\04_rust_language_feature_comprehensive_inventory_2026.md | 05.3 1.95+ 新增特性深度梳理：Atomic\*::update / try\_update | `#053-195-新增特性深度梳理atomicupdate--try_update` | 同文件锚点不存在: #053-195-新增特性深度梳理atomicupdate--try_update |
 | docs\04_rust_language_feature_comprehensive_inventory_2026.md | 07.4 前沿缺口：eBPF + Rust (Aya) | `#074-前沿缺口ebpf--rust-aya` | 同文件锚点不存在: #074-前沿缺口ebpf--rust-aya |
 | docs\04_rust_language_feature_comprehensive_inventory_2026.md | *项目 MSRV: 1.96.0+ (Edition 2024)* | `#项目-msrv-1950-edition-2024` | 同文件锚点不存在: #项目-msrv-1950-edition-2024 |
-| docs\TERMINOLOGY_STANDARD.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\TERMINOLOGY_STANDARD.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\10_terminology_standard.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\10_terminology_standard.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\00_meta\ANNUAL_REVIEW_TEMPLATE.md | 1️⃣ 对称差分析更新 | `#1️⃣-对称差分析更新` | 同文件锚点不存在: #1️⃣-对称差分析更新 |
 | docs\00_meta\ANNUAL_REVIEW_TEMPLATE.md | 2️⃣ 国际权威来源覆盖度评估 | `#2️⃣-国际权威来源覆盖度评估` | 同文件锚点不存在: #2️⃣-国际权威来源覆盖度评估 |
 | docs\00_meta\ANNUAL_REVIEW_TEMPLATE.md | 3️⃣ 项目健康度指标 | `#3️⃣-项目健康度指标` | 同文件锚点不存在: #3️⃣-项目健康度指标 |

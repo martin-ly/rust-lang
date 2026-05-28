@@ -2749,3 +2749,27 @@ fn inspect(ring: &IoUring) {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## Null 指针有效性定义重构（Rust 1.96）
+
+Rust 1.96 对 `std::ptr::null()` 和 `NonNull` 的有效性语义进行了精确定义重构，明确区分了**已分配但未初始化**与**未分配**的指针状态：
+
+```rust
+use std::ptr::NonNull;
+
+// Rust 1.96+: NonNull::new 语义更清晰
+let ptr: Option<NonNull<i32>> = NonNull::new(std::ptr::null_mut());
+assert!(ptr.is_none());  // null 明确不被视为 valid
+
+// 已分配但未初始化的内存指针是 valid（但不可安全解引用）
+let layout = std::alloc::Layout::new::<i32>();
+let raw = unsafe { std::alloc::alloc(layout) };
+assert!(!raw.is_null());  // alloc 返回的指针保证 non-null
+```
+
+> **语义**: 此前 Rust 对 "valid pointer" 的定义在标准库文档、Reference 和 Miri 之间存在细微不一致。1.96 的统一定义明确了：
+> 1. **null 不是 valid** — 即使不进行解引用，将 null 传递给期望 valid pointer 的 API 是 UB
+> 2. **已分配但未初始化是 valid** — `NonNull::new_unchecked` 可用于 `alloc` 返回的指针
+> 3. **dangling 指针在特定条件下 valid** — 只要偏移计算不越界，dangling pointer 的算术运算仍合法
+> 
+> 这为 Miri 的严格检查、 unsafe 代码指南和形式化验证工具（如 RustBelt）提供了统一基础。[来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · [来源: [Rust Reference — Pointer Validity](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)]

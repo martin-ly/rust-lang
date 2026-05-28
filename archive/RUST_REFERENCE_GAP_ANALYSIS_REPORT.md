@@ -374,7 +374,7 @@ const_evaluation.md (新增)
 - `./research_notes/formal_methods/MACRO_SYSTEM_MINDMAP.md`:
   - 提到"标识符隔离"、"避免捕获"
 
-- `docs/TERMINOLOGY_STANDARD.md`:
+- `docs/10_terminology_standard.md`:
   - 定义"卫生宏 (Hygienic Macro)"
 
 ### Rust Reference 中的完整内容1

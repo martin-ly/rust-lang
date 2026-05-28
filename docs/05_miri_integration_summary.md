@@ -128,7 +128,7 @@ pub mod miri_tests;
 - 测试组织结构
 - 最佳实践
 
-**文件**: `docs/MIRI_INTEGRATION_SUMMARY.md` (本文档)
+**文件**: `docs/05_miri_integration_summary.md` (本文档)
 
 ## Tree Borrows vs Stacked Borrows
 >
@@ -259,7 +259,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 - `scripts/run-miri.sh`
 - `scripts/run-miri.bat`
 - `docs/MIRI_GUIDE.md`
-- `docs/MIRI_INTEGRATION_SUMMARY.md`
+- `docs/05_miri_integration_summary.md`
 - `miri_test_example.rs`
 
 ---

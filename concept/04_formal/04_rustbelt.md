@@ -1,5 +1,5 @@
 # RustBelt & Verification Toolchain（RustBelt 与验证工具链）
->
+
 > **层次定位**: L4 形式化理论 / RustBelt 子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价安全性定理的假设边界
@@ -24,9 +24,11 @@
 
 ---
 
+## 📑 目录
+
+- [RustBelt & Verification Toolchain（RustBelt 与验证工具链）](#)
+
 ## 一、权威定义（Definition）
->
->
 
 ### 1.1 Wikipedia 权威定义
 
@@ -687,6 +689,7 @@ jobs:
 ## 📑 目录
 
 - [RustBelt \& Verification Toolchain（RustBelt 与验证工具链）](#rustbelt--verification-toolchainrustbelt-与验证工具链)
+  - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
     - [1.2 RustBelt 与 Iris 核心定义](#12-rustbelt-与-iris-核心定义)
@@ -717,7 +720,7 @@ jobs:
     - [7.3 Verus：`proof fn` 与所有权推理](#73-verusproof-fn-与所有权推理)
     - [7.4 Creusot：分离逻辑契约与预言（Prophecy）](#74-creusot分离逻辑契约与预言prophecy)
     - [7.5 CI/CD 集成方案](#75-cicd-集成方案)
-  - [📑 目录](#-目录)
+  - [📑 目录](#-目录-1)
   - [八、形式化验证工具链映射](#八形式化验证工具链映射)
     - [8.1 工具链全景矩阵](#81-工具链全景矩阵)
     - [8.2 验证方法光谱图](#82-验证方法光谱图)

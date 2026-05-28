@@ -23,7 +23,7 @@
 | [2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md](./2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md) | **2026生态梳理（权威引用版）** | 所有开发者 |
 | [AUTHORITATIVE_SOURCES_AND_CITATIONS.md](./AUTHORITATIVE_SOURCES_AND_CITATIONS.md) | 学术论文引用汇总 | 研究人员 |
 | [MIGRATION_GUIDE_2026.md](./MIGRATION_GUIDE_2026.md) | 2026迁移指南 | 升级用户 |
-| [TERMINOLOGY_STANDARD.md](./TERMINOLOGY_STANDARD.md) | 术语标准 | 所有人 |
+| [10_terminology_standard.md](./10_terminology_standard.md) | 术语标准 | 所有人 |
 
 ### 学习文档
 >
@@ -100,7 +100,7 @@ docs/
 │   ├── 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md
 │   ├── AUTHORITATIVE_SOURCES_AND_CITATIONS.md
 │   ├── MIGRATION_GUIDE_2026.md
-│   ├── TERMINOLOGY_STANDARD.md
+│   ├── 10_terminology_standard.md
 │   └── README.md
 │
 ├── 01_learning/            # 学习规划

@@ -10,8 +10,6 @@
 > **来源**: [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Plotkin 1981 — A Structural Approach to Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) · [Felleisen & Flatt — Modular Semantics](https://doi.org/10.1145/263690.263803) · [Felleisen & Hieb 1992 — The Revised Report on the Syntactic Theories of Sequential Control and State](https://doi.org/10.1017/S0956796800001368) · [RustBelt Paper](https://doi.org/10.1145/3158154) · [Stacked Borrows Paper](https://doi.org/10.1145/3371106)
 
 ## 📑 目录
->
->
 
 - [操作语义：程序行为的形式化定义](#操作语义程序行为的形式化定义)
   - [📑 目录](#-目录)

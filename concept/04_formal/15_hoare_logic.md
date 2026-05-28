@@ -18,8 +18,6 @@
 > [VSTTE — Verified Software](https://www.verifythis.org/)
 
 ## 📑 目录
->
->
 
 - [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](#hoare-逻辑程序验证的形式化基础与-rust-契约)
   - [📑 目录](#-目录)

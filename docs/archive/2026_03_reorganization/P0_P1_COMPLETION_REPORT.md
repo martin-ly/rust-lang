@@ -207,7 +207,7 @@ $ cargo test --workspace
 
 ### I5: 术语标准化 ✅
 
-**文件**: `docs/TERMINOLOGY_STANDARD.md`
+**文件**: `docs/10_terminology_standard.md`
 **规模**: 26,033 bytes / 280 行
 **术语数**: 207 条
 
@@ -270,7 +270,7 @@ $ cargo test --workspace
 | 文档 | 大小 | 行数 | 用途 |
 |------|------|------|------|
 | PROJECT_STATUS.md | 2.3 KB | 65 | 统一项目状态 |
-| TERMINOLOGY_STANDARD.md | 26.0 KB | 280 | 术语标准化 |
+| 10_terminology_standard.md | 26.0 KB | 280 | 术语标准化 |
 | TOKIO_ECOSYSTEM_GUIDE.md | 41.3 KB | 1,195 | Tokio 生态 |
 | FFI_PRACTICAL_GUIDE.md | 56.5 KB | 1,840 | FFI 实战 |
 | UNSAFE_PATTERNS_GUIDE.md | 81.4 KB | 2,480 | Unsafe 模式 |

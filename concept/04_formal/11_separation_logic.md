@@ -10,8 +10,6 @@
 > **来源**: [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf) · [Iris Project](https://iris-project.org/) · [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) · [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic) · [Viper Verification Infrastructure](https://www.pm.inf.ethz.ch/research/viper.html)
 
 ## 📑 目录
->
->
 
 - [分离逻辑：Rust 所有权的形式化根基](#分离逻辑rust-所有权的形式化根基)
   - [📑 目录](#-目录)

@@ -14,8 +14,6 @@
 > [Rust vs Swift Comparison](https://www.rust-lang.org/) · [Swift.org](https://www.swift.org/)
 
 ## 📑 目录
->
->
 
 - [Rust vs Swift：现代系统语言的两种路径](#rust-vs-swift现代系统语言的两种路径)
   - [📑 目录](#-目录)

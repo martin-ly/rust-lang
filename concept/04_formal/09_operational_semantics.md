@@ -14,6 +14,5 @@
 - [分离逻辑](./11_separation_logic.md) — 内存分离逻辑
 - [形式化验证工具](../06_ecosystem/47_formal_verification_tools.md) — 模型检测与定理证明
 
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

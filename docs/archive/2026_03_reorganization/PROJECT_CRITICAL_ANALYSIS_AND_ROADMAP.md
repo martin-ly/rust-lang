@@ -271,7 +271,7 @@ warning: trait `HListLength` is more private than the item `hlist_len`
 | **I2** | Unsafe 模式库 | 🟡 中 | 16h | 10+ 详细案例，含 Miri 验证 |
 | **I3** | FFI 实战指南 | 🟡 中 | 12h | bindgen、cbindgen、wasm-bindgen 完整教程 |
 | **I4** | 生产级项目案例 | 🟡 中 | 24h | 3 个端到端项目（CLI、Web API、嵌入式） |
-| **I5** | 术语标准化 | 🟡 中 | 8h | TERMINOLOGY_STANDARD.md，对齐 Ferrocene FLS |
+| **I5** | 术语标准化 | 🟡 中 | 8h | 10_terminology_standard.md，对齐 Ferrocene FLS |
 | **I6** | 错误码映射完善 | 🟡 中 | 12h | 覆盖主要编译器错误码 |
 
 ### 5.3 中期完善（P2 - 3-6 个月）

@@ -14,8 +14,6 @@
 > [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
 
 ## 📑 目录
->
->
 
 - [线性逻辑在 Rust 中的工程应用](#线性逻辑在-rust-中的工程应用)
   - [📑 目录](#-目录)

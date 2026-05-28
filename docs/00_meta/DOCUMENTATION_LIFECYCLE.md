@@ -94,7 +94,7 @@
 每次 Rust 新版本发布（约每 6 周），执行以下检查：
 
 - [ ] 更新 `Cargo.toml` 的 `rust-version`（如需要）
-- [ ] 更新所有入口文档的版本标注（`00_master_index.md`、`TERMINOLOGY_STANDARD.md` 等）
+- [ ] 更新所有入口文档的版本标注（`00_master_index.md`、`10_terminology_standard.md` 等）
 - [ ] 创建新版本速查卡（`docs/02_reference/quick_reference/rust_XYZ_features_cheatsheet.md`）
 - [ ] 创建新版本特性文档（`docs/06_toolchain/NN_rust_X.Y_features.md`）
 - [ ] 更新 `knowledge/INDEX.md` 中的版本索引

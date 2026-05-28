@@ -37,13 +37,10 @@
 ---
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
->
+
 ## 二、概念属性矩阵（Attribute Matrix）
->
->
 
 ### 2.1 结构规则对比矩阵
->
 
 | **结构规则** | **经典逻辑** | **直觉主义逻辑** | **线性逻辑** | **仿射逻辑** | **Rust** |
 |:---|:---|:---|:---|:---|:---|

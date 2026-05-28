@@ -49,7 +49,7 @@ docs/
 │   ├── LEARNING_PATH_GUIDE_2025_10_24.md           # 学习路径指南
 │   ├── MIGRATION_GUIDE_2026.md                     # 2026迁移指南
 │   ├── README.md                                   # 文档中心入口
-│   └── TERMINOLOGY_STANDARD.md                     # 术语标准
+│   └── 10_terminology_standard.md                     # 术语标准
 │
 ├── 📂 学习子目录 (7个)
 │   ├── 01_learning/        # 学习规划
@@ -99,7 +99,7 @@ docs/
 
 - `00_MASTER_INDEX.md`
 - `README.md`
-- `TERMINOLOGY_STANDARD.md`
+- `10_terminology_standard.md`
 
 ---
 

@@ -10,8 +10,6 @@
 > **来源**: [Types and Programming Languages (Pierce)](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus) · [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus) · [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
 ## 📑 目录
->
->
 
 - [Lambda 演算与 Rust 计算模型](#lambda-演算与-rust-计算模型)
   - [📑 目录](#-目录)

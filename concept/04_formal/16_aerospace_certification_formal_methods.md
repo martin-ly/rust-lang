@@ -16,8 +16,6 @@
 > [Wikipedia — DO-178C](https://en.wikipedia.org/wiki/DO-178C)
 
 ## 📑 目录
->
->
 
 - [航空航天认证与形式化方法 (Aerospace Certification \& Formal Methods)](#航空航天认证与形式化方法-aerospace-certification--formal-methods)
   - [📑 目录](#-目录)

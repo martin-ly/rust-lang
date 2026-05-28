@@ -179,7 +179,7 @@
 ### 4.2 必须包含版本声明的文件
 
 - `docs/00_master_index.md`
-- `docs/TERMINOLOGY_STANDARD.md`
+- `docs/10_terminology_standard.md`
 - `docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md`
 - `knowledge/INDEX.md`
 - `knowledge/README.md`

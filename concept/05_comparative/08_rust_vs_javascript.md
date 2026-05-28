@@ -10,8 +10,6 @@
 > **来源**: [ECMAScript Specification](https://tc39.es/ecma262/) · [MDN — JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [TRPL](https://doc.rust-lang.org/book/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [V8 Blog](https://v8.dev/blog)
 
 ## 📑 目录
->
->
 
 - [Rust vs JavaScript：系统编程与脚本执行的范式差异](#rust-vs-javascript系统编程与脚本执行的范式差异)
   - [📑 目录](#-目录)

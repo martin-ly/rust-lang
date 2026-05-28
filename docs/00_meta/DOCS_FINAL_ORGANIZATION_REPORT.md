@@ -80,7 +80,7 @@ docs/
 ├── AUTHORITATIVE_SOURCES_AND_CITATIONS.md      (8 KB) - 权威来源
 ├── MIGRATION_GUIDE_2026.md                     (2 KB) - 迁移指南
 ├── README.md                                   (4 KB) - 文档中心入口
-└── TERMINOLOGY_STANDARD.md                     (26 KB) - 术语标准
+└── 10_terminology_standard.md                     (26 KB) - 术语标准
 ```
 
 ### 学习子目录

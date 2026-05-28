@@ -15,8 +15,6 @@
 > [Wikipedia — Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 ## 📑 目录
->
->
 
 - [Rust vs Python：系统编程与动态脚本的对照分析](#rust-vs-python系统编程与动态脚本的对照分析)
   - [📑 目录](#-目录)

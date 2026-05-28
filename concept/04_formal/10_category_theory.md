@@ -10,8 +10,6 @@
 > **来源**: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) · [Wikipedia — Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming)) · [Rust RFC — Monad](https://github.com/rust-lang/rfcs/issues/1815) · [Haskell Wiki — Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ## 📑 目录
->
->
 
 - [范畴论与 Rust：从函子到单子](#范畴论与-rust从函子到单子)
   - [📑 目录](#-目录)

@@ -10,8 +10,6 @@
 > **来源**: [Kani](https://github.com/model-checking/kani) · [Creusot](https://github.com/creusot-rs/creusot) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [Wikipedia — Formal Verification](https://en.wikipedia.org/wiki/Formal_verification)
 
 ## 📑 目录
->
->
 
 - [形式化方法在 Rust 中的应用](#形式化方法在-rust-中的应用)
   - [📑 目录](#-目录)

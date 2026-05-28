@@ -15,8 +15,6 @@
 > [Wikipedia — Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 ## 📑 目录
->
->
 
 - [Rust vs Ruby：性能与表达力的两极](#rust-vs-ruby性能与表达力的两极)
   - [📑 目录](#-目录)

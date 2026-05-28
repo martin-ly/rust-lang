@@ -88,8 +88,7 @@
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
-- v1.0 (2026-05-12): 初始版本，完成 COR 形式化、区域类型、分离逻辑、操作语义、思维导图
-$entry
+- v1.0 (2026-05-12): 初始版本，完成 COR 形式化、区域类型、分离逻辑、操作语义、思维导图$entry
 - v2.2 (2026-05-13): Phase B 验证实践——新增§9.5b Kani 验证规格（Pin 地址恒定定理的可机械验证 harness，含 SelfRef 自引用结构、符号化地址检查、不变量断言）
 - v2.1 (2026-05-13): Phase A-1 形式化深化——新增§11.5b Tree Borrows 完整操作语义规约（状态空间 Σ=(M,P,T)、小步语义规则 REBORROW-MUT/SHARED/READ/WRITE/RAW、Permissions 状态机转换图、与 Miri 检测算法的精确对应） [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 - v2.0 (2026-05-13): 深度重构。扩展定理一致性矩阵至 10 行并引入 "⟹" 推理链；新增反命题决策树 3 组；重构认知路径为 5 步渐进式问答；补充 Wikipedia、Reed 2009、RustBelt 权威引用；全篇强化 L1↔L4 层次一致性标注
@@ -225,7 +224,6 @@ stateDiagram-v2
 ## 一、权威定义（Definition）
 
 ### 1.1 Wikipedia 权威定义
->
 
 > **[Wikipedia: Operational semantics]** In computer science, operational semantics is a category of formal programming language semantics in which certain desired properties of a program, such as correctness, safety or security, are verified by constructing proofs from logical statements about its execution and procedures, rather than by attaching mathematical meanings to its terms.
 
