@@ -257,7 +257,7 @@ Google 课程 Day 4 相对简洁，本项目在以下方面有显著扩展：
 | 内容 | 说明 | 建议补充 |
 | :--- | :--- | :--- |
 | 错误处理最佳实践（Google 风格） | Google 有专门的错误处理章节 | 可参考 `docs/05_guides/BEST_PRACTICES.md` 扩充 |
-| 测试策略（Google 内部） | Google 测试认证内容 | 可结合 `docs/03_guides/TEST_COVERAGE.md` |
+| 测试策略（Google 内部） | Google 测试认证内容 | 可结合 `docs/03_guides/03_test_coverage.md` |
 | 工具链（cargo、clippy、rustfmt） | 相对基础 | 已有 `docs/02_reference/quick_reference/cargo_cheatsheet.md` |
 | 标准库详细 API 讲解 | Google 按模块讲解 | 已有 `docs/02_reference/STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md` |
 

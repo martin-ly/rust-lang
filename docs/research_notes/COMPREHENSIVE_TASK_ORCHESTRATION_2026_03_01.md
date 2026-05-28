@@ -147,7 +147,7 @@
 | FORMALIZATION_ECOLOGY_MINDMAP.md | 3.0KB | 6KB | P2 |
 | UNSAFE_CONCEPT_MINDMAP.md | 3.1KB | 6KB | P1 |
 | GENERICS_TRAITS_MINDMAP.md | 3.1KB | 6KB | P1 |
-| DESIGN_PATTERN_CONCEPT_MINDMAP.md | 3.4KB | 6KB | P2 |
+| 10_design_pattern_concept_mindmap.md | 3.4KB | 6KB | P2 |
 | OWNERSHIP_CONCEPT_MINDMAP.md | 7.6KB | 10KB | P1 |
 | TYPE_SYSTEM_CONCEPT_MINDMAP.md | 9.9KB | 12KB | P1 |
 | PROOF_TECHNIQUES_MINDMAP.md | 7.2KB | 10KB | P1 |
@@ -179,7 +179,7 @@
 | 文件 | 当前大小 | 目标大小 | 优先级 |
 | :--- | :--- | :--- | :--- |
 | MACROS_CHEATSHEET.md | 1.3KB | 4KB | P2 |
-| ERROR_HANDLING_CHEATSHEET.md | 1.5KB | 4KB | P2 |
+| 10_error_handling_cheatsheet.md | 1.5KB | 4KB | P2 |
 | CONCURRENCY_CHEATSHEET.md | 1.6KB | 5KB | P1 |
 | LIFETIME_CHEATSHEET.md | 3.6KB | 6KB | P1 |
 | RUST_FORMAL_METHODS_CHEATSHEET.md | 4.5KB | 8KB | P1 |

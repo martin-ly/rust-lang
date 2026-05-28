@@ -2280,14 +2280,14 @@ Not:    不是通用 OS！没有堆分配器也能运行 (stack-based futures)
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-**现状**: `docs/01_core/` 仅含 `OWNERSHIP_BORROWING_LIFETIMES.md` 和 `README.md`，核心概念文档严重缺失。
+**现状**: `docs/01_core/` 仅含 `01_ownership_borrowing_lifetimes.md` 和 `README.md`，核心概念文档严重缺失。
 
 **建议填补内容**:
 
 ```text
 docs/01_core/
 ├── README.md                              # 已有
-├── OWNERSHIP_BORROWING_LIFETIMES.md       # 已有
+├── 01_ownership_borrowing_lifetimes.md       # 已有
 ├── 01_ownership_comprehensive_guide.md    # [新增] 所有权完整指南
 ├── 02_borrowing_and_references.md         # [新增] 借用与引用
 ├── 03_lifetimes_deep_dive.md              # [新增] 生命周期深度解析

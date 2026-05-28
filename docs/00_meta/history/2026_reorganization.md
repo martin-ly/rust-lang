@@ -209,7 +209,7 @@ rust-lang/
 
 ## 参考
 
-- [PROJECT_REORGANIZATION_PLAN.md](./PROJECT_REORGANIZATION_PLAN.md) - 重组计划
+- [00_project_reorganization_plan.md](./00_project_reorganization_plan.md) - 重组计划
 - [PROJECT_100_PERCENT_COMPLETION_FINAL.md](../../archive/2026_03_reorganization/PROJECT_100_PERCENT_COMPLETION_FINAL.md) - 完成报告
 
 ---

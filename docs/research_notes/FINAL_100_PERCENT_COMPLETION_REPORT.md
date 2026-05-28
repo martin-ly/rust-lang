@@ -190,7 +190,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- PROOF_TREES_VISUALIZATION.md (综合) ✅
+- 10_proof_trees_visualization.md (综合) ✅
 - 所有权证明树 ✅
 - 借用证明树 ✅
 - 类型系统证明树 ✅

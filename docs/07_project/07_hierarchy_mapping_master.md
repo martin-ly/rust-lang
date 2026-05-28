@@ -134,7 +134,7 @@ graph TB
 | 23 | `docs/05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md` | L2-L6 设计模式 | concept L2 Trait · docs 最佳实践 | docs 异步 · concept L6 | L2→L6 抽象映射 | T-020 → 模式可组合性 |
 | 24 | `docs/05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md` | L3-L6 异步工程 | concept L3 Async · docs 设计模式 | docs 嵌入式 · knowledge Async | L3→L6 运行时映射 | T-050 → T-051 → Tokio |
 | 25 | `docs/06_toolchain/01_compiler_features.md` | L6-L7 编译器 | concept L2 泛型 · docs 核心 | docs 并行前端 · concept L7 | L6→L7 工具驱动 | T-030 单态化 → 优化保持 |
-| 26 | `docs/06_toolchain/parallel_frontend.md` | L6-L7 编译器优化 | docs 编译器 · concept L2 泛型 | concept L7 · Rust Compiler Team | L6→L7 性能驱动 | T-030 → 并行语义保持 |
+| 26 | `docs/06_toolchain/06_parallel_frontend.md` | L6-L7 编译器优化 | docs 编译器 · concept L2 泛型 | concept L7 · Rust Compiler Team | L6→L7 性能驱动 | T-030 → 并行语义保持 |
 | 27 | `docs/ROD/01-core-concepts/01-01-ownership-rules-deep.md` | L4 深度 / 所有权 | concept L1 · L4 | ROD 借用 · ROD 可判定性 | L4↔L1 ROD 深度展开 | T-100 → T-101 |
 | 28 | `docs/ROD/01-core-concepts/01-02-borrowing-system-deep.md` | L4 深度 / 借用 | ROD 所有权 · concept L4 线性逻辑 | ROD 异步 · 并发 | L4 !A ↔ 可变借用 | T-110 → T-111 |
 | 29 | `docs/ROD/16-program-semantics/03-async-semantics.md` | L4 深度 / 异步 | ROD 借用 · concept L3 | ROD 形式语义 · 验证工具 | L4 continuation ↔ async/await | T-120 → T-121 → T-122 |

@@ -42,7 +42,7 @@
 | **Beyond the `&`** | 智能指针应像 `&`/`&mut` 一样自然 | `concept/02_intermediate/03_memory_management.md` | 🔴 30% | Field Projections 完全缺失；reborrow traits 未覆盖；in-place initialization 未覆盖 |
 | **Unblocking dormant traits** | Lending iterators, extern types, scalable vectors, evolvable trait hierarchies | `concept/02_intermediate/01_traits.md` · `concept/02_intermediate/02_generics.md` | 🟡 50% | Next-gen trait solver 完全缺失；Sized hierarchy 未覆盖 |
 | **Constify all the things** | 结构体和关联常量进入泛型参数；编译期类型内省 | `concept/02_intermediate/02_generics.md` · `concept/02_intermediate/01_traits.md` | 🟡 60% | `adt_const_params` 代码示例缺失；`min_generic_const_args` 代码示例缺失；reflection 未覆盖 |
-| **Higher-level Rust** | 单文件脚本带依赖 | `concept/06_ecosystem/09_cargo_script.md` · `docs/06_toolchain/cargo_script_guide.md` | 🟡 75% | ✅ 独立章节 + 指南已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
+| **Higher-level Rust** | 单文件脚本带依赖 | `concept/06_ecosystem/09_cargo_script.md` · `docs/06_toolchain/06_cargo_script_guide.md` | 🟡 75% | ✅ 独立章节 + 指南已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
 | **Secure your supply chain** | 公共 API 依赖控制、破坏性变更检测、SBOM 生成 | `SECURITY_RESPONSE.md` · `deny.toml` | 🟡 50% | cargo-semver-checks 未覆盖；SBOM 生成实践缺失 |
 | **Safety-Critical Rust** | 认证工具链、规范、功能安全证据 | `RUST_SAFETY_CRITICAL_ECOSYSTEM/` · `concept/07_future/02_formal_methods.md` | 🟡 60% | MC/DC coverage 未覆盖；normative unsafe docs 未与官方路线对齐；FLS 发布节奏未覆盖 |
 
@@ -73,7 +73,7 @@
 
 | 官方目标 | 负责人 | 状态 | 项目覆盖 | 覆盖文件 | 缺口 |
 |:---|:---|:---:|:---|:---|:---|
-| **Stabilize cargo-script** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/09_cargo_script.md` · `docs/06_toolchain/cargo_script_guide.md` | ✅ 独立章节 + 指南已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
+| **Stabilize cargo-script** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/09_cargo_script.md` · `docs/06_toolchain/06_cargo_script_guide.md` | ✅ 独立章节 + 指南已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
 | **Stabilize public/private dependencies** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/10_public_private_deps.md` | ✅ 独立章节已创建；RFC 3516 核心机制、SemVer 矩阵、重构路径全覆盖 |
 | **Stabilize Cargo SBOM precursor** | Sergey Davidoff | 推进中 | 🔴 **缺失** | — | 完全缺失 |
 | **build-std** | — | 推进中 | 🟡 部分 | `concept/07_future/05_rust_version_tracking.md` | 缺少实际操作示例 |

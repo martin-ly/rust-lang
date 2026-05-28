@@ -272,7 +272,7 @@
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-**文档**: [RUST_SAFETY_CRITICAL_TRAINING_PROGRAM.md](08_training/RUST_SAFETY_CRITICAL_TRAINING_PROGRAM.md) (10 KB)
+**文档**: [10_rust_safety_critical_training_program.md](08_training/10_rust_safety_critical_training_program.md) (10 KB)
 
 **内容**: 8周全级别培训计划
 

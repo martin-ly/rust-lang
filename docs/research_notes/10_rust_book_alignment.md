@@ -53,7 +53,7 @@
 | Ch 6. 枚举与模式匹配 | C03/crates/ | ✅ 已覆盖 | 100% |
 | Ch 7. 包与模块 | C02/module_system/ | ✅ 已覆盖 | 100% |
 | Ch 8. 集合 | C08/algorithms_data_structures/ | ✅ 已覆盖 | 100% |
-| Ch 9. 错误处理 | ERROR_HANDLING_CHEATSHEET.md | ✅ 已覆盖 | 100% |
+| Ch 9. 错误处理 | 10_error_handling_cheatsheet.md | ✅ 已覆盖 | 100% |
 | Ch 10. 泛型 | type_system_foundations.md | ✅ 已覆盖 | 100% |
 | Ch 11. Trait | trait_system_formalization.md | ✅ 已覆盖 | 100% |
 | Ch 12. 测试 | TESTING_COVERAGE_GUIDE.md | ✅ 已覆盖 | 100% |

@@ -118,7 +118,7 @@
 | `COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN.md` | 全面梳理与100%完成计划 | ✅ |
 | `MIND_REPRESENTATION_COMPLETION_PLAN.md` | 思维表征完善计划（导图/矩阵/证明树/决策树/应用树） | ✅ |
 | `L3_MACHINE_PROOF_GUIDE.md` | L3机器可检查证明实施指南（Coq+Iris） | ✅ |
-| `README_100_PERCENT_COMPLETION.md` | 本文件，总览与入口 | ✅ |
+| `10_readme_100_percent_completion.md` | 本文件，总览与入口 | ✅ |
 
 ### 现有核心文档（需完善）
 

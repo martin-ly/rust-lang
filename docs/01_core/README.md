@@ -336,7 +336,7 @@ unsafe {
 
 ## 相关概念
 
-- [所有权、借用与生命周期详解](./OWNERSHIP_BORROWING_LIFETIMES.md)
+- [所有权、借用与生命周期详解](./01_ownership_borrowing_lifetimes.md)
 
 ---
 

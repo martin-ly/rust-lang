@@ -268,7 +268,7 @@
 | [TASK_INDEX.md](07_project/TASK_INDEX.md) | 未完成任务与计划总索引 | ←→ 所有主要文档 |
 | DOCS_100_PERCENT_PROGRESS.md | 100% 推进进度与验收标准 | ←→ TASK_ORCHESTRATION_MASTER_PLAN (历史归档文件已迁移) |
 | [MODULE_1.93_ADAPTATION_STATUS.md](07_project/MODULE_1.93_ADAPTATION_STATUS.md) | C01–C12 模块 1.93 适配状态 | ←→ [crates/](../crates/README.md) ←→ [06_toolchain/](./06_toolchain/README.md) |
-| [PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md](07_project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md) | 项目批判性评估报告 | ←→ 所有主要文档 |
+| [07_project_critical_evaluation_report_2026_02.md](07_project/07_project_critical_evaluation_report_2026_02.md) | 项目批判性评估报告 | ←→ 所有主要文档 |
 | [INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md](07_project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md) | 国际化对标与全面批判性评估 | ←→ [formal_methods/](./research_notes/formal_methods/README.md) |
 | [ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md](07_project/ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md) | 对齐知识批判性评估与推进方案 | ←→ [ALIGNMENT_GUIDE](./02_reference/ALIGNMENT_GUIDE.md) |
 | DOCUMENTATION_THEME_ORGANIZATION_PLAN.md | 文档主题梳理与重组规划 | ←→ DOCS_STRUCTURE_OVERVIEW |

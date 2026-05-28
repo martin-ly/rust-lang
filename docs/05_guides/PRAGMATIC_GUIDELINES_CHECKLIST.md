@@ -273,7 +273,7 @@
 | rustfmt | `.rustfmt.toml`（如有） | 代码格式化 |
 | cargo-deny | （可选） | 依赖安全与许可证 |
 | Miri | `docs/03_guides/MIRI_GUIDE.md` | 未定义行为检测 |
-| cargo-tarpaulin | `docs/03_guides/TEST_COVERAGE.md` | 测试覆盖率 |
+| cargo-tarpaulin | `docs/03_guides/03_test_coverage.md` | 测试覆盖率 |
 
 ---
 

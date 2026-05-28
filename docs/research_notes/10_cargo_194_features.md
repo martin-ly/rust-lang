@@ -384,7 +384,7 @@ protocol = "sparse"
 - [Cargo 1.94 开发周期报告](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94/)
 - [Cargo 官方文档](https://doc.rust-lang.org/cargo/)
 - [TOML 1.1 规范](https://toml.io/en/v1.1.0)
-- [Rust 1.94 特性分析](./RUST_194_COMPREHENSIVE_ANALYSIS.md)
+- [Rust 1.94 特性分析](./10_rust_194_comprehensive_analysis.md)
 
 ---
 

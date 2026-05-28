@@ -115,7 +115,7 @@
 | :--- | :--- |
 | PROJECT_MAINTENANCE_GUIDE.md | 维护标准 |
 | USER_GUIDE.md | 使用指南 |
-| COMPREHENSIVE_PROJECT_REPORT.md | 项目报告 |
+| 10_comprehensive_project_report.md | 项目报告 |
 | CROSS_REFERENCE_INDEX.md | 交叉引用 |
 | FINAL_VERIFICATION_CHECKLIST.md | 验证清单 |
 
