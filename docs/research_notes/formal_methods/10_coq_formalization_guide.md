@@ -1886,7 +1886,7 @@ Send/Sync安全性证明策略:
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-**对应文档**: [FORMAL_FOUNDATIONS_INDEX.md](./FORMAL_FOUNDATIONS_INDEX.md)
+**对应文档**: [10_formal_foundations_index.md](./10_formal_foundations_index.md)
 
 #### Rust代码示例
 
@@ -2489,7 +2489,7 @@ lint:
 | 文档 | 内容 | 与本文件关系 |
 | :--- | :--- | :--- |
 | [10_coq_formalization_matrix.md](./10_coq_formalization_matrix.md) | Coq形式化矩阵 | 证明状态追踪 |
-| [FORMAL_FOUNDATIONS_INDEX.md](./FORMAL_FOUNDATIONS_INDEX.md) | 形式化基础索引 | 理论学习路径 |
+| [10_formal_foundations_index.md](./10_formal_foundations_index.md) | 形式化基础索引 | 理论学习路径 |
 | [ownership_model.md](./ownership_model.md) | 所有权模型形式化 | 定理1对应文档 |
 | [borrow_checker_proof.md](./borrow_checker_proof.md) | 借用检查器证明 | 定理2对应文档 |
 | [lifetime_formalization.md](./lifetime_formalization.md) | 生命周期形式化 | 定理3对应文档 |

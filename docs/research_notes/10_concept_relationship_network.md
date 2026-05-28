@@ -604,7 +604,7 @@ graph TB
 
 | 概念 | 主要文档 | 类型 | 关联文档 |
 | :--- | :--- | :--- | :--- |
-| C1 所有权 | [ownership_model.md](formal_methods/ownership_model.md) | 形式化 | CONCEPT_HIERARCHY_FRAMEWORK.md |
+| C1 所有权 | [ownership_model.md](formal_methods/ownership_model.md) | 形式化 | 10_concept_hierarchy_framework.md |
 | C5 借用 | [borrow_checker_proof.md](formal_methods/borrow_checker_proof.md) | 形式化 | ownership_model.md |
 | C8 生命周期 | [lifetime_formalization.md](formal_methods/lifetime_formalization.md) | 形式化 | borrow_checker_proof.md |
 | C9 泛型 | [type_system_foundations.md](type_theory/type_system_foundations.md) | 形式化 | trait_system_formalization.md |
@@ -734,7 +734,7 @@ C6 共享借用 ⊥ C7 可变借用
 
 **参考文档**:
 
-- [CONCEPT_HIERARCHY_FRAMEWORK.md](./CONCEPT_HIERARCHY_FRAMEWORK.md) - 层间映射
+- [10_concept_hierarchy_framework.md](./10_concept_hierarchy_framework.md) - 层间映射
 - [PROOF_INDEX.md](./PROOF_INDEX.md) - 定理索引
 
 ---
@@ -761,7 +761,7 @@ C6 共享借用 ⊥ C7 可变借用
 
 | 文档 | 关系类型 | 用途 |
 | :--- | :--- | :--- |
-| [CONCEPT_HIERARCHY_FRAMEWORK](./CONCEPT_HIERARCHY_FRAMEWORK.md) | 层次关系 | 五层概念体系 |
+| [CONCEPT_HIERARCHY_FRAMEWORK](./10_concept_hierarchy_framework.md) | 层次关系 | 五层概念体系 |
 | [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) | 论证关系 | 论证脉络关系 |
 | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) | 形式化关系 | 统一形式系统 |
 | [PROOF_INDEX](./PROOF_INDEX.md) | 证明依赖 | 定理索引 |

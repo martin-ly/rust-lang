@@ -293,7 +293,7 @@
 | RustBelt | 所有权形式化 | formal_methods/ownership_model.md |
 | Stacked Borrows | 借用检查器 | formal_methods/borrow_checker_proof.md |
 | Aeneas | 可执行语义 | research_notes/10_aeneas_integration_plan.md |
-| RustSEM | 操作语义 | research_notes/EXECUTABLE_SEMANTICS_ROADMAP.md |
+| RustSEM | 操作语义 | research_notes/10_executable_semantics_roadmap.md |
 
 ---
 

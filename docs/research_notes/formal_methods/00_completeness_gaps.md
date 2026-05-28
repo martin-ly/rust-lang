@@ -220,7 +220,7 @@ $
 | 缺口类型 | 说明 | 对标成果 |
 | :--- | :--- | :--- |
 | **L3 机器可检查证明** | 本目录证明多为 L1 证明思路；无 Coq/Isabelle 证明 | RustBelt、Aeneas、coq-of-rust |
-| **可执行语义** | 无可执行小步操作语义 | RustSEM (K-Framework)、[EXECUTABLE_SEMANTICS_ROADMAP](../EXECUTABLE_SEMANTICS_ROADMAP.md) |
+| **可执行语义** | 无可执行小步操作语义 | RustSEM (K-Framework)、[EXECUTABLE_SEMANTICS_ROADMAP](../10_executable_semantics_roadmap.md) |
 | **松弛内存模型** | 原子操作、Arc 仅 Def 级；无松弛内存形式化 | RustBelt Meets Relaxed Memory |
 | **MIR/THIR 级** | 无编译器 IR 级建模 | RustBelt MIR、coq-of-rust THIR |
 | **工具对接** | 无 Aeneas、coq-of-rust 对接 | AENEAS_INTEGRATION_PLAN、COQ_OF_RUST_INTEGRATION_PLAN |

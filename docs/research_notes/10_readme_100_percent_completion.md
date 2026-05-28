@@ -59,9 +59,9 @@
 | 目标 | 入口文档 |
 | :--- | :--- |
 | **全面梳理与计划总览** | 本文档 |
-| **详细100%完成计划** | [COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN](./COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN.md) |
+| **详细100%完成计划** | [COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN](./10_comprehensive_systematic_review_and_100_percent_plan.md) |
 | **思维表征完善计划** | MIND_REPRESENTATION_COMPLETION_PLAN |
-| **L3机器证明实施指南** | [L3_MACHINE_PROOF_GUIDE](./L3_MACHINE_PROOF_GUIDE.md) |
+| **L3机器证明实施指南** | [L3_MACHINE_PROOF_GUIDE](./10_l3_machine_proof_guide.md) |
 | **核心定理完整证明** | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) |
 | **论证缺口索引** | [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) |
 
@@ -115,9 +115,9 @@
 
 | 文档 | 描述 | 状态 |
 | :--- | :--- | :--- |
-| `COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN.md` | 全面梳理与100%完成计划 | ✅ |
+| `10_comprehensive_systematic_review_and_100_percent_plan.md` | 全面梳理与100%完成计划 | ✅ |
 | `MIND_REPRESENTATION_COMPLETION_PLAN.md` | 思维表征完善计划（导图/矩阵/证明树/决策树/应用树） | ✅ |
-| `L3_MACHINE_PROOF_GUIDE.md` | L3机器可检查证明实施指南（Coq+Iris） | ✅ |
+| `10_l3_machine_proof_guide.md` | L3机器可检查证明实施指南（Coq+Iris） | ✅ |
 | `10_readme_100_percent_completion.md` | 本文件，总览与入口 | ✅ |
 
 ### 现有核心文档（需完善）

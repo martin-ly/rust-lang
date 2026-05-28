@@ -205,7 +205,7 @@ research_notes/
 17. **BEST_PRACTICES.md** - 最佳实践
 18. **10_glossary.md** - 术语表
 19. **10_resources.md** - 研究资源汇总
-20. **SYSTEM_INTEGRATION.md** - 系统集成指南
+20. **10_system_integration.md** - 系统集成指南
 21. **10_example.md** - 研究笔记示例
 22. **10_progress_tracking.md** - 研究进展跟踪
 23. **10_task_checklist.md** - 研究任务清单

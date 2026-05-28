@@ -317,7 +317,7 @@ impl EventDrivenWorkflow {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 工作流引擎决策树
-- [工作流引擎矩阵](./formal_methods/WORKFLOW_ENGINES_MATRIX.md)
+- [工作流引擎矩阵](./formal_methods/10_workflow_engines_matrix.md)
 - [软件设计理论 - 工作流](./software_design_theory/02_workflow_safe_complete_models/README.md)
 
 ---

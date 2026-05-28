@@ -117,9 +117,9 @@
 
 | 文档 | 大小 | 内容深度 | 特色 |
 | :--- | :--- | :--- | :--- |
-| FORMAL_METHODS_COMPARISON.md | 7.6KB | L3 | 方法比较、工具选择 |
+| 10_formal_methods_comparison.md | 7.6KB | L3 | 方法比较、工具选择 |
 | 10_case_studies.md | 8.3KB | L4 | Vec/Rc/并发/异步案例 |
-| FORMAL_FOUNDATIONS_INDEX.md | 5.5KB | L2 | 理论体系完整导航 |
+| 10_formal_foundations_index.md | 5.5KB | L2 | 理论体系完整导航 |
 
 **涵盖主题:**
 
@@ -218,7 +218,7 @@ Week 6-7: 证明技术
   └── 练习：归纳证明
 
 Week 8: 方法比较
-  └── FORMAL_METHODS_COMPARISON.md
+  └── 10_formal_methods_comparison.md
 ```
 
 ### 专家路径 (80小时)

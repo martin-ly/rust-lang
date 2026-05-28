@@ -642,7 +642,7 @@ echo "   4. Run 'cargo test' to run tests"
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [检查清单与模板](./CHECKLISTS_AND_TEMPLATES.md)
+- [检查清单与模板](./10_checklists_and_templates.md)
 - [安全关键生态系统总览](../README.md)
 
 ---

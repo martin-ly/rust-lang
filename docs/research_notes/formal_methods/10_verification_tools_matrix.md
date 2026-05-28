@@ -300,7 +300,7 @@ jobs:
 
 - [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../10_international_formal_verification_index.md)
 - [coq_skeleton](../coq_skeleton/README.md) - Coq证明骨架
-- [L3_MACHINE_PROOF_GUIDE](../L3_MACHINE_PROOF_GUIDE.md)
+- [L3_MACHINE_PROOF_GUIDE](../10_l3_machine_proof_guide.md)
 
 ---
 

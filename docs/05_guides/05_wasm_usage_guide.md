@@ -472,7 +472,7 @@ pub fn process(data: &str) -> String {
 
 - 轻量级、快速启动
 - 安全的沙箱环境
-- 结合 [EMBEDDED_RUST_GUIDE.md](05_embedded_rust_guide.md) 进行边缘部署
+- 结合 [03_embedded_rust_guide.md](05_embedded_rust_guide.md) 进行边缘部署
 
 ### 场景4: 插件系统
 >
@@ -497,7 +497,7 @@ pub fn process(data: &str) -> String {
 | :--- | :--- |
 | **C12 详细文档** | [WASM 基础指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_基础指南.md) |
 | :--- | :--- |
-| **相关指南** | [EMBEDDED_RUST_GUIDE.md](05_embedded_rust_guide.md) |
+| **相关指南** | [03_embedded_rust_guide.md](05_embedded_rust_guide.md) |
 | :--- | :--- |
 | :--- | :--- |
 | **外部资源** | [wasm-bindgen 文档](https://rustwasm.github.io/wasm-bindgen/) |

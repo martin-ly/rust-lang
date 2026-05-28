@@ -155,8 +155,8 @@
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [所有权概念族谱](./formal_methods/10_ownership_concept_mindmap.md)
-- [分布式概念族谱](DISTRIBUTED_CONCEPT_MINDMAP.md)
-- [工作流概念族谱](./WORKFLOW_CONCEPT_MINDMAP.md)
+- [分布式概念族谱](10_distributed_concept_mindmap.md)
+- [工作流概念族谱](./10_workflow_concept_mindmap.md)
 - [形式化方法索引](./formal_methods/README.md)
 
 ---

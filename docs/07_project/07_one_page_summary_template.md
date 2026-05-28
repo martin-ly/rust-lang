@@ -3,7 +3,7 @@
 > **Bloom 层级**: L4-L5 (分析/评价)
 
 > **说明**: 此文档已迁移至归档目录。
-> **当前入口**: [archive/process_reports/2026_02/project/ONE_PAGE_SUMMARY_TEMPLATE.md](./ONE_PAGE_SUMMARY_TEMPLATE.md)
+> **当前入口**: [archive/process_reports/2026_02/project/07_one_page_summary_template.md](./07_one_page_summary_template.md)
 
 ---
 

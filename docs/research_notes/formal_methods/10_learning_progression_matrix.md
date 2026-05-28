@@ -200,7 +200,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
-| 生命周期基础 | [TUTORIAL_LIFETIMES](../TUTORIAL_LIFETIMES.md) | 3天 |
+| 生命周期基础 | [TUTORIAL_LIFETIMES](../10_tutorial_lifetimes.md) | 3天 |
 | 生命周期形式化 | [lifetime_formalization](./lifetime_formalization.md) | 1周 |
 | 生命周期省略 | TUTORIAL_LIFETIMES §省略规则 | 2天 |
 | 结构体生命周期 | TUTORIAL_LIFETIMES §结构体 | 2天 |
@@ -243,10 +243,10 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
-| 线程基础 | TUTORIAL_CONCURRENCY_MODELS.md | 3天 |
+| 线程基础 | 10_tutorial_concurrency_models.md | 3天 |
 | Send/Sync | [send_sync_formalization](./send_sync_formalization.md) | 1周 |
 | 共享状态 | 10_concurrency_safety_matrix.md | 3天 |
-| 消息传递 | [CONCURRENCY_CONCEPT_MINDMAP](./CONCURRENCY_CONCEPT_MINDMAP.md) | 2天 |
+| 消息传递 | [CONCURRENCY_CONCEPT_MINDMAP](./10_concurrency_concept_mindmap.md) | 2天 |
 | 异步基础 | [ASYNC_CONCEPT_MINDMAP](./10_async_concept_mindmap.md) §1-2 | 3天 |
 | async/await | [async_state_machine](./async_state_machine.md) §1-3 | 1周 |
 | Pin | [pin_self_referential](./pin_self_referential.md) | 1周 |
@@ -287,7 +287,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
-| Unsafe基础 | [UNSAFE_CONCEPT_MINDMAP](./UNSAFE_CONCEPT_MINDMAP.md) | 1周 |
+| Unsafe基础 | [UNSAFE_CONCEPT_MINDMAP](./10_unsafe_concept_mindmap.md) | 1周 |
 | 裸指针 | 10_memory_model_mindmap.md §原始指针 | 3天 |
 | FFI | 外部文档 | 1周 |
 | 内存布局 | 10_memory_model_mindmap.md §内存布局 | 3天 |

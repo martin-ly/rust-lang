@@ -215,7 +215,7 @@
 
 | # | 2026 目标 | 状态 | 本项目覆盖情况 |
 |---|----------|------|---------------|
-| E01 | C++ ↔ Rust 互操作 (cxx / bindgen) | ✅ | [`docs/03_guides/CXX_INTEROP_GUIDE.md`](../../03_guides/CXX_INTEROP_GUIDE.md) — 覆盖 bindgen 和 cxx 两条技术路线、共享类型与不透明类型、ABI 兼容性 |
+| E01 | C++ ↔ Rust 互操作 (cxx / bindgen) | ✅ | [`docs/03_guides/03_cxx_interop_guide.md`](../../03_guides/03_cxx_interop_guide.md) — 覆盖 bindgen 和 cxx 两条技术路线、共享类型与不透明类型、ABI 兼容性 |
 | E02 | crates.io 安全与供应链安全 | 🟡 | 生态系统目录有概述，缺少 crates.io 安全审计、typosquatting 检测和 `cargo-vet` 使用指南 |
 | E03 | SemVer 自动化检查 | ✅ | 见 T05 `cargo-semver-checks`，API 兼容性检查流程完整覆盖 |
 | E04 | 脚本化 Rust (cargo-script / rust-script) | ✅ | 见 T04 `cargo-script`，可直接作为 shebang 脚本运行 |
@@ -244,7 +244,7 @@
 
 | # | 2026 目标 | 状态 | 本项目覆盖情况 |
 |---|----------|------|---------------|
-| K01 | Rust for Linux (RFL) 生产化 | ✅ | [`docs/04_research/RUST_FOR_LINUX.md`](../../04_research/RUST_FOR_LINUX.md) — 完整时间线、里程碑解读、驱动开发指南、从实验到生产的演进分析 |
+| K01 | Rust for Linux (RFL) 生产化 | ✅ | [`docs/04_research/04_rust_for_linux.md`](../../04_research/04_rust_for_linux.md) — 完整时间线、里程碑解读、驱动开发指南、从实验到生产的演进分析 |
 | K02 | `no_std` 生态系统健壮性 | 🟡 | 嵌入式目录有基础内容，但缺少 `no_std` 兼容 crate 的完整清单和兼容性评测 |
 | K03 | 嵌入式 HAL 标准统一 | 🔴 | 无覆盖 — 涉及 `embedded-hal`、`embedded-io` 等 trait 标准的演进 |
 | K04 | 实时操作系统 (RTOS) 绑定 | 🔴 | 无覆盖 — 如 `Tock`、`Hubris` 或 FreeRTOS 绑定的状态 |
@@ -369,8 +369,8 @@
 | Unsafe Fields | `docs/05_guides/05_unsafe_fields_preview.md` | 新增 | 281 行实验性预览，覆盖语法和语义 |
 | TOML v1.1 | `docs/06_toolchain/06_toml_v11_cargo_guide.md` | 新增 | 392 行 Cargo 集成指南 |
 | VerusBelt | `docs/04_research/04_verusbelt_pldi_2026.md` | 新增 | 229 行 PLDI 2026 研究跟踪 |
-| C++ 互操作 | `docs/03_guides/CXX_INTEROP_GUIDE.md` | 新增 | 151 行 cxx + bindgen 技术路线对比 |
-| Rust for Linux | `docs/04_research/RUST_FOR_LINUX.md` | 新增 | 272 行 RFL 生产化时间线与驱动开发 |
+| C++ 互操作 | `docs/03_guides/03_cxx_interop_guide.md` | 新增 | 151 行 cxx + bindgen 技术路线对比 |
+| Rust for Linux | `docs/04_research/04_rust_for_linux.md` | 新增 | 272 行 RFL 生产化时间线与驱动开发 |
 | cargo-script | `crates/c03_control_fn/examples/cargo_script_demo.rs` | 新增 | 可运行的 shebang 脚本示例 |
 | cargo-semver-checks | `crates/c10_networks/src/cargo_semver_checks_guide.rs` | 新增 | API 兼容性检查指南 |
 
@@ -435,8 +435,8 @@
 | TOML v1.1 | [`docs/06_toolchain/06_toml_v11_cargo_guide.md`](../../06_toolchain/06_toml_v11_cargo_guide.md) | Markdown | 392 |
 | Unsafe Fields | [`docs/05_guides/05_unsafe_fields_preview.md`](../../05_guides/05_unsafe_fields_preview.md) | Markdown | 281 |
 | VerusBelt | [`docs/04_research/04_verusbelt_pldi_2026.md`](../../04_research/04_verusbelt_pldi_2026.md) | Markdown | 229 |
-| C++ 互操作 | [`docs/03_guides/CXX_INTEROP_GUIDE.md`](../../03_guides/CXX_INTEROP_GUIDE.md) | Markdown | 151 |
-| Rust for Linux | [`docs/04_research/RUST_FOR_LINUX.md`](../../04_research/RUST_FOR_LINUX.md) | Markdown | 272 |
+| C++ 互操作 | [`docs/03_guides/03_cxx_interop_guide.md`](../../03_guides/03_cxx_interop_guide.md) | Markdown | 151 |
+| Rust for Linux | [`docs/04_research/04_rust_for_linux.md`](../../04_research/04_rust_for_linux.md) | Markdown | 272 |
 | cargo-script | [`crates/c03_control_fn/examples/cargo_script_demo.rs`](../../../crates/c03_control_fn/examples/cargo_script_demo.rs) | Rust 示例 | — |
 | cargo-semver-checks | [`crates/c10_networks/src/cargo_semver_checks_guide.rs`](../../../crates/c10_networks/src/cargo_semver_checks_guide.rs) | Rust 源码 | — |
 

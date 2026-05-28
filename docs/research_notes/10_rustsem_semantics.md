@@ -544,7 +544,7 @@ safe_to_send(τ)    (Send)
 
 - [FORMAL_LANGUAGE_AND_PROOFS](./10_formal_language_and_proofs.md) — 形式语言基础
 - [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) — 定理证明
-- [CONCEPT_AXIOM_THEOREM_MATRIX](CONCEPT_AXIOM_THEOREM_MATRIX.md) — 概念矩阵
+- [CONCEPT_AXIOM_THEOREM_MATRIX](10_concept_axiom_theorem_matrix.md) — 概念矩阵
 
 ### 9.2 外部参考
 >

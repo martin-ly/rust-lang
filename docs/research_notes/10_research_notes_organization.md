@@ -72,9 +72,9 @@ research_notes/
 │   ├── # 思维导图 / 矩阵 / 决策树（选列）
 │   ├── 10_ownership_concept_mindmap.md, 10_variance_concept_mindmap.md
 │   ├── 10_async_concept_mindmap.md, 10_workflow_concept_mindmap.md, 10_distributed_concept_mindmap.md
-│   ├── TYPE_SYSTEM_CONCEPT_MINDMAP.md, 10_memory_model_mindmap.md, ERROR_HANDLING_MINDMAP.md
-│   ├── 10_concept_axiom_theorem_matrix.md, PROOF_COMPLETION_MATRIX.md, 10_verification_tools_matrix.md
-│   ├── DESIGN_PATTERN_SELECTION_DECISION_TREE.md, WORKFLOW_ENGINE_DECISION_TREE.md
+│   ├── 10_type_system_concept_mindmap.md, 10_memory_model_mindmap.md, 10_error_handling_mindmap.md
+│   ├── 10_concept_axiom_theorem_matrix.md, 10_proof_completion_matrix.md, 10_verification_tools_matrix.md
+│   ├── 10_design_pattern_selection_decision_tree.md, WORKFLOW_ENGINE_DECISION_TREE.md
 │   └── …（其余见 formal_methods/README 与 INDEX）
 │
 ├── type_theory/                        # 类型理论

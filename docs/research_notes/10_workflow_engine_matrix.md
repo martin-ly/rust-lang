@@ -267,9 +267,9 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [WORKFLOW_CONCEPT_MINDMAP](./WORKFLOW_CONCEPT_MINDMAP.md) — 概念族谱
-- [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md) — 架构决策
-- [CONCEPT_AXIOM_THEOREM_MATRIX](CONCEPT_AXIOM_THEOREM_MATRIX.md) — 定理映射
+- [WORKFLOW_CONCEPT_MINDMAP](./10_workflow_concept_mindmap.md) — 概念族谱
+- [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](10_distributed_architecture_decision_tree.md) — 架构决策
+- [CONCEPT_AXIOM_THEOREM_MATRIX](10_concept_axiom_theorem_matrix.md) — 定理映射
 
 ### 6.2 工作流定义文档
 >

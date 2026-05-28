@@ -1,7 +1,7 @@
 # Rust for Linux 指南
 >
 > **层次定位**: L3-L7 高级-前沿 / 内核开发应用域
-> **前置依赖**: [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md) · [docs 嵌入式](EMBEDDED_RUST_GUIDE.md)
+> **前置依赖**: [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md) · [docs 嵌入式](03_embedded_rust_guide.md)
 > **后置延伸**: [docs Safety-Critical](../04_research/04_safety_critical_alignment_2026.md) · [knowledge FFI](../../knowledge/03_advanced/unsafe/01_ffi.md)
 > **跨层映射**: L3→L7 前沿映射 | 系统编程边界
 > **定理链编号**: T-060 unsafe 块 ↔ T-110 内核抽象可靠性

@@ -118,7 +118,7 @@
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
-| [FORMAL_METHODS_COMPARISON.md](./FORMAL_METHODS_COMPARISON.md) | 方法比较、工具选择 | ⭐⭐⭐ |
+| [10_formal_methods_comparison.md](./10_formal_methods_comparison.md) | 方法比较、工具选择 | ⭐⭐⭐ |
 | [10_case_studies.md](./10_case_studies.md) | 实际案例分析 | ⭐⭐⭐⭐ |
 
 ---
@@ -161,7 +161,7 @@
    └── 10_proof_strategies.md 全部
 
 4. 方法比较
-   └── FORMAL_METHODS_COMPARISON.md
+   └── 10_formal_methods_comparison.md
 ```
 
 ### 专家路径

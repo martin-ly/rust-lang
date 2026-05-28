@@ -913,7 +913,7 @@ fn main() {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [借用检查器工作原理](./10_tutorial_borrow_checker.md)
-- [理解生命周期](./TUTORIAL_LIFETIMES.md)
+- [理解生命周期](./10_tutorial_lifetimes.md)
 - [反例汇编](./10_counter_examples_compendium.md)
 
 ---

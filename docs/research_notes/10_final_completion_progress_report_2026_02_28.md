@@ -71,7 +71,7 @@
 | 10_five_dimensional_concept_matrix.md | 2.1KB | 8.7KB | 五维交叉分析、决策矩阵 |
 | 10_concurrency_safety_matrix.md | 1.7KB | 6.7KB | 同步原语、并发模式 |
 | 10_ownership_transfer_decision_tree.md | 1.9KB | 8.7KB | 6个场景决策流程 |
-| LEARNING_PROGRESSION_MATRIX.md | 2.1KB | 8.6KB | 5个级别完整路径 |
+| 10_learning_progression_matrix.md | 2.1KB | 8.6KB | 5个级别完整路径 |
 | 10_verification_tools_matrix.md | 2.3KB | 6.6KB | 工具对比、选型决策树 |
 
 #### 思维导图扩展 (3个)
@@ -88,7 +88,7 @@
 | :--- | :--- | :--- | :--- |
 | 10_tutorial_ownership_safety.md | 8.2KB | 9.5KB | 实践模式、形式化视角 |
 | 10_tutorial_borrow_checker.md | 3.9KB | 9.1KB | NLL、常见错误解决 |
-| TUTORIAL_TYPE_SYSTEM.md | 2.7KB | 9.7KB | 模式匹配、泛型、Trait |
+| 10_tutorial_type_system.md | 2.7KB | 9.7KB | 模式匹配、泛型、Trait |
 | 10_error_type_selection_decision_tree.md | 2.1KB | 7.6KB | anyhow/thiserror对比 |
 
 #### 速查表扩展 (3个)

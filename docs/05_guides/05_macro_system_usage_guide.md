@@ -971,7 +971,7 @@ macro_rules! public_macro {
 - [完整文档](../../crates/c11_macro_system/README.md)
 - [声明宏指南](../../crates/c11_macro_system/docs/tier_02_guides/01_声明宏实践指南.md)
 - [过程宏指南](../../crates/c11_macro_system/docs/tier_02_guides/02_Derive宏开发指南.md)
-- [宏系统思维导图](../research_notes/formal_methods/MACRO_SYSTEM_MINDMAP.md) - 宏扩展过程的形式化分析
+- [宏系统思维导图](../research_notes/formal_methods/10_macro_system_mindmap.md) - 宏扩展过程的形式化分析
 
 ## 🆕 Rust 1.95+ 特性
 >

@@ -572,7 +572,7 @@
 - ✅ BEST_PRACTICES.md - 最佳实践
 - ✅ GLOSSARY.md - 术语表
 - ✅ 10_resources.md - 研究资源汇总
-- ✅ SYSTEM_INTEGRATION.md - 系统集成指南
+- ✅ 10_system_integration.md - 系统集成指南
 - ✅ 10_example.md - 研究笔记示例
 
 **研究方法论**:

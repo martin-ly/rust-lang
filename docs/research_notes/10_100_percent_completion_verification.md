@@ -255,7 +255,7 @@
 | 7 | 验证工具选型 | 10_verification_tools_matrix.md | 🆕 ✅ |
 | 8 | 异步运行时选型 | 10_async_runtime_decision_tree.md | 🆕 ✅ |
 | 9 | 错误处理策略 | 10_error_handling_decision_tree.md | 🆕 ✅ |
-| 10 | 测试策略 | TESTING_STRATEGY_DECISION_TREE.md | 🆕 ✅ |
+| 10 | 测试策略 | 10_testing_strategy_decision_tree.md | 🆕 ✅ |
 
 **验证结果**: 决策树 100% 覆盖 ✅ (新增1个超出目标)
 
@@ -276,7 +276,7 @@
 | 工具 | 状态 | 对接文档 | 计划 |
 | :--- | :--- | :--- | :--- |
 | Coq | ✅ 就绪 | 5个.v文件 | Phase 2 L3证明 |
-| Iris | ⏳ 准备中 | L3_MACHINE_PROOF_GUIDE.md | Week 9-12 |
+| Iris | ⏳ 准备中 | 10_l3_machine_proof_guide.md | Week 9-12 |
 | Aeneas | ⏳ 准备中 | 10_aeneas_integration_plan.md | Week 17-20 |
 | RustBelt | ⏳ 准备中 | 10_rustbelt_alignment.md | Week 21-24 |
 

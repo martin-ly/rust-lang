@@ -316,7 +316,7 @@
 - [最佳实践](./BEST_PRACTICES.md) - 研究笔记最佳实践
 - [术语表](./10_glossary.md) - 专业术语解释
 - [研究资源汇总](./10_resources.md) - 学术和工具资源
-- [系统集成指南](./SYSTEM_INTEGRATION.md) - 与形式化工程系统的集成
+- [系统集成指南](./10_system_integration.md) - 与形式化工程系统的集成
 - [研究笔记示例](./10_example.md) - 完整的研究笔记示例
 - [形式化方法索引](./formal_methods/README.md)
 - [类型理论索引](./type_theory/README.md)

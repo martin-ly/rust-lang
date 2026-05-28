@@ -267,7 +267,7 @@
 
 - [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) — 核心定理 T-OW2、T-BR1、T-TY3 完整证明（L2）
 - [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — 形式语言与形式证明（推理规则、操作语义、判定形式）
-- [FORMAL_FULL_MODEL_EN_SUMMARY](./FORMAL_FULL_MODEL_EN_SUMMARY.md) — 英文摘要
+- [FORMAL_FULL_MODEL_EN_SUMMARY](./10_formal_full_model_en_summary.md) — 英文摘要
 - [PROOF_INDEX](./PROOF_INDEX.md) — 105+ 证明索引、按深度导航
 - [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md) — 国际对标
 - [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md) — 批判性分析与推进计划

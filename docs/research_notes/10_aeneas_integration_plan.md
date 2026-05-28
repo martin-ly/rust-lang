@@ -393,8 +393,8 @@ fn binary_search(arr: &[i32], target: i32) -> bool {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [VERIFICATION_TOOLS_MATRIX](./VERIFICATION_TOOLS_MATRIX.md) — 工具对比矩阵
-- [VERIFICATION_TOOLS_DECISION_TREE](VERIFICATION_TOOLS_DECISION_TREE.md) — 选型决策树
+- [VERIFICATION_TOOLS_MATRIX](./10_verification_tools_matrix.md) — 工具对比矩阵
+- [VERIFICATION_TOOLS_DECISION_TREE](10_verification_tools_decision_tree.md) — 选型决策树
 - [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — 形式语言基础
 
 ### 7.2 外部资源

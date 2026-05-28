@@ -297,8 +297,8 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [RUST_191_RESEARCH_UPDATE_2025_11_15.md](./RUST_191_RESEARCH_UPDATE_2025_11_15.md) |
-| RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [RUST_192_RESEARCH_UPDATE_2025_12_11.md](./RUST_192_RESEARCH_UPDATE_2025_12_11.md) |
+| RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [10_rust_191_research_update_2025_11_15.md](./10_rust_191_research_update_2025_11_15.md) |
+| RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [10_rust_192_research_update_2025_12_11.md](./10_rust_192_research_update_2025_12_11.md) |
 | CHANGELOG | 更新日志 | [10_changelog.md](./10_changelog.md) |
 
 ### 形式化证明文档

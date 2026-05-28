@@ -34,7 +34,7 @@
 
 | 序号 | 文档名称 | 1.94相关性 | 状态 |
 |------|----------|------------|------|
-| 1 | RUST_194_COMPREHENSIVE_SEMANTICS_FRAMEWORK.md | 核心 | ✅ 已完成 |
+| 1 | 10_rust_194_comprehensive_semantics_framework.md | 核心 | ✅ 已完成 |
 | 2 | 10_rust_194_mind_representations.md | 核心 | ✅ 已完成 |
 | 3 | RUST_194_RESEARCH_UPDATE.md | 核心 | ✅ 已完成 |
 | 4 | 10_rust_194_comprehensive_analysis.md | 核心 | ✅ 已完成 |
