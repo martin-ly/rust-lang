@@ -9,3 +9,6 @@
 > - `03_unsafe_rust.md` → 整合至 [`03_unsafe.md`](./03_unsafe.md)
 > - `05_macros.md` → 整合至 [`04_macros.md`](./04_macros.md) 和 [`07_proc_macro.md`](./07_proc_macro.md)
 > - `08_zero_cost_abstractions.md` → 整合至 [`06_zero_cost_abstractions.md`](../01_foundation/06_zero_cost_abstractions.md)
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

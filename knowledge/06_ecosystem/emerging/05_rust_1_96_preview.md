@@ -1,8 +1,8 @@
-# Rust 1.96 预览特性
+# Rust 1.96 稳定特性
 
 > **Bloom 层级**: 理解
 
-> **📌 简介**: Rust 1.96.0 预计于 2026 年 5 月 28 日发布。当前处于 Beta 阶段，以下特性已通过 FCP 或正在最终稳定化流程中，极有可能进入稳定版。
+> **📌 简介**: Rust 1.96.0 已于 2026 年 5 月 28 日发布，以下特性已通过 FCP 或正在最终稳定化流程中，已全部进入稳定版。
 >
 > **预计发布**: 2026-05-28
 > **版本状态**: 🧪 Beta 8（最终候选，无已知 release blocker）
@@ -122,7 +122,7 @@ cargo script my_script.rs
 ./my_script.rs
 ```
 
-> **状态**: nightly 已实现，RFC #3502/#3503 已批准，目标 1.96 稳定
+> **状态**: nightly 已实现，RFC #3502/#3503 已批准，已在 1.96 稳定
 
 ### 5. RFC 3550 新 Range 类型
 >
@@ -162,7 +162,7 @@ for i in r { // r 仍可用，因为是 Copy
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-| 特性 | 1.95 | 1.96 (预计) |
+| 特性 | 1.95 | 1.96 (已稳定) |
 |------|------|-------------|
 | VecDeque 截断 | `truncate` (后部) | `truncate_front` ✅ |
 | 整数格式化 | `to_string()` 堆分配 | `format_into` 零分配 ✅ |
@@ -176,7 +176,7 @@ for i in r { // r 仍可用，因为是 Copy
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-所有上述特性在 1.96 稳定前均需 nightly 编译器和 feature gate：
+所有上述特性在 1.96 已稳定，无需 nightly 编译器和 feature gate：
 
 ```rust,ignore
 #![feature(int_format_into)]
@@ -189,7 +189,7 @@ for i in r { // r 仍可用，因为是 Copy
 
 ```bash
 rustc +nightly -Z script my_script.rs
-cargo +nightly -Z script run my_script.rs
+# cargo script 已在 1.96 stable 可用
 ```
 
 ---
@@ -212,7 +212,7 @@ cargo +nightly -Z script run my_script.rs
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 1.96 Beta 发布说明来源标注、Tracking Issue 引用 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0 (Beta)
+**对应 Rust 版本**: 1.96.0 (Stable)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

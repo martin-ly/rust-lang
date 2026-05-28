@@ -13,3 +13,6 @@
 - [并发编程](./01_concurrency.md) — Send/Sync、线程、锁
 - [Futures 与 Streams](./02_async.md) — 异步状态机、流处理
 - [Tokio 运行时](./02_async.md) — 异步执行器与任务调度
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

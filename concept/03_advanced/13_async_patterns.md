@@ -13,3 +13,6 @@
 - [并发编程](./01_concurrency.md) — 并行与并发基础
 - [Reactive Programming](../06_ecosystem/40_reactive_programming.md) — 响应式流、背压
 - [性能优化](../06_ecosystem/15_performance_optimization.md) — 异步性能调优
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
