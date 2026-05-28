@@ -504,7 +504,7 @@ L4 跨进程/跨网络（分布式、微服务）
 | :--- | :--- | :--- | :--- |
 | :--- | :--- | :--- | :--- |
 
-**引用**：[ERROR_CODE_MAPPING](../../../02_reference/ERROR_CODE_MAPPING.md)
+**引用**：[ERROR_CODE_MAPPING](../../../02_reference/02_error_code_mapping.md)
 
 ---
 

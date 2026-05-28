@@ -61,7 +61,7 @@ mindmap
 | **型变理论** | [../../../research_notes/type_theory/variance_theory.md](../../../research_notes/type_theory/variance_theory.md) | 型变规则证明、类型构造器 |
 | **生命周期形式化** | [../../../research_notes/formal_methods/lifetime_formalization.md](../../../research_notes/formal_methods/lifetime_formalization.md) | 生命周期作为区域、子类型关系 |
 | **证明索引** | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) | 类型安全相关证明 |
-| **工具指南** | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) | 类型验证工具使用 |
+| **工具指南** | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) | 类型验证工具使用 |
 
 ---
 

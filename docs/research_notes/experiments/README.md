@@ -75,7 +75,7 @@
 - 如何设计有效的基准测试？
 - 如何分析性能瓶颈？
 
-**相关笔记**: [performance_benchmarks.md](./performance_benchmarks.md)
+**相关笔记**: [10_performance_benchmarks.md](./10_performance_benchmarks.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -91,7 +91,7 @@
 - 如何优化内存分配？
 - 内存泄漏如何检测和修复？
 
-**相关笔记**: [memory_analysis.md](./memory_analysis.md)
+**相关笔记**: [10_memory_analysis.md](./10_memory_analysis.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -107,7 +107,7 @@
 - 如何编写编译器友好的代码？
 - 内联、循环优化等优化的影响如何？
 
-**相关笔记**: [compiler_optimizations.md](./compiler_optimizations.md)
+**相关笔记**: [10_compiler_optimizations.md](./10_compiler_optimizations.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -123,7 +123,7 @@
 - 如何优化并发实现？
 - 锁、通道等同步原语的性能特征如何？
 
-**相关笔记**: [concurrency_performance.md](./concurrency_performance.md)
+**相关笔记**: [10_concurrency_performance.md](./10_concurrency_performance.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -153,10 +153,10 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [x] [性能基准测试](./performance_benchmarks.md) - 100%
-- [x] [内存分析](./memory_analysis.md) - 100%
-- [x] [编译器优化](./compiler_optimizations.md) - 100%
-- [x] [并发性能研究](./concurrency_performance.md) - 100%
+- [x] [性能基准测试](./10_performance_benchmarks.md) - 100%
+- [x] [内存分析](./10_memory_analysis.md) - 100%
+- [x] [编译器优化](./10_compiler_optimizations.md) - 100%
+- [x] [并发性能研究](./10_concurrency_performance.md) - 100%
 - [x] [宏展开性能分析](./10_macro_expansion_performance.md) - 100%
 
 ---
@@ -274,7 +274,7 @@
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-1. 复制模板文件（如 `performance_benchmarks.md`）
+1. 复制模板文件（如 `10_performance_benchmarks.md`）
 2. 填写实验假设和目标
 3. 设计实验方案
 4. 运行实验并收集数据

@@ -1031,8 +1031,8 @@ $\text{lft}(r) \subseteq \text{lft}(\text{target}(r))$：引用寿命不超过�
 
 | 类型 | 位置 |
 | :--- | :--- |
-| 多维矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §形式化；[README §六篇并表](README.md#formal_methods-六篇并表) 第 3 行 |
-| 证明树 | [THINKING_REPRESENTATION_METHODS](../../04_thinking/04_thinking_representation_methods.md) §4.5；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
+| 多维矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../04_thinking/04_multi_dimensional_concept_matrix.md) §形式化；[README §六篇并表](README.md#formal_methods-六篇并表) 第 3 行 |
+| 证明树 | [THINKING_REPRESENTATION_METHODS](../../04_thinking/04_thinking_representation_methods.md) §4.5；[PROOF_GRAPH_NETWORK](../../04_thinking/04_proof_graph_network.md) |
 
 *依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 

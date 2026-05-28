@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 六篇形式化文档 × 六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）自检，确保充分完整完备
-> **上位**: [README](./README.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[QUALITY_CHECKLIST](../QUALITY_CHECKLIST.md)
+> **上位**: [README](./README.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[QUALITY_CHECKLIST](../10_quality_checklist.md)
 
 ---
 
@@ -57,7 +57,7 @@
 - **属性关系**：与其它机制（ownership/borrow/lifetime/async/pin/send_sync）的依赖或等价关系。
 - **解释论证**：设计动机、为何可判定、与 FLS/RustBelt 等权威对应（见 README 国际权威对标）。
 - **形式证明**：定理编号 + 证明思路或完整证明；与 [PROOF_INDEX](../PROOF_INDEX.md) 衔接。
-- **反例**：至少一例违反导致编译错误或 UB；可集中见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
+- **反例**：至少一例违反导致编译错误或 UB；可集中见 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) 反例索引。
 - **思维表征四类**：各篇末尾「相关思维表征」表含思维导图、概念多维矩阵、决策树、推理证明树四类入口；见 [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) §3.1。
 
 ---

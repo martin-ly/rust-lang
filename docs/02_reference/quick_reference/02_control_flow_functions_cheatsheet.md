@@ -873,7 +873,7 @@ let _ = &v;
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [错误处理速查卡](./error_handling_cheatsheet.md) - 错误处理模式
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - 错误处理模式
 - [类型系统速查卡](./type_system.md) - 类型与函数
 - [集合与迭代器速查卡](./02_collections_iterators_cheatsheet.md) - 迭代器与循环
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与闭包

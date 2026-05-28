@@ -40,7 +40,7 @@
 | 3 | 05_design_patterns_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 4 | 05_macro_system_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 5 | 05_wasm_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 6 | UNSAFE_RUST_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 6 | 05_unsafe_rust_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 7 | 05_troubleshooting_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 8 | BEST_PRACTICES.md | 1.96 | ✅ | ✅ | **深度整合完成** |
 | 9 | RUST_196_MIGRATION_GUIDE.md | 1.96 | ✅ | ✅ | 已完成 |
@@ -153,7 +153,7 @@ fn demonstrate_196_features() {
 - [async Fn trait 改进](./05_async_programming_usage_guide.md)
 
 #### 🛡️ 系统编程
-- [高级线程控制](./UNSAFE_RUST_GUIDE.md)
+- [高级线程控制](./05_unsafe_rust_guide.md)
 
 ---
 

@@ -15,7 +15,7 @@
     - [1. 高级实践工作坊 (`exercises/ADVANCED_OWNERSHIP_WORKSHOP.md`)](#1-高级实践工作坊-exercisesadvanced_ownership_workshopmd)
     - [2. 交互式学习指南 (`INTERACTIVE_LEARNING_GUIDE.md`)](#2-交互式学习指南-interactive_learning_guidemd)
     - [3. 知识图谱思维导图 (`visualizations/KNOWLEDGE_GRAPH_MINDMAP.md`)](#3-知识图谱思维导图-visualizationsknowledge_graph_mindmapmd)
-    - [4. 全面 FAQ (`COMPREHENSIVE_FAQ.md`)](#4-全面-faq-comprehensive_faqmd)
+    - [4. 全面 FAQ (`COMPREHENSIVE_10_faq.md`)](#4-全面-faq-comprehensive_faqmd)
     - [5. 错误诊断完全指南 (`ERROR_DIAGNOSTICS_GUIDE.md`)](#5-错误诊断完全指南-error_diagnostics_guidemd)
   - [📈 项目整体统计更新](#-项目整体统计更新)
     - [文档统计](#文档统计)
@@ -60,7 +60,7 @@
 | `ADVANCED_OWNERSHIP_WORKSHOP.md` | 实践工作坊 | 高级练习 | ✅ 100% |
 | `INTERACTIVE_LEARNING_GUIDE.md` | 交互式指南 | 问题驱动学习 | ✅ 100% |
 | `KNOWLEDGE_GRAPH_MINDMAP.md` | 可视化 | 知识图谱 | ✅ 100% |
-| `COMPREHENSIVE_FAQ.md` | 参考文档 | 常见问题 | ✅ 100% |
+| `COMPREHENSIVE_10_faq.md` | 参考文档 | 常见问题 | ✅ 100% |
 | `ERROR_DIAGNOSTICS_GUIDE.md` | 诊断指南 | 错误处理 | ✅ 100% |
 
 ### 新增内容统计
@@ -142,7 +142,7 @@
 
 ---
 
-### 4. 全面 FAQ (`COMPREHENSIVE_FAQ.md`)
+### 4. 全面 FAQ (`COMPREHENSIVE_10_faq.md`)
 > **[来源: [crates.io](https://crates.io/)]**
 
 **目标**: 覆盖从入门到高级的常见问题

@@ -411,9 +411,9 @@ fn main() {
 
 | 可视化类型 | 文档 | 内容 |
 | :--- | :--- | :--- |
-| 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 知识结构化思维导图 |
-| 概念矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念对比矩阵 |
-| 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策图网络 |
+| 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 知识结构化思维导图 |
+| 概念矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念对比矩阵 |
+| 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 决策图网络 |
 | 证明树 | [PROOF_INDEX](./PROOF_INDEX.md) | 证明树结构 |
 
 ### 研究笔记链接
@@ -424,7 +424,7 @@ fn main() {
 | :--- | :--- | :--- |
 | 形式化方法 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) | 所有权状态图 |
 | 类型理论 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) | 类型推导树 |
-| 实验研究 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) | 性能图表 |
+| 实验研究 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) | 性能图表 |
 
 ### 形式化定理链接
 >

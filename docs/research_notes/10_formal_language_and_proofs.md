@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 用形式语言（推理规则、操作语义、判定形式）表达 Rust 核心定理，提供数学级形式证明；与 Coq 骨架互补（形式语言为规范，Coq 为机器可检查实现）
-> **上位文档**: [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)、[FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md)
+> **上位文档**: [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md)、[FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md)
 
 ---
 
@@ -334,7 +334,7 @@ $$
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) — 完整证明（L2）
+- [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) — 完整证明（L2）
 - [coq_skeleton](./coq_skeleton/README.md) — Coq 骨架（L3）
 - [ownership_model](./formal_methods/ownership_model.md)、[borrow_checker_proof](./formal_methods/borrow_checker_proof.md)、[type_system_foundations](./type_theory/type_system_foundations.md)
 
@@ -351,7 +351,7 @@ $$
 
 > **适用版本**: Rust 1.94.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

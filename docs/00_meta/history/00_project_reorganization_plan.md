@@ -78,7 +78,7 @@
 ```
 rust-lang/
 ├── README.md                      # 项目主入口，简洁清晰
-├── CONTRIBUTING.md                # 贡献指南
+├── 10_contributing.md                # 贡献指南
 ├── LICENSE                        # 许可证
 ├── Cargo.toml                     # Workspace配置
 ├── Cargo.lock                     # 依赖锁定
@@ -165,7 +165,7 @@ rust-lang/
 | DECISION_TREES.md | 迁移 | 01_docs/05_roadmap/ |
 | LEARNING_CHECKLIST.md | 迁移 | 01_docs/01_getting_started.md |
 | VERSION_INDEX.md | 删除 | 内容整合 |
-| CONTRIBUTING.md | 保持 | CONTRIBUTING.md |
+| 10_contributing.md | 保持 | 10_contributing.md |
 | LICENSE | 保持 | LICENSE |
 
 ### 完成报告整合

@@ -448,7 +448,7 @@
 
 > **[来源: POPL - Programming Languages Research]**
 
-**文档**: [performance_benchmarks.md](./experiments/performance_benchmarks.md)
+**文档**: [10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)
 **优先级**: 🟡 中
 **预计完成时间**: 2-3 周
 
@@ -610,16 +610,16 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [贡献指南](./CONTRIBUTING.md)
-- [质量检查清单](./QUALITY_CHECKLIST.md)
-- [研究笔记模板](./TEMPLATE.md)
+- [贡献指南](./10_contributing.md)
+- [质量检查清单](./10_quality_checklist.md)
+- [研究笔记模板](./10_template.md)
 
 ### 工具和资源
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [研究工具使用指南](./TOOLS_GUIDE.md)
-- [研究方法论](./research_methodology.md)
+- [研究工具使用指南](./10_tools_guide.md)
+- [研究方法论](./10_research_methodology.md)
 - [实际应用案例](./10_practical_applications.md)
 
 ---

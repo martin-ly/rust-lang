@@ -93,7 +93,7 @@ impl ConfigBuilder {
 | [05_design_patterns_usage_guide.md](./05_design_patterns_usage_guide.md) | 设计模式 | ⭐⭐⭐ |
 | [05_macro_system_usage_guide.md](./05_macro_system_usage_guide.md) | 宏系统 | ⭐⭐⭐⭐ |
 | [05_wasm_usage_guide.md](./05_wasm_usage_guide.md) | WASM | ⭐⭐⭐ |
-| [UNSAFE_RUST_GUIDE.md](./UNSAFE_RUST_GUIDE.md) | Unsafe Rust | ⭐⭐⭐⭐ |
+| [05_unsafe_rust_guide.md](./05_unsafe_rust_guide.md) | Unsafe Rust | ⭐⭐⭐⭐ |
 | [05_troubleshooting_guide.md](./05_troubleshooting_guide.md) | 故障排查 | ⭐⭐ |
 | [BEST_PRACTICES.md](./BEST_PRACTICES.md) | 最佳实践 | ⭐⭐⭐ |
 | [workflow/](./workflow/README.md) | 工作流理论与模型 | ⭐⭐⭐ |

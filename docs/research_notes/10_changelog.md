@@ -443,7 +443,7 @@
 
 **新增文档**:
 
-- ✅ [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) - 设计机制论证：Pin 堆/栈区分、Send/Sync、Trait 对象等理由与完整论证
+- ✅ [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) - 设计机制论证：Pin 堆/栈区分、Send/Sync、Trait 对象等理由与完整论证
 - ✅ [ARGUMENTATION_GAP_INDEX](10_argumentation_gap_index.md) - 论证缺口与设计理由综合索引
 
 **设计机制论证补全**:
@@ -467,7 +467,7 @@
 **理论体系与论证体系结构**（2026-02-12 追加）:
 
 - ✅ [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) - 顶层框架：四层理论架构、五层论证结构
-- ✅ [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) - 安全与非安全全面论证、契约、UB、安全抽象
+- ✅ [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) - 安全与非安全全面论证、契约、UB、安全抽象
 
 **Rust 1.93 语言特性全面分析**（2026-02-12 追加）:
 
@@ -557,17 +557,17 @@
 
 - ✅ README.md - 主索引和导航中心
 - ✅ INDEX.md - 完整索引
-- ✅ QUICK_REFERENCE.md - 快速参考索引
+- ✅ 10_quick_reference.md - 快速参考索引
 - ✅ 10_research_roadmap.md - 研究路线图
 - ✅ SYSTEM_SUMMARY.md - 系统总结和统计
-- ✅ TEMPLATE.md - 研究笔记模板
-- ✅ CONTRIBUTING.md - 贡献指南
-- ✅ QUALITY_CHECKLIST.md - 质量检查清单
-- ✅ TOOLS_GUIDE.md - 研究工具使用指南
+- ✅ 10_template.md - 研究笔记模板
+- ✅ 10_contributing.md - 贡献指南
+- ✅ 10_quality_checklist.md - 质量检查清单
+- ✅ 10_tools_guide.md - 研究工具使用指南
 - ✅ 10_changelog.md - 更新日志（本文档）
 - ✅ INDEX.md - 完整索引
 - ✅ 10_getting_started.md - 快速入门指南
-- ✅ FAQ.md - 常见问题解答
+- ✅ 10_faq.md - 常见问题解答
 - ✅ 10_maintenance_guide.md - 维护指南
 - ✅ BEST_PRACTICES.md - 最佳实践
 - ✅ GLOSSARY.md - 术语表
@@ -577,7 +577,7 @@
 
 **研究方法论**:
 
-- ✅ research_methodology.md - 研究方法论框架
+- ✅ 10_research_methodology.md - 研究方法论框架
 - ✅ 10_practical_applications.md - 实际应用案例研究
 
 **形式化方法研究** (5个):
@@ -598,10 +598,10 @@
 
 **实验研究** (5个):
 
-- ✅ performance_benchmarks.md - 性能基准测试
-- ✅ memory_analysis.md - 内存分析
-- ✅ compiler_optimizations.md - 编译器优化
-- ✅ concurrency_performance.md - 并发性能研究
+- ✅ 10_performance_benchmarks.md - 性能基准测试
+- ✅ 10_memory_analysis.md - 内存分析
+- ✅ 10_compiler_optimizations.md - 编译器优化
+- ✅ 10_concurrency_performance.md - 并发性能研究
 - ✅ 10_macro_expansion_performance.md - 宏展开性能分析
 
 **目录索引** (3个):
@@ -1082,7 +1082,7 @@
 
 - ✅ 更新了 README.md，添加快速查找工具链接
 - ✅ 更新了 INDEX.md，添加快速查找工具索引
-- ✅ 更新了 QUICK_REFERENCE.md，添加快速查找工具提示
+- ✅ 更新了 10_quick_reference.md，添加快速查找工具提示
 - ✅ 更新了 SYSTEM_SUMMARY.md，更新文档统计
 
 **系统改进**:
@@ -1185,7 +1185,7 @@
 
 - ✅ 更新了 README.md，添加研究进展跟踪链接
 - ✅ 更新了 INDEX.md，添加研究进展跟踪索引
-- ✅ 更新了 QUICK_REFERENCE.md，添加研究进展跟踪快速链接
+- ✅ 更新了 10_quick_reference.md，添加研究进展跟踪快速链接
 - ✅ 更新了 SYSTEM_SUMMARY.md，更新文档统计
 
 **系统改进**:
@@ -1211,7 +1211,7 @@
 - ✅ 更新了 INDEX.md 中的状态统计
 - ✅ 更新了 SYSTEM_SUMMARY.md 中的研究笔记状态
 - ✅ 更新了 README.md 中的研究进展部分
-- ✅ 更新了 QUICK_REFERENCE.md 中的状态标记
+- ✅ 更新了 10_quick_reference.md 中的状态标记
 
 **研究笔记详情**:
 

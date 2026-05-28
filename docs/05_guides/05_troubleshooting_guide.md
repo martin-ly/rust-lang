@@ -586,7 +586,7 @@ A: 使用 `cargo tree` 查看依赖关系
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-常见错误码 → 本项目文档映射见 [ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md)。
+常见错误码 → 本项目文档映射见 [02_error_code_mapping.md](../02_reference/02_error_code_mapping.md)。
 
 ---
 
@@ -646,7 +646,7 @@ A: 使用 `cargo tree` 查看依赖关系
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
-| **错误参考** | [ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md) |
+| **错误参考** | [02_error_code_mapping.md](../02_reference/02_error_code_mapping.md) |
 | **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
 | :--- | :--- |
 | :--- | :--- |

@@ -215,7 +215,7 @@
 - 10_00_comprehensive_summary.md ✅
 - 10_00_organization_and_navigation.md ✅
 - PROOF_INDEX.md ✅
-- CORE_THEOREMS_FULL_PROOFS.md ✅
+- 10_core_theorems_full_proofs.md ✅
 - 10_theorem_rust_example_mapping.md ✅
 - 10_formal_concepts_encyclopedia.md ✅
 - 10_faq_comprehensive.md ✅

@@ -265,7 +265,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) — 核心定理 T-OW2、T-BR1、T-TY3 完整证明（L2）
+- [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) — 核心定理 T-OW2、T-BR1、T-TY3 完整证明（L2）
 - [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — 形式语言与形式证明（推理规则、操作语义、判定形式）
 - [FORMAL_FULL_MODEL_EN_SUMMARY](./10_formal_full_model_en_summary.md) — 英文摘要
 - [PROOF_INDEX](./PROOF_INDEX.md) — 105+ 证明索引、按深度导航
@@ -285,7 +285,7 @@
 
 > **适用版本**: Rust 1.94.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

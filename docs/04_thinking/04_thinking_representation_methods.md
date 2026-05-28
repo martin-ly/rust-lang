@@ -676,9 +676,9 @@ mindmap
 | C05 | 并发模型对比 | crates/c05_threads/docs/ |
 | C06 | 异步编程决策树 | crates/c06_async/docs/ |
 | C07 | 进程管理速查 | docs/quick_reference/02_process_management_cheatsheet.md |
-| C08 | 算法复杂度矩阵 | docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md |
+| C08 | 算法复杂度矩阵 | docs/04_multi_dimensional_concept_matrix.md |
 | C09 | 设计模式矩阵 | crates/c09_design_pattern/docs/ |
-| C10 | 网络协议矩阵 | docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md |
+| C10 | 网络协议矩阵 | docs/04_multi_dimensional_concept_matrix.md |
 | C11 | 宏系统层级 | crates/c11_macro_system/docs/ |
 | C12 | WASM 思维导图 | crates/c12_wasm/docs/WASM_MIND_MAPS.md |
 
@@ -1757,15 +1757,15 @@ impl DecisionEngine {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
-- [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网
-- [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网
+- [04_mind_map_collection.md](./04_mind_map_collection.md) - 思维导图集合
+- [04_decision_graph_network.md](./04_decision_graph_network.md) - 决策图网
+- [04_proof_graph_network.md](./04_proof_graph_network.md) - 证明图网
 
 ### 7.3 相关文档
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
+- [04_multi_dimensional_concept_matrix.md](./04_multi_dimensional_concept_matrix.md) - 多维概念矩阵
 - [07_knowledge_structure_framework.md](../07_project/07_knowledge_structure_framework.md) - 知识结构框架
 
 ---

@@ -583,8 +583,8 @@ impl ProcessMonitor {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-- [异步编程速查卡](./async_patterns.md) - 异步进程管理
-- [错误处理速查卡](./error_handling_cheatsheet.md) - 进程错误处理
+- [异步编程速查卡](./02_async_patterns.md) - 异步进程管理
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - 进程错误处理
 - [线程与并发速查卡](./02_threads_concurrency_cheatsheet.md) - 进程与线程
 
 ---

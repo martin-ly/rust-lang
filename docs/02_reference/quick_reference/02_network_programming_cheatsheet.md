@@ -658,8 +658,8 @@ async fn proxy_server() -> io::Result<()> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [异步编程速查卡](./async_patterns.md) - 异步网络编程
-- [错误处理速查卡](./error_handling_cheatsheet.md) - 网络错误处理
+- [异步编程速查卡](./02_async_patterns.md) - 异步网络编程
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - 网络错误处理
 - [线程与并发速查卡](./02_threads_concurrency_cheatsheet.md) - 并发网络编程
 
 ---

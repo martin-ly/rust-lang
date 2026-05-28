@@ -93,8 +93,8 @@ fn handle_message(msg: Message) {
 
 | 主题 | 文档 | 描述 |
 | :--- | :--- | :--- |
-| 形式化分析 | [FORMAL_PROOF_SYSTEM_GUIDE.md](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) | 形式化证明系统指南 |
-| 核心定理证明 | [CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 完整形式化证明 |
+| 形式化分析 | [10_formal_proof_system_guide.md](../research_notes/10_formal_proof_system_guide.md) | 形式化证明系统指南 |
+| 核心定理证明 | [10_core_theorems_full_proofs.md](../research_notes/10_core_theorems_full_proofs.md) | 完整形式化证明 |
 | 证明索引 | [PROOF_INDEX](../research_notes/PROOF_INDEX.md) | 形式化证明集合 |
 
 ```rust
@@ -194,8 +194,8 @@ fn ownership_theorem() {
   | C++概念 | Rust对应 | 本文档 |
 | :--- | :--- | :--- |
   | 手动内存管理 | 所有权系统 | [formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) |
-  | 智能指针 | Box/Rc/Arc | [02_reference/quick_reference/smart_pointers_cheatsheet.md](../02_reference/quick_reference/smart_pointers_cheatsheet.md) |
-  | 模板 | 泛型 | [02_reference/quick_reference/generics_cheatsheet.md](../02_reference/quick_reference/generics_cheatsheet.md) |
+  | 智能指针 | Box/Rc/Arc | [02_reference/quick_reference/02_smart_pointers_cheatsheet.md](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) |
+  | 模板 | 泛型 | [02_reference/quick_reference/02_generics_cheatsheet.md](../02_reference/quick_reference/02_generics_cheatsheet.md) |
 
 ##### Memory Management
 

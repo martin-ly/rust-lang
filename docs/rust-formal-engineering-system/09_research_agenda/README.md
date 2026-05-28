@@ -12,7 +12,7 @@
 | :--- | :--- |
 | 研究路线图 | [10_research_roadmap.md](../../research_notes/10_research_roadmap.md) |
 | 形式化证明索引 | [PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
-| 研究方法论 | [research_methodology.md](../../research_notes/research_methodology.md) |
+| 研究方法论 | [10_research_methodology.md](../../research_notes/10_research_methodology.md) |
 
 ---
 

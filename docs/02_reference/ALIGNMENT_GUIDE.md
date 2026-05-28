@@ -467,7 +467,7 @@ struct CacheLinePadded {
 
 - [ownership_model](../research_notes/formal_methods/ownership_model.md) - transmute 形式化约束
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 指针有效性
-- [memory_analysis](../research_notes/experiments/memory_analysis.md) - align_of 实验
+- [memory_analysis](../research_notes/experiments/10_memory_analysis.md) - align_of 实验
 
 ---
 

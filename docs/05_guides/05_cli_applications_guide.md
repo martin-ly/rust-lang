@@ -53,7 +53,7 @@
 本指南为官方 **Command Line Book** 的补充与项目内导航，帮助在开发 Rust 命令行应用时快速定位到本项目的相关模块和示例。
 
 **形式化引用**：T-OW2、T-BR1（进程间资源）、
-[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)（子进程安全边界）。
+[SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md)（子进程安全边界）。
 
 ---
 
@@ -78,8 +78,8 @@
 | 标准输入输出 | std::io | [C07 进程管理](../../crates/c07_process/README.md) |
 | 子进程与管道 | std::process | C07 [进程管理](../../crates/c07_process/docs/README.md) |
 | 文件系统 | std::fs | C03、C08 算法 |
-| 错误处理 | anyhow、thiserror | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
-| 异步 CLI | tokio | [C06 异步](../../crates/c06_async/README.md)、[async_patterns](../02_reference/quick_reference/async_patterns.md) |
+| 错误处理 | anyhow、thiserror | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
+| 异步 CLI | tokio | [C06 异步](../../crates/c06_async/README.md)、[async_patterns](../02_reference/quick_reference/02_async_patterns.md) |
 
 ---
 
@@ -285,7 +285,7 @@ fn main() {
 
 1. **入门**: 通读 [Command Line Book](https://rust-cli.github.io/book/) 快速教程
 2. **巩固**: 学习 C07 进程管理（std::process、std::io）
-3. **进阶**: C03 错误处理 + [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md)
+3. **进阶**: C03 错误处理 + [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md)
 4. **高级**: C06 异步 + 高性能 CLI 工具开发
 
 ---
@@ -410,7 +410,7 @@ fn main() -> ExitCode {
 | :--- | :--- |
 | **前置知识** | [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md) |
 | :--- | :--- |
-| **错误处理** | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
+| **错误处理** | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | **异步编程** | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
 | :--- | :--- |
 | **Cargo 工具** | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |

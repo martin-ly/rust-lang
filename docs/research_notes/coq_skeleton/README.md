@@ -10,7 +10,7 @@
 
 请访问 [archive/deprecated/coq_skeleton](../../archive/deprecated/coq_skeleton/README.md) 查看历史内容。
 
-**主路径**: [CORE_THEOREMS_FULL_PROOFS](../CORE_THEOREMS_FULL_PROOFS.md) - L2 完整证明
+**主路径**: [CORE_THEOREMS_FULL_PROOFS](../10_core_theorems_full_proofs.md) - L2 完整证明
 
 ---
 

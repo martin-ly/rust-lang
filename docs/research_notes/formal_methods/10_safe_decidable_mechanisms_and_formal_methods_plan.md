@@ -134,7 +134,7 @@
 - **概念定义**：每机制在对应形式化文档中有 Def 或等价形式化描述（Send/Sync 需补）。
 - **属性关系**：如 Send 与 Sync 的等价关系、与 ownership/borrow 的依赖（spawn 依赖 Send；Future 并发依赖 Send+Sync）。
 - **解释论证**：设计动机、为何编译期可判定、与 FLS/RustBelt 等权威来源的对应（见 README 国际权威对标）。
-- **形式证明**：定理编号与证明思路指向具体文档与小节；反例集中见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
+- **形式证明**：定理编号与证明思路指向具体文档与小节；反例集中见 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) 反例索引。
 
 ---
 
@@ -184,10 +184,10 @@
 
 | 类型 | 当前入口 | 与 formal_methods 的绑定建议 |
 | :--- | :--- | :--- |
-| **思维导图** | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) | 增加「安全可判定机制」节点：ownership → borrow → lifetime → Send/Sync → Pin → async；每节点链到对应 formal_methods 文档。 |
+| **思维导图** | [MIND_MAP_COLLECTION](../../04_thinking/04_mind_map_collection.md) | 增加「安全可判定机制」节点：ownership → borrow → lifetime → Send/Sync → Pin → async；每节点链到对应 formal_methods 文档。 |
 | **概念多维矩阵** | [README §六篇并表](README.md#formal_methods-六篇并表)、[执行模型矩阵](../software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵)、[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md) §6 | 安全可判定机制 × 可判定性 × 安全边界 × 形式化文档（§3.1）；六篇并表含 Send/Sync 专篇。 |
-| **决策树** | [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md)、[DESIGN_MECHANISM_RATIONALE §Send/Sync](../DESIGN_MECHANISM_RATIONALE.md) | 需跨线程 → Send/Sync；需 async → Send 跨 await、Pin；与 formal_methods Def/定理编号并排引用。 |
-| **推理证明树** | [PROOF_INDEX](../PROOF_INDEX.md)、[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) | Send/Sync → [send_sync_formalization](./send_sync_formalization.md)、async T6.2、SPAWN-T1、CHAN-T1；ownership/borrow/lifetime 保持现有。 |
+| **决策树** | [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md)、[DESIGN_MECHANISM_RATIONALE §Send/Sync](../10_design_mechanism_rationale.md) | 需跨线程 → Send/Sync；需 async → Send 跨 await、Pin；与 formal_methods Def/定理编号并排引用。 |
+| **推理证明树** | [PROOF_INDEX](../PROOF_INDEX.md)、[PROOF_GRAPH_NETWORK](../../04_thinking/04_proof_graph_network.md) | Send/Sync → [send_sync_formalization](./send_sync_formalization.md)、async T6.2、SPAWN-T1、CHAN-T1；ownership/borrow/lifetime 保持现有。 |
 
 ### 4.2 各篇形式化文档内「相关思维表征」块
 >
@@ -244,7 +244,7 @@
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) | 阶段 D 中增加「安全可判定机制↔思维表征」表或节。 |
 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./10_formal_methods_completeness_checklist.md) | 六篇×六维完备性检查表（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）；与总览互为自检。 |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) | §3 完备对比表与该文档 92 项一致；可互为「总览」与「详表」。 |
-| [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) | Send/Sync 设计理由已存在；形式化 Def/定理由阶段 A 专篇承担，DESIGN_MECHANISM 链到专篇。 |
+| [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md) | Send/Sync 设计理由已存在；形式化 Def/定理由阶段 A 专篇承担，DESIGN_MECHANISM 链到专篇。 |
 
 ---
 

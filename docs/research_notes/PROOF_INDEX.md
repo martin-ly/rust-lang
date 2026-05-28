@@ -155,7 +155,7 @@
 
 **引用格式**: 在证明树中可写 `A1 → L1 → T1 → C1` 表示公理→引理→定理→推论链。
 
-**对应文档**: [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) 第 4 节证明树、[PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md)。
+**对应文档**: [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) 第 4 节证明树、[PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md)。
 
 **顶层框架**: [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) —— 本索引的证明归属理论体系第 3 层（性质定理层）。
 
@@ -218,7 +218,7 @@
 
 **已完成的证明**:
 
-1. **定理 2 (所有权唯一性)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §2
+1. **定理 2 (所有权唯一性)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §2
    - **形式化表示**: 对于任何值 $v$，在任意时刻，最多存在一个变量 $x$ 使得 $\Omega(x) = \text{Owned}$ 且 $\Gamma(x) = v$
    - **证明方法**: 结构归纳法
    - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md#定理-2-所有权唯一性)
@@ -280,7 +280,7 @@
 
 **已完成的证明**:
 
-1. **定理 1 (数据竞争自由)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §3
+1. **定理 1 (数据竞争自由)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §3
    - **形式化表示**: 在借用检查器下，程序执行过程中不会出现数据竞争
    - **证明方法**: 结构归纳法
    - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由)
@@ -398,7 +398,7 @@
      - 基础情况：$\beta$ 归约
      - 归纳步骤：函数应用求值
 
-3. **定理 3 (类型安全)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §4
+3. **定理 3 (类型安全)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §4
    - **形式化表示**: $\Gamma \vdash e : \tau \rightarrow \neg \exists e': e \to^* e' \land \text{type\_error}(e')$
    - **证明方法**: 由进展性和保持性直接得出
    - **证明位置**: [type_system_foundations.md](./type_theory/type_system_foundations.md#定理-3-类型安全)
@@ -628,7 +628,7 @@
 
 > **[来源: Wikipedia - Concurrency]**
 
-**文档**: [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)
+**文档**: [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md)
 
 **已完成的证明**:
 
@@ -667,18 +667,18 @@
 
 #### 设计机制论证
 
-**文档**: [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md)
+**文档**: [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md)
 
 **已完成的证明**:
 
 1. **Def OR1 (Option/Result 语义)** ✅ — 无 null；显式变体编码
 2. **Axiom OR1** ✅ — 类型系统强制穷尽；排中律不成立
-3. **定理 OR-T1 (显式错误处理)** ✅ — 无 unwrap 则 None/Err 必被处理；[证明位置](./DESIGN_MECHANISM_RATIONALE.md)
+3. **定理 OR-T1 (显式错误处理)** ✅ — 无 unwrap 则 None/Err 必被处理；[证明位置](./10_design_mechanism_rationale.md)
 4. **推论 OR-C1** ✅ — Option/Result 与构造性逻辑 $T \lor E$ 对应
 
 #### 研究方法论
 
-**文档**: [research_methodology](./research_methodology.md)
+**文档**: [research_methodology](./10_research_methodology.md)
 
 **已完成的证明**:
 
@@ -688,28 +688,28 @@
 
 #### 实验与形式化衔接
 
-**文档**: [experiments/README](./experiments/README.md)、[compiler_optimizations](./experiments/compiler_optimizations.md)、[memory_analysis](./experiments/memory_analysis.md)、[performance_benchmarks](./experiments/performance_benchmarks.md)、[concurrency_performance](./experiments/concurrency_performance.md)、[macro_expansion_performance](./experiments/10_macro_expansion_performance.md)
+**文档**: [experiments/README](./experiments/README.md)、[compiler_optimizations](./experiments/10_compiler_optimizations.md)、[memory_analysis](./experiments/10_memory_analysis.md)、[performance_benchmarks](./experiments/10_performance_benchmarks.md)、[concurrency_performance](./experiments/10_concurrency_performance.md)、[macro_expansion_performance](./experiments/10_macro_expansion_performance.md)
 
 **已完成的证明**:
 
 1. **定理 EX-T1 (验证蕴涵)** ✅ — 实验反例可否定矛盾假设
 2. **定理 EX-T2 (可重复性蕴涵)** ✅ — 固定环境则观测可比较
 3. **推论 EX-C1** ✅ — 实验与形式化证明互补
-4. **定理 CO-T1 (编译器优化与类型安全)** ✅ — 优化保持类型；[证明位置](./experiments/compiler_optimizations.md)
-5. **定理 MA-T1 (内存观测蕴涵)** ✅ — Valgrind/Miri 无报告与 ownership T2/T3 一致；[证明位置](./experiments/memory_analysis.md)
-6. **引理 MA-L1 (工具与定理对应)** ✅ — Valgrind/Miri/ASan 与 ownership T3 三性质对应；[证明位置](./experiments/memory_analysis.md)
-7. **定理 PB-T1 (性能实验蕴涵)** ✅ — 验证+可重复性⇒经验支持；[证明位置](./experiments/performance_benchmarks.md)
-8. **引理 PB-L1 (统计与形式化互补)** ✅ — Criterion 置信区间、统计显著性；[证明位置](./experiments/performance_benchmarks.md)
-9. **定理 CP-T1 (并发观测蕴涵)** ✅ — TSan 无报告与 borrow T1、async T6.2 一致；[证明位置](./experiments/concurrency_performance.md)
-10. **引理 CP-L1 (Send/Sync 与 borrow T1 衔接)** ✅ — 跨线程 Send/Sync 与无数据竞争；[证明位置](./experiments/concurrency_performance.md)
+4. **定理 CO-T1 (编译器优化与类型安全)** ✅ — 优化保持类型；[证明位置](./experiments/10_compiler_optimizations.md)
+5. **定理 MA-T1 (内存观测蕴涵)** ✅ — Valgrind/Miri 无报告与 ownership T2/T3 一致；[证明位置](./experiments/10_memory_analysis.md)
+6. **引理 MA-L1 (工具与定理对应)** ✅ — Valgrind/Miri/ASan 与 ownership T3 三性质对应；[证明位置](./experiments/10_memory_analysis.md)
+7. **定理 PB-T1 (性能实验蕴涵)** ✅ — 验证+可重复性⇒经验支持；[证明位置](./experiments/10_performance_benchmarks.md)
+8. **引理 PB-L1 (统计与形式化互补)** ✅ — Criterion 置信区间、统计显著性；[证明位置](./experiments/10_performance_benchmarks.md)
+9. **定理 CP-T1 (并发观测蕴涵)** ✅ — TSan 无报告与 borrow T1、async T6.2 一致；[证明位置](./experiments/10_concurrency_performance.md)
+10. **引理 CP-L1 (Send/Sync 与 borrow T1 衔接)** ✅ — 跨线程 Send/Sync 与无数据竞争；[证明位置](./experiments/10_concurrency_performance.md)
 11. **定理 MP-T1 (宏展开与类型保持)** ✅ — cargo check 通过即良型；[证明位置](./experiments/10_macro_expansion_performance.md)
 12. **引理 MP-L1 (宏展开阶段)** ✅ — 宏展开在类型检查之前；[证明位置](./experiments/10_macro_expansion_performance.md)
-13. **引理 CO-L1 (优化阶段顺序)** ✅ — MIR 优化在类型检查之后；[证明位置](./experiments/compiler_optimizations.md)
-14. **推论 MA-C1** ✅ — 循环引用逻辑泄漏不在 ownership T3 范围；[证明位置](./experiments/memory_analysis.md)
-15. **推论 PB-C1** ✅ — 性能实验与形式化证明互补；[证明位置](./experiments/performance_benchmarks.md)
-16. **推论 CP-C1** ✅ — 并发原语性能开销可实验测量；[证明位置](./experiments/concurrency_performance.md)
+13. **引理 CO-L1 (优化阶段顺序)** ✅ — MIR 优化在类型检查之后；[证明位置](./experiments/10_compiler_optimizations.md)
+14. **推论 MA-C1** ✅ — 循环引用逻辑泄漏不在 ownership T3 范围；[证明位置](./experiments/10_memory_analysis.md)
+15. **推论 PB-C1** ✅ — 性能实验与形式化证明互补；[证明位置](./experiments/10_performance_benchmarks.md)
+16. **推论 CP-C1** ✅ — 并发原语性能开销可实验测量；[证明位置](./experiments/10_concurrency_performance.md)
 17. **推论 MP-C1** ✅ — 宏展开耗时可实验测量；[证明位置](./experiments/10_macro_expansion_performance.md)
-18. **推论 CO-C1** ✅ — 优化级别比较为性能实验；[证明位置](./experiments/compiler_optimizations.md)
+18. **推论 CO-C1** ✅ — 优化级别比较为性能实验；[证明位置](./experiments/10_compiler_optimizations.md)
 
 #### 形式化验证指南
 
@@ -724,7 +724,7 @@
 
 #### 质量检查清单
 
-**文档**: [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md)
+**文档**: [QUALITY_CHECKLIST](./10_quality_checklist.md)
 
 **已完成的证明**:
 
@@ -755,7 +755,7 @@
 | 深度 | 证明列表（示例） |
 | :--- | :--- |
 | **L1** | 所有权 T3、借用 T2、生命周期 LF-T1–T3、类型 T1/T2/T4/T5、异步 T6.1–T6.3、Pin T1–T3、Trait T1–T3、设计模式推论、实验定理 |
-| **L2** | 所有权 T2、借用 T1、类型 T3（见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)）；型变 T1–T4、组合工程 CE-T1–T3、边界 BMP-T1/T2 |
+| **L2** | 所有权 T2、借用 T1、类型 T3（见 [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md)）；型变 T1–T4、组合工程 CE-T1–T3、边界 BMP-T1/T2 |
 | **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./10_coq_isabelle_proof_scaffolding.md) |
 
 ---
@@ -767,7 +767,7 @@
 
 > **[来源: IEEE - Programming Language Standards]**
 
-- ✅ **所有权唯一性** `L2` ([ownership_model.md](./formal_methods/ownership_model.md#定理-2-所有权唯一性)、[CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §2)
+- ✅ **所有权唯一性** `L2` ([ownership_model.md](./formal_methods/ownership_model.md#定理-2-所有权唯一性)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §2)
   - 方法：结构归纳法
   - 结果：每个值最多有一个所有者
 
@@ -778,11 +778,11 @@
   - 方法：反证法 + 结构归纳法
   - 结果：无悬垂指针、无双重释放、无内存泄漏
 
-- ✅ **数据竞争自由** `L2` ([borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由)、[CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §3)
+- ✅ **数据竞争自由** `L2` ([borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §3)
   - 方法：结构归纳法
   - 结果：程序执行过程中不会出现数据竞争
 
-- ✅ **类型安全** `L2` ([type_system_foundations.md](./type_theory/type_system_foundations.md#定理-3-类型安全)、[CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §4)
+- ✅ **类型安全** `L2` ([type_system_foundations.md](./type_theory/type_system_foundations.md#定理-3-类型安全)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §4)
   - 方法：由进展性和保持性得出
   - 结果：良型程序不会出现类型错误
 
@@ -875,13 +875,13 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [形式语言与形式证明](./10_formal_language_and_proofs.md) — 推理规则、操作语义、判定形式、形式证明推导树（数学级，与 Coq 互补）
-- [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md) — T-OW2、T-BR1、T-TY3 L2 级完整证明
+- [核心定理完整证明](./10_core_theorems_full_proofs.md) — T-OW2、T-BR1、T-TY3 L2 级完整证明
 - [理论体系与论证体系结构](./10_theoretical_and_argumentation_system_architecture.md) - 顶层框架，本索引归属第 3 层
 - [完整总结综合](./10_00_comprehensive_summary.md) - 项目全貌、知识地图、论证总览
 - [论证脉络关系与论证思路](./10_argumentation_chain_and_flow.md) - 论证五步法、概念→定理 DAG、文档依赖、推导链
 - [全局统一系统化框架](./10_unified_systematic_framework.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
-- [构造性语义与表达能力边界](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 操作/指称/公理语义、表达能力边界论证
-- [形式化论证系统梳理指南](./FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射、反例索引
+- [构造性语义与表达能力边界](./10_language_semantics_expressiveness.md) - 操作/指称/公理语义、表达能力边界论证
+- [形式化论证系统梳理指南](./10_formal_proof_system_guide.md) - 论证缺口分析、概念-公理-定理映射、反例索引
 - [研究笔记主索引](./README.md)
 - [研究进展跟踪](./10_progress_tracking.md)
 - [研究任务清单](./10_task_checklist.md)
@@ -956,7 +956,7 @@
 - Cargo.toml 多行内联表
 - 配置文件 include 支持
 
-详见 [Rust 1.94 研究更新](./RUST_194_RESEARCH_UPDATE.md)
+详见 [Rust 1.94 研究更新](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

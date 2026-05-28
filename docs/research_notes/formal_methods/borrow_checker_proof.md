@@ -1955,10 +1955,10 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 
 | 类型 | 位置 |
 | :--- | :--- |
-| 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) §2、C01；本文 §思维导图 |
-| 多维矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §1；[README §六篇并表](README.md#formal_methods-六篇并表) 第 2 行 |
-| 证明树 | 本文 §证明树；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
-| 决策树 | [DECISION_GRAPH_NETWORK](../../04_thinking/DECISION_GRAPH_NETWORK.md) §1 |
+| 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/04_mind_map_collection.md) §2、C01；本文 §思维导图 |
+| 多维矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../../04_thinking/04_multi_dimensional_concept_matrix.md) §1；[README §六篇并表](README.md#formal_methods-六篇并表) 第 2 行 |
+| 证明树 | 本文 §证明树；[PROOF_GRAPH_NETWORK](../../04_thinking/04_proof_graph_network.md) |
+| 决策树 | [DECISION_GRAPH_NETWORK](../../04_thinking/04_decision_graph_network.md) §1 |
 
 *依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 

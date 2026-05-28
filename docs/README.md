@@ -156,7 +156,7 @@ docs/
 ---
 
 **返回项目主页**: [../README.md](../README.md)
-**贡献指南**: CONTRIBUTING.md
+**贡献指南**: 10_contributing.md
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

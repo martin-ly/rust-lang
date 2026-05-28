@@ -2532,7 +2532,7 @@ fn main() {
 |:---|:---|:---|
 | 所有权 | `quick_reference/ownership_cheatsheet.md` | 所有权规则速查 |
 | 类型系统 | `quick_reference/type_system.md` | 类型相关速查 |
-| 错误处理 | `quick_reference/error_handling_cheatsheet.md` | 错误处理模式 |
+| 错误处理 | `quick_reference/02_error_handling_cheatsheet.md` | 错误处理模式 |
 | 生命周期 | `quick_reference/lifetimes_cheatsheet.md` | 生命周期速查 |
 
 ### 官方资源

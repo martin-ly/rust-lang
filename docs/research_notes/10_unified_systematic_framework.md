@@ -120,7 +120,7 @@
 | 无全局一致性 | 全局一致性校验矩阵 + 术语对照 |
 | 语义归纳缺失 | 概念族谱 + 一句话语义归纳 |
 | 思维表征分散 | 思维导图、矩阵、证明树、决策树、反例统一索引 |
-| 缺少编程语言构造性语义 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
+| 缺少编程语言构造性语义 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) |
 | 缺少表达能力边界论证 | 同上 + 本框架 § 表达能力边界决策树 |
 
 ---
@@ -247,7 +247,7 @@
 | 操作语义 | 归约保持所有权 | 保持性 T2 | 数据竞争自由 | 规则即边界 |
 | 指称语义 | - | 类型=命题 | - | 构造性限制 |
 | 公理语义 | 分离逻辑 | Hoare | unsafe 契约 | 前置/后置 |
-| 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
+| 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
 
 ### 3. 证明完成度 vs 论证缺口 矩阵
 
@@ -437,7 +437,7 @@
 | Pin | 非 Unpin 被 Pin 后位置不变，自引用安全 | pin_self_referential |
 | Trait 对象 | vtable 动态分发、对象安全约束、解析正确 | trait_system_formalization |
 | 操作语义 | 程序通过归约/求值执行，保持类型与所有权 | type_system, ownership |
-| 指称语义 | 类型=命题，程序=证明，Result/! 对应 ∨/⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
+| 指称语义 | 类型=命题，程序=证明，Result/! 对应 ∨/⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) |
 | 公理语义 | 前置/后置条件刻画 unsafe 契约 | 同上 |
 
 ### 概念族依赖关系
@@ -551,16 +551,16 @@ Pin ──→ 自引用安全
 
 | 文档 | 用途 |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
-| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全与非安全全面论证、契约、UB、安全抽象 |
+| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) | 安全与非安全全面论证、契约、UB、安全抽象 |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义形式化、表达能力边界 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射、反例索引 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义形式化、表达能力边界 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
 | [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
 | [INDEX](./INDEX.md) | 研究笔记完整索引 |
-| [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵 |
-| [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合 |
-| [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策树 |
-| [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明图网 |
+| [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵 |
+| [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 思维导图集合 |
+| [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 决策树 |
+| [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | 证明图网 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 13 项核心特性完整链 |

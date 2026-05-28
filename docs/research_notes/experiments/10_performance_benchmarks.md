@@ -250,7 +250,7 @@
 | 并发性能 | borrow T1、async T6.2 | 无数据竞争 |
 | 序列化 | type_system 保持性 | 类型正确、无 UB |
 
-**引用**：见 [experiments/README](../experiments/README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)。
+**引用**：见 [experiments/README](../experiments/README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)。
 
 ---
 
@@ -1461,9 +1461,9 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
-| 内存分析 | [memory_analysis.md](./memory_analysis.md) | 内存分配与使用分析 |
-| 并发性能 | [concurrency_performance.md](./concurrency_performance.md) | 并发性能研究 |
-| 编译器优化 | [compiler_optimizations.md](./compiler_optimizations.md) | 编译器优化研究 |
+| 内存分析 | [10_memory_analysis.md](./10_memory_analysis.md) | 内存分配与使用分析 |
+| 并发性能 | [10_concurrency_performance.md](./10_concurrency_performance.md) | 并发性能研究 |
+| 编译器优化 | [10_compiler_optimizations.md](./10_compiler_optimizations.md) | 编译器优化研究 |
 | 宏展开性能 | [10_macro_expansion_performance.md](./10_macro_expansion_performance.md) | 宏展开性能分析 |
 
 ### 形式化证明
@@ -1471,7 +1471,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 
 | 文档 | 链接 | 定理 |
 | :--- | :--- | :--- |
-| CORE_THEOREMS_FULL_PROOFS | [../CORE_THEOREMS_FULL_PROOFS.md](../CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明 |
+| CORE_THEOREMS_FULL_PROOFS | [../10_core_theorems_full_proofs.md](../10_core_theorems_full_proofs.md) | 核心定理完整证明 |
 | 性能实验形式化 | [../experiments/README.md](../experiments/README.md) | 实验形式化论证 (EX-T1, EX-T2) |
 
 ### 理论体系

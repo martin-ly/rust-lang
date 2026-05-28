@@ -179,7 +179,7 @@ research_notes/
 │   ├── 10_argumentation_chain_and_flow.md
 │   ├── 10_argumentation_gap_index.md
 │   ├── PROOF_INDEX.md
-│   └── CORE_THEOREMS_FULL_PROOFS.md
+│   └── 10_core_theorems_full_proofs.md
 ├── 工具与实现层
 │   ├── coq_skeleton/            # L3证明骨架
 │   ├── 10_aeneas_integration_plan.md
@@ -786,7 +786,7 @@ Rust新版本发布
 ```text
 新贡献者
     │
-    ├──→ 阅读 CONTRIBUTING.md
+    ├──→ 阅读 10_contributing.md
     │
     ├──→ 选择入门任务 (good-first-issue)
     │

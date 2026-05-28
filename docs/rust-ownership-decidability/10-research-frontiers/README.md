@@ -256,8 +256,8 @@ Rust 所有权系统的理论基础仍然是活跃的研究领域。主要研究
 # 示例：为 Kani 做贡献
 git clone https://github.com/model-checking/kani.git
 cd kani
-# 阅读 CONTRIBUTING.md
-cat CONTRIBUTING.md
+# 阅读 10_contributing.md
+cat 10_contributing.md
 ```
 
 #### 3. 从简单任务开始

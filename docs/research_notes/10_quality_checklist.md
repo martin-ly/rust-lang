@@ -17,11 +17,11 @@
 
 **Axiom QC1**：质量完备性不保证定理正确性，但保证论证可追溯；形式化论证（Def/Axiom/定理）与质量检查互为补充。
 
-**定理 QC-T1（质量蕴涵可追溯）**：若 $D$ 质量完备且含形式化论证，则 $D$ 的论断可追溯至 [PROOF_INDEX](./PROOF_INDEX.md) 或上游定理；与 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范一致。
+**定理 QC-T1（质量蕴涵可追溯）**：若 $D$ 质量完备且含形式化论证，则 $D$ 的论断可追溯至 [PROOF_INDEX](./PROOF_INDEX.md) 或上游定理；与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 论证要素规范一致。
 
 *证明*：由 Def QC1；形式化论证含 Def/Axiom/Theorem 或引用；PROOF_INDEX 索引全部证明；可追溯性由引用链保证。∎
 
-**推论 QC-C1**：新研究笔记应满足本清单 + 建立与形式化体系的衔接；见 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 论证结构模板。
+**推论 QC-C1**：新研究笔记应满足本清单 + 建立与形式化体系的衔接；见 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 论证结构模板。
 
 ---
 
@@ -367,7 +367,7 @@
 
 - [ ] 更新了相应目录的 README.md
 - [ ] 更新了主索引 README.md（如需要）
-- [ ] 更新了快速参考 QUICK_REFERENCE.md（如需要）
+- [ ] 更新了快速参考 10_quick_reference.md（如需要）
 
 ### 概念定义-属性关系-解释论证 层次化（核心研究笔记建议）
 >
@@ -426,7 +426,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-1. 使用 [模板](./TEMPLATE.md) 创建文件
+1. 使用 [模板](./10_template.md) 创建文件
 2. 按照检查清单逐项检查
 3. 请他人审查
 
@@ -453,9 +453,9 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [研究笔记规范](./README.md#-研究笔记规范)
-- [研究笔记模板](./TEMPLATE.md)
-- [贡献指南](./CONTRIBUTING.md)
-- [快速参考](./QUICK_REFERENCE.md)
+- [研究笔记模板](./10_template.md)
+- [贡献指南](./10_contributing.md)
+- [快速参考](./10_quick_reference.md)
 
 ---
 

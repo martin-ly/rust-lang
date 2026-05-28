@@ -157,7 +157,7 @@
 
 **Axiom RM1**：形式化证明保证正确性；实验验证提供经验支持；二者互补，不可相互替代。见 [experiments/README](experiments/README.md) 推论 EX-C1。
 
-**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](./PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 的论证链。
+**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](./PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链。
 
 *证明*：由 [experiments/README](experiments/README.md) 定理 EX-T1；实验验证与定理结论一致；形式化证明在 PROOF_INDEX 可查。∎
 
@@ -359,7 +359,7 @@ Qed.
 - **假设**：明确、可测（如「opt-level=2 比 -O0 快 ≥2x」）。
 - **控制变量**：固定 Rust 版本、CPU、内存、`opt-level`、`codegen-units` 等；仅变化目标因素。
 - **可重复**：`cargo bench`、`criterion`、`--save-baseline`；记录环境与命令。
-- **详见**：[performance_benchmarks.md](./experiments/performance_benchmarks.md) 的「数据收集执行指南」与「结果分析模板」。
+- **详见**：[10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) 的「数据收集执行指南」与「结果分析模板」。
 
 ### 3.1 实证研究方法要点
 
@@ -499,11 +499,11 @@ Qed.
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- **与 [TOOLS_GUIDE.md](./TOOLS_GUIDE.md)**：本「研究工具」中的 Clippy、Miri、Criterion、Valgrind、perf 等，安装、常用参数与样例见 TOOLS_GUIDE。
-- **与各实验**： [performance_benchmarks](./experiments/performance_benchmarks.md)、
-- [memory_analysis](./experiments/memory_analysis.md)、
-- [compiler_optimizations](./experiments/compiler_optimizations.md)、
-- [concurrency_performance](./experiments/concurrency_performance.md)、
+- **与 [10_tools_guide.md](./10_tools_guide.md)**：本「研究工具」中的 Clippy、Miri、Criterion、Valgrind、perf 等，安装、常用参数与样例见 TOOLS_GUIDE。
+- **与各实验**： [performance_benchmarks](./experiments/10_performance_benchmarks.md)、
+- [memory_analysis](./experiments/10_memory_analysis.md)、
+- [compiler_optimizations](./experiments/10_compiler_optimizations.md)、
+- [concurrency_performance](./experiments/10_concurrency_performance.md)、
 - [macro_expansion_performance](./experiments/10_macro_expansion_performance.md) 的「数据收集执行指南」即工具在具体研究中的集成方式；
 - 可统一用 `cargo bench`、`cargo bloat`、`cargo expand`、`time cargo build`、Valgrind/Miri 等。
 - **与形式化**：Prusti、Creusot、Kani 的用法见各形式化文档的「工具验证」；Coq/Lean 示例见「1.1 形式化研究方法详解」。
@@ -526,7 +526,7 @@ Qed.
 | :--- | :--- | :--- |
 | 形式化 | [ownership_model](./formal_methods/ownership_model.md), [borrow_checker_proof](./formal_methods/borrow_checker_proof.md), [async_state_machine](./formal_methods/async_state_machine.md), [lifetime_formalization](./formal_methods/lifetime_formalization.md), [pin_self_referential](./formal_methods/pin_self_referential.md) | 形式化方法 + 证明/定理 + 系统集成 |
 | 类型理论 | [type_system_foundations](./type_theory/type_system_foundations.md), [trait_system_formalization](./type_theory/trait_system_formalization.md), [lifetime_formalization](./type_theory/lifetime_formalization.md), [advanced_types](./type_theory/advanced_types.md), [variance_theory](./type_theory/variance_theory.md) | 类型、Trait、生命周期、型变 |
-| 实验 | [performance_benchmarks](./experiments/performance_benchmarks.md), [memory_analysis](./experiments/memory_analysis.md), [compiler_optimizations](./experiments/compiler_optimizations.md), [concurrency_performance](./experiments/concurrency_performance.md), [macro_expansion_performance](./experiments/10_macro_expansion_performance.md) | 数据收集指南 + 结果分析模板 |
+| 实验 | [performance_benchmarks](./experiments/10_performance_benchmarks.md), [memory_analysis](./experiments/10_memory_analysis.md), [compiler_optimizations](./experiments/10_compiler_optimizations.md), [concurrency_performance](./experiments/10_concurrency_performance.md), [macro_expansion_performance](./experiments/10_macro_expansion_performance.md) | 数据收集指南 + 结果分析模板 |
 | 实证 | [practical_applications](./10_practical_applications.md) | 案例报告模板 + 案例快速索引 + 最佳实践 |
 
 ---
@@ -546,7 +546,7 @@ Qed.
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [研究工具使用指南](./TOOLS_GUIDE.md) - 详细的工具安装和使用方法
+- [研究工具使用指南](./10_tools_guide.md) - 详细的工具安装和使用方法
 - [Criterion.rs 文档](https://docs.rs/criterion/README.md)
 - [Miri 文档](https://github.com/rust-lang/miri)
 - [Prusti 文档](https://viperproject.github.io/prusti-dev/README.md)

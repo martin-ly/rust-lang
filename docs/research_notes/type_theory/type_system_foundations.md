@@ -2956,7 +2956,7 @@ $
 \text{Transparent}(\tau_w, \tau) \rightarrow \text{Layout}(\tau_w) = \text{Layout}(\tau)
 $。
 
-**定理 NEWTYPE-T1**：`repr(transparent)` 保证单字段包装零成本；类型检查与 `transmute` 安全见 [UNSAFE_RUST_GUIDE](../../05_guides/UNSAFE_RUST_GUIDE.md)。
+**定理 NEWTYPE-T1**：`repr(transparent)` 保证单字段包装零成本；类型检查与 `transmute` 安全见 [UNSAFE_RUST_GUIDE](../../05_guides/05_unsafe_rust_guide.md)。
 
 **Def DEREF-NULL1（deref_nullptr deny）**：1.93 中 `deref_nullptr` lint 默认 deny；对 `*const T`/`*mut T` 解引用需非空保证；与类型系统衔接：裸指针解引用 $*p$ 在 $p$ 可能为 null 时产生 lint 错误。
 

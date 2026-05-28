@@ -789,7 +789,7 @@ C6 共享借用 ⊥ C7 可变借用
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

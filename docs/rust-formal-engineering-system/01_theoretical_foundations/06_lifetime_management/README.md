@@ -22,7 +22,7 @@
 | **型变理论** | [../../../research_notes/type_theory/variance_theory.md](../../../research_notes/type_theory/variance_theory.md) | 生命周期与子类型关系 |
 | **借用检查器证明** | [../../../research_notes/formal_methods/borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md) | 生命周期验证的形式化 |
 | **证明索引** | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) | 生命周期相关证明 |
-| **工具指南** | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) | 生命周期验证工具 |
+| **工具指南** | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) | 生命周期验证工具 |
 
 ---
 

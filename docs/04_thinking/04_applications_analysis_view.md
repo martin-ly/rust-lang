@@ -109,7 +109,7 @@
 
 **公理 / 定理 → 论证**：系统编程选型遵循「最小依赖」公理——底层系统库应尽量少依赖。定理：`std::process` 提供可移植的进程抽象；`nix` 提供 Unix 特定 API。unsafe 使用需遵守 Rustonomicon 约束：安全抽象边界、不变式文档化。
 
-**决策树**：标准 API 够用？→ std；需 Unix 特定？→ nix；需 Windows 特定？→ windows-sys；FFI？→ 最小化 unsafe 范围。参考 [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md)。
+**决策树**：标准 API 够用？→ std；需 Unix 特定？→ nix；需 Windows 特定？→ windows-sys；FFI？→ 最小化 unsafe 范围。参考 [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md)。
 
 ---
 
@@ -187,7 +187,7 @@
 
 **公理 / 定理 → 论证**：区块链选型遵循「确定性」公理——全节点共识须一致。定理：Rust 无 GC、无未定义行为，执行可复现；形式化验证可应用到合约逻辑；宏用于序列化/反序列化代码生成。
 
-**决策树**：Solana？→ anchor/borsh；NEAR？→ near-sdk；通用合约？→ 确定性编码、无浮点、无随机。参考 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) 表达能力边界。
+**决策树**：Solana？→ anchor/borsh；NEAR？→ near-sdk；通用合约？→ 确定性编码、无浮点、无随机。参考 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/10_language_semantics_expressiveness.md) 表达能力边界。
 
 ---
 
@@ -299,7 +299,7 @@ flowchart LR
 | 并发安全 | async T6.2、Send/Sync | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
 | 类型安全 | type_system T1–T3 | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
 | 设计模式 | CE-T1–T3 | [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |
-| 安全边界 | unsafe 契约 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+| 安全边界 | unsafe 契约 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 
 ---
 
@@ -308,7 +308,7 @@ flowchart LR
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [思维表征方式](./04_thinking_representation_methods.md) - 决策树、转换树
-- [多维概念矩阵](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 技术选型矩阵
+- [多维概念矩阵](./04_multi_dimensional_concept_matrix.md) - 技术选型矩阵
 - [跨模块集成示例](../05_guides/05_cross_module_integration_examples.md)
 - [实际应用案例研究](./../research_notes/10_practical_applications.md) - 案例库
 - [执行模型边界分析](./../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) - 模型选型

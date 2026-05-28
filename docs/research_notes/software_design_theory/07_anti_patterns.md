@@ -49,7 +49,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-将设计模式反例、反模式与形式化边界衔接，提供**实质内容**：形式化对应、与安全边界关系、规避策略、与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引的衔接。
+将设计模式反例、反模式与形式化边界衔接，提供**实质内容**：形式化对应、与安全边界关系、规避策略、与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) 反例索引的衔接。
 
 ---
 
@@ -82,7 +82,7 @@
 
 ---
 
-## 二、13 反例索引（与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 衔接）
+## 二、13 反例索引（与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) 衔接）
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,9 +98,9 @@
 | Flyweight | 跨线程用 Rc | 编译错误 | Arc |
 | Mediator | 循环引用 | 泄漏 | Weak 打破环 |
 | Chain | 链成环 | 无限循环 | 无环约束 |
-| 其他 | 见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) | - | - |
+| 其他 | 见 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) | - | - |
 
-**完整反例**：见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)。
+**完整反例**：见 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md#设计模式反例)。
 
 ---
 
@@ -262,7 +262,7 @@ where
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)
+- [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md#设计模式反例)
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/) Anti-patterns
 - [safe_unsafe_matrix](05_boundary_system/10_safe_unsafe_matrix.md)
 

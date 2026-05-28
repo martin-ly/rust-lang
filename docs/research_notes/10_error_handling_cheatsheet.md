@@ -127,7 +127,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 > **适用版本**: Rust 1.94.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

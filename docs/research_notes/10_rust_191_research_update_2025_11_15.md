@@ -73,7 +73,7 @@
 **相关研究笔记**:
 
 - [异步状态机形式化](./formal_methods/async_state_machine.md)
-- [并发性能研究](./experiments/concurrency_performance.md)
+- [并发性能研究](./experiments/10_concurrency_performance.md)
 
 **代码示例**:
 
@@ -159,8 +159,8 @@ const fn with_static_ref() -> &'static mut i32 {
 
 **相关研究笔记**:
 
-- [编译器优化](./experiments/compiler_optimizations.md)
-- [性能基准测试](./experiments/performance_benchmarks.md)
+- [编译器优化](./experiments/10_compiler_optimizations.md)
+- [性能基准测试](./experiments/10_performance_benchmarks.md)
 
 **代码示例**:
 
@@ -179,7 +179,7 @@ async fn jit_optimized_async() -> i32 {
 // 研究任务：
 // 1. 设计实验测量 JIT 优化的效果
 // 2. 形式化分析 JIT 优化的正确性条件
-// 3. 更新 compiler_optimizations.md 中的实验数据
+// 3. 更新 10_compiler_optimizations.md 中的实验数据
 ```
 
 ---
@@ -199,8 +199,8 @@ async fn jit_optimized_async() -> i32 {
 
 **相关研究笔记**:
 
-- [内存分析](./experiments/memory_analysis.md)
-- [性能基准测试](./experiments/performance_benchmarks.md)
+- [内存分析](./experiments/10_memory_analysis.md)
+- [性能基准测试](./experiments/10_performance_benchmarks.md)
 
 **代码示例**:
 
@@ -224,7 +224,7 @@ fn small_object_allocation() {
 // 研究任务：
 // 1. 使用 Criterion.rs 测量分配性能
 // 2. 验证优化后的分配器仍满足所有权公理
-// 3. 更新 memory_analysis.md 中的性能数据
+// 3. 更新 10_memory_analysis.md 中的性能数据
 ```
 
 ---
@@ -243,11 +243,11 @@ fn small_object_allocation() {
    - 更新异步迭代器性能数据
    - 分析新的异步优化机制
 
-2. **并发性能研究** (`experiments/concurrency_performance.md`)
+2. **并发性能研究** (`experiments/10_concurrency_performance.md`)
    - 重新评估异步迭代器性能
    - 更新并发模式性能对比
 
-3. **编译器优化** (`experiments/compiler_optimizations.md`)
+3. **编译器优化** (`experiments/10_compiler_optimizations.md`)
    - 更新 JIT 优化效果数据
    - 分析新的优化策略
 
@@ -261,7 +261,7 @@ fn small_object_allocation() {
    - 更新 const 上下文相关内容
    - 分析新的类型系统特性
 
-2. **内存分析** (`experiments/memory_analysis.md`)
+2. **内存分析** (`experiments/10_memory_analysis.md`)
    - 更新内存分配性能数据
    - 分析新的分配器策略
 
@@ -311,8 +311,8 @@ fn small_object_allocation() {
 | 类型系统完整文档 | [../../crates/c02_type_system/README.md](../../crates/c02_type_system/README.md) | C02 类型系统模块 |
 | 所有权模型形式化 | [./formal_methods/ownership_model.md](./formal_methods/ownership_model.md) | 所有权形式化 |
 | 借用检查器证明 | [./formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) | 借用检查器形式化 |
-| 性能基准测试 | [./experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) | 性能实验 |
-| 内存分析 | [./experiments/memory_analysis.md](./experiments/memory_analysis.md) | 内存实验 |
+| 性能基准测试 | [./experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) | 性能实验 |
+| 内存分析 | [./experiments/10_memory_analysis.md](./experiments/10_memory_analysis.md) | 内存实验 |
 
 ### 形式化链接
 >
@@ -330,9 +330,9 @@ fn small_object_allocation() {
 
 | 定理 | 文档 | 说明 |
 | :--- | :--- | :--- |
-| T-OW2 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 所有权唯一性 |
-| T-BR1 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 数据竞争自由 |
-| T-TY3 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 类型安全 |
+| T-OW2 | [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) | 所有权唯一性 |
+| T-BR1 | [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) | 数据竞争自由 |
+| T-TY3 | [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) | 类型安全 |
 
 ### Coq 证明骨架
 >
@@ -354,8 +354,8 @@ fn small_object_allocation() {
 | 形式化方法 | 借用检查器 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
 | 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
 | 类型理论 | 高级类型特性 | [type_theory/advanced_types.md](./type_theory/advanced_types.md) |
-| 实验研究 | 性能基准测试 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) |
-| 实验研究 | 内存分析 | [experiments/memory_analysis.md](./experiments/memory_analysis.md) |
+| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
+| 实验研究 | 内存分析 | [experiments/10_memory_analysis.md](./experiments/10_memory_analysis.md) |
 
 ---
 

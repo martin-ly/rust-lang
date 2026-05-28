@@ -166,7 +166,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-查看 [快速参考](./QUICK_REFERENCE.md) 快速查找感兴趣的主题：
+查看 [快速参考](./10_quick_reference.md) 快速查找感兴趣的主题：
 
 - 按研究领域查找
 - 按研究目标查找
@@ -230,7 +230,7 @@
 - **想理解所有权系统** → [所有权模型形式化](./formal_methods/ownership_model.md)（Def OW1、定理 T2/T3、RC-T1、BOX-T1）
 - **想理解借用与生命周期** → [借用检查器证明](./formal_methods/borrow_checker_proof.md)（T1、CHAN-T1、MUTEX-T1）
 - **想理解类型系统** → [类型系统基础](./type_theory/type_system_foundations.md)
-- **想优化性能** → [性能基准测试](./experiments/performance_benchmarks.md)（含 Criterion 可运行基准）
+- **想优化性能** → [性能基准测试](./experiments/10_performance_benchmarks.md)（含 Criterion 可运行基准）
 
 ### 3.2 阅读研究笔记
 
@@ -248,7 +248,7 @@
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-如果需要使用研究工具，查看 [工具使用指南](./TOOLS_GUIDE.md)：
+如果需要使用研究工具，查看 [工具使用指南](./10_tools_guide.md)：
 
 - 形式化验证工具（Coq、Lean、Prusti）
 - 性能分析工具（Criterion.rs、perf）
@@ -270,7 +270,7 @@
 
 > **[来源: ACM - Systems Programming Languages]**
 
-使用 [研究笔记模板](./TEMPLATE.md) 创建新文件：
+使用 [研究笔记模板](./10_template.md) 创建新文件：
 
 1. 复制模板内容
 2. 填写研究主题信息
@@ -283,8 +283,8 @@
 确保您的内容遵循：
 
 - [研究笔记规范](./README.md#-研究笔记规范)
-- [质量检查清单](./QUALITY_CHECKLIST.md)
-- [贡献指南](./CONTRIBUTING.md)
+- [质量检查清单](./10_quality_checklist.md)
+- [贡献指南](./10_contributing.md)
 
 ### 4.4 更新索引
 
@@ -306,7 +306,7 @@
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-详细阅读 [贡献指南](./CONTRIBUTING.md) 了解：
+详细阅读 [贡献指南](./10_contributing.md) 了解：
 
 - 贡献类型
 - 贡献流程
@@ -347,7 +347,7 @@
 
 1. **了解系统** → 阅读 [主索引](./README.md) 和 [系统总结](10_system_summary.md)
 2. **第一个可运行示例** → [10_example.md](./10_example.md) 含所有权、借用、生命周期的完整代码（可直接复制运行）
-3. **选择主题** → 从 [快速参考](./QUICK_REFERENCE.md) 选择感兴趣的主题
+3. **选择主题** → 从 [快速参考](./10_quick_reference.md) 选择感兴趣的主题
 4. **阅读笔记** → 阅读相关研究笔记（所有权 → [ownership_model](./formal_methods/ownership_model.md)）
 5. **实践应用** → 查看 [实际应用案例](./10_practical_applications.md) 的案例 1–3（含 Axum、mpsc、SafeVec 代码）
 
@@ -357,8 +357,8 @@
 
 1. **深入研究** → 阅读 [形式化方法研究](./formal_methods/README.md) 和 [类型理论研究](./type_theory/README.md)
 2. **实验研究** → 查看 [实验研究索引](./experiments/README.md)
-3. **工具使用** → 学习 [工具使用指南](./TOOLS_GUIDE.md)
-4. **贡献研究** → 参考 [贡献指南](./CONTRIBUTING.md) 开始贡献
+3. **工具使用** → 学习 [工具使用指南](./10_tools_guide.md)
+4. **贡献研究** → 参考 [贡献指南](./10_contributing.md) 开始贡献
 
 ### 专家路径
 >
@@ -379,7 +379,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-查看 [常见问题解答](./FAQ.md) 获取常见问题的答案。
+查看 [常见问题解答](./10_faq.md) 获取常见问题的答案。
 
 **常见问题包括**:
 
@@ -404,9 +404,9 @@
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [主索引](./README.md) - 完整的研究笔记索引
-- [快速参考](./QUICK_REFERENCE.md) - 快速查找指南
+- [快速参考](./10_quick_reference.md) - 快速查找指南
 - [研究路线图](./10_research_roadmap.md) - 研究计划
-- [贡献指南](./CONTRIBUTING.md) - 贡献流程
+- [贡献指南](./10_contributing.md) - 贡献流程
 
 ---
 

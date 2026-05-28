@@ -584,7 +584,7 @@
 - 凡 **≥3 个二级标题**的文档，须在元信息 blockquote 之后、正文第一个 `##` 之前增加 `## 📊 目录`
 - 目录须包含至少二级（`##`）的锚点链接，尽量到三级（`###`）
 - 锚点格式：标题转小写、空格替换为连字符（如 `## 形式化定义` → `#形式化定义`）
-- 新文档提交前须通过 TOC 门禁；见 [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) § 目录结构
+- 新文档提交前须通过 TOC 门禁；见 [QUALITY_CHECKLIST](./10_quality_checklist.md) § 目录结构
 
 **示例**:
 
@@ -610,7 +610,7 @@
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-**依据**：[CONTENT_ENHANCEMENT](./10_content_enhancement.md) § 概念定义-属性关系-解释论证 层次化小节规范、[QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md)。
+**依据**：[CONTENT_ENHANCEMENT](./10_content_enhancement.md) § 概念定义-属性关系-解释论证 层次化小节规范、[QUALITY_CHECKLIST](./10_quality_checklist.md)。
 
 凡含 Def/Axiom/定理的形式化文档，宜在形式化定义节末增加 **「概念定义-属性关系-解释论证 层次汇总」** 子节，用表格显式三层次：
 
@@ -853,24 +853,24 @@
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [研究笔记主索引](./README.md)
-- [研究笔记模板](./TEMPLATE.md)
+- [研究笔记模板](./10_template.md)
 - [最佳实践](./BEST_PRACTICES.md)
-- [质量检查清单](./QUALITY_CHECKLIST.md)
+- [质量检查清单](./10_quality_checklist.md)
 
 ### 贡献和质量
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [贡献指南](./CONTRIBUTING.md)
+- [贡献指南](./10_contributing.md)
 - [研究笔记示例](./10_example.md)
-- [快速参考](./QUICK_REFERENCE.md)
+- [快速参考](./10_quick_reference.md)
 
 ### 工具和资源
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [研究工具使用指南](./TOOLS_GUIDE.md)
-- [研究方法论](./research_methodology.md)
+- [研究工具使用指南](./10_tools_guide.md)
+- [研究方法论](./10_research_methodology.md)
 
 ---
 

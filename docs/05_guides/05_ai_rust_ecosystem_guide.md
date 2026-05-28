@@ -75,7 +75,7 @@
 | :--- | :--- | :--- |
 | **提示词模板** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) | 概念解释、代码审查、错误修复 |
 | **RAG 与项目结合** | 同上 | 速查卡、00_MASTER_INDEX、决策树纳入检索 |
-| **错误码上下文** | [ERROR_CODE_MAPPING](../02_reference/ERROR_CODE_MAPPING.md) | 编译错误 → 文档映射 |
+| **错误码上下文** | [ERROR_CODE_MAPPING](../02_reference/02_error_code_mapping.md) | 编译错误 → 文档映射 |
 | **练习推荐** | [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) | 模块 ↔ 习题对应 |
 
 ---
@@ -136,7 +136,7 @@
 
 1. 使用 [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) 的提示词模板
 2. 结合 [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) 让 AI 推荐习题
-3. 遇到错误时附带 [ERROR_CODE_MAPPING](../02_reference/ERROR_CODE_MAPPING.md)
+3. 遇到错误时附带 [ERROR_CODE_MAPPING](../02_reference/02_error_code_mapping.md)
 
 ### 路径 B：Rust 构建 AI（先 Rust 后 AI）
 
@@ -413,8 +413,8 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 | :--- | :--- | :--- |
 | 速查卡 | docs/02_reference/quick_reference/*.md | 语法、模式、反例 |
 | 主索引 | crates/*/docs/00_MASTER_INDEX.md | 模块导航 |
-| 决策树 | docs/04_thinking/DECISION_GRAPH_NETWORK.md | 技术选型 |
-| 错误码映射 | docs/02_reference/ERROR_CODE_MAPPING.md | 错误→文档 |
+| 决策树 | docs/04_thinking/04_decision_graph_network.md | 技术选型 |
+| 错误码映射 | docs/02_reference/02_error_code_mapping.md | 错误→文档 |
 | 官方映射 | docs/01_learning/01_official_resources_mapping.md | 权威源引用 |
 
 **Embedding 建议**: 按段落或章节分块，chunk size 512–1024 tokens。

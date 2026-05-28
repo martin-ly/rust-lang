@@ -287,8 +287,8 @@ mod sync_impl {
 | 工具链文档 | 完整工具链指南 | [../../../06_toolchain/](../../../06_toolchain/README.md) |
 | Cargo 工作空间 | 工作空间配置 | ../../../06_toolchain/02_cargo_workspace_guide.md |
 | 编译器特性 | 编译器优化指南 | [../../../06_toolchain/01_compiler_features.md](../../../06_toolchain/01_compiler_features.md) |
-| 研究方法论 | 研究方法指南 | [../../../research_notes/research_methodology.md](../../../research_notes/research_methodology.md) |
-| 工具指南 | 验证工具使用 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |
+| 研究方法论 | 研究方法指南 | [../../../research_notes/10_research_methodology.md](../../../research_notes/10_research_methodology.md) |
+| 工具指南 | 验证工具使用 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
 | 最佳实践 | 工程最佳实践 | [../../../research_notes/BEST_PRACTICES.md](../../../research_notes/BEST_PRACTICES.md) |
 
 ---

@@ -274,7 +274,7 @@ docs/rust-ownership-decidability/
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-1. **贡献指南**: 创建 CONTRIBUTING.md
+1. **贡献指南**: 创建 10_contributing.md
 2. **Issue 模板**: Bug 报告、内容请求
 3. **PR 流程**: 代码审查清单
 4. **讨论区**: 技术讨论和问题解答

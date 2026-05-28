@@ -197,9 +197,9 @@
 
 | 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |
-| [性能基准测试](./experiments/performance_benchmarks.md) | [性能优化理论](../rust-formal-engineering-system/02_practical_applications/performance/README.md) | 研究笔记提供实验数据，形式化系统提供优化理论   |
-| [内存分析](./experiments/memory_analysis.md)            | [内存管理理论](../rust-formal-engineering-system/02_practical_applications/memory/README.md)      | 研究笔记提供分析结果，形式化系统提供管理理论   |
-| [编译器优化](./experiments/compiler_optimizations.md)   | [编译器理论](../rust-formal-engineering-system/03_compiler_theory/README.md)                      | 研究笔记提供优化研究，形式化系统提供编译器理论 |
+| [性能基准测试](./experiments/10_performance_benchmarks.md) | [性能优化理论](../rust-formal-engineering-system/02_practical_applications/performance/README.md) | 研究笔记提供实验数据，形式化系统提供优化理论   |
+| [内存分析](./experiments/10_memory_analysis.md)            | [内存管理理论](../rust-formal-engineering-system/02_practical_applications/memory/README.md)      | 研究笔记提供分析结果，形式化系统提供管理理论   |
+| [编译器优化](./experiments/10_compiler_optimizations.md)   | [编译器理论](../rust-formal-engineering-system/03_compiler_theory/README.md)                      | 研究笔记提供优化研究，形式化系统提供编译器理论 |
 
 ---
 
@@ -331,7 +331,7 @@
 
 **步骤**:
 
-1. 阅读 [性能基准测试](./experiments/performance_benchmarks.md) (研究笔记系统)
+1. 阅读 [性能基准测试](./experiments/10_performance_benchmarks.md) (研究笔记系统)
 2. 参考 [性能优化理论](../rust-formal-engineering-system/02_practical_applications/performance/README.md) (形式化工程系统)
 3. 结合两者，进行优化研究
 
@@ -351,7 +351,7 @@
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [主索引](./README.md) - 完整的研究笔记索引
-- [快速参考](./QUICK_REFERENCE.md) - 快速查找指南
+- [快速参考](./10_quick_reference.md) - 快速查找指南
 - [研究路线图](./10_research_roadmap.md) - 研究计划
 
 ### 形式化工程系统 {#形式化工程系统-1}
@@ -367,7 +367,7 @@
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [研究资源汇总](./10_resources.md) - 学术和工具资源
-- [工具使用指南](./TOOLS_GUIDE.md) - 研究工具详细指南
+- [工具使用指南](./10_tools_guide.md) - 研究工具详细指南
 - [术语表](./10_glossary.md) - 专业术语解释
 
 ---

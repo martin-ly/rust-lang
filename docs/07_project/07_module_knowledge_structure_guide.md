@@ -451,9 +451,9 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 - **知识结构框架**: [07_knowledge_structure_framework.md](./07_knowledge_structure_framework.md) - 完整知识结构体系定义
-- **证明图网**: [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构模板
-- **决策图网**: [DECISION_GRAPH_NETWORK.md](../04_thinking/DECISION_GRAPH_NETWORK.md) - 技术选型决策模板
-- **思维导图**: [MIND_MAP_COLLECTION.md](../04_thinking/MIND_MAP_COLLECTION.md) - 思维导图集合
+- **证明图网**: [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) - 形式化证明结构模板
+- **决策图网**: [04_decision_graph_network.md](../04_thinking/04_decision_graph_network.md) - 技术选型决策模板
+- **思维导图**: [04_mind_map_collection.md](../04_thinking/04_mind_map_collection.md) - 思维导图集合
 
 ### 实施场景
 
@@ -949,10 +949,10 @@ fn main() {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [知识结构框架](./07_knowledge_structure_framework.md) - 完整知识结构体系
-- [多维概念矩阵](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 概念对比矩阵
-- [思维导图集合](../04_thinking/MIND_MAP_COLLECTION.md) - 思维导图集合
-- [决策图网](../04_thinking/DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
-- [证明图网](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构
+- [多维概念矩阵](../04_thinking/04_multi_dimensional_concept_matrix.md) - 概念对比矩阵
+- [思维导图集合](../04_thinking/04_mind_map_collection.md) - 思维导图集合
+- [决策图网](../04_thinking/04_decision_graph_network.md) - 技术选型决策支持
+- [证明图网](../04_thinking/04_proof_graph_network.md) - 形式化证明结构
 
 ---
 

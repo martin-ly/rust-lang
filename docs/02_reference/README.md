@@ -69,12 +69,12 @@ let atomic = Arc::new(5);                // 多线程原子引用计数
 | **异步编程** | async_cheatsheet.md | async/await、Future |
 | **并发** | concurrency_cheatsheet.md | 线程、同步、Send/Sync |
 | **宏系统** | macros_cheatsheet.md | 声明宏、过程宏 |
-| **错误处理** | error_handling_cheatsheet.md | Result、panic、? 运算符 |
-| **泛型** | generics_cheatsheet.md | 泛型约束、关联类型 |
+| **错误处理** | 02_error_handling_cheatsheet.md | Result、panic、? 运算符 |
+| **泛型** | 02_generics_cheatsheet.md | 泛型约束、关联类型 |
 | **迭代器** | iterators_cheatsheet.md | Iterator trait、适配器 |
 | **测试** | 02_testing_cheatsheet.md | 单元测试、mock、基准测试 |
 | **Unsafe** | unsafe_cheatsheet.md | 原始指针、FFI |
-| **智能指针** | smart_pointers_cheatsheet.md | Box、Rc、Arc、RefCell |
+| **智能指针** | 02_smart_pointers_cheatsheet.md | Box、Rc、Arc、RefCell |
 | **生命周期** | lifetimes_cheatsheet.md | 生命周期省略、高阶 trait bound |
 | **闭包** | 02_closures_cheatsheet.md | Fn、FnMut、FnOnce |
 | **模式匹配** | pattern_matching_cheatsheet.md | match、if let、while let |

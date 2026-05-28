@@ -144,7 +144,7 @@ rust-lang/
 ### 根目录保留
 
 - `README.md` - 项目主入口（已重写）
-- `CONTRIBUTING.md` - 贡献指南
+- `10_contributing.md` - 贡献指南
 - `LICENSE` - 许可证
 - `Cargo.toml` - Workspace配置
 - `Cargo.lock` - 依赖锁定

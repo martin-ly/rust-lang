@@ -1270,9 +1270,9 @@ async fn process_stream() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [线程与并发速查卡](./02_threads_concurrency_cheatsheet.md) - 并发编程对比
-- [错误处理速查卡](./error_handling_cheatsheet.md) - 异步错误处理
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - 异步错误处理
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 异步中的所有权
-- [智能指针速查卡](./smart_pointers_cheatsheet.md) - Arc 在异步中的应用
+- [智能指针速查卡](./02_smart_pointers_cheatsheet.md) - Arc 在异步中的应用
 
 ---
 

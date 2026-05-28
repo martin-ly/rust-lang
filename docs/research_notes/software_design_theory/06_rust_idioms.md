@@ -385,7 +385,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 
 **Def OR1（Option/Result 组合）**：`Option` 表示可选值；`Result` 表示成功或错误；组合模式包括 `and_then`、`map`、`map_err`、`unwrap_or`、`ok_or`。
 
-**定理 OR-T1**：`Option`/`Result` 与 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) 构造性语义一致；无 null，无异常隐式传播。
+**定理 OR-T1**：`Option`/`Result` 与 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../10_language_semantics_expressiveness.md) 构造性语义一致；无 null，无异常隐式传播。
 
 ### 7.2 典型场景
 > **[来源: [crates.io](https://crates.io/)]**

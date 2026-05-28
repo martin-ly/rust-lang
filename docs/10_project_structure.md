@@ -21,7 +21,7 @@ rust-lang/
 ├── tests/                  # 集成测试
 ├── Cargo.toml             # Workspace 配置
 ├── README.md              # 项目说明
-└── CONTRIBUTING.md        # 贡献指南
+└── 10_contributing.md        # 贡献指南
 ```
 
 ---
@@ -270,7 +270,7 @@ integration_tests   # 集成测试
 - ARCHITECTURE.md - 架构总览
 - 10_api_guide.md - API 使用指南
 - 10_dependency_graph.md - 依赖关系
-- ../CONTRIBUTING.md - 贡献指南
+- ../10_contributing.md - 贡献指南
 
 ---
 

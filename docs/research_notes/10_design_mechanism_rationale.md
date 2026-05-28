@@ -444,11 +444,11 @@ Pin 使用场景决策树
 
 **定理 OR-T1（显式错误处理）**：若 $e : \mathit{Result}[T, E]$ 且无 `unwrap`/`expect`，则 $e$ 的 `None`/`Err` 分支必被处理；编译时保证。
 
-*证明*：由 match 穷尽规则；`?` 操作符将 `Err` 传播至调用者，调用者需处理或标注 `-> Result<_, E>`。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) 定理 3.1。∎
+*证明*：由 match 穷尽规则；`?` 操作符将 `Err` 传播至调用者，调用者需处理或标注 `-> Result<_, E>`。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) 定理 3.1。∎
 
 **推论 OR-C1**：`Option`/`Result` 与构造性逻辑 $T \lor E$ 对应；`!` (never) 对应 $\bot$；无隐式 null。
 
-**论证**：类型系统强制处理 None/Err；`?` 操作符传播错误；构造性逻辑（Curry-Howard）对应 $T \lor E$。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)。
+**论证**：类型系统强制处理 None/Err；`?` 操作符传播错误；构造性逻辑（Curry-Howard）对应 $T \lor E$。见 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md)。
 
 **反例**：unwrap 空 Option/Err 导致 panic；未处理 Result 编译警告。
 
@@ -483,8 +483,8 @@ Pin 使用场景决策树
 
 | 类型 | 位置 |
 | :--- | :--- |
-| 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §8 设计机制论证 |
-| 决策树 | 本文各机制「使用场景/决策树」；[DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) |
+| 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) §8 设计机制论证 |
+| 决策树 | 本文各机制「使用场景/决策树」；[DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) |
 | 多维矩阵 | [DESIGN_MECHANISM_RATIONALE 矩阵总览](#-设计机制论证矩阵总览)；[UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) |
 
 *依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
@@ -499,9 +499,9 @@ Pin 使用场景决策树
 | :--- | :--- |
 | [pin_self_referential](formal_methods/pin_self_referential.md) | Pin 形式化定义、定理、反例 |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射 |
-| [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 设计机制论证思维导图（§8） |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射 |
+| [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 设计机制论证思维导图（§8） |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖 |
 
 ---

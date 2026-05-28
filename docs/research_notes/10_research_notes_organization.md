@@ -55,7 +55,7 @@ research_notes/
 ├── README.md                           # 主入口、研究方向、规范
 ├── INDEX.md                            # 完整索引（按领域/主题）
 ├── 10_quick_find.md                       # 按关键词/领域/目标查找
-├── QUICK_REFERENCE.md                  # 按主题快速参考
+├── 10_quick_reference.md                  # 按主题快速参考
 │
 ├── formal_methods/                     # 形式化方法（六篇核心 + 思维表征与矩阵）
 │   ├── README.md
@@ -95,20 +95,20 @@ research_notes/
 │
 ├── experiments/                        # 实验研究
 │   ├── README.md
-│   ├── performance_benchmarks.md, memory_analysis.md
-│   ├── compiler_optimizations.md, concurrency_performance.md
+│   ├── 10_performance_benchmarks.md, 10_memory_analysis.md
+│   ├── 10_compiler_optimizations.md, 10_concurrency_performance.md
 │   └── 10_macro_expansion_performance.md
 │
 ├── coq_skeleton/                       # ⚠️ 重定向：内容已迁至 archive/deprecated/coq_skeleton/
 │   └── README.md                       # 仅保留重定向说明
 │
 ├── # 根目录核心文档（选列）
-├── 10_formal_full_model_overview.md, CORE_THEOREMS_FULL_PROOFS.md, PROOF_INDEX.md
+├── 10_formal_full_model_overview.md, 10_core_theorems_full_proofs.md, PROOF_INDEX.md
 ├── 10_formal_language_and_proofs.md, 10_authoritative_alignment_guide.md
 ├── 10_hierarchical_mapping_and_summary.md, 10_argumentation_chain_and_flow.md
 ├── 10_rust_193_language_features_comprehensive_analysis.md, 10_rust_193_counterexamples_index.md
-├── 10_practical_applications.md, research_methodology.md
-├── CONTRIBUTING.md, QUALITY_CHECKLIST.md, TEMPLATE.md, 10_changelog.md
+├── 10_practical_applications.md, 10_research_methodology.md
+├── 10_contributing.md, 10_quality_checklist.md, 10_template.md, 10_changelog.md
 └── …（其余见 INDEX.md）
 ```
 
@@ -141,7 +141,7 @@ research_notes/
 | [README](./README.md) | 主入口、研究方向、规范、目录树 | 总览、规范 |
 | [INDEX](./INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
 | [QUICK_FIND](./10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
-| [QUICK_REFERENCE](./QUICK_REFERENCE.md) | 按主题快速参考 | 按主题查 |
+| [QUICK_REFERENCE](./10_quick_reference.md) | 按主题快速参考 | 按主题查 |
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
 | 本文件 | 结构梳理、归档约定、版本 | 维护与一致性检查 |
 

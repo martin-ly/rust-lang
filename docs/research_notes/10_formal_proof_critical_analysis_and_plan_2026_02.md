@@ -60,7 +60,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [形式化证明系统指南](./FORMAL_PROOF_SYSTEM_GUIDE.md)
+- [形式化证明系统指南](./10_formal_proof_system_guide.md)
 - [研究笔记主索引](./README.md)
 
 ---

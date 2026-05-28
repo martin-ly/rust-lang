@@ -179,7 +179,7 @@
 | 多线程性能 | borrow T1 | 无数据竞争；Send/Sync 约束 |
 | 异步性能 | async T6.2 | 并发安全；Future 状态一致 |
 
-**引用**：[experiments/README](../experiments/README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)。
+**引用**：[experiments/README](../experiments/README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)。
 
 ### 相关概念
 
@@ -635,8 +635,8 @@ async fn async_task_benchmark() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。并发一节与本文的 Mutex/RwLock、通道、async 可共用 `cargo bench` 与 Criterion 流程。
-- **内存分析**：见 [memory_analysis.md](./memory_analysis.md)。`Arc`、有界通道的缓冲、Tokio 任务队列与 `thread_local` 分配器会影响内存；分析时需区分配置（线程数、任务数、通道容量）。
+- **性能基准测试**：见 [10_performance_benchmarks.md](./10_performance_benchmarks.md)。并发一节与本文的 Mutex/RwLock、通道、async 可共用 `cargo bench` 与 Criterion 流程。
+- **内存分析**：见 [10_memory_analysis.md](./10_memory_analysis.md)。`Arc`、有界通道的缓冲、Tokio 任务队列与 `thread_local` 分配器会影响内存；分析时需区分配置（线程数、任务数、通道容量）。
 
 ### 实际应用案例
 >

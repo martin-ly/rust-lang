@@ -286,7 +286,7 @@
 
 > **[来源: Wikipedia - Type System]**
 
-与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) § 元信息统一模板 一致：
+与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[QUALITY_CHECKLIST](./10_quality_checklist.md) § 元信息统一模板 一致：
 
 - [ ] **元信息**：每篇含 `创建日期`、`最后更新`、`Rust 版本`: 1.93.1+ (Edition 2024)、`状态`
 - [ ] **目录块**：有目录的文档统一使用「## 📊 目录」；同类文档二级标题风格一致
@@ -328,18 +328,18 @@
    - 选择合适的研究主题
 
 2. **创建或更新文件**
-   - 使用 [研究笔记模板](./TEMPLATE.md)
+   - 使用 [研究笔记模板](./10_template.md)
    - 遵循 [研究笔记规范](./README.md#-研究笔记规范)
 
 3. **质量检查**
-   - 使用 [质量检查清单](./QUALITY_CHECKLIST.md)
+   - 使用 [质量检查清单](./10_quality_checklist.md)
    - 确保代码示例可运行
 
 4. **更新索引**
    - 更新相应目录的 README.md
    - 更新 [主索引](./README.md)
    - 更新 [完整索引](./INDEX.md)
-   - 更新 [快速参考](./QUICK_REFERENCE.md)
+   - 更新 [快速参考](./10_quick_reference.md)
 
 5. **更新日志**
    - 更新 [更新日志](./10_changelog.md)
@@ -589,8 +589,8 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 
 - [主索引](./README.md) - 完整的研究笔记索引
 - [系统总结](./10_system_summary.md) - 系统概览和统计
-- [贡献指南](./CONTRIBUTING.md) - 贡献流程和规范
-- [质量检查清单](./QUALITY_CHECKLIST.md) - 质量检查标准
+- [贡献指南](./10_contributing.md) - 贡献流程和规范
+- [质量检查清单](./10_quality_checklist.md) - 质量检查标准
 
 ### 维护相关
 >
@@ -598,7 +598,7 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 
 - [更新日志](./10_changelog.md) - 系统变更历史
 - [研究路线图](./10_research_roadmap.md) - 研究计划
-- [快速参考](./QUICK_REFERENCE.md) - 快速查找指南
+- [快速参考](./10_quick_reference.md) - 快速查找指南
 
 ---
 

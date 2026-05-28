@@ -198,11 +198,11 @@
 
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
-| `fn foo<T>(x: T)` | [C04 泛型](../02_reference/quick_reference/generics_cheatsheet.md) | 泛型函数 |
-| `struct Point<T> { x: T, y: T }` | [C04 泛型结构体](../02_reference/quick_reference/generics_cheatsheet.md#泛型结构体) | 泛型结构体 |
-| `fn foo<T: Display + Clone>(x: T)` | [C04 Trait Bound](../02_reference/quick_reference/generics_cheatsheet.md#trait-bound) | trait bound, 约束 |
-| `trait Drawable { fn draw(&self); }` | [C04 Trait 定义](../02_reference/quick_reference/generics_cheatsheet.md#定义-trait) | trait 定义 |
-| `impl Drawable for Circle { ... }` | [C04 Trait 实现](../02_reference/quick_reference/generics_cheatsheet.md#实现-trait) | trait 实现 |
+| `fn foo<T>(x: T)` | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 泛型函数 |
+| `struct Point<T> { x: T, y: T }` | [C04 泛型结构体](../02_reference/quick_reference/02_generics_cheatsheet.md#泛型结构体) | 泛型结构体 |
+| `fn foo<T: Display + Clone>(x: T)` | [C04 Trait Bound](../02_reference/quick_reference/02_generics_cheatsheet.md#trait-bound) | trait bound, 约束 |
+| `trait Drawable { fn draw(&self); }` | [C04 Trait 定义](../02_reference/quick_reference/02_generics_cheatsheet.md#定义-trait) | trait 定义 |
+| `impl Drawable for Circle { ... }` | [C04 Trait 实现](../02_reference/quick_reference/02_generics_cheatsheet.md#实现-trait) | trait 实现 |
 
 ### 2.4 并发文档映射
 
@@ -213,8 +213,8 @@
 | `thread::spawn(\|_\| { ... })` | [C05 线程](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#创建线程) | spawn, 创建线程 |
 | `Arc::new(Mutex::new(0))` | [C05 Arc + Mutex](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#共享状态并发) | Arc, Mutex, 共享状态 |
 | `let (tx, rx) = mpsc::channel();` | [C05 消息传递](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#消息传递) | channel, mpsc |
-| `async fn foo() { ... }` | [C06 异步](../02_reference/quick_reference/async_patterns.md#async-函数) | async, 异步函数 |
-| `let handle = tokio::spawn(async { ... });` | [C06 任务调度](../02_reference/quick_reference/async_patterns.md#任务调度) | spawn, 异步任务 |
+| `async fn foo() { ... }` | [C06 异步](../02_reference/quick_reference/02_async_patterns.md#async-函数) | async, 异步函数 |
+| `let handle = tokio::spawn(async { ... });` | [C06 任务调度](../02_reference/quick_reference/02_async_patterns.md#任务调度) | spawn, 异步任务 |
 
 ### 2.5 标准库 API 文档映射
 
@@ -332,7 +332,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **E0597** | `{ let s = "x"; r = &s; } use(r);` | 生命周期不足 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#2-生命周期错误) | 规则 3 - 借用有效性: Valid(b) <=> Lifetime(b) subset Scope(b) |
 | **E0310** | `fn foo<T>(x: &T)` | 参数生命周期不足 | [C01 生命周期](../02_reference/quick_reference/ownership_cheatsheet.md) | 定理 LF-T2 - 引用有效性 |
-| **E0373** | `move \|_\| x` in closure | 闭包生命周期 | [C06 异步](../02_reference/quick_reference/async_patterns.md) | 捕获变量生命周期约束 |
+| **E0373** | `move \|_\| x` in closure | 闭包生命周期 | [C06 异步](../02_reference/quick_reference/02_async_patterns.md) | 捕获变量生命周期约束 |
 
 ### 4.4 类型系统错误 (E02xx, E03xx)
 >
@@ -341,10 +341,10 @@
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
 | **E0308** | `let x: i32 = "hello";` | 类型不匹配 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#3-类型不匹配) | 类型系统一致性: Gamma |- e : tau |
-| **E0277** | `fn foo<T>(x: T) { println!("{}", x); }` | Trait Bound 不满足 | [C04 Trait](../02_reference/quick_reference/generics_cheatsheet.md) | Trait 约束: Gamma |- T: Trait |
+| **E0277** | `fn foo<T>(x: T) { println!("{}", x); }` | Trait Bound 不满足 | [C04 Trait](../02_reference/quick_reference/02_generics_cheatsheet.md) | Trait 约束: Gamma |- T: Trait |
 | **E0282** | `let x = Vec::new();` | 需要类型标注 | [C02 类型推断](../02_reference/quick_reference/type_system.md) | 类型推断规则 |
-| **E0283** | `x.into()` (ambiguous) | 需要更多类型信息 | [C04 泛型](../02_reference/quick_reference/generics_cheatsheet.md) | 类型推断冲突 |
-| **E0325** | 递归 trait bound | 溢出求值要求 | [C04 泛型](../02_reference/quick_reference/generics_cheatsheet.md) | 类型系统一致性 |
+| **E0283** | `x.into()` (ambiguous) | 需要更多类型信息 | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 类型推断冲突 |
+| **E0325** | 递归 trait bound | 溢出求值要求 | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 类型系统一致性 |
 
 ### 4.5 并发错误 (E0xxx)
 >
@@ -501,7 +501,7 @@ Trait Bound      -> 1.4, E0277
 概念文档       -> 02_reference/quick_reference/
 形式化证明     -> research_notes/formal_methods/
 故障排查       -> 05_guides/05_troubleshooting_guide.md
-错误码详解     -> 02_reference/ERROR_CODE_MAPPING.md
+错误码详解     -> 02_reference/02_error_code_mapping.md
 标准库分析     -> 02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md
 ```
 
@@ -528,12 +528,12 @@ Trait Bound      -> 1.4, E0277
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md) - 编译错误码详细映射
+- [02_error_code_mapping.md](../02_reference/02_error_code_mapping.md) - 编译错误码详细映射
 - [02_standard_library_comprehensive_analysis_2025_12_25.md](../02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md) - 标准库全面分析
 - [05_troubleshooting_guide.md](../05_guides/05_troubleshooting_guide.md) - 故障排查指南
 - [C01 所有权与借用](../02_reference/quick_reference/ownership_cheatsheet.md) - 所有权核心概念
 - [C02 类型系统](../02_reference/quick_reference/type_system.md) - 类型系统详解
-- [C04 泛型与 Trait](../02_reference/quick_reference/generics_cheatsheet.md) - 泛型编程
+- [C04 泛型与 Trait](../02_reference/quick_reference/02_generics_cheatsheet.md) - 泛型编程
 
 ### 形式化文档
 >

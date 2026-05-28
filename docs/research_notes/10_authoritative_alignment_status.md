@@ -97,18 +97,18 @@
 | 4.3 Slice | 02_collections_iterators_cheatsheet.md | ✅ 一致 | - |
 | 5.0 结构体 | type_system.md | ✅ 一致 | - |
 | 6.0 枚举 | type_system.md | ✅ 一致 | - |
-| 6.2 模式匹配 | control_flow_functions_cheatsheet.md | ✅ 一致 | - |
+| 6.2 模式匹配 | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
 | 8.0 集合 | 02_collections_iterators_cheatsheet.md | ✅ 一致 | - |
-| 9.0 错误处理 | error_handling_cheatsheet.md | ✅ 一致 | 项目添加了形式化 |
-| 10.0 泛型 | generics_cheatsheet.md, type_system_foundations.md | ✅ 一致 | 项目添加了类型论 |
+| 9.0 错误处理 | 02_error_handling_cheatsheet.md | ✅ 一致 | 项目添加了形式化 |
+| 10.0 泛型 | 02_generics_cheatsheet.md, type_system_foundations.md | ✅ 一致 | 项目添加了类型论 |
 | 10.2 Trait | trait_system_formalization.md | ✅ 一致 | 项目添加了形式化 |
 | 10.3 生命周期 | lifetime_formalization.md | ✅ 一致 | 项目添加了形式化 |
 | 11.0 测试 | 02_testing_cheatsheet.md | ✅ 一致 | - |
-| 13.0 闭包 | control_flow_functions_cheatsheet.md | ✅ 一致 | - |
+| 13.0 闭包 | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
 | 13.2 迭代器 | 02_collections_iterators_cheatsheet.md | ✅ 一致 | - |
-| 15.0 智能指针 | smart_pointers_cheatsheet.md | ✅ 一致 | - |
+| 15.0 智能指针 | 02_smart_pointers_cheatsheet.md | ✅ 一致 | - |
 | 16.0 并发 | 02_threads_concurrency_cheatsheet.md | ✅ 一致 | 项目添加了形式化 |
-| 17.0 异步 | async_patterns.md, async_state_machine.md | ✅ 一致 | 项目添加了形式化 |
+| 17.0 异步 | 02_async_patterns.md, async_state_machine.md | ✅ 一致 | 项目添加了形式化 |
 | 19.0 高级特性 | 05_advanced_topics_deep_dive.md | ✅ 一致 | - |
 | 20.0 项目 | 02_cargo_cheatsheet.md | ✅ 一致 | - |
 
@@ -124,9 +124,9 @@
 | Types | type_system.md, type_system_foundations.md | ✅ 一致 | 项目添加了形式化 |
 | Lifetimes | lifetime_formalization.md | ✅ 一致 | 项目添加了证明 |
 | Traits | trait_system_formalization.md | ✅ 一致 | 项目添加了形式化 |
-| Patterns | control_flow_functions_cheatsheet.md | ✅ 一致 | - |
+| Patterns | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
 | Memory Model | ownership_model.md | ✅ 一致 | 项目添加了分离逻辑 |
-| Unsafe | UNSAFE_RUST_GUIDE.md | ✅ 一致 | - |
+| Unsafe | 05_unsafe_rust_guide.md | ✅ 一致 | - |
 | Attributes | macros_cheatsheet.md | ✅ 一致 | - |
 
 ### releases.rs 对齐
@@ -171,7 +171,7 @@
 | 形式化内容 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |
 | 分离逻辑 | ownership_model.md | ✅ 一致 |
-| Hoare逻辑 | FORMAL_PROOF_SYSTEM_GUIDE.md | ✅ 一致 |
+| Hoare逻辑 | 10_formal_proof_system_guide.md | ✅ 一致 |
 | 类型论 | type_theory/*.md | ✅ 一致 |
 | 进程代数 | software_design_theory/03_execution_models/*.md | ✅ 一致 |
 
@@ -202,7 +202,7 @@
 | 指南 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |
 | 命名规范 | BEST_PRACTICES.md | ✅ 一致 |
-| 错误处理 | error_handling_cheatsheet.md | ✅ 一致 |
+| 错误处理 | 02_error_handling_cheatsheet.md | ✅ 一致 |
 | 文档注释 | 各文档 | ✅ 一致 |
 | 类型转换 | type_system.md | ✅ 一致 |
 

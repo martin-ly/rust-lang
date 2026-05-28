@@ -598,8 +598,8 @@ fn dead_code_example() {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。同一 `cargo bench` 流程下，可切换 `opt-level`、`codegen-units` 做 A/B 比较。
-- **内存分析**：见 [memory_analysis.md](./memory_analysis.md)。`opt-level` 影响内联与栈使用，分析内存时需固定编译选项。
+- **性能基准测试**：见 [10_performance_benchmarks.md](./10_performance_benchmarks.md)。同一 `cargo bench` 流程下，可切换 `opt-level`、`codegen-units` 做 A/B 比较。
+- **内存分析**：见 [10_memory_analysis.md](./10_memory_analysis.md)。`opt-level` 影响内联与栈使用，分析内存时需固定编译选项。
 
 ### 实际应用案例
 >

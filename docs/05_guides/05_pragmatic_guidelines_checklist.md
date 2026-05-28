@@ -66,7 +66,7 @@
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
-| S01 | 最小化 unsafe 代码块范围 | MUST | `docs/03_guides/UNSAFE_RUST_GUIDE.md` | unsafe 块是否包含最小必要代码？ |
+| S01 | 最小化 unsafe 代码块范围 | MUST | `docs/03_guides/05_unsafe_rust_guide.md` | unsafe 块是否包含最小必要代码？ |
 | S02 | 每个 unsafe 块必须有 SAFETY 注释 | MUST | `crates/c13_embedded/src/` | 是否包含 `// SAFETY: ...` 说明？ |
 | S03 | 优先使用 safe 抽象封装 unsafe | MUST | `crates/c01_ownership_borrow_scope/src/internal_mut/` | unsafe 是否被封装在安全 API 后？ |
 | S04 | 避免不必要的 `unsafe_code` 允许 | SHOULD | `Cargo.toml` `[workspace.lints.rust]` | 是否保持 `unsafe_code = "forbid"`？ |

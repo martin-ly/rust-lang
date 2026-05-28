@@ -973,9 +973,9 @@ for i in 0..1000 {
 
 - [类型系统速查卡](./type_system.md) - 类型与所有权
 - [生命周期速查卡](./type_system.md#生命周期) - 生命周期标注
-- [智能指针速查卡](./smart_pointers_cheatsheet.md) - 所有权与智能指针
+- [智能指针速查卡](./02_smart_pointers_cheatsheet.md) - 所有权与智能指针
 - [借用检查器速查卡](./ownership_cheatsheet.md#借用规则) - 借用规则详解
-- [错误处理速查卡](./error_handling_cheatsheet.md) - 所有权与错误处理
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - 所有权与错误处理
 
 ---
 

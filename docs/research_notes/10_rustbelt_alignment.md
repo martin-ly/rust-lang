@@ -80,7 +80,7 @@
 | :--- | :--- | :--- |
 | 进展性 | type_system T1 | L2 完整证明；Coq 骨架待扩展 |
 | 保持性 | type_system T2 | 同上 |
-| 类型安全 | type_system T3 | 同上；见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §4 |
+| 类型安全 | type_system T3 | 同上；见 [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §4 |
 
 ### 2.3 扩展（RustBelt Meets Relaxed Memory, POPL 2020）
 >

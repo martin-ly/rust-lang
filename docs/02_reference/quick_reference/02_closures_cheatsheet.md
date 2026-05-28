@@ -172,7 +172,7 @@ where
 >
 > **[来源: Rust Official Docs]**
 
-- [控制流与函数速查卡](./control_flow_functions_cheatsheet.md)
+- [控制流与函数速查卡](./02_control_flow_functions_cheatsheet.md)
 - [迭代器速查卡](./02_collections_iterators_cheatsheet.md)
 - [类型系统速查卡](./type_system.md)
 

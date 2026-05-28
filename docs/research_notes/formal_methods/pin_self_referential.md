@@ -238,7 +238,7 @@ $。
 | **适用场景** | 普通 `Unpin` 类型、零开销 | 自引用、`!Unpin`、Future |
 | **性能** | 零分配 | 一次堆分配 |
 
-**决策树**：$T : \text{Unpin}$ → 栈固定；$T \not: \text{Unpin}$（自引用）→ 堆固定。详见 [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md#-pin堆栈区分使用场景的完整论证)。
+**决策树**：$T : \text{Unpin}$ → 栈固定；$T \not: \text{Unpin}$（自引用）→ 堆固定。详见 [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md#-pin堆栈区分使用场景的完整论证)。
 
 ### 理论背景
 
@@ -809,7 +809,7 @@ async fn use_future() {
 | 类型 | 位置 |
 | :--- | :--- |
 | 多维矩阵 | [README §六篇并表](README.md#formal_methods-六篇并表) 第 5 行 |
-| 证明树 | 本文 Pin Def/T1–T3 结构；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
+| 证明树 | 本文 Pin Def/T1–T3 结构；[PROOF_GRAPH_NETWORK](../../04_thinking/04_proof_graph_network.md) |
 
 *依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 

@@ -172,9 +172,9 @@
 |------|---------|-----------|---------|
 | 3.1 Variables and Mutability | 变量、可变性、常量、遮蔽 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) § 基础 | 变量作用域深入分析 |
 | 3.2 Data Types | 标量类型、复合类型 | [type_system](../02_reference/quick_reference/type_system.md) § 基础类型 | 类型推断算法说明 |
-| 3.3 Functions | 函数定义、参数、返回值 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | 函数签名设计模式 |
+| 3.3 Functions | 函数定义、参数、返回值 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | 函数签名设计模式 |
 | 3.4 Comments | 注释语法 | - | 官方充分覆盖 |
-| 3.5 Control Flow | if、loop、while、for | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 控制流 | 控制流决策树 |
+| 3.5 Control Flow | if、loop、while、for | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § 控制流 | 控制流决策树 |
 
 #### 第4章：Understanding Ownership
 
@@ -209,7 +209,7 @@
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 6.1 Defining an Enum | 枚举定义、Option、Result | [type_system](../02_reference/quick_reference/type_system.md) § Enum | 代数数据类型理论 |
-| 6.2 The match Control Flow Construct | match 语法 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § match | 穷尽性检查算法 |
+| 6.2 The match Control Flow Construct | match 语法 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § match | 穷尽性检查算法 |
 | 6.3 Concise Control Flow with if let and let else | if let、let-else | `crates/c03_control_fn/src/` | 模式匹配决策树 |
 
 #### 第7章：Packages, Crates, and Modules
@@ -242,8 +242,8 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 9.1 Unrecoverable Errors with panic! | panic!、unwind | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) § panic | panic hook 自定义 |
-| 9.2 Recoverable Errors with Result | Result、? 运算符 | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) § Result | 错误传播转换树 |
+| 9.1 Unrecoverable Errors with panic! | panic!、unwind | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) § panic | panic hook 自定义 |
+| 9.2 Recoverable Errors with Result | Result、? 运算符 | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) § Result | 错误传播转换树 |
 | 9.3 To panic! or Not to panic! | panic vs Result 决策 | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 错误处理决策流程 |
 
 #### 第10章：Generic Types, Traits, and Lifetimes
@@ -252,7 +252,7 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 10.1 Generic Data Types | 泛型函数、结构体 | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) | 单态化机制 |
+| 10.1 Generic Data Types | 泛型函数、结构体 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | 单态化机制 |
 | 10.2 Defining Shared Behavior with Traits | Trait 定义、实现 | [type_system](../02_reference/quick_reference/type_system.md) § Traits | Trait 对象 vs 泛型 |
 | 10.3 Validating References with Lifetimes | 生命周期语法 | [variance_theory](../research_notes/type_theory/variance_theory.md) | 型变理论、形式化证明 |
 
@@ -285,7 +285,7 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 13.1 Closures | 闭包、捕获环境 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | 闭包内存布局 |
+| 13.1 Closures | 闭包、捕获环境 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | 闭包内存布局 |
 | 13.2 Processing a Series of Items with Iterators | Iterator | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) § Iterator | 自定义迭代器 |
 | 13.3 Improving Our I/O Project | 应用改进 | `examples/` 各示例 | 最佳实践 |
 | 13.4 Performance in Loops vs. Iterators | 性能比较 | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) § 性能 | 零成本抽象证明 |
@@ -308,12 +308,12 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 15.1 Using `Box<T>` to Point to Data on the Heap | Box | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) § Box | 堆分配策略 |
-| 15.2 Treating Smart Pointers Like Regular References | Deref | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) § Deref | 自动解引用规则 |
-| 15.3 Running Code on Cleanup with the Drop Trait | Drop | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) § Drop | RAII 模式 |
-| 15.4 `Rc<T>`, the Reference Counted Smart Pointer | Rc | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) § Rc | 循环引用检测 |
-| 15.5 `RefCell<T>` and the Interior Mutability Pattern | RefCell | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) § RefCell | 运行时借用检查 |
-| 15.6 Reference Cycles Can Leak Memory | 循环引用 | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) § Weak | 内存泄漏分析 |
+| 15.1 Using `Box<T>` to Point to Data on the Heap | Box | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) § Box | 堆分配策略 |
+| 15.2 Treating Smart Pointers Like Regular References | Deref | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) § Deref | 自动解引用规则 |
+| 15.3 Running Code on Cleanup with the Drop Trait | Drop | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) § Drop | RAII 模式 |
+| 15.4 `Rc<T>`, the Reference Counted Smart Pointer | Rc | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) § Rc | 循环引用检测 |
+| 15.5 `RefCell<T>` and the Interior Mutability Pattern | RefCell | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) § RefCell | 运行时借用检查 |
+| 15.6 Reference Cycles Can Leak Memory | 循环引用 | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) § Weak | 内存泄漏分析 |
 
 #### 第16章：Fearless Concurrency
 
@@ -332,11 +332,11 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 17.1 Futures and the Async Syntax | async/await | [async_patterns](../02_reference/quick_reference/async_patterns.md) § 基础 | 状态机转换 |
-| 17.2 Applying Concurrency with Async | 并发执行 | [async_patterns](../02_reference/quick_reference/async_patterns.md) § 并发 | join!/select! |
-| 17.3 Working With Any Number of Futures | 动态 Future | [async_patterns](../02_reference/quick_reference/async_patterns.md) § Stream | FuturesUnordered |
-| 17.4 Streams: Futures in Sequence | Stream | [async_patterns](../02_reference/quick_reference/async_patterns.md) § Stream | 背压处理 |
-| 17.5 A Closer Look at the Traits for Async | Async Traits | [async_patterns](../02_reference/quick_reference/async_patterns.md) § Traits | RPITIT 详解 |
+| 17.1 Futures and the Async Syntax | async/await | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § 基础 | 状态机转换 |
+| 17.2 Applying Concurrency with Async | 并发执行 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § 并发 | join!/select! |
+| 17.3 Working With Any Number of Futures | 动态 Future | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § Stream | FuturesUnordered |
+| 17.4 Streams: Futures in Sequence | Stream | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § Stream | 背压处理 |
+| 17.5 A Closer Look at the Traits for Async | Async Traits | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § Traits | RPITIT 详解 |
 | 17.6 Futures, Tasks, and Threads | 运行时对比 | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) | 调度器原理 |
 
 #### 第18章：Object Oriented Programming Features
@@ -355,9 +355,9 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 19.1 All the Places Patterns Can Be Used | 模式使用位置 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | 模式匹配决策树 |
-| 19.2 Refutability: Whether a Pattern Might Fail to Match | 可反驳性 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | 穷尽性检查 |
-| 19.3 Pattern Syntax | 模式语法大全 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | 高级模式技巧 |
+| 19.1 All the Places Patterns Can Be Used | 模式使用位置 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § 模式 | 模式匹配决策树 |
+| 19.2 Refutability: Whether a Pattern Might Fail to Match | 可反驳性 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § 模式 | 穷尽性检查 |
+| 19.3 Pattern Syntax | 模式语法大全 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § 模式 | 高级模式技巧 |
 
 #### 第20章：Advanced Features
 
@@ -365,7 +365,7 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 20.1 Unsafe Rust | unsafe 代码 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) | 完整 unsafe 指南 |
+| 20.1 Unsafe Rust | unsafe 代码 | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | 完整 unsafe 指南 |
 | 20.2 Advanced Traits | 关联类型、完全限定语法 | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 复杂 trait 模式 |
 | 20.3 Advanced Types | 类型别名、never type | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 类型级编程 |
 | 20.4 Advanced Functions and Closures | 函数指针、返回闭包 | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) § 高级 | HRTB |
@@ -381,8 +381,8 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 22.1 Keywords | 关键字列表 | [QUICK_REFERENCE](../research_notes/QUICK_REFERENCE.md) | 快速参考 |
-| 22.2 Operators and Symbols | 运算符 | [QUICK_REFERENCE](../research_notes/QUICK_REFERENCE.md) | 运算符优先级 |
+| 22.1 Keywords | 关键字列表 | [QUICK_REFERENCE](../research_notes/10_quick_reference.md) | 快速参考 |
+| 22.2 Operators and Symbols | 运算符 | [QUICK_REFERENCE](../research_notes/10_quick_reference.md) | 运算符优先级 |
 | 22.3 Derivable Traits | 可派生 Trait | [type_system](../02_reference/quick_reference/type_system.md) § Derive | 自定义 derive |
 | 22.4 Useful Development Tools | 开发工具 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) § 工具 | 完整工具链 |
 | 22.5 Editions | Edition 差异 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | 迁移指南 |
@@ -396,16 +396,16 @@
 
 | 章节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| **2. Lexical Structure** | 词法结构 | [QUICK_REFERENCE](../research_notes/QUICK_REFERENCE.md) § 语法 | 快速参考 |
+| **2. Lexical Structure** | 词法结构 | [QUICK_REFERENCE](../research_notes/10_quick_reference.md) § 语法 | 快速参考 |
 | **3. Macros** | 宏系统 | macros_cheatsheet | 宏决策树 |
 | **6. Items** | 所有 Item 类型 | 各 crate 源码示例 | 实战示例 |
-| **8. Statements and Expressions** | 语句与表达式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | 控制流决策树 |
-| **9. Patterns** | 模式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | 穷尽性分析 |
+| **8. Statements and Expressions** | 语句与表达式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | 控制流决策树 |
+| **9. Patterns** | 模式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § 模式 | 穷尽性分析 |
 | **10. Type System** | 类型系统 | [type_system](../02_reference/quick_reference/type_system.md) | 型变理论 |
 | **10.5 Subtyping and Variance** | 子类型与型变 | [variance_theory](../research_notes/type_theory/variance_theory.md) | 形式化证明 |
 | **11. Special Types and Traits** | 特殊类型和 Trait | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | Send/Sync 形式化 |
 | **13. Memory Model** | 内存模型 | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 所有权证明 |
-| **17. Unsafety** | Unsafe | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) | UB 完整列表 |
+| **17. Unsafety** | Unsafe | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | UB 完整列表 |
 
 ---
 
@@ -421,22 +421,22 @@
 | 4 | **Variable Bindings** | 可变性、作用域 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
 | 5 | **Types** | 类型转换、推断 | [type_system](../02_reference/quick_reference/type_system.md) |
 | 6 | **Conversion** | From/Into、TryFrom | [type_system](../02_reference/quick_reference/type_system.md) § 转换 |
-| 7 | **Expressions** | 表达式语法 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
-| 8 | **Flow of Control** | if/else、loop、match | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
+| 7 | **Expressions** | 表达式语法 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
+| 8 | **Flow of Control** | if/else、loop、match | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 | 9 | **Functions** | 函数、闭包、高阶函数 | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) |
 | 10 | **Modules** | 模块系统 | `crates/` 项目结构 |
 | 11 | **Crates** | 库创建 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 | 12 | **Cargo** | 包管理 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 | 13 | **Attributes** | 属性 | macros_cheatsheet |
-| 14 | **Generics** | 泛型 | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) |
+| 14 | **Generics** | 泛型 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) |
 | 15 | **Scoping Rules** | 所有权、借用、生命周期 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
 | 16 | **Traits** | Trait 系统 | [type_system](../02_reference/quick_reference/type_system.md) § Traits |
 | 17 | **macro_rules!** | 声明宏 | macros_cheatsheet |
-| 18 | **Error Handling** | 错误处理 | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
+| 18 | **Error Handling** | 错误处理 | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | 19 | **Std Library Types** | 标准库类型 | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) |
 | 20 | **Std Misc** | 线程、文件、进程 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
 | 21 | **Testing** | 测试 | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) |
-| 22 | **Unsafe Operations** | Unsafe 操作 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
+| 22 | **Unsafe Operations** | Unsafe 操作 | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) |
 | 23 | **Compatibility** | 兼容性 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) |
 | 24 | **Meta** | 文档、Playground | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 
@@ -456,7 +456,7 @@
 | **Reference Ch 19-20** | ABI、运行时细节 | 低 | 链接到官方文档 |
 | **Embedded Book** | 嵌入式开发 | 低 | 暂不提供，使用官方 |
 | **WebAssembly Book** | WASM 深入 | 中 | [wasm_cheatsheet](../02_reference/quick_reference/02_wasm_cheatsheet.md) |
-| **Rustonomicon** | Unsafe 高级模式 | 中 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
+| **Rustonomicon** | Unsafe 高级模式 | 中 | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) |
 
 ### 本项目补充的官方未覆盖内容
 
@@ -471,8 +471,8 @@
 | **宏系统决策树** | macros_cheatsheet | 官方为参考文档 |
 | **错误传播转换树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 官方为教程式讲解 |
 | **版本兼容性深度分析** | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | 官方仅列变更 |
-| **控制流决策树** | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | 官方分散在各章 |
-| **异步模式反例** | [async_patterns](../02_reference/quick_reference/async_patterns.md) | 官方无反模式说明 |
+| **控制流决策树** | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | 官方分散在各章 |
+| **异步模式反例** | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | 官方无反模式说明 |
 | **所有权模型可视化** | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 官方无形式化描述 |
 
 ### 版本差异说明
@@ -505,7 +505,7 @@
 | **Week 1: 环境 + 基础语法** | Book Ch 1-3 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) | [Rustlings](https://github.com/rust-lang/rustlings) intro |
 | **Week 2: 所有权系统** | Book Ch 4 + RBE Scoping Rules | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) | RBE 15.1-15.4 |
 | **Week 3: 复合类型 + 集合** | Book Ch 5-8 + RBE Custom Types | [type_system](../02_reference/quick_reference/type_system.md) | 实现简易数据结构 |
-| **Week 4: 错误处理 + 泛型** | Book Ch 9-10 + RBE Error Handling | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) | 重构错误处理 |
+| **Week 4: 错误处理 + 泛型** | Book Ch 9-10 + RBE Error Handling | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | 重构错误处理 |
 | **Week 5: 项目实战** | Book Ch 12 I/O Project | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 完成命令行工具 |
 | **Week 6: 复习 + 测试** | Book Ch 11 Testing | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) | 为项目添加测试 |
 
@@ -517,14 +517,14 @@
 
 | 阶段 | 官方资源 | 本项目补充 | 练习 |
 |------|---------|-----------|------|
-| **Week 1: 智能指针深入** | Book Ch 15 | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) | 实现自定义智能指针 |
+| **Week 1: 智能指针深入** | Book Ch 15 | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | 实现自定义智能指针 |
 | **Week 2: 并发基础** | Book Ch 16 + RBE Threads | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | 线程池实现 |
-| **Week 3: 异步编程** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/async_patterns.md) | 异步 Web 服务器 |
+| **Week 3: 异步编程** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | 异步 Web 服务器 |
 | **Week 4: Trait 系统深度** | Book Ch 10.2 + Reference Traits | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 复杂 trait 设计 |
 | **Week 5: 宏系统** | Book Ch 20.5 + RBE macro_rules! | macros_cheatsheet | 编写 DSL |
 | **Week 6: 设计模式** | Book Ch 18 OOP | [design_patterns](../../crates/c09_design_pattern/docs/README.md) | 实现经典模式 |
 | **Week 7: 性能优化** | Book Ch 13.4 + Reference Types | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) § 性能 | 性能调优实践 |
-| **Week 8: Unsafe 基础** | Book Ch 20.1 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) § 基础 | FFI 绑定 |
+| **Week 8: Unsafe 基础** | Book Ch 20.1 | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) § 基础 | FFI 绑定 |
 
 ### 路径三：高级专家路径（深入原理 → 形式化理解）
 >
@@ -538,7 +538,7 @@
 | **阶段2: 所有权证明** | Reference Memory Model | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 形式化所有权 |
 | **阶段3: 并发安全证明** | Reference Send/Sync | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | 数据竞争自由证明 |
 | **阶段4: 异步形式化** | Reference Coroutines | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) | 状态机语义 |
-| **阶段5: Unsafe 深入** | Reference Unsafety | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) + [Rustonomicon](https://doc.rust-lang.org/nomicon/) | UB 边界掌握 |
+| **阶段5: Unsafe 深入** | Reference Unsafety | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) + [Rustonomicon](https://doc.rust-lang.org/nomicon/) | UB 边界掌握 |
 | **阶段6: 编译器研究** | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | [PROOF_INDEX](../research_notes/PROOF_INDEX.md) | 贡献 Rust 编译器 |
 
 ---
@@ -558,17 +558,17 @@
 | **生命周期** | Book Ch 10.3 | [type_system](../02_reference/quick_reference/type_system.md) | [variance_theory](../research_notes/type_theory/variance_theory.md) |
 | **类型系统** | Book Ch 3.2, 10 | [type_system](../02_reference/quick_reference/type_system.md) | [PROOF_INDEX](../research_notes/PROOF_INDEX.md) |
 | **Trait** | Book Ch 10.2 | [type_system](../02_reference/quick_reference/type_system.md) § Traits | - |
-| **泛型** | Book Ch 10.1 | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) | - |
+| **泛型** | Book Ch 10.1 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | - |
 | **并发** | Book Ch 16 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) |
-| **异步** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/async_patterns.md) | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
-| **错误处理** | Book Ch 9 | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) | - |
+| **异步** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
+| **错误处理** | Book Ch 9 | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | - |
 | **宏** | Book Ch 20.5 | macros_cheatsheet | - |
-| **Unsafe** | Book Ch 20.1 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) | - |
-| **模式匹配** | Book Ch 19 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | - |
+| **Unsafe** | Book Ch 20.1 | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | - |
+| **模式匹配** | Book Ch 19 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § 模式 | - |
 | **集合** | Book Ch 8 | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) | - |
 | **迭代器** | Book Ch 13.2 | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) § Iterator | - |
 | **闭包** | Book Ch 13.1 | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) | - |
-| **智能指针** | Book Ch 15 | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) | - |
+| **智能指针** | Book Ch 15 | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | - |
 | **测试** | Book Ch 11 | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) | - |
 | **Cargo** | Book Ch 14 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) | - |
 
@@ -581,14 +581,14 @@
 | Ch 1 - Getting Started | [Book](https://doc.rust-lang.org/book/ch01-00-getting-started.html) | [01_learning_path_planning.md](./01_learning_path_planning.md) |
 | Ch 4 - Ownership | [Book](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
 | Ch 8 - Collections | [Book](https://doc.rust-lang.org/book/ch08-00-common-collections.html) | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) |
-| Ch 9 - Error Handling | [Book](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
-| Ch 10 - Generics/Traits | [Book](https://doc.rust-lang.org/book/ch10-00-generics.html) | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) |
+| Ch 9 - Error Handling | [Book](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
+| Ch 10 - Generics/Traits | [Book](https://doc.rust-lang.org/book/ch10-00-generics.html) | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) |
 | Ch 11 - Testing | [Book](https://doc.rust-lang.org/book/ch11-00-testing.html) | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) |
 | Ch 13 - Iterators/Closures | [Book](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) |
-| Ch 15 - Smart Pointers | [Book](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) |
+| Ch 15 - Smart Pointers | [Book](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) |
 | Ch 16 - Concurrency | [Book](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
-| Ch 17 - Async | [Book](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [async_patterns](../02_reference/quick_reference/async_patterns.md) |
-| Ch 20 - Advanced/Unsafe | [Book](https://doc.rust-lang.org/book/ch20-00-advanced-features.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
+| Ch 17 - Async | [Book](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) |
+| Ch 20 - Advanced/Unsafe | [Book](https://doc.rust-lang.org/book/ch20-00-advanced-features.html) | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) |
 
 ### 按 Rust by Example 主题索引
 >
@@ -597,16 +597,16 @@
 | RBE 主题 | 快速链接 | 本项目对应 |
 |---------|---------|-----------|
 | 3. Custom Types | [RBE](https://doc.rust-lang.org/rust-by-example/custom_types.html) | [type_system](../02_reference/quick_reference/type_system.md) |
-| 8. Flow of Control | [RBE](https://doc.rust-lang.org/rust-by-example/flow_control.html) | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
+| 8. Flow of Control | [RBE](https://doc.rust-lang.org/rust-by-example/flow_control.html) | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 | 9. Functions | [RBE](https://doc.rust-lang.org/rust-by-example/fn.html) | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) |
-| 14. Generics | [RBE](https://doc.rust-lang.org/rust-by-example/generics.html) | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) |
+| 14. Generics | [RBE](https://doc.rust-lang.org/rust-by-example/generics.html) | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) |
 | 15. Scoping Rules | [RBE](https://doc.rust-lang.org/rust-by-example/scope.html) | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
 | 16. Traits | [RBE](https://doc.rust-lang.org/rust-by-example/trait.html) | [type_system](../02_reference/quick_reference/type_system.md) |
 | 17. macro_rules! | [RBE](https://doc.rust-lang.org/rust-by-example/macros.html) | macros_cheatsheet |
-| 18. Error Handling | [RBE](https://doc.rust-lang.org/rust-by-example/error.html) | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
+| 18. Error Handling | [RBE](https://doc.rust-lang.org/rust-by-example/error.html) | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | 20. Std Misc (Threads) | [RBE](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
 | 21. Testing | [RBE](https://doc.rust-lang.org/rust-by-example/testing.html) | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) |
-| 22. Unsafe | [RBE](https://doc.rust-lang.org/rust-by-example/unsafe.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
+| 22. Unsafe | [RBE](https://doc.rust-lang.org/rust-by-example/unsafe.html) | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) |
 
 ---
 
@@ -619,9 +619,9 @@
 | **Book Ch 10** | 10.1-10.3 Traits, Lifetimes | 型变理论、生命周期形式化（[research_notes](../research_notes/README.md)）；转换树 |
 | **Reference** | Types, Ownership, Special Types | 形式化工程系统（[rust-formal-engineering-system](../rust-formal-engineering-system/README.md)）；variance 专项 |
 | **Reference** | Macros by Example, Procedural Macros | 宏系统决策树、反例（macros_cheatsheet） |
-| **Book Ch 17** | 17.1-17.6 Async | 空 Future、持锁跨 await 反例（[async_patterns](../02_reference/quick_reference/async_patterns.md)）；EDGE_CASES |
+| **Book Ch 17** | 17.1-17.6 Async | 空 Future、持锁跨 await 反例（[async_patterns](../02_reference/quick_reference/02_async_patterns.md)）；EDGE_CASES |
 | **Book Ch 3** | 3.1-3.5 Types, Control Flow | 控制流（[C03](../../crates/c03_control_fn/docs/README.md)）；模式匹配决策树 |
-| **Book Ch 9** | 9.1-9.3 Error Handling | 错误传播转换树（[THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md)）；[error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
+| **Book Ch 9** | 9.1-9.3 Error Handling | 错误传播转换树（[THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md)）；[error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | **Book Ch 11** | 11.1-11.3 Testing | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md)；#[test] 1.93 严格化（[09_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)） |
 | **Reference** | Attributes, Macros | offset_of! 类型检查（1.93）；macros_cheatsheet |
 | **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/variance_theory.md)；[PROOF_INDEX](../research_notes/PROOF_INDEX.md) |
@@ -813,8 +813,8 @@
 
 | 资源 | 说明 | 形式化链接 |
 | :--- | :--- | :--- |
-| [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) | 批判性分析与推进计划 | [formal_methods/README](../research_notes/formal_methods/README.md) |
-| [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2） | [ownership_model](../research_notes/formal_methods/ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
+| [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/10_formal_proof_system_guide.md) | 批判性分析与推进计划 | [formal_methods/README](../research_notes/formal_methods/README.md) |
+| [CORE_THEOREMS_FULL_PROOFS](../research_notes/10_core_theorems_full_proofs.md) | 核心定理完整证明（L2） | [ownership_model](../research_notes/formal_methods/ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/10_international_formal_verification_index.md) | 国际对标 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)、[Ferrocene FLS](https://spec.ferrocene.dev/) |
 
 ### 官方形式化资源映射
@@ -823,13 +823,13 @@
 
 | 官方资源 | 本项目形式化文档 |
 | :--- | :--- |
-| [Ferrocene FLS - Ch.5 Patterns](https://spec.ferrocene.dev/patterns.html) | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
+| [Ferrocene FLS - Ch.5 Patterns](https://spec.ferrocene.dev/patterns.html) | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 | [Ferrocene FLS - Ch.15 Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
 | [Ferrocene FLS - Ch.15 Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
-| [Ferrocene FLS - Ch.16 Exceptions](https://spec.ferrocene.dev/exceptions-and-errors.html) | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
+| [Ferrocene FLS - Ch.16 Exceptions](https://spec.ferrocene.dev/exceptions-and-errors.html) | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | [Ferrocene FLS - Ch.17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
-| [Ferrocene FLS - Ch.19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
-| [Ferrocene FLS - Ch.21 FFI](https://spec.ferrocene.dev/ffi.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) § FFI |
+| [Ferrocene FLS - Ch.19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) |
+| [Ferrocene FLS - Ch.21 FFI](https://spec.ferrocene.dev/ffi.html) | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) § FFI |
 | [Ferrocene FLS - Appendix C UB](https://spec.ferrocene.dev/undefined-behavior.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/02_edge_cases_and_special_cases.md) |
 | [Rust Reference - Undefined Behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/02_edge_cases_and_special_cases.md) |
 
@@ -856,7 +856,7 @@
 | 课程 | 机构 | 链接 | 主要内容 | 本项目对应路径 |
 | :--- | :--- | :--- | :--- | :--- |
 | Rust Fundamentals | Duke | <https://www.coursera.org/learn/rust-fundamentals> | 所有权、借用、生命周期、enum、struct、trait、泛型 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md)、[type_system](../02_reference/quick_reference/type_system.md) |
-| Rust Programming Essentials | Edureka | <https://www.coursera.org/learn/rust-programming-essentials> | 模式匹配、所有权、类型系统、Cargo | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md)、[cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
+| Rust Programming Essentials | Edureka | <https://www.coursera.org/learn/rust-programming-essentials> | 模式匹配、所有权、类型系统、Cargo | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md)、[cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 | Advanced Rust Programming | Edureka | <https://www.coursera.org/learn/advanced-rust-programming> | 并发、多线程、内存管理、集合、trait、泛型 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md)、[collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) |
 | Rust Programming Specialization | Duke | <https://www.coursera.org/specializations/rust-programming> | 系统编程、数据工程、Linux、DevOps、LLM、云、MLOps | [05_guides/](../05_guides/README.md)、[CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) |
 
@@ -874,7 +874,7 @@
 
 1. 完成 edX Linux Foundation 开发者课程
 2. 参考本项目 [05_guides/](../05_guides/README.md) 专题指南
-3. 阅读 [异步模式速查](../02_reference/quick_reference/async_patterns.md) 等进阶内容
+3. 阅读 [异步模式速查](../02_reference/quick_reference/02_async_patterns.md) 等进阶内容
 
 ---
 

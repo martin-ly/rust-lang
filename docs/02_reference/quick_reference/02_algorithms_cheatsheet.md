@@ -941,7 +941,7 @@ fn fib(n: usize) -> usize {
 > **[来源: IEEE - Programming Language Standards]**
 
 - [集合与迭代器速查卡](./02_collections_iterators_cheatsheet.md) - 数据结构基础
-- [控制流与函数速查卡](./control_flow_functions_cheatsheet.md) - 算法控制流
+- [控制流与函数速查卡](./02_control_flow_functions_cheatsheet.md) - 算法控制流
 - [类型系统速查卡](./type_system.md) - 算法中的类型
 
 ---

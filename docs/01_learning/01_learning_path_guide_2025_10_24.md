@@ -317,7 +317,7 @@ async fn use_async_fn_trait() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [QUICK_REFERENCE](../archive/temp/QUICK_REFERENCE.md)
+- QUICK_REFERENCE
 - crates/c01_ownership_borrow_scope
 
 ---

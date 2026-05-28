@@ -1078,21 +1078,21 @@ graph TD
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-- [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md) - Pin 堆/栈区分、设计机制论证
+- [DESIGN_MECHANISM_RATIONALE](../research_notes/10_design_mechanism_rationale.md) - Pin 堆/栈区分、设计机制论证
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 
 ### 表达能力与边界
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 表达能力边界
+- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/10_language_semantics_expressiveness.md) - 表达能力边界
 - [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../research_notes/10_safe_decidable_mechanisms_overview.md) - 安全可判定机制
 
 ### 证明与安全
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-- [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网详细文档
+- [04_proof_graph_network.md](./04_proof_graph_network.md) - 证明图网详细文档
 - [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
 
 ### 分布式与工作流决策树（formal_methods 独立）
@@ -1107,7 +1107,7 @@ graph TD
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [04_thinking_representation_methods.md](./04_thinking_representation_methods.md) - 思维表征方式
-- [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
+- [04_mind_map_collection.md](./04_mind_map_collection.md) - 思维导图集合
 
 ---
 

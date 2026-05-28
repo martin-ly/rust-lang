@@ -182,7 +182,7 @@
 在贡献前，请先查看：
 
 - [主索引](./README.md) - 了解现有研究主题
-- [快速参考](./QUICK_REFERENCE.md) - 查找相关主题
+- [快速参考](./10_quick_reference.md) - 查找相关主题
 - [研究路线图](./10_research_roadmap.md) - 了解研究计划
 
 ### 步骤 3: 创建或修改文件
@@ -191,7 +191,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- **新研究笔记**: 使用 [模板](./TEMPLATE.md) 创建新文件
+- **新研究笔记**: 使用 [模板](./10_template.md) 创建新文件
 - **修改现有笔记**: 直接编辑相应文件
 
 ### 步骤 4: 遵循规范
@@ -205,7 +205,7 @@
 - [研究笔记规范](./README.md#-研究笔记规范)
 - [质量标准](#-质量标准)
 - [检查清单](#-检查清单)
-- **格式门禁**：新文档须符合 [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) § research_notes 元信息统一模板（创建日期、最后更新、**Rust 版本**: 1.93.1+ (Edition 2024)、状态）；不符合时请在 PR 中说明例外理由。详见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[MAINTENANCE_GUIDE](./10_maintenance_guide.md) § 格式统一检查清单。
+- **格式门禁**：新文档须符合 [QUALITY_CHECKLIST](./10_quality_checklist.md) § research_notes 元信息统一模板（创建日期、最后更新、**Rust 版本**: 1.93.1+ (Edition 2024)、状态）；不符合时请在 PR 中说明例外理由。详见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[MAINTENANCE_GUIDE](./10_maintenance_guide.md) § 格式统一检查清单。
 
 ### 步骤 5: 更新索引
 
@@ -215,7 +215,7 @@
 
 - 相应目录的 README.md
 - 主索引 README.md
-- 快速参考 QUICK_REFERENCE.md（如需要）
+- 快速参考 10_quick_reference.md（如需要）
 
 ### 步骤 6: 提交贡献
 
@@ -264,9 +264,9 @@
 
 - [ ] 查看 [主索引](./README.md) 确认主题不重复
 - [ ] 查看 [研究路线图](./10_research_roadmap.md) 了解优先级
-- [ ] 使用 [模板](./TEMPLATE.md) 创建文件
+- [ ] 使用 [模板](./10_template.md) 创建文件
 - [ ] 选择合适的目录（formal_methods/、type_theory/、experiments/）
-- [ ] **元信息**：文首 blockquote 含 创建日期、最后更新、Rust 版本 1.93.1+ (Edition 2024)、状态（见 [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md)）
+- [ ] **元信息**：文首 blockquote 含 创建日期、最后更新、Rust 版本 1.93.1+ (Edition 2024)、状态（见 [QUALITY_CHECKLIST](./10_quality_checklist.md)）
 
 ### 编写研究笔记时
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
@@ -312,8 +312,8 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [研究笔记规范](./README.md#-研究笔记规范)
-- [研究笔记模板](./TEMPLATE.md)
-- [快速参考](./QUICK_REFERENCE.md)
+- [研究笔记模板](./10_template.md)
+- [快速参考](./10_quick_reference.md)
 - [研究路线图](./10_research_roadmap.md)
 
 ---
@@ -358,7 +358,7 @@ A: 更新以下文件：
 
 1. 相应目录的 README.md（添加新笔记链接）
 2. 主索引 README.md（如需要）
-3. 快速参考 QUICK_REFERENCE.md（如需要）
+3. 快速参考 10_quick_reference.md（如需要）
 
 ### Q: 研究笔记的状态如何更新？
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -401,7 +401,7 @@ A: 在研究笔记的元信息中更新状态：
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

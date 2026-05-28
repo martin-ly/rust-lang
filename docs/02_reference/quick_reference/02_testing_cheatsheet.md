@@ -1719,7 +1719,7 @@ fn broken_test() {
 
 **定理 TEST-T1（测试完备性）**: 若测试覆盖所有公理/定理路径，则程序满足规范。
 
-*证明*: 由 [FORMAL_PROOF_SYSTEM_GUIDE](../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)，测试用例对应形式化规范的实例化，全覆盖保证所有执行路径验证。∎
+*证明*: 由 [FORMAL_PROOF_SYSTEM_GUIDE](../../research_notes/10_formal_proof_system_guide.md)，测试用例对应形式化规范的实例化，全覆盖保证所有执行路径验证。∎
 
 ---
 
@@ -1736,7 +1736,7 @@ fn broken_test() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [错误处理速查卡](./error_handling_cheatsheet.md) - 测试中的错误处理
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - 测试中的错误处理
 - [模块系统速查卡](./02_modules_cheatsheet.md) - 模块测试
 - 宏系统速查卡 - 测试宏
 - [Cargo 速查卡](./02_cargo_cheatsheet.md) - Cargo 测试命令

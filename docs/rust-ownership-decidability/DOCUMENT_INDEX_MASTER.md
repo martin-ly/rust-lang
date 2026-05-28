@@ -292,7 +292,7 @@
 #### 主要学习文档
 
 - INTERACTIVE_LEARNING_GUIDE.md (交互式学习)
-- COMPREHENSIVE_FAQ.md (全面 FAQ)
+- COMPREHENSIVE_10_faq.md (全面 FAQ)
 - ERROR_DIAGNOSTICS_GUIDE.md (错误诊断)
 
 ### 形式化理论
@@ -330,7 +330,7 @@
 **初学者** (🟢)
 → 01-core-concepts/short-concepts/
 → INTERACTIVE_LEARNING_GUIDE.md
-→ COMPREHENSIVE_FAQ.md
+→ COMPREHENSIVE_10_faq.md
 
 **进阶** (🟡)
 → 01-core-concepts/detailed-concepts/
@@ -368,7 +368,7 @@
 **学习资源**
 → exercises/
 → INTERACTIVE_LEARNING_GUIDE.md
-→ COMPREHENSIVE_FAQ.md
+→ COMPREHENSIVE_10_faq.md
 
 ---
 

@@ -62,7 +62,7 @@
 | **详细100%完成计划** | [COMPREHENSIVE_SYSTEMATIC_REVIEW_AND_100_PERCENT_PLAN](./10_comprehensive_systematic_review_and_100_percent_plan.md) |
 | **思维表征完善计划** | MIND_REPRESENTATION_COMPLETION_PLAN |
 | **L3机器证明实施指南** | [L3_MACHINE_PROOF_GUIDE](./10_l3_machine_proof_guide.md) |
-| **核心定理完整证明** | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) |
+| **核心定理完整证明** | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) |
 | **论证缺口索引** | [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) |
 
 ---
@@ -337,7 +337,7 @@ Week 21-24: 国际对标
 | :--- | :--- |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | 顶层框架 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 统一索引 |
-| [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | 核心定理L2证明 |
+| [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 核心定理L2证明 |
 | [PROOF_INDEX](./PROOF_INDEX.md) | 证明索引 |
 
 ---

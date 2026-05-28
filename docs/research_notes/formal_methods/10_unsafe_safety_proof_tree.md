@@ -433,7 +433,7 @@ impl<T> Drop for UniquePtr<T> {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [Unsafe Rust 指南](../../../docs/05_guides/UNSAFE_RUST_GUIDE.md)
+- [Unsafe Rust 指南](../../../docs/05_guides/05_unsafe_rust_guide.md)
 - [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 - [Miri 工具](https://github.com/rust-lang/miri)
 

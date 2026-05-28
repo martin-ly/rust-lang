@@ -42,7 +42,7 @@
 
 | 我的目标 | 入口 | 预计时间 |
 | :--- | :--- | :--- |
-| **我想理解 Rust 形式化证明** | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | 30min |
+| **我想理解 Rust 形式化证明** | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 30min |
 | **我想查某个概念的证明/定义** | [QUICK_FIND](./10_quick_find.md)（按关键词） | 2min |
 | **我想选设计模式/并发模型** | [software_design_theory/00_MASTER_INDEX](./software_design_theory/00_MASTER_INDEX.md) → 03_semantic_boundary_map、06_boundary_analysis | 15min |
 | **我想理解权威对齐体系** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) | 10min |
@@ -55,7 +55,7 @@
 | **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) | 5min |
 | **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) | 5min |
 | **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/10_formal_methods_completeness_checklist.md) | 2min |
-| **我想贡献/维护** | [CONTRIBUTING](./CONTRIBUTING.md) → [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) | 5min |
+| **我想贡献/维护** | [CONTRIBUTING](./10_contributing.md) → [QUALITY_CHECKLIST](./10_quality_checklist.md) | 5min |
 
 ---
 
@@ -104,7 +104,7 @@ research_notes/
 │   ├── type_theory/                    ← 类型、Trait、型变
 │   ├── 10_formal_full_model_overview.md   ← 统一形式系统入口
 │   ├── FORMAL_LANGUAGE_AND_PROOFS.md   ← 推理规则、操作语义
-│   ├── CORE_THEOREMS_FULL_PROOFS.md    ← T-OW2/T-BR1/T-TY3 证明
+│   ├── 10_core_theorems_full_proofs.md    ← T-OW2/T-BR1/T-TY3 证明
 │   ├── PROOF_INDEX.md                  ← 105+ 证明索引
 │   └── coq_skeleton/                   ← Coq 骨架
 │
@@ -114,7 +114,7 @@ research_notes/
 ├── 【实验与综合】
 │   ├── experiments/                    ← 性能、内存、并发、宏
 │   ├── 10_practical_applications.md
-│   └── research_methodology.md
+│   └── 10_research_methodology.md
 │
 └── 【导航/框架/指南】（按需查阅）
     ├── 10_00_comprehensive_summary.md      ← 完整总结综合、知识地图、论证总览
@@ -124,7 +124,7 @@ research_notes/
     ├── RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md  ← 批判性分析、层次化/矩阵/思维表征缺口、可持续改进计划
     ├── 10_hierarchical_mapping_and_summary.md                      ← 文档树、概念↔文档↔Def/定理、文档↔思维表征映射
     ├── ARGUMENTATION_GAP_INDEX.md
-    ├── CONTRIBUTING.md、QUALITY_CHECKLIST.md
+    ├── 10_contributing.md、10_quality_checklist.md
     └── 其他运维/参考文档
 ```
 

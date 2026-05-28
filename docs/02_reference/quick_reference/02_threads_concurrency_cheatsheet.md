@@ -871,7 +871,7 @@ thread::spawn(move || {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [并发模式速查卡](./async_patterns.md)
+- [并发模式速查卡](./02_async_patterns.md)
 - [Rust 官方文档 - 并发](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ---
@@ -945,10 +945,10 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-- [异步编程速查卡](./async_patterns.md) - 异步并发对比
-- [智能指针速查卡](./smart_pointers_cheatsheet.md) - Arc 和 Mutex
+- [异步编程速查卡](./02_async_patterns.md) - 异步并发对比
+- [智能指针速查卡](./02_smart_pointers_cheatsheet.md) - Arc 和 Mutex
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与并发
-- [错误处理速查卡](./error_handling_cheatsheet.md) - 并发错误处理
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - 并发错误处理
 
 ---
 

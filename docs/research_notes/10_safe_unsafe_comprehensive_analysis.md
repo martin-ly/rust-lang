@@ -396,8 +396,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | 文档 | 用途 |
 | :--- | :--- |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | 理论体系、论证体系、安全边界总览 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 公理语义、unsafe 契约 |
-| [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) | Unsafe Rust 专题指南 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 公理语义、unsafe 契约 |
+| [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | Unsafe Rust 专题指南 |
 | [ownership_model](formal_methods/ownership_model.md) | 内存安全定理 |
 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) | 数据竞争自由定理 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 官方 unsafe 权威 |

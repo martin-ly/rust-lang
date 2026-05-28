@@ -370,7 +370,7 @@ docs/
 **工时**: 3h
 
 ```markdown
-目标: 创建 docs/CONTRIBUTING.md
+目标: 创建 docs/10_contributing.md
 
 内容:
 - 文档命名规范

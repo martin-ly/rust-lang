@@ -129,7 +129,7 @@
 
 本文档展示了一个完整的研究笔记示例，帮助研究者理解如何编写高质量的研究笔记。
 
-**注意**: 这是一个示例文档，展示了研究笔记的标准格式和内容结构。实际研究笔记应该基于 [研究笔记模板](./TEMPLATE.md) 创建。
+**注意**: 这是一个示例文档，展示了研究笔记的标准格式和内容结构。实际研究笔记应该基于 [研究笔记模板](./10_template.md) 创建。
 
 **实质内容链接**：本示例的所有权、借用、生命周期形式化，在 [ownership_model](./formal_methods/ownership_model.md)、[borrow_checker_proof](./formal_methods/borrow_checker_proof.md)、[lifetime_formalization](./formal_methods/lifetime_formalization.md) 中有完整 Def/定理/证明；代码示例可对照 [PROOF_INDEX](./PROOF_INDEX.md) 追溯。
 
@@ -506,9 +506,9 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [研究笔记模板](./TEMPLATE.md) - 研究笔记模板
+- [研究笔记模板](./10_template.md) - 研究笔记模板
 - [最佳实践](./BEST_PRACTICES.md) - 研究笔记最佳实践
-- [质量检查清单](./QUALITY_CHECKLIST.md) - 质量检查标准
+- [质量检查清单](./10_quality_checklist.md) - 质量检查标准
 
 ### 研究笔记
 >

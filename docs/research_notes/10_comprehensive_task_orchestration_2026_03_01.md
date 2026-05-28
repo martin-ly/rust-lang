@@ -105,7 +105,7 @@
 | 文件 | 大小 | 状态 | 动作 |
 | :--- | :--- | :--- | :--- |
 | 10_formal_proof_critical_analysis_and_plan_2026_02.md | 0.39KB | 占位 | 补充实质内容或归档 |
-| FORMAL_PROOF_SYSTEM_GUIDE.md | 0.45KB | 占位 | 补充实质内容或归档 |
+| 10_formal_proof_system_guide.md | 0.45KB | 占位 | 补充实质内容或归档 |
 | 10_aeneas_integration_plan.md | 0.5KB | 重定向 | 已归档，可删除 |
 | 10_coq_isabelle_proof_scaffolding.md | 0.51KB | 重定向 | 已归档，可删除 |
 | 10_coq_of_rust_integration_plan.md | 0.53KB | 重定向 | 已归档，可删除 |
@@ -179,7 +179,7 @@
 | 文件 | 当前大小 | 目标大小 | 优先级 |
 | :--- | :--- | :--- | :--- |
 | 10_macros_cheatsheet.md | 1.3KB | 4KB | P2 |
-| 10_error_handling_cheatsheet.md | 1.5KB | 4KB | P2 |
+| 10_02_error_handling_cheatsheet.md | 1.5KB | 4KB | P2 |
 | 10_concurrency_cheatsheet.md | 1.6KB | 5KB | P1 |
 | 10_lifetime_cheatsheet.md | 3.6KB | 6KB | P1 |
 | 10_rust_formal_methods_cheatsheet.md | 4.5KB | 8KB | P1 |

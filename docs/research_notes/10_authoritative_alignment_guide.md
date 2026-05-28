@@ -335,17 +335,17 @@ let r = &s;
 | 可变借用 | Rust Book 4.2 | formal_methods/borrow_checker_proof.md | ✅ | 一致 |
 | 结构体 | Rust Book 5 | quick_reference/type_system.md | ✅ | 一致 |
 | 枚举 | Rust Book 6 | quick_reference/type_system.md | ✅ | 一致 |
-| 模式匹配 | Rust Book 6.2 | quick_reference/control_flow_functions_cheatsheet.md | ✅ | 一致 |
-| 错误处理 | Rust Book 9 | quick_reference/error_handling_cheatsheet.md | ✅ | 一致 |
-| 泛型 | Rust Book 10 | quick_reference/generics_cheatsheet.md | ✅ | 一致 |
+| 模式匹配 | Rust Book 6.2 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
+| 错误处理 | Rust Book 9 | quick_reference/02_error_handling_cheatsheet.md | ✅ | 一致 |
+| 泛型 | Rust Book 10 | quick_reference/02_generics_cheatsheet.md | ✅ | 一致 |
 | Trait | Rust Book 10.2 | quick_reference/type_system.md | ✅ | 一致 |
 | 生命周期 | Rust Book 10.3 | quick_reference/type_system.md | ✅ | 一致 |
 | 测试 | Rust Book 11 | quick_reference/02_testing_cheatsheet.md | ✅ | 一致 |
-| 闭包 | Rust Book 13 | quick_reference/control_flow_functions_cheatsheet.md | ✅ | 一致 |
+| 闭包 | Rust Book 13 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
 | 迭代器 | Rust Book 13.2 | quick_reference/02_collections_iterators_cheatsheet.md | ✅ | 一致 |
-| 智能指针 | Rust Book 15 | quick_reference/smart_pointers_cheatsheet.md | ✅ | 一致 |
+| 智能指针 | Rust Book 15 | quick_reference/02_smart_pointers_cheatsheet.md | ✅ | 一致 |
 | 并发 | Rust Book 16 | quick_reference/02_threads_concurrency_cheatsheet.md | ✅ | 一致 |
-| 异步 | Rust Book 17 | quick_reference/async_patterns.md | ✅ | 一致 |
+| 异步 | Rust Book 17 | quick_reference/02_async_patterns.md | ✅ | 一致 |
 
 ### 版本信息检查
 
@@ -419,7 +419,7 @@ let r = &s;
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

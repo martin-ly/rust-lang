@@ -369,8 +369,8 @@ fn api_stabilization_examples() {
 
 | 特性 | 形式化文档 | 相关定义 |
 | :--- | :--- | :--- |
-| MaybeUninit | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | unsafe 契约矩阵 |
-| 联合体 | [FORMAL_PROOF_SYSTEM_GUIDE.md](./FORMAL_PROOF_SYSTEM_GUIDE.md) | UB 分类 |
+| MaybeUninit | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) | unsafe 契约矩阵 |
+| 联合体 | [10_formal_proof_system_guide.md](./10_formal_proof_system_guide.md) | UB 分类 |
 | 自动特征 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md) | Trait 解析 |
 | 高阶生命周期 | [lifetime_formalization.md](./type_theory/lifetime_formalization.md) | 生命周期形式化 |
 
@@ -380,9 +380,9 @@ fn api_stabilization_examples() {
 
 | 定理 | 文档 | 说明 |
 | :--- | :--- | :--- |
-| T-OW2 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 所有权唯一性 |
-| T-BR1 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 数据竞争自由 |
-| T-TY3 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 类型安全 |
+| T-OW2 | [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) | 所有权唯一性 |
+| T-BR1 | [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) | 数据竞争自由 |
+| T-TY3 | [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) | 类型安全 |
 
 ### Coq 证明骨架
 
@@ -405,7 +405,7 @@ fn api_stabilization_examples() {
 | 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
 | 类型理论 | Trait 系统 | [type_theory/trait_system_formalization.md](./type_theory/trait_system_formalization.md) |
 | 类型理论 | 生命周期形式化 | [type_theory/lifetime_formalization.md](./type_theory/lifetime_formalization.md) |
-| 实验研究 | 性能基准测试 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) |
+| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
 
 ### 项目文档
 >

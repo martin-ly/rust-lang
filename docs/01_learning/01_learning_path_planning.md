@@ -186,7 +186,7 @@
 **推荐资源**:
 
 - [所有权速查卡](../02_reference/quick_reference/ownership_cheatsheet.md)
-- [控制流速查卡](../02_reference/quick_reference/control_flow_functions_cheatsheet.md)
+- [控制流速查卡](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md)
 - [类型系统速查卡](../02_reference/quick_reference/type_system.md)
 
 ---
@@ -326,8 +326,8 @@
    - 跟踪最新稳定版本特性，保持技术敏锐度
 
 5. **形式化与验证（研究者路径）**
-   - [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
-   - [核心定理完整证明](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
+   - [形式化证明系统指南](../research_notes/10_formal_proof_system_guide.md)
+   - [核心定理完整证明](../research_notes/10_core_theorems_full_proofs.md)
    - [国际对标索引](../research_notes/10_international_formal_verification_index.md)
 
 **推荐资源**:
@@ -775,7 +775,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ├── [所有权模型形式化](../research_notes/formal_methods/ownership_model.md)
 ├── [借用检查器证明](../research_notes/formal_methods/borrow_checker_proof.md)
 ├── [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
-└── 实践: Prusti/Kani 验证或数学风格证明（见 [CORE_THEOREMS_FULL_PROOFS](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)）
+└── 实践: Prusti/Kani 验证或数学风格证明（见 [CORE_THEOREMS_FULL_PROOFS](../research_notes/10_core_theorems_full_proofs.md)）
 
 第 9-12 周: 并发与异步形式化
 ├── [Send/Sync 形式化](../research_notes/formal_methods/send_sync_formalization.md)
@@ -784,8 +784,8 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 └── 实践: 分析并发算法的安全性证明
 
 第 13-16 周: 前沿研究
-├── [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
-├── [核心定理完整证明](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
+├── [形式化证明系统指南](../research_notes/10_formal_proof_system_guide.md)
+├── [核心定理完整证明](../research_notes/10_core_theorems_full_proofs.md)
 ├── [国际对标索引](../research_notes/10_international_formal_verification_index.md)
 └── 研究项目: 选择一个开放问题深入研究
 ```
@@ -860,7 +860,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [形式化方法研究](../research_notes/formal_methods/README.md)
-- [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
+- [形式化证明系统指南](../research_notes/10_formal_proof_system_guide.md)
 - [证明索引](../research_notes/PROOF_INDEX.md)
 - [国际对标索引](../research_notes/10_international_formal_verification_index.md)
 

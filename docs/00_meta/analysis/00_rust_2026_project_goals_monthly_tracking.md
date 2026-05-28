@@ -224,7 +224,7 @@
 | E07 | 嵌入式 crates 生态成熟度 | 🟡 | `crates/` 有部分算法和数据结构示例，但缺少嵌入式专用 crate 的推荐清单 |
 | E08 | unsafe 代码审计文化培育 | 🟡 | unsafe 指南和 Miri 文档共同覆盖，但缺少系统性的审计流程模板和检查清单 |
 | E09 | RFC 流程透明化与可访问性 | 🔴 | 无覆盖 — 涉及 RFC 撰写指南、FCP 流程解读 |
-| E10 | 开源贡献者 onboarding 体验 | 🟡 | `CONTRIBUTING.md` 有基础指南，但缺少「first contribution」实操手册 |
+| E10 | 开源贡献者 onboarding 体验 | 🟡 | `10_contributing.md` 有基础指南，但缺少「first contribution」实操手册 |
 | E11 | 国际化 (i18n) 与本地化基础设施 | 🔴 | 无覆盖 — `fluent` 或 `i18n-embed` 等 crate 的使用 |
 | E12 | WebAssembly 生态集成 | 🟡 | `crates/c10_networks/` 有 WASM 相关内容，但缺少 `wasm-bindgen` 和 `trunk` 的完整工作流 |
 | E13 | 学习路径标准化与分级 | 🟡 | [`knowledge/INDEX.md`](../../../knowledge/INDEX.md) 有分级学习索引，但缺少与官方 Book 的对比映射 |

@@ -1205,7 +1205,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 
 - [类型系统速查卡](./type_system.md) - String 和 &str 类型
 - [集合与迭代器速查卡](./02_collections_iterators_cheatsheet.md) - 字符串集合操作
-- [错误处理速查卡](./error_handling_cheatsheet.md) - 字符串错误处理
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - 字符串错误处理
 - [模块系统速查卡](./02_modules_cheatsheet.md) - 模块中的字符串处理
 
 ---

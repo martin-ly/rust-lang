@@ -94,7 +94,7 @@
 | 基本类型 | `crates/c02_type_system/src/primitive_types/` | 标量类型、复合类型完整覆盖 |
 | 控制流 | `crates/c03_control_fn/src/control_struct/` | if/let、loop、while、for、match |
 | 函数 | `crates/c03_control_fn/src/function/` | 参数、返回值、语句 vs 表达式 |
-| 注释与文档 | `docs/02_reference/quick_reference/control_flow_functions_cheatsheet.md` | 速查卡 |
+| 注释与文档 | `docs/02_reference/quick_reference/02_control_flow_functions_cheatsheet.md` | 速查卡 |
 
 ### 练习验证
 

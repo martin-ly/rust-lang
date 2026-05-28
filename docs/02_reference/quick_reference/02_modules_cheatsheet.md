@@ -817,7 +817,7 @@ mod inner {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 模块中的所有权规则
-- [错误处理速查卡](./error_handling_cheatsheet.md) - 模块中的错误处理
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - 模块中的错误处理
 - [测试速查卡](02_testing_cheatsheet.md) - 模块测试
 
 ---

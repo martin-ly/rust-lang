@@ -280,7 +280,7 @@
 | The Rust Book Ch 1-21 | C01-C12 | 逐章对比 |
 | Rust Reference | research_notes/formal_methods | 规范对齐 |
 | Rust By Example | examples/ | 示例覆盖 |
-| Rustonomicon | docs/05_guides/UNSAFE_RUST_GUIDE.md | unsafe 内容 |
+| Rustonomicon | docs/05_guides/05_unsafe_rust_guide.md | unsafe 内容 |
 | Cargo Book | C02/cargo_package_management/ | 构建系统 |
 | rustdoc Book | docs/06_toolchain/ | 文档工具 |
 

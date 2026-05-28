@@ -92,7 +92,7 @@
 - `05_macro_system_usage_guide.md` (C11)
 - `05_wasm_usage_guide.md` (C12)
 - `05_embedded_rust_guide.md` (C13)
-- `UNSAFE_RUST_GUIDE.md` (C01/C07)
+- `05_unsafe_rust_guide.md` (C01/C07)
 - `PERFORMANCE_TUNING_GUIDE.md` (C08)
 - `05_type_system_usage_guide.md` (C02) ⬅️ **待创建**
 - `05_control_flow_functions_usage_guide.md` (C03) ⬅️ **待创建**
@@ -205,7 +205,7 @@
 
 - `00_documentation_lifecycle.md` — 文档生命周期管理制度
 - `DOCS_STRUCTURE_OVERVIEW.md` — 完整结构总览
-- `DOCUMENTATION_CROSS_REFERENCE_GUIDE.md` — 跨文档映射网络
+- `07_documentation_cross_reference_guide.md` — 跨文档映射网络
 
 ---
 

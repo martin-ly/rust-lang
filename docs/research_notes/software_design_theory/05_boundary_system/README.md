@@ -163,7 +163,7 @@
 
 ## 与顶层衔接
 
-本边界体系与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 衔接，扩展至设计模式与执行模型维度。
+本边界体系与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../10_safe_unsafe_comprehensive_analysis.md) 衔接，扩展至设计模式与执行模型维度。
 
 ---
 

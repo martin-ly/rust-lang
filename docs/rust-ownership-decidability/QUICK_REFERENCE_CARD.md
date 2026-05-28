@@ -203,7 +203,7 @@ impl Sync for T where &T: Send { }
 └── case-studies/                     // 案例分析
 
 ❓ 参考
-├── COMPREHENSIVE_FAQ.md              // FAQ
+├── COMPREHENSIVE_10_faq.md              // FAQ
 ├── ERROR_DIAGNOSTICS_GUIDE.md        // 错误诊断
 └── 10_quick_reference_card.md           // 本卡片
 ```

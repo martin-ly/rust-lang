@@ -41,7 +41,7 @@
 - [Trait 系统形式化](../research_notes/type_theory/trait_system_formalization.md)
 - [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
 - [型变理论](../research_notes/type_theory/variance_theory.md)
-- [形式化验证工具](../research_notes/TOOLS_GUIDE.md)
+- [形式化验证工具](../research_notes/10_tools_guide.md)
 
 ---
 
@@ -132,7 +132,7 @@ fn render<T: Drawable>(item: T) {
 | **Trait 系统** | [../research_notes/type_theory/trait_system_formalization.md](../research_notes/type_theory/trait_system_formalization.md) | Trait 系统的形式化 |
 | **型变理论** | [../research_notes/type_theory/variance_theory.md](../research_notes/type_theory/variance_theory.md) | 型变规则与证明 |
 | **证明索引** | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) | 87+ 个形式化证明的完整索引 |
-| **工具指南** | [../research_notes/TOOLS_GUIDE.md](../research_notes/TOOLS_GUIDE.md) | Prusti/Kani/Creusot 使用指南 |
+| **工具指南** | [../research_notes/10_tools_guide.md](../research_notes/10_tools_guide.md) | Prusti/Kani/Creusot 使用指南 |
 
 ---
 
@@ -140,7 +140,7 @@ fn render<T: Drawable>(item: T) {
 
 - [研究笔记主入口](../research_notes/README.md)
 - [思维表征方式](../04_thinking/04_thinking_representation_methods.md)
-- [多维概念矩阵](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
+- [多维概念矩阵](../04_thinking/04_multi_dimensional_concept_matrix.md)
 
 ---
 
@@ -152,8 +152,8 @@ fn render<T: Drawable>(item: T) {
 | **type_theory/** | [../research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统、Trait 系统、型变理论、类型推导 |
 | **experiments/** | [../research_notes/experiments/](../research_notes/experiments/README.md) | 性能实验、内存分析、编译器优化 |
 | **PROOF_INDEX.md** | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) | 形式化证明索引（87+ 个证明） |
-| **TOOLS_GUIDE.md** | [../research_notes/TOOLS_GUIDE.md](../research_notes/TOOLS_GUIDE.md) | 形式化验证工具（Prusti、Kani、Creusot） |
-| **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md** | [../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全/非安全边界分析 |
+| **10_tools_guide.md** | [../research_notes/10_tools_guide.md](../research_notes/10_tools_guide.md) | 形式化验证工具（Prusti、Kani、Creusot） |
+| **10_safe_unsafe_comprehensive_analysis.md** | [../research_notes/10_safe_unsafe_comprehensive_analysis.md](../research_notes/10_safe_unsafe_comprehensive_analysis.md) | 安全/非安全边界分析 |
 
 ---
 

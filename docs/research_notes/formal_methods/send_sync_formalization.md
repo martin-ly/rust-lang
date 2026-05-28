@@ -284,9 +284,9 @@ Def SEND1, SYNC1
 
 | 类型 | 位置 |
 | :--- | :--- |
-| 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) §5、C06；安全可判定机制节点 |
+| 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/04_mind_map_collection.md) §5、C06；安全可判定机制节点 |
 | 概念多维矩阵 | [README §六篇并表](README.md#formal_methods-六篇并表) 第 6 行；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md) §3.1 |
-| 决策树 | [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) § Send/Sync；[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) 并发选型 |
+| 决策树 | [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md) § Send/Sync；[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) 并发选型 |
 | 推理证明树 | [PROOF_INDEX](../PROOF_INDEX.md)；本篇 § 公理-定理证明树 |
 
 *依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
@@ -300,7 +300,7 @@ Def SEND1, SYNC1
 - [Ferrocene FLS Ch. 17.1 Send and Sync](https://spec.ferrocene.dev/concurrency.html#send-and-sync)
 - [RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md) — Arc、Send/Sync 与松弛内存
 - [async_state_machine](./async_state_machine.md) — Future 与 Send/Sync 约束、定理 6.2
-- [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) § Send/Sync — 设计理由与决策树
+- [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md) § Send/Sync — 设计理由与决策树
 
 ---
 

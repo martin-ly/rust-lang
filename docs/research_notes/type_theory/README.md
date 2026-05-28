@@ -174,7 +174,7 @@
 
 **状态**: ✅ 已完成 (100%)
 
-**论证增强**: 已补充完整证明、反例、公理-定理证明树；详见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)
+**论证增强**: 已补充完整证明、反例、公理-定理证明树；详见 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)
 
 **Trait 系统、高级类型、类型系统基础**：均已补充反例、公理-定理证明树，论证系统 100% 完成
 
@@ -210,7 +210,7 @@
 | [advanced_types](./advanced_types.md) | GAT、const 泛型、PhantomData、CONST-EVAL-T1、CONST-MUT1、EXIST1 | 关联类型、类型级常量 | existential 完整规则 |
 | [variance_theory](./variance_theory.md) | T1–T4、VAR-COM-T1/C1 | 协变/逆变/不变、组合传递 | 三元组合已补全 |
 
-本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md) 衔接。
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)、[PROOF_INDEX](../PROOF_INDEX.md) 衔接。
 
 **缺口补全**：见 [00_completeness_gaps](./00_completeness_gaps.md) § 补全路线图。
 
@@ -252,7 +252,7 @@
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-- [CORE_THEOREMS_FULL_PROOFS](../CORE_THEOREMS_FULL_PROOFS.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../coq_skeleton/README.md) — Coq 证明骨架
+- [CORE_THEOREMS_FULL_PROOFS](../10_core_theorems_full_proofs.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../coq_skeleton/README.md) — Coq 证明骨架
 - **Types and Programming Languages** (Benjamin C. Pierce)
 - **Advanced Topics in Types and Programming Languages**
 - **Category Theory for Programmers** (Bartosz Milewski)

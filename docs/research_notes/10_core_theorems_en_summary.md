@@ -27,7 +27,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **Source**: [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) (Chinese)
+> **Source**: [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) (Chinese)
 > **Proof depth**: L2 (full proofs; L3 machine-checkable scaffolding in progress)
 
 ---

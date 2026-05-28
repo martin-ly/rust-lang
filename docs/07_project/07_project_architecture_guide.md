@@ -475,7 +475,7 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 - **形式化方法**: [ownership_model.md](../research_notes/formal_methods/ownership_model.md) - 所有权模型的形式化定义
-- **架构证明**: [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) - 架构决策的形式化证明
+- **架构证明**: [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) - 架构决策的形式化证明
 - **知识结构**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](07_knowledge_structure_framework.md) - 知识依赖与模块关系
 
 ### 实施场景

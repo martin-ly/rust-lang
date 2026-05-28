@@ -112,7 +112,7 @@
 
 **反例类型**：等价违反→类型错误/所有权错误；近似违反→运行时 panic/逻辑错误；不可表达→编译拒绝或 UB。
 
-**引用**：[LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) EB1–EB6。
+**引用**：[LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md) EB1–EB6。
 
 ---
 
@@ -187,7 +187,7 @@
 - 依赖多继承的复杂层次
 - 依赖运行时反射的某些企业模式
 
-**论证**：由 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) 表达能力边界，Rust 故意限制此类能力以换取安全与可预测性。
+**论证**：由 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md) 表达能力边界，Rust 故意限制此类能力以换取安全与可预测性。
 
 ---
 
@@ -448,8 +448,8 @@ impl Originator {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)：边界定理 EB1–EB6
-- [DESIGN_MECHANISM_RATIONALE](../../DESIGN_MECHANISM_RATIONALE.md)：设计机制理由
+- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md)：边界定理 EB1–EB6
+- [DESIGN_MECHANISM_RATIONALE](../../10_design_mechanism_rationale.md)：设计机制理由
 - [04_compositional_engineering 表达力×组合联合判定树](../04_compositional_engineering/README.md#表达力组合联合判定树支柱-23)：表达力与组合层级 L1–L4 联合选型
 
 ---

@@ -310,7 +310,7 @@
 | :--- | :--- | :--- | :--- |
 | 1 | 论证缺口处理 | 10_unified_systematic_framework.md | ✅ |
 | 2 | 表达能力边界 | 10_unified_systematic_framework.md | ✅ |
-| 3 | 并发模型选型 | DECISION_GRAPH_NETWORK.md | ✅ |
+| 3 | 并发模型选型 | 04_decision_graph_network.md | ✅ |
 | 4 | 设计模式选型 | DESIGN_PATTERNS_BOUNDARY_MATRIX.md | ✅ |
 | 5 | 分布式架构选型 | 10_distributed_architecture_decision_tree.md | 🆕 |
 | 6 | 工作流引擎选型 | 10_workflow_concept_mindmap.md | 🆕 |
@@ -478,7 +478,7 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 - Cargo.toml 多行内联表
 - 配置文件 include 支持
 
-详见 [Rust 1.94 研究更新](./RUST_194_RESEARCH_UPDATE.md)
+详见 [Rust 1.94 研究更新](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

@@ -235,7 +235,7 @@ fn performance_improvement_example() {
     // 研究任务：
     // 1. 设计基准测试验证性能改进
     // 2. 形式化证明新 API 的安全性
-    // 3. 更新 performance_benchmarks.md
+    // 3. 更新 10_performance_benchmarks.md
 }
 ```
 
@@ -307,10 +307,10 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| CORE_THEOREMS_FULL_PROOFS | 核心定理完整证明 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) |
+| CORE_THEOREMS_FULL_PROOFS | 核心定理完整证明 | [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) |
 | COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [10_coq_isabelle_proof_scaffolding.md](./10_coq_isabelle_proof_scaffolding.md) |
 | PROOF_INDEX | 证明索引 | [PROOF_INDEX.md](./PROOF_INDEX.md) |
-| SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+| SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) |
 
 ### 研究笔记索引
 >
@@ -321,7 +321,7 @@ fn api_stabilization_example() {
 | 形式化方法 | 所有权模型 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) |
 | 形式化方法 | 借用检查器 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
 | 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
-| 实验研究 | 性能基准测试 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) |
+| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
 
 ---
 
@@ -336,7 +336,7 @@ fn api_stabilization_example() {
 
 > **适用版本**: Rust 1.94.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

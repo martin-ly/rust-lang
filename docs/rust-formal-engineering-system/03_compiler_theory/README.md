@@ -6,7 +6,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： compiler_optimizations.md (研究笔记)、[01_compiler_features.md](../06_toolchain_ecosystem/01_compiler/README.md)
+> 内容已整合至： 10_compiler_optimizations.md (研究笔记)、[01_compiler_features.md](../06_toolchain_ecosystem/01_compiler/README.md)
 
 ## 知识结构思维导图
 >
@@ -47,7 +47,7 @@ mindmap
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
-| 本README | compiler_optimizations.md (研究笔记) | 索引/重定向 |
+| 本README | 10_compiler_optimizations.md (研究笔记) | 索引/重定向 |
 | 本README | [06_toolchain_ecosystem/01_compiler/README.md](../06_toolchain_ecosystem/01_compiler/README.md) | 索引/重定向 |
 
 [返回主索引](../00_master_index.md)
@@ -293,9 +293,9 @@ unsafe fn very_dangerous() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 编译器优化实验 | 编译器优化分析 | compiler_optimizations.md (研究笔记) |
-| 内存分析 | 内存使用分析 | memory_analysis.md (研究笔记) |
-| 性能基准 | 性能测试方法论 | performance_benchmarks.md (研究笔记) |
+| 编译器优化实验 | 编译器优化分析 | 10_compiler_optimizations.md (研究笔记) |
+| 内存分析 | 内存使用分析 | 10_memory_analysis.md (研究笔记) |
+| 性能基准 | 性能测试方法论 | 10_performance_benchmarks.md (研究笔记) |
 
 ### 形式化方法
 

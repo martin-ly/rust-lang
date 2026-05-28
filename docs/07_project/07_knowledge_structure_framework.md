@@ -447,8 +447,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 - **形式化证明**: [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 证明索引与公理编号规范
-- **证明图网**: [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构
-- **决策图网**: [DECISION_GRAPH_NETWORK.md](../04_thinking/DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
+- **证明图网**: [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) - 形式化证明结构
+- **决策图网**: [04_decision_graph_network.md](../04_thinking/04_decision_graph_network.md) - 技术选型决策支持
 - **类型理论**: [type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) - 类型理论基础
 
 ### 实施场景
@@ -713,7 +713,7 @@ Rust 核心概念
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-决策图网已在 [DECISION_GRAPH_NETWORK.md](../04_thinking/DECISION_GRAPH_NETWORK.md) 中详细定义，包含：
+决策图网已在 [04_decision_graph_network.md](../04_thinking/04_decision_graph_network.md) 中详细定义，包含：
 
 - 决策流程总览
 - 模块化决策树
@@ -721,20 +721,20 @@ Rust 核心概念
 - 性能优化决策
 - 安全保证决策
 
-详见: [决策图网文档](../04_thinking/DECISION_GRAPH_NETWORK.md)
+详见: [决策图网文档](../04_thinking/04_decision_graph_network.md)
 
 ### 4. 证明图网
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-证明图网已在 [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) 中详细定义，包含：
+证明图网已在 [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) 中详细定义，包含：
 
 - 核心证明路径
 - 特性组合证明
 - 安全性证明
 - 性能优化证明
 
-详见: [证明图网文档](../04_thinking/PROOF_GRAPH_NETWORK.md)
+详见: [证明图网文档](../04_thinking/04_proof_graph_network.md)
 
 ### 5. 知识图谱
 
@@ -1059,8 +1059,8 @@ graph TD
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [全面系统化梳理总览](../research_notes/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪、思维表征全索引
-- [决策图网](../04_thinking/DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
-- [证明图网](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构
+- [决策图网](../04_thinking/04_decision_graph_network.md) - 技术选型决策支持
+- [证明图网](../04_thinking/04_proof_graph_network.md) - 形式化证明结构
 - [项目架构指南](./07_project_architecture_guide.md) - 整体架构设计
 - [学习路径规划](../01_learning/01_learning_path_planning.md) - 系统化学习路径
 

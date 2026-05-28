@@ -549,9 +549,9 @@ pub fn process_task(task_json: &str) -> String {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-- [异步编程速查卡](./async_patterns.md) - WASM 异步
+- [异步编程速查卡](./02_async_patterns.md) - WASM 异步
 - [类型系统速查卡](./type_system.md) - WASM 类型
-- [错误处理速查卡](./error_handling_cheatsheet.md) - WASM 错误处理
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - WASM 错误处理
 - [测试速查卡](./02_testing_cheatsheet.md) - WASM 测试
 - 反模式速查卡 - WASM 反模式
 

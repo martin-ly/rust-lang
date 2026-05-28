@@ -40,7 +40,7 @@
 本指南对应 `crates/c03_control_fn`，涵盖 Rust 控制流、函数系统、闭包、模式匹配以及 Rust 1.95 的 `if let guards` 和协程/生成器前瞻。
 
 **前置知识**: [knowledge/01_fundamentals/](../../knowledge/01_fundamentals/)
-**速查卡**: [control_flow_functions_cheatsheet.md](../02_reference/quick_reference/control_flow_functions_cheatsheet.md)
+**速查卡**: [02_control_flow_functions_cheatsheet.md](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md)
 
 ---
 
@@ -291,7 +291,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- **速查卡**: [control_flow_functions_cheatsheet.md](../02_reference/quick_reference/control_flow_functions_cheatsheet.md)
+- **速查卡**: [02_control_flow_functions_cheatsheet.md](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md)
 - **学习教程**: [knowledge/02_intermediate/](../../knowledge/02_intermediate/)
 - **异步指南**: [05_async_programming_usage_guide.md](./05_async_programming_usage_guide.md)
 - **源码**: [crates/c03_control_fn/](../../crates/c03_control_fn/)

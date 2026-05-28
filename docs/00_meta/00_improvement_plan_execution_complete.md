@@ -144,9 +144,9 @@ docs/Rust所有权与可判定性/            (82 files)
 ```
 当前根目录: 4个核心文件
 ├── README.md
-├── CONTRIBUTING.md
+├── 10_contributing.md
 ├── 10_changelog.md
-└── FAQ.md
+└── 10_faq.md
 ```
 
 **成果**:

@@ -72,9 +72,9 @@
 | **无全局一致性** | 跨模块术语、依赖、公理链不一致 | 全局一致性矩阵、交叉引用校验 |
 | **语义归纳缺失** | 概念语义未归纳、总结未结构化 | 概念族谱、语义归纳表 |
 | **思维表征分散** | 思维导图、矩阵、证明树、决策树、反例分散 | 思维表征方式全索引 |
-| **缺少构造性语义** | 编程语言表达式的语义形式化、求值/存储/类型 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
+| **缺少构造性语义** | 编程语言表达式的语义形式化、求值/存储/类型 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) |
 | **缺少表达能力边界** | 何者可表达、何者不可表达、边界论证 | 同上 + 多维能力边界矩阵 |
-| **设计机制缺乏理由** | 如 Pin 堆/栈区分、 ownership 为何移动语义等无充分论证 | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
+| **设计机制缺乏理由** | 如 Pin 堆/栈区分、 ownership 为何移动语义等无充分论证 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
 
 ### 设计原则
 
@@ -118,12 +118,12 @@
 | :--- | :--- | :--- |
 | **1. 概念定义** | 形式化/非形式化定义、定义链、依赖 | [知识结构框架](../07_project/07_knowledge_structure_framework.md)、各 research_notes |
 | **2. 属性关系** | 公理、引理、定理、推论、属性矩阵 | [概念-公理-定理映射表](#-概念-公理-定理映射表)（FORMAL_PROOF_SYSTEM_GUIDE） |
-| **3. 解释论证** | 推导过程、引用链、论证结构 | [论证要素规范](FORMAL_PROOF_SYSTEM_GUIDE.md#-论证要素规范) |
+| **3. 解释论证** | 推导过程、引用链、论证结构 | [论证要素规范](10_formal_proof_system_guide.md#-论证要素规范) |
 | **4. 形式化证明** | 完整证明/证明思路、反例、证明树 | [PROOF_INDEX](./PROOF_INDEX.md)、[反例索引](#️-反例索引) |
 | **5. 思维表征** | 思维导图、矩阵、证明树、决策树、反例 | [思维表征方式全索引](#️-思维表征方式全索引) |
-| **6. 构造性语义** | 操作/指称/公理语义、表达能力边界 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
+| **6. 构造性语义** | 操作/指称/公理语义、表达能力边界 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) |
 | **7. 全局统一框架** | 全景思维导图、多维矩阵、全链路图 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) |
-| **8. 设计机制论证** | 动机、设计决策、堆/栈区分、决策树、反例 | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
+| **8. 设计机制论证** | 动机、设计决策、堆/栈区分、决策树、反例 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
 
 ---
 
@@ -191,7 +191,7 @@ Rust 语义族谱（顶层归纳）
 
 *证明*：由概念族依赖表；所有权、借用、生命周期为上游；型变、异步、Pin 依赖类型与所有权；依赖图无环。∎
 
-**推论 CSO-C1**：若 $P$ 违反任一族定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
+**推论 CSO-C1**：若 $P$ 违反任一族定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 反例索引。
 
 *证明*：由 CSO-T1 逆否；违反 ⇒ 不满足全部定理 ⇒ 非 Safe 或非良型。∎
 
@@ -209,7 +209,7 @@ Rust 语义族谱（顶层归纳）
 | 类型安全 | 良型程序不会出现类型错误（进展+保持） | type_system_foundations |
 | 型变 | 协变同向、逆变反向、不变无子类型；违反则悬垂 | variance_theory |
 | 异步状态机 | Future 状态转换合法、Send/Sync 则并发安全、有限则终将 Ready | async_state_machine |
-| Pin | 非 Unpin 被 Pin 后位置不变，自引用安全；堆固定可任意类型，栈固定仅 Unpin | pin_self_referential, [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
+| Pin | 非 Unpin 被 Pin 后位置不变，自引用安全；堆固定可任意类型，栈固定仅 Unpin | pin_self_referential, [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
 | Trait 对象 | vtable 动态分发、对象安全约束、解析正确 | trait_system_formalization |
 
 ---
@@ -348,15 +348,15 @@ Axiom/规则层
 
 | 类型 | 文档 | 用途 | 覆盖范围 |
 | :--- | :--- | :--- | :--- |
-| **思维导图** | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 核心概念、模块知识、关联 | Rust 核心、所有权、类型、并发、异步、系统编程、C01–C08 |
+| **思维导图** | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 核心概念、模块知识、关联 | Rust 核心、所有权、类型、并发、异步、系统编程、C01–C08 |
 | **思维导图** | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §1 | Rust 1.93 特性、学习路径 | 1.93 特性、跨模块依赖 |
-| **多维矩阵** | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 所有权、类型、并发、同步原语、形式化理论 | 型变、证明方法、公理-定理依赖 |
+| **多维矩阵** | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 所有权、类型、并发、同步原语、形式化理论 | 型变、证明方法、公理-定理依赖 |
 | **公理-定理证明树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §4 | MaybeUninit、Never、借用、生命周期、Send/Sync | 证明树 |
-| **公理-定理证明树** | [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明结构模板、核心证明路径 | MaybeUninit、联合体、迭代器 |
+| **公理-定理证明树** | [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | 证明结构模板、核心证明路径 | MaybeUninit、联合体、迭代器 |
 | **公理-定理证明树** | 各 research_notes「公理-定理证明树」小节 | 所有权、借用、生命周期、异步、Pin、型变 | 模块级证明树 |
-| **决策树** | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 所有权、类型、异步、性能、安全决策 | 技术选型 |
+| **决策树** | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 所有权、类型、异步、性能、安全决策 | 技术选型 |
 | **决策树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §3 | 特性使用、迁移、性能、应用场景 | 1.93 特性决策 |
-| **反例** | [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md#️-反例索引) | 型变、所有权、生命周期、异步、Pin、Trait、高级类型 | 反例汇总 |
+| **反例** | [FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md#️-反例索引) | 型变、所有权、生命周期、异步、Pin、Trait、高级类型 | 反例汇总 |
 | **反例** | 各 research_notes「反例」小节 | 模块级反例 | 详见 PROOF_INDEX |
 
 ### 按研究领域索引
@@ -378,7 +378,7 @@ Axiom/规则层
 
 > **[来源: POPL - Programming Languages Research]**
 
-> 完整矩阵见 [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §形式化理论概念对比矩阵。
+> 完整矩阵见 [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) §形式化理论概念对比矩阵。
 
 | 概念 | 形式化定义 | 子类型方向 | 典型类型 | 定理 | 反例（若违反） |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -394,7 +394,7 @@ Axiom/规则层
 
 > **[来源: PLDI - Programming Language Design]**
 
-> 完整决策树见 [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md)、[THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §3。
+> 完整决策树见 [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md)、[THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §3。
 
 ```text
 所有权决策: 需要共享？→ Rc/Arc | 需要内部可变？→ Cell/RefCell | 未初始化内存？→ MaybeUninit
@@ -521,21 +521,21 @@ Axiom/规则层
 | :--- | :--- |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | **🏛️ 理论体系与论证体系结构**：四层理论架构、五层论证结构、安全与非安全全面论证 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论体系**：设计模式形式化、23/43 模型、执行模型、组合工程有效性 |
-| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | **安全与非安全全面论证**：边界、契约、UB 分类、安全抽象 |
+| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) | **安全与非安全全面论证**：边界、契约、UB 分类、安全抽象 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | **全局统一系统化框架**：全景思维导图、多维矩阵、全链路图、反例总索引 |
-| [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) | **设计机制论证**：Pin 堆/栈区分、所有权、借用、型变等理由与完整论证 |
+| [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) | **设计机制论证**：Pin 堆/栈区分、所有权、借用、型变等理由与完整论证 |
 | [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) | **论证缺口与设计理由综合索引**：缺口追踪、设计理由矩阵、思维表征覆盖 |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖、设计论证 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | **构造性语义与表达能力边界**：操作/指称/公理语义、表达能力边界论证 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射、反例索引 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | **构造性语义与表达能力边界**：操作/指称/公理语义、表达能力边界论证 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
 | [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
 | [INDEX](./INDEX.md) | 研究笔记完整索引 |
 | [README](./README.md) | 研究笔记主入口 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
-| [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵、形式化理论对比 |
-| [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合 |
-| [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策树 |
-| [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明图网 |
+| [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵、形式化理论对比 |
+| [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 思维导图集合 |
+| [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 决策树 |
+| [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | 证明图网 |
 | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 思维表征方式（导图、矩阵、决策树、证明树） |
 
 ---
@@ -561,7 +561,7 @@ Axiom/规则层
 - LazyCell/LazyLock 的延迟语义
 - 与现有理论框架的集成
 
-详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

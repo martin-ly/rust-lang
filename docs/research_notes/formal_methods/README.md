@@ -260,7 +260,7 @@
 
 *证明*：由各文档定义；ownership 规则 1–3 为 borrow 规则 5–8 前提；lifetime 与 borrow 关联；async 依赖 Pin 与 Send/Sync；send_sync 独立成篇且被 async/spawn/Arc 引用；依赖图无环。∎
 
-**推论 FM-C1**：若 $P$ 违反 $\mathcal{M}$ 中任一定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
+**推论 FM-C1**：若 $P$ 违反 $\mathcal{M}$ 中任一定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) 反例索引。
 
 *证明*：由 FM-T1 逆否；违反 ⇒ 不满足全部定理 ⇒ 非 Safe 或非良型。∎
 
@@ -279,7 +279,7 @@
 | [send_sync_formalization](./send_sync_formalization.md) | Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1 | 跨线程转移/共享、与 spawn/Future/Arc 衔接 |
 | [ACTOR_MODEL_DEEP_DIVE](../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) | Actor形式语义、10+定理、15+代码示例 | Actor隔离定理、死锁自由、故障隔离、反例分析 |
 
-本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 衔接。
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)、[PROOF_INDEX](../PROOF_INDEX.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 衔接。
 
 ---
 
@@ -305,7 +305,7 @@
 
 > **[来源: POPL - Programming Languages Research]**
 
-- [形式化论证系统梳理指南](../FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、反例索引、公理-定理证明树
+- [形式化论证系统梳理指南](../10_formal_proof_system_guide.md) - 论证缺口分析、反例索引、公理-定理证明树
 - [形式化工程系统 - 理论基础](../../rust-formal-engineering-system/01_theoretical_foundations/README.md)
 - [所有权与借用文档](../../../crates/c01_ownership_borrow_scope/README.md)
 - [异步语义理论](../../../crates/c06_async/src/lib.rs)
@@ -381,9 +381,9 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 
 | FLS 章节 | 直接链接 | 本目录对应 |
 | :--- | :--- | :--- |
-| [Ch. 5 Patterns](https://spec.ferrocene.dev/patterns.html) | 5.1 [Refutability](https://spec.ferrocene.dev/patterns.html#refutability)、5.13 [Pattern Matching](https://spec.ferrocene.dev/patterns.html#pattern-matching) | [02_reference/quick_reference/control_flow_functions_cheatsheet.md](../../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
+| [Ch. 5 Patterns](https://spec.ferrocene.dev/patterns.html) | 5.1 [Refutability](https://spec.ferrocene.dev/patterns.html#refutability)、5.13 [Pattern Matching](https://spec.ferrocene.dev/patterns.html#pattern-matching) | [02_reference/quick_reference/02_control_flow_functions_cheatsheet.md](../../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 | [Ch. 15 Ownership and Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | 15.1 [Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html#ownership)、15.4 [Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)、15.6–15.9 [Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html#destruction) | [ownership_model](./ownership_model.md)、[borrow_checker_proof](./borrow_checker_proof.md) Def OW1、规则 1–8、DROP1 |
-| [Ch. 16 Exceptions and Errors](https://spec.ferrocene.dev/exceptions-and-errors.html) | 16.1 [Panic](https://spec.ferrocene.dev/exceptions-and-errors.html#panic)、16.2 [Abort](https://spec.ferrocene.dev/exceptions-and-errors.html#abort) | [02_reference/quick_reference/error_handling_cheatsheet.md](../../02_reference/quick_reference/error_handling_cheatsheet.md)、[EDGE_CASES_AND_SPECIAL_CASES](../../02_reference/02_edge_cases_and_special_cases.md) |
+| [Ch. 16 Exceptions and Errors](https://spec.ferrocene.dev/exceptions-and-errors.html) | 16.1 [Panic](https://spec.ferrocene.dev/exceptions-and-errors.html#panic)、16.2 [Abort](https://spec.ferrocene.dev/exceptions-and-errors.html#abort) | [02_reference/quick_reference/02_error_handling_cheatsheet.md](../../02_reference/quick_reference/02_error_handling_cheatsheet.md)、[EDGE_CASES_AND_SPECIAL_CASES](../../02_reference/02_edge_cases_and_special_cases.md) |
 | [Ch. 17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | 17.1 [Send/Sync](https://spec.ferrocene.dev/concurrency.html#send-and-sync)、17.2 [Atomics](https://spec.ferrocene.dev/concurrency.html#atomics)、17.3 [Async](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation) | CHAN-T1、MUTEX-T1、ATOMIC1、SPAWN-T1 |
 | [Ch. 19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | 完整章节 | UNSAFE1、RAW1、EXTERN1 |
 | [Ch. 21 FFI](https://spec.ferrocene.dev/ffi.html) | 21.2–21.4 External blocks/functions/statics | EXTERN1、CVARIADIC1 |

@@ -101,18 +101,18 @@ mindmap
 
 | 思维导图 | 文件路径 | 状态 |
 |----------|----------|------|
-| Rust 语言核心 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 所有权系统 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 借用系统 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 生命周期系统 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 泛型系统 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| Trait 系统 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 并发编程 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 异步编程 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 系统编程 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 形式化与语义 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 理论体系 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
-| 设计机制 | `docs/04_thinking/MIND_MAP_COLLECTION.md` | ✅ |
+| Rust 语言核心 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 所有权系统 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 借用系统 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 生命周期系统 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 泛型系统 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| Trait 系统 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 并发编程 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 异步编程 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 系统编程 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 形式化与语义 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 理论体系 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
+| 设计机制 | `docs/04_thinking/04_mind_map_collection.md` | ✅ |
 
 ---
 
@@ -126,18 +126,18 @@ mindmap
 
 | 矩阵名称 | 文件路径 | 完备度 |
 |----------|----------|--------|
-| 所有权机制对比矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 类型系统特性对比矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 并发模型对比矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 同步原语对比矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 异步运行时对比矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 算法复杂度对比矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 设计模式对比矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 网络协议对比矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 内存管理选型矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 并发方案选型矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 错误处理选型矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
-| 序列化方案选型矩阵 | `docs/04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md` | ✅ 100% |
+| 所有权机制对比矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 类型系统特性对比矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 并发模型对比矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 同步原语对比矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 异步运行时对比矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 算法复杂度对比矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 设计模式对比矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 网络协议对比矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 内存管理选型矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 并发方案选型矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 错误处理选型矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
+| 序列化方案选型矩阵 | `docs/04_thinking/04_multi_dimensional_concept_matrix.md` | ✅ 100% |
 
 ---
 
@@ -151,8 +151,8 @@ mindmap
 
 | 决策树 | 文件路径 | 完备度 |
 |--------|----------|--------|
-| 并发模型选择决策树 | `docs/04_thinking/DECISION_GRAPH_NETWORK.md` | ✅ 100% |
-| 技术选型决策树 | `docs/04_thinking/DECISION_GRAPH_NETWORK.md` | ✅ 100% |
+| 并发模型选择决策树 | `docs/04_thinking/04_decision_graph_network.md` | ✅ 100% |
+| 技术选型决策树 | `docs/04_thinking/04_decision_graph_network.md` | ✅ 100% |
 | 错误处理选择决策树 | `docs/research_notes/formal_methods/10_error_handling_decision_tree.md` | ✅ 100% |
 | 所有权转移决策树 | `docs/research_notes/formal_methods/10_ownership_transfer_decision_tree.md` | ✅ 100% |
 | 验证工具选择决策树 | `docs/research_notes/formal_methods/10_verification_tools_decision_tree.md` | ✅ 100% |

@@ -352,7 +352,7 @@
 
 ---
 
-**扩展路径**：国际对标见 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md)。Prusti/Kani 验证见 [TOOLS_GUIDE](./TOOLS_GUIDE.md)。
+**扩展路径**：国际对标见 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md)。Prusti/Kani 验证见 [TOOLS_GUIDE](./10_tools_guide.md)。
 
 ---
 

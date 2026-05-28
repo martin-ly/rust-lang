@@ -178,11 +178,11 @@
 *证明*：由各定理陈述；案例实现满足定理结论即一致；
 组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) CSO-T1。∎
 
-**引理 PA-L1（unsafe 案例边界）**：若案例 $C$ 含 `unsafe` 块，则 $C$ 与定理一致 ⟺ $C$ 的 unsafe 使用满足 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 契约；安全抽象对外 API 为 Safe。
+**引理 PA-L1（unsafe 案例边界）**：若案例 $C$ 含 `unsafe` 块，则 $C$ 与定理一致 ⟺ $C$ 的 unsafe 使用满足 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) 契约；安全抽象对外 API 为 Safe。
 
 *证明*：由 Def PA1；unsafe 块引入契约；安全抽象将 unsafe 封装，对外满足 Safe 规则；契约满足则与定理一致。∎
 
-**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](./PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 的论证链，建立与实际项目的追溯关系。
+**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](./PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链，建立与实际项目的追溯关系。
 
 ---
 
@@ -1085,7 +1085,7 @@ impl<T> Drop for SafeVec<T> {
 > **[来源: Wikipedia - Concurrency]**
 
 - **选型**：系统编程、网络、并发、嵌入式可分别从「案例分类」中选取对标项目；性能与安全诉求可参考「案例分析」与各实验的基准。
-- **落地**：按「最佳实践总结」的四个领域逐条对照；异步、错误处理、并发原语选型可结合 [async_state_machine](./formal_methods/async_state_machine.md)、[concurrency_performance](./experiments/concurrency_performance.md)。
+- **落地**：按「最佳实践总结」的四个领域逐条对照；异步、错误处理、并发原语选型可结合 [async_state_machine](./formal_methods/async_state_machine.md)、[concurrency_performance](./experiments/10_concurrency_performance.md)。
 - **扩展**：新案例可按「案例报告模板」录入，并纳入下方「系统集成与案例索引」。
 
 ---
@@ -1107,8 +1107,8 @@ impl<T> Drop for SafeVec<T> {
 > **[来源: Wikipedia - Rust (programming language)]**
 
 - **类型系统 / Trait** [type_system_foundations.md](./type_theory/type_system_foundations.md)、[trait_system_formalization.md](./type_theory/trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
-- **性能基准** [performance_benchmarks.md](./experiments/performance_benchmarks.md)、**并发性能** [concurrency_performance.md](./experiments/concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
-- **内存分析** [memory_analysis.md](./experiments/memory_analysis.md)、**编译器优化** [compiler_optimizations.md](./experiments/compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
+- **性能基准** [10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)、**并发性能** [10_concurrency_performance.md](./experiments/10_concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
+- **内存分析** [10_memory_analysis.md](./experiments/10_memory_analysis.md)、**编译器优化** [10_compiler_optimizations.md](./experiments/10_compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
 
 ### 案例快速索引
 
@@ -1136,7 +1136,7 @@ impl<T> Drop for SafeVec<T> {
 | **案例 3** SafeVec/内存安全 | ownership T2/T3、REFCELL-T1 |  interior mutability、RAII |
 | 所有案例 | [type_system_foundations](type_theory/type_system_foundations.md) T1–T3 | 良型、进展性、保持性 |
 | 组合案例 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) CE-T1–T3 | 模块组合、CE-T1/T2/T3 |
-| unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)、PA-L1 | 安全抽象、契约 |
+| unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md)、PA-L1 | 安全抽象、契约 |
 
 **引用**：案例分析可引用 [PROOF_INDEX](./PROOF_INDEX.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
 

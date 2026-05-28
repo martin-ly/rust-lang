@@ -112,7 +112,7 @@ $P_{\mathrm{Rust}} \equiv P_{\mathrm{OOP}}$
 trait 即接口；`impl Trait for T` 即多态；
 结构体包装即组合；
 委托即方法转发。
-由 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) EB1–EB3。
+由 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md) EB1–EB3。
 对任意输入 $x$，$P_{\mathrm{Rust}}(x)$ 与 $P_{\mathrm{OOP}}(x)$ 行为等价；
 依 Def 1.2 得 $\mathit{ExprB}(P) = \mathrm{Same}$。∎
 
@@ -403,8 +403,8 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)
-- [DESIGN_MECHANISM_RATIONALE](../../DESIGN_MECHANISM_RATIONALE.md)
+- [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../10_language_semantics_expressiveness.md)
+- [DESIGN_MECHANISM_RATIONALE](../../10_design_mechanism_rationale.md)
 - [04_expressiveness_boundary 分布式模式形式化](../02_workflow_safe_complete_models/04_expressiveness_boundary.md#分布式模式形式化边界event-sourcingsagacqrs) — Event Sourcing、Saga、CQRS 与 Rust 表达力边界
 
 ---

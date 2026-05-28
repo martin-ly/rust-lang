@@ -39,7 +39,7 @@
 | :--- | :--- |
 | [04_boundary_matrix](../software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) | 23 模式 × 三维边界（安全/支持/表达）|
 | [01_design_patterns_formal](../software_design_theory/01_design_patterns_formal/README.md) | 设计模式形式化框架 |
-| [DECISION_GRAPH_NETWORK](../../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策图网总索引 |
+| [DECISION_GRAPH_NETWORK](../../04_thinking/04_decision_graph_network.md) | 决策图网总索引 |
 
 ---
 

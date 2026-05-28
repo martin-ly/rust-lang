@@ -73,9 +73,9 @@
 ```
 rust-lang/
 ├── README.md              # 📄 项目主入口（精简重写）
-├── CONTRIBUTING.md        # 🤝 贡献指南
+├── 10_contributing.md        # 🤝 贡献指南
 ├── 10_changelog.md           # 📝 变更日志
-├── FAQ.md                 # ❓ 常见问题
+├── 10_faq.md                 # ❓ 常见问题
 ├── Cargo.toml             # 📦 Workspace配置
 ├── Cargo.lock             # 🔒 依赖锁定
 ├── rust-toolchain.toml    # ⚙️ 工具链配置
@@ -97,7 +97,7 @@ rust-lang/
 │   │   ├── migration_2026.md
 │   │   ├── best_practices.md
 │   │   ├── 10_getting_started.md
-│   │   ├── QUICK_REFERENCE.md
+│   │   ├── 10_quick_reference.md
 │   │   ├── 10_resources.md
 │   │   ├── ROADMAP.md
 │   │   └── TROUBLESHOOTING.md
@@ -145,7 +145,7 @@ rust-lang/
 | 原位置 | 新位置 |
 |--------|--------|
 | `10_getting_started.md` | `01_docs/04_guides/10_getting_started.md` |
-| `QUICK_REFERENCE.md` | `01_docs/04_guides/QUICK_REFERENCE.md` |
+| `10_quick_reference.md` | `01_docs/04_guides/10_quick_reference.md` |
 | `10_resources.md` | `01_docs/04_guides/10_resources.md` |
 | `ROADMAP.md` | `01_docs/04_guides/ROADMAP.md` |
 | `TROUBLESHOOTING.md` | `01_docs/04_guides/TROUBLESHOOTING.md` |

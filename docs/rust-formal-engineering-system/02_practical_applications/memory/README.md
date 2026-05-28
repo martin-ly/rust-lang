@@ -6,7 +6,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： memory_analysis.md (研究笔记)
+> 内容已整合至： 10_memory_analysis.md (研究笔记)
 
 ## 知识结构思维导图
 >
@@ -39,7 +39,7 @@ mindmap
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
-| 本README | memory_analysis.md (研究笔记) | 索引/重定向 |
+| 本README | 10_memory_analysis.md (研究笔记) | 索引/重定向 |
 | 本README | ownership_model.md (研究笔记) | 索引/重定向 |
 
 [返回主索引](../../00_master_index.md)
@@ -240,8 +240,8 @@ fn object_pool_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 内存分析 | 内存使用分析实验 | memory_analysis.md (研究笔记) |
-| 编译器优化 | 内存相关编译器优化 | compiler_optimizations.md (研究笔记) |
+| 内存分析 | 内存使用分析实验 | 10_memory_analysis.md (研究笔记) |
+| 编译器优化 | 内存相关编译器优化 | 10_compiler_optimizations.md (研究笔记) |
 
 ### 形式化方法
 
@@ -262,7 +262,7 @@ fn object_pool_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 安全/非安全分析 | unsafe 内存操作分析 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md (研究笔记) |
+| 安全/非安全分析 | unsafe 内存操作分析 | 10_safe_unsafe_comprehensive_analysis.md (研究笔记) |
 
 ---
 

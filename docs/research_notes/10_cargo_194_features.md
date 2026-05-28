@@ -404,7 +404,7 @@ protocol = "sparse"
 - Cargo.toml 多行内联表
 - 配置文件 include 支持
 
-详见 [Rust 1.94 研究更新](./RUST_194_RESEARCH_UPDATE.md)
+详见 [Rust 1.94 研究更新](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

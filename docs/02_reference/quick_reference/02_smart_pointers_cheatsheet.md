@@ -1490,7 +1490,7 @@ impl Unmovable {
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与智能指针
 - [类型系统速查卡](./type_system.md) - 指针类型
 - [线程与并发速查卡](./02_threads_concurrency_cheatsheet.md) - Arc 在多线程中的应用
-- [异步编程速查卡](./async_patterns.md) - Arc 在异步中的应用
+- [异步编程速查卡](./02_async_patterns.md) - Arc 在异步中的应用
 
 ---
 

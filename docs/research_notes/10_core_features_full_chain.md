@@ -88,9 +88,9 @@
 | **关系** | 移动→借用下游；Copy 为移动的特例 |
 | **解释** | 无 GC 下保证内存安全；移动即所有权转移 |
 | **示例** | `let x = vec![1,2]; let y = x;` // x 已移动 |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) § 所有权 |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) § 所有权 |
 | **形式化** | [ownership_model](formal_methods/ownership_model.md) 定理 T2/T3、规则 1–8 |
-| **反例** | 使用已移动值；见 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) |
+| **反例** | 使用已移动值；见 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) |
 
 ---
 
@@ -106,7 +106,7 @@
 | **关系** | 依赖所有权；与生命周期协同 |
 | **解释** | 借用不转移所有权；&mut 互斥；& 与 &mut 互斥 |
 | **示例** | `let r = &v; let r2 = &v;` // 允许多 &；`let m = &mut v;` 独占 |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) § 借用 |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) § 借用 |
 | **形式化** | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) 定理 T1 |
 | **反例** | 双重可变借用；悬垂引用 |
 
@@ -124,7 +124,7 @@
 | **关系** | 与借用协同；泛型生命周期 `'a` |
 | **解释** | 引用不能比其引用对象活得更久 |
 | **示例** | `fn f<'a>(x: &'a i32) -> &'a i32 { x }` |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) § 生命周期 |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) § 生命周期 |
 | **形式化** | [lifetime_formalization](formal_methods/lifetime_formalization.md) 定理 T2 |
 | **反例** | 返回局部引用 |
 
@@ -142,7 +142,7 @@
 | **关系** | Future 依赖 Pin；Unpin 为默认 |
 | **解释** | 自引用结构移动→悬垂；Pin 禁止移动 |
 | **示例** | `Box::pin(x)` 堆固定；`Pin::new(&mut x)` 仅 Unpin |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) § Pin 堆/栈区分 |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) § Pin 堆/栈区分 |
 | **形式化** | [pin_self_referential](formal_methods/pin_self_referential.md) 定理 T1–T3 |
 | **反例** | 非 Unpin 用 Pin::new；决策树见 DESIGN_MECHANISM_RATIONALE |
 
@@ -160,7 +160,7 @@
 | **关系** | `T: Sync` ⇔ `&T: Send`；Rc 非 Send |
 | **解释** | 跨线程传递需 Send；共享需 Sync |
 | **示例** | `thread::spawn(\|\| { ... })` 闭包需 Send |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) § Send/Sync |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) § Send/Sync |
 | **形式化** | [async_state_machine](formal_methods/async_state_machine.md) SPAWN1、Send/Sync 语义 |
 | **反例** | Rc 跨线程；见 05_boundary_system safe_unsafe_matrix |
 
@@ -178,7 +178,7 @@
 | **关系** | 依赖 Pin；跨 await 需 Send |
 | **解释** | Future 不立即执行；poll 驱动步进 |
 | **示例** | `async fn f() -> i32 { 1 }` |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) § 异步 |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) § 异步 |
 | **形式化** | [async_state_machine](formal_methods/async_state_machine.md) 定理 T6.1–T6.3 |
 | **反例** | 未 Pin 自引用；非 Send 跨 await |
 
@@ -263,12 +263,12 @@
 | 维度 | 内容 |
 | :--- | :--- |
 | **定义** | Option 可选值；Result 错误处理；无 null |
-| **概念** | 构造性、Some/None、Ok/Err（[DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) Def OR1） |
+| **概念** | 构造性、Some/None、Ok/Err（[DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) Def OR1） |
 | **属性** | 显式处理、无空指针 |
 | **关系** | ? 操作符早期返回；与 match 协同 |
 | **解释** | 强制处理缺失与错误 |
 | **示例** | `let x: Option<i32> = Some(1);` |
-| **论证** | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) 定理 OR-T1 |
+| **论证** | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) 定理 OR-T1 |
 | **形式化** | Def OR1、Axiom OR1 |
 | **反例** | unwrap 空值 panic |
 
@@ -318,7 +318,7 @@
 | :--- | :--- |
 | 多维矩阵 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) 概念-公理-定理-证明方法-反例矩阵；[formal_methods/README §六篇并表](formal_methods/README.md#formal_methods-六篇并表) |
 | 证明树 | [PROOF_INDEX](./PROOF_INDEX.md)、各特性对应 formal_methods/type_theory 文档 |
-| 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md)、[DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) 选型决策树 |
+| 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md)、[DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) 选型决策树 |
 
 *依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 
@@ -332,8 +332,8 @@
 | :--- | :--- |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性总览 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 全局矩阵与决策树 |
-| [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) | 核心机制设计论证 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) | 反例索引 |
+| [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) | 核心机制设计论证 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 反例索引 |
 
 ---
 

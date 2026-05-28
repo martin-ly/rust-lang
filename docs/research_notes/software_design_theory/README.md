@@ -109,7 +109,7 @@
 | 查某模式是否纯 Safe | [01_safe_23_catalog](02_workflow_safe_complete_models/02_complete_43_catalog.md) |
 | 查某模式 Rust 实现 | [01_design_patterns_formal](01_design_patterns_formal/README.md) 对应模式文档 |
 | 选执行模型（同步/异步/并发/并行/分布式） | [06_boundary_analysis](03_execution_models/06_boundary_analysis.md) |
-| 查模式反例 | [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例) |
+| 查模式反例 | [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md#设计模式反例) |
 
 ---
 
@@ -145,7 +145,7 @@
 | 设计模式 | 23 | 创建型 5、结构型 7、行为型 11 |
 | 扩展模式 | 20 | 43 完全 = 23 + 20 |
 | 执行模型 | 5 | 同步、异步、并发、并行、分布式 |
-| 反例 | 13 | 见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) |
+| 反例 | 13 | 见 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) |
 | 定理 | 3 | CE-T1、CE-T2、CE-T3 |
 
 ---
@@ -193,9 +193,9 @@
 | 文档 | 用途 |
 | :--- | :--- |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](../10_comprehensive_systematic_overview.md) | 全面系统化梳理 |
-| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全与非安全论证 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义与表达能力 |
-| [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) | 设计机制论证 |
+| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../10_safe_unsafe_comprehensive_analysis.md) | 安全与非安全论证 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../10_language_semantics_expressiveness.md) | 构造性语义与表达能力 |
+| [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md) | 设计机制论证 |
 | [PROOF_INDEX](../PROOF_INDEX.md) | 形式化证明索引 |
 | [DESIGN_PATTERNS_USAGE_GUIDE](../../05_guides/05_design_patterns_usage_guide.md) | 设计模式实践指南 |
 

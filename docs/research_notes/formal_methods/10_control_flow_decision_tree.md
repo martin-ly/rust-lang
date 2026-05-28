@@ -283,7 +283,7 @@ graph TD
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [C03 主索引](../../../crates/c03_control_fn/docs/tier_01_foundations/02_主索引导航.md)
-- [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md)
+- [MIND_MAP_COLLECTION](../../04_thinking/04_mind_map_collection.md)
 - [ControlFlow 示例](../../../examples/rust_194_control_flow_demo.rs)
 
 ---

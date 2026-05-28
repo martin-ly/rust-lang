@@ -499,8 +499,8 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- **编译器优化**：见 [compiler_optimizations.md](./compiler_optimizations.md)。宏展开后的代码参与后续优化（内联、死代码消除）；分析优化效果时需区分「宏生成」与「手写」路径。
-- **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。宏生成代码的运行时 bench 可纳入同一 `cargo bench` 流程；编译时间可用 `time cargo build` 与 CI 集成。
+- **编译器优化**：见 [10_compiler_optimizations.md](./10_compiler_optimizations.md)。宏展开后的代码参与后续优化（内联、死代码消除）；分析优化效果时需区分「宏生成」与「手写」路径。
+- **性能基准测试**：见 [10_performance_benchmarks.md](./10_performance_benchmarks.md)。宏生成代码的运行时 bench 可纳入同一 `cargo bench` 流程；编译时间可用 `time cargo build` 与 CI 集成。
 
 ### 实际应用案例
 >

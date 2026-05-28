@@ -117,7 +117,7 @@
    - [05_performance_testing_report.md](./05_performance_testing_report.md) - 46个基准测试文件汇总
 
 5. **文档交叉引用指南**: 100%完成
-   - [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](../07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) - 完整的交叉引用指南
+   - [07_documentation_cross_reference_guide.md](../07_project/07_documentation_cross_reference_guide.md) - 完整的交叉引用指南
 
 6. **跨模块集成示例**: 100%完成
    - [05_cross_module_integration_examples.md](./05_cross_module_integration_examples.md) - 6个完整示例
@@ -305,7 +305,7 @@
 - [高级主题深度指南](./05_advanced_topics_deep_dive.md)
 - [综合最佳实践指南](./BEST_PRACTICES.md)
 - [性能测试报告](./05_performance_testing_report.md)
-- [文档交叉引用指南](../07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md)
+- [文档交叉引用指南](../07_project/07_documentation_cross_reference_guide.md)
 
 ---
 

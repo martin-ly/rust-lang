@@ -238,7 +238,7 @@
 
 **可选**：文末「相关思维表征」注明本页对应的思维导图章节、矩阵位置、证明树、决策树（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md)）。
 
-**检查**：见 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md#概念定义-属性关系-解释论证-层次化) 对应项。
+**检查**：见 [QUALITY_CHECKLIST](10_quality_checklist.md#概念定义-属性关系-解释论证-层次化) 对应项。
 
 ---
 
@@ -629,15 +629,15 @@ error[E0382]: borrow of moved value: `s1`
 
 - [研究笔记主索引](./README.md)
 - [研究笔记写作指南](./10_writing_guide.md)
-- [研究笔记模板](./TEMPLATE.md)
-- [质量检查清单](./QUALITY_CHECKLIST.md)
+- [研究笔记模板](./10_template.md)
+- [质量检查清单](./10_quality_checklist.md)
 
 ### 完善工具
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [研究工具使用指南](./TOOLS_GUIDE.md)
-- [研究方法论](./research_methodology.md)
+- [研究工具使用指南](./10_tools_guide.md)
+- [研究方法论](./10_research_methodology.md)
 - [最佳实践](./BEST_PRACTICES.md)
 
 ### 参考示例

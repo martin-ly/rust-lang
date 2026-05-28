@@ -1430,7 +1430,7 @@ fn proof_validation_workflow() {
 > **[来源: ACM - Systems Programming Languages]**
 
 - [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
-- [CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) - 核心定理完整证明
+- [10_core_theorems_full_proofs.md](../research_notes/10_core_theorems_full_proofs.md) - 核心定理完整证明
 - [10_formal_language_and_proofs.md](../research_notes/10_formal_language_and_proofs.md) - 形式化语言与证明
 
 ### 理论基础
@@ -1438,7 +1438,7 @@ fn proof_validation_workflow() {
 > **[来源: IEEE - Programming Language Standards]**
 
 - [10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
-- [LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 语言语义与表达能力
+- [10_language_semantics_expressiveness.md](../research_notes/10_language_semantics_expressiveness.md) - 语言语义与表达能力
 
 ### 证明工具
 
@@ -1451,8 +1451,8 @@ fn proof_validation_workflow() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-- [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网
-- [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
+- [04_decision_graph_network.md](./04_decision_graph_network.md) - 决策图网
+- [04_mind_map_collection.md](./04_mind_map_collection.md) - 思维导图集合
 - [04_thinking_representation_methods.md](./04_thinking_representation_methods.md) - 思维表征方式
 
 ---

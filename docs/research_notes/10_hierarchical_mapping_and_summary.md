@@ -65,7 +65,7 @@ research_notes/
 │   │   └── 10_construction_capability.md
 │   ├── 10_formal_full_model_overview.md   ← 统一形式系统、公理列表、定理DAG
 │   ├── 10_formal_language_and_proofs.md
-│   ├── CORE_THEOREMS_FULL_PROOFS.md
+│   ├── 10_core_theorems_full_proofs.md
 │   ├── PROOF_INDEX.md
 │   └── coq_skeleton/
 │
@@ -77,7 +77,7 @@ research_notes/
 │       ├── 03_execution_models/         ← 01_sync～05_distributed, 06_boundary_analysis
 │       ├── 04_compositional_engineering/  ← CE-T1–T3, CE-MAT1
 │       ├── 05_boundary_system/
-│       └── LANGUAGE_SEMANTICS_EXPRESSIVENESS.md（交叉）
+│       └── 10_language_semantics_expressiveness.md（交叉）
 │
 ├── 【支柱 3：组件组合法则】
 │   └── software_design_theory/04_compositional_engineering/
@@ -94,7 +94,7 @@ research_notes/
     ├── 10_theoretical_and_argumentation_system_architecture.md
     ├── 10_comprehensive_systematic_overview.md
     ├── 10_unified_systematic_framework.md
-    ├── FORMAL_PROOF_SYSTEM_GUIDE.md
+    ├── 10_formal_proof_system_guide.md
     └── 10_argumentation_gap_index.md
 ```
 
@@ -155,7 +155,7 @@ research_notes/
 
 | research_notes 文档 | 思维导图 | 多维矩阵 | 证明树 | 决策树 |
 | :--- | :--- | :--- | :--- | :--- |
-| ownership_model | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §2, C01 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §1 | 文档内「公理-定理证明树」、[PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) §1 |
+| ownership_model | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) §2, C01 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) §1 | 文档内「公理-定理证明树」、[PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) §1 |
 | borrow_checker_proof | 同上 | 同上 | 同上 | 同上 |
 | lifetime_formalization | - | MULTI_MATRIX §形式化 | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §4.5 | - |
 | type_system_foundations | MIND_MAP §3, C02 | MULTI_MATRIX §2 | type_theory | DECISION §2 |
@@ -175,10 +175,10 @@ research_notes/
 
 | 思维表征文档 | 覆盖领域 | 对应 research_notes 入口 |
 | :--- | :--- | :--- |
-| [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 所有权、类型、并发、异步、C01–C08 | formal_methods、type_theory、COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 按研究领域索引 |
-| [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 所有权、类型、并发、形式化理论 | FORMAL_PROOF_SYSTEM_GUIDE 概念-公理-定理映射、COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 形式化理论概念对比矩阵 |
-| [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | MaybeUninit、借用、生命周期、联合体、迭代器 | PROOF_INDEX、各 formal_methods/type_theory 文档 |
-| [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 所有权、类型、异步、性能、安全 | 06_boundary_analysis、DESIGN_MECHANISM_RATIONALE、03_semantic_boundary_map |
+| [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 所有权、类型、并发、异步、C01–C08 | formal_methods、type_theory、COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 按研究领域索引 |
+| [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 所有权、类型、并发、形式化理论 | FORMAL_PROOF_SYSTEM_GUIDE 概念-公理-定理映射、COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 形式化理论概念对比矩阵 |
+| [PROOF_GRAPH_NETWORK](../04_thinking/04_proof_graph_network.md) | MaybeUninit、借用、生命周期、联合体、迭代器 | PROOF_INDEX、各 formal_methods/type_theory 文档 |
+| [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 所有权、类型、异步、性能、安全 | 06_boundary_analysis、DESIGN_MECHANISM_RATIONALE、03_semantic_boundary_map |
 | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 1.93 特性、证明树、决策树 | RUST_193、各模块证明树/决策树小节 |
 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) | 安全可判定机制、四类思维表征入口 | §四 思维表征入口、§六 并发+Trait 族四维表；formal_methods 六篇、06_boundary、DESIGN_MECHANISM |
 
@@ -226,7 +226,7 @@ research_notes/
 
 > **适用版本**: Rust 1.94.0+
 
-详见 [RUST_194_RESEARCH_UPDATE](./RUST_194_RESEARCH_UPDATE.md)
+详见 [RUST_194_RESEARCH_UPDATE](./10_rust_194_research_update.md)
 
 **最后更新**: 2026-03-14
 

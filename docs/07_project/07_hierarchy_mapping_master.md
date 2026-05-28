@@ -126,7 +126,7 @@ graph TB
 | 15 | `knowledge/03_advanced/unsafe/README.md` | L3 高级 / Unsafe 索引 | knowledge 所有权 · 借用 | knowledge 专家层 · concept L3 | knowledge→concept 直觉映射 | T-060 |
 | 16 | `knowledge/03_advanced/macros/README.md` | L3 高级 / 宏索引 | knowledge Trait · 泛型 | knowledge 编译器内部 · concept L3 | knowledge→concept 直觉映射 | T-070 → T-071 |
 | 17 | `docs/01_core/README.md` | L1-L2 基础-进阶 / 总览 | 无 | docs 指南 · 参考 · concept | docs→concept 工程映射 | T-001 → T-010 → T-020 → T-030 |
-| 18 | `docs/02_reference/ERROR_CODE_MAPPING.md` | L1-L3 诊断参考 | docs 核心概念 · concept L1 | docs 性能 · concept L3 | docs→concept 诊断映射 | E0502↔T-010 · E0597↔T-011 |
+| 18 | `docs/02_reference/02_error_code_mapping.md` | L1-L3 诊断参考 | docs 核心概念 · concept L1 | docs 性能 · concept L3 | docs→concept 诊断映射 | E0502↔T-010 · E0597↔T-011 |
 | 19 | `docs/03_guides/05_embedded_rust_guide.md` | L3-L6 嵌入式 | concept L3 Async · Unsafe · docs 核心 | docs RfL · knowledge Unsafe | L3→L6 工程映射 | T-050 → T-060 |
 | 20 | `docs/03_guides/03_rust_for_linux_guide.md` | L3-L7 内核 | concept L3 Unsafe · docs 嵌入式 | docs Safety-Critical · knowledge FFI | L3→L7 前沿映射 | T-060 ↔ T-110 |
 | 21 | `docs/04_research/04_safety_critical_alignment_2026.md` | L5-L7 安全关键 | concept L5 安全边界 · docs RfL | docs 设计模式 · concept L7 | L5→L7 标准驱动 | T-110 → ISO 26262 |

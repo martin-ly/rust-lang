@@ -155,12 +155,12 @@
 1. **Optimizing Rust Compiler Performance**
    - 作者: Rust Compiler Team
    - 摘要: Rust 编译器的性能优化技术
-   - 相关: [编译器优化](./experiments/compiler_optimizations.md)
+   - 相关: [编译器优化](./experiments/10_compiler_optimizations.md)
 
 2. **Memory Management in Rust**
    - 作者: Various
    - 摘要: Rust 内存管理的研究
-   - 相关: [内存分析](./experiments/memory_analysis.md)
+   - 相关: [内存分析](./experiments/10_memory_analysis.md)
 
 ---
 
@@ -237,22 +237,22 @@
 - **Coq**
   - 链接: <https://coq.inria.fr/>
   - 描述: 交互式定理证明器
-  - 相关: [工具使用指南 - Coq](./TOOLS_GUIDE.md#coq)
+  - 相关: [工具使用指南 - Coq](./10_tools_guide.md#coq)
 
 - **Lean**
   - 链接: <https://leanprover.github.io/>
   - 描述: 函数式编程语言和证明助手
-  - 相关: [工具使用指南 - Lean](./TOOLS_GUIDE.md#lean)
+  - 相关: [工具使用指南 - Lean](./10_tools_guide.md#lean)
 
 - **Prusti**
   - 链接: <https://www.pm.inf.ethz.ch/research/prusti.html>
   - 描述: Rust 的形式化验证工具
-  - 相关: [工具使用指南 - Prusti](./TOOLS_GUIDE.md#prusti)
+  - 相关: [工具使用指南 - Prusti](./10_tools_guide.md#prusti)
 
 - **Kani**
   - 链接: <https://github.com/model-checking/kani>
   - 描述: Rust 的模型检查工具
-  - 相关: [工具使用指南 - Kani](./TOOLS_GUIDE.md#kani)
+  - 相关: [工具使用指南 - Kani](./10_tools_guide.md#kani)
 
 ### 性能分析工具
 
@@ -261,17 +261,17 @@
 - **Criterion.rs**
   - 链接: <https://github.com/bheisler/criterion.rs>
   - 描述: Rust 的基准测试框架
-  - 相关: [工具使用指南 - Criterion.rs](./TOOLS_GUIDE.md#criterionrs)
+  - 相关: [工具使用指南 - Criterion.rs](./10_tools_guide.md#criterionrs)
 
 - **perf**
   - 链接: <https://perf.wiki.kernel.org/>
   - 描述: Linux 性能分析工具
-  - 相关: [工具使用指南 - perf](./TOOLS_GUIDE.md#perf)
+  - 相关: [工具使用指南 - perf](./10_tools_guide.md#perf)
 
 - **flamegraph**
   - 链接: <https://github.com/flamegraph-rs/flamegraph>
   - 描述: 性能分析可视化工具
-  - 相关: [工具使用指南 - flamegraph](./TOOLS_GUIDE.md#flamegraph)
+  - 相关: [工具使用指南 - flamegraph](./10_tools_guide.md#flamegraph)
 
 ### 内存分析工具
 
@@ -280,17 +280,17 @@
 - **Miri**
   - 链接: <https://github.com/rust-lang/miri>
   - 描述: Rust 的 MIR 解释器
-  - 相关: [工具使用指南 - Miri](./TOOLS_GUIDE.md#miri)
+  - 相关: [工具使用指南 - Miri](./10_tools_guide.md#miri)
 
 - **Valgrind**
   - 链接: <https://valgrind.org/>
   - 描述: 内存调试和性能分析工具
-  - 相关: [工具使用指南 - Valgrind](./TOOLS_GUIDE.md#valgrind)
+  - 相关: [工具使用指南 - Valgrind](./10_tools_guide.md#valgrind)
 
 - **heaptrack**
   - 链接: <https://github.com/KDE/heaptrack>
   - 描述: 堆内存分析工具
-  - 相关: [工具使用指南 - heaptrack](./TOOLS_GUIDE.md#heaptrack)
+  - 相关: [工具使用指南 - heaptrack](./10_tools_guide.md#heaptrack)
 
 ### 代码分析工具
 
@@ -299,17 +299,17 @@
 - **Clippy**
   - 链接: <https://github.com/rust-lang/rust-clippy>
   - 描述: Rust 代码检查工具
-  - 相关: [工具使用指南 - Clippy](./TOOLS_GUIDE.md#clippy)
+  - 相关: [工具使用指南 - Clippy](./10_tools_guide.md#clippy)
 
 - **rust-analyzer**
   - 链接: <https://rust-analyzer.github.io/>
   - 描述: Rust 语言服务器
-  - 相关: [工具使用指南 - rust-analyzer](./TOOLS_GUIDE.md#rust-analyzer)
+  - 相关: [工具使用指南 - rust-analyzer](./10_tools_guide.md#rust-analyzer)
 
 - **cargo-expand**
   - 链接: <https://github.com/dtolnay/cargo-expand>
   - 描述: 宏展开工具
-  - 相关: [工具使用指南 - cargo-expand](./TOOLS_GUIDE.md#cargo-expand)
+  - 相关: [工具使用指南 - cargo-expand](./10_tools_guide.md#cargo-expand)
 
 ---
 
@@ -439,7 +439,7 @@
 > **[来源: POPL - Programming Languages Research]**
 
 - [主索引](./README.md) - 完整的研究笔记索引
-- [工具使用指南](./TOOLS_GUIDE.md) - 研究工具详细指南
+- [工具使用指南](./10_tools_guide.md) - 研究工具详细指南
 - [术语表](./10_glossary.md) - 专业术语解释
 
 ### 研究笔记
@@ -457,7 +457,7 @@
 - [批判性分析与推进计划](./10_formal_proof_critical_analysis_and_plan_2026_02.md) - 阶段 1–3 完成总结
 - [国际对标索引](./10_international_formal_verification_index.md) - RustBelt、Aeneas、RustSEM 等
 - [形式化全模型入口](./10_formal_full_model_overview.md) - 统一形式系统
-- [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md) - L2 级 ownership T2、borrow T1、type T3
+- [核心定理完整证明](./10_core_theorems_full_proofs.md) - L2 级 ownership T2、borrow T1、type T3
 - [Coq 证明骨架](./coq_skeleton/README.md) - T-OW2 所有权唯一性
 - L3 实施指南 - Coq/Isabelle 补全路线（已归档）
 

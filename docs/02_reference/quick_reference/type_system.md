@@ -1299,10 +1299,10 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与类型系统
-- [泛型编程速查卡](./generics_cheatsheet.md) - 泛型与类型系统
+- [泛型编程速查卡](./02_generics_cheatsheet.md) - 泛型与类型系统
 - [模块系统速查卡](./02_modules_cheatsheet.md) - 模块中的类型
-- [智能指针速查卡](./smart_pointers_cheatsheet.md) - 指针类型
-- [错误处理速查卡](./error_handling_cheatsheet.md) - Result 和 Option 类型
+- [智能指针速查卡](./02_smart_pointers_cheatsheet.md) - 指针类型
+- [错误处理速查卡](./02_error_handling_cheatsheet.md) - Result 和 Option 类型
 
 ---
 

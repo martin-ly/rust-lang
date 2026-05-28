@@ -289,7 +289,7 @@ fn heterogeneous_collection() {
 | 类型系统基础 | 类型理论基础 | [../../../research_notes/type_theory/type_system_foundations.md](../../../research_notes/type_theory/type_system_foundations.md) |
 | 型变理论 | 型变与子类型关系 | [../../../research_notes/type_theory/variance_theory.md](../../../research_notes/type_theory/variance_theory.md) |
 | 证明索引 | Trait 相关证明 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
-| 工具指南 | Trait 验证工具 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |
+| 工具指南 | Trait 验证工具 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
 
 ---
 

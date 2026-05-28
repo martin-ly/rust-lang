@@ -442,7 +442,7 @@ Qed.
 | :--- | :--- | :--- |
 | [后续文档1] | [链接] | [说明] |
 | [后续文档2] | [链接] | [说明] |
-| CORE_THEOREMS_FULL_PROOFS | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 完整定理证明 |
+| CORE_THEOREMS_FULL_PROOFS | [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) | 完整定理证明 |
 
 ### 相关研究笔记
 >
@@ -458,8 +458,8 @@ Qed.
 | 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
 | 类型理论 | Trait 系统形式化 | [type_theory/trait_system_formalization.md](./type_theory/trait_system_formalization.md) |
 | 类型理论 | 高级类型特性 | [type_theory/advanced_types.md](./type_theory/advanced_types.md) |
-| 实验研究 | 性能基准测试 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) |
-| 实验研究 | 内存分析 | [experiments/memory_analysis.md](./experiments/memory_analysis.md) |
+| 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
+| 实验研究 | 内存分析 | [experiments/10_memory_analysis.md](./experiments/10_memory_analysis.md) |
 
 ### Coq 证明骨架
 >

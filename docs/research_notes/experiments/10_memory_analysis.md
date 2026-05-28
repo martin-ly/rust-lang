@@ -523,8 +523,8 @@ fn analyze_memory_layout() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-- **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。内存分配基准（栈/堆/预分配）与本研究的数据收集可共用 `cargo bench` 与 Criterion 输出。
-- **编译器优化**：见 [compiler_optimizations.md](./compiler_optimizations.md)。`-C link-dead-code`、`opt-level` 会影响可执行体大小与分配内联，分析时需固定编译选项。
+- **性能基准测试**：见 [10_performance_benchmarks.md](./10_performance_benchmarks.md)。内存分配基准（栈/堆/预分配）与本研究的数据收集可共用 `cargo bench` 与 Criterion 输出。
+- **编译器优化**：见 [10_compiler_optimizations.md](./10_compiler_optimizations.md)。`-C link-dead-code`、`opt-level` 会影响可执行体大小与分配内联，分析时需固定编译选项。
 
 ### 实际应用案例
 >
