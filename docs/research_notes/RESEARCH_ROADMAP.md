@@ -257,7 +257,7 @@
 
 > **[来源: Wikipedia - Type System]**
 
-- [x] [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) ✅ 阶段 1–3 100%
+- [x] [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md) ✅ 阶段 1–3 100%
   - 阶段 1：国际对标索引、证明深度、全模型入口、层次化导航
   - 阶段 2：核心定理完整证明（CORE_THEOREMS_FULL_PROOFS）、RUSTBELT_ALIGNMENT、EXECUTABLE_SEMANTICS_ROADMAP
   - 阶段 3：coq_skeleton（T-OW2）、COQ_ISABELLE_PROOF_SCAFFOLDING、AENEAS/COQ_OF_RUST 对接计划

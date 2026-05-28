@@ -151,7 +151,7 @@
 - [ ] 更新 `Cargo.toml` 中所有 `rust-version` 字段
 - [ ] 更新 CI 工作流中的 Rust 版本
 - [ ] 更新 `README.md` 中的版本要求
-- [ ] 更新 `CHANGELOG.md`
+- [ ] 更新 `10_changelog.md`
 - [ ] 运行全量测试验证
 - [ ] 创建 PR 并审查
 - [ ] 合并后打 tag（如适用）

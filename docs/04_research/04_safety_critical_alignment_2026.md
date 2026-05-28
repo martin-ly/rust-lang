@@ -2,7 +2,7 @@
 >
 > **层次定位**: L5-L7 对比-前沿 / 安全关键生态对齐
 > **前置依赖**: [concept L5 安全边界](../../concept/05_comparative/04_safety_boundaries.md) · [docs Rust for Linux](../03_guides/03_rust_for_linux_guide.md)
-> **后置延伸**: [docs 设计模式](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) · [concept L7 形式化方法](../../concept/07_future/02_formal_methods.md)
+> **后置延伸**: [docs 设计模式](../05_guides/05_design_patterns_usage_guide.md) · [concept L7 形式化方法](../../concept/07_future/02_formal_methods.md)
 > **跨层映射**: L5→L7 标准驱动映射 | 合规→演进
 > **定理链编号**: T-110 RustBelt soundness → ISO 26262 合规
 

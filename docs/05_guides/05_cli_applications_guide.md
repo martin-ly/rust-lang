@@ -414,7 +414,7 @@ fn main() -> ExitCode {
 | **异步编程** | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
 | :--- | :--- |
 | **Cargo 工具** | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
-| **相关指南** | [TROUBLESHOOTING_GUIDE.md](./TROUBLESHOOTING_GUIDE.md) |
+| **相关指南** | [05_troubleshooting_guide.md](./05_troubleshooting_guide.md) |
 | :--- | :--- |
 
 ---
@@ -424,7 +424,7 @@ fn main() -> ExitCode {
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [C07 进程管理](../../crates/c07_process/docs/00_MASTER_INDEX.md)
-- [故障排查指南](./TROUBLESHOOTING_GUIDE.md)
+- [故障排查指南](./05_troubleshooting_guide.md)
 - [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md)
 - [官方 Command Line Book](https://rust-cli.github.io/book/)
 - [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md)

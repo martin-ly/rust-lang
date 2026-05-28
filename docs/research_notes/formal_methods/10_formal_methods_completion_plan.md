@@ -67,7 +67,7 @@
 
 > **[来源: Wikipedia - Memory Safety]**
 
-- CONCEPT_AXIOM_THEOREM_MATRIX.md - 更新定理状态
+- 10_concept_axiom_theorem_matrix.md - 更新定理状态
 - 10_implementation_progress_matrix.md - 更新完成度
 
 ---

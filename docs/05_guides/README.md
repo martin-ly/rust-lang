@@ -89,12 +89,12 @@ impl ConfigBuilder {
 | 文档 | 描述 | 难度 |
 | :--- | :--- | :--- |
 | [ASYNC_PROGRAMMING_USAGE_GUIDE.md](./ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 异步编程 | ⭐⭐⭐ |
-| [THREADS_CONCURRENCY_USAGE_GUIDE.md](./THREADS_CONCURRENCY_USAGE_GUIDE.md) | 线程与并发 | ⭐⭐⭐ |
-| [DESIGN_PATTERNS_USAGE_GUIDE.md](./DESIGN_PATTERNS_USAGE_GUIDE.md) | 设计模式 | ⭐⭐⭐ |
-| [MACRO_SYSTEM_USAGE_GUIDE.md](./MACRO_SYSTEM_USAGE_GUIDE.md) | 宏系统 | ⭐⭐⭐⭐ |
-| [WASM_USAGE_GUIDE.md](./WASM_USAGE_GUIDE.md) | WASM | ⭐⭐⭐ |
+| [05_threads_concurrency_usage_guide.md](./05_threads_concurrency_usage_guide.md) | 线程与并发 | ⭐⭐⭐ |
+| [05_design_patterns_usage_guide.md](./05_design_patterns_usage_guide.md) | 设计模式 | ⭐⭐⭐ |
+| [05_macro_system_usage_guide.md](./05_macro_system_usage_guide.md) | 宏系统 | ⭐⭐⭐⭐ |
+| [05_wasm_usage_guide.md](./05_wasm_usage_guide.md) | WASM | ⭐⭐⭐ |
 | [UNSAFE_RUST_GUIDE.md](./UNSAFE_RUST_GUIDE.md) | Unsafe Rust | ⭐⭐⭐⭐ |
-| [TROUBLESHOOTING_GUIDE.md](./TROUBLESHOOTING_GUIDE.md) | 故障排查 | ⭐⭐ |
+| [05_troubleshooting_guide.md](./05_troubleshooting_guide.md) | 故障排查 | ⭐⭐ |
 | [BEST_PRACTICES.md](./BEST_PRACTICES.md) | 最佳实践 | ⭐⭐⭐ |
 | [workflow/](./workflow/README.md) | 工作流理论与模型 | ⭐⭐⭐ |
 | [05_miri_practical_guide.md](./05_miri_practical_guide.md) | Miri 实战：UB 检测与内存安全 | ⭐⭐⭐⭐ |

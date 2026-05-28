@@ -155,7 +155,7 @@ mindmap
 | 技术选型决策树 | `docs/04_thinking/DECISION_GRAPH_NETWORK.md` | ✅ 100% |
 | 错误处理选择决策树 | `docs/research_notes/formal_methods/10_error_handling_decision_tree.md` | ✅ 100% |
 | 所有权转移决策树 | `docs/research_notes/formal_methods/10_ownership_transfer_decision_tree.md` | ✅ 100% |
-| 验证工具选择决策树 | `docs/research_notes/formal_methods/VERIFICATION_TOOLS_DECISION_TREE.md` | ✅ 100% |
+| 验证工具选择决策树 | `docs/research_notes/formal_methods/10_verification_tools_decision_tree.md` | ✅ 100% |
 | 序列化决策树 | `docs/research_notes/formal_methods/10_serialization_decision_tree.md` | ✅ 100% |
 | Actor 框架选择决策树 | `docs/rust-ownership-decidability/actor-specialty/decision-trees/actor-framework-selection.md` | ✅ 100% |
 
@@ -192,7 +192,7 @@ mindmap
 
 | 场景树 | 文件路径 | 完备度 |
 |--------|----------|--------|
-| Web 开发场景 | `content/ecosystem/web_frameworks/axum_deep_dive.md` | 📝 80% |
+| Web 开发场景 | `content/ecosystem/web_frameworks/10_axum_deep_dive.md` | 📝 80% |
 | 数据库应用场景 | `content/ecosystem/database/10_sqlx_deep_dive.md` | 📝 80% |
 | 生产部署场景 | `content/production/README.md` | 📝 70% |
 | 学术研究场景 | `content/academic/README.md` | 📝 60% |

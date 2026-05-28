@@ -112,7 +112,7 @@
 |------|------|------|
 | `RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md` | 600 | 12个月详细计划 |
 | `decidability_theorems.md` | 400 | 6个核心定理草拟 |
-| `PROGRESS_TRACKING.md` | 400 | 实时进度跟踪 |
+| `10_progress_tracking.md` | 400 | 实时进度跟踪 |
 | `COMPREHENSIVE_STATUS_REPORT.md` | 800 | 综合状态报告 |
 | `2026-03-05_initial_setup.md` | 200 | 初始设置报告 |
 | `2026-03-06_week1_progress.md` | 350 | Week 1 进度 |

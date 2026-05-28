@@ -48,7 +48,6 @@
       - [2. 利用新特性](#2-利用新特性)
     - [兼容性说明](#兼容性说明)
   - [总结](#总结)
-  - [**状态**: ✅ **完成**（历史记录文档，当前版本为 Rust 1.93.0+）](#状态--完成历史记录文档当前版本为-rust-1930)
 
 ---
 
@@ -357,11 +356,6 @@ Rust 1.92.0 在所有权、借用和生命周期系统方面带来了：
 
 这些改进使得 Rust 的所有权系统更加清晰、安全和易用。
 
----
-
-**最后更新**: 2026-01-26
-**维护者**: Rust 学习项目团队
-**状态**: ✅ **完成**（历史记录文档，当前版本为 Rust 1.93.0+）
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -57,9 +57,9 @@
 | 维度 | 内容 | 文档 |
 | :--- | :--- | :--- |
 | **测试覆盖** | 单元/集成/基准、覆盖率报告 | [TESTING_COVERAGE_GUIDE](../../05_guides/05_testing_coverage_guide.md) |
-| **性能测试** | 基准测试、性能回归、分析工具 | [PERFORMANCE_TESTING_REPORT](../../05_guides/PERFORMANCE_TESTING_REPORT.md) |
+| **性能测试** | 基准测试、性能回归、分析工具 | [PERFORMANCE_TESTING_REPORT](../../05_guides/05_performance_testing_report.md) |
 | **内存安全** | MIRI、Valgrind、无 UB 验证 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
-| **形式化验证** | Prusti、Kani、Creusot | [TOOLS_GUIDE](../../research_notes/TOOLS_GUIDE.md)、[FORMAL_VERIFICATION_GUIDE](../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
+| **形式化验证** | Prusti、Kani、Creusot | [TOOLS_GUIDE](../../research_notes/TOOLS_GUIDE.md)、[FORMAL_VERIFICATION_GUIDE](../../research_notes/10_formal_verification_guide.md) |
 | **代码质量** | Clippy、rustfmt、文档 | [QUALITY_CHECKLIST](../../research_notes/QUALITY_CHECKLIST.md) |
 
 ---
@@ -69,7 +69,7 @@
 > **[来源: Rust Official Docs]**
 
 - [**05_testing_coverage_guide.md**](../../05_guides/05_testing_coverage_guide.md) — 测试策略、覆盖率、MIRI 集成
-- [**PERFORMANCE_TESTING_REPORT.md**](../../05_guides/PERFORMANCE_TESTING_REPORT.md) — 性能基准、报告、回归
+- [**05_performance_testing_report.md**](../../05_guides/05_performance_testing_report.md) — 性能基准、报告、回归
 
 ---
 
@@ -301,7 +301,7 @@ mod contracts {
 | **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS** | 安全边界与 UB | [../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | **type_theory/00_completeness_gaps** | 类型理论完备性缺口 | [../../research_notes/type_theory/00_completeness_gaps.md](../../research_notes/type_theory/00_completeness_gaps.md) |
 | **TOOLS_GUIDE** | 形式化验证工具指南 | [../../research_notes/TOOLS_GUIDE.md](../../research_notes/TOOLS_GUIDE.md) |
-| **FORMAL_VERIFICATION_GUIDE** | 形式化验证入门 | [../../research_notes/FORMAL_VERIFICATION_GUIDE.md](../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
+| **FORMAL_VERIFICATION_GUIDE** | 形式化验证入门 | [../../research_notes/10_formal_verification_guide.md](../../research_notes/10_formal_verification_guide.md) |
 | **PROOF_INDEX** | 形式化证明索引 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
 | **CORE_THEOREMS_FULL_PROOFS** | 核心定理完整证明 | [../../research_notes/CORE_THEOREMS_FULL_PROOFS.md](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
 | **BEST_PRACTICES** | 工程最佳实践 | [../../research_notes/BEST_PRACTICES.md](../../research_notes/BEST_PRACTICES.md) |

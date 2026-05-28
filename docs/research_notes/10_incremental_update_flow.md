@@ -121,7 +121,7 @@
 | 2.1 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 新增「Rust X.Y 新增/变更」表；更新特性总数 |
 | 2.2 | [06_toolchain/](../06_toolchain/README.md) | 新建 `07_rust_X.Y_full_changelog.md`、`05_rust_X.Y_vs_X.Y-1_comparison.md` |
 | 2.3 | [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) | 若有新形式化相关特性，更新 00_completeness_gaps |
-| 2.4 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 若核心特性有变更，更新对应链 |
+| 2.4 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 若核心特性有变更，更新对应链 |
 | 2.5 | [INDEX](./INDEX.md)、[README](./README.md) | 更新版本号、链接、统计 |
 
 ### 3. 对齐权威
@@ -299,7 +299,7 @@ fn api_stabilization_example() {
 | :--- | :--- | :--- |
 | RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [RUST_191_RESEARCH_UPDATE_2025_11_15.md](./RUST_191_RESEARCH_UPDATE_2025_11_15.md) |
 | RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [RUST_192_RESEARCH_UPDATE_2025_12_11.md](./RUST_192_RESEARCH_UPDATE_2025_12_11.md) |
-| CHANGELOG | 更新日志 | [CHANGELOG.md](./CHANGELOG.md) |
+| CHANGELOG | 更新日志 | [10_changelog.md](./10_changelog.md) |
 
 ### 形式化证明文档
 >

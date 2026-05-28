@@ -533,7 +533,7 @@ type Result<T> = std::result::Result<T, AIError>;
 在资源受限设备运行 AI 模型：
 
 - 使用 Candle 的轻量级特性
-- 结合 [嵌入式 Rust 指南](./EMBEDDED_RUST_GUIDE.md) 进行边缘部署
+- 结合 [嵌入式 Rust 指南](./05_embedded_rust_guide.md) 进行边缘部署
 
 ### 场景4: 生产级 ML Pipeline
 

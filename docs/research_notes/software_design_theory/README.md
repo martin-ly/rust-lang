@@ -192,12 +192,12 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](../COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理 |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](../10_comprehensive_systematic_overview.md) | 全面系统化梳理 |
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全与非安全论证 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义与表达能力 |
 | [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) | 设计机制论证 |
 | [PROOF_INDEX](../PROOF_INDEX.md) | 形式化证明索引 |
-| [DESIGN_PATTERNS_USAGE_GUIDE](../../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | 设计模式实践指南 |
+| [DESIGN_PATTERNS_USAGE_GUIDE](../../05_guides/05_design_patterns_usage_guide.md) | 设计模式实践指南 |
 
 ---
 

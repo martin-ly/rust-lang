@@ -227,7 +227,7 @@
 
 - 所有 17 个研究笔记均已完成（100%）
 - 形式化、类型理论、实验、综合四类已全部收尾
-- 详见 [PROGRESS_TRACKING.md](./PROGRESS_TRACKING.md)
+- 详见 [10_progress_tracking.md](./10_progress_tracking.md)
 
 ---
 
@@ -412,8 +412,8 @@
 
 - [研究笔记主索引](./README.md)
 - [形式化证明索引](./PROOF_INDEX.md) — 105+ 证明、formal_methods Phase 1–6、类型理论阶段 1–7、设计模式 23 种
-- [系统总结](./SYSTEM_SUMMARY.md)
-- [研究进展跟踪](./PROGRESS_TRACKING.md)
+- [系统总结](./10_system_summary.md)
+- [研究进展跟踪](./10_progress_tracking.md)
 - [研究任务清单](./10_task_checklist.md)
 
 ### 统计和分析

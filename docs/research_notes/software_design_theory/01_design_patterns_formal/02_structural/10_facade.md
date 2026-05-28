@@ -386,9 +386,9 @@ impl LogFacade {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Adapter](./adapter.md) | Facade 简化多接口；Adapter 转换单接口 |
+| [Adapter](./10_adapter.md) | Facade 简化多接口；Adapter 转换单接口 |
 | [Mediator](../03_behavioral/10_mediator.md) | Facade 协调子系统；Mediator 协调同事 |
-| [Proxy](./proxy.md) | Proxy 委托单对象；Facade 聚合多对象 |
+| [Proxy](./10_proxy.md) | Proxy 委托单对象；Facade 聚合多对象 |
 
 ---
 
@@ -459,7 +459,7 @@ pub struct BadFacade {
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Facade 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

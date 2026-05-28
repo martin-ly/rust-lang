@@ -267,7 +267,7 @@ CI/CD 检查项:
 docs/rust-ownership-decidability/
 ├── VERSION  # 标记文档版本
 ├── rust-toolchain  # 指定 Rust 版本
-└── CHANGELOG.md  # 变更记录
+└── 10_changelog.md  # 变更记录
 ```
 
 ### 社区参与

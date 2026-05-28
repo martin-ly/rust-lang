@@ -138,19 +138,19 @@
 >
 > **[来源: Rust Official Docs]**
 
-**简短回答**: 从 [快速入门指南](./GETTING_STARTED.md) 开始。
+**简短回答**: 从 [快速入门指南](./10_getting_started.md) 开始。
 
 **详细说明**:
 
 1. 阅读 [主索引](./README.md) 了解系统结构
-2. 查看 [系统总结](./SYSTEM_SUMMARY.md) 了解系统概览
+2. 查看 [系统总结](./10_system_summary.md) 了解系统概览
 3. 浏览 [快速参考](./QUICK_REFERENCE.md) 查找感兴趣的主题
 
 **相关资源**:
 
-- [快速入门指南](./GETTING_STARTED.md)
+- [快速入门指南](./10_getting_started.md)
 - [主索引](./README.md)
-- [系统总结](./SYSTEM_SUMMARY.md)
+- [系统总结](./10_system_summary.md)
 
 ---
 
@@ -182,7 +182,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**简短回答**：按 [CONTENT_ENHANCEMENT](./CONTENT_ENHANCEMENT.md) 的实质内容检查清单：形式化（Def/定理）、代码、场景、反例、衔接。
+**简短回答**：按 [CONTENT_ENHANCEMENT](./10_content_enhancement.md) 的实质内容检查清单：形式化（Def/定理）、代码、场景、反例、衔接。
 
 **详细说明**：
 
@@ -211,7 +211,7 @@
 **相关资源**:
 
 - [研究路线图](./RESEARCH_ROADMAP.md)
-- [系统总结](./SYSTEM_SUMMARY.md)
+- [系统总结](./10_system_summary.md)
 
 ---
 
@@ -485,7 +485,7 @@
 
 > **[来源: IEEE - Programming Language Standards]**
 
-- [快速入门指南](./GETTING_STARTED.md) - 新用户入门指南
+- [快速入门指南](./10_getting_started.md) - 新用户入门指南
 - [主索引](./README.md) - 完整的研究笔记索引
 - [快速参考](./QUICK_REFERENCE.md) - 快速查找指南
 - [贡献指南](./CONTRIBUTING.md) - 贡献流程和规范

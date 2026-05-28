@@ -296,7 +296,7 @@
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-**文档**: [QUICK_REFERENCE_CARD.md](09_reference/QUICK_REFERENCE_CARD.md)
+**文档**: [10_quick_reference_card.md](09_reference/10_quick_reference_card.md)
 
 一页纸速查卡，包含：
 

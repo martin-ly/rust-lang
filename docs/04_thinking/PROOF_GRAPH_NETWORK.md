@@ -1431,7 +1431,7 @@ fn proof_validation_workflow() {
 
 - [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
 - [CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) - 核心定理完整证明
-- [FORMAL_LANGUAGE_AND_PROOFS.md](../research_notes/FORMAL_LANGUAGE_AND_PROOFS.md) - 形式化语言与证明
+- [10_formal_language_and_proofs.md](../research_notes/10_formal_language_and_proofs.md) - 形式化语言与证明
 
 ### 理论基础
 
@@ -1445,7 +1445,7 @@ fn proof_validation_workflow() {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [10_coq_of_rust_integration_plan.md](../research_notes/10_coq_of_rust_integration_plan.md) - Coq 证明集成
-- [AENEAS_INTEGRATION_PLAN.md](../research_notes/AENEAS_INTEGRATION_PLAN.md) - Aeneas 验证工具
+- [10_aeneas_integration_plan.md](../research_notes/10_aeneas_integration_plan.md) - Aeneas 验证工具
 
 ### 相关文档
 

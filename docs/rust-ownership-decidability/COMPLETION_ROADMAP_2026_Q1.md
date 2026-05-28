@@ -190,10 +190,10 @@
 
 **任务清单**:
 
-- [ ] 编写 `11-design-patterns/behavioral/state.md`
+- [ ] 编写 `11-design-patterns/behavioral/10_state.md`
 - [ ] 编写 `11-design-patterns/behavioral/10_iterator.md`
 - [ ] 编写 `11-design-patterns/structural/10_bridge.md`
-- [ ] 编写 `11-design-patterns/structural/composite.md`
+- [ ] 编写 `11-design-patterns/structural/10_composite.md`
 
 ### Phase 3: 对齐优化 (Week 9-12) 🟢
 >

@@ -67,7 +67,6 @@
   - [🤝 反馈与贡献](#-反馈与贡献)
     - [反馈方式](#反馈方式)
     - [贡献指南](#贡献指南)
-  - [**Rust 版本**: 1.90+](#rust-版本-190)
 
 **版本**: 1.0
 **Rust 版本**: 1.90+
@@ -564,10 +563,6 @@ mmdc -i CONCEPT_RELATIONSHIP_NETWORK.md -o network.png
 **版权说明**: 本文档遵循项目整体许可证
 **维护状态**: 活跃维护中，随 Rust 版本更新
 **更新频率**: 每个 Rust 主要版本发布后更新
-
-**最后更新**: 2025年1月27日
-**Rust 版本**: 1.90+
----
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >

@@ -380,8 +380,8 @@ fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Opti
 | 模式 | 关系 |
 | :--- | :--- |
 | [Visitor](./10_visitor.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
-| [Composite](../02_structural/composite.md) | AST 即 Composite 结构 |
-| [Strategy](./strategy.md) | 不同求值策略可替换 |
+| [Composite](../02_structural/10_composite.md) | AST 即 Composite 结构 |
+| [Strategy](./10_strategy.md) | 不同求值策略可替换 |
 
 ---
 
@@ -452,7 +452,7 @@ GoF 用继承定义 AST 节点；Rust 用枚举更简洁，且穷尽匹配保证
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Interpreter 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

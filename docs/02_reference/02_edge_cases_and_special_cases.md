@@ -813,7 +813,7 @@ fn iterator_invalidation() {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [集合与迭代器速查卡](./quick_reference/collections_iterators_cheatsheet.md)
-- [算法速查卡](./quick_reference/algorithms_cheatsheet.md)
+- [算法速查卡](./quick_reference/02_algorithms_cheatsheet.md)
 - [线程与并发速查卡](./quick_reference/threads_concurrency_cheatsheet.md)
 - [所有权速查卡](./quick_reference/ownership_cheatsheet.md)
 

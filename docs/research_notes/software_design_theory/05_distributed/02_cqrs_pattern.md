@@ -234,7 +234,7 @@ impl<E, S> ProjectionSync<E, S> {
 **相关阅读**:
 
 - [CQRS 模式 - Microsoft Docs](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
-- [分布式概念族谱](../../DISTRIBUTED_CONCEPT_MINDMAP.md)
+- [分布式概念族谱](../../formal_methods/10_distributed_concept_mindmap.md)
 
 ---
 

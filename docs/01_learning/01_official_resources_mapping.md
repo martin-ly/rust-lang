@@ -262,9 +262,9 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 11.1 How to Write Tests | 测试函数、assert | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) § 单元测试 | 测试覆盖率工具 |
-| 11.2 Controlling How Tests Are Run | 测试过滤、并行 | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) § cargo test 选项 | nextest 工具链 |
-| 11.3 Test Organization | 单元/集成测试 | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) § 测试组织 | 测试架构模式 |
+| 11.1 How to Write Tests | 测试函数、assert | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) § 单元测试 | 测试覆盖率工具 |
+| 11.2 Controlling How Tests Are Run | 测试过滤、并行 | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) § cargo test 选项 | nextest 工具链 |
+| 11.3 Test Organization | 单元/集成测试 | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) § 测试组织 | 测试架构模式 |
 
 #### 第12章：An I/O Project
 
@@ -275,7 +275,7 @@
 | 12.1 Accepting Command Line Arguments | 命令行参数 | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) § 参数解析 | clap 库详解 |
 | 12.2 Reading a File | 文件读取 | `crates/c07_process/src/file_ops.rs` | 异步文件 I/O |
 | 12.3 Refactoring to Improve Modularity and Error Handling | 重构、错误处理 | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 项目架构模式 |
-| 12.4 Adding Functionality with Test Driven Development | TDD | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) § TDD | 属性测试 |
+| 12.4 Adding Functionality with Test Driven Development | TDD | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) § TDD | 属性测试 |
 | 12.5 Working with Environment Variables | 环境变量 | `crates/c07_process/src/env.rs` | 配置管理 |
 | 12.6 Redirecting Errors to Standard Error | 标准错误 | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) § 日志 | tracing 集成 |
 
@@ -435,7 +435,7 @@
 | 18 | **Error Handling** | 错误处理 | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | 19 | **Std Library Types** | 标准库类型 | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) |
 | 20 | **Std Misc** | 线程、文件、进程 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) |
-| 21 | **Testing** | 测试 | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) |
+| 21 | **Testing** | 测试 | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) |
 | 22 | **Unsafe Operations** | Unsafe 操作 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
 | 23 | **Compatibility** | 兼容性 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) |
 | 24 | **Meta** | 文档、Playground | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
@@ -507,7 +507,7 @@
 | **Week 3: 复合类型 + 集合** | Book Ch 5-8 + RBE Custom Types | [type_system](../02_reference/quick_reference/type_system.md) | 实现简易数据结构 |
 | **Week 4: 错误处理 + 泛型** | Book Ch 9-10 + RBE Error Handling | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) | 重构错误处理 |
 | **Week 5: 项目实战** | Book Ch 12 I/O Project | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 完成命令行工具 |
-| **Week 6: 复习 + 测试** | Book Ch 11 Testing | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) | 为项目添加测试 |
+| **Week 6: 复习 + 测试** | Book Ch 11 Testing | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) | 为项目添加测试 |
 
 ### 路径二：中级进阶路径（能写项目 → 深入理解）
 >
@@ -569,7 +569,7 @@
 | **迭代器** | Book Ch 13.2 | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) § Iterator | - |
 | **闭包** | Book Ch 13.1 | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) | - |
 | **智能指针** | Book Ch 15 | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) | - |
-| **测试** | Book Ch 11 | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) | - |
+| **测试** | Book Ch 11 | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) | - |
 | **Cargo** | Book Ch 14 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) | - |
 
 ### 按官方章节快速跳转
@@ -583,7 +583,7 @@
 | Ch 8 - Collections | [Book](https://doc.rust-lang.org/book/ch08-00-common-collections.html) | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) |
 | Ch 9 - Error Handling | [Book](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | Ch 10 - Generics/Traits | [Book](https://doc.rust-lang.org/book/ch10-00-generics.html) | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) |
-| Ch 11 - Testing | [Book](https://doc.rust-lang.org/book/ch11-00-testing.html) | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) |
+| Ch 11 - Testing | [Book](https://doc.rust-lang.org/book/ch11-00-testing.html) | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) |
 | Ch 13 - Iterators/Closures | [Book](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) |
 | Ch 15 - Smart Pointers | [Book](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) |
 | Ch 16 - Concurrency | [Book](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) |
@@ -605,7 +605,7 @@
 | 17. macro_rules! | [RBE](https://doc.rust-lang.org/rust-by-example/macros.html) | macros_cheatsheet |
 | 18. Error Handling | [RBE](https://doc.rust-lang.org/rust-by-example/error.html) | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | 20. Std Misc (Threads) | [RBE](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) |
-| 21. Testing | [RBE](https://doc.rust-lang.org/rust-by-example/testing.html) | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) |
+| 21. Testing | [RBE](https://doc.rust-lang.org/rust-by-example/testing.html) | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) |
 | 22. Unsafe | [RBE](https://doc.rust-lang.org/rust-by-example/unsafe.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
 
 ---
@@ -622,10 +622,10 @@
 | **Book Ch 17** | 17.1-17.6 Async | 空 Future、持锁跨 await 反例（[async_patterns](../02_reference/quick_reference/async_patterns.md)）；EDGE_CASES |
 | **Book Ch 3** | 3.1-3.5 Types, Control Flow | 控制流（[C03](../../crates/c03_control_fn/docs/README.md)）；模式匹配决策树 |
 | **Book Ch 9** | 9.1-9.3 Error Handling | 错误传播转换树（[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md)）；[error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
-| **Book Ch 11** | 11.1-11.3 Testing | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md)；#[test] 1.93 严格化（[09_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)） |
+| **Book Ch 11** | 11.1-11.3 Testing | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md)；#[test] 1.93 严格化（[09_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)） |
 | **Reference** | Attributes, Macros | offset_of! 类型检查（1.93）；macros_cheatsheet |
 | **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/variance_theory.md)；[PROOF_INDEX](../research_notes/PROOF_INDEX.md) |
-| **releases.rs** | 1.93 Language/Libraries | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)；[07_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) |
+| **releases.rs** | 1.93 Language/Libraries | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)；[07_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) |
 
 > 标注「本项目补充」表示官方资源未覆盖或简略，本项目提供额外深度。
 

@@ -329,9 +329,9 @@ fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Observer](./observer.md) | 同为解耦；Mediator 集中路由，Observer 一对多 |
+| [Observer](./10_observer.md) | 同为解耦；Mediator 集中路由，Observer 一对多 |
 | [Facade](../02_structural/10_facade.md) | Facade 简化接口；Mediator 协调多对象 |
-| [Chain of Responsibility](./chain_of_responsibility.md) | 链式传递 vs 集中路由 |
+| [Chain of Responsibility](./10_chain_of_responsibility.md) | 链式传递 vs 集中路由 |
 
 ---
 
@@ -401,7 +401,7 @@ struct BadColleague {
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Mediator 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

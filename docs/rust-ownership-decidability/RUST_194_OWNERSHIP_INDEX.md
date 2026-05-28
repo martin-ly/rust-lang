@@ -47,14 +47,14 @@
 - UNIFIED_THEORETICAL_FRAMEWORK.md
 - THEOREM_DEPENDENCY_GRAPH.md
 - THEOREM_INTUITIONS.md
-- PROOF_STRATEGIES.md
-- FORMAL_LANGUAGE_AND_PROOFS.md (引用)
+- 10_proof_strategies.md
+- 10_formal_language_and_proofs.md (引用)
 
 ### 实践指南 (10+ 文件)
 
 - ULTIMATE_COMPREHENSIVE_GUIDE.md
 - INTERACTIVE_LEARNING_GUIDE.md
-- QUICK_REFERENCE_CARD.md
+- 10_quick_reference_card.md
 - READING_GUIDE.md
 
 ### 分析与审计 (20+ 文件)

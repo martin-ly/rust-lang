@@ -101,7 +101,7 @@
 ### 3. 进度跟踪文档
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- `PROGRESS_TRACKING.md` - 持续跟踪
+- `10_progress_tracking.md` - 持续跟踪
 - `2026-03-05_initial_setup.md` - 初始设置
 - `2026-03-06_week1_progress.md` - Week 1 报告
 - `2026-03-07_daily_update.md` - 每日更新

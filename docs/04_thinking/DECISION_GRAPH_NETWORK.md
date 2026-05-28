@@ -1086,7 +1086,7 @@ graph TD
 > **[来源: Wikipedia - Rust (programming language)]**
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 表达能力边界
-- [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../research_notes/SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) - 安全可判定机制
+- [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../research_notes/10_safe_decidable_mechanisms_overview.md) - 安全可判定机制
 
 ### 证明与安全
 
@@ -1099,7 +1099,7 @@ graph TD
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-- [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../research_notes/formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md) - 分布式架构选型（Saga/CQRS/熔断器）
+- [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../research_notes/formal_methods/10_distributed_architecture_decision_tree.md) - 分布式架构选型（Saga/CQRS/熔断器）
 - WORKFLOW_ENGINE_DECISION_TREE - 工作流引擎选型（Temporal/自研/状态机）
 
 ### 相关文档

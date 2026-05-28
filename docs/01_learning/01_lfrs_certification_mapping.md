@@ -182,7 +182,7 @@
 | :--- | :--- | :--- |
 | 模块系统 | `crates/c02_type_system/src/type_composition/composite/mod.rs` | mod、pub、use |
 | Crate 结构 | `Cargo.toml` (workspace) | 多 crate workspace 实践 |
-| 路径系统 | `docs/02_reference/quick_reference/modules_cheatsheet.md` | 绝对路径、相对路径、super |
+| 路径系统 | `docs/02_reference/quick_reference/02_modules_cheatsheet.md` | 绝对路径、相对路径、super |
 | 可见性 | 所有 crate 的 `src/lib.rs` | pub、pub(crate)、pub(super) 实例 |
 
 ### 练习验证
@@ -412,7 +412,7 @@
 1. 考点 1 → `crates/c03_control_fn/` + `crates/c02_type_system/`
 2. 考点 2 → `crates/c01_ownership_borrow_scope/`
 3. 考点 3 → `crates/c02_type_system/src/type_composition/`
-4. 考点 4 → 阅读本项目 workspace 结构 + `docs/02_reference/quick_reference/modules_cheatsheet.md`
+4. 考点 4 → 阅读本项目 workspace 结构 + `docs/02_reference/quick_reference/02_modules_cheatsheet.md`
 5. 考点 5 → `crates/c02_type_system/src/type_composition/collection/`
 6. 考点 6 → `crates/c03_control_fn/src/error_handling/`
 7. 考点 7 → `crates/c04_generic/`

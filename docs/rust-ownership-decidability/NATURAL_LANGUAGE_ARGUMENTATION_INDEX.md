@@ -77,7 +77,7 @@
 
 | 文档 | 目标读者 | 内容 | 阅读时间 |
 |------|---------|------|---------|
-| **PROOF_STRATEGIES.md** | 研究者/贡献者 | 证明策略详解 | 2-3 小时 |
+| **10_proof_strategies.md** | 研究者/贡献者 | 证明策略详解 | 2-3 小时 |
 | **UNIFIED_THEORETICAL_FRAMEWORK.md** | 研究者 | 五层架构框架 | 2 小时 |
 | **THEOREM_DEPENDENCY_GRAPH.md** | 研究者 | 定理依赖网络 | 1 小时 |
 
@@ -174,7 +174,7 @@
 
 **阅读顺序**：
 
-1. PROOF_STRATEGIES.md（完整阅读）
+1. 10_proof_strategies.md（完整阅读）
    - 第 1 章：通用证明技巧
    - 第 2 章：特定定理的证明策略
    - 第 3 章：完成 admit 的实用指南
@@ -337,7 +337,7 @@
 
 **Proof Strategies（证明策略）**
 
-- 文档：PROOF_STRATEGIES.md
+- 文档：10_proof_strategies.md
 
 ### R
 >

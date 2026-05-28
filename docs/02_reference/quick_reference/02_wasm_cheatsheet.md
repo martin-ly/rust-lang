@@ -365,7 +365,7 @@ for i in 0..10000 {
 > **[来源: Wikipedia - Type System]**
 
 - [完整文档](../../../crates/c12_wasm/README.md)
-- [WASM 使用指南](../../05_guides/WASM_USAGE_GUIDE.md)
+- [WASM 使用指南](../../05_guides/05_wasm_usage_guide.md)
 - [JavaScript 互操作](../../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
 
 ## 🎯 使用场景 {#-使用场景}
@@ -552,7 +552,7 @@ pub fn process_task(task_json: &str) -> String {
 - [异步编程速查卡](./async_patterns.md) - WASM 异步
 - [类型系统速查卡](./type_system.md) - WASM 类型
 - [错误处理速查卡](./error_handling_cheatsheet.md) - WASM 错误处理
-- [测试速查卡](./testing_cheatsheet.md) - WASM 测试
+- [测试速查卡](./02_testing_cheatsheet.md) - WASM 测试
 - 反模式速查卡 - WASM 反模式
 
 ---

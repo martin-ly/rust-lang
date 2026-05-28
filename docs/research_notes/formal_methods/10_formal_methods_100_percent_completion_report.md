@@ -89,7 +89,7 @@ formal_methods 目录已达到 **100% 完成度**！
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - ✅ 10_implementation_progress_matrix.md - 更新至100%
-- ✅ CONCEPT_AXIOM_THEOREM_MATRIX.md - 更新所有定理状态
+- ✅ 10_concept_axiom_theorem_matrix.md - 更新所有定理状态
 
 ---
 

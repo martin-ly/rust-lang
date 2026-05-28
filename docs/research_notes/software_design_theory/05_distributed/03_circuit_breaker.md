@@ -251,7 +251,7 @@ impl CircuitBreaker {
 
 **相关阅读**:
 
-- [分布式架构决策树](../../DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md)
+- [分布式架构决策树](../../formal_methods/10_distributed_architecture_decision_tree.md)
 - [超时模式](./06_timeout_pattern.md)
 
 ---

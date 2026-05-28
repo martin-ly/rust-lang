@@ -63,7 +63,7 @@
 - **Send/Sync 已独立成篇**：[send_sync_formalization](./send_sync_formalization.md)。
 - **缺口与观感（已通过阶段 A–D 补全）**：
   1. ~~Sync、Send、async 未作为“机制”独立成篇~~ → **已补**：Send/Sync 专篇 [send_sync_formalization](./send_sync_formalization.md)；async 仍由 async_state_machine 覆盖。
-  2. ~~“安全的可判定的机制”未做统一梳理~~ → **已补**：[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) 每机制一节 + 并发/Trait 族四维表。
+  2. ~~“安全的可判定的机制”未做统一梳理~~ → **已补**：[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md) 每机制一节 + 并发/Trait 族四维表。
   3. ~~思维表征与 formal_methods 结合不足~~ → **已补**：HIERARCHICAL_MAPPING 机制↔思维表征、六篇并表、各篇「相关思维表征」统一四类；原 README 五篇并表已扩展为六篇并表，并含：
      - 以**安全可判定机制**为纲的**思维导图**（概念层次 + 机制间依赖）；
      - **概念多维矩阵**（机制 × 可判定性 × 安全边界 × 形式化文档 × 典型反例）；
@@ -185,7 +185,7 @@
 | 类型 | 当前入口 | 与 formal_methods 的绑定建议 |
 | :--- | :--- | :--- |
 | **思维导图** | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) | 增加「安全可判定机制」节点：ownership → borrow → lifetime → Send/Sync → Pin → async；每节点链到对应 formal_methods 文档。 |
-| **概念多维矩阵** | [README §六篇并表](README.md#formal_methods-六篇并表)、[执行模型矩阵](../software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵)、[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) §6 | 安全可判定机制 × 可判定性 × 安全边界 × 形式化文档（§3.1）；六篇并表含 Send/Sync 专篇。 |
+| **概念多维矩阵** | [README §六篇并表](README.md#formal_methods-六篇并表)、[执行模型矩阵](../software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵)、[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md) §6 | 安全可判定机制 × 可判定性 × 安全边界 × 形式化文档（§3.1）；六篇并表含 Send/Sync 专篇。 |
 | **决策树** | [06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md)、[DESIGN_MECHANISM_RATIONALE §Send/Sync](../DESIGN_MECHANISM_RATIONALE.md) | 需跨线程 → Send/Sync；需 async → Send 跨 await、Pin；与 formal_methods Def/定理编号并排引用。 |
 | **推理证明树** | [PROOF_INDEX](../PROOF_INDEX.md)、[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) | Send/Sync → [send_sync_formalization](./send_sync_formalization.md)、async T6.2、SPAWN-T1、CHAN-T1；ownership/borrow/lifetime 保持现有。 |
 
@@ -210,8 +210,8 @@
 | 阶段 | 目标 | 产出 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
 | **阶段 A** | Send/Sync 形式化专篇 | 新文档 `send_sync_formalization.md`：Def SEND1/SYNC1、定理 SEND-T1/SYNC-T1、与 spawn/Future/Arc 衔接、反例；README 六篇并表 | P0 | ✅ 已完成 |
-| **阶段 B** | 安全可判定机制总览 | 单文档 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)：每机制一节（概念定义、属性关系、解释论证、形式证明、反例）；与 formal_methods/type_theory 双向链接 | P0 | ✅ 已完成 |
-| **阶段 C** | 完备特性对比表扩展 | 并发与异步族、Trait 族四维表已入 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) §6；92 项全量可选后续迭代 | P1 | ✅ 已完成（并发+Trait 族） |
+| **阶段 B** | 安全可判定机制总览 | 单文档 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md)：每机制一节（概念定义、属性关系、解释论证、形式证明、反例）；与 formal_methods/type_theory 双向链接 | P0 | ✅ 已完成 |
+| **阶段 C** | 完备特性对比表扩展 | 并发与异步族、Trait 族四维表已入 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md) §6；92 项全量可选后续迭代 | P1 | ✅ 已完成（并发+Trait 族） |
 | **阶段 D** | 思维表征四类绑定 | MIND_MAP 增安全可判定机制节点；README 或 HIERARCHICAL_MAPPING 增「机制↔思维表征」表；各篇「相关思维表征」统一四类 | P1 | ✅ 见 §4 与总览/各篇块 |
 | **阶段 E** | async 机制单篇（可选） | 若需拆分，新增 async 机制形式化（async fn、.await、Send 边界）；与 async_state_machine 分工明确 | P2 | ⏸ 可选，不实施不影响 100% |
 

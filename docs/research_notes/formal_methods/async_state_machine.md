@@ -1281,7 +1281,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 | T6.1-T6.3 (状态一致性、数据竞争自由、进度性) | [c06 futures_smoke](../../../crates/c06_async/examples/futures_smoke.rs)、[async 示例](../../../crates/c06_async/examples/README.md) | Future、Poll、异步状态机 |
 | T-PIN1 (Pin 不动性) | c06 pin 相关示例 | 自引用 Future |
 
-详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](../10_theorem_rust_example_mapping.md)。
 
 ---
 

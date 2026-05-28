@@ -196,7 +196,7 @@
 - [ ] 至少 1 个反例或边界说明
 - [ ] 至少 1 处链接至 formal_methods/type_theory
 
-详见 [BEST_PRACTICES](BEST_PRACTICES.md#实质内容不足判断与修复)、[CONTENT_ENHANCEMENT](./CONTENT_ENHANCEMENT.md) 实质内容自检表。
+详见 [BEST_PRACTICES](BEST_PRACTICES.md#实质内容不足判断与修复)、[CONTENT_ENHANCEMENT](./10_content_enhancement.md) 实质内容自检表。
 
 ---
 

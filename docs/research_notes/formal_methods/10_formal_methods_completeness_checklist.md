@@ -66,7 +66,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-本表与 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) §二、§三 一致：总览按「机制」列出形式化文档与反例，本表按「文档」核对六维是否齐全。二者互为完备性检查。
+本表与 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../10_safe_decidable_mechanisms_overview.md) §二、§三 一致：总览按「机制」列出形式化文档与反例，本表按「文档」核对六维是否齐全。二者互为完备性检查。
 
 ---
 

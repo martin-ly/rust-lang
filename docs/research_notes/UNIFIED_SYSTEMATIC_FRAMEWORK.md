@@ -135,7 +135,7 @@
 
 **定理 USF-T1（框架一致性）**：若 $d_1, d_2 \in \mathcal{F}$ 均引用同一概念 $C$，则 $d_1$ 与 $d_2$ 对 $C$ 的形式化定义或引用一致。
 
-*证明*：由 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) 全局一致性矩阵；术语、公理编号、定义链已校验。∎
+*证明*：由 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) 全局一致性矩阵；术语、公理编号、定义链已校验。∎
 
 **推论 USF-C1**：反例索引与各模块反例一一对应；违反任一模块定理的代码在反例索引中可查。
 
@@ -410,11 +410,11 @@
 | Pin | 移动未 Pin 自引用 | 位置稳定 | [pin_self_referential](formal_methods/pin_self_referential.md) |
 | Trait | 对象安全违规 | vtable 约束 | [trait_system_formalization](type_theory/trait_system_formalization.md) |
 | 类型系统 | 类型不匹配 | 类型安全 | [type_system_foundations](type_theory/type_system_foundations.md) |
-| 设计模式 | Singleton 全局可变未同步 | 数据竞争 | [singleton](software_design_theory/01_design_patterns_formal/01_creational/singleton.md) |
-| 设计模式 | Observer 共享可变无 Mutex | 数据竞争 | [observer](software_design_theory/01_design_patterns_formal/03_behavioral/observer.md) |
-| 设计模式 | Composite 循环引用 | 所有权无法表达 | [composite](software_design_theory/01_design_patterns_formal/02_structural/composite.md) |
-| 设计模式 | Builder 必填未设 | 不变式违反 | [builder](software_design_theory/01_design_patterns_formal/01_creational/builder.md) |
-| 设计模式 | Memento 恢复非法状态 | 不变式违反 | [memento](software_design_theory/01_design_patterns_formal/03_behavioral/memento.md) |
+| 设计模式 | Singleton 全局可变未同步 | 数据竞争 | [singleton](software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md) |
+| 设计模式 | Observer 共享可变无 Mutex | 数据竞争 | [observer](software_design_theory/01_design_patterns_formal/03_behavioral/10_observer.md) |
+| 设计模式 | Composite 循环引用 | 所有权无法表达 | [composite](software_design_theory/01_design_patterns_formal/02_structural/10_composite.md) |
+| 设计模式 | Builder 必填未设 | 不变式违反 | [builder](software_design_theory/01_design_patterns_formal/01_creational/10_builder.md) |
+| 设计模式 | Memento 恢复非法状态 | 不变式违反 | [memento](software_design_theory/01_design_patterns_formal/03_behavioral/10_memento.md) |
 
 ---
 
@@ -505,11 +505,11 @@ Pin ──→ 自引用安全
 | 特性族 | 矩阵 | 决策树 | 完整链 |
 | :--- | :--- | :--- | :--- |
 | **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
-| **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) 所有权/借用 |
+| **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) 所有权/借用 |
 | **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/construction_capability.md) |
-| **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) Trait/泛型 |
-| **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) match/for/? |
-| **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) Send/Sync/Future |
+| **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) Trait/泛型 |
+| **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) match/for/? |
+| **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) Send/Sync/Future |
 
 ### 按类型族
 >
@@ -552,7 +552,7 @@ Pin ──→ 自引用安全
 | 文档 | 用途 |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全与非安全全面论证、契约、UB、安全抽象 |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义形式化、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射、反例索引 |
 | [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
@@ -561,9 +561,9 @@ Pin ──→ 自引用安全
 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合 |
 | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策树 |
 | [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明图网 |
-| [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、概念定义、思维表征 |
+| [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
-| [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
+| [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 13 项核心特性完整链 |
 | [FEATURE_TEMPLATE](./10_feature_template.md) | 79 项特性精简模板 |
 | [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md) | 版本增量更新流程 |
 

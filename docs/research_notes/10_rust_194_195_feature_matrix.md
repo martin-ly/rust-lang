@@ -93,7 +93,7 @@
 | :--- | :--- | :--- | :--- |
 | [FORMAL_CONCEPTS_ENCYCLOPEDIA](./10_formal_concepts_encyclopedia.md) | 添加新类型定义 | 3h | ⏳ |
 | [COUNTER_EXAMPLES_COMPENDIUM](./10_counter_examples_compendium.md) | 添加边界案例 | 4h | ⏳ |
-| [THEOREM_RUST_EXAMPLE_MAPPING](./THEOREM_RUST_EXAMPLE_MAPPING.md) | 更新定理映射 | 2h | ⏳ |
+| [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md) | 更新定理映射 | 2h | ⏳ |
 
 ---
 

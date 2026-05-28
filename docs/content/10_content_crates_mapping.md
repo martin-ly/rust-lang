@@ -92,7 +92,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
-| `web_frameworks/axum_deep_dive.md` | C10 网络 | Web 框架深入 |
+| `web_frameworks/10_axum_deep_dive.md` | C10 网络 | Web 框架深入 |
 | `databases/sqlx_guide.md` | C06 异步 | 数据库异步访问 |
 | `async_runtimes/10_tokio_deep_dive.md` | C06 异步 | Tokio 深入 |
 | `serialization/serde_guide.md` | C02 类型系统 | 序列化 |

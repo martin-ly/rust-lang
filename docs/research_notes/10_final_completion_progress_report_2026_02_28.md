@@ -80,7 +80,7 @@
 | :--- | :--- | :--- | :--- |
 | 10_async_concept_mindmap.md | 2.8KB | 8.2KB | 运行时对比、取消安全 |
 | 10_memory_model_mindmap.md | 2.9KB | 8.3KB | 内存布局、unsafe操作 |
-| PROOF_TECHNIQUES_MINDMAP.md | 7.2KB | 已有 | 已完整 |
+| 10_proof_techniques_mindmap.md | 7.2KB | 已有 | 已完整 |
 
 #### 教程扩展 (4个)
 

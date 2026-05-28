@@ -1118,7 +1118,7 @@ mindmap
 - [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网
 - [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网
 - [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
-- [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识结构框架
+- [07_knowledge_structure_framework.md](../07_project/07_knowledge_structure_framework.md) - 知识结构框架
 
 ---
 

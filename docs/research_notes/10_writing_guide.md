@@ -610,7 +610,7 @@
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-**依据**：[CONTENT_ENHANCEMENT](./CONTENT_ENHANCEMENT.md) § 概念定义-属性关系-解释论证 层次化小节规范、[QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md)。
+**依据**：[CONTENT_ENHANCEMENT](./10_content_enhancement.md) § 概念定义-属性关系-解释论证 层次化小节规范、[QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md)。
 
 凡含 Def/Axiom/定理的形式化文档，宜在形式化定义节末增加 **「概念定义-属性关系-解释论证 层次汇总」** 子节，用表格显式三层次：
 
@@ -620,7 +620,7 @@
 | **属性关系层** | 公理→定理→推论依赖 DAG |
 | **解释论证层** | 证明思路、反例所在节 |
 
-**示例**：见 [state](software_design_theory/01_design_patterns_formal/03_behavioral/state.md)、[02_effectiveness_proofs](software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md)。
+**示例**：见 [state](software_design_theory/01_design_patterns_formal/03_behavioral/10_state.md)、[02_effectiveness_proofs](software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md)。
 
 ---
 

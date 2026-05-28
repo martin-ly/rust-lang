@@ -43,7 +43,6 @@
     - [2. 中期计划](#2-中期计划)
     - [3. 长期计划](#3-长期计划)
   - [总结](#总结)
-  - [*Edition：2024*](#edition2024)
 
 ## 项目概述
 
@@ -505,12 +504,6 @@ fn advanced_usage_example() {
 **示例状态**：✅ 可用
 **新特性状态**：✅ 全部实现
 
----
-
-*报告生成时间：2025年1月*
-*项目版本：1.0.0*
-*Rust 版本：1.90*
-*Edition：2024*
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

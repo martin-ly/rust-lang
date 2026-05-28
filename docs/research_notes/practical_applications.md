@@ -176,7 +176,7 @@
 [async_state_machine](formal_methods/async_state_machine.md) T6.2 一致，则 $C$ 为 Safe 且满足形式化保证。
 
 *证明*：由各定理陈述；案例实现满足定理结论即一致；
-组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) CSO-T1。∎
+组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) CSO-T1。∎
 
 **引理 PA-L1（unsafe 案例边界）**：若案例 $C$ 含 `unsafe` 块，则 $C$ 与定理一致 ⟺ $C$ 的 unsafe 使用满足 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 契约；安全抽象对外 API 为 Safe。
 

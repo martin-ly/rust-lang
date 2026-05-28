@@ -104,9 +104,9 @@
 
 | 文件 | 大小 | 状态 | 动作 |
 | :--- | :--- | :--- | :--- |
-| FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md | 0.39KB | 占位 | 补充实质内容或归档 |
+| 10_formal_proof_critical_analysis_and_plan_2026_02.md | 0.39KB | 占位 | 补充实质内容或归档 |
 | FORMAL_PROOF_SYSTEM_GUIDE.md | 0.45KB | 占位 | 补充实质内容或归档 |
-| AENEAS_INTEGRATION_PLAN.md | 0.5KB | 重定向 | 已归档，可删除 |
+| 10_aeneas_integration_plan.md | 0.5KB | 重定向 | 已归档，可删除 |
 | 10_coq_isabelle_proof_scaffolding.md | 0.51KB | 重定向 | 已归档，可删除 |
 | 10_coq_of_rust_integration_plan.md | 0.53KB | 重定向 | 已归档，可删除 |
 | coq_skeleton/README.md | 0.46KB | 基础 | 扩展为完整指南 |
@@ -150,11 +150,11 @@
 | 10_design_pattern_concept_mindmap.md | 3.4KB | 6KB | P2 |
 | 10_ownership_concept_mindmap.md | 7.6KB | 10KB | P1 |
 | TYPE_SYSTEM_CONCEPT_MINDMAP.md | 9.9KB | 12KB | P1 |
-| PROOF_TECHNIQUES_MINDMAP.md | 7.2KB | 10KB | P1 |
+| 10_proof_techniques_mindmap.md | 7.2KB | 10KB | P1 |
 | CONCURRENCY_CONCEPT_MINDMAP.md | 7.6KB | 10KB | P1 |
 | 10_lifetime_concept_mindmap.md | 8.0KB | 10KB | P1 |
 | 10_variance_concept_mindmap.md | 8.2KB | 10KB | P1 |
-| DISTRIBUTED_CONCEPT_MINDMAP.md | 8.3KB | 10KB | P2 |
+| 10_distributed_concept_mindmap.md | 8.3KB | 10KB | P2 |
 
 ### D类：可扩展的教程 (5篇)
 
@@ -193,26 +193,26 @@
 | 分类 | 文件 | 当前大小 | 目标大小 |
 | :--- | :--- | :--- | :--- |
 | 创建型 | 10_abstract_factory.md | 12KB | 15KB |
-| 创建型 | builder.md | 13KB | 15KB |
-| 创建型 | factory_method.md | 12KB | 15KB |
+| 创建型 | 10_builder.md | 13KB | 15KB |
+| 创建型 | 10_factory_method.md | 12KB | 15KB |
 | 创建型 | 10_prototype.md | 11KB | 15KB |
-| 创建型 | singleton.md | 13KB | 15KB |
-| 结构型 | adapter.md | 12KB | 15KB |
+| 创建型 | 10_singleton.md | 13KB | 15KB |
+| 结构型 | 10_adapter.md | 12KB | 15KB |
 | 结构型 | 10_bridge.md | 11KB | 15KB |
-| 结构型 | composite.md | 12KB | 15KB |
-| 结构型 | decorator.md | 12KB | 15KB |
+| 结构型 | 10_composite.md | 12KB | 15KB |
+| 结构型 | 10_decorator.md | 12KB | 15KB |
 | 结构型 | 10_facade.md | 12KB | 15KB |
 | 结构型 | 10_flyweight.md | 12KB | 15KB |
-| 结构型 | proxy.md | 10KB | 15KB |
-| 行为型 | chain_of_responsibility.md | 12KB | 15KB |
-| 行为型 | command.md | 12KB | 15KB |
+| 结构型 | 10_proxy.md | 10KB | 15KB |
+| 行为型 | 10_chain_of_responsibility.md | 12KB | 15KB |
+| 行为型 | 10_command.md | 12KB | 15KB |
 | 行为型 | 10_interpreter.md | 11KB | 15KB |
 | 行为型 | 10_iterator.md | 10KB | 15KB |
 | 行为型 | 10_mediator.md | 9.8KB | 15KB |
-| 行为型 | memento.md | 8.8KB | 15KB |
-| 行为型 | observer.md | 10KB | 15KB |
-| 行为型 | state.md | 10KB | 15KB |
-| 行为型 | strategy.md | 10KB | 15KB |
+| 行为型 | 10_memento.md | 8.8KB | 15KB |
+| 行为型 | 10_observer.md | 10KB | 15KB |
+| 行为型 | 10_state.md | 10KB | 15KB |
+| 行为型 | 10_strategy.md | 10KB | 15KB |
 | 行为型 | 10_template_method.md | 11KB | 15KB |
 | 行为型 | 10_visitor.md | 9.8KB | 15KB |
 

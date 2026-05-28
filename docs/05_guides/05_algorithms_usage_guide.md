@@ -69,7 +69,7 @@
 本指南对应 `crates/c08_algorithms`，提供 Rust 中各类算法的完整实现，包括排序、搜索、图算法、动态规划、数据结构、机器学习算法以及 LeetCode 分类题解。所有实现支持同步、并行和异步三种执行模式。
 
 **前置知识**: [knowledge/02_intermediate/](../../knowledge/02_intermediate/) 集合与迭代器
-**速查卡**: [algorithms_cheatsheet.md](../02_reference/quick_reference/algorithms_cheatsheet.md)
+**速查卡**: [02_algorithms_cheatsheet.md](../02_reference/quick_reference/02_algorithms_cheatsheet.md)
 
 ---
 
@@ -343,7 +343,7 @@ fn verified_algorithms() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- **速查卡**: [algorithms_cheatsheet.md](../02_reference/quick_reference/algorithms_cheatsheet.md)
+- **速查卡**: [02_algorithms_cheatsheet.md](../02_reference/quick_reference/02_algorithms_cheatsheet.md)
 - **算法决策树**: [algorithm_decision_trees.md](../../crates/c08_algorithms/src/algorithm_decision_trees.rs)
 - **性能优化**: [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md)
 - **源码**: [crates/c08_algorithms/](../../crates/c08_algorithms/)

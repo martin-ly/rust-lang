@@ -43,7 +43,6 @@
     - [10.1 核心要点回顾](#101-核心要点回顾)
     - [10.2 学习资源推荐](#102-学习资源推荐)
     - [10.3 相关文档](#103-相关文档)
-  - [_本思维导图致力于用 ASCII 艺术和结构化图表帮助您建立 Rust 所有权系统的完整知识体系！_](#本思维导图致力于用-ascii-艺术和结构化图表帮助您建立-rust-所有权系统的完整知识体系)
 
 ---
 
@@ -990,9 +989,6 @@
 **维护者**: Rust Learning Community
 **反馈**: 欢迎通过 GitHub Issues 提供建议
 
----
-
-_本思维导图致力于用 ASCII 艺术和结构化图表帮助您建立 Rust 所有权系统的完整知识体系！_
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

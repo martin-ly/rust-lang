@@ -39,7 +39,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-除 [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) 所列 13 项核心特性外，其余特性采用以下**精简模板**：
+除 [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) 所列 13 项核心特性外，其余特性采用以下**精简模板**：
 
 | 列 | 必填 | 说明 |
 | :--- | :--- | :--- |
@@ -99,7 +99,7 @@
 - **形式化引用** ← 形式化列
 - **反例** ← 反例列
 
-**核心特性**（13 项）采用完整链，见 [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md)。
+**核心特性**（13 项）采用完整链，见 [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md)。
 
 **其余特性**（79 项）采用本精简模板，数据见 [RUST_193](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 各表。
 
@@ -112,7 +112,7 @@
 | 文档 | 用途 |
 | :--- | :--- |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 92 项特性完整表格 |
-| [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
+| [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 13 项核心特性完整链 |
 
 ---
 

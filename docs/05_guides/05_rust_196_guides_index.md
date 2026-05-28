@@ -36,26 +36,26 @@
 | 序号 | 文档名称 | 原版本 | 1.96语义 | 代码检查 | 状态 |
 |------|----------|--------|----------|----------|------|
 | 1 | ASYNC_PROGRAMMING_USAGE_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 2 | THREADS_CONCURRENCY_USAGE_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 3 | DESIGN_PATTERNS_USAGE_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 4 | MACRO_SYSTEM_USAGE_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 5 | WASM_USAGE_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 2 | 05_threads_concurrency_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 3 | 05_design_patterns_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 4 | 05_macro_system_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 5 | 05_wasm_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 6 | UNSAFE_RUST_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 7 | TROUBLESHOOTING_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 7 | 05_troubleshooting_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 8 | BEST_PRACTICES.md | 1.96 | ✅ | ✅ | **深度整合完成** |
 | 9 | RUST_196_MIGRATION_GUIDE.md | 1.96 | ✅ | ✅ | 已完成 |
 | 10 | 05_ai_rust_ecosystem_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 11 | 05_cli_applications_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 12 | EMBEDDED_RUST_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 12 | 05_embedded_rust_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 13 | FFI_PRACTICAL_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 14 | 05_inline_assembly_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 15 | PERFORMANCE_TUNING_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 16 | 05_testing_coverage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 17 | TOKIO_ECOSYSTEM_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 18 | ADVANCED_TOPICS_DEEP_DIVE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 18 | 05_advanced_topics_deep_dive.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 19 | 05_cross_module_integration_examples.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 20 | PRODUCTION_PROJECT_EXAMPLES.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 21 | PERFORMANCE_TESTING_REPORT.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 21 | 05_performance_testing_report.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 22 | FINAL_DOCUMENTATION_COMPLETION_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 23 | UNSAFE_PATTERNS_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 24 | workflow/README.md | 1.93 | ✅ | ✅ | **深度整合完成** |
@@ -75,11 +75,11 @@
 | 特性 | 类别 | 应用场景 | 相关指南 |
 |------|------|----------|----------|
 | `isqrt` | 数学运算 (≥1.84) | 质数检测、几何计算 | BEST_PRACTICES.md |
-| `HashMap::get_disjoint_mut` | 数据结构 (≥1.86) | 并发缓存、状态管理 | THREADS_CONCURRENCY_USAGE_GUIDE.md |
+| `HashMap::get_disjoint_mut` | 数据结构 (≥1.86) | 并发缓存、状态管理 | 05_threads_concurrency_usage_guide.md |
 | `async Fn` / async closures | 异步编程 (≥1.85, Edition 2024) | 异步 trait、回调抽象 | ASYNC_PROGRAMMING_USAGE_GUIDE.md |
 | `if let guards` | 语言特性 | 模式匹配守卫 | CONTROL_FLOW_GUIDE.md |
 | `Vec::pop_if` | 集合操作 (≥1.86) | 条件弹出、栈操作 | BEST_PRACTICES.md |
-| `const fn` 改进 | 编译时计算 | 常量初始化 | DESIGN_PATTERNS_USAGE_GUIDE.md |
+| `const fn` 改进 | 编译时计算 | 常量初始化 | 05_design_patterns_usage_guide.md |
 
 ---
 
@@ -146,7 +146,7 @@ fn demonstrate_196_features() {
 - [几何算法示例](./05_cross_module_integration_examples.md)
 
 #### 🔄 并发编程
-- [HashMap 新 API](./THREADS_CONCURRENCY_USAGE_GUIDE.md)
+- [HashMap 新 API](./05_threads_concurrency_usage_guide.md)
 - if let guards 指南
 
 #### ⚡ 异步编程

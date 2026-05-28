@@ -263,7 +263,7 @@ Rust 1.94 特性:       6 个          ✅
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md](./FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md) - 100% 完成认证
+- [10_final_100_percent_completion_certification.md](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md) - 100% 完成认证
 - [FINAL_COMPLETE_STATUS_100_PERCENT.md](./FINAL_COMPLETE_STATUS_100_PERCENT.md) - 本报告
 - [COMPLETION_SYNTHESIS_REPORT.md](./COMPLETION_SYNTHESIS_REPORT.md) - 推进报告
 
@@ -273,7 +273,7 @@ Rust 1.94 特性:       6 个          ✅
 
 - [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) - 四层知识体系
 - [FINAL_EXECUTIVE_SUMMARY_V2.md](./FINAL_EXECUTIVE_SUMMARY_V2.md) - 执行摘要
-- [QUICK_REFERENCE_CARD.md](./QUICK_REFERENCE_CARD.md) - 速查卡片
+- [10_quick_reference_card.md](QUICK_REFERENCE_CARD.md) - 速查卡片
 
 ### 桥梁文档 (关键创新)
 >
@@ -324,7 +324,7 @@ Rust 1.94 特性:       6 个          ✅
 3. INTERACTIVE_LEARNING_GUIDE.md (1小时)
 4. FOUNDATIONS_TO_PRACTICE_BRIDGE.md (1小时) ⭐新增
 5. 基础练习 (45分钟)
-6. QUICK_REFERENCE_CARD.md (15分钟)
+6. 10_quick_reference_card.md (15分钟)
 ```
 
 ### 进阶开发者 (2周)

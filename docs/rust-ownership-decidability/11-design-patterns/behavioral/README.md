@@ -17,9 +17,9 @@
 
 | 模式 | 文件 | 描述 | 难度 |
 |-----|------|------|------|
-| **Observer** | [observer.md](./observer.md) | 事件订阅通知 | 🟡 |
-| **Strategy** | [strategy.md](./strategy.md) | 算法封装 | 🟢 |
-| **Command** | [command.md](./command.md) | 请求封装 | 🟡 |
+| **Observer** | [10_observer.md](observer.md) | 事件订阅通知 | 🟡 |
+| **Strategy** | [10_strategy.md](strategy.md) | 算法封装 | 🟢 |
+| **Command** | [10_command.md](command.md) | 请求封装 | 🟡 |
 
 ---
 

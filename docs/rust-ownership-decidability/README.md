@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-[![Completion](https://img.shields.io/badge/Completion-100%25-brightgreen)](FINAL_100_PERCENT_COMPLETION_REPORT.md)
+[![Completion](https://img.shields.io/badge/Completion-100%25-brightgreen)](10_final_100_percent_completion_report.md)
 [![Rust Version](https://img.shields.io/badge/Rust-1.95-blue)](#)
 [![Documentation](https://img.shields.io/badge/Docs-586%20files%20|%20600K%2B%20words-informational)](FINAL_MASTER_INDEX.md)
 [![Coq](https://img.shields.io/badge/Coq-11%2C980%2B%20lines%20%7C%20300%20Qed-orange)](coq-formalization/README.md)

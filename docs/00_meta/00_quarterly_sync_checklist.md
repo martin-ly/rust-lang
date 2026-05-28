@@ -133,7 +133,7 @@
 
 - [ ] 检查 `docs/` 目录是否有需要新增的指南
 - [ ] 验证知识库索引 `knowledge/INDEX.md` 是否最新
-- [ ] 检查 `README.md` 和 `CHANGELOG.md` 是否需要更新
+- [ ] 检查 `README.md` 和 `10_changelog.md` 是否需要更新
 - [ ] 确认所有外部链接仍然有效
 
 ---

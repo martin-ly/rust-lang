@@ -776,12 +776,12 @@ pub fn update_optimistic(
 | DTO | 结构体 + serde；无行为；所有权转移 | 与 Remote Facade、Gateway 组合 |
 | Remote Facade | 粗粒度接口；batch 减少 RPC；见 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) CHAN1 | 与 DTO 组合 |
 | Value Object | `Clone`、`PartialEq`；不可变；见 [06_rust_idioms](../06_rust_idioms.md) Def NW1 | 与 Newtype、DTO 衔接 |
-| Registry | `OnceLock<HashMap>`；见 [singleton](../01_design_patterns_formal/01_creational/singleton.md) | 服务定位；与 Plugin 二选一 |
+| Registry | `OnceLock<HashMap>`；见 [singleton](../01_design_patterns_formal/01_creational/10_singleton.md) | 服务定位；与 Plugin 二选一 |
 | Identity Map | `HashMap<Id, Arc<T>>`；见 [ownership_model](../../formal_methods/ownership_model.md) Def ARC1 | 会话内去重 |
-| Lazy Load | `OnceLock`、`Option`；见 [proxy](../01_design_patterns_formal/02_structural/proxy.md) | 延迟加载 |
-| Plugin | `trait` + `Box<dyn Trait>`；依赖注入；见 [strategy](../01_design_patterns_formal/03_behavioral/strategy.md) | 可替换实现 |
+| Lazy Load | `OnceLock`、`Option`；见 [proxy](../01_design_patterns_formal/02_structural/10_proxy.md) | 延迟加载 |
+| Plugin | `trait` + `Box<dyn Trait>`；依赖注入；见 [strategy](../01_design_patterns_formal/03_behavioral/10_strategy.md) | 可替换实现 |
 | Optimistic Offline Lock | `version: u64`、CAS；见 [ownership_model](../../formal_methods/ownership_model.md) Def ATOMIC1 | 乐观并发 |
-| Specification | `trait Spec` + `and`/`or`；组合模式；见 [composite](../01_design_patterns_formal/02_structural/composite.md) | 业务规则组合 |
+| Specification | `trait Spec` + `and`/`or`；组合模式；见 [composite](../01_design_patterns_formal/02_structural/10_composite.md) | 业务规则组合 |
 | Event Sourcing | `Vec<Event>` + `fold`；无共享可变；见 [ownership_model](../../formal_methods/ownership_model.md) | 与 Command、Memento 概念衔接 |
 
 ---

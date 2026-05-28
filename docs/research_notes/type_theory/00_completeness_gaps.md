@@ -246,7 +246,7 @@
 
 - [construction_capability](./construction_capability.md) — 类型构造能力；§ 类型理论缺口对构造能力的影响 与本缺口对应
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) — 92 项特性；类型相关需与本缺口对照
-- [ARGUMENTATION_GAP_INDEX](../ARGUMENTATION_GAP_INDEX.md) — 论证缺口追踪
+- [ARGUMENTATION_GAP_INDEX](../10_argumentation_gap_index.md) — 论证缺口追踪
 - [RFC 1023 Rebalancing Coherence](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)
 - [Relaxing the Orphan Rule (2024)](https://rust-lang.github.io/rust-project-goals/2024h2/Relaxing-the-Orphan-Rule.html)
 
@@ -256,13 +256,13 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-**详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+**详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../10_formal_proof_critical_analysis_and_plan_2026_02.md)
 
 | 缺口类型 | 说明 | 对标成果 |
 | :--- | :--- | :--- |
 | **L3 机器可检查证明** | 类型系统 T-TY3 骨架已创建（[TYPE_SAFETY.v](../coq_skeleton/TYPE_SAFETY.v)，证明 Admitted 待补全）；T-OW2/T-BR1 骨架见 [coq_skeleton](../coq_skeleton/README.md) | RustBelt、Aeneas |
 | **范畴论对应** | 指称语义与类型论（Fω、System F）的范畴论对应未形式化 | 学术前沿 |
-| **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../10_coq_of_rust_integration_plan.md) |
+| **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../10_aeneas_integration_plan.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../10_coq_of_rust_integration_plan.md) |
 
 ---
 

@@ -222,7 +222,7 @@
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 92 项特性完整分析 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./UNIFIED_SYSTEMATIC_FRAMEWORK.md) | 全局统一框架、五维矩阵总览 |
 | [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引 |
-| [toolchain/07_rust_1.93_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) | Rust 1.93 完整变更清单 |
+| [toolchain/07_rust_1.93_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) | Rust 1.93 完整变更清单 |
 
 ---
 

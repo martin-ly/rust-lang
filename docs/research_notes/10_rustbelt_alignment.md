@@ -115,7 +115,7 @@
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **短期**：保持语言级形式化与 RustBelt 概念对齐；在 PROOF_INDEX 中标注 RustBelt 对应章节
-2. **中期**：补全 [coq_skeleton](coq_skeleton/README.md) Admitted 证明；扩展 T-BR1/T-TY3 骨架（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./10_coq_isabelle_proof_scaffolding.md)、[AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](./10_coq_of_rust_integration_plan.md)）
+2. **中期**：补全 [coq_skeleton](coq_skeleton/README.md) Admitted 证明；扩展 T-BR1/T-TY3 骨架（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./10_coq_isabelle_proof_scaffolding.md)、[AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md)、[COQ_OF_RUST_INTEGRATION_PLAN](./10_coq_of_rust_integration_plan.md)）
 3. **长期**：若资源允许，对标 RustBelt Meets Relaxed Memory，补全原子操作与 Arc 松弛内存形式化
 
 ---

@@ -50,7 +50,7 @@
 | **Tree Borrows** | ETH (PLDI 2025) | 2025 | 借用模型、树结构、54% 更少拒绝 | Iris (Coq)、Rocq | borrow_checker_proof 演进；Distinguished Paper |
 | **RustBelt Meets Relaxed Memory** | MPI-SWS | 2020 | 松弛内存、Arc、原子操作 | Iris (Coq) | formal_methods Phase 4（部分） |
 | **Rust Distilled** | DBLP | - | 高层所有权、无生命周期 | - | ownership_model（高层部分） |
-| **Aeneas** | INRIA 等 | 2023+ | Safe Rust → Coq/F*/HOL4/Lean | 多后端 | [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md) |
+| **Aeneas** | INRIA 等 | 2023+ | Safe Rust → Coq/F*/HOL4/Lean | 多后端 | [AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md) |
 | **coq-of-rust** | - | 2023+ | THIR → Rocq，借用与 effect | Rocq (Coq) | 无直接对应 |
 | **Crux-MIR** | Galois | 2024 | 比特级精确、密码学验证 | Crux | 无直接对应 |
 | **RustSEM** | 2024 (FMSD) | 2024 | 内存级 OBS、可执行语义、700+ 测试 | K-Framework | 无直接对应 |
@@ -96,7 +96,7 @@
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - **形式化**: Safe Rust 翻译到 Coq、F*、HOL4、Lean
-- **本项目对应**: [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md)（对接方案已制定）
+- **本项目对应**: [AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md)（对接方案已制定）
 - **差距**: 无证明助手翻译；无多后端验证
 - **对接状态**: 📋 计划中 — 示例选取、环境搭建、翻译验证待实施
 

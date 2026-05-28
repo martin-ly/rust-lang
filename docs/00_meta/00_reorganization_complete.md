@@ -74,7 +74,7 @@
 rust-lang/
 ├── README.md              # 📄 项目主入口（精简重写）
 ├── CONTRIBUTING.md        # 🤝 贡献指南
-├── CHANGELOG.md           # 📝 变更日志
+├── 10_changelog.md           # 📝 变更日志
 ├── FAQ.md                 # ❓ 常见问题
 ├── Cargo.toml             # 📦 Workspace配置
 ├── Cargo.lock             # 🔒 依赖锁定
@@ -96,7 +96,7 @@ rust-lang/
 │   ├── 04_guides/                     # 📖 使用指南
 │   │   ├── migration_2026.md
 │   │   ├── best_practices.md
-│   │   ├── GETTING_STARTED.md
+│   │   ├── 10_getting_started.md
 │   │   ├── QUICK_REFERENCE.md
 │   │   ├── 10_resources.md
 │   │   ├── ROADMAP.md
@@ -144,7 +144,7 @@ rust-lang/
 
 | 原位置 | 新位置 |
 |--------|--------|
-| `GETTING_STARTED.md` | `01_docs/04_guides/GETTING_STARTED.md` |
+| `10_getting_started.md` | `01_docs/04_guides/10_getting_started.md` |
 | `QUICK_REFERENCE.md` | `01_docs/04_guides/QUICK_REFERENCE.md` |
 | `10_resources.md` | `01_docs/04_guides/10_resources.md` |
 | `ROADMAP.md` | `01_docs/04_guides/ROADMAP.md` |
@@ -224,7 +224,7 @@ rust-lang/
 
 ## 相关文档
 
-- [重组记录](history/00_00_2026_reorganization.md) - 详细重组过程
+- [重组记录](history/00_2026_reorganization.md) - 详细重组过程
 - [文档索引](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) - 新文档导航
 - [项目README](../README.md) - 项目主入口
 

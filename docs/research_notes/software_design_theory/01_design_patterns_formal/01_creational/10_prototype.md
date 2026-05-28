@@ -333,9 +333,9 @@ ownership_model T2
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Factory Method](./factory_method.md) | 工厂可基于 Prototype 克隆 |
-| [Builder](./builder.md) | Builder 可基于 Prototype 克隆 |
-| [Memento](../03_behavioral/memento.md) | Clone 可作 Memento 实现 |
+| [Factory Method](./10_factory_method.md) | 工厂可基于 Prototype 克隆 |
+| [Builder](./10_builder.md) | Builder 可基于 Prototype 克隆 |
+| [Memento](../03_behavioral/10_memento.md) | Clone 可作 Memento 实现 |
 
 ---
 
@@ -431,7 +431,7 @@ impl Clone for BadNode {
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Prototype 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

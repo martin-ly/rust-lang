@@ -1766,7 +1766,7 @@ impl DecisionEngine {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
-- [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识结构框架
+- [07_knowledge_structure_framework.md](../07_project/07_knowledge_structure_framework.md) - 知识结构框架
 
 ---
 

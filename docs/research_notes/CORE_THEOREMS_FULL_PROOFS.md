@@ -8,9 +8,9 @@
 > **状态**: ✅ 已完成
 > **用途**: 为 ownership T2、borrow T1、type T3 提供 L2 级完整证明，含归纳基/归纳步形式化陈述、辅助引理显式编号、证明依赖 DAG
 > **证明深度**: L2（完整证明，非机器可检查）
-> **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)、[PROOF_INDEX](./PROOF_INDEX.md)
+> **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md)、[PROOF_INDEX](./PROOF_INDEX.md)
 
-**形式语言与形式证明**：本文档的定理同时以**形式语言**（推理规则、操作语义、判定形式）表达，见 [FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md)。形式语言为数学规范层。Rust 示例衔接见 [THEOREM_RUST_EXAMPLE_MAPPING](./THEOREM_RUST_EXAMPLE_MAPPING.md)。
+**形式语言与形式证明**：本文档的定理同时以**形式语言**（推理规则、操作语义、判定形式）表达，见 [FORMAL_LANGUAGE_AND_PROOFS](./10_formal_language_and_proofs.md)。形式语言为数学规范层。Rust 示例衔接见 [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md)。
 
 ---
 
@@ -317,7 +317,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md) — 形式语言（推理规则、操作语义、判定形式）、形式证明推导树
+- [FORMAL_LANGUAGE_AND_PROOFS](./10_formal_language_and_proofs.md) — 形式语言（推理规则、操作语义、判定形式）、形式证明推导树
 - [CORE_THEOREMS_EN_SUMMARY](./10_core_theorems_en_summary.md) — English summary
 
 ---
@@ -332,7 +332,7 @@
 | T-BR1 | c01_ownership_borrow_scope/examples/ | 借用规则、数据竞争自由 |
 | T-TY3 | c02_type_system/examples/ | 类型安全、进展性、保持性 |
 
-详见 [THEOREM_RUST_EXAMPLE_MAPPING](./THEOREM_RUST_EXAMPLE_MAPPING.md)。
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md)。
 
 ---
 
@@ -358,7 +358,7 @@
 
 **维护者**: Rust Formal Methods Research Team
 **最后更新**: 2026-02-26
-**证明深度**: L2（数学风格完整证明；Rust 示例见 [THEOREM_RUST_EXAMPLE_MAPPING](./THEOREM_RUST_EXAMPLE_MAPPING.md)）
+**证明深度**: L2（数学风格完整证明；Rust 示例见 [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md)）
 
 ---
 

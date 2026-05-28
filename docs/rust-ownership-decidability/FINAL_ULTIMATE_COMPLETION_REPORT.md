@@ -97,7 +97,7 @@ Coq 形式化文件:       32 个文件     ✅
 ├── 终极综合指南 (ULTIMATE_COMPREHENSIVE_GUIDE.md)
 ├── 知识梳理 (COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md)
 ├── 执行摘要 (FINAL_EXECUTIVE_SUMMARY_V2.md)
-├── 完成认证 (FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
+├── 完成认证 (10_final_100_percent_completion_certification.md)
 ├── 文档总索引 (DOCUMENT_INDEX_MASTER.md)
 ├── 知识矩阵 (COMPLETE_KNOWLEDGE_MATRIX.md)
 ├── 学习路线图 (LEARNING_ROADMAP_DETAILED.md)
@@ -261,7 +261,7 @@ Coq 形式化文件:       32 个文件     ✅
 
 - DOCUMENT_INDEX_MASTER.md - 找文档
 - COMPLETE_KNOWLEDGE_MATRIX.md - 查关联
-- QUICK_REFERENCE_CARD.md - 速查
+- 10_quick_reference_card.md - 速查
 
 **深入学习**:
 
@@ -358,7 +358,7 @@ Coq 形式化文件:       32 个文件     ✅
 **开始使用**:
 
 - [ULTIMATE_COMPREHENSIVE_GUIDE.md](./ULTIMATE_COMPREHENSIVE_GUIDE.md) - 从这里开始
-- [QUICK_REFERENCE_CARD.md](./QUICK_REFERENCE_CARD.md) - 快速查阅
+- [10_quick_reference_card.md](QUICK_REFERENCE_CARD.md) - 快速查阅
 - [DOCUMENT_INDEX_MASTER.md](./DOCUMENT_INDEX_MASTER.md) - 查找文档
 
 ---

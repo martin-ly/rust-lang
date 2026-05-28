@@ -1481,7 +1481,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 | :--- | :--- | :--- |
 | 理论体系架构 | [../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 四层理论体系 |
 | 证明索引 | [../PROOF_INDEX.md](../PROOF_INDEX.md) | 形式化证明索引 |
-| 系统总结 | [../SYSTEM_SUMMARY.md](../SYSTEM_SUMMARY.md) | 研究笔记系统总结 |
+| 系统总结 | [../10_system_summary.md](../10_system_summary.md) | 研究笔记系统总结 |
 
 ---
 

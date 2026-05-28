@@ -282,7 +282,7 @@
 
 - 任务编排与执行计划 - 包含所有可视化内容
 - [任务清单](./10_task_checklist.md) - 详细任务列表
-- [进度跟踪](./PROGRESS_TRACKING.md) - 详细进度跟踪
+- [进度跟踪](./10_progress_tracking.md) - 详细进度跟踪
 
 ### 工具资源
 

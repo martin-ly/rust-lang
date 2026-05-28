@@ -253,7 +253,7 @@ impl std::ops::Add for Meter {
 
 **Axiom TS1**：非法状态转换导致编译错误；类型系统保证状态机正确性。
 
-**定理 TS-T1**：类型状态与 [Builder](01_design_patterns_formal/01_creational/builder.md) B-T2 一致；类型状态 Builder 即 Def TS1 实例。
+**定理 TS-T1**：类型状态与 [Builder](01_design_patterns_formal/01_creational/10_builder.md) B-T2 一致；类型状态 Builder 即 Def TS1 实例。
 
 ### 3.2 典型场景
 
@@ -280,7 +280,7 @@ impl std::ops::Add for Meter {
 > **[来源: Wikipedia - Asynchronous I/O]**
 
 - **Builder**：类型状态 Builder 为 B-T2 的扩展；编译期强制顺序
-- **State**：与 [state](01_design_patterns_formal/03_behavioral/state.md) 互补；编译期 vs 运行时状态机
+- **State**：与 [state](01_design_patterns_formal/03_behavioral/10_state.md) 互补；编译期 vs 运行时状态机
 - **Template Method**：trait 默认方法 + 类型状态可组合
 
 ---
@@ -290,8 +290,8 @@ impl std::ops::Add for Meter {
 
 | 变体 | 说明 | 形式化文档 |
 | :--- | :--- | :--- |
-| Option + ok_or | 运行时校验 | [builder](01_design_patterns_formal/01_creational/builder.md) |
-| 类型状态 Builder | 编译期强制 | [builder](01_design_patterns_formal/01_creational/builder.md) B-T2 |
+| Option + ok_or | 运行时校验 | [builder](01_design_patterns_formal/01_creational/10_builder.md) |
+| 类型状态 Builder | 编译期强制 | [builder](01_design_patterns_formal/01_creational/10_builder.md) B-T2 |
 | derive_builder | 宏生成 | 同上 |
 
 ---

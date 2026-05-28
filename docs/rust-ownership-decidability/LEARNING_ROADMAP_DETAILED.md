@@ -480,7 +480,7 @@ Level 5: 能形式化证明 (专家)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - ULTIMATE_COMPREHENSIVE_GUIDE.md - 总入口
-- QUICK_REFERENCE_CARD.md - 速查
+- 10_quick_reference_card.md - 速查
 - COMPLETE_KNOWLEDGE_MATRIX.md - 知识矩阵
 
 ### 按级别推荐

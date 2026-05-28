@@ -44,7 +44,6 @@
     - [生命周期推断性能分析](#生命周期推断性能分析)
     - [标准库 API 性能分析](#标准库-api-性能分析)
   - [📚 相关文档](#-相关文档)
-  - [**适用版本**: Rust 1.92.0+](#适用版本-rust-1920)
 
 ---
 
@@ -277,11 +276,6 @@ Rust 1.92.0 稳定化的标准库 API（如 `NonZero::div_ceil`、`rotate_right`
 - [零成本抽象参考](../tier_03_references/07_零成本抽象参考.md)
 - [所有权性能优化](../tier_04_advanced/03_所有权性能优化.md)
 
----
-
-**文档维护**: Performance Team
-**最后更新**: 2025-12-11
-**适用版本**: Rust 1.92.0+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

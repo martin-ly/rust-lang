@@ -88,17 +88,17 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md) — Formal language (inference rules, operational semantics, judgment forms) and mathematical proofs; complements Coq skeletons.
+- [FORMAL_LANGUAGE_AND_PROOFS](./10_formal_language_and_proofs.md) — Formal language (inference rules, operational semantics, judgment forms) and mathematical proofs; complements Coq skeletons.
 
 ## Related Documents
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md) — Unified formal system (incl. Send/Sync)
+- [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) — Unified formal system (incl. Send/Sync)
 - [send_sync_formalization](./formal_methods/send_sync_formalization.md) — Send/Sync Def SEND1/SYNC1, SEND-T1/SYNC-T1, SEND-SYNC-T1
-- [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) — Safe decidable mechanisms (per-mechanism sections + 4-dim tables)
+- [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) — Safe decidable mechanisms (per-mechanism sections + 4-dim tables)
 - [PROOF_INDEX](./PROOF_INDEX.md) — 105+ proof index
-- [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md) — Safe Rust → proof assistant
+- [AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md) — Safe Rust → proof assistant
 
 ---
 

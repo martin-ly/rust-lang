@@ -2,7 +2,7 @@
 >
 > **层次定位**: L2-L6 进阶-生态 / 工程最佳实践
 > **前置依赖**: [concept L1-L2 基础-进阶](../../concept/01_foundation/) · [docs 核心概念](../01_core/README.md)
-> **后置延伸**: [docs 设计模式](./DESIGN_PATTERNS_USAGE_GUIDE.md) · [docs 性能调优](./PERFORMANCE_TUNING_GUIDE.md)
+> **后置延伸**: [docs 设计模式](./05_design_patterns_usage_guide.md) · [docs 性能调优](./PERFORMANCE_TUNING_GUIDE.md)
 > **跨层映射**: L2→L6 经验映射 | 模式→规范
 > **定理链编号**: T-020 → T-030 → 工程模式库
 
@@ -131,7 +131,7 @@
 
 本文档提供 Rust 项目开发的综合最佳实践，涵盖从代码编写到项目组织的各个方面，合并了项目级代码质量、性能、测试、文档、工具使用等主题。
 
-**形式化引用**：T-OW2、T-BR1、T-TY3、SEND-T1、SYNC-T1。综合见 [formal_methods](../research_notes/formal_methods/README.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/THEOREM_RUST_EXAMPLE_MAPPING.md)。
+**形式化引用**：T-OW2、T-BR1、T-TY3、SEND-T1、SYNC-T1。综合见 [formal_methods](../research_notes/formal_methods/README.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
 
 ---
 

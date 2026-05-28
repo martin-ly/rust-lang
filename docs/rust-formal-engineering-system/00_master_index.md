@@ -126,7 +126,7 @@
 
 | 映射目标 |
 | :--- | :--- | :--- |
-| [docs/PERFORMANCE_TESTING_REPORT.md](../05_guides/PERFORMANCE_TESTING_REPORT.md) |
+| [docs/05_performance_testing_report.md](../05_guides/05_performance_testing_report.md) |
 
 ---
 

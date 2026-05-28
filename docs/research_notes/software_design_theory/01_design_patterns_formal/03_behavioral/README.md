@@ -17,15 +17,15 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [责任链](./chain_of_responsibility.md)
-- [命令](./command.md)
+- [责任链](./10_chain_of_responsibility.md)
+- [命令](./10_command.md)
 - [解释器](./10_interpreter.md)
 - [迭代器](./10_iterator.md)
 - [中介者](./10_mediator.md)
-- [备忘录](./memento.md)
-- [观察者](./observer.md)
-- [状态](./state.md)
-- [策略](./strategy.md)
+- [备忘录](./10_memento.md)
+- [观察者](./10_observer.md)
+- [状态](./10_state.md)
+- [策略](./10_strategy.md)
 - [模板方法](./10_template_method.md)
 - [访问者](./10_visitor.md)
 

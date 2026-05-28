@@ -63,7 +63,7 @@
 | **思维表征完善计划** | MIND_REPRESENTATION_COMPLETION_PLAN |
 | **L3机器证明实施指南** | [L3_MACHINE_PROOF_GUIDE](./L3_MACHINE_PROOF_GUIDE.md) |
 | **核心定理完整证明** | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) |
-| **论证缺口索引** | [ARGUMENTATION_GAP_INDEX](./ARGUMENTATION_GAP_INDEX.md) |
+| **论证缺口索引** | [ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) |
 
 ---
 

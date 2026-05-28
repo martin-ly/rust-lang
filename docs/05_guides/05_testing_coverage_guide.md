@@ -561,7 +561,7 @@ exclude-files = [
 | **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
 | :--- | :--- |
 | :--- | :--- |
-| **相关指南** | [PERFORMANCE_TESTING_REPORT.md](./PERFORMANCE_TESTING_REPORT.md) |
+| **相关指南** | [05_performance_testing_report.md](./05_performance_testing_report.md) |
 | :--- | :--- |
 | :--- | :--- |
 | **外部资源** | [cargo-tarpaulin文档](https://github.com/xd009642/tarpaulin) |

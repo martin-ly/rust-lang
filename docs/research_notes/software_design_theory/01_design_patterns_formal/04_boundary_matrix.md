@@ -52,7 +52,7 @@
 
 若 $B_s(P)$、$B_p(P)$、$B_e(P)$ 与 [safe_unsafe_matrix](../05_boundary_system/safe_unsafe_matrix.md)、
 [supported_unsupported_matrix](../05_boundary_system/10_supported_unsupported_matrix.md)、
-[expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) 三矩阵对应一致，
+[expressive_inexpressive_matrix](../05_boundary_system/10_expressive_inexpressive_matrix.md) 三矩阵对应一致，
 则称模式 $P$ 的边界**与体系一致**。
 
 **Axiom BMP1**：设计模式边界由实现路径唯一确定；同一模式不同实现（如 Singleton 用 OnceLock vs static mut）可能对应不同 $B_s$。
@@ -66,16 +66,16 @@
 *证明*：由各矩阵文档的 Def 与设计模式表；safe_unsafe_matrix、supported_unsupported_matrix、expressive_inexpressive_matrix 分别覆盖 23 模式；交叉验证无矛盾。∎
 
 **引理 BMP-L1（近似表达模式）**：Singleton、Interpreter、Memento、Observer、Template Method、Visitor 为近似表达；
-$\mathit{ExprB}(P) = \mathrm{Approx}$ 由 [expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) 定理 EIM-T2、EIM-L1 确定。
+$\mathit{ExprB}(P) = \mathrm{Approx}$ 由 [expressive_inexpressive_matrix](../05_boundary_system/10_expressive_inexpressive_matrix.md) 定理 EIM-T2、EIM-L1 确定。
 
-*证明*：由 [expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md)；
+*证明*：由 [expressive_inexpressive_matrix](../05_boundary_system/10_expressive_inexpressive_matrix.md)；
 上述模式依赖全局可变、继承或双重分发，Rust 用 OnceLock、channel、match 等替代；
 依 Def 1.1 为 Approx。∎
 
 **推论 BMP-C1**：等价表达模式（21 种）满足零成本抽象；
 近似表达模式可能有额外间接（如 channel）。
 
-*证明*：由 [expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) 推论 EIM-C1。∎
+*证明*：由 [expressive_inexpressive_matrix](../05_boundary_system/10_expressive_inexpressive_matrix.md) 推论 EIM-C1。∎
 
 ---
 
@@ -142,7 +142,7 @@ $\mathit{ExprB}(P) = \mathrm{Approx}$ 由 [expressive_inexpressive_matrix](../05
 > **[来源: Rust Official Docs]**
 
 - **等价表达**：可形式化证明与 GoF 语义等价；见各模式文档定理。
-- **近似表达**：有明确差异点；见 [expressive_inexpressive_matrix](../05_boundary_system/expressive_inexpressive_matrix.md) 详解。
+- **近似表达**：有明确差异点；见 [expressive_inexpressive_matrix](../05_boundary_system/10_expressive_inexpressive_matrix.md) 详解。
 
 ---
 

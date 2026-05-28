@@ -63,7 +63,7 @@
 |------|------|------|------|
 | **OVERVIEW_AND_INTUITION.md** | 7,918 | 总览与直观理解 | 建立整体认知 |
 | **THEOREM_INTUITIONS.md** | 9,445 | 定理的直观解释 | 理解核心定理 |
-| **PROOF_STRATEGIES.md** | 10,179 | 证明策略详解 | 学习证明技巧 |
+| **10_proof_strategies.md** | 10,179 | 证明策略详解 | 学习证明技巧 |
 | **CONCEPT_MAP.md** | 7,533 | 概念映射 | Rust ↔ 形式化 |
 | **READING_GUIDE.md** | 5,729 | 阅读指南 | 个性化学习路径 |
 | **NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md** | 5,047 | 文档总览 | 导航和索引 |
@@ -121,7 +121,7 @@
 - 详细的证明策略说明
 - 常见疑问解答
 
-### 3. PROOF_STRATEGIES.md（证明策略详解）
+### 3. 10_proof_strategies.md（证明策略详解）
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
@@ -292,7 +292,7 @@ Linearizability                 Definition Linearizable
 5. 对比自然语言解释和 Coq 定义
 
 **第三层：证明深入**
-6. PROOF_STRATEGIES.md
+6. 10_proof_strategies.md
 7. 尝试理解/完成 admit
 
 ---

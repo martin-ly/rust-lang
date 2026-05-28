@@ -135,7 +135,7 @@ fn ownership_theorem() {
 | :--- | :--- |
   | Rust Basics | 01_learning/ |
   | Data Structures | 02_reference/quick_reference/collections_iterators_cheatsheet.md |
-  | Concurrency | 05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md |
+  | Concurrency | 05_guides/05_threads_concurrency_usage_guide.md |
 
 #### Programming in Rust (University of Colorado Boulder)
 >

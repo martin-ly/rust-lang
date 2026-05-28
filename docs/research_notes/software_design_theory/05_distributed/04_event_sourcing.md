@@ -234,7 +234,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 **相关阅读**:
 
 - [CQRS 模式](./02_cqrs_pattern.md)
-- [分布式概念族谱](../../DISTRIBUTED_CONCEPT_MINDMAP.md)
+- [分布式概念族谱](../../formal_methods/10_distributed_concept_mindmap.md)
 
 ---
 

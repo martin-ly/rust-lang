@@ -382,8 +382,8 @@ struct GlyphInstance {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Proxy](./proxy.md) | Proxy 可包装 Flyweight 做延迟/缓存 |
-| [Singleton](../01_creational/singleton.md) | 同为共享；Flyweight 按 key 共享，Singleton 全局唯一 |
+| [Proxy](./10_proxy.md) | Proxy 可包装 Flyweight 做延迟/缓存 |
+| [Singleton](../01_creational/10_singleton.md) | 同为共享；Flyweight 按 key 共享，Singleton 全局唯一 |
 | 对象池（扩展） | 共享池；Flyweight 不可变，Pool 可回收 |
 
 ---
@@ -456,7 +456,7 @@ struct BadFlyweight {
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Flyweight 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

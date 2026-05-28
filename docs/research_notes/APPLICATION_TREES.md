@@ -475,8 +475,8 @@ mindmap
 
 | 领域 | 入门文档 | 进阶文档 |
 |------|----------|----------|
-| 系统编程 | [TUTORIAL_OWNERSHIP](./10_tutorial_ownership_safety.md) | [THREADS_CONCURRENCY](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) |
-| 网络服务 | [ASYNC_PROGRAMMING](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | [DESIGN_PATTERNS](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) |
+| 系统编程 | [TUTORIAL_OWNERSHIP](./10_tutorial_ownership_safety.md) | [THREADS_CONCURRENCY](../05_guides/05_threads_concurrency_usage_guide.md) |
+| 网络服务 | [ASYNC_PROGRAMMING](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | [DESIGN_PATTERNS](../05_guides/05_design_patterns_usage_guide.md) |
 | 数据系统 | [TYPE_SYSTEM](./TUTORIAL_TYPE_SYSTEM.md) | [UNSAFE_RUST](../05_guides/UNSAFE_RUST_GUIDE.md) |
 
 ### 6.2 领域特定资源

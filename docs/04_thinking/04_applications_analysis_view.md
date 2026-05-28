@@ -274,7 +274,7 @@ flowchart LR
 | 分布式 | 异步 | tokio | tonic/Kafka | 序列化 | [05_distributed](../research_notes/software_design_theory/03_execution_models/05_distributed.md) |
 | 数据科学 | 并行 | rayon | 无 | ndarray/polars | [04_parallel](../research_notes/software_design_theory/03_execution_models/04_parallel.md) |
 | 游戏 | 并行/并发 | rayon/std | 可选 | ECS | 同上 |
-| WASM | 同步/异步 | wasm | 无 | 可选 | [WASM_USAGE_GUIDE](../05_guides/WASM_USAGE_GUIDE.md) |
+| WASM | 同步/异步 | wasm | 无 | 可选 | [WASM_USAGE_GUIDE](../05_guides/05_wasm_usage_guide.md) |
 
 ---
 
@@ -312,7 +312,7 @@ flowchart LR
 - [跨模块集成示例](../05_guides/05_cross_module_integration_examples.md)
 - [实际应用案例研究](./../research_notes/practical_applications.md) - 案例库
 - [执行模型边界分析](./../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) - 模型选型
-- [WASM 使用指南](../05_guides/WASM_USAGE_GUIDE.md)
+- [WASM 使用指南](../05_guides/05_wasm_usage_guide.md)
 
 ---
 

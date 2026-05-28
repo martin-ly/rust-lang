@@ -238,7 +238,7 @@ Google 课程 Day 4 相对简洁，本项目在以下方面有显著扩展：
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- `docs/03_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md` - 并发指南
+- `docs/03_guides/05_threads_concurrency_usage_guide.md` - 并发指南
 - `docs/03_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md` - 异步指南
 - `docs/03_guides/UNSAFE_PATTERNS_GUIDE.md` - Unsafe 模式
 

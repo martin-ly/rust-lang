@@ -378,7 +378,7 @@
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [VERIFICATION_TOOLS_MATRIX](./VERIFICATION_TOOLS_MATRIX.md) — 工具详细对比
-- [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md) — Aeneas集成指南
+- [AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md) — Aeneas集成指南
 - [COQ_ISABELLE_PROOF_SCAFFOLDING](./10_coq_isabelle_proof_scaffolding.md) — 证明脚手架
 
 ### 6.2 快速参考卡

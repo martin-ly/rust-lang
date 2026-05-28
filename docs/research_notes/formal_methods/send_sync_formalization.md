@@ -234,7 +234,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 | :--- | :--- | :--- |
 | SEND-T1、SYNC-T1、SEND-SYNC-T1 | [c05 thread/spawn 示例](../../../crates/c05_threads/examples/README.md)、Arc/Mutex 示例 | 跨线程转移、多线程共享 |
 
-详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](../10_theorem_rust_example_mapping.md)。
 
 ---
 

@@ -112,7 +112,7 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/ (56文件, 691KB)
 │   └── 10_assessment_and_certification.md
 │
 ├── 09_reference/                    22文件 (~260KB) ⭐
-│   ├── QUICK_REFERENCE_CARD.md
+│   ├── 10_quick_reference_card.md
 │   ├── 10_toolchain_setup_guide.md
 │   ├── TOOLS_CONFIGURATION_GUIDE.md
 │   ├── 10_safety_critical_checklists.md

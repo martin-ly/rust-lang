@@ -134,7 +134,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-以下 Rust 1.93 新增或变更的特性影响类型构造能力；详见 [07_rust_1.93_full_changelog](../../06_toolchain/07_rust_1.93_full_changelog.md)、[00_completeness_gaps](./00_completeness_gaps.md)。
+以下 Rust 1.93 新增或变更的特性影响类型构造能力；详见 [07_rust_1.93_full_changelog](../../06_toolchain/06_07_rust_1_93_full_changelog.md)、[00_completeness_gaps](./00_completeness_gaps.md)。
 
 | 特性 | 构造方式 | 确定性 | 说明 |
 | :--- | :--- | :--- | :--- |

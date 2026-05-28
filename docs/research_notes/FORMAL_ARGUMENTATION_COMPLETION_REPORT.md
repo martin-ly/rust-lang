@@ -100,8 +100,8 @@
 
 | 文档 | 大小 | 内容深度 | 特色 |
 | :--- | :--- | :--- | :--- |
-| PROOF_STRATEGIES.md | 7.6KB | L4 | 归纳/共归纳/反证/构造 |
-| PROOF_TECHNIQUES_MINDMAP.md | 7.2KB | L3 | 证明技术思维导图 |
+| 10_proof_strategies.md | 7.6KB | L4 | 归纳/共归纳/反证/构造 |
+| 10_proof_techniques_mindmap.md | 7.2KB | L3 | 证明技术思维导图 |
 
 **涵盖主题:**
 
@@ -175,10 +175,10 @@
 | **霍尔逻辑** | 函数契约、unsafe边界 | 10_axiomatic_semantics.md §4 |
 | **操作语义** | MIR求值、异步状态机 | 10_operational_semantics.md |
 | **模态逻辑** | 并发安全性、终结合理性 | 10_logical_foundations.md §4 |
-| **归纳证明** | 递归函数终止性、类型推导 | PROOF_STRATEGIES.md §1 |
-| **结构归纳** | 表达式求值、AST遍历 | PROOF_STRATEGIES.md §1.2 |
-| **不变式** | 循环验证、Vec容量 | PROOF_STRATEGIES.md §5 |
-| **双模拟** | 程序等价、优化验证 | PROOF_STRATEGIES.md §2 |
+| **归纳证明** | 递归函数终止性、类型推导 | 10_proof_strategies.md §1 |
+| **结构归纳** | 表达式求值、AST遍历 | 10_proof_strategies.md §1.2 |
+| **不变式** | 循环验证、Vec容量 | 10_proof_strategies.md §5 |
+| **双模拟** | 程序等价、优化验证 | 10_proof_strategies.md §2 |
 
 ---
 
@@ -214,7 +214,7 @@ Week 4-5: 分离逻辑
   └── 练习：所有权推理
 
 Week 6-7: 证明技术
-  ├── PROOF_STRATEGIES.md
+  ├── 10_proof_strategies.md
   └── 练习：归纳证明
 
 Week 8: 方法比较

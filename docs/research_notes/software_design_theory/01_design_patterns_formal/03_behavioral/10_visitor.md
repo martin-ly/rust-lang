@@ -180,7 +180,7 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 >
 > **[来源: Rust Official Docs]**
 
-Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Visitor}) = \mathrm{Approx}$。
+Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/10_expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Visitor}) = \mathrm{Approx}$。
 
 **证明**：
 
@@ -322,7 +322,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Composite](../02_structural/composite.md) | 遍历 Composite 常用 Visitor |
+| [Composite](../02_structural/10_composite.md) | 遍历 Composite 常用 Visitor |
 | [Interpreter](./10_interpreter.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
 | [Iterator](./10_iterator.md) | 遍历方式不同；Visitor 深度优先，Iterator 可定制 |
 
@@ -404,7 +404,7 @@ fn visit<V: Visitor>(v: &mut V, e: &Expr) {
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Visitor 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

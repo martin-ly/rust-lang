@@ -220,8 +220,8 @@ impl<S, E> SagaExecutor<S, E> {
 
 **相关阅读**:
 
-- [分布式概念族谱](../../DISTRIBUTED_CONCEPT_MINDMAP.md)
-- [分布式架构决策树](../../DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md)
+- [分布式概念族谱](../../formal_methods/10_distributed_concept_mindmap.md)
+- [分布式架构决策树](../../formal_methods/10_distributed_architecture_decision_tree.md)
 
 ---
 

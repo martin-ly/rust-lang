@@ -109,8 +109,8 @@
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
-| [PROOF_STRATEGIES.md](./PROOF_STRATEGIES.md) | 归纳/共归纳/反证/构造 | ⭐⭐⭐⭐ |
-| [PROOF_TECHNIQUES_MINDMAP.md](./PROOF_TECHNIQUES_MINDMAP.md) | 证明技术思维导图 | ⭐⭐⭐ |
+| [10_proof_strategies.md](./10_proof_strategies.md) | 归纳/共归纳/反证/构造 | ⭐⭐⭐⭐ |
+| [10_proof_techniques_mindmap.md](./10_proof_techniques_mindmap.md) | 证明技术思维导图 | ⭐⭐⭐ |
 
 ### 方法学
 
@@ -142,7 +142,7 @@
    └── 10_axiomatic_semantics.md §1 (霍尔逻辑基础)
 
 4. 简单证明
-   └── PROOF_STRATEGIES.md §1 (归纳证明)
+   └── 10_proof_strategies.md §1 (归纳证明)
 ```
 
 ### 进阶路径
@@ -158,7 +158,7 @@
    └── 10_axiomatic_semantics.md §2-4
 
 3. 证明技术
-   └── PROOF_STRATEGIES.md 全部
+   └── 10_proof_strategies.md 全部
 
 4. 方法比较
    └── FORMAL_METHODS_COMPARISON.md

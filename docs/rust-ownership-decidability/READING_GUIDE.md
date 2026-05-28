@@ -119,7 +119,7 @@
    ├── Metatheory/Progress.v
    └── Metatheory/TypeOwnershipConnection.v
 
-5. PROOF_STRATEGIES.md（2小时）
+5. 10_proof_strategies.md（2小时）
    └── 理解证明技巧
 ```
 
@@ -163,7 +163,7 @@
    └── 重点理解类型安全和内存安全
 
 5. 证明策略入门（4小时）
-   └── PROOF_STRATEGIES.md 第一章
+   └── 10_proof_strategies.md 第一章
    └── 尝试完成几个简单的 admit
 ```
 
@@ -206,7 +206,7 @@
 
 4. 选择任务（持续）
    └── 从简单的 admit 开始
-   └── 参考 PROOF_STRATEGIES.md
+   └── 参考 10_proof_strategies.md
 
 5. 扩展方向（可选）
    └── 添加并发模型
@@ -249,7 +249,7 @@
 | 为什么 Rust 安全 | OVERVIEW_AND_INTUITION.md |
 | 核心定理是什么 | THEOREM_INTUITIONS.md |
 | Rust 代码如何对应形式化 | CONCEPT_MAP.md |
-| 证明技巧 | PROOF_STRATEGIES.md |
+| 证明技巧 | 10_proof_strategies.md |
 | 整体架构 | UNIFIED_THEORETICAL_FRAMEWORK.md |
 | 定理依赖关系 | THEOREM_DEPENDENCY_GRAPH.md |
 | 快速开始 | 本文档 + OVERVIEW |

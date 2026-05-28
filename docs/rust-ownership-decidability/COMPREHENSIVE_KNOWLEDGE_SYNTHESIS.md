@@ -298,15 +298,15 @@
 
 | 类别 | 模式 | 文件 |
 |:-----|:-----|:-----|
-| 创建型 | Builder | `creational/builder.md` |
+| 创建型 | Builder | `creational/10_builder.md` |
 | 创建型 | Factory | `creational/factory.md` |
-| 创建型 | Singleton | `creational/singleton.md` |
-| 结构型 | Adapter | `structural/adapter.md` |
-| 结构型 | Decorator | `structural/decorator.md` |
-| 结构型 | Proxy | `structural/proxy.md` |
-| 行为型 | Command | `behavioral/command.md` |
-| 行为型 | Observer | `behavioral/observer.md` |
-| 行为型 | Strategy | `behavioral/strategy.md` |
+| 创建型 | Singleton | `creational/10_singleton.md` |
+| 结构型 | Adapter | `structural/10_adapter.md` |
+| 结构型 | Decorator | `structural/10_decorator.md` |
+| 结构型 | Proxy | `structural/10_proxy.md` |
+| 行为型 | Command | `behavioral/10_command.md` |
+| 行为型 | Observer | `behavioral/10_observer.md` |
+| 行为型 | Strategy | `behavioral/10_strategy.md` |
 | Rust特有 | Newtype | `rust-specific/newtype.md` |
 | Rust特有 | RAII Guard | `rust-specific/raii-guard.md` |
 

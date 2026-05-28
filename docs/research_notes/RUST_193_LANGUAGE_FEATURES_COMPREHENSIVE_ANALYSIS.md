@@ -307,7 +307,7 @@
 | **const** | 编译期常量 | const X: T = ... | [advanced_types](type_theory/advanced_types.md) | 非常量表达式 |
 | **const fn** | 编译期可求值函数 | 受限操作、无 I/O | advanced_types | 非 const 操作 |
 | **const 泛型** | 见 Trait 族 | - | advanced_types | - |
-| **const 中 mutable ref** | 1.93 允许 const 含 &mut static | 非常 unsafe | [07_rust_1.93_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) | 1.93 const_item_interior_mutations lint |
+| **const 中 mutable ref** | 1.93 允许 const 含 &mut static | 非常 unsafe | [07_rust_1.93_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) | 1.93 const_item_interior_mutations lint |
 | **const-eval** | 编译期求值 | 1.93 指针字节复制 | 07_rust_1.93 | - |
 | **inline** | 内联提示 | #[inline]、#[inline(always)] | - | - |
 
@@ -336,7 +336,7 @@
 
 | 特性 | 动机 | 设计决策 | 文档 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
-| **s390x vector** | s390x SIMD | is_s390x_feature_detected! | [07_rust_1.93](../06_toolchain/07_rust_1.93_full_changelog.md)、[releases.rs](https://releases.rs/docs/1.93.0/) | 非 s390x 架构 |
+| **s390x vector** | s390x SIMD | is_s390x_feature_detected! | [07_rust_1.93](../06_toolchain/06_07_rust_1_93_full_changelog.md)、[releases.rs](https://releases.rs/docs/1.93.0/) | 非 s390x 架构 |
 | **C variadic** | printf 等 FFI | extern "system" fn(..., ...) | 07_rust_1.93、[releases.rs](https://releases.rs/docs/1.93.0/) | 非 system ABI |
 | **cfg 关键词** | 避免误用 | 关键词作 cfg 谓词报错 | [09_rust_1.93_compatibility](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)、[releases.rs](https://releases.rs/docs/1.93.0/) | - |
 | **asm_cfg** | 条件汇编 | #[cfg] 在 asm! 行上 | 07_rust_1.93、05_comparison、[releases.rs](https://releases.rs/docs/1.93.0/) | - |
@@ -351,7 +351,7 @@
 | **repr(C) enum** | 可预测布局 | 判别值警告 | 09_compatibility | - |
 | **repr(transparent)** | 忽略 repr(C) 警告 | 单字段透明 | 09_compatibility | - |
 | **pin_v2** | Pin API 内部 | 内置属性命名空间 | 09_compatibility | 命名冲突 |
-| **Copy specialization 移除** | 生命周期安全 | 不再内部 specialization | [07_rust_1.93](../06_toolchain/07_rust_1.93_full_changelog.md) | 可能性能回归 |
+| **Copy specialization 移除** | 生命周期安全 | 不再内部 specialization | [07_rust_1.93](../06_toolchain/06_07_rust_1_93_full_changelog.md) | 可能性能回归 |
 | **全局分配器 thread_local** | 避免重入 | 允许 thread_local! | 05_comparison | - |
 | **Emscripten unwinding** | ABI 一致性 | wasm 异常处理 ABI | 09_compatibility | C 链接需 -fwasm-exceptions |
 
@@ -366,11 +366,11 @@
 | [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) | 按特性族展开的五维矩阵（概念-公理-定理-证明方法-反例） |
 | [releases.rs 1.93.0](https://releases.rs/docs/1.93.0/) | 权威变更清单 |
 | [Ferrocene FLS](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范 |
-| [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链（Def→示例→论证→证明） |
+| [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 13 项核心特性完整链（Def→示例→论证→证明） |
 | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) | 核心机制设计论证（Pin、所有权、借用等） |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳 |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界 |
-| [toolchain/07_rust_1.93_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) | Rust 1.93 完整变更清单 |
+| [toolchain/07_rust_1.93_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) | Rust 1.93 完整变更清单 |
 | [toolchain/09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | Rust 1.93 兼容性深度解析 |
 | [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |
 

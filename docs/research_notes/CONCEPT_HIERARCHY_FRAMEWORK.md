@@ -466,9 +466,9 @@ graph BT
 
 | 文档 | 用途 | 层次 |
 | :--- | :--- | :--- |
-| [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md) | 论证脉络关系 | L2-L3 |
+| [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) | 论证脉络关系 | L2-L3 |
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 层次化映射 | L2-L4 |
-| [FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md) | 统一形式系统 | L1-L2 |
+| [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) | 统一形式系统 | L1-L2 |
 | [PROOF_INDEX](./PROOF_INDEX.md) | 定理索引 | L3-L4 |
 
 ---

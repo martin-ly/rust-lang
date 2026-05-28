@@ -332,9 +332,9 @@ ownership_model T2
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Factory Method](./factory_method.md) | 抽象工厂由多个工厂方法组成 |
-| [Builder](./builder.md) | 可组合：Builder 由 Factory 创建 |
-| [Singleton](./singleton.md) | 工厂可为单例 |
+| [Factory Method](./10_factory_method.md) | 抽象工厂由多个工厂方法组成 |
+| [Builder](./10_builder.md) | 可组合：Builder 由 Factory 创建 |
+| [Singleton](./10_singleton.md) | 工厂可为单例 |
 
 ---
 
@@ -405,7 +405,7 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Abstract Factory 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

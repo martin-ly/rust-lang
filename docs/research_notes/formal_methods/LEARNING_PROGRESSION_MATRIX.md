@@ -291,7 +291,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 裸指针 | 10_memory_model_mindmap.md §原始指针 | 3天 |
 | FFI | 外部文档 | 1周 |
 | 内存布局 | 10_memory_model_mindmap.md §内存布局 | 3天 |
-| 形式化基础 | [PROOF_TECHNIQUES_MINDMAP](./PROOF_TECHNIQUES_MINDMAP.md) | 2周 |
+| 形式化基础 | [PROOF_TECHNIQUES_MINDMAP](./10_proof_techniques_mindmap.md) | 2周 |
 | 所有权形式化 | ownership_model.md §形式化 | 2周 |
 | 借用证明 | borrow_checker_proof.md §定理 | 2周 |
 | 自定义分配器 | 高级主题 | 1周 |

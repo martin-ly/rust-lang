@@ -205,7 +205,7 @@ impl Sync for T where &T: Send { }
 ❓ 参考
 ├── COMPREHENSIVE_FAQ.md              // FAQ
 ├── ERROR_DIAGNOSTICS_GUIDE.md        // 错误诊断
-└── QUICK_REFERENCE_CARD.md           // 本卡片
+└── 10_quick_reference_card.md           // 本卡片
 ```
 
 ---
@@ -226,7 +226,7 @@ impl Sync for T where &T: Send { }
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [完整认证](./FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
+- [完整认证](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
 - [知识梳理](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md)
 - [案例索引](case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md)
 

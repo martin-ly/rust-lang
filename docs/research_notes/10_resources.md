@@ -425,7 +425,7 @@
 
 详见 [PROOF_INDEX](./PROOF_INDEX.md) 全证明索引、
 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) 国际对标、
-[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 批判性分析与推进计划、
+[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md) 批判性分析与推进计划、
 [practical_applications](./practical_applications.md) 案例与定理对应。
 
 ---
@@ -440,7 +440,7 @@
 
 - [主索引](./README.md) - 完整的研究笔记索引
 - [工具使用指南](./TOOLS_GUIDE.md) - 研究工具详细指南
-- [术语表](./GLOSSARY.md) - 专业术语解释
+- [术语表](./10_glossary.md) - 专业术语解释
 
 ### 研究笔记
 >
@@ -454,9 +454,9 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [批判性分析与推进计划](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) - 阶段 1–3 完成总结
+- [批判性分析与推进计划](./10_formal_proof_critical_analysis_and_plan_2026_02.md) - 阶段 1–3 完成总结
 - [国际对标索引](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) - RustBelt、Aeneas、RustSEM 等
-- [形式化全模型入口](./FORMAL_FULL_MODEL_OVERVIEW.md) - 统一形式系统
+- [形式化全模型入口](./10_formal_full_model_overview.md) - 统一形式系统
 - [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md) - L2 级 ownership T2、borrow T1、type T3
 - [Coq 证明骨架](./coq_skeleton/README.md) - T-OW2 所有权唯一性
 - L3 实施指南 - Coq/Isabelle 补全路线（已归档）

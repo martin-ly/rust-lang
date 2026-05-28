@@ -40,7 +40,7 @@
 1. **结构透明**：实际目录与文件清单与 README/INDEX 一致
 2. **归档清晰**：已归档项（Aeneas、coq-of-rust、coq_skeleton）入口统一指向 archive
 3. **版本统一**：全目录元数据默认 Rust 1.93.1+ (Edition 2024)
-4. **单入口**：首次使用从 [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md) 或 [README](./README.md) 进入
+4. **单入口**：首次使用从 [00_ORGANIZATION_AND_NAVIGATION](./10_00_organization_and_navigation.md) 或 [README](./README.md) 进入
 
 ---
 
@@ -50,7 +50,7 @@
 
 ```text
 research_notes/
-├── 00_ORGANIZATION_AND_NAVIGATION.md   # 按目标导航（推荐首读）
+├── 10_00_organization_and_navigation.md   # 按目标导航（推荐首读）
 ├── 00_COMPREHENSIVE_SUMMARY.md         # 完整总结、知识地图、论证总览
 ├── README.md                           # 主入口、研究方向、规范
 ├── INDEX.md                            # 完整索引（按领域/主题）
@@ -71,9 +71,9 @@ research_notes/
 │   ├── 10_safe_decidable_mechanisms_and_formal_methods_plan.md
 │   ├── # 思维导图 / 矩阵 / 决策树（选列）
 │   ├── 10_ownership_concept_mindmap.md, 10_variance_concept_mindmap.md
-│   ├── 10_async_concept_mindmap.md, WORKFLOW_CONCEPT_MINDMAP.md, DISTRIBUTED_CONCEPT_MINDMAP.md
+│   ├── 10_async_concept_mindmap.md, WORKFLOW_CONCEPT_MINDMAP.md, 10_distributed_concept_mindmap.md
 │   ├── TYPE_SYSTEM_CONCEPT_MINDMAP.md, 10_memory_model_mindmap.md, ERROR_HANDLING_MINDMAP.md
-│   ├── CONCEPT_AXIOM_THEOREM_MATRIX.md, PROOF_COMPLETION_MATRIX.md, VERIFICATION_TOOLS_MATRIX.md
+│   ├── 10_concept_axiom_theorem_matrix.md, PROOF_COMPLETION_MATRIX.md, VERIFICATION_TOOLS_MATRIX.md
 │   ├── DESIGN_PATTERN_SELECTION_DECISION_TREE.md, WORKFLOW_ENGINE_DECISION_TREE.md
 │   └── …（其余见 formal_methods/README 与 INDEX）
 │
@@ -103,12 +103,12 @@ research_notes/
 │   └── README.md                       # 仅保留重定向说明
 │
 ├── # 根目录核心文档（选列）
-├── FORMAL_FULL_MODEL_OVERVIEW.md, CORE_THEOREMS_FULL_PROOFS.md, PROOF_INDEX.md
-├── FORMAL_LANGUAGE_AND_PROOFS.md, 10_authoritative_alignment_guide.md
-├── HIERARCHICAL_MAPPING_AND_SUMMARY.md, ARGUMENTATION_CHAIN_AND_FLOW.md
-├── RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md, RUST_193_COUNTEREXAMPLES_INDEX.md
+├── 10_formal_full_model_overview.md, CORE_THEOREMS_FULL_PROOFS.md, PROOF_INDEX.md
+├── 10_formal_language_and_proofs.md, 10_authoritative_alignment_guide.md
+├── HIERARCHICAL_MAPPING_AND_SUMMARY.md, 10_argumentation_chain_and_flow.md
+├── RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md, 10_rust_193_counterexamples_index.md
 ├── practical_applications.md, research_methodology.md
-├── CONTRIBUTING.md, QUALITY_CHECKLIST.md, TEMPLATE.md, CHANGELOG.md
+├── CONTRIBUTING.md, QUALITY_CHECKLIST.md, TEMPLATE.md, 10_changelog.md
 └── …（其余见 INDEX.md）
 ```
 
@@ -122,7 +122,7 @@ research_notes/
 
 | 原位置 | 归档位置 | 说明 |
 | :--- | :--- | :--- |
-| AENEAS_INTEGRATION_PLAN.md | [archive/deprecated/AENEAS_INTEGRATION_PLAN.md](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md) | Aeneas 对接计划 |
+| 10_aeneas_integration_plan.md | archive/deprecated/10_aeneas_integration_plan.md | Aeneas 对接计划 |
 | 10_coq_of_rust_integration_plan.md | archive/deprecated/10_coq_of_rust_integration_plan.md | coq-of-rust 对接计划 |
 | 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../archive/deprecated/README.md) | Coq/Isabelle 骨架说明 |
 | coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/README.md) | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](./coq_skeleton/README.md) 重定向 |
@@ -137,7 +137,7 @@ research_notes/
 
 | 文档 | 角色 | 何时用 |
 | :--- | :--- | :--- |
-| [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md) | 按目标选路径、三大支柱、层级 | 首次使用、不知道从哪看 |
+| [00_ORGANIZATION_AND_NAVIGATION](./10_00_organization_and_navigation.md) | 按目标选路径、三大支柱、层级 | 首次使用、不知道从哪看 |
 | [README](./README.md) | 主入口、研究方向、规范、目录树 | 总览、规范 |
 | [INDEX](./INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
 | [QUICK_FIND](./10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
@@ -154,7 +154,7 @@ research_notes/
 - **默认版本**：所有 research_notes 下文档元数据统一为 **Rust 1.93.1+ (Edition 2024)**（历史归档保留原版本）。
 - **权威引用**：releases.rs [1.93.0](https://releases.rs/docs/1.93.0/README.md)、
 - [Rust 1.93.1 公告](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/README.md)；
-- 详见 [00_ORGANIZATION_AND_NAVIGATION § 六](./00_ORGANIZATION_AND_NAVIGATION.md#六权威来源与版本约定)。
+- 详见 [00_ORGANIZATION_AND_NAVIGATION § 六](./10_00_organization_and_navigation.md#六权威来源与版本约定)。
 
 ---
 

@@ -180,7 +180,7 @@
 
 | 检查项 | 测试方法 | 状态 |
 | :--- | :--- | :--- |
-| 主索引 | 00_ORGANIZATION_AND_NAVIGATION.md | ✅ |
+| 主索引 | 10_00_organization_and_navigation.md | ✅ |
 | 证明索引 | PROOF_INDEX.md | ✅ |
 | 交叉引用 | CROSS_REFERENCE_INDEX.md | ✅ |
 | 快速入口 | 10_user_guide.md | ✅ |
@@ -253,8 +253,8 @@
 
 | 文档 | 状态 |
 | :--- | :--- |
-| FINAL_100_PERCENT_COMPLETION_REPORT.md | ✅ |
-| FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md | ✅ |
+| 10_final_100_percent_completion_report.md | ✅ |
+| 10_final_100_percent_completion_certification.md | ✅ |
 
 ---
 

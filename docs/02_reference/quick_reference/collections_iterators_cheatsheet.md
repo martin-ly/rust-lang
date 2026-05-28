@@ -1453,7 +1453,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 - [控制流与函数速查卡](./control_flow_functions_cheatsheet.md) - 循环与迭代器
 - [类型系统速查卡](./type_system.md) - 集合类型
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与集合
-- [字符串与格式化速查卡](./strings_formatting_cheatsheet.md) - 字符串集合
+- [字符串与格式化速查卡](./02_strings_formatting_cheatsheet.md) - 字符串集合
 
 ---
 

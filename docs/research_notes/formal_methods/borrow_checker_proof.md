@@ -1375,7 +1375,7 @@ graph TD
 | :--- | :--- | :--- |
 | Theorem 1 (T-BR1 数据竞争自由) | [c01 借用示例](../../../crates/c01_ownership_borrow_scope/examples/README.md)、[c05 Arc/Mutex](../../../crates/c05_threads/examples/README.md) | 借用规则、无数据竞争 |
 
-详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](../10_theorem_rust_example_mapping.md)。
 
 ---
 

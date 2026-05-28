@@ -17,8 +17,8 @@
 | 文件 | 大小 | 描述 |
 |------|------|------|
 | README.md | 1,006 B | 模块导航 |
-| singleton.md | 3,621 B | 单例模式 |
-| builder.md | 5,809 B | 构建者模式（含Type State） |
+| 10_singleton.md | 3,621 B | 单例模式 |
+| 10_builder.md | 5,809 B | 构建者模式（含Type State） |
 | factory.md | 4,835 B | 工厂模式 |
 
 **总计**: 4 个文件, ~15 KB
@@ -29,9 +29,9 @@
 | 文件 | 大小 | 描述 |
 |------|------|------|
 | README.md | 882 B | 模块导航 |
-| adapter.md | 3,934 B | 适配器模式 |
-| decorator.md | 4,803 B | 装饰者模式 |
-| proxy.md | 3,911 B | 代理模式 |
+| 10_adapter.md | 3,934 B | 适配器模式 |
+| 10_decorator.md | 4,803 B | 装饰者模式 |
+| 10_proxy.md | 3,911 B | 代理模式 |
 
 **总计**: 4 个文件, ~14 KB
 
@@ -40,9 +40,9 @@
 | 文件 | 大小 | 描述 |
 |------|------|------|
 | README.md | 930 B | 模块导航 |
-| observer.md | 4,582 B | 观察者模式 |
-| strategy.md | 4,670 B | 策略模式 |
-| command.md | 4,448 B | 命令模式 |
+| 10_observer.md | 4,582 B | 观察者模式 |
+| 10_strategy.md | 4,670 B | 策略模式 |
+| 10_command.md | 4,448 B | 命令模式 |
 
 **总计**: 4 个文件, ~15 KB
 

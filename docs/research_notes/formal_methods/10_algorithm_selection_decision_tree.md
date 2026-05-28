@@ -306,7 +306,7 @@ fn longest_increasing_subsequence(nums: &[i32]) -> i32 {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [C08 主索引](../../../crates/c08_algorithms/docs/tier_01_foundations/02_主索引导航.md)
-- [算法速查卡](../../02_reference/quick_reference/algorithms_cheatsheet.md)
+- [算法速查卡](../../02_reference/quick_reference/02_algorithms_cheatsheet.md)
 
 ---
 

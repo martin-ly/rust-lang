@@ -308,7 +308,7 @@
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
-| **E0382** | `let s2 = s1; println!("{}", s1);` | 使用已移动的值 | [TROUBLESHOOTING](../05_guides/TROUBLESHOOTING_GUIDE.md#1-所有权错误) | 规则 2 - 移动语义: move(x, y) -> Omega(x) = Moved |
+| **E0382** | `let s2 = s1; println!("{}", s1);` | 使用已移动的值 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#1-所有权错误) | 规则 2 - 移动语义: move(x, y) -> Omega(x) = Moved |
 | **E0383** | `let x = s.field; use(s);` | 部分移动 | [EDGE_CASES](../02_reference/02_edge_cases_and_special_cases.md) | 定理 2 - 所有权唯一性 |
 | **E0505** | `let r = &s; drop(s);` | 在借用时移动 | [C01 借用](../02_reference/quick_reference/ownership_cheatsheet.md) | 规则 3 - 借用有效性 |
 | **E0507** | `let x = *r;` (r 是借用) | 从借用内容移动 | [C01 借用检查器](../02_reference/quick_reference/ownership_cheatsheet.md) | 规则 1 - 借用规则 |
@@ -319,8 +319,8 @@
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
-| **E0499** | `let r1 = &mut s; let r2 = &mut s;` | 双重可变借用 | [TROUBLESHOOTING](../05_guides/TROUBLESHOOTING_GUIDE.md) | 规则 1 - 可变借用唯一性: forall b1, b2: type(b1) = &mut T -> b1 = b2 |
-| **E0502** | `let r1 = &mut s; let r2 = &s;` | 可变与不可变共存 | [TROUBLESHOOTING](../05_guides/TROUBLESHOOTING_GUIDE.md) | 规则 2 - 互斥借用 |
+| **E0499** | `let r1 = &mut s; let r2 = &mut s;` | 双重可变借用 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md) | 规则 1 - 可变借用唯一性: forall b1, b2: type(b1) = &mut T -> b1 = b2 |
+| **E0502** | `let r1 = &mut s; let r2 = &s;` | 可变与不可变共存 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md) | 规则 2 - 互斥借用 |
 | **E0503** | `use(x)` after `let y = x` | 使用已移动值 | [C01 所有权](../02_reference/quick_reference/ownership_cheatsheet.md) | 定理 2 - 所有权唯一性 |
 | **E0506** | `*r = value;` (while borrowed) | 给借用赋值 | [C01 借用](../02_reference/quick_reference/ownership_cheatsheet.md) | 规则 1 - 借用规则 |
 
@@ -330,7 +330,7 @@
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
-| **E0597** | `{ let s = "x"; r = &s; } use(r);` | 生命周期不足 | [TROUBLESHOOTING](../05_guides/TROUBLESHOOTING_GUIDE.md#2-生命周期错误) | 规则 3 - 借用有效性: Valid(b) <=> Lifetime(b) subset Scope(b) |
+| **E0597** | `{ let s = "x"; r = &s; } use(r);` | 生命周期不足 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#2-生命周期错误) | 规则 3 - 借用有效性: Valid(b) <=> Lifetime(b) subset Scope(b) |
 | **E0310** | `fn foo<T>(x: &T)` | 参数生命周期不足 | [C01 生命周期](../02_reference/quick_reference/ownership_cheatsheet.md) | 定理 LF-T2 - 引用有效性 |
 | **E0373** | `move \|_\| x` in closure | 闭包生命周期 | [C06 异步](../02_reference/quick_reference/async_patterns.md) | 捕获变量生命周期约束 |
 
@@ -340,7 +340,7 @@
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
-| **E0308** | `let x: i32 = "hello";` | 类型不匹配 | [TROUBLESHOOTING](../05_guides/TROUBLESHOOTING_GUIDE.md#3-类型不匹配) | 类型系统一致性: Gamma |- e : tau |
+| **E0308** | `let x: i32 = "hello";` | 类型不匹配 | [TROUBLESHOOTING](../05_guides/05_troubleshooting_guide.md#3-类型不匹配) | 类型系统一致性: Gamma |- e : tau |
 | **E0277** | `fn foo<T>(x: T) { println!("{}", x); }` | Trait Bound 不满足 | [C04 Trait](../02_reference/quick_reference/generics_cheatsheet.md) | Trait 约束: Gamma |- T: Trait |
 | **E0282** | `let x = Vec::new();` | 需要类型标注 | [C02 类型推断](../02_reference/quick_reference/type_system.md) | 类型推断规则 |
 | **E0283** | `x.into()` (ambiguous) | 需要更多类型信息 | [C04 泛型](../02_reference/quick_reference/generics_cheatsheet.md) | 类型推断冲突 |
@@ -353,7 +353,7 @@
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
 | **E0378** | `Rc::new(data)` across threads | Send/Sync 相关 | [C05 线程](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) | Send/Sync 约束 |
-| **E0381** | 跨 await 持锁 | 异步借用错误 | [C06 异步](../05_guides/TROUBLESHOOTING_GUIDE.md) | 借用有效性跨 await |
+| **E0381** | 跨 await 持锁 | 异步借用错误 | [C06 异步](../05_guides/05_troubleshooting_guide.md) | 借用有效性跨 await |
 
 ### 4.6 错误码快速修复索引
 >
@@ -500,7 +500,7 @@ Trait Bound      -> 1.4, E0277
 ```
 概念文档       -> 02_reference/quick_reference/
 形式化证明     -> research_notes/formal_methods/
-故障排查       -> 05_guides/TROUBLESHOOTING_GUIDE.md
+故障排查       -> 05_guides/05_troubleshooting_guide.md
 错误码详解     -> 02_reference/ERROR_CODE_MAPPING.md
 标准库分析     -> 02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md
 ```
@@ -530,7 +530,7 @@ Trait Bound      -> 1.4, E0277
 
 - [ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md) - 编译错误码详细映射
 - [02_standard_library_comprehensive_analysis_2025_12_25.md](../02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md) - 标准库全面分析
-- [TROUBLESHOOTING_GUIDE.md](../05_guides/TROUBLESHOOTING_GUIDE.md) - 故障排查指南
+- [05_troubleshooting_guide.md](../05_guides/05_troubleshooting_guide.md) - 故障排查指南
 - [C01 所有权与借用](../02_reference/quick_reference/ownership_cheatsheet.md) - 所有权核心概念
 - [C02 类型系统](../02_reference/quick_reference/type_system.md) - 类型系统详解
 - [C04 泛型与 Trait](../02_reference/quick_reference/generics_cheatsheet.md) - 泛型编程

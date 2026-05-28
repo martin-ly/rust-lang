@@ -199,7 +199,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 
 | 组合 | 说明 |
 | :--- | :--- |
-| 并发 + Observer | `mpsc` 或 `broadcast` 替代回调；见 [observer](../01_design_patterns_formal/03_behavioral/observer.md) |
+| 并发 + Observer | `mpsc` 或 `broadcast` 替代回调；见 [observer](../01_design_patterns_formal/03_behavioral/10_observer.md) |
 | 并发 + Flyweight | `Arc` 跨线程共享不可变；见 [flyweight](../01_design_patterns_formal/02_structural/10_flyweight.md) |
 | 并发 + Command | 任务队列化；`tx.send(Command::new(...))` |
 | 并发 + Mediator | 多组件通过 channel 协调 |

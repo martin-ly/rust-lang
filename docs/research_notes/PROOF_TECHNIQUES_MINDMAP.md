@@ -268,7 +268,7 @@ graph LR
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [验证工具对比矩阵](./VERIFICATION_TOOLS_MATRIX.md)
-- [验证工具选型决策树](./VERIFICATION_TOOLS_DECISION_TREE.md)
+- [验证工具选型决策树](VERIFICATION_TOOLS_DECISION_TREE.md)
 - [形式化方法概述](./formal_methods/README.md)
 
 ---

@@ -137,7 +137,7 @@
 | ownership_model 规则 1–3 | 归约规则：move、copy、drop |
 | borrow_checker_proof 规则 5–8 | 借用状态转换 |
 | type_system_foundations T1–T2 | 进展性、保持性可测试 |
-| [FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md) | 公理列表 → 语义规则 |
+| [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) | 公理列表 → 语义规则 |
 
 ---
 

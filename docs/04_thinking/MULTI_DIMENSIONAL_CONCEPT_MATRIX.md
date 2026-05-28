@@ -511,9 +511,9 @@
 - [验证工具对比矩阵](../research_notes/formal_methods/VERIFICATION_TOOLS_MATRIX.md) - Kani/Prusti/Miri 等工具对比
 - [全局统一系统化框架](../research_notes/UNIFIED_SYSTEMATIC_FRAMEWORK.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
 - [构造性语义与表达能力边界](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 操作/指称/公理语义、表达能力边界论证
-- [全面系统化梳理总览](../research_notes/COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪
+- [全面系统化梳理总览](../research_notes/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪
 - [形式化论证系统梳理指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射
-- [知识结构框架](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 完整知识结构体系
+- [知识结构框架](../07_project/07_knowledge_structure_framework.md) - 完整知识结构体系
 - [决策图网](./DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
 - [证明图网](./PROOF_GRAPH_NETWORK.md) - 形式化证明结构
 - [最佳实践指南](../05_guides/BEST_PRACTICES.md) - 开发最佳实践

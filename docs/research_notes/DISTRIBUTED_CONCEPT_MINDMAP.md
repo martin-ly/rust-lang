@@ -270,7 +270,7 @@ impl RateLimiter {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [分布式架构决策树](./DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md)
+- [分布式架构决策树](DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md)
 - [分布式模式矩阵](./formal_methods/10_distributed_patterns_matrix.md)
 - [软件设计理论 - 分布式](./software_design_theory/03_execution_models/05_distributed.md)
 

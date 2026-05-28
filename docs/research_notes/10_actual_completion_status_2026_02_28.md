@@ -164,7 +164,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- expressive_inexpressive_matrix.md ✅
+- 10_expressive_inexpressive_matrix.md ✅
 - safe_unsafe_matrix.md ✅
 - 10_supported_unsupported_matrix.md ✅
 
@@ -183,9 +183,9 @@
 | 10_variance_concept_mindmap.md | ✅ | 完整 |
 | 10_lifetime_concept_mindmap.md | ✅ | 完整 |
 | CONCURRENCY_CONCEPT_MINDMAP.md | ✅ | 完整 |
-| DISTRIBUTED_CONCEPT_MINDMAP.md | ✅ | 完整 |
+| 10_distributed_concept_mindmap.md | ✅ | 完整 |
 | WORKFLOW_CONCEPT_MINDMAP.md | ✅ | 完整 |
-| PROOF_TECHNIQUES_MINDMAP.md | ✅ | 完整 |
+| 10_proof_techniques_mindmap.md | ✅ | 完整 |
 | 10_async_concept_mindmap.md | ✅ | 完整 |
 | UNSAFE_CONCEPT_MINDMAP.md | ✅ | 完整 |
 | 10_generics_traits_mindmap.md | ✅ | 完整 |
@@ -201,11 +201,11 @@
 | 决策树 | 状态 | 评估 |
 | :--- | :--- | :--- |
 | 10_async_runtime_decision_tree.md | ✅ | 完整 |
-| DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md | ✅ | 完整 |
+| 10_distributed_architecture_decision_tree.md | ✅ | 完整 |
 | 10_error_handling_decision_tree.md | ✅ | 完整 |
 | 10_serialization_decision_tree.md | ✅ | 完整 |
 | TESTING_STRATEGY_DECISION_TREE.md | ✅ | 完整 |
-| VERIFICATION_TOOLS_DECISION_TREE.md | ✅ | 完整 |
+| 10_verification_tools_decision_tree.md | ✅ | 完整 |
 | WORKFLOW_ENGINE_DECISION_TREE.md | ✅ | 完整 |
 | DESIGN_PATTERN_SELECTION_DECISION_TREE.md | ✅ | 完整 |
 | 10_ownership_transfer_decision_tree.md | ✅ | 完整 |
@@ -217,7 +217,7 @@
 
 | 矩阵 | 状态 | 评估 |
 | :--- | :--- | :--- |
-| CONCEPT_AXIOM_THEOREM_MATRIX.md | ✅ | 完整 |
+| 10_concept_axiom_theorem_matrix.md | ✅ | 完整 |
 | PROOF_COMPLETION_MATRIX.md | ✅ | 完整 |
 | DESIGN_PATTERNS_MATRIX.md | ✅ | 完整 |
 | 10_distributed_patterns_matrix.md | ✅ | 完整 |

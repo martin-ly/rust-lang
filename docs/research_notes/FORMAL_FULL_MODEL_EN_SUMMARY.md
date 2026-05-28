@@ -6,7 +6,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **Source**: [FORMAL_FULL_MODEL_OVERVIEW.md](./FORMAL_FULL_MODEL_OVERVIEW.md) (Chinese)
+> **Source**: [10_formal_full_model_overview.md](./10_formal_full_model_overview.md) (Chinese)
 
 ---
 
@@ -115,7 +115,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md) — Inference rules, operational semantics, judgment forms, formal proof derivations (mathematical level; complements Coq skeletons)
+- [FORMAL_LANGUAGE_AND_PROOFS](./10_formal_language_and_proofs.md) — Inference rules, operational semantics, judgment forms, formal proof derivations (mathematical level; complements Coq skeletons)
 
 ## Related Documents
 >

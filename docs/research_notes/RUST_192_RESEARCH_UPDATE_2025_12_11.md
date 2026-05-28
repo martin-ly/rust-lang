@@ -413,7 +413,7 @@ fn api_stabilization_examples() {
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
-| 系统总结 | [SYSTEM_SUMMARY.md](./SYSTEM_SUMMARY.md) | 研究笔记系统总结 |
+| 系统总结 | [10_system_summary.md](./10_system_summary.md) | 研究笔记系统总结 |
 | 理论体系 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 理论体系架构 |
 | 证明索引 | [PROOF_INDEX.md](./PROOF_INDEX.md) | 形式化证明索引 |
 

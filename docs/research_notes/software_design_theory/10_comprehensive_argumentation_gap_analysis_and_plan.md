@@ -223,7 +223,7 @@ D1.*、D2.*、D3.* 有阶段性成果 ─→ D4.*
 | [03_execution_models](03_execution_models/README.md)、[05_distributed](03_execution_models/05_distributed.md) | D2 任务扩展分布式模式 |
 | [04_expressiveness_boundary](02_workflow_safe_complete_models/04_expressiveness_boundary.md) | D1.3、D3.3 增强判定规则 |
 | [04_compositional_engineering](04_compositional_engineering/README.md) | D1.2 增强模式组合定理 |
-| [CONTENT_ENHANCEMENT](../CONTENT_ENHANCEMENT.md) | 本计划为 L3/L4 深化延续 |
+| [CONTENT_ENHANCEMENT](../10_content_enhancement.md) | 本计划为 L3/L4 深化延续 |
 | FORMAT_AND_CONTENT_ALIGNMENT_PLAN | 新文档需符合元信息、格式规范 |
 
 ---

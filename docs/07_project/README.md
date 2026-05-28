@@ -137,7 +137,7 @@ fn main() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-- **综合总览**: [COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](../research_notes/COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) - 全局一致性、语义归纳、概念族谱
+- **综合总览**: [10_comprehensive_systematic_overview.md](../research_notes/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱
 - **证明系统**: [FORMAL_PROOF_SYSTEM_GUIDE.md](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) - 形式化证明系统指南
 - **权威对齐**: [10_authoritative_alignment_guide.md](../research_notes/10_authoritative_alignment_guide.md) - 权威来源对齐指南
 
@@ -147,20 +147,20 @@ fn main() {
 
 | 类别 | 文档 | 说明 |
 | :--- | :--- | :--- |
-| **知识结构** | KNOWLEDGE_STRUCTURE_FRAMEWORK.md 07_module_knowledge_structure_guide.md | 定义知识结构体系 模块知识结构补充指南 |
+| **知识结构** | 07_knowledge_structure_framework.md 07_module_knowledge_structure_guide.md | 定义知识结构体系 模块知识结构补充指南 |
 | **版本追踪** | [07_rust_release_tracking_checklist.md](./07_rust_release_tracking_checklist.md) (归档) 版本追踪文档 | 新版本发布追踪流程 各模块适配状态 |
 | **文档管理** | [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) 07_documentation_theme_organization_plan.md (归档) | 文档交叉引用指南 文档主题重组规划 |
-| **架构** | [PROJECT_ARCHITECTURE_GUIDE.md](./PROJECT_ARCHITECTURE_GUIDE.md) | 项目架构设计 |
+| **架构** | [07_project_architecture_guide.md](./07_project_architecture_guide.md) | 项目架构设计 |
 | **模板工具** | ONE_PAGE_SUMMARY_TEMPLATE.md | 一页纸总结模板 |
 
 ---
 
 ## 文档列表
 
-- [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识结构框架
+- [07_knowledge_structure_framework.md](./07_knowledge_structure_framework.md) - 知识结构框架
 - [07_module_knowledge_structure_guide.md](./07_module_knowledge_structure_guide.md) - 模块知识结构
 - [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) - 文档交叉引用
-- [PROJECT_ARCHITECTURE_GUIDE.md](./PROJECT_ARCHITECTURE_GUIDE.md) - 项目架构
+- [07_project_architecture_guide.md](./07_project_architecture_guide.md) - 项目架构
 - [07_rust_release_tracking_checklist.md](./07_rust_release_tracking_checklist.md) (归档) - 版本追踪
 - ARCHIVE_COMPLETION_REPORT.md - 归档完成报告
 

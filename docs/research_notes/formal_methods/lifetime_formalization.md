@@ -687,7 +687,7 @@ $$\forall r: \text{ref}(r) \land \text{lifetime}(r) = \ell \rightarrow \forall t
 | :--- | :--- | :--- |
 | LF-T1 (outlives)、LF-T2 (引用有效性) | [c01 借用示例](../../../crates/c01_ownership_borrow_scope/examples/README.md)、[c02 lifetimes_examples](../../../crates/c02_type_system/src/examples/lifetimes_examples.rs) | 生命周期约束、无悬垂引用 |
 
-详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](../10_theorem_rust_example_mapping.md)。
 
 ---
 

@@ -300,7 +300,7 @@ mod property_tests {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../../../research_notes/formal_methods/README.md](../../../research_notes/formal_methods/README.md) |
-| 形式化验证指南 | 完整验证流程 | [../../../research_notes/FORMAL_VERIFICATION_GUIDE.md](../../../research_notes/FORMAL_VERIFICATION_GUIDE.md) |
+| 形式化验证指南 | 完整验证流程 | [../../../research_notes/10_formal_verification_guide.md](../../../research_notes/10_formal_verification_guide.md) |
 | 证明系统指南 | 形式化证明方法 | [../../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md](../../../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) |
 | 所有权模型形式化 | 所有权系统数学定义 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
 | 类型系统形式化 | 类型理论数学定义 | [../../../research_notes/type_theory/type_system_foundations.md](../../../research_notes/type_theory/type_system_foundations.md) |
@@ -317,7 +317,7 @@ mod property_tests {
 | 证明索引 | 形式化证明集合 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 | 研究路线图 | 长期研究规划 | [../../../research_notes/RESEARCH_ROADMAP.md](../../../research_notes/RESEARCH_ROADMAP.md) |
 | 核心定理证明 | 完整证明文档 | [../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md](../../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
-| 形式化证明分析 | 证明分析与计划 | [../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md](../../../research_notes/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) |
+| 形式化证明分析 | 证明分析与计划 | [../../../research_notes/10_formal_proof_critical_analysis_and_plan_2026_02.md](../../../research_notes/10_formal_proof_critical_analysis_and_plan_2026_02.md) |
 | 最佳实践 | 工程最佳实践 | [../../../research_notes/BEST_PRACTICES.md](../../../research_notes/BEST_PRACTICES.md) |
 | 质量检查清单 | 研究笔记质量检查 | [../../../research_notes/QUALITY_CHECKLIST.md](../../../research_notes/QUALITY_CHECKLIST.md) |
 

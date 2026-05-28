@@ -229,7 +229,7 @@
 
 > **[来源: IEEE - Programming Language Standards]**
 
-**文件**: [testing_cheatsheet.md](./testing_cheatsheet.md)
+**文件**: [02_testing_cheatsheet.md](./02_testing_cheatsheet.md)
 
 **内容**:
 
@@ -303,7 +303,7 @@
 
 > **[来源: PLDI - Programming Language Design]**
 
-**文件**: [modules_cheatsheet.md](./modules_cheatsheet.md)
+**文件**: [02_modules_cheatsheet.md](./02_modules_cheatsheet.md)
 
 **内容**:
 
@@ -322,7 +322,7 @@
 
 > **[来源: Wikipedia - Memory Safety]**
 
-**文件**: [strings_formatting_cheatsheet.md](./strings_formatting_cheatsheet.md)
+**文件**: [02_strings_formatting_cheatsheet.md](./02_strings_formatting_cheatsheet.md)
 
 **内容**:
 
@@ -398,7 +398,7 @@
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-**文件**: [algorithms_cheatsheet.md](./algorithms_cheatsheet.md)
+**文件**: [02_algorithms_cheatsheet.md](./02_algorithms_cheatsheet.md)
 
 **内容**:
 

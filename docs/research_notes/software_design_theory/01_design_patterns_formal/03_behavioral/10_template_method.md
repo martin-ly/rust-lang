@@ -196,7 +196,7 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 >
 > **[来源: Rust Official Docs]**
 
-Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{TemplateMethod}) = \mathrm{Approx}$（无 OOP 继承）。
+Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/10_expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{TemplateMethod}) = \mathrm{Approx}$（无 OOP 继承）。
 
 **证明**：
 
@@ -333,9 +333,9 @@ impl DataImport for CsvImport {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Strategy](./strategy.md) | 同为算法定制；Template 为骨架，Strategy 为替换 |
-| [Factory Method](../01_creational/factory_method.md) | 工厂方法可为模板钩子 |
-| [Observer](./observer.md) | 钩子可触发观察者 |
+| [Strategy](./10_strategy.md) | 同为算法定制；Template 为骨架，Strategy 为替换 |
+| [Factory Method](../01_creational/10_factory_method.md) | 工厂方法可为模板钩子 |
+| [Observer](./10_observer.md) | 钩子可触发观察者 |
 
 ---
 
@@ -410,7 +410,7 @@ impl Algorithm for BadImpl {
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Template Method 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

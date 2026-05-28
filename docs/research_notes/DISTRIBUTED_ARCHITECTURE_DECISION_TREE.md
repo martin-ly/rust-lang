@@ -60,7 +60,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [分布式概念族谱](./DISTRIBUTED_CONCEPT_MINDMAP.md)
+- [分布式概念族谱](DISTRIBUTED_CONCEPT_MINDMAP.md)
 - [软件设计理论](./software_design_theory/README.md)
 
 ---

@@ -56,7 +56,7 @@
 | T-PIN1 | Pin不动性 | ✅ | ⚠️ | ⚠️ | P2 | 2026-04-06 |
 
 **图例**: ✅ 完成 | ⚠️ 部分 | ❌ 待开始
-**Rust示例**: 见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)
+**Rust示例**: 见 [THEOREM_RUST_EXAMPLE_MAPPING](../10_theorem_rust_example_mapping.md)
 
 ---
 

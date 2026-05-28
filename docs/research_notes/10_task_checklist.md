@@ -231,7 +231,7 @@
 
 - [x] 完成内存安全的形式化证明 ✅
 - [x] 完成所有权唯一性的证明 ✅
-- [x] 使用形式化工具验证（如 Coq）- 指南已就绪 ✅（[FORMAL_VERIFICATION_GUIDE.md](./FORMAL_VERIFICATION_GUIDE.md)）
+- [x] 使用形式化工具验证（如 Coq）- 指南已就绪 ✅（[10_formal_verification_guide.md](./10_formal_verification_guide.md)）
 - [x] 编写证明文档 ✅（[PROOF_INDEX.md](./PROOF_INDEX.md)）
 
 ---
@@ -283,7 +283,7 @@
 
 - [x] 完成数据竞争自由的证明 ✅
 - [x] 完成借用规则正确性的证明 ✅
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[FORMAL_VERIFICATION_GUIDE.md](./FORMAL_VERIFICATION_GUIDE.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](./10_formal_verification_guide.md)）
 - [x] 编写证明文档 ✅（[PROOF_INDEX.md](./PROOF_INDEX.md)）
 
 ---
@@ -321,7 +321,7 @@
 
 - [x] 完成引用有效性的形式化证明 ✅
 - [x] 完成生命周期推断算法的正确性证明 ✅
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[FORMAL_VERIFICATION_GUIDE.md](./FORMAL_VERIFICATION_GUIDE.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](./10_formal_verification_guide.md)）
 - [x] 编写证明文档 ✅（[PROOF_INDEX.md](./PROOF_INDEX.md)）
 
 ---
@@ -359,7 +359,7 @@
 
 - [x] 完成类型安全的形式化证明 ✅（进展性、保持性、类型安全）
 - [x] 完成类型推导算法的正确性证明 ✅（类型推导正确性、算法正确性）
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[FORMAL_VERIFICATION_GUIDE.md](./FORMAL_VERIFICATION_GUIDE.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](./10_formal_verification_guide.md)）
 - [x] 编写证明文档 ✅（[PROOF_INDEX.md](./PROOF_INDEX.md)）
 
 ---
@@ -401,7 +401,7 @@
 
 - [x] 完成并发安全的形式化证明 ✅
 - [x] 完成状态机正确性的证明 ✅
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[FORMAL_VERIFICATION_GUIDE.md](./FORMAL_VERIFICATION_GUIDE.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](./10_formal_verification_guide.md)）
 - [x] 编写证明文档 ✅
 
 ---
@@ -439,7 +439,7 @@
 
 - [x] 完成 Trait 系统的正确性证明 ✅
 - [x] 完成 Trait 对象语义的证明 ✅
-- [x] 使用形式化工具验证 - 指南已就绪 ✅（[FORMAL_VERIFICATION_GUIDE.md](./FORMAL_VERIFICATION_GUIDE.md)）
+- [x] 使用形式化工具验证 - 指南已就绪 ✅（[10_formal_verification_guide.md](./10_formal_verification_guide.md)）
 - [x] 编写证明文档 ✅
 
 ---
@@ -602,9 +602,9 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [研究笔记主索引](./README.md)
-- [研究进展跟踪](./PROGRESS_TRACKING.md)
+- [研究进展跟踪](./10_progress_tracking.md)
 - [研究路线图](./RESEARCH_ROADMAP.md)
-- [系统总结](./SYSTEM_SUMMARY.md)
+- [系统总结](./10_system_summary.md)
 
 ### 贡献和质量
 >

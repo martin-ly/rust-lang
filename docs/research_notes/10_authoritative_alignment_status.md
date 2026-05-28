@@ -103,13 +103,13 @@
 | 10.0 泛型 | generics_cheatsheet.md, type_system_foundations.md | ✅ 一致 | 项目添加了类型论 |
 | 10.2 Trait | trait_system_formalization.md | ✅ 一致 | 项目添加了形式化 |
 | 10.3 生命周期 | lifetime_formalization.md | ✅ 一致 | 项目添加了形式化 |
-| 11.0 测试 | testing_cheatsheet.md | ✅ 一致 | - |
+| 11.0 测试 | 02_testing_cheatsheet.md | ✅ 一致 | - |
 | 13.0 闭包 | control_flow_functions_cheatsheet.md | ✅ 一致 | - |
 | 13.2 迭代器 | collections_iterators_cheatsheet.md | ✅ 一致 | - |
 | 15.0 智能指针 | smart_pointers_cheatsheet.md | ✅ 一致 | - |
 | 16.0 并发 | threads_concurrency_cheatsheet.md | ✅ 一致 | 项目添加了形式化 |
 | 17.0 异步 | async_patterns.md, async_state_machine.md | ✅ 一致 | 项目添加了形式化 |
-| 19.0 高级特性 | ADVANCED_TOPICS_DEEP_DIVE.md | ✅ 一致 | - |
+| 19.0 高级特性 | 05_advanced_topics_deep_dive.md | ✅ 一致 | - |
 | 20.0 项目 | cargo_cheatsheet.md | ✅ 一致 | - |
 
 ### Rust Reference 对齐
@@ -120,7 +120,7 @@
 
 | 参考章节 | 对应项目文档 | 对齐状态 | 差异说明 |
 | :--- | :--- | :--- | :--- |
-| Items | modules_cheatsheet.md | ✅ 一致 | - |
+| Items | 02_modules_cheatsheet.md | ✅ 一致 | - |
 | Types | type_system.md, type_system_foundations.md | ✅ 一致 | 项目添加了形式化 |
 | Lifetimes | lifetime_formalization.md | ✅ 一致 | 项目添加了证明 |
 | Traits | trait_system_formalization.md | ✅ 一致 | 项目添加了形式化 |
@@ -137,7 +137,7 @@
 
 | 版本 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |
-| Rust 1.93.0 | 05_rust_1.93_vs_1.92_comparison.md, 07_rust_1.93_full_changelog.md | ✅ 100% |
+| Rust 1.93.0 | 05_rust_1.93_vs_1.92_comparison.md, 06_07_rust_1_93_full_changelog.md | ✅ 100% |
 | Rust 1.92.0 | 对应版本文档 | ✅ 100% |
 | Rust 1.91.0 | 04_rust_1.91_vs_1.90_comparison.md | ✅ 100% |
 | Edition 2024 | 00_rust_2024_edition_learning_impact.md | ✅ 100% |

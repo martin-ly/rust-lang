@@ -334,10 +334,10 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 模式 | 状态 | 交付物 |
 |:-----|:----:|:-------|
 | 责任链 | ❌ | `11-design-patterns/behavioral/01-chain-of-responsibility.md` |
-| 命令 | ❌ | `11-design-patterns/behavioral/02-command.md` |
+| 命令 | ❌ | `11-design-patterns/behavioral/02-10_command.md` |
 | 解释器 | ❌ | `11-design-patterns/behavioral/03-10_interpreter.md` |
 | 中介者 | ❌ | `11-design-patterns/behavioral/04-10_mediator.md` |
-| 备忘录 | ❌ | `11-design-patterns/behavioral/05-memento.md` |
+| 备忘录 | ❌ | `11-design-patterns/behavioral/05-10_memento.md` |
 | 访问者 | ❌ | `11-design-patterns/behavioral/06-10_visitor.md` |
 
 ### 2.4 Rust 特有模式

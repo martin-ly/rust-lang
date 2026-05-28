@@ -61,9 +61,9 @@
 | Ch 14. Cargo | C02/cargo_package_management/ | ✅ 已覆盖 | 100% |
 | Ch 15. 智能指针 | ownership_model.md Def 4.1-4.5 | ✅ 已覆盖 | 100% |
 | Ch 16. 并发 | C05/threads_concurrency/ | ✅ 已覆盖 | 100% |
-| Ch 17. 面向对象 | DESIGN_PATTERNS_USAGE_GUIDE.md | ✅ 已覆盖 | 100% |
+| Ch 17. 面向对象 | 05_design_patterns_usage_guide.md | ✅ 已覆盖 | 100% |
 | Ch 18. 模式匹配 | C03/pattern_matching/ | ✅ 已覆盖 | 100% |
-| Ch 19. 高级特性 | ADVANCED_TOPICS_DEEP_DIVE.md | ✅ 已覆盖 | 100% |
+| Ch 19. 高级特性 | 05_advanced_topics_deep_dive.md | ✅ 已覆盖 | 100% |
 | Ch 20. 项目实践 | PRODUCTION_PROJECT_EXAMPLES.md | ✅ 已覆盖 | 100% |
 | Ch 21. 闭包与函数 | C03/functional_features/ | ✅ 已覆盖 | 100% |
 

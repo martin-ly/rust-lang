@@ -451,7 +451,7 @@ coq-formalization/
 - [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md): "README.md..."
 - [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "README.md..."
 - [archive/README.md](archive/README.md): "README.md..."
-- [progress/FINAL_100_PERCENT_COMPLETION_REPORT.md](progress/FINAL_100_PERCENT_COMPLETION_REPORT.md): "README..."
+- [progress/10_final_100_percent_completion_report.md](100_PERCENT_COMPLETION_REPORT.md): "README..."
 
 **01-core-concepts/detailed-concepts/ownership-deep-dive.md** (referenced 4 times)
 

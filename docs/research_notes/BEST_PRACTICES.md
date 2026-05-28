@@ -109,7 +109,7 @@
 
 **引用**：[FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范、
 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) 论证体系五层、
-[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) 批判性分析。
+[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md) 批判性分析。
 
 ---
 
@@ -190,7 +190,7 @@ fn example_anti_pattern() {
 3. **补场景与反例**：添加 1–3 个典型使用场景；添加 1–2 个反例及规避策略。
 4. **补衔接**：在相关段落增加 `文档名` 链接至 formal_methods、type_theory、practical_applications。
 
-**逐文档自检**：按 [CONTENT_ENHANCEMENT](./CONTENT_ENHANCEMENT.md) 实质内容检查清单逐项核对；若任一项为空或仅占位，则需修复。
+**逐文档自检**：按 [CONTENT_ENHANCEMENT](./10_content_enhancement.md) 实质内容检查清单逐项核对；若任一项为空或仅占位，则需修复。
 见 [FAQ Q2.5](FAQ.md#q25-如何判断研究笔记是否有实质内容) 快速判断指引。
 
 ---

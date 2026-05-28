@@ -421,7 +421,7 @@ $$
 | :--- | :--- | :--- |
 | T-PIN1 (Pin 保证)、T1-T3 | [c06 async 示例](../../../crates/c06_async/examples/README.md) | Pin、自引用 Future、位置稳定 |
 
-详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](../10_theorem_rust_example_mapping.md)。
 
 ---
 

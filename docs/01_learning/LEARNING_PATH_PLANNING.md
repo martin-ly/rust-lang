@@ -232,7 +232,7 @@
 
 **推荐资源**:
 
-- [线程并发使用指南](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md)
+- [线程并发使用指南](../05_guides/05_threads_concurrency_usage_guide.md)
 - [异步编程使用指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)
 - [网络编程速查卡](../02_reference/quick_reference/02_network_programming_cheatsheet.md)
 - [Pin 与自引用结构形式化](../research_notes/formal_methods/pin_self_referential.md)
@@ -289,7 +289,7 @@
 
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 - [项目最佳实践指南](../05_guides/BEST_PRACTICES.md)
-- [设计模式使用指南](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md)
+- [设计模式使用指南](../05_guides/05_design_patterns_usage_guide.md)
 
 ---
 
@@ -332,9 +332,9 @@
 
 **推荐资源**:
 
-- [项目架构指南](../07_project/PROJECT_ARCHITECTURE_GUIDE.md)
+- [项目架构指南](../07_project/07_project_architecture_guide.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
-- [故障排查指南](../05_guides/TROUBLESHOOTING_GUIDE.md)
+- [故障排查指南](../05_guides/05_troubleshooting_guide.md)
 
 ---
 
@@ -749,7 +749,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 **推荐资源**:
 
 - [跨语言对比文档](../02_reference/02_cross_language_comparison.md)
-- [线程并发使用指南](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md)
+- [线程并发使用指南](../05_guides/05_threads_concurrency_usage_guide.md)
 - [异步编程使用指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)
 
 ---
@@ -838,7 +838,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 - [Rust 编译器开发指南](https://rustc-dev-guide.rust-lang.org/)
 - [Rustonomicon](https://doc.rust-lang.org/nomicon/) (unsafe 代码指南)
 - [形式化工程系统](../rust-formal-engineering-system/README.md)
-- [项目架构指南](../07_project/PROJECT_ARCHITECTURE_GUIDE.md)
+- [项目架构指南](../07_project/07_project_architecture_guide.md)
 
 ---
 
@@ -850,9 +850,9 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [项目架构指南](../07_project/PROJECT_ARCHITECTURE_GUIDE.md)
+- [项目架构指南](../07_project/07_project_architecture_guide.md)
 - [最佳实践指南](../05_guides/BEST_PRACTICES.md)
-- [故障排查指南](../05_guides/TROUBLESHOOTING_GUIDE.md)
+- [故障排查指南](../05_guides/05_troubleshooting_guide.md)
 - [快速参考卡片](../02_reference/quick_reference/README.md)
 
 ### 形式化研究（研究者路径）

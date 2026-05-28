@@ -141,7 +141,7 @@
 
 **形式化证明体系**（2026-02-14）:
 
-- 批判性分析与推进计划 → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
+- 批判性分析与推进计划 → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md)
 - 核心定理完整证明 → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)（L2）
 - Coq 证明骨架 → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
 
@@ -310,17 +310,17 @@
 - [速查卡快速参考](../02_reference/quick_reference/README.md) - 20 个速查卡（含 AI/ML、类型、所有权、并发、设计模式等）；与本研究笔记互为补充
 - [完整索引](./INDEX.md) - 所有研究笔记的详细索引
 - [软件设计理论](./software_design_theory/README.md) - 设计模式、23/43、执行模型、组合工程
-- [快速入门指南](./GETTING_STARTED.md) - 新用户入门指南
+- [快速入门指南](./10_getting_started.md) - 新用户入门指南
 - [常见问题解答](./FAQ.md) - 常见问题解答
 - [维护指南](./10_maintenance_guide.md) - 系统维护指南
 - [最佳实践](./BEST_PRACTICES.md) - 研究笔记最佳实践
-- [术语表](./GLOSSARY.md) - 专业术语解释
+- [术语表](./10_glossary.md) - 专业术语解释
 - [研究资源汇总](./10_resources.md) - 学术和工具资源
 - [系统集成指南](./SYSTEM_INTEGRATION.md) - 与形式化工程系统的集成
 - [研究笔记示例](./10_example.md) - 完整的研究笔记示例
 - [形式化方法索引](./formal_methods/README.md)
 - [类型理论索引](./type_theory/README.md)
-- [核心特性完整链](./CORE_FEATURES_FULL_CHAIN.md) - 13 项核心特性 Def→示例→论证→证明
+- [核心特性完整链](./10_core_features_full_chain.md) - 13 项核心特性 Def→示例→论证→证明
 - [特性精简模板](./10_feature_template.md) - 79 项非核心特性模板
 - [版本增量更新流程](./10_incremental_update_flow.md) - 1.94+ 发布后更新步骤
 - [实验研究索引](./experiments/README.md)

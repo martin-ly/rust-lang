@@ -498,7 +498,7 @@ Pin 使用场景决策树
 | 文档 | 用途 |
 | :--- | :--- |
 | [pin_self_referential](formal_methods/pin_self_referential.md) | Pin 形式化定义、定理、反例 |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳 |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射 |
 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 设计机制论证思维导图（§8） |

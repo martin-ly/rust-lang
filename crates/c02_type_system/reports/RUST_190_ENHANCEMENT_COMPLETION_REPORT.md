@@ -45,7 +45,6 @@
     - [长期（规划）](#长期规划)
   - [📞 反馈和建议](#-反馈和建议)
   - [🏆 总结](#-总结)
-  - [**最后更新**: 2025-10-19](#最后更新-2025-10-19)
 
 **报告日期**: 2025-10-19
 **项目**: c02_type_system
@@ -446,9 +445,6 @@ crates/c02_type_system/examples/
 
 *感谢您的关注！希望这份文档能帮助您更好地理解和使用 Rust 1.90 的类型系统特性！* 🦀
 
-**报告完成日期**: 2025-10-19
-**维护者**: Rust 学习社区
-**最后更新**: 2025-10-19
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

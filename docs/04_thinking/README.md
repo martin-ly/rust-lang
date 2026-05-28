@@ -87,7 +87,7 @@ fn verify_memory_safety() -> bool {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 证明索引 | 形式化证明索引 | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) |
-| 形式化语言与证明 | 形式化语言理论 | [../research_notes/FORMAL_LANGUAGE_AND_PROOFS.md](../research_notes/FORMAL_LANGUAGE_AND_PROOFS.md) |
+| 形式化语言与证明 | 形式化语言理论 | [../research_notes/10_formal_language_and_proofs.md](../research_notes/10_formal_language_and_proofs.md) |
 | 核心定理完整证明 | 完整形式化证明 | [../research_notes/CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) |
 | 设计机制论证 | 设计机制形式化论证 | [../research_notes/DESIGN_MECHANISM_RATIONALE.md](../research_notes/DESIGN_MECHANISM_RATIONALE.md) |
 

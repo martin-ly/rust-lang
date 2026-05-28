@@ -323,8 +323,8 @@ borrow_checker_proof
 | 模式 | 关系 |
 | :--- | :--- |
 | [Visitor](./10_visitor.md) | 遍历方式不同；Iterator 顺序，Visitor 深度优先 |
-| [Composite](../02_structural/composite.md) | 可对 Composite 实现 Iterator |
-| [Chain of Responsibility](./chain_of_responsibility.md) | 链式传递 vs 迭代消费 |
+| [Composite](../02_structural/10_composite.md) | 可对 Composite 实现 Iterator |
+| [Chain of Responsibility](./10_chain_of_responsibility.md) | 链式传递 vs 迭代消费 |
 
 ---
 
@@ -398,7 +398,7 @@ for x in v.iter() {
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Iterator 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

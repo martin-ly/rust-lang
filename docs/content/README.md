@@ -51,7 +51,7 @@ content/
 ├── ecosystem/                # 生态系统深度
 │   ├── README.md
 │   ├── web_frameworks/
-│   │   └── axum_deep_dive.md
+│   │   └── 10_axum_deep_dive.md
 │   ├── database/
 │   └── async_runtimes/
 ├── production/               # 生产实践
@@ -117,7 +117,7 @@ content/
 
 ### 生态系统
 
-- [Axum 深度解析](ecosystem/web_frameworks/axum_deep_dive.md)
+- [Axum 深度解析](ecosystem/web_frameworks/10_axum_deep_dive.md)
 
 ### 生产实践
 

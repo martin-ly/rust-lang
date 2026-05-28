@@ -86,7 +86,7 @@
 ├── 四大综合文档
 │   ├── COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md (知识梳理)
 │   ├── FINAL_EXECUTIVE_SUMMARY_V2.md (执行摘要)
-│   ├── FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md (完成认证)
+│   ├── 10_final_100_percent_completion_certification.md (完成认证)
 │   └── CONTENT_ASSOCIATION_ANALYSIS.md (关联分析)
 │
 ├── 四大桥梁文档
@@ -314,7 +314,7 @@
 | [概念卡片/借用](01-core-concepts/short-concepts/borrowing-concept-card.md) | 借用基础 | 15分钟 | 无 |
 | [概念卡片/生命周期](01-core-concepts/short-concepts/lifetime-concept-card.md) | 生命周期基础 | 15分钟 | 无 |
 | [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md) | 问题驱动学习 | 2小时 | 基础概念 |
-| [QUICK_REFERENCE_CARD.md](./QUICK_REFERENCE_CARD.md) | 速查卡片 | 20分钟 | 基础概念 |
+| [10_quick_reference_card.md](QUICK_REFERENCE_CARD.md) | 速查卡片 | 20分钟 | 基础概念 |
 | [全面FAQ](./COMPREHENSIVE_FAQ.md) | 常见问题 | 1小时 | 基础概念 |
 
 #### 🟡 进阶级 (有经验的开发者)
@@ -475,19 +475,19 @@
 └── THEORY_TO_PATTERN_BRIDGE.md (理论→模式)
 
 创建型:
-├── 11-design-patterns/creational/builder.md
+├── 11-design-patterns/creational/10_builder.md
 ├── 11-design-patterns/creational/factory.md
-└── 11-design-patterns/creational/singleton.md
+└── 11-design-patterns/creational/10_singleton.md
 
 结构型:
-├── 11-design-patterns/structural/adapter.md
-├── 11-design-patterns/structural/decorator.md
-└── 11-design-patterns/structural/proxy.md
+├── 11-design-patterns/structural/10_adapter.md
+├── 11-design-patterns/structural/10_decorator.md
+└── 11-design-patterns/structural/10_proxy.md
 
 行为型:
-├── 11-design-patterns/behavioral/command.md
-├── 11-design-patterns/behavioral/observer.md
-└── 11-design-patterns/behavioral/strategy.md
+├── 11-design-patterns/behavioral/10_command.md
+├── 11-design-patterns/behavioral/10_observer.md
+└── 11-design-patterns/behavioral/10_strategy.md
 
 Rust特有:
 ├── 11-design-patterns/rust-specific/newtype.md
@@ -553,7 +553,7 @@ Rust特有:
 时间        内容                                    文档
 ─────────────────────────────────────────────────────────
 3:00-3:30   基础练习                                exercises/ownership-basics.md
-3:30-4:00   速查卡片 + FAQ                          QUICK_REFERENCE_CARD.md + FAQ (前10问)
+3:30-4:00   速查卡片 + FAQ                          10_quick_reference_card.md + FAQ (前10问)
 ```
 
 **完成标志**:

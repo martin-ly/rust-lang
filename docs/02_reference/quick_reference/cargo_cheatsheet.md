@@ -1070,8 +1070,8 @@ $ cargo bloat --release
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [模块系统速查卡](./modules_cheatsheet.md) - Crate 和模块
-- [测试速查卡](./testing_cheatsheet.md) - Cargo 测试命令
+- [模块系统速查卡](./02_modules_cheatsheet.md) - Crate 和模块
+- [测试速查卡](./02_testing_cheatsheet.md) - Cargo 测试命令
 - [类型系统速查卡](./type_system.md) - 依赖类型管理
 - 反模式速查卡 - Cargo 配置反模式
 

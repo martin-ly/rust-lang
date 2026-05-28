@@ -340,7 +340,7 @@ let r = &s;
 | 泛型 | Rust Book 10 | quick_reference/generics_cheatsheet.md | ✅ | 一致 |
 | Trait | Rust Book 10.2 | quick_reference/type_system.md | ✅ | 一致 |
 | 生命周期 | Rust Book 10.3 | quick_reference/type_system.md | ✅ | 一致 |
-| 测试 | Rust Book 11 | quick_reference/testing_cheatsheet.md | ✅ | 一致 |
+| 测试 | Rust Book 11 | quick_reference/02_testing_cheatsheet.md | ✅ | 一致 |
 | 闭包 | Rust Book 13 | quick_reference/control_flow_functions_cheatsheet.md | ✅ | 一致 |
 | 迭代器 | Rust Book 13.2 | quick_reference/collections_iterators_cheatsheet.md | ✅ | 一致 |
 | 智能指针 | Rust Book 15 | quick_reference/smart_pointers_cheatsheet.md | ✅ | 一致 |

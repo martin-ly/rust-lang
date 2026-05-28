@@ -2011,7 +2011,7 @@ $$\text{Program} \in \text{Safe Rust} \rightarrow \text{SpatialSafe} \land \text
 | 规则 1-2、定理 6 (T-OW2) | [c01/moving02.rs](../../../crates/c01_ownership_borrow_scope/examples/moving02.rs)、rust_192_features_demo.rs | 所有权转移、唯一性 |
 | 定理 1 (T-OW3) | c01 各 moving/borrow 示例 | 无悬垂、无双重释放 |
 
-详见 [THEOREM_RUST_EXAMPLE_MAPPING](../THEOREM_RUST_EXAMPLE_MAPPING.md)。
+详见 [THEOREM_RUST_EXAMPLE_MAPPING](../10_theorem_rust_example_mapping.md)。
 
 ---
 

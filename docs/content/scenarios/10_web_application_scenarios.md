@@ -124,7 +124,7 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [Axum 深度解析](../ecosystem/web_frameworks/axum_deep_dive.md)
+- [Axum 深度解析](../ecosystem/web_frameworks/10_axum_deep_dive.md)
 
 ---
 

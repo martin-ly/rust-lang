@@ -942,7 +942,7 @@ codegen-units = 1
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
-| **相关指南** | [PERFORMANCE_TESTING_REPORT.md](./PERFORMANCE_TESTING_REPORT.md) |
+| **相关指南** | [05_performance_testing_report.md](./05_performance_testing_report.md) |
 | :--- | :--- |
 | :--- | :--- |
 | **外部资源** | [Rust性能手册](https://nnethercote.github.io/perf-book/) |
@@ -960,7 +960,7 @@ codegen-units = 1
 - [C05 线程与并发](../../crates/c05_threads/docs/00_MASTER_INDEX.md)
 - [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md)
 - [C08 算法](../../crates/c08_algorithms/docs/00_MASTER_INDEX.md)
-- [PERFORMANCE_TESTING_REPORT.md](./PERFORMANCE_TESTING_REPORT.md)
+- [05_performance_testing_report.md](./05_performance_testing_report.md)
 - [BEST_PRACTICES.md](./BEST_PRACTICES.md)
 
 ## 🆕 Rust 1.95+ 特性

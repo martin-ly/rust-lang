@@ -96,7 +96,7 @@
 | :--- | :--- | :--- |
 | **安全 vs 非安全** | 纯 Safe / 需 unsafe / 无法表达 | [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md) |
 | **支持 vs 不支持** | 原生支持 / 库支持 / 需 FFI | [supported_unsupported_matrix](05_boundary_system/10_supported_unsupported_matrix.md) |
-| **充分 vs 非充分表达** | 等价表达 / 近似表达 / 不可表达 | [expressive_inexpressive_matrix](05_boundary_system/expressive_inexpressive_matrix.md) |
+| **充分 vs 非充分表达** | 等价表达 / 近似表达 / 不可表达 | [expressive_inexpressive_matrix](05_boundary_system/10_expressive_inexpressive_matrix.md) |
 
 ### 2.2 边界原则
 
@@ -127,7 +127,7 @@
 
 - 五模型（同步、异步、并发、并行、分布式）✅
 - 可选扩展：Actor（actix）、CSP（channel）、事件溯源（02_complete_43 Event Sourcing）
-- **层次推进**：三阶段已完成；见 [CONTENT_ENHANCEMENT](../CONTENT_ENHANCEMENT.md) 层次推进计划
+- **层次推进**：三阶段已完成；见 [CONTENT_ENHANCEMENT](../10_content_enhancement.md) 层次推进计划
 
 ### 3.3 工作流模型扩展
 

@@ -477,7 +477,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - Rust 1.91 vs 1.90 对比分析（对齐官方发布说明）
 - [Rust 1.93 vs 1.92 对比分析](./05_rust_1.93_vs_1.92_comparison.md) 🆕
 - Rust 1.93 兼容性注意事项 🆕
-- [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md) 🆕
+- [Rust 1.93 完整变更清单](./06_07_rust_1_93_full_changelog.md) 🆕
 - [Rust 版本演进链 1.89–1.93](../archive/2026_05_historical_docs/08_rust_version_evolution_1.89_to_1.93.md)（已归档）
 - [Rust 1.93 兼容性深度解析](./06_09_rust_1_93_compatibility_deep_dive.md) 🆕
 - [Rust 1.89→1.93 累积特性总览](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md)（已归档）

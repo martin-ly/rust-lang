@@ -173,7 +173,7 @@
 
 | 文档 | 内容 | 大小 |
 |------|------|------|
-| `QUICK_REFERENCE_CARD.md` | 速查卡 | ~9KB |
+| `10_quick_reference_card.md` | 速查卡 | ~9KB |
 | `10_toolchain_setup_guide.md` | 工具链配置完整指南 | ~18KB |
 | `TOOLS_CONFIGURATION_GUIDE.md` | 工具配置详解 | ~6KB |
 | `10_safety_critical_checklists.md` | 开发检查表(400+项) | ~10KB |

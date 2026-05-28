@@ -348,8 +348,8 @@ Axiom BR2 (委托借用)
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Adapter](./adapter.md) | Bridge 解耦；Adapter 适配已有接口 |
-| [Strategy](../03_behavioral/strategy.md) | 实现可视为策略 |
+| [Adapter](./10_adapter.md) | Bridge 解耦；Adapter 适配已有接口 |
+| [Strategy](../03_behavioral/10_strategy.md) | 实现可视为策略 |
 | [Abstract Factory](../01_creational/10_abstract_factory.md) | 工厂可创建抽象+实现组合 |
 
 ---
@@ -427,7 +427,7 @@ struct BadCircle {
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Bridge 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

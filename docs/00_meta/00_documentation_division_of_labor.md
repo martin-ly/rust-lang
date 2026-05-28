@@ -87,11 +87,11 @@
 **当前专题清单**:
 
 - `ASYNC_PROGRAMMING_USAGE_GUIDE.md` (C06)
-- `THREADS_CONCURRENCY_USAGE_GUIDE.md` (C05)
-- `DESIGN_PATTERNS_USAGE_GUIDE.md` (C09)
-- `MACRO_SYSTEM_USAGE_GUIDE.md` (C11)
-- `WASM_USAGE_GUIDE.md` (C12)
-- `EMBEDDED_RUST_GUIDE.md` (C13)
+- `05_threads_concurrency_usage_guide.md` (C05)
+- `05_design_patterns_usage_guide.md` (C09)
+- `05_macro_system_usage_guide.md` (C11)
+- `05_wasm_usage_guide.md` (C12)
+- `05_embedded_rust_guide.md` (C13)
 - `UNSAFE_RUST_GUIDE.md` (C01/C07)
 - `PERFORMANCE_TUNING_GUIDE.md` (C08)
 - `05_type_system_usage_guide.md` (C02) ⬅️ **待创建**

@@ -309,7 +309,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [CONCEPT_AXIOM_THEOREM_MATRIX](./CONCEPT_AXIOM_THEOREM_MATRIX.md) - 概念-公理-定理映射
+- [CONCEPT_AXIOM_THEOREM_MATRIX](./10_concept_axiom_theorem_matrix.md) - 概念-公理-定理映射
 - [PROOF_COMPLETION_MATRIX](./PROOF_COMPLETION_MATRIX.md) - 证明完成度矩阵
 - [type_system_foundations](../type_theory/type_system_foundations.md) - 类型系统基础
 - [ownership_model](./ownership_model.md) - 所有权模型

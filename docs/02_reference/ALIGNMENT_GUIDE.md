@@ -14,7 +14,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **文档定位**: 全面覆盖 Rust 中「对齐」相关的各类知识
-> **关联**: [type_system.md](./quick_reference/type_system.md) | [strings_formatting_cheatsheet.md](./quick_reference/strings_formatting_cheatsheet.md)
+> **关联**: [type_system.md](./quick_reference/type_system.md) | [02_strings_formatting_cheatsheet.md](./quick_reference/02_strings_formatting_cheatsheet.md)
 
 ---
 
@@ -282,7 +282,7 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-输出文本的左右/居中排版，详见 [strings_formatting_cheatsheet.md](./quick_reference/strings_formatting_cheatsheet.md#对齐和填充)。
+输出文本的左右/居中排版，详见 [02_strings_formatting_cheatsheet.md](./quick_reference/02_strings_formatting_cheatsheet.md#对齐和填充)。
 
 ```rust
 let x = 42;
@@ -448,7 +448,7 @@ struct CacheLinePadded {
 | 内存安全参考 | [c01/tier_03/08_内存安全参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/08_内存安全参考.md) |
 | 缓存行对齐 | [c05/02_系统编程优化](../../crates/c05_threads/docs/tier_04_advanced/02_系统编程优化.md#51-缓存行对齐) |
 | 无锁编程 | [c05/04_lock_free_programming](../../crates/c05_threads/docs/04_lock_free_programming.md) |
-| 格式化对齐 | [strings_formatting_cheatsheet](./quick_reference/strings_formatting_cheatsheet.md) |
+| 格式化对齐 | [strings_formatting_cheatsheet](./quick_reference/02_strings_formatting_cheatsheet.md) |
 
 ### 代码示例
 >
