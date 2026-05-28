@@ -132,7 +132,7 @@
 | 类型理论 | `type_theory/*.md` | 组合法则细化 |
 | 设计理论 | `software_design_theory/**/*.md` | 完整证明 |
 | 证明骨架 | `coq_skeleton/*.v` | 证明补全 |
-| 框架文档 | `UNIFIED_SYSTEMATIC_FRAMEWORK.md` | 表征更新 |
+| 框架文档 | `10_unified_systematic_framework.md` | 表征更新 |
 
 ---
 
@@ -335,8 +335,8 @@ Week 21-24: 国际对标
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 顶层框架 |
-| [UNIFIED_SYSTEMATIC_FRAMEWORK](./UNIFIED_SYSTEMATIC_FRAMEWORK.md) | 统一索引 |
+| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | 顶层框架 |
+| [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 统一索引 |
 | [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | 核心定理L2证明 |
 | [PROOF_INDEX](./PROOF_INDEX.md) | 证明索引 |
 

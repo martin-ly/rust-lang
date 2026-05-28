@@ -193,7 +193,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文件**: [threads_concurrency_cheatsheet.md](./threads_concurrency_cheatsheet.md)
+**文件**: [02_threads_concurrency_cheatsheet.md](./02_threads_concurrency_cheatsheet.md)
 
 **内容**:
 
@@ -266,7 +266,7 @@
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-**文件**: [collections_iterators_cheatsheet.md](./collections_iterators_cheatsheet.md)
+**文件**: [02_collections_iterators_cheatsheet.md](./02_collections_iterators_cheatsheet.md)
 
 **内容**:
 
@@ -340,7 +340,7 @@
 
 > **[来源: Wikipedia - Type System]**
 
-**文件**: [cargo_cheatsheet.md](./cargo_cheatsheet.md)
+**文件**: [02_cargo_cheatsheet.md](./02_cargo_cheatsheet.md)
 
 **内容**:
 

@@ -51,7 +51,7 @@
 ```text
 research_notes/
 ├── 10_00_organization_and_navigation.md   # 按目标导航（推荐首读）
-├── 00_COMPREHENSIVE_SUMMARY.md         # 完整总结、知识地图、论证总览
+├── 10_00_comprehensive_summary.md         # 完整总结、知识地图、论证总览
 ├── README.md                           # 主入口、研究方向、规范
 ├── INDEX.md                            # 完整索引（按领域/主题）
 ├── 10_quick_find.md                       # 按关键词/领域/目标查找
@@ -71,9 +71,9 @@ research_notes/
 │   ├── 10_safe_decidable_mechanisms_and_formal_methods_plan.md
 │   ├── # 思维导图 / 矩阵 / 决策树（选列）
 │   ├── 10_ownership_concept_mindmap.md, 10_variance_concept_mindmap.md
-│   ├── 10_async_concept_mindmap.md, WORKFLOW_CONCEPT_MINDMAP.md, 10_distributed_concept_mindmap.md
+│   ├── 10_async_concept_mindmap.md, 10_workflow_concept_mindmap.md, 10_distributed_concept_mindmap.md
 │   ├── TYPE_SYSTEM_CONCEPT_MINDMAP.md, 10_memory_model_mindmap.md, ERROR_HANDLING_MINDMAP.md
-│   ├── 10_concept_axiom_theorem_matrix.md, PROOF_COMPLETION_MATRIX.md, VERIFICATION_TOOLS_MATRIX.md
+│   ├── 10_concept_axiom_theorem_matrix.md, PROOF_COMPLETION_MATRIX.md, 10_verification_tools_matrix.md
 │   ├── DESIGN_PATTERN_SELECTION_DECISION_TREE.md, WORKFLOW_ENGINE_DECISION_TREE.md
 │   └── …（其余见 formal_methods/README 与 INDEX）
 │
@@ -81,7 +81,7 @@ research_notes/
 │   ├── README.md, 00_completeness_gaps.md
 │   ├── type_system_foundations.md, trait_system_formalization.md
 │   ├── lifetime_formalization.md, advanced_types.md, variance_theory.md
-│   └── construction_capability.md
+│   └── 10_construction_capability.md
 │
 ├── software_design_theory/             # 设计模式、工作流、执行模型、组合、边界
 │   ├── 00_MASTER_INDEX.md
@@ -97,7 +97,7 @@ research_notes/
 │   ├── README.md
 │   ├── performance_benchmarks.md, memory_analysis.md
 │   ├── compiler_optimizations.md, concurrency_performance.md
-│   └── macro_expansion_performance.md
+│   └── 10_macro_expansion_performance.md
 │
 ├── coq_skeleton/                       # ⚠️ 重定向：内容已迁至 archive/deprecated/coq_skeleton/
 │   └── README.md                       # 仅保留重定向说明
@@ -105,9 +105,9 @@ research_notes/
 ├── # 根目录核心文档（选列）
 ├── 10_formal_full_model_overview.md, CORE_THEOREMS_FULL_PROOFS.md, PROOF_INDEX.md
 ├── 10_formal_language_and_proofs.md, 10_authoritative_alignment_guide.md
-├── HIERARCHICAL_MAPPING_AND_SUMMARY.md, 10_argumentation_chain_and_flow.md
-├── RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md, 10_rust_193_counterexamples_index.md
-├── practical_applications.md, research_methodology.md
+├── 10_hierarchical_mapping_and_summary.md, 10_argumentation_chain_and_flow.md
+├── 10_rust_193_language_features_comprehensive_analysis.md, 10_rust_193_counterexamples_index.md
+├── 10_practical_applications.md, research_methodology.md
 ├── CONTRIBUTING.md, QUALITY_CHECKLIST.md, TEMPLATE.md, 10_changelog.md
 └── …（其余见 INDEX.md）
 ```
@@ -142,7 +142,7 @@ research_notes/
 | [INDEX](./INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
 | [QUICK_FIND](./10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
 | [QUICK_REFERENCE](./QUICK_REFERENCE.md) | 按主题快速参考 | 按主题查 |
-| [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
 | 本文件 | 结构梳理、归档约定、版本 | 维护与一致性检查 |
 
 ---

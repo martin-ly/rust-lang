@@ -211,7 +211,7 @@ Mediator 为纯 Safe；`Vec<Box<dyn Fn>>` 或 channel 路由，无 `unsafe`。
 3. 回调：`Box<dyn Fn>` Safe trait 对象
 4. 无 `unsafe` 块
 
-由 ME-T1、ME-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+由 ME-T1、ME-T2 及 [safe_unsafe_matrix](../../05_boundary_system/10_safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 
@@ -458,7 +458,7 @@ graph LR
 | 场景 | ✅ | 典型场景、完整示例 |
 | 反例 | ✅ | 同事直接引用 |
 | 衔接 | ✅ | channel、Send/Sync、CE-T2 |
-| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
 
 ---
 

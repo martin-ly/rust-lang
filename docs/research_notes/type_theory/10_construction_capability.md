@@ -248,8 +248,8 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 | [type_system_foundations](./type_system_foundations.md) | 类型系统基础、类型安全定理 |
 | [trait_system_formalization](./trait_system_formalization.md) | Trait、泛型、impl/dyn |
 | [advanced_types](./advanced_types.md) | GAT、const 泛型 |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 92 项特性与类型族对应 |
-| [UNIFIED_SYSTEMATIC_FRAMEWORK](../UNIFIED_SYSTEMATIC_FRAMEWORK.md) | 全局矩阵与决策树索引 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性与类型族对应 |
+| [UNIFIED_SYSTEMATIC_FRAMEWORK](../10_unified_systematic_framework.md) | 全局矩阵与决策树索引 |
 
 ---
 

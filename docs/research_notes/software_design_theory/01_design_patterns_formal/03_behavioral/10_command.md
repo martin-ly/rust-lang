@@ -196,7 +196,7 @@ Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。
 3. `Box<dyn Fn()>`：Safe trait 对象
 4. 无 `unsafe` 块
 
-由 CM-T1、CM-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+由 CM-T1、CM-T2 及 [safe_unsafe_matrix](../../05_boundary_system/10_safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 
@@ -532,7 +532,7 @@ graph LR
 | 场景 | ✅ | 典型场景、完整示例 |
 | 反例 | ✅ | 命令副作用不可逆 |
 | 衔接 | ✅ | ownership、CE-T2、Send |
-| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
 
 ---
 

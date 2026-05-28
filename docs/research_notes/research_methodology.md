@@ -368,7 +368,7 @@ Qed.
 - **案例选择**：有公开代码、文档或论文；能对应到形式化/类型/实验中的至少一类问题。
 - **数据**：代码片段、性能数据、 issue/PR、社区讨论。
 - **模式**：归纳「所有权/借用/并发/异步」等在项目中的用法与坑点。
-- **详见**：[practical_applications.md](./practical_applications.md) 的「案例报告模板」与「案例快速索引」。
+- **详见**：[10_practical_applications.md](./10_practical_applications.md) 的「案例报告模板」与「案例快速索引」。
 
 ### 4.1 理论研究方法要点
 
@@ -476,7 +476,7 @@ Qed.
 - **可重复性**：环境、命令、版本可复现；实验类需「数据收集执行指南」+「结果分析模板」。
 - **逻辑一致**：形式化研究中的定义、定理、证明与代码示例一致；类型/借用规则与实现对应。
 - **可验证**：形式化可用 Coq/Lean/Prusti 等验证；实验可用 `cargo bench`/`cargo test`/Valgrind 等复现。
-- **交叉引用**：与 [formal_methods](./formal_methods/README.md)、[type_theory](./type_theory/README.md)、[experiments](./experiments/README.md)、[practical_applications](./practical_applications.md) 的关联明确。
+- **交叉引用**：与 [formal_methods](./formal_methods/README.md)、[type_theory](./type_theory/README.md)、[experiments](./experiments/README.md)、[practical_applications](./10_practical_applications.md) 的关联明确。
 - **时效性**：注明 Rust 版本（如 1.93.1+）；若依赖未稳定特性，需标出。
 
 ### 研究模板
@@ -504,7 +504,7 @@ Qed.
 - [memory_analysis](./experiments/memory_analysis.md)、
 - [compiler_optimizations](./experiments/compiler_optimizations.md)、
 - [concurrency_performance](./experiments/concurrency_performance.md)、
-- [macro_expansion_performance](./experiments/macro_expansion_performance.md) 的「数据收集执行指南」即工具在具体研究中的集成方式；
+- [macro_expansion_performance](./experiments/10_macro_expansion_performance.md) 的「数据收集执行指南」即工具在具体研究中的集成方式；
 - 可统一用 `cargo bench`、`cargo bloat`、`cargo expand`、`time cargo build`、Valgrind/Miri 等。
 - **与形式化**：Prusti、Creusot、Kani 的用法见各形式化文档的「工具验证」；Coq/Lean 示例见「1.1 形式化研究方法详解」。
 
@@ -516,7 +516,7 @@ Qed.
 - **Criterion**：`cargo bench`、`--save-baseline`、`BenchmarkId` 区分维度；结果见 `target/criterion/`。
 - **Valgrind**：`--leak-check=full --show-leak-kinds=all`；配合 `--error-limit=no` 做回归。
 - **Miri**：`cargo miri test`；`-Zmiri-tag-raw-pointers` 等见 Miri 文档。
-- **cargo expand / bloat**：宏展开与二进制体积分析；见 [macro_expansion_performance](./experiments/macro_expansion_performance.md)。
+- **cargo expand / bloat**：宏展开与二进制体积分析；见 [macro_expansion_performance](./experiments/10_macro_expansion_performance.md)。
 
 ### 案例研究索引
 >
@@ -526,8 +526,8 @@ Qed.
 | :--- | :--- | :--- |
 | 形式化 | [ownership_model](./formal_methods/ownership_model.md), [borrow_checker_proof](./formal_methods/borrow_checker_proof.md), [async_state_machine](./formal_methods/async_state_machine.md), [lifetime_formalization](./formal_methods/lifetime_formalization.md), [pin_self_referential](./formal_methods/pin_self_referential.md) | 形式化方法 + 证明/定理 + 系统集成 |
 | 类型理论 | [type_system_foundations](./type_theory/type_system_foundations.md), [trait_system_formalization](./type_theory/trait_system_formalization.md), [lifetime_formalization](./type_theory/lifetime_formalization.md), [advanced_types](./type_theory/advanced_types.md), [variance_theory](./type_theory/variance_theory.md) | 类型、Trait、生命周期、型变 |
-| 实验 | [performance_benchmarks](./experiments/performance_benchmarks.md), [memory_analysis](./experiments/memory_analysis.md), [compiler_optimizations](./experiments/compiler_optimizations.md), [concurrency_performance](./experiments/concurrency_performance.md), [macro_expansion_performance](./experiments/macro_expansion_performance.md) | 数据收集指南 + 结果分析模板 |
-| 实证 | [practical_applications](./practical_applications.md) | 案例报告模板 + 案例快速索引 + 最佳实践 |
+| 实验 | [performance_benchmarks](./experiments/performance_benchmarks.md), [memory_analysis](./experiments/memory_analysis.md), [compiler_optimizations](./experiments/compiler_optimizations.md), [concurrency_performance](./experiments/concurrency_performance.md), [macro_expansion_performance](./experiments/10_macro_expansion_performance.md) | 数据收集指南 + 结果分析模板 |
+| 实证 | [practical_applications](./10_practical_applications.md) | 案例报告模板 + 案例快速索引 + 最佳实践 |
 
 ---
 

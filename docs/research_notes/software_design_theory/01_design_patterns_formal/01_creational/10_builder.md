@@ -231,7 +231,7 @@ Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe
 3. 类型状态：PhantomData 标记，零运行时开销
 4. 无 `unsafe` 块：整个 Builder 实现无需 unsafe
 
-由 B-T1、B-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+由 B-T1、B-T2 及 [safe_unsafe_matrix](../../05_boundary_system/10_safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 

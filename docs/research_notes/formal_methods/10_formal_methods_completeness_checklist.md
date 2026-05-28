@@ -58,7 +58,7 @@
 - **解释论证**：设计动机、为何可判定、与 FLS/RustBelt 等权威对应（见 README 国际权威对标）。
 - **形式证明**：定理编号 + 证明思路或完整证明；与 [PROOF_INDEX](../PROOF_INDEX.md) 衔接。
 - **反例**：至少一例违反导致编译错误或 UB；可集中见 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
-- **思维表征四类**：各篇末尾「相关思维表征」表含思维导图、概念多维矩阵、决策树、推理证明树四类入口；见 [HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) §3.1。
+- **思维表征四类**：各篇末尾「相关思维表征」表含思维导图、概念多维矩阵、决策树、推理证明树四类入口；见 [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) §3.1。
 
 ---
 

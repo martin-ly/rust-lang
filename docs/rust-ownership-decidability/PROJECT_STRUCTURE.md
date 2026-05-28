@@ -47,7 +47,7 @@
 
 ```
 📄 README.md                          # 主入口文档
-📄 PROJECT_STRUCTURE.md               # 本文件 - 项目结构说明
+📄 10_project_structure.md               # 本文件 - 项目结构说明
 ```
 
 ### 1. 基础概念 (01-core-concepts/)

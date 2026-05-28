@@ -69,7 +69,7 @@
 
 - **FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md** - 缺失诊断与补充方案
 - **UNIFIED_THEORETICAL_FRAMEWORK.md** - 统一理论框架
-- **THEOREM_DEPENDENCY_GRAPH.md** - 定理依赖网络图
+- **THEOREM_10_dependency_graph.md** - 定理依赖网络图
 
 ### 2. 关键证明补充
 
@@ -125,7 +125,7 @@
 ├── 证明义务分配
 └── 证明策略对应
 
-文档: THEOREM_DEPENDENCY_GRAPH.md
+文档: THEOREM_10_dependency_graph.md
 ```
 
 ### 层次 4: 理论-实践映射 (已建立)
@@ -364,7 +364,7 @@ admit: 多个
     └── 元引理 (连接层)
 
 联系: 清晰的依赖图
-    ├── THEOREM_DEPENDENCY_GRAPH.md
+    ├── THEOREM_10_dependency_graph.md
     └── 可视化依赖关系
 
 admit: 明确的清单

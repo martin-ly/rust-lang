@@ -34,9 +34,9 @@ rust-lang/
 docs/
 ├── 00_master_index.md                  # 主索引
 ├── ARCHITECTURE.md                      # 架构文档
-├── PROJECT_STRUCTURE.md                 # 本文件
+├── 10_project_structure.md                 # 本文件
 ├── 10_api_guide.md                         # API 指南
-├── DEPENDENCY_GRAPH.md                  # 依赖图
+├── 10_dependency_graph.md                  # 依赖图
 ├── 10_2026_rust_ecosystem_comprehensive_review_with_citations.md
 ├── 10_authoritative_sources_and_citations.md
 ├── 10_migration_guide_2026.md
@@ -269,7 +269,7 @@ integration_tests   # 集成测试
 
 - ARCHITECTURE.md - 架构总览
 - 10_api_guide.md - API 使用指南
-- DEPENDENCY_GRAPH.md - 依赖关系
+- 10_dependency_graph.md - 依赖关系
 - ../CONTRIBUTING.md - 贡献指南
 
 ---

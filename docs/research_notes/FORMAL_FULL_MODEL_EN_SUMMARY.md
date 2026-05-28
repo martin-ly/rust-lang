@@ -123,7 +123,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 - [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) — Full proofs for T-OW2, T-BR1, T-TY3 (L2)
 - [PROOF_INDEX](./PROOF_INDEX.md) — 105+ proof index
-- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) — International alignment
+- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md) — International alignment
 
 ---
 

@@ -215,7 +215,7 @@ $
 >
 > **[来源: Rust Official Docs]**
 
-**详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../10_formal_proof_critical_analysis_and_plan_2026_02.md)
+**详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../10_international_formal_verification_index.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../10_formal_proof_critical_analysis_and_plan_2026_02.md)
 
 | 缺口类型 | 说明 | 对标成果 |
 | :--- | :--- | :--- |
@@ -233,7 +233,7 @@ $
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) — 92 项特性；formal_methods 衔接
+- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) — 92 项特性；formal_methods 衔接
 - [ARGUMENTATION_GAP_INDEX](../10_argumentation_gap_index.md) — 论证缺口追踪
 - [type_theory/00_completeness_gaps](../../research_notes/type_theory/00_completeness_gaps.md) — 类型理论缺口（可交叉引用）
 

@@ -79,7 +79,7 @@
 |------|---------|------|---------|
 | **10_proof_strategies.md** | 研究者/贡献者 | 证明策略详解 | 2-3 小时 |
 | **UNIFIED_THEORETICAL_FRAMEWORK.md** | 研究者 | 五层架构框架 | 2 小时 |
-| **THEOREM_DEPENDENCY_GRAPH.md** | 研究者 | 定理依赖网络 | 1 小时 |
+| **THEOREM_10_dependency_graph.md** | 研究者 | 定理依赖网络 | 1 小时 |
 
 ---
 
@@ -179,7 +179,7 @@
    - 第 2 章：特定定理的证明策略
    - 第 3 章：完成 admit 的实用指南
 
-2. THEOREM_DEPENDENCY_GRAPH.md
+2. THEOREM_10_dependency_graph.md
    - 理解定理间的依赖关系
 
 **关键收获**：
@@ -361,7 +361,7 @@
 **Structure（结构）**
 
 - 五层架构：OVERVIEW 第 3 章
-- 依赖图：THEOREM_DEPENDENCY_GRAPH.md
+- 依赖图：THEOREM_10_dependency_graph.md
 
 ### T
 >
@@ -375,7 +375,7 @@
 **Theorem（定理）**
 
 - 直观解释：THEOREM_INTUITIONS.md
-- 依赖图：THEOREM_DEPENDENCY_GRAPH.md
+- 依赖图：THEOREM_10_dependency_graph.md
 
 **Type Safety（类型安全）**
 

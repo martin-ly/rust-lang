@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 映射完成
 > **用途**: 按三大支柱的文档树、概念族↔文档↔Def/Axiom/定理映射、文档↔思维表征映射；支撑层次化检索与双向追溯
-> **上位文档**: [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
+> **上位文档**: [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
 
 ---
 
@@ -62,7 +62,7 @@ research_notes/
 │   │   ├── trait_system_formalization.md
 │   │   ├── lifetime_formalization.md
 │   │   ├── advanced_types.md
-│   │   └── construction_capability.md
+│   │   └── 10_construction_capability.md
 │   ├── 10_formal_full_model_overview.md   ← 统一形式系统、公理列表、定理DAG
 │   ├── 10_formal_language_and_proofs.md
 │   ├── CORE_THEOREMS_FULL_PROOFS.md
@@ -87,13 +87,13 @@ research_notes/
 │       └── 03_integration_theory.md
 │
 └── 【交叉层：论证与框架】
-    ├── 00_COMPREHENSIVE_SUMMARY.md
+    ├── 10_00_comprehensive_summary.md
     ├── 10_argumentation_chain_and_flow.md
-    ├── HIERARCHICAL_MAPPING_AND_SUMMARY.md  ← 本文件
+    ├── 10_hierarchical_mapping_and_summary.md  ← 本文件
     ├── RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md
-    ├── THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md
+    ├── 10_theoretical_and_argumentation_system_architecture.md
     ├── 10_comprehensive_systematic_overview.md
-    ├── UNIFIED_SYSTEMATIC_FRAMEWORK.md
+    ├── 10_unified_systematic_framework.md
     ├── FORMAL_PROOF_SYSTEM_GUIDE.md
     └── 10_argumentation_gap_index.md
 ```
@@ -157,7 +157,7 @@ research_notes/
 | :--- | :--- | :--- | :--- | :--- |
 | ownership_model | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §2, C01 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §1 | 文档内「公理-定理证明树」、[PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) §1 |
 | borrow_checker_proof | 同上 | 同上 | 同上 | 同上 |
-| lifetime_formalization | - | MULTI_MATRIX §形式化 | [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) §4.5 | - |
+| lifetime_formalization | - | MULTI_MATRIX §形式化 | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) §4.5 | - |
 | type_system_foundations | MIND_MAP §3, C02 | MULTI_MATRIX §2 | type_theory | DECISION §2 |
 | variance_theory | - | MULTI_MATRIX §形式化 | variance_theory 文档内 | - |
 | async_state_machine | MIND_MAP §5, C06 | MULTI_MATRIX §3,5 | async_state_machine 文档内 | DECISION §4 |
@@ -179,7 +179,7 @@ research_notes/
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 所有权、类型、并发、形式化理论 | FORMAL_PROOF_SYSTEM_GUIDE 概念-公理-定理映射、COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 形式化理论概念对比矩阵 |
 | [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | MaybeUninit、借用、生命周期、联合体、迭代器 | PROOF_INDEX、各 formal_methods/type_theory 文档 |
 | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 所有权、类型、异步、性能、安全 | 06_boundary_analysis、DESIGN_MECHANISM_RATIONALE、03_semantic_boundary_map |
-| [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) | 1.93 特性、证明树、决策树 | RUST_193、各模块证明树/决策树小节 |
+| [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 1.93 特性、证明树、决策树 | RUST_193、各模块证明树/决策树小节 |
 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) | 安全可判定机制、四类思维表征入口 | §四 思维表征入口、§六 并发+Trait 族四维表；formal_methods 六篇、06_boundary、DESIGN_MECHANISM |
 
 *更细的「按研究领域索引」见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) § 思维表征方式全索引。*

@@ -160,7 +160,7 @@ rust-lang/
 | README.md | 重写 | README.md（精简版） |
 | README.en.md | 迁移 | 01_docs/README.en.md |
 | MASTER_INDEX_AUTO.md | 重写 | 01_docs/00_index.md |
-| PROJECT_STRUCTURE.md | 删除 | 内容整合到新README |
+| 10_project_structure.md | 删除 | 内容整合到新README |
 | KNOWLEDGE_STRUCTURE.md | 迁移 | 01_docs/02_ecosystem_review/ |
 | DECISION_TREES.md | 迁移 | 01_docs/05_roadmap/ |
 | LEARNING_CHECKLIST.md | 迁移 | 01_docs/01_getting_started.md |

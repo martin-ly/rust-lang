@@ -1079,7 +1079,7 @@ graph TD
 > **[来源: Wikipedia - Asynchronous I/O]**
 
 - [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md) - Pin 堆/栈区分、设计机制论证
-- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 理论体系架构
+- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 
 ### 表达能力与边界
 
@@ -1106,7 +1106,7 @@ graph TD
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-- [THINKING_REPRESENTATION_METHODS.md](./THINKING_REPRESENTATION_METHODS.md) - 思维表征方式
+- [04_thinking_representation_methods.md](./04_thinking_representation_methods.md) - 思维表征方式
 - [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
 
 ---

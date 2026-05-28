@@ -358,7 +358,7 @@
 
 **形式化证明**
 → coq-formalization/
-→ THEOREM_DEPENDENCY_GRAPH.md
+→ THEOREM_10_dependency_graph.md
 
 **工程实践**
 → 11-design-patterns/

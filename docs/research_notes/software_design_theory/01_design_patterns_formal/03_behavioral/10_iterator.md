@@ -209,7 +209,7 @@ Iterator 为纯 Safe；`Iterator` trait 标准库定义，`for` 糖语法，无 
 3. 组合子：`map`、`filter` 等纯 Safe
 4. 无 `unsafe` 块（用户实现可含 unsafe，但 trait 本身 Safe）
 
-由 IT-T1、IT-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+由 IT-T1、IT-T2 及 [safe_unsafe_matrix](../../05_boundary_system/10_safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 
@@ -458,7 +458,7 @@ graph LR
 | 场景 | ✅ | 典型场景表 |
 | 反例 | ✅ | 迭代中修改集合 |
 | 衔接 | ✅ | 标准库 Iterator、ownership |
-| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
 
 ---
 

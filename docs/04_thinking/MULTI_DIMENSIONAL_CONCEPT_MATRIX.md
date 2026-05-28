@@ -508,8 +508,8 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [验证工具对比矩阵](../research_notes/formal_methods/VERIFICATION_TOOLS_MATRIX.md) - Kani/Prusti/Miri 等工具对比
-- [全局统一系统化框架](../research_notes/UNIFIED_SYSTEMATIC_FRAMEWORK.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
+- [验证工具对比矩阵](../research_notes/formal_methods/10_verification_tools_matrix.md) - Kani/Prusti/Miri 等工具对比
+- [全局统一系统化框架](../research_notes/10_unified_systematic_framework.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
 - [构造性语义与表达能力边界](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 操作/指称/公理语义、表达能力边界论证
 - [全面系统化梳理总览](../research_notes/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪
 - [形式化论证系统梳理指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射

@@ -194,7 +194,7 @@ impl Sync for T where &T: Send { }
 ```text
 📖 理论
 ├── UNIFIED_THEORETICAL_FRAMEWORK.md  // 统一框架
-├── THEOREM_DEPENDENCY_GRAPH.md       // 定理依赖
+├── THEOREM_10_dependency_graph.md       // 定理依赖
 └── coq-formalization/                // Coq证明
 
 💻 实践

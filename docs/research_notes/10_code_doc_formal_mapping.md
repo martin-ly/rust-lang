@@ -210,9 +210,9 @@
 
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
-| `thread::spawn(\|_\| { ... })` | [C05 线程](../02_reference/quick_reference/threads_concurrency_cheatsheet.md#创建线程) | spawn, 创建线程 |
-| `Arc::new(Mutex::new(0))` | [C05 Arc + Mutex](../02_reference/quick_reference/threads_concurrency_cheatsheet.md#共享状态并发) | Arc, Mutex, 共享状态 |
-| `let (tx, rx) = mpsc::channel();` | [C05 消息传递](../02_reference/quick_reference/threads_concurrency_cheatsheet.md#消息传递) | channel, mpsc |
+| `thread::spawn(\|_\| { ... })` | [C05 线程](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#创建线程) | spawn, 创建线程 |
+| `Arc::new(Mutex::new(0))` | [C05 Arc + Mutex](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#共享状态并发) | Arc, Mutex, 共享状态 |
+| `let (tx, rx) = mpsc::channel();` | [C05 消息传递](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#消息传递) | channel, mpsc |
 | `async fn foo() { ... }` | [C06 异步](../02_reference/quick_reference/async_patterns.md#async-函数) | async, 异步函数 |
 | `let handle = tokio::spawn(async { ... });` | [C06 任务调度](../02_reference/quick_reference/async_patterns.md#任务调度) | spawn, 异步任务 |
 
@@ -225,7 +225,7 @@
 | `vec![1, 2, 3]` | [C02 Vec](../02_reference/quick_reference/type_system.md#vec) | Vec, 动态数组 |
 | `HashMap::new()` | [C02 HashMap](../02_reference/quick_reference/type_system.md#hashmap) | HashMap, 哈希表 |
 | `String::from("hello")` | [C02 String](../02_reference/quick_reference/type_system.md#string) | String, 字符串 |
-| `file.read_to_string(&mut s)?` | [C07 I/O](../02_reference/quick_reference/collections_iterators_cheatsheet.md#读取文件) | read, I/O |
+| `file.read_to_string(&mut s)?` | [C07 I/O](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md#读取文件) | read, I/O |
 | `Command::new("ls").arg("-l").output()` | [C07 进程](../02_reference/quick_reference/02_process_management_cheatsheet.md#运行外部命令) | Command, 进程 |
 
 ---
@@ -352,7 +352,7 @@
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
-| **E0378** | `Rc::new(data)` across threads | Send/Sync 相关 | [C05 线程](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) | Send/Sync 约束 |
+| **E0378** | `Rc::new(data)` across threads | Send/Sync 相关 | [C05 线程](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | Send/Sync 约束 |
 | **E0381** | 跨 await 持锁 | 异步借用错误 | [C06 异步](../05_guides/05_troubleshooting_guide.md) | 借用有效性跨 await |
 
 ### 4.6 错误码快速修复索引

@@ -101,7 +101,7 @@
 | trait_system_formalization.md | ✅ 完成 | COH-T1, RPIT-T1 |
 | variance_theory.md | ✅ 完成 | T1-T4 |
 | advanced_types.md | ✅ 完成 | CONST-EVAL-T1 |
-| construction_capability.md | ⚠️ 需完善 | TCON1 需扩展 |
+| 10_construction_capability.md | ⚠️ 需完善 | TCON1 需扩展 |
 
 ---
 
@@ -165,7 +165,7 @@
 > **[来源: Rust Official Docs]**
 
 - 10_expressive_inexpressive_matrix.md ✅
-- safe_unsafe_matrix.md ✅
+- 10_safe_unsafe_matrix.md ✅
 - 10_supported_unsupported_matrix.md ✅
 
 ---
@@ -184,7 +184,7 @@
 | 10_lifetime_concept_mindmap.md | ✅ | 完整 |
 | CONCURRENCY_CONCEPT_MINDMAP.md | ✅ | 完整 |
 | 10_distributed_concept_mindmap.md | ✅ | 完整 |
-| WORKFLOW_CONCEPT_MINDMAP.md | ✅ | 完整 |
+| 10_workflow_concept_mindmap.md | ✅ | 完整 |
 | 10_proof_techniques_mindmap.md | ✅ | 完整 |
 | 10_async_concept_mindmap.md | ✅ | 完整 |
 | UNSAFE_CONCEPT_MINDMAP.md | ✅ | 完整 |
@@ -221,7 +221,7 @@
 | PROOF_COMPLETION_MATRIX.md | ✅ | 完整 |
 | DESIGN_PATTERNS_MATRIX.md | ✅ | 完整 |
 | 10_distributed_patterns_matrix.md | ✅ | 完整 |
-| VERIFICATION_TOOLS_MATRIX.md | ✅ | 完整 |
+| 10_verification_tools_matrix.md | ✅ | 完整 |
 | WORKFLOW_ENGINES_MATRIX.md | ✅ | 完整 |
 | 10_five_dimensional_concept_matrix.md | ✅ | 完整 |
 | 10_concurrency_safety_matrix.md | ✅ | 完整 |
@@ -235,7 +235,7 @@
 
 #### 4.4 应用树 (8/8 完成)
 
-APPLICATION_TREES.md 包含全部 8 个应用树：
+10_application_trees.md 包含全部 8 个应用树：
 
 1. 系统编程 ✅
 2. 网络服务 ✅

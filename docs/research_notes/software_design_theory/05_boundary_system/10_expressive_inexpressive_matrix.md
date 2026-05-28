@@ -153,7 +153,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 | :--- | :--- | :--- |
 | 在 Rust 中实现经典多继承菱形 | 无法表达；无类继承 | 由 Axiom EIM1、定理 EIM-T2 |
 | 假设 `dyn Trait` 可向下转型 | 编译错误；无内置反射 | 由 Axiom EIM1 |
-| 用 `static mut` 实现 Singleton 且多线程 | UB；违反 Safe 边界 | 见 [safe_unsafe_matrix](./safe_unsafe_matrix.md) |
+| 用 `static mut` 实现 Singleton 且多线程 | UB；违反 Safe 边界 | 见 [safe_unsafe_matrix](./10_safe_unsafe_matrix.md) |
 
 ---
 

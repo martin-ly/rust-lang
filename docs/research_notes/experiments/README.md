@@ -139,7 +139,7 @@
 - 宏对编译时间的影响如何？
 - 如何优化宏展开性能？
 
-**相关笔记**: [macro_expansion_performance.md](./macro_expansion_performance.md)
+**相关笔记**: [10_macro_expansion_performance.md](./10_macro_expansion_performance.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -157,7 +157,7 @@
 - [x] [内存分析](./memory_analysis.md) - 100%
 - [x] [编译器优化](./compiler_optimizations.md) - 100%
 - [x] [并发性能研究](./concurrency_performance.md) - 100%
-- [x] [宏展开性能分析](./macro_expansion_performance.md) - 100%
+- [x] [宏展开性能分析](./10_macro_expansion_performance.md) - 100%
 
 ---
 

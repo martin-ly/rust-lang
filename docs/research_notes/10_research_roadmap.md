@@ -314,7 +314,7 @@
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-- [x] [宏展开性能](./experiments/macro_expansion_performance.md) ✅ 100%
+- [x] [宏展开性能](./experiments/10_macro_expansion_performance.md) ✅ 100%
   - 宏展开时间分析
   - 编译时间影响
   - 宏优化策略
@@ -333,7 +333,7 @@
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-- [x] [实际应用案例研究](./practical_applications.md) ✅ 100%
+- [x] [实际应用案例研究](./10_practical_applications.md) ✅ 100%
   - 系统编程案例
   - 网络应用案例
   - 并发系统案例

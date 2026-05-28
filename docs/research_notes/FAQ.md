@@ -210,7 +210,7 @@
 
 **相关资源**:
 
-- [研究路线图](./RESEARCH_ROADMAP.md)
+- [研究路线图](./10_research_roadmap.md)
 - [系统总结](./10_system_summary.md)
 
 ---
@@ -236,7 +236,7 @@
 
 **相关资源**:
 
-- [研究路线图](./RESEARCH_ROADMAP.md)
+- [研究路线图](./10_research_roadmap.md)
 - [研究方法论](./research_methodology.md)
 
 ---

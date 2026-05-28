@@ -371,7 +371,7 @@ L2 核心概念族
 L3 具体概念
 ├── 02_reference/quick_reference/ownership_cheatsheet.md
 ├── 02_reference/quick_reference/type_system.md
-├── 05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md
+├── 05_guides/05_async_programming_usage_guide.md
 └── [各速查卡]
 
 L4 实现机制
@@ -467,7 +467,7 @@ graph BT
 | 文档 | 用途 | 层次 |
 | :--- | :--- | :--- |
 | [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) | 论证脉络关系 | L2-L3 |
-| [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 层次化映射 | L2-L4 |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) | 层次化映射 | L2-L4 |
 | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) | 统一形式系统 | L1-L2 |
 | [PROOF_INDEX](./PROOF_INDEX.md) | 定理索引 | L3-L4 |
 

@@ -213,7 +213,7 @@ Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
 3. 借用规则：编译期检查
 4. 无 `unsafe` 块
 
-由 CR-T1、CR-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+由 CR-T1、CR-T2 及 [safe_unsafe_matrix](../../05_boundary_system/10_safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 
@@ -511,7 +511,7 @@ graph LR
 | 场景 | ✅ | 典型场景、完整示例 |
 | 反例 | ✅ | 链中形成环 |
 | 衔接 | ✅ | ownership、CE-T1 |
-| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
 
 ---
 

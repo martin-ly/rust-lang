@@ -609,7 +609,7 @@ graph TB
 | C8 生命周期 | [lifetime_formalization.md](formal_methods/lifetime_formalization.md) | 形式化 | borrow_checker_proof.md |
 | C9 泛型 | [type_system_foundations.md](type_theory/type_system_foundations.md) | 形式化 | trait_system_formalization.md |
 | C10 Trait | [trait_system_formalization.md](type_theory/trait_system_formalization.md) | 形式化 | type_system_foundations.md |
-| C13 异步编程 | [async_state_machine.md](formal_methods/async_state_machine.md) | 形式化 | ASYNC_PROGRAMMING_USAGE_GUIDE.md |
+| C13 异步编程 | [async_state_machine.md](formal_methods/async_state_machine.md) | 形式化 | 05_async_programming_usage_guide.md |
 | C12 并发 | [send_sync_formalization.md](formal_methods/send_sync_formalization.md) | 形式化 | threads_concurrency_usage_guide.md |
 
 #### L3 具体概念 → 文档
@@ -625,7 +625,7 @@ graph TB
 | S6 可变借用 | [ownership_cheatsheet.md](../02_reference/quick_reference/ownership_cheatsheet.md) | 速查卡 | examples/ |
 | S9 生命周期标注 | [lifetime_formalization.md](formal_methods/lifetime_formalization.md) | 形式化 | examples/ |
 | S10 生命周期省略 | [lifetime_formalization.md](formal_methods/lifetime_formalization.md) | 形式化 | examples/ |
-| S15 async/await | [ASYNC_PROGRAMMING_USAGE_GUIDE.md](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 指南 | examples/async/ |
+| S15 async/await | [05_async_programming_usage_guide.md](../05_guides/05_async_programming_usage_guide.md) | 指南 | examples/async/ |
 | S18 Send/Sync | [send_sync_formalization.md](formal_methods/send_sync_formalization.md) | 形式化 | examples/concurrency/ |
 
 ### 概念间导航路径

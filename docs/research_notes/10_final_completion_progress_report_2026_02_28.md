@@ -72,7 +72,7 @@
 | 10_concurrency_safety_matrix.md | 1.7KB | 6.7KB | 同步原语、并发模式 |
 | 10_ownership_transfer_decision_tree.md | 1.9KB | 8.7KB | 6个场景决策流程 |
 | LEARNING_PROGRESSION_MATRIX.md | 2.1KB | 8.6KB | 5个级别完整路径 |
-| VERIFICATION_TOOLS_MATRIX.md | 2.3KB | 6.6KB | 工具对比、选型决策树 |
+| 10_verification_tools_matrix.md | 2.3KB | 6.6KB | 工具对比、选型决策树 |
 
 #### 思维导图扩展 (3个)
 

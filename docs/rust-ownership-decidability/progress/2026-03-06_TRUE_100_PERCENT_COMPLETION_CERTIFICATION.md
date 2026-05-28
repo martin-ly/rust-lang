@@ -338,7 +338,7 @@ docs/rust-ownership-decidability/
 │       ├── Semantics/ (全部更新) ✅
 │       ├── Advanced/ (全部更新) ✅
 │       └── ... (其他目录全部更新) ✅
-├── THEOREM_DEPENDENCY_GRAPH.md (更新) ✅
+├── THEOREM_10_dependency_graph.md (更新) ✅
 └── progress/
     └── 2026-03-06_TRUE_100_PERCENT_COMPLETION_CERTIFICATION.md (本报告) ✅
 ```

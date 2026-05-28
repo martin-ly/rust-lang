@@ -119,7 +119,7 @@
 
 **论证文档**:
 
-- `THEOREM_DEPENDENCY_GRAPH.md` - 完整依赖图
+- `THEOREM_10_dependency_graph.md` - 完整依赖图
 - `HORIZONTAL_CONNECTIONS.md` - 定理间关联论证
 - `coq-formalization/theories/Advanced/MetatheoryIntegration.v` - 形式化证明
 

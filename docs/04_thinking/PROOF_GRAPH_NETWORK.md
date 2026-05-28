@@ -1437,7 +1437,7 @@ fn proof_validation_workflow() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 理论体系架构
+- [10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 语言语义与表达能力
 
 ### 证明工具
@@ -1453,7 +1453,7 @@ fn proof_validation_workflow() {
 
 - [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) - 决策图网
 - [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
-- [THINKING_REPRESENTATION_METHODS.md](./THINKING_REPRESENTATION_METHODS.md) - 思维表征方式
+- [04_thinking_representation_methods.md](./04_thinking_representation_methods.md) - 思维表征方式
 
 ---
 

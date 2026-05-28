@@ -65,7 +65,7 @@
 
 **Def AP1（反模式）**：违反设计模式不变式或 Rust 安全规则的实现；$\mathit{SafeB}(P) = \mathrm{Inexpr}$ 或违反 [ownership_model](../formal_methods/ownership_model.md)、[borrow_checker_proof](../formal_methods/borrow_checker_proof.md) 规则。
 
-**Axiom AP1**：反模式导致 UB、数据竞争、或逻辑错误；与 [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md) SBM-T2、SBM-L2 衔接。
+**Axiom AP1**：反模式导致 UB、数据竞争、或逻辑错误；与 [safe_unsafe_matrix](05_boundary_system/10_safe_unsafe_matrix.md) SBM-T2、SBM-L2 衔接。
 
 ### 1.2 反模式分类
 
@@ -252,7 +252,7 @@ where
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)：SBM-L2 反模式边界
+- [safe_unsafe_matrix](05_boundary_system/10_safe_unsafe_matrix.md)：SBM-L2 反模式边界
 - `02_workflow 03_semantic_boundary_map`：反模式误选表
 - [01_design_patterns_formal](01_design_patterns_formal/README.md)：各模式反例
 
@@ -264,7 +264,7 @@ where
 
 - [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md#设计模式反例)
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/) Anti-patterns
-- [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)
+- [safe_unsafe_matrix](05_boundary_system/10_safe_unsafe_matrix.md)
 
 ---
 

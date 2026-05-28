@@ -136,7 +136,7 @@
 
 | 资源 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
-| [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) | 证明树图（MaybeUninit、借用检查器、生命周期、Send/Sync 等） |
+| [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 证明树图（MaybeUninit、借用检查器、生命周期、Send/Sync 等） |
 
 ---
 

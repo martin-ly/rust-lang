@@ -289,7 +289,7 @@ Def SEND1, SYNC1
 | 决策树 | [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) § Send/Sync；[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) 并发选型 |
 | 推理证明树 | [PROOF_INDEX](../PROOF_INDEX.md)；本篇 § 公理-定理证明树 |
 
-*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 
 ---
 

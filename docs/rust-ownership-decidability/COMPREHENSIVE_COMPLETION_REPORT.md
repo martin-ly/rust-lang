@@ -89,7 +89,7 @@
 | 文档 | 字数 | 核心贡献 |
 |------|------|---------|
 | **UNIFIED_THEORETICAL_FRAMEWORK.md** | 12,208 | 统一理论框架（五层架构） |
-| **THEOREM_DEPENDENCY_GRAPH.md** | 12,171 | 定理依赖网络图 |
+| **THEOREM_10_dependency_graph.md** | 12,171 | 定理依赖网络图 |
 | **FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md** | 5,619 | 框架分析与缺失诊断 |
 
 #### 进度文档（2个）

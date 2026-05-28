@@ -68,7 +68,7 @@
 | **READING_GUIDE.md** | 5,729 | 阅读指南 | 个性化学习路径 |
 | **NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md** | 5,047 | 文档总览 | 导航和索引 |
 | **UNIFIED_THEORETICAL_FRAMEWORK.md** | 12,208 | 统一框架 | 五层架构 |
-| **THEOREM_DEPENDENCY_GRAPH.md** | 12,171 | 定理依赖图 | 理解定理关系 |
+| **THEOREM_10_dependency_graph.md** | 12,171 | 定理依赖图 | 理解定理关系 |
 | **FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md** | 5,619 | 框架分析 | 缺失诊断 |
 | **FRAMEWORK_COMPLETION_SUMMARY.md** | 4,667 | 完成总结 | 进度报告 |
 

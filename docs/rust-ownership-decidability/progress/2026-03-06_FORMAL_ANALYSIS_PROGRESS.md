@@ -118,7 +118,7 @@
 ### ✅ 4. 定理依赖图更新
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-**文件**: `THEOREM_DEPENDENCY_GRAPH.md`
+**文件**: `THEOREM_10_dependency_graph.md`
 **状态**: ✅ 已更新
 
 **更新内容**:

@@ -230,7 +230,7 @@
 
 ## formal_methods 六篇并表
 
-下表为本目录六篇核心文档的**概念×公理×定理×证明方法×反例**并表；用于跨篇对比与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) 衔接。各子文档内可注明「本概念在 README §formal_methods 六篇并表 第 x 行」。
+下表为本目录六篇核心文档的**概念×公理×定理×证明方法×反例**并表；用于跨篇对比与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) 衔接。各子文档内可注明「本概念在 README §formal_methods 六篇并表 第 x 行」。
 
 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -279,7 +279,7 @@
 | [send_sync_formalization](./send_sync_formalization.md) | Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1 | 跨线程转移/共享、与 spawn/Future/Arc 衔接 |
 | [ACTOR_MODEL_DEEP_DIVE](../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) | Actor形式语义、10+定理、15+代码示例 | Actor隔离定理、死锁自由、故障隔离、反例分析 |
 
-本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 衔接。
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 衔接。
 
 ---
 

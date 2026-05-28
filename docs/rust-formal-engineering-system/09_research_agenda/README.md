@@ -10,7 +10,7 @@
 
 | 主题 | 链接 |
 | :--- | :--- |
-| 研究路线图 | [RESEARCH_ROADMAP.md](../../research_notes/RESEARCH_ROADMAP.md) |
+| 研究路线图 | [10_research_roadmap.md](../../research_notes/10_research_roadmap.md) |
 | 形式化证明索引 | [PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
 | 研究方法论 | [research_methodology.md](../../research_notes/research_methodology.md) |
 
@@ -56,7 +56,7 @@
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
-| 本README | research_notes/RESEARCH_ROADMAP.md | 索引/重定向 |
+| 本README | research_notes/10_research_roadmap.md | 索引/重定向 |
 
 [返回主索引](../00_master_index.md)
 ---

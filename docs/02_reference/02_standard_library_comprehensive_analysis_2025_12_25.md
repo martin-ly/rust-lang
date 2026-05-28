@@ -1544,7 +1544,7 @@ fn main() {
 | :--- | :--- | :--- |
 | 研究笔记系统 | [../research_notes/10_system_summary.md](../research_notes/10_system_summary.md) | 系统总结 |
 | 增量更新流程 | [../research_notes/10_incremental_update_flow.md](../research_notes/10_incremental_update_flow.md) | 版本更新流程 |
-| 理论体系 | [../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 理论体系架构 |
+| 理论体系 | [../research_notes/10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) | 理论体系架构 |
 
 ---
 

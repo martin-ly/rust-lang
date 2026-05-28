@@ -47,11 +47,11 @@
 | **我想选设计模式/并发模型** | [software_design_theory/00_MASTER_INDEX](./software_design_theory/00_MASTER_INDEX.md) → 03_semantic_boundary_map、06_boundary_analysis | 15min |
 | **我想理解权威对齐体系** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) | 10min |
 | **三大支柱** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） | 10min |
-| **我想看完整总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 15min |
+| **我想看完整总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 15min |
 | **我想看批判性意见与改进计划** | RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN | 15min |
 | **我想看格式统一与 Rust 1.93 对齐计划** | FORMAT_AND_CONTENT_ALIGNMENT_PLAN (归档) | 10min |
-| **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) | 10min |
-| **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 5min |
+| **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md) | 10min |
+| **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) | 5min |
 | **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) | 5min |
 | **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) | 5min |
 | **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/10_formal_methods_completeness_checklist.md) | 2min |
@@ -113,16 +113,16 @@ research_notes/
 │
 ├── 【实验与综合】
 │   ├── experiments/                    ← 性能、内存、并发、宏
-│   ├── practical_applications.md
+│   ├── 10_practical_applications.md
 │   └── research_methodology.md
 │
 └── 【导航/框架/指南】（按需查阅）
-    ├── 00_COMPREHENSIVE_SUMMARY.md      ← 完整总结综合、知识地图、论证总览
+    ├── 10_00_comprehensive_summary.md      ← 完整总结综合、知识地图、论证总览
     ├── ARGUMENTATION_CHAIN_AND_FLOW.md  ← 论证思路、论证脉络关系、文档依赖
     ├── [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) - 权威对齐指南、技术决策参考
     ├── 10_classification.md                ← 按角色/层次/主题分类
     ├── RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md  ← 批判性分析、层次化/矩阵/思维表征缺口、可持续改进计划
-    ├── HIERARCHICAL_MAPPING_AND_SUMMARY.md                      ← 文档树、概念↔文档↔Def/定理、文档↔思维表征映射
+    ├── 10_hierarchical_mapping_and_summary.md                      ← 文档树、概念↔文档↔Def/定理、文档↔思维表征映射
     ├── ARGUMENTATION_GAP_INDEX.md
     ├── CONTRIBUTING.md、QUALITY_CHECKLIST.md
     └── 其他运维/参考文档
@@ -174,7 +174,7 @@ research_notes/
 | **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/)；当前覆盖 **Rust 2021 + rustc 1.93** | 形式化规范引用 |
 | **本项目** | **Rust 1.94.0+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
 
-新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) § 权威来源对齐。
+新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) § 权威来源对齐。
 
 ---
 

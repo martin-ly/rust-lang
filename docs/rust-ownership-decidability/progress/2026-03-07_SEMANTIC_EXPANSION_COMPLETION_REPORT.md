@@ -33,7 +33,7 @@
 ### 2. 更新项目结构文档
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- **文件**: `PROJECT_STRUCTURE.md`
+- **文件**: `10_project_structure.md`
 - **更新内容**:
   - 添加 README 列到目录表格
   - 更新元模型目录结构说明

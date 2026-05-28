@@ -283,7 +283,7 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 > **[来源: Rust Official Docs]**
 
 - Rust 1.93 兼容性注意事项
-- [Rust 1.93 vs 1.92 对比](./05_rust_1.93_vs_1.92_comparison.md)
+- [Rust 1.93 vs 1.92 对比](./06_05_rust_1_93_vs_1_92_comparison.md)
 - [Rust 1.93 完整变更清单](./06_07_rust_1_93_full_changelog.md)
 - [releases.rs 1.93.0](https://releases.rs/docs/1.93.0/)
 

@@ -335,7 +335,7 @@ docs/rust-ownership-decidability/
 │           ├── MetatheoryTermination.v (更新, ✅)
 │           ├── MetatheoryComplete.v (更新, ✅)
 │           └── Rust194Complete.v (更新, ✅)
-├── THEOREM_DEPENDENCY_GRAPH.md (更新)
+├── THEOREM_10_dependency_graph.md (更新)
 └── progress/
     └── 2026-03-06_100_PERCENT_COMPLETION_FINAL_REPORT.md (本报告)
 ```

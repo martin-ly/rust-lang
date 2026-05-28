@@ -221,7 +221,7 @@ Bridge 为纯 Safe；trait 解耦抽象与实现，无 `unsafe`。
 4. 委托调用：`self.renderer.render()` 纯 Safe
 5. 无 `unsafe` 块：整个 Bridge 实现无需 unsafe
 
-由 BR-T1、BR-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+由 BR-T1、BR-T2 及 [safe_unsafe_matrix](../../05_boundary_system/10_safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 
@@ -489,7 +489,7 @@ graph LR
 | 场景 | ✅ | 典型场景表 |
 | 反例 | ✅ | 抽象与实现紧耦合 |
 | 衔接 | ✅ | trait、ownership、CE-T2 |
-| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
 
 ---
 

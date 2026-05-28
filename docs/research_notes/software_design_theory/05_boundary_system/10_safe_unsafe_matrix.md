@@ -318,7 +318,7 @@ impl PaymentGateway for FFIPaymentGateway {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../../SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)
-- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) § 3
+- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../10_theoretical_and_argumentation_system_architecture.md) § 3
 
 ---
 

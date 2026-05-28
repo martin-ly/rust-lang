@@ -171,7 +171,7 @@
 
 **公理 / 定理 → 论证**：游戏引擎选型遵循「实时性」公理——帧率稳定、无停顿。定理：所有权与借用保证无 GC；ECS 与 Rust 的借用规则天然契合；无数据竞争保证多线程安全。
 
-**决策树**：ECS？→ bevy/hecs；渲染？→ wgpu；物理？→ Rapier；2D？→ macroquad；音频？→ rodio。参考 [practical_applications](../research_notes/practical_applications.md)。
+**决策树**：ECS？→ bevy/hecs；渲染？→ wgpu；物理？→ Rapier；2D？→ macroquad；音频？→ rodio。参考 [practical_applications](../research_notes/10_practical_applications.md)。
 
 ---
 
@@ -307,10 +307,10 @@ flowchart LR
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [思维表征方式](./THINKING_REPRESENTATION_METHODS.md) - 决策树、转换树
+- [思维表征方式](./04_thinking_representation_methods.md) - 决策树、转换树
 - [多维概念矩阵](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 技术选型矩阵
 - [跨模块集成示例](../05_guides/05_cross_module_integration_examples.md)
-- [实际应用案例研究](./../research_notes/practical_applications.md) - 案例库
+- [实际应用案例研究](./../research_notes/10_practical_applications.md) - 案例库
 - [执行模型边界分析](./../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) - 模型选型
 - [WASM 使用指南](../05_guides/05_wasm_usage_guide.md)
 

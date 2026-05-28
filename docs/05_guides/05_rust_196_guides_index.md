@@ -35,7 +35,7 @@
 
 | 序号 | 文档名称 | 原版本 | 1.96语义 | 代码检查 | 状态 |
 |------|----------|--------|----------|----------|------|
-| 1 | ASYNC_PROGRAMMING_USAGE_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 1 | 05_async_programming_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 2 | 05_threads_concurrency_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 3 | 05_design_patterns_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 4 | 05_macro_system_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
@@ -76,7 +76,7 @@
 |------|------|----------|----------|
 | `isqrt` | 数学运算 (≥1.84) | 质数检测、几何计算 | BEST_PRACTICES.md |
 | `HashMap::get_disjoint_mut` | 数据结构 (≥1.86) | 并发缓存、状态管理 | 05_threads_concurrency_usage_guide.md |
-| `async Fn` / async closures | 异步编程 (≥1.85, Edition 2024) | 异步 trait、回调抽象 | ASYNC_PROGRAMMING_USAGE_GUIDE.md |
+| `async Fn` / async closures | 异步编程 (≥1.85, Edition 2024) | 异步 trait、回调抽象 | 05_async_programming_usage_guide.md |
 | `if let guards` | 语言特性 | 模式匹配守卫 | CONTROL_FLOW_GUIDE.md |
 | `Vec::pop_if` | 集合操作 (≥1.86) | 条件弹出、栈操作 | BEST_PRACTICES.md |
 | `const fn` 改进 | 编译时计算 | 常量初始化 | 05_design_patterns_usage_guide.md |
@@ -150,7 +150,7 @@ fn demonstrate_196_features() {
 - if let guards 指南
 
 #### ⚡ 异步编程
-- [async Fn trait 改进](./ASYNC_PROGRAMMING_USAGE_GUIDE.md)
+- [async Fn trait 改进](./05_async_programming_usage_guide.md)
 
 #### 🛡️ 系统编程
 - [高级线程控制](./UNSAFE_RUST_GUIDE.md)

@@ -1464,7 +1464,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 | 内存分析 | [memory_analysis.md](./memory_analysis.md) | 内存分配与使用分析 |
 | 并发性能 | [concurrency_performance.md](./concurrency_performance.md) | 并发性能研究 |
 | 编译器优化 | [compiler_optimizations.md](./compiler_optimizations.md) | 编译器优化研究 |
-| 宏展开性能 | [macro_expansion_performance.md](./macro_expansion_performance.md) | 宏展开性能分析 |
+| 宏展开性能 | [10_macro_expansion_performance.md](./10_macro_expansion_performance.md) | 宏展开性能分析 |
 
 ### 形式化证明
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
@@ -1479,7 +1479,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
-| 理论体系架构 | [../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 四层理论体系 |
+| 理论体系架构 | [../10_theoretical_and_argumentation_system_architecture.md](../10_theoretical_and_argumentation_system_architecture.md) | 四层理论体系 |
 | 证明索引 | [../PROOF_INDEX.md](../PROOF_INDEX.md) | 形式化证明索引 |
 | 系统总结 | [../10_system_summary.md](../10_system_summary.md) | 研究笔记系统总结 |
 

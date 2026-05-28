@@ -31,7 +31,7 @@
 
 ## 相关文档
 
-- [学习路径规划](../LEARNING_PATH_PLANNING.md)
+- [学习路径规划](../01_learning_path_planning.md)
 - [MDBook 测验指南](../01_mdbook_quiz_guide.md)
 
 ---

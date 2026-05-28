@@ -227,7 +227,7 @@ All theorem statements and proof frameworks are complete across 32 Coq files.
 
 - ✅ 100% internal Markdown links verified
 - ✅ All navigation documents updated
-- ✅ PROJECT_STRUCTURE.md reflects current state
+- ✅ 10_project_structure.md reflects current state
 - ✅ README.md badges and links functional
 
 ---
@@ -423,7 +423,7 @@ coqide theories/Advanced/PreciseCapturingComplete.v &
 
 1. `formal-foundations/semantics/operational-semantics.md`
 2. `coq-formalization/theories/Metatheory/*.v`
-3. `THEOREM_DEPENDENCY_GRAPH.md`
+3. `THEOREM_10_dependency_graph.md`
 4. Academic papers in `07-references/academic-papers.md`
 
 ---

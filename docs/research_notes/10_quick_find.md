@@ -161,7 +161,7 @@
 | 关键词     | 相关研究笔记                                                    | 状态    |
 | :--- | :--- | :--- |
 | 类型系统   | [类型系统基础](./type_theory/type_system_foundations.md)        | ✅ 100% |
-| 类型构造能力 | [construction_capability](./type_theory/construction_capability.md) | ✅ Def TCON1、矩阵、决策树 |
+| 类型构造能力 | [construction_capability](./type_theory/10_construction_capability.md) | ✅ Def TCON1、矩阵、决策树 |
 | 核心特性完整链 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | ✅ 13 项 Def→示例→论证→证明 |
 | 类型理论缺口 | [完备性缺口](./type_theory/00_completeness_gaps.md)           | ✅ 阶段 1–7 Def 占位 |
 | 形式化方法缺口 | [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md) | ✅ Phase 1–6 100% |
@@ -227,10 +227,10 @@
 
 | 关键词   | 相关研究笔记                                                   | 状态    |
 | :--- | :--- | :--- |
-| 宏       | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
-| 宏展开   | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
-| 过程宏   | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
-| 编译时间 | [宏展开性能分析](./experiments/macro_expansion_performance.md) | ✅ 100% |
+| 宏       | [宏展开性能分析](./experiments/10_macro_expansion_performance.md) | ✅ 100% |
+| 宏展开   | [宏展开性能分析](./experiments/10_macro_expansion_performance.md) | ✅ 100% |
+| 过程宏   | [宏展开性能分析](./experiments/10_macro_expansion_performance.md) | ✅ 100% |
+| 编译时间 | [宏展开性能分析](./experiments/10_macro_expansion_performance.md) | ✅ 100% |
 
 ---
 
@@ -296,7 +296,7 @@
 | [内存分析](./experiments/memory_analysis.md)                   | 分析内存使用模式，识别内存优化机会               | ✅ 已完成 | 100%   |
 | [编译器优化](./experiments/compiler_optimizations.md)          | 评估编译器优化效果，了解如何编写编译器友好的代码 | ✅ 已完成 | 100%   |
 | [并发性能研究](./experiments/concurrency_performance.md)       | 评估不同并发模型的性能特征                       | ✅ 已完成 | 100%   |
-| [宏展开性能分析](./experiments/macro_expansion_performance.md) | 分析宏展开性能，识别性能瓶颈                     | ✅ 已完成 | 100%   |
+| [宏展开性能分析](./experiments/10_macro_expansion_performance.md) | 分析宏展开性能，识别性能瓶颈                     | ✅ 已完成 | 100%   |
 
 ### 综合研究
 >
@@ -306,7 +306,7 @@
 
 | 研究笔记                                        | 研究目标                                                   | 状态      | 完成度 |
 | :--- | :--- | :--- | :--- |
-| [实际应用案例研究](./practical_applications.md) | 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果 | ✅ 已完成 | 100%   |
+| [实际应用案例研究](./10_practical_applications.md) | 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果 | ✅ 已完成 | 100%   |
 | [研究方法论](./research_methodology.md)         | 建立 Rust 研究的方法论体系，为研究提供系统化的方法指导     | ✅ 已完成 | 100%   |
 
 ---
@@ -319,7 +319,7 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- **完整总结综合** → [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)（项目全貌、三大支柱、知识地图、论证总览）
+- **完整总结综合** → [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md)（项目全貌、三大支柱、知识地图、论证总览）
 - **论证脉络关系** → [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md)（论证五步法、概念→定理 DAG、文档依赖、论证思路示例）
 
 ### 我想看批判性意见与改进计划
@@ -328,7 +328,7 @@
 
 - **批判性分析与可持续改进计划** → RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
   （概念定义/属性关系/解释论证/多维矩阵/层次化/思维表征 缺口；建议 P0–P3；四阶段可持续推进任务与计划）
-- **层次化映射总结** → [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)（文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖）
+- **层次化映射总结** → [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md)（文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖）
 
 ### 我想证明某个性质
 >
@@ -339,7 +339,7 @@
 - **批判性分析与推进计划** → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md)
 - **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)（L2 级 ownership T2、borrow T1、type T3）
 - **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
-- **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[RUSTBELT_ALIGNMENT](./10_rustbelt_alignment.md)
+- **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md)、[RUSTBELT_ALIGNMENT](./10_rustbelt_alignment.md)
 - **权威对齐指南** → [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)（原三大支柱文档已归档至 `../archive/process_reports/2026_02/`）
 - **工具对接** → Aeneas 集成计划、coq-of-rust 集成计划（已归档）
 
@@ -385,7 +385,7 @@
 - **内存优化** → [内存分析](./experiments/memory_analysis.md)
 - **编译优化** → [编译器优化](./experiments/compiler_optimizations.md)
 - **并发优化** → [并发性能研究](./experiments/concurrency_performance.md)
-- **宏优化** → [宏展开性能分析](./experiments/macro_expansion_performance.md)
+- **宏优化** → [宏展开性能分析](./experiments/10_macro_expansion_performance.md)
 
 ### 我想学习研究方法
 >
@@ -394,7 +394,7 @@
 **综合研究**:
 
 - **研究方法** → [研究方法论](./research_methodology.md)
-- **实际应用** → [实际应用案例研究](./practical_applications.md)
+- **实际应用** → [实际应用案例研究](./10_practical_applications.md)
 - **工具使用** → [研究工具使用指南](./TOOLS_GUIDE.md)
 - **写作指导** → [研究笔记写作指南](./10_writing_guide.md)
 
@@ -428,7 +428,7 @@
 5. [内存分析](./experiments/memory_analysis.md) - 100% 完成度
 6. [编译器优化](./experiments/compiler_optimizations.md) - 30% 完成度
 7. [并发性能研究](./experiments/concurrency_performance.md) - 30% 完成度
-8. [实际应用案例研究](./practical_applications.md) - 25% 完成度
+8. [实际应用案例研究](./10_practical_applications.md) - 25% 完成度
 9. [研究方法论](./research_methodology.md) - 35% 完成度
 10. [型变理论](./type_theory/variance_theory.md) - 30% 完成度
 
@@ -440,7 +440,7 @@
 
 1. [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md) - 30% 完成度
 2. [高级类型特性](./type_theory/advanced_types.md) - 30% 完成度
-3. [宏展开性能分析](./experiments/macro_expansion_performance.md) - 30% 完成度
+3. [宏展开性能分析](./experiments/10_macro_expansion_performance.md) - 30% 完成度
 
 ---
 
@@ -455,7 +455,7 @@
 - [研究笔记主索引](./README.md)
 - [快速参考](./QUICK_REFERENCE.md)
 - [完整索引](./INDEX.md)
-- [研究路线图](./RESEARCH_ROADMAP.md)
+- [研究路线图](./10_research_roadmap.md)
 
 ### 进展跟踪
 >

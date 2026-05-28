@@ -171,7 +171,7 @@
 | 编译时间 | type_system T2 | 展开后保持类型 |
 | 代码生成 | 宏卫生、展开正确性 | 编译时间与正确性 |
 
-**引用**：[experiments/README](../experiments/README.md) 定理 EX-T1；[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 宏相关特性。
+**引用**：[experiments/README](../experiments/README.md) 定理 EX-T1；[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 宏相关特性。
 
 ### 相关概念
 

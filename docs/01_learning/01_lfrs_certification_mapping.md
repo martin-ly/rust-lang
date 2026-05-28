@@ -211,7 +211,7 @@
 | HashMap | `crates/c02_type_system/src/type_composition/collection/hash_map.rs` | 键值对存储 |
 | HashSet | `crates/c02_type_system/src/type_composition/collection/hash_set.rs` | 集合操作 |
 | BTreeMap / BTreeSet | `crates/c02_type_system/src/type_composition/collection/` | 有序集合 |
-| 迭代器 | `docs/02_reference/quick_reference/collections_iterators_cheatsheet.md` | 迭代器适配器 |
+| 迭代器 | `docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md` | 迭代器适配器 |
 
 ### 练习验证
 >
@@ -328,7 +328,7 @@
 | 子主题 | 项目文件路径 | 说明 | 状态 |
 | :--- | :--- | :--- | :--- |
 | 闭包 | `crates/c03_control_fn/src/closure/` | 捕获方式、Fn/FnMut/FnOnce | ✅ |
-| 迭代器 | `docs/02_reference/quick_reference/collections_iterators_cheatsheet.md` | 适配器、消费者 | ✅ |
+| 迭代器 | `docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md` | 适配器、消费者 | ✅ |
 | Box<T> | `crates/c01_ownership_borrow_scope/src/ownership/` | 堆分配 | ✅ |
 | Rc<T> | `crates/c01_ownership_borrow_scope/src/internal_mut/refcell/` | 引用计数 | ✅ |
 | RefCell<T> | `crates/c01_ownership_borrow_scope/src/internal_mut/refcell/` | 运行时借用检查 | ✅ |

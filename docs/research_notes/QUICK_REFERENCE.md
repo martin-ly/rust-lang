@@ -87,7 +87,7 @@
 | 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
 | 完备性缺口       | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)               | ✅ 阶段 1–7 Def 占位 |
-| 类型构造能力     | [construction_capability.md](./type_theory/construction_capability.md)         | ✅ Def TCON1、矩阵、决策树 |
+| 类型构造能力     | [10_construction_capability.md](./type_theory/10_construction_capability.md)         | ✅ Def TCON1、矩阵、决策树 |
 | 类型系统基础     | [type_system_foundations.md](./type_theory/type_system_foundations.md)         | ✅ 100%               |
 | Trait 系统形式化 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md)   | ✅ 100%               |
 | 生命周期形式化   | [lifetime_formalization.md](./type_theory/lifetime_formalization.md)           | ✅ 100%               |
@@ -118,7 +118,7 @@
 | 内存分析       | [memory_analysis.md](./experiments/memory_analysis.md)                             | ✅ 100% |
 | 编译器优化     | [compiler_optimizations.md](./experiments/compiler_optimizations.md)               | ✅ 100% |
 | 并发性能       | [concurrency_performance.md](./experiments/concurrency_performance.md)             | ✅ 100% |
-| 宏展开性能     | [macro_expansion_performance.md](./experiments/macro_expansion_performance.md)     | ✅ 100% |
+| 宏展开性能     | [10_macro_expansion_performance.md](./experiments/10_macro_expansion_performance.md)     | ✅ 100% |
 
 #### 🌐 综合研究
 >
@@ -126,7 +126,7 @@
 
 | 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
-| 实际应用案例 | [practical_applications.md](./practical_applications.md) | ✅ 100% |
+| 实际应用案例 | [10_practical_applications.md](./10_practical_applications.md) | ✅ 100% |
 | 研究方法论 | [research_methodology.md](./research_methodology.md) | ✅ 100% |
 
 ---
@@ -202,7 +202,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- 类型构造能力 → [construction_capability.md](./type_theory/construction_capability.md)
+- 类型构造能力 → [10_construction_capability.md](./type_theory/10_construction_capability.md)
 - 类型推导 → [type_system_foundations.md](./type_theory/type_system_foundations.md)
 - Trait → [trait_system_formalization.md](./type_theory/trait_system_formalization.md)
 - GATs → [advanced_types.md](./type_theory/advanced_types.md)
@@ -225,7 +225,7 @@
 - 内存分析 → [memory_analysis.md](./experiments/memory_analysis.md)
 - 编译器优化 → [compiler_optimizations.md](./experiments/compiler_optimizations.md)
 - 并发性能 → [concurrency_performance.md](./experiments/concurrency_performance.md)
-- 宏性能 → [macro_expansion_performance.md](./experiments/macro_expansion_performance.md)
+- 宏性能 → [10_macro_expansion_performance.md](./experiments/10_macro_expansion_performance.md)
 
 ### 生命周期相关
 >

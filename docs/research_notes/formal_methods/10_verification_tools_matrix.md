@@ -298,7 +298,7 @@ jobs:
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
+- [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../10_international_formal_verification_index.md)
 - [coq_skeleton](../coq_skeleton/README.md) - Coq证明骨架
 - [L3_MACHINE_PROOF_GUIDE](../L3_MACHINE_PROOF_GUIDE.md)
 

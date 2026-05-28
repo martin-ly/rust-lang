@@ -86,7 +86,7 @@
 
 **当前专题清单**:
 
-- `ASYNC_PROGRAMMING_USAGE_GUIDE.md` (C06)
+- `05_async_programming_usage_guide.md` (C06)
 - `05_threads_concurrency_usage_guide.md` (C05)
 - `05_design_patterns_usage_guide.md` (C09)
 - `05_macro_system_usage_guide.md` (C11)

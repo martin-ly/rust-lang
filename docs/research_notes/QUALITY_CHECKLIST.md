@@ -376,7 +376,7 @@
 - [ ] **概念定义层**：本页 Def/Axiom 以表格或列表列出（或已有形式化定义小节）
 - [ ] **属性关系层**：本页定理/推论与公理/引理依赖可追溯（表格或 DAG 片段）
 - [ ] **解释论证层**：关键定理含「陈述→依赖→证明/思路→反例」块或证明思路
-- [ ] （可选）**相关思维表征**：注明对应思维导图/矩阵/证明树/决策树，见 [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)
+- [ ] （可选）**相关思维表征**：注明对应思维导图/矩阵/证明树/决策树，见 [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md)
 
 *适用*：formal_methods、type_theory、software_design_theory 核心文档；
 索引/概览类可放宽。

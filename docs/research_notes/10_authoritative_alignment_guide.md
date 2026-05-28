@@ -342,9 +342,9 @@ let r = &s;
 | 生命周期 | Rust Book 10.3 | quick_reference/type_system.md | ✅ | 一致 |
 | 测试 | Rust Book 11 | quick_reference/02_testing_cheatsheet.md | ✅ | 一致 |
 | 闭包 | Rust Book 13 | quick_reference/control_flow_functions_cheatsheet.md | ✅ | 一致 |
-| 迭代器 | Rust Book 13.2 | quick_reference/collections_iterators_cheatsheet.md | ✅ | 一致 |
+| 迭代器 | Rust Book 13.2 | quick_reference/02_collections_iterators_cheatsheet.md | ✅ | 一致 |
 | 智能指针 | Rust Book 15 | quick_reference/smart_pointers_cheatsheet.md | ✅ | 一致 |
-| 并发 | Rust Book 16 | quick_reference/threads_concurrency_cheatsheet.md | ✅ | 一致 |
+| 并发 | Rust Book 16 | quick_reference/02_threads_concurrency_cheatsheet.md | ✅ | 一致 |
 | 异步 | Rust Book 17 | quick_reference/async_patterns.md | ✅ | 一致 |
 
 ### 版本信息检查

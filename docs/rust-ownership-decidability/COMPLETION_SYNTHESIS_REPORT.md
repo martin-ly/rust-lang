@@ -145,7 +145,7 @@ Rust 1.94 特性:   6 个          ✅
    - 主索引: `FINAL_MASTER_INDEX.md`
    - 综合梳理: `COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md`
    - 执行摘要: `FINAL_EXECUTIVE_SUMMARY_V2.md`
-   - 定理依赖: `THEOREM_DEPENDENCY_GRAPH.md`
+   - 定理依赖: `THEOREM_10_dependency_graph.md`
 
 ---
 

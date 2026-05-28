@@ -1062,7 +1062,7 @@ graph TD
 - [决策图网](../04_thinking/DECISION_GRAPH_NETWORK.md) - 技术选型决策支持
 - [证明图网](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构
 - [项目架构指南](./07_project_architecture_guide.md) - 整体架构设计
-- [学习路径规划](../01_learning/LEARNING_PATH_PLANNING.md) - 系统化学习路径
+- [学习路径规划](../01_learning/01_learning_path_planning.md) - 系统化学习路径
 
 ---
 

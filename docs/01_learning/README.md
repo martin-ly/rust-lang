@@ -60,7 +60,7 @@ fn handle_message(msg: Message) {
 >
 > **[来源: Rust Official Docs]**
 
-- [LEARNING_PATH_PLANNING.md](./LEARNING_PATH_PLANNING.md) - 学习路径规划（四类路径、进度检查清单）
+- [01_learning_path_planning.md](./01_learning_path_planning.md) - 学习路径规划（四类路径、进度检查清单）
 - [01_official_resources_mapping.md](./01_official_resources_mapping.md) - 本项目 ↔ The Rust Book / Reference / RBE
 
 ---
@@ -134,7 +134,7 @@ fn ownership_theorem() {
   | Coursera内容 | 本文档对应 |
 | :--- | :--- |
   | Rust Basics | 01_learning/ |
-  | Data Structures | 02_reference/quick_reference/collections_iterators_cheatsheet.md |
+  | Data Structures | 02_reference/quick_reference/02_collections_iterators_cheatsheet.md |
   | Concurrency | 05_guides/05_threads_concurrency_usage_guide.md |
 
 #### Programming in Rust (University of Colorado Boulder)

@@ -108,7 +108,7 @@
 **证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](./PROOF_INDEX.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) L2 示例、[coq_skeleton](coq_skeleton/README.md) L3 骨架。
 
 **引用**：[FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范、
-[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) 论证体系五层、
+[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) 论证体系五层、
 [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md) 批判性分析。
 
 ---
@@ -392,7 +392,7 @@ fn example_anti_pattern() {
 **示例**:
 
 ```markdown
-✅ 正确: [研究路线图](./RESEARCH_ROADMAP.md)
+✅ 正确: [研究路线图](./10_research_roadmap.md)
 ❌ 错误: 研究路线图
 ```
 
@@ -409,8 +409,8 @@ fn example_anti_pattern() {
 **示例**:
 
 ```markdown
-✅ 正确: 查看 [研究路线图](./RESEARCH_ROADMAP.md) 了解研究计划
-❌ 错误: 点击 [这里](./RESEARCH_ROADMAP.md)
+✅ 正确: 查看 [研究路线图](./10_research_roadmap.md) 了解研究计划
+❌ 错误: 点击 [这里](./10_research_roadmap.md)
 ```
 
 ### 3. 维护链接完整性

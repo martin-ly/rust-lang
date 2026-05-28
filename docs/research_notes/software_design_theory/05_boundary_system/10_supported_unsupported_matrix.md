@@ -315,7 +315,7 @@ async fn serve() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md)
+- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../../10_rust_193_language_features_comprehensive_analysis.md)
 - [DESIGN_PATTERNS_USAGE_GUIDE](../../../05_guides/05_design_patterns_usage_guide.md)
 
 ---

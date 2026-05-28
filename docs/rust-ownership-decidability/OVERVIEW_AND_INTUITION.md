@@ -522,7 +522,7 @@ Rust 程序（语法）  --[解析]-->  表达式 e（形式化语法）
 **路径1：快速理解（2小时）**
 
 1. 阅读本文档（OVERVIEW_AND_INTUITION.md）
-2. 浏览 THEOREM_DEPENDENCY_GRAPH.md 的图示
+2. 浏览 THEOREM_10_dependency_graph.md 的图示
 3. 看几个示例（examples/SimpleBorrow.v）
 
 **路径2：深入研究（1周）**

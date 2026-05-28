@@ -233,7 +233,7 @@
 **推荐资源**:
 
 - [线程并发使用指南](../05_guides/05_threads_concurrency_usage_guide.md)
-- [异步编程使用指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)
+- [异步编程使用指南](../05_guides/05_async_programming_usage_guide.md)
 - [网络编程速查卡](../02_reference/quick_reference/02_network_programming_cheatsheet.md)
 - [Pin 与自引用结构形式化](../research_notes/formal_methods/pin_self_referential.md)
 
@@ -328,7 +328,7 @@
 5. **形式化与验证（研究者路径）**
    - [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
    - [核心定理完整证明](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
-   - [国际对标索引](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
+   - [国际对标索引](../research_notes/10_international_formal_verification_index.md)
 
 **推荐资源**:
 
@@ -750,7 +750,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 - [跨语言对比文档](../02_reference/02_cross_language_comparison.md)
 - [线程并发使用指南](../05_guides/05_threads_concurrency_usage_guide.md)
-- [异步编程使用指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)
+- [异步编程使用指南](../05_guides/05_async_programming_usage_guide.md)
 
 ---
 
@@ -786,7 +786,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 第 13-16 周: 前沿研究
 ├── [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
 ├── [核心定理完整证明](../research_notes/CORE_THEOREMS_FULL_PROOFS.md)
-├── [国际对标索引](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
+├── [国际对标索引](../research_notes/10_international_formal_verification_index.md)
 └── 研究项目: 选择一个开放问题深入研究
 ```
 
@@ -862,7 +862,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 - [形式化方法研究](../research_notes/formal_methods/README.md)
 - [形式化证明系统指南](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md)
 - [证明索引](../research_notes/PROOF_INDEX.md)
-- [国际对标索引](../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)
+- [国际对标索引](../research_notes/10_international_formal_verification_index.md)
 
 ---
 

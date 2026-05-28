@@ -493,7 +493,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) § 1.2 理论族依赖
+- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../../10_theoretical_and_argumentation_system_architecture.md) § 1.2 理论族依赖
 - [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](../../10_comprehensive_systematic_overview.md) 概念族谱
 
 ---

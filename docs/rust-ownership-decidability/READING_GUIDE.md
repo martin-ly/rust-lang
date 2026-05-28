@@ -201,7 +201,7 @@
    └── 标记所有 admit
 
 3. 理解依赖（4小时）
-   └── THEOREM_DEPENDENCY_GRAPH.md
+   └── THEOREM_10_dependency_graph.md
    └── 理解定理间的依赖关系
 
 4. 选择任务（持续）
@@ -251,7 +251,7 @@
 | Rust 代码如何对应形式化 | CONCEPT_MAP.md |
 | 证明技巧 | 10_proof_strategies.md |
 | 整体架构 | UNIFIED_THEORETICAL_FRAMEWORK.md |
-| 定理依赖关系 | THEOREM_DEPENDENCY_GRAPH.md |
+| 定理依赖关系 | THEOREM_10_dependency_graph.md |
 | 快速开始 | 本文档 + OVERVIEW |
 
 ### 2.2 按问题查找

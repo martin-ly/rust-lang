@@ -1053,7 +1053,7 @@ $ cargo bloat --release
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
 | **类型系统** | [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) | 依赖版本解析的类型理论 |
-| **类型构造** | [construction_capability](../../research_notes/type_theory/construction_capability.md) | 包组合的类型构造能力 |
+| **类型构造** | [construction_capability](../../research_notes/type_theory/10_construction_capability.md) | 包组合的类型构造能力 |
 | **Trait 系统** | [trait_system_formalization](../../research_notes/type_theory/trait_system_formalization.md) | 特征组合的兼容性 |
 
 ### 形式化定理
@@ -1062,7 +1062,7 @@ $ cargo bloat --release
 
 **定理 CARGO-T1（依赖解析正确性）**: 若 Cargo.toml 中的依赖约束可满足，则存在唯一的版本选择满足所有约束。
 
-*证明*: 由 [construction_capability](../../research_notes/type_theory/construction_capability.md) 定理 TCON-T1，依赖版本选择作为类型构造问题，满足确定性判定。∎
+*证明*: 由 [construction_capability](../../research_notes/type_theory/10_construction_capability.md) 定理 TCON-T1，依赖版本选择作为类型构造问题，满足确定性判定。∎
 
 ---
 

@@ -93,7 +93,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 中 92 项特性的表格列「动机」「设计决策」「形式化」「反例」与本模板一致：
+[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) 中 92 项特性的表格列「动机」「设计决策」「形式化」「反例」与本模板一致：
 
 - **概念** ← 动机 + 设计决策（合并为一句话）
 - **形式化引用** ← 形式化列
@@ -101,7 +101,7 @@
 
 **核心特性**（13 项）采用完整链，见 [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md)。
 
-**其余特性**（79 项）采用本精简模板，数据见 [RUST_193](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 各表。
+**其余特性**（79 项）采用本精简模板，数据见 [RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) 各表。
 
 ---
 
@@ -111,7 +111,7 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 92 项特性完整表格 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性完整表格 |
 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | 13 项核心特性完整链 |
 
 ---

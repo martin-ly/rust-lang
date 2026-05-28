@@ -103,7 +103,7 @@
 | trait_system_formalization.md | Trait 系统 | 8,000+ |
 | variance_theory.md | 型变理论 | 6,000+ |
 | advanced_types.md | 高级类型 | 5,000+ |
-| construction_capability.md | 构造能力 | 4,000+ |
+| 10_construction_capability.md | 构造能力 | 4,000+ |
 
 **总计**: 33,000+ 字类型理论内容
 
@@ -141,7 +141,7 @@
 - 10_lifetime_concept_mindmap.md ✅
 - CONCURRENCY_CONCEPT_MINDMAP.md ✅
 - DISTRIBUTED_CONCEPT_MINDMAP.md ✅
-- WORKFLOW_CONCEPT_MINDMAP.md ✅
+- 10_workflow_concept_mindmap.md ✅
 - PROOF_TECHNIQUES_MINDMAP.md ✅
 - 10_async_concept_mindmap.md ✅
 - UNSAFE_CONCEPT_MINDMAP.md ✅
@@ -176,7 +176,7 @@
 - PROOF_COMPLETION_MATRIX.md ✅
 - DESIGN_PATTERNS_MATRIX.md ✅
 - 10_distributed_patterns_matrix.md ✅
-- VERIFICATION_TOOLS_MATRIX.md ✅
+- 10_verification_tools_matrix.md ✅
 - WORKFLOW_ENGINES_MATRIX.md ✅
 - 10_five_dimensional_concept_matrix.md ✅
 - 10_concurrency_safety_matrix.md ✅
@@ -201,7 +201,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- APPLICATION_TREES.md (全集) ✅
+- 10_application_trees.md (全集) ✅
 - 系统编程应用树 ✅
 - 网络服务应用树 ✅
 - 数据系统应用树 ✅
@@ -224,7 +224,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- 00_COMPREHENSIVE_SUMMARY.md ✅
+- 10_00_comprehensive_summary.md ✅
 - 10_00_organization_and_navigation.md ✅
 - PROOF_INDEX.md ✅
 - CORE_THEOREMS_FULL_PROOFS.md ✅

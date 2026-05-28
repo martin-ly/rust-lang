@@ -50,7 +50,7 @@
 
 **Def 1.2（三维边界一致性）**:
 
-若 $B_s(P)$、$B_p(P)$、$B_e(P)$ 与 [safe_unsafe_matrix](../05_boundary_system/safe_unsafe_matrix.md)、
+若 $B_s(P)$、$B_p(P)$、$B_e(P)$ 与 [safe_unsafe_matrix](../05_boundary_system/10_safe_unsafe_matrix.md)、
 [supported_unsupported_matrix](../05_boundary_system/10_supported_unsupported_matrix.md)、
 [expressive_inexpressive_matrix](../05_boundary_system/10_expressive_inexpressive_matrix.md) 三矩阵对应一致，
 则称模式 $P$ 的边界**与体系一致**。

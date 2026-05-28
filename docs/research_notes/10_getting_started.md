@@ -197,7 +197,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-阅读 [研究路线图](./RESEARCH_ROADMAP.md) 了解研究计划：
+阅读 [研究路线图](./10_research_roadmap.md) 了解研究计划：
 
 - 四个研究阶段
 - 研究优先级
@@ -264,7 +264,7 @@
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-首先查看 [研究路线图](./RESEARCH_ROADMAP.md) 了解研究计划，选择合适的研究主题。
+首先查看 [研究路线图](./10_research_roadmap.md) 了解研究计划，选择合适的研究主题。
 
 ### 4.2 使用模板
 
@@ -349,7 +349,7 @@
 2. **第一个可运行示例** → [10_example.md](./10_example.md) 含所有权、借用、生命周期的完整代码（可直接复制运行）
 3. **选择主题** → 从 [快速参考](./QUICK_REFERENCE.md) 选择感兴趣的主题
 4. **阅读笔记** → 阅读相关研究笔记（所有权 → [ownership_model](./formal_methods/ownership_model.md)）
-5. **实践应用** → 查看 [实际应用案例](./practical_applications.md) 的案例 1–3（含 Axum、mpsc、SafeVec 代码）
+5. **实践应用** → 查看 [实际应用案例](./10_practical_applications.md) 的案例 1–3（含 Axum、mpsc、SafeVec 代码）
 
 ### 进阶路径
 >
@@ -405,7 +405,7 @@
 
 - [主索引](./README.md) - 完整的研究笔记索引
 - [快速参考](./QUICK_REFERENCE.md) - 快速查找指南
-- [研究路线图](./RESEARCH_ROADMAP.md) - 研究计划
+- [研究路线图](./10_research_roadmap.md) - 研究计划
 - [贡献指南](./CONTRIBUTING.md) - 贡献流程
 
 ---

@@ -79,7 +79,7 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **UNIFIED_THEORETICAL_FRAMEWORK.md** - 5层架构统一框架
-- **THEOREM_DEPENDENCY_GRAPH.md** - 定理依赖网络图
+- **THEOREM_10_dependency_graph.md** - 定理依赖网络图
 - **FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md** - 缺失诊断与补充方案
 - **FRAMEWORK_COMPLETION_SUMMARY.md** - 框架完成总结
 

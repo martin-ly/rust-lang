@@ -957,7 +957,7 @@ Miri 可以检测：
 - **理论体系与安全论证**: [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) - 安全与非安全边界、理论四层
 - **借用检查器证明**: [borrow_checker_proof.md](../research_notes/formal_methods/borrow_checker_proof.md) - 形式化证明内存安全
 - **所有权模型**: [ownership_model.md](../research_notes/formal_methods/ownership_model.md) - 所有权系统形式化
-- **safe/unsafe 边界矩阵**: [safe_unsafe_matrix.md](../research_notes/software_design_theory/05_boundary_system/safe_unsafe_matrix.md)
+- **safe/unsafe 边界矩阵**: [10_safe_unsafe_matrix.md](../research_notes/software_design_theory/05_boundary_system/10_safe_unsafe_matrix.md)
 
 ---
 
@@ -991,7 +991,7 @@ Miri 可以检测：
 | **Uninitialized Memory** | [uninitialized](https://doc.rust-lang.org/nomicon/uninitialized.html) | § UB 案例 6 越界、§ Miri |
 | **Destructors / Drop** | [destructors](https://doc.rust-lang.org/nomicon/destructors.html) | § UB 案例 8 不恰当的 Drop |
 | **Exception Safety** | [exception-safety](https://doc.rust-lang.org/nomicon/exception-safety.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/02_edge_cases_and_special_cases.md) |
-| **Concurrency / Send and Sync** | [send-and-sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | § 示例 3 实现 Send/Sync、[threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) |
+| **Concurrency / Send and Sync** | [send-and-sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | § 示例 3 实现 Send/Sync、[threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
 | **Implementing Vec** | [vec](https://doc.rust-lang.org/nomicon/vec/vec.html) | § 示例 1 原始指针、§ 示例 6 自定义智能指针 |
 | **Implementing Arc** | [arc](https://doc.rust-lang.org/nomicon/arc-mutex/arc.html) | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) |
 | **FFI** | [ffi](https://doc.rust-lang.org/nomicon/ffi.html) | § 示例 2 调用外部函数 |

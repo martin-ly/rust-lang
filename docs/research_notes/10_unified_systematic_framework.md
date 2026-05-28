@@ -104,7 +104,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
+**上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
 
 ### 核心问题响应
 
@@ -504,9 +504,9 @@ Pin ──→ 自引用安全
 
 | 特性族 | 矩阵 | 决策树 | 完整链 |
 | :--- | :--- | :--- | :--- |
-| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
+| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) |
 | **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) 所有权/借用 |
-| **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/construction_capability.md) |
+| **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/10_construction_capability.md) |
 | **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) Trait/泛型 |
 | **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) match/for/? |
 | **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) Send/Sync/Future |
@@ -517,9 +517,9 @@ Pin ──→ 自引用安全
 
 | 类型族 | 构造能力 | 决策树 | 文档 |
 | :--- | :--- | :--- | :--- |
-| **基本类型** | TCON 矩阵 Unique | 类型构造决策树 | [construction_capability](type_theory/construction_capability.md) |
-| **复合类型** | struct/enum/tuple | 同上 | [construction_capability](type_theory/construction_capability.md) |
-| **泛型/GAT** | Multi 或 Unique | 同上 | [construction_capability](type_theory/construction_capability.md)、[advanced_types](type_theory/advanced_types.md) |
+| **基本类型** | TCON 矩阵 Unique | 类型构造决策树 | [construction_capability](type_theory/10_construction_capability.md) |
+| **复合类型** | struct/enum/tuple | 同上 | [construction_capability](type_theory/10_construction_capability.md) |
+| **泛型/GAT** | Multi 或 Unique | 同上 | [construction_capability](type_theory/10_construction_capability.md)、[advanced_types](type_theory/advanced_types.md) |
 | **impl Trait / dyn Trait** | Unique | 同上 | [trait_system_formalization](type_theory/trait_system_formalization.md) |
 
 ### 按执行模型
@@ -550,7 +550,7 @@ Pin ──→ 自引用安全
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 用途 |
-| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
+| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全与非安全全面论证、契约、UB、安全抽象 |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义形式化、表达能力边界 |

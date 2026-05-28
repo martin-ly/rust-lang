@@ -201,7 +201,7 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 2. 类型状态：泛型约束，纯 Safe
 3. 无 `unsafe` 块
 
-由 ST-T1、ST-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+由 ST-T1、ST-T2 及 [safe_unsafe_matrix](../../05_boundary_system/10_safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 
@@ -461,7 +461,7 @@ graph LR
 | 场景 | ✅ | 典型场景、完整示例 |
 | 反例 | ✅ | 非法状态转换 |
 | 衔接 | ✅ | ownership、CE-T2、match |
-| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
 
 ---
 

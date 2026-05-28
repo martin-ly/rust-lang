@@ -124,7 +124,7 @@ extern "system" {
 
 **Rust 1.93** 稳定了 `asm_cfg`，允许在 `asm!` 的单个语句上使用 `cfg` 属性。
 
-详见 [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md#3-cfg-属性在-asm-行上)
+详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md#3-cfg-属性在-asm-行上)
 
 **参考**: [PR #147736](https://github.com/rust-lang/rust/pull/147736)
 
@@ -226,7 +226,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 > **[来源: POPL - Programming Languages Research]**
 
-详见 [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md#1-musl-125-更新)
+详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md#1-musl-125-更新)
 
 ---
 
@@ -248,7 +248,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-详见 [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md#2-全局分配器线程本地存储支持)
+详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md#2-全局分配器线程本地存储支持)
 
 ---
 
@@ -276,7 +276,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-详见 [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md#标准库更新)
+详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md#标准库更新)
 
 ---
 
@@ -366,7 +366,7 @@ cargo clean --workspace
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [Rust 1.93 vs 1.92 对比](./05_rust_1.93_vs_1.92_comparison.md)
+- [Rust 1.93 vs 1.92 对比](./06_05_rust_1_93_vs_1_92_comparison.md)
 - Rust 1.93 兼容性注意事项
 - [Rust 1.93.0 Release Notes](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/)
 - [releases.rs 1.93.0](https://releases.rs/docs/1.93.0/)

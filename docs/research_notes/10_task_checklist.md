@@ -521,7 +521,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-**文档**: [macro_expansion_performance.md](./experiments/macro_expansion_performance.md)
+**文档**: [10_macro_expansion_performance.md](./experiments/10_macro_expansion_performance.md)
 **优先级**: 🟢 低
 **预计完成时间**: 2-3 周
 
@@ -603,7 +603,7 @@
 
 - [研究笔记主索引](./README.md)
 - [研究进展跟踪](./10_progress_tracking.md)
-- [研究路线图](./RESEARCH_ROADMAP.md)
+- [研究路线图](./10_research_roadmap.md)
 - [系统总结](./10_system_summary.md)
 
 ### 贡献和质量
@@ -620,7 +620,7 @@
 
 - [研究工具使用指南](./TOOLS_GUIDE.md)
 - [研究方法论](./research_methodology.md)
-- [实际应用案例](./practical_applications.md)
+- [实际应用案例](./10_practical_applications.md)
 
 ---
 

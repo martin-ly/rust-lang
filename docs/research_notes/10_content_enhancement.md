@@ -236,7 +236,7 @@
 | **属性关系层** | 引理/定理/推论及依赖 | 本页定理与公理/引理的依赖关系 | 表格或 DAG 片段（如 A→L→T→C） |
 | **解释论证层** | 关键定理的论证块 | 陈述 → 依赖 → 证明步骤/思路 → 反例（若有） | 每定理至少「证明思路」或完整证明；注明引用链 |
 
-**可选**：文末「相关思维表征」注明本页对应的思维导图章节、矩阵位置、证明树、决策树（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)）。
+**可选**：文末「相关思维表征」注明本页对应的思维导图章节、矩阵位置、证明树、决策树（见 [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md)）。
 
 **检查**：见 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md#概念定义-属性关系-解释论证-层次化) 对应项。
 

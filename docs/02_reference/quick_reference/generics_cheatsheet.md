@@ -177,7 +177,7 @@ mindmap
 | **L4 单态化** | Monomorphization：代码生成 | 规则：每个 T 生成独立实例 | 定理 G4：零运行时开销 |
 | **L5 高阶** | HRTB：高阶 Trait Bound | 规则：∀'a, T: Trait<'a> | 定理 G5：生命周期泛化 |
 
-> 形式化理论详见：[类型构造能力](../../research_notes/type_theory/construction_capability.md) | [Trait 系统形式化](../../research_notes/type_theory/trait_system_formalization.md)
+> 形式化理论详见：[类型构造能力](../../research_notes/type_theory/10_construction_capability.md) | [Trait 系统形式化](../../research_notes/type_theory/trait_system_formalization.md)
 
 ---
 
@@ -866,7 +866,7 @@ fn main() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [类型系统完备性缺口](../../research_notes/type_theory/00_completeness_gaps.md) — 泛型相关的完备性保证
-- [类型构造能力](../../research_notes/type_theory/construction_capability.md) — 泛型类型的构造性分析
+- [类型构造能力](../../research_notes/type_theory/10_construction_capability.md) — 泛型类型的构造性分析
 - [Trait 系统形式化](../../research_notes/type_theory/trait_system_formalization.md) — Trait 约束的形式化理论
 
 ---

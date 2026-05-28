@@ -181,7 +181,7 @@
 
 4. 工具实践
    └── coq_skeleton/
-   └── VERIFICATION_TOOLS_MATRIX.md
+   └── 10_verification_tools_matrix.md
 ```
 
 ---

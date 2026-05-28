@@ -109,7 +109,7 @@
 | **never_type (!) 严格化** | ✅ 已补全 | Def BOT1、定理 BOT-T1；1.92+ 与 ⊥ 对应；[type_system_foundations](./type_system_foundations.md) | type_system_foundations |
 | **deref_nullptr deny** | ⚠️ 部分 | Def DEREF-NULL1；1.93 deny-by-default；[type_system_foundations](./type_system_foundations.md) | type_system_foundations |
 
-**对类型构造能力的影响**：上述 ⚠️ 缺口可能影响 [construction_capability](./construction_capability.md) 中的构造路径判定。impl Trait 捕获、Trait 继承菱形、DST 规则、类型推断歧义、对象安全完整规则 → 见 [construction_capability § 类型理论缺口对构造能力的影响](construction_capability.md#类型理论缺口对构造能力的影响)。
+**对类型构造能力的影响**：上述 ⚠️ 缺口可能影响 [construction_capability](./10_construction_capability.md) 中的构造路径判定。impl Trait 捕获、Trait 继承菱形、DST 规则、类型推断歧义、对象安全完整规则 → 见 [construction_capability § 类型理论缺口对构造能力的影响](10_construction_capability.md#类型理论缺口对构造能力的影响)。
 
 ---
 
@@ -161,7 +161,7 @@
 | **blanket impl 冲突** | ⚠️ 部分 | 有反例；**冲突检测算法**无形式化 | trait_system_formalization |
 | **Trait 方法默认参数** | ❌ 未覆盖 | 若稳定化；与 impl 解析的交互 | - |
 
-**对类型构造能力的影响**：对象安全、Trait 继承菱形、blanket impl 冲突 → 可能 Multi 或 Impossible；见 [construction_capability § 类型理论缺口](construction_capability.md#类型理论缺口对构造能力的影响)。
+**对类型构造能力的影响**：对象安全、Trait 继承菱形、blanket impl 冲突 → 可能 Multi 或 Impossible；见 [construction_capability § 类型理论缺口](10_construction_capability.md#类型理论缺口对构造能力的影响)。
 
 ---
 
@@ -178,7 +178,7 @@
 | **higher-ranked trait bounds** | ⚠️ 部分 | `for<'a> T: Trait<'a>` 有描述；**与生命周期推断**的交互未形式化 | lifetime_formalization, trait_system_formalization |
 | **newtype 与零成本** | ⚠️ 部分 | Def NEWTYPE1、定理 NEWTYPE-T1；repr(transparent)；[type_system_foundations](./type_system_foundations.md) | type_system_foundations |
 
-**对类型构造能力的影响**：类型推断歧义、unsized 类型（DST）→ 可能 Multi 或 Impossible；见 [construction_capability](./construction_capability.md)。
+**对类型构造能力的影响**：类型推断歧义、unsized 类型（DST）→ 可能 Multi 或 Impossible；见 [construction_capability](./10_construction_capability.md)。
 
 ---
 
@@ -244,8 +244,8 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [construction_capability](./construction_capability.md) — 类型构造能力；§ 类型理论缺口对构造能力的影响 与本缺口对应
-- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) — 92 项特性；类型相关需与本缺口对照
+- [construction_capability](./10_construction_capability.md) — 类型构造能力；§ 类型理论缺口对构造能力的影响 与本缺口对应
+- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) — 92 项特性；类型相关需与本缺口对照
 - [ARGUMENTATION_GAP_INDEX](../10_argumentation_gap_index.md) — 论证缺口追踪
 - [RFC 1023 Rebalancing Coherence](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)
 - [Relaxing the Orphan Rule (2024)](https://rust-lang.github.io/rust-project-goals/2024h2/Relaxing-the-Orphan-Rule.html)
@@ -256,7 +256,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-**详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../10_formal_proof_critical_analysis_and_plan_2026_02.md)
+**详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../10_international_formal_verification_index.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../10_formal_proof_critical_analysis_and_plan_2026_02.md)
 
 | 缺口类型 | 说明 | 对标成果 |
 | :--- | :--- | :--- |

@@ -51,7 +51,7 @@ fn verify_memory_safety() -> bool {
 
 | 文档 | 描述 | 用途 |
 | :--- | :--- | :--- |
-| [THINKING_REPRESENTATION_METHODS.md](./THINKING_REPRESENTATION_METHODS.md) | 思维表征方式 | 概念关系网络 |
+| [04_thinking_representation_methods.md](./04_thinking_representation_methods.md) | 思维表征方式 | 概念关系网络 |
 | [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) | 决策图网络 | 技术选型决策 |
 | [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) | 证明图网络 | 安全性验证 |
 | [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) | 思维导图集合 | 概念结构学习 |
@@ -73,7 +73,7 @@ fn verify_memory_safety() -> bool {
 | 学习 Rust 概念结构 | [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) | 从上到下浏览思维导图 |
 | 技术选型决策 | [DECISION_GRAPH_NETWORK.md](./DECISION_GRAPH_NETWORK.md) | 跟随决策树回答问题 |
 | 验证安全性 | [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) | 查看证明路径和保证 |
-| 理解特性关系 | [THINKING_REPRESENTATION_METHODS.md](./THINKING_REPRESENTATION_METHODS.md) | 查看概念关系网络 |
+| 理解特性关系 | [04_thinking_representation_methods.md](./04_thinking_representation_methods.md) | 查看概念关系网络 |
 | 对比分析特性 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 查看多维对比矩阵 |
 
 ---
@@ -96,7 +96,7 @@ fn verify_memory_safety() -> bool {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 语言语义与表达能力 | 语义理论 | [../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
-| 理论体系架构 | 理论体系结构 | [../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) |
+| 理论体系架构 | 理论体系结构 | [../research_notes/10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) |
 
 ---
 

@@ -141,7 +141,7 @@
 | 排名 | 文档 | 价值 | 适用人群 |
 |:----:|:-----|:-----|:---------|
 | 1 | `UNIFIED_THEORETICAL_FRAMEWORK.md` | 统一理论框架 | 研究者 |
-| 2 | `THEOREM_DEPENDENCY_GRAPH.md` | 定理依赖网络 | 形式化方法 |
+| 2 | `THEOREM_10_dependency_graph.md` | 定理依赖网络 | 形式化方法 |
 | 3 | `COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md` | 完整示例集 | 所有学习者 |
 | 4 | `COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md` | 综合知识梳理 | 所有学习者 |
 | 5 | `coq-formalization/README.md` | Coq 形式化入口 | 证明开发者 |
@@ -317,7 +317,7 @@ Theorem rust_type_system_fully_decidable :
 | 文件 | 内容 |
 |:-----|:-----|
 | `UNIFIED_THEORETICAL_FRAMEWORK.md` | 统一理论框架 |
-| `THEOREM_DEPENDENCY_GRAPH.md` | 定理依赖网络 |
+| `THEOREM_10_dependency_graph.md` | 定理依赖网络 |
 | `meta-model/RUST_194_COMPREHENSIVE_GUIDE.md` | Rust 1.94 元模型 |
 
 ### 实践导航
@@ -394,7 +394,7 @@ cat docs/rust-ownership-decidability/01-core-concepts/short-concepts/ownership-c
 cat docs/rust-ownership-decidability/FINAL_EXECUTIVE_SUMMARY_V2.md
 
 # 2. 查看定理依赖图
-cat docs/rust-ownership-decidability/THEOREM_DEPENDENCY_GRAPH.md
+cat docs/rust-ownership-decidability/THEOREM_10_dependency_graph.md
 
 # 3. 浏览统一理论框架 (前100行)
 head -100 docs/rust-ownership-decidability/UNIFIED_THEORETICAL_FRAMEWORK.md

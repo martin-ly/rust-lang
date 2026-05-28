@@ -117,7 +117,7 @@
 | 10_project_maintenance_guide.md | 维护标准 |
 | 10_user_guide.md | 使用指南 |
 | 10_comprehensive_project_report.md | 项目报告 |
-| CROSS_REFERENCE_INDEX.md | 交叉引用 |
+| 10_cross_reference_index.md | 交叉引用 |
 | 10_final_verification_checklist.md | 验证清单 |
 
 ### ✅ 完成认证 (100%)
@@ -203,7 +203,7 @@
 
 | 目标 | 入口文档 |
 | :--- | :--- |
-| 系统学习 | 00_COMPREHENSIVE_SUMMARY.md |
+| 系统学习 | 10_00_comprehensive_summary.md |
 | 解决问题 | 10_faq_comprehensive.md |
 | 面试准备 | 10_interview_questions_collection.md |
 | 日常查阅 | 10_rust_formal_methods_cheatsheet.md |

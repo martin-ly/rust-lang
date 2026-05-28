@@ -809,7 +809,7 @@ mod inner {
 
 - [Cargo 包管理与模块索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
 - [类型系统速查卡](./type_system.md) - 类型系统与模块的关系
-- [Cargo 速查卡](./cargo_cheatsheet.md) - Cargo 包管理
+- [Cargo 速查卡](./02_cargo_cheatsheet.md) - Cargo 包管理
 - [字符串与格式化速查卡](02_strings_formatting_cheatsheet.md) - 模块中的字符串处理
 
 ### 相关速查卡

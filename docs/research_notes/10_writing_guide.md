@@ -572,7 +572,7 @@
 
 ```markdown
 - [所有权模型形式化](./formal_methods/ownership_model.md)
-- [研究路线图](./RESEARCH_ROADMAP.md)
+- [研究路线图](./10_research_roadmap.md)
 ```
 
 ### 5. 目录（TOC）门禁

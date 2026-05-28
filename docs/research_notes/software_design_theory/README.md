@@ -60,7 +60,7 @@
 
 ## 与顶层架构衔接
 
-本体系归属于 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) 的**第 4 层（应用与边界层）**，依赖：
+本体系归属于 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../10_theoretical_and_argumentation_system_architecture.md) 的**第 4 层（应用与边界层）**，依赖：
 
 - **公理层**：所有权、借用、类型、型变、Pin、Send/Sync
 - **语义层**：操作语义、指称语义、公理语义、内存模型

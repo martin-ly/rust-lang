@@ -74,7 +74,7 @@
 | trait_system_formalization.md | Trait系统完整 | ✅ |
 | variance_theory.md | 型变理论完整 | ✅ |
 | advanced_types.md | 高级类型完整 | ✅ |
-| construction_capability.md | 构造能力完整 | ✅ |
+| 10_construction_capability.md | 构造能力完整 | ✅ |
 
 **结果**: 11/11 通过 ✅
 
@@ -182,7 +182,7 @@
 | :--- | :--- | :--- |
 | 主索引 | 10_00_organization_and_navigation.md | ✅ |
 | 证明索引 | PROOF_INDEX.md | ✅ |
-| 交叉引用 | CROSS_REFERENCE_INDEX.md | ✅ |
+| 交叉引用 | 10_cross_reference_index.md | ✅ |
 | 快速入口 | 10_user_guide.md | ✅ |
 
 **结果**: 4/4 通过 ✅
@@ -244,7 +244,7 @@
 | 10_project_maintenance_guide.md | ✅ |
 | 10_user_guide.md | ✅ |
 | 10_comprehensive_project_report.md | ✅ |
-| CROSS_REFERENCE_INDEX.md | ✅ |
+| 10_cross_reference_index.md | ✅ |
 | 10_final_verification_checklist.md | ✅ |
 
 ### 5.2 完成认证

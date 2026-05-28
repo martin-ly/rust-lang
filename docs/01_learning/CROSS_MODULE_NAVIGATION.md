@@ -200,7 +200,7 @@ C01 → C04 → C11 → docs/research_notes/
 | 资源 | 路径 | 描述 |
 |------|------|------|
 | 主索引 | [00_master_index.md](../00_master_index.md) | 完整文档索引 |
-| 学习路径 | [LEARNING_PATH_PLANNING.md](./LEARNING_PATH_PLANNING.md) | 学习规划 |
+| 学习路径 | [01_learning_path_planning.md](./01_learning_path_planning.md) | 学习规划 |
 | 快速参考 | [02_reference/quick_reference/README.md](../02_reference/quick_reference/README.md) | 速查手册 |
 | 实践练习 | [03_practice/README.md](../03_practice/README.md) | 动手练习 |
 | 思维表示 | [04_thinking/README.md](../04_thinking/README.md) | 思维导图/矩阵 |

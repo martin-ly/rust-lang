@@ -88,7 +88,7 @@ impl ConfigBuilder {
 
 | 文档 | 描述 | 难度 |
 | :--- | :--- | :--- |
-| [ASYNC_PROGRAMMING_USAGE_GUIDE.md](./ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 异步编程 | ⭐⭐⭐ |
+| [05_async_programming_usage_guide.md](./05_async_programming_usage_guide.md) | 异步编程 | ⭐⭐⭐ |
 | [05_threads_concurrency_usage_guide.md](./05_threads_concurrency_usage_guide.md) | 线程与并发 | ⭐⭐⭐ |
 | [05_design_patterns_usage_guide.md](./05_design_patterns_usage_guide.md) | 设计模式 | ⭐⭐⭐ |
 | [05_macro_system_usage_guide.md](./05_macro_system_usage_guide.md) | 宏系统 | ⭐⭐⭐⭐ |

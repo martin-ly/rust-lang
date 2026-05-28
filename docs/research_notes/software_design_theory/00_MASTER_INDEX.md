@@ -94,7 +94,7 @@
 
 | 维度 | 内容 | 文档 |
 | :--- | :--- | :--- |
-| **安全 vs 非安全** | 纯 Safe / 需 unsafe / 无法表达 | [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md) |
+| **安全 vs 非安全** | 纯 Safe / 需 unsafe / 无法表达 | [safe_unsafe_matrix](05_boundary_system/10_safe_unsafe_matrix.md) |
 | **支持 vs 不支持** | 原生支持 / 库支持 / 需 FFI | [supported_unsupported_matrix](05_boundary_system/10_supported_unsupported_matrix.md) |
 | **充分 vs 非充分表达** | 等价表达 / 近似表达 / 不可表达 | [expressive_inexpressive_matrix](05_boundary_system/10_expressive_inexpressive_matrix.md) |
 
@@ -193,7 +193,7 @@
 | 行为 | Observer、Command、State |
 | 进阶 | Visitor、Chain、Mediator |
 
-选模式时：需求 → `03_semantic_boundary_map` 模式选取示例；判安全 → [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)。
+选模式时：需求 → `03_semantic_boundary_map` 模式选取示例；判安全 → [safe_unsafe_matrix](05_boundary_system/10_safe_unsafe_matrix.md)。
 
 ---
 

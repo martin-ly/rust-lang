@@ -188,7 +188,7 @@ lto = true
 - ✅ **新的 lint（1.91）**：`dangling_pointers_from_locals`（warn-by-default）
 - ✅ **验证建议**：工作区 `check/test/doc-test` 的最小验证命令集
 
-#### 5. [Rust 1.93 vs 1.92 全面对比分析](./05_rust_1.93_vs_1.92_comparison.md) 🆕
+#### 5. [Rust 1.93 vs 1.92 全面对比分析](./06_05_rust_1_93_vs_1_92_comparison.md) 🆕
 
 > **[来源: Wikipedia - Rust (programming language)]**
 >
@@ -265,7 +265,7 @@ lto = true
 - **大量 API 稳定化**: MaybeUninit、String、Vec、整数操作、VecDeque、Duration、char、fmt 等
 - **平台支持**: 以 rustc 平台支持页与 GitHub release tag 为准（release post 未将平台 tier 变更作为重点列出）
 
-**文档**: [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md)
+**文档**: [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md)
 
 #### 6. Rust 1.93 兼容性注意事项 🆕
 
@@ -475,7 +475,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - Cargo 工作空间
 - [Rustdoc 高级](./03_rustdoc_advanced.md)
 - Rust 1.91 vs 1.90 对比分析（对齐官方发布说明）
-- [Rust 1.93 vs 1.92 对比分析](./05_rust_1.93_vs_1.92_comparison.md) 🆕
+- [Rust 1.93 vs 1.92 对比分析](./06_05_rust_1_93_vs_1_92_comparison.md) 🆕
 - Rust 1.93 兼容性注意事项 🆕
 - [Rust 1.93 完整变更清单](./06_07_rust_1_93_full_changelog.md) 🆕
 - [Rust 版本演进链 1.89–1.93](../archive/2026_05_historical_docs/08_rust_version_evolution_1.89_to_1.93.md)（已归档）
@@ -483,7 +483,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.89→1.93 累积特性总览](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md)（已归档）
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](./06_11_rust_1_93_cargo_rustdoc_changes.md) 🆕
 - [Rust 1.93.1 vs 1.93.0 补丁版本对比](../archive/2026_05_historical_docs/12_rust_1.93.1_vs_1.93.0_comparison.md)（已归档）
-- [Rust 1.93 语言特性全面分析（92 项设计论证）](../research_notes/RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 🆕
+- [Rust 1.93 语言特性全面分析（92 项设计论证）](../research_notes/10_rust_193_language_features_comprehensive_analysis.md) 🆕
 - [Rust 1.94 完整发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md) 🆕
 - [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md) 🆕
 - [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md) 🆕

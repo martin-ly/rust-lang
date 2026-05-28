@@ -223,7 +223,7 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 3. 委托调用：`self.inner.method()` 纯 Safe
 4. 无裸指针、无 FFI、无 `unsafe` 块
 
-由 AD-T1、AD-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+由 AD-T1、AD-T2 及 [safe_unsafe_matrix](../../05_boundary_system/10_safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 
@@ -526,7 +526,7 @@ graph LR
 | 场景 | ✅ | 典型场景、第三方 HTTP 适配 |
 | 反例 | ✅ | 适配器修改被适配者语义 |
 | 衔接 | ✅ | ownership、borrow、CE-T1 |
-| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
 
 ---
 

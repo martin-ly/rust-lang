@@ -466,7 +466,7 @@ struct CacheLinePadded {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ownership_model](../research_notes/formal_methods/ownership_model.md) - transmute 形式化约束
-- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 指针有效性
+- [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 指针有效性
 - [memory_analysis](../research_notes/experiments/memory_analysis.md) - align_of 实验
 
 ---

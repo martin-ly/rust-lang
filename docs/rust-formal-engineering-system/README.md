@@ -139,7 +139,7 @@ fn render<T: Drawable>(item: T) {
 ## 相关文档
 
 - [研究笔记主入口](../research_notes/README.md)
-- [思维表征方式](../04_thinking/THINKING_REPRESENTATION_METHODS.md)
+- [思维表征方式](../04_thinking/04_thinking_representation_methods.md)
 - [多维概念矩阵](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
 
 ---

@@ -183,7 +183,7 @@
 
 - [主索引](./README.md) - 了解现有研究主题
 - [快速参考](./QUICK_REFERENCE.md) - 查找相关主题
-- [研究路线图](./RESEARCH_ROADMAP.md) - 了解研究计划
+- [研究路线图](./10_research_roadmap.md) - 了解研究计划
 
 ### 步骤 3: 创建或修改文件
 
@@ -263,7 +263,7 @@
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 查看 [主索引](./README.md) 确认主题不重复
-- [ ] 查看 [研究路线图](./RESEARCH_ROADMAP.md) 了解优先级
+- [ ] 查看 [研究路线图](./10_research_roadmap.md) 了解优先级
 - [ ] 使用 [模板](./TEMPLATE.md) 创建文件
 - [ ] 选择合适的目录（formal_methods/、type_theory/、experiments/）
 - [ ] **元信息**：文首 blockquote 含 创建日期、最后更新、Rust 版本 1.93.1+ (Edition 2024)、状态（见 [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md)）
@@ -314,7 +314,7 @@
 - [研究笔记规范](./README.md#-研究笔记规范)
 - [研究笔记模板](./TEMPLATE.md)
 - [快速参考](./QUICK_REFERENCE.md)
-- [研究路线图](./RESEARCH_ROADMAP.md)
+- [研究路线图](./10_research_roadmap.md)
 
 ---
 

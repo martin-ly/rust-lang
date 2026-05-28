@@ -811,7 +811,7 @@ async fn use_future() {
 | 多维矩阵 | [README §六篇并表](README.md#formal_methods-六篇并表) 第 5 行 |
 | 证明树 | 本文 Pin Def/T1–T3 结构；[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) |
 
-*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) § 文档↔思维表征。
+*依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 
 ---
 

@@ -932,7 +932,7 @@ fn fib(n: usize) -> usize {
 > **[来源: ACM - Systems Programming Languages]**
 
 - [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 算法与类型的关系
-- [构造能力理论](../../research_notes/type_theory/construction_capability.md) — 算法表达能力边界
+- [构造能力理论](../../research_notes/type_theory/10_construction_capability.md) — 算法表达能力边界
 - [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — 算法复杂度与执行模型
 - [工作流安全完整模型](../../research_notes/software_design_theory/02_workflow_safe_complete_models/README.md) — 算法正确性验证
 
@@ -940,7 +940,7 @@ fn fib(n: usize) -> usize {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-- [集合与迭代器速查卡](./collections_iterators_cheatsheet.md) - 数据结构基础
+- [集合与迭代器速查卡](./02_collections_iterators_cheatsheet.md) - 数据结构基础
 - [控制流与函数速查卡](./control_flow_functions_cheatsheet.md) - 算法控制流
 - [类型系统速查卡](./type_system.md) - 算法中的类型
 

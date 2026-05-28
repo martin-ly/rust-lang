@@ -45,7 +45,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - UNIFIED_THEORETICAL_FRAMEWORK.md
-- THEOREM_DEPENDENCY_GRAPH.md
+- THEOREM_10_dependency_graph.md
 - THEOREM_INTUITIONS.md
 - 10_proof_strategies.md
 - 10_formal_language_and_proofs.md (引用)

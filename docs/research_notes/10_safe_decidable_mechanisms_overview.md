@@ -41,7 +41,7 @@
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 全面梳理 Rust 中「安全且编译期可判定」的机制，每项含概念定义、属性关系、解释论证、形式证明引用、反例；与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) 双向链接
-> **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)
+> **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md)
 
 ---
 
@@ -218,7 +218,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 基础上，为「并发与异步族」「Trait 与多态族」增加**可判定性、安全边界、形式化文档、思维表征**四维，便于与 formal_methods 对照。
+在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) 基础上，为「并发与异步族」「Trait 与多态族」增加**可判定性、安全边界、形式化文档、思维表征**四维，便于与 formal_methods 对照。
 
 ### 6.1 并发与异步族
 >
@@ -260,7 +260,7 @@
 
 - [formal_methods README](formal_methods/README.md) — 六篇并表、公理-定理索引
 - [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) — 意见与建议、阶段 A–E 计划
-- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) — 92 项特性与形式化映射
+- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) — 92 项特性与形式化映射
 - [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) — 反例索引
 
 ---

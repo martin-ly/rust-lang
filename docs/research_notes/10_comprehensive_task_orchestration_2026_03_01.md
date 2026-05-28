@@ -130,7 +130,7 @@
 | 10_five_dimensional_concept_matrix.md | 2.1KB | 5KB | P1 |
 | LEARNING_PROGRESSION_MATRIX.md | 2.1KB | 4KB | P2 |
 | 10_error_type_selection_decision_tree.md | 2.1KB | 5KB | P1 |
-| VERIFICATION_TOOLS_MATRIX.md | 2.3KB | 5KB | P2 |
+| 10_verification_tools_matrix.md | 2.3KB | 5KB | P2 |
 
 ### C类：可扩展的思维导图 (15个)
 

@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 针对 formal_methods 目录的批判性意见、Sync/Send/async 等机制缺口、安全可判定机制全面梳理建议、完备 Rust 特性对比表、思维表征结合建议及后续可持续推进计划
-> **上位**: [formal_methods README](./README.md)、[00_completeness_gaps](./00_completeness_gaps.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md)
+> **上位**: [formal_methods README](./README.md)、[00_completeness_gaps](./00_completeness_gaps.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md)
 
 ---
 
@@ -80,7 +80,7 @@
 | :--- | :--- | :--- |
 | **新增 Send/Sync 形式化专篇** | P0 | 独立文档：概念定义（SafeTransfer/SafeShare）、属性关系（T: Sync ⇔ &T: Send）、与 thread::spawn/Future/Arc 的衔接、形式化 Def/Axiom/定理、反例（Rc !Send、Cell !Sync）；与 async_state_machine、borrow_checker_proof、ownership_model 双向链接。 |
 | **安全可判定机制总览文档** | P0 | 单文档列出所有“安全且编译期可判定”的机制，每项含：概念定义、属性关系、解释论证、形式证明引用、反例；并注明对应思维表征（思维导图、矩阵、决策树、证明树）位置。 |
-| **完备 Rust 特性全部特征对比表** | P1 | 在现有 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 基础上，增加维度：可判定性（静态/运行时/不可判定）、安全边界（Safe/Unsafe 边界）、形式化文档、思维表征入口；必要时拆出「核心机制子表」含 Send/Sync/async。 |
+| **完备 Rust 特性全部特征对比表** | P1 | 在现有 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 基础上，增加维度：可判定性（静态/运行时/不可判定）、安全边界（Safe/Unsafe 边界）、形式化文档、思维表征入口；必要时拆出「核心机制子表」含 Send/Sync/async。 |
 | **思维表征四类与 formal_methods 绑定** | P1 | 在 HIERARCHICAL_MAPPING 或本目录 README 中明确：思维导图、概念多维矩阵、决策树图、推理证明树图各自对应哪些 formal_methods 文档/小节；各篇形式化文档末尾「相关思维表征」表统一包含四类入口。 |
 | **async 机制单篇可选** | P2 | 若需“async 语法与运行时模型”与“Future 状态机”分离，可增「async 机制形式化」篇，侧重 async fn、.await、Send 边界、与 Pin 的接口；与 async_state_machine 分工（状态机 vs 语言机制）。 |
 
@@ -142,7 +142,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-下表在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 92 项基础上，增加**可判定性、安全边界、形式化文档、思维表征**四维，形成「全部特征对比」视图；核心机制（含 Send/Sync/async）单独成块便于与 formal_methods 对照。
+下表在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 92 项基础上，增加**可判定性、安全边界、形式化文档、思维表征**四维，形成「全部特征对比」视图；核心机制（含 Send/Sync/async）单独成块便于与 formal_methods 对照。
 
 ### 3.1 核心安全可判定机制对比（子表）
 >
@@ -170,7 +170,7 @@
 - **形式化文档**：formal_methods 或 type_theory 中的文档名 + Def/定理编号；无则「-」。
 - **思维表征**：思维导图（04_thinking/MIND_MAP_COLLECTION 等）、概念多维矩阵（六篇并表、执行模型矩阵等）、决策树（06_boundary_analysis、DESIGN_MECHANISM）、推理证明树（PROOF_INDEX、PROOF_GRAPH_NETWORK）。
 
-完整 92 项逐项表可在后续迭代中从 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 自动生成或手填扩展；本小节仅给出**核心安全可判定机制子表**作为“完备对比”的模板与首期交付。
+完整 92 项逐项表可在后续迭代中从 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 自动生成或手填扩展；本小节仅给出**核心安全可判定机制子表**作为“完备对比”的模板与首期交付。
 
 ---
 
@@ -241,9 +241,9 @@
 | :--- | :--- |
 | [formal_methods README](./README.md) | 本计划为 README 的「意见与可持续推进」扩展；README 可增加「参见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md)」。 |
 | [00_completeness_gaps](./00_completeness_gaps.md) | Send/Sync 独立形式化已补全；§8 后续可持续推进已标阶段 A–D 完成，链到本计划与总览。 |
-| [HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 阶段 D 中增加「安全可判定机制↔思维表征」表或节。 |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) | 阶段 D 中增加「安全可判定机制↔思维表征」表或节。 |
 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./10_formal_methods_completeness_checklist.md) | 六篇×六维完备性检查表（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）；与总览互为自检。 |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | §3 完备对比表与该文档 92 项一致；可互为「总览」与「详表」。 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) | §3 完备对比表与该文档 92 项一致；可互为「总览」与「详表」。 |
 | [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) | Send/Sync 设计理由已存在；形式化 Def/定理由阶段 A 专篇承担，DESIGN_MECHANISM 链到专篇。 |
 
 ---

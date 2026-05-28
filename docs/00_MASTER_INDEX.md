@@ -41,7 +41,7 @@
 > **完整结构**: DOCS_STRUCTURE_OVERVIEW
 > （按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖）
 > **交叉引用**: [DOCUMENTATION_CROSS_REFERENCE_GUIDE](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) |
-> [CROSS_REFERENCE_INDEX](./research_notes/CROSS_REFERENCE_INDEX.md)
+> [CROSS_REFERENCE_INDEX](./research_notes/10_cross_reference_index.md)
 
 ---
 
@@ -51,8 +51,8 @@
 
 | 主题 | 入口 | 说明 | 交叉引用 |
 | :--- | :--- | :--- | :--- |
-| **📋 完整结构总览** | DOCS_STRUCTURE_OVERVIEW | 按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖 docs | ←→ [CROSS_REFERENCE_INDEX](./research_notes/CROSS_REFERENCE_INDEX.md) |
-| **🔗 跨文档映射网络** | [DOCUMENTATION_CROSS_REFERENCE_GUIDE](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) | 全文档双向链接、概念映射、定理引用 | ←→ [CROSS_REFERENCE_INDEX](./research_notes/CROSS_REFERENCE_INDEX.md) |
+| **📋 完整结构总览** | DOCS_STRUCTURE_OVERVIEW | 按 00_COMPREHENSIVE_SUMMARY 格式 100% 覆盖 docs | ←→ [CROSS_REFERENCE_INDEX](./research_notes/10_cross_reference_index.md) |
+| **🔗 跨文档映射网络** | [DOCUMENTATION_CROSS_REFERENCE_GUIDE](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) | 全文档双向链接、概念映射、定理引用 | ←→ [CROSS_REFERENCE_INDEX](./research_notes/10_cross_reference_index.md) |
 | **📄 一页纸总结** | [ONE_PAGE_SUMMARY_TEMPLATE](07_project/ONE_PAGE_SUMMARY_TEMPLATE.md) | C01–C12 模块速览（12/12 完成） | ←→ 各模块主索引 |
 | **📚 学习路径** | [01_learning](#01-学习路径与导航) | 学习规划、官方资源映射 | ←→ [quick_reference](#02-参考与速查) |
 | **⚡ 速查参考** | [02_reference](#02-参考与速查) | 20 个速查卡、边界特例、标准库 | ←→ [05_guides](#05-专题指南) ←→ [research_notes](#03-理论与形式化) |
@@ -73,7 +73,7 @@
 | **初学者** | 学习路径 → 速查卡 → C01 模块 | [01_learning](#01-学习路径与导航) → [quick_reference/ownership_cheatsheet](./02_reference/quick_reference/ownership_cheatsheet.md) → [c01_ownership_borrow_scope](../crates/c01_ownership_borrow_scope/docs/README.md) |
 | **开发者** | 专题指南 → 速查卡 → 边界特例 | [05_guides](#05-专题指南) → [quick_reference](#02-参考与速查) → [EDGE_CASES](./02_reference/02_edge_cases_and_special_cases.md) |
 | **研究者** | 形式化理论 → 思维表征 → 证明索引 | [research_notes/formal_methods](./research_notes/formal_methods/README.md) → [04_thinking](#04-思维表征) → [PROOF_INDEX](./research_notes/PROOF_INDEX.md) |
-| **维护者** | 项目元文档 → 版本追踪 → 跨文档映射 | [07_project](#07-项目元文档) → [CROSS_REFERENCE_GUIDE](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) → [CROSS_REFERENCE_INDEX](./research_notes/CROSS_REFERENCE_INDEX.md) |
+| **维护者** | 项目元文档 → 版本追踪 → 跨文档映射 | [07_project](#07-项目元文档) → [CROSS_REFERENCE_GUIDE](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) → [CROSS_REFERENCE_INDEX](./research_notes/10_cross_reference_index.md) |
 
 ---
 
@@ -83,7 +83,7 @@
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [LEARNING_PATH_PLANNING.md](./01_learning/LEARNING_PATH_PLANNING.md) | 学习路径规划 | → [quick_reference](#02-参考与速查) → [01_learning/OFFICIAL_RESOURCES_MAPPING](./01_learning/01_official_resources_mapping.md) |
+| [01_learning_path_planning.md](./01_learning/01_learning_path_planning.md) | 学习路径规划 | → [quick_reference](#02-参考与速查) → [01_learning/OFFICIAL_RESOURCES_MAPPING](./01_learning/01_official_resources_mapping.md) |
 | [01_official_resources_mapping.md](./01_learning/01_official_resources_mapping.md) | 本项目 ↔ The Rust Book / Reference / RBE | → crates/*/docs/ → [QUICK_REFERENCE](./research_notes/QUICK_REFERENCE.md) |
 
 ---
@@ -99,7 +99,7 @@
 | [ERROR_CODE_MAPPING.md](./02_reference/ERROR_CODE_MAPPING.md) | 编译器错误码 → 本项目文档映射 | → [TROUBLESHOOTING_GUIDE](./05_guides/05_troubleshooting_guide.md) → [research_notes/formal_methods](./research_notes/formal_methods/README.md) |
 | [02_edge_cases_and_special_cases.md](./02_reference/02_edge_cases_and_special_cases.md) | 空集、零长度、溢出等边界特例 | → [SAFE_DECIDABLE_MECHANISMS](./research_notes/10_safe_decidable_mechanisms_overview.md) → [SAFE_UNSAFE_ANALYSIS](./research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | [02_standard_library_comprehensive_analysis_2025_12_25.md](./02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md) | 标准库全面分析 | → [type_theory](./research_notes/type_theory/README.md) → [crates/*/examples/](../crates/README.md) |
-| [02_cross_language_comparison.md](./02_reference/02_cross_language_comparison.md) | Rust vs C++/Go/Python | → [LEARNING_PATH_PLANNING](./01_learning/LEARNING_PATH_PLANNING.md) |
+| [02_cross_language_comparison.md](./02_reference/02_cross_language_comparison.md) | Rust vs C++/Go/Python | → [LEARNING_PATH_PLANNING](./01_learning/01_learning_path_planning.md) |
 
 ### 速查卡详细索引
 >
@@ -109,21 +109,21 @@
 | :--- | :--- | :--- |
 | [ownership_cheatsheet](./02_reference/quick_reference/ownership_cheatsheet.md) | [UNSAFE_RUST_GUIDE](./05_guides/UNSAFE_RUST_GUIDE.md) | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
 | [type_system](./02_reference/quick_reference/type_system.md) | [ADVANCED_TOPICS_DEEP_DIVE](./05_guides/05_advanced_topics_deep_dive.md) | [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
-| [async_patterns](./02_reference/quick_reference/async_patterns.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](./05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
-| [threads_concurrency_cheatsheet](./02_reference/quick_reference/threads_concurrency_cheatsheet.md) | [THREADS_CONCURRENCY_USAGE_GUIDE](./05_guides/05_threads_concurrency_usage_guide.md) | [send_sync_formalization](./research_notes/formal_methods/send_sync_formalization.md) |
+| [async_patterns](./02_reference/quick_reference/async_patterns.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](./05_guides/05_async_programming_usage_guide.md) | [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
+| [threads_concurrency_cheatsheet](./02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [THREADS_CONCURRENCY_USAGE_GUIDE](./05_guides/05_threads_concurrency_usage_guide.md) | [send_sync_formalization](./research_notes/formal_methods/send_sync_formalization.md) |
 | [generics_cheatsheet](./02_reference/quick_reference/generics_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](./05_guides/05_macro_system_usage_guide.md) | [trait_system_formalization](./research_notes/type_theory/trait_system_formalization.md) |
 | design_patterns_cheatsheet | [DESIGN_PATTERNS_USAGE_GUIDE](./05_guides/05_design_patterns_usage_guide.md) | [01_design_patterns_formal](./research_notes/software_design_theory/01_design_patterns_formal/README.md) |
 | [error_handling_cheatsheet](./02_reference/quick_reference/error_handling_cheatsheet.md) | [TROUBLESHOOTING_GUIDE](./05_guides/05_troubleshooting_guide.md) | [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
 | macros_cheatsheet | [MACRO_SYSTEM_USAGE_GUIDE](./05_guides/05_macro_system_usage_guide.md) | [trait_system_formalization](./research_notes/type_theory/trait_system_formalization.md) |
 | [testing_cheatsheet](./02_reference/quick_reference/02_testing_cheatsheet.md) | [TESTING_COVERAGE_GUIDE](./05_guides/05_testing_coverage_guide.md) | [formal_methods](./research_notes/formal_methods/README.md) |
 | [control_flow_functions_cheatsheet](./02_reference/quick_reference/control_flow_functions_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](./05_guides/05_macro_system_usage_guide.md) | [formal_methods/README](./research_notes/formal_methods/README.md) §A-CF1 |
-| [collections_iterators_cheatsheet](./02_reference/quick_reference/collections_iterators_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](05_guides/PERFORMANCE_TUNING_GUIDE.md) | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
+| [collections_iterators_cheatsheet](./02_reference/quick_reference/02_collections_iterators_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](05_guides/PERFORMANCE_TUNING_GUIDE.md) | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
 | [smart_pointers_cheatsheet](./02_reference/quick_reference/smart_pointers_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](05_guides/PERFORMANCE_TUNING_GUIDE.md) | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
 | [modules_cheatsheet](./02_reference/quick_reference/02_modules_cheatsheet.md) | [CROSS_MODULE_INTEGRATION_EXAMPLES](./05_guides/05_cross_module_integration_examples.md) | [trait_system_formalization](./research_notes/type_theory/trait_system_formalization.md) |
 | [strings_formatting_cheatsheet](./02_reference/quick_reference/02_strings_formatting_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](./05_guides/05_cli_applications_guide.md) | [ALIGNMENT_GUIDE](./02_reference/ALIGNMENT_GUIDE.md) |
-| [cargo_cheatsheet](./02_reference/quick_reference/cargo_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](./05_guides/05_cli_applications_guide.md) | [06_toolchain](./06_toolchain/README.md) |
+| [cargo_cheatsheet](./02_reference/quick_reference/02_cargo_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](./05_guides/05_cli_applications_guide.md) | [06_toolchain](./06_toolchain/README.md) |
 | [process_management_cheatsheet](./02_reference/quick_reference/02_process_management_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](./05_guides/05_cli_applications_guide.md) | [SAFE_UNSAFE_ANALYSIS](./research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
-| [network_programming_cheatsheet](./02_reference/quick_reference/02_network_programming_cheatsheet.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](./05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
+| [network_programming_cheatsheet](./02_reference/quick_reference/02_network_programming_cheatsheet.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](./05_guides/05_async_programming_usage_guide.md) | [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
 | [algorithms_cheatsheet](./02_reference/quick_reference/02_algorithms_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](05_guides/PERFORMANCE_TUNING_GUIDE.md) | [ownership_model](./research_notes/formal_methods/ownership_model.md) |
 | [wasm_cheatsheet](./02_reference/quick_reference/02_wasm_cheatsheet.md) | [WASM_USAGE_GUIDE](./05_guides/05_wasm_usage_guide.md) | [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
 | [ai_ml_cheatsheet](./02_reference/quick_reference/02_ai_ml_cheatsheet.md) | [AI_RUST_ECOSYSTEM_GUIDE](./05_guides/05_ai_rust_ecosystem_guide.md) | [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
@@ -137,19 +137,19 @@
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
 | [research_notes/](./research_notes/README.md) | 形式化方法、类型理论、软件设计理论（主内容） | → [04_thinking](#04-思维表征) → [05_guides](#05-专题指南) |
-| [00_ORGANIZATION_AND_NAVIGATION](./research_notes/10_00_organization_and_navigation.md) | 研究笔记组织架构与按目标导航（首次使用入口） | → [00_COMPREHENSIVE_SUMMARY](./research_notes/00_COMPREHENSIVE_SUMMARY.md) |
-| [00_COMPREHENSIVE_SUMMARY](./research_notes/00_COMPREHENSIVE_SUMMARY.md) | 完整总结综合（项目全貌、知识地图、论证总览） | → [ARGUMENTATION_CHAIN_AND_FLOW](./research_notes/10_argumentation_chain_and_flow.md) → [HIERARCHICAL_MAPPING](./research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) |
-| [CROSS_REFERENCE_INDEX](./research_notes/CROSS_REFERENCE_INDEX.md) | **跨文档映射网络** - 双向链接表、概念映射、定理引用 | → [DOCUMENTATION_CROSS_REFERENCE_GUIDE](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) → 所有研究笔记 |
+| [00_ORGANIZATION_AND_NAVIGATION](./research_notes/10_00_organization_and_navigation.md) | 研究笔记组织架构与按目标导航（首次使用入口） | → [00_COMPREHENSIVE_SUMMARY](./research_notes/10_00_comprehensive_summary.md) |
+| [00_COMPREHENSIVE_SUMMARY](./research_notes/10_00_comprehensive_summary.md) | 完整总结综合（项目全貌、知识地图、论证总览） | → [ARGUMENTATION_CHAIN_AND_FLOW](./research_notes/10_argumentation_chain_and_flow.md) → [HIERARCHICAL_MAPPING](./research_notes/10_hierarchical_mapping_and_summary.md) |
+| [CROSS_REFERENCE_INDEX](./research_notes/10_cross_reference_index.md) | **跨文档映射网络** - 双向链接表、概念映射、定理引用 | → [DOCUMENTATION_CROSS_REFERENCE_GUIDE](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) → 所有研究笔记 |
 | [ARGUMENTATION_CHAIN_AND_FLOW](./research_notes/10_argumentation_chain_and_flow.md) | 论证脉络关系与论证思路（DAG、文档依赖、推导链） | → [FORMAL_FULL_MODEL_OVERVIEW](./research_notes/10_formal_full_model_overview.md) → [PROOF_INDEX](./research_notes/PROOF_INDEX.md) |
-| [HIERARCHICAL_MAPPING_AND_SUMMARY](./research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 层次化映射总结（文档树、概念↔定理、文档↔思维表征） | → [04_thinking](#04-思维表征) → [PROOF_INDEX](./research_notes/PROOF_INDEX.md) |
+| [HIERARCHICAL_MAPPING_AND_SUMMARY](./research_notes/10_hierarchical_mapping_and_summary.md) | 层次化映射总结（文档树、概念↔定理、文档↔思维表征） | → [04_thinking](#04-思维表征) → [PROOF_INDEX](./research_notes/PROOF_INDEX.md) |
 | [rust-formal-engineering-system/](./rust-formal-engineering-system/README.md) | 形式化工程系统索引（映射到 research_notes） | → [research_notes/formal_methods](./research_notes/formal_methods/README.md) → [research_notes/type_theory](./research_notes/type_theory/README.md) |
 | [research_notes/PROOF_INDEX.md](./research_notes/PROOF_INDEX.md) | 公理-定理-证明索引 | → [CORE_THEOREMS_FULL_PROOFS](./research_notes/CORE_THEOREMS_FULL_PROOFS.md) → [formal_methods/*](./research_notes/formal_methods/README.md) |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) | 形式化证明系统指南 | → [formal_methods/](./research_notes/formal_methods/README.md) → [type_theory/](./research_notes/type_theory/README.md) |
-| [00_COMPREHENSIVE_SUMMARY](./research_notes/00_COMPREHENSIVE_SUMMARY.md) | 综合总览、全局一致性 | → [formal_methods/](./research_notes/formal_methods/README.md) → [type_theory/](./research_notes/type_theory/README.md) |
+| [00_COMPREHENSIVE_SUMMARY](./research_notes/10_00_comprehensive_summary.md) | 综合总览、全局一致性 | → [formal_methods/](./research_notes/formal_methods/README.md) → [type_theory/](./research_notes/type_theory/README.md) |
 | [CORE_THEOREMS_FULL_PROOFS](./research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 核心定理完整证明（L2 级，数学风格） | → [ownership_model](./research_notes/formal_methods/ownership_model.md) → [borrow_checker_proof](./research_notes/formal_methods/borrow_checker_proof.md) → [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
 | [THEOREM_RUST_EXAMPLE_MAPPING](./research_notes/10_theorem_rust_example_mapping.md) | 定理↔Rust 示例映射 | → [CORE_THEOREMS_FULL_PROOFS](./research_notes/CORE_THEOREMS_FULL_PROOFS.md) → crates/*/examples/ |
 | [FORMAL_LANGUAGE_AND_PROOFS](./research_notes/10_formal_language_and_proofs.md) | 形式语言与形式证明（推理规则、操作语义、判定形式） | → [PROOF_INDEX](./research_notes/PROOF_INDEX.md) → [04_thinking/PROOF_GRAPH_NETWORK](./04_thinking/PROOF_GRAPH_NETWORK.md) |
-| [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际形式化验证对标 | → [formal_methods/README](./research_notes/formal_methods/README.md) §国际权威对标 |
+| [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./research_notes/10_international_formal_verification_index.md) | 国际形式化验证对标 | → [formal_methods/README](./research_notes/formal_methods/README.md) §国际权威对标 |
 
 ### 形式化方法研究
 >
@@ -190,7 +190,7 @@
 | [software_design_theory/00_MASTER_INDEX](./research_notes/software_design_theory/00_MASTER_INDEX.md) | 软件设计理论主索引 | → [01_design_patterns](./research_notes/software_design_theory/01_design_patterns_formal/README.md) → [04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | [01_design_patterns_formal/](./research_notes/software_design_theory/01_design_patterns_formal/README.md) | GoF 23 模式形式化 | ←→ [04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) ←→ [05_guides/DESIGN_PATTERNS_USAGE_GUIDE](./05_guides/05_design_patterns_usage_guide.md) |
 | [02_workflow_safe_complete_models/](./research_notes/software_design_theory/02_workflow_safe_complete_models/README.md) | 23 安全 vs 43 完全 | ←→ [03_execution_models](./research_notes/software_design_theory/03_execution_models/README.md) ←→ [04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
-| [03_execution_models/](./research_notes/software_design_theory/03_execution_models/README.md) | 同步/异步/并发/并行/分布式 | ←→ [02_workflow](./research_notes/software_design_theory/02_workflow_safe_complete_models/README.md) ←→ [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](./05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) |
+| [03_execution_models/](./research_notes/software_design_theory/03_execution_models/README.md) | 同步/异步/并发/并行/分布式 | ←→ [02_workflow](./research_notes/software_design_theory/02_workflow_safe_complete_models/README.md) ←→ [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](./05_guides/05_async_programming_usage_guide.md) |
 | [04_compositional_engineering/](./research_notes/software_design_theory/04_compositional_engineering/README.md) | CE-T1-T3 | ←→ [01_design_patterns](./research_notes/software_design_theory/01_design_patterns_formal/README.md) ←→ [formal_methods/ownership_model](./research_notes/formal_methods/ownership_model.md) |
 | [05_boundary_system/](./research_notes/software_design_theory/05_boundary_system/README.md) | 安全/表达/支持边界矩阵 | ←→ [01_design_patterns](./research_notes/software_design_theory/01_design_patterns_formal/README.md) ←→ [SAFE_UNSAFE_ANALYSIS](./research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 
@@ -202,10 +202,10 @@
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [THINKING_REPRESENTATION_METHODS.md](./04_thinking/THINKING_REPRESENTATION_METHODS.md) | 思维导图、决策树、转换树、证明树 | → [MIND_MAP_COLLECTION](./04_thinking/MIND_MAP_COLLECTION.md) → [DECISION_GRAPH_NETWORK](./04_thinking/DECISION_GRAPH_NETWORK.md) → [PROOF_GRAPH_NETWORK](./04_thinking/PROOF_GRAPH_NETWORK.md) |
-| [DECISION_GRAPH_NETWORK.md](./04_thinking/DECISION_GRAPH_NETWORK.md) | 决策图网络 | ←→ [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](./05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) ←→ [06_boundary_analysis](./research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) |
+| [04_thinking_representation_methods.md](./04_thinking/04_thinking_representation_methods.md) | 思维导图、决策树、转换树、证明树 | → [MIND_MAP_COLLECTION](./04_thinking/MIND_MAP_COLLECTION.md) → [DECISION_GRAPH_NETWORK](./04_thinking/DECISION_GRAPH_NETWORK.md) → [PROOF_GRAPH_NETWORK](./04_thinking/PROOF_GRAPH_NETWORK.md) |
+| [DECISION_GRAPH_NETWORK.md](./04_thinking/DECISION_GRAPH_NETWORK.md) | 决策图网络 | ←→ [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](./05_guides/05_async_programming_usage_guide.md) ←→ [06_boundary_analysis](./research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) |
 | [PROOF_GRAPH_NETWORK.md](./04_thinking/PROOF_GRAPH_NETWORK.md) | 证明图网络 | ←→ [PROOF_INDEX](./research_notes/PROOF_INDEX.md) ←→ [formal_methods/](./research_notes/formal_methods/README.md) |
-| [MIND_MAP_COLLECTION.md](./04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合 | ←→ [research_notes/](./research_notes/README.md) ←→ [00_COMPREHENSIVE_SUMMARY](./research_notes/00_COMPREHENSIVE_SUMMARY.md) |
+| [MIND_MAP_COLLECTION.md](./04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合 | ←→ [research_notes/](./research_notes/README.md) ←→ [00_COMPREHENSIVE_SUMMARY](./research_notes/10_00_comprehensive_summary.md) |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵 | ←→ [type_theory/variance_theory](./research_notes/type_theory/variance_theory.md) ←→ [formal_methods/README §六篇并表](./research_notes/formal_methods/README.md) |
 | [04_applications_analysis_view.md](./04_thinking/04_applications_analysis_view.md) | 应用场景→技术选型→论证依据 | ←→ [05_guides/](./05_guides/README.md) ←→ [research_notes/](./research_notes/README.md) |
 
@@ -217,14 +217,14 @@
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [ASYNC_PROGRAMMING_USAGE_GUIDE.md](./05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 异步编程使用指南 | ← [async_patterns](./02_reference/quick_reference/async_patterns.md) ← [async_state_machine](./research_notes/formal_methods/async_state_machine.md) ← [pin_self_referential](./research_notes/formal_methods/pin_self_referential.md) |
-| [05_threads_concurrency_usage_guide.md](./05_guides/05_threads_concurrency_usage_guide.md) | 线程与并发使用指南 | ← [threads_concurrency_cheatsheet](./02_reference/quick_reference/threads_concurrency_cheatsheet.md) ← [send_sync_formalization](./research_notes/formal_methods/send_sync_formalization.md) ← [06_boundary_analysis](./research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) |
+| [05_async_programming_usage_guide.md](./05_guides/05_async_programming_usage_guide.md) | 异步编程使用指南 | ← [async_patterns](./02_reference/quick_reference/async_patterns.md) ← [async_state_machine](./research_notes/formal_methods/async_state_machine.md) ← [pin_self_referential](./research_notes/formal_methods/pin_self_referential.md) |
+| [05_threads_concurrency_usage_guide.md](./05_guides/05_threads_concurrency_usage_guide.md) | 线程与并发使用指南 | ← [threads_concurrency_cheatsheet](./02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) ← [send_sync_formalization](./research_notes/formal_methods/send_sync_formalization.md) ← [06_boundary_analysis](./research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) |
 | [05_design_patterns_usage_guide.md](./05_guides/05_design_patterns_usage_guide.md) | 设计模式使用指南 | ← design_patterns_cheatsheet ← [01_design_patterns_formal](./research_notes/software_design_theory/01_design_patterns_formal/README.md) ← [04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | [05_macro_system_usage_guide.md](./05_guides/05_macro_system_usage_guide.md) | 宏系统使用指南 | ← macros_cheatsheet ← [trait_system_formalization](./research_notes/type_theory/trait_system_formalization.md) |
 | [05_wasm_usage_guide.md](./05_guides/05_wasm_usage_guide.md) | WASM 使用指南 | ← [wasm_cheatsheet](./02_reference/quick_reference/02_wasm_cheatsheet.md) ← [async_state_machine](./research_notes/formal_methods/async_state_machine.md) |
 | [UNSAFE_RUST_GUIDE.md](./05_guides/UNSAFE_RUST_GUIDE.md) | Unsafe Rust 专题 | ← [ownership_cheatsheet](./02_reference/quick_reference/ownership_cheatsheet.md) ← [ownership_model](./research_notes/formal_methods/ownership_model.md) ← [SAFE_UNSAFE_ANALYSIS](./research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | [05_ai_rust_ecosystem_guide.md](./05_guides/05_ai_rust_ecosystem_guide.md) | AI+Rust 生态（Burn/Candle/LLM） | ← [ai_ml_cheatsheet](./02_reference/quick_reference/02_ai_ml_cheatsheet.md) ← [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) |
-| [05_cli_applications_guide.md](./05_guides/05_cli_applications_guide.md) | CLI 应用开发 | ← [cargo_cheatsheet](./02_reference/quick_reference/cargo_cheatsheet.md) ← [process_management_cheatsheet](./02_reference/quick_reference/02_process_management_cheatsheet.md) |
+| [05_cli_applications_guide.md](./05_guides/05_cli_applications_guide.md) | CLI 应用开发 | ← [cargo_cheatsheet](./02_reference/quick_reference/02_cargo_cheatsheet.md) ← [process_management_cheatsheet](./02_reference/quick_reference/02_process_management_cheatsheet.md) |
 | [05_embedded_rust_guide.md](./05_guides/05_embedded_rust_guide.md) | 嵌入式 Rust | ← [UNSAFE_RUST_GUIDE](./05_guides/UNSAFE_RUST_GUIDE.md) |
 | [05_troubleshooting_guide.md](./05_guides/05_troubleshooting_guide.md) | 故障排查指南 | ← [error_handling_cheatsheet](./02_reference/quick_reference/error_handling_cheatsheet.md) ← [ERROR_CODE_MAPPING](./02_reference/ERROR_CODE_MAPPING.md) |
 | [PERFORMANCE_TUNING_GUIDE.md](05_guides/PERFORMANCE_TUNING_GUIDE.md) | 性能调优指南 | ← [algorithms_cheatsheet](./02_reference/quick_reference/02_algorithms_cheatsheet.md) ← [smart_pointers_cheatsheet](./02_reference/quick_reference/smart_pointers_cheatsheet.md) ← [ALIGNMENT_GUIDE](./02_reference/ALIGNMENT_GUIDE.md) |
@@ -243,8 +243,8 @@
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [06_toolchain/](./06_toolchain/README.md) | 编译器、Cargo、rustdoc、Rust 1.89–1.93 版本演进 | ← [type_theory/type_system_foundations](./research_notes/type_theory/type_system_foundations.md) ← [cargo_cheatsheet](./02_reference/quick_reference/cargo_cheatsheet.md) |
-| 00_rust_2024_edition_learning_impact.md | Rust 2024 Edition 对学习路径的影响 | ← [01_learning/LEARNING_PATH_PLANNING](./01_learning/LEARNING_PATH_PLANNING.md) |
+| [06_toolchain/](./06_toolchain/README.md) | 编译器、Cargo、rustdoc、Rust 1.89–1.93 版本演进 | ← [type_theory/type_system_foundations](./research_notes/type_theory/type_system_foundations.md) ← [cargo_cheatsheet](./02_reference/quick_reference/02_cargo_cheatsheet.md) |
+| 00_rust_2024_edition_learning_impact.md | Rust 2024 Edition 对学习路径的影响 | ← [01_learning/LEARNING_PATH_PLANNING](./01_learning/01_learning_path_planning.md) |
 
 **Rust 1.92 版本文档**（已归档）:
 
@@ -260,9 +260,9 @@
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
-| [07_knowledge_structure_framework.md](./07_project/07_knowledge_structure_framework.md) | 知识结构框架 | ←→ [research_notes/](./research_notes/README.md) ←→ [CROSS_REFERENCE_INDEX](./research_notes/CROSS_REFERENCE_INDEX.md) |
+| [07_knowledge_structure_framework.md](./07_project/07_knowledge_structure_framework.md) | 知识结构框架 | ←→ [research_notes/](./research_notes/README.md) ←→ [CROSS_REFERENCE_INDEX](./research_notes/10_cross_reference_index.md) |
 | [07_module_knowledge_structure_guide.md](./07_project/07_module_knowledge_structure_guide.md) | 模块知识结构指南 | ←→ [crates/*/docs/](../crates/README.md) ←→ [QUICK_REFERENCE](./research_notes/QUICK_REFERENCE.md) |
-| [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) | **文档交叉引用指南** - 全文档映射网络 | ←→ [CROSS_REFERENCE_INDEX](./research_notes/CROSS_REFERENCE_INDEX.md) ←→ 所有主要文档 |
+| [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) | **文档交叉引用指南** - 全文档映射网络 | ←→ [CROSS_REFERENCE_INDEX](./research_notes/10_cross_reference_index.md) ←→ 所有主要文档 |
 | [07_project_architecture_guide.md](./07_project/07_project_architecture_guide.md) | 项目架构指南 | ←→ [crates/](../crates/README.md) ←→ [software_design_theory/04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | [07_rust_release_tracking_checklist.md](07_project/07_rust_release_tracking_checklist.md) | 新版本发布后的更新流程 | ←→ [06_toolchain/](./06_toolchain/README.md) ←→ [research_notes/](./research_notes/README.md) |
 | [07_task_index.md](07_project/07_task_index.md) | 未完成任务与计划总索引 | ←→ 所有主要文档 |
@@ -347,12 +347,12 @@
 
 | 文档 | 说明 | 路径 |
 | :--- | :--- | :--- |
-| **CROSS_REFERENCE_INDEX** | 详细跨文档映射网络 | [research_notes/CROSS_REFERENCE_INDEX.md](./research_notes/CROSS_REFERENCE_INDEX.md) |
+| **CROSS_REFERENCE_INDEX** | 详细跨文档映射网络 | [research_notes/10_cross_reference_index.md](./research_notes/10_cross_reference_index.md) |
 | **DOCUMENTATION_CROSS_REFERENCE_GUIDE** | 文档交叉引用指南 | [07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) |
 | **PROOF_INDEX** | 公理-定理-证明索引 | [research_notes/PROOF_INDEX.md](./research_notes/PROOF_INDEX.md) |
-| **HIERARCHICAL_MAPPING_AND_SUMMARY** | 层次化映射与总结 | [research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md](./research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) |
+| **HIERARCHICAL_MAPPING_AND_SUMMARY** | 层次化映射与总结 | [research_notes/10_hierarchical_mapping_and_summary.md](./research_notes/10_hierarchical_mapping_and_summary.md) |
 | **ARGUMENTATION_CHAIN_AND_FLOW** | 论证脉络关系 | [research_notes/10_argumentation_chain_and_flow.md](./research_notes/10_argumentation_chain_and_flow.md) |
-| **00_COMPREHENSIVE_SUMMARY** | 完整总结综合 | [research_notes/00_COMPREHENSIVE_SUMMARY.md](./research_notes/00_COMPREHENSIVE_SUMMARY.md) |
+| **00_COMPREHENSIVE_SUMMARY** | 完整总结综合 | [research_notes/10_00_comprehensive_summary.md](./research_notes/10_00_comprehensive_summary.md) |
 
 ### 快速入口
 >

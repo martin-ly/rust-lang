@@ -74,7 +74,7 @@
 
 | CLI 开发主题 | 官方 CLI Book | 本项目对应 |
 | :--- | :--- | :--- |
-| 参数解析 | clap、structopt | C03 控制流、[cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
+| 参数解析 | clap、structopt | C03 控制流、[cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 | 标准输入输出 | std::io | [C07 进程管理](../../crates/c07_process/README.md) |
 | 子进程与管道 | std::process | C07 [进程管理](../../crates/c07_process/docs/README.md) |
 | 文件系统 | std::fs | C03、C08 算法 |
@@ -413,7 +413,7 @@ fn main() -> ExitCode {
 | **错误处理** | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | **异步编程** | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
 | :--- | :--- |
-| **Cargo 工具** | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
+| **Cargo 工具** | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 | **相关指南** | [05_troubleshooting_guide.md](./05_troubleshooting_guide.md) |
 | :--- | :--- |
 
@@ -425,7 +425,7 @@ fn main() -> ExitCode {
 
 - [C07 进程管理](../../crates/c07_process/docs/00_MASTER_INDEX.md)
 - [故障排查指南](./05_troubleshooting_guide.md)
-- [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md)
+- [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md)
 - [官方 Command Line Book](https://rust-cli.github.io/book/)
 - [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md)
 - [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md)

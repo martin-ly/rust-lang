@@ -200,7 +200,7 @@
 > **[来源: ACM - Systems Programming Languages]**
 
 - **Phase 1 权威对齐**：RUST_193 新增权威来源对齐表（releases.rs、Rust Blog、Ferrocene FLS、RustBelt）；Edition 2024 与 FLS 范围说明；formal_methods README 新增权威来源快速链接、版本说明
-- **Phase 2 类型构造能力**：新建 [type_theory/construction_capability.md](type_theory/construction_capability.md)；Def TCON1、TCON 矩阵、类型构造决策树、确定性判定；type_theory README 收录
+- **Phase 2 类型构造能力**：新建 [type_theory/10_construction_capability.md](type_theory/10_construction_capability.md)；Def TCON1、TCON 矩阵、类型构造决策树、确定性判定；type_theory README 收录
 - **Phase 3 并发确定性**：扩展 [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；Def EB-DET1、 theorem EB-DET-T1、确定性判定决策树、并发 vs 并行判定表；与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
 - **Phase 4 组件成熟度**：扩展 [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md)；Def CE-MAT1（L1–L4 成熟度）、 theorem CE-MAT-T1、构建能力确定性判定树；与 02_workflow、05_boundary_system 衔接
 - **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md)；13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一 Def→示例→论证→证明链
@@ -466,12 +466,12 @@
 
 **理论体系与论证体系结构**（2026-02-12 追加）:
 
-- ✅ [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 顶层框架：四层理论架构、五层论证结构
+- ✅ [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) - 顶层框架：四层理论架构、五层论证结构
 - ✅ [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) - 安全与非安全全面论证、契约、UB、安全抽象
 
 **Rust 1.93 语言特性全面分析**（2026-02-12 追加）:
 
-- ✅ [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) - 92 项语言特性全覆盖
+- ✅ [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) - 92 项语言特性全覆盖
 - ✅ 10 大类别：内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增
 - ✅ DESIGN_MECHANISM_RATIONALE 补全：宏、闭包、模式匹配、Option/Result
 
@@ -510,7 +510,7 @@
 
 > **[来源: PLDI - Programming Language Design]**
 
-- ✅ [Rust 1.93 vs 1.92 全面对比分析](../06_toolchain/05_rust_1.93_vs_1.92_comparison.md)
+- ✅ [Rust 1.93 vs 1.92 全面对比分析](../06_toolchain/06_05_rust_1_93_vs_1_92_comparison.md)
 
 ---
 
@@ -558,7 +558,7 @@
 - ✅ README.md - 主索引和导航中心
 - ✅ INDEX.md - 完整索引
 - ✅ QUICK_REFERENCE.md - 快速参考索引
-- ✅ RESEARCH_ROADMAP.md - 研究路线图
+- ✅ 10_research_roadmap.md - 研究路线图
 - ✅ SYSTEM_SUMMARY.md - 系统总结和统计
 - ✅ TEMPLATE.md - 研究笔记模板
 - ✅ CONTRIBUTING.md - 贡献指南
@@ -578,7 +578,7 @@
 **研究方法论**:
 
 - ✅ research_methodology.md - 研究方法论框架
-- ✅ practical_applications.md - 实际应用案例研究
+- ✅ 10_practical_applications.md - 实际应用案例研究
 
 **形式化方法研究** (5个):
 
@@ -602,7 +602,7 @@
 - ✅ memory_analysis.md - 内存分析
 - ✅ compiler_optimizations.md - 编译器优化
 - ✅ concurrency_performance.md - 并发性能研究
-- ✅ macro_expansion_performance.md - 宏展开性能分析
+- ✅ 10_macro_expansion_performance.md - 宏展开性能分析
 
 **目录索引** (3个):
 

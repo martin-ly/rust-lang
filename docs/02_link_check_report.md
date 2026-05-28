@@ -120,10 +120,10 @@
 | docs\01_learning\01_cross_module_navigation.md | **状态**: ✅ 100% 完成 | `#状态--100-完成` | 同文件锚点不存在: #状态--100-完成 |
 | docs\01_learning\01_learning_path_guide_2025_10_24.md | 🗺️ 推荐学习路径 | `#️-推荐学习路径` | 同文件锚点不存在: #️-推荐学习路径 |
 | docs\01_learning\01_learning_path_guide_2025_10_24.md | 🛠️ 实践项目建议 | `#️-实践项目建议` | 同文件锚点不存在: #️-实践项目建议 |
-| docs\01_learning\LEARNING_PATH_PLANNING.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\01_learning\LEARNING_PATH_PLANNING.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
-| docs\01_learning\LEARNING_PATH_PLANNING.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\01_learning\LEARNING_PATH_PLANNING.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
+| docs\01_learning\01_learning_path_planning.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\01_learning\01_learning_path_planning.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
+| docs\01_learning\01_learning_path_planning.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\01_learning\01_learning_path_planning.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
 | docs\01_learning\01_lfrs_certification_mapping.md | 考点 10: 并发（线程 / 通道 / async） | `#考点-10-并发线程--通道--async` | 同文件锚点不存在: #考点-10-并发线程--通道--async |
 | docs\01_learning\01_mdbook_quiz_guide.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
 | docs\01_learning\01_official_resources_mapping.md | 模块 → 官方章节映射 | `#模块--官方章节映射` | 同文件锚点不存在: #模块--官方章节映射 |
@@ -242,27 +242,27 @@
 | docs\02_reference\quick_reference\async_patterns.md | ⚠️ 常见陷阱 | `#️-常见陷阱` | 同文件锚点不存在: #️-常见陷阱 |
 | docs\02_reference\quick_reference\async_patterns.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
 | docs\02_reference\quick_reference\async_patterns.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
-| docs\02_reference\quick_reference\cargo_cheatsheet.md | 📦 Cargo 速查卡 {#-cargo-速查卡} | `#-cargo-速查卡--cargo-速查卡` | 同文件锚点不存在: #-cargo-速查卡--cargo-速查卡 |
-| docs\02_reference\quick_reference\cargo_cheatsheet.md | ⚙️ 配置文件 {#️-配置文件} | `#️-配置文件-️-配置文件` | 同文件锚点不存在: #️-配置文件-️-配置文件 |
-| docs\02_reference\quick_reference\cargo_cheatsheet.md | 🛠️ 常用工具 {#️-常用工具} | `#️-常用工具-️-常用工具` | 同文件锚点不存在: #️-常用工具-️-常用工具 |
-| docs\02_reference\quick_reference\cargo_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
-| docs\02_reference\quick_reference\cargo_cheatsheet.md | 📦 Cargo 速查卡 {#-cargo-速查卡} | `#-cargo-速查卡--cargo-速查卡` | 同文件锚点不存在: #-cargo-速查卡--cargo-速查卡 |
-| docs\02_reference\quick_reference\cargo_cheatsheet.md | ⚙️ 配置文件 {#️-配置文件} | `#️-配置文件-️-配置文件` | 同文件锚点不存在: #️-配置文件-️-配置文件 |
-| docs\02_reference\quick_reference\cargo_cheatsheet.md | 🛠️ 常用工具 {#️-常用工具} | `#️-常用工具-️-常用工具` | 同文件锚点不存在: #️-常用工具-️-常用工具 |
-| docs\02_reference\quick_reference\cargo_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
+| docs\02_reference\quick_reference\02_cargo_cheatsheet.md | 📦 Cargo 速查卡 {#-cargo-速查卡} | `#-cargo-速查卡--cargo-速查卡` | 同文件锚点不存在: #-cargo-速查卡--cargo-速查卡 |
+| docs\02_reference\quick_reference\02_cargo_cheatsheet.md | ⚙️ 配置文件 {#️-配置文件} | `#️-配置文件-️-配置文件` | 同文件锚点不存在: #️-配置文件-️-配置文件 |
+| docs\02_reference\quick_reference\02_cargo_cheatsheet.md | 🛠️ 常用工具 {#️-常用工具} | `#️-常用工具-️-常用工具` | 同文件锚点不存在: #️-常用工具-️-常用工具 |
+| docs\02_reference\quick_reference\02_cargo_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
+| docs\02_reference\quick_reference\02_cargo_cheatsheet.md | 📦 Cargo 速查卡 {#-cargo-速查卡} | `#-cargo-速查卡--cargo-速查卡` | 同文件锚点不存在: #-cargo-速查卡--cargo-速查卡 |
+| docs\02_reference\quick_reference\02_cargo_cheatsheet.md | ⚙️ 配置文件 {#️-配置文件} | `#️-配置文件-️-配置文件` | 同文件锚点不存在: #️-配置文件-️-配置文件 |
+| docs\02_reference\quick_reference\02_cargo_cheatsheet.md | 🛠️ 常用工具 {#️-常用工具} | `#️-常用工具-️-常用工具` | 同文件锚点不存在: #️-常用工具-️-常用工具 |
+| docs\02_reference\quick_reference\02_cargo_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
 | docs\02_reference\quick_reference\02_02_closures_cheatsheet.md | **最后更新**: 2026-05-08 (闭包场景深度整合) | `#最后更新-2026-05-08-闭包场景深度整合` | 同文件锚点不存在: #最后更新-2026-05-08-闭包场景深度整合 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 📦 Rust 集合与迭代器速查卡 | `#-rust-集合与迭代器速查卡` | 同文件锚点不存在: #-rust-集合与迭代器速查卡 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 🗺️ HashMap（哈希映射） | `#️-hashmap哈希映射` | 同文件锚点不存在: #️-hashmap哈希映射 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 🍽️ 迭代器消费者 | `#️-迭代器消费者` | 同文件锚点不存在: #️-迭代器消费者 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | Rust 1.95+ `array_windows()` - 零开销固定大小窗口 | `#rust-195-array_windows---零开销固定大小窗口` | 同文件锚点不存在: #rust-195-array_windows---零开销固定大小窗口 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 🎯 **掌握集合与迭代器，高效处理数据！** | `#-掌握集合与迭代器高效处理数据` | 同文件锚点不存在: #-掌握集合与迭代器高效处理数据 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 📦 Rust 集合与迭代器速查卡 | `#-rust-集合与迭代器速查卡` | 同文件锚点不存在: #-rust-集合与迭代器速查卡 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 🗺️ HashMap（哈希映射） | `#️-hashmap哈希映射` | 同文件锚点不存在: #️-hashmap哈希映射 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 🍽️ 迭代器消费者 | `#️-迭代器消费者` | 同文件锚点不存在: #️-迭代器消费者 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | Rust 1.95+ `array_windows()` - 零开销固定大小窗口 | `#rust-195-array_windows---零开销固定大小窗口` | 同文件锚点不存在: #rust-195-array_windows---零开销固定大小窗口 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 🎯 **掌握集合与迭代器，高效处理数据！** | `#-掌握集合与迭代器高效处理数据` | 同文件锚点不存在: #-掌握集合与迭代器高效处理数据 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 📦 Rust 集合与迭代器速查卡 | `#-rust-集合与迭代器速查卡` | 同文件锚点不存在: #-rust-集合与迭代器速查卡 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 🗺️ HashMap（哈希映射） | `#️-hashmap哈希映射` | 同文件锚点不存在: #️-hashmap哈希映射 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 🍽️ 迭代器消费者 | `#️-迭代器消费者` | 同文件锚点不存在: #️-迭代器消费者 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | Rust 1.95+ `array_windows()` - 零开销固定大小窗口 | `#rust-195-array_windows---零开销固定大小窗口` | 同文件锚点不存在: #rust-195-array_windows---零开销固定大小窗口 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 🎯 **掌握集合与迭代器，高效处理数据！** | `#-掌握集合与迭代器高效处理数据` | 同文件锚点不存在: #-掌握集合与迭代器高效处理数据 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 📦 Rust 集合与迭代器速查卡 | `#-rust-集合与迭代器速查卡` | 同文件锚点不存在: #-rust-集合与迭代器速查卡 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 🗺️ HashMap（哈希映射） | `#️-hashmap哈希映射` | 同文件锚点不存在: #️-hashmap哈希映射 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 🍽️ 迭代器消费者 | `#️-迭代器消费者` | 同文件锚点不存在: #️-迭代器消费者 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | Rust 1.95+ `array_windows()` - 零开销固定大小窗口 | `#rust-195-array_windows---零开销固定大小窗口` | 同文件锚点不存在: #rust-195-array_windows---零开销固定大小窗口 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 🎯 **掌握集合与迭代器，高效处理数据！** | `#-掌握集合与迭代器高效处理数据` | 同文件锚点不存在: #-掌握集合与迭代器高效处理数据 |
 | docs\02_reference\quick_reference\control_flow_functions_cheatsheet.md | 🔄 Rust 控制流与函数速查卡 | `#-rust-控制流与函数速查卡` | 同文件锚点不存在: #-rust-控制流与函数速查卡 |
 | docs\02_reference\quick_reference\control_flow_functions_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\02_reference\quick_reference\control_flow_functions_cheatsheet.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
@@ -405,16 +405,16 @@
 | docs\02_reference\quick_reference\02_testing_cheatsheet.md | 🧪 Rust 测试速查卡 | `#-rust-测试速查卡` | 同文件锚点不存在: #-rust-测试速查卡 |
 | docs\02_reference\quick_reference\02_testing_cheatsheet.md | 🛠️ 测试工具和库 | `#️-测试工具和库` | 同文件锚点不存在: #️-测试工具和库 |
 | docs\02_reference\quick_reference\02_testing_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 🔀 Rust 线程与并发速查卡 | `#-rust-线程与并发速查卡` | 同文件锚点不存在: #-rust-线程与并发速查卡 |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 反例 2: 死锁 - 重复获取同一 Mutex | `#反例-2-死锁---重复获取同一-mutex` | 同文件锚点不存在: #反例-2-死锁---重复获取同一-mutex |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 🔀 Rust 线程与并发速查卡 | `#-rust-线程与并发速查卡` | 同文件锚点不存在: #-rust-线程与并发速查卡 |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 反例 2: 死锁 - 重复获取同一 Mutex | `#反例-2-死锁---重复获取同一-mutex` | 同文件锚点不存在: #反例-2-死锁---重复获取同一-mutex |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🔀 Rust 线程与并发速查卡 | `#-rust-线程与并发速查卡` | 同文件锚点不存在: #-rust-线程与并发速查卡 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 反例 2: 死锁 - 重复获取同一 Mutex | `#反例-2-死锁---重复获取同一-mutex` | 同文件锚点不存在: #反例-2-死锁---重复获取同一-mutex |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 🔀 Rust 线程与并发速查卡 | `#-rust-线程与并发速查卡` | 同文件锚点不存在: #-rust-线程与并发速查卡 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 反例 2: 死锁 - 重复获取同一 Mutex | `#反例-2-死锁---重复获取同一-mutex` | 同文件锚点不存在: #反例-2-死锁---重复获取同一-mutex |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
 | docs\02_reference\quick_reference\type_system.md | 🔷 Rust 类型系统速查卡 | `#-rust-类型系统速查卡` | 同文件锚点不存在: #-rust-类型系统速查卡 |
 | docs\02_reference\quick_reference\type_system.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\02_reference\quick_reference\type_system.md | 🏗️ Trait 系统 | `#️-trait-系统` | 同文件锚点不存在: #️-trait-系统 |
@@ -497,18 +497,18 @@
 | docs\04_thinking\PROOF_GRAPH_NETWORK.md | 组合1: MaybeUninit + 调用追踪 | `#组合1-maybeuninit--调用追踪` | 同文件锚点不存在: #组合1-maybeuninit--调用追踪 |
 | docs\04_thinking\PROOF_GRAPH_NETWORK.md | 组合2: 关联类型多边界 + 自动特征 | `#组合2-关联类型多边界--自动特征` | 同文件锚点不存在: #组合2-关联类型多边界--自动特征 |
 | docs\04_thinking\PROOF_GRAPH_NETWORK.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | Rust 思维表征方式文档 / Thinking Representation Methods Documentation | `#rust-思维表征方式文档--thinking-representation-methods-documentation` | 同文件锚点不存在: #rust-思维表征方式文档--thinking-representation-methods-documentation |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 🗺️ 1. 思维导图 (Mind Map) | `#️-1-思维导图-mind-map` | 同文件锚点不存在: #️-1-思维导图-mind-map |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 3.9.1 借用 ↔ 所有权转换树 | `#391-借用--所有权转换树` | 同文件锚点不存在: #391-借用--所有权转换树 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 3.9.2 Option ↔ Result 转换树 | `#392-option--result-转换树` | 同文件锚点不存在: #392-option--result-转换树 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | Rust 思维表征方式文档 / Thinking Representation Methods Documentation | `#rust-思维表征方式文档--thinking-representation-methods-documentation` | 同文件锚点不存在: #rust-思维表征方式文档--thinking-representation-methods-documentation |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 🗺️ 1. 思维导图 (Mind Map) | `#️-1-思维导图-mind-map` | 同文件锚点不存在: #️-1-思维导图-mind-map |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 3.9.1 借用 ↔ 所有权转换树 | `#391-借用--所有权转换树` | 同文件锚点不存在: #391-借用--所有权转换树 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 3.9.2 Option ↔ Result 转换树 | `#392-option--result-转换树` | 同文件锚点不存在: #392-option--result-转换树 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
+| docs\04_thinking\04_thinking_representation_methods.md | Rust 思维表征方式文档 / Thinking Representation Methods Documentation | `#rust-思维表征方式文档--thinking-representation-methods-documentation` | 同文件锚点不存在: #rust-思维表征方式文档--thinking-representation-methods-documentation |
+| docs\04_thinking\04_thinking_representation_methods.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\04_thinking\04_thinking_representation_methods.md | 🗺️ 1. 思维导图 (Mind Map) | `#️-1-思维导图-mind-map` | 同文件锚点不存在: #️-1-思维导图-mind-map |
+| docs\04_thinking\04_thinking_representation_methods.md | 3.9.1 借用 ↔ 所有权转换树 | `#391-借用--所有权转换树` | 同文件锚点不存在: #391-借用--所有权转换树 |
+| docs\04_thinking\04_thinking_representation_methods.md | 3.9.2 Option ↔ Result 转换树 | `#392-option--result-转换树` | 同文件锚点不存在: #392-option--result-转换树 |
+| docs\04_thinking\04_thinking_representation_methods.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
+| docs\04_thinking\04_thinking_representation_methods.md | Rust 思维表征方式文档 / Thinking Representation Methods Documentation | `#rust-思维表征方式文档--thinking-representation-methods-documentation` | 同文件锚点不存在: #rust-思维表征方式文档--thinking-representation-methods-documentation |
+| docs\04_thinking\04_thinking_representation_methods.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\04_thinking\04_thinking_representation_methods.md | 🗺️ 1. 思维导图 (Mind Map) | `#️-1-思维导图-mind-map` | 同文件锚点不存在: #️-1-思维导图-mind-map |
+| docs\04_thinking\04_thinking_representation_methods.md | 3.9.1 借用 ↔ 所有权转换树 | `#391-借用--所有权转换树` | 同文件锚点不存在: #391-借用--所有权转换树 |
+| docs\04_thinking\04_thinking_representation_methods.md | 3.9.2 Option ↔ Result 转换树 | `#392-option--result-转换树` | 同文件锚点不存在: #392-option--result-转换树 |
+| docs\04_thinking\04_thinking_representation_methods.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
 | docs\05_guides\05_advanced_topics_deep_dive.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\05_guides\05_advanced_topics_deep_dive.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
 | docs\05_guides\05_advanced_topics_deep_dive.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
@@ -518,14 +518,14 @@
 | docs\05_guides\05_ai_rust_ecosystem_guide.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
 | docs\05_guides\05_algorithms_usage_guide.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\05_guides\05_algorithms_usage_guide.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | ControlFlow 与 Try  trait 集成 | `#controlflow-与-try--trait-集成` | 同文件锚点不存在: #controlflow-与-try--trait-集成 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | 🏗️ 异步编程模式（5+ 完整示例） | `#️-异步编程模式5-完整示例` | 同文件锚点不存在: #️-异步编程模式5-完整示例 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | **最后更新**: 2026-05-08 | `#最后更新-2026-05-08` | 同文件锚点不存在: #最后更新-2026-05-08 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | ControlFlow 与 Try  trait 集成 | `#controlflow-与-try--trait-集成` | 同文件锚点不存在: #controlflow-与-try--trait-集成 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | 🏗️ 异步编程模式（5+ 完整示例） | `#️-异步编程模式5-完整示例` | 同文件锚点不存在: #️-异步编程模式5-完整示例 |
-| docs\05_guides\ASYNC_PROGRAMMING_USAGE_GUIDE.md | **最后更新**: 2026-05-08 | `#最后更新-2026-05-08` | 同文件锚点不存在: #最后更新-2026-05-08 |
+| docs\05_guides\05_async_programming_usage_guide.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\05_guides\05_async_programming_usage_guide.md | ControlFlow 与 Try  trait 集成 | `#controlflow-与-try--trait-集成` | 同文件锚点不存在: #controlflow-与-try--trait-集成 |
+| docs\05_guides\05_async_programming_usage_guide.md | 🏗️ 异步编程模式（5+ 完整示例） | `#️-异步编程模式5-完整示例` | 同文件锚点不存在: #️-异步编程模式5-完整示例 |
+| docs\05_guides\05_async_programming_usage_guide.md | **最后更新**: 2026-05-08 | `#最后更新-2026-05-08` | 同文件锚点不存在: #最后更新-2026-05-08 |
+| docs\05_guides\05_async_programming_usage_guide.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\05_guides\05_async_programming_usage_guide.md | ControlFlow 与 Try  trait 集成 | `#controlflow-与-try--trait-集成` | 同文件锚点不存在: #controlflow-与-try--trait-集成 |
+| docs\05_guides\05_async_programming_usage_guide.md | 🏗️ 异步编程模式（5+ 完整示例） | `#️-异步编程模式5-完整示例` | 同文件锚点不存在: #️-异步编程模式5-完整示例 |
+| docs\05_guides\05_async_programming_usage_guide.md | **最后更新**: 2026-05-08 | `#最后更新-2026-05-08` | 同文件锚点不存在: #最后更新-2026-05-08 |
 | docs\05_guides\BEST_PRACTICES.md | Rust 项目最佳实践指南 | `#rust-项目最佳实践指南` | 同文件锚点不存在: #rust-项目最佳实践指南 |
 | docs\05_guides\BEST_PRACTICES.md | 📑 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\05_guides\BEST_PRACTICES.md | 1. array\_windows - 零开销滑动窗口 | `#1-array_windows---零开销滑动窗口` | 同文件锚点不存在: #1-array_windows---零开销滑动窗口 |
@@ -658,12 +658,12 @@
 | docs\06_toolchain\03_rustdoc_advanced.md | ⚠️ 避免 | `#️-避免` | 同文件锚点不存在: #️-避免 |
 | docs\06_toolchain\03_rustdoc_advanced.md | **最后更新**: 2026-05-08 (添加 1.95+ 引用) | `#最后更新-2026-05-08-添加-195-引用` | 同文件锚点不存在: #最后更新-2026-05-08-添加-195-引用 |
 | docs\06_toolchain\03_rustdoc_advanced.md | Rust 历史版本文档索引 | `../README.md#相关资源` | 锚点不存在: #相关资源 |
-| docs\06_toolchain\05_rust_1.93_vs_1.92_comparison.md | Rust 1.93 vs 1.92 全面对比分析 | `#rust-193-vs-192-全面对比分析` | 同文件锚点不存在: #rust-193-vs-192-全面对比分析 |
-| docs\06_toolchain\05_rust_1.93_vs_1.92_comparison.md | 📑 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\06_toolchain\05_rust_1.93_vs_1.92_comparison.md | **下次更新**：Rust 1.94 发布时 | `#下次更新rust-194-发布时` | 同文件锚点不存在: #下次更新rust-194-发布时 |
-| docs\06_toolchain\05_rust_1.93_vs_1.92_comparison.md | Rust 1.93 vs 1.92 全面对比分析 | `#rust-193-vs-192-全面对比分析` | 同文件锚点不存在: #rust-193-vs-192-全面对比分析 |
-| docs\06_toolchain\05_rust_1.93_vs_1.92_comparison.md | 📑 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\06_toolchain\05_rust_1.93_vs_1.92_comparison.md | **下次更新**：Rust 1.94 发布时 | `#下次更新rust-194-发布时` | 同文件锚点不存在: #下次更新rust-194-发布时 |
+| docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md | Rust 1.93 vs 1.92 全面对比分析 | `#rust-193-vs-192-全面对比分析` | 同文件锚点不存在: #rust-193-vs-192-全面对比分析 |
+| docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md | 📑 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md | **下次更新**：Rust 1.94 发布时 | `#下次更新rust-194-发布时` | 同文件锚点不存在: #下次更新rust-194-发布时 |
+| docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md | Rust 1.93 vs 1.92 全面对比分析 | `#rust-193-vs-192-全面对比分析` | 同文件锚点不存在: #rust-193-vs-192-全面对比分析 |
+| docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md | 📑 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\06_toolchain\06_05_rust_1_93_vs_1_92_comparison.md | **下次更新**：Rust 1.94 发布时 | `#下次更新rust-194-发布时` | 同文件锚点不存在: #下次更新rust-194-发布时 |
 | docs\06_toolchain\06_07_rust_1_93_full_changelog.md | Rust 1.93 完整变更清单 | `#rust-193-完整变更清单` | 同文件锚点不存在: #rust-193-完整变更清单 |
 | docs\06_toolchain\06_07_rust_1_93_full_changelog.md | cargo tree --format 长格式 | `#cargo-tree---format-长格式` | 同文件锚点不存在: #cargo-tree---format-长格式 |
 | docs\06_toolchain\06_07_rust_1_93_full_changelog.md | cargo clean --workspace | `#cargo-clean---workspace` | 同文件锚点不存在: #cargo-clean---workspace |
@@ -773,14 +773,14 @@
 | docs\07_project\07_project_critical_evaluation_report_2026_02.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
 | docs\07_project\07_rust_release_tracking_checklist.md | Rust 新版本发布追踪 Checklist - 重定向 | `#rust-新版本发布追踪-checklist---重定向` | 同文件锚点不存在: #rust-新版本发布追踪-checklist---重定向 |
 | docs\07_project\07_rust_release_tracking_checklist.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | crates/ - 学习模块 | `#crates---学习模块` | 同文件锚点不存在: #crates---学习模块 |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 🏗️ 模块标准结构 | `#️-模块标准结构` | 同文件锚点不存在: #️-模块标准结构 |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | guides/ - 学习指南 | `#guides---学习指南` | 同文件锚点不存在: #guides---学习指南 |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | docs/ - 跨模块文档与指南 | `#docs---跨模块文档与指南` | 同文件锚点不存在: #docs---跨模块文档与指南 |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | scripts/ - 脚本工具 | `#scripts---脚本工具` | 同文件锚点不存在: #scripts---脚本工具 |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | examples/ - 根级综合示例 | `#examples---根级综合示例` | 同文件锚点不存在: #examples---根级综合示例 |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | tests/ - 集成测试 | `#tests---集成测试` | 同文件锚点不存在: #tests---集成测试 |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | exercises/ - 练习入口 | `#exercises---练习入口` | 同文件锚点不存在: #exercises---练习入口 |
+| docs\archive\2026_03_reorganization\10_project_structure.md | crates/ - 学习模块 | `#crates---学习模块` | 同文件锚点不存在: #crates---学习模块 |
+| docs\archive\2026_03_reorganization\10_project_structure.md | 🏗️ 模块标准结构 | `#️-模块标准结构` | 同文件锚点不存在: #️-模块标准结构 |
+| docs\archive\2026_03_reorganization\10_project_structure.md | guides/ - 学习指南 | `#guides---学习指南` | 同文件锚点不存在: #guides---学习指南 |
+| docs\archive\2026_03_reorganization\10_project_structure.md | docs/ - 跨模块文档与指南 | `#docs---跨模块文档与指南` | 同文件锚点不存在: #docs---跨模块文档与指南 |
+| docs\archive\2026_03_reorganization\10_project_structure.md | scripts/ - 脚本工具 | `#scripts---脚本工具` | 同文件锚点不存在: #scripts---脚本工具 |
+| docs\archive\2026_03_reorganization\10_project_structure.md | examples/ - 根级综合示例 | `#examples---根级综合示例` | 同文件锚点不存在: #examples---根级综合示例 |
+| docs\archive\2026_03_reorganization\10_project_structure.md | tests/ - 集成测试 | `#tests---集成测试` | 同文件锚点不存在: #tests---集成测试 |
+| docs\archive\2026_03_reorganization\10_project_structure.md | exercises/ - 练习入口 | `#exercises---练习入口` | 同文件锚点不存在: #exercises---练习入口 |
 | docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md | Rust 1.94 预览与特性追踪 | `#rust-194-预览与特性追踪` | 同文件锚点不存在: #rust-194-预览与特性追踪 |
 | docs\archive\2026_05_historical_docs\13_rust_1.94_preview.md | 1. rustdoc `--merge` 选项 | `#1-rustdoc---merge-选项` | 同文件锚点不存在: #1-rustdoc---merge-选项 |
 | docs\archive\2026_05_historical_docs\15_rust_1.94_comprehensive_guide.md | 1. `ControlFlow::ok()` - 控制流简化 | `#1-controlflowok---控制流简化` | 同文件锚点不存在: #1-controlflowok---控制流简化 |
@@ -1007,7 +1007,7 @@
 | docs\content\representations\10_knowledge_representation_matrix.md | 🗺️ 思维导图索引 | `#️-思维导图索引` | 同文件锚点不存在: #️-思维导图索引 |
 | docs\content\representations\10_knowledge_representation_matrix.md | **状态**: 🔄 85% 完成，持续扩充中 | `#状态--85-完成持续扩充中` | 同文件锚点不存在: #状态--85-完成持续扩充中 |
 | docs\content\scenarios\10_web_application_scenarios.md | **状态**: ✅ 100% 完成 | `#状态--100-完成` | 同文件锚点不存在: #状态--100-完成 |
-| docs\research_notes\00_COMPREHENSIVE_SUMMARY.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_00_comprehensive_summary.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_00_organization_and_navigation.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_100_percent_completion_verification.md | 1. 形式化定义验证 ✅ | `#1-形式化定义验证-` | 同文件锚点不存在: #1-形式化定义验证- |
 | docs\research_notes\10_100_percent_completion_verification.md | 2. 公理系统验证 ✅ | `#2-公理系统验证-` | 同文件锚点不存在: #2-公理系统验证- |
@@ -1032,10 +1032,10 @@
 | docs\research_notes\10_aeneas_integration_plan.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_aeneas_integration_plan.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\research_notes\10_aeneas_integration_plan.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\APPLICATION_TREES.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\research_notes\APPLICATION_TREES.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\APPLICATION_TREES.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
-| docs\research_notes\APPLICATION_TREES.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_application_trees.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\research_notes\10_application_trees.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_application_trees.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
+| docs\research_notes\10_application_trees.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_argumentation_chain_and_flow.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_argumentation_chain_and_flow.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_argumentation_gap_index.md | 论证缺口与设计理由综合索引 | `#论证缺口与设计理由综合索引` | 同文件锚点不存在: #论证缺口与设计理由综合索引 |
@@ -1057,46 +1057,46 @@
 | docs\research_notes\10_cargo_194_features.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_classification.md | 研究笔记分类体系 | `#研究笔记分类体系` | 同文件锚点不存在: #研究笔记分类体系 |
 | docs\research_notes\10_classification.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 代码-文档-形式化完整映射 | `#代码-文档-形式化完整映射` | 同文件锚点不存在: #代码-文档-形式化完整映射 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 代码-文档-形式化完整映射 | `#代码-文档-形式化完整映射` | 同文件锚点不存在: #代码-文档-形式化完整映射 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C01 所有权 | `../02_reference/quick_reference/ownership_cheatsheet.md#移动语义` | 锚点不存在: #移动语义 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C01 函数参数 | `../02_reference/quick_reference/ownership_cheatsheet.md#函数参数` | 锚点不存在: #函数参数 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C01 借用 | `../02_reference/quick_reference/ownership_cheatsheet.md#引用与借用` | 锚点不存在: #引用与借用 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C01 生命周期 | `../02_reference/quick_reference/ownership_cheatsheet.md#生命周期` | 锚点不存在: #生命周期 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C01 结构体生命周期 | `../02_reference/quick_reference/ownership_cheatsheet.md#生命周期标注` | 锚点不存在: #生命周期标注 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C04 Trait Bound | `../02_reference/quick_reference/generics_cheatsheet.md#trait-bound` | 锚点不存在: #trait-bound |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C04 Trait 定义 | `../02_reference/quick_reference/generics_cheatsheet.md#定义-trait` | 锚点不存在: #定义-trait |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C04 Trait 实现 | `../02_reference/quick_reference/generics_cheatsheet.md#实现-trait` | 锚点不存在: #实现-trait |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C05 线程 | `../02_reference/quick_reference/threads_concurrency_cheatsheet.md#创建线程` | 锚点不存在: #创建线程 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C05 Arc + Mutex | `../02_reference/quick_reference/threads_concurrency_cheatsheet.md#共享状态并发` | 锚点不存在: #共享状态并发 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C06 异步 | `../02_reference/quick_reference/async_patterns.md#async-函数` | 锚点不存在: #async-函数 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C06 任务调度 | `../02_reference/quick_reference/async_patterns.md#任务调度` | 锚点不存在: #任务调度 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C02 Vec | `../02_reference/quick_reference/type_system.md#vec` | 锚点不存在: #vec |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C02 HashMap | `../02_reference/quick_reference/type_system.md#hashmap` | 锚点不存在: #hashmap |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C02 String | `../02_reference/quick_reference/type_system.md#string` | 锚点不存在: #string |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C07 I/O | `../02_reference/quick_reference/collections_iterators_cheatsheet.md#读取文件` | 锚点不存在: #读取文件 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | C07 进程 | `../02_reference/quick_reference/02_process_management_cheatsheet.md#运行外部命令` | 锚点不存在: #运行外部命令 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定理 2 - 所有权唯一性 | `./formal_methods/ownership_model.md#定理-2-所有权唯一性` | 锚点不存在: #定理-2-所有权唯一性 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 引理 1 - 资源释放 | `./formal_methods/ownership_model.md#引理-1-资源释放` | 锚点不存在: #引理-1-资源释放 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定理 3 - Copy 语义 | `./formal_methods/ownership_model.md#定理-3-copy-语义` | 锚点不存在: #定理-3-copy-语义 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 规则 1 - 借用规则 | `./formal_methods/borrow_checker_proof.md#规则-1-借用规则` | 锚点不存在: #规则-1-借用规则 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 引理 2 - 切片有效性 | `./formal_methods/borrow_checker_proof.md#引理-2-切片有效性` | 锚点不存在: #引理-2-切片有效性 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 规则 3 - 生命周期包含 | `./formal_methods/lifetime_formalization.md#规则-3-生命周期包含` | 锚点不存在: #规则-3-生命周期包含 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定理 LF-T1 - 生命周期传递 | `./formal_methods/lifetime_formalization.md#定理-lf-t1-生命周期传递` | 锚点不存在: #定理-lf-t1-生命周期传递 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 0, infinity) \| [定义 - 静态生命周期 | `./formal_methods/lifetime_formalization.md#定义-静态生命周期` | 锚点不存在: #定义-静态生命周期 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 类型规则 - Trait Bound | `./type_theory/type_system_foundations.md#类型规则-trait-bound` | 锚点不存在: #类型规则-trait-bound |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 类型规则 - Trait 实现 | `./type_theory/type_system_foundations.md#类型规则-trait-实现` | 锚点不存在: #类型规则-trait-实现 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 类型规则 - Trait 对象 | `./type_theory/type_system_foundations.md#类型规则-trait-对象` | 锚点不存在: #类型规则-trait-对象 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定理 C-T1 - Arc 安全 | `./formal_methods/send_sync_formalization.md#定理-c-t1-arc-安全` | 锚点不存在: #定理-c-t1-arc-安全 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定理 C-T2 - Mutex 互斥 | `./formal_methods/send_sync_formalization.md#定理-c-t2-mutex-互斥` | 锚点不存在: #定理-c-t2-mutex-互斥 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定理 C-T3 - 读写锁 | `./formal_methods/send_sync_formalization.md#定理-c-t3-读写锁` | 锚点不存在: #定理-c-t3-读写锁 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定义 - Send | `./formal_methods/send_sync_formalization.md#定义-send` | 锚点不存在: #定义-send |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定义 - Sync | `./formal_methods/send_sync_formalization.md#定义-sync` | 锚点不存在: #定义-sync |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定义 - 异步函数 | `./formal_methods/async_state_machine.md#定义-异步函数` | 锚点不存在: #定义-异步函数 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定理 A-T1 - Await 正确性 | `./formal_methods/async_state_machine.md#定理-a-t1-await-正确性` | 锚点不存在: #定理-a-t1-await-正确性 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 定理 A-T2 - Pin 安全性 | `./formal_methods/async_state_machine.md#定理-a-t2-pin-安全性` | 锚点不存在: #定理-a-t2-pin-安全性 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 代码-文档-形式化完整映射 | `#代码-文档-形式化完整映射` | 同文件锚点不存在: #代码-文档-形式化完整映射 |
+| docs\research_notes\10_code_doc_formal_mapping.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 代码-文档-形式化完整映射 | `#代码-文档-形式化完整映射` | 同文件锚点不存在: #代码-文档-形式化完整映射 |
+| docs\research_notes\10_code_doc_formal_mapping.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C01 所有权 | `../02_reference/quick_reference/ownership_cheatsheet.md#移动语义` | 锚点不存在: #移动语义 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C01 函数参数 | `../02_reference/quick_reference/ownership_cheatsheet.md#函数参数` | 锚点不存在: #函数参数 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C01 借用 | `../02_reference/quick_reference/ownership_cheatsheet.md#引用与借用` | 锚点不存在: #引用与借用 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C01 生命周期 | `../02_reference/quick_reference/ownership_cheatsheet.md#生命周期` | 锚点不存在: #生命周期 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C01 结构体生命周期 | `../02_reference/quick_reference/ownership_cheatsheet.md#生命周期标注` | 锚点不存在: #生命周期标注 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C04 Trait Bound | `../02_reference/quick_reference/generics_cheatsheet.md#trait-bound` | 锚点不存在: #trait-bound |
+| docs\research_notes\10_code_doc_formal_mapping.md | C04 Trait 定义 | `../02_reference/quick_reference/generics_cheatsheet.md#定义-trait` | 锚点不存在: #定义-trait |
+| docs\research_notes\10_code_doc_formal_mapping.md | C04 Trait 实现 | `../02_reference/quick_reference/generics_cheatsheet.md#实现-trait` | 锚点不存在: #实现-trait |
+| docs\research_notes\10_code_doc_formal_mapping.md | C05 线程 | `../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#创建线程` | 锚点不存在: #创建线程 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C05 Arc + Mutex | `../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#共享状态并发` | 锚点不存在: #共享状态并发 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C06 异步 | `../02_reference/quick_reference/async_patterns.md#async-函数` | 锚点不存在: #async-函数 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C06 任务调度 | `../02_reference/quick_reference/async_patterns.md#任务调度` | 锚点不存在: #任务调度 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C02 Vec | `../02_reference/quick_reference/type_system.md#vec` | 锚点不存在: #vec |
+| docs\research_notes\10_code_doc_formal_mapping.md | C02 HashMap | `../02_reference/quick_reference/type_system.md#hashmap` | 锚点不存在: #hashmap |
+| docs\research_notes\10_code_doc_formal_mapping.md | C02 String | `../02_reference/quick_reference/type_system.md#string` | 锚点不存在: #string |
+| docs\research_notes\10_code_doc_formal_mapping.md | C07 I/O | `../02_reference/quick_reference/02_collections_iterators_cheatsheet.md#读取文件` | 锚点不存在: #读取文件 |
+| docs\research_notes\10_code_doc_formal_mapping.md | C07 进程 | `../02_reference/quick_reference/02_process_management_cheatsheet.md#运行外部命令` | 锚点不存在: #运行外部命令 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定理 2 - 所有权唯一性 | `./formal_methods/ownership_model.md#定理-2-所有权唯一性` | 锚点不存在: #定理-2-所有权唯一性 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 引理 1 - 资源释放 | `./formal_methods/ownership_model.md#引理-1-资源释放` | 锚点不存在: #引理-1-资源释放 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定理 3 - Copy 语义 | `./formal_methods/ownership_model.md#定理-3-copy-语义` | 锚点不存在: #定理-3-copy-语义 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 规则 1 - 借用规则 | `./formal_methods/borrow_checker_proof.md#规则-1-借用规则` | 锚点不存在: #规则-1-借用规则 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 引理 2 - 切片有效性 | `./formal_methods/borrow_checker_proof.md#引理-2-切片有效性` | 锚点不存在: #引理-2-切片有效性 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 规则 3 - 生命周期包含 | `./formal_methods/lifetime_formalization.md#规则-3-生命周期包含` | 锚点不存在: #规则-3-生命周期包含 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定理 LF-T1 - 生命周期传递 | `./formal_methods/lifetime_formalization.md#定理-lf-t1-生命周期传递` | 锚点不存在: #定理-lf-t1-生命周期传递 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 0, infinity) \| [定义 - 静态生命周期 | `./formal_methods/lifetime_formalization.md#定义-静态生命周期` | 锚点不存在: #定义-静态生命周期 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 类型规则 - Trait Bound | `./type_theory/type_system_foundations.md#类型规则-trait-bound` | 锚点不存在: #类型规则-trait-bound |
+| docs\research_notes\10_code_doc_formal_mapping.md | 类型规则 - Trait 实现 | `./type_theory/type_system_foundations.md#类型规则-trait-实现` | 锚点不存在: #类型规则-trait-实现 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 类型规则 - Trait 对象 | `./type_theory/type_system_foundations.md#类型规则-trait-对象` | 锚点不存在: #类型规则-trait-对象 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定理 C-T1 - Arc 安全 | `./formal_methods/send_sync_formalization.md#定理-c-t1-arc-安全` | 锚点不存在: #定理-c-t1-arc-安全 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定理 C-T2 - Mutex 互斥 | `./formal_methods/send_sync_formalization.md#定理-c-t2-mutex-互斥` | 锚点不存在: #定理-c-t2-mutex-互斥 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定理 C-T3 - 读写锁 | `./formal_methods/send_sync_formalization.md#定理-c-t3-读写锁` | 锚点不存在: #定理-c-t3-读写锁 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定义 - Send | `./formal_methods/send_sync_formalization.md#定义-send` | 锚点不存在: #定义-send |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定义 - Sync | `./formal_methods/send_sync_formalization.md#定义-sync` | 锚点不存在: #定义-sync |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定义 - 异步函数 | `./formal_methods/async_state_machine.md#定义-异步函数` | 锚点不存在: #定义-异步函数 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定理 A-T1 - Await 正确性 | `./formal_methods/async_state_machine.md#定理-a-t1-await-正确性` | 锚点不存在: #定理-a-t1-await-正确性 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 定理 A-T2 - Pin 安全性 | `./formal_methods/async_state_machine.md#定理-a-t2-pin-安全性` | 锚点不存在: #定理-a-t2-pin-安全性 |
 | docs\research_notes\10_cognitive_argumentation_framework.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_comprehensive_project_report.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_comprehensive_systematic_overview.md | 🗺️ 思维表征方式全索引 {#️-思维表征方式全索引} | `#️-思维表征方式全索引-️-思维表征方式全索引` | 同文件锚点不存在: #️-思维表征方式全索引-️-思维表征方式全索引 |
@@ -1150,20 +1150,20 @@
 | docs\research_notes\CORE_THEOREMS_FULL_PROOFS.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\CORE_THEOREMS_FULL_PROOFS.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_counter_examples_compendium.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | � 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引} | `#-跨文档映射网络---核心索引--跨文档映射网络---核心索引` | 同文件锚点不存在: #-跨文档映射网络---核心索引--跨文档映射网络---核心索引 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | 🗺️ 文档网络概览 {#️-文档网络概览} | `#️-文档网络概览-️-文档网络概览` | 同文件锚点不存在: #️-文档网络概览-️-文档网络概览 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | formal\_methods ↔ 其他文档 | `#formal_methods--其他文档` | 同文件锚点不存在: #formal_methods--其他文档 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | type\_theory ↔ 其他文档 | `#type_theory--其他文档` | 同文件锚点不存在: #type_theory--其他文档 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | software\_design\_theory ↔ 其他文档 | `#software_design_theory--其他文档` | 同文件锚点不存在: #software_design_theory--其他文档 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | 速查卡 ↔ 指南/研究笔记 | `#速查卡--指南研究笔记` | 同文件锚点不存在: #速查卡--指南研究笔记 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | 🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引} | `#-跨文档映射网络---核心索引--跨文档映射网络---核心索引` | 同文件锚点不存在: #-跨文档映射网络---核心索引--跨文档映射网络---核心索引 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | 🗺️ 文档网络概览 {#️-文档网络概览} | `#️-文档网络概览-️-文档网络概览` | 同文件锚点不存在: #️-文档网络概览-️-文档网络概览 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | formal\_methods ↔ 其他文档 | `#formal_methods--其他文档` | 同文件锚点不存在: #formal_methods--其他文档 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | type\_theory ↔ 其他文档 | `#type_theory--其他文档` | 同文件锚点不存在: #type_theory--其他文档 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | software\_design\_theory ↔ 其他文档 | `#software_design_theory--其他文档` | 同文件锚点不存在: #software_design_theory--其他文档 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | 速查卡 ↔ 指南/研究笔记 | `#速查卡--指南研究笔记` | 同文件锚点不存在: #速查卡--指南研究笔记 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_cross_reference_index.md | � 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引} | `#-跨文档映射网络---核心索引--跨文档映射网络---核心索引` | 同文件锚点不存在: #-跨文档映射网络---核心索引--跨文档映射网络---核心索引 |
+| docs\research_notes\10_cross_reference_index.md | 🗺️ 文档网络概览 {#️-文档网络概览} | `#️-文档网络概览-️-文档网络概览` | 同文件锚点不存在: #️-文档网络概览-️-文档网络概览 |
+| docs\research_notes\10_cross_reference_index.md | formal\_methods ↔ 其他文档 | `#formal_methods--其他文档` | 同文件锚点不存在: #formal_methods--其他文档 |
+| docs\research_notes\10_cross_reference_index.md | type\_theory ↔ 其他文档 | `#type_theory--其他文档` | 同文件锚点不存在: #type_theory--其他文档 |
+| docs\research_notes\10_cross_reference_index.md | software\_design\_theory ↔ 其他文档 | `#software_design_theory--其他文档` | 同文件锚点不存在: #software_design_theory--其他文档 |
+| docs\research_notes\10_cross_reference_index.md | 速查卡 ↔ 指南/研究笔记 | `#速查卡--指南研究笔记` | 同文件锚点不存在: #速查卡--指南研究笔记 |
+| docs\research_notes\10_cross_reference_index.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_cross_reference_index.md | 🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引} | `#-跨文档映射网络---核心索引--跨文档映射网络---核心索引` | 同文件锚点不存在: #-跨文档映射网络---核心索引--跨文档映射网络---核心索引 |
+| docs\research_notes\10_cross_reference_index.md | 🗺️ 文档网络概览 {#️-文档网络概览} | `#️-文档网络概览-️-文档网络概览` | 同文件锚点不存在: #️-文档网络概览-️-文档网络概览 |
+| docs\research_notes\10_cross_reference_index.md | formal\_methods ↔ 其他文档 | `#formal_methods--其他文档` | 同文件锚点不存在: #formal_methods--其他文档 |
+| docs\research_notes\10_cross_reference_index.md | type\_theory ↔ 其他文档 | `#type_theory--其他文档` | 同文件锚点不存在: #type_theory--其他文档 |
+| docs\research_notes\10_cross_reference_index.md | software\_design\_theory ↔ 其他文档 | `#software_design_theory--其他文档` | 同文件锚点不存在: #software_design_theory--其他文档 |
+| docs\research_notes\10_cross_reference_index.md | 速查卡 ↔ 指南/研究笔记 | `#速查卡--指南研究笔记` | 同文件锚点不存在: #速查卡--指南研究笔记 |
+| docs\research_notes\10_cross_reference_index.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\DESIGN_MECHANISM_RATIONALE.md | Rust 设计机制论证：理由与完整论证 | `#rust-设计机制论证理由与完整论证` | 同文件锚点不存在: #rust-设计机制论证理由与完整论证 |
 | docs\research_notes\DESIGN_MECHANISM_RATIONALE.md | ⏱️ 生命周期：为何需要显式标注？ {#️-生命周期为何需要显式标注} | `#️-生命周期为何需要显式标注-️-生命周期为何需要显式标注` | 同文件锚点不存在: #️-生命周期为何需要显式标注-️-生命周期为何需要显式标注 |
 | docs\research_notes\DESIGN_MECHANISM_RATIONALE.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
@@ -1262,21 +1262,21 @@
 | docs\research_notes\10_glossary.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_glossary.md | 工具使用指南 - Coq | `./TOOLS_GUIDE.md#coq` | 锚点不存在: #coq |
 | docs\research_notes\10_glossary.md | 工具使用指南 - Lean | `./TOOLS_GUIDE.md#lean` | 锚点不存在: #lean |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | 二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表 | `#二概念族--文档--defaxiom定理-映射表` | 同文件锚点不存在: #二概念族--文档--defaxiom定理-映射表 |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | 三、文档 ↔ 思维表征 映射表 | `#三文档--思维表征-映射表` | 同文件锚点不存在: #三文档--思维表征-映射表 |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | 3.1 按文档 → 思维表征 | `#31-按文档--思维表征` | 同文件锚点不存在: #31-按文档--思维表征 |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | 3.2 按思维表征 → 文档（入口） | `#32-按思维表征--文档入口` | 同文件锚点不存在: #32-按思维表征--文档入口 |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | 二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表 | `#二概念族--文档--defaxiom定理-映射表` | 同文件锚点不存在: #二概念族--文档--defaxiom定理-映射表 |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | 三、文档 ↔ 思维表征 映射表 | `#三文档--思维表征-映射表` | 同文件锚点不存在: #三文档--思维表征-映射表 |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | 3.1 按文档 → 思维表征 | `#31-按文档--思维表征` | 同文件锚点不存在: #31-按文档--思维表征 |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | 3.2 按思维表征 → 文档（入口） | `#32-按思维表征--文档入口` | 同文件锚点不存在: #32-按思维表征--文档入口 |
-| docs\research_notes\HIERARCHICAL_MAPPING_AND_SUMMARY.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | 二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表 | `#二概念族--文档--defaxiom定理-映射表` | 同文件锚点不存在: #二概念族--文档--defaxiom定理-映射表 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | 三、文档 ↔ 思维表征 映射表 | `#三文档--思维表征-映射表` | 同文件锚点不存在: #三文档--思维表征-映射表 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | 3.1 按文档 → 思维表征 | `#31-按文档--思维表征` | 同文件锚点不存在: #31-按文档--思维表征 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | 3.2 按思维表征 → 文档（入口） | `#32-按思维表征--文档入口` | 同文件锚点不存在: #32-按思维表征--文档入口 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | 二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表 | `#二概念族--文档--defaxiom定理-映射表` | 同文件锚点不存在: #二概念族--文档--defaxiom定理-映射表 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | 三、文档 ↔ 思维表征 映射表 | `#三文档--思维表征-映射表` | 同文件锚点不存在: #三文档--思维表征-映射表 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | 3.1 按文档 → 思维表征 | `#31-按文档--思维表征` | 同文件锚点不存在: #31-按文档--思维表征 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | 3.2 按思维表征 → 文档（入口） | `#32-按思维表征--文档入口` | 同文件锚点不存在: #32-按思维表征--文档入口 |
+| docs\research_notes\10_hierarchical_mapping_and_summary.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_incremental_update_flow.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_incremental_update_flow.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\INDEX.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md | 国际 Rust 形式化验证成果对标索引 | `#国际-rust-形式化验证成果对标索引` | 同文件锚点不存在: #国际-rust-形式化验证成果对标索引 |
-| docs\research_notes\INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_international_formal_verification_index.md | 国际 Rust 形式化验证成果对标索引 | `#国际-rust-形式化验证成果对标索引` | 同文件锚点不存在: #国际-rust-形式化验证成果对标索引 |
+| docs\research_notes\10_international_formal_verification_index.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_interview_questions_collection.md | ⭐ 基础题 | `#-基础题-1` | 同文件锚点不存在: #-基础题-1 |
 | docs\research_notes\10_interview_questions_collection.md | ⭐⭐ 进阶题 | `#-进阶题-1` | 同文件锚点不存在: #-进阶题-1 |
 | docs\research_notes\10_interview_questions_collection.md | ⭐⭐⭐ 高级题 | `#-高级题-1` | 同文件锚点不存在: #-高级题-1 |
@@ -1314,10 +1314,10 @@
 | docs\research_notes\10_maintenance_guide.md | 🛠️ 维护工具 {#️-维护工具} | `#️-维护工具-️-维护工具` | 同文件锚点不存在: #️-维护工具-️-维护工具 |
 | docs\research_notes\10_maintenance_guide.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_ownership_concept_mindmap.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\practical_applications.md | 实际应用案例研究 | `#实际应用案例研究` | 同文件锚点不存在: #实际应用案例研究 |
-| docs\research_notes\practical_applications.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\practical_applications.md | 实际应用案例研究 | `#实际应用案例研究` | 同文件锚点不存在: #实际应用案例研究 |
-| docs\research_notes\practical_applications.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_practical_applications.md | 实际应用案例研究 | `#实际应用案例研究` | 同文件锚点不存在: #实际应用案例研究 |
+| docs\research_notes\10_practical_applications.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_practical_applications.md | 实际应用案例研究 | `#实际应用案例研究` | 同文件锚点不存在: #实际应用案例研究 |
+| docs\research_notes\10_practical_applications.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_progress_tracking.md | 研究进展跟踪 | `#研究进展跟踪` | 同文件锚点不存在: #研究进展跟踪 |
 | docs\research_notes\10_progress_tracking.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_progress_tracking.md | 研究进展跟踪 | `#研究进展跟踪` | 同文件锚点不存在: #研究进展跟踪 |
@@ -1357,8 +1357,8 @@
 | docs\research_notes\research_methodology.md | 研究方法论 | `#研究方法论` | 同文件锚点不存在: #研究方法论 |
 | docs\research_notes\research_methodology.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_research_notes_organization.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\RESEARCH_ROADMAP.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\RESEARCH_ROADMAP.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_research_roadmap.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_research_roadmap.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_resources.md | 🛠️ 工具资源 {#️-工具资源} | `#️-工具资源-️-工具资源` | 同文件锚点不存在: #️-工具资源-️-工具资源 |
 | docs\research_notes\10_resources.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_resources.md | 🛠️ 工具资源 {#️-工具资源} | `#️-工具资源-️-工具资源` | 同文件锚点不存在: #️-工具资源-️-工具资源 |
@@ -1383,8 +1383,8 @@
 | docs\research_notes\10_rust_193_feature_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_rust_193_feature_matrix.md | Rust 1.93 特性族多维概念矩阵 | `#rust-193-特性族多维概念矩阵` | 同文件锚点不存在: #rust-193-特性族多维概念矩阵 |
 | docs\research_notes\10_rust_193_feature_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_rust_193_language_features_comprehensive_analysis.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_rust_194_195_feature_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_rust_194_comprehensive_analysis.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_rust_194_comprehensive_semantics_framework.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
@@ -1452,10 +1452,10 @@
 | docs\research_notes\10_theorem_rust_example_mapping.md | 定理 ↔ Rust 示例完整映射 | `#定理--rust-示例完整映射` | 同文件锚点不存在: #定理--rust-示例完整映射 |
 | docs\research_notes\10_theorem_rust_example_mapping.md | T-TY1: 类型安全定理 (进展性 + 保持性) | `#t-ty1-类型安全定理-进展性--保持性` | 同文件锚点不存在: #t-ty1-类型安全定理-进展性--保持性 |
 | docs\research_notes\10_theorem_rust_example_mapping.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md | Rust 形式化研究：理论体系与论证体系结构 | `#rust-形式化研究理论体系与论证体系结构` | 同文件锚点不存在: #rust-形式化研究理论体系与论证体系结构 |
-| docs\research_notes\THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md | Rust 形式化研究：理论体系与论证体系结构 | `#rust-形式化研究理论体系与论证体系结构` | 同文件锚点不存在: #rust-形式化研究理论体系与论证体系结构 |
-| docs\research_notes\THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_theoretical_and_argumentation_system_architecture.md | Rust 形式化研究：理论体系与论证体系结构 | `#rust-形式化研究理论体系与论证体系结构` | 同文件锚点不存在: #rust-形式化研究理论体系与论证体系结构 |
+| docs\research_notes\10_theoretical_and_argumentation_system_architecture.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_theoretical_and_argumentation_system_architecture.md | Rust 形式化研究：理论体系与论证体系结构 | `#rust-形式化研究理论体系与论证体系结构` | 同文件锚点不存在: #rust-形式化研究理论体系与论证体系结构 |
+| docs\research_notes\10_theoretical_and_argumentation_system_architecture.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\TOOLS_GUIDE.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\TOOLS_GUIDE.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_tutorial_borrow_checker.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
@@ -1463,26 +1463,26 @@
 | docs\research_notes\10_tutorial_lifetimes.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_tutorial_ownership_safety.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_tutorial_type_system.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\UNIFIED_SYSTEMATIC_FRAMEWORK.md | Rust 研究笔记：全局统一系统化框架 | `#rust-研究笔记全局统一系统化框架` | 同文件锚点不存在: #rust-研究笔记全局统一系统化框架 |
-| docs\research_notes\UNIFIED_SYSTEMATIC_FRAMEWORK.md | 🕸️ 全局思维导图：Rust 形式化知识全景 {#️-全局思维导图rust-形式化知识全景} | `#️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景` | 同文件锚点不存在: #️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景 |
-| docs\research_notes\UNIFIED_SYSTEMATIC_FRAMEWORK.md | ⚠️ 反例总索引 {#️-反例总索引} | `#️-反例总索引-️-反例总索引` | 同文件锚点不存在: #️-反例总索引-️-反例总索引 |
-| docs\research_notes\UNIFIED_SYSTEMATIC_FRAMEWORK.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\UNIFIED_SYSTEMATIC_FRAMEWORK.md | Rust 研究笔记：全局统一系统化框架 | `#rust-研究笔记全局统一系统化框架` | 同文件锚点不存在: #rust-研究笔记全局统一系统化框架 |
-| docs\research_notes\UNIFIED_SYSTEMATIC_FRAMEWORK.md | 🕸️ 全局思维导图：Rust 形式化知识全景 {#️-全局思维导图rust-形式化知识全景} | `#️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景` | 同文件锚点不存在: #️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景 |
-| docs\research_notes\UNIFIED_SYSTEMATIC_FRAMEWORK.md | ⚠️ 反例总索引 {#️-反例总索引} | `#️-反例总索引-️-反例总索引` | 同文件锚点不存在: #️-反例总索引-️-反例总索引 |
-| docs\research_notes\UNIFIED_SYSTEMATIC_FRAMEWORK.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_unified_systematic_framework.md | Rust 研究笔记：全局统一系统化框架 | `#rust-研究笔记全局统一系统化框架` | 同文件锚点不存在: #rust-研究笔记全局统一系统化框架 |
+| docs\research_notes\10_unified_systematic_framework.md | 🕸️ 全局思维导图：Rust 形式化知识全景 {#️-全局思维导图rust-形式化知识全景} | `#️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景` | 同文件锚点不存在: #️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景 |
+| docs\research_notes\10_unified_systematic_framework.md | ⚠️ 反例总索引 {#️-反例总索引} | `#️-反例总索引-️-反例总索引` | 同文件锚点不存在: #️-反例总索引-️-反例总索引 |
+| docs\research_notes\10_unified_systematic_framework.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_unified_systematic_framework.md | Rust 研究笔记：全局统一系统化框架 | `#rust-研究笔记全局统一系统化框架` | 同文件锚点不存在: #rust-研究笔记全局统一系统化框架 |
+| docs\research_notes\10_unified_systematic_framework.md | 🕸️ 全局思维导图：Rust 形式化知识全景 {#️-全局思维导图rust-形式化知识全景} | `#️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景` | 同文件锚点不存在: #️-全局思维导图rust-形式化知识全景-️-全局思维导图rust-形式化知识全景 |
+| docs\research_notes\10_unified_systematic_framework.md | ⚠️ 反例总索引 {#️-反例总索引} | `#️-反例总索引-️-反例总索引` | 同文件锚点不存在: #️-反例总索引-️-反例总索引 |
+| docs\research_notes\10_unified_systematic_framework.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_user_guide.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_verification_tools_decision_tree.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\research_notes\10_verification_tools_decision_tree.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_verification_tools_decision_tree.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\research_notes\10_verification_tools_decision_tree.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\VERIFICATION_TOOLS_MATRIX.md | 1. Miri - 内存安全检查器 | `#1-miri---内存安全检查器` | 同文件锚点不存在: #1-miri---内存安全检查器 |
-| docs\research_notes\VERIFICATION_TOOLS_MATRIX.md | 2. Kani - 位精确模型检查器 | `#2-kani---位精确模型检查器` | 同文件锚点不存在: #2-kani---位精确模型检查器 |
-| docs\research_notes\VERIFICATION_TOOLS_MATRIX.md | 3. Prusti - 契约式验证 | `#3-prusti---契约式验证` | 同文件锚点不存在: #3-prusti---契约式验证 |
-| docs\research_notes\VERIFICATION_TOOLS_MATRIX.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_verification_tools_matrix.md | 1. Miri - 内存安全检查器 | `#1-miri---内存安全检查器` | 同文件锚点不存在: #1-miri---内存安全检查器 |
+| docs\research_notes\10_verification_tools_matrix.md | 2. Kani - 位精确模型检查器 | `#2-kani---位精确模型检查器` | 同文件锚点不存在: #2-kani---位精确模型检查器 |
+| docs\research_notes\10_verification_tools_matrix.md | 3. Prusti - 契约式验证 | `#3-prusti---契约式验证` | 同文件锚点不存在: #3-prusti---契约式验证 |
+| docs\research_notes\10_verification_tools_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_visualization_index.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_visualization_index.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\WORKFLOW_CONCEPT_MINDMAP.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\10_workflow_concept_mindmap.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_workflow_engine_matrix.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\research_notes\10_workflow_engine_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\10_workflow_engine_matrix.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
@@ -1504,10 +1504,10 @@
 | docs\research_notes\experiments\concurrency_performance.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\experiments\concurrency_performance.md | 并发性能研究 | `#并发性能研究` | 同文件锚点不存在: #并发性能研究 |
 | docs\research_notes\experiments\concurrency_performance.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\experiments\macro_expansion_performance.md | 宏展开性能研究 | `#宏展开性能研究` | 同文件锚点不存在: #宏展开性能研究 |
-| docs\research_notes\experiments\macro_expansion_performance.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\experiments\macro_expansion_performance.md | 宏展开性能研究 | `#宏展开性能研究` | 同文件锚点不存在: #宏展开性能研究 |
-| docs\research_notes\experiments\macro_expansion_performance.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\experiments\10_macro_expansion_performance.md | 宏展开性能研究 | `#宏展开性能研究` | 同文件锚点不存在: #宏展开性能研究 |
+| docs\research_notes\experiments\10_macro_expansion_performance.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\experiments\10_macro_expansion_performance.md | 宏展开性能研究 | `#宏展开性能研究` | 同文件锚点不存在: #宏展开性能研究 |
+| docs\research_notes\experiments\10_macro_expansion_performance.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\experiments\memory_analysis.md | 内存分析研究 | `#内存分析研究` | 同文件锚点不存在: #内存分析研究 |
 | docs\research_notes\experiments\memory_analysis.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\experiments\memory_analysis.md | 内存分析研究 | `#内存分析研究` | 同文件锚点不存在: #内存分析研究 |
@@ -1519,8 +1519,8 @@
 | docs\research_notes\experiments\README.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\formal_methods\00_completeness_gaps.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\formal_methods\10_algorithm_selection_decision_tree.md | **状态**: ✅ 100% 完成 | `#状态--100-完成` | 同文件锚点不存在: #状态--100-完成 |
-| docs\research_notes\formal_methods\APPLICATION_TREES.md | Rust应用场景映射树 - 应用树集合 | `#rust应用场景映射树---应用树集合` | 同文件锚点不存在: #rust应用场景映射树---应用树集合 |
-| docs\research_notes\formal_methods\APPLICATION_TREES.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\formal_methods\10_application_trees.md | Rust应用场景映射树 - 应用树集合 | `#rust应用场景映射树---应用树集合` | 同文件锚点不存在: #rust应用场景映射树---应用树集合 |
+| docs\research_notes\formal_methods\10_application_trees.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\formal_methods\10_async_concept_mindmap.md | join! - 并行等待 | `#join---并行等待` | 同文件锚点不存在: #join---并行等待 |
 | docs\research_notes\formal_methods\10_async_concept_mindmap.md | select! - 竞赛等待 | `#select---竞赛等待` | 同文件锚点不存在: #select---竞赛等待 |
 | docs\research_notes\formal_methods\10_async_concept_mindmap.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
@@ -1650,9 +1650,9 @@
 | docs\research_notes\formal_methods\10_variance_concept_mindmap.md | 1.3 不变 (Invariant) = | `#13-不变-invariant-` | 同文件锚点不存在: #13-不变-invariant- |
 | docs\research_notes\formal_methods\10_variance_concept_mindmap.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\formal_methods\10_verification_tools_decision_tree.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\formal_methods\VERIFICATION_TOOLS_MATRIX.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\formal_methods\WORKFLOW_CONCEPT_MINDMAP.md | 工作流概念族谱 - 思维导图 | `#工作流概念族谱---思维导图` | 同文件锚点不存在: #工作流概念族谱---思维导图 |
-| docs\research_notes\formal_methods\WORKFLOW_CONCEPT_MINDMAP.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\formal_methods\10_verification_tools_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\formal_methods\10_workflow_concept_mindmap.md | 工作流概念族谱 - 思维导图 | `#工作流概念族谱---思维导图` | 同文件锚点不存在: #工作流概念族谱---思维导图 |
+| docs\research_notes\formal_methods\10_workflow_concept_mindmap.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\formal_methods\10_workflow_engines_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\formal_modules\10_formalization_ecology_mindmap.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\software_design_theory\00_MASTER_INDEX.md | 软件设计理论体系：主索引 | `#软件设计理论体系主索引` | 同文件锚点不存在: #软件设计理论体系主索引 |
@@ -1862,10 +1862,10 @@
 | docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md | 设计模式 × 表达边界 | `#设计模式--表达边界` | 同文件锚点不存在: #设计模式--表达边界 |
 | docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md | 执行模型 × 表达边界 | `#执行模型--表达边界` | 同文件锚点不存在: #执行模型--表达边界 |
 | docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\software_design_theory\05_boundary_system\safe_unsafe_matrix.md | 安全 vs 非安全边界矩阵 | `#安全-vs-非安全边界矩阵` | 同文件锚点不存在: #安全-vs-非安全边界矩阵 |
-| docs\research_notes\software_design_theory\05_boundary_system\safe_unsafe_matrix.md | 设计模式 × 安全边界 | `#设计模式--安全边界` | 同文件锚点不存在: #设计模式--安全边界 |
-| docs\research_notes\software_design_theory\05_boundary_system\safe_unsafe_matrix.md | 执行模型 × 安全边界 | `#执行模型--安全边界` | 同文件锚点不存在: #执行模型--安全边界 |
-| docs\research_notes\software_design_theory\05_boundary_system\safe_unsafe_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md | 安全 vs 非安全边界矩阵 | `#安全-vs-非安全边界矩阵` | 同文件锚点不存在: #安全-vs-非安全边界矩阵 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md | 设计模式 × 安全边界 | `#设计模式--安全边界` | 同文件锚点不存在: #设计模式--安全边界 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md | 执行模型 × 安全边界 | `#执行模型--安全边界` | 同文件锚点不存在: #执行模型--安全边界 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md | 支持 vs 不支持边界矩阵 | `#支持-vs-不支持边界矩阵` | 同文件锚点不存在: #支持-vs-不支持边界矩阵 |
 | docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md | 设计模式 × 支持边界 | `#设计模式--支持边界` | 同文件锚点不存在: #设计模式--支持边界 |
 | docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md | 执行模型 × 支持边界 | `#执行模型--支持边界` | 同文件锚点不存在: #执行模型--支持边界 |
@@ -1889,10 +1889,10 @@
 | docs\research_notes\type_theory\advanced_types.md | 高级类型特性 | `#高级类型特性` | 同文件锚点不存在: #高级类型特性 |
 | docs\research_notes\type_theory\advanced_types.md | ⚠️ 反例：违反高级类型规则 {#️-反例违反高级类型规则} | `#️-反例违反高级类型规则-️-反例违反高级类型规则` | 同文件锚点不存在: #️-反例违反高级类型规则-️-反例违反高级类型规则 |
 | docs\research_notes\type_theory\advanced_types.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\type_theory\construction_capability.md | 类型系统构造能力 | `#类型系统构造能力` | 同文件锚点不存在: #类型系统构造能力 |
-| docs\research_notes\type_theory\construction_capability.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
-| docs\research_notes\type_theory\construction_capability.md | 类型系统构造能力 | `#类型系统构造能力` | 同文件锚点不存在: #类型系统构造能力 |
-| docs\research_notes\type_theory\construction_capability.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\type_theory\10_construction_capability.md | 类型系统构造能力 | `#类型系统构造能力` | 同文件锚点不存在: #类型系统构造能力 |
+| docs\research_notes\type_theory\10_construction_capability.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\type_theory\10_construction_capability.md | 类型系统构造能力 | `#类型系统构造能力` | 同文件锚点不存在: #类型系统构造能力 |
+| docs\research_notes\type_theory\10_construction_capability.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\type_theory\10_const_evaluation.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
 | docs\research_notes\type_theory\lifetime_formalization.md | 生命周期形式化 | `#生命周期形式化` | 同文件锚点不存在: #生命周期形式化 |
 | docs\research_notes\type_theory\lifetime_formalization.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
@@ -2110,8 +2110,8 @@
 | docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md | 阶段二: 内容深化 (4周) 🟡 | `#阶段二-内容深化-4周-` | 同文件锚点不存在: #阶段二-内容深化-4周- |
 | docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md | 阶段三: 对齐优化 (4周) 🟢 | `#阶段三-对齐优化-4周-` | 同文件锚点不存在: #阶段三-对齐优化-4周- |
 | docs\rust-ownership-decidability\PROJECT_COMPREHENSIVE_AUDIT_REPORT.md | *版本: v1.0* | `#版本-v10` | 同文件锚点不存在: #版本-v10 |
-| docs\rust-ownership-decidability\PROJECT_STRUCTURE.md | Rust 所有权可判定性 - 项目结构 | `#rust-所有权可判定性---项目结构` | 同文件锚点不存在: #rust-所有权可判定性---项目结构 |
-| docs\rust-ownership-decidability\PROJECT_STRUCTURE.md | *项目结构清晰，易于导航和维护* | `#项目结构清晰易于导航和维护` | 同文件锚点不存在: #项目结构清晰易于导航和维护 |
+| docs\rust-ownership-decidability\10_project_structure.md | Rust 所有权可判定性 - 项目结构 | `#rust-所有权可判定性---项目结构` | 同文件锚点不存在: #rust-所有权可判定性---项目结构 |
+| docs\rust-ownership-decidability\10_project_structure.md | *项目结构清晰，易于导航和维护* | `#项目结构清晰易于导航和维护` | 同文件锚点不存在: #项目结构清晰易于导航和维护 |
 | docs\rust-ownership-decidability\10_proof_strategies.md | **最后更新**: 2026-03-14 | `#最后更新-2026-03-14` | 同文件锚点不存在: #最后更新-2026-03-14 |
 | docs\rust-ownership-decidability\10_quick_reference_card.md | Rust 所有权系统 - 快速参考卡片 | `#rust-所有权系统---快速参考卡片` | 同文件锚点不存在: #rust-所有权系统---快速参考卡片 |
 | docs\rust-ownership-decidability\10_quick_reference_card.md | ⏱️ 生命周期规则 | `#️-生命周期规则` | 同文件锚点不存在: #️-生命周期规则 |
@@ -2201,7 +2201,7 @@
 | docs\rust-ownership-decidability\TECHNICAL_DEBT.md | 3. PreciseCapturingComplete.v (4/4) ✅ | `#3-precisecapturingcompletev-44-` | 同文件锚点不存在: #3-precisecapturingcompletev-44- |
 | docs\rust-ownership-decidability\TECHNICAL_DEBT.md | 4. AsyncBasicsComplete.v (5/5) ✅ | `#4-asyncbasicscompletev-55-` | 同文件锚点不存在: #4-asyncbasicscompletev-55- |
 | docs\rust-ownership-decidability\TECHNICAL_DEBT.md | **状态: P0 证明 100% 完成，非P0证明部分完成** | `#状态-p0-证明-100-完成非p0证明部分完成` | 同文件锚点不存在: #状态-p0-证明-100-完成非p0证明部分完成 |
-| docs\rust-ownership-decidability\THEOREM_DEPENDENCY_GRAPH.md | **最后更新**: 2026-03-14 | `#最后更新-2026-03-14` | 同文件锚点不存在: #最后更新-2026-03-14 |
+| docs\rust-ownership-decidability\THEOREM_10_dependency_graph.md | **最后更新**: 2026-03-14 | `#最后更新-2026-03-14` | 同文件锚点不存在: #最后更新-2026-03-14 |
 | docs\rust-ownership-decidability\THEOREM_INTUITIONS.md | **最后更新**: 2026-03-14 | `#最后更新-2026-03-14` | 同文件锚点不存在: #最后更新-2026-03-14 |
 | docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md | 一、终止性定理 ↔ rustc 借用检查 | `#一终止性定理--rustc-借用检查` | 同文件锚点不存在: #一终止性定理--rustc-借用检查 |
 | docs\rust-ownership-decidability\THEOREM_TO_COMPILER_BRIDGE.md | 二、类型安全定理 ↔ rustc 类型检查 | `#二类型安全定理--rustc-类型检查` | 同文件锚点不存在: #二类型安全定理--rustc-类型检查 |
@@ -3135,7 +3135,7 @@
 | docs\00_meta\analysis\00_rust_2026_project_goals_monthly_tracking.md | `crates/c10_networks/src/cargo_semver_checks_guide.rs` | `../../crates/c10_networks/src/cargo_semver_checks_guide.rs` | 文件不存在: docs\crates\c10_networks\src\cargo_semver_checks_guide.rs |
 | docs\02_reference\quick_reference\02_process_management_cheatsheet.md | performance_optimization_demo.rs | `../../../crates/c07_process/examples/performance_optimization_demo.rs` | 文件不存在: crates\c07_process\examples\performance_optimization_demo.rs |
 | docs\02_reference\quick_reference\02_testing_cheatsheet.md | `tests/cross_module_integration_tests.rs` | `../../../tests/cross_module_integration_tests.rs` | 文件不存在: tests\cross_module_integration_tests.rs |
-| docs\02_reference\quick_reference\threads_concurrency_cheatsheet.md | performance_optimization_demo.rs | `../../../crates/c05_threads/examples/performance_optimization_demo.rs` | 文件不存在: crates\c05_threads\examples\performance_optimization_demo.rs |
+| docs\02_reference\quick_reference\02_threads_concurrency_cheatsheet.md | performance_optimization_demo.rs | `../../../crates/c05_threads/examples/performance_optimization_demo.rs` | 文件不存在: crates\c05_threads\examples\performance_optimization_demo.rs |
 | docs\02_reference\quick_reference\02_wasm_cheatsheet.md | Rust 1.91/1.92 特性演示 | `../../../crates/c12_wasm/examples/rust_191_features_demo.rs` | 文件不存在: crates\c12_wasm\examples\rust_191_features_demo.rs |
 | docs\02_reference\quick_reference\02_wasm_cheatsheet.md | rust_192_features_demo.rs | `../../../crates/c12_wasm/examples/rust_192_features_demo.rs` | 文件不存在: crates\c12_wasm\examples\rust_192_features_demo.rs |
 | docs\03_guides\03_libp2p_guide.md | Network Programming | `../crates/c10_networks/` | 文件不存在: docs\crates\c10_networks |
@@ -3225,7 +3225,7 @@
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/DOCS_STRUCTURE_OVERVIEW.md | `docs/DOCS_STRUCTURE_OVERVIEW.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md |
-| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/LEARNING_PATH_PLANNING.md | `docs/01_learning/LEARNING_PATH_PLANNING.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md |
+| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/01_learning_path_planning.md | `docs/01_learning/01_learning_path_planning.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\01_learning_path_planning.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
@@ -3309,8 +3309,8 @@
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/FINAL_LINK_REPAIR_REPORT.md | `docs/FINAL_LINK_REPAIR_REPORT.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\FINAL_LINK_REPAIR_REPORT.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/LINK_REPAIR_STRATEGY.md | `docs/LINK_REPAIR_STRATEGY.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\LINK_REPAIR_STRATEGY.md |
-| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/LEARNING_PATH_PLANNING.md | `docs/01_learning/LEARNING_PATH_PLANNING.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md |
-| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/LEARNING_PATH_PLANNING.md | `docs/01_learning/LEARNING_PATH_PLANNING.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md |
+| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/01_learning_path_planning.md | `docs/01_learning/01_learning_path_planning.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\01_learning_path_planning.md |
+| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/01_learning_path_planning.md | `docs/01_learning/01_learning_path_planning.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\01_learning_path_planning.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
@@ -3332,9 +3332,9 @@
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | crates/c05_threads/README.md | `crates/c05_threads/README.md` | 文件不存在: docs\archive\2026_03_reorganization\crates\c05_threads\README.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | crates/c05_threads/docs/00_MASTER_INDEX.md | `crates/c05_threads/docs/00_MASTER_INDEX.md` | 文件不存在: docs\archive\2026_03_reorganization\crates\c05_threads\docs\00_MASTER_INDEX.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/00_MASTER_INDEX.md | `docs/00_master_index.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\00_MASTER_INDEX.md |
-| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/LEARNING_PATH_PLANNING.md | `docs/01_learning/LEARNING_PATH_PLANNING.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md |
-| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/LEARNING_PATH_PLANNING.md | `docs/01_learning/LEARNING_PATH_PLANNING.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md |
-| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/LEARNING_PATH_PLANNING.md | `docs/01_learning/LEARNING_PATH_PLANNING.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\LEARNING_PATH_PLANNING.md |
+| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/01_learning_path_planning.md | `docs/01_learning/01_learning_path_planning.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\01_learning_path_planning.md |
+| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/01_learning_path_planning.md | `docs/01_learning/01_learning_path_planning.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\01_learning_path_planning.md |
+| docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/01_learning_path_planning.md | `docs/01_learning/01_learning_path_planning.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\01_learning_path_planning.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/01_learning/01_official_resources_mapping.md | `docs/01_learning/01_official_resources_mapping.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\01_learning\01_official_resources_mapping.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/DOCS_STRUCTURE_OVERVIEW.md | `docs/DOCS_STRUCTURE_OVERVIEW.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\DOCS_STRUCTURE_OVERVIEW.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | docs/06_toolchain/README.md | `docs/06_toolchain/README.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\06_toolchain\README.md |
@@ -3446,47 +3446,47 @@
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md | `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.en.md` | 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.en.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md | `crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md` | 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\00_MASTER_INDEX.md |
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | crates/c01_ownership_borrow_scope/docs/FAQ.md | `crates/c01_ownership_borrow_scope/docs/FAQ.md` | 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\docs\FAQ.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | guides/README.md | `./guides/README.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md | `./guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | docs/05_guides/UNSAFE_RUST_GUIDE.md | `./docs/05_guides/UNSAFE_RUST_GUIDE.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\05_guides\UNSAFE_RUST_GUIDE.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | guides/README.md | `./guides/README.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | archive/reports/ | `./archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\archive\reports |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | docs/archive/reports/ | `./docs/archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\docs\archive\reports |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | docs/archive/root_completion_reports/ | `./docs/archive/root_completion_reports/README.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\archive\root_completion_reports\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md | `./docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\PLAN_IMPLEMENTATION_COMPLETION_2026_02.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | exercises/README.md | `./exercises/README.md` | 文件不存在: docs\archive\2026_03_reorganization\exercises\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | README.md | `./README.md` | 文件不存在: docs\archive\2026_03_reorganization\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | C01模块 | `./crates/c01_ownership_borrow_scope/README.md` | 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 学习路径 | `./README.md#学习路径推荐` | 文件不存在: docs\archive\2026_03_reorganization\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 学习指南 | `./guides/README.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | QUICK_REFERENCE.md | `./QUICK_REFERENCE.md` | 文件不存在: docs\archive\2026_03_reorganization\QUICK_REFERENCE.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 速查卡目录 | `./docs/02_reference/quick_reference/README.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\02_reference\quick_reference\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 文档中心 | `./docs/README.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | TROUBLESHOOTING.md | `./TROUBLESHOOTING.md#编译错误` | 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | TROUBLESHOOTING.md | `./TROUBLESHOOTING.md#运行时错误` | 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | TROUBLESHOOTING.md | `./TROUBLESHOOTING.md#性能问题` | 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | C09 设计模式 | `./crates/c09_design_pattern/README.md` | 文件不存在: docs\archive\2026_03_reorganization\crates\c09_design_pattern\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | archive/reports/ | `./archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\archive\reports |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | archive/reports/ | `./archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\archive\reports |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 10_changelog.md | `./10_changelog.md` | 文件不存在: docs\archive\2026_03_reorganization\10_changelog.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | ROADMAP.md | `./ROADMAP.md` | 文件不存在: docs\archive\2026_03_reorganization\ROADMAP.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | CONTRIBUTING.md | `./CONTRIBUTING.md` | 文件不存在: docs\archive\2026_03_reorganization\CONTRIBUTING.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | ROADMAP.md | `./ROADMAP.md` | 文件不存在: docs\archive\2026_03_reorganization\ROADMAP.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | README.md | `./README.md` | 文件不存在: docs\archive\2026_03_reorganization\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | guides/ | `./guides/README.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\README.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | archive/reports/ | `./archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\archive\reports |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | CONTRIBUTING.md | `./CONTRIBUTING.md` | 文件不存在: docs\archive\2026_03_reorganization\CONTRIBUTING.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | ROADMAP.md | `./ROADMAP.md` | 文件不存在: docs\archive\2026_03_reorganization\ROADMAP.md |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 10_resources.md | `./10_resources.md` | 文件不存在: docs\archive\2026_03_reorganization\10_resources.md |
-| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | 05_rust_1.93_vs_1.92_comparison.md | `./05_rust_1.93_vs_1.92_comparison.md` | 文件不存在: docs\archive\2026_05_historical_docs\05_rust_1.93_vs_1.92_comparison.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | guides/README.md | `./guides/README.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md | `./guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | docs/05_guides/UNSAFE_RUST_GUIDE.md | `./docs/05_guides/UNSAFE_RUST_GUIDE.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\05_guides\UNSAFE_RUST_GUIDE.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | guides/README.md | `./guides/README.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | archive/reports/ | `./archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\archive\reports |
+| docs\archive\2026_03_reorganization\10_project_structure.md | docs/archive/reports/ | `./docs/archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\docs\archive\reports |
+| docs\archive\2026_03_reorganization\10_project_structure.md | docs/archive/root_completion_reports/ | `./docs/archive/root_completion_reports/README.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\archive\root_completion_reports\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md | `./docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\archive\process_reports\PLAN_IMPLEMENTATION_COMPLETION_2026_02.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | exercises/README.md | `./exercises/README.md` | 文件不存在: docs\archive\2026_03_reorganization\exercises\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | README.md | `./README.md` | 文件不存在: docs\archive\2026_03_reorganization\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | C01模块 | `./crates/c01_ownership_borrow_scope/README.md` | 文件不存在: docs\archive\2026_03_reorganization\crates\c01_ownership_borrow_scope\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | 学习路径 | `./README.md#学习路径推荐` | 文件不存在: docs\archive\2026_03_reorganization\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | 学习指南 | `./guides/README.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | QUICK_REFERENCE.md | `./QUICK_REFERENCE.md` | 文件不存在: docs\archive\2026_03_reorganization\QUICK_REFERENCE.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | 速查卡目录 | `./docs/02_reference/quick_reference/README.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\02_reference\quick_reference\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | 文档中心 | `./docs/README.md` | 文件不存在: docs\archive\2026_03_reorganization\docs\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | TROUBLESHOOTING.md | `./TROUBLESHOOTING.md#编译错误` | 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | TROUBLESHOOTING.md | `./TROUBLESHOOTING.md#运行时错误` | 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | TROUBLESHOOTING.md | `./TROUBLESHOOTING.md#性能问题` | 文件不存在: docs\archive\2026_03_reorganization\TROUBLESHOOTING.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | C09 设计模式 | `./crates/c09_design_pattern/README.md` | 文件不存在: docs\archive\2026_03_reorganization\crates\c09_design_pattern\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | archive/reports/ | `./archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\archive\reports |
+| docs\archive\2026_03_reorganization\10_project_structure.md | archive/reports/ | `./archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\archive\reports |
+| docs\archive\2026_03_reorganization\10_project_structure.md | 10_changelog.md | `./10_changelog.md` | 文件不存在: docs\archive\2026_03_reorganization\10_changelog.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | ROADMAP.md | `./ROADMAP.md` | 文件不存在: docs\archive\2026_03_reorganization\ROADMAP.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | CONTRIBUTING.md | `./CONTRIBUTING.md` | 文件不存在: docs\archive\2026_03_reorganization\CONTRIBUTING.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | ROADMAP.md | `./ROADMAP.md` | 文件不存在: docs\archive\2026_03_reorganization\ROADMAP.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | README.md | `./README.md` | 文件不存在: docs\archive\2026_03_reorganization\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | guides/ | `./guides/README.md` | 文件不存在: docs\archive\2026_03_reorganization\guides\README.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | archive/reports/ | `./archive/reports/` | 文件不存在: docs\archive\2026_03_reorganization\archive\reports |
+| docs\archive\2026_03_reorganization\10_project_structure.md | CONTRIBUTING.md | `./CONTRIBUTING.md` | 文件不存在: docs\archive\2026_03_reorganization\CONTRIBUTING.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | ROADMAP.md | `./ROADMAP.md` | 文件不存在: docs\archive\2026_03_reorganization\ROADMAP.md |
+| docs\archive\2026_03_reorganization\10_project_structure.md | 10_resources.md | `./10_resources.md` | 文件不存在: docs\archive\2026_03_reorganization\10_resources.md |
+| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | 06_05_rust_1_93_vs_1_92_comparison.md | `./06_05_rust_1_93_vs_1_92_comparison.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_05_rust_1_93_vs_1_92_comparison.md |
 | docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | 06_rust_1.93_compatibility_notes.md | `./06_rust_1.93_compatibility_notes.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_rust_1.93_compatibility_notes.md |
-| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | Rust 1.93 vs 1.92 对比 | `./05_rust_1.93_vs_1.92_comparison.md` | 文件不存在: docs\archive\2026_05_historical_docs\05_rust_1.93_vs_1.92_comparison.md |
+| docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | Rust 1.93 vs 1.92 对比 | `./06_05_rust_1_93_vs_1_92_comparison.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_05_rust_1_93_vs_1_92_comparison.md |
 | docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | Rust 1.93 兼容性注意事项 | `./06_rust_1.93_compatibility_notes.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_rust_1.93_compatibility_notes.md |
 | docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | Rust 1.93 完整变更清单 | `./06_07_rust_1_93_full_changelog.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_07_rust_1_93_full_changelog.md |
 | docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | Rust 1.94 完整发布说明 | `../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md` | 文件不存在: docs\archive\archive\2026_05_historical_docs\16_rust_1.94_release_notes.md |
 | docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | Rust 1.94 采用指南 | `../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md` | 文件不存在: docs\archive\archive\2026_05_historical_docs\18_rust_1.94_adoption_guide.md |
 | docs\archive\2026_05_historical_docs\08_rust_version_evolution_1.89_to_1.93.md | Rust 1.93 vs 1.94 对比 | `../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md` | 文件不存在: docs\archive\archive\2026_05_historical_docs\17_rust_1.93_vs_1.94_comparison.md |
-| docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md | 05_rust_1.93_vs_1.92_comparison.md | `./05_rust_1.93_vs_1.92_comparison.md` | 文件不存在: docs\archive\2026_05_historical_docs\05_rust_1.93_vs_1.92_comparison.md |
+| docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md | 06_05_rust_1_93_vs_1_92_comparison.md | `./06_05_rust_1_93_vs_1_92_comparison.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_05_rust_1_93_vs_1_92_comparison.md |
 | docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md | 06_09_rust_1_93_compatibility_deep_dive.md | `./06_09_rust_1_93_compatibility_deep_dive.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_09_rust_1_93_compatibility_deep_dive.md |
 | docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md | 06_07_rust_1_93_full_changelog.md | `./06_07_rust_1_93_full_changelog.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_07_rust_1_93_full_changelog.md |
 | docs\archive\2026_05_historical_docs\10_rust_1.89_to_1.93_cumulative_features_overview.md | ../07_project/07_rust_release_tracking_checklist.md | `../07_project/07_rust_release_tracking_checklist.md` | 文件不存在: docs\archive\07_project\07_rust_release_tracking_checklist.md |
@@ -3506,7 +3506,7 @@
 | docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md | pin_self_referential | `../research_notes/formal_methods/pin_self_referential.md` | 文件不存在: docs\archive\research_notes\formal_methods\pin_self_referential.md |
 | docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md | send_sync_formalization | `../research_notes/formal_methods/send_sync_formalization.md` | 文件不存在: docs\archive\research_notes\formal_methods\send_sync_formalization.md |
 | docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md | 09_rust_1.93_compatibility_deep_dive | `./06_09_rust_1_93_compatibility_deep_dive.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_09_rust_1_93_compatibility_deep_dive.md |
-| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md | 05_rust_1.93_vs_1.92_comparison | `./05_rust_1.93_vs_1.92_comparison.md` | 文件不存在: docs\archive\2026_05_historical_docs\05_rust_1.93_vs_1.92_comparison.md |
+| docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md | 05_rust_1.93_vs_1.92_comparison | `./06_05_rust_1_93_vs_1_92_comparison.md` | 文件不存在: docs\archive\2026_05_historical_docs\06_05_rust_1_93_vs_1_92_comparison.md |
 | docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md | WASM_USAGE_GUIDE | `../05_guides/05_wasm_usage_guide.md` | 文件不存在: docs\archive\05_guides\05_wasm_usage_guide.md |
 | docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md | ownership_model | `../research_notes/formal_methods/ownership_model.md` | 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md |
 | docs\archive\2026_05_historical_docs\12_rust_1.93.1_vs_1.93.0_comparison.md | ownership_model | `../research_notes/formal_methods/ownership_model.md` | 文件不存在: docs\archive\research_notes\formal_methods\ownership_model.md |
@@ -3548,7 +3548,7 @@
 | docs\archive\2026_05_historical_docs\RUST_194_COMPREHENSIVE_GUIDE.md | 版本索引 | `../VERSION_INDEX.md` | 文件不存在: docs\archive\VERSION_INDEX.md |
 | docs\archive\2026_05_historical_docs\rust_194_features_cheatsheet.md | RUST_194_MIGRATION_GUIDE.md | `../../05_guides/RUST_194_MIGRATION_GUIDE.md` | 文件不存在: docs\05_guides\RUST_194_MIGRATION_GUIDE.md |
 | docs\archive\deprecated\README.md | TASK_ORCHESTRATION_MASTER_PLAN | `../../../TASK_ORCHESTRATION_MASTER_PLAN.md` | 文件不存在: TASK_ORCHESTRATION_MASTER_PLAN.md |
-| docs\archive\deprecated_20260318\00_rust_2024_edition_learning_impact.md | Rust 1.93 vs 1.92 对比 | `./05_rust_1.93_vs_1.92_comparison.md` | 文件不存在: docs\archive\deprecated_20260318\05_rust_1.93_vs_1.92_comparison.md |
+| docs\archive\deprecated_20260318\00_rust_2024_edition_learning_impact.md | Rust 1.93 vs 1.92 对比 | `./06_05_rust_1_93_vs_1_92_comparison.md` | 文件不存在: docs\archive\deprecated_20260318\06_05_rust_1_93_vs_1_92_comparison.md |
 | docs\archive\deprecated_20260318\00_rust_2024_edition_learning_impact.md | Rust 1.93 兼容性深度解析 | `./06_09_rust_1_93_compatibility_deep_dive.md` | 文件不存在: docs\archive\deprecated_20260318\06_09_rust_1_93_compatibility_deep_dive.md |
 | docs\archive\deprecated_20260318\00_rust_2024_edition_learning_impact.md | Unsafe Rust 指南 | `../05_guides/UNSAFE_RUST_GUIDE.md` | 文件不存在: docs\archive\05_guides\UNSAFE_RUST_GUIDE.md |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | factory_method | `../01_design_patterns_formal/01_creational/10_factory_method.md` | 文件不存在: docs\archive\01_design_patterns_formal\01_creational\10_factory_method.md |
@@ -3592,14 +3592,14 @@
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | async_state_machine | `../../formal_methods/async_state_machine.md` | 文件不存在: docs\formal_methods\async_state_machine.md |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | 03_behavioral | `../01_design_patterns_formal/03_behavioral/README.md` | 文件不存在: docs\archive\01_design_patterns_formal\03_behavioral\README.md |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | 02_complete_43_catalog | `./02_complete_43_catalog.md` | 文件不存在: docs\archive\deprecated_20260318\02_complete_43_catalog.md |
-| docs\archive\deprecated_20260318\01_safe_23_catalog.md | THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE | `../../THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md` | 文件不存在: docs\THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md |
+| docs\archive\deprecated_20260318\01_safe_23_catalog.md | THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE | `../../10_theoretical_and_argumentation_system_architecture.md` | 文件不存在: docs\10_theoretical_and_argumentation_system_architecture.md |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | ownership_model | `../../formal_methods/ownership_model.md` | 文件不存在: docs\formal_methods\ownership_model.md |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | borrow_checker_proof | `../../formal_methods/borrow_checker_proof.md` | 文件不存在: docs\formal_methods\borrow_checker_proof.md |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | type_system_foundations | `../../type_theory/type_system_foundations.md` | 文件不存在: docs\type_theory\type_system_foundations.md |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | Rust 1.94 迁移指南 | `../05_guides/RUST_194_MIGRATION_GUIDE.md` | 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | Rust 1.94 特性速查 | `../02_reference/quick_reference/rust_194_features_cheatsheet.md` | 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | 性能调优指南 | `../05_guides/PERFORMANCE_TUNING_GUIDE.md` | 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md |
-| docs\archive\deprecated_20260318\01_workflow_state_machine.md | 工作流概念族谱 | `../../WORKFLOW_CONCEPT_MINDMAP.md` | 文件不存在: docs\WORKFLOW_CONCEPT_MINDMAP.md |
+| docs\archive\deprecated_20260318\01_workflow_state_machine.md | 工作流概念族谱 | `../../10_workflow_concept_mindmap.md` | 文件不存在: docs\10_workflow_concept_mindmap.md |
 | docs\archive\deprecated_20260318\01_workflow_state_machine.md | Saga 模式 | `../05_distributed/01_saga_pattern.md` | 文件不存在: docs\archive\05_distributed\01_saga_pattern.md |
 | docs\archive\deprecated_20260318\01_workflow_state_machine.md | Rust 1.94 迁移指南 | `../05_guides/RUST_194_MIGRATION_GUIDE.md` | 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md |
 | docs\archive\deprecated_20260318\01_workflow_state_machine.md | Rust 1.94 特性速查 | `../02_reference/quick_reference/rust_194_features_cheatsheet.md` | 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md |
@@ -3614,7 +3614,7 @@
 | docs\archive\deprecated_20260318\02_compensation_chain.md | Rust 1.94 特性速查 | `../02_reference/quick_reference/rust_194_features_cheatsheet.md` | 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md |
 | docs\archive\deprecated_20260318\02_compensation_chain.md | 性能调优指南 | `../05_guides/PERFORMANCE_TUNING_GUIDE.md` | 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md |
 | docs\archive\deprecated_20260318\03_long_running_transaction.md | Saga 模式 | `../05_distributed/01_saga_pattern.md` | 文件不存在: docs\archive\05_distributed\01_saga_pattern.md |
-| docs\archive\deprecated_20260318\03_long_running_transaction.md | 工作流概念族谱 | `../../WORKFLOW_CONCEPT_MINDMAP.md` | 文件不存在: docs\WORKFLOW_CONCEPT_MINDMAP.md |
+| docs\archive\deprecated_20260318\03_long_running_transaction.md | 工作流概念族谱 | `../../10_workflow_concept_mindmap.md` | 文件不存在: docs\10_workflow_concept_mindmap.md |
 | docs\archive\deprecated_20260318\03_long_running_transaction.md | Rust 1.94 迁移指南 | `../05_guides/RUST_194_MIGRATION_GUIDE.md` | 文件不存在: docs\archive\05_guides\RUST_194_MIGRATION_GUIDE.md |
 | docs\archive\deprecated_20260318\03_long_running_transaction.md | Rust 1.94 特性速查 | `../02_reference/quick_reference/rust_194_features_cheatsheet.md` | 文件不存在: docs\archive\02_reference\quick_reference\rust_194_features_cheatsheet.md |
 | docs\archive\deprecated_20260318\03_long_running_transaction.md | 性能调优指南 | `../05_guides/PERFORMANCE_TUNING_GUIDE.md` | 文件不存在: docs\archive\05_guides\PERFORMANCE_TUNING_GUIDE.md |
@@ -3637,7 +3637,7 @@
 | docs\archive\deprecated_20260318\04_rust_1.91_vs_1.90_comparison.md | Rust 1.94 采用指南 | `./18_rust_1.94_adoption_guide.md` | 文件不存在: docs\archive\deprecated_20260318\18_rust_1.94_adoption_guide.md |
 | docs\archive\deprecated_20260318\04_rust_1.91_vs_1.90_comparison.md | Rust 1.93 vs 1.94 对比 | `./17_rust_1.93_vs_1.94_comparison.md` | 文件不存在: docs\archive\deprecated_20260318\17_rust_1.93_vs_1.94_comparison.md |
 | docs\archive\deprecated_20260318\06_rust_1.93_compatibility_notes.md | 12_rust_1.93.1_vs_1.93.0_comparison | `./12_rust_1.93.1_vs_1.93.0_comparison.md` | 文件不存在: docs\archive\deprecated_20260318\12_rust_1.93.1_vs_1.93.0_comparison.md |
-| docs\archive\deprecated_20260318\06_rust_1.93_compatibility_notes.md | Rust 1.93 vs 1.92 对比 | `./05_rust_1.93_vs_1.92_comparison.md` | 文件不存在: docs\archive\deprecated_20260318\05_rust_1.93_vs_1.92_comparison.md |
+| docs\archive\deprecated_20260318\06_rust_1.93_compatibility_notes.md | Rust 1.93 vs 1.92 对比 | `./06_05_rust_1_93_vs_1_92_comparison.md` | 文件不存在: docs\archive\deprecated_20260318\06_05_rust_1_93_vs_1_92_comparison.md |
 | docs\archive\deprecated_20260318\08_fallback_pattern.md | Circuit Breaker | `./03_circuit_breaker.md` | 文件不存在: docs\archive\deprecated_20260318\03_circuit_breaker.md |
 | docs\archive\deprecated_20260318\08_fallback_pattern.md | 超时模式 | `./06_timeout_pattern.md` | 文件不存在: docs\archive\deprecated_20260318\06_timeout_pattern.md |
 | docs\archive\deprecated_20260318\08_fallback_pattern.md | 重试模式 | `./07_retry_pattern.md` | 文件不存在: docs\archive\deprecated_20260318\07_retry_pattern.md |
@@ -3882,8 +3882,8 @@ Files that mention key concepts but don't link to them:
 | docs\archive\2026_03_reorganization\MASTER_INDEX_AUTO.md | 293 |
 | docs\02_reference\ERROR_CODE_MAPPING.md | 58 |
 | docs\archive\deprecated_20260318\01_safe_23_catalog.md | 49 |
-| docs\archive\2026_03_reorganization\PROJECT_STRUCTURE.md | 40 |
-| docs\research_notes\CODE_DOC_FORMAL_MAPPING.md | 40 |
+| docs\archive\2026_03_reorganization\10_project_structure.md | 40 |
+| docs\research_notes\10_code_doc_formal_mapping.md | 40 |
 | docs\07_project\DOCUMENTATION_CROSS_REFERENCE_GUIDE.md | 34 |
 | docs\archive\deprecated_20260318\DESIGN_PATTERNS_BOUNDARY_MATRIX.md | 34 |
 | docs\02_reference\quick_reference\smart_pointers_cheatsheet.md | 28 |
@@ -3907,7 +3907,7 @@ Files that mention key concepts but don't link to them:
 | docs\02_reference\quick_reference\02_strings_formatting_cheatsheet.md | 14 |
 | docs\archive\deprecated_20260318\axum-formal-analysis.md | 14 |
 | docs\archive\version_reports\RUST_192_EXAMPLE_COMPATIBILITY_REPORT.md | 14 |
-| docs\research_notes\CROSS_REFERENCE_INDEX.md | 14 |
+| docs\research_notes\10_cross_reference_index.md | 14 |
 | docs\research_notes\10_interview_questions_collection.md | 14 |
 | docs\research_notes\software_design_theory\04_compositional_engineering\03_integration_theory.md | 14 |
 | docs\rust-ownership-decidability\case-studies\pin-project-formal-analysis.md | 14 |
@@ -3923,9 +3923,9 @@ Files that mention key concepts but don't link to them:
 | docs\rust-ownership-decidability\case-studies\rtic-formal-analysis.md | 13 |
 | docs\rust-ownership-decidability\case-studies\tonic-formal-analysis.md | 13 |
 | docs\rust-ownership-decidability\progress\2026-03-06_TRUE_100_PERCENT_COMPLETION_CERTIFICATION.md | 13 |
-| docs\02_reference\quick_reference\collections_iterators_cheatsheet.md | 12 |
+| docs\02_reference\quick_reference\02_collections_iterators_cheatsheet.md | 12 |
 | docs\04_thinking\PROOF_GRAPH_NETWORK.md | 12 |
-| docs\04_thinking\THINKING_REPRESENTATION_METHODS.md | 12 |
+| docs\04_thinking\04_thinking_representation_methods.md | 12 |
 | docs\research_notes\TEMPLATE.md | 12 |
 | docs\rust-ownership-decidability\AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md | 12 |
 | docs\rust-ownership-decidability\COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md | 12 |

@@ -293,7 +293,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 
 - **速查卡**: [control_flow_functions_cheatsheet.md](../02_reference/quick_reference/control_flow_functions_cheatsheet.md)
 - **学习教程**: [knowledge/02_intermediate/](../../knowledge/02_intermediate/)
-- **异步指南**: [ASYNC_PROGRAMMING_USAGE_GUIDE.md](./ASYNC_PROGRAMMING_USAGE_GUIDE.md)
+- **异步指南**: [05_async_programming_usage_guide.md](./05_async_programming_usage_guide.md)
 - **源码**: [crates/c03_control_fn/](../../crates/c03_control_fn/)
 
 ---
