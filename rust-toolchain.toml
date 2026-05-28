@@ -1,5 +1,5 @@
 [toolchain]
-channel = "nightly"  # 项目使用 nightly 1.97.0 预览实验性特性；MSRV 为 1.95.0 stable
+channel = "nightly"  # 项目使用 nightly 1.98.0 预览实验性特性；MSRV 为 1.96.0 stable
 components = [
     "rustfmt",           # 代码格式化
     "clippy",            # 静态分析
