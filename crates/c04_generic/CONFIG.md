@@ -110,6 +110,7 @@ cargo run --bin c04_generic
 2. **定期格式化**: 使用 `cargo fmt` 保持代码风格一致
 3. **质量检查**: 使用 `cargo clippy` 发现潜在问题
 4. **测试覆盖**: 确保所有功能都有测试用例
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

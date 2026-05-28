@@ -31,6 +31,7 @@
   - [**覆盖框架**: Actix, Bastion, coerce, Xtra, Heph, Stakker](#覆盖框架-actix-bastion-coerce-xtra-heph-stakker)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 顶层决策树
 >

@@ -70,6 +70,7 @@ Rust 编程语言的所有权系统、类型安全的并发原语和零成本抽
 > [来源: Workflow Patterns Initiative] · [来源: Russell 2006]
 
 ### 实现状态总览
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -87,6 +88,7 @@ xychart-beta
 ```
 
 ### 主对照表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 编号 | 英文名称 | 中文名称 | 模式类别 | 实现状态 | 对应文件路径 | Rust 关键技术 | 所有权安全等级 |
@@ -145,6 +147,7 @@ xychart-beta
 ---
 
 ## 3. 按类别分类详情
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 基础控制流 (Basic Control Flow)
@@ -352,6 +355,7 @@ graph LR
 - **正确性证明**：安全性证明（不会到达错误状态）和活性证明（最终会到达目标状态）
 
 ### 形式化方法的 Rust 特异性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Separation Logic）**嵌入：
@@ -374,6 +378,7 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 基于 Rust 开发者的实际应用场景、模式的基础性程度和实现复杂度，对 22 个缺失模式进行三档优先级划分：
 
 ### P0 — 必须补充（Must Have）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 这些模式是工作流异常处理和结构化控制的基础，在实际系统中使用频率极高。缺失它们会导致知识库无法覆盖工作流引擎最核心的异常处理场景。
@@ -388,6 +393,7 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 > **注**：WCP20、WCP21、WCP43 当前处于并行编写状态，本索引标记为已完成。
 
 ### P1 — 重要补充（Important）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 这些模式在复杂并发工作流中频繁出现，缺失会导致模式家族不完整：
@@ -402,6 +408,7 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 | WCP33 Generalised AND-Join | DAG 工作流的核心汇合模式；与构建系统/CI 流水线直接相关 | 高 | `petgraph`、拓扑排序、入度计数器 |
 
 ### P2 — 锦上添花（Nice to Have）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 这些模式在特定领域有价值，但使用频率相对较低，或可由已有模式组合近似实现：
@@ -425,12 +432,14 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 > [来源: 知识库内部链接规范]
 
 ### 核心分析文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **[`09-workflow-ownership-analysis.md`](./09-workflow-ownership-analysis.md)** — 全部 43 个 WCP 的所有权安全分类矩阵、逐类形式化分析和反模式清单
 - **[`08-workflow-patterns.md`](./08-workflow-patterns.md)** — 工作流设计模式的通用语义框架、BPMN 映射和引擎架构讨论
 
 ### 已完成的模式文件
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 文件 | WCP | 说明 |
@@ -458,6 +467,7 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 | [`workflow-patterns/43-explicit-termination.md`](./workflow-patterns/43-explicit-termination.md) | WCP43 | 显式终止模式完整形式化语义 |
 
 ### 相关概念文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **[`concept/06_ecosystem/18_distributed_systems.md`](../../../concept/06_ecosystem/18_distributed_systems.md)** — Actor 模型、分布式一致性协议与工作流引擎架构；WCP 在分布式场景下的扩展讨论。当工作流模式从单机扩展到分布式环境时，Actor 模型（如 `actix`、`tokio::sync::mpsc` 的 actor 风格使用）为 WCP12-WCP15 多实例模式提供了天然的分布式映射。
@@ -467,6 +477,7 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 - **[`concept/03_advanced/02_async.md`](../../../concept/03_advanced/02_async.md)** — Rust 异步编程：`Future`、`Pin`、`async/await`、`Waker`、执行器模型；理解 WCP2/WCP16/WCP19 等异步模式的前提知识。`Pin` 的语义对于理解 WCP10（Arbitrary Cycles）中自引用状态机的实现至关重要。
 
 ### 补充材料
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **[`COMPREHENSIVE_ANALYSIS_AND_ROADMAP.md`](./COMPREHENSIVE_ANALYSIS_AND_ROADMAP.md)** — 本目录的整体分析路线图和扩展计划
@@ -479,6 +490,7 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 ---
 
 ## 参考文献
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. van der Aalst, W. M. P., ter Hofstede, A. H. M., Kiepuszewski, B., & Barros, A. P. (2003). *Workflow Patterns*. Distributed and Parallel Databases, 14(1), 5-51.
@@ -585,4 +597,3 @@ Rust 的所有权系统本身可以看作一种轻量级的**分离逻辑（Sepa
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

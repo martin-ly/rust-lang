@@ -88,6 +88,7 @@
     - [Rust Documentation](#rust-documentation)
     - [Related Documentation in This Project](#related-documentation-in-this-project)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -344,6 +345,7 @@ pub fn ownership_demo() {
 ---
 
 ## 2. Parallel Iterator Theorems
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Theorem PAR-ITER-SAFETY
@@ -456,6 +458,7 @@ pub fn determinism_proof() {
 ---
 
 ## 3. Patterns
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Parallel Map
@@ -866,6 +869,7 @@ pub fn non_deterministic_ordering() {
 ---
 
 ## 4. Safety Considerations
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 Send Requirement
@@ -1027,6 +1031,7 @@ pub fn safe_collection() {
 ---
 
 ## 5. Advanced Patterns
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Parallel Sort
@@ -1321,6 +1326,7 @@ pub fn parallel_graph_mutation() {
 ---
 
 ## 6. Performance Optimization
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 Granularity Control
@@ -1500,6 +1506,7 @@ pub fn thread_local_accumulation() {
 ---
 
 ## 7. Custom Parallel Algorithms
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 Implementing ParallelIterator
@@ -1702,6 +1709,7 @@ pub fn scope_escape_attempt() {
 ---
 
 ## 8. Case Study: Image Processing
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 Parallel Blur
@@ -2012,6 +2020,7 @@ pub fn memory_bandwidth_analysis() {
 ---
 
 ## 9. Rust 1.94 Features
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 1.94 includes several features that enhance data parallelism:
@@ -2073,6 +2082,7 @@ pub const fn optimal_chunk_size(data_len: usize, num_threads: usize) -> usize {
 ---
 
 ## References
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Academic Papers

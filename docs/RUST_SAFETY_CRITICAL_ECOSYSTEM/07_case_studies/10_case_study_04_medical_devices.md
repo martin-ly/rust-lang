@@ -36,6 +36,7 @@
   - [**联系**: medical-rust@example.com](#联系-medical-rustexamplecom)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >

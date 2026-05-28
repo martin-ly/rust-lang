@@ -3,6 +3,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust安全关键系统 - 工具配置指南](#rust安全关键系统---工具配置指南)
@@ -41,6 +42,7 @@
   - [**维护者**: Rust安全关键系统工作组](#维护者-rust安全关键系统工作组)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 工具链概述
 >
@@ -364,6 +366,7 @@ show_tree = true
 ---
 
 ## 测试工具配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Miri配置
@@ -536,6 +539,7 @@ clean = true
 ---
 
 ## 嵌入式开发工具
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 交叉编译配置
@@ -619,6 +623,7 @@ DEFMT_LOG = "info"
 ---
 
 ## CI/CD配置
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### GitHub Actions完整配置
@@ -772,6 +777,7 @@ jobs:
 ---
 
 ## 工具速查表
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 工具 | 用途 | 常用命令 |
@@ -813,6 +819,7 @@ jobs:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)

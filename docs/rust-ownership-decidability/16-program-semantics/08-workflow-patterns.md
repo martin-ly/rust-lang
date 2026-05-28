@@ -206,6 +206,7 @@
   - [附录：BPMN 语义映射](#附录bpmn-语义映射)
   - [参考文献](#参考文献)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -1797,4 +1798,3 @@ Rust 的类型安全和零成本抽象特性使其成为实现工作流引擎的
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

@@ -131,6 +131,7 @@
     - [11.4 最佳实践](#114-最佳实践)
   - [参考](#参考)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -4264,4 +4265,3 @@ $$
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

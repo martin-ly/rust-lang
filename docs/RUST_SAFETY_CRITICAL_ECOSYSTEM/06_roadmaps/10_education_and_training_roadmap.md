@@ -3,6 +3,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [教育与培训路线图](#教育与培训路线图)
@@ -46,6 +47,7 @@
   - [*持续学习是保持技术领先的关键。*](#持续学习是保持技术领先的关键)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -439,6 +441,7 @@ mod verification {
 ---
 
 ## 2. 企业培训体系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 培训矩阵
@@ -454,6 +457,7 @@ mod verification {
 | **项目经理** | 选修 | 选修 | 必修 | 选修 | 选修 |
 
 ### 培训课程设计
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 课程A: Rust安全关键基础 (3天)
@@ -511,6 +515,7 @@ Day 2: Verus/Creusot
 ```
 
 ### 认证体系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -538,9 +543,11 @@ Day 2: Verus/Creusot
 ---
 
 ## 3. 学习资源库
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 推荐阅读
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 书籍 | 难度 | 主题 | 优先级 |
@@ -552,6 +559,7 @@ Day 2: Verus/Creusot
 | IEC 61508 Handbook | 中级 | 工业安全 | ⭐⭐⭐ |
 
 ### 在线课程
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -570,6 +578,7 @@ Day 2: Verus/Creusot
 ```
 
 ### 实践平台
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -589,9 +598,11 @@ Day 2: Verus/Creusot
 ---
 
 ## 4. 评估与认证
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 技能评估矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 技能 | 初级 | 中级 | 高级 | 专家 |
@@ -603,6 +614,7 @@ Day 2: Verus/Creusot
 | **验证** | 单元测试 | 集成测试 | 形式化验证 | 验证工具开发 |
 
 ### 认证考试示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -633,9 +645,11 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 ---
 
 ## 5. 持续学习
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 社区参与
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -655,6 +669,7 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 ```
 
 ### 知识更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -700,6 +715,7 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
@@ -899,4 +915,3 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

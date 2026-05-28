@@ -58,6 +58,7 @@
   - [参考文献](#参考文献)
   - [*维护者: Rust Comparative Study Team*](#维护者-rust-comparative-study-team)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -217,6 +218,7 @@ private void process(String line) {
 ---
 
 ## 3. 内存管理对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 所有权 vs 垃圾回收
@@ -510,6 +512,7 @@ assert_eq!(std::mem::size_of::<ZeroSized>(), 0);
 ---
 
 ## 4. 类型系统对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 类型系统概览
@@ -871,6 +874,7 @@ pub fn process() {
 ---
 
 ## 5. 并发模型对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 线程模型对比
@@ -1279,6 +1283,7 @@ pub async fn with_timeout() {
 ---
 
 ## 6. 错误处理对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 异常 vs Result
@@ -1420,6 +1425,7 @@ pub fn operation_c() -> Result<()> {
 ---
 
 ## 7. 性能特征对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 运行时开销
@@ -1516,6 +1522,7 @@ pub fn sum_manual(numbers: &[i32]) -> i32 {
 ---
 
 ## 8. 代码示例对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 集合操作
@@ -1849,6 +1856,7 @@ async fn main() {
 ---
 
 ## 9. 生态系统对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 9.1 构建工具
@@ -1892,6 +1900,7 @@ async fn main() {
 ---
 
 ## 10. 适用场景分析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 场景 | 推荐 | 理由 |
@@ -1908,6 +1917,7 @@ async fn main() {
 ---
 
 ## 11. 迁移指南
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Java → Rust 思维转换
@@ -1938,6 +1948,7 @@ async fn main() {
 ---
 
 ## 总结
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 维度 | Java | Rust |
@@ -1960,6 +1971,7 @@ async fn main() {
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. Gosling, J., et al. (2005). *The Java Language Specification*.

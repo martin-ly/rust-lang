@@ -41,6 +41,7 @@
     - [9.2 RustBelt 的生命周期逻辑](#92-rustbelt-的生命周期逻辑)
   - [参考文献](#参考文献)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 生命周期的本质
 >
@@ -64,6 +65,7 @@ fn main() {
 ```
 
 ### 1.2 生命周期的形式化定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -83,9 +85,11 @@ fn main() {
 ```
 
 ## 2. 生命周期标注
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 显式生命周期
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -101,6 +105,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 ### 2.2 生命周期省略规则 (Elision)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -120,6 +125,7 @@ fn get_static() -> &'static str  // 整个程序期间有效
 ```
 
 ### 2.3 'static 生命周期
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -141,9 +147,11 @@ Box::leak(Box::new(5))     // 泄漏的内存是 'static
 ```
 
 ## 3. 生命周期推断
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 基于约束的推断
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -172,6 +180,7 @@ Box::leak(Box::new(5))     // 泄漏的内存是 'static
 ```
 
 ### 3.2 约束示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -192,9 +201,11 @@ let result = {
 ```
 
 ## 4. 生命周期与数据结构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 结构体中的生命周期
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -223,6 +234,7 @@ impl<'a> Book<'a> {
 ```
 
 ### 4.2 生命周期省略在结构体中的限制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -238,9 +250,11 @@ struct Wrapper<'a> {
 ```
 
 ## 5. 高级生命周期模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 高阶 trait bound (HRTB)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -259,6 +273,7 @@ where
 ```
 
 ### 5.2 生命周期子类型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -274,9 +289,11 @@ fn main() {
 ```
 
 ## 6. NLL (Non-Lexical Lifetimes)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 从词法到非词法
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -304,6 +321,7 @@ fn non_lexical() {
 ```
 
 ### 6.2 NLL 的形式化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -324,9 +342,11 @@ lifetime(x) = { p | x 在点 p 是 live }  // 生命周期等于活跃点集
 ```
 
 ## 7. 生命周期与编译器实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 MIR 中的生命周期
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -346,6 +366,7 @@ bb0: {
 ```
 
 ### 7.2 Polonius: 基于 Datalog 的借用检查
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```prolog
@@ -367,9 +388,11 @@ error(P, L) :- loan_live_at(P, L), loan_invalidated_at(L, P).
 ```
 
 ## 8. 生命周期常见错误与解决
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 悬垂引用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -393,6 +416,7 @@ fn get_static_str() -> &'static str {
 ```
 
 ### 8.2 生命周期不够长
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -415,9 +439,11 @@ fn main() {
 ```
 
 ## 9. 生命周期与形式化验证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 在验证工具中的编码
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -435,6 +461,7 @@ fn swap<'a>(x: &'a mut i32, y: &'a mut i32)
 ```
 
 ### 9.2 RustBelt 的生命周期逻辑
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -458,6 +485,7 @@ RustBelt 的生命周期逻辑:
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. Tofte, M., & Talpin, J.-P. (1994). Implementation of the Typed Call-by-Value λ-Calculus using a Stack of Regions. *POPL*.

@@ -3,6 +3,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [主题覆盖矩阵：现状 vs 权威来源](#主题覆盖矩阵现状-vs-权威来源)
@@ -24,6 +25,7 @@
     - [路径C: 完整掌握 (面向专家)](#路径c-完整掌握-面向专家)
   - [**最后更新**: 2026-03-07](#最后更新-2026-03-07)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 使用说明
 >
@@ -111,6 +113,7 @@
 ---
 
 ## 三、Rust特定语义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
@@ -137,6 +140,7 @@
 ---
 
 ## 四、并发与并行 (来自 "Art of Multiprocessor Programming")
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
@@ -163,6 +167,7 @@
 ---
 
 ## 五、形式验证 (来自 Iris & RustBelt)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
@@ -187,6 +192,7 @@
 ---
 
 ## 六、Workflow Patterns (来自 van der Aalst)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
@@ -210,6 +216,7 @@
 ---
 
 ## 七、分布式系统 (来自 "Designing Data-Intensive Applications")
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
@@ -235,9 +242,11 @@
 ---
 
 ## 八、覆盖率统计
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 按类别统计
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 类别 | 总主题数 | 已覆盖 | 部分覆盖 | 未覆盖 | 覆盖率 |
@@ -252,6 +261,7 @@
 | **总计** | **117** | **29** | **28** | **60** | **33%** |
 
 ### 关键缺口汇总
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **关键缺口 (🔴 P0)**: 23个主题
@@ -276,11 +286,13 @@
 ---
 
 ## 九、建议阅读路径
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 对于不同背景的读者：
 
 ### 路径A: 形式化理论背景 (面向研究者)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. 先补: 00a-00e (理论基础)
@@ -288,6 +300,7 @@
 3. 深入: 04-verification
 
 ### 路径B: 工程实践背景 (面向开发者)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. 现有: Rust核心语义
@@ -295,6 +308,7 @@
 3. 进阶: 形式验证
 
 ### 路径C: 完整掌握 (面向专家)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 按阶段1-5顺序完成所有内容
@@ -388,4 +402,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

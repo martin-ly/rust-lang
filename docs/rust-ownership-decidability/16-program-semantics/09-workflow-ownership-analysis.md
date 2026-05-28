@@ -39,6 +39,7 @@
   - [参考文献](#参考文献)
   - [权威来源索引](#权威来源索引)
   - [相关文件](#相关文件)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -879,4 +880,3 @@ async fn good_deferred_choice(rx: &mut tokio::sync::mpsc::Receiver<i32>) -> i32 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

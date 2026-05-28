@@ -63,6 +63,7 @@
   - [总结](#总结)
   - [*继续学习: interior-mutability.md*](#继续学习-interior-mutabilitymd)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -126,6 +127,7 @@
 ---
 
 ## 2. 生命周期省略规则 (Elision)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 Elision 规则概述
@@ -227,6 +229,7 @@ fn process<'a>(data: &'a str, config: &Config) -> &'a str;
 ---
 
 ## 3. 高级生命周期标注
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 多个独立生命周期
@@ -368,6 +371,7 @@ std::thread::spawn(move || {
 ---
 
 ## 4. Higher-Ranked Trait Bounds (HRTB)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 HRTB 的动机
@@ -473,6 +477,7 @@ where
 ```
 
 ### 4.4 HRTB 与生命周期省略的交互
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -496,6 +501,7 @@ where
 ```
 
 ### 4.5 HRTB 的限制
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -515,9 +521,11 @@ where
 ---
 
 ## 5. 常见陷阱与解决方案
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 陷阱 1: 返回局部变量的引用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -544,6 +552,7 @@ fn get_substring<'a>(s: &'a str) -> &'a str {
 ```
 
 ### 陷阱 2: 生命周期过长
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -563,6 +572,7 @@ fn process_fixed(data: &mut Data) -> Result {
 ```
 
 ### 陷阱 3: 结构体自引用
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -597,6 +607,7 @@ struct SelfRefCrate {
 ```
 
 ### 陷阱 4: 泛型生命周期约束遗漏
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -620,6 +631,7 @@ where
 ```
 
 ### 陷阱 5: HRTB 与具体生命周期冲突
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -644,6 +656,7 @@ where
 ```
 
 ### 陷阱 6: `impl Trait` 中的生命周期
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -666,9 +679,11 @@ fn get_iter_anon(data: &[i32]) -> impl Iterator<Item = &i32> + '_ {
 ---
 
 ## 6. 与其他语言对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 C++: 无生命周期系统
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **C++ 代码**:
@@ -693,6 +708,7 @@ std::cout << ref;  // 崩溃或垃圾数据
 | 安全性保证 | 完整 | 程序员责任 |
 
 ### 6.2 Swift: 逃逸分析
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **Swift 代码**:
@@ -720,6 +736,7 @@ func immediate(data: [Int], operation: ([Int]) -> Void) {
 | 闭包捕获 | 所有权/借用 | ARC |
 
 ### 6.3 Java: 无生命周期概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Java 依赖 GC 管理生命周期，没有编译期生命周期检查：
@@ -748,6 +765,7 @@ public class LifetimeExample {
 | 运行时开销 | 极小 | GC 暂停 |
 
 ### 6.4 ATS: 依赖类型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ATS 是一种使用依赖类型进行内存安全的语言：
@@ -772,9 +790,11 @@ fn safe_access {l:addr} (pf: array_v(int, l, n) | p: ptr l): int
 ---
 
 ## 7. 性能影响分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 生命周期的零成本特性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 生命周期完全在编译期处理，不产生运行时开销：
@@ -792,6 +812,7 @@ fn get_first<'a>(slice: &'a [i32]) -> &'a i32 {
 ```
 
 ### 7.2 生命周期对优化的影响
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -807,6 +828,7 @@ fn optimized_access(slice: &[i32; 100], index: usize) -> &i32 {
 ```
 
 ### 7.3 编译时间分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 生命周期检查是 Rust 编译时间的重要组成部分：
@@ -838,6 +860,7 @@ where
 - 考虑使用 `impl Trait` 简化返回类型
 
 ### 7.4 缓存局部性与生命周期
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -862,9 +885,11 @@ fn optimized(data: &[i32]) {
 ---
 
 ## 8. 实战模式
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 解析器模式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -896,6 +921,7 @@ impl<'input> Parser<'input> {
 ```
 
 ### 8.2 迭代器适配器
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -924,6 +950,7 @@ fn windows<T>(slice: &[T], size: usize) -> Windows<T> {
 ```
 
 ### 8.3 回调注册系统
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -954,6 +981,7 @@ system.register(|e: &Event| {
 ```
 
 ### 8.4 数据库连接池
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -993,6 +1021,7 @@ impl<'env> Drop for Connection<'env> {
 ---
 
 ## 总结
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 生命周期是 Rust 类型系统的核心组件，它提供了：
@@ -1276,4 +1305,3 @@ impl<'env> Drop for Connection<'env> {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

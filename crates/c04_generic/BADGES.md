@@ -130,6 +130,7 @@ https://img.shields.io/badge/{label}-{message}-{color}
 2. **测试覆盖**: 根据测试结果更新
 3. **代码质量**: 根据 Clippy 检查结果更新
 4. **Rust 版本**: 根据最低支持版本更新
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

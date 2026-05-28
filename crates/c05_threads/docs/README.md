@@ -191,7 +191,7 @@ Rust 的编译器确保：
 
 ---
 
-🚀 **开始学习**: 前往 [主索引](./00_MASTER_INDEX.md) 查看完整导航！
+🚀 **开始学习**: 前往 [主索引](./00_MASTER_INDEX.md) 查看完整导航
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

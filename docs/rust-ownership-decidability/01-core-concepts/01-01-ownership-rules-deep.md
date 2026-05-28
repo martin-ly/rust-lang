@@ -111,6 +111,7 @@
   - [交叉引用](#交叉引用)
   - [**状态**: ✅ 形式化完备](#状态--形式化完备)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -4035,7 +4036,6 @@ fn macro_ownership() {
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
 
-
 > **[来源: Wikipedia - Asynchronous I/O]**
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
@@ -5458,4 +5458,3 @@ fn macro_ownership() {
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-

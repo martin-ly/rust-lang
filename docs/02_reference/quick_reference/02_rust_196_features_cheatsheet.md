@@ -19,7 +19,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [Rust 1.96 特性速查表](#rust-195196-特性速查表)
+- [Rust 1.96 特性速查表](#rust-196-特性速查表)
   - [目录](#目录)
   - [if let guards 语法](#if-let-guards-语法)
     - [基本语法](#基本语法)

@@ -161,6 +161,7 @@
     - [12.4 延伸阅读](#124-延伸阅读)
   - [*本文档是 Rust 所有权可判定性研究系列的一部分，与 `00-semantic-framework.md` 保持一致的语义框架。*](#本文档是-rust-所有权可判定性研究系列的一部分与-00-semantic-frameworkmd-保持一致的语义框架)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -5597,4 +5598,3 @@ valgrind --tool=cachegrind ./target/release/myapp
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

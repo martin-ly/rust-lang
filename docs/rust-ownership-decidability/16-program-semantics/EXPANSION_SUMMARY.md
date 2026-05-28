@@ -3,6 +3,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [16-program-semantics 目录扩展总结](#16-program-semantics-目录扩展总结)
@@ -25,6 +26,8 @@
   - [总字数统计](#总字数统计)
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 扩展概述
 >
@@ -51,6 +54,7 @@
 | **总计** | **19 个** | **~395 KB** | **完成** |
 
 ### 详细文件列表
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### Communication (通信模式)
@@ -87,9 +91,11 @@
 ---
 
 ## 内容特点
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 形式化定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 每个文件包含：
@@ -99,6 +105,7 @@
 - **操作语义规则**: 推导式形式化
 
 ### Rust 实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 完整可运行的代码示例
@@ -106,6 +113,7 @@
 - 实际框架集成 (tokio, tonic, etcd-client)
 
 ### 架构图示
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ASCII 架构图
@@ -204,7 +212,6 @@
 - [16-program-semantics 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -239,4 +246,3 @@
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

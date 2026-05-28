@@ -71,7 +71,6 @@
     - [新用户必读 🆕](#新用户必读-)
     - [重要提示 ⚠️](#重要提示-️)
   - [📝 文档维护](#-文档维护)
-  - [**维护者**: Rust 学习社区](#维护者-rust-学习社区)
 
 ## 🎯 快速开始
 
@@ -501,11 +500,6 @@ docs/
 **最后审核**: 2025-10-19
 **下次更新**: Rust 1.93.0 发布后
 
----
-
-**文档版本**: v2.0
-**最后更新**: 2025-12-11
-**维护者**: Rust 学习社区
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

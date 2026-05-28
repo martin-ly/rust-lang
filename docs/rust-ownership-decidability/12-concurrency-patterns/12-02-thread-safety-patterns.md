@@ -36,6 +36,7 @@
     - [4.1 操作系统互斥锁](#41-操作系统互斥锁)
   - [继续下一部分？](#继续下一部分)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -152,6 +153,7 @@ fn data_race_prevention() {
 ---
 
 ## 2. Send 和 Sync 深入解析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 Send trait
@@ -436,6 +438,7 @@ mod tests {
 ---
 
 ## 3. 内部可变性模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 RefCell 与线程安全
@@ -1026,6 +1029,7 @@ pub fn benchmark_locks() {
 ---
 
 ## 4. 锁的类型与实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 操作系统互斥锁

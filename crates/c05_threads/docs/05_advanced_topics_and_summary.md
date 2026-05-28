@@ -139,6 +139,7 @@ Rust 的并发模型是其语言设计的皇冠明珠。
 
 - **上一章 ->** `04_parallelism_and_beyond.md`
 - **返回目录 ->** `_index.md`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

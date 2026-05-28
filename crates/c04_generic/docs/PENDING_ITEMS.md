@@ -15,6 +15,7 @@
 - [x] Tier 2 指南深度扩展（tier* 链接、RUST_192 引用修复）
 - [x] Tier 3 参考完整性（链接修复）
 - [x] Tier 4 advanced 理论补全（链接修复）
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

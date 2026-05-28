@@ -77,6 +77,7 @@
     - [Creusot for Formal Proof](#creusot-for-formal-proof)
   - [References](#references)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -322,6 +323,7 @@ Any well-typed Rust program (excluding `unsafe` blocks) is data-race-free.
 ---
 
 ## 2. Thread Safety Theorems
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Theorem SEND-SYNC-SAFETY
@@ -619,6 +621,7 @@ fn what_channels_prevent() {
 ---
 
 ## 3. Mutex and Locking Patterns
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Mutex Ownership Analysis
@@ -997,6 +1000,7 @@ fn risky_operation() -> Result<(), ()> {
 ---
 
 ## 4. Read-Write Lock Patterns
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 RwLock Semantics
@@ -1180,6 +1184,7 @@ async fn async_fair_rwlock() {
 ---
 
 ## 5. Lock-Free Patterns Formal
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Atomic Operations
@@ -1561,6 +1566,7 @@ fn using_crossbeam_epoch() {
 ---
 
 ## 6. Channel Patterns
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 Ownership Transfer in Channels
@@ -1907,6 +1913,7 @@ impl TokenBucket {
 ---
 
 ## 7. Memory Ordering Deep Dive
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 Happens-Before Relation
@@ -2147,6 +2154,7 @@ fn seq_cst_example() {
 ---
 
 ## 8. Case Study: High-Performance Queue
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 Lock-Free Bounded Queue Implementation
@@ -2441,6 +2449,7 @@ impl<T> LockFreeQueue<T> {
 ---
 
 ## 9. Rust 1.94 Concurrency Features
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 1.94 introduces several improvements to concurrency primitives:
@@ -2520,6 +2529,7 @@ fn atomic_improvements_1_94() {
 ---
 
 ## 10. Formal Verification Tools
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Loom for Model Checking
@@ -2604,6 +2614,7 @@ pub fn try_enqueue(&self, item: T) -> Result<(), T> {
 ---
 
 ## References
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **The Rust Programming Language** - Chapter 16: Fearless Concurrency

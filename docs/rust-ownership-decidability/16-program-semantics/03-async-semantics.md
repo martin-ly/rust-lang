@@ -163,6 +163,7 @@
     - [形式化语义表示](#形式化语义表示)
   - [*关联文档：00-semantic-framework.md*](#关联文档00-semantic-frameworkmd)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -7267,4 +7268,3 @@ $$
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

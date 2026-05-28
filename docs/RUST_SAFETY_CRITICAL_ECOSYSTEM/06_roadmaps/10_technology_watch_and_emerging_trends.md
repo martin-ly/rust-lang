@@ -3,6 +3,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [技术观察与新兴趋势](#技术观察与新兴趋势)
@@ -35,6 +36,7 @@
   - [*保持对新技术的关注，但谨慎评估生产采用。*](#保持对新技术的关注但谨慎评估生产采用)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -98,6 +100,7 @@ Tree Borrows:
 ---
 
 ## 2. 工具链发展
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 编译器技术
@@ -157,6 +160,7 @@ Verus发展:
 ---
 
 ## 3. 硬件发展
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 目标平台
@@ -183,6 +187,7 @@ ARM:
 ```
 
 ### 3.2 安全硬件
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -201,9 +206,11 @@ ARM:
 ---
 
 ## 4. 标准演进
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 功能安全标准
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -234,6 +241,7 @@ IEC 61508:
 ```
 
 ### 4.2 行业特定标准
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -272,9 +280,11 @@ IEC 61508:
 ---
 
 ## 5. 行业采用趋势
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 汽车
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -297,6 +307,7 @@ IEC 61508:
 ```
 
 ### 5.2 航空
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -319,9 +330,11 @@ IEC 61508:
 ---
 
 ## 6. 学术研究前沿
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 活跃研究领域
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
@@ -343,6 +356,7 @@ IEC 61508:
 ```
 
 ### 6.2 重要会议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
@@ -364,9 +378,11 @@ IEC 61508:
 ---
 
 ## 7. 技术预警
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 需要关注的技术
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -385,6 +401,7 @@ IEC 61508:
 ```
 
 ### 7.2 潜在挑战
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -404,9 +421,11 @@ IEC 61508:
 ---
 
 ## 8. 建议行动
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 8.1 技术跟踪
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -424,6 +443,7 @@ IEC 61508:
 ```
 
 ### 8.2 投资策略
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -470,6 +490,7 @@ IEC 61508:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -606,4 +627,3 @@ IEC 61508:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

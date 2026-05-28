@@ -38,6 +38,7 @@
     - [7.3 未来方向](#73-未来方向)
   - [参考文献](#参考文献)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. Creusot 概述
 >
@@ -91,6 +92,7 @@ SMT 求解器 (Alt-Ergo, Z3, CVC5)
 ```
 
 ## 2. 预言变量：核心创新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 什么是预言变量？
@@ -160,6 +162,7 @@ prophesy(v) 创建一个预言变量 π
 ```
 
 ## 3. 规格语言 Pearlite
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 基本语法
@@ -219,6 +222,7 @@ fn max(x: &u32, y: &u32) -> Option<u32> {
 ```
 
 ### 3.3 逻辑函数与谓词
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -244,9 +248,11 @@ fn binary_search(arr: &[u32], needle: u32) -> bool {
 ```
 
 ## 4. 高级特性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 Trait 与规范
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -275,6 +281,7 @@ impl MyTrait for MyStruct {
 ```
 
 ### 4.2 幽灵状态
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -295,6 +302,7 @@ fn increment_ghost(p: GhostPtrMut<i32>) {
 ```
 
 ### 4.3 向量与序列
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -320,9 +328,11 @@ fn reverse_vec<T>(seq: &mut Vec<T>) {
 ```
 
 ## 5. 验证流程实战
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 完整示例：二分查找
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -360,6 +370,7 @@ fn lower_bound(v: &[u32], elem: u32) -> usize {
 ```
 
 ### 5.2 命令行验证
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -377,6 +388,7 @@ cargo creusot -- --proof-checker
 ```
 
 ### 5.3 Rust 1.94 安装指南
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
@@ -408,6 +420,7 @@ why3 ide output.mlcfg
 ```
 
 ## 6. 与其他工具对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | Creusot | Prusti | RustHorn | Aeneas | Verus | Kani |
@@ -420,9 +433,11 @@ why3 ide output.mlcfg
 | Rust 1.94 | ⚠️需验证 | ⚠️维护中 | ⚠️实验性 | ✅支持 | ✅推荐 | ✅官方支持 |
 
 ## 7. 限制与未来工作
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 当前限制
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -444,6 +459,7 @@ why3 ide output.mlcfg
 ```
 
 ### 7.2 Rust 1.94 兼容性说明
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **当前状态**:
@@ -470,6 +486,7 @@ cargo +nightly install cargo-creusot --locked
 - **Kani**: Amazon官方维护，与稳定版同步
 
 ### 7.3 未来方向
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 更好的不安全代码支持
@@ -481,6 +498,7 @@ cargo +nightly install cargo-creusot --locked
 ---
 
 ## 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. Denis, X., Jourdan, J.-H., & Marché, C. (2022). Creusot: A Foundry for the Deductive Verification of Rust Programs. *ICFEM*.

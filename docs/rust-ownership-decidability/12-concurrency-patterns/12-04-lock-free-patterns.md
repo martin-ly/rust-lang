@@ -37,6 +37,7 @@
     - [4.2 无锁队列](#42-无锁队列)
   - [（继续...）](#继续)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -216,6 +217,7 @@ fn seq_cst_example() {
 ---
 
 ## 2. 原子操作
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 原子类型
@@ -576,6 +578,7 @@ impl<T: Copy + Into<usize> + From<usize>> AtomicUpdate<T> {
 ---
 
 ## 3. CAS 循环模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 基本 CAS 循环
@@ -925,6 +928,7 @@ impl<T> HelpingStack<T> {
 ---
 
 ## 4. 无锁延迟初始化 (Rust 1.94)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### LazyLock 的无锁语义
@@ -1063,6 +1067,7 @@ pub fn get_lazy_stack() -> &'static LockFreeStack<i32> {
 ```
 
 ## 4. 无锁数据结构
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 无锁栈
@@ -1952,4 +1957,3 @@ impl<T> CountedMSQueue<T> {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

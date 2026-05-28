@@ -32,6 +32,7 @@
     - [3.3 矩阵运算](#33-矩阵运算)
   - [（继续...）](#继续)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -226,6 +227,7 @@ pub struct CachePaddedCounter {
 ---
 
 ## 2. Rayon并行计算
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 并行迭代器
@@ -727,6 +729,7 @@ where
 ---
 
 ## 3. SIMD向量化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 便携式SIMD
@@ -985,7 +988,6 @@ pub fn parallel_simd_matrix_multiply(a: &[f32], b: &[f32], c: &mut [f32], n: usi
 > **[来源: Rust Reference - std::sync]**
 
 > **[来源: ACM - Concurrent Programming]**
-
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1308,4 +1310,3 @@ pub fn parallel_simd_matrix_multiply(a: &[f32], b: &[f32], c: &mut [f32], n: usi
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

@@ -57,6 +57,7 @@
     - [Related Patterns](#related-patterns)
   - [*This document is part of the Rust Ownership \& Decidability documentation series. For questions or contributions, refer to the project repository.*](#this-document-is-part-of-the-rust-ownership--decidability-documentation-series-for-questions-or-contributions-refer-to-the-project-repository)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -250,6 +251,7 @@ enum ExampleStateMachine {
 ---
 
 ## 2. Core Concepts (with Formal Reasoning)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 Future and State Machines
@@ -998,6 +1000,7 @@ use std::sync::Arc;
 ---
 
 ## 3. Ownership in Async (with Theorems)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Send and Sync Requirements
@@ -1508,6 +1511,7 @@ async fn some_async_op() {}
 ---
 
 ## 4. Common Patterns (with Safety Arguments)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 Spawning Tasks
@@ -2224,6 +2228,7 @@ pub async fn good_chunked_processing() {
 ---
 
 ## 5. Formal Safety Theorems
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 This section presents formal theorems about async Rust safety with proof sketches.
@@ -2569,6 +2574,7 @@ async fn cancel_safe_alternative() {
 ---
 
 ## 6. Anti-Patterns and Solutions
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Anti-Pattern 1: Holding Mutex Across Await
@@ -3263,6 +3269,7 @@ enum AccountMessage {
 ---
 
 ## 7. Case Study: Async HTTP Server
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 This case study presents a complete async HTTP server with formal ownership analysis, architecture diagrams, and safety arguments.
@@ -3860,6 +3867,7 @@ async fn update_db_safe(state: &AppState) {
 ---
 
 ## 8. References
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### Core Documentation
@@ -3982,7 +3990,6 @@ async fn update_db_safe(state: &AppState) {
 > **[来源: Rust API Guidelines]**
 > **[来源: Gang of Four - Design Patterns]**
 > **[来源: ACM - Software Design Patterns]**
-
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -5487,4 +5494,3 @@ async fn update_db_safe(state: &AppState) {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

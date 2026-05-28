@@ -70,6 +70,7 @@
     - [Related Patterns](#related-patterns)
   - [**Document Version**: 1.0.0](#document-version-100)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

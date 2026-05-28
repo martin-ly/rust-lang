@@ -11,6 +11,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [程序语义深度分析](#程序语义深度分析)
@@ -34,10 +35,12 @@
     - [文档大小统计](#文档大小统计)
     - [代码示例说明](#代码示例说明)
   - [✅ 质量保证](#-质量保证)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 🎯 本模块目标
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本模块提供 Rust 程序设计的形式化语义分析，从理论到实践深入理解 Rust 的：
@@ -51,6 +54,7 @@
 ---
 
 ## 📁 文档导航
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 🟢 基础框架
@@ -285,7 +289,6 @@ fn error_example() {
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

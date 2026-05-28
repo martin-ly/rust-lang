@@ -83,7 +83,7 @@ impl Point<f32, f32> {
 ```rust
 use std::fmt::Display;
 
-fn compare_and_print<T, U>(t: &T, u: &U) 
+fn compare_and_print<T, U>(t: &T, u: &U)
 where
     T: Display + PartialOrd,
     U: Display + PartialOrd,
@@ -101,7 +101,7 @@ where
 ```rust
 trait Container {
     type Item<'a> where Self: 'a;
-    
+
     fn get<'a>(&'a self) -> Option<Self::Item<'a>>;
 }
 
@@ -111,7 +111,7 @@ struct VecContainer<T> {
 
 impl<T> Container for VecContainer<T> {
     type Item<'a> = &'a T where T: 'a;
-    
+
     fn get<'a>(&'a self) -> Option<Self::Item<'a>> {
         self.items.first()
     }
@@ -145,14 +145,17 @@ fn draw_all(components: &[Box<dyn Drawable>]) {
 ## 依赖关系
 
 ### 上游依赖
+
 - `c02_type_system`: 类型系统基础
 - `common`: 共享工具
 
 ### 下游依赖
+
 - `c08_algorithms`: 泛型算法实现
 - `c09_design_pattern`: 设计模式应用
 
 ### 外部依赖
+
 ```toml
 [dependencies]
 itertools = { workspace = true }
@@ -187,6 +190,7 @@ cargo bench -p c04_generic
 - [Rust Book - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)
 - [Rust Book - Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
 - [Rust Reference - GAT](https://blog.rust-lang.org/2022/10/28/gats-stabilization.html)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

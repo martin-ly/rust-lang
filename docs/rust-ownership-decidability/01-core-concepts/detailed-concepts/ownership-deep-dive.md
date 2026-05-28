@@ -60,6 +60,7 @@
   - [总结](#总结)
   - [*继续学习: borrowing-in-depth.md*](#继续学习-borrowing-in-depthmd)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -120,6 +121,7 @@
 ---
 
 ## 2. Move 语义深度剖析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 Move 的本质
@@ -225,6 +227,7 @@ let result = process_data(data);  // 高效：没有不必要的复制
 ---
 
 ## 3. Copy Trait 完全指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Copy 的形式化定义
@@ -378,6 +381,7 @@ impl Clone for FileHandle {
 ---
 
 ## 4. Drop Trait 与 RAII
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 Drop 的形式化定义
@@ -565,6 +569,7 @@ impl Drop for Buffer {
 ---
 
 ## 5. 常见陷阱与解决方案
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 陷阱 1: 部分移动 (Partial Move)
@@ -606,6 +611,7 @@ let Person { name, age } = person;
 ```
 
 ### 陷阱 2: Copy 类型在 Mutex 中的陷阱
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -629,6 +635,7 @@ fn main() {
 ```
 
 ### 陷阱 3: Drop 中的 panic
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -663,6 +670,7 @@ impl Drop for SafeDrop {
 ```
 
 ### 陷阱 4: 忘记为包含 Drop 类型的结构体实现 Drop
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -684,6 +692,7 @@ impl Drop for Wrapper {
 ```
 
 ### 陷阱 5: 自引用结构体
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -719,9 +728,11 @@ impl SafeSelfRef {
 ---
 
 ## 6. 与其他语言对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 C++: 移动语义与 RAII
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **C++ 版本**:
@@ -773,6 +784,7 @@ int main() {
 | 默认行为 | Move | Copy |
 
 ### 6.2 Java: 垃圾回收
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **Java 版本**:
@@ -810,6 +822,7 @@ public class Resource {
 | RAII | 核心特性 | try-with-resources |
 
 ### 6.3 Go: 垃圾回收与 defer
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **Go 版本**:
@@ -848,6 +861,7 @@ func main() {
 | 错误处理 | Result 类型 | 多返回值 |
 
 ### 6.4 Swift: ARC
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **Swift 版本**:
@@ -885,9 +899,11 @@ func main() {
 ---
 
 ## 7. 性能影响分析
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 基准测试: Move vs Clone
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -925,6 +941,7 @@ clone_string    time:   [15.234 ns]  # 涉及堆分配
 ```
 
 ### 7.2 内存布局分析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **String 的内存布局**:
@@ -947,6 +964,7 @@ clone_string    time:   [15.234 ns]  # 涉及堆分配
 **Clone 操作的成本**: 分配新内存 + 复制所有数据（数千 CPU 周期）
 
 ### 7.3 Drop 的性能影响
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -968,6 +986,7 @@ fn process_items_optimized(items: Vec<Item>) {
 ```
 
 ### 7.4 Copy 类型的优化效果
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -995,6 +1014,7 @@ fn process_points(points: &[Point]) -> Vec<Point> {
 ```
 
 ### 7.5 内存池与自定义分配器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -1013,9 +1033,11 @@ fn process_with_arena(arena: &Bump) {
 ---
 
 ## 8. 高级主题
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 所有权与并发
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -1042,6 +1064,7 @@ fn main() {
 ```
 
 ### 8.2 静态分析工具
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -1053,6 +1076,7 @@ fn main() {
 ```
 
 ### 8.3 所有权的未来：Polonius
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 Polonius 是下一代 Rust 借用检查器，支持更复杂的模式：
@@ -1074,6 +1098,7 @@ fn polonius_example() {
 ---
 
 ## 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 所有权系统是 Rust 最核心的创新，它提供了：
@@ -1388,4 +1413,3 @@ fn polonius_example() {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

@@ -111,6 +111,7 @@
   - [Theorems Index](#theorems-index)
   - [*End of Document*](#end-of-document)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -238,6 +239,7 @@ Rust's ownership system provides memory safety guarantees at compile time, but s
 ---
 
 ## 2. Miri: The Undefined Behavior Detector
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Miri is an interpreter for Rust's Mid-level Intermediate Representation (MIR). Unlike the regular Rust compiler which generates machine code, Miri executes MIR directly while checking for undefined behavior.
@@ -561,6 +563,7 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 ---
 
 ## 3. Loom: Concurrency Model Checking
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Loom is a model checker specifically designed for Rust concurrent code. It systematically explores all possible thread interleavings to find race conditions, deadlocks, and atomicity violations.
@@ -1043,6 +1046,7 @@ LOOM_CHECKPOINT_INTERVAL=1000 // Save progress
 ---
 
 ## 4. Creusot: Deductive Verification
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Creusot is a deductive verification tool for Rust that translates Rust programs to WhyML, the specification language of the Why3 platform. It leverages automated theorem provers (SMT solvers) to discharge proof obligations.
@@ -1340,6 +1344,7 @@ trait MyTrait {
 ---
 
 ## 5. Prusti: Viper-Based Verification
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Prusti is a verification tool for Rust built on the Viper verification infrastructure. It uses separation logic to reason about Rust's ownership system.
@@ -1432,6 +1437,7 @@ pub fn mut_ref_issue(x: &mut i32) {
 ---
 
 ## 6. Fuzzing and Property-Based Testing
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Fuzzing complements formal verification by finding bugs through randomized testing. Unlike verification which proves correctness, fuzzing finds counter-examples to correctness claims.
@@ -1569,6 +1575,7 @@ fn test_with_fuzzing() {
 ---
 
 ## 7. Tool Comparison and Selection Guide
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 Comparison Matrix
@@ -1660,6 +1667,7 @@ Assurance
 ---
 
 ## 8. Case Study: Verified Vec Implementation
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 This case study demonstrates verifying a simplified `Vec` implementation using Creusot.
@@ -1835,6 +1843,7 @@ The verification with Creusot establishes:
 ---
 
 ## 9. Integration Strategies
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 9.1 CI/CD Integration
@@ -1942,6 +1951,7 @@ pub fn binary_search<T: Ord>(slice: &[T], target: T) -> Option<usize> {
 ---
 
 ## 10. Future Directions
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 10.1 Emerging Tools
@@ -1973,6 +1983,7 @@ pub fn binary_search<T: Ord>(slice: &[T], target: T) -> Option<usize> {
 ---
 
 ## Appendix A: Quick Reference
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### A.1 Miri Commands
@@ -2025,6 +2036,7 @@ cargo creusot -- --why3-ide
 ```
 
 ### A.4 Fuzzing Commands
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
@@ -2044,6 +2056,7 @@ cargo fuzz run target_name -- -max_total_time=300
 ---
 
 ## Summary
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 This document has provided a comprehensive overview of Rust verification tools:
@@ -2067,11 +2080,13 @@ The verification pyramid provides a framework for selecting appropriate tools ba
 ---
 
 ## Counter-Examples Index
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 This document contains **17 counter-examples** demonstrating bugs caught by verification tools:
 
 ### Miri Counter-Examples (7 total)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. Use of uninitialized memory (2.1)
@@ -2083,6 +2098,7 @@ This document contains **17 counter-examples** demonstrating bugs caught by veri
 7. Invalid vtable (2.7)
 
 ### Loom Counter-Examples (6 total)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. Missed atomic ordering (3.1)
@@ -2093,6 +2109,7 @@ This document contains **17 counter-examples** demonstrating bugs caught by veri
 6. Deadlock (3.6)
 
 ### Creusot Counter-Examples (4 total)
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. Integer overflow (4.1)
@@ -2101,6 +2118,7 @@ This document contains **17 counter-examples** demonstrating bugs caught by veri
 4. Broken loop invariant (4.4)
 
 ## Theorems Index
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 This document contains **9 theorems** about verification guarantees:
@@ -2732,4 +2750,3 @@ This document contains **9 theorems** about verification guarantees:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

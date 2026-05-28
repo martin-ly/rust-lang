@@ -25,6 +25,7 @@
     - [Rust 1.94 延迟初始化在分布式系统中的应用](#rust-194-延迟初始化在分布式系统中的应用)
   - [（继续...）](#继续)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -440,6 +441,7 @@ impl BFTConfig {
 ---
 
 ## 2. 共识算法
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 Raft协议
@@ -1008,7 +1010,6 @@ impl Election {
 
 > **[来源: ACM - Software Design Patterns]**
 
-
 > **[来源: TRPL - The Rust Programming Language]**
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 > **[来源: ACM - Systems Programming Languages]**
@@ -1351,4 +1352,3 @@ impl Election {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

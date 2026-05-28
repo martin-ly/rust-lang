@@ -18,7 +18,6 @@
     - [HList (异构列表)](#hlist-异构列表)
   - [🔧 实战技巧](#-实战技巧)
     - [Builder 模式中的泛型](#builder-模式中的泛型)
-  - [**状态**: ✅ 100% 完成](#状态--100-完成)
 
 ---
 
@@ -122,11 +121,6 @@ struct RequestBuilder<Url, Method, Body> {
 }
 ```
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 100% 完成
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

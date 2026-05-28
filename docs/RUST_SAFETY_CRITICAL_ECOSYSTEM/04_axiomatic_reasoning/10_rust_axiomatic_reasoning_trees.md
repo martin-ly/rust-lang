@@ -3,6 +3,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust安全保证公理定理推理决策树](#rust安全保证公理定理推理决策树)
@@ -17,6 +18,7 @@
     - [限制与假设](#限制与假设)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 推理树1: 内存安全性公理系统
 >
@@ -262,6 +264,7 @@
 ---
 
 ## 推理树4: 形式化验证工具链
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -344,6 +347,7 @@
 ---
 
 ## 推理树使用说明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 证明结构模板
@@ -384,6 +388,7 @@
 4. **风险评估**: 使用推理树识别证明漏洞
 
 ### 限制与假设
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 所有推理假设编译器无缺陷
@@ -409,6 +414,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
@@ -581,4 +587,3 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

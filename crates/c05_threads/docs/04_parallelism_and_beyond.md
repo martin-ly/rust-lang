@@ -155,6 +155,7 @@ Rust 的并发故事远不止于标准库。
 - **上一章 ->** `03_synchronization_primitives.md`
 - **下一章 ->** `05_advanced_topics_and_summary.md`: 高级主题与本分册总结。
 - **返回目录 ->** `_index.md`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

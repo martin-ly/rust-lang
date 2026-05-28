@@ -3,6 +3,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全关键Rust工具链配置指南](#安全关键rust工具链配置指南)
@@ -42,6 +43,7 @@
   - [*定期更新此文档以反映工具链的最新发展。*](#定期更新此文档以反映工具链的最新发展)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -314,6 +316,7 @@ crates-io = { index = "https://github.com/rust-lang/crates.io-index" }
 ---
 
 ## Clippy配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### clippy.toml
@@ -404,6 +407,7 @@ impl LintPass for SafetyCriticalLints {
 ---
 
 ## 测试配置
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Miri配置
@@ -473,6 +477,7 @@ codegen-units = 1
 ---
 
 ## 覆盖率配置
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### cargo-tarpaulin
@@ -564,6 +569,7 @@ cargo llvm-cov --html --ignore-filename-regex 'tests/.*'
 ---
 
 ## CI/CD配置
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### GitHub Actions完整配置
@@ -728,6 +734,7 @@ jobs:
 ---
 
 ## 文档生成
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### rustdoc配置
@@ -779,9 +786,11 @@ pub unsafe fn safe_wrapper(ptr: *const i32) -> i32 {
 ---
 
 ## 依赖管理
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### cargo-deny配置
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```toml
@@ -851,6 +860,7 @@ github = ["your-org"]
 ```
 
 ### Cargo.lock管理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -867,9 +877,11 @@ cargo update --workspace --locked --dry-run
 ---
 
 ## IDE配置
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### VS Code settings.json
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```json
@@ -930,6 +942,7 @@ cargo update --workspace --locked --dry-run
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
@@ -1227,4 +1240,3 @@ cargo update --workspace --locked --dry-run
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

@@ -167,6 +167,7 @@
   - [References](#references)
   - [*Last Updated: 2026*](#last-updated-2026)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -3528,4 +3529,3 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

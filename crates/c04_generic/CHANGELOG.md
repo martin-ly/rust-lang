@@ -122,7 +122,7 @@
 
 ---
 
-**注意**: 这是项目的初始版本，包含了 Rust 泛型系统的完整实现和示例。
+**注意**: 这是项目的初始版本，包含了 Rust 泛型系统的完整实现和示例
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

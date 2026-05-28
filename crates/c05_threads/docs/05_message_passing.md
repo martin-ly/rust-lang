@@ -17,6 +17,7 @@
     - [1. 类型安全的事件总线](#1-类型安全的事件总线)
     - [2. 异步事件流](#2-异步事件流)
   - [总结](#总结)
+  - [这些模式充分利用了Rust 1.89的新特性，提供了高效、安全的消息传递解决方案。](#这些模式充分利用了rust-189的新特性提供了高效安全的消息传递解决方案)
 
 ## 概述
 
@@ -581,7 +582,7 @@ Rust 1.89的消息传递模式提供了：
 4. **发布订阅**: 类型安全的事件总线
 5. **异步流**: 高性能的异步事件流
 
-这些模式充分利用了Rust 1.89的新特性，提供了高效、安全的消息传递解决方案。
+这些模式充分利用了Rust 1.89的新特性，提供了高效、安全的消息传递解决方案
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
