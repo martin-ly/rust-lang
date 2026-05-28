@@ -658,3 +658,6 @@ fn main() {
 > [来源: [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)]
 
 > [来源: [Rustonomicon — Rc and Arc](https://doc.rust-lang.org/nomicon/rc-mostly.html)]
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

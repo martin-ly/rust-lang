@@ -711,3 +711,6 @@ fn main() {
 ```
 
 > **修正**: serde 的**枚举表示**策略：1) **外部标签**（默认）：`{"Text": {"content": "hello"}}`；2) **内部标签**（`#[serde(tag = "type")]`）：`{"type": "Text", "content": "hello"}`；3) **邻接标签**（`#[serde(tag = "t", content = "c")]`）：`{"t": "Text", "c": {"content": "hello"}}`；4) **无标签**（`#[serde(untagged)]`）：按顺序尝试每个变体。内部标签的风险：1) 字段名冲突（`type` 是 Rust 关键字，但 serde 处理正确）；2) 类型名拼写错误 → 反序列化失败；3) 未知类型 → 默认报错（可用 `#[serde(other)]` 捕获）。这与 JSON Schema 的 `oneOf` / `discriminator` 或 Protocol Buffers 的 `oneof` 类似——serde 提供灵活的枚举序列化策略，但需前后端约定一致。[来源: [serde](https://serde.rs/enum-representations.html)] · [来源: [serde_json](https://docs.rs/serde_json/)]
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
