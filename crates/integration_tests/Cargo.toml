@@ -3,7 +3,9 @@ name = "integration_tests"
 version = "0.1.0"
 edition = "2024"
 description = "Integration tests for Rust learning workspace"
+authors = ["Rust Learning Community"]
+repository = "https://github.com/rust-lang/rust-lang-learning"
 rust-version = "1.96.0"
-license = "MIT"
+license = "MIT OR Apache-2.0"
 
 [dependencies]

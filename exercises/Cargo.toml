@@ -3,7 +3,9 @@ name = "exercises"
 version = "0.1.0"
 edition.workspace = true
 rust-version.workspace = true
-license = "MIT"
+authors = ["Rust Learning Community"]
+repository = "https://github.com/rust-lang/rust-lang-learning"
+license = "MIT OR Apache-2.0"
 
 [dependencies]
 tokio = { workspace = true }
