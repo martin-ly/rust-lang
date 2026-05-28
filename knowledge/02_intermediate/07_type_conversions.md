@@ -2,7 +2,15 @@
 
 > **Bloom 层级**: 理解
 
-Rust 中的类型转换是系统编程的核心技能 [来源: Rust Reference — Type Cast Expressions / 2025; RFC 2484 — TryFrom/TryInto / 2018; 核心设计决策: 显式转换（`as`、`From`/`Into`、`TryFrom`/`TryInto`）替代隐式强制转换，消除 C/C++ 中隐式类型转换导致的未定义行为]。与许多动态语言不同，Rust 要求显式处理类型转换，这虽然增加了代码量，但大大提高了安全性和可预测性。本教程将深入讲解 Rust 中各种类型转换的方法、trait 和最佳实践。
+Rust 中的类型转换是系统编程的核心技能
+[
+来源: Rust Reference — Type Cast Expressions / 2025;
+RFC 2484 — TryFrom/TryInto / 2018;
+核心设计决策:
+显式转换（`as`、`From`/`Into`、`TryFrom`/`TryInto`）替代隐式强制转换，消除 C/C++ 中隐式类型转换导致的未定义行为
+]。
+与许多动态语言不同，Rust 要求显式处理类型转换，这虽然增加了代码量，但大大提高了安全性和可预测性。
+本教程将深入讲解 Rust 中各种类型转换的方法、trait 和最佳实践。
 
 > **预估学习时长**: 45-60 分钟
 > **难度**: 中级

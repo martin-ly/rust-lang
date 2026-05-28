@@ -13,7 +13,6 @@
   - [📚 内容](#-内容)
   - [🎯 学习路径](#-学习路径)
   - [🚀 相关层](#-相关层)
-  - [**最后更新**: 2026-05-09](#最后更新-2026-05-09)
 
 > **Bloom 层级**: 理解
 
@@ -30,7 +29,7 @@
 | [async_closures_2024.md](01_async_closures_2024.md) | 2024 Edition 异步闭包速览 | ⭐⭐⭐ | 快速参考 |
 
 ## 🎯 学习路径
->
+
 > **[来源: Rust Official Docs]**
 
 1. **async/await 基础** → 先学习 [async_await.md](01_async_await.md)
@@ -44,10 +43,6 @@
 - [03_advanced/concurrency/](../concurrency/) - 线程、原子操作、同步原语
 - [06_ecosystem/deep_dives/tokio_deep_dive.md](../../06_ecosystem/deep_dives/02_tokio_deep_dive.md) - Tokio 运行时
 
----
-
-**维护者**: Rust 学习项目
-**最后更新**: 2026-05-09
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

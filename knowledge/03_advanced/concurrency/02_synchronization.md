@@ -1,14 +1,20 @@
 # Rust 同步原语深度解析
->
+
 > **相关概念**: [并发同步](../../../concept/03_advanced/01_concurrency.md)
-
 > **Bloom 层级**: 理解
-
-> **📌 简介**: Rust 的同步原语（`Mutex`、`RwLock`、`Condvar`、`Barrier`）建立在操作系统内核对象之上 [来源: std::sync / Rust Standard Library 2025; POSIX Threads (pthreads) IEEE Std 1003.1-2017; Windows SRW Locks / MSDN]，通过类型系统（`Send`/`Sync`、守卫模式、poisoning）将传统的锁机制与 Rust 的所有权模型结合 [来源: RustBelt — Jung et al., POPL 2018; 核心定理: 守卫模式（Guard Pattern）将锁的持有与释放绑定到类型的生命周期，编译期保证锁的正确释放; Rust Atomics and Locks — Mara Bos / 2021]，在编译期消除数据竞争的同时提供灵活的线程协作能力。
+> **📌 简介**:
+> Rust 的同步原语（`Mutex`、`RwLock`、`Condvar`、`Barrier`）建立在操作系统内核对象之上
+> [来源: std::sync / Rust Standard Library 2025; POSIX Threads (pthreads) IEEE Std 1003.1-2017; Windows SRW Locks / MSDN]，
+> 通过类型系统（`Send`/`Sync`、守卫模式、poisoning）将传统的锁机制与 Rust 的所有权模型结合
+> [来源: RustBelt — Jung et al., POPL 2018; 核心定理: 守卫模式（Guard Pattern）将锁的持有与释放绑定到类型的生命周期，编译期保证锁的正确释放; Rust Atomics and Locks — Mara Bos / 2021]，
+> 在编译期消除数据竞争的同时提供灵活的线程协作能力。
 >
 > **⏱️ 预计学习时间**: 90-120 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
-> **权威来源**: [Rust Book Ch16-03](https://doc.rust-lang.org/book/ch16-03-shared-state.html), [std::sync](https://doc.rust-lang.org/std/sync/index.html), [Rust Atomics and Locks](https://marabos.nl/atomics/) (Mara Bos), [The Art of Multiprocessor Programming](https://www.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1) (Herlihy & Shavit)
+> **权威来源**: [Rust Book Ch16-03](https://doc.rust-lang.org/book/ch16-03-shared-state.html),
+> [std::sync](https://doc.rust-lang.org/std/sync/index.html),
+> [Rust Atomics and Locks](https://marabos.nl/atomics/) (Mara Bos),
+> [The Art of Multiprocessor Programming](https://www.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1) (Herlihy & Shavit)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 `Mutex`/`RwLock` 守卫模式形式化语义来源标注、poisoning 机制设计决策引用、死锁预防策略学术来源 [来源: Authority Source Sprint Batch 8]
 
@@ -50,7 +56,8 @@
 >
 > **[来源: Rust Official Docs]**
 
-**同步原语（Synchronization Primitives）** 是协调多个线程对共享资源访问的机制。Rust 标准库提供的同步原语基于 OS 内核对象（如 POSIX mutex、Windows CRITICAL_SECTION），但通过类型系统封装为**安全抽象**。
+**同步原语（Synchronization Primitives）** 是协调多个线程对共享资源访问的机制。
+Rust 标准库提供的同步原语基于 OS 内核对象（如 POSIX mutex、Windows CRITICAL_SECTION），但通过类型系统封装为**安全抽象**。
 
 核心原语：
 
@@ -59,7 +66,8 @@
 - **`Condvar`**：条件变量，允许线程等待某个条件
 - **`Barrier`**：屏障，阻塞线程直到所有参与者到达
 
-> 💡 关键直觉：Rust 的同步原语不仅是"锁"，更是**所有权的运行时扩展**。`MutexGuard` 是 `&mut T` 的运行时等价物：任何时刻最多存在一个，离开作用域自动释放。
+> 💡 关键直觉：Rust 的同步原语不仅是"锁"，更是**所有权的运行时扩展**。
+> `MutexGuard` 是 `&mut T` 的运行时等价物：任何时刻最多存在一个，离开作用域自动释放。
 
 #### 1.2 操作定义
 

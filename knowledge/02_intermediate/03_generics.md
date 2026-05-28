@@ -1,5 +1,5 @@
 # 泛型 (Generics)
->
+
 > **层次定位**: L2 进阶概念 / 泛型子域
 > **前置依赖**: [knowledge Trait](06_traits.md)
 > **后置延伸**: [knowledge 并发](../03_advanced/concurrency/README.md) · [concept L2 泛型](../../concept/02_intermediate/02_generics.md)
@@ -7,7 +7,7 @@
 > **定理链编号**: T-030 参数多态保持
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [泛型 (Generics)](#泛型-generics)
@@ -63,8 +63,9 @@
     - [边界测试：泛型递归类型的大小计算（编译错误）](#边界测试泛型递归类型的大小计算编译错误)
 
 > **Bloom 层级**: 理解
-
-> **📌 简介**: 泛型是 Rust 实现"零成本抽象"的核心机制。通过编译期单态化，Rust 为每个使用的具体类型生成专用代码，消除运行时类型检查与装箱开销。本章深入类型推断、单态化成本、以及高级泛型特性（GAT、impl Trait、const generics）。
+> **📌 简介**: 泛型是 Rust 实现"零成本抽象"的核心机制。
+> 通过编译期单态化，Rust 为每个使用的具体类型生成专用代码，消除运行时类型检查与装箱开销。
+> 本章深入类型推断、单态化成本、以及高级泛型特性（GAT、impl Trait、const generics）。
 >
 > **⏱️ 预计学习时间**: 75-100 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级

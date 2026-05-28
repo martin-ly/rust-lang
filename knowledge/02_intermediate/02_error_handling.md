@@ -1,21 +1,30 @@
 # 错误处理 (Error Handling)
 >
 > **相关概念**: [错误处理](../../concept/02_intermediate/04_error_handling.md)
-
 > **Bloom 层级**: 理解
-
-> **📌 简介**: Rust 将错误分为可恢复错误 (`Result<T, E>`) 和不可恢复错误 (`panic!`)，通过类型系统强制显式处理失败路径。这种设计消除了 C 的静默错误传播和 Java 的异常滥用，实现了"编译期错误处理完备性检查"。
+> **📌 简介**:
+> Rust 将错误分为可恢复错误 (`Result<T, E>`) 和不可恢复错误 (`panic!`)，通过类型系统强制显式处理失败路径。
+> 这种设计消除了 C 的静默错误传播和 Java 的异常滥用，实现了"编译期错误处理完备性检查"。
 >
 > **⏱️ 预计学习时间**: 3-4 小时
 > **📚 难度级别**: ⭐⭐⭐ 中级
-> **权威来源**: [Rust Book Ch09](https://doc.rust-lang.org/book/ch09-00-error-handling.html), [Rust Reference — The `?` operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator), [RFC 243: Trait-based Exception Handling](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html), [RFC 3058: `let` chains](https://rust-lang.github.io/rfcs/3058-let-chains.html), [thiserror crate](https://docs.rs/thiserror/), [anyhow crate](https://docs.rs/anyhow/)
+> **权威来源**: [Rust Book Ch09](https://doc.rust-lang.org/book/ch09-00-error-handling.html),
+> [Rust Reference — The `?` operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator),
+> [RFC 243: Trait-based Exception Handling](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html),
+> [RFC 3058: `let` chains](https://rust-lang.github.io/rfcs/3058-let-chains.html),
+> [thiserror crate](https://docs.rs/thiserror/),
+> [anyhow crate](https://docs.rs/anyhow/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 243 核心设计决策摘要、`?` 运算符形式化语义（Rust Reference）、Rust vs C++ vs Haskell 错误处理对比矩阵、错误处理代数语义来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**:
+> 2026-05-19 新增 RFC 243 核心设计决策摘要、
+> `?` 运算符形式化语义（Rust Reference）、
+> Rust vs C++ vs Haskell 错误处理对比矩阵、
+> 错误处理代数语义来源标注 [来源: Authority Source Sprint Batch 8]
 
 ---
 
 ## 🎯 学习目标
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 完成本章后，你将能够：
@@ -29,7 +38,7 @@
 ---
 
 ## 📋 先决条件
->
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **枚举与模式匹配** — `enum`、`match`（`01_fundamentals/enums.md`）
@@ -40,22 +49,29 @@
 ---
 
 ## 🧠 核心概念
->
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 模块 1: 概念定义
->
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 1.1 直观定义
 
-Rust 没有异常（Exception）。所有可能的失败都**显式编码在类型中** [来源: Rust Reference — Error Handling / 2025; RFC 243 — Trait-based Exception Handling / 2016; 核心设计决策: 用代数数据类型替代异常机制，编译器强制 exhaustiveness check，消除 C 的静默错误传播和 Java 的异常滥用]：
+Rust 没有异常（Exception）。
+所有可能的失败都**显式编码在类型中**
+[
+来源: Rust Reference — Error Handling / 2025; RFC 243 — Trait-based Exception Handling / 2016;
+核心设计决策: 用代数数据类型替代异常机制，编译器强制 exhaustiveness check，消除 C 的静默错误传播和 Java 的异常滥用
+]：
 
 - **`Result<T, E>`**: 操作**可能失败**，失败时携带错误信息 `E`
 - **`Option<T>`**: 操作**可能为空**，空时无额外信息
 - **`panic!`**: 程序进入**不可恢复状态**，立即终止当前线程
 
-> 💡 关键直觉：`Result` 说"我可能失败，请处理"；`Option` 说"我可能为空，请检查"；`panic` 说"这不应该发生，如果有 bug 请崩溃"。
+> 💡 关键直觉：`Result` 说"我可能失败，请处理"；
+> `Option` 说"我可能为空，请检查"；
+> `panic` 说"这不应该发生，如果有 bug 请崩溃"。
 
 #### 1.2 操作定义
 

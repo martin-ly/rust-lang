@@ -1,16 +1,22 @@
 # 智能指针 (Smart Pointers)
 >
 > **相关概念**: [智能指针](../../concept/02_intermediate/03_memory_management.md)
-
 > **Bloom 层级**: 理解
-
 > **📌 简介**: 智能指针是在所有权模型基础上提供的抽象，允许超出普通引用的内存管理模式：堆分配（`Box<T>`）、共享所有权（`Rc<T>`/`Arc<T>`）、内部可变性（`RefCell<T>`/`Mutex<T>`）。它们是 Rust 所有权系统的补充，而非替代。
 >
 > **⏱️ 预计学习时间**: 3-4 小时
 > **📚 难度级别**: ⭐⭐⭐ 中级
-> **权威来源**: [Rust Book Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html), [std::rc](https://doc.rust-lang.org/std/rc/), [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html), [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html), [RFC 3382: Pin](https://rust-lang.github.io/rfcs/3382-pin.html)
+> **权威来源**: [Rust Book Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html),
+> [std::rc](https://doc.rust-lang.org/std/rc/),
+> [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html),
+> [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html),
+> [RFC 3382: Pin](https://rust-lang.github.io/rfcs/3382-pin.html)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rustonomicon 内部可变性形式化语义、`Deref`/`Drop` trait 自动调用机制来源标注、智能指针跨语言对比矩阵（C++ `std::unique_ptr`/`shared_ptr` vs Haskell `STRef` vs Go 无智能指针） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**:
+> 2026-05-19 新增 Rustonomicon 内部可变性形式化语义、
+> `Deref`/`Drop` trait 自动调用机制来源标注、
+> 智能指针跨语言对比矩阵（C++ `std::unique_ptr`/`shared_ptr` vs Haskell `STRef` vs Go 无智能指针）
+> [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -48,7 +54,15 @@
 
 #### 1.1 直观定义
 
-**智能指针（Smart Pointer）** 是实现了 `Deref` 和/或 `Drop` trait 的数据结构 [来源: Rust Reference — Deref coercions / 2025; Rustonomicon — Interior Mutability / 2025; 核心形式化语义: `Deref` 实现触发编译期自动解引用（deref coercion），`Drop` 实现触发作用域结束时确定性析构，二者共同构成 RAII 在 Rust 中的核心抽象]，它们在行为上类似指针（可以解引用访问数据），但附加了额外的所有权语义：
+**智能指针（Smart Pointer）** 是实现了 `Deref` 和/或 `Drop` trait 的数据结构
+[
+来源: Rust Reference — Deref coercions / 2025;
+Rustonomicon — Interior Mutability / 2025;
+核心形式化语义:
+`Deref` 实现触发编译期自动解引用（deref coercion），`Drop` 实现触发作用域结束时确定性析构，二者共同构成 RAII 在 Rust 中的核心抽象
+]，
+它们在行为上类似指针（可以解引用访问数据），
+但附加了额外的所有权语义：
 
 | 智能指针 | 核心能力 | 解决的问题 |
 |---------|---------|-----------|
@@ -61,7 +75,7 @@
 > 💡 关键直觉：普通引用 `&T` 是"零成本的借用查看"；智能指针是"有所有权语义的内存管理"。
 
 #### 1.2 操作定义
->
+
 > **[来源: Rust Official Docs]**
 
 **`Box<T>` 的核心语义**：
@@ -915,7 +929,7 @@ fn main() {
 ---
 
 ## 相关概念
->
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [集合类型 (Collections)](01_collections.md)
@@ -933,264 +947,6 @@ fn main() {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 边界测试：`Rc<RefCell<T>>` 的循环引用与内存泄漏（运行时泄漏）
 
@@ -1215,4 +971,14 @@ fn main() {
 }
 ```
 
-> **修正**: `Rc<RefCell<T>>` 提供**单线程共享可变访问**，但无法防止**循环引用**。循环引用导致引用计数永不为零，内存泄漏（非 UB，但资源浪费）。解决方案：1) **`Weak<T>`**：`Rc::downgrade` 创建弱引用，不增加引用计数，打破循环；2) **arena 分配**：所有节点由同一分配器管理，一次性释放；3) **显式清理**：在 drop 前手动断开链接。`RefCell` 的运行时借用检查（`borrow()`/`borrow_mut()`）在循环引用场景下可能 panic（若已有 `borrow_mut`，再 `borrow_mut` 同一 `RefCell`）。这与 C++ 的 `std::shared_ptr`（同样循环引用问题，需 `std::weak_ptr`）或 Swift 的 ARC（运行时循环引用检测，但非确定性）不同——Rust 要求开发者显式使用 `Weak` 打破循环。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
+> **修正**: `Rc<RefCell<T>>` 提供**单线程共享可变访问**，但无法防止**循环引用**。
+> 循环引用导致引用计数永不为零，内存泄漏（非 UB，但资源浪费）。
+> 解决方案：
+>
+> 1) **`Weak<T>`**：`Rc::downgrade` 创建弱引用，不增加引用计数，打破循环；
+> 2) **arena 分配**：所有节点由同一分配器管理，一次性释放；
+> 3) **显式清理**：在 drop 前手动断开链接。
+> `RefCell` 的运行时借用检查（`borrow()`/`borrow_mut()`）在循环引用场景下可能 panic（若已有 `borrow_mut`，再 `borrow_mut` 同一 `RefCell`）。
+> 这与 C++ 的 `std::shared_ptr`（同样循环引用问题，需 `std::weak_ptr`）或 Swift 的 ARC（运行时循环引用检测，但非确定性）不同——Rust 要求开发者显式使用 `Weak` 打破循环。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
