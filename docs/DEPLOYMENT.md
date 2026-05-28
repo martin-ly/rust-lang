@@ -59,7 +59,7 @@ docker-compose up -d
 docker-compose ps
 ```
 
-更多详情参见 [DOCKER_GUIDE.md](./DOCKER_GUIDE.md)
+更多详情参见 [06_docker_guide.md](./06_docker_guide.md)
 
 ## Kubernetes 部署
 >

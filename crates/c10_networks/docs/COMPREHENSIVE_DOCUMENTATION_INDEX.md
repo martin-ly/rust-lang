@@ -296,7 +296,7 @@ C10 Networks文档体系按照以下结构组织：
 | 文档名称            | 描述               | 状态      | 链接                                       |
 | :--- | :--- | :--- | :--- |
 | DEPLOYMENT_GUIDE.md | 部署指南           | ✅ 完成   | [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) |
-| DOCKER_GUIDE.md     | Docker容器化指南   | 🚧 进行中 | [DOCKER_GUIDE.md](DOCKER_GUIDE.md)         |
+| 06_docker_guide.md     | Docker容器化指南   | 🚧 进行中 | [06_docker_guide.md](06_docker_guide.md)         |
 | KUBERNETES_GUIDE.md | Kubernetes部署指南 | 🚧 进行中 | [KUBERNETES_GUIDE.md](KUBERNETES_GUIDE.md) |
 
 ### 2. 配置管理
