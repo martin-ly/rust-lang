@@ -19,9 +19,11 @@ limit-results = 30
 teaser-word-count = 30
 use-boolean-and = true
 
-[preprocessor.toc]
-command = "mdbook-toc"
-marker = "<!-- toc -->"
+# [preprocessor.toc]
+# command = "mdbook-toc"
+# marker = "<!-- toc -->"
+# NOTE: mdbook-toc v0.15.4 fails with "Unable to parse the input" on some
+# concept/ markdown files. Disabled until upstream fix. No files use <!-- toc -->.
 
 [output.html.fold]
 enable = true
