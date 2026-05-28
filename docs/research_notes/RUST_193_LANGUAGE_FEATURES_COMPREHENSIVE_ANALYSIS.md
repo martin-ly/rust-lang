@@ -363,7 +363,7 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [RUST_193_FEATURE_MATRIX](./RUST_193_FEATURE_MATRIX.md) | 按特性族展开的五维矩阵（概念-公理-定理-证明方法-反例） |
+| [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) | 按特性族展开的五维矩阵（概念-公理-定理-证明方法-反例） |
 | [releases.rs 1.93.0](https://releases.rs/docs/1.93.0/) | 权威变更清单 |
 | [Ferrocene FLS](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范 |
 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链（Def→示例→论证→证明） |

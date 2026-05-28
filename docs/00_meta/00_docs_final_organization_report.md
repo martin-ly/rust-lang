@@ -61,10 +61,10 @@
 
 | 文件 | 从 | 到 |
 |------|-----|-----|
-| `CROSS_MODULE_LEARNING_ROADMAP_2025_10_25.md` | docs根目录 | `01_learning/` |
-| `CROSS_MODULE_PRACTICAL_PROJECTS_2025_10_25.md` | docs根目录 | `03_practice/` |
-| `CROSS_MODULE_NAVIGATION.md` | docs根目录 | `01_learning/` |
-| `LEARNING_PATH_GUIDE_2025_10_24.md` | docs根目录 | `01_learning/` |
+| `01_cross_module_learning_roadmap_2025_10_25.md` | docs根目录 | `01_learning/` |
+| `03_cross_module_practical_projects_2025_10_25.md` | docs根目录 | `03_practice/` |
+| `01_cross_module_navigation.md` | docs根目录 | `01_learning/` |
+| `01_learning_path_guide_2025_10_24.md` | docs根目录 | `01_learning/` |
 | `COMPREHENSIVE_EXTENSION_DEEPENING_PLAN_2026_03.md` | docs根目录 | `07_project/` |
 
 ---
@@ -88,9 +88,9 @@ docs/
 ```
 docs/
 ├── 01_learning/          (8个文件) - 学习规划
-│   ├── CROSS_MODULE_LEARNING_ROADMAP_2025_10_25.md
-│   ├── CROSS_MODULE_NAVIGATION.md
-│   ├── LEARNING_PATH_GUIDE_2025_10_24.md
+│   ├── 01_cross_module_learning_roadmap_2025_10_25.md
+│   ├── 01_cross_module_navigation.md
+│   ├── 01_learning_path_guide_2025_10_24.md
 │   └── ...
 ├── 02_reference/         (31个文件) - 参考资料
 ├── 03_practice/          (2个文件) - 实践练习
@@ -161,7 +161,7 @@ docs/
 |------|------|
 | 了解Rust 1.94生态 | `docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md` |
 | 查看学术引用 | `docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md` |
-| 规划学习路径 | `docs/01_learning/LEARNING_PATH_GUIDE_2025_10_24.md` |
+| 规划学习路径 | `docs/01_learning/01_learning_path_guide_2025_10_24.md` |
 | 迁移到新版 | `docs/MIGRATION_GUIDE_2026.md` |
 | 查看文档索引 | `docs/00_master_index.md` 或 `docs/README.md` |
 

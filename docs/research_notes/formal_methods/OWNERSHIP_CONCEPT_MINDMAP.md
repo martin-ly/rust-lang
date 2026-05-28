@@ -358,8 +358,8 @@ Pin与Unpin
 
 | 定理 | 描述 | 位置 |
 | :--- | :--- | :--- |
-| T-OW2 | 所有权唯一性 | [定理汇编](../THEOREMS_AND_PROOF_STRATEGIES.md) §1 |
-| T-OW3 | 内存安全 | [定理汇编](../THEOREMS_AND_PROOF_STRATEGIES.md) §1 |
+| T-OW2 | 所有权唯一性 | [定理汇编](../10_theorems_and_proof_strategies.md) §1 |
+| T-OW3 | 内存安全 | [定理汇编](../10_theorems_and_proof_strategies.md) §1 |
 
 ### 相关证明
 >

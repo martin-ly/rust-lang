@@ -135,7 +135,7 @@
 
 ## 5. 相关文档
 
-- `DOCUMENTATION_DIVISION_OF_LABOR.md` — 文档体系分工协议
+- `00_documentation_division_of_labor.md` — 文档体系分工协议
 - `00_documentation_lifecycle.md` — 文档生命周期管理制度
 
 ---

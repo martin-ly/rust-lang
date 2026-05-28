@@ -368,7 +368,7 @@
 | 20.1 Unsafe Rust | unsafe 代码 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) | 完整 unsafe 指南 |
 | 20.2 Advanced Traits | 关联类型、完全限定语法 | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 复杂 trait 模式 |
 | 20.3 Advanced Types | 类型别名、never type | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 类型级编程 |
-| 20.4 Advanced Functions and Closures | 函数指针、返回闭包 | [closures_cheatsheet](../02_reference/quick_reference/closures_cheatsheet.md) § 高级 | HRTB |
+| 20.4 Advanced Functions and Closures | 函数指针、返回闭包 | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) § 高级 | HRTB |
 | 20.5 Macros | 声明宏、过程宏 | macros_cheatsheet | 宏编写指南 |
 
 #### 第21章：Final Project
@@ -423,7 +423,7 @@
 | 6 | **Conversion** | From/Into、TryFrom | [type_system](../02_reference/quick_reference/type_system.md) § 转换 |
 | 7 | **Expressions** | 表达式语法 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
 | 8 | **Flow of Control** | if/else、loop、match | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
-| 9 | **Functions** | 函数、闭包、高阶函数 | [closures_cheatsheet](../02_reference/quick_reference/closures_cheatsheet.md) |
+| 9 | **Functions** | 函数、闭包、高阶函数 | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) |
 | 10 | **Modules** | 模块系统 | `crates/` 项目结构 |
 | 11 | **Crates** | 库创建 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
 | 12 | **Cargo** | 包管理 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
@@ -567,7 +567,7 @@
 | **模式匹配** | Book Ch 19 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | - |
 | **集合** | Book Ch 8 | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) | - |
 | **迭代器** | Book Ch 13.2 | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) § Iterator | - |
-| **闭包** | Book Ch 13.1 | [closures_cheatsheet](../02_reference/quick_reference/closures_cheatsheet.md) | - |
+| **闭包** | Book Ch 13.1 | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) | - |
 | **智能指针** | Book Ch 15 | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) | - |
 | **测试** | Book Ch 11 | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) | - |
 | **Cargo** | Book Ch 14 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) | - |
@@ -584,7 +584,7 @@
 | Ch 9 - Error Handling | [Book](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | Ch 10 - Generics/Traits | [Book](https://doc.rust-lang.org/book/ch10-00-generics.html) | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) |
 | Ch 11 - Testing | [Book](https://doc.rust-lang.org/book/ch11-00-testing.html) | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) |
-| Ch 13 - Iterators/Closures | [Book](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | [closures_cheatsheet](../02_reference/quick_reference/closures_cheatsheet.md) |
+| Ch 13 - Iterators/Closures | [Book](https://doc.rust-lang.org/book/ch13-00-functional-features.html) | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) |
 | Ch 15 - Smart Pointers | [Book](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) |
 | Ch 16 - Concurrency | [Book](https://doc.rust-lang.org/book/ch16-00-concurrency.html) | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) |
 | Ch 17 - Async | [Book](https://doc.rust-lang.org/book/ch17-00-async-await.html) | [async_patterns](../02_reference/quick_reference/async_patterns.md) |
@@ -598,7 +598,7 @@
 |---------|---------|-----------|
 | 3. Custom Types | [RBE](https://doc.rust-lang.org/rust-by-example/custom_types.html) | [type_system](../02_reference/quick_reference/type_system.md) |
 | 8. Flow of Control | [RBE](https://doc.rust-lang.org/rust-by-example/flow_control.html) | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
-| 9. Functions | [RBE](https://doc.rust-lang.org/rust-by-example/fn.html) | [closures_cheatsheet](../02_reference/quick_reference/closures_cheatsheet.md) |
+| 9. Functions | [RBE](https://doc.rust-lang.org/rust-by-example/fn.html) | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) |
 | 14. Generics | [RBE](https://doc.rust-lang.org/rust-by-example/generics.html) | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) |
 | 15. Scoping Rules | [RBE](https://doc.rust-lang.org/rust-by-example/scope.html) | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
 | 16. Traits | [RBE](https://doc.rust-lang.org/rust-by-example/trait.html) | [type_system](../02_reference/quick_reference/type_system.md) |

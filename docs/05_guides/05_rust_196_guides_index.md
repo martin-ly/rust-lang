@@ -48,7 +48,7 @@
 | 11 | CLI_APPLICATIONS_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 12 | EMBEDDED_RUST_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 13 | FFI_PRACTICAL_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 14 | INLINE_ASSEMBLY_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 14 | 05_inline_assembly_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 15 | PERFORMANCE_TUNING_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 16 | TESTING_COVERAGE_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 17 | TOKIO_ECOSYSTEM_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |

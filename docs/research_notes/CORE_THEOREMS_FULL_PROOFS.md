@@ -318,7 +318,7 @@
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md) — 形式语言（推理规则、操作语义、判定形式）、形式证明推导树
-- [CORE_THEOREMS_EN_SUMMARY](./CORE_THEOREMS_EN_SUMMARY.md) — English summary
+- [CORE_THEOREMS_EN_SUMMARY](./10_core_theorems_en_summary.md) — English summary
 
 ---
 

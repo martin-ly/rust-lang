@@ -68,7 +68,7 @@
 
 | 文档 | 大小 | 内容深度 | 特色 |
 | :--- | :--- | :--- | :--- |
-| LOGICAL_FOUNDATIONS.md | 7.2KB | L4 | 命题/一阶/高阶/模态逻辑 |
+| 10_logical_foundations.md | 7.2KB | L4 | 命题/一阶/高阶/模态逻辑 |
 | SEPARATION_LOGIC.md | 6.5KB | L5 | 分离逻辑、Iris框架 |
 
 **涵盖主题:**
@@ -85,7 +85,7 @@
 | 文档 | 大小 | 内容深度 | 特色 |
 | :--- | :--- | :--- | :--- |
 | OPERATIONAL_SEMANTICS.md | 6.7KB | L4 | 小步/大步/环境语义 |
-| AXIOMATIC_SEMANTICS.md | 7.1KB | L5 | 霍尔逻辑、WP/SP |
+| 10_axiomatic_semantics.md | 7.1KB | L5 | 霍尔逻辑、WP/SP |
 
 **涵盖主题:**
 
@@ -118,7 +118,7 @@
 | 文档 | 大小 | 内容深度 | 特色 |
 | :--- | :--- | :--- | :--- |
 | FORMAL_METHODS_COMPARISON.md | 7.6KB | L3 | 方法比较、工具选择 |
-| CASE_STUDIES.md | 8.3KB | L4 | Vec/Rc/并发/异步案例 |
+| 10_case_studies.md | 8.3KB | L4 | Vec/Rc/并发/异步案例 |
 | FORMAL_FOUNDATIONS_INDEX.md | 5.5KB | L2 | 理论体系完整导航 |
 
 **涵盖主题:**
@@ -172,9 +172,9 @@
 | :--- | :--- | :--- |
 | **分离逻辑** | 所有权/借用系统 | SEPARATION_LOGIC.md §3 |
 | **线性逻辑** | 移动语义、Copy vs Move | SEPARATION_LOGIC.md §3.1 |
-| **霍尔逻辑** | 函数契约、unsafe边界 | AXIOMATIC_SEMANTICS.md §4 |
+| **霍尔逻辑** | 函数契约、unsafe边界 | 10_axiomatic_semantics.md §4 |
 | **操作语义** | MIR求值、异步状态机 | OPERATIONAL_SEMANTICS.md |
-| **模态逻辑** | 并发安全性、终结合理性 | LOGICAL_FOUNDATIONS.md §4 |
+| **模态逻辑** | 并发安全性、终结合理性 | 10_logical_foundations.md §4 |
 | **归纳证明** | 递归函数终止性、类型推导 | PROOF_STRATEGIES.md §1 |
 | **结构归纳** | 表达式求值、AST遍历 | PROOF_STRATEGIES.md §1.2 |
 | **不变式** | 循环验证、Vec容量 | PROOF_STRATEGIES.md §5 |
@@ -192,7 +192,7 @@
 
 ```text
 Week 1: 逻辑基础
-  ├── LOGICAL_FOUNDATIONS.md §1-2
+  ├── 10_logical_foundations.md §1-2
   └── 练习：命题逻辑推导
 
 Week 2: 操作语义
@@ -200,7 +200,7 @@ Week 2: 操作语义
   └── 练习：λ演算归约
 
 Week 3: 霍尔逻辑
-  ├── AXIOMATIC_SEMANTICS.md §1
+  ├── 10_axiomatic_semantics.md §1
   └── 练习：简单程序验证
 ```
 
@@ -231,7 +231,7 @@ Week 9-10: 高级主题
   └── OPERATIONAL_SEMANTICS.md §3-4
 
 Week 11-12: 案例研究
-  ├── CASE_STUDIES.md
+  ├── 10_case_studies.md
   └── 实际Rust代码验证
 
 Week 13-14: 工具实践
@@ -263,9 +263,9 @@ Week 13-14: 工具实践
 
 | 设计模式 | 形式化基础 | 文档 |
 | :--- | :--- | :--- |
-| 所有权模式 | 分离逻辑 | CASE_STUDIES.md §2 |
-| 并发模式 | 霍尔逻辑、分离逻辑 | CASE_STUDIES.md §3 |
-| 异步模式 | 操作语义 | CASE_STUDIES.md §4 |
+| 所有权模式 | 分离逻辑 | 10_case_studies.md §2 |
+| 并发模式 | 霍尔逻辑、分离逻辑 | 10_case_studies.md §3 |
+| 异步模式 | 操作语义 | 10_case_studies.md §4 |
 
 ---
 

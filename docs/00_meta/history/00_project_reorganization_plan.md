@@ -88,7 +88,7 @@ rust-lang/
 │   ├── project_charter.md         # 项目章程
 │   ├── governance.md              # 治理结构
 │   └── history/                   # 项目历史
-│       └── 2026_reorganization.md # 本次重组记录
+│       └── 00_2026_reorganization.md # 本次重组记录
 │
 ├── 01_docs/                       # 核心文档（精简整合）
 │   ├── 00_index.md                # 文档总索引
@@ -196,7 +196,7 @@ rust-lang/
 ├── 04_guides/                           # 整合：原05_guides + 其他
 │   ├── migration_2026.md
 │   ├── best_practices.md
-│   └── tree_borrows_guide.md
+│   └── 10_tree_borrows_guide.md
 └── 05_roadmap/                          # 整合：路线图
     ├── 2026_roadmap.md
     └── sustainable_plan.md              # SUSTAINABLE_DEVELOPMENT_PLAN
@@ -298,7 +298,7 @@ rust-lang/
 
 ## 相关概念
 
-- [2026 重组历史](./2026_reorganization.md)
+- [2026 重组历史](./00_2026_reorganization.md)
 
 ---
 

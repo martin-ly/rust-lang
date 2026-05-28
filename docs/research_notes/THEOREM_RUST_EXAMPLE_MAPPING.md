@@ -54,6 +54,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 映射总览
 >
@@ -545,8 +546,8 @@ async fn theorem_cc1_compensation_consistency() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md)
-- [所有权证明树](./PROOF_TREE_OWNERSHIP.md)
-- [借用证明树](./PROOF_TREE_BORROW.md)
+- [所有权证明树](./10_proof_tree_ownership.md)
+- [借用证明树](./10_proof_tree_borrow.md)
 - [类型安全证明树](./PROOF_TREE_TYPE_SAFETY.md)
 
 ---

@@ -475,7 +475,7 @@ assert_eq!(evens, vec![2, 4]);
 ```
 
 > **与 Tokio 生态集成**：async closures 与 Tokio 的任务系统、通道系统天然配合。
-> 详见 [Tokio 异步运行时深度解析](../../content/ecosystem/async_runtimes/tokio_deep_dive.md)。
+> 详见 [Tokio 异步运行时深度解析](../../content/ecosystem/async_runtimes/10_tokio_deep_dive.md)。
 
 ---
 
@@ -1874,7 +1874,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 ```
 
 > **项目示例**: `crates/c08_algorithms/src/rust_195_features.rs` 中展示了 `cfg_select!` 与异步代码的更多结合模式。
-> **相关文档**: [Rust 1.95 稳定特性全景](../../content/emerging/rust_1_95_preview.md)
+> **相关文档**: [Rust 1.95 稳定特性全景](../../content/emerging/10_rust_1_95_preview.md)
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 特性、Async Closures、`cfg_select!`)
 

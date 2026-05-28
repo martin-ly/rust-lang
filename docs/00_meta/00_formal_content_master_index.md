@@ -142,7 +142,7 @@
 ## 5. 相关文档
 
 - [`00_rust_ownership_decidability_integration_plan.md`](./00_rust_ownership_decidability_integration_plan.md) — 整合计划详情
-- [`DOCUMENTATION_DIVISION_OF_LABOR.md`](./DOCUMENTATION_DIVISION_OF_LABOR.md) — 文档体系分工协议
+- [`00_documentation_division_of_labor.md`](./00_documentation_division_of_labor.md) — 文档体系分工协议
 - [`rust-ownership-decidability/README.md`](../rust-ownership-decidability/README.md) — 所有权知识库入口
 - [`research_notes/README.md`](../research_notes/README.md) — 研究笔记入口
 

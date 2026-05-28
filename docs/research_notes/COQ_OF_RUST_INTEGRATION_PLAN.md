@@ -7,7 +7,7 @@
 
 请访问 [archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md) 查看完整内容。
 
-**入口**: [RESEARCH_NOTES_ORGANIZATION](./RESEARCH_NOTES_ORGANIZATION.md) § 三、归档约定 | [INDEX](./INDEX.md) 7g
+**入口**: [RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) § 三、归档约定 | [INDEX](./INDEX.md) 7g
 
 ---
 

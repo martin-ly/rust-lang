@@ -206,7 +206,7 @@
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | **安全与非安全全面论证**：边界、契约、UB、安全抽象 |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖 |
 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | **核心特性完整链**：13 项 Def→示例→论证→证明 |
-| [FEATURE_TEMPLATE](./FEATURE_TEMPLATE.md) | **特性精简模板**：79 项非核心特性 |
+| [FEATURE_TEMPLATE](./10_feature_template.md) | **特性精简模板**：79 项非核心特性 |
 | [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md) | **版本增量更新流程**：1.94+ 发布后更新步骤 |
 | [construction_capability](type_theory/construction_capability.md) | **类型构造能力**：Def TCON1、矩阵、决策树 |
 | [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) | **批判性分析与推进计划**：国际对标、证明深度、全模型入口、Coq 骨架 |

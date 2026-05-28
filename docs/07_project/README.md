@@ -149,7 +149,7 @@ fn main() {
 | :--- | :--- | :--- |
 | **知识结构** | KNOWLEDGE_STRUCTURE_FRAMEWORK.md MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md | 定义知识结构体系 模块知识结构补充指南 |
 | **版本追踪** | [RUST_RELEASE_TRACKING_CHECKLIST.md](./RUST_RELEASE_TRACKING_CHECKLIST.md) (归档) 版本追踪文档 | 新版本发布追踪流程 各模块适配状态 |
-| **文档管理** | [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) DOCUMENTATION_THEME_ORGANIZATION_PLAN.md (归档) | 文档交叉引用指南 文档主题重组规划 |
+| **文档管理** | [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) 07_documentation_theme_organization_plan.md (归档) | 文档交叉引用指南 文档主题重组规划 |
 | **架构** | [PROJECT_ARCHITECTURE_GUIDE.md](./PROJECT_ARCHITECTURE_GUIDE.md) | 项目架构设计 |
 | **模板工具** | ONE_PAGE_SUMMARY_TEMPLATE.md | 一页纸总结模板 |
 

@@ -748,7 +748,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 **推荐资源**:
 
-- [跨语言对比文档](../02_reference/CROSS_LANGUAGE_COMPARISON.md)
+- [跨语言对比文档](../02_reference/02_cross_language_comparison.md)
 - [线程并发使用指南](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md)
 - [异步编程使用指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)
 

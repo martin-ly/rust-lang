@@ -339,7 +339,7 @@
 - **批判性分析与推进计划** → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
 - **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)（L2 级 ownership T2、borrow T1、type T3）
 - **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../archive/deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../archive/deprecated/README.md)（已归档）
-- **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[RUSTBELT_ALIGNMENT](./RUSTBELT_ALIGNMENT.md)
+- **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[RUSTBELT_ALIGNMENT](./10_rustbelt_alignment.md)
 - **权威对齐指南** → [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)（原三大支柱文档已归档至 `../archive/process_reports/2026_02/`）
 - **工具对接** → [Aeneas 集成计划](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)、[coq-of-rust 集成计划](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md)（已归档）
 

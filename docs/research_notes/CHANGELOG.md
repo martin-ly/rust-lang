@@ -205,7 +205,7 @@
 - **Phase 4 组件成熟度**：扩展 [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md)；Def CE-MAT1（L1–L4 成熟度）、 theorem CE-MAT-T1、构建能力确定性判定树；与 02_workflow、05_boundary_system 衔接
 - **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md)；13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一 Def→示例→论证→证明链
 - **Phase 6 全局索引增强**：UNIFIED_SYSTEMATIC_FRAMEWORK 新增「按特性族/类型族/执行模型子索引」；设计模式表征与组件构建索引
-- **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](./FEATURE_TEMPLATE.md)；概念→形式化引用→反例模板；与 RUST_193 对应
+- **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](./10_feature_template.md)；概念→形式化引用→反例模板；与 RUST_193 对应
 - **Phase 8 增量流程**：新建 [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md)；1.94+ 发布后更新步骤与检查清单；MAINTENANCE_GUIDE 新增版本增量更新节
 - **INDEX**：新增 CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW 条目
 

@@ -43,10 +43,10 @@ docs/
 │   ├── 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md # 权威引用版
 │   ├── AUTHORITATIVE_SOURCES_AND_CITATIONS.md      # 学术论文引用
 │   ├── COMPREHENSIVE_EXTENSION_DEEPENING_PLAN_2026_03.md # 扩展计划
-│   ├── CROSS_MODULE_LEARNING_ROADMAP_2025_10_25.md # 跨模块学习路线
-│   ├── CROSS_MODULE_NAVIGATION.md                  # 跨模块导航
-│   ├── CROSS_MODULE_PRACTICAL_PROJECTS_2025_10_25.md # 实践项目
-│   ├── LEARNING_PATH_GUIDE_2025_10_24.md           # 学习路径指南
+│   ├── 01_cross_module_learning_roadmap_2025_10_25.md # 跨模块学习路线
+│   ├── 01_cross_module_navigation.md                  # 跨模块导航
+│   ├── 03_cross_module_practical_projects_2025_10_25.md # 实践项目
+│   ├── 01_learning_path_guide_2025_10_24.md           # 学习路径指南
 │   ├── MIGRATION_GUIDE_2026.md                     # 2026迁移指南
 │   ├── README.md                                   # 文档中心入口
 │   └── 10_terminology_standard.md                     # 术语标准
@@ -85,10 +85,10 @@ docs/
 
 #### 🚀 学习与路径 (4个)
 
-- `LEARNING_PATH_GUIDE_2025_10_24.md`
-- `CROSS_MODULE_LEARNING_ROADMAP_2025_10_25.md`
-- `CROSS_MODULE_NAVIGATION.md`
-- `CROSS_MODULE_PRACTICAL_PROJECTS_2025_10_25.md`
+- `01_learning_path_guide_2025_10_24.md`
+- `01_cross_module_learning_roadmap_2025_10_25.md`
+- `01_cross_module_navigation.md`
+- `03_cross_module_practical_projects_2025_10_25.md`
 
 #### 📝 迁移与规划 (2个)
 
@@ -117,7 +117,7 @@ docs/
 |---------|---------|
 | 了解Rust生态 | `2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md` |
 | 查看学术引用 | `AUTHORITATIVE_SOURCES_AND_CITATIONS.md` |
-| 规划学习路径 | `LEARNING_PATH_GUIDE_2025_10_24.md` |
+| 规划学习路径 | `01_learning_path_guide_2025_10_24.md` |
 | 迁移到新版 | `MIGRATION_GUIDE_2026.md` |
 | 查找所有文档 | `00_MASTER_INDEX.md` 或 `README.md` |
 

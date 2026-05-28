@@ -38,7 +38,7 @@
 | 2 | 10_rust_194_mind_representations.md | 核心 | ✅ 已完成 |
 | 3 | RUST_194_RESEARCH_UPDATE.md | 核心 | ✅ 已完成 |
 | 4 | 10_rust_194_comprehensive_analysis.md | 核心 | ✅ 已完成 |
-| 5 | RUST_193_FEATURE_MATRIX.md | 参考 | ✅ 已完成 |
+| 5 | 10_rust_193_feature_matrix.md | 参考 | ✅ 已完成 |
 | 6 | 10_rust_194_195_feature_matrix.md | 参考 | ✅ 已完成 |
 | 7 | 10_cargo_194_features.md | 相关 | 🔄 待更新 |
 | 8 | formal_methods/README.md | 核心 | 🔄 待更新 |

@@ -225,7 +225,7 @@ $
 | **MIR/THIR 级** | 无编译器 IR 级建模 | RustBelt MIR、coq-of-rust THIR |
 | **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md) |
 
-**RustBelt 逐章对标**: [RUSTBELT_ALIGNMENT](../RUSTBELT_ALIGNMENT.md)
+**RustBelt 逐章对标**: [RUSTBELT_ALIGNMENT](../10_rustbelt_alignment.md)
 
 ---
 

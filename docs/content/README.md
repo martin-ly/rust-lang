@@ -45,8 +45,8 @@ content/
 ├── README.md                 # 本文件
 ├── emerging/                 # 前沿特性跟踪
 │   ├── README.md
-│   ├── rust_1_95_preview.md
-│   ├── generic_const_exprs.md
+│   ├── 10_rust_1_95_preview.md
+│   ├── 10_generic_const_exprs.md
 │   └── async_closures.md
 ├── ecosystem/                # 生态系统深度
 │   ├── README.md
@@ -111,8 +111,8 @@ content/
 
 ### 前沿特性
 
-- [Rust 1.95 预览](emerging/rust_1_95_preview.md)
-- [Generic Const Expressions](emerging/generic_const_exprs.md)
+- [Rust 1.95 预览](emerging/10_rust_1_95_preview.md)
+- [Generic Const Expressions](emerging/10_generic_const_exprs.md)
 - [Async Closures](emerging/async_closures.md)
 
 ### 生态系统
@@ -175,7 +175,7 @@ content/
 - [生态系统](./ecosystem/README.md)
 - [前沿特性](./emerging/README.md)
 - [生产实践](./production/README.md)
-- [Content Crates 映射](./CONTENT_CRATES_MAPPING.md)
+- [Content Crates 映射](./10_content_crates_mapping.md)
 
 ---
 

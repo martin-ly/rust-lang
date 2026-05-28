@@ -87,9 +87,9 @@
 
 #### emerging/
 
-- [x] `rust_1_95_preview.md`
+- [x] `10_rust_1_95_preview.md`
 - [x] `rust_1_96_preview.md`
-- [x] `generic_const_exprs.md`
+- [x] `10_generic_const_exprs.md`
 - [x] `async_closures.md`
 - [x] `gen_blocks_guide.md`
 - [x] `wasm_advanced_topics.md`
@@ -101,9 +101,9 @@
 - [x] `web_frameworks/actix_web_vs_axum.md`
 - [x] `web_frameworks/grpc_microservices_guide.md`
 - [x] `web_frameworks/rocket_guide.md` ⬅️ 本轮
-- [x] `database/sea_orm_deep_dive.md`
-- [x] `database/sqlx_deep_dive.md` ⬅️ 本轮
-- [x] `async_runtimes/tokio_deep_dive.md`
+- [x] `database/10_sea_orm_deep_dive.md`
+- [x] `database/10_sqlx_deep_dive.md` ⬅️ 本轮
+- [x] `async_runtimes/10_tokio_deep_dive.md`
 - [x] `error_handling/anyhow_vs_thiserror.md`
 - [x] `serialization/serde_best_practices.md`
 - [x] `flutter_rust_bridge.md`
@@ -119,7 +119,7 @@
 
 #### academic/
 
-- [x] `tree_borrows_guide.md`
+- [x] `10_tree_borrows_guide.md`
 - [x] `prusti_verification_tutorial.md`
 - [x] `coq_formalization_guide.md`
 - [x] `formal_verification_landscape.md` ⬅️ 本轮

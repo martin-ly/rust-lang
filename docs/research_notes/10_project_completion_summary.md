@@ -40,6 +40,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 完成宣言
 >
@@ -113,11 +114,11 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| PROJECT_MAINTENANCE_GUIDE.md | 维护标准 |
-| USER_GUIDE.md | 使用指南 |
+| 10_project_maintenance_guide.md | 维护标准 |
+| 10_user_guide.md | 使用指南 |
 | 10_comprehensive_project_report.md | 项目报告 |
 | CROSS_REFERENCE_INDEX.md | 交叉引用 |
-| FINAL_VERIFICATION_CHECKLIST.md | 验证清单 |
+| 10_final_verification_checklist.md | 验证清单 |
 
 ### ✅ 完成认证 (100%)
 
@@ -205,7 +206,7 @@
 | 系统学习 | 00_COMPREHENSIVE_SUMMARY.md |
 | 解决问题 | FAQ_COMPREHENSIVE.md |
 | 面试准备 | INTERVIEW_QUESTIONS_COLLECTION.md |
-| 日常查阅 | RUST_FORMAL_METHODS_CHEATSHEET.md |
+| 日常查阅 | 10_rust_formal_methods_cheatsheet.md |
 
 ### 完整导航
 >
@@ -225,7 +226,7 @@
 - 响应社区反馈
 - 持续质量改进
 
-详见 [PROJECT_MAINTENANCE_GUIDE.md](./PROJECT_MAINTENANCE_GUIDE.md)
+详见 [10_project_maintenance_guide.md](./10_project_maintenance_guide.md)
 
 ---
 

@@ -473,7 +473,7 @@ struct CacheLinePadded {
 
 **维护**: 对齐知识随 Rust 版本更新。新版本发布时检查 [Rust Reference - Type layout](https://doc.rust-lang.org/reference/type-layout.html)。发现错误或遗漏请提 issue。
 
-**批判性评估与推进计划**: [ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md](../07_project/ALIGNMENT_KNOWLEDGE_CRITICAL_EVALUATION_2026_02.md)
+**批判性评估与推进计划**: [07_alignment_knowledge_critical_evaluation_2026_02.md](../07_project/07_alignment_knowledge_critical_evaluation_2026_02.md)
 
 ---
 

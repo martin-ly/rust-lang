@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化基础索引](#形式化基础索引)
@@ -43,6 +44,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 形式化理论体系架构
 >
@@ -89,7 +91,7 @@
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
-| [LOGICAL_FOUNDATIONS.md](./LOGICAL_FOUNDATIONS.md) | 命题/一阶/高阶/模态逻辑 | ⭐⭐⭐⭐ |
+| [10_logical_foundations.md](./10_logical_foundations.md) | 命题/一阶/高阶/模态逻辑 | ⭐⭐⭐⭐ |
 | [SEPARATION_LOGIC.md](./SEPARATION_LOGIC.md) | 分离逻辑、Iris框架 | ⭐⭐⭐⭐⭐ |
 
 ### 程序语义
@@ -99,7 +101,7 @@
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
 | [OPERATIONAL_SEMANTICS.md](./OPERATIONAL_SEMANTICS.md) | 小步/大步/环境语义 | ⭐⭐⭐⭐ |
-| [AXIOMATIC_SEMANTICS.md](./AXIOMATIC_SEMANTICS.md) | 霍尔逻辑、WP/SP | ⭐⭐⭐⭐⭐ |
+| [10_axiomatic_semantics.md](./10_axiomatic_semantics.md) | 霍尔逻辑、WP/SP | ⭐⭐⭐⭐⭐ |
 
 ### 证明技术
 
@@ -117,11 +119,12 @@
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
 | [FORMAL_METHODS_COMPARISON.md](./FORMAL_METHODS_COMPARISON.md) | 方法比较、工具选择 | ⭐⭐⭐ |
-| [CASE_STUDIES.md](./CASE_STUDIES.md) | 实际案例分析 | ⭐⭐⭐⭐ |
+| [10_case_studies.md](./10_case_studies.md) | 实际案例分析 | ⭐⭐⭐⭐ |
 
 ---
 
 ## 学习路径
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 入门路径
@@ -130,13 +133,13 @@
 
 ```
 1. 逻辑基础
-   └── LOGICAL_FOUNDATIONS.md §1-2 (命题/一阶逻辑)
+   └── 10_logical_foundations.md §1-2 (命题/一阶逻辑)
 
 2. 操作语义
    └── OPERATIONAL_SEMANTICS.md §1-2 (小步/大步语义)
 
 3. 霍尔逻辑
-   └── AXIOMATIC_SEMANTICS.md §1 (霍尔逻辑基础)
+   └── 10_axiomatic_semantics.md §1 (霍尔逻辑基础)
 
 4. 简单证明
    └── PROOF_STRATEGIES.md §1 (归纳证明)
@@ -152,7 +155,7 @@
 
 2. 高级语义
    └── OPERATIONAL_SEMANTICS.md §3-4
-   └── AXIOMATIC_SEMANTICS.md §2-4
+   └── 10_axiomatic_semantics.md §2-4
 
 3. 证明技术
    └── PROOF_STRATEGIES.md 全部
@@ -174,7 +177,7 @@
    └── formal_methods/ (核心文档)
 
 3. 案例研究
-   └── CASE_STUDIES.md
+   └── 10_case_studies.md
 
 4. 工具实践
    └── coq_skeleton/
@@ -184,6 +187,7 @@
 ---
 
 ## 与Rust形式化的联系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 理论 → 实践映射
@@ -193,7 +197,7 @@
 | 理论概念 | Rust应用 | 文档位置 |
 | :--- | :--- | :--- |
 | 分离逻辑 | 所有权/借用 | ownership_model.md, borrow_checker_proof.md |
-| 霍尔逻辑 | 函数规范 | AXIOMATIC_SEMANTICS.md §4 |
+| 霍尔逻辑 | 函数规范 | 10_axiomatic_semantics.md §4 |
 | 类型理论 | Rust类型系统 | type_theory/ |
 | 操作语义 | MIR求值 | OPERATIONAL_SEMANTICS.md §5 |
 | 模态逻辑 | 并发安全性 | send_sync_formalization.md |
@@ -202,9 +206,11 @@
 ---
 
 ## 工具链索引
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 证明助手
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 工具 | 适用理论 | 学习资源 |
@@ -214,6 +220,7 @@
 | Lean | 依赖类型 | Aeneas项目 |
 
 ### 验证工具
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 工具 | 方法 | 适用场景 |
@@ -226,9 +233,11 @@
 ---
 
 ## 快速参考
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 常用符号
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 符号 | 含义 | 使用场景 |
@@ -241,6 +250,7 @@
 | wp(C,Q) | 最弱前置条件 | 验证条件 |
 
 ### 关键定理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 定理 | 位置 | 重要性 |
@@ -254,9 +264,11 @@
 ---
 
 ## 外部资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 经典教材
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 书名 | 作者 | 适用范围 |
@@ -267,6 +279,7 @@
 | Concrete Semantics | Nipkow et al. | Isabelle |
 
 ### 在线资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
@@ -282,12 +295,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -333,6 +348,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [formal_methods 目录](./README.md)
@@ -430,4 +446,3 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

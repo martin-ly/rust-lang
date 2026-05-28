@@ -282,8 +282,8 @@ timeline
 ## 相关概念
 
 - [Async Closures](./async_closures.md)
-- [Generic Const Exprs](./generic_const_exprs.md)
-- [Rust 1.95 Preview](./rust_1_95_preview.md)
+- [Generic Const Exprs](./10_generic_const_exprs.md)
+- [Rust 1.95 Preview](./10_rust_1_95_preview.md)
 
 ---
 

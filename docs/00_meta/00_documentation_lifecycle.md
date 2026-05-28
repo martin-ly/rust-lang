@@ -168,7 +168,7 @@ python3 scripts/check_deprecated_markers.py --days 30
 
 ## 7. 相关文档
 
-- `DOCUMENTATION_DIVISION_OF_LABOR.md` — 文档体系分工协议
+- `00_documentation_division_of_labor.md` — 文档体系分工协议
 - `DOCS_STRUCTURE_OVERVIEW.md` — 完整结构总览
 
 ---

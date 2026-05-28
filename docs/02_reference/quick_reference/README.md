@@ -673,7 +673,7 @@ use std::hint::cold_path;
 if let Some(msg) = e { cold_path(); eprintln!("error: {}", msg); }
 ```
 
-**完整速查表**: [`rust_195_features_cheatsheet.md`](./rust_195_features_cheatsheet.md) — 包含所有 1.95 新 API 与示例链接
+**完整速查表**: [`02_rust_195_features_cheatsheet.md`](./02_rust_195_features_cheatsheet.md) — 包含所有 1.95 新 API 与示例链接
 
 **性能提升**: `cold_path` 优化冷分支预测, `Atomic*::update` 减少 CAS 循环样板, `push_mut` 消除二次查找。
 

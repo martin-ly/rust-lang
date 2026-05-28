@@ -321,7 +321,7 @@
 - [形式化方法索引](./formal_methods/README.md)
 - [类型理论索引](./type_theory/README.md)
 - [核心特性完整链](./CORE_FEATURES_FULL_CHAIN.md) - 13 项核心特性 Def→示例→论证→证明
-- [特性精简模板](./FEATURE_TEMPLATE.md) - 79 项非核心特性模板
+- [特性精简模板](./10_feature_template.md) - 79 项非核心特性模板
 - [版本增量更新流程](./INCREMENTAL_UPDATE_FLOW.md) - 1.94+ 发布后更新步骤
 - [实验研究索引](./experiments/README.md)
 - [工具使用指南](./TOOLS_GUIDE.md) - 研究工具详细指南

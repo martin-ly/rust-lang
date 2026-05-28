@@ -82,7 +82,7 @@ rust-lang/
 │
 ├── 00_meta/               # 📋 元数据与项目治理
 │   ├── history/
-│   │   ├── 2026_reorganization.md    # 重组记录
+│   │   ├── 00_00_2026_reorganization.md    # 重组记录
 │   │   └── 00_reorganization_complete.md # 本报告
 │   └── project_charter.md # 项目章程
 │
@@ -128,7 +128,7 @@ rust-lang/
 | `01_docs/01_getting_started.md` | 3,988字节 | 快速开始指南 |
 | `01_docs/04_guides/best_practices.md` | 5,621字节 | 最佳实践指南 |
 | `01_docs/05_roadmap/2026_roadmap.md` | 4,722字节 | 2026路线图 |
-| `00_meta/history/2026_reorganization.md` | 4,957字节 | 重组记录 |
+| `00_meta/history/00_00_2026_reorganization.md` | 4,957字节 | 重组记录 |
 
 ### 迁移的核心文档（5个）
 
@@ -224,7 +224,7 @@ rust-lang/
 
 ## 相关文档
 
-- [重组记录](history/2026_reorganization.md) - 详细重组过程
+- [重组记录](history/00_00_2026_reorganization.md) - 详细重组过程
 - [文档索引](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) - 新文档导航
 - [项目README](../README.md) - 项目主入口
 

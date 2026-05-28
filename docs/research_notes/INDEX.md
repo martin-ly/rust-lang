@@ -169,12 +169,12 @@
 - 公理列表、定理依赖 DAG、与子文档映射
 - 按证明深度、按抽象层次导航
 
-7d. **[RUSTBELT_ALIGNMENT.md](./RUSTBELT_ALIGNMENT.md)** - RustBelt 逐章对标 🆕
+7d. **[10_rustbelt_alignment.md](./10_rustbelt_alignment.md)** - RustBelt 逐章对标 🆕
 7e. **[EXECUTABLE_SEMANTICS_ROADMAP.md](./EXECUTABLE_SEMANTICS_ROADMAP.md)** - 可执行语义路线图（K-Framework、PLT Redex）🆕
 7f. **[AENEAS_INTEGRATION_PLAN](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)** - Aeneas 对接调研与集成计划（已归档）
 7g. **[COQ_OF_RUST_INTEGRATION_PLAN](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md)** - coq-of-rust 对接调研与集成计划（已归档）
 7h. **[CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md)** - 核心定理完整证明（L2 级）🆕
-7i. **[CORE_THEOREMS_EN_SUMMARY.md](./CORE_THEOREMS_EN_SUMMARY.md)** - 核心定理英文摘要
+7i. **[10_core_theorems_en_summary.md](./10_core_theorems_en_summary.md)** - 核心定理英文摘要
 7j. **[FORMAL_FULL_MODEL_EN_SUMMARY.md](./FORMAL_FULL_MODEL_EN_SUMMARY.md)** - 形式化全模型英文摘要
 7k. **[FORMAL_LANGUAGE_AND_PROOFS.md](./FORMAL_LANGUAGE_AND_PROOFS.md)** - 形式语言与形式证明（推理规则、操作语义、判定形式）
 
@@ -229,14 +229,14 @@
 
 - 92 项语言特性全覆盖（内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增）
 - 每项含动机、设计决策、形式化引用、反例
-- 配套 [RUST_193_FEATURE_MATRIX](./RUST_193_FEATURE_MATRIX.md) 按特性族五维矩阵
+- 配套 [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) 按特性族五维矩阵
 
 1. **[CORE_FEATURES_FULL_CHAIN.md](./CORE_FEATURES_FULL_CHAIN.md)** - 核心特性完整链 🆕
 
 - 13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一链
 - 定义→概念→属性→关系→解释→示例→论证→形式化证明
 
-1. **[FEATURE_TEMPLATE.md](./FEATURE_TEMPLATE.md)** - 特性精简模板 🆕
+1. **[10_feature_template.md](./10_feature_template.md)** - 特性精简模板 🆕
 
 - 79 项非核心特性的「概念→形式化引用→反例」模板
 

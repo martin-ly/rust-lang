@@ -54,7 +54,7 @@ let atomic = Arc::new(5);                // 多线程原子引用计数
 | [ALIGNMENT_GUIDE.md](./ALIGNMENT_GUIDE.md) | 对齐知识综合（内存/格式化/unsafe/缓存行） | 内存布局优化 |
 | [EDGE_CASES_AND_SPECIAL_CASES.md](./EDGE_CASES_AND_SPECIAL_CASES.md) | 边界特例 | 处理特殊情况 |
 | [STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md](./STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md) | 标准库分析 | 标准库深入理解 |
-| [CROSS_LANGUAGE_COMPARISON.md](./CROSS_LANGUAGE_COMPARISON.md) | 跨语言对比 | 从其他语言迁移 |
+| [02_cross_language_comparison.md](./02_cross_language_comparison.md) | 跨语言对比 | 从其他语言迁移 |
 
 ---
 
@@ -76,7 +76,7 @@ let atomic = Arc::new(5);                // 多线程原子引用计数
 | **Unsafe** | unsafe_cheatsheet.md | 原始指针、FFI |
 | **智能指针** | smart_pointers_cheatsheet.md | Box、Rc、Arc、RefCell |
 | **生命周期** | lifetimes_cheatsheet.md | 生命周期省略、高阶 trait bound |
-| **闭包** | closures_cheatsheet.md | Fn、FnMut、FnOnce |
+| **闭包** | 02_closures_cheatsheet.md | Fn、FnMut、FnOnce |
 | **模式匹配** | pattern_matching_cheatsheet.md | match、if let、while let |
 | **模块系统** | modules_cheatsheet.md | mod、use、pub |
 | **字符串** | strings_cheatsheet.md | &str、String、编码 |

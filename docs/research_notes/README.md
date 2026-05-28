@@ -25,7 +25,7 @@
 | 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |
 | 完整总结与论证脉络 | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) → [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md) |
 | 批判性意见与改进计划 | RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN |
-| **结构梳理与归档约定** | **[RESEARCH_NOTES_ORGANIZATION](./RESEARCH_NOTES_ORGANIZATION.md)** — 实际目录、归档说明、入口与索引 |
+| **结构梳理与归档约定** | **[RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md)** — 实际目录、归档说明、入口与索引 |
 | 格式统一与内容/Rust 1.93 对齐计划 | FORMAT_AND_CONTENT_ALIGNMENT_PLAN |
 | 层次化映射（文档树/概念↔定理/文档↔思维表征） | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) |
 | **docs 全结构梳理**（100% 覆盖） | DOCS_STRUCTURE_OVERVIEW |
@@ -37,13 +37,13 @@
 >
 > **[来源: Rust Official Docs]**
 
-**详细梳理**（实际文件清单、归档约定、formal_methods 概览）：见 **[RESEARCH_NOTES_ORGANIZATION.md](./RESEARCH_NOTES_ORGANIZATION.md)**。
+**详细梳理**（实际文件清单、归档约定、formal_methods 概览）：见 **[10_research_notes_organization.md](./10_research_notes_organization.md)**。
 
 ```text
 research_notes/
 ├── 00_ORGANIZATION_AND_NAVIGATION.md  # 组织架构与按目标导航（首次使用入口）
 ├── README.md                    # 本索引文件
-├── RESEARCH_NOTES_ORGANIZATION.md  # 全面梳理（结构、归档、版本、维护）
+├── 10_research_notes_organization.md  # 全面梳理（结构、归档、版本、维护）
 ├── formal_methods/              # 形式化方法研究（六篇核心 + 思维导图/矩阵/决策树，见该目录 README）
 │   ├── README.md
 │   ├── 00_completeness_gaps.md  # 完备性缺口（Phase 1–6 100% 完成）
@@ -103,7 +103,7 @@ research_notes/
 ├── INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md  # 国际形式化验证对标索引 🆕
 ├── FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md  # 批判性分析与可持续推进计划 🆕
 ├── FORMAL_FULL_MODEL_OVERVIEW.md  # 形式化全模型入口（统一形式系统）🆕
-├── RUSTBELT_ALIGNMENT.md  # RustBelt 逐章对标 🆕
+├── 10_rustbelt_alignment.md  # RustBelt 逐章对标 🆕
 ├── EXECUTABLE_SEMANTICS_ROADMAP.md  # 可执行语义路线图 🆕
 ├── CORE_THEOREMS_FULL_PROOFS.md  # 核心定理完整证明（L2 级，数学风格）🆕
 ├── THEOREM_RUST_EXAMPLE_MAPPING.md  # 定理↔Rust 示例映射 🆕
@@ -579,7 +579,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 **Rust 版本**: 1.93.1+
 **状态**: ✅ **研究笔记系统 100% 完成**（17/17 研究笔记全部完成）
 
-**全面梳理**：[RESEARCH_NOTES_ORGANIZATION](./RESEARCH_NOTES_ORGANIZATION.md) — 实际结构、归档约定、入口与索引关系
+**全面梳理**：[RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) — 实际结构、归档约定、入口与索引关系
 
 ---
 

@@ -143,7 +143,7 @@
 
 **Day 1-2: 类型安全**
 
-- 阅读: [定理汇编](./THEOREMS_AND_PROOF_STRATEGIES.md) §3
+- 阅读: [定理汇编](./10_theorems_and_proof_strategies.md) §3
 - 理解: 什么是"良类型程序不会崩溃"
 
 **Day 3-4: Send与Sync**
@@ -210,7 +210,7 @@
 
 **主题**: 形式化方法入门
 
-- 阅读: [认知论证框架](./COGNITIVE_ARGUMENTATION_FRAMEWORK.md)
+- 阅读: [认知论证框架](./10_cognitive_argumentation_framework.md)
 - 学习: 如何阅读形式化定义
 - 理解: L1/L2/L3的区别
 
@@ -220,7 +220,7 @@
 
 **主题**: 所有权与借用的形式化
 
-- 阅读: [定理汇编](./THEOREMS_AND_PROOF_STRATEGIES.md) §1, §2
+- 阅读: [定理汇编](./10_theorems_and_proof_strategies.md) §1, §2
 - 深入: T-OW2 (所有权唯一性) 证明思路
 - 深入: T-BR1 (数据竞争自由) 证明思路
 
@@ -228,7 +228,7 @@
 
 **主题**: 类型安全的形式化
 
-- 阅读: [定理汇编](./THEOREMS_AND_PROOF_STRATEGIES.md) §3
+- 阅读: [定理汇编](./10_theorems_and_proof_strategies.md) §3
 - 理解: 进展性与保持性
 - 学习: 型变规则的形式化
 
@@ -325,8 +325,8 @@
 | 文档 | 难度 | 路径 | 说明 |
 | :--- | :--- | :--- | :--- |
 | [形式化概念百科](./FORMAL_CONCEPTS_ENCYCLOPEDIA.md) | ⭐⭐ | 全部 | 核心概念定义 |
-| [定理汇编](./THEOREMS_AND_PROOF_STRATEGIES.md) | ⭐⭐⭐ | 进阶+专家 | 证明思路 |
-| [认知论证框架](./COGNITIVE_ARGUMENTATION_FRAMEWORK.md) | ⭐⭐ | 全部 | 方法论 |
+| [定理汇编](./10_theorems_and_proof_strategies.md) | ⭐⭐⭐ | 进阶+专家 | 证明思路 |
+| [认知论证框架](./10_cognitive_argumentation_framework.md) | ⭐⭐ | 全部 | 方法论 |
 
 ### 思维导图
 >

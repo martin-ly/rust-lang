@@ -151,7 +151,7 @@
 
 | # | 2026 目标 | 状态 | 本项目覆盖情况 |
 |---|----------|------|---------------|
-| L01 | Polonius 下一代 Borrow Checker | ✅ | [`docs/04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md`](../../04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md) — 完整覆盖原理、Datalog 核心引擎、与 NLL 对比、实际使用方式 |
+| L01 | Polonius 下一代 Borrow Checker | ✅ | [`docs/04_research/04_polonius_next_gen_borrow_checker.md`](../../04_research/04_polonius_next_gen_borrow_checker.md) — 完整覆盖原理、Datalog 核心引擎、与 NLL 对比、实际使用方式 |
 | L02 | Unsafe Fields (unsafe 粒度细化) | ✅ | [`docs/05_guides/UNSAFE_FIELDS_PREVIEW.md`](../../05_guides/UNSAFE_FIELDS_PREVIEW.md) — 实验性语法预览，覆盖动机、提议语法、访问规则、与现有 unsafe 块的区别 |
 | L03 | `gen` 关键字 / 异步生成器 | 🟡 | `crates/c06_async/` 中有部分 async 示例，但缺少 `gen` 块专题文档和 `Coroutine` trait 解析 |
 | L04 | `match` ergonomics (if let guards) | 🟡 | 语言基础部分有涉及，但缺少 1.95+ 新 guard 语法的专门说明和迁移示例 |
@@ -270,7 +270,7 @@
 | # | 2026 目标 | 状态 | 本项目覆盖情况 |
 |---|----------|------|---------------|
 | F01 | Miri 作为 UB 检测基准工具 | ✅ | 见 T02 `MIRI_PRACTICAL_GUIDE.md`，覆盖栈/堆 UAF、OOB、数据竞争、对齐违规等 10+ UB 模式 |
-| F02 | Polonius 正确性证明与落地 | ✅ | 见 L01 `POLONIUS_NEXT_GEN_BORROW_CHECKER.md`，涵盖 Datalog 事实生成、约束求解和正确性论证 |
+| F02 | Polonius 正确性证明与落地 | ✅ | 见 L01 `04_polonius_next_gen_borrow_checker.md`，涵盖 Datalog 事实生成、约束求解和正确性论证 |
 | F03 | Verus / 定理证明集成 | ✅ | [`docs/04_research/VERUSBELT_PLDI_2026.md`](../../04_research/VERUSBELT_PLDI_2026.md) — PLDI 2026 研究跟踪，覆盖层叠语义、擦除定理、与 Verus 验证框架的关系 |
 | F04 | Kani 模型检查器推广 | 🔴 | 无覆盖 — 需创建 Kani 入门指南，覆盖 `kani::proof` 属性、假设-断言模式和 CI 集成 |
 | F05 | Prusti / 合约式验证前置条件 | 🔴 | 无覆盖 — 涉及 `#[requires]` / `#[ensures]` 注解和 Viper 后端 |
@@ -365,7 +365,7 @@
 |------|-------------|------|------|
 | Miri UB 检测 | `docs/05_guides/MIRI_PRACTICAL_GUIDE.md` | 新增 | 466 行实战指南，覆盖 10+ 常见 UB 模式 |
 | Cranelift 后端 | `docs/06_toolchain/CRANELIFT_BACKEND_GUIDE.md` | 新增 | 349 行配置与评测，含实测编译时间对比 |
-| Polonius | `docs/04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md` | 新增 | 327 行深度解析，关联官方 2026 goal |
+| Polonius | `docs/04_research/04_polonius_next_gen_borrow_checker.md` | 新增 | 327 行深度解析，关联官方 2026 goal |
 | Unsafe Fields | `docs/05_guides/UNSAFE_FIELDS_PREVIEW.md` | 新增 | 281 行实验性预览，覆盖语法和语义 |
 | TOML v1.1 | `docs/06_toolchain/TOML_V11_CARGO_GUIDE.md` | 新增 | 392 行 Cargo 集成指南 |
 | VerusBelt | `docs/04_research/VERUSBELT_PLDI_2026.md` | 新增 | 229 行 PLDI 2026 研究跟踪 |
@@ -420,7 +420,7 @@
 
 ### 7.2 本项目相关报告
 
-- [2026-05 对称差分析报告](./RUST_GLOBAL_ALIGNMENT_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05.md)
+- [2026-05 对称差分析报告](./00_rust_global_alignment_symmetric_difference_analysis_2026_05.md)
 - [2026-04 对称差分析报告](./RUST_GLOBAL_ALIGNMENT_SYMMETRIC_DIFFERENCE_ANALYSIS_2026.md)
 - [编译优化报告](../../../reports/COMPILATION_OPTIMIZATION_REPORT.md)
 - [sccache 基准测试](../../../reports/sccache-benchmark.md)
@@ -431,7 +431,7 @@
 |------|----------|------|------|
 | Miri | [`docs/05_guides/MIRI_PRACTICAL_GUIDE.md`](../../05_guides/MIRI_PRACTICAL_GUIDE.md) | Markdown | 466 |
 | Cranelift | [`docs/06_toolchain/CRANELIFT_BACKEND_GUIDE.md`](../../06_toolchain/CRANELIFT_BACKEND_GUIDE.md) | Markdown | 349 |
-| Polonius | [`docs/04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md`](../../04_research/POLONIUS_NEXT_GEN_BORROW_CHECKER.md) | Markdown | 327 |
+| Polonius | [`docs/04_research/04_polonius_next_gen_borrow_checker.md`](../../04_research/04_polonius_next_gen_borrow_checker.md) | Markdown | 327 |
 | TOML v1.1 | [`docs/06_toolchain/TOML_V11_CARGO_GUIDE.md`](../../06_toolchain/TOML_V11_CARGO_GUIDE.md) | Markdown | 392 |
 | Unsafe Fields | [`docs/05_guides/UNSAFE_FIELDS_PREVIEW.md`](../../05_guides/UNSAFE_FIELDS_PREVIEW.md) | Markdown | 281 |
 | VerusBelt | [`docs/04_research/VERUSBELT_PLDI_2026.md`](../../04_research/VERUSBELT_PLDI_2026.md) | Markdown | 229 |

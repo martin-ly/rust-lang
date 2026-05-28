@@ -52,7 +52,7 @@
 | **我想看格式统一与 Rust 1.93 对齐计划** | FORMAT_AND_CONTENT_ALIGNMENT_PLAN (归档) | 10min |
 | **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) | 10min |
 | **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 5min |
-| **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](./RESEARCH_NOTES_ORGANIZATION.md) | 5min |
+| **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) | 5min |
 | **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) | 5min |
 | **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md) | 2min |
 | **我想贡献/维护** | [CONTRIBUTING](./CONTRIBUTING.md) → [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) | 5min |

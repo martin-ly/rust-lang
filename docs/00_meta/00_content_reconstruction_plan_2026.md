@@ -258,8 +258,8 @@ graph TD
 
 将 safety_critical 现有的"矩阵+决策树+思维导图"方法提炼为 **《知识表征标准规范》**，供 Track A 复用：
 
-- `safety_critical/02_matrices/` → 提炼为 `docs/00_meta/TEMPLATE_MATRIX.md`
-- `safety_critical/03_decision_trees/` → 提炼为 `docs/00_meta/TEMPLATE_DECISION_TREE.md`
+- `safety_critical/02_matrices/` → 提炼为 `docs/00_meta/00_template_matrix.md`
+- `safety_critical/03_decision_trees/` → 提炼为 `docs/00_meta/00_template_decision_tree.md`
 - `safety_critical/01_mind_maps/` → 提炼为 `docs/00_meta/TEMPLATE_MIND_MAP.md`
 
 #### Phase B2: 跨轨关联（第 3-4 周）
@@ -270,7 +270,7 @@ graph TD
 
 - `SAFETY_CRITICAL_CODING_GUIDELINES.md` → 链接到 `unsafe_rust.md` 的不变量契约
 - `FORMAL_VERIFICATION_PRACTICAL_GUIDE.md` → 链接到 `tree_borrows.md` 的内存模型
-- `TOOLCHAIN_SETUP_GUIDE.md` → 链接到 `async_await.md` 的运行时选择（如安全关键异步）
+- `10_toolchain_setup_guide.md` → 链接到 `async_await.md` 的运行时选择（如安全关键异步）
 
 #### Phase B3: 标准对齐深化（第 5-8 周）
 

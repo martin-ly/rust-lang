@@ -23,7 +23,7 @@
 
 **实操入口**：执行模型 + 设计模式可运行示例见 [03_execution_models 可运行示例](03_execution_models/README.md#可运行示例层次推进)；语义边界 Safe 决策 3 例见 03_semantic_boundary_map 场景 7–9。
 
-**全面论证推进**：设计模式、分布式模式、工作流模式论证深化见 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md)。
+**全面论证推进**：设计模式、分布式模式、工作流模式论证深化见 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./10_comprehensive_argumentation_gap_analysis_and_plan.md)。
 
 ---
 

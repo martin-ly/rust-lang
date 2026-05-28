@@ -216,7 +216,7 @@ impl OrderService {
 
 **选型流程**：需求 → 选 23/43 模式（如 Repository、Service Layer、Event Sourcing）→ 选执行模型（如分布式）→ 选编排（状态机 / Saga 补偿 / Temporal）。
 
-**引用**：[03_execution_models](../03_execution_models/README.md)、[04_expressiveness_boundary](./04_expressiveness_boundary.md) 工作流引擎表达力、[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](../COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md)。
+**引用**：[03_execution_models](../03_execution_models/README.md)、[04_expressiveness_boundary](./04_expressiveness_boundary.md) 工作流引擎表达力、[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](../10_comprehensive_argumentation_gap_analysis_and_plan.md)。
 
 ---
 

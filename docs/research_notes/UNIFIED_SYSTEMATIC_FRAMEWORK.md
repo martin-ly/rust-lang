@@ -504,7 +504,7 @@ Pin ──→ 自引用安全
 
 | 特性族 | 矩阵 | 决策树 | 完整链 |
 | :--- | :--- | :--- | :--- |
-| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](./RUST_193_FEATURE_MATRIX.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
+| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](./10_rust_193_feature_matrix.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
 | **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) 所有权/借用 |
 | **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/construction_capability.md) |
 | **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) Trait/泛型 |
@@ -564,7 +564,7 @@ Pin ──→ 自引用安全
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
-| [FEATURE_TEMPLATE](./FEATURE_TEMPLATE.md) | 79 项特性精简模板 |
+| [FEATURE_TEMPLATE](./10_feature_template.md) | 79 项特性精简模板 |
 | [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md) | 版本增量更新流程 |
 
 ---

@@ -3,6 +3,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [软件设计理论体系：主索引](#软件设计理论体系主索引)
@@ -32,6 +33,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -83,6 +85,7 @@
 ---
 
 ## 二、边界化索引
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 三维边界
@@ -106,6 +109,7 @@
 ---
 
 ## 三、扩展化路线
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 设计模式扩展
@@ -135,6 +139,7 @@
 ---
 
 ## 四、层次推进学习路径
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 阶段 | 阅读顺序 | 内容深度 | 预计时间 |
@@ -148,6 +153,7 @@
 ---
 
 ## 五、层次推进实质内容深化路线
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 层次 | 深化入口 | 新增/充实内容 |
@@ -160,6 +166,7 @@
 ---
 
 ## 六、内容概览
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本体系各文档已充实为实质内容：
@@ -176,6 +183,7 @@
 ---
 
 ## 七、学习与选型
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 阶段 | 内容 |
@@ -190,6 +198,7 @@
 ---
 
 ## 八、文档快速导航
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 需求 | 入口文档 |
@@ -201,11 +210,12 @@
 | 边界体系总览 | [05_boundary_system/README](05_boundary_system/README.md) |
 | **Rust 惯用模式** | [06_rust_idioms](./06_rust_idioms.md) — RAII、Newtype、类型状态、与设计模式衔接 |
 | **反模式与边界** | [07_anti_patterns](./07_anti_patterns.md) — 13 反例、反模式分类、规避策略 |
-| **全面论证缺口与推进计划** | [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) — 设计模式、分布式、工作流论证深化 |
+| **全面论证缺口与推进计划** | [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./10_comprehensive_argumentation_gap_analysis_and_plan.md) — 设计模式、分布式、工作流论证深化 |
 
 ---
 
 ## 九、扩展阅读
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Refactoring.Guru](https://refactoring.guru/design-patterns)：各模式结构图
@@ -215,6 +225,7 @@
 ---
 
 ## 十、推进阶段
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 阶段 | 内容 | 状态 |
@@ -224,11 +235,12 @@
 | 第三阶段 | 工作流与执行模型 | 100% 完成（23/43、五执行模型）；**2026-02 增强**：常见陷阱、形式化衔接、模式选取完整示例 |
 | 第四阶段 | 组合工程与证明 | 100% 完成（CE-T1–T3） |
 | 第五阶段 | Rust Idioms 与反模式 | 100% 完成（06、07）；**2026-02 增强**：完整代码示例、规避示例 |
-| **全面论证推进** | 设计模式、分布式模式、工作流模式 | ✅ 100% 完成 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) |
+| **全面论证推进** | 设计模式、分布式模式、工作流模式 | ✅ 100% 完成 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./10_comprehensive_argumentation_gap_analysis_and_plan.md) |
 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -281,6 +293,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [software_design_theory 目录](./README.md)
@@ -364,4 +377,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

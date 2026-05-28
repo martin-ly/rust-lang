@@ -280,7 +280,7 @@ fn api_stabilization_example() {
 | :--- | :--- | :--- |
 | MAINTENANCE_GUIDE | 维护计划、质量检查 | [MAINTENANCE_GUIDE.md](./MAINTENANCE_GUIDE.md) |
 | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | 特性分析主文档 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
-| FEATURE_TEMPLATE | 新特性精简模板 | [FEATURE_TEMPLATE.md](./FEATURE_TEMPLATE.md) |
+| FEATURE_TEMPLATE | 新特性精简模板 | [10_feature_template.md](./10_feature_template.md) |
 
 ### 形式化方法文档
 >

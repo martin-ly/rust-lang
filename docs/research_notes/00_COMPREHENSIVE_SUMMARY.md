@@ -189,7 +189,7 @@
 | **层次化/矩阵/思维表征** | ✅ 阶段 1–4 全部完成：层次化规范、HIERARCHICAL_MAPPING、23 模式/执行模型/**六篇并表**、矩阵双向链接规范、思维表征-文档块、选型决策树交叉链接、文档依赖与维护机制；见 RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN |
 | **格式统一与 Rust 1.93 对齐** | ✅ 100%：元信息全库补全、92 项→落点文档、[RUST_193_COUNTEREXAMPLES_INDEX](./RUST_193_COUNTEREXAMPLES_INDEX.md)、权威来源约定、CONTRIBUTING/MAINTENANCE_GUIDE 门禁与季度复核；见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN |
 | **docs 全结构梳理** | ✅ 100%：DOCS_STRUCTURE_OVERVIEW 按本格式 100% 覆盖 docs；各子目录 README 元信息、双向链接、验证清单完整 |
-| **设计模式/分布式/工作流全面论证** | ✅ 100%：[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](software_design_theory/COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) D1–D3 全部交付；CE-PAT1、EB-DET1、反例映射、模式 DAG、分布式模式形式化、工作流形式化 |
+| **设计模式/分布式/工作流全面论证** | ✅ 100%：[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](software_design_theory/10_comprehensive_argumentation_gap_analysis_and_plan.md) D1–D3 全部交付；CE-PAT1、EB-DET1、反例映射、模式 DAG、分布式模式形式化、工作流形式化 |
 | L3 机器证明 | 📦 已归档（[archive/deprecated/](../archive/deprecated/README.md)）；聚焦 L2 数学风格 + Rust 示例 |
 | Aeneas/coq-of-rust 对接 | 📦 已归档；保留为国际对标参考 |
 
