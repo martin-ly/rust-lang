@@ -1,5 +1,7 @@
 # 知识体系全局层次映射总表
 
+> **Bloom 层级**: L4-L5 (分析/评价)
+
 > **定位**: 三轨道（concept/ / knowledge/ / docs/）核心文件的层次关系、定理链、跨层映射的单一事实来源
 > **[来源: Wikipedia - Knowledge Organization]** · **[来源: Wikipedia - Taxonomy]** · **[来源: ACM - Knowledge Representation]** · **[来源: IEEE - Information Architecture]** · **[来源: Bloom Taxonomy 2001]**
 > **覆盖**: 30 个核心示范文件 + L0-L7 全局架构
