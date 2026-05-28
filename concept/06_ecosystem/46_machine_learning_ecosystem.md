@@ -816,3 +816,7 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 - [网络协议](./38_network_protocols.md) — gRPC、HTTP/2、序列化
 - [云原生](./24_cloud_native.md) — 容器化部署、微服务
 - [WebAssembly](./11_webassembly.md) — WASM 目标、浏览器内推理
+
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

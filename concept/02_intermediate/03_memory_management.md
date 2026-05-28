@@ -121,6 +121,7 @@
     - [10.4 边界测试：Box::leak 后的可变借用与原始 Box 的关系（编译错误）](#104-边界测试boxleak-后的可变借用与原始-box-的关系编译错误)
     - [10.3 边界测试：返回局部变量的悬垂引用](#103-边界测试返回局部变量的悬垂引用)
   - [参考来源](#参考来源)
+  - [`ManuallyDrop` 模式匹配（Rust 1.96）](#manuallydrop-模式匹配rust-196)
 
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [来源: [The Rust Programming Language — Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
@@ -1854,3 +1855,18 @@ fn main() {}
 > [来源: [mimalloc](https://github.com/microsoft/mimalloc)]
 
 > [来源: [Rust Allocator Working Group](https://github.com/rust-lang/wg-allocators)]
+
+## `ManuallyDrop` 模式匹配（Rust 1.96）
+
+Rust 1.96 稳定了 `ManuallyDrop` 的模式匹配支持，允许在解构时直接访问内部值而不触发 `Drop`：
+
+```rust
+use std::mem::ManuallyDrop;
+
+let md = ManuallyDrop::new(vec![1, 2, 3]);
+// Rust 1.96+: 可直接模式匹配解构
+let ManuallyDrop { value } = md;
+// 注意：value 不会自动 drop，需手动管理
+```
+
+> **语义**: `ManuallyDrop` 的核心语义是**抑制自动析构**。1.96 之前只能通过 `ManuallyDrop::into_inner()` 或 `ManuallyDrop::deref()` 访问内部值；1.96 引入的模式匹配支持使代码更简洁，尤其在 unsafe 代码和 FFI 边界处。[来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)]

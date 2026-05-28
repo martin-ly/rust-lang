@@ -1322,3 +1322,7 @@ fn fixed() {
 > **来源**: [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html) · [Ferrocene](https://ferrocene.dev/) · [Safety-Critical Rust Consortium](https://rustfoundation.org/) · 可信度: ✅
 
 > **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Blog — Project Goals Update 2026-04](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Cranelift Documentation](https://cranelift.dev/) · [Rust Internals Forum](https://internals.rust-lang.org/) · [Rust Blog — Safety-Critical Rust 2026-01-14](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical.html)
+
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

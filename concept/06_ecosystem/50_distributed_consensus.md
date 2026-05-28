@@ -700,3 +700,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 - [并发编程](../03_advanced/01_concurrency.md) — 原子操作、内存顺序、锁
 - [性能优化](./15_performance_optimization.md) — 批处理、流水线、零拷贝
 - [安全与密码学](./43_security_cryptography.md) — 数字签名、阈值密码学
+
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

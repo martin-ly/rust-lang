@@ -820,3 +820,7 @@ fn good_csv_parse() -> PolarsResult<DataFrame> {
 - [数据库系统](./37_database_systems.md) — 存储引擎、事务、索引
 - [网络协议](./38_network_protocols.md) — HTTP/2、gRPC、对象存储协议
 - [安全与密码学](./43_security_cryptography.md) — 数据加密、合规性
+
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

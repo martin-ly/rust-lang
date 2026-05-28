@@ -483,3 +483,7 @@ fn robust_csv_read() -> Result<DataFrame, PolarsError> {
 - [并发编程](../03_advanced/01_concurrency.md) — Send/Sync、Rayon 并行
 - [类型系统](../01_foundation/04_type_system.md) — 泛型、Trait、零成本抽象
 - [量子计算](./51_quantum_computing_rust.md) — 量子模拟、量子机器学习
+
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

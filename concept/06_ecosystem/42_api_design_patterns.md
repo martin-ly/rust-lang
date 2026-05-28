@@ -1176,3 +1176,7 @@ struct UserV2 {
 - [Trait](../02_intermediate/01_traits.md) — 接口设计、类型抽象
 - [错误处理](../01_foundation/10_error_handling_basics.md) — Result、? 运算符
 - [云原生](./24_cloud_native.md) — Kubernetes、容器化、可观测性
+
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

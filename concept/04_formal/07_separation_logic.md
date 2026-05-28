@@ -13,3 +13,7 @@
 - [公理语义](./20_axiomatic_semantics.md) — Hoare 逻辑、 weakest precondition
 - [类型语义](./21_type_semantics.md) — Progress & Preservation
 - [形式化验证工具](../06_ecosystem/47_formal_verification_tools.md) — Kani、Prusti、Creusot
+
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

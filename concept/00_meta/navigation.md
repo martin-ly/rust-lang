@@ -222,3 +222,6 @@ L5: paradigm_matrix（Rust 在设计空间中的位置）
 > **文档版本**: 1.0
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 与知识体系 v2.0 同步
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

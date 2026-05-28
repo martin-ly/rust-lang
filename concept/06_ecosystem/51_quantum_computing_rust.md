@@ -750,3 +750,7 @@ fn main() {
 - [分布式系统](./18_distributed_systems.md) — 分布式模拟、MPI、集群计算
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 密码学实现的形式化证明、常量时间验证
 - [WebAssembly](./11_webassembly.md) — 浏览器内量子模拟、跨平台部署
+
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

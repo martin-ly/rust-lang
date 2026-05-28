@@ -779,3 +779,7 @@ fn weak_hash_password(password: &str) -> String {
 - [内存管理](../02_intermediate/03_memory_management.md) — 密钥材料的内存管理
 - [并发编程](../03_advanced/01_concurrency.md) — 密码学操作的线程安全
 - [形式化验证](../04_formal/05_verification_toolchain.md) — 密码学实现的形式化证明
+
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

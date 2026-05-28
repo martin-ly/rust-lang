@@ -224,3 +224,6 @@ mindmap
 > **文档版本**: 1.1
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 全局思维导图 v1.1 — 新增相关概念链接
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

@@ -2209,3 +2209,18 @@ fn main() {}
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## `expr` → `cfg` 迁移（Rust 1.96）
+
+Rust 1.96 完成了 `expr` 元变量在 `cfg` 属性中的迁移支持，使宏可以更安全地生成条件编译代码：
+
+```rust
+macro_rules! conditional_feature {
+    ($feature:expr) => {
+        #[cfg(feature = $feature)]  // Rust 1.96+: expr 可直接用于 cfg
+        fn enabled() {}
+    };
+}
+```
+
+> **语义**: 此前 `cfg` 属性中的元变量仅限 `literal` 和 `path` 片段类型。1.96 扩展了 `expr` 的支持范围，使宏生成条件编译代码时更灵活，减少字符串拼接的 unsafe 模式。这是宏系统向更完整表达式支持演进的一步。[来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]

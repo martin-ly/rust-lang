@@ -124,6 +124,7 @@
     - [12.5 边界测试：生命周期省略规则失效（编译错误）](#125-边界测试生命周期省略规则失效编译错误)
     - [10.1 边界测试：类型不匹配的基础错误](#101-边界测试类型不匹配的基础错误)
   - [参考来源](#参考来源)
+  - [Never 类型元组强制（Rust 1.96）](#never-类型元组强制rust-196)
 
 ## 一、权威定义（Definition）
 
@@ -2380,3 +2381,16 @@ fn main() {
 > [来源: [RFC 1214 — WF](https://rust-lang.github.io/rfcs/1214-projections-lifetimes-and-wf.html)]
 
 > [来源: [The Rust Programming Language, Ch. 3.2](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
+
+## Never 类型元组强制（Rust 1.96）
+
+Rust 1.96 稳定了 never 类型 (`!`) 的元组元素强制转换（tuple coercion），允许空类型自动转换为任意类型的元组元素：
+
+```rust
+// Rust 1.96+: never 类型可强制为任意类型的元组元素
+fn diverge() -> ! { panic!("never returns") }
+
+let pair: (i32, String) = (42, diverge());  // ! 强制为 String
+```
+
+> **语义**: 这是 never 类型子类型化的自然延伸。由于 `!` 是任意类型的子类型，`(!, T)` 可以强制为 `(U, T)`。此特性填补了类型系统一致性的一块拼图，尤其在宏生成代码和泛型抽象中减少显式转换。[来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · [来源: [RFC 1216 — `!` type](https://rust-lang.github.io/rfcs/1216-bang-type.html)]

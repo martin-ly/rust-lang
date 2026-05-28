@@ -611,3 +611,6 @@
 | 一致性错误 | 0 | 0 |
 
 **状态**: ✅ Phase 19 全面完成，180 文件 / 344 代码块 / 25.3% 来源率，全部门禁通过
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
