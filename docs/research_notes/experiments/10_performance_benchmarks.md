@@ -3,6 +3,7 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [性能基准测试研究](#性能基准测试研究)
@@ -71,6 +72,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-11-15
 > **最后更新**: 2026-02-28
@@ -157,6 +159,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -1425,6 +1428,7 @@ Rust 1.93.0 允许在 `asm!` 块中对单个语句应用 `cfg` 属性：
 - [x] 识别可以从状态机优化中受益的代码模式（已文档化于 Rust 1.93 更新与结果分析）
 
 ### musl 1.2.5 更新
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
@@ -1448,6 +1452,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 > **[来源: Rust Official Docs]**
 
 ### 实验与定理对应关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 实验类型 | 验证的形式化定理 | 验证目标 |
@@ -1457,6 +1462,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 | 序列化 | type_system 保持性 | 类型正确、无 UB |
 
 ### 相关研究笔记
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文档 | 链接 | 内容 |
@@ -1467,6 +1473,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 | 宏展开性能 | [10_macro_expansion_performance.md](./10_macro_expansion_performance.md) | 宏展开性能分析 |
 
 ### 形式化证明
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 链接 | 定理 |
@@ -1475,6 +1482,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 | 性能实验形式化 | [../experiments/README.md](../experiments/README.md) | 实验形式化论证 (EX-T1, EX-T2) |
 
 ### 理论体系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文档 | 链接 | 内容 |
@@ -1499,6 +1507,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。

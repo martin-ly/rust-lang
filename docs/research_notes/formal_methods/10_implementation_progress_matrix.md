@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实现进度矩阵](#实现进度矩阵)
@@ -41,6 +42,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -87,6 +89,7 @@
 ---
 
 ## 详细进度追踪
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Phase 0: 审计与清理 ✅
@@ -133,6 +136,7 @@
 | 证明树补充 | ✅ | 100% (10/10) |
 
 ### Phase 4: 教程与实用内容 ✅
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 任务 | 状态 | 完成度 |
@@ -141,6 +145,7 @@
 | 速查表扩展 | ✅ | 100% (5/5) |
 
 ### Phase 5: Coq骨架与L3证明 🔄
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 任务 | 状态 | 完成度 |
@@ -154,9 +159,11 @@
 ---
 
 ## 质量指标
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 文档大小统计
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 类别 | 平均大小 | 目标 | 状态 |
@@ -168,6 +175,7 @@
 | 教程 | 8KB | >10KB | ⚠️ |
 
 ### 内容完整性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 检查项 | 覆盖率 | 状态 |
@@ -182,9 +190,11 @@
 ---
 
 ## 剩余工作清单
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 高优先级
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | ID | 任务 | 工时 | 依赖 |
@@ -194,6 +204,7 @@
 | R3 | 扩展2个教程 | 8h | 无 |
 
 ### 中优先级
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | ID | 任务 | 工时 | 依赖 |
@@ -203,6 +214,7 @@
 | M3 | 最终文档审核 | 8h | 全部 |
 
 ### 低优先级
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | ID | 任务 | 工时 | 依赖 |
@@ -213,6 +225,7 @@
 ---
 
 ## 里程碑
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -229,6 +242,7 @@
 ---
 
 ## 风险评估
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 风险 | 概率 | 影响 | 缓解措施 |
@@ -246,12 +260,14 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -297,6 +313,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [formal_methods 目录](./README.md)
@@ -372,4 +389,3 @@
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

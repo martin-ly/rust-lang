@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [formal\_methods 100% 完成计划](#formal_methods-100-完成计划)
@@ -31,6 +32,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 未完成任务清单
 >
@@ -73,6 +75,7 @@
 ---
 
 ## 执行计划
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Phase 1: 证明树可视化 (12小时)
@@ -99,6 +102,7 @@
 ---
 
 ## 立即执行任务
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 现在开始执行Phase 1 - 证明树可视化！
@@ -106,6 +110,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -158,6 +163,7 @@
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](./README.md)
@@ -205,4 +211,3 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
