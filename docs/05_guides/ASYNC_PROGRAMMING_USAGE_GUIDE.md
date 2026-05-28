@@ -1745,7 +1745,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 > **[来源: Rust Official Docs]**
 
 - [完整文档](../../crates/c06_async/README.md)
-- [异步编程指南](../../crates/c06_async/docs/tier_02_guides/01_异步编程快速入门.md)
+- [异步编程指南](../../crates/c06_async/docs/tier_02_guides/README.md)
 - [Reactor 模式](../../crates/c06_async/docs/tier_04_advanced/01_异步并发模式.md)
 - [Actor 模式](../../crates/c06_async/docs/tier_02_guides/04_异步设计模式实践.md)
 - [异步状态机形式化](../research_notes/formal_methods/async_state_machine.md) - Future/Poll 状态机形式化定义与证明
