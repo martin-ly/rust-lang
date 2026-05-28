@@ -563,7 +563,7 @@
 | P18-T5 | 新增 L6 生态扩展 | `06_ecosystem/21_game_development.md` ✅, `22_embedded_systems.md` ✅, `23_database_access.md` ✅, `24_cloud_native.md` ✅, `25_cli_development.md` ✅, `26_game_development.md` ✅, `27_web_frameworks.md` ✅ | ✅ |
 | P18-T6 | 新增 L7 前沿跟踪 | `07_future/27_compile_time_execution.md` ✅, `23_rust_edition_guide.md` ✅ | 🔄 |
 | P18-T7 | 历史文件命名规范化 | `borrowsanitizer_preview.md`→`20_`, `open_enums_preview.md`→`25_`, `19_specialization`→`26_` ✅ | ✅ |
-| P18-T8 | docs/ 轨道问题修复 | LINK_CHECK_REPORT.md 链接补足 ✅ | ✅ |
+| P18-T8 | docs/ 轨道问题修复 | 02_link_check_report.md 链接补足 ✅ | ✅ |
 | P18-T9 | 现有文件代码示例深化 | 20+ 文件新增可编译代码块 | 🔄 |
 | P18-T10 | 跨文件链接密度提升 | 平均每文件 ≥5 跨文件链接 | 🔄 |
 | P18-T11 | 死链接持续清零 | 全量扫描 1400+ 文件，0 死链接 | ✅ |
