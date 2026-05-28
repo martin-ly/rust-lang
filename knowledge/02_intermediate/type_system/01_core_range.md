@@ -1,11 +1,11 @@
-# `core::range` 模块与 `RangeInclusive`（Rust 1.95.0）
+# `core::range` 模块与 `RangeInclusive`（Rust 1.96.0）
 
 > **Bloom 层级**: 理解
 
-> **稳定版本**: Rust 1.95.0 (2026-04-16)
+> **稳定版本**: Rust 1.96.0 (2026-04-16)
 > **Edition**: 2024
 > **RFC**: [RFC 3550](https://rust-lang.github.io/rfcs/3550-rangeful.html)
-> **权威来源**: [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/), [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-rangeful.html), [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html)
+> **权威来源**: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-rangeful.html), [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3550 设计决策来源标注、Range 类型形式化语义引用 [来源: Authority Source Sprint Batch 8]
 
@@ -13,7 +13,7 @@
 
 ## 一、概念定义
 
-Rust 1.95.0 引入了 `core::range` 模块 [来源: Rust 1.95 Release Notes / 2026; RFC 3550 — Rangeful / 2025; 核心设计决策: 新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型，为未来统一所有 range 类型提供命名空间]，新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型。这是对 `std::ops::RangeInclusive` 的模块级补充，旨在为未来统一所有 range 类型提供命名空间。
+Rust 1.96.0 引入了 `core::range` 模块 [来源: Rust 1.96 Release Notes / 2026; RFC 3550 — Rangeful / 2025; 核心设计决策: 新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型，为未来统一所有 range 类型提供命名空间]，新增 `RangeInclusive` 和 `RangeInclusiveIter` 类型。这是对 `std::ops::RangeInclusive` 的模块级补充，旨在为未来统一所有 range 类型提供命名空间。
 
 ### 关键区分
 >
@@ -23,7 +23,7 @@ Rust 1.95.0 引入了 `core::range` 模块 [来源: Rust 1.95 Release Notes / 20
 |------|--------|---------|------|
 | `std::ops::Range` | `a..b` | 半开 `[a, b)` | `core::ops` |
 | `std::ops::RangeInclusive` | `a..=b` | 闭区间 `[a, b]` | `core::ops` |
-| **`core::range::RangeInclusive`** (1.95+) | `RangeInclusive::new(a, b)` | 闭区间 `[a, b]` | `core::range` |
+| **`core::range::RangeInclusive`** (1.96+) | `RangeInclusive::new(a, b)` | 闭区间 `[a, b]` | `core::range` |
 
 > ⚠️ **注意**: `core::range::RangeInclusive` 目前**不是** `std::ops::RangeInclusive` 的替代，两者共存。
 
@@ -145,7 +145,7 @@ assert_eq!(r.into_iter().count(), 6);  // 不是 5！
 use std::ops::RangeInclusive;
 let old: RangeInclusive<i32> = 1..=10;
 
-// 新方式（1.95+）
+// 新方式（1.96+）
 use core::range::RangeInclusive;
 let new = RangeInclusive::new(1, 10);
 
@@ -204,7 +204,7 @@ std::ops::Range                     std::ops::RangeInclusive
   迭代: a, a+1, ..., b-1               迭代: a, a+1, ..., b
   空区间: a >= b                       空区间: a > b（但 a..=a 含一个元素）
 
-core::range::RangeInclusive (1.95+):
+core::range::RangeInclusive (1.96+):
   与 std::ops::RangeInclusive 语义相同
   位于 core::range 模块，为未来的 range 统一提供命名空间
 ```
@@ -217,7 +217,7 @@ core::range::RangeInclusive (1.95+):
 
 | 来源 | 类型 | 说明 |
 |------|------|------|
-| [Rust 1.95.0 Release](https://releases.rs/docs/1.95.0/) | 官方 | `core::range` 模块稳定化 |
+| [Rust 1.96.0 Release](https://releases.rs/docs/1.96.0/) | 官方 | `core::range` 模块稳定化 |
 | [RFC 3550](https://rust-lang.github.io/rfcs/3550-rangeful.html) | 官方 | Range 类型系统改进提案 |
 
 ---
@@ -255,7 +255,7 @@ core::range::RangeInclusive (1.95+):
 
 ## 📚 权威来源索引
 
-- [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/) [来源: Rust Release Team / 2026]
+- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) [来源: Rust Release Team / 2026]
 - [RFC 3550: Rangeful](https://rust-lang.github.io/rfcs/3550-rangeful.html) [来源: Rust Core Team / 2025]
 - [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) [来源: Rust Standard Library / 2025]
 

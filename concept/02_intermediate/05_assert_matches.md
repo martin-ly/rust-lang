@@ -9,7 +9,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) · [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html) · [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) · [std::matches](https://doc.rust-lang.org/std/macro.matches.html)
+> **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Rust 1.77 Release Notes](https://releases.rs/docs/1.77.0/) · [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html) · [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) · [std::matches](https://doc.rust-lang.org/std/macro.matches.html)
 
 ## 📑 目录
 
@@ -85,10 +85,10 @@ assert!(matches!(x, Some(n) if n > 100)); // ❌ 失败
 ### 1.2 `assert_matches!`：从判断到断言
 >
 
-Rust 1.96 稳定化 `assert_matches!`，将 `matches!` 的布尔结果**提升为断言契约**：
+Rust 1.77 稳定化 `assert_matches!`，将 `matches!` 的布尔结果**提升为断言契约**：
 
 ```ignore
-// 需要 Rust 1.96+
+// 需要 Rust 1.77+
 use std::assert_matches::assert_matches;
 
 let result: Result<i32, &str> = Ok(42);
@@ -110,12 +110,12 @@ assert_matches!(result, Ok(n) => {
 **与 `assert!(matches!(...))` 的对比**:
 
 ```ignore
-// 方式 A: assert! + matches!（Rust < 1.96）
+// 方式 A: assert! + matches!（Rust < 1.77）
 assert!(matches!(result, Ok(n) if n > 10));
 // 失败时信息: "assertion failed: matches!(result, Ok(n) if n > 10)"
 // ❌ 无法使用 n 的绑定
 
-// 方式 B: assert_matches!（Rust 1.96+）
+// 方式 B: assert_matches!（Rust 1.77+）
 assert_matches!(result, Ok(n) if n > 10 => {
     println!("value = {}", n); // ✅ n 可用
 });
@@ -359,7 +359,7 @@ let x = 42;
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) | ✅ 一级 | 稳定化公告 |
+| [Rust 1.77 Release Notes](https://releases.rs/docs/1.77.0/) | ✅ 一级 | 稳定化公告 |
 | [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html) | ✅ 一级 | API 文档 |
 | [std::matches](https://doc.rust-lang.org/std/macro.matches.html) | ✅ 一级 | `matches!` 宏文档 |
 | [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) | ✅ 一级 | 设计动机与语义 |
@@ -402,15 +402,15 @@ fn main() {
 - [Type System](../01_foundation/04_type_system.md) — 模式匹配的形式化根基
 - [Error Handling](./04_error_handling.md) — Result/Option 测试断言实践
 - [Macros](../03_advanced/04_macros.md) — 宏系统的语法糖机制
-- [Version Tracking](../07_future/05_rust_version_tracking.md) — Rust 1.96 特性演进
+- [Version Tracking](../07_future/05_rust_version_tracking.md) — Rust 1.77 特性演进
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0 (Edition 2024)
+> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.77.0 (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**对应 Rust 版本**: 1.77.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 
