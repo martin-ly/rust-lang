@@ -40,7 +40,7 @@ criterion = { workspace = true }
 candle-core = { workspace = true }
 candle-nn = { workspace = true }
 egui = { workspace = true }
-eframe = { version = "0.34.2", default-features = false, features = ["default"] }
+eframe = { version = "0.34.3", default-features = false, features = ["default"] }
 
 [lib]
 name = "c08_algorithms"

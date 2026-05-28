@@ -172,8 +172,8 @@ codegen-units = 1024
 panic = "abort"
 
 # 工作区级别的依赖版本统一
-# 2026-04-24: Rust 1.96.0/1.97.0-nightly 同步更新
-# rust-version: 1.96.0
+# 2026-04-24: Rust 1.95.0/1.97.0-nightly 同步更新
+# rust-version: 1.95.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 本地 crate
@@ -182,16 +182,15 @@ common = { path = "crates/common", default-features = false }
 # 2025-12-11: 网络和 HTTP 相关最新稳定版本
 # reqwest: 高级HTTP客户端库，支持异步请求和JSON序列化
 # 注意: reqwest 0.12.x 使用 "rustls-tls" 特性，0.13.x 使用 "rustls" 特性
-reqwest = { version = "0.13.3", features = ["json", "rustls"] }
+reqwest = { version = "0.13.4", features = ["json", "rustls"] }
 # hyper: 底层HTTP库，提供高性能的HTTP/1.1和HTTP/2支持
-hyper = { version = "1.9.0", features = ["full"] }
+hyper = { version = "1.10.0", features = ["full"] }
 # hyper-util: hyper的实用工具库，提供连接池和服务器功能
 hyper-util = "0.1.20"
 # hyper-rustls: hyper与rustls的集成，提供安全的TLS连接
 hyper-rustls = "0.28.1"
 # libp2p: P2P网络协议栈
-# 2026-05-14: 保持 0.54.1，升级至 0.56+ 需同步升级 hickory-resolver 到 0.26，
-#       c10_networks DNS 模块需大量代码适配（ResolverConfig 预设移除、Lookup API 变更等）
+# 2026-05-28: 已升级至 0.56.0，hickory-resolver 同步升级至 0.26.1，c10_networks DNS 模块已适配
 libp2p = { version = "0.56.0", features = ["tokio", "tcp", "noise", "yamux", "gossipsub", "kad", "identify"] }
 # hyper-tls: hyper与native-tls的集成，提供TLS支持
 hyper-tls = "0.6.0"
@@ -201,7 +200,7 @@ hyper-timeout = "0.6.1"
 h2 = "0.4.14"
 # http: HTTP类型和特征的Rust实现
 # 2025-12-11: 更新至 1.4.0 (重大版本更新)
-http = "1.4.0"
+http = "1.4.1"
 
 # 2025-12-11: Web 框架最新稳定版本
 # axum: 现代Web框架，专注于人体工程学和模块化设计
@@ -346,25 +345,25 @@ tracing = "0.1.44"
 # tracing-subscriber: tracing的订阅者实现，支持多种输出格式
 tracing-subscriber = { version = "0.3.23", features = ["env-filter", "json"] }
 # log: 标准日志库，提供简单的日志记录接口
-log = "0.4.29"
+log = "0.4.30"
 # prometheus: Prometheus指标收集库
 prometheus = "0.14.0"
 # tracing-opentelemetry: tracing与OpenTelemetry的集成 - 2025年10月最新版本
 tracing-opentelemetry = "0.33.0"
 # opentelemetry: OpenTelemetry的Rust实现
-# 2026-05-14: 保持 0.31.0，tracing-opentelemetry 0.32.1 仅支持 opentelemetry ^0.31.0
+# 2026-05-28: 0.32.0 stable，与 opentelemetry_sdk 0.32.x 配套
 opentelemetry = "0.32.0"
 # opentelemetry_sdk: OpenTelemetry SDK
-# 2026-05-14: 保持 0.31.0，与 opentelemetry 0.31.x 配套
-opentelemetry_sdk = { version = "0.32.0", features = ["rt-tokio"] }
+# 2026-05-28: 0.32.0 -> 0.32.1 (cargo update)
+opentelemetry_sdk = { version = "0.32.1", features = ["rt-tokio"] }
 # opentelemetry-otlp: OpenTelemetry OTLP导出器
-# 2026-05-14: 保持 0.31.1，与 opentelemetry 0.31.x 配套
+# 2026-05-28: 0.32.0 stable，与 opentelemetry 0.32.x 配套
 opentelemetry-otlp = { version = "0.32.0", features = ["http-json"] }
 # opentelemetry-stdout: OpenTelemetry标准输出导出器
-# 2026-05-14: 保持 0.31.0，与 opentelemetry 0.31.x 配套
+# 2026-05-28: 0.32.0 stable，与 opentelemetry 0.32.x 配套
 opentelemetry-stdout = "0.32.0"
 # opentelemetry-proto: OpenTelemetry协议缓冲区定义
-# 2026-05-14: 保持 0.31.0，与 opentelemetry 0.31.x 配套
+# 2026-05-28: 0.32.0 stable，与 opentelemetry 0.32.x 配套
 opentelemetry-proto = { version = "0.32.0", features = ["gen-tonic"] }
 
 # 2025-09-27: 指标最新稳定版本
@@ -523,7 +522,7 @@ lru = "0.18.0"
 # Web 和 GUI 框架 - 2025年12月11日最新稳定版本
 # tauri 已移除，使用 egui/iced 替代 (解决 GTK3 安全漏洞)
 # egui: 易于使用的即时模式GUI，支持Web和原生平台 - 版本 0.28+ (字母索引)
-egui = "0.34.2"
+egui = "0.34.3"
 # iced: 受Elm启发的跨平台GUI库
 iced = "0.14.0"
 
@@ -654,19 +653,20 @@ const-hex = "=1.18.1"
 # - candle-core 0.9.2 -> 0.10.2: minor 版本升级，需评估 API 兼容性
 # - candle-nn 0.9.2 -> 0.10.2: 与 candle-core 同步升级
 # - clap 4.5.x -> 4.6.x: 已升级至 4.6.1，传递依赖兼容性问题已解决
-# - eframe 0.33.3 -> 0.34.2: minor 版本升级，需评估 egui 生态兼容性
-# - egui 0.33.3 -> 0.34.2: 与 eframe 同步升级，可能影响 wgpu 传递依赖版本
+# - eframe 0.33.3 -> 0.34.3: 已升级至 0.34.3 (cargo update 2026-05-28)
+# - egui 0.33.3 -> 0.34.3: 已升级至 0.34.3 (cargo update 2026-05-28)，wgpu 传递依赖兼容
 # - generic-array 0.14.7 -> 0.14.9: crypto-common 0.1.7 精确锁定 =0.14.7，无法升级
 # - hecs 0.10.5 -> 0.11.0: minor 版本升级，需评估 ECS API 兼容性
-# - hickory-resolver 0.25.2 -> 0.26.1: API 变更大，c10_networks DNS 模块需大量适配
+# - hickory-resolver 0.25.2 -> 0.26.1: 已升级至 0.26.1，c10_networks DNS 模块已适配
 # - io-uring 0.6.4 -> 0.7.12: tokio-uring 0.5.0 锁定 io-uring ^0.6.0，无法升级
-# - libp2p 0.54.1 -> 0.56.0: 需同步升级 hickory-resolver 到 0.26，c10_networks DNS 模块需适配
+# - libp2p 0.54.1 -> 0.56.0: 已升级至 0.56.0，hickory-resolver 已同步升级至 0.26.1
 # - matchit 0.8.4 -> 0.8.6: axum 0.8.9 精确锁定 =0.8.4，无法升级
-# - opentelemetry 0.31.0 -> 0.32.0: tracing-opentelemetry 0.32.1 仅支持 opentelemetry ^0.31.0
+# - opentelemetry 0.31.0 -> 0.32.0: 已升级，tracing-opentelemetry 0.33.0 支持 opentelemetry 0.32.x
+# - opentelemetry_sdk 0.32.0 -> 0.32.1: 已升级 (cargo update 2026-05-28)
 # - sea-orm 2.0.0-rc.18 -> 2.0.0 stable: 等待 SeaORM 2.0 正式版发布
 # - sea-query 1.0.0-rc.33 -> rc.34: 与 sea-orm 同步评估
 # - sea-query-sqlx 0.8.0-rc.15 -> rc.16: 与 sea-orm 同步评估
-# - tracing-opentelemetry 0.32.1 -> 0.33.0: 需同步升级 opentelemetry 到 0.32.0
+# - tracing-opentelemetry 0.32.1 -> 0.33.0: 已升级至 0.33.0
 # - unicode-width 0.2.0 -> 0.2.2: 已升级，传递依赖兼容性问题已解决
 # - burn / burn-ndarray: 保持禁用，等待版本兼容问题解决
 # - backoff 0.4.0 (c06_async): 已标记为 unmaintained (RUSTSEC-2025-0012)，建议替换为 backon 或 tokio-retry
