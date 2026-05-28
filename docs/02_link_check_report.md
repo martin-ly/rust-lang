@@ -25,11 +25,11 @@
 | 源文件 | 链接文本 | 链接路径 | 问题 |
 |:---|:---|:---|:---|
 | docs\00_master_index.md | 文档中心 - 主索引 | `#文档中心---主索引` | 同文件锚点不存在: #文档中心---主索引 |
-| docs\2026_INTERNATIONAL_AUTHORITATIVE_ALIGNMENT_REPORT.md | 1.1 Tree Borrows - PLDI 2025 Distinguished Paper | `#11-tree-borrows---pldi-2025-distinguished-paper` | 同文件锚点不存在: #11-tree-borrows---pldi-2025-distinguished-paper |
-| docs\2026_INTERNATIONAL_AUTHORITATIVE_ALIGNMENT_REPORT.md | 1.2 Miri: Practical UB Detection - POPL 2026 | `#12-miri-practical-ub-detection---popl-2026` | 同文件锚点不存在: #12-miri-practical-ub-detection---popl-2026 |
-| docs\2026_INTERNATIONAL_AUTHORITATIVE_ALIGNMENT_REPORT.md | 2.1 Rust 2024 Edition - 已稳定发布 | `#21-rust-2024-edition---已稳定发布` | 同文件锚点不存在: #21-rust-2024-edition---已稳定发布 |
-| docs\2026_INTERNATIONAL_AUTHORITATIVE_ALIGNMENT_REPORT.md | 2.2 Rust 1.95.0 - 即将发布 | `#22-rust-1950---即将发布` | 同文件锚点不存在: #22-rust-1950---即将发布 |
-| docs\2026_INTERNATIONAL_AUTHORITATIVE_ALIGNMENT_REPORT.md | 3.1 Linux内核 - Rust永久采用 | `#31-linux内核---rust永久采用` | 同文件锚点不存在: #31-linux内核---rust永久采用 |
+| docs\03_2026_international_authoritative_alignment_report.md | 1.1 Tree Borrows - PLDI 2025 Distinguished Paper | `#11-tree-borrows---pldi-2025-distinguished-paper` | 同文件锚点不存在: #11-tree-borrows---pldi-2025-distinguished-paper |
+| docs\03_2026_international_authoritative_alignment_report.md | 1.2 Miri: Practical UB Detection - POPL 2026 | `#12-miri-practical-ub-detection---popl-2026` | 同文件锚点不存在: #12-miri-practical-ub-detection---popl-2026 |
+| docs\03_2026_international_authoritative_alignment_report.md | 2.1 Rust 2024 Edition - 已稳定发布 | `#21-rust-2024-edition---已稳定发布` | 同文件锚点不存在: #21-rust-2024-edition---已稳定发布 |
+| docs\03_2026_international_authoritative_alignment_report.md | 2.2 Rust 1.95.0 - 即将发布 | `#22-rust-1950---即将发布` | 同文件锚点不存在: #22-rust-1950---即将发布 |
+| docs\03_2026_international_authoritative_alignment_report.md | 3.1 Linux内核 - Rust永久采用 | `#31-linux内核---rust永久采用` | 同文件锚点不存在: #31-linux内核---rust永久采用 |
 | docs\AUTHORITATIVE_SOURCES_AND_CITATIONS.md | 1. `array_windows` - 切片迭代方法 | `#1-array_windows---切片迭代方法` | 同文件锚点不存在: #1-array_windows---切片迭代方法 |
 | docs\AUTHORITATIVE_SOURCES_AND_CITATIONS.md | **维护说明**: 本文档应随Rust生态更新而更新，确保所有引用来源保持最新和准确 | `#维护说明-本文档应随rust生态更新而更新确保所有引用来源保持最新和准确` | 同文件锚点不存在: #维护说明-本文档应随rust生态更新而更新确保所有引用来源保持最新和准确 |
 | docs\01_cargo_build_optimization.md | ⚙️ 环境变量配置 | `#️-环境变量配置` | 同文件锚点不存在: #️-环境变量配置 |
@@ -39,15 +39,15 @@
 | docs\MIGRATION_GUIDE_2026.md | async-trait → 原生async trait | `#async-trait--原生async-trait` | 同文件锚点不存在: #async-trait--原生async-trait |
 | docs\MIGRATION_GUIDE_2026.md | 生成器 → gen关键字 | `#生成器--gen关键字` | 同文件锚点不存在: #生成器--gen关键字 |
 | docs\MIGRATION_GUIDE_2026.md | **详细指南**: 2026\_RUST\_ECOSYSTEM\_COMPREHENSIVE\_REVIEW.md | `#详细指南-2026_rust_ecosystem_comprehensive_reviewmd` | 同文件锚点不存在: #详细指南-2026_rust_ecosystem_comprehensive_reviewmd |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 00.2 缺失项热力图 (A \\ B) | `#002-缺失项热力图-a--b` | 同文件锚点不存在: #002-缺失项热力图-a--b |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 🔴 P0 — 语言核心层（1.95.0 已稳定，认知必需） | `#-p0--语言核心层1950-已稳定认知必需` | 同文件锚点不存在: #-p0--语言核心层1950-已稳定认知必需 |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 🔴 P0 — 异步范式层（改变编程心智模型） | `#-p0--异步范式层改变编程心智模型` | 同文件锚点不存在: #-p0--异步范式层改变编程心智模型 |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 🟡 P1 — 系统与网络层 | `#-p1--系统与网络层` | 同文件锚点不存在: #-p1--系统与网络层 |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 🟢 P2 — 类型系统与工具链层 | `#-p2--类型系统与工具链层` | 同文件锚点不存在: #-p2--类型系统与工具链层 |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 00.3 冗余/过时项热力图 (B \\ A) | `#003-冗余过时项热力图-b--a` | 同文件锚点不存在: #003-冗余过时项热力图-b--a |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 05.3 1.95+ 新增特性深度梳理：Atomic\*::update / try\_update | `#053-195-新增特性深度梳理atomicupdate--try_update` | 同文件锚点不存在: #053-195-新增特性深度梳理atomicupdate--try_update |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 07.4 前沿缺口：eBPF + Rust (Aya) | `#074-前沿缺口ebpf--rust-aya` | 同文件锚点不存在: #074-前沿缺口ebpf--rust-aya |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | *项目 MSRV: 1.96.0+ (Edition 2024)* | `#项目-msrv-1950-edition-2024` | 同文件锚点不存在: #项目-msrv-1950-edition-2024 |
+| docs\04_rust_language_feature_comprehensive_inventory_2026.md | 00.2 缺失项热力图 (A \\ B) | `#002-缺失项热力图-a--b` | 同文件锚点不存在: #002-缺失项热力图-a--b |
+| docs\04_rust_language_feature_comprehensive_inventory_2026.md | 🔴 P0 — 语言核心层（1.95.0 已稳定，认知必需） | `#-p0--语言核心层1950-已稳定认知必需` | 同文件锚点不存在: #-p0--语言核心层1950-已稳定认知必需 |
+| docs\04_rust_language_feature_comprehensive_inventory_2026.md | 🔴 P0 — 异步范式层（改变编程心智模型） | `#-p0--异步范式层改变编程心智模型` | 同文件锚点不存在: #-p0--异步范式层改变编程心智模型 |
+| docs\04_rust_language_feature_comprehensive_inventory_2026.md | 🟡 P1 — 系统与网络层 | `#-p1--系统与网络层` | 同文件锚点不存在: #-p1--系统与网络层 |
+| docs\04_rust_language_feature_comprehensive_inventory_2026.md | 🟢 P2 — 类型系统与工具链层 | `#-p2--类型系统与工具链层` | 同文件锚点不存在: #-p2--类型系统与工具链层 |
+| docs\04_rust_language_feature_comprehensive_inventory_2026.md | 00.3 冗余/过时项热力图 (B \\ A) | `#003-冗余过时项热力图-b--a` | 同文件锚点不存在: #003-冗余过时项热力图-b--a |
+| docs\04_rust_language_feature_comprehensive_inventory_2026.md | 05.3 1.95+ 新增特性深度梳理：Atomic\*::update / try\_update | `#053-195-新增特性深度梳理atomicupdate--try_update` | 同文件锚点不存在: #053-195-新增特性深度梳理atomicupdate--try_update |
+| docs\04_rust_language_feature_comprehensive_inventory_2026.md | 07.4 前沿缺口：eBPF + Rust (Aya) | `#074-前沿缺口ebpf--rust-aya` | 同文件锚点不存在: #074-前沿缺口ebpf--rust-aya |
+| docs\04_rust_language_feature_comprehensive_inventory_2026.md | *项目 MSRV: 1.96.0+ (Edition 2024)* | `#项目-msrv-1950-edition-2024` | 同文件锚点不存在: #项目-msrv-1950-edition-2024 |
 | docs\TERMINOLOGY_STANDARD.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\TERMINOLOGY_STANDARD.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\00_meta\ANNUAL_REVIEW_TEMPLATE.md | 1️⃣ 对称差分析更新 | `#1️⃣-对称差分析更新` | 同文件锚点不存在: #1️⃣-对称差分析更新 |

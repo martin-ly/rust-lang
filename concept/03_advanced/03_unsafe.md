@@ -2746,3 +2746,6 @@ fn inspect(ring: &IoUring) {
 | **编译器验证** | 无字段级追踪 | 需扩展借用检查器，追踪字段级 unsafe 状态 |
 
 > **关键洞察**: Unsafe Fields 是 Rust "显式化 Unsafe 边界"趋势的延续（Rust 2024 Edition 的 `unsafe_op_in_unsafe_fn` 是同一方向的先前步骤）。它将 Rust 的**效果系统**（effect system）从函数级扩展到字段级，为未来更细粒度的 effects（如 `const`、`async`、`unsafe` 的组合）铺平道路。[来源: [Rust Internals — Unsafe Fields Discussion](https://internals.rust-lang.org/t/unsafe-fields/)] · [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
