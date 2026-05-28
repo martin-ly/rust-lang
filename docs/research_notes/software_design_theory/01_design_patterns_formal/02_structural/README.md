@@ -18,11 +18,11 @@
 > **[来源: Rust Official Docs]**
 
 - [适配器](./adapter.md)
-- [桥接](./bridge.md)
+- [桥接](./10_bridge.md)
 - [组合](./composite.md)
 - [装饰器](./decorator.md)
-- [外观](./facade.md)
-- [享元](./flyweight.md)
+- [外观](./10_facade.md)
+- [享元](./10_flyweight.md)
 - [代理](./proxy.md)
 
 ## 相关链接

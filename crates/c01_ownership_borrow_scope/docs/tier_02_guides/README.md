@@ -35,7 +35,6 @@
     - [其他层级](#其他层级)
     - [导航](#导航)
   - [🎉 开始学习](#-开始学习)
-  - [**维护状态**: ✅ 活跃维护](#维护状态--活跃维护)
 
 ## 📚 本层文档概览
 
@@ -297,11 +296,6 @@ graph TD
 
 **第一步**: [2.1 所有权系统](./2.1_所有权系统.md)
 
----
-
-**最后更新**: 2025-12-11
-**适用版本**: Rust 1.93.0+
-**维护状态**: ✅ 活跃维护
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

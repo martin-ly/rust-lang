@@ -675,7 +675,7 @@ mindmap
 | C04 | 泛型概念关系 | crates/c04_generic/docs/ |
 | C05 | 并发模型对比 | crates/c05_threads/docs/ |
 | C06 | 异步编程决策树 | crates/c06_async/docs/ |
-| C07 | 进程管理速查 | docs/quick_reference/process_management_cheatsheet.md |
+| C07 | 进程管理速查 | docs/quick_reference/02_process_management_cheatsheet.md |
 | C08 | 算法复杂度矩阵 | docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md |
 | C09 | 设计模式矩阵 | crates/c09_design_pattern/docs/ |
 | C10 | 网络协议矩阵 | docs/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md |

@@ -56,7 +56,7 @@
 | Ch 9. 错误处理 | 10_error_handling_cheatsheet.md | ✅ 已覆盖 | 100% |
 | Ch 10. 泛型 | type_system_foundations.md | ✅ 已覆盖 | 100% |
 | Ch 11. Trait | trait_system_formalization.md | ✅ 已覆盖 | 100% |
-| Ch 12. 测试 | TESTING_COVERAGE_GUIDE.md | ✅ 已覆盖 | 100% |
+| Ch 12. 测试 | 05_testing_coverage_guide.md | ✅ 已覆盖 | 100% |
 | Ch 13. 迭代器与闭包 | C03/functional_features/ | ✅ 已覆盖 | 100% |
 | Ch 14. Cargo | C02/cargo_package_management/ | ✅ 已覆盖 | 100% |
 | Ch 15. 智能指针 | ownership_model.md Def 4.1-4.5 | ✅ 已覆盖 | 100% |

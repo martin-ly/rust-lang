@@ -173,7 +173,7 @@
 | **L2** | 完整证明 | 归纳基、归纳步、辅助引理编号、形式化陈述 |
 | **L3** | 机器可检查 | Coq/Isabelle/Lean 证明代码 |
 
-**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](./coq_skeleton/README.md) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)、[FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md)。
+**本索引现状**: 多数为 L1；部分（如型变、组合工程、CORE_THEOREMS_FULL_PROOFS）为 L2；L3 骨架已创建（[coq_skeleton](./coq_skeleton/README.md) T-OW2/T-BR1/T-TY3，证明 Admitted 待补全），见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./10_coq_isabelle_proof_scaffolding.md)、[FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md)。
 
 ---
 
@@ -591,9 +591,9 @@
 **设计模式形式化（23 种 Def/Axiom/定理/推论）**：
 
 1. **引理 MO-L1、推论 MO-C1** ✅ — Memento；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/memento.md)
-2. **引理 VI-L1、推论 VI-C1** ✅ — Visitor；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/visitor.md)
-3. **引理 IN-L1、推论 IN-C1** ✅ — Interpreter；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/interpreter.md)
-4. **引理 TM-L1、推论 TM-C1** ✅ — Template Method；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/template_method.md)
+2. **引理 VI-L1、推论 VI-C1** ✅ — Visitor；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/10_visitor.md)
+3. **引理 IN-L1、推论 IN-C1** ✅ — Interpreter；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/10_interpreter.md)
+4. **引理 TM-L1、推论 TM-C1** ✅ — Template Method；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/10_template_method.md)
 5. **推论 FA-C1、DE-C1、CO-C1、BR-C1、FL-C1、PR-C1** ✅ — 结构型 6 种（Facade、Decorator、Composite、Bridge、Flyweight、Proxy）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/02_structural/README.md)
 6. **推论 B-C1、AF-C1、FM-C1、P-C1、S-C1** ✅ — 创建型 5 种（Builder、Abstract Factory、Factory Method、Prototype、Singleton）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/01_creational/README.md)
 7. **推论 CR-C1、CM-C1、SR-C1、IT-C1、ME-C1、OB-C1、ST-C1** ✅ — 行为型 7 种（Chain、Command、Strategy、Iterator、Mediator、Observer、State）纯 Safe；[证明位置](./software_design_theory/01_design_patterns_formal/03_behavioral/README.md)
@@ -614,7 +614,7 @@
 
 **已完成的证明**:
 
-1. **定理 SBM-T1/T2、SUM-T1/T2、EIM-T1/T2** ✅ — [safe_unsafe_matrix](./software_design_theory/05_boundary_system/safe_unsafe_matrix.md)、[supported_unsupported_matrix](./software_design_theory/05_boundary_system/supported_unsupported_matrix.md)、[expressive_inexpressive_matrix](./software_design_theory/05_boundary_system/expressive_inexpressive_matrix.md)
+1. **定理 SBM-T1/T2、SUM-T1/T2、EIM-T1/T2** ✅ — [safe_unsafe_matrix](./software_design_theory/05_boundary_system/safe_unsafe_matrix.md)、[supported_unsupported_matrix](./software_design_theory/05_boundary_system/10_supported_unsupported_matrix.md)、[expressive_inexpressive_matrix](./software_design_theory/05_boundary_system/expressive_inexpressive_matrix.md)
 2. **定理 BMP-T1/T2 (设计模式边界)** ✅ — 边界唯一性、23 模式与 05 矩阵一致；[证明位置](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
 3. **引理 BMP-L1 (近似表达模式)** ✅ — Singleton、Interpreter 等 6 种为 Approx；[证明位置](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
 4. **推论 BMP-C1** ✅ — 等价表达模式满足零成本抽象；[证明位置](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)
@@ -756,7 +756,7 @@
 | :--- | :--- |
 | **L1** | 所有权 T3、借用 T2、生命周期 LF-T1–T3、类型 T1/T2/T4/T5、异步 T6.1–T6.3、Pin T1–T3、Trait T1–T3、设计模式推论、实验定理 |
 | **L2** | 所有权 T2、借用 T1、类型 T3（见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md)）；型变 T1–T4、组合工程 CE-T1–T3、边界 BMP-T1/T2 |
-| **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| **L3** | Coq 骨架已创建 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)（证明 Admitted）；补全见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./10_coq_isabelle_proof_scaffolding.md) |
 
 ---
 
@@ -884,7 +884,7 @@
 - [形式化论证系统梳理指南](./FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射、反例索引
 - [研究笔记主索引](./README.md)
 - [研究进展跟踪](./PROGRESS_TRACKING.md)
-- [研究任务清单](./TASK_CHECKLIST.md)
+- [研究任务清单](./10_task_checklist.md)
 - [形式化工具验证指南](./FORMAL_VERIFICATION_GUIDE.md)（✅ 指南 100% 完成）
 
 ### 形式化方法研究

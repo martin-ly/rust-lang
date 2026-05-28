@@ -116,7 +116,7 @@
 | 10.1 Generic Data Types | type_system_foundations.md | ✅ | 系统F形式化 |
 | 10.2 Traits | trait_system_formalization.md | ✅ | Trait语义 |
 | 10.3 Lifetimes | lifetime_formalization.md | ✅ | 生命周期形式化 |
-| 11.1 Test Organization | TESTING_COVERAGE_GUIDE.md | ✅ | 测试模式 |
+| 11.1 Test Organization | 05_testing_coverage_guide.md | ✅ | 测试模式 |
 
 **状态**: ✅ 100% 对齐
 

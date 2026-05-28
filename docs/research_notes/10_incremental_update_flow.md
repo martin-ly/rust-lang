@@ -278,7 +278,7 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| MAINTENANCE_GUIDE | 维护计划、质量检查 | [MAINTENANCE_GUIDE.md](./MAINTENANCE_GUIDE.md) |
+| MAINTENANCE_GUIDE | 维护计划、质量检查 | [10_maintenance_guide.md](./10_maintenance_guide.md) |
 | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | 特性分析主文档 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
 | FEATURE_TEMPLATE | 新特性精简模板 | [10_feature_template.md](./10_feature_template.md) |
 
@@ -308,7 +308,7 @@ fn api_stabilization_example() {
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
 | CORE_THEOREMS_FULL_PROOFS | 核心定理完整证明 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) |
-| COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [10_coq_isabelle_proof_scaffolding.md](./10_coq_isabelle_proof_scaffolding.md) |
 | PROOF_INDEX | 证明索引 | [PROOF_INDEX.md](./PROOF_INDEX.md) |
 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 

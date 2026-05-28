@@ -269,7 +269,7 @@ graph TD
 在 safety_critical 文档中建立指向核心知识的**精确反向链接**：
 
 - `SAFETY_CRITICAL_CODING_GUIDELINES.md` → 链接到 `unsafe_rust.md` 的不变量契约
-- `FORMAL_VERIFICATION_PRACTICAL_GUIDE.md` → 链接到 `tree_borrows.md` 的内存模型
+- `10_formal_verification_practical_guide.md` → 链接到 `tree_borrows.md` 的内存模型
 - `10_toolchain_setup_guide.md` → 链接到 `async_await.md` 的运行时选择（如安全关键异步）
 
 #### Phase B3: 标准对齐深化（第 5-8 周）

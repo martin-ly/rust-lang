@@ -309,7 +309,7 @@ flowchart LR
 
 - [思维表征方式](./THINKING_REPRESENTATION_METHODS.md) - 决策树、转换树
 - [多维概念矩阵](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 技术选型矩阵
-- [跨模块集成示例](../05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md)
+- [跨模块集成示例](../05_guides/05_cross_module_integration_examples.md)
 - [实际应用案例研究](./../research_notes/practical_applications.md) - 案例库
 - [执行模型边界分析](./../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) - 模型选型
 - [WASM 使用指南](../05_guides/WASM_USAGE_GUIDE.md)

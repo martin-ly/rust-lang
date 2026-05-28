@@ -92,7 +92,7 @@
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
 | [10_logical_foundations.md](./10_logical_foundations.md) | 命题/一阶/高阶/模态逻辑 | ⭐⭐⭐⭐ |
-| [SEPARATION_LOGIC.md](./SEPARATION_LOGIC.md) | 分离逻辑、Iris框架 | ⭐⭐⭐⭐⭐ |
+| [10_separation_logic.md](./10_separation_logic.md) | 分离逻辑、Iris框架 | ⭐⭐⭐⭐⭐ |
 
 ### 程序语义
 
@@ -100,7 +100,7 @@
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
-| [OPERATIONAL_SEMANTICS.md](./OPERATIONAL_SEMANTICS.md) | 小步/大步/环境语义 | ⭐⭐⭐⭐ |
+| [10_operational_semantics.md](./10_operational_semantics.md) | 小步/大步/环境语义 | ⭐⭐⭐⭐ |
 | [10_axiomatic_semantics.md](./10_axiomatic_semantics.md) | 霍尔逻辑、WP/SP | ⭐⭐⭐⭐⭐ |
 
 ### 证明技术
@@ -136,7 +136,7 @@
    └── 10_logical_foundations.md §1-2 (命题/一阶逻辑)
 
 2. 操作语义
-   └── OPERATIONAL_SEMANTICS.md §1-2 (小步/大步语义)
+   └── 10_operational_semantics.md §1-2 (小步/大步语义)
 
 3. 霍尔逻辑
    └── 10_axiomatic_semantics.md §1 (霍尔逻辑基础)
@@ -151,10 +151,10 @@
 
 ```
 1. 分离逻辑
-   └── SEPARATION_LOGIC.md
+   └── 10_separation_logic.md
 
 2. 高级语义
-   └── OPERATIONAL_SEMANTICS.md §3-4
+   └── 10_operational_semantics.md §3-4
    └── 10_axiomatic_semantics.md §2-4
 
 3. 证明技术
@@ -170,7 +170,7 @@
 
 ```
 1. Iris框架
-   └── SEPARATION_LOGIC.md §4
+   └── 10_separation_logic.md §4
 
 2. Rust特定形式化
    └── type_theory/
@@ -199,9 +199,9 @@
 | 分离逻辑 | 所有权/借用 | ownership_model.md, borrow_checker_proof.md |
 | 霍尔逻辑 | 函数规范 | 10_axiomatic_semantics.md §4 |
 | 类型理论 | Rust类型系统 | type_theory/ |
-| 操作语义 | MIR求值 | OPERATIONAL_SEMANTICS.md §5 |
+| 操作语义 | MIR求值 | 10_operational_semantics.md §5 |
 | 模态逻辑 | 并发安全性 | send_sync_formalization.md |
-| 线性逻辑 | 所有权转移 | SEPARATION_LOGIC.md §3.1 |
+| 线性逻辑 | 所有权转移 | 10_separation_logic.md §3.1 |
 
 ---
 

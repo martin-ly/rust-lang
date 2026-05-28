@@ -3,7 +3,7 @@
 > **Bloom 层级**: L4-L5 (分析/评价)
 
 > **说明**: 此文档已迁移至归档目录。
-> **当前入口**: [archive/process_reports/2026_02/project/RUST_RELEASE_TRACKING_CHECKLIST.md](./RUST_RELEASE_TRACKING_CHECKLIST.md)
+> **当前入口**: [archive/process_reports/2026_02/project/07_rust_release_tracking_checklist.md](./07_rust_release_tracking_checklist.md)
 
 ## 📑 目录
 >

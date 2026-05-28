@@ -54,7 +54,7 @@ research_notes/
 ├── 00_COMPREHENSIVE_SUMMARY.md         # 完整总结、知识地图、论证总览
 ├── README.md                           # 主入口、研究方向、规范
 ├── INDEX.md                            # 完整索引（按领域/主题）
-├── QUICK_FIND.md                       # 按关键词/领域/目标查找
+├── 10_quick_find.md                       # 按关键词/领域/目标查找
 ├── QUICK_REFERENCE.md                  # 按主题快速参考
 │
 ├── formal_methods/                     # 形式化方法（六篇核心 + 思维表征与矩阵）
@@ -67,10 +67,10 @@ research_notes/
 │   ├── pin_self_referential.md
 │   ├── send_sync_formalization.md
 │   ├── 10_axiomatic_semantics.md
-│   ├── FORMAL_METHODS_COMPLETENESS_CHECKLIST.md
-│   ├── SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md
+│   ├── 10_formal_methods_completeness_checklist.md
+│   ├── 10_safe_decidable_mechanisms_and_formal_methods_plan.md
 │   ├── # 思维导图 / 矩阵 / 决策树（选列）
-│   ├── OWNERSHIP_CONCEPT_MINDMAP.md, 10_variance_concept_mindmap.md
+│   ├── 10_ownership_concept_mindmap.md, 10_variance_concept_mindmap.md
 │   ├── 10_async_concept_mindmap.md, WORKFLOW_CONCEPT_MINDMAP.md, DISTRIBUTED_CONCEPT_MINDMAP.md
 │   ├── TYPE_SYSTEM_CONCEPT_MINDMAP.md, 10_memory_model_mindmap.md, ERROR_HANDLING_MINDMAP.md
 │   ├── CONCEPT_AXIOM_THEOREM_MATRIX.md, PROOF_COMPLETION_MATRIX.md, VERIFICATION_TOOLS_MATRIX.md
@@ -104,7 +104,7 @@ research_notes/
 │
 ├── # 根目录核心文档（选列）
 ├── FORMAL_FULL_MODEL_OVERVIEW.md, CORE_THEOREMS_FULL_PROOFS.md, PROOF_INDEX.md
-├── FORMAL_LANGUAGE_AND_PROOFS.md, AUTHORITATIVE_ALIGNMENT_GUIDE.md
+├── FORMAL_LANGUAGE_AND_PROOFS.md, 10_authoritative_alignment_guide.md
 ├── HIERARCHICAL_MAPPING_AND_SUMMARY.md, ARGUMENTATION_CHAIN_AND_FLOW.md
 ├── RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md, RUST_193_COUNTEREXAMPLES_INDEX.md
 ├── practical_applications.md, research_methodology.md
@@ -123,8 +123,8 @@ research_notes/
 | 原位置 | 归档位置 | 说明 |
 | :--- | :--- | :--- |
 | AENEAS_INTEGRATION_PLAN.md | [archive/deprecated/AENEAS_INTEGRATION_PLAN.md](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md) | Aeneas 对接计划 |
-| COQ_OF_RUST_INTEGRATION_PLAN.md | [archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md) | coq-of-rust 对接计划 |
-| COQ_ISABELLE_PROOF_SCAFFOLDING.md | [archive/deprecated/](../archive/deprecated/README.md) | Coq/Isabelle 骨架说明 |
+| 10_coq_of_rust_integration_plan.md | archive/deprecated/10_coq_of_rust_integration_plan.md | coq-of-rust 对接计划 |
+| 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../archive/deprecated/README.md) | Coq/Isabelle 骨架说明 |
 | coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../archive/deprecated/coq_skeleton/README.md) | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](./coq_skeleton/README.md) 重定向 |
 
 **引用建议**：新文档中提及 Aeneas、coq-of-rust、Coq 骨架时，链接至上述 `archive/deprecated/` 路径；INDEX/README 中已统一标注「已归档」。
@@ -140,7 +140,7 @@ research_notes/
 | [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md) | 按目标选路径、三大支柱、层级 | 首次使用、不知道从哪看 |
 | [README](./README.md) | 主入口、研究方向、规范、目录树 | 总览、规范 |
 | [INDEX](./INDEX.md) | 完整列表、按领域/主题/证明 | 查具体文档、证明索引 |
-| [QUICK_FIND](./QUICK_FIND.md) | 关键词/领域/目标 | 快速定位 |
+| [QUICK_FIND](./10_quick_find.md) | 关键词/领域/目标 | 快速定位 |
 | [QUICK_REFERENCE](./QUICK_REFERENCE.md) | 按主题快速参考 | 按主题查 |
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 文档树、概念↔定理、文档↔思维表征 | 层次化检索、双向追溯 |
 | 本文件 | 结构梳理、归档约定、版本 | 维护与一致性检查 |

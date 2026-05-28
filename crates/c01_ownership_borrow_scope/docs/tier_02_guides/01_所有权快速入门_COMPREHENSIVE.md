@@ -35,7 +35,6 @@
     - [7.2 何时使用 Copy](#72-何时使用-copy)
     - [7.3 何时使用 Clone](#73-何时使用-clone)
   - [✅ 完成检查](#-完成检查)
-  - [**版本**: v2.0 (完整版)](#版本-v20-完整版)
 
 ---
 
@@ -468,11 +467,6 @@ fn duplicate_data() {
 
 如果都能回答，你已经掌握了所有权的基础！下一步学习**借用（Borrowing）**。
 
----
-
-**文档维护**: Rust 学习项目团队
-**最后更新**: 2026-02-28
-**版本**: v2.0 (完整版)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -99,7 +99,7 @@
 | :--- | :--- | :--- |
 | [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](./formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md) | 分布式架构选型 | 🆕 完整 |
 | [ASYNC_RUNTIME_DECISION_TREE](./formal_methods/10_async_runtime_decision_tree.md) | 异步运行时选型 | 🆕 完整 |
-| [ERROR_HANDLING_DECISION_TREE](./formal_methods/ERROR_HANDLING_DECISION_TREE.md) | 错误处理策略 | 🆕 完整 |
+| [ERROR_HANDLING_DECISION_TREE](./formal_methods/10_error_handling_decision_tree.md) | 错误处理策略 | 🆕 完整 |
 | [TESTING_STRATEGY_DECISION_TREE](./formal_methods/TESTING_STRATEGY_DECISION_TREE.md) | 测试策略 | 🆕 完整 |
 
 ### 应用树文档
@@ -316,7 +316,7 @@
 | 6 | 工作流引擎选型 | WORKFLOW_CONCEPT_MINDMAP.md | 🆕 |
 | 7 | 验证工具选型 | VERIFICATION_TOOLS_MATRIX.md | 🆕 |
 | 8 | 异步运行时选型 | 10_async_runtime_decision_tree.md | 🆕 |
-| 9 | 错误处理策略 | ERROR_HANDLING_DECISION_TREE.md | 🆕 |
+| 9 | 错误处理策略 | 10_error_handling_decision_tree.md | 🆕 |
 
 **待创建** (1个):
 

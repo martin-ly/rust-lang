@@ -322,7 +322,7 @@ Programming Languages (POPL 2026).
 1. **RustBelt 论文**: Jung, R., et al. "RustBelt: Securing the Foundations of the Rust Programming Language". *POPL 2018*. DOI: `10.1145/3158154`
 2. **Miri 项目**: <https://github.com/rust-lang/miri>
 3. **Tree Borrows 模型**: <https://github.com/Vanille-N/tree-borrows>
-4. **VerusBelt (PLDI 2026)**: 参见本项目 `VERUSBELT_PLDI_2026.md`
+4. **VerusBelt (PLDI 2026)**: 参见本项目 `04_verusbelt_pldi_2026.md`
 5. **Iris 框架**: <https://iris-project.org/>
 
 ---

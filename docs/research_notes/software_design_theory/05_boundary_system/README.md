@@ -30,7 +30,7 @@
 设 $D$ 为设计模式或执行模型，$B_s$、$B_p$、$B_e$ 分别为安全、支持、表达边界函数（定义见各矩阵文档）：
 
 - **Def B1**：$B_s(D) \in \{\mathrm{Safe},\, \mathrm{Unsafe},\, \mathrm{Inexpr}\}$（见 [safe_unsafe_matrix](./safe_unsafe_matrix.md) Def 1.1）
-- **Def B2**：$B_p(D) \in \{\mathrm{Native},\, \mathrm{Lib},\, \mathrm{FFI}\}$（见 [supported_unsupported_matrix](./supported_unsupported_matrix.md) Def 1.1）
+- **Def B2**：$B_p(D) \in \{\mathrm{Native},\, \mathrm{Lib},\, \mathrm{FFI}\}$（见 [supported_unsupported_matrix](./10_supported_unsupported_matrix.md) Def 1.1）
 - **Def B3**：$B_e(D) \in \{\mathrm{Same},\, \mathrm{Approx},\, \mathrm{NoExpr}\}$（见 [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) Def 1.1）
 
 **Axiom B1**：三维边界独立；任一维度可单独判定；组合使用时需同时满足各维约束。
@@ -52,7 +52,7 @@
 | 文档 | 内容 |
 | :--- | :--- |
 | [safe_unsafe_matrix](./safe_unsafe_matrix.md) | 安全 vs 非安全边界矩阵 |
-| [supported_unsupported_matrix](./supported_unsupported_matrix.md) | 支持 vs 不支持边界矩阵 |
+| [supported_unsupported_matrix](./10_supported_unsupported_matrix.md) | 支持 vs 不支持边界矩阵 |
 | [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) | 充分表达 vs 非充分表达边界矩阵 |
 
 ---
@@ -73,7 +73,7 @@
 
 1. 查模式：在 [04_boundary_matrix](../01_design_patterns_formal/04_boundary_matrix.md) 或对应模式文档
 2. 判安全：用 [safe_unsafe_matrix](./safe_unsafe_matrix.md) 决策树
-3. 判支持：用 [supported_unsupported_matrix](./supported_unsupported_matrix.md) 判定
+3. 判支持：用 [supported_unsupported_matrix](./10_supported_unsupported_matrix.md) 判定
 4. 查表达：用 [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) 了解差异
 
 ---
@@ -85,7 +85,7 @@
 | 问题 | 查文档 |
 | :--- | :--- |
 | 某模式是否纯 Safe？ | [safe_unsafe_matrix](./safe_unsafe_matrix.md) |
-| 需哪个 crate？ | [supported_unsupported_matrix](./supported_unsupported_matrix.md) |
+| 需哪个 crate？ | [supported_unsupported_matrix](./10_supported_unsupported_matrix.md) |
 | 与 GoF 有无差异？ | [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) |
 | 从 OOP 迁移？ | expressive_inexpressive_matrix § 从 OOP 迁移建议 |
 
@@ -117,7 +117,7 @@
 
 **步骤 2**：判安全 → [safe_unsafe_matrix](./safe_unsafe_matrix.md) 创建型表 → **纯 Safe**。
 
-**步骤 3**：判支持 → [supported_unsupported_matrix](./supported_unsupported_matrix.md) → **原生**（trait + 枚举）。
+**步骤 3**：判支持 → [supported_unsupported_matrix](./10_supported_unsupported_matrix.md) → **原生**（trait + 枚举）。
 
 **步骤 4**：判表达 → [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) → **等价**。
 

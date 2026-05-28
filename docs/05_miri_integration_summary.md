@@ -119,7 +119,7 @@ pub mod miri_tests;
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-**文件**: `docs/MIRI_GUIDE.md`
+**文件**: `docs/03_miri_guide.md`
 
 - Miri 简介和安装
 - Tree Borrows vs Stacked Borrows 详解
@@ -258,7 +258,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 - `crates/c12_wasm/src/miri_tests.rs`
 - `scripts/run-miri.sh`
 - `scripts/run-miri.bat`
-- `docs/MIRI_GUIDE.md`
+- `docs/03_miri_guide.md`
 - `docs/05_miri_integration_summary.md`
 - `miri_test_example.rs`
 

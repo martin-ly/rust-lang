@@ -35,11 +35,11 @@ docs/
 ├── 00_master_index.md                  # 主索引
 ├── ARCHITECTURE.md                      # 架构文档
 ├── PROJECT_STRUCTURE.md                 # 本文件
-├── API_GUIDE.md                         # API 指南
+├── 10_api_guide.md                         # API 指南
 ├── DEPENDENCY_GRAPH.md                  # 依赖图
-├── 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md
-├── AUTHORITATIVE_SOURCES_AND_CITATIONS.md
-├── MIGRATION_GUIDE_2026.md
+├── 10_2026_rust_ecosystem_comprehensive_review_with_citations.md
+├── 10_authoritative_sources_and_citations.md
+├── 10_migration_guide_2026.md
 ├── TERMINOLOGY_STANDARD.md
 ├── 01_learning/                         # 学习文档
 ├── 03_practice/                         # 实践项目
@@ -204,7 +204,7 @@ serde = "1.0"
 | Rust 源文件 | snake_case.rs | my_module.rs |
 | 测试文件 | <name>_test.rs | math_test.rs |
 | 示例文件 | <description>_example.rs | tcp_echo_example.rs |
-| 文档文件 | UPPER_SNAKE_CASE.md | API_GUIDE.md |
+| 文档文件 | UPPER_SNAKE_CASE.md | 10_api_guide.md |
 
 ### Crate 命名
 >
@@ -268,7 +268,7 @@ integration_tests   # 集成测试
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - ARCHITECTURE.md - 架构总览
-- API_GUIDE.md - API 使用指南
+- 10_api_guide.md - API 使用指南
 - DEPENDENCY_GRAPH.md - 依赖关系
 - ../CONTRIBUTING.md - 贡献指南
 

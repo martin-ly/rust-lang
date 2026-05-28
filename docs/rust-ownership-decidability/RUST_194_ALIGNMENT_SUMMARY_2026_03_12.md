@@ -152,7 +152,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-**文件**: `RUST_194_STDLIB_API_GUIDE.md` (746行)
+**文件**: `RUST_194_STDLIB_10_api_guide.md` (746行)
 
 **涵盖API** (16个):
 
@@ -265,7 +265,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-1. `RUST_194_STDLIB_API_GUIDE.md` - 标准库API完整指南
+1. `RUST_194_STDLIB_10_api_guide.md` - 标准库API完整指南
 2. `RUST_194_ALIGNMENT_FINAL_REPORT.md` - Alignment最终报告
 3. `08-advanced-topics/RUST_1.94_UPDATE_REPORT.md` - 高级主题更新
 

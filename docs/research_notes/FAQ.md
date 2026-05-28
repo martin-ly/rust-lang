@@ -172,7 +172,7 @@
 
 - [快速参考](./QUICK_REFERENCE.md)
 - [完整索引](./INDEX.md)
-- [快速查找](./QUICK_FIND.md)（按「我想理解…」查找）
+- [快速查找](./10_quick_find.md)（按「我想理解…」查找）
 
 ---
 

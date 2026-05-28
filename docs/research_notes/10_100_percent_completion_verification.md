@@ -254,7 +254,7 @@
 | 6 | 工作流引擎选型 | WORKFLOW_CONCEPT_MINDMAP.md | 🆕 ✅ |
 | 7 | 验证工具选型 | VERIFICATION_TOOLS_MATRIX.md | 🆕 ✅ |
 | 8 | 异步运行时选型 | 10_async_runtime_decision_tree.md | 🆕 ✅ |
-| 9 | 错误处理策略 | ERROR_HANDLING_DECISION_TREE.md | 🆕 ✅ |
+| 9 | 错误处理策略 | 10_error_handling_decision_tree.md | 🆕 ✅ |
 | 10 | 测试策略 | TESTING_STRATEGY_DECISION_TREE.md | 🆕 ✅ |
 
 **验证结果**: 决策树 100% 覆盖 ✅ (新增1个超出目标)

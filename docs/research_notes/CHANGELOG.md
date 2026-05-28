@@ -206,7 +206,7 @@
 - **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md)；13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一 Def→示例→论证→证明链
 - **Phase 6 全局索引增强**：UNIFIED_SYSTEMATIC_FRAMEWORK 新增「按特性族/类型族/执行模型子索引」；设计模式表征与组件构建索引
 - **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](./10_feature_template.md)；概念→形式化引用→反例模板；与 RUST_193 对应
-- **Phase 8 增量流程**：新建 [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md)；1.94+ 发布后更新步骤与检查清单；MAINTENANCE_GUIDE 新增版本增量更新节
+- **Phase 8 增量流程**：新建 [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md)；1.94+ 发布后更新步骤与检查清单；MAINTENANCE_GUIDE 新增版本增量更新节
 - **INDEX**：新增 CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW 条目
 
 ### 持续推进至 100% 收尾（2026-02-12）🆕
@@ -251,7 +251,7 @@
 - **100% 收尾**：INDEX、README、STATISTICS 补充实质内容自检体系；EXAMPLE 示例说明优化；根 README 研究笔记系统补实质内容自检体系；BEST_PRACTICES 状态与日期更新
 - **formal_methods 国际权威对标 100% 完成**：ownership_model 新增 Tree Borrows PLDI 2025；borrow_checker_proof 修正 Tree Borrows 会议年份与链接；README 新增 FLS 精确章节直接链接、权威奖项（ACM SIGPLAN John C. Reynolds、PLDI 2025 Distinguished Paper）、Tree Borrows 源码；00_completeness_gaps、pin_self_referential、lifetime_formalization、async_state_machine 新增 Ferrocene FLS 章节引用
 - **收尾完成**：07_anti_patterns 去除重复「九、引用」章节；README 更新内容补充 formal_methods 国际权威对标、07 收尾
-- **归类与扩展**：新建 [CLASSIFICATION.md](./CLASSIFICATION.md) 文档分类体系（按文档角色、知识层次、主题域、扩展路线）；INDEX 增加文档分类体系节、扩展按主题分类（安全与 unsafe、设计模式与工程、版本与特性）；README 修正目录结构（补充 06/07、CLASSIFICATION、去除重复 CONTENT_ENHANCEMENT）；QUICK_REFERENCE 扩展 05/06/07、CLASSIFICATION 链接；ARGUMENTATION_GAP_INDEX 增加分类体系入口
+- **归类与扩展**：新建 [10_classification.md](./10_classification.md) 文档分类体系（按文档角色、知识层次、主题域、扩展路线）；INDEX 增加文档分类体系节、扩展按主题分类（安全与 unsafe、设计模式与工程、版本与特性）；README 修正目录结构（补充 06/07、CLASSIFICATION、去除重复 CONTENT_ENHANCEMENT）；QUICK_REFERENCE 扩展 05/06/07、CLASSIFICATION 链接；ARGUMENTATION_GAP_INDEX 增加分类体系入口
 - **formal_methods 国际权威对标 100% 完成**：Tree Borrows 更新为 PLDI 2025（Distinguished Paper Award、Rocq 证明、30k crates 54% 更少拒绝）；新增 Ferrocene FLS 章节与本目录对应表（Ch. 15/17/19/21、Appendix C）；ownership_model、borrow_checker_proof、lifetime_formalization、pin_self_referential、async_state_machine 各文档新增国际权威对标脚注
 - **formal_methods 国际权威对标补全**：00_completeness_gaps、README 补充 Tree Borrows (OOPSLA 2024)、Polonius、FLS 官方采纳 2025；ownership_model 补 Safe Systems Programming in Rust (CACM 2021)；borrow_checker_proof 补 Tree Borrows、Polonius、Miri；lifetime_formalization 补 Polonius 规则链接
 - **formal_methods 国际权威对标**：README 新增「国际权威对标」节（RustBelt POPL 2018/2020、Stacked Borrows、Ferrocene FLS、Prusti/Kani 对照表）；ownership_model、borrow_checker_proof、async_state_machine、pin_self_referential、lifetime_formalization 参考文献补全权威论文链接与对应说明；00_completeness_gaps 新增 §9 国际权威对标
@@ -325,7 +325,7 @@
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-**APPLICATIONS_ANALYSIS_VIEW.md 全面丰富**:
+**04_applications_analysis_view.md 全面丰富**:
 
 - ✅ 应用场景选型决策树（顶层）
 - ✅ 各场景决策树（CLI、Web、系统、嵌入式、分布式、数据科学、游戏、区块链、WASM、DevOps）
@@ -568,12 +568,12 @@
 - ✅ INDEX.md - 完整索引
 - ✅ GETTING_STARTED.md - 快速入门指南
 - ✅ FAQ.md - 常见问题解答
-- ✅ MAINTENANCE_GUIDE.md - 维护指南
+- ✅ 10_maintenance_guide.md - 维护指南
 - ✅ BEST_PRACTICES.md - 最佳实践
 - ✅ GLOSSARY.md - 术语表
-- ✅ RESOURCES.md - 研究资源汇总
+- ✅ 10_resources.md - 研究资源汇总
 - ✅ SYSTEM_INTEGRATION.md - 系统集成指南
-- ✅ EXAMPLE.md - 研究笔记示例
+- ✅ 10_example.md - 研究笔记示例
 
 **研究方法论**:
 
@@ -843,7 +843,7 @@
   - 形式化方法平均完成度：从 38% 提升到 38.4%
   - 类型理论平均完成度：从 36% 提升到 36.4%
   - 总体平均完成度：从 34.5% 提升到 34.7%
-- ✅ 更新了 STATISTICS.md，反映最新的统计信息
+- ✅ 更新了 10_statistics.md，反映最新的统计信息
   - 更新了各研究领域的平均完成度
 
 **系统改进**:
@@ -924,7 +924,7 @@
   - 形式化方法平均完成度：从 37% 提升到 38%
   - 总体平均完成度：从 34% 提升到 34.5%
   - 高优先级平均完成度：从 40.5% 提升到 41.25%
-- ✅ 更新了 STATISTICS.md，反映最新的统计信息
+- ✅ 更新了 10_statistics.md，反映最新的统计信息
   - 更新了高优先级研究笔记的完成度排序
 
 **系统改进**:
@@ -965,7 +965,7 @@
   - 所有权模型形式化：完成度从 40% 提升到 45%
   - 借用检查器证明：完成度从 35% 提升到 40%
   - 类型系统基础：完成度从 40% 提升到 42%
-- ✅ 更新了 STATISTICS.md，反映最新的统计信息
+- ✅ 更新了 10_statistics.md，反映最新的统计信息
   - 形式化方法平均完成度：从 35% 提升到 37%
   - 类型理论平均完成度：从 34% 提升到 36%
   - 总体平均完成度：从 33% 提升到 34%
@@ -1072,7 +1072,7 @@
 
 **研究笔记快速查找工具**:
 
-- ✅ 创建了 QUICK_FIND.md - 研究笔记快速查找工具
+- ✅ 创建了 10_quick_find.md - 研究笔记快速查找工具
 - ✅ 提供按关键词查找功能
 - ✅ 提供按研究领域查找功能
 - ✅ 提供按研究目标查找功能
@@ -1099,7 +1099,7 @@
 
 **研究笔记系统统计报告**:
 
-- ✅ 创建了 STATISTICS.md - 全面的系统统计报告
+- ✅ 创建了 10_statistics.md - 全面的系统统计报告
 - ✅ 提供文档统计（总体、类型、状态）
 - ✅ 提供研究笔记统计（领域、优先级、完成度）
 - ✅ 提供内容统计（代码示例、参考文献、形式化定义）
@@ -1126,7 +1126,7 @@
 
 **研究笔记写作指南**:
 
-- ✅ 创建了 WRITING_GUIDE.md - 详细的研究笔记写作指南
+- ✅ 创建了 10_writing_guide.md - 详细的研究笔记写作指南
 - ✅ 提供写作前准备指导
 - ✅ 提供各部分写作技巧
 - ✅ 提供格式规范和内容组织建议
@@ -1152,7 +1152,7 @@
 
 **研究任务清单**:
 
-- ✅ 创建了 TASK_CHECKLIST.md - 具体的研究任务清单文档
+- ✅ 创建了 10_task_checklist.md - 具体的研究任务清单文档
 - ✅ 将研究计划转化为可执行任务
 - ✅ 按优先级分类任务（高、中、低）
 - ✅ 提供任务状态跟踪和统计信息

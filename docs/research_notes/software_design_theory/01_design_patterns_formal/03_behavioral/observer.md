@@ -332,7 +332,7 @@ fn main() {
 | 模式 | 关系 |
 | :--- | :--- |
 | [Command](./command.md) | 观察者可接收命令；命令可作为事件 |
-| [Mediator](./mediator.md) | 同为解耦；Observer 一对多，Mediator 集中路由 |
+| [Mediator](./10_mediator.md) | 同为解耦；Observer 一对多，Mediator 集中路由 |
 | [State](./state.md) | 状态转换可通知观察者 |
 
 ---

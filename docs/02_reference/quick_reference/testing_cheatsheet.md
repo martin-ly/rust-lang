@@ -1637,7 +1637,7 @@ fn broken_test() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [完整测试文档（项目内）](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md)
-- [测试覆盖率指南](../../05_guides/TESTING_COVERAGE_GUIDE.md)
+- [测试覆盖率指南](../../05_guides/05_testing_coverage_guide.md)
 - [tarpaulin 配置](../../../tarpaulin.toml)
 
 ## 🧩 相关示例代码

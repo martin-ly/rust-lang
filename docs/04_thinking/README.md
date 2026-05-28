@@ -56,7 +56,7 @@ fn verify_memory_safety() -> bool {
 | [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) | 证明图网络 | 安全性验证 |
 | [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) | 思维导图集合 | 概念结构学习 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵 | 特性对比分析 |
-| [APPLICATIONS_ANALYSIS_VIEW.md](./APPLICATIONS_ANALYSIS_VIEW.md) | 应用分析视图 | 应用场景分析 |
+| [04_applications_analysis_view.md](./04_applications_analysis_view.md) | 应用分析视图 | 应用场景分析 |
 
 ---
 

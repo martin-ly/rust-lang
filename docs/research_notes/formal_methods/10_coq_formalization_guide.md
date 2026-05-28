@@ -2494,8 +2494,8 @@ lint:
 | [borrow_checker_proof.md](./borrow_checker_proof.md) | 借用检查器证明 | 定理2对应文档 |
 | [lifetime_formalization.md](./lifetime_formalization.md) | 生命周期形式化 | 定理3对应文档 |
 | [send_sync_formalization.md](./send_sync_formalization.md) | Send/Sync形式化 | 定理4对应文档 |
-| [SEPARATION_LOGIC.md](./SEPARATION_LOGIC.md) | 分离逻辑 | Iris理论基础 |
-| [OPERATIONAL_SEMANTICS.md](./OPERATIONAL_SEMANTICS.md) | 操作语义 | 类型安全基础 |
+| [10_separation_logic.md](./10_separation_logic.md) | 分离逻辑 | Iris理论基础 |
+| [10_operational_semantics.md](./10_operational_semantics.md) | 操作语义 | 类型安全基础 |
 
 ### 外部资源
 
@@ -2527,7 +2527,7 @@ lint:
 
 进阶阶段 (8周):
 ├── Week 5-6: 分离逻辑基础
-│   └── SEPARATION_LOGIC.md 第1-3章
+│   └── 10_separation_logic.md 第1-3章
 ├── Week 7-8: Iris框架入门
 │   └── Iris示例项目
 ├── Week 9-10: Rust所有权形式化

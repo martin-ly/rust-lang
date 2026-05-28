@@ -201,7 +201,7 @@ BorrowCheck(程序 P):
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [所有权证明树](./10_proof_tree_ownership.md)
-- [类型安全证明树](./PROOF_TREE_TYPE_SAFETY.md)
+- [类型安全证明树](./formal_methods/10_proof_tree_type_safety.md)
 - [生命周期形式化](./formal_methods/lifetime_formalization.md)
 
 ---

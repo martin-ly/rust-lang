@@ -20,9 +20,9 @@
 | 文档 | 描述 | 推荐人群 |
 |------|------|---------|
 | [00_MASTER_INDEX.md](./00_master_index.md) | 文档总索引 | 所有人 |
-| [2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md](./2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md) | **2026生态梳理（权威引用版）** | 所有开发者 |
-| [AUTHORITATIVE_SOURCES_AND_CITATIONS.md](./AUTHORITATIVE_SOURCES_AND_CITATIONS.md) | 学术论文引用汇总 | 研究人员 |
-| [MIGRATION_GUIDE_2026.md](./MIGRATION_GUIDE_2026.md) | 2026迁移指南 | 升级用户 |
+| [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](./10_2026_rust_ecosystem_comprehensive_review_with_citations.md) | **2026生态梳理（权威引用版）** | 所有开发者 |
+| [10_authoritative_sources_and_citations.md](./10_authoritative_sources_and_citations.md) | 学术论文引用汇总 | 研究人员 |
+| [10_migration_guide_2026.md](./10_migration_guide_2026.md) | 2026迁移指南 | 升级用户 |
 | [10_terminology_standard.md](./10_terminology_standard.md) | 术语标准 | 所有人 |
 
 ### 学习文档
@@ -40,12 +40,12 @@
 
 | 文档 | 描述 | 版本 |
 |------|------|------|
-| Miri 实战指南 | UB 检测与内存安全验证 | [05_guides/MIRI_PRACTICAL_GUIDE.md](05_guides/MIRI_PRACTICAL_GUIDE.md) |
-| Cranelift 后端指南 | 快速调试编译后端 | [06_toolchain/CRANELIFT_BACKEND_GUIDE.md](06_toolchain/CRANELIFT_BACKEND_GUIDE.md) |
-| TOML v1.1 Cargo 指南 | Cargo.toml 新语法 | [06_toolchain/TOML_V11_CARGO_GUIDE.md](06_toolchain/TOML_V11_CARGO_GUIDE.md) |
+| Miri 实战指南 | UB 检测与内存安全验证 | [05_guides/05_miri_practical_guide.md](05_guides/05_miri_practical_guide.md) |
+| Cranelift 后端指南 | 快速调试编译后端 | [06_toolchain/06_cranelift_backend_guide.md](06_toolchain/06_cranelift_backend_guide.md) |
+| TOML v1.1 Cargo 指南 | Cargo.toml 新语法 | [06_toolchain/06_toml_v11_cargo_guide.md](06_toolchain/06_toml_v11_cargo_guide.md) |
 | Polonius 下一代 Borrow Checker | 基于 Datalog 的生命周期推断 | [04_research/04_polonius_next_gen_borrow_checker.md](04_research/04_polonius_next_gen_borrow_checker.md) |
-| VerusBelt (PLDI 2026) | 形式化验证语义基础 | [04_research/VERUSBELT_PLDI_2026.md](04_research/VERUSBELT_PLDI_2026.md) |
-| Unsafe Fields 预览 | 更细粒度的 unsafe 声明 | [05_guides/UNSAFE_FIELDS_PREVIEW.md](05_guides/UNSAFE_FIELDS_PREVIEW.md) |
+| VerusBelt (PLDI 2026) | 形式化验证语义基础 | [04_research/04_verusbelt_pldi_2026.md](04_research/04_verusbelt_pldi_2026.md) |
+| Unsafe Fields 预览 | 更细粒度的 unsafe 声明 | [05_guides/05_unsafe_fields_preview.md](05_guides/05_unsafe_fields_preview.md) |
 | 下一代 Trait Solver | 基于逻辑编程的类型推断 | [04_research/04_next_generation_trait_solver.md](04_research/04_next_generation_trait_solver.md) |
 | C++ ↔ Rust 互操作评估 | `cxx`/`bindgen` 安全 FFI 实践 | [05_guides/05_cxx_rust_interop_evaluation.md](05_guides/05_cxx_rust_interop_evaluation.md) |
 | Rust for Linux 工具链 | 内核模块开发与工具链 | [06_toolchain/06_rust_for_linux_tooling_guide.md](06_toolchain/06_rust_for_linux_tooling_guide.md) |
@@ -72,19 +72,19 @@
 ```
 1. [项目README](../README.md)
    ↓
-2. [2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md](./2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md)
+2. [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](./10_2026_rust_ecosystem_comprehensive_review_with_citations.md)
    ↓
 3. [01_learning/01_learning_path_guide_2025_10_24.md](01_learning/01_learning_path_guide_2025_10_24.md)
    ↓
-4. [MIGRATION_GUIDE_2026.md](./MIGRATION_GUIDE_2026.md)
+4. [10_migration_guide_2026.md](./10_migration_guide_2026.md)
 ```
 
 ### 研究人员路径
 
 ```
-1. [2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md](./2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md)
+1. [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](./10_2026_rust_ecosystem_comprehensive_review_with_citations.md)
    ↓
-2. [AUTHORITATIVE_SOURCES_AND_CITATIONS.md](./AUTHORITATIVE_SOURCES_AND_CITATIONS.md)
+2. [10_authoritative_sources_and_citations.md](./10_authoritative_sources_and_citations.md)
    ↓
 3. [04_thinking/](04_thinking/) 和 [research_notes/](research_notes/)
 ```
@@ -97,9 +97,9 @@
 docs/
 ├── 核心文档 (6个)          # 放在根目录，快速访问
 │   ├── 00_MASTER_INDEX.md
-│   ├── 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md
-│   ├── AUTHORITATIVE_SOURCES_AND_CITATIONS.md
-│   ├── MIGRATION_GUIDE_2026.md
+│   ├── 10_2026_rust_ecosystem_comprehensive_review_with_citations.md
+│   ├── 10_authoritative_sources_and_citations.md
+│   ├── 10_migration_guide_2026.md
 │   ├── 10_terminology_standard.md
 │   └── README.md
 │
@@ -135,7 +135,7 @@ docs/
 - Rust Edition Guide
 - Miri官方文档
 
-详见 [AUTHORITATIVE_SOURCES_AND_CITATIONS.md](./AUTHORITATIVE_SOURCES_AND_CITATIONS.md)
+详见 [10_authoritative_sources_and_citations.md](./10_authoritative_sources_and_citations.md)
 
 ---
 

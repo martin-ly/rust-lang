@@ -200,7 +200,7 @@ Rust 所有权可判定性文档库
 1. 阅读 11-design-patterns/ 设计模式
 2. 研究 case-studies/ 实际案例
 3. 了解 03-verification-tools/ 验证工具
-4. 参考 FAQ_COMPREHENSIVE.md 解决问题
+4. 参考 10_faq_comprehensive.md 解决问题
 
 ### 研究人员
 

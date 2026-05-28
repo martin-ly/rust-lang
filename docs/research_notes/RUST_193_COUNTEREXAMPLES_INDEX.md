@@ -43,7 +43,7 @@
 | **asm_cfg / target_cfg** | `asm!` 与 `cfg` 组合下目标不支持时的回退；错误配置导致编译失败 | [RUST_193](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) § 9. FFI、§ 10 |
 | **LUB coercion** | 分支类型 LUB 与自动强转；若类型不兼容仍会报错，反例为过度依赖隐式 LUB 导致的可读性下降 | [type_system_foundations](type_theory/type_system_foundations.md)、[RUST_193](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) § 2. 类型系统 |
 | **全局分配器 / thread_local** | 分配器与 thread_local 的初始化顺序；错误依赖导致未定义行为或崩溃 | [ownership_model](formal_methods/ownership_model.md)、[RUST_193](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) § 1. 内存与所有权 |
-| **lint 变更** | 1.93 默认启用或升级的 lint；旧代码可能新增警告或错误，需按发布说明迁移 | [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md)、releases.rs 1.93.0 |
+| **lint 变更** | 1.93 默认启用或升级的 lint；旧代码可能新增警告或错误，需按发布说明迁移 | [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md)、releases.rs 1.93.0 |
 
 ---
 

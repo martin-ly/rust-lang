@@ -1,29 +1,29 @@
-# Visitor 形式化分析
+# Mediator 形式化分析
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Visitor 形式化分析](#visitor-形式化分析)
+- [Mediator 形式化分析](#mediator-形式化分析)
   - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
-    - [Def 1.1（Visitor 结构）](#def-11visitor-结构)
-    - [Axiom VI1（访问完备公理）](#axiom-vi1访问完备公理)
-    - [定理 VI-T1（单分发完备定理）](#定理-vi-t1单分发完备定理)
-    - [定理 VI-T2（穷尽匹配定理）](#定理-vi-t2穷尽匹配定理)
-    - [推论 VI-C1（近似表达）](#推论-vi-c1近似表达)
+    - [Def 1.1（Mediator 结构）](#def-11mediator-结构)
+    - [Axiom ME1（无直接耦合公理）](#axiom-me1无直接耦合公理)
+    - [Axiom ME2（无循环引用公理）](#axiom-me2无循环引用公理)
+    - [定理 ME-T1（循环引用避免定理）](#定理-me-t1循环引用避免定理)
+    - [定理 ME-T2（消息路由安全定理）](#定理-me-t2消息路由安全定理)
+    - [推论 ME-C1（纯 Safe Mediator）](#推论-me-c1纯-safe-mediator)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
-  - [完整场景示例：AST 美化打印](#完整场景示例ast-美化打印)
   - [典型场景](#典型场景)
+  - [完整场景示例：聊天室（channel 实现）](#完整场景示例聊天室channel-实现)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：新增变体遗漏访问](#反例新增变体遗漏访问)
+  - [反例：同事直接引用](#反例同事直接引用)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
@@ -39,7 +39,6 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -47,7 +46,7 @@
 > **状态**: ✅ 已完成
 > **分类**: 行为型
 > **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 23 行（Visitor）
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 17 行（Mediator）
 > **证明深度**: L3（完整证明）
 
 ---
@@ -56,24 +55,25 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [Visitor 形式化分析](#visitor-形式化分析)
+- [Mediator 形式化分析](#mediator-形式化分析)
   - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
-    - [Def 1.1（Visitor 结构）](#def-11visitor-结构)
-    - [Axiom VI1（访问完备公理）](#axiom-vi1访问完备公理)
-    - [定理 VI-T1（单分发完备定理）](#定理-vi-t1单分发完备定理)
-    - [定理 VI-T2（穷尽匹配定理）](#定理-vi-t2穷尽匹配定理)
-    - [推论 VI-C1（近似表达）](#推论-vi-c1近似表达)
+    - [Def 1.1（Mediator 结构）](#def-11mediator-结构)
+    - [Axiom ME1（无直接耦合公理）](#axiom-me1无直接耦合公理)
+    - [Axiom ME2（无循环引用公理）](#axiom-me2无循环引用公理)
+    - [定理 ME-T1（循环引用避免定理）](#定理-me-t1循环引用避免定理)
+    - [定理 ME-T2（消息路由安全定理）](#定理-me-t2消息路由安全定理)
+    - [推论 ME-C1（纯 Safe Mediator）](#推论-me-c1纯-safe-mediator)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [完整证明](#完整证明)
     - [形式化论证链](#形式化论证链)
-  - [完整场景示例：AST 美化打印](#完整场景示例ast-美化打印)
   - [典型场景](#典型场景)
+  - [完整场景示例：聊天室（channel 实现）](#完整场景示例聊天室channel-实现)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：新增变体遗漏访问](#反例新增变体遗漏访问)
+  - [反例：同事直接引用](#反例同事直接引用)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
@@ -89,7 +89,6 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -97,98 +96,122 @@
 >
 > **[来源: Rust Official Docs]**
 
-### Def 1.1（Visitor 结构）
-
-> **[来源: Wikipedia - Memory Safety]**
->
-> **[来源: Rust Official Docs]**
-
-设 $E$ 为元素类型（AST/节点），$V$ 为访问者类型。Visitor 是一个三元组 $\mathcal{VI} = (E, V, \mathit{visit})$，满足：
-
-- $\exists \mathit{visit} : V \times E \to R$
-- $E$ 为代数数据类型
-- 双重分发：$e.\mathit{accept}(v)$ 调用 $v.\mathit{visit}(e)$；或单分发：`match e` 后调用 `v.visit_X(e)`
-- **操作分离**：将操作与对象结构分离
-
-**形式化表示**：
-$$\mathcal{VI} = \langle E, V, \mathit{visit}: V \times E \rightarrow R \rangle$$
-
----
-
-### Axiom VI1（访问完备公理）
+### Def 1.1（Mediator 结构）
 
 > **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
-$$\forall e: E,\, \exists v: V,\, \mathit{visit}(v, e)\text{ 有定义}$$
+设 $M$ 为中介者类型，$C_1, \ldots, C_n$ 为同事类型。Mediator 是一个三元组 $\mathcal{ME} = (M, \{C_i\}, \mathit{mediate})$，满足：
 
-访问者可访问所有节点变体；可扩展新操作。
+- $M$ 持有或可访问 $C_1, \ldots, C_n$
+- $C_i$ 通过 $M$ 与 $C_j$ 通信，而非直接引用
+- $\mathit{mediate}(m, c_i, \mathit{msg})$ 由 $M$ 路由至目标
+- **去耦合**：同事间无直接依赖
+
+**形式化表示**：
+$$\mathcal{ME} = \langle M, \{C_i\}_{i=1}^n, \mathit{mediate}: M \times C_i \times \mathit{Msg} \rightarrow \mathrm{Action} \rangle$$
 
 ---
 
-### 定理 VI-T1（单分发完备定理）
+### Axiom ME1（无直接耦合公理）
 
 > **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
-Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达为近似。
+$$\forall i \neq j,\, C_i\text{ 不直接引用 }C_j\text{；仅通过 }M\text{ 通信}$$
 
-**证明**：
+同事间无直接耦合；仅通过中介通信。
 
-1. **单分发模式**：
+### Axiom ME2（无循环引用公理）
 
-   ```rust,ignore
-   fn visit<V: Visitor>(v: &mut V, e: &Expr) {
-       match e {
-           Expr::Int(n) => v.visit_int(*n),
-           Expr::Add(a, b) => { visit(v, a); visit(v, b); v.visit_add(a, b); }
-       }
-   }
-   ```
+> **[来源: Wikipedia - Type System]**
+>
+> **[来源: Rust Official Docs]**
 
-2. **穷尽匹配**：编译器检查所有变体被处理
-3. **可扩展性**：新 Visitor 实现 trait 即可
-4. **无双重分发**：Rust 无 OOP 虚函数双重分发
+$$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 
-由 Rust match 语义，得证。$\square$
+避免循环引用；用 `Weak` 或重构为无环。
 
 ---
 
-### 定理 VI-T2（穷尽匹配定理）
+### 定理 ME-T1（循环引用避免定理）
+
+> **[来源: Wikipedia - Rust (programming language)]**
+>
+> **[来源: Rust Official Docs]**
+
+`Rc`/`Weak` 或 `Arc` 管理循环引用时避免自引用；由 [ownership_model](../../../formal_methods/ownership_model.md) 与借用规则。
+
+**证明**：
+
+1. **弱引用模式**：
+
+   ```rust,ignore
+   struct Mediator { colleagues: Vec<Weak<Colleague>> }
+   ```
+
+2. **所有权与弱引用**：
+   - `Rc<Colleague>`：拥有同事
+   - `Weak<Colleague>`：不增加引用计数
+   - 避免循环引用导致的内存泄漏
+
+3. **升级安全**：
+   - `Weak::upgrade()` 返回 `Option<Rc<T>>`
+   - 原对象已释放时返回 `None`
+
+由 ownership_model 及 `Weak` 语义，得证。$\square$
+
+---
+
+### 定理 ME-T2（消息路由安全定理）
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
-`match e { ... }` 必须覆盖 $E$ 所有变体；新增变体需新增分支，否则编译错误。
+channel 或回调消息传递满足借用规则；无数据竞争。
 
 **证明**：
 
-1. **穷尽检查**：Rust 编译器强制 match 穷尽
-2. **编译错误**：遗漏变体 → 编译失败
-3. **安全保证**：运行时不存在未处理变体
+1. **channel 模式**：
 
-由 type_system_foundations，得证。$\square$
+   ```rust,ignore
+   let (tx, rx) = mpsc::channel();
+   // tx.send(msg) → 所有权转移
+   // rx.recv() → 接收所有权
+   ```
+
+2. **所有权转移**：
+   - 消息发送时所有权转移
+   - 无共享可变状态
+   - 无数据竞争
+
+3. **类型安全**：
+   - `Send` 约束保证跨线程安全
+   - 编译期检查
+
+由 ownership_model 及 Send/Sync 约束，得证。$\square$
 
 ---
 
-### 推论 VI-C1（近似表达）
+### 推论 ME-C1（纯 Safe Mediator）
 
 > **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
-Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Visitor}) = \mathrm{Approx}$。
+Mediator 为纯 Safe；`Vec<Box<dyn Fn>>` 或 channel 路由，无 `unsafe`。
 
 **证明**：
 
-1. 功能等价：match 单分发 = 访问者模式
-2. 风格差异：无 OOP 双重分发
-3. 标记为 Approximate
+1. `Weak` 引用：Safe API
+2. channel：标准库 Safe API
+3. 回调：`Box<dyn Fn>` Safe trait 对象
+4. 无 `unsafe` 块
 
-由 VI-T1、VI-T2 及 expressive_inexpressive_matrix，得证。$\square$
+由 ME-T1、ME-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 
@@ -200,9 +223,9 @@ Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
-| **概念定义层** | Def 1.1（Visitor 结构）、Axiom VI1（访问完备） | 上 |
-| **属性关系层** | Axiom VI1 $\rightarrow$ 定理 VI-T1/VI-T2 $\rightarrow$ 推论 VI-C1 | 上 |
-| **解释论证层** | VI-T1/VI-T2 完整证明；反例：新增变体遗漏 | §完整证明、§反例 |
+| **概念定义层** | Def 1.1（Mediator 结构）、Axiom ME1/ME2（无直接耦合、避免循环引用） | 上 |
+| **属性关系层** | Axiom ME1/ME2 $\rightarrow$ 定理 ME-T1/ME-T2 $\rightarrow$ 推论 ME-C1；依赖 ownership、borrow | 上 |
+| **解释论证层** | ME-T1/ME-T2 完整证明；反例：同事直接引用 | §完整证明、§反例 |
 
 ---
 
@@ -211,32 +234,26 @@ Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive
 > **[来源: Rust Official Docs]**
 
 ```rust
-enum Expr {
-    Int(i32),
-    Add(Box<Expr>, Box<Expr>),
+struct Mediator {
+    handlers: Vec<Box<dyn Fn(&str)>>,
 }
 
-trait Visitor {
-    fn visit_int(&mut self, n: i32);
-    fn visit_add(&mut self, a: &Expr, b: &Expr);
-}
-
-fn visit<V: Visitor>(v: &mut V, e: &Expr) {
-    match e {
-        Expr::Int(n) => v.visit_int(*n),
-        Expr::Add(a, b) => {
-            visit(v, a);
-            visit(v, b);
-            v.visit_add(a, b);
+impl Mediator {
+    fn broadcast(&self, msg: &str) {
+        for h in &self.handlers {
+            h(msg);
         }
     }
 }
 
-struct PrintVisitor;
-impl Visitor for PrintVisitor {
-    fn visit_int(&mut self, n: i32) { println!("{}", n); }
-    fn visit_add(&mut self, _: &Expr, _: &Expr) { println!("+"); }
-}
+// 同事通过 Mediator 通信
+let m = Mediator {
+    handlers: vec![
+        Box::new(|msg| println!("A received: {}", msg)),
+        Box::new(|msg| println!("B received: {}", msg)),
+    ],
+};
+m.broadcast("hello");
 ```
 
 ---
@@ -247,229 +264,205 @@ impl Visitor for PrintVisitor {
 
 ### 形式化论证链
 
-> **[来源: ACM - Systems Programming Languages]**
->
-> **[来源: Rust Official Docs]**
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```text
-Axiom VI1 (访问完备)
+Axiom ME1 (无直接耦合)
     ↓ 实现
-match + trait
+channel / Weak
     ↓ 保证
-定理 VI-T1 (单分发完备)
+定理 ME-T2 (消息路由安全)
     ↓ 组合
-type_system
+Axiom ME2 (无循环引用)
+    ↓ 依赖
+ownership_model
     ↓ 保证
-定理 VI-T2 (穷尽匹配)
+定理 ME-T1 (循环引用避免)
     ↓ 结论
-推论 VI-C1 (近似表达)
-```
-
----
-
-## 完整场景示例：AST 美化打印
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-```rust
-enum Expr { Int(i32), Add(Box<Expr>, Box<Expr>) }
-
-trait ExprVisitor<T> {
-    fn visit_int(&mut self, n: i32) -> T;
-    fn visit_add(&mut self, a: &Expr, b: &Expr, la: T, lb: T) -> T;
-}
-
-fn visit<V: ExprVisitor<String>>(v: &mut V, e: &Expr) -> String {
-    match e {
-        Expr::Int(n) => v.visit_int(*n),
-        Expr::Add(a, b) => {
-            let la = visit(v, a);
-            let lb = visit(v, b);
-            v.visit_add(a, b, la, lb)
-        }
-    }
-}
-
-struct PrettyPrint;
-impl ExprVisitor<String> for PrettyPrint {
-    fn visit_int(&mut self, n: i32) -> String { n.to_string() }
-    fn visit_add(&mut self, _: &Expr, _: &Expr, la: String, lb: String) -> String {
-        format!("({} + {})", la, lb)
-    }
-}
-
-// 输出："(1 + 2)"
+推论 ME-C1 (纯 Safe Mediator)
 ```
 
 ---
 
 ## 典型场景
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
 | :--- | :--- |
-| AST 遍历 | 编译器、解释器、代码生成 |
-| 文档/树遍历 | DOM、配置树、语法树 |
-| 序列化/反序列化 | 各节点类型不同处理 |
-| 类型检查 | 按节点类型施加不同规则 |
+| 对话框/表单 | 多个控件互不引用，通过 Mediator 协调 |
+| 聊天室 | 用户仅知 Mediator，消息经其广播 |
+| 工作流编排 | 任务节点通过协调器通信 |
+| 事件总线 | 发布/订阅中心化路由 |
+
+---
+
+## 完整场景示例：聊天室（channel 实现）
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+struct ChatMessage { from: String, content: String }
+
+struct ChatMediator {
+    tx: mpsc::Sender<ChatMessage>,
+}
+
+impl ChatMediator {
+    fn broadcast(&self, msg: ChatMessage) {
+        let _ = self.tx.send(msg);
+    }
+}
+
+fn run_room(rx: mpsc::Receiver<ChatMessage>) {
+    for msg in rx {
+        println!("[broadcast] {}: {}", msg.from, msg.content);
+    }
+}
+```
 
 ---
 
 ## 相关模式
->
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Composite](../02_structural/composite.md) | 遍历 Composite 常用 Visitor |
-| [Interpreter](./interpreter.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
-| [Iterator](./iterator.md) | 遍历方式不同；Visitor 深度优先，Iterator 可定制 |
+| [Observer](./observer.md) | 同为解耦；Mediator 集中路由，Observer 一对多 |
+| [Facade](../02_structural/10_facade.md) | Facade 简化接口；Mediator 协调多对象 |
+| [Chain of Responsibility](./chain_of_responsibility.md) | 链式传递 vs 集中路由 |
 
 ---
 
 ## 实现变体
->
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
 | :--- | :--- | :--- |
-| match + 函数 | `fn visit<V: Visitor>(v: &mut V, e: &Expr)` | 单分发；穷尽 |
-| trait accept | `fn accept<V: Visitor>(&self, v: &mut V)` | 模拟双重分发 |
-| 宏 | 自动生成 visit 分支 | 减少样板 |
+| `Vec<Box<dyn Fn>>` | 广播回调；无同事引用 | 简单事件总线 |
+| `Weak<Colleague>` | 同事注册；避免循环 | 需同事身份 |
+| channel | 消息传递；完全解耦 | 异步、跨线程 |
 
 ---
 
-## 反例：新增变体遗漏访问
->
+## 反例：同事直接引用
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-**错误**：`Expr` 新增 `Expr::Mul` 变体，`visit` 中 `match` 未补充分支。
+**错误**：Colleague 直接持有其他 Colleague 的引用，绕过 Mediator。
 
 ```rust,ignore
-enum Expr { Int(i32), Add(Box<Expr>, Box<Expr>), Mul(Box<Expr>, Box<Expr>) }
-fn visit<V: Visitor>(v: &mut V, e: &Expr) {
-    match e {
-        Expr::Int(n) => v.visit_int(*n),
-        Expr::Add(a, b) => { ... },
-        // 遗漏 Expr::Mul => 编译错误！
-    }
+struct BadColleague {
+    mediator: Rc<Mediator>,
+    other: Rc<Colleague>,  // 直接耦合，违反 Axiom ME1
 }
 ```
 
 ---
 
 ## 选型决策树
->
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
-需要按节点类型施加不同操作？
-├── 是 → 结构稳定、操作常变？ → Visitor（match 或 accept）
-│       └── 操作简单、顺序遍历？ → Iterator
-├── 需求值/解释？ → Interpreter
-└── 需建树？ → Composite
+需要多对象协调、避免直接耦合？
+├── 是 → 集中路由？ → Mediator（结构体 + channel / Weak）
+├── 需一对多通知？ → Observer
+├── 需简化多接口？ → Facade
+└── 需沿链传递？ → Chain of Responsibility
 ```
 
 ---
 
 ## 与 GoF 对比
->
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | GoF | Rust 对应 | 差异 |
 | :--- | :--- | :--- |
-| 双重分发 | match 单分发 | 风格不同 |
-| accept/visit | trait 方法 | 等价 |
-| 穷尽检查 | 编译期强制 | Rust 更强 |
+| 中介者接口 | trait 或 结构体 | 等价 |
+| 同事注册 | Vec、Weak | 等价 |
+| 无直接引用 | 仅持 Mediator | 等价 |
 
 ---
 
 ## 边界
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 分类 |
 | :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
-| 表达 | 近似 |
+| 表达 | 等价 |
 
 ---
 
 ## 与 Rust 1.93 的对应
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
-| 无新增影响 | — | 1.93 无影响 Visitor 语义的变更 |
+| 无新增影响 | — | 1.93 无影响 Mediator 语义的变更 |
 | 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
 
 ---
 
 ## 思维导图
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 mindmap
-  root((Visitor<br/>访问者模式))
+  root((Mediator<br/>中介者模式))
     结构
-      Element enum
-      Visitor trait
-      visit() 方法
+      Mediator
+      Colleague
+      消息路由
     行为
-      分离操作与结构
-      遍历访问
-      类型分发
+      集中协调
+      解耦同事
+      消息广播
     实现方式
-      match单分发
-      trait accept
-      宏生成
+      channel
+      Weak引用
+      回调Vec
     应用场景
-      AST遍历
-      类型检查
-      代码生成
-      序列化
+      聊天室
+      事件总线
+      工作流编排
+      表单协调
 ```
 
 ---
 
 ## 与其他模式的关系图
->
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph LR
-    V[Visitor<br/>访问者] -->|遍历| C[Composite<br/>组合模式]
-    V -->|AST处理对比| I[Interpreter<br/>解释器]
-    V -->|遍历对比| IT[Iterator<br/>迭代器]
-    style V fill:#9C27B0,stroke:#6A1B9A,stroke-width:3px,color:#fff
-    style C fill:#2196F3,stroke:#1565C0,color:#fff
-    style I fill:#9C27B0,stroke:#6A1B9A,color:#fff
-    style IT fill:#9E9E9E,stroke:#616161,color:#fff
+    M[Mediator<br/>中介者] -->|解耦对比| O[Observer<br/>观察者]
+    M -->|简化对比| F[Facade<br/>外观模式]
+    M -->|路由对比| CR[Chain of Responsibility<br/>职责链]
+    style M fill:#9C27B0,stroke:#6A1B9A,stroke-width:3px,color:#fff
+    style O fill:#9C27B0,stroke:#6A1B9A,color:#fff
+    style F fill:#2196F3,stroke:#1565C0,color:#fff
+    style CR fill:#9E9E9E,stroke:#616161,color:#fff
 ```
 
 ---
 
 ## 实质内容五维自检
->
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
 | :--- | :--- | :--- |
-| 形式化 | ✅ | Def 1.1、Axiom VI1、定理 VI-T1/T2（L3 完整证明）、推论 VI-C1 |
-| 代码 | ✅ | 可运行示例、AST 美化 |
+| 形式化 | ✅ | Def 1.1、Axiom ME1/ME2、定理 ME-T1/T2（L3 完整证明）、推论 ME-C1 |
+| 代码 | ✅ | 可运行示例、聊天室 |
 | 场景 | ✅ | 典型场景、完整示例 |
-| 反例 | ✅ | 新增变体遗漏访问 |
-| 衔接 | ✅ | match、trait、Composite |
+| 反例 | ✅ | 同事直接引用 |
+| 衔接 | ✅ | channel、Send/Sync、CE-T2 |
 | 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -477,13 +470,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: IEEE - Programming Language Standards]**
+> **[来源: Wikipedia - Rust (programming language)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -494,7 +487,7 @@ graph LR
 
 #### 代码示例更新
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: TRPL - The Rust Programming Language]**
 
 本文档中的所有Rust代码示例均已：
 
@@ -504,7 +497,7 @@ graph LR
 
 #### 相关文档
 
-> **[来源: POPL - Programming Languages Research]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -528,7 +521,6 @@ graph LR
 ---
 
 ## 相关概念
->
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [03_behavioral 目录](./README.md)
@@ -554,9 +546,12 @@ graph LR
 
 > **[来源: ACM - Formal Verification]**
 
-> **[来源: PLDI - Programming Language Design]**
-> **[来源: Wikipedia - Memory Safety]**
-> **[来源: Wikipedia - Type System]**
+
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
 
 ---
 
@@ -633,8 +628,6 @@ graph LR
 
 > **[来源: [crates.io](https://crates.io/)]**
 
-> **[来源: [docs.rs](https://docs.rs/)]**
-
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -657,8 +650,6 @@ graph LR
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -668,3 +659,4 @@ graph LR
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

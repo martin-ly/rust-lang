@@ -105,4 +105,4 @@
 ## 相关文档
 
 - [Rust 版本跟踪](../../concept/07_future/05_rust_version_tracking.md)
-- [迁移指南](../MIGRATION_GUIDE_2026.md)
+- [迁移指南](../10_migration_guide_2026.md)

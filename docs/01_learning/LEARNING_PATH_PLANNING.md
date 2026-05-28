@@ -234,7 +234,7 @@
 
 - [线程并发使用指南](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md)
 - [异步编程使用指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md)
-- [网络编程速查卡](../02_reference/quick_reference/network_programming_cheatsheet.md)
+- [网络编程速查卡](../02_reference/quick_reference/02_network_programming_cheatsheet.md)
 - [Pin 与自引用结构形式化](../research_notes/formal_methods/pin_self_referential.md)
 
 ---

@@ -29,7 +29,6 @@
   - [🔄 与现有方案对比](#-与现有方案对比)
     - [对比: 使用 const generics vs generic\_const\_exprs](#对比-使用-const-generics-vs-generic_const_exprs)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: 🧪 不稳定特性，需要 nightly](#状态--不稳定特性需要-nightly)
 
 ---
 
@@ -392,10 +391,6 @@ where
 - [Tracking Issue](https://github.com/rust-lang/rust/issues/76560)
 - [Const Eval](https://doc.rust-lang.org/nightly/unstable-book/language-features/const-eval.html)
 
----
-
-**最后更新**: 2026-03-15
-**状态**: 🧪 不稳定特性，需要 nightly
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

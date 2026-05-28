@@ -283,7 +283,7 @@ lto = true
 - 升级到 Rust 1.93 前的兼容性检查
 - 迁移问题排查
 
-#### 7. [Rust 1.93 兼容性深度解析](./09_rust_1.93_compatibility_deep_dive.md) 🆕
+#### 7. [Rust 1.93 兼容性深度解析](./06_09_rust_1_93_compatibility_deep_dive.md) 🆕
 
 > **[来源: IEEE - Programming Language Standards]**
 
@@ -479,7 +479,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - Rust 1.93 兼容性注意事项 🆕
 - [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md) 🆕
 - [Rust 版本演进链 1.89–1.93](../archive/2026_05_historical_docs/08_rust_version_evolution_1.89_to_1.93.md)（已归档）
-- [Rust 1.93 兼容性深度解析](./09_rust_1.93_compatibility_deep_dive.md) 🆕
+- [Rust 1.93 兼容性深度解析](./06_09_rust_1_93_compatibility_deep_dive.md) 🆕
 - [Rust 1.89→1.93 累积特性总览](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md)（已归档）
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](./06_11_rust_1_93_cargo_rustdoc_changes.md) 🆕
 - [Rust 1.93.1 vs 1.93.0 补丁版本对比](../archive/2026_05_historical_docs/12_rust_1.93.1_vs_1.93.0_comparison.md)（已归档）
@@ -490,8 +490,8 @@ pub fn function(a: i32, b: i32) -> i32 {
 - Rust 1.95+ 迁移指南 🆕
 - [Rust 1.94 研究笔记](../research_notes/RUST_194_RESEARCH_UPDATE.md) 🆕
 - [Rust 1.94 速查卡](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)（已归档）
-- [Cranelift 后端指南](./CRANELIFT_BACKEND_GUIDE.md) ⭐ (Rust 1.96+)
-- [TOML v1.1 Cargo 指南](./TOML_V11_CARGO_GUIDE.md) ⭐ (Cargo 1.96+)
+- [Cranelift 后端指南](./06_cranelift_backend_guide.md) ⭐ (Rust 1.96+)
+- [TOML v1.1 Cargo 指南](./06_toml_v11_cargo_guide.md) ⭐ (Cargo 1.96+)
 
 ### 官方资源
 

@@ -102,7 +102,7 @@
 | **Normative Documentation for Sound unsafe Rust** | — | 推进中 | 🟡 部分 | `concept/03_advanced/03_unsafe.md` | 未与官方 Safety-Critical 路线对齐 |
 | **Safety-Critical Lints in Clippy** | — | 推进中 | 🟡 部分 | `RUST_SAFETY_CRITICAL_ECOSYSTEM/` | 缺少 Clippy 安全 lint 矩阵 |
 | **MC/DC Coverage Support** | — | 推进中 | 🔴 **缺失** | — | 完全缺失 |
-| **MemorySanitizer / ThreadSanitizer** | Jakob Koschel | **目标 2026 稳定** | 🟡 部分 | `docs/MIRI_GUIDE.md` | 缺少 MSan/TSan 与 Miri 的对比 |
+| **MemorySanitizer / ThreadSanitizer** | Jakob Koschel | **目标 2026 稳定** | 🟡 部分 | `docs/03_miri_guide.md` | 缺少 MSan/TSan 与 Miri 的对比 |
 | **BorrowSanitizer** | — | 原型 | 🔴 **缺失** | — | 完全缺失 |
 
 ### 2.5 WASM 与跨语言层

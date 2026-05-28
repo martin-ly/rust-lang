@@ -1,21 +1,20 @@
-# Interpreter 形式化分析
+# Facade 形式化分析
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [Interpreter 形式化分析](#interpreter-形式化分析)
+- [Facade 形式化分析](#facade-形式化分析)
   - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
-    - [Def 1.1（Interpreter 结构）](#def-11interpreter-结构)
-    - [Axiom IN1（AST 有穷公理）](#axiom-in1ast-有穷公理)
-    - [Axiom IN2（match 穷尽公理）](#axiom-in2match-穷尽公理)
-    - [定理 IN-T1（穷尽匹配完备性定理）](#定理-in-t1穷尽匹配完备性定理)
-    - [定理 IN-T2（求值终止性定理）](#定理-in-t2求值终止性定理)
-    - [推论 IN-C1（纯 Safe Interpreter）](#推论-in-c1纯-safe-interpreter)
+    - [Def 1.1（Facade 结构）](#def-11facade-结构)
+    - [Axiom FA1（简化接口公理）](#axiom-fa1简化接口公理)
+    - [Axiom FA2（协调调用公理）](#axiom-fa2协调调用公理)
+    - [定理 FA-T1（封装边界定理）](#定理-fa-t1封装边界定理)
+    - [定理 FA-T2（所有权协调定理）](#定理-fa-t2所有权协调定理)
+    - [推论 FA-C1（纯 Safe Facade）](#推论-fa-c1纯-safe-facade)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [完整证明](#完整证明)
@@ -23,10 +22,10 @@
     - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
     - [内存安全保证](#内存安全保证)
   - [典型场景](#典型场景)
-  - [完整 DSL 示例：简易查询语言](#完整-dsl-示例简易查询语言)
+  - [完整场景示例：日志系统外观](#完整场景示例日志系统外观)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：AST 含环或无限递归](#反例ast-含环或无限递归)
+  - [反例：外观暴露子系统细节](#反例外观暴露子系统细节)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
@@ -42,15 +41,14 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **分类**: 行为型
+> **分类**: 结构型
 > **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 15 行（Interpreter）
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 10 行（Facade）
 > **证明深度**: L3（完整证明）
 
 ---
@@ -59,16 +57,16 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [Interpreter 形式化分析](#interpreter-形式化分析)
+- [Facade 形式化分析](#facade-形式化分析)
   - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
-    - [Def 1.1（Interpreter 结构）](#def-11interpreter-结构)
-    - [Axiom IN1（AST 有穷公理）](#axiom-in1ast-有穷公理)
-    - [Axiom IN2（match 穷尽公理）](#axiom-in2match-穷尽公理)
-    - [定理 IN-T1（穷尽匹配完备性定理）](#定理-in-t1穷尽匹配完备性定理)
-    - [定理 IN-T2（求值终止性定理）](#定理-in-t2求值终止性定理)
-    - [推论 IN-C1（纯 Safe Interpreter）](#推论-in-c1纯-safe-interpreter)
+    - [Def 1.1（Facade 结构）](#def-11facade-结构)
+    - [Axiom FA1（简化接口公理）](#axiom-fa1简化接口公理)
+    - [Axiom FA2（协调调用公理）](#axiom-fa2协调调用公理)
+    - [定理 FA-T1（封装边界定理）](#定理-fa-t1封装边界定理)
+    - [定理 FA-T2（所有权协调定理）](#定理-fa-t2所有权协调定理)
+    - [推论 FA-C1（纯 Safe Facade）](#推论-fa-c1纯-safe-facade)
     - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
   - [完整证明](#完整证明)
@@ -76,10 +74,10 @@
     - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
     - [内存安全保证](#内存安全保证)
   - [典型场景](#典型场景)
-  - [完整 DSL 示例：简易查询语言](#完整-dsl-示例简易查询语言)
+  - [完整场景示例：日志系统外观](#完整场景示例日志系统外观)
   - [相关模式](#相关模式)
   - [实现变体](#实现变体)
-  - [反例：AST 含环或无限递归](#反例ast-含环或无限递归)
+  - [反例：外观暴露子系统细节](#反例外观暴露子系统细节)
   - [选型决策树](#选型决策树)
   - [与 GoF 对比](#与-gof-对比)
   - [边界](#边界)
@@ -95,7 +93,6 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -103,130 +100,144 @@
 >
 > **[来源: Rust Official Docs]**
 
-### Def 1.1（Interpreter 结构）
+### Def 1.1（Facade 结构）
 
-> **[来源: IEEE - Programming Language Standards]**
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
-设 $E$ 为表达式类型（AST），$V$ 为值类型。Interpreter 是一个四元组 $\mathcal{IN} = (E, V, \mathit{eval}, \mathit{parse})$，满足：
+设 $F$ 为外观类型，$S_1, \ldots, S_n$ 为子系统类型。Facade 是一个多元组 $\mathcal{FA} = (F, \{S_i\}_{i=1}^n, \mathit{simplified\_ops})$，满足：
 
-- $\exists \mathit{eval} : E \to V$
-- $E$ 为代数数据类型：$E = \mathrm{Const}(V) \mid \mathrm{Op}(\mathit{Op}, E, E) \mid \ldots$
-- 递归求值：$\mathit{eval}(\mathrm{Op}(e_1,e_2)) = f(\mathit{eval}(e_1), \mathit{eval}(e_2))$
-- **有穷性**：AST 有穷、无环
+- $F$ 持有或可访问 $S_1, \ldots, S_n$
+- $\exists \mathit{simplified\_op} : F \to R$，封装对子系统的调用序列
+- 客户端仅通过 $F$ 的 `pub` 方法访问；子系统可私有
+- **封装边界**：隐藏子系统复杂性，提供简化接口
 
 **形式化表示**：
-$$\mathcal{IN} = \langle E, V, \mathit{eval}: E \rightarrow V, \mathit{parse}: \mathit{String} \rightarrow E \rangle$$
+$$\mathcal{FA} = \langle F, \{S_i\}_{i=1}^n, \{\mathit{simplified\_op}_j: F \rightarrow R_j\} \rangle$$
 
 ---
 
-### Axiom IN1（AST 有穷公理）
+### Axiom FA1（简化接口公理）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
-$$\forall e: E,\, e\text{ 为有限树；无环}$$
+$$\forall f: F,\, \mathit{simplified\_op}(f) \text{ 隐藏 } \{S_i\} \text{ 的调用复杂性}$$
 
-AST 有穷；无环（由结构保证）。
+外观简化接口，隐藏子系统复杂性。
 
-### Axiom IN2（match 穷尽公理）
+### Axiom FA2（协调调用公理）
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
-$$\mathsf{match}\,e\,\mathsf{with}\,\{\ldots\}\text{ 覆盖 }E\text{ 所有变体}$$
+$$\mathit{simplified\_op}(f) \text{ 协调 } S_1, \ldots, S_n \text{ 的调用顺序}$$
 
-`match` 穷尽所有变体；无遗漏。
+外观协调调用顺序；子系统间依赖由 $F$ 管理。
 
 ---
 
-### 定理 IN-T1（穷尽匹配完备性定理）
+### 定理 FA-T1（封装边界定理）
 
-> **[来源: POPL - Programming Languages Research]**
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
-枚举 + match 求值，由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 穷尽匹配保证完备性。
+模块系统与 `pub` 可见性保证封装边界。由 Rust 模块语义。
 
 **证明**：
 
-1. **枚举定义**：
+1. **模块系统**：
 
-   ```rust,ignore
-   enum Expr { Const(i32), Add(Box<Expr>, Box<Expr>), ... }
+   ```rust
+   mod subsystem { pub(crate) fn op() {} }  // 子系统私有
+
+   pub struct Facade;  // 外观公开
+   impl Facade {
+       pub fn simple_op(&self) { subsystem::op(); }  // 公开方法
+   }
    ```
 
-2. **穷尽检查**：
-   - Rust 编译器检查 match 覆盖所有变体
-   - 遗漏变体 → 编译错误
+2. **可见性层次**：
+   - `pub`：完全公开
+   - `pub(crate)`：crate 内可见
+   - `pub(super)`：父模块可见
+   - 默认：私有
 
-3. **完备性**：
-   - 每个变体有对应处理分支
-   - 递归调用覆盖子表达式
+3. **封装保证**：
+   - 客户端只能访问 `Facade` 的 `pub` 方法
+   - 子系统实现细节对外不可见
+   - 修改子系统不影响客户端（只要外观接口不变）
 
-由 type_system_foundations 保持性，得证。$\square$
-
----
-
-### 定理 IN-T2（求值终止性定理）
-
-> **[来源: IEEE - Programming Language Standards]**
->
-> **[来源: Rust Official Docs]**
-
-若 $E$ 有穷且无环，则 $\mathit{eval}(e)$ 终止。
-
-**证明**：
-
-1. **结构归纳**：
-   - 基础：`Const(v)` 直接返回值
-   - 归纳：`Op(e1, e2)` 先求值 $e_1, e_2$（子表达式更小）
-
-2. **有界深度**：
-   - AST 深度有界（Axiom IN1）
-   - 递归深度不超过 AST 深度
-
-3. **终止**：
-   - 有限递归步数后终止
-   - 无无限循环（无环）
-
-由结构归纳法，得证。$\square$
+由 Rust 模块系统语义，得证。$\square$
 
 ---
 
-### 推论 IN-C1（纯 Safe Interpreter）
+### 定理 FA-T2（所有权协调定理）
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
-Interpreter 为纯 Safe；`enum` + `match` 递归求值，无 `unsafe`。
+外观协调子系统所有权；客户端仅持有外观引用。
 
 **证明**：
 
-1. `enum` 定义：纯 Safe
-2. `match` 求值：纯 Safe
-3. 递归调用：Safe Rust
+1. **所有权模式**：
+
+   ```rust,ignore
+   pub struct Facade {
+       a: SubsystemA,  // 拥有
+       b: SubsystemB,  // 拥有
+   }
+   ```
+
+2. **借用协调**：
+   - `Facade` 方法按需借用子系统
+   - 借用规则保证无冲突
+
+3. **客户端视图**：
+   - 客户端：`let f = Facade::new(); f.simple_op();`
+   - 不直接操作子系统
+   - 所有权由 `Facade` 管理
+
+由 ownership_model 及模块封装，得证。$\square$
+
+---
+
+### 推论 FA-C1（纯 Safe Facade）
+
+> **[来源: ACM - Systems Programming Languages]**
+>
+> **[来源: Rust Official Docs]**
+
+Facade 为纯 Safe；仅用结构体聚合、私有字段、`pub fn` 委托，无 `unsafe`。
+
+**证明**：
+
+1. 结构体聚合：`struct Facade { a: A, b: B }` 纯 Safe
+2. 私有字段：默认私有，封装实现
+3. `pub fn` 委托：公开方法调用子系统，纯 Safe
 4. 无 `unsafe` 块
 
-由 IN-T1、IN-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
+由 FA-T1、FA-T2 及 [safe_unsafe_matrix](../../05_boundary_system/safe_unsafe_matrix.md) SBM-T1，得证。$\square$
 
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
-| **概念定义层** | Def 1.1（Interpreter 结构）、Axiom IN1/IN2（AST 有穷、match 穷尽） | 上 |
-| **属性关系层** | Axiom IN1/IN2 $\rightarrow$ 定理 IN-T1/IN-T2 $\rightarrow$ 推论 IN-C1；依赖 type_system | 上 |
-| **解释论证层** | IN-T1/IN-T2 完整证明；反例：AST 含环、漏 match | §完整证明、§反例 |
+| **概念定义层** | Def 1.1（Facade 结构）、Axiom FA1/FA2（简化接口、协调调用） | 上 |
+| **属性关系层** | Axiom FA1/FA2 $\rightarrow$ 定理 FA-T1/FA-T2 $\rightarrow$ 推论 FA-C1；依赖模块语义、safe_unsafe_matrix | 上 |
+| **解释论证层** | FA-T1/FA-T2 完整证明；反例：外观暴露子系统细节 | §完整证明、§反例 |
 
 ---
 
@@ -235,34 +246,44 @@ Interpreter 为纯 Safe；`enum` + `match` 递归求值，无 `unsafe`。
 > **[来源: Rust Official Docs]**
 
 ```rust
-enum Expr {
-    Const(i32),
-    Add(Box<Expr>, Box<Expr>),
-    Mul(Box<Expr>, Box<Expr>),
+// 子系统（通常为私有模块）
+struct SubsystemA;
+impl SubsystemA {
+    fn operation_a(&self) -> String { "A".into() }
 }
 
-impl Expr {
-    fn eval(&self) -> i32 {
-        match self {
-            Expr::Const(n) => *n,
-            Expr::Add(a, b) => a.eval() + b.eval(),
-            Expr::Mul(a, b) => a.eval() * b.eval(),
-        }
+struct SubsystemB;
+impl SubsystemB {
+    fn operation_b(&self, s: &str) -> String {
+        format!("B({})", s)
     }
 }
 
-// 1 + 2 * 3
-let e = Expr::Add(
-    Box::new(Expr::Const(1)),
-    Box::new(Expr::Mul(
-        Box::new(Expr::Const(2)),
-        Box::new(Expr::Const(3)),
-    )),
-);
-assert_eq!(e.eval(), 7);
+// 外观
+pub struct Facade {
+    a: SubsystemA,
+    b: SubsystemB,
+}
+
+impl Facade {
+    pub fn new() -> Self {
+        Self {
+            a: SubsystemA,
+            b: SubsystemB,
+        }
+    }
+    pub fn simplified_op(&self) -> String {
+        let x = self.a.operation_a();
+        self.b.operation_b(&x)
+    }
+}
+
+// 客户端仅使用 Facade
+let f = Facade::new();
+assert_eq!(f.simplified_op(), "B(A)");
 ```
 
-**形式化对应**：`Expr` 即 $E$；`Const`、`Add`、`Mul` 为变体；`eval` 即 $\mathit{eval}$。
+**形式化对应**：`Facade` 即 $F$；`SubsystemA`、`SubsystemB` 即 $S_1$、$S_2$；`simplified_op` 即 $\mathit{simplified\_op}$。
 
 ---
 
@@ -272,254 +293,237 @@ assert_eq!(e.eval(), 7);
 
 ### 形式化论证链
 
-> **[来源: POPL - Programming Languages Research]**
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```text
-Axiom IN1 (AST 有穷)
+Axiom FA1 (简化接口)
     ↓ 依赖
-Box 间接
+Rust 模块系统
+    ↓ 保证
+定理 FA-T1 (封装边界)
     ↓ 组合
-Axiom IN2 (match 穷尽)
+Axiom FA2 (协调调用)
     ↓ 依赖
-type_system
+ownership_model
     ↓ 保证
-定理 IN-T1 (穷尽匹配完备性)
-    ↓ 组合
-结构归纳
-    ↓ 保证
-定理 IN-T2 (求值终止性)
+定理 FA-T2 (所有权协调)
     ↓ 结论
-推论 IN-C1 (纯 Safe Interpreter)
+推论 FA-C1 (纯 Safe Facade)
 ```
 
 ### 与 Rust 类型系统的联系
 
-> **[来源: PLDI - Programming Language Design]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-| Rust 特性 | Interpreter 实现 | 类型安全保证 |
+| Rust 特性 | Facade 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
-| `enum` | AST 定义 | 穷尽匹配 |
-| `Box<T>` | 递归类型 | 有界大小 |
-| `match` | 求值分支 | 完备性检查 |
-| 递归方法 | 求值 | 终止性 |
+| `mod` 系统 | 子系统隔离 | 可见性控制 |
+| `pub`/`priv` | 接口封装 | 访问控制 |
+| 结构体聚合 | 持有子系统 | 所有权管理 |
+| 方法委托 | 简化接口 | 类型检查 |
 
 ### 内存安全保证
 
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: TRPL - The Rust Programming Language]**
 
-1. **无悬垂**：`Box` 拥有子表达式
-2. **类型安全**：match 穷尽检查
-3. **终止性**：AST 有穷保证求值终止
-4. **无泄漏**：递归释放整个 AST
+1. **封装安全**：子系统细节对外不可见
+2. **所有权清晰**：外观管理子系统生命周期
+3. **借用协调**：外观方法内部协调借用
+4. **接口稳定**：外观接口变化最小化
 
 ---
 
 ## 典型场景
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
 | :--- | :--- |
-| 表达式求值 | 算术、布尔、正则 |
-| 脚本解析 | DSL、配置语言 |
-| 查询解析 | SQL 子集、过滤表达式 |
+| 库/API 简化 | 复杂 SDK 封装为简单入口 |
+| 子系统协调 | 编排多个模块的调用顺序 |
+| 遗留系统 | 封装旧接口为新接口 |
 
 ---
 
-## 完整 DSL 示例：简易查询语言
->
+## 完整场景示例：日志系统外观
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
+**场景**：日志需经由格式化、写入、轮转三个子系统；客户端仅需 `log(level, message)`。
+
 ```rust
-#[derive(Debug, Clone)]
-pub enum QueryExpr {
-    Lit(i64),
-    Field(String),
-    Eq(Box<QueryExpr>, Box<QueryExpr>),
-    Gt(Box<QueryExpr>, Box<QueryExpr>),
-    And(Box<QueryExpr>, Box<QueryExpr>),
-    Or(Box<QueryExpr>, Box<QueryExpr>),
-}
-
-impl QueryExpr {
-    pub fn eval(&self, ctx: &std::collections::HashMap<String, i64>) -> Option<bool> {
-        match self {
-            QueryExpr::Lit(n) => Some(*n != 0),
-            QueryExpr::Field(f) => ctx.get(f).map(|&v| v != 0),
-            QueryExpr::Eq(a, b) => {
-                let (va, vb) = (eval_num(a, ctx)?, eval_num(b, ctx)?);
-                Some(va == vb)
-            }
-            QueryExpr::Gt(a, b) => {
-                let (va, vb) = (eval_num(a, ctx)?, eval_num(b, ctx)?);
-                Some(va > vb)
-            }
-            QueryExpr::And(a, b) => Some(a.eval(ctx)? && b.eval(ctx)?),
-            QueryExpr::Or(a, b) => Some(a.eval(ctx)? || b.eval(ctx)?),
-        }
+mod formatter {
+    pub(super) fn format(level: &str, msg: &str) -> String {
+        format!("[{}] {}", level, msg)
     }
 }
 
-fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Option<i64> {
-    match e {
-        QueryExpr::Lit(n) => Some(*n),
-        QueryExpr::Field(f) => ctx.get(f).copied(),
-        _ => None,
+mod writer {
+    pub(super) fn write(s: &str) { println!("{}", s); }
+}
+
+mod rotator {
+    pub(super) fn maybe_rotate() { /* 按大小/时间轮转 */ }
+}
+
+pub struct LogFacade;
+
+impl LogFacade {
+    pub fn log(level: &str, msg: &str) {
+        rotator::maybe_rotate();
+        let formatted = formatter::format(level, msg);
+        writer::write(&formatted);
     }
 }
+
+// 客户端：LogFacade::log("INFO", "started");
 ```
 
-**形式化对应**：AST 即 $E$；`eval` 即 $\mathit{eval}$；Axiom IN1 由 `Box` 递归深度有界保证；Axiom IN2 由 `match` 穷尽保证。
+**形式化对应**：`LogFacade` 为 $F$；formatter、writer、rotator 为私有子系统；`log` 为 $\mathit{simplified\_op}$；Axiom FA1 由 `pub(super)` 隐藏实现保证。
 
 ---
 
 ## 相关模式
->
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Visitor](./visitor.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
-| [Composite](../02_structural/composite.md) | AST 即 Composite 结构 |
-| [Strategy](./strategy.md) | 不同求值策略可替换 |
+| [Adapter](./adapter.md) | Facade 简化多接口；Adapter 转换单接口 |
+| [Mediator](../03_behavioral/10_mediator.md) | Facade 协调子系统；Mediator 协调同事 |
+| [Proxy](./proxy.md) | Proxy 委托单对象；Facade 聚合多对象 |
 
 ---
 
 ## 实现变体
->
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
 | :--- | :--- | :--- |
-| 枚举 + match | 同质 AST；穷尽匹配 | 简单 DSL |
-| trait 节点 | 异质节点；多态求值 | 可扩展语法 |
-| 访问者分离 | 求值逻辑在 Visitor | 多操作（求值、打印、优化） |
+| 结构体聚合 | `struct Facade { a: A, b: B }` | 持有子系统 |
+| 模块 | `mod facade { pub fn op() }` | 函数级简化 |
+| trait | `trait Facade { fn op(&self); }` | 多实现 |
 
 ---
 
-## 反例：AST 含环或无限递归
->
+## 反例：外观暴露子系统细节
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-**错误**：自引用表达式导致 `eval` 无限递归。
+**错误**：外观将子系统类型作为 `pub` 字段或方法参数暴露，破坏封装。
 
-```rust
-// 若 Expr 允许 Expr::Ref(Box<Expr>) 指向自身 → 无限递归
+```rust,ignore
+pub struct BadFacade {
+    pub a: SubsystemA,  // 暴露内部，客户端可直接操作
+}
 ```
 
-**Axiom IN1**：AST 有穷、无环；由 `Box` 递归与无自引用保证。
+**后果**：客户端依赖子系统，外观失去简化接口的意义；违反 Axiom FA1。
 
 ---
 
 ## 选型决策树
->
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
-需要解析并求值 DSL/表达式？
-├── 是 → 枚举 AST + match 求值？ → Interpreter
-│       └── 需多操作（求值、打印、优化）？ → Visitor
-├── 需遍历树？ → Visitor 或 Iterator
-└── 需策略替换？ → Strategy
+需要简化多子系统调用？
+├── 是 → 仅协调调用顺序？ → Facade（结构体聚合）
+│       └── 需调解对象间通信？ → Mediator
+├── 转换单接口？ → Adapter
+└── 委托单对象？ → Proxy
 ```
 
 ---
 
 ## 与 GoF 对比
->
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-GoF 用继承定义 AST 节点；Rust 用枚举更简洁，且穷尽匹配保证完备性。
+| GoF | Rust 对应 | 差异 |
+| :--- | :--- | :--- |
+| 外观类 | 结构体或模块 | 等价 |
+| 子系统 | 私有字段 | 完全等价 |
+| 简化接口 | pub fn | 等价 |
 
 ---
 
 ## 边界
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 分类 |
 | :--- | :--- |
 | 安全 | 纯 Safe |
 | 支持 | 原生 |
-| 表达 | 近似（无继承，用枚举） |
+| 表达 | 等价 |
 
 ---
 
 ## 与 Rust 1.93 的对应
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
-| 无新增影响 | — | 1.93 无影响 Interpreter 语义的变更 |
+| 无新增影响 | — | 1.93 无影响 Facade 语义的变更 |
 | 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../RUST_193_COUNTEREXAMPLES_INDEX.md) 特定项 |
 
 ---
 
 ## 思维导图
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 mindmap
-  root((Interpreter<br/>解释器模式))
+  root((Facade<br/>外观模式))
     结构
-      Expression enum
-      AST 树
-      eval() 方法
+      Facade struct
+      Subsystem A
+      Subsystem B
+      Subsystem C
     行为
-      解析语法
-      递归求值
-      返回结果
+      简化接口
+      协调调用
+      隐藏复杂性
     实现方式
-      枚举 + match
-      trait 节点
-      Visitor分离
+      结构体聚合
+      模块函数
+      trait 抽象
     应用场景
-      表达式求值
-      DSL解析
-      查询语言
-      配置文件
+      复杂SDK封装
+      子系统协调
+      遗留系统包装
+      API简化
 ```
 
 ---
 
 ## 与其他模式的关系图
->
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph LR
-    I[Interpreter<br/>解释器模式] -->|遍历| V[Visitor<br/>访问者]
-    I -->|AST结构| C[Composite<br/>组合模式]
-    I -->|求值策略| S[Strategy<br/>策略模式]
-    I -.->|对比| P[Parser Combinator<br/>解析器组合子]
-    style I fill:#9C27B0,stroke:#6A1B9A,stroke-width:3px,color:#fff
-    style V fill:#9C27B0,stroke:#6A1B9A,color:#fff
-    style C fill:#2196F3,stroke:#1565C0,color:#fff
-    style S fill:#9C27B0,stroke:#6A1B9A,color:#fff
+    F[Facade<br/>外观模式] -->|简化多接口| A[Adapter<br/>适配器]
+    F -->|协调同事| M[Mediator<br/>中介者]
+    F -->|对比| P[Proxy<br/>代理模式]
+    F -.->|复杂vs简单| AF[Abstract Factory<br/>抽象工厂]
+    style F fill:#2196F3,stroke:#1565C0,stroke-width:3px,color:#fff
+    style A fill:#2196F3,stroke:#1565C0,color:#fff
+    style M fill:#2196F3,stroke:#1565C0,color:#fff
     style P fill:#9E9E9E,stroke:#616161,color:#fff
+    style AF fill:#9E9E9E,stroke:#616161,color:#fff
 ```
 
 ---
 
 ## 实质内容五维自检
->
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
 | :--- | :--- | :--- |
-| 形式化 | ✅ | Def 1.1、Axiom IN1/IN2、定理 IN-T1/T2（L3 完整证明）、推论 IN-C1 |
-| 代码 | ✅ | 可运行示例、过滤表达式、DSL |
+| 形式化 | ✅ | Def 1.1、Axiom FA1/FA2、定理 FA-T1/T2（L3 完整证明）、推论 FA-C1 |
+| 代码 | ✅ | 可运行示例、日志外观 |
 | 场景 | ✅ | 典型场景、完整示例 |
-| 反例 | ✅ | AST 含环或无限递归 |
-| 衔接 | ✅ | ownership、递归类型 |
-| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
+| 反例 | ✅ | 外观暴露子系统细节 |
+| 衔接 | ✅ | ownership、CE-T1 |
+| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[Fowler EAA](https://martinfowler.com/eaaCatalog/)、[formal_methods](../../../formal_methods/README.md) |
 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -527,13 +531,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
 
-> **[来源: POPL - Programming Languages Research]**
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -544,7 +548,7 @@ graph LR
 
 #### 代码示例更新
 
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: Wikipedia - Rust (programming language)]**
 
 本文档中的所有Rust代码示例均已：
 
@@ -554,7 +558,7 @@ graph LR
 
 #### 相关文档
 
-> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -578,10 +582,9 @@ graph LR
 ---
 
 ## 相关概念
->
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [03_behavioral 目录](./README.md)
+- [02_structural 目录](./README.md)
 - [上级目录](../README.md)
 
 ---
@@ -604,12 +607,7 @@ graph LR
 
 > **[来源: ACM - Formal Verification]**
 
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**
-> **[来源: IEEE - Programming Language Standards]**
-> **[来源: RFCs - github.com/rust-lang/rfcs]**
-> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-> **[来源: POPL - Programming Languages Research]**
+> **[来源: TRPL - The Rust Programming Language]**
 
 ---
 
@@ -692,6 +690,22 @@ graph LR
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -715,6 +729,10 @@ graph LR
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ---
 

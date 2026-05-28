@@ -113,7 +113,7 @@
 
 **文档状态**：本指南结构与全部六类验证的 Coq/Isabelle 框架、任务清单已完整；验证任务清单中的方框供实施时勾选。
 
-**Coq 证明骨架**：所有权唯一性（T-OW2）的 Coq 定理骨架已创建，见 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)、[COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)。
+**Coq 证明骨架**：所有权唯一性（T-OW2）的 Coq 定理骨架已创建，见 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)、[COQ_ISABELLE_PROOF_SCAFFOLDING](./10_coq_isabelle_proof_scaffolding.md)。
 
 ### 验证目标
 
@@ -614,7 +614,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 | 工具 | 输入 | 输出 | 对接状态 | 任务入口 |
 | :--- | :--- | :--- | :--- | :--- |
 | **Aeneas** | Safe Rust (MIR/THIR) | Coq/F*/HOL4/Lean | 📋 计划中 | [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md) |
-| **coq-of-rust** | THIR | Rocq (Coq) | 📋 计划中 | [COQ_OF_RUST_INTEGRATION_PLAN](./COQ_OF_RUST_INTEGRATION_PLAN.md) |
+| **coq-of-rust** | THIR | Rocq (Coq) | 📋 计划中 | [COQ_OF_RUST_INTEGRATION_PLAN](./10_coq_of_rust_integration_plan.md) |
 
 完成 Aeneas/coq-of-rust 对接后，在 [PROOF_INDEX](./PROOF_INDEX.md) 中标注对应定理为 L3（机器可检查）。
 

@@ -381,7 +381,7 @@
 *适用*：formal_methods、type_theory、software_design_theory 核心文档；
 索引/概览类可放宽。
 依据：RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN。
-**formal_methods 六篇完备性**（六篇×六维自检）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
+**formal_methods 六篇完备性**（六篇×六维自检）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/10_formal_methods_completeness_checklist.md)。
 
 ---
 

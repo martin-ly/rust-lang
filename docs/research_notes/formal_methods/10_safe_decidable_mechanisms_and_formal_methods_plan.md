@@ -239,10 +239,10 @@
 
 | 文档 | 与本计划的关系 |
 | :--- | :--- |
-| [formal_methods README](./README.md) | 本计划为 README 的「意见与可持续推进」扩展；README 可增加「参见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)」。 |
+| [formal_methods README](./README.md) | 本计划为 README 的「意见与可持续推进」扩展；README 可增加「参见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md)」。 |
 | [00_completeness_gaps](./00_completeness_gaps.md) | Send/Sync 独立形式化已补全；§8 后续可持续推进已标阶段 A–D 完成，链到本计划与总览。 |
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](../HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 阶段 D 中增加「安全可判定机制↔思维表征」表或节。 |
-| [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./FORMAL_METHODS_COMPLETENESS_CHECKLIST.md) | 六篇×六维完备性检查表（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）；与总览互为自检。 |
+| [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./10_formal_methods_completeness_checklist.md) | 六篇×六维完备性检查表（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）；与总览互为自检。 |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | §3 完备对比表与该文档 92 项一致；可互为「总览」与「详表」。 |
 | [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) | Send/Sync 设计理由已存在；形式化 Def/定理由阶段 A 专篇承担，DESIGN_MECHANISM 链到专篇。 |
 

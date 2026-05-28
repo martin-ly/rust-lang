@@ -92,7 +92,7 @@
 ### 2.4 清理过时内容
 
 - 将 `rust-ownership-decidability/08-advanced-topics/RUST_1.94_UPDATE_REPORT.md` 归档 ✅ 已完成
-- 将 `rust-ownership-decidability/RUST_194_STDLIB_API_GUIDE.md` 归档 ✅ 已完成
+- 将 `rust-ownership-decidability/RUST_194_STDLIB_10_api_guide.md` 归档 ✅ 已完成
 - 更新 `DEEP_DIVE_COMPLETION_REPORT.md` 中的版本目标
 
 ---

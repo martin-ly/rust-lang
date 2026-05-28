@@ -36,7 +36,8 @@
 
 ## 🎯 概述
 
-WebAssembly (WASM) 已从浏览器的"快速 JavaScript 替代"演进为通用字节码格式。Rust 是 WASM 生态中最成熟的生产语言之一，本指南深入解析四大前沿方向：
+WebAssembly (WASM) 已从浏览器的"快速 JavaScript 替代"演进为通用字节码格式。
+Rust 是 WASM 生态中最成熟的生产语言之一，本指南深入解析四大前沿方向：
 
 ```text
 WASM 技术演进路线:
@@ -57,7 +58,8 @@ WASM 1.0 (2017)
                     └── 跨语言互操作
 ```
 
-> 项目内相关代码请见 [`crates/c12_wasm/src/component_model.rs`](../../crates/c12_wasm/src/component_model.rs) 和 [`content/ecosystem/web_frameworks/`](../../content/ecosystem/web_frameworks/)。
+> 项目内相关代码请见 [`crates/c12_wasm/src/component_model.rs`](../../crates/c12_wasm/src/component_model.rs)
+> 和 [`content/ecosystem/web_frameworks/`](../../content/ecosystem/web_frameworks/)。
 
 ---
 

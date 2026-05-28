@@ -201,17 +201,17 @@ research_notes/
 13. **INDEX.md** - 完整索引
 14. **GETTING_STARTED.md** - 快速入门指南
 15. **FAQ.md** - 常见问题解答
-16. **MAINTENANCE_GUIDE.md** - 维护指南
+16. **10_maintenance_guide.md** - 维护指南
 17. **BEST_PRACTICES.md** - 最佳实践
 18. **GLOSSARY.md** - 术语表
-19. **RESOURCES.md** - 研究资源汇总
+19. **10_resources.md** - 研究资源汇总
 20. **SYSTEM_INTEGRATION.md** - 系统集成指南
-21. **EXAMPLE.md** - 研究笔记示例
+21. **10_example.md** - 研究笔记示例
 22. **PROGRESS_TRACKING.md** - 研究进展跟踪
-23. **TASK_CHECKLIST.md** - 研究任务清单
-24. **WRITING_GUIDE.md** - 研究笔记写作指南
-25. **STATISTICS.md** - 研究笔记系统统计报告
-26. **QUICK_FIND.md** - 研究笔记快速查找
+23. **10_task_checklist.md** - 研究任务清单
+24. **10_writing_guide.md** - 研究笔记写作指南
+25. **10_statistics.md** - 研究笔记系统统计报告
+26. **10_quick_find.md** - 研究笔记快速查找
 27. **CONTENT_ENHANCEMENT.md** - 研究笔记内容完善指南
 
 ### 研究笔记详情

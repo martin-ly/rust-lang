@@ -338,7 +338,7 @@ impl<S: CompressStrategy> Exporter<S> {
 | :--- | :--- |
 | [Decorator](../02_structural/decorator.md) | 装饰器可持有多态策略 |
 | [State](./state.md) | 策略可替换；State 可转换 |
-| [Template Method](./template_method.md) | 同为算法定制；Strategy 为组合，Template 为继承等价 |
+| [Template Method](./10_template_method.md) | 同为算法定制；Strategy 为组合，Template 为继承等价 |
 
 ---
 

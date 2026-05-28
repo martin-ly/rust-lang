@@ -21,7 +21,6 @@
     - [时间分配](#时间分配)
     - [常见陷阱](#常见陷阱)
   - [🤝 获取帮助](#-获取帮助)
-  - [**维护状态**: ✅ 活跃维护](#维护状态--活跃维护)
 
 ## 📚 本层文档概览
 
@@ -116,11 +115,6 @@ graph LR
 3. 查看 [可视化文档](../VISUALIZATION_INDEX.md)
 4. 提交 Issue 或联系维护者
 
----
-
-**最后更新**: 2025-12-11
-**适用版本**: Rust 1.93.0+
-**维护状态**: ✅ 活跃维护
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

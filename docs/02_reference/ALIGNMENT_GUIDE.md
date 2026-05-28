@@ -406,7 +406,7 @@ struct CacheLinePadded {
 
 > **说明**：此处「对齐」指项目文档与官方发布的一致性，与内存对齐无技术关联。技术读者可跳过。
 
-版本追踪与权威来源： [RUST_RELEASE_TRACKING_CHECKLIST](../07_project/RUST_RELEASE_TRACKING_CHECKLIST.md)、[INCREMENTAL_UPDATE_FLOW](../research_notes/INCREMENTAL_UPDATE_FLOW.md)。
+版本追踪与权威来源： [RUST_RELEASE_TRACKING_CHECKLIST](../07_project/07_rust_release_tracking_checklist.md)、[INCREMENTAL_UPDATE_FLOW](../research_notes/10_incremental_update_flow.md)。
 
 ---
 

@@ -1543,7 +1543,7 @@ fn main() {
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
 | 研究笔记系统 | [../research_notes/SYSTEM_SUMMARY.md](../research_notes/SYSTEM_SUMMARY.md) | 系统总结 |
-| 增量更新流程 | [../research_notes/INCREMENTAL_UPDATE_FLOW.md](../research_notes/INCREMENTAL_UPDATE_FLOW.md) | 版本更新流程 |
+| 增量更新流程 | [../research_notes/10_incremental_update_flow.md](../research_notes/10_incremental_update_flow.md) | 版本更新流程 |
 | 理论体系 | [../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | 理论体系架构 |
 
 ---

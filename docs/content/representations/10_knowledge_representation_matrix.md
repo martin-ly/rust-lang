@@ -153,7 +153,7 @@ mindmap
 |--------|----------|--------|
 | 并发模型选择决策树 | `docs/04_thinking/DECISION_GRAPH_NETWORK.md` | ✅ 100% |
 | 技术选型决策树 | `docs/04_thinking/DECISION_GRAPH_NETWORK.md` | ✅ 100% |
-| 错误处理选择决策树 | `docs/research_notes/formal_methods/ERROR_HANDLING_DECISION_TREE.md` | ✅ 100% |
+| 错误处理选择决策树 | `docs/research_notes/formal_methods/10_error_handling_decision_tree.md` | ✅ 100% |
 | 所有权转移决策树 | `docs/research_notes/formal_methods/10_ownership_transfer_decision_tree.md` | ✅ 100% |
 | 验证工具选择决策树 | `docs/research_notes/formal_methods/VERIFICATION_TOOLS_DECISION_TREE.md` | ✅ 100% |
 | 序列化决策树 | `docs/research_notes/formal_methods/10_serialization_decision_tree.md` | ✅ 100% |
@@ -178,7 +178,7 @@ mindmap
 | Pin 证明树 | `docs/research_notes/formal_methods/pin_self_referential.md` | ✅ 100% |
 | Send/Sync 形式化 | `docs/research_notes/formal_methods/send_sync_formalization.md` | ✅ 100% |
 | 型变证明树 | `docs/research_notes/formal_methods/variance_theory.md` | ✅ 100% |
-| 类型安全证明树 | `docs/research_notes/formal_methods/PROOF_TREE_TYPE_SAFETY.md` | ✅ 100% |
+| 类型安全证明树 | `docs/research_notes/formal_methods/10_proof_tree_type_safety.md` | ✅ 100% |
 
 ---
 

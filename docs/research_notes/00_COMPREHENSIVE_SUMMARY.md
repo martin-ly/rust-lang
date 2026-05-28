@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 单一入口的完整总结、全项目知识地图、论证脉络总览；解决「无完整总结综合、无论证脉络关系」的缺口
-> **上位文档**: [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)、[AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)
+> **上位文档**: [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)、[AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)
 > **docs 全结构**: DOCS_STRUCTURE_OVERVIEW（按本格式 100% 覆盖 docs）
 
 ---
@@ -122,7 +122,7 @@
 
 **论证思路**：定义先行 → 公理链闭环 → 论证可追溯 → 证明结构化 → 边界有反例。
 **完备性自检**：formal_methods 六篇 × 六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）
-见 [FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
+见 [FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/10_formal_methods_completeness_checklist.md)。
 
 **论证流向**（详见 [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md)）：
 

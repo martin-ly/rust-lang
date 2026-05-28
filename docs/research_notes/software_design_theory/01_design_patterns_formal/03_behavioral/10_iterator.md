@@ -322,7 +322,7 @@ borrow_checker_proof
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Visitor](./visitor.md) | 遍历方式不同；Iterator 顺序，Visitor 深度优先 |
+| [Visitor](./10_visitor.md) | 遍历方式不同；Iterator 顺序，Visitor 深度优先 |
 | [Composite](../02_structural/composite.md) | 可对 Composite 实现 Iterator |
 | [Chain of Responsibility](./chain_of_responsibility.md) | 链式传递 vs 迭代消费 |
 

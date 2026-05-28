@@ -645,7 +645,7 @@ $ python -m pytest
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [多维概念矩阵](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md)
-- [应用分析视图](../04_thinking/APPLICATIONS_ANALYSIS_VIEW.md)
+- [应用分析视图](../04_thinking/04_applications_analysis_view.md)
 - [形式化方法研究](../research_notes/formal_methods/README.md)
 - [错误码映射](./ERROR_CODE_MAPPING.md)
 

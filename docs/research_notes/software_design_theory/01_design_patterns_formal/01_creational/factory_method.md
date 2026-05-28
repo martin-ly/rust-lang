@@ -327,9 +327,9 @@ ownership_model T2
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Abstract Factory](./abstract_factory.md) | 多个工厂方法组成抽象工厂 |
+| [Abstract Factory](./10_abstract_factory.md) | 多个工厂方法组成抽象工厂 |
 | [Builder](./builder.md) | 工厂可返回 Builder |
-| [Prototype](./prototype.md) | 工厂可基于 Prototype 克隆 |
+| [Prototype](./10_prototype.md) | 工厂可基于 Prototype 克隆 |
 
 ---
 

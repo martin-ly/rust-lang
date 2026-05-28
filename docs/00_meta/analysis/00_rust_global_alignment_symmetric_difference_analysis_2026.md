@@ -274,7 +274,7 @@
 
 | # | 任务 | 来源对齐 | 验收标准 | 负责人 |
 |---|------|----------|----------|--------|
-| 3.1 | **Miri 使用指南** | Microsoft, The Rustonomicon | docs/ 新增 MIRI_GUIDE.md，含10个UB检测示例 | TBD |
+| 3.1 | **Miri 使用指南** | Microsoft, The Rustonomicon | docs/ 新增 03_miri_guide.md，含10个UB检测示例 | TBD |
 | 3.2 | **C++ 互操作实战 (cxx + bindgen)** | Google, Microsoft, Rust Foundation | c12/c07 新增 cxx 桥接完整示例 | TBD |
 | 3.3 | **Security Audit 流程建立** | Rust Foundation | .github/workflows/ 新增 security-audit.yml | TBD |
 | 3.4 | **cargo-semver-checks 集成** | Rust Official | CI 集成 semver-checks，保护公开API | TBD |
@@ -410,7 +410,7 @@
 
 ## 相关概念
 
-- [Rust 2026 项目目标月度跟踪](./RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md)
+- [Rust 2026 项目目标月度跟踪](./00_rust_2026_project_goals_monthly_tracking.md)
 
 ---
 

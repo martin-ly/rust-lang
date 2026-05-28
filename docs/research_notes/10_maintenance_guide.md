@@ -568,14 +568,14 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-**每 Rust 新版本发布后**，按 [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md) 执行：
+**每 Rust 新版本发布后**，按 [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md) 执行：
 
 1. 收集 releases.rs、Blog 变更
 2. 更新 RUST_XXX、toolchain 文档
 3. 评估 formal_methods、type_theory 缺口
 4. 更新 INDEX、README、CHANGELOG
 
-详见 [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md)。
+详见 [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md)。
 
 ---
 

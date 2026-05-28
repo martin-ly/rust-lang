@@ -272,12 +272,12 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 12.1 Accepting Command Line Arguments | 命令行参数 | [CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) § 参数解析 | clap 库详解 |
+| 12.1 Accepting Command Line Arguments | 命令行参数 | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) § 参数解析 | clap 库详解 |
 | 12.2 Reading a File | 文件读取 | `crates/c07_process/src/file_ops.rs` | 异步文件 I/O |
-| 12.3 Refactoring to Improve Modularity and Error Handling | 重构、错误处理 | [CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) | 项目架构模式 |
+| 12.3 Refactoring to Improve Modularity and Error Handling | 重构、错误处理 | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 项目架构模式 |
 | 12.4 Adding Functionality with Test Driven Development | TDD | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) § TDD | 属性测试 |
 | 12.5 Working with Environment Variables | 环境变量 | `crates/c07_process/src/env.rs` | 配置管理 |
-| 12.6 Redirecting Errors to Standard Error | 标准错误 | [CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) § 日志 | tracing 集成 |
+| 12.6 Redirecting Errors to Standard Error | 标准错误 | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) § 日志 | tracing 集成 |
 
 #### 第13章：Functional Language Features
 
@@ -385,7 +385,7 @@
 | 22.2 Operators and Symbols | 运算符 | [QUICK_REFERENCE](../research_notes/QUICK_REFERENCE.md) | 运算符优先级 |
 | 22.3 Derivable Traits | 可派生 Trait | [type_system](../02_reference/quick_reference/type_system.md) § Derive | 自定义 derive |
 | 22.4 Useful Development Tools | 开发工具 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) § 工具 | 完整工具链 |
-| 22.5 Editions | Edition 差异 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | 迁移指南 |
+| 22.5 Editions | Edition 差异 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | 迁移指南 |
 | 22.6-22.7 | 翻译、开发流程 | - | 官方充分覆盖 |
 
 ---
@@ -437,7 +437,7 @@
 | 20 | **Std Misc** | 线程、文件、进程 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) |
 | 21 | **Testing** | 测试 | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) |
 | 22 | **Unsafe Operations** | Unsafe 操作 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
-| 23 | **Compatibility** | 兼容性 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) |
+| 23 | **Compatibility** | 兼容性 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) |
 | 24 | **Meta** | 文档、Playground | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
 
 ---
@@ -455,7 +455,7 @@
 | **Book Ch 21** | Web Server 完整实现 | 中 | `examples/web_server/` |
 | **Reference Ch 19-20** | ABI、运行时细节 | 低 | 链接到官方文档 |
 | **Embedded Book** | 嵌入式开发 | 低 | 暂不提供，使用官方 |
-| **WebAssembly Book** | WASM 深入 | 中 | [wasm_cheatsheet](../02_reference/quick_reference/wasm_cheatsheet.md) |
+| **WebAssembly Book** | WASM 深入 | 中 | [wasm_cheatsheet](../02_reference/quick_reference/02_wasm_cheatsheet.md) |
 | **Rustonomicon** | Unsafe 高级模式 | 中 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
 
 ### 本项目补充的官方未覆盖内容
@@ -470,7 +470,7 @@
 | **异步状态机形式化** | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) | 官方无形式化模型 |
 | **宏系统决策树** | macros_cheatsheet | 官方为参考文档 |
 | **错误传播转换树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) | 官方为教程式讲解 |
-| **版本兼容性深度分析** | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | 官方仅列变更 |
+| **版本兼容性深度分析** | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | 官方仅列变更 |
 | **控制流决策树** | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | 官方分散在各章 |
 | **异步模式反例** | [async_patterns](../02_reference/quick_reference/async_patterns.md) | 官方无反模式说明 |
 | **所有权模型可视化** | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 官方无形式化描述 |
@@ -506,7 +506,7 @@
 | **Week 2: 所有权系统** | Book Ch 4 + RBE Scoping Rules | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) | RBE 15.1-15.4 |
 | **Week 3: 复合类型 + 集合** | Book Ch 5-8 + RBE Custom Types | [type_system](../02_reference/quick_reference/type_system.md) | 实现简易数据结构 |
 | **Week 4: 错误处理 + 泛型** | Book Ch 9-10 + RBE Error Handling | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) | 重构错误处理 |
-| **Week 5: 项目实战** | Book Ch 12 I/O Project | [CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) | 完成命令行工具 |
+| **Week 5: 项目实战** | Book Ch 12 I/O Project | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 完成命令行工具 |
 | **Week 6: 复习 + 测试** | Book Ch 11 Testing | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) | 为项目添加测试 |
 
 ### 路径二：中级进阶路径（能写项目 → 深入理解）
@@ -622,10 +622,10 @@
 | **Book Ch 17** | 17.1-17.6 Async | 空 Future、持锁跨 await 反例（[async_patterns](../02_reference/quick_reference/async_patterns.md)）；EDGE_CASES |
 | **Book Ch 3** | 3.1-3.5 Types, Control Flow | 控制流（[C03](../../crates/c03_control_fn/docs/README.md)）；模式匹配决策树 |
 | **Book Ch 9** | 9.1-9.3 Error Handling | 错误传播转换树（[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md)）；[error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
-| **Book Ch 11** | 11.1-11.3 Testing | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md)；#[test] 1.93 严格化（[09_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)） |
+| **Book Ch 11** | 11.1-11.3 Testing | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md)；#[test] 1.93 严格化（[09_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)） |
 | **Reference** | Attributes, Macros | offset_of! 类型检查（1.93）；macros_cheatsheet |
 | **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/variance_theory.md)；[PROOF_INDEX](../research_notes/PROOF_INDEX.md) |
-| **releases.rs** | 1.93 Language/Libraries | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)；[07_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) |
+| **releases.rs** | 1.93 Language/Libraries | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)；[07_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) |
 
 > 标注「本项目补充」表示官方资源未覆盖或简略，本项目提供额外深度。
 
@@ -780,7 +780,7 @@
 
 | 课程 | 链接 | 主要内容 | 本项目对应 |
 | :--- | :--- | :--- | :--- |
-| **CS340R: Rusty Systems** | <https://web.stanford.edu/class/cs340r/> | Rust 系统编程、3 周基础 + 7 周系统重实现项目 | [05_guides/](../05_guides/README.md)、[C05 线程](../02_reference/quick_reference/threads_concurrency_cheatsheet.md)、[C10 网络](../02_reference/quick_reference/network_programming_cheatsheet.md) |
+| **CS340R: Rusty Systems** | <https://web.stanford.edu/class/cs340r/> | Rust 系统编程、3 周基础 + 7 周系统重实现项目 | [05_guides/](../05_guides/README.md)、[C05 线程](../02_reference/quick_reference/threads_concurrency_cheatsheet.md)、[C10 网络](../02_reference/quick_reference/02_network_programming_cheatsheet.md) |
 
 ### CMU
 >
@@ -789,7 +789,7 @@
 | 课程 | 链接 | 主要内容 | 本项目对应 |
 | :--- | :--- | :--- | :--- |
 | **17-363/17-663: Programming Language Pragmatics** | <https://www.cs.cmu.edu/~aldrich/courses/17-363/> | 编程语言基础、约 4/8 作业用 Rust 实现编译器 | C11 宏、[C02 类型系统](../02_reference/quick_reference/type_system.md) |
-| **17-770: WebAssembly** | <https://www.cs.cmu.edu/~wasm/cs17-770/> | WebAssembly 引擎，支持 Rust 实现 | [C12 WASM](../02_reference/quick_reference/wasm_cheatsheet.md) |
+| **17-770: WebAssembly** | <https://www.cs.cmu.edu/~wasm/cs17-770/> | WebAssembly 引擎，支持 Rust 实现 | [C12 WASM](../02_reference/quick_reference/02_wasm_cheatsheet.md) |
 
 ### 其他高校（参考）
 >
@@ -830,8 +830,8 @@
 | [Ferrocene FLS - Ch.17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
 | [Ferrocene FLS - Ch.19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
 | [Ferrocene FLS - Ch.21 FFI](https://spec.ferrocene.dev/ffi.html) | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) § FFI |
-| [Ferrocene FLS - Appendix C UB](https://spec.ferrocene.dev/undefined-behavior.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) |
-| [Rust Reference - Undefined Behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) |
+| [Ferrocene FLS - Appendix C UB](https://spec.ferrocene.dev/undefined-behavior.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/02_edge_cases_and_special_cases.md) |
+| [Rust Reference - Undefined Behavior](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/02_edge_cases_and_special_cases.md) |
 
 ---
 
@@ -858,7 +858,7 @@
 | Rust Fundamentals | Duke | <https://www.coursera.org/learn/rust-fundamentals> | 所有权、借用、生命周期、enum、struct、trait、泛型 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md)、[type_system](../02_reference/quick_reference/type_system.md) |
 | Rust Programming Essentials | Edureka | <https://www.coursera.org/learn/rust-programming-essentials> | 模式匹配、所有权、类型系统、Cargo | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md)、[cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
 | Advanced Rust Programming | Edureka | <https://www.coursera.org/learn/advanced-rust-programming> | 并发、多线程、内存管理、集合、trait、泛型 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md)、[collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) |
-| Rust Programming Specialization | Duke | <https://www.coursera.org/specializations/rust-programming> | 系统编程、数据工程、Linux、DevOps、LLM、云、MLOps | [05_guides/](../05_guides/README.md)、[CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) |
+| Rust Programming Specialization | Duke | <https://www.coursera.org/specializations/rust-programming> | 系统编程、数据工程、Linux、DevOps、LLM、云、MLOps | [05_guides/](../05_guides/README.md)、[CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) |
 
 ### 学习路径建议
 >

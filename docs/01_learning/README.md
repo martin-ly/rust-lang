@@ -61,7 +61,7 @@ fn handle_message(msg: Message) {
 > **[来源: Rust Official Docs]**
 
 - [LEARNING_PATH_PLANNING.md](./LEARNING_PATH_PLANNING.md) - 学习路径规划（四类路径、进度检查清单）
-- [OFFICIAL_RESOURCES_MAPPING.md](./OFFICIAL_RESOURCES_MAPPING.md) - 本项目 ↔ The Rust Book / Reference / RBE
+- [01_official_resources_mapping.md](./01_official_resources_mapping.md) - 本项目 ↔ The Rust Book / Reference / RBE
 
 ---
 

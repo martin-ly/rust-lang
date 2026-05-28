@@ -14,7 +14,6 @@
   - [`Arc<T>` API](#arct-api)
   - [`RefCell<T>` API](#refcellt-api)
   - [`Weak<T>` API](#weakt-api)
-  - [**创建日期**: 2025-10-22](#创建日期-2025-10-22)
 
 ## `Box<T>` API
 
@@ -118,10 +117,6 @@ let weak_count = weak.weak_count();
 
 - [Tier 2: 05\_智能指针实践](../tier_02_guides/05_智能指针实践.md)
 
----
-
-**文档维护**: Documentation Team
-**创建日期**: 2025-10-22
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

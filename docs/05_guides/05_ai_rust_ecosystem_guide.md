@@ -415,7 +415,7 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 | 主索引 | crates/*/docs/00_MASTER_INDEX.md | 模块导航 |
 | 决策树 | docs/04_thinking/DECISION_GRAPH_NETWORK.md | 技术选型 |
 | 错误码映射 | docs/02_reference/ERROR_CODE_MAPPING.md | 错误→文档 |
-| 官方映射 | docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md | 权威源引用 |
+| 官方映射 | docs/01_learning/01_official_resources_mapping.md | 权威源引用 |
 
 **Embedding 建议**: 按段落或章节分块，chunk size 512–1024 tokens。
 
@@ -571,7 +571,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 - [AI 辅助编程指南](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 - [guides/README](../../guides/README.md)
-- [官方资源映射](../01_learning/OFFICIAL_RESOURCES_MAPPING.md)
+- [官方资源映射](../01_learning/01_official_resources_mapping.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)
 - [BEST_PRACTICES.md](./BEST_PRACTICES.md)
 - [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md)

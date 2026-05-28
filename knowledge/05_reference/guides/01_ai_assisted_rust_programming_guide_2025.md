@@ -96,7 +96,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-Rust 在 AI/ML 领域有 Burn、Candle、llm 等生态，详见 [AI+Rust 生态指南](../../../docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md)。
+Rust 在 AI/ML 领域有 Burn、Candle、llm 等生态，详见 [AI+Rust 生态指南](../../../docs/05_guides/05_ai_rust_ecosystem_guide.md)。
 
 ---
 
@@ -115,7 +115,7 @@ Rust 在 AI/ML 领域有 Burn、Candle、llm 等生态，详见 [AI+Rust 生态�
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [guides/README.md](../README.md) - 指南入口
-- [AI+Rust 生态指南](../../../docs/05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) - Burn/Candle/LLM、用 Rust 构建 AI
+- [AI+Rust 生态指南](../../../docs/05_guides/05_ai_rust_ecosystem_guide.md) - Burn/Candle/LLM、用 Rust 构建 AI
 - [docs/02_reference/quick_reference/](../../../docs/02_reference/quick_reference/README.md) - 速查卡
 - [LEARNING_CHECKLIST.md](../../../docs/archive/2026_03_reorganization/LEARNING_CHECKLIST.md) - 学习清单与自测
 - [ERROR_CODE_MAPPING.md](../../../docs/02_reference/ERROR_CODE_MAPPING.md) - 错误码→文档映射

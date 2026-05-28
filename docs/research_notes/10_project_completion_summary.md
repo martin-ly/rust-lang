@@ -204,7 +204,7 @@
 | 目标 | 入口文档 |
 | :--- | :--- |
 | 系统学习 | 00_COMPREHENSIVE_SUMMARY.md |
-| 解决问题 | FAQ_COMPREHENSIVE.md |
+| 解决问题 | 10_faq_comprehensive.md |
 | 面试准备 | INTERVIEW_QUESTIONS_COLLECTION.md |
 | 日常查阅 | 10_rust_formal_methods_cheatsheet.md |
 

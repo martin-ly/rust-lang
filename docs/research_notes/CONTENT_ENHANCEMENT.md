@@ -253,7 +253,7 @@
 | **矩阵文档**（如 01_design_patterns_formal/README §23 模式矩阵、03_execution_models/README §执行模型矩阵、formal_methods/README §六篇并表） | 每行/每格注明「详见 xx」或列「形式化文档」列链接到具体子文档 |
 | **子文档**（各模式、各执行模型、ownership/borrow/…、send_sync） | 元信息或文末注明「本概念在 矩阵文档 §节名 第 x 行/第 y 列」或「23 模式矩阵」「六篇并表」等 |
 
-**已实施**：23 模式均在元信息中含「23 模式矩阵」行号；执行模型矩阵、formal_methods **六篇并表**均含文档列。新增矩阵时按上表补全双向链接；见 [MAINTENANCE_GUIDE](./MAINTENANCE_GUIDE.md) 更新流程。
+**已实施**：23 模式均在元信息中含「23 模式矩阵」行号；执行模型矩阵、formal_methods **六篇并表**均含文档列。新增矩阵时按上表补全双向链接；见 [MAINTENANCE_GUIDE](./10_maintenance_guide.md) 更新流程。
 
 ---
 
@@ -628,7 +628,7 @@ error[E0382]: borrow of moved value: `s1`
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [研究笔记主索引](./README.md)
-- [研究笔记写作指南](./WRITING_GUIDE.md)
+- [研究笔记写作指南](./10_writing_guide.md)
 - [研究笔记模板](./TEMPLATE.md)
 - [质量检查清单](./QUALITY_CHECKLIST.md)
 
@@ -644,7 +644,7 @@ error[E0382]: borrow of moved value: `s1`
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [研究笔记示例](./EXAMPLE.md)
+- [研究笔记示例](./10_example.md)
 - [所有权模型形式化](./formal_methods/ownership_model.md)
 - [类型系统基础](./type_theory/type_system_foundations.md)
 

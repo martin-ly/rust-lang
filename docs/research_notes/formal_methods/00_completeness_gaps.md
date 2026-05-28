@@ -187,7 +187,7 @@ $
 **后续可持续推进**：✅ 阶段 A–D 已完成：Send/Sync 独立形式化 [send_sync_formalization](./send_sync_formalization.md)、
 安全可判定机制总览 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)、
 并发+Trait 族四维表、思维表征四类绑定（HIERARCHICAL_MAPPING、六篇并表）。
-详见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。
+详见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md)。
 
 ---
 
@@ -223,7 +223,7 @@ $
 | **可执行语义** | 无可执行小步操作语义 | RustSEM (K-Framework)、[EXECUTABLE_SEMANTICS_ROADMAP](../EXECUTABLE_SEMANTICS_ROADMAP.md) |
 | **松弛内存模型** | 原子操作、Arc 仅 Def 级；无松弛内存形式化 | RustBelt Meets Relaxed Memory |
 | **MIR/THIR 级** | 无编译器 IR 级建模 | RustBelt MIR、coq-of-rust THIR |
-| **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)、[COQ_OF_RUST_INTEGRATION_PLAN](../../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md) |
+| **工具对接** | 无 Aeneas、coq-of-rust 对接 | [AENEAS_INTEGRATION_PLAN](../../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)、COQ_OF_RUST_INTEGRATION_PLAN |
 
 **RustBelt 逐章对标**: [RUSTBELT_ALIGNMENT](../10_rustbelt_alignment.md)
 

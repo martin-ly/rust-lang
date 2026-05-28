@@ -285,7 +285,7 @@ Def SEND1, SYNC1
 | 类型 | 位置 |
 | :--- | :--- |
 | 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) §5、C06；安全可判定机制节点 |
-| 概念多维矩阵 | [README §六篇并表](README.md#formal_methods-六篇并表) 第 6 行；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md) §3.1 |
+| 概念多维矩阵 | [README §六篇并表](README.md#formal_methods-六篇并表) 第 6 行；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md) §3.1 |
 | 决策树 | [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md) § Send/Sync；[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) 并发选型 |
 | 推理证明树 | [PROOF_INDEX](../PROOF_INDEX.md)；本篇 § 公理-定理证明树 |
 

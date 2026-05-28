@@ -183,7 +183,7 @@ research_notes/
 ├── 工具与实现层
 │   ├── coq_skeleton/            # L3证明骨架
 │   ├── AENEAS_INTEGRATION_PLAN.md
-│   └── COQ_OF_RUST_INTEGRATION_PLAN.md
+│   └── 10_coq_of_rust_integration_plan.md
 └── 实验与应用层
     └── experiments/             # 实验研究
 ```

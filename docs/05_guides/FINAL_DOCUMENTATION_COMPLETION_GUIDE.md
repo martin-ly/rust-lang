@@ -120,7 +120,7 @@
    - [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](../07_project/DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) - 完整的交叉引用指南
 
 6. **跨模块集成示例**: 100%完成
-   - [CROSS_MODULE_INTEGRATION_EXAMPLES.md](./CROSS_MODULE_INTEGRATION_EXAMPLES.md) - 6个完整示例
+   - [05_cross_module_integration_examples.md](./05_cross_module_integration_examples.md) - 6个完整示例
 
 7. **文档测试**: 100%完成
    - 所有模块的文档测试完成

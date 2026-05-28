@@ -107,7 +107,7 @@
 
 | 子模块 | 映射目标 |
 | :--- | :--- | :--- | :--- | :--- |
-| 应用分析 | [APPLICATIONS_ANALYSIS_VIEW.md](../04_thinking/APPLICATIONS_ANALYSIS_VIEW.md) — 应用场景→技术选型→论证依据 |
+| 应用分析 | [04_applications_analysis_view.md](../04_thinking/04_applications_analysis_view.md) — 应用场景→技术选型→论证依据 |
 
 ---
 

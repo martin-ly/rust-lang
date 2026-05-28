@@ -469,7 +469,7 @@ fn test_wasm_integration() {
 
 - [C11 宏](#示例4-宏系统与设计模式集成) 定义 DSL
 - [C09 设计模式](#示例4-宏系统与设计模式集成) 实现插件接口
-- [C04 泛型](./CROSS_MODULE_INTEGRATION_EXAMPLES.md) 保证类型安全
+- [C04 泛型](./05_cross_module_integration_examples.md) 保证类型安全
 
 ---
 

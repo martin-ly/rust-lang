@@ -382,8 +382,8 @@ fn fetch_data<H: HttpClient>(client: &H, url: &str) -> Result<String, Box<dyn st
 | 模式 | 关系 |
 | :--- | :--- |
 | [Decorator](./decorator.md) | 同为包装；Adapter 转换接口，Decorator 同接口延伸 |
-| [Facade](./facade.md) | Facade 简化多接口；Adapter 转换单接口 |
-| [Bridge](./bridge.md) | Bridge 解耦抽象与实现；Adapter 适配已有接口 |
+| [Facade](./10_facade.md) | Facade 简化多接口；Adapter 转换单接口 |
+| [Bridge](./10_bridge.md) | Bridge 解耦抽象与实现；Adapter 适配已有接口 |
 
 ---
 

@@ -1,6 +1,6 @@
 ﻿# 🤖 Rust AI/ML 速查卡
 
-> **快速参考** | [AI+Rust 生态指南](../../05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) | [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
+> **快速参考** | [AI+Rust 生态指南](../../05_guides/05_ai_rust_ecosystem_guide.md) | [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -631,7 +631,7 @@ fn normalize(tensor: &Tensor) -> Option<Tensor> {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [AI+Rust 生态指南](../../05_guides/AI_RUST_ECOSYSTEM_GUIDE.md)
+- [AI+Rust 生态指南](../../05_guides/05_ai_rust_ecosystem_guide.md)
 - [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)
 
@@ -641,7 +641,7 @@ fn normalize(tensor: &Tensor) -> Option<Tensor> {
 
 AI/ML 示例代码位于指南与外部仓库，可直接参考：
 
-- [AI_RUST_ECOSYSTEM_GUIDE 入门示例](../../05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) - Burn/Candle 最小示例（见「四、入门示例」）
+- [AI_RUST_ECOSYSTEM_GUIDE 入门示例](../../05_guides/05_ai_rust_ecosystem_guide.md) - Burn/Candle 最小示例（见「四、入门示例」）
 - [Candle examples](https://github.com/huggingface/candle/tree/main/candle-examples)
 - [llm 示例](https://github.com/rust-ml/llm/tree/main/examples)
 

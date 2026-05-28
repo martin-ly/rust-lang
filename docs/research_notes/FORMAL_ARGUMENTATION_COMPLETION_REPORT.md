@@ -69,7 +69,7 @@
 | 文档 | 大小 | 内容深度 | 特色 |
 | :--- | :--- | :--- | :--- |
 | 10_logical_foundations.md | 7.2KB | L4 | 命题/一阶/高阶/模态逻辑 |
-| SEPARATION_LOGIC.md | 6.5KB | L5 | 分离逻辑、Iris框架 |
+| 10_separation_logic.md | 6.5KB | L5 | 分离逻辑、Iris框架 |
 
 **涵盖主题:**
 
@@ -84,7 +84,7 @@
 
 | 文档 | 大小 | 内容深度 | 特色 |
 | :--- | :--- | :--- | :--- |
-| OPERATIONAL_SEMANTICS.md | 6.7KB | L4 | 小步/大步/环境语义 |
+| 10_operational_semantics.md | 6.7KB | L4 | 小步/大步/环境语义 |
 | 10_axiomatic_semantics.md | 7.1KB | L5 | 霍尔逻辑、WP/SP |
 
 **涵盖主题:**
@@ -170,10 +170,10 @@
 
 | 理论概念 | Rust应用 | 文档位置 |
 | :--- | :--- | :--- |
-| **分离逻辑** | 所有权/借用系统 | SEPARATION_LOGIC.md §3 |
-| **线性逻辑** | 移动语义、Copy vs Move | SEPARATION_LOGIC.md §3.1 |
+| **分离逻辑** | 所有权/借用系统 | 10_separation_logic.md §3 |
+| **线性逻辑** | 移动语义、Copy vs Move | 10_separation_logic.md §3.1 |
 | **霍尔逻辑** | 函数契约、unsafe边界 | 10_axiomatic_semantics.md §4 |
-| **操作语义** | MIR求值、异步状态机 | OPERATIONAL_SEMANTICS.md |
+| **操作语义** | MIR求值、异步状态机 | 10_operational_semantics.md |
 | **模态逻辑** | 并发安全性、终结合理性 | 10_logical_foundations.md §4 |
 | **归纳证明** | 递归函数终止性、类型推导 | PROOF_STRATEGIES.md §1 |
 | **结构归纳** | 表达式求值、AST遍历 | PROOF_STRATEGIES.md §1.2 |
@@ -196,7 +196,7 @@ Week 1: 逻辑基础
   └── 练习：命题逻辑推导
 
 Week 2: 操作语义
-  ├── OPERATIONAL_SEMANTICS.md §1-2
+  ├── 10_operational_semantics.md §1-2
   └── 练习：λ演算归约
 
 Week 3: 霍尔逻辑
@@ -210,7 +210,7 @@ Week 3: 霍尔逻辑
 
 ```text
 Week 4-5: 分离逻辑
-  ├── SEPARATION_LOGIC.md
+  ├── 10_separation_logic.md
   └── 练习：所有权推理
 
 Week 6-7: 证明技术
@@ -227,8 +227,8 @@ Week 8: 方法比较
 
 ```text
 Week 9-10: 高级主题
-  ├── SEPARATION_LOGIC.md §4 (Iris)
-  └── OPERATIONAL_SEMANTICS.md §3-4
+  ├── 10_separation_logic.md §4 (Iris)
+  └── 10_operational_semantics.md §3-4
 
 Week 11-12: 案例研究
   ├── 10_case_studies.md

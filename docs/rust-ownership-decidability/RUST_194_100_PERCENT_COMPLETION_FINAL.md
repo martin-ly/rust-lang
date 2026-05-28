@@ -168,7 +168,7 @@ Located in `docs/rust-ownership-decidability/exercises/src/`:
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-Complete guide: `RUST_194_STDLIB_API_GUIDE.md`
+Complete guide: `RUST_194_STDLIB_10_api_guide.md`
 
 **Coverage:**
 
@@ -361,7 +361,7 @@ cat docs/rust-ownership-decidability/12-concurrency-patterns/README.md
 cat docs/rust-ownership-decidability/meta-model/RUST_194_COMPREHENSIVE_GUIDE.md
 
 # API reference
-cat docs/rust-ownership-decidability/RUST_194_STDLIB_API_GUIDE.md
+cat docs/rust-ownership-decidability/RUST_194_STDLIB_10_api_guide.md
 ```
 
 ### 5.2 How to Use the Coq Formalization

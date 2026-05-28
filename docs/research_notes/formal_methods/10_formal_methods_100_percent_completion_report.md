@@ -67,7 +67,7 @@ formal_methods 目录已达到 **100% 完成度**！
 
 | # | 证明树 | 文件名 | 状态 |
 |---|--------|--------|------|
-| 1 | 类型安全证明树 | PROOF_TREE_TYPE_SAFETY.md | ✅ |
+| 1 | 类型安全证明树 | 10_proof_tree_type_safety.md | ✅ |
 | 2 | Send/Sync安全证明树 | 10_proof_tree_send_sync.md | ✅ |
 | 3 | 型变安全证明树 | 10_proof_tree_variance.md | ✅ |
 | 4 | 异步并发安全证明树 | 10_proof_tree_async_concurrency.md | ✅ |
@@ -88,7 +88,7 @@ formal_methods 目录已达到 **100% 完成度**！
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-- ✅ IMPLEMENTATION_PROGRESS_MATRIX.md - 更新至100%
+- ✅ 10_implementation_progress_matrix.md - 更新至100%
 - ✅ CONCEPT_AXIOM_THEOREM_MATRIX.md - 更新所有定理状态
 
 ---

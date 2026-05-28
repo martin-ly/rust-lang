@@ -180,7 +180,7 @@
 
 - `docs/00_master_index.md`
 - `docs/10_terminology_standard.md`
-- `docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md`
+- `docs/10_authoritative_sources_and_citations.md`
 - `knowledge/INDEX.md`
 - `knowledge/README.md`
 - 所有 `docs/05_guides/*_GUIDE.md`

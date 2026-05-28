@@ -107,8 +107,8 @@
 | FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md | 0.39KB | 占位 | 补充实质内容或归档 |
 | FORMAL_PROOF_SYSTEM_GUIDE.md | 0.45KB | 占位 | 补充实质内容或归档 |
 | AENEAS_INTEGRATION_PLAN.md | 0.5KB | 重定向 | 已归档，可删除 |
-| COQ_ISABELLE_PROOF_SCAFFOLDING.md | 0.51KB | 重定向 | 已归档，可删除 |
-| COQ_OF_RUST_INTEGRATION_PLAN.md | 0.53KB | 重定向 | 已归档，可删除 |
+| 10_coq_isabelle_proof_scaffolding.md | 0.51KB | 重定向 | 已归档，可删除 |
+| 10_coq_of_rust_integration_plan.md | 0.53KB | 重定向 | 已归档，可删除 |
 | coq_skeleton/README.md | 0.46KB | 基础 | 扩展为完整指南 |
 
 ### B类：可扩展的矩阵/决策树 (12个)
@@ -120,13 +120,13 @@
 | 文件 | 当前大小 | 目标大小 | 优先级 |
 | :--- | :--- | :--- | :--- |
 | WORKFLOW_ENGINES_MATRIX.md | 1.2KB | 5KB | P2 |
-| DISTRIBUTED_PATTERNS_MATRIX.md | 1.5KB | 5KB | P2 |
+| 10_distributed_patterns_matrix.md | 1.5KB | 5KB | P2 |
 | 10_coq_formalization_matrix.md | 1.6KB | 4KB | P2 |
 | RISK_ASSESSMENT_MATRIX.md | 1.7KB | 4KB | P2 |
 | 10_concurrency_safety_matrix.md | 1.7KB | 5KB | P2 |
 | 10_ownership_transfer_decision_tree.md | 1.9KB | 5KB | P1 |
 | 10_paradigm_comparison_matrix.md | 1.9KB | 4KB | P2 |
-| IMPLEMENTATION_PROGRESS_MATRIX.md | 2.0KB | 4KB | P3 |
+| 10_implementation_progress_matrix.md | 2.0KB | 4KB | P3 |
 | 10_five_dimensional_concept_matrix.md | 2.1KB | 5KB | P1 |
 | LEARNING_PROGRESSION_MATRIX.md | 2.1KB | 4KB | P2 |
 | 10_error_type_selection_decision_tree.md | 2.1KB | 5KB | P1 |
@@ -148,7 +148,7 @@
 | UNSAFE_CONCEPT_MINDMAP.md | 3.1KB | 6KB | P1 |
 | 10_generics_traits_mindmap.md | 3.1KB | 6KB | P1 |
 | 10_design_pattern_concept_mindmap.md | 3.4KB | 6KB | P2 |
-| OWNERSHIP_CONCEPT_MINDMAP.md | 7.6KB | 10KB | P1 |
+| 10_ownership_concept_mindmap.md | 7.6KB | 10KB | P1 |
 | TYPE_SYSTEM_CONCEPT_MINDMAP.md | 9.9KB | 12KB | P1 |
 | PROOF_TECHNIQUES_MINDMAP.md | 7.2KB | 10KB | P1 |
 | CONCURRENCY_CONCEPT_MINDMAP.md | 7.6KB | 10KB | P1 |
@@ -192,29 +192,29 @@
 
 | 分类 | 文件 | 当前大小 | 目标大小 |
 | :--- | :--- | :--- | :--- |
-| 创建型 | abstract_factory.md | 12KB | 15KB |
+| 创建型 | 10_abstract_factory.md | 12KB | 15KB |
 | 创建型 | builder.md | 13KB | 15KB |
 | 创建型 | factory_method.md | 12KB | 15KB |
-| 创建型 | prototype.md | 11KB | 15KB |
+| 创建型 | 10_prototype.md | 11KB | 15KB |
 | 创建型 | singleton.md | 13KB | 15KB |
 | 结构型 | adapter.md | 12KB | 15KB |
-| 结构型 | bridge.md | 11KB | 15KB |
+| 结构型 | 10_bridge.md | 11KB | 15KB |
 | 结构型 | composite.md | 12KB | 15KB |
 | 结构型 | decorator.md | 12KB | 15KB |
-| 结构型 | facade.md | 12KB | 15KB |
-| 结构型 | flyweight.md | 12KB | 15KB |
+| 结构型 | 10_facade.md | 12KB | 15KB |
+| 结构型 | 10_flyweight.md | 12KB | 15KB |
 | 结构型 | proxy.md | 10KB | 15KB |
 | 行为型 | chain_of_responsibility.md | 12KB | 15KB |
 | 行为型 | command.md | 12KB | 15KB |
-| 行为型 | interpreter.md | 11KB | 15KB |
-| 行为型 | iterator.md | 10KB | 15KB |
-| 行为型 | mediator.md | 9.8KB | 15KB |
+| 行为型 | 10_interpreter.md | 11KB | 15KB |
+| 行为型 | 10_iterator.md | 10KB | 15KB |
+| 行为型 | 10_mediator.md | 9.8KB | 15KB |
 | 行为型 | memento.md | 8.8KB | 15KB |
 | 行为型 | observer.md | 10KB | 15KB |
 | 行为型 | state.md | 10KB | 15KB |
 | 行为型 | strategy.md | 10KB | 15KB |
-| 行为型 | template_method.md | 11KB | 15KB |
-| 行为型 | visitor.md | 9.8KB | 15KB |
+| 行为型 | 10_template_method.md | 11KB | 15KB |
+| 行为型 | 10_visitor.md | 9.8KB | 15KB |
 
 ### G类：Coq骨架证明 (L3机器证明)
 

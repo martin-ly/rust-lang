@@ -21,7 +21,6 @@
     - [组合生成器](#组合生成器)
   - [⚠️ 当前限制](#️-当前限制)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: ⚠️ Nightly 预览](#状态-️-nightly-预览)
 
 ---
 
@@ -202,11 +201,6 @@ fn flatten_nested<T>(nested: Vec<Vec<T>>) -> impl Iterator<Item = T> {
 - [项目 C08 算法模块](../../crates/c08_algorithms/)
 - [Rust Nightly 文档](https://doc.rust-lang.org/nightly/unstable-book/)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: ⚠️ Nightly 预览
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -5,7 +5,7 @@
 > **分析日期**: 2026-05-08
 > **Rust 版本状态**: Stable 1.95.0 | Beta 1.96.0 (2026-05-28) | Nightly 1.97.0 (2026-05-05)
 > **方法论**: 集合论对称差分析 (A Δ B = (A−B) ∪ (B−A))
-> **前置报告**: [2026-04-24 版](./RUST_GLOBAL_ALIGNMENT_SYMMETRIC_DIFFERENCE_ANALYSIS_2026.md)
+> **前置报告**: [2026-04-24 版](./00_rust_global_alignment_symmetric_difference_analysis_2026.md)
 
 ---
 
@@ -211,17 +211,17 @@
 |---|------|---------|---------|---------|
 | 7 | **cargo-script 专题** | Rust 2026 Project Goals | ✅ **已创建**: `crates/c03_control_fn/examples/cargo_script_demo.rs` (191 行) | 完成 |
 | 8 | **cargo-semver-checks** | Rust 2026 Project Goals | ✅ **已创建**: `crates/c10_networks/src/cargo_semver_checks_guide.rs` (312 行) | 完成 |
-| 9 | **Cranelift backend 深度** | Rust 2026 Project Goals | ✅ **已创建**: `docs/06_toolchain/CRANELIFT_BACKEND_GUIDE.md` (264 行) | 完成 |
-| 10 | **VerusBelt (PLDI 2026)** | PLDI 2026 | ✅ **已创建**: `docs/04_research/VERUSBELT_PLDI_2026.md` (171 行) | 完成 |
-| 11 | **Miri 实战指南深度不足** | POPL 2026 | ✅ **已创建**: `docs/05_guides/MIRI_PRACTICAL_GUIDE.md` (354 行) | 完成 |
+| 9 | **Cranelift backend 深度** | Rust 2026 Project Goals | ✅ **已创建**: `docs/06_toolchain/06_cranelift_backend_guide.md` (264 行) | 完成 |
+| 10 | **VerusBelt (PLDI 2026)** | PLDI 2026 | ✅ **已创建**: `docs/04_research/04_verusbelt_pldi_2026.md` (171 行) | 完成 |
+| 11 | **Miri 实战指南深度不足** | POPL 2026 | ✅ **已创建**: `docs/05_guides/05_miri_practical_guide.md` (354 行) | 完成 |
 
 #### 🟢 P2 — 扩展
 
 | # | 差距 | 权威来源 | 建议位置 |
 |---|------|---------|---------|
 | 12 | **Polonius 新求解器更新** | Rust 2026 Goals | ✅ **已创建**: `docs/04_research/04_polonius_next_gen_borrow_checker.md` (300+ 行) | 完成 |
-| 13 | **Unsafe Fields 预览** | Rust 2026 Goals | ✅ **已创建**: `docs/05_guides/UNSAFE_FIELDS_PREVIEW.md` (222 行) | 完成 |
-| 14 | **TOML v1.1 in Cargo** | Cargo 1.96 | ✅ **已创建**: `docs/06_toolchain/TOML_V11_CARGO_GUIDE.md` (260+ 行) | 完成 |
+| 13 | **Unsafe Fields 预览** | Rust 2026 Goals | ✅ **已创建**: `docs/05_guides/05_unsafe_fields_preview.md` (222 行) | 完成 |
+| 14 | **TOML v1.1 in Cargo** | Cargo 1.96 | ✅ **已创建**: `docs/06_toolchain/06_toml_v11_cargo_guide.md` (260+ 行) | 完成 |
 
 ### 4.2 已修复差距（自 2026-04-24 报告以来）
 
@@ -240,12 +240,12 @@
 | 11 | `element_offset`/`next_if_map` 缺失 | 2026-05-08 | `c08_algorithms` 添加 |
 | 12 | cargo-script 专题 | 2026-05-08 | `c03_control_fn/examples/cargo_script_demo.rs` |
 | 13 | cargo-semver-checks 专题 | 2026-05-08 | `c10_networks/src/cargo_semver_checks_guide.rs` |
-| 14 | Cranelift backend 深度 | 2026-05-08 | `docs/06_toolchain/CRANELIFT_BACKEND_GUIDE.md` |
-| 15 | VerusBelt (PLDI 2026) | 2026-05-08 | `docs/04_research/VERUSBELT_PLDI_2026.md` |
-| 16 | Miri 实战指南 | 2026-05-08 | `docs/05_guides/MIRI_PRACTICAL_GUIDE.md` |
+| 14 | Cranelift backend 深度 | 2026-05-08 | `docs/06_toolchain/06_cranelift_backend_guide.md` |
+| 15 | VerusBelt (PLDI 2026) | 2026-05-08 | `docs/04_research/04_verusbelt_pldi_2026.md` |
+| 16 | Miri 实战指南 | 2026-05-08 | `docs/05_guides/05_miri_practical_guide.md` |
 | 17 | Polonius 新求解器 | 2026-05-08 | `docs/04_research/04_polonius_next_gen_borrow_checker.md` |
-| 18 | Unsafe Fields 预览 | 2026-05-08 | `docs/05_guides/UNSAFE_FIELDS_PREVIEW.md` |
-| 19 | TOML v1.1 in Cargo | 2026-05-08 | `docs/06_toolchain/TOML_V11_CARGO_GUIDE.md` |
+| 18 | Unsafe Fields 预览 | 2026-05-08 | `docs/05_guides/05_unsafe_fields_preview.md` |
+| 19 | TOML v1.1 in Cargo | 2026-05-08 | `docs/06_toolchain/06_toml_v11_cargo_guide.md` |
 | 20 | c01/c06/c12 缺少真正 1.96 特性 | 2026-05-08 | 补充 `pin!`、`From<bool>`、`VecDeque::new` const 等 |
 | 21 | 活跃 docs 1.94 历史文档归档 | 2026-05-08 | 11 个 1.94 专用文档移至 `docs/archive/2026_05_historical_docs/` |
 | 22 | docs 批量版本标签替换 | 2026-05-08 | 52+ 文件、93+ 处 1.94 活跃引用替换为 1.95+

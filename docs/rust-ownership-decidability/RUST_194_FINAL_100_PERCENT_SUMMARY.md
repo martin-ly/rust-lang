@@ -137,7 +137,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-**标准库API指南** (`RUST_194_STDLIB_API_GUIDE.md`)
+**标准库API指南** (`RUST_194_STDLIB_10_api_guide.md`)
 
 - [x] `[T]::array_windows`
 - [x] `LazyCell/LazyLock` 新方法
@@ -251,7 +251,7 @@
 
 1. `README.md` - 主文档，100%更新
 2. `RUST_194_100_PERCENT_COMPLETION_FINAL.md` - 完成报告
-3. `RUST_194_STDLIB_API_GUIDE.md` - API指南
+3. `RUST_194_STDLIB_10_api_guide.md` - API指南
 4. `RUST_194_VS_193_COMPARISON.md` - 对比文档
 
 ### 形式化
@@ -285,7 +285,7 @@
 
 1. 阅读 `01-core-concepts/short-concepts/`
 2. 完成 `exercises/src/` 练习
-3. 查看 `RUST_194_STDLIB_API_GUIDE.md`
+3. 查看 `RUST_194_STDLIB_10_api_guide.md`
 
 **进阶用户**
 

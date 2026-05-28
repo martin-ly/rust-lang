@@ -2,10 +2,10 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-> **归档说明**: 本文档已迁至 [archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md)
+> **归档说明**: 本文档已迁至 archive/deprecated/10_coq_of_rust_integration_plan.md
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 
-请访问 [archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md) 查看完整内容。
+请访问 archive/deprecated/10_coq_of_rust_integration_plan.md 查看完整内容。
 
 **入口**: [RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) § 三、归档约定 | [INDEX](./INDEX.md) 7g
 

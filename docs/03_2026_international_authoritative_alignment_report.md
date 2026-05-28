@@ -165,7 +165,7 @@
 > **[来源: Rust Official Docs]**
 
 ✅ **已对齐** - 项目Miri CI配置已使用`-Zmiri-tree-borrows`
-✅ **已引用** - `AUTHORITATIVE_SOURCES_AND_CITATIONS.md`已包含完整引用
+✅ **已引用** - `10_authoritative_sources_and_citations.md`已包含完整引用
 ✅ **已更新** - 生态梳理已补充54%误报减少数据 [^12]
 
 ---

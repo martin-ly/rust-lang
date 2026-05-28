@@ -44,16 +44,16 @@
 | 7 | TROUBLESHOOTING_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 8 | BEST_PRACTICES.md | 1.96 | ✅ | ✅ | **深度整合完成** |
 | 9 | RUST_196_MIGRATION_GUIDE.md | 1.96 | ✅ | ✅ | 已完成 |
-| 10 | AI_RUST_ECOSYSTEM_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 11 | CLI_APPLICATIONS_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 10 | 05_ai_rust_ecosystem_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 11 | 05_cli_applications_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 12 | EMBEDDED_RUST_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 13 | FFI_PRACTICAL_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 14 | 05_inline_assembly_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 15 | PERFORMANCE_TUNING_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 16 | TESTING_COVERAGE_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 16 | 05_testing_coverage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 17 | TOKIO_ECOSYSTEM_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 18 | ADVANCED_TOPICS_DEEP_DIVE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 19 | CROSS_MODULE_INTEGRATION_EXAMPLES.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 19 | 05_cross_module_integration_examples.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 20 | PRODUCTION_PROJECT_EXAMPLES.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 21 | PERFORMANCE_TESTING_REPORT.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 22 | FINAL_DOCUMENTATION_COMPLETION_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
@@ -143,7 +143,7 @@ fn demonstrate_196_features() {
 
 #### 🔢 数学计算
 - [isqrt 最佳实践](./BEST_PRACTICES.md#rust-196-最佳实践)
-- [几何算法示例](./CROSS_MODULE_INTEGRATION_EXAMPLES.md)
+- [几何算法示例](./05_cross_module_integration_examples.md)
 
 #### 🔄 并发编程
 - [HashMap 新 API](./THREADS_CONCURRENCY_USAGE_GUIDE.md)

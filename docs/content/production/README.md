@@ -701,7 +701,7 @@ impl Service {
 
 ## 相关概念
 
-- [Kubernetes 部署指南](./kubernetes_deployment_guide.md)
+- [Kubernetes 部署指南](./10_kubernetes_deployment_guide.md)
 - [Content 总览](../README.md)
 
 ---

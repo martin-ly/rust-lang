@@ -383,7 +383,7 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 | :--- | :--- | :--- |
 | [Ch. 5 Patterns](https://spec.ferrocene.dev/patterns.html) | 5.1 [Refutability](https://spec.ferrocene.dev/patterns.html#refutability)、5.13 [Pattern Matching](https://spec.ferrocene.dev/patterns.html#pattern-matching) | [02_reference/quick_reference/control_flow_functions_cheatsheet.md](../../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
 | [Ch. 15 Ownership and Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | 15.1 [Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html#ownership)、15.4 [Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)、15.6–15.9 [Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html#destruction) | [ownership_model](./ownership_model.md)、[borrow_checker_proof](./borrow_checker_proof.md) Def OW1、规则 1–8、DROP1 |
-| [Ch. 16 Exceptions and Errors](https://spec.ferrocene.dev/exceptions-and-errors.html) | 16.1 [Panic](https://spec.ferrocene.dev/exceptions-and-errors.html#panic)、16.2 [Abort](https://spec.ferrocene.dev/exceptions-and-errors.html#abort) | [02_reference/quick_reference/error_handling_cheatsheet.md](../../02_reference/quick_reference/error_handling_cheatsheet.md)、[EDGE_CASES_AND_SPECIAL_CASES](../../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) |
+| [Ch. 16 Exceptions and Errors](https://spec.ferrocene.dev/exceptions-and-errors.html) | 16.1 [Panic](https://spec.ferrocene.dev/exceptions-and-errors.html#panic)、16.2 [Abort](https://spec.ferrocene.dev/exceptions-and-errors.html#abort) | [02_reference/quick_reference/error_handling_cheatsheet.md](../../02_reference/quick_reference/error_handling_cheatsheet.md)、[EDGE_CASES_AND_SPECIAL_CASES](../../02_reference/02_edge_cases_and_special_cases.md) |
 | [Ch. 17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | 17.1 [Send/Sync](https://spec.ferrocene.dev/concurrency.html#send-and-sync)、17.2 [Atomics](https://spec.ferrocene.dev/concurrency.html#atomics)、17.3 [Async](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation) | CHAN-T1、MUTEX-T1、ATOMIC1、SPAWN-T1 |
 | [Ch. 19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | 完整章节 | UNSAFE1、RAW1、EXTERN1 |
 | [Ch. 21 FFI](https://spec.ferrocene.dev/ffi.html) | 21.2–21.4 External blocks/functions/statics | EXTERN1、CVARIADIC1 |
@@ -443,7 +443,7 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 
 **维护团队**: Rust Formal Methods Research Group
 **最后更新**: 2026-02-12
-**状态**: ✅ **100% 完成**；Phase 1–6 全部补全，见 [00_completeness_gaps](./00_completeness_gaps.md)。**意见与可持续推进**（Send/Sync 独立形式化、安全可判定机制全面梳理、完备特性对比、思维表征四类绑定）：[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。**完备性检查表**（六篇×六维）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](./FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
+**状态**: ✅ **100% 完成**；Phase 1–6 全部补全，见 [00_completeness_gaps](./00_completeness_gaps.md)。**意见与可持续推进**（Send/Sync 独立形式化、安全可判定机制全面梳理、完备特性对比、思维表征四类绑定）：[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md)。**完备性检查表**（六篇×六维）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](./10_formal_methods_completeness_checklist.md)。
 
 ---
 

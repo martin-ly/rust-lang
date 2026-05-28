@@ -119,19 +119,19 @@
 
 **Day 1-2: 所有权概念**
 
-- 阅读: [形式化概念百科](./FORMAL_CONCEPTS_ENCYCLOPEDIA.md) §1.1
+- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §1.1
 - 实践: 编写Move/Copy示例代码
 - 检验: 能解释"为什么转移后原变量不能用"
 
 **Day 3-4: 借用规则**
 
-- 阅读: [形式化概念百科](./FORMAL_CONCEPTS_ENCYCLOPEDIA.md) §1.2
+- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §1.2
 - 实践: 编写&和&mut示例
 - 检验: 能解释"为什么可变和不可变借用不能共存"
 
 **Day 5-7: 生命周期直觉**
 
-- 阅读: [形式化概念百科](./FORMAL_CONCEPTS_ENCYCLOPEDIA.md) §1.3, §3
+- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §1.3, §3
 - 实践: 解决编译器生命周期错误
 - 检验: 能读懂简单生命周期标注
 
@@ -148,7 +148,7 @@
 
 **Day 3-4: Send与Sync**
 
-- 阅读: [形式化概念百科](./FORMAL_CONCEPTS_ENCYCLOPEDIA.md) §4.1
+- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §4.1
 - 实践: 判断类型是否Send/Sync
 
 **Day 5-7: 反例学习**
@@ -236,7 +236,7 @@
 
 **主题**: 并发安全的形式化
 
-- 阅读: [形式化概念百科](./FORMAL_CONCEPTS_ENCYCLOPEDIA.md) §4
+- 阅读: [形式化概念百科](./10_formal_concepts_encyclopedia.md) §4
 - 理解: Send/Sync的形式化定义
 - 学习: Future与Pin的形式化
 
@@ -324,7 +324,7 @@
 
 | 文档 | 难度 | 路径 | 说明 |
 | :--- | :--- | :--- | :--- |
-| [形式化概念百科](./FORMAL_CONCEPTS_ENCYCLOPEDIA.md) | ⭐⭐ | 全部 | 核心概念定义 |
+| [形式化概念百科](./10_formal_concepts_encyclopedia.md) | ⭐⭐ | 全部 | 核心概念定义 |
 | [定理汇编](./10_theorems_and_proof_strategies.md) | ⭐⭐⭐ | 进阶+专家 | 证明思路 |
 | [认知论证框架](./10_cognitive_argumentation_framework.md) | ⭐⭐ | 全部 | 方法论 |
 

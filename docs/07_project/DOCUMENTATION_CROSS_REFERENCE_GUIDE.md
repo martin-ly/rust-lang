@@ -208,14 +208,14 @@ docs/
 │
 ├── 📁 01_learning/ .............................. 学习路径
 │   ├── LEARNING_PATH_PLANNING.md ←→ 02_reference/quick_reference/ (速查卡)
-│   └── OFFICIAL_RESOURCES_MAPPING.md ←→ crates/*/docs/ (模块文档)
+│   └── 01_official_resources_mapping.md ←→ crates/*/docs/ (模块文档)
 │
 ├── 📁 02_reference/ ............................. 参考与速查
 │   ├── quick_reference/ (20个速查卡)
 │   │   ├── *.md ←→ 05_guides/ (对应指南)
 │   │   └── *.md ←→ research_notes/ (形式化定义)
 │   ├── ALIGNMENT_GUIDE.md ←→ 05_guides/PERFORMANCE_TUNING_GUIDE.md
-│   └── EDGE_CASES_AND_SPECIAL_CASES.md ←→ research_notes/formal_methods/
+│   └── 02_edge_cases_and_special_cases.md ←→ research_notes/formal_methods/
 │
 ├── 📁 research_notes/ ........................... 研究笔记 (形式化理论)
 │   ├── formal_methods/ ←→ type_theory/ (等价定义)
@@ -334,9 +334,9 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c07_process/docs/tier_01_foundations/02_主索引导航.md` | ←→ [process_management_cheatsheet](../02_reference/quick_reference/process_management_cheatsheet.md) |
-| **速查卡** | [process_management_cheatsheet.md](../02_reference/quick_reference/process_management_cheatsheet.md) | → [05_guides/CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) → [SAFE_UNSAFE_ANALYSIS](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
-| **指南** | [CLI_APPLICATIONS_GUIDE.md](../05_guides/CLI_APPLICATIONS_GUIDE.md) | ← [process_management_cheatsheet](../02_reference/quick_reference/process_management_cheatsheet.md) |
+| **主索引** | `crates/c07_process/docs/tier_01_foundations/02_主索引导航.md` | ←→ [process_management_cheatsheet](../02_reference/quick_reference/02_process_management_cheatsheet.md) |
+| **速查卡** | [02_process_management_cheatsheet.md](../02_reference/quick_reference/02_process_management_cheatsheet.md) | → [05_guides/CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) → [SAFE_UNSAFE_ANALYSIS](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+| **指南** | [05_cli_applications_guide.md](../05_guides/05_cli_applications_guide.md) | ← [process_management_cheatsheet](../02_reference/quick_reference/02_process_management_cheatsheet.md) |
 
 ### C08 - 算法与数据结构
 >
@@ -366,9 +366,9 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md` | ←→ [network_programming_cheatsheet](../02_reference/quick_reference/network_programming_cheatsheet.md) |
-| **速查卡** | [network_programming_cheatsheet.md](../02_reference/quick_reference/network_programming_cheatsheet.md) | → [async_state_machine](../research_notes/formal_methods/async_state_machine.md) → [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) |
-| **指南** | [ASYNC_PROGRAMMING_USAGE_GUIDE.md](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | ← [network_programming_cheatsheet](../02_reference/quick_reference/network_programming_cheatsheet.md) |
+| **主索引** | `crates/c10_networks/docs/tier_01_foundations/02_主索引导航.md` | ←→ [network_programming_cheatsheet](../02_reference/quick_reference/02_network_programming_cheatsheet.md) |
+| **速查卡** | [02_network_programming_cheatsheet.md](../02_reference/quick_reference/02_network_programming_cheatsheet.md) | → [async_state_machine](../research_notes/formal_methods/async_state_machine.md) → [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) |
+| **指南** | [ASYNC_PROGRAMMING_USAGE_GUIDE.md](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | ← [network_programming_cheatsheet](../02_reference/quick_reference/02_network_programming_cheatsheet.md) |
 
 ### C11 - 宏系统
 >
@@ -386,9 +386,9 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
-| **主索引** | `crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md` | ←→ [wasm_cheatsheet](../02_reference/quick_reference/wasm_cheatsheet.md) |
-| **速查卡** | [wasm_cheatsheet.md](../02_reference/quick_reference/wasm_cheatsheet.md) | → [WASM_USAGE_GUIDE](../05_guides/WASM_USAGE_GUIDE.md) → [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
-| **指南** | [WASM_USAGE_GUIDE.md](../05_guides/WASM_USAGE_GUIDE.md) | ← [wasm_cheatsheet](../02_reference/quick_reference/wasm_cheatsheet.md) |
+| **主索引** | `crates/c12_wasm/docs/tier_01_foundations/02_主索引导航.md` | ←→ [wasm_cheatsheet](../02_reference/quick_reference/02_wasm_cheatsheet.md) |
+| **速查卡** | [02_wasm_cheatsheet.md](../02_reference/quick_reference/02_wasm_cheatsheet.md) | → [WASM_USAGE_GUIDE](../05_guides/WASM_USAGE_GUIDE.md) → [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
+| **指南** | [WASM_USAGE_GUIDE.md](../05_guides/WASM_USAGE_GUIDE.md) | ← [wasm_cheatsheet](../02_reference/quick_reference/02_wasm_cheatsheet.md) |
 
 ---
 
@@ -502,19 +502,19 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | 泛型 ↔ 宏系统 |
 | design_patterns_cheatsheet | [DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | 模式速查 ↔ 模式应用 |
 | macros_cheatsheet | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | 语法 ↔ 应用 |
-| [wasm_cheatsheet](../02_reference/quick_reference/wasm_cheatsheet.md) | [WASM_USAGE_GUIDE](../05_guides/WASM_USAGE_GUIDE.md) | 语法 ↔ 应用 |
-| [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) | [TESTING_COVERAGE_GUIDE](../05_guides/TESTING_COVERAGE_GUIDE.md) | 测试语法 ↔ 测试策略 |
-| [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) | 工具 ↔ 应用 |
+| [wasm_cheatsheet](../02_reference/quick_reference/02_wasm_cheatsheet.md) | [WASM_USAGE_GUIDE](../05_guides/WASM_USAGE_GUIDE.md) | 语法 ↔ 应用 |
+| [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) | [TESTING_COVERAGE_GUIDE](../05_guides/05_testing_coverage_guide.md) | 测试语法 ↔ 测试策略 |
+| [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 工具 ↔ 应用 |
 | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) | [TROUBLESHOOTING_GUIDE](../05_guides/TROUBLESHOOTING_GUIDE.md) | 错误处理 ↔ 故障排查 |
 | [smart_pointers_cheatsheet](../02_reference/quick_reference/smart_pointers_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../05_guides/PERFORMANCE_TUNING_GUIDE.md) | 智能指针 ↔ 性能优化 |
 | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../05_guides/PERFORMANCE_TUNING_GUIDE.md) | 集合 ↔ 性能优化 |
-| [strings_formatting_cheatsheet](../02_reference/quick_reference/strings_formatting_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) | 字符串 ↔ CLI应用 |
-| [modules_cheatsheet](../02_reference/quick_reference/modules_cheatsheet.md) | [CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md) | 模块 ↔ 集成示例 |
+| [strings_formatting_cheatsheet](../02_reference/quick_reference/strings_formatting_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 字符串 ↔ CLI应用 |
+| [modules_cheatsheet](../02_reference/quick_reference/modules_cheatsheet.md) | [CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/05_cross_module_integration_examples.md) | 模块 ↔ 集成示例 |
 | [algorithms_cheatsheet](../02_reference/quick_reference/algorithms_cheatsheet.md) | [PERFORMANCE_TUNING_GUIDE](../05_guides/PERFORMANCE_TUNING_GUIDE.md) | 算法 ↔ 性能优化 |
-| [process_management_cheatsheet](../02_reference/quick_reference/process_management_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/CLI_APPLICATIONS_GUIDE.md) | 进程 ↔ CLI应用 |
-| [network_programming_cheatsheet](../02_reference/quick_reference/network_programming_cheatsheet.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 网络 ↔ 异步应用 |
+| [process_management_cheatsheet](../02_reference/quick_reference/02_process_management_cheatsheet.md) | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 进程 ↔ CLI应用 |
+| [network_programming_cheatsheet](../02_reference/quick_reference/02_network_programming_cheatsheet.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | 网络 ↔ 异步应用 |
 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | 控制流 ↔ 宏系统 |
-| [ai_ml_cheatsheet](../02_reference/quick_reference/ai_ml_cheatsheet.md) | [AI_RUST_ECOSYSTEM_GUIDE](../05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) | AI速查 ↔ AI生态 |
+| [ai_ml_cheatsheet](../02_reference/quick_reference/02_ai_ml_cheatsheet.md) | [AI_RUST_ECOSYSTEM_GUIDE](../05_guides/05_ai_rust_ecosystem_guide.md) | AI速查 ↔ AI生态 |
 
 ### 速查卡 ↔ 研究笔记映射
 >

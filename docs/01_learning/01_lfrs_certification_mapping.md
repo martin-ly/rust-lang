@@ -303,7 +303,7 @@
 | 文档测试 | 所有 crate 的文档注释中的 ``` 代码块 | 文档内嵌测试 |
 | 属性测试 | `docs/03_guides/03_fuzzing_guide.md` | proptest 使用指南 |
 | 基准测试 | `crates/c08_algorithms/src/performance_benchmarks.rs` | Criterion 实例 |
-| Miri | `docs/03_guides/MIRI_GUIDE.md` | 未定义行为检测 |
+| Miri | `docs/03_guides/03_miri_guide.md` | 未定义行为检测 |
 | 覆盖率 | `docs/03_guides/03_test_coverage.md` | tarpaulin 使用 |
 
 ### 练习验证

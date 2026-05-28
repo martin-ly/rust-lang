@@ -346,7 +346,7 @@
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **了解系统** → 阅读 [主索引](./README.md) 和 [系统总结](./SYSTEM_SUMMARY.md)
-2. **第一个可运行示例** → [EXAMPLE.md](./EXAMPLE.md) 含所有权、借用、生命周期的完整代码（可直接复制运行）
+2. **第一个可运行示例** → [10_example.md](./10_example.md) 含所有权、借用、生命周期的完整代码（可直接复制运行）
 3. **选择主题** → 从 [快速参考](./QUICK_REFERENCE.md) 选择感兴趣的主题
 4. **阅读笔记** → 阅读相关研究笔记（所有权 → [ownership_model](./formal_methods/ownership_model.md)）
 5. **实践应用** → 查看 [实际应用案例](./practical_applications.md) 的案例 1–3（含 Axum、mpsc、SafeVec 代码）

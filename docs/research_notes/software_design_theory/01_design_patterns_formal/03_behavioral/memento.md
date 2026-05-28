@@ -301,7 +301,7 @@ Axiom MO2 (兼容性)
 | :--- | :--- |
 | [Command](./command.md) | 撤销需 Memento 保存状态 |
 | [State](./state.md) | 保存/恢复状态 |
-| [Prototype](../01_creational/prototype.md) | Clone 可作 Memento 实现 |
+| [Prototype](../01_creational/10_prototype.md) | Clone 可作 Memento 实现 |
 
 ---
 

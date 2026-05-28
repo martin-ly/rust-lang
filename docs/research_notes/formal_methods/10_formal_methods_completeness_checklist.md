@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 六篇形式化文档 × 六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）自检，确保充分完整完备
-> **上位**: [README](./README.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)、[QUALITY_CHECKLIST](../QUALITY_CHECKLIST.md)
+> **上位**: [README](./README.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[QUALITY_CHECKLIST](../QUALITY_CHECKLIST.md)
 
 ---
 
@@ -75,7 +75,7 @@
 
 - 新增 formal_methods 文档时：在本表增加一行，六维逐项填写并保持 ✅。
 - 某篇补充定义/定理/反例/思维表征时：更新对应单元格说明，保持 ✅。
-- 季度维护：与 [MAINTENANCE_GUIDE](../MAINTENANCE_GUIDE.md) 协同，核对本表与 README 六篇并表、00_completeness_gaps 一致。
+- 季度维护：与 [MAINTENANCE_GUIDE](../10_maintenance_guide.md) 协同，核对本表与 README 六篇并表、00_completeness_gaps 一致。
 
 ---
 

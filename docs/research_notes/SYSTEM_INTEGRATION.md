@@ -366,7 +366,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [研究资源汇总](./RESOURCES.md) - 学术和工具资源
+- [研究资源汇总](./10_resources.md) - 学术和工具资源
 - [工具使用指南](./TOOLS_GUIDE.md) - 研究工具详细指南
 - [术语表](./GLOSSARY.md) - 专业术语解释
 

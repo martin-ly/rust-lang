@@ -138,9 +138,9 @@ Level 4: 思维表征
 Level 5: 实用资源
 ├── TUTORIAL_*.md (5篇)
 ├── *_CHEATSHEET.md (5篇)
-├── FAQ_COMPREHENSIVE.md
+├── 10_faq_comprehensive.md
 ├── INTERVIEW_QUESTIONS_COLLECTION.md
-└── COUNTER_EXAMPLES_COMPENDIUM.md
+└── 10_counter_examples_compendium.md
 ```
 
 ---

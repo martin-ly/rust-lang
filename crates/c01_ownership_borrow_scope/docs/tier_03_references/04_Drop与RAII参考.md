@@ -15,7 +15,6 @@
     - [文件 RAII](#文件-raii)
     - [锁 RAII](#锁-raii)
   - [Drop 顺序](#drop-顺序)
-  - [**最后更新**: 2025-12-11](#最后更新-2025-12-11)
 
 ## Drop trait
 
@@ -118,11 +117,6 @@ fn main() {
 
 - [Tier 2: 04\_作用域管理实践](../tier_02_guides/04_作用域管理实践.md)
 
----
-
-**文档维护**: Documentation Team
-**创建日期**: 2025-10-22
-**最后更新**: 2025-12-11
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

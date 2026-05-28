@@ -339,8 +339,8 @@ borrow_checker_proof
 | 模式 | 关系 |
 | :--- | :--- |
 | [Decorator](./decorator.md) | 同为包装；Proxy 控制访问，Decorator 扩展行为 |
-| [Flyweight](./flyweight.md) | Proxy 可包装 Flyweight 做延迟/缓存 |
-| [Facade](./facade.md) | Proxy 委托单对象；Facade 聚合多对象 |
+| [Flyweight](./10_flyweight.md) | Proxy 可包装 Flyweight 做延迟/缓存 |
+| [Facade](./10_facade.md) | Proxy 委托单对象；Facade 聚合多对象 |
 
 ---
 

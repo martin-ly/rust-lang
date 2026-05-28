@@ -565,7 +565,7 @@ Pin ──→ 自引用安全
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
 | [FEATURE_TEMPLATE](./10_feature_template.md) | 79 项特性精简模板 |
-| [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md) | 版本增量更新流程 |
+| [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md) | 版本增量更新流程 |
 
 ---
 

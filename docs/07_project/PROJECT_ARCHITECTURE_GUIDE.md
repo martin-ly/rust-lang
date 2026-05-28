@@ -860,7 +860,7 @@ codegen-units = 1
 
 - [项目结构文档](./PROJECT_ARCHITECTURE_GUIDE.md)
 - [最佳实践指南](../05_guides/BEST_PRACTICES.md)
-- [测试覆盖率指南](../05_guides/TESTING_COVERAGE_GUIDE.md)
+- [测试覆盖率指南](../05_guides/05_testing_coverage_guide.md)
 - [快速参考卡片](../02_reference/quick_reference/README.md)
 
 ---

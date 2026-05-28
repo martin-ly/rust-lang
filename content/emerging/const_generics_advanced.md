@@ -30,7 +30,6 @@
     - [稳定路线图](#稳定路线图)
     - [当前使用建议](#当前使用建议)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: 🧪 nightly 特性跟踪](#状态--nightly-特性跟踪)
 
 ---
 
@@ -426,11 +425,6 @@ impl<T, const N: usize, const M: usize> Matrix<T, N, M> {
 - [Const Eval Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/language-features/const-eval.html)
 - [项目 emerging/generic_const_exprs.md](./generic_const_exprs.md)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-05-08
-**状态**: 🧪 nightly 特性跟踪
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

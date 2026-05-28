@@ -1444,7 +1444,7 @@ fn proof_validation_workflow() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-- [COQ_OF_RUST_INTEGRATION_PLAN.md](../research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md) - Coq 证明集成
+- [10_coq_of_rust_integration_plan.md](../research_notes/10_coq_of_rust_integration_plan.md) - Coq 证明集成
 - [AENEAS_INTEGRATION_PLAN.md](../research_notes/AENEAS_INTEGRATION_PLAN.md) - Aeneas 验证工具
 
 ### 相关文档

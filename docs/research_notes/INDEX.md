@@ -61,7 +61,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**多维度分类**：见 [CLASSIFICATION.md](./CLASSIFICATION.md) — 按文档角色、知识层次、主题域、扩展路线。
+**多维度分类**：见 [10_classification.md](./10_classification.md) — 按文档角色、知识层次、主题域、扩展路线。
 
 | 维度 | 简要 |
 | :--- | :--- |
@@ -132,7 +132,7 @@
    - 成功标准
 
 4. **[CONTENT_ENHANCEMENT.md](./CONTENT_ENHANCEMENT.md)** - 内容完善指南（含层次推进计划、实质内容检查清单、实质内容自检表）
-5. **[CLASSIFICATION.md](./CLASSIFICATION.md)** - 文档分类体系（按角色、层次、主题域、扩展路线）
+5. **[10_classification.md](./10_classification.md)** - 文档分类体系（按角色、层次、主题域、扩展路线）
 6. **[SYSTEM_SUMMARY.md](./SYSTEM_SUMMARY.md)** - 系统总结
    - 系统概览
    - 文档统计
@@ -154,9 +154,9 @@
 
 - 现状诊断、国际差距、论证充分性缺口
 
-> **注意**: 原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md 已归档至 `../archive/process_reports/2026_02/`，请查阅 [AUTHORITATIVE_ALIGNMENT_GUIDE.md](./AUTHORITATIVE_ALIGNMENT_GUIDE.md) 获取最新对齐指南。
+> **注意**: 原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN.md 已归档至 `../archive/process_reports/2026_02/`，请查阅 [10_authoritative_alignment_guide.md](./10_authoritative_alignment_guide.md) 获取最新对齐指南。
 
-7b1. **[AUTHORITATIVE_ALIGNMENT_GUIDE.md](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)** - 权威对齐指南 🆕
+7b1. **[10_authoritative_alignment_guide.md](./10_authoritative_alignment_guide.md)** - 权威对齐指南 🆕
 
 - 研究笔记权威来源对齐
 - 技术决策参考与最佳实践
@@ -172,7 +172,7 @@
 7d. **[10_rustbelt_alignment.md](./10_rustbelt_alignment.md)** - RustBelt 逐章对标 🆕
 7e. **[EXECUTABLE_SEMANTICS_ROADMAP.md](./EXECUTABLE_SEMANTICS_ROADMAP.md)** - 可执行语义路线图（K-Framework、PLT Redex）🆕
 7f. **[AENEAS_INTEGRATION_PLAN](../archive/deprecated/AENEAS_INTEGRATION_PLAN.md)** - Aeneas 对接调研与集成计划（已归档）
-7g. **[COQ_OF_RUST_INTEGRATION_PLAN](../archive/deprecated/COQ_OF_RUST_INTEGRATION_PLAN.md)** - coq-of-rust 对接调研与集成计划（已归档）
+7g. **COQ_OF_RUST_INTEGRATION_PLAN** - coq-of-rust 对接调研与集成计划（已归档）
 7h. **[CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md)** - 核心定理完整证明（L2 级）🆕
 7i. **[10_core_theorems_en_summary.md](./10_core_theorems_en_summary.md)** - 核心定理英文摘要
 7j. **[FORMAL_FULL_MODEL_EN_SUMMARY.md](./FORMAL_FULL_MODEL_EN_SUMMARY.md)** - 形式化全模型英文摘要
@@ -240,7 +240,7 @@
 
 - 79 项非核心特性的「概念→形式化引用→反例」模板
 
-1. **[INCREMENTAL_UPDATE_FLOW.md](./INCREMENTAL_UPDATE_FLOW.md)** - 版本增量更新流程 🆕
+1. **[10_incremental_update_flow.md](./10_incremental_update_flow.md)** - 版本增量更新流程 🆕
 
 - 1.94+ 发布后：对比、更新 RUST_XXX、补新特性；检查清单
 
@@ -260,20 +260,20 @@
    - 四大检查维度、权威来源对齐
    - 六阶段分步推进方案（100% 完成）
 
-3. **[TASK_CHECKLIST.md](./TASK_CHECKLIST.md)** - 研究任务清单
+3. **[10_task_checklist.md](./10_task_checklist.md)** - 研究任务清单
    - 具体可执行任务
    - 任务优先级分类
    - 任务状态跟踪
    - 任务统计信息
 
-4. **[WRITING_GUIDE.md](./WRITING_GUIDE.md)** - 研究笔记写作指南
+4. **[10_writing_guide.md](./10_writing_guide.md)** - 研究笔记写作指南
    - 写作前准备
    - 各部分写作技巧
    - 格式规范
    - 内容组织
    - 质量检查
 
-5. **[STATISTICS.md](./STATISTICS.md)** - 研究笔记系统统计报告
+5. **[10_statistics.md](./10_statistics.md)** - 研究笔记系统统计报告
    - 文档统计
    - 研究笔记统计
    - 内容统计
@@ -281,7 +281,7 @@
    - 质量统计
    - 趋势分析
 
-6. **[QUICK_FIND.md](./QUICK_FIND.md)** - 研究笔记快速查找
+6. **[10_quick_find.md](./10_quick_find.md)** - 研究笔记快速查找
    - 按关键词查找
    - 按研究领域查找
    - 按研究目标查找
@@ -410,7 +410,7 @@
    - 状态: ✅ 已完成 (100%)
    - 关键词: Send、Sync、跨线程安全、数据竞争自由
 
-7. **[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md](./formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)** - formal_methods 意见与建议、安全可判定机制梳理、完备特性对比、可持续推进计划
+7. **[10_safe_decidable_mechanisms_and_formal_methods_plan.md](./formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)** - formal_methods 意见与建议、安全可判定机制梳理、完备特性对比、可持续推进计划
    - 研究目标: 阶段 A–D 已完成（Send/Sync 专篇、安全可判定总览、四维表、思维表征绑定）
    - 状态: ✅ 阶段 A–D 100% 完成
    - 关键词: Send、Sync、安全可判定、完备特性对比、思维表征
@@ -420,7 +420,7 @@
    - 状态: ✅ 已完成 (100%)
    - 关键词: 安全可判定、ownership、borrow、Send、Sync、Pin、async
 
-9. **[FORMAL_METHODS_COMPLETENESS_CHECKLIST.md](./formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)** - formal_methods 完备性检查表
+9. **[10_formal_methods_completeness_checklist.md](./formal_methods/10_formal_methods_completeness_checklist.md)** - formal_methods 完备性检查表
    - 研究目标: 六篇×六维（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类）自检，确保充分完整完备
    - 状态: ✅ 六篇全覆盖
    - 关键词: 完备性、六维、formal_methods、自检

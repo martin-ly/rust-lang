@@ -178,7 +178,7 @@ rust-lang/
 |-------|---------|
 | 06_archive/2026_03_reorganization/COMPLETION_REPORT_FINAL.md | 所有RUST_194_*报告 |
 | 06_archive/2026_03_reorganization/AUTHORITATIVE_ALIGNMENT_REPORT.md | FINAL_AUTHORITATIVE_ALIGNMENT_REPORT.md |
-| 01_docs/02_ecosystem_review/2026_comprehensive_review.md | 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md |
+| 01_docs/02_ecosystem_review/2026_comprehensive_review.md | 10_2026_rust_ecosystem_comprehensive_review_with_citations.md |
 
 ### docs目录重组
 

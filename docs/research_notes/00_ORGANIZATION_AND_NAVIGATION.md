@@ -43,10 +43,10 @@
 | 我的目标 | 入口 | 预计时间 |
 | :--- | :--- | :--- |
 | **我想理解 Rust 形式化证明** | [FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md) → [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) | 30min |
-| **我想查某个概念的证明/定义** | [QUICK_FIND](./QUICK_FIND.md)（按关键词） | 2min |
+| **我想查某个概念的证明/定义** | [QUICK_FIND](./10_quick_find.md)（按关键词） | 2min |
 | **我想选设计模式/并发模型** | [software_design_theory/00_MASTER_INDEX](./software_design_theory/00_MASTER_INDEX.md) → 03_semantic_boundary_map、06_boundary_analysis | 15min |
-| **我想理解权威对齐体系** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md) | 10min |
-| **三大支柱** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） | 10min |
+| **我想理解权威对齐体系** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) | 10min |
+| **三大支柱** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） | 10min |
 | **我想看完整总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md) → [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md) | 15min |
 | **我想看批判性意见与改进计划** | RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN | 15min |
 | **我想看格式统一与 Rust 1.93 对齐计划** | FORMAT_AND_CONTENT_ALIGNMENT_PLAN (归档) | 10min |
@@ -54,7 +54,7 @@
 | **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) | 5min |
 | **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) | 5min |
 | **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) | 5min |
-| **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md) | 2min |
+| **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/10_formal_methods_completeness_checklist.md) | 2min |
 | **我想贡献/维护** | [CONTRIBUTING](./CONTRIBUTING.md) → [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) | 5min |
 
 ---
@@ -63,7 +63,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-本目录围绕 [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md) 所述的三大支柱组织，现推荐参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)：
+本目录围绕 [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) 所述的三大支柱组织，现推荐参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)：
 
 ```text
 支柱 1：公理判定系统（形式系统）
@@ -97,7 +97,7 @@ research_notes/
 ├── 00_ORGANIZATION_AND_NAVIGATION.md  ← 本文件（组织架构与导航）
 ├── README.md                           ← 主入口、研究方向、规范
 ├── INDEX.md                            ← 完整索引（按领域、主题）
-├── QUICK_FIND.md                       ← 按关键词/领域/目标快速查找
+├── 10_quick_find.md                       ← 按关键词/领域/目标快速查找
 │
 ├── 【支柱 1 形式化】
 │   ├── formal_methods/                 ← 所有权、借用、异步、Pin、Send/Sync（六篇并表）
@@ -119,8 +119,8 @@ research_notes/
 └── 【导航/框架/指南】（按需查阅）
     ├── 00_COMPREHENSIVE_SUMMARY.md      ← 完整总结综合、知识地图、论证总览
     ├── ARGUMENTATION_CHAIN_AND_FLOW.md  ← 论证思路、论证脉络关系、文档依赖
-    ├── [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md) - 权威对齐指南、技术决策参考
-    ├── CLASSIFICATION.md                ← 按角色/层次/主题分类
+    ├── [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) - 权威对齐指南、技术决策参考
+    ├── 10_classification.md                ← 按角色/层次/主题分类
     ├── RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md  ← 批判性分析、层次化/矩阵/思维表征缺口、可持续改进计划
     ├── HIERARCHICAL_MAPPING_AND_SUMMARY.md                      ← 文档树、概念↔文档↔Def/定理、文档↔思维表征映射
     ├── ARGUMENTATION_GAP_INDEX.md

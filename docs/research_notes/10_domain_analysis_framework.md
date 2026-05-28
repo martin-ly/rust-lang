@@ -544,7 +544,7 @@ Rust特有:
 | 内存安全 | 并发 | Send/Sync | send_sync_formalization.md |
 | 类型系统 | 软件设计 | Trait抽象 | trait_system_formalization.md |
 | 并发 | 工具链 | 异步状态机 | async_state_machine.md |
-| 软件设计 | 工具链 | 模块化 | MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md |
+| 软件设计 | 工具链 | 模块化 | 07_module_knowledge_structure_guide.md |
 
 ### 领域依赖图
 

@@ -158,7 +158,7 @@ let result = timeout(Duration::from_secs(5), fetch_data()).await;
 
 ## 🔧 工作线程模型
 
-```
+```text
 Thread 1          Thread 2          Thread 3
 ┌─────────┐       ┌─────────┐       ┌─────────┐
 │ Local   │       │ Local   │       │ Local   │
@@ -191,7 +191,7 @@ Thread 1          Thread 2          Thread 3
 
 **选择决策树**:
 
-```
+```text
 需要 no_std? ──是──→ Embassy
                 └──否──→ 需要成熟生态? ──是──→ Tokio
                                       └──否──→ 追求简洁? ──是──→ smol

@@ -338,13 +338,13 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **s390x vector** | s390x SIMD | is_s390x_feature_detected! | [07_rust_1.93](../06_toolchain/07_rust_1.93_full_changelog.md)、[releases.rs](https://releases.rs/docs/1.93.0/) | 非 s390x 架构 |
 | **C variadic** | printf 等 FFI | extern "system" fn(..., ...) | 07_rust_1.93、[releases.rs](https://releases.rs/docs/1.93.0/) | 非 system ABI |
-| **cfg 关键词** | 避免误用 | 关键词作 cfg 谓词报错 | [09_rust_1.93_compatibility](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)、[releases.rs](https://releases.rs/docs/1.93.0/) | - |
+| **cfg 关键词** | 避免误用 | 关键词作 cfg 谓词报错 | [09_rust_1.93_compatibility](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)、[releases.rs](https://releases.rs/docs/1.93.0/) | - |
 | **asm_cfg** | 条件汇编 | #[cfg] 在 asm! 行上 | 07_rust_1.93、05_comparison、[releases.rs](https://releases.rs/docs/1.93.0/) | - |
 | **LUB coercion** | 类型推断正确性 | 修正函数项、安全性 | 07_rust_1.93 | - |
 | **const &mut static** | 允许特定 const | 非常 unsafe | 07_rust_1.93 | const_item_interior_mutations |
 | **const_item_interior_mutations** | 安全警示 | warn-by-default lint | 07_rust_1.93 | - |
 | **function_casts_as_integer** | 可移植性 | warn-by-default | 07_rust_1.93 | - |
-| **deref_nullptr** | 安全 | deny-by-default | [09_compatibility](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | 解引用空指针 |
+| **deref_nullptr** | 安全 | deny-by-default | [09_compatibility](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | 解引用空指针 |
 | **#[test] 严格** | 避免误用 | 非函数位置报错 | 09_compatibility | trait 方法上 #[test] |
 | **offset_of!** | 类型检查 | well-formed 检查 | 09_compatibility | 非法类型 |
 | **... variadic** | 未来兼容 | future-incompat | 09_compatibility | - |
@@ -371,7 +371,7 @@
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界 |
 | [toolchain/07_rust_1.93_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) | Rust 1.93 完整变更清单 |
-| [toolchain/09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | Rust 1.93 兼容性深度解析 |
+| [toolchain/09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | Rust 1.93 兼容性深度解析 |
 | [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |
 
 ---

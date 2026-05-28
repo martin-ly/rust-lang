@@ -47,7 +47,7 @@ content/
 │   ├── README.md
 │   ├── 10_rust_1_95_preview.md
 │   ├── 10_generic_const_exprs.md
-│   └── async_closures.md
+│   └── 10_async_closures.md
 ├── ecosystem/                # 生态系统深度
 │   ├── README.md
 │   ├── web_frameworks/
@@ -113,7 +113,7 @@ content/
 
 - [Rust 1.95 预览](emerging/10_rust_1_95_preview.md)
 - [Generic Const Expressions](emerging/10_generic_const_exprs.md)
-- [Async Closures](emerging/async_closures.md)
+- [Async Closures](emerging/10_async_closures.md)
 
 ### 生态系统
 

@@ -98,7 +98,7 @@ rust-lang/
 │   │   ├── best_practices.md
 │   │   ├── GETTING_STARTED.md
 │   │   ├── QUICK_REFERENCE.md
-│   │   ├── RESOURCES.md
+│   │   ├── 10_resources.md
 │   │   ├── ROADMAP.md
 │   │   └── TROUBLESHOOTING.md
 │   └── 05_roadmap/                    # 🗺️ 路线图
@@ -134,9 +134,9 @@ rust-lang/
 
 | 原位置 | 新位置 |
 |--------|--------|
-| `docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md` | `01_docs/02_ecosystem_review/2026_comprehensive_review.md` |
-| `docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md` | `01_docs/03_authoritative_sources/citations.md` |
-| `docs/MIGRATION_GUIDE_2026.md` | `01_docs/04_guides/migration_2026.md` |
+| `docs/10_2026_rust_ecosystem_comprehensive_review_with_citations.md` | `01_docs/02_ecosystem_review/2026_comprehensive_review.md` |
+| `docs/10_authoritative_sources_and_citations.md` | `01_docs/03_authoritative_sources/citations.md` |
+| `docs/10_migration_guide_2026.md` | `01_docs/04_guides/migration_2026.md` |
 | `SUSTAINABLE_DEVELOPMENT_PLAN_2026.md` | `01_docs/05_roadmap/sustainable_plan.md` |
 | `README.en.md` | `01_docs/README.en.md` |
 
@@ -146,7 +146,7 @@ rust-lang/
 |--------|--------|
 | `GETTING_STARTED.md` | `01_docs/04_guides/GETTING_STARTED.md` |
 | `QUICK_REFERENCE.md` | `01_docs/04_guides/QUICK_REFERENCE.md` |
-| `RESOURCES.md` | `01_docs/04_guides/RESOURCES.md` |
+| `10_resources.md` | `01_docs/04_guides/10_resources.md` |
 | `ROADMAP.md` | `01_docs/04_guides/ROADMAP.md` |
 | `TROUBLESHOOTING.md` | `01_docs/04_guides/TROUBLESHOOTING.md` |
 

@@ -914,7 +914,7 @@ fn main() {
 
 - [借用检查器工作原理](./10_tutorial_borrow_checker.md)
 - [理解生命周期](./TUTORIAL_LIFETIMES.md)
-- [反例汇编](./COUNTER_EXAMPLES_COMPENDIUM.md)
+- [反例汇编](./10_counter_examples_compendium.md)
 
 ---
 

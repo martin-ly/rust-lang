@@ -862,7 +862,7 @@
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [贡献指南](./CONTRIBUTING.md)
-- [研究笔记示例](./EXAMPLE.md)
+- [研究笔记示例](./10_example.md)
 - [快速参考](./QUICK_REFERENCE.md)
 
 ### 工具和资源

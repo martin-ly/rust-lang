@@ -264,7 +264,7 @@ fn message_passing() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [C07 主索引](../../../crates/c07_process/docs/tier_01_foundations/02_主索引导航.md)
-- [进程管理速查卡](../../02_reference/quick_reference/process_management_cheatsheet.md)
+- [进程管理速查卡](../../02_reference/quick_reference/02_process_management_cheatsheet.md)
 
 ---
 

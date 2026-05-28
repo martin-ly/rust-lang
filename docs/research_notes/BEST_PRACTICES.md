@@ -759,7 +759,7 @@ git commit -m "添加所有权模型形式化研究笔记
 - [研究笔记模板](./TEMPLATE.md) - 研究笔记模板
 - [贡献指南](./CONTRIBUTING.md) - 贡献流程和规范
 - [质量检查清单](./QUALITY_CHECKLIST.md) - 质量检查标准
-- [维护指南](./MAINTENANCE_GUIDE.md) - 系统维护指南
+- [维护指南](./10_maintenance_guide.md) - 系统维护指南
 
 ### 工具和资源
 >

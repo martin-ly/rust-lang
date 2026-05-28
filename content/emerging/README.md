@@ -20,7 +20,6 @@
     - [Type Alias Impl Trait (TAIT)](#type-alias-impl-trait-tait)
   - [📈 版本路线图](#-版本路线图)
   - [🔗 参考资源](#-参考资源)
-  - [**状态**: 🔄 持续跟踪更新](#状态--持续跟踪更新)
 
 ---
 
@@ -243,11 +242,6 @@ timeline
 - [Rust Internals Forum](https://internals.rust-lang.org/)
 - [This Week in Rust](https://this-week-in-rust.org/)
 
----
-
-**维护者**: Rust 学习项目团队
-**更新日期**: 2026-03-15
-**状态**: 🔄 持续跟踪更新
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

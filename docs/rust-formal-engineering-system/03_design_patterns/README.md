@@ -448,7 +448,7 @@ fn newtype_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 抽象工厂 | 抽象工厂模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/abstract_factory.md](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/abstract_factory.md) |
+| 抽象工厂 | 抽象工厂模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/10_abstract_factory.md) |
 | 构造器 | 构造器模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/builder.md](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/builder.md) |
 | 工厂方法 | 工厂方法模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/factory_method.md](../../research_notes/software_design_theory/01_design_patterns_formal/01_creational/factory_method.md) |
 
@@ -460,7 +460,7 @@ fn newtype_demo() {
 | :--- | :--- | :--- |
 | 适配器 | 适配器模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/adapter.md](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/adapter.md) |
 | 装饰器 | 装饰器模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/decorator.md](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/decorator.md) |
-| 外观 | 外观模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/facade.md](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/facade.md) |
+| 外观 | 外观模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_facade.md](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/10_facade.md) |
 
 ### 行为型模式
 

@@ -281,7 +281,7 @@
 > **[来源: TRPL - The Rust Programming Language]**
 
 - 任务编排与执行计划 - 包含所有可视化内容
-- [任务清单](./TASK_CHECKLIST.md) - 详细任务列表
+- [任务清单](./10_task_checklist.md) - 详细任务列表
 - [进度跟踪](./PROGRESS_TRACKING.md) - 详细进度跟踪
 
 ### 工具资源
@@ -432,9 +432,9 @@ fn main() {
 
 | 定理 | 可视化表示 | 代码示例位置 |
 | :--- | :--- | :--- |
-| T-OW2 | 所有权状态转换图 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
-| T-BR1 | 借用生命周期图 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
-| T-TY3 | 类型推导树 | [COQ_ISABELLE_PROOF_SCAFFOLDING.md](./COQ_ISABELLE_PROOF_SCAFFOLDING.md) |
+| T-OW2 | 所有权状态转换图 | [10_coq_isabelle_proof_scaffolding.md](./10_coq_isabelle_proof_scaffolding.md) |
+| T-BR1 | 借用生命周期图 | [10_coq_isabelle_proof_scaffolding.md](./10_coq_isabelle_proof_scaffolding.md) |
+| T-TY3 | 类型推导树 | [10_coq_isabelle_proof_scaffolding.md](./10_coq_isabelle_proof_scaffolding.md) |
 
 ---
 

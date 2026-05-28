@@ -57,8 +57,8 @@
 >
 > **[来源: Rust Official Docs]**
 
-> 💡 **提示**: 需要更详细的查找功能？请查看 [快速查找工具](./QUICK_FIND.md)！
-> 📐 **分类体系**: 按文档角色、知识层次、主题域查找 → [CLASSIFICATION.md](./CLASSIFICATION.md)
+> 💡 **提示**: 需要更详细的查找功能？请查看 [快速查找工具](./10_quick_find.md)！
+> 📐 **分类体系**: 按文档角色、知识层次、主题域查找 → [10_classification.md](./10_classification.md)
 > 📋 **速查卡**: 按主题的语法速查、代码示例、反例 → [docs/quick_reference](../02_reference/quick_reference/README.md)
 
 ---
@@ -312,17 +312,17 @@
 - [软件设计理论](./software_design_theory/README.md) - 设计模式、23/43、执行模型、组合工程
 - [快速入门指南](./GETTING_STARTED.md) - 新用户入门指南
 - [常见问题解答](./FAQ.md) - 常见问题解答
-- [维护指南](./MAINTENANCE_GUIDE.md) - 系统维护指南
+- [维护指南](./10_maintenance_guide.md) - 系统维护指南
 - [最佳实践](./BEST_PRACTICES.md) - 研究笔记最佳实践
 - [术语表](./GLOSSARY.md) - 专业术语解释
-- [研究资源汇总](./RESOURCES.md) - 学术和工具资源
+- [研究资源汇总](./10_resources.md) - 学术和工具资源
 - [系统集成指南](./SYSTEM_INTEGRATION.md) - 与形式化工程系统的集成
-- [研究笔记示例](./EXAMPLE.md) - 完整的研究笔记示例
+- [研究笔记示例](./10_example.md) - 完整的研究笔记示例
 - [形式化方法索引](./formal_methods/README.md)
 - [类型理论索引](./type_theory/README.md)
 - [核心特性完整链](./CORE_FEATURES_FULL_CHAIN.md) - 13 项核心特性 Def→示例→论证→证明
 - [特性精简模板](./10_feature_template.md) - 79 项非核心特性模板
-- [版本增量更新流程](./INCREMENTAL_UPDATE_FLOW.md) - 1.94+ 发布后更新步骤
+- [版本增量更新流程](./10_incremental_update_flow.md) - 1.94+ 发布后更新步骤
 - [实验研究索引](./experiments/README.md)
 - [工具使用指南](./TOOLS_GUIDE.md) - 研究工具详细指南
 

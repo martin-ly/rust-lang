@@ -74,7 +74,7 @@ representations/ ────────▶  (知识表示)                 ─
 |--------------|------------|------|
 | `rust_195_roadmap.md` | C04 泛型 | 新泛型特性预览 |
 | `generic_const_items.md` | C04 泛型 | 泛型常量项目 |
-| `async_closures.md` | C06 异步 | 异步闭包 |
+| `10_async_closures.md` | C06 异步 | 异步闭包 |
 | `coroutines.md` | C03 控制流 | 协程底层 |
 
 **学习路径**:
@@ -113,7 +113,7 @@ representations/ ────────▶  (知识表示)                 ─
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
-| `kubernetes_deployment_guide.md` | C12 WASM | 容器化部署 |
+| `10_kubernetes_deployment_guide.md` | C12 WASM | 容器化部署 |
 | `monitoring_setup.md` | C06 异步 | 监控和日志 |
 | `ci_cd_pipeline.md` | C07 进程 | 持续集成 |
 
@@ -134,7 +134,7 @@ representations/ ────────▶  (知识表示)                 ─
 |--------------|------------|------|
 | `rustbelt_formal_verification.md` | C01 所有权 | 形式化验证 |
 | `tree_borrows_pldi_2025.md` | C01 所有权 | 借用检查器理论 |
-| `coq_formalization_guide.md` | C04 泛型 | 类型理论 |
+| `10_coq_formalization_guide.md` | C04 泛型 | 类型理论 |
 
 **学习路径**:
 

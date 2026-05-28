@@ -548,7 +548,7 @@ async fn theorem_cc1_compensation_consistency() {
 - [核心定理完整证明](./CORE_THEOREMS_FULL_PROOFS.md)
 - [所有权证明树](./10_proof_tree_ownership.md)
 - [借用证明树](./10_proof_tree_borrow.md)
-- [类型安全证明树](./PROOF_TREE_TYPE_SAFETY.md)
+- [类型安全证明树](./formal_methods/10_proof_tree_type_safety.md)
 
 ---
 

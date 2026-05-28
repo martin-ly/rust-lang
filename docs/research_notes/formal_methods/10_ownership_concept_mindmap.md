@@ -344,7 +344,7 @@ Pin与Unpin
 | CE-2.2 | 多重可变借用 | E0499 |
 | CE-2.3 | 悬垂引用 | E0106 |
 
-详见: [反例汇编](../COUNTER_EXAMPLES_COMPENDIUM.md)
+详见: [反例汇编](../10_counter_examples_compendium.md)
 
 ---
 

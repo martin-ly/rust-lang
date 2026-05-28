@@ -162,7 +162,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 结构体方法 | trait_system_formalization.md | 2天 |
 | 泛型基础 | [variance_theory](../type_theory/variance_theory.md) §1 | 3天 |
 | Trait基础 | trait_system_formalization.md §1-2 | 3天 |
-| 错误处理 | ERROR_HANDLING_DECISION_TREE.md | 2天 |
+| 错误处理 | 10_error_handling_decision_tree.md | 2天 |
 
 ### 检查清单
 

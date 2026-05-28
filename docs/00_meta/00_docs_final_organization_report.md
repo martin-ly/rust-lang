@@ -76,9 +76,9 @@
 ```
 docs/
 ├── 00_MASTER_INDEX.md                          (34 KB) - 文档总索引
-├── 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md  (9 KB) - 生态梳理
-├── AUTHORITATIVE_SOURCES_AND_CITATIONS.md      (8 KB) - 权威来源
-├── MIGRATION_GUIDE_2026.md                     (2 KB) - 迁移指南
+├── 10_2026_rust_ecosystem_comprehensive_review_with_citations.md  (9 KB) - 生态梳理
+├── 10_authoritative_sources_and_citations.md      (8 KB) - 权威来源
+├── 10_migration_guide_2026.md                     (2 KB) - 迁移指南
 ├── README.md                                   (4 KB) - 文档中心入口
 └── 10_terminology_standard.md                     (26 KB) - 术语标准
 ```
@@ -159,10 +159,10 @@ docs/
 
 | 需求 | 文档 |
 |------|------|
-| 了解Rust 1.94生态 | `docs/2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW_WITH_CITATIONS.md` |
-| 查看学术引用 | `docs/AUTHORITATIVE_SOURCES_AND_CITATIONS.md` |
+| 了解Rust 1.94生态 | `docs/10_2026_rust_ecosystem_comprehensive_review_with_citations.md` |
+| 查看学术引用 | `docs/10_authoritative_sources_and_citations.md` |
 | 规划学习路径 | `docs/01_learning/01_learning_path_guide_2025_10_24.md` |
-| 迁移到新版 | `docs/MIGRATION_GUIDE_2026.md` |
+| 迁移到新版 | `docs/10_migration_guide_2026.md` |
 | 查看文档索引 | `docs/00_master_index.md` 或 `docs/README.md` |
 
 ---

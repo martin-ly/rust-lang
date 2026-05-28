@@ -70,7 +70,7 @@
 | S02 | 每个 unsafe 块必须有 SAFETY 注释 | MUST | `crates/c13_embedded/src/` | 是否包含 `// SAFETY: ...` 说明？ |
 | S03 | 优先使用 safe 抽象封装 unsafe | MUST | `crates/c01_ownership_borrow_scope/src/internal_mut/` | unsafe 是否被封装在安全 API 后？ |
 | S04 | 避免不必要的 `unsafe_code` 允许 | SHOULD | `Cargo.toml` `[workspace.lints.rust]` | 是否保持 `unsafe_code = "forbid"`？ |
-| S05 | 使用 Miri 验证 unsafe 代码 | SHOULD | `docs/03_guides/MIRI_GUIDE.md` | 关键 unsafe 代码是否通过 Miri？ |
+| S05 | 使用 Miri 验证 unsafe 代码 | SHOULD | `docs/03_guides/03_miri_guide.md` | 关键 unsafe 代码是否通过 Miri？ |
 
 ### 1.2 输入验证
 
@@ -272,7 +272,7 @@
 | Clippy | `.clippy.toml` + `Cargo.toml` `[workspace.lints.clippy]` | 代码质量、性能、风格 |
 | rustfmt | `.rustfmt.toml`（如有） | 代码格式化 |
 | cargo-deny | （可选） | 依赖安全与许可证 |
-| Miri | `docs/03_guides/MIRI_GUIDE.md` | 未定义行为检测 |
+| Miri | `docs/03_guides/03_miri_guide.md` | 未定义行为检测 |
 | cargo-tarpaulin | `docs/03_guides/03_test_coverage.md` | 测试覆盖率 |
 
 ---

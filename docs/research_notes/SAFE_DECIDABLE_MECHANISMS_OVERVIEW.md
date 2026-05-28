@@ -41,7 +41,7 @@
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 全面梳理 Rust 中「安全且编译期可判定」的机制，每项含概念定义、属性关系、解释论证、形式证明引用、反例；与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) 双向链接
-> **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)
+> **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)
 
 ---
 
@@ -208,7 +208,7 @@
 | 类型 | 入口 |
 | :--- | :--- |
 | 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md)；安全可判定机制节点 → 本总览 §二、§三 |
-| 概念多维矩阵 | [formal_methods README §六篇并表](formal_methods/README.md#formal_methods-六篇并表)；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md) §3.1 |
+| 概念多维矩阵 | [formal_methods README §六篇并表](formal_methods/README.md#formal_methods-六篇并表)；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) §3.1 |
 | 决策树 | [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；[DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) § Send/Sync |
 | 推理证明树 | [PROOF_INDEX](./PROOF_INDEX.md)；[PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) |
 
@@ -250,7 +250,7 @@
 | blanket impl | 静态 | Safe 核心 | coherence | trait_system_formalization |
 | Trait 继承 | 静态 | Safe 核心 | - | trait_system |
 
-*说明*：92 项全量四维表见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md) §3.2；本表为并发与 Trait 族子集。
+*说明*：92 项全量四维表见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) §3.2；本表为并发与 Trait 族子集。
 
 ---
 
@@ -259,7 +259,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [formal_methods README](formal_methods/README.md) — 六篇并表、公理-定理索引
-- [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md) — 意见与建议、阶段 A–E 计划
+- [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) — 意见与建议、阶段 A–E 计划
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) — 92 项特性与形式化映射
 - [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) — 反例索引
 

@@ -216,7 +216,7 @@ MISRA C:2025 → Rust 规则映射统计:
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: `RUST_ECOSYSTEM_MIND_MAP.md`
+**文档**: `10_rust_ecosystem_mind_map.md`
 
 ```
 核心价值:
