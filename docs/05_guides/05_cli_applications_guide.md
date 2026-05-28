@@ -388,7 +388,7 @@ fn main() -> ExitCode {
 
 - 使用 [tokio](#3-异步-cli-示例) 处理并发请求
 - 实现 [超时处理](#错误处理最佳实践)
-- 参考 [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) 深入学习
+- 参考 [C06 异步](../../crates/c06_async/docs/10_00_master_index.md) 深入学习
 
 ### 场景4: TUI 应用
 >
@@ -408,10 +408,10 @@ fn main() -> ExitCode {
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **前置知识** | [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md) |
+| **前置知识** | [C03 控制流](../../crates/c03_control_fn/docs/10_00_master_index.md) |
 | :--- | :--- |
 | **错误处理** | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
-| **异步编程** | [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) |
+| **异步编程** | [C06 异步](../../crates/c06_async/docs/10_00_master_index.md) |
 | :--- | :--- |
 | **Cargo 工具** | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 | **相关指南** | [05_troubleshooting_guide.md](./05_troubleshooting_guide.md) |
@@ -423,12 +423,12 @@ fn main() -> ExitCode {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [C07 进程管理](../../crates/c07_process/docs/00_MASTER_INDEX.md)
+- [C07 进程管理](../../crates/c07_process/docs/10_00_master_index.md)
 - [故障排查指南](./05_troubleshooting_guide.md)
 - [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md)
 - [官方 Command Line Book](https://rust-cli.github.io/book/)
-- [C03 控制流](../../crates/c03_control_fn/docs/00_MASTER_INDEX.md)
-- [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md)
+- [C03 控制流](../../crates/c03_control_fn/docs/10_00_master_index.md)
+- [C06 异步](../../crates/c06_async/docs/10_00_master_index.md)
 
 ---
 

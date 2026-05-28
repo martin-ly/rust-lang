@@ -50,8 +50,8 @@
 
 | 文档 | 说明 |
 | :--- | :--- |
-| [variance_theory](../../research_notes/type_theory/variance_theory.md) | 型变理论形式化定义与定理 |
-| [lifetime_formalization](./lifetime_formalization.md) | 生命周期形式化（型变在生命周期中的体现）|
+| [variance_theory](../../research_notes/type_theory/10_variance_theory.md) | 型变理论形式化定义与定理 |
+| [lifetime_formalization](./10_lifetime_formalization.md) | 生命周期形式化（型变在生命周期中的体现）|
 | [MIND_MAP_COLLECTION](../../04_thinking/04_mind_map_collection.md) | 思维导图集合索引 |
 
 ---
@@ -434,7 +434,7 @@ let local = String::from("local");
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

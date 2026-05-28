@@ -280,7 +280,7 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 | 全局可变隐式共享 | 经典 Singleton 的 static 可变 | 无 `static mut` 安全用法；用 OnceLock |
 | 多继承 | 菱形继承、混入 | 仅 trait 多实现；无类继承 |
 | 运行时反射 | 动态调用、属性注入 | 无内置反射；用宏或 trait 显式 |
-| 任意子类型 | 协变/逆变复杂 | 型变严格；见 [variance_theory](../../type_theory/variance_theory.md) |
+| 任意子类型 | 协变/逆变复杂 | 型变严格；见 [variance_theory](../../type_theory/10_variance_theory.md) |
 
 ---
 
@@ -357,7 +357,7 @@ impl Node {
 | 全局可变隐式共享 | 经典 Singleton 的 static 可变 | 无 `static mut` 安全用法；用 OnceLock |
 | 多继承 | 菱形继承、混入 | 仅 trait 多实现；无类继承 |
 | 运行时反射 | 动态调用、属性注入 | 无内置反射；用宏或 trait 显式 |
-| 任意子类型 | 协变/逆变复杂 | 型变严格；见 [variance_theory](../../type_theory/variance_theory.md) |
+| 任意子类型 | 协变/逆变复杂 | 型变严格；见 [variance_theory](../../type_theory/10_variance_theory.md) |
 | 重载（同名不同签名的函数） | 传统 OOP 多态 | trait 方法 + 泛型；无 ad-hoc 重载 |
 | 负约束 | `T: !Trait` | 仅部分支持；RFC 讨论中 |
 
@@ -449,7 +449,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -13,11 +13,11 @@
 >
 > **[来源: Rust Official Docs]**
 
-**Def QC1（质量完备性）**：设 $D$ 为研究笔记文档。若 $D$ 满足本清单全部必需项，且含 Def/Axiom/Theorem 或与 [PROOF_INDEX](./PROOF_INDEX.md) 的衔接，则称 $D$ **质量完备**。
+**Def QC1（质量完备性）**：设 $D$ 为研究笔记文档。若 $D$ 满足本清单全部必需项，且含 Def/Axiom/Theorem 或与 [PROOF_INDEX](./10_proof_index.md) 的衔接，则称 $D$ **质量完备**。
 
 **Axiom QC1**：质量完备性不保证定理正确性，但保证论证可追溯；形式化论证（Def/Axiom/定理）与质量检查互为补充。
 
-**定理 QC-T1（质量蕴涵可追溯）**：若 $D$ 质量完备且含形式化论证，则 $D$ 的论断可追溯至 [PROOF_INDEX](./PROOF_INDEX.md) 或上游定理；与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 论证要素规范一致。
+**定理 QC-T1（质量蕴涵可追溯）**：若 $D$ 质量完备且含形式化论证，则 $D$ 的论断可追溯至 [PROOF_INDEX](./10_proof_index.md) 或上游定理；与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 论证要素规范一致。
 
 *证明*：由 Def QC1；形式化论证含 Def/Axiom/Theorem 或引用；PROOF_INDEX 索引全部证明；可追溯性由引用链保证。∎
 
@@ -190,13 +190,13 @@
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-- [ ] 含 Def/Axiom/定理或与 [PROOF_INDEX](./PROOF_INDEX.md) 衔接
+- [ ] 含 Def/Axiom/定理或与 [PROOF_INDEX](./10_proof_index.md) 衔接
 - [ ] 至少 1 段可运行 Rust 代码（索引/概览类可放宽）
 - [ ] 至少 1 个具体场景（非泛泛描述）
 - [ ] 至少 1 个反例或边界说明
 - [ ] 至少 1 处链接至 formal_methods/type_theory
 
-详见 [BEST_PRACTICES](BEST_PRACTICES.md#实质内容不足判断与修复)、[CONTENT_ENHANCEMENT](./10_content_enhancement.md) 实质内容自检表。
+详见 [BEST_PRACTICES](10_best_practices.md#实质内容不足判断与修复)、[CONTENT_ENHANCEMENT](./10_content_enhancement.md) 实质内容自检表。
 
 ---
 
@@ -499,7 +499,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

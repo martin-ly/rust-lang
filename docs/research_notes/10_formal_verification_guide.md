@@ -138,7 +138,7 @@
 
 **Axiom FV1**：形式化验证不能替代定理正确性论证，但可排除证明中的隐含错误；验证通过 ⇒ 证明无语法/逻辑遗漏。
 
-**定理 FV-T1（验证与定理衔接）**：若 $V$ 验证 $T$，则 $T$ 的证明在验证工具的逻辑框架内成立；与 [PROOF_INDEX](./PROOF_INDEX.md) 的手工证明互为补充。
+**定理 FV-T1（验证与定理衔接）**：若 $V$ 验证 $T$，则 $T$ 的证明在验证工具的逻辑框架内成立；与 [PROOF_INDEX](./10_proof_index.md) 的手工证明互为补充。
 
 *证明*：由 Def FV1；机器验证保证证明结构正确；手工证明提供直觉与文档；二者一致则论证完备。∎
 
@@ -267,8 +267,8 @@ end
 - [ ] 借用检查器的形式化定义
 - [ ] 生命周期的形式化定义
 - [ ] 类型系统的形式化定义
-- [ ] 异步状态机的形式化定义（参见 [async_state_machine.md](./formal_methods/async_state_machine.md)）
-- [ ] Pin 与自引用类型的形式化定义（参见 [pin_self_referential.md](./formal_methods/pin_self_referential.md)）
+- [ ] 异步状态机的形式化定义（参见 [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)）
+- [ ] Pin 与自引用类型的形式化定义（参见 [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)）
 
 ### 3. 验证框架设计
 
@@ -458,7 +458,7 @@ Admitted.
 
 > **[来源: Wikipedia - Type System]**
 
-**目标**：验证 Future 状态一致性、并发安全与进度保证（参见 [async_state_machine.md](./formal_methods/async_state_machine.md)）
+**目标**：验证 Future 状态一致性、并发安全与进度保证（参见 [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)）
 
 **Coq 实现框架**：
 
@@ -492,7 +492,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-**目标**：验证 Pin 保证、自引用类型安全与 Pin 投影安全（参见 [pin_self_referential.md](./formal_methods/pin_self_referential.md)）
+**目标**：验证 Pin 保证、自引用类型安全与 Pin 投影安全（参见 [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)）
 
 **Coq 实现框架**：
 
@@ -616,7 +616,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 | **Aeneas** | Safe Rust (MIR/THIR) | Coq/F*/HOL4/Lean | 📋 计划中 | [AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md) |
 | **coq-of-rust** | THIR | Rocq (Coq) | 📋 计划中 | [COQ_OF_RUST_INTEGRATION_PLAN](./10_coq_of_rust_integration_plan.md) |
 
-完成 Aeneas/coq-of-rust 对接后，在 [PROOF_INDEX](./PROOF_INDEX.md) 中标注对应定理为 L3（机器可检查）。
+完成 Aeneas/coq-of-rust 对接后，在 [PROOF_INDEX](./10_proof_index.md) 中标注对应定理为 L3（机器可检查）。
 
 ### 工具资源
 
@@ -680,7 +680,7 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

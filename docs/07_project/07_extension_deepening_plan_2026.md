@@ -290,8 +290,8 @@
 
 | 论文/资源 | 主题 | 本项目覆盖 |
 | :--- | :--- | :--- |
-| RustBelt | 所有权形式化 | formal_methods/ownership_model.md |
-| Stacked Borrows | 借用检查器 | formal_methods/borrow_checker_proof.md |
+| RustBelt | 所有权形式化 | formal_methods/10_ownership_model.md |
+| Stacked Borrows | 借用检查器 | formal_methods/10_borrow_checker_proof.md |
 | Aeneas | 可执行语义 | research_notes/10_aeneas_integration_plan.md |
 | RustSEM | 操作语义 | research_notes/10_executable_semantics_roadmap.md |
 

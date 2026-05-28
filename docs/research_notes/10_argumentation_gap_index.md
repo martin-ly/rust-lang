@@ -201,7 +201,7 @@
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 全局统一框架、全景思维导图、多维矩阵、全链路图 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义形式化、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-| [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
+| [PROOF_INDEX](./10_proof_index.md) | 形式化证明索引、公理编号规范 |
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | **顶层框架**：理论体系四层、论证体系五层、安全与非安全 |
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) | **安全与非安全全面论证**：边界、契约、UB、安全抽象 |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖 |
@@ -263,7 +263,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

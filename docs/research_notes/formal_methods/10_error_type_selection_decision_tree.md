@@ -421,9 +421,9 @@ Result<T, ()>  // 没有错误信息
 
 | 概念 | 形式化表示 | 相关文档 |
 | :--- | :--- | :--- |
-| Result | `Result<T, E> = Ok(T) \| Err(E)` | type_system_foundations.md |
-| 错误传播 | `?` 运算符 | ownership_model.md §移动 |
-| 类型安全 | 穷尽匹配检查 | borrow_checker_proof.md |
+| Result | `Result<T, E> = Ok(T) \| Err(E)` | 10_type_system_foundations.md |
+| 错误传播 | `?` 运算符 | 10_ownership_model.md §移动 |
+| 类型安全 | 穷尽匹配检查 | 10_borrow_checker_proof.md |
 
 ---
 
@@ -559,7 +559,7 @@ pub enum ConfigError {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

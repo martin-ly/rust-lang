@@ -239,7 +239,7 @@
 | panic! | `crates/c03_control_fn/src/error_handling/define.rs` | 不可恢复错误 |
 | ? 运算符 | `crates/c03_control_fn/src/error_handling/` | 错误传播语法糖 |
 | 自定义错误 | `crates/c02_type_system/src/advanced_error_handling.rs` | Error trait 实现 |
-| anyhow / thiserror | `docs/05_guides/BEST_PRACTICES.md` | 生态库推荐 |
+| anyhow / thiserror | `docs/05_guides/10_best_practices.md` | 生态库推荐 |
 
 ### 练习验证
 >

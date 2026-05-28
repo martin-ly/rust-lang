@@ -122,7 +122,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) — Full proofs for T-OW2, T-BR1, T-TY3 (L2)
-- [PROOF_INDEX](./PROOF_INDEX.md) — 105+ proof index
+- [PROOF_INDEX](./10_proof_index.md) — 105+ proof index
 - [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md) — International alignment
 
 ---
@@ -179,7 +179,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

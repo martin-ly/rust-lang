@@ -103,7 +103,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**陈述**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
+**陈述**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
 
 **证明思路**：
 
@@ -122,7 +122,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**陈述**：若各模块满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 定理 T1（数据竞争自由），且跨线程传递仅 Send 类型、共享仅 Sync 类型，则组合保持数据竞争自由。
+**陈述**：若各模块满足 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) 定理 T1（数据竞争自由），且跨线程传递仅 Send 类型、共享仅 Sync 类型，则组合保持数据竞争自由。
 
 **证明思路**：
 
@@ -139,7 +139,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**陈述**：若各模块良型，且 [type_system_foundations](../../type_theory/type_system_foundations.md) 进展性 T1、保持性 T2、类型安全 T3 成立，则组合程序良型且类型安全。
+**陈述**：若各模块良型，且 [type_system_foundations](../../type_theory/10_type_system_foundations.md) 进展性 T1、保持性 T2、类型安全 T3 成立，则组合程序良型且类型安全。
 
 **证明思路**：
 
@@ -335,7 +335,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-本部分定理纳入 [PROOF_INDEX](../../PROOF_INDEX.md)，按「组合软件工程」领域分类。
+本部分定理纳入 [PROOF_INDEX](../../10_proof_index.md)，按「组合软件工程」领域分类。
 
 ---
 
@@ -373,7 +373,7 @@ impl<S: OrderServiceTrait> OrderController<S> {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -301,17 +301,17 @@ unsafe fn very_dangerous() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 借用检查证明 | 借用检查器形式化 | borrow_checker_proof.md (研究笔记) |
-| 所有权模型 | 所有权系统形式化 | ownership_model.md (研究笔记) |
-| 生命周期形式化 | 生命周期系统理论 | lifetime_formalization.md (研究笔记) |
+| 借用检查证明 | 借用检查器形式化 | 10_borrow_checker_proof.md (研究笔记) |
+| 所有权模型 | 所有权系统形式化 | 10_ownership_model.md (研究笔记) |
+| 生命周期形式化 | 生命周期系统理论 | 10_lifetime_formalization.md (研究笔记) |
 
 ### 类型理论
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 类型系统基础 | 类型系统理论 | type_system_foundations.md (研究笔记) |
-| 高级类型 | 高级类型特性 | advanced_types.md (研究笔记) |
-| 变型理论 | 类型变型 | variance_theory.md (研究笔记) |
+| 类型系统基础 | 类型系统理论 | 10_type_system_foundations.md (研究笔记) |
+| 高级类型 | 高级类型特性 | 10_advanced_types.md (研究笔记) |
+| 变型理论 | 类型变型 | 10_variance_theory.md (研究笔记) |
 
 ### 工具链
 

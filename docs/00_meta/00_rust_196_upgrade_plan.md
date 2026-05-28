@@ -80,7 +80,7 @@
 | `core::range` 迭代器 | `concept/02_intermediate/06_range_types.md` | c02_type_system | ✅ |
 | `NonZero` 范围迭代 | `concept/02_intermediate/06_range_types.md` | c02_type_system | ✅ |
 | `From<T> for LazyCell/LazyLock` | `concept/02_intermediate/08_interior_mutability.md` | - | 🟡 |
-| `ManuallyDrop` 常量模式 | `concept/01_foundation/04_type_system.md` | - | 🟡 |
+| `ManuallyDrop` 常量模式 | `concept/01_foundation/04_02_type_system.md` | - | 🟡 |
 | `expr` metavariable to `cfg` | `concept/03_advanced/04_macros.md` | - | 🟡 |
 | never type tuple coercion | `concept/02_intermediate/02_generics.md` | - | 🟡 |
 

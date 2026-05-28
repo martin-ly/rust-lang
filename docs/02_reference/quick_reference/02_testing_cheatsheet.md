@@ -1708,9 +1708,9 @@ fn broken_test() {
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **类型系统** | [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) | 测试的类型正确性 |
-| **所有权与借用** | [borrow_checker_proof](../../research_notes/formal_methods/borrow_checker_proof.md) | 测试中的内存安全 |
-| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/send_sync_formalization.md) | 并发测试安全性 |
+| **类型系统** | [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) | 测试的类型正确性 |
+| **所有权与借用** | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md) | 测试中的内存安全 |
+| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/10_send_sync_formalization.md) | 并发测试安全性 |
 | **反模式** | [anti_patterns](../../research_notes/software_design_theory/07_anti_patterns.md) | 测试中的常见错误模式 |
 
 ### 形式化定理

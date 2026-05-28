@@ -72,7 +72,7 @@
 
 **相关研究笔记**:
 
-- [异步状态机形式化](./formal_methods/async_state_machine.md)
+- [异步状态机形式化](./formal_methods/10_async_state_machine.md)
 - [并发性能研究](./experiments/10_concurrency_performance.md)
 
 **代码示例**:
@@ -116,8 +116,8 @@ fn process(n: i32) -> impl Future<Output = ()> {
 
 **相关研究笔记**:
 
-- [类型系统基础](./type_theory/type_system_foundations.md)
-- [高级类型特性](./type_theory/advanced_types.md)
+- [类型系统基础](./type_theory/10_type_system_foundations.md)
+- [高级类型特性](./type_theory/10_advanced_types.md)
 
 **代码示例**:
 
@@ -139,7 +139,7 @@ const fn with_static_ref() -> &'static mut i32 {
 // 研究任务：
 // 1. 形式化描述 const 中 &mut static 的类型规则
 // 2. 验证 const_item_interior_mutations lint 的正确性
-// 3. 更新 advanced_types.md 中的 const 泛型形式化定义
+// 3. 更新 10_advanced_types.md 中的 const 泛型形式化定义
 ```
 
 ---
@@ -239,7 +239,7 @@ fn small_object_allocation() {
 >
 > **[来源: Rust Official Docs]**
 
-1. **异步状态机形式化** (`formal_methods/async_state_machine.md`)
+1. **异步状态机形式化** (`formal_methods/10_async_state_machine.md`)
    - 更新异步迭代器性能数据
    - 分析新的异步优化机制
 
@@ -257,7 +257,7 @@ fn small_object_allocation() {
 >
 > **[来源: Rust Official Docs]**
 
-1. **类型系统基础** (`type_theory/type_system_foundations.md`)
+1. **类型系统基础** (`type_theory/10_type_system_foundations.md`)
    - 更新 const 上下文相关内容
    - 分析新的类型系统特性
 
@@ -309,8 +309,8 @@ fn small_object_allocation() {
 | :--- | :--- | :--- |
 | 异步编程完整文档 | [../../crates/c06_async/README.md](../../crates/c06_async/README.md) | C06 异步编程模块 |
 | 类型系统完整文档 | [../../crates/c02_type_system/README.md](../../crates/c02_type_system/README.md) | C02 类型系统模块 |
-| 所有权模型形式化 | [./formal_methods/ownership_model.md](./formal_methods/ownership_model.md) | 所有权形式化 |
-| 借用检查器证明 | [./formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) | 借用检查器形式化 |
+| 所有权模型形式化 | [./formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) | 所有权形式化 |
+| 借用检查器证明 | [./formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) | 借用检查器形式化 |
 | 性能基准测试 | [./experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) | 性能实验 |
 | 内存分析 | [./experiments/10_memory_analysis.md](./experiments/10_memory_analysis.md) | 内存实验 |
 
@@ -320,9 +320,9 @@ fn small_object_allocation() {
 
 | 特性 | 形式化文档 | 定理/定义 |
 | :--- | :--- | :--- |
-| 异步迭代器 | [async_state_machine.md](./formal_methods/async_state_machine.md) | T6.1-T6.3 |
-| const 上下文 | [advanced_types.md](./type_theory/advanced_types.md) | Def CONST-MUT1 |
-| 内存分配 | [ownership_model.md](./formal_methods/ownership_model.md) | Axiom A1-A8 |
+| 异步迭代器 | [10_async_state_machine.md](./formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
+| const 上下文 | [10_advanced_types.md](./type_theory/10_advanced_types.md) | Def CONST-MUT1 |
+| 内存分配 | [10_ownership_model.md](./formal_methods/10_ownership_model.md) | Axiom A1-A8 |
 
 ### 核心定理
 >
@@ -350,10 +350,10 @@ fn small_object_allocation() {
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
-| 形式化方法 | 所有权模型 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) |
-| 形式化方法 | 借用检查器 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
-| 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
-| 类型理论 | 高级类型特性 | [type_theory/advanced_types.md](./type_theory/advanced_types.md) |
+| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) |
+| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) |
+| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) |
+| 类型理论 | 高级类型特性 | [type_theory/10_advanced_types.md](./type_theory/10_advanced_types.md) |
 | 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
 | 实验研究 | 内存分析 | [experiments/10_memory_analysis.md](./experiments/10_memory_analysis.md) |
 
@@ -398,7 +398,7 @@ fn small_object_allocation() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

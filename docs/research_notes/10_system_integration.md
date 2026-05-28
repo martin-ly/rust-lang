@@ -173,9 +173,9 @@
 
 | 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |
-| [类型系统基础](./type_theory/type_system_foundations.md)        | [类型系统理论基础](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md) | 研究笔记提供研究问题，形式化系统提供理论基础     |
-| [Trait 系统形式化](./type_theory/trait_system_formalization.md) | [Trait 系统理论](../rust-formal-engineering-system/01_theoretical_foundations/05_trait_system/README.md)        | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
-| [型变理论](./type_theory/variance_theory.md)                    | [类型系统高级理论](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)                    | 研究笔记提供理论研究，形式化系统提供详细定义     |
+| [类型系统基础](./type_theory/10_type_system_foundations.md)        | [类型系统理论基础](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md) | 研究笔记提供研究问题，形式化系统提供理论基础     |
+| [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) | [Trait 系统理论](../rust-formal-engineering-system/01_theoretical_foundations/05_trait_system/README.md)        | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
+| [型变理论](./type_theory/10_variance_theory.md)                    | [类型系统高级理论](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)                    | 研究笔记提供理论研究，形式化系统提供详细定义     |
 
 ### 形式化方法
 
@@ -185,9 +185,9 @@
 
 | 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |
-| [所有权模型形式化](./formal_methods/ownership_model.md)      | [所有权系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)  | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
-| [借用检查器证明](./formal_methods/borrow_checker_proof.md)   | [借用系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)    | 研究笔记提供证明研究，形式化系统提供证明框架     |
-| [生命周期形式化](./formal_methods/lifetime_formalization.md) | [生命周期系统理论](../rust-formal-engineering-system/01_theoretical_foundations/06_lifetime_management/README.md) | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
+| [所有权模型形式化](./formal_methods/10_ownership_model.md)      | [所有权系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)  | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
+| [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)   | [借用系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)    | 研究笔记提供证明研究，形式化系统提供证明框架     |
+| [生命周期形式化](./formal_methods/10_lifetime_formalization.md) | [生命周期系统理论](../rust-formal-engineering-system/01_theoretical_foundations/06_lifetime_management/README.md) | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
 
 ### 实验研究
 
@@ -297,7 +297,7 @@
 
 **步骤**:
 
-1. 阅读 [类型系统基础](./type_theory/type_system_foundations.md) (研究笔记系统)
+1. 阅读 [类型系统基础](./type_theory/10_type_system_foundations.md) (研究笔记系统)
 2. 查看 [类型系统理论基础](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md) (形式化工程系统)
 3. 结合两者，深入理解类型系统
 
@@ -314,7 +314,7 @@
 
 **步骤**:
 
-1. 查看 [所有权模型形式化](./formal_methods/ownership_model.md) (研究笔记系统)
+1. 查看 [所有权模型形式化](./formal_methods/10_ownership_model.md) (研究笔记系统)
 2. 参考 [所有权系统理论](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md) (形式化工程系统)
 3. 结合两者，完善形式化定义
 
@@ -412,7 +412,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

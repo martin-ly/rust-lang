@@ -142,7 +142,7 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 >
 > **[来源: Rust Official Docs]**
 
-`Rc`/`Weak` 或 `Arc` 管理循环引用时避免自引用；由 [ownership_model](../../../formal_methods/ownership_model.md) 与借用规则。
+`Rc`/`Weak` 或 `Arc` 管理循环引用时避免自引用；由 [ownership_model](../../../formal_methods/10_ownership_model.md) 与借用规则。
 
 **证明**：
 
@@ -501,7 +501,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

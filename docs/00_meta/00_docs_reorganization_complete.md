@@ -38,7 +38,7 @@
 ```
 docs/
 ├── 📄 核心文档 (12个)
-│   ├── 00_MASTER_INDEX.md                          # 文档总索引
+│   ├── 10_00_master_index.md                          # 文档总索引
 │   ├── 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md # 2026生态梳理
 │   ├── 10_2026_rust_ecosystem_comprehensive_review_with_citations.md # 权威引用版
 │   ├── 10_authoritative_sources_and_citations.md      # 学术论文引用
@@ -97,7 +97,7 @@ docs/
 
 #### 📖 索引与标准 (3个)
 
-- `00_MASTER_INDEX.md`
+- `10_00_master_index.md`
 - `README.md`
 - `10_terminology_standard.md`
 
@@ -119,7 +119,7 @@ docs/
 | 查看学术引用 | `10_authoritative_sources_and_citations.md` |
 | 规划学习路径 | `01_learning_path_guide_2025_10_24.md` |
 | 迁移到新版 | `10_migration_guide_2026.md` |
-| 查找所有文档 | `00_MASTER_INDEX.md` 或 `README.md` |
+| 查找所有文档 | `10_00_master_index.md` 或 `README.md` |
 
 ---
 

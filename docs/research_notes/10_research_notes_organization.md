@@ -60,12 +60,12 @@ research_notes/
 ├── formal_methods/                     # 形式化方法（六篇核心 + 思维表征与矩阵）
 │   ├── README.md
 │   ├── 00_completeness_gaps.md
-│   ├── ownership_model.md
-│   ├── borrow_checker_proof.md
-│   ├── lifetime_formalization.md
-│   ├── async_state_machine.md
-│   ├── pin_self_referential.md
-│   ├── send_sync_formalization.md
+│   ├── 10_ownership_model.md
+│   ├── 10_borrow_checker_proof.md
+│   ├── 10_lifetime_formalization.md
+│   ├── 10_async_state_machine.md
+│   ├── 10_pin_self_referential.md
+│   ├── 10_send_sync_formalization.md
 │   ├── 10_axiomatic_semantics.md
 │   ├── 10_formal_methods_completeness_checklist.md
 │   ├── 10_safe_decidable_mechanisms_and_formal_methods_plan.md
@@ -79,12 +79,12 @@ research_notes/
 │
 ├── type_theory/                        # 类型理论
 │   ├── README.md, 00_completeness_gaps.md
-│   ├── type_system_foundations.md, trait_system_formalization.md
-│   ├── lifetime_formalization.md, advanced_types.md, variance_theory.md
+│   ├── 10_type_system_foundations.md, 10_trait_system_formalization.md
+│   ├── 10_lifetime_formalization.md, 10_advanced_types.md, 10_variance_theory.md
 │   └── 10_construction_capability.md
 │
 ├── software_design_theory/             # 设计模式、工作流、执行模型、组合、边界
-│   ├── 00_MASTER_INDEX.md
+│   ├── 10_00_master_index.md
 │   ├── 01_design_patterns_formal/      # GoF 23
 │   ├── 02_workflow_safe_complete_models/
 │   ├── 03_execution_models/
@@ -103,7 +103,7 @@ research_notes/
 │   └── README.md                       # 仅保留重定向说明
 │
 ├── # 根目录核心文档（选列）
-├── 10_formal_full_model_overview.md, 10_core_theorems_full_proofs.md, PROOF_INDEX.md
+├── 10_formal_full_model_overview.md, 10_core_theorems_full_proofs.md, 10_proof_index.md
 ├── 10_formal_language_and_proofs.md, 10_authoritative_alignment_guide.md
 ├── 10_hierarchical_mapping_and_summary.md, 10_argumentation_chain_and_flow.md
 ├── 10_rust_193_language_features_comprehensive_analysis.md, 10_rust_193_counterexamples_index.md
@@ -248,7 +248,7 @@ research_notes/
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

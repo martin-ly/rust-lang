@@ -187,10 +187,10 @@
 **详细说明**：
 
 - **形式化**：含 Def、Axiom、定理及证明或证明思路
-- **代码**：可运行 Rust 示例，对应某定理（如所有权移动对应 [ownership_model](./formal_methods/ownership_model.md) T2）
-- **衔接**：与 [PROOF_INDEX](./PROOF_INDEX.md)、[formal_methods](./formal_methods/README.md) 有交叉引用
+- **代码**：可运行 Rust 示例，对应某定理（如所有权移动对应 [ownership_model](./formal_methods/10_ownership_model.md) T2）
+- **衔接**：与 [PROOF_INDEX](./10_proof_index.md)、[formal_methods](./formal_methods/README.md) 有交叉引用
 
-**相关资源**：[BEST_PRACTICES](./BEST_PRACTICES.md) Def BP2、实践对照表、[PROOF_INDEX](./PROOF_INDEX.md)
+**相关资源**：[BEST_PRACTICES](./10_best_practices.md) Def BP2、实践对照表、[PROOF_INDEX](./10_proof_index.md)
 
 ---
 
@@ -552,7 +552,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

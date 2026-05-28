@@ -92,8 +92,8 @@ Google Comprehensive Rust 分为 4 天：
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-- `docs/02_reference/quick_reference/ownership_cheatsheet.md` - 所有权速查
-- `docs/02_reference/quick_reference/type_system.md` - 类型系统速查
+- `docs/02_reference/quick_reference/02_ownership_cheatsheet.md` - 所有权速查
+- `docs/02_reference/quick_reference/02_type_system.md` - 类型系统速查
 - `exercises/src/ownership_borrowing/ex01_borrow_checker_fix.rs` - 练习
 
 ---
@@ -250,7 +250,7 @@ Google 课程 Day 4 相对简洁，本项目在以下方面有显著扩展：
 
 | 内容 | 说明 | 建议补充 |
 | :--- | :--- | :--- |
-| 错误处理最佳实践（Google 风格） | Google 有专门的错误处理章节 | 可参考 `docs/05_guides/BEST_PRACTICES.md` 扩充 |
+| 错误处理最佳实践（Google 风格） | Google 有专门的错误处理章节 | 可参考 `docs/05_guides/10_best_practices.md` 扩充 |
 | 测试策略（Google 内部） | Google 测试认证内容 | 可结合 `docs/03_guides/03_test_coverage.md` |
 | 工具链（cargo、clippy、rustfmt） | 相对基础 | 已有 `docs/02_reference/quick_reference/02_cargo_cheatsheet.md` |
 | 标准库详细 API 讲解 | Google 按模块讲解 | 已有 `docs/02_reference/02_standard_library_comprehensive_analysis_2025_12_25.md` |
@@ -287,7 +287,7 @@ Google 课程 Day 4 相对简洁，本项目在以下方面有显著扩展：
    - `crates/c06_async/`（异步编程完整生态）
    - `crates/c04_generic/src/advanced/`（GAT、HRTB）
 3. 完成 `exercises/` 下的对应练习题验证掌握度
-4. 阅读 `docs/05_guides/BEST_PRACTICES.md` 了解生产实践
+4. 阅读 `docs/05_guides/10_best_practices.md` 了解生产实践
 
 ### 如果用本项目替代 Google 课程
 >

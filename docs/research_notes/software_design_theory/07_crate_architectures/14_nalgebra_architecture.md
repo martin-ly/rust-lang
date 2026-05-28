@@ -439,7 +439,7 @@ def transform_point(m: np.ndarray, p: np.ndarray) -> np.ndarray:
 >
 > - `docs/research_notes/software_design_theory/07_crate_architectures/10_tokio_architecture.md` — Tokio 运行时架构
 > - `concept/02_intermediate/02_trait.md` — Trait 系统与泛型编程
-> - `concept/02_intermediate/02_type_system.md` — Rust 类型系统深度解析
+> - `concept/02_intermediate/02_02_type_system.md` — Rust 类型系统深度解析
 > - `crates/c04_generic/` — 泛型与 trait 边界实践 crate
 
 ---
@@ -448,7 +448,7 @@ def transform_point(m: np.ndarray, p: np.ndarray) -> np.ndarray:
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [类型系统与所有权](../../../../concept/01_foundation/04_type_system.md)
+- [类型系统与所有权](../../../../concept/01_foundation/04_02_type_system.md)
 - [泛型与特化](../../../../concept/02_intermediate/20_type_system_advanced.md)
 
 ---

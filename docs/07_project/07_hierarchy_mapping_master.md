@@ -130,7 +130,7 @@ graph TB
 | 19 | `docs/03_guides/05_embedded_rust_guide.md` | L3-L6 嵌入式 | concept L3 Async · Unsafe · docs 核心 | docs RfL · knowledge Unsafe | L3→L6 工程映射 | T-050 → T-060 |
 | 20 | `docs/03_guides/03_rust_for_linux_guide.md` | L3-L7 内核 | concept L3 Unsafe · docs 嵌入式 | docs Safety-Critical · knowledge FFI | L3→L7 前沿映射 | T-060 ↔ T-110 |
 | 21 | `docs/04_research/04_safety_critical_alignment_2026.md` | L5-L7 安全关键 | concept L5 安全边界 · docs RfL | docs 设计模式 · concept L7 | L5→L7 标准驱动 | T-110 → ISO 26262 |
-| 22 | `docs/05_guides/BEST_PRACTICES.md` | L2-L6 最佳实践 | concept L1-L2 · docs 核心 | docs 设计模式 · 性能 | L2→L6 经验映射 | T-020 → T-030 → 模式库 |
+| 22 | `docs/05_guides/10_best_practices.md` | L2-L6 最佳实践 | concept L1-L2 · docs 核心 | docs 设计模式 · 性能 | L2→L6 经验映射 | T-020 → T-030 → 模式库 |
 | 23 | `docs/05_guides/05_design_patterns_usage_guide.md` | L2-L6 设计模式 | concept L2 Trait · docs 最佳实践 | docs 异步 · concept L6 | L2→L6 抽象映射 | T-020 → 模式可组合性 |
 | 24 | `docs/05_guides/05_async_programming_usage_guide.md` | L3-L6 异步工程 | concept L3 Async · docs 设计模式 | docs 嵌入式 · knowledge Async | L3→L6 运行时映射 | T-050 → T-051 → Tokio |
 | 25 | `docs/06_toolchain/01_compiler_features.md` | L6-L7 编译器 | concept L2 泛型 · docs 核心 | docs 并行前端 · concept L7 | L6→L7 工具驱动 | T-030 单态化 → 优化保持 |
@@ -138,7 +138,7 @@ graph TB
 | 27 | `docs/ROD/01-core-concepts/01-01-ownership-rules-deep.md` | L4 深度 / 所有权 | concept L1 · L4 | ROD 借用 · ROD 可判定性 | L4↔L1 ROD 深度展开 | T-100 → T-101 |
 | 28 | `docs/ROD/01-core-concepts/01-02-borrowing-system-deep.md` | L4 深度 / 借用 | ROD 所有权 · concept L4 线性逻辑 | ROD 异步 · 并发 | L4 !A ↔ 可变借用 | T-110 → T-111 |
 | 29 | `docs/ROD/16-program-semantics/03-async-semantics.md` | L4 深度 / 异步 | ROD 借用 · concept L3 | ROD 形式语义 · 验证工具 | L4 continuation ↔ async/await | T-120 → T-121 → T-122 |
-| 30 | `docs/research_notes/type_theory/type_system_foundations.md` | L4 研究 / 类型论 | concept L4 类型论 · L2 泛型 | ROD 形式语义 · concept L7 | L4 System F ↔ Rust 泛型 | T-130 → T-131 |
+| 30 | `docs/research_notes/type_theory/10_type_system_foundations.md` | L4 研究 / 类型论 | concept L4 类型论 · L2 泛型 | ROD 形式语义 · concept L7 | L4 System F ↔ Rust 泛型 | T-130 → T-131 |
 
 ---
 

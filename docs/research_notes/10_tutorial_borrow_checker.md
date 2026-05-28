@@ -530,9 +530,9 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 | 概念 | 形式化定义 | 文档 |
 | :--- | :--- | :--- |
-| 借用 | `&'a T`, `&'a mut T` | borrow_checker_proof.md |
-| 生命周期 | `'a: 'b` | lifetime_formalization.md |
-| 数据竞争自由 | `Send` + `Sync` | send_sync_formalization.md |
+| 借用 | `&'a T`, `&'a mut T` | 10_borrow_checker_proof.md |
+| 生命周期 | `'a: 'b` | 10_lifetime_formalization.md |
+| 数据竞争自由 | `Send` + `Sync` | 10_send_sync_formalization.md |
 
 ---
 
@@ -819,7 +819,7 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

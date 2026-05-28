@@ -153,18 +153,18 @@
 research_notes/
 ├── 理论基础层
 │   ├── formal_methods/          # 形式化方法（6篇核心文档）
-│   │   ├── ownership_model.md
-│   │   ├── borrow_checker_proof.md
-│   │   ├── lifetime_formalization.md
-│   │   ├── async_state_machine.md
-│   │   ├── pin_self_referential.md
-│   │   └── send_sync_formalization.md
+│   │   ├── 10_ownership_model.md
+│   │   ├── 10_borrow_checker_proof.md
+│   │   ├── 10_lifetime_formalization.md
+│   │   ├── 10_async_state_machine.md
+│   │   ├── 10_pin_self_referential.md
+│   │   └── 10_send_sync_formalization.md
 │   ├── type_theory/             # 类型理论（6篇核心文档）
-│   │   ├── type_system_foundations.md
-│   │   ├── trait_system_formalization.md
-│   │   ├── variance_theory.md
-│   │   ├── advanced_types.md
-│   │   ├── lifetime_formalization.md
+│   │   ├── 10_type_system_foundations.md
+│   │   ├── 10_trait_system_formalization.md
+│   │   ├── 10_variance_theory.md
+│   │   ├── 10_advanced_types.md
+│   │   ├── 10_lifetime_formalization.md
 │   │   └── 10_construction_capability.md
 │   └── software_design_theory/  # 软件设计理论
 │       ├── 01_design_patterns_formal/    # GoF 23模式
@@ -178,7 +178,7 @@ research_notes/
 │   ├── 10_unified_systematic_framework.md
 │   ├── 10_argumentation_chain_and_flow.md
 │   ├── 10_argumentation_gap_index.md
-│   ├── PROOF_INDEX.md
+│   ├── 10_proof_index.md
 │   └── 10_core_theorems_full_proofs.md
 ├── 工具与实现层
 │   ├── coq_skeleton/            # L3证明骨架
@@ -991,7 +991,7 @@ verification_pipeline:
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

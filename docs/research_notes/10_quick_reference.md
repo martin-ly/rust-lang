@@ -74,11 +74,11 @@
 | 主题  | 文件 | 状态  |
 | :--- | :--- | :--- |
 | 完备性缺口  | [00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md)                | ✅ Phase 1–6 100% |
-| 所有权模型形式化 | [ownership_model.md](./formal_methods/ownership_model.md)                          | ✅ 100%
-| 借用检查器证明   | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)                | ✅ 100%           |
-| 异步状态机形式化 | [async_state_machine.md](./formal_methods/async_state_machine.md)                  | ✅ 100%           |
-| 生命周期形式化   | [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)            | ✅ 100%           |
-| Pin 和自引用类型 | [pin_self_referential.md](./formal_methods/pin_self_referential.md)                | ✅ 100%           |
+| 所有权模型形式化 | [10_ownership_model.md](./formal_methods/10_ownership_model.md)                          | ✅ 100%
+| 借用检查器证明   | [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)                | ✅ 100%           |
+| 异步状态机形式化 | [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)                  | ✅ 100%           |
+| 生命周期形式化   | [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md)            | ✅ 100%           |
+| Pin 和自引用类型 | [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)                | ✅ 100%           |
 
 #### 🔷 类型理论研究
 >
@@ -88,11 +88,11 @@
 | :--- | :--- | :--- |
 | 完备性缺口       | [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)               | ✅ 阶段 1–7 Def 占位 |
 | 类型构造能力     | [10_construction_capability.md](./type_theory/10_construction_capability.md)         | ✅ Def TCON1、矩阵、决策树 |
-| 类型系统基础     | [type_system_foundations.md](./type_theory/type_system_foundations.md)         | ✅ 100%               |
-| Trait 系统形式化 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md)   | ✅ 100%               |
-| 生命周期形式化   | [lifetime_formalization.md](./type_theory/lifetime_formalization.md)           | ✅ 100%               |
-| 高级类型特性     | [advanced_types.md](./type_theory/advanced_types.md)                           | ✅ 100%               |
-| 型变理论         | [variance_theory.md](./type_theory/variance_theory.md)                         | ✅ 100%               |
+| 类型系统基础     | [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)         | ✅ 100%               |
+| Trait 系统形式化 | [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)   | ✅ 100%               |
+| 生命周期形式化   | [10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md)           | ✅ 100%               |
+| 高级类型特性     | [10_advanced_types.md](./type_theory/10_advanced_types.md)                           | ✅ 100%               |
+| 型变理论         | [10_variance_theory.md](./type_theory/10_variance_theory.md)                         | ✅ 100%               |
 
 #### 🌐 软件设计理论
 >
@@ -147,10 +147,10 @@
 
 **形式化方法研究**:
 
-- 内存安全 → [所有权模型形式化](./formal_methods/ownership_model.md)
-- 数据竞争自由 → [借用检查器证明](./formal_methods/borrow_checker_proof.md)
-- 并发安全 → [异步状态机形式化](./formal_methods/async_state_machine.md)
-- 引用有效性 → [生命周期形式化](./formal_methods/lifetime_formalization.md)
+- 内存安全 → [所有权模型形式化](./formal_methods/10_ownership_model.md)
+- 数据竞争自由 → [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
+- 并发安全 → [异步状态机形式化](./formal_methods/10_async_state_machine.md)
+- 引用有效性 → [生命周期形式化](./formal_methods/10_lifetime_formalization.md)
 
 ### 我想理解类型系统
 >
@@ -158,10 +158,10 @@
 
 **类型理论研究**:
 
-- 基础概念 → [类型系统基础](./type_theory/type_system_foundations.md)
-- Trait 系统 → [Trait 系统形式化](./type_theory/trait_system_formalization.md)
-- 高级特性 → [高级类型特性](./type_theory/advanced_types.md)
-- 型变规则 → [型变理论](./type_theory/variance_theory.md)
+- 基础概念 → [类型系统基础](./type_theory/10_type_system_foundations.md)
+- Trait 系统 → [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
+- 高级特性 → [高级类型特性](./type_theory/10_advanced_types.md)
+- 型变规则 → [型变理论](./type_theory/10_variance_theory.md)
 
 ### 我想优化性能
 >
@@ -194,28 +194,28 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- 所有权模型 → [ownership_model.md](./formal_methods/ownership_model.md)
-- 借用检查器 → [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
-- Pin 类型 → [pin_self_referential.md](./formal_methods/pin_self_referential.md)
+- 所有权模型 → [10_ownership_model.md](./formal_methods/10_ownership_model.md)
+- 借用检查器 → [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
+- Pin 类型 → [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)
 
 ### 类型系统相关
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 类型构造能力 → [10_construction_capability.md](./type_theory/10_construction_capability.md)
-- 类型推导 → [type_system_foundations.md](./type_theory/type_system_foundations.md)
-- Trait → [trait_system_formalization.md](./type_theory/trait_system_formalization.md)
-- GATs → [advanced_types.md](./type_theory/advanced_types.md)
-- const 泛型 → [advanced_types.md](./type_theory/advanced_types.md)
-- 型变 → [variance_theory.md](./type_theory/variance_theory.md)
+- 类型推导 → [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)
+- Trait → [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)
+- GATs → [10_advanced_types.md](./type_theory/10_advanced_types.md)
+- const 泛型 → [10_advanced_types.md](./type_theory/10_advanced_types.md)
+- 型变 → [10_variance_theory.md](./type_theory/10_variance_theory.md)
 - 类型理论缺口 → [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)
 
 ### 异步相关
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- Future/Poll → [async_state_machine.md](./formal_methods/async_state_machine.md)
-- async/await → [async_state_machine.md](./formal_methods/async_state_machine.md)
+- Future/Poll → [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)
+- async/await → [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)
 
 ### 性能相关
 >
@@ -231,8 +231,8 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- 生命周期语义 → [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)
-- 生命周期推断 → [lifetime_formalization.md](./type_theory/lifetime_formalization.md)
+- 生命周期语义 → [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md)
+- 生命周期推断 → [10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md)
 
 ---
 
@@ -276,24 +276,24 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-1. [类型系统基础](./type_theory/type_system_foundations.md) - 理解基本概念
-2. [所有权模型形式化](./formal_methods/ownership_model.md) - 理解所有权
+1. [类型系统基础](./type_theory/10_type_system_foundations.md) - 理解基本概念
+2. [所有权模型形式化](./formal_methods/10_ownership_model.md) - 理解所有权
 3. [性能基准测试](./experiments/10_performance_benchmarks.md) - 开始实验
 
 ### 进阶路径
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-1. [Trait 系统形式化](./type_theory/trait_system_formalization.md) - 深入类型系统
-2. [借用检查器证明](./formal_methods/borrow_checker_proof.md) - 理解借用规则
-3. [高级类型特性](./type_theory/advanced_types.md) - 学习高级特性
+1. [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) - 深入类型系统
+2. [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) - 理解借用规则
+3. [高级类型特性](./type_theory/10_advanced_types.md) - 学习高级特性
 
 ### 专家路径
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-1. [型变理论](./type_theory/variance_theory.md) - 深入类型理论
-2. [异步状态机形式化](./formal_methods/async_state_machine.md) - 形式化异步系统
+1. [型变理论](./type_theory/10_variance_theory.md) - 深入类型理论
+2. [异步状态机形式化](./formal_methods/10_async_state_machine.md) - 形式化异步系统
 3. [研究方法论](./10_research_methodology.md) - 掌握研究方法
 
 ---
@@ -313,7 +313,7 @@
 - [快速入门指南](./10_getting_started.md) - 新用户入门指南
 - [常见问题解答](./10_faq.md) - 常见问题解答
 - [维护指南](./10_maintenance_guide.md) - 系统维护指南
-- [最佳实践](./BEST_PRACTICES.md) - 研究笔记最佳实践
+- [最佳实践](./10_best_practices.md) - 研究笔记最佳实践
 - [术语表](./10_glossary.md) - 专业术语解释
 - [研究资源汇总](./10_resources.md) - 学术和工具资源
 - [系统集成指南](./10_system_integration.md) - 与形式化工程系统的集成
@@ -376,7 +376,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

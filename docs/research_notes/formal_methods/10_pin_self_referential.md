@@ -785,14 +785,14 @@ async fn use_future() {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `Future::poll(self: Pin<&mut Self>, ctx)` 的 `Pin` 保证 `Self` 在 poll 间不移动，满足自引用与 `Waker` 存储的不变式；
-与 [async_state_machine](./async_state_machine.md) 的 Pin、状态机语义一致。
+与 [async_state_machine](./10_async_state_machine.md) 的 Pin、状态机语义一致。
 形式化：$\text{Pin}[P] \rightarrow \neg \text{move}(\text{target}(P))$。
 
 ### 与生命周期的集成
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 自引用中 `&'a T` 的 `'a` 覆盖包含自引用结构体；Pin 保证移动不发生，故 `'a` 不悬垂。
-与 [lifetime_formalization](./lifetime_formalization.md) 的 outlives、NLL 兼容。
+与 [lifetime_formalization](./10_lifetime_formalization.md) 的 outlives、NLL 兼容。
 
 ### 实际应用案例
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
@@ -856,7 +856,7 @@ async fn use_future() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -94,7 +94,7 @@
 
 **决策树**：REST/GraphQL？→ axum；极高 QPS？→ actix-web；gRPC？→ tonic；WebSocket？→ axum/tokio-tungstenite。
 
-**形式化引用**：[async_state_machine](../research_notes/formal_methods/async_state_machine.md)、[03_execution_models/02_async](../research_notes/software_design_theory/03_execution_models/02_async.md)。
+**形式化引用**：[async_state_machine](../research_notes/formal_methods/10_async_state_machine.md)、[03_execution_models/02_async](../research_notes/software_design_theory/03_execution_models/02_async.md)。
 
 ---
 
@@ -296,8 +296,8 @@ flowchart LR
 
 | 应用场景 | 形式化定理 | 文档 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 并发安全 | async T6.2、Send/Sync | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
-| 类型安全 | type_system T1–T3 | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
+| 并发安全 | async T6.2、Send/Sync | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) |
+| 类型安全 | type_system T1–T3 | [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) |
 | 设计模式 | CE-T1–T3 | [04_compositional_engineering](../research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | 安全边界 | unsafe 契约 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
 
@@ -390,7 +390,7 @@ Rust 新特性可扩展思维表征方式：
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

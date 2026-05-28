@@ -343,7 +343,7 @@ graph TD
 >
 > **[来源: Rust Official Docs]**
 
-**形式化对应**: [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) 定理 T1（数据竞争自由）、规则 1–5。
+**形式化对应**: [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) 定理 T1（数据竞争自由）、规则 1–5。
 
 ```mermaid
 graph TD
@@ -388,7 +388,7 @@ graph TD
 
 > **[来源: PLDI - Programming Language Design]**
 
-**形式化对应**: [lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md) 定理 LF-T1/T2、规则 3。
+**形式化对应**: [lifetime_formalization](../research_notes/formal_methods/10_lifetime_formalization.md) 定理 LF-T1/T2、规则 3。
 
 ```mermaid
 graph TD
@@ -441,9 +441,9 @@ graph TD
 
 **形式化对应**:
 
-- 所有权: [ownership_model](../research_notes/formal_methods/ownership_model.md) 定理 T2（唯一性）、T3（内存安全）
-- 借用: [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) 定理 T1
-- 类型: [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) 定理 T1–T3
+- 所有权: [ownership_model](../research_notes/formal_methods/10_ownership_model.md) 定理 T2（唯一性）、T3（内存安全）
+- 借用: [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) 定理 T1
+- 类型: [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) 定理 T1–T3
 
 ### 内存安全定理
 
@@ -669,7 +669,7 @@ graph TD
 >
 > **[来源: Rust Official Docs]**
 
-**形式化对应**: [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) 定理 T1（进展性）、T2（保持性）、T3（类型安全）。
+**形式化对应**: [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) 定理 T1（进展性）、T2（保持性）、T3（类型安全）。
 
 ### 类型安全定理
 
@@ -838,7 +838,7 @@ graph TD
 >
 > **[来源: Rust Official Docs]**
 
-**形式化对应**: [async_state_machine](../research_notes/formal_methods/async_state_machine.md) 定理 T6.1–T6.3、[pin_self_referential](../research_notes/formal_methods/pin_self_referential.md) 定理 T1–T3。
+**形式化对应**: [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) 定理 T6.1–T6.3、[pin_self_referential](../research_notes/formal_methods/10_pin_self_referential.md) 定理 T1–T3。
 
 ### 异步 Future 安全性证明树
 
@@ -1429,7 +1429,7 @@ fn proof_validation_workflow() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-- [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
+- [10_proof_index.md](../research_notes/10_proof_index.md) - 形式化证明索引
 - [10_core_theorems_full_proofs.md](../research_notes/10_core_theorems_full_proofs.md) - 核心定理完整证明
 - [10_formal_language_and_proofs.md](../research_notes/10_formal_language_and_proofs.md) - 形式化语言与证明
 
@@ -1539,7 +1539,7 @@ ust
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -679,7 +679,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [SQLx 异步 SQL 工具架构](./09_sqlx_architecture.md)
-- [类型系统与所有权](../../../../concept/01_foundation/04_type_system.md)
+- [类型系统与所有权](../../../../concept/01_foundation/04_02_type_system.md)
 
 ---
 

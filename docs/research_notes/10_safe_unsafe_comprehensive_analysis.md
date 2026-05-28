@@ -197,7 +197,7 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 
 **引理 SU-L1（安全保证蕴涵）**：若 $P$ 满足 borrow T1 且满足 ownership T2/T3，则 $P$ 无数据竞争且无悬垂引用。
 
-*证明*：borrow T1 ⇒ 无数据竞争；ownership T2/T3 ⇒ 无双重释放、无泄漏、无悬垂。由 [borrow_checker_proof](formal_methods/borrow_checker_proof.md)、[ownership_model](formal_methods/ownership_model.md)。∎
+*证明*：borrow T1 ⇒ 无数据竞争；ownership T2/T3 ⇒ 无双重释放、无泄漏、无悬垂。由 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[ownership_model](formal_methods/10_ownership_model.md)。∎
 
 **推论 SU-C1**：Safe 代码不触发 UB 当且仅当未调用违反契约的 unsafe；由 Def 1.1 与各 unsafe 契约。
 
@@ -398,8 +398,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | 理论体系、论证体系、安全边界总览 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 公理语义、unsafe 契约 |
 | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | Unsafe Rust 专题指南 |
-| [ownership_model](formal_methods/ownership_model.md) | 内存安全定理 |
-| [borrow_checker_proof](formal_methods/borrow_checker_proof.md) | 数据竞争自由定理 |
+| [ownership_model](formal_methods/10_ownership_model.md) | 内存安全定理 |
+| [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 数据竞争自由定理 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | 官方 unsafe 权威 |
 
 ---
@@ -444,7 +444,7 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

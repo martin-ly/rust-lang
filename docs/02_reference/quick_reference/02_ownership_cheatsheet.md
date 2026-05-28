@@ -189,7 +189,7 @@ mindmap
 | **L4 智能指针** | RAII 封装：Box/Rc/Arc | 规则：运行时引用计数 | 定理 T2.4：智能指针保持所有权语义 |
 | **L5 形式化** | 分离逻辑模型 | 霍尔三元组 {P}C{Q} | 定理 T2.5：所有权系统可靠性 |
 
-> 形式化理论详见：[所有权模型形式化](../../research_notes/formal_methods/ownership_model.md)
+> 形式化理论详见：[所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md)
 
 ---
 
@@ -691,9 +691,9 @@ fn no_dangle() -> String {
 
 - [类型系统理论](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/06_类型系统理论.md)
 - [形式化验证](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/07_形式化验证.md)
-- [所有权模型形式化](../../research_notes/formal_methods/ownership_model.md) — Def 2.1–2.3、定理 T2.1–T2.5
-- [借用检查器证明](../../research_notes/formal_methods/borrow_checker_proof.md) — 定理 3.1–3.3、引理 L3.1–L3.4
-- [生命周期形式化](../../research_notes/formal_methods/lifetime_formalization.md) — Def 1.1–1.4、定理 T1.1–T1.3
+- [所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md) — Def 2.1–2.3、定理 T2.1–T2.5
+- [借用检查器证明](../../research_notes/formal_methods/10_borrow_checker_proof.md) — 定理 3.1–3.3、引理 L3.1–L3.4
+- [生命周期形式化](../../research_notes/formal_methods/10_lifetime_formalization.md) — Def 1.1–1.4、定理 T1.1–T1.3
 
 ---
 
@@ -964,17 +964,17 @@ for i in 0..1000 {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [所有权系统完整文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
-- [所有权形式化研究](../../research_notes/formal_methods/ownership_model.md)
-- [生命周期形式化](../../research_notes/formal_methods/lifetime_formalization.md)
+- [所有权形式化研究](../../research_notes/formal_methods/10_ownership_model.md)
+- [生命周期形式化](../../research_notes/formal_methods/10_lifetime_formalization.md)
 
 ### 相关速查卡
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [类型系统速查卡](./type_system.md) - 类型与所有权
-- [生命周期速查卡](./type_system.md#生命周期) - 生命周期标注
+- [类型系统速查卡](./02_type_system.md) - 类型与所有权
+- [生命周期速查卡](./02_type_system.md#生命周期) - 生命周期标注
 - [智能指针速查卡](./02_smart_pointers_cheatsheet.md) - 所有权与智能指针
-- [借用检查器速查卡](./ownership_cheatsheet.md#借用规则) - 借用规则详解
+- [借用检查器速查卡](./02_ownership_cheatsheet.md#借用规则) - 借用规则详解
 - [错误处理速查卡](./02_error_handling_cheatsheet.md) - 所有权与错误处理
 
 ---

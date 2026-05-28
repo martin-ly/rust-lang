@@ -1480,7 +1480,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
 | 理论体系架构 | [../10_theoretical_and_argumentation_system_architecture.md](../10_theoretical_and_argumentation_system_architecture.md) | 四层理论体系 |
-| 证明索引 | [../PROOF_INDEX.md](../PROOF_INDEX.md) | 形式化证明索引 |
+| 证明索引 | [../10_proof_index.md](../10_proof_index.md) | 形式化证明索引 |
 | 系统总结 | [../10_system_summary.md](../10_system_summary.md) | 研究笔记系统总结 |
 
 ---
@@ -1524,7 +1524,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

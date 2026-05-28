@@ -131,7 +131,7 @@
 
 **注意**: 这是一个示例文档，展示了研究笔记的标准格式和内容结构。实际研究笔记应该基于 [研究笔记模板](./10_template.md) 创建。
 
-**实质内容链接**：本示例的所有权、借用、生命周期形式化，在 [ownership_model](./formal_methods/ownership_model.md)、[borrow_checker_proof](./formal_methods/borrow_checker_proof.md)、[lifetime_formalization](./formal_methods/lifetime_formalization.md) 中有完整 Def/定理/证明；代码示例可对照 [PROOF_INDEX](./PROOF_INDEX.md) 追溯。
+**实质内容链接**：本示例的所有权、借用、生命周期形式化，在 [ownership_model](./formal_methods/10_ownership_model.md)、[borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md)、[lifetime_formalization](./formal_methods/10_lifetime_formalization.md) 中有完整 Def/定理/证明；代码示例可对照 [PROOF_INDEX](./10_proof_index.md) 追溯。
 
 ---
 
@@ -507,14 +507,14 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [研究笔记模板](./10_template.md) - 研究笔记模板
-- [最佳实践](./BEST_PRACTICES.md) - 研究笔记最佳实践
+- [最佳实践](./10_best_practices.md) - 研究笔记最佳实践
 - [质量检查清单](./10_quality_checklist.md) - 质量检查标准
 
 ### 研究笔记
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [所有权模型形式化](./formal_methods/ownership_model.md) - 实际研究笔记
+- [所有权模型形式化](./formal_methods/10_ownership_model.md) - 实际研究笔记
 - [形式化方法研究](./formal_methods/README.md) - 形式化方法索引
 
 ---
@@ -559,7 +559,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

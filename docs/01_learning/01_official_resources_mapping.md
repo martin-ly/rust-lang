@@ -170,8 +170,8 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 3.1 Variables and Mutability | 变量、可变性、常量、遮蔽 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) § 基础 | 变量作用域深入分析 |
-| 3.2 Data Types | 标量类型、复合类型 | [type_system](../02_reference/quick_reference/type_system.md) § 基础类型 | 类型推断算法说明 |
+| 3.1 Variables and Mutability | 变量、可变性、常量、遮蔽 | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) § 基础 | 变量作用域深入分析 |
+| 3.2 Data Types | 标量类型、复合类型 | [type_system](../02_reference/quick_reference/02_type_system.md) § 基础类型 | 类型推断算法说明 |
 | 3.3 Functions | 函数定义、参数、返回值 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | 函数签名设计模式 |
 | 3.4 Comments | 注释语法 | - | 官方充分覆盖 |
 | 3.5 Control Flow | if、loop、while、for | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § 控制流 | 控制流决策树 |
@@ -184,8 +184,8 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 4.1 What is Ownership? | 所有权规则、内存安全 | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 形式化所有权证明 |
-| 4.2 References and Borrowing | 引用、借用规则 | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) | 借用检查器内部机制 |
+| 4.1 What is Ownership? | 所有权规则、内存安全 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | 形式化所有权证明 |
+| 4.2 References and Borrowing | 引用、借用规则 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查器内部机制 |
 | 4.3 The Slice Type | 切片、字符串 slice | `crates/c02_type_system/src/slice_examples.rs` | 切片边界检查分析 |
 
 #### 第5章：Using Structs
@@ -196,9 +196,9 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 5.1 Defining and Instantiating Structs | 结构体定义、实例化 | [type_system](../02_reference/quick_reference/type_system.md) § Struct | 结构体内存布局 |
+| 5.1 Defining and Instantiating Structs | 结构体定义、实例化 | [type_system](../02_reference/quick_reference/02_type_system.md) § Struct | 结构体内存布局 |
 | 5.2 An Example Program Using Structs | 示例程序 | `examples/struct_demo/` | 扩展示例 |
-| 5.3 Methods | 方法定义、关联函数 | [type_system](../02_reference/quick_reference/type_system.md) § Methods | 方法解析规则 |
+| 5.3 Methods | 方法定义、关联函数 | [type_system](../02_reference/quick_reference/02_type_system.md) § Methods | 方法解析规则 |
 
 #### 第6章：Enums and Pattern Matching
 
@@ -208,7 +208,7 @@
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
-| 6.1 Defining an Enum | 枚举定义、Option、Result | [type_system](../02_reference/quick_reference/type_system.md) § Enum | 代数数据类型理论 |
+| 6.1 Defining an Enum | 枚举定义、Option、Result | [type_system](../02_reference/quick_reference/02_type_system.md) § Enum | 代数数据类型理论 |
 | 6.2 The match Control Flow Construct | match 语法 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § match | 穷尽性检查算法 |
 | 6.3 Concise Control Flow with if let and let else | if let、let-else | `crates/c03_control_fn/src/` | 模式匹配决策树 |
 
@@ -253,8 +253,8 @@
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 10.1 Generic Data Types | 泛型函数、结构体 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | 单态化机制 |
-| 10.2 Defining Shared Behavior with Traits | Trait 定义、实现 | [type_system](../02_reference/quick_reference/type_system.md) § Traits | Trait 对象 vs 泛型 |
-| 10.3 Validating References with Lifetimes | 生命周期语法 | [variance_theory](../research_notes/type_theory/variance_theory.md) | 型变理论、形式化证明 |
+| 10.2 Defining Shared Behavior with Traits | Trait 定义、实现 | [type_system](../02_reference/quick_reference/02_type_system.md) § Traits | Trait 对象 vs 泛型 |
+| 10.3 Validating References with Lifetimes | 生命周期语法 | [variance_theory](../research_notes/type_theory/10_variance_theory.md) | 型变理论、形式化证明 |
 
 #### 第11章：Writing Automated Tests
 
@@ -324,7 +324,7 @@
 | 16.1 Using Threads to Run Code Simultaneously | 线程创建、join | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) § 线程 | 线程池实现 |
 | 16.2 Transfer Data Between Threads with Message Passing | Channel | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) § Channel | async-channel |
 | 16.3 Shared-State Concurrency | Mutex、Arc | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) § 同步原语 | 锁粒度优化 |
-| 16.4 Extensible Concurrency with Send and Sync | Send、Sync | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | 形式化证明 |
+| 16.4 Extensible Concurrency with Send and Sync | Send、Sync | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | 形式化证明 |
 
 #### 第17章：Asynchronous Programming
 
@@ -337,7 +337,7 @@
 | 17.3 Working With Any Number of Futures | 动态 Future | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § Stream | FuturesUnordered |
 | 17.4 Streams: Futures in Sequence | Stream | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § Stream | 背压处理 |
 | 17.5 A Closer Look at the Traits for Async | Async Traits | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) § Traits | RPITIT 详解 |
-| 17.6 Futures, Tasks, and Threads | 运行时对比 | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) | 调度器原理 |
+| 17.6 Futures, Tasks, and Threads | 运行时对比 | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | 调度器原理 |
 
 #### 第18章：Object Oriented Programming Features
 
@@ -346,7 +346,7 @@
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 18.1 Characteristics of Object-Oriented Languages | OOP 特性对比 | [design_patterns](../../crates/c09_design_pattern/docs/README.md) § OOP | 设计模式映射 |
-| 18.2 Using Trait Objects to Abstract over Shared Behavior | Trait Objects | [type_system](../02_reference/quick_reference/type_system.md) § 动态分发 | vtable 布局 |
+| 18.2 Using Trait Objects to Abstract over Shared Behavior | Trait Objects | [type_system](../02_reference/quick_reference/02_type_system.md) § 动态分发 | vtable 布局 |
 | 18.3 Implementing an Object-Oriented Design Pattern | 状态模式 | `crates/c09_design_pattern/src/state_pattern.rs` | 其他模式实现 |
 
 #### 第19章：Patterns and Matching
@@ -366,8 +366,8 @@
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 20.1 Unsafe Rust | unsafe 代码 | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | 完整 unsafe 指南 |
-| 20.2 Advanced Traits | 关联类型、完全限定语法 | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 复杂 trait 模式 |
-| 20.3 Advanced Types | 类型别名、never type | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 类型级编程 |
+| 20.2 Advanced Traits | 关联类型、完全限定语法 | [type_system](../02_reference/quick_reference/02_type_system.md) § 高级 | 复杂 trait 模式 |
+| 20.3 Advanced Types | 类型别名、never type | [type_system](../02_reference/quick_reference/02_type_system.md) § 高级 | 类型级编程 |
 | 20.4 Advanced Functions and Closures | 函数指针、返回闭包 | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) § 高级 | HRTB |
 | 20.5 Macros | 声明宏、过程宏 | macros_cheatsheet | 宏编写指南 |
 
@@ -383,7 +383,7 @@
 |------|---------|-----------|---------|
 | 22.1 Keywords | 关键字列表 | [QUICK_REFERENCE](../research_notes/10_quick_reference.md) | 快速参考 |
 | 22.2 Operators and Symbols | 运算符 | [QUICK_REFERENCE](../research_notes/10_quick_reference.md) | 运算符优先级 |
-| 22.3 Derivable Traits | 可派生 Trait | [type_system](../02_reference/quick_reference/type_system.md) § Derive | 自定义 derive |
+| 22.3 Derivable Traits | 可派生 Trait | [type_system](../02_reference/quick_reference/02_type_system.md) § Derive | 自定义 derive |
 | 22.4 Useful Development Tools | 开发工具 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) § 工具 | 完整工具链 |
 | 22.5 Editions | Edition 差异 | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | 迁移指南 |
 | 22.6-22.7 | 翻译、开发流程 | - | 官方充分覆盖 |
@@ -401,10 +401,10 @@
 | **6. Items** | 所有 Item 类型 | 各 crate 源码示例 | 实战示例 |
 | **8. Statements and Expressions** | 语句与表达式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | 控制流决策树 |
 | **9. Patterns** | 模式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) § 模式 | 穷尽性分析 |
-| **10. Type System** | 类型系统 | [type_system](../02_reference/quick_reference/type_system.md) | 型变理论 |
-| **10.5 Subtyping and Variance** | 子类型与型变 | [variance_theory](../research_notes/type_theory/variance_theory.md) | 形式化证明 |
-| **11. Special Types and Traits** | 特殊类型和 Trait | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | Send/Sync 形式化 |
-| **13. Memory Model** | 内存模型 | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 所有权证明 |
+| **10. Type System** | 类型系统 | [type_system](../02_reference/quick_reference/02_type_system.md) | 型变理论 |
+| **10.5 Subtyping and Variance** | 子类型与型变 | [variance_theory](../research_notes/type_theory/10_variance_theory.md) | 形式化证明 |
+| **11. Special Types and Traits** | 特殊类型和 Trait | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | Send/Sync 形式化 |
+| **13. Memory Model** | 内存模型 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | 所有权证明 |
 | **17. Unsafety** | Unsafe | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | UB 完整列表 |
 
 ---
@@ -416,11 +416,11 @@
 | # | 主题 | 官方内容 | 本项目映射 |
 |---|------|---------|-----------|
 | 1 | **Hello World** | 基础打印、注释 | `crates/c01_basic/` |
-| 2 | **Primitives** | 基本类型、元组、数组 | [type_system](../02_reference/quick_reference/type_system.md) |
-| 3 | **Custom Types** | struct、enum | [type_system](../02_reference/quick_reference/type_system.md) § 自定义类型 |
-| 4 | **Variable Bindings** | 可变性、作用域 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
-| 5 | **Types** | 类型转换、推断 | [type_system](../02_reference/quick_reference/type_system.md) |
-| 6 | **Conversion** | From/Into、TryFrom | [type_system](../02_reference/quick_reference/type_system.md) § 转换 |
+| 2 | **Primitives** | 基本类型、元组、数组 | [type_system](../02_reference/quick_reference/02_type_system.md) |
+| 3 | **Custom Types** | struct、enum | [type_system](../02_reference/quick_reference/02_type_system.md) § 自定义类型 |
+| 4 | **Variable Bindings** | 可变性、作用域 | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) |
+| 5 | **Types** | 类型转换、推断 | [type_system](../02_reference/quick_reference/02_type_system.md) |
+| 6 | **Conversion** | From/Into、TryFrom | [type_system](../02_reference/quick_reference/02_type_system.md) § 转换 |
 | 7 | **Expressions** | 表达式语法 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 | 8 | **Flow of Control** | if/else、loop、match | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 | 9 | **Functions** | 函数、闭包、高阶函数 | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) |
@@ -429,8 +429,8 @@
 | 12 | **Cargo** | 包管理 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 | 13 | **Attributes** | 属性 | macros_cheatsheet |
 | 14 | **Generics** | 泛型 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) |
-| 15 | **Scoping Rules** | 所有权、借用、生命周期 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
-| 16 | **Traits** | Trait 系统 | [type_system](../02_reference/quick_reference/type_system.md) § Traits |
+| 15 | **Scoping Rules** | 所有权、借用、生命周期 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
+| 16 | **Traits** | Trait 系统 | [type_system](../02_reference/quick_reference/02_type_system.md) § Traits |
 | 17 | **macro_rules!** | 声明宏 | macros_cheatsheet |
 | 18 | **Error Handling** | 错误处理 | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | 19 | **Std Library Types** | 标准库类型 | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) |
@@ -464,16 +464,16 @@
 
 | 补充内容 | 位置 | 说明 |
 |---------|------|------|
-| **型变理论形式化** | [variance_theory](../research_notes/type_theory/variance_theory.md) | 官方仅提及概念，无理论深度 |
-| **Send/Sync 形式化证明** | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | 官方仅定义 trait，无证明 |
-| **借用检查器内部机制** | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) | 官方无实现细节 |
-| **异步状态机形式化** | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) | 官方无形式化模型 |
+| **型变理论形式化** | [variance_theory](../research_notes/type_theory/10_variance_theory.md) | 官方仅提及概念，无理论深度 |
+| **Send/Sync 形式化证明** | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | 官方仅定义 trait，无证明 |
+| **借用检查器内部机制** | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | 官方无实现细节 |
+| **异步状态机形式化** | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | 官方无形式化模型 |
 | **宏系统决策树** | macros_cheatsheet | 官方为参考文档 |
 | **错误传播转换树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) | 官方为教程式讲解 |
 | **版本兼容性深度分析** | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md) | 官方仅列变更 |
 | **控制流决策树** | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) | 官方分散在各章 |
 | **异步模式反例** | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | 官方无反模式说明 |
-| **所有权模型可视化** | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 官方无形式化描述 |
+| **所有权模型可视化** | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | 官方无形式化描述 |
 
 ### 版本差异说明
 >
@@ -503,8 +503,8 @@
 | 阶段 | 官方资源 | 本项目补充 | 练习 |
 |------|---------|-----------|------|
 | **Week 1: 环境 + 基础语法** | Book Ch 1-3 | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) | [Rustlings](https://github.com/rust-lang/rustlings) intro |
-| **Week 2: 所有权系统** | Book Ch 4 + RBE Scoping Rules | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) | RBE 15.1-15.4 |
-| **Week 3: 复合类型 + 集合** | Book Ch 5-8 + RBE Custom Types | [type_system](../02_reference/quick_reference/type_system.md) | 实现简易数据结构 |
+| **Week 2: 所有权系统** | Book Ch 4 + RBE Scoping Rules | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | RBE 15.1-15.4 |
+| **Week 3: 复合类型 + 集合** | Book Ch 5-8 + RBE Custom Types | [type_system](../02_reference/quick_reference/02_type_system.md) | 实现简易数据结构 |
 | **Week 4: 错误处理 + 泛型** | Book Ch 9-10 + RBE Error Handling | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | 重构错误处理 |
 | **Week 5: 项目实战** | Book Ch 12 I/O Project | [CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) | 完成命令行工具 |
 | **Week 6: 复习 + 测试** | Book Ch 11 Testing | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md) | 为项目添加测试 |
@@ -520,7 +520,7 @@
 | **Week 1: 智能指针深入** | Book Ch 15 | [smart_pointers_cheatsheet](../02_reference/quick_reference/02_smart_pointers_cheatsheet.md) | 实现自定义智能指针 |
 | **Week 2: 并发基础** | Book Ch 16 + RBE Threads | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | 线程池实现 |
 | **Week 3: 异步编程** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | 异步 Web 服务器 |
-| **Week 4: Trait 系统深度** | Book Ch 10.2 + Reference Traits | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 复杂 trait 设计 |
+| **Week 4: Trait 系统深度** | Book Ch 10.2 + Reference Traits | [type_system](../02_reference/quick_reference/02_type_system.md) § 高级 | 复杂 trait 设计 |
 | **Week 5: 宏系统** | Book Ch 20.5 + RBE macro_rules! | macros_cheatsheet | 编写 DSL |
 | **Week 6: 设计模式** | Book Ch 18 OOP | [design_patterns](../../crates/c09_design_pattern/docs/README.md) | 实现经典模式 |
 | **Week 7: 性能优化** | Book Ch 13.4 + Reference Types | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) § 性能 | 性能调优实践 |
@@ -534,12 +534,12 @@
 
 | 阶段 | 官方资源 | 本项目补充 | 目标 |
 |------|---------|-----------|------|
-| **阶段1: 形式化基础** | Reference Type System | [variance_theory](../research_notes/type_theory/variance_theory.md) | 理解型变理论 |
-| **阶段2: 所有权证明** | Reference Memory Model | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 形式化所有权 |
-| **阶段3: 并发安全证明** | Reference Send/Sync | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | 数据竞争自由证明 |
-| **阶段4: 异步形式化** | Reference Coroutines | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) | 状态机语义 |
+| **阶段1: 形式化基础** | Reference Type System | [variance_theory](../research_notes/type_theory/10_variance_theory.md) | 理解型变理论 |
+| **阶段2: 所有权证明** | Reference Memory Model | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | 形式化所有权 |
+| **阶段3: 并发安全证明** | Reference Send/Sync | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | 数据竞争自由证明 |
+| **阶段4: 异步形式化** | Reference Coroutines | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | 状态机语义 |
 | **阶段5: Unsafe 深入** | Reference Unsafety | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) + [Rustonomicon](https://doc.rust-lang.org/nomicon/) | UB 边界掌握 |
-| **阶段6: 编译器研究** | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | [PROOF_INDEX](../research_notes/PROOF_INDEX.md) | 贡献 Rust 编译器 |
+| **阶段6: 编译器研究** | [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) | [PROOF_INDEX](../research_notes/10_proof_index.md) | 贡献 Rust 编译器 |
 
 ---
 
@@ -553,14 +553,14 @@
 
 | 主题 | 官方章节 | 本项目速查 | 形式化文档 |
 |------|---------|-----------|-----------|
-| **所有权** | Book Ch 4 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
-| **借用** | Book Ch 4.2 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
-| **生命周期** | Book Ch 10.3 | [type_system](../02_reference/quick_reference/type_system.md) | [variance_theory](../research_notes/type_theory/variance_theory.md) |
-| **类型系统** | Book Ch 3.2, 10 | [type_system](../02_reference/quick_reference/type_system.md) | [PROOF_INDEX](../research_notes/PROOF_INDEX.md) |
-| **Trait** | Book Ch 10.2 | [type_system](../02_reference/quick_reference/type_system.md) § Traits | - |
+| **所有权** | Book Ch 4 | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
+| **借用** | Book Ch 4.2 | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
+| **生命周期** | Book Ch 10.3 | [type_system](../02_reference/quick_reference/02_type_system.md) | [variance_theory](../research_notes/type_theory/10_variance_theory.md) |
+| **类型系统** | Book Ch 3.2, 10 | [type_system](../02_reference/quick_reference/02_type_system.md) | [PROOF_INDEX](../research_notes/10_proof_index.md) |
+| **Trait** | Book Ch 10.2 | [type_system](../02_reference/quick_reference/02_type_system.md) § Traits | - |
 | **泛型** | Book Ch 10.1 | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) | - |
-| **并发** | Book Ch 16 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) |
-| **异步** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
+| **并发** | Book Ch 16 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) |
+| **异步** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/02_async_patterns.md) | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) |
 | **错误处理** | Book Ch 9 | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) | - |
 | **宏** | Book Ch 20.5 | macros_cheatsheet | - |
 | **Unsafe** | Book Ch 20.1 | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) | - |
@@ -579,7 +579,7 @@
 | Book 章节 | 快速链接 | 本项目文档 |
 |-----------|---------|-----------|
 | Ch 1 - Getting Started | [Book](https://doc.rust-lang.org/book/ch01-00-getting-started.html) | [01_learning_path_planning.md](./01_learning_path_planning.md) |
-| Ch 4 - Ownership | [Book](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
+| Ch 4 - Ownership | [Book](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) |
 | Ch 8 - Collections | [Book](https://doc.rust-lang.org/book/ch08-00-common-collections.html) | [collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) |
 | Ch 9 - Error Handling | [Book](https://doc.rust-lang.org/book/ch09-00-error-handling.html) | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | Ch 10 - Generics/Traits | [Book](https://doc.rust-lang.org/book/ch10-00-generics.html) | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) |
@@ -596,12 +596,12 @@
 
 | RBE 主题 | 快速链接 | 本项目对应 |
 |---------|---------|-----------|
-| 3. Custom Types | [RBE](https://doc.rust-lang.org/rust-by-example/custom_types.html) | [type_system](../02_reference/quick_reference/type_system.md) |
+| 3. Custom Types | [RBE](https://doc.rust-lang.org/rust-by-example/custom_types.html) | [type_system](../02_reference/quick_reference/02_type_system.md) |
 | 8. Flow of Control | [RBE](https://doc.rust-lang.org/rust-by-example/flow_control.html) | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
 | 9. Functions | [RBE](https://doc.rust-lang.org/rust-by-example/fn.html) | [closures_cheatsheet](../02_reference/quick_reference/02_closures_cheatsheet.md) |
 | 14. Generics | [RBE](https://doc.rust-lang.org/rust-by-example/generics.html) | [generics_cheatsheet](../02_reference/quick_reference/02_generics_cheatsheet.md) |
-| 15. Scoping Rules | [RBE](https://doc.rust-lang.org/rust-by-example/scope.html) | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
-| 16. Traits | [RBE](https://doc.rust-lang.org/rust-by-example/trait.html) | [type_system](../02_reference/quick_reference/type_system.md) |
+| 15. Scoping Rules | [RBE](https://doc.rust-lang.org/rust-by-example/scope.html) | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) |
+| 16. Traits | [RBE](https://doc.rust-lang.org/rust-by-example/trait.html) | [type_system](../02_reference/quick_reference/02_type_system.md) |
 | 17. macro_rules! | [RBE](https://doc.rust-lang.org/rust-by-example/macros.html) | macros_cheatsheet |
 | 18. Error Handling | [RBE](https://doc.rust-lang.org/rust-by-example/error.html) | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | 20. Std Misc (Threads) | [RBE](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) |
@@ -624,7 +624,7 @@
 | **Book Ch 9** | 9.1-9.3 Error Handling | 错误传播转换树（[THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md)）；[error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
 | **Book Ch 11** | 11.1-11.3 Testing | [testing_cheatsheet](../02_reference/quick_reference/02_testing_cheatsheet.md)；#[test] 1.93 严格化（[09_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)） |
 | **Reference** | Attributes, Macros | offset_of! 类型检查（1.93）；macros_cheatsheet |
-| **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/variance_theory.md)；[PROOF_INDEX](../research_notes/PROOF_INDEX.md) |
+| **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/10_variance_theory.md)；[PROOF_INDEX](../research_notes/10_proof_index.md) |
 | **releases.rs** | 1.93 Language/Libraries | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/06_09_rust_1_93_compatibility_deep_dive.md)；[07_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) |
 
 > 标注「本项目补充」表示官方资源未覆盖或简略，本项目提供额外深度。
@@ -788,7 +788,7 @@
 
 | 课程 | 链接 | 主要内容 | 本项目对应 |
 | :--- | :--- | :--- | :--- |
-| **17-363/17-663: Programming Language Pragmatics** | <https://www.cs.cmu.edu/~aldrich/courses/17-363/> | 编程语言基础、约 4/8 作业用 Rust 实现编译器 | C11 宏、[C02 类型系统](../02_reference/quick_reference/type_system.md) |
+| **17-363/17-663: Programming Language Pragmatics** | <https://www.cs.cmu.edu/~aldrich/courses/17-363/> | 编程语言基础、约 4/8 作业用 Rust 实现编译器 | C11 宏、[C02 类型系统](../02_reference/quick_reference/02_type_system.md) |
 | **17-770: WebAssembly** | <https://www.cs.cmu.edu/~wasm/cs17-770/> | WebAssembly 引擎，支持 Rust 实现 | [C12 WASM](../02_reference/quick_reference/02_wasm_cheatsheet.md) |
 
 ### 其他高校（参考）
@@ -814,7 +814,7 @@
 | 资源 | 说明 | 形式化链接 |
 | :--- | :--- | :--- |
 | [FORMAL_PROOF_SYSTEM_GUIDE](../research_notes/10_formal_proof_system_guide.md) | 批判性分析与推进计划 | [formal_methods/README](../research_notes/formal_methods/README.md) |
-| [CORE_THEOREMS_FULL_PROOFS](../research_notes/10_core_theorems_full_proofs.md) | 核心定理完整证明（L2） | [ownership_model](../research_notes/formal_methods/ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
+| [CORE_THEOREMS_FULL_PROOFS](../research_notes/10_core_theorems_full_proofs.md) | 核心定理完整证明（L2） | [ownership_model](../research_notes/formal_methods/10_ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../research_notes/10_international_formal_verification_index.md) | 国际对标 | [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)、[Ferrocene FLS](https://spec.ferrocene.dev/) |
 
 ### 官方形式化资源映射
@@ -824,10 +824,10 @@
 | 官方资源 | 本项目形式化文档 |
 | :--- | :--- |
 | [Ferrocene FLS - Ch.5 Patterns](https://spec.ferrocene.dev/patterns.html) | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
-| [Ferrocene FLS - Ch.15 Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
-| [Ferrocene FLS - Ch.15 Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) |
+| [Ferrocene FLS - Ch.15 Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
+| [Ferrocene FLS - Ch.15 Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing) | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | [Ferrocene FLS - Ch.16 Exceptions](https://spec.ferrocene.dev/exceptions-and-errors.html) | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
-| [Ferrocene FLS - Ch.17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md)、[async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
+| [Ferrocene FLS - Ch.17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md)、[async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) |
 | [Ferrocene FLS - Ch.19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) |
 | [Ferrocene FLS - Ch.21 FFI](https://spec.ferrocene.dev/ffi.html) | [UNSAFE_RUST_GUIDE](../05_guides/05_unsafe_rust_guide.md) § FFI |
 | [Ferrocene FLS - Appendix C UB](https://spec.ferrocene.dev/undefined-behavior.html) | [EDGE_CASES_AND_SPECIAL_CASES](../02_reference/02_edge_cases_and_special_cases.md) |
@@ -855,7 +855,7 @@
 
 | 课程 | 机构 | 链接 | 主要内容 | 本项目对应路径 |
 | :--- | :--- | :--- | :--- | :--- |
-| Rust Fundamentals | Duke | <https://www.coursera.org/learn/rust-fundamentals> | 所有权、借用、生命周期、enum、struct、trait、泛型 | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md)、[type_system](../02_reference/quick_reference/type_system.md) |
+| Rust Fundamentals | Duke | <https://www.coursera.org/learn/rust-fundamentals> | 所有权、借用、生命周期、enum、struct、trait、泛型 | [ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md)、[type_system](../02_reference/quick_reference/02_type_system.md) |
 | Rust Programming Essentials | Edureka | <https://www.coursera.org/learn/rust-programming-essentials> | 模式匹配、所有权、类型系统、Cargo | [control_flow_functions_cheatsheet](../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md)、[cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 | Advanced Rust Programming | Edureka | <https://www.coursera.org/learn/advanced-rust-programming> | 并发、多线程、内存管理、集合、trait、泛型 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md)、[collections_iterators_cheatsheet](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) |
 | Rust Programming Specialization | Duke | <https://www.coursera.org/specializations/rust-programming> | 系统编程、数据工程、Linux、DevOps、LLM、云、MLOps | [05_guides/](../05_guides/README.md)、[CLI_APPLICATIONS_GUIDE](../05_guides/05_cli_applications_guide.md) |
@@ -952,7 +952,7 @@
 
 - Rust 1.95+ 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

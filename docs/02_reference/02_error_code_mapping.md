@@ -4,7 +4,7 @@
 >
 > **层次定位**: L1-L3 基础-高级 / 编译器诊断参考
 > **前置依赖**: [docs 核心概念](../01_core/README.md) · [concept L1 所有权](../../concept/01_foundation/01_ownership.md)
-> **后置延伸**: [docs 性能调优](../05_guides/PERFORMANCE_TUNING_GUIDE.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md)
+> **后置延伸**: [docs 性能调优](../05_guides/05_performance_tuning_guide.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md)
 > **跨层映射**: docs→concept 诊断映射 | L1-L3 错误→概念
 > **定理链编号**: E0502 ↔ T-010 | E0597 ↔ T-011
 
@@ -221,7 +221,7 @@ fn main() {
 
 **形式化解释**:
 
-- 违反规则: [规则 2 - 移动语义](../research_notes/formal_methods/ownership_model.md)
+- 违反规则: [规则 2 - 移动语义](../research_notes/formal_methods/10_ownership_model.md)
 - 形式化: $\text{move}(x, y) \rightarrow \Omega(x) = \text{Moved} \land \Omega(y) = \text{Owned}$
 
 ---
@@ -378,7 +378,7 @@ fn process(s: String) -> String {
 
 **形式化解释**:
 
-- 违反规则: [规则 1 - 可变借用唯一性](../research_notes/formal_methods/borrow_checker_proof.md)
+- 违反规则: [规则 1 - 可变借用唯一性](../research_notes/formal_methods/10_borrow_checker_proof.md)
 - 形式化: $\forall b_1, b_2: \text{type}(b_1) = \&mut T \land \text{target}(b_1) = \text{target}(b_2) \rightarrow b_1 = b_2$
 - 目的: 保证数据竞争自由
 
@@ -1049,7 +1049,7 @@ fn main() {
 
 **形式化解释**:
 
-- 违反规则: [规则 3 - 借用有效性](../research_notes/formal_methods/borrow_checker_proof.md)
+- 违反规则: [规则 3 - 借用有效性](../research_notes/formal_methods/10_borrow_checker_proof.md)
 - 形式化: $\text{Valid}(b) \leftrightarrow \text{Lifetime}(b) \subseteq \text{Scope}(b)$
 
 ---
@@ -2530,8 +2530,8 @@ fn main() {
 
 | 速查卡 | 路径 | 内容 |
 |:---|:---|:---|
-| 所有权 | `quick_reference/ownership_cheatsheet.md` | 所有权规则速查 |
-| 类型系统 | `quick_reference/type_system.md` | 类型相关速查 |
+| 所有权 | `quick_reference/02_ownership_cheatsheet.md` | 所有权规则速查 |
+| 类型系统 | `quick_reference/02_type_system.md` | 类型相关速查 |
 | 错误处理 | `quick_reference/02_error_handling_cheatsheet.md` | 错误处理模式 |
 | 生命周期 | `quick_reference/lifetimes_cheatsheet.md` | 生命周期速查 |
 
@@ -2547,9 +2547,9 @@ fn main() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [所有权模型形式化](../research_notes/formal_methods/ownership_model.md)
-- [借用检查器证明](../research_notes/formal_methods/borrow_checker_proof.md)
-- [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
+- [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
+- [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
+- [生命周期形式化](../research_notes/formal_methods/10_lifetime_formalization.md)
 
 ---
 

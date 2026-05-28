@@ -308,11 +308,11 @@ clean:
 
 | Coq文件 | 对应Markdown | 状态 |
 | :--- | :--- | :--- |
-| ownership.v | ownership_model.md | 🔄 |
-| borrow_checker.v | borrow_checker_proof.md | 🔄 |
-| lifetime.v | lifetime_formalization.md | ⚠️ |
-| type_system.v | type_system_foundations.md | 🔄 |
-| async.v | async_state_machine.md | ❌ |
+| ownership.v | 10_ownership_model.md | 🔄 |
+| borrow_checker.v | 10_borrow_checker_proof.md | 🔄 |
+| lifetime.v | 10_lifetime_formalization.md | ⚠️ |
+| type_system.v | 10_type_system_foundations.md | 🔄 |
+| async.v | 10_async_state_machine.md | ❌ |
 
 ---
 
@@ -356,7 +356,7 @@ clean:
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -119,7 +119,7 @@
 | **1. 概念定义** | 形式化/非形式化定义、定义链、依赖 | [知识结构框架](../07_project/07_knowledge_structure_framework.md)、各 research_notes |
 | **2. 属性关系** | 公理、引理、定理、推论、属性矩阵 | [概念-公理-定理映射表](#-概念-公理-定理映射表)（FORMAL_PROOF_SYSTEM_GUIDE） |
 | **3. 解释论证** | 推导过程、引用链、论证结构 | [论证要素规范](10_formal_proof_system_guide.md#-论证要素规范) |
-| **4. 形式化证明** | 完整证明/证明思路、反例、证明树 | [PROOF_INDEX](./PROOF_INDEX.md)、[反例索引](#️-反例索引) |
+| **4. 形式化证明** | 完整证明/证明思路、反例、证明树 | [PROOF_INDEX](./10_proof_index.md)、[反例索引](#️-反例索引) |
 | **5. 思维表征** | 思维导图、矩阵、证明树、决策树、反例 | [思维表征方式全索引](#️-思维表征方式全索引) |
 | **6. 构造性语义** | 操作/指称/公理语义、表达能力边界 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) |
 | **7. 全局统一框架** | 全景思维导图、多维矩阵、全链路图 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) |
@@ -528,7 +528,7 @@ Axiom/规则层
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖、设计论证 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | **构造性语义与表达能力边界**：操作/指称/公理语义、表达能力边界论证 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-| [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
+| [PROOF_INDEX](./10_proof_index.md) | 形式化证明索引、公理编号规范 |
 | [INDEX](./INDEX.md) | 研究笔记完整索引 |
 | [README](./README.md) | 研究笔记主入口 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
@@ -601,7 +601,7 @@ Axiom/规则层
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

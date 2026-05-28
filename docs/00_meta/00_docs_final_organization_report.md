@@ -75,7 +75,7 @@
 
 ```
 docs/
-├── 00_MASTER_INDEX.md                          (34 KB) - 文档总索引
+├── 10_00_master_index.md                          (34 KB) - 文档总索引
 ├── 10_2026_rust_ecosystem_comprehensive_review_with_citations.md  (9 KB) - 生态梳理
 ├── 10_authoritative_sources_and_citations.md      (8 KB) - 权威来源
 ├── 10_migration_guide_2026.md                     (2 KB) - 迁移指南

@@ -164,7 +164,7 @@
 
 | 文件 | 当前大小 | 目标大小 | 优先级 |
 | :--- | :--- | :--- | :--- |
-| 10_tutorial_type_system.md | 2.7KB | 8KB | P1 |
+| 10_tutorial_02_type_system.md | 2.7KB | 8KB | P1 |
 | 10_tutorial_concurrency_models.md | 2.4KB | 8KB | P1 |
 | 10_tutorial_lifetimes.md | 3.6KB | 8KB | P1 |
 | 10_tutorial_borrow_checker.md | 3.9KB | 8KB | P1 |
@@ -404,7 +404,7 @@ Phase 7: 验证报告      [░░░░░░░░░░] 0%  ⏳ 待开始
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

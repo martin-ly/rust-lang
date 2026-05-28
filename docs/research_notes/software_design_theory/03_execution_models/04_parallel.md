@@ -98,7 +98,7 @@ $\mathit{par\_map}(f, S) = \mathit{merge}(\mathit{map}(f, S_1), \ldots, \mathit{
 
 **Axiom PL2**：任务结果合并顺序可无关（如归约满足结合律）；或任务顺序确定。
 
-**定理 PL-T1**：Rayon 等库保证数据竞争自由；由 Send/Sync 与 [borrow_checker_proof](../../../research_notes/formal_methods/borrow_checker_proof.md)。
+**定理 PL-T1**：Rayon 等库保证数据竞争自由；由 Send/Sync 与 [borrow_checker_proof](../../../research_notes/formal_methods/10_borrow_checker_proof.md)。
 
 **引理 PL-L1（无共享可变）**：`par_iter` 闭包捕获为 move 或只读引用；各子任务无共享可变；归约满足结合律时结果确定。
 
@@ -367,7 +367,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

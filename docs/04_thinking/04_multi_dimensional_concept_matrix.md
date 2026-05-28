@@ -516,7 +516,7 @@
 - [知识结构框架](../07_project/07_knowledge_structure_framework.md) - 完整知识结构体系
 - [决策图网](./04_decision_graph_network.md) - 技术选型决策支持
 - [证明图网](./04_proof_graph_network.md) - 形式化证明结构
-- [最佳实践指南](../05_guides/BEST_PRACTICES.md) - 开发最佳实践
+- [最佳实践指南](../05_guides/10_best_practices.md) - 开发最佳实践
 
 ---
 
@@ -594,7 +594,7 @@ ust
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -67,7 +67,7 @@
 本指南对应 `crates/c02_type_system`，涵盖 Rust 类型系统的核心概念与高级特性，包括基本类型、泛型、Trait、型变、模式匹配以及 Rust 1.95 的 `if let guards` 和 `use<..>` 精确捕获。
 
 **前置知识**: [knowledge/01_fundamentals/](../../knowledge/01_fundamentals/) 基础语法
-**速查卡**: [type_system.md](../02_reference/quick_reference/type_system.md)
+**速查卡**: [02_type_system.md](../02_reference/quick_reference/02_type_system.md)
 
 ---
 
@@ -299,7 +299,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- **速查卡**: [type_system.md](../02_reference/quick_reference/type_system.md)
+- **速查卡**: [02_type_system.md](../02_reference/quick_reference/02_type_system.md)
 - **学习教程**: [knowledge/02_intermediate/](../../knowledge/02_intermediate/)
 - **形式化理论**: [research_notes/type_theory/](../research_notes/type_theory/)
 - **源码**: [crates/c02_type_system/](../../crates/c02_type_system/)

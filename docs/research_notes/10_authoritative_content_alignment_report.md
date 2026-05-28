@@ -77,8 +77,8 @@
 | 1.2 Hello, World! | examples/hello_world.rs | ✅ | 代码示例完整 |
 | 1.3 Hello, Cargo! | C02/cargo_package_management/ | ✅ | Cargo详解 |
 | 2. 猜数字游戏 | examples/guessing_game.rs | ✅ | 完整示例 |
-| 3.1 变量与可变性 | ownership_model.md §规则1-4 | ✅ | 形式化定义 |
-| 3.2 数据类型 | type_system_foundations.md | ✅ | 类型规则 |
+| 3.1 变量与可变性 | 10_ownership_model.md §规则1-4 | ✅ | 形式化定义 |
+| 3.2 数据类型 | 10_type_system_foundations.md | ✅ | 类型规则 |
 | 3.3 函数 | C03/control_flow_functions/ | ✅ | 函数语义 |
 | 3.4 注释 | - | ✅ | 基础内容 |
 | 3.5 控制流 | C03/control_flow_functions/ | ✅ | 控制流分析 |
@@ -95,8 +95,8 @@
 
 | Book章节 | 本项目文档 | 对齐状态 | 差距 |
 | :--- | :--- | :--- | :--- |
-| 4.1 What is Ownership? | ownership_model.md | ✅ | 完整 |
-| 4.2 References and Borrowing | borrow_checker_proof.md | ✅ | 完整 |
+| 4.1 What is Ownership? | 10_ownership_model.md | ✅ | 完整 |
+| 4.2 References and Borrowing | 10_borrow_checker_proof.md | ✅ | 完整 |
 | 4.3 The Slice Type | - | ⚠️ | **需补充Slice形式化** |
 
 **识别差距**:
@@ -113,9 +113,9 @@
 
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
-| 10.1 Generic Data Types | type_system_foundations.md | ✅ | 系统F形式化 |
-| 10.2 Traits | trait_system_formalization.md | ✅ | Trait语义 |
-| 10.3 Lifetimes | lifetime_formalization.md | ✅ | 生命周期形式化 |
+| 10.1 Generic Data Types | 10_type_system_foundations.md | ✅ | 系统F形式化 |
+| 10.2 Traits | 10_trait_system_formalization.md | ✅ | Trait语义 |
+| 10.3 Lifetimes | 10_lifetime_formalization.md | ✅ | 生命周期形式化 |
 | 11.1 Test Organization | 05_testing_coverage_guide.md | ✅ | 测试模式 |
 
 **状态**: ✅ 100% 对齐
@@ -128,11 +128,11 @@
 
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
-| 15.1 `Box<T>` | ownership_model.md Def 4.1 | ✅ | Box形式化 |
+| 15.1 `Box<T>` | 10_ownership_model.md Def 4.1 | ✅ | Box形式化 |
 | 15.2 Deref Trait | - | ⚠️ | **需补充Deref形式化** |
 | 15.3 Drop Trait | guides/drop-check-analysis.md | ✅ | Drop检查 |
-| 15.4 `Rc<T>` | ownership_model.md Def 4.2 | ✅ | Rc形式化 |
-| 15.5 `RefCell<T>` | ownership_model.md Def 4.4-4.5 | ✅ | 含1.94 try_map |
+| 15.4 `Rc<T>` | 10_ownership_model.md Def 4.2 | ✅ | Rc形式化 |
+| 15.5 `RefCell<T>` | 10_ownership_model.md Def 4.4-4.5 | ✅ | 含1.94 try_map |
 | 15.6 Reference Cycles | - | ⚠️ | **需补充循环引用形式化** |
 
 **识别差距**:
@@ -151,7 +151,7 @@
 | 16.1 Threads | C05/threads_concurrency/ | ✅ | 线程模型 |
 | 16.2 Message Passing | C05/threads_concurrency/ | ✅ | Channel语义 |
 | 16.3 Shared State | C05/threads_concurrency/ | ✅ | Mutex/Arc |
-| 16.4 Send/Sync | send_sync_formalization.md | ✅ | 线程安全trait |
+| 16.4 Send/Sync | 10_send_sync_formalization.md | ✅ | 线程安全trait |
 
 **状态**: ✅ 100% 对齐
 
@@ -163,7 +163,7 @@
 
 | Book章节 | 本项目文档 | 对齐状态 | 差距 |
 | :--- | :--- | :--- | :--- |
-| 17.1 Futures and Async | async_state_machine.md | ✅ | 状态机形式化 |
+| 17.1 Futures and Async | 10_async_state_machine.md | ✅ | 状态机形式化 |
 | 17.2 Applying Concurrency | C06_async_programming/ | ✅ | async/await |
 | 17.3 Working with Futures | C06_async_programming/ | ✅ | Future组合 |
 | 17.4 Streams | C06_async_programming/ | ✅ | Stream语义 |
@@ -187,11 +187,11 @@
 
 | Reference主题 | 本项目文档 | 状态 |
 | :--- | :--- | :--- |
-| Types | type_system_foundations.md | ✅ |
-| Type Inference | type_system_foundations.md §类型推导 | ✅ |
-| Generic Parameters | type_system_foundations.md §系统F | ✅ |
-| Impl Trait | type_system_foundations.md Def 4.1 | ✅ |
-| Dyn Trait | type_system_foundations.md Def 4.2 | ✅ |
+| Types | 10_type_system_foundations.md | ✅ |
+| Type Inference | 10_type_system_foundations.md §类型推导 | ✅ |
+| Generic Parameters | 10_type_system_foundations.md §系统F | ✅ |
+| Impl Trait | 10_type_system_foundations.md Def 4.1 | ✅ |
+| Dyn Trait | 10_type_system_foundations.md Def 4.2 | ✅ |
 | Const Generics | 10_const_evaluation.md | ✅ |
 
 ### 所有权与借用
@@ -200,10 +200,10 @@
 
 | Reference主题 | 本项目文档 | 状态 |
 | :--- | :--- | :--- |
-| Ownership | ownership_model.md | ✅ |
-| References | borrow_checker_proof.md | ✅ |
-| Lifetimes | lifetime_formalization.md | ✅ |
-| Interior Mutability | ownership_model.md Def 4.4 | ✅ |
+| Ownership | 10_ownership_model.md | ✅ |
+| References | 10_borrow_checker_proof.md | ✅ |
+| Lifetimes | 10_lifetime_formalization.md | ✅ |
+| Interior Mutability | 10_ownership_model.md Def 4.4 | ✅ |
 
 ### 2024 Edition 特性
 >
@@ -230,7 +230,7 @@
 | 差距ID | 描述 | 影响 | 修复文档 |
 | :--- | :--- | :--- | :--- |
 | GAP-SLICE-01 | Slice类型形式化 | Ch 4.3 | 10_slice_formalization.md |
-| GAP-DEREF-01 | Deref trait形式化 | Ch 15.2 | trait_system_formalization.md |
+| GAP-DEREF-01 | Deref trait形式化 | Ch 15.2 | 10_trait_system_formalization.md |
 
 ### P1 中优先级 (下周修复)
 >
@@ -238,8 +238,8 @@
 
 | 差距ID | 描述 | 影响 | 修复文档 |
 | :--- | :--- | :--- | :--- |
-| GAP-CYCLE-01 | 循环引用形式化 | Ch 15.6 | ownership_model.md 扩展 |
-| GAP-ASYNC-01 | Async Trait形式化 | Ch 17.5 | async_state_machine.md 扩展 |
+| GAP-CYCLE-01 | 循环引用形式化 | Ch 15.6 | 10_ownership_model.md 扩展 |
+| GAP-ASYNC-01 | Async Trait形式化 | Ch 17.5 | 10_async_state_machine.md 扩展 |
 
 ### P2 低优先级 (后续版本)
 >
@@ -262,10 +262,10 @@
 
 | 文档 | 声明版本 | 实际状态 | 需更新 |
 | :--- | :--- | :--- | :--- |
-| ownership_model.md | 1.94.0+ | ✅ | 无 |
-| type_system_foundations.md | 1.94.0+ | ✅ | 无 |
-| borrow_checker_proof.md | 1.94.0+ | ⚠️ | 更新至1.94 |
-| lifetime_formalization.md | 1.94.0+ | ⚠️ | 更新至1.94 |
+| 10_ownership_model.md | 1.94.0+ | ✅ | 无 |
+| 10_type_system_foundations.md | 1.94.0+ | ✅ | 无 |
+| 10_borrow_checker_proof.md | 1.94.0+ | ⚠️ | 更新至1.94 |
+| 10_lifetime_formalization.md | 1.94.0+ | ⚠️ | 更新至1.94 |
 
 ---
 
@@ -342,7 +342,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

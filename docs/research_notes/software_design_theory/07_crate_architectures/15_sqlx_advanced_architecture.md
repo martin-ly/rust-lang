@@ -503,7 +503,7 @@ SQLx 的宏在编译期绑定特定数据库类型。如果同一套代码需要
 
 - [Diesel ORM 架构](./03_diesel_architecture.md)
 - [SQLx 主架构分析](./09_sqlx_architecture.md)
-- [类型系统与所有权](../../../../concept/01_foundation/04_type_system.md)
+- [类型系统与所有权](../../../../concept/01_foundation/04_02_type_system.md)
 
 ---
 

@@ -93,9 +93,9 @@
 
 **Def RAII1（RAII 惯用）**：资源生命周期与对象绑定；构造时获取、析构时释放；$\forall r \in \text{Resource},\, \exists x \in \text{Var}: \text{owns}(x, r) \land \text{scope\_end}(x) \rightarrow \text{release}(r)$。
 
-**Axiom RAII1**：RAII 与 [ownership_model](../formal_methods/ownership_model.md) 规则 3 一致；drop 顺序为创建逆序。
+**Axiom RAII1**：RAII 与 [ownership_model](../formal_methods/10_ownership_model.md) 规则 3 一致；drop 顺序为创建逆序。
 
-**定理 RAII-T1**：RAII 实现等价于 ownership 规则 3；`Drop::drop` 在 `scope_end` 时调用；由 [ownership_model](../formal_methods/ownership_model.md) 定理 T3、BOX-T1。
+**定理 RAII-T1**：RAII 实现等价于 ownership 规则 3；`Drop::drop` 在 `scope_end` 时调用；由 [ownership_model](../formal_methods/10_ownership_model.md) 定理 T3、BOX-T1。
 
 ### 1.2 典型场景
 
@@ -178,7 +178,7 @@ let m = Mutex::new(0);
 
 **Axiom NW1**：Newtype 与底层类型布局相同；无运行时开销；类型层面区分语义。
 
-**定理 NW-T1**：Newtype 满足 [ownership_model](../formal_methods/ownership_model.md) 规则 1–3；`T` 的 ownership 语义直接传递；由 Def 1.3 无环、接口一致。
+**定理 NW-T1**：Newtype 满足 [ownership_model](../formal_methods/10_ownership_model.md) 规则 1–3；`T` 的 ownership 语义直接传递；由 Def 1.3 无环、接口一致。
 
 ### 2.2 典型场景
 
@@ -320,7 +320,7 @@ impl std::ops::Add for Meter {
 
 **Def EH1（Error handling 惯用）**：错误通过 `Result<T, E>` 显式传播；`?` 操作符实现早期返回；$\text{query}(e) \equiv \text{match } e \text{ with Ok}(v) \rightarrow v \mid \text{Err}(e) \rightarrow \text{return Err}(e.\text{into}())$。
 
-**定理 EH-T1**：`?` 与 [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) Def QUERY1 一致；错误传播不违反借用规则。
+**定理 EH-T1**：`?` 与 [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) Def QUERY1 一致；错误传播不违反借用规则。
 
 ### 6.2 典型场景
 
@@ -507,7 +507,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 | 需求 | 选型 | 形式化对应 |
 | :--- | :--- | :--- |
-| 独占堆 | `Box<T>` | [ownership_model](../formal_methods/ownership_model.md) Def BOX1 |
+| 独占堆 | `Box<T>` | [ownership_model](../formal_methods/10_ownership_model.md) Def BOX1 |
 | 单线程共享 | `Rc<T>` | Def RC1 |
 | 跨线程共享 | `Arc<T>` | Def ARC1 |
 | 内部可变单线程 | `RefCell<T>` | Def REFCELL1 |
@@ -520,8 +520,8 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/)：Rust Idioms 官方来源
-- [ownership_model](../formal_methods/ownership_model.md)
-- [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) Def QUERY1
+- [ownership_model](../formal_methods/10_ownership_model.md)
+- [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) Def QUERY1
 - [01_design_patterns_formal](01_design_patterns_formal/README.md)
 
 ---
@@ -558,7 +558,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

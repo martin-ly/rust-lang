@@ -558,7 +558,7 @@ exclude-files = [
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/10_00_master_index.md) |
 | :--- | :--- |
 | :--- | :--- |
 | **相关指南** | [05_performance_testing_report.md](./05_performance_testing_report.md) |

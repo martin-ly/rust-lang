@@ -161,7 +161,7 @@ cargo prusti
 cargo prusti --file src/lib.rs
 ```
 
-**与形式化衔接**：Prusti 可验证 [ownership_model](formal_methods/ownership_model.md) 定理 T2（移动语义）、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) 定理 T1（借用规则）；`#[requires]`/`#[ensures]` 对应前置/后置条件。
+**与形式化衔接**：Prusti 可验证 [ownership_model](formal_methods/10_ownership_model.md) 定理 T2（移动语义）、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 定理 T1（借用规则）；`#[requires]`/`#[ensures]` 对应前置/后置条件。
 
 **相关资源**:
 
@@ -214,7 +214,7 @@ cargo kani
 cargo kani --function test_abs
 ```
 
-**与形式化衔接**：Kani 可验证 [borrow_checker_proof](formal_methods/borrow_checker_proof.md) 无数据竞争、[ownership_model](formal_methods/ownership_model.md) 内存安全；`kani::any()` 对应全称量化。
+**与形式化衔接**：Kani 可验证 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 无数据竞争、[ownership_model](formal_methods/10_ownership_model.md) 内存安全；`kani::any()` 对应全称量化。
 
 **相关资源**:
 
@@ -404,7 +404,7 @@ MIRIFLAGS="-Zmiri-tag-raw-pointers" cargo miri test
 cargo miri test --test my_test
 ```
 
-**与形式化衔接**：Miri 检测违反 [ownership_model](formal_methods/ownership_model.md)、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) 的 UB；
+**与形式化衔接**：Miri 检测违反 [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 的 UB；
 与 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) 契约体系对应。
 
 **相关资源**:
@@ -785,7 +785,7 @@ cargo expand > expanded.rs
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

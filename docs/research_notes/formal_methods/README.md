@@ -33,8 +33,8 @@
 
 **与子文档衔接**：
 
-- [borrow_checker_proof](./borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1、定理 MATCH-T1/FOR-T1/QUERY-T1
-- [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) 定理 T2（保持性）、T3（类型安全）
+- [borrow_checker_proof](./10_borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1、定理 MATCH-T1/FOR-T1/QUERY-T1
+- [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) 定理 T2（保持性）、T3（类型安全）
 
 ---
 
@@ -115,7 +115,7 @@
 - 如何证明所有权系统保证内存安全？
 - 所有权转移的语义如何形式化表示？
 
-**相关笔记**: [ownership_model.md](./ownership_model.md)
+**相关笔记**: [10_ownership_model.md](./10_ownership_model.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -131,7 +131,7 @@
 - 如何证明借用检查器保证数据竞争自由？
 - 借用规则与所有权规则的关系如何形式化？
 
-**相关笔记**: [borrow_checker_proof.md](./borrow_checker_proof.md)
+**相关笔记**: [10_borrow_checker_proof.md](./10_borrow_checker_proof.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -147,7 +147,7 @@
 - 如何证明异步执行的安全性？
 - async/await 的语义如何形式化表示？
 
-**相关笔记**: [async_state_machine.md](./async_state_machine.md)
+**相关笔记**: [10_async_state_machine.md](./10_async_state_machine.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -163,7 +163,7 @@
 - 如何证明生命周期系统保证引用有效性？
 - 生命周期推断算法如何形式化？
 
-**相关笔记**: [lifetime_formalization.md](./lifetime_formalization.md)
+**相关笔记**: [10_lifetime_formalization.md](./10_lifetime_formalization.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -179,7 +179,7 @@
 - 如何证明自引用类型的安全性？
 - Pin 如何保证内存位置的稳定性？
 
-**相关笔记**: [pin_self_referential.md](./pin_self_referential.md)
+**相关笔记**: [10_pin_self_referential.md](./10_pin_self_referential.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -195,7 +195,7 @@
 - 与 thread::spawn、Future、Arc 的衔接？
 - 反例（Rc !Send、Cell !Sync）与数据竞争自由？
 
-**相关笔记**: [send_sync_formalization.md](./send_sync_formalization.md)
+**相关笔记**: [10_send_sync_formalization.md](./10_send_sync_formalization.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -234,12 +234,12 @@
 
 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
-| **所有权** | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 结构归纳、反证 | [ownership_model](./ownership_model.md) 使用已移动值、双重释放 |
-| **借用** | 规则 5–8 | T1 数据竞争自由, T2 | 规则归纳 | [borrow_checker_proof](./borrow_checker_proof.md) 双重可变借用 |
-| **生命周期** | Axiom LF1–LF2, Def 1.4, $\ell \subseteq \text{lft}$ | LF-T1–T3 引用有效性 | 三步骤、约束求解 | [lifetime_formalization](./lifetime_formalization.md) 返回局部引用、存储短生命周期 |
-| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | 归纳+案例分析 | [async_state_machine](./async_state_machine.md) 非 Send 跨线程、移动未 Pin |
-| **Pin** | Def 1.1–2.2（位置稳定、自引用） | T1–T3 Pin 保证/自引用/投影 | 类型系统、位置稳定 | [pin_self_referential](./pin_self_referential.md) 移动未 Pin 自引用 |
-| **Send/Sync** | Def SEND1, SYNC1；SYNC-L1 $T:\text{Sync} \Leftrightarrow \&T:\text{Send}$ | SEND-T1, SYNC-T1, SEND-SYNC-T1 | 与 borrow/async 衔接 | [send_sync_formalization](./send_sync_formalization.md) Rc !Send、Cell !Sync、非 Send spawn |
+| **所有权** | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 结构归纳、反证 | [ownership_model](./10_ownership_model.md) 使用已移动值、双重释放 |
+| **借用** | 规则 5–8 | T1 数据竞争自由, T2 | 规则归纳 | [borrow_checker_proof](./10_borrow_checker_proof.md) 双重可变借用 |
+| **生命周期** | Axiom LF1–LF2, Def 1.4, $\ell \subseteq \text{lft}$ | LF-T1–T3 引用有效性 | 三步骤、约束求解 | [lifetime_formalization](./10_lifetime_formalization.md) 返回局部引用、存储短生命周期 |
+| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | 归纳+案例分析 | [async_state_machine](./10_async_state_machine.md) 非 Send 跨线程、移动未 Pin |
+| **Pin** | Def 1.1–2.2（位置稳定、自引用） | T1–T3 Pin 保证/自引用/投影 | 类型系统、位置稳定 | [pin_self_referential](./10_pin_self_referential.md) 移动未 Pin 自引用 |
+| **Send/Sync** | Def SEND1, SYNC1；SYNC-L1 $T:\text{Sync} \Leftrightarrow \&T:\text{Send}$ | SEND-T1, SYNC-T1, SEND-SYNC-T1 | 与 borrow/async 衔接 | [send_sync_formalization](./10_send_sync_formalization.md) Rc !Send、Cell !Sync、非 Send spawn |
 | **Actor模型** | Actor := (State, Behavior, Mailbox) | ACTOR-ISOLATION, ACTOR-NO-DATA-RACE, ACTOR-FAULT-ISOLATION | 结构归纳、Actor演算 | [ACTOR_MODEL_DEEP_DIVE](../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) 循环Ask、共享状态、Actor泄漏 |
 
 *控制流*：A-CF1 见本 README「控制流形式化」；变量 Def 1.4/1.5 见 ownership_model。
@@ -271,15 +271,15 @@
 | 文档 | 核心公理/定理 | 证明要点 |
 | :--- | :--- | :--- |
 | [00_completeness_gaps](./00_completeness_gaps.md) | Def FMG1、定理 FMG-T1 | 完备性缺口声明 |
-| [ownership_model](./ownership_model.md) | 所有权规则 1–8、T2/T3、RC/ARC/CELL/REFCELL/BOX、MAYBEUNINIT/ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 唯一性、RAII、Rc/Arc、Cell/RefCell、MaybeUninit、atomic、union、transmute、Drop/Deref、repr、const &mut static |
-| [borrow_checker_proof](./borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 互斥借用、通道、Mutex、裸指针、unsafe 契约、match/for/?、extern、C variadic |
-| [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、NLL |
-| [async_state_machine](./async_state_machine.md) | T6.1–T6.3 状态一致性、并发安全、进度 | Future 状态机、Pin |
-| [pin_self_referential](./pin_self_referential.md) | Pin 不变式、T1–T3 自引用安全 | 堆/栈区分、!Unpin |
-| [send_sync_formalization](./send_sync_formalization.md) | Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1 | 跨线程转移/共享、与 spawn/Future/Arc 衔接 |
+| [ownership_model](./10_ownership_model.md) | 所有权规则 1–8、T2/T3、RC/ARC/CELL/REFCELL/BOX、MAYBEUNINIT/ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 唯一性、RAII、Rc/Arc、Cell/RefCell、MaybeUninit、atomic、union、transmute、Drop/Deref、repr、const &mut static |
+| [borrow_checker_proof](./10_borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 互斥借用、通道、Mutex、裸指针、unsafe 契约、match/for/?、extern、C variadic |
+| [lifetime_formalization](./10_lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、NLL |
+| [async_state_machine](./10_async_state_machine.md) | T6.1–T6.3 状态一致性、并发安全、进度 | Future 状态机、Pin |
+| [pin_self_referential](./10_pin_self_referential.md) | Pin 不变式、T1–T3 自引用安全 | 堆/栈区分、!Unpin |
+| [send_sync_formalization](./10_send_sync_formalization.md) | Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1 | 跨线程转移/共享、与 spawn/Future/Arc 衔接 |
 | [ACTOR_MODEL_DEEP_DIVE](../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) | Actor形式语义、10+定理、15+代码示例 | Actor隔离定理、死锁自由、故障隔离、反例分析 |
 
-本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)、[PROOF_INDEX](../PROOF_INDEX.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 衔接。
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)、[PROOF_INDEX](../10_proof_index.md)、[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) 衔接。
 
 ---
 
@@ -290,12 +290,12 @@
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [x] [完备性缺口](./00_completeness_gaps.md) - 缺口声明与路线图
-- [x] [所有权模型形式化](./ownership_model.md) - 100%；含 RC/ARC/CELL/REFCELL/BOX 扩展
-- [x] [借用检查器证明](./borrow_checker_proof.md) - 100%；含 CHAN/MUTEX/RAW 扩展
-- [x] [异步状态机形式化](./async_state_machine.md) - 100%
-- [x] [生命周期形式化](./lifetime_formalization.md) - 100%
-- [x] [Pin 和自引用类型形式化](./pin_self_referential.md) - 100%
-- [x] [Send/Sync 形式化](./send_sync_formalization.md) - 100%；Def SEND1/SYNC1、SEND-T1/SYNC-T1、与 spawn/Future/Arc 衔接
+- [x] [所有权模型形式化](./10_ownership_model.md) - 100%；含 RC/ARC/CELL/REFCELL/BOX 扩展
+- [x] [借用检查器证明](./10_borrow_checker_proof.md) - 100%；含 CHAN/MUTEX/RAW 扩展
+- [x] [异步状态机形式化](./10_async_state_machine.md) - 100%
+- [x] [生命周期形式化](./10_lifetime_formalization.md) - 100%
+- [x] [Pin 和自引用类型形式化](./10_pin_self_referential.md) - 100%
+- [x] [Send/Sync 形式化](./10_send_sync_formalization.md) - 100%；Def SEND1/SYNC1、SEND-T1/SYNC-T1、与 spawn/Future/Arc 衔接
 
 ---
 
@@ -382,7 +382,7 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 | FLS 章节 | 直接链接 | 本目录对应 |
 | :--- | :--- | :--- |
 | [Ch. 5 Patterns](https://spec.ferrocene.dev/patterns.html) | 5.1 [Refutability](https://spec.ferrocene.dev/patterns.html#refutability)、5.13 [Pattern Matching](https://spec.ferrocene.dev/patterns.html#pattern-matching) | [02_reference/quick_reference/02_control_flow_functions_cheatsheet.md](../../02_reference/quick_reference/02_control_flow_functions_cheatsheet.md) |
-| [Ch. 15 Ownership and Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | 15.1 [Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html#ownership)、15.4 [Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)、15.6–15.9 [Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html#destruction) | [ownership_model](./ownership_model.md)、[borrow_checker_proof](./borrow_checker_proof.md) Def OW1、规则 1–8、DROP1 |
+| [Ch. 15 Ownership and Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | 15.1 [Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html#ownership)、15.4 [Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)、15.6–15.9 [Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html#destruction) | [ownership_model](./10_ownership_model.md)、[borrow_checker_proof](./10_borrow_checker_proof.md) Def OW1、规则 1–8、DROP1 |
 | [Ch. 16 Exceptions and Errors](https://spec.ferrocene.dev/exceptions-and-errors.html) | 16.1 [Panic](https://spec.ferrocene.dev/exceptions-and-errors.html#panic)、16.2 [Abort](https://spec.ferrocene.dev/exceptions-and-errors.html#abort) | [02_reference/quick_reference/02_error_handling_cheatsheet.md](../../02_reference/quick_reference/02_error_handling_cheatsheet.md)、[EDGE_CASES_AND_SPECIAL_CASES](../../02_reference/02_edge_cases_and_special_cases.md) |
 | [Ch. 17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | 17.1 [Send/Sync](https://spec.ferrocene.dev/concurrency.html#send-and-sync)、17.2 [Atomics](https://spec.ferrocene.dev/concurrency.html#atomics)、17.3 [Async](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation) | CHAN-T1、MUTEX-T1、ATOMIC1、SPAWN-T1 |
 | [Ch. 19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | 完整章节 | UNSAFE1、RAW1、EXTERN1 |
@@ -425,7 +425,7 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 
 ### 创建新的研究笔记
 
-1. 复制模板文件（如 `ownership_model.md`）
+1. 复制模板文件（如 `10_ownership_model.md`）
 2. 填写研究问题和目标
 3. 添加形式化定义和证明
 4. 提供代码示例和验证
@@ -477,7 +477,7 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

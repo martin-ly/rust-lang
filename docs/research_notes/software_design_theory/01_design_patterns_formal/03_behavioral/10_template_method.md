@@ -145,7 +145,7 @@ $$h_i\text{ 可有无默认实现；}\mathit{impl}\text{ 可选择性覆盖}$$
 >
 > **[来源: Rust Official Docs]**
 
-trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 [trait_system_formalization](../../../type_theory/trait_system_formalization.md)。
+trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 [trait_system_formalization](../../../type_theory/10_trait_system_formalization.md)。
 
 **证明**：
 
@@ -515,7 +515,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

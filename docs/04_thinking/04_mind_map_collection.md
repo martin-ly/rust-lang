@@ -1105,7 +1105,7 @@ mindmap
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
+- [10_proof_index.md](../research_notes/10_proof_index.md) - 形式化证明索引
 - [10_language_semantics_expressiveness.md](../research_notes/10_language_semantics_expressiveness.md) - 语言语义与表达能力
 - [10_theoretical_and_argumentation_system_architecture.md](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 理论体系架构
 
@@ -1198,7 +1198,7 @@ ust
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

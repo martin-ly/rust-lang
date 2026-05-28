@@ -177,7 +177,7 @@ mindmap
 | **L4 单态化** | Monomorphization：代码生成 | 规则：每个 T 生成独立实例 | 定理 G4：零运行时开销 |
 | **L5 高阶** | HRTB：高阶 Trait Bound | 规则：∀'a, T: Trait<'a> | 定理 G5：生命周期泛化 |
 
-> 形式化理论详见：[类型构造能力](../../research_notes/type_theory/10_construction_capability.md) | [Trait 系统形式化](../../research_notes/type_theory/trait_system_formalization.md)
+> 形式化理论详见：[类型构造能力](../../research_notes/type_theory/10_construction_capability.md) | [Trait 系统形式化](../../research_notes/type_theory/10_trait_system_formalization.md)
 
 ---
 
@@ -506,7 +506,7 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [类型系统速查卡](./type_system.md)
+- [类型系统速查卡](./02_type_system.md)
 - [Rust 官方文档 - 泛型](https://doc.rust-lang.org/book/ch10-00-generics.html)
 
 ---
@@ -587,10 +587,10 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 
 > **[来源: IEEE - Programming Language Standards]**
 
-- [类型系统速查卡](./type_system.md) - 类型系统基础
-- [Trait 系统速查卡](./type_system.md#trait-系统) - Trait 与泛型
-- [生命周期速查卡](./type_system.md#生命周期) - 生命周期参数
-- [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与泛型
+- [类型系统速查卡](./02_type_system.md) - 类型系统基础
+- [Trait 系统速查卡](./02_type_system.md#trait-系统) - Trait 与泛型
+- [生命周期速查卡](./02_type_system.md#生命周期) - 生命周期参数
+- [所有权系统速查卡](./02_ownership_cheatsheet.md) - 所有权与泛型
 
 ---
 
@@ -867,7 +867,7 @@ fn main() {
 
 - [类型系统完备性缺口](../../research_notes/type_theory/00_completeness_gaps.md) — 泛型相关的完备性保证
 - [类型构造能力](../../research_notes/type_theory/10_construction_capability.md) — 泛型类型的构造性分析
-- [Trait 系统形式化](../../research_notes/type_theory/trait_system_formalization.md) — Trait 约束的形式化理论
+- [Trait 系统形式化](../../research_notes/type_theory/10_trait_system_formalization.md) — Trait 约束的形式化理论
 
 ---
 

@@ -174,7 +174,7 @@ where
 
 - [控制流与函数速查卡](./02_control_flow_functions_cheatsheet.md)
 - [迭代器速查卡](./02_collections_iterators_cheatsheet.md)
-- [类型系统速查卡](./type_system.md)
+- [类型系统速查卡](./02_type_system.md)
 
 ---
 

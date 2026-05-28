@@ -596,10 +596,10 @@ let b: Result<i8, _> = a.try_into();  // Err, 溢出
 
 | 概念 | 形式化定义 | 文档位置 |
 | :--- | :--- | :--- |
-| 类型推导 | `Γ ⊢ e : τ` | type_system_foundations.md |
-| Trait | `impl Trait for Type` | trait_system_formalization.md |
-| 泛型 | `∀T. F<T>` | variance_theory.md |
-| 模式匹配 | 穷尽性检查 | type_system_foundations.md |
+| 类型推导 | `Γ ⊢ e : τ` | 10_type_system_foundations.md |
+| Trait | `impl Trait for Type` | 10_trait_system_formalization.md |
+| 泛型 | `∀T. F<T>` | 10_variance_theory.md |
+| 模式匹配 | 穷尽性检查 | 10_type_system_foundations.md |
 
 ---
 
@@ -837,7 +837,7 @@ Rust类型系统
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

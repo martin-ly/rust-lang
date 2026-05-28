@@ -224,7 +224,7 @@ fn type_safety_theorem() {
 
 - [所有权证明树](./10_proof_tree_ownership.md)
 - [借用证明树](./10_proof_tree_borrow.md)
-- [类型系统基础](./type_theory/type_system_foundations.md)
+- [类型系统基础](./type_theory/10_type_system_foundations.md)
 
 ---
 
@@ -264,7 +264,7 @@ fn type_safety_theorem() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -143,8 +143,8 @@
 3. **Rust's Type System**
    - 作者: Various
    - 摘要: Rust 类型系统的相关研究
-   - 相关: [类型系统基础](./type_theory/type_system_foundations.md)
-   - 形式化衔接: [00_completeness_gaps](type_theory/00_completeness_gaps.md)、[PROOF_INDEX](./PROOF_INDEX.md)
+   - 相关: [类型系统基础](./type_theory/10_type_system_foundations.md)
+   - 形式化衔接: [00_completeness_gaps](type_theory/00_completeness_gaps.md)、[PROOF_INDEX](./10_proof_index.md)
 
 ### 性能优化相关论文
 
@@ -418,12 +418,12 @@
 
 | 资源类型 | 形式化文档 | 可验证/支撑的定理 |
 | :--- | :--- | :--- |
-| RustBelt、Stacked Borrows | [ownership_model](formal_methods/ownership_model.md)、[borrow_checker_proof](formal_methods/borrow_checker_proof.md)、[coq_skeleton](coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](./10_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
-| Rust 类型系统研究 | [type_system_foundations](type_theory/type_system_foundations.md)、[trait_system_formalization](type_theory/trait_system_formalization.md) | 类型保持、coherence、RPITIT |
+| RustBelt、Stacked Borrows | [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[coq_skeleton](coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](./10_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
+| Rust 类型系统研究 | [type_system_foundations](type_theory/10_type_system_foundations.md)、[trait_system_formalization](type_theory/10_trait_system_formalization.md) | 类型保持、coherence、RPITIT |
 | Prusti、Kani | [formal_methods](formal_methods/README.md) | 所有权、借用、unsafe 契约 |
 | Criterion、Miri | [experiments/README](experiments/README.md) | EX-T1、EX-T2；内存安全验证 |
 
-详见 [PROOF_INDEX](./PROOF_INDEX.md) 全证明索引、
+详见 [PROOF_INDEX](./10_proof_index.md) 全证明索引、
 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md) 国际对标、
 [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md) 批判性分析与推进计划、
 [practical_applications](./10_practical_applications.md) 案例与定理对应。
@@ -503,7 +503,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

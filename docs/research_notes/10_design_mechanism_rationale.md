@@ -196,7 +196,7 @@ $$\text{HeapPin}(T) \equiv \text{Pin}[\Box[T]]$$
 **定理 1（堆固定满足 Pin 保证）**
 $$\forall T.\, \text{HeapPin}(T) \Rightarrow \neg \text{move}(\ast \text{Box::pin}(t))$$
 
-*证明*：`Box` 的所有权保证其指向的堆块不被移动；`Pin` 包装后禁止通过 `Pin` 接口进行移动操作。见 [pin_self_referential](formal_methods/pin_self_referential.md) 定理 1。
+*证明*：`Box` 的所有权保证其指向的堆块不被移动；`Pin` 包装后禁止通过 `Pin` 接口进行移动操作。见 [pin_self_referential](formal_methods/10_pin_self_referential.md) 定理 1。
 
 **定理 2（栈固定仅对 Unpin 安全）**
 $$T : \text{Unpin} \Leftrightarrow \text{StackPin}(T)\ \text{safe}$$
@@ -258,13 +258,13 @@ Pin 使用场景决策树
 
 **Axiom OM1**：每个值恰有一个所有者；所有者离开作用域时值被 drop。
 
-**定理 OM-T1**：默认移动 + 显式 Copy 保证无双重释放、无泄漏。*证明*：由 [ownership_model](formal_methods/ownership_model.md) T2、T3；移动转移所有权，Copy 创建副本，二者均由唯一所有者管理。∎
+**定理 OM-T1**：默认移动 + 显式 Copy 保证无双重释放、无泄漏。*证明*：由 [ownership_model](formal_methods/10_ownership_model.md) T2、T3；移动转移所有权，Copy 创建副本，二者均由唯一所有者管理。∎
 
 **论证**：
 
 - 若默认复制：大对象、RAII 资源复制语义不明确，易泄漏或双重释放。
 - 若默认移动：每个值恰有一个所有者，作用域结束自动释放；复制需显式，语义清晰。
-- 形式化：见 [ownership_model](formal_methods/ownership_model.md) 定理 2、3。
+- 形式化：见 [ownership_model](formal_methods/10_ownership_model.md) 定理 2、3。
 
 **反例**：使用已移动值 → 编译错误。
 
@@ -280,14 +280,14 @@ Pin 使用场景决策树
 
 **Def BC1（借用互斥）**：对同一位置 $x$，$\text{borrow}_{\text{mut}}(x)$ 有效时，$\text{borrow}(x)$ 与 $\text{borrow}_{\text{mut}}(x)$ 均不可并存。
 
-**Axiom BC1**：借用规则 5–8（见 [borrow_checker_proof](formal_methods/borrow_checker_proof.md)）静态可检查；违反则编译错误。
+**Axiom BC1**：借用规则 5–8（见 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)）静态可检查；违反则编译错误。
 
-**定理 BC-T1**：满足借用规则则数据竞争自由。*证明*：由 [borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1；互斥保证无并发写。∎
+**定理 BC-T1**：满足借用规则则数据竞争自由。*证明*：由 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) T1；互斥保证无并发写。∎
 
 **论证**：
 
 - 互斥规则：$\text{borrow}_{\text{mut}}(x) \Rightarrow \neg \text{borrow}(x) \land \neg \text{borrow}_{\text{mut}}(x)$（其他引用）。
-- 由 [borrow_checker_proof](formal_methods/borrow_checker_proof.md) 定理 1：满足规则则数据竞争自由。
+- 由 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 定理 1：满足规则则数据竞争自由。
 
 **反例**：双重可变借用 → 编译错误。
 
@@ -304,7 +304,7 @@ Pin 使用场景决策树
 **论证**：
 
 - 推断可覆盖多数情况；复杂泛型、多参数、返回引用时需显式。
-- 形式化：$\&'a T$ 要求 $'a \subseteq \text{lft}(\text{referent})$。见 [lifetime_formalization](formal_methods/lifetime_formalization.md)。
+- 形式化：$\&'a T$ 要求 $'a \subseteq \text{lft}(\text{referent})$。见 [lifetime_formalization](formal_methods/10_lifetime_formalization.md)。
 
 **反例**：返回局部引用 → 编译错误。
 
@@ -322,7 +322,7 @@ Pin 使用场景决策树
 - 逆变：反向，如 `fn(T) -> R` 的参数
 - 不变：无子类型，如 `&mut T`、`Cell<T>`
 
-**论证**：见 [variance_theory](type_theory/variance_theory.md)。若 `&mut T` 协变→可写入短生命周期值→悬垂。若 `fn(T)` 参数协变→可传入长寿引用期望短寿→悬垂。
+**论证**：见 [variance_theory](type_theory/10_variance_theory.md)。若 `&mut T` 协变→可写入短生命周期值→悬垂。若 `fn(T)` 参数协变→可传入长寿引用期望短寿→悬垂。
 
 **反例**：`&mut T` 协变、`fn(T)` 参数协变、`Cell<T>` 协变 → 悬垂。
 
@@ -340,7 +340,7 @@ Pin 使用场景决策树
 
 - 自引用 Future 若被移动→悬垂。
 - Pin 保证 poll 间不移动；`Box::pin` 在堆上固定，满足 Pin 保证。
-- 见 [async_state_machine](formal_methods/async_state_machine.md)、[pin_self_referential](formal_methods/pin_self_referential.md)。
+- 见 [async_state_machine](formal_methods/10_async_state_machine.md)、[pin_self_referential](formal_methods/10_pin_self_referential.md)。
 
 **反例**：未 Pin 自引用 Future、非 Send 跨线程 → 编译错误或 UB。
 
@@ -358,7 +358,7 @@ Pin 使用场景决策树
 
 - **Send**：$T : \text{Send} \Leftrightarrow \forall t : T.\, \text{transfer}(t, \text{thread}_1, \text{thread}_2)$ 安全。若含非 Send 字段（如 `Rc`）则不可跨线程传递，否则可能多线程持有同一 `Rc` 导致竞态。
 - **Sync**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$。即多线程共享 `&T` 时，`T` 内部无可变全局状态或需同步保护。
-- **形式化专篇**：[send_sync_formalization](formal_methods/send_sync_formalization.md) Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1、与 spawn/Future/Arc 衔接；[async_state_machine](formal_methods/async_state_machine.md) 定理 6.2 依赖 Send/Sync 约束。
+- **形式化专篇**：[send_sync_formalization](formal_methods/10_send_sync_formalization.md) Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1、与 spawn/Future/Arc 衔接；[async_state_machine](formal_methods/10_async_state_machine.md) 定理 6.2 依赖 Send/Sync 约束。
 
 **决策树**：需跨线程传递？→ `T : Send`；需多线程共享 `&T`？→ `T : Sync`。
 
@@ -378,7 +378,7 @@ Pin 使用场景决策树
 
 - **vtable**：每个 `dyn Trait` 携带指向方法的函数指针表；调用时通过偏移查找。
 - **对象安全**：若方法返回 `Self`，则 vtable 无法为「未知具体类型」提供统一入口；若泛型方法，则需无限多 vtable 条目。故限制：返回类型不含 `Self`、方法无类型参数等。
-- 形式化：见 [trait_system_formalization](type_theory/trait_system_formalization.md) 定理 1–3。
+- 形式化：见 [trait_system_formalization](type_theory/10_trait_system_formalization.md) 定理 1–3。
 
 **决策树**：需运行时多态？→ `dyn Trait`；需统一类型存储？→ `Box<dyn Trait>` 或 `&dyn Trait`；Trait 是否对象安全？→ 检查规则。
 
@@ -497,7 +497,7 @@ Pin 使用场景决策树
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [pin_self_referential](formal_methods/pin_self_referential.md) | Pin 形式化定义、定理、反例 |
+| [pin_self_referential](formal_methods/10_pin_self_referential.md) | Pin 形式化定义、定理、反例 |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理、语义归纳 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射 |
@@ -552,7 +552,7 @@ Pin 使用场景决策树
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

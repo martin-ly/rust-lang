@@ -411,7 +411,7 @@
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [研究笔记主索引](./README.md)
-- [形式化证明索引](./PROOF_INDEX.md) — 105+ 证明、formal_methods Phase 1–6、类型理论阶段 1–7、设计模式 23 种
+- [形式化证明索引](./10_proof_index.md) — 105+ 证明、formal_methods Phase 1–6、类型理论阶段 1–7、设计模式 23 种
 - [系统总结](./10_system_summary.md)
 - [研究进展跟踪](./10_progress_tracking.md)
 - [研究任务清单](./10_task_checklist.md)
@@ -429,7 +429,7 @@
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [质量检查清单](./10_quality_checklist.md)
-- [最佳实践](./BEST_PRACTICES.md)
+- [最佳实践](./10_best_practices.md)
 - [贡献指南](./10_contributing.md)
 
 ---
@@ -475,7 +475,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

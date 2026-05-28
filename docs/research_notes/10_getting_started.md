@@ -227,9 +227,9 @@
 
 根据您的兴趣选择研究主题：
 
-- **想理解所有权系统** → [所有权模型形式化](./formal_methods/ownership_model.md)（Def OW1、定理 T2/T3、RC-T1、BOX-T1）
-- **想理解借用与生命周期** → [借用检查器证明](./formal_methods/borrow_checker_proof.md)（T1、CHAN-T1、MUTEX-T1）
-- **想理解类型系统** → [类型系统基础](./type_theory/type_system_foundations.md)
+- **想理解所有权系统** → [所有权模型形式化](./formal_methods/10_ownership_model.md)（Def OW1、定理 T2/T3、RC-T1、BOX-T1）
+- **想理解借用与生命周期** → [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)（T1、CHAN-T1、MUTEX-T1）
+- **想理解类型系统** → [类型系统基础](./type_theory/10_type_system_foundations.md)
 - **想优化性能** → [性能基准测试](./experiments/10_performance_benchmarks.md)（含 Criterion 可运行基准）
 
 ### 3.2 阅读研究笔记
@@ -348,7 +348,7 @@
 1. **了解系统** → 阅读 [主索引](./README.md) 和 [系统总结](10_system_summary.md)
 2. **第一个可运行示例** → [10_example.md](./10_example.md) 含所有权、借用、生命周期的完整代码（可直接复制运行）
 3. **选择主题** → 从 [快速参考](./10_quick_reference.md) 选择感兴趣的主题
-4. **阅读笔记** → 阅读相关研究笔记（所有权 → [ownership_model](./formal_methods/ownership_model.md)）
+4. **阅读笔记** → 阅读相关研究笔记（所有权 → [ownership_model](./formal_methods/10_ownership_model.md)）
 5. **实践应用** → 查看 [实际应用案例](./10_practical_applications.md) 的案例 1–3（含 Axum、mpsc、SafeVec 代码）
 
 ### 进阶路径
@@ -454,7 +454,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

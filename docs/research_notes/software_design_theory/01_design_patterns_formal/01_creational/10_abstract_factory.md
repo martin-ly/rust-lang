@@ -144,7 +144,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 >
 > **[来源: Rust Official Docs]**
 
-由 [trait_system_formalization](../../../type_theory/trait_system_formalization.md)，trait 解析保证多态工厂调用类型安全。
+由 [trait_system_formalization](../../../type_theory/10_trait_system_formalization.md)，trait 解析保证多态工厂调用类型安全。
 
 **证明**：
 
@@ -180,7 +180,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 >
 > **[来源: Rust Official Docs]**
 
-由 [ownership_model](../../../formal_methods/ownership_model.md) T2，同一工厂创建的产品族所有权独立且兼容。
+由 [ownership_model](../../../formal_methods/10_ownership_model.md) T2，同一工厂创建的产品族所有权独立且兼容。
 
 **证明**：
 
@@ -509,7 +509,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

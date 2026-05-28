@@ -6,7 +6,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [lifetime_formalization.md](../../../research_notes/formal_methods/lifetime_formalization.md)
+> 内容已整合至： [10_lifetime_formalization.md](../../../research_notes/formal_methods/10_lifetime_formalization.md)
 
 [返回主索引](../../00_master_index.md)
 
@@ -18,10 +18,10 @@
 
 | 文档 | 路径 | 内容 |
 | :--- | :--- | :--- |
-| **生命周期形式化** | [../../../research_notes/formal_methods/lifetime_formalization.md](../../../research_notes/formal_methods/lifetime_formalization.md) | 区域理论、生命周期约束 |
-| **型变理论** | [../../../research_notes/type_theory/variance_theory.md](../../../research_notes/type_theory/variance_theory.md) | 生命周期与子类型关系 |
-| **借用检查器证明** | [../../../research_notes/formal_methods/borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md) | 生命周期验证的形式化 |
-| **证明索引** | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) | 生命周期相关证明 |
+| **生命周期形式化** | [../../../research_notes/formal_methods/10_lifetime_formalization.md](../../../research_notes/formal_methods/10_lifetime_formalization.md) | 区域理论、生命周期约束 |
+| **型变理论** | [../../../research_notes/type_theory/10_variance_theory.md](../../../research_notes/type_theory/10_variance_theory.md) | 生命周期与子类型关系 |
+| **借用检查器证明** | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) | 生命周期验证的形式化 |
+| **证明索引** | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) | 生命周期相关证明 |
 | **工具指南** | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) | 生命周期验证工具 |
 
 ---

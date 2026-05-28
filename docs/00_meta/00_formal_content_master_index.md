@@ -52,8 +52,8 @@
 |------|------|------|
 | ⭐⭐⭐ 完整理论 | [`rust-ownership-decidability/01-core-concepts/`](../rust-ownership-decidability/01-core-concepts/) | 所有权规则、借用系统、生命周期、内部可变性 |
 | ⭐⭐⭐ Coq 证明 | [`rust-ownership-decidability/formal-foundations/proofs/`](../rust-ownership-decidability/formal-foundations/proofs/) | 类型安全、进展性、保持性、可判定性 |
-| ⭐⭐ 研究笔记 | [`research_notes/formal_methods/ownership_model.md`](../research_notes/formal_methods/ownership_model.md) | 所有权模型概述 |
-| ⭐⭐ 研究笔记 | [`research_notes/formal_methods/borrow_checker_proof.md`](../research_notes/formal_methods/borrow_checker_proof.md) | 借用检查器证明 |
+| ⭐⭐ 研究笔记 | [`research_notes/formal_methods/10_ownership_model.md`](../research_notes/formal_methods/10_ownership_model.md) | 所有权模型概述 |
+| ⭐⭐ 研究笔记 | [`research_notes/formal_methods/10_borrow_checker_proof.md`](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查器证明 |
 
 **建议**: 优先阅读 `rust-ownership-decidability/` 侧内容，更系统、更完整。
 
@@ -73,8 +73,8 @@
 |------|------|------|
 | ⭐⭐⭐ 并发模式 | [`rust-ownership-decidability/12-concurrency-patterns/`](../rust-ownership-decidability/12-concurrency-patterns/) | 并发架构、消息传递、数据并行、锁自由模式 |
 | ⭐⭐⭐ Actor 模型 | [`rust-ownership-decidability/actor-specialty/`](../rust-ownership-decidability/actor-specialty/) | Actor 框架、分布式 Actor |
-| ⭐⭐ 异步状态机 | [`research_notes/formal_methods/async_state_machine.md`](../research_notes/formal_methods/async_state_machine.md) | 异步状态机形式化 |
-| ⭐⭐ Send/Sync | [`research_notes/formal_methods/send_sync_formalization.md`](../research_notes/formal_methods/send_sync_formalization.md) | Send/Sync 形式化 |
+| ⭐⭐ 异步状态机 | [`research_notes/formal_methods/10_async_state_machine.md`](../research_notes/formal_methods/10_async_state_machine.md) | 异步状态机形式化 |
+| ⭐⭐ Send/Sync | [`research_notes/formal_methods/10_send_sync_formalization.md`](../research_notes/formal_methods/10_send_sync_formalization.md) | Send/Sync 形式化 |
 
 ### 2.4 设计模式形式化
 

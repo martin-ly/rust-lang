@@ -88,7 +88,7 @@
 | :--- | :--- | :--- | :--- |
 | 10_tutorial_ownership_safety.md | 8.2KB | 9.5KB | 实践模式、形式化视角 |
 | 10_tutorial_borrow_checker.md | 3.9KB | 9.1KB | NLL、常见错误解决 |
-| 10_tutorial_type_system.md | 2.7KB | 9.7KB | 模式匹配、泛型、Trait |
+| 10_tutorial_02_type_system.md | 2.7KB | 9.7KB | 模式匹配、泛型、Trait |
 | 10_error_type_selection_decision_tree.md | 2.1KB | 7.6KB | anyhow/thiserror对比 |
 
 #### 速查表扩展 (3个)
@@ -255,7 +255,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

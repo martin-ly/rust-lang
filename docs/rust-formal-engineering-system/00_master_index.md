@@ -21,6 +21,7 @@
   - [返回](#返回)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
@@ -46,11 +47,11 @@
 
 | 子模块 | 映射目标 | 说明 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **02 所有权系统** | [research_notes/formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) | 所有权形式化模型 |
+| **02 所有权系统** | [research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权形式化模型 |
 | **03 所有权与借用** | [research_notes/formal_methods/](../research_notes/formal_methods/README.md) | 借用检查器、所有权、生命周期 |
-| **02 内存安全** | [research_notes/formal_methods/borrow_checker_proof.md](../research_notes/formal_methods/borrow_checker_proof.md) | 借用检查器与内存安全 |
-| **05 Trait 系统** | [research_notes/type_theory/trait_system_formalization.md](../research_notes/type_theory/trait_system_formalization.md) | Trait 形式化 |
-| **06 生命周期管理** | [research_notes/formal_methods/lifetime_formalization.md](../research_notes/formal_methods/lifetime_formalization.md) | 生命周期形式化 |
+| **02 内存安全** | [research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查器与内存安全 |
+| **05 Trait 系统** | [research_notes/type_theory/10_trait_system_formalization.md](../research_notes/type_theory/10_trait_system_formalization.md) | Trait 形式化 |
+| **06 生命周期管理** | [research_notes/formal_methods/10_lifetime_formalization.md](../research_notes/formal_methods/10_lifetime_formalization.md) | 生命周期形式化 |
 | **08 宏系统** | [crates/c11_macro_system/docs/](../../crates/c11_macro_system/docs/README.md) | 宏系统文档 |
 | **09 形式化验证** | [research_notes/10_tools_guide.md](../research_notes/10_tools_guide.md) | Prusti、Kani、Creusot |
 | **10 数学基础** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型理论与数学基础 |
@@ -63,7 +64,7 @@
 
 | 路径 | 映射目标 |
 | :--- | :--- | :--- | :--- | :--- |
-| 01_type_system/06_variance.md | [type_theory/variance_theory.md](../research_notes/type_theory/variance_theory.md) |
+| 01_type_system/06_variance.md | [type_theory/10_variance_theory.md](../research_notes/type_theory/10_variance_theory.md) |
 
 ---
 

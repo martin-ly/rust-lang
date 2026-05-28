@@ -808,7 +808,7 @@ mod inner {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Cargo 包管理与模块索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
-- [类型系统速查卡](./type_system.md) - 类型系统与模块的关系
+- [类型系统速查卡](./02_type_system.md) - 类型系统与模块的关系
 - [Cargo 速查卡](./02_cargo_cheatsheet.md) - Cargo 包管理
 - [字符串与格式化速查卡](02_strings_formatting_cheatsheet.md) - 模块中的字符串处理
 
@@ -816,7 +816,7 @@ mod inner {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- [所有权系统速查卡](./ownership_cheatsheet.md) - 模块中的所有权规则
+- [所有权系统速查卡](./02_ownership_cheatsheet.md) - 模块中的所有权规则
 - [错误处理速查卡](./02_error_handling_cheatsheet.md) - 模块中的错误处理
 - [测试速查卡](02_testing_cheatsheet.md) - 模块测试
 
@@ -1122,7 +1122,7 @@ fn main() {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [类型系统完备性缺口](../../research_notes/type_theory/00_completeness_gaps.md) — 模块系统与类型可见性的形式化保证
-- [所有权模型形式化](../../research_notes/formal_methods/ownership_model.md) — 跨模块边界的所有权规则
+- [所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md) — 跨模块边界的所有权规则
 
 ---
 

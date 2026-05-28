@@ -171,9 +171,9 @@
 
 **Axiom PA1**：实际案例为经验证据；与形式化定理一致可增强论证可信度；不一致则需分析差异（unsafe 使用、库契约等）。
 
-**定理 PA-T1（案例与定理衔接）**：若案例 $C$ 与 [ownership_model](formal_methods/ownership_model.md) T2/T3、
-[borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1、
-[async_state_machine](formal_methods/async_state_machine.md) T6.2 一致，则 $C$ 为 Safe 且满足形式化保证。
+**定理 PA-T1（案例与定理衔接）**：若案例 $C$ 与 [ownership_model](formal_methods/10_ownership_model.md) T2/T3、
+[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) T1、
+[async_state_machine](formal_methods/10_async_state_machine.md) T6.2 一致，则 $C$ 为 Safe 且满足形式化保证。
 
 *证明*：由各定理陈述；案例实现满足定理结论即一致；
 组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) CSO-T1。∎
@@ -182,7 +182,7 @@
 
 *证明*：由 Def PA1；unsafe 块引入契约；安全抽象将 unsafe 封装，对外满足 Safe 规则；契约满足则与定理一致。∎
 
-**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](./PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链，建立与实际项目的追溯关系。
+**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](./10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链，建立与实际项目的追溯关系。
 
 ---
 
@@ -1085,7 +1085,7 @@ impl<T> Drop for SafeVec<T> {
 > **[来源: Wikipedia - Concurrency]**
 
 - **选型**：系统编程、网络、并发、嵌入式可分别从「案例分类」中选取对标项目；性能与安全诉求可参考「案例分析」与各实验的基准。
-- **落地**：按「最佳实践总结」的四个领域逐条对照；异步、错误处理、并发原语选型可结合 [async_state_machine](./formal_methods/async_state_machine.md)、[concurrency_performance](./experiments/10_concurrency_performance.md)。
+- **落地**：按「最佳实践总结」的四个领域逐条对照；异步、错误处理、并发原语选型可结合 [async_state_machine](./formal_methods/10_async_state_machine.md)、[concurrency_performance](./experiments/10_concurrency_performance.md)。
 - **扩展**：新案例可按「案例报告模板」录入，并纳入下方「系统集成与案例索引」。
 
 ---
@@ -1098,15 +1098,15 @@ impl<T> Drop for SafeVec<T> {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-- **所有权模型** [ownership_model.md](./formal_methods/ownership_model.md)：Redox、Tock、Firecracker、SafeVec 等案例中的资源管理与 `unsafe` 边界，可对照所有权规则做形式化抽查。
-- **借用检查器** [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)：TiKV、Actix、Linkerd 等并发与迭代场景，可对照借用规则验证无数据竞争。
-- **异步状态机** [async_state_machine.md](./formal_methods/async_state_machine.md)：Tokio、Actix、ScyllaDB 驱动、案例 1–2 的 async 设计，可对应 Future/Poll/Waker 形式化。
+- **所有权模型** [10_ownership_model.md](./formal_methods/10_ownership_model.md)：Redox、Tock、Firecracker、SafeVec 等案例中的资源管理与 `unsafe` 边界，可对照所有权规则做形式化抽查。
+- **借用检查器** [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)：TiKV、Actix、Linkerd 等并发与迭代场景，可对照借用规则验证无数据竞争。
+- **异步状态机** [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)：Tokio、Actix、ScyllaDB 驱动、案例 1–2 的 async 设计，可对应 Future/Poll/Waker 形式化。
 
 ### 与类型理论、实验研究的关联
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-- **类型系统 / Trait** [type_system_foundations.md](./type_theory/type_system_foundations.md)、[trait_system_formalization.md](./type_theory/trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
+- **类型系统 / Trait** [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
 - **性能基准** [10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md)、**并发性能** [10_concurrency_performance.md](./experiments/10_concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
 - **内存分析** [10_memory_analysis.md](./experiments/10_memory_analysis.md)、**编译器优化** [10_compiler_optimizations.md](./experiments/10_compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
 
@@ -1128,17 +1128,17 @@ impl<T> Drop for SafeVec<T> {
 
 | 案例 | 形式化定理 | 衔接要点 |
 | :--- | :--- | :--- |
-| Redox, Tock, Firecracker | [ownership_model](formal_methods/ownership_model.md) T2/T3、BOX-T1 | 资源 RAII、唯一所有权、无双重释放 |
-| Tokio, Actix, ScyllaDB | [async_state_machine](formal_methods/async_state_machine.md) T6.1–T6.3、SPAWN-T1 | Future、Send/Sync、无数据竞争 |
-| TiKV, Linkerd | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1、CHAN-T1、MUTEX-T1 | 通道、锁、借用规则 |
+| Redox, Tock, Firecracker | [ownership_model](formal_methods/10_ownership_model.md) T2/T3、BOX-T1 | 资源 RAII、唯一所有权、无双重释放 |
+| Tokio, Actix, ScyllaDB | [async_state_machine](formal_methods/10_async_state_machine.md) T6.1–T6.3、SPAWN-T1 | Future、Send/Sync、无数据竞争 |
+| TiKV, Linkerd | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) T1、CHAN-T1、MUTEX-T1 | 通道、锁、借用规则 |
 | **案例 1** Web 服务器（Axum + RwLock） | MUTEX-T1、async T6、RC-T1/ARC-T1 | `Arc<RwLock<T>>` 共享状态、异步 I/O |
 | **案例 2** 并发数据处理（mpsc） | CHAN-T1、SPAWN-T1、borrow T1 | 通道、tokio::spawn、无共享可变 |
 | **案例 3** SafeVec/内存安全 | ownership T2/T3、REFCELL-T1 |  interior mutability、RAII |
-| 所有案例 | [type_system_foundations](type_theory/type_system_foundations.md) T1–T3 | 良型、进展性、保持性 |
+| 所有案例 | [type_system_foundations](type_theory/10_type_system_foundations.md) T1–T3 | 良型、进展性、保持性 |
 | 组合案例 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) CE-T1–T3 | 模块组合、CE-T1/T2/T3 |
 | unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md)、PA-L1 | 安全抽象、契约 |
 
-**引用**：案例分析可引用 [PROOF_INDEX](./PROOF_INDEX.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
+**引用**：案例分析可引用 [PROOF_INDEX](./10_proof_index.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
 
 ---
 
@@ -1210,7 +1210,7 @@ impl<T> Drop for SafeVec<T> {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

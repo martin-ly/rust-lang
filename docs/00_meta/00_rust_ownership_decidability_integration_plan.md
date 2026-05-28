@@ -56,8 +56,8 @@
 
 | 主题 | `rust-ownership-decidability/` | `research_notes/` | 重复度 |
 |------|-------------------------------|-------------------|--------|
-| 所有权形式化 | `01-core-concepts/`, `formal-foundations/` | `formal_methods/ownership_model.md` | **高** |
-| 借用检查器证明 | `formal-foundations/proofs/` | `formal_methods/borrow_checker_proof.md` | **高** |
+| 所有权形式化 | `01-core-concepts/`, `formal-foundations/` | `formal_methods/10_ownership_model.md` | **高** |
+| 借用检查器证明 | `formal-foundations/proofs/` | `formal_methods/10_borrow_checker_proof.md` | **高** |
 | 设计模式形式化 | `11-design-patterns/` | `software_design_theory/01_design_patterns_formal/` | **中** |
 | 并发形式化 | `12-concurrency-patterns/` | `formal_methods/concurrency_model.md` | **中** |
 | 工作流形式化 | — | `software_design_theory/02_workflow/` | 独有 |

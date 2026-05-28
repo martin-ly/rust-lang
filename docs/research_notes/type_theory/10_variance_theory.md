@@ -681,7 +681,7 @@ fn use_contravariant_callback() {
 
 - [Rust Reference - Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
 - [型变参考文档](../../../crates/c02_type_system/docs/tier_03_references/02_类型型变参考.md)
-- [型变理论（本篇）](./variance_theory.md)
+- [型变理论（本篇）](./10_variance_theory.md)
 
 ### 相关代码
 
@@ -739,15 +739,15 @@ fn use_contravariant_callback() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 型变参与子类型推导与类型检查；$\&'a T$ 协变、$\&'a \text{mut} T$ 不变、
-`fn(T) -> U` 逆变等与 [type_system_foundations](./type_system_foundations.md)
-的 subtyping 及 [lifetime_formalization](./lifetime_formalization.md) 的 $\ell <:$ 一致。
+`fn(T) -> U` 逆变等与 [type_system_foundations](./10_type_system_foundations.md)
+的 subtyping 及 [lifetime_formalization](./10_lifetime_formalization.md) 的 $\ell <:$ 一致。
 
 ### 组合法则：类型 + 生命周期 + 型变
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理 VAR-COM-T1（三元组合传递）**：设 $\tau_1 <: \tau_2$（生命周期子类型）、$F$ 为协变类型构造子，则 $F[\tau_1] <: F[\tau_2]$；
-同理逆变、不变由 [variance_theory](./variance_theory.md) T1–T4 保证。
+同理逆变、不变由 [variance_theory](./10_variance_theory.md) T1–T4 保证。
 组合时：$\&'a T$ 中 `'a` 与 `T` 的型变分别由构造子决定；`&'a` 对 `'a` 协变、`&'a T` 对 `T` 协变。
 
 *证明思路*：由 Def 1.1–3.1、定理 T1–T4；`&'a T` 的型变为 `'a` 协变 × `T` 协变；组合时各参数独立应用型变规则。∎
@@ -805,7 +805,7 @@ fn use_contravariant_callback() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

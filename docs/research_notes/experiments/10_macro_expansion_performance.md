@@ -152,7 +152,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**Def MP1（宏展开实验验证）**：宏展开实验 $E$ 验证 [type_system_foundations](../type_theory/type_system_foundations.md) 保持性 T2，当且仅当 $E$ 观测到宏展开后代码良型且类型检查通过。
+**Def MP1（宏展开实验验证）**：宏展开实验 $E$ 验证 [type_system_foundations](../type_theory/10_type_system_foundations.md) 保持性 T2，当且仅当 $E$ 观测到宏展开后代码良型且类型检查通过。
 
 **Axiom MP1**：宏展开为编译时阶段；展开后代码需通过类型检查；类型检查通过即与 type_system T2 保持性一致。
 
@@ -492,8 +492,8 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- **类型系统基础**：见 [type_system_foundations.md](../type_theory/type_system_foundations.md)。宏在类型检查之前展开，其生成的类型与 trait 需满足类型规则；复杂宏可先 `cargo expand` 再交给类型系统分析。
-- **Trait 系统**：见 [trait_system_formalization.md](../type_theory/trait_system_formalization.md)。派生宏（`#[derive]`）生成 trait 实现，其正确性与 hygiene 可对照 Trait 形式化；`Serialize`/`Deserialize` 等是过程宏的典型应用。
+- **类型系统基础**：见 [10_type_system_foundations.md](../type_theory/10_type_system_foundations.md)。宏在类型检查之前展开，其生成的类型与 trait 需满足类型规则；复杂宏可先 `cargo expand` 再交给类型系统分析。
+- **Trait 系统**：见 [10_trait_system_formalization.md](../type_theory/10_trait_system_formalization.md)。派生宏（`#[derive]`）生成 trait 实现，其正确性与 hygiene 可对照 Trait 形式化；`Serialize`/`Deserialize` 等是过程宏的典型应用。
 
 ### 与实验研究的集成
 >
@@ -572,7 +572,7 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -42,14 +42,14 @@
 | 5 | 05_wasm_usage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 6 | 05_unsafe_rust_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 7 | 05_troubleshooting_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 8 | BEST_PRACTICES.md | 1.96 | ✅ | ✅ | **深度整合完成** |
+| 8 | 10_best_practices.md | 1.96 | ✅ | ✅ | **深度整合完成** |
 | 9 | RUST_196_MIGRATION_GUIDE.md | 1.96 | ✅ | ✅ | 已完成 |
 | 10 | 05_ai_rust_ecosystem_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 11 | 05_cli_applications_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 12 | 05_embedded_rust_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 13 | FFI_PRACTICAL_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 14 | 05_inline_assembly_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
-| 15 | PERFORMANCE_TUNING_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 15 | 05_performance_tuning_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 16 | 05_testing_coverage_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 17 | TOKIO_ECOSYSTEM_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 18 | 05_advanced_topics_deep_dive.md | 1.93 | ✅ | ✅ | **深度整合完成** |
@@ -74,11 +74,11 @@
 
 | 特性 | 类别 | 应用场景 | 相关指南 |
 |------|------|----------|----------|
-| `isqrt` | 数学运算 (≥1.84) | 质数检测、几何计算 | BEST_PRACTICES.md |
+| `isqrt` | 数学运算 (≥1.84) | 质数检测、几何计算 | 10_best_practices.md |
 | `HashMap::get_disjoint_mut` | 数据结构 (≥1.86) | 并发缓存、状态管理 | 05_threads_concurrency_usage_guide.md |
 | `async Fn` / async closures | 异步编程 (≥1.85, Edition 2024) | 异步 trait、回调抽象 | 05_async_programming_usage_guide.md |
 | `if let guards` | 语言特性 | 模式匹配守卫 | CONTROL_FLOW_GUIDE.md |
-| `Vec::pop_if` | 集合操作 (≥1.86) | 条件弹出、栈操作 | BEST_PRACTICES.md |
+| `Vec::pop_if` | 集合操作 (≥1.86) | 条件弹出、栈操作 | 10_best_practices.md |
 | `const fn` 改进 | 编译时计算 | 常量初始化 | 05_design_patterns_usage_guide.md |
 
 ---
@@ -142,7 +142,7 @@ fn demonstrate_196_features() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 🔢 数学计算
-- [isqrt 最佳实践](./BEST_PRACTICES.md#rust-196-最佳实践)
+- [isqrt 最佳实践](./10_best_practices.md#rust-196-最佳实践)
 - [几何算法示例](./05_cross_module_integration_examples.md)
 
 #### 🔄 并发编程

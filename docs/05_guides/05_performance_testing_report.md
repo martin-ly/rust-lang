@@ -265,7 +265,7 @@ cargo bench --workspace
 
 比较不同实现的性能：
 
-- 使用 [Criterion](./PERFORMANCE_TUNING_GUIDE.md#1-使用-criterion-基准测试) 进行精确测量
+- 使用 [Criterion](./05_performance_tuning_guide.md#1-使用-criterion-基准测试) 进行精确测量
 - 运行特定模块的基准测试（[运行特定模块](#运行特定模块的性能测试)）
 - 生成性能报告进行对比分析
 
@@ -276,7 +276,7 @@ cargo bench --workspace
 验证性能优化的效果：
 
 1. 建立 [性能基准](#性能基准测试文件统计)
-2. 实施优化策略（参考 [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md)）
+2. 实施优化策略（参考 [05_performance_tuning_guide.md](./05_performance_tuning_guide.md)）
 3. 重新运行测试，对比结果
 
 ### 场景4: 发布前性能审计
@@ -297,13 +297,13 @@ cargo bench --workspace
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **核心模块** | [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md) |
+| **核心模块** | [C02 类型系统](../../crates/c02_type_system/docs/10_00_master_index.md) |
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
-| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| **相关指南** | [05_performance_tuning_guide.md](./05_performance_tuning_guide.md) |
 | :--- | :--- |
 | **外部工具** | [Criterion.rs](https://github.com/bheisler/criterion.rs) |
 | :--- | :--- |

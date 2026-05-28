@@ -106,16 +106,16 @@
 
 | 概念 | 定义位置 | 形式化程度 | 状态 |
 | :--- | :--- | :--- | :--- |
-| 所有权 | ownership_model.md + .v | Def 1.1-1.3 | ✅ |
-| 借用 | borrow_checker_proof.md + .v | 规则5-8 | ✅ |
-| 生命周期 | lifetime_formalization.md | ℓ⊆lft | ✅ |
-| 子类型 | type_system_foundations.md | S<:T | ✅ |
-| 协变/逆变/不变 | variance_theory.md | Def 2.1-2.3 | ✅ |
-| 类型安全 | type_system_foundations.md + .v | 进展性+保持性 | ✅ |
-| Future | async_state_machine.md | Def 4.1-5.2 | ✅ |
-| Pin | pin_self_referential.md | Def 3.1-3.2 | ✅ |
-| Trait对象 | trait_system_formalization.md | vtable | ✅ |
-| Send/Sync | send_sync_formalization.md | Def 5.1-5.2 | ✅ |
+| 所有权 | 10_ownership_model.md + .v | Def 1.1-1.3 | ✅ |
+| 借用 | 10_borrow_checker_proof.md + .v | 规则5-8 | ✅ |
+| 生命周期 | 10_lifetime_formalization.md | ℓ⊆lft | ✅ |
+| 子类型 | 10_type_system_foundations.md | S<:T | ✅ |
+| 协变/逆变/不变 | 10_variance_theory.md | Def 2.1-2.3 | ✅ |
+| 类型安全 | 10_type_system_foundations.md + .v | 进展性+保持性 | ✅ |
+| Future | 10_async_state_machine.md | Def 4.1-5.2 | ✅ |
+| Pin | 10_pin_self_referential.md | Def 3.1-3.2 | ✅ |
+| Trait对象 | 10_trait_system_formalization.md | vtable | ✅ |
+| Send/Sync | 10_send_sync_formalization.md | Def 5.1-5.2 | ✅ |
 | **Saga** | DISTRIBUTED_PATTERNS.v | Def S1-S3 | 🆕 ✅ |
 | **CQRS** | DISTRIBUTED_PATTERNS.v | Def CQ1-CQ3 | 🆕 ✅ |
 | **Circuit Breaker** | DISTRIBUTED_PATTERNS.v | Def CB1-CB3 | 🆕 ✅ |
@@ -136,15 +136,15 @@
 
 | 公理 | 描述 | 位置 | 状态 |
 | :--- | :--- | :--- | :--- |
-| A1-A3 | 所有权公理 | ownership_model.md | ✅ |
-| A4-A6 | 借用公理 | borrow_checker_proof.md | ✅ |
-| A7-A8 | 生命周期公理 | lifetime_formalization.md | ✅ |
-| A9-A11 | 型变公理 | variance_theory.md | ✅ |
-| A12-A13 | 类型安全公理 | type_system_foundations.md | ✅ |
-| A14-A16 | async公理 | async_state_machine.md | ✅ |
-| A17-A18 | Pin公理 | pin_self_referential.md | ✅ |
-| A19-A20 | Trait对象公理 | trait_system_formalization.md | ✅ |
-| A21-A22 | Send/Sync公理 | send_sync_formalization.md | ✅ |
+| A1-A3 | 所有权公理 | 10_ownership_model.md | ✅ |
+| A4-A6 | 借用公理 | 10_borrow_checker_proof.md | ✅ |
+| A7-A8 | 生命周期公理 | 10_lifetime_formalization.md | ✅ |
+| A9-A11 | 型变公理 | 10_variance_theory.md | ✅ |
+| A12-A13 | 类型安全公理 | 10_type_system_foundations.md | ✅ |
+| A14-A16 | async公理 | 10_async_state_machine.md | ✅ |
+| A17-A18 | Pin公理 | 10_pin_self_referential.md | ✅ |
+| A19-A20 | Trait对象公理 | 10_trait_system_formalization.md | ✅ |
+| A21-A22 | Send/Sync公理 | 10_send_sync_formalization.md | ✅ |
 | AS1-AS3 | Saga公理 | DISTRIBUTED_PATTERNS.v | 🆕 ✅ |
 | ACQ1-ACQ2 | CQRS公理 | DISTRIBUTED_PATTERNS.v | 🆕 ✅ |
 | AWF1-AWF3 | Workflow公理 | WORKFLOW_FORMALIZATION.v | 🆕 ✅ |
@@ -167,16 +167,16 @@
 
 | 定理 | 描述 | 位置 | 证明深度 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
-| T-OW2 | 所有权唯一性 | ownership_model.md | L2完整 | ✅ |
-| T-OW3 | 内存安全 | ownership_model.md | L2完整 | ✅ |
-| T-BR1 | 数据竞争自由 | borrow_checker_proof.md | L2完整 | ✅ |
-| T-TY1 | 进展性 | type_system_foundations.md | L2完整 | ✅ |
-| T-TY2 | 保持性 | type_system_foundations.md | L2完整 | ✅ |
-| T-TY3 | 类型安全 | type_system_foundations.md | L2完整 | ✅ |
-| T-LF2 | 引用有效性 | lifetime_formalization.md | L2完整 | ✅ |
-| T-AS1 | async状态机正确性 | async_state_machine.md | L2完整 | ✅ |
-| SEND-T1 | Send安全 | send_sync_formalization.md | L2完整 | ✅ |
-| SYNC-T1 | Sync安全 | send_sync_formalization.md | L2完整 | ✅ |
+| T-OW2 | 所有权唯一性 | 10_ownership_model.md | L2完整 | ✅ |
+| T-OW3 | 内存安全 | 10_ownership_model.md | L2完整 | ✅ |
+| T-BR1 | 数据竞争自由 | 10_borrow_checker_proof.md | L2完整 | ✅ |
+| T-TY1 | 进展性 | 10_type_system_foundations.md | L2完整 | ✅ |
+| T-TY2 | 保持性 | 10_type_system_foundations.md | L2完整 | ✅ |
+| T-TY3 | 类型安全 | 10_type_system_foundations.md | L2完整 | ✅ |
+| T-LF2 | 引用有效性 | 10_lifetime_formalization.md | L2完整 | ✅ |
+| T-AS1 | async状态机正确性 | 10_async_state_machine.md | L2完整 | ✅ |
+| SEND-T1 | Send安全 | 10_send_sync_formalization.md | L2完整 | ✅ |
+| SYNC-T1 | Sync安全 | 10_send_sync_formalization.md | L2完整 | ✅ |
 
 #### L3机器证明骨架 (5/5)
 
@@ -212,16 +212,16 @@
 
 | # | 导图 | 位置 | 状态 |
 | :--- | :--- | :--- | :--- |
-| 1 | 所有权概念族 | ownership_model.md | ✅ |
-| 2 | 类型系统概念族 | type_system_foundations.md | ✅ |
-| 3 | 型变概念族 | variance_theory.md | ✅ |
+| 1 | 所有权概念族 | 10_ownership_model.md | ✅ |
+| 2 | 类型系统概念族 | 10_type_system_foundations.md | ✅ |
+| 3 | 型变概念族 | 10_variance_theory.md | ✅ |
 | 4 | 设计模式概念族 | DESIGN_PATTERNS_BOUNDARY_MATRIX.md | ✅ |
 | 5 | 分布式模式概念族 | 10_distributed_concept_mindmap.md | 🆕 ✅ |
 | 6 | 工作流概念族 | 10_workflow_concept_mindmap.md | 🆕 ✅ |
 | 7 | 证明技术概念族 | 10_proof_techniques_mindmap.md | 🆕 ✅ |
 | 8 | 全局知识全景 | 10_unified_systematic_framework.md | ✅ |
-| 9 | 异步概念族 | async_state_machine.md | ✅ |
-| 10 | 并发概念族 | send_sync_formalization.md | ✅ |
+| 9 | 异步概念族 | 10_async_state_machine.md | ✅ |
+| 10 | 并发概念族 | 10_send_sync_formalization.md | ✅ |
 | 11 | 算法概念族 | c08_algorithms | ✅ |
 
 **验证结果**: 核心概念族 100% 覆盖 ✅
@@ -236,9 +236,9 @@
 | 4 | 设计模式边界矩阵 | DESIGN_PATTERNS_BOUNDARY_MATRIX.md | 🆕 ✅ |
 | 5 | 执行模型边界矩阵 | 10_unified_systematic_framework.md | ✅ |
 | 6 | 验证工具对比矩阵 | 10_verification_tools_matrix.md | 🆕 ✅ |
-| 7 | Trait系统矩阵 | trait_system_formalization.md | ✅ |
-| 8 | 型变规则矩阵 | variance_theory.md | ✅ |
-| 9 | 并发模型矩阵 | send_sync_formalization.md | ✅ |
+| 7 | Trait系统矩阵 | 10_trait_system_formalization.md | ✅ |
+| 8 | 型变规则矩阵 | 10_variance_theory.md | ✅ |
+| 9 | 并发模型矩阵 | 10_send_sync_formalization.md | ✅ |
 
 **验证结果**: 核心矩阵 100% 覆盖 ✅
 
@@ -435,7 +435,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

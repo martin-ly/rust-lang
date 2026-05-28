@@ -139,7 +139,7 @@
    - 研究主题覆盖
    - 系统评估
 
-7. **[PROOF_INDEX.md](./PROOF_INDEX.md)** - 形式化证明文档索引 🆕
+7. **[10_proof_index.md](./10_proof_index.md)** - 形式化证明文档索引 🆕
    - 按研究领域分类的证明索引
    - 按证明类型分类的证明索引
    - 证明完成度统计
@@ -380,32 +380,32 @@
 
 **目录**: [formal_methods/](./formal_methods/README.md)
 
-1. **[ownership_model.md](./formal_methods/ownership_model.md)** - 所有权模型形式化
+1. **[10_ownership_model.md](./formal_methods/10_ownership_model.md)** - 所有权模型形式化
    - 研究目标: 形式化定义所有权系统，证明内存安全
    - 状态: ✅ 已完成 (100%)
    - 关键词: 所有权、内存安全、形式化定义
 
-2. **[borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)** - 借用检查器证明
+2. **[10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)** - 借用检查器证明
    - 研究目标: 形式化定义借用检查器，证明数据竞争自由
    - 状态: ✅ 已完成 (100%)
    - 关键词: 借用检查器、数据竞争、形式化证明
 
-3. **[async_state_machine.md](./formal_methods/async_state_machine.md)** - 异步状态机形式化
+3. **[10_async_state_machine.md](./formal_methods/10_async_state_machine.md)** - 异步状态机形式化
    - 研究目标: 形式化定义 Future/Poll 状态机，证明并发安全
    - 状态: ✅ 已完成 (100%)
    - 关键词: 异步、Future、状态机、并发安全
 
-4. **[lifetime_formalization.md](./formal_methods/lifetime_formalization.md)** - 生命周期形式化
+4. **[10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md)** - 生命周期形式化
    - 研究目标: 形式化定义生命周期系统，证明引用有效性
    - 状态: ✅ 已完成 (100%)
    - 关键词: 生命周期、引用有效性、形式化语义
 
-5. **[pin_self_referential.md](./formal_methods/pin_self_referential.md)** - Pin 和自引用类型形式化
+5. **[10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)** - Pin 和自引用类型形式化
    - 研究目标: 形式化定义 Pin 类型和自引用类型，证明安全性
    - 状态: ✅ 已完成 (100%)
    - 关键词: Pin、自引用类型、内存位置稳定性
 
-6. **[send_sync_formalization.md](./formal_methods/send_sync_formalization.md)** - Send/Sync 形式化
+6. **[10_send_sync_formalization.md](./formal_methods/10_send_sync_formalization.md)** - Send/Sync 形式化
    - 研究目标: Def SEND1/SYNC1、SEND-T1/SYNC-T1、与 spawn/Future/Arc 衔接、反例
    - 状态: ✅ 已完成 (100%)
    - 关键词: Send、Sync、跨线程安全、数据竞争自由
@@ -440,27 +440,27 @@
    - 状态: ✅ 缺口已声明；阶段 1–7 Def 占位完成
    - 关键词: 完备性、LUB、Copy、RPITIT、coherence、组合法则
 
-2. **[type_system_foundations.md](./type_theory/type_system_foundations.md)** - 类型系统基础
+2. **[10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)** - 类型系统基础
    - 研究目标: 形式化定义 Rust 类型系统基础
    - 状态: ✅ 已完成 (100%)
    - 关键词: 类型系统、类型推导、类型安全
 
-3. **[trait_system_formalization.md](./type_theory/trait_system_formalization.md)** - Trait 系统形式化
+3. **[10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)** - Trait 系统形式化
    - 研究目标: 形式化定义 Trait 系统，理解类型理论基础
    - 状态: ✅ 已完成 (100%)
    - 关键词: Trait、类型类、存在类型
 
-4. **[lifetime_formalization.md](./type_theory/lifetime_formalization.md)** - 生命周期形式化
+4. **[10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md)** - 生命周期形式化
    - 研究目标: 形式化定义生命周期系统，理解类型理论解释
    - 状态: ✅ 已完成 (100%)
    - 关键词: 生命周期、区域类型、约束求解
 
-5. **[advanced_types.md](./type_theory/advanced_types.md)** - 高级类型特性
+5. **[10_advanced_types.md](./type_theory/10_advanced_types.md)** - 高级类型特性
    - 研究目标: 深入分析 GATs、const 泛型和依赖类型
    - 状态: ✅ 已完成 (100%)
    - 关键词: GATs、const 泛型、依赖类型、类型族
 
-6. **[variance_theory.md](./type_theory/variance_theory.md)** - 型变理论
+6. **[10_variance_theory.md](./type_theory/10_variance_theory.md)** - 型变理论
    - 研究目标: 深入理解型变理论，形式化定义型变规则
    - 状态: ✅ 已完成 (100%)
    - 关键词: 型变、协变、逆变、不变、子类型
@@ -554,32 +554,32 @@
 
 > **[来源: IEEE - Programming Language Standards]**
 
-- [所有权模型形式化](./formal_methods/ownership_model.md)
-- [借用检查器证明](./formal_methods/borrow_checker_proof.md)
-- [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md)
+- [所有权模型形式化](./formal_methods/10_ownership_model.md)
+- [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
+- [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md)
 
 ### 类型系统
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [类型理论完备性缺口](./type_theory/00_completeness_gaps.md)
-- [类型系统基础](./type_theory/type_system_foundations.md)
-- [Trait 系统形式化](./type_theory/trait_system_formalization.md)
-- [高级类型特性](./type_theory/advanced_types.md)
-- [型变理论](./type_theory/variance_theory.md)
+- [类型系统基础](./type_theory/10_type_system_foundations.md)
+- [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
+- [高级类型特性](./type_theory/10_advanced_types.md)
+- [型变理论](./type_theory/10_variance_theory.md)
 
 ### 生命周期
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-- [生命周期形式化（形式化方法）](./formal_methods/lifetime_formalization.md)
-- [生命周期形式化（类型理论）](./type_theory/lifetime_formalization.md)
+- [生命周期形式化（形式化方法）](./formal_methods/10_lifetime_formalization.md)
+- [生命周期形式化（类型理论）](./type_theory/10_lifetime_formalization.md)
 
 ### 异步和并发
 
 > **[来源: POPL - Programming Languages Research]**
 
-- [异步状态机形式化](./formal_methods/async_state_machine.md)
+- [异步状态机形式化](./formal_methods/10_async_state_machine.md)
 - [并发性能研究](./experiments/10_concurrency_performance.md)
 - [执行模型](software_design_theory/03_execution_models/README.md)（同步/异步/并发/并行/分布式）
 
@@ -728,7 +728,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

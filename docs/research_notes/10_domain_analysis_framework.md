@@ -191,10 +191,10 @@
 
 | 定理 | 陈述 | 证明 | 重要性 |
 | :--- | :--- | :--- | :--- |
-| **T-唯一性** | 任何时刻只有一个所有者 | [ownership_model](formal_methods/ownership_model.md) | ⭐⭐⭐⭐⭐ |
-| **T-内存安全** | 无悬垂指针、无双重释放 | [ownership_model](formal_methods/ownership_model.md) | ⭐⭐⭐⭐⭐ |
-| **T-无泄漏** | 资源最终被释放 | [ownership_model](formal_methods/ownership_model.md) | ⭐⭐⭐⭐ |
-| **T-数据竞争自由** | 借用规则保证线程安全 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) | ⭐⭐⭐⭐⭐ |
+| **T-唯一性** | 任何时刻只有一个所有者 | [ownership_model](formal_methods/10_ownership_model.md) | ⭐⭐⭐⭐⭐ |
+| **T-内存安全** | 无悬垂指针、无双重释放 | [ownership_model](formal_methods/10_ownership_model.md) | ⭐⭐⭐⭐⭐ |
+| **T-无泄漏** | 资源最终被释放 | [ownership_model](formal_methods/10_ownership_model.md) | ⭐⭐⭐⭐ |
+| **T-数据竞争自由** | 借用规则保证线程安全 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | ⭐⭐⭐⭐⭐ |
 
 #### 领域模型图
 
@@ -296,10 +296,10 @@ A + B     : A 或 B
 
 | 定理 | 陈述 | 证明 | 重要性 |
 | :--- | :--- | :--- | :--- |
-| **T-进展** | 良类型的程序不会卡住 | [type_system_foundations](type_theory/type_system_foundations.md) | ⭐⭐⭐⭐⭐ |
-| **T-保持** | 规约保持类型 | [type_system_foundations](type_theory/type_system_foundations.md) | ⭐⭐⭐⭐⭐ |
-| **T-类型安全** | 进展 + 保持 | [type_system_foundations](type_theory/type_system_foundations.md) | ⭐⭐⭐⭐⭐ |
-| **T-型变安全** | 协变/逆变/不变正确性 | [variance_theory](type_theory/variance_theory.md) | ⭐⭐⭐⭐ |
+| **T-进展** | 良类型的程序不会卡住 | [type_system_foundations](type_theory/10_type_system_foundations.md) | ⭐⭐⭐⭐⭐ |
+| **T-保持** | 规约保持类型 | [type_system_foundations](type_theory/10_type_system_foundations.md) | ⭐⭐⭐⭐⭐ |
+| **T-类型安全** | 进展 + 保持 | [type_system_foundations](type_theory/10_type_system_foundations.md) | ⭐⭐⭐⭐⭐ |
+| **T-型变安全** | 协变/逆变/不变正确性 | [variance_theory](type_theory/10_variance_theory.md) | ⭐⭐⭐⭐ |
 
 #### 类型层次结构
 
@@ -380,10 +380,10 @@ Rust 映射:
 
 | 定理 | 陈述 | 证明 | 重要性 |
 | :--- | :--- | :--- | :--- |
-| **T-Send安全** | Send类型可安全跨线程转移 | [send_sync_formalization](formal_methods/send_sync_formalization.md) | ⭐⭐⭐⭐⭐ |
-| **T-Sync安全** | Sync类型可安全跨线程共享 | [send_sync_formalization](formal_methods/send_sync_formalization.md) | ⭐⭐⭐⭐⭐ |
-| **T-异步安全** | async/await不引入数据竞争 | [async_state_machine](formal_methods/async_state_machine.md) | ⭐⭐⭐⭐ |
-| **T-Pin安全** | Pin保证自引用安全 | [pin_self_referential](formal_methods/pin_self_referential.md) | ⭐⭐⭐⭐ |
+| **T-Send安全** | Send类型可安全跨线程转移 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | ⭐⭐⭐⭐⭐ |
+| **T-Sync安全** | Sync类型可安全跨线程共享 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | ⭐⭐⭐⭐⭐ |
+| **T-异步安全** | async/await不引入数据竞争 | [async_state_machine](formal_methods/10_async_state_machine.md) | ⭐⭐⭐⭐ |
+| **T-Pin安全** | Pin保证自引用安全 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | ⭐⭐⭐⭐ |
 
 #### 并发模型对比
 
@@ -540,10 +540,10 @@ Rust特有:
 
 | 领域 A | 领域 B | 交叉概念 | 交叉文档 |
 | :--- | :--- | :--- | :--- |
-| 内存安全 | 类型系统 | 所有权类型 | ownership_model.md |
-| 内存安全 | 并发 | Send/Sync | send_sync_formalization.md |
-| 类型系统 | 软件设计 | Trait抽象 | trait_system_formalization.md |
-| 并发 | 工具链 | 异步状态机 | async_state_machine.md |
+| 内存安全 | 类型系统 | 所有权类型 | 10_ownership_model.md |
+| 内存安全 | 并发 | Send/Sync | 10_send_sync_formalization.md |
+| 类型系统 | 软件设计 | Trait抽象 | 10_trait_system_formalization.md |
+| 并发 | 工具链 | 异步状态机 | 10_async_state_machine.md |
 | 软件设计 | 工具链 | 模块化 | 07_module_knowledge_structure_guide.md |
 
 ### 领域依赖图
@@ -649,7 +649,7 @@ graph TB
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

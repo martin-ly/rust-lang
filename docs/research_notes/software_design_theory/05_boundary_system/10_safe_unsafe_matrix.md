@@ -57,7 +57,7 @@
 **Def 1.2（安全抽象）**:
 
 设 $A$ 为封装 unsafe 的 Rust 模块。
-若 $A$ 对外 API 满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 与 [ownership_model](../../formal_methods/ownership_model.md) 的 Safe 规则，则称 $A$ 为**安全抽象**。
+若 $A$ 对外 API 满足 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) 与 [ownership_model](../../formal_methods/10_ownership_model.md) 的 Safe 规则，则称 $A$ 为**安全抽象**。
 
 **Axiom SBM1**：Safe 代码不触发 UB；违反借用/所有权规则导致编译错误。
 
@@ -65,7 +65,7 @@
 
 **定理 SBM-T1**：若模式 $X$ 仅用 `OnceLock`、`Mutex`、`Channel`、`Arc` 等 Safe 抽象，则 $\mathit{SafeB}(X) = \mathrm{Safe}$。
 
-*证明*：由 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1、[ownership_model](../../formal_methods/ownership_model.md) T2/T3，Safe API 保证内存安全与无数据竞争。
+*证明*：由 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) T1、[ownership_model](../../formal_methods/10_ownership_model.md) T2/T3，Safe API 保证内存安全与无数据竞争。
 依 Axiom SBM1，Safe 代码不触发 UB；故 $\mathit{SafeB}(X) = \mathrm{Safe}$。∎
 
 **定理 SBM-T2**：若模式 $X$ 需 FFI 或裸指针，则 $\mathit{SafeB}(X) = \mathrm{Unsafe}$；
@@ -362,7 +362,7 @@ impl PaymentGateway for FFIPaymentGateway {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

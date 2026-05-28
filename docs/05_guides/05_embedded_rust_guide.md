@@ -456,13 +456,13 @@ fn update_data(value: u32) {
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/10_00_master_index.md) |
 | :--- | :--- |
 | :--- | :--- |
 | **外部资源** | [Embedded Rust Book](https://doc.rust-lang.org/embedded-book/) |
 | :--- | :--- |
 | :--- | :--- |
-| **相关指南** | [BEST_PRACTICES.md](./BEST_PRACTICES.md) |
+| **相关指南** | [10_best_practices.md](./10_best_practices.md) |
 | :--- | :--- |
 | :--- | :--- |
 
@@ -472,12 +472,12 @@ fn update_data(value: u32) {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md)
+- [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/10_00_master_index.md)
 - [C02 类型系统](../../crates/c02_type_system/docs/README.md)
 - [C05 线程与并发](../../crates/c05_threads/docs/README.md)
 - [C12 WASM](../../crates/c12_wasm/docs/README.md)
 - [官方 Embedded Book](https://doc.rust-lang.org/embedded-book/)
-- [BEST_PRACTICES.md](./BEST_PRACTICES.md)
+- [10_best_practices.md](./10_best_practices.md)
 
 ---
 

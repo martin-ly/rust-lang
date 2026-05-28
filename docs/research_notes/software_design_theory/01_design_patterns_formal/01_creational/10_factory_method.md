@@ -149,7 +149,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 >
 > **[来源: Rust Official Docs]**
 
-由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 保持性，$\mathit{factory}(c)$ 良型则求值结果类型为 $T$。
+由 [type_system_foundations](../../../type_theory/10_type_system_foundations.md) 保持性，$\mathit{factory}(c)$ 良型则求值结果类型为 $T$。
 
 **证明**：
 
@@ -170,7 +170,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 >
 > **[来源: Rust Official Docs]**
 
-由 [ownership_model](../../../formal_methods/ownership_model.md) T2，返回值所有权转移至调用者；无悬垂。
+由 [ownership_model](../../../formal_methods/10_ownership_model.md) T2，返回值所有权转移至调用者；无悬垂。
 
 **证明**：
 
@@ -526,7 +526,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -431,8 +431,8 @@ Qed.
 | :--- | :--- | :--- |
 | [前置概念1] | [文档链接] | [用途说明] |
 | [前置概念2] | [文档链接] | [用途说明] |
-| 所有权规则 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) | 内存安全基础 |
-| 借用规则 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) | 数据竞争自由 |
+| 所有权规则 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) | 内存安全基础 |
+| 借用规则 | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) | 数据竞争自由 |
 
 ### 后续引用
 >
@@ -450,14 +450,14 @@ Qed.
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
-| 形式化方法 | 所有权模型形式化 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) |
-| 形式化方法 | 借用检查器证明 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
-| 形式化方法 | 异步状态机 | [formal_methods/async_state_machine.md](./formal_methods/async_state_machine.md) |
-| 形式化方法 | 生命周期形式化 | [formal_methods/lifetime_formalization.md](./formal_methods/lifetime_formalization.md) |
-| 形式化方法 | Pin 和自引用类型 | [formal_methods/pin_self_referential.md](./formal_methods/pin_self_referential.md) |
-| 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
-| 类型理论 | Trait 系统形式化 | [type_theory/trait_system_formalization.md](./type_theory/trait_system_formalization.md) |
-| 类型理论 | 高级类型特性 | [type_theory/advanced_types.md](./type_theory/advanced_types.md) |
+| 形式化方法 | 所有权模型形式化 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) |
+| 形式化方法 | 借用检查器证明 | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) |
+| 形式化方法 | 异步状态机 | [formal_methods/10_async_state_machine.md](./formal_methods/10_async_state_machine.md) |
+| 形式化方法 | 生命周期形式化 | [formal_methods/10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md) |
+| 形式化方法 | Pin 和自引用类型 | [formal_methods/10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md) |
+| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) |
+| 类型理论 | Trait 系统形式化 | [type_theory/10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md) |
+| 类型理论 | 高级类型特性 | [type_theory/10_advanced_types.md](./type_theory/10_advanced_types.md) |
 | 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
 | 实验研究 | 内存分析 | [experiments/10_memory_analysis.md](./experiments/10_memory_analysis.md) |
 
@@ -540,7 +540,7 @@ Qed.
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

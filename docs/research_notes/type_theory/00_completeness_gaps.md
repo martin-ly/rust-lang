@@ -101,13 +101,13 @@
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
-| **LUB coercion** | ✅ 已补全 | Def LUB1、定理 LUB-T1；[type_system_foundations](./type_system_foundations.md) | type_system_foundations |
-| **Copy 与 specialization** | ✅ 已补全 | Def COP1、定理 COP-T1；1.93 移除内部 specialization；[type_system_foundations](./type_system_foundations.md) | type_system_foundations, variance |
-| **const 中 &mut static** | ⚠️ 部分 | Def CONST-MUT1；1.93 允许 const 含 &mut static；lint 规则；[advanced_types](./advanced_types.md) | advanced_types |
-| **offset_of!** | ✅ 已补全 | Def OFFSET1、定理 OFFSET-T1；[type_system_foundations](./type_system_foundations.md) | type_system_foundations |
+| **LUB coercion** | ✅ 已补全 | Def LUB1、定理 LUB-T1；[type_system_foundations](./10_type_system_foundations.md) | type_system_foundations |
+| **Copy 与 specialization** | ✅ 已补全 | Def COP1、定理 COP-T1；1.93 移除内部 specialization；[type_system_foundations](./10_type_system_foundations.md) | type_system_foundations, variance |
+| **const 中 &mut static** | ⚠️ 部分 | Def CONST-MUT1；1.93 允许 const 含 &mut static；lint 规则；[advanced_types](./10_advanced_types.md) | advanced_types |
+| **offset_of!** | ✅ 已补全 | Def OFFSET1、定理 OFFSET-T1；[type_system_foundations](./10_type_system_foundations.md) | type_system_foundations |
 | **impl Trait 捕获规则** | ⚠️ 部分 | async fn、impl Trait 捕获的精确规则；RPITIT/ASYNC-T1 已覆盖 Trait 内语义 | trait_system_formalization |
-| **never_type (!) 严格化** | ✅ 已补全 | Def BOT1、定理 BOT-T1；1.92+ 与 ⊥ 对应；[type_system_foundations](./type_system_foundations.md) | type_system_foundations |
-| **deref_nullptr deny** | ⚠️ 部分 | Def DEREF-NULL1；1.93 deny-by-default；[type_system_foundations](./type_system_foundations.md) | type_system_foundations |
+| **never_type (!) 严格化** | ✅ 已补全 | Def BOT1、定理 BOT-T1；1.92+ 与 ⊥ 对应；[type_system_foundations](./10_type_system_foundations.md) | type_system_foundations |
+| **deref_nullptr deny** | ⚠️ 部分 | Def DEREF-NULL1；1.93 deny-by-default；[type_system_foundations](./10_type_system_foundations.md) | type_system_foundations |
 
 **对类型构造能力的影响**：上述 ⚠️ 缺口可能影响 [construction_capability](./10_construction_capability.md) 中的构造路径判定。impl Trait 捕获、Trait 继承菱形、DST 规则、类型推断歧义、对象安全完整规则 → 见 [construction_capability § 类型理论缺口对构造能力的影响](10_construction_capability.md#类型理论缺口对构造能力的影响)。
 
@@ -136,13 +136,13 @@
 
 | 组合法则 | 状态 | 缺口说明 | 应补充 |
 | :--- | :--- | :--- | :--- |
-| **Trait coherence（一致性）** | ✅ 已补全 | Axiom COH1/COH2、定理 COH-T1：至多一个 impl；证明思路见 [trait_system_formalization](./trait_system_formalization.md) | trait_system_formalization |
+| **Trait coherence（一致性）** | ✅ 已补全 | Axiom COH1/COH2、定理 COH-T1：至多一个 impl；证明思路见 [trait_system_formalization](./10_trait_system_formalization.md) | trait_system_formalization |
 | **Orphan rule 放宽** | ⚠️ 部分 | Def ORPH1、ORPH-RELAX1；当前规则已形式化；2024 放宽为倡议未稳定 | trait_system_formalization |
-| **negative impls** | ✅ 已补全 | Def NEG1、Axiom NEG1、定理 NEG-T1；[trait_system_formalization](./trait_system_formalization.md) | trait_system_formalization |
-| **类型与生命周期组合** | ✅ 已补全 | 定理 VAR-COM-T1、推论 VAR-COM-C1（[variance_theory](./variance_theory.md)） | variance_theory |
-| **Trait + 泛型 + GAT 组合** | ⚠️ 部分 | Def TRAIT-GAT1；解析优先级、与 AT-L1 衔接；[trait_system_formalization](./trait_system_formalization.md) | trait_system_formalization, advanced_types |
-| **impl Trait 与 dyn Trait 组合** | ✅ 已补全 | Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1；[trait_system_formalization](./trait_system_formalization.md) | trait_system_formalization |
-| **const 泛型与类型组合** | ✅ 已补全 | Def CONST-EVAL1、定理 CONST-EVAL-T1；[advanced_types](./advanced_types.md) | advanced_types |
+| **negative impls** | ✅ 已补全 | Def NEG1、Axiom NEG1、定理 NEG-T1；[trait_system_formalization](./10_trait_system_formalization.md) | trait_system_formalization |
+| **类型与生命周期组合** | ✅ 已补全 | 定理 VAR-COM-T1、推论 VAR-COM-C1（[variance_theory](./10_variance_theory.md)） | variance_theory |
+| **Trait + 泛型 + GAT 组合** | ⚠️ 部分 | Def TRAIT-GAT1；解析优先级、与 AT-L1 衔接；[trait_system_formalization](./10_trait_system_formalization.md) | trait_system_formalization, advanced_types |
+| **impl Trait 与 dyn Trait 组合** | ✅ 已补全 | Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1；[trait_system_formalization](./10_trait_system_formalization.md) | trait_system_formalization |
+| **const 泛型与类型组合** | ✅ 已补全 | Def CONST-EVAL1、定理 CONST-EVAL-T1；[advanced_types](./10_advanced_types.md) | advanced_types |
 
 ---
 
@@ -153,10 +153,10 @@
 | Trait 特性 | 状态 | 缺口说明 | 应补充 |
 | :--- | :--- | :--- | :--- |
 | **对象安全完整规则** | ⚠️ 部分 | 有方法列表；推论 RPIT-C1 覆盖 RPITIT 与 dyn 交互；其余未来兼容性未形式化 | trait_system_formalization |
-| **RPITIT (Return Position Impl Trait In Trait)** | ✅ 已补全 | Def RPIT1、定理 RPIT-T1、推论 RPIT-C1；[trait_system_formalization](./trait_system_formalization.md) | trait_system_formalization |
-| **async fn in trait** | ✅ 已补全 | Def ASYNC1、定理 ASYNC-T1（Send 边界）；[trait_system_formalization](./trait_system_formalization.md) | trait_system_formalization |
+| **RPITIT (Return Position Impl Trait In Trait)** | ✅ 已补全 | Def RPIT1、定理 RPIT-T1、推论 RPIT-C1；[trait_system_formalization](./10_trait_system_formalization.md) | trait_system_formalization |
+| **async fn in trait** | ✅ 已补全 | Def ASYNC1、定理 ASYNC-T1（Send 边界）；[trait_system_formalization](./10_trait_system_formalization.md) | trait_system_formalization |
 | **Trait 继承传递** | ⚠️ 部分 | `trait B: A` 有；**菱形继承**（trait D: B, C; B: A; C: A）的解析未形式化 | trait_system_formalization |
-| **specialization** | ⚠️ 部分 | Def SPEC1、定理 SPEC-T1；不稳定；[trait_system_formalization](./trait_system_formalization.md) | trait_system_formalization |
+| **specialization** | ⚠️ 部分 | Def SPEC1、定理 SPEC-T1；不稳定；[trait_system_formalization](./10_trait_system_formalization.md) | trait_system_formalization |
 | **fundamental 类型** | ⚠️ 部分 | Def FUND1；RFC 1023 孤儿规则例外；完整规则未形式化 | trait_system_formalization |
 | **blanket impl 冲突** | ⚠️ 部分 | 有反例；**冲突检测算法**无形式化 | trait_system_formalization |
 | **Trait 方法默认参数** | ❌ 未覆盖 | 若稳定化；与 impl 解析的交互 | - |
@@ -172,11 +172,11 @@
 | 特性 | 状态 | 缺口说明 | 应补充 |
 | :--- | :--- | :--- | :--- |
 | **类型推断歧义** | ⚠️ 部分 | 报错有；**何时可消除歧义**的规则未形式化 | type_system_foundations |
-| **类型 ascription** | ✅ 已补全 | Def ASC1、定理 ASC-T1；[type_system_foundations](./type_system_foundations.md) | type_system_foundations |
+| **类型 ascription** | ✅ 已补全 | Def ASC1、定理 ASC-T1；[type_system_foundations](./10_type_system_foundations.md) | type_system_foundations |
 | **unsized 类型** | ⚠️ 部分 | `?Sized` 有；**DST 的完整类型规则**未形式化 | type_system_foundations |
-| **existential type** | ⚠️ 部分 | Def EXIST1；不稳定；存在类型；[advanced_types](./advanced_types.md) | advanced_types |
+| **existential type** | ⚠️ 部分 | Def EXIST1；不稳定；存在类型；[advanced_types](./10_advanced_types.md) | advanced_types |
 | **higher-ranked trait bounds** | ⚠️ 部分 | `for<'a> T: Trait<'a>` 有描述；**与生命周期推断**的交互未形式化 | lifetime_formalization, trait_system_formalization |
-| **newtype 与零成本** | ⚠️ 部分 | Def NEWTYPE1、定理 NEWTYPE-T1；repr(transparent)；[type_system_foundations](./type_system_foundations.md) | type_system_foundations |
+| **newtype 与零成本** | ⚠️ 部分 | Def NEWTYPE1、定理 NEWTYPE-T1；repr(transparent)；[type_system_foundations](./10_type_system_foundations.md) | type_system_foundations |
 
 **对类型构造能力的影响**：类型推断歧义、unsized 类型（DST）→ 可能 Multi 或 Impossible；见 [construction_capability](./10_construction_capability.md)。
 
@@ -216,11 +216,11 @@
 
 | 文档 | 已覆盖 | 缺口所在 |
 | :--- | :--- | :--- |
-| [type_system_foundations](./type_system_foundations.md) | 进展性、保持性、类型安全 T1–T3、LUB、Copy、**OFFSET-T1**、**ASC-T1**、**BOT-T1**、**NEWTYPE-T1**、**DEREF-NULL1** | 类型推断歧义 |
-| [trait_system_formalization](./trait_system_formalization.md) | 对象安全、impl 解析、coherence、**COH-T1**、**RPIT-T1**、**ASYNC-T1**、**NEG-T1**、**DYN-T1**、**TRAIT-GAT1**、**SPEC-T1** | 孤儿放宽（倡议） |
-| [lifetime_formalization](./lifetime_formalization.md) | outlives、引用有效性 | 与型变、泛型组合 |
-| [advanced_types](./advanced_types.md) | GAT、const 泛型、**CONST-EVAL-T1**、**CONST-MUT1**、**EXIST1** | existential 完整规则 |
-| [variance_theory](./variance_theory.md) | 协变/逆变/不变 T1–T4 | 与 Copy 变更、组合传递 |
+| [type_system_foundations](./10_type_system_foundations.md) | 进展性、保持性、类型安全 T1–T3、LUB、Copy、**OFFSET-T1**、**ASC-T1**、**BOT-T1**、**NEWTYPE-T1**、**DEREF-NULL1** | 类型推断歧义 |
+| [trait_system_formalization](./10_trait_system_formalization.md) | 对象安全、impl 解析、coherence、**COH-T1**、**RPIT-T1**、**ASYNC-T1**、**NEG-T1**、**DYN-T1**、**TRAIT-GAT1**、**SPEC-T1** | 孤儿放宽（倡议） |
+| [lifetime_formalization](./10_lifetime_formalization.md) | outlives、引用有效性 | 与型变、泛型组合 |
+| [advanced_types](./10_advanced_types.md) | GAT、const 泛型、**CONST-EVAL-T1**、**CONST-MUT1**、**EXIST1** | existential 完整规则 |
+| [variance_theory](./10_variance_theory.md) | 协变/逆变/不变 T1–T4 | 与 Copy 变更、组合传递 |
 
 ---
 
@@ -306,7 +306,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

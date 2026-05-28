@@ -64,16 +64,16 @@
 
 | 文档 | 检查项 | 状态 |
 | :--- | :--- | :--- |
-| ownership_model.md | Def完整、定理有证明、示例可运行 | ✅ |
-| borrow_checker_proof.md | 借用规则完整、T-BR1证明 | ✅ |
-| lifetime_formalization.md | 生命周期系统完整 | ✅ |
-| async_state_machine.md | 异步语义完整 | ✅ |
-| pin_self_referential.md | Pin形式化完整 | ✅ |
-| send_sync_formalization.md | 并发trait完整 | ✅ |
-| type_system_foundations.md | 类型系统基础完整 | ✅ |
-| trait_system_formalization.md | Trait系统完整 | ✅ |
-| variance_theory.md | 型变理论完整 | ✅ |
-| advanced_types.md | 高级类型完整 | ✅ |
+| 10_ownership_model.md | Def完整、定理有证明、示例可运行 | ✅ |
+| 10_borrow_checker_proof.md | 借用规则完整、T-BR1证明 | ✅ |
+| 10_lifetime_formalization.md | 生命周期系统完整 | ✅ |
+| 10_async_state_machine.md | 异步语义完整 | ✅ |
+| 10_pin_self_referential.md | Pin形式化完整 | ✅ |
+| 10_send_sync_formalization.md | 并发trait完整 | ✅ |
+| 10_type_system_foundations.md | 类型系统基础完整 | ✅ |
+| 10_trait_system_formalization.md | Trait系统完整 | ✅ |
+| 10_variance_theory.md | 型变理论完整 | ✅ |
+| 10_advanced_types.md | 高级类型完整 | ✅ |
 | 10_construction_capability.md | 构造能力完整 | ✅ |
 
 **结果**: 11/11 通过 ✅
@@ -181,7 +181,7 @@
 | 检查项 | 测试方法 | 状态 |
 | :--- | :--- | :--- |
 | 主索引 | 10_00_organization_and_navigation.md | ✅ |
-| 证明索引 | PROOF_INDEX.md | ✅ |
+| 证明索引 | 10_proof_index.md | ✅ |
 | 交叉引用 | 10_cross_reference_index.md | ✅ |
 | 快速入口 | 10_user_guide.md | ✅ |
 
@@ -308,7 +308,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

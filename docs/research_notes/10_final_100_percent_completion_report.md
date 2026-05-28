@@ -82,12 +82,12 @@
 
 | 文档 | 内容 | 字数 |
 | :--- | :--- | :--- |
-| ownership_model.md | 所有权系统形式化 | 15,000+ |
-| borrow_checker_proof.md | 借用检查器证明 | 12,000+ |
-| lifetime_formalization.md | 生命周期形式化 | 10,000+ |
-| async_state_machine.md | 异步状态机 | 12,000+ |
-| pin_self_referential.md | Pin 形式化 | 8,000+ |
-| send_sync_formalization.md | Send/Sync 形式化 | 6,000+ |
+| 10_ownership_model.md | 所有权系统形式化 | 15,000+ |
+| 10_borrow_checker_proof.md | 借用检查器证明 | 12,000+ |
+| 10_lifetime_formalization.md | 生命周期形式化 | 10,000+ |
+| 10_async_state_machine.md | 异步状态机 | 12,000+ |
+| 10_pin_self_referential.md | Pin 形式化 | 8,000+ |
+| 10_send_sync_formalization.md | Send/Sync 形式化 | 6,000+ |
 
 **总计**: 63,000+ 字核心形式化内容
 
@@ -99,10 +99,10 @@
 
 | 文档 | 内容 | 字数 |
 | :--- | :--- | :--- |
-| type_system_foundations.md | 类型系统基础 | 10,000+ |
-| trait_system_formalization.md | Trait 系统 | 8,000+ |
-| variance_theory.md | 型变理论 | 6,000+ |
-| advanced_types.md | 高级类型 | 5,000+ |
+| 10_type_system_foundations.md | 类型系统基础 | 10,000+ |
+| 10_trait_system_formalization.md | Trait 系统 | 8,000+ |
+| 10_variance_theory.md | 型变理论 | 6,000+ |
+| 10_advanced_types.md | 高级类型 | 5,000+ |
 | 10_construction_capability.md | 构造能力 | 4,000+ |
 
 **总计**: 33,000+ 字类型理论内容
@@ -226,7 +226,7 @@
 
 - 10_00_comprehensive_summary.md ✅
 - 10_00_organization_and_navigation.md ✅
-- PROOF_INDEX.md ✅
+- 10_proof_index.md ✅
 - 10_core_theorems_full_proofs.md ✅
 - 10_theorem_rust_example_mapping.md ✅
 - 10_formal_concepts_encyclopedia.md ✅
@@ -441,7 +441,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

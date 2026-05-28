@@ -27,6 +27,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 核心研究笔记清单 (已梳理)
 >
@@ -43,7 +44,7 @@
 | 7 | 10_cargo_194_features.md | 相关 | 🔄 待更新 |
 | 8 | formal_methods/README.md | 核心 | 🔄 待更新 |
 | 9 | 10_formal_methods_master_index.md | 核心 | 🔄 待更新 |
-| 10 | PROOF_INDEX.md | 核心 | 🔄 待更新 |
+| 10 | 10_proof_index.md | 核心 | 🔄 待更新 |
 
 ---
 
@@ -107,7 +108,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

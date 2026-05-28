@@ -477,7 +477,7 @@ mindmap
 |------|----------|----------|
 | 系统编程 | [TUTORIAL_OWNERSHIP](./10_tutorial_ownership_safety.md) | [THREADS_CONCURRENCY](../05_guides/05_threads_concurrency_usage_guide.md) |
 | 网络服务 | [ASYNC_PROGRAMMING](../05_guides/05_async_programming_usage_guide.md) | [DESIGN_PATTERNS](../05_guides/05_design_patterns_usage_guide.md) |
-| 数据系统 | [TYPE_SYSTEM](./10_tutorial_type_system.md) | [UNSAFE_RUST](../05_guides/05_unsafe_rust_guide.md) |
+| 数据系统 | [TYPE_SYSTEM](./10_tutorial_02_type_system.md) | [UNSAFE_RUST](../05_guides/05_unsafe_rust_guide.md) |
 
 ### 6.2 领域特定资源
 >
@@ -579,7 +579,7 @@ Rust 应用领域总览
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

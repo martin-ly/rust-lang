@@ -196,7 +196,7 @@
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../10_safe_unsafe_comprehensive_analysis.md) | 安全与非安全论证 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../10_language_semantics_expressiveness.md) | 构造性语义与表达能力 |
 | [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md) | 设计机制论证 |
-| [PROOF_INDEX](../PROOF_INDEX.md) | 形式化证明索引 |
+| [PROOF_INDEX](../10_proof_index.md) | 形式化证明索引 |
 | [DESIGN_PATTERNS_USAGE_GUIDE](../../05_guides/05_design_patterns_usage_guide.md) | 设计模式实践指南 |
 
 ---
@@ -239,7 +239,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

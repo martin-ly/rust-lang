@@ -1471,24 +1471,24 @@ impl Unmovable {
 
 - [完整智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
 - [智能指针示例](../../../crates/c01_ownership_borrow_scope/examples/README.md)
-- [所有权系统研究](../../research_notes/formal_methods/ownership_model.md)
+- [所有权系统研究](../../research_notes/formal_methods/10_ownership_model.md)
 
 ### 形式化理论与类型系统
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [所有权模型形式化](../../research_notes/formal_methods/ownership_model.md) — 所有权系统形式化基础
-- [生命周期形式化](../../research_notes/formal_methods/lifetime_formalization.md) — 智能指针生命周期
-- [Pin 形式化](../../research_notes/formal_methods/pin_self_referential.md) — 自引用结构形式化
-- [Send/Sync 形式化](../../research_notes/formal_methods/send_sync_formalization.md) — 线程安全 trait 形式化
-- [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 智能指针类型理论
+- [所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md) — 所有权系统形式化基础
+- [生命周期形式化](../../research_notes/formal_methods/10_lifetime_formalization.md) — 智能指针生命周期
+- [Pin 形式化](../../research_notes/formal_methods/10_pin_self_referential.md) — 自引用结构形式化
+- [Send/Sync 形式化](../../research_notes/formal_methods/10_send_sync_formalization.md) — 线程安全 trait 形式化
+- [类型系统基础](../../research_notes/type_theory/10_type_system_foundations.md) — 智能指针类型理论
 
 ### 相关速查卡
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与智能指针
-- [类型系统速查卡](./type_system.md) - 指针类型
+- [所有权系统速查卡](./02_ownership_cheatsheet.md) - 所有权与智能指针
+- [类型系统速查卡](./02_type_system.md) - 指针类型
 - [线程与并发速查卡](./02_threads_concurrency_cheatsheet.md) - Arc 在多线程中的应用
 - [异步编程速查卡](./02_async_patterns.md) - Arc 在异步中的应用
 

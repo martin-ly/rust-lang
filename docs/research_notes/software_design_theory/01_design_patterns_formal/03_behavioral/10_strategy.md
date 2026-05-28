@@ -142,7 +142,7 @@ $$\Omega(S) \cap \Omega(C) = \emptyset \text{ 或 } C \text{ 拥有 } S$$
 >
 > **[来源: Rust Official Docs]**
 
-trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trait_system_formalization](../../../type_theory/trait_system_formalization.md) 解析正确性。
+trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trait_system_formalization](../../../type_theory/10_trait_system_formalization.md) 解析正确性。
 
 **证明**：
 
@@ -170,7 +170,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 >
 > **[来源: Rust Official Docs]**
 
-策略调用时借用规则：`&self` 不可变调用策略；`&mut self` 可变时仍满足互斥。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
+策略调用时借用规则：`&self` 不可变调用策略；`&mut self` 可变时仍满足互斥。由 [borrow_checker_proof](../../../formal_methods/10_borrow_checker_proof.md)。
 
 **证明**：
 
@@ -511,7 +511,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -111,7 +111,7 @@
    - [05_advanced_topics_deep_dive.md](./05_advanced_topics_deep_dive.md) - 8个高级主题
 
 3. **最佳实践文档**: 100%完成
-   - [BEST_PRACTICES.md](./BEST_PRACTICES.md) - 10个最佳实践主题
+   - [10_best_practices.md](./10_best_practices.md) - 10个最佳实践主题
 
 4. **性能测试报告**: 100%完成
    - [05_performance_testing_report.md](./05_performance_testing_report.md) - 46个基准测试文件汇总
@@ -303,7 +303,7 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [高级主题深度指南](./05_advanced_topics_deep_dive.md)
-- [综合最佳实践指南](./BEST_PRACTICES.md)
+- [综合最佳实践指南](./10_best_practices.md)
 - [性能测试报告](./05_performance_testing_report.md)
 - [文档交叉引用指南](../07_project/07_documentation_cross_reference_guide.md)
 

@@ -49,7 +49,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 | **T-OW2** | Ownership uniqueness: at any time, at most one variable owns each value | Induction on state; L-OW1 base; move/copy/scope-end steps |
 | **T-BR1** | Borrow checker ⇒ data-race freedom | L-BR1 (write mutual exclusion), L-BR2 (read-write exclusion); contradiction |
 | **T-TY3** | Well-typed programs never reach type errors | T-TY2 preservation + L-TY1 (type errors rejected); contradiction |
-| **SEND-T1 / SYNC-T1** | Send ⇒ safe cross-thread transfer; Sync ⇒ safe cross-thread shared reference | Def SEND1/SYNC1, SYNC-L1 ($T:\text{Sync} \Leftrightarrow \&T:\text{Send}$); [send_sync_formalization](formal_methods/send_sync_formalization.md) |
+| **SEND-T1 / SYNC-T1** | Send ⇒ safe cross-thread transfer; Sync ⇒ safe cross-thread shared reference | Def SEND1/SYNC1, SYNC-L1 ($T:\text{Sync} \Leftrightarrow \&T:\text{Send}$); [send_sync_formalization](formal_methods/10_send_sync_formalization.md) |
 
 ---
 
@@ -65,7 +65,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 | L-BR1 | Write operations mutually exclusive |
 | L-BR2 | Read and write cannot coexist |
 | L-TY1 | Type errors rejected at type-check time |
-| SYNC-L1 | $T : \text{Sync} \Leftrightarrow \&T : \text{Send}$ (Rust std; [send_sync_formalization](formal_methods/send_sync_formalization.md)) |
+| SYNC-L1 | $T : \text{Sync} \Leftrightarrow \&T : \text{Send}$ (Rust std; [send_sync_formalization](formal_methods/10_send_sync_formalization.md)) |
 
 ---
 
@@ -78,7 +78,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 | T-OW2 | coq_skeleton/OWNERSHIP_UNIQUENESS.v | Statement defined; proof Admitted |
 | T-BR1 | coq_skeleton/BORROW_DATARACE_FREE.v | Statement + L-BR1/L-BR2 placeholders; proof Admitted |
 | T-TY3 | coq_skeleton/TYPE_SAFETY.v | Statement + L-TY1 placeholder; proof Admitted |
-| SEND-T1 / SYNC-T1 | [send_sync_formalization](formal_methods/send_sync_formalization.md) | L2 proofs in doc; no Coq skeleton yet |
+| SEND-T1 / SYNC-T1 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | L2 proofs in doc; no Coq skeleton yet |
 
 **Extension path**: Aeneas, coq-of-rust integration for auto-generated Coq.
 
@@ -95,9 +95,9 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) — Unified formal system (incl. Send/Sync)
-- [send_sync_formalization](./formal_methods/send_sync_formalization.md) — Send/Sync Def SEND1/SYNC1, SEND-T1/SYNC-T1, SEND-SYNC-T1
+- [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) — Send/Sync Def SEND1/SYNC1, SEND-T1/SYNC-T1, SEND-SYNC-T1
 - [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) — Safe decidable mechanisms (per-mechanism sections + 4-dim tables)
-- [PROOF_INDEX](./PROOF_INDEX.md) — 105+ proof index
+- [PROOF_INDEX](./10_proof_index.md) — 105+ proof index
 - [AENEAS_INTEGRATION_PLAN](./10_aeneas_integration_plan.md) — Safe Rust → proof assistant
 
 ---
@@ -136,7 +136,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

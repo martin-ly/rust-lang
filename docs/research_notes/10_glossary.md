@@ -167,13 +167,13 @@
 
 - **定义**: 一种静态分析技术，用于在程序执行前推断程序的性质
 - **应用**: 在 Rust 中用于借用检查器的实现
-- **相关**: [借用检查器证明](./formal_methods/borrow_checker_proof.md)
+- **相关**: [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
 
 **异步状态机 (Async State Machine)**:
 
 - **定义**: 用于建模异步程序执行的状态机
 - **应用**: Rust 的 async/await 机制可以转换为状态机
-- **相关**: [异步状态机形式化](./formal_methods/async_state_machine.md)
+- **相关**: [异步状态机形式化](./formal_methods/10_async_state_machine.md)
 
 ### B
 
@@ -185,7 +185,7 @@
 
 - **定义**: Rust 编译器的核心组件，用于检查借用规则
 - **功能**: 确保内存安全，防止数据竞争
-- **相关**: [借用检查器证明](./formal_methods/borrow_checker_proof.md)
+- **相关**: [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
 
 **借用规则 (Borrowing Rules)**:
 
@@ -193,7 +193,7 @@
 - **规则**:
   - 同一时间只能有一个可变借用或多个不可变借用
   - 借用不能超过值的生命周期
-- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+- **相关**: [所有权模型形式化](./formal_methods/10_ownership_model.md)
 
 ### L
 
@@ -205,13 +205,13 @@
 
 - **定义**: Rust 中引用有效的时间范围
 - **表示**: 使用 `'a` 等生命周期参数
-- **相关**: [生命周期形式化](./formal_methods/lifetime_formalization.md)
+- **相关**: [生命周期形式化](./formal_methods/10_lifetime_formalization.md)
 
 **线性类型 (Linear Type)**:
 
 - **定义**: 一种类型系统，要求每个值恰好使用一次
 - **应用**: 用于建模 Rust 的所有权转移
-- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+- **相关**: [所有权模型形式化](./formal_methods/10_ownership_model.md)
 
 ### N
 
@@ -223,7 +223,7 @@
 
 - **定义**: 非词法生命周期，允许借用检查在更精确的作用域内进行
 - **效果**: 减少不必要的生命周期标注，使借用尽早结束
-- **相关**: [生命周期形式化](./formal_methods/lifetime_formalization.md)
+- **相关**: [生命周期形式化](./formal_methods/10_lifetime_formalization.md)
 
 ### O
 
@@ -237,13 +237,13 @@
 - **规则**:
   - 每个值只有一个所有者
   - 当所有者离开作用域时，值被释放
-- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+- **相关**: [所有权模型形式化](./formal_methods/10_ownership_model.md)
 
 **RAII (Resource Acquisition Is Initialization)**:
 
 - **定义**: 资源获取即初始化，资源生命周期与对象绑定
 - **应用**: `Drop` trait 在对象离开作用域时自动释放资源；`MutexGuard`、`File` 等
-- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+- **相关**: [所有权模型形式化](./formal_methods/10_ownership_model.md)
 
 ### P
 
@@ -255,7 +255,7 @@
 
 - **定义**: Rust 的类型，用于固定值在内存中的位置
 - **应用**: 用于自引用类型和异步编程
-- **相关**: [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md)
+- **相关**: [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md)
 
 **过程宏 (Procedural Macro)**:
 
@@ -277,13 +277,13 @@
 
 - **定义**: Rust 编译器的中间表示，介于 HIR 与 LLVM IR 之间
 - **应用**: 借用检查、优化、诊断
-- **相关**: [借用检查器证明](./formal_methods/borrow_checker_proof.md)
+- **相关**: [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
 
 **Move (移动)**:
 
 - **定义**: 默认转移所有权；原变量不再有效
 - **与 Copy**: 非 Copy 类型赋值时发生移动
-- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+- **相关**: [所有权模型形式化](./formal_methods/10_ownership_model.md)
 
 ### C
 
@@ -293,13 +293,13 @@
 
 - **定义**: 位复制语义；类型实现后赋值不移动
 - **约束**: 仅 `Copy` 类型可 `Copy`；含 `Drop` 的不可 `Copy`
-- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+- **相关**: [所有权模型形式化](./formal_methods/10_ownership_model.md)
 
 **Clone (克隆)**:
 
 - **定义**: 显式复制，可自定义逻辑
 - **与 Copy**: `Copy` 隐含 `Clone`；大对象常用 `Clone`
-- **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
+- **相关**: [所有权模型形式化](./formal_methods/10_ownership_model.md)
 
 ### S
 
@@ -310,14 +310,14 @@
 - **定义**: 类型可安全跨线程转移所有权
 - **示例**: `i32`、`String`、`Box<T>`（若 `T: Send`）
 - **反例**: `Rc` 非 Send（多线程持会导致竞态）
-- **相关**: [异步状态机形式化](./formal_methods/async_state_machine.md)
+- **相关**: [异步状态机形式化](./formal_methods/10_async_state_machine.md)
 
 **Sync**:
 
 - **定义**: `&T` 可安全跨线程共享；等价于 `&T: Send`
 - **示例**: `i32`、`Arc<T>`（若 `T: Sync`）
 - **反例**: `Cell` 非 Sync（内部可变无同步）
-- **相关**: [异步状态机形式化](./formal_methods/async_state_machine.md)
+- **相关**: [异步状态机形式化](./formal_methods/10_async_state_machine.md)
 
 ### U
 
@@ -343,7 +343,7 @@
 
 - **定义**: Trait 中定义的占位符类型
 - **示例**: `Iterator` trait 中的 `Item` 类型
-- **相关**: [Trait 系统形式化](./type_theory/trait_system_formalization.md)
+- **相关**: [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
 
 ### C {#c-1}
 
@@ -353,13 +353,13 @@
 
 - **定义**: 使用常量值作为泛型参数
 - **示例**: `[T; N]` 中的 `N` 是常量泛型参数
-- **相关**: [高级类型特性](./type_theory/advanced_types.md)
+- **相关**: [高级类型特性](./type_theory/10_advanced_types.md)
 
 **协变 (Covariance)**:
 
 - **定义**: 类型参数在子类型关系中的变化方向
 - **示例**: `&'a T` 在 `'a` 上是协变的
-- **相关**: [型变理论](./type_theory/variance_theory.md)
+- **相关**: [型变理论](./type_theory/10_variance_theory.md)
 
 ### G
 
@@ -369,7 +369,7 @@
 
 - **定义**: 允许在 Trait 中使用泛型参数的关联类型
 - **应用**: 提供更灵活的类型抽象
-- **相关**: [高级类型特性](./type_theory/advanced_types.md)
+- **相关**: [高级类型特性](./type_theory/10_advanced_types.md)
 
 ### I
 
@@ -379,13 +379,13 @@
 
 - **定义**: 类型参数在子类型关系中的反向变化
 - **示例**: 函数参数类型是逆变的
-- **相关**: [型变理论](./type_theory/variance_theory.md)
+- **相关**: [型变理论](./type_theory/10_variance_theory.md)
 
 **不变 (Invariance)**:
 
 - **定义**: 类型参数不允许子类型关系变化
 - **示例**: `&mut T` 在 `T` 上是不变的
-- **相关**: [型变理论](./type_theory/variance_theory.md)
+- **相关**: [型变理论](./type_theory/10_variance_theory.md)
 
 ### T
 
@@ -395,25 +395,25 @@
 
 - **定义**: Rust 的类型系统特性，类似于接口
 - **功能**: 定义类型必须实现的方法
-- **相关**: [Trait 系统形式化](./type_theory/trait_system_formalization.md)
+- **相关**: [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
 
 **Trait 对象 (Trait Object)**:
 
 - **定义**: 使用动态分发的 Trait 实现
 - **表示**: `dyn Trait`
-- **相关**: [Trait 系统形式化](./type_theory/trait_system_formalization.md)
+- **相关**: [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
 
 **类型推导 (Type Inference)**:
 
 - **定义**: 编译器自动推断类型的能力
 - **应用**: 减少显式类型注解的需要
-- **相关**: [类型系统基础](./type_theory/type_system_foundations.md)
+- **相关**: [类型系统基础](./type_theory/10_type_system_foundations.md)
 
 **类型系统 (Type System)**:
 
 - **定义**: 编程语言中用于类型检查和类型安全的机制
 - **功能**: 防止类型错误，提供类型安全保证
-- **相关**: [类型系统基础](./type_theory/type_system_foundations.md)
+- **相关**: [类型系统基础](./type_theory/10_type_system_foundations.md)
 
 ### V {#v-1}
 
@@ -423,7 +423,7 @@
 
 - **定义**: 描述类型参数在子类型关系中的变化方式
 - **类型**: 协变、逆变、不变
-- **相关**: [型变理论](./type_theory/variance_theory.md)
+- **相关**: [型变理论](./type_theory/10_variance_theory.md)
 
 ---
 
@@ -673,7 +673,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -6,7 +6,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [trait_system_formalization.md](../../../research_notes/type_theory/trait_system_formalization.md)
+> 内容已整合至： [10_trait_system_formalization.md](../../../research_notes/type_theory/10_trait_system_formalization.md)
 
 [返回主索引](../../00_master_index.md)
 
@@ -285,10 +285,10 @@ fn heterogeneous_collection() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Trait 系统形式化 | Trait 系统的完整形式化 | [../../../research_notes/type_theory/trait_system_formalization.md](../../../research_notes/type_theory/trait_system_formalization.md) |
-| 类型系统基础 | 类型理论基础 | [../../../research_notes/type_theory/type_system_foundations.md](../../../research_notes/type_theory/type_system_foundations.md) |
-| 型变理论 | 型变与子类型关系 | [../../../research_notes/type_theory/variance_theory.md](../../../research_notes/type_theory/variance_theory.md) |
-| 证明索引 | Trait 相关证明 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
+| Trait 系统形式化 | Trait 系统的完整形式化 | [../../../research_notes/type_theory/10_trait_system_formalization.md](../../../research_notes/type_theory/10_trait_system_formalization.md) |
+| 类型系统基础 | 类型理论基础 | [../../../research_notes/type_theory/10_type_system_foundations.md](../../../research_notes/type_theory/10_type_system_foundations.md) |
+| 型变理论 | 型变与子类型关系 | [../../../research_notes/type_theory/10_variance_theory.md](../../../research_notes/type_theory/10_variance_theory.md) |
+| 证明索引 | Trait 相关证明 | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) |
 | 工具指南 | Trait 验证工具 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
 
 ---

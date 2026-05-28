@@ -210,7 +210,7 @@ impl Container for Vec<i32> {
 // 研究任务：
 // 1. 形式化描述改进后的 trait 解析算法
 // 2. 验证向后兼容性
-// 3. 更新 trait_system_formalization.md
+// 3. 更新 10_trait_system_formalization.md
 ```
 
 ### 场景 4：高阶生命周期处理
@@ -371,8 +371,8 @@ fn api_stabilization_examples() {
 | :--- | :--- | :--- |
 | MaybeUninit | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) | unsafe 契约矩阵 |
 | 联合体 | [10_formal_proof_system_guide.md](./10_formal_proof_system_guide.md) | UB 分类 |
-| 自动特征 | [trait_system_formalization.md](./type_theory/trait_system_formalization.md) | Trait 解析 |
-| 高阶生命周期 | [lifetime_formalization.md](./type_theory/lifetime_formalization.md) | 生命周期形式化 |
+| 自动特征 | [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md) | Trait 解析 |
+| 高阶生命周期 | [10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md) | 生命周期形式化 |
 
 ### 核心定理
 
@@ -400,11 +400,11 @@ fn api_stabilization_examples() {
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
-| 形式化方法 | 所有权模型 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) |
-| 形式化方法 | 借用检查器 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
-| 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
-| 类型理论 | Trait 系统 | [type_theory/trait_system_formalization.md](./type_theory/trait_system_formalization.md) |
-| 类型理论 | 生命周期形式化 | [type_theory/lifetime_formalization.md](./type_theory/lifetime_formalization.md) |
+| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) |
+| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) |
+| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) |
+| 类型理论 | Trait 系统 | [type_theory/10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md) |
+| 类型理论 | 生命周期形式化 | [type_theory/10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md) |
 | 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
 
 ### 项目文档
@@ -415,7 +415,7 @@ fn api_stabilization_examples() {
 | :--- | :--- | :--- |
 | 系统总结 | [10_system_summary.md](./10_system_summary.md) | 研究笔记系统总结 |
 | 理论体系 | [10_theoretical_and_argumentation_system_architecture.md](./10_theoretical_and_argumentation_system_architecture.md) | 理论体系架构 |
-| 证明索引 | [PROOF_INDEX.md](./PROOF_INDEX.md) | 形式化证明索引 |
+| 证明索引 | [10_proof_index.md](./10_proof_index.md) | 形式化证明索引 |
 
 ---
 
@@ -459,7 +459,7 @@ fn api_stabilization_examples() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

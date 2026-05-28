@@ -18,8 +18,8 @@
 | :--- | :--- | :--- |
 | **性能基准实验** | [../../research_notes/experiments/10_performance_benchmarks.md](../../research_notes/experiments/10_performance_benchmarks.md) | 基准测试方法论、统计分析 |
 | **编译器优化** | [../../research_notes/experiments/10_compiler_optimizations.md](../../research_notes/experiments/10_compiler_optimizations.md) | 编译器优化分析 |
-| **性能调优指南** | [../../05_guides/PERFORMANCE_TUNING_GUIDE.md](../../05_guides/PERFORMANCE_TUNING_GUIDE.md) | 实用优化技巧 |
-| **证明索引** | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) | 性能相关证明 |
+| **性能调优指南** | [../../05_guides/05_performance_tuning_guide.md](../../05_guides/05_performance_tuning_guide.md) | 实用优化技巧 |
+| **证明索引** | [../../research_notes/10_proof_index.md](../../research_notes/10_proof_index.md) | 性能相关证明 |
 | **工具指南** | [../../research_notes/10_tools_guide.md](../../research_notes/10_tools_guide.md) | 基准测试工具使用 |
 
 ---
@@ -408,6 +408,7 @@ $ perf report
   - [相关 crates](#相关-crates)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ### 使用 cargo-flamegraph
 
@@ -571,7 +572,7 @@ criterion_main!(benches);
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 性能调优指南 | 实用优化技巧 | [../../05_guides/PERFORMANCE_TUNING_GUIDE.md](../../05_guides/PERFORMANCE_TUNING_GUIDE.md) |
+| 性能调优指南 | 实用优化技巧 | [../../05_guides/05_performance_tuning_guide.md](../../05_guides/05_performance_tuning_guide.md) |
 
 ---
 

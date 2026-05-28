@@ -202,7 +202,7 @@ research_notes/
 14. **10_getting_started.md** - 快速入门指南
 15. **10_faq.md** - 常见问题解答
 16. **10_maintenance_guide.md** - 维护指南
-17. **BEST_PRACTICES.md** - 最佳实践
+17. **10_best_practices.md** - 最佳实践
 18. **10_glossary.md** - 术语表
 19. **10_resources.md** - 研究资源汇总
 20. **10_system_integration.md** - 系统集成指南
@@ -228,11 +228,11 @@ research_notes/
 
 | 文档 | 链接 | 关键定理 |
 | :--- | :--- | :--- |
-| ownership_model.md | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) | T-OW1, T-OW2, T-OW3 |
-| borrow_checker_proof.md | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) | T-BR1 |
-| async_state_machine.md | [formal_methods/async_state_machine.md](./formal_methods/async_state_machine.md) | T6.1, T6.2, T6.3 |
-| lifetime_formalization.md | [formal_methods/lifetime_formalization.md](./formal_methods/lifetime_formalization.md) | T-LT1, T-LT2 |
-| pin_self_referential.md | [formal_methods/pin_self_referential.md](./formal_methods/pin_self_referential.md) | T-PN1, T-PN2, T-PN3 |
+| 10_ownership_model.md | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) | T-OW1, T-OW2, T-OW3 |
+| 10_borrow_checker_proof.md | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) | T-BR1 |
+| 10_async_state_machine.md | [formal_methods/10_async_state_machine.md](./formal_methods/10_async_state_machine.md) | T6.1, T6.2, T6.3 |
+| 10_lifetime_formalization.md | [formal_methods/10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md) | T-LT1, T-LT2 |
+| 10_pin_self_referential.md | [formal_methods/10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md) | T-PN1, T-PN2, T-PN3 |
 
 #### 类型理论研究 (5个)
 
@@ -242,11 +242,11 @@ research_notes/
 
 | 文档 | 链接 | 关键定义 |
 | :--- | :--- | :--- |
-| type_system_foundations.md | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) | Def 1.1-3.3, T-TY1, T-TY2, T-TY3 |
-| trait_system_formalization.md | [type_theory/trait_system_formalization.md](./type_theory/trait_system_formalization.md) | Def TR1-TR5 |
-| lifetime_formalization.md | [type_theory/lifetime_formalization.md](./type_theory/lifetime_formalization.md) | Def L1-L3 |
-| advanced_types.md | [type_theory/advanced_types.md](./type_theory/advanced_types.md) | Def 1.1-3.2, AT-T1, AT-T2, AT-T3 |
-| variance_theory.md | [type_theory/variance_theory.md](./type_theory/variance_theory.md) | Def 1.1-3.1, T1-T4 |
+| 10_type_system_foundations.md | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) | Def 1.1-3.3, T-TY1, T-TY2, T-TY3 |
+| 10_trait_system_formalization.md | [type_theory/10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md) | Def TR1-TR5 |
+| 10_lifetime_formalization.md | [type_theory/10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md) | Def L1-L3 |
+| 10_advanced_types.md | [type_theory/10_advanced_types.md](./type_theory/10_advanced_types.md) | Def 1.1-3.2, AT-T1, AT-T2, AT-T3 |
+| 10_variance_theory.md | [type_theory/10_variance_theory.md](./type_theory/10_variance_theory.md) | Def 1.1-3.1, T1-T4 |
 
 #### 实验研究 (5个)
 
@@ -579,12 +579,12 @@ fn main() {
 
 | 定理 | 文档 | 研究笔记 |
 | :--- | :--- | :--- |
-| T-OW1, T-OW2, T-OW3 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | ownership_model.md |
-| T-BR1 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | borrow_checker_proof.md |
-| T-TY1, T-TY2, T-TY3 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | type_system_foundations.md |
-| T-LT1, T-LT2 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | lifetime_formalization.md |
-| T6.1, T6.2, T6.3 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | async_state_machine.md |
-| T-PN1, T-PN2, T-PN3 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | pin_self_referential.md |
+| T-OW1, T-OW2, T-OW3 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 10_ownership_model.md |
+| T-BR1 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 10_borrow_checker_proof.md |
+| T-TY1, T-TY2, T-TY3 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 10_type_system_foundations.md |
+| T-LT1, T-LT2 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 10_lifetime_formalization.md |
+| T6.1, T6.2, T6.3 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 10_async_state_machine.md |
+| T-PN1, T-PN2, T-PN3 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 10_pin_self_referential.md |
 
 ### Coq 证明骨架
 >
@@ -605,7 +605,7 @@ fn main() {
 | 完整总结 | 项目全貌与知识地图 | [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md) |
 | 理论体系 | 四层理论体系结构 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) |
 | 安全分析 | 安全与非安全边界 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./10_safe_unsafe_comprehensive_analysis.md) |
-| 证明索引 | 26个证明索引 | [PROOF_INDEX](./PROOF_INDEX.md) |
+| 证明索引 | 26个证明索引 | [PROOF_INDEX](./10_proof_index.md) |
 
 ---
 
@@ -706,7 +706,7 @@ fn main() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -874,9 +874,9 @@ let _ = &v;
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [错误处理速查卡](./02_error_handling_cheatsheet.md) - 错误处理模式
-- [类型系统速查卡](./type_system.md) - 类型与函数
+- [类型系统速查卡](./02_type_system.md) - 类型与函数
 - [集合与迭代器速查卡](./02_collections_iterators_cheatsheet.md) - 迭代器与循环
-- [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与闭包
+- [所有权系统速查卡](./02_ownership_cheatsheet.md) - 所有权与闭包
 
 ---
 
@@ -1143,8 +1143,8 @@ fn main() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [借用检查器证明](../../research_notes/formal_methods/borrow_checker_proof.md) — 控制流相关的借用规则证明
-- [Send/Sync 形式化](../../research_notes/formal_methods/send_sync_formalization.md) — 闭包在多线程环境下的安全性
+- [借用检查器证明](../../research_notes/formal_methods/10_borrow_checker_proof.md) — 控制流相关的借用规则证明
+- [Send/Sync 形式化](../../research_notes/formal_methods/10_send_sync_formalization.md) — 闭包在多线程环境下的安全性
 
 ---
 

@@ -119,7 +119,7 @@ Level 1: 概述与导航
 Level 2: 核心形式化
 ├── formal_methods/ (6篇)
 ├── type_theory/ (5篇)
-└── PROOF_INDEX.md
+└── 10_proof_index.md
 
 Level 3: 设计理论
 ├── software_design_theory/
@@ -410,7 +410,7 @@ L3: 机器检查 (Coq骨架)
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

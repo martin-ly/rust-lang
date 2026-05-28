@@ -110,8 +110,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
 | 变量与可变性 | [TUTORIAL_OWNERSHIP_SAFETY](../10_tutorial_ownership_safety.md) | 2天 |
-| 数据类型 | [type_system_foundations](../type_theory/type_system_foundations.md) §1 | 2天 |
-| 函数 | ownership_model.md §移动语义 | 1天 |
+| 数据类型 | [type_system_foundations](../type_theory/10_type_system_foundations.md) §1 | 2天 |
+| 函数 | 10_ownership_model.md §移动语义 | 1天 |
 | 控制流 | 标准文档 | 1天 |
 | 基本所有权 | TUTORIAL_OWNERSHIP_SAFETY §2-3 | 3天 |
 | 结构体与枚举 | type_system_foundations §复合类型 | 2天 |
@@ -156,12 +156,12 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
-| 所有权深入 | [ownership_model](./ownership_model.md) | 1周 |
-| 借用检查器 | [borrow_checker_proof](./borrow_checker_proof.md) §1-3 | 1周 |
+| 所有权深入 | [ownership_model](./10_ownership_model.md) | 1周 |
+| 借用检查器 | [borrow_checker_proof](./10_borrow_checker_proof.md) §1-3 | 1周 |
 | 引用与切片 | TUTORIAL_OWNERSHIP_SAFETY §5-7 | 3天 |
-| 结构体方法 | trait_system_formalization.md | 2天 |
-| 泛型基础 | [variance_theory](../type_theory/variance_theory.md) §1 | 3天 |
-| Trait基础 | trait_system_formalization.md §1-2 | 3天 |
+| 结构体方法 | 10_trait_system_formalization.md | 2天 |
+| 泛型基础 | [variance_theory](../type_theory/10_variance_theory.md) §1 | 3天 |
+| Trait基础 | 10_trait_system_formalization.md §1-2 | 3天 |
 | 错误处理 | 10_error_handling_decision_tree.md | 2天 |
 
 ### 检查清单
@@ -201,13 +201,13 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
 | 生命周期基础 | [TUTORIAL_LIFETIMES](../10_tutorial_lifetimes.md) | 3天 |
-| 生命周期形式化 | [lifetime_formalization](./lifetime_formalization.md) | 1周 |
+| 生命周期形式化 | [lifetime_formalization](./10_lifetime_formalization.md) | 1周 |
 | 生命周期省略 | TUTORIAL_LIFETIMES §省略规则 | 2天 |
 | 结构体生命周期 | TUTORIAL_LIFETIMES §结构体 | 2天 |
-| 型变 | [variance_theory](../type_theory/variance_theory.md) | 1周 |
-| Trait对象 | trait_system_formalization.md §动态分发 | 3天 |
-| 闭包 | [advanced_types](../type_theory/advanced_types.md) | 3天 |
-| 迭代器 | [type_system_foundations](../type_theory/type_system_foundations.md) | 3天 |
+| 型变 | [variance_theory](../type_theory/10_variance_theory.md) | 1周 |
+| Trait对象 | 10_trait_system_formalization.md §动态分发 | 3天 |
+| 闭包 | [advanced_types](../type_theory/10_advanced_types.md) | 3天 |
+| 迭代器 | [type_system_foundations](../type_theory/10_type_system_foundations.md) | 3天 |
 
 ### 检查清单
 
@@ -244,13 +244,13 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
 | 线程基础 | 10_tutorial_concurrency_models.md | 3天 |
-| Send/Sync | [send_sync_formalization](./send_sync_formalization.md) | 1周 |
+| Send/Sync | [send_sync_formalization](./10_send_sync_formalization.md) | 1周 |
 | 共享状态 | 10_concurrency_safety_matrix.md | 3天 |
 | 消息传递 | [CONCURRENCY_CONCEPT_MINDMAP](./10_concurrency_concept_mindmap.md) | 2天 |
 | 异步基础 | [ASYNC_CONCEPT_MINDMAP](./10_async_concept_mindmap.md) §1-2 | 3天 |
-| async/await | [async_state_machine](./async_state_machine.md) §1-3 | 1周 |
-| Pin | [pin_self_referential](./pin_self_referential.md) | 1周 |
-| Future | async_state_machine.md §4-5 | 1周 |
+| async/await | [async_state_machine](./10_async_state_machine.md) §1-3 | 1周 |
+| Pin | [pin_self_referential](./10_pin_self_referential.md) | 1周 |
+| Future | 10_async_state_machine.md §4-5 | 1周 |
 | 设计模式 | software_design_theory/01_design_patterns_formal/ | 2周 |
 
 ### 检查清单
@@ -292,8 +292,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | FFI | 外部文档 | 1周 |
 | 内存布局 | 10_memory_model_mindmap.md §内存布局 | 3天 |
 | 形式化基础 | [PROOF_TECHNIQUES_MINDMAP](./10_proof_techniques_mindmap.md) | 2周 |
-| 所有权形式化 | ownership_model.md §形式化 | 2周 |
-| 借用证明 | borrow_checker_proof.md §定理 | 2周 |
+| 所有权形式化 | 10_ownership_model.md §形式化 | 2周 |
+| 借用证明 | 10_borrow_checker_proof.md §定理 | 2周 |
 | 自定义分配器 | 高级主题 | 1周 |
 
 ### 检查清单
@@ -537,7 +537,7 @@ Level 1 ──> Level 2 ──> Level 3 ──> 证明技术 ──> Coq ──>
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

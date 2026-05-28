@@ -157,7 +157,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
    - 输入：`&self`（不可变借用）
    - 输出：`Self`（拥有值）
 
-2. **类型保持**：根据 [type_system_foundations](../../../type_theory/type_system_foundations.md)，
+2. **类型保持**：根据 [type_system_foundations](../../../type_theory/10_type_system_foundations.md)，
    - $\Gamma \vdash t : T$
    - $\Gamma \vdash \mathit{clone} : \&T \rightarrow T$
    - $\Gamma \vdash \mathit{clone}(&t) : T$
@@ -192,7 +192,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
    // a 仍可使用
    ```
 
-3. **无悬垂**：根据 [ownership_model](../../../formal_methods/ownership_model.md) T2，
+3. **无悬垂**：根据 [ownership_model](../../../formal_methods/10_ownership_model.md) T2，
    - 借用生命周期不超过原对象
    - 返回值所有权独立
 
@@ -537,7 +537,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

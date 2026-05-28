@@ -344,8 +344,8 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [研究笔记术语表](./research_notes/10_glossary.md) - 形式化方法和研究相关术语
-- [所有权速查卡](./02_reference/quick_reference/ownership_cheatsheet.md) - 所有权系统快速参考
-- [类型系统速查卡](./02_reference/quick_reference/type_system.md) - 类型系统快速参考
+- [所有权速查卡](./02_reference/quick_reference/02_ownership_cheatsheet.md) - 所有权系统快速参考
+- [类型系统速查卡](./02_reference/quick_reference/02_type_system.md) - 类型系统快速参考
 - [错误码映射](./02_reference/02_error_code_mapping.md) - 编译器错误码详解
 
 ### Ferrocene FLS 标准对照

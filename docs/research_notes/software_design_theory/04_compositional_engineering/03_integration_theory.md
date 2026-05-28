@@ -94,7 +94,7 @@
 若 $M_1$、$M_2$ 各自满足 $\Phi$，且跨模块调用不破坏 $\Phi$，则称**组合保持 $\Phi$**。
 
 **Axiom IT1**：所有权在跨模块值传递时转移；引用传递遵守借用规则。
-由 [ownership_model](../../formal_methods/ownership_model.md) 规则 1–3、[borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 规则 5–8。
+由 [ownership_model](../../formal_methods/10_ownership_model.md) 规则 1–3、[borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) 规则 5–8。
 
 **Axiom IT2**：`Send`/`Sync` 为结构性质；若 $T$ 的所有字段为 Send，则 $T$ 为 Send。组合不改变字段类型。
 
@@ -104,11 +104,11 @@
 
 **定理 IT-T2（跨模块 Send/Sync 传递）**：若 $M_1$ 的 `pub fn` 返回 `impl Future + Send` 且内部持有 $T$，则 $T: \mathrm{Send}$ 为必要条件。
 
-*证明*：由 [async_state_machine](../../formal_methods/async_state_machine.md) T6.1–T6.3；Future 跨 await 点持有时，需 Send 才能跨线程。
+*证明*：由 [async_state_machine](../../formal_methods/10_async_state_machine.md) T6.1–T6.3；Future 跨 await 点持有时，需 Send 才能跨线程。
 
 **引理 IT-L1（跨模块引用生命周期）**：若 $M_1$ 的 `pub fn` 返回 `&'a T`，则 `'a` 必须 outlive 调用者可见的生命周期；否则编译错误。
 
-*证明*：由 [lifetime_formalization](../../formal_methods/lifetime_formalization.md) T2；跨模块不改变 outlives 规则。∎
+*证明*：由 [lifetime_formalization](../../formal_methods/10_lifetime_formalization.md) T2；跨模块不改变 outlives 规则。∎
 
 **推论 IT-C1**：组合保持 CE-T1、CE-T2、CE-T3 当且仅当各模块满足 Axiom IT1、IT2 且跨模块调用不违反 IT-T1、IT-T2、IT-L1。
 
@@ -121,27 +121,27 @@
 ```text
 组合软件工程有效性
         │
-        ├── 所有权：[ownership_model](../../formal_methods/ownership_model.md) T2, T3
+        ├── 所有权：[ownership_model](../../formal_methods/10_ownership_model.md) T2, T3
         │   组合时值传递/移动/借用保持唯一性
         │   跨模块调用：参数为值则移动，为 & 则借用
         │
-        ├── 借用：[borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) T1
+        ├── 借用：[borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) T1
         │   组合时借用规则跨模块成立
         │   pub fn f(&self, x: &T) 保证 x 与 self 借用互斥
         │
-        ├── 生命周期：[lifetime_formalization](../../formal_methods/lifetime_formalization.md) T2
+        ├── 生命周期：[lifetime_formalization](../../formal_methods/10_lifetime_formalization.md) T2
         │   组合时 outlives 关系保持
         │   跨模块引用需满足生命周期约束
         │
-        ├── 类型系统：[type_system_foundations](../../type_theory/type_system_foundations.md) T1–T3
+        ├── 类型系统：[type_system_foundations](../../type_theory/10_type_system_foundations.md) T1–T3
         │   组合时类型检查保持
         │   模块边界：实参类型与形参一致
         │
-        ├── Trait：[trait_system_formalization](../../type_theory/trait_system_formalization.md)
+        ├── Trait：[trait_system_formalization](../../type_theory/10_trait_system_formalization.md)
         │   组合时 impl 解析、对象安全保持
         │   泛型约束跨模块传递
         │
-        └── 异步：[async_state_machine](../../formal_methods/async_state_machine.md) T6.1–T6.3
+        └── 异步：[async_state_machine](../../formal_methods/10_async_state_machine.md) T6.1–T6.3
             组合时 Future 状态转换保持
             async 模块组合：await 链保持 Send
 ```
@@ -538,7 +538,7 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

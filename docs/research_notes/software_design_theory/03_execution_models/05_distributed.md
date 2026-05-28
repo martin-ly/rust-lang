@@ -327,11 +327,11 @@ where
 
 **定理 DI-CONC-T1（Saga + Send/Sync 组合）**：Saga 编排式实现中，各步骤闭包若跨线程传递，须满足 `Send + Sync`；
 补偿闭包 `Box<dyn Fn() -> Result<(), E> + Send>` 保证跨线程安全。
-由 [send_sync_formalization](../../../research_notes/formal_methods/send_sync_formalization.md) SEND-T1、SYNC-T1 与 Saga 补偿语义组合。
+由 [send_sync_formalization](../../../research_notes/formal_methods/10_send_sync_formalization.md) SEND-T1、SYNC-T1 与 Saga 补偿语义组合。
 
 **定理 DI-CONC-T2（CQRS + 通道组合）**：CQRS 读写分离时，命令端与查询端通过 channel 通信；
 `Sender<Event>: Send`、`Receiver<Event>: Send` 保证跨线程事件传递无数据竞争。
-由 [borrow_checker_proof](../../../research_notes/formal_methods/borrow_checker_proof.md) T1 与 channel 语义。
+由 [borrow_checker_proof](../../../research_notes/formal_methods/10_borrow_checker_proof.md) T1 与 channel 语义。
 
 **Rust 对应**：`OrchestratedSaga` 的 `steps`/`compensations` 若为 `Vec<Box<dyn Saga<(), E> + Send>>`，则 `run()` 可安全跨线程调度；
 CQRS 使用 `tokio::sync::mpsc` 传递事件。
@@ -505,7 +505,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

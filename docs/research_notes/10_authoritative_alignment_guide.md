@@ -316,12 +316,12 @@ let r = &s;
 
 | 概念 | 官方来源 | 本项目 | 状态 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
-| 所有权 | Rust Book 4.1 | [所有权模型](formal_methods/ownership_model.md) | ✅ | 一致 |
-| 借用 | Rust Book 4.2 | [借用检查](formal_methods/borrow_checker_proof.md) | ✅ | 一致 |
-| 生命周期 | Rust Book 10.3 | [生命周期形式化](formal_methods/lifetime_formalization.md) | ✅ | 一致 |
-| 泛型 | Rust Book 10 | [类型系统](type_theory/type_system_foundations.md) | ✅ | 一致 |
-| Trait | Rust Book 10.2 | [Trait系统](type_theory/trait_system_formalization.md) | ✅ | 一致 |
-| async/await | Rust Book 17 | [异步状态机](formal_methods/async_state_machine.md) | ✅ | 一致 |
+| 所有权 | Rust Book 4.1 | [所有权模型](formal_methods/10_ownership_model.md) | ✅ | 一致 |
+| 借用 | Rust Book 4.2 | [借用检查](formal_methods/10_borrow_checker_proof.md) | ✅ | 一致 |
+| 生命周期 | Rust Book 10.3 | [生命周期形式化](formal_methods/10_lifetime_formalization.md) | ✅ | 一致 |
+| 泛型 | Rust Book 10 | [类型系统](type_theory/10_type_system_foundations.md) | ✅ | 一致 |
+| Trait | Rust Book 10.2 | [Trait系统](type_theory/10_trait_system_formalization.md) | ✅ | 一致 |
+| async/await | Rust Book 17 | [异步状态机](formal_methods/10_async_state_machine.md) | ✅ | 一致 |
 
 ### 代码示例检查
 
@@ -329,17 +329,17 @@ let r = &s;
 
 | 示例 | 官方来源 | 本项目 | 状态 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
-| Hello World | Rust Book 1.2 | quick_reference/ownership_cheatsheet.md | ✅ | 一致 |
-| 所有权转移 | Rust Book 4.1 | formal_methods/ownership_model.md | ✅ | 一致 |
-| 共享借用 | Rust Book 4.2 | formal_methods/borrow_checker_proof.md | ✅ | 一致 |
-| 可变借用 | Rust Book 4.2 | formal_methods/borrow_checker_proof.md | ✅ | 一致 |
-| 结构体 | Rust Book 5 | quick_reference/type_system.md | ✅ | 一致 |
-| 枚举 | Rust Book 6 | quick_reference/type_system.md | ✅ | 一致 |
+| Hello World | Rust Book 1.2 | quick_reference/02_ownership_cheatsheet.md | ✅ | 一致 |
+| 所有权转移 | Rust Book 4.1 | formal_methods/10_ownership_model.md | ✅ | 一致 |
+| 共享借用 | Rust Book 4.2 | formal_methods/10_borrow_checker_proof.md | ✅ | 一致 |
+| 可变借用 | Rust Book 4.2 | formal_methods/10_borrow_checker_proof.md | ✅ | 一致 |
+| 结构体 | Rust Book 5 | quick_reference/02_type_system.md | ✅ | 一致 |
+| 枚举 | Rust Book 6 | quick_reference/02_type_system.md | ✅ | 一致 |
 | 模式匹配 | Rust Book 6.2 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
 | 错误处理 | Rust Book 9 | quick_reference/02_error_handling_cheatsheet.md | ✅ | 一致 |
 | 泛型 | Rust Book 10 | quick_reference/02_generics_cheatsheet.md | ✅ | 一致 |
-| Trait | Rust Book 10.2 | quick_reference/type_system.md | ✅ | 一致 |
-| 生命周期 | Rust Book 10.3 | quick_reference/type_system.md | ✅ | 一致 |
+| Trait | Rust Book 10.2 | quick_reference/02_type_system.md | ✅ | 一致 |
+| 生命周期 | Rust Book 10.3 | quick_reference/02_type_system.md | ✅ | 一致 |
 | 测试 | Rust Book 11 | quick_reference/02_testing_cheatsheet.md | ✅ | 一致 |
 | 闭包 | Rust Book 13 | quick_reference/02_control_flow_functions_cheatsheet.md | ✅ | 一致 |
 | 迭代器 | Rust Book 13.2 | quick_reference/02_collections_iterators_cheatsheet.md | ✅ | 一致 |
@@ -459,7 +459,7 @@ let r = &s;
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

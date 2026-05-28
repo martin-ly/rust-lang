@@ -35,14 +35,14 @@
 
 | 特性/变更 | 反例或边界说明 | 形式化/设计文档 |
 | :--- | :--- | :--- |
-| **deref_nullptr** | 对空指针解引用为未定义行为；`*ptr` 当 `ptr.is_null()` 时 UB | [borrow_checker_proof](formal_methods/borrow_checker_proof.md)、[ownership_model](formal_methods/ownership_model.md) |
+| **deref_nullptr** | 对空指针解引用为未定义行为；`*ptr` 当 `ptr.is_null()` 时 UB | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[ownership_model](formal_methods/10_ownership_model.md) |
 | **C variadic** | FFI 中 C 风格可变参数；类型与 ABI 必须与 C 端一致，否则未定义行为 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) § 9. FFI |
-| **const &mut in static** | `static` 中 `&mut` 的约束与 `const` 求值；不当使用导致编译错误或语义差异 | [advanced_types](type_theory/advanced_types.md)、[RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 8. 常量与编译期 |
-| **Copy 特化移除** | 不再允许为仅部分类型参数实现 Copy 的特化；反例：仅对 `T: Copy` 特化 Copy 的泛型 | [trait_system_formalization](type_theory/trait_system_formalization.md)、[RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 10. 1.93 新增 |
+| **const &mut in static** | `static` 中 `&mut` 的约束与 `const` 求值；不当使用导致编译错误或语义差异 | [advanced_types](type_theory/10_advanced_types.md)、[RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 8. 常量与编译期 |
+| **Copy 特化移除** | 不再允许为仅部分类型参数实现 Copy 的特化；反例：仅对 `T: Copy` 特化 Copy 的泛型 | [trait_system_formalization](type_theory/10_trait_system_formalization.md)、[RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 10. 1.93 新增 |
 | **offset_of!** | 对非 `packed` 或零大小字段的用法、跨 crate 稳定性；不当字段导致编译错误 | [RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 10. 1.93 新增 |
 | **asm_cfg / target_cfg** | `asm!` 与 `cfg` 组合下目标不支持时的回退；错误配置导致编译失败 | [RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 9. FFI、§ 10 |
-| **LUB coercion** | 分支类型 LUB 与自动强转；若类型不兼容仍会报错，反例为过度依赖隐式 LUB 导致的可读性下降 | [type_system_foundations](type_theory/type_system_foundations.md)、[RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 2. 类型系统 |
-| **全局分配器 / thread_local** | 分配器与 thread_local 的初始化顺序；错误依赖导致未定义行为或崩溃 | [ownership_model](formal_methods/ownership_model.md)、[RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 1. 内存与所有权 |
+| **LUB coercion** | 分支类型 LUB 与自动强转；若类型不兼容仍会报错，反例为过度依赖隐式 LUB 导致的可读性下降 | [type_system_foundations](type_theory/10_type_system_foundations.md)、[RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 2. 类型系统 |
+| **全局分配器 / thread_local** | 分配器与 thread_local 的初始化顺序；错误依赖导致未定义行为或崩溃 | [ownership_model](formal_methods/10_ownership_model.md)、[RUST_193](./10_rust_193_language_features_comprehensive_analysis.md) § 1. 内存与所有权 |
 | **lint 变更** | 1.93 默认启用或升级的 lint；旧代码可能新增警告或错误，需按发布说明迁移 | [INCREMENTAL_UPDATE_FLOW](./10_incremental_update_flow.md)、releases.rs 1.93.0 |
 
 ---
@@ -51,8 +51,8 @@
 >
 > **[来源: Rust Official Docs]**
 
-- **所有权/借用**：deref_nullptr、全局分配器反例见 [formal_methods](formal_methods/README.md) 六篇并表与 [borrow_checker_proof](formal_methods/borrow_checker_proof.md)。
-- **类型/Trait**：Copy 特化移除、const/static 边界见 [type_theory](type_theory/README.md)、[trait_system_formalization](type_theory/trait_system_formalization.md)、[advanced_types](type_theory/advanced_types.md)。
+- **所有权/借用**：deref_nullptr、全局分配器反例见 [formal_methods](formal_methods/README.md) 六篇并表与 [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)。
+- **类型/Trait**：Copy 特化移除、const/static 边界见 [type_theory](type_theory/README.md)、[trait_system_formalization](type_theory/10_trait_system_formalization.md)、[advanced_types](type_theory/10_advanced_types.md)。
 - **92 项特性与反例**：每项特性的动机/形式化/反例见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md)；本索引仅作 1.93 相关反例的集中入口。
 
 ---
@@ -97,7 +97,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

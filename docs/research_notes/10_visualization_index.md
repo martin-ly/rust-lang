@@ -414,7 +414,7 @@ fn main() {
 | 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 知识结构化思维导图 |
 | 概念矩阵 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念对比矩阵 |
 | 决策树 | [DECISION_GRAPH_NETWORK](../04_thinking/04_decision_graph_network.md) | 决策图网络 |
-| 证明树 | [PROOF_INDEX](./PROOF_INDEX.md) | 证明树结构 |
+| 证明树 | [PROOF_INDEX](./10_proof_index.md) | 证明树结构 |
 
 ### 研究笔记链接
 >
@@ -422,8 +422,8 @@ fn main() {
 
 | 类别 | 文档 | 可视化内容 |
 | :--- | :--- | :--- |
-| 形式化方法 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) | 所有权状态图 |
-| 类型理论 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) | 类型推导树 |
+| 形式化方法 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) | 所有权状态图 |
+| 类型理论 | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) | 类型推导树 |
 | 实验研究 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) | 性能图表 |
 
 ### 形式化定理链接
@@ -478,7 +478,7 @@ fn main() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

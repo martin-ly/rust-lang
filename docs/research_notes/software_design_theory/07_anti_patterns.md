@@ -63,7 +63,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**Def AP1（反模式）**：违反设计模式不变式或 Rust 安全规则的实现；$\mathit{SafeB}(P) = \mathrm{Inexpr}$ 或违反 [ownership_model](../formal_methods/ownership_model.md)、[borrow_checker_proof](../formal_methods/borrow_checker_proof.md) 规则。
+**Def AP1（反模式）**：违反设计模式不变式或 Rust 安全规则的实现；$\mathit{SafeB}(P) = \mathrm{Inexpr}$ 或违反 [ownership_model](../formal_methods/10_ownership_model.md)、[borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) 规则。
 
 **Axiom AP1**：反模式导致 UB、数据竞争、或逻辑错误；与 [safe_unsafe_matrix](05_boundary_system/10_safe_unsafe_matrix.md) SBM-T2、SBM-L2 衔接。
 
@@ -392,7 +392,7 @@ let x = match result {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

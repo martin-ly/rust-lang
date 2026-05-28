@@ -251,11 +251,11 @@ Week 13-14: 工具实践
 
 | 原有文档 | 新增理论支持 | 衔接点 |
 | :--- | :--- | :--- |
-| ownership_model.md | 分离逻辑 | 所有权作为分离合取 |
-| borrow_checker_proof.md | 分离逻辑、霍尔逻辑 | 借用作为资源 |
-| type_system_foundations.md | 操作语义 | 类型保持定理 |
-| async_state_machine.md | 并发语义 | Future状态转换 |
-| send_sync_formalization.md | 模态逻辑 | 并发安全性 |
+| 10_ownership_model.md | 分离逻辑 | 所有权作为分离合取 |
+| 10_borrow_checker_proof.md | 分离逻辑、霍尔逻辑 | 借用作为资源 |
+| 10_type_system_foundations.md | 操作语义 | 类型保持定理 |
+| 10_async_state_machine.md | 并发语义 | Future状态转换 |
+| 10_send_sync_formalization.md | 模态逻辑 | 并发安全性 |
 
 ### 与设计模式的联系
 >

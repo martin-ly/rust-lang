@@ -474,7 +474,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-- **形式化方法**: [ownership_model.md](../research_notes/formal_methods/ownership_model.md) - 所有权模型的形式化定义
+- **形式化方法**: [10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) - 所有权模型的形式化定义
 - **架构证明**: [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) - 架构决策的形式化证明
 - **知识结构**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](07_knowledge_structure_framework.md) - 知识依赖与模块关系
 
@@ -859,7 +859,7 @@ codegen-units = 1
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [项目结构文档](./07_project_architecture_guide.md)
-- [最佳实践指南](../05_guides/BEST_PRACTICES.md)
+- [最佳实践指南](../05_guides/10_best_practices.md)
 - [测试覆盖率指南](../05_guides/05_testing_coverage_guide.md)
 - [快速参考卡片](../02_reference/quick_reference/README.md)
 
@@ -905,7 +905,7 @@ codegen-units = 1
 
 - Rust 1.95+ 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

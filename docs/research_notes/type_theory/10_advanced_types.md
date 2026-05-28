@@ -408,7 +408,7 @@ $$\text{DependentType}[\tau, v] = \text{Type} \text{ where } v : \text{Const}$$
 
 > **[来源: ACM - Systems Programming Languages]**
 
-以下定义依赖 [type_system_foundations](./type_system_foundations.md) 与 [trait_system_formalization](./trait_system_formalization.md) 中的基础概念：
+以下定义依赖 [type_system_foundations](./10_type_system_foundations.md) 与 [trait_system_formalization](./10_trait_system_formalization.md) 中的基础概念：
 
 | 前置概念 | 来源 | 在本文档中的使用 |
 | :--- | :--- | :--- |
@@ -457,13 +457,13 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
 > **[来源: POPL - Programming Languages Research]**
 
-**Axiom AT1**：GAT 类型推导规则与 [type_system_foundations](./type_system_foundations.md) 定理 4、5 一致；约束违反则编译错误。
+**Axiom AT1**：GAT 类型推导规则与 [type_system_foundations](./10_type_system_foundations.md) 定理 4、5 一致；约束违反则编译错误。
 
 **Axiom AT2**：const 泛型参数必须为编译时常量；运行时常量不能作为类型参数；违反则编译错误。
 
 **定理 AT-T1 (GAT 类型安全)**：若 GAT $A[P]$ 的类型推导正确，则 GAT 的使用是类型安全的。
 
-*证明*：由 Def 1.1–1.3；GAT 约束 $A[P] : B[P]$ 在类型推导时检查；[type_system_foundations](./type_system_foundations.md) 定理 4、5 保证推导正确性；违反则编译错误。依 Axiom AT1。∎
+*证明*：由 Def 1.1–1.3；GAT 约束 $A[P] : B[P]$ 在类型推导时检查；[type_system_foundations](./10_type_system_foundations.md) 定理 4、5 保证推导正确性；违反则编译错误。依 Axiom AT1。∎
 
 **定理 AT-T2 (const 泛型类型安全)**：若 const 泛型类型 $T[N]$ 的 const 参数 $N$ 为编译时常量，则类型安全。
 
@@ -479,7 +479,7 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
 *证明*：由 Def 3.1–3.2；依赖仅限于编译时常量；类型检查在编译时完成；由 AT-T1、AT-T2 组合。∎
 
-**引理 AT-L1 (GAT 与 trait 衔接)**：GAT 约束 $A[P] : B[P]$ 在 `impl` 解析时检查；满足 [trait_system_formalization](./trait_system_formalization.md) 解析正确性。
+**引理 AT-L1 (GAT 与 trait 衔接)**：GAT 约束 $A[P] : B[P]$ 在 `impl` 解析时检查；满足 [trait_system_formalization](./10_trait_system_formalization.md) 解析正确性。
 
 *证明*：由 Def 1.3；GAT 为 trait 关联类型扩展；impl 解析在类型检查阶段；约束违反则编译错误。∎
 
@@ -894,7 +894,7 @@ fn use_family<F: Family>() -> F::Member<i32> {
 
 - [GATs RFC](https://github.com/rust-lang/rfcs/blob/master/text/1598-generic_associated_types.md)
 - [const 泛型 RFC](https://github.com/rust-lang/rfcs/blob/master/text/2000-const-generics.md)
-- [高级类型与 GATs（本篇）](./advanced_types.md)
+- [高级类型与 GATs（本篇）](./10_advanced_types.md)
 
 ### 相关代码
 
@@ -956,7 +956,7 @@ fn use_family<F: Family>() -> F::Member<i32> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-GATs 扩展 Trait 的关联类型为类型级函数；const 泛型参与类型与值层面的推导；与 [type_system_foundations](./type_system_foundations.md)、[trait_system_formalization](./trait_system_formalization.md) 在扩展后的类型规则下一致。
+GATs 扩展 Trait 的关联类型为类型级函数；const 泛型参与类型与值层面的推导；与 [type_system_foundations](./10_type_system_foundations.md)、[trait_system_formalization](./10_trait_system_formalization.md) 在扩展后的类型规则下一致。
 
 ### 实际应用案例
 
@@ -1086,7 +1086,7 @@ let reference = unsafe { item.assume_init_ref() };
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

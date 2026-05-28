@@ -149,7 +149,7 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 >
 > **[来源: Rust Official Docs]**
 
-闭包 `Fn() -> R` 或 `FnOnce() -> R` 即命令；由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 类型安全。
+闭包 `Fn() -> R` 或 `FnOnce() -> R` 即命令；由 [type_system_foundations](../../../type_theory/10_type_system_foundations.md) 类型安全。
 
 **证明**：
 
@@ -576,7 +576,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

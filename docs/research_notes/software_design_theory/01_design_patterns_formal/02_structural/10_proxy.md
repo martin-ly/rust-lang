@@ -144,7 +144,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 >
 > **[来源: Rust Official Docs]**
 
-委托时借用/所有权规则保证正确性。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
+委托时借用/所有权规则保证正确性。由 [borrow_checker_proof](../../../formal_methods/10_borrow_checker_proof.md)。
 
 **证明**：
 
@@ -516,7 +516,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

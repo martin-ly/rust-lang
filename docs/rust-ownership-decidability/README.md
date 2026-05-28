@@ -553,11 +553,11 @@ cat coq-formalization/theories/Advanced/MetatheoryDecidability.v
 
 | 本知识库主题 | `research_notes/` 对应内容 | 说明 |
 |-------------|---------------------------|------|
-| 所有权形式化 (`01-core-concepts/`) | [`formal_methods/ownership_model.md`](../research_notes/formal_methods/ownership_model.md) | 本知识库更深入、更系统 |
-| 借用检查器证明 (`formal-foundations/proofs/`) | [`formal_methods/borrow_checker_proof.md`](../research_notes/formal_methods/borrow_checker_proof.md) | 本知识库包含完整 Coq 证明 |
+| 所有权形式化 (`01-core-concepts/`) | [`formal_methods/10_ownership_model.md`](../research_notes/formal_methods/10_ownership_model.md) | 本知识库更深入、更系统 |
+| 借用检查器证明 (`formal-foundations/proofs/`) | [`formal_methods/10_borrow_checker_proof.md`](../research_notes/formal_methods/10_borrow_checker_proof.md) | 本知识库包含完整 Coq 证明 |
 | 类型理论 (`01-core-concepts/`) | [`type_theory/`](../research_notes/type_theory/) | `research_notes/` 侧更侧重类型系统基础理论 |
 | 设计模式形式化 (`11-design-patterns/`) | [`software_design_theory/01_design_patterns_formal/`](../research_notes/software_design_theory/01_design_patterns_formal/) | 两者互补，本知识库侧重 Rust 特定模式 |
-| 并发形式化 (`12-concurrency-patterns/`) | [`formal_methods/async_state_machine.md`](../research_notes/formal_methods/async_state_machine.md) | 本知识库涵盖更多并发模型 |
+| 并发形式化 (`12-concurrency-patterns/`) | [`formal_methods/10_async_state_machine.md`](../research_notes/formal_methods/10_async_state_machine.md) | 本知识库涵盖更多并发模型 |
 
 **建议阅读路径**: 若需 Rust 所有权系统的**最完整形式化理论**，以本知识库为主；若需**类型理论通用基础**或**软件设计理论**，参考 `research_notes/`。
 

@@ -2795,13 +2795,13 @@ fn main() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-泛型与 Trait 约束 $\tau : T$ 参与类型推导与 monomorphisation；类型安全定理在扩展 Trait 后仍由进展性、保持性保证。与 [trait_system_formalization](../type_theory/trait_system_formalization.md) 的 $\text{Resolve}$、$\tau : T$ 一致。
+泛型与 Trait 约束 $\tau : T$ 参与类型推导与 monomorphisation；类型安全定理在扩展 Trait 后仍由进展性、保持性保证。与 [trait_system_formalization](../type_theory/10_trait_system_formalization.md) 的 $\text{Resolve}$、$\tau : T$ 一致。
 
 ### 与生命周期的集成
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-类型规则中的 $\Gamma, x:\tau' \vdash e:\tau$ 与生命周期环境、outlives 兼容；引用类型 $\&'a \tau$ 的 $'a$ 由 [lifetime_formalization](../formal_methods/lifetime_formalization.md) 的约束与推断给出。
+类型规则中的 $\Gamma, x:\tau' \vdash e:\tau$ 与生命周期环境、outlives 兼容；引用类型 $\&'a \tau$ 的 $'a$ 由 [lifetime_formalization](../formal_methods/10_lifetime_formalization.md) 的约束与推断给出。
 
 ### 实际应用案例
 
@@ -2924,7 +2924,7 @@ fn main() {
 
 **定理 COP-T1**：1.93 后 `Copy` 与 `Clone` 的 impl 解析不再依赖生命周期 specialization；
 类型安全有增强；
-见 [variance_theory](./variance_theory.md) 与 [00_completeness_gaps](./00_completeness_gaps.md)。
+见 [variance_theory](./10_variance_theory.md) 与 [00_completeness_gaps](./00_completeness_gaps.md)。
 
 - **全局分配器与 `thread_local`**：1.93 允许 `#[global_allocator]` 实现中使用 `thread_local!` 和 `std::thread::current()`，类型上涉及 `Allocator` trait 与线程局部；
 对类型推导、单态化无新增规则，但对 `alloc` 相关泛型与 `impl` 的选用有影响。
@@ -3307,7 +3307,7 @@ fn truncate_front(&mut self, len: usize)
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

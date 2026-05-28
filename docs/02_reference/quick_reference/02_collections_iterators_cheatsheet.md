@@ -1440,19 +1440,19 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 集合类型与类型理论
+- [类型系统基础](../../research_notes/type_theory/10_type_system_foundations.md) — 集合类型与类型理论
 - [构造能力理论](../../research_notes/type_theory/10_construction_capability.md) — 迭代器的表达能力
-- [泛型编程形式化](../../research_notes/type_theory/trait_system_formalization.md) — Iterator trait 形式化
-- [所有权模型](../../research_notes/formal_methods/ownership_model.md) — 集合所有权转移形式化
-- [变型理论](../../research_notes/type_theory/variance_theory.md) — 集合协变/逆变
+- [泛型编程形式化](../../research_notes/type_theory/10_trait_system_formalization.md) — Iterator trait 形式化
+- [所有权模型](../../research_notes/formal_methods/10_ownership_model.md) — 集合所有权转移形式化
+- [变型理论](../../research_notes/type_theory/10_variance_theory.md) — 集合协变/逆变
 
 ### 相关速查卡
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [控制流与函数速查卡](./02_control_flow_functions_cheatsheet.md) - 循环与迭代器
-- [类型系统速查卡](./type_system.md) - 集合类型
-- [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与集合
+- [类型系统速查卡](./02_type_system.md) - 集合类型
+- [所有权系统速查卡](./02_ownership_cheatsheet.md) - 所有权与集合
 - [字符串与格式化速查卡](./02_strings_formatting_cheatsheet.md) - 字符串集合
 
 ---

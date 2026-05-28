@@ -768,9 +768,9 @@ fn iterator_invalidation() {
 
 | 边界情况 | 形式化规则 | 相关文档 |
 | :--- | :--- | :--- |
-| 部分移动 | $\Omega(\text{field}) = \text{Moved}$，结构体不能整体使用 | [ownership_model](../research_notes/formal_methods/ownership_model.md#示例-8-复杂所有权场景---结构体字段移动) |
-| 复制语义 | $\Gamma(y) = \text{copy}(\Gamma(x))$，原变量仍有效 | [ownership_model](../research_notes/formal_methods/ownership_model.md#规则-4-复制语义) |
-| NLL | $\text{Scope}(r) = [t_1, t_{\text{last\_use}}]$ | [lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md) |
+| 部分移动 | $\Omega(\text{field}) = \text{Moved}$，结构体不能整体使用 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md#示例-8-复杂所有权场景---结构体字段移动) |
+| 复制语义 | $\Gamma(y) = \text{copy}(\Gamma(x))$，原变量仍有效 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md#规则-4-复制语义) |
+| NLL | $\text{Scope}(r) = [t_1, t_{\text{last\_use}}]$ | [lifetime_formalization](../research_notes/formal_methods/10_lifetime_formalization.md) |
 
 ### 类型系统边界
 >
@@ -778,9 +778,9 @@ fn iterator_invalidation() {
 
 | 边界情况 | 形式化规则 | 相关文档 |
 | :--- | :--- | :--- |
-| 递归类型 | 需满足 $\text{size\_of}(T) < \infty$ | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
+| 递归类型 | 需满足 $\text{size\_of}(T) < \infty$ | [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) |
 | ZST | $\text{size\_of}(T) = 0$ | [Rust Reference](https://doc.rust-lang.org/reference/dynamically-sized-types.html) |
-| 生命周期子类型 | $\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$ | [lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md#定义-14-生命周期子类型) |
+| 生命周期子类型 | $\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$ | [lifetime_formalization](../research_notes/formal_methods/10_lifetime_formalization.md#定义-14-生命周期子类型) |
 
 ### 并发边界
 >
@@ -788,9 +788,9 @@ fn iterator_invalidation() {
 
 | 边界情况 | 形式化规则 | 相关文档 |
 | :--- | :--- | :--- |
-| Send 边界 | $T: \text{Send} \rightarrow \text{可以跨线程转移}$ | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md#defs-send1send-sync1sendsync-形式化) |
-| Sync 边界 | $T: \text{Sync} \leftrightarrow \&T: \text{Send}$ | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md#sendsync-关系) |
-| 数据竞争 | $\text{DataRaceFree}(P)$ 编译期保证 | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由) |
+| Send 边界 | $T: \text{Send} \rightarrow \text{可以跨线程转移}$ | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md#defs-send1send-sync1sendsync-形式化) |
+| Sync 边界 | $T: \text{Sync} \leftrightarrow \&T: \text{Send}$ | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md#sendsync-关系) |
+| 数据竞争 | $\text{DataRaceFree}(P)$ 编译期保证 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md#定理-1-数据竞争自由) |
 
 ### unsafe 边界
 >
@@ -798,9 +798,9 @@ fn iterator_invalidation() {
 
 | 边界情况 | 形式化规则 | 相关文档 |
 | :--- | :--- | :--- |
-| 裸指针 | $\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$ | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md#def-raw1-裸指针与-deref_nullptr) |
+| 裸指针 | $\text{deref}(p)$ 合法仅当 $\text{nonnull}(p)$ | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md#def-raw1-裸指针与-deref_nullptr) |
 | 未对齐访问 | 需使用 `read_unaligned` | [Rust Reference](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) |
-| FFI 边界 | `extern` 函数类型布局一致 | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md#def-extern1-extern-abi-边界) |
+| FFI 边界 | `extern` 函数类型布局一致 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md#def-extern1-extern-abi-边界) |
 
 ---
 
@@ -815,16 +815,16 @@ fn iterator_invalidation() {
 - [集合与迭代器速查卡](./quick_reference/02_collections_iterators_cheatsheet.md)
 - [算法速查卡](./quick_reference/02_algorithms_cheatsheet.md)
 - [线程与并发速查卡](./quick_reference/02_threads_concurrency_cheatsheet.md)
-- [所有权速查卡](./quick_reference/ownership_cheatsheet.md)
+- [所有权速查卡](./quick_reference/02_ownership_cheatsheet.md)
 
 ### 形式化文档
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [所有权模型形式化](../research_notes/formal_methods/ownership_model.md)
-- [借用检查器证明](../research_notes/formal_methods/borrow_checker_proof.md)
-- [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
-- [Send/Sync 形式化](../research_notes/formal_methods/send_sync_formalization.md)
+- [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
+- [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
+- [生命周期形式化](../research_notes/formal_methods/10_lifetime_formalization.md)
+- [Send/Sync 形式化](../research_notes/formal_methods/10_send_sync_formalization.md)
 
 ---
 

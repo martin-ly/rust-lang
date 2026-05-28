@@ -219,11 +219,11 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 **定理 LT-T1（引用有效性）**：若程序通过生命周期检查，则对任意引用 $r : \&\ell \tau$，$r$ 在 $\ell$ 内有效，无悬垂引用。
 
-*证明*：由 Axiom LT1；约束保证 $\ell_r \subseteq \ell_{target}$；推断算法 + 借用检查器保证使用时刻有效。完整证明见 [formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) 定理 2。∎
+*证明*：由 Axiom LT1；约束保证 $\ell_r \subseteq \ell_{target}$；推断算法 + 借用检查器保证使用时刻有效。完整证明见 [formal_methods/lifetime_formalization](../formal_methods/10_lifetime_formalization.md) 定理 2。∎
 
 **定理 LT-T2（推断正确性）**：生命周期推断算法生成的约束系统一致当且仅当程序良型；一致则有解。
 
-*证明*：由 Axiom LT2；约束生成规则正确反映程序语义；求解算法完备。见 [formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) 定理 3。∎
+*证明*：由 Axiom LT2；约束生成规则正确反映程序语义；求解算法完备。见 [formal_methods/lifetime_formalization](../formal_methods/10_lifetime_formalization.md) 定理 3。∎
 
 **引理 LT-L1（子类型传递）**：若 $\ell_3 <: \ell_2$ 且 $\ell_2 <: \ell_1$，则 $\ell_3 <: \ell_1$；由 Def 2.1 包含关系传递。
 
@@ -231,7 +231,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 **推论 LT-C1**：$\&\ell_1 \tau <: \&\ell_2 \tau$ 当且仅当 $\ell_2 <: \ell_1$（较长生命周期引用可协变替换较短）；由 Def 2.2。
 
-**推论 LT-C2**：违反生命周期约束的代码无法通过编译；编译器拒绝悬垂引用、存储短生命周期等。反例见 [formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) § 反例。
+**推论 LT-C2**：违反生命周期约束的代码无法通过编译；编译器拒绝悬垂引用、存储短生命周期等。反例见 [formal_methods/lifetime_formalization](../formal_methods/10_lifetime_formalization.md) § 反例。
 
 ---
 
@@ -239,7 +239,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-本文档为**类型论视角**；[formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) 为**形式化方法视角**，含完整定理 1–3 证明、公理-定理证明树、反例表。两者互补：类型论侧重 $\ell <:$ 与类型系统的集成；形式化方法侧重约束生成、求解与引用有效性证明。
+本文档为**类型论视角**；[formal_methods/lifetime_formalization](../formal_methods/10_lifetime_formalization.md) 为**形式化方法视角**，含完整定理 1–3 证明、公理-定理证明树、反例表。两者互补：类型论侧重 $\ell <:$ 与类型系统的集成；形式化方法侧重约束生成、求解与引用有效性证明。
 
 ---
 
@@ -461,7 +461,7 @@ where
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [x] 与类型系统、借用检查器的集成，实际应用案例（见下方「系统集成与实际应用」）；与 [formal_methods/lifetime_formalization](../formal_methods/lifetime_formalization.md) 互补（类型论视角 vs 形式化方法视角）
+- [x] 与类型系统、借用检查器的集成，实际应用案例（见下方「系统集成与实际应用」）；与 [formal_methods/lifetime_formalization](../formal_methods/10_lifetime_formalization.md) 互补（类型论视角 vs 形式化方法视角）
 
 ---
 
@@ -473,20 +473,20 @@ where
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-$\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\ell_2 \tau_2$ 参与类型推导；与 [type_system_foundations](./type_system_foundations.md) 的进展性、保持性在扩展引用与生命周期后一致。
+$\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\ell_2 \tau_2$ 参与类型推导；与 [type_system_foundations](./10_type_system_foundations.md) 的进展性、保持性在扩展引用与生命周期后一致。
 
 ### 与借用检查器的集成
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-生命周期约束与 NLL、reborrow、Polonius 的约束生成与求解对应；见 [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) 与 [lifetime_formalization](../formal_methods/lifetime_formalization.md)。
+生命周期约束与 NLL、reborrow、Polonius 的约束生成与求解对应；见 [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) 与 [lifetime_formalization](../formal_methods/10_lifetime_formalization.md)。
 
 ### 实际应用案例
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **结构体与 HRTB**：`struct S<'a> { r: &'a T }`、`for<'a> Fn(&'a T)` 的约束与推断。
-2. **async 与 Pin**：async 块中引用的 `'a` 编译进状态机；与 Pin、[async_state_machine](../formal_methods/async_state_machine.md) 一致。
+2. **async 与 Pin**：async 块中引用的 `'a` 编译进状态机；与 Pin、[async_state_machine](../formal_methods/10_async_state_machine.md) 一致。
 3. **Trait 对象**：`dyn Trait + 'a` 的 outlives 与 vtable 不包含生命周期的分工。
 
 ---
@@ -531,7 +531,7 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

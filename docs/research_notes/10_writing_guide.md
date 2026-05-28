@@ -502,7 +502,7 @@
 - 使用 `###` 表示三级标题（子章节）
 - 避免跳过层级
 
-**表格格式**（统一规范，见 [PROOF_INDEX](./PROOF_INDEX.md) 公理编号规范表）:
+**表格格式**（统一规范，见 [PROOF_INDEX](./10_proof_index.md) 公理编号规范表）:
 
 - 分隔行使用 `| :--- | :--- | :--- |` 格式（左对齐，冒号在左）
 - 列数需与表头一致；N 列则 N 个 `:---`
@@ -571,7 +571,7 @@
 **示例**:
 
 ```markdown
-- [所有权模型形式化](./formal_methods/ownership_model.md)
+- [所有权模型形式化](./formal_methods/10_ownership_model.md)
 - [研究路线图](./10_research_roadmap.md)
 ```
 
@@ -854,7 +854,7 @@
 
 - [研究笔记主索引](./README.md)
 - [研究笔记模板](./10_template.md)
-- [最佳实践](./BEST_PRACTICES.md)
+- [最佳实践](./10_best_practices.md)
 - [质量检查清单](./10_quality_checklist.md)
 
 ### 贡献和质量
@@ -914,7 +914,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

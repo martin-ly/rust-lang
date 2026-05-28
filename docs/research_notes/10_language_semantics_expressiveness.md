@@ -171,10 +171,10 @@ $\to \subseteq \text{Expr} \times \text{Expr}$：若 $(e, e') \in \to$，则称 
 $\to^*$ 为 $\to$ 的自反传递闭包。
 
 **引理 1.1**（与类型系统衔接）
-若 $\Gamma \vdash e : \tau$ 且 $e \to^* e'$，则 $\Gamma \vdash e' : \tau$。（即 [type_system_foundations](type_theory/type_system_foundations.md) 的保持性定理）
+若 $\Gamma \vdash e : \tau$ 且 $e \to^* e'$，则 $\Gamma \vdash e' : \tau$。（即 [type_system_foundations](type_theory/10_type_system_foundations.md) 的保持性定理）
 
 **引理 1.2**（与所有权衔接）
-若 $e \to e'$ 且 $\Omega$ 为所有权状态，则移动/复制/借用操作满足 [ownership_model](formal_methods/ownership_model.md) 规则 1–3。
+若 $e \to e'$ 且 $\Omega$ 为所有权状态，则移动/复制/借用操作满足 [ownership_model](formal_methods/10_ownership_model.md) 规则 1–3。
 
 ### 2. 大步操作语义（Big-Step）
 
@@ -187,7 +187,7 @@ $e \Downarrow v$ 表示表达式 $e$ 求值为值 $v$。
 
 **定理 2.1（操作语义与类型安全）**
 $\Gamma \vdash e : \tau \land e \Downarrow v \Rightarrow \Gamma \vdash v : \tau$。
-*证明*：由 [type_system_foundations](type_theory/type_system_foundations.md) 定理 2（保持性）与定理 1（进展性）组合可得。
+*证明*：由 [type_system_foundations](type_theory/10_type_system_foundations.md) 定理 2（保持性）与定理 1（进展性）组合可得。
 
 ### 3. 表达能力边界：操作语义视角
 
@@ -247,7 +247,7 @@ Rust 的 `Result<T, E>` 对应构造性逻辑中的 $T \lor E$：可构造的要
 | 存在类型（`impl Trait`、dyn） | 完整依赖类型 | 受限 GAT；依赖类型需额外约束 |
 | 高阶类型（`Vec<T>`） | 无界高阶 | 类型构造子有限；无 type-level 计算 |
 | 线性/仿射类型（所有权） | 全息类型（可复制任意次） | 默认移动；Copy 需显式 |
-| 类型级常量（const 泛型） | 任意运行时值作类型参数 | 仅 const 表达式；见 [advanced_types](type_theory/advanced_types.md) |
+| 类型级常量（const 泛型） | 任意运行时值作类型参数 | 仅 const 表达式；见 [advanced_types](type_theory/10_advanced_types.md) |
 
 ---
 
@@ -301,14 +301,14 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 | 维度 | 可表达 | 边界 | 不可表达 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- |
-| **内存** | 所有权、借用、RAII | 无 GC、无手动 malloc/free | 跨线程共享无同步 | [ownership_model](formal_methods/ownership_model.md) T2, T3 |
-| **类型** | 泛型、Trait、类型推断 | 无运行时类型反射 | 完整依赖类型 | [type_system_foundations](type_theory/type_system_foundations.md)、[advanced_types](type_theory/advanced_types.md) |
-| **并发** | Send/Sync、async、线程 | 数据竞争自由 | 无 GC 的共享可变 | [async_state_machine](formal_methods/async_state_machine.md) T6.2、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1 |
-| **异步** | Future、Pin、async/await | 有限 Future 终将 Ready | 无限延迟未标记 | [async_state_machine](formal_methods/async_state_machine.md) T6.3 |
-| **引用** | 生命周期、NLL | 引用不超被引用对象 | 无界引用 | [lifetime_formalization](formal_methods/lifetime_formalization.md) T2 |
-| **别名** | 独占可变、多只读 | 可变借用独占 | 共享可变（安全子集） | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) 规则 5–8 |
-| **多态** | 静态分发、dyn | 编译时单态化 | 运行时类型擦除 | [trait_system_formalization](type_theory/trait_system_formalization.md) |
-| **型变** | 协变、逆变、不变 | 违反则悬垂 | 任意型变 | [variance_theory](type_theory/variance_theory.md) T1–T4 |
+| **内存** | 所有权、借用、RAII | 无 GC、无手动 malloc/free | 跨线程共享无同步 | [ownership_model](formal_methods/10_ownership_model.md) T2, T3 |
+| **类型** | 泛型、Trait、类型推断 | 无运行时类型反射 | 完整依赖类型 | [type_system_foundations](type_theory/10_type_system_foundations.md)、[advanced_types](type_theory/10_advanced_types.md) |
+| **并发** | Send/Sync、async、线程 | 数据竞争自由 | 无 GC 的共享可变 | [async_state_machine](formal_methods/10_async_state_machine.md) T6.2、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) T1 |
+| **异步** | Future、Pin、async/await | 有限 Future 终将 Ready | 无限延迟未标记 | [async_state_machine](formal_methods/10_async_state_machine.md) T6.3 |
+| **引用** | 生命周期、NLL | 引用不超被引用对象 | 无界引用 | [lifetime_formalization](formal_methods/10_lifetime_formalization.md) T2 |
+| **别名** | 独占可变、多只读 | 可变借用独占 | 共享可变（安全子集） | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 规则 5–8 |
+| **多态** | 静态分发、dyn | 编译时单态化 | 运行时类型擦除 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
+| **型变** | 协变、逆变、不变 | 违反则悬垂 | 任意型变 | [variance_theory](type_theory/10_variance_theory.md) T1–T4 |
 
 ### 2. 表达能力边界：决策树
 
@@ -343,12 +343,12 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 | 定理 | 陈述 | 证明文档 |
 | :--- | :--- | :--- |
-| **EB1** | 安全 Rust 不允许数据竞争 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1 |
-| **EB2** | 安全 Rust 不允许悬垂引用 | [lifetime_formalization](formal_methods/lifetime_formalization.md) T2、[ownership_model](formal_methods/ownership_model.md) T3 |
-| **EB3** | 良型程序不退化为类型错误 | [type_system_foundations](type_theory/type_system_foundations.md) T3 |
-| **EB4** | 型变违反导致悬垂 | [variance_theory](type_theory/variance_theory.md) 反例 |
-| **EB5** | 有限 Future 终将 Ready | [async_state_machine](formal_methods/async_state_machine.md) T6.3 |
-| **EB6** | Pin 保证自引用安全 | [pin_self_referential](formal_methods/pin_self_referential.md) T2 |
+| **EB1** | 安全 Rust 不允许数据竞争 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) T1 |
+| **EB2** | 安全 Rust 不允许悬垂引用 | [lifetime_formalization](formal_methods/10_lifetime_formalization.md) T2、[ownership_model](formal_methods/10_ownership_model.md) T3 |
+| **EB3** | 良型程序不退化为类型错误 | [type_system_foundations](type_theory/10_type_system_foundations.md) T3 |
+| **EB4** | 型变违反导致悬垂 | [variance_theory](type_theory/10_variance_theory.md) 反例 |
+| **EB5** | 有限 Future 终将 Ready | [async_state_machine](formal_methods/10_async_state_machine.md) T6.3 |
+| **EB6** | Pin 保证自引用安全 | [pin_self_referential](formal_methods/10_pin_self_referential.md) T2 |
 
 **定理 EB-Meta（边界完备性）**：EB1–EB6 覆盖内存、类型、并发、异步、引用、自引用等主要表达能力边界；任意 Safe 代码违反其一则无法通过编译或触发 UB。
 
@@ -422,12 +422,12 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 | 反例 | 违反的边界 | 后果 | 文档 |
 | :--- | :--- | :--- | :--- |
-| 双重可变借用 | 借用互斥 | 编译错误 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) |
-| 返回局部引用 | 生命周期 outlives | 编译错误 | [lifetime_formalization](formal_methods/lifetime_formalization.md) |
-| `&mut T` 协变 | 型变边界 | 悬垂引用 | [variance_theory](type_theory/variance_theory.md) |
-| 非 Send 跨线程 | Send 边界 | 编译错误 | [async_state_machine](formal_methods/async_state_machine.md) |
+| 双重可变借用 | 借用互斥 | 编译错误 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
+| 返回局部引用 | 生命周期 outlives | 编译错误 | [lifetime_formalization](formal_methods/10_lifetime_formalization.md) |
+| `&mut T` 协变 | 型变边界 | 悬垂引用 | [variance_theory](type_theory/10_variance_theory.md) |
+| 非 Send 跨线程 | Send 边界 | 编译错误 | [async_state_machine](formal_methods/10_async_state_machine.md) |
 | 未初始化 assume_init | unsafe 契约 | UB | MaybeUninit 文档 |
-| 移动未 Pin 自引用 | Pin 边界 | 悬垂 | [pin_self_referential](formal_methods/pin_self_referential.md) |
+| 移动未 Pin 自引用 | Pin 边界 | 悬垂 | [pin_self_referential](formal_methods/10_pin_self_referential.md) |
 
 ---
 
@@ -439,7 +439,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 | :--- | :--- |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射 |
-| [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引 |
+| [PROOF_INDEX](./10_proof_index.md) | 形式化证明索引 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵 |
 | [knowledge structure](../07_project/07_knowledge_structure_framework.md) | 知识结构、概念定义、思维表征 |
 
@@ -491,7 +491,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

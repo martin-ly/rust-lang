@@ -164,12 +164,12 @@ struct Parser<'a> { input: &'a str }
 
 | 定理 | 内容 | 位置 |
 | :--- | :--- | :--- |
-| T-OW2 | 所有权唯一性 | ownership_model.md |
-| T-BR1 | 数据竞争自由 | borrow_checker_proof.md |
-| T-TY3 | 类型安全 | type_system_foundations.md |
-| LF-T1 | 生命周期正确性 | lifetime_formalization.md |
-| T-ASYNC | 异步安全 | async_state_machine.md |
-| PIN-T1 | Pin位置稳定性 | pin_self_referential.md |
+| T-OW2 | 所有权唯一性 | 10_ownership_model.md |
+| T-BR1 | 数据竞争自由 | 10_borrow_checker_proof.md |
+| T-TY3 | 类型安全 | 10_type_system_foundations.md |
+| LF-T1 | 生命周期正确性 | 10_lifetime_formalization.md |
+| T-ASYNC | 异步安全 | 10_async_state_machine.md |
+| PIN-T1 | Pin位置稳定性 | 10_pin_self_referential.md |
 
 ---
 
@@ -625,7 +625,7 @@ Coq → Iris → RustBelt → 工具开发
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

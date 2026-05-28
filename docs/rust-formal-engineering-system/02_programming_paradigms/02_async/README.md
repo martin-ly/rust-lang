@@ -418,9 +418,9 @@ where
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 异步状态机 | 异步状态机形式化 | [../../../research_notes/formal_methods/async_state_machine.md](../../../research_notes/formal_methods/async_state_machine.md) |
-| Pin 与自引用 | 自引用类型形式化 | [../../../research_notes/formal_methods/pin_self_referential.md](../../../research_notes/formal_methods/pin_self_referential.md) |
-| Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/send_sync_formalization.md](../../../research_notes/formal_methods/send_sync_formalization.md) |
+| 异步状态机 | 异步状态机形式化 | [../../../research_notes/formal_methods/10_async_state_machine.md](../../../research_notes/formal_methods/10_async_state_machine.md) |
+| Pin 与自引用 | 自引用类型形式化 | [../../../research_notes/formal_methods/10_pin_self_referential.md](../../../research_notes/formal_methods/10_pin_self_referential.md) |
+| Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../research_notes/formal_methods/10_send_sync_formalization.md) |
 
 ### 实验分析
 

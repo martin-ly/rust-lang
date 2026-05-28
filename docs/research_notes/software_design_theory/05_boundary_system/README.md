@@ -157,7 +157,7 @@
 
 **步骤**：判安全 → 需 `unsafe`；可封装为 Safe API（`Box::from_raw` 等）→ **需 unsafe、可安全抽象**。
 
-**结论**：内部 `unsafe`；对外 `pub fn` 为 Safe 抽象；见 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) Def UNSAFE1。
+**结论**：内部 `unsafe`；对外 `pub fn` 为 Safe 抽象；见 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) Def UNSAFE1。
 
 ---
 
@@ -201,7 +201,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

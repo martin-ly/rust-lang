@@ -545,9 +545,9 @@ impl ProcessMonitor {
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **所有权模型** | [ownership_model](../../research_notes/formal_methods/ownership_model.md) | 进程资源生命周期管理 |
-| **异步状态机** | [async_state_machine](../../research_notes/formal_methods/async_state_machine.md) | 异步进程管理语义 |
-| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/send_sync_formalization.md) | 跨线程进程句柄安全 |
+| **所有权模型** | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) | 进程资源生命周期管理 |
+| **异步状态机** | [async_state_machine](../../research_notes/formal_methods/10_async_state_machine.md) | 异步进程管理语义 |
+| **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/10_send_sync_formalization.md) | 跨线程进程句柄安全 |
 
 ### 形式化定理
 
@@ -555,7 +555,7 @@ impl ProcessMonitor {
 
 **定理 PROC-T1（进程资源安全）**: 若进程句柄正确实现 Drop trait，则进程资源不会泄漏。
 
-*证明*: 由 [ownership_model](../../research_notes/formal_methods/ownership_model.md) 定理 T3（RAII），Child 类型实现 Drop 在离开作用域时自动 wait 或 kill，保证资源释放。∎
+*证明*: 由 [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) 定理 T3（RAII），Child 类型实现 Drop 在离开作用域时自动 wait 或 kill，保证资源释放。∎
 
 ---
 

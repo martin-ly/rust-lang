@@ -398,18 +398,18 @@
 
 | 领域 | 反例 | 违反的边界 | 文档 |
 | :--- | :--- | :--- | :--- |
-| 型变 | `&mut T` 协变 | 唯一可变借用 | [variance_theory](type_theory/variance_theory.md) |
-| 型变 | `fn(T)` 参数协变 | 生命周期 | [variance_theory](type_theory/variance_theory.md) |
-| 型变 | `Cell<T>` 协变 | 内部可变 | [variance_theory](type_theory/variance_theory.md) |
-| 所有权 | 使用已移动值 | 唯一性 | [ownership_model](formal_methods/ownership_model.md) |
-| 借用 | 双重可变借用 | 互斥 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) |
-| 生命周期 | 返回局部引用 | outlives | [lifetime_formalization](formal_methods/lifetime_formalization.md) |
-| 生命周期 | 存储短生命周期引用 | 约束冲突 | [lifetime_formalization](formal_methods/lifetime_formalization.md) |
-| 异步 | 非 Send 跨线程 | Send 边界 | [async_state_machine](formal_methods/async_state_machine.md) |
-| 异步 | 未 Pin 自引用 | Pin 边界 | [async_state_machine](formal_methods/async_state_machine.md) |
-| Pin | 移动未 Pin 自引用 | 位置稳定 | [pin_self_referential](formal_methods/pin_self_referential.md) |
-| Trait | 对象安全违规 | vtable 约束 | [trait_system_formalization](type_theory/trait_system_formalization.md) |
-| 类型系统 | 类型不匹配 | 类型安全 | [type_system_foundations](type_theory/type_system_foundations.md) |
+| 型变 | `&mut T` 协变 | 唯一可变借用 | [variance_theory](type_theory/10_variance_theory.md) |
+| 型变 | `fn(T)` 参数协变 | 生命周期 | [variance_theory](type_theory/10_variance_theory.md) |
+| 型变 | `Cell<T>` 协变 | 内部可变 | [variance_theory](type_theory/10_variance_theory.md) |
+| 所有权 | 使用已移动值 | 唯一性 | [ownership_model](formal_methods/10_ownership_model.md) |
+| 借用 | 双重可变借用 | 互斥 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) |
+| 生命周期 | 返回局部引用 | outlives | [lifetime_formalization](formal_methods/10_lifetime_formalization.md) |
+| 生命周期 | 存储短生命周期引用 | 约束冲突 | [lifetime_formalization](formal_methods/10_lifetime_formalization.md) |
+| 异步 | 非 Send 跨线程 | Send 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
+| 异步 | 未 Pin 自引用 | Pin 边界 | [async_state_machine](formal_methods/10_async_state_machine.md) |
+| Pin | 移动未 Pin 自引用 | 位置稳定 | [pin_self_referential](formal_methods/10_pin_self_referential.md) |
+| Trait | 对象安全违规 | vtable 约束 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
+| 类型系统 | 类型不匹配 | 类型安全 | [type_system_foundations](type_theory/10_type_system_foundations.md) |
 | 设计模式 | Singleton 全局可变未同步 | 数据竞争 | [singleton](software_design_theory/01_design_patterns_formal/01_creational/10_singleton.md) |
 | 设计模式 | Observer 共享可变无 Mutex | 数据竞争 | [observer](software_design_theory/01_design_patterns_formal/03_behavioral/10_observer.md) |
 | 设计模式 | Composite 循环引用 | 所有权无法表达 | [composite](software_design_theory/01_design_patterns_formal/02_structural/10_composite.md) |
@@ -519,8 +519,8 @@ Pin ──→ 自引用安全
 | :--- | :--- | :--- | :--- |
 | **基本类型** | TCON 矩阵 Unique | 类型构造决策树 | [construction_capability](type_theory/10_construction_capability.md) |
 | **复合类型** | struct/enum/tuple | 同上 | [construction_capability](type_theory/10_construction_capability.md) |
-| **泛型/GAT** | Multi 或 Unique | 同上 | [construction_capability](type_theory/10_construction_capability.md)、[advanced_types](type_theory/advanced_types.md) |
-| **impl Trait / dyn Trait** | Unique | 同上 | [trait_system_formalization](type_theory/trait_system_formalization.md) |
+| **泛型/GAT** | Multi 或 Unique | 同上 | [construction_capability](type_theory/10_construction_capability.md)、[advanced_types](type_theory/10_advanced_types.md) |
+| **impl Trait / dyn Trait** | Unique | 同上 | [trait_system_formalization](type_theory/10_trait_system_formalization.md) |
 
 ### 按执行模型
 >
@@ -555,7 +555,7 @@ Pin ──→ 自引用安全
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./10_comprehensive_systematic_overview.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./10_language_semantics_expressiveness.md) | 构造性语义形式化、表达能力边界 |
 | [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-| [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
+| [PROOF_INDEX](./10_proof_index.md) | 形式化证明索引、公理编号规范 |
 | [INDEX](./INDEX.md) | 研究笔记完整索引 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) | 多维概念矩阵 |
 | [MIND_MAP_COLLECTION](../04_thinking/04_mind_map_collection.md) | 思维导图集合 |
@@ -609,7 +609,7 @@ Pin ──→ 自引用安全
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -49,29 +49,29 @@ research_notes/
 │   ├── formal_methods/
 │   │   ├── README.md
 │   │   ├── 00_completeness_gaps.md
-│   │   ├── ownership_model.md          ← 所有权 规则1-3, T2, T3
-│   │   ├── borrow_checker_proof.md     ← 借用 规则5-8, T1, T2
-│   │   ├── lifetime_formalization.md   ← 生命周期 LF-T1–T3
-│   │   ├── async_state_machine.md      ← 异步 Def4.1-5.2, T6.1–T6.3
-│   │   └── pin_self_referential.md     ← Pin Def1.1-2.2, T1–T3
+│   │   ├── 10_ownership_model.md          ← 所有权 规则1-3, T2, T3
+│   │   ├── 10_borrow_checker_proof.md     ← 借用 规则5-8, T1, T2
+│   │   ├── 10_lifetime_formalization.md   ← 生命周期 LF-T1–T3
+│   │   ├── 10_async_state_machine.md      ← 异步 Def4.1-5.2, T6.1–T6.3
+│   │   └── 10_pin_self_referential.md     ← Pin Def1.1-2.2, T1–T3
 │   ├── type_theory/
 │   │   ├── README.md
 │   │   ├── 00_completeness_gaps.md
-│   │   ├── type_system_foundations.md  ← 类型 进展/保持, T1–T3
-│   │   ├── variance_theory.md          ← 型变 Def1.1-3.1, T1–T4
-│   │   ├── trait_system_formalization.md
-│   │   ├── lifetime_formalization.md
-│   │   ├── advanced_types.md
+│   │   ├── 10_type_system_foundations.md  ← 类型 进展/保持, T1–T3
+│   │   ├── 10_variance_theory.md          ← 型变 Def1.1-3.1, T1–T4
+│   │   ├── 10_trait_system_formalization.md
+│   │   ├── 10_lifetime_formalization.md
+│   │   ├── 10_advanced_types.md
 │   │   └── 10_construction_capability.md
 │   ├── 10_formal_full_model_overview.md   ← 统一形式系统、公理列表、定理DAG
 │   ├── 10_formal_language_and_proofs.md
 │   ├── 10_core_theorems_full_proofs.md
-│   ├── PROOF_INDEX.md
+│   ├── 10_proof_index.md
 │   └── coq_skeleton/
 │
 ├── 【支柱 2：语言表达力】
 │   └── software_design_theory/
-│       ├── 00_MASTER_INDEX.md
+│       ├── 10_00_master_index.md
 │       ├── 01_design_patterns_formal/   ← 23 模式 Def/Axiom/定理
 │       ├── 02_workflow_safe_complete_models/  ← 23 安全 / 43 完全
 │       ├── 03_execution_models/         ← 01_sync～05_distributed, 06_boundary_analysis
@@ -110,15 +110,15 @@ research_notes/
 
 | 概念族 | 主文档 | Def/Axiom | 定理/推论 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
-| 所有权 | [ownership_model](formal_methods/ownership_model.md) | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 变量绑定/遮蔽 Def 1.4/1.5 |
-| 借用 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) | 规则 5–8 | T1 数据竞争自由, T2 | |
-| 生命周期 | [lifetime_formalization](formal_methods/lifetime_formalization.md) | Axiom LF1–LF2, Def 1.4 | LF-T1–T3 引用有效性 | |
-| 类型系统 | [type_system_foundations](type_theory/type_system_foundations.md) | typing rules, 进展/保持 | T1 进展, T2 保持, T3 类型安全 | |
-| 型变 | [variance_theory](type_theory/variance_theory.md) | Def 1.1–3.1 | T1–T4 协变/逆变/不变/函数 | |
-| Trait | [trait_system_formalization](type_theory/trait_system_formalization.md) | Axiom COH1/COH2 | COH-T1, 对象安全 T1–T3 | |
-| 异步 | [async_state_machine](formal_methods/async_state_machine.md) | Def 4.1–5.2 | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | |
-| Pin | [pin_self_referential](formal_methods/pin_self_referential.md) | Def 1.1–2.2 | T1–T3 Pin 保证/自引用/投影 | |
-| Send/Sync | [send_sync_formalization](formal_methods/send_sync_formalization.md) | Def SEND1/SYNC1、SYNC-L1 | SEND-T1、SYNC-T1、SEND-SYNC-T1 | 与 spawn/Future/Arc 衔接 |
+| 所有权 | [ownership_model](formal_methods/10_ownership_model.md) | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 变量绑定/遮蔽 Def 1.4/1.5 |
+| 借用 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8 | T1 数据竞争自由, T2 | |
+| 生命周期 | [lifetime_formalization](formal_methods/10_lifetime_formalization.md) | Axiom LF1–LF2, Def 1.4 | LF-T1–T3 引用有效性 | |
+| 类型系统 | [type_system_foundations](type_theory/10_type_system_foundations.md) | typing rules, 进展/保持 | T1 进展, T2 保持, T3 类型安全 | |
+| 型变 | [variance_theory](type_theory/10_variance_theory.md) | Def 1.1–3.1 | T1–T4 协变/逆变/不变/函数 | |
+| Trait | [trait_system_formalization](type_theory/10_trait_system_formalization.md) | Axiom COH1/COH2 | COH-T1, 对象安全 T1–T3 | |
+| 异步 | [async_state_machine](formal_methods/10_async_state_machine.md) | Def 4.1–5.2 | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | |
+| Pin | [pin_self_referential](formal_methods/10_pin_self_referential.md) | Def 1.1–2.2 | T1–T3 Pin 保证/自引用/投影 | |
+| Send/Sync | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | Def SEND1/SYNC1、SYNC-L1 | SEND-T1、SYNC-T1、SEND-SYNC-T1 | 与 spawn/Future/Arc 衔接 |
 | 控制流 | [formal_methods/README](formal_methods/README.md) | A-CF1 | 与 T-TY3 衔接 | |
 
 ### 2.2 支柱 2（语言表达力）
@@ -268,7 +268,7 @@ research_notes/
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

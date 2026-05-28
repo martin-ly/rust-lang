@@ -86,7 +86,7 @@ fn verify_memory_safety() -> bool {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 证明索引 | 形式化证明索引 | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) |
+| 证明索引 | 形式化证明索引 | [../research_notes/10_proof_index.md](../research_notes/10_proof_index.md) |
 | 形式化语言与证明 | 形式化语言理论 | [../research_notes/10_formal_language_and_proofs.md](../research_notes/10_formal_language_and_proofs.md) |
 | 核心定理完整证明 | 完整形式化证明 | [../research_notes/10_core_theorems_full_proofs.md](../research_notes/10_core_theorems_full_proofs.md) |
 | 设计机制论证 | 设计机制形式化论证 | [../research_notes/10_design_mechanism_rationale.md](../research_notes/10_design_mechanism_rationale.md) |
@@ -102,7 +102,7 @@ fn verify_memory_safety() -> bool {
 
 ## 主索引
 
-[00_MASTER_INDEX.md](../00_master_index.md)
+[10_00_master_index.md](../00_master_index.md)
 
 ---
 
@@ -140,7 +140,7 @@ fn verify_memory_safety() -> bool {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

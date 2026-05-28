@@ -336,7 +336,7 @@ $$
 
 - [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) — 完整证明（L2）
 - [coq_skeleton](./coq_skeleton/README.md) — Coq 骨架（L3）
-- [ownership_model](./formal_methods/ownership_model.md)、[borrow_checker_proof](./formal_methods/borrow_checker_proof.md)、[type_system_foundations](./type_theory/type_system_foundations.md)
+- [ownership_model](./formal_methods/10_ownership_model.md)、[borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md)、[type_system_foundations](./type_theory/10_type_system_foundations.md)
 
 ---
 
@@ -391,7 +391,7 @@ $$
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

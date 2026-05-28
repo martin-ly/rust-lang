@@ -284,11 +284,11 @@
 
 | 维度 | 核心定理 | 证明文件 |
 | :--- | :--- | :--- |
-| 所有权 | T-OW2: 所有权唯一性 | ownership_model.md |
-| 借用 | T-BR1: 数据竞争自由 | borrow_checker_proof.md |
-| 生命周期 | LF-T1: 生命周期推断正确性 | lifetime_formalization.md |
-| 类型系统 | T-TY3: 类型安全 | type_system_foundations.md |
-| 并发 | T-ASYNC: 并发安全 | async_state_machine.md |
+| 所有权 | T-OW2: 所有权唯一性 | 10_ownership_model.md |
+| 借用 | T-BR1: 数据竞争自由 | 10_borrow_checker_proof.md |
+| 生命周期 | LF-T1: 生命周期推断正确性 | 10_lifetime_formalization.md |
+| 类型系统 | T-TY3: 类型安全 | 10_type_system_foundations.md |
+| 并发 | T-ASYNC: 并发安全 | 10_async_state_machine.md |
 
 ---
 
@@ -311,8 +311,8 @@
 
 - [CONCEPT_AXIOM_THEOREM_MATRIX](./10_concept_axiom_theorem_matrix.md) - 概念-公理-定理映射
 - [PROOF_COMPLETION_MATRIX](./10_proof_completion_matrix.md) - 证明完成度矩阵
-- [type_system_foundations](../type_theory/type_system_foundations.md) - 类型系统基础
-- [ownership_model](./ownership_model.md) - 所有权模型
+- [type_system_foundations](../type_theory/10_type_system_foundations.md) - 类型系统基础
+- [ownership_model](./10_ownership_model.md) - 所有权模型
 
 ---
 
@@ -434,7 +434,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

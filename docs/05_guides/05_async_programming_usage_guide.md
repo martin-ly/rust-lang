@@ -159,8 +159,8 @@
 本指南介绍如何使用 C06 异步编程模块的功能，包括 async/await、Future、异步运行时、Reactor 模式、Actor 模式等。
 
 **形式化引用**：T-ASYNC1 (Future 安全性)、
-[async_state_machine](../research_notes/formal_methods/async_state_machine.md) T6.1-T6.3、
-[pin_self_referential](../research_notes/formal_methods/pin_self_referential.md) T-PIN1。
+[async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) T6.1-T6.3、
+[pin_self_referential](../research_notes/formal_methods/10_pin_self_referential.md) T-PIN1。
 详见 [THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
 
 ---
@@ -1748,7 +1748,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 - [异步编程指南](../../crates/c06_async/docs/tier_02_guides/README.md)
 - [Reactor 模式](../../crates/c06_async/docs/tier_04_advanced/01_异步并发模式.md)
 - [Actor 模式](../../crates/c06_async/docs/tier_02_guides/04_异步设计模式实践.md)
-- [异步状态机形式化](../research_notes/formal_methods/async_state_machine.md) - Future/Poll 状态机形式化定义与证明
+- [异步状态机形式化](../research_notes/formal_methods/10_async_state_machine.md) - Future/Poll 状态机形式化定义与证明
 
 ---
 
@@ -1888,12 +1888,12 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 
 | 概念 | 形式化定义/定理 | 文档 |
 | :--- | :--- | :--- |
-| Future Trait | Def 5.1 (Future Trait) | [async_state_machine.md](../research_notes/formal_methods/async_state_machine.md) |
-| Poll 类型 | Def 5.2 (Poll) | [async_state_machine.md](../research_notes/formal_methods/async_state_machine.md) |
-| Waker 机制 | Def 5.3 (Waker) | [async_state_machine.md](../research_notes/formal_methods/async_state_machine.md) |
-| Pin 不动性 | T-PIN1 (Pin 不动性) | [pin_self_referential.md](../research_notes/formal_methods/pin_self_referential.md) |
-| Send/Sync 安全 | SEND-T1/SYNC-T1 | [send_sync_formalization.md](../research_notes/formal_methods/send_sync_formalization.md) |
-| 异步状态机 | T6.1-T6.3 | [async_state_machine.md](../research_notes/formal_methods/async_state_machine.md) |
+| Future Trait | Def 5.1 (Future Trait) | [10_async_state_machine.md](../research_notes/formal_methods/10_async_state_machine.md) |
+| Poll 类型 | Def 5.2 (Poll) | [10_async_state_machine.md](../research_notes/formal_methods/10_async_state_machine.md) |
+| Waker 机制 | Def 5.3 (Waker) | [10_async_state_machine.md](../research_notes/formal_methods/10_async_state_machine.md) |
+| Pin 不动性 | T-PIN1 (Pin 不动性) | [10_pin_self_referential.md](../research_notes/formal_methods/10_pin_self_referential.md) |
+| Send/Sync 安全 | SEND-T1/SYNC-T1 | [10_send_sync_formalization.md](../research_notes/formal_methods/10_send_sync_formalization.md) |
+| 异步状态机 | T6.1-T6.3 | [10_async_state_machine.md](../research_notes/formal_methods/10_async_state_machine.md) |
 
 **定理引用说明**: 本指南中的异步模式实现基于上述形式化定理保证。例如，`Future` 必须实现 `Send` 才能跨线程传递 (SEND-T1)；`Pin` 保证自引用结构安全 (T-PIN1)。
 

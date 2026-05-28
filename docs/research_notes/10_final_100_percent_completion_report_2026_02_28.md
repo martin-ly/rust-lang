@@ -82,16 +82,16 @@
 
 | 文档 | 内容 | 大小 |
 | :--- | :--- | :--- |
-| ownership_model.md | 所有权系统形式化 | 60KB |
-| borrow_checker_proof.md | 借用检查器证明 | 58KB |
-| lifetime_formalization.md | 生命周期形式化 | 33KB |
-| async_state_machine.md | 异步状态机 | 45KB |
-| pin_self_referential.md | Pin 形式化 | 23KB |
-| send_sync_formalization.md | Send/Sync 形式化 | 13KB |
-| type_system_foundations.md | 类型系统基础 | 42KB |
-| trait_system_formalization.md | Trait 系统 | 43KB |
-| variance_theory.md | 型变理论 | 22KB |
-| advanced_types.md | 高级类型 | 27KB |
+| 10_ownership_model.md | 所有权系统形式化 | 60KB |
+| 10_borrow_checker_proof.md | 借用检查器证明 | 58KB |
+| 10_lifetime_formalization.md | 生命周期形式化 | 33KB |
+| 10_async_state_machine.md | 异步状态机 | 45KB |
+| 10_pin_self_referential.md | Pin 形式化 | 23KB |
+| 10_send_sync_formalization.md | Send/Sync 形式化 | 13KB |
+| 10_type_system_foundations.md | 类型系统基础 | 42KB |
+| 10_trait_system_formalization.md | Trait 系统 | 43KB |
+| 10_variance_theory.md | 型变理论 | 22KB |
+| 10_advanced_types.md | 高级类型 | 27KB |
 | 10_construction_capability.md | 构造能力 | 10KB |
 
 **总计**: 376KB 核心形式化内容
@@ -204,7 +204,7 @@
 
 - 10_tutorial_ownership_safety.md (9.5KB) ✅
 - 10_tutorial_borrow_checker.md (9.1KB) ✅
-- 10_tutorial_type_system.md (9.7KB) ✅
+- 10_tutorial_02_type_system.md (9.7KB) ✅
 - 10_tutorial_lifetimes.md (3.6KB) ✅
 - 10_tutorial_concurrency_models.md (7KB) ✅
 
@@ -214,7 +214,7 @@
 
 - 10_00_comprehensive_summary.md ✅
 - 10_00_organization_and_navigation.md ✅
-- PROOF_INDEX.md ✅
+- 10_proof_index.md ✅
 - 10_core_theorems_full_proofs.md ✅
 - 10_theorem_rust_example_mapping.md ✅
 - 10_formal_concepts_encyclopedia.md ✅
@@ -434,7 +434,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

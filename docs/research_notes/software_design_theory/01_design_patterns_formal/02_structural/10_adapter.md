@@ -149,7 +149,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 >
 > **[来源: Rust Official Docs]**
 
-由 [ownership_model](../../../formal_methods/ownership_model.md)，$A$ 拥有 $S$，委托调用时 `&self.inner` 借用有效，无悬垂。
+由 [ownership_model](../../../formal_methods/10_ownership_model.md)，$A$ 拥有 $S$，委托调用时 `&self.inner` 借用有效，无悬垂。
 
 **证明**：
 
@@ -179,7 +179,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 >
 > **[来源: Rust Official Docs]**
 
-由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托链上无双重可变借用。
+由 [borrow_checker_proof](../../../formal_methods/10_borrow_checker_proof.md)，委托链上无双重可变借用。
 
 **证明**：
 
@@ -570,7 +570,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

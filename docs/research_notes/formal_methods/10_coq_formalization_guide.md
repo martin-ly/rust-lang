@@ -687,7 +687,7 @@ Require Import RustFormal.Ownership.Ownership.
 Require Import Coq.Logic.Classical_Prop.
 
 (* 定理: 所有权唯一性 *)
-(* 对应 ownership_model.md 定理 6 *)
+(* 对应 10_ownership_model.md 定理 6 *)
 Theorem ownership_uniqueness :
   forall (Γ : value_env) (Ω : ownership_env) (x y : var) (v : val),
     VarMap.MapsTo x Owned Ω ->
@@ -1150,7 +1150,7 @@ Parameter happens_before : operation -> operation -> Prop.
 
 ```coq
 (* 定理: 借用检查器保证无数据竞争 *)
-(* 对应 borrow_checker_proof.md 定理 1 *)
+(* 对应 10_borrow_checker_proof.md 定理 1 *)
 Theorem borrow_checker_implies_race_freedom :
   forall (B : borrow_env) (Ω : ownership_env) (ops : list operation),
     valid_borrow_env B Ω ->
@@ -1264,7 +1264,7 @@ Require Import RustFormal.Core.Syntax.
 Require Import RustFormal.Core.Semantics.
 
 (* 进展性定理 *)
-(* 对应 type_system_foundations.md 定理 1 *)
+(* 对应 10_type_system_foundations.md 定理 1 *)
 Theorem progress :
   forall (e : expr) (T : ty) (Γ : value_env) (Ω : ownership_env),
     type_check Γ Ω e T ->
@@ -1322,7 +1322,7 @@ Fixpoint fill_ctx (K : eval_ctx) (e : expr) : expr :=
 
 ```coq
 (* 保持性定理 *)
-(* 对应 type_system_foundations.md 定理 2 *)
+(* 对应 10_type_system_foundations.md 定理 2 *)
 Theorem preservation :
   forall (e e' : expr) (T : ty) (Γ Γ' : value_env) (Ω Ω' : ownership_env),
     type_check Γ Ω e T ->
@@ -1408,7 +1408,7 @@ Inductive type_check : value_env -> ownership_env -> expr -> ty -> Prop :=
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-**对应文档**: [ownership_model.md](./ownership_model.md) 定理 6
+**对应文档**: [10_ownership_model.md](./10_ownership_model.md) 定理 6
 
 #### Rust代码示例
 
@@ -1493,7 +1493,7 @@ End Theorem1_OwnershipUniqueness.
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-**对应文档**: [borrow_checker_proof.md](./borrow_checker_proof.md) 定理 1
+**对应文档**: [10_borrow_checker_proof.md](./10_borrow_checker_proof.md) 定理 1
 
 #### Rust代码示例
 
@@ -1613,7 +1613,7 @@ End Theorem2_BorrowMutex.
 
 > **[来源: ACM - Systems Programming Languages]**
 
-**对应文档**: [lifetime_formalization.md](./lifetime_formalization.md)
+**对应文档**: [10_lifetime_formalization.md](./10_lifetime_formalization.md)
 
 #### Rust代码示例
 
@@ -1687,7 +1687,7 @@ End Theorem3_ReferenceValidity.
 
 ```coq
 (*
-与 lifetime_formalization.md 对应关系:
+与 10_lifetime_formalization.md 对应关系:
 
 人工证明 (L2):                    Coq形式化 (L3):
 ─────────────────────────────────────────────────────────
@@ -1714,7 +1714,7 @@ End Theorem3_ReferenceValidity.
 
 > **[来源: IEEE - Programming Language Standards]**
 
-**对应文档**: [send_sync_formalization.md](./send_sync_formalization.md)
+**对应文档**: [10_send_sync_formalization.md](./10_send_sync_formalization.md)
 
 #### Rust代码示例
 
@@ -1773,7 +1773,7 @@ Definition is_sync (T : ty) : Prop :=
     ~ data_race (Read r) (Read r).
 
 (* 定理: Send/Sync 关系 *)
-(* 对应 send_sync_formalization.md 定理 SYNC-L1 *)
+(* 对应 10_send_sync_formalization.md 定理 SYNC-L1 *)
 Theorem send_sync_equivalence :
   forall (T : ty),
     is_sync T <-> is_send (TRef ImmBorrow 0 T).
@@ -2490,10 +2490,10 @@ lint:
 | :--- | :--- | :--- |
 | [10_coq_formalization_matrix.md](./10_coq_formalization_matrix.md) | Coq形式化矩阵 | 证明状态追踪 |
 | [10_formal_foundations_index.md](./10_formal_foundations_index.md) | 形式化基础索引 | 理论学习路径 |
-| [ownership_model.md](./ownership_model.md) | 所有权模型形式化 | 定理1对应文档 |
-| [borrow_checker_proof.md](./borrow_checker_proof.md) | 借用检查器证明 | 定理2对应文档 |
-| [lifetime_formalization.md](./lifetime_formalization.md) | 生命周期形式化 | 定理3对应文档 |
-| [send_sync_formalization.md](./send_sync_formalization.md) | Send/Sync形式化 | 定理4对应文档 |
+| [10_ownership_model.md](./10_ownership_model.md) | 所有权模型形式化 | 定理1对应文档 |
+| [10_borrow_checker_proof.md](./10_borrow_checker_proof.md) | 借用检查器证明 | 定理2对应文档 |
+| [10_lifetime_formalization.md](./10_lifetime_formalization.md) | 生命周期形式化 | 定理3对应文档 |
+| [10_send_sync_formalization.md](./10_send_sync_formalization.md) | Send/Sync形式化 | 定理4对应文档 |
 | [10_separation_logic.md](./10_separation_logic.md) | 分离逻辑 | Iris理论基础 |
 | [10_operational_semantics.md](./10_operational_semantics.md) | 操作语义 | 类型安全基础 |
 
@@ -2548,7 +2548,7 @@ lint:
 **最后更新**: 2026-02-28
 **状态**: ✅ 完整框架
 **版本**: 1.0
-**对应L1/L2文档**: ownership_model.md, borrow_checker_proof.md, lifetime_formalization.md, send_sync_formalization.md
+**对应L1/L2文档**: 10_ownership_model.md, 10_borrow_checker_proof.md, 10_lifetime_formalization.md, 10_send_sync_formalization.md
 
 ---
 
@@ -2586,7 +2586,7 @@ lint:
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

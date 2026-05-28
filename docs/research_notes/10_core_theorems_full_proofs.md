@@ -8,7 +8,7 @@
 > **状态**: ✅ 已完成
 > **用途**: 为 ownership T2、borrow T1、type T3 提供 L2 级完整证明，含归纳基/归纳步形式化陈述、辅助引理显式编号、证明依赖 DAG
 > **证明深度**: L2（完整证明，非机器可检查）
-> **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md)、[PROOF_INDEX](./PROOF_INDEX.md)
+> **上位文档**: [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./10_formal_proof_critical_analysis_and_plan_2026_02.md)、[PROOF_INDEX](./10_proof_index.md)
 
 **形式语言与形式证明**：本文档的定理同时以**形式语言**（推理规则、操作语义、判定形式）表达，见 [FORMAL_LANGUAGE_AND_PROOFS](./10_formal_language_and_proofs.md)。形式语言为数学规范层。Rust 示例衔接见 [THEOREM_RUST_EXAMPLE_MAPPING](./10_theorem_rust_example_mapping.md)。
 
@@ -101,7 +101,7 @@
 | **Theorem** | T-OW2, T-BR1 | 主要结论 | T-OW2 所有权唯一性 |
 | **Corollary** | C-OW1 | 由 Theorem 直接推论 | 推论 |
 
-**引用规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](./PROOF_INDEX.md)。
+**引用规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](./10_proof_index.md)。
 
 ---
 
@@ -244,7 +244,7 @@
 
 **归纳基**：$n=0$ 或单语句，无并发，$Q$ 成立。
 
-**归纳步**：设 $Q(e_1;\ldots;e_{n-1})$。对 $e_n$：若为借用，规则 1、2 保证与已有借用不冲突；若为跨线程，Send/Sync 与 [send_sync_formalization](formal_methods/send_sync_formalization.md) SEND-T1/SYNC-T1、[async_state_machine](formal_methods/async_state_machine.md) T6.2 一致。故 $Q(e_1;\ldots;e_n)$。∎
+**归纳步**：设 $Q(e_1;\ldots;e_{n-1})$。对 $e_n$：若为借用，规则 1、2 保证与已有借用不冲突；若为跨线程，Send/Sync 与 [send_sync_formalization](formal_methods/10_send_sync_formalization.md) SEND-T1/SYNC-T1、[async_state_machine](formal_methods/10_async_state_machine.md) T6.2 一致。故 $Q(e_1;\ldots;e_n)$。∎
 
 ---
 
@@ -262,7 +262,7 @@
 
 **定理 T-TY2（保持性）**：$\Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau$。
 
-（完整证明见 [type_system_foundations](type_theory/type_system_foundations.md) § 定理 1、2。）
+（完整证明见 [type_system_foundations](type_theory/10_type_system_foundations.md) § 定理 1、2。）
 
 ### 4.2 辅助引理
 
@@ -309,9 +309,9 @@
 
 | 本文档 | 子文档 |
 | :--- | :--- |
-| §2 T-OW2 | [ownership_model](formal_methods/ownership_model.md) 定理 2 |
-| §3 T-BR1 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) 定理 1 |
-| §4 T-TY3 | [type_system_foundations](type_theory/type_system_foundations.md) 定理 3 |
+| §2 T-OW2 | [ownership_model](formal_methods/10_ownership_model.md) 定理 2 |
+| §3 T-BR1 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) 定理 1 |
+| §4 T-TY3 | [type_system_foundations](type_theory/10_type_system_foundations.md) 定理 3 |
 
 ## 七、形式语言与英文摘要
 >
@@ -348,7 +348,7 @@
 
 **引理 SYNC-L1**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$。
 
-*完整 Def（SEND1/SYNC1）、证明与反例*见 [send_sync_formalization](formal_methods/send_sync_formalization.md)。与 [async_state_machine](formal_methods/async_state_machine.md) 定理 6.2、[borrow_checker_proof](formal_methods/borrow_checker_proof.md) T1 衔接。
+*完整 Def（SEND1/SYNC1）、证明与反例*见 [send_sync_formalization](formal_methods/10_send_sync_formalization.md)。与 [async_state_machine](formal_methods/10_async_state_machine.md) 定理 6.2、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) T1 衔接。
 
 ---
 
@@ -396,7 +396,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

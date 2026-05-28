@@ -804,9 +804,9 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-- [类型系统速查卡](./type_system.md) - Result 和 Option 类型
+- [类型系统速查卡](./02_type_system.md) - Result 和 Option 类型
 - [控制流与函数速查卡](./02_control_flow_functions_cheatsheet.md) - 错误处理模式
-- [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与错误处理
+- [所有权系统速查卡](./02_ownership_cheatsheet.md) - 所有权与错误处理
 - [异步编程速查卡](./02_async_patterns.md) - 异步错误处理
 
 ---
@@ -1036,7 +1036,7 @@ fn main() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [类型系统完备性缺口](../../research_notes/formal_methods/00_completeness_gaps.md) — 错误处理相关的形式化保证
-- [Send/Sync 形式化](../../research_notes/formal_methods/send_sync_formalization.md) — 错误在多线程间的传递
+- [Send/Sync 形式化](../../research_notes/formal_methods/10_send_sync_formalization.md) — 错误在多线程间的传递
 
 ---
 

@@ -93,11 +93,11 @@
 
 **Axiom SY1**：求值顺序确定；无交错；无数据竞争。
 
-**Axiom SY2**：归约保持类型：若 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。即 [type_system_foundations](../../type_theory/type_system_foundations.md) 保持性。
+**Axiom SY2**：归约保持类型：若 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。即 [type_system_foundations](../../type_theory/10_type_system_foundations.md) 保持性。
 
 **定理 SY-T1**：由 type_system 进展性 T1、保持性 T2，良型程序 $e$ 可求值至值 $v$（$e \to^* v$）或无限归约。
 
-**定理 SY-T2**：由 [ownership_model](../../formal_methods/ownership_model.md)、[borrow_checker_proof](../../formal_methods/borrow_checker_proof.md)，同步执行下所有权与借用规则保证内存安全与无数据竞争。
+**定理 SY-T2**：由 [ownership_model](../../formal_methods/10_ownership_model.md)、[borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md)，同步执行下所有权与借用规则保证内存安全与无数据竞争。
 
 ---
 
@@ -173,7 +173,7 @@ main()
 
 **Axiom SY3**：panic 时栈展开，按 LIFO 顺序 drop 局部变量；若展开到线程边界则线程终止。
 
-**与所有权**：drop 顺序保证 RAII 资源正确释放；见 [ownership_model](../../formal_methods/ownership_model.md)。
+**与所有权**：drop 顺序保证 RAII 资源正确释放；见 [ownership_model](../../formal_methods/10_ownership_model.md)。
 
 ---
 
@@ -313,7 +313,7 @@ main()
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

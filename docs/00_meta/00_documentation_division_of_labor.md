@@ -93,7 +93,7 @@
 - `05_wasm_usage_guide.md` (C12)
 - `05_embedded_rust_guide.md` (C13)
 - `05_unsafe_rust_guide.md` (C01/C07)
-- `PERFORMANCE_TUNING_GUIDE.md` (C08)
+- `05_performance_tuning_guide.md` (C08)
 - `05_type_system_usage_guide.md` (C02) ⬅️ **待创建**
 - `05_control_flow_functions_usage_guide.md` (C03) ⬅️ **待创建**
 - `05_algorithms_usage_guide.md` (C08) ⬅️ **待创建**

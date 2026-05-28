@@ -638,7 +638,7 @@ RFC 1023。形式化：$\text{Fundamental}(\tau) \rightarrow \text{OrphanRule}(\
 *证明思路*：RPITIT 的返回类型由 impl 绑定；由 COH-T1，$(\tau, T)$ 至多一个 impl，故返回类型唯一。∎
 
 **定理 ASYNC-T1（async fn Send 边界）**：若 `async fn m(...) -> R` 用于跨线程（如 `Send` 边界），则其生成的 Future 类型须满足 `Future: Send`；
-等价于 $\tau_R$ 及相关借用的生命周期、自引用约束满足 Send。见 [async_state_machine](../../research_notes/formal_methods/async_state_machine.md) 定理 6.2。
+等价于 $\tau_R$ 及相关借用的生命周期、自引用约束满足 Send。见 [async_state_machine](../../research_notes/formal_methods/10_async_state_machine.md) 定理 6.2。
 
 *证明思路*：async fn 脱糖为 `impl Future`；Send 由 Future 的 poll 状态与捕获的 `&self`/`&mut self` 决定；类型系统在 Trait 约束传播时检查。∎
 
@@ -669,7 +669,7 @@ RFC 1023。形式化：$\text{Fundamental}(\tau) \rightarrow \text{OrphanRule}(\
 
 **Def TRAIT-GAT1（Trait + 泛型 + GAT 组合）**：`impl<T> Trait for Vec<T>` 与 GAT 组合时，解析优先级：具体 impl 优先于泛型 impl；GAT 约束在单态化时检查。
 形式化：$\text{Resolve}(\tau[\vec{\alpha}], T)$ 中优先匹配最具体 impl；
-GAT 约束 $A[P] : B[P]$ 在 [advanced_types](./advanced_types.md) AT-L1 衔接。
+GAT 约束 $A[P] : B[P]$ 在 [advanced_types](./10_advanced_types.md) AT-L1 衔接。
 
 **Def SPEC1（specialization）**： overlapping impl 时（不稳定），更具体的 impl 优先；
 `default` 方法可被更具体 impl 覆盖；
@@ -1703,7 +1703,7 @@ $$
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

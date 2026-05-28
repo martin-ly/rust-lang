@@ -14,7 +14,7 @@
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **文档定位**: 全面覆盖 Rust 中「对齐」相关的各类知识
-> **关联**: [type_system.md](./quick_reference/type_system.md) | [02_strings_formatting_cheatsheet.md](./quick_reference/02_strings_formatting_cheatsheet.md)
+> **关联**: [02_type_system.md](./quick_reference/02_type_system.md) | [02_strings_formatting_cheatsheet.md](./quick_reference/02_strings_formatting_cheatsheet.md)
 
 ---
 
@@ -465,7 +465,7 @@ struct CacheLinePadded {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [ownership_model](../research_notes/formal_methods/ownership_model.md) - transmute 形式化约束
+- [ownership_model](../research_notes/formal_methods/10_ownership_model.md) - transmute 形式化约束
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/10_theoretical_and_argumentation_system_architecture.md) - 指针有效性
 - [memory_analysis](../research_notes/experiments/10_memory_analysis.md) - align_of 实验
 

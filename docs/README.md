@@ -19,7 +19,7 @@
 
 | 文档 | 描述 | 推荐人群 |
 |------|------|---------|
-| [00_MASTER_INDEX.md](./00_master_index.md) | 文档总索引 | 所有人 |
+| [10_00_master_index.md](./00_master_index.md) | 文档总索引 | 所有人 |
 | [10_2026_rust_ecosystem_comprehensive_review_with_citations.md](./10_2026_rust_ecosystem_comprehensive_review_with_citations.md) | **2026生态梳理（权威引用版）** | 所有开发者 |
 | [10_authoritative_sources_and_citations.md](./10_authoritative_sources_and_citations.md) | 学术论文引用汇总 | 研究人员 |
 | [10_migration_guide_2026.md](./10_migration_guide_2026.md) | 2026迁移指南 | 升级用户 |
@@ -96,7 +96,7 @@
 ```
 docs/
 ├── 核心文档 (6个)          # 放在根目录，快速访问
-│   ├── 00_MASTER_INDEX.md
+│   ├── 10_00_master_index.md
 │   ├── 10_2026_rust_ecosystem_comprehensive_review_with_citations.md
 │   ├── 10_authoritative_sources_and_citations.md
 │   ├── 10_migration_guide_2026.md

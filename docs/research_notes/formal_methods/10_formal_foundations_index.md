@@ -196,11 +196,11 @@
 
 | 理论概念 | Rust应用 | 文档位置 |
 | :--- | :--- | :--- |
-| 分离逻辑 | 所有权/借用 | ownership_model.md, borrow_checker_proof.md |
+| 分离逻辑 | 所有权/借用 | 10_ownership_model.md, 10_borrow_checker_proof.md |
 | 霍尔逻辑 | 函数规范 | 10_axiomatic_semantics.md §4 |
 | 类型理论 | Rust类型系统 | type_theory/ |
 | 操作语义 | MIR求值 | 10_operational_semantics.md §5 |
-| 模态逻辑 | 并发安全性 | send_sync_formalization.md |
+| 模态逻辑 | 并发安全性 | 10_send_sync_formalization.md |
 | 线性逻辑 | 所有权转移 | 10_separation_logic.md §3.1 |
 
 ---
@@ -255,11 +255,11 @@
 
 | 定理 | 位置 | 重要性 |
 | :--- | :--- | :--- |
-| 类型安全 | type_system_foundations.md | ⭐⭐⭐⭐⭐ |
-| 所有权唯一性 | ownership_model.md | ⭐⭐⭐⭐⭐ |
-| 借用无竞争 | borrow_checker_proof.md | ⭐⭐⭐⭐⭐ |
-| 进展性 | type_system_foundations.md | ⭐⭐⭐⭐⭐ |
-| 保持性 | type_system_foundations.md | ⭐⭐⭐⭐⭐ |
+| 类型安全 | 10_type_system_foundations.md | ⭐⭐⭐⭐⭐ |
+| 所有权唯一性 | 10_ownership_model.md | ⭐⭐⭐⭐⭐ |
+| 借用无竞争 | 10_borrow_checker_proof.md | ⭐⭐⭐⭐⭐ |
+| 进展性 | 10_type_system_foundations.md | ⭐⭐⭐⭐⭐ |
+| 保持性 | 10_type_system_foundations.md | ⭐⭐⭐⭐⭐ |
 
 ---
 
@@ -328,7 +328,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

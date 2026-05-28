@@ -149,7 +149,7 @@ $$D_1(D_2(D_3(\cdots))) \text{ 形成有效委托链}$$
 >
 > **[来源: Rust Official Docs]**
 
-由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托时 `&self.inner` 借用有效，无数据竞争。
+由 [borrow_checker_proof](../../../formal_methods/10_borrow_checker_proof.md)，委托时 `&self.inner` 借用有效，无数据竞争。
 
 **证明**：
 
@@ -574,7 +574,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

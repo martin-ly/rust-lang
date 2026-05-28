@@ -1285,10 +1285,10 @@ fn pgo_workflow() {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [所有权模型形式化](../research_notes/formal_methods/ownership_model.md)
-- [借用检查器证明](../research_notes/formal_methods/borrow_checker_proof.md)
-- [类型系统基础](../research_notes/type_theory/type_system_foundations.md)
-- [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
+- [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
+- [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
+- [类型系统基础](../research_notes/type_theory/10_type_system_foundations.md)
+- [生命周期形式化](../research_notes/formal_methods/10_lifetime_formalization.md)
 
 ### 📦 推荐工具
 >

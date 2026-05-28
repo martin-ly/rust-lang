@@ -40,7 +40,7 @@ mindmap
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
 | 本README | 10_memory_analysis.md (研究笔记) | 索引/重定向 |
-| 本README | ownership_model.md (研究笔记) | 索引/重定向 |
+| 本README | 10_ownership_model.md (研究笔记) | 索引/重定向 |
 
 [返回主索引](../../00_master_index.md)
 
@@ -247,16 +247,16 @@ fn object_pool_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 所有权模型 | 所有权系统形式化 | ownership_model.md (研究笔记) |
-| 生命周期形式化 | 生命周期系统理论 | lifetime_formalization.md (研究笔记) |
+| 所有权模型 | 所有权系统形式化 | 10_ownership_model.md (研究笔记) |
+| 生命周期形式化 | 生命周期系统理论 | 10_lifetime_formalization.md (研究笔记) |
 
 ### 类型理论
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 类型系统基础 | 类型系统理论 | type_system_foundations.md (研究笔记) |
-| 生命周期形式化 | 生命周期类型理论 | lifetime_formalization.md (研究笔记) |
-| 方差理论 | 类型方差与内存安全 | variance_theory.md (研究笔记) |
+| 类型系统基础 | 类型系统理论 | 10_type_system_foundations.md (研究笔记) |
+| 生命周期形式化 | 生命周期类型理论 | 10_lifetime_formalization.md (研究笔记) |
+| 方差理论 | 类型方差与内存安全 | 10_variance_theory.md (研究笔记) |
 
 ### 安全分析
 

@@ -202,7 +202,7 @@ BorrowCheck(程序 P):
 
 - [所有权证明树](./10_proof_tree_ownership.md)
 - [类型安全证明树](./formal_methods/10_proof_tree_type_safety.md)
-- [生命周期形式化](./formal_methods/lifetime_formalization.md)
+- [生命周期形式化](./formal_methods/10_lifetime_formalization.md)
 
 ---
 
@@ -246,7 +246,7 @@ BorrowCheck(程序 P):
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

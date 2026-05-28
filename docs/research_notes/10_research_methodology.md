@@ -157,7 +157,7 @@
 
 **Axiom RM1**：形式化证明保证正确性；实验验证提供经验支持；二者互补，不可相互替代。见 [experiments/README](experiments/README.md) 推论 EX-C1。
 
-**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](./PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链。
+**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](./10_proof_index.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./10_formal_proof_system_guide.md) 的论证链。
 
 *证明*：由 [experiments/README](experiments/README.md) 定理 EX-T1；实验验证与定理结论一致；形式化证明在 PROOF_INDEX 可查。∎
 
@@ -377,7 +377,7 @@ Qed.
 - **问题**：类型安全、型变、生命周期、Trait 解析等；需可形式化。
 - **模型**：语法、类型规则、操作语义、性质（进展性、保持性、安全）。
 - **推导**：归纳、反证、辅助定理；可借助 Coq/Lean/Isabelle。
-- **详见**： [type_system_foundations.md](./type_theory/type_system_foundations.md)、[trait_system_formalization.md](./type_theory/trait_system_formalization.md)、[borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)。
+- **详见**： [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)、[10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)、[10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)。
 
 ---
 
@@ -524,8 +524,8 @@ Qed.
 
 | 类型 | 文档 | 说明 |
 | :--- | :--- | :--- |
-| 形式化 | [ownership_model](./formal_methods/ownership_model.md), [borrow_checker_proof](./formal_methods/borrow_checker_proof.md), [async_state_machine](./formal_methods/async_state_machine.md), [lifetime_formalization](./formal_methods/lifetime_formalization.md), [pin_self_referential](./formal_methods/pin_self_referential.md) | 形式化方法 + 证明/定理 + 系统集成 |
-| 类型理论 | [type_system_foundations](./type_theory/type_system_foundations.md), [trait_system_formalization](./type_theory/trait_system_formalization.md), [lifetime_formalization](./type_theory/lifetime_formalization.md), [advanced_types](./type_theory/advanced_types.md), [variance_theory](./type_theory/variance_theory.md) | 类型、Trait、生命周期、型变 |
+| 形式化 | [ownership_model](./formal_methods/10_ownership_model.md), [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md), [async_state_machine](./formal_methods/10_async_state_machine.md), [lifetime_formalization](./formal_methods/10_lifetime_formalization.md), [pin_self_referential](./formal_methods/10_pin_self_referential.md) | 形式化方法 + 证明/定理 + 系统集成 |
+| 类型理论 | [type_system_foundations](./type_theory/10_type_system_foundations.md), [trait_system_formalization](./type_theory/10_trait_system_formalization.md), [lifetime_formalization](./type_theory/10_lifetime_formalization.md), [advanced_types](./type_theory/10_advanced_types.md), [variance_theory](./type_theory/10_variance_theory.md) | 类型、Trait、生命周期、型变 |
 | 实验 | [performance_benchmarks](./experiments/10_performance_benchmarks.md), [memory_analysis](./experiments/10_memory_analysis.md), [compiler_optimizations](./experiments/10_compiler_optimizations.md), [concurrency_performance](./experiments/10_concurrency_performance.md), [macro_expansion_performance](./experiments/10_macro_expansion_performance.md) | 数据收集指南 + 结果分析模板 |
 | 实证 | [practical_applications](./10_practical_applications.md) | 案例报告模板 + 案例快速索引 + 最佳实践 |
 
@@ -632,7 +632,7 @@ Qed.
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

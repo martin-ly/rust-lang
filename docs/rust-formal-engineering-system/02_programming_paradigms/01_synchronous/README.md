@@ -326,8 +326,8 @@ fn thread_local_demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/send_sync_formalization.md](../../../research_notes/formal_methods/send_sync_formalization.md) |
-| 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
+| Send/Sync 形式化 | 线程安全 trait 形式化 | [../../../research_notes/formal_methods/10_send_sync_formalization.md](../../../research_notes/formal_methods/10_send_sync_formalization.md) |
+| 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 
 ### 实验分析
 

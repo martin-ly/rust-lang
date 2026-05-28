@@ -222,9 +222,9 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 | 定理 | 依赖 | 来源 |
 | :--- | :--- | :--- |
-| CE-T1 | ownership T2、T3 | [ownership_model](../../../research_notes/formal_methods/ownership_model.md) |
-| CE-T2 | borrow T1、Send/Sync | [borrow_checker_proof](../../../research_notes/formal_methods/borrow_checker_proof.md)、[send_sync_formalization](../../../research_notes/formal_methods/send_sync_formalization.md) |
-| CE-T3 | type T1、T2、T3 | [type_system_foundations](../../../research_notes/type_theory/type_system_foundations.md) |
+| CE-T1 | ownership T2、T3 | [ownership_model](../../../research_notes/formal_methods/10_ownership_model.md) |
+| CE-T2 | borrow T1、Send/Sync | [borrow_checker_proof](../../../research_notes/formal_methods/10_borrow_checker_proof.md)、[send_sync_formalization](../../../research_notes/formal_methods/10_send_sync_formalization.md) |
+| CE-T3 | type T1、T2、T3 | [type_system_foundations](../../../research_notes/type_theory/10_type_system_foundations.md) |
 
 ---
 
@@ -546,7 +546,7 @@ L4 跨进程/跨网络（分布式、微服务）
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

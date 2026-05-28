@@ -91,7 +91,7 @@ where
 {}
 ```
 
-**形式化关联**: [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) 需要更新 trait 求解算法描述
+**形式化关联**: [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) 需要更新 trait 求解算法描述
 
 ---
 
@@ -123,7 +123,7 @@ impl AsyncDrop for AsyncResource {
 }
 ```
 
-**形式化关联**: [async_state_machine](../research_notes/formal_methods/async_state_machine.md)、[pin_self_referential](../research_notes/formal_methods/pin_self_referential.md)
+**形式化关联**: [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md)、[pin_self_referential](../research_notes/formal_methods/10_pin_self_referential.md)
 
 ---
 
@@ -154,7 +154,7 @@ let iter = std::iter::iter! {
 };
 ```
 
-**形式化意义**: 需要扩展 [async_state_machine](../research_notes/formal_methods/async_state_machine.md) 以涵盖生成器状态机
+**形式化意义**: 需要扩展 [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) 以涵盖生成器状态机
 
 ---
 
@@ -177,7 +177,7 @@ use_pinned(pinned.as_mut());  // 必须显式 as_mut
 use_pinned(pinned);  // 自动重新借用
 ```
 
-**形式化关联**: [pin_self_referential](../research_notes/formal_methods/pin_self_referential.md) 需要更新重新借用规则
+**形式化关联**: [pin_self_referential](../research_notes/formal_methods/10_pin_self_referential.md) 需要更新重新借用规则
 
 ---
 
@@ -251,7 +251,7 @@ let ptr = std::ptr::without_provenance::<i32>(0x1000);
 let addr = ptr.addr();
 ```
 
-**形式化关联**: [ownership_model](../research_notes/formal_methods/ownership_model.md) 需要添加严格来源规则
+**形式化关联**: [ownership_model](../research_notes/formal_methods/10_ownership_model.md) 需要添加严格来源规则
 
 ---
 
@@ -324,11 +324,11 @@ cargo build --timings -Zsection-timings
 
 | 主题 | 描述 | 相关文档 |
 | :--- | :--- | :--- |
-| 下一代 Trait 求解器 | 新求解器的正确性证明 | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
-| Async Drop | 异步析构的安全保证 | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
-| 生成器状态机 | 生成器的内存安全证明 | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
-| Pin 重新借用 | 人体工学改进的安全边界 | [pin_self_referential](../research_notes/formal_methods/pin_self_referential.md) |
-| 严格指针来源 | 指针操作的严格语义 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
+| 下一代 Trait 求解器 | 新求解器的正确性证明 | [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) |
+| Async Drop | 异步析构的安全保证 | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) |
+| 生成器状态机 | 生成器的内存安全证明 | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) |
+| Pin 重新借用 | 人体工学改进的安全边界 | [pin_self_referential](../research_notes/formal_methods/10_pin_self_referential.md) |
+| 严格指针来源 | 指针操作的严格语义 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) |
 
 ### 建议添加的形式化定义
 >

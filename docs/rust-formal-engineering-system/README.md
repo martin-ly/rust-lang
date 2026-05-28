@@ -35,12 +35,12 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [所有权与借用理论](../research_notes/formal_methods/ownership_model.md)
-- [借用检查器证明](../research_notes/formal_methods/borrow_checker_proof.md)
-- [类型系统基础](../research_notes/type_theory/type_system_foundations.md)
-- [Trait 系统形式化](../research_notes/type_theory/trait_system_formalization.md)
-- [生命周期形式化](../research_notes/formal_methods/lifetime_formalization.md)
-- [型变理论](../research_notes/type_theory/variance_theory.md)
+- [所有权与借用理论](../research_notes/formal_methods/10_ownership_model.md)
+- [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
+- [类型系统基础](../research_notes/type_theory/10_type_system_foundations.md)
+- [Trait 系统形式化](../research_notes/type_theory/10_trait_system_formalization.md)
+- [生命周期形式化](../research_notes/formal_methods/10_lifetime_formalization.md)
+- [型变理论](../research_notes/type_theory/10_variance_theory.md)
 - [形式化验证工具](../research_notes/10_tools_guide.md)
 
 ---
@@ -125,13 +125,13 @@ fn render<T: Drawable>(item: T) {
 
 | 主题 | 文档路径 | 内容概述 |
 | :--- | :--- | :--- |
-| **所有权模型** | [../research_notes/formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) | 所有权系统的形式化定义与证明 |
-| **借用检查器** | [../research_notes/formal_methods/borrow_checker_proof.md](../research_notes/formal_methods/borrow_checker_proof.md) | 借用检查的形式化正确性证明 |
-| **生命周期** | [../research_notes/formal_methods/lifetime_formalization.md](../research_notes/formal_methods/lifetime_formalization.md) | 生命周期的形式化模型 |
-| **类型系统** | [../research_notes/type_theory/type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) | 类型理论基础 |
-| **Trait 系统** | [../research_notes/type_theory/trait_system_formalization.md](../research_notes/type_theory/trait_system_formalization.md) | Trait 系统的形式化 |
-| **型变理论** | [../research_notes/type_theory/variance_theory.md](../research_notes/type_theory/variance_theory.md) | 型变规则与证明 |
-| **证明索引** | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) | 87+ 个形式化证明的完整索引 |
+| **所有权模型** | [../research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权系统的形式化定义与证明 |
+| **借用检查器** | [../research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查的形式化正确性证明 |
+| **生命周期** | [../research_notes/formal_methods/10_lifetime_formalization.md](../research_notes/formal_methods/10_lifetime_formalization.md) | 生命周期的形式化模型 |
+| **类型系统** | [../research_notes/type_theory/10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) | 类型理论基础 |
+| **Trait 系统** | [../research_notes/type_theory/10_trait_system_formalization.md](../research_notes/type_theory/10_trait_system_formalization.md) | Trait 系统的形式化 |
+| **型变理论** | [../research_notes/type_theory/10_variance_theory.md](../research_notes/type_theory/10_variance_theory.md) | 型变规则与证明 |
+| **证明索引** | [../research_notes/10_proof_index.md](../research_notes/10_proof_index.md) | 87+ 个形式化证明的完整索引 |
 | **工具指南** | [../research_notes/10_tools_guide.md](../research_notes/10_tools_guide.md) | Prusti/Kani/Creusot 使用指南 |
 
 ---
@@ -151,7 +151,7 @@ fn render<T: Drawable>(item: T) {
 | **formal_methods/** | [../research_notes/formal_methods/](../research_notes/formal_methods/README.md) | 所有权模型、借用检查器、生命周期、异步状态机、Pin |
 | **type_theory/** | [../research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型系统、Trait 系统、型变理论、类型推导 |
 | **experiments/** | [../research_notes/experiments/](../research_notes/experiments/README.md) | 性能实验、内存分析、编译器优化 |
-| **PROOF_INDEX.md** | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) | 形式化证明索引（87+ 个证明） |
+| **10_proof_index.md** | [../research_notes/10_proof_index.md](../research_notes/10_proof_index.md) | 形式化证明索引（87+ 个证明） |
 | **10_tools_guide.md** | [../research_notes/10_tools_guide.md](../research_notes/10_tools_guide.md) | 形式化验证工具（Prusti、Kani、Creusot） |
 | **10_safe_unsafe_comprehensive_analysis.md** | [../research_notes/10_safe_unsafe_comprehensive_analysis.md](../research_notes/10_safe_unsafe_comprehensive_analysis.md) | 安全/非安全边界分析 |
 

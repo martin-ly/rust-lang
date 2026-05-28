@@ -146,7 +146,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 >
 > **[来源: Rust Official Docs]**
 
-`Option<Box<Handler>>` 链由 [ownership_model](../../../formal_methods/ownership_model.md) 保证无悬垂。
+`Option<Box<Handler>>` 链由 [ownership_model](../../../formal_methods/10_ownership_model.md) 保证无悬垂。
 
 **证明**：
 
@@ -173,7 +173,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 >
 > **[来源: Rust Official Docs]**
 
-递归或循环处理时借用规则满足；由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
+递归或循环处理时借用规则满足；由 [borrow_checker_proof](../../../formal_methods/10_borrow_checker_proof.md)。
 
 **证明**：
 
@@ -554,7 +554,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

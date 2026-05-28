@@ -56,7 +56,7 @@
 
 | 支柱 | 核心问题 | 确定性判定目标 | 核心文档 |
 | :--- | :--- | :--- | :--- |
-| **支柱 1：公理判定系统** | 类型、控制流、变量、Send/Sync 等全面形式化推理与证明 | 公理→定理的形式化推理链可追溯 | FORMAL_FULL_MODEL_OVERVIEW、CORE_THEOREMS_FULL_PROOFS、PROOF_INDEX、[send_sync_formalization](formal_methods/send_sync_formalization.md)、[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) |
+| **支柱 1：公理判定系统** | 类型、控制流、变量、Send/Sync 等全面形式化推理与证明 | 公理→定理的形式化推理链可追溯 | FORMAL_FULL_MODEL_OVERVIEW、CORE_THEOREMS_FULL_PROOFS、PROOF_INDEX、[send_sync_formalization](formal_methods/10_send_sync_formalization.md)、[SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) |
 | **支柱 2：语言表达力** | 设计模式、并发/分布式、工作流 | 何者可表达、何者不可表达、边界在哪 | software_design_theory、04_expressiveness_boundary、06_boundary_analysis |
 | **支柱 3：组件组合法则** | 结合 1、2 的组件组合 | 组合有效性 CE-T1–T3、构建能力 CE-MAT1 | 04_compositional_engineering |
 
@@ -106,7 +106,7 @@
 | **Trait** | impl、对象安全、一致性；COH-T1 | trait_system_formalization |
 | **异步** | Future、Poll、状态机；T6.1–T6.3 | async_state_machine |
 | **Pin** | 位置稳定、自引用；T1–T3 | pin_self_referential |
-| **Send/Sync** | 跨线程转移/共享安全；SEND-T1、SYNC-T1、SYNC-L1 | [send_sync_formalization](formal_methods/send_sync_formalization.md) |
+| **Send/Sync** | 跨线程转移/共享安全；SEND-T1、SYNC-T1、SYNC-L1 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) |
 | **安全可判定机制** | 每机制概念定义·属性关系·形式证明·反例；并发/Trait 族四维表 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) |
 | **设计模式** | GoF 23、扩展 43；Def/Axiom/定理、证明思路、反例 | 01_design_patterns_formal |
 | **工作流** | 23 安全 vs 43 完全；语义边界图、表达边界 | 02_workflow_safe_complete_models |
@@ -257,7 +257,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -203,7 +203,7 @@ fn lub_coercion_example() {
     // 研究任务：
     // 1. 形式化描述 LUB 计算规则
     // 2. 验证修正后的推断正确性
-    // 3. 更新 type_system_foundations.md 中的类型推导规则
+    // 3. 更新 10_type_system_foundations.md 中的类型推导规则
 }
 ```
 
@@ -261,7 +261,7 @@ fn api_stabilization_example() {
 
     // 研究任务：
     // 1. 验证新 API 的前置/后置条件
-    // 2. 更新 trait_system_formalization.md 中的实现解析
+    // 2. 更新 10_trait_system_formalization.md 中的实现解析
     // 3. 检查是否需要新的形式化定义
 }
 ```
@@ -309,7 +309,7 @@ fn api_stabilization_example() {
 | :--- | :--- | :--- |
 | CORE_THEOREMS_FULL_PROOFS | 核心定理完整证明 | [10_core_theorems_full_proofs.md](./10_core_theorems_full_proofs.md) |
 | COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [10_coq_isabelle_proof_scaffolding.md](./10_coq_isabelle_proof_scaffolding.md) |
-| PROOF_INDEX | 证明索引 | [PROOF_INDEX.md](./PROOF_INDEX.md) |
+| PROOF_INDEX | 证明索引 | [10_proof_index.md](./10_proof_index.md) |
 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [10_safe_unsafe_comprehensive_analysis.md](./10_safe_unsafe_comprehensive_analysis.md) |
 
 ### 研究笔记索引
@@ -318,9 +318,9 @@ fn api_stabilization_example() {
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
-| 形式化方法 | 所有权模型 | [formal_methods/ownership_model.md](./formal_methods/ownership_model.md) |
-| 形式化方法 | 借用检查器 | [formal_methods/borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
-| 类型理论 | 类型系统基础 | [type_theory/type_system_foundations.md](./type_theory/type_system_foundations.md) |
+| 形式化方法 | 所有权模型 | [formal_methods/10_ownership_model.md](./formal_methods/10_ownership_model.md) |
+| 形式化方法 | 借用检查器 | [formal_methods/10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) |
+| 类型理论 | 类型系统基础 | [type_theory/10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) |
 | 实验研究 | 性能基准测试 | [experiments/10_performance_benchmarks.md](./experiments/10_performance_benchmarks.md) |
 
 ---
@@ -376,7 +376,7 @@ fn api_stabilization_example() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

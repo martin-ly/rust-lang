@@ -87,17 +87,17 @@
 
 | 机制 | 公理/定义 | 子文档 |
 | :--- | :--- | :--- |
-| **所有权** | 规则 1–3：唯一所有者、移动转移、作用域结束释放 | [ownership_model](./formal_methods/ownership_model.md) |
-| **借用** | 规则 5–8：共享借用、可变借用、互斥、作用域 | [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) |
-| **生命周期** | Axiom LF1–LF2、Def 1.4、$\ell \subseteq \text{lft}$ | [lifetime_formalization](./formal_methods/lifetime_formalization.md) |
-| **类型系统** | 进展性、保持性、typing rules | [type_system_foundations](./type_theory/type_system_foundations.md) |
-| **型变** | Def 1.1–3.1（协变、逆变、不变） | [variance_theory](./type_theory/variance_theory.md) |
-| **Trait** | Axiom COH1/COH2、对象安全、impl 解析 | [trait_system_formalization](./type_theory/trait_system_formalization.md) |
-| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | [async_state_machine](./formal_methods/async_state_machine.md) |
-| **Pin** | Def 1.1–2.2（位置稳定、自引用） | [pin_self_referential](./formal_methods/pin_self_referential.md) |
-| **Send/Sync** | Def SEND1/SYNC1、SYNC-L1（$T:\text{Sync} \Leftrightarrow \&T:\text{Send}$）；SEND-T1/SYNC-T1 | [send_sync_formalization](./formal_methods/send_sync_formalization.md) |
+| **所有权** | 规则 1–3：唯一所有者、移动转移、作用域结束释放 | [ownership_model](./formal_methods/10_ownership_model.md) |
+| **借用** | 规则 5–8：共享借用、可变借用、互斥、作用域 | [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) |
+| **生命周期** | Axiom LF1–LF2、Def 1.4、$\ell \subseteq \text{lft}$ | [lifetime_formalization](./formal_methods/10_lifetime_formalization.md) |
+| **类型系统** | 进展性、保持性、typing rules | [type_system_foundations](./type_theory/10_type_system_foundations.md) |
+| **型变** | Def 1.1–3.1（协变、逆变、不变） | [variance_theory](./type_theory/10_variance_theory.md) |
+| **Trait** | Axiom COH1/COH2、对象安全、impl 解析 | [trait_system_formalization](./type_theory/10_trait_system_formalization.md) |
+| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | [async_state_machine](./formal_methods/10_async_state_machine.md) |
+| **Pin** | Def 1.1–2.2（位置稳定、自引用） | [pin_self_referential](./formal_methods/10_pin_self_referential.md) |
+| **Send/Sync** | Def SEND1/SYNC1、SYNC-L1（$T:\text{Sync} \Leftrightarrow \&T:\text{Send}$）；SEND-T1/SYNC-T1 | [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) |
 | **控制流** | A-CF1：控制流归约保持类型与所有权 | [formal_methods/README](./formal_methods/README.md#控制流形式化) |
-| **变量** | Def 1.4 绑定、Def 1.5 遮蔽 | [ownership_model](./formal_methods/ownership_model.md) |
+| **变量** | Def 1.4 绑定、Def 1.5 遮蔽 | [ownership_model](./formal_methods/10_ownership_model.md) |
 
 ### 1.2 定理依赖 DAG（简化）
 
@@ -236,14 +236,14 @@
 
 | 子文档 | 本模型对应 | 定理编号 |
 | :--- | :--- | :--- |
-| [ownership_model](./formal_methods/ownership_model.md) | §2.1 内存与所有权、§2.3 A-BIND1/SHADOW1 | T2, T3, Def 1.4/1.5, RC-T1, … |
-| [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) | §2.1 A-BR1–4 | T1, T2, CHAN-T1, MUTEX-T1, … |
-| [lifetime_formalization](./formal_methods/lifetime_formalization.md) | §2.2 A-LF1–2 | LF-T1, LF-T2, LF-T3 |
-| [type_system_foundations](./type_theory/type_system_foundations.md) | §2.2 A-TY1–2 | T1–T5, LUB-T1, … |
-| [variance_theory](./type_theory/variance_theory.md) | §2.2 A-VAR1–3 | T1–T4, VAR-COM-T1 |
-| [trait_system_formalization](./type_theory/trait_system_formalization.md) | - | T1–T3, COH-T1, RPIT-T1, … |
-| [async_state_machine](./formal_methods/async_state_machine.md) | §2.4 A-AS1–2 | T6.1–T6.3, SPAWN-T1 |
-| [pin_self_referential](./formal_methods/pin_self_referential.md) | §2.4 A-PIN1–2 | T1–T3 |
+| [ownership_model](./formal_methods/10_ownership_model.md) | §2.1 内存与所有权、§2.3 A-BIND1/SHADOW1 | T2, T3, Def 1.4/1.5, RC-T1, … |
+| [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) | §2.1 A-BR1–4 | T1, T2, CHAN-T1, MUTEX-T1, … |
+| [lifetime_formalization](./formal_methods/10_lifetime_formalization.md) | §2.2 A-LF1–2 | LF-T1, LF-T2, LF-T3 |
+| [type_system_foundations](./type_theory/10_type_system_foundations.md) | §2.2 A-TY1–2 | T1–T5, LUB-T1, … |
+| [variance_theory](./type_theory/10_variance_theory.md) | §2.2 A-VAR1–3 | T1–T4, VAR-COM-T1 |
+| [trait_system_formalization](./type_theory/10_trait_system_formalization.md) | - | T1–T3, COH-T1, RPIT-T1, … |
+| [async_state_machine](./formal_methods/10_async_state_machine.md) | §2.4 A-AS1–2 | T6.1–T6.3, SPAWN-T1 |
+| [pin_self_referential](./formal_methods/10_pin_self_referential.md) | §2.4 A-PIN1–2 | T1–T3 |
 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | 组合层 | CE-T1–T3, CE-L1, CE-C1 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 顶层 | USF-T1, USF-C1 |
 
@@ -268,7 +268,7 @@
 - [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) — 核心定理 T-OW2、T-BR1、T-TY3 完整证明（L2）
 - [FORMAL_LANGUAGE_AND_PROOFS](10_formal_language_and_proofs.md) — 形式语言与形式证明（推理规则、操作语义、判定形式）
 - [FORMAL_FULL_MODEL_EN_SUMMARY](./10_formal_full_model_en_summary.md) — 英文摘要
-- [PROOF_INDEX](./PROOF_INDEX.md) — 105+ 证明索引、按深度导航
+- [PROOF_INDEX](./10_proof_index.md) — 105+ 证明索引、按深度导航
 - [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./10_international_formal_verification_index.md) — 国际对标
 - [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md) — 批判性分析与推进计划
 
@@ -327,7 +327,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

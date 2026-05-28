@@ -137,7 +137,7 @@
 
 > **[来源: Wikipedia - Memory Safety]**
 
-- **阶段 A**：新建 [send_sync_formalization](formal_methods/send_sync_formalization.md)；Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1、与 spawn/Future/Arc 衔接、反例；README 扩展为**六篇并表**
+- **阶段 A**：新建 [send_sync_formalization](formal_methods/10_send_sync_formalization.md)；Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1、与 spawn/Future/Arc 衔接、反例；README 扩展为**六篇并表**
 - **阶段 B**：新建 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md)；每机制一节（概念定义、属性关系、解释论证、形式证明、反例）；与 formal_methods/type_theory 双向链接
 - **阶段 C**：并发与异步族、Trait 族四维表（可判定性、安全边界、形式化、思维表征）已入 SAFE_DECIDABLE_MECHANISMS_OVERVIEW §6
 - **阶段 D**：HIERARCHICAL_MAPPING 增加 send_sync_formalization、安全可判定机制总览行；文档↔思维表征表更新；各篇「五篇并表」→「六篇并表」统一
@@ -269,7 +269,7 @@
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-**表格格式统一**：参照 PROOF_INDEX.md 行 55 规范，research_notes 表格分隔行统一为 `| :--- | :--- | :--- |` 格式；已修复 50+ 文件：formal_methods、type_theory、01_design_patterns_formal（23 模式）、02_workflow_safe_complete_models、03_execution_models、04_compositional_engineering、FORMAL_PROOF_SYSTEM_GUIDE、THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE、experiments、BEST_PRACTICES、TASK_ORCHESTRATION_AND_EXECUTION_PLAN、practical_applications 等。
+**表格格式统一**：参照 10_proof_index.md 行 55 规范，research_notes 表格分隔行统一为 `| :--- | :--- | :--- |` 格式；已修复 50+ 文件：formal_methods、type_theory、01_design_patterns_formal（23 模式）、02_workflow_safe_complete_models、03_execution_models、04_compositional_engineering、FORMAL_PROOF_SYSTEM_GUIDE、THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE、experiments、BEST_PRACTICES、TASK_ORCHESTRATION_AND_EXECUTION_PLAN、practical_applications 等。
 
 **形式论证扩展**：
 
@@ -569,7 +569,7 @@
 - ✅ 10_getting_started.md - 快速入门指南
 - ✅ 10_faq.md - 常见问题解答
 - ✅ 10_maintenance_guide.md - 维护指南
-- ✅ BEST_PRACTICES.md - 最佳实践
+- ✅ 10_best_practices.md - 最佳实践
 - ✅ GLOSSARY.md - 术语表
 - ✅ 10_resources.md - 研究资源汇总
 - ✅ 10_system_integration.md - 系统集成指南
@@ -582,19 +582,19 @@
 
 **形式化方法研究** (5个):
 
-- ✅ ownership_model.md - 所有权模型形式化
-- ✅ borrow_checker_proof.md - 借用检查器证明
-- ✅ async_state_machine.md - 异步状态机形式化
-- ✅ lifetime_formalization.md - 生命周期形式化
-- ✅ pin_self_referential.md - Pin 和自引用类型形式化
+- ✅ 10_ownership_model.md - 所有权模型形式化
+- ✅ 10_borrow_checker_proof.md - 借用检查器证明
+- ✅ 10_async_state_machine.md - 异步状态机形式化
+- ✅ 10_lifetime_formalization.md - 生命周期形式化
+- ✅ 10_pin_self_referential.md - Pin 和自引用类型形式化
 
 **类型理论研究** (5个):
 
-- ✅ type_system_foundations.md - 类型系统基础
-- ✅ trait_system_formalization.md - Trait 系统形式化
-- ✅ lifetime_formalization.md - 生命周期形式化
-- ✅ advanced_types.md - 高级类型特性（GATs、const 泛型）
-- ✅ variance_theory.md - 型变理论
+- ✅ 10_type_system_foundations.md - 类型系统基础
+- ✅ 10_trait_system_formalization.md - Trait 系统形式化
+- ✅ 10_lifetime_formalization.md - 生命周期形式化
+- ✅ 10_advanced_types.md - 高级类型特性（GATs、const 泛型）
+- ✅ 10_variance_theory.md - 型变理论
 
 **实验研究** (5个):
 
@@ -1341,7 +1341,7 @@ _版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/) 规范。_
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

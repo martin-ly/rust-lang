@@ -92,23 +92,23 @@
 
 | 本书章节 | 对应项目文档 | 对齐状态 | 差异说明 |
 | :--- | :--- | :--- | :--- |
-| 4.1 所有权 | ownership_cheatsheet.md, ownership_model.md | ✅ 一致 | 项目添加了形式化 |
-| 4.2 借用 | borrow_checker_proof.md | ✅ 一致 | 项目添加了证明 |
+| 4.1 所有权 | 02_ownership_cheatsheet.md, 10_ownership_model.md | ✅ 一致 | 项目添加了形式化 |
+| 4.2 借用 | 10_borrow_checker_proof.md | ✅ 一致 | 项目添加了证明 |
 | 4.3 Slice | 02_collections_iterators_cheatsheet.md | ✅ 一致 | - |
-| 5.0 结构体 | type_system.md | ✅ 一致 | - |
-| 6.0 枚举 | type_system.md | ✅ 一致 | - |
+| 5.0 结构体 | 02_type_system.md | ✅ 一致 | - |
+| 6.0 枚举 | 02_type_system.md | ✅ 一致 | - |
 | 6.2 模式匹配 | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
 | 8.0 集合 | 02_collections_iterators_cheatsheet.md | ✅ 一致 | - |
 | 9.0 错误处理 | 02_error_handling_cheatsheet.md | ✅ 一致 | 项目添加了形式化 |
-| 10.0 泛型 | 02_generics_cheatsheet.md, type_system_foundations.md | ✅ 一致 | 项目添加了类型论 |
-| 10.2 Trait | trait_system_formalization.md | ✅ 一致 | 项目添加了形式化 |
-| 10.3 生命周期 | lifetime_formalization.md | ✅ 一致 | 项目添加了形式化 |
+| 10.0 泛型 | 02_generics_cheatsheet.md, 10_type_system_foundations.md | ✅ 一致 | 项目添加了类型论 |
+| 10.2 Trait | 10_trait_system_formalization.md | ✅ 一致 | 项目添加了形式化 |
+| 10.3 生命周期 | 10_lifetime_formalization.md | ✅ 一致 | 项目添加了形式化 |
 | 11.0 测试 | 02_testing_cheatsheet.md | ✅ 一致 | - |
 | 13.0 闭包 | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
 | 13.2 迭代器 | 02_collections_iterators_cheatsheet.md | ✅ 一致 | - |
 | 15.0 智能指针 | 02_smart_pointers_cheatsheet.md | ✅ 一致 | - |
 | 16.0 并发 | 02_threads_concurrency_cheatsheet.md | ✅ 一致 | 项目添加了形式化 |
-| 17.0 异步 | 02_async_patterns.md, async_state_machine.md | ✅ 一致 | 项目添加了形式化 |
+| 17.0 异步 | 02_async_patterns.md, 10_async_state_machine.md | ✅ 一致 | 项目添加了形式化 |
 | 19.0 高级特性 | 05_advanced_topics_deep_dive.md | ✅ 一致 | - |
 | 20.0 项目 | 02_cargo_cheatsheet.md | ✅ 一致 | - |
 
@@ -121,11 +121,11 @@
 | 参考章节 | 对应项目文档 | 对齐状态 | 差异说明 |
 | :--- | :--- | :--- | :--- |
 | Items | 02_modules_cheatsheet.md | ✅ 一致 | - |
-| Types | type_system.md, type_system_foundations.md | ✅ 一致 | 项目添加了形式化 |
-| Lifetimes | lifetime_formalization.md | ✅ 一致 | 项目添加了证明 |
-| Traits | trait_system_formalization.md | ✅ 一致 | 项目添加了形式化 |
+| Types | 02_type_system.md, 10_type_system_foundations.md | ✅ 一致 | 项目添加了形式化 |
+| Lifetimes | 10_lifetime_formalization.md | ✅ 一致 | 项目添加了证明 |
+| Traits | 10_trait_system_formalization.md | ✅ 一致 | 项目添加了形式化 |
 | Patterns | 02_control_flow_functions_cheatsheet.md | ✅ 一致 | - |
-| Memory Model | ownership_model.md | ✅ 一致 | 项目添加了分离逻辑 |
+| Memory Model | 10_ownership_model.md | ✅ 一致 | 项目添加了分离逻辑 |
 | Unsafe | 05_unsafe_rust_guide.md | ✅ 一致 | - |
 | Attributes | macros_cheatsheet.md | ✅ 一致 | - |
 
@@ -156,11 +156,11 @@
 
 | RustBelt 内容 | 对应项目文档 | 对齐状态 | 说明 |
 | :--- | :--- | :--- | :--- |
-| λRust 语法 | ownership_model.md, borrow_checker_proof.md | ✅ 一致 | 模型对应 |
-| 所有权逻辑 | ownership_model.md | ✅ 一致 | 分离逻辑 |
-| 借用规则 | borrow_checker_proof.md | ✅ 一致 | 定理对应 |
-| 类型安全 | type_system_foundations.md | ✅ 一致 | 进展保持 |
-| 并发安全 | send_sync_formalization.md | ✅ 一致 | Send/Sync |
+| λRust 语法 | 10_ownership_model.md, 10_borrow_checker_proof.md | ✅ 一致 | 模型对应 |
+| 所有权逻辑 | 10_ownership_model.md | ✅ 一致 | 分离逻辑 |
+| 借用规则 | 10_borrow_checker_proof.md | ✅ 一致 | 定理对应 |
+| 类型安全 | 10_type_system_foundations.md | ✅ 一致 | 进展保持 |
+| 并发安全 | 10_send_sync_formalization.md | ✅ 一致 | Send/Sync |
 
 ### 形式化方法对齐
 
@@ -170,7 +170,7 @@
 
 | 形式化内容 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |
-| 分离逻辑 | ownership_model.md | ✅ 一致 |
+| 分离逻辑 | 10_ownership_model.md | ✅ 一致 |
 | Hoare逻辑 | 10_formal_proof_system_guide.md | ✅ 一致 |
 | 类型论 | type_theory/*.md | ✅ 一致 |
 | 进程代数 | software_design_theory/03_execution_models/*.md | ✅ 一致 |
@@ -190,8 +190,8 @@
 | 模式 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |
 | Builder | design_patterns_cheatsheet.md | ✅ 一致 |
-| RAII | ownership_cheatsheet.md | ✅ 一致 |
-| Newtype | type_system.md | ✅ 一致 |
+| RAII | 02_ownership_cheatsheet.md | ✅ 一致 |
+| Newtype | 02_type_system.md | ✅ 一致 |
 | Strategy | design_patterns_cheatsheet.md | ✅ 一致 |
 | Observer | design_patterns_cheatsheet.md | ✅ 一致 |
 
@@ -201,10 +201,10 @@
 
 | 指南 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |
-| 命名规范 | BEST_PRACTICES.md | ✅ 一致 |
+| 命名规范 | 10_best_practices.md | ✅ 一致 |
 | 错误处理 | 02_error_handling_cheatsheet.md | ✅ 一致 |
 | 文档注释 | 各文档 | ✅ 一致 |
-| 类型转换 | type_system.md | ✅ 一致 |
+| 类型转换 | 02_type_system.md | ✅ 一致 |
 
 ---
 
@@ -343,7 +343,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

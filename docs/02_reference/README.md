@@ -64,8 +64,8 @@ let atomic = Arc::new(5);                // 多线程原子引用计数
 
 | 主题 | 文件 | 描述 |
 | :--- | :--- | :--- |
-| **所有权与借用** | ownership_cheatsheet.md | 所有权规则、生命周期 |
-| **类型系统** | type_system.md | 泛型、trait、类型转换 |
+| **所有权与借用** | 02_ownership_cheatsheet.md | 所有权规则、生命周期 |
+| **类型系统** | 02_type_system.md | 泛型、trait、类型转换 |
 | **异步编程** | async_cheatsheet.md | async/await、Future |
 | **并发** | concurrency_cheatsheet.md | 线程、同步、Send/Sync |
 | **宏系统** | macros_cheatsheet.md | 声明宏、过程宏 |
@@ -122,14 +122,14 @@ enum List {
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 形式化方法概述 | 形式化验证基础理论 | [../research_notes/formal_methods/README.md](../research_notes/formal_methods/README.md) |
-| 类型系统形式化 | 类型理论数学定义 | [../research_notes/type_theory/type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) |
-| 证明索引 | 形式化证明集合 | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) |
+| 类型系统形式化 | 类型理论数学定义 | [../research_notes/type_theory/10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) |
+| 证明索引 | 形式化证明集合 | [../research_notes/10_proof_index.md](../research_notes/10_proof_index.md) |
 
 ---
 
 ## 主索引
 
-[00_MASTER_INDEX.md](../00_master_index.md)
+[10_00_master_index.md](../00_master_index.md)
 
 ---
 

@@ -171,13 +171,13 @@ mindmap
 
 | 证明树 | 文件路径 | 完备度 |
 |--------|----------|--------|
-| 所有权证明树 | `docs/research_notes/formal_methods/ownership_model.md` | ✅ 100% |
-| 借用检查证明树 | `docs/research_notes/formal_methods/borrow_checker_proof.md` | ✅ 100% |
-| 生命周期形式化 | `docs/research_notes/formal_methods/lifetime_formalization.md` | ✅ 100% |
-| 异步状态机证明树 | `docs/research_notes/formal_methods/async_state_machine.md` | ✅ 100% |
-| Pin 证明树 | `docs/research_notes/formal_methods/pin_self_referential.md` | ✅ 100% |
-| Send/Sync 形式化 | `docs/research_notes/formal_methods/send_sync_formalization.md` | ✅ 100% |
-| 型变证明树 | `docs/research_notes/formal_methods/variance_theory.md` | ✅ 100% |
+| 所有权证明树 | `docs/research_notes/formal_methods/10_ownership_model.md` | ✅ 100% |
+| 借用检查证明树 | `docs/research_notes/formal_methods/10_borrow_checker_proof.md` | ✅ 100% |
+| 生命周期形式化 | `docs/research_notes/formal_methods/10_lifetime_formalization.md` | ✅ 100% |
+| 异步状态机证明树 | `docs/research_notes/formal_methods/10_async_state_machine.md` | ✅ 100% |
+| Pin 证明树 | `docs/research_notes/formal_methods/10_pin_self_referential.md` | ✅ 100% |
+| Send/Sync 形式化 | `docs/research_notes/formal_methods/10_send_sync_formalization.md` | ✅ 100% |
+| 型变证明树 | `docs/research_notes/formal_methods/10_variance_theory.md` | ✅ 100% |
 | 类型安全证明树 | `docs/research_notes/formal_methods/10_proof_tree_type_safety.md` | ✅ 100% |
 
 ---

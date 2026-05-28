@@ -146,11 +146,11 @@
 
 | 关键词     | 相关研究笔记                                               | 状态    |
 | :--- | :--- | :--- |
-| 所有权     | [所有权模型形式化](./formal_methods/ownership_model.md)    | ✅ 100% |
-| 借用       | [借用检查器证明](./formal_methods/borrow_checker_proof.md) | ✅ 100% |
-| 借用检查器 | [借用检查器证明](./formal_methods/borrow_checker_proof.md) | ✅ 100% |
-| 数据竞争   | [借用检查器证明](./formal_methods/borrow_checker_proof.md) | ✅ 100% |
-| 内存安全   | [所有权模型形式化](./formal_methods/ownership_model.md)    | ✅ 100% |
+| 所有权     | [所有权模型形式化](./formal_methods/10_ownership_model.md)    | ✅ 100% |
+| 借用       | [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
+| 借用检查器 | [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
+| 数据竞争   | [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) | ✅ 100% |
+| 内存安全   | [所有权模型形式化](./formal_methods/10_ownership_model.md)    | ✅ 100% |
 
 ### 类型系统
 
@@ -160,18 +160,18 @@
 
 | 关键词     | 相关研究笔记                                                    | 状态    |
 | :--- | :--- | :--- |
-| 类型系统   | [类型系统基础](./type_theory/type_system_foundations.md)        | ✅ 100% |
+| 类型系统   | [类型系统基础](./type_theory/10_type_system_foundations.md)        | ✅ 100% |
 | 类型构造能力 | [construction_capability](./type_theory/10_construction_capability.md) | ✅ Def TCON1、矩阵、决策树 |
 | 核心特性完整链 | [CORE_FEATURES_FULL_CHAIN](./10_core_features_full_chain.md) | ✅ 13 项 Def→示例→论证→证明 |
 | 类型理论缺口 | [完备性缺口](./type_theory/00_completeness_gaps.md)           | ✅ 阶段 1–7 Def 占位 |
 | 形式化方法缺口 | [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md) | ✅ Phase 1–6 100% |
-| Trait      | [Trait 系统形式化](./type_theory/trait_system_formalization.md) | ✅ 100% |
-| 泛型       | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
-| GATs       | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
-| const 泛型 | [高级类型特性](./type_theory/advanced_types.md)                 | ✅ 100% |
-| 型变       | [型变理论](./type_theory/variance_theory.md)                    | ✅ 100% |
-| 协变       | [型变理论](./type_theory/variance_theory.md)                    | ✅ 100% |
-| 逆变       | [型变理论](./type_theory/variance_theory.md)                    | ✅ 100% |
+| Trait      | [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) | ✅ 100% |
+| 泛型       | [高级类型特性](./type_theory/10_advanced_types.md)                 | ✅ 100% |
+| GATs       | [高级类型特性](./type_theory/10_advanced_types.md)                 | ✅ 100% |
+| const 泛型 | [高级类型特性](./type_theory/10_advanced_types.md)                 | ✅ 100% |
+| 型变       | [型变理论](./type_theory/10_variance_theory.md)                    | ✅ 100% |
+| 协变       | [型变理论](./type_theory/10_variance_theory.md)                    | ✅ 100% |
+| 逆变       | [型变理论](./type_theory/10_variance_theory.md)                    | ✅ 100% |
 
 ### 生命周期
 
@@ -181,10 +181,10 @@
 
 | 关键词       | 相关研究笔记                                                 | 状态    |
 | :--- | :--- | :--- |
-| 生命周期     | [生命周期形式化](./formal_methods/lifetime_formalization.md) | ✅ 100% |
-| 生命周期推断 | [生命周期形式化](./type_theory/lifetime_formalization.md)    | ✅ 100% |
-| 引用有效性   | [生命周期形式化](./formal_methods/lifetime_formalization.md) | ✅ 100% |
-| 区域类型     | [生命周期形式化](./type_theory/lifetime_formalization.md)    | ✅ 100% |
+| 生命周期     | [生命周期形式化](./formal_methods/10_lifetime_formalization.md) | ✅ 100% |
+| 生命周期推断 | [生命周期形式化](./type_theory/10_lifetime_formalization.md)    | ✅ 100% |
+| 引用有效性   | [生命周期形式化](./formal_methods/10_lifetime_formalization.md) | ✅ 100% |
+| 区域类型     | [生命周期形式化](./type_theory/10_lifetime_formalization.md)    | ✅ 100% |
 
 ### 异步和并发
 
@@ -194,14 +194,14 @@
 
 | 关键词      | 相关研究笔记                                                | 状态    |
 | :--- | :--- | :--- |
-| 异步        | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
-| Future      | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
-| async/await | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
+| 异步        | [异步状态机形式化](./formal_methods/10_async_state_machine.md) | ✅ 100% |
+| Future      | [异步状态机形式化](./formal_methods/10_async_state_machine.md) | ✅ 100% |
+| async/await | [异步状态机形式化](./formal_methods/10_async_state_machine.md) | ✅ 100% |
 | 并发        | [并发性能研究](./experiments/10_concurrency_performance.md)    | ✅ 100% |
 | 执行确定性 | [06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) | ✅ Def EB-DET1、确定性判定树 |
 | 组件成熟度 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | ✅ Def CE-MAT1、L1–L4 |
-| 并发安全    | [异步状态机形式化](./formal_methods/async_state_machine.md) | ✅ 100% |
-| Send/Sync   | [Send/Sync 形式化](./formal_methods/send_sync_formalization.md)、[异步状态机形式化](./formal_methods/async_state_machine.md)、[设计机制论证](./10_design_mechanism_rationale.md) §Send/Sync | ✅ Def SEND1/SYNC1、SEND-T1/SYNC-T1；六篇并表 |
+| 并发安全    | [异步状态机形式化](./formal_methods/10_async_state_machine.md) | ✅ 100% |
+| Send/Sync   | [Send/Sync 形式化](./formal_methods/10_send_sync_formalization.md)、[异步状态机形式化](./formal_methods/10_async_state_machine.md)、[设计机制论证](./10_design_mechanism_rationale.md) §Send/Sync | ✅ Def SEND1/SYNC1、SEND-T1/SYNC-T1；六篇并表 |
 | 安全可判定机制 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md)、[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./formal_methods/10_safe_decidable_mechanisms_and_formal_methods_plan.md) | ✅ 总览每机制一节；并发+Trait 族四维表；阶段 A–D 已完成 |
 | formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/10_formal_methods_completeness_checklist.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
 
@@ -247,11 +247,11 @@
 | 研究笔记                                                           | 研究目标                                    | 状态      | 完成度 |
 | :--- | :--- | :--- | :--- |
 | [形式语言与形式证明](./10_formal_language_and_proofs.md)             | 推理规则、操作语义、判定形式、形式证明推导树 | ✅ 已完成 | 100%   |
-| [所有权模型形式化](./formal_methods/ownership_model.md)            | 形式化定义所有权系统，证明内存安全          | ✅ 已完成 | 100%   |
-| [借用检查器证明](./formal_methods/borrow_checker_proof.md)         | 形式化定义借用检查器，证明数据竞争自由      | ✅ 已完成 | 100%   |
-| [异步状态机形式化](./formal_methods/async_state_machine.md)        | 形式化定义 Future/Poll 状态机，证明并发安全 | ✅ 已完成 | 100%   |
-| [生命周期形式化](./formal_methods/lifetime_formalization.md)       | 形式化定义生命周期系统，证明引用有效性      | ✅ 已完成 | 100%   |
-| [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md) | 形式化定义 Pin 类型和自引用类型，证明安全性 | ✅ 已完成 | 100%   |
+| [所有权模型形式化](./formal_methods/10_ownership_model.md)            | 形式化定义所有权系统，证明内存安全          | ✅ 已完成 | 100%   |
+| [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)         | 形式化定义借用检查器，证明数据竞争自由      | ✅ 已完成 | 100%   |
+| [异步状态机形式化](./formal_methods/10_async_state_machine.md)        | 形式化定义 Future/Poll 状态机，证明并发安全 | ✅ 已完成 | 100%   |
+| [生命周期形式化](./formal_methods/10_lifetime_formalization.md)       | 形式化定义生命周期系统，证明引用有效性      | ✅ 已完成 | 100%   |
+| [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md) | 形式化定义 Pin 类型和自引用类型，证明安全性 | ✅ 已完成 | 100%   |
 
 ### 类型理论
 
@@ -262,11 +262,11 @@
 | 研究笔记                                                        | 研究目标                                 | 状态      | 完成度 |
 | :--- | :--- | :--- | :--- |
 | [完备性缺口](./type_theory/00_completeness_gaps.md)             | 形式化论证不充分声明；LUB、Copy、RPITIT 等缺口 | ✅ 阶段 1–7 Def 占位 | 路线图 |
-| [类型系统基础](./type_theory/type_system_foundations.md)        | 形式化定义 Rust 类型系统基础             | ✅ 已完成 | 100%   |
-| [Trait 系统形式化](./type_theory/trait_system_formalization.md) | 形式化定义 Trait 系统，理解类型理论基础  | ✅ 已完成 | 100%   |
-| [生命周期形式化](./type_theory/lifetime_formalization.md)       | 形式化定义生命周期系统，理解类型理论解释 | ✅ 已完成 | 100%   |
-| [高级类型特性](./type_theory/advanced_types.md)                 | 深入分析 GATs、const 泛型和依赖类型      | ✅ 已完成 | 100%   |
-| [型变理论](./type_theory/variance_theory.md)                    | 深入理解型变理论，形式化定义型变规则     | ✅ 已完成 | 100%   |
+| [类型系统基础](./type_theory/10_type_system_foundations.md)        | 形式化定义 Rust 类型系统基础             | ✅ 已完成 | 100%   |
+| [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) | 形式化定义 Trait 系统，理解类型理论基础  | ✅ 已完成 | 100%   |
+| [生命周期形式化](./type_theory/10_lifetime_formalization.md)       | 形式化定义生命周期系统，理解类型理论解释 | ✅ 已完成 | 100%   |
+| [高级类型特性](./type_theory/10_advanced_types.md)                 | 深入分析 GATs、const 泛型和依赖类型      | ✅ 已完成 | 100%   |
+| [型变理论](./type_theory/10_variance_theory.md)                    | 深入理解型变理论，形式化定义型变规则     | ✅ 已完成 | 100%   |
 
 ### 软件设计理论
 
@@ -345,11 +345,11 @@
 
 **形式化方法研究**:
 
-- **内存安全** → [所有权模型形式化](./formal_methods/ownership_model.md)
-- **数据竞争自由** → [借用检查器证明](./formal_methods/borrow_checker_proof.md)
-- **并发安全** → [异步状态机形式化](./formal_methods/async_state_machine.md)
-- **引用有效性** → [生命周期形式化](./formal_methods/lifetime_formalization.md)
-- **内存位置稳定性** → [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md)
+- **内存安全** → [所有权模型形式化](./formal_methods/10_ownership_model.md)
+- **数据竞争自由** → [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
+- **并发安全** → [异步状态机形式化](./formal_methods/10_async_state_machine.md)
+- **引用有效性** → [生命周期形式化](./formal_methods/10_lifetime_formalization.md)
+- **内存位置稳定性** → [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md)
 - **形式化方法完备性** → [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
 
 ### 我想理解某个概念
@@ -358,13 +358,13 @@
 
 **类型理论研究**:
 
-- **类型系统基础** → [类型系统基础](./type_theory/type_system_foundations.md)
+- **类型系统基础** → [类型系统基础](./type_theory/10_type_system_foundations.md)
 - **类型理论缺口** → [完备性缺口](./type_theory/00_completeness_gaps.md)（LUB、Copy、RPITIT 等；阶段 1–7 Def 占位）
 - **形式化方法缺口** → [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md)（Phase 1–6 100%）
-- **Trait 系统** → [Trait 系统形式化](./type_theory/trait_system_formalization.md)
-- **生命周期** → [生命周期形式化](./type_theory/lifetime_formalization.md)
-- **高级类型特性** → [高级类型特性](./type_theory/advanced_types.md)
-- **型变规则** → [型变理论](./type_theory/variance_theory.md)
+- **Trait 系统** → [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
+- **生命周期** → [生命周期形式化](./type_theory/10_lifetime_formalization.md)
+- **高级类型特性** → [高级类型特性](./type_theory/10_advanced_types.md)
+- **型变规则** → [型变理论](./type_theory/10_variance_theory.md)
 
 **软件设计理论**:
 
@@ -410,10 +410,10 @@
 
 **预计完成时间**: 2-3 周
 
-1. [所有权模型形式化](./formal_methods/ownership_model.md) - 40% 完成度
-2. [借用检查器证明](./formal_methods/borrow_checker_proof.md) - 35% 完成度
-3. [生命周期形式化](./formal_methods/lifetime_formalization.md) - 35% 完成度
-4. [类型系统基础](./type_theory/type_system_foundations.md) - 40% 完成度
+1. [所有权模型形式化](./formal_methods/10_ownership_model.md) - 40% 完成度
+2. [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) - 35% 完成度
+3. [生命周期形式化](./formal_methods/10_lifetime_formalization.md) - 35% 完成度
+4. [类型系统基础](./type_theory/10_type_system_foundations.md) - 40% 完成度
 
 ### 中优先级研究
 >
@@ -421,16 +421,16 @@
 
 **预计完成时间**: 3-4 周
 
-1. [异步状态机形式化](./formal_methods/async_state_machine.md) - 35% 完成度
-2. [Trait 系统形式化](./type_theory/trait_system_formalization.md) - 35% 完成度
-3. [生命周期形式化](./type_theory/lifetime_formalization.md) - 35% 完成度
+1. [异步状态机形式化](./formal_methods/10_async_state_machine.md) - 35% 完成度
+2. [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) - 35% 完成度
+3. [生命周期形式化](./type_theory/10_lifetime_formalization.md) - 35% 完成度
 4. [性能基准测试](./experiments/10_performance_benchmarks.md) - 30% 完成度
 5. [内存分析](./experiments/10_memory_analysis.md) - 100% 完成度
 6. [编译器优化](./experiments/10_compiler_optimizations.md) - 30% 完成度
 7. [并发性能研究](./experiments/10_concurrency_performance.md) - 30% 完成度
 8. [实际应用案例研究](./10_practical_applications.md) - 25% 完成度
 9. [研究方法论](./10_research_methodology.md) - 35% 完成度
-10. [型变理论](./type_theory/variance_theory.md) - 30% 完成度
+10. [型变理论](./type_theory/10_variance_theory.md) - 30% 完成度
 
 ### 低优先级研究
 >
@@ -438,8 +438,8 @@
 
 **预计完成时间**: 4-6 周
 
-1. [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md) - 30% 完成度
-2. [高级类型特性](./type_theory/advanced_types.md) - 30% 完成度
+1. [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md) - 30% 完成度
+2. [高级类型特性](./type_theory/10_advanced_types.md) - 30% 完成度
 3. [宏展开性能分析](./experiments/10_macro_expansion_performance.md) - 30% 完成度
 
 ---
@@ -515,7 +515,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

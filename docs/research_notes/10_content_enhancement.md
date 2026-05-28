@@ -131,9 +131,9 @@
 | 代码 | 至少 1 段可运行 Rust 代码 | `fn main() { let s = String::from("x"); }` |
 | 场景 | 至少 1 个具体使用场景（非泛泛描述） | 「HTTP 请求解析→Builder 模式→axum」 |
 | 反例 | 至少 1 个反例或边界说明 | 双重可变借用、unwrap 空 Option |
-| 衔接 | 至少 1 处链接至 formal_methods/type_theory/PROOF_INDEX | `[ownership_model](formal_methods/ownership_model.md)` |
+| 衔接 | 至少 1 处链接至 formal_methods/type_theory/PROOF_INDEX | `[ownership_model](formal_methods/10_ownership_model.md)` |
 
-**薄弱文档优先修复**：索引/概览类可放宽「代码」项，但需保证「衔接」充分；研究笔记/设计模式/实验五项均需满足。修复指引见 [BEST_PRACTICES](BEST_PRACTICES.md#实质内容不足判断与修复) 四步修复法。
+**薄弱文档优先修复**：索引/概览类可放宽「代码」项，但需保证「衔接」充分；研究笔记/设计模式/实验五项均需满足。修复指引见 [BEST_PRACTICES](10_best_practices.md#实质内容不足判断与修复) 四步修复法。
 
 ---
 
@@ -214,9 +214,9 @@
 >
 > **[来源: Rust Official Docs]**
 
-**Def CE1（内容完备性）**：研究笔记 $N$ 满足**内容完备**，当且仅当 $N$ 对核心概念有 Def、对主要结论有定理及证明或证明思路、对边界有反例、与 [PROOF_INDEX](./PROOF_INDEX.md) 衔接。
+**Def CE1（内容完备性）**：研究笔记 $N$ 满足**内容完备**，当且仅当 $N$ 对核心概念有 Def、对主要结论有定理及证明或证明思路、对边界有反例、与 [PROOF_INDEX](./10_proof_index.md) 衔接。
 
-**Axiom CE1**：形式化完备（见 [BEST_PRACTICES](./BEST_PRACTICES.md) Def BP1）蕴含内容完备；Def CE1 为 Def BP1 的细化。**实质内容完备**见 [BEST_PRACTICES](./BEST_PRACTICES.md) Def BP2 与实践对照表。
+**Axiom CE1**：形式化完备（见 [BEST_PRACTICES](./10_best_practices.md) Def BP1）蕴含内容完备；Def CE1 为 Def BP1 的细化。**实质内容完备**见 [BEST_PRACTICES](./10_best_practices.md) Def BP2 与实践对照表。
 
 **定理 CE-T1**：若 $N$ 经本指南完善（理论基础 + 形式化定义 + 代码示例 + 参考文献），则 $N$ 满足 Def CE1 当且仅当形式化定义部分含 Def/Axiom/定理及证明思路。
 
@@ -563,7 +563,7 @@ error[E0382]: borrow of moved value: `s1`
   - 关键文件: `borrow_checker.rs` - 借用检查器实现
 
 - [所有权文档](../../crates/c01_ownership_borrow_scope/README.md)
-  - 文档: `ownership_model.md` - 所有权模型文档
+  - 文档: `10_ownership_model.md` - 所有权模型文档
 ```
 
 ---
@@ -638,15 +638,15 @@ error[E0382]: borrow of moved value: `s1`
 
 - [研究工具使用指南](./10_tools_guide.md)
 - [研究方法论](./10_research_methodology.md)
-- [最佳实践](./BEST_PRACTICES.md)
+- [最佳实践](./10_best_practices.md)
 
 ### 参考示例
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [研究笔记示例](./10_example.md)
-- [所有权模型形式化](./formal_methods/ownership_model.md)
-- [类型系统基础](./type_theory/type_system_foundations.md)
+- [所有权模型形式化](./formal_methods/10_ownership_model.md)
+- [类型系统基础](./type_theory/10_type_system_foundations.md)
 
 ---
 
@@ -690,7 +690,7 @@ error[E0382]: borrow of moved value: `s1`
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

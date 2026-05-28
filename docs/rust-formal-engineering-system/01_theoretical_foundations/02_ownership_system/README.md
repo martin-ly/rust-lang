@@ -6,7 +6,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [ownership_model.md](../../../research_notes/formal_methods/ownership_model.md)
+> 内容已整合至： [10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md)
 
 [返回理论基础](../README.md) | [返回主索引](../../00_master_index.md)
 
@@ -80,8 +80,8 @@ fn demo() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 所有权模型 | 所有权系统的完整形式化模型 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
-| 借用检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md) |
+| 所有权模型 | 所有权系统的完整形式化模型 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
+| 借用检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
 
 ## 更多代码示例
 
@@ -243,9 +243,9 @@ fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 所有权模型 | 所有权系统的完整形式化模型 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
-| 借用检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md) |
-| 证明索引 | 所有权相关证明 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
+| 所有权模型 | 所有权系统的完整形式化模型 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
+| 借用检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
+| 证明索引 | 所有权相关证明 | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) |
 | 工具指南 | 形式化验证工具 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
 
 ---

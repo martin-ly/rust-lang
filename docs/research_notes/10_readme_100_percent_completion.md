@@ -338,7 +338,7 @@ Week 21-24: 国际对标
 | [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./10_theoretical_and_argumentation_system_architecture.md) | 顶层框架 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 统一索引 |
 | [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 核心定理L2证明 |
-| [PROOF_INDEX](./PROOF_INDEX.md) | 证明索引 |
+| [PROOF_INDEX](./10_proof_index.md) | 证明索引 |
 
 ---
 
@@ -412,7 +412,7 @@ Week 21-24: 国际对标
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

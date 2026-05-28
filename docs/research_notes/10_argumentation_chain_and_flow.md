@@ -228,7 +228,7 @@ type T3 ────────────────────────
 | **生命周期→借用** | 引用有效性 ⇒ 借用规则 | lifetime LF-T2 | borrow T2 借用正确性 |
 | **型变→引用安全** | 协变/逆变/不变 ⇒ 无悬垂 | variance Def | variance T1–T4 |
 | **Pin→自引用** | 位置稳定 ⇒ 自引用安全 | Pin Def | pin T1–T3 |
-| **Send/Sync→跨线程安全** | 跨线程转移/共享 ⇒ 数据竞争自由 | [send_sync_formalization](formal_methods/send_sync_formalization.md) SEND1/SYNC1 | SEND-T1、SYNC-T1、SEND-SYNC-T1；与 borrow T1、SPAWN-T1 一致 |
+| **Send/Sync→跨线程安全** | 跨线程转移/共享 ⇒ 数据竞争自由 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) SEND1/SYNC1 | SEND-T1、SYNC-T1、SEND-SYNC-T1；与 borrow T1、SPAWN-T1 一致 |
 | **Future+Pin→并发** | 状态一致 + Send/Sync | async Def、Pin、send_sync | async T6.2 并发安全 |
 
 ---
@@ -420,7 +420,7 @@ software_design_theory
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

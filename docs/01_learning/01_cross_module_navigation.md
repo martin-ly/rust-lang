@@ -204,7 +204,7 @@ C01 → C04 → C11 → docs/research_notes/
 | 快速参考 | [02_reference/quick_reference/README.md](../02_reference/quick_reference/README.md) | 速查手册 |
 | 实践练习 | [03_practice/README.md](../03_practice/README.md) | 动手练习 |
 | 思维表示 | [04_thinking/README.md](../04_thinking/README.md) | 思维导图/矩阵 |
-| 实用指南 | [05_guides/BEST_PRACTICES.md](../05_guides/BEST_PRACTICES.md) | 最佳实践 |
+| 实用指南 | [05_guides/10_best_practices.md](../05_guides/10_best_practices.md) | 最佳实践 |
 | 前沿内容 | [../content/](../content/) | 生产实践/学术 |
 
 ---

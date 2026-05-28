@@ -214,14 +214,14 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [ownership_model.md](./formal_methods/ownership_model.md)
+**文档**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
 **已完成的证明**:
 
 1. **定理 2 (所有权唯一性)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §2
    - **形式化表示**: 对于任何值 $v$，在任意时刻，最多存在一个变量 $x$ 使得 $\Omega(x) = \text{Owned}$ 且 $\Gamma(x) = v$
    - **证明方法**: 结构归纳法
-   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md#定理-2-所有权唯一性)
+   - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md#定理-2-所有权唯一性)
    - **关键步骤**:
      - 基础情况：初始状态唯一性
      - 归纳步骤：移动操作、复制操作、作用域结束
@@ -232,7 +232,7 @@
      - 无双重释放: $\forall x, y: x \neq y \land \text{owner}(x) = \text{owner}(y) \rightarrow \text{false}$
      - 无内存泄漏: $\forall x: \text{scope\_end}(x) \land \Omega(x) = \text{Owned} \rightarrow \text{deallocated}(x)$
    - **证明方法**: 反证法 + 结构归纳法
-   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md#定理-3-内存安全框架)
+   - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md#定理-3-内存安全框架)
    - **关键步骤**:
      - 性质1（无悬垂指针）：由所有权唯一性和作用域规则保证
      - 性质2（无双重释放）：由所有权唯一性直接保证
@@ -240,35 +240,35 @@
 
 3. **Def RC1/ARC1/CELL1/REFCELL1/BOX1 / 定理 RC-T1/REFCELL-T1/BOX-T1（Rust 1.93 智能指针）** ✅ `L1`
    - **形式化表示**: Rc/Arc 引用计数、Cell/RefCell 内部可变、Box RAII
-   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+   - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
 4. **Def MAYBEUNINIT1 / 定理 MAYBEUNINIT-T1（MaybeUninit 1.93）** ✅
    - **形式化表示**: assume_init 合法仅当 initialized
-   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+   - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
 5. **Def ATOMIC1 / 定理 ATOMIC-T1（原子操作）** ✅
    - **形式化表示**: 原子操作与数据竞争自由相容
-   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+   - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
 6. **Def UNION1（union 非活动字段）** ✅
    - **形式化表示**: 读取非活动字段为 UB
-   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+   - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
 7. **Def TRANSMUTE1 / 定理 TRANSMUTE-T1（transmute）** ✅
    - **形式化表示**: size/align 约束；与所有权相容
-   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+   - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
 8. **Def DROP1/DEREF1 / 定理 DROP-T1/DEREF-T1（Drop/Deref trait）** ✅
    - **形式化表示**: Drop 与 RAII 一致；Deref 与借用规则相容
-   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+   - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
 9. **Def REPR1 / 定理 REPR-T1（内存布局 repr）** ✅
    - **形式化表示**: repr(C) 与 FFI 衔接
-   - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+   - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
 10. **Def CONST_MUT_STATIC1 / 定理 CONST_MUT_STATIC-T1（const &mut static 1.93）** ✅
     - **形式化表示**: const 含 &mut static 需显式 unsafe
-    - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
+    - **证明位置**: [10_ownership_model.md](./formal_methods/10_ownership_model.md)
 
 #### 借用检查器证明
 
@@ -276,14 +276,14 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+**文档**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 **已完成的证明**:
 
 1. **定理 1 (数据竞争自由)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §3
    - **形式化表示**: 在借用检查器下，程序执行过程中不会出现数据竞争
    - **证明方法**: 结构归纳法
-   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由)
+   - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md#定理-1-数据竞争自由)
    - **关键步骤**:
      - 基础情况：单线程执行
      - 归纳步骤：借用规则保证互斥访问
@@ -291,43 +291,43 @@
 2. **定理 2 (借用规则正确性)** ✅ `L1`
    - **形式化表示**: 借用检查器正确执行借用规则
    - **证明方法**: 规则归纳法
-   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-2-借用规则正确性)
+   - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md#定理-2-借用规则正确性)
 
 3. **Def CHAN1 / 定理 CHAN-T1（通道消息传递）** ✅
    - **形式化表示**: 消息传递无共享可变，满足数据竞争自由
-   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+   - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 4. **Def MUTEX1 / 定理 MUTEX-T1（Mutex 锁语义）** ✅
    - **形式化表示**: 任一时刻至多一个 MutexGuard 持有 &mut T
-   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+   - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 5. **Def RAW1 / 定理 RAW-T1（裸指针与 deref_nullptr）** ✅
    - **形式化表示**: deref 合法仅当 nonnull；deref_nullptr lint 减少 UB
-   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+   - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 6. **Def UNSAFE1 / 定理 UNSAFE-T1/T2（unsafe 契约与 borrow/ownership 衔接）** ✅
    - **形式化表示**: pre(C) → safe(C)；unsafe 与借用/所有权相容
-   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+   - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 7. **Def MATCH1 / 定理 MATCH-T1（match 穷尽性）** ✅
    - **形式化表示**: 穷尽 match 保证所有值被处理；各分支借用作用域独立
-   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+   - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 8. **Def FOR1 / 定理 FOR-T1（for 迭代与借用）** ✅
    - **形式化表示**: 迭代中修改集合违反借用规则 1
-   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+   - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 9. **Def EXTERN1 / 定理 EXTERN-T1（extern ABI 边界）** ✅
    - **形式化表示**: extern 与借用检查器边界相容
-   - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+   - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 10. **Def CVARIADIC1（C variadic 1.93）** ✅
     - **形式化表示**: extern "system" fn(..., ...) FFI 约定
-    - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+    - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 11. **Def QUERY1 / 定理 QUERY-T1（? 操作符）** ✅
     - **形式化表示**: 错误传播与借用相容
-    - **证明位置**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
+    - **证明位置**: [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)
 
 ---
 
@@ -343,19 +343,19 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)（形式化方法视角，含 Axiom LF1–LF2、引理 LF-L1、推论 LF-C1）；[type_theory/lifetime_formalization.md](./type_theory/lifetime_formalization.md)（类型论视角，含 Axiom LT1–LT2、定理 LT-T1/T2、引理 LT-L1、推论 LT-C1/C2）
+**文档**: [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md)（形式化方法视角，含 Axiom LF1–LF2、引理 LF-L1、推论 LF-C1）；[type_theory/10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md)（类型论视角，含 Axiom LT1–LT2、定理 LT-T1/T2、引理 LT-L1、推论 LT-C1/C2）
 
 **已完成的证明**:
 
 1. **定理 LF-T1（推断正确性）** ✅
    - **形式化表示**: 生命周期推断算法正确推断生命周期参数，保证引用有效性
    - **证明方法**: 由 Def 3.1、Axiom LF2、Def 1.4
-   - **证明位置**: [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)
+   - **证明位置**: [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md)
 
 2. **定理 LF-T2（引用有效性）** ✅
    - **形式化表示**: $\forall r: \text{ref}(r) \land \text{lifetime}(r) = \ell \rightarrow \forall t \in \ell: \text{valid}(r, t)$
    - **证明方法**: 三步骤证明（约束保证、推断正确性、借用检查器验证）
-   - **证明位置**: [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)
+   - **证明位置**: [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md)
    - **关键步骤**:
      - 步骤1：生命周期约束保证
      - 步骤2：生命周期推断正确性（LF-T3）
@@ -364,7 +364,7 @@
 3. **定理 LF-T3（推断算法正确性）** ✅
    - **形式化表示**: 生命周期推断算法生成的约束系统一致 ⟺ 程序良型
    - **证明方法**: 双向证明（⇒ 由 Axiom LF2；⇐ 由约束反映语义）
-   - **证明位置**: [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)
+   - **证明位置**: [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md)
 
 ---
 
@@ -378,14 +378,14 @@
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-**文档**: [type_system_foundations.md](./type_theory/type_system_foundations.md)
+**文档**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md)
 
 **已完成的证明**:
 
 1. **定理 1 (进展性)** ✅
    - **形式化表示**: $\Gamma \vdash e : \tau \rightarrow e \text{ is value} \lor \exists e': e \to e'$
    - **证明方法**: 结构归纳法
-   - **证明位置**: [type_system_foundations.md](./type_theory/type_system_foundations.md#定理-1-进展性)
+   - **证明位置**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md#定理-1-进展性)
    - **关键步骤**:
      - 基础情况：值、变量
      - 归纳步骤：函数应用、函数抽象
@@ -393,7 +393,7 @@
 2. **定理 2 (保持性)** ✅
    - **形式化表示**: $\Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau$
    - **证明方法**: 结构归纳法
-   - **证明位置**: [type_system_foundations.md](./type_theory/type_system_foundations.md#定理-2-保持性)
+   - **证明位置**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md#定理-2-保持性)
    - **关键步骤**:
      - 基础情况：$\beta$ 归约
      - 归纳步骤：函数应用求值
@@ -401,7 +401,7 @@
 3. **定理 3 (类型安全)** ✅ `L2` — 完整证明见 [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §4
    - **形式化表示**: $\Gamma \vdash e : \tau \rightarrow \neg \exists e': e \to^* e' \land \text{type\_error}(e')$
    - **证明方法**: 由进展性和保持性直接得出
-   - **证明位置**: [type_system_foundations.md](./type_theory/type_system_foundations.md#定理-3-类型安全)
+   - **证明位置**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md#定理-3-类型安全)
    - **关键步骤**:
      - 进展性保证：程序可以继续执行
      - 保持性保证：类型在执行过程中保持不变
@@ -410,7 +410,7 @@
 4. **定理 4 (类型推导正确性)** ✅
    - **形式化表示**: $\text{infer}(\Gamma, e) = \tau \rightarrow \Gamma \vdash e : \tau$
    - **证明方法**: 基于类型规则的正确性
-   - **证明位置**: [type_system_foundations.md](./type_theory/type_system_foundations.md#定理-4-类型推导正确性)
+   - **证明位置**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md#定理-4-类型推导正确性)
    - **关键步骤**:
      - 约束生成正确性
      - 约束求解正确性
@@ -419,18 +419,18 @@
 5. **定理 5 (类型推导算法正确性)** ✅
    - **形式化表示**: $\text{infer}(\Gamma, e) = \tau \leftrightarrow \Gamma \vdash e : \tau$
    - **证明方法**: 充分性和必要性双向证明
-   - **证明位置**: [type_system_foundations.md](./type_theory/type_system_foundations.md#定理-5-类型推导算法正确性)
+   - **证明位置**: [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md#定理-5-类型推导算法正确性)
    - **关键步骤**:
      - 充分性：由定理4得出
      - 必要性：结构归纳法
 
-6. **Def LUB1 / 定理 LUB-T1（LUB coercion）** ✅ — Def LUB1：`if c { e1 } else { e2 }` 类型为 LUB(τ₁, τ₂)； theorem LUB-T1：1.93 修正后推断更严格；[证明位置](./type_theory/type_system_foundations.md)
-7. **Def COP1 / 定理 COP-T1（Copy 与 specialization）** ✅ — Def COP1：1.93 移除 Copy 内部 specialization； theorem COP-T1：impl 解析不再依赖生命周期 specialization；[证明位置](./type_theory/type_system_foundations.md)
-8. **Def OFFSET1、定理 OFFSET-T1（offset_of!）** ✅ — well-formed 检查、字节偏移；[证明位置](./type_theory/type_system_foundations.md)
-9. **Def ASC1、定理 ASC-T1（类型 ascription）** ✅ — `e: T` 语义与推断约束；[证明位置](./type_theory/type_system_foundations.md)
-10. **Def BOT1、定理 BOT-T1（never type !）** ✅ — $\bot$ 类型、无 inhabitant、可 coerce 到任意类型；[证明位置](./type_theory/type_system_foundations.md)
-11. **Def NEWTYPE1、定理 NEWTYPE-T1（repr(transparent)）** ✅ — 零成本包装；[证明位置](./type_theory/type_system_foundations.md)
-12. **Def DEREF-NULL1（deref_nullptr deny）** ✅ — 1.93 裸指针解引用 lint；[证明位置](./type_theory/type_system_foundations.md)
+6. **Def LUB1 / 定理 LUB-T1（LUB coercion）** ✅ — Def LUB1：`if c { e1 } else { e2 }` 类型为 LUB(τ₁, τ₂)； theorem LUB-T1：1.93 修正后推断更严格；[证明位置](./type_theory/10_type_system_foundations.md)
+7. **Def COP1 / 定理 COP-T1（Copy 与 specialization）** ✅ — Def COP1：1.93 移除 Copy 内部 specialization； theorem COP-T1：impl 解析不再依赖生命周期 specialization；[证明位置](./type_theory/10_type_system_foundations.md)
+8. **Def OFFSET1、定理 OFFSET-T1（offset_of!）** ✅ — well-formed 检查、字节偏移；[证明位置](./type_theory/10_type_system_foundations.md)
+9. **Def ASC1、定理 ASC-T1（类型 ascription）** ✅ — `e: T` 语义与推断约束；[证明位置](./type_theory/10_type_system_foundations.md)
+10. **Def BOT1、定理 BOT-T1（never type !）** ✅ — $\bot$ 类型、无 inhabitant、可 coerce 到任意类型；[证明位置](./type_theory/10_type_system_foundations.md)
+11. **Def NEWTYPE1、定理 NEWTYPE-T1（repr(transparent)）** ✅ — 零成本包装；[证明位置](./type_theory/10_type_system_foundations.md)
+12. **Def DEREF-NULL1（deref_nullptr deny）** ✅ — 1.93 裸指针解引用 lint；[证明位置](./type_theory/10_type_system_foundations.md)
 
 ### 异步状态机与 Pin
 
@@ -440,51 +440,51 @@
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-**文档**: [async_state_machine.md](./formal_methods/async_state_machine.md)
+**文档**: [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)
 
 **已完成的证明**:
 
 1. **定理 6.1 (状态一致性)** ✅
    - **形式化表示**: $\forall F, s, s': \text{State}(F)=s \land \text{Transition}(F)=s' \rightarrow \text{ValidTransition}(s, s')$
    - **证明方法**: 归纳法 + 案例分析 + 不变式验证
-   - **证明位置**: [async_state_machine.md#定理-61-状态一致性](./formal_methods/async_state_machine.md#定理-61-状态一致性)
+   - **证明位置**: [10_async_state_machine.md#定理-61-状态一致性](./formal_methods/10_async_state_machine.md#定理-61-状态一致性)
 
 2. **定理 6.2 (并发安全)** ✅
    - **形式化表示**: $\forall \{F_1,\ldots,F_n\}: (\forall i: \text{Send}(F_i)\land\text{Sync}(F_i)) \rightarrow \text{DataRaceFree}(\text{ConcurrentExec}[\{F_1,\ldots,F_n\}])$
    - **证明方法**: 类型系统保证 + 运行时保证 + 组合性
-   - **证明位置**: [async_state_machine.md#定理-62-并发安全](./formal_methods/async_state_machine.md#定理-62-并发安全)
+   - **证明位置**: [10_async_state_machine.md#定理-62-并发安全](./formal_methods/10_async_state_machine.md#定理-62-并发安全)
 
 3. **定理 6.3 (进度保证)** ✅
    - **形式化表示**: $\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F,n) \land \text{State}(F)=\text{Ready}(v)$
    - **证明方法**: 有限性假设 + 进度性 + 终止性
-   - **证明位置**: [async_state_machine.md#定理-63-进度保证](./formal_methods/async_state_machine.md#定理-63-进度保证)
+   - **证明位置**: [10_async_state_machine.md#定理-63-进度保证](./formal_methods/10_async_state_machine.md#定理-63-进度保证)
 
 4. **Def SPAWN1 / 定理 SPAWN-T1（thread::spawn 与 JoinHandle）** ✅
    - **形式化表示**: Send 约束保证 spawn 数据竞争自由
-   - **证明位置**: [async_state_machine.md](./formal_methods/async_state_machine.md)
+   - **证明位置**: [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)
 
 #### Pin 和自引用类型形式化
 
 > **[来源: ACM - Systems Programming Languages]**
 
-**文档**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
+**文档**: [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)
 
 **已完成的证明**:
 
 1. **定理 1 (Pin 保证)** ✅
    - **形式化表示**: 对于非 `Unpin` 类型 $T$ 和 $\text{Pin}[\Box[T]]$，被 Pin 的值在内存中的位置不会改变
    - **证明方法**: 类型系统 + 编译器保证
-   - **证明位置**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
+   - **证明位置**: [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)
 
 2. **定理 2 (自引用类型安全)** ✅
    - **形式化表示**: 若自引用类型 $T$ 被 Pin，则其自引用字段安全，无悬垂指针
    - **证明方法**: Pin 保证 + 位置稳定
-   - **证明位置**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
+   - **证明位置**: [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)
 
 3. **定理 3 (Pin 投影安全)** ✅
    - **形式化表示**: 从被 Pin 的结构体中按安全条件投影出的被 Pin 字段仍满足 Pin 保证
    - **证明方法**: 安全条件 + Pin 保证
-   - **证明位置**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
+   - **证明位置**: [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)
 
 ### 类型理论扩展
 
@@ -494,35 +494,35 @@
 
 > **[来源: IEEE - Programming Language Standards]**
 
-**文档**: [trait_system_formalization.md](./type_theory/trait_system_formalization.md)
+**文档**: [10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md)
 
 **已完成的证明**:
 
-1. **定理 1 (Trait 对象类型安全)** ✅ — 方法：类型系统；[证明位置](./type_theory/trait_system_formalization.md#定理-1-trait-对象类型安全-)
-2. **定理 2 (Trait 实现一致性)** ✅ — 方法：规则归纳；[证明位置](./type_theory/trait_system_formalization.md#定理-2-trait-实现一致性-)
-3. **定理 3 (Trait 解析正确性)** ✅ — 方法：算法正确性；[证明位置](./type_theory/trait_system_formalization.md#定理-3-trait-解析正确性-)
-4. **定理 COH-T1 (Trait coherence)** ✅ — 至多一个 impl；[证明位置](./type_theory/trait_system_formalization.md)；Axiom COH1/COH2、推论 COH-C1
-5. **Def RPIT1 / 定理 RPIT-T1（RPITIT）** ✅ — Trait 方法返回 impl Trait 语义；impl 解析唯一性；[证明位置](./type_theory/trait_system_formalization.md)
-6. **Def ASYNC1 / 定理 ASYNC-T1（async fn in trait）** ✅ — Future 类型、Send 边界；[证明位置](./type_theory/trait_system_formalization.md)
-7. **推论 RPIT-C1** ✅ — RPITIT 与 dyn Trait 对象安全交互；[证明位置](./type_theory/trait_system_formalization.md)
-8. **Def ORPH1/NEG1、定理 NEG-T1（孤儿规则、negative impls）** ✅ — 孤儿形式化、negative impl 与 coherence 交互；[证明位置](./type_theory/trait_system_formalization.md)
-9. **Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1（impl/dyn 可替换边界）** ✅ — 对象安全条件下 impl T 与 dyn T 可替换条件；[证明位置](./type_theory/trait_system_formalization.md)
-10. **Def TRAIT-GAT1、Def SPEC1、定理 SPEC-T1（Trait+GAT、specialization）** ✅ — 泛型+GAT 解析优先级、specialization 与 coherence；[证明位置](./type_theory/trait_system_formalization.md)
+1. **定理 1 (Trait 对象类型安全)** ✅ — 方法：类型系统；[证明位置](./type_theory/10_trait_system_formalization.md#定理-1-trait-对象类型安全-)
+2. **定理 2 (Trait 实现一致性)** ✅ — 方法：规则归纳；[证明位置](./type_theory/10_trait_system_formalization.md#定理-2-trait-实现一致性-)
+3. **定理 3 (Trait 解析正确性)** ✅ — 方法：算法正确性；[证明位置](./type_theory/10_trait_system_formalization.md#定理-3-trait-解析正确性-)
+4. **定理 COH-T1 (Trait coherence)** ✅ — 至多一个 impl；[证明位置](./type_theory/10_trait_system_formalization.md)；Axiom COH1/COH2、推论 COH-C1
+5. **Def RPIT1 / 定理 RPIT-T1（RPITIT）** ✅ — Trait 方法返回 impl Trait 语义；impl 解析唯一性；[证明位置](./type_theory/10_trait_system_formalization.md)
+6. **Def ASYNC1 / 定理 ASYNC-T1（async fn in trait）** ✅ — Future 类型、Send 边界；[证明位置](./type_theory/10_trait_system_formalization.md)
+7. **推论 RPIT-C1** ✅ — RPITIT 与 dyn Trait 对象安全交互；[证明位置](./type_theory/10_trait_system_formalization.md)
+8. **Def ORPH1/NEG1、定理 NEG-T1（孤儿规则、negative impls）** ✅ — 孤儿形式化、negative impl 与 coherence 交互；[证明位置](./type_theory/10_trait_system_formalization.md)
+9. **Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1（impl/dyn 可替换边界）** ✅ — 对象安全条件下 impl T 与 dyn T 可替换条件；[证明位置](./type_theory/10_trait_system_formalization.md)
+10. **Def TRAIT-GAT1、Def SPEC1、定理 SPEC-T1（Trait+GAT、specialization）** ✅ — 泛型+GAT 解析优先级、specialization 与 coherence；[证明位置](./type_theory/10_trait_system_formalization.md)
 
 #### 型变理论
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-**文档**: [variance_theory.md](./type_theory/variance_theory.md)
+**文档**: [10_variance_theory.md](./type_theory/10_variance_theory.md)
 
 **已完成的证明**:
 
-1. **定理 1 (协变安全性)** ✅ — 方法：直接推导；完整证明+反例+证明树；[证明位置](./type_theory/variance_theory.md#1-协变-covariance)
-2. **定理 2 (逆变安全性)** ✅ — 方法：直接推导；完整证明；[证明位置](./type_theory/variance_theory.md#2-逆变-contravariance)
-3. **定理 3 (不变安全性)** ✅ — 方法：直接推导；完整证明；[证明位置](./type_theory/variance_theory.md#3-不变-invariance)
-4. **定理 4 (函数类型型变)** ✅ — 方法：案例分析；完整证明（参数逆变、返回值协变）；[证明位置](./type_theory/variance_theory.md#4-型变规则)
-5. **定理 VAR-COM-T1（三元组合传递）** ✅ — 类型+生命周期+型变组合；$F[\tau_1] <: F[\tau_2]$ 由型变构造子决定；[证明位置](./type_theory/variance_theory.md)
-6. **推论 VAR-COM-C1** ✅ — 多参数型变取乘积；[证明位置](./type_theory/variance_theory.md)
+1. **定理 1 (协变安全性)** ✅ — 方法：直接推导；完整证明+反例+证明树；[证明位置](./type_theory/10_variance_theory.md#1-协变-covariance)
+2. **定理 2 (逆变安全性)** ✅ — 方法：直接推导；完整证明；[证明位置](./type_theory/10_variance_theory.md#2-逆变-contravariance)
+3. **定理 3 (不变安全性)** ✅ — 方法：直接推导；完整证明；[证明位置](./type_theory/10_variance_theory.md#3-不变-invariance)
+4. **定理 4 (函数类型型变)** ✅ — 方法：案例分析；完整证明（参数逆变、返回值协变）；[证明位置](./type_theory/10_variance_theory.md#4-型变规则)
+5. **定理 VAR-COM-T1（三元组合传递）** ✅ — 类型+生命周期+型变组合；$F[\tau_1] <: F[\tau_2]$ 由型变构造子决定；[证明位置](./type_theory/10_variance_theory.md)
+6. **推论 VAR-COM-C1** ✅ — 多参数型变取乘积；[证明位置](./type_theory/10_variance_theory.md)
 
 #### 类型理论完备性缺口
 
@@ -555,19 +555,19 @@
 
 > **[来源: PLDI - Programming Language Design]**
 
-**文档**: [advanced_types.md](./type_theory/advanced_types.md)
+**文档**: [10_advanced_types.md](./type_theory/10_advanced_types.md)
 
 **已完成的证明**:
 
 1. **Axiom AT1** ✅ — GAT 类型推导与 type_system 定理 4、5 一致
 2. **Axiom AT2** ✅ — const 泛型参数必须为编译时常量
-3. **定理 AT-T1 (GAT 类型安全)** ✅ — 方法：Def 1.1–1.3 + 类型推导；[证明位置](./type_theory/advanced_types.md)
-4. **定理 AT-T2 (const 泛型类型安全)** ✅ — 方法：Def 2.1–2.3 + 编译时常量检查；[证明位置](./type_theory/advanced_types.md)
-5. **定理 AT-T3 (受限依赖类型安全)** ✅ — 方法：Def 3.1–3.2 + AT-T1、AT-T2；[证明位置](./type_theory/advanced_types.md)
-6. **引理 AT-L1 (GAT 与 trait 衔接)** ✅ — 方法：impl 解析时检查；[证明位置](./type_theory/advanced_types.md)
+3. **定理 AT-T1 (GAT 类型安全)** ✅ — 方法：Def 1.1–1.3 + 类型推导；[证明位置](./type_theory/10_advanced_types.md)
+4. **定理 AT-T2 (const 泛型类型安全)** ✅ — 方法：Def 2.1–2.3 + 编译时常量检查；[证明位置](./type_theory/10_advanced_types.md)
+5. **定理 AT-T3 (受限依赖类型安全)** ✅ — 方法：Def 3.1–3.2 + AT-T1、AT-T2；[证明位置](./type_theory/10_advanced_types.md)
+6. **引理 AT-L1 (GAT 与 trait 衔接)** ✅ — 方法：impl 解析时检查；[证明位置](./type_theory/10_advanced_types.md)
 7. **推论 AT-C1** ✅ — 违反则编译错误；反例见文档
-8. **Def CONST-EVAL1、定理 CONST-EVAL-T1（const 求值失败）** ✅ — const 表达式求值失败即类型错误；[证明位置](./type_theory/advanced_types.md)
-9. **Def CONST-MUT1、Def EXIST1（const &mut static、existential type）** ✅ — 1.93 const、存在类型；[证明位置](./type_theory/advanced_types.md)
+8. **Def CONST-EVAL1、定理 CONST-EVAL-T1（const 求值失败）** ✅ — const 表达式求值失败即类型错误；[证明位置](./type_theory/10_advanced_types.md)
+9. **Def CONST-MUT1、Def EXIST1（const &mut static、existential type）** ✅ — 1.93 const、存在类型；[证明位置](./type_theory/10_advanced_types.md)
 
 #### 软件设计理论
 
@@ -767,41 +767,41 @@
 
 > **[来源: IEEE - Programming Language Standards]**
 
-- ✅ **所有权唯一性** `L2` ([ownership_model.md](./formal_methods/ownership_model.md#定理-2-所有权唯一性)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §2)
+- ✅ **所有权唯一性** `L2` ([10_ownership_model.md](./formal_methods/10_ownership_model.md#定理-2-所有权唯一性)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §2)
   - 方法：结构归纳法
   - 结果：每个值最多有一个所有者
 
 ### 安全性证明
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- ✅ **内存安全框架** ([ownership_model.md](./formal_methods/ownership_model.md#定理-3-内存安全框架))
+- ✅ **内存安全框架** ([10_ownership_model.md](./formal_methods/10_ownership_model.md#定理-3-内存安全框架))
   - 方法：反证法 + 结构归纳法
   - 结果：无悬垂指针、无双重释放、无内存泄漏
 
-- ✅ **数据竞争自由** `L2` ([borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §3)
+- ✅ **数据竞争自由** `L2` ([10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md#定理-1-数据竞争自由)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §3)
   - 方法：结构归纳法
   - 结果：程序执行过程中不会出现数据竞争
 
-- ✅ **类型安全** `L2` ([type_system_foundations.md](./type_theory/type_system_foundations.md#定理-3-类型安全)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §4)
+- ✅ **类型安全** `L2` ([10_type_system_foundations.md](./type_theory/10_type_system_foundations.md#定理-3-类型安全)、[CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) §4)
   - 方法：由进展性和保持性得出
   - 结果：良型程序不会出现类型错误
 
-- ✅ **并发安全** ([async_state_machine.md](./formal_methods/async_state_machine.md#定理-62-并发安全))
-- ✅ **Pin 保证、自引用类型安全、Pin 投影安全** ([pin_self_referential.md](./formal_methods/pin_self_referential.md))
-- ✅ **协变、逆变、不变、函数类型型变** ([variance_theory.md](./type_theory/variance_theory.md))
-- ✅ **GAT、const 泛型、受限依赖类型安全** ([advanced_types.md](./type_theory/advanced_types.md))
+- ✅ **并发安全** ([10_async_state_machine.md](./formal_methods/10_async_state_machine.md#定理-62-并发安全))
+- ✅ **Pin 保证、自引用类型安全、Pin 投影安全** ([10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md))
+- ✅ **协变、逆变、不变、函数类型型变** ([10_variance_theory.md](./type_theory/10_variance_theory.md))
+- ✅ **GAT、const 泛型、受限依赖类型安全** ([10_advanced_types.md](./type_theory/10_advanced_types.md))
 
 ### 正确性证明
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-- ✅ **借用规则正确性** ([borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md#定理-2-借用规则正确性))
-- ✅ **引用有效性** ([lifetime_formalization.md](./formal_methods/lifetime_formalization.md) 定理 LF-T2)
-- ✅ **生命周期推断算法正确性** ([lifetime_formalization.md](./formal_methods/lifetime_formalization.md) 定理 LF-T3)
-- ✅ **类型推导正确性** ([type_system_foundations.md](./type_theory/type_system_foundations.md#定理-4-类型推导正确性))
-- ✅ **类型推导算法正确性** ([type_system_foundations.md](./type_theory/type_system_foundations.md#定理-5-类型推导算法正确性))
-- ✅ **状态一致性** ([async_state_machine.md](./formal_methods/async_state_machine.md#定理-61-状态一致性))
-- ✅ **进度保证** ([async_state_machine.md](./formal_methods/async_state_machine.md#定理-63-进度保证))
-- ✅ **Trait 对象类型安全、实现一致性、解析正确性** ([trait_system_formalization.md](./type_theory/trait_system_formalization.md))
+- ✅ **借用规则正确性** ([10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md#定理-2-借用规则正确性))
+- ✅ **引用有效性** ([10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md) 定理 LF-T2)
+- ✅ **生命周期推断算法正确性** ([10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md) 定理 LF-T3)
+- ✅ **类型推导正确性** ([10_type_system_foundations.md](./type_theory/10_type_system_foundations.md#定理-4-类型推导正确性))
+- ✅ **类型推导算法正确性** ([10_type_system_foundations.md](./type_theory/10_type_system_foundations.md#定理-5-类型推导算法正确性))
+- ✅ **状态一致性** ([10_async_state_machine.md](./formal_methods/10_async_state_machine.md#定理-61-状态一致性))
+- ✅ **进度保证** ([10_async_state_machine.md](./formal_methods/10_async_state_machine.md#定理-63-进度保证))
+- ✅ **Trait 对象类型安全、实现一致性、解析正确性** ([10_trait_system_formalization.md](./type_theory/10_trait_system_formalization.md))
 - ✅ **组合保持内存安全、数据竞争自由、类型安全** ([02_effectiveness_proofs.md](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) CE-T1–T3)
 
 ---
@@ -892,21 +892,21 @@
 
 - [形式化方法完备性缺口](./formal_methods/00_completeness_gaps.md) — ✅ 100% 完成；Phase 1–6 全部补全
 - [形式化方法研究索引](./formal_methods/README.md)
-- [所有权模型形式化](./formal_methods/ownership_model.md)
-- [借用检查器证明](./formal_methods/borrow_checker_proof.md)
-- [生命周期形式化](./formal_methods/lifetime_formalization.md)
-- [异步状态机形式化](./formal_methods/async_state_machine.md)
-- [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md)
+- [所有权模型形式化](./formal_methods/10_ownership_model.md)
+- [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
+- [生命周期形式化](./formal_methods/10_lifetime_formalization.md)
+- [异步状态机形式化](./formal_methods/10_async_state_machine.md)
+- [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md)
 
 ### 类型理论研究
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [类型理论研究索引](./type_theory/README.md)
-- [类型系统基础](./type_theory/type_system_foundations.md)
-- [生命周期形式化](./type_theory/lifetime_formalization.md)（类型论视角：Axiom LT1–LT2、定理 LT-T1/T2、引理 LT-L1、推论 LT-C1/C2）
-- [Trait 系统形式化](./type_theory/trait_system_formalization.md)
-- [型变理论](./type_theory/variance_theory.md)
-- [高级类型特性](./type_theory/advanced_types.md)
+- [类型系统基础](./type_theory/10_type_system_foundations.md)
+- [生命周期形式化](./type_theory/10_lifetime_formalization.md)（类型论视角：Axiom LT1–LT2、定理 LT-T1/T2、引理 LT-L1、推论 LT-C1/C2）
+- [Trait 系统形式化](./type_theory/10_trait_system_formalization.md)
+- [型变理论](./type_theory/10_variance_theory.md)
+- [高级类型特性](./type_theory/10_advanced_types.md)
 - [类型理论完备性缺口](./type_theory/00_completeness_gaps.md) — 形式化论证不充分声明
 
 ### 软件设计理论 {#软件设计理论-1}
@@ -933,9 +933,9 @@
 | MaybeUninit 安全性证明树 | 本文档（Rust 1.93 API） |
 | Never 类型 Lint 严格化证明树              | 类型系统、借检相关      |
 | 联合体原始引用安全性证明树                | 类型系统                |
-| 借用检查器安全性证明树                    | [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) |
-| 生命周期安全性证明树                      | [lifetime_formalization.md](./formal_methods/lifetime_formalization.md) |
-| Send/Sync 安全性证明树                    | [send_sync_formalization.md](./formal_methods/send_sync_formalization.md)（Def SEND1/SYNC1、SEND-T1/SYNC-T1）；[async_state_machine.md](./formal_methods/async_state_machine.md) 定理 6.2 |
+| 借用检查器安全性证明树                    | [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) |
+| 生命周期安全性证明树                      | [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md) |
+| Send/Sync 安全性证明树                    | [10_send_sync_formalization.md](./formal_methods/10_send_sync_formalization.md)（Def SEND1/SYNC1、SEND-T1/SYNC-T1）；[10_async_state_machine.md](./formal_methods/10_async_state_machine.md) 定理 6.2 |
 
 **相关文档**: [THINKING_REPRESENTATION_METHODS](../04_thinking/04_thinking_representation_methods.md) - 思维导图、决策树、转换树、证明树
 
@@ -994,7 +994,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

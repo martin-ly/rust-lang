@@ -67,6 +67,7 @@
   - [**总内容**: ~570,000+ 行](#总内容-570000-行)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📖 如何使用本指南
 >
@@ -404,7 +405,7 @@
 形式化:
 ├── coq-formalization/theories/Semantics/OwnershipSafety.v
 ├── coq-formalization/theories/Metatheory/Preservation.v
-└── formal-foundations/proofs/borrow_checker_proof.md
+└── formal-foundations/proofs/10_borrow_checker_proof.md
 
 桥梁:
 ├── FOUNDATIONS_TO_PRACTICE_BRIDGE.md (仿射类型→借用)

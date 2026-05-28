@@ -221,7 +221,7 @@
 | :--- | :--- |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) | 92 项特性完整分析 |
 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./10_unified_systematic_framework.md) | 全局统一框架、五维矩阵总览 |
-| [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引 |
+| [PROOF_INDEX](./10_proof_index.md) | 形式化证明索引 |
 | [toolchain/07_rust_1.93_full_changelog](../06_toolchain/06_07_rust_1_93_full_changelog.md) | Rust 1.93 完整变更清单 |
 
 ---
@@ -266,7 +266,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

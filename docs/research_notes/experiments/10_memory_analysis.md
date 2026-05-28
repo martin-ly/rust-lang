@@ -183,7 +183,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**Def MA1（内存实验验证）**：内存分析实验 $E$ 验证 [ownership_model](../formal_methods/ownership_model.md) 定理 T2/T3，当且仅当 $E$ 观测到无悬垂、无双重释放、无泄漏。
+**Def MA1（内存实验验证）**：内存分析实验 $E$ 验证 [ownership_model](../formal_methods/10_ownership_model.md) 定理 T2/T3，当且仅当 $E$ 观测到无悬垂、无双重释放、无泄漏。
 
 **Axiom MA1**：Valgrind、Miri、ASan 等工具在满足其前置条件时，可观测到内存 UB 的典型表现；实验不能证明定理，但可提供经验支持。
 
@@ -516,8 +516,8 @@ fn analyze_memory_layout() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-- **所有权模型**：见 [ownership_model.md](../formal_methods/ownership_model.md)。内存分析中的「移动/复制/Drop」可对照所有权规则验证无泄漏。
-- **借用检查器**：见 [borrow_checker_proof.md](../formal_methods/borrow_checker_proof.md)。引用与生命周期不影响堆分配量，但可通过 Miri 与借用规则共同保证无 UB。
+- **所有权模型**：见 [10_ownership_model.md](../formal_methods/10_ownership_model.md)。内存分析中的「移动/复制/Drop」可对照所有权规则验证无泄漏。
+- **借用检查器**：见 [10_borrow_checker_proof.md](../formal_methods/10_borrow_checker_proof.md)。引用与生命周期不影响堆分配量，但可通过 Miri 与借用规则共同保证无 UB。
 
 ### 与实验研究的集成
 
@@ -605,7 +605,7 @@ fn analyze_memory_layout() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

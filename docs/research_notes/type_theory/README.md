@@ -91,7 +91,7 @@
 - 类型推导算法如何工作？
 - 类型安全如何保证？
 
-**相关笔记**: [type_system_foundations.md](./type_system_foundations.md)
+**相关笔记**: [10_type_system_foundations.md](./10_type_system_foundations.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -122,7 +122,7 @@
 - Trait 对象和动态分发的语义如何形式化？
 - 泛型 Trait 的类型推导如何工作？
 
-**相关笔记**: [trait_system_formalization.md](./trait_system_formalization.md)
+**相关笔记**: [10_trait_system_formalization.md](./10_trait_system_formalization.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -138,7 +138,7 @@
 - 生命周期推断算法如何形式化？
 - 生命周期与类型系统的关系如何？
 
-**相关笔记**: [lifetime_formalization.md](./lifetime_formalization.md)
+**相关笔记**: [10_lifetime_formalization.md](./10_lifetime_formalization.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -154,7 +154,7 @@
 - const 泛型如何影响类型系统？
 - Dependent Type 与 Rust 的关系如何？
 
-**相关笔记**: [advanced_types.md](./advanced_types.md)
+**相关笔记**: [10_advanced_types.md](./10_advanced_types.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -170,7 +170,7 @@
 - Rust 的型变规则如何推导？
 - 型变如何保证类型安全？
 
-**相关笔记**: [variance_theory.md](./variance_theory.md)
+**相关笔记**: [10_variance_theory.md](./10_variance_theory.md)
 
 **状态**: ✅ 已完成 (100%)
 
@@ -203,14 +203,14 @@
 | 文档 | 核心公理/定理 | 证明要点 | 缺口 |
 | :--- | :--- | :--- | :--- |
 | [00_completeness_gaps](./00_completeness_gaps.md) | Def CGI、Axiom CGI1、CGI-T1 | 不完备性形式化 | 缺口索引 |
-| [type_system_foundations](./type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断歧义 |
+| [type_system_foundations](./10_type_system_foundations.md) | T1–T5、LUB-T1、COP-T1、OFFSET-T1、ASC-T1、BOT-T1、NEWTYPE-T1、DEREF-NULL1 | 良型不卡住、求值保型 | 类型推断歧义 |
 | [construction_capability](./10_construction_capability.md) | Def TCON1、TCON-T1、TCON-L1、TCON-C1 | 类型构造能力、确定性判定树 | - |
-| [trait_system_formalization](./trait_system_formalization.md) | 对象安全、impl 解析、COH-T1、RPIT-T1、ASYNC-T1、NEG-T1、DYN-T1、TRAIT-GAT1、SPEC-T1 | dyn | 孤儿放宽（倡议） |
-| [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、见 formal_methods | 与型变组合 |
-| [advanced_types](./advanced_types.md) | GAT、const 泛型、PhantomData、CONST-EVAL-T1、CONST-MUT1、EXIST1 | 关联类型、类型级常量 | existential 完整规则 |
-| [variance_theory](./variance_theory.md) | T1–T4、VAR-COM-T1/C1 | 协变/逆变/不变、组合传递 | 三元组合已补全 |
+| [trait_system_formalization](./10_trait_system_formalization.md) | 对象安全、impl 解析、COH-T1、RPIT-T1、ASYNC-T1、NEG-T1、DYN-T1、TRAIT-GAT1、SPEC-T1 | dyn | 孤儿放宽（倡议） |
+| [lifetime_formalization](./10_lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、见 formal_methods | 与型变组合 |
+| [advanced_types](./10_advanced_types.md) | GAT、const 泛型、PhantomData、CONST-EVAL-T1、CONST-MUT1、EXIST1 | 关联类型、类型级常量 | existential 完整规则 |
+| [variance_theory](./10_variance_theory.md) | T1–T4、VAR-COM-T1/C1 | 协变/逆变/不变、组合传递 | 三元组合已补全 |
 
-本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)、[PROOF_INDEX](../PROOF_INDEX.md) 衔接。
+本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md)、[PROOF_INDEX](../10_proof_index.md) 衔接。
 
 **缺口补全**：见 [00_completeness_gaps](./00_completeness_gaps.md) § 补全路线图。
 
@@ -222,12 +222,12 @@
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-- [x] [类型系统基础](./type_system_foundations.md) - 100%
+- [x] [类型系统基础](./10_type_system_foundations.md) - 100%
 - [x] [类型构造能力](./10_construction_capability.md) - Def TCON1、矩阵、决策树
-- [x] [Trait 系统形式化](./trait_system_formalization.md) - 100%
-- [x] [生命周期形式化](./lifetime_formalization.md) - 100%
-- [x] [高级类型特性](./advanced_types.md) - 100%
-- [x] [型变理论](./variance_theory.md) - 100%
+- [x] [Trait 系统形式化](./10_trait_system_formalization.md) - 100%
+- [x] [生命周期形式化](./10_lifetime_formalization.md) - 100%
+- [x] [高级类型特性](./10_advanced_types.md) - 100%
+- [x] [型变理论](./10_variance_theory.md) - 100%
 
 ---
 
@@ -239,7 +239,7 @@
 
 - [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 - [类型系统文档](../../../crates/c02_type_system/docs/README.md)
-- [类型系统速查卡](../../02_reference/quick_reference/type_system.md)
+- [类型系统速查卡](../../02_reference/quick_reference/02_type_system.md)
 
 ### 代码实现
 
@@ -289,7 +289,7 @@
 
 ### 创建新的研究笔记
 
-1. 复制模板文件（如 `type_system_foundations.md`）
+1. 复制模板文件（如 `10_type_system_foundations.md`）
 2. 填写研究问题和目标
 3. 添加类型理论定义和证明
 4. 提供代码示例和验证
@@ -341,7 +341,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

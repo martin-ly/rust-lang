@@ -6,7 +6,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： [borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md)
+> 内容已整合至： [10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md)
 
 ## 知识结构思维导图
 >
@@ -38,7 +38,7 @@ mindmap
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
-| 本README | research_notes/formal_methods/borrow_checker_proof.md | 索引/重定向 |
+| 本README | research_notes/formal_methods/10_borrow_checker_proof.md | 索引/重定向 |
 | 本README | research_notes/10_safe_unsafe_comprehensive_analysis.md | 索引/重定向 |
 
 [返回理论基础](../README.md) | [返回主索引](../../00_master_index.md)
@@ -234,10 +234,10 @@ fn prevent_use_after_free() {
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| 借用检查器证明 | 借用检查器的形式化正确性证明 | [../../../research_notes/formal_methods/borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md) |
-| 所有权模型 | 所有权系统的形式化模型 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
+| 借用检查器证明 | 借用检查器的形式化正确性证明 | [../../../research_notes/formal_methods/10_borrow_checker_proof.md](../../../research_notes/formal_methods/10_borrow_checker_proof.md) |
+| 所有权模型 | 所有权系统的形式化模型 | [../../../research_notes/formal_methods/10_ownership_model.md](../../../research_notes/formal_methods/10_ownership_model.md) |
 | 安全/非安全分析 | unsafe Rust 的边界分析 | [../../../research_notes/10_safe_unsafe_comprehensive_analysis.md](../../../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
-| 证明索引 | 内存安全相关证明 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
+| 证明索引 | 内存安全相关证明 | [../../../research_notes/10_proof_index.md](../../../research_notes/10_proof_index.md) |
 | 工具指南 | 内存安全验证工具 | [../../../research_notes/10_tools_guide.md](../../../research_notes/10_tools_guide.md) |
 
 ---

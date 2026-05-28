@@ -21,7 +21,7 @@
 | 理解形式化证明 | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) |
 | Rust 所有权系统深度形式化 | [`rust-ownership-decidability/`](../rust-ownership-decidability/) — 600K+ 字完整知识库 |
 | 查概念/证明 | [QUICK_FIND](./10_quick_find.md) |
-| 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](./software_design_theory/00_MASTER_INDEX.md) |
+| 选设计模式/并发模型 | [software_design_theory/00_MASTER_INDEX](./software_design_theory/10_00_master_index.md) |
 | 理解三大支柱 | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） |
 | 完整总结与论证脉络 | [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](./10_argumentation_chain_and_flow.md) |
 | 批判性意见与改进计划 | RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN |
@@ -47,22 +47,22 @@ research_notes/
 ├── formal_methods/              # 形式化方法研究（六篇核心 + 思维导图/矩阵/决策树，见该目录 README）
 │   ├── README.md
 │   ├── 00_completeness_gaps.md  # 完备性缺口（Phase 1–6 100% 完成）
-│   ├── ownership_model.md       # 所有权模型形式化
-│   ├── borrow_checker_proof.md  # 借用检查器证明
-│   ├── async_state_machine.md   # 异步状态机形式化
-│   ├── lifetime_formalization.md # 生命周期形式化
-│   ├── pin_self_referential.md  # Pin 和自引用类型形式化
-│   ├── send_sync_formalization.md
+│   ├── 10_ownership_model.md       # 所有权模型形式化
+│   ├── 10_borrow_checker_proof.md  # 借用检查器证明
+│   ├── 10_async_state_machine.md   # 异步状态机形式化
+│   ├── 10_lifetime_formalization.md # 生命周期形式化
+│   ├── 10_pin_self_referential.md  # Pin 和自引用类型形式化
+│   ├── 10_send_sync_formalization.md
 │   └── …（思维导图、矩阵、决策树等见 [formal_methods/README](./formal_methods/README.md)）
 ├── type_theory/                 # 类型理论研究
 │   ├── README.md
 │   ├── 00_completeness_gaps.md  # 完备性缺口（形式化论证不充分声明）
 │   ├── 10_construction_capability.md  # 类型构造能力（Def TCON1、矩阵、决策树）
-│   ├── type_system_foundations.md
-│   ├── trait_system_formalization.md
-│   ├── lifetime_formalization.md
-│   ├── advanced_types.md
-│   └── variance_theory.md
+│   ├── 10_type_system_foundations.md
+│   ├── 10_trait_system_formalization.md
+│   ├── 10_lifetime_formalization.md
+│   ├── 10_advanced_types.md
+│   └── 10_variance_theory.md
 ├── software_design_theory/      # 软件设计理论研究
 │   ├── 01_design_patterns_formal/  # 设计模式形式化（GoF 23）
 │   ├── 02_workflow_safe_complete_models/  # 23 安全 / 43 完全模型
@@ -92,14 +92,14 @@ research_notes/
 ├── 10_getting_started.md          # 快速入门指南
 ├── 10_faq.md                      # 常见问题解答
 ├── 10_maintenance_guide.md        # 维护指南
-├── BEST_PRACTICES.md           # 最佳实践
+├── 10_best_practices.md           # 最佳实践
 ├── 10_glossary.md                 # 术语表
 ├── 10_resources.md                # 研究资源汇总
 ├── 10_system_integration.md       # 系统集成指南
 ├── 10_example.md                  # 研究笔记示例
 ├── 10_progress_tracking.md        # 研究进展跟踪
 ├── 10_task_checklist.md           # 研究任务清单
-├── PROOF_INDEX.md              # 形式化证明文档索引 🆕
+├── 10_proof_index.md              # 形式化证明文档索引 🆕
 ├── 10_international_formal_verification_index.md  # 国际形式化验证对标索引 🆕
 ├── 10_formal_proof_critical_analysis_and_plan_2026_02.md  # 批判性分析与可持续推进计划 🆕
 ├── 10_formal_full_model_overview.md  # 形式化全模型入口（统一形式系统）🆕
@@ -169,11 +169,11 @@ research_notes/
 - ✅ 类型推导正确性证明
 - ✅ 类型推导算法正确性证明
 
-**证明文档索引**: [PROOF_INDEX.md](./PROOF_INDEX.md)
+**证明文档索引**: [10_proof_index.md](./10_proof_index.md)
 
 **按证明深度/层次导航**:
 
-- [按证明深度](PROOF_INDEX.md#-按证明深度导航) — L1 证明思路 / L2 完整证明 / L3 机器可检查
+- [按证明深度](10_proof_index.md#-按证明深度导航) — L1 证明思路 / L2 完整证明 / L3 机器可检查
 - [按抽象层次](10_formal_full_model_overview.md#四抽象层次对应) — 语言级 / MIR 级 / 内存级
 - [形式化全模型入口](./10_formal_full_model_overview.md) — 统一形式系统、公理列表、定理依赖 DAG
 
@@ -297,8 +297,8 @@ research_notes/
 >
 > **[来源: Rust Official Docs]**
 
-- [类型系统速查卡](../02_reference/quick_reference/type_system.md)
-- [所有权速查卡](../02_reference/quick_reference/ownership_cheatsheet.md)
+- [类型系统速查卡](../02_reference/quick_reference/02_type_system.md)
+- [所有权速查卡](../02_reference/quick_reference/02_ownership_cheatsheet.md)
 - [异步模式速查卡](../02_reference/quick_reference/02_async_patterns.md)
 
 ---
@@ -391,19 +391,19 @@ research_notes/
 
 **形式化方法研究** (5个):
 
-- [x] [所有权模型形式化](./formal_methods/ownership_model.md) - ✅ 已完成 (100%)
-- [x] [借用检查器证明](./formal_methods/borrow_checker_proof.md) - ✅ 已完成 (100%)
-- [x] [异步状态机形式化](./formal_methods/async_state_machine.md) - ✅ 已完成 (100%)
-- [x] [生命周期形式化](./formal_methods/lifetime_formalization.md) - ✅ 已完成 (100%)
-- [x] [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md) - ✅ 已完成 (100%)
+- [x] [所有权模型形式化](./formal_methods/10_ownership_model.md) - ✅ 已完成 (100%)
+- [x] [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) - ✅ 已完成 (100%)
+- [x] [异步状态机形式化](./formal_methods/10_async_state_machine.md) - ✅ 已完成 (100%)
+- [x] [生命周期形式化](./formal_methods/10_lifetime_formalization.md) - ✅ 已完成 (100%)
+- [x] [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md) - ✅ 已完成 (100%)
 
 **类型理论研究** (5个):
 
-- [x] [类型系统基础](./type_theory/type_system_foundations.md) - ✅ 已完成 (100%)
-- [x] [Trait 系统形式化](./type_theory/trait_system_formalization.md) - ✅ 已完成 (100%)
-- [x] [生命周期形式化](./type_theory/lifetime_formalization.md) - ✅ 已完成 (100%)
-- [x] [高级类型特性](./type_theory/advanced_types.md) - ✅ 已完成 (100%)
-- [x] [型变理论](./type_theory/variance_theory.md) - ✅ 已完成 (100%)
+- [x] [类型系统基础](./type_theory/10_type_system_foundations.md) - ✅ 已完成 (100%)
+- [x] [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) - ✅ 已完成 (100%)
+- [x] [生命周期形式化](./type_theory/10_lifetime_formalization.md) - ✅ 已完成 (100%)
+- [x] [高级类型特性](./type_theory/10_advanced_types.md) - ✅ 已完成 (100%)
+- [x] [型变理论](./type_theory/10_variance_theory.md) - ✅ 已完成 (100%)
 
 **实验研究** (5个):
 
@@ -444,7 +444,7 @@ research_notes/
 3. **MaybeUninit API 增强研究**
    - 新增安全方法的类型理论分析
    - 未初始化内存的安全性形式化
-   - 相关笔记: [类型系统基础](./type_theory/type_system_foundations.md)、[高级类型特性](./type_theory/advanced_types.md)
+   - 相关笔记: [类型系统基础](./type_theory/10_type_system_foundations.md)、[高级类型特性](./type_theory/10_advanced_types.md)
 
 4. **`cfg` 属性在 `asm!` 行上研究**
    - 内联汇编条件编译的改进
@@ -473,7 +473,7 @@ research_notes/
 2. **const 上下文增强研究**
    - 对非静态常量引用的形式化分析
    - const 泛型配置系统研究
-   - 相关笔记: [类型系统基础](./type_theory/type_system_foundations.md)
+   - 相关笔记: [类型系统基础](./type_theory/10_type_system_foundations.md)
 
 3. **JIT 编译器优化研究**
    - 异步代码性能提升机制
@@ -538,7 +538,7 @@ research_notes/
 - [快速入门指南](./10_getting_started.md) - 新用户入门指南
 - [常见问题解答](./10_faq.md) - 常见问题解答
 - [维护指南](./10_maintenance_guide.md) - 系统维护指南
-- [最佳实践](./BEST_PRACTICES.md) - 研究笔记最佳实践（含实质内容不足判断与四步修复法）
+- [最佳实践](./10_best_practices.md) - 研究笔记最佳实践（含实质内容不足判断与四步修复法）
 - [术语表](./10_glossary.md) - 专业术语解释
 - [研究资源汇总](./10_resources.md) - 学术和工具资源
 - [系统集成指南](./10_system_integration.md) - 与形式化工程系统的集成
@@ -635,7 +635,7 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

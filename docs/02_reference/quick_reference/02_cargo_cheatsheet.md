@@ -1052,9 +1052,9 @@ $ cargo bloat --release
 
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
-| **类型系统** | [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) | 依赖版本解析的类型理论 |
+| **类型系统** | [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) | 依赖版本解析的类型理论 |
 | **类型构造** | [construction_capability](../../research_notes/type_theory/10_construction_capability.md) | 包组合的类型构造能力 |
-| **Trait 系统** | [trait_system_formalization](../../research_notes/type_theory/trait_system_formalization.md) | 特征组合的兼容性 |
+| **Trait 系统** | [trait_system_formalization](../../research_notes/type_theory/10_trait_system_formalization.md) | 特征组合的兼容性 |
 
 ### 形式化定理
 >
@@ -1072,7 +1072,7 @@ $ cargo bloat --release
 
 - [模块系统速查卡](./02_modules_cheatsheet.md) - Crate 和模块
 - [测试速查卡](./02_testing_cheatsheet.md) - Cargo 测试命令
-- [类型系统速查卡](./type_system.md) - 依赖类型管理
+- [类型系统速查卡](./02_type_system.md) - 依赖类型管理
 - 反模式速查卡 - Cargo 配置反模式
 
 ---

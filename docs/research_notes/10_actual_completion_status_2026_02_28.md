@@ -78,12 +78,12 @@
 
 | 文档 | 状态 | 实际内容评估 |
 | :--- | :--- | :--- |
-| ownership_model.md | ✅ 完成 | Def 1.1-4.4, Axiom, 定理完整 |
-| borrow_checker_proof.md | ✅ 完成 | Def 1.1-1.7, T1-T3 完整证明 |
-| lifetime_formalization.md | ✅ 完成 | Def 1.1-3.1, LF-T1-T3 完整 |
-| async_state_machine.md | ✅ 完成 | Def 4.1-6.3, T6.1-6.3 |
-| pin_self_referential.md | ✅ 完成 | Def 1.1-2.2, T1-T3 |
-| send_sync_formalization.md | ✅ 完成 | SEND-T1, SYNC-T1 |
+| 10_ownership_model.md | ✅ 完成 | Def 1.1-4.4, Axiom, 定理完整 |
+| 10_borrow_checker_proof.md | ✅ 完成 | Def 1.1-1.7, T1-T3 完整证明 |
+| 10_lifetime_formalization.md | ✅ 完成 | Def 1.1-3.1, LF-T1-T3 完整 |
+| 10_async_state_machine.md | ✅ 完成 | Def 4.1-6.3, T6.1-6.3 |
+| 10_pin_self_referential.md | ✅ 完成 | Def 1.1-2.2, T1-T3 |
+| 10_send_sync_formalization.md | ✅ 完成 | SEND-T1, SYNC-T1 |
 
 **缺口**: 仅需微调，补充最新 Rust 1.94/1.95 特性
 
@@ -97,10 +97,10 @@
 
 | 文档 | 状态 | 实际内容评估 |
 | :--- | :--- | :--- |
-| type_system_foundations.md | ✅ 完成 | T1-T3 完整 |
-| trait_system_formalization.md | ✅ 完成 | COH-T1, RPIT-T1 |
-| variance_theory.md | ✅ 完成 | T1-T4 |
-| advanced_types.md | ✅ 完成 | CONST-EVAL-T1 |
+| 10_type_system_foundations.md | ✅ 完成 | T1-T3 完整 |
+| 10_trait_system_formalization.md | ✅ 完成 | COH-T1, RPIT-T1 |
+| 10_variance_theory.md | ✅ 完成 | T1-T4 |
+| 10_advanced_types.md | ✅ 完成 | CONST-EVAL-T1 |
 | 10_construction_capability.md | ⚠️ 需完善 | TCON1 需扩展 |
 
 ---
@@ -387,7 +387,7 @@ Week 5: 交叉引用 + 格式检查 ────── 12h
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

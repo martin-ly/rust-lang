@@ -61,7 +61,7 @@
 
 本指南涵盖「AI 辅助 Rust 开发」与「用 Rust 构建 AI/ML 应用」两类场景，帮助开发者选择合适工具并规划学习路径。
 
-**形式化引用**：T-OW2、T-TY3、[type_system_foundations](../research_notes/type_theory/type_system_foundations.md)（张量泛型、Trait 抽象）。
+**形式化引用**：T-OW2、T-TY3、[type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md)（张量泛型、Trait 抽象）。
 
 ---
 
@@ -412,7 +412,7 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 | 文档类型 | 路径 | 用途 |
 | :--- | :--- | :--- |
 | 速查卡 | docs/02_reference/quick_reference/*.md | 语法、模式、反例 |
-| 主索引 | crates/*/docs/00_MASTER_INDEX.md | 模块导航 |
+| 主索引 | crates/*/docs/10_00_master_index.md | 模块导航 |
 | 决策树 | docs/04_thinking/04_decision_graph_network.md | 技术选型 |
 | 错误码映射 | docs/02_reference/02_error_code_mapping.md | 错误→文档 |
 | 官方映射 | docs/01_learning/01_official_resources_mapping.md | 权威源引用 |
@@ -553,10 +553,10 @@ type Result<T> = std::result::Result<T, AIError>;
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/10_00_master_index.md) |
 | :--- | :--- |
 | :--- | :--- |
-| **进阶主题** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| **进阶主题** | [05_performance_tuning_guide.md](./05_performance_tuning_guide.md) |
 | :--- | :--- |
 | **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md) |
 | :--- | :--- |
@@ -573,8 +573,8 @@ type Result<T> = std::result::Result<T, AIError>;
 - [guides/README](../../guides/README.md)
 - [官方资源映射](../01_learning/01_official_resources_mapping.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)
-- [BEST_PRACTICES.md](./BEST_PRACTICES.md)
-- [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md)
+- [10_best_practices.md](./10_best_practices.md)
+- [05_performance_tuning_guide.md](./05_performance_tuning_guide.md)
 
 ---
 

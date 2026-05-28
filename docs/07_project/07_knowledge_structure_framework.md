@@ -446,10 +446,10 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-- **形式化证明**: [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 证明索引与公理编号规范
+- **形式化证明**: [10_proof_index.md](../research_notes/10_proof_index.md) - 证明索引与公理编号规范
 - **证明图网**: [04_proof_graph_network.md](../04_thinking/04_proof_graph_network.md) - 形式化证明结构
 - **决策图网**: [04_decision_graph_network.md](../04_thinking/04_decision_graph_network.md) - 技术选型决策支持
-- **类型理论**: [type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) - 类型理论基础
+- **类型理论**: [10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) - 类型理论基础
 
 ### 实施场景
 
@@ -1106,7 +1106,7 @@ graph TD
 
 - Rust 1.95+ 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

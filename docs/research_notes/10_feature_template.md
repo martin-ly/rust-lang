@@ -85,7 +85,7 @@
 
 | 概念 | 形式化引用 | 反例 |
 | :--- | :--- | :--- |
-| 编译期常量；const X: T = ... | [advanced_types](type_theory/advanced_types.md) | 非常量表达式编译错误 |
+| 编译期常量；const X: T = ... | [advanced_types](type_theory/10_advanced_types.md) | 非常量表达式编译错误 |
 
 ---
 
@@ -167,7 +167,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

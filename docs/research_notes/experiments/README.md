@@ -248,9 +248,9 @@
 
 | 实验类型 | 形式化定理 | 验证目标 | 文档链接 |
 | :--- | :--- | :--- | :--- |
-| 内存分析 | ownership T2/T3、RC-T1、REFCELL-T1 | 无泄漏、无双重释放 | [ownership_model](../../research_notes/formal_methods/ownership_model.md) |
-| 并发性能 | borrow T1、CHAN-T1、MUTEX-T1、async T6.2、SPAWN-T1 | 无数据竞争 | [borrow_checker_proof](../../research_notes/formal_methods/borrow_checker_proof.md)、[async_state_machine](../../research_notes/formal_methods/async_state_machine.md) |
-| 编译器优化 | type_system 保持性 | 优化保持类型 | [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) |
+| 内存分析 | ownership T2/T3、RC-T1、REFCELL-T1 | 无泄漏、无双重释放 | [ownership_model](../../research_notes/formal_methods/10_ownership_model.md) |
+| 并发性能 | borrow T1、CHAN-T1、MUTEX-T1、async T6.2、SPAWN-T1 | 无数据竞争 | [borrow_checker_proof](../../research_notes/formal_methods/10_borrow_checker_proof.md)、[async_state_machine](../../research_notes/formal_methods/10_async_state_machine.md) |
+| 编译器优化 | type_system 保持性 | 优化保持类型 | [type_system_foundations](../../research_notes/type_theory/10_type_system_foundations.md) |
 | 宏展开 | 宏卫生、展开正确性 | 编译时间与正确性 | — |
 
 ---
@@ -332,7 +332,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -907,9 +907,9 @@ fn take_slice<T>(t: &[T]) {}
 - [类型构造能力](../../research_notes/type_theory/10_construction_capability.md) — Def TCON1、TCON 矩阵、类型构造决策树、Rust 1.93 新特性
 - [类型构造决策树（直达）](../../research_notes/type_theory/10_construction_capability.md#类型构造决策树) — 目标类型→构造路径选择、确定性判定
 - [类型理论完备性缺口](../../research_notes/type_theory/00_completeness_gaps.md) — 缺口与对构造能力的影响
-- [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 类型系统的数学基础
-- [型变理论](../../research_notes/type_theory/variance_theory.md) — 型变的形式化定义
-- [Trait 系统形式化](../../research_notes/type_theory/trait_system_formalization.md) — Trait 系统的类型理论
+- [类型系统基础](../../research_notes/type_theory/10_type_system_foundations.md) — 类型系统的数学基础
+- [型变理论](../../research_notes/type_theory/10_variance_theory.md) — 型变的形式化定义
+- [Trait 系统形式化](../../research_notes/type_theory/10_trait_system_formalization.md) — Trait 系统的类型理论
 
 ---
 
@@ -1298,7 +1298,7 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与类型系统
+- [所有权系统速查卡](./02_ownership_cheatsheet.md) - 所有权与类型系统
 - [泛型编程速查卡](./02_generics_cheatsheet.md) - 泛型与类型系统
 - [模块系统速查卡](./02_modules_cheatsheet.md) - 模块中的类型
 - [智能指针速查卡](./02_smart_pointers_cheatsheet.md) - 指针类型

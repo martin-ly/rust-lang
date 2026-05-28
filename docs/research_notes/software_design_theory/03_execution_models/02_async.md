@@ -99,15 +99,15 @@ $\mathit{async}\, \{ e \}$ 产生 $\mathrm{Future}\langle \tau \rangle$，其中
 
 **Axiom AS2**：单线程协作式多任务；无抢占，yield 点仅在 await。
 
-**定理 AS-T1**：由 [async_state_machine](../../formal_methods/async_state_machine.md) 定理 6.1（状态一致性）、6.2（并发安全）、6.3（进度保证）。
+**定理 AS-T1**：由 [async_state_machine](../../formal_methods/10_async_state_machine.md) 定理 6.1（状态一致性）、6.2（并发安全）、6.3（进度保证）。
 
-**定理 AS-T2**：由 [pin_self_referential](../../formal_methods/pin_self_referential.md)，Pin 保证自引用 Future 移动安全。
+**定理 AS-T2**：由 [pin_self_referential](../../formal_methods/10_pin_self_referential.md)，Pin 保证自引用 Future 移动安全。
 
 **引理 AS-L1（await 挂起语义）**：$\mathit{await}\, f$ 在 $f = \mathrm{Pending}$ 时挂起；恢复后 $f$ 的 poll 由运行时调度；单线程协作式，无抢占。
 
 *证明*：由 Axiom AS2；await 为 yield 点；运行时（tokio 等）在 Ready 时唤醒；无抢占故无数据竞争。∎
 
-**推论 AS-C1**：有限 Future 终将 Ready；由 [async_state_machine](../../formal_methods/async_state_machine.md) T6.3；无限延迟需超时/取消显式处理。
+**推论 AS-C1**：有限 Future 终将 Ready；由 [async_state_machine](../../formal_methods/10_async_state_machine.md) T6.3；无限延迟需超时/取消显式处理。
 
 ---
 
@@ -369,7 +369,7 @@ handle.abort();  // 显式取消
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

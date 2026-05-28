@@ -11,7 +11,7 @@
 | 主题 | 链接 |
 | :--- | :--- |
 | 研究路线图 | [10_research_roadmap.md](../../research_notes/10_research_roadmap.md) |
-| 形式化证明索引 | [PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
+| 形式化证明索引 | [10_proof_index.md](../../research_notes/10_proof_index.md) |
 | 研究方法论 | [10_research_methodology.md](../../research_notes/10_research_methodology.md) |
 
 ---

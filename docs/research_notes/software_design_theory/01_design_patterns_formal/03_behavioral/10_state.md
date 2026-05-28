@@ -130,7 +130,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 >
 > **[来源: Rust Official Docs]**
 
-枚举 + match 或类型状态（零开销）实现；由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 穷尽匹配保证完备性。
+枚举 + match 或类型状态（零开销）实现；由 [type_system_foundations](../../../type_theory/10_type_system_foundations.md) 穷尽匹配保证完备性。
 
 **证明**：
 
@@ -504,7 +504,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -110,7 +110,7 @@
 | P02 | 使用 `with_capacity` 预分配 Vec | SHOULD | `exercises/src/concurrency/ex03_channel_mpsc.rs` | `Vec::new()` 是否可替换为 `with_capacity`？ |
 | P03 | 优先使用 &str 而非 String 作为参数 | SHOULD | `exercises/src/ownership_borrowing/ex02_string_slice.rs` | 函数参数是否为 `&str` 而非 `String`？ |
 | P04 | 避免不必要的 clone | SHOULD | `crates/c01_ownership_borrow_scope/src/copy_move/` | clone() 是否可以通过借用消除？ |
-| P05 | 使用 Cow<'_, str> 处理可选克隆 | MAY | `docs/02_reference/quick_reference/ownership_cheatsheet.md` | 读多写少场景是否使用了 Cow？ |
+| P05 | 使用 Cow<'_, str> 处理可选克隆 | MAY | `docs/02_reference/quick_reference/02_ownership_cheatsheet.md` | 读多写少场景是否使用了 Cow？ |
 
 ### 2.2 迭代与集合
 >
@@ -283,7 +283,7 @@
 
 - [01_lfrs_certification_mapping.md](../01_learning/01_lfrs_certification_mapping.md) - 认证考点映射
 - [01_google_rust_mapping.md](../01_learning/01_google_rust_mapping.md) - Google 课程映射
-- [BEST_PRACTICES.md](./BEST_PRACTICES.md) - 生产实践指南
+- [10_best_practices.md](./10_best_practices.md) - 生产实践指南
 - [exercises/README.md](../../exercises/README.md) - 练习题入口
 
 ---

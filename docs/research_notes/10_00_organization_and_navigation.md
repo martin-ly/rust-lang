@@ -44,7 +44,7 @@
 | :--- | :--- | :--- |
 | **我想理解 Rust 形式化证明** | [FORMAL_FULL_MODEL_OVERVIEW](./10_formal_full_model_overview.md) → [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) | 30min |
 | **我想查某个概念的证明/定义** | [QUICK_FIND](./10_quick_find.md)（按关键词） | 2min |
-| **我想选设计模式/并发模型** | [software_design_theory/00_MASTER_INDEX](./software_design_theory/00_MASTER_INDEX.md) → 03_semantic_boundary_map、06_boundary_analysis | 15min |
+| **我想选设计模式/并发模型** | [software_design_theory/00_MASTER_INDEX](./software_design_theory/10_00_master_index.md) → 03_semantic_boundary_map、06_boundary_analysis | 15min |
 | **我想理解权威对齐体系** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md) | 10min |
 | **三大支柱** | [AUTHORITATIVE_ALIGNMENT_GUIDE](./10_authoritative_alignment_guide.md)（原 RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN 已归档） | 10min |
 | **我想看完整总结与论证脉络** | [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md) → [ARGUMENTATION_CHAIN_AND_FLOW](10_argumentation_chain_and_flow.md) | 15min |
@@ -53,7 +53,7 @@
 | **我想看目录缺失与内容深化计划** | [00_COMPREHENSIVE_SUMMARY](./10_00_comprehensive_summary.md) | 10min |
 | **我想查层次化映射（文档树/概念↔定理/文档↔思维表征）** | [HIERARCHICAL_MAPPING_AND_SUMMARY](./10_hierarchical_mapping_and_summary.md) | 5min |
 | **我想看 research_notes 全面梳理（结构、归档、维护）** | [RESEARCH_NOTES_ORGANIZATION](./10_research_notes_organization.md) | 5min |
-| **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) | 5min |
+| **我想查 Send/Sync 或安全可判定机制** | [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) → [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) | 5min |
 | **我想查 formal_methods 完备性（六篇×六维）** | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/10_formal_methods_completeness_checklist.md) | 2min |
 | **我想贡献/维护** | [CONTRIBUTING](./10_contributing.md) → [QUALITY_CHECKLIST](./10_quality_checklist.md) | 5min |
 
@@ -105,7 +105,7 @@ research_notes/
 │   ├── 10_formal_full_model_overview.md   ← 统一形式系统入口
 │   ├── FORMAL_LANGUAGE_AND_PROOFS.md   ← 推理规则、操作语义
 │   ├── 10_core_theorems_full_proofs.md    ← T-OW2/T-BR1/T-TY3 证明
-│   ├── PROOF_INDEX.md                  ← 105+ 证明索引
+│   ├── 10_proof_index.md                  ← 105+ 证明索引
 │   └── coq_skeleton/                   ← Coq 骨架
 │
 ├── 【支柱 2+3 设计与组合】
@@ -235,7 +235,7 @@ research_notes/
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

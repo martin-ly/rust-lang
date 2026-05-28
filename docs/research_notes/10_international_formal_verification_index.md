@@ -70,7 +70,7 @@
 
 - **论文**: [RustBelt: Logical Foundations for the Future of Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/README.md)
 - **形式化**: λ Rust 模型、分离逻辑、MIR 级语义
-- **本项目对应**: `formal_methods/ownership_model.md`, `formal_methods/borrow_checker_proof.md`
+- **本项目对应**: `formal_methods/10_ownership_model.md`, `formal_methods/10_borrow_checker_proof.md`
 - **差距**: 无 Iris 分离逻辑形式化；无 MIR 级建模；**Coq 骨架已创建**（[coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)），证明 Admitted 待补全
 
 ### 2.2 RustBelt Meets Relaxed Memory (POPL 2020)
@@ -215,7 +215,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

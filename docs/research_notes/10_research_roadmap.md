@@ -138,7 +138,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [x] [类型系统基础](./type_theory/type_system_foundations.md) ✅ 100%
+- [x] [类型系统基础](./type_theory/10_type_system_foundations.md) ✅ 100%
   - 类型环境与类型判断
   - 基本类型规则
   - 类型安全证明
@@ -151,7 +151,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [x] [Trait 系统形式化](./type_theory/trait_system_formalization.md) ✅ 100%
+- [x] [Trait 系统形式化](./type_theory/10_trait_system_formalization.md) ✅ 100%
   - Trait 的形式化定义
   - Trait 对象语义
   - 泛型 Trait
@@ -164,7 +164,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [x] [型变理论](./type_theory/variance_theory.md) ✅ 100%
+- [x] [型变理论](./type_theory/10_variance_theory.md) ✅ 100%
   - 协变、逆变、不变
   - 型变规则推导
   - 型变与内存安全
@@ -199,7 +199,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [x] [所有权模型形式化](./formal_methods/ownership_model.md) ✅ 100%
+- [x] [所有权模型形式化](./formal_methods/10_ownership_model.md) ✅ 100%
   - 所有权规则形式化
   - 内存安全证明
   - 所有权转移语义
@@ -212,7 +212,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [x] [借用检查器证明](./formal_methods/borrow_checker_proof.md) ✅ 100%
+- [x] [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) ✅ 100%
   - 借用规则形式化
   - 数据竞争自由证明
   - 借用检查算法
@@ -225,7 +225,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [x] [异步状态机形式化](./formal_methods/async_state_machine.md) ✅ 100%
+- [x] [异步状态机形式化](./formal_methods/10_async_state_machine.md) ✅ 100%
   - Future/Poll 状态机
   - 并发安全证明
   - async/await 语义
@@ -236,7 +236,7 @@
 
 > **[来源: Wikipedia - Type System]**
 
-- [x] [生命周期形式化](./formal_methods/lifetime_formalization.md) ✅ 100%
+- [x] [生命周期形式化](./formal_methods/10_lifetime_formalization.md) ✅ 100%
   - 生命周期语义
   - 生命周期推断算法
   - 引用有效性证明
@@ -356,12 +356,12 @@
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [x] [高级类型特性](./type_theory/advanced_types.md) ✅ 100%
+- [x] [高级类型特性](./type_theory/10_advanced_types.md) ✅ 100%
   - GATs 深入分析
   - const 泛型影响
   - 依赖类型关系
 
-- [x] [Pin 和自引用类型](./formal_methods/pin_self_referential.md) ✅ 100%
+- [x] [Pin 和自引用类型](./formal_methods/10_pin_self_referential.md) ✅ 100%
   - Pin 类型形式化
   - 自引用类型安全
   - Pin 保证证明
@@ -510,7 +510,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

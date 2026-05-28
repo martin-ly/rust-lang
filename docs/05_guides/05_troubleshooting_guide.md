@@ -128,7 +128,7 @@
 本文档提供常见问题的排查和解决方案，帮助开发者快速定位和解决问题。
 
 **形式化引用**：T-OW2/T-OW3 (所有权)、T-BR1 (借用)、T-LF2 (生命周期)。
-编译错误对应 [ownership_model](../research_notes/formal_methods/ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md)、[lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md)。
+编译错误对应 [ownership_model](../research_notes/formal_methods/10_ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md)、[lifetime_formalization](../research_notes/formal_methods/10_lifetime_formalization.md)。
 
 ---
 
@@ -621,7 +621,7 @@ A: 使用 `cargo tree` 查看依赖关系
 程序性能不达标的排查：
 
 1. 使用 [perf 或 flamegraph](#2-运行时性能问题) 定位热点
-2. 参考 [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) 优化
+2. 参考 [05_performance_tuning_guide.md](./05_performance_tuning_guide.md) 优化
 3. 检查是否存在 [编译时间过长](#1-编译时间过长) 问题
 
 ### 场景4: 生产环境问题
@@ -642,12 +642,12 @@ A: 使用 `cargo tree` 查看依赖关系
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
+| **核心模块** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/10_00_master_index.md) |
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
 | **错误参考** | [02_error_code_mapping.md](../02_reference/02_error_code_mapping.md) |
-| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| **相关指南** | [05_performance_tuning_guide.md](./05_performance_tuning_guide.md) |
 | :--- | :--- |
 | :--- | :--- |
 | **外部资源** | [Rust错误索引](https://doc.rust-lang.org/error-index.html) |

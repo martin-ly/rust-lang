@@ -99,9 +99,9 @@
 
 - Send/Sync 的 Def 与定理（SEND1、SYNC1、SEND-T1、SYNC-T1、SYNC-L1）
 - 反例索引（Rc !Send、Cell !Sync、非 Send 闭包 spawn）
-- 与 [async_state_machine](./async_state_machine.md)、
-- [borrow_checker_proof](./borrow_checker_proof.md)、
-- [ownership_model](./ownership_model.md) 的双向链接
+- 与 [async_state_machine](./10_async_state_machine.md)、
+- [borrow_checker_proof](./10_borrow_checker_proof.md)、
+- [ownership_model](./10_ownership_model.md) 的双向链接
 
 ---
 
@@ -114,7 +114,7 @@
 - **关系**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$（Rust 标准库定义）；即「可共享引用」等价于「引用类型可跨线程传递」。
 - **可判定性**：Send/Sync 由**编译期**类型检查判定；违反则编译错误。
 
-**与 Rc/Arc/Cell 的关系**：见 [ownership_model](./ownership_model.md) Def RC1/ARC1/CELL1。`Rc: !Send`（非原子计数）；`Arc: Send + Sync` 当 $T: \text{Send} + \text{Sync}$；`Cell: !Sync`（内部可变无同步）。
+**与 Rc/Arc/Cell 的关系**：见 [ownership_model](./10_ownership_model.md) Def RC1/ARC1/CELL1。`Rc: !Send`（非原子计数）；`Arc: Send + Sync` 当 $T: \text{Send} + \text{Sync}$；`Cell: !Sync`（内部可变无同步）。
 
 ## 权威来源对齐
 >
@@ -134,7 +134,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**Def SEND1（Send）**：类型 $\tau$ 满足 **Send** 当且仅当：将 $\tau$ 的值从线程 $t_1$ 转移到线程 $t_2$ 后，$t_1$ 不再持有或访问该值，且 $t_2$ 上的使用满足单线程内存安全与 [borrow_checker_proof](./borrow_checker_proof.md) 借用规则。形式化谓词：
+**Def SEND1（Send）**：类型 $\tau$ 满足 **Send** 当且仅当：将 $\tau$ 的值从线程 $t_1$ 转移到线程 $t_2$ 后，$t_1$ 不再持有或访问该值，且 $t_2$ 上的使用满足单线程内存安全与 [borrow_checker_proof](./10_borrow_checker_proof.md) 借用规则。形式化谓词：
 
 $$\text{Send}(\tau) \leftrightarrow \forall v:\tau,\, t_1,\, t_2.\ \text{SafeTransfer}(v, t_1, t_2)$$
 
@@ -198,15 +198,15 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 *证明*：由 Rust 标准库定义；多线程共享 `&T` 等价于将 `&T` 作为值跨线程传递，故 Sync 与 &T: Send 等价。∎
 
-**定理 SEND-T1（跨线程转移安全）**：若 $T : \text{Send}$，则将 $v:T$ 从线程 $t_1$ 转移至 $t_2$ 后，程序在 [borrow_checker_proof](./borrow_checker_proof.md) 与 [ownership_model](./ownership_model.md) 意义下保持内存安全与数据竞争自由。
+**定理 SEND-T1（跨线程转移安全）**：若 $T : \text{Send}$，则将 $v:T$ 从线程 $t_1$ 转移至 $t_2$ 后，程序在 [borrow_checker_proof](./10_borrow_checker_proof.md) 与 [ownership_model](./10_ownership_model.md) 意义下保持内存安全与数据竞争自由。
 
-*证明*：由 Def SEND1，转移后 $t_1$ 不再访问 $v$，故无跨线程别名；$t_2$ 上单线程使用满足 ownership/borrow 规则。与 [borrow_checker_proof](./borrow_checker_proof.md) 定理 T1 数据竞争自由一致。∎
+*证明*：由 Def SEND1，转移后 $t_1$ 不再访问 $v$，故无跨线程别名；$t_2$ 上单线程使用满足 ownership/borrow 规则。与 [borrow_checker_proof](./10_borrow_checker_proof.md) 定理 T1 数据竞争自由一致。∎
 
 **定理 SYNC-T1（跨线程共享引用安全）**：若 $T : \text{Sync}$，则多线程同时持有 $\&T$ 不引入数据竞争。
 
-*证明*：由 Def SYNC1 与 SYNC-L1；$\&T : \text{Send}$ 保证引用可跨线程传递，且不可变引用允许多读者、无写，故无数据竞争。与 [async_state_machine](./async_state_machine.md) 定理 6.2 中 Sync 约束一致。∎
+*证明*：由 Def SYNC1 与 SYNC-L1；$\&T : \text{Send}$ 保证引用可跨线程传递，且不可变引用允许多读者、无写，故无数据竞争。与 [async_state_machine](./10_async_state_machine.md) 定理 6.2 中 Sync 约束一致。∎
 
-**定理 SEND-SYNC-T1（spawn 数据竞争自由）**：若闭包类型 $F$ 满足 $F : \text{Send} + \text{'static}$，则 `thread::spawn(|| body)` 与 [async_state_machine](./async_state_machine.md) Def SPAWN1、定理 SPAWN-T1 一致，跨线程无数据竞争。
+**定理 SEND-SYNC-T1（spawn 数据竞争自由）**：若闭包类型 $F$ 满足 $F : \text{Send} + \text{'static}$，则 `thread::spawn(|| body)` 与 [async_state_machine](./10_async_state_machine.md) Def SPAWN1、定理 SPAWN-T1 一致，跨线程无数据竞争。
 
 *证明*：SPAWN1 要求闭包 `Send + 'static`；由 SEND-T1，捕获的 $T$ 转移至新线程后原线程不再访问，故满足数据竞争自由。∎
 
@@ -244,10 +244,10 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 
 | 反例 | 违反 | 结果 | 形式化对应 |
 | :--- | :--- | :--- | :--- |
-| `Rc<T>` 跨线程传递 | Send | 编译错误；若用 unsafe 则多线程持 Rc 导致计数竞态 | Def SEND1；[ownership_model](./ownership_model.md) Def RC1 |
-| `Cell<T>` 多线程共享 `&Cell<T>` | Sync | 编译错误；内部可变无同步，共享即数据竞争 | Def SYNC1；[ownership_model](./ownership_model.md) Def CELL1 |
-| 非 Send 闭包传入 `thread::spawn` | Send | 编译错误 | SPAWN1；[async_state_machine](./async_state_machine.md) |
-| 非 Send Future 在多线程运行时 poll | Send | 编译错误或 UB | [async_state_machine](./async_state_machine.md) 定理 6.2 |
+| `Rc<T>` 跨线程传递 | Send | 编译错误；若用 unsafe 则多线程持 Rc 导致计数竞态 | Def SEND1；[ownership_model](./10_ownership_model.md) Def RC1 |
+| `Cell<T>` 多线程共享 `&Cell<T>` | Sync | 编译错误；内部可变无同步，共享即数据竞争 | Def SYNC1；[ownership_model](./10_ownership_model.md) Def CELL1 |
+| 非 Send 闭包传入 `thread::spawn` | Send | 编译错误 | SPAWN1；[async_state_machine](./10_async_state_machine.md) |
+| 非 Send Future 在多线程运行时 poll | Send | 编译错误或 UB | [async_state_machine](./10_async_state_machine.md) 定理 6.2 |
 | `&T` 跨线程但 `T: !Sync` | Sync | 编译错误 | SYNC-L1 |
 
 ---
@@ -262,7 +262,7 @@ Def SEND1, SYNC1
 ├── SEND-T1: Send ⇒ 跨线程转移安全（与 borrow T1 一致）
 ├── SYNC-T1: Sync ⇒ 跨线程共享 &T 无数据竞争
 └── SEND-SYNC-T1: spawn(Send + 'static) ⇒ 数据竞争自由（与 SPAWN-T1 一致）
-    前提: [async_state_machine](./async_state_machine.md) Def SPAWN1
+    前提: [async_state_machine](./10_async_state_machine.md) Def SPAWN1
 ```
 
 ---
@@ -271,10 +271,10 @@ Def SEND1, SYNC1
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- **thread::spawn**：[async_state_machine](./async_state_machine.md) Def SPAWN1、定理 SPAWN-T1。闭包需 `Send + 'static`；由 SEND-T1 保证转移后数据竞争自由。
-- **Future 并发**：[async_state_machine](./async_state_machine.md) 定理 6.2。多 Future 并发 poll 时，若各 Future 为 Send/Sync，则并发执行数据竞争自由；Send/Sync 语义与本篇 Def SEND1/SYNC1 一致。
-- **Arc**：[ownership_model](./ownership_model.md) Def ARC1。`Arc<T>: Send + Sync` 当 $T: \text{Send} + \text{Sync}$；跨线程共享 Arc 依赖 Sync。
-- **通道 / Mutex**：[borrow_checker_proof](./borrow_checker_proof.md) Def CHAN1、MUTEX1，定理 CHAN-T1、MUTEX-T1。发送端类型需 Send；与 SEND-T1 一致。
+- **thread::spawn**：[async_state_machine](./10_async_state_machine.md) Def SPAWN1、定理 SPAWN-T1。闭包需 `Send + 'static`；由 SEND-T1 保证转移后数据竞争自由。
+- **Future 并发**：[async_state_machine](./10_async_state_machine.md) 定理 6.2。多 Future 并发 poll 时，若各 Future 为 Send/Sync，则并发执行数据竞争自由；Send/Sync 语义与本篇 Def SEND1/SYNC1 一致。
+- **Arc**：[ownership_model](./10_ownership_model.md) Def ARC1。`Arc<T>: Send + Sync` 当 $T: \text{Send} + \text{Sync}$；跨线程共享 Arc 依赖 Sync。
+- **通道 / Mutex**：[borrow_checker_proof](./10_borrow_checker_proof.md) Def CHAN1、MUTEX1，定理 CHAN-T1、MUTEX-T1。发送端类型需 Send；与 SEND-T1 一致。
 
 ---
 
@@ -287,7 +287,7 @@ Def SEND1, SYNC1
 | 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/04_mind_map_collection.md) §5、C06；安全可判定机制节点 |
 | 概念多维矩阵 | [README §六篇并表](README.md#formal_methods-六篇并表) 第 6 行；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./10_safe_decidable_mechanisms_and_formal_methods_plan.md) §3.1 |
 | 决策树 | [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md) § Send/Sync；[06_boundary_analysis](../software_design_theory/03_execution_models/06_boundary_analysis.md) 并发选型 |
-| 推理证明树 | [PROOF_INDEX](../PROOF_INDEX.md)；本篇 § 公理-定理证明树 |
+| 推理证明树 | [PROOF_INDEX](../10_proof_index.md)；本篇 § 公理-定理证明树 |
 
 *依据*：[HIERARCHICAL_MAPPING_AND_SUMMARY](../10_hierarchical_mapping_and_summary.md) § 文档↔思维表征。
 
@@ -299,7 +299,7 @@ Def SEND1, SYNC1
 
 - [Ferrocene FLS Ch. 17.1 Send and Sync](https://spec.ferrocene.dev/concurrency.html#send-and-sync)
 - [RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md) — Arc、Send/Sync 与松弛内存
-- [async_state_machine](./async_state_machine.md) — Future 与 Send/Sync 约束、定理 6.2
+- [async_state_machine](./10_async_state_machine.md) — Future 与 Send/Sync 约束、定理 6.2
 - [DESIGN_MECHANISM_RATIONALE](../10_design_mechanism_rationale.md) § Send/Sync — 设计理由与决策树
 
 ---
@@ -351,7 +351,7 @@ Def SEND1, SYNC1
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

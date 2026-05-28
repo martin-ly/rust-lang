@@ -38,6 +38,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 对标概览
 >
@@ -48,18 +49,18 @@
 | Ch 1. 开始 | 01_learning/README.md | ✅ 已覆盖 | 100% |
 | Ch 2. 猜数字游戏 | examples/ | ✅ 已覆盖 | 100% |
 | Ch 3. 常见编程概念 | C03/crates/ | ✅ 已覆盖 | 100% |
-| Ch 4. 所有权 | ownership_model.md, C01/ | ✅ 已覆盖 | 100% |
+| Ch 4. 所有权 | 10_ownership_model.md, C01/ | ✅ 已覆盖 | 100% |
 | Ch 5. 结构体 | C02/type_system/ | ✅ 已覆盖 | 100% |
 | Ch 6. 枚举与模式匹配 | C03/crates/ | ✅ 已覆盖 | 100% |
 | Ch 7. 包与模块 | C02/module_system/ | ✅ 已覆盖 | 100% |
 | Ch 8. 集合 | C08/algorithms_data_structures/ | ✅ 已覆盖 | 100% |
 | Ch 9. 错误处理 | 10_02_error_handling_cheatsheet.md | ✅ 已覆盖 | 100% |
-| Ch 10. 泛型 | type_system_foundations.md | ✅ 已覆盖 | 100% |
-| Ch 11. Trait | trait_system_formalization.md | ✅ 已覆盖 | 100% |
+| Ch 10. 泛型 | 10_type_system_foundations.md | ✅ 已覆盖 | 100% |
+| Ch 11. Trait | 10_trait_system_formalization.md | ✅ 已覆盖 | 100% |
 | Ch 12. 测试 | 05_testing_coverage_guide.md | ✅ 已覆盖 | 100% |
 | Ch 13. 迭代器与闭包 | C03/functional_features/ | ✅ 已覆盖 | 100% |
 | Ch 14. Cargo | C02/cargo_package_management/ | ✅ 已覆盖 | 100% |
-| Ch 15. 智能指针 | ownership_model.md Def 4.1-4.5 | ✅ 已覆盖 | 100% |
+| Ch 15. 智能指针 | 10_ownership_model.md Def 4.1-4.5 | ✅ 已覆盖 | 100% |
 | Ch 16. 并发 | C05/threads_concurrency/ | ✅ 已覆盖 | 100% |
 | Ch 17. 面向对象 | 05_design_patterns_usage_guide.md | ✅ 已覆盖 | 100% |
 | Ch 18. 模式匹配 | C03/pattern_matching/ | ✅ 已覆盖 | 100% |
@@ -80,8 +81,8 @@
 | Book 主题 | 本项目位置 | 形式化内容 | 代码示例 |
 | :--- | :--- | :--- | :--- |
 | 安装与开始 | docs/01_learning/ | - | ✅ |
-| 变量与可变性 | ownership_model.md §规则1-4 | Def 1.1-1.5 | ✅ |
-| 数据类型 | type_system_foundations.md §基本类型规则 | 规则1-3 | ✅ |
+| 变量与可变性 | 10_ownership_model.md §规则1-4 | Def 1.1-1.5 | ✅ |
+| 数据类型 | 10_type_system_foundations.md §基本类型规则 | 规则1-3 | ✅ |
 | 函数 | C03/control_flow_functions/ | - | ✅ |
 | 注释与文档 | docs/06_toolchain/rustdoc_advanced.md | - | ✅ |
 
@@ -95,8 +96,8 @@
 
 | Book 主题 | 本项目位置 | 形式化定理 | 差距分析 |
 | :--- | :--- | :--- | :--- |
-| 什么是所有权 | ownership_model.md §所有权规则 | 定理6, 定理7 | 无 |
-| 引用与借用 | borrow_checker_proof.md | 定理T-BR1, T-BR2 | 无 |
+| 什么是所有权 | 10_ownership_model.md §所有权规则 | 定理6, 定理7 | 无 |
+| 引用与借用 | 10_borrow_checker_proof.md | 定理T-BR1, T-BR2 | 无 |
 | 切片 | C01/slice_semantics.md | - | 需补充形式化 |
 
 **对齐检查清单**:
@@ -115,10 +116,10 @@
 
 | Book 主题 | 本项目位置 | 形式化内容 | 差距分析 |
 | :--- | :--- | :--- | :--- |
-| 泛型基础 | type_system_foundations.md §系统F | Def 4.1-4.4 | 无 |
-| Trait 基础 | trait_system_formalization.md | Def TRAIT1-3 | 无 |
-| 生命周期标注 | lifetime_formalization.md | Def LF1-3, 定理LF-T1 | 无 |
-| Trait Bound | trait_system_formalization.md | Def BOUND1 | 无 |
+| 泛型基础 | 10_type_system_foundations.md §系统F | Def 4.1-4.4 | 无 |
+| Trait 基础 | 10_trait_system_formalization.md | Def TRAIT1-3 | 无 |
+| 生命周期标注 | 10_lifetime_formalization.md | Def LF1-3, 定理LF-T1 | 无 |
+| Trait Bound | 10_trait_system_formalization.md | Def BOUND1 | 无 |
 
 **对齐检查清单**:
 
@@ -136,11 +137,11 @@
 
 | Book 主题 | 本项目位置 | 形式化定义 | Rust 1.94 更新 |
 | :--- | :--- | :--- | :--- |
-| `Box<T>` | ownership_model.md Def 4.1 | BOX1, BOX-T1 | - |
-| `Rc<T>` | ownership_model.md Def 4.2 | RC1, RC-T1 | - |
-| `RefCell<T>` | ownership_model.md Def 4.4 | CELL1 | ✅ RefCell::try_map |
-| `Arc<T>` | ownership_model.md Def 4.3 | ARC1, ARC-T1 | - |
-| `Weak<T>` | ownership_model.md | WEAK1 | - |
+| `Box<T>` | 10_ownership_model.md Def 4.1 | BOX1, BOX-T1 | - |
+| `Rc<T>` | 10_ownership_model.md Def 4.2 | RC1, RC-T1 | - |
+| `RefCell<T>` | 10_ownership_model.md Def 4.4 | CELL1 | ✅ RefCell::try_map |
+| `Arc<T>` | 10_ownership_model.md Def 4.3 | ARC1, ARC-T1 | - |
+| `Weak<T>` | 10_ownership_model.md | WEAK1 | - |
 
 **Rust 1.94 新增对齐**:
 
@@ -157,7 +158,7 @@
 | 线程创建 | C05/threads_concurrency/ | - | 100% |
 | 消息传递 | C05/threads_concurrency/ | - | 100% |
 | 共享状态 | C05/threads_concurrency/ | T-MUTEX1 | 100% |
-| Send/Sync | send_sync_formalization.md | Def SEND1, SYNC1 | 100% |
+| Send/Sync | 10_send_sync_formalization.md | Def SEND1, SYNC1 | 100% |
 
 **对齐检查清单**:
 
@@ -232,12 +233,12 @@ Week 3
 
 | Book 章节 | 快速跳转 |
 | :--- | :--- |
-| Ch 4.1 所有权 | [ownership_model.md](formal_methods/ownership_model.md) |
-| Ch 4.2 引用 | [borrow_checker_proof.md](formal_methods/borrow_checker_proof.md) |
-| Ch 10 泛型 | [type_system_foundations.md](type_theory/type_system_foundations.md) |
-| Ch 11 Trait | [trait_system_formalization.md](type_theory/trait_system_formalization.md) |
-| Ch 15 智能指针 | [ownership_model.md §Def 4.1-4.5](formal_methods/ownership_model.md) |
-| Ch 16 并发 | [send_sync_formalization.md](formal_methods/send_sync_formalization.md) |
+| Ch 4.1 所有权 | [10_ownership_model.md](formal_methods/10_ownership_model.md) |
+| Ch 4.2 引用 | [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) |
+| Ch 10 泛型 | [10_type_system_foundations.md](type_theory/10_type_system_foundations.md) |
+| Ch 11 Trait | [10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) |
+| Ch 15 智能指针 | [10_ownership_model.md §Def 4.1-4.5](formal_methods/10_ownership_model.md) |
+| Ch 16 并发 | [10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) |
 
 ---
 
@@ -282,7 +283,7 @@ Week 3
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -160,11 +160,11 @@
 
 **Def CO1（编译器优化保持性）**：设优化 $O$ 将程序 $P$ 变换为 $P'$。若 $\Gamma \vdash P : \tau \Rightarrow \Gamma \vdash P' : \tau$，则称 $O$ **保持类型**。
 
-**Axiom CO1**：Rust 编译器优化（内联、循环优化、死代码消除等）在默认安全配置下保持 [type_system_foundations](../type_theory/type_system_foundations.md) 定理 T2（保持性）；优化不改变良型程序的类型。
+**Axiom CO1**：Rust 编译器优化（内联、循环优化、死代码消除等）在默认安全配置下保持 [type_system_foundations](../type_theory/10_type_system_foundations.md) 定理 T2（保持性）；优化不改变良型程序的类型。
 
 **定理 CO-T1（优化与类型安全）**：若 $P$ 良型且通过 `cargo build --release`，则优化后的 $P'$ 仍良型；由 type_system T2、编译器实现保证。
 
-*证明*：由 [type_system_foundations](../type_theory/type_system_foundations.md) 保持性；MIR 优化在类型检查之后；故优化保持类型。∎
+*证明*：由 [type_system_foundations](../type_theory/10_type_system_foundations.md) 保持性；MIR 优化在类型检查之后；故优化保持类型。∎
 
 **引理 CO-L1（优化阶段顺序）**：Rust 编译流程为：解析 → 宏展开 → 类型检查 → MIR 生成 → 优化 → 代码生成；优化在类型检查之后，故优化输入必良型。
 
@@ -591,8 +591,8 @@ fn dead_code_example() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- **类型系统基础**：见 [type_system_foundations.md](../type_theory/type_system_foundations.md)。类型与单态化直接影响内联与死代码消除；泛型与 `impl Trait` 的 codegen 可在此验证。
-- **Trait 系统**：见 [trait_system_formalization.md](../type_theory/trait_system_formalization.md)。动态分发 (`dyn`) vs 静态分发对 `#[inline]` 与优化级别敏感，可纳入对照实验。
+- **类型系统基础**：见 [10_type_system_foundations.md](../type_theory/10_type_system_foundations.md)。类型与单态化直接影响内联与死代码消除；泛型与 `impl Trait` 的 codegen 可在此验证。
+- **Trait 系统**：见 [10_trait_system_formalization.md](../type_theory/10_trait_system_formalization.md)。动态分发 (`dyn`) vs 静态分发对 `#[inline]` 与优化级别敏感，可纳入对照实验。
 
 ### 与实验研究的集成
 >
@@ -679,7 +679,7 @@ fn dead_code_example() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

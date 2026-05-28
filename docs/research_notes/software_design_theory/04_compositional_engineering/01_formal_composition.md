@@ -117,15 +117,15 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 >
 > **[来源: Rust Official Docs]**
 
-**定理 CE-T1（组合保持内存安全）**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
+**定理 CE-T1（组合保持内存安全）**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/10_ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
 
 *证明*：见 [02_effectiveness_proofs](./02_effectiveness_proofs.md) CE-T1；归纳基：单模块；归纳步：添加 $M_n$ 时，值传递/所有权转移符合 Def 1.3 接口一致；无新分配模式违反规则。∎
 
-**定理 CE-T2（组合保持数据竞争自由）**：若各模块满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 定理 T1，且跨线程传递仅 Send/Sync、共享仅 Sync，则组合保持数据竞争自由。
+**定理 CE-T2（组合保持数据竞争自由）**：若各模块满足 [borrow_checker_proof](../../formal_methods/10_borrow_checker_proof.md) 定理 T1，且跨线程传递仅 Send/Sync、共享仅 Sync，则组合保持数据竞争自由。
 
 *证明*：见 [02_effectiveness_proofs](./02_effectiveness_proofs.md) CE-T2；Send/Sync 为结构性质；跨模块边界约束不变。∎
 
-**定理 CE-T3（组合保持类型安全）**：若各模块良型，且 [type_system_foundations](../../type_theory/type_system_foundations.md) 进展性 T1、保持性 T2、类型安全 T3 成立，则组合程序良型且类型安全。
+**定理 CE-T3（组合保持类型安全）**：若各模块良型，且 [type_system_foundations](../../type_theory/10_type_system_foundations.md) 进展性 T1、保持性 T2、类型安全 T3 成立，则组合程序良型且类型安全。
 
 *证明*：见 [02_effectiveness_proofs](./02_effectiveness_proofs.md) CE-T3；类型环境合并无冲突；跨模块调用保持类型。∎
 
@@ -258,8 +258,8 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-- [type_system_foundations](../../type_theory/type_system_foundations.md)
-- [trait_system_formalization](../../type_theory/trait_system_formalization.md)
+- [type_system_foundations](../../type_theory/10_type_system_foundations.md)
+- [trait_system_formalization](../../type_theory/10_trait_system_formalization.md)
 
 ---
 
@@ -305,7 +305,7 @@ fn main() {
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

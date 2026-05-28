@@ -170,10 +170,10 @@ mindmap
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-- [所有权形式化定义](./formal_methods/ownership_model.md)
-- [借用检查器证明](./formal_methods/borrow_checker_proof.md)
-- [生命周期形式化](./formal_methods/lifetime_formalization.md)
-- [Send/Sync形式化](./formal_methods/send_sync_formalization.md)
+- [所有权形式化定义](./formal_methods/10_ownership_model.md)
+- [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
+- [生命周期形式化](./formal_methods/10_lifetime_formalization.md)
+- [Send/Sync形式化](./formal_methods/10_send_sync_formalization.md)
 
 ---
 
@@ -211,7 +211,7 @@ mindmap
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 

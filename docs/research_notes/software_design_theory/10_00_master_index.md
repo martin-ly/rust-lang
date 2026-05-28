@@ -73,14 +73,14 @@
 
 | 依赖 | 文档 |
 | :--- | :--- |
-| 所有权 | [ownership_model](../formal_methods/ownership_model.md) |
-| 借用 | [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) |
-| 生命周期 | [lifetime_formalization](../formal_methods/lifetime_formalization.md) |
-| 类型系统 | [type_system_foundations](../type_theory/type_system_foundations.md) |
-| 型变 | [variance_theory](../type_theory/variance_theory.md) |
-| 异步 | [async_state_machine](../formal_methods/async_state_machine.md) |
-| Pin | [pin_self_referential](../formal_methods/pin_self_referential.md) |
-| Trait | [trait_system_formalization](../type_theory/trait_system_formalization.md) |
+| 所有权 | [ownership_model](../formal_methods/10_ownership_model.md) |
+| 借用 | [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) |
+| 生命周期 | [lifetime_formalization](../formal_methods/10_lifetime_formalization.md) |
+| 类型系统 | [type_system_foundations](../type_theory/10_type_system_foundations.md) |
+| 型变 | [variance_theory](../type_theory/10_variance_theory.md) |
+| 异步 | [async_state_machine](../formal_methods/10_async_state_machine.md) |
+| Pin | [pin_self_referential](../formal_methods/10_pin_self_referential.md) |
+| Trait | [trait_system_formalization](../type_theory/10_trait_system_formalization.md) |
 
 ---
 
@@ -273,7 +273,7 @@
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

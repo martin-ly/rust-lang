@@ -106,7 +106,7 @@
 本指南为 **Rustonomicon** 的补充与项目内导航，帮助在系统学习 unsafe Rust 时快速定位到本项目的相关模块和示例。
 
 **形式化引用**：T-OW3 (内存安全框架)、T-BR1 (数据竞争自由)。
-详见 [ownership_model](../research_notes/formal_methods/ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
+详见 [ownership_model](../research_notes/formal_methods/10_ownership_model.md)、[borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md)、[THEOREM_RUST_EXAMPLE_MAPPING](../research_notes/10_theorem_rust_example_mapping.md)。
 
 ---
 
@@ -955,8 +955,8 @@ Miri 可以检测：
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - **理论体系与安全论证**: [10_safe_unsafe_comprehensive_analysis.md](../research_notes/10_safe_unsafe_comprehensive_analysis.md) - 安全与非安全边界、理论四层
-- **借用检查器证明**: [borrow_checker_proof.md](../research_notes/formal_methods/borrow_checker_proof.md) - 形式化证明内存安全
-- **所有权模型**: [ownership_model.md](../research_notes/formal_methods/ownership_model.md) - 所有权系统形式化
+- **借用检查器证明**: [10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) - 形式化证明内存安全
+- **所有权模型**: [10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) - 所有权系统形式化
 - **safe/unsafe 边界矩阵**: [10_safe_unsafe_matrix.md](../research_notes/software_design_theory/05_boundary_system/10_safe_unsafe_matrix.md)
 
 ---
@@ -984,8 +984,8 @@ Miri 可以检测：
 | **How Safe and Unsafe Interact** | [safe-unsafe-meaning](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html) | § 安全抽象原则 |
 | **What Unsafe Can Do** | [what-unsafe-does](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) | § 核心 Unsafe 操作、§ UB 案例 |
 | **Working with Unsafe** | [working-with-unsafe](https://doc.rust-lang.org/nomicon/working-with-unsafe.html) | § 安全抽象原则、§ 推荐学习路径 |
-| **Data Layout** | [data](https://doc.rust-lang.org/nomicon/data.html) | 本项目 [type_system](../02_reference/quick_reference/type_system.md) |
-| **Ownership** | [ownership](https://doc.rust-lang.org/nomicon/ownership.html) | [ownership_model](../research_notes/formal_methods/ownership_model.md)、[ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
+| **Data Layout** | [data](https://doc.rust-lang.org/nomicon/data.html) | 本项目 [type_system](../02_reference/quick_reference/02_type_system.md) |
+| **Ownership** | [ownership](https://doc.rust-lang.org/nomicon/ownership.html) | [ownership_model](../research_notes/formal_methods/10_ownership_model.md)、[ownership_cheatsheet](../02_reference/quick_reference/02_ownership_cheatsheet.md) |
 | **Subtyping and Variance** | [subtyping](https://doc.rust-lang.org/nomicon/subtyping.html) | [VARIANCE_CONCEPT_MINDMAP](../research_notes/formal_methods/10_variance_concept_mindmap.md) |
 | **Type Conversions / Transmutes** | [transmutes](https://doc.rust-lang.org/nomicon/transmutes.html) | § UB 案例 4 类型混淆 |
 | **Uninitialized Memory** | [uninitialized](https://doc.rust-lang.org/nomicon/uninitialized.html) | § UB 案例 6 越界、§ Miri |

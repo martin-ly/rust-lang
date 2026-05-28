@@ -463,7 +463,7 @@ tx.commit().await?;
 
 - [Diesel ORM 架构](./03_diesel_architecture.md)
 - [Reqwest HTTP 客户端架构](./10_reqwest_architecture.md)
-- [类型系统与所有权](../../../../concept/01_foundation/04_type_system.md)
+- [类型系统与所有权](../../../../concept/01_foundation/04_02_type_system.md)
 
 ---
 

@@ -6,7 +6,7 @@
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
-> 内容已整合至： 10_performance_benchmarks.md (研究笔记)、PERFORMANCE_TUNING_GUIDE.md (指南)
+> 内容已整合至： 10_performance_benchmarks.md (研究笔记)、05_performance_tuning_guide.md (指南)
 
 ## 知识结构思维导图
 >
@@ -44,7 +44,7 @@ mindmap
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
 | 本README | 10_performance_benchmarks.md (研究笔记) | 索引/重定向 |
-| 本README | PERFORMANCE_TUNING_GUIDE.md (指南) | 索引/重定向 |
+| 本README | 05_performance_tuning_guide.md (指南) | 索引/重定向 |
 
 [返回主索引](../../00_master_index.md)
 
@@ -313,13 +313,13 @@ criterion_main!(benches);
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 编译器特性 | 编译器优化选项 | [../../06_toolchain_ecosystem/01_compiler/README.md](../../06_toolchain_ecosystem/01_compiler/README.md) |
-| 性能调优指南 | 实用优化技巧 | PERFORMANCE_TUNING_GUIDE.md (指南) |
+| 性能调优指南 | 实用优化技巧 | 05_performance_tuning_guide.md (指南) |
 
 ### 形式化方法
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Send/Sync 形式化 | 并发安全形式化 | send_sync_formalization.md (研究笔记) |
+| Send/Sync 形式化 | 并发安全形式化 | 10_send_sync_formalization.md (研究笔记) |
 
 ---
 

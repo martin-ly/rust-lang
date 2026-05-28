@@ -151,7 +151,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 >
 > **[来源: Rust Official Docs]**
 
-由 [ownership_model](../../../formal_methods/ownership_model.md) T2，`build(self)` 消费 $B$ 后 $B$ 无效，无双重使用。
+由 [ownership_model](../../../formal_methods/10_ownership_model.md) T2，`build(self)` 消费 $B$ 后 $B$ 无效，无双重使用。
 
 **证明**：
 
@@ -612,7 +612,7 @@ graph LR
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
 

@@ -94,7 +94,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文件**: [type_system.md](./type_system.md)
+**文件**: [02_type_system.md](./02_type_system.md)
 
 **内容**:
 
@@ -115,7 +115,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文件**: [ownership_cheatsheet.md](./ownership_cheatsheet.md)
+**文件**: [02_ownership_cheatsheet.md](./02_ownership_cheatsheet.md)
 
 **内容**:
 

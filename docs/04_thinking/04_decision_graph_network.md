@@ -1093,7 +1093,7 @@ graph TD
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - [04_proof_graph_network.md](./04_proof_graph_network.md) - 证明图网详细文档
-- [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
+- [10_proof_index.md](../research_notes/10_proof_index.md) - 形式化证明索引
 
 ### 分布式与工作流决策树（formal_methods 独立）
 
@@ -1191,7 +1191,7 @@ ust
 
 - Rust 1.94 迁移指南
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---
 
