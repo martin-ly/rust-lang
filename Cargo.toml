@@ -31,6 +31,7 @@ exclude = [
 [workspace.package]
 edition = "2024"
 rust-version = "1.96.0"
+license = "MIT OR Apache-2.0"
 
 [profile.release]
 
