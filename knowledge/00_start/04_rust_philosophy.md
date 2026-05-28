@@ -1,17 +1,14 @@
 # Rust 设计哲学
->
+
 > **相关概念**: [所有权](../../concept/01_foundation/01_ownership.md)
-
 > **Bloom 层级**: 理解
-
 > **理解 Rust 为什么是这样设计的**
 > **预计时间**: 30 分钟
 > **权威来源**: [Rust Language FAQ](https://www.rust-lang.org/faq), [Rust Book Ch00](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
->
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 设计决策来源标注、零成本抽象学术引用、内存安全形式化语义来源 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 完成本章后，你将能够：

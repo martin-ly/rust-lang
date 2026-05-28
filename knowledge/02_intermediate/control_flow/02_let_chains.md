@@ -1,16 +1,15 @@
 # Rust 2024 Edition `let chains` 深度专题
->
+
 > **相关概念**: [变量绑定](../../../concept/01_foundation/07_control_flow.md)
-
 > **Bloom 层级**: 理解
-
 > **权威来源**: [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html), [Rust Reference — Let expressions](https://doc.rust-lang.org/reference/statements.html#let-statements), [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html)
->
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2497 设计决策来源标注、跨语言对比矩阵（Haskell ViewPatterns / Swift if let / C++17 structured binding） [来源: Authority Source Sprint Batch 8]
 
 ## 概述
 
-`let chains` 是 Rust 2024 Edition 中稳定化的重要特性 [来源: RFC 2497 — if-let-chains / 2022; Rust Reference — Let expressions / 2025; 核心设计决策: 允许在 `if` 和 `while` 条件中将 `let` 绑定与普通布尔表达式链式组合，使用短路求值语义，大幅简化嵌套的 `if let` 代码]，允许在 `if` 和 `while` 条件中将 `let` 绑定与普通布尔表达式链式组合，大幅简化嵌套的 `if let` 代码。
+`let chains` 是 Rust 2024 Edition 中稳定化的重要特性 [来源: RFC 2497 — if-let-chains / 2022; Rust Reference — Let expressions / 2025; 核心设计决策:
+允许在 `if` 和 `while` 条件中将 `let` 绑定与普通布尔表达式链式组合，使用短路求值语义，大幅简化嵌套的 `if let` 代码]，
+允许在 `if` 和 `while` 条件中将 `let` 绑定与普通布尔表达式链式组合，大幅简化嵌套的 `if let` 代码。
 
 ## 语法
 >
@@ -33,7 +32,7 @@ if let Some(x) = opt && x > 0 && let Ok(y) = parse(x) {
 ```
 
 ## 核心优势
->
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **减少嵌套层级**：代码更扁平，避免"右漂移"
@@ -42,11 +41,11 @@ if let Some(x) = opt && x > 0 && let Ok(y) = parse(x) {
 4. **`match` arm guards**：结合模式守卫进行复杂条件判断
 
 ## 重要语义差异
->
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### `if let chains` vs `while let chains`
->
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **`if let chains`**：条件不满足时跳过当前代码块，不影响外层循环
@@ -76,11 +75,11 @@ while let Some(packet) = stream.next()
 ```
 
 ## 完整示例
->
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 示例 1：解析并验证数值
->
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -98,7 +97,7 @@ pub fn parse_and_validate(input: Option<&str>) -> Result<i32, &'static str> {
 ```
 
 ### 示例 2：多模式组合
->
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -117,7 +116,7 @@ pub fn combine_options(a: Option<i32>, b: Option<i32>, c: Result<i32, &str>) -> 
 ```
 
 ### 示例 3：配置解析
->
+
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust,ignore
@@ -144,7 +143,7 @@ pub fn from_args(
 ```
 
 ### 示例 4：match 守卫
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -161,7 +160,7 @@ pub fn classify_value(value: Result<Option<&str>, &str>) -> &'static str {
 ```
 
 ## 适用场景
->
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **参数验证**：多个输入需要同时满足解析和范围条件
@@ -170,7 +169,7 @@ pub fn classify_value(value: Result<Option<&str>, &str>) -> &'static str {
 - **命令解析**：CLI 参数的多阶段验证
 
 ### 模块 3: 概念依赖图
->
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -212,11 +211,11 @@ graph TD
 ---
 
 ### 模块 7: 思维表征
->
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 表征 A: let chains 扁平化效果对比
->
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -260,7 +259,7 @@ if let Some(x) = opt
 ```
 
 ### 表征 B: 传统 vs let chains 复杂度矩阵
->
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景 | 嵌套 if let | let chains | 代码行数 | 可读性 |
@@ -273,7 +272,7 @@ if let Some(x) = opt
 ---
 
 ## 📚 模块 8: 国际化对齐
->
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 来源 | 类型 | 说明 |

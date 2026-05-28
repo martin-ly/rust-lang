@@ -1,20 +1,17 @@
 # `if let` Guards on Match Arms（Rust 1.95.0）
->
+
 > **相关概念**: [变量绑定](../../../concept/01_foundation/07_control_flow.md)
-
 > **Bloom 层级**: 理解
-
 > **稳定版本**: Rust 1.95.0 (2026-04-16)
 > **关联特性**: `let chains`（Rust 1.88.0, Edition 2024）
 > **前置知识**: 模式匹配（match）、if let、match guards
 > **权威来源**: [Rust Reference: Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html), [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/), [RFC 2294: if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html)
->
 > **权威来源对齐变更日志**: 2026-05-19 新增 if-let-guard RFC 设计决策来源标注、match 守卫形式化语义引用 [来源: Authority Source Sprint Batch 8]
 
 ---
 
 ## 目录
->
+
 > **[来源: Rust Official Docs]**
 
 - [`if let` Guards on Match Arms（Rust 1.95.0）](#if-let-guards-on-match-armsrust-1950)
@@ -47,7 +44,7 @@
 ---
 
 ## 一、什么是 `if let` guards
->
+
 > **[来源: Rust Official Docs]**
 
 `if let` guards 允许在 `match` 表达式的 arm guard（守卫）中使用 `if let` 进行模式匹配。

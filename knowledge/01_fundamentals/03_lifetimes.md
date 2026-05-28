@@ -1,9 +1,7 @@
 # Rust 生命周期 (Lifetimes)
->
+
 > **相关概念**: [生命周期](../../concept/01_foundation/03_lifetimes.md)
-
 > **Bloom 层级**: 理解
-
 > **📌 简介**: 生命周期是 Rust 借用检查器的核心机制。它不是运行时检查，而是编译期对引用有效范围的**形式化推理**。通过将每个引用标注为一个"生命阶段"，Rust 编译器在编译阶段即可证明：任何引用在被使用时，其指向的数据必然存活。
 >
 > **⏱️ 预计学习时间**: 60-90 分钟
@@ -12,7 +10,7 @@
 ---
 
 ## 🎯 学习目标
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 完成本章学习后，你将能够：
@@ -26,7 +24,7 @@
 ---
 
 ## 📋 先决条件
->
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **所有权** — 值的所有权转移与作用域（`01_fundamentals/ownership.md`）
@@ -36,11 +34,11 @@
 ---
 
 ## 🧠 核心概念
->
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 模块 1: 概念定义
->
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 1.1 直观定义

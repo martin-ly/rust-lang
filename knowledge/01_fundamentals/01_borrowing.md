@@ -1,5 +1,5 @@
 # Rust 借用与引用 (Borrowing and References)
->
+
 > **层次定位**: L1 基础概念 / 借用子域
 > **前置依赖**: [knowledge 所有权](04_ownership.md)
 > **后置延伸**: [knowledge Trait](../02_intermediate/06_traits.md) · [concept L1 借用](../../concept/01_foundation/02_borrowing.md)
@@ -7,7 +7,7 @@
 > **定理链编号**: T-010 借用唯一性 → T-011 生命周期包含
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 借用与引用 (Borrowing and References)](#rust-借用与引用-borrowing-and-references)

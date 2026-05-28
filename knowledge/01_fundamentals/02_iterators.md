@@ -1,17 +1,14 @@
 # 迭代器 (Iterators)
->
+
 > **相关概念**: [迭代器](../../concept/02_intermediate/15_iterator_patterns.md)
-
 > **Bloom 层级**: 理解
-
 > **版本**: Rust 1.96.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
 > **特性**: `array_windows`, `Peekable::next_if`
 > **权威来源**: [Rust 官方文档 — Iterator trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html), [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/)
->
 > **权威来源对齐变更日志**: 2026-05-19 新增 array_windows 与 next_if 的来源标注、Iterator  trait 形式化语义引用 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
->
+
 > **[来源: Rust Official Docs]**
 
 完成本章后，你将能够：
@@ -22,7 +19,7 @@
 - [ ] 在实际问题中应用这些特性
 
 ## 📋 先决条件
->
+
 > **[来源: Rust Official Docs]**
 
 - 基础 Rust 语法
@@ -30,7 +27,7 @@
 - 了解闭包基础
 
 ## 🧠 核心概念
->
+
 > **[来源: Rust Official Docs]**
 
 ### 1. array_windows - 滑动窗口迭代

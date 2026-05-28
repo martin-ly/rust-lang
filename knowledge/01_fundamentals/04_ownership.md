@@ -1,5 +1,5 @@
 # Rust 所有权系统 (Ownership System)
->
+
 > **层次定位**: L1 基础概念 / 所有权子域
 > **前置依赖**: 无（入门概念）
 > **后置延伸**: [knowledge 借用](01_borrowing.md) · [concept L1 所有权](../../concept/01_foundation/01_ownership.md)
@@ -7,7 +7,7 @@
 > **定理链编号**: T-001 所有权唯一性
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 所有权系统 (Ownership System)](#rust-所有权系统-ownership-system)
@@ -49,16 +49,17 @@
   - [思维导图：所有权系统全景](#思维导图所有权系统全景)
   - [决策树：所有权转移判定](#决策树所有权转移判定)
   - [权威来源索引](#权威来源索引)
+    - [边界测试：Copy 类型与 Drop 的互斥性（编译错误）](#边界测试copy-类型与-drop-的互斥性编译错误)
 
 > **Bloom 层级**: 理解
-
 > **📌 简介**：所有权是 Rust 最独特且最重要的特性，它让 Rust 在不需要垃圾回收器的情况下保证内存安全。
 >
 > **⏱️ 预计学习时间**：45-60 分钟
 > **📚 难度级别**：⭐⭐⭐ 中等
-
-> **权威来源**: [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-ownership.html), [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html), [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html), [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
->
+> **权威来源**: [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-ownership.html),
+> [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html),
+> [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html),
+> [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（TRPL、Rust Reference、RustBelt、C++ / Go 对标） [来源: Authority Source Sprint Batch 8]
 
 **变更日志**:
@@ -68,7 +69,7 @@
 ---
 
 ## 🎯 学习目标
->
+
 > **[来源: Rust Official Docs]**
 
 完成本章学习后，你将能够：
@@ -83,7 +84,7 @@
 ---
 
 ## 📋 先决条件
->
+
 > **[来源: Rust Official Docs]**
 
 在学习所有权之前，你应该：
