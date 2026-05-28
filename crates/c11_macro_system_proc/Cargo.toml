@@ -2,7 +2,7 @@
 name = "c11_macro_system_proc"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.95.0"
+rust-version = "1.96.0"
 authors = ["Rust Learning Community"]
 description = "Rust procedural macro examples for c11_macro_system learning module"
 license = "MIT OR Apache-2.0"
