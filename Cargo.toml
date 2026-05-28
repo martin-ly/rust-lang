@@ -255,7 +255,8 @@ tokio-console = "0.1.14"
 # tokio-test: tokio的测试工具
 tokio-test = "0.4.5"
 # mio: 跨平台异步I/O库
-mio = "1.2.0"
+# 2026-05-29: cargo update 1.2.0 -> 1.2.1
+mio = "1.2.1"
 # tungstenite: WebSocket协议的Rust实现
 # 2026-03-28: 0.28.0 -> 0.29.0 (cargo update)
 tungstenite = "0.29.0"
@@ -335,6 +336,9 @@ tokio-stream = "0.1.18"
 # tokio-tungstenite: tokio与tungstenite的集成，提供WebSocket支持
 # 2026-03-28: 0.28.0 -> 0.29.0 (cargo update)
 tokio-tungstenite = "0.29.0"
+# socket2: 跨平台socket API封装，tokio/quinn/libp2p-tcp等传递依赖
+# 2026-05-29: cargo update 0.6.3 -> 0.6.4
+socket2 = "0.6.4"
 # futures: 异步编程的基础库
 futures = "0.3.32"
 # futures-util: futures的实用工具库
