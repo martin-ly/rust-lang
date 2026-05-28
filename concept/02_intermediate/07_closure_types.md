@@ -18,8 +18,6 @@
 > [RFC 1558 — Closures](https://github.com/rust-lang/rfcs/pull/1558)
 
 ## 📑 目录
->
->
 
 - [闭包类型系统：Fn、FnMut、FnOnce 的捕获语义](#闭包类型系统fnfnmutfnonce-的捕获语义)
   - [📑 目录](#-目录)

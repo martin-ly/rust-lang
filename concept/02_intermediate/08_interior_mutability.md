@@ -20,8 +20,6 @@
 > [std::cell Documentation](https://doc.rust-lang.org/std/cell/index.html)
 
 ## 📑 目录
->
->
 
 - [内部可变性：编译期规则的运行时逃逸](#内部可变性编译期规则的运行时逃逸)
   - [📑 目录](#-目录)

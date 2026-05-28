@@ -13,8 +13,6 @@
 > [Wikipedia — Iterator Pattern](https://en.wikipedia.org/wiki/Iterator_pattern)
 
 ## 📑 目录
->
->
 
 - [Rust 迭代器模式](#rust-迭代器模式)
   - [📑 目录](#-目录)

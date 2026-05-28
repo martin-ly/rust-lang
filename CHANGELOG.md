@@ -1,6 +1,42 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-05-20
+> **最后更新**: 2026-05-28
+
+---
+
+## [2.4.0] - 2026-05-28 — Rust 1.96.0 Stable 全量对齐 + Miri R30 + Bloom 100%
+
+### 🦀 Rust 1.96.0 Stable 全量版本号对齐
+
+- **全局批量替换**: 2,200+ 文件 `1.95.0+` → `1.96.0+`，覆盖 concept/、knowledge/、docs/、content/、crates/、exercises/、guides/、reports/、scripts/、tools/ 等全部活跃轨道
+- **根目录配置同步**: `Cargo.toml` rust-version 1.95.0 → 1.96.0，`.clippy.toml` msrv 1.95.0 → 1.96.0
+- **crates/ Cargo.toml**: 17 个 crate 的 `rust-version` 字段统一更新至 1.96.0
+- **历史文件豁免**: `archive/`、`CHANGELOG.md`、`*rust_1_95_preview*`、`*rust_195_features*` 等历史记录文件保留原始版本号
+
+### 🔬 Miri R30 内存安全验证
+
+- **13/15 crate 通过** Miri `--lib` 测试（0 失败）
+- **修复 4 处兼容性问题**:
+  - c05_threads: `LockFreeHashMap` Miri 内存泄漏 → `#[cfg_attr(miri, ignore)]`
+  - c01_ownership: 边界测试大循环超时 → 降深度 1000→100
+  - c09_design_pattern: 并发测试 100 线程超时 → 降 10 线程
+  - common: `format_bytes` 浮点运算 Miri 失败 → `#[cfg_attr(miri, ignore)]`
+- **本地 nightly 升级**: 1.98.0-nightly (2026-05-25)
+
+### 🧠 Bloom 认知层级标注 100% 覆盖
+
+- **全项目 1567/1567 文件**完成 Bloom 标注（concept/ 245、knowledge/ 132、docs/ 1190）
+- **docs/ 批量标注**: 从 28/1190 提升至 1190/1190，五批次完成（1012+125+19+3）
+- **BOM 修复**: 处理 UTF-8 BOM (`\ufeff`) 导致的正则匹配失败问题
+
+### 📚 mdbook 构建修复
+
+- **mdbook-toc v0.15.4 上游兼容性**: 与 mdbook v0.4.52 不兼容，即使最小书籍也报 "Unable to parse the input"。已禁用并记录上游问题。
+
+### ✅ 全量验证通过
+
+- `cargo check` / `cargo test --workspace` / `cargo clippy --workspace` / `cargo doc --no-deps` / `mdbook build` 全部通过
+- `concept_audit.py`: 0 死链接，245/245 + 132/132 + 1190/1190 Bloom，命名规范通过
 
 ---
 

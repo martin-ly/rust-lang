@@ -12,8 +12,6 @@
 > **来源**: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) · [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html) · [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Wikipedia — Copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write)
 
 ## 📑 目录
->
->
 
 - [Cow：写时克隆与零拷贝抽象](#cow写时克隆与零拷贝抽象)
   - [📑 目录](#-目录)

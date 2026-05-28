@@ -15,8 +15,6 @@
 > [RFC 1681 — Macros 1.1](https://github.com/rust-lang/rfcs/pull/1681)
 
 ## 📑 目录
->
->
 
 - [Serde 序列化模式：Rust 的类型驱动数据转换](#serde-序列化模式rust-的类型驱动数据转换)
   - [📑 目录](#-目录)

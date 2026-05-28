@@ -10,8 +10,6 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Wikipedia — Zero-copy](https://en.wikipedia.org/wiki/Zero-copy)
 
 ## 📑 目录
->
->
 
 - [零拷贝解析与序列化优化](#零拷贝解析与序列化优化)
   - [📑 目录](#-目录)
@@ -493,11 +491,6 @@ fn main() {
 
 ---
 
-
-
-
-
-
 ## 十、边界测试：零拷贝解析的编译错误
 
 ### 10.1 边界测试：`mem::transmute` 的字节对齐假设（运行时 UB）
@@ -559,22 +552,7 @@ fn parse_header(data: &[u8]) -> Option<&Header> {
 
 > **修正**: 零拷贝解析的核心是返回对原始字节切片的引用视图，而非复制数据。这要求视图类型的生命周期与原始数据绑定——任何生命周期不匹配都会导致悬垂引用。使用 `#[repr(C)]` 结构体作为类型化视图时，还需验证：1) 字节长度足够；2) 对齐满足；3) 字节序正确（大端/小端）。`zerocopy` crate 通过 derive 宏自动生成这些验证，是生产环境的首选。[来源: [zerocopy Documentation](https://docs.rs/zerocopy/)]
 
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 ### 10.3 边界测试：`nom` 解析器的生命周期传播（编译错误）
 

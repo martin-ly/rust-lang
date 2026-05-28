@@ -10,8 +10,6 @@
 > **来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html) · [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/) · [cbindgen Documentation](https://github.com/mozilla/cbindgen)
 
 ## 📑 目录
->
->
 
 - [Rust FFI：与外部代码的安全边界](#rust-ffi与外部代码的安全边界)
   - [📑 目录](#-目录)

@@ -12,8 +12,6 @@
 > **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) · [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html) · [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) · [std::matches](https://doc.rust-lang.org/std/macro.matches.html)
 
 ## 📑 目录
->
->
 
 - [`assert_matches!`：模式匹配断言的形式化语义](#assert_matches模式匹配断言的形式化语义)
   - [📑 目录](#-目录)

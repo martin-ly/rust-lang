@@ -16,7 +16,6 @@
 > [Wikipedia — Non-blocking Algorithm](https://en.wikipedia.org/wiki/Non-blocking_algorithm)
 
 ## 📑 目录
->
 
 - [并发 模式：从消息 传递到锁自由的数据结构](#并发-模式从消息-传递到锁自由的数据结构)
   - [📑 目录](#-目录)

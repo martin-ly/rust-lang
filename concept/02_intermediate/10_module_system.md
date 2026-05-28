@@ -10,8 +10,6 @@
 > **来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [TRPL Ch7 — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) · [Rust RFC 2126 — Clarify and streamline paths and visibility](https://github.com/rust-lang/rfcs/pull/2126) · [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/module-system.html)
 
 ## 📑 目录
->
->
 
 - [模块系统：Rust 的代码组织与可见性规则](#模块系统rust-的代码组织与可见性规则)
   - [📑 目录](#-目录)

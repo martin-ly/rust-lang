@@ -10,10 +10,6 @@
 > **来源**: [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype) · [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types) · [Wikipedia — Newtype](https://en.wikipedia.org/wiki/Newtype) · [Rust Reference — Tuple Structs](https://doc.rust-lang.org/reference/items/structs.html) · [Rust Patterns — Newtype](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)
 
 ## 📑 目录
->
->
-
- [Newtype \ 与包装器模式：类型安全的零成本抽象](#newtype)
 
 - [Newtype 与包装器模式：类型安全的零成本抽象](#newtype-与包装器模式类型安全的零成本抽象)
   - [📑 目录](#-目录)

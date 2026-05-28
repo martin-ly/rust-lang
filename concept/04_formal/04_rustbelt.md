@@ -18,8 +18,7 @@
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
-- v3.0 (2026-05-13): 新增 §3 Concurrent Separation Logic（CSL）含 Mutex/Arc 形式化；新增 §6 标准库原语验证矩阵；新增 §8 形式化验证工具链映射（含光谱图）；扩展层次一致性标注至 L3 Unsafe / L3 并发 / L7 形式化方法；补充章节过渡段落
-$entry
+- v3.0 (2026-05-13): 新增 §3 Concurrent Separation Logic（CSL）含 Mutex/Arc 形式化；新增 §6 标准库原语验证矩阵；新增 §8 形式化验证工具链映射（含光谱图）；扩展层次一致性标注至 L3 Unsafe / L3 并发 / L7 形式化方法；补充章节过渡段落$entry
 - v2.0 (2026-05-13): 重构定理一致性矩阵至 11 行，新增反命题决策树 3 组，扩展认知路径 5 步，补充层次一致性标注（L1–L3），强化 Wikipedia / POPL 2018 / Iris 引用
 - v1.0 (2026-05-12): 初始版本，完成 RustBelt 概述、Iris 逻辑、验证工具链对比、工业应用
 
@@ -113,6 +112,7 @@ C2 (未覆盖范围) 是负面边界
 > **层次规则**: L1 层定理不依赖于 L2/L3；L2 层定理依赖于 L1；L3 层定理依赖于 L1+L2；边界层 C1/C2 是元声明，不依赖也不被依赖。
 
 > **扩展映射**:
+>
 > - **L3 Unsafe**: [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §3 "Unsafe 抽象边界" ↔ C1 边界层。unsafe 代码的安全契约需在 Iris 中手动建模，RustBelt 提供方法论但不自动化验证 [来源: [Wikipedia — Type Theory](https://en.wikipedia.org/wiki/Type_theory)]
 > - **L3 并发**: [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) §2 "Send/Sync 语义" ↔ T1（无数据竞争）。CSL 是并发安全的逻辑根基，Mutex/Arc 的形式化规约见 §3
 > **Send/Sync 形式化语义**: `T: Send` ⇔ 类型 T 可安全跨线程转移所有权（值 move 无数据竞争）。`T: Sync` ⇔ `&T: Send`，即 T 的共享引用可安全跨线程共享。
@@ -196,11 +196,13 @@ graph BT
 | `▷P` | 后续模态 | `P` 在"下一步"成立，用于递归协议 | 延迟初始化的协议约束 |
 
 > **核心公理（CSL 并行组合规则）**:
+>
 > ```text
 > {P1} C1 {Q1}    {P2} C2 {Q2}
 > ────────────────────────────────  (P1 * P2 无资源冲突)
 > {P1 * P2} C1 ‖ C2 {Q1 * Q2}
 > ```
+>
 > 该规则直接对应 Rust `Send` 语义：捕获不相交资源的闭包可安全并行执行。
 
 ### 3.3 `Mutex<T>` 的形式化

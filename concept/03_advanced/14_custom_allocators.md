@@ -10,8 +10,6 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Allocation](https://doc.rust-lang.org/reference/memory-allocation.html) · [RFC 1398 — Global Allocators](https://rust-lang.github.io/rfcs/1398-global_allocators.html) · [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)
 
 ## 📑 目录
->
->
 
 - [自定义分配器与内存布局优化](#自定义分配器与内存布局优化)
   - [📑 目录](#-目录)
@@ -494,13 +492,7 @@ fn main() {
 
 ---
 
-
-
-
-
-
 > **补充来源**
-
 
 ## 十、边界测试：自定义分配器的编译错误
 

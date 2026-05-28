@@ -14,8 +14,6 @@
 > [Wikipedia — Code Generation](https://en.wikipedia.org/wiki/Code_generation_(compiler))
 
 ## 📑 目录
->
->
 
 - [宏模式：编译期代码生成的工程实践](#宏模式编译期代码生成的工程实践)
   - [📑 目录](#-目录)
@@ -41,6 +39,7 @@
     - [10.3 边界测试：`tt` muncher 的 token 消耗（编译错误）](#103-边界测试tt-muncher-的-token-消耗编译错误)
     - [10.4 边界测试：宏生成的 `unsafe` 块边界（编译错误）](#104-边界测试宏生成的-unsafe-块边界编译错误)
     - [10.2 边界测试：宏递归深度限制（编译错误）](#102-边界测试宏递归深度限制编译错误)
+    - [10.4 边界测试：宏中的 `tt` 与 `expr` 的匹配差异（编译错误）](#104-边界测试宏中的-tt-与-expr-的匹配差异编译错误)
 
 ---
 
@@ -555,7 +554,6 @@ graph TD
 
 > **补充来源**
 
-
 ## 十、边界测试：宏模式的编译错误
 
 ### 10.1 边界测试：`macro_rules!` 的优先级与贪婪匹配（编译错误）
@@ -679,11 +677,11 @@ macro_rules! bad_match {
 fn main() {
     // ❌ 编译错误: expr 不能匹配包含逗号的表达式（如函数调用参数）
     // bad_match!(foo(1, 2)); // 宏解析器将逗号视为分隔符
-    
+
     // tt（token tree）可以匹配任何括号对:
     // macro_rules! good_match { ($e:tt) => { $e }; }
     // good_match!(foo(1, 2)); // ✅
-    
+
     let x = bad_match!(5);
     println!("{}", x);
 }

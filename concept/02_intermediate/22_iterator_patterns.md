@@ -13,8 +13,6 @@
 > [Wikipedia — Iterator Pattern](https://en.wikipedia.org/wiki/Iterator_pattern)
 
 ## 📑 目录
->
->
 
 - [Rust 迭代器模式](#rust-迭代器模式)
   - [📑 目录](#-目录)
@@ -40,13 +38,13 @@
     - [10.4 边界测试：`scan` 的状态闭包与 `FnMut` 约束（编译错误）](#104-边界测试scan-的状态闭包与-fnmut-约束编译错误)
     - [10.5 边界测试：`Peekable` 的 `peek` 与 `next` 的交互（逻辑错误）](#105-边界测试peekable-的-peek-与-next-的交互逻辑错误)
     - [10.2 边界测试：`scan` 的状态闭包与借用冲突（编译错误）](#102-边界测试scan-的状态闭包与借用冲突编译错误)
+    - [10.4 边界测试：`Iterator::zip` 的长度不匹配与元素丢失（逻辑错误）](#104-边界测试iteratorzip-的长度不匹配与元素丢失逻辑错误)
 
 ---
 
 ## 一、核心概念
 
 ### 1.1 Iterator Trait
->
 
 ```text
 Iterator Trait:
@@ -558,7 +556,7 @@ fn main() {
     // ❌ 逻辑错误: zip 在任一迭代器结束时停止，a 的第三个元素丢失
     let pairs: Vec<_> = a.iter().zip(b.iter()).collect();
     println!("{:?}", pairs); // [(1, "a"), (2, "b")]
-    
+
     // 若需处理长度不匹配:
     // use itertools::zip_longest;
     // let pairs: Vec<_> = zip_longest(a.iter(), b.iter()).collect();

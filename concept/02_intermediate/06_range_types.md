@@ -15,8 +15,6 @@
 > [IntoIterator Trait](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)
 
 ## 📑 目录
->
->
 
 - [Rust 范围类型语义：`std::ops::Range` → `core::range`](#rust-范围类型语义stdopsrange--corerange)
   - [📑 目录](#-目录)

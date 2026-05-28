@@ -68,6 +68,7 @@
     - [7.7 RefinedRust：基于 Liquid Types 的自动分离逻辑验证](#77-refinedrust基于-liquid-types-的自动分离逻辑验证)
     - [7.8 Rustlantis：随机程序生成的编译器差分测试](#78-rustlantis随机程序生成的编译器差分测试)
     - [7.9 rustc Bug 实证研究：Rust 特有编译器缺陷分析（OOPSLA 2025）](#79-rustc-bug-实证研究rust-特有编译器缺陷分析oopsla-2025)
+    - [7.11 Rusted Types：Rust 类型混淆漏洞的静态检测（ICSE 2026）](#711-rusted-typesrust-类型混淆漏洞的静态检测icse-2026)
     - [7.10 Ravencheck：Rust 的有效命题推理（SOAP 2026）](#710-ravencheckrust-的有效命题推理soap-2026)
   - [八、验证边界：编译错误示例](#八验证边界编译错误示例)
     - [编译错误 1：Safe Rust 中直接解引用裸指针](#编译错误-1safe-rust-中直接解引用裸指针)

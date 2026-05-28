@@ -14,8 +14,6 @@
 > [RFC 0243 — Trait-based Exception Handling](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)
 
 ## 📑 目录
->
->
 
 - [错误处理深入：从 Result 到自定义错误生态](#错误处理深入从-result-到自定义错误生态)
   - [📑 目录](#-目录)
@@ -40,6 +38,7 @@
     - [10.2 边界测试：`Result` 嵌套与 `?` 的传播限制（编译错误）](#102-边界测试result-嵌套与--的传播限制编译错误)
     - [10.5 边界测试：`thiserror` 的 `#[from]` 与类型歧义（编译错误）](#105-边界测试thiserror-的-from-与类型歧义编译错误)
     - [10.6 边界测试：`eyre` 与 `anyhow` 的混用导致上下文丢失（编译错误）](#106-边界测试eyre-与-anyhow-的混用导致上下文丢失编译错误)
+    - [10.4 边界测试：错误类型的 `source()` 链与 `Display` 的循环（运行时栈溢出）](#104-边界测试错误类型的-source-链与-display-的循环运行时栈溢出)
 
 ---
 
@@ -516,7 +515,6 @@ graph TD
 ---
 
 > **补充来源**
-
 
 ## 十、边界测试：错误处理的编译错误
 

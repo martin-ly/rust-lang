@@ -16,8 +16,6 @@
 > [Wikipedia — Type System](https://en.wikipedia.org/wiki/Type_system)
 
 ## 📑 目录
->
->
 
 - [高级类型系统：从关联类型到类型级编程](#高级类型系统从关联类型到类型级编程)
   - [📑 目录](#-目录)

@@ -15,8 +15,6 @@
 > [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ## 📑 目录
->
->
 
 - [子类型与变型：Rust 类型系统中的协变、逆变与不变](#子类型与变型rust-类型系统中的协变逆变与不变)
   - [📑 目录](#-目录)

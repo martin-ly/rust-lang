@@ -84,7 +84,7 @@ Rust 特有的类型（`String`, `Vec<T>`, `enum`）不能通过 C ABI 直接传
 
 **关键差异**: C++ 的 `this` 指针作为隐式第一个参数传递；Rust 没有 `this`，方法调用通过显式的 `&self` / `&mut self` / `self` 参数实现。
 
----
+--
 
 ## 三、对象模型与内存布局
 

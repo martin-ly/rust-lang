@@ -10,8 +10,6 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Wikipedia — Type Erasure](https://en.wikipedia.org/wiki/Type_erasure) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
 
 ## 📑 目录
->
->
 
 - [类型擦除与动态分发](#类型擦除与动态分发)
   - [📑 目录](#-目录)
@@ -542,80 +540,11 @@ graph TD
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：类型擦除的编译错误
 

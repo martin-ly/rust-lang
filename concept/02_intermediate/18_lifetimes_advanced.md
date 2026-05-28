@@ -16,8 +16,6 @@
 > [Wikipedia — Region-based Memory Management](https://en.wikipedia.org/wiki/Region-based_memory_management)
 
 ## 📑 目录
->
->
 
 - [生命周期高级主题：从 HRTB 到自引用类型](#生命周期高级主题从-hrtb-到自引用类型)
   - [📑 目录](#-目录)
@@ -533,7 +531,6 @@ graph TD
 ---
 
 > **补充来源**
-
 
 ## 十、边界测试：高级生命周期的编译错误
 

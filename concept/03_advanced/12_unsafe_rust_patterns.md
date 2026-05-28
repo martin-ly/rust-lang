@@ -10,8 +10,6 @@
 > **来源**: [Rust Nomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)
 
 ## 📑 目录
->
->
 
 - [Unsafe Rust 模式：安全抽象的核心技术](#unsafe-rust-模式安全抽象的核心技术)
   - [📑 目录](#-目录)
@@ -531,7 +529,6 @@ graph TD
 >
 
 > **补充来源**
-
 
 ## 十、边界测试：Unsafe Rust 模式的编译错误
 

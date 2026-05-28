@@ -16,8 +16,6 @@
 > [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs/0235-collections-conventions.html)
 
 ## 📑 目录
->
->
 
 - [迭代器模式：Rust 的惰性计算与零成本抽象](#迭代器模式rust-的惰性计算与零成本抽象)
   - [📑 目录](#-目录)
@@ -526,7 +524,6 @@ graph TD
 ---
 
 > **补充来源**
-
 
 ## 十、边界测试：迭代器模式的编译错误
 
