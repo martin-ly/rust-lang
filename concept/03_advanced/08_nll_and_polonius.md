@@ -581,3 +581,6 @@ fn main() {
 ```
 
 > **修正**: NLL（Non-Lexical Lifetimes）已大幅改进 Rust 的借用检查：引用的生命周期基于**最后使用点**而非词法作用域。但 NLL 仍**保守**：某些情况下编译器无法证明安全，选择拒绝。Polonius（下一代借用检查器）基于**数据流分析**和**关系推理**，可处理更复杂的场景：1) 路径敏感分析（不同分支的借用不同）；2) 循环中的可变借用；3) 部分借用（`&mut v[0]` 与 `&mut v[1]` 不冲突）。Polonius 当前在 nightly 可用（`-Z polonius`），预计在未来 stable 中取代 NLL。这与 C++ 的借用检查（无，完全信任程序员）或 Swift 的 exclusivity enforcement（运行时检查，非编译期）不同——Rust 的借用检查器持续演进，目标是允许更多合法程序同时保持安全保证。[来源: [Polonius](https://github.com/rust-lang/polonius)] · [来源: [NLL](https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html)]
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

@@ -2206,3 +2206,6 @@ fn main() {}
 > [来源: [Rust By Example — Macros](https://doc.rust-lang.org/rust-by-example/macros.html)]
 
 > [来源: [proc-macro2 crate](https://docs.rs/proc-macro2/)]
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

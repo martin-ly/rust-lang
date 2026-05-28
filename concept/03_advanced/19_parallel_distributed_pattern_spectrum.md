@@ -663,3 +663,6 @@ fn main() {}
 > [来源: [Apache Arrow Rust](https://arrow.apache.org/rust/)]
 
 > [来源: [Rust Concurrency Patterns](https://rust-lang.github.io/async-book/)]
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)

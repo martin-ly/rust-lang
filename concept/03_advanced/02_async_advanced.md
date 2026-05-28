@@ -1314,3 +1314,6 @@ fn main() {
 > [来源: [Futures crate](https://docs.rs/futures/)]
 
 > [来源: [Tokio Internals](https://tokio.rs/tokio/topics/runtime)]
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
