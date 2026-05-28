@@ -368,7 +368,7 @@ async fn kafka_consumer() {
 > **权威来源**: [Timely Dataflow GitHub](https://github.com/TimelyDataflow/timely-dataflow) · [Differential Dataflow GitHub](https://github.com/TimelyDataflow/differential-dataflow) · [Materialize Documentation](https://materialize.com/docs/) · [RisingWave Documentation](https://docs.risingwave.com/) · [Fluvio Documentation](https://www.fluvio.io/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.95.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 流处理生态
 

@@ -528,7 +528,7 @@ async fn main() {
 > **权威来源**: [Akidau et al. — The Dataflow Model, VLDB 2015](https://www.vldb.org/pvldb/vol8/p1792-Akidau.pdf) · [Murray et al. — Naiad, SOSP 2013](https://dl.acm.org/doi/10.1145/2517349.2522738) · [McSherry et al. — Differential Dataflow, CIDR 2013](https://dl.acm.org/doi/10.1145/2452376.2452396) · [Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/) · [Materialize Documentation](https://materialize.com/docs/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.95.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-24
 > **状态**: ✅ 新建 — 流处理语义空间
 

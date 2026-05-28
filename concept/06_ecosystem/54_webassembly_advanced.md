@@ -777,9 +777,9 @@ fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [WebAssembly Specification](https://webassembly.github.io/spec/), [WASI Preview 2 Docs](https://wasi.dev), [Component Model Spec](https://component-model.bytecodealliance.org/)
-> **权威来源对齐变更日志**: 2026-05-26 初始创建，对齐 Rust 1.95.0+ (Edition 2024) 与 WASI Preview 2 / Component Model 最新规范
+> **权威来源对齐变更日志**: 2026-05-26 初始创建，对齐 Rust 1.96.0+ (Edition 2024) 与 WASI Preview 2 / Component Model 最新规范
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-26
 **状态**: ✅ 概念文件创建完成

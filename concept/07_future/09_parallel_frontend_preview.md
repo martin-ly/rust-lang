@@ -317,10 +317,10 @@ fn main() {
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rust Compiler Team](https://github.com/rust-lang/compiler-team/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
+> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成 (Batch 9)
 

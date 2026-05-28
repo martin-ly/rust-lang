@@ -335,10 +335,10 @@ graph TD
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/), [Rust for Linux](https://rust-for-linux.com/)
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
+> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.96.0+ (Edition 2024)
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
 

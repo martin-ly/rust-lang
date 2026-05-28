@@ -7,8 +7,6 @@
 ---
 
 ## 📑 目录
->
->
 
 - [Rust 概念速查卡片（Quick Reference）](#rust-概念速查卡片quick-reference)
   - [📑 目录](#-目录)
@@ -740,6 +738,6 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 > **权威来源对齐变更日志**: 2026-05-22 批量补充来源标注（Rust Reference、TRPL、Rustonomicon、标准库、Wikipedia 等） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

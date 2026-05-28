@@ -860,7 +860,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]; 2026-05-22 网络对齐：Ferrocene 26.02.0 ISO 26262 ASIL B core 认证、IEC 61508 SIL 2 core 认证、Safety-Critical Rust Consortium 成立 [来源: Web Authority Alignment Sprint]
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **对应 DO-178C 版本**: DO-178C / DO-333 / DO-330
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成

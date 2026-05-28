@@ -17,6 +17,31 @@
 
 > **Bloom 层级**: 分析 → 评价 → 创造
 
+## 📑 目录
+
+- [语义桥：算法、设计模式与工作流模式的统一谱系](#语义桥算法设计模式与工作流模式的统一谱系)
+  - [📑 目录](#-目录)
+  - [一、核心命题](#一核心命题)
+  - [二、三层语义空间的同构映射](#二三层语义空间的同构映射)
+    - [2.1 统一抽象框架](#21-统一抽象框架)
+    - [2.2 同构映射表](#22-同构映射表)
+  - [三、分治算法 ↔ Composite + Parallel Split 的完整同构](#三分治算法--composite--parallel-split-的完整同构)
+    - [3.1 算法层：归并排序\[来源: CLRS — Introduction to Algorithms, 4th Ed.\]](#31-算法层归并排序来源-clrs--introduction-to-algorithms-4th-ed)
+    - [3.2 设计模式层：Composite + Strategy](#32-设计模式层composite--strategy)
+    - [3.3 工作流层：Parallel Split + Synchronization](#33-工作流层parallel-split--synchronization)
+    - [3.4 统一语义\[来源: Category Theory for Programmers — Bartosz Milewski\]](#34-统一语义来源-category-theory-for-programmers--bartosz-milewski)
+  - [四、动态规划 ↔ Memoization + Deferred Choice\[来源: Wikipedia — Dynamic Programming\]](#四动态规划--memoization--deferred-choice来源-wikipedia--dynamic-programming)
+    - [4.1 算法层：斐波那契 DP](#41-算法层斐波那契-dp)
+    - [4.2 设计模式层：Memoization + Strategy](#42-设计模式层memoization--strategy)
+    - [4.3 工作流层：Deferred Choice + Sequence](#43-工作流层deferred-choice--sequence)
+    - [4.4 统一语义](#44-统一语义)
+  - [五、图遍历 ↔ Visitor + Arbitrary Cycles\[来源: Wikipedia — Graph Traversal\]](#五图遍历--visitor--arbitrary-cycles来源-wikipedia--graph-traversal)
+    - [5.1 统一语义](#51-统一语义)
+  - [六、语义桥的价值与应用\[来源: Workflow Patterns — van der Aalst\]](#六语义桥的价值与应用来源-workflow-patterns--van-der-aalst)
+    - [6.1 跨域学习迁移](#61-跨域学习迁移)
+    - [6.2 统一设计决策框架](#62-统一设计决策框架)
+  - [七、知识来源关系](#七知识来源关系)
+
 ## 一、核心命题
 
 > **算法、设计模式和工作流模式在当前的语义空间中是三个孤立的"星系"

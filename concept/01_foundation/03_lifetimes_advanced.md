@@ -8,8 +8,12 @@
 
 从直觉到形式化的过渡需要六步递进的认知脚手架。每一步不仅提供新知识，还解释"为什么这一步必须接在上一步之后"。
 
+## 📑 目录
+
+- [Borrowing（借用）](#borrowing借用)
+  - [📑 目录](#-目录)
+  - 
 ### Step 1: 直觉困惑（Intuitive Confusion）
->
 
 > **核心困惑**: "为什么返回值引用不能指向局部变量？"
 >
@@ -1066,7 +1070,7 @@ enum SafeValue {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

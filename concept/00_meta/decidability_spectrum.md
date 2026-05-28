@@ -16,7 +16,6 @@
 ---
 
 ## 📑 目录
->
 
 - [Rust 编译期可判定性谱系全景（Decidability Spectrum）](#rust-编译期可判定性谱系全景decidability-spectrum)
   - [📑 目录](#-目录)
