@@ -3,7 +3,7 @@
 > **快速参考** | [完整文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md) | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -1755,7 +1755,7 @@ fn broken_test() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **适用版本**: Rust 1.95.0+
+> **适用版本**: Rust 1.96.0+
 
 ### 核心特性速查
 >
@@ -1804,7 +1804,7 @@ let gamma = f64::consts::EULER_GAMMA;
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **适用版本**: Rust 1.95.0+ | **实际场景**: 测试开发
+> **适用版本**: Rust 1.96.0+ | **实际场景**: 测试开发
 
 ### ControlFlow 在测试验证管道中的应用
 >
@@ -1869,7 +1869,7 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

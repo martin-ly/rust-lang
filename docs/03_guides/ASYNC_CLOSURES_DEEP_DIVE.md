@@ -1,7 +1,7 @@
 # Async Closures 深度指南
 
 > **Bloom 层级**: L3 (Application) — L4 (Analysis)
-> **对应 Rust 版本**: 1.95.0+ stable
+> **对应 Rust 版本**: 1.96.0+ stable
 > **最后更新**: 2026-05-20
 
 ---

@@ -667,7 +667,7 @@ let row: (i64, String) = sqlx::query_as("SELECT id, name FROM users WHERE id = $
 
 > **文档元信息**
 >
-> - 对应 Rust 版本: 1.95.0+ (Edition 2024)
+> - 对应 Rust 版本: 1.96.0+ (Edition 2024)
 > - Diesel 版本: 2.2.x
 > - 最后更新: 2026-05-22
 > - 状态: ✅ 初版完成

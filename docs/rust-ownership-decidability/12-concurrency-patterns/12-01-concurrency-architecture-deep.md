@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-> **Rust Version**: 1.95.0+ (Edition 2024)
+> **Rust Version**: 1.96.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12
 > **Scope**: Formal concurrency models, thread safety theorems, memory ordering semantics
 > **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Concurrent Computing]** · **[来源: Rustonomicon - Concurrency]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Memory Ordering]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Computer Multitasking]** · **[来源: Wikipedia - Lock-Free Data Structure]** · **[来源: ACM - Concurrent Programming Paradigms]** · **[来源: IEEE - Parallel Architecture Patterns]**
@@ -2632,7 +2632,7 @@ pub fn try_enqueue(&self, item: T) -> Result<(), T> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

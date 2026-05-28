@@ -576,7 +576,7 @@ tokio = { version = "1.0", features = ["full"] }
 ---
 
 **文档版本**: 2.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 > **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/), [Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html), [RFC 2121: Private Dependencies](https://rust-lang.github.io/rfcs/2121-private-dependency.html)
 >

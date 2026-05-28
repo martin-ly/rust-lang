@@ -301,7 +301,7 @@ graph TD
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [crates.io](https://crates.io/) · [docs.rs](https://docs.rs/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.95.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-23
 > **状态**: ✅ 21 crate 架构解构完成
 

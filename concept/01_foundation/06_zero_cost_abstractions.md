@@ -15,8 +15,6 @@
 > [Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
 ## 📑 目录
->
->
 
 - [零成本抽象：Rust 的性能哲学](#零成本抽象rust-的性能哲学)
   - [📑 目录](#-目录)

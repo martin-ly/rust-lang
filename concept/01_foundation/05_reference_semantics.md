@@ -16,8 +16,6 @@
 > [Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html)
 
 ## 📑 目录
->
->
 
 - [引用语义：自动解引用、Deref 强制与类型转换](#引用语义自动解引用deref-强制与类型转换)
   - [📑 目录](#-目录)

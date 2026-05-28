@@ -805,7 +805,7 @@ pub fn cancel_with_dependencies(
 > **权威来源对齐变更日志**: 2026-05-22 新增 WCP26 取消多实例活动模式完整形式化语义 [来源: Workflow Patterns Series Batch 1]
 
 **文档版本**: 1.0
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成
 

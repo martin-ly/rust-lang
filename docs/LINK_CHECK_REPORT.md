@@ -47,7 +47,7 @@
 | docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 00.3 冗余/过时项热力图 (B \\ A) | `#003-冗余过时项热力图-b--a` | 同文件锚点不存在: #003-冗余过时项热力图-b--a |
 | docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 05.3 1.95+ 新增特性深度梳理：Atomic\*::update / try\_update | `#053-195-新增特性深度梳理atomicupdate--try_update` | 同文件锚点不存在: #053-195-新增特性深度梳理atomicupdate--try_update |
 | docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | 07.4 前沿缺口：eBPF + Rust (Aya) | `#074-前沿缺口ebpf--rust-aya` | 同文件锚点不存在: #074-前沿缺口ebpf--rust-aya |
-| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | *项目 MSRV: 1.95.0+ (Edition 2024)* | `#项目-msrv-1950-edition-2024` | 同文件锚点不存在: #项目-msrv-1950-edition-2024 |
+| docs\RUST_LANGUAGE_FEATURE_COMPREHENSIVE_INVENTORY_2026.md | *项目 MSRV: 1.96.0+ (Edition 2024)* | `#项目-msrv-1950-edition-2024` | 同文件锚点不存在: #项目-msrv-1950-edition-2024 |
 | docs\TERMINOLOGY_STANDARD.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\TERMINOLOGY_STANDARD.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\00_meta\ANNUAL_REVIEW_TEMPLATE.md | 1️⃣ 对称差分析更新 | `#1️⃣-对称差分析更新` | 同文件锚点不存在: #1️⃣-对称差分析更新 |
@@ -281,7 +281,7 @@
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 边界 2:  panic 恢复 | `#边界-2--panic-恢复` | 同文件锚点不存在: #边界-2--panic-恢复 |
-| docs\02_reference\quick_reference\error_handling_cheatsheet.md | **Rust 版本**: 1.95.0+ (Edition 2024) | `#rust-版本-1950-edition-2024` | 同文件锚点不存在: #rust-版本-1950-edition-2024 |
+| docs\02_reference\quick_reference\error_handling_cheatsheet.md | **Rust 版本**: 1.96.0+ (Edition 2024) | `#rust-版本-1950-edition-2024` | 同文件锚点不存在: #rust-版本-1950-edition-2024 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | ⚠️ Rust 错误处理速查卡 | `#️-rust-错误处理速查卡` | 同文件锚点不存在: #️-rust-错误处理速查卡 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 模式 3: ? 操作符 | `#模式-3--操作符` | 同文件锚点不存在: #模式-3--操作符 |
@@ -292,7 +292,7 @@
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | ⚠️ 边界情况 | `#️-边界情况` | 同文件锚点不存在: #️-边界情况 |
 | docs\02_reference\quick_reference\error_handling_cheatsheet.md | 边界 2:  panic 恢复 | `#边界-2--panic-恢复` | 同文件锚点不存在: #边界-2--panic-恢复 |
-| docs\02_reference\quick_reference\error_handling_cheatsheet.md | **Rust 版本**: 1.95.0+ (Edition 2024) | `#rust-版本-1950-edition-2024` | 同文件锚点不存在: #rust-版本-1950-edition-2024 |
+| docs\02_reference\quick_reference\error_handling_cheatsheet.md | **Rust 版本**: 1.96.0+ (Edition 2024) | `#rust-版本-1950-edition-2024` | 同文件锚点不存在: #rust-版本-1950-edition-2024 |
 | docs\02_reference\quick_reference\generics_cheatsheet.md | 🔷 Rust 泛型编程速查卡 | `#-rust-泛型编程速查卡` | 同文件锚点不存在: #-rust-泛型编程速查卡 |
 | docs\02_reference\quick_reference\generics_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\02_reference\quick_reference\generics_cheatsheet.md | 📚 相关资源 | `#-相关资源-1` | 同文件锚点不存在: #-相关资源-1 |
@@ -2284,7 +2284,7 @@
 | docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md | 7.2 Arc + Mutex | `#72-arc--mutex` | 同文件锚点不存在: #72-arc--mutex |
 | docs\rust-ownership-decidability\01-core-concepts\01-05-interior-mutability-deep.md | *Last updated: 2026-03-06* | `#last-updated-2026-03-06` | 同文件锚点不存在: #last-updated-2026-03-06 |
 | docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md | 所有权系统 - 反例与逻辑论证 | `#所有权系统---反例与逻辑论证` | 同文件锚点不存在: #所有权系统---反例与逻辑论证 |
-| docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md | **对齐版本**: Rust 1.95.0+ (Edition 2024) \| 对齐日期: 2026-05-12 | `#对齐版本-rust-1950-edition-2024--对齐日期-2026-05-12` | 同文件锚点不存在: #对齐版本-rust-1950-edition-2024--对齐日期-2026-05-12 |
+| docs\rust-ownership-decidability\01-core-concepts\ownership-counterexamples.md | **对齐版本**: Rust 1.96.0+ (Edition 2024) \| 对齐日期: 2026-05-12 | `#对齐版本-rust-1950-edition-2024--对齐日期-2026-05-12` | 同文件锚点不存在: #对齐版本-rust-1950-edition-2024--对齐日期-2026-05-12 |
 | docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\borrowing-in-depth.md | *继续学习: lifetimes-mastery.md* | `#继续学习-lifetimes-masterymd` | 同文件锚点不存在: #继续学习-lifetimes-masterymd |
 | docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md | 2. Cell 详解 | `#2-cell-详解` | 同文件锚点不存在: #2-cell-详解 |
 | docs\rust-ownership-decidability\01-core-concepts\detailed-concepts\interior-mutability.md | 3. RefCell 深入 | `#3-refcell-深入` | 同文件锚点不存在: #3-refcell-深入 |

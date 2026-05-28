@@ -294,7 +294,7 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 > **权威来源对齐变更日志**: 2026-05-19 新增 Linux 内核 io_uring 官方文档来源标注 [来源: Authority Source Sprint Batch 8]; 2026-05-21 补充决策树、性能对比、registered buffers 示例 [来源: io_uring Deep Dive]
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 深化完成
 

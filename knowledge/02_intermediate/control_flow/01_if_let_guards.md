@@ -241,7 +241,7 @@ match opt {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- **Rust 1.95.0+**: `if let` guards 在 **所有 Edition** 中可用
+- **Rust 1.96.0+**: `if let` guards 在 **所有 Edition** 中可用
 - **不需要** `#![feature(...)]` 或 Edition 2024
 - 与 `let chains`（需要 Edition 2024）是独立稳定的特性
 
@@ -414,7 +414,7 @@ match status {
 ---
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

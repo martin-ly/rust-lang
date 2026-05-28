@@ -405,7 +405,7 @@ cargo build --timings -Zsection-timings
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-> **最新版本**: Rust 1.95.0+ (2026-03-05)
+> **最新版本**: Rust 1.96.0+ (2026-03-05)
 
 本文档基于 Rust 1.93/1.92，最新版本请参见：
 
@@ -421,7 +421,7 @@ cargo build --timings -Zsection-timings
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

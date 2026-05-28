@@ -297,7 +297,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 > **权威来源**: [libp2p Specification](https://specs.libp2p.io/), [rust-libp2p](https://github.com/libp2p/rust-libp2p), [libp2p Documentation](https://docs.libp2p.io/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.95.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
 

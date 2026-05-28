@@ -25,7 +25,6 @@
 ---
 
 ## 📑 目录
->
 
 - [Type System Basics（类型系统基础）](#type-system-basics类型系统基础)
   - [📑 目录](#-目录)

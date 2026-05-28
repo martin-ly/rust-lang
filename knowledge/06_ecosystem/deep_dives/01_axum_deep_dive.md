@@ -3,7 +3,7 @@
 > **Bloom 层级**: 理解
 
 > **版本**: Axum 0.8.x
-> **Rust 版本**: 1.95.0+
+> **Rust 版本**: 1.96.0+
 > **难度**: 中级到高级
 > **预计阅读时间**: 45分钟
 > **权威来源**: [Axum 官方文档](https://docs.rs/axum/latest/axum/), [Tower 文档](https://docs.rs/tower/latest/tower/), [Hyper 文档](https://docs.rs/hyper/latest/hyper/)

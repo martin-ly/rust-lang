@@ -72,7 +72,7 @@
 
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成 (含完整跨文档映射网络)
 > **文档类型**: 文档管理指南
 > **关联文档**: [CROSS_REFERENCE_INDEX](../research_notes/CROSS_REFERENCE_INDEX.md) - 详细映射网络
@@ -956,7 +956,7 @@ struct LinkValidator {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-> **适用版本**: Rust 1.95.0+ (Edition 2024)
+> **适用版本**: Rust 1.96.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
@@ -999,7 +999,7 @@ struct LinkValidator {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

@@ -3,7 +3,7 @@
 > **快速参考** | [AI+Rust 生态指南](../../05_guides/AI_RUST_ECOSYSTEM_GUIDE.md) | [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -651,7 +651,7 @@ AI/ML 示例代码位于指南与外部仓库，可直接参考：
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-> **适用版本**: Rust 1.95.0+ | **实际场景**: 机器学习推理与训练
+> **适用版本**: Rust 1.96.0+ | **实际场景**: 机器学习推理与训练
 
 ---
 
@@ -835,7 +835,7 @@ impl RecommendationService {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

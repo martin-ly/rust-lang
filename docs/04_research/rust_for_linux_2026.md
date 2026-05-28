@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: L4-L5 (分析/评价)
 
-> **Rust 版本**: 1.95.0+
+> **Rust 版本**: 1.96.0+
 > **分析日期**: 2026-05-06
 > **状态**: Rust 已正式成为 Linux 内核永久组成部分
 > **权威来源**: [LKML](https://lore.kernel.org/lkml/), [Rust for Linux](https://rust-for-linux.com/), [Linux Kernel Docs](https://docs.kernel.org/rust/)
@@ -441,7 +441,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.2
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 权威来源对齐完成 (Batch 9)
 

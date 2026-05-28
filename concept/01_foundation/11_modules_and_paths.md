@@ -16,8 +16,6 @@
 > [RFC 2126 — Uniform Paths](https://rust-lang.github.io/rfcs/2126-path-clarity.html)
 
 ## 📑 目录
->
->
 
 - [模块系统与路径：Rust 的代码组织哲学](#模块系统与路径rust-的代码组织哲学)
   - [📑 目录](#-目录)
@@ -48,11 +46,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 模块层次结构
->
 
 ```text
 Rust 模块系统的核心实体:
@@ -149,7 +144,6 @@ mod outer {
 ---
 
 ### 1.3 路径解析
->
 
 ```rust,ignore
 // 路径类型
@@ -193,7 +187,6 @@ pub use self::hosting::add_to_waitlist;  // 外部可见
 ## 二、技术细节
 
 ### 2.1 文件系统映射
->
 
 ```text
 模块到文件的映射规则:
@@ -235,7 +228,6 @@ pub use self::hosting::add_to_waitlist;  // 外部可见
 ---
 
 ### 2.2 use 语句与重导出
->
 
 ```rust,ignore
 // 重导出（Re-export）模式
@@ -277,7 +269,6 @@ pub use self::{
 ---
 
 ### 2.3 工作空间（Workspace）
->
 
 ```toml
 # Cargo.toml (workspace root)
@@ -382,7 +373,6 @@ graph TD
 ---
 
 ### 4.2 边界极限
->
 
 ```text
 边界 1: 循环依赖
@@ -465,7 +455,6 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
->
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -498,16 +487,6 @@ graph TD
 ---
 
 ## 权威来源索引
-
->
->
->
-
----
-
----
-
----
 
 > **补充来源**
 
@@ -574,7 +553,11 @@ mod inner_fixed {
 // b.rs: use crate::common::Shared;
 ```
 
-> **修正**: Rust 严格禁止模块间的循环依赖（circular dependency）。这与 C/C++ 的前向声明（forward declaration）不同——Rust 的模块系统要求依赖关系是有向无环图（DAG）。若出现循环依赖，需重构代码：提取公共类型到独立模块，或使用 trait 抽象打破循环。这是 Rust 编译模型（整体编译、基于 crate 的依赖）的固有约束。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 严格禁止模块间的循环依赖（circular dependency）。
+> 这与 C/C++ 的前向声明（forward declaration）不同——Rust 的模块系统要求依赖关系是有向无环图（DAG）。
+> 若出现循环依赖，需重构代码：提取公共类型到独立模块，或使用 trait 抽象打破循环。
+> 这是 Rust 编译模型（整体编译、基于 crate 的依赖）的固有约束。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`pub(crate)` 与 `pub(super)` 的层级混淆（编译错误）
 
@@ -602,7 +585,18 @@ mod sibling {
 }
 ```
 
-> **修正**: Rust 的可见性修饰符精确控制作用域：`pub`（完全公开）、`pub(crate)`（当前 crate）、`pub(super)`（父模块）、`pub(in path)`（指定路径）。`pub(crate)` 和 `pub(super)` 的区别在大型 crate 中尤为重要——`pub(crate)` 允许 crate 内任何模块访问，`pub(super)` 限制为直接父模块。常见错误：1) 用 `pub` 代替 `pub(crate)`，暴露内部实现细节；2) 用 `pub(super)` 但需要在兄弟模块中访问；3) 混淆 `super` 和 `crate`（`super` 是上一级，`crate` 是根）。这与 Java 的 `package-private`（无修饰符，同包可见）或 C# 的 `internal`（同程序集可见）类似——Rust 提供更细粒度的控制。模块系统的可见性是 API 设计的关键工具：最小化公开表面，最大化重构自由。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html)] · [来源: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)]
+> **修正**: Rust 的可见性修饰符精确控制作用域：
+> `pub`（完全公开）、`pub(crate)`（当前 crate）、`pub(super)`（父模块）、`pub(in path)`（指定路径）。
+> `pub(crate)` 和 `pub(super)` 的区别在大型 crate 中尤为重要——`pub(crate)` 允许 crate 内任何模块访问，`pub(super)` 限制为直接父模块。
+> 常见错误：
+>
+> 1) 用 `pub` 代替 `pub(crate)`，暴露内部实现细节；
+> 2) 用 `pub(super)` 但需要在兄弟模块中访问；
+> 3) 混淆 `super` 和 `crate`（`super` 是上一级，`crate` 是根）。
+> 这与 Java 的 `package-private`（无修饰符，同包可见）或 C# 的 `internal`（同程序集可见）类似——Rust 提供更细粒度的控制。
+> 模块系统的可见性是 API 设计的关键工具：最小化公开表面，最大化重构自由。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html)] ·
+> [来源: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)]
 
 ### 10.4 边界测试：`use` 语句的循环依赖（编译错误）
 
@@ -617,7 +611,19 @@ pub use crate::a::A;
 // Rust 允许模块间的循环依赖（通过 `use`），但 item 的定义不能循环
 ```
 
-> **修正**: Rust 的模块系统允许**循环 `use`**（模块 A `use` 模块 B 的项，模块 B `use` 模块 A 的项），因为 `use` 只是别名，不定义新项。但**项的定义不能循环**：`struct A { b: B }` 和 `struct B { a: A }` 是无限大小类型，编译错误。`use` 循环的常见场景：1) `prelude` 模块集中暴露公开 API；2) 子模块互相引用类型；3) `pub use` 重新导出组织 API 表面。Rust 的模块解析是声明式的：所有 `mod` 声明在编译期收集，然后解析 `use` 路径，最后检查循环。这与 Python 的循环 import（运行时动态，可能部分成功）或 C/C++ 的头文件循环 include（需 `#pragma once` 或 include guard）不同——Rust 的模块系统从设计上避免循环问题。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)] · [来源: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html)]
+> **修正**: Rust 的模块系统允许**循环 `use`**（模块 A `use` 模块 B 的项，模块 B `use` 模块 A 的项），因为 `use` 只是别名，不定义新项。
+> 但**项的定义不能循环**：`struct A { b: B }` 和 `struct B { a: A }` 是无限大小类型，编译错误。
+> `use` 循环的常见场景：
+>
+> 1) `prelude` 模块集中暴露公开 API；
+> 2) 子模块互相引用类型；
+> 3) `pub use` 重新导出组织 API 表面。
+> Rust 的模块解析是声明式的：
+> 所有 `mod` 声明在编译期收集，然后解析 `use` 路径，最后检查循环。
+> 这与 Python 的循环 import（运行时动态，可能部分成功）或 C/C++ 的头文件循环 include（需 `#pragma once` 或 include guard）不同
+> ——Rust 的模块系统从设计上避免循环问题。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html)] ·
+> [来源: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html)]
 
 ### 10.5 边界测试：模块文件系统的歧义解析（编译错误）
 

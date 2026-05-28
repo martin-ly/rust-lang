@@ -19,8 +19,6 @@
 > [Wikipedia — B-tree](https://en.wikipedia.org/wiki/B-tree)
 
 ## 📑 目录
->
->
 
 - [集合类型：Rust 标准库的数据结构谱系](#集合类型rust-标准库的数据结构谱系)
   - [📑 目录](#-目录)

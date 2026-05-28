@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-> **Rust版本**: 1.95.0+ (Edition 2024)
+> **Rust版本**: 1.96.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12
 > **覆盖范围**: 并行、同步、异步架构模式
 > **权威参考**: Rust Async Book, Tokio文档, Rayon文档
@@ -826,7 +826,7 @@ async fn good_mutex() {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

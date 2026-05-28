@@ -273,7 +273,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 > **权威来源**: [RFC 9000](https://datatracker.ietf.org/doc/html/rfc9000), [RFC 9114](https://datatracker.ietf.org/doc/html/rfc9114), [quinn](https://github.com/quinn-rs/quinn)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.95.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
 

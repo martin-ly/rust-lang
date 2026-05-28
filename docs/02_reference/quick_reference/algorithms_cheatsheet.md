@@ -70,7 +70,7 @@
 > **快速参考** | [完整文档](../../../crates/c08_algorithms/docs/README.md) | [代码示例](../../../crates/c08_algorithms/examples/README.md)
 > **创建日期**: 2026-01-26
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -947,7 +947,7 @@ fn fib(n: usize) -> usize {
 ---
 
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.95.0+ (Edition 2024)
+**Rust 版本**: 1.96.0+ (Edition 2024)
 **提示**: 使用 `cargo doc --open` 查看完整 API 文档
 
 ---
@@ -956,7 +956,7 @@ fn fib(n: usize) -> usize {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-> **适用版本**: Rust 1.95.0+ | **实际场景**: 算法优化与数值计算
+> **适用版本**: Rust 1.96.0+ | **实际场景**: 算法优化与数值计算
 
 ---
 
@@ -1378,7 +1378,7 @@ impl StreamProcessor {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

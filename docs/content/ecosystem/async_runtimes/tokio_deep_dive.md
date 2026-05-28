@@ -3,7 +3,7 @@
 > **Bloom 层级**: L3-L4 (应用/分析)
 
 > **版本**: Tokio 1.49.0+
-> **Rust 版本**: 1.95.0+
+> **Rust 版本**: 1.96.0+
 > **难度**: 高级
 > **关键词**: 异步运行时、任务调度、I/O驱动
 
@@ -546,7 +546,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

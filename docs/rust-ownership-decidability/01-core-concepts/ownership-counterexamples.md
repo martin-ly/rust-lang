@@ -38,7 +38,7 @@
     - [5.1 "Clone是免费的"](#51-clone是免费的)
     - [5.2 "RefCell可以替代所有借用"](#52-refcell可以替代所有借用)
   - [6. 反例总结表](#6-反例总结表)
-  - [**对齐版本**: Rust 1.95.0+ (Edition 2024) | 对齐日期: 2026-05-12](#对齐版本-rust-1950-edition-2024--对齐日期-2026-05-12)
+  - [**对齐版本**: Rust 1.96.0+ (Edition 2024) | 对齐日期: 2026-05-12](#对齐版本-rust-1950-edition-2024--对齐日期-2026-05-12)
   - [权威来源索引](#权威来源索引)
 
 ## 1. 所有权规则反例
@@ -550,7 +550,7 @@ fn prefer_compile_time() {
 
 **维护er**: Rust Counterexamples Team
 **更新日期**: 2026-03-06
-**对齐版本**: Rust 1.95.0+ (Edition 2024) | 对齐日期: 2026-05-12
+**对齐版本**: Rust 1.96.0+ (Edition 2024) | 对齐日期: 2026-05-12
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -558,7 +558,7 @@ fn prefer_compile_time() {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

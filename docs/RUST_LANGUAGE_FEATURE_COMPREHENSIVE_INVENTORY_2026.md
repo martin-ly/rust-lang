@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: L2-L3 (理解/应用)
 
-> **版本**: Rust 1.95.0+ (Edition 2024)
+> **版本**: Rust 1.96.0+ (Edition 2024)
 > **梳理日期**: 2026-05-08
 > **修订日期**: 2026-05-08
 > **方法**: 认知视角下的知识完备性检查 + 集合论对称差分析
@@ -135,7 +135,7 @@
     - [B.2 1.95 语言特性（非 API）](#b2-195-语言特性非-api)
   - [附录 C：特性成熟度决策树](#附录-c特性成熟度决策树)
   - [附录 D：认知完备性检查表](#附录-d认知完备性检查表)
-  - [*项目 MSRV: 1.95.0+ (Edition 2024)*](#项目-msrv-1950-edition-2024)
+  - [*项目 MSRV: 1.96.0+ (Edition 2024)*](#项目-msrv-1950-edition-2024)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)
@@ -2608,7 +2608,7 @@ graph TD
 *文档版本: v1.0-draft*
 *生成日期: 2026-05-08*
 *对应 Rust 版本: 1.95.0 (stable) / 1.96.0-beta.8 (最终候选) / 1.97.0 (nightly)*
-*项目 MSRV: 1.95.0+ (Edition 2024)*
+*项目 MSRV: 1.96.0+ (Edition 2024)*
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -2616,7 +2616,7 @@ graph TD
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

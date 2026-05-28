@@ -302,7 +302,7 @@ mod app {
 > **权威来源**: [Embassy Book](https://embassy.dev/book/), [RTIC Book](https://rtic-rs.github.io/book/), [Rust Embedded WG](https://github.com/rust-embedded/wg)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.95.0+ (Edition 2024)
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
 

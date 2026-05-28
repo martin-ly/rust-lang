@@ -1,7 +1,7 @@
 # Let Chains 全面指南
 
 > **Bloom 层级**: L2 (Comprehension) — L3 (Application)
-> **对应 Rust 版本**: 1.95.0+ stable
+> **对应 Rust 版本**: 1.96.0+ stable
 > **最后更新**: 2026-05-20
 
 ---
@@ -361,7 +361,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 | `while let` chains | 1.95.0 | `while let A = a && let B = b` |
 | `if let` guards | 1.95.0 | match arm guards 中的 `if let` |
 
-**最低要求**: Edition 2021 或 2024，Rust 1.95.0+
+**最低要求**: Edition 2021 或 2024，Rust 1.96.0+
 
 ---
 

@@ -769,7 +769,7 @@ enum Temperature {
 > **权威来源对齐变更日志**: 2026-05-19 新增类型转换形式化语义来源标注、RFC 2484 TryFrom/TryInto 设计决策引用、跨语言类型转换对比矩阵 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

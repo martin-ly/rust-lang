@@ -66,7 +66,7 @@
 > **快速参考** | [完整文档](../../../crates/c04_generic/docs/README.md) | [代码示例](../../../crates/c04_generic/examples/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 
 ---
@@ -872,7 +872,7 @@ fn main() {
 ---
 
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.95.0+ (Edition 2024)
+**Rust 版本**: 1.96.0+ (Edition 2024)
 
 ---
 
@@ -880,7 +880,7 @@ fn main() {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-> **适用版本**: Rust 1.95.0+
+> **适用版本**: Rust 1.96.0+
 
 ### 核心特性速查
 >
@@ -929,7 +929,7 @@ let gamma = f64::consts::EULER_GAMMA;
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **适用版本**: Rust 1.95.0+ | **实际场景**: 泛型开发
+> **适用版本**: Rust 1.96.0+ | **实际场景**: 泛型开发
 
 ### ControlFlow 在泛型约束中的应用
 >
@@ -993,7 +993,7 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

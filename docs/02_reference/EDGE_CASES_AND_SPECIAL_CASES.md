@@ -8,7 +8,7 @@
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-05-08
-> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 集合、算法、并发等模块的边界/特例示例
 
@@ -832,7 +832,7 @@ fn iterator_invalidation() {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-> **适用版本**: Rust 1.95.0+
+> **适用版本**: Rust 1.96.0+
 
 详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
@@ -841,7 +841,7 @@ fn iterator_invalidation() {
 ---
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

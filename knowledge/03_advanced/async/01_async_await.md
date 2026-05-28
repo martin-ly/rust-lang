@@ -1128,7 +1128,7 @@ async fn safe_read_from_unsafe_source(rx: &mut mpsc::Receiver<i32>) -> Option<i3
 ---
 
 **文档版本**: 2.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

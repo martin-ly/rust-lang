@@ -947,7 +947,7 @@ fn process(items: &[&dyn Display]) {
 ---
 
 **文档版本**: 2.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 > **权威来源**: [Rust Reference — Generic parameters](https://doc.rust-lang.org/reference/items/generics.html), [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html), [RFC 1598: GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html), [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/)
 >

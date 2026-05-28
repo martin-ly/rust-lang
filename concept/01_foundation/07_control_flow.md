@@ -16,8 +16,6 @@
 > [RFC 160 — `if let`](https://github.com/rust-lang/rfcs/pull/160)
 
 ## 📑 目录
->
->
 
 - [控制流：表达式导向的流程控制](#控制流表达式导向的流程控制)
   - [📑 目录](#-目录)
@@ -49,11 +47,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 表达式 vs 语句
->
 
 ```text
 Rust 是表达式导向语言（Expression-Oriented Language）:
@@ -95,7 +90,6 @@ Rust 是表达式导向语言（Expression-Oriented Language）:
 ---
 
 ### 1.2 match：穷尽性模式匹配
->
 
 ```rust,ignore
 // match 是 Rust 最强大的控制流工具
@@ -146,7 +140,6 @@ match result {
 ---
 
 ### 1.3 if let / while let：简化的模式匹配
->
 
 ```rust,ignore
 // if let: 当只关心一个模式时使用
@@ -197,7 +190,6 @@ if let Some(x) = opt1 && let Some(y) = opt2 && x > y {
 ## 二、技术细节
 
 ### 2.1 loop 与值返回
->
 
 ```rust,ignore
 // loop 可以返回值（Rust 特有）
@@ -240,7 +232,6 @@ let sum: i32 = (0..10).map(|x| x * 2).sum();
 ---
 
 ### 2.2 标签与嵌套循环控制
->
 
 ```rust,ignore
 // 标签循环: 控制嵌套循环
@@ -282,7 +273,6 @@ let result = 'retry: loop {
 ---
 
 ### 2.3 块表达式与尾部值
->
 
 ```rust,ignore
 // 块表达式 {} 的值是其最后一个表达式
@@ -387,7 +377,6 @@ let x = if condition {
 ## 四、反命题与边界分析
 
 ### 4.1 反命题树
->
 
 ```mermaid
 graph TD
@@ -409,7 +398,6 @@ graph TD
 ---
 
 ### 4.2 边界极限
->
 
 ```text
 边界 1: match 的穷尽性限制
@@ -513,7 +501,6 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
->
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -548,16 +535,6 @@ graph TD
 
 ## 权威来源索引
 
->
->
->
-
----
-
----
-
----
-
 > **补充来源**
 
 ## 十二、边界测试：控制流的编译错误
@@ -587,7 +564,9 @@ fn fixed() -> i32 {
 fn some_condition() -> bool { false }
 ```
 
-> **修正**: `loop` 表达式可以返回值（通过 `break expr;`），但所有 `break` 分支必须返回相同类型。编译器通过控制流分析推断 `loop` 的类型。若存在不一致的 `break` 类型，编译器报错。这类似于 `match` 的所有分支必须返回相同类型。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `loop` 表达式可以返回值（通过 `break expr;`），但所有 `break` 分支必须返回相同类型。编译器通过控制流分析推断 `loop` 的类型。
+> 若存在不一致的 `break` 类型，编译器报错。这类似于 `match` 的所有分支必须返回相同类型。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 12.2 边界测试：`if let` 与 `while let` 的变量遮蔽（编译错误）
 
@@ -613,7 +592,11 @@ fn fixed() {
 }
 ```
 
-> **修正**: `if let` 和 `while let` 通过模式匹配解构值。若模式不使用 `ref` 或 `ref mut`，则发生所有权移动（对非 `Copy` 类型）。使用 `ref` 绑定创建引用而非获取所有权，允许在匹配后继续使用原值。这是 Rust 模式匹配与所有权系统的关键交互点。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: `if let` 和 `while let` 通过模式匹配解构值。
+> 若模式不使用 `ref` 或 `ref mut`，则发生所有权移动（对非 `Copy` 类型）。
+> 使用 `ref` 绑定创建引用而非获取所有权，允许在匹配后继续使用原值。
+> 这是 Rust 模式匹配与所有权系统的关键交互点。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.3 边界测试：`loop` 表达式的类型推断（编译错误）
 
@@ -631,7 +614,16 @@ fn maybe_return() -> i32 {
 fn some_condition() -> bool { true }
 ```
 
-> **修正**: `loop` 是 Rust 中唯一可返回值的循环结构：`break expr` 返回 `expr` 作为 `loop` 的值。编译器要求：1) 所有 `break` 返回相同类型；2) 若 `loop` 可能无限循环（无 `break`），其类型为 `!`（never type），可 coerce 为任意类型。`loop { break 42 }` 的类型是 `i32`，`loop { break "hello" }` 的类型是 `&str`。若 `break` 的类型不一致，编译错误。这与 C 的 `for`/`while`（无返回值）或 Haskell 的 `rec`/`fix`（返回值但语义不同）不同——Rust 的 `loop` 返回值使某些模式更简洁（如重试逻辑返回操作结果）。`loop` 与 `break` 的组合是 Rust 控制流的独特设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html)]
+> **修正**: `loop` 是 Rust 中唯一可返回值的循环结构：`break expr` 返回 `expr` 作为 `loop` 的值。
+> 编译器要求：
+>
+> 1) 所有 `break` 返回相同类型；
+> 2) 若 `loop` 可能无限循环（无 `break`），其类型为 `!`（never type），可 coerce 为任意类型。
+> `loop { break 42 }` 的类型是 `i32`，`loop { break "hello" }` 的类型是 `&str`。
+> 若 `break` 的类型不一致，编译错误。这与 C 的 `for`/`while`（无返回值）或 Haskell 的 `rec`/`fix`（返回值但语义不同）不同——Rust 的 `loop` 返回值使某些模式更简洁（如重试逻辑返回操作结果）。
+> `loop` 与 `break` 的组合是 Rust 控制流的独特设计。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] ·
+> [来源: [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html)]
 
 ### 10.4 边界测试：`?` 运算符在 `main` 中的返回类型（编译错误）
 

@@ -78,7 +78,7 @@
 **模块**: C06 Async
 **创建日期**: 2025-12-11
 **最后更新**: 2026-05-08
-**Rust 版本**: 1.95.0+ (Edition 2024)
+**Rust 版本**: 1.96.0+ (Edition 2024)
 **状态**: ✅ 已完成
 
 ---
@@ -1756,7 +1756,7 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 >
 > **[来源: Rust Official Docs]**
 
-> **适用版本**: Rust 1.95.0+
+> **适用版本**: Rust 1.96.0+
 
 ### ControlFlow 在异步编程中的应用
 
@@ -1909,7 +1909,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

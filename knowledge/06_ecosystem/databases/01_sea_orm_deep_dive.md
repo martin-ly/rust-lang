@@ -3,7 +3,7 @@
 > **Bloom 层级**: 理解
 
 > **版本**: Sea-ORM 1.x
-> **Rust 版本**: 1.95.0+
+> **Rust 版本**: 1.96.0+
 > **难度**: 中级
 > **预计阅读时间**: 40分钟
 > **权威来源**: [Sea-ORM 官方文档](https://www.sea-ql.org/SeaORM/), [Sea-ORM GitHub](https://github.com/SeaQL/sea-orm)

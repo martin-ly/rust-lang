@@ -127,7 +127,7 @@ CI/测试:          BorrowSanitizer + Miri
 > **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html), [RustConf 2026](https://rustconf.com/)
 >
 > **文档版本**: 1.0
-> **对应 Rust 版本**: 1.95.0+ Nightly (未来)
+> **对应 Rust 版本**: 1.96.0+ Nightly (未来)
 > **最后更新**: 2026-05-21
 > **状态**: 🟡 预研跟踪
 

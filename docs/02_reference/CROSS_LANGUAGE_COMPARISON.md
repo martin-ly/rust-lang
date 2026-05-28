@@ -4,7 +4,7 @@
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-05-19
-> **Rust 版本**: 1.95.0+ (Edition 2024)
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 技术选型、迁移参考、概念对标
 
@@ -655,7 +655,7 @@ $ python -m pytest
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-> **适用版本**: Rust 1.95.0+
+> **适用版本**: Rust 1.96.0+
 
 详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
@@ -664,7 +664,7 @@ $ python -m pytest
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference / RFC、C++ ISO / cppreference、Go Spec、学术论文），添加 Haskell 对标索引 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

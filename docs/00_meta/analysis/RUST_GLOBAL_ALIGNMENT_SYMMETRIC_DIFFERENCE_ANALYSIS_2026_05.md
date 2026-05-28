@@ -283,7 +283,7 @@
 
 | 任务 | 目标 | 操作 |
 |------|------|------|
-| 3.1 | 活跃 docs 子目录 README | 版本横幅统一为 "Rust 1.95.0+ (Edition 2024)" |
+| 3.1 | 活跃 docs 子目录 README | 版本横幅统一为 "Rust 1.96.0+ (Edition 2024)" |
 | 3.2 | `docs/06_toolchain/` | 新增 cargo-script、cargo-semver-checks 专题 |
 | 3.3 | `docs/05_guides/` | Miri 实战指南、async closures 深度指南 |
 | 3.4 | `docs/2026_03_reorganization/` | 清理过渡文件（39 个），有价值的合并，其余归档 |
@@ -324,7 +324,7 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 

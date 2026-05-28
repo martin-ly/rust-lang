@@ -22,8 +22,6 @@
 > [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504)
 
 ## 📑 目录
->
->
 
 - [字符串与文本：Rust 的 Unicode 处理与格式化系统](#字符串与文本rust-的-unicode-处理与格式化系统)
   - [📑 目录](#-目录)

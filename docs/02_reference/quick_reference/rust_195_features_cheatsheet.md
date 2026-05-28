@@ -363,7 +363,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 
 ```rust,ignore
 const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
-    cf.is_break() // 1.95.0+ 可在 const fn 中使用
+    cf.is_break() // 1.96.0+ 可在 const fn 中使用
 }
 ```
 
@@ -393,7 +393,7 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 标准库、Rust Reference、TRPL 官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
