@@ -460,7 +460,7 @@ git checkout -- .
 - [Rust 1.95 Release Notes](https://blog.rust-lang.org/)
 - [Rust 1.96 Release Notes](https://blog.rust-lang.org/)
 - [if let guards RFC](https://rust-lang.github.io/rfcs/2294-if-let-guard.html)
-- [详细特性文档](./06_toolchain/19_rust_1.96_features.md)
+- [详细特性文档](./06_toolchain/06_19_rust_1_96_features.md)
 - [特性速查表](./02_reference/quick_reference/02_rust_196_features_cheatsheet.md)
 
 **详细指南**: 2026_RUST_ECOSYSTEM_COMPREHENSIVE_REVIEW.md

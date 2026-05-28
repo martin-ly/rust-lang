@@ -192,7 +192,7 @@
 | Generic Parameters | type_system_foundations.md §系统F | ✅ |
 | Impl Trait | type_system_foundations.md Def 4.1 | ✅ |
 | Dyn Trait | type_system_foundations.md Def 4.2 | ✅ |
-| Const Generics | CONST_EVALUATION.md | ✅ |
+| Const Generics | 10_const_evaluation.md | ✅ |
 
 ### 所有权与借用
 
@@ -229,7 +229,7 @@
 
 | 差距ID | 描述 | 影响 | 修复文档 |
 | :--- | :--- | :--- | :--- |
-| GAP-SLICE-01 | Slice类型形式化 | Ch 4.3 | slice_formalization.md |
+| GAP-SLICE-01 | Slice类型形式化 | Ch 4.3 | 10_slice_formalization.md |
 | GAP-DEREF-01 | Deref trait形式化 | Ch 15.2 | trait_system_formalization.md |
 
 ### P1 中优先级 (下周修复)

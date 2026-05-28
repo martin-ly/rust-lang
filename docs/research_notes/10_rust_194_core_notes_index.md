@@ -35,12 +35,12 @@
 | 序号 | 文档名称 | 1.94相关性 | 状态 |
 |------|----------|------------|------|
 | 1 | RUST_194_COMPREHENSIVE_SEMANTICS_FRAMEWORK.md | 核心 | ✅ 已完成 |
-| 2 | RUST_194_MIND_REPRESENTATIONS.md | 核心 | ✅ 已完成 |
+| 2 | 10_rust_194_mind_representations.md | 核心 | ✅ 已完成 |
 | 3 | RUST_194_RESEARCH_UPDATE.md | 核心 | ✅ 已完成 |
 | 4 | RUST_194_COMPREHENSIVE_ANALYSIS.md | 核心 | ✅ 已完成 |
 | 5 | RUST_193_FEATURE_MATRIX.md | 参考 | ✅ 已完成 |
-| 6 | RUST_194_195_FEATURE_MATRIX.md | 参考 | ✅ 已完成 |
-| 7 | CARGO_194_FEATURES.md | 相关 | 🔄 待更新 |
+| 6 | 10_rust_194_195_feature_matrix.md | 参考 | ✅ 已完成 |
+| 7 | 10_cargo_194_features.md | 相关 | 🔄 待更新 |
 | 8 | formal_methods/README.md | 核心 | 🔄 待更新 |
 | 9 | FORMAL_METHODS_MASTER_INDEX.md | 核心 | 🔄 待更新 |
 | 10 | PROOF_INDEX.md | 核心 | 🔄 待更新 |

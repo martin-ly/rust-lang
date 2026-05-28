@@ -301,7 +301,7 @@
 | 单元测试 | `crates/*/src/lib.rs` 中的 `#[cfg(test)]` | 模块内测试 |
 | 集成测试 | `tests/cross_module_integration_tests.rs` | 跨模块测试 |
 | 文档测试 | 所有 crate 的文档注释中的 ``` 代码块 | 文档内嵌测试 |
-| 属性测试 | `docs/03_guides/FUZZING_GUIDE.md` | proptest 使用指南 |
+| 属性测试 | `docs/03_guides/03_fuzzing_guide.md` | proptest 使用指南 |
 | 基准测试 | `crates/c08_algorithms/src/performance_benchmarks.rs` | Criterion 实例 |
 | Miri | `docs/03_guides/MIRI_GUIDE.md` | 未定义行为检测 |
 | 覆盖率 | `docs/03_guides/TEST_COVERAGE.md` | tarpaulin 使用 |

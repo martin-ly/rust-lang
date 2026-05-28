@@ -282,7 +282,7 @@
 - [季度同步检查表](./QUARTERLY_SYNC_CHECKLIST.md)
 - [PDCA 循环模板](./PDCA_TEMPLATE.md)
 - [版本对齐检查表](./RUST_VERSION_ALIGNMENT_CHECKLIST.md)
-- [项目健康度仪表盘](./PROJECT_HEALTH_DASHBOARD.md)
+- [项目健康度仪表盘](./00_project_health_dashboard.md)
 
 ### 数据支持
 

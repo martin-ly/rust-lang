@@ -203,7 +203,7 @@
 
 ## 6. 相关文档
 
-- `DOCUMENTATION_LIFECYCLE.md` — 文档生命周期管理制度
+- `00_documentation_lifecycle.md` — 文档生命周期管理制度
 - `DOCS_STRUCTURE_OVERVIEW.md` — 完整结构总览
 - `DOCUMENTATION_CROSS_REFERENCE_GUIDE.md` — 跨文档映射网络
 

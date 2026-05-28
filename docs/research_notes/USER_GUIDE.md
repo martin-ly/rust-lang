@@ -120,7 +120,7 @@ Rust Formal Methods Research Notes 是一套全面的Rust形式化方法文档�
 问题：理解借用检查器错误
 └── 路径：
     ├── 查阅 TUTORIAL_BORROW_CHECKER.md
-    ├── 参考 CONCEPT_COMPARISON_TABLES.md
+    ├── 参考 10_concept_comparison_tables.md
     ├── 阅读 borrow_checker_proof.md 相关章节
     └── 练习 COUNTER_EXAMPLES_COMPENDIUM.md 相关示例
 

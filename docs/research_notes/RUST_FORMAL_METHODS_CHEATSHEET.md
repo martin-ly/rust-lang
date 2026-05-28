@@ -580,7 +580,7 @@ Coq → Iris → RustBelt → 工具开发
 | :--- | :--- |
 | 查概念定义 | [形式化概念百科](./FORMAL_CONCEPTS_ENCYCLOPEDIA.md) |
 | 查定理证明 | [定理汇编](./THEOREMS_AND_PROOF_STRATEGIES.md) |
-| 查学习路径 | [学习路径](./LEARNING_PATH_COMPREHENSIVE.md) |
+| 查学习路径 | [学习路径](./10_learning_path_comprehensive.md) |
 | 查错误修复 | [反例汇编](./COUNTER_EXAMPLES_COMPENDIUM.md) |
 | 查方法论 | [认知论证框架](./COGNITIVE_ARGUMENTATION_FRAMEWORK.md) |
 

@@ -32,7 +32,7 @@
 ## 相关文档
 
 - [学习路径规划](../LEARNING_PATH_PLANNING.md)
-- [MDBook 测验指南](../MDBOOK_QUIZ_GUIDE.md)
+- [MDBook 测验指南](../01_mdbook_quiz_guide.md)
 
 ---
 

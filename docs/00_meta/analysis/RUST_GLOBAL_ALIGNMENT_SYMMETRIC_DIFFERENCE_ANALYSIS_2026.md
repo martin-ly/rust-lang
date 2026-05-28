@@ -85,7 +85,7 @@
 1. `PROJECT_COMPREHENSIVE_UPDATE_PLAN.md` - Rust 1.96 特性全面采用
 2. `RUST_1.96_MIGRATION_PLAN.md` - 1.94 to 1.96 迁移 (Phase 2-7)
 3. `PROJECT_CRITICAL_EVALUATION_AND_NEXT_PLAN.md` - 13个 crates 版本号不一致修复
-4. `docs/2026_03_reorganization/EXTENSION_DEEPENING_PLAN_2026.md` - 证明树可视化增强
+4. `docs/2026_03_reorganization/07_extension_deepening_plan_2026.md` - 证明树可视化增强
 5. `crates/c04_generic/docs/C04_RESTRUCTURING_PLAN_2025_10_22.md` - Phase 2-8 文档重组
 6. `crates/c09_design_pattern/IMPLEMENTATION_ROADMAP.md` - 12周设计模式实施
 7. `crates/c10_networks/reports/ROADMAP.md` - v0.1 to v1.0 网络路线图

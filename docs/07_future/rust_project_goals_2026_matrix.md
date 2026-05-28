@@ -58,8 +58,8 @@
 
 | 官方目标 | 负责人 | 状态 | 项目覆盖 | 覆盖文件 | 缺口 |
 |:---|:---|:---:|:---|:---|:---|
-| **Rust for Linux: compiler features** | Tomas Sedovic / Wesley Wiser | 推进中 | 🟡 部分 | `docs/rust_for_linux_2026.md` | 缺少具体 unstable feature 清单与代码示例 |
-| **Rust for Linux: language features** | Tomas Sedovic / Josh Triplett | 推进中 | 🟡 部分 | `docs/rust_for_linux_2026.md` | 同上 |
+| **Rust for Linux: compiler features** | Tomas Sedovic / Wesley Wiser | 推进中 | 🟡 部分 | `docs/04_rust_for_linux_2026.md` | 缺少具体 unstable feature 清单与代码示例 |
+| **Rust for Linux: language features** | Tomas Sedovic / Josh Triplett | 推进中 | 🟡 部分 | `docs/04_rust_for_linux_2026.md` | 同上 |
 | **Stabilize Const Generics** | Boxy / Niko Matsakis | **目标 2026 稳定** | 🟡 部分 | `concept/02_intermediate/02_generics.md` | `adt_const_params` 无代码示例；`min_generic_const_args` 无代码示例 |
 | **Stabilize Const Traits** | Deadbeef | **目标 2026 RFC + 稳定** | 🟡 部分 | `concept/02_intermediate/01_traits.md` §Const Trait | 缺少 `~const` → `const trait` 语法迁移跟踪 |
 | **Stabilize next-generation trait solver** | lcnr / Niko Matsakis | **目标 2026 稳定** | 🔴 **缺失** | — | **完全缺失**；需新建概念章节 + nightly 代码示例 |

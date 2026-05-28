@@ -68,9 +68,9 @@ formal_methods 目录已达到 **100% 完成度**！
 | # | 证明树 | 文件名 | 状态 |
 |---|--------|--------|------|
 | 1 | 类型安全证明树 | PROOF_TREE_TYPE_SAFETY.md | ✅ |
-| 2 | Send/Sync安全证明树 | PROOF_TREE_SEND_SYNC.md | ✅ |
-| 3 | 型变安全证明树 | PROOF_TREE_VARIANCE.md | ✅ |
-| 4 | 异步并发安全证明树 | PROOF_TREE_ASYNC_CONCURRENCY.md | ✅ |
+| 2 | Send/Sync安全证明树 | 10_proof_tree_send_sync.md | ✅ |
+| 3 | 型变安全证明树 | 10_proof_tree_variance.md | ✅ |
+| 4 | 异步并发安全证明树 | 10_proof_tree_async_concurrency.md | ✅ |
 
 ### 2. Coq骨架创建 (3个)
 
