@@ -83,7 +83,7 @@ rust-lang/
 ├── 00_meta/               # 📋 元数据与项目治理
 │   ├── history/
 │   │   ├── 2026_reorganization.md    # 重组记录
-│   │   └── REORGANIZATION_COMPLETE.md # 本报告
+│   │   └── 00_reorganization_complete.md # 本报告
 │   └── project_charter.md # 项目章程
 │
 ├── 01_docs/               # 📚 核心文档（全新整合）
