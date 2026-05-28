@@ -808,7 +808,7 @@ jobs:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-- [Verus 实战指南 —— 互补的演绎验证器](VERUS_PRACTICAL_GUIDE.md)
+- [Verus 实战指南 —— 互补的演绎验证器](05_verus_practical_guide.md)
 - [形式化操作语义与 Rust 的形式化模型](../../concept/04_formal/09_operational_semantics.md)
 - [所有权的形式化定义](../../concept/04_formal/03_ownership_formal.md)
 

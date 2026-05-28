@@ -17,7 +17,7 @@
 
 | 项目 | 描述 | 所需知识 | 预计时间 |
 |------|------|---------|---------|
-| [项目 01: 命令行工具](./project-01-cli-tool.md) | Todo CLI工具 | c01-c03 | 2-3h |
+| [项目 01: 命令行工具](./03_project_01_cli_tool.md) | Todo CLI工具 | c01-c03 | 2-3h |
 | [项目 02: 文件处理器](./project-02-file-processor.md) | 文件搜索/复制/统计 | c01-c03 | 2-3h |
 | [项目 03: 表达式计算器](./project-03-calculator.md) | 支持四则运算的计算器 | c01-c04 | 3-4h |
 | [项目 04: 密码生成器](./project-04-password-generator.md) | 随机密码生成 | c01-c03 | 1-2h |

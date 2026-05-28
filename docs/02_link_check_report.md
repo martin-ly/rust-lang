@@ -58,9 +58,9 @@
 | docs\00_meta\ANNUAL_REVIEW_TEMPLATE.md | 6️⃣ 年度总结 | `#6️⃣-年度总结` | 同文件锚点不存在: #6️⃣-年度总结 |
 | docs\00_meta\CONTENT_RECONSTRUCTION_PLAN_2026.md | 模块 6: 反例集（Counterexamples \& Anti-patterns） | `#模块-6-反例集counterexamples--anti-patterns` | 同文件锚点不存在: #模块-6-反例集counterexamples--anti-patterns |
 | docs\00_meta\CONTENT_RECONSTRUCTION_PLAN_2026.md | **状态**: 待确认 | `#状态-待确认` | 同文件锚点不存在: #状态-待确认 |
-| docs\00_meta\CRITICAL_EVALUATION_AND_IMPROVEMENT_PLAN.md | **下次评价时间**: 2026-04-18 | `#下次评价时间-2026-04-18` | 同文件锚点不存在: #下次评价时间-2026-04-18 |
-| docs\00_meta\DOCS_FINAL_ORGANIZATION_REPORT.md | **状态**: ✅ **Docs目录整理完成** | `#状态--docs目录整理完成` | 同文件锚点不存在: #状态--docs目录整理完成 |
-| docs\00_meta\DOCS_REORGANIZATION_COMPLETE.md | ✅ **重组完成** - docs目录已清晰组织 | `#-重组完成---docs目录已清晰组织` | 同文件锚点不存在: #-重组完成---docs目录已清晰组织 |
+| docs\00_meta\00_critical_evaluation_and_improvement_plan.md | **下次评价时间**: 2026-04-18 | `#下次评价时间-2026-04-18` | 同文件锚点不存在: #下次评价时间-2026-04-18 |
+| docs\00_meta\00_docs_final_organization_report.md | **状态**: ✅ **Docs目录整理完成** | `#状态--docs目录整理完成` | 同文件锚点不存在: #状态--docs目录整理完成 |
+| docs\00_meta\00_docs_reorganization_complete.md | ✅ **重组完成** - docs目录已清晰组织 | `#-重组完成---docs目录已清晰组织` | 同文件锚点不存在: #-重组完成---docs目录已清晰组织 |
 | docs\00_meta\DOCUMENTATION_DIVISION_OF_LABOR.md | 2.1 `knowledge/` — 面向学习者的分层教程 | `#21-knowledge--面向学习者的分层教程` | 同文件锚点不存在: #21-knowledge--面向学习者的分层教程 |
 | docs\00_meta\DOCUMENTATION_DIVISION_OF_LABOR.md | 2.2 `docs/05_guides/` — 面向开发者的专题查阅指南 | `#22-docs05_guides--面向开发者的专题查阅指南` | 同文件锚点不存在: #22-docs05_guides--面向开发者的专题查阅指南 |
 | docs\00_meta\DOCUMENTATION_DIVISION_OF_LABOR.md | 2.3 `docs/02_reference/` — 速查卡与边界特例 | `#23-docs02_reference--速查卡与边界特例` | 同文件锚点不存在: #23-docs02_reference--速查卡与边界特例 |
@@ -223,7 +223,7 @@
 | docs\02_reference\quick_reference\algorithms_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\02_reference\quick_reference\algorithms_cheatsheet.md | 示例 3: 动态规划 - 最长公共子序列 | `#示例-3-动态规划---最长公共子序列` | 同文件锚点不存在: #示例-3-动态规划---最长公共子序列 |
 | docs\02_reference\quick_reference\algorithms_cheatsheet.md | **最后更新**: 2026-05-08 (算法场景深度整合) | `#最后更新-2026-05-08-算法场景深度整合` | 同文件锚点不存在: #最后更新-2026-05-08-算法场景深度整合 |
-| docs\02_reference\quick_reference\algorithm_decision_cheatsheet.md | **最后更新**: 2026-05-08 | `#最后更新-2026-05-08` | 同文件锚点不存在: #最后更新-2026-05-08 |
+| docs\02_reference\quick_reference\02_algorithm_decision_cheatsheet.md | **最后更新**: 2026-05-08 | `#最后更新-2026-05-08` | 同文件锚点不存在: #最后更新-2026-05-08 |
 | docs\02_reference\quick_reference\assert_matches_guide.md | `assert_matches!` / `debug_assert_matches!` 速查指南 | `#assert_matches--debug_assert_matches-速查指南` | 同文件锚点不存在: #assert_matches--debug_assert_matches-速查指南 |
 | docs\02_reference\quick_reference\assert_matches_guide.md | 与 `assert!` + `matches!` 的关系 | `#与-assert--matches-的关系` | 同文件锚点不存在: #与-assert--matches-的关系 |
 | docs\02_reference\quick_reference\async_patterns.md | ⚡ Rust 异步编程速查卡 | `#-rust-异步编程速查卡` | 同文件锚点不存在: #-rust-异步编程速查卡 |
@@ -338,7 +338,7 @@
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | 生命周期速查卡 | `./type_system.md#生命周期` | 锚点不存在: #生命周期 |
 | docs\02_reference\quick_reference\ownership_cheatsheet.md | 借用检查器速查卡 | `./ownership_cheatsheet.md#借用规则` | 锚点不存在: #借用规则 |
-| docs\02_reference\quick_reference\pin_cheatsheet.md | **最后更新**: 2026-05-08 | `#最后更新-2026-05-08` | 同文件锚点不存在: #最后更新-2026-05-08 |
+| docs\02_reference\quick_reference\02_pin_cheatsheet.md | **最后更新**: 2026-05-08 | `#最后更新-2026-05-08` | 同文件锚点不存在: #最后更新-2026-05-08 |
 | docs\02_reference\quick_reference\process_management_cheatsheet.md | 进程管理快速参考卡片 | `#进程管理快速参考卡片` | 同文件锚点不存在: #进程管理快速参考卡片 |
 | docs\02_reference\quick_reference\process_management_cheatsheet.md | 📋 目录 | `#-目录-1` | 同文件锚点不存在: #-目录-1 |
 | docs\02_reference\quick_reference\process_management_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
@@ -443,7 +443,7 @@
 | docs\02_reference\quick_reference\wasm_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
 | docs\02_reference\quick_reference\wasm_cheatsheet.md | WASM 快速参考卡片 | `#wasm-快速参考卡片` | 同文件锚点不存在: #wasm-快速参考卡片 |
 | docs\02_reference\quick_reference\wasm_cheatsheet.md | **状态**: ✅ 深度整合完成 | `#状态--深度整合完成` | 同文件锚点不存在: #状态--深度整合完成 |
-| docs\03_guides\ASYNC_CLOSURES_DEEP_DIVE.md | 2.3 关键区别：AsyncFn vs Fn + Future | `#23-关键区别asyncfn-vs-fn--future` | 同文件锚点不存在: #23-关键区别asyncfn-vs-fn--future |
+| docs\03_guides\03_async_closures_deep_dive.md | 2.3 关键区别：AsyncFn vs Fn + Future | `#23-关键区别asyncfn-vs-fn--future` | 同文件锚点不存在: #23-关键区别asyncfn-vs-fn--future |
 | docs\03_guides\CXX_INTEROP_GUIDE.md | C++ 互操作指南（cxx + bindgen） | `#c-互操作指南cxx--bindgen` | 同文件锚点不存在: #c-互操作指南cxx--bindgen |
 | docs\03_guides\FUZZING_GUIDE.md | c08\_algorithms —— 解析器模糊测试 | `#c08_algorithms--解析器模糊测试` | 同文件锚点不存在: #c08_algorithms--解析器模糊测试 |
 | docs\03_guides\LET_CHAINS_GUIDE.md | 2.3 不能用 `\|\|` 混合 let | `#23-不能用--混合-let` | 同文件锚点不存在: #23-不能用--混合-let |
@@ -467,7 +467,7 @@
 | docs\03_practice\project-13-database-engine.md | 完整参考实现位于: `examples/database-engine/` | `#完整参考实现位于-examplesdatabase-engine` | 同文件锚点不存在: #完整参考实现位于-examplesdatabase-engine |
 | docs\03_practice\project-14-async-runtime.md | 完整参考实现位于: `examples/async-runtime/` | `#完整参考实现位于-examplesasync-runtime` | 同文件锚点不存在: #完整参考实现位于-examplesasync-runtime |
 | docs\03_practice\project-15-distributed-system.md | 完整参考实现位于: `examples/distributed-kv/` | `#完整参考实现位于-examplesdistributed-kv` | 同文件锚点不存在: #完整参考实现位于-examplesdistributed-kv |
-| docs\04_research\NG_TRAIT_SOLVER.md | C. 改进的 Coherence / Specialization 支持 | `#c-改进的-coherence--specialization-支持` | 同文件锚点不存在: #c-改进的-coherence--specialization-支持 |
+| docs\04_research\04_ng_trait_solver.md | C. 改进的 Coherence / Specialization 支持 | `#c-改进的-coherence--specialization-支持` | 同文件锚点不存在: #c-改进的-coherence--specialization-支持 |
 | docs\04_research\RUST_FOR_LINUX.md | 六、与 Ferrocene / 安全关键系统的关联 | `#六与-ferrocene--安全关键系统的关联` | 同文件锚点不存在: #六与-ferrocene--安全关键系统的关联 |
 | docs\04_research\VERUSBELT_PLDI_2026.md | ⚖️ 与相关工作的对比 | `#️-与相关工作的对比` | 同文件锚点不存在: #️-与相关工作的对比 |
 | docs\04_thinking\APPLICATIONS_ANALYSIS_VIEW.md | **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新) | `#最后更新-2026-05-08-rust-195-持续更新` | 同文件锚点不存在: #最后更新-2026-05-08-rust-195-持续更新 |

@@ -836,7 +836,7 @@ spec fn spec_sum(arr: &[i32], n: int) -> int
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [Kani 实战指南 —— 互补的有界模型检查器](KANI_PRACTICAL_GUIDE.md)
+- [Kani 实战指南 —— 互补的有界模型检查器](05_kani_practical_guide.md)
 - [形式化操作语义与 Rust 的形式化模型](../../concept/04_formal/09_operational_semantics.md)
 - [所有权的形式化定义](../../concept/04_formal/03_ownership_formal.md)
 - [引用语义与多级借用](../../concept/01_foundation/05_reference_semantics.md)
