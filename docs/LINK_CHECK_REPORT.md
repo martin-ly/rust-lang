@@ -32,9 +32,9 @@
 | docs\2026_INTERNATIONAL_AUTHORITATIVE_ALIGNMENT_REPORT.md | 3.1 Linux内核 - Rust永久采用 | `#31-linux内核---rust永久采用` | 同文件锚点不存在: #31-linux内核---rust永久采用 |
 | docs\AUTHORITATIVE_SOURCES_AND_CITATIONS.md | 1. `array_windows` - 切片迭代方法 | `#1-array_windows---切片迭代方法` | 同文件锚点不存在: #1-array_windows---切片迭代方法 |
 | docs\AUTHORITATIVE_SOURCES_AND_CITATIONS.md | **维护说明**: 本文档应随Rust生态更新而更新，确保所有引用来源保持最新和准确 | `#维护说明-本文档应随rust生态更新而更新确保所有引用来源保持最新和准确` | 同文件锚点不存在: #维护说明-本文档应随rust生态更新而更新确保所有引用来源保持最新和准确 |
-| docs\CARGO_BUILD_OPTIMIZATION.md | ⚙️ 环境变量配置 | `#️-环境变量配置` | 同文件锚点不存在: #️-环境变量配置 |
-| docs\CARGO_BUILD_OPTIMIZATION.md | 🛠️ 推荐工具 | `#️-推荐工具` | 同文件锚点不存在: #️-推荐工具 |
-| docs\CARGO_BUILD_OPTIMIZATION.md | ⚠️ 注意事项 | `#️-注意事项` | 同文件锚点不存在: #️-注意事项 |
+| docs\01_cargo_build_optimization.md | ⚙️ 环境变量配置 | `#️-环境变量配置` | 同文件锚点不存在: #️-环境变量配置 |
+| docs\01_cargo_build_optimization.md | 🛠️ 推荐工具 | `#️-推荐工具` | 同文件锚点不存在: #️-推荐工具 |
+| docs\01_cargo_build_optimization.md | ⚠️ 注意事项 | `#️-注意事项` | 同文件锚点不存在: #️-注意事项 |
 | docs\MIGRATION_GUIDE_2026.md | lazy\_static → LazyLock | `#lazy_static--lazylock` | 同文件锚点不存在: #lazy_static--lazylock |
 | docs\MIGRATION_GUIDE_2026.md | async-trait → 原生async trait | `#async-trait--原生async-trait` | 同文件锚点不存在: #async-trait--原生async-trait |
 | docs\MIGRATION_GUIDE_2026.md | 生成器 → gen关键字 | `#生成器--gen关键字` | 同文件锚点不存在: #生成器--gen关键字 |
