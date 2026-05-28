@@ -1,0 +1,322 @@
+# Rust借用系统 - 思维导图
+
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
+
+## 📑 目录
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+- [Rust借用系统 - 思维导图](#rust借用系统---思维导图)
+  - [📑 目录](#-目录)
+  - [Mermaid思维导图](#mermaid思维导图)
+  - [借用系统核心关系图](#借用系统核心关系图)
+  - [生命周期关系图](#生命周期关系图)
+  - [借用检查演进](#借用检查演进)
+  - [借用模式速查表](#借用模式速查表)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
+
+## Mermaid思维导图
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+```mermaid
+mindmap
+  root((Rust Borrowing\n借用系统))
+    不可变借用
+      共享引用 &T
+        多个同时存在
+        只读访问
+        并行安全
+      规则
+        可同时存在多个
+        不能与可变借用重叠
+        生命周期检查
+      应用场景
+        函数参数传递
+        迭代器访问
+        多线程读
+      优化
+        别名分析优化
+        缓存友好
+    可变借用 &mut T
+      独占引用
+        唯一一个
+        读写权限
+        排他性保证
+      规则
+        只能有一个
+        不能与任何借用共存
+        移动语义
+      应用场景
+        修改数据结构
+        迭代器修改
+        单线程状态机
+      优化
+        LLVM优化机会
+        无别名假设
+    生命周期
+      显式标注
+        fn foo<'a>
+        struct Bar<'a>
+        impl<'a> Trait
+      省略规则
+        输入生命周期
+        输出生命周期
+        方法生命周期
+      复杂模式
+        高阶trait边界
+        生命周期子类型
+        'static
+      NLL
+        非词法生命周期
+        借用结束于最后使用
+        更灵活的代码
+    编译器检查
+      借用检查器
+        AST基础(旧)
+        MIR基础(NLL)
+        错误信息
+      常见错误
+        悬垂引用
+        多重可变借用
+        可变与不可变冲突
+      高级模式
+        自引用结构
+        借用分片
+        重新借用
+    与所有权关系
+      借用不转移所有权
+      所有者负责释放
+      借用必须比所有者短
+      引用离开作用域
+    Unsafe与借用
+      原始指针
+        *const T
+        *mut T
+        无生命周期检查
+      裸指针转换
+        as *const T
+        as *mut T
+        安全责任转移
+      安全封装
+        Safe API
+        Unsafe内部实现
+        不变式维护
+```
+
+---
+
+## 借用系统核心关系图
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                    Rust 借用系统全景                             │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │                     所有权 Owner                         │   │
+│   │                    ┌─────────┐                          │   │
+│   │                    │   值    │                          │   │
+│   │                    └────┬────┘                          │   │
+│   │                         │                                 │   │
+│   └─────────────────────────┼─────────────────────────────────┘   │
+│                             │                                    │
+│              ┌──────────────┴──────────────┐                     │
+│              │                             │                      │
+│              ▼                             ▼                      │
+│   ┌──────────────────┐         ┌──────────────────┐              │
+│   │   不可变借用 &T   │         │   可变借用 &mut T │              │
+│   │                  │         │                  │              │
+│   │  • 多个同时存在   │         │  • 唯一一个       │              │
+│   │  • 只读访问      │         │  • 读写权限       │              │
+│   │  • 并行安全      │         │  • 排他性保证     │              │
+│   │                  │         │                  │              │
+│   │  规则:           │         │  规则:           │              │
+│   │  &T1, &T2, &T3   │         │  只能有&mut T    │              │
+│   │  不能与&mut共存  │         │  不能与其他借用   │              │
+│   │  生命周期有效    │         │  共存            │              │
+│   └──────────────────┘         └──────────────────┘              │
+│                                                                  │
+│   关键约束:                                                       │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │  借用生命周期 ⊆ 所有者生命周期                           │   │
+│   │  ∀借用b. 有效性(借用b) → 有效性(所有者)                 │   │
+│   │  不能同时存在 &mut T 和 &T (或 &mut T)                   │   │
+│   └─────────────────────────────────────────────────────────┘   │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 生命周期关系图
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+```text
+生命周期层级:
+
+'static ──────────────────────────────────────────────→ 最长
+  │
+  ├──▶ 程序运行期间一直存在
+  │     例如: 字符串字面量, 全局变量
+  │
+  └──▶ 'a ────────────────────────────────────────▶ 任意生命周期
+        │
+        ├──▶ 函数参数生命周期
+        │      fn foo<'a>(x: &'a T)
+        │
+        ├──▶ 结构体字段生命周期
+        │      struct Bar<'a> { x: &'a T }
+        │
+        └──▶ impl块生命周期
+               impl<'a> Trait for Type<'a>
+
+生命周期约束:
+
+'a: 'b  表示 'a 至少和 'b 一样长
+        (a outlives b)
+
+示例:
+    fn example<'a, 'b>(x: &'a T, y: &'b T) where 'a: 'b
+    // x的生命周期至少和y一样长
+```
+
+---
+
+## 借用检查演进
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+```text
+借用检查器演进:
+
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   AST-based │ ──▶ │  MIR-based  │ ──▶ │  Polonius   │
+│  (Rust 1.0) │     │   (NLL)     │     │   (未来)    │
+└─────────────┘     └─────────────┘     └─────────────┘
+      │                   │                   │
+      ▼                   ▼                   ▼
+  词法作用域           非词法作用域         更精确分析
+
+  {                  {                   {
+    let x = 5;         let x = 5;          let x = 5;
+    let y = &x;        let y = &x;         let y = &x;
+    println!(y);       println!(y);        println!(y);
+                       // y不再使用        // 复杂控制流
+    x = 6;    // 错误   x = 6;    // OK    x = 6;    // OK
+  }                  }                   }
+```
+
+---
+
+## 借用模式速查表
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+| 模式 | 语法 | 约束 | 典型应用 |
+|:---|:---|:---|:---|
+| 共享借用 | `&T` | 多个共存，只读 | 参数传递，遍历 |
+| 可变借用 | `&mut T` | 唯一，读写 | 修改数据，状态机 |
+| 重新借用 | `&mut *r` | 临时降级 | 部分借用 |
+| 切片借用 | `&[T]` | 连续内存 | 数组访问 |
+| 字符串借用 | `&str` | UTF-8验证 | 字符串处理 |
+|  trait借用 | `&dyn Trait` | 对象安全 | 多态 |
+
+---
+
+**维护者**: Rust Analysis Team
+**更新日期**: 2026-03-05
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [Parent README](../README.md)
+
+---
+
+## 相关概念
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+- [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - Resource Management]**
+
+> **[来源: TRPL Ch. 10 - Lifetimes]**
+
+> **[来源: Rust Reference - Borrow Checker]**
+
+> **[来源: RFC 2094 - NLL]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
