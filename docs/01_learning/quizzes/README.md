@@ -1,25 +1,24 @@
 # 主题测验
 
 > **Bloom 层级**: L1-L2 (记忆/理解)
-
 > **最后更新**: 2026-05-08
 
 ---
 
 ## 测验目录
->
+
 > **[来源: Rust Official Docs]**
 
 本目录包含各主题的测验题目，用于自测学习效果。
 
 ## 使用方式
->
+
 > **[来源: Rust Official Docs]**
 
 每个测验文件包含选择题和编程题，完成学习后可进行自我测试。
 
 ## 测验列表
->
+
 > **[来源: Rust Official Docs]**
 
 - 基础语法测验 (即将推出)
@@ -72,10 +71,10 @@
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
@@ -88,17 +87,10 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

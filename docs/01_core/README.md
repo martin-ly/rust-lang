@@ -11,7 +11,6 @@
 # Rust 核心概念 (Core Concepts)
 
 > **Bloom 层级**: L1-L2 (记忆/理解)
-
 > **Rust 版本**: 1.96.0+
 > **Edition**: 2024
 > **最后更新**: 2026-05-07
@@ -20,7 +19,7 @@
 ---
 
 ## 目录
->
+
 > **[来源: Rust Official Docs]**
 
 - [Rust 核心概念 (Core Concepts)](#rust-核心概念-core-concepts)

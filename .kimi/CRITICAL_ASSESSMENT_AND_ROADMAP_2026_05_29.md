@@ -113,6 +113,7 @@ L7 未来 → AI 集成、Effects System、Async Drop、Gen Blocks、Const Trait
 **影响**: 项目正从一个"知识库"退化为一个"知识垃圾场"——表面上什么都有，但实际上很多内容无人阅读、无人更新、无人验证。
 
 **建议**: 立即执行 **文档大瘦身（Great Documentation Slimming）**。建立明确的内容保留标准：
+
 - 核心概念（concept/ L0-L3）必须保持 100% 更新
 - 教程（knowledge/）必须可执行、可验证
 - docs/ 深度研究内容必须有明确的"保质期"和"责任人"
@@ -129,13 +130,15 @@ L7 未来 → AI 集成、Effects System、Async Drop、Gen Blocks、Const Trait
 - 这些形式化内容虽然令人印象深刻，但它们的存在**吓退了普通学习者**，并可能给项目贴上"不实用"的标签。
 
 **影响**: 项目的受众定位模糊。它究竟是要成为：
+
 - (A) 中文 Rust 学习者的首选入门资源？
 - (B) 中高级 Rust 开发者的参考手册？
 - (C) 学术研究人员的形式化 Rust 资料库？
 
 当前项目试图同时做 (A)(B)(C)，但三者的需求是冲突的。
 
-**建议**: 
+**建议**:
+
 - **明确分离受众**。将 L4-L7 独立为一个子项目（"Rust 形式化研究附录"），与主流学习路径解耦。
 - 在 L3 到 L4 之间建立**缓冲带**：增加"为什么需要形式化？"、"什么时候需要读 L4？"的引导文档。
 - 对于 (A) 类受众，提供**"最小必要知识集"**（Minimal Essential Knowledge Set），明确标注"此内容可选"。
@@ -154,6 +157,7 @@ L7 未来 → AI 集成、Effects System、Async Drop、Gen Blocks、Const Trait
 **影响**: 项目的影响力被锁定在中文圈内。考虑到项目投入的巨大工程量（保守估计 5,000+ 小时），这种"不可被全球发现"的状态是巨大的沉没成本风险。
 
 **建议**:
+
 - **短期**: 在核心概念文档中，为关键术语提供英文原文对照（如"所有权 (Ownership)"）。
 - **中期**: 为 concept/ 目录建立**英文骨架版本**（不一定要完整翻译，但至少提供标题、摘要、关键代码示例的英文版）。
 - **长期**: 引入 mdbook 的多语言支持插件（如 `mdbook-i18n` 或类似方案），建立社区翻译工作流。
@@ -175,6 +179,7 @@ L7 未来 → AI 集成、Effects System、Async Drop、Gen Blocks、Const Trait
 **影响**: 这些依赖问题现在不会导致编译失败（因为 workspace 统一管理了版本），但它们代表了**安全漏洞和兼容性风险**。一旦某个被锁定的传递依赖出现 RUSTSEC，修复将极其困难。
 
 **建议**:
+
 - 每季度执行一次**依赖健康检查**，使用 `cargo audit`、`cargo outdated`、`cargo tree --duplicates`。
 - 对 `sea-orm rc` 制定明确的迁移计划：要么等待 2.0 stable，要么降级到 1.x。
 - 逐步替换 `backoff` 为 `backon` 或 `tokio-retry`。
@@ -202,6 +207,7 @@ L7 未来 → AI 集成、Effects System、Async Drop、Gen Blocks、Const Trait
 **影响**: 指标驱动可能导致**形式大于内容**。维护者忙于增加数字，而非验证这些数字是否帮助了学习者。
 
 **建议**:
+
 - 引入**学习者反馈机制**：在 mdBook 中添加"此页对你有帮助吗？"的简单评分。
 - 对定理链等指标，允许**豁免机制**：描述性/综述性文档可以声明"本文件不适用定理链要求"。
 - 每年进行一次**内容价值审计**：通过页面浏览分析（如果有部署的话）或社区反馈，识别低价值内容并考虑归档。
@@ -219,6 +225,7 @@ L7 未来 → AI 集成、Effects System、Async Drop、Gen Blocks、Const Trait
 **影响**: 项目在技术质量上接近满分，但在**教育效果**上缺乏验证闭环。
 
 **建议**:
+
 - 建立**教育效果验证机制**：邀请 5-10 名不同水平的 Rust 学习者，进行有声思维测试（think-aloud testing），观察他们如何使用项目学习，并记录困惑点。
 - 对核心概念文档（尤其是所有权、借用、生命周期），定期进行**同行评审**：邀请有经验的 Rust 教师/讲师审阅教学逻辑。
 
@@ -345,16 +352,16 @@ L7 未来 → AI 集成、Effects System、Async Drop、Gen Blocks、Const Trait
 
 | 资源 | URL | 本项目应重点对标的维度 |
 |:---|:---|:---|
-| TRPL 3rd Edition | https://doc.rust-lang.org/book/ | 教学逻辑、版本对齐、术语标准化 |
-| Brown University Interactive Book | https://rust-book.cs.brown.edu/ | 交互式测验、Aquascope 可视化、学习分析 |
-| Google Comprehensive Rust | https://google.github.io/comprehensive-rust/ | 多语言支持、3天速成课程结构、Android/嵌入式模块 |
-| Rust by Example | https://doc.rust-lang.org/rust-by-example/ | 代码示例密度、可运行性 |
-| Rust API Guidelines | https://rust-lang.github.io/api-guidelines/ | 代码风格、命名规范、文档标准 |
-| Rust Project Goals | https://rust-lang.github.io/rust-project-goals/ | 前沿特性跟踪（Polonius、Effects、Gen Blocks） |
-| 100 Exercises to Learn Rust | https://rust-exercises.com/ | 渐进式项目制学习、练习与概念的结合 |
-| Rustlings | https://github.com/rust-lang/rustlings | CLI 交互式练习体验 |
-| Rust Reference | https://doc.rust-lang.org/reference/ | 权威来源的准确性 |
-| The Rustonomicon | https://doc.rust-lang.org/nomicon/ | Unsafe 内容的深度与安全性 |
+| TRPL 3rd Edition | <https://doc.rust-lang.org/book/> | 教学逻辑、版本对齐、术语标准化 |
+| Brown University Interactive Book | <https://rust-book.cs.brown.edu/> | 交互式测验、Aquascope 可视化、学习分析 |
+| Google Comprehensive Rust | <https://google.github.io/comprehensive-rust/> | 多语言支持、3天速成课程结构、Android/嵌入式模块 |
+| Rust by Example | <https://doc.rust-lang.org/rust-by-example/> | 代码示例密度、可运行性 |
+| Rust API Guidelines | <https://rust-lang.github.io/api-guidelines/> | 代码风格、命名规范、文档标准 |
+| Rust Project Goals | <https://rust-lang.github.io/rust-project-goals/> | 前沿特性跟踪（Polonius、Effects、Gen Blocks） |
+| 100 Exercises to Learn Rust | <https://rust-exercises.com/> | 渐进式项目制学习、练习与概念的结合 |
+| Rustlings | <https://github.com/rust-lang/rustlings> | CLI 交互式练习体验 |
+| Rust Reference | <https://doc.rust-lang.org/reference/> | 权威来源的准确性 |
+| The Rustonomicon | <https://doc.rust-lang.org/nomicon/> | Unsafe 内容的深度与安全性 |
 
 ---
 
