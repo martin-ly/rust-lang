@@ -183,7 +183,7 @@ path = "../my-lib"
 name = "advanced-networking"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.95.0"
+rust-version = "1.96.0"
 
 [dependencies]
 # 多行内联表 + 尾部逗号 — 依赖配置更清晰
@@ -299,7 +299,7 @@ flowchart LR
 # 在 Cargo.toml 中声明 MSRV，间接提示 TOML 兼容性
 [package]
 name = "my-lib"
-rust-version = "1.95.0"  # ← 低于 1.96：暗示使用 TOML v1.0 语法
+rust-version = "1.96.0"  # ← 1.96+：使用 TOML v1.1 语法
 ```
 
 ---

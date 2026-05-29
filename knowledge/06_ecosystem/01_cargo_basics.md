@@ -200,7 +200,7 @@ edition = "2024"
 authors = ["Your Name <you@example.com>"]
 description = "A sample Rust application"
 license = "MIT OR Apache-2.0"
-rust-version = "1.95.0"  # MSRV: 最低支持的 Rust 版本
+rust-version = "1.96.0"  # MSRV: 最低支持的 Rust 版本
 
 [dependencies]
 # 基本依赖

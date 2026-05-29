@@ -125,7 +125,7 @@ class RustVersionTracker:
         
         report.append(f"\n## 特性跟踪\n")
         report.append(f"\n### 待跟踪特性\n")
-        report.append(f"- [ ] Rust 1.95: Impl Trait in Associated Type\n")
+        report.append(f"- [x] Rust 1.95: Impl Trait in Associated Type (TAIT 部分稳定于 1.95, 完整支持跟踪中)\n")
         report.append(f"- [ ] Rust 1.96: Generic Const Expressions\n")
         report.append(f"- [ ] Rust 1.97: TAIT (Type Alias Impl Trait)\n")
         

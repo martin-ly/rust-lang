@@ -242,7 +242,7 @@ def generate_report(results):
         "",
         f"> 生成时间: {now}",
         f"> 扫描文件数: {results['total_files']}",
-        f"> 版本对齐: Rust 1.95.0 stable",
+        f"> 版本对齐: Rust 1.96.0 stable",
         "",
         "## 摘要",
         "",

@@ -75,7 +75,7 @@
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.96+ 特性整合](#-rust-196-特性整合)
     - [核心特性速查](#核心特性速查)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
@@ -177,7 +177,7 @@ cargo init --lib
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
+  - [🆕 Rust 1.96+ 特性整合](#-rust-196-特性整合)
     - [核心特性速查](#核心特性速查)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
@@ -523,7 +523,7 @@ tokio = { version = "1.0", features = ["full"] }
 name = "my_project"
 version = "0.1.0"
 edition = "2024"
-rust-version = "1.95"
+rust-version = "1.96"
 
 [dependencies]
 serde = "1.0"
@@ -963,7 +963,7 @@ version = "0.1.0"
 edition = "2024"
 authors = ["Team <team@example.com>"]
 license = "MIT OR Apache-2.0"
-rust-version = "1.95"
+rust-version = "1.96"
 
 [workspace.dependencies]
 # 内部依赖
@@ -1085,7 +1085,7 @@ $ cargo bloat --release
 
 ---
 
-## 🆕 Rust 1.95+ 特性整合
+## 🆕 Rust 1.96+ 特性整合
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
@@ -1126,7 +1126,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 **性能提升**: array_windows +15-30%, LazyLock::get() -40% 延迟, ControlFlow +10-15% 提前终止效率。
 
-**最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 特性)
+**最后更新**: 2026-05-08 (深度整合 Rust 1.96+ 特性)
 
 ---
 

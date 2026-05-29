@@ -6,7 +6,7 @@ Rust 稳定版 API 审计脚本
 与已知的新稳定 API 列表进行对比，生成缺失报告。
 
 用法:
-    python scripts/audit_stable_apis.py [--version 1.95.0]
+    python scripts/audit_stable_apis.py [--version 1.96.0]
 """
 
 import argparse
@@ -51,10 +51,17 @@ KNOWN_APIS: Dict[str, List[Tuple[str, str, str]]] = {
         ("ControlFlow::is_break (const)", "core::ops", "c03_control_fn"),
         ("ControlFlow::is_continue (const)", "core::ops", "c03_control_fn"),
     ],
-    "1.96.0 (expected)": [
-        ("VecDeque::truncate_front", "alloc::collections", "c08_algorithms"),
-        ("derive(CoercePointee)", "core::marker", "c04_generic"),
-        ("Cargo Script / Frontmatter", "cargo", "global"),
+    "1.96.0": [
+        ("assert_matches!", "std::assert_matches", "c02_type_system"),
+        ("core::range::Range", "core::range", "c02_type_system"),
+        ("core::range::RangeFrom", "core::range", "c02_type_system"),
+        ("core::range::RangeToInclusive", "core::range", "c02_type_system"),
+        ("NonZero range iteration (Step)", "core::num", "c02_type_system"),
+        ("From<T> for LazyCell", "std::cell", "c02_type_system"),
+        ("From<T> for LazyLock", "std::sync", "c02_type_system"),
+        ("From<T> for AssertUnwindSafe", "std::panic", "c02_type_system"),
+        ("ManuallyDrop const pattern", "core::mem", "c02_type_system"),
+        ("expr metavariable to cfg", "macro", "c11_macro_system"),
     ],
 }
 
@@ -136,7 +143,7 @@ def check_api_coverage(crate_dir: Path, known_apis: List[Tuple[str, str, str]]) 
 
 def main():
     parser = argparse.ArgumentParser(description="Audit Rust stable APIs in project crates")
-    parser.add_argument("--version", default="1.95.0", help="Rust version to audit (default: 1.95.0)")
+    parser.add_argument("--version", default="1.96.0", help="Rust version to audit (default: 1.96.0)")
     parser.add_argument("--crates-dir", default="crates", help="Path to crates directory")
     args = parser.parse_args()
     

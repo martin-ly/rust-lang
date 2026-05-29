@@ -538,7 +538,7 @@ use std::sync::LazyLock;
 ```toml
 # Cargo.toml
 [package]
-rust-version = "1.95"  # 设置MSRV
+rust-version = "1.96"  # 设置MSRV
 
 [features]
 unstable = []  # 不稳定特性开关
