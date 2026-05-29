@@ -224,14 +224,14 @@ impl AsyncPinMacroExamples {
 }
 
 // ============================================================================
-// Rust 1.96 新特性：`VecDeque::new` const 支持 (1.96 stable)
+// Rust 1.68 稳定特性：`VecDeque::new` const 支持
 // ============================================================================
 
 use std::collections::VecDeque;
 
 /// # `VecDeque::new` 的 `const` 支持
 ///
-/// Rust 1.96.0 使 `VecDeque::new` 成为 `const fn`，
+/// Rust 1.68.0 使 `VecDeque::new` 成为 `const fn`，
 /// 允许在编译期初始化双端队列。
 ///
 /// ## 异步场景

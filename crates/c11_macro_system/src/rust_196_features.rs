@@ -278,7 +278,7 @@ use std::marker::PhantomPinned;
 
 /// `VecDeque::new` 在 const 上下文中的应用
 ///
-/// Rust 1.96 稳定了 `VecDeque::new` 的 const 特性，
+/// Rust 1.68 稳定了 `VecDeque::new` 的 const 特性，
 /// 允许在编译期创建空的宏展开缓冲区。
 pub struct ConstMacroBuffer;
 

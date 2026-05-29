@@ -100,7 +100,7 @@ impl StackPinningExamples {
 
 /// # `VecDeque::new` 的 const 初始化
 ///
-/// Rust 1.96+ 稳定了 `VecDeque::new` 的 const 上下文支持。
+/// Rust 1.68+ 稳定了 `VecDeque::new` 的 const 上下文支持。
 /// 这意味着可以在编译期创建空的环形缓冲区，无需运行时初始化代码。
 ///
 /// ## 嵌入式应用场景
@@ -151,7 +151,7 @@ impl ConstVecDequeExamples {
 
 /// # 布尔到浮点转换
 ///
-/// Rust 1.96+ 稳定了 `From<bool> for f32` 和 `From<bool> for f64`。
+/// Rust 1.68+ 稳定了 `From<bool> for f32` 和 `From<bool> for f64`。
 /// - `true` → `1.0`
 /// - `false` → `0.0`
 ///

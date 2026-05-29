@@ -303,12 +303,12 @@ pub fn get_rust_196_wasm_info() -> String {
 }
 
 // ============================================================================
-// Rust 1.96 新特性：`impl From<bool> for f32/f64` (1.96 stable)
+// Rust 1.68 稳定特性：`impl From<bool> for f32/f64`
 // ============================================================================
 
 /// # 布尔到浮点转换在 WASM 中的应用
 ///
-/// Rust 1.96.0 稳定了 `impl From<bool> for f32` 和 `impl From<bool> for f64`。
+/// Rust 1.68.0 稳定了 `impl From<bool> for f32` 和 `impl From<bool> for f64`。
 /// 在 WebAssembly 中，这种转换常用于：
 /// - 条件标志到数值的转换（0.0/1.0）
 /// - 与 JavaScript 的互操作（JS 中 `true` 有时需要转为 `1.0`）

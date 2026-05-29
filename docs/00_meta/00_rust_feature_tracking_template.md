@@ -31,9 +31,9 @@
 
 | 通道 | 版本 | 发布日期 | 状态 |
 |------|------|---------|------|
-| Stable | 1.95.0 | 2026-04-16 | ✅ 当前项目 MSRV |
-| Beta | 1.96.0 | 2026-05-28 (预计) | 🔄 跟踪中 |
-| Nightly | 1.97.0 | 2026-07-09 (预计) | 🧪 实验跟踪 |
+| Stable | 1.96.0 | 2026-05-28 | ✅ 当前项目 MSRV |
+| Beta | 1.97.0 | 2026-07-09 (预计) | 🔄 跟踪中 |
+| Nightly | 1.98.0 | 2026-08 (预计) | 🧪 实验跟踪 |
 
 ---
 
@@ -69,16 +69,16 @@
 | `VecDeque::push_*_mut` | 1.95.0 | ✅ 稳定 | ✅ 已覆盖 | - | c08_algorithms |
 | `LinkedList::push_*_mut` | 1.95.0 | ✅ 稳定 | ✅ 已覆盖 | - | c08_algorithms |
 | `Layout::dangling_ptr` 等 | 1.95.0 | ✅ 稳定 | ✅ 已覆盖 | - | c01_ownership |
-| `VecDeque::truncate_front` | 1.96 | 🔄 FCP | 🔴 未覆盖 | P2 | - |
+| `VecDeque::truncate_front` | 1.97+ | ❌ 未进入 1.96 | 🔴 未覆盖 | P2 | 1.96 未稳定，继续跟踪 |
 | `refcell_try_map` | 1.97+ | 🧪 等待作者 | 🔴 未覆盖 | P3 | - |
 
 ### 工具链与生态
 
 | 特性 | 版本 | 状态 | 项目覆盖 | 优先级 | 备注 |
 |------|------|------|---------|--------|------|
-| Cargo Script / Frontmatter | 1.96 | 🔄 FCP 通过 | 🔴 未覆盖 | P1 | 指南已创建 |
+| Cargo Script / Frontmatter | 1.97+ | ❌ 未进入 1.96 | 🔴 未覆盖 | P1 | 指南已创建，继续跟踪 |
 | 并行前端编译 | 1.97+ | 🧪 Nightly | 🔴 未覆盖 | P2 | 指南已创建 |
-| `derive(CoercePointee)` | 1.96 | 🔄 FCP | 🔴 未覆盖 | P2 | - |
+| `derive(CoercePointee)` | 1.97+ | ❌ 未进入 1.96 | 🔴 未覆盖 | P2 | 继续跟踪 |
 | Safety Tags | - | 📋 RFC 讨论 | 🔴 未覆盖 | P2 | 指南已创建 |
 | Stack protector | 1.97+ | 🔄 PFCP | 🔴 未覆盖 | P3 | - |
 | Miri 改进 | 持续 | ✅ 可用 | ⚠️ 基础覆盖 | P3 | - |

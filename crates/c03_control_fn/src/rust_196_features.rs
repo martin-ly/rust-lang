@@ -306,7 +306,7 @@ impl Rust196PinControlFlow {
     }
 }
 
-/// Rust 1.96 `impl From<bool> for {f32, f64}` 在错误处理中的应用
+/// Rust 1.68 `impl From<bool> for {f32, f64}` 在错误处理中的应用
 ///
 /// 布尔值到浮点数的转换简化了成功/失败率的计算，特别是在错误统计场景中。
 pub struct Rust196BoolFloatConversion;

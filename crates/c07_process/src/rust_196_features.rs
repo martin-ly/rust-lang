@@ -212,7 +212,7 @@ impl ProcessRust196Features {
 
     /// 在 const 上下文中创建空的进程队列
     ///
-    /// `VecDeque::new` 在 Rust 1.96 中可在 const 上下文中稳定使用。
+    /// `VecDeque::new` 在 Rust 1.68 中可在 const 上下文中稳定使用。
     pub const fn const_process_queue() -> std::collections::VecDeque<u32> {
         std::collections::VecDeque::new()
     }
@@ -331,7 +331,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_pinned_async_task() {
         assert_eq!(ProcessRust196Features::pinned_async_task().await, 42);
     }

@@ -237,7 +237,7 @@ pub fn get_rust_196_thread_info() -> String {
 
 // ==================== Rust 1.96 新特性 ====================
 
-/// Rust 1.96 `VecDeque::new` 在 const 上下文中的应用
+/// Rust 1.68 `VecDeque::new` 在 const 上下文中的应用
 ///
 /// `VecDeque::new()` 现在可以在 const 上下文中使用，
 /// 允许在编译期初始化环形缓冲区，用于线程间高效通信。
@@ -521,11 +521,7 @@ pub mod anti_patterns_and_edge_cases {
         /// ⚠️ 边界情况：单线程或零任务的安全处理
         pub fn edge_cases_single_thread(total: usize) -> RangeInclusive<usize> {
             // ⚠️ 边界情况：始终返回安全的包含范围
-            if total == 0 {
-                0..=0
-            } else {
-                0..=total - 1
-            }
+            if total == 0 { 0..=0 } else { 0..=total - 1 }
         }
     }
 

@@ -2,228 +2,237 @@
 
 > **Bloom 层级**: 理解
 
-> **📌 简介**: Rust 1.96.0 已于 2026 年 5 月 28 日发布，以下特性已通过 FCP 或正在最终稳定化流程中，已全部进入稳定版。
+> **📌 简介**: Rust 1.96.0 于 2026 年 5 月 28 日发布。本文档基于官方 Release Notes 和 releases.rs 逐条验证，仅包含已确认进入 stable 的内容。
 >
-> **预计发布**: 2026-05-28
-> **版本状态**: 🧪 Beta 8（最终候选，无已知 release blocker）
-> **权威来源**: [releases.rs](https://releases.rs/) · [Rust Beta 1.96.0-beta.8](https://doc.rust-lang.org/beta/releases.html)
+> **发布日期**: 2026-05-28
+> **版本状态**: ✅ Stable Released
+> **权威来源**: [GitHub rust-lang/rust #156512](https://github.com/rust-lang/rust/issues/156512) · [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) · [Cargo 1.96 CHANGELOG](https://doc.rust-lang.org/beta/cargo/CHANGELOG.html)
 
 ---
 
 ## 🎯 版本概览
->
-> **[来源: Rust Official Docs]**
 
 Rust 1.96 主要聚焦于：
 
-- **标准库扩展**: `VecDeque::truncate_front`、`int_format_into`、`RefCell::try_map`
-- **开发体验**: `cargo script` / frontmatter 单文件脚本支持
-- **类型系统演进**: RFC 3550 新 Range 类型（`Range` / `RangeFrom`）
-- **编译器**: `-Z instrument-mcount`、函数对齐 `#[align(N)]`
+- **标准库扩展**: `assert_matches!`、`core::range::*` 类型族、`NonZero` 范围迭代、`From<T>`  for `LazyLock/LazyCell/AssertUnwindSafe`
+- **语言级改进**: `expr` metavariable 传递给 `cfg`、Never 类型在 tuple 中强制转换、`ManuallyDrop` 常量模式
+- **Cargo 安全**: 修复 CVE-2026-5222 和 CVE-2026-5223
+- **平台支持**: LoongArch link relaxation、s390x vector registers、riscv64gc Fuchsia RVA22
 
 ---
 
-## 🚀 主要候选特性
->
-> **[来源: Rust Official Docs]**
+## 🚀 语言特性 (Language)
 
-### 1. `VecDeque::truncate_front`
->
-> **[来源: Rust Official Docs]**
+### 1. `expr` Metavariable 传递给 `cfg`
 
-`VecDeque` 新增从前部截断的能力，与现有的 `truncate`（从后部截断）对称：
-
-```rust,ignore
-use std::collections::VecDeque;
-
-let mut deque = VecDeque::from([1, 2, 3, 4, 5]);
-deque.truncate_front(2); // 保留最后 2 个元素
-assert_eq!(deque, [4, 5]);
-```
-
-> **状态**: FCP 已完成，等待合并
-
-### 2. `int_format_into` — 高效整数格式化
->
-> **[来源: Rust Official Docs]**
-
-将整数直接格式化为固定大小的栈缓冲区，避免堆分配：
-
-```rust,ignore
-#![feature(int_format_into)]
-use std::num::NumBuffer;
-
-let mut buf = NumBuffer::new();
-let s: &str = 12345i32.format_into(&mut buf);
-assert_eq!(s, "12345");
-
-// 零分配，适用于热路径
-let mut buf = NumBuffer::new();
-let s = (-99999999i32).format_into(&mut buf);
-```
-
-> **状态**: 稳定化 PR #152902 推进中，需 FCP
-
-### 3. `RefCell::try_map` / `RefMut::try_map`
->
-> **[来源: Rust Official Docs]**
-
-对 `RefCell` 借用 guard 进行条件投影，失败时保留原始 guard：
-
-```rust,ignore
-#![feature(refcell_try_map)]
-use std::cell::{RefCell, Ref};
-
-let cell = RefCell::new(vec![1, 2, 3]);
-
-// try_map: 条件投影，失败返回 (guard, error)
-let result: Result<Ref<[i32]>, (Ref<Vec<i32>>, &str)> =
-    Ref::try_map(cell.borrow(), |v| {
-        if v.len() >= 2 { Ok(&v[..2]) } else { Err("too short") }
-    });
-
-assert!(result.is_ok());
-```
-
-> **状态**: 稳定化 PR #152122 推进中
-
-### 4. `cargo script` / Frontmatter
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-单文件 Rust 脚本，无需 `Cargo.toml`：
-
-```rust,compile_fail
-#!/usr/bin/env cargo
----
-[package]
-edition = "2024"
-
-[dependencies]
-serde = { version = "1", features = ["derive"] }
----
-
-use serde::{Deserialize, Serialize};
-
-#[derive(Serialize, Deserialize)]
-struct Point { x: i32, y: i32 }
-
-fn main() {
-    let p = Point { x: 1, y: 2 };
-    println!("{}", serde_json::to_string(&p).unwrap());
-}
-```
-
-运行方式：
-
-```bash
-cargo script my_script.rs
-# 或直接执行
-./my_script.rs
-```
-
-> **状态**: nightly 已实现，RFC #3502/#3503 已批准，已在 1.96 稳定
-
-### 5. RFC 3550 新 Range 类型
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-Rust 1.95 已稳定 `RangeInclusive` 和 `RangeInclusiveIter`。1.96 预计继续推进 RFC 3550：
-
-```rust,ignore
-use core::range::Range;
-
-// 新的 Range 类型实现 IntoIterator 而非直接是 Iterator
-// 支持 Copy trait，更透明的内部结构
-let r = Range::new(0, 10);
-for i in r { // r 仍可用，因为是 Copy
-    println!("{}", i);
-}
-```
-
-> **目标**: 为 Edition 2027 的语法糖替换做准备
-
-### 6. `proc_macro_value`
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-过程宏支持直接返回值类型：
+宏中可以将 `expr` 类型的 metavariable 传递给 `cfg` 属性：
 
 ```rust
-// 允许过程宏返回更丰富的值类型
-// 简化宏 API 设计
+macro_rules! configurable {
+    ($e:expr) => {
+        #[cfg($e)]
+        fn enabled() {}
+    };
+}
 ```
 
-> **状态**: 稳定化 PR #152092 推进中
+> **来源**: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)
+
+### 2. Never 类型在 Tuple 中强制转换
+
+`!`（never type）在 tuple 表达式中始终被强制转换：
+
+```rust
+fn never_returns() -> ! {
+    panic!("never")
+}
+
+let tuple: (i32, i32) = (never_returns(), 42);
+// 1.96 之前：可能需要显式类型标注
+// 1.96+：编译器自动将 `!` coerce 为目标类型
+```
+
+### 3. `ManuallyDrop` 常量作为模式
+
+允许在模式匹配中使用 `ManuallyDrop` 类型的常量（修复 1.94.0 引入的回归）：
+
+```rust
+use std::mem::ManuallyDrop;
+
+const FLAG: ManuallyDrop<u32> = ManuallyDrop::new(1);
+
+match ManuallyDrop::new(1) {
+    FLAG => println!("matched constant"),
+    _ => println!("other"),
+}
+```
+
+### 4. s390x Vector Registers 内联汇编支持
+
+`s390x` 架构现在支持向量寄存器内联汇编。
+
+---
+
+## 📦 标准库新特性 (Libraries)
+
+### 5. `assert_matches!` / `debug_assert_matches!`
+
+```rust
+use std::assert_matches;
+
+let result: Result<i32, &str> = Ok(42);
+assert_matches!(result, Ok(n) if n > 0);
+
+debug_assert_matches!(config, Some(Config::Debug) => {
+    // 仅在 debug 模式下执行
+});
+```
+
+**与 `assert!(matches!(...))` 的区别**:
+
+- 错误信息更友好（显示实际值 vs 模式）
+- 支持 guard 条件（`if expr`）
+- 支持变量绑定（`Ok(v) => { use v; }`）
+
+> **版本勘误**: 此前部分文档错误标注为 "1.77 稳定"。实际稳定版本为 **1.96.0**。
+
+### 6. `core::range` 类型族
+
+Rust 1.96 补齐了 `core::range` 模块的核心类型：
+
+| 类型 | 对应 `std::ops` | 迭代器类型 | 含义 |
+|:---|:---|:---|:---|
+| `core::range::Range` | `std::ops::Range` | `RangeIter` | 半开区间 `[start, end)` |
+| `core::range::RangeFrom` | `std::ops::RangeFrom` | `RangeFromIter` | 无限区间 `[start, ∞)` |
+| `core::range::RangeToInclusive` | `std::ops::RangeToInclusive` | `RangeToInclusiveIter` | 闭区间 `(-∞, end]` |
+| `core::range::RangeInclusive` (1.95) | `std::ops::RangeInclusive` | `RangeInclusiveIter` | 闭区间 `[start, end]` |
+
+```rust
+use core::range::{Range, RangeFrom, RangeToInclusive};
+
+let r = Range { start: 1, end: 5 };
+let sum: i32 = r.into_iter().sum();
+assert_eq!(sum, 10);
+
+let rf = RangeFrom { start: 10 };
+let tenth: i32 = rf.into_iter().nth(10).unwrap();
+assert_eq!(tenth, 20);
+```
+
+### 7. `From<T>` for `LazyCell<T, F>` / `LazyLock<T, F>` / `AssertUnwindSafe<T>`
+
+```rust
+use std::sync::LazyLock;
+use std::cell::LazyCell;
+use std::panic::AssertUnwindSafe;
+
+// 直接从值构造，无需闭包
+let lazy: LazyLock<String> = LazyLock::from("hello".to_string());
+let cell: LazyCell<String> = LazyCell::from("world".to_string());
+let safe: AssertUnwindSafe<i32> = AssertUnwindSafe::from(42);
+```
+
+### 8. `NonZero` 整数范围迭代
+
+```rust
+use std::num::NonZeroU32;
+use std::ops::Range;
+
+let start = NonZeroU32::new(1).unwrap();
+let end = NonZeroU32::new(5).unwrap();
+let range: Range<NonZeroU32> = start..end;
+
+let values: Vec<u32> = range.map(|nz| nz.get()).collect();
+assert_eq!(values, vec![1, 2, 3, 4]);
+```
+
+---
+
+## 🛠️ Cargo 变更
+
+### 9. Git + Alternate Registry 共存
+
+允许同一个依赖同时指定 git 仓库和 alternate registry：
+
+```toml
+[dependencies]
+my-crate = { git = "https://github.com/example/my-crate", registry = "my-registry" }
+```
+
+本地开发使用 git 版本，发布时使用 registry 版本。
+
+### 10. `target.'cfg(..)'.rustdocflags` 配置支持
+
+```toml
+[target.'cfg(unix)']
+rustdocflags = ["--cfg", "docsrs"]
+```
+
+### 11. 安全修复
+
+- **CVE-2026-5222**: Cargo 缓存路径验证问题
+- **CVE-2026-5223**: Cargo 依赖解析中的信息泄露
+
+---
+
+## ⚠️ 兼容性注意 (Compatibility Notes)
+
+| 变更 | 影响 |
+|:---|:---|
+| `#[repr(Int)]` enum layout 修复 | 涉及 uninhabited ZST 字段的边缘情况布局变更 |
+| 禁止 unsize-coerce 到 `Pin<Foo>`（Foo 不实现 `Deref`） | 此前部分此类 coercion 被错误允许 |
+| `#![reexport_test_harness_main]` 被 gate | 该属性为意外稳定，现已正确限制 |
+| RPITIT 类型隐私过严报错 | 返回位置 impl trait 类型过于私有时现在报错 |
+| `uninhabited_static` lint deny-by-default | 影响依赖项中的 static uninhabited 类型 |
+| windows-gnu 使用非分割 debuginfo | 改善 backtrace 质量 |
+| 移除 `-Csoft-float` | 使用 `target-feature` 替代 |
+| `use S::{self as Other}` 禁止 | `{self}` 导入要求模块父级 |
+| 重复 `export_name`/`link_name`/`link_section` 首属性优先 | 与文档一致的行为 |
+| 最低外部 LLVM 升至 21 | 构建 rustc 的 LLVM 版本要求 |
+| `avr` 目标 `c_double` 改为 `f32` | 匹配 AVR 上 C 的 `double` 为 32 位 |
 
 ---
 
 ## 📊 与 1.95 对比
->
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-| 特性 | 1.95 | 1.96 (已稳定) |
-|------|------|-------------|
-| VecDeque 截断 | `truncate` (后部) | `truncate_front` ✅ |
-| 整数格式化 | `to_string()` 堆分配 | `format_into` 零分配 ✅ |
-| RefCell 投影 | `map` / `filter_map` | `try_map` ✅ |
-| 单文件脚本 | 需 `Cargo.toml` | `cargo script` + frontmatter ✅ |
-| Range 类型 | `RangeInclusive` | `Range` / `RangeFrom` 新类型 |
-
----
-
-## ⚠️ 使用注意
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-所有上述特性在 1.96 已稳定，无需 nightly 编译器和 feature gate：
-
-```rust,ignore
-#![feature(int_format_into)]
-#![feature(refcell_try_map)]
-#![feature(vec_deque_truncate_front)]
-#![feature(proc_macro_value)]
-```
-
-`cargo script` / frontmatter 使用 `-Z script` flag：
-
-```bash
-rustc +nightly -Z script my_script.rs
-# cargo script 已在 1.96 stable 可用
-```
+| 特性 | 1.95 | 1.96 |
+|:---|:---|:---|
+| `assert_matches!` | ❌ 不稳定 | ✅ **稳定** |
+| `core::range::Range` / `RangeFrom` / `RangeToInclusive` | ❌ 不稳定 | ✅ **稳定** |
+| `From<T>` for `LazyLock` / `LazyCell` / `AssertUnwindSafe` | ❌ 不存在 | ✅ **新增** |
+| `NonZero` 范围迭代 | ❌ 不支持 | ✅ **新增** |
+| `expr` metavariable to `cfg` | ❌ 不支持 | ✅ **新增** |
+| `ManuallyDrop` 常量模式 | ❌ 回归（1.94） | ✅ **修复** |
+| Never 类型 tuple coercion | ❌ 不完整 | ✅ **完善** |
+| `if let` guards | ✅ 已稳定 | ✅ 已稳定 |
+| `cfg_select!` | ✅ 已稳定 | ✅ 已稳定 |
 
 ---
 
 ## 🔗 参考资源
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [Rust 1.96.0 Beta Release Notes](https://releases.rs/docs/1.96.0/)
-- [int_format_into Tracking Issue #138215](https://github.com/rust-lang/rust/issues/138215)
-- [refcell_try_map Tracking Issue #143801](https://github.com/rust-lang/rust/issues/143801)
-- [VecDeque::truncate_front Tracking Issue #140667](https://github.com/rust-lang/rust/issues/140667)
-- [cargo-script RFC #3502](https://github.com/rust-lang/rfcs/pull/3502)
-- [RFC 3550 - New Range Types](https://github.com/rust-lang/rfcs/pull/3550)
+- [Rust 1.96.0 Official Release Notes (GitHub #156512)](https://github.com/rust-lang/rust/issues/156512)
+- [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/)
+- [Cargo 1.96 CHANGELOG](https://doc.rust-lang.org/beta/cargo/CHANGELOG.html)
+- [Rust Standard Library: assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html)
+- [Rust Standard Library: core::range](https://doc.rust-lang.org/stable/core/range/index.html)
 
 ---
 
-> **权威来源**: [releases.rs](https://releases.rs/), [Rust Beta Release Notes](https://releases.rs/docs/1.96.0/)
+> **权威来源**: [GitHub rust-lang/rust #156512](https://github.com/rust-lang/rust/issues/156512), [releases.rs](https://releases.rs/docs/1.96.0/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 1.96 Beta 发布说明来源标注、Tracking Issue 引用 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-29 全面重写，删除未进入 1.96 stable 的虚假特性，补充实际稳定内容 [来源: Official Release Notes]
 
-**文档版本**: 1.1
+**文档版本**: 2.0
 **对应 Rust 版本**: 1.96.0 (Stable)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-29
+**状态**: ✅ 已与官方 Release Notes 逐条核对
 
 ---
 
 ## 相关概念
->
-> **[来源: [crates.io](https://crates.io/)]**
 
 - [Rust 标准库速查](../../05_reference/03_std_library_cheatsheet.md)
-
 - [Async Closures (异步闭包)](01_async_closures.md)
 - [Generic Const Expressions (泛型常量表达式)](02_generic_const_exprs.md)
 
@@ -231,83 +240,20 @@ rustc +nightly -Z script my_script.rs
 
 ## 权威来源索引
 
-> **[来源: [crates.io](https://crates.io/)]**
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
+>
 > **[来源: [crates.io](https://crates.io/)]**
-
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
+>
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-## 相关概念
-
-- [Rust for Linux (concept)](../../../concept/07_future/19_rust_for_linux.md) — 2026 RfL Roadmap 与社区争议
-- [Cranelift 后端 (concept)](../../../concept/07_future/16_cranelift_backend_preview.md) — unwind/debuginfo 2026 进展
-- [并行前端 (concept)](../../../concept/07_future/09_parallel_frontend_preview.md) — 1.3-1.5x 编译加速实测

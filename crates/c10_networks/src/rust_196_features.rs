@@ -417,7 +417,7 @@ impl CrossPlatformConfigPath {
 
 /// `impl From<bool> for {f32, f64}` 在网络协议标志中的应用
 ///
-/// Rust 1.96 为 `f32` 和 `f64` 实现了 `From<bool>`：
+/// Rust 1.68 为 `f32` 和 `f64` 实现了 `From<bool>`：
 /// - `true` 转换为 `1.0`
 /// - `false` 转换为 `0.0`
 ///

@@ -52,7 +52,7 @@
 
 | 版本 | 预计发布 | 关键特性 | 准备状态 |
 |------|---------|---------|----------|
-| 1.96.0 | 2026-05-28 | `truncate_front`, `int_format_into`, `cargo script` | 🧪 Beta |
+| 1.96.0 | 2026-05-28 | `assert_matches!`, `core::range`, `NonZero` 迭代等 | ✅ Stable |
 | 1.97.0 | 2026-07 | TBD | ⏳ 等待 |
 
 ## 📖 如何使用
