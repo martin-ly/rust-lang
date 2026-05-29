@@ -98,7 +98,6 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
-
 > **认知功能**: Ruby 和 Rust 代表**类型系统的两个极端**——Ruby 将类型检查推迟到运行时以换取灵活性，Rust 在编译期完成所有检查以换取性能和安全性。
 > [来源: [Wikipedia — Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)]
 
@@ -135,7 +134,6 @@
   │ 开发者负担      │ 无              │ 中（学习曲线）    │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
-
 
 > **内存洞察**: Ruby 的 **GC 简化开发**，Rust 的 **所有权提供可预测性**——选择取决于应用场景对延迟和吞吐量的要求。
 > [来源: [Ruby GC Guide](https://tenderlovemaking.com/tags/gc.html)]
@@ -264,7 +262,6 @@ Web 框架对比:
   ├── Rust: 精确控制内存布局
   └── 差距同样显著
 ```
-
 
 > **性能洞察**: Rust 比 Ruby **快 10-100 倍**——但这只在**计算密集型**场景重要。IO 密集型场景差距缩小。
 > [来源: [The Computer Language Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/)]
@@ -525,70 +522,9 @@ fn main() {
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 ## 十、边界测试：Rust 与 Ruby 的编译错误对比
 

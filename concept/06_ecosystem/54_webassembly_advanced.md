@@ -50,7 +50,7 @@
     - [6.3 流式编译与代码体积优化](#63-流式编译与代码体积优化)
   - [七、安全沙箱模型](#七安全沙箱模型)
     - [7.1 线性内存与能力模型](#71-线性内存与能力模型)
-    - [7.2 wasm32-unknown-unknown 与 `wasm32-wasip1` 或 `wasm32-wasip2` 的安全边界](#72-wasm32-unknown-unknown-与-`wasm32-wasip1` 或 `wasm32-wasip2`-的安全边界)
+    - [7.2 wasm32-unknown-unknown 与 `wasm32-wasip1` 或 `wasm32-wasip2` 的安全边界](#72-wasm32-unknown-unknown-与-wasm32-wasip1-或-wasm32-wasip2-的安全边界)
   - [八、反命题树](#八反命题树)
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：wasm-bindgen 跨边界传递含 `String` 的结构体](#91-边界测试wasm-bindgen-跨边界传递含-string-的结构体)
@@ -415,7 +415,7 @@ fn main() {
 }
 ```
 
-> **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target](https://doc.rust-lang.org/rustc/platform-support/`wasm32-wasip1` 或 `wasm32-wasip2`p1.html)
+> **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target](<https://doc.rust-lang.org/rustc/platform-support/`wasm32-wasip1`> 或 `wasm32-wasip2`p1.html)
 
 ---
 
@@ -570,7 +570,7 @@ pub fn hash_data(input: &[u8]) -> [u8; 32] {
 }
 ```
 
-> **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target Docs](https://doc.rust-lang.org/rustc/platform-support/`wasm32-wasip1` 或 `wasm32-wasip2`p1.html)
+> **来源**: [Rust `wasm32-wasip1` 或 `wasm32-wasip2` Target Docs](<https://doc.rust-lang.org/rustc/platform-support/`wasm32-wasip1`> 或 `wasm32-wasip2`p1.html)
 
 ---
 

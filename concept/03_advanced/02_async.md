@@ -114,7 +114,7 @@
     - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
     - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
     - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
-    - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-AFIT（async fn in trait，Rust 1.75+ 稳定）-中的误用编译错误)
+    - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
   - [参考来源](#参考来源)
 

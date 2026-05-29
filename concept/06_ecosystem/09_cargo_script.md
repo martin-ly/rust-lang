@@ -8,18 +8,19 @@
 
 ---
 
-> [来源: [RFC 3502 — Cargo Script Manifest](https://github.com/rust-lang/rfcs/pull/3502) · [RFC 3503 — Cargo Script Frontmatter](https://github.com/rust-lang/rfcs/pull/3503) · [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) · [rust-lang/cargo#12207](https://github.com/rust-lang/cargo/issues/12207) · [rust-lang/rust#136889](https://github.com/rust-lang/rust/issues/136889)
+> [来源: [RFC 3502 — Cargo Script Manifest](https://github.com/rust-lang/rfcs/pull/3502) ·
+> [RFC 3503 — Cargo Script Frontmatter](https://github.com/rust-lang/rfcs/pull/3503) ·
+> [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) ·
+> [rust-lang/cargo#12207](https://github.com/rust-lang/cargo/issues/12207) ·
+> [rust-lang/rust#136889](https://github.com/rust-lang/rust/issues/136889)
 
 ## 📑 目录
->
->
 
 - [Cargo Script：单文件 Rust 程序](#cargo-script单文件-rust-程序)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 三种执行方式](#11-三种执行方式)
     - [1.2 嵌入式 Manifest](#12-嵌入式-manifest)
-- [\[derive(Parser)\]](#deriveparser)
   - [二、Frontmatter 语法详解](#二frontmatter-语法详解)
     - [2.1 完整字段支持](#21-完整字段支持)
     - [2.2 依赖解析机制](#22-依赖解析机制)
@@ -44,13 +45,10 @@
 ---
 
 ## 一、核心概念
->
->
 
 Cargo Script（RFC 3502 + RFC 3503）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：RFC 3502 定义单文件 manifest 格式，RFC 3503 定义 frontmatter 语法。当前 nightly 已实现核心支持，目标 2026 年稳定化。
 
 ### 1.1 三种执行方式
->
 
 ```bash
 # 方式 A: cargo 原生支持 (Rust 1.79+ 稳定)
@@ -65,23 +63,21 @@ rust-script script.rs
 ```
 
 ### 1.2 嵌入式 Manifest
->
 
 单文件通过 frontmatter 或 Markdown 代码块声明依赖与元数据：
 
 **原生 Cargo Script（```cargo 代码块）**:
 
 ```rust,ignore
-#!/usr/bin/env cargo
-```cargo
-[dependencies]
-clap = { version = "4", features = ["derive"] }
-```
+    #!/usr/bin/env cargo
+    ```cargo
+    [dependencies]
+    clap = { version = "4", features = ["derive"] }
+    ```
 
 use clap::Parser;
 
-# [derive(Parser)]
-
+#[derive(Parser)]
 struct Args { name: String }
 
 fn main() {

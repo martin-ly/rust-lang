@@ -1015,6 +1015,5 @@ enum AssetState {
 - [嵌入式系统](./22_embedded_systems.md) — `#![no_std]`、资源受限
 - [架构设计模式](./35_architecture_patterns.md) — 分层/六边形架构
 
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

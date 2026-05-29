@@ -152,6 +152,7 @@
     - [10.4 边界测试：`union` 的字段访问与活跃字段跟踪（运行时 UB）](#104-边界测试union-的字段访问与活跃字段跟踪运行时-ub)
   - [参考来源](#参考来源)
     - [16.7 前沿方向：Unsafe Fields（字段级 unsafe，Rust 2026 Project Goal）](#167-前沿方向unsafe-fields字段级-unsaferust-2026-project-goal)
+  - [Null 指针有效性定义重构（Rust 1.96）](#null-指针有效性定义重构rust-196)
 
 <!-- L3::权威定义 -->
 
@@ -2768,8 +2769,9 @@ assert!(!raw.is_null());  // alloc 返回的指针保证 non-null
 ```
 
 > **语义**: 此前 Rust 对 "valid pointer" 的定义在标准库文档、Reference 和 Miri 之间存在细微不一致。1.96 的统一定义明确了：
+>
 > 1. **null 不是 valid** — 即使不进行解引用，将 null 传递给期望 valid pointer 的 API 是 UB
 > 2. **已分配但未初始化是 valid** — `NonNull::new_unchecked` 可用于 `alloc` 返回的指针
 > 3. **dangling 指针在特定条件下 valid** — 只要偏移计算不越界，dangling pointer 的算术运算仍合法
-> 
+>
 > 这为 Miri 的严格检查、 unsafe 代码指南和形式化验证工具（如 RustBelt）提供了统一基础。[来源: [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)] · [来源: [Rust Reference — Pointer Validity](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)]

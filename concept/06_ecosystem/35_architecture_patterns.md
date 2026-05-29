@@ -1097,6 +1097,5 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 - [云原生](./24_cloud_native.md) — Kubernetes、容器化、可观测性
 - [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、正确性证明
 
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

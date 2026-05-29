@@ -112,7 +112,6 @@ fn main() {
 }
 ```
 
-
 > **认知功能**: **Rust 和 Elixir 对错误的根本态度不同**——Rust 在编译期预防，Elixir 在运行时恢复。
 > [来源: [Elixir Error Handling](https://elixir-lang.org/getting-started/try-catch-and-rescue.html)]
 
@@ -148,7 +147,6 @@ fn main() {
   └─────────────────┴─────────────────┴─────────────────┘
 > [来源: [Elixir Official]]
 ```
-
 
 > **并发洞察**: **Elixir 的轻量进程和消息传递适合超高并发场景**——Rust 则在共享状态并发上提供编译期安全。
 > [来源: [Erlang Processes](https://www.erlang.org/doc/reference_manual/processes.html)]
@@ -611,84 +609,11 @@ graph TD
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-
-
-
-
-
 
 > **补充来源**
-
 
 ## 十、边界测试：Rust 与 Elixir 的编译错误对比
 

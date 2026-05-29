@@ -744,6 +744,5 @@ fn caller() {
 - [嵌入式系统](./22_embedded_systems.md) — `#![no_std]`、资源受限验证
 - [版本跟踪](../07_future/05_rust_version_tracking.md) — Rust 语言演进对验证工具的影响
 
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

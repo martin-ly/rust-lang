@@ -739,6 +739,5 @@ fn undefined_behavior() {
 - [形式化验证](../04_formal/05_verification_toolchain.md) — Kani、Prusti、MIRI
 - [工具链](../06_ecosystem/01_toolchain.md) — Cargo、编译器标志、目标平台
 
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

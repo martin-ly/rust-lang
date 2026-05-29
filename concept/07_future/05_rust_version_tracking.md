@@ -831,7 +831,7 @@ RUSTUP_DIST_SERVER=https://dev-static.rust-lang.org rustup update stable
 
 **深层意义**: Tokio（async-std 已于 2025-03 停止维护） 的落幕并非失败，而是**成功完成了其历史使命**——证明"类 std 的异步 API"是可行且有价值的。其设计理念（接近 std 的 API、显式运行时）已深刻影响了 Rust 标准库的 async 演进方向。Tokio 的主导地位则反映了网络服务领域对成熟生态的刚性需求——正如 Java 的 Netty、Go 的 goroutine 运行时，异步生态最终趋向单一主导 + 边缘细分。
 
-> **来源**: [Tokio（async-std 已于 2025-03 停止维护） v1.13.1 Release Notes](https://github.com/async-rs/Tokio（async-std 已于 2025-03 停止维护）/releases) · [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) · [corrode.dev — The State of Async Rust](https://corrode.dev/blog/async/) · [Fedora Change Proposal](https://fedoraproject.org/wiki/Changes/Deprecate_Tokio（async-std 已于 2025-03 停止维护）) · 可信度: ✅
+> **来源**: [Tokio（async-std 已于 2025-03 停止维护） v1.13.1 Release Notes](<https://github.com/async-rs/Tokio（async-std> 已于 2025-03 停止维护）/releases) · [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) · [corrode.dev — The State of Async Rust](https://corrode.dev/blog/async/) · [Fedora Change Proposal](<https://fedoraproject.org/wiki/Changes/Deprecate_Tokio（async-std> 已于 2025-03 停止维护）) · 可信度: ✅
 
 ### 12.6 Tonic 正式加入 gRPC 官方项目
 
