@@ -3,12 +3,21 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在数据科学生态中的性能、安全与表达能力
-> **前置依赖**: [数据工程](./48_data_engineering.md) · [机器学习生态](./46_machine_learning_ecosystem.md) · [性能优化](./15_performance_optimization.md) · [类型系统](../01_foundation/04_type_system.md)
-> **后置延伸**: [量子计算](./51_quantum_computing_rust.md) · [WebAssembly](./11_webassembly.md) · [云计算](./24_cloud_native.md)
+> **前置依赖**: [数据工程](./48_data_engineering.md) ·
+> [机器学习生态](./46_machine_learning_ecosystem.md) ·
+> [性能优化](./15_performance_optimization.md) ·
+> [类型系统](../01_foundation/04_type_system.md)
+> **后置延伸**: [量子计算](./51_quantum_computing_rust.md) ·
+> [WebAssembly](./11_webassembly.md) ·
+> [云计算](./24_cloud_native.md)
 
 ---
 
-> **来源**: [Polars User Guide](https://docs.pola.rs/) · [DataFusion Documentation](https://arrow.apache.org/datafusion/) · [Jupyter Protocol](https://jupyter-client.readthedocs.io/en/latest/) · [Rust Data Science Survey 2024](https://www.arewelearningyet.com/) · [Arrow Rust](https://docs.rs/arrow/latest/arrow/)
+> **来源**: [Polars User Guide](https://docs.pola.rs/) ·
+> [DataFusion Documentation](https://arrow.apache.org/datafusion/) ·
+> [Jupyter Protocol](https://jupyter-client.readthedocs.io/en/latest/) ·
+> [Rust Data Science Survey 2024](https://www.arewelearningyet.com/) ·
+> [Arrow Rust](https://docs.rs/arrow/latest/arrow/)
 
 ## 📑 目录
 

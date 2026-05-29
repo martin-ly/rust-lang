@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [CLI 应用开发指南](#cli-应用开发指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [文档定位](#文档定位)
   - [官方 CLI Book 入口](#官方-cli-book-入口)
   - [本项目对应模块](#本项目对应模块)
@@ -41,10 +41,10 @@
     - [array\_windows 在参数解析中的应用](#array_windows-在参数解析中的应用)
     - [ControlFlow 在验证管道中的应用](#controlflow-在验证管道中的应用)
     - [LazyLock 在配置管理中的应用](#lazylock-在配置管理中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+  - **状态**: ✅ 深度整合完成
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 文档定位
 >
@@ -387,8 +387,8 @@ fn main() -> ExitCode {
 构建网络相关的 CLI 工具：
 
 - 使用 [tokio](#3-异步-cli-示例) 处理并发请求
-- 实现 [超时处理](#错误处理最佳实践)
-- 参考 [C06 异步](../../crates/c06_async/docs/10_00_master_index.md) 深入学习
+- 实现 超时处理
+- 参考 C06 异步 深入学习
 
 ### 场景4: TUI 应用
 >
@@ -408,10 +408,10 @@ fn main() -> ExitCode {
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **前置知识** | [C03 控制流](../../crates/c03_control_fn/docs/10_00_master_index.md) |
+| **前置知识** | C03 控制流 |
 | :--- | :--- |
 | **错误处理** | [error_handling_cheatsheet](../02_reference/quick_reference/02_error_handling_cheatsheet.md) |
-| **异步编程** | [C06 异步](../../crates/c06_async/docs/10_00_master_index.md) |
+| **异步编程** | C06 异步 |
 | :--- | :--- |
 | **Cargo 工具** | [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md) |
 | **相关指南** | [05_troubleshooting_guide.md](./05_troubleshooting_guide.md) |
@@ -423,12 +423,12 @@ fn main() -> ExitCode {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [C07 进程管理](../../crates/c07_process/docs/10_00_master_index.md)
+- C07 进程管理
 - [故障排查指南](./05_troubleshooting_guide.md)
 - [cargo_cheatsheet](../02_reference/quick_reference/02_cargo_cheatsheet.md)
 - [官方 Command Line Book](https://rust-cli.github.io/book/)
-- [C03 控制流](../../crates/c03_control_fn/docs/10_00_master_index.md)
-- [C06 异步](../../crates/c06_async/docs/10_00_master_index.md)
+- C03 控制流
+- C06 异步
 
 ---
 

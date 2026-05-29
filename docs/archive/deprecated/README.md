@@ -1,7 +1,7 @@
 # 已归档文档（Deprecated）
 
 > **归档日期**: 2026-02-26
-> **原因**: 按 [TASK_ORCHESTRATION_MASTER_PLAN](../../../TASK_ORCHESTRATION_MASTER_PLAN.md) 修订版剔除需专业形式化语言（Lean/Coq）的任务，聚焦「数学风格形式化论证 + Rust 示例」
+> **原因**: 按 TASK_ORCHESTRATION_MASTER_PLAN 修订版剔除需专业形式化语言（Lean/Coq）的任务，聚焦「数学风格形式化论证 + Rust 示例」
 > **状态**: 仅作历史参考，不作为主路径
 
 ---
@@ -25,10 +25,10 @@
 
 | 需求 | 主路径 |
 | :--- | :--- |
-| 形式化证明 | [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md)（L2 数学风格） |
-| 形式语言 | [FORMAL_LANGUAGE_AND_PROOFS](../../research_notes/FORMAL_LANGUAGE_AND_PROOFS.md) |
-| 国际对标 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) |
-| 验证工具 | [TOOLS_GUIDE](../../research_notes/TOOLS_GUIDE.md)（Prusti/Kani 为主） |
+| 形式化证明 | CORE_THEOREMS_FULL_PROOFS（L2 数学风格） |
+| 形式语言 | FORMAL_LANGUAGE_AND_PROOFS |
+| 国际对标 | INTERNATIONAL_FORMAL_VERIFICATION_INDEX |
+| 验证工具 | TOOLS_GUIDE（Prusti/Kani 为主） |
 
 ---
 

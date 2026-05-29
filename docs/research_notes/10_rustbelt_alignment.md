@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [RustBelt 逐章对标](#rustbelt-逐章对标)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、RustBelt 论文结构（附录形式化）](#一rustbelt-论文结构附录形式化)
   - [二、逐章对标详情](#二逐章对标详情)
     - [2.1 所有权与借用（RustBelt 核心）](#21-所有权与借用rustbelt-核心)
@@ -15,22 +15,22 @@
     - [2.3 扩展（RustBelt Meets Relaxed Memory, POPL 2020）](#23-扩展rustbelt-meets-relaxed-memory-popl-2020)
   - [三、覆盖度汇总](#三覆盖度汇总)
   - [四、补全路线图](#四补全路线图)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 将 ownership_model、borrow_checker_proof 与 RustBelt 论文逐章对标，标注「已覆盖」「部分覆盖」「未覆盖」
-> **参考**: [RustBelt: Logical Foundations for the Future of Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/README.md) (POPL 2018)
+> **参考**: RustBelt: Logical Foundations for the Future of Safe Systems Programming (POPL 2018)
 
 ---
 

@@ -173,7 +173,7 @@ research_notes/
 
 **按证明深度/层次导航**:
 
-- [按证明深度](10_proof_index.md#-按证明深度导航) — L1 证明思路 / L2 完整证明 / L3 机器可检查
+- [按证明深度](10_proof_index.md) — L1 证明思路 / L2 完整证明 / L3 机器可检查
 - [按抽象层次](10_formal_full_model_overview.md#四抽象层次对应) — 语言级 / MIR 级 / 内存级
 - [形式化全模型入口](./10_formal_full_model_overview.md) — 统一形式系统、公理列表、定理依赖 DAG
 
@@ -394,7 +394,7 @@ research_notes/
 - [x] [所有权模型形式化](./formal_methods/10_ownership_model.md) - ✅ 已完成 (100%)
 - [x] [借用检查器证明](./formal_methods/10_borrow_checker_proof.md) - ✅ 已完成 (100%)
 - [x] [异步状态机形式化](./formal_methods/10_async_state_machine.md) - ✅ 已完成 (100%)
-- [x] [生命周期形式化](./formal_methods/10_lifetime_formalization.md) - ✅ 已完成 (100%)
+- x] [生命周期形式化 - ✅ 已完成 (100%)
 - [x] [Pin 和自引用类型形式化](./formal_methods/10_pin_self_referential.md) - ✅ 已完成 (100%)
 
 **类型理论研究** (5个):

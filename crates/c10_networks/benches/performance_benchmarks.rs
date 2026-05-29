@@ -3,7 +3,7 @@
 #![allow(clippy::bind_instead_of_map)]
 
 //! 网络编程模块性能基准测试 / Network Programming Module Performance Benchmarks
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 fn bench_network_operations(c: &mut Criterion) {

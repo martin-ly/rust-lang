@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [软件设计理论体系：主索引](#软件设计理论体系主索引)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、层次化索引](#一层次化索引)
     - [1.1 理论层次](#11-理论层次)
     - [1.2 依赖关系](#12-依赖关系)
@@ -25,15 +25,15 @@
   - [八、文档快速导航](#八文档快速导航)
   - [九、扩展阅读](#九扩展阅读)
   - [十、推进阶段](#十推进阶段)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -75,7 +75,7 @@
 | :--- | :--- |
 | 所有权 | [ownership_model](../formal_methods/10_ownership_model.md) |
 | 借用 | [borrow_checker_proof](../formal_methods/10_borrow_checker_proof.md) |
-| 生命周期 | [lifetime_formalization](../formal_methods/10_lifetime_formalization.md) |
+| 生命周期 | lifetime_formalization |
 | 类型系统 | [type_system_foundations](../type_theory/10_type_system_foundations.md) |
 | 型变 | [variance_theory](../type_theory/10_variance_theory.md) |
 | 异步 | [async_state_machine](../formal_methods/10_async_state_machine.md) |

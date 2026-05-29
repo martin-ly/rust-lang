@@ -238,7 +238,7 @@ use std::path::{Path, PathBuf};
 
 /// `core::pin::pin!` 宏在构建者模式中的应用
 ///
-/// Rust 1.96 稳定了 `core::pin::pin!` 宏，允许在栈上固定值，
+/// Rust 1.68 稳定了 `core::pin::pin!`（1.96 回顾） 宏，允许在栈上固定值，
 /// 无需 `Box::pin` 的堆分配。这在构建自引用结构时非常有用。
 pub struct PinnedConfig {
     name: String,

@@ -11,7 +11,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.94 综合应用指南](#rust-194-综合应用指南)
-  - [📋 目录](#-目录)
+  - [📋 目录](#目录)
   - [特性概览](#特性概览)
     - [Rust 1.94 核心特性](#rust-194-核心特性)
   - [array\_windows 深度应用](#array_windows-深度应用)
@@ -394,7 +394,7 @@ use crate::rust_194_features::*;
 - [所有权与借用 1.94特性](../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
 - [类型系统 1.94特性](../crates/c02_type_system/src/rust_194_features.rs)
 - [控制流 1.94特性](../crates/c03_control_fn/src/rust_194_features.rs)
-- [版本索引](../VERSION_INDEX.md)
+- 版本索引
 
 ---
 

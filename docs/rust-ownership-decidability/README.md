@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
-[![Completion](https://img.shields.io/badge/Completion-100%25-brightgreen)](10_final_100_percent_completion_report.md)
+![Completion](https://img.shields.io/badge/Completion-100%25-brightgreen)
 [![Rust Version](https://img.shields.io/badge/Rust-1.95-blue)](#)
 [![Documentation](https://img.shields.io/badge/Docs-586%20files%20|%20600K%2B%20words-informational)](FINAL_MASTER_INDEX.md)
 [![Coq](https://img.shields.io/badge/Coq-11%2C980%2B%20lines%20%7C%20300%20Qed-orange)](coq-formalization/README.md)
@@ -34,9 +34,9 @@
 
 | 受众 | 入门文档 | 核心文档 | 高级文档 | 综合梳理 |
 |:------:|:----------|:----------|:----------|:---------|
-| **初学者** | [概念卡片](#-基础概念速查) | [核心概念](#01-核心概念) | [练习题](#-练习与实践) | [终极指南](./ULTIMATE_COMPREHENSIVE_GUIDE.md) |
-| **进阶** | [详细概念](#01-核心概念) | [设计模式](#11-设计模式) | [案例研究](#-案例研究) | [知识梳理](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) |
-| **专家** | [形式化基础](#-形式化理论) | [证明与定理](#-coq形式化) | [Coq代码](#-coq形式化) | [理论框架](./UNIFIED_THEORETICAL_FRAMEWORK.md) |
+| **初学者** | 概念卡片 | 核心概念 | 练习题 | [终极指南](./ULTIMATE_COMPREHENSIVE_GUIDE.md) |
+| **进阶** | 详细概念 | 设计模式 | 案例研究 | [知识梳理](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) |
+| **专家** | 形式化基础 | 证明与定理 | Coq代码 | [理论框架](./UNIFIED_THEORETICAL_FRAMEWORK.md) |
 
 ---
 

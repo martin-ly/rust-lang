@@ -10,7 +10,6 @@
 > [L6 设计模式](../06_ecosystem/02_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait
 > **定理链编号**: T-020 特质一致性 → T-021 孤儿规则完备性 → T-022 关联类型规范化
-
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) ·
 > [Ownership](../01_foundation/01_ownership.md)

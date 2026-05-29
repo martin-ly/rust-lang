@@ -99,12 +99,12 @@ def check_anchor(content, anchor):
     # 将锚点转换为标题格式
     anchor_lower = anchor.lower()
     
-    # 兼容 "id--title" 格式（目录生成器可能产生）：优先用 id 部分匹配
-    if '--' in anchor_lower:
-        anchor_lower = anchor_lower.split('--')[0]
-    
     # 生成待尝试的锚点变体（提高匹配率）
     anchors_to_try = [anchor_lower]
+    
+    # 兼容 "id--title" 格式（目录生成器可能产生）：也尝试 id 部分匹配
+    if '--' in anchor_lower:
+        anchors_to_try.append(anchor_lower.split('--')[0])
     if anchor_lower.startswith('-'):
         anchors_to_try.append(anchor_lower[1:])  # "-目录" -> "目录"
     # 递归移除 -N 后缀（GitHub 对重复标题加 -1,-2）

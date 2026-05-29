@@ -71,9 +71,11 @@ fn bench_data_serialization(c: &mut Criterion) {
             b.iter(|| serde_json::from_str::<TestData>(&json).unwrap())
         });
 
-        group.bench_with_input(BenchmarkId::new("postcard_serialize", size), size, |b, _| {
-            b.iter(|| postcard::to_stdvec(&data).unwrap())
-        });
+        group.bench_with_input(
+            BenchmarkId::new("postcard_serialize", size),
+            size,
+            |b, _| b.iter(|| postcard::to_stdvec(&data).unwrap()),
+        );
 
         group.bench_with_input(
             BenchmarkId::new("postcard_deserialize", size),

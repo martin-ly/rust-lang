@@ -9,7 +9,7 @@
 > **归档原因**: 清理与主题子主题不相关的文件，保持项目结构清晰
 > **用途**: 过程性报告、历史版本文档；历史可查、主目录简洁
 > **判定目标**: 历史可查、主目录简洁
-> **完整结构**: [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) § 2.8
+> **完整结构**: DOCS_STRUCTURE_OVERVIEW § 2.8
 
 ---
 
@@ -35,7 +35,7 @@ docs/archive/
 >
 > **[来源: Rust Official Docs]**
 
-归档目录中的历史文档可能包含指向已移动、重命名或删除文件的链接。此类断链为历史遗留，不影响主文档导航。主文档入口见 [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md)。
+归档目录中的历史文档可能包含指向已移动、重命名或删除文件的链接。此类断链为历史遗留，不影响主文档导航。主文档入口见 DOCS_STRUCTURE_OVERVIEW。
 
 ---
 
@@ -58,7 +58,7 @@ docs/archive/
 
 **保留在根目录的文档**：`README.md`、`README.en.md`、`PROJECT_STRUCTURE.md`、`MIGRATION_GUIDE_1.91.1_TO_1.92.0.md`。
 
-**说明**：归档副本位于 `docs/archive/root_completion_reports/`。**2026-01-27 全面归档**：根目录中与主题无关的完成度/推进/周报类 .md 已全部复制到本目录并从根目录删除；`docs/research_notes/` 中的完成度类报告（`COMPLETION_SUMMARY_2025_12_25.md`、`COMPREHENSIVE_PROGRESS_REPORT_2025_12_25.md`、`FINAL_COMPLETION_STATUS_2025_12_25.md`、`ULTIMATE_COMPLETION_REPORT_2025_12_25.md`）已一并迁入本目录。完成度与 100% 认定以 [FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md](root_completion_reports/FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md) 为准。
+**说明**：归档副本位于 `docs/archive/root_completion_reports/`。**2026-01-27 全面归档**：根目录中与主题无关的完成度/推进/周报类 .md 已全部复制到本目录并从根目录删除；`docs/research_notes/` 中的完成度类报告（`COMPLETION_SUMMARY_2025_12_25.md`、`COMPREHENSIVE_PROGRESS_REPORT_2025_12_25.md`、`FINAL_COMPLETION_STATUS_2025_12_25.md`、`ULTIMATE_COMPLETION_REPORT_2025_12_25.md`）已一并迁入本目录。完成度与 100% 认定以 FINAL_PUSH_COMPLETE_SUMMARY_2026_01_27.md 为准。
 
 ---
 

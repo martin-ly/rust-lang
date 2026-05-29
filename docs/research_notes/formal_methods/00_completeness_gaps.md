@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化方法完备性缺口：形式化论证不充分声明](#形式化方法完备性缺口形式化论证不充分声明)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [宗旨](#宗旨)
   - [形式化定义（完备性缺口）](#形式化定义完备性缺口)
   - [1. 内存与所有权族缺口](#1-内存与所有权族缺口)
@@ -28,15 +28,15 @@
   - [9. 国际权威对标](#9-国际权威对标)
   - [10. 国际对标缺口（与阶段 1 交付物联动）](#10-国际对标缺口与阶段-1-交付物联动)
   - [引用](#引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 宗旨
 >
@@ -163,7 +163,7 @@ $
 | :--- | :--- | :--- |
 | [ownership_model](./10_ownership_model.md) | 所有权规则 1–3、T2/T3、Box/Rc/Arc/Cell/RefCell、MaybeUninit、ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 100% |
 | [borrow_checker_proof](./10_borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 100% |
-| [lifetime_formalization](./10_lifetime_formalization.md) | outlives、T2 引用有效性 | 与型变、泛型组合 |
+| lifetime_formalization | outlives、T2 引用有效性 | 与型变、泛型组合 |
 | [async_state_machine](./10_async_state_machine.md) | T6.1–T6.3 Future、Send/Sync、SPAWN、1.93 变更 | 100% |
 | [pin_self_referential](./10_pin_self_referential.md) | Pin T1–T3 | 100% |
 
@@ -199,14 +199,14 @@ $
 
 | 权威来源 | 本目录对应 | 说明 |
 | :--- | :--- | :--- |
-| **RustBelt POPL 2018** | ownership 规则 1–3、T2/T3；borrow 规则、T1 | Iris 分离逻辑、unsafe 安全抽象；[论文](https://plv.mpi-sws.org/rustbelt/popl18/README.md)；Ralf Jung 博士论文获 **ACM SIGPLAN John C. Reynolds Doctoral Dissertation Award** |
-| **Stacked Borrows POPL 2020** | 借用规则 1、RAW1、UNSAFE-T1 | 别名模型、&mut 唯一性、UB；Miri 实现；[论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md) |
+| **RustBelt POPL 2018** | ownership 规则 1–3、T2/T3；borrow 规则、T1 | Iris 分离逻辑、unsafe 安全抽象；论文；Ralf Jung 博士论文获 **ACM SIGPLAN John C. Reynolds Doctoral Dissertation Award** |
+| **Stacked Borrows POPL 2020** | 借用规则 1、RAW1、UNSAFE-T1 | 别名模型、&mut 唯一性、UB；Miri 实现；论文 |
 | **Tree Borrows PLDI 2025** | 借用规则、RAW1 演进 | **Distinguished Paper Award**；树结构；30k crates 54% 更少拒绝；Rocq 证明；[ETH](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf) |
-| **RustBelt Meets Relaxed Memory POPL 2020** | CHAN-T1、MUTEX-T1、ATOMIC1、ARC1 | relaxed memory、Arc 数据竞争；[论文](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md) |
-| **Polonius** | lifetime 推断、borrow 分析 | datalog 形式化、NLL 后继；[规则](https://rust-lang.github.io/polonius/README.md) |
+| **RustBelt Meets Relaxed Memory POPL 2020** | CHAN-T1、MUTEX-T1、ATOMIC1、ARC1 | relaxed memory、Arc 数据竞争；论文 |
+| **Polonius** | lifetime 推断、borrow 分析 | datalog 形式化、NLL 后继；规则 |
 | **Rust Reference** | UB 列表、RAW1、REPR1 | 官方规范；[UB](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) |
-| **Rustonomicon** | UNSAFE1、TRANSMUTE1、UNION1 | unsafe、内存布局；[文档](https://doc.rust-lang.org/nomicon/README.md) |
-| **Ferrocene FLS** | 语法与 legality | Rust 1.93 形式化规范；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/README.md)；[spec](https://spec.ferrocene.dev/README.md) |
+| **Rustonomicon** | UNSAFE1、TRANSMUTE1、UNION1 | unsafe、内存布局；文档 |
+| **Ferrocene FLS** | 语法与 legality | Rust 1.93 形式化规范；Rust 官方采纳 2025；spec |
 | **Prusti / Kani / Miri** | 可验证 ownership/borrow | 验证工具；Miri 实现 Stacked Borrows |
 
 ---

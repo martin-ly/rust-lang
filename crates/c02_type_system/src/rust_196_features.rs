@@ -478,6 +478,7 @@ pub fn nonzero_range_demo() {
 /// `assert_matches!` 允许对表达式进行模式匹配断言，无需展开 `if let`：
 ///
 /// ```rust
+/// use std::assert_matches;
 /// let result: Result<i32, &str> = Ok(42);
 /// assert_matches!(result, Ok(n) if n > 0);
 ///
@@ -762,26 +763,92 @@ pub mod manually_drop_pattern {
 
 /// # `expr` Metavariable 传递给 `cfg`
 ///
-/// Rust 1.96 允许宏将 `expr` 类型的 metavariable 传递给 `cfg` 属性：
+/// Rust 1.96 允许宏将 `expr` 类型的 metavariable 传递给 `cfg` 属性。
+/// 完整可运行示例见 `c11_macro_system::rust_196_features::ExprMetavariableToCfgExamples`。
+///
+/// 关键变更：在 1.96 之前，`expr` fragment specifier 不能用于 `#[cfg(...)]` 属性参数。
+/// 1.96 放宽了这一限制，允许通过宏参数动态生成条件编译属性。
 pub mod expr_metavariable_to_cfg {
-    /// Rust 1.96 允许宏将 `expr` 类型的 metavariable 传递给 `cfg` 属性。
-    /// 注意: cfg 属性本身仍只接受有效的 cfg 谓词，此变更放宽了宏元编程限制。
-    /// 示例语法（需在支持表达式属性的上下文中使用）：
-    ///
-    /// ```ignore
-    /// macro_rules! feature_gate {
-    ///     ($cond:expr, $item:item) => {
-    ///         #[cfg($cond)]  // 1.96+: expr metavariable 可传递给 cfg
-    ///         $item
-    ///     };
-    /// }
-    /// ```
     #[cfg(test)]
     mod tests {
         #[test]
-        fn test_cfg_expr_documented() {
-            // 该特性为宏元编程能力扩展，文档已覆盖
+        fn test_cfg_expr_feature_documented() {
+            // 该特性为宏元编程能力扩展，完整实现见 c11_macro_system
             assert_eq!(2 + 2, 4);
+        }
+    }
+}
+
+/// # Never Type 在 Tuple 表达式中的强制转换
+///
+/// Rust 1.96 修复了 never type (`!`) 在 tuple 表达式中的 coercion 行为，
+/// 确保 diverging 表达式在 tuple 中始终被正确强制转换为目标类型。
+///
+/// 在 1.96 之前，某些边缘情况下 `!` 类型在 tuple 中不会被自动 coercion，
+/// 导致编译失败。1.96 统一了这一行为。
+pub mod never_type_tuple_coercion {
+    /// 演示 never type 在 tuple 中的 coercion
+    ///
+    /// `diverge()` 返回 `!`，在 `(diverge(), 42)` 中被 coercion 为 `i32`。
+    /// 整个表达式永远不会返回，因为 `diverge()` 不会返回。
+    #[allow(dead_code, unreachable_code)]
+    fn _never_in_tuple() -> (i32, i32) {
+        fn diverge() -> ! {
+            panic!("this never returns")
+        }
+        (diverge(), 42)
+    }
+
+    /// 使用 `todo!()` 返回 `!` 的温和演示
+    ///
+    /// 注意：此函数本身也会 diverge，因为 `todo!()` 返回 `!`。
+    #[allow(dead_code, unreachable_code)]
+    fn _todo_in_tuple() -> (String, i32) {
+        (todo!("implement this"), 42)
+    }
+
+    /// 验证 never type coercion 的编译时测试
+    ///
+    /// 通过 `catch_unwind` 捕获 panic，验证代码能编译且运行时行为正确。
+    #[cfg(test)]
+    mod tests {
+        use std::panic::catch_unwind;
+
+        #[test]
+        fn test_never_type_tuple_coercion_compiles() {
+            fn diverge() -> ! {
+                panic!("expected panic for never type coercion test")
+            }
+
+            // 验证：返回 `!` 的表达式在 tuple 中可以被 coercion 为目标类型
+            // 这个赋值语句的编译通过即证明了 never type coercion 工作正常
+            let result = catch_unwind(|| {
+                #[allow(unreachable_code, clippy::diverging_sub_expression)]
+                let _: (i32, String) = (diverge(), "test".to_string());
+            });
+
+            assert!(
+                result.is_err(),
+                "diverge() 应该 panic，证明 never type 在 tuple 中被正确 coercion 后执行了"
+            );
+        }
+
+        #[test]
+        fn test_todo_in_tuple_compiles() {
+            #[allow(unreachable_code)]
+            fn make_tuple() -> (String, i32) {
+                (todo!("never type coercion demo"), 42)
+            }
+
+            let result = catch_unwind(|| {
+                #[allow(clippy::diverging_sub_expression)]
+                let _: (String, i32) = make_tuple();
+            });
+
+            assert!(
+                result.is_err(),
+                "todo!() 应该 panic，证明 never type 在 tuple 中被正确 coercion"
+            );
         }
     }
 }

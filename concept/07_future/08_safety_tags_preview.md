@@ -9,7 +9,11 @@
 
 ---
 
-> **来源**: [Rust RFC: Safety Tags](https://github.com/rust-lang/rfcs/pull/) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Internals — Safety Annotations](https://internals.rust-lang.org/) · [Rust for Linux](https://rust-for-linux.com/) · [Prusti: Deductive Verification for Rust](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf)
+> **来源**: [Rust RFC: Safety Tags](https://github.com/rust-lang/rfcs/pull/) ·
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
+> [Rust Internals — Safety Annotations](https://internals.rust-lang.org/) ·
+> [Rust for Linux](https://rust-for-linux.com/) ·
+> [Prusti: Deductive Verification for Rust](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf)
 
 ## 📑 目录
 
@@ -43,11 +47,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 问题定义：Unsafe 契约的表达缺口
->
 
 Rust 的 `unsafe` 块是**信任边界**——编译器暂停检查，开发者手动保证安全：
 

@@ -248,7 +248,10 @@ fn metrics_overview() {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("📡 OpenTelemetry 全链路追踪实战演示\n");
-    println!("   确保 Jaeger 已启动: docker run -d -p 16686:16686 -p 4317:4317 -p 4318:4318 jaegertracing/all-in-one:latest\n");
+    println!(
+        "   确保 Jaeger 已启动: docker run -d -p 16686:16686 -p 4317:4317 -p 4318:4318 \
+         jaegertracing/all-in-one:latest\n"
+    );
 
     // 初始化遥测
     let provider = init_telemetry().await;

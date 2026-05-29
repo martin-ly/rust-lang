@@ -10,7 +10,7 @@ use c10_networks::error::{
     ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
 };
 use common::RustLangError;
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::sync::{Arc, Mutex};
 use std::thread;

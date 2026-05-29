@@ -165,9 +165,9 @@
     - [10.5 async Closure Improvements](#105-async-closure-improvements)
   - [Summary](#summary)
   - [References](#references)
-  - [*Last Updated: 2026*](#last-updated-2026)
+  - *Last Updated: 2026*
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

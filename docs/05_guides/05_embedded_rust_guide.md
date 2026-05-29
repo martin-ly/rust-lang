@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [嵌入式 Rust 专题指南](#嵌入式-rust-专题指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [文档定位](#文档定位)
   - [官方 Embedded 资源入口](#官方-embedded-资源入口)
   - [本项目对应模块](#本项目对应模块)
@@ -43,10 +43,10 @@
     - [LazyLock 在硬件抽象层中的应用](#lazylock-在硬件抽象层中的应用)
     - [ControlFlow 在错误恢复中的应用](#controlflow-在错误恢复中的应用)
     - [内存优化：array\_windows 的零分配特性](#内存优化array_windows-的零分配特性)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+  - **状态**: ✅ 深度整合完成
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 文档定位
 >
@@ -456,13 +456,13 @@ fn update_data(value: u32) {
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/10_00_master_index.md) |
+| **前置知识** | C01 所有权 |
 | :--- | :--- |
 | :--- | :--- |
 | **外部资源** | [Embedded Rust Book](https://doc.rust-lang.org/embedded-book/) |
 | :--- | :--- |
 | :--- | :--- |
-| **相关指南** | [10_best_practices.md](./10_best_practices.md) |
+| **相关指南** | 10_best_practices.md |
 | :--- | :--- |
 | :--- | :--- |
 
@@ -472,12 +472,12 @@ fn update_data(value: u32) {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/10_00_master_index.md)
+- C01 所有权
 - [C02 类型系统](../../crates/c02_type_system/docs/README.md)
 - [C05 线程与并发](../../crates/c05_threads/docs/README.md)
 - [C12 WASM](../../crates/c12_wasm/docs/README.md)
 - [官方 Embedded Book](https://doc.rust-lang.org/embedded-book/)
-- [10_best_practices.md](./10_best_practices.md)
+- 10_best_practices.md
 
 ---
 

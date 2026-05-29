@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Builder Pattern in Rust](#builder-pattern-in-rust)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概念](#概念)
   - [基础实现](#基础实现)
     - [标准构建者](#标准构建者)
@@ -27,7 +27,7 @@
   - [推荐 crates](#推荐-crates)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 概念
 >

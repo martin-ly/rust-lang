@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [文档中心 - 主索引](#文档中心---主索引)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [按主题快速导航](#按主题快速导航)
   - [按角色导航](#按角色导航)
   - [01 学习路径与导航](#01-学习路径与导航)
@@ -21,7 +21,7 @@
   - [05 专题指南](#05-专题指南)
   - [06 工具链与版本](#06-工具链与版本)
   - [07 项目元文档](#07-项目元文档)
-  - [🔗 双向链接验证](#-双向链接验证)
+  - [🔗 双向链接验证](#双向链接验证)
     - [跨文档映射网络统计](#跨文档映射网络统计)
     - [概念映射统计](#概念映射统计)
     - [验证清单](#验证清单)
@@ -31,7 +31,7 @@
     - [快速入口](#快速入口)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
@@ -161,8 +161,8 @@
 | [ACTOR_MODEL_DEEP_DIVE](./rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) | **Actor模型深度解析** - 形式语义、10+定理、15+代码、反例分析 | → [actor-specialty/README](./rust-ownership-decidability/actor-specialty/README.md) → [formal-proofs](./rust-ownership-decidability/actor-specialty/formal-proofs/actor-safety-theorems.md) |
 | [00_completeness_gaps](./research_notes/formal_methods/00_completeness_gaps.md) | 完备性缺口声明与路线图 | → [README](./research_notes/formal_methods/README.md) |
 | [ownership_model](./research_notes/formal_methods/10_ownership_model.md) | 所有权规则 1-8、T2/T3 | ←→ [borrow_checker_proof](./research_notes/formal_methods/10_borrow_checker_proof.md) ←→ [type_system_foundations](./research_notes/type_theory/10_type_system_foundations.md) |
-| [borrow_checker_proof](./research_notes/formal_methods/10_borrow_checker_proof.md) | 借用规则、T1 | ←→ [ownership_model](./research_notes/formal_methods/10_ownership_model.md) ←→ [lifetime_formalization](./research_notes/formal_methods/10_lifetime_formalization.md) |
-| [lifetime_formalization](./research_notes/formal_methods/10_lifetime_formalization.md) | outlives、T2 | ←→ [borrow_checker_proof](./research_notes/formal_methods/10_borrow_checker_proof.md) ←→ [type_theory/lifetime_formalization](./research_notes/type_theory/10_lifetime_formalization.md) |
+| [borrow_checker_proof](./research_notes/formal_methods/10_borrow_checker_proof.md) | 借用规则、T1 | ←→ [ownership_model](./research_notes/formal_methods/10_ownership_model.md) ←→ lifetime_formalization |
+| lifetime_formalization | outlives、T2 | ←→ [borrow_checker_proof](./research_notes/formal_methods/10_borrow_checker_proof.md) ←→ [type_theory/lifetime_formalization](./research_notes/type_theory/10_lifetime_formalization.md) |
 | [async_state_machine](./research_notes/formal_methods/10_async_state_machine.md) | T6.1-T6.3 | ←→ [pin_self_referential](./research_notes/formal_methods/10_pin_self_referential.md) ←→ [send_sync_formalization](./research_notes/formal_methods/10_send_sync_formalization.md) |
 | [pin_self_referential](./research_notes/formal_methods/10_pin_self_referential.md) | Pin T1-T3 | ←→ [async_state_machine](./research_notes/formal_methods/10_async_state_machine.md) ←→ [advanced_types](./research_notes/type_theory/10_advanced_types.md) |
 | [send_sync_formalization](./research_notes/formal_methods/10_send_sync_formalization.md) | SEND-T1/SYNC-T1 | ←→ [async_state_machine](./research_notes/formal_methods/10_async_state_machine.md) ←→ [06_boundary_analysis](./research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) |
@@ -177,7 +177,7 @@
 | [type_theory/README](./research_notes/type_theory/README.md) | 类型理论总览 | → [type_system_foundations](./research_notes/type_theory/10_type_system_foundations.md) → [variance_theory](./research_notes/type_theory/10_variance_theory.md) |
 | [type_system_foundations](./research_notes/type_theory/10_type_system_foundations.md) | 类型 T1-T3 | ←→ [trait_system_formalization](./research_notes/type_theory/10_trait_system_formalization.md) ←→ [variance_theory](./research_notes/type_theory/10_variance_theory.md) |
 | [trait_system_formalization](./research_notes/type_theory/10_trait_system_formalization.md) | COH-T1 | ←→ [type_system_foundations](./research_notes/type_theory/10_type_system_foundations.md) ←→ [advanced_types](./research_notes/type_theory/10_advanced_types.md) |
-| [lifetime_formalization](./research_notes/type_theory/10_lifetime_formalization.md) | 生命周期形式化 | ←→ [variance_theory](./research_notes/type_theory/10_variance_theory.md) ←→ [formal_methods/lifetime_formalization](./research_notes/formal_methods/10_lifetime_formalization.md) |
+| [lifetime_formalization](./research_notes/type_theory/10_lifetime_formalization.md) | 生命周期形式化 | ←→ [variance_theory](./research_notes/type_theory/10_variance_theory.md) ←→ formal_methods/lifetime_formalization |
 | [advanced_types](./research_notes/type_theory/10_advanced_types.md) | GAT/const泛型 | ←→ [trait_system_formalization](./research_notes/type_theory/10_trait_system_formalization.md) ←→ [pin_self_referential](./research_notes/formal_methods/10_pin_self_referential.md) |
 | [variance_theory](./research_notes/type_theory/10_variance_theory.md) | T1-T4 | ←→ [type_system_foundations](./research_notes/type_theory/10_type_system_foundations.md) ←→ [lifetime_formalization](./research_notes/type_theory/10_lifetime_formalization.md) |
 
@@ -230,7 +230,7 @@
 | [05_performance_tuning_guide.md](05_guides/05_performance_tuning_guide.md) | 性能调优指南 | ← [algorithms_cheatsheet](./02_reference/quick_reference/02_algorithms_cheatsheet.md) ← [smart_pointers_cheatsheet](./02_reference/quick_reference/02_smart_pointers_cheatsheet.md) ← [ALIGNMENT_GUIDE](./02_reference/ALIGNMENT_GUIDE.md) |
 | [05_performance_testing_report.md](./05_guides/05_performance_testing_report.md) | 性能测试报告 | ← [testing_cheatsheet](./02_reference/quick_reference/02_testing_cheatsheet.md) ← [PERFORMANCE_TUNING_GUIDE](05_guides/05_performance_tuning_guide.md) |
 | [05_testing_coverage_guide.md](./05_guides/05_testing_coverage_guide.md) | 测试覆盖率指南 | ← [testing_cheatsheet](./02_reference/quick_reference/02_testing_cheatsheet.md) |
-| [10_best_practices.md](./05_guides/10_best_practices.md) | 综合最佳实践 | ← 所有速查卡 ← [formal_methods/](./research_notes/formal_methods/README.md) |
+| 10_best_practices.md | 综合最佳实践 | ← 所有速查卡 ← [formal_methods/](./research_notes/formal_methods/README.md) |
 | [05_advanced_topics_deep_dive.md](./05_guides/05_advanced_topics_deep_dive.md) | 高级主题深度指南 | ← [type_system](./02_reference/quick_reference/02_type_system.md) ← [type_system_foundations](./research_notes/type_theory/10_type_system_foundations.md) ← [advanced_types](./research_notes/type_theory/10_advanced_types.md) |
 | [05_cross_module_integration_examples.md](./05_guides/05_cross_module_integration_examples.md) | 跨模块集成示例 | ← [modules_cheatsheet](./02_reference/quick_reference/02_modules_cheatsheet.md) ← [04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | [workflow/](./05_guides/workflow/README.md) | 工作流理论与模型 | ← [02_workflow_safe_complete](./research_notes/software_design_theory/02_workflow_safe_complete_models/README.md) |

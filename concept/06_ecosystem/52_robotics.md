@@ -3,12 +3,32 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在机器人全栈中的适用性、实时约束满足度与 ROS2 集成成熟度
-> **前置依赖**: [嵌入式系统](./22_embedded_systems.md) · [并发编程](../03_advanced/01_concurrency.md) · [Async/Await](../03_advanced/02_async.md) · [网络协议](./38_network_protocols.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
-> **后置延伸**: [操作系统内核](./39_os_kernel.md) · [性能优化](./15_performance_optimization.md) · [机器学习生态](./46_machine_learning_ecosystem.md) · [形式化验证工具](./47_formal_verification_tools.md)
+> **前置依赖**: [嵌入式系统](./22_embedded_systems.md) ·
+> [并发编程](../03_advanced/01_concurrency.md) ·
+> [Async/Await](../03_advanced/02_async.md) ·
+> [网络协议](./38_network_protocols.md) ·
+> [Unsafe Rust](../03_advanced/03_unsafe.md)
+> **后置延伸**: [操作系统内核](./39_os_kernel.md) ·
+> [性能优化](./15_performance_optimization.md) ·
+> [机器学习生态](./46_machine_learning_ecosystem.md) ·
+> [形式化验证工具](./47_formal_verification_tools.md)
 
 ---
 
-> **来源**: [ROS2 Design](https://design.ros2.org/) · [ROS2 Humble Documentation](https://docs.ros.org/en/humble/) · [rclrs — ros2-rust](https://github.com/ros2-rust/ros2_rust) · [safe_drive](https://github.com/tier4/safe_drive) · [openrr](https://github.com/openrr/openrr) · [CycloneDDS](https://cyclonedds.io/) · [Fast DDS](https://www.eprosima.com/index.php/products-all/eprosima-fast-dds) · [Tock OS](https://www.tockos.org/) · [Hubris — Oxide Computer](https://hubris.oxide.computer/) · [nalgebra](https://docs.rs/nalgebra/) · [ROS2 Real-Time Paper — Maruyama et al. 2016](https://doi.org/10.1109/IROS.2016.7758091) · [ROS2 Executor Paper — Casini et al. 2019](https://doi.org/10.1109/LRA.2020.2967328) · [PREEMPT_RT Wiki](https://wiki.linuxfoundation.org/realtime/start) · [Rust Embedded Book](https://docs.rust-embedded.org/book/)
+> **来源**: [ROS2 Design](https://design.ros2.org/) ·
+> [ROS2 Humble Documentation](https://docs.ros.org/en/humble/) ·
+> [rclrs — ros2-rust](https://github.com/ros2-rust/ros2_rust) ·
+> [safe_drive](https://github.com/tier4/safe_drive) ·
+> [openrr](https://github.com/openrr/openrr) ·
+> [CycloneDDS](https://cyclonedds.io/) ·
+> [Fast DDS](https://www.eprosima.com/index.php/products-all/eprosima-fast-dds) ·
+> [Tock OS](https://www.tockos.org/) ·
+> [Hubris — Oxide Computer](https://hubris.oxide.computer/) ·
+> [nalgebra](https://docs.rs/nalgebra/) ·
+> [ROS2 Real-Time Paper — Maruyama et al. 2016](https://doi.org/10.1109/IROS.2016.7758091) ·
+> [ROS2 Executor Paper — Casini et al. 2019](https://doi.org/10.1109/LRA.2020.2967328) ·
+> [PREEMPT_RT Wiki](https://wiki.linuxfoundation.org/realtime/start) ·
+> [Rust Embedded Book](https://docs.rust-embedded.org/book/)
 
 ## 📑 目录
 

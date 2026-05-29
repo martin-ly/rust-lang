@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [AI + Rust 生态指南](#ai--rust-生态指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [文档定位](#文档定位)
   - [一、AI 辅助 Rust 开发](#一ai-辅助-rust-开发)
   - [二、Rust 构建 AI/ML 应用](#二rust-构建-aiml-应用)
@@ -50,10 +50,10 @@
     - [LazyLock 在模型缓存中的应用](#lazylock-在模型缓存中的应用)
     - [ControlFlow 在数据处理管道中的应用](#controlflow-在数据处理管道中的应用)
     - [数学常量在算法优化中的应用](#数学常量在算法优化中的应用)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+  - **状态**: ✅ 深度整合完成
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 文档定位
 >
@@ -553,7 +553,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
-| **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/10_00_master_index.md) |
+| **前置知识** | C01 所有权 |
 | :--- | :--- |
 | :--- | :--- |
 | **进阶主题** | [05_performance_tuning_guide.md](./05_performance_tuning_guide.md) |
@@ -573,7 +573,7 @@ type Result<T> = std::result::Result<T, AIError>;
 - [guides/README](../../guides/README.md)
 - [官方资源映射](../01_learning/01_official_resources_mapping.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)
-- [10_best_practices.md](./10_best_practices.md)
+- 10_best_practices.md
 - [05_performance_tuning_guide.md](./05_performance_tuning_guide.md)
 
 ---

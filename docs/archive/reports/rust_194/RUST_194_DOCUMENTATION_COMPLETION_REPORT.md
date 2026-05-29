@@ -39,29 +39,29 @@
 
 | 文档 | 大小 | 内容 | 状态 |
 |------|------|------|------|
-| [16_rust_1.94_release_notes.md](./06_toolchain/16_rust_1.94_release_notes.md) | 18.6 KB | 完整发布说明 | ✅ |
-| [17_rust_1.93_vs_1.94_comparison.md](./06_toolchain/17_rust_1.93_vs_1.94_comparison.md) | 9.9 KB | 版本对比 | ✅ |
-| [18_rust_1.94_adoption_guide.md](./06_toolchain/18_rust_1.94_adoption_guide.md) | 10.4 KB | 采用指南 | ✅ |
-| [README.md](./06_toolchain/README.md) | 更新 | 主索引更新 | ✅ |
+| 16_rust_1.94_release_notes.md | 18.6 KB | 完整发布说明 | ✅ |
+| 17_rust_1.93_vs_1.94_comparison.md | 9.9 KB | 版本对比 | ✅ |
+| 18_rust_1.94_adoption_guide.md | 10.4 KB | 采用指南 | ✅ |
+| README.md | 更新 | 主索引更新 | ✅ |
 
 ### 2. 指南文档 (`docs/05_guides/`)
 
 | 文档 | 大小 | 内容 | 状态 |
 |------|------|------|------|
-| [RUST_194_MIGRATION_GUIDE.md](./05_guides/RUST_194_MIGRATION_GUIDE.md) | 19.4 KB | 迁移指南 | ✅ |
+| RUST_194_MIGRATION_GUIDE.md | 19.4 KB | 迁移指南 | ✅ |
 
 ### 3. 研究笔记 (`docs/research_notes/`)
 
 | 文档 | 大小 | 内容 | 状态 |
 |------|------|------|------|
-| [RUST_194_RESEARCH_UPDATE.md](./research_notes/RUST_194_RESEARCH_UPDATE.md) | 24.6 KB | 研究笔记 | ✅ |
+| RUST_194_RESEARCH_UPDATE.md | 24.6 KB | 研究笔记 | ✅ |
 
 ### 4. 速查卡 (`docs/02_reference/quick_reference/`)
 
 | 文档 | 大小 | 内容 | 状态 |
 |------|------|------|------|
-| [rust_194_features_cheatsheet.md](./02_reference/quick_reference/rust_194_features_cheatsheet.md) | 10.0 KB | 1.94 速查卡 | ✅ |
-| [README.md](./02_reference/quick_reference/README.md) | 更新 | 索引更新 | ✅ |
+| rust_194_features_cheatsheet.md | 10.0 KB | 1.94 速查卡 | ✅ |
+| README.md | 更新 | 索引更新 | ✅ |
 
 ### 5. 代码模块 (`crates/c*/src/`)
 

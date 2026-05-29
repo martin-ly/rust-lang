@@ -14,40 +14,40 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究工具使用指南](#研究工具使用指南)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 工具分类 {#-工具分类}](#-工具分类--工具分类)
-  - [🔬 形式化验证工具 {#-形式化验证工具}](#-形式化验证工具--形式化验证工具)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
+  - [🎯 工具分类 {#-工具分类}](#工具分类)
+  - [🔬 形式化验证工具 {#-形式化验证工具}](#形式化验证工具)
     - [Prusti](#prusti)
     - [Kani](#kani)
     - [可选进阶：Coq/Lean](#可选进阶coqlean)
-  - [⚡ 性能分析工具 {#-性能分析工具}](#-性能分析工具--性能分析工具)
+  - [⚡ 性能分析工具 {#-性能分析工具}](#性能分析工具)
     - [Criterion.rs](#criterionrs)
     - [perf](#perf)
     - [flamegraph](#flamegraph)
-  - [🔍 内存分析工具 {#-内存分析工具}](#-内存分析工具--内存分析工具)
+  - [🔍 内存分析工具 {#-内存分析工具}](#内存分析工具)
     - [Miri](#miri)
     - [Valgrind](#valgrind)
     - [heaptrack](#heaptrack)
-  - [🧪 测试工具 {#-测试工具}](#-测试工具--测试工具)
+  - [🧪 测试工具 {#-测试工具}](#测试工具)
     - [cargo test](#cargo-test)
     - [proptest](#proptest)
     - [loom](#loom)
-  - [📚 代码分析工具 {#-代码分析工具}](#-代码分析工具--代码分析工具)
+  - [📚 代码分析工具 {#-代码分析工具}](#代码分析工具)
     - [Clippy](#clippy)
     - [rust-analyzer](#rust-analyzer)
     - [cargo-expand](#cargo-expand)
-  - [💡 使用建议 {#-使用建议}](#-使用建议--使用建议)
+  - [💡 使用建议 {#-使用建议}](#使用建议)
     - [工具选择](#工具选择)
     - [工具组合](#工具组合)
     - [最佳实践](#最佳实践)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🔗 相关资源 {#-相关资源}](#相关资源)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -56,40 +56,40 @@
 > **[来源: Rust Official Docs]**
 
 - [研究工具使用指南](#研究工具使用指南)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 工具分类 {#-工具分类}](#-工具分类--工具分类)
-  - [🔬 形式化验证工具 {#-形式化验证工具}](#-形式化验证工具--形式化验证工具)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
+  - [🎯 工具分类 {#-工具分类}](#工具分类)
+  - [🔬 形式化验证工具 {#-形式化验证工具}](#形式化验证工具)
     - [Prusti](#prusti)
     - [Kani](#kani)
     - [可选进阶：Coq/Lean](#可选进阶coqlean)
-  - [⚡ 性能分析工具 {#-性能分析工具}](#-性能分析工具--性能分析工具)
+  - [⚡ 性能分析工具 {#-性能分析工具}](#性能分析工具)
     - [Criterion.rs](#criterionrs)
     - [perf](#perf)
     - [flamegraph](#flamegraph)
-  - [🔍 内存分析工具 {#-内存分析工具}](#-内存分析工具--内存分析工具)
+  - [🔍 内存分析工具 {#-内存分析工具}](#内存分析工具)
     - [Miri](#miri)
     - [Valgrind](#valgrind)
     - [heaptrack](#heaptrack)
-  - [🧪 测试工具 {#-测试工具}](#-测试工具--测试工具)
+  - [🧪 测试工具 {#-测试工具}](#测试工具)
     - [cargo test](#cargo-test)
     - [proptest](#proptest)
     - [loom](#loom)
-  - [📚 代码分析工具 {#-代码分析工具}](#-代码分析工具--代码分析工具)
+  - [📚 代码分析工具 {#-代码分析工具}](#代码分析工具)
     - [Clippy](#clippy)
     - [rust-analyzer](#rust-analyzer)
     - [cargo-expand](#cargo-expand)
-  - [💡 使用建议 {#-使用建议}](#-使用建议--使用建议)
+  - [💡 使用建议 {#-使用建议}](#使用建议)
     - [工具选择](#工具选择)
     - [工具组合](#工具组合)
     - [最佳实践](#最佳实践)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🔗 相关资源 {#-相关资源}](#相关资源)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -165,8 +165,8 @@ cargo prusti --file src/lib.rs
 
 **相关资源**:
 
-- [Prusti 文档](https://viperproject.github.io/prusti-dev/README.md)
-- [Prusti 用户指南](https://viperproject.github.io/prusti-dev/user-guide/README.md)
+- Prusti 文档
+- Prusti 用户指南
 - [Prusti 教程](https://viperproject.github.io/prusti-dev/user-guide/getting-started.html)
 
 ---
@@ -219,7 +219,7 @@ cargo kani --function test_abs
 **相关资源**:
 
 - [Kani 文档](https://github.com/model-checking/kani)
-- [Kani 用户指南](https://model-checking.github.io/kani/README.md)
+- Kani 用户指南
 - [Kani 教程](https://model-checking.github.io/kani/tutorial.html)
 
 ---
@@ -292,8 +292,8 @@ cargo bench
 
 **相关资源**:
 
-- [Criterion.rs 文档](https://docs.rs/criterion/README.md)
-- [Criterion.rs 指南](https://github.com/bheisler/criterion.rs/blob/master/book/src/user_guide/index.md)
+- Criterion.rs 文档
+- Criterion.rs 指南
 
 ---
 
@@ -333,7 +333,7 @@ perf stat ./target/release/my_program
 
 **相关资源**:
 
-- [perf 文档](https://perf.wiki.kernel.org/README.md)
+- perf 文档
 - [perf 教程](https://perf.wiki.kernel.org/index.php/Tutorial)
 
 ---
@@ -542,7 +542,7 @@ proptest! {
 
 **相关资源**:
 
-- [proptest 文档](https://docs.rs/proptest/README.md)
+- proptest 文档
 - [proptest 教程](https://altsysrq.github.io/proptest-book/intro.html)
 
 ---
@@ -583,7 +583,7 @@ mod tests {
 
 **相关资源**:
 
-- [loom 文档](https://docs.rs/loom/README.md)
+- loom 文档
 - [loom 使用指南](https://github.com/tokio-rs/loom#usage)
 
 ---
@@ -653,7 +653,7 @@ rust-analyzer 通常在 IDE 中自动使用，提供：
 
 **相关资源**:
 
-- [rust-analyzer 文档](https://rust-analyzer.github.io/README.md)
+- rust-analyzer 文档
 - [rust-analyzer 用户指南](https://rust-analyzer.github.io/manual.html)
 
 ---

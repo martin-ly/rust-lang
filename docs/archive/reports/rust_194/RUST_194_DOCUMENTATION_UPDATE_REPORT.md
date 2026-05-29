@@ -350,12 +350,12 @@ rust-version = "1.94"
 
 ### Rust 1.94 专属文档
 
-- [Rust 1.94 发布说明](./06_toolchain/16_rust_1.94_release_notes.md)
-- [Rust 1.93 vs 1.94 对比](./06_toolchain/17_rust_1.93_vs_1.94_comparison.md)
-- [Rust 1.94 采用指南](./06_toolchain/18_rust_1.94_adoption_guide.md)
-- [Rust 1.94 迁移指南](./05_guides/RUST_194_MIGRATION_GUIDE.md)
-- [Rust 1.94 研究笔记](./research_notes/RUST_194_RESEARCH_UPDATE.md)
-- [Rust 1.94 速查卡](./02_reference/quick_reference/rust_194_features_cheatsheet.md)
+- Rust 1.94 发布说明
+- Rust 1.93 vs 1.94 对比
+- Rust 1.94 采用指南
+- Rust 1.94 迁移指南
+- Rust 1.94 研究笔记
+- Rust 1.94 速查卡
 
 ### 代码示例
 

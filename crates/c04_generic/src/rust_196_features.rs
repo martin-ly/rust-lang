@@ -216,7 +216,7 @@ impl Rust196PathBufDerefMut {
     }
 }
 
-/// Rust 1.96 `core::pin::pin!` 在泛型异步代码中的应用
+/// Rust 1.68 `core::pin::pin!`（1.96 回顾） 在泛型异步代码中的应用
 ///
 /// `pin!` 宏允许在栈上固定泛型 Future，无需 `Box::pin` 或 unsafe。
 pub struct Rust196GenericPin;

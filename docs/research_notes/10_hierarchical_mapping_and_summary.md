@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [research\_notes 层次化梳理与映射总结](#research_notes-层次化梳理与映射总结)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、按三大支柱的文档树](#一按三大支柱的文档树)
   - [二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表](#二概念族--文档--defaxiom定理-映射表)
     - [2.1 支柱 1（公理判定）](#21-支柱-1公理判定)
@@ -27,16 +27,16 @@
     - [3.2 按思维表征 → 文档（入口）](#32-按思维表征--文档入口)
   - [四、文档依赖关系（简表）](#四文档依赖关系简表)
   - [五、使用说明](#五使用说明)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、按三大支柱的文档树
 >
@@ -112,7 +112,7 @@ research_notes/
 | :--- | :--- | :--- | :--- | :--- |
 | 所有权 | [ownership_model](formal_methods/10_ownership_model.md) | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 变量绑定/遮蔽 Def 1.4/1.5 |
 | 借用 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8 | T1 数据竞争自由, T2 | |
-| 生命周期 | [lifetime_formalization](formal_methods/10_lifetime_formalization.md) | Axiom LF1–LF2, Def 1.4 | LF-T1–T3 引用有效性 | |
+| 生命周期 | lifetime_formalization | Axiom LF1–LF2, Def 1.4 | LF-T1–T3 引用有效性 | |
 | 类型系统 | [type_system_foundations](type_theory/10_type_system_foundations.md) | typing rules, 进展/保持 | T1 进展, T2 保持, T3 类型安全 | |
 | 型变 | [variance_theory](type_theory/10_variance_theory.md) | Def 1.1–3.1 | T1–T4 协变/逆变/不变/函数 | |
 | Trait | [trait_system_formalization](type_theory/10_trait_system_formalization.md) | Axiom COH1/COH2 | COH-T1, 对象安全 T1–T3 | |

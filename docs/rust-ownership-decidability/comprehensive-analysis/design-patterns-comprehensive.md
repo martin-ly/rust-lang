@@ -11,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust设计模式综合论证](#rust设计模式综合论证)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 模式分类体系](#1-模式分类体系)
     - [1.1 思维导图：Rust设计模式全景](#11-思维导图rust设计模式全景)
   - [2. 创建型模式](#2-创建型模式)
@@ -29,7 +29,7 @@
     - [6.1 自引用结构模式](#61-自引用结构模式)
   - [7. 模式选择决策树](#7-模式选择决策树)
   - [8. 模式与所有权的关系](#8-模式与所有权的关系)
-  - [**对齐来源**: Rust Book, Rust API Guidelines, crate文档](#对齐来源-rust-book-rust-api-guidelines-crate文档)
+  - **对齐来源**: Rust Book, Rust API Guidelines, crate文档
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 

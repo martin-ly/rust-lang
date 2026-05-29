@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [formal\_methods 意见与建议、安全可判定机制梳理与可持续推进计划](#formal_methods-意见与建议安全可判定机制梳理与可持续推进计划)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、对 formal\_methods 的意见与建议](#一对-formal_methods-的意见与建议)
     - [1.1 现状简述](#11-现状简述)
     - [1.2 具体建议](#12-具体建议)
@@ -35,15 +35,15 @@
     - [5.2 依赖与顺序](#52-依赖与顺序)
     - [5.3 维护约定](#53-维护约定)
   - [六、与现有文档的衔接](#六与现有文档的衔接)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、对 formal_methods 的意见与建议
 >
@@ -113,7 +113,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 所有权 | 静态 | 唯一所有者、移动、Copy/Clone | 规则 1–3 → T2/T3 | [ownership_model](./10_ownership_model.md) | 使用已移动值、双重释放 |
 | 借用 | 静态 | &T/&mut T、互斥可变、不可变可多 | 规则 5–8 → T1 | [borrow_checker_proof](./10_borrow_checker_proof.md) | 双重可变借用、悬垂引用 |
-| 生命周期 | 静态 | outlives、区域、NLL | $\ell \subseteq \text{lft}$ → LF-T1–T3 | [lifetime_formalization](./10_lifetime_formalization.md) | 返回局部引用、存短命引用 |
+| 生命周期 | 静态 | outlives、区域、NLL | $\ell \subseteq \text{lft}$ → LF-T1–T3 | lifetime_formalization | 返回局部引用、存短命引用 |
 | **Send** | **静态** | **跨线程转移所有权安全** | **T: Sync ⇔ &T: Send** | **[send_sync_formalization](./10_send_sync_formalization.md)** | **Rc 跨线程、!Send 闭包 spawn** |
 | **Sync** | **静态** | **跨线程共享引用安全** | **见上** | **同上** | **Cell 跨线程共享、Rc &T 跨线程** |
 | Pin/Unpin | 静态 | 位置稳定、自引用、!Unpin 堆固定 | Def 1.1–2.2 → T1–T3 | [pin_self_referential](./10_pin_self_referential.md) | 未 Pin 自引用、栈上 !Unpin |

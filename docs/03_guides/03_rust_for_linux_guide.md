@@ -11,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust for Linux 指南](#rust-for-linux-指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [核心概念](#核心概念)
     - [内核 Rust vs 用户态 Rust](#内核-rust-vs-用户态-rust)
@@ -25,7 +25,7 @@
   - [思维导图：Rust for Linux 全景](#思维导图rust-for-linux-全景)
   - [决策树：内核模块开发路径](#决策树内核模块开发路径)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 > **层级**: L7 前沿 / L3 高级系统编程
 > **前置概念**: [Unsafe](../../concept/03_advanced/03_unsafe.md) · [FFI](../../concept/03_advanced/03_unsafe.md) · [Build Systems](../../concept/06_ecosystem/01_toolchain.md)

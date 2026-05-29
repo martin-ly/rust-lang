@@ -34,8 +34,8 @@
     - [类型系统形式化对比](#类型系统形式化对比)
   - [生态与工具链](#生态与工具链)
     - [工具链代码对比示例](#工具链代码对比示例)
-  - [📊 综合对比矩阵](#-综合对比矩阵)
-  - [🔗 形式化文档链接](#-形式化文档链接)
+  - [📊 综合对比矩阵](#综合对比矩阵)
+  - [🔗 形式化文档链接](#形式化文档链接)
     - [Rust 形式化基础](#rust-形式化基础)
     - [权威来源索引](#权威来源索引)
       - [Rust（一级来源）](#rust一级来源)
@@ -45,7 +45,7 @@
       - [Python（三级来源）](#python三级来源)
   - [相关文档](#相关文档)
   - [Rust 1.95+ 更新](#rust-195-更新)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -128,7 +128,7 @@ print(s)           # 仍然可用
 
 | 语言 | 形式化模型 | 安全保证 | 形式化证明 |
 | :--- | :--- | :--- | :--- |
-| **Rust** | 线性类型 + 分离逻辑 | 编译期 | [所有权唯一性定理](../research_notes/formal_methods/10_ownership_model.md#定理-2-所有权唯一性)、[内存安全定理](../research_notes/formal_methods/10_ownership_model.md#定理-3-内存安全框架) |
+| **Rust** | 线性类型 + 分离逻辑 | 编译期 | [所有权唯一性定理](../research_notes/formal_methods/10_ownership_model.md)、[内存安全定理](../research_notes/formal_methods/10_ownership_model.md) |
 | **C++** | 无统一形式化 | 运行时/程序员 | 无官方形式化证明 |
 | **Go** | 标记-清除 GC | 运行时 | GC 正确性证明 |
 | **Python** | 引用计数 + GC | 运行时 | 无官方形式化证明 |
@@ -140,8 +140,8 @@ print(s)           # 仍然可用
 
 **Rust 形式化定义**:
 
-- 所有权规则: $\forall v. \text{唯一拥有者}(v)$ ([规则 1](../research_notes/formal_methods/10_ownership_model.md#规则-1-所有权唯一性))
-- 移动语义: $\text{move}(x, y) \rightarrow \Omega(x) = \text{Moved} \land \Omega(y) = \text{Owned}$ ([规则 2](../research_notes/formal_methods/10_ownership_model.md#规则-2-移动语义))
+- 所有权规则: $\forall v. \text{唯一拥有者}(v)$ ([规则 1](../research_notes/formal_methods/10_ownership_model.md))
+- 移动语义: $\text{move}(x, y) \rightarrow \Omega(x) = \text{Moved} \land \Omega(y) = \text{Owned}$ ([规则 2](../research_notes/formal_methods/10_ownership_model.md))
 
 ---
 
@@ -258,7 +258,7 @@ print(f"结果: {counter}")
 
 | 语言 | 并发安全机制 | 数据竞争检测 | 形式化保证 |
 | :--- | :--- | :--- | :--- |
-| **Rust** | Send/Sync Trait | 编译期 | [数据竞争自由定理](../research_notes/formal_methods/10_borrow_checker_proof.md#定理-1-数据竞争自由) |
+| **Rust** | Send/Sync Trait | 编译期 | [数据竞争自由定理](../research_notes/formal_methods/10_borrow_checker_proof.md) |
 | **C++** | 手动同步 | 运行时工具 (TSan) | 无编译期保证 |
 | **Go** | Channel + Mutex | 运行时工具 (race detector) | 无编译期保证 |
 | **Python** | GIL + 手动锁 | 运行时工具 | GIL 保证解释器状态安全 |
@@ -270,9 +270,9 @@ print(f"结果: {counter}")
 
 **Rust 形式化定义**:
 
-- Send Trait: 跨线程转移所有权 ([Def SEND1](../research_notes/formal_methods/10_send_sync_formalization.md#defs-send1send-sync1sendsync-形式化))
-- Sync Trait: 跨线程共享引用 ([Def SYNC1](../research_notes/formal_methods/10_send_sync_formalization.md#defs-send1send-sync1sendsync-形式化))
-- 数据竞争自由: $\text{DataRaceFree}(P)$ ([定理 1](../research_notes/formal_methods/10_borrow_checker_proof.md#定理-1-数据竞争自由))
+- Send Trait: 跨线程转移所有权 ([Def SEND1](../research_notes/formal_methods/10_send_sync_formalization.md))
+- Sync Trait: 跨线程共享引用 ([Def SYNC1](../research_notes/formal_methods/10_send_sync_formalization.md))
+- 数据竞争自由: $\text{DataRaceFree}(P)$ ([定理 1](../research_notes/formal_methods/10_borrow_checker_proof.md))
 
 ---
 
@@ -411,8 +411,8 @@ except Exception as e:
 
 **Rust 错误传播形式化**:
 
-- `?` 操作符: $\text{query}(e) \equiv \text{match } e \text{ with Ok}(v) \rightarrow v \mid \text{Err}(e) \rightarrow \text{return}$ ([Def QUERY1](../research_notes/formal_methods/10_borrow_checker_proof.md#def-query1-操作符))
-- 与借用检查器兼容: `?` 所在函数返回类型与 `e` 的 `E` 相容 ([定理 QUERY-T1](../research_notes/formal_methods/10_borrow_checker_proof.md#定理-query-t1))
+- `?` 操作符: $\text{query}(e) \equiv \text{match } e \text{ with Ok}(v) \rightarrow v \mid \text{Err}(e) \rightarrow \text{return}$ ([Def QUERY1](../research_notes/formal_methods/10_borrow_checker_proof.md))
+- 与借用检查器兼容: `?` 所在函数返回类型与 `e` 的 `E` 相容 ([定理 QUERY-T1](../research_notes/formal_methods/10_borrow_checker_proof.md))
 
 ---
 
@@ -504,7 +504,7 @@ result = max_val(10, 20)
 **Rust 类型系统形式化**:
 
 - Trait 约束: $\Gamma \vdash T: \text{Trait}$ ([Trait 形式化](../research_notes/formal_methods/10_ownership_model.md))
-- 生命周期子类型: $\ell_2 <: \ell_1$ 当 $\ell_1 \supseteq \ell_2$ ([Def 1.4](../research_notes/formal_methods/10_lifetime_formalization.md#定义-14-生命周期子类型))
+- 生命周期子类型: $\ell_2 <: \ell_1$ 当 $\ell_1 \supseteq \ell_2$ (Def 1.4)
 
 ---
 
@@ -590,7 +590,7 @@ $ python -m pytest
 | :--- | :--- | :--- |
 | 所有权 | [ownership_model](../research_notes/formal_methods/10_ownership_model.md) | T2 唯一性, T3 内存安全 |
 | 借用 | [borrow_checker_proof](../research_notes/formal_methods/10_borrow_checker_proof.md) | T1 数据竞争自由 |
-| 生命周期 | [lifetime_formalization](../research_notes/formal_methods/10_lifetime_formalization.md) | LF-T2 引用有效性 |
+| 生命周期 | lifetime_formalization | LF-T2 引用有效性 |
 | 并发 | [send_sync_formalization](../research_notes/formal_methods/10_send_sync_formalization.md) | SEND-T1, SYNC-T1 |
 | 异步 | [async_state_machine](../research_notes/formal_methods/10_async_state_machine.md) | T6.1-T6.3 |
 | 类型系统 | [type_system_foundations](../research_notes/type_theory/10_type_system_foundations.md) | T1-T3 类型安全 |

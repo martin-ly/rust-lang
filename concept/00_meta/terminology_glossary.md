@@ -1,8 +1,11 @@
-# Rust 核心术语英中对照表
-
+> **Bloom 层级**: 记忆 → 理解
 > **定位**: 本项目的最小国际化基础设施（决策 3-C）
 > **目标**: 为 100 个高频 Rust 术语提供标准化的英文原文对照，确保学习者能顺利对接 crates.io、RFC、GitHub Issue 等英文生态。
+> **前置概念**: [所有权](../01_foundation/01_ownership.md) · [借用](../01_foundation/02_borrowing.md) · [类型系统](../01_foundation/04_type_system.md)
+> **后置概念**: [生命周期](../01_foundation/03_lifetimes.md) · [特质](../02_intermediate/01_traits.md) · [泛型](../02_intermediate/02_generics.md)
 > **标准来源**: [The Rust Programming Language (TRPL)](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
+# Rust 核心术语英中对照表
 
 ---
 

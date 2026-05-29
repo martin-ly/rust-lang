@@ -15,20 +15,20 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 概念关联网络](#rust-概念关联网络)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
+  - [🎯 概述 {#-概述}](#概述)
   - [概念节点定义](#概念节点定义)
     - [L1: 元概念节点](#l1-元概念节点)
     - [L2: 核心概念族节点](#l2-核心概念族节点)
     - [L3: 具体概念节点](#l3-具体概念节点)
     - [L4: 实现机制节点](#l4-实现机制节点)
   - [关系类型定义](#关系类型定义)
-    - [等价关系 ≡ {#等价关系-}](#等价关系--等价关系-)
-    - [蕴含关系 ⇒ {#蕴含关系-}](#蕴含关系--蕴含关系-)
-    - [互斥关系 ⊥ {#互斥关系-}](#互斥关系--互斥关系-)
-    - [组合关系 ∘ {#组合关系-}](#组合关系--组合关系-)
-    - [层次关系 ⊂ {#层次关系-}](#层次关系--层次关系-)
+    - [等价关系 ≡ {#等价关系-}](#等价关系)
+    - [蕴含关系 ⇒ {#蕴含关系-}](#蕴含关系)
+    - [互斥关系 ⊥ {#互斥关系-}](#互斥关系)
+    - [组合关系 ∘ {#组合关系-}](#组合关系)
+    - [层次关系 ⊂ {#层次关系-}](#层次关系)
   - [关联矩阵](#关联矩阵)
     - [L1-L2 关联矩阵](#l1-l2-关联矩阵)
     - [L2-L3 关联矩阵](#l2-l3-关联矩阵)
@@ -48,39 +48,39 @@
       - [路径2: 从并发需求到实现机制](#路径2-从并发需求到实现机制)
       - [路径3: 从泛型到类型安全](#路径3-从泛型到类型安全)
       - [路径4: 互斥关系处理路径](#路径4-互斥关系处理路径)
-  - [📊 关系统计 {#-关系统计}](#-关系统计--关系统计)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [📊 关系统计 {#-关系统计}](#关系统计)
+  - [📚 相关文档 {#-相关文档}](#相关文档)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 📊 目录 {#-目录}
 >
 > **[来源: Rust Official Docs]**
 
 - [Rust 概念关联网络](#rust-概念关联网络)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
+  - [🎯 概述 {#-概述}](#概述)
   - [概念节点定义](#概念节点定义)
     - [L1: 元概念节点](#l1-元概念节点)
     - [L2: 核心概念族节点](#l2-核心概念族节点)
     - [L3: 具体概念节点](#l3-具体概念节点)
     - [L4: 实现机制节点](#l4-实现机制节点)
   - [关系类型定义](#关系类型定义)
-    - [等价关系 ≡ {#等价关系-}](#等价关系--等价关系-)
-    - [蕴含关系 ⇒ {#蕴含关系-}](#蕴含关系--蕴含关系-)
-    - [互斥关系 ⊥ {#互斥关系-}](#互斥关系--互斥关系-)
-    - [组合关系 ∘ {#组合关系-}](#组合关系--组合关系-)
-    - [层次关系 ⊂ {#层次关系-}](#层次关系--层次关系-)
+    - [等价关系 ≡ {#等价关系-}](#等价关系)
+    - [蕴含关系 ⇒ {#蕴含关系-}](#蕴含关系)
+    - [互斥关系 ⊥ {#互斥关系-}](#互斥关系)
+    - [组合关系 ∘ {#组合关系-}](#组合关系)
+    - [层次关系 ⊂ {#层次关系-}](#层次关系)
   - [关联矩阵](#关联矩阵)
     - [L1-L2 关联矩阵](#l1-l2-关联矩阵)
     - [L2-L3 关联矩阵](#l2-l3-关联矩阵)
@@ -100,19 +100,19 @@
       - [路径2: 从并发需求到实现机制](#路径2-从并发需求到实现机制)
       - [路径3: 从泛型到类型安全](#路径3-从泛型到类型安全)
       - [路径4: 互斥关系处理路径](#路径4-互斥关系处理路径)
-  - [📊 关系统计 {#-关系统计}](#-关系统计--关系统计)
-  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [📊 关系统计 {#-关系统计}](#关系统计)
+  - [📚 相关文档 {#-相关文档}](#相关文档)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -606,7 +606,7 @@ graph TB
 | :--- | :--- | :--- | :--- |
 | C1 所有权 | [10_ownership_model.md](formal_methods/10_ownership_model.md) | 形式化 | 10_concept_hierarchy_framework.md |
 | C5 借用 | [10_borrow_checker_proof.md](formal_methods/10_borrow_checker_proof.md) | 形式化 | 10_ownership_model.md |
-| C8 生命周期 | [10_lifetime_formalization.md](formal_methods/10_lifetime_formalization.md) | 形式化 | 10_borrow_checker_proof.md |
+| C8 生命周期 | 10_lifetime_formalization.md | 形式化 | 10_borrow_checker_proof.md |
 | C9 泛型 | [10_type_system_foundations.md](type_theory/10_type_system_foundations.md) | 形式化 | 10_trait_system_formalization.md |
 | C10 Trait | [10_trait_system_formalization.md](type_theory/10_trait_system_formalization.md) | 形式化 | 10_type_system_foundations.md |
 | C13 异步编程 | [10_async_state_machine.md](formal_methods/10_async_state_machine.md) | 形式化 | 05_async_programming_usage_guide.md |
@@ -623,8 +623,8 @@ graph TB
 | S3 作用域 | [02_ownership_cheatsheet.md](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 速查卡 | examples/ |
 | S5 共享借用 | [02_ownership_cheatsheet.md](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 速查卡 | examples/ |
 | S6 可变借用 | [02_ownership_cheatsheet.md](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 速查卡 | examples/ |
-| S9 生命周期标注 | [10_lifetime_formalization.md](formal_methods/10_lifetime_formalization.md) | 形式化 | examples/ |
-| S10 生命周期省略 | [10_lifetime_formalization.md](formal_methods/10_lifetime_formalization.md) | 形式化 | examples/ |
+| S9 生命周期标注 | 10_lifetime_formalization.md | 形式化 | examples/ |
+| S10 生命周期省略 | 10_lifetime_formalization.md | 形式化 | examples/ |
 | S15 async/await | [05_async_programming_usage_guide.md](../05_guides/05_async_programming_usage_guide.md) | 指南 | examples/async/ |
 | S18 Send/Sync | [10_send_sync_formalization.md](formal_methods/10_send_sync_formalization.md) | 形式化 | examples/concurrency/ |
 

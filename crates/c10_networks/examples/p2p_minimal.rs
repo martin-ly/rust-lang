@@ -39,12 +39,10 @@
 //! - `C10_P2P_LISTEN_ADDR`: 监听地址 (默认: /ip4/0.0.0.0/tcp/0)
 //! - `C10_P2P_TOPIC`: 订阅主题 (默认: c10-demo)
 //! - `C10_P2P_PUBLISH_INTERVAL`: 发布间隔 (默认: 5秒)
+use libp2p::core::upgrade;
+use libp2p::swarm::{NetworkBehaviour, SwarmEvent};
 use libp2p::{
-    Multiaddr, PeerId, Transport,
-    core::upgrade,
-    gossipsub, identify, identity, kad, noise, ping,
-    swarm::{NetworkBehaviour, SwarmEvent},
-    tcp, yamux,
+    Multiaddr, PeerId, Transport, gossipsub, identify, identity, kad, noise, ping, tcp, yamux,
 };
 use std::time::Duration;
 

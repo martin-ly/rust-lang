@@ -10,30 +10,30 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [📁 项目结构说明 (Project Structure)](#-项目结构说明-project-structure)
-  - [📋 目录](#-目录)
+- [📁 项目结构说明 (Project Structure)](#项目结构说明-project-structure)
+  - [📋 目录](#目录)
   - [项目总览](#项目总览)
     - [设计原则](#设计原则)
   - [目录树概览](#目录树概览)
   - [核心目录说明](#核心目录说明)
     - [根目录文件](#根目录文件)
-      - [📄 核心文档](#-核心文档)
-      - [📦 配置文件](#-配置文件)
+      - [📄 核心文档](#核心文档)
+      - [📦 配置文件](#配置文件)
     - [crates/ - 学习模块](#crates---学习模块)
-      - [📚 模块列表](#-模块列表)
-      - [🏗️ 模块标准结构](#️-模块标准结构)
+      - [📚 模块列表](#模块列表)
+      - [🏗️ 模块标准结构](#模块标准结构)
     - [guides/ - 学习指南](#guides---学习指南)
-      - [📖 指南分类](#-指南分类)
+      - [📖 指南分类](#指南分类)
     - [项目报告 (archive/)](#项目报告-archive)
-      - [📊 报告位置](#-报告位置)
+      - [📊 报告位置](#报告位置)
     - [docs/ - 跨模块文档与指南](#docs---跨模块文档与指南)
-      - [📚 文档分类](#-文档分类)
+      - [📚 文档分类](#文档分类)
     - [scripts/ - 脚本工具](#scripts---脚本工具)
     - [examples/ - 根级综合示例](#examples---根级综合示例)
     - [tests/ - 集成测试](#tests---集成测试)
     - [exercises/ - 练习入口](#exercises---练习入口)
   - [导航指南](#导航指南)
-    - [🎯 我想](#-我想)
+    - [🎯 我想](#我想)
       - [学习Rust](#学习rust)
       - [查找资料](#查找资料)
       - [解决问题](#解决问题)
@@ -41,9 +41,9 @@
       - [了解项目进度](#了解项目进度)
       - [参与贡献](#参与贡献)
   - [项目统计](#项目统计)
-    - [📊 规模统计](#-规模统计)
-    - [✨ 内容覆盖](#-内容覆盖)
-  - [🔗 相关文档](#-相关文档)
+    - [📊 规模统计](#规模统计)
+    - [✨ 内容覆盖](#内容覆盖)
+  - [🔗 相关文档](#相关文档)
 
 ---
 
@@ -240,7 +240,7 @@ c##_module_name/
 
 #### 📖 指南分类
 
-**指南入口**: [guides/README.md](./guides/README.md) 提供指南导航和官方资源映射
+**指南入口**: guides/README.md 提供指南导航和官方资源映射
 
 **实际指南位置**:
 
@@ -248,11 +248,11 @@ c##_module_name/
 - **crates/*/docs/** - 各模块的 Tier 指南、快速开始、实践指南
 - **docs/02_reference/quick_reference/** - 20 个速查卡（含 AI/ML）
 
-**已完善**: AI 辅助指南 ([guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md](./guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md))、Unsafe 专题 ([docs/05_guides/UNSAFE_RUST_GUIDE.md](./docs/05_guides/UNSAFE_RUST_GUIDE.md))
+**已完善**: AI 辅助指南 (guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md)、Unsafe 专题 (docs/05_guides/UNSAFE_RUST_GUIDE.md)
 
 **计划完善**（后续版本）: 编译器内部、认知科学、交互式学习平台等
 
-👉 查看 [guides/README.md](./guides/README.md) 了解完整导航
+👉 查看 guides/README.md 了解完整导航
 
 ---
 
@@ -265,8 +265,8 @@ c##_module_name/
 | 类型 | 路径 |
 | :--- | :--- || 阶段/模块报告 | [archive/reports/](./archive/reports/) |
 | 归档报告 | [docs/archive/reports/](./docs/archive/reports/) |
-| 根完成报告 | [docs/archive/root_completion_reports/](./docs/archive/root_completion_reports/README.md) |
-| 计划实施完成 | [docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md](./docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md) |
+| 根完成报告 | docs/archive/root_completion_reports/ |
+| 计划实施完成 | docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md |
 
 ---
 
@@ -320,7 +320,7 @@ scripts/
 
 ### exercises/ - 练习入口
 
-**交互式练习导航**。本项目无内置练习题，[exercises/README.md](./exercises/README.md) 提供外部工具入口：
+**交互式练习导航**。本项目无内置练习题，exercises/README.md 提供外部工具入口：
 
 - **Rustlings** - 官方命令行交互式学习
 - **Rust Playground** - 在线运行代码
@@ -334,41 +334,41 @@ scripts/
 
 #### 学习Rust
 
-1. **完全新手** → [README.md](./README.md) → [C01模块](./crates/c01_ownership_borrow_scope/README.md)
-2. **选择路径** → [学习路径](./README.md#学习路径推荐)
-3. **快速上手** → [学习指南](./guides/README.md)
+1. **完全新手** → README.md → C01模块
+2. **选择路径** → 学习路径
+3. **快速上手** → 学习指南
 
 #### 查找资料
 
-1. **快速查询** → [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) 或 [速查卡目录](./docs/02_reference/quick_reference/README.md)
+1. **快速查询** → QUICK_REFERENCE.md 或 速查卡目录
 2. **深入学习** → 各模块的 `docs/00_master_index.md`
 3. **常见问题** → 各模块的 `docs/FAQ.md`
 4. **术语查询** → 各模块的 `docs/Glossary.md`
-5. **所有文档** → [文档中心](./docs/README.md)
+5. **所有文档** → 文档中心
 
 #### 解决问题
 
-1. **编译错误** → [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#编译错误)
-2. **运行时错误** → [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#运行时错误)
-3. **性能问题** → [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#性能问题)
+1. **编译错误** → TROUBLESHOOTING.md
+2. **运行时错误** → TROUBLESHOOTING.md
+3. **性能问题** → TROUBLESHOOTING.md
 
 #### 提升代码质量
 
 1. **最佳实践** → [BEST_PRACTICES.md](./BEST_PRACTICES.md)
 2. **代码审查** → 查看模块示例代码
-3. **学习模式** → [C09 设计模式](./crates/c09_design_pattern/README.md)
+3. **学习模式** → C09 设计模式
 
 #### 了解项目进度
 
 1. **整体进度** → [archive/reports/](./archive/reports/)
 2. **模块进度** → [archive/reports/](./archive/reports/)
-3. **更新历史** → [CHANGELOG.md](./CHANGELOG.md)
-4. **未来规划** → [ROADMAP.md](./ROADMAP.md)
+3. **更新历史** → CHANGELOG.md
+4. **未来规划** → ROADMAP.md
 
 #### 参与贡献
 
-1. **阅读指南** → [CONTRIBUTING.md](./CONTRIBUTING.md)
-2. **查看规划** → [ROADMAP.md](./ROADMAP.md)
+1. **阅读指南** → CONTRIBUTING.md
+2. **查看规划** → ROADMAP.md
 3. **提交Issue** → GitHub Issues
 
 ---
@@ -411,12 +411,12 @@ scripts/
 
 ## 🔗 相关文档
 
-- **项目入口**: [README.md](./README.md) ⭐
-- **学习指南**: [guides/](./guides/README.md) ⭐⭐
+- **项目入口**: README.md ⭐
+- **学习指南**: guides/ ⭐⭐
 - **项目报告**: [archive/reports/](./archive/reports/)
-- **贡献指南**: [CONTRIBUTING.md](./CONTRIBUTING.md)
-- **项目路线**: [ROADMAP.md](./ROADMAP.md)
-- **学习资源**: [RESOURCES.md](./RESOURCES.md)
+- **贡献指南**: CONTRIBUTING.md
+- **项目路线**: ROADMAP.md
+- **学习资源**: RESOURCES.md
 
 ---
 

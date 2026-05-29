@@ -1,10 +1,10 @@
-> **版本状态声明**: 本文档覆盖 Rust 1.95.0 (2026-04-16) 和 **1.96.0 (2026-05-28)** 稳定版内容。
+> **版本状态声明**: 本文档覆盖 **Rust 1.96.0 (2026-05-28)** 稳定版内容，含 1.95 关键特性回顾。
 >
-> - Rust 1.95.0 内容已稳定，1.96.0 内容已与官方 Release Notes (#156512) 逐条核对。
+> - 1.96.0 内容已与官方 Release Notes (#156512) 逐条核对。
 > - 标注 `🔴 nightly-only` 的特性**不是** stable 内容。
 > **最后更新**: 2026-05-29
 
-# Rust 1.95 & 1.96 特性详解
+# Rust 1.96 稳定特性全景
 
 > **Bloom 层级**: L3 (应用)
 
@@ -163,16 +163,54 @@ my-crate = { git = "https://github.com/example/my-crate", registry = "corp" }
 
 #### 12. `target.'cfg(..)'.rustdocflags`
 
+Cargo 1.96 支持按目标条件配置 `rustdoc` 标志，此前只能通过 `RUSTDOCFLAGS` 环境变量全局设置。
+
+**基础示例**：仅在 Unix 平台上启用 `docsrs` 条件编译
+
 ```toml
 [target.'cfg(unix)']
 rustdocflags = ["--cfg", "docsrs"]
 ```
+
+**实际应用场景**：
+
+| 场景 | 配置 | 说明 |
+|:---|:---|:---|
+| 跨平台文档特性门控 | `[target.'cfg(windows)'].rustdocflags = ["--cfg", "windows_doc"]` | Windows 专属 API 仅在 Windows 目标下出现在文档中 |
+| docs.rs 风格平台标注 | `[target.'cfg(unix)'].rustdocflags = ["--cfg", "docsrs"]` | 配合 `#[cfg(docsrs)]` 控制文档专用特性标注 |
+| 自定义 CSS/JS 注入 | `rustdocflags = ["--html-in-header", "custom.html"]` | 按目标注入分析脚本或样式 |
+| 内部项目文档搜索 | `rustdocflags = ["--extern-html-root-url", "crate_name=https://internal.docs/crate_name"]` | 为内部 crate 指定文档根 URL |
+
+**与 `RUSTDOCFLAGS` 环境变量的优先级**：
+
+```bash
+# 环境变量优先级高于 cargo 配置
+RUSTDOCFLAGS="--cfg custom" cargo doc
+```
+
+Cargo 配置中的 `rustdocflags` 与 `RUSTDOCFLAGS` **合并**而非覆盖，但环境变量的标志在命令行中更靠后，可能覆盖同名配置。
 
 #### 13. 安全修复：CVE-2026-5222 / CVE-2026-5223
 
 修复了 Cargo 缓存路径验证问题和依赖解析中的信息泄露风险。
 
 ---
+
+### 编译器改进
+
+| 改进 | 说明 |
+|:---|:---|
+| LoongArch Linux link relaxation | 龙芯架构启用链接松弛优化 |
+| `riscv64gc-unknown-fuchsia` RVA22 + vector | RISC-V Fuchsia 目标基线提升至 RVA22 |
+| `unused_features` lint | 恢复/新增 lint，警告未使用的 `#![feature(...)]` |
+
+### 平台支持
+
+| 目标 | 变更 |
+|:---|:---|
+| `loongarch64-unknown-linux-gnu` | Link relaxation 启用 |
+| `riscv64gc-unknown-fuchsia` | 基线提升至 RVA22 + vector |
+| `s390x-unknown-linux-gnu` | 向量寄存器内联汇编支持 |
 
 ### 兼容性注意
 
@@ -190,6 +228,20 @@ rustdocflags = ["--cfg", "docsrs"]
 | `avr` 目标 `c_double` 为 `f32` | 匹配 AVR 上 C 的 double 宽度 |
 
 ---
+
+## 项目覆盖映射表
+
+| 1.96 特性 | 概念文档 | Crate 代码示例 | 测试 |
+|:---|:---|:---:|:---:|
+| `assert_matches!` | `concept/02_intermediate/05_assert_matches.md` | `c02_type_system` | ✅ 183 passed |
+| `core::range::*` | `concept/02_intermediate/06_range_types.md` | `c02_type_system` | ✅ |
+| `NonZero` 范围迭代 | `concept/02_intermediate/06_range_types.md` | `c02_type_system` | ✅ |
+| `From<T>` for cell types | `concept/02_intermediate/08_interior_mutability.md` | `c02_type_system` | ✅ |
+| `ManuallyDrop` 常量模式 | `concept/01_foundation/04_02_type_system.md` | `c02_type_system` | ✅ |
+| `expr` metavariable to `cfg` | `concept/03_advanced/04_macros.md` | `c11_macro_system` | ✅ 97 passed |
+| Never 类型 tuple coercion | `concept/02_intermediate/02_generics.md` | `c02_type_system` | ✅ |
+| Cargo Git + registry 共存 | `docs/06_toolchain/06_19_rust_1_96_features.md` | — | 文档 |
+| Cargo `target.cfg.rustdocflags` | `docs/06_toolchain/06_19_rust_1_96_features.md` | — | 文档 |
 
 ## 与 1.95 特性对比
 
@@ -218,7 +270,7 @@ rustdocflags = ["--cfg", "docsrs"]
 >
 > **权威来源对齐变更日志**: 2026-05-29 全面重写 1.96 部分，删除未进入 stable 的虚假特性（`truncate_front`、`int_format_into`、`RefCell::try_map`、`proc_macro_value` 等），补充实际稳定内容 [来源: Official Release Notes]
 
-**文档版本**: 2.0
-**对应 Rust 版本**: 1.95.0 / 1.96.0 (Stable)
+**文档版本**: 2.1
+**对应 Rust 版本**: 1.96.0 (Stable) / 1.95.0 回顾
 **最后更新**: 2026-05-29
-**状态**: ✅ 已与官方 Release Notes 逐条核对
+**状态**: ✅ 已与官方 Release Notes (#156512) 逐条核对

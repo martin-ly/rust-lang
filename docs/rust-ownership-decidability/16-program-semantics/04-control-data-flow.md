@@ -159,9 +159,9 @@
     - [12.2 静态分析要点](#122-静态分析要点)
     - [12.3 实践指导](#123-实践指导)
     - [12.4 延伸阅读](#124-延伸阅读)
-  - [*本文档是 Rust 所有权可判定性研究系列的一部分，与 `00-semantic-framework.md` 保持一致的语义框架。*](#本文档是-rust-所有权可判定性研究系列的一部分与-00-semantic-frameworkmd-保持一致的语义框架)
+  - *本文档是 Rust 所有权可判定性研究系列的一部分，与 `00-semantic-framework.md` 保持一致的语义框架。*
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -4074,7 +4074,7 @@ valgrind --tool=cachegrind ./target/release/myapp
 - [Rust 参考手册](https://doc.rust-lang.org/reference/)
 - [Rustc 开发者指南](https://rustc-dev-guide.rust-lang.org/)
 - [Rust 形式化语义研究（RustBelt）](https://plv.mpi-sws.org/rustbelt/)
-- [Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)
+- Stacked Borrows
 - [Tree Borrows](https://perso.crans.org/vanille/treebor/)
 
 ---

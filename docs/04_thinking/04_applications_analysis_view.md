@@ -37,7 +37,7 @@
     - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
+      - [相关文档](#相关文档)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -121,7 +121,7 @@
 
 **公理 / 定理 → 论证**：嵌入式选型遵循「资源受限」公理——无 OS 或极小运行时。定理：`no_std` 剔除堆分配与标准库；所有权与借用保证无 GC 下内存安全。并发选型：裸金属用临界区/中断；RTOS 用其提供的同步原语。
 
-**决策树**：需堆？→ `extern crate alloc`；需异步？→ embassy；裸金属？→ cortex-m/avr；有 RTOS？→ 用其 API。参考 [supported_unsupported_matrix](../research_notes/software_design_theory/05_boundary_system/supported_unsupported_matrix.md#no_std-与嵌入式支持)。
+**决策树**：需堆？→ `extern crate alloc`；需异步？→ embassy；裸金属？→ cortex-m/avr；有 RTOS？→ 用其 API。参考 supported_unsupported_matrix。
 
 ---
 
@@ -267,7 +267,7 @@ flowchart LR
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Web | 异步 | tokio | HTTP/gRPC | 可选 | [02_async](../research_notes/software_design_theory/03_execution_models/02_async.md) |
 | 系统 | 同步/并发 | std | std::net | 无 | [03_concurrent](../research_notes/software_design_theory/03_execution_models/03_concurrent.md) |
-| 嵌入式 | 同步 | no_std | 无 | 无 | [supported_unsupported](../research_notes/software_design_theory/05_boundary_system/supported_unsupported_matrix.md#no_std-与嵌入式支持) |
+| 嵌入式 | 同步 | no_std | 无 | 无 | supported_unsupported |
 | 分布式 | 异步 | tokio | tonic/Kafka | 序列化 | [05_distributed](../research_notes/software_design_theory/03_execution_models/05_distributed.md) |
 | 数据科学 | 并行 | rayon | 无 | ndarray/polars | [04_parallel](../research_notes/software_design_theory/03_execution_models/04_parallel.md) |
 | 游戏 | 并行/并发 | rayon/std | 可选 | ECS | 同上 |

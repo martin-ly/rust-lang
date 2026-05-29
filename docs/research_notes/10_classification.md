@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记分类体系](#研究笔记分类体系)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [宗旨](#宗旨)
   - [一、按文档角色分类](#一按文档角色分类)
   - [二、按知识层次分类](#二按知识层次分类)
@@ -19,15 +19,15 @@
     - [5.3 索引扩展](#53-索引扩展)
   - [六、快速查找指引](#六快速查找指引)
   - [引用](#引用)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -154,7 +154,7 @@
 | **首次使用、按目标选路径** | [00_ORGANIZATION_AND_NAVIGATION](./10_00_organization_and_navigation.md) |
 | 快速定位文档 | [QUICK_REFERENCE](./10_quick_reference.md)、[QUICK_FIND](./10_quick_find.md) |
 | 理解文档角色 | 本表 § 一 |
-| 按主题查 | [INDEX § 按主题分类](INDEX.md#-按主题分类) |
+| 按主题查 | [INDEX § 按主题分类](INDEX.md) |
 | 查证明与缺口 | [PROOF_INDEX](./10_proof_index.md)、[ARGUMENTATION_GAP_INDEX](./10_argumentation_gap_index.md) |
 | 查设计理由 | [DESIGN_MECHANISM_RATIONALE](./10_design_mechanism_rationale.md) |
 | 查 Rust 1.93 特性 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./10_rust_193_language_features_comprehensive_analysis.md) |

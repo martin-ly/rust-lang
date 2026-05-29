@@ -24,10 +24,10 @@
 //!     ├── Block
 //!     └── Batch
 //! ```
+use c09_design_pattern::concurrency::message_passing::define::StringEventHandler;
 use c09_design_pattern::concurrency::message_passing::define::async_bus::{
     BackpressureStrategy, EventBusString,
 };
-use c09_design_pattern::concurrency::message_passing::define::StringEventHandler;
 
 fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
     use core::pin::Pin;

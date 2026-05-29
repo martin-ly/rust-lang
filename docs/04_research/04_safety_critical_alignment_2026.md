@@ -11,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Safety-Critical Rust 官方路线对齐（2026）](#safety-critical-rust-官方路线对齐2026)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、Safety-Critical Rust 生态全景](#一safety-critical-rust-生态全景)
   - [二、官方路线时间线](#二官方路线时间线)
   - [三、FLS (Ferrocene Language Specification) 与项目映射](#三fls-ferrocene-language-specification-与项目映射)
@@ -31,7 +31,7 @@
   - [思维导图：Safety-Critical Rust 生态](#思维导图safety-critical-rust-生态)
   - [决策树：安全关键项目合规路径](#决策树安全关键项目合规路径)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 > **文档定位**: 对齐 Rust 官方 Safety-Critical 路线与项目知识体系
 > **覆盖版本**: Rust 1.96.0+ / FLS (Ferrocene Language Specification) 24.11 / Ferrocene 26.02.0

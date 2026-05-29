@@ -74,7 +74,7 @@
 - **API 稳定化**：MaybeUninit、String/Vec raw parts、VecDeque、Duration、char、fmt 等
 - **兼容性**：deref_nullptr deny、#[test] 无效位置报错、Emscripten ABI、offset_of 等
 
-**参考**：[05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md)、[06_rust_1.93_compatibility_notes.md](./06_rust_1.93_compatibility_notes.md)
+**参考**：05_rust_1.93_vs_1.92_comparison.md、06_rust_1.93_compatibility_notes.md
 
 ---
 
@@ -109,9 +109,9 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [Rust 1.93 vs 1.92 对比](./05_rust_1.93_vs_1.92_comparison.md)
-- [Rust 1.93 兼容性注意事项](./06_rust_1.93_compatibility_notes.md)
-- [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md)
+- Rust 1.93 vs 1.92 对比
+- Rust 1.93 兼容性注意事项
+- Rust 1.93 完整变更清单
 
 ---
 
@@ -357,8 +357,8 @@ mod tests {
 
 本文档基于 Rust 1.93/1.92，最新版本请参见：
 
-- [Rust 1.94 完整发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
-- [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md)
-- [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md)
+- Rust 1.94 完整发布说明
+- Rust 1.94 采用指南
+- Rust 1.93 vs 1.94 对比
 
 **最后更新**: 2026-05-08 (添加 1.94 引用)

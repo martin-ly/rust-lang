@@ -19,7 +19,7 @@
   - [工具与项目](#工具与项目)
     - [Miri](#miri)
     - [Prusti](#prusti)
-    - [Aeneas\*](#aeneas-1)
+    - [Aeneas\*](#aeneas)
     - [Creusot](#creusot)
     - [Kani](#kani)
     - [Flux](#flux)

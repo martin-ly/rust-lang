@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [代码-文档-形式化完整映射](#代码-文档-形式化完整映射)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 代码到概念的映射](#1-代码到概念的映射)
     - [1.1 所有权与移动语义](#11-所有权与移动语义)
     - [1.2 借用与引用](#12-借用与引用)
@@ -51,15 +51,15 @@
     - [项目内部文档](#项目内部文档)
     - [形式化文档](#形式化文档)
     - [外部资源](#外部资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档-1)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+      - [相关文档](#相关文档)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
@@ -176,9 +176,9 @@
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
 | `let s = String::from("hello");` | [C01 所有权](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 所有权获取 |
-| `let s2 = s1;` | [C01 所有权](../02_reference/quick_reference/02_ownership_cheatsheet.md#移动语义) | move, 转移 |
-| `fn take_ownership(s: String)` | [C01 函数参数](../02_reference/quick_reference/02_ownership_cheatsheet.md#函数参数) | 参数所有权 |
-| `fn borrow(s: &String)` | [C01 借用](../02_reference/quick_reference/02_ownership_cheatsheet.md#引用与借用) | 引用, 借用 |
+| `let s2 = s1;` | [C01 所有权](../02_reference/quick_reference/02_ownership_cheatsheet.md) | move, 转移 |
+| `fn take_ownership(s: String)` | [C01 函数参数](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 参数所有权 |
+| `fn borrow(s: &String)` | [C01 借用](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 引用, 借用 |
 
 ### 2.2 生命周期文档映射
 
@@ -188,8 +188,8 @@
 
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
-| `fn longest<'a>(x: &'a str, y: &'a str)` | [C01 生命周期](../02_reference/quick_reference/02_ownership_cheatsheet.md#生命周期) | lifetime, 生命周期 |
-| `struct Excerpt<'a> { part: &'a str }` | [C01 结构体生命周期](../02_reference/quick_reference/02_ownership_cheatsheet.md#生命周期标注) | 结构体生命周期 |
+| `fn longest<'a>(x: &'a str, y: &'a str)` | [C01 生命周期](../02_reference/quick_reference/02_ownership_cheatsheet.md) | lifetime, 生命周期 |
+| `struct Excerpt<'a> { part: &'a str }` | [C01 结构体生命周期](../02_reference/quick_reference/02_ownership_cheatsheet.md) | 结构体生命周期 |
 | `impl<'a> Excerpt<'a> { ... }` | [C01 生命周期省略](../02_reference/quick_reference/02_ownership_cheatsheet.md#生命周期省略规则) | impl 生命周期 |
 
 ### 2.3 泛型与 Trait 文档映射
@@ -200,9 +200,9 @@
 | :--- | :--- | :--- |
 | `fn foo<T>(x: T)` | [C04 泛型](../02_reference/quick_reference/02_generics_cheatsheet.md) | 泛型函数 |
 | `struct Point<T> { x: T, y: T }` | [C04 泛型结构体](../02_reference/quick_reference/02_generics_cheatsheet.md#泛型结构体) | 泛型结构体 |
-| `fn foo<T: Display + Clone>(x: T)` | [C04 Trait Bound](../02_reference/quick_reference/02_generics_cheatsheet.md#trait-bound) | trait bound, 约束 |
-| `trait Drawable { fn draw(&self); }` | [C04 Trait 定义](../02_reference/quick_reference/02_generics_cheatsheet.md#定义-trait) | trait 定义 |
-| `impl Drawable for Circle { ... }` | [C04 Trait 实现](../02_reference/quick_reference/02_generics_cheatsheet.md#实现-trait) | trait 实现 |
+| `fn foo<T: Display + Clone>(x: T)` | [C04 Trait Bound](../02_reference/quick_reference/02_generics_cheatsheet.md) | trait bound, 约束 |
+| `trait Drawable { fn draw(&self); }` | [C04 Trait 定义](../02_reference/quick_reference/02_generics_cheatsheet.md) | trait 定义 |
+| `impl Drawable for Circle { ... }` | [C04 Trait 实现](../02_reference/quick_reference/02_generics_cheatsheet.md) | trait 实现 |
 
 ### 2.4 并发文档映射
 
@@ -210,11 +210,11 @@
 
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
-| `thread::spawn(\|_\| { ... })` | [C05 线程](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#创建线程) | spawn, 创建线程 |
-| `Arc::new(Mutex::new(0))` | [C05 Arc + Mutex](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#共享状态并发) | Arc, Mutex, 共享状态 |
+| `thread::spawn(\|_\| { ... })` | [C05 线程](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | spawn, 创建线程 |
+| `Arc::new(Mutex::new(0))` | [C05 Arc + Mutex](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md) | Arc, Mutex, 共享状态 |
 | `let (tx, rx) = mpsc::channel();` | [C05 消息传递](../02_reference/quick_reference/02_threads_concurrency_cheatsheet.md#消息传递) | channel, mpsc |
-| `async fn foo() { ... }` | [C06 异步](../02_reference/quick_reference/02_async_patterns.md#async-函数) | async, 异步函数 |
-| `let handle = tokio::spawn(async { ... });` | [C06 任务调度](../02_reference/quick_reference/02_async_patterns.md#任务调度) | spawn, 异步任务 |
+| `async fn foo() { ... }` | [C06 异步](../02_reference/quick_reference/02_async_patterns.md) | async, 异步函数 |
+| `let handle = tokio::spawn(async { ... });` | [C06 任务调度](../02_reference/quick_reference/02_async_patterns.md) | spawn, 异步任务 |
 
 ### 2.5 标准库 API 文档映射
 
@@ -222,11 +222,11 @@
 
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
-| `vec![1, 2, 3]` | [C02 Vec](../02_reference/quick_reference/02_type_system.md#vec) | Vec, 动态数组 |
-| `HashMap::new()` | [C02 HashMap](../02_reference/quick_reference/02_type_system.md#hashmap) | HashMap, 哈希表 |
-| `String::from("hello")` | [C02 String](../02_reference/quick_reference/02_type_system.md#string) | String, 字符串 |
-| `file.read_to_string(&mut s)?` | [C07 I/O](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md#读取文件) | read, I/O |
-| `Command::new("ls").arg("-l").output()` | [C07 进程](../02_reference/quick_reference/02_process_management_cheatsheet.md#运行外部命令) | Command, 进程 |
+| `vec![1, 2, 3]` | [C02 Vec](../02_reference/quick_reference/02_type_system.md) | Vec, 动态数组 |
+| `HashMap::new()` | [C02 HashMap](../02_reference/quick_reference/02_type_system.md) | HashMap, 哈希表 |
+| `String::from("hello")` | [C02 String](../02_reference/quick_reference/02_type_system.md) | String, 字符串 |
+| `file.read_to_string(&mut s)?` | [C07 I/O](../02_reference/quick_reference/02_collections_iterators_cheatsheet.md) | read, I/O |
+| `Command::new("ls").arg("-l").output()` | [C07 进程](../02_reference/quick_reference/02_process_management_cheatsheet.md) | Command, 进程 |
 
 ---
 
@@ -240,9 +240,9 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `let s2 = s1;` | move(s1, s2) -> Omega(s1) = Moved && Omega(s2) = Owned | [定理 2 - 所有权唯一性](./formal_methods/10_ownership_model.md#定理-2-所有权唯一性) |
-| `drop(s);` | drop(s) -> Omega(s) = Freed | [引理 1 - 资源释放](./formal_methods/10_ownership_model.md#引理-1-资源释放) |
-| `let x = 5; let y = x;` | Copy(T) -> forall x: T, assign(x, y) => Omega(x) = Omega(y) = Owned | [定理 3 - Copy 语义](./formal_methods/10_ownership_model.md#定理-3-copy-语义) |
+| `let s2 = s1;` | move(s1, s2) -> Omega(s1) = Moved && Omega(s2) = Owned | [定理 2 - 所有权唯一性](./formal_methods/10_ownership_model.md) |
+| `drop(s);` | drop(s) -> Omega(s) = Freed | [引理 1 - 资源释放](./formal_methods/10_ownership_model.md) |
+| `let x = 5; let y = x;` | Copy(T) -> forall x: T, assign(x, y) => Omega(x) = Omega(y) = Owned | [定理 3 - Copy 语义](./formal_methods/10_ownership_model.md) |
 
 ### 3.2 借用的形式化
 
@@ -250,9 +250,9 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `let r = &s;` | Borrow(r, s, Immutable) -> type(r) = &T && valid(r) subset lifetime(s) | [规则 1 - 借用规则](./formal_methods/10_borrow_checker_proof.md#规则-1-借用规则) |
-| `let r = &mut s;` | Borrow(r, s, Mutable) -> type(r) = &mut T && forall r' != r: !aliased(r, r') | [定理 1 - 数据竞争自由](./formal_methods/10_borrow_checker_proof.md#定理-1-数据竞争自由) |
-| `&s[0..5]` | Slice(r, s, i, j) -> r = {s_k | i <= k < j} && valid(r) subset valid(s) | [引理 2 - 切片有效性](./formal_methods/10_borrow_checker_proof.md#引理-2-切片有效性) |
+| `let r = &s;` | Borrow(r, s, Immutable) -> type(r) = &T && valid(r) subset lifetime(s) | [规则 1 - 借用规则](./formal_methods/10_borrow_checker_proof.md) |
+| `let r = &mut s;` | Borrow(r, s, Mutable) -> type(r) = &mut T && forall r' != r: !aliased(r, r') | [定理 1 - 数据竞争自由](./formal_methods/10_borrow_checker_proof.md) |
+| `&s[0..5]` | Slice(r, s, i, j) -> r = {s_k | i <= k < j} && valid(r) subset valid(s) | [引理 2 - 切片有效性](./formal_methods/10_borrow_checker_proof.md) |
 
 ### 3.3 生命周期的形式化
 
@@ -260,9 +260,9 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `&'a str` | Lifetime(&'a T) = a subset Scope(T) | [规则 3 - 生命周期包含](./formal_methods/10_lifetime_formalization.md#规则-3-生命周期包含) |
-| `fn foo<'a>(x: &'a str) -> &'a str` | forall 'a. forall x: &'a T. exists y: &'a T. lft(y) = lft(x) | [定理 LF-T1 - 生命周期传递](./formal_methods/10_lifetime_formalization.md#定理-lf-t1-生命周期传递) |
-| `'static` | Lifetime('static) = [0, infinity) | [定义 - 静态生命周期](./formal_methods/10_lifetime_formalization.md#定义-静态生命周期) |
+| `&'a str` | Lifetime(&'a T) = a subset Scope(T) | 规则 3 - 生命周期包含 |
+| `fn foo<'a>(x: &'a str) -> &'a str` | forall 'a. forall x: &'a T. exists y: &'a T. lft(y) = lft(x) | 定理 LF-T1 - 生命周期传递 |
+| `'static` | Lifetime('static) = 0, infinity) | [定义 - 静态生命周期 |
 
 ### 3.4 类型系统的形式化
 >
@@ -270,9 +270,9 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `fn foo<T: Display>(x: T)` | Gamma |- T: Display => forall x: T. displayable(x) | [类型规则 - Trait Bound](./type_theory/10_type_system_foundations.md#类型规则-trait-bound) |
-| `impl Clone for MyType` | Gamma |- MyType: Clone <=> exists clone: MyType -> MyType | [类型规则 - Trait 实现](./type_theory/10_type_system_foundations.md#类型规则-trait-实现) |
-| `dyn Trait` | dyn Trait = exists T. T: Trait && vtable(T) | [类型规则 - Trait 对象](./type_theory/10_type_system_foundations.md#类型规则-trait-对象) |
+| `fn foo<T: Display>(x: T)` | Gamma |- T: Display => forall x: T. displayable(x) | [类型规则 - Trait Bound](./type_theory/10_type_system_foundations.md) |
+| `impl Clone for MyType` | Gamma |- MyType: Clone <=> exists clone: MyType -> MyType | [类型规则 - Trait 实现](./type_theory/10_type_system_foundations.md) |
+| `dyn Trait` | dyn Trait = exists T. T: Trait && vtable(T) | [类型规则 - Trait 对象](./type_theory/10_type_system_foundations.md) |
 
 ### 3.5 并发的形式化
 >
@@ -280,11 +280,11 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `Arc::new(data)` | Arc(T) = T x AtomicUsize && Send(T) && Sync(T) | [定理 C-T1 - Arc 安全](./formal_methods/10_send_sync_formalization.md#定理-c-t1-arc-安全) |
-| `Mutex::new(data)` | Mutex(T) = T x Lock && invariant(lock -> exclusive(T)) | [定理 C-T2 - Mutex 互斥](./formal_methods/10_send_sync_formalization.md#定理-c-t2-mutex-互斥) |
-| `RwLock::new(data)` | RwLock(T) = T x RWLock && (n_r > 0 -> !w) && (w -> n_r = 0) | [定理 C-T3 - 读写锁](./formal_methods/10_send_sync_formalization.md#定理-c-t3-读写锁) |
-| `Send` trait | Send(T) <=> forall t1, t2: Thread. safe_transfer(T, t1, t2) | [定义 - Send](./formal_methods/10_send_sync_formalization.md#定义-send) |
-| `Sync` trait | Sync(T) <=> forall r: &T. Send(r) | [定义 - Sync](./formal_methods/10_send_sync_formalization.md#定义-sync) |
+| `Arc::new(data)` | Arc(T) = T x AtomicUsize && Send(T) && Sync(T) | [定理 C-T1 - Arc 安全](./formal_methods/10_send_sync_formalization.md) |
+| `Mutex::new(data)` | Mutex(T) = T x Lock && invariant(lock -> exclusive(T)) | [定理 C-T2 - Mutex 互斥](./formal_methods/10_send_sync_formalization.md) |
+| `RwLock::new(data)` | RwLock(T) = T x RWLock && (n_r > 0 -> !w) && (w -> n_r = 0) | [定理 C-T3 - 读写锁](./formal_methods/10_send_sync_formalization.md) |
+| `Send` trait | Send(T) <=> forall t1, t2: Thread. safe_transfer(T, t1, t2) | [定义 - Send](./formal_methods/10_send_sync_formalization.md) |
+| `Sync` trait | Sync(T) <=> forall r: &T. Send(r) | [定义 - Sync](./formal_methods/10_send_sync_formalization.md) |
 
 ### 3.6 异步的形式化
 >
@@ -292,9 +292,9 @@
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
-| `async fn foo() -> T` | Async(f) = Future && Output(f) = T && poll: Context -> Poll(T) | [定义 - 异步函数](./formal_methods/10_async_state_machine.md#定义-异步函数) |
-| `f.await` | Await(f) = poll(f) until Ready(v) then v | [定理 A-T1 - Await 正确性](./formal_methods/10_async_state_machine.md#定理-a-t1-await-正确性) |
-| `Pin<Box<dyn Future>>` | Pin(F) = F && immovable(F) && drop(F) -> cleanup | [定理 A-T2 - Pin 安全性](./formal_methods/10_async_state_machine.md#定理-a-t2-pin-安全性) |
+| `async fn foo() -> T` | Async(f) = Future && Output(f) = T && poll: Context -> Poll(T) | [定义 - 异步函数](./formal_methods/10_async_state_machine.md) |
+| `f.await` | Await(f) = poll(f) until Ready(v) then v | [定理 A-T1 - Await 正确性](./formal_methods/10_async_state_machine.md) |
+| `Pin<Box<dyn Future>>` | Pin(F) = F && immovable(F) && drop(F) -> cleanup | [定理 A-T2 - Pin 安全性](./formal_methods/10_async_state_machine.md) |
 
 ---
 
@@ -541,7 +541,7 @@ Trait Bound      -> 1.4, E0277
 
 - [10_ownership_model.md](./formal_methods/10_ownership_model.md) - 所有权模型形式化
 - [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md) - 借用检查器证明
-- [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md) - 生命周期形式化
+- 10_lifetime_formalization.md - 生命周期形式化
 - [10_send_sync_formalization.md](./formal_methods/10_send_sync_formalization.md) - 并发模型
 - [10_async_state_machine.md](./formal_methods/10_async_state_machine.md) - 异步形式化
 - [10_type_system_foundations.md](./type_theory/10_type_system_foundations.md) - 类型理论基础

@@ -345,9 +345,8 @@ where
 
 #[cfg(test)]
 mod async_bus_tests {
-    use super::AsyncEventHandler;
-    use super::StringEventHandler;
     use super::async_bus::*;
+    use super::{AsyncEventHandler, StringEventHandler};
 
     // 轻量 block_on：无外部运行时依赖，仅用于验证异步流程可执行
     fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {

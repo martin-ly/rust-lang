@@ -110,11 +110,11 @@
 
 | 文档 | 路径 |
 | :--- | :--- | :--- | :--- | :--- |
-| 1.93 vs 1.92 | [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md) |
+| 1.93 vs 1.92 | 05_rust_1.93_vs_1.92_comparison.md |
 | 1.93.1 vs 1.93.0 | [12_rust_1.93.1_vs_1.93.0_comparison.md](./12_rust_1.93.1_vs_1.93.0_comparison.md) |
-| 1.93 兼容性深度 | [09_rust_1.93_compatibility_deep_dive.md](./09_rust_1.93_compatibility_deep_dive.md) |
-| 1.93 完整变更 | [07_rust_1.93_full_changelog.md](./07_rust_1.93_full_changelog.md) |
-| 发布追踪清单 | [../07_project/RUST_RELEASE_TRACKING_CHECKLIST.md](../07_project/RUST_RELEASE_TRACKING_CHECKLIST.md) |
+| 1.93 兼容性深度 | 09_rust_1.93_compatibility_deep_dive.md |
+| 1.93 完整变更 | 07_rust_1.93_full_changelog.md |
+| 发布追踪清单 | ../07_project/RUST_RELEASE_TRACKING_CHECKLIST.md |
 
 ---
 
@@ -355,8 +355,8 @@ mod tests {
 
 本文档基于 Rust 1.93/1.92，最新版本请参见：
 
-- [Rust 1.94 完整发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
-- [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md)
-- [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md)
+- Rust 1.94 完整发布说明
+- Rust 1.94 采用指南
+- Rust 1.93 vs 1.94 对比
 
 **最后更新**: 2026-05-08 (添加 1.94 引用)

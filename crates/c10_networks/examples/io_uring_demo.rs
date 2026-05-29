@@ -50,9 +50,9 @@ fn io_uring_concepts() {
 
 #[cfg(target_os = "linux")]
 fn demo_io_uring_file_read() -> io::Result<()> {
-    use io_uring::{opcode, types, IoUring};
-    use std::os::unix::io::AsRawFd;
+    use io_uring::{IoUring, opcode, types};
     use std::fs::File;
+    use std::os::unix::io::AsRawFd;
 
     println!("\n--- 示例: io_uring 异步文件读取 ---");
 
@@ -87,7 +87,10 @@ fn demo_io_uring_file_read() -> io::Result<()> {
     if bytes_read >= 0 {
         let bytes_read = bytes_read as usize;
         println!("  读取 {} bytes", bytes_read);
-        println!("  内容预览: {}", String::from_utf8_lossy(&buf[..bytes_read.min(80)]));
+        println!(
+            "  内容预览: {}",
+            String::from_utf8_lossy(&buf[..bytes_read.min(80)])
+        );
     } else {
         println!("  读取失败: errno {}", -bytes_read);
     }
@@ -120,7 +123,10 @@ fn demo_tokio_uring() -> io::Result<()> {
         let bytes_read = result?;
 
         println!("  tokio-uring 读取 {} bytes", bytes_read);
-        println!("  内容预览: {}", String::from_utf8_lossy(&buf[..bytes_read.min(80)]));
+        println!(
+            "  内容预览: {}",
+            String::from_utf8_lossy(&buf[..bytes_read.min(80)])
+        );
 
         // 异步写入（写入临时文件）
         let temp_path = "/tmp/io_uring_demo_test.txt";
@@ -148,9 +154,9 @@ fn demo_tokio_uring() -> io::Result<()> {
 
 #[cfg(target_os = "linux")]
 fn demo_batch_submission() -> io::Result<()> {
-    use io_uring::{opcode, types, IoUring};
-    use std::os::unix::io::AsRawFd;
+    use io_uring::{IoUring, opcode, types};
     use std::fs::File;
+    use std::os::unix::io::AsRawFd;
 
     println!("\n--- 示例: 批量 I/O 提交 ---");
 
@@ -195,7 +201,10 @@ fn demo_batch_submission() -> io::Result<()> {
 
     if total >= 0 {
         println!("  批量读取总字节数: {}", total);
-        println!("  缓冲区 1 预览: {:?}", String::from_utf8_lossy(&buf1[..80.min(buf1.len())]));
+        println!(
+            "  缓冲区 1 预览: {:?}",
+            String::from_utf8_lossy(&buf1[..80.min(buf1.len())])
+        );
     }
 
     Ok(())

@@ -109,7 +109,7 @@
 | 查某模式是否纯 Safe | [01_safe_23_catalog](02_workflow_safe_complete_models/02_complete_43_catalog.md) |
 | 查某模式 Rust 实现 | [01_design_patterns_formal](01_design_patterns_formal/README.md) 对应模式文档 |
 | 选执行模型（同步/异步/并发/并行/分布式） | [06_boundary_analysis](03_execution_models/06_boundary_analysis.md) |
-| 查模式反例 | [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md#设计模式反例) |
+| 查模式反例 | [FORMAL_PROOF_SYSTEM_GUIDE](../10_formal_proof_system_guide.md) |
 
 ---
 
@@ -182,9 +182,9 @@
 | 来源 | 内容 |
 | :--- | :--- |
 | [Refactoring.Guru 设计模式](https://refactoring.guru/design-patterns) | 各模式结构、示例、关系 |
-| [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/README.md) | Rust Idioms、Patterns、Anti-patterns |
-| [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/README.md) | 命名、错误处理、文档 |
-| [Fowler EAA](https://martinfowler.com/eaaCatalog/README.md) | 企业架构模式 |
+| rust-unofficial/patterns | Rust Idioms、Patterns、Anti-patterns |
+| Rust API Guidelines | 命名、错误处理、文档 |
+| Fowler EAA | 企业架构模式 |
 
 ---
 

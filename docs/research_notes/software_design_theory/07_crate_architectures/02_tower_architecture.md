@@ -327,7 +327,7 @@ Tower 的 `Service` 是其 Rust 模拟：
 
 `Future<Result<Response, E>>` 是 Rust 的异步 Monad（尽管 Rust 不正式使用 Monad 术语），而 `Service` 是这个 Monad 上的 Kleisli Arrow。
 
-> [来源: [Wikipedia - Kleisli Category](https://en.wikipedia.org/wiki/Kleisli_category)] · [Tower 设计文档](https://github.com/tower-rs/tower/blob/master/doc/design.md)]
+> 来源: [Wikipedia - Kleisli Category](https://en.wikipedia.org/wiki/Kleisli_category)] · [Tower 设计文档]
 
 ---
 
@@ -471,7 +471,7 @@ graph BT
 
 Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协议，又足够高层以提供有意义的组合原语。它不显式依赖 HTTP 或 gRPC 语义，却通过 `Service<Request>` 的泛型参数让上层框架注入自己的协议类型。
 
-> [来源: [Tower 设计文档](https://github.com/tower-rs/tower/blob/master/doc/design.md)]
+> 来源: [Tower 设计文档]
 
 ---
 

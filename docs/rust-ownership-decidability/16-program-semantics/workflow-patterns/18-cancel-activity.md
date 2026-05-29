@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [18 取消活动模式 (Cancel Activity)](#18-取消活动模式-cancel-activity)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [形式化表示](#形式化表示)

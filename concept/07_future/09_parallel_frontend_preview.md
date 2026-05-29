@@ -9,7 +9,10 @@
 
 ---
 
-> **来源**: [Rust Compiler Team — Parallel Frontend](https://github.com/rust-lang/compiler-team/issues/) · [Rust Internals — Parallel Compilation](https://internals.rust-lang.org/) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Cargo Parallel Compilation](https://doc.rust-lang.org/cargo/reference/profiles.html)
+> **来源**: [Rust Compiler Team — Parallel Frontend](https://github.com/rust-lang/compiler-team/issues/) ·
+> [Rust Internals — Parallel Compilation](https://internals.rust-lang.org/) ·
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) ·
+> [Cargo Parallel Compilation](https://doc.rust-lang.org/cargo/reference/profiles.html)
 
 ## 📑 目录
 
@@ -41,11 +44,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 Rust 编译器架构回顾
->
 
 Rust 编译器采用传统的**前端-中端-后端**分离架构：
 
@@ -62,7 +62,6 @@ Rust 编译器采用传统的**前端-中端-后端**分离架构：
 ---
 
 ### 1.2 前端瓶颈：单线程限制
->
 
 当前 Rust 编译器前端（直到 MIR 生成）基本上是**单线程**的：
 
@@ -124,7 +123,6 @@ graph LR
 ## 二、技术方案
 
 ### 2.1 查询系统的并行化
->
 
 Rust 编译器已采用 **Salsa 风格的查询系统**（rustc_query_system）。查询系统的天然惰性求值和缓存特性使其适合并行化：
 

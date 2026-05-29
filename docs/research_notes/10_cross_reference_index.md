@@ -6,42 +6,42 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}](#-跨文档映射网络---核心索引--跨文档映射网络---核心索引)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🗺️ 文档网络概览 {#️-文档网络概览}](#️-文档网络概览-️-文档网络概览)
+- [🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}](#跨文档映射网络---核心索引)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
+  - [🗺️ 文档网络概览 {#️-文档网络概览}](#文档网络概览)
     - [三大支柱文档网络](#三大支柱文档网络)
     - [文档类型分布](#文档类型分布)
-  - [🔄 双向链接表 {#-双向链接表}](#-双向链接表--双向链接表)
+  - [🔄 双向链接表 {#-双向链接表}](#双向链接表)
     - [formal\_methods ↔ 其他文档](#formal_methods--其他文档)
     - [type\_theory ↔ 其他文档](#type_theory--其他文档)
     - [software\_design\_theory ↔ 其他文档](#software_design_theory--其他文档)
     - [速查卡 ↔ 指南/研究笔记](#速查卡--指南研究笔记)
-  - [📐 概念跨文档定义映射 {#-概念跨文档定义映射}](#-概念跨文档定义映射--概念跨文档定义映射)
+  - [📐 概念跨文档定义映射 {#-概念跨文档定义映射}](#概念跨文档定义映射)
     - [核心概念定义分布](#核心概念定义分布)
     - [概念等价关系](#概念等价关系)
-  - [📜 定理跨文档引用网络 {#-定理跨文档引用网络}](#-定理跨文档引用网络--定理跨文档引用网络)
+  - [📜 定理跨文档引用网络 {#-定理跨文档引用网络}](#定理跨文档引用网络)
     - [定理依赖图](#定理依赖图)
     - [跨文档定理引用矩阵](#跨文档定理引用矩阵)
-  - [🌐 文档依赖关系图 {#-文档依赖关系图}](#-文档依赖关系图--文档依赖关系图)
+  - [🌐 文档依赖关系图 {#-文档依赖关系图}](#文档依赖关系图)
     - [层次依赖](#层次依赖)
     - [横向关联](#横向关联)
-  - [🧭 导航指南 {#-导航指南}](#-导航指南--导航指南)
+  - [🧭 导航指南 {#-导航指南}](#导航指南)
     - [按目标快速导航](#按目标快速导航)
     - [交叉验证清单](#交叉验证清单)
-  - [📈 映射统计 {#-映射统计}](#-映射统计--映射统计)
+  - [📈 映射统计 {#-映射统计}](#映射统计)
     - [跨文档链接统计](#跨文档链接统计)
     - [概念映射统计](#概念映射统计)
     - [定理引用统计](#定理引用统计)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
@@ -57,42 +57,42 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}](#-跨文档映射网络---核心索引--跨文档映射网络---核心索引)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🗺️ 文档网络概览 {#️-文档网络概览}](#️-文档网络概览-️-文档网络概览)
+- [🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}](#跨文档映射网络---核心索引)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
+  - [🗺️ 文档网络概览 {#️-文档网络概览}](#文档网络概览)
     - [三大支柱文档网络](#三大支柱文档网络)
     - [文档类型分布](#文档类型分布)
-  - [🔄 双向链接表 {#-双向链接表}](#-双向链接表--双向链接表)
+  - [🔄 双向链接表 {#-双向链接表}](#双向链接表)
     - [formal\_methods ↔ 其他文档](#formal_methods--其他文档)
     - [type\_theory ↔ 其他文档](#type_theory--其他文档)
     - [software\_design\_theory ↔ 其他文档](#software_design_theory--其他文档)
     - [速查卡 ↔ 指南/研究笔记](#速查卡--指南研究笔记)
-  - [📐 概念跨文档定义映射 {#-概念跨文档定义映射}](#-概念跨文档定义映射--概念跨文档定义映射)
+  - [📐 概念跨文档定义映射 {#-概念跨文档定义映射}](#概念跨文档定义映射)
     - [核心概念定义分布](#核心概念定义分布)
     - [概念等价关系](#概念等价关系)
-  - [📜 定理跨文档引用网络 {#-定理跨文档引用网络}](#-定理跨文档引用网络--定理跨文档引用网络)
+  - [📜 定理跨文档引用网络 {#-定理跨文档引用网络}](#定理跨文档引用网络)
     - [定理依赖图](#定理依赖图)
     - [跨文档定理引用矩阵](#跨文档定理引用矩阵)
-  - [🌐 文档依赖关系图 {#-文档依赖关系图}](#-文档依赖关系图--文档依赖关系图)
+  - [🌐 文档依赖关系图 {#-文档依赖关系图}](#文档依赖关系图)
     - [层次依赖](#层次依赖)
     - [横向关联](#横向关联)
-  - [🧭 导航指南 {#-导航指南}](#-导航指南--导航指南)
+  - [🧭 导航指南 {#-导航指南}](#导航指南)
     - [按目标快速导航](#按目标快速导航)
     - [交叉验证清单](#交叉验证清单)
-  - [📈 映射统计 {#-映射统计}](#-映射统计--映射统计)
+  - [📈 映射统计 {#-映射统计}](#映射统计)
     - [跨文档链接统计](#跨文档链接统计)
     - [概念映射统计](#概念映射统计)
     - [定理引用统计](#定理引用统计)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -175,8 +175,8 @@
 | formal_methods 文档 | 正向链接 → | ← 反向链接来源 |
 | :--- | :--- | :--- |
 | [ownership_model](./formal_methods/10_ownership_model.md) | → [type_system_foundations](./type_theory/10_type_system_foundations.md) 定理T3→ [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) 借用规则前提→ [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) T-OW2证明 | ← [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) 所有权规则引用← [software_design_theory/01_design_patterns](./software_design_theory/01_design_patterns_formal/README.md) 各模式引用← [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) CE-T1依赖 |
-| [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) | → [ownership_model](./formal_methods/10_ownership_model.md) 规则1-3前提→ [lifetime_formalization](./formal_methods/10_lifetime_formalization.md) 生命周期关联→ [PROOF_INDEX](./10_proof_index.md) T-BR1索引 | ← [ownership_model](./formal_methods/10_ownership_model.md) 控制流A-CF1← [type_system_foundations](./type_theory/10_type_system_foundations.md) 类型保持性引用← [async_state_machine](./formal_methods/10_async_state_machine.md) 借用检查衔接 |
-| [lifetime_formalization](./formal_methods/10_lifetime_formalization.md) | → [type_theory/lifetime_formalization](./type_theory/10_lifetime_formalization.md) 理论对应→ [variance_theory](./type_theory/10_variance_theory.md) 型变组合→ [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) 证明引用 | ← [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) 生命周期检查← [trait_system_formalization](./type_theory/10_trait_system_formalization.md) 生命周期约束← [async_state_machine](./formal_methods/10_async_state_machine.md) 'static生命周期 |
+| [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) | → [ownership_model](./formal_methods/10_ownership_model.md) 规则1-3前提→ lifetime_formalization 生命周期关联→ [PROOF_INDEX](./10_proof_index.md) T-BR1索引 | ← [ownership_model](./formal_methods/10_ownership_model.md) 控制流A-CF1← [type_system_foundations](./type_theory/10_type_system_foundations.md) 类型保持性引用← [async_state_machine](./formal_methods/10_async_state_machine.md) 借用检查衔接 |
+| lifetime_formalization | → [type_theory/lifetime_formalization](./type_theory/10_lifetime_formalization.md) 理论对应→ [variance_theory](./type_theory/10_variance_theory.md) 型变组合→ [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) 证明引用 | ← [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) 生命周期检查← [trait_system_formalization](./type_theory/10_trait_system_formalization.md) 生命周期约束← [async_state_machine](./formal_methods/10_async_state_machine.md) 'static生命周期 |
 | [async_state_machine](./formal_methods/10_async_state_machine.md) | → [pin_self_referential](./formal_methods/10_pin_self_referential.md) Pin依赖→ [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) Send/Sync要求→ [software_design_theory/03_execution_models](./software_design_theory/03_execution_models/02_async.md) 执行模型 | ← [pin_self_referential](./formal_methods/10_pin_self_referential.md) Future+Pin组合← [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) 跨线程spawn← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) 实践指南 |
 | [pin_self_referential](./formal_methods/10_pin_self_referential.md) | → [async_state_machine](./formal_methods/10_async_state_machine.md) 自引用Future→ [type_theory/advanced_types](./type_theory/10_advanced_types.md) PhantomData→ [PROOF_INDEX](./10_proof_index.md) 证明引用 | ← [async_state_machine](./formal_methods/10_async_state_machine.md) Pin使用场景← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/05_async_programming_usage_guide.md) Pin实践← [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./10_safe_decidable_mechanisms_overview.md) 安全机制 |
 | [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) | → [async_state_machine](./formal_methods/10_async_state_machine.md) 跨线程执行→ [software_design_theory/06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) 并发选型→ [PROOF_INDEX](./10_proof_index.md) 证明索引 | ← [async_state_machine](./formal_methods/10_async_state_machine.md) Send要求← [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) CHAN/MUTEX← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/05_threads_concurrency_usage_guide.md) 并发指南 |
@@ -191,7 +191,7 @@
 | [trait_system_formalization](./type_theory/10_trait_system_formalization.md) | → [type_system_foundations](./type_theory/10_type_system_foundations.md) 类型基础→ [advanced_types](./type_theory/10_advanced_types.md) GAT/特化→ [software_design_theory/01_design_patterns](./software_design_theory/01_design_patterns_formal/README.md) 模式实现 | ← [type_system_foundations](./type_theory/10_type_system_foundations.md) Trait对象← [async_state_machine](./formal_methods/10_async_state_machine.md) Future Trait← [software_design_theory/04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) 组合法则 |
 | [variance_theory](./type_theory/10_variance_theory.md) | → [lifetime_formalization](./type_theory/10_lifetime_formalization.md) 生命周期型变→ [advanced_types](./type_theory/10_advanced_types.md) 高级类型→ [PROOF_INDEX](./10_proof_index.md) 型变定理 | ← [type_system_foundations](./type_theory/10_type_system_foundations.md) 子类型← [lifetime_formalization](./type_theory/10_lifetime_formalization.md) 型变规则← [04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/04_multi_dimensional_concept_matrix.md) 型变矩阵 |
 | [advanced_types](./type_theory/10_advanced_types.md) | → [type_system_foundations](./type_theory/10_type_system_foundations.md) 基础类型→ [trait_system_formalization](./type_theory/10_trait_system_formalization.md) GAT→ [formal_methods/pin_self_referential](./formal_methods/10_pin_self_referential.md) PhantomData | ← [trait_system_formalization](./type_theory/10_trait_system_formalization.md) 关联类型← [pin_self_referential](./formal_methods/10_pin_self_referential.md) 高级类型技术← [05_guides/ADVANCED_TOPICS_DEEP_DIVE](../05_guides/05_advanced_topics_deep_dive.md) 高级主题 |
-| [lifetime_formalization](./type_theory/10_lifetime_formalization.md) | → [variance_theory](./type_theory/10_variance_theory.md) 型变组合→ [formal_methods/lifetime_formalization](./formal_methods/10_lifetime_formalization.md) 形式化对应→ [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) 证明引用 | ← [type_system_foundations](./type_theory/10_type_system_foundations.md) 生命周期参数← [trait_system_formalization](./type_theory/10_trait_system_formalization.md) 生命周期约束← [02_reference/quick_reference/02_type_system.md](../02_reference/quick_reference/02_type_system.md) 速查 |
+| [lifetime_formalization](./type_theory/10_lifetime_formalization.md) | → [variance_theory](./type_theory/10_variance_theory.md) 型变组合→ formal_methods/lifetime_formalization 形式化对应→ [CORE_THEOREMS_FULL_PROOFS](./10_core_theorems_full_proofs.md) 证明引用 | ← [type_system_foundations](./type_theory/10_type_system_foundations.md) 生命周期参数← [trait_system_formalization](./type_theory/10_trait_system_formalization.md) 生命周期约束← [02_reference/quick_reference/02_type_system.md](../02_reference/quick_reference/02_type_system.md) 速查 |
 
 ### software_design_theory ↔ 其他文档
 >
@@ -230,7 +230,7 @@
 | :--- | :--- | :--- | :--- |
 | **所有权 (Ownership)** | [ownership_model](./formal_methods/10_ownership_model.md) §Def 1.1-1.3 | borrow_checker_proof, 01_design_patterns, CORE_THEOREMS | 规则1-3: 唯一所有者、移动转移、作用域释放 |
 | **借用 (Borrowing)** | [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) §规则5-8 | ownership_model, async_state_machine, PROOF_INDEX | 共享/可变互斥、作用域约束 |
-| **生命周期 (Lifetime)** | [lifetime_formalization](./formal_methods/10_lifetime_formalization.md) §Def 1.4 | type_theory/lifetime, variance_theory, CORE_THEOREMS | formal_methods ↔ type_theory 双重定义 |
+| **生命周期 (Lifetime)** | lifetime_formalization §Def 1.4 | type_theory/lifetime, variance_theory, CORE_THEOREMS | formal_methods ↔ type_theory 双重定义 |
 | **类型安全 (Type Safety)** | [type_system_foundations](./type_theory/10_type_system_foundations.md) §定理T3 | ownership_model, borrow_checker_proof, variance_theory | 进展性T1 + 保持性T2 |
 | **Send/Sync** | [send_sync_formalization](./formal_methods/10_send_sync_formalization.md) §Def SEND1/SYNC1 | async_state_machine, 06_boundary_analysis, PROOF_INDEX | 跨线程转移/共享安全 |
 | **Future/Poll** | [async_state_machine](./formal_methods/10_async_state_machine.md) §Def 4.1-4.2 | pin_self_referential, 03_execution_models/02_async | 异步状态机核心 |
@@ -457,7 +457,7 @@ graph TD
 | 验证项 | 检查方法 | 验证文档 |
 | :--- | :--- | :--- |
 | 所有权规则一致性 | 对比 ownership_model ↔ borrow_checker_proof 规则定义 | [ownership_model](./formal_methods/10_ownership_model.md) §规则1-3[borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) §规则5-8 |
-| 生命周期定义一致性 | 对比 formal_methods/lifetime ↔ type_theory/lifetime | [fm/lifetime](./formal_methods/10_lifetime_formalization.md)[tt/lifetime](./type_theory/10_lifetime_formalization.md) |
+| 生命周期定义一致性 | 对比 formal_methods/lifetime ↔ type_theory/lifetime | fm/lifetime[tt/lifetime](./type_theory/10_lifetime_formalization.md) |
 | Send/Sync 与 async 衔接 | 验证 async_state_machine 中 Send 要求与 send_sync 定义 | [async_state_machine](./formal_methods/10_async_state_machine.md) §跨线程[send_sync_formalization](./formal_methods/10_send_sync_formalization.md) §Def SEND1 |
 | 型变与生命周期组合 | 验证 variance_theory 中生命周期型变规则 | [variance_theory](./type_theory/10_variance_theory.md) §生命周期型变 |
 | 组合定理依赖链 | 验证 CE-T1/T2/T3 与 ownership/borrow/type 定理的依赖 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md) |

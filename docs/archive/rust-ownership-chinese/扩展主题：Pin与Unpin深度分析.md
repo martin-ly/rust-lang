@@ -19,7 +19,7 @@
     - [创建Pin的方法](#创建pin的方法)
       - [方法1: Box::pin](#方法1-boxpin)
       - [方法2: Pin::new\_unchecked (unsafe)](#方法2-pinnew_unchecked-unsafe)
-      - [方法3: pin! 宏 ( nightly )](#方法3-pin-宏--nightly-)
+      - [方法3: pin! 宏 ( nightly )](#方法3-pin-宏--nightly)
   - [Unpin trait的语义](#unpin-trait的语义)
     - [定义](#定义)
     - [语义解释](#语义解释)

@@ -286,7 +286,7 @@ impl<T: Clone, const N: usize> Rust196ConstRingBuffer<T, N> {
     }
 }
 
-/// Rust 1.96 `core::pin::pin!` 在线程本地数据中的应用
+/// Rust 1.68 `core::pin::pin!`（1.96 回顾） 在线程本地数据中的应用
 ///
 /// `pin!` 宏允许在栈上固定数据，适用于需要内存位置稳定的线程本地状态。
 pub struct Rust196PinnedThreadLocal;

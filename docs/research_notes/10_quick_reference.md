@@ -14,42 +14,42 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记快速参考](#研究笔记快速参考)
-  - [📑 目录](#-目录)
-  - [📊 快速导航](#-快速导航)
+  - [📑 目录](#目录)
+  - [📊 快速导航](#快速导航)
     - [按研究领域查找](#按研究领域查找)
-      - [🔬 形式化方法研究](#-形式化方法研究)
-      - [🔷 类型理论研究](#-类型理论研究)
-      - [🌐 软件设计理论](#-软件设计理论)
-      - [⚡ 实验研究](#-实验研究)
-      - [🌐 综合研究](#-综合研究)
-  - [🎯 按研究目标查找](#-按研究目标查找)
+      - [🔬 形式化方法研究](#形式化方法研究)
+      - [🔷 类型理论研究](#类型理论研究)
+      - [🌐 软件设计理论](#软件设计理论)
+      - [⚡ 实验研究](#实验研究)
+      - [🌐 综合研究](#综合研究)
+  - [🎯 按研究目标查找](#按研究目标查找)
     - [我想证明某个性质](#我想证明某个性质)
     - [我想理解类型系统](#我想理解类型系统)
     - [我想优化性能](#我想优化性能)
     - [我想学习研究方法](#我想学习研究方法)
-  - [🔍 按关键词查找](#-按关键词查找)
+  - [🔍 按关键词查找](#按关键词查找)
     - [所有权相关](#所有权相关)
     - [类型系统相关](#类型系统相关)
     - [异步相关](#异步相关)
     - [性能相关](#性能相关)
     - [生命周期相关](#生命周期相关)
-  - [🛠️ 常用工具快速查找](#️-常用工具快速查找)
+  - [🛠️ 常用工具快速查找](#常用工具快速查找)
     - [形式化验证工具](#形式化验证工具)
     - [性能分析工具](#性能分析工具)
     - [内存分析工具](#内存分析工具)
-  - [📚 学习路径建议](#-学习路径建议)
+  - [📚 学习路径建议](#学习路径建议)
     - [初学者路径](#初学者路径)
     - [进阶路径](#进阶路径)
     - [专家路径](#专家路径)
-  - [🔗 相关资源](#-相关资源)
+  - [🔗 相关资源](#相关资源)
     - [核心文档](#核心文档)
     - [外部资源](#外部资源)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -77,7 +77,7 @@
 | 所有权模型形式化 | [10_ownership_model.md](./formal_methods/10_ownership_model.md)                          | ✅ 100%
 | 借用检查器证明   | [10_borrow_checker_proof.md](./formal_methods/10_borrow_checker_proof.md)                | ✅ 100%           |
 | 异步状态机形式化 | [10_async_state_machine.md](./formal_methods/10_async_state_machine.md)                  | ✅ 100%           |
-| 生命周期形式化   | [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md)            | ✅ 100%           |
+| 生命周期形式化   | 10_lifetime_formalization.md            | ✅ 100%           |
 | Pin 和自引用类型 | [10_pin_self_referential.md](./formal_methods/10_pin_self_referential.md)                | ✅ 100%           |
 
 #### 🔷 类型理论研究
@@ -150,7 +150,7 @@
 - 内存安全 → [所有权模型形式化](./formal_methods/10_ownership_model.md)
 - 数据竞争自由 → [借用检查器证明](./formal_methods/10_borrow_checker_proof.md)
 - 并发安全 → [异步状态机形式化](./formal_methods/10_async_state_machine.md)
-- 引用有效性 → [生命周期形式化](./formal_methods/10_lifetime_formalization.md)
+- 引用有效性 → 生命周期形式化
 
 ### 我想理解类型系统
 >
@@ -181,8 +181,8 @@
 **研究方法论**:
 
 - 方法选择 → [研究方法论](./10_research_methodology.md)
-- 工具使用 → [研究方法论 - 研究工具](./10_research_methodology.md#-研究工具)
-- 实践指南 → [研究方法论 - 实践指南](./10_research_methodology.md#-实践指南)
+- 工具使用 → [研究方法论 - 研究工具](./10_research_methodology.md)
+- 实践指南 → [研究方法论 - 实践指南](./10_research_methodology.md)
 
 ---
 
@@ -231,7 +231,7 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- 生命周期语义 → [10_lifetime_formalization.md](./formal_methods/10_lifetime_formalization.md)
+- 生命周期语义 → 10_lifetime_formalization.md
 - 生命周期推断 → [10_lifetime_formalization.md](./type_theory/10_lifetime_formalization.md)
 
 ---
@@ -331,8 +331,8 @@
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [形式化工程系统](../rust-formal-engineering-system/README.md)
-- [Rust Book](https://doc.rust-lang.org/book/README.md)
-- [Rust Reference](https://doc.rust-lang.org/reference/README.md)
+- Rust Book
+- Rust Reference
 
 ---
 

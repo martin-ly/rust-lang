@@ -29,7 +29,7 @@
   - [4. Ownership in Async](#4-ownership-in-async)
     - [4.1 Task Ownership Model](#41-task-ownership-model)
     - [4.2 Shared Ownership Patterns](#42-shared-ownership-patterns)
-      - [4.2.1 Arc\<Mutex\> Pattern](#421-arcmutex-pattern)
+      - 4.2.1 Arc\<Mutex\> Pattern
       - [4.2.2 Channel-Based Communication](#422-channel-based-communication)
     - [4.3 JoinHandle and Task Completion](#43-joinhandle-and-task-completion)
   - [5. I/O Driver](#5-io-driver)
@@ -76,7 +76,7 @@
     - [10.3 Related Crates](#103-related-crates)
   - [Appendix A: Theorem Summary](#appendix-a-theorem-summary)
   - [Appendix B: Glossary](#appendix-b-glossary)
-  - [*Last Updated: 2026-03-06*](#last-updated-2026-03-06)
+  - *Last Updated: 2026-03-06*
   - [权威来源索引](#权威来源索引)
 
 ---

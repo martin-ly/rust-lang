@@ -9,7 +9,10 @@
 
 ---
 
-> **来源**: [Rust RFC — Derive CoercePointee](https://github.com/rust-lang/rfcs/pull/3621) · [Rust Reference — Coercion](https://doc.rust-lang.org/reference/type-coercions.html) · [The Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html) · [Tracking Issue #123430](https://github.com/rust-lang/rust/issues/123430)
+> **来源**: [Rust RFC — Derive CoercePointee](https://github.com/rust-lang/rfcs/pull/3621) ·
+> [Rust Reference — Coercion](https://doc.rust-lang.org/reference/type-coercions.html) ·
+> [The Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html) ·
+> [Tracking Issue #123430](https://github.com/rust-lang/rust/issues/123430)
 
 ## 📑 目录
 
@@ -41,11 +44,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 问题：自定义智能指针的样板代码
->
 
 在 Rust 中，自定义智能指针（如 `Rc<T>`、`Box<T>` 的替代实现）需要手动实现 `CoerceUnsized` 和 `DispatchFromDyn` 才能支持**自动类型强制**（如 `SmartPtr<T>` → `SmartPtr<dyn Trait>`）：
 
@@ -112,7 +112,6 @@ graph TD
 ---
 
 ### 1.3 `#[derive(CoercePointee)]` 方案
->
 
 ```rust,ignore
 // 使用派生宏 —— 零 unsafe 代码！（需要 nightly + 不稳定特性）
@@ -138,7 +137,6 @@ struct MyBox<T: ?Sized> {
 ## 二、技术细节
 
 ### 2.1 派生宏的展开逻辑
->
 
 ```text
 #[derive(CoercePointee)]
@@ -165,7 +163,6 @@ struct SmartPtr<T: ?Sized> {
 ---
 
 ### 2.2 约束条件
->
 
 | 约束 | 说明 | 违反后果 |
 |:---|:---|:---|
@@ -379,7 +376,14 @@ struct BadPointer<T: ?Sized> {
 fn main() {}
 ```
 
-> **修正**: `#[repr(transparent)]` 要求 struct 只有一个非零大小（non-zero-sized）字段，其余必须是零大小类型（`PhantomData<T>`、单元类型 `()` 等）。`extra: usize` 使 `BadPointer` 的大小变为 `sizeof(*const T) + sizeof(usize)`，不再是透明包装。这阻止了 `CoercePointee` 的派生，因为编译器无法保证强制转换后的内存表示等价。正确模式：额外元数据应存储在堆上（如 `Box` 的指针指向 `(T, usize)` 布局），或使用全局表（`TypeId` → metadata 映射）。Rust 的 DST（dynamically sized type）设计深思熟虑： fat pointer（宽指针）包含数据指针 + 元数据（长度或 vtable），但自定义 DST 的元数据存储仍是开放问题。[来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] · [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
+> **修正**:
+> `#[repr(transparent)]` 要求 struct 只有一个非零大小（non-zero-sized）字段，其余必须是零大小类型（`PhantomData<T>`、单元类型 `()` 等）。
+> `extra: usize` 使 `BadPointer` 的大小变为 `sizeof(*const T) + sizeof(usize)`，不再是透明包装。
+> 这阻止了 `CoercePointee` 的派生，因为编译器无法保证强制转换后的内存表示等价。
+> 正确模式：额外元数据应存储在堆上（如 `Box` 的指针指向 `(T, usize)` 布局），或使用全局表（`TypeId` → metadata 映射）。
+> Rust 的 DST（dynamically sized type）设计深思熟虑： fat pointer（宽指针）包含数据指针 + 元数据（长度或 vtable），但自定义 DST 的元数据存储仍是开放问题。
+> [来源: [Rust RFC 3621](https://rust-lang.github.io/rfcs/3621-derive-coerce-pointee.html)] ·
+> [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
 
 ### 10.3 边界测试：CoercePointee 与自定义 DST 的元数据（编译错误）
 

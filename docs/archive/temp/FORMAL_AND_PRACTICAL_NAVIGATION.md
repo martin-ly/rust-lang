@@ -66,7 +66,7 @@
   - [代码示例](../../../crates/c02_type_system/examples/README.md) - 类型系统实际代码示例
   - [Tier 文档](../../../crates/c02_type_system/docs/README.md) - 4-Tier 分层学习文档
   - [测试用例](../../../crates/c02_type_system/tests/README.md) - 完整的测试套件
-  - [深度分析](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
+  - 深度分析 - 多维概念矩阵
 
 **学习路径**:
 
@@ -201,7 +201,7 @@
 - **[C03 控制流与函数模块](../../../crates/c03_control_fn/README.md)** - 完整的学习模块
   - [代码示例](../../../crates/c03_control_fn/examples/README.md) - 500+ 个控制流示例
   - [Tier 文档](../../../crates/c03_control_fn/docs/README.md) - 4-Tier 分层学习文档（19个文档，12,000+行）
-  - [深度分析](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
+  - 深度分析 - 多维概念矩阵
   - [测试用例](../../../crates/c03_control_fn/tests/README.md) - 完整的测试套件
 
 **学习路径**:
@@ -227,7 +227,7 @@
 
 - **[工具链实用文档](../../06_toolchain/README.md)** - 完整的工具链使用指南
   - [编译器特性与优化](../../06_toolchain/01_compiler_features.md) - 编译器优化深入指南（935行）
-  - [Cargo 工作空间指南](../../06_toolchain/02_cargo_workspace_guide.md) - Workspace 和依赖管理（1013行）
+  - Cargo 工作空间指南 - Workspace 和依赖管理（1013行）
   - [Rustdoc 高级功能](../../06_toolchain/03_rustdoc_advanced.md) - 文档生成高级技巧（1004行）
   - [工具链 README](../../06_toolchain/README.md) - 工具链文档总览
 
@@ -255,8 +255,8 @@
 - **[C04 泛型编程模块](../../../crates/c04_generic/README.md)** - 完整的学习模块
   - [代码示例](../../../crates/c04_generic/examples/README.md) - 泛型实际代码示例
   - [Tier 文档](../../../crates/c04_generic/docs/README.md) - 4-Tier 分层学习文档（78+ 文档，27,300+ 行）
-  - [知识图谱](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
-  - [对比矩阵](../../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 25+ 详细对比表格
+  - 知识图谱 - 多维概念矩阵
+  - 对比矩阵 - 25+ 详细对比表格
   - [测试用例](../../../crates/c04_generic/tests/README.md) - 完整的测试套件
 
 **学习路径**:
@@ -273,7 +273,7 @@
 
 - **[形式化系统主页](../../rust-formal-engineering-system/README.md)**
 - **[主索引](../../rust-formal-engineering-system/00_master_index.md)**
-- **[完整度报告](../../archive/root_completion_reports/FINAL_100_PERCENT_COMPLETION_REPORT_2026_01_27.md)**
+- **完整度报告**
 
 ### 主项目入口
 

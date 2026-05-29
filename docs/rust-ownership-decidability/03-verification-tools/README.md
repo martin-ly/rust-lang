@@ -67,7 +67,7 @@
 | Prusti | ⚠️ 维护模式 |
 | Verus | ✅ 推荐用于新项目 |
 
-> **注意**: 有关 Rust 1.94 的详细兼容性信息，请参阅 [验证概述](03-01-verification-overview.md#7-rust-194-版本兼容性)
+> **注意**: 有关 Rust 1.94 的详细兼容性信息，请参阅 [验证概述](03-01-verification-overview.md)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

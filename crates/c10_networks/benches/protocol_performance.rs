@@ -10,8 +10,8 @@ use c10_networks::protocol::tcp::{TcpConnection, TcpConnectionConfig, TcpState};
 use c10_networks::protocol::websocket::{
     WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode,
 };
-use c10_networks::socket::{utils, TcpConfig, UdpConfig};
-use criterion::{criterion_group, criterion_main, Criterion};
+use c10_networks::socket::{TcpConfig, UdpConfig, utils};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 use std::time::Duration;
 

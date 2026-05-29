@@ -10,8 +10,8 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [Rust 1.91 特性全面文档](#rust-191-特性全面文档)
-  - [📊 目录](#-目录)
+- Rust 1.91 特性全面文档
+  - [📊 目录](#目录)
   - [概述](#概述)
   - [核心特性](#核心特性)
     - [1. const 上下文增强](#1-const-上下文增强)
@@ -26,8 +26,8 @@
     - [5. 类型检查器优化](#5-类型检查器优化)
     - [6. 异步迭代器改进](#6-异步迭代器改进)
   - [各 Crate 实现情况](#各-crate-实现情况)
-    - [✅ 已完成的实现](#-已完成的实现)
-    - [✅ 所有实现已完成](#-所有实现已完成)
+    - [✅ 已完成的实现](#已完成的实现)
+    - [✅ 所有实现已完成](#所有实现已完成)
   - [迁移指南](#迁移指南)
     - [升级步骤](#升级步骤)
     - [利用新特性](#利用新特性)
@@ -422,8 +422,8 @@ where
 - Rust 1.91 vs 1.90 对比文档
 - [Rust 1.91.0 Release Notes](https://blog.rust-lang.org/2025/XX/XX/Rust-1.91.0.html)（待发布）
 - [Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2024/09/12/Rust-1.90.0.html)
-- [Rust Language Reference](https://doc.rust-lang.org/reference/README.md)
-- [Rust Standard Library Documentation](https://doc.rust-lang.org/std/README.md)
+- Rust Language Reference
+- Rust Standard Library Documentation
 
 ---
 

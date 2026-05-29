@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Next-gen Trait Solver 跟踪报告](#next-gen-trait-solver-跟踪报告)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. Rust 当前 Trait Solver 的局限](#1-rust-当前-trait-solver-的局限)
     - [1.1 主要技术局限](#11-主要技术局限)
       - [A. 高阶类型推理 (Higher-Ranked Type Inference)](#a-高阶类型推理-higher-ranked-type-inference)
@@ -45,7 +45,7 @@
   - [7. 参考文献](#7-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. Rust 当前 Trait Solver 的局限
 >

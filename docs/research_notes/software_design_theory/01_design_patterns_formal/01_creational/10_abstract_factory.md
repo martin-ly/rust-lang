@@ -6,8 +6,8 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Abstract Factory 形式化分析](#abstract-factory-形式化分析)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Abstract Factory 结构）](#def-11abstract-factory-结构)
     - [Axiom AF1（产品族一致性公理）](#axiom-af1产品族一致性公理)
@@ -32,12 +32,12 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -57,8 +57,8 @@
 > **[来源: Rust Official Docs]**
 
 - [Abstract Factory 形式化分析](#abstract-factory-形式化分析)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Abstract Factory 结构）](#def-11abstract-factory-结构)
     - [Axiom AF1（产品族一致性公理）](#axiom-af1产品族一致性公理)
@@ -83,12 +83,12 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -466,7 +466,7 @@ graph LR
 | 场景 | ✅ | 典型场景表 |
 | 反例 | ✅ | 混用不同族产品 |
 | 衔接 | ✅ | ownership、CE-PAT1、04_boundary_matrix、trait_system |
-| 权威对应 | ✅ | [GoF](../README.md#与-gof-原书对应)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
+| 权威对应 | ✅ | [GoF](../README.md)、[formal_methods](../../../formal_methods/README.md)、[INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../../../10_international_formal_verification_index.md) |
 
 ---
 

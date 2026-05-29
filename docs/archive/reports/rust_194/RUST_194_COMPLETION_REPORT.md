@@ -197,12 +197,12 @@ test rust_194_features::tests::test_demonstrate_features ... ok
 ### 核心文档
 
 - [特性审计报告](./RUST_194_FEATURE_AUDIT_REPORT.md)
-- [发布说明](./06_toolchain/16_rust_1.94_release_notes.md)
-- [版本对比](./06_toolchain/17_rust_1.93_vs_1.94_comparison.md)
-- [采用指南](./06_toolchain/18_rust_1.94_adoption_guide.md)
-- [迁移指南](./05_guides/RUST_194_MIGRATION_GUIDE.md)
-- [速查卡](./02_reference/quick_reference/rust_194_features_cheatsheet.md)
-- [研究笔记](./research_notes/RUST_194_RESEARCH_UPDATE.md)
+- 发布说明
+- 版本对比
+- 采用指南
+- 迁移指南
+- 速查卡
+- 研究笔记
 
 ### 代码示例
 

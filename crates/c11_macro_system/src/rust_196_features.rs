@@ -276,6 +276,51 @@ pub fn get_rust_196_macro_info() -> String {
 use std::collections::VecDeque;
 use std::marker::PhantomPinned;
 
+/// Rust 1.96: `expr` metavariable 传递给 `cfg`
+///
+/// 在 Rust 1.96 之前，声明式宏中的 `expr` fragment specifier
+/// 不能用于 `#[cfg(...)]` 属性参数。1.96 放宽了这一限制，
+/// 允许通过宏参数动态生成条件编译属性。
+///
+/// 这在编写跨平台宏包装器或特性门控宏时非常有用。
+macro_rules! cfg_conditional {
+    ($cond:expr, $item:item) => {
+        #[cfg($cond)]
+        $item
+    };
+}
+
+// 使用宏生成平台相关的辅助函数
+// 注意：至少有一个会被编译，取决于目标平台
+cfg_conditional!(
+    target_os = "windows",
+    fn _platform_id() -> &'static str {
+        "windows"
+    }
+);
+cfg_conditional!(
+    not(target_os = "windows"),
+    fn _platform_id() -> &'static str {
+        "unix-like"
+    }
+);
+
+/// 条件编译宏的实用包装
+pub struct ExprMetavariableToCfgExamples;
+
+impl ExprMetavariableToCfgExamples {
+    /// 返回当前平台标识（通过条件编译宏生成）
+    pub fn platform_hint() -> &'static str {
+        _platform_id()
+    }
+
+    /// 演示：使用宏根据 cfg 条件选择不同的实现
+    pub fn cfg_select_hint() -> &'static str {
+        // 直接调用条件编译生成的函数
+        _platform_id()
+    }
+}
+
 /// `VecDeque::new` 在 const 上下文中的应用
 ///
 /// Rust 1.68 稳定了 `VecDeque::new` 的 const 特性，
@@ -472,5 +517,22 @@ mod tests {
     fn test_macro_state_machine_transition() {
         let sm = MacroStateMachine::new("expanding");
         assert_eq!(sm.transition("done"), "expanding -> done");
+    }
+
+    // Rust 1.96: expr metavariable to cfg
+    #[test]
+    fn test_expr_metavariable_to_cfg_compiles() {
+        // 核心验证：expr metavariable 传递给 cfg 的宏能够编译
+        // _platform_id() 是通过 cfg_conditional! 宏生成的条件编译函数
+        let hint = ExprMetavariableToCfgExamples::platform_hint();
+        assert!(!hint.is_empty());
+        assert!(hint == "windows" || hint == "unix-like");
+    }
+
+    #[test]
+    fn test_cfg_conditional_macro() {
+        // 验证通过宏参数传递的 cfg 条件正确生效
+        let result = ExprMetavariableToCfgExamples::cfg_select_hint();
+        assert!(!result.is_empty());
     }
 }

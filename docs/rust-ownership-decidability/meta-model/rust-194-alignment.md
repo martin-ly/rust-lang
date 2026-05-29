@@ -6,7 +6,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 所有权形式化对齐](#rust-194-所有权形式化对齐)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [Rust 1.94 新特性概览](#rust-194-新特性概览)
     - [1. Reborrow Trait](#1-reborrow-trait)

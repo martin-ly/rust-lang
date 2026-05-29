@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [语义模型全面梳理完成报告](#语义模型全面梳理完成报告)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [执行摘要](#执行摘要)
   - [新增文档清单](#新增文档清单)
     - [1. Tree Borrows 全面分析](#1-tree-borrows-全面分析)

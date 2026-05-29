@@ -22,7 +22,7 @@
 ## 编译
 > **[来源: Rust Official Docs]**
 
-**前置**: 安装 [Coq](https://coq.inria.fr/README.md)（建议 8.18+）
+**前置**: 安装 Coq（建议 8.18+）
 
 ```bash
 cd docs/research_notes/coq_skeleton

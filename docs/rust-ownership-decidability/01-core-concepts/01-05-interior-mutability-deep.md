@@ -13,27 +13,27 @@
     - [1.2 Interior Mutability: The Solution Pattern](#12-interior-mutability-the-solution-pattern)
     - [1.3 The Interior Mutability Spectrum](#13-the-interior-mutability-spectrum)
     - [1.4 Safety Through Runtime Checks](#14-safety-through-runtime-checks)
-      - [RefCell: Borrow Checking at Runtime](#refcell-borrow-checking-at-runtime)
-      - [Mutex: Synchronization for Thread Safety](#mutex-synchronization-for-thread-safety)
+      - RefCell: Borrow Checking at Runtime
+      - Mutex: Synchronization for Thread Safety
       - [AtomicUsize: Hardware Atomic Operations](#atomicusize-hardware-atomic-operations)
-  - [2. Cell Analysis](#2-cell-analysis)
+  - 2. Cell Analysis
     - [2.1 Cell Semantics](#21-cell-semantics)
     - [2.2 The Copy Constraint](#22-the-copy-constraint)
     - [2.3 Cell Implementation Deep Dive](#23-cell-implementation-deep-dive)
     - [2.4 When to Use Cell](#24-when-to-use-cell)
     - [2.5 Cell Limitations](#25-cell-limitations)
-  - [3. RefCell Deep Dive](#3-refcell-deep-dive)
+  - 3. RefCell Deep Dive
     - [3.1 RefCell Overview](#31-refcell-overview)
     - [3.2 Borrow State Machine](#32-borrow-state-machine)
     - [3.3 RefCell Implementation](#33-refcell-implementation)
     - [3.4 Panic Conditions](#34-panic-conditions)
     - [3.5 RefCell Memory Layout](#35-refcell-memory-layout)
     - [3.6 RefCell Best Practices](#36-refcell-best-practices)
-  - [4. Mutex and RwLock](#4-mutex-and-rwlock)
+  - 4. Mutex and RwLock
     - [4.1 Mutex Semantics](#41-mutex-semantics)
     - [4.2 Mutex Implementation Concepts](#42-mutex-implementation-concepts)
     - [4.3 Poisoning](#43-poisoning)
-    - [4.4 RwLock](#44-rwlock)
+    - 4.4 RwLock
     - [4.5 Deadlock Potential](#45-deadlock-potential)
     - [4.6 Double Lock in Same Thread](#46-double-lock-in-same-thread)
   - [5. Atomic Types](#5-atomic-types)
@@ -73,9 +73,9 @@
     - [Theorem MUTEX-SAFETY](#theorem-mutex-safety)
     - [Theorem ATOMIC-LINEARIZATION](#theorem-atomic-linearization)
   - [Summary](#summary)
-  - [*Last updated: 2026-03-06*](#last-updated-2026-03-06)
+  - *Last updated: 2026-03-06*
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

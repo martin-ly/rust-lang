@@ -16,8 +16,8 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [权威内容对齐指南](#权威内容对齐指南)
-  - [📑 目录](#-目录)
-  - [🎯 概述 {#-概述}](#-概述--概述)
+  - [📑 目录](#目录)
+  - [🎯 概述 {#-概述}](#概述)
   - [权威来源分级](#权威来源分级)
     - [P0: 官方权威](#p0-官方权威)
     - [P1: 学术权威](#p1-学术权威)
@@ -39,14 +39,14 @@
   - [持续追踪机制](#持续追踪机制)
     - [追踪检查表](#追踪检查表)
     - [更新响应流程](#更新响应流程)
-  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+  - [🆕 Rust 1.94 研究更新](#rust-194-研究更新)
     - [核心研究点](#核心研究点)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -317,7 +317,7 @@ let r = &s;
 | :--- | :--- | :--- | :--- | :--- |
 | 所有权 | Rust Book 4.1 | [所有权模型](formal_methods/10_ownership_model.md) | ✅ | 一致 |
 | 借用 | Rust Book 4.2 | [借用检查](formal_methods/10_borrow_checker_proof.md) | ✅ | 一致 |
-| 生命周期 | Rust Book 10.3 | [生命周期形式化](formal_methods/10_lifetime_formalization.md) | ✅ | 一致 |
+| 生命周期 | Rust Book 10.3 | 生命周期形式化 | ✅ | 一致 |
 | 泛型 | Rust Book 10 | [类型系统](type_theory/10_type_system_foundations.md) | ✅ | 一致 |
 | Trait | Rust Book 10.2 | [Trait系统](type_theory/10_trait_system_formalization.md) | ✅ | 一致 |
 | async/await | Rust Book 17 | [异步状态机](formal_methods/10_async_state_machine.md) | ✅ | 一致 |

@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Microsoft Pragmatic Rust Guidelines 代码审查清单](#microsoft-pragmatic-rust-guidelines-代码审查清单)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [清单使用说明](#清单使用说明)
   - [1. 安全 (Safety)](#1-安全-safety)
     - [1.1 Unsafe 代码管理](#11-unsafe-代码管理)
@@ -40,7 +40,7 @@
   - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 清单使用说明
 >
@@ -283,7 +283,7 @@
 
 - [01_lfrs_certification_mapping.md](../01_learning/01_lfrs_certification_mapping.md) - 认证考点映射
 - [01_google_rust_mapping.md](../01_learning/01_google_rust_mapping.md) - Google 课程映射
-- [10_best_practices.md](./10_best_practices.md) - 生产实践指南
+- 10_best_practices.md - 生产实践指南
 - [exercises/README.md](../../exercises/README.md) - 练习题入口
 
 ---

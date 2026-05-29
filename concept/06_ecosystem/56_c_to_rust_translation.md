@@ -3,8 +3,11 @@
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: E×Eva — 评估 C→Rust 自动化翻译工具的适用性与局限
-> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/09_ffi_advanced.md)
-> **后置概念**: [Formal Verification Tools](./47_formal_verification_tools.md) · [Compiler Internals](./45_compiler_internals.md)
+> **前置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) ·
+> [Unsafe Rust](../03_advanced/03_unsafe.md) ·
+> [FFI](../03_advanced/09_ffi_advanced.md)
+> **后置概念**: [Formal Verification Tools](./47_formal_verification_tools.md) ·
+> [Compiler Internals](./45_compiler_internals.md)
 > **Bloom 层级**: 分析 → 评价
 >
 > **主要来源**: [DARPA TRACTOR] · [C2Rust] · [Scylla (OOPSLA 2026)] · [&inator (PLDI 2026)] · [His2Trans]

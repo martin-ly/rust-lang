@@ -11,8 +11,8 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
-  - [📑 目录](#-目录)
-  - [📚 目录](#-目录-1)
+  - [📑 目录](#目录)
+  - [📚 目录](#目录)
   - [基础知识](#基础知识)
     - [Q1: 为什么 Rust 需要所有权系统？](#q1-为什么-rust-需要所有权系统)
     - [Q2: Copy trait 和 Clone trait 有什么区别？](#q2-copy-trait-和-clone-trait-有什么区别)
@@ -39,7 +39,7 @@
     - [Q16: 如何处理复杂的生命周期？](#q16-如何处理复杂的生命周期)
     - [Q17: 如何设计良好的 Rust API？](#q17-如何设计良好的-rust-api)
   - [更多资源](#更多资源)
-  - [*FAQ 持续更新中，如有问题请提交 Issue*](#faq-持续更新中如有问题请提交-issue)
+  - *FAQ 持续更新中，如有问题请提交 Issue*
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -48,8 +48,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
-  - [📑 目录](#-目录)
-  - [📚 目录](#-目录-1)
+  - [📑 目录](#目录)
+  - [📚 目录](#目录)
   - [基础知识](#基础知识)
     - [Q1: 为什么 Rust 需要所有权系统？](#q1-为什么-rust-需要所有权系统)
     - [Q2: Copy trait 和 Clone trait 有什么区别？](#q2-copy-trait-和-clone-trait-有什么区别)
@@ -76,7 +76,7 @@
     - [Q16: 如何处理复杂的生命周期？](#q16-如何处理复杂的生命周期)
     - [Q17: 如何设计良好的 Rust API？](#q17-如何设计良好的-rust-api)
   - [更多资源](#更多资源)
-  - [*FAQ 持续更新中，如有问题请提交 Issue*](#faq-持续更新中如有问题请提交-issue)
+  - *FAQ 持续更新中，如有问题请提交 Issue*
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 

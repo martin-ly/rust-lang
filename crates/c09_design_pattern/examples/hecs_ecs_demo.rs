@@ -47,7 +47,7 @@ struct Enemy; // 标签组件
 // ============================================================
 
 fn movement_system(world: &mut World, dt: f32) {
-    for (_id, (pos, vel)) in world.query_mut::<(&mut Position, &Velocity)>() {
+    for (pos, vel) in world.query_mut::<(&mut Position, &Velocity)>() {
         pos.x += vel.dx * dt;
         pos.y += vel.dy * dt;
     }
@@ -60,9 +60,9 @@ fn movement_system(world: &mut World, dt: f32) {
 fn collision_system(world: &mut World) {
     // 收集所有带 Position + Health 的实体位置
     let entities: Vec<(Entity, Position, i32)> = world
-        .query_mut::<(&Position, &Health)>()
+        .query_mut::<(Entity, &Position, &Health)>()
         .into_iter()
-        .map(|(e, (pos, health))| (e, *pos, health.current))
+        .map(|(e, pos, health)| (e, *pos, health.current))
         .collect();
 
     for (e1, pos1, _hp1) in &entities {
@@ -89,10 +89,10 @@ fn collision_system(world: &mut World) {
 
 fn render_system(world: &World) {
     println!("--- 实体状态 ---");
-    for (id, (name, pos, health)) in world.query::<(&Name, &Position, &Health)>().iter() {
-        let tag = if world.satisfies::<&Player>(id).unwrap_or(false) {
+    for (id, name, pos, health) in world.query::<(Entity, &Name, &Position, &Health)>().iter() {
+        let tag = if world.satisfies::<&Player>(id) {
             "[玩家]"
-        } else if world.satisfies::<&Enemy>(id).unwrap_or(false) {
+        } else if world.satisfies::<&Enemy>(id) {
             "[敌人]"
         } else {
             "[中立]"
@@ -178,9 +178,9 @@ fn demo_basic_ecs() {
     // 演示实体销毁
     println!("\n--- 销毁史莱姆 ---");
     let to_remove: Vec<Entity> = world
-        .query_mut::<(&Name,)>()
-        .into_iter()
-        .filter(|(_, (name,))| name.0 == "史莱姆")
+        .query::<(Entity, &Name)>()
+        .iter()
+        .filter(|(_, name)| name.0 == "史莱姆")
         .map(|(e, _)| e)
         .collect();
     for e in to_remove {
@@ -224,7 +224,7 @@ fn demo_advanced_queries() {
 
     // 查询 Health < 50% 的实体
     println!("\n低生命值实体:");
-    for (_, (name, health)) in world.query::<(&Name, &Health)>().iter() {
+    for (name, health) in world.query::<(&Name, &Health)>().iter() {
         if health.current * 2 < health.max {
             println!(
                 "  {}: {}/{} ({}%)",
@@ -238,10 +238,10 @@ fn demo_advanced_queries() {
 
     // 批量查询并修改
     println!("\n批量治疗所有实体 (+5 HP):");
-    for (_, health) in world.query_mut::<&mut Health>() {
+    for health in world.query_mut::<&mut Health>() {
         health.current = (health.current + 5).min(health.max);
     }
-    for (_, (name, health)) in world.query::<(&Name, &Health)>().iter() {
+    for (name, health) in world.query::<(&Name, &Health)>().iter() {
         println!("  {}: {}/{}", name.0, health.current, health.max);
     }
 

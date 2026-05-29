@@ -252,25 +252,25 @@ Aeneas支持多个定理证明器后端：
 
 #### 与 ownership_model.md 的整合
 
-需要在 [ownership_model.md](../../research_notes/formal_methods/ownership_model.md) 中添加Aeneas引用：
+需要在 ownership_model.md 中添加Aeneas引用：
 
 1. **理论基础章节**: 添加"Aeneas 函数式翻译方法"
 2. **所有权规则**: 对比 CPV 与所有权环境 Ω
 3. **移动语义**: 与函数式状态传递对应
 4. **参考文献**: 添加 ICFP 2022 论文
 
-具体添加内容见 [ownership_model.md](../../research_notes/formal_methods/ownership_model.md) §Aeneas 函数式翻译方法。
+具体添加内容见 ownership_model.md §Aeneas 函数式翻译方法。
 
 #### 与 borrow_checker_proof.md 的整合
 
-需要在 [borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) 中添加：
+需要在 borrow_checker_proof.md 中添加：
 
 1. **对比分析**: Aeneas 借用处理 vs 传统借用检查
 2. **borrow_generated_from**: 与 Def 1.3（借用有效性）的关系
 3. **预言变量**: 与 Axiom 3（借用有效性保持）的对应
 4. **数据竞争自由**: 两种方法的路径对比
 
-具体添加内容见 [borrow_checker_proof.md](../../research_notes/formal_methods/borrow_checker_proof.md) §与Aeneas对比。
+具体添加内容见 borrow_checker_proof.md §与Aeneas对比。
 
 ### 类型理论整合
 

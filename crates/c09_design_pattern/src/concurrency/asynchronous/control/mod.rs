@@ -16,7 +16,11 @@ impl RateLimiter {
     }
 
     pub async fn acquire(&self) -> OwnedSemaphorePermit {
-        self.semaphore.clone().acquire_owned().await.expect("获取信号量许可失败")
+        self.semaphore
+            .clone()
+            .acquire_owned()
+            .await
+            .expect("获取信号量许可失败")
     }
 
     pub fn capacity(&self) -> usize {

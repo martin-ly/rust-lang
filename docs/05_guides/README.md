@@ -95,7 +95,7 @@ impl ConfigBuilder {
 | [05_wasm_usage_guide.md](./05_wasm_usage_guide.md) | WASM | ⭐⭐⭐ |
 | [05_unsafe_rust_guide.md](./05_unsafe_rust_guide.md) | Unsafe Rust | ⭐⭐⭐⭐ |
 | [05_troubleshooting_guide.md](./05_troubleshooting_guide.md) | 故障排查 | ⭐⭐ |
-| [10_best_practices.md](./10_best_practices.md) | 最佳实践 | ⭐⭐⭐ |
+| 10_best_practices.md | 最佳实践 | ⭐⭐⭐ |
 | [workflow/](./workflow/README.md) | 工作流理论与模型 | ⭐⭐⭐ |
 | [05_miri_practical_guide.md](./05_miri_practical_guide.md) | Miri 实战：UB 检测与内存安全 | ⭐⭐⭐⭐ |
 | [05_unsafe_fields_preview.md](./05_unsafe_fields_preview.md) | Unsafe Fields 预览（Rust 2026 目标） | ⭐⭐⭐⭐ |

@@ -56,9 +56,9 @@
     - [Java → Rust 思维转换](#java--rust-思维转换)
   - [总结](#总结)
   - [参考文献](#参考文献)
-  - [*维护者: Rust Comparative Study Team*](#维护者-rust-comparative-study-team)
+  - *维护者: Rust Comparative Study Team*
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 

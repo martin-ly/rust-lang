@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [array\_windows 语义分析 \[Stable 1.94\]](#array_windows-语义分析-stable-194)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 概述](#1-概述)
     - [1.1 与 `windows` 的对比](#11-与-windows-的对比)
   - [2. 语法定义](#2-语法定义)

@@ -42,12 +42,12 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [🔬 形式化方法研究 {#-形式化方法研究}](#-形式化方法研究--形式化方法研究)
-  - [✅ 完备性声明 {#-完备性声明}](#-完备性声明--完备性声明)
+- [🔬 形式化方法研究 {#-形式化方法研究}](#形式化方法研究)
+  - [✅ 完备性声明 {#-完备性声明}](#完备性声明)
   - [控制流形式化](#控制流形式化)
-  - [📊 目录 {#-目录}](#-目录--目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
-  - [📚 研究主题 {#-研究主题}](#-研究主题--研究主题)
+  - [📊 目录 {#-目录}](#目录)
+  - [🎯 研究目标 {#-研究目标}](#研究目标)
+  - [📚 研究主题 {#-研究主题}](#研究主题)
     - [1. 所有权模型形式化](#1-所有权模型形式化)
     - [2. 借用检查器证明](#2-借用检查器证明)
     - [3. 异步状态机形式化](#3-异步状态机形式化)
@@ -58,9 +58,9 @@
   - [formal\_methods 六篇并表](#formal_methods-六篇并表)
   - [形式化论证汇总](#形式化论证汇总)
   - [公理-定理形式化索引](#公理-定理形式化索引)
-  - [📝 研究笔记 {#-研究笔记}](#-研究笔记--研究笔记)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
-  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [📝 研究笔记 {#-研究笔记}](#研究笔记)
+    - [已完成 ✅ {#已完成-}](#已完成)
+  - [🔗 相关资源 {#-相关资源}](#相关资源)
     - [核心文档](#核心文档)
     - [代码实现](#代码实现)
     - [学术资源](#学术资源)
@@ -71,19 +71,19 @@
     - [权威来源快速链接](#权威来源快速链接)
     - [Ferrocene FLS 章节与本目录对应](#ferrocene-fls-章节与本目录对应)
     - [国际权威奖项与认可](#国际权威奖项与认可)
-  - [📖 研究方法 {#-研究方法}](#-研究方法--研究方法)
+  - [📖 研究方法 {#-研究方法}](#研究方法)
     - [形式化工具](#形式化工具)
     - [形式化方法](#形式化方法)
     - [证明策略](#证明策略)
-  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
+  - [🚀 快速开始 {#-快速开始}](#快速开始)
     - [创建新的研究笔记](#创建新的研究笔记)
     - [研究流程](#研究流程)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -163,7 +163,7 @@
 - 如何证明生命周期系统保证引用有效性？
 - 生命周期推断算法如何形式化？
 
-**相关笔记**: [10_lifetime_formalization.md](./10_lifetime_formalization.md)
+**相关笔记**: 10_lifetime_formalization.md
 
 **状态**: ✅ 已完成 (100%)
 
@@ -236,7 +236,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **所有权** | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 结构归纳、反证 | [ownership_model](./10_ownership_model.md) 使用已移动值、双重释放 |
 | **借用** | 规则 5–8 | T1 数据竞争自由, T2 | 规则归纳 | [borrow_checker_proof](./10_borrow_checker_proof.md) 双重可变借用 |
-| **生命周期** | Axiom LF1–LF2, Def 1.4, $\ell \subseteq \text{lft}$ | LF-T1–T3 引用有效性 | 三步骤、约束求解 | [lifetime_formalization](./10_lifetime_formalization.md) 返回局部引用、存储短生命周期 |
+| **生命周期** | Axiom LF1–LF2, Def 1.4, $\ell \subseteq \text{lft}$ | LF-T1–T3 引用有效性 | 三步骤、约束求解 | lifetime_formalization 返回局部引用、存储短生命周期 |
 | **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | 归纳+案例分析 | [async_state_machine](./10_async_state_machine.md) 非 Send 跨线程、移动未 Pin |
 | **Pin** | Def 1.1–2.2（位置稳定、自引用） | T1–T3 Pin 保证/自引用/投影 | 类型系统、位置稳定 | [pin_self_referential](./10_pin_self_referential.md) 移动未 Pin 自引用 |
 | **Send/Sync** | Def SEND1, SYNC1；SYNC-L1 $T:\text{Sync} \Leftrightarrow \&T:\text{Send}$ | SEND-T1, SYNC-T1, SEND-SYNC-T1 | 与 borrow/async 衔接 | [send_sync_formalization](./10_send_sync_formalization.md) Rc !Send、Cell !Sync、非 Send spawn |
@@ -273,7 +273,7 @@
 | [00_completeness_gaps](./00_completeness_gaps.md) | Def FMG1、定理 FMG-T1 | 完备性缺口声明 |
 | [ownership_model](./10_ownership_model.md) | 所有权规则 1–8、T2/T3、RC/ARC/CELL/REFCELL/BOX、MAYBEUNINIT/ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 唯一性、RAII、Rc/Arc、Cell/RefCell、MaybeUninit、atomic、union、transmute、Drop/Deref、repr、const &mut static |
 | [borrow_checker_proof](./10_borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 互斥借用、通道、Mutex、裸指针、unsafe 契约、match/for/?、extern、C variadic |
-| [lifetime_formalization](./10_lifetime_formalization.md) | outlives、T2 引用有效性 | 区域类型、NLL |
+| lifetime_formalization | outlives、T2 引用有效性 | 区域类型、NLL |
 | [async_state_machine](./10_async_state_machine.md) | T6.1–T6.3 状态一致性、并发安全、进度 | Future 状态机、Pin |
 | [pin_self_referential](./10_pin_self_referential.md) | Pin 不变式、T1–T3 自引用安全 | 堆/栈区分、!Unpin |
 | [send_sync_formalization](./10_send_sync_formalization.md) | Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1 | 跨线程转移/共享、与 spawn/Future/Arc 衔接 |
@@ -293,7 +293,7 @@
 - [x] [所有权模型形式化](./10_ownership_model.md) - 100%；含 RC/ARC/CELL/REFCELL/BOX 扩展
 - [x] [借用检查器证明](./10_borrow_checker_proof.md) - 100%；含 CHAN/MUTEX/RAW 扩展
 - [x] [异步状态机形式化](./10_async_state_machine.md) - 100%
-- [x] [生命周期形式化](./10_lifetime_formalization.md) - 100%
+- x] [生命周期形式化 - 100%
 - [x] [Pin 和自引用类型形式化](./10_pin_self_referential.md) - 100%
 - [x] [Send/Sync 形式化](./10_send_sync_formalization.md) - 100%；Def SEND1/SYNC1、SEND-T1/SYNC-T1、与 spawn/Future/Arc 衔接
 
@@ -318,11 +318,11 @@
 
 ### 学术资源
 
-- [RustBelt 项目](https://plv.mpi-sws.org/rustbelt/README.md) — MPI-SWS 形式化 Rust 研究；Ralf Jung 博士论文获 **ACM SIGPLAN John C. Reynolds Doctoral Dissertation Award**
-- [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/README.md) — 首个 Rust 安全形式化证明
-- [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md) — 别名模型；Miri 实现
+- RustBelt 项目 — MPI-SWS 形式化 Rust 研究；Ralf Jung 博士论文获 **ACM SIGPLAN John C. Reynolds Doctoral Dissertation Award**
+- RustBelt POPL 2018 — 首个 Rust 安全形式化证明
+- Stacked Borrows — 别名模型；Miri 实现
 - [Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) — Stacked Borrows 演进（**Distinguished Paper Award**）；[ACM PDF](https://dl.acm.org/doi/pdf/10.1145/3735592)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf)、[源码](https://gitlab.mpi-sws.org/iris/simuliris/-/tree/master/theories/tree_borrows)
-- [Ferrocene FLS](https://spec.ferrocene.dev/README.md) — Rust 1.93 形式化规范；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/README.md)
+- Ferrocene FLS — Rust 1.93 形式化规范；Rust 官方采纳 2025
 
 ---
 
@@ -334,28 +334,28 @@
 
 | 本目录 Def/定理 | 国际权威来源 | 对应关系 |
 | :--- | :--- | :--- |
-| ownership 规则 1–8、T2/T3 | [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/README.md) | Iris 分离逻辑、unsafe 安全抽象 |
-| borrow 规则、T1 数据竞争自由 | [RustBelt POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/README.md)、[Stacked Borrows POPL 2020](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md) | 别名模型、&mut 唯一性 |
-| RAW1、裸指针 | [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md)、[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | 解引用非空、对齐、有效；Tree Borrows 为 Stacked Borrows 演进（Distinguished Paper Award；Rocq 形式化证明） |
-| CHAN/MUTEX、relaxed memory | [RustBelt Meets Relaxed Memory POPL 2020](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md) | Arc 数据竞争、同步 ghost state |
-| lifetime outlives、NLL | [RustBelt](https://plv.mpi-sws.org/rustbelt/README.md)、[Polonius](https://rust-lang.github.io/polonius/README.md) | 区域类型、NLL；Polonius 为 datalog 形式化 borrow 分析 |
+| ownership 规则 1–8、T2/T3 | RustBelt POPL 2018 | Iris 分离逻辑、unsafe 安全抽象 |
+| borrow 规则、T1 数据竞争自由 | RustBelt POPL 2018、Stacked Borrows POPL 2020 | 别名模型、&mut 唯一性 |
+| RAW1、裸指针 | Stacked Borrows、[Tree Borrows PLDI 2025](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html) | 解引用非空、对齐、有效；Tree Borrows 为 Stacked Borrows 演进（Distinguished Paper Award；Rocq 形式化证明） |
+| CHAN/MUTEX、relaxed memory | RustBelt Meets Relaxed Memory POPL 2020 | Arc 数据竞争、同步 ghost state |
+| lifetime outlives、NLL | RustBelt、Polonius | 区域类型、NLL；Polonius 为 datalog 形式化 borrow 分析 |
 | Pin T1–T3 | [Rust RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)、[async 规范](https://doc.rust-lang.org/std/future/trait.Future.html) | 自引用、!Unpin |
-| 形式化工具 | [Prusti](https://prusti.org/README.md)、[Kani](https://model-checking.github.io/kani/README.md)、[Miri](https://github.com/rust-lang/miri)、[Iris (Coq)](https://iris-project.org/README.md) | Miri 实现 Stacked Borrows |
+| 形式化工具 | Prusti、Kani、Miri](https://github.com/rust-lang/miri)、[Iris (Coq) | Miri 实现 Stacked Borrows |
 
 ### 权威论文与规范（含链接）
 
 | 来源 | 类型 | 链接 | 说明 |
 | :--- | :--- | :--- | :--- |
-| **RustBelt** | 论文 POPL 2018 | [plv.mpi-sws.org/rustbelt/popl18](https://plv.mpi-sws.org/rustbelt/popl18/README.md) | 首个 Rust 安全形式化证明；Iris + Coq |
-| **Stacked Borrows** | 论文 POPL 2020 | [plv.mpi-sws.org/rustbelt/stacked-borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/README.md) | 别名模型；UB 定义；Miri 实现 |
-| **RustBelt Meets Relaxed Memory** | 论文 POPL 2020 | [plv.mpi-sws.org/rustbelt/rbrlx](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md) | relaxed memory、Arc 数据竞争 |
-| **Rust Reference** | 官方规范 | [doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/README.md) | 语法、语义、UB 列表 |
-| **Rustonomicon** | 官方文档 | [doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/README.md) | unsafe、内存布局、UB |
-| **Ferrocene FLS** | 形式化规范 | [spec.ferrocene.dev](https://spec.ferrocene.dev/README.md) | Rust 1.93 形式化规范；[Rust 官方采纳 2025](https://blog.rust-lang.org/2025/03/26/adopting-the-fls/README.md) |
+| **RustBelt** | 论文 POPL 2018 | plv.mpi-sws.org/rustbelt/popl18 | 首个 Rust 安全形式化证明；Iris + Coq |
+| **Stacked Borrows** | 论文 POPL 2020 | plv.mpi-sws.org/rustbelt/stacked-borrows | 别名模型；UB 定义；Miri 实现 |
+| **RustBelt Meets Relaxed Memory** | 论文 POPL 2020 | plv.mpi-sws.org/rustbelt/rbrlx | relaxed memory、Arc 数据竞争 |
+| **Rust Reference** | 官方规范 | doc.rust-lang.org/reference | 语法、语义、UB 列表 |
+| **Rustonomicon** | 官方文档 | doc.rust-lang.org/nomicon | unsafe、内存布局、UB |
+| **Ferrocene FLS** | 形式化规范 | spec.ferrocene.dev | Rust 1.93 形式化规范；Rust 官方采纳 2025 |
 | **Tree Borrows** | 论文 PLDI 2025（Distinguished Paper Award） | [ETH 项目页](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)、[Iris PDF](https://iris-project.org/pdfs/2025-pldi-treeborrows.pdf)、[Ralf 博客](https://www.ralfj.de/blog/2025/07/07/tree-borrows-paper.html) | Stacked Borrows 演进；树结构；30k crates 测试 54% 更少拒绝；Rocq 形式化证明 |
-| **Polonius** | 形式化 borrow 分析 | [rust-lang.github.io/polonius](https://rust-lang.github.io/polonius/README.md) | datalog 形式化；NLL 后继；`-Zpolonius` |
-| **Prusti** | 验证工具 | [prusti.org](https://prusti.org/README.md) | 基于 Viper 的 deductive verification |
-| **Kani** | 验证工具 | [model-checking.github.io/kani](https://model-checking.github.io/kani/README.md) | 模型检查、UB 验证 |
+| **Polonius** | 形式化 borrow 分析 | rust-lang.github.io/polonius | datalog 形式化；NLL 后继；`-Zpolonius` |
+| **Prusti** | 验证工具 | prusti.org | 基于 Viper 的 deductive verification |
+| **Kani** | 验证工具 | model-checking.github.io/kani | 模型检查、UB 验证 |
 
 ### 与本目录的对应说明
 
@@ -369,15 +369,15 @@
 
 | 来源 | 链接 | 用途 |
 | :--- | :--- | :--- |
-| **releases.rs 1.93.0** | [releases.rs/docs/1.93.0](https://releases.rs/docs/1.93.0/README.md) | 完整变更清单 |
-| **Rust 1.93 发布说明** | [blog.rust-lang.org/2026/01/22/Rust-1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/README.md) | 语言特性权威公告 |
-| **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/README.md) | Rust 1.93 形式化规范 |
+| **releases.rs 1.93.0** | releases.rs/docs/1.93.0 | 完整变更清单 |
+| **Rust 1.93 发布说明** | blog.rust-lang.org/2026/01/22/Rust-1.93.0 | 语言特性权威公告 |
+| **Ferrocene FLS** | spec.ferrocene.dev | Rust 1.93 形式化规范 |
 
 **版本说明**：Ferrocene FLS 覆盖 **Rust 2021 Edition** 与 rustc 1.93.0。本项目文档使用 **Edition 2024**；Edition 2024 新增语法与语义尚未纳入 FLS 正式章节，形式化引用以 FLS 当前覆盖范围为准。
 
 ### Ferrocene FLS 章节与本目录对应
 
-Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.dev/README.md) 覆盖 Rust 1.93 语法与 legality；本目录侧重**语义与安全性质**，二者互补：
+Rust 官方采纳（2025 年 3 月）的 Ferrocene FLS 覆盖 Rust 1.93 语法与 legality；本目录侧重**语义与安全性质**，二者互补：
 
 | FLS 章节 | 直接链接 | 本目录对应 |
 | :--- | :--- | :--- |

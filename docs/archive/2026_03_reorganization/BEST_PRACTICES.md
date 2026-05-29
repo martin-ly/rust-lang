@@ -194,6 +194,6 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ## 相关文档
 
-- [README.md](./README.md)
-- [CONTRIBUTING.md](./CONTRIBUTING.md)
-- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
+- README.md
+- CONTRIBUTING.md
+- TROUBLESHOOTING.md

@@ -11,7 +11,7 @@
 ## 📑 目录
 >
 - [RAII Guard Pattern in Rust](#raii-guard-pattern-in-rust)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概念](#概念)
   - [标准库示例](#标准库示例)
     - [MutexGuard](#mutexguard)

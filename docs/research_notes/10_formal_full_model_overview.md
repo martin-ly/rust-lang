@@ -16,8 +16,8 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 形式化全模型：统一形式系统入口](#rust-形式化全模型统一形式系统入口)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
   - [一、统一形式系统总览](#一统一形式系统总览)
     - [1.1 核心机制与公理层](#11-核心机制与公理层)
     - [1.2 定理依赖 DAG（简化）](#12-定理依赖-dag简化)
@@ -31,24 +31,24 @@
   - [三、与各子文档的映射](#三与各子文档的映射)
   - [四、抽象层次对应](#四抽象层次对应)
   - [五、相关文档](#五相关文档)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ## 📊 目录 {#-目录}
 >
 > **[来源: Rust Official Docs]**
 
 - [Rust 形式化全模型：统一形式系统入口](#rust-形式化全模型统一形式系统入口)
-  - [📑 目录](#-目录)
-  - [📊 目录 {#-目录}](#-目录--目录)
+  - [📑 目录](#目录)
+  - [📊 目录 {#-目录}](#目录)
   - [一、统一形式系统总览](#一统一形式系统总览)
     - [1.1 核心机制与公理层](#11-核心机制与公理层)
     - [1.2 定理依赖 DAG（简化）](#12-定理依赖-dag简化)
@@ -62,16 +62,16 @@
   - [三、与各子文档的映射](#三与各子文档的映射)
   - [四、抽象层次对应](#四抽象层次对应)
   - [五、相关文档](#五相关文档)
-  - [🆕 Rust 1.94 更新](#-rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -89,7 +89,7 @@
 | :--- | :--- | :--- |
 | **所有权** | 规则 1–3：唯一所有者、移动转移、作用域结束释放 | [ownership_model](./formal_methods/10_ownership_model.md) |
 | **借用** | 规则 5–8：共享借用、可变借用、互斥、作用域 | [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) |
-| **生命周期** | Axiom LF1–LF2、Def 1.4、$\ell \subseteq \text{lft}$ | [lifetime_formalization](./formal_methods/10_lifetime_formalization.md) |
+| **生命周期** | Axiom LF1–LF2、Def 1.4、$\ell \subseteq \text{lft}$ | lifetime_formalization |
 | **类型系统** | 进展性、保持性、typing rules | [type_system_foundations](./type_theory/10_type_system_foundations.md) |
 | **型变** | Def 1.1–3.1（协变、逆变、不变） | [variance_theory](./type_theory/10_variance_theory.md) |
 | **Trait** | Axiom COH1/COH2、对象安全、impl 解析 | [trait_system_formalization](./type_theory/10_trait_system_formalization.md) |
@@ -238,7 +238,7 @@
 | :--- | :--- | :--- |
 | [ownership_model](./formal_methods/10_ownership_model.md) | §2.1 内存与所有权、§2.3 A-BIND1/SHADOW1 | T2, T3, Def 1.4/1.5, RC-T1, … |
 | [borrow_checker_proof](./formal_methods/10_borrow_checker_proof.md) | §2.1 A-BR1–4 | T1, T2, CHAN-T1, MUTEX-T1, … |
-| [lifetime_formalization](./formal_methods/10_lifetime_formalization.md) | §2.2 A-LF1–2 | LF-T1, LF-T2, LF-T3 |
+| lifetime_formalization | §2.2 A-LF1–2 | LF-T1, LF-T2, LF-T3 |
 | [type_system_foundations](./type_theory/10_type_system_foundations.md) | §2.2 A-TY1–2 | T1–T5, LUB-T1, … |
 | [variance_theory](./type_theory/10_variance_theory.md) | §2.2 A-VAR1–3 | T1–T4, VAR-COM-T1 |
 | [trait_system_formalization](./type_theory/10_trait_system_formalization.md) | - | T1–T3, COH-T1, RPIT-T1, … |

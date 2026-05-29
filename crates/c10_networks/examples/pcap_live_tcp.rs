@@ -30,6 +30,7 @@ mod run {
 #[cfg(not(feature = "pcap_live"))]
 fn main() {
     eprintln!(
-        "This example requires feature 'pcap_live'.\nTry: cargo run -p c10_networks --features pcap_live --example pcap_live_tcp -- \"Ethernet\" \"tcp port 80\""
+        "This example requires feature 'pcap_live'.\nTry: cargo run -p c10_networks --features \
+         pcap_live --example pcap_live_tcp -- \"Ethernet\" \"tcp port 80\""
     );
 }

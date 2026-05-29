@@ -103,11 +103,11 @@
     - [形式化理论](#形式化理论)
   - [故障排查建议](#故障排查建议)
   - [Rust 1.95+ 更新说明](#rust-195-更新说明)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+  - **状态**: ✅ 深度整合完成
   - [权威来源索引](#权威来源索引)
   - [思维导图：Rust 错误码体系](#思维导图rust-错误码体系)
   - [决策树：编译错误诊断流程](#决策树编译错误诊断流程)
-  - [权威来源索引](#权威来源索引-1)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2549,7 +2549,7 @@ fn main() {
 
 - [所有权模型形式化](../research_notes/formal_methods/10_ownership_model.md)
 - [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
-- [生命周期形式化](../research_notes/formal_methods/10_lifetime_formalization.md)
+- 生命周期形式化
 
 ---
 

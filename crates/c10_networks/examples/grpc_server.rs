@@ -7,7 +7,6 @@
 //! - **gRPC**: 高性能、跨语言的RPC框架
 //!   - **属性**: Protocol Buffers、HTTP/2、流式传输、跨语言
 //!   - **关系**: 与RPC、微服务、网络编程相关
-//!
 #![allow(clippy::default_constructed_unit_structs)]
 
 //! ### 思维导图
@@ -74,12 +73,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("HTTP Greeter server listening on {}", addr);
 
     // 使用axum创建一个简单的HTTP服务器
-    use axum::{
-        Router,
-        extract::{Query, State},
-        response::Json,
-        routing::get,
-    };
+    use axum::Router;
+    use axum::extract::{Query, State};
+    use axum::response::Json;
+    use axum::routing::get;
     use serde::Deserialize;
     use serde_json::json;
 

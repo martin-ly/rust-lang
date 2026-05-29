@@ -28,7 +28,7 @@ futures = []
 
 [dev-dependencies]
 criterion = { workspace = true }
-hecs = "0.10"
+hecs = "0.11"
 
 [lib]
 name = "c09_design_pattern"

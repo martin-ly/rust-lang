@@ -29,7 +29,9 @@ async fn user_input(tx: mpsc::Sender<Event>) {
     ];
 
     for input in inputs {
-        tx.send(Event::UserInput(input)).await.expect("发送用户输入事件失败");
+        tx.send(Event::UserInput(input))
+            .await
+            .expect("发送用户输入事件失败");
         sleep(Duration::from_secs(1)).await; // 模拟用户输入延迟
     }
 }

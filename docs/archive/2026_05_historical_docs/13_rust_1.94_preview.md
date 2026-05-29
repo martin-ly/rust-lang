@@ -12,7 +12,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [Rust 1.94 预览与特性追踪](#rust-194-预览与特性追踪)
+- Rust 1.94 预览与特性追踪
   - [目录](#目录)
   - [版本概览](#版本概览)
   - [主要新特性预览](#主要新特性预览)
@@ -88,7 +88,7 @@ fn process_items(items: &[i32]) -> Option<i32> {
 }
 ```
 
-**形式化关联**: 与 [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) 中 ControlFlow 类型理论相关
+**形式化关联**: 与 type_system_foundations 中 ControlFlow 类型理论相关
 
 ---
 
@@ -151,7 +151,7 @@ let cell = RefCell::new(Some(42));
 let result: Result<Ref<i32>, _> = RefCell::try_map(cell.borrow(), |opt| opt.as_ref());
 ```
 
-**形式化关联**: 与 [ownership_model](../research_notes/formal_methods/ownership_model.md) 内部可变性规则相关
+**形式化关联**: 与 ownership_model 内部可变性规则相关
 
 ---
 
@@ -175,10 +175,10 @@ let result: Result<Ref<i32>, _> = RefCell::try_map(cell.borrow(), |opt| opt.as_r
 
 | API | 描述 | 形式化关联 |
 | :--- | :--- | :--- |
-| `ControlFlow::ok` | 转换为 Option | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
-| `RefCell::try_map` | 条件映射 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
-| `RangeToInclusive` | 包含结束的范围类型 | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) |
-| `VecDeque::truncate_front` | 从头部截断 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
+| `ControlFlow::ok` | 转换为 Option | type_system_foundations |
+| `RefCell::try_map` | 条件映射 | ownership_model |
+| `RangeToInclusive` | 包含结束的范围类型 | type_system_foundations |
+| `VecDeque::truncate_front` | 从头部截断 | ownership_model |
 
 ### 性能改进
 >
@@ -271,20 +271,20 @@ include = [
 
 | 变更 | 形式化文档 | 影响 |
 | :--- | :--- | :--- |
-| `RangeToInclusive` 类型 | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) | 新增类型构造器 |
-| `ControlFlow::ok` | [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) | 新增类型转换 |
+| `RangeToInclusive` 类型 | type_system_foundations | 新增类型构造器 |
+| `ControlFlow::ok` | type_system_foundations | 新增类型转换 |
 
 ### 所有权与借用
 
 | 变更 | 形式化文档 | 影响 |
 | :--- | :--- | :--- |
-| `RefCell::try_map` | [ownership_model](../research_notes/formal_methods/ownership_model.md) | 内部可变性新操作 |
+| `RefCell::try_map` | ownership_model | 内部可变性新操作 |
 
 ### 证明更新计划
 
-- [ ] 更新 [FORMAL_CONCEPTS_ENCYCLOPEDIA](../research_notes/FORMAL_CONCEPTS_ENCYCLOPEDIA.md) 添加新类型
-- [ ] 更新 [COUNTER_EXAMPLES_COMPENDIUM](../research_notes/COUNTER_EXAMPLES_COMPENDIUM.md) 添加边界案例
-- [ ] 更新 [RUST_193_FEATURE_MATRIX](../research_notes/RUST_193_FEATURE_MATRIX.md) 至 1.94
+-  ] 更新 [FORMAL_CONCEPTS_ENCYCLOPEDIA 添加新类型
+-  ] 更新 [COUNTER_EXAMPLES_COMPENDIUM 添加边界案例
+-  ] 更新 [RUST_193_FEATURE_MATRIX 至 1.94
 
 ---
 
@@ -292,7 +292,7 @@ include = [
 
 | 文档 | 说明 |
 | :--- | :--- |
-| [07_rust_1.93_full_changelog](./07_rust_1.93_full_changelog.md) | 1.93 完整变更 |
+| 07_rust_1.93_full_changelog | 1.93 完整变更 |
 | [12_rust_1.93.1_vs_1.93.0_comparison](./12_rust_1.93.1_vs_1.93.0_comparison.md) | 1.93.1 补丁说明 |
 | [Rust 1.94 Beta 官方公告](https://blog.rust-lang.org/) | 待发布 |
 | [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) | 项目目标追踪 |

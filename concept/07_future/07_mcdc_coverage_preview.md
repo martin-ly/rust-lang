@@ -9,7 +9,11 @@
 
 ---
 
-> **来源**: [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] / ED-12C](<https://www.rtca.org/product/do-178c/>) · [ISO 26262](https://www.iso.org/standard/68383.html) · [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656) · [MCDC [来源: [FAA MC/DC](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] Wikipedia](<https://en.wikipedia.org/wiki/Code_coverage>) · [NASA Software Safety Guidebook](https://ntrs.nasa.gov/citations/20030093620)
+> **来源**: [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] / ED-12C](<https://www.rtca.org/product/do-178c/>) ·
+> [ISO 26262](https://www.iso.org/standard/68383.html) ·
+> [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656) ·
+> [MCDC [来源: [FAA MC/DC](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] Wikipedia](<https://en.wikipedia.org/wiki/Code_coverage>) ·
+> [NASA Software Safety Guidebook](https://ntrs.nasa.gov/citations/20030093620)
 
 ## 📑 目录
 
@@ -39,11 +43,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 覆盖率等级的层次结构
->
 
 软件测试中的覆盖率形成严格的**层次包含关系**：
 
@@ -66,7 +67,6 @@ graph BT
 ---
 
 ### 1.2 MC/DC 的数学定义
->
 
 MC/DC（Modified Condition/Decision Coverage）要求：
 

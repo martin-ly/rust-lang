@@ -39,7 +39,7 @@
 - [借用检查器证明](../research_notes/formal_methods/10_borrow_checker_proof.md)
 - [类型系统基础](../research_notes/type_theory/10_type_system_foundations.md)
 - [Trait 系统形式化](../research_notes/type_theory/10_trait_system_formalization.md)
-- [生命周期形式化](../research_notes/formal_methods/10_lifetime_formalization.md)
+- 生命周期形式化
 - [型变理论](../research_notes/type_theory/10_variance_theory.md)
 - [形式化验证工具](../research_notes/10_tools_guide.md)
 
@@ -127,7 +127,7 @@ fn render<T: Drawable>(item: T) {
 | :--- | :--- | :--- |
 | **所有权模型** | [../research_notes/formal_methods/10_ownership_model.md](../research_notes/formal_methods/10_ownership_model.md) | 所有权系统的形式化定义与证明 |
 | **借用检查器** | [../research_notes/formal_methods/10_borrow_checker_proof.md](../research_notes/formal_methods/10_borrow_checker_proof.md) | 借用检查的形式化正确性证明 |
-| **生命周期** | [../research_notes/formal_methods/10_lifetime_formalization.md](../research_notes/formal_methods/10_lifetime_formalization.md) | 生命周期的形式化模型 |
+| **生命周期** | ../research_notes/formal_methods/10_lifetime_formalization.md | 生命周期的形式化模型 |
 | **类型系统** | [../research_notes/type_theory/10_type_system_foundations.md](../research_notes/type_theory/10_type_system_foundations.md) | 类型理论基础 |
 | **Trait 系统** | [../research_notes/type_theory/10_trait_system_formalization.md](../research_notes/type_theory/10_trait_system_formalization.md) | Trait 系统的形式化 |
 | **型变理论** | [../research_notes/type_theory/10_variance_theory.md](../research_notes/type_theory/10_variance_theory.md) | 型变规则与证明 |

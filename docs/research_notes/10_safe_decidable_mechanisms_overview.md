@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全可判定机制总览](#安全可判定机制总览)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、何为“安全的可判定的机制”](#一何为安全的可判定的机制)
   - [二、机制清单与形式化对应总表](#二机制清单与形式化对应总表)
   - [三、各机制分节（概念定义·属性关系·解释论证·形式证明·反例）](#三各机制分节概念定义属性关系解释论证形式证明反例)
@@ -19,7 +19,7 @@
     - [3.6 Pin/Unpin](#36-pinunpin)
     - [3.7 Future/async](#37-futureasync)
     - [3.8 类型系统](#38-类型系统)
-    - [3.9 match / for / ?](#39-match--for--)
+    - [3.9 match / for / ?](#39-match--for)
     - [3.10 通道 / Mutex / thread::spawn](#310-通道--mutex--threadspawn)
     - [3.11 RefCell 借用（运行时可判定）](#311-refcell-借用运行时可判定)
   - [四、思维表征入口](#四思维表征入口)
@@ -27,12 +27,12 @@
     - [6.1 并发与异步族](#61-并发与异步族)
     - [6.2 Trait 与多态族](#62-trait-与多态族)
   - [七、相关文档](#七相关文档)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -64,7 +64,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | 所有权 | 静态 | [ownership_model](formal_methods/10_ownership_model.md) | 规则 1–3, T2, T3 | 使用已移动值、双重释放 |
 | 借用 | 静态 | [borrow_checker_proof](formal_methods/10_borrow_checker_proof.md) | 规则 5–8, T1 | 双重可变借用、悬垂引用 |
-| 生命周期 | 静态 | [lifetime_formalization](formal_methods/10_lifetime_formalization.md) | LF1–LF2, LF-T1–T3 | 返回局部引用、存短命引用 |
+| 生命周期 | 静态 | lifetime_formalization | LF1–LF2, LF-T1–T3 | 返回局部引用、存短命引用 |
 | Send | 静态 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | SEND1, SEND-T1 | Rc 跨线程、!Send 闭包 spawn |
 | Sync | 静态 | [send_sync_formalization](formal_methods/10_send_sync_formalization.md) | SYNC1, SYNC-L1, SYNC-T1 | Cell 跨线程共享、Rc &T 跨线程 |
 | Pin/Unpin | 静态 | [pin_self_referential](formal_methods/10_pin_self_referential.md) | Def 1.1–2.2, T1–T3 | 未 Pin 自引用、栈上 !Unpin |
@@ -112,7 +112,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- **概念定义**：outlives、区域、NLL；[lifetime_formalization](formal_methods/10_lifetime_formalization.md) Axiom LF1–LF2、Def 1.4。
+- **概念定义**：outlives、区域、NLL；lifetime_formalization Axiom LF1–LF2、Def 1.4。
 - **属性关系**：$\ell \subseteq \text{lft}$；与借用、型变组合。
 - **解释论证**：引用有效性；Polonius/区域类型。
 - **形式证明**：LF-T1–T3 引用有效性。

@@ -475,5 +475,5 @@ Aeneas为Rust safe代码的形式验证提供了实用路径：
 
 1. [Aeneas GitHub](https://github.com/AeneasVerif/aeneas)
 2. [Aeneas Paper: ICFP 2022](https://arxiv.org/abs/2206.07185)
-3. [LLBC Formalization](https://github.com/AeneasVerif/aeneas/blob/main/doc/llbc.md)
+3. LLBC Formalization
 4. [Companion Tutorial](https://github.com/AeneasVerif/aeneas-tutorial)
