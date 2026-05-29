@@ -11,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition `Future` in Prelude 影响分析](#rust-2024-edition-future-in-prelude-影响分析)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [变化详情](#变化详情)
     - [之前（Rust 2021 及之前）](#之前rust-2021-及之前)
@@ -32,7 +32,6 @@
   - [版本兼容性](#版本兼容性)
   - [参考资源](#参考资源)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 概述
@@ -277,60 +276,3 @@ where
 > **[来源: ACM - Async Language Integration]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
->
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

@@ -13,16 +13,15 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 06: 并发下载器](#实践项目-06-并发下载器)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
     - [多线程下载](#多线程下载)
     - [异步下载](#异步下载)
   - [参考实现](#参考实现)
-  - 完整参考实现位于: `examples/concurrent-downloader/`
+  - [完整参考实现位于: `examples/concurrent-downloader/`](#完整参考实现位于-examplesconcurrent-downloader)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 项目目标
@@ -133,38 +132,3 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 > **[来源: ACM - Concurrent Programming]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

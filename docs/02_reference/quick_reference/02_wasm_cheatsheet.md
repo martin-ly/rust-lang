@@ -12,48 +12,47 @@
 >
 > **[来源: Rust Official Docs]**
 
-- WASM 快速参考卡片
-  - [📋 目录 {#-目录}](#目录)
-  - [🚀 快速开始 {#-快速开始}](#快速开始)
+- [WASM 快速参考卡片](#wasm-快速参考卡片)
+  - [📋 目录 {#-目录}](#-目录--目录)
+  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
     - [基本设置](#基本设置)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
     - [基本函数](#基本函数)
-  - [📋 常用 API {#-常用-api}](#常用-api)
+  - [📋 常用 API {#-常用-api}](#-常用-api--常用-api)
     - [JavaScript 互操作](#javascript-互操作)
     - [处理对象](#处理对象)
     - [异步函数](#异步函数)
-  - [🔧 编译配置 {#-编译配置}](#编译配置)
+  - [🔧 编译配置 {#-编译配置}](#-编译配置--编译配置)
     - [Cargo.toml](#cargotoml)
     - [编译命令](#编译命令)
-  - [🌐 在浏览器中使用 {#-在浏览器中使用}](#在浏览器中使用)
-  - [⚡ 性能优化 {#-性能优化}](#性能优化)
+  - [🌐 在浏览器中使用 {#-在浏览器中使用}](#-在浏览器中使用--在浏览器中使用)
+  - [⚡ 性能优化 {#-性能优化}](#-性能优化--性能优化)
     - [减小二进制大小](#减小二进制大小)
     - [使用 wasm-opt](#使用-wasm-opt)
-  - [🚫 反例速查 {#-反例速查}](#反例速查)
+  - [🚫 反例速查 {#-反例速查}](#-反例速查--反例速查)
     - [反例 1: 在 wasm 中使用阻塞 API](#反例-1-在-wasm-中使用阻塞-api)
     - [反例 2: 忽略 JS 边界开销](#反例-2-忽略-js-边界开销)
-  - [📚 相关文档 {#-相关文档}](#相关文档)
-  - [🧩 相关示例代码 {#-相关示例代码}](#相关示例代码)
-  - [📚 相关资源 {#-相关资源}](#相关资源)
+  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
+  - [🧩 相关示例代码 {#-相关示例代码}](#-相关示例代码--相关示例代码)
+  - [📚 相关资源 {#-相关资源}](#-相关资源--相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
-  - [🎯 使用场景 {#-使用场景}](#使用场景)
+  - [🎯 使用场景 {#-使用场景}](#-使用场景--使用场景)
     - [场景 1: 浏览器图像处理器](#场景-1-浏览器图像处理器)
     - [场景 2: 实时数据可视化](#场景-2-实时数据可视化)
     - [场景 3: Web Worker 计算密集型任务](#场景-3-web-worker-计算密集型任务)
-  - [📐 形式化方法链接 {#-形式化方法链接}](#形式化方法链接)
+  - [📐 形式化方法链接 {#-形式化方法链接}](#-形式化方法链接--形式化方法链接)
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
   - [Rust 1.95+ 在WASM中的深度应用](#rust-195-在wasm中的深度应用)
     - [array\_windows 在 WASM 图像处理中的应用](#array_windows-在-wasm-图像处理中的应用)
     - [LazyLock 在 WASM 状态管理中的应用](#lazylock-在-wasm-状态管理中的应用)
     - [性能提升总结](#性能提升总结)
-  - **状态**: ✅ 深度整合完成
+  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -82,48 +81,47 @@ wasm-pack new my-wasm-project
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- WASM 快速参考卡片
-  - [📋 目录 {#-目录}](#目录)
-  - [🚀 快速开始 {#-快速开始}](#快速开始)
+- [WASM 快速参考卡片](#wasm-快速参考卡片)
+  - [📋 目录 {#-目录}](#-目录--目录)
+  - [🚀 快速开始 {#-快速开始}](#-快速开始--快速开始)
     - [基本设置](#基本设置)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
     - [基本函数](#基本函数)
-  - [📋 常用 API {#-常用-api}](#常用-api)
+  - [📋 常用 API {#-常用-api}](#-常用-api--常用-api)
     - [JavaScript 互操作](#javascript-互操作)
     - [处理对象](#处理对象)
     - [异步函数](#异步函数)
-  - [🔧 编译配置 {#-编译配置}](#编译配置)
+  - [🔧 编译配置 {#-编译配置}](#-编译配置--编译配置)
     - [Cargo.toml](#cargotoml)
     - [编译命令](#编译命令)
-  - [🌐 在浏览器中使用 {#-在浏览器中使用}](#在浏览器中使用)
-  - [⚡ 性能优化 {#-性能优化}](#性能优化)
+  - [🌐 在浏览器中使用 {#-在浏览器中使用}](#-在浏览器中使用--在浏览器中使用)
+  - [⚡ 性能优化 {#-性能优化}](#-性能优化--性能优化)
     - [减小二进制大小](#减小二进制大小)
     - [使用 wasm-opt](#使用-wasm-opt)
-  - [🚫 反例速查 {#-反例速查}](#反例速查)
+  - [🚫 反例速查 {#-反例速查}](#-反例速查--反例速查)
     - [反例 1: 在 wasm 中使用阻塞 API](#反例-1-在-wasm-中使用阻塞-api)
     - [反例 2: 忽略 JS 边界开销](#反例-2-忽略-js-边界开销)
-  - [📚 相关文档 {#-相关文档}](#相关文档)
-  - [🧩 相关示例代码 {#-相关示例代码}](#相关示例代码)
-  - [📚 相关资源 {#-相关资源}](#相关资源)
+  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
+  - [🧩 相关示例代码 {#-相关示例代码}](#-相关示例代码--相关示例代码)
+  - [📚 相关资源 {#-相关资源}](#-相关资源--相关资源)
     - [官方文档](#官方文档)
     - [项目内部文档](#项目内部文档)
-  - [🎯 使用场景 {#-使用场景}](#使用场景)
+  - [🎯 使用场景 {#-使用场景}](#-使用场景--使用场景)
     - [场景 1: 浏览器图像处理器](#场景-1-浏览器图像处理器)
     - [场景 2: 实时数据可视化](#场景-2-实时数据可视化)
     - [场景 3: Web Worker 计算密集型任务](#场景-3-web-worker-计算密集型任务)
-  - [📐 形式化方法链接 {#-形式化方法链接}](#形式化方法链接)
+  - [📐 形式化方法链接 {#-形式化方法链接}](#-形式化方法链接--形式化方法链接)
     - [理论基础](#理论基础)
     - [形式化定理](#形式化定理)
     - [相关速查卡](#相关速查卡)
-  - [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
+  - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
   - [Rust 1.95+ 在WASM中的深度应用](#rust-195-在wasm中的深度应用)
     - [array\_windows 在 WASM 图像处理中的应用](#array_windows-在-wasm-图像处理中的应用)
     - [LazyLock 在 WASM 状态管理中的应用](#lazylock-在-wasm-状态管理中的应用)
     - [性能提升总结](#性能提升总结)
-  - **状态**: ✅ 深度整合完成
+  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ### 基本函数
@@ -719,144 +717,3 @@ pub fn get_state() -> String {
 > **[来源: Rustonomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [WebAssembly Documentation](https://webassembly.org/)]**
->
-> **[来源: [Wasmtime](https://wasmtime.dev/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

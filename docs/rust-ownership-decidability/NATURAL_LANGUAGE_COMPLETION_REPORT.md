@@ -13,13 +13,13 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [自然语言论证文档完成报告](#自然语言论证文档完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [完成情况概览](#完成情况概览)
     - [新增自然语言文档（10个）](#新增自然语言文档10个)
   - [文档内容详解](#文档内容详解)
     - [1. OVERVIEW\_AND\_INTUITION.md（总览与直观理解）](#1-overview_and_intuitionmd总览与直观理解)
     - [2. THEOREM\_INTUITIONS.md（定理的直观解释）](#2-theorem_intuitionsmd定理的直观解释)
-    - 3. PROOF\_STRATEGIES.md（证明策略详解）
+    - [3. 10\_proof\_strategies.md（证明策略详解）](#3-10_proof_strategiesmd证明策略详解)
     - [4. CONCEPT\_MAP.md（概念映射）](#4-concept_mapmd概念映射)
     - [5. READING\_GUIDE.md（阅读指南）](#5-reading_guidemd阅读指南)
     - [6. NATURAL\_LANGUAGE\_ARGUMENTATION\_INDEX.md（文档总览）](#6-natural_language_argumentation_indexmd文档总览)
@@ -47,9 +47,10 @@
     - [完成的工作](#完成的工作)
     - [核心成就](#核心成就)
     - [最终状态](#最终状态)
-  - *状态: 完成 ✅*
+  - [*状态: 完成 ✅*](#状态-完成-)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 完成情况概览
 >

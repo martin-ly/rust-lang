@@ -13,15 +13,14 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 12: WebAssembly应用](#实践项目-12-webassembly应用)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
     - [WASM绑定](#wasm绑定)
   - [参考实现](#参考实现)
-  - 完整参考实现位于: `examples/wasm-app/`
+  - [完整参考实现位于: `examples/wasm-app/`](#完整参考实现位于-exampleswasm-app)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 项目目标
@@ -114,16 +113,3 @@ extern "C" {
 > **[来源: Rustonomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [WebAssembly Documentation](https://webassembly.org/)]**
->
-> **[来源: [Wasmtime](https://wasmtime.dev/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->

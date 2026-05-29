@@ -17,7 +17,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cargo Script 单文件脚本指南](#cargo-script-单文件脚本指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 什么是 Cargo Script？](#1-什么是-cargo-script)
     - [1.1 为什么需要它？](#11-为什么需要它)
     - [1.2 适用场景](#12-适用场景)
@@ -37,14 +37,19 @@
     - [4.4 工作区依赖](#44-工作区依赖)
   - [5. 实际示例](#5-实际示例)
     - [示例 1: JSON 数据处理](#示例-1-json-数据处理)
-- [\[derive(Debug, Serialize, Deserialize)\]](#derivedebug-serialize-deserialize)
-- [Unix/Linux](#unixlinux)
-- [Windows](#windows)
+    - [示例 2: HTTP 请求](#示例-2-http-请求)
+    - [示例 3: 本项目的演示文件](#示例-3-本项目的演示文件)
+  - [6. 注意事项与限制](#6-注意事项与限制)
+    - [6.1 当前限制](#61-当前限制)
+    - [6.2 缓存](#62-缓存)
+    - [6.3 性能提示](#63-性能提示)
+  - [7. 调试与测试](#7-调试与测试)
+    - [7.1 运行测试](#71-运行测试)
     - [7.2 调试输出](#72-调试输出)
   - [8. 参考文献](#8-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 什么是 Cargo Script？
 >
@@ -282,24 +287,22 @@ common = { path = "../../crates/common" }
 ---
 
 ## 5. 实际示例
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 示例 1: JSON 数据处理
->
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
-#!/usr/bin/env cargo
-```cargo
-[dependencies]
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-```
+    #!/usr/bin/env cargo
+    ```cargo
+    [dependencies]
+    serde = { version = "1", features = ["derive"] }
+    serde_json = "1"
+    ```
 
 use serde::{Deserialize, Serialize};
 
-# [derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 
 struct User {
     name: String,
@@ -315,14 +318,15 @@ fn main() {
 ```
 
 ### 示例 2: HTTP 请求
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
-#!/usr/bin/env cargo
-```cargo
-[dependencies]
-reqwest = { version = "0.11", features = ["blocking"] }
-```
+    #!/usr/bin/env cargo
+    ```cargo
+    [dependencies]
+    reqwest = { version = "0.11", features = ["blocking"] }
+    ```
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let body = reqwest::blocking::get("<https://api.github.com/users/rust-lang>")?
@@ -334,6 +338,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 示例 3: 本项目的演示文件
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 参见项目根目录: `examples/cargo_script_demo.rs`
@@ -341,9 +346,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ## 6. 注意事项与限制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 当前限制
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 限制 | 说明 |  workaround |
@@ -354,6 +361,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 | 过程宏 | 可作为依赖使用 | 正常使用 |
 
 ### 6.2 缓存
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Cargo Script 会自动缓存编译结果。缓存位置：
@@ -371,6 +379,7 @@ Cargo Script 会自动缓存编译结果。缓存位置：
 ```
 
 ### 6.3 性能提示
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 第一次运行会下载依赖并编译，耗时较长
@@ -380,9 +389,11 @@ Cargo Script 会自动缓存编译结果。缓存位置：
 ---
 
 ## 7. 调试与测试
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 7.1 运行测试
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Cargo Script 文件中的 `#[cfg(test)]` 模块可以通过以下方式测试：

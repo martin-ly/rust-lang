@@ -9,14 +9,13 @@
 ## 📑 目录
 >
 - [跨模块实战项目指南](#跨模块实战项目指南)
-  - [📑 目录](#目录)
-  - [🚀 10 个渐进式项目](#10-个渐进式项目)
+  - [📑 目录](#-目录)
+  - [🚀 10 个渐进式项目](#-10-个渐进式项目)
     - [入门级](#入门级)
     - [进阶级](#进阶级)
     - [专家级](#专家级)
-  - **状态**: ✅ 可用
+  - [**状态**: ✅ 可用](#状态--可用)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 🚀 10 个渐进式项目
@@ -88,12 +87,3 @@
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->

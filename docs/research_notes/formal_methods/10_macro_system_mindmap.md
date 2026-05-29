@@ -10,10 +10,11 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [宏系统概念思维导图](#宏系统概念思维导图)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [宏系统全景](#宏系统全景)
   - [声明宏详解](#声明宏详解)
     - [基本结构](#基本结构)
@@ -37,14 +38,15 @@
   - [Token处理](#token处理)
   - [常见应用](#常见应用)
   - [与其他概念的关系](#与其他概念的关系)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 宏系统全景
 >
@@ -274,6 +276,7 @@ Pancakes::hello(); // Hello, Macro! My name is Pancakes
 ---
 
 ## 宏调试技巧
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 查看展开结果
@@ -308,9 +311,11 @@ fn main() {
 ---
 
 ## 宏设计原则
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### DO
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 保持简单，避免复杂递归
@@ -319,6 +324,7 @@ fn main() {
 - 文档化宏的用法
 
 ### DON'T
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 不要用宏隐藏控制流
@@ -326,6 +332,7 @@ fn main() {
 - 不要依赖未文档化的行为
 
 ## 宏系统层次
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
@@ -345,6 +352,7 @@ fn main() {
 ---
 
 ## 声明宏 (macro_rules!)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```
@@ -375,6 +383,7 @@ fn main() {
 ---
 
 ## 过程宏
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
@@ -393,6 +402,7 @@ fn main() {
 ---
 
 ## Token处理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
@@ -411,6 +421,7 @@ Token流程
 ---
 
 ## 常见应用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
@@ -431,6 +442,7 @@ Token流程
 ---
 
 ## 与其他概念的关系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -449,12 +461,14 @@ Token流程
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -500,6 +514,7 @@ Token流程
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [formal_methods 目录](./README.md)
@@ -645,4 +660,3 @@ Token流程
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

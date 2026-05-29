@@ -1,7 +1,6 @@
 # 教程：理解借用检查器
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-02-24
 > **最后更新**: 2026-02-28
 > **目标受众**: 初学者-进阶
@@ -73,7 +72,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)
@@ -822,10 +820,6 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
----
-
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

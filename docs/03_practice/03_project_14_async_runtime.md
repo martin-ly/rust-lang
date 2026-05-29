@@ -13,15 +13,14 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 14: 异步运行时原型](#实践项目-14-异步运行时原型)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
     - [自定义Future](#自定义future)
   - [参考实现](#参考实现)
-  - 完整参考实现位于: `examples/async-runtime/`
+  - [完整参考实现位于: `examples/async-runtime/`](#完整参考实现位于-examplesasync-runtime)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 项目目标
@@ -115,34 +114,3 @@ impl Future for MyFuture {
 > **[来源: RFC 2394 - Async/Await]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]**
->
-> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

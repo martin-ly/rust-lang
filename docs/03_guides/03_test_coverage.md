@@ -16,15 +16,15 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [代码覆盖率测试指南](#代码覆盖率测试指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 覆盖率工具选择](#1-覆盖率工具选择)
   - [2. cargo-tarpaulin 使用](#2-cargo-tarpaulin-使用)
     - [安装](#安装)
     - [基本使用](#基本使用)
     - [输出文件](#输出文件)
   - [3. cargo-llvm-cov 使用](#3-cargo-llvm-cov-使用)
-    - [安装](#安装)
-    - [基本使用](#基本使用)
+    - [安装](#安装-1)
+    - [基本使用](#基本使用-1)
   - [4. CI 集成](#4-ci-集成)
     - [与 Codecov 集成](#与-codecov-集成)
   - [5. 覆盖率目标](#5-覆盖率目标)
@@ -36,7 +36,6 @@
     - [Q: async 代码覆盖率不准确？](#q-async-代码覆盖率不准确)
   - [8. 参考资源](#8-参考资源)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 1. 覆盖率工具选择
@@ -310,66 +309,3 @@ A: 这是已知问题。尝试：
 > **[来源: Martin Fowler - Test Coverage]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Test Documentation](https://doc.rust-lang.org/rustc/tests/index.html)]**
->
-> **[来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

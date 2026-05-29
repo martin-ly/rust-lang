@@ -1,7 +1,6 @@
 # 定理 ↔ Rust 示例完整映射
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **创建日期**: 2026-03-08
 > **版本**: v1.0
 > **描述**: 所有核心定理与 Rust 代码示例的完整映射关系
@@ -51,7 +50,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -552,9 +550,8 @@ async fn theorem_cc1_compensation_consistency() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -589,10 +586,6 @@ async fn theorem_cc1_compensation_consistency() {
 
 ---
 
-**维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-14 (Rust 1.94 深度整合)
----
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
@@ -616,19 +609,12 @@ async fn theorem_cc1_compensation_consistency() {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**

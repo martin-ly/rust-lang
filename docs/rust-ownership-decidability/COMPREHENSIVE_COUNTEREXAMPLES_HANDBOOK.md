@@ -4,7 +4,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [📑 目录](#目录)
+- [📑 目录](#-目录)
 - [Part 2: Deep Dive Counter-Examples](#part-2-deep-dive-counter-examples)
   - [Extended Ownership Deep Dive](#extended-ownership-deep-dive)
     - [EDO.1 Understanding Move Semantics](#edo1-understanding-move-semantics)
@@ -42,9 +42,7 @@
 - [Final Summary](#final-summary)
   - [Key Takeaways](#key-takeaways)
   - [Resources](#resources)
-- // Extended content line 1200 for comprehensive Rust handbook
-- 相关概念
-- 权威来源索引
+- [相关文档](#相关文档)
 
 ---
 

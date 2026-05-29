@@ -12,11 +12,30 @@
 >
 > **[来源: Rust Official Docs]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rustonomicon]** · **[来源: Rust Project Goals 2026]**
 
-- [项目概述](#项目概述)
-- [架构总览](#架构总览)
-- [Crate 关系图](#crate-关系图)
-- [模块依赖图](#模块依赖图)
-- [数据流图](#数据流图)
+- [Rust 学习项目架构文档](#rust-学习项目架构文档)
+  - [目录](#目录)
+  - [项目概述](#项目概述)
+    - [设计原则](#设计原则)
+  - [架构总览](#架构总览)
+  - [Crate 关系图](#crate-关系图)
+    - [详细依赖关系](#详细依赖关系)
+    - [Crate 特性矩阵](#crate-特性矩阵)
+  - [模块依赖图](#模块依赖图)
+    - [内部模块结构](#内部模块结构)
+  - [数据流图](#数据流图)
+    - [学习路径数据流](#学习路径数据流)
+    - [运行时数据流（以异步模块为例）](#运行时数据流以异步模块为例)
+  - [架构决策记录](#架构决策记录)
+    - [ADR-001: Workspace 结构](#adr-001-workspace-结构)
+    - [ADR-002: Common Crate](#adr-002-common-crate)
+    - [ADR-003: 渐进式特性](#adr-003-渐进式特性)
+  - [技术栈](#技术栈)
+    - [核心运行时](#核心运行时)
+    - [序列化](#序列化)
+    - [网络](#网络)
+    - [日志与追踪](#日志与追踪)
+  - [参考资料](#参考资料)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -461,86 +480,3 @@ sequenceDiagram
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

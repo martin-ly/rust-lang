@@ -9,29 +9,28 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cargo 编译速度优化指南](#cargo-编译速度优化指南)
-  - [📑 目录](#目录)
-  - [🚀 快速开始](#快速开始)
+  - [📑 目录](#-目录)
+  - [🚀 快速开始](#-快速开始)
     - [1. 安装优化工具](#1-安装优化工具)
     - [2. 使用优化脚本编译](#2-使用优化脚本编译)
-  - [⚙️ 环境变量配置](#环境变量配置)
+  - [⚙️ 环境变量配置](#️-环境变量配置)
     - [Windows (PowerShell)](#windows-powershell)
     - [Linux/macOS (Bash/Zsh)](#linuxmacos-bashzsh)
-  - [📊 优化效果对比](#优化效果对比)
-  - [🔧 配置文件说明](#配置文件说明)
+  - [📊 优化效果对比](#-优化效果对比)
+  - [🔧 配置文件说明](#-配置文件说明)
     - [.cargo/config.toml](#cargoconfigtoml)
     - [Cargo.toml Profile 配置](#cargotoml-profile-配置)
-  - [🛠️ 推荐工具](#推荐工具)
-  - [📈 性能监控](#性能监控)
+  - [🛠️ 推荐工具](#️-推荐工具)
+  - [📈 性能监控](#-性能监控)
     - [查看编译时间](#查看编译时间)
     - [sccache 统计](#sccache-统计)
-  - [🧹 清理和重置](#清理和重置)
-  - [🔬 进阶优化](#进阶优化)
+  - [🧹 清理和重置](#-清理和重置)
+  - [🔬 进阶优化](#-进阶优化)
     - [使用 Nightly 工具链（可选）](#使用-nightly-工具链可选)
     - [内存优化（大型项目）](#内存优化大型项目)
-  - [⚠️ 注意事项](#注意事项)
-  - [📚 参考资源](#参考资源)
+  - [⚠️ 注意事项](#️-注意事项)
+  - [📚 参考资源](#-参考资源)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 🚀 快速开始
@@ -341,64 +340,3 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 > **[来源: crates.io Documentation]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

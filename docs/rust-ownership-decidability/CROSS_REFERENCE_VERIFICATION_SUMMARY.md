@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cross-Reference Verification Summary](#cross-reference-verification-summary)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Work Completed](#work-completed)
     - [1. Link Verification](#1-link-verification)
     - [2. Files Fixed (14 files)](#2-files-fixed-14-files)
@@ -35,9 +35,10 @@
     - [File Distribution](#file-distribution)
   - [Verification Tool](#verification-tool)
   - [Conclusion](#conclusion)
-  - *Completed: 2026-03-06*
+  - [*Completed: 2026-03-06*](#completed-2026-03-06)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Work Completed
 >

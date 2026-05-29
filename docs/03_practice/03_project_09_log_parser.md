@@ -13,15 +13,14 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 09: 日志分析器](#实践项目-09-日志分析器)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
     - [流式处理](#流式处理)
   - [参考实现](#参考实现)
-  - 完整参考实现位于: `examples/log-parser/`
+  - [完整参考实现位于: `examples/log-parser/`](#完整参考实现位于-exampleslog-parser)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 项目目标
@@ -117,20 +116,3 @@ fn process_log_file(path: &str) -> std::io::Result<()> {
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.95.0 特性与 API 速查表](#rust-1950-特性与-api-速查表)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、语言特性](#一语言特性)
     - [1. `cfg_select!` 宏](#1-cfg_select-宏)
     - [2. `if let` guards on match arms](#2-if-let-guards-on-match-arms)
@@ -29,14 +29,14 @@
     - [`MaybeUninit` 数组互转](#maybeuninit-数组互转)
     - [`Cell` 数组引用](#cell-数组引用)
   - [三、编译器与平台](#三编译器与平台)
-    - [`--remap-path-scope` 稳定化](#remap-path-scope-稳定化)
+    - [`--remap-path-scope` 稳定化](#--remap-path-scope-稳定化)
     - [平台支持提升](#平台支持提升)
     - [重要兼容性变更](#重要兼容性变更)
   - [四、Const 上下文新稳定 API](#四const-上下文新稳定-api)
   - [五、与 Rust 2024 Edition 的关联](#五与-rust-2024-edition-的关联)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 一、语言特性
 >

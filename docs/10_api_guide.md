@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [API 使用指南](#api-使用指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [快速开始](#快速开始)
     - [添加依赖](#添加依赖)
     - [基本使用](#基本使用)
@@ -29,7 +29,6 @@
     - [并发控制](#并发控制)
   - [参考文档](#参考文档)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 快速开始
@@ -227,30 +226,3 @@ let data = Arc::new(Mutex::new(Vec::new()));
 > **[来源: Rustonomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**

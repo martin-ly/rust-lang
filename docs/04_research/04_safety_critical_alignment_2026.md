@@ -11,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Safety-Critical Rust 官方路线对齐（2026）](#safety-critical-rust-官方路线对齐2026)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、Safety-Critical Rust 生态全景](#一safety-critical-rust-生态全景)
   - [二、官方路线时间线](#二官方路线时间线)
   - [三、FLS (Ferrocene Language Specification) 与项目映射](#三fls-ferrocene-language-specification-与项目映射)
@@ -30,7 +30,6 @@
   - [八、行动清单](#八行动清单)
   - [思维导图：Safety-Critical Rust 生态](#思维导图safety-critical-rust-生态)
   - [决策树：安全关键项目合规路径](#决策树安全关键项目合规路径)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 > **文档定位**: 对齐 Rust 官方 Safety-Critical 路线与项目知识体系
@@ -356,79 +355,3 @@ graph TD
 > **[来源: Ferrocene 26.02.0 Release Notes](https://ferrocene.dev/)** — ISO 26262 ASIL B + IEC 61508 SIL 2 core 子集认证 [来源: Authority Source Sprint Batch 9]
 
 ---
-
-## 权威来源索引
-
-> **[来源: [ISO 26262](https://www.iso.org/standard/68383.html)]**
->
-> **[来源: [IEC 61508](https://www.iec.ch/functionalsafety)]**
->
-> **[来源: [MISRA Rust Guidelines](https://misra.org.uk/)]**
->
-> **[来源: [Ferrocene](https://ferrocene.dev/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [2026年国际权威对齐报告](#2026年国际权威对齐报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [执行摘要](#执行摘要)
   - [第一部分：学术权威对齐](#第一部分学术权威对齐)
     - [1.1 Tree Borrows - PLDI 2025 Distinguished Paper](#11-tree-borrows---pldi-2025-distinguished-paper)
@@ -22,37 +22,37 @@
     - [1.2 Miri: Practical UB Detection - POPL 2026](#12-miri-practical-ub-detection---popl-2026)
   - [相关概念文件](#相关概念文件)
     - [核心贡献](#核心贡献)
-    - [项目对齐状态](#项目对齐状态)
+    - [项目对齐状态](#项目对齐状态-1)
     - [1.3 其他关键学术成果](#13-其他关键学术成果)
   - [第二部分：官方权威对齐](#第二部分官方权威对齐)
     - [2.1 Rust 2024 Edition - 已稳定发布](#21-rust-2024-edition---已稳定发布)
       - [主要特性](#主要特性)
-      - [项目对齐状态](#项目对齐状态)
+      - [项目对齐状态](#项目对齐状态-2)
     - [2.2 Rust 1.95.0 - 即将发布](#22-rust-1950---即将发布)
       - [预期特性（开发中）](#预期特性开发中)
-      - [项目对齐状态](#项目对齐状态)
+      - [项目对齐状态](#项目对齐状态-3)
     - [2.3 Rust项目目标2026](#23-rust项目目标2026)
       - [旗舰主题（Flagship Themes）](#旗舰主题flagship-themes)
       - [其他2026目标](#其他2026目标)
-      - [项目对齐状态](#项目对齐状态)
+      - [项目对齐状态](#项目对齐状态-4)
   - [第三部分：行业权威对齐](#第三部分行业权威对齐)
     - [3.1 Linux内核 - Rust永久采用](#31-linux内核---rust永久采用)
       - [关键里程碑](#关键里程碑)
-      - [项目对齐状态](#项目对齐状态)
+      - [项目对齐状态](#项目对齐状态-5)
     - [3.2 企业采用状态（2026）](#32-企业采用状态2026)
       - [Microsoft](#microsoft)
       - [Google](#google)
       - [其他企业](#其他企业)
-      - [项目对齐状态](#项目对齐状态)
+      - [项目对齐状态](#项目对齐状态-6)
     - [3.3 Rust基金会2026-2028战略](#33-rust基金会2026-2028战略)
       - [五大战略领域](#五大战略领域)
-      - [项目对齐状态](#项目对齐状态)
+      - [项目对齐状态](#项目对齐状态-7)
   - [第四部分：安全与供应链](#第四部分安全与供应链)
     - [4.1 Crates.io供应链安全（2025-2026）](#41-cratesio供应链安全2025-2026)
       - [2025年安全事件](#2025年安全事件)
       - [应对措施](#应对措施)
       - [建议行动（来自官方）](#建议行动来自官方)
-      - [项目对齐状态](#项目对齐状态)
+      - [项目对齐状态](#项目对齐状态-8)
     - [4.2 CVE-2026-23194: Rust Binder驱动漏洞](#42-cve-2026-23194-rust-binder驱动漏洞)
       - [漏洞详情](#漏洞详情)
       - [修复](#修复)
@@ -60,10 +60,10 @@
   - [第五部分：技术趋势对齐](#第五部分技术趋势对齐)
     - [5.1 WebAssembly演进](#51-webassembly演进)
       - [WASI目标迁移](#wasi目标迁移)
-      - [项目对齐状态](#项目对齐状态)
+      - [项目对齐状态](#项目对齐状态-9)
     - [5.2 Windows ARM64支持](#52-windows-arm64支持)
       - [影响](#影响)
-      - [项目对齐状态](#项目对齐状态)
+      - [项目对齐状态](#项目对齐状态-10)
     - [5.3 异步生态系统整合](#53-异步生态系统整合)
       - [生态系统现状](#生态系统现状)
       - [新项目](#新项目)
@@ -83,16 +83,16 @@
     - [对齐总结](#对齐总结)
       - [已对齐内容](#已对齐内容)
       - [全面覆盖领域](#全面覆盖领域)
-    - [持续跟踪计划](#持续跟踪计划)
+    - [持续跟踪计划](#持续跟踪计划-1)
   - [附录：权威引用来源](#附录权威引用来源)
     - [学术论文引用](#学术论文引用)
     - [官方文档引用](#官方文档引用)
     - [行业来源引用](#行业来源引用)
     - [安全来源引用](#安全来源引用)
-  - \[^26\]: The Update Framework (TUF). "crates.io TUF Integration." Rust Foundation. 2026. https://foundation.rust-lang.org/security/
+  - [\[^26\]: The Update Framework (TUF). "crates.io TUF Integration." Rust Foundation. 2026. https://foundation.rust-lang.org/security/](#26-the-update-framework-tuf-cratesio-tuf-integration-rust-foundation-2026-httpsfoundationrust-langorgsecurity)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -834,7 +834,7 @@
 [^4]: HotHardware. "AMD Confirms Zen 6 CPUs Will Support AVX512 And These Other Instruction Sets." 2025-11-10. <https://hothardware.com/news/amd-confirms-zen6-avx512-fp16>
 
 ### 安全来源引用
->
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 [^23]: MITRE Corporation. "CVE-2025-68260 Detail." CVE Database. <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-68260>
@@ -848,12 +848,6 @@
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 

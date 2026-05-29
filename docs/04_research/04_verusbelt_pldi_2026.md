@@ -14,25 +14,24 @@
 > **[来源: Rust Official Docs]**
 
 - [VerusBelt (PLDI 2026) 研究笔记](#verusbelt-pldi-2026-研究笔记)
-  - [📋 目录](#目录)
-  - [🔍 背景：Verus 验证框架](#背景verus-验证框架)
-  - [📄 VerusBelt 论文概述](#verusbelt-论文概述)
-  - [🧠 核心贡献](#核心贡献)
+  - [📋 目录](#-目录)
+  - [🔍 背景：Verus 验证框架](#-背景verus-验证框架)
+  - [📄 VerusBelt 论文概述](#-verusbelt-论文概述)
+  - [🧠 核心贡献](#-核心贡献)
     - [1. 类型系统扩展的形式化](#1-类型系统扩展的形式化)
     - [2. 层叠语义 (Layered Semantics)](#2-层叠语义-layered-semantics)
     - [3. 擦除定理 (Erasure Theorem)](#3-擦除定理-erasure-theorem)
-  - [⚖️ 与相关工作的对比](#与相关工作的对比)
+  - [⚖️ 与相关工作的对比](#️-与相关工作的对比)
     - [VerusBelt vs RefinedRust](#verusbelt-vs-refinedrust)
     - [VerusBelt vs RustBelt](#verusbelt-vs-rustbelt)
     - [Verus 生态最新进展 (2025–2026)](#verus-生态最新进展-20252026)
-  - [🔧 对安全关键 Rust 的实践意义](#对安全关键-rust-的实践意义)
+  - [🔧 对安全关键 Rust 的实践意义](#-对安全关键-rust-的实践意义)
     - [1. 操作系统内核验证](#1-操作系统内核验证)
     - [2. 密码学实现验证](#2-密码学实现验证)
     - [3. 分布式系统协议](#3-分布式系统协议)
     - [4. 行业标准](#4-行业标准)
-  - [📖 引用信息](#引用信息)
+  - [📖 引用信息](#-引用信息)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -326,76 +325,3 @@ Design and Implementation (PLDI 2026).
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Verus Documentation](https://verus-lang.github.io/verus/)]**
->
-> **[来源: [Microsoft Verus Blog](https://www.microsoft.com/en-us/research/project/verus/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

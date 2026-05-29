@@ -25,7 +25,6 @@
     - [4.2 可判定性对Rust的意义](#42-可判定性对rust的意义)
   - [5. 参考文献](#5-参考文献)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
 
 ## 1. 可判定性定理
 >
@@ -194,22 +193,3 @@ Rust借用检查器的可判定性:
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
->
-> **[来源: [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)]**
->
-> **[来源: [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->

@@ -11,7 +11,7 @@
 ## 📑 目录
 >
 - [Rust 知识体系内容重构总体规划](#rust-知识体系内容重构总体规划)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、内容标准模板（Concept Document Standard Template）](#一内容标准模板concept-document-standard-template)
     - [模块 1: 概念定义（Concept Definition）](#模块-1-概念定义concept-definition)
     - [模块 2: 属性清单（Property Inventory）](#模块-2-属性清单property-inventory)
@@ -42,7 +42,7 @@
     - [交付 3: `unsafe_rust.md` 重构](#交付-3-unsafe_rustmd-重构)
   - [五、风险与应对](#五风险与应对)
   - [六、立即行动项（Next Steps）](#六立即行动项next-steps)
-  - **状态**: 待确认
+  - [**状态**: 待确认](#状态-待确认)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
