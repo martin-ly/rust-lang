@@ -627,6 +627,7 @@ pulldown-cmark = "0.13.4"
 # ordered-float: 存在多版本 (4.6.0 用于 sea-query, 5.3.0 用于 wgpu-hal)
 #       暂时不强制统一，等待 sea-query 升级支持 5.x
 # windows-sys: 存在多版本 (0.36.1, 0.45.0, 0.48.0, 0.52.0, 0.59.0, 0.60.2, 0.61.2)
+#       2026-05-29: cargo update 后新增 0.60.2/0.61.2，windows-targets 新增 0.53.5
 #       Windows 生态传递依赖普遍锁定不同版本，暂无法统一
 
 # 依赖版本约束 - 在工作区依赖中统一版本 end
@@ -663,19 +664,34 @@ const-hex = "=1.18.1"
 # - generic-array 0.14.7 -> 0.14.9: crypto-common 0.1.7 精确锁定 =0.14.7，无法升级
 # - hecs 0.10.5 -> 0.11.0: minor 版本升级，需评估 ECS API 兼容性
 # - hickory-resolver 0.25.2 -> 0.26.1: 已升级至 0.26.1，c10_networks DNS 模块已适配
+#       注意: libp2p 0.56.0 内部仍传递依赖 hickory-proto/resolver 0.25.2，无法通过 [patch.crates-io] 修复（同 registry 不能 patch 版本）
 # - io-uring 0.6.4 -> 0.7.12: tokio-uring 0.5.0 锁定 io-uring ^0.6.0，无法升级
 # - libp2p 0.54.1 -> 0.56.0: 已升级至 0.56.0，hickory-resolver 已同步升级至 0.26.1
 # - matchit 0.8.4 -> 0.8.6: axum 0.8.9 精确锁定 =0.8.4，无法升级
 # - opentelemetry 0.31.0 -> 0.32.0: 已升级，tracing-opentelemetry 0.33.0 支持 opentelemetry 0.32.x
 # - opentelemetry_sdk 0.32.0 -> 0.32.1: 已升级 (cargo update 2026-05-28)
 # - sea-orm 2.0.0-rc.18 -> 2.0.0 stable: 等待 SeaORM 2.0 正式版发布
-# - sea-query 1.0.0-rc.33 -> rc.34: 与 sea-orm 同步评估
+# - sea-query 1.0.0-rc.33 -> 1.0.0 stable: cargo update 2026-05-29 已自动升级
+# - sea-query-derive 1.0.0-rc.12 -> 1.0.0 stable: cargo update 2026-05-29 已自动升级
 # - sea-query-sqlx 0.8.0-rc.15 -> rc.16: 与 sea-orm 同步评估
 # - tracing-opentelemetry 0.32.1 -> 0.33.0: 已升级至 0.33.0
 # - unicode-width 0.2.0 -> 0.2.2: 已升级，传递依赖兼容性问题已解决
 # - burn / burn-ndarray: 保持禁用，等待版本兼容问题解决
 # - backoff 0.4.0 (c06_async): 已标记为 unmaintained (RUSTSEC-2025-0012)，建议替换为 backon 或 tokio-retry
 # - rustls feature "ring": 0.23.40 中 ring 特性已废弃，未来版本将移除，需迁移到 aws-lc-rs 或默认后端
+# - paste 1.0.15: 已标记为 unmaintained (RUSTSEC-2024-0436)，但为 tokenizers/pulp/netlink-packet-core 等深层传递依赖，暂无法移除
+# - atomic-polyfill 1.0.3: 已标记为 unmaintained (RUSTSEC-2023-0089)，postcard -> heapless 传递依赖，需等上游升级
+# - bare-metal 0.2.5: 已标记为 unmaintained (RUSTSEC-2026-0110)，cortex-m 0.7.7 传递依赖，嵌入式生态暂无法替换
+# - instant 0.1.13: 已标记为 unmaintained (RUSTSEC-2024-0384)，glommio -> futures-lite -> fastrand 传递依赖
+
+# 安全补丁 - 通过 [patch.crates-io] 强制替换有漏洞的传递依赖
+# 注意: 以下补丁覆盖 libp2p 内部传递依赖，消除 Cargo.lock 中旧版本残留
+# 2026-05-29: hickory-proto/resolver 0.25.2 的 RUSTSEC-2026-0118/0119 无法通过 [patch] 修复
+#       原因: [patch.crates-io] 不能指向同一 registry 的不同版本，需 libp2p >0.56.0 升级内部依赖
+#       当前缓解: c10_networks 默认 feature 不启用 libp2p，0.25.2 不在编译路径中
+#       状态: 等待 libp2p 新版本释放后升级
+# [patch.crates-io]
+# hickory-proto = { git = "..." }  # 如需 patch，必须使用不同源（git/local）
 
 [workspace.lints.rust]
 unsafe_code = "forbid"
