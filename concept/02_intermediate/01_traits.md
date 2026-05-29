@@ -240,6 +240,24 @@ Trait 作为逻辑命题:
 | 外部 A 类型 + 外部 B Trait | `crate_a` | `crate_b` | ❌ | 双方均非本地（孤儿） |
 
 > **[来源: RFC 1023 §3; Rust Reference: Orphan Rules]** Orphan Rule 要求 impl 中至少有一方（类型或 Trait）定义在当前 crate，防止跨 crate 的 impl 冲突，是 Coherence 的工程基础。
+>
+> #### Coherence Domain（前沿概念）
+>
+> Rust 2026 Project Goals 中提出 **Coherence Domain** 概念，用于解决 Rust for Linux 等场景的需求：
+> 在严格 orphan rule 下，将 `kernel` crate 拆分为多个子 crate 时，
+> 子 crate 之间无法为彼此的类型实现 trait（因为类型和 trait 都来自"外部"）。
+>
+> **Coherence Domain** 提案允许声明一组 crate 构成一个"一致性域"，
+> 域内的 crate 可以相互实现 impl，如同它们属于同一个 crate：
+>
+> ```rust,ignore
+> // 概念性语法（尚未稳定）
+> #![coherence_domain("kernel")]
+> ```
+>
+> 这与 C++ 的 namespace 或 Java 的 package 有本质不同：
+> coherence domain 不改变类型路径或可见性，仅放宽 orphan rule 的判定边界。
+
 > **过渡到思维导图**: 属性矩阵展示了 Trait 系统的静态分类，但未能表达概念间的动态关联。
 > 思维导图通过拓扑结构揭示 Trait 从定义、约束到分发的完整概念网络，为后续定理推理链提供直观的概念地图。
 

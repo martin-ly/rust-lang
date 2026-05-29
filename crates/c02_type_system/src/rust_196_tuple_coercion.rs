@@ -13,7 +13,7 @@
 // use std::any::Any;
 // use std::sync::Arc;
 
-/// Rust 1.96 `if let` guards 在类型系统中的应用
+/// Rust 1.95 `if let` guards 在类型系统中的应用
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// 减少嵌套层级，使代码更扁平、更易读。

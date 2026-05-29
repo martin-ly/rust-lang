@@ -1,0 +1,213 @@
+# Arbitrary Self Types 预览：自定义方法接收器
+
+> **Bloom 层级**: L4 (分析)
+> **A/S/P 标记**: **S** — Structure
+> **定位**: 探讨 Rust 中 arbitrary self types 的提案——允许 `self` 参数使用任意类型（不仅是 `Self`、`&Self`、`&mut Self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<P<Self>>`），分析其对嵌入式驱动、内核编程和自定义指针类型的影响。
+> **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Pin](../03_advanced/01_pin.md) · [Smart Pointers](../02_intermediate/04_smart_pointers.md)
+
+---
+
+## 📑 目录
+
+- [Arbitrary Self Types 预览：自定义方法接收器](#arbitrary-self-types-预览自定义方法接收器)
+  - [📑 目录](#-目录)
+  - [一、核心概念](#一核心概念)
+    - [1.1 当前限制](#11-当前限制)
+    - [1.2 Arbitrary Self Types 提案](#12-arbitrary-self-types-提案)
+  - [二、技术细节](#二技术细节)
+    - [2.1 `DispatchFromDyn` Trait](#21-dispatchfromdyn-trait)
+    - [2.2 与 `Deref` 的关系](#22-与-deref-的关系)
+  - [三、使用场景](#三使用场景)
+    - [场景 1：内核编程（Rust for Linux）](#场景-1内核编程rust-for-linux)
+    - [场景 2：嵌入式寄存器映射](#场景-2嵌入式寄存器映射)
+    - [场景 3：自定义智能指针](#场景-3自定义智能指针)
+  - [四、反命题与边界分析](#四反命题与边界分析)
+    - [4.1 安全边界](#41-安全边界)
+    - [4.2 设计决策](#42-设计决策)
+  - [五、演进路线](#五演进路线)
+  - [参考](#参考)
+
+## 一、核心概念
+
+### 1.1 当前限制
+
+在稳定 Rust 中，`self` 参数的类型受到严格限制：
+
+```rust
+impl MyType {
+    fn by_value(self) {}           // ✅ Self
+    fn by_ref(&self) {}            // ✅ &Self
+    fn by_mut(&mut self) {}        // ✅ &mut Self
+    fn by_box(self: Box<Self>) {}  // ✅ Box<Self>
+    fn by_rc(self: Rc<Self>) {}    // ✅ Rc<Self>
+    fn by_arc(self: Arc<Self>) {}  // ✅ Arc<Self>
+    fn by_pin(self: Pin<Box<Self>>) {} // ✅ Pin<P<Self>>
+
+    // ❌ 以下均不支持：
+    // fn by_ref_cell(self: RefCell<Self>) {}
+    // fn by_my_ptr(self: MyPtr<Self>) {}
+    // fn by_addr(self: *const Self) {}
+}
+```
+
+### 1.2 Arbitrary Self Types 提案
+
+Arbitrary self types 允许 `self` 使用**任何实现 `DispatchFromDyn` 或满足特定约束的类型**：
+
+```rust,ignore
+#![feature(arbitrary_self_types)]
+
+impl MyType {
+    // 使用自定义智能指针
+    fn by_my_ptr(self: MyPtr<Self>) {}
+
+    // 使用裸指针（内核编程常见）
+    fn by_raw(self: *const Self) {}
+
+    // 使用 RefCell
+    fn by_refcell(self: RefCell<Self>) {}
+}
+```
+
+---
+
+## 二、技术细节
+
+### 2.1 `DispatchFromDyn` Trait
+
+Arbitrary self types 的核心是 `DispatchFromDyn` trait，它告诉编译器如何在动态分发（`dyn Trait`）时解包 `self`：
+
+```rust,ignore
+#![feature(dispatch_from_dyn)]
+
+use std::ops::DispatchFromDyn;
+
+// 自定义指针类型
+struct KernelPtr<T: ?Sized>(*mut T);
+
+unsafe impl<T: ?Sized, U: ?Sized> DispatchFromDyn<KernelPtr<U>> for KernelPtr<T>
+where
+    T: Unsize<U>,
+{}
+```
+
+### 2.2 与 `Deref` 的关系
+
+```rust,ignore
+// 对于 &T、&mut T、Box<T> 等，编译器已知如何解引用
+// 对于自定义类型，需要实现 Deref：
+
+impl<T> Deref for KernelPtr<T> {
+    type Target = T;
+    fn deref(&self) -> &T {
+        unsafe { &*self.0 }
+    }
+}
+```
+
+---
+
+## 三、使用场景
+
+### 场景 1：内核编程（Rust for Linux）
+
+Linux 内核中的对象通常通过特定类型的指针引用：
+
+```rust,ignore
+struct Device {
+    ptr: *mut raw_device,
+}
+
+impl Device {
+    // 当前：需要显式传递指针
+    unsafe fn read(dev: *mut Device) -> u32 {
+        (*dev).ptr.read()
+    }
+
+    // arbitrary_self_types 后：
+    unsafe fn read(self: *mut Device) -> u32 {
+        self.ptr.read()
+    }
+}
+```
+
+### 场景 2：嵌入式寄存器映射
+
+```rust,ignore
+struct RegisterBlock {
+    base: *mut u32,
+}
+
+impl RegisterBlock {
+    fn read_status(self: *const Self) -> u32 {
+        unsafe { self.base.add(0).read_volatile() }
+    }
+
+    fn write_control(self: *mut Self, val: u32) {
+        unsafe { self.base.add(1).write_volatile(val) }
+    }
+}
+```
+
+### 场景 3：自定义智能指针
+
+```rust,ignore
+struct TaggedPtr<T> {
+    ptr: *mut T,
+    tag: u8,
+}
+
+impl<T> TaggedPtr<T> {
+    fn tag(self: TaggedPtr<T>) -> u8 {
+        self.tag
+    }
+
+    fn data(self: &TaggedPtr<T>) -> &T {
+        unsafe { &*self.ptr }
+    }
+}
+```
+
+---
+
+## 四、反命题与边界分析
+
+### 4.1 安全边界
+
+| 问题 | 分析 |
+|------|------|
+| `self: *const T` 安全吗？ | 方法体内仍需 `unsafe`，但调用语法更自然 |
+| 与 `Pin` 的交互 | `Pin<CustomPtr<T>>` 需要 `CustomPtr` 实现 `Unpin` 规则 |
+| 动态分发 | 必须通过 `DispatchFromDyn`，否则 `dyn Trait` 调用失败 |
+
+### 4.2 设计决策
+
+```text
+需要 arbitrary self types？
+├── 内核/嵌入式裸指针调用？ → 是，代码可读性大幅提升
+├── 自定义智能指针库？ → 是，API 更自然
+├── 普通应用代码？ → 否，现有 self 类型已足够
+└── 需要 dyn Trait 支持？ → 确认 DispatchFromDyn 实现
+```
+
+---
+
+## 五、演进路线
+
+| 阶段 | 状态 | 预计 |
+|------|------|------|
+| RFC 讨论 | 活跃中 | 2026 |
+| Nightly 实现 | 部分可用 | 已存在 |
+| 稳定化 | 未开始 | 2027+ |
+
+---
+
+## 参考
+
+> **[来源: Rust Project Goals 2026 — Rust for Linux]**
+> **[来源: Rust Internals — Arbitrary Self Types Discussion]**
+
+| 资源 | 链接 |
+|------|-----|
+| Tracking Issue | <https://github.com/rust-lang/rust/issues/44874> |
+| Rust for Linux 需求 | <https://rust-lang.github.io/rust-project-goals/2026/> |

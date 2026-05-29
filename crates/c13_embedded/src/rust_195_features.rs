@@ -3,6 +3,7 @@
 //! 本模块展示了 Rust 1.95.0 在嵌入式和系统编程方面的关键增强：
 //! - 裸指针 `as_ref_unchecked` / `as_mut_unchecked` ⭐
 //! - PowerPC 内联汇编稳定化
+//! - `asm_cfg` — 条件汇编 (Rust 1.95 stable) ⭐
 //! - `cfg_select!` 在嵌入式跨平台配置中的应用
 //!
 //! # 版本信息
@@ -266,7 +267,86 @@ impl PowerPcAsmExamples {
 }
 
 // ============================================================================
-// 3. cfg_select! 在嵌入式跨平台配置中的应用
+// 3. asm_cfg — 条件汇编 (Rust 1.95 stable)
+// ============================================================================
+
+/// # `asm_cfg` — 条件汇编
+///
+/// Rust 1.95.0 稳定了 `asm_cfg`，允许在 `asm!` 宏的**单个指令**上使用 `#[cfg]` 属性。
+/// 这使得编写跨平台内联汇编更加简洁，无需为每个平台维护完整的独立 `asm!` 块。
+///
+/// ## 语法
+/// ```ignore
+/// std::arch::asm!(
+///     "common_instruction",
+///     #[cfg(target_arch = "x86_64")]
+///     "x86_specific_instruction",
+///     #[cfg(target_arch = "aarch64")]
+///     "arm_specific_instruction",
+///     options(nomem, nostack),
+/// );
+/// ```
+///
+/// ## 对比：传统方式 vs asm_cfg
+///
+/// | 方式 | 代码重复度 | 可维护性 |
+/// |:-----|:-----------|:---------|
+/// | `#[cfg]` 包裹整个 `asm!` 块 | 高（每个平台写完整块） | 低 |
+/// | `asm_cfg`（指令级 `#[cfg]`） | 低（仅差异指令标记） | 高 |
+pub struct AsmCfgExamples;
+
+impl AsmCfgExamples {
+    /// 跨平台内存屏障：使用 `asm_cfg` 选择正确的屏障指令
+    ///
+    /// x86_64 使用 `mfence`，aarch64 使用 `dmb ish`，其他平台使用编译器屏障。
+    ///
+    /// # Safety
+    /// 此函数调用 `std::arch::asm!`，属于 unsafe 操作。调用者需确保：
+    /// 1. 在正确的上下文中使用内存屏障
+    /// 2. 不会导致数据竞争或死锁
+    #[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+    pub unsafe fn cross_platform_fence() {
+        unsafe {
+            std::arch::asm!(
+                #[cfg(target_arch = "x86_64")]
+                "mfence",
+                #[cfg(target_arch = "aarch64")]
+                "dmb ish",
+                options(nomem, nostack, preserves_flags),
+            );
+        }
+    }
+
+    /// Host 目标模拟（仅用于文档编译）
+    #[cfg(not(any(target_arch = "x86_64", target_arch = "aarch64")))]
+    pub unsafe fn cross_platform_fence() {
+        std::sync::atomic::fence(std::sync::atomic::Ordering::SeqCst);
+    }
+
+    /// 跨平台 `nop` + 可选调试断点
+    ///
+    /// x86_64 支持 `int3` 断点指令，aarch64 支持 `brk #0`，其他平台仅执行 `nop`。
+    ///
+    /// # Safety
+    /// 此函数调用 `std::arch::asm!`，属于 unsafe 操作。调用者需确保：
+    /// 1. 断点指令不会破坏程序状态
+    /// 2. 仅在调试环境中使用断点
+    #[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
+    pub unsafe fn nop_with_optional_breakpoint(_enable_breakpoint: bool) {
+        unsafe {
+            std::arch::asm!("nop", options(nomem, nostack, preserves_flags),);
+        }
+    }
+
+    /// Host 目标模拟
+    #[cfg(not(any(target_arch = "x86_64", target_arch = "aarch64")))]
+    pub unsafe fn nop_with_optional_breakpoint(_enable_breakpoint: bool) {
+        // 在 host 目标上无操作
+    }
+}
+
+// ============================================================================
+// 4. cfg_select! 在嵌入式跨平台配置中的应用
 // ============================================================================
 
 /// # `cfg_select!` 嵌入式跨平台抽象

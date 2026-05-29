@@ -97,7 +97,7 @@ impl GenBlockExercises {
 
 /// # `const VecDeque` 练习
 ///
-/// Rust 1.96+ 使 `VecDeque::new` 可在 const 上下文中使用，
+/// `VecDeque::new` 在 Rust 1.68+ 即可在 const 上下文中使用，
 /// 允许编译期初始化双端队列。
 pub struct ConstVecDequeExercises;
 
@@ -149,7 +149,7 @@ impl<T, const N: usize> ConstVecDequeRingBuffer<T, N> {
 
 /// # `bool` 到浮点数转换练习
 ///
-/// Rust 1.96+ 稳定了 `From<bool> for f32` 和 `From<bool> for f64`，
+/// `From<bool> for f32` 和 `From<bool> for f64` 在 Rust 1.68+ 已稳定，
 /// 允许将 `true` 转为 `1.0`，`false` 转为 `0.0`。
 pub struct BoolToFloatExercises;
 

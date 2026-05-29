@@ -643,7 +643,65 @@ mod tests {
 // Real Rust 1.95 Features — Type System, Pattern Matching
 // ============================================================================
 
+use std::num::Saturating;
 use std::ops::ControlFlow;
+
+// ============================================================================
+// Saturating 类型 — 饱和算术 (Rust 1.95 stable)
+// ============================================================================
+
+/// # `Saturating<T>` 类型
+///
+/// Rust 1.95.0 稳定了 `std::num::Saturating<T>`，提供**饱和算术**语义：
+/// 溢出时不 panic，也不回绕 (wrap)，而是「饱和」到类型的最大值或最小值。
+///
+/// ## 对比
+///
+/// | 运算方式 | 溢出行为 | 适用场景 |
+/// |:---------|:---------|:---------|
+/// | 普通 `+` | Debug panic / Release wrap | 绝大多数场景 |
+/// | `saturating_add` | 饱和到边界 | 信号处理、颜色值、音频采样 |
+/// | `wrapping_add` | 回绕 | 哈希、密码学、位运算 |
+/// | `Saturating<T> + Saturating<T>` | 饱和（运算符重载） | 需要全程饱和的算法 |
+///
+/// ## 设计动机
+/// - **信号处理**: 音频采样值溢出时不应回绕（会产生爆音）
+/// - **图形学**: RGB 颜色值溢出时应保持 255，不应回到 0
+/// - **控制系统**: PID 控制器积分项不应因溢出而跳变
+pub struct SaturatingTypeExamples;
+
+impl SaturatingTypeExamples {
+    /// 基础示例：饱和加法 vs 普通加法
+    pub fn basic_saturating() {
+        let a = Saturating(250_u8);
+        let b = Saturating(20_u8);
+        let sum = a + b; // 饱和到 255，不溢出
+        assert_eq!(sum.0, 255);
+
+        let c = Saturating(10_u8);
+        let d = Saturating(20_u8);
+        let normal_sum = c + d; // 正常加法
+        assert_eq!(normal_sum.0, 30);
+    }
+
+    /// 音频采样混合：饱和加法防止爆音
+    pub fn audio_sample_mix(a: i16, b: i16) -> i16 {
+        let mixed = Saturating(a) + Saturating(b);
+        mixed.0
+    }
+
+    /// 颜色值混合：RGB 通道饱和
+    pub fn color_blend(c1: u8, c2: u8) -> u8 {
+        (Saturating(c1) + Saturating(c2)).0
+    }
+
+    /// 乘法饱和：增益控制
+    pub fn apply_gain(sample: u8, gain: u8) -> u8 {
+        let s = Saturating(sample);
+        let g = Saturating(gain);
+        (s * g).0
+    }
+}
 
 /// Demonstrates real Rust 1.95 features related to type system and pattern matching.
 pub struct RealRust195Features;
@@ -709,5 +767,15 @@ mod real_rust_195_tests {
     fn test_control_flow_map_demo() {
         let result = RealRust195Features::control_flow_map_demo();
         assert!(matches!(result, ControlFlow::Break(42)));
+    }
+
+    #[test]
+    fn test_saturating_basic() {
+        SaturatingTypeExamples::basic_saturating();
+        assert_eq!(
+            SaturatingTypeExamples::audio_sample_mix(30000, 10000),
+            32767_i16
+        );
+        assert_eq!(SaturatingTypeExamples::color_blend(250, 20), 255_u8);
     }
 }

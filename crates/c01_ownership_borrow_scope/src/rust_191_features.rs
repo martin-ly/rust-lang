@@ -14,12 +14,12 @@
 // 1. C 风格变参函数声明稳定
 // ============================================================================
 
-/// # C 风格变参函数（C Variadic Functions）
+/// # C 风格变参函数声明（C Variadic Functions）
 ///
-/// Rust 1.91.0 稳定了 C 风格变参函数的声明，允许 Rust 函数接受可变数量的参数，
+/// Rust 1.95.0 稳定了 C 风格变参函数的**声明语法**，允许 Rust 函数接受可变数量的参数，
 /// 使用 C ABI 与 C 的 `...` 语法兼容。
 ///
-/// ## 声明方式
+/// ## 声明方式（1.95+ stable）
 /// ```ignore
 /// unsafe extern "C" fn printf(fmt: *const c_char, ...) { }
 /// ```
@@ -34,27 +34,31 @@
 /// - 必须使用 `unsafe`（因为编译器无法验证变参类型安全）
 /// - 变参访问需通过 `core::ffi::VaList`（或 `std` 中的等效类型）
 ///
-/// **注意**：截至 Rust 1.95.0 stable，`c_variadic` 特性尚未完全稳定。
-/// 以下代码需要 nightly 工具链才能编译。
+/// **注意**：`VaList` 的使用仍需 nightly。以下声明语法在 stable 1.95+ 可用，
+/// 但变参体（`args.clone()`、`ap.arg::<T>()`）需要 nightly。
 ///
 /// ```ignore
 /// use std::ffi::{c_char, c_int, VaList};
 ///
+/// // 声明部分：1.95+ stable
 /// unsafe extern "C" fn rust_printf(fmt: *const c_char, mut args: ...) -> c_int {
+///     // 变参访问：仍需 nightly
 ///     let mut ap: VaList = args.clone();
 ///     let _ = ap.arg::<c_int>();
 ///     0
 /// }
 /// ```
 pub fn c_variadic_doc_placeholder() -> &'static str {
-    "c_variadic requires nightly Rust; see documentation above"
+    "C variadic function declaration syntax is stable since Rust 1.95.0; VaList usage requires \
+     nightly"
 }
 
 #[test]
 fn test_c_variadic_placeholder() {
     assert_eq!(
         c_variadic_doc_placeholder(),
-        "c_variadic requires nightly Rust; see documentation above"
+        "C variadic function declaration syntax is stable since Rust 1.95.0; VaList usage \
+         requires nightly"
     );
 }
 
