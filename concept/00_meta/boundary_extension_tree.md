@@ -167,7 +167,7 @@ pub fn safe_wrapper(data: &mut [u8]) {
 
 ### 2.5 L4: WASM 沙箱（🟡 能力安全）
 
-> **扩展条件**: `wasm32-wasi` target、WASI 系统调用。
+> **扩展条件**: ``wasm32-wasip1` 或 `wasm32-wasip2`` target、WASI 系统调用。
 > **特征**: WASM 提供内存沙箱，但 WASI capability 模型进一步限制资源访问。 [来源: WASI Specification, Bytecode Alliance]
 
 | 能力 | 传统 WASM | WASI |

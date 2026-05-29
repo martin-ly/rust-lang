@@ -450,7 +450,7 @@ impl OrderProjection {
 
 ```rust
 // 事件存储的追加接口
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 trait EventStore {
     async fn append(&self, stream_id: &str, expected_version: i64, events: &[OrderEvent]) -> Result<i64, EventStoreError>;
     async fn read_stream(&self, stream_id: &str, from_version: i64) -> Result<Vec<RecordedEvent>, EventStoreError>;
@@ -928,7 +928,7 @@ pub struct OrderItem {
 ```rust
 use async_trait::async_trait;
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait CommandHandler<C: Command> {
     type Error;
     async fn handle(&self, command: C) -> Result<Vec<Box<dyn DomainEvent>>, Self::Error>;
@@ -953,7 +953,7 @@ pub struct PlaceOrderHandler<ES: EventStore> {
     event_store: ES,
 }
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 impl<ES: EventStore + Send + Sync> CommandHandler<PlaceOrderCommand> for PlaceOrderHandler<ES> {
     type Error = CommandError;
 
@@ -1011,7 +1011,7 @@ pub struct PostgresEventStore {
     pool: PgPool,
 }
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 impl EventStore for PostgresEventStore {
     async fn append(
         &self,

@@ -255,7 +255,7 @@
 use async_trait::async_trait;
 use uuid::Uuid;
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait OrderRepository: Send + Sync {
     async fn find_by_id(&self, id: Uuid) -> Option<Order>;
     async fn save(&self, order: &Order) -> Result<(), RepositoryError>;
@@ -333,7 +333,7 @@ Rust 实现: 通过 Cargo workspace 的依赖约束强制分层
 // 驱动端口（Driving Ports）—— 外部调用应用程序
 // 对应: Web API, CLI, 消息消费者
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait OrderService {
     async fn place_order(&self, cmd: PlaceOrderCommand) -> Result<Uuid, OrderError>;
     async fn get_order(&self, id: Uuid) -> Option<OrderDto>;
@@ -343,18 +343,18 @@ pub trait OrderService {
 // 被驱动端口（Driven Ports）—— 应用程序调用外部
 // 对应: 数据库、消息队列、外部 API
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait OrderRepository {
     async fn find_by_id(&self, id: Uuid) -> Option<Order>;
     async fn save(&self, order: &Order) -> Result<(), RepositoryError>;
 }
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait EventPublisher {
     async fn publish(&self, event: DomainEvent) -> Result<(), PublishError>;
 }
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait PaymentGateway {
     async fn charge(&self, amount: f64, currency: &str) -> Result<PaymentResult, PaymentError>;
 }
@@ -393,7 +393,7 @@ pub struct PostgresOrderRepository {
     pool: PgPool,
 }
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 impl OrderRepository for PostgresOrderRepository {
     async fn find_by_id(&self, id: Uuid) -> Option<Order> {
         sqlx::query_as::<_, OrderRow>("SELECT * FROM orders WHERE id = $1")
@@ -418,7 +418,7 @@ pub struct KafkaEventPublisher {
     topic: String,
 }
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 impl EventPublisher for KafkaEventPublisher {
     async fn publish(&self, event: DomainEvent) -> Result<(), PublishError> {
         let payload = serde_json::to_string(&event)?;
@@ -571,7 +571,7 @@ impl<R: OrderRepository, P: PaymentGateway> OrderApplicationService<R, P> {
 // src/infrastructure/repositories.rs
 pub struct PostgresOrderRepository { pool: PgPool }
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 impl OrderRepository for PostgresOrderRepository {
     async fn save(&self, order: &Order) -> Result<(), RepositoryError> {
         // PostgreSQL 具体实现...

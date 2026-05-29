@@ -910,14 +910,14 @@ pub struct WorkflowEngine {
     monitor: Arc<dyn WorkflowMonitor>,
 }
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait WorkflowExecutor: Send + Sync {
     async fn start(&self, definition_id: &str, input: Value) -> Result<WorkflowInstanceId>;
     async fn signal(&self, instance_id: WorkflowInstanceId, signal: Signal) -> Result<()>;
     async fn query_state(&self, instance_id: WorkflowInstanceId) -> Result<WorkflowState>;
 }
 
-#[async_trait]
+// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait WorkflowPersistence: Send + Sync {
     async fn save_event(&self, instance_id: WorkflowInstanceId, event: WorkflowEvent) -> Result<()>;
     async fn load_events(&self, instance_id: WorkflowInstanceId) -> Result<Vec<WorkflowEvent>>;

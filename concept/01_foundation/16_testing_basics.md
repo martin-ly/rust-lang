@@ -436,7 +436,7 @@ graph TD
 
 边界 2: 异步测试
 ├── 异步测试需要特殊运行时
-├── tokio::test, async-std::test
+├── tokio::test, Tokio（async-std 已于 2025-03 停止维护）::test
 ├── 阻塞 vs 非阻塞断言
 └── 缓解: 使用 async 测试宏
 

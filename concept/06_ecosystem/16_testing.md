@@ -341,7 +341,7 @@ graph TD
 ```text
 边界 1: 异步测试的复杂度
 ├── async fn 的测试需要运行时
-├── #[tokio::test] 或 async-std 测试属性
+├── #[tokio::test] 或 Tokio（async-std 已于 2025-03 停止维护） 测试属性
 ├── 模拟时间（tokio::time::pause）增加复杂度
 └── 异步 mock 需要额外支持
 

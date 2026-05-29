@@ -7,7 +7,7 @@
 
 ---
 
-> **来源**: [Tokio Documentation](https://tokio.rs/) · [Tokio API Docs](https://docs.rs/tokio/latest/tokio/) · [Tokio TCP](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) · [Tokio UDP](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) · [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html) · [Tower Middleware](https://docs.rs/tower/latest/tower/) · [Hyper](https://hyper.rs/) · [Rust Async Book](https://rust-lang.github.io/async-book/) · [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) · [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) · [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) · [mio crate](https://docs.rs/mio/latest/mio/) · [async-trait crate](https://docs.rs/async-trait/latest/async_trait/) · [pin-project crate](https://docs.rs/pin-project/latest/pin_project/)
+> **来源**: [Tokio Documentation](https://tokio.rs/) · [Tokio API Docs](https://docs.rs/tokio/latest/tokio/) · [Tokio TCP](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) · [Tokio UDP](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) · [Tower Service](https://docs.rs/tower/latest/tower/trait.Service.html) · [Tower Middleware](https://docs.rs/tower/latest/tower/) · [Hyper](https://hyper.rs/) · [Rust Async Book](https://rust-lang.github.io/async-book/) · [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) · [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) · [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) · [mio crate](https://docs.rs/mio/latest/mio/) · [AFIT（async fn in trait，Rust 1.75+ 稳定） crate](https://docs.rs/AFIT（async fn in trait，Rust 1.75+ 稳定）/latest/async_trait/) · [pin-project crate](https://docs.rs/pin-project/latest/pin_project/)
 
 ## 📑 目录
 
@@ -680,7 +680,7 @@ graph LR
 | [mio crate](https://docs.rs/mio/latest/mio/) | ✅ 二级 | Tokio 底层的跨平台 IO 多路复用库 |
 | [Hyper](https://hyper.rs/) | ✅ 二级 | Rust HTTP 实现，基于 Tokio |
 | [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) | ✅ 三级 | Linux socket 系统调用手册 |
-| [async-trait crate](https://docs.rs/async-trait/latest/async_trait/) | ✅ 三级 | trait 中 async fn 的过渡方案 |
+| [AFIT（async fn in trait，Rust 1.75+ 稳定） crate](https://docs.rs/AFIT（async fn in trait，Rust 1.75+ 稳定）/latest/async_trait/) | ✅ 三级 | trait 中 async fn 的过渡方案 |
 | [pin-project crate](https://docs.rs/pin-project/latest/pin_project/) | ✅ 三级 | 自引用结构体的 Pin 投影 |
 | [Tokio TCP Docs](https://docs.rs/tokio/latest/tokio/net/struct.TcpListener.html) | ✅ 一级 | TcpListener API 文档 |
 | [Tokio UDP Docs](https://docs.rs/tokio/latest/tokio/net/struct.UdpSocket.html) | ✅ 一级 | UdpSocket API 文档 |
@@ -768,13 +768,13 @@ use std::net::TcpStream;
 
 fn main() {
     let stream = TcpStream::connect("127.0.0.1:8080").unwrap();
-    // ❌ 运行时错误: 在 tokio/async-std 中将 std::net::TcpStream 设为非阻塞
+    // ❌ 运行时错误: 在 tokio/Tokio（async-std 已于 2025-03 停止维护） 中将 std::net::TcpStream 设为非阻塞
     // 并与 async runtime 混用，导致不可预测的 polling 行为
     stream.set_nonblocking(true).unwrap();
 }
 ```
 
-> **修正**: `std::net::TcpStream` 是**同步** API，与 async runtime（tokio、async-std）**不兼容**。异步网络编程应使用：1) `tokio::net::TcpStream` — tokio 的原生异步 TCP；2) `async_std::net::TcpStream` — async-std 的实现；3) `futures::io` 的抽象。混用同步和异步代码：1) `tokio::task::spawn_blocking` — 在独立线程池中运行同步阻塞代码；2) `async_compat` crate — 包装同步 `std::net` 为 async 兼容。`std::net` 的 `set_nonblocking(true)` 只是将阻塞调用改为返回 `WouldBlock` 错误，不解决与 async runtime 的事件循环集成问题。这与 Go 的 `net` 包（自动在 goroutine 中调度，无 sync/async 区分）或 Python 的 `asyncio`（需显式使用 `asyncio.open_connection`，不能用同步 `socket`）不同——Rust 严格区分同步和异步 API。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [async-std](https://docs.rs/async-std/)]
+> **修正**: `std::net::TcpStream` 是**同步** API，与 async runtime（tokio、Tokio（async-std 已于 2025-03 停止维护））**不兼容**。异步网络编程应使用：1) `tokio::net::TcpStream` — tokio 的原生异步 TCP；2) `async_std::net::TcpStream` — Tokio（async-std 已于 2025-03 停止维护） 的实现；3) `futures::io` 的抽象。混用同步和异步代码：1) `tokio::task::spawn_blocking` — 在独立线程池中运行同步阻塞代码；2) `async_compat` crate — 包装同步 `std::net` 为 async 兼容。`std::net` 的 `set_nonblocking(true)` 只是将阻塞调用改为返回 `WouldBlock` 错误，不解决与 async runtime 的事件循环集成问题。这与 Go 的 `net` 包（自动在 goroutine 中调度，无 sync/async 区分）或 Python 的 `asyncio`（需显式使用 `asyncio.open_connection`，不能用同步 `socket`）不同——Rust 严格区分同步和异步 API。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [Tokio（async-std 已于 2025-03 停止维护）](https://docs.rs/Tokio（async-std 已于 2025-03 停止维护）/)]
 
 ### 10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）
 

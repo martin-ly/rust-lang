@@ -71,7 +71,7 @@ std提供基础，serde/tokio等扩展能力
 ### 第 5 步：async生态的核心组件？
 >
 
-tokio/async-std/futures/smol的比较和选择
+tokio/Tokio（async-std 已于 2025-03 停止维护）/futures/smol的比较和选择
 
 ### 第 6 步：crate生态的边界和风险？
 >
@@ -187,7 +187,7 @@ graph TD
 | **Crate** | **调度模型** | **特点** | **L3 概念根基** |
 |:---|:---|:---|:---|
 | **tokio** | M:N 协作调度 + 多线程 work-stealing | 生态标准、io-uring 支持、tracing 集成 | async/await + Send/Sync + Pin |
-| **async-std** | M:N 协作调度 | 标准库 API 风格、await 一切 | 同上 |
+| **Tokio（async-std 已于 2025-03 停止维护）** | M:N 协作调度 | 标准库 API 风格、await 一切 | 同上 |
 | **smol** | 轻量、可组合 | 嵌入式友好、低依赖 | async/await |
 | **embassy** | 嵌入式异步 | 无 alloc、中断驱动、no_std | async + 裸机 |
 
@@ -920,7 +920,7 @@ graph TD
 
     P1["标准库足够完成所有任务"] --> Q{成立？}
 
-    Q -->|反例1| C1_0["async需要tokio/async-std"]
+    Q -->|反例1| C1_0["async需要tokio/Tokio（async-std 已于 2025-03 停止维护）"]
 
     style C1_0 fill:#f66
 
@@ -1144,14 +1144,14 @@ fn main() {
 
 > **修正**: `thiserror` 用于库（定义结构化错误类型），`anyhow` 用于应用（快速错误处理）。`anyhow::Result<T>` 是 `Result<T, anyhow::Error>` 的别名，`anyhow::Error` 可自动包裹任何实现 `std::error::Error` 的类型。`may_fail` 中 `?` 从 `std::io::Error` 转换为 `anyhow::Error` 是自动的（通过 `From`），但若函数签名是 `Result<T, AppError>`，`anyhow::Error` 不能自动转换。解决方案：1) 库函数返回 `thiserror` 类型，应用层用 `anyhow` 包裹；2) 统一使用 `anyhow`（牺牲结构化错误）；3) 统一使用 `thiserror`（增加样板）。这与 Go 的 `error` 接口（统一，无结构化）或 Java 的异常层次（结构化，但繁琐）不同——Rust 的错误生态提供分层选择，而非一刀切。[来源: [thiserror Documentation](https://docs.rs/thiserror/)] · [来源: [anyhow Documentation](https://docs.rs/anyhow/)]
 
-### 10.4 边界测试：`tokio` 与 `async-std` 的 channel 不兼容（编译错误）
+### 10.4 边界测试：`tokio` 与 `Tokio（async-std 已于 2025-03 停止维护）` 的 channel 不兼容（编译错误）
 
 ```rust,compile_fail
 use tokio::sync::mpsc;
 
 async fn tokio_task() {
     let (tx, mut rx) = mpsc::channel(10);
-    // ❌ 编译错误: 不能在 async-std runtime 中直接使用 tokio 的 channel
+    // ❌ 编译错误: 不能在 Tokio（async-std 已于 2025-03 停止维护） runtime 中直接使用 tokio 的 channel
     // async_std::task::spawn(async move {
     //     tx.send(1).await.unwrap();
     // });
@@ -1159,7 +1159,7 @@ async fn tokio_task() {
 }
 ```
 
-> **修正**: `tokio::sync::mpsc` 的 `send`/`recv` 是异步方法，底层依赖 tokio 的 reactor（epoll/kqueue/IOCP）进行任务唤醒。在 async-std 或 smol 的 runtime 上调用 tokio channel，可能导致任务永不唤醒（deadlock）或 panic。跨 runtime 的互操作性是 Rust 异步生态的分裂点：1) 计算型 future（无 I/O）可跨 runtime 使用；2) I/O 和定时器必须匹配 runtime；3) `async-compat` crate 提供适配层，但有开销。这与 Go 的单一 runtime（所有 goroutine 由 Go scheduler 管理）或 JavaScript 的单一事件循环不同——Rust 的异步生态允许多个 runtime 竞争，但要求开发者明确选择和隔离。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [async-std Documentation](https://docs.rs/async-std/)]
+> **修正**: `tokio::sync::mpsc` 的 `send`/`recv` 是异步方法，底层依赖 tokio 的 reactor（epoll/kqueue/IOCP）进行任务唤醒。在 Tokio（async-std 已于 2025-03 停止维护） 或 smol 的 runtime 上调用 tokio channel，可能导致任务永不唤醒（deadlock）或 panic。跨 runtime 的互操作性是 Rust 异步生态的分裂点：1) 计算型 future（无 I/O）可跨 runtime 使用；2) I/O 和定时器必须匹配 runtime；3) `async-compat` crate 提供适配层，但有开销。这与 Go 的单一 runtime（所有 goroutine 由 Go scheduler 管理）或 JavaScript 的单一事件循环不同——Rust 的异步生态允许多个 runtime 竞争，但要求开发者明确选择和隔离。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Tokio（async-std 已于 2025-03 停止维护） Documentation](https://docs.rs/Tokio（async-std 已于 2025-03 停止维护）/)]
 
 ### 10.5 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时性能下降）
 

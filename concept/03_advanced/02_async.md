@@ -114,7 +114,7 @@
     - [16.2 边界测试：在 async 块中调用阻塞函数（逻辑错误）](#162-边界测试在-async-块中调用阻塞函数逻辑错误)
     - [16.3 边界测试：递归 async fn（编译错误）](#163-边界测试递归-async-fn编译错误)
     - [16.4 边界测试：在 async 块中借用局部变量生命周期不足（编译错误）](#164-边界测试在-async-块中借用局部变量生命周期不足编译错误)
-    - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-async-trait-中的误用编译错误)
+    - [16.5 边界测试：`Pin<&mut Self>` 在 async trait 中的误用（编译错误）](#165-边界测试pinmut-self-在-AFIT（async fn in trait，Rust 1.75+ 稳定）-中的误用编译错误)
     - [10.4 边界测试：`async fn` 在 trait 中的缺失与 `async_trait` crate（编译错误）](#104-边界测试async-fn-在-trait-中的缺失与-async_trait-crate编译错误)
   - [参考来源](#参考来源)
 
@@ -235,7 +235,7 @@ Poll 类型:
 | **维度** | **Async（异步）** | **Threading（线程）** | **Parallel（并行）** |
 |:---|:---|:---|:---|
 | **核心抽象** | Future / Task | OS Thread | Data / Task |
-| **调度者** | 运行时（Tokio/async-std） | OS 内核 | 运行时 / OS |
+| **调度者** | 运行时（Tokio/Tokio） | OS 内核 | 运行时 / OS |
 | **上下文切换** | 用户态（极轻量，~ns 级） | 内核态（较重，~μs 级） | 视实现 |
 | **内存占用** | 小（~几百字节栈） | 大（~MB 栈） | 视实现 |
 | **适用场景** | IO 密集型 | CPU 密集型 + 阻塞 | CPU 密集型 |
@@ -266,12 +266,12 @@ Poll 类型:
 | **运行时** | **调度策略** | **线程池** | **生态** | **适用场景** |
 |:---|:---|:---|:---|:---|
 | **Tokio** | 工作窃取 M:N | 多线程 | 最丰富（axum, tonic, hyper） | 生产级服务端 |
-| **async-std** | 工作窃取 M:N | 多线程 | 中等 | 通用异步 |
+| **Tokio** | 工作窃取 M:N | 多线程 | 中等 | 通用异步 |
 | **smol** | 简单高效 | 可配置 | 轻量 | 嵌入式/低资源 |
 | **embassy** | 协程/中断驱动 | 单线程 | 嵌入式 | IoT/嵌入式 |
 | **glommio** | 线程 per core | 1 线程/核心 | 专用 | 存储/IO 密集型 |
 
-> **来源**: [Tokio Documentation: Runtime internals] · [async-std docs] · [smol docs] · [embassy docs] · [glommio docs]
+> **来源**: [Tokio Documentation: Runtime internals] · [Tokio docs] · [smol docs] · [embassy docs] · [glommio docs]
 
 ---
 
@@ -656,7 +656,7 @@ graph LR
 | 维度 | Rust `async/await` | C++20 Coroutines | Haskell `async` / `IO` | Go Goroutine |
 |:---|:---|:---|:---|:---|
 | **核心抽象** | `Future` + `poll` 状态机 | `co_await` + promise/awaitable | `IO` monad / `async` 库 | `go` 关键字 + channel |
-| **调度方式** | 协作式（运行时库: tokio/async-std） | 协作式（可自定义 allocator） | 惰性求值 + GHC 运行时调度 | 抢占式 M:N 调度 |
+| **调度方式** | 协作式（运行时库: tokio/Tokio） | 协作式（可自定义 allocator） | 惰性求值 + GHC 运行时调度 | 抢占式 M:N 调度 |
 | **运行时开销** | 零（状态机无分配） | 零（编译器生成状态机） | 有（thunk 求值 + GC） | 有（调度器 + 栈管理） |
 | **自引用支持** | `Pin<T>` 强制位置不变性 | `coroutine_handle` + 自定义分配 | 无（惰性求值天然避免） | 无（值语义 + GC） |
 | **取消语义** | `Drop` 隐式取消（需设计） | 无内置（需手动实现） | `killThread` / 异常 | 无内置（需 channel 协调） |
@@ -695,7 +695,7 @@ graph TD
     D --> D3[自引用结构必需]
 
     E --> E1[Tokio: 生产级]
-    E --> E2[async-std]
+    E --> E2[Tokio]
     E --> E3[smol / embassy]
 
     F --> F1[join! 并发等待]
@@ -2338,10 +2338,10 @@ Miri 的局限（与 loom 互补）:
 ```text
 问题（Rust < 1.75）:
   trait 中不能写 async fn
-   workaround: 手动返回关联 Future 类型或使用 async-trait crate
+   workaround: 手动返回关联 Future 类型或使用 AFIT（async fn in trait，Rust 1.75+ 稳定） crate
 
-解决方案 1: async-trait crate（宏模拟）
-  #[async_trait]
+解决方案 1: AFIT（async fn in trait，Rust 1.75+ 稳定） crate（宏模拟）
+  // 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
   trait MyTrait {
       async fn method(&self);
   }
@@ -2860,7 +2860,7 @@ impl Service for MyService {
 fn main() {}
 ```
 
-> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`#[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/async-trait/)]
+> **修正**: Rust stable **不支持 trait 中的 `async fn`**（RPITIT — Return Position Impl Trait In Traits，1.75+ 已稳定！）。`async_trait` crate 提供过程宏 workaround：`// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 自动将 `async fn` 转为返回 `Pin<Box<dyn Future>>`。1.75+ 后，原生 `async fn` 在 trait 中可用，但需注意：1) `Send` 约束不自动推导（`async_trait` 自动添加）；2) 动态分发（`dyn Trait`）仍需 `async_trait` 或手动 `Box::pin`。异步 trait 是 Rust async 生态的关键里程碑，使 async/await 可用于 trait 抽象。这与 C# 的 `async` 接口方法（原生支持）或 Java 的 `CompletableFuture`（接口中返回 Future，非 async 方法）不同——Rust 的 async trait 支持是语言演进的重要步骤。[来源: [Rust 1.75 Release Notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html)] · [来源: [async_trait crate](https://docs.rs/AFIT（async fn in trait，Rust 1.75+ 稳定）/)]
 
 ## 参考来源
 
@@ -2872,7 +2872,7 @@ fn main() {}
 
 > [来源: [Tokio Documentation](https://tokio.rs/)]
 
-> [来源: [async-std crate](https://docs.rs/async-std/)]
+> [来源: [Tokio crate](https://docs.rs/Tokio/)]
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

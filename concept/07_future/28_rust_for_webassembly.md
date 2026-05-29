@@ -425,7 +425,7 @@ Rust Wasm 目标三元组对比:
 │   ├── 需要 wasm-bindgen 处理 JS 互操作                           │
 │   └── 适用: 浏览器前端、npm 包                                   │
 ├─────────────────────────────────────────────────────────────────┤
-│ wasm32-wasi                                                     │
+│ `wasm32-wasip1` 或 `wasm32-wasip2`                                                     │
 │   ├── 提供 WASI 系统调用接口（文件、网络、时钟）                  │
 │   ├── 无需 wasm-bindgen，独立运行时                             │
 │   └── 适用: 服务端 Wasm、边缘计算、插件系统                       │
@@ -437,7 +437,7 @@ Rust Wasm 目标三元组对比:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-> **配置要点**: `wasm32-unknown-unknown` 是 Rust 前端框架（Yew/Leptos）的标准目标；`wasm32-wasi` 是服务端 Wasm 的首选。两者 ABI 不兼容，不可混用。[来源: [Rustc Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)]
+> **配置要点**: `wasm32-unknown-unknown` 是 Rust 前端框架（Yew/Leptos）的标准目标；``wasm32-wasip1` 或 `wasm32-wasip2`` 是服务端 Wasm 的首选。两者 ABI 不兼容，不可混用。[来源: [Rustc Platform Support](https://doc.rust-lang.org/rustc/platform-support.html)]
 
 ---
 
@@ -563,10 +563,10 @@ Rust panic in Wasm:
   ❌ Wasm 中执行长时间计算，UI 冻结
   ✅ 使用 Web Workers（wasm-bindgen-rayon）或 yield 控制流
 
-陷阱 5: 混淆 wasm32-unknown-unknown 与 wasm32-wasi
+陷阱 5: 混淆 wasm32-unknown-unknown 与 `wasm32-wasip1` 或 `wasm32-wasip2`
   ❌ 在浏览器中使用 wasi 目标，或在服务端使用 unknown 目标
   ✅ 浏览器前端 → wasm32-unknown-unknown + wasm-bindgen
-  ✅ 服务端 Wasm → wasm32-wasi + Wasmtime/WasmEdge
+  ✅ 服务端 Wasm → `wasm32-wasip1` 或 `wasm32-wasip2` + Wasmtime/WasmEdge
 ```
 
 > **陷阱总结**: Rust Wasm 开发的常见错误集中在**目标三元组选型**、**panic 处理**、**内存视图生命周期**、**主线程阻塞**和**宿主环境假设**五个维度。[来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]

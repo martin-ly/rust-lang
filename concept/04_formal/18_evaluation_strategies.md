@@ -1,5 +1,8 @@
 # 求值策略：Call-by-Value, Call-by-Name, Call-by-Need
 
+> ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
+>
+
 > **层级**: L4 形式化 — 通用编程语言机制
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: F×Und — 形式化理解程序执行的求值规则

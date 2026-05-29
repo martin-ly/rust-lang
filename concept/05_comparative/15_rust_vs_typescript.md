@@ -284,7 +284,7 @@ TypeScript 核心特征:
   │ await 点            │ 任意表达式          │ 仅 Future 类型      │
   │ 错误传播            │ throw / await 混用  │ ? 运算符统一传播    │
   │ 并发组合            │ Promise.all/race    │ join!/select! 宏   │
-  │ 运行时绑定          │ 隐式（事件循环）    │ 显式（Tokio/async-std）│
+  │ 运行时绑定          │ 隐式（事件循环）    │ 显式（Tokio/Tokio（async-std 已于 2025-03 停止维护））│
   │ 取消语义            │ AbortSignal         │ 任务 drop + 取消安全 │
   └─────────────────────┴─────────────────────┴─────────────────────┘
   > [来源: [TypeScript Handbook — Async/Await](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-7.html)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]

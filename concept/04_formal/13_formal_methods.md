@@ -1,5 +1,8 @@
 # 形式化方法在 Rust 中的应用
 
+> ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
+>
+
 > **Bloom 层级**: 评价 → 创造
 > **定位**: 探讨形式化验证工具在 Rust 生态中的应用——从 Kani 的模型检查到 Creusot 的演绎验证，分析如何用数学方法证明 Rust 代码正确性。
 > **前置概念**: [Verification Toolchain](05_verification_toolchain.md) · [RustBelt](04_rustbelt.md) · [Separation Logic](11_separation_logic.md)

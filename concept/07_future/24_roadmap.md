@@ -33,7 +33,7 @@
     - [2.2 Type Alias Impl Trait (TAIT)](#22-type-alias-impl-trait-tait)
     - [2.3 可移植 SIMD (std::simd)](#23-可移植-simd-stdsimd)
   - [三、异步与执行模型](#三异步与执行模型)
-    - [3.1 Async Traits 与静态分发](#31-async-traits-与静态分发)
+    - [3.1 Async Traits 与静态分发](#31-AFIT（async fn in trait，Rust 1.75+ 稳定）s-与静态分发)
     - [3.2 Async Drop 与生命周期](#32-async-drop-与生命周期)
     - [3.3 Custom Allocators 稳定化](#33-custom-allocators-稳定化)
   - [四、语言级语法演进](#四语言级语法演进)

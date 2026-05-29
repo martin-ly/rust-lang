@@ -197,7 +197,7 @@ Rust 的安全边界层次与 Zero Trust 的映射：
 | 微分段 | Crate 边界 = 安全边界；模块 = 微分段 |
 
 **WASI（WebAssembly System Interface）的能力安全**:
-WASI 采用 capability-based 设计——程序只能访问显式授予的资源（文件描述符、网络 socket）。Rust 的 `wasm32-wasi` target 将 Rust 的所有权语义映射到 WASI 的 capability 模型，实现从源码到运行时的端到端安全。 [来源: WASI Specification; Bytecode Alliance]
+WASI 采用 capability-based 设计——程序只能访问显式授予的资源（文件描述符、网络 socket）。Rust 的 ``wasm32-wasip1` 或 `wasm32-wasip2`` target 将 Rust 的所有权语义映射到 WASI 的 capability 模型，实现从源码到运行时的端到端安全。 [来源: WASI Specification; Bytecode Alliance]
 
 ### 2.7 容错设计：Error Kernel + Let It Crash
 

@@ -3,7 +3,7 @@
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
 > **双维定位**: P×Eva — 评估 WASM 与 Rust 的集成策略
-> **定位**: 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，探讨 `wasm32-unknown-unknown` / `wasm32-wasi` 目标、`wasm-bindgen [来源: [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen)]`、组件模型以及 Rust 作为 Wasm 首选语言的工程原因。
+> **定位**: 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，探讨 `wasm32-unknown-unknown` / ``wasm32-wasip1` 或 `wasm32-wasip2`` 目标、`wasm-bindgen [来源: [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen)]`、组件模型以及 Rust 作为 Wasm 首选语言的工程原因。
 > **前置概念**: [Toolchain](./01_toolchain.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [WASI](./08_wasi.md)
 
@@ -135,7 +135,7 @@ Rust 的 Wasm 目标:
   └── 用途: 浏览器内 Wasm，通过 wasm-bindgen 与 JS 交互
   └── 限制: 无文件系统、无网络、无 std::fs/std::net
 
-  wasm32-wasi
+  `wasm32-wasip1` 或 `wasm32-wasip2`
   ├── arch: wasm32
   ├── vendor: unknown
   ├── sys: wasi（WebAssembly System Interface）
@@ -148,7 +148,7 @@ Rust 的 Wasm 目标:
   └── 用途: 兼容 Emscripten 的编译（逐渐被淘汰）
 ```
 
-> **目标选择**: 浏览器场景用 `wasm32-unknown-unknown` + `wasm-bindgen`；服务端/边缘用 `wasm32-wasi` + `wasmtime`。
+> **目标选择**: 浏览器场景用 `wasm32-unknown-unknown` + `wasm-bindgen`；服务端/边缘用 ``wasm32-wasip1` 或 `wasm32-wasip2`` + `wasmtime`。
 > [来源: [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)]
 
 ---
@@ -232,7 +232,7 @@ graph TD
 | 场景 | 技术栈 | Rust 价值 | 代表项目 |
 |:---|:---|:---|:---|
 | **浏览器端计算** | wasm32-unknown-unknown + wasm-bindgen | 高性能计算（图像处理、游戏物理） | [yew](https://yew.rs/), [egui](https://github.com/emilk/egui) |
-| **边缘计算** | wasm32-wasi + wasmtime | 沙箱化、低启动延迟 | [Fastly Compute@Edge](https://www.fastly.com/products/edge-compute) |
+| **边缘计算** | `wasm32-wasip1` 或 `wasm32-wasip2` + wasmtime | 沙箱化、低启动延迟 | [Fastly Compute@Edge](https://www.fastly.com/products/edge-compute) |
 | **插件系统** | Wasm + WASI | 安全隔离的第三方插件 | [Extism](https://extism.org/) |
 | **微服务** | Wasm + wasmCloud | 轻量级、可移植的执行单元 | [wasmCloud](https://wasmcloud.com/) |
 | **区块链** | Wasm 虚拟机 | 确定性执行、沙箱化智能合约 | [Polkadot](https://polkadot.network/), [NEAR](https://near.org/) |
@@ -413,7 +413,7 @@ fn main() {
 // 或使用 Web Workers（通过 js-sys）
 ```
 
-> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块不可用。WebAssembly 的线程支持通过 `wasm32-wasi` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
+> **修正**: `wasm32-unknown-unknown` 目标没有操作系统支持，因此 `std::thread`、`std::fs`、`std::net` 等模块不可用。WebAssembly 的线程支持通过 ``wasm32-wasip1` 或 `wasm32-wasip2`` 或 `wasm32-unknown-emscripten` 目标实现，或浏览器的 Web Workers。Rust 编译器在编译期拒绝 wasm32 上不支持的 API，防止运行时错误。这与 C/C++ 的 WASM 编译（可能链接失败或运行时崩溃）不同——Rust 在类型系统层面保证目标平台兼容性。[来源: [Rust and WebAssembly](https://rustwasm.github.io/book/)]
 
 ### 10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）
 
@@ -459,4 +459,4 @@ fn main() {
 }
 ```
 
-> **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasi` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]
+> **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 ``wasm32-wasip1` 或 `wasm32-wasip2`` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/book/)]

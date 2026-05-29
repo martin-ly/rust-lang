@@ -23,7 +23,7 @@ mindmap
       RAII[RAII / Newtype]
       零成本[Zero-cost Abstractions]
     核心库谱系
-      异步运行时[Tokio / async-std]
+      异步运行时[Tokio / Tokio（async-std 已于 2025-03 停止维护）]
       Web框架[Axum / Actix]
       序列化[Serde]
       数据库[SQLx / Diesel]
@@ -116,7 +116,7 @@ graph TB
 | [05_formal_ecosystem_tower.md](./05_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估；L0-L4 形式化分层 | ✅ v1.0 | L4 类型论、L3 Async/Unsafe | 形式化选型决策 |
 | [06_blockchain.md](./06_blockchain.md) | 区块链合约安全 | Solana/Substrate/Near、合约安全形式化、Kani 验证、无重入/溢出 | ✅ v1.0 | L1 Ownership、L3 Unsafe、L4 RustBelt | 链上安全保证 |
 | [07_game_ecs.md](./07_game_ecs.md) | 游戏 ECS 架构 | Bevy/Fyrox、ECS 与所有权协同、DOD、并发渲染 | ✅ v1.0 | L1 Ownership、L3 Concurrency | 游戏引擎选型 |
-| [08_wasi.md](./08_wasi.md) | WASI 与 Wasm | Component Model、wit-bindgen、能力安全、wasm32-wasi | ✅ v1.0 | L1 Ownership、L3 FFI | 跨平台沙箱部署 |
+| [08_wasi.md](./08_wasi.md) | WASI 与 Wasm | Component Model、wit-bindgen、能力安全、`wasm32-wasip1` 或 `wasm32-wasip2` | ✅ v1.0 | L1 Ownership、L3 FFI | 跨平台沙箱部署 |
 | [11_webassembly.md](./11_webassembly.md) | WebAssembly | Rust 的 Wasm 编译模型、组件模型、应用场景 | ✅ v1.0 | L1 Type System, L3 FFI | 跨平台部署 |
 | [13_logging_observability.md](./13_logging_observability.md) | 日志与可观测性 | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ v1.0 | L3 Async, L2 Error | 监控与诊断 |
 | [14_documentation.md](./14_documentation.md) | 文档生态 | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ v1.0 | L3 Macros, L2 Module | 知识传播 |
