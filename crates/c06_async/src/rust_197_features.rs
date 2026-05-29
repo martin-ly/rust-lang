@@ -1,31 +1,54 @@
 //! Rust 1.97 特性跟踪模块 —— 异步编程
 #![allow(clippy::incompatible_msrv)]
 
-use futures::executor::block_on;
+use std::future::Future;
+use std::task::{Context, Poll, Waker};
 
-/// # Rust 1.97 特性演示
+/// # Rust 1.97 异步特性演示
 ///
-/// 展示 `std::pin::pin!` 和 `std::iter::repeat_n` 在异步场景中的应用。
-pub struct Rust197Features;
+/// Rust 1.97 稳定化的核心异步 API：
+/// - `AsyncFn*` trait family 加入 prelude（所有 edition）
+/// - `std::task::Waker::noop` — 无操作 Waker，用于不需要唤醒的上下文
+pub struct Rust197AsyncFeatures;
 
-impl Rust197Features {
-    /// 使用 `pin!` 在栈上固定异步 Future
-    pub fn pin_async_future() -> i32 {
-        let future = async { 42 };
-        let pinned = std::pin::pin!(future);
-        block_on(pinned)
+impl Rust197AsyncFeatures {
+    /// 使用 `Waker::noop()` 创建一个不需要唤醒的 Context
+    ///
+    /// 适用于同步轮询（polling）场景，例如测试或已知不会阻塞的 Future。
+    pub fn poll_with_noop_waker<F>(future: F) -> Poll<F::Output>
+    where
+        F: Future,
+    {
+        let waker = Waker::noop();
+        let mut cx = Context::from_waker(waker);
+        let mut pinned = std::pin::pin!(future);
+        pinned.as_mut().poll(&mut cx)
     }
 
-    /// 使用 `repeat_n` 生成异步任务批次
-    pub fn generate_async_batch(task_id: u32, count: usize) -> Vec<u32> {
-        std::iter::repeat_n(task_id, count).collect()
+    /// 演示 `AsyncFn` trait 的使用（Rust 1.97+ 在 prelude 中可用）
+    ///
+    /// `AsyncFn` 允许像调用普通闭包一样调用异步闭包。
+    pub async fn call_async_closure<F>(f: F, arg: i32) -> i32
+    where
+        F: AsyncFn(i32) -> i32,
+    {
+        f(arg).await
     }
 
-    /// 结合 pin! 与 repeat_n 管理异步资源
-    pub fn pin_and_repeat<T: Clone>(value: T, count: usize) -> Vec<T> {
-        let pinned = std::pin::pin!(value.clone());
-        let _ = pinned.clone();
-        std::iter::repeat_n(value, count).collect()
+    /// 演示 `AsyncFnMut` trait 的使用
+    pub async fn call_async_mut_closure<F>(mut f: F, arg: i32) -> i32
+    where
+        F: AsyncFnMut(i32) -> i32,
+    {
+        f(arg).await
+    }
+
+    /// 演示 `AsyncFnOnce` trait 的使用
+    pub async fn call_async_once_closure<F>(f: F, arg: i32) -> i32
+    where
+        F: AsyncFnOnce(i32) -> i32,
+    {
+        f(arg).await
     }
 }
 
@@ -34,21 +57,36 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_pin_async_future() {
-        assert_eq!(Rust197Features::pin_async_future(), 42);
+    fn test_poll_with_noop_waker() {
+        let fut = async { 42 };
+        match Rust197AsyncFeatures::poll_with_noop_waker(fut) {
+            Poll::Ready(v) => assert_eq!(v, 42),
+            Poll::Pending => panic!("simple future should be ready immediately"),
+        }
     }
 
-    #[test]
-    fn test_generate_async_batch() {
-        assert_eq!(Rust197Features::generate_async_batch(7, 3), vec![7, 7, 7]);
-        assert!(Rust197Features::generate_async_batch(1, 0).is_empty());
+    #[tokio::test]
+    async fn test_call_async_closure() {
+        let closure = async |x: i32| x * 2;
+        let result = Rust197AsyncFeatures::call_async_closure(closure, 21).await;
+        assert_eq!(result, 42);
     }
 
-    #[test]
-    fn test_pin_and_repeat() {
-        assert_eq!(
-            Rust197Features::pin_and_repeat("task".to_string(), 2),
-            vec!["task", "task"]
-        );
+    #[tokio::test]
+    async fn test_call_async_mut_closure() {
+        let mut count = 0;
+        let closure = async |x: i32| {
+            count += x;
+            count
+        };
+        let result = Rust197AsyncFeatures::call_async_mut_closure(closure, 10).await;
+        assert_eq!(result, 10);
+    }
+
+    #[tokio::test]
+    async fn test_call_async_once_closure() {
+        let closure = async |x: i32| x + 1;
+        let result = Rust197AsyncFeatures::call_async_once_closure(closure, 41).await;
+        assert_eq!(result, 42);
     }
 }

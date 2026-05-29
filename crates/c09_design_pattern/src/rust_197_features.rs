@@ -1,63 +1,93 @@
 //! Rust 1.97 特性跟踪模块 —— 设计模式
 #![allow(clippy::incompatible_msrv)]
 
-/// # Rust 1.97 特性演示
+use std::ffi::CString;
+use std::fmt;
+use std::num::NonZeroU32;
+use std::str::FromStr;
+
+/// # Rust 1.97 设计模式特性演示
 ///
-/// 展示 `Option::is_none_or` 和 `Result::is_ok_and` 在设计模式中的应用。
-pub struct Rust197Features;
+/// Rust 1.97 稳定化的核心设计模式相关 API：
+/// - `FromStr` for `CString` — 从字符串解析 C 字符串
+/// - `LowerExp` / `UpperExp` for `NonZero` — 科学计数法格式化
+/// - `Option::as_slice` / `as_mut_slice` — Null Object 模式
+pub struct Rust197DesignPatternFeatures;
 
-impl Rust197Features {
-    /// 使用 `Option::is_none_or` 实现空对象模式验证
-    pub fn is_valid_or_empty(opt: Option<i32>, min: i32) -> bool {
-        opt.is_none_or(|v| v >= min)
+impl Rust197DesignPatternFeatures {
+    /// 使用 `FromStr` for `CString` 从字符串创建 C 字符串
+    ///
+    /// 如果输入包含 NUL 字节，返回错误。
+    pub fn parse_c_string(input: &str) -> Result<CString, CStringParseError> {
+        CString::from_str(input).map_err(|_| CStringParseError)
     }
 
-    /// 使用 `Result::is_ok_and` 实现策略模式结果验证
-    pub fn strategy_succeeded<T: PartialEq>(result: Result<T, &'static str>, expected: T) -> bool {
-        result.is_ok_and(|v| v == expected)
+    /// 使用 `NonZeroU32` 的科学计数法格式化
+    ///
+    /// Rust 1.97 为 `NonZero` 类型实现了 `LowerExp` 和 `UpperExp`。
+    pub fn format_nonzero_scientific(n: NonZeroU32) -> (String, String) {
+        let lower = format!("{:e}", n);
+        let upper = format!("{:E}", n);
+        (lower, upper)
     }
 
-    /// 组合两者构建守卫条件
-    pub fn guard_condition(
-        maybe_result: Option<Result<i32, &'static str>>,
-        threshold: i32,
-    ) -> bool {
-        maybe_result.is_none_or(|res| res.is_ok_and(|v| v >= threshold))
+    /// 使用 `Option::as_slice` 实现 Null Object 模式
+    ///
+    /// `None` 映射为空切片，`Some` 映射为单元素切片，
+    /// 统一处理"可能存在的值"和"空值"两种情况。
+    pub fn option_to_slice<T>(opt: &Option<T>) -> &[T] {
+        opt.as_slice()
     }
 }
+
+/// `CString` 解析错误的标记类型
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CStringParseError;
+
+impl fmt::Display for CStringParseError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "input contains NUL byte, cannot create C string")
+    }
+}
+
+impl std::error::Error for CStringParseError {}
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn test_is_valid_or_empty() {
-        assert!(Rust197Features::is_valid_or_empty(None, 10));
-        assert!(Rust197Features::is_valid_or_empty(Some(10), 10));
-        assert!(!Rust197Features::is_valid_or_empty(Some(5), 10));
+    fn test_parse_c_string_valid() {
+        let result = Rust197DesignPatternFeatures::parse_c_string("hello");
+        assert!(result.is_ok());
+        assert_eq!(result.unwrap().to_bytes(), b"hello");
     }
 
     #[test]
-    fn test_strategy_succeeded() {
-        assert!(Rust197Features::strategy_succeeded(
-            Ok("done".to_string()),
-            "done".to_string()
-        ));
-        assert!(!Rust197Features::strategy_succeeded(
-            Ok("fail".to_string()),
-            "done".to_string()
-        ));
-        assert!(!Rust197Features::strategy_succeeded(
-            Err("error"),
-            "done".to_string()
-        ));
+    fn test_parse_c_string_with_nul() {
+        let result = Rust197DesignPatternFeatures::parse_c_string("he\0llo");
+        assert!(result.is_err());
     }
 
     #[test]
-    fn test_guard_condition() {
-        assert!(Rust197Features::guard_condition(None, 10));
-        assert!(Rust197Features::guard_condition(Some(Ok(15)), 10));
-        assert!(!Rust197Features::guard_condition(Some(Ok(5)), 10));
-        assert!(!Rust197Features::guard_condition(Some(Err("fail")), 10));
+    fn test_format_nonzero_scientific() {
+        let n = NonZeroU32::new(1000).unwrap();
+        let (lower, upper) = Rust197DesignPatternFeatures::format_nonzero_scientific(n);
+        assert_eq!(lower, "1e3");
+        assert_eq!(upper, "1E3");
+    }
+
+    #[test]
+    fn test_option_to_slice_some() {
+        let opt = Some(42);
+        let slice = Rust197DesignPatternFeatures::option_to_slice(&opt);
+        assert_eq!(slice, &[42]);
+    }
+
+    #[test]
+    fn test_option_to_slice_none() {
+        let opt: Option<i32> = None;
+        let slice = Rust197DesignPatternFeatures::option_to_slice(&opt);
+        assert!(slice.is_empty());
     }
 }

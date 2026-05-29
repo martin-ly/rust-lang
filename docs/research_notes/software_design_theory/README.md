@@ -257,24 +257,3 @@
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
-
-## 权威来源索引
-
-> **[来源: Wikipedia - Software Design Pattern]**
-
-> **[来源: Wikipedia - Software Architecture]**
-
-> **[来源: ACM - Design Patterns Survey]**
-
-> **[来源: IEEE - Software Design Standards]**
-
-> **[来源: Gang of Four - Design Patterns]**
-
-> **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**
-
-> **[来源: Wikipedia - Asynchronous I/O]**
-> **[来源: Wikipedia - Rust (programming language)]**
-> **[来源: Rust Reference - doc.rust-lang.org/reference]**
-> **[来源: TRPL - The Rust Programming Language]**
-> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
-> **[来源: ACM - Systems Programming Languages]**

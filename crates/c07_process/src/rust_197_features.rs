@@ -1,35 +1,60 @@
 //! Rust 1.97 特性跟踪模块 —— 进程与 FFI
 #![allow(clippy::incompatible_msrv)]
 
-use std::collections::VecDeque;
+use std::fs::{File, FileTimes};
 use std::io;
+use std::time::SystemTime;
 
-/// # Rust 1.97 特性演示
+/// # Rust 1.97 进程/文件系统特性演示
 ///
-/// 展示 `io::Error::other` 和 `VecDeque::resize` 在进程管理中的应用。
-pub struct Rust197Features;
+/// Rust 1.97 稳定化的核心文件系统与进程 API：
+/// - `FileTimes` / `FileTimesExt` / `File::set_modified` / `File::set_times`
+/// - `io::ErrorKind::QuotaExceeded` / `CrossesDevices`
+/// - `Default` for `ExitCode`
+pub struct Rust197ProcessFeatures;
 
-impl Rust197Features {
-    /// 使用 `io::Error::other` 快速创建进程错误
-    pub fn process_error(reason: &str) -> io::Error {
-        io::Error::other(reason)
-    }
-
-    /// 使用 `VecDeque::resize` 管理进程参数队列
-    pub fn resize_args_queue(args: VecDeque<String>, expected_len: usize) -> VecDeque<String> {
-        let mut queue = args;
-        queue.resize(expected_len, String::from(""));
-        queue
-    }
-
-    /// 结合两者进行进程启动验证
-    pub fn validate_process_args(args: VecDeque<String>) -> Result<VecDeque<String>, io::Error> {
-        if args.is_empty() {
-            return Err(io::Error::other("进程参数不能为空"));
+impl Rust197ProcessFeatures {
+    /// 使用 `FileTimes` 构建文件时间修改请求
+    ///
+    /// `FileTimes` 允许原子地设置文件的访问时间和修改时间。
+    pub fn build_file_times(
+        accessed: Option<SystemTime>,
+        modified: Option<SystemTime>,
+    ) -> FileTimes {
+        let times = FileTimes::new();
+        if let Some(t) = accessed {
+            let _ = times.set_accessed(t);
         }
-        let mut queue = args;
-        queue.resize(3, String::from("default"));
-        Ok(queue)
+        if let Some(t) = modified {
+            let _ = times.set_modified(t);
+        }
+        times
+    }
+
+    /// 使用 `File::set_times` 原子更新文件时间戳
+    pub fn update_file_times(path: &str, times: FileTimes) -> io::Result<()> {
+        let file = File::options().write(true).open(path)?;
+        file.set_times(times)
+    }
+
+    /// 使用 `File::set_modified` 快捷设置修改时间
+    pub fn set_modified_time(path: &str, time: SystemTime) -> io::Result<()> {
+        let file = File::options().write(true).open(path)?;
+        file.set_modified(time)
+    }
+
+    /// 创建 `io::ErrorKind::QuotaExceeded` 错误
+    ///
+    /// 表示磁盘配额已耗尽。
+    pub fn quota_exceeded_error() -> io::ErrorKind {
+        io::ErrorKind::QuotaExceeded
+    }
+
+    /// 创建 `io::ErrorKind::CrossesDevices` 错误
+    ///
+    /// 表示操作会跨越设备边界（例如跨文件系统的 rename）。
+    pub fn crosses_devices_error() -> io::ErrorKind {
+        io::ErrorKind::CrossesDevices
     }
 }
 
@@ -38,29 +63,32 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_process_error() {
-        let err = Rust197Features::process_error("fork failed");
-        assert_eq!(err.kind(), io::ErrorKind::Other);
+    fn test_build_file_times() {
+        let now = SystemTime::now();
+        let times = Rust197ProcessFeatures::build_file_times(Some(now), Some(now));
+        // FileTimes 内部状态无法直接检查，但确保构造不 panic
+        let _ = times;
     }
 
     #[test]
-    fn test_resize_args_queue() {
-        let q = VecDeque::from(vec!["a".to_string()]);
-        let result = Rust197Features::resize_args_queue(q, 3);
-        assert_eq!(result.len(), 3);
-        assert_eq!(result[0], "a");
-        assert_eq!(result[1], "");
-        assert_eq!(result[2], "");
+    fn test_quota_exceeded_error() {
+        assert_eq!(
+            Rust197ProcessFeatures::quota_exceeded_error(),
+            io::ErrorKind::QuotaExceeded
+        );
     }
 
     #[test]
-    fn test_validate_process_args() {
-        let q = VecDeque::from(vec!["prog".to_string()]);
-        let result = Rust197Features::validate_process_args(q).unwrap();
-        assert_eq!(result.len(), 3);
-        assert_eq!(result[0], "prog");
+    fn test_crosses_devices_error() {
+        assert_eq!(
+            Rust197ProcessFeatures::crosses_devices_error(),
+            io::ErrorKind::CrossesDevices
+        );
+    }
 
-        let empty: VecDeque<String> = VecDeque::new();
-        assert!(Rust197Features::validate_process_args(empty).is_err());
+    #[test]
+    fn test_error_kind_display() {
+        let err = io::Error::new(io::ErrorKind::QuotaExceeded, "disk quota exceeded");
+        assert_eq!(err.kind(), io::ErrorKind::QuotaExceeded);
     }
 }

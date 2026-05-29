@@ -6,7 +6,7 @@
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
 > **状态**: ✅ 已完成
-> **用途**: 20 个主题速查；语法/模式可速查
+> **用途**: 26 个主题速查（含 6 个版本特性速查卡）；语法/模式可速查
 > **完整结构**: DOCS_STRUCTURE_OVERVIEW § 2.2 quick_reference
 
 ---
@@ -451,6 +451,95 @@
 
 **内容**:
 
+- AI/ML 生态系统概览
+- candle 框架
+- burn 框架
+- 模型推理优化
+
+**适用对象**: Rust AI/ML 开发者
+
+---
+
+### 21. Rust 1.90–1.93 特性速查卡 🆕
+
+**文件**: [02_rust_190_to_193_features_cheatsheet.md](./02_rust_190_to_193_features_cheatsheet.md)
+
+**内容**:
+
+- Rust 1.90: LLD 默认链接器、`cargo publish --workspace`
+- Rust 1.91: aarch64-windows Tier 1、新 lint
+- Rust 1.92: Never 类型 lint 严格化、`Box::new_zeroed`
+- Rust 1.93: musl 1.2.5、`asm_cfg`、标准库 API
+
+**适用对象**: 版本跟踪、迁移参考
+
+---
+
+### 22. Rust 1.94 特性速查卡 🆕
+
+**文件**: [02_rust_194_features_cheatsheet.md](./02_rust_194_features_cheatsheet.md)
+
+**内容**:
+
+- Array Windows（数组窗口）
+- LazyCell / LazyLock 新方法
+- 数学常量（EULER_GAMMA、GOLDEN_RATIO）
+- Peekable 迭代器增强
+- `char → usize` 转换
+
+**适用对象**: 版本跟踪、算法开发
+
+---
+
+### 23. Rust 1.95 特性速查卡 🆕
+
+**文件**: [02_rust_195_features_cheatsheet.md](./02_rust_195_features_cheatsheet.md)
+
+**内容**:
+
+- `if let` guards
+- `core::range` 类型族
+- `Saturating` 类型
+- `cfg_select!` 宏
+- `as_ref_unchecked` / `as_mut_unchecked`
+
+**适用对象**: 版本跟踪
+
+---
+
+### 24. Rust 1.96 特性速查卡 🆕
+
+**文件**: [02_rust_196_features_cheatsheet.md](./02_rust_196_features_cheatsheet.md)
+
+**内容**:
+
+- `assert_matches!` / `debug_assert_matches!`
+- `core::range` 完整迭代器
+- `ManuallyDrop` 模式
+- never 类型 tuple coercion
+
+**适用对象**: 版本跟踪
+
+---
+
+### 25. Rust 1.97 特性速查卡 🆕
+
+**文件**: [02_rust_197_features_cheatsheet.md](./02_rust_197_features_cheatsheet.md)
+
+**内容**:
+
+- `AsyncFn*` trait family prelude
+- `midpoint` / `isqrt`
+- Strict Provenance API
+- `Waker::noop`
+- IP 地址位运算
+
+**适用对象**: 版本跟踪、前沿特性预览
+
+**文件**: [02_ai_ml_cheatsheet.md](./02_ai_ml_cheatsheet.md)
+
+**内容**:
+
 - Burn/Candle/LLM 框架选型
 - 快速入门代码
 - 与 C01–C12 关联
@@ -515,13 +604,13 @@
 
 ### 速查卡统计
 
-- **总数量**: 20 个速查卡 ⭐ (含 AI/ML 速查卡，2026-02-13)
-- **总行数**: 约 11,000+ 行
-- **代码示例**: 800+ 个
-- **覆盖主题**: Rust 核心概念全覆盖（包括系统编程、网络编程、算法、设计模式、WASM）
-- **交叉引用**: ✅ 所有20个速查卡已统一添加"相关资源"部分，包含官方文档、项目内部文档和相关速查卡链接
-- **相关示例代码**: ✅ 20 个速查卡（含 AI/ML，2026-02-13）
-- **反例速查**: ✅ 20/20 速查卡已补全「反例速查」小节（错误示例 + 原因 + 修正），模板见 ANTI_PATTERN_10_template.md（2026-02-12）
+- **总数量**: 26 个速查卡 ⭐ (含版本特性速查卡 1.90–1.98 nightly，2026-05-29)
+- **总行数**: 约 13,000+ 行
+- **代码示例**: 900+ 个
+- **覆盖主题**: Rust 核心概念全覆盖（包括系统编程、网络编程、算法、设计模式、WASM）+ 版本特性跟踪（1.90–1.98 nightly）
+- **交叉引用**: ✅ 所有25个速查卡已统一添加"相关资源"部分，包含官方文档、项目内部文档和相关速查卡链接
+- **相关示例代码**: ✅ 26 个速查卡（含版本特性，2026-05-29）
+- **反例速查**: ✅ 20/20 核心速查卡已补全「反例速查」小节（错误示例 + 原因 + 修正），模板见 ANTI_PATTERN_10_template.md（2026-02-12）
 - **版本一致性**: ✅ 所有速查卡已更新到 Rust 1.96.0+
 
 ---
@@ -571,6 +660,18 @@
 ---
 
 ## 🔄 更新日志 {#-更新日志}
+
+### 2026-05-29
+
+- ✅ **新增版本特性速查卡**: 补齐 Rust 1.90–1.97 版本特性速查表
+  - `02_rust_190_to_193_features_cheatsheet.md`: 1.90–1.93 累积特性
+  - `02_rust_194_features_cheatsheet.md`: 1.94 特性（从 archive 迁移）
+  - `02_rust_195_features_cheatsheet.md`: 1.95 特性（已存在，确认覆盖）
+  - `02_rust_196_features_cheatsheet.md`: 1.96 特性（已存在，确认覆盖）
+  - `02_rust_197_features_cheatsheet.md`: 1.97 beta 特性（新增）
+- ✅ **新增 1.98 nightly 前瞻速查卡**: `02_rust_198_nightly_preview_cheatsheet.md`
+  - gen 块、for await、derive(CoercePointee)、never_type 推进、函数对齐、调试断点
+- ✅ **速查卡总数**: 20 → 26
 
 ### 2026-02-12
 

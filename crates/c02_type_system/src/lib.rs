@@ -3,6 +3,7 @@
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]
 #![feature(never_type)]
+#![feature(derive_coerce_pointee)]
 
 // 导出所有主要模块
 pub mod error;
@@ -36,6 +37,7 @@ pub mod rust_192_features;
 pub mod rust_195_features;
 pub mod rust_196_features;
 pub mod rust_197_features;
+pub mod rust_198_features;
 
 // 注意: rust_196_tuple_coercion 模块包含的内容与 Rust 实际稳定特性不符，
 // 将在后续版本中清理或重命名。当前保留仅为兼容性。

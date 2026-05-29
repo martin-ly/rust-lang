@@ -1,5 +1,7 @@
 // [来源: The Embedded Rust Book / Rust Reference]
 #![cfg_attr(target_arch = "arm", no_std)]
+#![feature(core_intrinsics, fn_align)]
+#![allow(internal_features)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]
 #![allow(clippy::module_name_repetitions)]
@@ -51,6 +53,7 @@ pub mod rust_193_features;
 pub mod rust_195_features; // Rust 1.95 特性 (裸指针 unchecked, PowerPC asm, cfg_select 嵌入式)
 pub mod rust_196_features; // Rust 1.96+ 特性 (pin! 宏, const VecDeque, bool→float, const NonNull)
 pub mod rust_197_features;
+pub mod rust_198_features;
 
 pub mod uart_driver; // RTIC 实时中断驱动并发
 

@@ -3,7 +3,7 @@
 > **Bloom 层级**: L4 (分析)
 > **A/S/P 标记**: **S** — Structure
 > **定位**: 探讨 Rust 中 arbitrary self types 的提案——允许 `self` 参数使用任意类型（不仅是 `Self`、`&Self`、`&mut Self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<P<Self>>`），分析其对嵌入式驱动、内核编程和自定义指针类型的影响。
-> **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Pin](../03_advanced/01_pin.md) · [Smart Pointers](../02_intermediate/04_smart_pointers.md)
+> **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Pin](../03_advanced/06_pin_unpin.md) · [Smart Pointers](../02_intermediate/12_smart_pointers.md)
 
 ---
 
@@ -28,6 +28,10 @@
   - [参考](#参考)
 
 ## 一、核心概念
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/items/associated-items.html)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1.1 当前限制
 
@@ -51,6 +55,10 @@ impl MyType {
 ```
 
 ### 1.2 Arbitrary Self Types 提案
+>
+> **[来源: [Rust Internals Forum](https://internals.rust-lang.org/)]**
+>
+> **[来源: [RFC 44874 Tracking Issue](https://github.com/rust-lang/rust/issues/44874)]**
 
 Arbitrary self types 允许 `self` 使用**任何实现 `DispatchFromDyn` 或满足特定约束的类型**：
 
@@ -72,6 +80,10 @@ impl MyType {
 ---
 
 ## 二、技术细节
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 2.1 `DispatchFromDyn` Trait
 
@@ -108,6 +120,10 @@ impl<T> Deref for KernelPtr<T> {
 ---
 
 ## 三、使用场景
+>
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust for Linux](https://rust-for-linux.com/)]**
 
 ### 场景 1：内核编程（Rust for Linux）
 
@@ -171,6 +187,10 @@ impl<T> TaggedPtr<T> {
 ---
 
 ## 四、反命题与边界分析
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/unsafe-blocks.html)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 安全边界
 

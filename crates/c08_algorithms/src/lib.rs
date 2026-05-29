@@ -109,6 +109,7 @@ pub mod rust_194_features;
 pub mod rust_195_features;
 pub mod rust_196_features;
 pub mod rust_197_features;
+pub mod rust_198_features;
 
 pub mod algorithm_decision_trees;
 

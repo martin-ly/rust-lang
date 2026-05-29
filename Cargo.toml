@@ -434,7 +434,7 @@ sqlx = { version = "0.8.6", features = [
     "uuid",                # UUID类型支持
 ], default-features = false }
 # redis: Redis客户端库，支持异步操作
-redis = "1.2.1"
+redis = "1.2.2"
 # rusqlite: SQLite的Rust绑定，提供类型安全的SQLite接口
 rusqlite = { version = "0.39.0", default-features = false }
 # mysql_async: MySQL异步客户端

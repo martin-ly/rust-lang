@@ -15,7 +15,7 @@
 >
 - [📚 形式化证明文档索引 {#-形式化证明文档索引}](#-形式化证明文档索引--形式化证明文档索引)
   - [📑 目录](#-目录)
-  - [� 公理编号规范 (Axiom Numbering Convention) {#-公理编号规范-axiom-numbering-convention}](#-公理编号规范-axiom-numbering-convention--公理编号规范-axiom-numbering-convention)
+  - [🔢 公理编号规范 (Axiom Numbering Convention) {#-公理编号规范-axiom-numbering-convention}](#-公理编号规范-axiom-numbering-convention--公理编号规范-axiom-numbering-convention)
   - [📐 证明深度层次 (Proof Depth) {#-证明深度层次-proof-depth}](#-证明深度层次-proof-depth--证明深度层次-proof-depth)
   - [🎯 索引说明 {#-索引说明}](#-索引说明--索引说明)
   - [📚 按研究领域分类 {#-按研究领域分类}](#-按研究领域分类--按研究领域分类)

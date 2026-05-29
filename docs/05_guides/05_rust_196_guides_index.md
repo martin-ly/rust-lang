@@ -3,7 +3,7 @@
 > **Bloom 层级**: L3-L4 (应用/分析)
 
 > **目录**: docs/05_guides/
-> **文档数**: 28
+> **文档数**: 29
 > **Rust 版本**: 1.96.0
 > **梳理日期**: 2026-04-10
 > **深度整合状态**: ✅✅✅✅✅✅ **100% 完成（28/28 文档）** 🎉🎉🎉
@@ -15,18 +15,17 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.96 指南文档语义梳理索引](#rust-196-指南文档语义梳理索引)
-  - [📑 目录](#目录)
-  - [📋 指南文档清单与梳理状态](#指南文档清单与梳理状态)
-  - [🆕 Rust 1.95/1.96 特性指南（含版本勘误）](#rust-195196-特性指南含版本勘误)
+  - [📑 目录](#-目录)
+  - [📋 指南文档清单与梳理状态](#-指南文档清单与梳理状态)
+  - [🆕 Rust 1.95/1.96 特性指南（含版本勘误）](#-rust-195196-特性指南含版本勘误)
     - [核心新特性概览](#核心新特性概览)
-  - [📝 统一更新模板](#统一更新模板)
+  - [📝 统一更新模板](#-统一更新模板)
     - [Rust 1.96 内容模板](#rust-196-内容模板)
       - [迁移注意事项](#迁移注意事项)
-      - [迁移注意事项](#迁移注意事项)
+      - [迁移注意事项](#迁移注意事项-1)
     - [检查 1.96 特性覆盖](#检查-196-特性覆盖)
-  - **负责人**: 系统化梳理团队
+  - [**负责人**: 系统化梳理团队](#负责人-系统化梳理团队)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 📋 指南文档清单与梳理状态
@@ -59,6 +58,7 @@
 | 22 | 05_final_documentation_completion_guide.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 23 | UNSAFE_PATTERNS_GUIDE.md | 1.93 | ✅ | ✅ | **深度整合完成** |
 | 24 | workflow/README.md | 1.93 | ✅ | ✅ | **深度整合完成** |
+| 25 | 06_rust_2024_edition_migration_guide.md | 1.85+ | ✅ | ✅ | **深度整合完成** |
 
 ---
 
@@ -79,6 +79,7 @@
 | `async Fn` / async closures | 异步编程 (≥1.85, Edition 2024) | 异步 trait、回调抽象 | 05_async_programming_usage_guide.md |
 | `if let guards` | 语言特性 | 模式匹配守卫 | CONTROL_FLOW_GUIDE.md |
 | `Vec::pop_if` | 集合操作 (≥1.86) | 条件弹出、栈操作 | 10_best_practices.md |
+| Edition 2024 迁移 | 语言版本 | 迁移检查清单、代码对比 | 06_rust_2024_edition_migration_guide.md |
 | `const fn` 改进 | 编译时计算 | 常量初始化 | 05_design_patterns_usage_guide.md |
 
 ---
@@ -261,56 +262,3 @@ grep -r "isqrt\|get_disjoint_mut\|if let guards\|async Fn" docs/05_guides/ | wc 
 > **[来源: Rustonomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

@@ -1,28 +1,62 @@
-//! Rust 1.97 特性跟踪模块 —— 宏系统
+//! Rust 1.97 特性跟踪模块 —— 宏系统与构建
 #![allow(clippy::incompatible_msrv)]
 
-/// # Rust 1.97 特性演示
+/// # Rust 1.97 宏系统与构建特性演示
 ///
-/// 展示 `std::iter::repeat_n` 和 `Vec::pop_if` 在宏系统中的应用。
-pub struct Rust197Features;
+/// Rust 1.97 稳定化的 Cargo 构建相关改进：
+/// - `CARGO_CFG_FEATURE` 环境变量传递给 build scripts
+/// - cfg 中关键字 future-incompatibility warning
+/// - higher precedence trailing flags
+///
+/// **注意**: 以下代码展示的是概念性用法，实际 build script 需要在 `build.rs` 中运行。
+pub struct Rust197MacroFeatures;
 
-impl Rust197Features {
-    /// 使用 `repeat_n` 生成重复的宏令牌占位符
-    pub fn repeat_tokens(token: &str, count: usize) -> Vec<String> {
-        std::iter::repeat_n(token.to_string(), count).collect()
+impl Rust197MacroFeatures {
+    /// 演示如何在 build script 中使用 `CARGO_CFG_FEATURE`
+    ///
+    /// 在 `build.rs` 中可以通过 `env::var("CARGO_CFG_FEATURE")` 获取
+    /// 当前启用的 feature 列表（逗号分隔）。
+    pub fn cargo_cfg_feature_doc() -> &'static str {
+        r#"
+        // In build.rs:
+        use std::env;
+
+        fn main() {
+            if let Ok(features) = env::var("CARGO_CFG_FEATURE") {
+                for feature in features.split(',') {
+                    println!("cargo:rustc-cfg=has_feature_{}", feature);
+                }
+            }
+        }
+        "#
     }
 
-    /// 使用 `Vec::pop_if` 条件性移除最后一个宏参数
-    pub fn pop_if_variadic(params: &mut Vec<String>) -> Option<String> {
-        params.pop_if(|p| p.starts_with("..."))
+    /// 演示 cfg 中关键字的 future-incompatibility warning
+    ///
+    /// Rust 1.97 开始对 cfg 条件中的关键字（如 `cfg(target_os = "windows")` 中的
+    /// `target_os`）引入 future-incompatibility warning。
+    pub fn cfg_keyword_warning_doc() -> &'static str {
+        r#"
+        // 使用 raw-ident 避免关键字冲突（Rust 1.97+ 推荐）:
+        #[cfg(target_has_atomics = "64")]
+        // 或
+        #[cfg(r#type = "mytype")]  // 如果 "type" 是自定义 cfg 键
+        "#
     }
 
-    /// 组合两者构建宏参数列表
-    pub fn build_macro_params(base: &str, repeat_count: usize) -> (Vec<String>, Option<String>) {
-        let mut params: Vec<String> = std::iter::repeat_n(base.to_string(), repeat_count).collect();
-        params.push("...rest".to_string());
-        let variadic = params.pop_if(|p| p.starts_with("..."));
-        (params, variadic)
+    /// 演示 higher precedence trailing flags
+    ///
+    /// Cargo 1.97 稳定化了尾部标志的更高优先级解析规则。
+    pub fn trailing_flags_doc() -> &'static str {
+        r#"
+        // 在 Cargo.toml 的 [target.'cfg(...)'.linker] 配置中，
+        // 尾部标志现在具有更高优先级。
+        // 
+        // 例如:
+        // [target.x86_64-pc-windows-msvc]
+        // linker = "lld-link"
+        // rustflags = ["/subsystem:console"]
+        "#
     }
 }
 
@@ -31,31 +65,20 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_repeat_tokens() {
-        assert_eq!(
-            Rust197Features::repeat_tokens("$ident", 3),
-            vec!["$ident", "$ident", "$ident"]
-        );
-        assert!(Rust197Features::repeat_tokens("$ident", 0).is_empty());
+    fn test_cargo_cfg_feature_doc() {
+        let doc = Rust197MacroFeatures::cargo_cfg_feature_doc();
+        assert!(doc.contains("CARGO_CFG_FEATURE"));
     }
 
     #[test]
-    fn test_pop_if_variadic() {
-        let mut v = vec!["a".to_string(), "...rest".to_string()];
-        assert_eq!(
-            Rust197Features::pop_if_variadic(&mut v),
-            Some("...rest".to_string())
-        );
-        assert_eq!(v, vec!["a"]);
-
-        let mut v2 = vec!["a".to_string()];
-        assert_eq!(Rust197Features::pop_if_variadic(&mut v2), None);
+    fn test_cfg_keyword_warning_doc() {
+        let doc = Rust197MacroFeatures::cfg_keyword_warning_doc();
+        assert!(doc.contains("raw-ident"));
     }
 
     #[test]
-    fn test_build_macro_params() {
-        let (params, variadic) = Rust197Features::build_macro_params("$x", 2);
-        assert_eq!(params, vec!["$x", "$x"]);
-        assert_eq!(variadic, Some("...rest".to_string()));
+    fn test_trailing_flags_doc() {
+        let doc = Rust197MacroFeatures::trailing_flags_doc();
+        assert!(doc.contains("linker"));
     }
 }

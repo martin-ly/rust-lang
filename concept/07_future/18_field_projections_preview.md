@@ -3,7 +3,7 @@
 > **Bloom 层级**: L4 (分析)
 > **A/S/P 标记**: **S** — Structure
 > **定位**: 探讨 Rust 中 field projections 的提案——允许安全地从复合类型中"投影"出对字段的引用，而不暴露内部结构。分析其对内核编程、自引用结构和内存安全保证的影响。
-> **前置概念**: [Pin](../03_advanced/01_pin.md) · [Lifetime](../01_foundation/03_lifetimes.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
+> **前置概念**: [Pin](../03_advanced/06_pin_unpin.md) · [Lifetime](../01_foundation/03_lifetimes.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 
 ---
 
@@ -29,6 +29,10 @@
   - [参考](#参考)
 
 ## 一、核心概念
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/expressions/field-access-expr.html)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1.1 问题背景
 
@@ -51,6 +55,10 @@ let h = &p.header; // ✅ 简单
 - **自引用结构**: 安全地表达"结构体包含指向自身的指针"
 
 ### 1.2 Field Projections 提案
+>
+> **[来源: [Rust Internals Forum](https://internals.rust-lang.org/)]**
+>
+> **[来源: [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)]**
 
 Field projections 允许编译器生成**安全的字段访问投影**，提供以下保证：
 
@@ -75,6 +83,10 @@ let status: &u32 = base.project::<DeviceRegs, _>(|d| &d.status); // 安全投影
 ---
 
 ## 二、技术细节
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/types.html)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 2.1 投影类型系统
 
@@ -114,6 +126,10 @@ struct SelfRef {
 ---
 
 ## 三、使用场景
+>
+> **[来源: [Rust Embedded Working Group](https://github.com/rust-embedded/wg)]**
+>
+> **[来源: [Rust for Linux](https://rust-for-linux.com/)]**
 
 ### 场景 1：MMIO 寄存器访问（嵌入式/内核）
 
@@ -183,6 +199,10 @@ fn parse_packet(bytes: &[u8]) -> Option<&Packet> {
 ---
 
 ## 四、反命题与边界分析
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/types/struct.html)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/macro.offset_of.html)]**
 
 ### 4.1 与 `offset_of!` 的关系
 

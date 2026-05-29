@@ -5,6 +5,7 @@
 #![allow(clippy::assertions_on_constants)]
 // Nightly 预研特性（仅用于 async_closures_preview 和 afit_dyn_tracking 模块）
 // 这些特性在 stable 编译器下会被条件编译排除
+#![feature(async_iterator, async_for_loop)]
 
 //! # C06 Async - Rust 异步编程全面解析
 //!
@@ -315,6 +316,7 @@ pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95 特性 (async 场景 if let guards)
 pub mod rust_196_features;
 pub mod rust_197_features;
+pub mod rust_198_features;
 
 /// 异步运行时示例
 pub mod async_runtime_examples;

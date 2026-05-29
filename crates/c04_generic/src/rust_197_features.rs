@@ -1,30 +1,50 @@
-//! Rust 1.97 特性跟踪模块 —— 泛型
+//! Rust 1.97 特性跟踪模块 —— 泛型与高级类型
 #![allow(clippy::incompatible_msrv)]
 
-/// # Rust 1.97 特性演示
+/// # Rust 1.97 泛型特性演示
 ///
-/// 展示 `std::iter::repeat_n` 和 `Vec::pop_if` 在泛型编程中的应用。
-pub struct Rust197Features;
+/// Rust 1.97 稳定化的核心泛型/集合 API：
+/// - `impl Extend` for tuples with arity 1 through 12
+/// - `impl FromIterator<(A, ...)>` for tuples with arity 1 through 12
+/// - `BufRead` for `VecDeque<u8>`
+/// - `BuildHasherDefault::new` const stable
+pub struct Rust197GenericFeatures;
 
-impl Rust197Features {
-    /// 使用 `repeat_n` 生成泛型重复序列
-    pub fn repeat_value<T: Clone>(value: T, count: usize) -> Vec<T> {
-        std::iter::repeat_n(value, count).collect()
+impl Rust197GenericFeatures {
+    /// 使用元组的 `Extend` trait 并行收集多个迭代器的结果
+    ///
+    /// Rust 1.97 为元组实现了 `Extend`，允许一次向多个集合追加元素。
+    pub fn extend_tuples_example() -> (Vec<i32>, Vec<String>) {
+        let mut result: (Vec<i32>, Vec<String>) = (Vec::new(), Vec::new());
+        let items = vec![
+            (1, "one".to_string()),
+            (2, "two".to_string()),
+            (3, "three".to_string()),
+        ];
+        result.extend(items);
+        result
     }
 
-    /// 使用 `Vec::pop_if` 在泛型上下文中条件弹出
-    pub fn pop_if_matches<T>(
-        vec: &mut Vec<T>,
-        predicate: impl FnOnce(&mut T) -> bool,
-    ) -> Option<T> {
-        vec.pop_if(predicate)
+    /// 使用 `FromIterator` 为元组从迭代器构造并行集合
+    ///
+    /// 与 `Extend` 配合使用，实现"一次 collect，多个容器"。
+    pub fn from_iterator_tuples_example() -> (Vec<i32>, Vec<String>) {
+        let items = vec![(10, "ten".to_string()), (20, "twenty".to_string())];
+        items.into_iter().collect()
     }
 
-    /// 组合 repeat_n 与 pop_if 构建泛型缓冲池
-    pub fn create_and_drain_buffer<T: Clone>(value: T, count: usize) -> (Vec<T>, Option<T>) {
-        let mut buf: Vec<T> = std::iter::repeat_n(value, count).collect();
-        let last = buf.pop_if(|_| true);
-        (buf, last)
+    /// 三元组版本的 `Extend` 演示
+    pub fn extend_three_tuples() -> (Vec<i32>, Vec<i32>, Vec<i32>) {
+        let mut result: (Vec<i32>, Vec<i32>, Vec<i32>) = (Vec::new(), Vec::new(), Vec::new());
+        let items = vec![(1, 2, 3), (4, 5, 6)];
+        result.extend(items);
+        result
+    }
+
+    /// 使用 `BuildHasherDefault::new` 在 const 上下文中构造哈希构建器
+    pub const fn const_build_hasher()
+    -> std::hash::BuildHasherDefault<std::collections::hash_map::DefaultHasher> {
+        std::hash::BuildHasherDefault::new()
     }
 }
 
@@ -33,28 +53,29 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_repeat_value() {
-        assert_eq!(Rust197Features::repeat_value(7, 3), vec![7, 7, 7]);
-        assert_eq!(
-            Rust197Features::repeat_value("x".to_string(), 2),
-            vec!["x", "x"]
-        );
+    fn test_extend_tuples() {
+        let (nums, strings) = Rust197GenericFeatures::extend_tuples_example();
+        assert_eq!(nums, vec![1, 2, 3]);
+        assert_eq!(strings, vec!["one", "two", "three"]);
     }
 
     #[test]
-    fn test_pop_if_matches() {
-        let mut v = vec![1, 2, 3];
-        assert_eq!(
-            Rust197Features::pop_if_matches(&mut v, |x| *x == 3),
-            Some(3)
-        );
-        assert_eq!(v, vec![1, 2]);
+    fn test_from_iterator_tuples() {
+        let (nums, strings) = Rust197GenericFeatures::from_iterator_tuples_example();
+        assert_eq!(nums, vec![10, 20]);
+        assert_eq!(strings, vec!["ten", "twenty"]);
     }
 
     #[test]
-    fn test_create_and_drain_buffer() {
-        let (buf, last) = Rust197Features::create_and_drain_buffer(0, 4);
-        assert_eq!(buf, vec![0, 0, 0]);
-        assert_eq!(last, Some(0));
+    fn test_extend_three_tuples() {
+        let (a, b, c) = Rust197GenericFeatures::extend_three_tuples();
+        assert_eq!(a, vec![1, 4]);
+        assert_eq!(b, vec![2, 5]);
+        assert_eq!(c, vec![3, 6]);
+    }
+
+    #[test]
+    fn test_const_build_hasher() {
+        let _ = Rust197GenericFeatures::const_build_hasher();
     }
 }

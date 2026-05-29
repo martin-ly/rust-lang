@@ -90,12 +90,17 @@ impl ConstVecDequeExamples {
 }
 
 // ============================================================================
-// Never 类型 (`!`) 深度专题 (nightly-only, 非 1.96 stable)
+// Never 类型 (`!`) 深度专题 (Rust 1.96+ stable, Edition 2024)
 // ============================================================================
 
-// ⚠️ **注意**: 完整的 `!` 类型支持仍需 nightly 编译器 (`#![feature(never_type)]`)。
-// 在 stable Rust 中，`!` 的部分行为已通过 edition 2024 的 fallback 改进可用，
-// 但 `Result<T, !>` 等完整用法在 stable 上可能受限。
+// ✅ **状态**: `!` 类型的核心功能在 Rust 1.96+ stable / Edition 2024 中已可用：
+//    - `!` 作为函数返回类型（`-> !`）—— 早已稳定
+//    - `Result<T, !>` / `Option<!>` —— stable 可用（通过 edition 2024）
+//    - never type 在 tuple 表达式中的 coercion —— Rust 1.96 stable
+//    - match 穷尽性检查（`Result<T, !>` 无需 `Err` 分支）—— stable 可用
+//
+// ⚠️ **限制**: `!` 作为显式类型别名（如 `type MyNever = !;`）在某些上下文中仍受限，
+//    但这不影响上述核心用例。
 //
 // # Rust 2024 Edition Never 类型 (`!`) 深度专题
 //

@@ -1,35 +1,50 @@
 //! Rust 1.97 特性跟踪模块 —— 网络编程
 #![allow(clippy::incompatible_msrv)]
 
-use std::collections::VecDeque;
-use std::io;
+use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
+use std::ops::{BitAnd, BitOr, Not};
 
-/// # Rust 1.97 特性演示
+/// # Rust 1.97 网络特性演示
 ///
-/// 展示 `io::Error::other` 和 `VecDeque::resize` 在网络编程中的应用。
-pub struct Rust197Features;
+/// Rust 1.97 稳定化的核心网络 API：
+/// - `Ipv6Addr::is_unique_local` / `is_unicast_link_local`
+/// - `IpAddr::to_canonical` / `Ipv6Addr::to_canonical`
+/// - `Not`, `BitAnd`, `BitOr` 等位运算 trait 为 IP 地址实现
+pub struct Rust197NetworkFeatures;
 
-impl Rust197Features {
-    /// 使用 `io::Error::other` 快速创建网络错误
-    pub fn network_error(reason: &str) -> io::Error {
-        io::Error::other(reason)
+impl Rust197NetworkFeatures {
+    /// 检查 IPv6 地址是否为 Unique Local Address (ULA, fc00::/7)
+    pub fn is_unique_local(addr: Ipv6Addr) -> bool {
+        addr.is_unique_local()
     }
 
-    /// 使用 `VecDeque::resize` 调整网络包缓冲区
-    pub fn resize_packet_buffer(packets: VecDeque<u8>, frame_size: usize) -> VecDeque<u8> {
-        let mut buf = packets;
-        buf.resize(frame_size, 0);
-        buf
+    /// 检查 IPv6 地址是否为 Unicast Link-Local (fe80::/10)
+    pub fn is_unicast_link_local(addr: Ipv6Addr) -> bool {
+        addr.is_unicast_link_local()
     }
 
-    /// 结合两者进行网络帧验证
-    pub fn validate_frame(frame: VecDeque<u8>, min_size: usize) -> Result<VecDeque<u8>, io::Error> {
-        if frame.len() < min_size {
-            return Err(io::Error::other("帧长度不足"));
-        }
-        let mut buf = frame;
-        buf.resize(min_size, 0);
-        Ok(buf)
+    /// 将 IPv6 地址转换为其规范形式
+    ///
+    /// 对于 IPv4-mapped IPv6 地址，返回对应的 IPv4 地址；否则返回自身。
+    pub fn to_canonical(addr: IpAddr) -> IpAddr {
+        addr.to_canonical()
+    }
+
+    /// 演示 IPv6 地址的位运算（Rust 1.97+）
+    ///
+    /// IP 地址现在支持 `!`, `&`, `|`, `^` 等位运算。
+    pub fn ipv6_bitwise_mask(addr: Ipv6Addr, mask: Ipv6Addr) -> Ipv6Addr {
+        addr.bitand(mask)
+    }
+
+    /// 演示 IPv4 地址的位或运算
+    pub fn ipv4_bitwise_or(a: Ipv4Addr, b: Ipv4Addr) -> Ipv4Addr {
+        a.bitor(b)
+    }
+
+    /// 演示 IPv4 地址的取反运算
+    pub fn ipv4_invert(addr: Ipv4Addr) -> Ipv4Addr {
+        addr.not()
     }
 }
 
@@ -38,26 +53,59 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_network_error() {
-        let err = Rust197Features::network_error("连接超时");
-        assert_eq!(err.kind(), io::ErrorKind::Other);
+    fn test_is_unique_local() {
+        let ula = Ipv6Addr::new(0xfc00, 0, 0, 0, 0, 0, 0, 1);
+        assert!(Rust197NetworkFeatures::is_unique_local(ula));
+
+        let global = Ipv6Addr::new(0x2001, 0xdb8, 0, 0, 0, 0, 0, 1);
+        assert!(!Rust197NetworkFeatures::is_unique_local(global));
     }
 
     #[test]
-    fn test_resize_packet_buffer() {
-        let buf = VecDeque::from(vec![0x01, 0x02]);
-        let result = Rust197Features::resize_packet_buffer(buf, 4);
-        assert_eq!(result.len(), 4);
-        assert_eq!(Vec::from(result), vec![0x01, 0x02, 0x00, 0x00]);
+    fn test_is_unicast_link_local() {
+        let link_local = Ipv6Addr::new(0xfe80, 0, 0, 0, 0, 0, 0, 1);
+        assert!(Rust197NetworkFeatures::is_unicast_link_local(link_local));
+
+        let global = Ipv6Addr::new(0x2001, 0xdb8, 0, 0, 0, 0, 0, 1);
+        assert!(!Rust197NetworkFeatures::is_unicast_link_local(global));
     }
 
     #[test]
-    fn test_validate_frame() {
-        let frame = VecDeque::from(vec![0xFF; 10]);
-        let result = Rust197Features::validate_frame(frame, 8).unwrap();
-        assert_eq!(result.len(), 8);
+    fn test_to_canonical_ipv4_mapped() {
+        let mapped = IpAddr::V6(Ipv6Addr::new(0, 0, 0, 0, 0, 0xffff, 0xc000, 0x0280));
+        let canonical = Rust197NetworkFeatures::to_canonical(mapped);
+        assert_eq!(canonical, IpAddr::V4(Ipv4Addr::new(192, 0, 2, 128)));
+    }
 
-        let small = VecDeque::from(vec![0x01]);
-        assert!(Rust197Features::validate_frame(small, 8).is_err());
+    #[test]
+    fn test_to_canonical_regular_ipv6() {
+        let v6 = IpAddr::V6(Ipv6Addr::new(0x2001, 0xdb8, 0, 0, 0, 0, 0, 1));
+        let canonical = Rust197NetworkFeatures::to_canonical(v6);
+        assert_eq!(canonical, v6);
+    }
+
+    #[test]
+    fn test_ipv6_bitwise_mask() {
+        let addr = Ipv6Addr::new(0xffff, 0xffff, 0xffff, 0xffff, 0, 0, 0, 0);
+        let mask = Ipv6Addr::new(
+            0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff,
+        );
+        let result = Rust197NetworkFeatures::ipv6_bitwise_mask(addr, mask);
+        assert_eq!(result, addr);
+    }
+
+    #[test]
+    fn test_ipv4_bitwise_or() {
+        let a = Ipv4Addr::new(192, 168, 0, 0);
+        let b = Ipv4Addr::new(0, 0, 1, 1);
+        let result = Rust197NetworkFeatures::ipv4_bitwise_or(a, b);
+        assert_eq!(result, Ipv4Addr::new(192, 168, 1, 1));
+    }
+
+    #[test]
+    fn test_ipv4_invert() {
+        let addr = Ipv4Addr::new(255, 255, 255, 0);
+        let result = Rust197NetworkFeatures::ipv4_invert(addr);
+        assert_eq!(result, Ipv4Addr::new(0, 0, 0, 255));
     }
 }
