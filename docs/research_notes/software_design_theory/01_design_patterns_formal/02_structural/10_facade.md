@@ -3,11 +3,11 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Facade 形式化分析](#facade-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
+  - [📑 目录](#-目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Facade 结构）](#def-11facade-结构)
     - [Axiom FA1（简化接口公理）](#axiom-fa1简化接口公理)
@@ -33,14 +33,15 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -50,49 +51,6 @@
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 10 行（Facade）
 > **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [Facade 形式化分析](#facade-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
-  - [形式化定义](#形式化定义)
-    - [Def 1.1（Facade 结构）](#def-11facade-结构)
-    - [Axiom FA1（简化接口公理）](#axiom-fa1简化接口公理)
-    - [Axiom FA2（协调调用公理）](#axiom-fa2协调调用公理)
-    - [定理 FA-T1（封装边界定理）](#定理-fa-t1封装边界定理)
-    - [定理 FA-T2（所有权协调定理）](#定理-fa-t2所有权协调定理)
-    - [推论 FA-C1（纯 Safe Facade）](#推论-fa-c1纯-safe-facade)
-    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
-  - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [完整证明](#完整证明)
-    - [形式化论证链](#形式化论证链)
-    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
-    - [内存安全保证](#内存安全保证)
-  - [典型场景](#典型场景)
-  - [完整场景示例：日志系统外观](#完整场景示例日志系统外观)
-  - [相关模式](#相关模式)
-  - [实现变体](#实现变体)
-  - [反例：外观暴露子系统细节](#反例外观暴露子系统细节)
-  - [选型决策树](#选型决策树)
-  - [与 GoF 对比](#与-gof-对比)
-  - [边界](#边界)
-  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
-  - [思维导图](#思维导图)
-  - [与其他模式的关系图](#与其他模式的关系图)
-  - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -334,6 +292,7 @@ ownership_model
 ---
 
 ## 典型场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
@@ -345,6 +304,7 @@ ownership_model
 ---
 
 ## 完整场景示例：日志系统外观
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **场景**：日志需经由格式化、写入、轮转三个子系统；客户端仅需 `log(level, message)`。
@@ -382,6 +342,7 @@ impl LogFacade {
 ---
 
 ## 相关模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
@@ -393,6 +354,7 @@ impl LogFacade {
 ---
 
 ## 实现变体
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
@@ -404,6 +366,7 @@ impl LogFacade {
 ---
 
 ## 反例：外观暴露子系统细节
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **错误**：外观将子系统类型作为 `pub` 字段或方法参数暴露，破坏封装。
@@ -419,6 +382,7 @@ pub struct BadFacade {
 ---
 
 ## 选型决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -432,6 +396,7 @@ pub struct BadFacade {
 ---
 
 ## 与 GoF 对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | GoF | Rust 对应 | 差异 |
@@ -443,6 +408,7 @@ pub struct BadFacade {
 ---
 
 ## 边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 分类 |
@@ -454,6 +420,7 @@ pub struct BadFacade {
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
@@ -464,6 +431,7 @@ pub struct BadFacade {
 ---
 
 ## 思维导图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -492,6 +460,7 @@ mindmap
 ---
 
 ## 与其他模式的关系图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -510,6 +479,7 @@ graph LR
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -524,6 +494,7 @@ graph LR
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -582,6 +553,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [02_structural 目录](./README.md)

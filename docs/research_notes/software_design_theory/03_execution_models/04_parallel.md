@@ -3,11 +3,12 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [并行执行模型形式化](#并行执行模型形式化)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
+  - [📑 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
   - [与并发的区别](#与并发的区别)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
@@ -25,14 +26,15 @@
   - [边界](#边界)
   - [与 Rust 1.93 的对应](#与-rust-193-的对应)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -48,8 +50,8 @@
 > **[来源: Rust Official Docs]**
 
 - [并行执行模型形式化](#并行执行模型形式化)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
+  - [📑 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
   - [与并发的区别](#与并发的区别)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
@@ -67,14 +69,15 @@
   - [边界](#边界)
   - [与 Rust 1.93 的对应](#与-rust-193-的对应)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -240,6 +243,7 @@ loop {
 ---
 
 ## 分治与递归并行
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -261,6 +265,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ---
 
 ## 典型场景扩展
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 场景 | Rayon API | 说明 |
@@ -273,6 +278,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ---
 
 ## 与异步组合
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 组合 | 说明 | 示例 |
@@ -283,6 +289,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ---
 
 ## 反例
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 反例 | 后果 |
@@ -294,6 +301,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ---
 
 ## 边界
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | 分类 |
@@ -305,6 +313,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 1.93 特性 | 与本模型 | 说明 |
@@ -315,6 +324,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -329,6 +339,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -387,6 +398,7 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [03_execution_models 目录](./README.md)
@@ -491,4 +503,3 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

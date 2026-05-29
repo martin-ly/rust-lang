@@ -47,9 +47,11 @@ fn main() -> std::io::Result<()> {
 ---
 
 ## 2. 核心架构
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 整体架构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Ratatui 采用**即时模式 (Immediate Mode)** 渲染范式，每帧完全重建 UI 状态：
@@ -96,6 +98,7 @@ graph LR
 > [来源: Ratatui Docs — Concepts](https://ratatui.rs/concepts/)
 
 ### 2.2 Buffer 与 Cell 的内存模型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Ratatui 的核心数据结构是一个二维 `Cell` 数组，每个 `Cell` 编码一个终端字符格子的完整状态：
@@ -126,9 +129,11 @@ pub struct Cell {
 ---
 
 ## 3. 类型系统关键利用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 `Widget` Trait：声明式组合的基石
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Ratatui 的 `Widget` trait 是**消费型 trait** (consuming trait)，即 `render` 方法获取 `self` 的所有权：
@@ -156,6 +161,7 @@ impl Widget for Block<'_> {
 > [来源: Ratatui Widget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/trait.Widget.html)
 
 ### 3.2 `StatefulWidget`：有状态组件的借用模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 对于需要在帧间保持状态的组件（如 `List`、`Table`、`Scrollbar`），Ratatui 提供了第二个 trait：
@@ -183,6 +189,7 @@ frame.render_stateful_widget(list, area, &mut list_state);
 > [来源: Ratatui StatefulWidget Docs](https://docs.rs/ratatui/latest/ratatui/widgets/trait.StatefulWidget.html)
 
 ### 3.3 `Layout` 约束系统：编译期不可解，运行期可靠
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 Ratatui 的布局系统采用**Cassowary 约束求解算法**的简化版（类似 Flutter 的 `flex` 布局）：
@@ -214,9 +221,11 @@ let layout = Layout::default()
 ---
 
 ## 4. 渲染管线与差分算法
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 差分渲染的核心逻辑
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Ratatui 的性能关键不在于"渲染"，而在于**避免不必要的终端输出**：
@@ -257,9 +266,11 @@ impl Terminal {
 ---
 
 ## 5. Backend 抽象与可移植性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 `Backend` Trait
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Ratatui 通过 `Backend` trait 解耦与具体终端库的依赖：
@@ -292,6 +303,7 @@ pub trait Backend {
 > [来源: Ratatui Backend Docs](https://docs.rs/ratatui/latest/ratatui/backend/trait.Backend.html)
 
 ### 5.2 测试策略：纯函数的 UI 验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 `TestBackend` 使 Ratatui 的 UI 逻辑成为**可测试的纯函数**：
@@ -327,9 +339,11 @@ fn test_ui_renders_correctly() {
 ---
 
 ## 6. 与生态的集成
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 异步事件循环
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Ratatui 本身不提供事件循环，但与 Tokio / `crossterm` 的异步事件流无缝集成：
@@ -358,6 +372,7 @@ loop {
 ---
 
 ## 相关架构与延伸阅读
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Tokio 异步运行时架构](./06_tokio_architecture.md)
@@ -463,4 +478,3 @@ loop {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

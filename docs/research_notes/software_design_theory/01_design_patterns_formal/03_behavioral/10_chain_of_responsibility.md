@@ -3,11 +3,11 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Chain of Responsibility 形式化分析](#chain-of-responsibility-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
+  - [📑 目录](#-目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Chain of Responsibility 结构）](#def-11chain-of-responsibility-结构)
     - [Axiom CR1（链有穷公理）](#axiom-cr1链有穷公理)
@@ -33,14 +33,15 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -50,49 +51,6 @@
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 13 行（Chain of Responsibility）
 > **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [Chain of Responsibility 形式化分析](#chain-of-responsibility-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
-  - [形式化定义](#形式化定义)
-    - [Def 1.1（Chain of Responsibility 结构）](#def-11chain-of-responsibility-结构)
-    - [Axiom CR1（链有穷公理）](#axiom-cr1链有穷公理)
-    - [Axiom CR2（请求传递公理）](#axiom-cr2请求传递公理)
-    - [定理 CR-T1（链无悬垂定理）](#定理-cr-t1链无悬垂定理)
-    - [定理 CR-T2（递归处理安全定理）](#定理-cr-t2递归处理安全定理)
-    - [推论 CR-C1（纯 Safe Chain）](#推论-cr-c1纯-safe-chain)
-    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
-  - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [完整证明](#完整证明)
-    - [形式化论证链](#形式化论证链)
-    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
-    - [内存安全保证](#内存安全保证)
-  - [典型场景](#典型场景)
-  - [完整场景示例：HTTP 中间件链](#完整场景示例http-中间件链)
-  - [相关模式](#相关模式)
-  - [实现变体](#实现变体)
-  - [反例：链中形成环](#反例链中形成环)
-  - [选型决策树](#选型决策树)
-  - [与 GoF 对比](#与-gof-对比)
-  - [边界](#边界)
-  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
-  - [思维导图](#思维导图)
-  - [与其他模式的关系图](#与其他模式的关系图)
-  - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -319,6 +277,7 @@ borrow_checker_proof
 ---
 
 ## 典型场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
@@ -331,6 +290,7 @@ borrow_checker_proof
 ---
 
 ## 完整场景示例：HTTP 中间件链
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **场景**：请求依次经日志→认证；任一失败则短路返回。
@@ -378,6 +338,7 @@ let chain = LogHandler {
 ---
 
 ## 相关模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 关系 |
@@ -389,6 +350,7 @@ let chain = LogHandler {
 ---
 
 ## 实现变体
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变体 | 说明 | 适用 |
@@ -400,6 +362,7 @@ let chain = LogHandler {
 ---
 
 ## 反例：链中形成环
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **错误**：用 `Rc<RefCell<Handler>>` 等使 `next` 指回前驱，形成环。
@@ -414,6 +377,7 @@ let chain = LogHandler {
 ---
 
 ## 选型决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -427,6 +391,7 @@ let chain = LogHandler {
 ---
 
 ## 与 GoF 对比
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | GoF | Rust 对应 | 差异 |
@@ -438,6 +403,7 @@ let chain = LogHandler {
 ---
 
 ## 边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 维度 | 分类 |
@@ -449,6 +415,7 @@ let chain = LogHandler {
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
@@ -459,6 +426,7 @@ let chain = LogHandler {
 ---
 
 ## 思维导图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -486,6 +454,7 @@ mindmap
 ---
 
 ## 与其他模式的关系图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -502,6 +471,7 @@ graph LR
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -516,6 +486,7 @@ graph LR
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -574,6 +545,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [03_behavioral 目录](./README.md)

@@ -3,11 +3,12 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Abstract Factory 形式化分析](#abstract-factory-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
+  - [📑 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Abstract Factory 结构）](#def-11abstract-factory-结构)
     - [Axiom AF1（产品族一致性公理）](#axiom-af1产品族一致性公理)
@@ -32,14 +33,15 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -57,8 +59,8 @@
 > **[来源: Rust Official Docs]**
 
 - [Abstract Factory 形式化分析](#abstract-factory-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
+  - [📑 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Abstract Factory 结构）](#def-11abstract-factory-结构)
     - [Axiom AF1（产品族一致性公理）](#axiom-af1产品族一致性公理)
@@ -83,14 +85,15 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -316,6 +319,7 @@ ownership_model T2
 ---
 
 ## 典型场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
@@ -328,6 +332,7 @@ ownership_model T2
 ---
 
 ## 相关模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模式 | 关系 |
@@ -339,6 +344,7 @@ ownership_model T2
 ---
 
 ## 实现变体
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 变体 | 说明 | 适用 |
@@ -350,6 +356,7 @@ ownership_model T2
 ---
 
 ## 反例：混用不同族产品
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **错误**：从不同工厂取产品组合，风格不一致。
@@ -366,6 +373,7 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 ---
 
 ## 选型决策树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -378,6 +386,7 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 ---
 
 ## 与 GoF 对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | GoF | Rust 对应 | 差异 |
@@ -389,6 +398,7 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 ---
 
 ## 边界
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 维度 | 分类 |
@@ -400,6 +410,7 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
@@ -410,6 +421,7 @@ let ui = (win_factory.create_button(), mac_factory.create_dialog());
 ---
 
 ## 思维导图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -439,6 +451,7 @@ mindmap
 ---
 
 ## 与其他模式的关系图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -457,6 +470,7 @@ graph LR
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -471,6 +485,7 @@ graph LR
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -529,6 +544,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [01_creational 目录](./README.md)
@@ -669,4 +685,3 @@ graph LR
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -3,10 +3,11 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 惯用模式与设计理论衔接](#rust-惯用模式与设计理论衔接)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [宗旨](#宗旨)
   - [层次推进（阅读顺序）](#层次推进阅读顺序)
   - [一、RAII（资源获取即初始化）](#一raii资源获取即初始化)
@@ -45,14 +46,15 @@
     - [8.4 常见陷阱](#84-常见陷阱)
   - [九、智能指针选型决策](#九智能指针选型决策)
   - [十、引用](#十引用)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -243,6 +245,7 @@ impl std::ops::Add for Meter {
 ---
 
 ## 三、类型状态模式（Typed State）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 定义与形式化
@@ -286,6 +289,7 @@ impl std::ops::Add for Meter {
 ---
 
 ## 四、Builder 变体（与 GoF 对照）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 变体 | 说明 | 形式化文档 |
@@ -297,6 +301,7 @@ impl std::ops::Add for Meter {
 ---
 
 ## 五、与 23/43 模型衔接
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Idiom | 23 安全 | 43 完全 |
@@ -312,6 +317,7 @@ impl std::ops::Add for Meter {
 ---
 
 ## 六、Error handling 与 Result/? 惯用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 定义与形式化
@@ -377,6 +383,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 ---
 
 ## 七、Option/Result 组合模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 定义与形式化
@@ -388,6 +395,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 **定理 OR-T1**：`Option`/`Result` 与 [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../10_language_semantics_expressiveness.md) 构造性语义一致；无 null，无异常隐式传播。
 
 ### 7.2 典型场景
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 场景 | 实现 | 示例 |
@@ -397,6 +405,7 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 | 必填校验 | `opt.ok_or(Error::Missing)` | Builder 必填 |
 
 ### 7.3 完整代码示例：配置解析链
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -422,6 +431,7 @@ fn combine_all() -> Option<u32> {
 ```
 
 ### 7.4 与 Builder 必填校验衔接
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -442,9 +452,11 @@ impl ConfigBuilder {
 ---
 
 ## 八、Cow（Clone-on-Write）模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 8.1 定义与形式化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **Def COW1（Cow）**：`Cow<'a, T>` 表示「借用或拥有」；可读时用 `&T` 避免复制；需写时克隆为 `T`。形式化：$\text{Cow} = \text{Borrowed}(\&T) \mid \text{Owned}(T)$；$\text{to\_mut}(c) \rightarrow \text{若 Borrowed 则 clone 转为 Owned}$。
@@ -452,6 +464,7 @@ impl ConfigBuilder {
 **定理 COW-T1**：Cow 与 ownership 规则一致；读时不转移所有权；写时取得独占所有权。
 
 ### 8.2 典型场景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 场景 | 实现 | 与设计模式关系 |
@@ -461,6 +474,7 @@ impl ConfigBuilder {
 | 条件克隆 | 仅修改时克隆 | 延迟复制 |
 
 ### 8.3 完整代码示例：字符串处理
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -493,6 +507,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 ```
 
 ### 8.4 常见陷阱
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 陷阱 | 后果 | 规避 |
@@ -503,6 +518,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 ---
 
 ## 九、智能指针选型决策
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 需求 | 选型 | 形式化对应 |
@@ -517,6 +533,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 ---
 
 ## 十、引用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/)：Rust Idioms 官方来源
@@ -527,12 +544,14 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -578,6 +597,7 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [software_design_theory 目录](./README.md)
@@ -704,4 +724,3 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

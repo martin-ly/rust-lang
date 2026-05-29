@@ -20,12 +20,17 @@ def find_all_md_files(base_path):
     return md_files
 
 def extract_links(content, file_path):
-    """从 Markdown 内容中提取所有链接"""
+    """从 Markdown 内容中提取所有链接（跳过代码块）"""
     links = []
+    
+    # 移除 fenced code blocks (```...```)
+    content_without_code = re.sub(r'```[\s\S]*?```', '', content)
+    # 移除 inline code (`...`)
+    content_without_code = re.sub(r'`[^`]+`', '', content_without_code)
     
     # 匹配 [text](url) 格式
     pattern = r'\[([^\]]+)\]\(([^)]+)\)'
-    matches = re.findall(pattern, content)
+    matches = re.findall(pattern, content_without_code)
     
     for text, url in matches:
         links.append({
@@ -36,7 +41,7 @@ def extract_links(content, file_path):
     
     # 匹配 <url> 格式 (自动链接)
     auto_link_pattern = r'<(https?://[^>]+)>'
-    auto_matches = re.findall(auto_link_pattern, content)
+    auto_matches = re.findall(auto_link_pattern, content_without_code)
     for url in auto_matches:
         links.append({
             'text': url,
@@ -49,7 +54,7 @@ def extract_links(content, file_path):
 def is_external_link(url):
     """判断是否为外部链接"""
     parsed = urlparse(url)
-    return bool(parsed.scheme and parsed.netloc)
+    return bool(parsed.scheme and parsed.netloc) or parsed.scheme == 'mailto'
 
 def is_placeholder_link(url):
     """判断是否为文档中的占位符/示例链接（非真实链接），仅用于含路径的链接"""
@@ -133,7 +138,7 @@ def check_anchor(content, anchor):
                     return True
             # 生成锚点ID (GitHub 风格)
             h_clean = re.sub(r'\s*\{#[^}]+\}\s*$', '', h)  # 移除 {#id} 再计算
-            header_anchor = re.sub(r'[^\w\s-]', '', h_clean).strip().lower().replace(' ', '-')
+            header_anchor = re.sub(r'[^\w\s-]', '', h_clean).strip().lower().replace(' ', '-').strip('-')
             if header_anchor == a:
                 return True
         

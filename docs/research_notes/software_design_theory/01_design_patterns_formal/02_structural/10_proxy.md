@@ -3,11 +3,11 @@
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Proxy 形式化分析](#proxy-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
+  - [📑 目录](#-目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Proxy 结构）](#def-11proxy-结构)
     - [Axiom PR1（接口一致公理）](#axiom-pr1接口一致公理)
@@ -32,14 +32,15 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -49,48 +50,6 @@
 > **安全边界**: 纯 Safe
 > **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 12 行（Proxy）
 > **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [Proxy 形式化分析](#proxy-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
-  - [形式化定义](#形式化定义)
-    - [Def 1.1（Proxy 结构）](#def-11proxy-结构)
-    - [Axiom PR1（接口一致公理）](#axiom-pr1接口一致公理)
-    - [Axiom PR2（委托规则公理）](#axiom-pr2委托规则公理)
-    - [定理 PR-T1（委托安全定理）](#定理-pr-t1委托安全定理)
-    - [定理 PR-T2（访问控制定理）](#定理-pr-t2访问控制定理)
-    - [推论 PR-C1（纯 Safe Proxy）](#推论-pr-c1纯-safe-proxy)
-    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
-  - [Rust 实现与代码示例](#rust-实现与代码示例)
-  - [完整证明](#完整证明)
-    - [形式化论证链](#形式化论证链)
-    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
-    - [内存安全保证](#内存安全保证)
-  - [典型场景](#典型场景)
-  - [相关模式](#相关模式)
-  - [实现变体](#实现变体)
-  - [反例：代理持有 mut 且未同步](#反例代理持有-mut-且未同步)
-  - [选型决策树](#选型决策树)
-  - [与 GoF 对比](#与-gof-对比)
-  - [边界](#边界)
-  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
-  - [思维导图](#思维导图)
-  - [与其他模式的关系图](#与其他模式的关系图)
-  - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -322,6 +281,7 @@ borrow_checker_proof
 ---
 
 ## 典型场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 说明 |
@@ -334,6 +294,7 @@ borrow_checker_proof
 ---
 
 ## 相关模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模式 | 关系 |
@@ -345,6 +306,7 @@ borrow_checker_proof
 ---
 
 ## 实现变体
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 变体 | 说明 | 适用 |
@@ -356,6 +318,7 @@ borrow_checker_proof
 ---
 
 ## 反例：代理持有 mut 且未同步
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **错误**：代理内部用 `RefCell` 缓存，跨线程共享时未用 `Mutex`。
@@ -372,6 +335,7 @@ struct BadProxy {
 ---
 
 ## 选型决策树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -386,6 +350,7 @@ struct BadProxy {
 ---
 
 ## 与 GoF 对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | GoF | Rust 对应 | 差异 |
@@ -397,6 +362,7 @@ struct BadProxy {
 ---
 
 ## 边界
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 维度 | 分类 |
@@ -408,6 +374,7 @@ struct BadProxy {
 ---
 
 ## 与 Rust 1.93 的对应
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 1.93 特性 | 与本模式 | 说明 |
@@ -418,6 +385,7 @@ struct BadProxy {
 ---
 
 ## 思维导图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -446,6 +414,7 @@ mindmap
 ---
 
 ## 与其他模式的关系图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -464,6 +433,7 @@ graph LR
 ---
 
 ## 实质内容五维自检
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 自检项 | 状态 | 说明 |
@@ -478,6 +448,7 @@ graph LR
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -536,6 +507,7 @@ graph LR
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [02_structural 目录](./README.md)
@@ -683,4 +655,3 @@ graph LR
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
