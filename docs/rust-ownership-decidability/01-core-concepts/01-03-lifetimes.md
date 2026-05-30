@@ -1,5 +1,6 @@
 # Rust生命周期：理论与实践
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **权威来源**: Rust RFC 2094 (NLL), Rust Reference

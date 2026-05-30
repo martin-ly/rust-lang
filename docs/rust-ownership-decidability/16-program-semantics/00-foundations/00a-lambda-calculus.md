@@ -1,5 +1,6 @@
 # λ演算基础 (Lambda Calculus Foundations)
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **难度**: 🔴 高级

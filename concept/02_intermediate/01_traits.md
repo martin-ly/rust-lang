@@ -1,4 +1,5 @@
 # Traits（Trait 系统）
+> **受众**: [进阶]
 >
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
@@ -2049,6 +2050,13 @@ fn main() {}
 ```
 
 > **修正**: Rust 的**关联常量**（associated constant）是 trait 的一部分，但**不能**直接用于 `const generic` 数组大小。原因：关联常量依赖于具体实现，而 `const generic` 要求编译期确定的值。变通方案：1) 使用 `generic_const_exprs`（nightly，不稳定）；2) 用宏生成固定大小的数组；3) 使用 `Box<[u8]>` 或 `Vec<u8>`（运行时大小）；4) `typenum` crate（类型级整数）。关联常量的其他用途：1) 配置参数（`MAX_SIZE`、`VERSION`）；2) 类型标识（`const NAME: &'static str`）；3) 与 `const fn` 结合计算派生常量。这与 C++ 的 `static constexpr`（可在模板参数中使用）或 Swift 的 `associatedtype` + `static let`（类似限制）不同——Rust 的关联常量与 const generics 的集成仍在演进。[来源: [Rust Reference — Associated Constants](https://doc.rust-lang.org/reference/items/associated-items.html#associated-constants)] · [来源: [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)]
+
+## 实践
+
+> **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system/) · [`c04_generic`](../../crates/c04_generic/)
+> **对应练习**: [`exercises/src/generics_traits/`](../../exercises/src/generics_traits/)
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
 ## 参考来源
 

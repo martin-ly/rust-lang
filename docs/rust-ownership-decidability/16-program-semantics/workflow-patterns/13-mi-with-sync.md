@@ -1,5 +1,6 @@
 # 13 多实例有同步模式 (Multiple Instances With Synchronization)
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📋 目录

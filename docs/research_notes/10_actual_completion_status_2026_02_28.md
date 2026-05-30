@@ -1,5 +1,6 @@
 # Research Notes 实际完成度评估报告
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **评估日期**: 2026-02-28
@@ -386,7 +387,7 @@ Week 5: 交叉引用 + 格式检查 ────── 12h
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

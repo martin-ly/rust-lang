@@ -1,4 +1,5 @@
 // [来源: Rust Standard Library / The Rust Programming Language]
+//! Concurrency primitives: threads, mutexes, channels, and atomic operations.
 #![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]

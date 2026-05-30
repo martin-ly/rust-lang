@@ -1,5 +1,6 @@
 # Generic Const Expressions (泛型常量表达式)
 
+> **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
 
 > **特性**: `generic_const_exprs`

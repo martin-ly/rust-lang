@@ -1,5 +1,6 @@
 # nalgebra / ndarray Crate 架构解构
 
+> **分级**: [B]
 > **Bloom 层级**: L3 (高级应用) / L4 (数值计算类型系统)
 > **目标读者**: 已掌握 Rust 泛型与 trait 系统，从事科学计算、图形学或机器学习基础设施的开发者
 > [来源: nalgebra 官方文档](https://docs.rs/nalgebra/latest/nalgebra/)

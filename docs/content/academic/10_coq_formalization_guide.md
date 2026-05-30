@@ -1,5 +1,6 @@
 # Coq 形式化验证指南
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **工具**: Coq Proof Assistant

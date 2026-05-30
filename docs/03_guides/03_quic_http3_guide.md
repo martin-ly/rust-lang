@@ -1,5 +1,6 @@
 # QUIC / HTTP/3 指南
 
+> **分级**: [A]
 > **层级**: L6 生态工具 / L3 高级网络
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks/)
 > **Bloom 层级**: 应用 → 分析

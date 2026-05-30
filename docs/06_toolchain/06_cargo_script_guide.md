@@ -1,5 +1,6 @@
 # Cargo Script / Frontmatter 指南
 
+> **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 > **状态**: Frontmatter 仍在 nightly 中稳定化进程中，尚未进入 stable。当前可用方式：`cargo +nightly -Zscript`。
 > **RFC**: [Frontmatter Stabilization PR #148605](https://github.com/rust-lang/rust/pull/148605)

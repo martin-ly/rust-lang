@@ -1,4 +1,5 @@
 > **权威来源**: [SemVer 2.0.0](https://semver.org/lang/zh-CN/), [cargo-semver-checks 文档](https://github.com/obi1kenobi/cargo-semver-checks), [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+> **分级**: [A]
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 SemVer 2.0.0、cargo-semver-checks、Rust API Guidelines 来源标注 [来源: Authority Source Sprint Batch 8]
 

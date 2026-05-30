@@ -1,5 +1,6 @@
 # Rust 1.94 文档全面完成报告
 
+> **分级**: [C]
 > **报告类型**: 文档修正与完善
 > **Rust 版本**: 1.94.0 (rustc 1.94.0 (4a4ef493e 2026-03-02))
 > **完成日期**: 2026-03-06
@@ -206,8 +207,8 @@ test rust_194_features::tests::test_demonstrate_features ... ok
 
 ### 代码示例
 
-- [c01 rust_194_features.rs](../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
-- [c02 rust_194_features.rs](../crates/c02_type_system/src/rust_194_features.rs)
+- [c01 rust_194_features.rs](../../../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
+- [c02 rust_194_features.rs](../../../../crates/c02_type_system/src/rust_194_features.rs)
 
 ---
 

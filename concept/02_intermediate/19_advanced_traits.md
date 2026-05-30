@@ -1,4 +1,6 @@
 # 高级 Trait 主题：从关联类型到特化
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
@@ -646,3 +648,12 @@ fn main() {
 ```
 
 > **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统的重要扩展，但学习曲线陡。[来源: [Rust Reference — Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#generic-associated-types)] · [来源: [RFC 1598 — GAT](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

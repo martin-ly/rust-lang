@@ -1,5 +1,6 @@
 # Miri 使用教程：检测Rust未定义行为
 
+> **分级**: [C]
 > Miri（Mid-level IR Interpreter）是Rust的MIR解释器，用于检测unsafe代码中的未定义行为（UB）。
 
 ---

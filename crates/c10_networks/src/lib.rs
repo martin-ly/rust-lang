@@ -1,4 +1,5 @@
 // [来源: Rust Standard Library / RFCs]
+//! Network programming: TCP/UDP, HTTP, WebSocket, and async I/O.
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::type_complexity)]
 #![allow(clippy::needless_borrows_for_generic_args)]

@@ -1,5 +1,6 @@
 # 26 取消多实例活动模式 (Cancel Multiple Instance Activity) - 完整形式化语义
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 目录

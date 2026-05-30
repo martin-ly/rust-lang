@@ -1,4 +1,7 @@
 # Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举
+> **受众**: [专家]
+> **内容分级**: [实验级]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure

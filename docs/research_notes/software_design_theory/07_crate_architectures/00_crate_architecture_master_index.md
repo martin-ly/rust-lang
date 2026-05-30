@@ -1,5 +1,6 @@
 # Rust 工业级 Crate 架构解构总索引
 
+> **分级**: [B]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 本目录对 Rust 生态中 **21 个核心工业级 crate** 进行系统性架构解构，揭示类型系统、零成本抽象、组合性设计在真实工程中的运用方式。
 > **方法论对齐**: 软件架构分析 (Software Architecture Analysis) · 设计恢复 (Design Recovery) · 架构权衡分析方法 (ATAM)

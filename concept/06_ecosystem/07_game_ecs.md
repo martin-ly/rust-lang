@@ -1,4 +1,7 @@
 # Game Development & ECS Architecture（游戏开发与 ECS 架构）
+> **受众**: [进阶]
+> **内容分级**: [专家级]
+
 
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S+P** — 全维度

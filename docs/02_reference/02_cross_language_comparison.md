@@ -1,5 +1,6 @@
 # Rust 与 C++/Go/Python 跨语言对比
 
+> **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-05-19
@@ -656,7 +657,7 @@ $ python -m pytest
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
+详见 [Rust 1.94 发布说明
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [ISO C++20](https://www.iso.org/standard/83626.html), [Go Language Specification](https://go.dev/ref/spec), [Haskell 2010 Language Report](https://www.haskell.org/definition/haskell2010.pdf)
 >

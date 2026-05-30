@@ -1,4 +1,5 @@
 # Newtype 与包装器模式：类型安全的零成本抽象
+> **受众**: [进阶]
 >
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入分析 Rust 中 **Newtype 模式**和**包装器类型**的设计——如何通过单字段元组结构体创建语义上不同的类型，实现编译期单位检查、API 封装和安全边界，同时保持零运行时开销。
@@ -631,6 +632,15 @@ fn main() {
 ```
 
 > **修正**: newtype 模式（`struct Meters(u32)`）创建语义不同的类型，但 `Deref` 自动解引用使 newtype 像底层类型一样行为。这导致**方法解析困惑**：`m.saturating_add(50)` 调用 `u32::saturating_add`，而非 `Meters` 的方法（若存在）。设计原则：newtype 用于**类型安全**（防止混淆 Meters 和 Seconds），但 `Deref` 削弱了这一优势。替代方案：1) 不显式实现 `Deref`，只提供必要方法；2) 使用 `From`/`Into` 显式转换；3) 使用 `as_ref()` / `into_inner()` 访问内部值。这与 Haskell 的 `newtype`（无运行时开销，无 Deref 等价物，需显式解包）或 Ada 的派生类型（类似 newtype，无隐式转换）相同——Rust 的 newtype 最纯粹的形式是不实现 `Deref`，完全通过显式 API 交互。[来源: [Newtype Pattern](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)] · [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 
 ## 参考来源
 

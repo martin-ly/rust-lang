@@ -1,5 +1,6 @@
 # Rust for Linux
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 Rust for Linux 是一个将 Rust 编程语言引入 Linux 内核的开源项目。

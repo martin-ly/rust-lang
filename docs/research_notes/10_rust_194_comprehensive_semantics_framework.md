@@ -1,5 +1,6 @@
 # Rust 1.94 语义概念体系完整梳理
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **版本**: Rust 1.94.0 (rustc 1.94.0, 4a4ef493e 2026-03-02)
@@ -998,7 +999,7 @@ fn lazy_semantic() {
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

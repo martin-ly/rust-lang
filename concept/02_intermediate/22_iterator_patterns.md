@@ -1,4 +1,6 @@
 # Rust 迭代器模式
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入探讨 Rust 迭代器模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。
@@ -564,3 +566,12 @@ fn main() {
 ```
 
 > **修正**: `Iterator::zip` 将两个迭代器**对齐配对**，在**任一迭代器耗尽时停止**。`a.iter().zip(b.iter())` 中 `b` 只有两个元素，所以结果只有两个对，`a` 的第三个元素被静默忽略。这是常见陷阱：假设两个集合等长，但数据变化后导致不匹配。检测：1) `itertools::zip_eq` — 长度不等时 panic；2) `zip_longest` — 用 `EitherOrBoth` 处理不等长；3) 手动检查 `a.len() == b.len()`。这与 Python 的 `zip`（同样最短停止，`zip_longest` 在 `itertools` 中）或 Haskell 的 `zip`（同样最短停止）相同——Rust 的 `zip` 遵循函数式语言的传统，但工业代码中常需显式长度检查。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/iter/trait.Iterator.html)] · [来源: [itertools](https://docs.rs/itertools/)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

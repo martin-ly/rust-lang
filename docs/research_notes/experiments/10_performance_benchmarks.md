@@ -1,5 +1,6 @@
 # 性能基准测试研究
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录
@@ -1532,7 +1533,7 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---

@@ -1,4 +1,7 @@
 # Rust in Space Preview
+> **受众**: [专家]
+> **内容分级**: [综述级]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure

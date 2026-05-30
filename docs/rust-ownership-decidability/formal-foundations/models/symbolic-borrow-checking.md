@@ -1,5 +1,6 @@
 # Sound Borrow-Checking via Symbolic Semantics
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **来源**: POPL 2024 (ACM SIGPLAN Symposium on Principles of Programming Languages)

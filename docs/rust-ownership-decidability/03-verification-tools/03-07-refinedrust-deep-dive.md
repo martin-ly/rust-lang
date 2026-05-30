@@ -1,5 +1,6 @@
 # RefinedRust 深度解析
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **RefinedRust: A Type System for High-Assurance Verification of Rust Programs**

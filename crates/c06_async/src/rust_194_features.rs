@@ -651,12 +651,10 @@ pub async fn demonstrate_rust_194_async_features() {
 
 /// 获取 Rust 1.94.0 异步编程特性信息
 pub fn get_rust_194_async_info() -> String {
-    "Rust 1.94.0 异步编程特性:\n\
-        - 异步上下文中的 LazyLock (get, get_mut, force_mut)\n\
-        - 数学常量在异步计算中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n\
-        - Peekable 流处理 (next_if_map, next_if_map_mut)\n\
-        - 异步数组窗口处理 (array_windows)\n\
-        - char 转换在异步解析中的应用 (`TryFrom<char>` for usize)"
+    "Rust 1.94.0 异步编程特性:\n- 异步上下文中的 LazyLock (get, get_mut, force_mut)\n- \
+     数学常量在异步计算中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n- Peekable 流处理 (next_if_map, \
+     next_if_map_mut)\n- 异步数组窗口处理 (array_windows)\n- char 转换在异步解析中的应用 \
+     (`TryFrom<char>` for usize)"
         .to_string()
 }
 
@@ -665,7 +663,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_config_manager() {
         let config = AsyncConfigManager::get_config();
         assert_eq!(config.max_connections, 100);
@@ -675,7 +673,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_lazy_value() {
         let lazy = AsyncLazyValue::new(|| 42);
         let value = lazy.get().await;
@@ -683,7 +681,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_math_calculator() {
         let error = AsyncMathCalculator::golden_ratio_approximation(50).await;
         assert!(error < 0.0001);
@@ -693,7 +691,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_numerical_integration() {
         let result = async_numerical_integration(|x| x * x, 0.0, 1.0, 1000).await;
         // ∫₀¹ x² dx = 1/3
@@ -701,7 +699,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_token_stream() {
         let tokens = vec!["10".to_string(), "20".to_string()];
         let mut stream = AsyncTokenStream::new(tokens);
@@ -711,7 +709,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_sliding_window() {
         let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
         let ma = AsyncSlidingWindowProcessor::moving_average::<3>(&data).await;
@@ -719,7 +717,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_detect_trend_changes() {
         let data = vec![1.0, 2.0, 10.0, 3.0];
         let changes = AsyncSlidingWindowProcessor::detect_trend_changes(&data).await;
@@ -727,7 +725,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_unicode_parser() {
         let text = "Hello";
         let composition = AsyncUnicodeParser::analyze_string(text).await;
@@ -736,7 +734,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_validate_encoding() {
         let chars = vec!['A', '中', '🦀'];
         let results = AsyncUnicodeParser::validate_encoding(&chars).await;
@@ -744,7 +742,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_demonstrate_features() {
         demonstrate_rust_194_async_features().await;
     }
@@ -761,12 +759,18 @@ mod tests {
     #[test]
     fn test_control_flow_matrix_search() {
         let matrix = vec![vec![1, 2], vec![3, 4]];
-        assert!(matches!(search_in_matrix(&matrix, 3), ControlFlow::Break((1, 0))));
+        assert!(matches!(
+            search_in_matrix(&matrix, 3),
+            ControlFlow::Break((1, 0))
+        ));
     }
 
     #[test]
     fn test_control_flow_validate() {
-        assert!(matches!(validate_data("valid123"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("valid123"),
+            ControlFlow::Continue(())
+        ));
         assert!(matches!(validate_data(""), ControlFlow::Break(_)));
     }
 
@@ -783,7 +787,7 @@ mod tests {
     ///
     /// 验证多个并发任务同时访问同一个 LazyValue 时的行为
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_lazy_value_concurrent() {
         use std::sync::Arc;
         use tokio::sync::Barrier;
@@ -803,7 +807,7 @@ mod tests {
             let handle = tokio::spawn(async move {
                 // 等待所有任务都准备好
                 barrier_clone.wait().await;
-                
+
                 // 并发访问
                 let value = lazy_clone.get().await;
                 println!("任务 {} 获取到值: {:?}", i, value);
@@ -825,15 +829,16 @@ mod tests {
     ///
     /// 验证长时间计算可以被正确取消
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_math_timeout() {
-        use tokio::time::{timeout, Duration};
+        use tokio::time::{Duration, timeout};
 
         // 测试快速计算不会超时
         let result = timeout(
             Duration::from_secs(1),
-            AsyncMathCalculator::golden_ratio_approximation(10)
-        ).await;
+            AsyncMathCalculator::golden_ratio_approximation(10),
+        )
+        .await;
         assert!(result.is_ok(), "快速计算不应该超时");
 
         // 测试计算结果正确性
@@ -841,17 +846,15 @@ mod tests {
         assert!(error < 0.0001, "黄金比例逼近应该收敛");
 
         // 测试长时间计算可以被取消
-        let long_calc = timeout(
-            Duration::from_millis(1),
-            async {
-                // 模拟一个需要多次 yield 的计算
-                for _ in 0..100 {
-                    tokio::time::sleep(Duration::from_millis(10)).await;
-                }
-                42
+        let long_calc = timeout(Duration::from_millis(1), async {
+            // 模拟一个需要多次 yield 的计算
+            for _ in 0..100 {
+                tokio::time::sleep(Duration::from_millis(10)).await;
             }
-        ).await;
-        
+            42
+        })
+        .await;
+
         assert!(long_calc.is_err(), "应该超时");
     }
 
@@ -859,12 +862,12 @@ mod tests {
     ///
     /// 验证空字符串和边界情况的处理
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_unicode_analyzer_empty() {
         // 测试空字符串
         let empty = "";
         let composition = AsyncUnicodeParser::analyze_string(empty).await;
-        
+
         assert_eq!(composition.total_count(), 0);
         assert!(composition.ascii_chars.is_empty());
         assert!(composition.cjk_chars.is_empty());

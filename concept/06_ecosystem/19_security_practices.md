@@ -1,4 +1,5 @@
 # 安全 实践：Rust 代码的防御性编程
+> **受众**: [进阶]
 >
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **S+P** — StructureProcedure

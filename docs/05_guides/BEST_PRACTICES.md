@@ -1,4 +1,5 @@
 ﻿# Rust 项目最佳实践指南
+> **分级**: [A]
 >
 > **层次定位**: L2-L6 进阶-生态 / 工程最佳实践
 > **前置依赖**: [concept L1-L2 基础-进阶](../../concept/01_foundation/) · [docs 核心概念](../01_core/README.md)

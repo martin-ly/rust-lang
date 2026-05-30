@@ -26,7 +26,6 @@
     - [常见问题 1: 编译慢](#常见问题-1-编译慢)
     - [常见问题 2: 二进制过大](#常见问题-2-二进制过大)
   - [📚 相关资源](#-相关资源)
-  - [**最后更新**: 2025-10-19](#最后更新-2025-10-19)
 
 **版本**: Rust 1.92.0 / Cargo 1.92.0（兼容 Rust 1.90+ 特性）
 **创建日期**: 2025-10-19
@@ -398,6 +397,7 @@ cargo bloat --release --crates
 
 **维护状态**: 🟢 活跃维护中
 **最后更新**: 2025-10-19
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

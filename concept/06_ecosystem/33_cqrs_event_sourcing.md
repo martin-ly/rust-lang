@@ -1,4 +1,6 @@
 # CQRS & Event Sourcing（命令查询职责分离与事件溯源）
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 分析 → 创造
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure

@@ -1,4 +1,6 @@
 # Error Handling（错误处理）
+> **受众**: [进阶]
+
 
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -2341,3 +2343,12 @@ fn main() {
 ```
 
 > **修正**: 手动 `map_err` 的错误链：每一步失败只保留当前上下文，丢失之前的信息。`anyhow` 的 `Context` trait 解决：`file.open("config.txt").context("failed to open config")?` — 自动累积上下文，生成错误链。`thiserror` 的 `#[source]` 字段保留原始错误。错误链的设计：1) **底层错误**（`io::Error`）→ 原始原因；2) **中间层**（`context`）→ 操作描述；3) **顶层** → 用户友好消息。这与 Go 的 `fmt.Errorf("%w", err)`（错误包装，Go 1.13+）或 Java 的 `Exception(String msg, Throwable cause)`（异常链）类似——Rust 的错误处理生态提供了类型安全和可读性的平衡。[来源: [anyhow](https://docs.rs/anyhow/)] · [来源: [thiserror](https://docs.rs/thiserror/)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

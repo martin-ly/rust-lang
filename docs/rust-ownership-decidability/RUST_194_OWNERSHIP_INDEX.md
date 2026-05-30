@@ -1,5 +1,6 @@
 # Rust 所有权与可判定性 - Rust 1.94 索引
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **目录**: docs/rust-ownership-decidability/

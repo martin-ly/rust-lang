@@ -1,4 +1,6 @@
 # 模块系统：Rust 的代码组织与可见性规则
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 深入分析 Rust **模块系统**（module system）的设计——从文件系统映射、可见性规则（pub/use/super/self）、到 crate 边界与 workspace 组织，揭示 Rust 模块系统与 C++/Java/Python 的本质差异。
@@ -568,3 +570,9 @@ fn main() {}
 ```
 
 > **修正**: Cargo **禁止循环依赖**：若 crate A 依赖 B，B 不能直接或间接依赖 A。循环依赖的设计问题：1) 两个 crate 紧密耦合，应合并为一个；2) 公共部分提取到第三个 crate；3) 使用 trait 打破循环（A 定义 trait，B 实现，C 使用）。Cargo 的依赖解析：1) 构建有向无环图（DAG）；2) 检测循环 → 编译错误；3) 同一 crate 的多个版本可在依赖图中共存（不同版本视为不同 crate）。工作区（workspace）共享 `Cargo.lock` 和 `target/` 目录，但每个成员独立编译。这与 Java 的 Maven（同样禁止循环依赖）或 Python 的导入（运行时循环导入可能工作，但可能导致意外行为）不同——Rust 在编译期严格排除循环依赖。[来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)] · [来源: [Rust Reference — Crates](https://doc.rust-lang.org/reference/items/extern-crates.html)]
+
+## 实践
+
+> **对应 Crate**: [`c09_design_pattern`](../../crates/c09_design_pattern/) · [`c11_macro_system`](../../crates/c11_macro_system/)
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。

@@ -45,7 +45,6 @@
     - [2025-10-19 (第二批更新)](#2025-10-19-第二批更新)
     - [2025-10-19 (第一批更新)](#2025-10-19-第一批更新)
   - [📞 反馈与支持](#-反馈与支持)
-  - [_让我们一起构建更好的 Cargo 包管理知识体系！_ 🦀📦](#让我们一起构建更好的-cargo-包管理知识体系-)
 
 **版本**: Rust 1.93.0+ / Cargo 1.93.0+
 **创建日期**: 2025-10-19
@@ -433,6 +432,7 @@ graph TD
 **维护状态**: 🟢 活跃维护中（Rust 1.93.0 更新完成）
 
 _让我们一起构建更好的 Cargo 包管理知识体系！_ 🦀📦
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

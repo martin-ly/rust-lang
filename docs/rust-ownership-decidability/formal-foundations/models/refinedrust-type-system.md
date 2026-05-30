@@ -1,5 +1,6 @@
 # RefinedRust: 高保证验证的类型系统
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **来源**: PLDI 2024 (ACM SIGPLAN Conference on Programming Language Design and Implementation)

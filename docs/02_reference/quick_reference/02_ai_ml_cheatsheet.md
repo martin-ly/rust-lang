@@ -1,5 +1,6 @@
 ﻿# 🤖 Rust AI/ML 速查卡
 
+> **分级**: [A]
 > **快速参考** | [AI+Rust 生态指南](../../05_guides/05_ai_rust_ecosystem_guide.md) | [AI 辅助编程](../../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08

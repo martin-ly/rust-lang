@@ -1,4 +1,6 @@
 # API Design Patterns（API 设计模式）
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 应用 → 创造
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure

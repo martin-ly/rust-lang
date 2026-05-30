@@ -1,4 +1,5 @@
 # Concurrency（并发模型）
+> **受众**: [专家]
 >
 > **层次定位**: L3 高级概念 / 并发子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure

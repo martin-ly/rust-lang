@@ -2,7 +2,7 @@
 //!
 //! 测试闭包、控制流分支、模式匹配等核心语言特性的性能表现。
 
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 /// 基准测试：函数组合链性能
 /// 验证函数式编程风格在高频调用下的开销

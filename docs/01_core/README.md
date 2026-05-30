@@ -1,4 +1,5 @@
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> **分级**: [A]
 > [Rust Reference](https://doc.rust-lang.org/reference/),
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **层次定位**: L1-L2 基础-进阶 / 核心概念总览

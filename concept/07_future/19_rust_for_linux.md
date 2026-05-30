@@ -1,4 +1,6 @@
 # Rust for Linux ：操作系统内核中的内存安全
+> **受众**: [专家]
+> **内容分级**: [综述级]
 >
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure

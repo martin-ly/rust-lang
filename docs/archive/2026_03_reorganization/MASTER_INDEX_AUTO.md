@@ -1,5 +1,6 @@
 # Documentation Master Index
 
+> **分级**: [C]
 > Auto-generated cross-reference index for the Rust Ownership Decidability documentation.
 
 ## Table of Contents
@@ -60,10 +61,10 @@
 
 | Area | Entry Point |
 |------|-------------|
-| Formal Models | [formal-foundations/models/](formal-foundations/models/) |
-| Semantics | [formal-foundations/semantics/](formal-foundations/semantics/) |
-| Proofs | [formal-foundations/proofs/](formal-foundations/proofs/) |
-| Coq Formalization | [coq-formalization/](coq-formalization/) |
+| Formal Models | formal-foundations/models/ |
+| Semantics | formal-foundations/semantics/ |
+| Proofs | formal-foundations/proofs/ |
+| Coq Formalization | coq-formalization/ |
 
 ### Case Studies
 >
@@ -96,7 +97,7 @@
 
 - **Theory**: borrow-semantics.md
 - **Practice**: borrowing-in-depth.md
-- **Coq Proof**: [ReborrowComplete.v](coq-formalization/theories/Advanced/ReborrowComplete.v)
+- **Coq Proof**: [ReborrowComplete.v] [待建]
 
 ### Lifetimes
 >
@@ -104,14 +105,14 @@
 
 - **Theory**: lifetime-logic.md
 - **Practice**: lifetimes-mastery.md
-- **Coq Proof**: [MetatheoryTermination.v](coq-formalization/theories/Advanced/MetatheoryTermination.v)
+- **Coq Proof**: [MetatheoryTermination.v] [待建]
 
 ### Type System
 >
 > **[来源: Rust Official Docs]**
 
 - **Theory**: type-system-formalization.md
-- **Coq**: [TypeSystem.v](coq-formalization/theories/Typing/TypeSystem.v)
+- **Coq**: [TypeSystem.v] [待建]
 
 ---
 
@@ -121,9 +122,9 @@
 
 | Theorem | Natural Language | Coq Formalization |
 |---------|-----------------|-------------------|
-| Termination | THEOREM_INTUITIONS.md | [MetatheoryTermination.v](coq-formalization/theories/Advanced/MetatheoryTermination.v) |
-| Decidability | decidability_theorems.md | [MetatheoryDecidability.v](coq-formalization/theories/Advanced/MetatheoryDecidability.v) |
-| Type Safety | memory-safety-proof.md | [MetatheoryKeyProofs.v](coq-formalization/theories/Advanced/MetatheoryKeyProofs.v) |
+| Termination | THEOREM_INTUITIONS.md | [MetatheoryTermination.v] [待建] |
+| Decidability | decidability_theorems.md | [MetatheoryDecidability.v] [待建] |
+| Type Safety | memory-safety-proof.md | [MetatheoryKeyProofs.v] [待建] |
 
 ### Coq File Organization
 

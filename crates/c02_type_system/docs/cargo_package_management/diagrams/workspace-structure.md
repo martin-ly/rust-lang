@@ -35,7 +35,6 @@
     - [问题 2: 构建缓存失效](#问题-2-构建缓存失效)
     - [问题 3: 成员未被识别](#问题-3-成员未被识别)
   - [📚 相关资源](#-相关资源)
-  - [**最后更新**: 2026-01-26](#最后更新-2026-01-26)
 
 **版本**: Rust 1.93.0+ / Cargo 1.93.0+（兼容 Rust 1.90+ 特性）
 **创建日期**: 2025-10-19
@@ -532,6 +531,7 @@ members = ["crates/*"]  # 使用通配符
 
 **维护状态**: 🟢 活跃维护中
 **最后更新**: 2026-01-26
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

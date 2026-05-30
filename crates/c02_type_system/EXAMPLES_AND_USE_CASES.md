@@ -51,7 +51,6 @@
     - [推荐阅读](#推荐阅读)
     - [实践项目](#实践项目)
     - [社区资源](#社区资源)
-  - [**维护者**: Rust 类型系统项目组](#维护者-rust-类型系统项目组)
 
 ## 📚 概述
 
@@ -1102,6 +1101,7 @@ pub struct MyOptimizedStruct {
 **文档版本**: 1.0
 **最后更新**: 2025年1月27日
 **维护者**: Rust 类型系统项目组
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -53,7 +53,6 @@
     - [10.1 设计原则](#101-设计原则)
     - [10.2 使用建议](#102-使用建议)
     - [10.3 性能考虑](#103-性能考虑)
-  - [**相关文档**: Trait系统指南 - 更深入的理论内容](#相关文档-trait系统指南---更深入的理论内容)
 
 ---
 
@@ -632,6 +631,7 @@ impl Display for MyVec {
 **Rust版本**: 1.92.0+
 **文档版本**: v1.0
 **相关文档**: [Trait系统指南](./04_Trait系统指南.md) - 更深入的理论内容
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -1,4 +1,6 @@
 # 测试基础：从单元测试到集成测试
+> **受众**: [初学者]
+
 
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+P** — Application + Procedure
@@ -621,3 +623,12 @@ fn main() {}
 ```
 
 > **修正**: Rust 的**集成测试**（`tests/` 目录）将 crate 作为外部依赖使用，只能访问 `pub` API。`InternalStruct` 不是 `pub`，集成测试无法导入。测试私有代码的方法：1) `#[cfg(test)] mod tests { use super::*; }` — 单元测试在同一文件中，可访问私有项；2) `pub(crate)` — 使项在 crate 内可见（包括单元测试）；3) `pub` — 完全公开（集成测试可用）。设计权衡：集成测试验证公共 API 的行为，单元测试验证内部实现。过度公开内部类型（仅为测试）破坏封装。这与 Java 的 `package-private`（同包内可访问，类似 `pub(crate)`）或 Python 的 `_prefix`（约定私有，但测试可导入）不同——Rust 的可见性是编译期强制的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch11-03-test-organization.html)] · [来源: [The Cargo Book](https://doc.rust-lang.org/cargo/reference/workspaces.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

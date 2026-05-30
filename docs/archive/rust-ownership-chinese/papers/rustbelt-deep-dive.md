@@ -1,5 +1,6 @@
 # RustBelt 深度解读
 
+> **分级**: [C]
 > RustBelt: Securing the Foundations of the Rust Programming Language (Jung et al., POPL 2018)
 >
 > 本文档提供RustBelt论文的全面技术解读，涵盖λ_Rust核心语言、Iris分离逻辑框架、所有权谓词语义和标准库验证。

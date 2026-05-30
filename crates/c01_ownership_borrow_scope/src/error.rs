@@ -3,7 +3,7 @@
 //! This module provides crate-specific error types and utilities using
 //! the trait-based error design from the common crate.
 
-use common::{impl_into_unified_error, impl_rust_lang_error, ErrorCode};
+use common::{ErrorCode, impl_into_unified_error, impl_rust_lang_error};
 use thiserror::Error;
 
 /// C01 crate-specific error type
@@ -11,19 +11,19 @@ use thiserror::Error;
 pub enum OwnershipError {
     #[error("borrow conflict: {0}")]
     BorrowConflict(String),
-    
+
     #[error("lifetime error: {0}")]
     Lifetime(String),
-    
+
     #[error("move error: {0}")]
     MoveError(String),
-    
+
     #[error("mutable borrow conflict: {0}")]
     MutableBorrowConflict(String),
-    
+
     #[error("interior mutability error: {0}")]
     InteriorMutability(String),
-    
+
     #[error("memory safety error: {0}")]
     MemorySafety(String),
 }
@@ -33,8 +33,7 @@ impl_into_unified_error!(OwnershipError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C01 crate's result type
@@ -69,7 +68,6 @@ pub fn interior_mutability_error<T: Into<String>>(msg: T) -> OwnershipError {
 pub fn memory_safety_error<T: Into<String>>(msg: T) -> OwnershipError {
     OwnershipError::MemorySafety(msg.into())
 }
-
 
 #[cfg(test)]
 mod tests {

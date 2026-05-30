@@ -1,4 +1,5 @@
 > **权威来源**: [ISO C++20](https://isocpp.org/std/the-standard), [cppreference](https://en.cppreference.com/), [cxx crate 文档](https://cxx.rs/), [Rust FFI 文档](https://doc.rust-lang.org/nomicon/ffi.html)
+> **分级**: [A]
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 ISO C++20、cxx crate 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 

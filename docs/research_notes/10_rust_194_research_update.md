@@ -1,5 +1,6 @@
 # Rust 1.94.0 研究更新报告
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **创建日期**: 2026-03-06
@@ -265,7 +266,7 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-- [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
+- [Rust 1.94 发布说明
 - Rust 1.94 迁移指南
 
 ---
@@ -311,7 +312,7 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

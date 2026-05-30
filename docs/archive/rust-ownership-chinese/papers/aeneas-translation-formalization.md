@@ -1,5 +1,6 @@
 # Aeneas：Rust到函数式翻译的完整形式化
 
+> **分级**: [C]
 > 本文档详细定义从Rust MIR到LLBC（Low-Level Borrow Calculus）的翻译函数
 > 基于 Ho & Protzenko (2022) Aeneas: Rust Verification by Functional Translation
 

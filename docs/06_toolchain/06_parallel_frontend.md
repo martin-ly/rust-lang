@@ -1,5 +1,6 @@
 # 并行前端编译指南
 
+> **分级**: [A]
 > **层次定位**: L6-L7 生态-前沿 / 编译器优化
 > **前置依赖**: [docs 编译器特性](./01_compiler_features.md) · [concept L2 泛型](../../concept/02_intermediate/02_generics.md)
 > **后置延伸**: [concept L7 语言演进](../../concept/07_future/03_evolution.md) · [Rust Compiler Team Blog]

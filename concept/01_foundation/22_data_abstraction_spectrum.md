@@ -1,4 +1,6 @@
 # 数据抽象谱系：从 C struct 到 Rust enum + trait
+> **受众**: [初学者]
+
 
 > **层级**: L1 基础概念 — 通用编程语言机制
 > **A/S/P 标记**: **S** — Structure
@@ -562,3 +564,12 @@ fn main() {
 ```
 
 > **修正**: Rust 的**部分移动**（partial move）允许从 struct 中移动单个字段，但移动后原变量**部分失效**。`p.name` 被移动后，`p` 仍可使用未移动的字段（`p.age`），但不能作为整体使用（如 `drop(p)` 或 `let q = p`）。但 `println!("{}", p.age)` 实际上**可以编译**——部分移动后未移动字段仍可用。真正的编译错误：`let q = p;`（试图整体移动已部分移动的变量）或 `println!("{:?}", p)`（使用已移动字段）。部分移动使 Rust 的所有权系统更灵活：无需为单个字段移动而拆分整个 struct。这与 C++ 的默认拷贝（无移动语义）或 Swift 的拷贝语义不同——Rust 的部分移动是零成本抽象，编译期跟踪每个字段的所有权状态。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Moved Values](https://doc.rust-lang.org/reference/ownership.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

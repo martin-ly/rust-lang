@@ -1,5 +1,6 @@
 # Generic-Array 泛型数组形式化分析
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **主题**: 类型级大小数组 (Type-Level Sized Arrays)

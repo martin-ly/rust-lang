@@ -1,5 +1,6 @@
 # 质量保障 {#-质量保障维度}
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **创建日期**: 2026-02-20
@@ -299,7 +300,7 @@ mod contracts {
 | **QUALITY_CHECKLIST** | 研究笔记质量检查 | [../../research_notes/10_quality_checklist.md](../../research_notes/10_quality_checklist.md) |
 | **experiments/performance_benchmarks** | 性能基准方法论 | [../../research_notes/experiments/10_performance_benchmarks.md](../../research_notes/experiments/10_performance_benchmarks.md) |
 | **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS** | 安全边界与 UB | [../../research_notes/10_safe_unsafe_comprehensive_analysis.md](../../research_notes/10_safe_unsafe_comprehensive_analysis.md) |
-| **type_theory/00_completeness_gaps** | 类型理论完备性缺口 | [../../research_notes/type_theory/00_completeness_gaps.md](../../research_notes/type_theory/00_completeness_gaps.md) |
+| **type_theory/00_completeness_gaps** | 类型理论完备性缺口 | [../../research_notes/formal_methods/00_completeness_gaps.md](../../research_notes/formal_methods/00_completeness_gaps.md) |
 | **TOOLS_GUIDE** | 形式化验证工具指南 | [../../research_notes/10_tools_guide.md](../../research_notes/10_tools_guide.md) |
 | **FORMAL_VERIFICATION_GUIDE** | 形式化验证入门 | [../../research_notes/10_formal_verification_guide.md](../../research_notes/10_formal_verification_guide.md) |
 | **PROOF_INDEX** | 形式化证明索引 | [../../research_notes/10_proof_index.md](../../research_notes/10_proof_index.md) |

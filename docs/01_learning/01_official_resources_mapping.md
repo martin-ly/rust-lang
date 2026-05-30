@@ -1,5 +1,6 @@
 # 本项目概念与官方资源映射表
 
+> **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
 
 > **创建日期**: 2026-02-12
@@ -912,7 +913,7 @@
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - Rust 1.95+ 迁移指南
-- [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
+- [Rust 1.94 发布说明
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 学习路径)
 
@@ -951,7 +952,7 @@
 #### 相关文档
 
 - Rust 1.95+ 迁移指南
-- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

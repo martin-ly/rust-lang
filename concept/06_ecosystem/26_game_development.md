@@ -1,4 +1,6 @@
 # Rust 游戏开发
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure

@@ -1,4 +1,5 @@
 // [来源: The Embedded Rust Book / Rust Reference]
+//! Embedded Rust: no_std, bare-metal, RTOS, and hardware abstraction.
 #![cfg_attr(target_arch = "arm", no_std)]
 #![feature(core_intrinsics, fn_align)]
 #![allow(internal_features)]

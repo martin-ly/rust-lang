@@ -1,5 +1,6 @@
 # Stacked Borrows 与 Tree Borrows 完整形式语义
 
+> **分级**: [C]
 > 本文档提供Stacked Borrows和Tree Borrows的完整形式化操作语义
 > 基于 Jung et al. (2021) Stacked Borrows 和 Ralf Jung 的 Tree Borrows
 

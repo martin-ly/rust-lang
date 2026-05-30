@@ -1,4 +1,6 @@
 # 异步模式：从 Future 到生产级并发
+> **受众**: [专家]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -154,7 +156,7 @@ Waker: 异步通知机制
 
   执行器（Executor）:
   ├── Tokio: 生产级执行器（多线程）
-  ├── Tokio（async-std 已于 2025-03 停止维护）: 标准库风格的执行器
+  ├── Tokio: 标准库风格的执行器
   ├── smol: 小型执行器
   └── 自定义: 可针对特定场景优化
 
@@ -536,7 +538,7 @@ graph TD
 └── 缓解: tokio-console, tracing
 
 边界 5: 生态碎片化
-├── Tokio vs Tokio（async-std 已于 2025-03 停止维护） vs smol
+├── Tokio vs Tokio vs smol
 ├── 不同运行时互不兼容
 ├── 库选择受运行时约束
 └── 缓解: Tokio 是事实标准

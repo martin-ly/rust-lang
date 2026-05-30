@@ -1,5 +1,6 @@
 # RustBelt：Iris分离逻辑核心机制详解
 
+> **分级**: [C]
 > 本文档深入解析Iris框架的核心机制，包括资源代数、Hoare三元组、高阶协议等
 > 基于 Jung et al. (2018) RustBelt 和 Iris 论文
 

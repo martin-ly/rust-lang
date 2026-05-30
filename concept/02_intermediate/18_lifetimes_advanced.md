@@ -1,4 +1,6 @@
 # 生命周期高级主题：从 HRTB 到自引用类型
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
@@ -646,3 +648,12 @@ fn main() {}
 ```
 
 > **修正**: Trait object `dyn Trait<'a>` 将生命周期参数**固化**为具体值。`dyn Processor<'static>` 要求所有输入输出都是 `'static`，不能处理临时字符串。修复：1) `fn use_processor<'a>(p: &dyn Processor<'a>, data: &'a str)` — 泛型生命周期；2) `dyn for<'a> Processor<'a>` — HRTB（Higher-Ranked Trait Bounds），接受任意生命周期。HRTB 的语法：`dyn for<'a> Fn(&'a str) -> &'a str` 表示闭包对所有 `'a` 有效。这与 Java 的泛型通配符（`? extends T`）或 C++ 的模板（无显式生命周期参数）不同——Rust 的 HRTB 允许 trait object 保持生命周期泛型，是高级类型系统的核心特性。[来源: [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-02-advanced-lifetimes.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

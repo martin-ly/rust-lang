@@ -1,5 +1,6 @@
 # Research Notes: 形式化方法主索引
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **创建日期**: 2026-02-21
@@ -517,7 +518,7 @@ TODO    和相关定义    命名规范  Rust测试  填写描述
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

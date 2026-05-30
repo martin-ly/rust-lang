@@ -1,4 +1,5 @@
 # Borrowing（借用）
+> **受众**: [初学者]
 >
 > **层次定位**: L1 基础概念 / 借用子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
@@ -1331,6 +1332,94 @@ fn main() {
 ```
 
 > **修正**: `slice::split_at_mut` 是标准库提供的**安全分割**：将可变 slice 分为两个不重叠的可变引用。编译器允许，因为 `split_at_mut` 内部使用 `unsafe` 和指针算术，但对外暴露安全接口。直接使用索引借用：`&mut v[0..2]` 和 `&mut v[2..4]` 在某些情况下可能被 NLL 保守拒绝——因为编译器不分析索引表达式的值是否重叠。Polonius（下一代借用检查器）可能放松此类限制。安全模式：使用 `split_at_mut`、`chunks_mut`、`windows` 等标准库方法，而非手动索引分割。这与 C 的数组（无借用检查，完全信任程序员）或 Swift 的 ArraySlice（类似，但无编译期互斥保证）不同——Rust 的标准库方法封装了经过验证的 unsafe 操作，提供安全抽象。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/primitive.slice.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
+
+## 嵌入式测验
+
+<details>
+<summary>📝 测验 1：以下代码能否编译？</summary>
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r1 = &s;
+    let r2 = &mut s;
+    println!("{}", r1);
+}
+```
+
+**答案**：❌ 编译错误。同一时间内不能同时存在可变借用和不可变借用。`r1`（不可变借用）和 `r2`（可变借用）的生命周期重叠。修正：确保 `r1` 的使用在 `r2` 创建之前结束（借助 NLL）。
+</details>
+
+<details>
+<summary>📝 测验 2：以下代码能否编译？</summary>
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3, 4];
+    let a = &mut v[0..2];
+    let b = &mut v[2..4];
+    a[0] = 10;
+    b[0] = 20;
+}
+```
+
+**答案**：❌ 编译错误。编译器不分析索引表达式是否重叠，即使 `[0..2]` 和 `[2..4]` 不相交。修正：使用 `v.split_at_mut(2)`，该方法内部使用 `unsafe` 但对外提供安全保证。
+</details>
+
+<details>
+<summary>📝 测验 3：以下代码能否编译？（NLL 测试）</summary>
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r = &s;
+    println!("{}", r);
+    let r2 = &mut s;
+    r2.push_str(" world");
+}
+```
+
+**答案**：✅ 能编译。NLL（Non-Lexical Lifetimes）允许 `r` 在最后一次使用后结束，因此 `r2` 可以创建。如果没有 NLL（Rust 2015），这会在词法作用域层面报错。
+</details>
+
+<details>
+<summary>📝 测验 4：以下代码能否编译？</summary>
+
+```rust
+fn main() {
+    let s = String::from("hello");
+    let r1 = &s;
+    let r2 = &s;
+    let r3 = &s;
+    println!("{}", r1);
+}
+```
+
+**答案**：✅ 能编译。Rust 允许**多个不可变借用**同时存在，只要没有可变借用。`r1`、`r2`、`r3` 都是 `&s`，互不冲突。
+</details>
+
+<details>
+<summary>📝 测验 5：以下代码的输出是什么？</summary>
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r = &mut s;
+    let r2 = &mut *r;
+    r2.push_str(" world");
+    println!("{}", s);
+}
+```
+
+**答案**：✅ 能编译，输出 `hello world`。`&mut *r` 是**重新借用（reborrow）**：从 `&mut s` 重新借出 `&mut s`，原借用 `r` 在 `r2` 活跃期间被冻结。`r2` 结束后 `r` 恢复可用，但这里直接使用了 `s`（因为 `r` 和 `r2` 都已结束）。
+</details>
+
+## 实践
+
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
+> **对应练习**: [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/)
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
 ## 参考来源
 

@@ -1,5 +1,6 @@
 # Rust 1.93.1 vs Go 1.26 vs C++26 vs C23 深度对比分析
 
+> **分级**: [C]
 ## 目录
 >
 > **[来源: Rust Official Docs]**

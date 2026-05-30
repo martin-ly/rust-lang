@@ -28,7 +28,6 @@
     - [添加日志](#添加日志)
     - [添加进度条](#添加进度条)
   - [📚 相关资源](#-相关资源)
-  - [_这是一个完整可运行的示例，可以直接复制使用！_ 🦀🔧](#这是一个完整可运行的示例可以直接复制使用-)
 
 **难度**: ⭐⭐
 **类型**: 单包应用
@@ -547,6 +546,7 @@ pb.set_style(ProgressStyle::default_bar()
 **难度等级**: ⭐⭐ 初级
 
 _这是一个完整可运行的示例，可以直接复制使用！_ 🦀🔧
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -1,5 +1,6 @@
 # Miri 深度解析
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **工具类型**: 运行时 UB 检测 (Undefined Behavior Detection)

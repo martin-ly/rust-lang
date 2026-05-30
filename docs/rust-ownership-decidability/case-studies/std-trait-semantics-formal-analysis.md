@@ -1,5 +1,6 @@
 # Rust标准库核心Trait语义形式化分析
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **主题**: Drop/Clone/Send/Sync/Any的语义与安全性

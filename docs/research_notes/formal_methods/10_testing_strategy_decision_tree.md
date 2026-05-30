@@ -1,5 +1,6 @@
 # Rust 测试策略决策树
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 本文档提供了一个系统化的 Rust 测试策略决策框架，帮助开发团队根据项目特点选择合适的测试类型、工具和最佳实践。
@@ -1687,7 +1688,7 @@ pub mod test_config {
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---

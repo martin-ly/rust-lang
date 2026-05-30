@@ -58,7 +58,6 @@
     - [从 Rust 1.91 迁移](#从-rust-191-迁移)
     - [兼容性说明](#兼容性说明)
   - [相关资源](#相关资源)
-  - [**维护者**: Rust 类型系统项目组](#维护者-rust-类型系统项目组)
 
 ---
 
@@ -464,6 +463,7 @@ unsafe { &*self.storage.as_ptr() }
 
 **最后更新**: 2025-12-11
 **维护者**: Rust 类型系统项目组
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

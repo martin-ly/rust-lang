@@ -1,5 +1,6 @@
 # Drop检查深度分析
 
+> **分级**: [C]
 ## 目录
 >
 > **[来源: Rust Official Docs]**

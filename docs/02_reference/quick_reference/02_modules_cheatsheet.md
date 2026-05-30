@@ -1,5 +1,6 @@
 ﻿# 📦 Rust 模块系统速查卡
 
+> **分级**: [A]
 > **快速参考** | [Cargo/包索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) | [Rust 官方模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08
@@ -1120,7 +1121,7 @@ fn main() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [类型系统完备性缺口](../../research_notes/type_theory/00_completeness_gaps.md) — 模块系统与类型可见性的形式化保证
+- [类型系统完备性缺口](../../research_notes/formal_methods/00_completeness_gaps.md) — 模块系统与类型可见性的形式化保证
 - [所有权模型形式化](../../research_notes/formal_methods/10_ownership_model.md) — 跨模块边界的所有权规则
 
 ---

@@ -1,5 +1,6 @@
 # 概念文档标准模板（Concept Document Standard Template）
 
+> **分级**: [B]
 > **Bloom 层级**: L2 (理解)
 
 > **适用范围**: knowledge/ 目录下所有核心概念文档

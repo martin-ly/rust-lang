@@ -1,4 +1,6 @@
 # 模块系统与路径：Rust 的代码组织哲学
+> **受众**: [初学者]
+
 
 > **Bloom 层级**: 记忆 → 应用
 > **A/S/P 标记**: **A** — Application
@@ -684,3 +686,12 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

@@ -1,4 +1,6 @@
 # Distributed Consensus（分布式共识）
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure

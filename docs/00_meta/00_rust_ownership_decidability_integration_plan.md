@@ -1,5 +1,6 @@
 # rust-ownership-decidability 与 research_notes 整合计划
 
+> **分级**: [B]
 > **Bloom 层级**: L2 (理解)
 
 > **创建日期**: 2026-05-12

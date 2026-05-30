@@ -1,4 +1,5 @@
 # DSL 与嵌入 式设计：Rust 中的领域特定语言
+> **受众**: [进阶]
 >
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rust-lang.github.io/rustc-dev-guide/grammar.html)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。
@@ -664,3 +665,12 @@ fn main() {
 ```
 
 > **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。[来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

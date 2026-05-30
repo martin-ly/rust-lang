@@ -1,5 +1,6 @@
 # 项目元文档
 
+> **分级**: [A]
 > **Bloom 层级**: L4-L5 (分析/评价)
 
 > **创建日期**: 2025-12-11
@@ -205,7 +206,7 @@ fn main() {
 #### 相关文档
 
 - Rust 1.95+ 迁移指南
-- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

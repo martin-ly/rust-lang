@@ -1,5 +1,6 @@
 ﻿# 📦 Cargo 速查卡 {#-cargo-速查卡}
 
+> **分级**: [A]
 > **快速参考** | [Cargo 官方文档](https://doc.rust-lang.org/cargo/) | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08

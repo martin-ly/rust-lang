@@ -1,4 +1,7 @@
 # Const Trait Impl 预研：常量上下文中的 Trait 泛化
+> **受众**: [专家]
+> **内容分级**: [实验级]
+
 
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S** — Structure

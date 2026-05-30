@@ -1,5 +1,6 @@
 # 📁 项目结构说明 (Project Structure)
 
+> **分级**: [C]
 > **文档定位**: 详细解释项目的目录结构和组织方式
 > **最后更新**: 2026-02-11
 > **项目版本**: v1.0
@@ -10,30 +11,30 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [📁 项目结构说明 (Project Structure)](#项目结构说明-project-structure)
-  - [📋 目录](#目录)
+- [📁 项目结构说明 (Project Structure)](#-项目结构说明-project-structure)
+  - [📋 目录](#-目录)
   - [项目总览](#项目总览)
     - [设计原则](#设计原则)
   - [目录树概览](#目录树概览)
   - [核心目录说明](#核心目录说明)
     - [根目录文件](#根目录文件)
-      - [📄 核心文档](#核心文档)
-      - [📦 配置文件](#配置文件)
+      - [📄 核心文档](#-核心文档)
+      - [📦 配置文件](#-配置文件)
     - [crates/ - 学习模块](#crates---学习模块)
-      - [📚 模块列表](#模块列表)
-      - [🏗️ 模块标准结构](#模块标准结构)
+      - [📚 模块列表](#-模块列表)
+      - 🏗️ 模块标准结构
     - [guides/ - 学习指南](#guides---学习指南)
-      - [📖 指南分类](#指南分类)
+      - [📖 指南分类](#-指南分类)
     - [项目报告 (archive/)](#项目报告-archive)
-      - [📊 报告位置](#报告位置)
+      - [📊 报告位置](#-报告位置)
     - [docs/ - 跨模块文档与指南](#docs---跨模块文档与指南)
-      - [📚 文档分类](#文档分类)
+      - [📚 文档分类](#-文档分类)
     - [scripts/ - 脚本工具](#scripts---脚本工具)
     - [examples/ - 根级综合示例](#examples---根级综合示例)
     - [tests/ - 集成测试](#tests---集成测试)
     - [exercises/ - 练习入口](#exercises---练习入口)
   - [导航指南](#导航指南)
-    - [🎯 我想](#我想)
+    - [🎯 我想](#-我想)
       - [学习Rust](#学习rust)
       - [查找资料](#查找资料)
       - [解决问题](#解决问题)
@@ -41,9 +42,9 @@
       - [了解项目进度](#了解项目进度)
       - [参与贡献](#参与贡献)
   - [项目统计](#项目统计)
-    - [📊 规模统计](#规模统计)
-    - [✨ 内容覆盖](#内容覆盖)
-  - [🔗 相关文档](#相关文档)
+    - [📊 规模统计](#-规模统计)
+    - [✨ 内容覆盖](#-内容覆盖)
+  - [🔗 相关文档](#-相关文档)
 
 ---
 
@@ -263,8 +264,8 @@ c##_module_name/
 #### 📊 报告位置
 
 | 类型 | 路径 |
-| :--- | :--- || 阶段/模块报告 | [archive/reports/](./archive/reports/) |
-| 归档报告 | [docs/archive/reports/](./docs/archive/reports/) |
+| :--- | :--- || 阶段/模块报告 | archive/reports/ |
+| 归档报告 | docs/archive/reports/ |
 | 根完成报告 | docs/archive/root_completion_reports/ |
 | 计划实施完成 | docs/archive/process_reports/PLAN_IMPLEMENTATION_COMPLETION_2026_02.md |
 
@@ -360,8 +361,8 @@ scripts/
 
 #### 了解项目进度
 
-1. **整体进度** → [archive/reports/](./archive/reports/)
-2. **模块进度** → [archive/reports/](./archive/reports/)
+1. **整体进度** → archive/reports/
+2. **模块进度** → archive/reports/
 3. **更新历史** → CHANGELOG.md
 4. **未来规划** → ROADMAP.md
 
@@ -413,7 +414,7 @@ scripts/
 
 - **项目入口**: README.md ⭐
 - **学习指南**: guides/ ⭐⭐
-- **项目报告**: [archive/reports/](./archive/reports/)
+- **项目报告**: archive/reports/
 - **贡献指南**: CONTRIBUTING.md
 - **项目路线**: ROADMAP.md
 - **学习资源**: RESOURCES.md

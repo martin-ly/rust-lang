@@ -1,5 +1,6 @@
 # 证明树：型变安全
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **定理**: 协变/逆变/不变保证类型安全
@@ -362,7 +363,7 @@ fn invariance_example() {
 > **[来源: TRPL - The Rust Programming Language]**
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---

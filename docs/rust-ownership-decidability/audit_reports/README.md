@@ -1,5 +1,6 @@
 <!-- ARCHIVED: 内容简略，待补充后解档 -->
 
+> **分级**: [C]
 <details>
 <summary>📦 归档内容（点击展开）— 待补充实质内容</summary>
 

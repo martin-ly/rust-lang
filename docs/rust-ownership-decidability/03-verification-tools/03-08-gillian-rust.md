@@ -1,5 +1,6 @@
 # Gillian-Rust: 混合方法验证 Unsafe Rust
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **来源**: Rust Formal Methods Interest Group (RFMIG) 2024年5月会议

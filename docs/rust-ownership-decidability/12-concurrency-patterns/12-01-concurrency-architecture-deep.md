@@ -1,5 +1,6 @@
 # Concurrency Architecture: Formal Deep Dive
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **Rust Version**: 1.96.0+ (Edition 2024)

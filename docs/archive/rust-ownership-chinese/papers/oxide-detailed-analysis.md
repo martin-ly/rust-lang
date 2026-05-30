@@ -1,5 +1,6 @@
 # Oxide 详细解读：声明式Rust语义
 
+> **分级**: [C]
 > Oxide: The Essence of Rust (Weiss et al., 2020)
 
 ---

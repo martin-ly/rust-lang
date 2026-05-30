@@ -1,5 +1,6 @@
 # 类型理论基础 (Type Theory Foundations)
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **难度**: 🔴 高级

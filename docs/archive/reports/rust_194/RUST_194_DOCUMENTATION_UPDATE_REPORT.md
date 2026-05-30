@@ -1,5 +1,6 @@
 # Rust 1.94 文档全面更新报告
 
+> **分级**: [C]
 > **报告类型**: 文档版本更新
 > **Rust 版本**: 1.94.0
 > **更新日期**: 2026-03-06
@@ -359,9 +360,9 @@ rust-version = "1.94"
 
 ### 代码示例
 
-- [c01 Rust 1.94 特性](../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
-- [c02 Rust 1.94 特性](../crates/c02_type_system/src/rust_194_features.rs)
-- [c06 Rust 1.94 特性](../crates/c06_async/src/rust_194_features.rs)
+- [c01 Rust 1.94 特性](../../../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
+- [c02 Rust 1.94 特性](../../../../crates/c02_type_system/src/rust_194_features.rs)
+- [c06 Rust 1.94 特性](../../../../crates/c06_async/src/rust_194_features.rs)
 
 ---
 

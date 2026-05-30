@@ -1,5 +1,6 @@
 # Rust 1.95+ 特性速查卡 / Rust 1.94 Features Cheatsheet
 
+> **分级**: [A]
 > **Rust 版本**: 1.94.0
 > **最后更新**: 2026-05-08
 > **状态**: ✅ 完整
@@ -381,7 +382,7 @@ impl DataProcessor {
 | 资源 | 链接 |
 |------|------|
 | **官方发布说明** | [Rust 1.94.0](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/) |
-| **完整发布说明** | [16_rust_1.94_release_notes.md](../../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md) |
+| **完整发布说明** | [16_rust_1.94_release_notes.md |
 | **迁移指南** | RUST_194_MIGRATION_GUIDE.md |
 | **C01 示例** | [c01 rust_194_features.rs](../../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs) |
 | **C02 示例** | [c02 rust_194_features.rs](../../../crates/c02_type_system/src/rust_194_features.rs) |

@@ -1,5 +1,6 @@
 # 29 取消鉴别器模式 (Cancelling Discriminator) - 完整形式化语义
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 目录

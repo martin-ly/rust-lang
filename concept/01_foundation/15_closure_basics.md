@@ -1,4 +1,6 @@
 # 闭包基础：捕获环境与匿名函数
+> **受众**: [初学者]
+
 
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -696,3 +698,12 @@ fn main() {
 ```
 
 > **修正**: 闭包的 trait 自动实现：1) `Fn` — 不修改捕获状态；2) `FnMut` — 修改捕获状态（`mut` 绑定）；3) `FnOnce` — 消耗捕获状态（move）。`apply_twice` 要求 `F: Fn`（可多次调用不修改状态），但 `closure` 是 `FnMut`（修改 `counter`）。修复：1) 改用 `FnMut` 约束 + `mut` 参数；2) 重构闭包避免修改状态（用返回值传递状态）；3) 使用 `Cell`/`RefCell` 内部可变性（使闭包变为 `Fn`）。这与 C++ 的 lambda（按值/按引用捕获显式指定，无 Fn/FnMut/FnOnce 区分）或 Java 的 lambda（隐式 final 变量捕获，只能读取）不同——Rust 的闭包推断是自动的，但开发者需理解捕获模式对调用次数的限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Reference — Closure Traits](https://doc.rust-lang.org/reference/types/closure.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

@@ -10,12 +10,12 @@
 
 #![allow(clippy::incompatible_msrv, unreachable_code)]
 
-use std::assert_matches;
 use std::cell::LazyCell;
 use std::mem::ManuallyDrop;
 use std::num::NonZero;
 use std::panic::AssertUnwindSafe;
 use std::sync::LazyLock;
+use std::{assert_matches, debug_assert_matches};
 
 // ============================================================================
 // core::range 完整家族
@@ -55,19 +55,22 @@ impl RangeFamilyExamples {
         r.last.saturating_sub(r.start) + 1
     }
 
-    /// 使用 `core::range::RangeIter` 遍历左闭右开区间
+    /// 将 `core::range::Range` 转换为 `RangeIter` 进行遍历
     pub fn iter_range(start: usize, end: usize) -> core::range::RangeIter<usize> {
-        core::range::RangeIter::new(start, end)
+        core::range::Range { start, end }.into_iter()
     }
 
-    /// 使用 `core::range::RangeFromIter` 从某位置开始遍历
+    /// 将 `core::range::RangeFrom` 转换为 `RangeFromIter` 进行遍历
     pub fn iter_range_from(start: usize) -> core::range::RangeFromIter<usize> {
-        core::range::RangeFromIter::new(start)
+        core::range::RangeFrom { start }.into_iter()
     }
 
-    /// 使用 `core::range::RangeToInclusiveIter` 遍历从开始到某位置的闭区间
-    pub fn iter_range_to_inclusive(last: usize) -> core::range::RangeToInclusiveIter<usize> {
-        core::range::RangeToInclusiveIter::new(last)
+    /// 将 `core::range::RangeInclusive` 转换为 `RangeInclusiveIter` 进行遍历
+    pub fn iter_range_inclusive(
+        start: usize,
+        last: usize,
+    ) -> core::range::RangeInclusiveIter<usize> {
+        core::range::RangeInclusive { start, last }.into_iter()
     }
 }
 
@@ -248,10 +251,14 @@ impl ExprToCfgExamples {
     /// 演示宏内部将表达式片段嵌入 cfg 条件（编译时生成）
     pub fn demonstrate_expr_cfg() {
         // 实际使用场景中，宏可根据输入表达式生成不同的 cfg 分支
-        // 例如：根据 feature 名称（来自 expr 片段）条件编译代码块
-        #[cfg(feature = "std")]
+        // 例如：根据 target_os 名称（来自 expr 片段）条件编译代码块
+        #[cfg(target_os = "linux")]
         {
-            println!("std feature enabled (demo placeholder)");
+            // 仅在 Linux 目标下编译的占位代码
+        }
+        #[cfg(not(target_os = "linux"))]
+        {
+            // 其他目标的占位代码
         }
     }
 }
@@ -397,12 +404,12 @@ mod tests {
     }
 
     #[test]
-    fn test_range_to_inclusive_iter() {
+    fn test_range_inclusive_iter() {
         let mut collected = Vec::new();
-        for i in RangeFamilyExamples::iter_range_to_inclusive(3) {
+        for i in RangeFamilyExamples::iter_range_inclusive(1, 3) {
             collected.push(i);
         }
-        assert_eq!(collected, vec![0, 1, 2, 3]);
+        assert_eq!(collected, vec![1, 2, 3]);
     }
 
     #[test]

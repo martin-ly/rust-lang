@@ -1,5 +1,6 @@
 # Creusot 形式化验证教程
 
+> **分级**: [C]
 > 基于预言逻辑(Prophecy Logic)的Rust程序验证工具
 
 ---

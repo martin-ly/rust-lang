@@ -1,4 +1,6 @@
 # Security & Cryptography（安全与密码学）
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure

@@ -1,5 +1,6 @@
 # Rust 1.94 vs 1.93: Comprehensive Comparison for Ownership and Borrow Checking
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **Document Version:** 1.0

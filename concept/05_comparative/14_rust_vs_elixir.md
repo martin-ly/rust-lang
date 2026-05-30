@@ -1,4 +1,6 @@
 # Rust vs Elixir
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 评价 → 创造
 > **定位**: 对比 Rust 和 Elixir（Erlang VM）在并发模型、错误处理、类型系统和运行时的异同。

@@ -1,5 +1,6 @@
 # 多维概念矩阵对比文档
 
+> **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
@@ -449,7 +450,7 @@
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [验证工具对比矩阵](../research_notes/formal_methods/10_verification_tools_matrix.md) - Kani/Prusti/Miri 等工具对比
+- [验证工具对比矩阵](../research_notes/10_verification_tools_matrix.md) - Kani/Prusti/Miri 等工具对比
 - [全局统一系统化框架](../research_notes/10_unified_systematic_framework.md) - 全景思维导图、多维矩阵、全链路图、反例总索引
 - [构造性语义与表达能力边界](../research_notes/10_language_semantics_expressiveness.md) - 操作/指称/公理语义、表达能力边界论证
 - [全面系统化梳理总览](../research_notes/10_comprehensive_systematic_overview.md) - 全局一致性、语义归纳、概念族谱、论证缺口追踪
@@ -534,7 +535,7 @@ ust
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

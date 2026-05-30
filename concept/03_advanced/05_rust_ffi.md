@@ -1,4 +1,6 @@
 # Rust FFI：与外部代码的安全边界
+> **受众**: [专家]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。

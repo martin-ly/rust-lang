@@ -1,5 +1,6 @@
 # Rust Relaxed Memory 模型形式化
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **来源**: POPL 2020 "RustBelt Meets Relaxed Memory"

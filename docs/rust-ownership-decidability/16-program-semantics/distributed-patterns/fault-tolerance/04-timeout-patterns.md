@@ -1,5 +1,6 @@
 # 超时模式语义 (Timeout Pattern Semantics)
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 目录

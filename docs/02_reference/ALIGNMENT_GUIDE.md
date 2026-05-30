@@ -1,5 +1,6 @@
 # Rust 对齐知识综合指南
 
+> **分级**: [A]
 > **Bloom 层级**: L2 (理解)
 > **创建日期**: 2026-02-13
 > > **权威来源**: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html), [Rustonomicon — Data Layout](https://doc.rust-lang.org/nomicon/data.html), [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-ownership.html)
@@ -441,7 +442,7 @@ struct CacheLinePadded {
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
+详见 [Rust 1.94 发布说明
 
 **最后更新**: 2026-05-08
 

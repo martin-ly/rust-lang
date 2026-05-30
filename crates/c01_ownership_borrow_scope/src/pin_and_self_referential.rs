@@ -421,8 +421,8 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context) -> Poll<T>;
 
     /// 返回 async/await → Pin 的关系总结
     pub fn async_await_pin_summary() -> &'static str {
-        "async/await 语法糖 → 编译器生成状态机 → 状态机可能自引用 → \
-         必须用 Pin 保证不移动 → Future::poll 接收 Pin<&mut Self>"
+        "async/await 语法糖 → 编译器生成状态机 → 状态机可能自引用 → 必须用 Pin 保证不移动 → \
+         Future::poll 接收 Pin<&mut Self>"
     }
 }
 

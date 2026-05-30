@@ -1,5 +1,6 @@
 # Unsafe Rust 安全证明树
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **模块**: Unsafe Rust / FFI

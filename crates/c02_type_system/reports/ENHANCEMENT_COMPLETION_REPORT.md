@@ -45,7 +45,6 @@
   - [🎉 项目总结](#-项目总结)
   - [📞 联系方式](#-联系方式)
   - [📄 许可证](#-许可证)
-  - [通过本次增强，`c02_type_system` 模块现在提供了完整的 Rust 1.89 类型系统实现，包括详细的注释、规范的语言使用、全面的解释和示例，充分挖掘了 Rust 1.89 版本的语言特性，为开发者提供了宝贵的学习和实践资源](#通过本次增强c02_type_system-模块现在提供了完整的-rust-189-类型系统实现包括详细的注释规范的语言使用全面的解释和示例充分挖掘了-rust-189-版本的语言特性为开发者提供了宝贵的学习和实践资源)
 
 ## 📋 项目概述
 
@@ -389,6 +388,7 @@ cargo doc --package c02_type_system --open
 **感谢您的关注和支持！** 🚀
 
 通过本次增强，`c02_type_system` 模块现在提供了完整的 Rust 1.89 类型系统实现，包括详细的注释、规范的语言使用、全面的解释和示例，充分挖掘了 Rust 1.89 版本的语言特性，为开发者提供了宝贵的学习和实践资源
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

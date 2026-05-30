@@ -1,5 +1,6 @@
 # BorrowSanitizer 预览
 
+> **分级**: [A]
 > **层级**: L7 前沿 / L3 高级 Unsafe
 > **前置概念**: [MIRI](../03_guides/03_miri_guide.md) · [Unsafe Rust](../../concept/03_advanced/03_unsafe.md)
 > **Bloom 层级**: 分析

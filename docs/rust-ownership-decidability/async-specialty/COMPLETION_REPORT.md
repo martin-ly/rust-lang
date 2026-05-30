@@ -1,5 +1,6 @@
 # Async Rust 全面专题 - 完成报告
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **Rust的核心优势：Zero-Cost Async Programming**

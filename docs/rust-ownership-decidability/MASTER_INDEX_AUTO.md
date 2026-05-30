@@ -1,5 +1,6 @@
 # Documentation Master Index
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > Auto-generated cross-reference index for the Rust Ownership Decidability documentation.

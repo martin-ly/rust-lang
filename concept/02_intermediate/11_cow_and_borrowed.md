@@ -1,4 +1,6 @@
 # Cow：写时克隆与零拷贝抽象
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -597,3 +599,12 @@ fn main() {}
 ```
 
 > **修正**: `Cow<'a, B>` 的**生命周期参数**：1) `'a` 是借用的最长期限；2) `Cow::Borrowed(&'a B)` 要求引用至少存活 `'a`；3) 返回 `Cow<'static, str>` 要求数据是 `'static`（如 `String` 或字面量）。解决：1) 返回 `Cow<'a, str>` 而非 `'static`；2) 若必须 `'static`，使用 `Cow::Owned(s.to_string())`；3) 使用 `Into<Cow<'static, str>>` 让调用方决定。这与 C++ 的 `std::variant`（无生命周期，存储值或引用）或 Swift 的 `copy-on-write`（隐式，无生命周期标记）不同——Rust 的 `Cow` 显式跟踪所有权和借用生命周期。[来源: [Cow Documentation](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

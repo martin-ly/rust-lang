@@ -1,5 +1,6 @@
 ﻿# 项目架构指南
 
+> **分级**: [A]
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.96.0+ (Edition 2024)
@@ -903,7 +904,7 @@ codegen-units = 1
 #### 相关文档
 
 - Rust 1.95+ 迁移指南
-- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

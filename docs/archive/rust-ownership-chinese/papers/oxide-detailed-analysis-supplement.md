@@ -1,5 +1,6 @@
 # Oxide 形式语义详细补充
 
+> **分级**: [C]
 > 本文档大幅扩展Oxide形式语义分析，补充完整的类型规则、来源集算法和贷款机制
 > 基于 Weiss et al. "Oxide: The Essence of Rust" (2019/2021)
 

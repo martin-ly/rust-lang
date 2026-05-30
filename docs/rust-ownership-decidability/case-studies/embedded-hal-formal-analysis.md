@@ -1,5 +1,6 @@
 # Embedded-HAL 硬件抽象层深度形式化分析
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **主题**: 嵌入式硬件抽象层 (Hardware Abstraction Layer)

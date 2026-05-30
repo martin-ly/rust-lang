@@ -1,4 +1,6 @@
 # 智能指针：堆内存管理与共享语义
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -648,6 +650,15 @@ fn main() {
 ```
 
 > **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时借用检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统通过 `Send`/`Sync` 在编译期排除不安全的线程共享。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.RefCell.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 
 ## 参考来源
 

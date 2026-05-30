@@ -520,11 +520,7 @@ pub fn compose_functions<T, U, V>(f: fn(T) -> U, g: fn(U) -> V) -> impl Fn(T) ->
 ///
 /// Rust 1.94.0: 改进的条件编译优化
 pub fn conditional_execute<T>(condition: bool, f: fn() -> T, g: fn() -> T) -> T {
-    if condition {
-        f()
-    } else {
-        g()
-    }
+    if condition { f() } else { g() }
 }
 
 // ==================== 4. Edition 2024 控制流改进 ====================

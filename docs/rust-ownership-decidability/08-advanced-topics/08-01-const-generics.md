@@ -1,5 +1,6 @@
 # 常量泛型与类型级计算
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > 权威来源: Rust RFC 2000 (min_const_generics, adt_const_params)

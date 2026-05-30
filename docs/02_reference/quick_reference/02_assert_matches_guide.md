@@ -1,5 +1,6 @@
 # `assert_matches!` / `debug_assert_matches!` 速查指南
 
+> **分级**: [A]
 > **Rust 版本**: 1.96.0+ Stable
 > **跟踪 Issue**: rust#108099
 > **Bloom 层级**: 应用

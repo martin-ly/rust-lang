@@ -1,5 +1,6 @@
 # 定理与证明策略汇编
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **创建日期**: 2026-02-23
 > **级别**: L1 (证明思路) + L2 (完整证明草图)
@@ -499,7 +500,7 @@ T: 'a  表示 T中所有引用都存活至少'a
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

@@ -1,4 +1,5 @@
 > **权威来源**: [The Rust Programming Language — Ch11](https://doc.rust-lang.org/book/ch11-00-testing.html), [cargo test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html), [cargo-tarpaulin 文档](https://github.com/xd009642/tarpaulin)
+> **分级**: [A]
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Book、cargo test、cargo-tarpaulin 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 

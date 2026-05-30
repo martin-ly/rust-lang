@@ -1,5 +1,6 @@
 # 01-02: The Rust Borrowing System - A Formal Deep Dive
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 借用系统深度分析

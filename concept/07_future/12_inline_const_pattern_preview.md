@@ -1,4 +1,7 @@
 # Inline Const Pattern Preview
+> **受众**: [专家]
+> **内容分级**: [实验级]
+
 
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A** — Application

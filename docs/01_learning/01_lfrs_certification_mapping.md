@@ -1,5 +1,6 @@
 # Linux Foundation Certified Rust Programmer (LFRS) 认证映射
 
+> **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
 
 > **创建日期**: 2026-04-24

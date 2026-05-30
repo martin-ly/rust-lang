@@ -1,5 +1,6 @@
 # Docker 使用指南
 
+> **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 
 本文档介绍如何使用 Docker 和 Docker Compose 构建和运行本项目。

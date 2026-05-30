@@ -1,4 +1,6 @@
 # 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析
+> **受众**: [初学者]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权语义、性能特征、内存布局与选型策略。
@@ -851,3 +853,12 @@ fn main() {
 ```
 
 > **修正**: `BTreeMap` 基于**排序键**维护平衡二叉搜索树。键的排序位置决定树结构，若键被修改，排序不变性破坏，树操作可能产生错误结果或 panic。Rust 的 API 设计禁止键修改：`keys()` 返回不可变引用，`values_mut()` 只返回值的可变引用。`HashMap` 同理：键的哈希值决定桶位置，修改键会破坏哈希表。这与 C++ 的 `std::map`（`iterator->first` 是 const，不能修改键）或 Java 的 `TreeMap`（`Map.Entry.setValue` 只允许修改值）类似——Rust 的编译期不可变性保证更严格。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

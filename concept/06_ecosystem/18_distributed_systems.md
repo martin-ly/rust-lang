@@ -1,4 +1,5 @@
 # 分布式 系统：Rust 在微服务 与集群中的工程实践
+> **受众**: [进阶]
 >
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure

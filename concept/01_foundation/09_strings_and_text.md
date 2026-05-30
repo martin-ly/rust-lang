@@ -1,4 +1,6 @@
 # 字符串与文本：Rust 的 Unicode 处理与格式化系统
+> **受众**: [初学者]
+
 
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -592,3 +594,12 @@ fn main() {
 ```
 
 > **修正**: `String::from_utf8` 将 `Vec<u8>` 转为 `String`，要求严格 UTF-8。无效序列时：1) `unwrap()` → panic；2) `from_utf8_lossy` → 用 `U+FFFD`（�）替换无效字节，返回 `Cow<'_, str>`；3) `from_utf8` 返回 `Result<String, FromUtf8Error>`，可恢复原始 `Vec`。`String::from_utf8` 的所有权语义：成功时消耗 `Vec<u8>`（无额外分配），失败时返回 `Err` 包含原始 `Vec`。这与 `str::from_utf8`（`&[u8]` → `&str`，不消耗输入）或 Python 的 `bytes.decode('utf-8', errors='replace')` 类似——Rust 提供严格转换和损失转换两种选择。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

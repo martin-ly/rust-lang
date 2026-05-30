@@ -1,5 +1,6 @@
 # Safety Tags 预研指南
 
+> **分级**: [A]
 > **层级**: L7 前沿 / L3 高级 Unsafe
 > **前置概念**: [Unsafe Rust](../../concept/03_advanced/03_unsafe.md) · [Safety-Critical](../04_research/04_safety_critical_alignment_2026.md)
 > **Bloom 层级**: 评价 → 创造

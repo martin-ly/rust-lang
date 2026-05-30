@@ -1,4 +1,6 @@
 # 数值类型与运算：从整数到浮点的完整图景
+> **受众**: [初学者]
+
 
 > **Bloom 层级**: 记忆 → 理解
 > **定位**: 系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。
@@ -668,3 +670,12 @@ fn main() {
 ```
 
 > **修正**: Rust 的数值转换分三层：1) `From`/`Into`——保证无损转换（`u8::from(5u8)` 合法，`u8::from(1000u32)` 不实现）；2) `TryFrom`/`TryInto`——可能失败，返回 `Result`；3) `as`——强制转换，可能截断/溢出/符号变化，编译期不检查。设计意图：`From` 是"可信转换"，`as` 是"我清楚后果"。`u8::from(x)` 编译错误是因为 `From<u32>` 未为 `u8` 实现。这与 C 的隐式截断（`int` → `char`，静默截断）或 Java 的强制类型转换（`(byte)1000` 截断）不同——Rust 的类型系统区分了"安全但可能失败"和"显式承担风险"两种语义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/convert/trait.From.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

@@ -1,4 +1,6 @@
 # Panic 与 Abort：不可恢复错误的处理机制
+> **受众**: [初学者]
+
 
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -699,3 +701,12 @@ fn compute_expensive_string() -> String { String::from("expensive") }
 ```
 
 > **修正**: `assert!` 的格式参数在**断言失败时**求值，但 `compute_expensive_string()` 是否在断言通过时求值？实际上，Rust 的 `assert!` 宏展开后，格式参数在 panic 时才求值（通过 `format_args!` 的惰性），但闭包捕获可能意外触发求值。更安全的模式：`assert!(x > 0, "value is not positive")`，或延迟格式化：`assert!(x > 0, "value {x} is not positive")`（1.58+ 的捕获格式化）。`debug_assert!` 在 release 模式下完全消除（无运行时开销），适合开发期检查。这与 C 的 `assert`（宏，条件为假时打印消息并 abort）或 Java 的 `assert`（类似，但可启用/禁用）不同——Rust 的 `assert!` 是宏，可格式化消息，且 `debug_assert!` 在 release 中零成本。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/panic-macro.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

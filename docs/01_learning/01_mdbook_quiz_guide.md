@@ -1,5 +1,6 @@
 # MDBook Quiz 使用指南
 
+> **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
 
 本文档介绍如何在项目中使用和维护 mdbook-quiz 交互式测验系统。
@@ -435,7 +436,7 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - Rust 1.95+ 迁移指南
-- [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
+- [Rust 1.94 发布说明
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 学习路径)
 
@@ -474,7 +475,7 @@ A: 目前 mdbook-quiz 不支持直接导出。可以通过浏览器的 Local Sto
 #### 相关文档
 
 - Rust 1.95+ 迁移指南
-- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

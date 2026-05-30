@@ -1,5 +1,6 @@
 # 分布式消息传递语义 (Message Passing Semantics)
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 目录

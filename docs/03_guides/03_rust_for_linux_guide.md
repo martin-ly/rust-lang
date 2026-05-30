@@ -1,4 +1,5 @@
 # Rust for Linux 指南
+> **分级**: [A]
 >
 > **层次定位**: L3-L7 高级-前沿 / 内核开发应用域
 > **前置依赖**: [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md) · [docs 嵌入式](03_embedded_rust_guide.md)

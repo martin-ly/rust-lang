@@ -126,7 +126,10 @@ impl BorrowChecker {
     }
 
     /// 检查借用冲突 / Check Borrow Conflicts
-    fn check_borrow_conflicts(&self, borrows: &[Borrow]) -> Result<Vec<BorrowConflict>, BorrowError> {
+    fn check_borrow_conflicts(
+        &self,
+        borrows: &[Borrow],
+    ) -> Result<Vec<BorrowConflict>, BorrowError> {
         let mut conflicts = Vec::new();
 
         for i in 0..borrows.len() {
@@ -153,9 +156,15 @@ impl BorrowChecker {
     }
 
     /// 检查生命周期约束 / Check Lifetime Constraints
-    fn check_lifetime_constraints(&self, borrows: &[Borrow]) -> Result<Vec<LifetimeError>, BorrowError> {
+    fn check_lifetime_constraints(
+        &self,
+        borrows: &[Borrow],
+    ) -> Result<Vec<LifetimeError>, BorrowError> {
         let mut errors = Vec::new();
-        let analyzer = self.lifetime_analyzer.lock().expect("生命周期分析器锁定失败");
+        let analyzer = self
+            .lifetime_analyzer
+            .lock()
+            .expect("生命周期分析器锁定失败");
 
         for borrow in borrows {
             if let Some(lifetime) = &borrow.lifetime {
@@ -173,14 +182,23 @@ impl BorrowChecker {
     }
 
     /// 优化借用模式 / Optimize Borrow Patterns
-    pub fn optimize_borrow_patterns(&self, borrows: &mut Vec<Borrow>) -> Result<OptimizationResult, BorrowError> {
+    pub fn optimize_borrow_patterns(
+        &self,
+        borrows: &mut Vec<Borrow>,
+    ) -> Result<OptimizationResult, BorrowError> {
         let optimizer = self.pattern_optimizer.lock().expect("模式优化器锁定失败");
         optimizer.optimize(borrows)
     }
 
     /// 检测数据竞争 / Detect Data Races
-    pub fn detect_data_races(&self, accesses: &[MemoryAccess]) -> Result<Vec<DataRaceReport>, BorrowError> {
-        let detector = self.data_race_detector.lock().expect("数据竞争检测器锁定失败");
+    pub fn detect_data_races(
+        &self,
+        accesses: &[MemoryAccess],
+    ) -> Result<Vec<DataRaceReport>, BorrowError> {
+        let detector = self
+            .data_race_detector
+            .lock()
+            .expect("数据竞争检测器锁定失败");
         detector.detect_races(accesses)
     }
 
@@ -408,7 +426,13 @@ impl BorrowGraph {
     }
 
     /// 深度优先搜索查找路径 / DFS Find Path
-    fn dfs_find_path(&self, current: &str, target: &str, visited: &mut HashSet<String>, path: &mut Vec<String>) -> bool {
+    fn dfs_find_path(
+        &self,
+        current: &str,
+        target: &str,
+        visited: &mut HashSet<String>,
+        path: &mut Vec<String>,
+    ) -> bool {
         if current == target {
             path.push(current.to_string());
             return true;
@@ -646,7 +670,10 @@ impl DataRaceDetector {
     }
 
     /// 检测数据竞争 / Detect Data Races
-    pub fn detect_races(&self, accesses: &[MemoryAccess]) -> Result<Vec<DataRaceReport>, BorrowError> {
+    pub fn detect_races(
+        &self,
+        accesses: &[MemoryAccess],
+    ) -> Result<Vec<DataRaceReport>, BorrowError> {
         let mut reports = Vec::new();
 
         for i in 0..accesses.len() {
@@ -682,7 +709,8 @@ impl DataRaceDetector {
         }
 
         // 检查是否至少有一个是写操作
-        matches!(access1.access_type, AccessType::Write) || matches!(access2.access_type, AccessType::Write)
+        matches!(access1.access_type, AccessType::Write)
+            || matches!(access2.access_type, AccessType::Write)
     }
 }
 
@@ -1113,9 +1141,11 @@ mod tests {
     #[test]
     fn test_borrow_check_rules() {
         let checker = BorrowChecker::new();
-        let borrows = vec![
-            Borrow::new("owner1".to_string(), "borrower1".to_string(), BorrowType::Immutable),
-        ];
+        let borrows = vec![Borrow::new(
+            "owner1".to_string(),
+            "borrower1".to_string(),
+            BorrowType::Immutable,
+        )];
 
         let result = checker.check_borrow_rules(&borrows);
         assert!(result.is_success);

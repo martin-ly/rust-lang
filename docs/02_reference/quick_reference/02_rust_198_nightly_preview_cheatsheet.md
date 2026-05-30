@@ -1,5 +1,6 @@
 # Rust 1.98 Nightly 前瞻速查表
 
+> **分级**: [A]
 > **Bloom 层级**: L3 (应用)
 
 > **版本**: Rust 1.98 nightly (d1fc603d1 2026-05-26)

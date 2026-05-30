@@ -1,4 +1,5 @@
 # 嵌入式 Rust 指南：Embassy vs RTIC
+> **分级**: [A]
 >
 > **层次定位**: L3-L6 高级-生态 / 嵌入式应用域
 > **前置依赖**: [concept L3 Async](../../concept/03_advanced/02_async.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md) · [docs 核心概念](../01_core/README.md)

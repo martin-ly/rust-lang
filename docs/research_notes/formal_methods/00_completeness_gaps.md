@@ -1,5 +1,6 @@
 # 形式化方法完备性缺口：形式化论证不充分声明
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **创建日期**: 2026-02-12
@@ -235,7 +236,7 @@ $
 
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../10_rust_193_language_features_comprehensive_analysis.md) — 92 项特性；formal_methods 衔接
 - [ARGUMENTATION_GAP_INDEX](../10_argumentation_gap_index.md) — 论证缺口追踪
-- [type_theory/00_completeness_gaps](../../research_notes/type_theory/00_completeness_gaps.md) — 类型理论缺口（可交叉引用）
+- [type_theory/00_completeness_gaps](../../research_notes/formal_methods/00_completeness_gaps.md) — 类型理论缺口（可交叉引用）
 
 ---
 
@@ -278,7 +279,7 @@ $
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---

@@ -43,7 +43,6 @@
     - [🔧 代码贡献](#-代码贡献)
     - [🐛 问题报告](#-问题报告)
   - [📞 联系方式](#-联系方式)
-  - [_Rust 版本：1.89+_](#rust-版本189)
 
 ## 📚 文档总览
 
@@ -292,6 +291,7 @@ fn get_number() -> NumberProcessor {
 _最后更新：2025年1月_
 _文档版本：v1.0_
 _Rust 版本：1.89+_
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

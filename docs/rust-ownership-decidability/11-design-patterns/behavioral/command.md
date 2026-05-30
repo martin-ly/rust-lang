@@ -1,5 +1,6 @@
 # Command Pattern in Rust
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **设计模式**: 行为型模式

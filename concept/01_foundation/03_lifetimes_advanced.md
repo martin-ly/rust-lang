@@ -1,4 +1,6 @@
 # Lifetimes 高级主题
+> **受众**: [初学者]
+
 
 > **层次定位**: L1-L3 进阶 / 生命周期高级主题
 > **前置依赖**: [Lifetimes 基础](./03_lifetimes.md)
@@ -1280,3 +1282,12 @@ fn main() {
 ```
 
 > **修正**: `for<'a> Fn(&'a str) -> &'a str` 要求闭包对**所有**生命周期 `'a` 都返回与输入相同生命周期的引用。`|s| &s[0..1]` 中 `s` 是 `&str`（输入引用），`&s[0..1]` 的生命周期与 `s` 相同，这在闭包内部成立。但 `call_with_ref` 的问题在于 `s` 在 `call_with_ref` 内部创建，如果闭包尝试返回比 `s` 活得更长的引用，编译器会拒绝。更常见的 HRTB 失败模式：期望 `for<'a> Fn(&'a str)` 但传入 `Fn(&'static str)`——后者只接受静态生命周期，不满足"所有生命周期"。HRTB 是 Rust 类型系统的强大特性，但也是闭包与 trait 交互时的常见陷阱。[来源: [Rust Reference — Higher-Ranked Trait Bounds](https://doc.rust-lang.org/reference/trait-bounds.html#higher-ranked-trait-bounds)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

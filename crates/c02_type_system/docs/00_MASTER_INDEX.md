@@ -18,7 +18,6 @@
   - [🆕 Rust 版本特性](#-rust-版本特性)
   - [💻 代码示例](#-代码示例)
   - [🔗 相关文档](#-相关文档)
-  - [**最后更新**: 2026-02-12](#最后更新-2026-02-12)
 
 ---
 
@@ -105,6 +104,7 @@ cargo test -p c02_type_system
 ---
 
 **最后更新**: 2026-02-12
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

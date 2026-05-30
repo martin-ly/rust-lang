@@ -1,5 +1,6 @@
 # Rust 2026 Project Goals — 月度跟踪报告
 
+> **分级**: [B]
 > **Bloom 层级**: L2 (理解)
 
 > **文档类型**: 元分析 (Meta-Analysis)

@@ -1,4 +1,5 @@
 # Type System Basics（类型系统基础）
+> **受众**: [初学者]
 >
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S** — Structure（心智模型）
@@ -2373,6 +2374,13 @@ fn main() {
 ```
 
 > **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
+
+## 实践
+
+> **对应 Crate**: [`c02_type_system`](../../crates/c02_type_system/)
+> **对应练习**: [`exercises/src/type_system/`](../../exercises/src/type_system/)
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
 ## 参考来源
 

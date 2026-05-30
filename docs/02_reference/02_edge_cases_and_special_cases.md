@@ -1,4 +1,5 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/),
+> **分级**: [A]
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/),
 > [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
@@ -835,7 +836,7 @@ fn iterator_invalidation() {
 
 > **适用版本**: Rust 1.96.0+
 
-详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
+详见 [Rust 1.94 发布说明
 
 **最后更新**: 2026-05-08
 

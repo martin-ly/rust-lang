@@ -1,5 +1,6 @@
 # Actix-web Crate 架构解构
 
+> **分级**: [B]
 > **Bloom 层级**: L3 (高级应用) / L4 (框架原理)
 > **目标读者**: 已掌握 Rust 异步编程与 Web 开发基础，希望深入理解 Actix-web 内部架构的开发者
 > [来源: Actix-web 官方文档](https://actix.rs/docs/)

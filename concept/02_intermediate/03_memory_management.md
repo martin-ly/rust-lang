@@ -1,4 +1,6 @@
 # Memory Management（内存管理）
+> **受众**: [进阶]
+
 
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -1843,6 +1845,12 @@ fn main() {}
 ```
 
 > **修正**: **悬垂引用**是 Rust borrow checker 的核心防护：1) 局部变量在函数结束时 drop；2) 返回其引用 → 引用指向已释放内存；3) 解决：返回所有权（`i32` 而非 `&i32`）或使用 `Box::leak` 获取 `'static` 引用。
+
+## 实践
+
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
 ## 参考来源
 

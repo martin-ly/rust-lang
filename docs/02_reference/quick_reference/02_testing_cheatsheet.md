@@ -1,5 +1,6 @@
 ﻿# 🧪 Rust 测试速查卡
 
+> **分级**: [A]
 > **快速参考** | [完整文档](../../rust-formal-engineering-system/05_software_engineering/07_testing/README.md) | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08

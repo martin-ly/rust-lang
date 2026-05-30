@@ -1,4 +1,6 @@
 # 内部可变性：编译期规则的运行时逃逸
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 分析 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -599,6 +601,15 @@ fn main() {
 ```
 
 > **修正**: `Cell<T>` 的方法要求：1) `get()` — 要求 `T: Copy`（复制值）；2) `take()` — 要求 `T: Default`（取走值，留默认值）；3) `replace(val)` — 无约束（取走旧值，放入新值）；4) `into_inner()` — 无约束（消耗 Cell，返回值）。`Cell` 的设计：适用于 `Copy` 类型或小值类型（`i32`、`bool`），因为 `get` 复制值。对于非 `Copy` 类型：使用 `RefCell<T>`（运行时借用检查）或 `Cell<T>` + `replace`/`take`。这与 C++ 的 `std::atomic`（类似 `Cell`，但线程安全，需 `TriviallyCopyable`）或 Java 的 `AtomicReference`（类似 `Cell`，但线程安全）不同——Rust 的 `Cell` 是单线程的、无锁的内部可变性原语。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/cell/struct.Cell.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。
 
 ## 参考来源
 

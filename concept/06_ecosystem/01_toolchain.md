@@ -1,4 +1,6 @@
 # Toolchain（工具链与 Cargo）
+> **受众**: [进阶]
+> **内容分级**: [综述级]
 >
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+P** — Application + Procedure

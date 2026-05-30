@@ -15,7 +15,7 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 /// 生命周期管理器 / Lifetime Manager
-/// 
+///
 /// 管理程序中的所有生命周期，包括推断、约束和验证
 /// Manages all lifetimes in the program, including inference, constraints, and validation
 pub struct LifetimeManager {
@@ -42,89 +42,92 @@ impl LifetimeManager {
             statistics: Arc::new(Mutex::new(LifetimeStatistics::new())),
         }
     }
-    
+
     /// 注册生命周期 / Register Lifetime
     pub fn register_lifetime(&self, name: String, scope: String) -> Result<(), LifetimeError> {
         let mut lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
-        
+
         if lifetime_map.contains_key(&name) {
             return Err(LifetimeError::LifetimeAlreadyExists);
         }
-        
+
         let lifetime_info = LifetimeInfo::new(name.clone(), scope);
         lifetime_map.insert(name, lifetime_info);
-        
+
         // 更新统计信息
         {
             let mut stats = self.statistics.lock().expect("统计信息锁定失败");
             stats.total_lifetimes += 1;
         }
-        
+
         Ok(())
     }
-    
+
     /// 推断生命周期 / Infer Lifetime
     pub fn infer_lifetime(&self, context: &LifetimeContext) -> Result<LifetimeInfo, LifetimeError> {
         let engine = self.inference_engine.lock().expect("推断引擎锁定失败");
         engine.infer(context)
     }
-    
+
     /// 添加生命周期约束 / Add Lifetime Constraint
     pub fn add_constraint(&self, constraint: LifetimeConstraint) -> Result<(), LifetimeError> {
         let solver = self.constraint_solver.lock().expect("约束求解器锁定失败");
         solver.add_constraint(constraint)
     }
-    
+
     /// 解决生命周期约束 / Solve Lifetime Constraints
     pub fn solve_constraints(&self) -> Result<LifetimeSolution, LifetimeError> {
         let solver = self.constraint_solver.lock().expect("约束求解器锁定失败");
         solver.solve()
     }
-    
+
     /// 验证生命周期 / Validate Lifetime
-    pub fn validate_lifetime(&self, lifetime_name: &str) -> Result<ValidationResult, LifetimeError> {
+    pub fn validate_lifetime(
+        &self,
+        lifetime_name: &str,
+    ) -> Result<ValidationResult, LifetimeError> {
         let lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
-        
+
         if let Some(lifetime_info) = lifetime_map.get(lifetime_name) {
             let mut result = ValidationResult::new();
-            
+
             // 检查生命周期约束
             for constraint in &lifetime_info.constraints {
                 if !self.validate_constraint(constraint) {
                     result.add_error(ValidationError::InvalidConstraint);
                 }
             }
-            
+
             // 检查生命周期图连通性
             let graph = self.lifetime_graph.lock().expect("生命周期图锁定失败");
             if !graph.is_connected(lifetime_name) {
                 result.add_error(ValidationError::DisconnectedLifetime);
             }
-            
+
             Ok(result)
         } else {
             Err(LifetimeError::LifetimeNotFound)
         }
     }
-    
+
     /// 验证约束 / Validate Constraint
     fn validate_constraint(&self, constraint: &LifetimeConstraint) -> bool {
         // 实现约束验证逻辑
         !constraint.value.is_empty()
     }
-    
+
     /// 获取生命周期信息 / Get Lifetime Information
     pub fn get_lifetime_info(&self, name: &str) -> Option<LifetimeInfo> {
         let lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
         lifetime_map.get(name).cloned()
     }
-    
+
     /// 获取所有生命周期 / Get All Lifetimes
     pub fn get_all_lifetimes(&self) -> Vec<LifetimeInfo> {
         let lifetime_map = self.lifetime_map.lock().expect("生命周期映射锁定失败");
         lifetime_map.values().cloned().collect()
     }
-    
+
     /// 获取统计信息 / Get Statistics
     pub fn get_statistics(&self) -> LifetimeStatistics {
         self.statistics.lock().expect("统计信息锁定失败").clone()
@@ -166,53 +169,53 @@ impl LifetimeInfo {
             last_used: None,
         }
     }
-    
+
     /// 添加参数 / Add Parameter
     pub fn add_parameter(&mut self, parameter: LifetimeParameter) {
         if !self.parameters.contains(&parameter) {
             self.parameters.push(parameter);
         }
     }
-    
+
     /// 添加约束 / Add Constraint
     pub fn add_constraint(&mut self, constraint: LifetimeConstraint) {
         if !self.constraints.contains(&constraint) {
             self.constraints.push(constraint);
         }
     }
-    
+
     /// 添加推断规则 / Add Inference Rule
     pub fn add_inference_rule(&mut self, rule: InferenceRule) {
         if !self.inference_rules.contains(&rule) {
             self.inference_rules.push(rule);
         }
     }
-    
+
     /// 更新最后使用时间 / Update Last Used Time
     pub fn update_last_used(&mut self) {
         self.last_used = Some(Instant::now());
     }
-    
+
     /// 检查生命周期是否兼容 / Check if Lifetime is Compatible
     pub fn is_compatible_with(&self, other: &LifetimeInfo) -> bool {
         // 检查参数兼容性
         if self.parameters.len() != other.parameters.len() {
             return false;
         }
-        
+
         for (param1, param2) in self.parameters.iter().zip(other.parameters.iter()) {
             if !param1.is_compatible_with(param2) {
                 return false;
             }
         }
-        
+
         // 检查约束兼容性
         for constraint in &self.constraints {
             if !other.constraints.contains(constraint) {
                 return false;
             }
         }
-        
+
         true
     }
 }
@@ -246,14 +249,14 @@ impl LifetimeParameter {
             is_invariant: false,
         }
     }
-    
+
     /// 添加约束 / Add Constraint
     pub fn add_constraint(&mut self, constraint: ParameterConstraint) {
         if !self.constraints.contains(&constraint) {
             self.constraints.push(constraint);
         }
     }
-    
+
     /// 检查参数是否兼容 / Check if Parameter is Compatible
     pub fn is_compatible_with(&self, other: &LifetimeParameter) -> bool {
         self.param_type == other.param_type && self.constraints == other.constraints
@@ -332,38 +335,50 @@ impl LifetimeConstraint {
             created_at: Instant::now(),
         }
     }
-    
+
     /// 检查约束是否满足 / Check if Constraint is Satisfied
     pub fn is_satisfied(&self, lifetime_map: &HashMap<String, LifetimeInfo>) -> bool {
         match self.constraint_type {
-            ConstraintType::LifetimeBound if let (Some(left), Some(right)) = (
-                lifetime_map.get(&self.left_lifetime),
-                lifetime_map.get(&self.right_lifetime),
-            ) => left.is_compatible_with(right),
+            ConstraintType::LifetimeBound
+                if let (Some(left), Some(right)) = (
+                    lifetime_map.get(&self.left_lifetime),
+                    lifetime_map.get(&self.right_lifetime),
+                ) =>
+            {
+                left.is_compatible_with(right)
+            }
             ConstraintType::LifetimeBound => false,
-            ConstraintType::LifetimeSubtype if let (Some(left), Some(right)) = (
-                lifetime_map.get(&self.left_lifetime),
-                lifetime_map.get(&self.right_lifetime),
-            ) => self.check_subtype_relation(left, right),
+            ConstraintType::LifetimeSubtype
+                if let (Some(left), Some(right)) = (
+                    lifetime_map.get(&self.left_lifetime),
+                    lifetime_map.get(&self.right_lifetime),
+                ) =>
+            {
+                self.check_subtype_relation(left, right)
+            }
             ConstraintType::LifetimeSubtype => false,
             ConstraintType::LifetimeEquality => {
                 // 检查生命周期相等约束
                 self.left_lifetime == self.right_lifetime
             }
-            ConstraintType::LifetimeInclusion if let (Some(left), Some(right)) = (
-                lifetime_map.get(&self.left_lifetime),
-                lifetime_map.get(&self.right_lifetime),
-            ) => self.check_inclusion_relation(left, right),
+            ConstraintType::LifetimeInclusion
+                if let (Some(left), Some(right)) = (
+                    lifetime_map.get(&self.left_lifetime),
+                    lifetime_map.get(&self.right_lifetime),
+                ) =>
+            {
+                self.check_inclusion_relation(left, right)
+            }
             ConstraintType::LifetimeInclusion => false,
         }
     }
-    
+
     /// 检查子类型关系 / Check Subtype Relation
     fn check_subtype_relation(&self, left: &LifetimeInfo, right: &LifetimeInfo) -> bool {
         // 实现子类型关系检查逻辑
         left.scope.len() <= right.scope.len()
     }
-    
+
     /// 检查包含关系 / Check Inclusion Relation
     fn check_inclusion_relation(&self, left: &LifetimeInfo, right: &LifetimeInfo) -> bool {
         // 实现包含关系检查逻辑
@@ -412,19 +427,19 @@ impl LifetimeGraph {
             connected_components: Vec::new(),
         }
     }
-    
+
     /// 添加节点 / Add Node
     pub fn add_node(&mut self, node: LifetimeNode) {
         self.nodes.insert(node.id.clone(), node);
         self.update_connected_components();
     }
-    
+
     /// 添加边 / Add Edge
     pub fn add_edge(&mut self, edge: LifetimeEdge) {
         self.edges.push(edge);
         self.update_connected_components();
     }
-    
+
     /// 检查连通性 / Check Connectivity
     pub fn is_connected(&self, lifetime_name: &str) -> bool {
         // 检查生命周期是否在图中连通
@@ -435,29 +450,35 @@ impl LifetimeGraph {
         }
         false
     }
-    
+
     /// 查找路径 / Find Path
     pub fn find_path(&self, from: &str, to: &str) -> Option<Vec<String>> {
         let mut visited = HashSet::new();
         let mut path = Vec::new();
-        
+
         if self.dfs_find_path(from, to, &mut visited, &mut path) {
             Some(path)
         } else {
             None
         }
     }
-    
+
     /// 深度优先搜索查找路径 / DFS Find Path
-    fn dfs_find_path(&self, current: &str, target: &str, visited: &mut HashSet<String>, path: &mut Vec<String>) -> bool {
+    fn dfs_find_path(
+        &self,
+        current: &str,
+        target: &str,
+        visited: &mut HashSet<String>,
+        path: &mut Vec<String>,
+    ) -> bool {
         if current == target {
             path.push(current.to_string());
             return true;
         }
-        
+
         visited.insert(current.to_string());
         path.push(current.to_string());
-        
+
         for edge in &self.edges {
             if edge.from == current && !visited.contains(&edge.to) {
                 if self.dfs_find_path(&edge.to, target, visited, path) {
@@ -465,16 +486,16 @@ impl LifetimeGraph {
                 }
             }
         }
-        
+
         path.pop();
         false
     }
-    
+
     /// 更新连通分量 / Update Connected Components
     fn update_connected_components(&mut self) {
         let mut visited = HashSet::new();
         self.connected_components.clear();
-        
+
         for node_id in self.nodes.keys() {
             if !visited.contains(node_id) {
                 let mut component = Vec::new();
@@ -483,12 +504,17 @@ impl LifetimeGraph {
             }
         }
     }
-    
+
     /// 深度优先搜索连通分量 / DFS Component
-    fn dfs_component(&self, current: &str, visited: &mut HashSet<String>, component: &mut Vec<String>) {
+    fn dfs_component(
+        &self,
+        current: &str,
+        visited: &mut HashSet<String>,
+        component: &mut Vec<String>,
+    ) {
         visited.insert(current.to_string());
         component.push(current.to_string());
-        
+
         for edge in &self.edges {
             if edge.from == current && !visited.contains(&edge.to) {
                 self.dfs_component(&edge.to, visited, component);
@@ -565,7 +591,7 @@ impl LifetimeInferenceEngine {
             statistics: InferenceStatistics::new(),
         }
     }
-    
+
     /// 推断生命周期 / Infer Lifetime
     pub fn infer(&self, context: &LifetimeContext) -> Result<LifetimeInfo, LifetimeError> {
         // 应用推断规则
@@ -574,20 +600,20 @@ impl LifetimeInferenceEngine {
                 return Ok(lifetime_info);
             }
         }
-        
+
         Err(LifetimeError::InferenceFailed)
     }
-    
+
     /// 推入上下文 / Push Context
     pub fn push_context(&mut self, context: LifetimeContext) {
         self.context_stack.push(context);
     }
-    
+
     /// 弹出上下文 / Pop Context
     pub fn pop_context(&mut self) -> Option<LifetimeContext> {
         self.context_stack.pop()
     }
-    
+
     /// 获取当前上下文 / Get Current Context
     pub fn get_current_context(&self) -> Option<&LifetimeContext> {
         self.context_stack.last()
@@ -617,7 +643,7 @@ impl InferenceRule {
             InferenceRule::ConstraintRule => self.apply_constraint_rule(context),
         }
     }
-    
+
     /// 应用省略规则 / Apply Elision Rule
     fn apply_elision_rule(&self, context: &LifetimeContext) -> Option<LifetimeInfo> {
         // 实现省略规则逻辑
@@ -630,19 +656,19 @@ impl InferenceRule {
             None
         }
     }
-    
+
     /// 应用子类型规则 / Apply Subtyping Rule
     fn apply_subtyping_rule(&self, context: &LifetimeContext) -> Option<LifetimeInfo> {
         // 实现子类型规则逻辑
         None
     }
-    
+
     /// 应用变体规则 / Apply Variance Rule
     fn apply_variance_rule(&self, context: &LifetimeContext) -> Option<LifetimeInfo> {
         // 实现变体规则逻辑
         None
     }
-    
+
     /// 应用约束规则 / Apply Constraint Rule
     fn apply_constraint_rule(&self, context: &LifetimeContext) -> Option<LifetimeInfo> {
         // 实现约束规则逻辑
@@ -686,13 +712,13 @@ impl LifetimeConstraintSolver {
             statistics: SolvingStatistics::new(),
         }
     }
-    
+
     /// 添加约束 / Add Constraint
     pub fn add_constraint(&mut self, constraint: LifetimeConstraint) -> Result<(), LifetimeError> {
         self.constraints.push(constraint);
         Ok(())
     }
-    
+
     /// 解决约束 / Solve Constraints
     pub fn solve(&self) -> Result<LifetimeSolution, LifetimeError> {
         match self.algorithm {
@@ -701,12 +727,12 @@ impl LifetimeConstraintSolver {
             SolvingAlgorithm::ConstraintPropagation => self.solve_by_propagation(),
         }
     }
-    
+
     /// 通过统一算法解决 / Solve by Unification
     fn solve_by_unification(&self) -> Result<LifetimeSolution, LifetimeError> {
         // 实现统一算法
         let mut solution = LifetimeSolution::new();
-        
+
         for constraint in &self.constraints {
             if constraint.is_satisfied(&HashMap::new()) {
                 solution.add_satisfied_constraint(constraint.clone());
@@ -714,18 +740,18 @@ impl LifetimeConstraintSolver {
                 solution.add_unsatisfied_constraint(constraint.clone());
             }
         }
-        
+
         Ok(solution)
     }
-    
+
     /// 通过图算法解决 / Solve by Graph
     fn solve_by_graph(&self) -> Result<LifetimeSolution, LifetimeError> {
         // 实现图算法
         let mut solution = LifetimeSolution::new();
-        
+
         // 构建约束图
         let mut graph = LifetimeGraph::new();
-        
+
         for constraint in &self.constraints {
             let edge = LifetimeEdge {
                 from: constraint.left_lifetime.clone(),
@@ -736,7 +762,7 @@ impl LifetimeConstraintSolver {
             };
             graph.add_edge(edge);
         }
-        
+
         // 检查图的连通性
         for constraint in &self.constraints {
             if graph.is_connected(&constraint.left_lifetime) {
@@ -745,21 +771,21 @@ impl LifetimeConstraintSolver {
                 solution.add_unsatisfied_constraint(constraint.clone());
             }
         }
-        
+
         Ok(solution)
     }
-    
+
     /// 通过约束传播解决 / Solve by Propagation
     fn solve_by_propagation(&self) -> Result<LifetimeSolution, LifetimeError> {
         // 实现约束传播算法
         let mut solution = LifetimeSolution::new();
-        
+
         // 初始化约束队列
         let mut constraint_queue = VecDeque::new();
         for constraint in &self.constraints {
             constraint_queue.push_back(constraint.clone());
         }
-        
+
         // 传播约束
         while let Some(constraint) = constraint_queue.pop_front() {
             if constraint.is_satisfied(&HashMap::new()) {
@@ -769,7 +795,7 @@ impl LifetimeConstraintSolver {
                 solution.add_unsatisfied_constraint(constraint);
             }
         }
-        
+
         Ok(solution)
     }
 }
@@ -808,29 +834,31 @@ impl LifetimeSolution {
             solving_time: Duration::from_secs(0),
         }
     }
-    
+
     /// 添加满足的约束 / Add Satisfied Constraint
     pub fn add_satisfied_constraint(&mut self, constraint: LifetimeConstraint) {
         self.satisfied_constraints.push(constraint);
     }
-    
+
     /// 添加不满足的约束 / Add Unsatisfied Constraint
     pub fn add_unsatisfied_constraint(&mut self, constraint: LifetimeConstraint) {
         self.unsatisfied_constraints.push(constraint);
     }
-    
+
     /// 检查解决方案是否完整 / Check if Solution is Complete
     pub fn is_complete(&self) -> bool {
         self.unsatisfied_constraints.is_empty()
     }
-    
+
     /// 计算解决方案质量 / Calculate Solution Quality
     pub fn calculate_quality(&mut self) {
-        let total_constraints = self.satisfied_constraints.len() + self.unsatisfied_constraints.len();
+        let total_constraints =
+            self.satisfied_constraints.len() + self.unsatisfied_constraints.len();
         if total_constraints == 0 {
             self.quality = SolutionQuality::Unknown;
         } else {
-            let satisfaction_rate = self.satisfied_constraints.len() as f64 / total_constraints as f64;
+            let satisfaction_rate =
+                self.satisfied_constraints.len() as f64 / total_constraints as f64;
             self.quality = if satisfaction_rate >= 0.9 {
                 SolutionQuality::Excellent
             } else if satisfaction_rate >= 0.7 {
@@ -882,13 +910,13 @@ impl ValidationResult {
             validation_time: Duration::from_secs(0),
         }
     }
-    
+
     /// 添加错误 / Add Error
     pub fn add_error(&mut self, error: ValidationError) {
         self.errors.push(error);
         self.is_valid = false;
     }
-    
+
     /// 添加警告 / Add Warning
     pub fn add_warning(&mut self, warning: ValidationWarning) {
         self.warnings.push(warning);

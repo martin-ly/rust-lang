@@ -1,5 +1,6 @@
 # 类型-所有权统一理论
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## Type-Ownership Unified Theory

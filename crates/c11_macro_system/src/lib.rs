@@ -1,4 +1,5 @@
 // [来源: Rust Reference / The Little Book of Rust Macros]
+//! Declarative macros (macro_rules!) and macro hygiene.
 #![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]

@@ -1,5 +1,6 @@
 # Rust 证明图网 / Proof Graph Network
 
+> **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
 
 > **创建日期**: 2025-12-11
@@ -1472,7 +1473,7 @@ ust
 > **[来源: Wikipedia - Memory Safety]**
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

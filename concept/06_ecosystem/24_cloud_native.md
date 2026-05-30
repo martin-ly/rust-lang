@@ -1,4 +1,6 @@
 # Rust 云原生生态
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
@@ -385,7 +387,7 @@ graph TD
 ```text
 陷阱 1: 忽略异步运行时选择
   ❌ 混用不同异步运行时
-     // Tokio 和 Tokio（async-std 已于 2025-03 停止维护） 不兼容
+     // Tokio 和 Tokio 不兼容
 
   ✅ 统一使用一个运行时
      // 通常选 Tokio
@@ -506,22 +508,22 @@ fn main() {
 ### 10.1 边界测试：异步运行时混用（编译错误）
 
 ```rust,compile_fail
-// 假设同时依赖 tokio 和 Tokio（async-std 已于 2025-03 停止维护）
+// 假设同时依赖 tokio 和 Tokio
 
 async fn task() {
     println!("running");
 }
 
 fn main() {
-    // ❌ 编译错误/运行时 panic: 在 tokio runtime 中调用 Tokio（async-std 已于 2025-03 停止维护） 的 future
+    // ❌ 编译错误/运行时 panic: 在 tokio runtime 中调用 Tokio 的 future
     // tokio::runtime::Runtime::new().unwrap().block_on(async {
     //     async_std::task::spawn(task()).await; // 可能 panic 或死锁
     // });
 }
 ```
 
-> **修正**: Rust 异步生态存在多个运行时（tokio、Tokio（async-std 已于 2025-03 停止维护）、smol、embassy），它们的任务调度器和 I/O 驱动互不兼容。
-> 在 tokio runtime 上执行 Tokio（async-std 已于 2025-03 停止维护） 的 I/O 操作（如 `async_std::fs::read`）会导致 panic 或死锁，因为 I/O 事件注册到了错误的 reactor。
+> **修正**: Rust 异步生态存在多个运行时（tokio、Tokio、smol、embassy），它们的任务调度器和 I/O 驱动互不兼容。
+> 在 tokio runtime 上执行 Tokio 的 I/O 操作（如 `async_std::fs::read`）会导致 panic 或死锁，因为 I/O 事件注册到了错误的 reactor。
 > 解决方案：
 >
 > 1) 统一使用一个运行时；
@@ -529,7 +531,7 @@ fn main() {
 > 3) 仅混用计算型 future（无 I/O）。
 > 这与 Go 的单一运行时（goroutine + netpoller）不同——Rust 的异步生态允许多个运行时竞争，但要求开发者明确选择。
 > [来源: [Tokio Documentation](https://docs.rs/tokio/)] ·
-> [来源: [Tokio（async-std 已于 2025-03 停止维护） Documentation](https://docs.rs/Tokio（async-std 已于 2025-03 停止维护）/)]
+> [来源: [Tokio Documentation](https://docs.rs/Tokio/)]
 
 ### 10.2 边界测试：配置结构的反序列化生命周期（编译错误）
 

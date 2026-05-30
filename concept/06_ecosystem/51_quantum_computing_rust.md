@@ -1,4 +1,6 @@
 # Quantum Computing in Rust（量子计算与 Rust）
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure

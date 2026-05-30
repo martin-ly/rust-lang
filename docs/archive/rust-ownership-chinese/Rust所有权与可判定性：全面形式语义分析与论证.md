@@ -1,5 +1,6 @@
 # Rust所有权与可判定性：全面形式语义分析与论证
 
+> **分级**: [C]
 > **文档版本**: 2.0 全面修订版
 > **适用范围**: Rust 1.93.1 / Rust 2024 Edition
 > **理论框架**: 基于 RustBelt、Oxide、Stacked/Tree Borrows 等权威学术研究

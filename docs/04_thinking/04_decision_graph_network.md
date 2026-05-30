@@ -1,5 +1,6 @@
 # Rust 决策图网 / Decision Graph Network
 
+> **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
 
 > **创建日期**: 2025-12-11
@@ -1034,7 +1035,7 @@ graph TD
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-- [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../research_notes/formal_methods/10_distributed_architecture_decision_tree.md) - 分布式架构选型（Saga/CQRS/熔断器）
+- [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../research_notes/10_distributed_architecture_decision_tree.md) - 分布式架构选型（Saga/CQRS/熔断器）
 - WORKFLOW_ENGINE_DECISION_TREE - 工作流引擎选型（Temporal/自研/状态机）
 
 ### 相关文档
@@ -1124,7 +1125,7 @@ ust
 
 #### 相关文档
 
-- [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查（已归档）
 - [性能调优指南](../05_guides/05_performance_tuning_guide.md)
 
 ---

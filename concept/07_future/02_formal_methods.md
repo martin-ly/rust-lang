@@ -1,4 +1,7 @@
 # Formal Methods Industrialization（形式化方法工业化）
+> **受众**: [专家]
+> **内容分级**: [实验级]
+
 
 > **层级**: L7 前沿趋势
 > **A/S/P 标记**: **P** — Procedure（策略决策）

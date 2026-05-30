@@ -1,4 +1,5 @@
 // [来源: Rust Reference / RFC 1196]
+//! Generics, trait bounds, associated types, and const generics.
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::type_complexity)]
 #![allow(clippy::assertions_on_constants)]

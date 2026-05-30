@@ -1,4 +1,5 @@
 # Ownership（所有权）
+> **受众**: [初学者]
 >
 > **层次定位**: L1 基础概念 / 所有权子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
@@ -1216,6 +1217,93 @@ fn main() {
 ```
 
 > **修正**: 函数参数传递默认是**按值移动**（move）：`String` 等不实现 `Copy` 的类型，传入函数后原变量失效。若需保留原变量：1) **返回所有权**：`fn process(s: String) -> String`（C++ 的风格，但 Rust 中更常用引用）；2) **借用**：`fn process(s: &String)` 或 `fn process(s: &mut String)`；3) **clone**：`process(s.clone())`（显式深拷贝）。Rust 的所有权规则使 API 设计更明确：函数签名即文档——`fn foo(s: String)` 消费 `s`，`fn foo(s: &String)` 只读借用，`fn foo(s: &mut String)` 可变借用。这与 C++ 的 const 引用参数（`void foo(const string& s)`，类似 Rust 的 `&String`）或 Java 的对象传递（总是引用传递，无所有权概念）不同——Rust 的参数类型直接反映所有权语义。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)] · [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)]
+
+## 嵌入式测验
+
+<details>
+<summary>📝 测验 1：以下代码能否编译？输出什么？</summary>
+
+```rust
+fn main() {
+    let x = 5;
+    let y = x;
+    println!("x = {}, y = {}", x, y);
+}
+```
+
+**答案**：✅ 能编译，输出 `x = 5, y = 5`。`i32` 实现了 `Copy`，赋值时按位复制，`x` 仍可用。
+</details>
+
+<details>
+<summary>📝 测验 2：以下代码能否编译？</summary>
+
+```rust
+fn main() {
+    let s = String::from("hello");
+    let s2 = s;
+    println!("{}", s);
+}
+```
+
+**答案**：❌ 编译错误。`String` 不实现 `Copy`，`let s2 = s` 是**移动（move）**，`s` 的所有权已转移给 `s2`，之后不能再使用 `s`。修正：使用 `s.clone()` 或借用 `&s`。
+</details>
+
+<details>
+<summary>📝 测验 3：以下函数签名中，调用后 `s` 是否仍可用？</summary>
+
+```rust
+fn process(s: String) { /* ... */ }
+fn inspect(s: &String) { /* ... */ }
+fn modify(s: &mut String) { /* ... */ }
+```
+
+**答案**：
+- `process(s)` → ❌ `s` 被**消费（move）**，不可再用
+- `inspect(&s)` → ✅ `s` 被**不可变借用**，仍可用
+- `modify(&mut s)` → ✅ `s` 被**可变借用**，但在借用结束后可用
+</details>
+
+<details>
+<summary>📝 测验 4：以下代码的 Drop 顺序是什么？</summary>
+
+```rust
+struct A;
+impl Drop for A {
+    fn drop(&mut self) { println!("A dropped"); }
+}
+
+fn main() {
+    let a = A;
+    let b = A;
+    {
+        let c = A;
+    }
+    println!("end");
+}
+```
+
+**答案**：输出顺序为：`A dropped`（c）→ `end` → `A dropped`（b）→ `A dropped`（a）。局部变量按**逆序** Drop（栈的后进先出），`c` 在内部作用域结束时先被 Drop。
+</details>
+
+<details>
+<summary>📝 测验 5：以下结构体能实现 `Copy` 吗？</summary>
+
+```rust
+struct Point { x: i32, y: i32 }
+struct Label { text: String }
+```
+
+**答案**：
+- `Point` → ✅ 能。所有字段（`i32`, `i32`）都实现 `Copy`。
+- `Label` → ❌ 不能。`String` 不实现 `Copy`，包含 `String` 的类型无法自动实现 `Copy`。
+</details>
+
+## 实践
+
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
+> **对应练习**: [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing/)
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
 ## 参考来源
 

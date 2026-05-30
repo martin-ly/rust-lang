@@ -1,4 +1,6 @@
 # Rust 数值类型与运算
+> **受众**: [初学者]
+
 
 > **Bloom 层级**: 理解 → 应用
 > **定位**: 系统讲解 Rust 的**数值类型**——从整数、浮点到 wrapping/saturating 运算，分析类型安全如何防止数值错误。
@@ -508,3 +510,12 @@ fn main() {
 ```
 
 > **修正**: `Wrapping<T>` 是一个 newtype 包装器，提供**环绕算术**（wrapping arithmetic）：溢出时静默环绕（`255u8 + 1 = 0`）。但它与原始类型 `T` 是不同的类型，不能直接混用运算。正确：`Wrapping(255u8) + Wrapping(1u8)` 或 `a.0 + b`（解包后）。Rust 的整数默认使用 panic-on-overflow（debug 模式）或 wrapping（release 模式）。`Wrapping` 显式选择环绕语义，适用于哈希、密码学、游戏循环等场景。这与 C 的"始终环绕"（UB 仅在 signed overflow）或 Swift 的"默认 panic"不同——Rust 显式区分了两种语义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] · [来源: [Rust Reference — Integer Overflow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#overflow)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

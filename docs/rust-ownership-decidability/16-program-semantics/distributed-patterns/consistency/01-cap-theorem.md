@@ -1,5 +1,6 @@
 # CAP 定理深度分析 (CAP Theorem Deep Dive)
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 目录

@@ -1,4 +1,5 @@
 > **权威来源**: [Rust Platform Support 文档](https://doc.rust-lang.org/nightly/rustc/platform-support.html), [Rust Reference](https://doc.rust-lang.org/reference/)
+> **分级**: [A]
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Platform Support 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 

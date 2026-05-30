@@ -1,4 +1,5 @@
 // [来源: Rust Reference / TRPL]
+//! Type system fundamentals: enums, structs, traits, and pattern matching.
 #![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]

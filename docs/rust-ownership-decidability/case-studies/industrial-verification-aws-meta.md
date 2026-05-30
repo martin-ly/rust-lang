@@ -1,5 +1,6 @@
 # 工业级 Rust 形式化验证案例
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **企业**: Amazon (AWS), Meta, Microsoft

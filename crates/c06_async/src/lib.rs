@@ -1,4 +1,5 @@
 // [来源: Rust Reference / RFC 2394 / RFC 3185]
+//! Async/await, futures, streams, and runtime integrations (Tokio, Smol).
 #![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]
@@ -254,7 +255,8 @@ pub mod actix;
 pub mod async_runtime;
 
 /// async-std 运行时
-pub mod async_std;
+// async_std 模块已归档，详见 src/async_std/mod.rs
+// pub mod async_std;
 
 /// async/await 关键字
 pub mod r#await;
@@ -283,6 +285,13 @@ pub mod glommio;
 pub mod utils;
 
 /// 高级异步工具库
+///
+/// ⚠️ **关于 `async_trait` 的使用说明**:
+/// 本 crate 的部分示例代码仍使用 `#[async_trait::async_trait]`，原因如下：
+/// - Rust 1.75 AFIT (async fn in trait) 已稳定，但**不支持 trait object (`dyn Trait`)**
+/// - AFIDT (async fn in dyn trait) 预计 1.97-1.98 稳定，当前仍需 nightly
+/// - 教学代码需要在 `dyn Trait` 场景下演示，因此 `async_trait` 仍是必要 workaround
+/// - 详见 [`afit_dyn_tracking`] 模块的对比分析
 pub mod advanced_tools;
 
 // ============================================================================

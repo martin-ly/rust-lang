@@ -1,4 +1,7 @@
 # Design Patterns（设计模式）
+> **受众**: [进阶]
+> **内容分级**: [专家级]
+
 
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **S+P** — Structure + Procedure

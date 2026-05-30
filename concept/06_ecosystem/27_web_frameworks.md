@@ -1,4 +1,6 @@
 # Rust Web 框架对比与选型
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A+S** — ApplicationStructure
@@ -427,7 +429,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
 |:---|:---|:---|:---|:---|
 | 运行时 | Tokio 独占 | Tokio（封装） | Tokio 独占 | Tokio 独占 |
 | 自定义运行时 | ❌ 不支持 | ⚠️ 困难 | ❌ 不支持 | ❌ 不支持 |
-| Tokio（async-std 已于 2025-03 停止维护） 兼容 | ❌ | ❌ | ❌ | ❌ |
+| Tokio 兼容 | ❌ | ❌ | ❌ | ❌ |
 | glommio (io_uring) | ❌ | ❌ | ❌ | ❌ |
 | 阻塞任务桥接 | `tokio::task::spawn_blocking` | `web::block` | `tokio::task::spawn_blocking` | `tokio::task::spawn_blocking` |
 | WASM 目标 | ⚠️ 需 wasm-bindgen-futures | ⚠️ 有限支持 | ❌ | ⚠️ 需适配 |
@@ -676,7 +678,7 @@ graph TD
 
 ```text
 陷阱 1: 运行时混用
-  ❌ 在 Axum 中使用 Tokio（async-std 已于 2025-03 停止维护） 的 fs::read
+  ❌ 在 Axum 中使用 Tokio 的 fs::read
      // 混用运行时导致阻塞或 panic
 
   ✅ 统一使用 Tokio 原语

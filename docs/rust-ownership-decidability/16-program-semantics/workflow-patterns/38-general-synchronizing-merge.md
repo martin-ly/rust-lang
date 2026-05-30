@@ -1,5 +1,6 @@
 # 38 通用同步合并模式 (General Synchronizing Merge) - 完整形式化语义
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 目录

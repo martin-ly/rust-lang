@@ -1,4 +1,5 @@
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> **分级**: [A]
 > [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html),
 > [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html),
 > [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)

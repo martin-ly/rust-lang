@@ -1,4 +1,5 @@
 # Safety-Critical Rust 官方路线对齐（2026）
+> **分级**: [B]
 >
 > **层次定位**: L5-L7 对比-前沿 / 安全关键生态对齐
 > **前置依赖**: [concept L5 安全边界](../../concept/05_comparative/04_safety_boundaries.md) · [docs Rust for Linux](../03_guides/03_rust_for_linux_guide.md)

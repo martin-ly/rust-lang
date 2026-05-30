@@ -1,5 +1,6 @@
 # Rust Verification Tools: A Comprehensive Deep Dive
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **Abstract**: This document provides an exhaustive examination of the Rust verification ecosystem, covering static analysis tools, model checkers, theorem provers, and fuzzing frameworks.

@@ -1,5 +1,6 @@
 # Aeneas：Rust到函数式语言的翻译
 
+> **分级**: [C]
 ## 目录
 >
 > **[来源: Rust Official Docs]**

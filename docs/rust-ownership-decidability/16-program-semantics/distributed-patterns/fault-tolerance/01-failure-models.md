@@ -1,5 +1,6 @@
 # 故障模型语义 (Failure Models Semantics)
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 目录

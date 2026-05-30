@@ -1,5 +1,6 @@
 # Rust所有权三大规则
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **权威来源**: The Rust Programming Language (Book), Chapter 4

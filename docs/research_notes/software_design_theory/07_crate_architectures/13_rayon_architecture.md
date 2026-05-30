@@ -1,5 +1,6 @@
 # Rayon Crate 架构解构
 
+> **分级**: [B]
 > **Bloom 层级**: L3 (高级应用) / L4 (并行计算原理)
 > **目标读者**: 已掌握 Rust 迭代器与闭包，希望利用数据并行加速计算的开发者
 > [来源: Rayon 官方文档](https://docs.rs/rayon/latest/rayon/)

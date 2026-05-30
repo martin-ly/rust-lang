@@ -15,7 +15,7 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 /// 内存安全管理器 / Memory Safety Manager
-/// 
+///
 /// 统一管理所有内存安全相关的检查和验证
 /// Unified management of all memory safety related checks and verifications
 pub struct MemorySafetyManager {
@@ -45,89 +45,107 @@ impl MemorySafetyManager {
             statistics: Arc::new(Mutex::new(MemorySafetyStatistics::new())),
         }
     }
-    
+
     /// 检查内存安全 / Check Memory Safety
-    pub fn check_memory_safety(&self, program: &Program) -> Result<MemorySafetyReport, MemorySafetyError> {
+    pub fn check_memory_safety(
+        &self,
+        program: &Program,
+    ) -> Result<MemorySafetyReport, MemorySafetyError> {
         let start_time = Instant::now();
         let mut report = MemorySafetyReport::new();
-        
+
         // 更新统计信息
         {
             let mut stats = self.statistics.lock().expect("统计信息锁定失败");
             stats.total_checks += 1;
             stats.check_start_time = start_time;
         }
-        
+
         // 检查内存分配
         if let Ok(allocation_report) = self.check_memory_allocations(program) {
             report.add_allocation_report(allocation_report);
         }
-        
+
         // 检查引用有效性
         if let Ok(reference_report) = self.check_reference_validity(program) {
             report.add_reference_report(reference_report);
         }
-        
+
         // 检查数据竞争
         if let Ok(data_race_report) = self.check_data_races(program) {
             report.add_data_race_report(data_race_report);
         }
-        
+
         // 检查内存泄漏
         if let Ok(leak_report) = self.check_memory_leaks(program) {
             report.add_leak_report(leak_report);
         }
-        
+
         // 检查缓冲区安全
         if let Ok(buffer_report) = self.check_buffer_safety(program) {
             report.add_buffer_report(buffer_report);
         }
-        
+
         // 更新统计信息
         {
             let mut stats = self.statistics.lock().expect("统计信息锁定失败");
             stats.last_check_duration = start_time.elapsed();
             stats.total_check_time += stats.last_check_duration;
         }
-        
+
         Ok(report)
     }
-    
+
     /// 检查内存分配 / Check Memory Allocations
-    fn check_memory_allocations(&self, program: &Program) -> Result<AllocationReport, MemorySafetyError> {
+    fn check_memory_allocations(
+        &self,
+        program: &Program,
+    ) -> Result<AllocationReport, MemorySafetyError> {
         let tracker = self.allocation_tracker.lock().expect("分配跟踪器锁定失败");
         tracker.check_allocations(program)
     }
-    
+
     /// 检查引用有效性 / Check Reference Validity
-    fn check_reference_validity(&self, program: &Program) -> Result<ReferenceReport, MemorySafetyError> {
+    fn check_reference_validity(
+        &self,
+        program: &Program,
+    ) -> Result<ReferenceReport, MemorySafetyError> {
         let checker = self.reference_checker.lock().expect("引用检查器锁定失败");
         checker.check_references(program)
     }
-    
+
     /// 检查数据竞争 / Check Data Races
     fn check_data_races(&self, program: &Program) -> Result<DataRaceReport, MemorySafetyError> {
-        let detector = self.data_race_detector.lock().expect("数据竞争检测器锁定失败");
+        let detector = self
+            .data_race_detector
+            .lock()
+            .expect("数据竞争检测器锁定失败");
         detector.detect_races(program)
     }
-    
+
     /// 检查内存泄漏 / Check Memory Leaks
     fn check_memory_leaks(&self, program: &Program) -> Result<LeakReport, MemorySafetyError> {
-        let detector = self.memory_leak_detector.lock().expect("内存泄漏检测器锁定失败");
+        let detector = self
+            .memory_leak_detector
+            .lock()
+            .expect("内存泄漏检测器锁定失败");
         detector.detect_leaks(program)
     }
-    
+
     /// 检查缓冲区安全 / Check Buffer Safety
     fn check_buffer_safety(&self, program: &Program) -> Result<BufferReport, MemorySafetyError> {
-        let checker = self.buffer_safety_checker.lock().expect("缓冲区安全检查器锁定失败");
+        let checker = self
+            .buffer_safety_checker
+            .lock()
+            .expect("缓冲区安全检查器锁定失败");
         checker.check_buffers(program)
     }
-    
+
     /// 获取统计信息 / Get Statistics
     pub fn get_statistics(&self) -> MemorySafetyStatistics {
         self.statistics.lock().expect("统计信息锁定失败").clone()
     }
-    
+
     /// 重置统计信息 / Reset Statistics
     pub fn reset_statistics(&self) {
         let mut stats = self.statistics.lock().expect("统计信息锁定失败");
@@ -376,11 +394,14 @@ impl MemoryAllocationTracker {
             statistics: AllocationStatistics::new(),
         }
     }
-    
+
     /// 检查内存分配 / Check Memory Allocations
-    pub fn check_allocations(&self, program: &Program) -> Result<AllocationReport, MemorySafetyError> {
+    pub fn check_allocations(
+        &self,
+        program: &Program,
+    ) -> Result<AllocationReport, MemorySafetyError> {
         let mut report = AllocationReport::new();
-        
+
         // 检查双重释放
         for allocation in &program.allocations {
             if allocation.is_freed {
@@ -405,19 +426,20 @@ impl MemoryAllocationTracker {
                 }
             }
         }
-        
+
         // 检查内存泄漏
         for allocation in &program.allocations {
             if !allocation.is_freed {
                 // 检查分配是否仍然被引用
                 let mut is_referenced = false;
                 for reference in &program.references {
-                    if reference.target_allocation == allocation.allocation_id && reference.is_valid {
+                    if reference.target_allocation == allocation.allocation_id && reference.is_valid
+                    {
                         is_referenced = true;
                         break;
                     }
                 }
-                
+
                 if !is_referenced {
                     report.add_violation(AllocationViolation {
                         allocation_id: allocation.allocation_id.clone(),
@@ -431,7 +453,7 @@ impl MemoryAllocationTracker {
                 }
             }
         }
-        
+
         Ok(report)
     }
 }
@@ -452,23 +474,28 @@ impl ReferenceValidityChecker {
             statistics: ReferenceCheckStatistics::new(),
         }
     }
-    
+
     /// 检查引用 / Check References
-    pub fn check_references(&self, program: &Program) -> Result<ReferenceReport, MemorySafetyError> {
+    pub fn check_references(
+        &self,
+        program: &Program,
+    ) -> Result<ReferenceReport, MemorySafetyError> {
         let mut report = ReferenceReport::new();
-        
+
         // 检查悬垂引用
         for reference in &program.references {
             if reference.is_valid {
                 // 检查目标分配是否仍然有效
                 let mut target_valid = false;
                 for allocation in &program.allocations {
-                    if allocation.allocation_id == reference.target_allocation && !allocation.is_freed {
+                    if allocation.allocation_id == reference.target_allocation
+                        && !allocation.is_freed
+                    {
                         target_valid = true;
                         break;
                     }
                 }
-                
+
                 if !target_valid {
                     report.add_violation(ReferenceViolation {
                         reference_id: reference.reference_id.clone(),
@@ -482,7 +509,7 @@ impl ReferenceValidityChecker {
                 }
             }
         }
-        
+
         // 检查释放后使用
         for reference in &program.references {
             if reference.is_valid {
@@ -505,7 +532,7 @@ impl ReferenceValidityChecker {
                 }
             }
         }
-        
+
         Ok(report)
     }
 }
@@ -526,17 +553,17 @@ impl DataRaceDetector {
             statistics: DataRaceDetectionStatistics::new(),
         }
     }
-    
+
     /// 检测数据竞争 / Detect Data Races
     pub fn detect_races(&self, program: &Program) -> Result<DataRaceReport, MemorySafetyError> {
         let mut report = DataRaceReport::new();
-        
+
         // 收集所有内存访问
         let mut all_accesses = Vec::new();
         for thread in &program.threads {
             all_accesses.extend(thread.memory_accesses.clone());
         }
-        
+
         // 检查数据竞争
         for i in 0..all_accesses.len() {
             for j in i + 1..all_accesses.len() {
@@ -554,24 +581,25 @@ impl DataRaceDetector {
                 }
             }
         }
-        
+
         Ok(report)
     }
-    
+
     /// 检查是否为数据竞争 / Check if Data Race
     fn is_data_race(&self, access1: &MemoryAccess, access2: &MemoryAccess) -> bool {
         // 检查是否为同一内存地址
         if access1.target_allocation != access2.target_allocation {
             return false;
         }
-        
+
         // 检查是否为不同线程
         if access1.thread_id == access2.thread_id {
             return false;
         }
-        
+
         // 检查是否至少有一个是写操作
-        matches!(access1.access_type, AccessType::Write) || matches!(access2.access_type, AccessType::Write)
+        matches!(access1.access_type, AccessType::Write)
+            || matches!(access2.access_type, AccessType::Write)
     }
 }
 
@@ -591,23 +619,24 @@ impl MemoryLeakDetector {
             statistics: LeakDetectionStatistics::new(),
         }
     }
-    
+
     /// 检测内存泄漏 / Detect Memory Leaks
     pub fn detect_leaks(&self, program: &Program) -> Result<LeakReport, MemorySafetyError> {
         let mut report = LeakReport::new();
-        
+
         // 检查未释放的分配
         for allocation in &program.allocations {
             if !allocation.is_freed {
                 // 检查分配是否仍然被引用
                 let mut is_referenced = false;
                 for reference in &program.references {
-                    if reference.target_allocation == allocation.allocation_id && reference.is_valid {
+                    if reference.target_allocation == allocation.allocation_id && reference.is_valid
+                    {
                         is_referenced = true;
                         break;
                     }
                 }
-                
+
                 if !is_referenced {
                     report.add_leak(MemoryLeak {
                         allocation_id: allocation.allocation_id.clone(),
@@ -622,7 +651,7 @@ impl MemoryLeakDetector {
                 }
             }
         }
-        
+
         Ok(report)
     }
 }
@@ -643,16 +672,17 @@ impl BufferSafetyChecker {
             statistics: BufferCheckStatistics::new(),
         }
     }
-    
+
     /// 检查缓冲区 / Check Buffers
     pub fn check_buffers(&self, program: &Program) -> Result<BufferReport, MemorySafetyError> {
         let mut report = BufferReport::new();
-        
+
         // 检查缓冲区溢出
         for allocation in &program.allocations {
             if allocation.allocation_type == AllocationType::Stack {
                 // 检查栈溢出
-                if allocation.size > 1024 * 1024 { // 1MB 限制
+                if allocation.size > 1024 * 1024 {
+                    // 1MB 限制
                     report.add_violation(BufferViolation {
                         buffer_id: allocation.allocation_id.clone(),
                         violation_type: ViolationType::BufferOverflow,
@@ -665,7 +695,7 @@ impl BufferSafetyChecker {
                 }
             }
         }
-        
+
         Ok(report)
     }
 }
@@ -810,7 +840,7 @@ impl MemorySafetyReport {
             is_safe: true,
         }
     }
-    
+
     /// 添加分配报告 / Add Allocation Report
     pub fn add_allocation_report(&mut self, report: AllocationReport) {
         self.allocation_report = Some(report);
@@ -820,7 +850,7 @@ impl MemorySafetyReport {
             }
         }
     }
-    
+
     /// 添加引用报告 / Add Reference Report
     pub fn add_reference_report(&mut self, report: ReferenceReport) {
         self.reference_report = Some(report);
@@ -830,7 +860,7 @@ impl MemorySafetyReport {
             }
         }
     }
-    
+
     /// 添加数据竞争报告 / Add Data Race Report
     pub fn add_data_race_report(&mut self, report: DataRaceReport) {
         self.data_race_report = Some(report);
@@ -840,7 +870,7 @@ impl MemorySafetyReport {
             }
         }
     }
-    
+
     /// 添加泄漏报告 / Add Leak Report
     pub fn add_leak_report(&mut self, report: LeakReport) {
         self.leak_report = Some(report);
@@ -850,7 +880,7 @@ impl MemorySafetyReport {
             }
         }
     }
-    
+
     /// 添加缓冲区报告 / Add Buffer Report
     pub fn add_buffer_report(&mut self, report: BufferReport) {
         self.buffer_report = Some(report);
@@ -879,7 +909,7 @@ impl AllocationReport {
             check_time: Duration::from_secs(0),
         }
     }
-    
+
     /// 添加违规 / Add Violation
     pub fn add_violation(&mut self, violation: AllocationViolation) {
         self.violations.push(violation);
@@ -916,7 +946,7 @@ impl ReferenceReport {
             check_time: Duration::from_secs(0),
         }
     }
-    
+
     /// 添加违规 / Add Violation
     pub fn add_violation(&mut self, violation: ReferenceViolation) {
         self.violations.push(violation);
@@ -953,7 +983,7 @@ impl DataRaceReport {
             check_time: Duration::from_secs(0),
         }
     }
-    
+
     /// 添加竞争 / Add Race
     pub fn add_race(&mut self, race: DataRace) {
         self.races.push(race);
@@ -977,7 +1007,7 @@ impl LeakReport {
             check_time: Duration::from_secs(0),
         }
     }
-    
+
     /// 添加泄漏 / Add Leak
     pub fn add_leak(&mut self, leak: MemoryLeak) {
         self.leaks.push(leak);
@@ -1001,7 +1031,7 @@ impl BufferReport {
             check_time: Duration::from_secs(0),
         }
     }
-    
+
     /// 添加违规 / Add Violation
     pub fn add_violation(&mut self, violation: BufferViolation) {
         self.violations.push(violation);

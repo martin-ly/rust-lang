@@ -1,4 +1,6 @@
 # WebAssembly 生态：Rust 的浏览器外运行时
+> **受众**: [进阶]
+> **内容分级**: [综述级]
 >
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure

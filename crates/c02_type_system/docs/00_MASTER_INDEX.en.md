@@ -68,7 +68,10 @@ cargo test -p c02_type_system
 ## Cheatsheet & Rustlings
 
 - **Cheatsheet**: [generics_cheatsheet](../../../docs/02_reference/quick_reference/generics_cheatsheet.md) | [type_system](../../../docs/02_reference/quick_reference/type_system.md)
-- **Rustlings**: [04_primitive_types](https://github.com/rust-lang/rustlings/tree/main/exercises/04_primitive_types), [07_structs](https://github.com/rust-lang/rustlings/tree/main/exercises/07_structs), [08_enums](https://github.com/rust-lang/rustlings/tree/main/exercises/08_enums), [15_traits](https://github.com/rust-lang/rustlings/tree/main/exercises/15_traits)
+- **Rustlings**: [04_primitive_types](https://github.com/rust-lang/rustlings/tree/main/exercises/04_primitive_types),
+- [07_structs](https://github.com/rust-lang/rustlings/tree/main/exercises/07_structs),
+- [08_enums](https://github.com/rust-lang/rustlings/tree/main/exercises/08_enums),
+- [15_traits](https://github.com/rust-lang/rustlings/tree/main/exercises/15_traits)
 
 ---
 

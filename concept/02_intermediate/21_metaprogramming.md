@@ -1,4 +1,6 @@
 # 元编程：Rust 的编译期代码生成与变换
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配、过程宏的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。
@@ -689,3 +691,12 @@ fn main() {
 ```
 
 > **修正**: Rust 编译器的**宏递归限制**：默认 128 层展开，防止无限递归导致编译器栈溢出。`count!` 宏递归计数 token 数量，大量 token 会超出限制。增加限制：`#![recursion_limit = "256"]`（crate 级别）。但过度递归增加编译时间。替代方案：1) 使用 `const fn` 替代宏递归（若逻辑可在 const 中表达）；2) 使用过程宏（无递归限制，但复杂度更高）；3) 减少 token 数量（批量处理）。这与 C 的预处理器（无递归限制，可能无限展开）或 Template Haskell（编译期执行 Haskell 代码，受运行时栈限制）不同——Rust 的宏递归限制是编译期的安全阀。[来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)] · [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

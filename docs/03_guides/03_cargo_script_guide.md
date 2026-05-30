@@ -1,4 +1,5 @@
 > **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/), [RFC 3502: cargo-script](https://github.com/rust-lang/rfcs/pull/3502), [Rust 1.79 Release Notes](https://releases.rs/docs/1.79.0/)
+> **分级**: [A]
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Cargo Book、RFC 3502 来源标注 [来源: Authority Source Sprint Batch 8]
 

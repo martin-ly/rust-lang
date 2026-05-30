@@ -1,4 +1,6 @@
 # 字符串与编码：Rust 的文本处理类型系统
+> **受众**: [初学者]
+
 
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。
@@ -672,3 +674,12 @@ fn main() {
 ```
 
 > **修正**: `OsStr`/`OsString` 是平台相关的字符串类型，可能包含非 UTF-8 序列（Windows 的 WTF-8、Unix 的字节序列）。`str`/`String` 要求严格 UTF-8。两者不能直接比较或转换：`OsStr` → `str` 需 `to_str()`（返回 `Option<&str>`，可能失败）；`str` → `OsStr` 通过 `OsStr::new()`（总是成功，因为 UTF-8 是平台字符串的子集）。设计原因：Rust 强制处理平台字符串的编码不确定性，避免假设所有路径/环境变量都是 UTF-8。这与 Go 的 `string`（底层是字节切片，可能非 UTF-8）或 Python 3 的 `str`（强制 Unicode）不同——Rust 的分离类型系统显式标记了编码风险。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/ffi/struct.OsStr.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html)]
+
+## 实践
+
+> **相关资源**:
+> - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
+> - [exercises/ 练习](../../exercises/) — 动手编程挑战
+> - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。完成至少 1 道相关练习以巩固理解。

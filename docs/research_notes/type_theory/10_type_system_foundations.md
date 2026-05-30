@@ -1,5 +1,6 @@
 # 类型系统基础
 
+> **分级**: [B]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 >
 > **层次定位**: L4 形式化 / 类型论基础研究
@@ -3300,7 +3301,7 @@ fn truncate_front(&mut self, len: usize)
 > **[来源: POPL - Programming Languages Research]**
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../../05_guides/05_performance_tuning_guide.md)
 
 ---

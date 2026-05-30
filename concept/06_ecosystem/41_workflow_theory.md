@@ -1,4 +1,6 @@
 # Workflow Theory & Formalization（工作流理论与形式化）
+> **受众**: [进阶]
+
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure

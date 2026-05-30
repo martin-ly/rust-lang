@@ -1,5 +1,6 @@
 # Creusot 深度解析：预言变量与Rust验证
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 > **权威来源**: Denis, Jourdan, Marché (2022). Creusot: A Foundry for the Deductive Verification of Rust Programs. ICFEM

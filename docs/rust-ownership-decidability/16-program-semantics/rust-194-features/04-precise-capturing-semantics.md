@@ -1,5 +1,6 @@
 # Precise Capturing (+ use<'lt>) 的生命周期语义
 
+> **分级**: [C]
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
 
 ## 📑 目录

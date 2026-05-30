@@ -1,4 +1,6 @@
 # Lifetimes（生命周期）
+> **受众**: [初学者]
+
 
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S+A** — Structure + Application
@@ -928,6 +930,87 @@ fn main() {
 ```
 
 > **修正**: `'static` 是 Rust 中最长的生命周期：程序整个运行期间。`&'static str` 通常来自字符串字面量（`"hello"`，编译期嵌入二进制）或泄漏的内存（`Box::leak`）。常见滥用：1) 将局部变量引用标注为 `'static`；2) 在 trait bound 中过度使用 `'static`（排除所有非静态引用）；3) 线程闭包要求 `'static`，但试图捕获局部引用。`'static` 的正确使用：1) 全局常量；2) 字符串字面量；3) 泄漏的 Box（`Box::leak(Box::new(...))`）；4) `lazy_static` / `once_cell`。这与 C 的 `static` 关键字（存储期，非生命周期概念）或 Java 的 `static` 字段（类级别，与 Rust 的 `'static` 部分相似）不同——Rust 的 `'static` 是生命周期标注，非存储类说明符。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)] · [来源: [Rust Reference — 'static](https://doc.rust-lang.org/reference/lifetime-elision.html#the-static-lifetime)]
+
+## 嵌入式测验
+
+<details>
+<summary>📝 测验 1：以下函数签名需要什么生命周期标注？</summary>
+
+```rust
+fn longest(x: &str, y: &str) -> &str {
+    if x.len() > y.len() { x } else { y }
+}
+```
+
+**答案**：需要显式生命周期标注，因为返回的引用可能是 `x` 或 `y`，编译器无法推断：
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { ... }
+```
+表示返回的引用与 `x` 和 `y` 中**较短的生命周期**相同。
+</details>
+
+<details>
+<summary>📝 测验 2：以下代码应用了哪条生命周期省略规则？</summary>
+
+```rust
+fn first_word(s: &str) -> &str { ... }
+```
+
+**答案**：应用了**省略规则 1**：每个引用参数获得独立的生命周期参数，即 `fn first_word<'a>(s: &'a str) -> &'a str`。由于只有一个输入生命周期，它被赋予给输出生命周期。
+</details>
+
+<details>
+<summary>📝 测验 3：以下结构体定义是否正确？</summary>
+
+```rust
+struct BorrowedString {
+    text: &str,
+}
+```
+
+**答案**：❌ 编译错误。结构体包含引用时，必须显式标注生命周期：
+```rust
+struct BorrowedString<'a> {
+    text: &'a str,
+}
+```
+否则编译器不知道 `text` 引用的数据何时失效。
+</details>
+
+<details>
+<summary>📝 测验 4：`&'static str` 通常来自哪里？</summary>
+
+```rust
+fn get_greeting() -> &'static str {
+    // 以下哪种方式可以返回 &'static str？
+    // A. let s = String::from("hello"); &s
+    // B. "hello"
+    // C. let s = Box::new("hello"); &*s
+}
+```
+
+**答案**：
+- **A** → ❌ `&s` 指向局部变量，`s` 在函数返回后被 Drop，不能返回其引用。
+- **B** → ✅ 字符串字面量 `"hello"` 编译期嵌入二进制，生命周期为 `'static`。
+- **C** → ❌ `Box::new("hello")` 在堆上分配，返回后 Box 被 Drop，引用失效。除非使用 `Box::leak`。
+</details>
+
+<details>
+<summary>📝 测验 5：以下 trait bound 表示什么？</summary>
+
+```rust
+fn print_it<T: Display + 'static>(t: T) { ... }
+```
+
+**答案**：`T` 必须实现 `Display`，且 `T` 中**不包含任何非 `'static` 的引用**。注意：`T: 'static` 不表示 `T` 本身必须存活整个程序运行期，而是表示 `T` 内部没有引用局部数据（即 `T` 可以安全地在线程间传递或长期存储）。例如 `String: 'static`，`&'static str: 'static`，但 `&'a i32`（其中 `'a` 不是 `'static`）不满足 `T: 'static`。
+</details>
+
+## 实践
+
+> **对应 Crate**: [`c01_ownership_borrow_scope`](../../crates/c01_ownership_borrow_scope/)
+> **对应练习**: [`exercises/rustlings_style/ex05_struct_lifetime.rs`](../../exercises/rustlings_style/ex05_struct_lifetime.rs)
+>
+> **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
 ## 参考来源
 

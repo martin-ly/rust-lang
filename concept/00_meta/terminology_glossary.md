@@ -27,6 +27,15 @@
 | 别名规则 | Aliasing Rules | L1 | 同一时间内，一个值要么有一个可变引用，要么有多个不可变引用，二者不可兼得 | [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html) |
 | 栈 | Stack | L1 | 后进先出的内存区域，用于存储固定大小的局部变量 | [TRPL Ch4.1](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) |
 | 堆 | Heap | L1 | 动态分配内存的区域，通过 `Box::new`、`Vec::new` 等分配 | [TRPL Ch4.1](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) |
+| 切片 | Slice / `str` / `[T]` | L1 | 对连续序列的动态大小视图，如字符串切片 `&str` 和数组切片 `&[T]` | [TRPL Ch4.3](https://doc.rust-lang.org/book/ch04-03-slices.html) |
+| 范围 | Range | L1 | 表示整数区间的类型（`a..b`、`a..=b` 等），用于迭代和索引 | [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) |
+| `Vec` | Vec | L1 | 动态数组，堆上分配的可变长度连续序列 | [std::vec::Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) |
+| `HashMap` | HashMap | L1 | 基于哈希表的无序键值对容器 | [std::collections::HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html) |
+| `VecDeque` | VecDeque | L1 | 双端队列，支持 O(1) 两端插入和删除 | [std::collections::VecDeque](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) |
+| `Debug` | Debug | L1 | 用于格式化输出的 trait，通过 `{:?}` 提供开发者友好的表示 | [std::fmt::Debug](https://doc.rust-lang.org/std/fmt/trait.Debug.html) |
+| `Display` | Display | L1 | 用于格式化输出的 trait，通过 `{}` 提供用户友好的表示 | [std::fmt::Display](https://doc.rust-lang.org/std/fmt/trait.Display.html) |
+| `PartialEq` | PartialEq | L1 | 定义部分等价关系的 trait（允许 NaN ≠ NaN） | [std::cmp::PartialEq](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html) |
+| `Hash` | Hash | L1 | 定义哈希值的 trait，与 `HashMap` 等哈希集合配合使用 | [std::hash::Hash](https://doc.rust-lang.org/std/hash/trait.Hash.html) |
 | 模式匹配 | Pattern Matching | L1 | 通过 `match`、`if let` 等解构值并绑定变量的机制 | [TRPL Ch6.2](https://doc.rust-lang.org/book/ch06-02-match.html) |
 | 枚举 | Enum / Enumeration | L1 | 代数数据类型，可携带数据的标签联合体（tagged union） | [TRPL Ch6](https://doc.rust-lang.org/book/ch06-00-enums.html) |
 | 结构体 | Struct | L1 | 命名字段的复合数据类型 | [TRPL Ch5](https://doc.rust-lang.org/book/ch05-00-structs.html) |
@@ -58,6 +67,9 @@
 | `Result` 类型 | Result | L2 | `Result<T, E>` 枚举，表示可能失败的操作，显式处理错误 | [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html) |
 | `Option` 类型 | Option | L2 | `Option<T>` 枚举，表示可能不存在的值，替代空指针 | [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html) |
 | `?` 运算符 | Try Operator / Question Mark | L2 | 自动展开 `Result` 或 `Option`，错误时提前返回 | [TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html) |
+| `TryFrom` / `TryInto` | TryFrom / TryInto | L2 | 可失败的类型转换 trait，返回 `Result` 而非直接 panic | [std::convert::TryFrom](https://doc.rust-lang.org/std/convert/trait.TryFrom.html) |
+| `AsRef` / `AsMut` | AsRef / AsMut | L2 | 廉价的引用转换 trait，用于泛型函数接受多种引用类型 | [std::convert::AsRef](https://doc.rust-lang.org/std/convert/trait.AsRef.html) |
+| `Cow` | Clone-on-Write | L2 | 写时克隆的智能指针，避免不必要的堆分配 | [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) |
 
 ## L3 高级层术语 (Advanced)
 
@@ -82,6 +94,15 @@
 | 原子操作 | Atomic Operation | L3 | 不可中断的底层内存操作（`AtomicUsize`、`Ordering` 等） | [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) |
 | 内存排序 | Memory Ordering | L3 | 控制原子操作可见性的语义（`Relaxed`、`Acquire`、`Release`、`SeqCst`） | [std::sync::atomic::Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html) |
 | 无锁数据结构 | Lock-free Data Structure | L3 | 不使用互斥锁，仅靠原子操作实现线程安全的数据结构 | [Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html) |
+| `Unpin` | Unpin | L3 | 标记可在内存中安全移动的类型；大多数类型自动实现 | [std::marker::Unpin](https://doc.rust-lang.org/std/marker/trait.Unpin.html) |
+| `MaybeUninit` | MaybeUninit | L3 | 可能未初始化的内存包装器，用于 `unsafe` 中的延迟初始化 | [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html) |
+| `ManuallyDrop` | ManuallyDrop | L3 | 阻止编译器自动调用 `Drop` 的包装器，用于精细控制析构时机 | [std::mem::ManuallyDrop](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html) |
+| `Poll` | Poll | L3 | 异步任务的状态枚举：`Pending`（未完成）或 `Ready(T)`（已完成） | [std::task::Poll](https://doc.rust-lang.org/std/task/enum.Poll.html) |
+| `Mutex` | Mutex | L3 | 互斥锁，保证同一时间只有一个线程访问受保护数据 | [std::sync::Mutex](https://doc.rust-lang.org/std/sync/struct.Mutex.html) |
+| `RwLock` | RwLock | L3 | 读写锁，允许多个读者或单个写者并发访问 | [std::sync::RwLock](https://doc.rust-lang.org/std/sync/struct.RwLock.html) |
+| 通道 | Channel | L3 | 线程间或 async 任务间的消息传递机制（`mpsc`、`oneshot`、`broadcast`） | [std::sync::mpsc](https://doc.rust-lang.org/std/sync/mpsc/index.html) |
+| 派生宏 | Derive Macro | L3 | 自动为结构体/枚举生成 trait 实现的过程宏（`#[derive(...)]`） | [TRPL Ch20.5](https://doc.rust-lang.org/book/ch20-05-macros.html) |
+| 属性宏 | Attribute Macro | L3 | 修饰整个项（函数、模块等）的过程宏，可重写其 AST | [TRPL Ch20.5](https://doc.rust-lang.org/book/ch20-05-macros.html) |
 
 ## L4 形式化层术语 (Formal Methods)
 
@@ -141,4 +162,4 @@
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.96.0 (Edition 2024)
 > **最后更新**: 2026-05-29
-> **状态**: ✅ 术语表框架创建完成，覆盖 80/100 目标术语
+> **状态**: ✅ 术语表创建完成，覆盖 101/100 目标术语

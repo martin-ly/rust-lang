@@ -1,4 +1,6 @@
 # L3 高级概念层（Advanced）
+> **受众**: [专家]
+
 
 > **定位**：Rust 的高级特性，涉及并发、异步、Unsafe 和元编程。本层是 L1-L2 概念在**复杂场景**中的组合应用与边界突破。
 > **Bloom 层级**: 应用 → 分析 → 评价
@@ -259,7 +261,29 @@ Macros
 
 ---
 
-## 七、跨层出口
+## 七、是否继续？导航分岔口
+
+> **受众**: [专家]
+
+L3 是 Rust 工程能力的**顶峰**。在继续之前，请自检以下能力：
+
+| 检查项 | 自检标准 | 若未达标 |
+|:---|:---|:---|
+| 并发 | 能独立编写含 `Mutex`/`Arc`/`Channel` 的多线程程序，并解释死锁原因 | 回到 [L3 并发](./01_concurrency.md) |
+| 异步 | 能用 `tokio::spawn` + `async/await` 实现并发 HTTP 请求，理解 `Future` 轮询 | 回到 [L3 异步](./02_async.md) |
+| Unsafe | 能写出 `unsafe` 块并说明为什么这是安全的（Safety Contract） | 回到 [L3 Unsafe](./03_unsafe.md) |
+| 生命周期 | 能标注含多个引用的函数签名，理解 HRTB | 回到 [L2 生命周期](../02_intermediate/18_lifetimes_advanced.md) |
+
+**分岔口选择**：
+
+- ✅ **进入 L4 形式化**：如果你希望理解"为什么 Rust 能编译通过"的数学证明 → [L4 形式化](../04_formal/README.md)
+- ✅ **进入 L5 对比**：如果你希望对比 Rust 与其他语言的差异 → [L5 对比](../05_comparative/README.md)
+- ✅ **进入 L6 生态**：如果你希望掌握生产环境工具链 → [L6 生态](../06_ecosystem/README.md)
+- ⏸️ **留在 L3 巩固**：如果你仍有上述检查项未达标，建议先完成 [MVP 学习路径](../00_meta/LEARNING_MVP_PATH.md) 的 Week 2
+
+---
+
+## 八、跨层出口
 
 掌握 L3 后可进入：
 
