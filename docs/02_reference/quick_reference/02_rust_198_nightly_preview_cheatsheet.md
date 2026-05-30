@@ -34,6 +34,9 @@
 
 ## 语言特性
 
+> **[来源: Rust Nightly Documentation](https://doc.rust-lang.org/nightly/std/ops/trait.Iterator.html)**
+> **[来源: RFC 3513 — gen blocks](https://rust-lang.github.io/rfcs/3513-gen-blocks.html)**
+
 ### `gen` 块 — 原生生成器
 
 `gen { yield ... }` 提供了一种直观的方式构造惰性迭代器，无需显式实现 `Iterator` trait 或使用 `std::iter::from_fn`。
@@ -192,6 +195,9 @@ pub fn debug_pause() {
 
 ## 核心标准库 API (进行中稳定化)
 
+> **[来源: Rust Standard Library — Unstable Features](https://doc.rust-lang.org/nightly/std/)**
+> **[来源: Rust Release Tracking](https://releases.rs/)**
+
 以下 API 的稳定化 PR 处于 FCP/PFCP 阶段，可能在 1.98/1.99 进入 stable：
 
 | PR | 特性 | 状态 |
@@ -210,6 +216,8 @@ pub fn debug_pause() {
 ---
 
 ## 快速参考示例
+
+> **[来源: Rust Nightly Documentation](https://doc.rust-lang.org/nightly/)**
 
 ### 惰性斐波那契序列
 
@@ -266,6 +274,8 @@ impl<'a, T: ?Sized> Deref for SmartPtr<'a, T> {
 
 ## Feature Gate 清单
 
+> **[来源: The Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/index.html)**
+
 ```rust
 // gen 块
 #![feature(gen_blocks, yield_expr)]
@@ -295,3 +305,6 @@ impl<'a, T: ?Sized> Deref for SmartPtr<'a, T> {
 - [Rust 1.96 特性速查表](./02_rust_196_features_cheatsheet.md)
 - [Rust 2024 Edition 迁移指南](../../05_guides/06_rust_2024_edition_migration_guide.md)
 - [releases.rs — 稳定化进度跟踪](https://releases.rs/)
+- [Rust 版本跟踪](../../../concept/07_future/05_rust_version_tracking.md)
+- [gen blocks 前瞻](../../../concept/07_future/15_gen_blocks_preview.md)
+- [derive(CoercePointee) 前瞻](../../../concept/07_future/10_derive_coerce_pointee_preview.md)

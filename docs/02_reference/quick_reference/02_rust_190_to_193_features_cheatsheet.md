@@ -1,11 +1,9 @@
 # Rust 1.90–1.93 特性速查表
 
 > **Bloom 层级**: L2 (理解)
-
 > **版本**: Rust 1.90.0 – 1.93.1
 > **更新日期**: 2026-05-29
 > **适用版本**: stable
-
 > **版本勘误说明**:
 >
 > - 本表覆盖 Rust 1.90 至 1.93.1 的累积特性，按版本分组。
@@ -194,6 +192,9 @@ pub unsafe fn cpuid() {
 - [Rust 1.91.0 Release](https://blog.rust-lang.org/2025/10/30/Rust-1.91.0/)
 - [Rust 1.92.0 Release](https://blog.rust-lang.org/2025/12/11/Rust-1.92.0/)
 - [Rust 1.93.0 Release](https://blog.rust-lang.org/2026/01/xx/Rust-1.93.0/)
+- [Rust 1.94 特性速查表](./02_rust_194_features_cheatsheet.md)
+- [Rust 1.95 特性速查表](./02_rust_195_features_cheatsheet.md)
+- [Rust 版本跟踪](../../../concept/07_future/05_rust_version_tracking.md)
 
 ---
 

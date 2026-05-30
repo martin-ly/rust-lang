@@ -14,68 +14,31 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cranelift 后端实用指南](#cranelift-后端实用指南)
-  - [📑 目录](#目录)
-  - [📋 目录](#目录)
-  - [🚀 什么是 Cranelift](#什么是-cranelift)
-  - [⏱️ 为什么 Cranelift 重要](#为什么-cranelift-重要)
-  - [⚙️ 安装与配置](#安装与配置)
+  - [📑 目录](#-目录)
+  - [🚀 什么是 Cranelift](#-什么是-cranelift)
+  - [⏱️ 为什么 Cranelift 重要](#️-为什么-cranelift-重要)
+  - [⚙️ 安装与配置](#️-安装与配置)
     - [1. 安装组件](#1-安装组件)
     - [2. 项目级配置](#2-项目级配置)
     - [3. 单次编译](#3-单次编译)
     - [4. 验证生效](#4-验证生效)
-  - [⚖️ LLVM vs Cranelift 对比](#llvm-vs-cranelift-对比)
+  - [⚖️ LLVM vs Cranelift 对比](#️-llvm-vs-cranelift-对比)
     - [设计哲学](#设计哲学)
     - [支持平台](#支持平台)
     - [优化级别](#优化级别)
-  - [📊 当前状态](#当前状态)
+  - [📊 当前状态](#-当前状态)
     - [Rust 2026 Project Goal 关联](#rust-2026-project-goal-关联)
     - [已知限制 (2026-05)](#已知限制-2026-05)
-  - [✅ 何时使用 vs 🚫 何时不使用](#何时使用-vs--何时不使用)
-    - [✅ 推荐使用 Cranelift](#推荐使用-cranelift)
-    - [🚫 不推荐使用 Cranelift](#不推荐使用-cranelift)
-  - [🔧 实战配置模板](#实战配置模板)
+  - [✅ 何时使用 vs 🚫 何时不使用](#-何时使用-vs--何时不使用)
+    - [✅ 推荐使用 Cranelift](#-推荐使用-cranelift)
+    - [🚫 不推荐使用 Cranelift](#-不推荐使用-cranelift)
+  - [🔧 实战配置模板](#-实战配置模板)
     - [推荐 `.cargo/config.toml`](#推荐-cargoconfigtoml)
     - [快速切换脚本](#快速切换脚本)
     - [Makefile 集成](#makefile-集成)
-  - [📖 参考文献](#参考文献)
+  - [📖 参考文献](#-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
-
-## 📋 目录
->
-> **[来源: Rust Official Docs]**
-
-- [Cranelift 后端实用指南](#cranelift-后端实用指南)
-  - [📑 目录](#目录)
-  - [📋 目录](#目录)
-  - [🚀 什么是 Cranelift](#什么是-cranelift)
-  - [⏱️ 为什么 Cranelift 重要](#为什么-cranelift-重要)
-  - [⚙️ 安装与配置](#安装与配置)
-    - [1. 安装组件](#1-安装组件)
-    - [2. 项目级配置](#2-项目级配置)
-    - [3. 单次编译](#3-单次编译)
-    - [4. 验证生效](#4-验证生效)
-  - [⚖️ LLVM vs Cranelift 对比](#llvm-vs-cranelift-对比)
-    - [设计哲学](#设计哲学)
-    - [支持平台](#支持平台)
-    - [优化级别](#优化级别)
-  - [📊 当前状态](#当前状态)
-    - [Rust 2026 Project Goal 关联](#rust-2026-project-goal-关联)
-    - [已知限制 (2026-05)](#已知限制-2026-05)
-  - [✅ 何时使用 vs 🚫 何时不使用](#何时使用-vs--何时不使用)
-    - [✅ 推荐使用 Cranelift](#推荐使用-cranelift)
-    - [🚫 不推荐使用 Cranelift](#不推荐使用-cranelift)
-  - [🔧 实战配置模板](#实战配置模板)
-    - [推荐 `.cargo/config.toml`](#推荐-cargoconfigtoml)
-    - [快速切换脚本](#快速切换脚本)
-    - [Makefile 集成](#makefile-集成)
-  - [📖 参考文献](#参考文献)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
-
----
 
 ## 🚀 什么是 Cranelift
 >
@@ -490,112 +453,3 @@ test-dev:
 > **[来源: ACM - AI Systems]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

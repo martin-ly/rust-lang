@@ -9,7 +9,7 @@
 ---
 
 ## 📑 目录
->
+
 - [Rust 知识体系内容重构总体规划](#rust-知识体系内容重构总体规划)
   - [📑 目录](#-目录)
   - [一、内容标准模板（Concept Document Standard Template）](#一内容标准模板concept-document-standard-template)

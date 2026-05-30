@@ -50,7 +50,6 @@
     - [array\_windows 在工作流状态转换中的应用](#array_windows-在工作流状态转换中的应用)
     - [LazyLock 在工作流引擎配置中的应用](#lazylock-在工作流引擎配置中的应用)
     - [ControlFlow 在工作流执行控制中的应用](#controlflow-在工作流执行控制中的应用)
-  - **状态**: ✅ 深度整合完成
   - [权威来源索引](#权威来源索引)
 
 ## 14.1 工作流基础理论
@@ -1126,6 +1125,7 @@ fn execute_workflow_steps(
 
 **维护者**: Rust 学习项目团队
 **状态**: ✅ 深度整合完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1150,13 +1150,9 @@ fn execute_workflow_steps(
 ## 权威来源索引
 
 > **[来源: Wikipedia - Workflow]**
-
 > **[来源: Wikipedia - Software Development Process]**
-
 > **[来源: ACM - Development Workflow Patterns]**
-
 > **[来源: IEEE - Software Process Standards]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1165,7 +1161,6 @@ fn execute_workflow_steps(
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**
@@ -1174,7 +1169,6 @@ fn execute_workflow_steps(
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design]**

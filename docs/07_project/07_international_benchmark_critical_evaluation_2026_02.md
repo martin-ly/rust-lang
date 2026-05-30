@@ -21,7 +21,6 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 ## Rust 1.95+ 持续更新更新
 >
@@ -98,26 +97,3 @@
 > **[来源: Rust Performance Book]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Test Documentation](https://doc.rust-lang.org/rustc/tests/index.html)]**
->
-> **[来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**

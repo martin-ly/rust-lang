@@ -1,4 +1,7 @@
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/),
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/),
+> [Ferrocene](https://ferrous-systems.com/ferrocene/),
+> [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
 > **相关概念**: [变量绑定](../../../../concept/01_foundation/07_control_flow.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
@@ -16,14 +19,14 @@
 ```
 ╔═══════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                       ║
-║                    ✅ 全面国际化对齐工作完成                                          ║
+║                    ✅ 全面国际化对齐工作完成                                           ║
 ║                                                                                       ║
 ╠═══════════════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                       ║
-║  完成时间: 2026-03-18                                                                ║
-║  文档数量: 8份核心文档 + 26处权威引用                                                 ║
-║  覆盖领域: 8大领域 (学术/工具链/工业/国防/教育/标准/思维/规划)                        ║
-║  思维表征: 4种方式 (思维导图/矩阵/决策树/公理推理)                                    ║
+║  完成时间: 2026-03-18                                                                  ║
+║  文档数量: 8份核心文档 + 26处权威引用                                                    ║
+║  覆盖领域: 8大领域 (学术/工具链/工业/国防/教育/标准/思维/规划)                             ║
+║  思维表征: 4种方式 (思维导图/矩阵/决策树/公理推理)                                        ║
 ║                                                                                       ║
 ╚═══════════════════════════════════════════════════════════════════════════════════════╝
 ```

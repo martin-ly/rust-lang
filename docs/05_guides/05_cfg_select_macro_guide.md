@@ -34,6 +34,7 @@
     - [陷阱 3：在运行时条件中使用](#陷阱-3在运行时条件中使用)
     - [陷阱 4：过度使用导致可读性下降](#陷阱-4过度使用导致可读性下降)
   - [七、参考](#七参考)
+    - [相关文档](#相关文档)
 
 ---
 
@@ -324,3 +325,9 @@ const VALUE: u32 = cfg_select! { ... };
 | Rust 1.95.0 Release Notes | <https://releases.rs/docs/1.95.0/> |
 | `#[cfg]` 参考 | <https://doc.rust-lang.org/reference/conditional-compilation.html> |
 | RFC (如适用) | 见 tracking issue |
+
+### 相关文档
+
+- [Rust 1.95 特性速查表](../02_reference/quick_reference/02_rust_195_features_cheatsheet.md)
+- [Rust 版本跟踪](../../concept/07_future/05_rust_version_tracking.md)
+- [2024 Edition 迁移指南](./06_rust_2024_edition_migration_guide.md)

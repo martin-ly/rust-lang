@@ -16,11 +16,15 @@
 ---
 
 ## 📋 目录
->
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Software Development Best Practices]** · **[来源: ACM - Code Quality Metrics]** · **[来源: IEEE - Software Engineering Standards]** · **[来源: Rust Project Guidelines]**
 
-- Rust 项目最佳实践指南
-  - [📋 目录](#目录)
+> **[来源: Rust Official Docs]** ·
+> **[来源: Wikipedia - Software Development Best Practices]** ·
+> **[来源: ACM - Code Quality Metrics]** ·
+> **[来源: IEEE - Software Engineering Standards]** ·
+> **[来源: Rust Project Guidelines]**
+
+- [Rust 项目最佳实践指南](#rust-项目最佳实践指南)
+  - [📋 目录](#-目录)
   - [概述](#概述)
   - [1. 代码质量最佳实践](#1-代码质量最佳实践)
     - [1.1 所有权和借用](#11-所有权和借用)
@@ -57,7 +61,7 @@
     - [10.2 特性标志](#102-特性标志)
   - [11. 工具使用](#11-工具使用)
     - [11.1 Clippy](#111-clippy)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录-1)
     - [11.2 rustfmt](#112-rustfmt)
     - [11.3 依赖管理](#113-依赖管理)
   - [12. 性能监控](#12-性能监控)
@@ -96,11 +100,11 @@
       - [ControlFlow 优化](#controlflow-优化)
       - [LazyLock 优化](#lazylock-优化)
     - [快速参考卡片](#快速参考卡片)
-  - [🆕 新增最佳实践](#新增最佳实践)
+  - [🆕 新增最佳实践](#-新增最佳实践)
     - [1. isqrt - 整数平方根运算](#1-isqrt---整数平方根运算)
       - [什么时候使用 isqrt？](#什么时候使用-isqrt)
-      - [最佳实践示例](#最佳实践示例)
-      - [性能检查清单](#性能检查清单)
+      - [最佳实践示例](#最佳实践示例-1)
+      - [性能检查清单](#性能检查清单-1)
     - [2. HashMap::get\_disjoint\_mut - 安全并行访问](#2-hashmapget_disjoint_mut---安全并行访问)
       - [什么时候使用 get\_disjoint\_mut？](#什么时候使用-get_disjoint_mut)
       - [最佳实践：并发状态管理](#最佳实践并发状态管理)
@@ -110,18 +114,18 @@
       - [与 ControlFlow 结合](#与-controlflow-结合)
     - [4. Vec::pop\_if - 条件弹出](#4-vecpop_if---条件弹出)
       - [最佳实践：栈和队列操作](#最佳实践栈和队列操作)
-    - [5. 综合性能优化检查清单](#5-综合性能优化检查清单)
+    - [5. 综合性能优化检查清单](#5-综合性能优化检查清单-1)
       - [isqrt 优化](#isqrt-优化)
       - [get\_disjoint\_mut 优化](#get_disjoint_mut-优化)
       - [async Fn 优化](#async-fn-优化)
     - [6. 版本兼容性与迁移指南](#6-版本兼容性与迁移指南)
       - [从 1.95+ 迁移到新版本](#从-195-迁移到新版本)
     - [7. 快速参考卡片](#7-快速参考卡片)
-  - **状态**: ✅ 持续更新
+  - [**状态**: ✅ 持续更新](#状态--持续更新)
   - [思维导图：Rust 最佳实践体系](#思维导图rust-最佳实践体系)
   - [决策树：错误处理策略选择](#决策树错误处理策略选择)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 

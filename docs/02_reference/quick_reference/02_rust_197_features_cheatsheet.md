@@ -39,6 +39,8 @@
 
 ## 语言特性
 
+> **[来源: Rust 1.97 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.97.0)**
+
 ### AsyncFn* trait family 加入 prelude
 
 Rust 1.97 将 `AsyncFn`, `AsyncFnMut`, `AsyncFnOnce` 三个 trait 加入标准 prelude，
@@ -59,6 +61,8 @@ let result = call_async(async |x| x * 2, 21).await;
 ---
 
 ## 核心标准库 API
+
+> **[来源: Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 数值计算
 
@@ -193,6 +197,8 @@ let poll_result = future.poll(&mut cx);
 
 ## Const 上下文稳定
 
+> **[来源: Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)**
+
 以下 API 在 Rust 1.97 中可在 `const fn` / `const` 上下文中使用：
 
 | API | 说明 |
@@ -211,6 +217,8 @@ let poll_result = future.poll(&mut cx);
 ---
 
 ## Cargo 改进
+
+> **[来源: Cargo Documentation](https://doc.rust-lang.org/cargo/)**
 
 | 特性 | 说明 |
 |------|------|
@@ -231,6 +239,8 @@ fn main() {
 ---
 
 ## 快速参考示例
+
+> **[来源: Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 ### 二分搜索中点（无溢出）
 
@@ -268,6 +278,8 @@ let original = tagged.with_addr(addr);    // 恢复原始地址，保留 provena
 
 ## 迁移检查清单
 
+> **[来源: Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)**
+
 - [ ] 确认项目编译器升级到 Rust 1.97+
 - [ ] 检查新的 `io::ErrorKind` 变体是否需要处理
 - [ ] 评估 `AsyncFn*` trait 是否可以简化异步闭包代码
@@ -282,6 +294,9 @@ let original = tagged.with_addr(addr);    // 恢复原始地址，保留 provena
 - [Rust 1.97 Release Notes](https://blog.rust-lang.org/)
 - [Rust Standard Library](https://doc.rust-lang.org/std/)
 - [The Rust Reference](https://doc.rust-lang.org/reference/)
+- [Rust 1.96 特性速查表](./02_rust_196_features_cheatsheet.md)
+- [Rust 1.98 Nightly 前瞻速查表](./02_rust_198_nightly_preview_cheatsheet.md)
+- [Rust 版本跟踪](../../../concept/07_future/05_rust_version_tracking.md)
 
 ---
 

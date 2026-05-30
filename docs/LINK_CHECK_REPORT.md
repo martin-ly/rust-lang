@@ -114,3 +114,18 @@
 | docs\archive\rust-ownership-chinese\rust_go_cpp_c_comprehensive_comparison.md | 1 |
 
 **总计 8 个文件包含损坏链接**
+
+---
+
+## 相关维护脚本
+
+- [链接检查脚本](../scripts/check_links.py)
+- [死链分析脚本](../scripts/_analyze_dead_links.py)
+- [死链修复脚本](../scripts/fix_dead_links.py)
+- [锚点链接修复脚本](../scripts/fix_anchor_links.py)
+
+## 相关文档
+
+- [概念审计报告](../reports/concept_audit_report.md)
+- [项目维护指南](./research_notes/10_project_maintenance_guide.md)
+- [项目结构总览](./10_project_structure.md)

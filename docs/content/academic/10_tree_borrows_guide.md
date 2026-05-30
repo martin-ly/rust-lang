@@ -14,56 +14,25 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Tree Borrows 详解](#tree-borrows-详解)
-  - [📑 目录](#目录)
-  - [📋 目录](#目录)
-  - [🎯 概述](#概述)
+  - [📑 目录](#-目录)
+  - [🎯 概述](#-概述)
     - [核心改进](#核心改进)
-  - [📊 与 Stacked Borrows 对比](#与-stacked-borrows-对比)
+  - [📊 与 Stacked Borrows 对比](#-与-stacked-borrows-对比)
     - [关键区别示例](#关键区别示例)
-  - [🌳 核心概念](#核心概念)
+  - [🌳 核心概念](#-核心概念)
     - [树结构](#树结构)
     - [权限模型](#权限模型)
     - [状态转换](#状态转换)
-  - [💡 实际影响](#实际影响)
+  - [💡 实际影响](#-实际影响)
     - [更多代码合法](#更多代码合法)
     - [直观性提升](#直观性提升)
-  - [🔄 迁移指南](#迁移指南)
+  - [🔄 迁移指南](#-迁移指南)
     - [测试代码兼容性](#测试代码兼容性)
     - [常见问题](#常见问题)
-  - [🔗 参考资源](#参考资源)
-  - **状态**: 🔄 学术前沿跟踪中
+  - [🔗 参考资源](#-参考资源)
+  - [**状态**: 🔄 学术前沿跟踪中](#状态--学术前沿跟踪中)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
-
-## 📋 目录
->
-> **[来源: Rust Official Docs]**
-
-- [Tree Borrows 详解](#tree-borrows-详解)
-  - [📑 目录](#目录)
-  - [📋 目录](#目录)
-  - [🎯 概述](#概述)
-    - [核心改进](#核心改进)
-  - [📊 与 Stacked Borrows 对比](#与-stacked-borrows-对比)
-    - [关键区别示例](#关键区别示例)
-  - [🌳 核心概念](#核心概念)
-    - [树结构](#树结构)
-    - [权限模型](#权限模型)
-    - [状态转换](#状态转换)
-  - [💡 实际影响](#实际影响)
-    - [更多代码合法](#更多代码合法)
-    - [直观性提升](#直观性提升)
-  - [🔄 迁移指南](#迁移指南)
-    - [测试代码兼容性](#测试代码兼容性)
-    - [常见问题](#常见问题)
-  - [🔗 参考资源](#参考资源)
-  - **状态**: 🔄 学术前沿跟踪中
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
-
----
 
 ## 🎯 概述
 >
@@ -335,78 +304,3 @@ MIRIFLAGS="-Zmiri-stacked-borrows" cargo miri test
 > **[来源: Rustonomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

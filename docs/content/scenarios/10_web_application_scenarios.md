@@ -13,14 +13,13 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Web 应用开发场景树](#web-应用开发场景树)
-  - [📑 目录](#目录)
-  - [🌳 Web 应用场景树](#web-应用场景树)
-  - [📊 RESTful API 场景](#restful-api-场景)
+  - [📑 目录](#-目录)
+  - [🌳 Web 应用场景树](#-web-应用场景树)
+  - [📊 RESTful API 场景](#-restful-api-场景)
     - [场景 1: CRUD API](#场景-1-crud-api)
-  - [🔗 相关文档](#相关文档)
-  - **状态**: ✅ 100% 完成
+  - [🔗 相关文档](#-相关文档)
+  - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 🌳 Web 应用场景树
@@ -167,48 +166,3 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 > **[来源: Wikipedia - Concurrency]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
->
-> **[来源: [Hyper Documentation](https://hyper.rs/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

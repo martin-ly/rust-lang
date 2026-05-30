@@ -27,6 +27,7 @@
     - [模式 2：完全可重现构建](#模式-2完全可重现构建)
     - [模式 3：Docker 构建](#模式-3docker-构建)
   - [六、参考](#六参考)
+    - [相关文档](#相关文档)
 
 ---
 
@@ -187,3 +188,9 @@ RUN cargo build --release
 | Rust 1.95.0 Release Notes | <https://releases.rs/docs/1.95.0/> |
 | rustc 路径重映射文档 | <https://doc.rust-lang.org/rustc/command-line-arguments.html> |
 | Reproducible Builds 项目 | <https://reproducible-builds.org/> |
+
+### 相关文档
+
+- [Rust 1.95 特性速查表](../02_reference/quick_reference/02_rust_195_features_cheatsheet.md)
+- [Rust 版本跟踪](../../concept/07_future/05_rust_version_tracking.md)
+- [Rust 1.96 稳定特性全景](./06_19_rust_1_96_features.md)

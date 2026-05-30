@@ -13,9 +13,8 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
-- [⚡ 性能测试报告 {#-性能测试报告}](#性能测试报告)
-  - [📑 目录](#目录)
-  - [📋 目录 {#-目录}](#目录)
+- [⚡ 性能测试报告 {#-性能测试报告}](#-性能测试报告--性能测试报告)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [性能基准测试文件统计](#性能基准测试文件统计)
     - [核心模块性能测试](#核心模块性能测试)
@@ -43,51 +42,9 @@
     - [array\_windows 性能基准](#array_windows-性能基准)
     - [LazyLock 并发性能](#lazylock-并发性能)
     - [测试总结](#测试总结)
-  - **状态**: ✅ 深度整合完成
+  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
-
-## 📋 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [⚡ 性能测试报告 {#-性能测试报告}](#性能测试报告)
-  - [📑 目录](#目录)
-  - [📋 目录 {#-目录}](#目录)
-  - [概述](#概述)
-  - [性能基准测试文件统计](#性能基准测试文件统计)
-    - [核心模块性能测试](#核心模块性能测试)
-  - [运行性能测试](#运行性能测试)
-    - [运行所有性能测试](#运行所有性能测试)
-    - [运行特定模块的性能测试](#运行特定模块的性能测试)
-    - [运行特定基准测试](#运行特定基准测试)
-  - [性能测试结果](#性能测试结果)
-    - [测试覆盖范围](#测试覆盖范围)
-  - [性能优化建议](#性能优化建议)
-    - [1. 内存优化](#1-内存优化)
-    - [2. 迭代器优化](#2-迭代器优化)
-    - [3. 并发优化](#3-并发优化)
-    - [4. 异步优化](#4-异步优化)
-  - [相关资源](#相关资源)
-    - [性能测试工具](#性能测试工具)
-    - [性能优化资源](#性能优化资源)
-  - [使用场景](#使用场景)
-    - [场景1: 性能回归测试](#场景1-性能回归测试)
-    - [场景2: 模块性能对比](#场景2-模块性能对比)
-    - [场景3: 优化验证](#场景3-优化验证)
-    - [场景4: 发布前性能审计](#场景4-发布前性能审计)
-  - [形式化链接](#形式化链接)
-  - [Rust 1.95+ 性能测试与基准](#rust-195-性能测试与基准)
-    - [array\_windows 性能基准](#array_windows-性能基准)
-    - [LazyLock 并发性能](#lazylock-并发性能)
-    - [测试总结](#测试总结)
-  - **状态**: ✅ 深度整合完成
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
-
----
 
 ## 概述
 >
@@ -399,54 +356,3 @@ cargo bench --workspace
 > **[来源: Rust Performance Book]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Test Documentation](https://doc.rust-lang.org/rustc/tests/index.html)]**
->
-> **[来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

@@ -1,4 +1,6 @@
-> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **层次定位**: L1-L2 基础-进阶 / 核心概念总览
 > **前置依赖**: 无（入门入口）
 > **后置延伸**: [docs 指南](../03_guides/) · [docs 参考](../02_reference/) · [concept L1-L2](../../concept/)

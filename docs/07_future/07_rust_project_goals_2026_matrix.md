@@ -14,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Project Goals 2026 对齐矩阵](#rust-project-goals-2026-对齐矩阵)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、旗舰主题映射（Flagship Themes → 项目内容）](#一旗舰主题映射flagship-themes--项目内容)
   - [二、2026 稳定化目标详细映射](#二2026-稳定化目标详细映射)
     - [2.1 语言与编译器层](#21-语言与编译器层)
@@ -24,12 +24,11 @@
     - [2.5 WASM 与跨语言层](#25-wasm-与跨语言层)
   - [三、缺口热力图](#三缺口热力图)
   - [四、行动建议（按优先级排序）](#四行动建议按优先级排序)
-    - [🔴 P0 — 立即创建（完全缺失，2026 年稳定化目标）](#p0--立即创建完全缺失2026-年稳定化目标)
-    - [🟡 P1 — 补充深化（部分覆盖，需升级）](#p1--补充深化部分覆盖需升级)
-    - [🟢 P2 — 跟踪观察（nightly / 长期演进）](#p2--跟踪观察nightly--长期演进)
+    - [🔴 P0 — 立即创建（完全缺失，2026 年稳定化目标）](#-p0--立即创建完全缺失2026-年稳定化目标)
+    - [🟡 P1 — 补充深化（部分覆盖，需升级）](#-p1--补充深化部分覆盖需升级)
+    - [🟢 P2 — 跟踪观察（nightly / 长期演进）](#-p2--跟踪观察nightly--长期演进)
   - [五、参考链接](#五参考链接)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 一、旗舰主题映射（Flagship Themes → 项目内容）
@@ -249,52 +248,3 @@ Rust for Linux           ███████████░░░░░░░ 
 > **[来源: Rustonomicon]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
->
-> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
