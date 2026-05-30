@@ -1,7 +1,6 @@
 # Outbox 模式形式化定义
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **模式类型**: 消息可靠性
 > **创建日期**: 2026-03-08
 > **版本**: v1.0
@@ -9,11 +8,11 @@
 ---
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
+
 - [Outbox 模式形式化定义](#outbox-模式形式化定义)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def OB1: Outbox](#def-ob1-outbox)
     - [Def OB2: 事务边界](#def-ob2-事务边界)
@@ -27,14 +26,12 @@
     - [Theorem OB2: 消息不重复](#theorem-ob2-消息不重复)
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 与 Saga 模式的关系](#5-与-saga-模式的关系)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Def)
@@ -49,7 +46,7 @@
 
 Outbox（发件箱）模式是一种**事务性消息投递模式**，确保数据库更新和消息发送的**原子性**。
 
-```
+```text
 Outbox := (T_db, T_outbox, M, P_relay)
   where:
     T_db        -- 业务数据表
@@ -64,7 +61,7 @@ Outbox := (T_db, T_outbox, M, P_relay)
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 Transaction := (db_ops, outbox_ops)
   where:
     db_ops: T_db 的更新操作
@@ -79,7 +76,7 @@ Transaction := (db_ops, outbox_ops)
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```
+```text
 MessageStatus :=
   | Pending      -- 待投递
   | Published    -- 已发布到队列
@@ -96,7 +93,7 @@ MessageStatus :=
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```
+```text
 (db_ops ∧ outbox_ops) 要么同时成功，要么同时失败
 ```
 
@@ -104,7 +101,7 @@ MessageStatus :=
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```
+```text
 ∀m ∈ M. relay(m) = success → relay(m) = success (idempotent)
 ```
 
@@ -114,7 +111,7 @@ MessageStatus :=
 
 > **[来源: POPL - Programming Languages Research]**
 
-```
+```text
 ∀msg ∈ T_outbox. status = Pending → ◇(status = Published)
 ```
 
@@ -130,7 +127,7 @@ MessageStatus :=
 
 > **[来源: PLDI - Programming Language Design]**
 
-```
+```text
 db_ops 成功 → ◇(msg ∈ M)
 ```
 
@@ -145,7 +142,7 @@ db_ops 成功 → ◇(msg ∈ M)
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```
+```text
 msg.id 唯一 → 消费者收到 msg 一次且仅一次
 ```
 
@@ -271,7 +268,7 @@ Outbox 模式常与 Saga 配合使用：
 - Saga 步骤执行本地事务
 - Outbox 确保 Saga 的事件可靠投递
 
-```
+```text
 ┌─────────────┐    Local Tx     ┌─────────────┐    Publish    ┌─────────────┐
 │ Saga Step   │ ───────────────→│   Outbox    │ ────────────→ │ Event Bus   │
 │  Execution  │   (with outbox) │    Table    │    (relay)    │             │
@@ -288,9 +285,8 @@ Outbox 模式常与 Saga 配合使用：
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -327,6 +323,7 @@ Outbox 模式常与 Saga 配合使用：
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -352,98 +349,8 @@ Outbox 模式常与 Saga 配合使用：
 ## 权威来源索引
 
 > **[来源: Wikipedia - Design Pattern]**
-
 > **[来源: Rust API Guidelines]**
-
 > **[来源: Gang of Four]**
-
 > **[来源: ACM - Software Design Patterns]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

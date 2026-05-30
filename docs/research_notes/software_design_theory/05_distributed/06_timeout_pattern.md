@@ -1,7 +1,6 @@
 # 超时模式形式化定义
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **模式类型**: 可靠性机制
 > **创建日期**: 2026-03-08
 > **版本**: v1.0
@@ -13,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [超时模式形式化定义](#超时模式形式化定义)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def TO1: Timeout](#def-to1-timeout)
     - [Def TO2: 操作结果](#def-to2-操作结果)
@@ -28,14 +27,12 @@
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 超时配置建议](#5-超时配置建议)
   - [6. 与重试模式的关系](#6-与重试模式的关系)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Def)
@@ -50,7 +47,7 @@
 
 超时是一种**时间限制机制**，当操作在指定时间内未完成时，终止操作并返回错误。
 
-```
+```text
 Timeout := (Op, t_max, handler)
   where:
     Op: 待执行操作
@@ -64,7 +61,7 @@ Timeout := (Op, t_max, handler)
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 OperationResult<T> :=
   | Success(T)      -- 在 t_max 内完成
   | Timeout         -- 超过 t_max
@@ -75,7 +72,7 @@ OperationResult<T> :=
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```
+```text
 TimeoutType :=
   | ConnectionTimeout   -- 连接建立超时
   | RequestTimeout      -- 请求处理超时
@@ -93,7 +90,7 @@ TimeoutType :=
 
 > **[来源: Wikipedia - Type System]**
 
-```
+```text
 t_execution > t_max → result = Timeout
 ```
 
@@ -103,7 +100,7 @@ t_execution > t_max → result = Timeout
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```
+```text
 t₁ < t₂ → elapsed(t₁) < elapsed(t₂)
 ```
 
@@ -113,7 +110,7 @@ t₁ < t₂ → elapsed(t₁) < elapsed(t₂)
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```
+```text
 Timeout → resources_released
 ```
 
@@ -129,7 +126,7 @@ Timeout → resources_released
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```
+```text
 ∀Op. resource_usage(Op) ≤ f(t_max)
 ```
 
@@ -143,7 +140,7 @@ Timeout → resources_released
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```
+```text
 Timeout → system_continues
 ```
 
@@ -276,9 +273,8 @@ impl TimeoutHttpClient {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [crates.io](https://crates.io/)]**
 
+> **[来源: [crates.io](https://crates.io/)]**
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -315,6 +311,7 @@ impl TimeoutHttpClient {
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -340,97 +337,13 @@ impl TimeoutHttpClient {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Timeout (computing)]**
-
 > **[来源: Wikipedia - Distributed Computing]**
-
 > **[来源: IEEE - Distributed System Design]**
-
 > **[来源: ACM - Timeout Pattern in Distributed Systems]**
-
 > **[来源: Martin Kleppmann - Designing Data-Intensive Applications]**
-
 > **[来源: Wikipedia - Design Pattern]**
 > **[来源: Rust API Guidelines]**
 > **[来源: Gang of Four - Design Patterns]**
 > **[来源: ACM - Software Design Patterns]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

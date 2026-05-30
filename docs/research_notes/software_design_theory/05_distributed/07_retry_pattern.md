@@ -1,7 +1,6 @@
 # 重试模式形式化定义
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **模式类型**: 容错机制
 > **创建日期**: 2026-03-08
 > **版本**: v1.0
@@ -9,11 +8,11 @@
 ---
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
+
 - [重试模式形式化定义](#重试模式形式化定义)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def RT1: Retry](#def-rt1-retry)
     - [Def RT2: 退避策略](#def-rt2-退避策略)
@@ -28,19 +27,21 @@
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 重试策略选择](#5-重试策略选择)
   - [6. 可重试错误分类](#6-可重试错误分类)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Def)
->
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Retry Pattern]** · **[来源: Wikipedia - Circuit Breaker Pattern]** · **[来源: ACM - Fault-Tolerant Design Patterns]** · **[来源: IEEE - Resilient Software Architecture]**
+
+> **[来源: Rust Official Docs]** ·
+> **[来源: Wikipedia - Retry Pattern]** ·
+> **[来源: Wikipedia - Circuit Breaker Pattern]** ·
+> **[来源: ACM - Fault-Tolerant Design Patterns]** ·
+> **[来源: IEEE - Resilient Software Architecture]**
 
 ### Def RT1: Retry
 
@@ -50,7 +51,7 @@
 
 重试是一种**故障恢复机制**，当操作失败时，按策略重新执行操作。
 
-```
+```text
 Retry := (Op, policy, predicate)
   where:
     Op: 待执行操作
@@ -64,7 +65,7 @@ Retry := (Op, policy, predicate)
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 BackoffStrategy :=
   | Fixed { interval }                    -- 固定间隔
   | Linear { initial, increment }         -- 线性增长
@@ -76,7 +77,7 @@ BackoffStrategy :=
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```
+```text
 Jitter := None | Full | Equal | Decorrelated
   where:
     Full: delay' = random(0, delay)
@@ -94,7 +95,7 @@ Jitter := None | Full | Equal | Decorrelated
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```
+```text
 attempts ≤ max_attempts
 ```
 
@@ -104,7 +105,7 @@ attempts ≤ max_attempts
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```
+```text
 ∀Op ∈ Retry. Idempotent(Op) ∨ (predicate only for transient errors)
 ```
 
@@ -114,7 +115,7 @@ attempts ≤ max_attempts
 
 > **[来源: Wikipedia - Concurrency]**
 
-```
+```text
 n < m → backoff(n) ≤ backoff(m)
 ```
 
@@ -130,7 +131,7 @@ n < m → backoff(n) ≤ backoff(m)
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 P(success) ≤ 1 - (1 - p)^n
   where:
     p = 单次成功概率
@@ -148,7 +149,7 @@ P(success) ≤ 1 - (1 - p)^n
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 ExponentialBackoff → prevents thundering herd
 ```
 
@@ -336,9 +337,8 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -375,6 +375,7 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -400,111 +401,12 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Design Pattern]**
-
 > **[来源: Rust API Guidelines]**
-
 > **[来源: Gang of Four]**
-
 > **[来源: ACM - Software Design Patterns]**
-
 > **[来源: Wikipedia - Design Pattern]**
 > **[来源: Rust API Guidelines]**
 > **[来源: Gang of Four - Design Patterns]**
 > **[来源: ACM - Software Design Patterns]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

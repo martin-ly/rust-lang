@@ -1,7 +1,6 @@
 # Event Sourcing 模式形式化定义
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **模式类型**: 数据持久化
 > **创建日期**: 2026-03-08
 > **版本**: v1.0
@@ -13,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Event Sourcing 模式形式化定义](#event-sourcing-模式形式化定义)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 概念定义 (Def)](#1-概念定义-def)
     - [Def ES1: Event Sourcing](#def-es1-event-sourcing)
     - [Def ES2: 事件不变性](#def-es2-事件不变性)
@@ -27,14 +26,12 @@
     - [Theorem ES2: 审计完整性](#theorem-es2-审计完整性)
   - [4. Rust 实现示例](#4-rust-实现示例)
   - [5. 与 CQRS 的关系](#5-与-cqrs-的关系)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Def)
@@ -49,7 +46,7 @@
 
 事件溯源是一种**状态持久化模式**，系统状态不直接存储，而是存储导致状态变更的**事件序列**，状态通过**重放事件**重建。
 
-```
+```text
 EventSourcing := (E, S, apply, snapshot)
   where:
     E = {e₁, e₂, ..., eₙ}       -- 不可变事件序列
@@ -64,7 +61,7 @@ EventSourcing := (E, S, apply, snapshot)
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 ∀e ∈ E. Immutable(e)
 ```
 
@@ -74,7 +71,7 @@ EventSourcing := (E, S, apply, snapshot)
 
 > **[来源: Wikipedia - Type System]**
 
-```
+```text
 State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
           = fold(apply, S₀, [e₁, e₂, ..., eₙ])
 ```
@@ -91,7 +88,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 > **[来源: Wikipedia - Type System]**
 
-```
+```text
 ∀eᵢ, eⱼ ∈ E. i < j → timestamp(eᵢ) ≤ timestamp(eⱼ)
 ```
 
@@ -101,7 +98,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```
+```text
 ∀s, e. apply(s, e) = s' 是确定性的
 ```
 
@@ -111,7 +108,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```
+```text
 ∀e ∈ E. version(e) = sequence_number ∈ ℕ
 ```
 
@@ -127,7 +124,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```
+```text
 ∀t. State(t) 可通过重放 E[0..t] 重建
 ```
 
@@ -142,7 +139,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```
+```text
 ∀t. 历史状态 State(t) 可查询
 ```
 
@@ -215,7 +212,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 ┌─────────────┐     Events      ┌─────────────┐
 │   Command   │ ───────────────→│ Event Store │
 │   Handler   │                 │  (Append)   │
@@ -239,9 +236,8 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -278,6 +274,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -303,88 +300,12 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Event Sourcing]**
-
 > **[来源: Wikipedia - CQRS]**
-
 > **[来源: Martin Fowler - Event Sourcing]**
-
 > **[来源: ACM - Event-Driven Architecture]**
-
 > **[来源: IEEE - Distributed Data Patterns]**
-
 > **[来源: Wikipedia - Software Design Pattern]**
-
 > **[来源: Wikipedia - Software Architecture]**
-
 > **[来源: ACM - Design Patterns Survey]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
