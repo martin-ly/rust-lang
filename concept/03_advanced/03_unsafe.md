@@ -1,7 +1,6 @@
 # Unsafe Rust
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **层级**: L3 高级概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评判 unsafe 契约的充分性
@@ -165,7 +164,6 @@
 
 ### 1.1 Wikipedia 权威定义
 
->
 > **[Wikipedia: Undefined behavior]** In computer programming, undefined behavior (UB) is the result of executing computer code whose behavior is not prescribed by the language specification to which the code can adhere, for the current state of the program. This happens when the translator of the source code makes certain assumptions, but these assumptions are not satisfied during execution.
 > **[Wikipedia: Memory safety]** Memory safety is the state of being protected from various software bugs and security vulnerabilities when dealing with memory access, such as buffer overflows and dangling pointers. A programming language is memory-safe if it prevents such issues through its design, type system, or automatic memory management.
 
@@ -1520,6 +1518,8 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 - **不转移所有权**（从内存模型角度）：原位置的 bytes 仍被视为"有效"的 `T` 实例，直到被覆盖或内存释放。
 - **不安全契约**：`src` 必须对齐且指向已初始化的 `T`；读取后，调用者必须确保原位置和新位置的值**不会同时被 drop**。
 
+> **Rust 1.96 更新**: `"valid for read/write"` 定义重构——`ptr` 方法的文档现在明确排除 null 指针作为"有效"地址，将 null 例外作为单独说明添加到各方法上。这与 `NonNull<T>` 的语义一致：null 指针**不是**任何 Rust 引用的有效值，即使在 unsafe 代码中解引用 null 也是立即 UB。
+
 > **[来源: Rustonomicon: Ownership and Move Semantics]** Move 语义在底层就是 bitwise copy + 使原位置失效。`ptr::read` 只做前半部分，后半部分由程序员负责。✅ 已验证
 
 ##### `std::ptr::write<T>(dst: *mut T, src: T)`
@@ -1821,12 +1821,13 @@ unsafe fn swap_via_replace<T>(a: *mut T, b: *mut T) {
 **历史演进**：Rust 标准库内部指针类型经历了从 `Unique<T>` / `Shared<T>` 到 `NonNull<T>` 的统一化过程，核心动机是**简化内部表示**、**提供稳定的外部 API**，并**统一协变语义**。
 
 | 类型 | 时期 | 核心语义 | 状态 |
-|:---|:---|:---|:---|
+| :--- | :--- | :--- | :--- |
 | `Unique<T>` | Rust 1.0 ~ 1.25 | 协变、非空、拥有语义（`Own`） | ❌ 已移除（内部使用） |
 | `Shared<T>` | Rust 1.0 ~ 1.25 | 协变、非空、共享语义（`Rc`/`Arc` 内部） | ❌ 已移除 |
 | `NonNull<T>` | Rust 1.25+ | 协变、非空、裸指针包装，不携带所有权语义 | ✅ 稳定 API |
 
-> **[Rust RFC 1184]** `NonNull<T>` replaces `Unique<T>` as the standard covariant, non-null raw pointer abstraction. Unlike `Unique`, `NonNull` does not encode ownership semantics—it is purely a pointer utility type. ✅ 已验证
+> **[Rust RFC 1184]** `NonNull<T>` replaces `Unique<T>` as the standard covariant, non-null raw pointer abstraction.
+> Unlike `Unique`, `NonNull` does not encode ownership semantics—it is purely a pointer utility type. ✅ 已验证
 
 #### `Unique<T>`：曾经的 Box 内部表示
 
@@ -2015,10 +2016,16 @@ fn demo_invariance<'a>(ptr: *mut &'a str) -> *mut &'static str {
 }
 ```
 
-> **[来源: Rust Reference: Variance]** `*const T` 对 `T` 是协变的，`*mut T` 对 `T` 是不变的。`NonNull<T>` 通过内部存储 `*const T` 来实现协变，同时通过 API 设计（`as_mut()` 需要 unsafe）保持写入的安全性。 ✅ 已验证
-> **[来源: Rustonomicon: Variance]** 协变性对容器类型至关重要：`Vec<&'a str>` 可协变为 `Vec<&'static str>`，这使函数返回包含长生命周期引用的容器成为可能。若 `Vec` 内部使用 `*mut T` 而非 `NonNull<T>`，它将是不变的，极大限制其可用性。 ✅ 已验证
-
-> **定理**：`NonNull<T>` 的协变设计是**类型系统层面的精巧权衡**——通过 `*const T` 的字段存储获得协变性，通过 `unsafe` API 控制写入风险，从而在"编译器优化假设"（非空性）和"程序员便利"（协变性）之间取得平衡。💡 原创分析
+> **[来源: Rust Reference: Variance]**
+> `*const T` 对 `T` 是协变的，`*mut T` 对 `T` 是不变的。
+> `NonNull<T>` 通过内部存储 `*const T` 来实现协变，同时通过 API 设计（`as_mut()` 需要 unsafe）保持写入的安全性。
+> ✅ 已验证
+> **[来源: Rustonomicon: Variance]**
+> 协变性对容器类型至关重要：`Vec<&'a str>` 可协变为 `Vec<&'static str>`，这使函数返回包含长生命周期引用的容器成为可能。
+> 若 `Vec` 内部使用 `*mut T` 而非 `NonNull<T>`，它将是不变的，极大限制其可用性。 ✅ 已验证
+> **定理**：`NonNull<T>` 的协变设计是**类型系统层面的精巧权衡**
+> ——通过 `*const T` 的字段存储获得协变性，通过 `unsafe` API 控制写入风险，从而在"编译器优化假设"（非空性）和"程序员便利"（协变性）之间取得平衡。
+> 💡 原创分析
 > **跨层映射**: `L3::NonNull` ↔ [`L1::类型系统`](../01_foundation/04_type_system.md) 协变/逆变/不变 · [`L2::智能指针`](../02_intermediate/03_memory_management.md) Box/Rc/Arc 内部实现
 
 ---
@@ -2028,19 +2035,25 @@ fn demo_invariance<'a>(ptr: *mut &'a str) -> *mut &'static str {
 > **权威来源**: [Rust Reference: MaybeUninit] · [Unsafe Code Guidelines: Validity Invariants] · [TRPL: Ch19.3]
 > **层级标注**: `L3::未初始化内存` → `L1::所有权` 初始化要求 · `L2::内存管理` 堆栈分配
 
-**定义**：`std::mem::MaybeUninit<T>` 是 Rust 处理**未初始化内存**的官方抽象。它告知编译器"此位置的 `T` 可能尚未初始化"，从而避免编译器假设所有 `T` 实例都满足 Validity Invariant。
+**定义**：`std::mem::MaybeUninit<T>` 是 Rust 处理**未初始化内存**的官方抽象。
+它告知编译器"此位置的 `T` 可能尚未初始化"，从而避免编译器假设所有 `T` 实例都满足 Validity Invariant。
 
-> **[Unsafe Code Guidelines]** `MaybeUninit<T>` is the standard and safe way to work with uninitialized memory. Its contents are not subject to the validity invariant of `T` until explicitly initialized. ✅ 已验证
+> **[Unsafe Code Guidelines]**
+> `MaybeUninit<T>` is the standard and safe way to work with uninitialized memory.
+> Its contents are not subject to the validity invariant of `T` until explicitly initialized.
+> ✅ 已验证
 
 #### 核心语义对比
 
 | 写法 | 结果 | 是否 UB |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 | `let x: T = std::mem::uninitialized();` | 假装已初始化 | ❌ UB（读取未初始化 = UB） |
 | `let x = MaybeUninit::<T>::uninit().assume_init();` | 假设已初始化 | ⚠️ 若实际未写入则 UB |
 | `let mut x = MaybeUninit::<T>::uninit(); x.write(val); x.assume_init()` | 先写后假设 | ✅ 安全（前提是确实写入） |
 
-> **[Rust Reference]** Calling `assume_init()` on a `MaybeUninit<T>` that has not been fully initialized is immediate undefined behavior, because it produces a `T` that violates the validity invariant. ✅ 已验证
+> **[Rust Reference]**
+> Calling `assume_init()` on a `MaybeUninit<T>` that has not been fully initialized is immediate undefined behavior,
+> because it produces a `T` that violates the validity invariant. ✅ 已验证
 
 #### 正确示例：逐个元素初始化数组
 
@@ -2289,7 +2302,9 @@ where
 > **[来源: C11 Standard]** Reading uninitialized automatic variables results in indeterminate values; this is not explicitly UB in all cases, but using such values can lead to UB. ✅ 已验证
 > **[来源: Rust Reference: Behavior considered undefined]** Reading uninitialized memory in Rust is immediate undefined behavior, and Miri can detect it precisely. ✅ 已验证
 > **定理**：`MaybeUninit<T>` 是 C `malloc` + 手动初始化模式的**类型安全升级版**——它将"未初始化内存"从隐式的 `void*` 状态提升为显式的 `MaybeUninit<T>` 类型，使编译器能够验证类型一致性，使 Miri 能够动态验证初始化完整性，使程序员能够通过 `unsafe { assume_init() }` 的显式边界承担证明责任。💡 原创分析
-> **跨层映射**: `L3::MaybeUninit` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) 初始化要求 · [`L2::内存管理`](../02_intermediate/03_memory_management.md) RAII · [`L5::对比`](../05_comparative/01_rust_vs_cpp.md) Rust vs C/C++ 内存模型
+> **跨层映射**: `L3::MaybeUninit` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) 初始化要求 ·
+> [`L2::内存管理`](../02_intermediate/03_memory_management.md) RAII ·
+> [`L5::对比`](../05_comparative/01_rust_vs_cpp.md) Rust vs C/C++ 内存模型
 
 ---
 
@@ -2299,8 +2314,11 @@ where
 - [x] **TODO**: 补充 `MaybeUninit` 数组初始化模式（含 array::from_fn 安全替代与 C malloc 对比） —— 优先级: 低 —— 已完成 2026-05-14
 
 > **过渡: L3 → L4**
-> `unsafe` 块的安全性契约由程序员保证，但这种保证能否被形式化验证？RustBelt 将 safe Rust 的语义嵌入 Iris 逻辑并证明其 soundness，而 Aeneas 和 Kani 等工具则尝试将 unsafe 边界上的手工推理自动化。形式化方法不消除 `unsafe`，但能将 "我相信这是安全的" 转化为 "机器验证了这是安全的"。
-> 验证框架见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)，别名模型的精确规则见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §5（Tree Borrows / Stacked Borrows 对比）。
+> `unsafe` 块的安全性契约由程序员保证，但这种保证能否被形式化验证？
+> RustBelt 将 safe Rust 的语义嵌入 Iris 逻辑并证明其 soundness，而 Aeneas 和 Kani 等工具则尝试将 unsafe 边界上的手工推理自动化。
+> 形式化方法不消除 `unsafe`，但能将 "我相信这是安全的" 转化为 "机器验证了这是安全的"。
+> 验证框架见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)，
+> 别名模型的精确规则见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §5（Tree Borrows / Stacked Borrows 对比）。
 
 ---
 
@@ -2466,7 +2484,7 @@ int r = x.load(std::memory_order_relaxed); // 可能读到 stale 值
 
 Java 内存模型基于 **happens-before** 关系：
 
-```
+```text
 Happens-Before 规则:
   1. 程序顺序: 同一线程中的操作按代码顺序 happens-before
   2. 监视器锁: unlock(M) happens-before 后续 lock(M)
@@ -2695,25 +2713,42 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 `union` 类似于 C 的 union：所有字段共享同一内存，但 Rust 的借用检查器**不跟踪**哪个字段是"活跃的"（最近写入的）。读取未初始化的字段（或写入一个字段后读取另一个字段）是**safe**的语法（在 `unsafe` 块中），但值是底层位的重新解释，可能无意义。安全使用：1) 使用 `ManuallyDrop<T>` 包装非 `Copy` 字段（union 的字段默认需实现 `Copy`）；2) 手动跟踪活跃字段（通过外部状态）；3) 优先使用 `enum`（tagged union，编译器跟踪变体）。`union` 的用途：1) FFI（C 结构体中的 union）；2) 手动内存布局优化；3) 类型双关（type punning）。这与 C 的 union（无活跃字段跟踪，完全信任程序员）或 Swift 的 enum with associated values（ tagged union，安全）不同——Rust 的 union 是底层原语，需 unsafe 使用。[来源: [Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> Rust 的 `union` 类似于 C 的 union：
+> 所有字段共享同一内存，但 Rust 的借用检查器**不跟踪**哪个字段是"活跃的"（最近写入的）。
+> 读取未初始化的字段（或写入一个字段后读取另一个字段）是**safe**的语法（在 `unsafe` 块中），但值是底层位的重新解释，可能无意义。
+> 安全使用：
+>
+> 1) 使用 `ManuallyDrop<T>` 包装非 `Copy` 字段（union 的字段默认需实现 `Copy`）；
+> 2) 手动跟踪活跃字段（通过外部状态）；
+> 3) 优先使用 `enum`（tagged union，编译器跟踪变体）。
+>
+> `union` 的用途：
+>
+> 1) FFI（C 结构体中的 union）；
+> 2) 手动内存布局优化；
+> 3) 类型双关（type punning）。
+> 这与 C 的 union（无活跃字段跟踪，完全信任程序员）或 Swift 的 enum with associated values（ tagged union，安全）不同
+> ——Rust 的 union 是底层原语，需 unsafe 使用。
+> [来源: [Rust Reference — Unions](https://doc.rust-lang.org/reference/items/unions.html)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ## 参考来源
 
 > [来源: [RFC 2585 — Unsafe Op in Unsafe Fn](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)]
-
 > [来源: [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)]
-
 > [来源: [Miri — Undefined Behavior Detection](https://github.com/rust-lang/miri)]
-
 > [来源: [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)]
-
 > [来源: [Tree Borrows](https://perso.crans.org/vanille/treebor/)]
 
 ### 16.7 前沿方向：Unsafe Fields（字段级 unsafe，Rust 2026 Project Goal）
 
-> **[来源: [Rust Project Goals 2026 — Unsafe Fields](https://rust-lang.github.io/rust-project-goals/2026/)]** · **[来源: [RFC 3908 — Unsafe Fields](https://rust-lang.github.io/rfcs/3908-unsafe-fields.html)]**
+> **[来源: [Rust Project Goals 2026 — Unsafe Fields](https://rust-lang.github.io/rust-project-goals/2026/)]** ·
+> **[来源: [RFC 3908 — Unsafe Fields](https://rust-lang.github.io/rfcs/3908-unsafe-fields.html)]**
 
-**核心命题**：当前 Rust 的 `unsafe` 粒度是**整个结构体**——如果结构体包含需要 unsafe 初始化的字段（如自引用、未对齐数据、原始句柄），则整个结构体的构造和使用都被 unsafe 污染。Unsafe Fields 提议将 unsafe 粒度下沉到**字段级别**。
+**核心命题**：
+当前 Rust 的 `unsafe` 粒度是**整个结构体**——如果结构体包含需要 unsafe 初始化的字段（如自引用、未对齐数据、原始句柄），则整个结构体的构造和使用都被 unsafe 污染。
+Unsafe Fields 提议将 unsafe 粒度下沉到**字段级别**。
 
 **语法草案**（仍在设计中）：
 
@@ -2748,9 +2783,14 @@ fn inspect(ring: &IoUring) {
 | **误用风险** | 高——用户被迫在更大范围内使用 unsafe | 低——unsafe 范围精确到字段访问 |
 | **编译器验证** | 无字段级追踪 | 需扩展借用检查器，追踪字段级 unsafe 状态 |
 
-> **关键洞察**: Unsafe Fields 是 Rust "显式化 Unsafe 边界"趋势的延续（Rust 2024 Edition 的 `unsafe_op_in_unsafe_fn` 是同一方向的先前步骤）。它将 Rust 的**效果系统**（effect system）从函数级扩展到字段级，为未来更细粒度的 effects（如 `const`、`async`、`unsafe` 的组合）铺平道路。[来源: [Rust Internals — Unsafe Fields Discussion](https://internals.rust-lang.org/t/unsafe-fields/)] · [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **关键洞察**: Unsafe Fields 是 Rust "显式化 Unsafe 边界"趋势的延续（Rust 2024 Edition 的 `unsafe_op_in_unsafe_fn` 是同一方向的先前步骤）。
+> 它将 Rust 的**效果系统**（effect system）从函数级扩展到字段级，为未来更细粒度的 effects（如 `const`、`async`、`unsafe` 的组合）铺平道路。
+> [来源: [Rust Internals — Unsafe Fields Discussion](https://internals.rust-lang.org/t/unsafe-fields/)] ·
+> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## Null 指针有效性定义

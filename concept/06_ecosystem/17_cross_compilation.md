@@ -1,7 +1,6 @@
 # 交叉编译：多目标平台支持与条件编译
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: F×App — 交叉编译工具链的应用
@@ -285,6 +284,7 @@ Rust 的两种运行模式:
   │ x86_64-pc-windows-msvc │ 1       │ ✅      │ Windows │
   │ aarch64-apple-darwin   │ 1       │ ✅      │ Apple   │
   │ aarch64-unknown-linux-gnu│ 2     │ ✅      │ ARM 服务器│
+  │ s390x-unknown-linux-gnu│ 2       │ ✅      │ IBM Z   │ 1.96+: 向量寄存器内联汇编
   └────────────────────────┴─────────┴─────────┴─────────┘
 
   移动:

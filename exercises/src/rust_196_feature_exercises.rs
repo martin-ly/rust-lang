@@ -406,6 +406,56 @@ impl ManuallyDropPatternExercises {
     }
 }
 
+// ============================================================
+// NonZeroRangeExercises (Rust 1.96 stable)
+// ============================================================
+
+/// # `NonZero` 范围迭代练习
+///
+/// Rust 1.96 为 `NonZero*` 类型实现了 `Step` trait，允许对非零整数范围进行迭代。
+pub struct NonZeroRangeExercises;
+
+impl NonZeroRangeExercises {
+    /// ## 练习 01: 使用 NonZeroU32 范围生成值
+    ///
+    /// 给定起始和结束值（均不为 0），生成范围内的所有非零整数，返回它们的原始 u32 值。
+    pub fn exercise_01_nonzero_range(start: u32, end: u32) -> Vec<u32> {
+        use std::num::NonZeroU32;
+        let s = NonZeroU32::new(start).expect("start must be non-zero");
+        let e = NonZeroU32::new(end).expect("end must be non-zero");
+        (s..e).map(|nz| nz.get()).collect()
+    }
+
+    /// ## 练习 02: 计算 NonZero 范围的乘积
+    pub fn exercise_02_nonzero_product(start: u32, end: u32) -> u32 {
+        use std::num::NonZeroU32;
+        let s = NonZeroU32::new(start).expect("start must be non-zero");
+        let e = NonZeroU32::new(end).expect("end must be non-zero");
+        (s..e).map(|nz| nz.get()).product()
+    }
+}
+
+// ============================================================
+// AssertUnwindSafeExercises (Rust 1.96 stable)
+// ============================================================
+
+/// # `AssertUnwindSafe` `From<T>` 练习
+///
+/// Rust 1.96 稳定了 `From<T> for AssertUnwindSafe<T>`，允许从值直接构造。
+pub struct AssertUnwindSafeExercises;
+
+impl AssertUnwindSafeExercises {
+    /// ## 练习 01: 使用 AssertUnwindSafe::from 包装值
+    pub fn exercise_01_wrap_value(value: i32) -> std::panic::AssertUnwindSafe<i32> {
+        std::panic::AssertUnwindSafe::from(value)
+    }
+
+    /// ## 练习 02: 在 catch_unwind 中使用 From 构造
+    pub fn exercise_02_safe_divide(a: i32, b: i32) -> Result<i32, Box<dyn std::any::Any + Send>> {
+        std::panic::catch_unwind(std::panic::AssertUnwindSafe::from(move || a / b))
+    }
+}
+
 #[cfg(test)]
 mod tests_196 {
     use super::*;
@@ -492,5 +542,38 @@ mod tests_196 {
             )),
             "unknown"
         );
+    }
+
+    #[test]
+    fn test_nonzero_range() {
+        assert_eq!(
+            NonZeroRangeExercises::exercise_01_nonzero_range(1, 5),
+            vec![1, 2, 3, 4]
+        );
+        assert_eq!(
+            NonZeroRangeExercises::exercise_01_nonzero_range(10, 13),
+            vec![10, 11, 12]
+        );
+    }
+
+    #[test]
+    fn test_nonzero_product() {
+        assert_eq!(NonZeroRangeExercises::exercise_02_nonzero_product(1, 5), 24); // 1*2*3*4
+        assert_eq!(NonZeroRangeExercises::exercise_02_nonzero_product(2, 5), 24); // 2*3*4
+    }
+
+    #[test]
+    fn test_assert_unwind_safe_from() {
+        let wrapped = AssertUnwindSafeExercises::exercise_01_wrap_value(42);
+        assert_eq!(wrapped.0, 42);
+    }
+
+    #[test]
+    fn test_assert_unwind_safe_catch_unwind() {
+        let result = AssertUnwindSafeExercises::exercise_02_safe_divide(10, 2);
+        assert_eq!(result.unwrap(), 5);
+
+        let result = AssertUnwindSafeExercises::exercise_02_safe_divide(10, 0);
+        assert!(result.is_err()); // panic caught
     }
 }

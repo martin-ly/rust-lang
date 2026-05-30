@@ -154,6 +154,16 @@ for nz in start..end {
 
 ---
 
+### Rustdoc 改进
+
+> **[来源: Rustdoc Documentation](https://doc.rust-lang.org/rustdoc/)**
+
+| 改进 | 说明 | 影响 |
+|:---|:---|:---|
+| Deprecation notes 渲染方式变更 | 弃用说明现在像普通文档一样渲染，不再使用 `white-space: pre-wrap` 和剥离 `<p>` 标签。多行弃用说明如需换行，请使用标准 Markdown 方法 `" \n"`（两个空格 + 换行） | 文档可视化更可预测 |
+| `missing_doc_code_examples` lint | 不再在 impl items 上触发此 lint | 减少误报 |
+| Sidebar 分离 | 方法和关联函数在侧边栏中分开显示 | 导航更清晰 |
+
 ### Cargo 变更
 
 > **[来源: Cargo Documentation](https://doc.rust-lang.org/cargo/)**

@@ -1,7 +1,6 @@
 # Rust FFI：与外部代码的安全边界
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。
 > **前置概念**: [Unsafe](./03_unsafe.md) · [Type System](../01_foundation/04_type_system.md) · [Memory Management](../02_intermediate/03_memory_management.md)
@@ -9,7 +8,11 @@
 
 ---
 
-> **来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html) · [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/) · [cbindgen Documentation](https://github.com/mozilla/cbindgen)
+> **来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
+> [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) ·
+> [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html) ·
+> [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/) ·
+> [cbindgen Documentation](https://github.com/mozilla/cbindgen)
 
 ## 📑 目录
 
@@ -570,9 +573,7 @@ fn main() {
 ```
 
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用 `&s`。
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

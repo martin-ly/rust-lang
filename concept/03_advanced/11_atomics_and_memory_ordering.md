@@ -1,7 +1,6 @@
 # 原子操作与内存序：无锁并发的精确控制
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估原子操作内存序的选型
@@ -132,7 +131,6 @@ Rust 原子类型 (std::sync::atomic):
 ---
 
 ### 1.3 Happens-Before 关系
->
 
 ```text
 Happens-Before 关系:
@@ -175,7 +173,6 @@ Happens-Before 关系:
 ## 二、技术细节
 
 ### 2.1 原子操作详解
->
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering, AtomicBool};
