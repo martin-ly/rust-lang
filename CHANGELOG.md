@@ -1,6 +1,53 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-05-28
+> **最后更新**: 2026-05-30
+
+---
+
+## [2.5.0] - 2026-05-30 — Phase 1~4 全面推进完成
+
+### 🔗 死链全面修复
+
+- **docs/ 死链**: 56 → 4（剩余 4 个为报告自引用/代码误报，非真正死链）
+- **修复规模**: 批量处理 400+ 文件的锚点链接和路径错误
+- **主要修复**: `#最后更新-2026-03-14-rust-194-深度整合` 死锚点（50+ 文件）、emoji 编码锚点问题、Coq 形式化文件链接、archive/ 历史版本路径错误
+
+### 🏷️ 受众分层与内容分级
+
+- **215 个 concept/ 文件**添加 `[初学者]`/`[进阶]`/`[专家]`/`[研究者]` 受众标签
+- **57 个 L6-L7 文件**添加 `[综述级]`/`[实验级]`/`[专家级]` 内容分级标签
+- **41 个 L1-L2 文件**添加 `## 实践` 章节，链接到 crates/ + exercises/
+- **L3 导航分岔口**: 添加"是否继续？"自检清单和分岔口选择
+- **L4 前置检查清单**: 添加进入形式化层的前置能力验证
+
+### 📖 学习体验增强
+
+- **MVP 学习路径**: 新建 `concept/00_meta/LEARNING_MVP_PATH.md`，Hello World → 多线程 CLI，40 小时路径
+- **嵌入式测验**: 3 个 L1 核心文件（ownership/borrowing/lifetimes）各添加 5 道折叠测验
+- **术语表补全**: `terminology_glossary.md` 从 80 扩展至 101 个术语
+
+### 🦀 async_trait 评估与 1.96 同步
+
+- **async_trait 迁移评估**: c06_async 中 8 个文件的 `#[async_trait::async_trait]` 经评估均为教学演示必要使用（AFIDT 未稳定），维持现状并添加注释说明
+- **1.96 特性同步**: `common/src/rust_196_features.rs` 已覆盖全部新增特性（RangeIter、debug_assert_matches!、expr to cfg），各 crate 按需展示相关子集
+
+### 🧪 形式化工具生态补全
+
+- **新建**: `concept/04_formal/22_modern_verification_tools.md`（12,750 bytes）
+- **覆盖工具**: AutoVerus、Kani 0.65+（循环契约/Autoharness）、ESBMC for Rust、Safety Tags（RFC #3842）、TrustInSoft
+- **每个工具**: 概念解释 + 代码示例 + 选型速查表
+
+### 📋 文档分级与历史精简
+
+- **1,326 个 docs/ 文件**标记 A/B/C 分级
+- **archive/ 历史版本精简**: 删除 1.93/1.94 纯历史文件 7 个，保留 1.89 及跨版本文件
+- **定理链指标改革**: audit_checklist.md 添加描述性文档豁免条款（`# theorem_chain: N/A`）
+
+### 🔧 编译验证
+
+- `cargo build`: 24.5s，零错误零警告
+- `cargo test`: **3,597 passed, 0 failed**
+- `cargo clippy --all-targets`: 零 lint
 
 ---
 
