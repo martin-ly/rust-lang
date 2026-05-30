@@ -574,7 +574,21 @@ fn main() {
 }
 ```
 
-> **修正**: 自引用结构（self-referential struct）是 Rust 的**硬问题**：`ptr` 指向 `data` 的地址，若结构体移动（`let s2 = s`），`data` 的地址改变，`ptr` 成为悬垂指针。`Pin` 是解决关键：`Pin<&mut SelfRef>` 保证 `SelfRef` 在内存中不可移动。创建 `Pin` 的方法：1) `Box::pin(SelfRef::new())` — 堆分配 + Pin；2) `pin_utils::pin_mut!` — 栈上 Pin（unsafe）；3) `std::pin::pin!`（1.68+，安全栈 Pin）。`Unpin` trait 标记"移动安全"的类型：大多数类型自动实现 `Unpin`，但含自引用字段的类型应 `!Unpin`（通过 `PhantomPinned`）。这与 C++ 的 `this` 指针（对象移动后 `this` 不变，但内部指针可能悬垂）或 Swift 的引用类型（堆分配不移动）不同——Rust 的 `Pin` 类型系统显式标记不可移动对象。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/pin/struct.Pin.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)]
+> **修正**:
+> 自引用结构（self-referential struct）是 Rust 的**硬问题**：
+> `ptr` 指向 `data` 的地址，若结构体移动（`let s2 = s`），`data` 的地址改变，`ptr` 成为悬垂指针。
+> `Pin` 是解决关键：`Pin<&mut SelfRef>` 保证 `SelfRef` 在内存中不可移动。
+> 创建 `Pin` 的方法：
+>
+> 1) `Box::pin(SelfRef::new())` — 堆分配 + Pin；
+> 2) `pin_utils::pin_mut!` — 栈上 Pin（unsafe）；
+> 3) `std::pin::pin!`（1.68+，安全栈 Pin）。
+> `Unpin` trait 标记"移动安全"的类型：
+> 大多数类型自动实现 `Unpin`，但含自引用字段的类型应 `!Unpin`（通过 `PhantomPinned`）。
+> 这与 C++ 的 `this` 指针（对象移动后 `this` 不变，但内部指针可能悬垂）或 Swift 的引用类型（堆分配不移动）不同
+> ——Rust 的 `Pin` 类型系统显式标记不可移动对象。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/pin/struct.Pin.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)]
 
 ### 10.4 边界测试：Pin 与 Unpin 的自动实现冲突（编译错误）
 
