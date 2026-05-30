@@ -15,7 +15,9 @@
 
 ## 一、概念定义
 
-`cfg_select!` 是 Rust 1.95.0 引入的标准宏 [来源: Rust 1.95 Release Notes / 2026; core::macros::cfg_select / Rust Standard Library 2025; 核心设计决策: 编译期根据 `cfg` 条件选择第一个满足条件的表达式，替代嵌套 `cfg!` 或 `#[cfg]` 属性]，用于在**编译期**根据 `cfg` 条件选择第一个满足条件的表达式。它是嵌套 `cfg!` 或 `#[cfg]` 属性的简洁替代方案。
+`cfg_select!` 是 Rust 1.95.0 引入的标准宏 [来源: Rust 1.95 Release Notes / 2026; core::macros::cfg_select / Rust Standard Library 2025;
+核心设计决策: 编译期根据 `cfg` 条件选择第一个满足条件的表达式，替代嵌套 `cfg!` 或 `#[cfg]` 属性]，用于在**编译期**根据 `cfg` 条件选择第一个满足条件的表达式。
+它是嵌套 `cfg!` 或 `#[cfg]` 属性的简洁替代方案。
 
 ### 语法
 >
@@ -309,12 +311,7 @@ let x = cfg_select! {
 ## 权威来源索引
 
 > **[来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)]**
->
 > **[来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)]**
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->

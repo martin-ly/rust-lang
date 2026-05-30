@@ -1,17 +1,21 @@
 # Async Closures 异步闭包
 >
 > **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
-
 > **Bloom 层级**: 理解
-
-> **📌 简介**: 异步闭包（`async || {}`）是 Rust 1.85 稳定的核心特性 [来源: RFC 3668 — Async Closures / 2024; 核心设计决策: `async || {}` 脱糖为返回 `impl AsyncFn` 的状态机闭包，捕获语义继承自 `Fn` 三族但 `Future` 状态机引入额外的生命周期约束; Rust Reference — Async closures / 2025]，它将闭包的变量捕获机制与 `Future` 状态机结合，使函数式异步编程（高阶异步函数、流式处理、回调抽象）成为可能。
+> **📌 简介**: 异步闭包（`async || {}`）是 Rust 1.85 稳定的核心特性 [来源: RFC 3668 — Async Closures / 2024;
+> 核心设计决策: `async || {}` 脱糖为返回 `impl AsyncFn` 的状态机闭包，捕获语义继承自 `Fn` 三族但 `Future` 状态机引入额外的生命周期约束;
+> Rust Reference — Async closures / 2025]，它将闭包的变量捕获机制与 `Future` 状态机结合，使函数式异步编程（高阶异步函数、流式处理、回调抽象）成为可能。
 >
 > **⏱️ 预计学习时间**: 60-90 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
 > **Rust 版本要求**: 1.85.0+
-> **权威来源**: [RFC 3668: Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [The Rust Async Book](https://rust-lang.github.io/async-book/)
+> **权威来源**: [RFC 3668: Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html),
+> [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures),
+> [The Rust Async Book](https://rust-lang.github.io/async-book/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3668 异步闭包设计决策来源标注、`AsyncFn` trait 家族形式化语义、跨语言闭包对比（C++ lambda / Haskell 高阶函数 / Go 闭包） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**:
+> 2026-05-19 新增 RFC 3668 异步闭包设计决策来源标注、`AsyncFn` trait 家族形式化语义、跨语言闭包对比（C++ lambda / Haskell 高阶函数 / Go 闭包）
+> [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -169,18 +173,22 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
 |--------|------|-----------|------|----------|
-| **调用即返回 Future** | 固有属性 | true | `async || {}()` 返回 Future，不立即执行体 | 与 `fn() -> impl Future` 的行为混淆 |
+| **调用即返回 Future** | 固有属性 | true | `async \|\| {}()` 返回 Future，不立即执行体 | 与 `fn() -> impl Future` 的行为混淆 |
 | **AsyncFn 借用性** | 固有属性 | `&self` | `AsyncFn` 返回的 Future 可借用闭包捕获 | `AsyncFnOnce` 返回的 Future 不借用 |
-| **捕获语义继承** | 关系属性 | 同 Fn 三族 | `async ||`默认按引用捕获，`async move ||` 按值捕获 | 误以为 `async ||` 等价于 `async move ||` |
-| **Send 传染性** | 关系属性 | 依赖捕获 | `async move ||` 的 Future 是 Send 当且仅当所有捕获是 Send | `Rc` 在 `async move ||` 中导致 `!Send` |
+| **捕获语义继承** | 关系属性 | 同 Fn 三族 | `async \|\|`默认按引用捕获，`async move \|\|` 按值捕获 | 误以为 `async \|\|` 等价于 `async move \|\|` |
+| **Send 传染性** | 关系属性 | 依赖捕获 | `async move \|\|` 的 Future 是 Send 当且仅当所有捕获是 Send | `Rc` 在 `async move \|\|` 中导致 `!Send` |
 | **生命周期投影** | 关系属性 | 闭包 ≤ Future | `AsyncFn` 返回的 Future 的 lifetime 受闭包捕获的生命周期限制 | 闭包在 Future 完成前 drop |
-| **可调用次数** | 关系属性 | AsyncFn/AsyncFnMut: 多次; AsyncFnOnce: 一次 | 与 Fn 三族的调用语义完全一致 | `async move ||` 首次调用后捕获被消耗 |
+| **可调用次数** | 关系属性 | AsyncFn/AsyncFnMut: 多次; AsyncFnOnce: 一次 | 与 Fn 三族的调用语义完全一致 | `async move \|\|` 首次调用后捕获被消耗 |
 
 #### 关键推论
 
-1. **推论 1（AsyncFn 的借用优势）**: `AsyncFn` 返回的 `Future` 可以借用闭包的环境，这意味着**不需要 `Arc<Mutex<T>>`** 就可以在多次调用间共享可变状态。每次 `async_call_mut` 获取 `&mut self`，返回的 `Future` 持有该借用。
-2. **推论 2（与 spawn 的冲突）**: 由于 `AsyncFn` 返回的 `Future` 可能借用闭包，该 `Future` 通常不是 `'static`。因此 `AsyncFn` 闭包**不能直接传给 `tokio::spawn`**，除非捕获全部是 `'static` 且使用 `async move ||`。
-3. **推论 3（Fn vs AsyncFn 的不可互替）**: `AsyncFn` 不继承 `Fn`。一个接受 `F: AsyncFn(i32)` 的高阶函数**不能**传入 `|| async {}` 形式的普通闭包。这是 Rust 类型系统的有意设计：两者的调用契约不同。
+1. **推论 1（AsyncFn 的借用优势）**: `AsyncFn` 返回的 `Future` 可以借用闭包的环境，这意味着**不需要 `Arc<Mutex<T>>`** 就可以在多次调用间共享可变状态。
+   每次 `async_call_mut` 获取 `&mut self`，返回的 `Future` 持有该借用。
+2. **推论 2（与 spawn 的冲突）**: 由于 `AsyncFn` 返回的 `Future` 可能借用闭包，该 `Future` 通常不是 `'static`。
+   因此 `AsyncFn` 闭包**不能直接传给 `tokio::spawn`**，除非捕获全部是 `'static` 且使用 `async move ||`。
+3. **推论 3（Fn vs AsyncFn 的不可互替）**: `AsyncFn` 不继承 `Fn`。
+   一个接受 `F: AsyncFn(i32)` 的高阶函数**不能**传入 `|| async {}` 形式的普通闭包。
+   这是 Rust 类型系统的有意设计：两者的调用契约不同。
 
 ---
 
@@ -213,9 +221,9 @@ graph TD
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
 |----------|----------|-------------------|
-| **闭包捕获** | `02_intermediate/traits.md` | `async ||` 的捕获规则继承自 `Fn` 三族 |
+| **闭包捕获** | `02_intermediate/traits.md` | `async \|\|` 的捕获规则继承自 `Fn` 三族 |
 | **Future 与 Pin** | `03_advanced/async/async_await.md` | 异步闭包返回的 `Future` 同样需要 `Pin` 后才能 poll |
-| **Send/Sync** | `03_advanced/concurrency/threads.md` | `async move ||` 的 `Send` 性质由捕获变量决定 |
+| **Send/Sync** | `03_advanced/concurrency/threads.md` | `async move \|\|` 的 `Send` 性质由捕获变量决定 |
 | **生命周期** | `01_fundamentals/lifetimes.md` | `AsyncFn` 返回的 `Future<'a>` 的 lifetime 约束 |
 
 #### 启下（后续延伸预告）
@@ -229,7 +237,7 @@ graph TD
 ---
 
 ### 模块 4: 机制解释
->
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 4.1 类型系统视角
@@ -1041,14 +1049,9 @@ fn make_predicate(threshold: i32) -> impl AsyncFn(i32) -> bool {
 ## 权威来源索引
 
 > **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]**
->
 > **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 
 ---

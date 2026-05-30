@@ -1,7 +1,6 @@
 # 02 - 进阶 Rust
 
 > **Bloom 层级**: 理解
-
 > **掌握 Rust 的核心抽象能力**
 
 ## 🎯 本模块学习目标
@@ -87,9 +86,12 @@
 
 **维护者**: Rust 学习项目
 **最后更新**: 2026-05-09
+
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 

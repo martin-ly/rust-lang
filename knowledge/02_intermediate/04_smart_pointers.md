@@ -116,9 +116,14 @@ println!("{}", *borrow2);
 
 #### 1.3 形式化直觉
 
-> ⚠️ **标注**: 本节与 Rust 所有权系统的形式化模型对齐 [来源: RustBelt (Jung et al., POPL 2018) — 所有权类型系统的 Iris 形式化; Rustonomicon — Interior Mutability / 2025; 核心论证: `Rc<T>` 实现共享所有权通过引用计数（运行时而非编译期验证），`RefCell<T>` 通过运行时 borrow checker 实现内部可变性，二者均在形式上可归约为 affine/linear 类型系统的受控松弛]。
+> ⚠️ **标注**: 本节与 Rust 所有权系统的形式化模型对齐 [来源: RustBelt (Jung et al., POPL 2018) — 所有权类型系统的 Iris 形式化; Rustonomicon — Interior Mutability / 2025;
+> 核心论证: `Rc<T>` 实现共享所有权通过引用计数（运行时而非编译期验证），`RefCell<T>` 通过运行时 borrow checker 实现内部可变性，二者均在形式上可归约为 affine/linear 类型系统的受控松弛]。
 >
-> **跨语言对比**: C++ `std::unique_ptr`（独占所有权，移动语义）[来源: ISO C++20 §20.11.1; cppreference — std::unique_ptr / 2024]; C++ `std::shared_ptr`（引用计数共享所有权，循环引用风险）[来源: ISO C++20 §20.11.3; Herlihy & Shavit — *The Art of Multiprocessor Programming* / 2020 §9]; Haskell `STRef`/`IORef`（通过 monad 隔离可变状态）[来源: GHC User's Guide — `Data.STRef` / 2024]; Go 无内置智能指针（依赖 GC，无所有权语义）[来源: Go Language Specification — Memory Model / 2022]。
+> **跨语言对比**:
+> C++ `std::unique_ptr`（独占所有权，移动语义）[来源: ISO C++20 §20.11.1; cppreference — std::unique_ptr / 2024];
+> C++ `std::shared_ptr`（引用计数共享所有权，循环引用风险）[来源: ISO C++20 §20.11.3; Herlihy & Shavit — *The Art of Multiprocessor Programming* / 2020 §9];
+> Haskell `STRef`/`IORef`（通过 monad 隔离可变状态）[来源: GHC User's Guide — `Data.STRef` / 2024];
+> Go 无内置智能指针（依赖 GC，无所有权语义）[来源: Go Language Specification — Memory Model / 2022]。
 
 Rust 的所有权规则在编译期检查：
 

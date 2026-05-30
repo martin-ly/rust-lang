@@ -154,7 +154,7 @@ let mut m = HashMap::with_capacity(100);
 let val = m.entry("key").or_insert_with(|| compute());
 ```
 
-#### HashSet<T> / BTreeSet<T>
+#### `HashSet<T>` / `BTreeSet<T>`
 
 ```rust,ignore
 use std::collections::HashSet;
@@ -500,7 +500,7 @@ thread::scope(|s| {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-#### Mutex<T> - 互斥锁
+#### `Mutex<T>` - 互斥锁
 
 ```rust,ignore
 use std::sync::Mutex;
@@ -519,7 +519,7 @@ let m = Mutex::new(5);
 | `into_inner()` | 消费锁获取数据 |
 | `get_mut()` | 可变引用获取数据（无需锁）|
 
-#### RwLock<T> - 读写锁
+#### `RwLock<T>` - 读写锁
 
 ```rust,ignore
 use std::sync::RwLock;
@@ -536,7 +536,7 @@ let w = lock.write().unwrap();  // 独占写
 | `write()` | 获取写锁 `RwLockWriteGuard` |
 | `try_write()` | 非阻塞写 |
 
-#### Arc<T> - 原子引用计数
+#### `Arc<T>` - 原子引用计数
 
 ```rust,ignore
 use std::sync::Arc;

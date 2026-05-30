@@ -1,9 +1,7 @@
 # 数学常量
->
+
 > **相关概念**: [常量](../../concept/01_foundation/04_type_system.md)
-
 > **Bloom 层级**: 理解
-
 > **📌 简介**: Rust 标准库 `std::f64::consts` 和 `std::f32::consts` 提供了一组常用的数学常量。Rust 1.96 新增 `EULER_GAMMA`、`GOLDEN_RATIO` 及其共轭，补充了数值计算和科学计算场景的基础工具。
 >
 > **Rust 版本**: 1.96.0+

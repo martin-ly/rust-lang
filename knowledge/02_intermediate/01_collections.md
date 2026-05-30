@@ -882,7 +882,7 @@ fn build_index(users: Vec<User>) -> HashMap<UserKey, Vec<String>> {
 ---
 
 ## 相关概念
->
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [错误处理 (Error Handling)](02_error_handling.md)
@@ -895,10 +895,7 @@ fn build_index(users: Vec<User>) -> HashMap<UserKey, Vec<String>> {
 ## 权威来源索引
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 
 ---

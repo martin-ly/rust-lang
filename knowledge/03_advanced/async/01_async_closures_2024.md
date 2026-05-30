@@ -1,9 +1,7 @@
 # Rust 2024 Edition Async Closures 完整指南
 >
 > **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
-
 > **Bloom 层级**: 理解
-
 > **提示**: 本文档为快速参考。如需完整教学（概念定义、反例集、自我检测等），请参阅 [async_closure.md](02_async_closure.md)。
 > **权威来源**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [Rust 1.85 Release Notes](https://releases.rs/docs/1.85.0/)
 >
@@ -11,7 +9,9 @@
 
 ## 概述
 
-Async closures 是 Rust 1.85+ 中稳定化的重要特性 [来源: RFC 3668 — Async Closures / 2024; Rust Reference — Async closures / 2025; Rust 1.85 Release Notes / 2025]，允许直接使用 `async || { }` 语法创建异步闭包。相比传统的 `async move { }` 闭包，新语法更简洁、语义更清晰。
+Async closures 是 Rust 1.85+ 中稳定化的重要特性 [来源: RFC 3668 — Async Closures / 2024; Rust Reference — Async closures / 2025; Rust 1.85 Release Notes / 2025]，
+允许直接使用 `async || { }` 语法创建异步闭包。
+相比传统的 `async move { }` 闭包，新语法更简洁、语义更清晰。
 
 ## 语法对比
 >
@@ -388,14 +388,9 @@ let process = async |items: Vec<i32>| -> i32 {
 ## 权威来源索引
 
 > **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]**
->
 > **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 
 ---
