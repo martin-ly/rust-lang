@@ -2,7 +2,7 @@
 //!
 //! 本模块展示了Rust中各种性能优化技术的实践案例，
 //! 包括内存优化、并发优化、编译时优化和运行时性能分析。
-use std::alloc::{alloc, dealloc, Layout};
+use std::alloc::{Layout, alloc, dealloc};
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
@@ -214,21 +214,23 @@ struct Worker {
 
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<std::sync::mpsc::Receiver<Message>>>) -> Worker {
-        let thread = thread::spawn(move || loop {
-            let message = receiver
-                .lock()
-                .expect("线程池接收器锁被污染")
-                .recv()
-                .expect("线程池接收器已关闭");
+        let thread = thread::spawn(move || {
+            loop {
+                let message = receiver
+                    .lock()
+                    .expect("线程池接收器锁被污染")
+                    .recv()
+                    .expect("线程池接收器已关闭");
 
-            match message {
-                Message::NewJob(job) => {
-                    println!("Worker {} got a job; executing.", id);
-                    job();
-                }
-                Message::Terminate => {
-                    println!("Worker {} was told to terminate.", id);
-                    break;
+                match message {
+                    Message::NewJob(job) => {
+                        println!("Worker {} got a job; executing.", id);
+                        job();
+                    }
+                    Message::Terminate => {
+                        println!("Worker {} was told to terminate.", id);
+                        break;
+                    }
                 }
             }
         });
@@ -764,7 +766,7 @@ mod tests {
 
     #[test]
     fn test_object_pool() {
-        let mut pool = ObjectPool::new(3, || String::new());
+        let mut pool = ObjectPool::new(3, String::new);
 
         let _obj1 = pool.acquire().unwrap();
         let _obj2 = pool.acquire().unwrap();

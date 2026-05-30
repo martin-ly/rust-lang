@@ -1,5 +1,6 @@
 // [来源: Rust Reference / The Little Book of Rust Macros]
 //! 声明宏（Macro Rules）
+#![allow(clippy::vec_init_then_push)]
 //!
 //! 声明宏是Rust中最基础的宏形式，使用macro_rules!定义。
 

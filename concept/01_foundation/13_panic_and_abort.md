@@ -1,6 +1,6 @@
 # Panic 与 Abort：不可恢复错误的处理机制
+>
 > **受众**: [初学者]
-
 
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -47,6 +47,7 @@
     - [10.7 边界测试：`core::intrinsics::abort` 与 `std::process::abort` 的差异（运行时行为）](#107-边界测试coreintrinsicsabort-与-stdprocessabort-的差异运行时行为)
     - [10.5 边界测试：`catch_unwind` 与 `UnwindSafe` 边界（编译错误）](#105-边界测试catch_unwind-与-unwindsafe-边界编译错误)
     - [10.6 边界测试：`panic!` 与 `assert!` 的消息格式化开销（运行时性能）](#106-边界测试panic-与-assert-的消息格式化开销运行时性能)
+  - [实践](#实践)
 
 ---
 
@@ -705,6 +706,7 @@ fn compute_expensive_string() -> String { String::from("expensive") }
 ## 实践
 
 > **相关资源**:
+>
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
 > - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径

@@ -1,15 +1,9 @@
 // [来源: Rust Standard Library / The Algorithm Design Manual]
 //! Collections, iterators, and algorithmic patterns in Rust.
 #![allow(clippy::type_complexity)]
-#![allow(clippy::empty_line_after_doc_comments)]
-#![allow(clippy::duplicated_attributes)]
 #![allow(clippy::assertions_on_constants)]
 #![allow(clippy::bool_assert_comparison)]
-#![allow(clippy::identity_op)]
 #![allow(clippy::approx_constant)]
-#![allow(clippy::manual_range_contains)]
-#![allow(clippy::redundant_closure)]
-#![allow(clippy::cmp_owned)]
 #![feature(gen_blocks, yield_expr)]
 #![cfg_attr(feature = "portable_simd", feature(portable_simd))]
 //! Rust 1.95.0 高级算法实现库

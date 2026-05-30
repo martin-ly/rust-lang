@@ -62,39 +62,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check internal documentation links
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run internal link checker
         run: |
-          echo "# Internal Link Check Report" > internal_links_report.md
-          echo "" >> internal_links_report.md
-          
-          # 检查 Markdown 文件中的相对链接
-          find . -name "*.md" -type f | while read -r file; do
-            grep -oE '\[([^]]+)\]\(([^)]+)\)' "$file" | grep -v "http" | grep -v "mailto" | while read -r link; do
-              target=$(echo "$link" | sed -E 's/\[([^]]+)\]\(([^)]+)\)/\2/')
-              # 处理锚点
-              target=${target%%#*}
-              # 处理查询参数
-              target=${target%%\?*}
-              
-              if [ -n "$target" ] && [ ! -e "$(dirname "$file")/$target" ] && [ ! -e "$target" ]; then
-                echo "- Broken link in $file: $target" >> internal_links_report.md
-              fi
-            done
-          done
-          
-          if [ -s internal_links_report.md ]; then
-            echo "" >> internal_links_report.md
-            echo "## Summary" >> internal_links_report.md
-            echo "Found potential broken internal links. Please review." >> internal_links_report.md
-          else
-            echo "- No broken internal links found!" >> internal_links_report.md
-          fi
-          
-          cat internal_links_report.md
+          cd ${{ github.workspace }}
+          python scripts/check_links.py
 
       - name: Upload internal link check report
         uses: actions/upload-artifact@v4
         with:
           name: internal-link-check-report
-          path: internal_links_report.md
+          path: docs/LINK_CHECK_REPORT.md
           retention-days: 30
+
+      - name: Check for broken links
+        run: |
+          broken=$(grep "损坏链接:" docs/LINK_CHECK_REPORT.md | grep -oE '[0-9]+' | head -1)
+          echo "Broken links: $broken"
+          if [ "$broken" -gt 10 ]; then
+            echo "⚠️ Too many broken internal links: $broken"
+            exit 1
+          fi

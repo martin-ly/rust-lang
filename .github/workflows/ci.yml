@@ -9,7 +9,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  RUST_VERSION: 1.96.0
+  RUST_VERSION: nightly
   CARGO_INCREMENTAL: 0
   CARGO_NET_RETRY: 10
   RUSTUP_MAX_RETRIES: 10
@@ -32,9 +32,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: ${{ env.RUST_VERSION }}
           components: rustfmt, clippy
 
       - name: Setup sccache
@@ -73,9 +72,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: ${{ env.RUST_VERSION }}
+        uses: dtolnay/rust-toolchain@nightly
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.7
@@ -155,9 +152,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: ${{ env.RUST_VERSION }}
           components: llvm-tools-preview
 
       - name: Install cargo-tarpaulin

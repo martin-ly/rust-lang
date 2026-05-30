@@ -1,6 +1,6 @@
 # 内部可变性：编译期规则的运行时逃逸
+>
 > **受众**: [进阶]
-
 
 > **Bloom 层级**: 分析 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -46,6 +46,7 @@
   - [权威来源索引](#权威来源索引)
     - [10.5 边界测试：`RefCell::borrow_mut` 的递归 panic（运行时 panic）](#105-边界测试refcellborrow_mut-的递归-panic运行时-panic)
     - [10.6 边界测试：`Cell::take` 与 `Default` 的隐式要求（编译错误）](#106-边界测试celltake-与-default-的隐式要求编译错误)
+  - [实践](#实践)
   - [参考来源](#参考来源)
 
 ---
@@ -605,6 +606,7 @@ fn main() {
 ## 实践
 
 > **相关资源**:
+>
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
 > - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径

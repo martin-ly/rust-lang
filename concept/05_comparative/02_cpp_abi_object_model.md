@@ -1,6 +1,6 @@
 # Rust vs C++：ABI、对象模型与内存布局
+>
 > **受众**: [进阶]
-
 
 > **层级**: L5 对比分析 — 系统编程工程实践
 > **A/S/P 标记**: **A+S** — Application + Structure

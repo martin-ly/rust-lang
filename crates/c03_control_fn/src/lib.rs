@@ -1,8 +1,6 @@
 // [来源: Rust Reference / TRPL]
 //! Control flow, functions, closures, and error handling patterns.
 #![allow(clippy::type_complexity)]
-#![allow(clippy::empty_line_after_doc_comments)]
-#![allow(clippy::duplicated_attributes)]
 #![allow(clippy::assertions_on_constants)]
 
 //! Rust 1.95.0 控制流与函数特性研究项目

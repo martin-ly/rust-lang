@@ -1,6 +1,6 @@
 # 异步模式：从 Future 到生产级并发
+>
 > **受众**: [专家]
-
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure

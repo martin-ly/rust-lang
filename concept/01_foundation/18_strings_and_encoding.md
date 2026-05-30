@@ -1,6 +1,6 @@
 # 字符串与编码：Rust 的文本处理类型系统
+>
 > **受众**: [初学者]
-
 
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。
@@ -48,6 +48,7 @@
     - [10.4 边界测试：字符串切片的字符边界（运行时 panic）](#104-边界测试字符串切片的字符边界运行时-panic)
     - [10.5 边界测试：`from_utf8_unchecked` 的无效 UTF-8（运行时 UB）](#105-边界测试from_utf8_unchecked-的无效-utf-8运行时-ub)
     - [10.3 边界测试：`OsStr` 与 `str` 的隐式转换边界（编译错误）](#103-边界测试osstr-与-str-的隐式转换边界编译错误)
+  - [实践](#实践)
 
 ---
 
@@ -678,6 +679,7 @@ fn main() {
 ## 实践
 
 > **相关资源**:
+>
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
 > - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径

@@ -1,6 +1,6 @@
 # Unsafe Rust
+>
 > **受众**: [专家]
-
 
 > **层级**: L3 高级概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -154,7 +154,7 @@
     - [10.4 边界测试：`union` 的字段访问与活跃字段跟踪（运行时 UB）](#104-边界测试union-的字段访问与活跃字段跟踪运行时-ub)
   - [参考来源](#参考来源)
     - [16.7 前沿方向：Unsafe Fields（字段级 unsafe，Rust 2026 Project Goal）](#167-前沿方向unsafe-fields字段级-unsaferust-2026-project-goal)
-  - [Null 指针有效性定义重构（Rust 1.96）](#null-指针有效性定义重构rust-196)
+  - [Null 指针有效性定义](#null-指针有效性定义)
 
 <!-- L3::权威定义 -->
 

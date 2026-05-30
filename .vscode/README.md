@@ -140,6 +140,7 @@ Markdownlint 规则配置（项目根目录）：
 
 - [Markdownlint 规则列表](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md)
 - [VSCode Markdown 支持](https://code.visualstudio.com/docs/languages/markdown)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

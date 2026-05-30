@@ -1,6 +1,6 @@
 # Rust 错误处理基础
+>
 > **受众**: [初学者]
-
 
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -48,6 +48,7 @@
     - [10.4 边界测试：`catch_unwind` 与 `UnwindSafe`（编译错误）](#104-边界测试catch_unwind-与-unwindsafe编译错误)
     - [10.5 边界测试：`Result` 的 `unwrap_unchecked` 与 release 模式（运行时 UB）](#105-边界测试result-的-unwrap_unchecked-与-release-模式运行时-ub)
     - [10.5 边界测试：生命周期参数的不匹配返回](#105-边界测试生命周期参数的不匹配返回)
+  - [实践](#实践)
 
 ---
 
@@ -723,6 +724,7 @@ fn main() {}
 ## 实践
 
 > **相关资源**:
+>
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
 > - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径

@@ -1,6 +1,6 @@
 # 高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析
+>
 > **受众**: [初学者]
-
 
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权语义、性能特征、内存布局与选型策略。
@@ -58,6 +58,7 @@
     - [10.5 边界测试：`HashSet` 的自定义哈希与 `Hash` 一致性（运行时逻辑错误）](#105-边界测试hashset-的自定义哈希与-hash-一致性运行时逻辑错误)
     - [10.5 边界测试：`HashMap` 的 `Entry` API 与借用冲突（编译错误）](#105-边界测试hashmap-的-entry-api-与借用冲突编译错误)
     - [10.6 边界测试：`BTreeMap` 的键修改与排序不变性破坏（逻辑错误/UB）](#106-边界测试btreemap-的键修改与排序不变性破坏逻辑错误ub)
+  - [实践](#实践)
 
 ---
 
@@ -857,6 +858,7 @@ fn main() {
 ## 实践
 
 > **相关资源**:
+>
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
 > - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径

@@ -10,10 +10,14 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
 
+type Job = Box<dyn FnOnce() + Send + 'static>;
+type SharedReceiver = Arc<Mutex<Receiver<Job>>>;
+
+
 /// 简单线程池实现
 pub struct SimpleThreadPool {
     workers: Vec<Worker>,
-    sender: Option<Sender<Box<dyn FnOnce() + Send + 'static>>>,
+    sender: Option<Sender<Job>>,
 }
 
 impl SimpleThreadPool {
@@ -93,7 +97,7 @@ struct Worker {
 }
 
 impl Worker {
-    fn new(id: usize, receiver: Arc<Mutex<Receiver<Box<dyn FnOnce() + Send + 'static>>>>) -> Self {
+    fn new(id: usize, receiver: SharedReceiver) -> Self {
         let thread = thread::spawn(move || loop {
             let message = receiver
                 .lock()
@@ -122,8 +126,8 @@ impl Worker {
 /// 可配置线程池
 pub struct ConfigurableThreadPool {
     workers: Vec<ConfigurableWorker>,
-    sender: Option<Sender<Box<dyn FnOnce() + Send + 'static>>>,
-    receiver: Arc<Mutex<Receiver<Box<dyn FnOnce() + Send + 'static>>>>,
+    sender: Option<Sender<Job>>,
+    receiver: SharedReceiver,
     config: ThreadPoolConfig,
 }
 
@@ -270,7 +274,7 @@ struct ConfigurableWorker {
 impl ConfigurableWorker {
     fn new(
         id: usize,
-        receiver: Arc<Mutex<Receiver<Box<dyn FnOnce() + Send + 'static>>>>,
+        receiver: SharedReceiver,
         keep_alive_time: Duration,
     ) -> Self {
         let thread = thread::spawn(move || loop {

@@ -752,7 +752,7 @@ mod tests {
         state_manager.handle_input("enter");
 
         // 验证进入游戏状态
-        if let Some(_) = state_manager.current_state {
+        if state_manager.current_state.is_some() {
             // 状态已转换
         }
     }

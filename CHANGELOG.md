@@ -49,6 +49,57 @@
 - `cargo test`: **3,597 passed, 0 failed**
 - `cargo clippy --all-targets`: 零 lint
 
+### 📑 SUMMARY.md 全面补全
+
+- **补全规模**: 从 131 行扩展至 266 行，新增 135 个核心概念文件链接
+- **覆盖层级**: L1 基础概念 26/26、L2 进阶概念 23/23、L3 高级概念 26/26、L4 形式化理论 22/22、L5 对比分析 18/18、L6 生态工程 59/59、L7 前沿趋势 42/42
+- **自动提取标题**: 从每个文件的第一行 `#` 标题自动提取链接文本
+- **归档文件豁免**: 已归档 stub 自动跳过，不加入导航
+
+### 🧹 概念文件重复清理
+
+- **识别**: 5 组标题完全相同的概念文件（共 10 个文件）
+- **归档**: 将内容较不完整或重复的版本替换为归档 stub
+  - `01_foundation/19_numerics.md` → 迁移至 `10_numerics.md`
+  - `02_intermediate/22_iterator_patterns.md` → 迁移至 `15_iterator_patterns.md`
+  - `05_comparative/16_rust_vs_ruby.md` → 迁移至 `08_rust_vs_ruby.md`
+  - `06_ecosystem/33_idioms_spectrum.md` → 迁移至 `03_idioms_spectrum.md`
+  - `06_ecosystem/34_formal_ecosystem_tower.md` → 迁移至 `05_formal_ecosystem_tower.md`
+- **效果**: 消除读者混淆，降低维护负担，保留历史追溯能力
+
+### 🔧 未使用依赖清理
+
+- **c06_async**: 删除 `actix-web`、`once_cell`（仅 doc comment 引用，无实际代码使用）
+- **c09_design_pattern**: 删除 `serde`、`serde_json`（无代码使用）
+- **c11_macro_system**: 删除 `serde`、`serde_json`、`tokio`（仅 doc comment 引用，无实际代码使用）
+- **c12_wasm**: 删除 `serde`、`serde_json`、`tokio`（无代码使用，WASM 运行时不需要 tokio）
+- **c11_macro_system**: 删除 `serde`、`serde_json`、`tokio`
+- **c12_wasm**: 删除 `serde`、`serde_json`、`tokio`
+- **cargo-machete 配置**: 为 `c05_threads`、`c07_process`、`c10_networks`、`c08_algorithms-fuzz`、`embassy-demo` 添加忽略配置，消除平台/bin/fuzz/嵌入式误报
+- **结果**: `cargo machete` 零未使用依赖报告
+
+### 🔧 Clippy Allow 属性大清理
+
+- **批量移除 `empty_line_after_doc_comments`**: 10+ 个 crate（全部安全，无新警告）
+- **批量移除 `duplicated_attributes`**: 8+ 个 crate（全部安全，无新警告）
+- **移除 `assertions_on_constants`**: `c01_ownership_borrow_scope`（无触发）
+- **修复 `type_complexity`**: `c05_threads` — 通过类型别名重构 `Job` 和 `SharedReceiver`，消除 4 个复杂类型警告
+- **修复 doc comment 空行**: `c06_async` — 2 处 doc comment 后空行修复
+- **c08_algorithms**: 移除 `identity_op`、`manual_range_contains`、`redundant_closure`、`cmp_owned`（4 处代码修复）
+- **c09_design_pattern**: 移除 `manual_range_contains`、`redundant_pattern_matching`、`needless_borrow`（3 处代码修复）
+- **c10_networks**: 移除 `needless_borrows_for_generic_args`
+- **c05_threads**: 移除 `needless_borrows_for_generic_args`、`overly_complex_bool_expr`、`redundant_closure`（1 处代码修复）
+- **c11_macro_system**: `vec_init_then_push` 从全局 allow 移至 `declarative_macros.rs` 局部模块
+- **统计**: 从 ~60 个 allow 降至 31 个，清理约 30 个冗余 allow
+- **结果**: `cargo clippy --all-targets` **零警告**
+- **验证**: `cargo build` / `cargo test` / `cargo clippy` 全部通过
+
+### 📦 依赖版本更新
+
+- `cargo update` 同步：更新 `hyper` 1.10.0 → 1.10.1，`typenum`、`zerocopy`、`zerocopy-derive` 传递依赖同步更新
+- `Cargo.toml` 已同步更新
+- **验证**: `cargo build` / `cargo test` / `cargo clippy` 全部通过
+
 ---
 
 ## [2.4.0] - 2026-05-28 — Rust 1.96.0 Stable 全量对齐 + Miri R30 + Bloom 100%
@@ -426,7 +477,10 @@
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 

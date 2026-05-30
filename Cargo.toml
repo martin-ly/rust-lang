@@ -185,7 +185,7 @@ common = { path = "crates/common", default-features = false }
 # 注意: reqwest 0.12.x 使用 "rustls-tls" 特性，0.13.x 使用 "rustls" 特性
 reqwest = { version = "0.13.4", features = ["json", "rustls"] }
 # hyper: 底层HTTP库，提供高性能的HTTP/1.1和HTTP/2支持
-hyper = { version = "1.10.0", features = ["full"] }
+hyper = { version = "1.10.1", features = ["full"] }
 # hyper-util: hyper的实用工具库，提供连接池和服务器功能
 hyper-util = "0.1.20"
 # hyper-rustls: hyper与rustls的集成，提供安全的TLS连接

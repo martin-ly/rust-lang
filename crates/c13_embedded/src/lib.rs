@@ -3,8 +3,6 @@
 #![cfg_attr(target_arch = "arm", no_std)]
 #![feature(core_intrinsics, fn_align)]
 #![allow(internal_features)]
-#![allow(clippy::empty_line_after_doc_comments)]
-#![allow(clippy::duplicated_attributes)]
 #![allow(clippy::module_name_repetitions)]
 
 //! # C13 Embedded - Bare-metal 嵌入式 Rust 学习模块

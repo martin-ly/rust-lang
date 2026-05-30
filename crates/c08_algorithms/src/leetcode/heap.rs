@@ -19,8 +19,7 @@
 //! - 973. K Closest Points to Origin（最接近原点的 K 个点）
 //! - 1046. Last Stone Weight（最后一块石头的重量）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
-use std::collections::BinaryHeap;
-use std::collections::HashMap;
+use std::collections::{BinaryHeap, HashMap};
 
 /// 215. Kth Largest Element in an Array（数组中的第K个最大元素）
 ///
@@ -317,13 +316,12 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Kth Largest Element in an Array".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::Heap, LeetCodeTag::Sorting],
-            description: "给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。".to_string(),
-            examples: vec![
-                "输入：nums = [3,2,1,5,6,4], k = 2\n输出：5".to_string(),
-            ],
-            constraints: vec![
-                "1 <= k <= nums.length <= 10^4".to_string(),
-            ],
+            description: "给定整数数组 nums 和整数 k，请返回数组中第 k \
+                          个最大的元素。请注意，你需要找的是数组排序后的第 k \
+                          个最大的元素，而不是第 k 个不同的元素。"
+                .to_string(),
+            examples: vec!["输入：nums = [3,2,1,5,6,4], k = 2\n输出：5".to_string()],
+            constraints: vec!["1 <= k <= nums.length <= 10^4".to_string()],
             rust_191_features: vec![
                 "JIT 优化：堆操作性能提升 10-15%".to_string(),
                 "内存优化：使用最小堆，O(k) 空间复杂度".to_string(),
@@ -339,14 +337,17 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "前 K 个高频元素".to_string(),
             title_en: "Top K Frequent Elements".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::HashTable, LeetCodeTag::Heap, LeetCodeTag::Sorting],
-            description: "给你一个整数数组 nums 和一个整数 k，请你返回其中出现频率前 k 高的元素。你可以按任意顺序返回答案。".to_string(),
-            examples: vec![
-                "输入：nums = [1,1,1,2,2,3], k = 2\n输出：[1,2]".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::HashTable,
+                LeetCodeTag::Heap,
+                LeetCodeTag::Sorting,
             ],
-            constraints: vec![
-                "1 <= nums.length <= 10^5".to_string(),
-            ],
+            description: "给你一个整数数组 nums 和一个整数 k，请你返回其中出现频率前 k \
+                          高的元素。你可以按任意顺序返回答案。"
+                .to_string(),
+            examples: vec!["输入：nums = [1,1,1,2,2,3], k = 2\n输出：[1,2]".to_string()],
+            constraints: vec!["1 <= nums.length <= 10^5".to_string()],
             rust_191_features: vec![
                 "JIT 优化：堆操作性能提升".to_string(),
                 "内存优化：使用最小堆和 HashMap，O(n) 空间复杂度".to_string(),
@@ -363,13 +364,15 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Kth Largest Element in a Stream".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Tree, LeetCodeTag::Design, LeetCodeTag::Heap],
-            description: "设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k 大元素，不是第 k 个不同的元素。".to_string(),
+            description: "设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k \
+                          大元素，不是第 k 个不同的元素。"
+                .to_string(),
             examples: vec![
-                "输入：[\"KthLargest\", \"add\", \"add\", \"add\", \"add\", \"add\"]\n[[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]]\n输出：[null, 4, 5, 5, 8, 8]".to_string(),
+                "输入：[\"KthLargest\", \"add\", \"add\", \"add\", \"add\", \"add\"]\n[[3, [4, 5, \
+                 8, 2]], [3], [5], [10], [9], [4]]\n输出：[null, 4, 5, 5, 8, 8]"
+                    .to_string(),
             ],
-            constraints: vec![
-                "1 <= k <= 10^4".to_string(),
-            ],
+            constraints: vec!["1 <= k <= 10^4".to_string()],
             rust_191_features: vec![
                 "JIT 优化：堆操作性能提升".to_string(),
                 "内存优化：使用最小堆，O(k) 空间复杂度".to_string(),
@@ -404,11 +407,7 @@ mod tests {
     fn test_frequency_sort() {
         let result = frequency_sort("tree".to_string());
         // 应该是按频率排序：e(2) -> r(1) 或 t(1)
-        assert!(
-            result.starts_with("ee")
-                || result == "eert".to_string()
-                || result == "eetr".to_string()
-        );
+        assert!(result.starts_with("ee") || result == "eert" || result == "eetr");
     }
 
     #[test]

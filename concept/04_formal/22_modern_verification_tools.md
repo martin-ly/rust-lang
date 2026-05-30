@@ -13,11 +13,29 @@
 
 ## 目录
 
-- [AutoVerus：LLM 辅助自动证明合成](#autoverusllm-辅助自动证明合成)
-- [Kani 0.65+：循环契约与 Autoharness](#kani-065循环契约与-autoharness)
-- [ESBMC for Rust：基于 SMT 的符号执行](#esbmc-for-rust基于-smt-的符号执行)
-- [Safety Tags：机器可读的安全契约](#safety-tags机器可读的安全契约)
-- [TrustInSoft：C/Rust 混合代码的抽象解释](#trustinsoftcrust-混合代码的抽象解释)
+- [现代 Rust 验证工具生态（2025-2026）](#现代-rust-验证工具生态2025-2026)
+  - [目录](#目录)
+  - [AutoVerus：LLM 辅助自动证明合成](#autoverusllm-辅助自动证明合成)
+    - [核心思想](#核心思想)
+    - [能力边界](#能力边界)
+    - [概念示例（伪代码）](#概念示例伪代码)
+  - [Kani 0.65+：循环契约与 Autoharness](#kani-065循环契约与-autoharness)
+    - [新特性 1：循环契约](#新特性-1循环契约)
+    - [新特性 2：Autoharness](#新特性-2autoharness)
+    - [验证示例：安全包装器](#验证示例安全包装器)
+  - [ESBMC for Rust：基于 SMT 的符号执行](#esbmc-for-rust基于-smt-的符号执行)
+    - [核心能力](#核心能力)
+    - [Rust 验证示例](#rust-验证示例)
+    - [C/Rust FFI 验证](#crust-ffi-验证)
+  - [Safety Tags：机器可读的安全契约](#safety-tags机器可读的安全契约)
+    - [语法设计（提案阶段）](#语法设计提案阶段)
+    - [工具链集成愿景](#工具链集成愿景)
+    - [状态](#状态)
+  - [TrustInSoft：C/Rust 混合代码的抽象解释](#trustinsoftcrust-混合代码的抽象解释)
+    - [抽象解释原理](#抽象解释原理)
+    - [Rust 支持状态](#rust-支持状态)
+  - [选型速查表（2026）](#选型速查表2026)
+  - [嵌入式测验](#嵌入式测验)
 
 ---
 
@@ -285,7 +303,7 @@ Safety Tags
 TrustInSoft 对 Rust 的支持通过以下路径：
 
 1. **MIR 导入**: 将 Rust MIR（中级中间表示）转换为 TrustInSoft 的内部 IR
-2. ** unsafe 块聚焦**: 优先分析包含 `unsafe` 的函数（safe Rust 由编译器保证）
+2. **unsafe 块聚焦**: 优先分析包含 `unsafe` 的函数（safe Rust 由编译器保证）
 3. **FFI 边界检查**: 验证 Rust 调用 C 函数时的前置条件
 
 ```rust,ignore

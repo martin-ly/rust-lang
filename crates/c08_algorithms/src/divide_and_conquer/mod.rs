@@ -418,7 +418,7 @@ mod tests {
     #[test]
     fn test_fast_pow_mod() {
         assert_eq!(fast_pow_mod(2, 10, 1_000_000_007), 1024);
-        assert_eq!(fast_pow_mod(123456789, 0, 97), 1 % 97);
+        assert_eq!(fast_pow_mod(123456789, 0, 97), 1);
     }
 
     #[test]

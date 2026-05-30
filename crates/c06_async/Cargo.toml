@@ -21,7 +21,6 @@ thiserror = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 parking_lot = { workspace = true }
-actix-web = { workspace = true }
 actix = { workspace = true }
 actix-rt = { workspace = true }
 env_logger = "0.11.10"
@@ -31,7 +30,6 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 reqwest = { workspace = true, features = ["json"] }
 prometheus = { workspace = true }
-once_cell = { workspace = true }
 num_cpus = { workspace = true }
 async-trait = { workspace = true }
 rayon = { workspace = true }

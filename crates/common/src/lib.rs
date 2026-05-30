@@ -23,7 +23,6 @@
 //! Old crate-specific error types are now deprecated - use your own crate-specific
 //! error types and implement `RustLangError` trait.
 
-#![allow(clippy::empty_line_after_doc_comments)]
 #![allow(deprecated)] // Allow deprecated items for backward compatibility
 
 // Re-export the error module

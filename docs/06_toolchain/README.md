@@ -485,8 +485,6 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](./06_11_rust_1_93_cargo_rustdoc_changes.md) 🆕
 - [Rust 1.93 语言特性全面分析（92 项设计论证）](../research_notes/10_rust_193_language_features_comprehensive_analysis.md) 🆕
 
-- [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md) 🆕
-
 - [Rust 1.94 研究笔记](../research_notes/10_rust_194_research_update.md) 🆕
 
 - [Cranelift 后端指南](./06_cranelift_backend_guide.md) ⭐ (Rust 1.96+)

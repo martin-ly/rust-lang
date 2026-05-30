@@ -131,3 +131,6 @@ harness = false
 [[bench]]
 name = "protocol_performance"
 harness = false
+
+[package.metadata.cargo-machete]
+ignored = ["hickory-proto", "pnet_base", "pnet_macros_support", "prost", "tonic-prost"]

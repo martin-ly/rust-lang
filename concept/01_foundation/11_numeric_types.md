@@ -1,7 +1,6 @@
 # Rust 数值类型与运算
+
 > **受众**: [初学者]
-
-
 > **Bloom 层级**: 理解 → 应用
 > **定位**: 系统讲解 Rust 的**数值类型**——从整数、浮点到 wrapping/saturating 运算，分析类型安全如何防止数值错误。
 > **前置概念**: [Type System](04_type_system.md) · [Ownership](01_ownership.md)
@@ -40,6 +39,7 @@
     - [10.3 边界测试：`Wrapping` 与 `Saturating` 的语义选择（逻辑错误）](#103-边界测试wrapping-与-saturating-的语义选择逻辑错误)
     - [10.4 边界测试：`NonZeroU32` 的构造与优化假设（编译错误/运行时 panic）](#104-边界测试nonzerou32-的构造与优化假设编译错误运行时-panic)
     - [10.3 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）](#103-边界测试wrappingt-与-t-的混用陷阱编译错误)
+  - [实践](#实践)
 
 ---
 
@@ -362,7 +362,7 @@ graph TD
 ## 五、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
-|:---|:---:|:---|
+| :--- | :---: | :--- |
 | [Rust Reference — Numeric](https://doc.rust-lang.org/reference/types/numeric.html) | ✅ 一级 | 官方参考 |
 | [std::num](https://doc.rust-lang.org/std/num/index.html) | ✅ 一级 | 标准库 |
 | [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) | ✅ 一级 | 数据类型 |
@@ -431,7 +431,12 @@ fn fixed() {
 }
 ```
 
-> **修正**: `usize` 在 32 位平台是 32 位，64 位平台是 64 位。依赖 `usize` 精确大小的代码不可移植。数组大小 `[T; N]` 中的 `N` 必须是 `usize`，超大数组在栈上分配会导致栈溢出。对于动态或大数据，始终使用 `Vec<T>`（堆分配）。Rust 的数组大小限制是 `isize::MAX` 字节，但实际受栈大小限制。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: `usize` 在 32 位平台是 32 位，64 位平台是 64 位。
+> 依赖 `usize` 精确大小的代码不可移植。
+> 数组大小 `[T; N]` 中的 `N` 必须是 `usize`，超大数组在栈上分配会导致栈溢出。
+> 对于动态或大数据，始终使用 `Vec<T>`（堆分配）。
+> Rust 的数组大小限制是 `isize::MAX` 字节，但实际受栈大小限制。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 12.2 边界测试：位运算与逻辑运算混用（编译错误）
 
@@ -453,7 +458,9 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 严格区分位运算（`&`、`|`、`^`、`!`）和逻辑运算（`&&`、`||`、`!`）。位运算作用于整数类型，逻辑运算作用于 `bool`。C/C++ 中 `&&` 和 `&` 在某些上下文可互换（非零即真），但 Rust 不允许。这消除了 C 语言中常见的 `if (flags & MASK)` 与 `if (flags && MASK)` 混淆错误。[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> **修正**: Rust 严格区分位运算（`&`、`|`、`^`、`!`）和逻辑运算（`&&`、`||`、`!`）。位运算作用于整数类型，逻辑运算作用于 `bool`。
+> C/C++ 中 `&&` 和 `&` 在某些上下文可互换（非零即真），但 Rust 不允许。这消除了 C 语言中常见的 `if (flags & MASK)` 与 `if (flags && MASK)` 混淆错误。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 边界测试：`Wrapping` 与 `Saturating` 的语义选择（逻辑错误）
 
@@ -473,7 +480,18 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 提供三种整数溢出处理模式：1) **默认**（debug panic，release 回绕）；2) `Wrapping`（显式回绕）；3) `Saturating`（饱和到最大/最小值）；4) `Checked`（返回 `Option`，溢出时 `None`）。选择错误的模式导致逻辑错误：`Wrapping` 在密码学中是预期行为（模运算），但在计数器中是 bug。Rust 的标准库不默认饱和或检查，因为每种场景需求不同。这与 Swift 的整数（默认饱和/检查，溢出 panic）或 C 的整数（无检查，UB）不同——Rust 要求开发者显式选择语义。安全关键代码（航空、医疗）应使用 `checked_*` 或 `saturating_*`，并处理所有 `None` 情况。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**: Rust 提供三种整数溢出处理模式：
+>
+> 1) **默认**（debug panic，release 回绕）；
+> 2) `Wrapping`（显式回绕）；
+> 3) `Saturating`（饱和到最大/最小值）；
+> 4) `Checked`（返回 `Option`，溢出时 `None`）。
+> 选择错误的模式导致逻辑错误：`Wrapping` 在密码学中是预期行为（模运算），但在计数器中是 bug。
+> Rust 的标准库不默认饱和或检查，因为每种场景需求不同。
+> 这与 Swift 的整数（默认饱和/检查，溢出 panic）或 C 的整数（无检查，UB）不同——Rust 要求开发者显式选择语义。
+> 安全关键代码（航空、医疗）应使用 `checked_*` 或 `saturating_*`，并处理所有 `None` 情况。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：`NonZeroU32` 的构造与优化假设（编译错误/运行时 panic）
 
@@ -494,7 +512,13 @@ fn main() {
 }
 ```
 
-> **修正**: `NonZeroU32`（及 `NonZeroU64`、`NonZeroI32` 等）是 Rust 的**优化类型**：包装整数，编译时保证非零。LLVM 利用此保证优化 `Option<NonZeroU32>` 的布局（niche optimization），用 0 表示 `None`，消除 tag 字节。这在高频 Option 场景（解析器、图算法）中显著减少内存。构造必须通过 `NonZeroU32::new(u32) -> Option<NonZeroU32>`——编译器无法在类型层面证明字面量非零（`NonZeroU32::new(0)` 返回 `None`）。这与 C 的 `assert(x != 0)`（运行时检查，无优化）或 Swift 的 `Nonzero` 类型（无标准支持）不同——Rust 的 `NonZero*` 是标准库类型，与编译器深度集成。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.NonZeroU32.html)] · [来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/type-sizes.html)]
+> **修正**: `NonZeroU32`（及 `NonZeroU64`、`NonZeroI32` 等）是 Rust 的**优化类型**：包装整数，编译时保证非零。
+> LLVM 利用此保证优化 `Option<NonZeroU32>` 的布局（niche optimization），用 0 表示 `None`，消除 tag 字节。
+> 这在高频 Option 场景（解析器、图算法）中显著减少内存。
+> 构造必须通过 `NonZeroU32::new(u32) -> Option<NonZeroU32>`——编译器无法在类型层面证明字面量非零（`NonZeroU32::new(0)` 返回 `None`）。
+> 这与 C 的 `assert(x != 0)`（运行时检查，无优化）或 Swift 的 `Nonzero` 类型（无标准支持）不同——Rust 的 `NonZero*` 是标准库类型，与编译器深度集成。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.NonZeroU32.html)] ·
+> [来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/type-sizes.html)]
 
 ### 10.3 边界测试：`Wrapping<T>` 与 `T` 的混用陷阱（编译错误）
 
@@ -509,11 +533,19 @@ fn main() {
 }
 ```
 
-> **修正**: `Wrapping<T>` 是一个 newtype 包装器，提供**环绕算术**（wrapping arithmetic）：溢出时静默环绕（`255u8 + 1 = 0`）。但它与原始类型 `T` 是不同的类型，不能直接混用运算。正确：`Wrapping(255u8) + Wrapping(1u8)` 或 `a.0 + b`（解包后）。Rust 的整数默认使用 panic-on-overflow（debug 模式）或 wrapping（release 模式）。`Wrapping` 显式选择环绕语义，适用于哈希、密码学、游戏循环等场景。这与 C 的"始终环绕"（UB 仅在 signed overflow）或 Swift 的"默认 panic"不同——Rust 显式区分了两种语义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] · [来源: [Rust Reference — Integer Overflow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#overflow)]
+> **修正**: `Wrapping<T>` 是一个 newtype 包装器，提供**环绕算术**（wrapping arithmetic）：溢出时静默环绕（`255u8 + 1 = 0`）。
+> 但它与原始类型 `T` 是不同的类型，不能直接混用运算。
+> 正确：`Wrapping(255u8) + Wrapping(1u8)` 或 `a.0 + b`（解包后）。
+> Rust 的整数默认使用 panic-on-overflow（debug 模式）或 wrapping（release 模式）。
+> `Wrapping` 显式选择环绕语义，适用于哈希、密码学、游戏循环等场景。
+> 这与 C 的"始终环绕"（UB 仅在 signed overflow）或 Swift 的"默认 panic"不同——Rust 显式区分了两种语义。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/num/struct.Wrapping.html)] ·
+> [来源: [Rust Reference — Integer Overflow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#overflow)]
 
 ## 实践
 
 > **相关资源**:
+>
 > - [crates/ 示例代码](../../crates/) — 与本文概念对应的可编译示例
 > - [exercises/ 练习](../../exercises/) — 动手编程挑战
 > - [MVP 学习路径](./LEARNING_MVP_PATH.md) — 从零到多线程 CLI 的 40 小时路径

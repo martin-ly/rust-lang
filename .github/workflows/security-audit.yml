@@ -47,9 +47,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: "1.96.0"
+          toolchain: "nightly"
 
       - name: Install cargo-audit
         run: cargo install cargo-audit --locked
@@ -156,9 +156,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: "1.96.0"
+          toolchain: "nightly"
 
       - name: Install cargo-deny
         run: cargo install cargo-deny --locked
@@ -184,9 +184,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: "1.96.0"
+          toolchain: "nightly"
 
       - name: Install cargo-deny
         run: cargo install cargo-deny --locked

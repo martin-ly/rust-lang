@@ -1,6 +1,6 @@
 # C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）
+>
 > **受众**: [进阶]
-
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **P** — Procedure
@@ -42,6 +42,7 @@
     - [CRUST-Bench：C-to-Safe-Rust 翻译的系统性评估（COLM 2025 Spotlight）](#crust-benchc-to-safe-rust-翻译的系统性评估colm-2025-spotlight)
     - [近期学术进展补充](#近期学术进展补充)
   - [五、挑战与未来方向](#五挑战与未来方向)
+  - [可编译示例：使用 `bindgen` 生成 C FFI 绑定](#可编译示例使用-bindgen-生成-c-ffi-绑定)
 
 ---
 
@@ -309,13 +310,13 @@ use std::path::PathBuf;
 
 fn main() {
     println!("cargo:rustc-link-lib=my_c_lib");
-    
+
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .generate()
         .expect("Unable to generate bindings");
-    
+
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     bindings
         .write_to_file(out_path.join("bindings.rs"))

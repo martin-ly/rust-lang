@@ -10,6 +10,10 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Instant;
 
+type TaskResult = (usize, Vec<i32>);
+type Task = Box<dyn FnOnce() -> TaskResult + Send>;
+
+
 use super::advanced_concurrency::{
     parallel_map, parallel_reduce, HighPerformanceThreadPool, LockFreeRingBuffer, LockFreeStack,
 };
@@ -258,7 +262,7 @@ fn process_data_high_performance_thread_pool(
     let chunk_size = data.len().div_ceil(4); // 假设4个工作线程
     let mut results = vec![0; data.len()];
 
-    let mut tasks: Vec<Box<dyn FnOnce() -> (usize, Vec<i32>) + Send>> = Vec::new();
+    let mut tasks: Vec<Task> = Vec::new();
     for i in 0..4 {
         let data = data.to_vec();
         let start = i * chunk_size;

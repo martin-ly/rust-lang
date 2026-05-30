@@ -1,11 +1,10 @@
 # Deep Dives 深度解析
 
 > **Bloom 层级**: 理解
-
 > **Rust 生态核心框架的深度技术解析**
 
 ## 📚 内容
->
+
 > **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
@@ -22,7 +21,7 @@
 3. 最后学习 Axum 的 Web 开发模式
 
 ## 🚀 相关层
->
+
 > **[来源: Rust Official Docs]**
 
 - [03_advanced/concurrency/](../../03_advanced/concurrency/) - 线程与并发
@@ -32,6 +31,7 @@
 
 **维护者**: Rust 学习项目
 **最后更新**: 2026-05-09
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

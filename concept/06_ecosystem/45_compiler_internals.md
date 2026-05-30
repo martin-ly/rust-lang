@@ -1,6 +1,6 @@
 # Compiler Internals（Rust 编译器内部原理）
+>
 > **受众**: [进阶]
-
 
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure

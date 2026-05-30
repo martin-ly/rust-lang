@@ -1,7 +1,7 @@
 # Formal Ecosystem Tower（Rust 生态形式化分层塔）
+>
 > **受众**: [进阶]
 > **内容分级**: [专家级]
-
 
 > **层级**: L6 生态工程
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Type Theory](../04_formal/02_type_theory.md) [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

@@ -114,28 +114,28 @@ jobs:
         crate:
           - c01_ownership_borrow_scope
           - c02_type_system
-          - c03_structs_enums
-          - c04_collections
+          - c03_control_fn
+          - c04_generic
           - c05_threads
           - c06_async
-          - c07_error_handling
-          - c08_modules
+          - c07_process
+          - c08_algorithms
         include:
           - crate: c01_ownership_borrow_scope
             flags: "-Zmiri-tree-borrows"
           - crate: c02_type_system
             flags: "-Zmiri-tree-borrows"
-          - crate: c03_structs_enums
+          - crate: c03_control_fn
             flags: "-Zmiri-tree-borrows"
-          - crate: c04_collections
+          - crate: c04_generic
             flags: "-Zmiri-tree-borrows"
           - crate: c05_threads
             flags: "-Zmiri-tree-borrows -Zmiri-disable-isolation"
           - crate: c06_async
             flags: "-Zmiri-tree-borrows -Zmiri-disable-isolation"
-          - crate: c07_error_handling
+          - crate: c07_process
             flags: "-Zmiri-tree-borrows"
-          - crate: c08_modules
+          - crate: c08_algorithms
             flags: "-Zmiri-tree-borrows"
     steps:
       - name: Checkout repository

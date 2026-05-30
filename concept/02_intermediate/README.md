@@ -1,6 +1,6 @@
 # L2 进阶概念层（Intermediate）
+>
 > **受众**: [进阶]
-
 
 > **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
 > **Bloom 层级**: 理解 → 应用

@@ -533,7 +533,7 @@ mod tests {
         let labels = vec![0, 0, 1, 1];
 
         let score = ClusteringMetrics::silhouette_score(&data, &labels).expect("计算轮廓系数失败");
-        assert!(score >= -1.0 && score <= 1.0);
+        assert!((-1.0..=1.0).contains(&score));
     }
 
     #[test]

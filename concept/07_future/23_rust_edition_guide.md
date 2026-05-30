@@ -1,7 +1,7 @@
 # Rust Edition 机制与迁移指南
+>
 > **受众**: [专家]
 > **内容分级**: [综述级]
-
 
 > **Bloom 层级**: 分析 → 应用
 > **A/S/P 标记**: **A+S** — ApplicationStructure

@@ -1,6 +1,6 @@
 # Rust vs Go：线性所有权 vs CSP 过程逻辑
+>
 > **受众**: [进阶]
-
 
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S+P** — Structure + Procedure

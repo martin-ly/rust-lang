@@ -1,7 +1,6 @@
 # Deployment 部署
 
 > **Bloom 层级**: 理解
-
 > **Rust 应用部署与运维**
 
 ## 📚 内容
@@ -23,6 +22,7 @@
 
 **维护者**: Rust 学习项目
 **最后更新**: 2026-05-09
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

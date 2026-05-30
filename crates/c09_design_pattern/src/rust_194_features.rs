@@ -817,7 +817,7 @@ mod tests {
         });
         // 搜索结果应该在 [0, 10] 区间内
         assert!(
-            min >= 0.0 && min <= 10.0,
+            (0.0..=10.0).contains(&min),
             "Expected min in range [0, 10], got {}",
             min
         );
@@ -1090,7 +1090,7 @@ mod tests {
         });
         // 结果应该接近5（在0-10范围内）
         assert!(
-            normal_point >= 0.0 && normal_point <= 10.0,
+            (0.0..=10.0).contains(&normal_point),
             "搜索结果应该在搜索区间内"
         );
 

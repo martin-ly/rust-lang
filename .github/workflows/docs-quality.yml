@@ -1,0 +1,142 @@
+name: Documentation Quality Checks
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  # 检查 concept/ 文件受众标签
+  check-audience-tags:
+    name: Check Audience Tags
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check audience tags in concept/
+        run: |
+          echo "# Audience Tag Check Report" > audience_report.md
+          echo "" >> audience_report.md
+          
+          missing=0
+          for f in $(find concept -name "*.md" -not -name "README.md" -not -name "SUMMARY.md"); do
+            if ! grep -q "\*\*受众\*\*" "$f" && ! grep -q "\*\*Audience\*\*" "$f"; then
+              echo "- Missing audience tag: $f" >> audience_report.md
+              missing=$((missing + 1))
+            fi
+          done
+          
+          if [ "$missing" -eq 0 ]; then
+            echo "✅ All concept/ files have audience tags." >> audience_report.md
+          else
+            echo "" >> audience_report.md
+            echo "⚠️ Found $missing files without audience tags." >> audience_report.md
+          fi
+          
+          cat audience_report.md
+          echo "missing=$missing" >> $GITHUB_OUTPUT
+        id: audience_check
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: audience-tag-report
+          path: audience_report.md
+          retention-days: 7
+
+  # 检查 docs/ 文件 A/B/C 分级
+  check-grade-tags:
+    name: Check Grade Tags
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check grade tags in docs/
+        run: |
+          echo "# Grade Tag Check Report" > grade_report.md
+          echo "" >> grade_report.md
+          
+          missing=0
+          for f in $(find docs -name "*.md" -not -path "*/archive/*" -not -name "README.md" -not -name "SUMMARY.md" -not -name "LINK_CHECK_REPORT.md"); do
+            if ! grep -q "\*\*分级\*\*" "$f" && ! grep -q "\*\*Grade\*\*" "$f"; then
+              echo "- Missing grade tag: $f" >> grade_report.md
+              missing=$((missing + 1))
+            fi
+          done
+          
+          if [ "$missing" -eq 0 ]; then
+            echo "✅ All docs/ files have grade tags." >> grade_report.md
+          else
+            echo "" >> grade_report.md
+            echo "⚠️ Found $missing files without grade tags." >> grade_report.md
+          fi
+          
+          cat grade_report.md
+          echo "missing=$missing" >> $GITHUB_OUTPUT
+        id: grade_check
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: grade-tag-report
+          path: grade_report.md
+          retention-days: 7
+
+  # 检查 L4 形式化声明
+  check-formal-declarations:
+    name: Check L4 Formal Declarations
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check formal declarations
+        run: |
+          echo "# Formal Declaration Check Report" > formal_report.md
+          echo "" >> formal_report.md
+          
+          missing=0
+          for f in $(find concept/04_formal -name "*.md" -not -name "README.md"); do
+            if ! grep -q "⚠️ \*\*声明\*\*" "$f"; then
+              echo "- Missing formal declaration: $f" >> formal_report.md
+              missing=$((missing + 1))
+            fi
+          done
+          
+          if [ "$missing" -eq 0 ]; then
+            echo "✅ All L4 files have formal declarations." >> formal_report.md
+          else
+            echo "" >> formal_report.md
+            echo "⚠️ Found $missing L4 files without formal declarations." >> formal_report.md
+          fi
+          
+          cat formal_report.md
+        id: formal_check
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: formal-declaration-report
+          path: formal_report.md
+          retention-days: 7
+
+  # 汇总
+  quality-summary:
+    name: Quality Summary
+    runs-on: ubuntu-latest
+    needs: [check-audience-tags, check-grade-tags, check-formal-declarations]
+    if: always()
+    steps:
+      - name: Generate summary
+        run: |
+          echo "# 📋 Documentation Quality Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Audience Tags | ${{ needs.check-audience-tags.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Grade Tags | ${{ needs.check-grade-tags.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Formal Declarations | ${{ needs.check-formal-declarations.result }} |" >> $GITHUB_STEP_SUMMARY

@@ -125,3 +125,6 @@ futures = ["dep:futures"]
 unix = ["nix"]
 windows = []
 full = ["std", "async", "unix", "windows"]
+
+[package.metadata.cargo-machete]
+ignored = ["anyhow", "chrono", "config", "libc", "nix", "signal-hook", "tokio-util"]

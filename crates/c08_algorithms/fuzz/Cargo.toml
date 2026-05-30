@@ -20,3 +20,6 @@ name = "parser_fuzzer"
 path = "src/parser_fuzzer.rs"
 test = false
 doc = false
+
+[package.metadata.cargo-machete]
+ignored = ["c08_algorithms"]

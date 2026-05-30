@@ -1,7 +1,6 @@
 # Rust Edition 2024 完整指南
->
-> **相关概念**: [Edition](../../concept/06_ecosystem/01_toolchain.md)
 
+> **相关概念**: [Edition](../../concept/06_ecosystem/01_toolchain.md)
 > **Bloom 层级**: 理解
 > **版本**: Edition 2024
 > **Rust 版本**: 1.82.0+ (Edition 2024 稳定版)

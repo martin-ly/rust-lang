@@ -1,8 +1,6 @@
 // [来源: Rust Reference / RFC 2394 / RFC 3185]
 //! Async/await, futures, streams, and runtime integrations (Tokio, Smol).
 #![allow(clippy::type_complexity)]
-#![allow(clippy::empty_line_after_doc_comments)]
-#![allow(clippy::duplicated_attributes)]
 #![allow(clippy::assertions_on_constants)]
 // Nightly 预研特性（仅用于 async_closures_preview 和 afit_dyn_tracking 模块）
 // 这些特性在 stable 编译器下会被条件编译排除
@@ -254,8 +252,7 @@ pub mod actix;
 /// 异步运行时
 pub mod async_runtime;
 
-/// async-std 运行时
-// async_std 模块已归档，详见 src/async_std/mod.rs
+// async-std 运行时（已归档，详见 src/async_std/mod.rs）
 // pub mod async_std;
 
 /// async/await 关键字
@@ -303,8 +300,7 @@ pub mod archive;
 pub mod afit_dyn_tracking;
 /// Async Closures 实现模块 (1.85.0+ 稳定)
 pub mod async_closures_preview;
-/// AFIDT 跟踪模块 (rust-lang/rust#133119, nightly)
-
+// AFIDT 跟踪模块 (rust-lang/rust#133119, nightly)
 // ============================================================================
 // 异步生态系统模块 (Async Ecosystem)
 // ============================================================================

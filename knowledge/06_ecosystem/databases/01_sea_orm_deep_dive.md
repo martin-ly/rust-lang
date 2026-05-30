@@ -1,7 +1,6 @@
 # Sea-ORM 深度解析
 
 > **Bloom 层级**: 理解
-
 > **版本**: Sea-ORM 1.x
 > **Rust 版本**: 1.96.0+
 > **难度**: 中级
@@ -13,7 +12,7 @@
 ---
 
 ## 📋 目录
->
+
 > **[来源: Rust Official Docs]**
 
 - [Sea-ORM 深度解析](#sea-orm-深度解析)
@@ -68,10 +67,10 @@ Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设
 | **关系支持** | 完整的一对多、多对多关系 |
 
 ### 适用场景
->
+
 > **[来源: Rust Official Docs]**
 
-```
+```text
 Sea-ORM 适用场景:
 ├── ✅ 异步 Web 应用 (Axum/Actix/Rocket)
 ├── ✅ 微服务架构

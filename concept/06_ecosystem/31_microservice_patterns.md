@@ -1,6 +1,6 @@
 # 微服务架构模式 (Microservice Architecture Patterns)
+>
 > **受众**: [进阶]
-
 
 > **Bloom 层级**: 应用 → 创造
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure

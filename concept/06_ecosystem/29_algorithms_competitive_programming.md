@@ -1,6 +1,6 @@
 # 算法与竞赛编程 (Algorithms & Competitive Programming)
+>
 > **受众**: [进阶]
-
 
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S** — ApplicationStructure

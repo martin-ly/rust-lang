@@ -12,9 +12,6 @@ repository = "https://github.com/rust-lang/rust-lang-learning"
 
 [dependencies]
 common = { workspace = true, features = ["serde", "error-trait", "async"] }
-tokio = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
 thiserror = { workspace = true }
 wasm-bindgen = { workspace = true }
 js-sys = { workspace = true }

@@ -1,6 +1,6 @@
 # 系统可组合性 (System Composability)
+>
 > **受众**: [进阶]
-
 
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **S+P** — StructureProcedure

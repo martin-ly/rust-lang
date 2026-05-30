@@ -1,6 +1,6 @@
 # 事件驱动架构 (Event-Driven Architecture)
+>
 > **受众**: [进阶]
-
 
 > **Bloom 层级**: 应用 → 创造
 > **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure

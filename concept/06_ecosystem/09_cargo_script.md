@@ -1,7 +1,7 @@
 # Cargo Script：单文件 Rust 程序
+>
 > **受众**: [进阶]
 > **内容分级**: [综述级]
-
 
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **A** — Application

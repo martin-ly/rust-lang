@@ -33,7 +33,7 @@ mod tests {
         let main_first = tls_increment();
         assert_eq!(main_first, 1);
 
-        let handle = thread::spawn(|| tls_increment());
+        let handle = thread::spawn(tls_increment);
         let other = handle.join().expect("线程应成功完成");
         assert_eq!(other, 1);
 

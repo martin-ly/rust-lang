@@ -1,6 +1,6 @@
 # Lifetimes（生命周期）
+>
 > **受众**: [初学者]
-
 
 > **层级**: L1 基础概念
 > **A/S/P 标记**: **S+A** — Structure + Application
@@ -76,6 +76,8 @@
   - [九、认知路径（Cognitive Path）](#九认知路径cognitive-path)
     - [10.5 边界测试：生命周期省略规则的三条规则（编译错误）](#105-边界测试生命周期省略规则的三条规则编译错误)
     - [10.6 边界测试：静态生命周期 `'static` 的滥用与字符串字面量（编译错误）](#106-边界测试静态生命周期-static-的滥用与字符串字面量编译错误)
+  - [嵌入式测验](#嵌入式测验)
+  - [实践](#实践)
   - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
@@ -943,9 +945,11 @@ fn longest(x: &str, y: &str) -> &str {
 ```
 
 **答案**：需要显式生命周期标注，因为返回的引用可能是 `x` 或 `y`，编译器无法推断：
+
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { ... }
 ```
+
 表示返回的引用与 `x` 和 `y` 中**较短的生命周期**相同。
 </details>
 
@@ -969,11 +973,13 @@ struct BorrowedString {
 ```
 
 **答案**：❌ 编译错误。结构体包含引用时，必须显式标注生命周期：
+
 ```rust
 struct BorrowedString<'a> {
     text: &'a str,
 }
 ```
+
 否则编译器不知道 `text` 引用的数据何时失效。
 </details>
 
@@ -990,9 +996,11 @@ fn get_greeting() -> &'static str {
 ```
 
 **答案**：
+
 - **A** → ❌ `&s` 指向局部变量，`s` 在函数返回后被 Drop，不能返回其引用。
 - **B** → ✅ 字符串字面量 `"hello"` 编译期嵌入二进制，生命周期为 `'static`。
 - **C** → ❌ `Box::new("hello")` 在堆上分配，返回后 Box 被 Drop，引用失效。除非使用 `Box::leak`。
+
 </details>
 
 <details>
