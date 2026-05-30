@@ -409,9 +409,9 @@ cargo build --timings -Zsection-timings
 
 本文档基于 Rust 1.93/1.92，最新版本请参见：
 
-- [Rust 1.94 完整发布说明
-- [Rust 1.94 采用指南
-- [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md)
+- Rust 1.94 完整发布说明（已归档）
+- Rust 1.94 采用指南（已归档）
+- Rust 1.93 vs 1.94 对比（已归档）
 
 **最后更新**: 2026-05-08 (添加 1.95+ 引用)
 ---

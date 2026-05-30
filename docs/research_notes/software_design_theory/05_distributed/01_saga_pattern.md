@@ -220,8 +220,8 @@ impl<S, E> SagaExecutor<S, E> {
 
 **相关阅读**:
 
-- [分布式概念族谱](../../formal_methods/10_distributed_concept_mindmap.md)
-- [分布式架构决策树](../../formal_methods/10_distributed_architecture_decision_tree.md)
+- [分布式概念族谱](../../10_distributed_concept_mindmap.md)
+- [分布式架构决策树](../../10_distributed_architecture_decision_tree.md)
 
 ---
 
@@ -258,7 +258,7 @@ impl<S, E> SagaExecutor<S, E> {
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---

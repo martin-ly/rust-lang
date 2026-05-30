@@ -8,8 +8,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Singleton 形式化分析](#singleton-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
+  - [📑 目录](#-目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Singleton 结构）](#def-11singleton-结构)
     - [Axiom S1（实例唯一性公理）](#axiom-s1实例唯一性公理)
@@ -37,14 +36,13 @@
   - [思维导图](#思维导图)
   - [与其他模式的关系图](#与其他模式的关系图)
   - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
@@ -57,50 +55,6 @@
 > **证明深度**: L3（完整证明）
 
 ---
-
-## 📊 目录 {#-目录}
->
-> **[来源: Rust Official Docs]**
-
-- [Singleton 形式化分析](#singleton-形式化分析)
-  - [📑 目录](#目录)
-  - [📊 目录 {#-目录}](#目录)
-  - [形式化定义](#形式化定义)
-    - [Def 1.1（Singleton 结构）](#def-11singleton-结构)
-    - [Axiom S1（实例唯一性公理）](#axiom-s1实例唯一性公理)
-    - [Axiom S2（惰性初始化公理）](#axiom-s2惰性初始化公理)
-    - [Axiom S3（线程安全公理）](#axiom-s3线程安全公理)
-    - [定理 S-T1（OnceLock 线程安全定理）](#定理-s-t1oncelock-线程安全定理)
-    - [定理 S-T2（全局可变单例安全性定理）](#定理-s-t2全局可变单例安全性定理)
-    - [引理 S-L1（OnceLock 单次执行引理）](#引理-s-l1oncelock-单次执行引理)
-    - [推论 S-C1（纯 Safe Singleton）](#推论-s-c1纯-safe-singleton)
-    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
-  - [Rust 实现与代码示例](#rust-实现与代码示例)
-    - [方式一：OnceLock（纯 Safe，推荐）](#方式一oncelock纯-safe推荐)
-    - [方式二：LazyLock（纯 Safe）](#方式二lazylock纯-safe)
-    - [方式三：带内部可变（Safe）](#方式三带内部可变safe)
-  - [完整证明](#完整证明)
-    - [形式化论证链](#形式化论证链)
-    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
-    - [内存安全保证](#内存安全保证)
-  - [典型场景](#典型场景)
-  - [相关模式](#相关模式)
-  - [实现变体](#实现变体)
-  - [反例](#反例)
-  - [边界](#边界)
-  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
-  - [思维导图](#思维导图)
-  - [与其他模式的关系图](#与其他模式的关系图)
-  - [实质内容五维自检](#实质内容五维自检)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
-    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-      - [核心特性应用](#核心特性应用)
-      - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
-  - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
-  - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -557,7 +511,7 @@ graph LR
 > **[来源: Wikipedia - Asynchronous I/O]**
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../../../../05_guides/05_performance_tuning_guide.md)
 
 ---
@@ -611,108 +565,3 @@ graph LR
 > **[来源: ACM - Systems Programming Languages]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Iris Project](https://iris-project.org/)]**
->
-> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
->
-> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

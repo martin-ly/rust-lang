@@ -234,7 +234,7 @@ impl<E, S> ProjectionSync<E, S> {
 **相关阅读**:
 
 - [CQRS 模式 - Microsoft Docs](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
-- [分布式概念族谱](../../formal_methods/10_distributed_concept_mindmap.md)
+- [分布式概念族谱](../../10_distributed_concept_mindmap.md)
 
 ---
 
@@ -273,7 +273,7 @@ impl<E, S> ProjectionSync<E, S> {
 #### 相关文档
 
 - Rust 1.94 迁移指南
-- [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [Rust 1.94 特性速查
 - [性能调优指南](../../../05_guides/05_performance_tuning_guide.md)
 
 ---

@@ -112,7 +112,7 @@
 | 文档 | 路径 |
 | :--- | :--- | :--- | :--- | :--- |
 | 1.93 vs 1.92 | 05_rust_1.93_vs_1.92_comparison.md |
-| 1.93.1 vs 1.93.0 | [12_rust_1.93.1_vs_1.93.0_comparison.md](./12_rust_1.93.1_vs_1.93.0_comparison.md) |
+| 1.93.1 vs 1.93.0 | [12_rust_1.93.1_vs_1.93.0_comparison.md |
 | 1.93 兼容性深度 | 09_rust_1.93_compatibility_deep_dive.md |
 | 1.93 完整变更 | 07_rust_1.93_full_changelog.md |
 | 发布追踪清单 | ../07_project/RUST_RELEASE_TRACKING_CHECKLIST.md |

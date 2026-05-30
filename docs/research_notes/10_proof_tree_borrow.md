@@ -14,25 +14,24 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [借用证明树 (Proof Tree: Borrowing)](#借用证明树-proof-tree-borrowing)
-  - [📑 目录](#目录)
-  - [🌳 定理陈述](#定理陈述)
-  - [🌿 证明树结构](#证明树结构)
-  - [📋 详细证明](#详细证明)
+  - [📑 目录](#-目录)
+  - [🌳 定理陈述](#-定理陈述)
+  - [🌿 证明树结构](#-证明树结构)
+  - [📋 详细证明](#-详细证明)
     - [Lemma 1: 读取不修改](#lemma-1-读取不修改)
     - [Lemma 2: 独占访问](#lemma-2-独占访问)
     - [Lemma 3: 悬垂引用预防](#lemma-3-悬垂引用预防)
-  - [🎯 Rust 代码验证](#rust-代码验证)
-  - [📊 借用检查器算法](#借用检查器算法)
-  - [📊 证明复杂度](#证明复杂度)
-  - [🔗 相关证明](#相关证明)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🎯 Rust 代码验证](#-rust-代码验证)
+  - [📊 借用检查器算法](#-借用检查器算法)
+  - [📊 证明复杂度](#-证明复杂度)
+  - [🔗 相关证明](#-相关证明)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
-  - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引)
 
 ## 🌳 定理陈述
@@ -202,7 +201,7 @@ BorrowCheck(程序 P):
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [所有权证明树](./10_proof_tree_ownership.md)
-- [类型安全证明树](./formal_methods/10_proof_tree_type_safety.md)
+- [类型安全证明树](./10_proof_tree_type_safety.md)
 - 生命周期形式化
 
 ---
@@ -289,72 +288,3 @@ BorrowCheck(程序 P):
 > **[来源: Wikipedia - Memory Safety]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

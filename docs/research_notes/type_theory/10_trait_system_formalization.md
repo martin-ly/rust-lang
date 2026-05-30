@@ -504,7 +504,7 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 
 *证明思路*：（1）由 Axiom COH1，孤儿 impl 被拒绝；故 impl 仅来自本 crate 或 Trait/类型定义方。（2）由 Axiom COH2，重叠 impl 被拒绝；故对同一 $(\tau, T)$ 无两个 impl 同时适用。（3）由定义 4.3 唯一性，$\text{Resolve}(\tau, T)$ 若有解则唯一。综上，至多一个 impl。∎
 
-**推论 COH-C1**：若编译通过，则对任意 $(\tau, T)$ 恰好零个或一个 impl；不存在歧义。见 [00_completeness_gaps](./00_completeness_gaps.md)：孤儿规则放宽、negative impls 为扩展缺口。
+**推论 COH-C1**：若编译通过，则对任意 $(\tau, T)$ 恰好零个或一个 impl；不存在歧义。见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md)：孤儿规则放宽、negative impls 为扩展缺口。
 
 ---
 
@@ -553,7 +553,7 @@ RFC 1023。形式化：$\text{Fundamental}(\tau) \rightarrow \text{OrphanRule}(\
 *证明思路*：async fn 脱糖为 `impl Future`；Send 由 Future 的 poll 状态与捕获的 `&self`/`&mut self` 决定；类型系统在 Trait 约束传播时检查。∎
 
 **推论 RPIT-C1**：RPITIT 与 dyn Trait 的交互：若 Trait 含 RPITIT 方法，则 `dyn T` 的对象安全需额外条件——返回的 `impl Trait` 在 vtable 中需可擦除；
-1.93 中 RPITIT 稳定化后，对象安全规则见 [00_completeness_gaps](./00_completeness_gaps.md) 对象安全缺口。
+1.93 中 RPITIT 稳定化后，对象安全规则见 [00_completeness_gaps](../formal_methods/00_completeness_gaps.md) 对象安全缺口。
 
 ---
 

@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Research Notes: 形式化方法主索引](#research-notes-形式化方法主索引)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [快速导航](#快速导航)
     - [核心形式化文档](#核心形式化文档)
     - [思维表征文档](#思维表征文档)
@@ -46,8 +46,8 @@
     - [贡献流程](#贡献流程)
   - [变更日志](#变更日志)
   - [附录：思维导图全貌](#附录思维导图全貌)
-  - [🆕 Rust 1.94 更新](#rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -55,7 +55,7 @@
   - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 快速导航
 >
@@ -83,11 +83,11 @@
 
 | 文档 | 类型 | 描述 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [PROOF_TECHNIQUES_MINDMAP](./formal_methods/10_proof_techniques_mindmap.md) | 导图 | 证明技术概念族 | 🆕 完整 |
-| [DISTRIBUTED_CONCEPT_MINDMAP](./formal_methods/10_distributed_concept_mindmap.md) | 导图 | 分布式模式概念族 | 🆕 完整 |
-| [WORKFLOW_CONCEPT_MINDMAP](./formal_methods/10_workflow_concept_mindmap.md) | 导图 | 工作流概念族 | 🆕 完整 |
-| [CONCEPT_AXIOM_THEOREM_MATRIX](./formal_methods/10_concept_axiom_theorem_matrix.md) | 矩阵 | 五维矩阵 | 🆕 完整 |
-| [VERIFICATION_TOOLS_MATRIX](./formal_methods/10_verification_tools_matrix.md) | 矩阵 | 验证工具对比 | 🆕 完整 |
+| [PROOF_TECHNIQUES_MINDMAP](./10_proof_techniques_mindmap.md) | 导图 | 证明技术概念族 | 🆕 完整 |
+| [DISTRIBUTED_CONCEPT_MINDMAP](./10_distributed_concept_mindmap.md) | 导图 | 分布式模式概念族 | 🆕 完整 |
+| [WORKFLOW_CONCEPT_MINDMAP](./10_workflow_concept_mindmap.md) | 导图 | 工作流概念族 | 🆕 完整 |
+| [CONCEPT_AXIOM_THEOREM_MATRIX](./10_concept_axiom_theorem_matrix.md) | 矩阵 | 五维矩阵 | 🆕 完整 |
+| [VERIFICATION_TOOLS_MATRIX](./10_verification_tools_matrix.md) | 矩阵 | 验证工具对比 | 🆕 完整 |
 | DESIGN_PATTERNS_BOUNDARY_MATRIX | 矩阵 | 设计模式边界 | 🆕 完整 |
 
 ### 决策树文档
@@ -98,7 +98,7 @@
 
 | 文档 | 描述 | 状态 |
 | :--- | :--- | :--- |
-| [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](./formal_methods/10_distributed_architecture_decision_tree.md) | 分布式架构选型 | 🆕 完整 |
+| [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](./10_distributed_architecture_decision_tree.md) | 分布式架构选型 | 🆕 完整 |
 | [ASYNC_RUNTIME_DECISION_TREE](./formal_methods/10_async_runtime_decision_tree.md) | 异步运行时选型 | 🆕 完整 |
 | [ERROR_HANDLING_DECISION_TREE](./formal_methods/10_error_handling_decision_tree.md) | 错误处理策略 | 🆕 完整 |
 | [TESTING_STRATEGY_DECISION_TREE](./formal_methods/10_testing_strategy_decision_tree.md) | 测试策略 | 🆕 完整 |
@@ -111,7 +111,7 @@
 
 | 文档 | 描述 | 状态 |
 | :--- | :--- | :--- |
-| [APPLICATION_TREES](./formal_methods/10_application_trees.md) | 8大应用场景映射树 | 🆕 完整 |
+| [APPLICATION_TREES](./10_application_trees.md) | 8大应用场景映射树 | 🆕 完整 |
 
 ---
 

@@ -483,14 +483,12 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.93 兼容性深度解析](./06_09_rust_1_93_compatibility_deep_dive.md) 🆕
 - [Rust 1.89→1.93 累积特性总览](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md)（已归档）
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](./06_11_rust_1_93_cargo_rustdoc_changes.md) 🆕
-- [Rust 1.93.1 vs 1.93.0 补丁版本对比](../archive/2026_05_historical_docs/12_rust_1.93.1_vs_1.93.0_comparison.md)（已归档）
 - [Rust 1.93 语言特性全面分析（92 项设计论证）](../research_notes/10_rust_193_language_features_comprehensive_analysis.md) 🆕
-- [Rust 1.94 完整发布说明 🆕
+
 - [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md) 🆕
-- [Rust 1.94 采用指南 🆕
-- Rust 1.95+ 迁移指南 🆕
+
 - [Rust 1.94 研究笔记](../research_notes/10_rust_194_research_update.md) 🆕
-- [Rust 1.94 速查卡（已归档）
+
 - [Cranelift 后端指南](./06_cranelift_backend_guide.md) ⭐ (Rust 1.96+)
 - [TOML v1.1 Cargo 指南](./06_toml_v11_cargo_guide.md) ⭐ (Cargo 1.96+)
 

@@ -18,7 +18,7 @@
 | 1.91 | 2025-10 | aarch64-pc-windows-msvc Tier 1、dangling_pointers_from_locals lint |
 | 1.92 | 2025-12 | Never 类型 Lint 严格化、musl 预告、标准库 API |
 | 1.93.0 | 2026-01 | musl 1.2.5、全局分配器 TLS、asm_cfg、大量 API 稳定化、兼容性变更 |
-| **1.93.1** | **2026-02** | **补丁**：ICE 修复、Clippy panicking_unwrap 误报、wasm32-wasip2 FD 泄漏；见 [12_rust_1.93.1_vs_1.93.0](./12_rust_1.93.1_vs_1.93.0_comparison.md) |
+| **1.93.1** | **2026-02** | **补丁**：ICE 修复、Clippy panicking_unwrap 误报、wasm32-wasip2 FD 泄漏；见 [12_rust_1.93.1_vs_1.93.0 |
 
 ---
 
@@ -89,7 +89,7 @@
 - **Clippy**：`panicking_unwrap` 在隐式 Deref 场景下的误报修复
 - **wasm32-wasip2**：回退 wasm 依赖，修复文件描述符泄漏
 
-**参考**：[12_rust_1.93.1_vs_1.93.0_comparison.md](./12_rust_1.93.1_vs_1.93.0_comparison.md)、[Rust 1.93.1 官方公告](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)
+**参考**：[12_rust_1.93.1_vs_1.93.0_comparison.md、[Rust 1.93.1 官方公告](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/)
 
 ---
 

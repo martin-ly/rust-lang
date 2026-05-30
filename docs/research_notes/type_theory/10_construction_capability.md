@@ -106,7 +106,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-以下 Rust 1.93 新增或变更的特性影响类型构造能力；详见 [07_rust_1.93_full_changelog](../../06_toolchain/06_07_rust_1_93_full_changelog.md)、[00_completeness_gaps](./00_completeness_gaps.md)。
+以下 Rust 1.93 新增或变更的特性影响类型构造能力；详见 [07_rust_1.93_full_changelog](../../06_toolchain/06_07_rust_1_93_full_changelog.md)、[00_completeness_gaps](../formal_methods/00_completeness_gaps.md)。
 
 | 特性 | 构造方式 | 确定性 | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -124,7 +124,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-[00_completeness_gaps](./00_completeness_gaps.md) 中 ⚠️ 部分缺口可能影响类型构造路径；本表标注其对 TCON 的影响。
+[00_completeness_gaps](../formal_methods/00_completeness_gaps.md) 中 ⚠️ 部分缺口可能影响类型构造路径；本表标注其对 TCON 的影响。
 
 | 缺口 | 影响构造路径 | 说明 |
 | :--- | :--- | :--- |
@@ -207,7 +207,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 | [trait_system_formalization](./10_trait_system_formalization.md) | impl Trait、dyn Trait、关联类型、GAT；coherence、对象安全 |
 | [advanced_types](./10_advanced_types.md) | GAT、const 泛型、impl Trait 捕获规则 |
 | [variance_theory](./10_variance_theory.md) | 型变影响子类型；某些构造路径受型变约束 |
-| [00_completeness_gaps](./00_completeness_gaps.md) | LUB coercion、Copy specialization 等 1.93 构造相关缺口 |
+| [00_completeness_gaps](../formal_methods/00_completeness_gaps.md) | LUB coercion、Copy specialization 等 1.93 构造相关缺口 |
 
 ---
 

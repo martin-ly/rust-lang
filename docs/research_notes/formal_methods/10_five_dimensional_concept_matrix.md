@@ -15,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [五维概念矩阵](#五维概念矩阵)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [维度一：所有权维度 (Ownership)](#维度一所有权维度-ownership)
     - [所有权状态转移](#所有权状态转移)
@@ -40,7 +40,7 @@
   - [定理-证明映射](#定理-证明映射)
   - [反例汇编](#反例汇编)
   - [学习路径](#学习路径)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -48,7 +48,7 @@
   - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -310,7 +310,7 @@
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-- [CONCEPT_AXIOM_THEOREM_MATRIX](./10_concept_axiom_theorem_matrix.md) - 概念-公理-定理映射
+- [CONCEPT_AXIOM_THEOREM_MATRIX](../10_concept_axiom_theorem_matrix.md) - 概念-公理-定理映射
 - [PROOF_COMPLETION_MATRIX](./10_proof_completion_matrix.md) - 证明完成度矩阵
 - [type_system_foundations](../type_theory/10_type_system_foundations.md) - 类型系统基础
 - [ownership_model](./10_ownership_model.md) - 所有权模型

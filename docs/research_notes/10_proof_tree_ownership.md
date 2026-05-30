@@ -14,19 +14,19 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [所有权证明树 (Proof Tree: Ownership)](#所有权证明树-proof-tree-ownership)
-  - [📑 目录](#目录)
-  - [🌳 定理陈述](#定理陈述)
-  - [🌿 证明树结构](#证明树结构)
-  - [📋 详细证明](#详细证明)
+  - [📑 目录](#-目录)
+  - [🌳 定理陈述](#-定理陈述)
+  - [🌿 证明树结构](#-证明树结构)
+  - [📋 详细证明](#-详细证明)
     - [基础情形 (Base Case)](#基础情形-base-case)
     - [归纳步骤 (Inductive Step)](#归纳步骤-inductive-step)
-  - [🔍 关键引理](#关键引理)
+  - [🔍 关键引理](#-关键引理)
     - [Lemma 1: 移动后原所有者不可用](#lemma-1-移动后原所有者不可用)
     - [Lemma 2: 借用不转移所有权](#lemma-2-借用不转移所有权)
-  - [🎯 Rust 代码验证](#rust-代码验证)
-  - [📊 证明复杂度](#证明复杂度)
-  - [🔗 相关证明](#相关证明)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🎯 Rust 代码验证](#-rust-代码验证)
+  - [📊 证明复杂度](#-证明复杂度)
+  - [🔗 相关证明](#-相关证明)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -34,7 +34,7 @@
   - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🌳 定理陈述
 >
@@ -195,7 +195,7 @@ fn ownership_uniqueness_theorem() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [借用证明树](./10_proof_tree_borrow.md)
-- [类型安全证明树](./formal_methods/10_proof_tree_type_safety.md)
+- [类型安全证明树](./10_proof_tree_type_safety.md)
 - [核心定理完整证明](./10_core_theorems_full_proofs.md)
 
 ---

@@ -16,7 +16,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 版本增量更新流程](#rust-版本增量更新流程)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [触发条件](#触发条件)
   - [增量更新步骤](#增量更新步骤)
     - [1. 收集变更](#1-收集变更)
@@ -36,16 +36,16 @@
     - [更新记录文档](#更新记录文档)
     - [形式化证明文档](#形式化证明文档)
     - [研究笔记索引](#研究笔记索引)
-  - [🆕 Rust 1.94 更新](#rust-194-更新)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
-      - [相关文档](#相关文档)
+      - [相关文档](#相关文档-1)
   - **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 触发条件
 >
@@ -250,7 +250,7 @@ fn api_stabilization_example() {
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
 | formal_methods/00_completeness_gaps | 形式化缺口 | [formal_methods/00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md) |
-| type_theory/00_completeness_gaps | 类型理论缺口 | [type_theory/00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) |
+| type_theory/00_completeness_gaps | 类型理论缺口 | [formal_methods/00_completeness_gaps.md](./formal_methods/00_completeness_gaps.md) |
 
 ### 更新记录文档
 >

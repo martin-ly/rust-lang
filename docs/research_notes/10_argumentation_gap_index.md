@@ -8,14 +8,14 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [论证缺口与设计理由综合索引](#论证缺口与设计理由综合索引)
-  - [📑 目录](#目录)
-  - [🎯 索引宗旨 {#-索引宗旨}](#索引宗旨)
-  - [📐 四维缺口分类 {#-四维缺口分类}](#四维缺口分类)
-  - [📊 论证缺口追踪矩阵 {#-论证缺口追踪矩阵}](#论证缺口追踪矩阵)
-  - [📊 设计理由缺口追踪矩阵 {#-设计理由缺口追踪矩阵}](#设计理由缺口追踪矩阵)
-  - [🗺️ 思维表征覆盖矩阵 {#️-思维表征覆盖矩阵}](#思维表征覆盖矩阵)
-  - [📚 文档导航 {#-文档导航}](#文档导航)
-  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [📑 目录](#-目录)
+  - [🎯 索引宗旨 {#-索引宗旨}](#-索引宗旨--索引宗旨)
+  - [📐 四维缺口分类 {#-四维缺口分类}](#-四维缺口分类--四维缺口分类)
+  - [📊 论证缺口追踪矩阵 {#-论证缺口追踪矩阵}](#-论证缺口追踪矩阵--论证缺口追踪矩阵)
+  - [📊 设计理由缺口追踪矩阵 {#-设计理由缺口追踪矩阵}](#-设计理由缺口追踪矩阵--设计理由缺口追踪矩阵)
+  - 🗺️ 思维表征覆盖矩阵
+  - [📚 文档导航 {#-文档导航}](#-文档导航--文档导航)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
@@ -83,7 +83,7 @@
 | **formal_methods（整体）** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **100% 完成** |
 | **02_workflow 语义边界** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 好 |
 
-*type_theory（整体）*：各子文档有 Def/Theorem；阶段 1–7 已补全；高/中优先级缺口已补全，见 [type_theory/00_completeness_gaps](type_theory/00_completeness_gaps.md)。
+*type_theory（整体）*：各子文档有 Def/Theorem；阶段 1–7 已补全；高/中优先级缺口已补全，见 [type_theory/00_completeness_gaps](formal_methods/00_completeness_gaps.md)。
 
 *formal_methods（整体）*：✅ 100% 完成；Phase 1–6 全部补全；含 RC/ARC/CELL/REFCELL/BOX、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY、DROP/DEREF/REPR/CONST_MUT_STATIC、SPAWN；见 [formal_methods/00_completeness_gaps](formal_methods/00_completeness_gaps.md)。
 

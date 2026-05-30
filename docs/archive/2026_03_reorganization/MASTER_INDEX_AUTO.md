@@ -597,12 +597,12 @@ coq-formalization/
 - crates/c04_generic/docs/00_MASTER_INDEX.md: "泛型基础指南..."
 - ... and 32 more
 
-**docs/research_notes/type_theory/00_completeness_gaps.md** (referenced 37 times)
+**docs/research_notes/formal_methods/00_completeness_gaps.md** (referenced 37 times)
 
 - docs/02_reference/quick_reference/generics_cheatsheet.md: "类型系统完备性缺口..."
 - docs/02_reference/quick_reference/modules_cheatsheet.md: "类型系统完备性缺口..."
 - docs/02_reference/quick_reference/type_system.md: "类型理论完备性缺口..."
-- docs/archive/process_reports/2026_02/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md: "type_theory/00_completeness_gaps.md..."
+- docs/archive/process_reports/2026_02/FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md: "formal_methods/00_completeness_gaps.md..."
 - docs/research_notes/ARGUMENTATION_GAP_INDEX.md: "type_theory/00_completeness_gaps..."
 - ... and 32 more
 

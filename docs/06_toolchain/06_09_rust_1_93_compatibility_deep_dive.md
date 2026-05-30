@@ -18,7 +18,7 @@
 - **Clippy 误报**：`panicking_unwrap` 在 Deref 链上误报 → 已修复
 - **wasm32-wasip2**：文件描述符泄漏 → 已修复
 
-详见 [12_rust_1.93.1_vs_1.93.0_comparison](../archive/2026_05_historical_docs/12_rust_1.93.1_vs_1.93.0_comparison.md)。
+详见 [12_rust_1.93.1_vs_1.93.0_comparison]。
 
 ---
 
