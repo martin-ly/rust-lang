@@ -26,7 +26,7 @@
     - [const\_item\_interior\_mutations lint（warn-by-default）](#const_item_interior_mutations-lintwarn-by-default)
     - [function\_casts\_as\_integer lint（warn-by-default）](#function_casts_as_integer-lintwarn-by-default)
   - [编译器](#编译器)
-    - [-C jump-tables=bool 稳定化](#-c-jump-tablesbool-稳定化)
+    - [-C jump-tables=bool 稳定化](#c-jump-tablesbool-稳定化)
   - [平台支持](#平台支持)
     - [riscv64a23-unknown-linux-gnu Tier 2](#riscv64a23-unknown-linux-gnu-tier-2)
     - [musl 1.2.5](#musl-125)
@@ -52,7 +52,7 @@
     - [Ferrocene 规范引用](#ferrocene-规范引用)
   - [完整特性代码示例](#完整特性代码示例)
   - [Rust 1.95+ 更新](#rust-195-更新)
-  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+  - **状态**: ✅ 深度整合完成
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -123,7 +123,7 @@ extern "system" {
 
 **Rust 1.93** 稳定了 `asm_cfg`，允许在 `asm!` 的单个语句上使用 `cfg` 属性。
 
-详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md#3-cfg-属性在-asm-行上)
+详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md)
 
 **参考**: [PR #147736](https://github.com/rust-lang/rust/pull/147736)
 
@@ -247,7 +247,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md#2-全局分配器线程本地存储支持)
+详见 [06_05_rust_1_93_vs_1_92_comparison.md](./06_05_rust_1_93_vs_1_92_comparison.md)
 
 ---
 

@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [度量与测量指南](#度量与测量指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [1. 代码质量度量](#1-代码质量度量)
     - [1.1 代码复杂度](#11-代码复杂度)
@@ -34,7 +34,6 @@
   - [8. 度量工具](#8-度量工具)
     - [8.1 自动收集](#81-自动收集)
     - [8.2 可视化](#82-可视化)
-  - [*度量是改进的基础，建议定期回顾和调整。*](#度量是改进的基础建议定期回顾和调整)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -87,7 +86,7 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```
+```text
 度量指标:
 ├── 物理行数 (LOC)
 │   ├── 定义: 包含代码的行数
@@ -192,7 +191,7 @@ mod coverage {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```
+```text
 严重程度:
 ├── 致命: 系统崩溃/安全违规
 ├── 严重: 主要功能失效
@@ -229,7 +228,7 @@ mod coverage {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```
+```text
 周期时间:
 ├── 需求到设计: 2-4周
 ├── 设计到编码: 4-8周
@@ -265,7 +264,7 @@ mod coverage {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```
+```text
 验证度量:
 ├── 验证属性数
 │   ├── 目标: 核心函数100%
@@ -305,7 +304,7 @@ mod coverage {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```
+```text
 流水线指标:
 ├── 构建成功率: > 95%
 ├── 测试通过率: 100%
@@ -408,7 +407,7 @@ mod coverage {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```
+```text
 推荐工具:
 ├── Grafana: 时序数据
 ├── Prometheus: 度量收集
@@ -425,6 +424,7 @@ mod coverage {
 ---
 
 *度量是改进的基础，建议定期回顾和调整。*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -453,13 +453,9 @@ mod coverage {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Software Metric]**
-
 > **[来源: Wikipedia - Code Quality]**
-
 > **[来源: ACM - Software Measurement]**
-
 > **[来源: IEEE - Software Engineering Metrics]**
-
 > **[来源: ISO/IEC 25010 - System and Software Quality]**
 
 ---

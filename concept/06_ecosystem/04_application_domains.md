@@ -1328,7 +1328,7 @@ graph TD
 - **L6 工具链**: Cargo Script 不是语言特性，而是**包管理系统的语法压缩**。但它改变了 Rust 的**最小可运行单元**——从"crate + Cargo.toml"压缩为"单文件"。
 - **L4 形式化**: 单文件脚本的形式化语义等价于一个**匿名 crate**——文件即模块，frontmatter 即 `Cargo.toml` 的语法糖。这对形式化验证工具的影响是：验证目标从"crate 级"变为"文件级"，粒度更细。
 
-**关键限制**: Cargo Script 的 frontmatter 语法（`cargo +nightly -Zscript`）仍在 FCP 阶段。预计 1.96+ 稳定。
+**关键限制**: Cargo Script 的 frontmatter 语法（`cargo +nightly -Zscript`）仍在 nightly 中稳定化进程中，尚未进入 stable。
 
 > **[来源: Cargo RFC]** Cargo Script / Frontmatter FCP 已通过。
 

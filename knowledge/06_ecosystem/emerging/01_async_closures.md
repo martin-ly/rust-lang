@@ -6,7 +6,7 @@
 
 > **特性**: `async_closure`
 > **状态**: 🧪 不稳定 (Unstable)
-> **预计稳定**: Rust 1.96+
+> **预计稳定**: TBD (nightly-only，稳定时间未定)
 > **跟踪 Issue**: [#62290](https://github.com/rust-lang/rust/issues/62290)
 > **权威来源**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures)
 >

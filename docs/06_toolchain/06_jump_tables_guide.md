@@ -8,7 +8,7 @@
 
 ## 目录
 
-- [`-C jump-tables=bool` 编译器优化指南](#-c-jump-tablesbool-编译器优化指南)
+- [`-C jump-tables=bool` 编译器优化指南](#c-jump-tablesbool-编译器优化指南)
   - [目录](#目录)
   - [一、什么是跳转表 (Jump Tables)](#一什么是跳转表-jump-tables)
     - [工作原理](#工作原理)

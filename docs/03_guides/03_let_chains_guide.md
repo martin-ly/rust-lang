@@ -11,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Let Chains 全面指南](#let-chains-全面指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [一、核心语法](#一核心语法)
     - [1.1 if let chains](#11-if-let-chains)

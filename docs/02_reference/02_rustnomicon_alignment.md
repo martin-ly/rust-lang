@@ -9,7 +9,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [The Rustonomicon 内容对齐](#the-rustonomicon-内容对齐)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [已覆盖内容](#已覆盖内容)
   - [新增补齐内容](#新增补齐内容)
     - [c01: 布局保证 (align, size)](#c01-布局保证-align-size)

@@ -53,17 +53,20 @@
 
 ---
 
-## 🔮 Rust 1.96 预览特性索引
+## ✅ Rust 1.96 稳定特性索引
 >
 > **[来源: Rust Official Docs]**
+> Rust 1.96.0 已于 2026-05-28 发布。
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| `VecDeque::truncate_front` | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/05_rust_1_96_preview.md) | 🧪 Beta |
-| `int_format_into` | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/05_rust_1_96_preview.md) | 🧪 Beta |
-| `RefCell::try_map` | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/05_rust_1_96_preview.md) | 🧪 Beta |
-| `cargo script` / frontmatter | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/05_rust_1_96_preview.md) | 🧪 Beta |
-| 新 Range 类型 (RFC 3550) | [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/05_rust_1_96_preview.md) | 🧪 Beta |
+| `assert_matches!` / `debug_assert_matches!` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
+| `core::range::{Range, RangeFrom, RangeToInclusive}` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
+| `From<T>` for `LazyLock` / `LazyCell` / `AssertUnwindSafe` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
+| `NonZero*` 范围迭代 (`Step` trait) | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
+| `expr` metavariable to `cfg` | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
+| `ManuallyDrop` 常量模式 | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
+| Never 类型 tuple coercion | [06_ecosystem/emerging/05_rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md) | ✅ Stable |
 
 ---
 
@@ -165,7 +168,7 @@
 - **Rc/Arc** - [02_intermediate/smart_pointers.md](02_intermediate/04_smart_pointers.md)
 - **Result/Option** - [02_intermediate/error_handling.md](02_intermediate/02_error_handling.md)
 - **Rust 1.95** - [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md)
-- **Rust 1.96 preview** - [06_ecosystem/emerging/rust_1_96_preview.md](06_ecosystem/emerging/05_rust_1_96_preview.md)
+- **Rust 1.96** - [06_ecosystem/emerging/rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md)
 - **Rust philosophy** - [00_start/04_rust_philosophy.md](00_start/04_rust_philosophy.md)
 - **RwLock** - [03_advanced/concurrency/synchronization.md](03_advanced/concurrency/02_synchronization.md)
 

@@ -11,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Async Closures 深度指南](#async-closures-深度指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [一、历史背景：为什么需要 AsyncFn？](#一历史背景为什么需要-asyncfn)
     - [1.1 旧时代的困境](#11-旧时代的困境)

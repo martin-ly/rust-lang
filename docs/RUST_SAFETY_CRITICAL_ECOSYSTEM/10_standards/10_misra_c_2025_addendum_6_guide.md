@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [MISRA C:2025 Addendum 6 - Rust应用指南](#misra-c2025-addendum-6---rust应用指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [核心发现](#核心发现)
     - [规则映射统计](#规则映射统计)
@@ -34,7 +34,7 @@
     - [MISRA Rust标准](#misra-rust标准)
     - [参与机会](#参与机会)
   - [参考资源](#参考资源)
-  - [**基于**: MISRA C:2025 Addendum 6 (March 2025)](#基于-misra-c2025-addendum-6-march-2025)
+  - **基于**: MISRA C:2025 Addendum 6 (March 2025)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 

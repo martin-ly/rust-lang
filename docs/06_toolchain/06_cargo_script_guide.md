@@ -1,15 +1,14 @@
 # Cargo Script / Frontmatter 指南
 
 > **Bloom 层级**: L3 (应用)
-
-> **状态**: Frontmatter 已通过 FCP，预计 **Rust 1.96.0 (2026-05-28)** 稳定
+> **状态**: Frontmatter 仍在 nightly 中稳定化进程中，尚未进入 stable。当前可用方式：`cargo +nightly -Zscript`。
 > **RFC**: [Frontmatter Stabilization PR #148605](https://github.com/rust-lang/rust/pull/148605)
 > **最后更新**: 2026-05-08
 
 ---
 
 ## 目录
->
+
 > **[来源: Rust Official Docs]**
 
 - [Cargo Script / Frontmatter 指南](#cargo-script--frontmatter-指南)
@@ -246,7 +245,7 @@ fn main() {
 ```mermaid
 graph LR
     subgraph "脚本化 Rust 生态"
-        CS[Cargo Script<br/>1.96+ 预计稳定]
+        CS[Cargo Script<br/>nightly 稳定化中]
         CR[cargo-run<br/>已稳定]
         RS[rust-script<br/>第三方 crate]
         NB[runner<br/>Nightly feature]
@@ -324,7 +323,7 @@ fn main() {
 | 不支持 workspace | 单文件脚本不能是 workspace 成员 | 使用完整 Cargo 项目 |
 | 无 proc macro | 依赖 proc macro 的 crate 可能有限制 | 预编译或完整项目 |
 | 首次编译慢 | 依赖需要下载编译 | 使用 `CARGO_TARGET_DIR` 共享缓存 |
-| 仅 Nightly (当前) | 1.96 预计稳定 | 使用 `cargo +nightly` |
+| 仅 Nightly (当前) | 稳定时间未定 | 使用 `cargo +nightly` |
 
 ---
 

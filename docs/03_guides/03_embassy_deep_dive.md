@@ -10,7 +10,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Embassy 异步嵌入式框架深度指南](#embassy-异步嵌入式框架深度指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 引言](#1-引言)
   - [2. 裸机 async executor 架构](#2-裸机-async-executor-架构)
     - [2.1 单线程 Executor 设计](#21-单线程-executor-设计)

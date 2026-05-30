@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全审计指南](#安全审计指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [1. 审计框架](#1-审计框架)
     - [1.1 审计类型](#11-审计类型)
@@ -28,7 +28,6 @@
   - [6. 持续安全监控](#6-持续安全监控)
     - [6.1 CI集成](#61-ci集成)
     - [6.2 安全指标仪表板](#62-安全指标仪表板)
-  - [*安全是持续的过程，不是一次性的活动。*](#安全是持续的过程不是一次性的活动)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -50,7 +49,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 安全审计类型:
 
 代码审计:
@@ -78,7 +77,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 开发阶段审计:
 ├── 每日: 自动扫描
 ├── 每周: 依赖检查
@@ -450,7 +449,7 @@ impl IntrusionDetector {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```
+```text
 代码审计:
 □ unsafe代码审查
 □ 边界检查验证
@@ -560,6 +559,7 @@ impl SecurityMetrics {
 ---
 
 *安全是持续的过程，不是一次性的活动。*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -588,11 +588,8 @@ impl SecurityMetrics {
 ## 权威来源索引
 
 > **[来源: ISO 26262 - Functional Safety]**
-
 > **[来源: IEC 61508 - Safety Standards]**
-
 > **[来源: MISRA Rust Guidelines]**
-
 > **[来源: Ferrocene Language Specification]**
 
 ---

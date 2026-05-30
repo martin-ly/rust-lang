@@ -55,7 +55,7 @@
     - [8.4 泛型与借用](#84-泛型与借用)
     - [8.5 闭包与借用](#85-闭包与借用)
   - [总结](#总结)
-  - [*继续学习: lifetimes-mastery.md*](#继续学习-lifetimes-masterymd)
+  - *继续学习: lifetimes-mastery.md*
   - [权威来源索引](#权威来源索引)
 
 ---

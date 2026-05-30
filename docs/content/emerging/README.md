@@ -14,17 +14,17 @@
 > **[来源: Rust Official Docs]**
 
 - [Rust 前沿特性跟踪](#rust-前沿特性跟踪)
-  - [📋 目录](#-目录)
-  - [🎯 目标](#-目标)
-  - [📊 特性跟踪矩阵](#-特性跟踪矩阵)
-  - [🔬 正在开发的特性](#-正在开发的特性)
+  - [📋 目录](#目录)
+  - [🎯 目标](#目标)
+  - [📊 特性跟踪矩阵](#特性跟踪矩阵)
+  - [🔬 正在开发的特性](#正在开发的特性)
     - [Generic Const Expressions (generic\_const\_exprs)](#generic-const-expressions-generic_const_exprs)
     - [Async Closures](#async-closures)
     - [Impl Trait in Associated Type](#impl-trait-in-associated-type)
     - [Type Alias Impl Trait (TAIT)](#type-alias-impl-trait-tait)
-  - [📈 版本路线图](#-版本路线图)
-  - [🔗 参考资源](#-参考资源)
-  - [**状态**: 🔄 持续跟踪更新](#状态--持续跟踪更新)
+  - [📈 版本路线图](#版本路线图)
+  - [🔗 参考资源](#参考资源)
+  - **状态**: 🔄 持续跟踪更新
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -283,7 +283,7 @@ timeline
 
 - [Async Closures](./10_async_closures.md)
 - [Generic Const Exprs](./10_generic_const_exprs.md)
-- [Rust 1.95 Preview](./10_rust_1_95_preview.md)
+- [Rust 1.95 稳定特性](./10_rust_1_95_preview.md)
 
 ---
 

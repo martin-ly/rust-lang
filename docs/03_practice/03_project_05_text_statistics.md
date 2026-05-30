@@ -13,13 +13,13 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 05: 文本统计工具](#实践项目-05-文本统计工具)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
     - [迭代器处理](#迭代器处理)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/text-statistics/`](#完整参考实现位于-examplestext-statistics)
+  - 完整参考实现位于: `examples/text-statistics/`
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 

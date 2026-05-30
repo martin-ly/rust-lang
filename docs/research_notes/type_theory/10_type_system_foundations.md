@@ -7,7 +7,6 @@
 > **后置延伸**: [ROD 形式语义](../../rust-ownership-decidability/formal-foundations/) · [concept L7 效果系统](../../../concept/07_future/04_effects_system.md)
 > **跨层映射**: L4 System F ↔ Rust 泛型 | 研究笔记扩展
 > **定理链编号**: T-130 类型一致性 → T-131 子类型 soundness
-
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-03-11
 > **更新内容**:
@@ -29,11 +28,11 @@
 > **[来源: Rust Reference - Type System]**
 >
 - [类型系统基础](#类型系统基础)
-  - [📑 目录](#-目录)
-  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+  - [📑 目录](#目录)
+  - [🎯 研究目标 {#-研究目标}](#研究目标)
     - [核心问题](#核心问题)
     - [预期成果](#预期成果)
-  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [📚 理论基础 {#-理论基础}](#理论基础)
     - [类型系统核心概念](#类型系统核心概念)
     - [相关概念](#相关概念)
     - [相关理论](#相关理论)
@@ -47,7 +46,7 @@
     - [类型理论的基础知识](#类型理论的基础知识)
     - [类型推导的理论基础](#类型推导的理论基础)
     - [类型安全的理论基础](#类型安全的理论基础)
-      - [Stanford CS242 形式化定义 (Lecture 6-10) {#-形式化定义}](#stanford-cs242-形式化定义-lecture-6-10--形式化定义)
+      - [Stanford CS242 形式化定义 (Lecture 6-10) {#-形式化定义}](#stanford-cs242-形式化定义-lecture-6-10)
       - [原有形式化定义](#原有形式化定义)
     - [相关学术论文的详细分析](#相关学术论文的详细分析)
       - [1. Types and Programming Languages (TAPL)](#1-types-and-programming-languages-tapl)
@@ -57,7 +56,7 @@
     - [University of Cambridge (剑桥大学)](#university-of-cambridge-剑桥大学)
     - [EPFL (瑞士洛桑联邦理工学院)](#epfl-瑞士洛桑联邦理工学院)
     - [欧洲大学课程对比总结](#欧洲大学课程对比总结)
-  - [🔬 形式化定义](#-形式化定义)
+  - [🔬 形式化定义](#形式化定义)
     - [1. 类型环境与类型判断](#1-类型环境与类型判断)
     - [2. 基本类型规则](#2-基本类型规则)
     - [3. 类型安全](#3-类型安全)
@@ -78,7 +77,7 @@
       - [5.6 类型推导示例](#56-类型推导示例)
       - [5.7 HM 算法的正确性](#57-hm-算法的正确性)
     - [6. 高级类型特性](#6-高级类型特性)
-  - [⚠️ 反例：类型错误与类型推导失败 {#️-反例类型错误类型检查拒绝}](#️-反例类型错误与类型推导失败-️-反例类型错误类型检查拒绝)
+  - [⚠️ 反例：类型错误与类型推导失败 {#️-反例类型错误类型检查拒绝}](#反例类型错误与类型推导失败)
     - [反例概览](#反例概览)
     - [反例 1: 类型不匹配函数应用](#反例-1-类型不匹配函数应用)
     - [反例 2: 未绑定变量](#反例-2-未绑定变量)
@@ -89,11 +88,11 @@
     - [反例 7: 生命周期错误（类型系统扩展）](#反例-7-生命周期错误类型系统扩展)
     - [反例 8: Trait 解析失败](#反例-8-trait-解析失败)
     - [反例总结表](#反例总结表)
-  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
-  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
+  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#公理-定理证明树)
+  - [✅ 证明目标 {#-证明目标}](#证明目标)
     - [待证明的性质](#待证明的性质)
     - [证明方法](#证明方法)
-  - [💻 代码示例与实践 {#-代码示例与实践}](#-代码示例与实践--代码示例与实践)
+  - [💻 代码示例与实践 {#-代码示例与实践}](#代码示例与实践)
     - [示例 1: 基本类型](#示例-1-基本类型)
     - [示例 2: 函数类型](#示例-2-函数类型)
     - [示例 3: 泛型类型](#示例-3-泛型类型)
@@ -103,28 +102,28 @@
     - [示例 7: 泛型类型推导](#示例-7-泛型类型推导)
     - [示例 8: 类型错误检测](#示例-8-类型错误检测)
     - [示例 5: 类型推导与推断（原示例保留）](#示例-5-类型推导与推断原示例保留)
-  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [📖 参考文献 {#-参考文献}](#参考文献)
     - [Stanford CS242 课程参考](#stanford-cs242-课程参考)
     - [学术论文](#学术论文)
     - [官方文档](#官方文档)
     - [相关代码](#相关代码)
     - [工具资源](#工具资源)
-  - [🔄 研究进展 {#-研究进展}](#-研究进展--研究进展)
-    - [已完成 ✅ {#已完成-}](#已完成--已完成-)
+  - [🔄 研究进展 {#-研究进展}](#研究进展)
+    - [已完成 ✅ {#已完成-}](#已完成)
     - [进行中 🔄（已完成）](#进行中-已完成)
     - [计划中 📋（已完成）](#计划中-已完成)
-  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#系统集成与实际应用)
     - [与 Trait 系统的集成](#与-trait-系统的集成)
     - [与生命周期的集成](#与生命周期的集成)
     - [实际应用案例](#实际应用案例)
-  - [🆕 Rust 1.93.0 更新内容 {#-rust-1930-更新内容}](#-rust-1930-更新内容--rust-1930-更新内容)
+  - [🆕 Rust 1.93.0 更新内容 {#-rust-1930-更新内容}](#rust-1930-更新内容)
     - [MaybeUninit API 增强](#maybeuninit-api-增强)
     - [切片到数组转换](#切片到数组转换)
     - [const 上下文增强（Rust 1.91.1+）](#const-上下文增强rust-1911)
     - [类型系统改进](#类型系统改进)
     - [Rust 1.93.0 补充](#rust-1930-补充)
     - [低优先级扩展（形式化占位）](#低优先级扩展形式化占位)
-  - [🆕 Rust 1.94.0 更新内容 {#-rust-1940-更新内容}](#-rust-1940-更新内容--rust-1940-更新内容)
+  - [🆕 Rust 1.94.0 更新内容 {#-rust-1940-更新内容}](#rust-1940-更新内容)
     - [1. ControlFlow::ok() - 控制流与Option转换](#1-controlflowok---控制流与option转换)
     - [2. RangeToInclusive 类型](#2-rangetoinclusive-类型)
     - [3. int\_format\_into - 高性能整数格式化](#3-int_format_into---高性能整数格式化)
@@ -133,12 +132,11 @@
   - [形式化影响总结](#形式化影响总结)
   - [文档增强摘要](#文档增强摘要)
     - [本次更新内容](#本次更新内容)
-  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+  - [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
     - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [权威来源索引](#权威来源索引)
 
 ## 🎯 研究目标 {#-研究目标}
@@ -239,7 +237,6 @@
 > **[来源: POPL - Type Theory Advances]**
 >
 > **[来源: Rust Official Docs]**
-
 > **课程**: Stanford CS242: Programming Languages
 > **关键 Lecture**: Lecture 16-20 详细讲解 Curry-Howard 对应
 
@@ -1749,7 +1746,7 @@ $$C ::= \tau_1 = \tau_2 \mid C_1 \land C_2 \mid \top \mid \bot$$
 
 **算法定义**:
 
-```
+```text
 W(Γ, x) =
   if x:σ ∈ Γ where σ = ∀α₁...αₙ.τ
   then ([], τ[αᵢ := βᵢ])  (βᵢ 是新类型变量)
@@ -1795,7 +1792,7 @@ $$S = [\alpha_1 := \tau_1, ..., \alpha_n := \tau_n]$$
 
 **算法 unify**:
 
-```
+```text
 unify(τ, τ) = []
 
 unify(α, τ) =
@@ -1828,7 +1825,7 @@ unify(τ₁, τ₂) = fail (if constructors differ)
 
 生成描述表达式类型关系的约束集合。
 
-```
+```text
 C(Γ, x : τ) =
   if x:σ ∈ Γ
   then let τ' = inst(σ)
@@ -1857,7 +1854,7 @@ C(Γ, let x = e₁ in e₂ : τ) =
 
 **约束求解算法 (Algorithm Solve)**:
 
-```
+```text
 solve({}) = []
 
 solve({τ = τ} ∪ C) = solve(C)
@@ -2052,7 +2049,7 @@ $$\frac{\Gamma \vdash \text{add} : \text{Int} \times \text{Int} \to \text{Int} \
 
 **错误信息**:
 
-```
+```text
 error[E0308]: mismatched types
   --> src/main.rs:6:23
    |
@@ -2089,7 +2086,7 @@ $$\frac{y : \text{Int} \in \Gamma}{\Gamma \vdash y : \text{Int}}$$
 
 **错误信息**:
 
-```
+```text
 error[E0425]: cannot find value `y` in this scope
  --> src/main.rs:2:13
   |
@@ -2130,7 +2127,7 @@ where
 
 **错误信息**:
 
-```
+```text
 error[E0277]: the trait bound `F: FnOnce<(F,)>` is not satisfied
   --> src/main.rs:5:5
    |
@@ -2188,7 +2185,7 @@ fn lambda_poly() {
 
 在 HM 类型系统中，let 绑定的变量可以是多态的，但 Lambda 绑定的变量不能：
 
-```
+```text
 let id = λx. x in        // id : ∀α. α → α (多态)
   let a = id 5 in        // α = Int
     let b = id "hello"   // α = String，可以！
@@ -2330,7 +2327,7 @@ $$\&'a \tau \quad \text{(引用类型)}$$
 
 **错误信息**:
 
-```
+```text
 error[E0106]: missing lifetime specifier
 error[E0515]: cannot return reference to local variable `x`
 ```
@@ -2962,7 +2959,6 @@ $。
 ## 🆕 Rust 1.94.0 更新内容 {#-rust-1940-更新内容}
 
 > **[来源: POPL - Type Theory Advances]**
-
 > **发布日期**: 2026-03-05
 > **最后更新**: 2026-03-05
 > **状态**: ✅ 已整合
@@ -3269,7 +3265,6 @@ fn truncate_front(&mut self, len: usize)
 ## 🆕 Rust 1.94 深度整合更新
 
 > **[来源: Wikipedia - Type System]**
-
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -3312,6 +3307,7 @@ fn truncate_front(&mut self, len: usize)
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -3332,49 +3328,27 @@ fn truncate_front(&mut self, len: usize)
 ## 权威来源索引
 
 > **[来源: Wikipedia - Type Theory]**
-
 > **[来源: Wikipedia - Lambda Calculus]**
-
 > **[来源: Wikipedia - Type System]**
-
 > **[来源: Wikipedia - Hindley-Milner Type System]**
-
 > **[来源: IEEE - Advanced Type System Features]**
-
 > **[来源: ACM - Type Systems for Memory Safety]**
-
 > **[来源: POPL 2018 - RustBelt]**
-
 > **[来源: PLDI 2023 - Aeneas]**
-
 > **[来源: Pierce 2002 - Types and Programming Languages]**
-
 > **[来源: Rust Reference - Type System]**
-
 > **[来源: Wikipedia - Polymorphism]**
-
 > **[来源: Wikipedia - Subtyping]**
-
 > **[来源: Wikipedia - Type Inference]**
-
 > **[来源: Wikipedia - Dependent Type]**
-
 > **[来源: ACM - Type Soundness Proofs]**
-
 > **[来源: IEEE - Type Safety Standards]**
-
 > **[来源: POPL 2020 - Oxide]**
-
 > **[来源: POPL 2021 - Rust Verification Tools]**
-
 > **[来源: PLDI 2021 - Rust Verification]**
-
 > **[来源: Harper 2016 - Practical Foundations for Programming Languages]**
-
 > **[来源: Cardelli 1996 - Type Systems]**
-
 > **[来源: Girard 1989 - Proofs and Types]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**

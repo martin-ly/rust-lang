@@ -10,21 +10,21 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                    Rust安全关键系统培训体系                         │
+│                    Rust安全关键系统培训体系                           │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
-│  Level 1          Level 2          Level 3          Level 4        │
-│  基础 (2周)       进阶 (2周)       专业 (2周)       认证 (2周)      │
-│     │                │                │                │           │
-│     ▼                ▼                ▼                ▼           │
-│  ┌─────┐         ┌─────┐         ┌─────┐         ┌─────┐         │
-│  │语法 │    →    │系统 │    →    │安全 │    →    │认证 │         │
-│  │基础 │         │编程 │         │关键 │         │准备 │         │
-│  └─────┘         └─────┘         └─────┘         └─────┘         │
+│  Level 1          Level 2          Level 3          Level 4         │
+│  基础 (2周)       进阶 (2周)       专业 (2周)       认证 (2周)        │
+│     │                │                │                │            │
+│     ▼                ▼                ▼                ▼            │
+│  ┌─────┐         ┌─────┐         ┌─────┐         ┌─────┐            │
+│  │语法  │    →    │系统 │    →    │安全 │    →    │认证 │            │
+│  │基础  │         │编程 │         │关键 │         │准备 │            │
+│  └─────┘         └─────┘         └─────┘         └─────┘            │
 │                                                                     │
-│  目标:            目标:            目标:            目标:          │
-│  通过考试         独立开发         安全设计         认证通过        │
-│  (80%+)          嵌入式应用        ASIL B+系统      (FSC/FSE)      │
+│  目标:            目标:            目标:            目标:            │
+│  通过考试         独立开发         安全设计         认证通过           │
+│  (80%+)          嵌入式应用        ASIL B+系统      (FSC/FSE)        │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -498,6 +498,7 @@ cargo install kani-verifier verus
 **培训计划版本**: 1.0
 **最后更新**: 2026-03-18
 **维护者**: Rust安全关键系统培训团队
+
 ---
 
 **最后更新**: 2026-05-19
@@ -534,109 +535,3 @@ cargo install kani-verifier verus
 >
 
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
-> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

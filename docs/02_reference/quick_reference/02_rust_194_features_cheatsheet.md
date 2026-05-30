@@ -11,8 +11,8 @@
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.95+ 特性速查卡 / Rust 1.94 Features Cheatsheet](#rust-195-特性速查卡--rust-194-features-cheatsheet)
-  - [📋 目录](#-目录)
-  - [🎯 快速参考](#-快速参考)
+  - [📋 目录](#目录)
+  - [🎯 快速参考](#快速参考)
   - [1. Array Windows（数组窗口）](#1-array-windows数组窗口)
     - [基本用法](#基本用法)
     - [滑动窗口平均值](#滑动窗口平均值)
@@ -30,9 +30,9 @@
   - [5. char 到 usize 转换](#5-char-到-usize-转换)
     - [基本转换](#基本转换)
     - [应用场景](#应用场景)
-  - [🔧 完整示例](#-完整示例)
+  - [🔧 完整示例](#完整示例)
     - [综合示例：数据处理器](#综合示例数据处理器)
-  - [📚 相关资源](#-相关资源)
+  - [📚 相关资源](#相关资源)
   - [Rust 1.95+ 特性速查 - 完整版](#rust-195-特性速查---完整版)
     - [array\_windows](#array_windows)
     - [ControlFlow](#controlflow)

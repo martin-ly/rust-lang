@@ -108,11 +108,12 @@ impl WasmCoreRangeExamples {
     /// 数据段偏移范围检查
     pub fn data_segment_in_range(offset: usize, segment_size: usize, memory_limit: usize) -> bool {
         use core::range::Range;
+        let max_offset = memory_limit.saturating_sub(segment_size);
         let valid: Range<usize> = Range {
             start: 0,
-            end: memory_limit.saturating_sub(segment_size),
+            end: max_offset.saturating_add(1),
         };
-        valid.into_iter().any(|o| o == offset)
+        offset >= valid.start && offset < valid.end
     }
 }
 
@@ -262,7 +263,7 @@ mod tests {
 
     #[test]
     fn test_default_memory_limit() {
-        assert_eq!(*WasmLazyLockExamples::default_memory_limit(), 256);
+        assert_eq!(**WasmLazyLockExamples::default_memory_limit(), 256);
     }
 
     #[test]

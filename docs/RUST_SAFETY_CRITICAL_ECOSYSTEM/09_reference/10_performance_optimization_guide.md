@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [性能优化指南](#性能优化指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [1. 零成本抽象](#1-零成本抽象)
     - [1.1 泛型单态化](#11-泛型单态化)
@@ -31,7 +31,6 @@
     - [编译时优化](#编译时优化)
     - [代码优化](#代码优化)
     - [嵌入式优化](#嵌入式优化)
-  - [*性能优化应在保证安全性的前提下进行。*](#性能优化应在保证安全性的前提下进行)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -494,6 +493,7 @@ impl Drop for PerformanceCounter {
 ---
 
 *性能优化应在保证安全性的前提下进行。*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -522,13 +522,9 @@ impl Drop for PerformanceCounter {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Program Optimization]**
-
 > **[来源: Criterion.rs]**
-
 > **[来源: ACM - Performance Engineering]**
-
 > **[来源: Rust Performance Book]**
-
 > **[来源: ISO 26262 - Functional Safety]**
 > **[来源: IEC 61508 - Safety Standards]**
 > **[来源: MISRA Rust Guidelines]**

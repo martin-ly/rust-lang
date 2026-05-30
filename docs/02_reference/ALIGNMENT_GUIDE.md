@@ -22,7 +22,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 对齐知识综合指南](#rust-对齐知识综合指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [一、概念分类](#一概念分类)
   - [二、内存对齐（核心）](#二内存对齐核心)
     - [2.0 为何要对齐（Why Alignment Matters）](#20-为何要对齐why-alignment-matters)

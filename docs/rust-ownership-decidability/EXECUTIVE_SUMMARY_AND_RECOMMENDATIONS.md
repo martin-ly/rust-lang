@@ -1,7 +1,6 @@
 # 执行摘要与建议
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **审计日期**: 2026-03-07
 > **项目**: rust-ownership-decidability
 > **当前状态**: ~70% 完成
@@ -9,11 +8,11 @@
 ---
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
+
 - [执行摘要与建议](#执行摘要与建议)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [执行摘要](#执行摘要)
     - [优势 (Strengths)](#优势-strengths)
     - [劣势 (Weaknesses)](#劣势-weaknesses)
@@ -49,10 +48,8 @@
     - [本月里程碑](#本月里程碑)
     - [季度目标](#季度目标)
   - [结论](#结论)
-  - [*下次审查: 2026-03-14*](#下次审查-2026-03-14)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引-1)
 
 ## 执行摘要
 >
@@ -104,7 +101,7 @@
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 深度分布:
 ├── L3 (专著级): 15% - 形式化、并发、程序语义
 ├── L2 (深度级): 35% - 核心概念、案例研究
@@ -146,7 +143,7 @@
 
 #### 1. 立即创建 Unsafe Rust 专题 (最高优先级)
 
-```
+```text
 新建目录: 17-unsafe-rust/
 ├── README.md                 # 导航
 ├── 01-intro.md              # Unsafe 概述
@@ -184,7 +181,7 @@ CI/CD 检查项:
 
 #### 1. 扩展验证工具文档
 
-```
+```text
 03-verification-tools/ 扩展:
 ├── 03-03-miri-deep-dive.md
 ├── 03-04-kani-guide.md
@@ -194,7 +191,7 @@ CI/CD 检查项:
 
 #### 2. 添加对比研究
 
-```
+```text
 05-comparative-study/ 扩展:
 ├── 05-02-rust-vs-cpp.md
 ├── 05-03-rust-vs-go.md
@@ -222,7 +219,7 @@ CI/CD 检查项:
 
 #### 2. 建立可持续维护机制
 
-```
+```text
 维护周期:
 ├── 每周: 检查 Rust nightly 新特性
 ├── 每月: 更新稳定版特性
@@ -240,7 +237,7 @@ CI/CD 检查项:
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 需求识别 → 权威对齐 → 内容创建 → 形式化检查 → 代码验证 → 交叉引用 → 发布
     ↑___________________________________________________________↓
 ```
@@ -264,7 +261,7 @@ CI/CD 检查项:
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```
+```text
 docs/rust-ownership-decidability/
 ├── VERSION  # 标记文档版本
 ├── rust-toolchain  # 指定 Rust 版本
@@ -290,7 +287,7 @@ docs/rust-ownership-decidability/
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 rust-ownership-decidability/
 ├── 形式化理论: 100% (Coq 验证)
 ├── 核心概念: 100% (L2+ 深度)
@@ -357,7 +354,7 @@ rust-ownership-decidability/
 ---
 
 ## 结论
->
+
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 项目已具备**优秀的形式化基础**和**丰富的案例研究**，但在 **Unsafe Rust** 和 **底层细节** 方面存在显著差距。
@@ -369,6 +366,7 @@ rust-ownership-decidability/
 *执行摘要版本: 1.0*
 *制定日期: 2026-03-07*
 *下次审查: 2026-03-14*
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -398,48 +396,8 @@ rust-ownership-decidability/
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: TRPL Ch. 4 - Ownership]**
-
 > **[来源: Rustonomicon - Ownership]**
-
 > **[来源: POPL 2018 - RustBelt]**
 
 ---
-
-## 权威来源索引
-
-> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
->
-> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
->
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

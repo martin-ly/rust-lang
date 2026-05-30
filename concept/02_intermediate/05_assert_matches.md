@@ -105,12 +105,15 @@ let nested: Result<Option<i32>, &str> = Ok(Some(42));
 assert_matches!(nested, Ok(Some(n)) if n > 0);
 ```
 
-> **语义核心**: `assert_matches!(e, p => block)` 执行以下操作：
+> **语义核心**: `assert_matches!(e, p)` 执行以下操作：
 >
 > 1. 计算表达式 `e`
 > 2. 尝试将 `e` 与模式 `p` 匹配
-> 3. 若匹配成功：执行 `block`（绑定在 block 作用域内有效）
+> 3. 若匹配成功：断言通过
 > 4. 若匹配失败：触发 panic，显示不匹配信息
+> 5. 支持 guard 条件：`assert_matches!(e, p if guard)`
+>
+> **注意**: 绑定不可导出到宏外部。如需提取值并后续使用，请使用 `if let`。
 > [来源: [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html)]
 
 **与 `assert!(matches!(...))` 的对比**:
@@ -208,18 +211,18 @@ enum Message {
 
 let msg = Message::Coord { x: 1.5, y: 2.5 };
 
-// 绑定捕获：x 和 y 在 => 后的块作用域内可用
-assert_matches!(msg, Message::Coord { x, y } => {
+// assert_matches! 绑定不可导出到宏外部
+// 如需在断言后使用绑定的值，应使用 if let
+assert_matches!(msg, Message::Coord { x: 1.5, y: 2.5 });
+
+// 如需提取值并后续使用：
+if let Message::Coord { x, y } = msg {
     assert!((x - 1.5).abs() < f64::EPSILON);
     assert!((y - 2.5).abs() < f64::EPSILON);
-    // x, y 仅在此块内有效
-});
-
-// x, y 在此处不可用（编译错误）
-// println!("{}", x); // ❌ error: cannot find value `x` in this scope
+}
 ```
 
-> **形式化规则**: `assert_matches!(e, p => block)` 创建**模式绑定作用域**。
+> **形式化规则**: `assert_matches!(e, p)` 进行模式匹配断言，绑定不可导出宏外部。
 >
 > - 设 `p` 中的绑定变量集合为 `Vars(p)`
 > - 则 `Vars(p)` 的作用域仅限于 `block`

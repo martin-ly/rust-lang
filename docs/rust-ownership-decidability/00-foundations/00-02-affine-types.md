@@ -1,11 +1,10 @@
 # 仿射类型系统与可判定性
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **权威来源**: Alexei P. Kopylov (2001). *Decidability of Linear Affine Logic*. Information and Computation 164:173-198
 
 ## 目录
->
+
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [仿射类型系统与可判定性](#仿射类型系统与可判定性)

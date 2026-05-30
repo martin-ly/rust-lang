@@ -10,7 +10,6 @@
 //! - 稳定日期: 2026-05-28
 //! - Edition: 2024
 
-use std::assert_matches;
 use std::mem::ManuallyDrop;
 use std::panic::AssertUnwindSafe;
 
@@ -174,11 +173,11 @@ mod tests {
     #[test]
     fn test_manually_drop_resource_classify() {
         assert_eq!(
-            ManuallyDropPatternExamples::classify_resource(ManuallyDrop::new(0xF1LE)),
+            ManuallyDropPatternExamples::classify_resource(ManuallyDrop::new(0xF1_0E_u64)),
             "file descriptor"
         );
         assert_eq!(
-            ManuallyDropPatternExamples::classify_resource(ManuallyDrop::new(0x50CK)),
+            ManuallyDropPatternExamples::classify_resource(ManuallyDrop::new(0x50_0A_u64)),
             "network socket"
         );
         assert_eq!(

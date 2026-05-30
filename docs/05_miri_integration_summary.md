@@ -7,7 +7,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Miri 集成总结报告](#miri-集成总结报告)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [完成的工作](#完成的工作)
     - [1. Miri 配置](#1-miri-配置)
     - [2. Miri 测试文件](#2-miri-测试文件)

@@ -13,13 +13,13 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 13: 简易数据库引擎](#实践项目-13-简易数据库引擎)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
     - [B-Tree实现](#b-tree实现)
   - [参考实现](#参考实现)
-  - [完整参考实现位于: `examples/database-engine/`](#完整参考实现位于-examplesdatabase-engine)
+  - 完整参考实现位于: `examples/database-engine/`
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 

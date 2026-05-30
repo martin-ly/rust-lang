@@ -12,7 +12,7 @@
 ## 📑 目录
 
 - [rust-ownership-decidability 与 research\_notes 整合计划](#rust-ownership-decidability-与-research_notes-整合计划)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [1. 现状分析](#1-现状分析)
     - [1.1 `rust-ownership-decidability/` 概况](#11-rust-ownership-decidability-概况)
     - [1.2 `research_notes/` 概况](#12-research_notes-概况)

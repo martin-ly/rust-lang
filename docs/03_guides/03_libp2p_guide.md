@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [libp2p 指南](#libp2p-指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [核心概念](#核心概念)
     - [Multiaddr —— 统一的地址格式](#multiaddr--统一的地址格式)

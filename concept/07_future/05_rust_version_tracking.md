@@ -481,7 +481,7 @@ timeline
 
 ### 9.1 Rust 1.96 特性待跟踪表
 
-> **[来源: Rust 1.96.0 release notes draft (GitHub #156512) 2026-05-12; Rust beta 1.96.0-beta.8 2026-05-20; releases.rs]** Rust 1.96.0 预计 2026-05-28 进入 stable，release notes draft 已发布，无已知 release blocker。关键稳定化特性已确认。
+> **[来源: Rust 1.96.0 release notes (GitHub #156512) 2026-05-28; releases.rs]** Rust 1.96.0 已于 2026-05-28 发布 stable。关键稳定化特性：assert_matches!、core::range 类型族、From<T> for LazyCell/LazyLock/AssertUnwindSafe、ManuallyDrop 常量模式、expr metavariable to cfg。
 
 | 特性 | 当前状态 | 影响维度 | 概念文件 | 优先级 | 1.96 预期 |
 |:---|:---|:---|:---|:---:|:---|
@@ -500,7 +500,7 @@ timeline
 | `cargo_script` | unstable · RFC 3502+3503 已批准 · nightly 已实现 | D6 生态 | `concept/06_ecosystem/09_cargo_script.md` | 中 | 目标稳定 |
 | **Ferrocene** | 已认证（ISO 26262 ASIL-D） | D7 安全 / D6 生态 | [`concept/07_future/14_ferrocene_preview.md`](./14_ferrocene_preview.md) | **高** | 持续更新 |
 
-> **1.96 Beta 已知变更**: `target.'cfg(..)'.rustdocflags` Cargo 配置支持；嵌套子命令 manpage 显示；`term.progress.term-integration` 支持 Ptyxis / iTerm 终端；`build-dir` 并发文件锁优化；依赖多位置支持 `git` + 替代 registry；`cargo-clean` 安全改进（防止误删非目标目录）；macOS 排除 iCloud Drive 同步；`-Zcargo-lints` 新增 `unused_dependencies` lint。
+> **1.96 Stable 已知变更**: `assert_matches!` / `debug_assert_matches!` 稳定；`core::range::{Range, RangeFrom, RangeToInclusive}` 类型族稳定；`From<T>` for `LazyCell` / `LazyLock` / `AssertUnwindSafe`；`NonZero*` 范围迭代（`Step` trait）；`expr` metavariable to `cfg`；Never 类型 tuple coercion；`ManuallyDrop` 常量模式修复。Cargo 修复 CVE-2026-5222（sparse registry URL）和 CVE-2026-5223（symlink 缓存覆盖）。WebAssembly 移除 `--allow-undefined` 默认传递。
 
 ### 9.2 Rust 1.96.0 Stable 稳定化 API 详情
 

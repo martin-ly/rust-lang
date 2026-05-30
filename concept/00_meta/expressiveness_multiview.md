@@ -303,7 +303,7 @@ graph LR
 
 ### 4.3 生成器（Generator）与协程
 
-Rust 的 `gen` blocks（1.95 nightly / 1.96+ preview）进一步扩展了控制流表达力：
+Rust 的 `gen` blocks（nightly 实验性，`#![feature(gen_blocks)]`）进一步扩展了控制流表达力：
 
 ```rust,ignore
 // gen block: 懒性迭代器生成

@@ -12,7 +12,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [`assert_matches!` / `debug_assert_matches!` 速查指南](#assert_matches--debug_assert_matches-速查指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [概述](#概述)
   - [语法](#语法)
   - [对比：`assert!` vs `assert_matches!`](#对比assert-vs-assert_matches)
@@ -107,9 +107,7 @@ assert_matches!(
 #[test]
 fn test_file_open() {
     let result = File::open("/tmp/test.txt");
-    assert_matches!(result, Ok(file) => {
-        assert!(file.metadata().unwrap().len() > 0);
-    });
+    assert_matches!(result, Ok(file) if file.metadata().unwrap().len() > 0);
 }
 ```
 

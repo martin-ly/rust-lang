@@ -28,7 +28,7 @@
 | [cargo_basics.md](01_cargo_basics.md) | Cargo 基础与工作空间 | ⭐⭐ |
 | [edition_2024.md](02_edition_2024.md) | Edition 2024 迁移指南 | ⭐⭐⭐ |
 | [emerging/rust_1_95.md](./emerging/03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ |
-| [emerging/rust_1_96_preview.md](./emerging/05_rust_1_96_preview.md) | Rust 1.96 预览 | ⭐⭐⭐ |
+| [emerging/rust_1_96.md](./emerging/05_rust_1_96.md) | Rust 1.96 稳定特性 | ⭐⭐⭐ |
 
 ### 深度解析
 >

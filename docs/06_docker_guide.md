@@ -9,7 +9,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Docker 使用指南](#docker-使用指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [前置要求](#前置要求)
   - [快速开始](#快速开始)
     - [构建镜像](#构建镜像)

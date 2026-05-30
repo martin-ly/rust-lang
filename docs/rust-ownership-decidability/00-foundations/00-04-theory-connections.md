@@ -1,13 +1,12 @@
 # 理论模型间的全面联系与论证
 
 > **Bloom 层级**: L5-L6 (分析/评价/创造)
-
 > **目的**: 建立线性逻辑、仿射逻辑、分离逻辑、类型理论之间的全面论证关系
 
 ---
 
 ## 目录
->
+
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [理论模型间的全面联系与论证](#理论模型间的全面联系与论证)

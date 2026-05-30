@@ -9,7 +9,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [sccache 配置指南](#sccache-配置指南)
-  - [📑 目录](#-目录)
+  - [📑 目录](#目录)
   - [什么是 sccache?](#什么是-sccache)
   - [安装](#安装)
     - [方式 1: 使用 cargo 安装 (推荐)](#方式-1-使用-cargo-安装-推荐)

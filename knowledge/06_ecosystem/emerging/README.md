@@ -13,13 +13,13 @@
 | [generic_const_exprs.md](02_generic_const_exprs.md) | 泛型常量表达式 | ⭐⭐⭐⭐ | 🧪 不稳定 |
 | [async_closures.md](01_async_closures.md) | 异步闭包 | ⭐⭐⭐⭐ | 🧪 不稳定 |
 | [rust_1_95.md](03_rust_1_95.md) | Rust 1.95 新特性 | ⭐⭐⭐ | ✅ 已发布 |
-| [rust_1_96_preview.md](05_rust_1_96_preview.md) | Rust 1.96 预览 | ⭐⭐⭐ | 🧪 Beta |
+| [rust_1_96.md](05_rust_1_96.md) | Rust 1.96 稳定特性 | ⭐⭐⭐ | ✅ Stable |
 
 ## ⚠️ 使用警告
 >
 > **[来源: Rust Official Docs]**
 
-本文档层中的特性均处于**不稳定或预览状态**，不适合生产环境：
+本文档层中的特性大部分处于**不稳定或预览状态**（1.96 内容已稳定），不适合生产环境：
 
 - 需要 nightly 编译器或特定 feature flag
 - API 可能在稳定前变更

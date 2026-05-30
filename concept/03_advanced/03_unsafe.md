@@ -2751,9 +2751,9 @@ fn inspect(ring: &IoUring) {
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
-## Null 指针有效性定义重构（Rust 1.96）
+## Null 指针有效性定义
 
-Rust 1.96 对 `std::ptr::null()` 和 `NonNull` 的有效性语义进行了精确定义重构，明确区分了**已分配但未初始化**与**未分配**的指针状态：
+Rust 对 `std::ptr::null()` 和 `NonNull` 的有效性语义有精确定义，明确区分了**已分配但未初始化**与**未分配**的指针状态：
 
 ```rust
 use std::ptr::NonNull;

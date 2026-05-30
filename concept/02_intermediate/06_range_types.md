@@ -161,7 +161,7 @@ let r2 = r; // r 被移动
 // println!("{:?}", r); // ❌ 编译错误
 
 // 1.96 后行为：Range 实现 Copy
-// let r = Range::new(0, 10);
+// let r = Range { start: 0, end: 10 };
 // let r2 = r; // ✅ r 被复制，两者都可用
 // println!("{:?}", r); // ✅ 编译通过
 ```
@@ -192,7 +192,7 @@ for i in r { /* r 被消费 */ }
 // r 不可用
 
 // 新模型：r 被复制 into_iter（因为 Range: Copy）
-// let r = Range::new(0, 10);
+// let r = Range { start: 0, end: 10 };
 // for i in r { /* r 被复制 */ }
 // r 仍可用 ✅
 ```

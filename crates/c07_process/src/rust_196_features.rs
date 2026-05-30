@@ -148,7 +148,7 @@ mod tests {
     #[test]
     fn test_lazy_cell_from() {
         let cell: LazyCell<String> = LazyCell::from("test".to_string());
-        assert_eq!(**cell, "test");
+        assert_eq!(&**cell, "test");
     }
 
     #[test]

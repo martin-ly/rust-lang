@@ -282,9 +282,9 @@ include = [
 
 ### 证明更新计划
 
--  ] 更新 [FORMAL_CONCEPTS_ENCYCLOPEDIA 添加新类型
--  ] 更新 [COUNTER_EXAMPLES_COMPENDIUM 添加边界案例
--  ] 更新 [RUST_193_FEATURE_MATRIX 至 1.94
+- ] 更新 [FORMAL_CONCEPTS_ENCYCLOPEDIA 添加新类型
+- ] 更新 [COUNTER_EXAMPLES_COMPENDIUM 添加边界案例
+- ] 更新 [RUST_193_FEATURE_MATRIX 至 1.94
 
 ---
 
