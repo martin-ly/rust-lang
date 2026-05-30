@@ -273,7 +273,14 @@ classDiagram
     note for Send "Arc<T>, Mutex<T> 等\n（Rc<T>, Cell<T> 除外）"
 ```
 
-> **认知功能**: 此 classDiagram 建立了 Rust 核心 trait 的**能力层次结构**。读者可直观理解 trait 之间的依赖关系：Copy 是 Clone 的「子集」（所有 Copy 类型都可 Clone，但反之不成立）；Sized 是 Send/Sync 的「前提」（auto trait 默认基于 Sized）。图中的 note 标注了典型实现者和例外，帮助读者快速判断「我的类型是否自动实现了某 trait」。建议将此图作为「trait 实现推断」的参考——看到 `T: Copy` 约束时，知道它也满足 `T: Clone + Sized`。 [来源: Rust Reference §11; TRPL §10; UML Class Diagram Standard]
+> **认知功能**:
+> 此 classDiagram 建立了 Rust 核心 trait 的**能力层次结构**。
+> 读者可直观理解 trait 之间的依赖关系：
+> Copy 是 Clone 的「子集」（所有 Copy 类型都可 Clone，但反之不成立）；
+> Sized 是 Send/Sync 的「前提」（auto trait 默认基于 Sized）。
+> 图中的 note 标注了典型实现者和例外，帮助读者快速判断「我的类型是否自动实现了某 trait」。
+> 建议将此图作为「trait 实现推断」的参考——看到 `T: Copy` 约束时，知道它也满足 `T: Clone + Sized`。
+> [来源: Rust Reference §11; TRPL §10; UML Class Diagram Standard]
 > [来源: [TRPL — Types]]
 
 > **类型分类层次（另一视角——数据导向）**:
@@ -311,7 +318,13 @@ graph TD
     F --> F5[Fn/FnMut/FnOnce]
 ```
 
-> **认知功能**: 此层次图从**数据构造**视角（而非 trait 能力视角）组织 Rust 全部类型。读者面对一个不熟悉的类型时，可按图定位它属于哪一类——标量（简单值）、复合（多值组合）、ADT（代数构造）、引用（内存别名）、特殊（类型系统元机制）。关键认知：Rust 的类型系统不是平铺的清单，而是有层次的taxonomy（分类学）。enum/struct 对应「和类型/积类型」的代数结构，impl Trait/dyn Trait 对应「存在类型/动态分发」的类型论概念。建议将此图与上方的 classDiagram 对照阅读，建立「数据构造 × 能力接口」的二维认知模型。 [来源: Rust Reference §3, §6; TRPL §3]
+> **认知功能**:
+> 此层次图从**数据构造**视角（而非 trait 能力视角）组织 Rust 全部类型。
+> 读者面对一个不熟悉的类型时，可按图定位它属于哪一类——标量（简单值）、复合（多值组合）、ADT（代数构造）、引用（内存别名）、特殊（类型系统元机制）。
+> 关键认知：Rust 的类型系统不是平铺的清单，而是有层次的taxonomy（分类学）。
+> enum/struct 对应「和类型/积类型」的代数结构，impl Trait/dyn Trait 对应「存在类型/动态分发」的类型论概念。
+> 建议将此图与上方的 classDiagram 对照阅读，建立「数据构造 × 能力接口」的二维认知模型。
+> [来源: Rust Reference §3, §6; TRPL §3]
 
 ```mermaid
 graph TD

@@ -1,3 +1,4 @@
+> **受众**: [专家]
 > **Bloom 层级**: 分析
 > **状态**: 已归档（内容已迁移至主文件）
 > **归档声明**: 本文件内容已合并至 [`05_formal_ecosystem_tower.md`](./05_formal_ecosystem_tower.md)。

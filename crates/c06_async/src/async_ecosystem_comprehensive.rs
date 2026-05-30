@@ -1,8 +1,13 @@
 //! Rust 异步生态系统全面分析模块
 //!
 //! 本模块提供了对Rust异步编程生态系统中各个主要库的全面分析，
-//! 包括：std、smol、async-std、tokio等库的概念定义、属性、联系关系、
+//! 包括：std、smol、tokio等库的概念定义、属性、联系关系、
 //! 区别、使用场景、示例和组合设计模式。
+//!
+//! > **历史说明**: `async-std` 运行时已于 **2025年3月** 停止维护，
+//! > 其仓库已归档。本模块保留 async-std 的对比分析作为历史参考，
+//! > 但在新项目中应优先选择 **Tokio** 或 **smol**。
+//! > 详见 [async-rs 归档公告](https://github.com/async-rs/async-std)。
 use anyhow::Result;
 use futures::future::join_all;
 use serde::{Deserialize, Serialize};
@@ -321,7 +326,6 @@ pub struct RuntimeComparison {
 }
 
 /// 异步运行时集成模式演示
-///
 #[allow(unused)]
 pub struct AsyncIntegrationPatterns {
     shared_state: Arc<RwLock<HashMap<String, String>>>,
@@ -525,7 +529,6 @@ impl AbstractAsyncOperation {
 }
 
 /// 数据源
-///
 #[allow(unused)]
 #[derive(Debug)]
 pub struct DataSource {
@@ -591,7 +594,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_runtime_analyzer() {
         let analyzer = AsyncRuntimeAnalyzer::new();
         assert!(analyzer.get_runtime_analysis("tokio").is_some());
@@ -601,7 +604,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_runtime_comparison() {
         let analyzer = AsyncRuntimeAnalyzer::new();
         let comparison = analyzer.compare_runtimes("tokio", "smol");
@@ -609,7 +612,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_integration_patterns() {
         let patterns = AsyncIntegrationPatterns::new(2);
         assert!(patterns.runtime_adapter_pattern().await.is_ok());
@@ -617,14 +620,14 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_sync_conversion() {
         let patterns = AsyncIntegrationPatterns::new(1);
         assert!(patterns.async_sync_conversion_pattern().await.is_ok());
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_aggregation_composition() {
         let patterns = AsyncIntegrationPatterns::new(1);
         assert!(patterns.aggregation_composition_pattern().await.is_ok());

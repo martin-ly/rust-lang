@@ -81,7 +81,7 @@ fn print_color(c: Color) {
 
 **Error output**:
 
-```
+```text
 error[E0428]: the name `print_color` is defined multiple times
   --> e:\_src\rust-lang\target\semantic_test\01_foundation_04_type_system_block2.rs:11:1
    |

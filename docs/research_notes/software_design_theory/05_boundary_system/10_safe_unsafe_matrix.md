@@ -392,13 +392,9 @@ impl PaymentGateway for FFIPaymentGateway {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: Rustonomicon]**
-
 > **[来源: Rust Reference - Unsafe]**
-
 > **[来源: RFC 2585 - Unsafe Guidelines]**
-
 > **[来源: TRPL - The Rust Programming Language]**
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 

@@ -1,7 +1,10 @@
 //! 异步运行时具体示例和组合模式
 //!
 //! 本模块提供了各个异步运行时的具体使用示例，
-//! 包括：std、tokio、async-std、smol的实际应用场景和组合模式。
+//! 包括：std、tokio、smol的实际应用场景和组合模式。
+//!
+//! > **历史说明**: `async-std` 已于 **2025年3月** 停止维护并归档。
+//! > 示例中保留 async-std 的模拟代码作为历史参考，新项目请使用 Tokio。
 use anyhow::Result;
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -604,7 +607,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_std_async_examples() {
         let examples = StdAsyncExamples::new();
         assert!(examples.basic_async_function("test").await.is_ok());
@@ -612,7 +615,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_tokio_examples() {
         let examples = TokioExamples::new(3);
         let tasks = vec!["test1".to_string(), "test2".to_string()];
@@ -626,7 +629,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_std_examples() {
         let examples = AsyncStdExamples::new();
         assert!(examples.file_operations_example().await.is_ok());
@@ -634,7 +637,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_smol_examples() {
         let examples = SmolExamples::new();
         assert!(examples.lightweight_task_scheduling().await.is_ok());
@@ -642,7 +645,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_runtime_composition() {
         let examples = RuntimeCompositionExamples::new();
         assert!(

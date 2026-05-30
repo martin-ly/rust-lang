@@ -1,5 +1,6 @@
 # Rust 表征空间（Semantic / Representational Space）
-
+>
+> **受众**: [研究者]
 > **Bloom 层级**: 分析 → 评价
 > **定位**：本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言"能表达什么"、"不能表达什么"、"等价表达的组合关系"，以及其内部机制的完备性与封闭性。
 > **核心命题**：Rust 的 safe 子集是一个**内部完备但封闭**的形式系统；其设计空间的边界由编译器强制，而非程序员自律。
@@ -1225,4 +1226,20 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 生态系统中的**术语过载**（term overloading）是认知障碍来源。"生命周期"（lifetime）至少四种含义：1) **引用生命周期**（`'a`）：编译期检查引用有效性；2) **作用域生命周期**：变量从声明到 drop 的代码区域；3) **对象生命周期**：OOP 的创建-使用-销毁序列；4) **形式化生命周期**：线性逻辑中的模态算子。精确沟通策略：1) 引用生命周期 → "lifetime annotation"；2) 作用域 → "scope"；3) 对象生命周期 → "object lifetime"；4) 线性逻辑 → "exponential modality"。这与数学中的"域"（field/area/domain）或编程中的"类型"（type/kind/sort）类似——跨学科术语重叠需要上下文消歧。[来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)] · [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
+> **修正**: Rust 生态系统中的**术语过载**（term overloading）是认知障碍来源。
+> "生命周期"（lifetime）至少四种含义：
+>
+> 1) **引用生命周期**（`'a`）：编译期检查引用有效性；
+> 2) **作用域生命周期**：变量从声明到 drop 的代码区域；
+> 3) **对象生命周期**：OOP 的创建-使用-销毁序列；
+> 4) **形式化生命周期**：线性逻辑中的模态算子。
+>
+> 精确沟通策略：
+>
+> 1) 引用生命周期 → "lifetime annotation"；
+> 2) 作用域 → "scope"；
+> 3) 对象生命周期 → "object lifetime"；
+> 4) 线性逻辑 → "exponential modality"。
+> 这与数学中的"域"（field/area/domain）或编程中的"类型"（type/kind/sort）类似——跨学科术语重叠需要上下文消歧。
+> [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)] ·
+> [来源: [Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]

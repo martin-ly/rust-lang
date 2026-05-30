@@ -105,22 +105,19 @@
 ## 一、权威定义（Definition）
 
 ### 1.1 TRPL 官方定义
->
 
 > **[TRPL: Ch4.2]** At any given time, you can have **either one mutable reference** or **any number of immutable references**. References must always be valid. These are the rules of references. This is the part that is called *borrowing*.
 
 ### 1.2 Wikipedia 对齐定义
->
 
 > **[Wikipedia: Reference (computer science)]** A reference is a value that enables a program to indirectly access a particular datum, such as a variable's value or a record, in the computer's memory or in some other storage device. In Rust, references are governed by the borrowing rules which enforce memory safety at compile time.
-
 > **[Wikipedia: Pointer aliasing]** In computing, pointer aliasing occurs when two or more pointers refer to the same memory location. The Rust borrow checker enforces *aliasing XOR mutation* — mutable aliasing (one mutable and one or more immutable references to the same data) is prohibited at compile time, eliminating a major class of memory errors including data races and iterator invalidation.
-
 > **[TRPL: Ch19.1]** Unsafe Rust gives you access to five superpowers, including the ability to dereference raw pointers. However, even in unsafe blocks, you must uphold the borrowing rules manually; the compiler cannot enforce them for raw pointers。
-> **unsafe 核心语义**: `unsafe` 不是关闭借用检查器，而是将**证明责任转移给程序员**（proof obligation transfer）——程序员手动承担编译器无法自动验证的不变量 [来源: Rustonomicon — Meet Safe and Unsafe / 2025; RustBelt — unsafe 块的 Iris 形式化 / POPL 2018]
+> **unsafe 核心语义**: `unsafe` 不是关闭借用检查器，而是将**证明责任转移给程序员**（proof obligation transfer）
+> ——程序员手动承担编译器无法自动验证的不变量
+> [来源: Rustonomicon — Meet Safe and Unsafe / 2025; RustBelt — unsafe 块的 Iris 形式化 / POPL 2018]
 
 ### 1.3 形式化视角
->
 
 借用是**所有权的临时授权**（temporary authorization），不改变资源的最终归属：
 

@@ -1,7 +1,6 @@
 # Architecture Patterns（架构设计模式）
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 分析 → 创造
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×Cre — 分析系统架构层级与依赖关系设计
@@ -72,7 +71,6 @@
 
 ### 1.1 分层架构（Layered Architecture）
 >
-
 > **[Martin Fowler — Enterprise Application Architecture](https://martinfowler.com/books/eaa.html)** 分层架构将系统组织为水平层级，每一层提供特定的抽象级别，并且只依赖于其下方的层。这是企业应用中最常见的架构模式。
 
 ```text
@@ -155,7 +153,6 @@
 
 ### 1.4 整洁架构（Clean Architecture）
 >
-
 > **[Robert C. Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)** 整洁架构是六边形架构和洋葱架构的进一步抽象和规范化。核心原则：**依赖关系只能向内指向更抽象、更稳定的层**。外层是机制（Mechanisms），内层是策略（Policies）。
 
 ```text
@@ -254,7 +251,6 @@
 // │       └── messaging.rs     # Kafka 实现
 
 // domain/repository.rs — 领域层只定义接口，不依赖具体技术
-use async_trait::async_trait;
 use uuid::Uuid;
 
 // 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]

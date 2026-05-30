@@ -27,6 +27,13 @@ def extract_links(content, file_path):
     content_without_code = re.sub(r'```[\s\S]*?```', '', content)
     # 移除 inline code (`...`)
     content_without_code = re.sub(r'`[^`]+`', '', content_without_code)
+    # 移除 <!-- markdown-link-check-disable --> ... <!-- markdown-link-check-enable --> 区域
+    content_without_code = re.sub(
+        r'<!--\s*markdown-link-check-disable\s*-->.*?<!--\s*markdown-link-check-enable\s*-->',
+        '',
+        content_without_code,
+        flags=re.DOTALL
+    )
     
     # 匹配 [text](url) 格式
     pattern = r'\[([^\]]+)\]\(([^)]+)\)'

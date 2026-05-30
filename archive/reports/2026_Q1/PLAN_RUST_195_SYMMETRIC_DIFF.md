@@ -1,6 +1,9 @@
 # Rust 1.95 × 本项目 对称差分析与认知友好型推进计划
 
-> **编制依据**：Rust 1.95.0 Release Notes (2026-04-16)、Rust Reference、TRPL、The Rustonomicon、Async Book、各依赖库官方文档 (tokio 1.52, axum 0.8.9, hyper 1.9, rustls 0.23, quinn 0.11, libp2p 0.54.1, crossbeam 0.8.4, rayon 1.12)
+> **编制依据**：
+> Rust 1.95.0 Release Notes (2026-04-16)、
+> Rust Reference、TRPL、The Rustonomicon、Async Book、
+> 各依赖库官方文档 (tokio 1.52, axum 0.8.9, hyper 1.9, rustls 0.23, quinn 0.11, libp2p 0.54.1, crossbeam 0.8.4, rayon 1.12)
 > **分析维度**：语言特性 / 标准库 API / 开源生态特性 / 工程实践
 > **认知原则**：由核心到外围、由语言到生态、由概念到工程、避免过度重复
 
@@ -226,7 +229,7 @@
 
 ## 四、认知地图：学习者视角的 Rust 1.95
 
-```
+```text
 Rust 1.95 新能力
 ├── 语言层（怎么写更优雅）
 │   ├── if let guards ← 已充分覆盖（8 crate）

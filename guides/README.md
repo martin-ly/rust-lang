@@ -47,7 +47,8 @@
 ### 导航入口（已就绪）
 
 | 主题 | 项目内入口 | 说明 |
-| :--- | :--- | :--- || **编译器内部机制** | [docs/06_toolchain/](../docs/06_toolchain/README.md) | 编译器特性、Cargo、rustdoc；[rustc Book](https://doc.rust-lang.org/rustc/) |
+| :--- | :--- | :--- |
+| **编译器内部机制** | [docs/06_toolchain/](../docs/06_toolchain/README.md) | 编译器特性、Cargo、rustdoc；[rustc Book](https://doc.rust-lang.org/rustc/) |
 | **认知科学学习** | [LEARNING_CHECKLIST.md](../LEARNING_CHECKLIST.md) | 间隔重复、自测题；[Brown 交互版](https://rust-book.cs.brown.edu/) |
 | **大学课程对标** | [docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md](../docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md) | 官方资源映射、模块对标 |
 | **交互式学习平台** | [exercises/README.md](../exercises/README.md)、[RUSTLINGS_MAPPING.md](../exercises/RUSTLINGS_MAPPING.md) | Rustlings、Playground、习题映射 |
@@ -59,7 +60,8 @@
 ## 官方资源映射
 
 | 官方资源 | 链接 | 项目对应 |
-| :--- | :--- | :--- || The Rust Book | <https://doc.rust-lang.org/book/> | C01-C03 基础模块 |
+| :--- | :--- | :--- |
+| The Rust Book | <https://doc.rust-lang.org/book/> | C01-C03 基础模块 |
 | Rust By Example | <https://doc.rust-lang.org/rust-by-example/> | 各模块 examples/ |
 | Rust Reference | <https://doc.rust-lang.org/reference/> | docs/ 深度文档 |
 | Rustonomicon | <https://doc.rust-lang.org/nomicon/> | [UNSAFE_RUST_GUIDE](../docs/05_guides/UNSAFE_RUST_GUIDE.md)、形式化验证 |
@@ -75,7 +77,8 @@
 ## 指南完成度
 
 | 类别 | 数量 | 状态 |
-| :--- | :--- | :--- || 快速入口 | 7 | ✅ |
+| :--- | :--- | :--- |
+| 快速入口 | 7 | ✅ |
 | 使用指南 | 7 | ✅ |
 | 速查卡 | 20 | ✅ |
 | 已完善指南 | 2 (AI 辅助、AI+Rust 生态) | ✅ |
@@ -86,6 +89,7 @@
 ---
 
 **维护说明**: 本目录为指南入口索引。具体指南内容请查阅 `docs/` 或各 crate 的 `docs/` 子目录
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

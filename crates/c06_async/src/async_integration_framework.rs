@@ -2,6 +2,9 @@
 //!
 //! 本模块提供了异步生态系统在集成框架层面的分析，
 //! 包括：运行时共性、异步同步转换、聚合组合设计模式等。
+//!
+//! > **历史说明**: `async-std` 已于 **2025年3月** 停止维护并归档。
+//! > 框架保留 async-std 的模拟接口作为历史参考，新项目请使用 Tokio。
 use anyhow::Result;
 use futures::future::try_join_all;
 use serde::{Deserialize, Serialize};
@@ -668,7 +671,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_commonality_analyzer() {
         let analyzer = AsyncCommonalityAnalyzer::new();
         assert!(analyzer.get_runtime_commonality("tokio").is_some());
@@ -677,7 +680,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_sync_conversion() {
         let framework = AsyncSyncConversionFramework::new(2);
         assert!(framework.hybrid_conversion().await.is_ok());
@@ -690,7 +693,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_aggregation_composition() {
         let framework = AggregationCompositionFramework::new();
         let component = Box::new(DataProcessingComponent::new("test", 1));
@@ -698,10 +701,13 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_data_processing_component() {
         let component = DataProcessingComponent::new("test", 1);
-        let result = component.execute("input".to_string()).await.expect("执行组件不应失败");
+        let result = component
+            .execute("input".to_string())
+            .await
+            .expect("执行组件不应失败");
         assert!(result.contains("test_processed_input"));
     }
 }

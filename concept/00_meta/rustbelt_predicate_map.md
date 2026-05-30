@@ -1,4 +1,6 @@
 # RustBelt 谓词映射图（RustBelt Predicate Map）
+>
+> **受众**: [研究者]
 
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 本文件将 RustBelt（Jung et al., POPL 2018）中的核心形式化谓词——**所有权谓词 `own(τ)`** 和 **共享谓词 `shr(κ, ℓ)`**——可视化映射到 Rust 的 L1-L3 工程概念，建立"数学符号 ↔ 代码直觉"的双向桥梁。
