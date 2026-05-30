@@ -1,7 +1,6 @@
 # Error Handling（错误处理）
 >
 > **受众**: [进阶]
-
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 实施 Result/Option 传播模式

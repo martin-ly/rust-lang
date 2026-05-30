@@ -1,7 +1,6 @@
 # Serde 序列化模式：Rust 的类型驱动数据转换
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Serde 序列化设计模式

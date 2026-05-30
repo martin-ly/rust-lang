@@ -1,7 +1,6 @@
 # Memory Management（内存管理）
 >
 > **受众**: [进阶]
-
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价不同指针类型的适用场景

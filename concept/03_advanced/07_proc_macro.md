@@ -1,7 +1,6 @@
 # 过程宏：编译期代码生成的元编程工具
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。
 > **前置概念**: [Macros](./04_macros.md) · [Trait](./../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)

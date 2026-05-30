@@ -1,7 +1,6 @@
 # Rust 范围类型语义：`std::ops::Range` → `core::range`
 >
 > **受众**: [进阶]
-
 > **Bloom 层级**: 理解 → 分析
 > **定位**: 探讨 Rust 范围类型从**运行时迭代器**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](./02_generics.md)
