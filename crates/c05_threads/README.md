@@ -72,6 +72,7 @@
     - [知识结构体系](#知识结构体系)
     - [使用指南](#使用指南-1)
   - [许可证](#许可证)
+  - [本项目采用MIT许可证](#本项目采用mit许可证)
 
 ## 🎯 最新更新 (2025-12-11) ✨
 
@@ -684,7 +685,7 @@ cargo test rust_192_features
 
 ## 许可证
 
-本项目采用MIT许可证。
+本项目采用MIT许可证
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
