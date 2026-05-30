@@ -8,7 +8,7 @@
 //! - `NonZero` 范围迭代
 //! - `never type` 元组 coercion
 
-#![allow(clippy::incompatible_msrv)]
+#![allow(clippy::incompatible_msrv, unreachable_code)]
 
 use std::assert_matches;
 use std::cell::LazyCell;
@@ -53,6 +53,21 @@ impl RangeFamilyExamples {
     /// 计算闭区间包含的元素数量
     pub fn range_inclusive_len(r: &core::range::RangeInclusive<usize>) -> usize {
         r.last.saturating_sub(r.start) + 1
+    }
+
+    /// 使用 `core::range::RangeIter` 遍历左闭右开区间
+    pub fn iter_range(start: usize, end: usize) -> core::range::RangeIter<usize> {
+        core::range::RangeIter::new(start, end)
+    }
+
+    /// 使用 `core::range::RangeFromIter` 从某位置开始遍历
+    pub fn iter_range_from(start: usize) -> core::range::RangeFromIter<usize> {
+        core::range::RangeFromIter::new(start)
+    }
+
+    /// 使用 `core::range::RangeToInclusiveIter` 遍历从开始到某位置的闭区间
+    pub fn iter_range_to_inclusive(last: usize) -> core::range::RangeToInclusiveIter<usize> {
+        core::range::RangeToInclusiveIter::new(last)
     }
 }
 
@@ -104,6 +119,11 @@ impl AssertMatchesExamples {
     pub fn assert_is_nothing(val: &MatchExample) {
         assert_matches!(val, MatchExample::Nothing);
     }
+
+    /// 使用 `debug_assert_matches!` 进行调试断言（仅在 debug 构建生效）
+    pub fn debug_assert_is_number(val: &MatchExample) {
+        debug_assert_matches!(val, MatchExample::Number(_));
+    }
 }
 
 // ============================================================================
@@ -129,7 +149,7 @@ impl FromInitExamples {
         AssertUnwindSafe::from(vec![1, 2, 3])
     }
 
-    /// 创建包含多种 From<T> 初始化类型的元组
+    /// 创建包含多种 `From<T>` 初始化类型的元组
     pub fn mixed_init_tuple() -> (LazyLock<i32>, LazyCell<String>, AssertUnwindSafe<bool>) {
         (
             LazyLock::from(100),
@@ -181,21 +201,21 @@ impl ManuallyDropExamples {
 pub struct NonZeroRangeExamples;
 
 impl NonZeroRangeExamples {
-    /// 遍历 NonZero<u8> 闭区间并收集
+    /// 遍历 `NonZero<u8>` 闭区间并收集
     pub fn collect_nonzero_range(start: u8, end: u8) -> Vec<NonZero<u8>> {
         let s = NonZero::new(start).expect("start must be non-zero");
         let e = NonZero::new(end).expect("end must be non-zero");
         (s..=e).collect()
     }
 
-    /// 计算 NonZero<u16> 范围内的元素数量
+    /// 计算 `NonZero<u16>` 范围内的元素数量
     pub fn count_nonzero_range(start: u16, end: u16) -> usize {
         let s = NonZero::new(start).expect("start must be non-zero");
         let e = NonZero::new(end).expect("end must be non-zero");
         (s..=e).count()
     }
 
-    /// 对 NonZero<u32> 范围求和
+    /// 对 `NonZero<u32>` 范围求和
     pub fn sum_nonzero_range(start: u32, end: u32) -> u32 {
         let s = NonZero::new(start).expect("start must be non-zero");
         let e = NonZero::new(end).expect("end must be non-zero");
@@ -211,6 +231,28 @@ impl NonZeroRangeExamples {
         let s = NonZero::new(start)?;
         let e = NonZero::new(end)?;
         (s..=e).find(|nz| predicate(nz.get()))
+    }
+}
+
+// ============================================================================
+// expr metavariable to cfg（宏系统增强）
+// ============================================================================
+
+/// Rust 1.96: 允许将 `expr` 元变量传递给 `cfg` 的宏示例
+///
+/// 此前，`expr` 元变量不能作为宏的 `cfg` 条件直接传递。
+/// 1.96 起，宏可以生成带 `cfg` 属性的代码，条件来自表达式片段。
+pub struct ExprToCfgExamples;
+
+impl ExprToCfgExamples {
+    /// 演示宏内部将表达式片段嵌入 cfg 条件（编译时生成）
+    pub fn demonstrate_expr_cfg() {
+        // 实际使用场景中，宏可根据输入表达式生成不同的 cfg 分支
+        // 例如：根据 feature 名称（来自 expr 片段）条件编译代码块
+        #[cfg(feature = "std")]
+        {
+            println!("std feature enabled (demo placeholder)");
+        }
     }
 }
 
@@ -279,9 +321,19 @@ pub fn demonstrate_all_rust_196_features() {
         RangeFamilyExamples::range_inclusive_len(&ri)
     );
 
+    // core::range iterators
+    let mut count = 0;
+    for _ in RangeFamilyExamples::iter_range(0, 5) {
+        count += 1;
+    }
+    println!("RangeIter count: {}", count);
+
     // assert_matches!
     let val = MatchExample::Number(42);
     AssertMatchesExamples::assert_is_number_42(&val);
+
+    // debug_assert_matches!
+    AssertMatchesExamples::debug_assert_is_number(&val);
 
     // From<T>
     let lock = FromInitExamples::lazy_lock_from_value();
@@ -297,15 +349,19 @@ pub fn demonstrate_all_rust_196_features() {
         nz_vec.iter().map(|n| n.get()).collect::<Vec<_>>()
     );
 
+    // expr to cfg
+    ExprToCfgExamples::demonstrate_expr_cfg();
+
     println!("=== 演示完成 ===\n");
 }
 
 /// 获取 Rust 1.96 特性信息
 pub fn get_rust_196_feature_info() -> String {
     "Rust 1.96 稳定特性参考:\n- core::range family (Range, RangeInclusive, RangeFrom, \
-     RangeToInclusive)\n- assert_matches! macro\n- From<T> for LazyCell / LazyLock / \
-     AssertUnwindSafe\n- ManuallyDrop patterns\n- NonZero range iteration\n- never type tuple \
-     coercion"
+     RangeToInclusive, RangeIter, RangeFromIter, RangeToInclusiveIter)\n- assert_matches! / \
+     debug_assert_matches! macro\n- From<T> for LazyCell / LazyLock / AssertUnwindSafe\n- \
+     ManuallyDrop patterns\n- NonZero range iteration\n- never type tuple coercion\n- expr \
+     metavariable to cfg"
         .to_string()
 }
 
@@ -320,6 +376,33 @@ mod tests {
         assert_eq!(r.start, 5);
         assert_eq!(r.end, 15);
         assert_eq!(RangeFamilyExamples::range_len(&r), 10);
+    }
+
+    #[test]
+    fn test_range_iter() {
+        let mut collected = Vec::new();
+        for i in RangeFamilyExamples::iter_range(1, 4) {
+            collected.push(i);
+        }
+        assert_eq!(collected, vec![1, 2, 3]);
+    }
+
+    #[test]
+    fn test_range_from_iter() {
+        let mut collected = Vec::new();
+        for i in RangeFamilyExamples::iter_range_from(5).take(3) {
+            collected.push(i);
+        }
+        assert_eq!(collected, vec![5, 6, 7]);
+    }
+
+    #[test]
+    fn test_range_to_inclusive_iter() {
+        let mut collected = Vec::new();
+        for i in RangeFamilyExamples::iter_range_to_inclusive(3) {
+            collected.push(i);
+        }
+        assert_eq!(collected, vec![0, 1, 2, 3]);
     }
 
     #[test]

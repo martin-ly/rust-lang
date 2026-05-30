@@ -1,13 +1,14 @@
 # 链接有效性检查报告
 
 ## 统计
+
 | 类别 | 数量 |
 |:---|:---:|
-| 总链接数 | 117113 |
-| 有效链接 | 49656 |
-| 损坏链接 | 39 |
-| 外部链接 | 67406 |
-| 仅锚点链接 | 40106 |
+| 总链接数 | 116595 |
+| 有效链接 | 49470 |
+| 损坏链接 | 56 |
+| 外部链接 | 67057 |
+| 仅锚点链接 | 39937 |
 
 ## 损坏链接清单（按问题类型分组）
 
@@ -81,19 +82,44 @@
 
  |
 
+### 锚点不存在 (17个)
+
+| 源文件 | 链接文本 | 链接路径 | 问题 |
+|:---|:---|:---|:---|
+| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\03_execution_models\01_synchronous.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\03_execution_models\04_parallel.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\03_execution_models\05_distributed.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\03_execution_models\README.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\04_compositional_engineering\02_effectiveness_proofs.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\04_compositional_engineering\03_integration_theory.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\04_compositional_engineering\README.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+| docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md | **最后更新**: 2026-03-14 (Rust 1.94 深度整合) | `#最后更新-2026-03-14-rust-194-深度整合` | 同文件锚点不存在: #最后更新-2026-03-14-rust-194-深度整合 |
+
 ## 修复建议
 
 ### 1. 文件不存在问题
+
 - 检查链接路径是否正确
 - 确认目标文件是否已被移动或删除
 - 更新链接指向正确的文件位置
 
 ### 2. 锚点不存在问题
+
 - 检查锚点ID是否与目标文件中的标题匹配
 - GitHub风格锚点：将标题转换为小写，空格替换为连字符，移除标点
 - 示例：`## Hello World!` -> `#hello-world`
 
 ### 3. 同文件锚点问题
+
 - 检查文档中是否存在对应的标题
 - 可能是文档结构已更改但目录未更新
 
@@ -110,5 +136,22 @@
 | docs\rust-ownership-decidability\CROSS_REFERENCE_VERIFICATION_REPORT.md | 2 |
 | docs\archive\rust-ownership-chinese\rust_go_cpp_c_comprehensive_comparison.md | 1 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 1 |
+| docs\research_notes\software_design_theory\02_workflow_safe_complete_models\02_complete_43_catalog.md | 1 |
+| docs\research_notes\software_design_theory\03_execution_models\01_synchronous.md | 1 |
+| docs\research_notes\software_design_theory\03_execution_models\03_concurrent.md | 1 |
+| docs\research_notes\software_design_theory\03_execution_models\04_parallel.md | 1 |
+| docs\research_notes\software_design_theory\03_execution_models\05_distributed.md | 1 |
+| docs\research_notes\software_design_theory\03_execution_models\06_boundary_analysis.md | 1 |
+| docs\research_notes\software_design_theory\03_execution_models\README.md | 1 |
+| docs\research_notes\software_design_theory\04_compositional_engineering\01_formal_composition.md | 1 |
+| docs\research_notes\software_design_theory\04_compositional_engineering\02_effectiveness_proofs.md | 1 |
+| docs\research_notes\software_design_theory\04_compositional_engineering\03_integration_theory.md | 1 |
+| docs\research_notes\software_design_theory\04_compositional_engineering\README.md | 1 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_expressive_inexpressive_matrix.md | 1 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_safe_unsafe_matrix.md | 1 |
+| docs\research_notes\software_design_theory\05_boundary_system\10_supported_unsupported_matrix.md | 1 |
+| docs\research_notes\software_design_theory\05_distributed\01_saga_pattern.md | 1 |
+| docs\research_notes\software_design_theory\05_distributed\02_cqrs_pattern.md | 1 |
+| docs\research_notes\software_design_theory\05_distributed\03_circuit_breaker.md | 1 |
 
-**总计 9 个文件包含损坏链接**
+**总计 26 个文件包含损坏链接**

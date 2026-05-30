@@ -131,7 +131,7 @@ impl ConnectionPool {
     }
 }
 
-/// 使用 From<T> for LazyLock<T> 构建网络配置
+/// 使用 `From<T>` for `LazyLock<T>` 构建网络配置
 pub struct NetworkConfig {
     endpoint: LazyLock<String>,
     timeout_ms: LazyLock<u64>,

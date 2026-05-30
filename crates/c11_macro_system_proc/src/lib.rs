@@ -244,7 +244,8 @@ pub fn conditional(input: TokenStream) -> TokenStream {
                     branches.push((current_cfg.take(), g.stream()));
                     current_tokens = proc_macro2::TokenStream::new();
                 } else {
-                    current_tokens.extend(std::iter::once(proc_macro2::TokenTree::Group(g.clone())));
+                    current_tokens
+                        .extend(std::iter::once(proc_macro2::TokenTree::Group(g.clone())));
                 }
             }
             _ => {
@@ -258,16 +259,20 @@ pub fn conditional(input: TokenStream) -> TokenStream {
     }
 
     // 选择一个匹配的分支（简化：检查 debug_assertions）
-    let selected = branches.iter().find_map(|(cfg, tokens)| {
-        match cfg.as_deref() {
+    let selected = branches
+        .iter()
+        .find_map(|(cfg, tokens)| match cfg.as_deref() {
             Some(c) if c.contains("debug_assertions") && !c.contains("not") => Some(tokens.clone()),
             Some(c) if c.contains("not(debug_assertions)") => {
-                if cfg!(not(debug_assertions)) { Some(tokens.clone()) } else { None }
+                if cfg!(not(debug_assertions)) {
+                    Some(tokens.clone())
+                } else {
+                    None
+                }
             }
             None => Some(tokens.clone()),
             _ => None,
-        }
-    });
+        });
 
     selected.map_or_else(TokenStream::new, TokenStream::from)
 }
@@ -343,7 +348,10 @@ pub fn serializable(input: TokenStream) -> TokenStream {
     };
 
     let field_names: Vec<_> = fields.iter().map(|f| &f.ident).collect();
-    let field_names_str: Vec<String> = field_names.iter().map(|n| n.as_ref().unwrap().to_string()).collect();
+    let field_names_str: Vec<String> = field_names
+        .iter()
+        .map(|n| n.as_ref().unwrap().to_string())
+        .collect();
 
     let expanded = quote! {
         #[derive(Debug)]

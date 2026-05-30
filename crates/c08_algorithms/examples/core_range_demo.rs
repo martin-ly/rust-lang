@@ -3,7 +3,7 @@
 //! 本示例展示 Rust 1.96.0 中 `core::range` 模块的完整新 API：
 //! - `core::range::Range` / `RangeIter` — 半开区间 `[start, end)`
 //! - `core::range::RangeFrom` / `RangeFromIter` — 无限区间 `[start, ∞)`
-//! - `core::range::RangeToInclusive` / `RangeToInclusiveIter` — 闭区间 `(-∞, end]`
+//! - `core::range::RangeToInclusive` — 闭区间 `(-∞, end]`（不实现 IntoIterator）
 //! - `core::range::RangeInclusive` / `RangeInclusiveIter` — 闭区间 `[start, end]`
 //!
 //! 这些类型实现 `IntoIterator` 而非直接 `Iterator`，因此当元素类型 `T: Copy` 时，
@@ -62,7 +62,7 @@ fn demonstrate_core_range_from() {
     println!("  取前5个: {:?}", first_5); // [10, 11, 12, 13, 14]
 
     // RangeFrom 也实现 Copy
-    let another_iter: RangeFromIter<i32> = from.into_iter();
+    let mut another_iter: RangeFromIter<i32> = from.into_iter();
     let nth_10 = another_iter.nth(10);
     println!("  第11个元素: {:?}", nth_10); // Some(20)
 }
@@ -75,14 +75,11 @@ fn demonstrate_core_range_from() {
 fn demonstrate_core_range_to_inclusive() {
     println!("\n=== core::range::RangeToInclusive (闭区间 (-∞, end]) ===");
 
-    use core::range::{RangeToInclusive, RangeToInclusiveIter};
+    use core::range::RangeToInclusive;
 
-    let to: RangeToInclusive<i32> = RangeToInclusive { end: 4 };
-    println!("  RangeToInclusive {{ end: 4 }} = {:?}", to);
-
-    let iter: RangeToInclusiveIter<i32> = to.into_iter();
-    let values: Vec<i32> = iter.collect();
-    println!("  迭代结果: {:?}", values); // [0, 1, 2, 3, 4]
+    let to: RangeToInclusive<i32> = RangeToInclusive { last: 4 };
+    println!("  RangeToInclusive {{ last: 4 }} = {:?}", to);
+    println!("  注意: RangeToInclusive 不实现 IntoIterator");
 
     // 与 RangeInclusive 的对比
     use core::range::RangeInclusive;
@@ -157,8 +154,8 @@ fn inclusive_binary_search(
     target: i32,
     range: &RangeInclusive<usize>,
 ) -> Option<usize> {
-    let mut left = *range.start();
-    let mut right = *range.end();
+    let mut left = range.start;
+    let mut right = range.last;
 
     while left <= right {
         let mid = left + (right - left) / 2;
@@ -180,7 +177,10 @@ fn demonstrate_inclusive_binary_search() {
     println!("\n=== 算法: 闭区间二分查找 ===");
 
     let arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
-    let range = RangeInclusive::new(0, arr.len() - 1);
+    let range = RangeInclusive {
+        start: 0,
+        last: arr.len() - 1,
+    };
 
     println!("  数组: {:?}", arr);
     println!("  搜索范围: [{}, {}]", range.start, range.last);
@@ -294,9 +294,7 @@ fn main() {
     println!("\n✅ `core::range` 1.96.0 演示完成！");
     println!("   关键要点:");
     println!("   - core::range::Range / RangeFrom / RangeToInclusive / RangeInclusive");
-    println!(
-        "   - 配套迭代器: RangeIter / RangeFromIter / RangeToInclusiveIter / RangeInclusiveIter"
-    );
+    println!("   - 配套迭代器: RangeIter / RangeFromIter / RangeInclusiveIter");
     println!("   - 所有范围类型在元素 Copy 时自身也 Copy，可多次复用");
     println!("   - 实现 IntoIterator 而非 Iterator，解耦范围值与迭代状态");
     println!("   - 完全在 core 中定义，no_std 友好");

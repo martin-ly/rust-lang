@@ -478,4 +478,3 @@ spec:
       targetLabel: pod
     - sourceLabels: [__meta_kubernetes_namespace]
       targetLabel: namespace
-

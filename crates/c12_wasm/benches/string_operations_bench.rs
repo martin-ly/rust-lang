@@ -8,7 +8,7 @@
 //! cargo bench --bench string_operations_bench
 //! ```
 use c12_wasm::string_examples::*;
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 /// 测试字符串反转性能

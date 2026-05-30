@@ -391,8 +391,8 @@ macro_rules! define_crate_error {
         $result_name:ident
     ) => {
         pub use $crate::{
-            impl_into_unified_error, impl_rust_lang_error, CommonError, ErrorCode, ErrorContext,
-            ErrorRecovery, Result, RustLangError, UnifiedError,
+            CommonError, ErrorCode, ErrorContext, ErrorRecovery, Result, RustLangError,
+            UnifiedError, impl_into_unified_error, impl_rust_lang_error,
         };
 
         /// Crate-specific result type

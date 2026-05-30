@@ -5,7 +5,7 @@
 //! - `From<T> for LazyLock` 用于过程宏元数据缓存
 //! - `never type` 元组 coercion 用于错误路径
 
-#![allow(clippy::incompatible_msrv, dead_code)]
+#![allow(clippy::incompatible_msrv, dead_code, unreachable_code)]
 
 use std::assert_matches;
 use std::sync::LazyLock;

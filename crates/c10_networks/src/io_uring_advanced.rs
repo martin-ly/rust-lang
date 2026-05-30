@@ -35,14 +35,14 @@
 
 #[cfg(all(target_os = "linux", feature = "io-uring"))]
 pub mod linux_impl {
-    use io_uring::{opcode, types, CompletionQueue, IoUring, SubmissionQueue};
+    use io_uring::{CompletionQueue, IoUring, SubmissionQueue, opcode, types};
     use std::os::unix::io::AsRawFd;
 
     // =========================================================================
     // 1. 基础文件 I/O
     // =========================================================================
 
-    /// 异步读取整个文件到 Vec<u8>
+    /// 异步读取整个文件到 `Vec<u8>`
     ///
     /// 展示了最基本的 io_uring 文件读取模式：
     /// 1. 打开文件

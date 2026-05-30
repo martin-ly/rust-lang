@@ -13,11 +13,11 @@
 //! cargo bench --bench rust_192_benchmarks
 //! ```
 use c01_ownership_borrow_scope::archive::rust_192_features::{
-    rust_192_higher_ranked_lifetime, rust_192_tracked_function, Rust192Union,
-    Rust192ZeroSizedArray, SafeMaybeUninit,
+    Rust192Union, Rust192ZeroSizedArray, SafeMaybeUninit, rust_192_higher_ranked_lifetime,
+    rust_192_tracked_function,
 };
 use c01_ownership_borrow_scope::{BorrowTracker, LifetimeTracker, OwnershipTracker};
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use std::hint::black_box;
 
 /// 基准测试 MaybeUninit 性能

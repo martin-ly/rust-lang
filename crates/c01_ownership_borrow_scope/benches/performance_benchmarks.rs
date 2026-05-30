@@ -1,6 +1,6 @@
 //! 所有权和借用作用域模块性能基准测试 / Ownership and Borrowing Scope Module Performance Benchmarks
 use c01_ownership_borrow_scope::scope::{ScopeManager, ScopeType};
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 fn bench_scope_creation(c: &mut Criterion) {
     c.bench_function("scope_creation", |b| {
