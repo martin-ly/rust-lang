@@ -54,7 +54,7 @@
 
 Rust 1.42 引入 `matches!` 宏，将模式匹配从**控制流**转化为**布尔表达式**：
 
-```ignore
+```rust
 let x = Some(42);
 
 // 传统方式：需要 match 控制流
@@ -65,6 +65,7 @@ let is_some_forty_two = match x {
 
 // matches! 方式：直接返回 bool
 let is_some_forty_two = matches!(x, Some(42));
+assert!(is_some_forty_two);
 ```
 
 > **形式化语义**: `matches!(e, p)` ≡ `match e { p => true, _ => false }`
@@ -90,16 +91,18 @@ assert!(matches!(x, Some(n) if n > 100)); // ❌ 失败
 
 Rust 1.96 稳定化 `assert_matches!`，将 `matches!` 的布尔结果**提升为断言契约**：
 
-```ignore
+```rust
 // 需要 Rust 1.96+
 use std::assert_matches;
 
 let result: Result<i32, &str> = Ok(42);
 
-// 断言 result 匹配 Ok 变体，并捕获绑定
-assert_matches!(result, Ok(n) => {
-    assert_eq!(n, 42); // n 在此作用域内可用
-});
+// 断言 result 匹配 Ok 变体
+assert_matches!(result, Ok(n) if n == 42);
+
+// 支持嵌套模式
+let nested: Result<Option<i32>, &str> = Ok(Some(42));
+assert_matches!(nested, Ok(Some(n)) if n > 0);
 ```
 
 > **语义核心**: `assert_matches!(e, p => block)` 执行以下操作：
@@ -112,17 +115,18 @@ assert_matches!(result, Ok(n) => {
 
 **与 `assert!(matches!(...))` 的对比**:
 
-```ignore
+```rust
+use std::assert_matches;
+
+let result: Result<i32, &str> = Ok(42);
+
 // 方式 A: assert! + matches!（Rust < 1.96）
 assert!(matches!(result, Ok(n) if n > 10));
 // 失败时信息: "assertion failed: matches!(result, Ok(n) if n > 10)"
-// ❌ 无法使用 n 的绑定
 
 // 方式 B: assert_matches!（Rust 1.96+）
-assert_matches!(result, Ok(n) if n > 10 => {
-    println!("value = {}", n); // ✅ n 可用
-});
-// 失败时信息: 显示实际值和期望模式
+assert_matches!(result, Ok(n) if n > 10);
+// 失败时信息: 显示实际值和期望模式，更易于调试
 ```
 
 > **关键差异**: `assert_matches!` 在匹配成功时**保留绑定**，允许在断言通过后继续使用模式绑定的变量。这是 `assert!(matches!(...))` 无法实现的——后者在 `matches!` 返回后绑定已丢失。
@@ -134,11 +138,12 @@ assert_matches!(result, Ok(n) if n > 10 => {
 
 与 `assert!` / `debug_assert!` 的关系一致：
 
-```ignore
+```rust
+use std::assert_matches::debug_assert_matches;
+
 // release 模式下被消除（零运行时开销）
-debug_assert_matches!(config, Config::Debug { verbose: true } => {
-    log::set_max_level(log::LevelFilter::Debug);
-});
+let config = Some(true);
+debug_assert_matches!(config, Some(true));
 ```
 
 | 宏 | debug 模式 | release 模式 | 用例 |
@@ -228,18 +233,22 @@ assert_matches!(msg, Message::Coord { x, y } => {
 ### 3.1 测试中的 Result/Option 断言
 >
 
-```ignore
-#[test]
+```rust
+use std::assert_matches::assert_matches;
+
+#[derive(Debug, PartialEq)]
+struct Config { port: u16, host: String }
+
 fn parse_config() {
-    let result = parse("port=8080");
+    let result: Result<Config, &str> = Ok(Config { port: 8080, host: "localhost".to_string() });
 
-    // ✅ 推荐: 验证结构形状 + 提取值
-    assert_matches!(result, Ok(Config { port, .. }) => {
+    // ✅ 推荐: 验证结构形状
+    assert_matches!(result, Ok(Config { port, .. }) if *port == 8080);
+
+    // 也可结合 if let 提取值做进一步断言
+    if let Ok(Config { port, .. }) = result {
         assert_eq!(port, 8080);
-    });
-
-    // ❌ 不推荐: 仅验证相等性，丢失结构信息
-    assert_eq!(result, Ok(Config { port: 8080, host: "localhost".to_string() }));
+    }
 }
 ```
 
@@ -250,7 +259,9 @@ fn parse_config() {
 ### 3.2 复杂枚举变体验证
 >
 
-```ignore
+```rust
+use std::assert_matches::assert_matches;
+
 #[derive(Debug)]
 enum State {
     Idle,
@@ -259,15 +270,11 @@ enum State {
     Error { code: u16, message: String },
 }
 
-#[test]
 fn state_machine_transition() {
-    let state = run_task();
+    let state = State::Processing { id: 42, progress: 0.5 };
 
-    // 验证特定变体 + 提取字段进行进一步检查
-    assert_matches!(state, State::Processing { id, progress } => {
-        assert!(id > 0);
-        assert!(progress >= 0.0 && progress <= 1.0);
-    });
+    // 验证特定变体
+    assert_matches!(state, State::Processing { id, progress } if *id > 0 && *progress <= 1.0);
 }
 ```
 
@@ -329,28 +336,26 @@ graph TD
 
 ### 4.2 边界极限
 
-```ignore
+```rust
+use std::assert_matches::assert_matches;
+
 // 边界 1: 嵌套模式
 let x = Some(Some(42));
-assert_matches!(x, Some(Some(n)) => {
-    assert_eq!(n, 42); // ✅ 嵌套绑定正常工作
-});
+assert_matches!(x, Some(Some(n)) if n == 42); // ✅ 嵌套模式正常工作
 
 // 边界 2: 或模式 (|)
-let x = Ok(42);
-assert_matches!(x, Ok(n) | Err(n) if n > 0 => {
-    // ✅ 或模式支持
-});
+let x: Result<i32, i32> = Ok(42);
+assert_matches!(x, Ok(n) | Err(n) if n > 0); // ✅ 或模式支持
 
 // 边界 3: .. 忽略剩余字段
+#[derive(Debug)]
+struct Point { x: i32, y: i32, z: i32 }
 let x = Point { x: 1, y: 2, z: 3 };
-assert_matches!(x, Point { x, .. } => {
-    assert_eq!(x, 1); // ✅ .. 正常工作
-});
+assert_matches!(x, Point { x: 1, .. }); // ✅ .. 正常工作
 
 // 边界 4: 不可反驳模式（编译警告）
 let x = 42;
-// assert_matches!(x, n => { ... }); // ⚠️ 不可反驳模式，编译器警告
+// assert_matches!(x, n); // ⚠️ 不可反驳模式，编译器可能警告
 ```
 
 > **边界要点**: `assert_matches!` 支持所有标准模式语法（嵌套、或模式、`..`、守卫条件），但**不可反驳模式**（irrefutable patterns）会触发编译器警告——因为断言在此情况下永不为假。

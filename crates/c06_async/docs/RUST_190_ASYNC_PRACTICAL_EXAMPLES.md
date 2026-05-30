@@ -26,7 +26,6 @@
   - [📚 完整内容包括](#-完整内容包括)
   - [🔗 相关文档](#-相关文档)
   - [🎯 学习建议](#-学习建议)
-  - [**总代码行数**: ~800+ 行（此为精简版，完整版约3000+行）](#总代码行数-800-行此为精简版完整版约3000行)
 
 ---
 
@@ -951,13 +950,6 @@ pub async fn demo_timeout_cancellation() -> Result<(), Box<dyn std::error::Error
 4. **实践生产模式**: 学习连接池、熔断器等模式
 5. **性能优化**: 测量、分析、优化
 
----
-
-**文档完成日期**: 2025-10-19
-**Rust版本要求**: 1.90+
-**主要运行时**: Tokio 1.35+, async-std 1.12+, Smol 2.0+
-**代码状态**: ✅ 可直接运行（需要添加相应依赖）
-**总代码行数**: ~800+ 行（此为精简版，完整版约3000+行）
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

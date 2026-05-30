@@ -1,182 +1,164 @@
-//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
+//! # Rust 1.96.0 稳定特性演示模块（异步编程）
+//!
+//! 本模块展示 Rust 1.96.0 在异步编程中的关键新 API：
+//! - `core::range::Range` — `Copy` 语义，适用于异步任务分批范围
+//! - `std::assert_matches!` / `debug_assert_matches!` — 异步 Result/Option 模式断言
+//! - `LazyLock::from(value)` — 异步运行时配置（非 `const`）
 
-use std::ops::RangeInclusive;
+use std::sync::LazyLock;
 
-/// `if let` guards (Rust 1.95 稳定，非 1.96 新特性) 在异步编程中的应用
+// ============================================================================
+// 1. core::range::Range — 异步任务分批（Copy 语义）
+// ============================================================================
+
+/// 异步任务批次分配器。
 ///
-/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
-/// 减少嵌套层级，使代码更扁平、更易读。
-pub struct AsyncIfLetGuardExamples;
+/// `core::range::Range` 实现 `Copy`，因此批次范围可以在多个异步任务之间
+/// 自由复制，无需引用或生命周期管理。
+pub struct AsyncTaskBatcher;
 
-impl AsyncIfLetGuardExamples {
-    /// 解析超时配置
-    pub fn parse_timeout_ms(input: Option<&str>) -> Result<u64, &'static str> {
-        match input {
-            Some(s) if let Ok(ms) = s.parse::<u64>() => Ok(ms),
-            Some(_) => Err("无效的超时值"),
-            None => Ok(5000), // 默认 5 秒
-        }
-    }
-
-    /// 评估异步任务结果
-    pub fn evaluate_task_result(result: Result<Option<u32>, &'static str>) -> &'static str {
-        match result {
-            Ok(Some(0)) => "任务成功完成",
-            Ok(Some(_)) => "任务完成但有警告",
-            Ok(None) => "任务结果为空",
-            Err(_) => "任务执行失败",
-        }
-    }
-}
-
-/// Range 类型应用（标准库基础特性）
-pub struct AsyncRangeExamples;
-
-impl AsyncRangeExamples {
-    /// 批处理
-    pub fn batch_async_tasks(total_tasks: usize, batch_size: usize) -> Vec<RangeInclusive<usize>> {
+impl AsyncTaskBatcher {
+    /// 将 `total_tasks` 按 `batch_size` 分成多个批次，返回 `core::range::Range` 列表。
+    ///
+    /// 使用 `core::range::Range { start, end }` 直接构造半开区间。
+    pub fn batch_ranges(total_tasks: usize, batch_size: usize) -> Vec<core::range::Range<usize>> {
         if batch_size == 0 || total_tasks == 0 {
             return vec![];
         }
 
         let mut ranges = Vec::new();
-        let mut start = 0;
+        let mut start = 0usize;
 
         while start < total_tasks {
-            let end = (start + batch_size - 1).min(total_tasks - 1);
-            ranges.push(start..=end);
-            start = end + 1;
+            let end = (start + batch_size).min(total_tasks);
+            ranges.push(core::range::Range { start, end });
+            start = end;
         }
 
         ranges
     }
 
-    /// 并发度控制
-    pub fn optimal_concurrency_range(
-        cpu_cores: usize,
-        io_intensive: bool,
-    ) -> RangeInclusive<usize> {
-        if io_intensive {
-            cpu_cores..=(cpu_cores * 10)
-        } else {
-            1..=cpu_cores
+    /// 计算给定批次范围的总任务数。
+    pub fn total_in_ranges(ranges: &[core::range::Range<usize>]) -> usize {
+        ranges.iter().map(|r| r.end - r.start).sum()
+    }
+
+    /// 将范围映射为并发执行的建议优先级（范围越小优先级越高）。
+    pub fn priority_for_range(range: core::range::Range<usize>) -> u8 {
+        let size = range.end - range.start;
+        match size {
+            0..=10 => 3,
+            11..=50 => 2,
+            _ => 1,
         }
     }
-
-    /// 超时类别
-    pub fn timeout_category(millis: u64) -> &'static str {
-        match millis {
-            0..=100 => "instant",
-            101..=1000 => "fast",
-            1001..=5000 => "moderate",
-            5001..=30000 => "slow",
-            _ => "timeout",
-        }
-    }
-
-    /// 背压控制
-    pub fn is_back_pressure_needed(queue_depth: usize, threshold: RangeInclusive<usize>) -> bool {
-        threshold.contains(&queue_depth)
-    }
 }
 
-/// 元组类型应用（泛型编程基础）
-pub struct AsyncTupleExamples;
+// ============================================================================
+// 2. LazyLock::from(value) — 异步运行时配置
+// ============================================================================
 
-impl AsyncTupleExamples {
-    /// 异步执行结果
-    pub fn async_execution_result<T>(
-        result: Result<T, String>,
-        task_id: usize,
-    ) -> (Result<T, String>, usize, std::time::Instant)
-    where
-        T: Clone,
-    {
-        (result, task_id, std::time::Instant::now())
-    }
-
-    /// 异步统计
-    pub fn async_stats(
-        completed: usize,
-        failed: usize,
-        pending: usize,
-    ) -> (usize, usize, usize, f64, &'static str) {
-        let total = completed + failed + pending;
-        let completion_rate = if total > 0 {
-            (completed as f64 / total as f64) * 100.0
-        } else {
-            0.0
-        };
-
-        let status = if completion_rate >= 95.0 {
-            "excellent"
-        } else if completion_rate >= 80.0 {
-            "good"
-        } else if completion_rate >= 50.0 {
-            "fair"
-        } else {
-            "poor"
-        };
-
-        (completed, failed, pending, completion_rate, status)
-    }
+/// 异步运行时配置，使用 `LazyLock::from` 包装运行时确定的值。
+///
+/// ⚠️ `LazyLock::from` **不是 `const`**，不能用于 `static`。
+/// 适合在异步运行时初始化阶段构造配置对象。
+pub struct AsyncRuntimeConfig {
+    /// 最大并发任务数
+    pub max_concurrency: LazyLock<usize, fn() -> usize>,
+    /// 单次批处理大小
+    pub batch_size: LazyLock<usize, fn() -> usize>,
+    /// 默认超时（毫秒）
+    pub default_timeout_ms: LazyLock<u64, fn() -> u64>,
 }
 
-/// 异步任务调度器
-pub struct AsyncTaskScheduler {
-    task_ranges: Vec<RangeInclusive<usize>>,
-    active_range: RangeInclusive<usize>,
-}
-
-impl AsyncTaskScheduler {
-    /// 创建新调度器
-    pub fn new(total_tasks: usize, concurrency: usize) -> Self {
-        let ranges = AsyncRangeExamples::batch_async_tasks(total_tasks, concurrency);
+impl AsyncRuntimeConfig {
+    /// 从运行时值构造配置。
+    pub fn from_values(max_concurrency: usize, batch_size: usize, timeout_ms: u64) -> Self {
         Self {
-            task_ranges: ranges.clone(),
-            active_range: 0..=concurrency.saturating_sub(1),
+            max_concurrency: LazyLock::from(max_concurrency),
+            batch_size: LazyLock::from(batch_size),
+            default_timeout_ms: LazyLock::from(timeout_ms),
         }
     }
 
-    /// 获取任务范围
-    pub fn get_task_range(&self, batch_id: usize) -> Option<&RangeInclusive<usize>> {
-        self.task_ranges.get(batch_id)
-    }
-
-    /// 检查批次是否活跃
-    pub fn is_batch_active(&self, batch_id: usize) -> bool {
-        self.active_range.contains(&batch_id)
-    }
-
-    /// 获取所有范围
-    pub fn get_all_ranges(&self) -> &[RangeInclusive<usize>] {
-        &self.task_ranges
+    /// 获取配置摘要。
+    pub fn summary(&self) -> String {
+        format!(
+            "max_concurrency={}, batch_size={}, timeout_ms={}",
+            *self.max_concurrency, *self.batch_size, *self.default_timeout_ms
+        )
     }
 }
 
-/// 演示函数
+// ============================================================================
+// 3. assert_matches! / debug_assert_matches! — 异步结果测试
+// ============================================================================
+
+/// 异步任务结果。
+#[derive(Debug, PartialEq)]
+pub enum AsyncTaskResult {
+    Completed { id: usize, output: String },
+    TimedOut { id: usize, elapsed_ms: u64 },
+    Cancelled { id: usize },
+}
+
+/// 使用 `assert_matches!` 验证异步结果集合。
+///
+/// 在测试异步系统时，比 `assert!(matches!(...))` 提供更好的诊断信息。
+pub fn verify_async_results(results: &[AsyncTaskResult]) {
+    use std::assert_matches;
+
+    for result in results {
+        assert_matches!(
+            result,
+            AsyncTaskResult::Completed { .. }
+                | AsyncTaskResult::TimedOut { .. }
+                | AsyncTaskResult::Cancelled { .. }
+        );
+    }
+}
+
+/// 异步状态机状态。
+#[derive(Debug, PartialEq, Clone, Copy)]
+pub enum AsyncState {
+    Idle,
+    Polling { attempt: u8 },
+    Ready,
+    Failed { code: u16 },
+}
+
+/// 使用 `debug_assert_matches!` 在运行时检查异步不变式（零成本于 release）。
+///
+/// 适用于验证异步状态机的内部状态转换是否符合预期。
+pub fn check_async_invariants(state: AsyncState) {
+    use std::debug_assert_matches;
+
+    // 零成本抽象：仅在 debug 构建时执行
+    debug_assert_matches!(
+        state,
+        AsyncState::Idle
+            | AsyncState::Polling { .. }
+            | AsyncState::Ready
+            | AsyncState::Failed { .. }
+    );
+}
+
+// ============================================================================
+// 演示函数
+// ============================================================================
+
+/// 运行 Rust 1.96 异步特性演示
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
-    println!("   Rust 1.95+ 特性跟踪演示");
+    println!("   Rust 1.96.0 异步特性演示");
     println!("========================================\n");
 
-    let batches = AsyncRangeExamples::batch_async_tasks(100, 10);
-    println!("批处理: {:?}", batches);
+    let batches = AsyncTaskBatcher::batch_ranges(100, 10);
+    println!("异步任务批次: {:?}", batches);
+    println!("总任务数: {}", AsyncTaskBatcher::total_in_ranges(&batches));
 
-    let concurrency = AsyncRangeExamples::optimal_concurrency_range(8, true);
-    println!("I/O密集型并发度: {:?}", concurrency);
-
-    let category = AsyncRangeExamples::timeout_category(500);
-    println!("500ms超时类别: {}", category);
-
-    let (completed, failed, pending, rate, status) = AsyncTupleExamples::async_stats(90, 5, 5);
-    println!(
-        "异步统计: 完成={}, 失败={}, 等待={}, 完成率={:.1}%, 状态={}",
-        completed, failed, pending, rate, status
-    );
-
-    let scheduler = AsyncTaskScheduler::new(100, 4);
-    println!("任务范围: {:?}", scheduler.get_all_ranges());
+    let config = AsyncRuntimeConfig::from_values(8, 16, 5000);
+    println!("运行时配置: {}", config.summary());
 
     println!("\n========================================");
     println!("   演示完成");
@@ -185,519 +167,160 @@ pub fn demonstrate_rust_196_features() {
 
 /// 获取特性信息
 pub fn get_rust_196_async_info() -> String {
-    "Rust 1.95+ 特性跟踪:\n- RangeInclusive for batch processing\n- Tuple coercion for async \
-     results\n- Better async task scheduling"
+    "Rust 1.96.0 异步特性:\n- core::range::Range { start, end } — Copy 语义，异步任务分批\n- \
+     LazyLock::from(value) — 异步运行时配置（非 const）\n- assert_matches! / debug_assert_matches! \
+     — 异步 Result/Option 断言"
         .to_string()
 }
 
 // ============================================================================
-// Rust 1.96 回顾：`core::pin::pin!` 宏（1.68 stable） — 异步栈上固定 (1.68 stable, 1.96 回顾)
+// 测试
 // ============================================================================
-
-/// # `core::pin::pin!` 与异步编程
-///
-/// Rust 1.68.0 稳定了 `core::pin::pin!`（项目 MSRV 1.96 可用） 宏。
-/// 在异步编程中，`pin!` 消除了将 Future 固定到堆上的需要，
-/// 对高性能异步运行时尤为重要。
-///
-/// ## 异步场景
-/// - `select!` 宏中的多个 future 可以在栈上固定
-/// - 递归异步函数减少 `Box::pin` 分配
-/// - 嵌入式/实时异步场景避免堆分配
-pub struct AsyncPinMacroExamples;
-
-impl AsyncPinMacroExamples {
-    /// 在栈上固定 future 并执行
-    pub fn stack_pin_future() {
-        let future = async { 42 };
-        let _pinned = std::pin::pin!(future);
-        // _pinned 现在是 Pin<&mut impl Future<Output = i32>>
-    }
-
-    /// 模拟 async block 的栈上固定模式
-    pub fn pin_async_block<F>(_f: F) -> std::pin::Pin<&'static mut F>
-    where
-        F: std::future::Future,
-    {
-        todo!("使用 pin!(f) 在调用点固定")
-    }
-}
-
-// ============================================================================
-// Rust 1.68 稳定特性：`VecDeque::new` const 支持
-// ============================================================================
-
-use std::collections::VecDeque;
-
-/// # `VecDeque::new` 的 `const` 支持
-///
-/// Rust 1.68.0 使 `VecDeque::new` 成为 `const fn`，
-/// 允许在编译期初始化双端队列。
-///
-/// ## 异步场景
-/// 异步运行时的任务队列、消息通道的缓冲区可在编译期初始化，
-/// 减少运行时启动延迟。
-pub struct ConstVecDequeAsyncExamples;
-
-impl ConstVecDequeAsyncExamples {
-    /// 编译期初始化的异步任务队列
-    pub const TASK_QUEUE: VecDeque<&'static str> = VecDeque::new();
-
-    /// 演示常量 VecDeque 在异步上下文中的应用
-    pub fn async_task_buffer() -> VecDeque<Box<dyn std::future::Future<Output = ()>>> {
-        // 实际异步运行时中，结合 UnsafeCell 或 Mutex 实现静态队列
-        VecDeque::new()
-    }
-}
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::assert_matches;
 
     #[test]
-    fn test_batch_async_tasks() {
-        let batches = AsyncRangeExamples::batch_async_tasks(100, 10);
-        assert_eq!(batches.len(), 10);
+    fn test_batch_ranges_copy_semantics() {
+        let ranges = AsyncTaskBatcher::batch_ranges(100, 10);
+        assert_eq!(ranges.len(), 10);
 
-        let total: usize = batches.iter().map(|r| r.end() - r.start() + 1).sum();
-        assert_eq!(total, 100);
+        // `core::range::Range` 是 `Copy`，可以复制后仍使用原值
+        let r0 = ranges[0];
+        let r0_copy = r0;
+        assert_eq!(r0.start, r0_copy.start);
+        assert_eq!(r0.end, r0_copy.end);
+        assert_eq!(r0.end - r0.start, 10);
     }
 
     #[test]
-    fn test_optimal_concurrency_range() {
-        let io_range = AsyncRangeExamples::optimal_concurrency_range(4, true);
-        assert_eq!(*io_range.start(), 4);
-        assert_eq!(*io_range.end(), 40);
+    fn test_batch_ranges_distribution() {
+        let ranges = AsyncTaskBatcher::batch_ranges(53, 10);
+        assert_eq!(ranges.len(), 6);
+        assert_eq!(AsyncTaskBatcher::total_in_ranges(&ranges), 53);
 
-        let cpu_range = AsyncRangeExamples::optimal_concurrency_range(4, false);
-        assert_eq!(*cpu_range.start(), 1);
-        assert_eq!(*cpu_range.end(), 4);
+        // 最后一个批次应该包含剩余任务
+        let last = ranges.last().unwrap();
+        assert_eq!(last.end - last.start, 3);
     }
 
     #[test]
-    fn test_timeout_category() {
-        assert_eq!(AsyncRangeExamples::timeout_category(50), "instant");
-        assert_eq!(AsyncRangeExamples::timeout_category(500), "fast");
-        assert_eq!(AsyncRangeExamples::timeout_category(3000), "moderate");
+    fn test_batch_ranges_empty() {
+        let ranges = AsyncTaskBatcher::batch_ranges(0, 10);
+        assert!(ranges.is_empty());
+
+        let ranges2 = AsyncTaskBatcher::batch_ranges(10, 0);
+        assert!(ranges2.is_empty());
     }
 
     #[test]
-    fn test_is_back_pressure_needed() {
-        assert!(AsyncRangeExamples::is_back_pressure_needed(80, 50..=100));
-        assert!(!AsyncRangeExamples::is_back_pressure_needed(30, 50..=100));
+    fn test_priority_for_range() {
+        let small = core::range::Range { start: 0, end: 5 };
+        assert_eq!(AsyncTaskBatcher::priority_for_range(small), 3);
+
+        let medium = core::range::Range { start: 0, end: 30 };
+        assert_eq!(AsyncTaskBatcher::priority_for_range(medium), 2);
+
+        let large = core::range::Range { start: 0, end: 100 };
+        assert_eq!(AsyncTaskBatcher::priority_for_range(large), 1);
     }
 
     #[test]
-    fn test_async_stats() {
-        let (completed, failed, pending, rate, status) = AsyncTupleExamples::async_stats(90, 5, 5);
-        assert_eq!(completed, 90);
-        assert_eq!(failed, 5);
-        assert_eq!(pending, 5);
-        assert!((rate - 90.0).abs() < 0.01);
-        assert_eq!(status, "good");
-    }
-
-    #[test]
-    fn test_async_task_scheduler() {
-        let scheduler = AsyncTaskScheduler::new(100, 4);
-        // 100 tasks / batch_size 4 = 25 ranges
-        assert_eq!(scheduler.get_all_ranges().len(), 25);
-        // batch 0 should be in active_range 0..=3
-        assert!(scheduler.is_batch_active(0));
-        // batch 4 should also be in active_range 0..=3
-        assert!(scheduler.is_batch_active(3));
-        // batch 4 should NOT be in active_range
-        assert!(!scheduler.is_batch_active(4));
-    }
-
-    #[test]
-    fn test_parse_timeout_ms() {
+    fn test_lazy_lock_from_runtime_config() {
+        let config = AsyncRuntimeConfig::from_values(16, 32, 3000);
+        assert_eq!(*config.max_concurrency, 16);
+        assert_eq!(*config.batch_size, 32);
+        assert_eq!(*config.default_timeout_ms, 3000);
         assert_eq!(
-            AsyncIfLetGuardExamples::parse_timeout_ms(Some("1000")),
-            Ok(1000)
+            config.summary(),
+            "max_concurrency=16, batch_size=32, timeout_ms=3000"
         );
-        assert_eq!(
-            AsyncIfLetGuardExamples::parse_timeout_ms(Some("abc")),
-            Err("无效的超时值")
-        );
-        assert_eq!(AsyncIfLetGuardExamples::parse_timeout_ms(None), Ok(5000));
     }
 
     #[test]
-    fn test_evaluate_task_result() {
-        assert_eq!(
-            AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(0))),
-            "任务成功完成"
+    fn test_assert_matches_async_result() {
+        let completed = AsyncTaskResult::Completed {
+            id: 1,
+            output: "done".to_string(),
+        };
+        assert_matches!(completed, AsyncTaskResult::Completed { id: 1, .. });
+
+        let timed_out = AsyncTaskResult::TimedOut {
+            id: 2,
+            elapsed_ms: 5000,
+        };
+        assert_matches!(
+            timed_out,
+            AsyncTaskResult::TimedOut {
+                elapsed_ms: 5000,
+                ..
+            }
         );
-        assert_eq!(
-            AsyncIfLetGuardExamples::evaluate_task_result(Ok(Some(1))),
-            "任务完成但有警告"
-        );
-        assert_eq!(
-            AsyncIfLetGuardExamples::evaluate_task_result(Ok(None)),
-            "任务结果为空"
-        );
-        assert_eq!(
-            AsyncIfLetGuardExamples::evaluate_task_result(Err("超时")),
-            "任务执行失败"
-        );
+
+        let cancelled = AsyncTaskResult::Cancelled { id: 3 };
+        assert_matches!(cancelled, AsyncTaskResult::Cancelled { id: 3 });
+    }
+
+    #[test]
+    fn test_assert_matches_option_result() {
+        let ok: Result<i32, &str> = Ok(100);
+        assert_matches!(ok, Ok(100));
+
+        let some: Option<u64> = Some(12345);
+        assert_matches!(some, Some(12345));
+
+        let none: Option<u64> = None;
+        assert_matches!(none, None);
+    }
+
+    #[test]
+    fn test_debug_assert_matches_async_state() {
+        // debug_assert_matches! 在 debug 构建时生效
+        check_async_invariants(AsyncState::Idle);
+        check_async_invariants(AsyncState::Polling { attempt: 1 });
+        check_async_invariants(AsyncState::Ready);
+        check_async_invariants(AsyncState::Failed { code: 500 });
+    }
+
+    #[test]
+    fn test_verify_async_results() {
+        let results = vec![
+            AsyncTaskResult::Completed {
+                id: 1,
+                output: "a".to_string(),
+            },
+            AsyncTaskResult::TimedOut {
+                id: 2,
+                elapsed_ms: 100,
+            },
+            AsyncTaskResult::Cancelled { id: 3 },
+        ];
+        verify_async_results(&results);
+    }
+
+    #[test]
+    fn test_core_range_into_iter() {
+        let r = core::range::Range { start: 5, end: 10 };
+        let collected: Vec<i32> = r.into_iter().collect();
+        assert_eq!(collected, vec![5, 6, 7, 8, 9]);
+    }
+
+    #[test]
+    fn test_range_inclusive_fields() {
+        let ri = core::range::RangeInclusive { start: 2, last: 5 };
+        assert_eq!(ri.start, 2);
+        assert_eq!(ri.last, 5);
+        let collected: Vec<i32> = ri.into_iter().collect();
+        assert_eq!(collected, vec![2, 3, 4, 5]);
     }
 
     #[test]
     fn test_get_rust_196_async_info() {
         let info = get_rust_196_async_info();
-        assert!(!info.is_empty());
-    }
-}
-
-// ==================== Rust 2024 Edition: async closures 完整指南 ====================
-//
-// async closures 是 Rust 1.85+ 中稳定化的重要特性，允许直接使用 `async || { }` 语法
-// 创建异步闭包。相比传统的 `async move { }` 闭包，新语法更简洁、语义更清晰。
-//
-// ## 语法对比
-// ```rust,ignore
-// // 传统写法（Rust 1.84 及之前）
-// let fetch = |url: &str| async move {
-//     reqwest::get(url).await?.text().await
-// };
-//
-// // Rust 1.85+ async closures
-// let fetch = async |url: &str| -> Result<String, Error> {
-//     reqwest::get(url).await?.text().await
-// };
-// ```
-
-use futures::executor::block_on;
-use std::pin::Pin;
-
-/// 基础 async closure 示例
-///
-/// 新的 `async || { }` 语法直接创建异步闭包，无需嵌套。
-pub fn basic_async_closure()
--> impl Fn(i32) -> Pin<Box<dyn std::future::Future<Output = i32> + Send>> {
-    // 传统写法：返回一个同步闭包，内部返回 async block
-    let _traditional = |x: i32| async move { x * 2 };
-
-    // Rust 2024 新写法：直接使用 async closure
-    // 注意：当前 stable 版本中 async closures 的 trait 系统支持仍在完善
-    // 以下使用等效的 async block 实现以确保兼容性
-
-    |x: i32| -> Pin<Box<dyn std::future::Future<Output = i32> + Send>> {
-        Box::pin(async move { x * 2 })
-    }
-}
-
-/// async closure 与并发执行
-///
-/// 演示如何使用 async closure 配合并发执行框架。
-pub async fn run_async_closures_concurrently(inputs: Vec<i32>) -> Vec<i32> {
-    let tasks: Vec<_> = inputs
-        .into_iter()
-        .map(|x| {
-            let closure = |n: i32| Box::pin(async move { n * n + 1 });
-            closure(x)
-        })
-        .collect();
-
-    let mut results = Vec::new();
-    for task in tasks {
-        results.push(task.await);
-    }
-    results
-}
-
-/// async closure 在流处理中的应用
-///
-/// 使用 async closure 对异步数据流进行转换。
-pub async fn process_stream_with_async_closure(
-    items: Vec<String>,
-) -> Vec<Result<usize, &'static str>> {
-    let processor = |s: String| {
-        Box::pin(async move {
-            // 模拟异步处理（如数据库查询、网络请求）
-            if s.is_empty() {
-                Err("空字符串")
-            } else {
-                Ok(s.len())
-            }
-        })
-    };
-
-    let mut results = Vec::new();
-    for item in items {
-        results.push(processor(item).await);
-    }
-    results
-}
-
-/// async closure 与 Cancellation Safety
-///
-/// 当 async closure 在 select! 或超时场景中被取消时，
-/// 需要确保不会产生不一致状态。
-pub async fn cancellation_safe_async_closure(items: Vec<i32>) -> Vec<i32> {
-    let mut results = Vec::new();
-
-    for item in items {
-        let task = Box::pin(async move {
-            // 模拟可能需要被取消的异步工作
-            // 关键：不使用非 Cancellation Safe 的操作（如 Mutex::lock）
-            item * 2
-        });
-
-        // 使用 futures::future::select 模拟取消场景
-        // task_future 会立即完成，pending 永远不会完成
-        let timeout_future = futures::future::pending::<()>();
-        let task_future = task;
-
-        // Cancellation Safety 的核心：任务被 drop 时不会留下不一致状态
-        match futures::future::select(task_future, timeout_future).await {
-            futures::future::Either::Left((result, _)) => results.push(result),
-            futures::future::Either::Right((_, _)) => {
-                // 任务被取消/超时：task_future 被 drop，不会继续执行
-                // 由于没有使用非 Cancellation Safe 状态，这是安全的
-                results.push(-1); // 标记为取消
-            }
-        }
-    }
-
-    results
-}
-
-/// async closure 与传统 async block 对比
-///
-/// 展示两种写法在闭包捕获行为上的差异。
-pub fn compare_capture_behavior() -> (i32, i32) {
-    let data = vec![1, 2, 3, 4, 5];
-
-    // 传统 async move {}：强制 move 所有捕获变量
-    let traditional_sum = {
-        let data = data.clone();
-        move || {
-            let data = data.clone();
-            async move { data.iter().sum::<i32>() }
-        }
-    };
-
-    // async || {} 语义：根据使用情况自动推断捕获方式（move/ref）
-    // 在 Rust 2024 中，async closure 的捕获语义更精确
-    let modern_sum = {
-        let data = data.clone();
-        move || Box::pin(async move { data.iter().sum::<i32>() })
-    };
-
-    // 两者效果相同，但 async closure 语法更简洁
-    let traditional_result = traditional_sum();
-    let modern_result = modern_sum();
-
-    // 为了同步返回结果，这里使用 block_on
-    // 实际项目中应在 async 上下文中使用 .await
-    let traditional_value = block_on(traditional_result);
-    let modern_value = block_on(modern_result);
-
-    (traditional_value, modern_value)
-}
-
-/// 演示 async closures 特性
-pub fn demonstrate_async_closures() {
-    println!("\n========================================");
-    println!("   Rust 2024 Edition async closures 演示");
-    println!("========================================\n");
-
-    println!("--- async closure 基础用法 ---");
-    let closure = basic_async_closure();
-    let result = block_on(closure(21));
-    println!("basic_async_closure(21) => {}", result);
-
-    println!("\n--- 并发执行 ---");
-    let inputs = vec![1, 2, 3, 4, 5];
-    let results = block_on(run_async_closures_concurrently(inputs));
-    println!("并发计算结果: {:?}", results);
-
-    println!("\n--- 流处理 ---");
-    let items = vec!["hello".to_string(), "".to_string(), "world".to_string()];
-    let results = block_on(process_stream_with_async_closure(items));
-    println!("流处理结果: {:?}", results);
-
-    println!("\n--- 捕获行为对比 ---");
-    let (_traditional_value, _modern_value) = compare_capture_behavior();
-    println!(
-        "传统写法结果: {}, 现代写法结果: {}",
-        _traditional_value, _modern_value
-    );
-
-    println!("\n========================================");
-    println!("   演示完成");
-    println!("========================================\n");
-}
-
-/// 获取 async closures 特性信息
-pub fn get_async_closures_info() -> String {
-    "Rust 2024 Edition async closures 特性:\n- 语法: async |args| { body }，直接创建异步闭包\n- \
-     相比传统 |args| async move { } 更简洁\n- 更精确的捕获语义（自动推断 move/ref）\n- \
-     Cancellation Safety: 在 select!/timeout 中安全取消\n- 适用场景: 异步回调、流处理、并发任务生成"
-        .to_string()
-}
-
-#[cfg(test)]
-mod async_closure_tests {
-    use super::*;
-
-    #[test]
-    fn test_basic_async_closure() {
-        let closure = basic_async_closure();
-        let result = block_on(closure(21));
-        assert_eq!(result, 42);
-    }
-
-    #[test]
-    fn test_run_async_closures_concurrently() {
-        let inputs = vec![1, 2, 3, 4];
-        let results = block_on(run_async_closures_concurrently(inputs));
-        assert_eq!(results, vec![2, 5, 10, 17]); // x*x + 1
-    }
-
-    #[test]
-    fn test_process_stream_with_async_closure() {
-        let items = vec!["hello".to_string(), "".to_string(), "world".to_string()];
-        let results = block_on(process_stream_with_async_closure(items));
-        assert_eq!(results, vec![Ok(5), Err("空字符串"), Ok(5)]);
-    }
-
-    #[test]
-    fn test_cancellation_safe_async_closure() {
-        let items = vec![1, 2, 3];
-        let results = block_on(cancellation_safe_async_closure(items));
-        assert_eq!(results, vec![2, 4, 6]); // 没有超时发生
-    }
-
-    #[test]
-    fn test_compare_capture_behavior() {
-        let (traditional, modern) = compare_capture_behavior();
-        assert_eq!(traditional, 15);
-        assert_eq!(modern, 15);
-    }
-
-    #[test]
-    fn test_get_async_closures_info() {
-        let info = get_async_closures_info();
-        assert!(info.contains("async closures"));
-        assert!(info.contains("Cancellation Safety"));
-    }
-}
-
-/// 异步超时反模式与边界情况专题
-pub mod anti_patterns_and_edge_cases {
-    use std::time::Duration;
-
-    /// 展示异步超时配置中的反模式和边界情况
-    pub struct AsyncTimeoutAntiPatterns;
-
-    impl AsyncTimeoutAntiPatterns {
-        /// ❌ 不推荐：使用极端超时值而不验证
-        pub fn dangerous_timeout_config(millis: u64) -> Duration {
-            // ❌ 反例：直接接受 0 或极大值作为超时，可能导致立即失败或资源长期占用
-            Duration::from_millis(millis)
-        }
-
-        /// ✅ 推荐：对超时值进行边界检查和裁剪
-        pub fn safe_timeout_config(millis: u64) -> Duration {
-            const MIN_TIMEOUT_MS: u64 = 1;
-            const MAX_TIMEOUT_MS: u64 = 300_000; // 5 minutes
-            let clamped = millis.clamp(MIN_TIMEOUT_MS, MAX_TIMEOUT_MS);
-            Duration::from_millis(clamped)
-        }
-
-        /// ⚠️ 边界情况：超时为 0 的行为
-        pub fn zero_timeout_behavior(millis: u64) -> &'static str {
-            // ⚠️ 边界情况：0 毫秒超时意味着立即过期
-            if millis == 0 {
-                "immediately_expires"
-            } else if millis < 10 {
-                "too_short_for_practical_use"
-            } else {
-                "valid"
-            }
-        }
-
-        /// ⚠️ 边界情况：接近 u64::MAX 的超时值
-        pub fn extreme_timeout_behavior(millis: u64) -> &'static str {
-            // ⚠️ 边界情况：超过合理范围的超时可能导致计时器溢出或资源浪费
-            const REASONABLE_MAX_MS: u64 = 86_400_000; // 24 hours
-            if millis > REASONABLE_MAX_MS {
-                "unreasonably_long"
-            } else if millis > 3_600_000 {
-                "very_long"
-            } else {
-                "reasonable"
-            }
-        }
-    }
-
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-
-        #[test]
-        fn test_dangerous_timeout_config() {
-            // ❌ 反例：0 毫秒超时
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::dangerous_timeout_config(0),
-                Duration::from_millis(0)
-            );
-            // ❌ 反例：极大的超时值
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::dangerous_timeout_config(u64::MAX),
-                Duration::from_millis(u64::MAX)
-            );
-        }
-
-        #[test]
-        fn test_safe_timeout_config() {
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::safe_timeout_config(0),
-                Duration::from_millis(1)
-            );
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::safe_timeout_config(1000),
-                Duration::from_millis(1000)
-            );
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::safe_timeout_config(u64::MAX),
-                Duration::from_millis(300_000)
-            );
-        }
-
-        #[test]
-        fn test_zero_timeout_behavior() {
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::zero_timeout_behavior(0),
-                "immediately_expires"
-            );
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::zero_timeout_behavior(5),
-                "too_short_for_practical_use"
-            );
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::zero_timeout_behavior(100),
-                "valid"
-            );
-        }
-
-        #[test]
-        fn test_extreme_timeout_behavior() {
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::extreme_timeout_behavior(u64::MAX),
-                "unreasonably_long"
-            );
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::extreme_timeout_behavior(4_000_000),
-                "very_long"
-            );
-            assert_eq!(
-                AsyncTimeoutAntiPatterns::extreme_timeout_behavior(1000),
-                "reasonable"
-            );
-        }
+        assert!(info.contains("core::range::Range"));
+        assert!(info.contains("LazyLock::from"));
+        assert!(info.contains("assert_matches"));
     }
 }

@@ -106,19 +106,23 @@
 
 ### 函数颜色 (Function Coloring)
 
-**定义**: 一个描述编程语言中 `async` 和 `sync` 函数之间交互限制的术语。它指出了 `async` 代码倾向于"病毒式"传播，以及 `async`/`sync` 边界处需要谨慎处理的架构问题。
+**定义**: 一个描述编程语言中 `async` 和 `sync` 函数之间交互限制的术语。
+它指出了 `async` 代码倾向于"病毒式"传播，以及 `async`/`sync` 边界处需要谨慎处理的架构问题。
 
 **相关**: [06_critical_analysis_and_advanced_topics](./06_critical_analysis_and_advanced_topics.md)
 
 ### `Waker`
 
-**定义**: 一个由执行器提供给 `Future` 的句柄。当一个 `Future` 在 `poll` 时返回 `Poll::Pending`，它必须存储这个 `Waker`。当 `Future` 准备好再次被轮询时（例如，一个 I/O 事件已发生），它会调用 `waker.wake()` 来通知执行器。
+**定义**: 一个由执行器提供给 `Future` 的句柄。
+当一个 `Future` 在 `poll` 时返回 `Poll::Pending`，它必须存储这个 `Waker`。
+当 `Future` 准备好再次被轮询时（例如，一个 I/O 事件已发生），它会调用 `waker.wake()` 来通知执行器。
 
 **相关**: [01_introduction_and_philosophy](./01_introduction_and_philosophy.md), [02_runtime_and_execution_model](./02_runtime_and_execution_model.md)
 
 ### `async-trait`
 
-**定义**: 一个流行的第三方 crate，它通过宏提供了在 Trait 中使用 `async fn` 的能力。它通过将 `Future` 包装在 `Box<dyn Future>` 中来实现对象安全。
+**定义**: 一个流行的第三方 crate，它通过宏提供了在 Trait 中使用 `async fn` 的能力。
+它通过将 `Future` 包装在 `Box<dyn Future>` 中来实现对象安全。
 
 **相关**: [05_async_in_traits_and_ecosystem](./05_async_in_traits_and_ecosystem.md)
 

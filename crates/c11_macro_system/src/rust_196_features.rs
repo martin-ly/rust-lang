@@ -1,288 +1,23 @@
-//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
+//! Rust 1.96 特性模块 —— 宏系统场景
+//!
+//! 本模块展示 Rust 1.96 稳定新特性在宏系统学习中的应用：
+//! - `expr` metavariable 传递给 `cfg`
+//! - `assert_matches!` 用于宏展开结果测试
+//! - `core::range` 用于 token span 范围表示
+//! - `ManuallyDrop` 用于宏卫生标记类型
 
-use std::ops::RangeInclusive;
+#![allow(clippy::incompatible_msrv)]
 
-/// if let guards (Rust 1.95 稳定，非 1.96 新特性) 在宏系统中的应用
-///
-/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
-/// 减少嵌套层级，使代码更扁平、更易读。
-pub struct MacroIfLetGuardExamples;
-
-impl MacroIfLetGuardExamples {
-    /// 解析宏参数数量
-    pub fn parse_macro_arity(input: Option<&str>) -> Result<usize, &'static str> {
-        match input {
-            Some(s) if let Ok(n) = s.parse::<usize>() => Ok(n),
-            Some("variadic") => Ok(usize::MAX),
-            Some(_) => Err("无效的宏参数规格"),
-            None => Ok(0),
-        }
-    }
-
-    /// 检查宏展开深度
-    pub fn check_expansion_depth(depth: Option<Result<usize, &'static str>>) -> &'static str {
-        match depth {
-            Some(Ok(d)) if d <= 64 => "安全深度",
-            Some(Ok(_)) => "警告：展开深度过大",
-            Some(Err(_)) => "无法确定展开深度",
-            None => "使用默认深度限制",
-        }
-    }
-}
-
-/// RangeInclusive 在宏系统中的应用
-pub struct MacroRangeExamples;
-
-impl MacroRangeExamples {
-    /// 宏嵌套深度检查
-    pub fn recursion_depth_category(depth: usize) -> &'static str {
-        match depth {
-            0..=8 => "normal",
-            9..=16 => "deep",
-            17..=32 => "very_deep",
-            _ => "excessive",
-        }
-    }
-
-    /// 标识符长度检查
-    pub fn identifier_length_check(len: usize) -> &'static str {
-        match len {
-            0..=32 => "short",
-            33..=64 => "medium",
-            65..=128 => "long",
-            _ => "excessive",
-        }
-    }
-
-    /// 宏复杂度分级
-    pub fn macro_complexity_score(tokens: usize, nesting: usize) -> u8 {
-        let score = tokens + nesting * 10;
-        match score {
-            0..=50 => 1,
-            51..=100 => 2,
-            101..=200 => 3,
-            _ => 4,
-        }
-    }
-
-    /// 编译时间估计
-    pub fn compilation_time_estimate(macro_count: usize) -> &'static str {
-        match macro_count {
-            0..=10 => "fast",
-            11..=50 => "moderate",
-            51..=100 => "slow",
-            _ => "very_slow",
-        }
-    }
-
-    /// 宏批处理
-    pub fn batch_macro_expansions(
-        total_macros: usize,
-        batch_size: usize,
-    ) -> Vec<RangeInclusive<usize>> {
-        if batch_size == 0 || total_macros == 0 {
-            return vec![];
-        }
-
-        let mut ranges = Vec::new();
-        let mut start = 0;
-
-        while start < total_macros {
-            let end = (start + batch_size - 1).min(total_macros - 1);
-            ranges.push(start..=end);
-            start = end + 1;
-        }
-
-        ranges
-    }
-}
-
-/// 元组 coercion 示例
-pub struct MacroTupleExamples;
-
-impl MacroTupleExamples {
-    /// 宏展开结果
-    pub fn expansion_result<T>(
-        result: Result<T, String>,
-        macro_name: &str,
-    ) -> (Result<T, String>, String, usize, &'static str)
-    where
-        T: Clone,
-    {
-        let token_count = 100;
-        let status = if result.is_ok() { "expanded" } else { "failed" };
-        (result, macro_name.to_string(), token_count, status)
-    }
-
-    /// 宏统计
-    pub fn macro_stats(
-        declarative: usize,
-        procedural: usize,
-        attribute: usize,
-    ) -> (usize, usize, usize, usize, &'static str) {
-        let total = declarative + procedural + attribute;
-        let dominant = if declarative > procedural && declarative > attribute {
-            "declarative"
-        } else if procedural > attribute {
-            "procedural"
-        } else {
-            "attribute"
-        };
-        (declarative, procedural, attribute, total, dominant)
-    }
-
-    /// 宏分析
-    pub fn macro_analysis(name: &str, complexity: u8) -> (String, u8, &'static str, bool) {
-        let is_complex = complexity > 2;
-        let category = if complexity == 1 {
-            "simple"
-        } else if complexity <= 3 {
-            "moderate"
-        } else {
-            "complex"
-        };
-        (name.to_string(), complexity, category, is_complex)
-    }
-}
-
-/// 实际应用
-pub struct PracticalMacroExamples;
-
-impl PracticalMacroExamples {
-    /// 宏性能分级
-    pub fn macro_performance_tier(expansion_time_us: u64) -> &'static str {
-        match expansion_time_us {
-            0..=100 => "instant",
-            101..=1000 => "fast",
-            1001..=10000 => "moderate",
-            10001..=100000 => "slow",
-            _ => "problematic",
-        }
-    }
-
-    /// 代码生成大小检查
-    pub fn generated_code_size_check(lines: usize) -> (bool, &'static str) {
-        let acceptable = 0..=1000;
-        let is_acceptable = acceptable.contains(&lines);
-        let status = if is_acceptable { "ok" } else { "too_large" };
-        (is_acceptable, status)
-    }
-
-    /// 宏编译摘要
-    pub fn macro_compilation_summary(
-        expanded: usize,
-        failed: usize,
-        time_ms: u64,
-    ) -> (usize, usize, u64, f64, &'static str) {
-        let total = expanded + failed;
-        let success_rate = if total > 0 {
-            (expanded as f64 / total as f64) * 100.0
-        } else {
-            0.0
-        };
-
-        let status = if success_rate >= 99.0 {
-            "perfect"
-        } else if success_rate >= 95.0 {
-            "excellent"
-        } else if success_rate >= 80.0 {
-            "good"
-        } else {
-            "problematic"
-        };
-
-        (expanded, failed, time_ms, success_rate, status)
-    }
-}
-
-/// 宏展开管理器
-pub struct MacroExpansionManager {
-    expansion_ranges: Vec<RangeInclusive<usize>>,
-    active_range: RangeInclusive<usize>,
-}
-
-impl MacroExpansionManager {
-    /// 创建新管理器
-    pub fn new(macro_count: usize, batch_size: usize) -> Self {
-        let ranges = MacroRangeExamples::batch_macro_expansions(macro_count, batch_size);
-        Self {
-            expansion_ranges: ranges.clone(),
-            active_range: 0..=ranges.len().saturating_sub(1),
-        }
-    }
-
-    /// 获取展开范围
-    pub fn get_expansion_range(&self, batch_id: usize) -> Option<&RangeInclusive<usize>> {
-        self.expansion_ranges.get(batch_id)
-    }
-
-    /// 检查批次是否活跃
-    pub fn is_batch_active(&self, batch_id: usize) -> bool {
-        self.active_range.contains(&batch_id)
-    }
-
-    /// 获取所有范围
-    pub fn get_all_ranges(&self) -> &[RangeInclusive<usize>] {
-        &self.expansion_ranges
-    }
-}
-
-/// 演示函数
-pub fn demonstrate_rust_196_features() {
-    println!("\n========================================");
-    println!("   Rust 宏系统特性演示");
-    println!("========================================\n");
-
-    let depth_cat = MacroRangeExamples::recursion_depth_category(12);
-    println!("递归深度12类别: {}", depth_cat);
-
-    let len_cat = MacroRangeExamples::identifier_length_check(50);
-    println!("标识符长度50类别: {}", len_cat);
-
-    let score = MacroRangeExamples::macro_complexity_score(80, 3);
-    println!("宏复杂度分数(80tokens,3层): {}", score);
-
-    let time_est = MacroRangeExamples::compilation_time_estimate(25);
-    println!("25个宏编译时间估计: {}", time_est);
-
-    let batches = MacroRangeExamples::batch_macro_expansions(50, 10);
-    println!("宏批处理: {:?}", batches);
-
-    let (decl, proc, attr, total, dominant) = MacroTupleExamples::macro_stats(10, 5, 3);
-    println!(
-        "宏统计: 声明式={}, 过程式={}, 属性式={}, 总计={}, 主导={}",
-        decl, proc, attr, total, dominant
-    );
-
-    let manager = MacroExpansionManager::new(50, 10);
-    println!("宏展开范围: {:?}", manager.get_all_ranges());
-
-    println!("\n========================================");
-    println!("   演示完成");
-    println!("========================================\n");
-}
-
-/// 获取特性信息
-pub fn get_rust_196_macro_info() -> String {
-    "Rust 宏系统特性:\n- RangeInclusive for recursion depth control\n- Tuple coercion for macro \
-     results\n- Better complexity scoring\n- Improved batch expansion management"
-        .to_string()
-}
+use std::assert_matches;
+use std::mem::ManuallyDrop;
 
 // ============================================================================
-// Rust 1.96 稳定新特性
+// Rust 1.96: expr metavariable to cfg（保留并维护）
 // ============================================================================
 
-use std::collections::VecDeque;
-use std::marker::PhantomPinned;
-
-/// Rust 1.96: `expr` metavariable 传递给 `cfg`
-///
 /// 在 Rust 1.96 之前，声明式宏中的 `expr` fragment specifier
 /// 不能用于 `#[cfg(...)]` 属性参数。1.96 放宽了这一限制，
 /// 允许通过宏参数动态生成条件编译属性。
-///
-/// 这在编写跨平台宏包装器或特性门控宏时非常有用。
 macro_rules! cfg_conditional {
     ($cond:expr, $item:item) => {
         #[cfg($cond)]
@@ -291,7 +26,6 @@ macro_rules! cfg_conditional {
 }
 
 // 使用宏生成平台相关的辅助函数
-// 注意：至少有一个会被编译，取决于目标平台
 cfg_conditional!(
     target_os = "windows",
     fn _platform_id() -> &'static str {
@@ -316,214 +50,166 @@ impl ExprMetavariableToCfgExamples {
 
     /// 演示：使用宏根据 cfg 条件选择不同的实现
     pub fn cfg_select_hint() -> &'static str {
-        // 直接调用条件编译生成的函数
         _platform_id()
     }
 }
 
-/// `VecDeque::new` 在 const 上下文中的应用
-///
-/// Rust 1.68 稳定了 `VecDeque::new` 的 const 特性，
-/// 允许在编译期创建空的宏展开缓冲区。
-pub struct ConstMacroBuffer;
+// ============================================================================
+// Rust 1.96: assert_matches! 用于宏展开结果测试
+// ============================================================================
 
-impl ConstMacroBuffer {
-    /// 编译期初始化的空令牌缓冲区
-    pub const TOKEN_BUFFER: VecDeque<String> = VecDeque::new();
+/// 宏展开结果的枚举表示
+#[derive(Debug, Clone, PartialEq)]
+pub enum ExpansionResult {
+    /// 展开成功
+    Success {
+        /// 生成的 token 数量
+        tokens: usize,
+        /// span 数量
+        span_count: usize,
+    },
+    /// 展开出错
+    Error {
+        /// 错误信息
+        message: &'static str,
+        /// 所在行号
+        line: u32,
+    },
+    /// 空展开
+    Empty,
+}
 
-    /// 编译期初始化的空深度跟踪队列
-    pub const DEPTH_TRACKER: VecDeque<usize> = VecDeque::new();
+/// 宏展开结果断言工具
+pub struct MacroExpansionAssertions;
 
-    /// 创建新的展开缓冲区（运行时填充）
-    pub fn create_expansion_buffer() -> VecDeque<String> {
-        let mut buffer = VecDeque::new();
-        buffer.push_back("macro_start".to_string());
-        buffer
+impl MacroExpansionAssertions {
+    /// 检查宏展开是否成功
+    pub fn assert_success(result: &ExpansionResult) {
+        assert_matches!(result, ExpansionResult::Success { .. });
+    }
+
+    /// 检查宏展开错误信息
+    pub fn assert_error_with_message(result: &ExpansionResult, expected: &str) {
+        assert_matches!(
+            result,
+            ExpansionResult::Error { message, .. } if *message == expected
+        );
+    }
+
+    /// 检查宏展开是否为空
+    pub fn assert_empty(result: &ExpansionResult) {
+        assert_matches!(result, ExpansionResult::Empty);
     }
 }
 
-/// `core::pin::pin!` 宏在过程宏状态机中的应用
-///
-/// 过程宏的展开状态机可以使用 `pin!` 固定中间状态，
-/// 避免为临时状态机节点分配堆内存。
-pub struct MacroStateMachine {
-    state: String,
-    _pin: PhantomPinned,
+// ============================================================================
+// Rust 1.96: core::range 用于 token span 范围
+// ============================================================================
+
+/// 使用 `core::range` 表示宏 token 的 span 范围
+pub struct TokenSpanRange {
+    /// 左闭右开范围
+    pub range: core::range::Range<usize>,
+    /// 闭区间范围
+    pub range_inclusive: core::range::RangeInclusive<usize>,
 }
 
-impl MacroStateMachine {
-    /// 创建新状态机
-    pub fn new(initial: &str) -> Self {
+impl TokenSpanRange {
+    /// 创建新的 token span 范围
+    pub fn new(start: usize, end: usize) -> Self {
         Self {
-            state: initial.to_string(),
-            _pin: PhantomPinned,
+            range: core::range::Range { start, end },
+            range_inclusive: core::range::RangeInclusive { start, last: end },
         }
     }
 
-    /// 在栈上固定状态机并转换到下一状态
-    pub fn transition(self, next: &str) -> String {
-        let pinned = std::pin::pin!(self);
-        // 在真实场景中，这里会基于固定状态进行安全的状态转换
-        format!("{} -> {}", pinned.state, next)
+    /// 检查位置是否在范围内
+    pub fn contains(&self, pos: usize) -> bool {
+        self.range.start <= pos && pos < self.range.end
     }
 
-    /// 获取当前状态（通过 pin! 固定后读取）
-    pub fn current_state(self) -> String {
-        let pinned = std::pin::pin!(self);
-        pinned.state.clone()
+    /// 获取范围长度
+    pub fn len(&self) -> usize {
+        self.range.end - self.range.start
+    }
+
+    /// 是否为空范围
+    pub fn is_empty(&self) -> bool {
+        self.range.start == self.range.end
     }
 }
 
+// ============================================================================
+// Rust 1.96: ManuallyDrop 用于宏卫生标记类型
+// ============================================================================
+
+/// 宏卫生标记：使用 ManuallyDrop 包装标识符，避免在分析阶段被自动释放
+pub struct HygieneMarker<T> {
+    inner: ManuallyDrop<T>,
+}
+
+impl<T> HygieneMarker<T> {
+    /// 创建新的卫生标记
+    pub fn new(value: T) -> Self {
+        Self {
+            inner: ManuallyDrop::new(value),
+        }
+    }
+
+    /// 获取内部值的引用
+    pub fn get(&self) -> &T {
+        &self.inner
+    }
+
+    /// 获取内部值（消费 self，不调用 drop）
+    pub fn into_inner(self) -> T {
+        ManuallyDrop::into_inner(self.inner)
+    }
+}
+
+// ============================================================================
+// 演示函数
+// ============================================================================
+
 /// 演示 Rust 1.96 新特性
-pub fn demonstrate_rust_196_new_features() {
-    println!("\n=== Rust 1.96 新特性演示 ===");
+pub fn demonstrate_rust_196_features() {
+    println!("\n=== Rust 1.96 宏系统特性演示 ===");
 
-    // VecDeque::new in const
-    let buffer = ConstMacroBuffer::create_expansion_buffer();
-    println!("宏展开缓冲区: {:?}", buffer);
+    // core::range for token spans
+    let span = TokenSpanRange::new(10, 25);
+    println!(
+        "Token span: {}..{} (len={})",
+        span.range.start,
+        span.range.end,
+        span.len()
+    );
 
-    // pin! in proc-macro state machine
-    let sm = MacroStateMachine::new("parsing");
-    println!("状态机状态: {}", sm.current_state());
-    let sm2 = MacroStateMachine::new("expanding");
-    println!("状态转换: {}", sm2.transition("done"));
+    // assert_matches!
+    let result = ExpansionResult::Success {
+        tokens: 42,
+        span_count: 5,
+    };
+    MacroExpansionAssertions::assert_success(&result);
+
+    // ManuallyDrop hygiene marker
+    let marker = HygieneMarker::new("macro_ident");
+    println!("Hygiene marker: {}", marker.get());
+}
+
+/// 获取特性信息
+pub fn get_rust_196_macro_info() -> String {
+    "Rust 1.96 宏系统特性:\n- expr metavariable to cfg\n- assert_matches! for macro expansion \
+     testing\n- core::range for token span ranges\n- ManuallyDrop for macro hygiene markers"
+        .to_string()
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_recursion_depth_category() {
-        assert_eq!(MacroRangeExamples::recursion_depth_category(5), "normal");
-        assert_eq!(MacroRangeExamples::recursion_depth_category(12), "deep");
-        assert_eq!(
-            MacroRangeExamples::recursion_depth_category(50),
-            "excessive"
-        );
-    }
-
-    #[test]
-    fn test_macro_complexity_score() {
-        assert_eq!(MacroRangeExamples::macro_complexity_score(30, 1), 1);
-        assert_eq!(MacroRangeExamples::macro_complexity_score(80, 2), 2);
-    }
-
-    #[test]
-    fn test_compilation_time_estimate() {
-        assert_eq!(MacroRangeExamples::compilation_time_estimate(5), "fast");
-        assert_eq!(
-            MacroRangeExamples::compilation_time_estimate(30),
-            "moderate"
-        );
-    }
-
-    #[test]
-    fn test_batch_macro_expansions() {
-        let batches = MacroRangeExamples::batch_macro_expansions(50, 10);
-        assert_eq!(batches.len(), 5);
-    }
-
-    #[test]
-    fn test_macro_stats() {
-        let (decl, proc, attr, total, dominant) = MacroTupleExamples::macro_stats(10, 5, 3);
-        assert_eq!(decl, 10);
-        assert_eq!(proc, 5);
-        assert_eq!(attr, 3);
-        assert_eq!(total, 18);
-        assert_eq!(dominant, "declarative");
-    }
-
-    #[test]
-    fn test_macro_performance_tier() {
-        assert_eq!(
-            PracticalMacroExamples::macro_performance_tier(50),
-            "instant"
-        );
-        assert_eq!(PracticalMacroExamples::macro_performance_tier(500), "fast");
-    }
-
-    #[test]
-    fn test_macro_expansion_manager() {
-        let manager = MacroExpansionManager::new(50, 10);
-        assert_eq!(manager.get_all_ranges().len(), 5);
-        assert!(manager.is_batch_active(0));
-    }
-
-    #[test]
-    fn test_parse_macro_arity() {
-        assert_eq!(MacroIfLetGuardExamples::parse_macro_arity(Some("4")), Ok(4));
-        assert_eq!(
-            MacroIfLetGuardExamples::parse_macro_arity(Some("variadic")),
-            Ok(usize::MAX)
-        );
-        assert_eq!(
-            MacroIfLetGuardExamples::parse_macro_arity(Some("abc")),
-            Err("无效的宏参数规格")
-        );
-        assert_eq!(MacroIfLetGuardExamples::parse_macro_arity(None), Ok(0));
-    }
-
-    #[test]
-    fn test_check_expansion_depth() {
-        assert_eq!(
-            MacroIfLetGuardExamples::check_expansion_depth(Some(Ok(32))),
-            "安全深度"
-        );
-        assert_eq!(
-            MacroIfLetGuardExamples::check_expansion_depth(Some(Ok(128))),
-            "警告：展开深度过大"
-        );
-        assert_eq!(
-            MacroIfLetGuardExamples::check_expansion_depth(Some(Err("overflow"))),
-            "无法确定展开深度"
-        );
-        assert_eq!(
-            MacroIfLetGuardExamples::check_expansion_depth(None),
-            "使用默认深度限制"
-        );
-    }
-
-    #[test]
-    fn test_get_rust_196_macro_info() {
-        let info = get_rust_196_macro_info();
-        assert!(!info.is_empty());
-    }
-
-    // Rust 1.96 新特性测试
-    #[test]
-    fn test_const_macro_buffer() {
-        let buffer = ConstMacroBuffer::TOKEN_BUFFER;
-        assert!(buffer.is_empty());
-
-        let tracker = ConstMacroBuffer::DEPTH_TRACKER;
-        assert!(tracker.is_empty());
-    }
-
-    #[test]
-    fn test_create_expansion_buffer() {
-        let buffer = ConstMacroBuffer::create_expansion_buffer();
-        assert_eq!(buffer.len(), 1);
-        assert_eq!(buffer.front().unwrap(), "macro_start");
-    }
-
-    #[test]
-    fn test_macro_state_machine() {
-        let sm = MacroStateMachine::new("parsing");
-        assert_eq!(sm.current_state(), "parsing");
-    }
-
-    #[test]
-    fn test_macro_state_machine_transition() {
-        let sm = MacroStateMachine::new("expanding");
-        assert_eq!(sm.transition("done"), "expanding -> done");
-    }
-
-    // Rust 1.96: expr metavariable to cfg
+    // Rust 1.96: expr metavariable to cfg（保留测试）
     #[test]
     fn test_expr_metavariable_to_cfg_compiles() {
-        // 核心验证：expr metavariable 传递给 cfg 的宏能够编译
-        // _platform_id() 是通过 cfg_conditional! 宏生成的条件编译函数
         let hint = ExprMetavariableToCfgExamples::platform_hint();
         assert!(!hint.is_empty());
         assert!(hint == "windows" || hint == "unix-like");
@@ -531,8 +217,95 @@ mod tests {
 
     #[test]
     fn test_cfg_conditional_macro() {
-        // 验证通过宏参数传递的 cfg 条件正确生效
         let result = ExprMetavariableToCfgExamples::cfg_select_hint();
         assert!(!result.is_empty());
+    }
+
+    // assert_matches! 测试
+    #[test]
+    fn test_assert_success() {
+        let result = ExpansionResult::Success {
+            tokens: 10,
+            span_count: 2,
+        };
+        MacroExpansionAssertions::assert_success(&result);
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_assert_success_panics_on_error() {
+        let result = ExpansionResult::Error {
+            message: "fail",
+            line: 1,
+        };
+        MacroExpansionAssertions::assert_success(&result);
+    }
+
+    #[test]
+    fn test_assert_error_with_message() {
+        let result = ExpansionResult::Error {
+            message: "expected",
+            line: 5,
+        };
+        MacroExpansionAssertions::assert_error_with_message(&result, "expected");
+    }
+
+    #[test]
+    fn test_assert_empty() {
+        let result = ExpansionResult::Empty;
+        MacroExpansionAssertions::assert_empty(&result);
+    }
+
+    // core::range 测试
+    #[test]
+    fn test_token_span_range_contains() {
+        let span = TokenSpanRange::new(10, 20);
+        assert!(span.contains(10));
+        assert!(span.contains(15));
+        assert!(!span.contains(20));
+        assert!(!span.contains(25));
+    }
+
+    #[test]
+    fn test_token_span_range_len() {
+        let span = TokenSpanRange::new(5, 15);
+        assert_eq!(span.len(), 10);
+        assert!(!span.is_empty());
+    }
+
+    #[test]
+    fn test_token_span_range_empty() {
+        let span = TokenSpanRange::new(5, 5);
+        assert_eq!(span.len(), 0);
+        assert!(span.is_empty());
+    }
+
+    #[test]
+    fn test_range_inclusive_fields() {
+        let ri = core::range::RangeInclusive { start: 1, last: 5 };
+        assert_eq!(ri.start, 1);
+        assert_eq!(ri.last, 5);
+    }
+
+    // ManuallyDrop 测试
+    #[test]
+    fn test_hygiene_marker_new_and_get() {
+        let marker = HygieneMarker::new(42);
+        assert_eq!(*marker.get(), 42);
+    }
+
+    #[test]
+    fn test_hygiene_marker_into_inner() {
+        let marker = HygieneMarker::new(vec![1, 2, 3]);
+        let inner = marker.into_inner();
+        assert_eq!(inner, vec![1, 2, 3]);
+    }
+
+    #[test]
+    fn test_get_rust_196_macro_info() {
+        let info = get_rust_196_macro_info();
+        assert!(!info.is_empty());
+        assert!(info.contains("assert_matches!"));
+        assert!(info.contains("core::range"));
     }
 }

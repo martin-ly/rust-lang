@@ -5,8 +5,11 @@
 //! 本模块提供 Rust 1.96.0 前瞻特性的 hands-on 练习。
 //! 每道练习题包含：题目描述、起始代码（stub）、参考实现、测试用例。
 
+use std::assert_matches;
+use std::cell::LazyCell;
 use std::collections::VecDeque;
 use std::ptr::NonNull;
+use std::sync::LazyLock;
 
 // ============================================================
 // GenBlockExercises
@@ -286,5 +289,208 @@ mod tests {
         let ptr = ConstNonNullExercises::exercise_02_from_mut_ref();
         // NonNull 保证非空，通过地址验证
         assert_ne!(ptr.as_ptr() as usize, 0);
+    }
+}
+
+// ============================================================
+// AssertMatchesExercises (Rust 1.96 stable)
+// ============================================================
+
+/// # `assert_matches!` 练习
+///
+/// Rust 1.96 稳定了 `assert_matches!` 和 `debug_assert_matches!` 宏，
+/// 允许对表达式进行模式匹配断言。
+pub struct AssertMatchesExercises;
+
+impl AssertMatchesExercises {
+    /// ## 练习 01: 验证 Result 变体
+    pub fn exercise_01_verify_ok(result: Result<i32, &str>) {
+        assert_matches!(result, Ok(_));
+    }
+
+    /// ## 练习 02: 验证 Option 并提取值
+    pub fn exercise_02_verify_positive(option: Option<i32>) {
+        assert_matches!(option, Some(n) if n > 0);
+    }
+
+    /// ## 练习 03: 验证嵌套枚举
+    pub fn exercise_03_verify_nested(result: Result<Option<i32>, &str>) {
+        assert_matches!(result, Ok(Some(n)) if n > 0);
+    }
+}
+
+// ============================================================
+// CoreRangeExercises (Rust 1.96 stable)
+// ============================================================
+
+/// # `core::range` 练习
+///
+/// Rust 1.96 补齐了 `core::range` 模块的完整类型族。
+pub struct CoreRangeExercises;
+
+impl CoreRangeExercises {
+    /// ## 练习 01: 使用 core::range::Range 计算累加和
+    pub fn exercise_01_range_sum(start: i32, end: i32) -> i32 {
+        use core::range::Range;
+        let range = Range { start, end };
+        let sum1: i32 = range.into_iter().sum();
+        let sum2: i32 = range.into_iter().sum();
+        assert_eq!(sum1, sum2);
+        sum1
+    }
+
+    /// ## 练习 02: 使用 core::range::RangeFrom 生成序列
+    pub fn exercise_02_range_from(start: i32, n: usize) -> Vec<i32> {
+        use core::range::RangeFrom;
+        let from = RangeFrom { start };
+        from.into_iter().take(n).collect()
+    }
+
+    /// ## 练习 03: 使用 core::range::RangeInclusive 验证闭区间
+    pub fn exercise_03_range_inclusive_contains(start: i32, end: i32, target: i32) -> bool {
+        use core::range::RangeInclusive;
+        let range = RangeInclusive { start, last: end };
+        range.into_iter().any(|x| x == target)
+    }
+}
+
+// ============================================================
+// LazyCellLazyLockExercises (Rust 1.96 stable)
+// ============================================================
+
+/// # `From<T>` for `LazyCell` / `LazyLock` 练习
+///
+/// Rust 1.96 稳定了 `From<T>` 实现，允许从值直接构造懒加载容器。
+pub struct LazyCellLazyLockExercises;
+
+impl LazyCellLazyLockExercises {
+    /// ## 练习 01: 使用 LazyLock::from 创建配置
+    pub fn exercise_01_lazy_lock_from() -> LazyLock<String> {
+        LazyLock::from("config".to_string())
+    }
+
+    /// ## 练习 02: 使用 LazyCell::from 创建缓存
+    pub fn exercise_02_lazy_cell_from() -> LazyCell<Vec<i32>> {
+        LazyCell::from(vec![1, 2, 3, 4, 5])
+    }
+
+    /// ## 练习 03: 验证 LazyLock 的值
+    pub fn exercise_03_verify_lazy_lock() -> i32 {
+        let lazy: LazyLock<i32> = LazyLock::from(42);
+        *lazy
+    }
+}
+
+// ============================================================
+// ManuallyDropPatternExercises (Rust 1.96 stable)
+// ============================================================
+
+/// # `ManuallyDrop` 常量模式练习
+///
+/// Rust 1.96 修复了 1.94.0 引入的回归，允许在 match 中使用 `ManuallyDrop` 常量。
+pub struct ManuallyDropPatternExercises;
+
+impl ManuallyDropPatternExercises {
+    const TAG_RED: std::mem::ManuallyDrop<u32> = std::mem::ManuallyDrop::new(1);
+    const TAG_GREEN: std::mem::ManuallyDrop<u32> = std::mem::ManuallyDrop::new(2);
+    const TAG_BLUE: std::mem::ManuallyDrop<u32> = std::mem::ManuallyDrop::new(3);
+
+    /// ## 练习 01: 使用 ManuallyDrop 常量进行模式匹配
+    pub fn exercise_01_classify_color(tag: std::mem::ManuallyDrop<u32>) -> &'static str {
+        match tag {
+            Self::TAG_RED => "red",
+            Self::TAG_GREEN => "green",
+            Self::TAG_BLUE => "blue",
+            _ => "unknown",
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests_196 {
+    use super::*;
+
+    #[test]
+    fn test_assert_matches_ok() {
+        AssertMatchesExercises::exercise_01_verify_ok(Ok(42));
+    }
+
+    #[test]
+    fn test_assert_matches_positive() {
+        AssertMatchesExercises::exercise_02_verify_positive(Some(10));
+    }
+
+    #[test]
+    fn test_assert_matches_nested() {
+        AssertMatchesExercises::exercise_03_verify_nested(Ok(Some(5)));
+    }
+
+    #[test]
+    fn test_core_range_sum() {
+        assert_eq!(CoreRangeExercises::exercise_01_range_sum(1, 5), 10);
+        assert_eq!(CoreRangeExercises::exercise_01_range_sum(0, 0), 0);
+    }
+
+    #[test]
+    fn test_core_range_from() {
+        assert_eq!(
+            CoreRangeExercises::exercise_02_range_from(10, 3),
+            vec![10, 11, 12]
+        );
+    }
+
+    #[test]
+    fn test_core_range_inclusive_contains() {
+        assert!(CoreRangeExercises::exercise_03_range_inclusive_contains(
+            1, 5, 3
+        ));
+        assert!(CoreRangeExercises::exercise_03_range_inclusive_contains(
+            1, 5, 5
+        ));
+        assert!(!CoreRangeExercises::exercise_03_range_inclusive_contains(
+            1, 5, 6
+        ));
+    }
+
+    #[test]
+    fn test_lazy_lock_from() {
+        let lazy = LazyCellLazyLockExercises::exercise_01_lazy_lock_from();
+        assert_eq!(*lazy, "config");
+    }
+
+    #[test]
+    fn test_lazy_cell_from() {
+        let cell = LazyCellLazyLockExercises::exercise_02_lazy_cell_from();
+        assert_eq!(cell.len(), 5);
+    }
+
+    #[test]
+    fn test_verify_lazy_lock() {
+        assert_eq!(
+            LazyCellLazyLockExercises::exercise_03_verify_lazy_lock(),
+            42
+        );
+    }
+
+    #[test]
+    fn test_manually_drop_pattern() {
+        assert_eq!(
+            ManuallyDropPatternExercises::exercise_01_classify_color(std::mem::ManuallyDrop::new(
+                1
+            )),
+            "red"
+        );
+        assert_eq!(
+            ManuallyDropPatternExercises::exercise_01_classify_color(std::mem::ManuallyDrop::new(
+                2
+            )),
+            "green"
+        );
+        assert_eq!(
+            ManuallyDropPatternExercises::exercise_01_classify_color(std::mem::ManuallyDrop::new(
+                99
+            )),
+            "unknown"
+        );
     }
 }

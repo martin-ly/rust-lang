@@ -1,56 +1,231 @@
 //! Rust 1.96 特性模块 —— 过程宏场景
 //!
 //! 本模块展示 Rust 1.96 在过程宏上下文中的关键特性：
-//! - `VecDeque::resize`
-//! - `std::iter::repeat_n`
+//! - `assert_matches!` 用于过程宏诊断测试
+//! - `From<T> for LazyLock` 用于过程宏元数据缓存
+//! - `never type` 元组 coercion 用于错误路径
 
 #![allow(clippy::incompatible_msrv, dead_code)]
 
-use std::collections::VecDeque;
+use std::assert_matches;
+use std::sync::LazyLock;
 
-/// # Rust 1.96 特性演示
-pub struct Rust196Features;
+// ============================================================================
+// Rust 1.96: assert_matches! 用于过程宏诊断测试
+// ============================================================================
 
-impl Rust196Features {
-    /// `VecDeque::resize` — 调整双端队列大小
-    ///
-    /// 在宏处理过程中动态调整 token 缓冲区大小。
-    pub fn token_buffer_resize() -> VecDeque<&'static str> {
-        let mut buffer = VecDeque::from(["ident", "="]);
-        buffer.resize(5, "placeholder");
-        buffer
+/// 过程宏诊断结果的枚举表示
+#[derive(Debug, Clone, PartialEq)]
+pub enum ProcMacroDiagnostic {
+    /// 解析成功
+    ParseOk,
+    /// 语法错误
+    SyntaxError {
+        /// 错误描述
+        description: &'static str,
+        /// 错误位置
+        offset: usize,
+    },
+    /// 不支持的语法结构
+    Unsupported {
+        /// 结构名称
+        construct: &'static str,
+    },
+    /// 编译通过，无诊断信息
+    Clean,
+}
+
+/// 过程宏诊断断言工具
+pub struct ProcMacroDiagnosticAssertions;
+
+impl ProcMacroDiagnosticAssertions {
+    /// 断言诊断为解析成功
+    pub fn assert_parse_ok(diag: &ProcMacroDiagnostic) {
+        assert_matches!(diag, ProcMacroDiagnostic::ParseOk);
     }
 
-    /// `std::iter::repeat_n` — 有限次重复
-    ///
-    /// 生成 N 个相同值的迭代器，比 `std::iter::repeat(...).take(N)` 更简洁。
-    pub fn repeat_placeholder(n: usize) -> Vec<i32> {
-        std::iter::repeat_n(0, n).collect()
+    /// 断言诊断为指定类型的语法错误
+    pub fn assert_syntax_error_at(diag: &ProcMacroDiagnostic, expected_offset: usize) {
+        assert_matches!(
+            diag,
+            ProcMacroDiagnostic::SyntaxError { offset, .. } if *offset == expected_offset
+        );
     }
+
+    /// 断言诊断为不支持的结构
+    pub fn assert_unsupported(diag: &ProcMacroDiagnostic, name: &str) {
+        assert_matches!(
+            diag,
+            ProcMacroDiagnostic::Unsupported { construct } if *construct == name
+        );
+    }
+
+    /// 断言诊断完全干净
+    pub fn assert_clean(diag: &ProcMacroDiagnostic) {
+        assert_matches!(diag, ProcMacroDiagnostic::Clean);
+    }
+}
+
+// ============================================================================
+// Rust 1.96: From<T> for LazyLock 用于过程宏元数据缓存
+// ============================================================================
+
+/// 过程宏元数据缓存：利用 `LazyLock::from(value)` 立即初始化
+pub struct MacroMetadataCache {
+    /// 支持的属性列表（立即初始化，无需闭包）
+    supported_attrs: LazyLock<Vec<&'static str>>,
+    /// 版本信息（立即初始化）
+    version_info: LazyLock<String>,
+}
+
+impl MacroMetadataCache {
+    /// 创建新的元数据缓存
+    pub fn new() -> Self {
+        Self {
+            supported_attrs: LazyLock::from(vec!["derive", "inline", "test", "cfg", "allow"]),
+            version_info: LazyLock::from("1.96.0".to_string()),
+        }
+    }
+
+    /// 检查是否支持指定属性
+    pub fn is_attr_supported(&self, attr: &str) -> bool {
+        self.supported_attrs.contains(&attr)
+    }
+
+    /// 获取版本信息
+    pub fn version(&self) -> &str {
+        &self.version_info
+    }
+
+    /// 获取支持属性数量
+    pub fn attr_count(&self) -> usize {
+        self.supported_attrs.len()
+    }
+}
+
+impl Default for MacroMetadataCache {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+// ============================================================================
+// Rust 1.96: never type 元组 coercion 用于错误路径
+// ============================================================================
+
+/// 模拟过程宏展开中的错误结果元组
+///
+/// 在错误路径上，`panic!()` 返回 `!` 类型，可自动 coercing 为
+/// 元组中的任意类型，从而统一返回类型。
+pub fn error_tuple_with_never() -> (usize, &'static str, u32) {
+    if false {
+        // 正常路径永远不会执行，但类型检查通过
+        return (0, "ok", 0);
+    }
+    // panic!() 返回 !，在元组上下文中自动 coercion 为 (usize, &'static str, u32)
+    (0, panic!("proc macro expansion failed"), 0)
+}
+
+/// 另一个错误路径示例：使用 unreachable!()
+pub fn unreachable_tuple_with_never() -> (bool, u64) {
+    if false {
+        return (true, 42);
+    }
+    // unreachable!() 返回 !， coercion 为 (bool, u64)
+    (false, unreachable!("invalid proc macro state"))
+}
+
+/// 演示函数
+pub fn demonstrate_rust_196_features() {
+    println!("\n=== Rust 1.96 过程宏特性演示 ===");
+
+    // LazyLock::from for metadata cache
+    let cache = MacroMetadataCache::new();
+    println!("Version: {}", cache.version());
+    println!("Supported attrs: {}", cache.attr_count());
+
+    // assert_matches! for diagnostic testing
+    let diag = ProcMacroDiagnostic::Clean;
+    ProcMacroDiagnosticAssertions::assert_clean(&diag);
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
+    // assert_matches! 测试
     #[test]
-    fn test_token_buffer_resize() {
-        let buffer = Rust196Features::token_buffer_resize();
-        assert_eq!(
-            buffer,
-            VecDeque::from(["ident", "=", "placeholder", "placeholder", "placeholder"])
-        );
+    fn test_assert_parse_ok() {
+        let diag = ProcMacroDiagnostic::ParseOk;
+        ProcMacroDiagnosticAssertions::assert_parse_ok(&diag);
     }
 
     #[test]
-    fn test_repeat_placeholder() {
-        let v = Rust196Features::repeat_placeholder(4);
-        assert_eq!(v, vec![0, 0, 0, 0]);
+    #[should_panic]
+    fn test_assert_parse_ok_fails_on_error() {
+        let diag = ProcMacroDiagnostic::SyntaxError {
+            description: "missing semicolon",
+            offset: 10,
+        };
+        ProcMacroDiagnosticAssertions::assert_parse_ok(&diag);
     }
 
     #[test]
-    fn test_repeat_placeholder_empty() {
-        let v = Rust196Features::repeat_placeholder(0);
-        assert!(v.is_empty());
+    fn test_assert_syntax_error_at() {
+        let diag = ProcMacroDiagnostic::SyntaxError {
+            description: "unexpected token",
+            offset: 42,
+        };
+        ProcMacroDiagnosticAssertions::assert_syntax_error_at(&diag, 42);
+    }
+
+    #[test]
+    fn test_assert_unsupported() {
+        let diag = ProcMacroDiagnostic::Unsupported {
+            construct: "async_trait",
+        };
+        ProcMacroDiagnosticAssertions::assert_unsupported(&diag, "async_trait");
+    }
+
+    #[test]
+    fn test_assert_clean() {
+        let diag = ProcMacroDiagnostic::Clean;
+        ProcMacroDiagnosticAssertions::assert_clean(&diag);
+    }
+
+    // LazyLock::from 测试
+    #[test]
+    fn test_metadata_cache_attrs() {
+        let cache = MacroMetadataCache::new();
+        assert!(cache.is_attr_supported("derive"));
+        assert!(cache.is_attr_supported("test"));
+        assert!(!cache.is_attr_supported("unknown"));
+    }
+
+    #[test]
+    fn test_metadata_cache_version() {
+        let cache = MacroMetadataCache::new();
+        assert_eq!(cache.version(), "1.96.0");
+    }
+
+    #[test]
+    fn test_metadata_cache_attr_count() {
+        let cache = MacroMetadataCache::new();
+        assert_eq!(cache.attr_count(), 5);
+    }
+
+    // never type 元组 coercion 测试
+    // 注意：这些函数在 panic/unreachable 路径上永远不会正常返回，
+    // 但类型检查证明 coercion 是有效的。
+    #[test]
+    #[should_panic(expected = "proc macro expansion failed")]
+    fn test_error_tuple_with_never() {
+        error_tuple_with_never();
+    }
+
+    #[test]
+    #[should_panic(expected = "invalid proc macro state")]
+    fn test_unreachable_tuple_with_never() {
+        unreachable_tuple_with_never();
     }
 }

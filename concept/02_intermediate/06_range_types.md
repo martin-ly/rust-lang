@@ -97,19 +97,18 @@ for i in r {
 
 Rust 1.96 引入 `core::range::Range`，将范围从**迭代器**重构为**纯值**：
 
-```ignore
-// Rust 1.96+ 的新语义（概念预览）
+```rust
+// Rust 1.96+ 的新语义
 use core::range::Range;
 
-let r = Range::new(0, 10); // core::range::Range<i32>
+let r = Range { start: 0, end: 10 }; // core::range::Range<i32>
 
 // ✅ Range 实现 Copy — 迭代不消费原始值
-for i in r {
-    println!("{}", i);
-}
-for i in r { // ✅ 再次迭代 — r 仍可用
-    println!("{}", i);
-}
+let v1: Vec<i32> = r.into_iter().collect();
+assert_eq!(v1, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+let v2: Vec<i32> = r.into_iter().collect(); // ✅ 再次迭代 — r 仍可用
+assert_eq!(v2, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 ```
 
 > **关键差异**:
@@ -245,15 +244,15 @@ auto r = std::views::iota(0, 10);
 
 ### 3.3 Rust：`core::range::Range`
 
-```ignore
+```rust
 // Rust 1.96+ 设计
 use core::range::Range;
 
-let r: Range<i32> = Range::new(0, 10);
+let r: Range<i32> = Range { start: 0, end: 10 };
 
 // 纯值语义：Copy + IntoIterator
-assert!(r.contains(&5));  // ✅ 包含判断
-assert!(!r.contains(&10)); // ✅ 半开区间
+assert!(r.into_iter().any(|x| x == 5));  // ✅ 包含判断
+assert!(!r.into_iter().any(|x| x == 10)); // ✅ 半开区间
 
 // 多次迭代
 let sum1: i32 = r.into_iter().sum();

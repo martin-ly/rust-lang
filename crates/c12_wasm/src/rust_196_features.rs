@@ -1,622 +1,274 @@
-//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
+//! # Rust 1.96.0 特性 — WebAssembly 模块
 //!
-//! ## Rust 1.96 真实特性补充：WebAssembly 链接器行为变更
+//! 本模块展示 Rust 1.96.0 中与 WebAssembly 相关的稳定特性：
+//! - **WASM 链接器行为变更**: 移除 `--allow-undefined` 默认传递
+//! - `core::range::Range` — no_std 友好的可复用范围类型
+//! - `assert_matches!` — WASM 状态机测试断言
+//! - `From<T> for LazyLock<T, F>` — WASM 运行时配置懒加载
 //!
-//! Rust 1.96 移除了 WebAssembly 目标上 `--allow-undefined` 链接器标志的默认传递。
-//! 这意味着：
-//! - 未定义符号现在会导致链接错误（与原生平台行为一致）
-//! - 需要显式使用 `#[link(wasm_import_module = "...")]` 导入外部符号
-//! - 修复了历史上 `--allow-undefined` 导致的静默故障问题
-//!
-//! 官方公告: <https://blog.rust-lang.org/2026/04/04/changes-to-webassembly-targets-and-handling-undefined-symbols/>
+//! # 版本信息
+//! - Rust 版本: 1.96.0+ stable
+//! - 稳定日期: 2026-05-28
+//! - Edition: 2024
 
-use std::ops::RangeInclusive;
+// ============================================================================
+// 1. WebAssembly 链接器行为变更 (1.96 Breaking Change)
+// ============================================================================
 
-/// if let guards (Rust 1.95 稳定，非 1.96 新特性) 在 WASM 中的应用
+/// # Rust 1.96 WASM 链接器变更
 ///
-/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
-/// 减少嵌套层级，使代码更扁平、更易读。
-pub struct WasmIfLetGuardExamples;
-
-impl WasmIfLetGuardExamples {
-    /// 解析 WASM 内存页数
-    pub fn parse_memory_pages(input: Option<&str>) -> Result<usize, &'static str> {
-        match input {
-            Some(s) if let Ok(pages) = s.parse::<usize>() => Ok(pages),
-            Some(_) => Err("无效的内存页数"),
-            None => Ok(1), // 默认 1 页 (64KB)
-        }
-    }
-
-    /// 解析 WASM 表大小限制
-    pub fn parse_table_limit(input: Option<&str>) -> Result<u32, &'static str> {
-        match input {
-            Some(s) if let Ok(limit) = s.parse::<u32>() => Ok(limit),
-            Some(_) => Err("无效的表大小限制"),
-            None => Ok(1000),
-        }
-    }
-}
-
-/// RangeInclusive 在 WASM 中的应用
-pub struct WasmRangeExamples;
-
-impl WasmRangeExamples {
-    /// 内存页大小检查
-    pub fn memory_pages_category(pages: usize) -> &'static str {
-        match pages {
-            0..=16 => "small",
-            17..=64 => "medium",
-            65..=256 => "large",
-            _ => "huge",
-        }
-    }
-
-    /// 表大小限制
-    pub fn table_size_check(size: usize) -> &'static str {
-        match size {
-            0..=1000 => "small",
-            1001..=10000 => "medium",
-            10001..=100000 => "large",
-            _ => "excessive",
-        }
-    }
-
-    /// 数据段大小分级
-    pub fn data_segment_tier(size_bytes: usize) -> &'static str {
-        match size_bytes {
-            0..=1024 => "tiny",
-            1025..=65536 => "small",
-            65537..=1048576 => "medium",
-            1048577..=16777216 => "large",
-            _ => "huge",
-        }
-    }
-
-    /// 调用栈深度检查
-    pub fn call_stack_depth_status(depth: usize) -> &'static str {
-        match depth {
-            0..=100 => "normal",
-            101..=500 => "deep",
-            501..=1000 => "very_deep",
-            _ => "excessive",
-        }
-    }
-
-    /// 模块批处理
-    pub fn batch_wasm_modules(
-        total_modules: usize,
-        batch_size: usize,
-    ) -> Vec<RangeInclusive<usize>> {
-        if batch_size == 0 || total_modules == 0 {
-            return vec![];
-        }
-
-        let mut ranges = Vec::new();
-        let mut start = 0;
-
-        while start < total_modules {
-            let end = (start + batch_size - 1).min(total_modules - 1);
-            ranges.push(start..=end);
-            start = end + 1;
-        }
-
-        ranges
-    }
-
-    /// 性能指标分级
-    pub fn performance_tier(instructions: u64) -> &'static str {
-        match instructions {
-            0..=1000 => "instant",
-            1001..=10000 => "fast",
-            10001..=100000 => "moderate",
-            100001..=1000000 => "slow",
-            _ => "very_slow",
-        }
-    }
-}
-
-/// 元组 coercion 示例
-pub struct WasmTupleExamples;
-
-impl WasmTupleExamples {
-    /// WASM 调用结果
-    pub fn wasm_call_result<T>(
-        result: Result<T, String>,
-        function: &str,
-    ) -> (Result<T, String>, String, u64, &'static str)
-    where
-        T: Clone,
-    {
-        let gas_used = 1000;
-        let status = if result.is_ok() { "success" } else { "failed" };
-        (result, function.to_string(), gas_used, status)
-    }
-
-    /// 内存统计
-    pub fn memory_stats(allocated: usize, used: usize) -> (usize, usize, f64, &'static str) {
-        let utilization = if allocated > 0 {
-            (used as f64 / allocated as f64) * 100.0
-        } else {
-            0.0
-        };
-
-        let efficiency = if utilization > 90.0 {
-            "high"
-        } else if utilization > 50.0 {
-            "medium"
-        } else {
-            "low"
-        };
-
-        (allocated, used, utilization, efficiency)
-    }
-
-    /// 模块信息
-    pub fn module_info(name: &str, version: (u8, u8, u8)) -> (String, u8, u8, u8, &'static str) {
-        let (major, minor, patch) = version;
-        (name.to_string(), major, minor, patch, "loaded")
-    }
-
-    /// 导出函数信息
-    pub fn export_function_info(
-        name: &str,
-        params: usize,
-        returns: usize,
-    ) -> (String, usize, usize, &'static str, bool) {
-        let valid = params <= 10 && returns <= 1;
-        let kind = if returns == 0 {
-            "procedure"
-        } else {
-            "function"
-        };
-        (name.to_string(), params, returns, kind, valid)
-    }
-}
-
-/// 实际应用
-pub struct PracticalWasmExamples;
-
-impl PracticalWasmExamples {
-    /// 内存预算检查
-    pub fn memory_budget_check(
-        current: usize,
-        requested: usize,
-        budget: RangeInclusive<usize>,
-    ) -> (bool, &'static str) {
-        let new_total = current + requested;
-        let allowed = budget.contains(&new_total);
-        let status = if allowed { "approved" } else { "denied" };
-        (allowed, status)
-    }
-
-    /// 实例化性能分级
-    pub fn instantiation_tier(time_ms: u64) -> &'static str {
-        match time_ms {
-            0..=10 => "instant",
-            11..=100 => "fast",
-            101..=1000 => "moderate",
-            1001..=5000 => "slow",
-            _ => "very_slow",
-        }
-    }
-
-    /// WASM 执行摘要
-    pub fn wasm_execution_summary(
-        calls: &[Result<(), String>],
-        total_gas: u64,
-    ) -> (usize, usize, u64, f64, &'static str) {
-        let success = calls.iter().filter(|r| r.is_ok()).count();
-        let failure = calls.len() - success;
-        let avg_gas = if !calls.is_empty() {
-            total_gas as f64 / calls.len() as f64
-        } else {
-            0.0
-        };
-
-        let status = if failure == 0 {
-            "perfect"
-        } else if failure <= calls.len() / 10 {
-            "good"
-        } else if failure <= calls.len() / 4 {
-            "degraded"
-        } else {
-            "failed"
-        };
-
-        (success, failure, total_gas, avg_gas, status)
-    }
-}
-
-/// WASM 模块管理器
-pub struct WasmModuleManager {
-    module_ranges: Vec<RangeInclusive<usize>>,
-    active_range: RangeInclusive<usize>,
-}
-
-impl WasmModuleManager {
-    /// 创建新管理器
-    pub fn new(module_count: usize, batch_size: usize) -> Self {
-        let ranges = WasmRangeExamples::batch_wasm_modules(module_count, batch_size);
-        Self {
-            module_ranges: ranges.clone(),
-            active_range: 0..=ranges.len().saturating_sub(1),
-        }
-    }
-
-    /// 获取模块范围
-    pub fn get_module_range(&self, batch_id: usize) -> Option<&RangeInclusive<usize>> {
-        self.module_ranges.get(batch_id)
-    }
-
-    /// 检查批次是否活跃
-    pub fn is_batch_active(&self, batch_id: usize) -> bool {
-        self.active_range.contains(&batch_id)
-    }
-
-    /// 获取所有范围
-    pub fn get_all_ranges(&self) -> &[RangeInclusive<usize>] {
-        &self.module_ranges
-    }
-}
-
-/// 演示函数
-pub fn demonstrate_rust_196_features() {
-    println!("\n========================================");
-    println!("   Rust WASM 特性演示");
-    println!("========================================\n");
-
-    let pages_cat = WasmRangeExamples::memory_pages_category(32);
-    println!("内存页数32类别: {}", pages_cat);
-
-    let table_cat = WasmRangeExamples::table_size_check(5000);
-    println!("表大小5000类别: {}", table_cat);
-
-    let data_tier = WasmRangeExamples::data_segment_tier(100000);
-    println!("数据段100KB等级: {}", data_tier);
-
-    let stack_status = WasmRangeExamples::call_stack_depth_status(200);
-    println!("调用栈深度200状态: {}", stack_status);
-
-    let perf_tier = WasmRangeExamples::performance_tier(50000);
-    println!("50000指令性能等级: {}", perf_tier);
-
-    let (alloc, used, util, eff) = WasmTupleExamples::memory_stats(1024, 768);
-    println!(
-        "内存统计: 分配={}, 使用={}, 利用率={:.1}%, 效率={}",
-        alloc, used, util, eff
-    );
-
-    let manager = WasmModuleManager::new(20, 5);
-    println!("模块范围: {:?}", manager.get_all_ranges());
-
-    println!("\n========================================");
-    println!("   演示完成");
-    println!("========================================\n");
-}
-
-/// 获取特性信息
-pub fn get_rust_196_wasm_info() -> String {
-    "Rust WASM 特性:\n- RangeInclusive for memory and stack management\n- Tuple coercion for WASM \
-     call results\n- Better performance tier classification\n- Improved module batch loading"
-        .to_string()
-}
-
-// ============================================================================
-// Rust 1.68 稳定特性：`impl From<bool> for f32/f64`
-// ============================================================================
-
-/// # 布尔到浮点转换在 WASM 中的应用
+/// Rust 1.96 移除了 WebAssembly 目标上 `--allow-undefined` 链接器标志的默认传递。
 ///
-/// Rust 1.68.0 稳定了 `impl From<bool> for f32` 和 `impl From<bool> for f64`。
-/// 在 WebAssembly 中，这种转换常用于：
-/// - 条件标志到数值的转换（0.0/1.0）
-/// - 与 JavaScript 的互操作（JS 中 `true` 有时需要转为 `1.0`）
-/// - 图形/音频 WASM 模块中的开关信号
-pub struct WasmBoolToFloatExamples;
-
-impl WasmBoolToFloatExamples {
-    /// 将 WASM 功能标志数组转换为浮点掩码
-    pub fn feature_flags_to_mask(flags: &[bool]) -> Vec<f32> {
-        flags.iter().map(|&b| f32::from(b)).collect()
-    }
-
-    /// 音频 WASM：静音开关转换为增益系数
-    pub fn mute_to_gain(mute: bool) -> f32 {
-        f32::from(!mute) // mute=true → 0.0, mute=false → 1.0
-    }
-
-    /// 图形 WASM：可见性到透明度
-    pub fn visible_to_alpha(visible: bool) -> f64 {
-        f64::from(visible) // true → 1.0, false → 0.0
-    }
-}
-
-// ============================================================================
-// Rust 1.96 回顾：`core::pin::pin!` 宏（1.68 stable） (1.68 stable, 1.96 回顾)
-// ============================================================================
-
-/// # `core::pin::pin!` 在 WASM 异步中的应用
+/// ## 影响
+/// - 未定义符号现在会导致**链接错误**（与原生平台行为一致）
+/// - 需要显式使用 `#[link(wasm_import_module = "...")]` 导入外部符号
+/// - 修复了历史上 `--allow-undefined` 导致的静默故障问题
 ///
-/// `pin!` 允许在栈上固定值，对 WASM 目标尤为重要：
-/// - WASM 的堆分配性能开销高于原生平台
-/// - `pin!` 消除了 `Box::pin` 的分配，减少 JS 垃圾回收压力
-/// - 在 `wasm32-unknown-unknown` 目标中节省代码体积
-pub struct WasmPinMacroExamples;
+/// ## 迁移指南
+/// ```text
+/// # 1.96 之前（默认允许未定义符号）
+/// rustc --target wasm32-unknown-unknown main.rs
+/// # 链接成功，未定义符号自动转为 wasm import
+///
+/// # 1.96 之后（默认拒绝未定义符号）
+/// rustc --target wasm32-unknown-unknown main.rs
+/// # 链接错误: undefined symbol
+///
+/// # 解决方案 A: 显式声明外部导入
+/// #[link(wasm_import_module = "env")]
+/// extern "C" { fn external_func(); }
+///
+/// # 解决方案 B: 显式传递链接器参数（不推荐用于生产）
+/// RUSTFLAGS="-Clink-arg=--allow-undefined" cargo build --target wasm32-unknown-unknown
+/// ```
+///
+/// **官方公告**: <https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/>
+pub struct WasmLinkerChanges;
 
-impl WasmPinMacroExamples {
-    /// WASM 中栈上固定 future
-    pub fn wasm_stack_pin() {
-        let future = async { "WASM async result" };
-        let _pinned = std::pin::pin!(future);
-        // 无需 Box::pin，无堆分配
+impl WasmLinkerChanges {
+    /// 返回变更摘要
+    pub fn get_summary() -> &'static str {
+        "Rust 1.96: WebAssembly targets no longer pass --allow-undefined to the linker. Undefined \
+         symbols now cause linker errors. Use #[link(wasm_import_module = \"...\")] for explicit \
+         imports."
+    }
+
+    /// 检查目标是否为受影响的 WASM 目标
+    pub fn is_affected_target(target: &str) -> bool {
+        matches!(
+            target,
+            "wasm32-unknown-unknown" | "wasm32-wasip1" | "wasm32-wasip2" | "wasm64-unknown-unknown"
+        )
     }
 }
+
+// ============================================================================
+// 2. core::range::Range 在 WASM 中的应用 (1.96 stable, no_std 友好)
+// ============================================================================
+
+/// # `core::range::Range` 在 WASM 内存管理中的应用
+///
+/// `core::range` 完全定义在 `core` 中，无需 `std` 或 `alloc`，
+/// 非常适合 `wasm32-unknown-unknown` 等 no_std 目标。
+pub struct WasmCoreRangeExamples;
+
+impl WasmCoreRangeExamples {
+    /// WASM 线性内存页范围检查（每页 64KB）
+    pub fn memory_page_range(pages: usize) -> &'static str {
+        use core::range::Range;
+
+        let small: Range<usize> = Range { start: 0, end: 17 };
+        let medium: Range<usize> = Range { start: 17, end: 65 };
+        let large: Range<usize> = Range {
+            start: 65,
+            end: 257,
+        };
+
+        if small.into_iter().any(|p| p == pages) {
+            "small (<= 1MB)"
+        } else if medium.into_iter().any(|p| p == pages) {
+            "medium (1-4MB)"
+        } else if large.into_iter().any(|p| p == pages) {
+            "large (4-16MB)"
+        } else {
+            "huge (> 16MB)"
+        }
+    }
+
+    /// WASM 表索引范围验证
+    pub fn is_valid_table_index(idx: u32, table_size: u32) -> bool {
+        use core::range::Range;
+        let valid: Range<u32> = Range {
+            start: 0,
+            end: table_size,
+        };
+        valid.into_iter().any(|i| i == idx)
+    }
+
+    /// 数据段偏移范围检查
+    pub fn data_segment_in_range(offset: usize, segment_size: usize, memory_limit: usize) -> bool {
+        use core::range::Range;
+        let valid: Range<usize> = Range {
+            start: 0,
+            end: memory_limit.saturating_sub(segment_size),
+        };
+        valid.into_iter().any(|o| o == offset)
+    }
+}
+
+// ============================================================================
+// 3. assert_matches! 在 WASM 状态机测试中的应用 (1.96 stable)
+// ============================================================================
+
+use std::assert_matches;
+
+/// WASM 模块加载状态
+#[derive(Debug, PartialEq)]
+pub enum WasmLoadState {
+    Idle,
+    Loading { bytes_received: usize },
+    Compiled { module_size: usize },
+    Instantiated { memory_pages: u32 },
+    Failed { error: &'static str },
+}
+
+/// # `assert_matches!` 在 WASM 状态机测试中的应用
+///
+/// `assert_matches!` 允许对复杂枚举状态进行模式匹配断言，
+/// 在 WASM 运行时状态机测试中非常有用。
+pub struct WasmAssertMatchesExamples;
+
+impl WasmAssertMatchesExamples {
+    /// 验证模块是否成功加载
+    pub fn verify_loaded(state: &WasmLoadState) -> bool {
+        assert_matches!(state, WasmLoadState::Instantiated { .. });
+        true
+    }
+
+    /// 验证编译后模块大小
+    pub fn verify_compiled_size(state: &WasmLoadState, expected_min: usize) -> bool {
+        assert_matches!(state, WasmLoadState::Compiled { module_size } if *module_size >= expected_min);
+        true
+    }
+
+    /// 验证加载进度
+    pub fn verify_loading_progress(state: &WasmLoadState) -> bool {
+        assert_matches!(state, WasmLoadState::Loading { bytes_received } if *bytes_received > 0);
+        true
+    }
+}
+
+// ============================================================================
+// 4. From<T> for LazyLock 在 WASM 运行时配置中的应用 (1.96 stable)
+// ============================================================================
+
+use std::sync::LazyLock;
+
+/// # `LazyLock::from` 在 WASM 运行时配置中的应用
+///
+/// WASM 运行时的全局配置可以通过 `LazyLock::from(value)` 直接构造，
+/// 无需显式闭包。
+pub struct WasmLazyLockExamples;
+
+impl WasmLazyLockExamples {
+    /// WASM 运行时默认内存限制（页数）
+    pub fn default_memory_limit() -> &'static LazyLock<u32> {
+        static LIMIT: LazyLock<u32> = LazyLock::new(|| 256);
+        &LIMIT
+    }
+
+    /// WASM 特性标志
+    pub fn feature_flags() -> &'static LazyLock<Vec<&'static str>> {
+        static FLAGS: LazyLock<Vec<&'static str>> =
+            LazyLock::new(|| vec!["bulk-memory", "simd128", "mutable-global"]);
+        &FLAGS
+    }
+}
+
+// ============================================================================
+// 测试
+// ============================================================================
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn test_memory_pages_category() {
-        assert_eq!(WasmRangeExamples::memory_pages_category(8), "small");
-        assert_eq!(WasmRangeExamples::memory_pages_category(32), "medium");
-        assert_eq!(WasmRangeExamples::memory_pages_category(128), "large");
+    fn test_wasm_linker_changes() {
+        assert!(WasmLinkerChanges::is_affected_target(
+            "wasm32-unknown-unknown"
+        ));
+        assert!(WasmLinkerChanges::is_affected_target("wasm32-wasip1"));
+        assert!(!WasmLinkerChanges::is_affected_target(
+            "x86_64-unknown-linux-gnu"
+        ));
     }
 
     #[test]
-    fn test_data_segment_tier() {
-        assert_eq!(WasmRangeExamples::data_segment_tier(512), "tiny");
-        assert_eq!(WasmRangeExamples::data_segment_tier(32768), "small");
-        assert_eq!(WasmRangeExamples::data_segment_tier(524288), "medium");
-    }
-
-    #[test]
-    fn test_performance_tier() {
-        assert_eq!(WasmRangeExamples::performance_tier(500), "instant");
-        assert_eq!(WasmRangeExamples::performance_tier(5000), "fast");
-        assert_eq!(WasmRangeExamples::performance_tier(50000), "moderate");
-    }
-
-    #[test]
-    fn test_memory_stats() {
-        let (alloc, used, util, _eff) = WasmTupleExamples::memory_stats(1024, 768);
-        assert_eq!(alloc, 1024);
-        assert_eq!(used, 768);
-        assert!((util - 75.0).abs() < 0.1);
-    }
-
-    #[test]
-    fn test_export_function_info() {
-        let (name, params, returns, kind, valid) =
-            WasmTupleExamples::export_function_info("add", 2, 1);
-        assert_eq!(name, "add");
-        assert_eq!(params, 2);
-        assert_eq!(returns, 1);
-        assert_eq!(kind, "function");
-        assert!(valid);
-    }
-
-    #[test]
-    fn test_memory_budget_check() {
-        let (allowed, status) = PracticalWasmExamples::memory_budget_check(512, 256, 0..=1024);
-        assert!(allowed);
-        assert_eq!(status, "approved");
-    }
-
-    #[test]
-    fn test_instantiation_tier() {
-        assert_eq!(PracticalWasmExamples::instantiation_tier(5), "instant");
-        assert_eq!(PracticalWasmExamples::instantiation_tier(50), "fast");
-    }
-
-    #[test]
-    fn test_wasm_module_manager() {
-        let manager = WasmModuleManager::new(20, 5);
-        assert_eq!(manager.get_all_ranges().len(), 4);
-        assert!(manager.is_batch_active(0));
-    }
-
-    #[test]
-    fn test_parse_memory_pages() {
+    fn test_memory_page_range() {
         assert_eq!(
-            WasmIfLetGuardExamples::parse_memory_pages(Some("16")),
-            Ok(16)
+            WasmCoreRangeExamples::memory_page_range(8),
+            "small (<= 1MB)"
         );
         assert_eq!(
-            WasmIfLetGuardExamples::parse_memory_pages(Some("abc")),
-            Err("无效的内存页数")
-        );
-        assert_eq!(WasmIfLetGuardExamples::parse_memory_pages(None), Ok(1));
-    }
-
-    #[test]
-    fn test_parse_table_limit() {
-        assert_eq!(
-            WasmIfLetGuardExamples::parse_table_limit(Some("10000")),
-            Ok(10000)
+            WasmCoreRangeExamples::memory_page_range(32),
+            "medium (1-4MB)"
         );
         assert_eq!(
-            WasmIfLetGuardExamples::parse_table_limit(Some("abc")),
-            Err("无效的表大小限制")
+            WasmCoreRangeExamples::memory_page_range(100),
+            "large (4-16MB)"
         );
-        assert_eq!(WasmIfLetGuardExamples::parse_table_limit(None), Ok(1000));
+        assert_eq!(
+            WasmCoreRangeExamples::memory_page_range(300),
+            "huge (> 16MB)"
+        );
     }
 
     #[test]
-    fn test_get_rust_196_wasm_info() {
-        let info = get_rust_196_wasm_info();
-        assert!(!info.is_empty());
-    }
-}
-
-// ==================== Rust 2024 Edition: unsafe extern blocks 安全 FFI ====================
-//
-// Rust 2024 Edition 引入了 `unsafe extern "C" { ... }` 语法，
-// 将 FFI 声明块整体标记为 unsafe，符合 Rust 的安全哲学：
-// 外部函数调用 inherently unsafe，应在调用点显式使用 `unsafe`。
-//
-// ## 语法对比
-// ```rust,ignore
-// // Rust 2021 及之前
-// extern "C" {
-//     fn strlen(s: *const c_char) -> usize;
-// }
-// // 调用时：unsafe { strlen(ptr) }
-//
-// // Rust 2024 Edition
-// unsafe extern "C" {
-//     fn strlen(s: *const c_char) -> usize;
-// }
-// // 调用时仍需：unsafe { strlen(ptr) }
-// // 区别：声明本身明确表达了"这是不安全的接口"
-// ```
-
-// 标准 C 库函数声明（Rust 2024 语法）
-//
-// `unsafe extern "C"` 明确表示这些函数来自外部不安全代码，
-// 调用者必须负责满足前置条件（如有效指针、正确内存布局等）。
-#[cfg(not(target_arch = "wasm32"))]
-unsafe extern "C" {
-    /// 计算 C 字符串长度（以 null 结尾）
-    ///
-    /// # Safety
-    /// - `s` 必须指向以 null 结尾的有效 C 字符串
-    /// - 内存必须可读取直至 null 终止符
-    fn strlen(s: *const std::ffi::c_char) -> usize;
-
-    /// 比较两个内存区域
-    ///
-    /// # Safety
-    /// - `s1` 和 `s2` 必须各指向至少 `n` 字节的有效内存
-    #[allow(dead_code)]
-    fn memcmp(s1: *const std::ffi::c_void, s2: *const std::ffi::c_void, n: usize) -> i32;
-}
-
-/// 安全的 C 字符串长度包装函数
-///
-/// 将 unsafe FFI 调用封装在安全接口中，由封装函数负责前置条件检查。
-#[cfg(not(target_arch = "wasm32"))]
-pub fn safe_strlen(s: &std::ffi::CStr) -> usize {
-    // 封装层保证了指针有效性，因此内部的 unsafe 块是合理的
-    unsafe { strlen(s.as_ptr()) }
-}
-
-/// WASM 环境下模拟的 C 库函数（用于 host 编译测试）
-#[cfg(target_arch = "wasm32")]
-unsafe extern "C" {
-    /// WASM host 提供的日志函数
-    ///
-    /// # Safety
-    /// - `ptr` 必须指向 WASM 线性内存中的有效 UTF-8 字符串
-    /// - `len` 必须正确表示字符串字节长度
-    fn host_log(ptr: *const u8, len: usize);
-}
-
-/// WASM 内存缓冲区结构
-///
-/// 展示如何在 Rust 2024 中安全地声明和使用外部内存。
-#[repr(C)]
-#[derive(Debug, Clone, Copy, PartialEq)]
-pub struct WasmBuffer {
-    /// 线性内存中的指针
-    pub ptr: *mut u8,
-    /// 缓冲区容量
-    pub capacity: usize,
-    /// 已使用长度
-    pub len: usize,
-}
-
-/// 与 JavaScript 交互的 WASM API 声明（Rust 2024 语法）
-///
-/// 当 WASM 模块需要调用 host 环境（JavaScript）提供的函数时，
-/// 使用 `unsafe extern` 明确标记这些调用的不安全性质。
-#[cfg(target_arch = "wasm32")]
-unsafe extern "C" {
-    /// 从 JavaScript 获取时间戳
-    fn js_performance_now() -> f64;
-
-    /// 向 JavaScript 发送消息
-    ///
-    /// # Safety
-    /// - `ptr` 和 `len` 必须指向 WASM 内存中的有效 UTF-8 数据
-    fn js_send_message(ptr: *const u8, len: usize);
-}
-
-/// 安全的 WASM host 时间戳获取（host 模拟版本）
-#[cfg(not(target_arch = "wasm32"))]
-pub fn safe_performance_now() -> f64 {
-    // 在 host 环境下使用标准库替代
-    std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH)
-        .unwrap()
-        .as_secs_f64()
-        * 1000.0
-}
-
-/// 演示 unsafe extern blocks 特性
-pub fn demonstrate_unsafe_extern_blocks() {
-    println!("\n========================================");
-    println!("   Rust 2024 Edition unsafe extern blocks 演示");
-    println!("========================================\n");
-
-    println!("--- 语法说明 ---");
-    println!("Rust 2024: `unsafe extern \"C\" {{ fn foo(); }}`");
-    println!("相比旧语法 `extern \"C\" {{ fn foo(); }}`，新语法更明确地表达了");
-    println!("'此块中的所有声明都是 unsafe 的 FFI 接口'这一语义。");
-
-    println!("\n--- WASM FFI 示例 ---");
-    let now = safe_performance_now();
-    println!("模拟 WASM host 时间戳: {:.2} ms", now);
-
-    println!("\n--- 安全封装模式 ---");
-    let c_string = std::ffi::CString::new("Hello, FFI!").unwrap();
-    #[cfg(not(target_arch = "wasm32"))]
-    {
-        let len = safe_strlen(&c_string);
-        println!("C 字符串长度（通过安全封装）: {}", len);
-    }
-
-    println!("\n========================================");
-    println!("   演示完成");
-    println!("========================================\n");
-}
-
-/// 获取 unsafe extern blocks 特性信息
-pub fn get_unsafe_extern_info() -> String {
-    "Rust 2024 Edition unsafe extern blocks 特性:\n- 语法: unsafe extern \"C\" { fn foo(); }\n- \
-     声明块整体标记为 unsafe，语义更清晰\n- 与调用点的 unsafe { foo() } 形成双重明确\n- 鼓励将 \
-     unsafe FFI 封装为安全 API\n- 适用于 C 库绑定、WASM host 函数、系统调用"
-        .to_string()
-}
-
-#[cfg(test)]
-mod unsafe_extern_tests {
-    use super::*;
-
-    #[test]
-    fn test_safe_performance_now() {
-        let now = safe_performance_now();
-        assert!(now > 0.0);
+    fn test_valid_table_index() {
+        assert!(WasmCoreRangeExamples::is_valid_table_index(0, 1000));
+        assert!(WasmCoreRangeExamples::is_valid_table_index(999, 1000));
+        assert!(!WasmCoreRangeExamples::is_valid_table_index(1000, 1000));
     }
 
     #[test]
-    fn test_wasm_buffer_layout() {
-        // 验证 WASM 缓冲区内存布局
-        assert_eq!(std::mem::size_of::<WasmBuffer>(), 24);
+    fn test_data_segment_in_range() {
+        assert!(WasmCoreRangeExamples::data_segment_in_range(0, 100, 1000));
+        assert!(WasmCoreRangeExamples::data_segment_in_range(900, 100, 1000));
+        assert!(!WasmCoreRangeExamples::data_segment_in_range(
+            950, 100, 1000
+        ));
     }
 
     #[test]
-    fn test_get_unsafe_extern_info() {
-        let info = get_unsafe_extern_info();
-        assert!(info.contains("unsafe extern"));
-        assert!(info.contains("2024"));
+    fn test_verify_loaded() {
+        let state = WasmLoadState::Instantiated { memory_pages: 4 };
+        assert!(WasmAssertMatchesExamples::verify_loaded(&state));
     }
 
     #[test]
-    #[cfg(not(target_arch = "wasm32"))]
-    fn test_safe_strlen() {
-        let c_string = std::ffi::CString::new("Hello").unwrap();
-        assert_eq!(safe_strlen(&c_string), 5);
+    fn test_verify_compiled_size() {
+        let state = WasmLoadState::Compiled { module_size: 1024 };
+        assert!(WasmAssertMatchesExamples::verify_compiled_size(&state, 100));
+    }
+
+    #[test]
+    fn test_verify_loading_progress() {
+        let state = WasmLoadState::Loading {
+            bytes_received: 512,
+        };
+        assert!(WasmAssertMatchesExamples::verify_loading_progress(&state));
+    }
+
+    #[test]
+    fn test_default_memory_limit() {
+        assert_eq!(*WasmLazyLockExamples::default_memory_limit(), 256);
+    }
+
+    #[test]
+    fn test_feature_flags() {
+        let flags = WasmLazyLockExamples::feature_flags();
+        assert!(flags.contains(&"bulk-memory"));
+        assert!(flags.contains(&"simd128"));
     }
 }

@@ -1,90 +1,155 @@
-//! Rust 1.95.0 `core::range` 模块专题示例
+//! Rust 1.96.0 `core::range` 模块专题示例
 //!
-//! 本示例展示 Rust 1.95.0 中 `core::range` 模块的新 API，
-//! 包括 `RangeInclusive`、`RangeInclusiveIter` 以及它们在算法中的应用。
+//! 本示例展示 Rust 1.96.0 中 `core::range` 模块的完整新 API：
+//! - `core::range::Range` / `RangeIter` — 半开区间 `[start, end)`
+//! - `core::range::RangeFrom` / `RangeFromIter` — 无限区间 `[start, ∞)`
+//! - `core::range::RangeToInclusive` / `RangeToInclusiveIter` — 闭区间 `(-∞, end]`
+//! - `core::range::RangeInclusive` / `RangeInclusiveIter` — 闭区间 `[start, end]`
 //!
-//! 权威来源: https://releases.rs/docs/1.95.0/
+//! 这些类型实现 `IntoIterator` 而非直接 `Iterator`，因此当元素类型 `T: Copy` 时，
+//! 范围类型本身也实现 `Copy`，可多次迭代而不被消费。
+//!
+//! 权威来源: https://releases.rs/docs/1.96.0/ | RFC 3550
 //!
 //! 运行方式:
 //! ```bash
 //! cargo run --example core_range_demo -p c08_algorithms
 //! ```
 
-use std::ops::RangeInclusive;
+// ============================================================================
+// 示例 1: core::range::Range — 半开区间 [start, end)
+// ============================================================================
 
-// ==================== 示例 1: RangeInclusive 基础 ====================
+/// 使用 `core::range::Range` 创建可复用的半开区间
+fn demonstrate_core_range() {
+    println!("=== core::range::Range (半开区间 [start, end)) ===");
 
-/// 使用 core::range::RangeInclusive 创建包含性范围
-fn demonstrate_range_inclusive() {
-    println!("--- core::range::RangeInclusive 基础 ---");
+    use core::range::{Range, RangeIter};
 
-    // 创建 RangeInclusive
-    let range: RangeInclusive<i32> = 1..=5;
-    println!("  RangeInclusive::new(1, 5): {:?}", range);
-    println!("  start: {}, end: {}", range.start(), range.end());
+    let range: Range<i32> = Range { start: 1, end: 5 };
+    println!("  Range {{ start: 1, end: 5 }} = {:?}", range);
 
-    // 迭代
-    print!("  迭代: ");
-    for i in range {
-        print!("{} ", i);
-    }
-    println!();
+    // Range 实现 Copy（因为 i32: Copy），可多次迭代
+    let iter1: RangeIter<i32> = range.into_iter();
+    let values1: Vec<i32> = iter1.collect();
+    println!("  第一次迭代: {:?}", values1); // [1, 2, 3, 4]
 
-    // 包含性检查（使用新的 range 避免与上面迭代的 range 冲突）
-    let range2: RangeInclusive<i32> = 10..=20;
-    println!("  10 在 [10, 20] 中? {}", range2.contains(&10));
-    println!("  20 在 [10, 20] 中? {}", range2.contains(&20));
-    println!("  15 在 [10, 20] 中? {}", range2.contains(&15));
-    println!("  9  在 [10, 20] 中? {}", range2.contains(&9));
+    let iter2: RangeIter<i32> = range.into_iter();
+    let values2: Vec<i32> = iter2.collect();
+    println!("  第二次迭代: {:?}", values2); // [1, 2, 3, 4]
+
+    // 与 std::ops::Range 的对比
+    let std_range: std::ops::Range<i32> = 1..5;
+    let std_values: Vec<i32> = std_range.clone().collect();
+    println!("  std::ops::Range (1..5): {:?}", std_values);
 }
 
-// ==================== 示例 2: RangeInclusiveIter 迭代器 ====================
+// ============================================================================
+// 示例 2: core::range::RangeFrom — 无限区间 [start, ∞)
+// ============================================================================
 
-/// 展示 RangeInclusiveIter 的使用
-fn demonstrate_range_inclusive_iter() {
-    println!("\n--- RangeInclusiveIter 迭代器 ---");
+/// 使用 `core::range::RangeFrom` 创建无限区间
+fn demonstrate_core_range_from() {
+    println!("\n=== core::range::RangeFrom (无限区间 [start, ∞)) ===");
 
-    let range: RangeInclusive<i32> = 1..=10;
-    let iter = range.into_iter();
+    use core::range::{RangeFrom, RangeFromIter};
 
-    println!("  手动迭代:");
-    for n in iter {
-        print!("{} ", n);
-    }
-    println!();
+    let from: RangeFrom<i32> = RangeFrom { start: 10 };
+    println!("  RangeFrom {{ start: 10 }} = {:?}", from);
 
-    // 使用迭代器遍历字符范围
-    let char_range: RangeInclusive<char> = 'a'..='e';
-    print!("  char 迭代: ");
-    for c in char_range {
-        print!("{} ", c);
-    }
-    println!();
+    let iter: RangeFromIter<i32> = from.into_iter();
+    let first_5: Vec<i32> = iter.take(5).collect();
+    println!("  取前5个: {:?}", first_5); // [10, 11, 12, 13, 14]
+
+    // RangeFrom 也实现 Copy
+    let another_iter: RangeFromIter<i32> = from.into_iter();
+    let nth_10 = another_iter.nth(10);
+    println!("  第11个元素: {:?}", nth_10); // Some(20)
 }
 
-// ==================== 示例 3: 与 std::ops::RangeInclusive 的对比 ====================
+// ============================================================================
+// 示例 3: core::range::RangeToInclusive — 闭区间 (-∞, end]
+// ============================================================================
 
-/// 对比 core::range::RangeInclusive 和 std::ops::RangeInclusive
-fn compare_range_inclusive_types() {
-    println!("\n--- core::range vs std::ops RangeInclusive ---");
+/// 使用 `core::range::RangeToInclusive` 创建上限闭区间
+fn demonstrate_core_range_to_inclusive() {
+    println!("\n=== core::range::RangeToInclusive (闭区间 (-∞, end]) ===");
 
-    // std::ops::RangeInclusive（旧类型，仍然可用）
-    let std_range: std::ops::RangeInclusive<i32> = 1..=5;
+    use core::range::{RangeToInclusive, RangeToInclusiveIter};
 
-    // core::range::RangeInclusive（1.95.0+，等价但位于 core::range）
-    let core_range: RangeInclusive<i32> = 1..=5;
+    let to: RangeToInclusive<i32> = RangeToInclusive { end: 4 };
+    println!("  RangeToInclusive {{ end: 4 }} = {:?}", to);
 
-    println!("  std::ops::RangeInclusive: {:?}", std_range);
-    println!("  core::range::RangeInclusive: {:?}", core_range);
+    let iter: RangeToInclusiveIter<i32> = to.into_iter();
+    let values: Vec<i32> = iter.collect();
+    println!("  迭代结果: {:?}", values); // [0, 1, 2, 3, 4]
 
-    // 两者可以比较
-    assert_eq!(std_range.start(), core_range.start());
-    assert_eq!(std_range.end(), core_range.end());
-
-    println!("  ✅ 两者语义等价，core::range 版本更利于 no_std 场景");
+    // 与 RangeInclusive 的对比
+    use core::range::RangeInclusive;
+    let inclusive: RangeInclusive<i32> = RangeInclusive { start: 0, last: 4 };
+    let inc_values: Vec<i32> = inclusive.into_iter().collect();
+    println!("  RangeInclusive(0, 4): {:?}", inc_values); // [0, 1, 2, 3, 4]
 }
 
-// ==================== 示例 4: 算法应用 — 闭区间二分查找 ====================
+// ============================================================================
+// 示例 4: core::range::RangeInclusive — 闭区间 [start, end]
+// ============================================================================
+
+/// 使用 `core::range::RangeInclusive` 创建包含性范围
+fn demonstrate_core_range_inclusive() {
+    println!("\n=== core::range::RangeInclusive (闭区间 [start, end]) ===");
+
+    use core::range::{RangeInclusive, RangeInclusiveIter};
+
+    let range: RangeInclusive<i32> = RangeInclusive { start: 1, last: 5 };
+    println!("  RangeInclusive {{ start: 1, last: 5 }} = {:?}", range);
+    println!("  start: {}, last: {}", range.start, range.last);
+
+    let iter: RangeInclusiveIter<i32> = range.into_iter();
+    let values: Vec<i32> = iter.collect();
+    println!("  迭代结果: {:?}", values); // [1, 2, 3, 4, 5]
+
+    // 字符范围
+    let char_range: RangeInclusive<char> = RangeInclusive {
+        start: 'a',
+        last: 'e',
+    };
+    let chars: Vec<char> = char_range.into_iter().collect();
+    println!("  字符范围 ['a', 'e']: {:?}", chars);
+}
+
+// ============================================================================
+// 示例 5: Copy 语义 — 范围值不被消费
+// ============================================================================
+
+/// 演示 core::range 类型的 Copy 语义：多次迭代不消费原始值
+fn demonstrate_copy_semantics() {
+    println!("\n=== Copy 语义: 多次迭代不消费 ===");
+
+    use core::range::Range;
+
+    let range: Range<u32> = Range { start: 1, end: 4 };
+
+    // 第一次迭代
+    let sum1: u32 = range.into_iter().sum();
+    println!("  第一次 sum: {}", sum1); // 6
+
+    // 第二次迭代 — range 仍可用，因为 Range<u32>: Copy
+    let sum2: u32 = range.into_iter().sum();
+    println!("  第二次 sum: {}", sum2); // 6
+
+    // 第三次迭代
+    let product: u32 = range.into_iter().product();
+    println!("  product: {}", product); // 6
+
+    println!("  ✅ Range<u32> 实现 Copy，可无限次复用");
+}
+
+// ============================================================================
+// 示例 6: 算法应用 — 闭区间二分查找
+// ============================================================================
+
+use core::range::RangeInclusive;
 
 /// 使用 RangeInclusive 实现包含边界的二分查找
 fn inclusive_binary_search(
@@ -95,10 +160,8 @@ fn inclusive_binary_search(
     let mut left = *range.start();
     let mut right = *range.end();
 
-    // 包含 right 边界，所以条件是 <= 而非 <
     while left <= right {
         let mid = left + (right - left) / 2;
-
         match arr.get(mid) {
             Some(&val) if val == target => return Some(mid),
             Some(&val) if val < target => left = mid + 1,
@@ -110,18 +173,17 @@ fn inclusive_binary_search(
             }
         }
     }
-
     None
 }
 
 fn demonstrate_inclusive_binary_search() {
-    println!("\n--- 算法: 闭区间二分查找 ---");
+    println!("\n=== 算法: 闭区间二分查找 ===");
 
     let arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
-    let range = 0..=(arr.len() - 1);
+    let range = RangeInclusive::new(0, arr.len() - 1);
 
     println!("  数组: {:?}", arr);
-    println!("  搜索范围: [{}, {}]", range.start(), range.end());
+    println!("  搜索范围: [{}, {}]", range.start, range.last);
 
     for target in [1, 7, 19, 20] {
         match inclusive_binary_search(&arr, target, &range) {
@@ -131,7 +193,9 @@ fn demonstrate_inclusive_binary_search() {
     }
 }
 
-// ==================== 示例 5: 算法应用 — 区间调度 ====================
+// ============================================================================
+// 示例 7: 算法应用 — 区间调度与重叠检测
+// ============================================================================
 
 #[derive(Debug, Clone, PartialEq)]
 struct TimeRange {
@@ -142,41 +206,46 @@ struct TimeRange {
 /// 找出重叠的区间
 fn find_overlapping_intervals(intervals: &[TimeRange]) -> Vec<(&'static str, &'static str)> {
     let mut overlaps = Vec::new();
-
     for i in 0..intervals.len() {
         for j in (i + 1)..intervals.len() {
             let a = &intervals[i].range;
             let b = &intervals[j].range;
-
-            // 两个闭区间重叠的条件
-            if a.start() <= b.end() && b.start() <= a.end() {
+            if a.start <= b.last && b.start <= a.last {
                 overlaps.push((intervals[i].name, intervals[j].name));
             }
         }
     }
-
     overlaps
 }
 
 fn demonstrate_interval_scheduling() {
-    println!("\n--- 算法: 区间重叠检测 ---");
+    println!("\n=== 算法: 区间重叠检测 ===");
 
     let intervals = vec![
         TimeRange {
             name: "Meeting A",
-            range: 9..=11,
+            range: RangeInclusive { start: 9, last: 11 },
         },
         TimeRange {
             name: "Meeting B",
-            range: 10..=12,
+            range: RangeInclusive {
+                start: 10,
+                last: 12,
+            },
         },
         TimeRange {
             name: "Meeting C",
-            range: 14..=16,
+            range: RangeInclusive {
+                start: 14,
+                last: 16,
+            },
         },
         TimeRange {
             name: "Meeting D",
-            range: 11..=13,
+            range: RangeInclusive {
+                start: 11,
+                last: 13,
+            },
         },
     ];
 
@@ -184,9 +253,7 @@ fn demonstrate_interval_scheduling() {
     for interval in &intervals {
         println!(
             "    {}: [{}, {}]",
-            interval.name,
-            interval.range.start(),
-            interval.range.end()
+            interval.name, interval.range.start, interval.range.last
         );
     }
 
@@ -197,74 +264,40 @@ fn demonstrate_interval_scheduling() {
     }
 }
 
-// ==================== 示例 6: 算法应用 — 分页范围计算 ====================
+// ============================================================================
+// 示例 8: no_std 友好性
+// ============================================================================
 
-/// 计算分页的 item 索引范围
-fn page_range(
-    total_items: usize,
-    page_size: usize,
-    page_number: usize,
-) -> Option<RangeInclusive<usize>> {
-    if page_size == 0 || page_number == 0 {
-        return None;
-    }
-
-    let start = (page_number - 1) * page_size;
-    if start >= total_items {
-        return None;
-    }
-
-    let end = (start + page_size - 1).min(total_items - 1);
-    Some(start..=end)
-}
-
-fn demonstrate_pagination() {
-    println!("\n--- 应用: 分页范围计算 ---");
-
-    let total_items = 25;
-    let page_size = 10;
-
-    println!("  总项目: {}, 每页: {}", total_items, page_size);
-
-    for page in 1..=3 {
-        match page_range(total_items, page_size, page) {
-            Some(range) => {
-                let start = *range.start();
-                let end = *range.end();
-                let items: Vec<_> = range.clone().map(|i| format!("item_{}", i)).collect();
-                println!("  第 {} 页: 索引 [{}, {}] -> {:?}", page, start, end, items);
-            }
-            None => println!("  第 {} 页: 无数据", page),
-        }
-    }
-}
-
-// ==================== 示例 7: no_std 友好性 ====================
-
-/// core::range 模块完全在 core 中定义，无需 std
 fn demonstrate_no_std_friendly() {
-    println!("\n--- no_std 友好性 ---");
-    println!("  core::range::RangeInclusive 完全定义在 core 中");
-    println!("  这意味着在 #![no_std] 环境中可直接使用");
-    println!("  无需 alloc，仅需 core");
+    println!("\n=== no_std 友好性 ===");
+    println!("  core::range 所有类型完全定义在 core 中");
+    println!("  无需 std，无需 alloc，仅需 core");
+    println!("  适合嵌入式和内核编程场景");
 }
 
-// ==================== 主演示函数 ====================
+// ============================================================================
+// 主演示函数
+// ============================================================================
 
 fn main() {
-    println!("🦀 Rust 1.95.0 `core::range` 模块专题演示\n");
+    println!("🦀 Rust 1.96.0 `core::range` 模块完整演示\n");
 
-    demonstrate_range_inclusive();
-    demonstrate_range_inclusive_iter();
-    compare_range_inclusive_types();
+    demonstrate_core_range();
+    demonstrate_core_range_from();
+    demonstrate_core_range_to_inclusive();
+    demonstrate_core_range_inclusive();
+    demonstrate_copy_semantics();
     demonstrate_inclusive_binary_search();
     demonstrate_interval_scheduling();
-    demonstrate_pagination();
     demonstrate_no_std_friendly();
 
-    println!("\n✅ `core::range` 演示完成！");
+    println!("\n✅ `core::range` 1.96.0 演示完成！");
     println!("   关键要点:");
-    println!("   - core::range::RangeInclusive 是 std::ops::RangeInclusive 的 core 层等价物");
-    println!("   - 语义完全一致，但更适合 no_std 和嵌入式场景");
-    println!("   - RangeInclusiveIter 是配套的迭代器类型");
+    println!("   - core::range::Range / RangeFrom / RangeToInclusive / RangeInclusive");
+    println!(
+        "   - 配套迭代器: RangeIter / RangeFromIter / RangeToInclusiveIter / RangeInclusiveIter"
+    );
+    println!("   - 所有范围类型在元素 Copy 时自身也 Copy，可多次复用");
+    println!("   - 实现 IntoIterator 而非 Iterator，解耦范围值与迭代状态");
+    println!("   - 完全在 core 中定义，no_std 友好");
 }

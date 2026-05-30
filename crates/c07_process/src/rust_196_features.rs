@@ -1,371 +1,188 @@
-//! # Rust 1.96 特性跟踪模块（含历史特性复习与 1.96 前瞻）
+//! # Rust 1.96.0 特性 — 进程管理与系统编程模块
+//!
+//! 本模块展示 Rust 1.96.0 中与进程管理、系统编程、懒加载相关的稳定特性：
+//! - `From<T> for LazyCell<T, F>` / `LazyLock<T, F>` — 值直接构造懒加载容器
+//! - `assert_matches!` / `debug_assert_matches!` — 模式匹配断言
+//! - `core::range::Range` — 进程 ID 范围、资源限制范围的可复用迭代
+//!
+//! # 版本信息
+//! - Rust 版本: 1.96.0+ stable
+//! - 稳定日期: 2026-05-28
+//! - Edition: 2024
 
-use std::ops::RangeInclusive;
+use std::assert_matches;
+use std::cell::LazyCell;
+use std::sync::LazyLock;
 
-/// `if let` guards (Rust 1.95 稳定，非 1.96 新特性) 在进程管理中的应用
+// ============================================================================
+// 1. From<T> for LazyCell<T, F> / LazyLock<T, F> (1.96 stable)
+// ============================================================================
+
+/// # 懒加载容器的 `From` 实现
 ///
-/// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
-/// 减少嵌套层级，使代码更扁平、更易读。
-pub struct ProcessIfLetGuardExamples;
+/// Rust 1.96 稳定了从值直接构造 `LazyCell` 和 `LazyLock` 的 `From` 实现，
+/// 无需显式提供初始化闭包。这在进程级配置和全局状态管理中特别有用。
+///
+/// ## 进程管理应用场景
+/// - 进程配置的单例懒加载
+/// - 系统资源信息的延迟初始化
+/// - 环境变量的缓存封装
+pub struct LazyFromExamples;
 
-impl ProcessIfLetGuardExamples {
-    /// 解析进程 ID
-    pub fn parse_pid(input: Option<&str>) -> Result<u32, &'static str> {
-        match input {
-            Some(s) if let Ok(pid) = s.parse::<u32>() => Ok(pid),
-            Some(_) => Err("无效的进程 ID"),
-            None => Err("未指定进程 ID"),
-        }
+impl LazyFromExamples {
+    /// 从值直接构造 LazyLock（无需闭包）
+    pub fn process_config_from_value() -> LazyLock<String> {
+        LazyLock::from("production".to_string())
     }
 
-    /// 检查进程退出状态
-    pub fn interpret_exit_status(status: Option<Result<i32, &'static str>>) -> &'static str {
-        match status {
-            Some(Ok(0)) => "正常退出",
-            Some(Ok(_)) => "异常退出",
-            Some(Err(_)) => "进程被信号终止",
-            None => "仍在运行",
-        }
+    /// 从值直接构造 LazyCell
+    pub fn thread_local_config_from_value() -> LazyCell<Vec<String>> {
+        LazyCell::from(vec!["--verbose".to_string(), "--secure".to_string()])
+    }
+
+    /// 进程 PID 表的懒加载初始化
+    pub fn pid_table() -> &'static LazyLock<Vec<u32>> {
+        static TABLE: LazyLock<Vec<u32>> = LazyLock::new(|| vec![1, 2, 4, 8, 16]);
+        &TABLE
     }
 }
 
-/// Range 类型应用（标准库基础特性）
+// ============================================================================
+// 2. assert_matches! / debug_assert_matches! (1.96 stable)
+// ============================================================================
+
+/// # 模式匹配断言在进程管理中的应用
+///
+/// `assert_matches!` 允许对 `Result`、`Option` 和自定义枚举进行模式匹配断言，
+/// 在进程状态验证和错误处理测试中非常有用。
+pub struct ProcessAssertMatchesExamples;
+
+impl ProcessAssertMatchesExamples {
+    /// 验证进程退出状态
+    pub fn verify_exit_status(status: Result<i32, &'static str>) -> bool {
+        assert_matches!(status, Ok(code) if code >= 0);
+        true
+    }
+
+    /// 验证进程信号
+    pub fn verify_signal(signal: Option<i32>) -> bool {
+        assert_matches!(signal, Some(sig) if sig > 0 && sig < 64);
+        true
+    }
+}
+
+// ============================================================================
+// 3. core::range::Range 在进程管理中的应用
+// ============================================================================
+
+/// # `core::range::Range` 在进程资源管理中的应用
+///
+/// Rust 1.96 的 `core::range::Range` 实现 `Copy`，可多次迭代，
+/// 适合表示进程 ID 范围、内存地址范围、资源限制等。
 pub struct ProcessRangeExamples;
 
 impl ProcessRangeExamples {
-    /// 进程优先级分配
-    pub fn priority_range(nice_level: i8) -> &'static str {
+    /// 验证 PID 是否在有效范围内
+    pub fn is_valid_pid(pid: u32) -> bool {
+        use core::range::Range;
+        let valid_range: Range<u32> = Range {
+            start: 1,
+            end: 32768,
+        };
+        valid_range.into_iter().any(|p| p == pid)
+    }
+
+    /// 进程优先级范围分类
+    pub fn priority_category(nice_level: i8) -> &'static str {
+        use core::range::RangeInclusive;
         match nice_level {
-            -20..=-10 => "高优先级",
-            -9..=0 => "正常优先级",
-            1..=10 => "低优先级",
-            11..=19 => "最低优先级",
-            _ => "无效",
+            n if (RangeInclusive {
+                start: -20,
+                last: -10,
+            })
+            .into_iter()
+            .any(|x| x == n) =>
+            {
+                "high"
+            }
+            n if (RangeInclusive { start: -9, last: 0 })
+                .into_iter()
+                .any(|x| x == n) =>
+            {
+                "normal"
+            }
+            n if (RangeInclusive { start: 1, last: 10 })
+                .into_iter()
+                .any(|x| x == n) =>
+            {
+                "low"
+            }
+            n if (RangeInclusive {
+                start: 11,
+                last: 19,
+            })
+            .into_iter()
+            .any(|x| x == n) =>
+            {
+                "idle"
+            }
+            _ => "invalid",
         }
     }
-
-    /// 资源限制检查
-    pub fn check_resource_limit(current: usize, limit: RangeInclusive<usize>) -> &'static str {
-        if current < *limit.start() {
-            "正常"
-        } else if limit.contains(&current) {
-            "警告"
-        } else {
-            "超限"
-        }
-    }
-
-    /// 进程分组
-    pub fn group_processes(processes: &[usize], group_size: usize) -> Vec<RangeInclusive<usize>> {
-        if group_size == 0 || processes.is_empty() {
-            return vec![];
-        }
-
-        let mut groups = Vec::new();
-        let mut start = 0;
-
-        while start < processes.len() {
-            let end = (start + group_size - 1).min(processes.len() - 1);
-            groups.push(start..=end);
-            start = end + 1;
-        }
-
-        groups
-    }
 }
 
-/// 元组类型应用（泛型编程基础）
-pub struct ProcessTupleExamples;
-
-impl ProcessTupleExamples {
-    /// 进程执行结果
-    pub fn process_execution_result<T>(
-        result: Result<T, String>,
-        pid: u32,
-    ) -> (Result<T, String>, u32, std::time::Instant)
-    where
-        T: Clone,
-    {
-        (result, pid, std::time::Instant::now())
-    }
-
-    /// 进程统计
-    pub fn process_stats(
-        running: usize,
-        zombie: usize,
-        stopped: usize,
-    ) -> (usize, usize, usize, usize, &'static str) {
-        let total = running + zombie + stopped;
-        let health = if zombie > 10 {
-            "critical"
-        } else if zombie > 0 {
-            "warning"
-        } else {
-            "healthy"
-        };
-        (running, zombie, stopped, total, health)
-    }
-
-    /// 资源使用
-    pub fn resource_usage(cpu_percent: f64, memory_mb: usize) -> (f64, usize, &'static str) {
-        let status = if cpu_percent > 90.0 {
-            "high_cpu"
-        } else if memory_mb > 1024 {
-            "high_memory"
-        } else {
-            "normal"
-        };
-        (cpu_percent, memory_mb, status)
-    }
-}
-
-/// 进程池管理器
-pub struct ProcessPoolManager {
-    process_ranges: Vec<RangeInclusive<usize>>,
-    active_range: RangeInclusive<usize>,
-}
-
-impl ProcessPoolManager {
-    /// 创建新管理器
-    pub fn new(process_count: usize, batch_size: usize) -> Self {
-        let ranges = ProcessRangeExamples::group_processes(
-            &(0..process_count).collect::<Vec<_>>(),
-            batch_size,
-        );
-        Self {
-            process_ranges: ranges.clone(),
-            active_range: 0..=ranges.len().saturating_sub(1),
-        }
-    }
-
-    /// 获取进程范围
-    pub fn get_process_range(&self, group_id: usize) -> Option<&RangeInclusive<usize>> {
-        self.process_ranges.get(group_id)
-    }
-
-    /// 检查组是否活跃
-    pub fn is_group_active(&self, group_id: usize) -> bool {
-        self.active_range.contains(&group_id)
-    }
-
-    /// 获取所有范围
-    pub fn get_all_ranges(&self) -> &[RangeInclusive<usize>] {
-        &self.process_ranges
-    }
-}
-
-/// 演示函数
-pub fn demonstrate_rust_196_features() {
-    println!("\n========================================");
-    println!("   Rust 1.95+ 特性跟踪演示");
-    println!("========================================\n");
-
-    let priority = ProcessRangeExamples::priority_range(-5);
-    println!("优先级(-5): {}", priority);
-
-    let resource_status = ProcessRangeExamples::check_resource_limit(80, 50..=100);
-    println!("资源状态(80/50-100): {}", resource_status);
-
-    let groups = ProcessRangeExamples::group_processes(&[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
-    println!("进程分组: {:?}", groups);
-
-    let (running, zombie, stopped, total, health) = ProcessTupleExamples::process_stats(10, 2, 1);
-    println!(
-        "进程统计: 运行={}, 僵尸={}, 停止={}, 总计={}, 健康={}",
-        running, zombie, stopped, total, health
-    );
-
-    let manager = ProcessPoolManager::new(12, 4);
-    println!("进程组: {:?}", manager.get_all_ranges());
-
-    println!("\n========================================");
-    println!("   演示完成");
-    println!("========================================\n");
-}
-
-/// 获取特性信息
-pub fn get_rust_196_process_info() -> String {
-    "Rust 1.95+ 特性跟踪:\n- RangeInclusive for priority and resource management\n- Tuple coercion \
-     for process results\n- Better process pool management"
-        .to_string()
-}
-
-/// Rust 1.96 新特性在进程管理中的应用
-///
-/// 本结构体演示了 Rust 1.96 中稳定化的以下特性：
-/// - `core::pin::pin!` 宏：在栈上固定异步任务
-/// - `VecDeque::new` 可在 const 上下文中使用：编译期初始化进程队列
-/// - `impl From<bool> for {f32, f64}`：将进程成功/失败标志转换为浮点指标
-/// - `std::path::MAIN_SEPARATOR_STR`：跨平台路径分隔符
-/// - `impl DerefMut for PathBuf`：可变路径操作
-pub struct ProcessRust196Features;
-
-impl ProcessRust196Features {
-    /// 使用 `core::pin::pin!` 在栈上固定异步进程任务
-    ///
-    /// 适用于进程池中需要对 Future 进行原地固定的场景。
-    pub async fn pinned_async_task() -> u32 {
-        let future = async { 42 };
-        let pinned = core::pin::pin!(future);
-        pinned.await
-    }
-
-    /// 在 const 上下文中创建空的进程队列
-    ///
-    /// `VecDeque::new` 在 Rust 1.68 中可在 const 上下文中稳定使用。
-    pub const fn const_process_queue() -> std::collections::VecDeque<u32> {
-        std::collections::VecDeque::new()
-    }
-
-    /// 将进程执行结果（成功/失败）转换为浮点指标
-    ///
-    /// `true` 对应 `1.0`，`false` 对应 `0.0`。
-    pub fn success_to_metric(success: bool) -> (f32, f64) {
-        (f32::from(success), f64::from(success))
-    }
-
-    /// 使用跨平台路径分隔符拼接进程路径
-    ///
-    /// 利用 `std::path::MAIN_SEPARATOR_STR` 避免硬编码 `/` 或 `\`。
-    pub fn join_process_path(dir: &str, file: &str) -> String {
-        format!("{}{}{}", dir, std::path::MAIN_SEPARATOR_STR, file)
-    }
-
-    /// 通过可变引用修改进程工作目录路径
-    ///
-    /// Rust 1.96 为 `PathBuf` 实现了 `DerefMut`，
-    /// 使其能够更好地与需要 `&mut Path` 的泛型代码协同。
-    pub fn update_working_dir(path: &mut std::path::PathBuf, subdir: &str) {
-        path.push(subdir);
-    }
-}
+// ============================================================================
+// 测试
+// ============================================================================
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn test_priority_range() {
-        assert_eq!(ProcessRangeExamples::priority_range(-15), "高优先级");
-        assert_eq!(ProcessRangeExamples::priority_range(-5), "正常优先级");
-        assert_eq!(ProcessRangeExamples::priority_range(5), "低优先级");
+    fn test_lazy_lock_from() {
+        let lazy: LazyLock<i32> = LazyLock::from(100);
+        assert_eq!(*lazy, 100);
     }
 
     #[test]
-    fn test_check_resource_limit() {
-        assert_eq!(
-            ProcessRangeExamples::check_resource_limit(30, 50..=100),
-            "正常"
-        );
-        assert_eq!(
-            ProcessRangeExamples::check_resource_limit(75, 50..=100),
-            "警告"
-        );
-        assert_eq!(
-            ProcessRangeExamples::check_resource_limit(150, 50..=100),
-            "超限"
-        );
+    fn test_lazy_cell_from() {
+        let cell: LazyCell<String> = LazyCell::from("test".to_string());
+        assert_eq!(**cell, "test");
     }
 
     #[test]
-    fn test_group_processes() {
-        let groups = ProcessRangeExamples::group_processes(&[1, 2, 3, 4, 5], 2);
-        assert_eq!(groups.len(), 3);
+    fn test_process_config_from_value() {
+        let config = LazyFromExamples::process_config_from_value();
+        assert_eq!(*config, "production");
     }
 
     #[test]
-    fn test_process_stats() {
-        let (running, zombie, stopped, total, health) =
-            ProcessTupleExamples::process_stats(10, 2, 1);
-        assert_eq!(running, 10);
-        assert_eq!(zombie, 2);
-        assert_eq!(stopped, 1);
-        assert_eq!(total, 13);
-        assert_eq!(health, "warning");
+    fn test_pid_table() {
+        let table = LazyFromExamples::pid_table();
+        assert_eq!(table.len(), 5);
+        assert_eq!(table[0], 1);
     }
 
     #[test]
-    fn test_process_pool_manager() {
-        let manager = ProcessPoolManager::new(12, 4);
-        assert_eq!(manager.get_all_ranges().len(), 3);
-        assert!(manager.is_group_active(0));
+    fn test_verify_exit_status() {
+        assert!(ProcessAssertMatchesExamples::verify_exit_status(Ok(0)));
+        assert!(ProcessAssertMatchesExamples::verify_exit_status(Ok(42)));
     }
 
     #[test]
-    fn test_parse_pid() {
-        assert_eq!(ProcessIfLetGuardExamples::parse_pid(Some("1234")), Ok(1234));
-        assert_eq!(
-            ProcessIfLetGuardExamples::parse_pid(Some("abc")),
-            Err("无效的进程 ID")
-        );
-        assert_eq!(
-            ProcessIfLetGuardExamples::parse_pid(None),
-            Err("未指定进程 ID")
-        );
+    fn test_priority_category() {
+        assert_eq!(ProcessRangeExamples::priority_category(-15), "high");
+        assert_eq!(ProcessRangeExamples::priority_category(0), "normal");
+        assert_eq!(ProcessRangeExamples::priority_category(5), "low");
+        assert_eq!(ProcessRangeExamples::priority_category(15), "idle");
     }
 
     #[test]
-    fn test_interpret_exit_status() {
-        assert_eq!(
-            ProcessIfLetGuardExamples::interpret_exit_status(Some(Ok(0))),
-            "正常退出"
-        );
-        assert_eq!(
-            ProcessIfLetGuardExamples::interpret_exit_status(Some(Ok(1))),
-            "异常退出"
-        );
-        assert_eq!(
-            ProcessIfLetGuardExamples::interpret_exit_status(Some(Err("SIGKILL"))),
-            "进程被信号终止"
-        );
-        assert_eq!(
-            ProcessIfLetGuardExamples::interpret_exit_status(None),
-            "仍在运行"
-        );
-    }
-
-    #[test]
-    fn test_get_rust_196_process_info() {
-        let info = get_rust_196_process_info();
-        assert!(!info.is_empty());
-    }
-
-    #[tokio::test]
-    #[cfg_attr(miri, ignore)]
-    async fn test_pinned_async_task() {
-        assert_eq!(ProcessRust196Features::pinned_async_task().await, 42);
-    }
-
-    #[test]
-    fn test_const_process_queue() {
-        let queue = ProcessRust196Features::const_process_queue();
-        assert!(queue.is_empty());
-    }
-
-    #[test]
-    fn test_success_to_metric() {
-        assert_eq!(
-            ProcessRust196Features::success_to_metric(true),
-            (1.0_f32, 1.0_f64)
-        );
-        assert_eq!(
-            ProcessRust196Features::success_to_metric(false),
-            (0.0_f32, 0.0_f64)
-        );
-    }
-
-    #[test]
-    fn test_join_process_path() {
-        let joined = ProcessRust196Features::join_process_path("var", "log");
-        assert!(joined.contains(std::path::MAIN_SEPARATOR_STR));
-        assert!(joined.starts_with("var"));
-        assert!(joined.ends_with("log"));
-    }
-
-    #[test]
-    fn test_update_working_dir() {
-        let mut path = std::path::PathBuf::from("/tmp");
-        ProcessRust196Features::update_working_dir(&mut path, "logs");
-        assert_eq!(path, std::path::PathBuf::from("/tmp/logs"));
+    fn test_is_valid_pid() {
+        assert!(ProcessRangeExamples::is_valid_pid(1));
+        assert!(ProcessRangeExamples::is_valid_pid(1000));
+        assert!(!ProcessRangeExamples::is_valid_pid(0));
+        assert!(!ProcessRangeExamples::is_valid_pid(50000));
     }
 }
