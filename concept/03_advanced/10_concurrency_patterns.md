@@ -675,7 +675,15 @@ fn main() {
 }
 ```
 
-> **修正**: `crossbeam::channel` 的关闭语义：1) 所有 `Sender` drop → `Receiver::recv()` 返回 `Err(RecvError)`（Disconnected）；2) `Receiver::iter()` 在 channel 关闭且所有消息消费完后终止；3) 无显式"关闭信号"——需协议层实现（发送特殊 sentinel 值）。与 `std::sync::mpsc` 的区别：`crossbeam` 支持多生产者/多消费者、无界和有界 channel、选择（`select!`）。有界 channel 的 `send` 在满时阻塞（或超时），防止无限内存增长。这与 Go 的 channel（语言原生，自动处理关闭和 range 迭代）或 Tokio 的 `mpsc`（异步，背压控制）不同——Rust 的 channel 库多样，`crossbeam` 是同步场景的性能最优选择。[来源: [crossbeam-channel](https://docs.rs/crossbeam-channel/)] · [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
+> **修正**: `crossbeam::channel` 的关闭语义：
+>
+> 1) 所有 `Sender` drop → `Receiver::recv()` 返回 `Err(RecvError)`（Disconnected）；
+> 2) `Receiver::iter()` 在 channel 关闭且所有消息消费完后终止；
+> 3) 无显式"关闭信号"——需协议层实现（发送特殊 sentinel 值）。
+> 与 `std::sync::mpsc` 的区别：`crossbeam` 支持多生产者/多消费者、无界和有界 channel、选择（`select!`）。
+> 有界 channel 的 `send` 在满时阻塞（或超时），防止无限内存增长。
+> 这与 Go 的 channel（语言原生，自动处理关闭和 range 迭代）或 Tokio 的 `mpsc`（异步，背压控制）不同——Rust 的 channel 库多样，`crossbeam` 是同步场景的性能最优选择。
+> [来源: [crossbeam-channel](https://docs.rs/crossbeam-channel/)] · [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
 
 ### 10.4 边界测试：Send/Sync 的 auto trait 边界与线程安全（编译错误）
 
@@ -692,17 +700,33 @@ fn main() {
 }
 ```
 
-> **修正**: **`Send`** 和 **`Sync`** 是 auto trait：1) `Send` — 类型可安全转移到其他线程；2) `Sync` — 类型可安全被多线程共享引用（`&T` 是 `Send`）；3) `Rc<T>` 既不是 `Send` 也不是 `Sync`（引用计数非原子）。线程安全替代：1) `Arc<T>` — 原子引用计数，实现 `Send + Sync`（若 `T: Send + Sync`）；2) `Mutex<T>` / `RwLock<T>` — 互斥访问；3) `mpsc` / `crossbeam` channel — 消息传递。自定义类型的线程安全：1) 包含 `Send` 字段 → 自动 `Send`；2) 包含 `Rc` / `Cell` / `RefCell` → 自动 `!Send`；3) 可 `unsafe impl Send for MyType {}`（需手动保证）。这与 Go 的 goroutine（所有数据可共享，通过 channel 或 mutex 协调）或 Java 的 `synchronized`（所有对象有 monitor，编译器不检查线程安全）不同——Rust 的 `Send`/`Sync` 是编译期线程安全检查。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)]
+> **修正**:
+> **`Send`** 和 **`Sync`** 是 auto trait：
+>
+> 1) `Send` — 类型可安全转移到其他线程；
+> 2) `Sync` — 类型可安全被多线程共享引用（`&T` 是 `Send`）；
+> 3) `Rc<T>` 既不是 `Send` 也不是 `Sync`（引用计数非原子）。
+>
+> 线程安全替代：
+>
+> 1) `Arc<T>` — 原子引用计数，实现 `Send + Sync`（若 `T: Send + Sync`）；
+> 2) `Mutex<T>` / `RwLock<T>` — 互斥访问；
+> 3) `mpsc` / `crossbeam` channel — 消息传递。
+>
+> 自定义类型的线程安全：
+>
+> 1) 包含 `Send` 字段 → 自动 `Send`；
+> 2) 包含 `Rc` / `Cell` / `RefCell` → 自动 `!Send`；
+> 3) 可 `unsafe impl Send for MyType {}`（需手动保证）。
+> 这与 Go 的 goroutine（所有数据可共享，通过 channel 或 mutex 协调）或 Java 的 `synchronized`（所有对象有 monitor，编译器不检查线程安全）不同
+> ——Rust 的 `Send`/`Sync` 是编译期线程安全检查。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)] · [来源: [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)]
 
 ## 参考来源
 
 > [来源: [Tokio Concurrency Primitives](https://tokio.rs/tokio/tutorial/shared-state)]
-
 > [来源: [Rustonomicon — Concurrency](https://doc.rust-lang.org/nomicon/concurrency.html)]
-
 > [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
-
 > [来源: [RFC 0458 — Send and Sync](https://rust-lang.github.io/rfcs/0458-send-sync.html)]
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

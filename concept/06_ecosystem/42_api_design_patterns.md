@@ -622,6 +622,7 @@ struct OrderLoader {
     db: PgPool,
 }
 
+// async-graphql Loader trait 仍需 #[async_trait]（内部使用 dyn Loader）
 #[async_trait::async_trait]
 impl Loader<ID> for OrderLoader {
     type Value = Vec<Order>;

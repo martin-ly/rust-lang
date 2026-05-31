@@ -1016,6 +1016,174 @@ fn print_it<T: Display + 'static>(t: T) { ... }
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
+## 🎯 嵌入式测验
+
+> 以下测验用于自测理解程度，点击展开查看答案。
+
+### Q1: 生命周期标注的核心目的是什么？
+
+<details>
+<summary>点击查看题目</summary>
+
+Rust 中为什么需要显式标注生命周期？如果不标注会发生什么？
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+**核心目的**: 确保引用在其指向的数据仍然有效期间使用，防止**悬垂引用**。
+
+Rust 编译器通过生命周期检查验证：引用的有效期 ≤ 被引用数据的有效期。
+
+**不标注的情况**: 编译器会尝试**生命周期省略**（Lifetime Elision），根据三条规则自动推断。如果无法推断，则要求显式标注。
+
+> **来源**: [TRPL — Lifetime Syntax](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+
+</details>
+
+### Q2: 以下函数签名是否需要显式生命周期标注？
+
+<details>
+<summary>点击查看题目</summary>
+
+```rust
+fn first_word(s: &str) -> &str { }
+
+fn longest(x: &str, y: &str) -> &str { }
+```
+
+哪个需要显式标注，哪个可以省略？
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+| 函数 | 是否需要显式标注 | 原因 |
+|:---|:---:|:---|
+| `first_word` | ❌ 不需要 | 单输入单输出，编译器自动应用省略规则 |
+| `longest` | ✅ 需要 | 两个输入引用，编译器无法确定返回哪个引用的生命周期 |
+
+正确标注：
+
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+```
+
+> `'a` 表示返回的生命周期与两个参数中**较短的那个**相同。
+
+</details>
+
+### Q3: `'static` 生命周期意味着什么？
+
+<details>
+<summary>点击查看题目</summary>
+
+以下关于 `'static` 的说法哪个正确？
+
+1. `'static` 引用存活于整个程序运行期间
+2. 所有字符串字面量都是 `'static`
+3. 拥有 `'static` 生命周期的值永远不会被 drop
+4. `Box::leak` 可以创建 `'static` 引用
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+| 说法 | 正误 | 解释 |
+|:---|:---:|:---|
+| 1 | ✅ | `'static` 表示数据在程序整个生命周期内有效 |
+| 2 | ✅ | 字符串字面量编译期嵌入二进制，是 `'static` |
+| 3 | ❌ | `'static` 引用可能被 drop，只是数据本身不释放（如 `Box::leak`）|
+| 4 | ✅ | `Box::leak(boxed)` 将堆内存泄漏为 `'static` 引用 |
+
+> 常见误区：`'static` ≠ "永远不被 drop"。`let s: &'static str = "hi"` 中变量 `s` 本身有作用域，只是它指向的数据是静态的。
+
+</details>
+
+### Q4: 结构体何时需要生命周期参数？
+
+<details>
+<summary>点击查看题目</summary>
+
+```rust
+struct Book {
+    title: String,
+    author: &str,  // 这里需要什么？
+}
+```
+
+`author` 字段使用 `&str` 而非 `String` 时，结构体需要什么修改？
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+结构体包含引用时，必须声明生命周期参数：
+
+```rust
+struct Book<'a> {
+    title: String,
+    author: &'a str,  // author 引用的有效期至少为 'a
+}
+```
+
+**规则**: 如果结构体包含引用类型的字段，结构体本身必须参数化生命周期。实例的有效期不能超过其引用字段的生命周期。
+
+```rust
+let title = String::from("Rust Book");
+let author = "Steve Klabnik";
+let book = Book { title, author };  // book 不能活得比 author 久
+```
+
+</details>
+
+### Q5: 以下代码的编译结果是什么？
+
+<details>
+<summary>点击查看题目</summary>
+
+```rust
+fn main() {
+    let r;
+    {
+        let x = 5;
+        r = &x;
+    }
+    println!("{}", r);
+}
+```
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+**编译错误**: `x` does not live long enough
+
+`x` 在大括号结束后被 drop，但 `r` 仍然持有对 `x` 的引用。`r` 的生命周期比 `x` 长，违反了引用有效性规则。
+
+**修复**: 让 `x` 活得和 `r` 一样久：
+
+```rust
+fn main() {
+    let x = 5;
+    let r = &x;
+    println!("{}", r);  // ✅ x 和 r 同作用域
+}
+```
+
+> 这是生命周期检查最基本的原则：引用的有效期不能超过被引用数据的有效期。
+
+</details>
+
+---
+
 ## 参考来源
 
 > [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)]

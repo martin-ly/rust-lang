@@ -25,7 +25,7 @@ async fn main() -> Result<()> {
     println!("🚀 Rust 异步生态系统最终演示");
     println!("================================================");
     println!("本演示将全面展示Rust异步编程生态系统的所有特性：");
-    println!("1. 异步运行时特性分析 (std, tokio, async-std, smol)");
+    println!("1. 异步运行时特性分析 (std, tokio, smol) [历史: async-std 已停止维护]");
     println!("2. 各运行时的具体使用示例和组合模式");
     println!("3. 集成框架层面的共性和设计模式");
     println!("4. 异步同步转换机制");
@@ -128,7 +128,7 @@ async fn real_world_scenarios_demo() -> Result<()> {
     web_server_scenario().await?;
 
     // 场景2：CLI工具
-    println!("\n  场景2：CLI工具 (推荐: async-std 或 smol)");
+    println!("\n  场景2：CLI工具 (推荐: tokio 或 smol)");
     cli_tool_scenario().await?;
 
     // 场景3：嵌入式系统
@@ -169,7 +169,7 @@ async fn web_server_scenario() -> Result<()> {
 async fn cli_tool_scenario() -> Result<()> {
     println!("    🛠️ CLI工具场景:");
     println!("      特点: 快速启动、简单易用、资源占用少");
-    println!("      推荐运行时: async-std 或 smol");
+    println!("      推荐运行时: tokio 或 smol");
     println!("      原因: 易用性、轻量级、快速开发");
 
     let async_std_examples = AsyncStdExamples::new();
@@ -253,7 +253,7 @@ async fn best_practices_demo() -> Result<()> {
     // 1. 运行时选择原则
     println!("\n  1. 运行时选择原则:");
     println!("     - 生产环境高性能需求 → Tokio");
-    println!("     - 快速原型开发 → async-std");
+    println!("     - 快速原型开发 → tokio");
     println!("     - 资源受限环境 → smol");
     println!("     - 基础异步概念学习 → std");
 
@@ -327,7 +327,7 @@ fn print_final_summary() {
     println!("================================================");
 
     println!("\n📋 完成的功能模块:");
-    println!("  ✅ 异步运行时特性分析 (std, tokio, async-std, smol)");
+    println!("  ✅ 异步运行时特性分析 (std, tokio, smol) [历史: async-std 已停止维护]");
     println!("  ✅ 各运行时的具体使用示例和组合模式");
     println!("  ✅ 集成框架层面的共性和设计模式");
     println!("  ✅ 异步同步转换机制");
@@ -344,13 +344,13 @@ fn print_final_summary() {
 
     println!("\n📊 运行时选择指南:");
     println!("  🚀 Tokio: 高性能网络服务、微服务架构");
-    println!("  📚 async-std: 快速开发、学习异步编程");
+    println!("  📚 async-std [历史]: 已于 2025-03 停止维护");
     println!("  ⚡ smol: 嵌入式系统、资源受限环境");
     println!("  🔧 std: 基础异步概念、跨平台兼容");
 
     println!("\n🎯 应用场景推荐:");
     println!("  🌐 Web服务器 → Tokio");
-    println!("  🛠️ CLI工具 → async-std 或 smol");
+    println!("  🛠️ CLI工具 → tokio 或 smol");
     println!("  🔧 嵌入式系统 → smol");
     println!("  🏗️ 微服务架构 → Tokio");
     println!("  📊 数据处理管道 → 组合使用");

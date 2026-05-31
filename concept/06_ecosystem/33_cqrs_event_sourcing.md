@@ -928,8 +928,6 @@ pub struct OrderItem {
 >
 
 ```rust
-use async_trait::async_trait;
-
 // 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]
 pub trait CommandHandler<C: Command> {
     type Error;

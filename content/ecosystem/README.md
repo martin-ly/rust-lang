@@ -486,7 +486,6 @@ mod tests {
     mock! {
         Database {}
 
-        #[async_trait]
         impl DatabaseTrait for Database {
             async fn get_user(&self, id: u64) -> Result<User, Error>;
         }

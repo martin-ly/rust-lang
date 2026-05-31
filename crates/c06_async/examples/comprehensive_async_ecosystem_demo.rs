@@ -1,7 +1,7 @@
 //! 综合异步生态系统演示
 //!
 //! 本示例展示了Rust异步编程生态系统中各个库的全面使用，
-//! 包括：std、tokio、async-std、smol等库的特性、概念、关系和使用场景。
+//! 包括：std、tokio、smol 等库的特性、概念、关系和使用场景。[历史: async-std 已停止维护]
 use anyhow::Result;
 #[allow(unused_imports)]
 use c06_async::{
@@ -25,7 +25,7 @@ async fn main() -> Result<()> {
     println!("🚀 Rust 异步生态系统全面演示");
     println!("================================================");
     println!("本演示将展示以下内容：");
-    println!("1. 异步运行时特性分析 (std, tokio, async-std, smol)");
+    println!("1. 异步运行时特性分析 (std, tokio, smol) [历史: async-std 已停止维护]");
     println!("2. 各运行时的具体使用示例和组合模式");
     println!("3. 集成框架层面的共性和设计模式");
     println!("4. 异步同步转换机制");
@@ -77,7 +77,7 @@ async fn main() -> Result<()> {
     println!("总结：");
     println!("- std: 基础异步支持，需要外部运行时");
     println!("- tokio: 高性能，适合生产环境");
-    println!("- async-std: 易用性优先，标准库风格");
+    println!("- async-std [历史]: 已于 2025-03 停止维护");
     println!("- smol: 轻量级，适合资源受限环境");
     println!("- 各运行时可以组合使用，发挥各自优势");
     println!("- 异步同步转换是实际应用中的重要技术");
@@ -144,7 +144,7 @@ async fn real_world_scenarios_demo() -> Result<()> {
     web_server_scenario().await?;
 
     // 场景2：CLI工具
-    println!("\n  场景2：CLI工具 (推荐: async-std 或 smol)");
+    println!("\n  场景2：CLI工具 (推荐: tokio 或 smol)");
     cli_tool_scenario().await?;
 
     // 场景3：嵌入式系统
@@ -185,7 +185,7 @@ async fn web_server_scenario() -> Result<()> {
 async fn cli_tool_scenario() -> Result<()> {
     println!("    🛠️ CLI工具场景:");
     println!("      特点: 快速启动、简单易用、资源占用少");
-    println!("      推荐运行时: async-std 或 smol");
+    println!("      推荐运行时: tokio 或 smol");
     println!("      原因: 易用性、轻量级、快速开发");
 
     let async_std_examples = AsyncStdExamples::new();
@@ -270,7 +270,7 @@ fn print_best_practices() {
 
     println!("\n1. 运行时选择原则:");
     println!("   - 生产环境高性能需求 → Tokio");
-    println!("   - 快速原型开发 → async-std");
+    println!("   - 快速原型开发 → tokio");
     println!("   - 资源受限环境 → smol");
     println!("   - 基础异步概念学习 → std");
 

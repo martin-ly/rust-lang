@@ -1,6 +1,6 @@
 //! Rust 异步生态系统全面演示
 //!
-//! 本示例展示了std、smol、async-std、tokio等异步运行时的
+//! 本示例展示了 std、tokio、smol 等异步运行时的 [历史: async-std 已停止维护]
 //! 特性使用、概念定义、属性联系、区别场景、示例组合等
 use anyhow::Result;
 use futures::future::{join_all, try_join_all};
@@ -165,13 +165,13 @@ impl TokioAsyncDemo {
     }
 }
 
-/// 3. async-std 标准库风格API演示
+/// 3. async-std 标准库风格API演示 [历史参考]
 pub struct AsyncStdDemo;
 
 impl AsyncStdDemo {
-    /// 演示async-std的标准库风格API
+    /// 演示async-std的标准库风格API [历史参考]
     pub async fn demonstrate_std_like_api() -> Result<()> {
-        println!("🔍 async-std 标准库风格API演示:");
+        println!("🔍 async-std 标准库风格API演示 [历史参考]:");
 
         // 模拟标准库风格的异步操作
         let operations = vec![
@@ -185,9 +185,9 @@ impl AsyncStdDemo {
         Ok(())
     }
 
-    /// 演示async-std的易用性
+    /// 演示async-std的易用性 [历史参考]
     pub async fn demonstrate_ease_of_use() -> Result<()> {
-        println!("🔍 async-std 易用性演示:");
+        println!("🔍 async-std 易用性演示 [历史参考]:");
 
         // 简单的异步操作链
         let result = async {
@@ -203,9 +203,9 @@ impl AsyncStdDemo {
         Ok(())
     }
 
-    /// 演示async-std的快速编译特性
+    /// 演示async-std的快速编译特性 [历史参考]
     pub async fn demonstrate_fast_compilation() -> Result<()> {
-        println!("🔍 async-std 快速编译演示:");
+        println!("🔍 async-std 快速编译演示 [历史参考]:");
 
         // 使用简单的异步函数，减少编译时间
         let simple_tasks = (0..5)
@@ -490,7 +490,7 @@ impl AsyncPerformanceComparison {
         let async_std_result = Self::benchmark_async_std_runtime().await?;
         let async_std_elapsed = start.elapsed();
         println!(
-            "  async-std 运行时性能: {:?}, 结果: {}",
+            "  async-std 运行时性能 [历史参考]: {:?}, 结果: {}",
             async_std_elapsed, async_std_result
         );
 
@@ -528,7 +528,7 @@ impl AsyncPerformanceComparison {
     }
 
     async fn benchmark_async_std_runtime() -> Result<String> {
-        // 模拟async-std运行时的性能特征
+        // 模拟async-std运行时的性能特征 [历史参考]
         sleep(Duration::from_millis(8)).await;
         Ok("async_std_benchmark_completed".to_string())
     }
@@ -558,8 +558,8 @@ async fn main() -> Result<()> {
     TokioAsyncDemo::demonstrate_async_io().await?;
     TokioAsyncDemo::demonstrate_timers().await?;
 
-    // 3. async-std 标准库风格API演示
-    println!("\n📖 3. async-std 标准库风格API演示:");
+    // 3. async-std 标准库风格API演示 [历史参考]
+    println!("\n📖 3. async-std 标准库风格API演示 [历史参考]:");
     AsyncStdDemo::demonstrate_std_like_api().await?;
     AsyncStdDemo::demonstrate_ease_of_use().await?;
     AsyncStdDemo::demonstrate_fast_compilation().await?;

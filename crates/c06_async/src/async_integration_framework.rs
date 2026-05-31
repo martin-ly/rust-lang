@@ -167,7 +167,7 @@ impl AsyncCommonalityAnalyzer {
         ];
 
         // 为每个运行时创建共性分析
-        let runtime_names = vec!["std", "tokio", "async-std", "smol"];
+        let runtime_names = vec!["std", "tokio", "smol"]; // [历史: async-std 已于 2025-03 停止维护]
 
         for runtime_name in runtime_names {
             let performance_profile = match runtime_name {
@@ -183,11 +183,13 @@ impl AsyncCommonalityAnalyzer {
                     concurrency_capability: "高并发".to_string(),
                     latency_profile: "低延迟".to_string(),
                 },
+                // [历史: async-std 已于 2025-03 停止维护]
+                // "async-std" => PerformanceProfile { ... },
                 "async-std" => PerformanceProfile {
-                    memory_usage_pattern: "低到中等".to_string(),
-                    cpu_usage_pattern: "单线程或多线程".to_string(),
-                    concurrency_capability: "中等并发".to_string(),
-                    latency_profile: "中等延迟".to_string(),
+                    memory_usage_pattern: "[历史参考] 低到中等".to_string(),
+                    cpu_usage_pattern: "[历史参考] 单线程或多线程".to_string(),
+                    concurrency_capability: "[历史参考] 中等并发".to_string(),
+                    latency_profile: "[历史参考] 中等延迟".to_string(),
                 },
                 "smol" => PerformanceProfile {
                     memory_usage_pattern: "极低".to_string(),

@@ -1,7 +1,7 @@
 //! 异步生态系统性能基准测试套件
 //!
 //! 本基准测试套件用于测试和比较不同异步运行时的性能，
-//! 包括std、tokio、async-std、smol等库的性能对比
+//! 包括 std、tokio、smol 等库的性能对比 [历史: async-std 已于 2025-03 停止维护]
 use c06_async::async_runtime_integration_framework_simple::*;
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
@@ -344,7 +344,7 @@ fn benchmark_runtime_type_comparison(c: &mut Criterion) {
     let runtime_types = [
         ("std", AsyncRuntimeType::Std),
         ("tokio", AsyncRuntimeType::Tokio),
-        ("async-std", AsyncRuntimeType::AsyncStd),
+        // [已移除: async-std 已于 2025-03 停止维护]
         ("smol", AsyncRuntimeType::Smol),
     ];
 
@@ -447,7 +447,7 @@ fn benchmark_health_check_performance(c: &mut Criterion) {
     let runtime_types = [
         ("std", AsyncRuntimeType::Std),
         ("tokio", AsyncRuntimeType::Tokio),
-        ("async-std", AsyncRuntimeType::AsyncStd),
+        // [已移除: async-std 已于 2025-03 停止维护]
         ("smol", AsyncRuntimeType::Smol),
     ];
 

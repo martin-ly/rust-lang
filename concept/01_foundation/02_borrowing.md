@@ -1421,6 +1421,170 @@ fn main() {
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
+## 🎯 嵌入式测验
+
+> 以下测验用于自测理解程度，点击展开查看答案。
+
+### Q1: 可变引用和不可变引用的共存规则是什么？
+
+<details>
+<summary>点击查看题目</summary>
+
+在同一作用域内，以下哪些引用组合是允许的？
+
+1. 多个 `&T`
+2. 一个 `&mut T`
+3. 多个 `&mut T`
+4. `&T` 和 `&mut T` 同时存在
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+| 组合 | 是否允许 | 原因 |
+|:---|:---:|:---|
+| 多个 `&T` | ✅ | 只读共享安全 |
+| 一个 `&mut T` | ✅ | 独占可变访问 |
+| 多个 `&mut T` | ❌ | 数据竞争风险 |
+| `&T` + `&mut T` | ❌ | 读写冲突风险 |
+
+> **核心规则**: 要么多个不可变引用，要么一个可变引用，不能同时存在。
+> **来源**: [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+
+</details>
+
+### Q2: 以下代码为什么报错？
+
+<details>
+<summary>点击查看题目</summary>
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r1 = &s;
+    let r2 = &mut s;
+    println!("{}", r1);
+}
+```
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+**错误**: `cannot borrow `s` as mutable because it is also borrowed as immutable`
+
+`r1` 是不可变引用，`r2` 是可变引用，二者在同一作用域内不能共存。即使 `r1` 在 `println!` 之后不再使用，编译器仍按作用域整体检查。
+
+**修复**: 将不可变引用的使用范围限制在可变引用之前：
+
+```rust
+let r1 = &s;
+println!("{}", r1);  // r1 最后一次使用
+let r2 = &mut s;     // ✅ 现在可以创建可变引用
+```
+
+> Rust 的非词法生命周期（NLL）允许这种修复方式。
+
+</details>
+
+### Q3: 什么是悬垂引用（Dangling Reference）？
+
+<details>
+<summary>点击查看题目</summary>
+
+```rust
+fn dangle() -> &String {
+    let s = String::from("hello");
+    &s
+}
+```
+
+这段代码有什么问题？
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+**悬垂引用**：函数返回了对局部变量 `s` 的引用，但 `s` 在函数结束时被 drop，返回的引用指向无效内存。
+
+Rust 编译器会报错：`missing lifetime specifier` 或 `returns a reference to data owned by the current function`。
+
+**修复**: 返回所有权而非引用：
+
+```rust
+fn no_dangle() -> String {
+    let s = String::from("hello");
+    s  // 移动所有权给调用者
+}
+```
+
+</details>
+
+### Q4: 何时应该使用 `clone()` 而非借用？
+
+<details>
+<summary>点击查看题目</summary>
+
+在以下场景中，选择借用还是克隆？
+
+1. 函数需要读取数据但不修改，且调用后原数据仍需使用
+2. 函数需要在多个线程间共享所有权
+3. 函数需要修改数据并保留原数据
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+| 场景 | 推荐方案 | 原因 |
+|:---|:---|:---|
+| 只读访问 | `&T` 借用 | 零开销，不转移所有权 |
+| 多线程共享 | `Arc<T>` | 原子引用计数，线程安全共享 |
+| 修改并保留原数据 | `clone()` + 修改副本 | 或重构为返回新值（函数式风格） |
+
+> **原则**: 优先借用，必要时克隆，避免过早优化或过早克隆。
+
+</details>
+
+### Q5: 以下代码的编译结果是什么？
+
+<details>
+<summary>点击查看题目</summary>
+
+```rust
+fn main() {
+    let mut data = vec![1, 2, 3];
+    let first = &data[0];
+    data.push(4);
+    println!("{}", first);
+}
+```
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+**编译错误**: `cannot borrow `data` as mutable because it is also borrowed as immutable`
+
+`first` 是对 `data[0]` 的不可变引用，`data.push(4)` 需要 `&mut data`。虽然 `first` 只指向第一个元素，`push` 可能重新分配整个 vector 的内存，导致 `first` 悬垂。
+
+**修复**: 在 `push` 之前使用完 `first`：
+
+```rust
+let first = &data[0];
+println!("{}", first);  // 先使用
+let first = first;       // 结束借用
+data.push(4);            // ✅ 现在可以修改
+```
+
+</details>
+
+---
+
 ## 参考来源
 
 > [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html#reference-type)]

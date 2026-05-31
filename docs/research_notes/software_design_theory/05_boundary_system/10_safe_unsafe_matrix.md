@@ -31,7 +31,6 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
-  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -323,9 +322,8 @@ impl PaymentGateway for FFIPaymentGateway {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
->
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
@@ -367,6 +365,7 @@ impl PaymentGateway for FFIPaymentGateway {
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

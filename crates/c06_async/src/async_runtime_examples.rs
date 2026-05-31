@@ -449,7 +449,7 @@ impl RuntimeCompositionExamples {
 
         let runtime = match task_type {
             "high_performance" => "tokio",
-            "easy_development" => "async-std",
+            "easy_development" => "tokio",
             "lightweight" => "smol",
             "basic" => "std",
             _ => "tokio",

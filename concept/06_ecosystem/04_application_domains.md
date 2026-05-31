@@ -875,7 +875,7 @@ fn main() {
 | 动态类型 `x = 5` | 显式类型 `let x: i32 = 5;` | 类型推断依赖使用场景 |
 | GC 内存管理 | 所有权 + 借用 | `Rc<RefCell<T>>` 不是银弹 |
 | `try/except` | `Result<T, E>` + `?` | 忘记处理 `Err` 分支 |
-| `async/await` | `async/await` + `Future` | 运行时选择（Tokio vs Tokio（async-std 已于 2025-03 停止维护））|
+| `async/await` | `async/await` + `Future` | Tokio（推荐），async-std 已归档 |
 | 鸭子类型 | Trait bound | Orphan Rule 限制 |
 | `list` / `dict` | `Vec<T>` / `HashMap<K, V>` | 需要预先考虑所有权 |
 
@@ -1479,4 +1479,4 @@ async fn handler() -> String {
 }
 ```
 
-> **修正**: Async runtime（tokio、Tokio（async-std 已于 2025-03 停止维护））基于**协作式多任务**：任务在 `.await` 点 yield 控制权，让 runtime 调度其他任务。若在 async 函数中执行**阻塞操作**（`std::thread::sleep`、`std::fs::read`、CPU 密集型计算、数据库同步查询），当前线程被阻塞，该线程上的所有任务都无法执行。在多线程 runtime 中，一个线程阻塞降低整体吞吐；在单线程 runtime 中，整个应用死锁。解决方案：1) 使用异步版本的 API（`tokio::fs`、`tokio::time`）；2) 将阻塞操作放到 `spawn_blocking` 线程池；3) 使用 `tokio::task::yield_now().await` 手动 yield。这与 Node.js 的 event loop（单线程，阻塞操作冻结整个应用）或 Go 的 goroutine（阻塞操作挂起 goroutine，调度器切换到其他 goroutine）不同——Rust 的 async 任务不自动处理阻塞，需要开发者显式选择。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+> **修正**: Async runtime（tokio）基于**协作式多任务** [历史: async-std 已归档]：任务在 `.await` 点 yield 控制权，让 runtime 调度其他任务。若在 async 函数中执行**阻塞操作**（`std::thread::sleep`、`std::fs::read`、CPU 密集型计算、数据库同步查询），当前线程被阻塞，该线程上的所有任务都无法执行。在多线程 runtime 中，一个线程阻塞降低整体吞吐；在单线程 runtime 中，整个应用死锁。解决方案：1) 使用异步版本的 API（`tokio::fs`、`tokio::time`）；2) 将阻塞操作放到 `spawn_blocking` 线程池；3) 使用 `tokio::task::yield_now().await` 手动 yield。这与 Node.js 的 event loop（单线程，阻塞操作冻结整个应用）或 Go 的 goroutine（阻塞操作挂起 goroutine，调度器切换到其他 goroutine）不同——Rust 的 async 任务不自动处理阻塞，需要开发者显式选择。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]

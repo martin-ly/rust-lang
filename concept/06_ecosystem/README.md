@@ -37,7 +37,7 @@ mindmap
       RAII[RAII / Newtype]
       零成本[Zero-cost Abstractions]
     核心库谱系
-      异步运行时[Tokio / Tokio（async-std 已于 2025-03 停止维护）]
+      异步运行时[Tokio]
       Web框架[Axum / Actix]
       序列化[Serde]
       数据库[SQLx / Diesel]

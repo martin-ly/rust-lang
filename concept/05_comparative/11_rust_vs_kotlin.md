@@ -119,7 +119,7 @@
   ├── 所有权保证数据竞争自由
   ├── Send + Sync trait
   ├── 通道: std::sync::mpsc / crossbeam
-  ├── 运行时可选（Tokio、Tokio（async-std 已于 2025-03 停止维护））
+  ├── Tokio（推荐）、smol [历史: async-std 已停止维护]
   └── 编译期并发安全
 
   代码对比:
@@ -284,7 +284,7 @@
   Rust:
   ├── async fn / async {}
   ├── .await 挂起点
-  ├── 运行时: Tokio, Tokio（async-std 已于 2025-03 停止维护）, smol
+  ├── 运行时: Tokio, smol [历史: async-std 已停止维护]
   ├── JoinHandle: 任务管理
   ├── 取消: AbortHandle
   └── Pin: 自引用类型安全

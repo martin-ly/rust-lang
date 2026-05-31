@@ -41,9 +41,6 @@
 | `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md) | ✅ |
 | `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/03_maybe_uninit.md) | ✅ |
 | PowerPC/PowerPC64 内联汇编 | [03_advanced/unsafe/inline_asm.md](03_advanced/unsafe/02_inline_asm.md) | ✅ |
-| `assert_matches!` / `debug_assert_matches!` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
-| `VecDeque::push_*_mut` / `insert_mut` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
-| `LinkedList::push_*_mut` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
 | `fmt::from_fn` / `ControlFlow` (const) | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
 | `--remap-path-scope` | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
 | `irrefutable_let_patterns` lint | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
@@ -56,6 +53,23 @@
 >
 > **[来源: Rust Official Docs]**
 > Rust 1.96.0 已于 2026-05-28 发布。
+
+| 特性 | 文档 | 状态 |
+|------|------|------|
+| 特性 | 文档 | 状态 |
+|------|------|------|
+| AFIDT (`async fn` in `dyn Trait`) | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
+| `VecDeque::truncate_front` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
+| `RefCell::try_map` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
+| `int_format_into` | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 Nightly |
+| `cargo script` / frontmatter | [06_ecosystem/emerging/06_rust_1_97_preview.md](06_ecosystem/emerging/06_rust_1_97_preview.md) | 🧪 完善中 |
+
+---
+
+## 🧪 Rust 1.97 预览特性索引
+>
+> **[来源: Rust Internals / Nightly]**
+> 预计发布: 2026-07-16
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
@@ -291,9 +305,10 @@
 
 ---
 
-**索引生成时间**: 2026-05-09
+**索引生成时间**: 2026-05-31
 **版本**: Rust 1.96.0+ (Edition 2024)
 **状态**: ✅ 核心层 100% 完成，Ecosystem 层持续推进中
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

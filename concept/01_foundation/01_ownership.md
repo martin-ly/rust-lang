@@ -1312,6 +1312,146 @@ struct Label { text: String }
 >
 > **建议**: 阅读完本概念文件后，打开对应 crate 的示例代码，尝试修改并运行。
 
+## 🎯 嵌入式测验
+
+> 以下测验用于自测理解程度，点击展开查看答案。
+
+### Q1: 所有权的核心规则是什么？
+
+<details>
+<summary>点击查看题目</summary>
+
+Rust 所有权系统有哪三条核心规则？
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+1. 每个值有且只有一个所有者（owner）
+2. 当所有者离开作用域，值将被丢弃（drop）
+3. 所有权可以通过移动（move）转移给新的所有者
+
+> **来源**: [TRPL — Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+
+</details>
+
+### Q2: 以下代码能否编译？
+
+<details>
+<summary>点击查看题目</summary>
+
+```rust
+fn main() {
+    let s = String::from("hello");
+    let s2 = s;
+    println!("{}", s);
+}
+```
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+**不能编译**。`String` 没有实现 `Copy`，`let s2 = s` 将 `s` 的所有权**移动**给了 `s2`，此后 `s` 不再有效。
+
+正确做法：使用 `clone()` 或借用。
+
+```rust
+let s2 = s.clone(); // ✅
+// 或
+let s2 = &s;        // ✅ 借用
+```
+
+</details>
+
+### Q3: `i32` 和 `String` 在赋值时的行为有何不同？
+
+<details>
+<summary>点击查看题目</summary>
+
+```rust
+let x: i32 = 5;
+let y = x;      // x 还能用吗？
+
+let s = String::from("hi");
+let t = s;      // s 还能用吗？
+```
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+- `i32` 实现了 `Copy`，`let y = x` 是**复制**，`x` 仍可用 ✅
+- `String` 未实现 `Copy`，`let t = s` 是**移动**，`s` 不可用 ❌
+
+> 简单规则：栈上的标量类型通常可 Copy，堆上的复杂类型通常 move。
+
+</details>
+
+### Q4: 函数参数传递后，原变量还能继续使用吗？
+
+<details>
+<summary>点击查看题目</summary>
+
+```rust
+fn take(s: String) { }
+
+fn main() {
+    let s = String::from("hello");
+    take(s);
+    // s 还能用吗？
+}
+```
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+**不能**。函数参数传递默认是**移动**。`s` 的所有权已转移给 `take` 函数的参数，函数结束后被 drop。
+
+如需保留所有权，可：
+1. 传递引用：`take(&s)`
+2. 函数返回所有权：`let s = take_and_return(s)`
+3. 使用 `clone()`：`take(s.clone())`
+
+</details>
+
+### Q5: 为什么 `&str` 作为函数参数比 `String` 更灵活？
+
+<details>
+<summary>点击查看题目</summary>
+
+比较以下两个函数签名：
+
+```rust
+fn greet_string(s: String) { }
+fn greet_str(s: &str) { }
+```
+
+第二个签名有什么优势？
+
+</details>
+
+<details>
+<summary>点击查看答案</summary>
+
+`&str` 是字符串切片（借用），不获取所有权：
+
+1. 可接受 `String` 的引用：`greet_str(&my_string)`
+2. 可接受字符串字面量：`greet_str("hello")`
+3. 不转移所有权，调用后原变量仍可用
+4. 零拷贝，性能更好
+
+> 这是 Rust 中"接受借用而非所有权"的最佳实践。
+
+</details>
+
+---
+
 ## 参考来源
 
 > [来源: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)]

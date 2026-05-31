@@ -171,7 +171,7 @@ impl AsyncRuntimeAnalyzer {
             },
         );
 
-        // 3. async-std 分析
+        // 3. async-std 分析 [历史: async-std 已于 2025-03 停止维护]
         self.runtimes.insert(
             "async-std".to_string(),
             AsyncEcosystemAnalysis {

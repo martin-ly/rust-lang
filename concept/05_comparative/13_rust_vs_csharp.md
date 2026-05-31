@@ -168,7 +168,7 @@
   Rust:
   ├── async/await（Future-based）
   ├── 无内置运行时
-  ├── Tokio/Tokio（async-std 已于 2025-03 停止维护） 选择
+  ├── Tokio
   ├── Pin 保证自引用安全
   └── 零成本抽象
 
@@ -617,7 +617,7 @@ async fn main_fixed() {
 }
 ```
 
-> **C# 对比**: C# 的 `async/await` 可在任何方法中使用（包括 `Main`），编译器自动生成状态机。Rust 的 `async fn` 返回 `Future`，必须在异步运行时上执行。C# 的 `Task` 与 Rust 的 `Future` 类似，但 C# 有隐式运行时（线程池），Rust 要求显式选择运行时（Tokio、Tokio（async-std 已于 2025-03 停止维护））。Rust 的设计更灵活（可选择无运行时），但增加了认知负担。C# 的 `await` 可在 `catch`/`finally` 中使用，Rust 的 `?` 运算符在 `async` 中有类似限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **C# 对比**: C# 的 `async/await` 可在任何方法中使用（包括 `Main`），编译器自动生成状态机。Rust 的 `async fn` 返回 `Future`，必须在异步运行时上执行。C# 的 `Task` 与 Rust 的 `Future` 类似，但 C# 有隐式运行时（线程池），Rust 要求显式选择运行时（Tokio）。Rust 的设计更灵活（可选择无运行时），但增加了认知负担。C# 的 `await` 可在 `catch`/`finally` 中使用，Rust 的 `?` 运算符在 `async` 中有类似限制。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：C# 的 LINQ 与 Rust 的迭代器（编译错误）
 
@@ -656,7 +656,7 @@ fn main() {
 }
 ```
 
-> **修正**: C# 的 `async/await` 从 `Main` 方法开始就支持：`static async Task Main()` 是合法的，编译器自动生成状态机包装。Rust 的 `main` 不能是 `async fn`——`main` 是程序入口点，操作系统直接调用，无运行时调度 async 任务。必须用 `#[tokio::main]` 宏或手动创建 runtime 并 `block_on`。这是设计差异：C# 的 async 是语言级别的（编译器内置状态机生成），Rust 的 async 是库级别的（`Future` trait + runtime crate）。C# 的 `async Main` 隐藏了 runtime 创建，Rust 要求显式选择 runtime（tokio、Tokio（async-std 已于 2025-03 停止维护）、smol）。这与 JavaScript 的 `async` 函数（自动由事件循环调度）或 Python 的 `asyncio.run()`（显式入口，类似 Rust）类似——Rust 的显式设计提供了更多控制权，但增加了样板代码。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [C# Async Main](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#asyncmain)]
+> **修正**: C# 的 `async/await` 从 `Main` 方法开始就支持：`static async Task Main()` 是合法的，编译器自动生成状态机包装。Rust 的 `main` 不能是 `async fn`——`main` 是程序入口点，操作系统直接调用，无运行时调度 async 任务。必须用 `#[tokio::main]` 宏或手动创建 runtime 并 `block_on`。这是设计差异：C# 的 async 是语言级别的（编译器内置状态机生成），Rust 的 async 是库级别的（`Future` trait + runtime crate）。C# 的 `async Main` 隐藏了 runtime 创建，Rust 要求显式选择 runtime（tokio、smol [历史: async-std 已停止维护]）。这与 JavaScript 的 `async` 函数（自动由事件循环调度）或 Python 的 `asyncio.run()`（显式入口，类似 Rust）类似——Rust 的显式设计提供了更多控制权，但增加了样板代码。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [C# Async Main](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#asyncmain)]
 
 ### 10.4 边界测试：C# 的属性与 Rust 的派生宏的编译期差异（编译错误）
 

@@ -252,8 +252,8 @@ pub mod actix;
 /// 异步运行时
 pub mod async_runtime;
 
-// async-std 运行时（已归档，详见 src/async_std/mod.rs）
-// pub mod async_std;
+// async-std 历史归档（已移除，使用 tokio）
+// mod async_std_archive;
 
 /// async/await 关键字
 pub mod r#await;
