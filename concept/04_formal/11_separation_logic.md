@@ -10,7 +10,12 @@
 
 ---
 
-> **来源**: [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf) · [Iris Project](https://iris-project.org/) · [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) · [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic) · [Viper Verification Infrastructure](https://www.pm.inf.ethz.ch/research/viper.html)
+> **来源**:
+> [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf) ·
+> [Iris Project](https://iris-project.org/) ·
+> [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic) ·
+> [Viper Verification Infrastructure](https://www.pm.inf.ethz.ch/research/viper.html)
 
 ## 📑 目录
 

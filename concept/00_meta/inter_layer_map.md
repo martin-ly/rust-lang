@@ -314,7 +314,10 @@ graph LR
     来源: ✅ [Jung et al. POPL 2017] · ✅ [RustBelt website]
 ```
 
-[来源: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)]
+[来源: [TRPL](https://doc.rust-lang.org/book/) ·
+[Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
+[Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+[Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)]
 
 ### 4.2 链 2: 类型系统一致性
 
@@ -366,7 +369,10 @@ graph LR
     来源: ✅ [RFC 2349: Pin] · [PLDI 2024: RefinedRust] · [Jung et al. 2018: Iris]
 ```
 
-[来源: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) · [Rust Async Book](https://rust-lang.github.io/async-book/) · [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) · [Wikipedia — Linear Temporal Logic](https://en.wikipedia.org/wiki/Linear_temporal_logic)]
+[来源: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) ·
+[Rust Async Book](https://rust-lang.github.io/async-book/) ·
+[RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) ·
+[Wikipedia — Linear Temporal Logic](https://en.wikipedia.org/wiki/Linear_temporal_logic)]
 
 ---
 

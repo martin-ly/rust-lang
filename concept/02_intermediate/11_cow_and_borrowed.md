@@ -10,7 +10,11 @@
 
 ---
 
-> **来源**: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) · [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html) · [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Wikipedia — Copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write)
+> **来源**:
+> [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) ·
+> [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html) ·
+> [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
+> [Wikipedia — Copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write)
 
 ## 📑 目录
 
@@ -501,7 +505,14 @@ fn fixed() {
 }
 ```
 
-> **修正**: `Cow<T>`（Clone on Write）在读取时表现为借用（零拷贝），在修改时克隆为拥有值。`to_mut()` 方法检查当前状态：若 `Borrowed`，则克隆数据为 `Owned`；若已是 `Owned`，则返回可变引用。`Cow` 的核心价值是延迟克隆——只在真正需要修改时才分配内存。这与 C++ 的 `copy-on-write` string 实现类似，但 Rust 的 `Cow` 是显式的、类型安全的。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**:
+> `Cow<T>`（Clone on Write）在读取时表现为借用（零拷贝），在修改时克隆为拥有值。
+> `to_mut()` 方法检查当前状态：
+> 若 `Borrowed`，则克隆数据为 `Owned`；
+> 若已是 `Owned`，则返回可变引用。
+> `Cow` 的核心价值是延迟克隆——只在真正需要修改时才分配内存。
+> 这与 C++ 的 `copy-on-write` string 实现类似，但 Rust 的 `Cow` 是显式的、类型安全的。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.2 边界测试：`Borrow` trait 与 `AsRef` 的误用（编译错误）
 
@@ -526,7 +537,11 @@ fn takes_ref<R: AsRef<[i32]>>(r: R) {
 }
 ```
 
-> **修正**: `Borrow<T>` 要求 `T` 的哈希值和相等性与原类型一致（`x.borrow() == y.borrow()` ⟺ `x == y`），用于 `HashMap`/`BTreeMap` 的键查找。`AsRef<T>` 只要求进行引用转换，无哈希/相等性约束。`String` 实现 `Borrow<str>` 和 `AsRef<str>`，但 `Vec<T>` 只实现 `AsRef<[T]>`，不实现 `Borrow<[T]>`（因 `Vec` 的容量字段不影响相等性）。混淆两者可能导致 `HashMap::get` 失败。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `Borrow<T>` 要求 `T` 的哈希值和相等性与原类型一致（`x.borrow() == y.borrow()` ⟺ `x == y`），用于 `HashMap`/`BTreeMap` 的键查找。
+> `AsRef<T>` 只要求进行引用转换，无哈希/相等性约束。
+> `String` 实现 `Borrow<str>` 和 `AsRef<str>`，但 `Vec<T>` 只实现 `AsRef<[T]>`，不实现 `Borrow<[T]>`（因 `Vec` 的容量字段不影响相等性）。
+> 混淆两者可能导致 `HashMap::get` 失败。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：`Cow` 的 `ToOwned` 约束（编译错误）
 
@@ -548,7 +563,19 @@ fn main() {
 }
 ```
 
-> **修正**: `Cow<'a, B>`（Clone on Write）要求 `B: ToOwned`，即借用类型 `B` 必须知道如何创建对应的拥有类型（`B::Owned`）。标准类型如 `str`（`ToOwned<Owned = String>`）、`[T]`（`ToOwned<Owned = Vec<T>>`）、`CStr`（`ToOwned<Owned = CString>`）已实现 `ToOwned`。自定义类型需手动实现 `ToOwned`，定义 `Owned` 类型和 `to_owned` 方法。`Cow` 的使用场景：1) 避免不必要的克隆（借用时零成本，修改时才克隆）；2) 函数返回"可能是借用或拥有"的值；3) 解析器的输出（输入是借用，转义后需拥有）。这与 C++ 的 `std::variant<const std::string&, std::string>` 或 Swift 的 `copy-on-write` 字符串类似——Rust 的 `Cow` 是显式、类型安全的 COW 抽象。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `Cow<'a, B>`（Clone on Write）要求 `B: ToOwned`，即借用类型 `B` 必须知道如何创建对应的拥有类型（`B::Owned`）。
+> 标准类型如 `str`（`ToOwned<Owned = String>`）、`[T]`（`ToOwned<Owned = Vec<T>>`）、`CStr`（`ToOwned<Owned = CString>`）已实现 `ToOwned`。
+> 自定义类型需手动实现 `ToOwned`，定义 `Owned` 类型和 `to_owned` 方法。
+> `Cow` 的使用场景：
+>
+> 1) 避免不必要的克隆（借用时零成本，修改时才克隆）；
+> 2) 函数返回"可能是借用或拥有"的值；
+> 3) 解析器的输出（输入是借用，转义后需拥有）。
+>
+> 这与 C++ 的 `std::variant<const std::string&, std::string>` 或 Swift 的 `copy-on-write` 字符串类似——Rust 的 `Cow` 是显式、类型安全的 COW 抽象。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：`Cow` 在 `match` 中的所有权转移（编译错误）
 
@@ -566,7 +593,14 @@ fn main() {
 }
 ```
 
-> **修正**: `Cow` 是枚举（`enum Cow<'a, B> { Borrowed(&'a B), Owned(<B as ToOwned>::Owned) }`），在 `match` 中按值解构时，`Cow` 被移动，`Owned` 变体的内部值被取出。若需保留 `Cow`，应使用 `match &cow`（匹配引用）或 `cow.as_ref()`（获取 `&B`）。`Cow` 的灵活性伴随着所有权复杂性：有时需要 `Cow` 本身（传递），有时需要内部值（使用），有时需要引用（检查）。这与 `Option` 和 `Result` 的所有权管理相同——枚举的按值匹配消耗所有者。`Cow` 提供 `into_owned()`（无论借用或拥有，都转为拥有）和 `to_mut()`（转为可变引用，必要时克隆）简化常见模式。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `Cow` 是枚举（`enum Cow<'a, B> { Borrowed(&'a B), Owned(<B as ToOwned>::Owned) }`），在 `match` 中按值解构时，`Cow` 被移动，`Owned` 变体的内部值被取出。
+> 若需保留 `Cow`，应使用 `match &cow`（匹配引用）或 `cow.as_ref()`（获取 `&B`）。
+> `Cow` 的灵活性伴随着所有权复杂性：有时需要 `Cow` 本身（传递），有时需要内部值（使用），有时需要引用（检查）。
+> 这与 `Option` 和 `Result` 的所有权管理相同——枚举的按值匹配消耗所有者。
+> `Cow` 提供 `into_owned()`（无论借用或拥有，都转为拥有）和 `to_mut()`（转为可变引用，必要时克隆）简化常见模式。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.2 边界测试：`Cow` 的生命周期与所有权转换（编译错误）
 
@@ -583,7 +617,18 @@ fn main() {
 }
 ```
 
-> **修正**: `Cow<'a, B>`（Clone-on-Write）是**写时克隆**的智能指针：`Borrowed(&'a B)` 持有借用，`Owned(B::Owned)` 持有所有权。`into_owned()` 将 `Borrowed` 克隆为 `Owned`（若已是 `Owned` 则直接移动）。关键：`Cow::Borrowed(&s)` 的生命周期受 `s` 限制，但 `into_owned()` 返回的 `String` 拥有独立数据，生命周期不再关联。上述代码在**当前 Rust 中实际可以编译**——`into_owned()` 返回所有权。真正的 `Cow` 陷阱：1) `Cow::to_mut()` 在 `Borrowed` 时克隆数据；2) `Cow` 不能跨越 await 点（若 `Borrowed` 引用局部变量）；3) `Cow<'static, str>` 与 `Cow<'a, str>` 的类型不匹配。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `Cow<'a, B>`（Clone-on-Write）是**写时克隆**的智能指针：`Borrowed(&'a B)` 持有借用，`Owned(B::Owned)` 持有所有权。
+> `into_owned()` 将 `Borrowed` 克隆为 `Owned`（若已是 `Owned` 则直接移动）。
+> 关键：`Cow::Borrowed(&s)` 的生命周期受 `s` 限制，但 `into_owned()` 返回的 `String` 拥有独立数据，生命周期不再关联。
+> 上述代码在**当前 Rust 中实际可以编译**——`into_owned()` 返回所有权。
+> 真正的 `Cow` 陷阱：
+>
+> 1) `Cow::to_mut()` 在 `Borrowed` 时克隆数据；
+> 2) `Cow` 不能跨越 await 点（若 `Borrowed` 引用局部变量）；
+> 3) `Cow<'static, str>` 与 `Cow<'a, str>` 的类型不匹配。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/borrow/enum.Cow.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：Cow 的生命周期与泛型约束不匹配（编译错误）
 

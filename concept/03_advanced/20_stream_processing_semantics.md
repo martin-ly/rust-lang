@@ -1,7 +1,6 @@
 # 流处理语义：从 Dataflow Model 到 Differential Dataflow
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析流处理系统的形式化语义与工程实现
@@ -86,8 +85,11 @@
 | **容错模型** | 重跑整个作业 | 增量检查点 + 状态恢复 |
 | **典型系统** | Hadoop MapReduce, Spark | Flink, Kafka Streams, Materialize |
 
-> **流处理系统谱系**: 批处理系统（Hadoop, Spark）假设输入有界，流处理系统（Flink, Kafka Streams, Materialize）处理无界数据。Materialize 是 Rust 实现的流式 SQL 引擎，提供严格串行化保证。[来源: [Materialize Documentation](https://materialize.com/docs/)] · [来源: [Apache Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/)]
-
+> **流处理系统谱系**:
+> 批处理系统（Hadoop, Spark）假设输入有界，流处理系统（Flink, Kafka Streams, Materialize）处理无界数据。
+> Materialize 是 Rust 实现的流式 SQL 引擎，提供严格串行化保证。
+> [来源: [Materialize Documentation](https://materialize.com/docs/)] ·
+> [来源: [Apache Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/)]
 > **关键洞察**: Google Dataflow Model 的核心贡献是将流处理问题解构为四个正交维度：
 > **What**（计算什么）、**Where**（在哪个事件时间窗口）、**When**（在处理时间的哪个时刻物化结果）、**How**（早期结果如何与后期修正关联）。
 > 这种解构使批处理成为流处理的特例（全局窗口 + watermark 到达 ∞ 时触发）。[来源: Akidau et al., VLDB 2015] ✅
@@ -372,7 +374,7 @@ tx.send(42).await?;
 
 Differential Dataflow（DD）将数据集合表示为**差分集合（collection of diffs）**：
 
-```
+```text
 Collection<T> = Stream of (data: T, time: Timestamp, diff: isize)
 
 其中:
@@ -389,7 +391,7 @@ DD 的所有运算符都是**增量化的**：输入的变更（diff）传播到
 |:---|:---|:---|
 | **Map** | `map(f)((d, t, δ)) = (f(d), t, δ)` | O(1) per diff |
 | **Filter** | 保留满足谓词的 diff | O(1) per diff |
-| **Join** | 新 diff 与对手集合的当前状态匹配 | O(|state|) in worst case |
+| **Join** | 新 diff 与对手集合的当前状态匹配 | O(\|state\|) in worst case |
 | **Group/Reduce** | 增量更新聚合结果 | O(1) with arrangement index |
 | **Iterate** | 递归到不动点，每次迭代增量传播 | 依赖收敛速度 |
 
@@ -397,7 +399,7 @@ DD 的所有运算符都是**增量化的**：输入的变更（diff）传播到
 
 Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳追踪**：
 
-```
+```text
 每个数据记录携带逻辑时间戳 (epoch, iteration)
 - epoch: 外部输入轮次（单调递增）
 - iteration: 循环迭代次数（用于递归计算）
@@ -411,7 +413,11 @@ Timely Dataflow（TD）是 DD 的底层执行引擎，核心创新是**时间戳
 3. 确定性执行（相同输入产生相同输出）
 ```
 
-> **关键洞察**: Timely Dataflow 的时间戳机制与 Rust 的生命周期系统有深层同构：两者都追踪"资源（数据/引用）何时可被安全释放"。TD 的 `epoch` 类似于所有权的 drop 时刻，而 `iteration` 类似于借用链的嵌套深度。这种同构不是巧合——Frank McSherry 选择 Rust 实现 TD 正是因为其类型系统能精确表达 TD 的并发安全约束。[来源: 💡 原创分析] · [McSherry Blog] ✅
+> **关键洞察**:
+> Timely Dataflow 的时间戳机制与 Rust 的生命周期系统有深层同构：两者都追踪"资源（数据/引用）何时可被安全释放"。
+> TD 的 `epoch` 类似于所有权的 drop 时刻，而 `iteration` 类似于借用链的嵌套深度。
+> 这种同构不是巧合——Frank McSherry 选择 Rust 实现 TD 正是因为其类型系统能精确表达 TD 的并发安全约束。
+> [来源: 💡 原创分析] · [McSherry Blog] ✅
 
 ---
 
@@ -446,7 +452,10 @@ GROUP BY region;
 -- 结果自动增量更新，无需重新计算
 ```
 
-> **关键洞察**: Materialize 的核心创新是将"物化视图维护"从批处理（定时刷新）转化为流处理（增量更新）。其正确性保证来自 Differential Dataflow 的严格串行化（strict serializability）——每个更新都对应一个逻辑时间戳，查询结果始终是某时间戳下的全局一致快照。这与 C++ 或 Java 流处理框架的"最终一致性"形成鲜明对比。[来源: Materialize Documentation] ✅
+> **关键洞察**:
+> Materialize 的核心创新是将"物化视图维护"从批处理（定时刷新）转化为流处理（增量更新）。
+> 其正确性保证来自 Differential Dataflow 的严格串行化（strict serializability）——每个更新都对应一个逻辑时间戳，查询结果始终是某时间戳下的全局一致快照。
+> 这与 C++ 或 Java 流处理框架的"最终一致性"形成鲜明对比。[来源: Materialize Documentation] ✅
 
 ---
 
@@ -467,7 +476,11 @@ GROUP BY region;
 | **实现语言** | Java/Scala | Java/Scala | Java/Scala | **Rust** ✅ | **Rust** ✅ |
 | **GC 暂停** | 有 | 有 | 有 | **无** ✅ | **无** ✅ |
 
-> **关键洞察**: Rust 实现的流处理系统（Materialize、timely-dataflow）在"无 GC 暂停"和"内存安全"两个维度上具有结构性优势。对于低延迟流处理（sub-100ms），GC 暂停是不可接受的噪声源。Rust 的所有权系统消除了 GC 的需要，同时保证了并发安全——这正是 Frank McSherry 选择 Rust 实现 TD/DD 的根本原因。[来源: 💡 原创分析] · [Materialize Interview — SE-Radio 2022] ✅
+> **关键洞察**:
+> Rust 实现的流处理系统（Materialize、timely-dataflow）在"无 GC 暂停"和"内存安全"两个维度上具有结构性优势。
+> 对于低延迟流处理（sub-100ms），GC 暂停是不可接受的噪声源。
+> Rust 的所有权系统消除了 GC 的需要，同时保证了并发安全——这正是 Frank McSherry 选择 Rust 实现 TD/DD 的根本原因。
+> [来源: 💡 原创分析] · [Materialize Interview — SE-Radio 2022] ✅
 
 ---
 
@@ -575,7 +588,12 @@ async fn main() {
 
 ---
 
-> **权威来源**: [Akidau et al. — The Dataflow Model, VLDB 2015](https://www.vldb.org/pvldb/vol8/p1792-Akidau.pdf) · [Murray et al. — Naiad, SOSP 2013](https://dl.acm.org/doi/10.1145/2517349.2522738) · [McSherry et al. — Differential Dataflow, CIDR 2013](https://dl.acm.org/doi/10.1145/2452376.2452396) · [Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/) · [Materialize Documentation](https://materialize.com/docs/)
+> **权威来源**:
+> [Akidau et al. — The Dataflow Model, VLDB 2015](https://www.vldb.org/pvldb/vol8/p1792-Akidau.pdf) ·
+> [Murray et al. — Naiad, SOSP 2013](https://dl.acm.org/doi/10.1145/2517349.2522738) ·
+> [McSherry et al. — Differential Dataflow, CIDR 2013](https://dl.acm.org/doi/10.1145/2452376.2452396) ·
+> [Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/) ·
+> [Materialize Documentation](https://materialize.com/docs/)
 >
 > **文档版本**: 1.0
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
@@ -611,7 +629,12 @@ async fn fixed_stream() {
 }
 ```
 
-> **修正**: `stream::iter(data)` 消耗 `data` 的所有权，将其转换为流。若需在流消费后继续使用原数据，必须传递引用（`stream::iter(&data)`）。这与迭代器的所有权规则一致——`into_iter` 消耗，`iter` 借用。Rust 的流处理（`Stream` trait）与所有权系统的结合确保了内存安全：流不能产出指向已释放数据的引用。[来源: [futures-rs Documentation](https://docs.rs/futures/)]
+> **修正**:
+> `stream::iter(data)` 消耗 `data` 的所有权，将其转换为流。
+> 若需在流消费后继续使用原数据，必须传递引用（`stream::iter(&data)`）。
+> 这与迭代器的所有权规则一致——`into_iter` 消耗，`iter` 借用。
+> Rust 的流处理（`Stream` trait）与所有权系统的结合确保了内存安全：流不能产出指向已释放数据的引用。
+> [来源: [futures-rs Documentation](https://docs.rs/futures/)]
 
 ### 10.2 边界测试：背压传播中的类型不匹配（编译错误）
 
@@ -661,19 +684,20 @@ fn main() {
 }
 ```
 
-> **修正**: `Stream` trait 的 `poll_next` 在返回 `None` 后，再次 poll 的行为**未定义**（取决于实现）。`Fuse` adapter（`.fuse()`）保证：返回 `None` 后，所有后续 poll 也返回 `None`。这与 `Iterator` 的行为不同：`Iterator::next()` 返回 `None` 后再次调用是明确定义的（继续返回 `None`）。`Stream` 的设计原因：某些底层源（如 I/O、channel）在关闭后可能重新打开或产生错误，不强制 `None` 后终止。安全模式：消费 Stream 后使用 `.fuse()`，或用 `while let Some(item) = stream.next().await`（自动处理）。这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步流语义比迭代器更复杂，因涉及外部事件源。[来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]
+> **修正**: `Stream` trait 的 `poll_next` 在返回 `None` 后，再次 poll 的行为**未定义**（取决于实现）。
+> `Fuse` adapter（`.fuse()`）保证：返回 `None` 后，所有后续 poll 也返回 `None`。
+> 这与 `Iterator` 的行为不同：`Iterator::next()` 返回 `None` 后再次调用是明确定义的（继续返回 `None`）。
+> `Stream` 的设计原因：某些底层源（如 I/O、channel）在关闭后可能重新打开或产生错误，不强制 `None` 后终止。
+> 安全模式：消费 Stream 后使用 `.fuse()`，或用 `while let Some(item) = stream.next().await`（自动处理）。
+> 这与 Tokio 的 `StreamExt` 或 futures-rs 的 `Stream` 实现一致——Rust 的异步流语义比迭代器更复杂，因涉及外部事件源。
+> [来源: [futures-rs Documentation](https://docs.rs/futures/)] · [来源: [Tokio Stream](https://docs.rs/tokio-stream/)]
 
 ## 参考来源
 
 > [来源: [Tokio Streams](https://docs.rs/tokio-stream/)]
-
 > [来源: [Reactive Streams Specification](https://www.reactive-streams.org/)]
-
 > [来源: [RFC 2996 — Async Iteration](https://rust-lang.github.io/rfcs/2996-async-iterator.html)]
-
 > [来源: [Stream Processing — Akka Streams](https://doc.akka.io/docs/akka/current/stream/)]
-
 > [来源: [Apache Flink — Stream Semantics](https://nightlies.apache.org/flink/flink-docs-stable/)]
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

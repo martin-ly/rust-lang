@@ -637,7 +637,14 @@ fn main() {
 }
 ```
 
-> **修正**: `?` 运算符只能在返回 `Result` 或 `Option` 的函数中使用。`main` 函数可返回 `Result<(), E>`（`E: Debug`），Rust 在返回 `Err` 时打印错误并设置非零退出码。正确写法：`fn main() -> Result<(), Box<dyn std::error::Error>> { let file = std::fs::File::open("...")?; Ok(()) }`。这与 Go 的 `if err != nil { return err }`（在 main 中返回 error 等价于 `os.Exit(1)`）或 Python 的 `sys.exit(1)` 类似——Rust 的类型系统要求显式声明 `main` 可能失败。`main` 返回 `Result` 是 Rust 错误处理哲学的自然延伸：连程序入口点也使用 `Result`。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] · [来源: [Rust Reference — Main Function](https://doc.rust-lang.org/reference/crates-and-source-files.html#main-functions)]
+> **修正**:
+> `?` 运算符只能在返回 `Result` 或 `Option` 的函数中使用。
+> `main` 函数可返回 `Result<(), E>`（`E: Debug`），Rust 在返回 `Err` 时打印错误并设置非零退出码。
+> 正确写法：`fn main() -> Result<(), Box<dyn std::error::Error>> { let file = std::fs::File::open("...")?; Ok(()) }`。
+> 这与 Go 的 `if err != nil { return err }`（在 main 中返回 error 等价于 `os.Exit(1)`）或 Python 的 `sys.exit(1)` 类似——Rust 的类型系统要求显式声明 `main` 可能失败。
+> `main` 返回 `Result` 是 Rust 错误处理哲学的自然延伸：连程序入口点也使用 `Result`。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)] ·
+> [来源: [Rust Reference — Main Function](https://doc.rust-lang.org/reference/crates-and-source-files.html#main-functions)]
 
 ### 10.5 边界测试：`loop` 返回值与 `break` 的类型一致性（编译错误）
 
@@ -654,7 +661,16 @@ fn main() {
 }
 ```
 
-> **修正**: `loop` 是 Rust 中唯一可返回值的循环：`break expr` 将 `expr` 作为 `loop` 表达式的值。编译器要求：1) 所有 `break` 返回相同类型；2) 若 `loop` 可能无限循环（无 `break`），其类型为 `!`（never type），可 coerce 为任意类型。`loop { break 42 }` 的类型是 `i32`。若 `break` 的类型不一致，编译错误。这与 C 的 `for`/`while`（无返回值）或 Haskell 的 `rec`/`fix`（返回值但语义不同）不同——Rust 的 `loop` 返回值使某些模式更简洁（如重试逻辑返回操作结果）。`loop` 与 `break` 的组合是 Rust 控制流的独特设计。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] · [来源: [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html)]
+> **修正**:
+> `loop` 是 Rust 中唯一可返回值的循环：`break expr` 将 `expr` 作为 `loop` 表达式的值。
+> 编译器要求：
+>
+> 1) 所有 `break` 返回相同类型；
+> 2) 若 `loop` 可能无限循环（无 `break`），其类型为 `!`（never type），可 coerce 为任意类型。
+> `loop { break 42 }` 的类型是 `i32`。若 `break` 的类型不一致，编译错误。
+> 这与 C 的 `for`/`while`（无返回值）或 Haskell 的 `rec`/`fix`（返回值但语义不同）不同——Rust 的 `loop` 返回值使某些模式更简洁（如重试逻辑返回操作结果）。`loop` 与 `break` 的组合是 Rust 控制流的独特设计。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-05-control-flow.html)] ·
+> [来源: [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html)]
 
 ### 10.6 边界测试：`match` 臂中的变量绑定与模式守卫（编译错误）
 
@@ -677,7 +693,18 @@ fn main() {
 }
 ```
 
-> **修正**: `match` 的**模式守卫**（pattern guard，`if` 条件）在绑定后执行，但守卫中的借用可能与后续臂冲突。`ref` 关键字创建引用绑定（`&T` 而非 `T`），避免 move。`ref mut` 创建可变引用绑定。模式守卫的限制：1) 守卫中不能引入新绑定；2) 守卫中的变量是引用而非值（若使用 `ref`）；3) 守卫不移动值，但若守卫失败，后续臂可能获得 move 绑定。这与 Haskell 的 `case` guard（类似，但 Haskell 是惰性求值，守卫语义不同）或 Scala 的 `match` with `if` guard（类似，但无所有权影响）不同——Rust 的模式守卫需考虑所有权和借用的交互。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)] · [来源: [Rust Reference — Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)]
+> **修正**:
+> `match` 的**模式守卫**（pattern guard，`if` 条件）在绑定后执行，但守卫中的借用可能与后续臂冲突。
+> `ref` 关键字创建引用绑定（`&T` 而非 `T`），避免 move。`ref mut` 创建可变引用绑定。
+> 模式守卫的限制：
+>
+> 1) 守卫中不能引入新绑定；
+> 2) 守卫中的变量是引用而非值（若使用 `ref`）；
+> 3) 守卫不移动值，但若守卫失败，后续臂可能获得 move 绑定。
+> 这与 Haskell 的 `case` guard（类似，但 Haskell 是惰性求值，守卫语义不同）或 Scala 的 `match` with `if` guard（类似，但无所有权影响）不同
+> ——Rust 的模式守卫需考虑所有权和借用的交互。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)] ·
+> [来源: [Rust Reference — Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html#match-guards)]
 
 ## 实践
 

@@ -149,7 +149,7 @@
 
 ### 完全新手（无系统编程经验）
 
-```
+```text
 L1: ownership → borrowing → lifetimes → type_system
 L2: traits → generics → memory_management → error_handling
 L3: concurrency → async
@@ -159,7 +159,7 @@ L3: concurrency → async
 
 ### C/C++ 开发者
 
-```
+```text
 L1: ownership（对比 unique_ptr） + L5: rust_vs_cpp
 L3: unsafe（对比 C 指针安全）
 L5: rust_vs_cpp（本体论差异系统对比）
@@ -169,7 +169,7 @@ L5: rust_vs_cpp（本体论差异系统对比）
 
 ### Java/Go 开发者
 
-```
+```text
 L1: ownership（核心问题：没有 GC 如何管理内存？）
 L2: traits（对比 Java Interface/Go Interface）
 L3: concurrency（对比 goroutine/channel）
@@ -180,7 +180,7 @@ L5: rust_vs_go
 
 ### Haskell/ML 开发者
 
-```
+```text
 L2: traits + generics（利用类型论基础）
 L4: linear_logic + type_theory（形式化视角）
 L5: paradigm_matrix（Rust 在设计空间中的位置）
@@ -222,6 +222,5 @@ L5: paradigm_matrix（Rust 在设计空间中的位置）
 > **文档版本**: 1.0
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 与知识体系 v2.0 同步
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

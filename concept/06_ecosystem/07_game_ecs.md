@@ -26,7 +26,6 @@
 ---
 
 ## 权威定义
->
 
 > **[Wikipedia — Entity component system]** Entity component system (ECS) is a software architectural pattern mostly used in video game development for the representation of game world objects. An ECS comprises entities composed from components of data, with systems which read and update component data.
 > **来源**: <https://en.wikipedia.org/wiki/Entity_component_system>

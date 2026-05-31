@@ -5,8 +5,17 @@
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S+P** — 全维度
 > **双维定位**: P×Cre — 设计区块链系统的 Rust 架构
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Type System](../01_foundation/04_type_system.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Linear Logic](../04_formal/01_linear_logic.md) [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
-> **后置概念**: [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) · [Application Domains](./04_application_domains.md)
+> **前置概念**:
+> [Ownership](../01_foundation/01_ownership.md) ·
+> [Borrowing](../01_foundation/02_borrowing.md) ·
+> [Lifetimes](../01_foundation/03_lifetimes.md) ·
+> [Type System](../01_foundation/04_type_system.md) ·
+> [Unsafe](../03_advanced/03_unsafe.md) ·
+> [Linear Logic](../04_formal/01_linear_logic.md)
+> [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
+> **后置概念**:
+> [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) ·
+> [Application Domains](./04_application_domains.md)
 > **主要来源**: [Solana Docs] · [Polkadot Substrate Docs] · [Near Protocol Docs] · [Kani Verification Blog] · [Rust in Blockchain Report] · [Wikipedia: Blockchain] · [Wikipedia: Smart contract]
 
 ---
@@ -22,10 +31,8 @@
 
 > **[Wikipedia — Blockchain]** A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.
 > **来源**: <https://en.wikipedia.org/wiki/Blockchain>
-
 > **[Wikipedia — Smart contract]** A smart contract is a self-executing program with the terms of the agreement between buyer and seller being directly written into lines of code. [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > **来源**: <https://en.wikipedia.org/wiki/Smart_contract>
-
 > **[Ethereum Docs]** Smart contract security is the practice of creating and maintaining smart contracts that are resilient to attacks, bugs, and unintended behavior.
 
 ---
@@ -83,7 +90,6 @@ mindmap
 ```
 
 > **认知路径**: 本 mindmap 从四个维度组织区块链安全知识：**Rust 链架构**回答"有哪些主流 Rust 链"，**漏洞类别消除**回答"Rust 消除了哪些 Solidity 漏洞"，**形式化验证**回答"如何证明合约正确"，**跨链对比**回答"Move vs Rust vs Solidity 的安全模型差异"。
-
 > **认知功能**: 本 mindmap 以四层架构组织区块链安全知识全景，帮助读者建立"链架构→漏洞消除→形式化验证→跨链对比"的系统认知框架。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
@@ -161,13 +167,11 @@ graph TD
 ```
 
 > **来源**: [Solana Docs — Sealevel] · [Anatoly Yakovenko — Sealevel Paper]
-
 > **认知功能**: 此流程图揭示 Solana 如何将 Rust 的 `&`/`&mut` 借用语义映射到运行时并行调度策略，实现"无数据竞争的并行合约执行"。[来源: 💡 原创分析]
 > **使用建议**: 设计并行交易时，优先将账户标记为 read-only 以最大化并行度；mutually exclusive writes 需显式排序。
 > **关键洞察**: Sealevel 的并行不是自动的——它依赖交易显式声明账户访问模式，这与 Rust 编译期借用检查同构。
 
 ### 2.2 Polkadot (Substrate)：异构分片与 FRAME
->
 
 | 维度 | Substrate 设计 | Rust 角色 |
 |:---|:---|:---|
@@ -552,7 +556,6 @@ fn verify_weight_calculation_does_not_overflow() {
 | 纯计算逻辑的分支覆盖 | 跨链通信的异步安全性 |
 
 > **核心结论**: Kani 在 Substrate pallet 中的价值不是"验证合约无漏洞"，而是**将运行时错误转化为编译期错误**——与 Rust 本身的哲学一致。业务逻辑漏洞仍需经济模型审计和博弈论分析。
-
 > **来源**: [Interlay — Security Audit Report] · [Kani — Substrate Verification Guide] · [Parity — FRAME Security Best Practices]
 
 ---
@@ -568,7 +571,6 @@ fn verify_weight_calculation_does_not_overflow() {
 | **确定性** | 操作码计数确定性高 | Wasm 指令计数确定性高 | 执行时间计量，有轻微非确定性 |
 
 > **关键差异**: EVM gas 是**操作码定价表**，而 Rust/Wasm 合约的 gas 是**主机函数调用定价**。这意味着 Rust 合约中大量 cheap 的 Wasm 指令（如局部变量操作）几乎不消耗 gas，而存储和网络操作才是主要成本——这与现代计算机的性能特征更匹配。
-
 > **来源**: [Ethereum Yellow Paper] · [Substrate Weights Documentation] · [Solana Docs — Compute Budget]
 
 ---
@@ -635,7 +637,6 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 | **Move Bytecode** | Move IR → Move Bytecode | Move Prover（Boogie/Z3）| `movec` → Move Bytecode | 资源语义的形式化已较成熟（ abilities 系统）|
 
 > **核心洞察**: 区块链字节码的形式化语义研究遵循一个共同模式——**将高级语言（Rust/Move）的类型安全保证"下沉"到低级字节码的验证规则中**。SBF 的 verifier、PVF 的 Wasm 规范、Move 的字节码验证器，都是同一理念在不同技术路径上的实现。 [来源: [crates.io](https://crates.io/)]
-
 > **来源**: [Solana — SBF Specification] · [Polkadot — PVF Documentation] · [eBPF ISA Specification] · [Wasm Core Spec] · [Move Prover Paper]
 
 ---
@@ -676,9 +677,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 | 应用领域 | [`./04_application_domains.md`](./04_application_domains.md) | 区块链作为 L6 应用域 |
 
 > **[来源: Solana Docs; Polkadot Substrate Docs; Near Protocol Docs; Kani Verification Blog; Rust in Blockchain Report]** 区块链分析基于官方协议文档和形式化验证研究。✅
-
 > **[来源: Smart Contract Security Research; Reentrancy Attack Analysis; The DAO Post-Mortem]** 合约安全分析基于已公开的安全事件和研究文献。✅
-
 > **[来源: RustBelt: POPL 2018; Linear Logic; Separation Logic]** 形式化映射基于 RustBelt 和分离逻辑的理论框架。✅
 ---
 
@@ -718,7 +717,12 @@ fn fixed() {
 }
 ```
 
-> **修正**: 区块链和加密货币应用对时序攻击（timing attack）高度敏感。标准库的 `==` 运算符在发现第一个不匹配字节时立即返回，执行时间与匹配字节数相关，可能泄露密钥信息。`subtle` crate 提供常量时间比较原语（`ct_eq`、`ct_gt` 等），确保执行时间不泄露信息。这与 Rust 的标准库设计冲突——标准库优先性能，加密应用优先安全，因此需要显式选择常量时间操作。[来源: [subtle Documentation](https://docs.rs/subtle/)]
+> **修正**:
+> 区块链和加密货币应用对时序攻击（timing attack）高度敏感。
+> 标准库的 `==` 运算符在发现第一个不匹配字节时立即返回，执行时间与匹配字节数相关，可能泄露密钥信息。
+> `subtle` crate 提供常量时间比较原语（`ct_eq`、`ct_gt` 等），确保执行时间不泄露信息。
+> 这与 Rust 的标准库设计冲突——标准库优先性能，加密应用优先安全，因此需要显式选择常量时间操作。
+> [来源: [subtle Documentation](https://docs.rs/subtle/)]
 
 ### 10.2 边界测试：智能合约的状态一致性（编译错误）
 
@@ -740,7 +744,12 @@ impl Contract {
 }
 ```
 
-> **修正**: 智能合约的漏洞（如 The DAO 攻击）常源于"检查-生效-交互"（Checks-Effects-Interactions）模式的违反。Rust 的所有权系统不直接防止重入攻击，但编译期检查确保状态修改的顺序可被静态分析。形式化验证工具（如 Kani）可验证合约的数学不变量（如总供应量守恒）。Rust 在区块链生态（Solana、Polkadot、Near）中的优势是：编译期内存安全 + 运行时性能，消除整类 Solidity 的内存相关漏洞。[来源: [Rust in Blockchain](https://rust-in-blockchain.github.io/)]
+> **修正**:
+> 智能合约的漏洞（如 The DAO 攻击）常源于"检查-生效-交互"（Checks-Effects-Interactions）模式的违反。
+> Rust 的所有权系统不直接防止重入攻击，但编译期检查确保状态修改的顺序可被静态分析。
+> 形式化验证工具（如 Kani）可验证合约的数学不变量（如总供应量守恒）。
+> Rust 在区块链生态（Solana、Polkadot、Near）中的优势是：编译期内存安全 + 运行时性能，消除整类 Solidity 的内存相关漏洞。
+> [来源: [Rust in Blockchain](https://rust-in-blockchain.github.io/)]
 
 ### 10.3 边界测试：加密签名的类型安全（编译错误）
 
@@ -755,7 +764,13 @@ fn sign(sk: &SecretKey, msg: &[u8]) -> Vec<u8> {
 }
 ```
 
-> **修正**: 椭圆曲线签名（ECDSA、Schnorr）要求消息先经过密码学哈希（SHA-256、Keccak-256）压缩为固定长度（32 字节），再作为签名输入。直接对原始消息签名是安全漏洞（长度扩展攻击、消息结构歧义）。Rust 的 `secp256k1` crate 在类型层面强化这一点：`Message` 类型只能通过 `Message::from_slice(&[u8; 32])` 构造，拒绝任意长度输入。这与 C 的 libsecp256k1（接受 `const unsigned char* msg32`，依赖文档约束）或 Go 的 `crypto/ecdsa`（接受 `[]byte`，内部哈希）不同——Rust 的类型系统阻止"忘记哈希"的错误。区块链应用（以太坊、比特币）中，签名正确性是资金安全的核心，类型安全的密码学库是 Rust 的重要优势。[来源: [secp256k1 Crate](https://docs.rs/secp256k1/)] · [来源: [Rust Crypto WG](https://github.com/rustcrypto/)]
+> **修正**:
+> 椭圆曲线签名（ECDSA、Schnorr）要求消息先经过密码学哈希（SHA-256、Keccak-256）压缩为固定长度（32 字节），再作为签名输入。
+> 直接对原始消息签名是安全漏洞（长度扩展攻击、消息结构歧义）。
+> Rust 的 `secp256k1` crate 在类型层面强化这一点：`Message` 类型只能通过 `Message::from_slice(&[u8; 32])` 构造，拒绝任意长度输入。
+> 这与 C 的 libsecp256k1（接受 `const unsigned char* msg32`，依赖文档约束）或 Go 的 `crypto/ecdsa`（接受 `[]byte`，内部哈希）不同——Rust 的类型系统阻止"忘记哈希"的错误。
+> 区块链应用（以太坊、比特币）中，签名正确性是资金安全的核心，类型安全的密码学库是 Rust 的重要优势。
+> [来源: [secp256k1 Crate](https://docs.rs/secp256k1/)] · [来源: [Rust Crypto WG](https://github.com/rustcrypto/)]
 
 ### 10.4 边界测试：`no_std` 与哈希计算的堆分配（编译错误）
 
@@ -773,7 +788,16 @@ fn hash_data(data: &[u8]) -> [u8; 32] {
 }
 ```
 
-> **修正**: 区块链的共识节点和轻客户端常在资源受限环境运行（嵌入式、WASM、TEE），要求 `no_std`（无标准库）。Rust 的密码学生态（`rust-crypto`）积极支持 `no_std`：`sha2`、`sha3`、`blake2` 等 crate 提供 `default-features = false` 配置，禁用 `std` 依赖。但某些高级功能（如 `update` 的流式接口、并行哈希）可能需要 `std` 或 `alloc`。区块链项目的依赖管理：1) 检查每个密码学 crate 的 `no_std` 支持；2) 使用 `heapless` 替代 `Vec`；3) 在合约环境（如 CosmWasm、ink!）中，堆分配受限制，需预分配缓冲区。这与 Solidity（EVM 的内存模型固定）或 Go（无 `no_std` 概念）不同——Rust 的 `no_std` 允许在极端约束下使用高级抽象。[来源: [Rust Crypto Documentation](https://docs.rs/sha2/)] · [来源: [Substrate Documentation](https://docs.substrate.io/)]
+> **修正**: 区块链的共识节点和轻客户端常在资源受限环境运行（嵌入式、WASM、TEE），要求 `no_std`（无标准库）。
+> Rust 的密码学生态（`rust-crypto`）积极支持 `no_std`：`sha2`、`sha3`、`blake2` 等 crate 提供 `default-features = false` 配置，禁用 `std` 依赖。
+> 但某些高级功能（如 `update` 的流式接口、并行哈希）可能需要 `std` 或 `alloc`。
+> 区块链项目的依赖管理：
+>
+> 1) 检查每个密码学 crate 的 `no_std` 支持；
+> 2) 使用 `heapless` 替代 `Vec`；
+> 3) 在合约环境（如 CosmWasm、ink!）中，堆分配受限制，需预分配缓冲区。
+> 这与 Solidity（EVM 的内存模型固定）或 Go（无 `no_std` 概念）不同——Rust 的 `no_std` 允许在极端约束下使用高级抽象。
+> [来源: [Rust Crypto Documentation](https://docs.rs/sha2/)] · [来源: [Substrate Documentation](https://docs.substrate.io/)]
 
 ### 10.7 边界测试：no_std 环境下的 `Vec` 使用（编译错误）
 
@@ -787,7 +811,22 @@ fn main() {
 }
 ```
 
-> **修正**: 区块链智能合约（如 Substrate pallet）和嵌入式系统常用 `#![no_std]` 以减少依赖和二进制大小。`no_std` 禁用 `std`，仅保留 `core` 和（若启用）`alloc`。1) `Vec`、`String`、`Box` 需 `extern crate alloc;` + `use alloc::vec::Vec;`；2) `println!`、`format!` 不可用（无标准输出）；3) `std::collections::HashMap` 不可用（`hashbrown` crate 替代）。链上运行时的特殊限制：1) 无浮点数（非确定性）；2) 无随机数生成（可复现性）；3) 严格 gas/weight 限制。Rust 的 `no_std` 是区块链开发的基石——Substrate、ink! 都基于此。这与 Solidity（无标准库概念，依赖 OpenZeppelin）或 Go（无 `no_std` 等价物）不同——Rust 的显式依赖管理使资源受限环境开发成为可能。[来源: [The Rust Programming Language](https://doc.rust-lang.org/reference/names/preludes.html)] · [来源: [Substrate no_std](https://docs.substrate.io/build/)]
+> **修正**:
+> 区块链智能合约（如 Substrate pallet）和嵌入式系统常用 `#![no_std]` 以减少依赖和二进制大小。
+> `no_std` 禁用 `std`，仅保留 `core` 和（若启用）`alloc`。
+>
+> 1) `Vec`、`String`、`Box` 需 `extern crate alloc;` + `use alloc::vec::Vec;`；
+> 2) `println!`、`format!` 不可用（无标准输出）；
+> 3) `std::collections::HashMap` 不可用（`hashbrown` crate 替代）。
+>
+> 链上运行时的特殊限制：
+>
+> 1) 无浮点数（非确定性）；
+> 2) 无随机数生成（可复现性）；
+> 3) 严格 gas/weight 限制。
+> Rust 的 `no_std` 是区块链开发的基石——Substrate、ink! 都基于此。
+> 这与 Solidity（无标准库概念，依赖 OpenZeppelin）或 Go（无 `no_std` 等价物）不同——Rust 的显式依赖管理使资源受限环境开发成为可能。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/reference/names/preludes.html)] · [来源: [Substrate no_std](https://docs.substrate.io/build/)]
 
 ### 10.3 边界测试：`no_std` 中的 `panic` 处理缺失（编译错误）
 

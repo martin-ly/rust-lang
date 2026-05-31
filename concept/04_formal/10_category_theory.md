@@ -10,7 +10,11 @@
 
 ---
 
-> **来源**: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) · [Wikipedia — Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming)) · [Rust RFC — Monad](https://github.com/rust-lang/rfcs/issues/1815) · [Haskell Wiki — Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) · [The Rust Programming Language](https://doc.rust-lang.org/book/)
+> **来源**: [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) ·
+> [Wikipedia — Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming)) ·
+> [Rust RFC — Monad](https://github.com/rust-lang/rfcs/issues/1815) ·
+> [Haskell Wiki — Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/)
 
 ## 📑 目录
 
@@ -42,11 +46,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 范畴的基本直觉
->
 
 ```text
 范畴 (Category) 的直觉:

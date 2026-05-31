@@ -407,7 +407,11 @@ where
 }
 ```
 
-> **修正**: `Range`（`a..b`，半开区间）、`RangeInclusive`（`a..=b`，闭区间）、`RangeFrom`（`a..`）、`RangeTo`（`..b`）是**不同的类型**。函数参数需明确指定接受哪种范围，或使用 `RangeBounds` trait 泛化。这体现了 Rust"显式优于隐式"的设计哲学——范围语义在类型层面区分，避免 C++ 中 `for (int i = a; i <= b; i++)` 与 `i < b` 的歧义。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**:
+> `Range`（`a..b`，半开区间）、`RangeInclusive`（`a..=b`，闭区间）、`RangeFrom`（`a..`）、`RangeTo`（`..b`）是**不同的类型**。
+> 函数参数需明确指定接受哪种范围，或使用 `RangeBounds` trait 泛化。
+> 这体现了 Rust"显式优于隐式"的设计哲学——范围语义在类型层面区分，避免 C++ 中 `for (int i = a; i <= b; i++)` 与 `i < b` 的歧义。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：`RangeInclusive` 的 `Copy` 缺失（编译错误）
 
@@ -455,7 +459,14 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 `match` 要求**穷尽**（exhaustive）——覆盖所有可能的值。范围模式 `a..=b` 只覆盖闭区间，不覆盖区间外的值。整数类型（`i32`、`u8` 等）的范围是完整的，任何遗漏都会导致编译错误。修复：添加 `_ =>` 通配分支或补全范围。范围类型（`Range`、`RangeInclusive`）作为值时，不能直接用于 `match`（非枚举类型），需用 `if let` 或解构。这与 Haskell 的 guard（不强制穷尽）或 Scala 的 `match`（非穷尽时警告）不同——Rust 的穷尽检查是编译错误，不可忽略。[来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)]
+> **修正**:
+> Rust 的 `match` 要求**穷尽**（exhaustive）——覆盖所有可能的值。
+> 范围模式 `a..=b` 只覆盖闭区间，不覆盖区间外的值。
+> 整数类型（`i32`、`u8` 等）的范围是完整的，任何遗漏都会导致编译错误。
+> 修复：添加 `_ =>` 通配分支或补全范围。范围类型（`Range`、`RangeInclusive`）作为值时，不能直接用于 `match`（非枚举类型），需用 `if let` 或解构。
+> 这与 Haskell 的 guard（不强制穷尽）或 Scala 的 `match`（非穷尽时警告）不同——Rust 的穷尽检查是编译错误，不可忽略。
+> [来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html)]
 
 ### 10.5 边界测试：不可变借用与可变借用的冲突
 

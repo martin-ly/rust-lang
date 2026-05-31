@@ -473,7 +473,15 @@ fn main() {
 }
 ```
 
-> **修正**: 闭包根据捕获变量的使用方式自动实现 `Fn`、`FnMut`、`FnOnce`：只读引用捕获 → `Fn`（可多次调用）；可变引用捕获 → `FnMut`（可多次调用，需 `&mut`）；值捕获/移动 → `FnOnce`（只能调用一次，因为值被消耗）。`let _t = s` 在闭包体内移动 `s`，因此闭包只能调用一次（`FnOnce`）。若需要 `Fn` bound，闭包不能消耗捕获变量——应使用 `let _t = &s` 或 `let _t = s.clone()`。这与 JavaScript 的闭包（总是引用捕获，无所有权概念）或 C++ 的 lambda（值捕获可复制，除非 `std::move`）不同——Rust 的闭包类型系统自动推断最严格的 trait 实现，约束调用方式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ops/trait.Fn.html)]
+> **修正**:
+> 闭包根据捕获变量的使用方式自动实现 `Fn`、`FnMut`、`FnOnce`：只读引用捕获 → `Fn`（可多次调用）；
+> 可变引用捕获 → `FnMut`（可多次调用，需 `&mut`）；
+> 值捕获/移动 → `FnOnce`（只能调用一次，因为值被消耗）。
+> `let _t = s` 在闭包体内移动 `s`，因此闭包只能调用一次（`FnOnce`）。
+> 若需要 `Fn` bound，闭包不能消耗捕获变量——应使用 `let _t = &s` 或 `let _t = s.clone()`。
+> 这与 JavaScript 的闭包（总是引用捕获，无所有权概念）或 C++ 的 lambda（值捕获可复制，除非 `std::move`）不同——Rust 的闭包类型系统自动推断最严格的 trait 实现，约束调用方式。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch13-01-closures.html)] ·
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ops/trait.Fn.html)]
 
 ### 10.4 边界测试：闭包递归的类型推断失败（编译错误）
 

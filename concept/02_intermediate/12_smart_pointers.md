@@ -10,7 +10,13 @@
 
 ---
 
-> **来源**: [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html) · [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) · [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) · [std::cell::RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html) · [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)
+> **来源**:
+> [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html) ·
+> [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) ·
+> [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) ·
+> [std::cell::RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html) ·
+> [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
+> [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)
 
 ## 📑 目录
 
@@ -43,11 +49,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 智能指针谱系
->
 
 ```mermaid
 graph TD
@@ -283,7 +286,7 @@ struct Node {
   └── RefCell<T>: [borrow: isize, T]
 ```
 
-> **性能洞察**: 智能指针的选择是**开销与能力**的权衡——从 Box（最低开销，最少能力）到 Arc<Mutex<T>>（最高开销，最多能力）。
+> **性能洞察**: 智能指针的选择是**开销与能力**的权衡——从 Box（最低开销，最少能力）到 `Arc<Mutex<T>>`（最高开销，最多能力）。
 > [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ---

@@ -113,7 +113,7 @@ mindmap
 ### 2.1 L1 基础概念层映射
 
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
-|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---|:---|:---|
 | **01_ownership** | F×Mem: `Drop` / `Copy` trait 名称 F×App: `mem::forget` 用法 | C×Und: 所有权唯一性心智模型 C×Ana: Move 语义 vs 浅拷贝分析 | P×App: 实现自定义 `Drop` P×Eva: 评估 `Rc` 引入的循环引用风险 | M×Und: 识别自身对 Move 的误解模式 |
 | **02_borrowing** | F×Mem: `&T` / `&mut T` 语法 F×App: Reborrow 写法 | C×Und: AXM (Alias-XOR-Mutate) 规则 C×Ana: 分析内部可变性突破机制 | P×App: 修复借用检查错误 P×Eva: 选择 `&T` vs `&mut T` vs 所有权 | M×Ana: 诊断自身代码的借用模式习惯 |
 | **03_lifetimes** | F×Mem: `'a` 标注语法 F×App: Elision 三条规则 | C×Und: 生命周期 = 区域类型的直觉 C×Ana: 推导 `&'a str` 的约束传播 | P×App: 标注复杂结构体生命周期 P×Eva: 评估 HRTB 的必要性 | M×Eva: 评估自身生命周期标注能力的边界 |
@@ -122,7 +122,7 @@ mindmap
 ### 2.2 L2 进阶概念层映射
 
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
-|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---|:---|:---|
 | **01_traits** | F×Mem: `trait` / `impl` / `dyn` 语法 F×App: 编写 `#[derive]` 可用 trait | C×Und: Trait = 类型类的 Haskell 对应 C×Ana: 分析 Orphan Rule 对 coherence 的保障 | P×App: 设计可对象安全的 Trait P×Eva: 评估 GATs 的引入代价 | M×Ana: 识别自身 Trait 设计中的过度抽象倾向 |
 | **02_generics** | F×Mem: `<T: Bound>` 语法 F×App: Const Generics 数组长度参数化 | C×Und: 单态化 = 零成本抽象的编译机制 C×Ana: 分析单态化代码膨胀的影响 | P×App: 设计合理的 Trait Bound 层次 P×Eva: 评估 `&dyn` vs `impl` 的性能权衡 | M×Cre: 设计领域特定的类型约束语言 |
 | **03_memory_management** | F×Mem: `Box` / `Rc` / `Arc` / `RefCell` API F×App: `Pin::new_unchecked` 调用 | C×Und: 智能指针 = 所有权策略的封装 C×Ana: 分析 `Pin` 不动性与自引用的关系 | P×App: 实现 `Deref` / `Drop` 自定义 P×Eva: 评估内存布局优化策略 | M×Eva: 评估自身对堆/栈分配敏感度的认知 |
