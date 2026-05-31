@@ -1,7 +1,6 @@
 # Panic 与 Abort：不可恢复错误的处理机制
->
-> **受众**: [初学者]
 
+> **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价 panic 与 abort 的策略选择

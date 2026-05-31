@@ -759,7 +759,23 @@ fn main() {
 }
 ```
 
-> **修正**: **`MaybeUninit<T>`** 是 Rust 处理未初始化内存的安全抽象：1) `MaybeUninit::uninit()` — 分配内存但不初始化；2) `MaybeUninit::write(val)` — 安全写入；3) `unsafe { uninit.assume_init() }` — 假设已初始化，读取值（unsafe！）；4) `unsafe { *uninit.as_ptr() }` — 同样 unsafe，读取可能未初始化的值。UB 条件：1) 在 `write` 前 `assume_init`/`as_ptr` dereference → UB；2) `assume_init_read()` 后再次使用 → double read（可能安全但可能 panic）；3) `drop` 未初始化的 `MaybeUninit<T>`（`T` 未实现 `Drop` 时安全）。与 C 的未初始化变量（UB，编译器优化不可预测）或 C++ 的 `std::optional`（有状态标记，安全）不同——Rust 的 `MaybeUninit` 是显式的、零成本的未初始化抽象，但使用需 unsafe。[来源: [MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/unchecked-uninit.html)]
+> **修正**:
+> **`MaybeUninit<T>`** 是 Rust 处理未初始化内存的安全抽象：
+>
+> 1) `MaybeUninit::uninit()` — 分配内存但不初始化；
+> 2) `MaybeUninit::write(val)` — 安全写入；
+> 3) `unsafe { uninit.assume_init() }` — 假设已初始化，读取值（unsafe！）；
+> 4) `unsafe { *uninit.as_ptr() }` — 同样 unsafe，读取可能未初始化的值。
+>
+> UB 条件：
+>
+> 1) 在 `write` 前 `assume_init`/`as_ptr` dereference → UB；
+> 2) `assume_init_read()` 后再次使用 → double read（可能安全但可能 panic）；
+> 3) `drop` 未初始化的 `MaybeUninit<T>`（`T` 未实现 `Drop` 时安全）。
+> 与 C 的未初始化变量（UB，编译器优化不可预测）或 C++ 的 `std::optional`（有状态标记，安全）不同
+> ——Rust 的 `MaybeUninit` 是显式的、零成本的未初始化抽象，但使用需 unsafe。
+> [来源: [MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/unchecked-uninit.html)]
 
 ### 10.1 边界测试：const fn 中的非编译期操作
 

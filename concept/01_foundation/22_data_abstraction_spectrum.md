@@ -1,5 +1,5 @@
 # 数据抽象谱系：从 C struct 到 Rust enum + trait
->
+
 > **受众**: [初学者]
 > **层级**: L1 基础概念 — 通用编程语言机制
 > **A/S/P 标记**: **S** — Structure

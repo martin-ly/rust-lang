@@ -7,6 +7,33 @@
 
 ---
 
+## 📑 目录
+
+- [编程语言理论基础（PL Prerequisites）](#编程语言理论基础pl-prerequisites)
+  - [📑 目录](#-目录)
+  - [一、求值策略（Evaluation Strategies）](#一求值策略evaluation-strategies)
+    - [1.1 为什么需要了解求值策略？](#11-为什么需要了解求值策略)
+    - [1.2 三种核心求值策略](#12-三种核心求值策略)
+    - [1.3 对比表](#13-对比表)
+  - [二、副作用模型（Side Effects Model）](#二副作用模型side-effects-model)
+    - [2.1 什么是副作用？](#21-什么是副作用)
+    - [2.2 副作用与并发的关系](#22-副作用与并发的关系)
+    - [2.3 与其他语言的对比](#23-与其他语言的对比)
+  - [三、变量模型：环境 vs 存储](#三变量模型环境-vs-存储)
+    - [3.1 两个层面的变量](#31-两个层面的变量)
+    - [3.2 Move 的存储层面解释](#32-move-的存储层面解释)
+    - [3.3 对比 C++ 和 Java](#33-对比-c-和-java)
+  - [四、Continuation 与 CPS](#四continuation-与-cps)
+    - [4.1 什么是 Continuation？](#41-什么是-continuation)
+    - [4.2 CPS：Continuation Passing Style](#42-cpscontinuation-passing-style)
+    - [4.3 async/await 的本质：CPS 变换](#43-asyncawait-的本质cps-变换)
+    - [4.4 与操作系统线程的对比](#44-与操作系统线程的对比)
+  - [五、结构化程序定理](#五结构化程序定理)
+    - [5.1 程序可以由三种结构组成](#51-程序可以由三种结构组成)
+    - [5.2 Rust 的控制流安全性](#52-rust-的控制流安全性)
+    - [5.3 为什么 `goto` 有害？](#53-为什么-goto-有害)
+  - [六、总结：这些概念如何支撑 Rust](#六总结这些概念如何支撑-rust)
+
 ## 一、求值策略（Evaluation Strategies）
 
 ### 1.1 为什么需要了解求值策略？

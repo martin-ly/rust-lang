@@ -1,7 +1,6 @@
 # Rust 错误处理基础
->
-> **受众**: [初学者]
 
+> **受众**: [初学者]
 > **Bloom 层级**: 理解 → 应用
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 应用 Result/Option 错误传播模式

@@ -1,7 +1,9 @@
-> **说明**：本表为最小国际化 efforts（决策 3-C），聚焦高频术语标准化。所有英文术语与 [TRPL](https://doc.rust-lang.org/book/) 及 [Rust Reference](https://doc.rust-lang.org/reference/) 保持一致，确保学习者能顺利对接 crates.io、RFC、GitHub Issue 等英文生态。
-> 
-> **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide  
-> **对应 Rust 版本**: 1.96.0 (Edition 2024)  
+> **说明**：本表为最小国际化 efforts（决策 3-C），聚焦高频术语标准化。
+> 所有英文术语与 [TRPL](https://doc.rust-lang.org/book/) 及 [Rust Reference](https://doc.rust-lang.org/reference/) 保持一致，
+> 确保学习者能顺利对接 crates.io、RFC、GitHub Issue 等英文生态。
+>
+> **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide
+> **对应 Rust 版本**: 1.96.0 (Edition 2024)
 > **状态**: 术语表覆盖 100 个高频术语，L1 → L5+ 分层
 
 # Rust 核心术语英中对照表
@@ -74,7 +76,6 @@
 
 - **HashMap** (HashMap) [L1] — 基于哈希表的无序键值对容器 — [TRPL](https://doc.rust-lang.org/book/ch08-03-hash-maps.html)
 
-
 ## L2 进阶（Intermediate）
 
 - **泛型** (Generics) [L2] — 参数化类型与函数以实现代码复用 — [TRPL](https://doc.rust-lang.org/book/ch10-00-generics.html)
@@ -126,7 +127,6 @@
 - **Clone** (Clone) [L2] — 显式深拷贝的 trait，用于堆数据复制 — [std](https://doc.rust-lang.org/std/clone/trait.Clone.html)
 
 - **Eq / PartialEq** (Eq / PartialEq) [L2] — 定义等价关系的比较 trait 组合 — [std](https://doc.rust-lang.org/std/cmp/trait.Eq.html)
-
 
 ## L3 高级（Advanced）
 
@@ -180,7 +180,6 @@
 
 - **SeqCst** (Sequentially Consistent) [L3] — 最强顺序一致性，所有线程观察顺序一致 — [std](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)
 
-
 ## L4 形式化（Formal Methods）
 
 - **分离逻辑** (Separation Logic) [L4] — 扩展 Hoare 逻辑以推理共享可变状态 — [Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)
@@ -213,7 +212,6 @@
 
 - **Tree Borrows** (Tree Borrows) [L4] — Miri 采用的内存别名模型 — [Miri](https://github.com/rust-lang/miri)
 
-
 ## L5+ 生态/专家（Ecosystem & Expert）
 
 - **Tokio** (Tokio) [L5+] — 异步 Rust 的运行时与网络 IO 生态核心 — [Tokio](https://tokio.rs/)
@@ -235,7 +233,6 @@
 - **实时系统** (Real-Time Systems) [L5+] — 有严格时间约束的确定性执行环境 — [Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)
 
 - **no_std** (no_std) [L5+] — 不链接标准库，仅使用 `core` 的运行环境 — [Reference](https://doc.rust-lang.org/reference/crates-and-source-files.html#prelude)
-
 
 ---
 
@@ -265,9 +262,9 @@
 
 ---
 
-> **文档版本**: 2.0  
-> **术语总数**: 100  
-> **与 TRPL 一致率**: 100%（所有 L1~L3 术语均与 TRPL / 官方 Reference 英文原文一致）  
+> **文档版本**: 2.0
+> **术语总数**: 100
+> **与 TRPL 一致率**: 100%（所有 L1~L3 术语均与 TRPL / 官方 Reference 英文原文一致）
 > **最后更新**: 2026-05-31
 
 ---

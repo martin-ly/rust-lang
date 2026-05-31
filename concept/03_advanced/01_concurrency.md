@@ -1188,7 +1188,10 @@ let (tx, mut rx) = mpsc::unbounded_channel::<i32>();
 // 正确的做法：使用有界 channel，让背压自然传播
 ```
 
-> **关键洞察**: Rust 的所有权 + `async/await` + 有界 channel = **零成本、类型安全的背压**。与 Java（需 Reactive Streams 显式 `request(n)`）或 Go（channel 有界但无编译期保证）相比，Rust 的背压是"隐式的"——由 `await` 点的挂起自然产生。这是 Rust 并发模型与流处理语义的自然交汇点。[来源: 💡 原创分析] · [Tokio Documentation] ✅
+> **关键洞察**: Rust 的所有权 + `async/await` + 有界 channel = **零成本、类型安全的背压**。
+> 与 Java（需 Reactive Streams 显式 `request(n)`）或 Go（channel 有界但无编译期保证）相比，
+> Rust 的背压是"隐式的"——由 `await` 点的挂起自然产生。
+> 这是 Rust 并发模型与流处理语义的自然交汇点。[来源: 💡 原创分析] · [Tokio Documentation] ✅
 
 > **相关判定树**: [并发判定树](../00_meta/concept_definition_decision_forest.md#七并发判定树)
 > **相关 FTA**: [并发安全失效树](../00_meta/fault_tree_analysis_collection.md#三并发安全失效树)

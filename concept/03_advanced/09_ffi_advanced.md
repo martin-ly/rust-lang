@@ -618,7 +618,12 @@ fn fixed() {
 }
 ```
 
-> **修正**: `Box::into_raw` 将 `Box` 转为裸指针，放弃 Rust 的自动内存管理。调用者必须确保：1) 指针最终通过 `Box::from_raw` 或 `drop(Box::from_raw(ptr))` 释放恰好一次；2) 指针在释放后不再使用。双重释放（double free）是严重的内存安全漏洞，可能被利用进行代码执行。这与 C 的 `malloc`/`free` 管理相同——Rust 的 unsafe 边界将责任完全转移给程序员。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> **修正**: `Box::into_raw` 将 `Box` 转为裸指针，放弃 Rust 的自动内存管理。
+> 调用者必须确保：
+>
+> 1) 指针最终通过 `Box::from_raw` 或 `drop(Box::from_raw(ptr))` 释放恰好一次；
+> 2) 指针在释放后不再使用。双重释放（double free）是严重的内存安全漏洞，可能被利用进行代码执行。
+> 这与 C 的 `malloc`/`free` 管理相同——Rust 的 unsafe 边界将责任完全转移给程序员。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 
 ### 10.3 边界测试：C 变长参数的类型安全（编译错误/运行时 UB）
 
@@ -640,7 +645,17 @@ fn main() {
 }
 ```
 
-> **修正**: C 的变长参数（variadic functions，`...`）无类型检查，调用者必须确保实参类型与格式字符串一致。Rust 的 FFI 声明 `extern "C" { fn printf(fmt: *const c_char, ...) }` 同样无类型保护——`unsafe` 块中的调用完全信任开发者。错误传递参数类型（`char*` vs `int`）导致未定义行为：栈布局错误、格式字符串解析越界、可能的安全漏洞。安全替代：1) 在 Rust 中封装为类型安全的 API（`fn rust_print(args: &[Arg])`）；2) 使用 `libffi` crate 动态构造调用；3) 避免使用 C 的变长参数，改用 struct 指针传递参数。这与 Go 的 `cgo`（同样无变长参数类型检查）或 Java 的 JNA（有类型映射，但仍可能出错）类似——FFI 的边界是类型系统的极限。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] · [来源: [libffi Crate](https://docs.rs/libffi/)]
+> **修正**: C 的变长参数（variadic functions，`...`）无类型检查，调用者必须确保实参类型与格式字符串一致。
+> Rust 的 FFI 声明 `extern "C" { fn printf(fmt: *const c_char, ...) }` 同样无类型保护——`unsafe` 块中的调用完全信任开发者。
+> 错误传递参数类型（`char*` vs `int`）导致未定义行为：栈布局错误、格式字符串解析越界、可能的安全漏洞。
+> 安全替代：
+>
+> 1) 在 Rust 中封装为类型安全的 API（`fn rust_print(args: &[Arg])`）；
+> 2) 使用 `libffi` crate 动态构造调用；
+> 3) 避免使用 C 的变长参数，改用 struct 指针传递参数。
+> 这与 Go 的 `cgo`（同样无变长参数类型检查）或 Java 的 JNA（有类型映射，但仍可能出错）类似——FFI 的边界是类型系统的极限。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] ·
+> [来源: [libffi Crate](https://docs.rs/libffi/)]
 
 ### 10.4 边界测试：回调函数的生命周期与 `Box::into_raw` 泄漏（编译错误/运行时 UB）
 
@@ -668,7 +683,19 @@ fn main() {
 }
 ```
 
-> **修正**: 将 Rust 对象通过 `Box::into_raw` 传递给 C 代码时，所有权语义发生断裂：C 代码不理解 Rust 的所有权规则，可能不调用回调、多次调用回调、或在错误线程调用。这是 FFI 的**所有权边界**问题：Rust 侧释放（`Box::from_raw`）要求对调用次数和时机的精确控制。安全模式：1) 使用 `Arc<Mutex<T>>`（引用计数，多线程安全）；2) 在 C API 中明确文档回调调用次数（一次、零次或多次）；3) 使用 `ManuallyDrop` 延迟释放，直到确定安全。这与 C++ 的 `std::shared_ptr` 传递到外代码（同样问题，需要自定义 deleter）或 Swift 的 `Unmanaged<T>`（显式 retain/release）类似——跨语言边界时，自动内存管理让位于显式契约。[来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> 将 Rust 对象通过 `Box::into_raw` 传递给 C 代码时，
+> 所有权语义发生断裂：
+> C 代码不理解 Rust 的所有权规则，可能不调用回调、多次调用回调、或在错误线程调用。
+> 这是 FFI 的**所有权边界**问题：
+> Rust 侧释放（`Box::from_raw`）要求对调用次数和时机的精确控制。
+> 安全模式：
+>
+> 1) 使用 `Arc<Mutex<T>>`（引用计数，多线程安全）；
+> 2) 在 C API 中明确文档回调调用次数（一次、零次或多次）；
+> 3) 使用 `ManuallyDrop` 延迟释放，直到确定安全。
+> 这与 C++ 的 `std::shared_ptr` 传递到外代码（同样问题，需要自定义 deleter）或 Swift 的 `Unmanaged<T>`（显式 retain/release）类似——跨语言边界时，自动内存管理让位于显式契约。
+> [来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.5 边界测试：C 的 `long double` 与 Rust 的类型映射缺失（编译错误）
 

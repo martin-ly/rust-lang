@@ -1,5 +1,5 @@
 # Rust 表征空间（Semantic / Representational Space）
->
+
 > **受众**: [研究者]
 > **Bloom 层级**: 分析 → 评价
 > **定位**：本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言"能表达什么"、"不能表达什么"、"等价表达的组合关系"，以及其内部机制的完备性与封闭性。
@@ -107,7 +107,6 @@ mindmap
 
 > **认知功能**: 本 mindmap 以四维结构组织 Rust 的表达力边界，帮助读者快速定位特定概念在"能/不能/等价"光谱中的位置。建议在遇到"Rust 如何做 X"的问题时，先在此图中定位 X 所属的表达维度。关键洞察：Rust 的设计哲学不是最大化表达力，而是在"安全/性能/表达"三者的帕累托前沿上寻找最优解。[来源: 💡 原创分析]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
-
 > **认知路径**: 本 mindmap 从四个维度组织 Rust 表征空间：**核心算子**（Rust 提供什么表达工具）、**能且高效表达**（Sweet Spot）、**能但低效表达**（需要技巧）、**不能表达**（设计排除）。第四分支展示 Rust 如何提供**等价表达**替代其他语言的核心机制——这些替代不是简单的语法转换，而是语义保持的观察等价。
 
 ## 〇、认知路径（Cognitive Path）
@@ -542,21 +541,27 @@ Rust 目前用三种不兼容的语法表达三种效果：
 | 编译器复杂度 | 已存在 | 新增效果求解器 | ⚠️ 工程挑战 |
 | 封闭性 | 每种效果独立保证 | 效果组合的安全性需验证 | ⚠️ 理论挑战 |
 
-> **关键洞察**: Effects system 是 Rust 表征空间中**最大胆的潜在扩展**。它不改变语言的计算能力（图灵完备性不变），但会彻底改变控制流的**表征方式**——从"语法特化"走向"语义统一"。这与 Haskell 的 monad transformer 和 Koka 的代数效应形成谱系对比。
-
-> **状态与现实**: Effects system 目前处于**研究阶段**，尚无稳定实现时间表。Rust 语言团队采取渐进策略：先通过 `try` blocks、`gen` blocks 等独立特性积累经验，再考虑统一语法。这反映了 Rust 演化的保守哲学——**先验证，后统一**。
-
-> **深入阅读**: `async`/`await` 的详细语义模型见 [`02_async.md`](../03_advanced/02_async.md)；错误处理与 `?` 运算符见 [`04_error_handling.md`](../02_intermediate/04_error_handling.md)。
+> **关键洞察**:
+> Effects system 是 Rust 表征空间中**最大胆的潜在扩展**。
+> 它不改变语言的计算能力（图灵完备性不变），但会彻底改变控制流的**表征方式**——从"语法特化"走向"语义统一"。
+> 这与 Haskell 的 monad transformer 和 Koka 的代数效应形成谱系对比。
+> **状态与现实**:
+> Effects system 目前处于**研究阶段**，尚无稳定实现时间表。
+> Rust 语言团队采取渐进策略：先通过 `try` blocks、`gen` blocks 等独立特性积累经验，再考虑统一语法。
+> 这反映了 Rust 演化的保守哲学——**先验证，后统一**。
+> **深入阅读**: `async`/`await` 的详细语义模型见 [`02_async.md`](../03_advanced/02_async.md)；
+> 错误处理与 `?` 运算符见 [`04_error_handling.md`](../02_intermediate/04_error_handling.md)。
 
 ---
 
 > **来源**: [Rust Reference] · [RFCs] · [RustBelt] · [Wikipedia]
->
+
 ## 四、等价表达的语义保持（Equivalent Expressions & Semantic Preservation）
 
 ### 4.1 等价表达谱系
 
-同一语义概念在 Rust 中通常有多种表达方式。这些表达之间的关系不是简单的"替代"，而是涉及**观察等价性**、**性能等价性**、和**扩展性等价性**的复杂权衡。
+同一语义概念在 Rust 中通常有多种表达方式。
+这些表达之间的关系不是简单的"替代"，而是涉及**观察等价性**、**性能等价性**、和**扩展性等价性**的复杂权衡。
 
 ```text
 等价表达谱系:

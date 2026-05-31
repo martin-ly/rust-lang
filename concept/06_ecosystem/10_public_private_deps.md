@@ -1,8 +1,7 @@
 # Public/Private Dependencies：可见性控制的工程化
->
+
 > **受众**: [进阶]
 > **内容分级**: [综述级]
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S** — ApplicationStructure
 > **双维定位**: C×App — 应用依赖可见性规则

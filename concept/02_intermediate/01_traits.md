@@ -1,7 +1,6 @@
 # Traits（Trait 系统）
->
+
 > **受众**: [进阶]
->
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Orphan Rule 的设计意图

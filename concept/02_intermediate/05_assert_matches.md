@@ -1,5 +1,5 @@
 # `assert_matches!`：模式匹配断言的形式化语义
->
+
 > **受众**: [进阶]
 > **Bloom 层级**: 应用 → 分析
 > **A/S/P 标记**: **A** — Application
@@ -518,7 +518,20 @@ fn main() {
 }
 ```
 
-> **修正**: `assert!`、`assert_eq!`、`assert_ne!` 的自定义消息参数必须实现 `std::fmt::Display` trait。`Vec<&str>` 未实现 `Display`，因此不能直接作为消息。解决方案：1) 使用 `format!("{:?}", vec)`（`Debug` 实现）；2) 使用 `vec.join(", ")` 转为 `String`；3) 使用 `assert!(..., "message", args...)` 的格式化语法。这与 C 的 `assert`（只接受布尔，无自定义消息）或 Python 的 `assert`（接受任意表达式作为消息）不同——Rust 的断言消息有类型约束，保证错误输出可读。`assert!` 的格式化参数使用与 `println!` 相同的语法，支持 `{}`、`{:?}`、`{:x}` 等格式说明符。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/macro.assert.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> **修正**:
+> `assert!`、`assert_eq!`、`assert_ne!` 的自定义消息参数必须实现 `std::fmt::Display` trait。
+> `Vec<&str>` 未实现 `Display`，因此不能直接作为消息。
+>
+> 解决方案：
+>
+> 1) 使用 `format!("{:?}", vec)`（`Debug` 实现）；
+> 2) 使用 `vec.join(", ")` 转为 `String`；
+> 3) 使用 `assert!(..., "message", args...)` 的格式化语法。
+>
+> 这与 C 的 `assert`（只接受布尔，无自定义消息）或 Python 的 `assert`（接受任意表达式作为消息）不同——Rust 的断言消息有类型约束，保证错误输出可读。
+> `assert!` 的格式化参数使用与 `println!` 相同的语法，支持 `{}`、`{:?}`、`{:x}` 等格式说明符。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/macro.assert.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 
 ### 10.4 边界测试：所有权移动后的再次使用
 

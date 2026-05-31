@@ -9,7 +9,6 @@
 > **后置延伸**: [L2 Trait](../02_intermediate/01_traits.md) · [L4 分离逻辑](../04_formal/01_linear_logic.md) · [L3 并发](../03_advanced/01_concurrency.md)
 > **跨层映射**: L1→L4 借用规则 ↔ 线性逻辑 !A 规则 | L1→L3 借用 → Send/Sync
 > **定理链编号**: T-010 借用唯一性 → T-011 生命周期包含 → T-012 悬垂引用 [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html)]不可达
-
 > **层级**: L1 基础概念
 > **前置概念**: [Ownership](./01_ownership.md)
 > **后置概念**: [Lifetimes](./03_lifetimes.md) · [Slices](../01_foundation/04_type_system.md) · [Interior Mutability](../02_intermediate/03_memory_management.md)
@@ -100,6 +99,12 @@
     - [10.6 边界测试：slice 模式匹配与借用冲突（编译错误）](#106-边界测试slice-模式匹配与借用冲突编译错误)
   - [嵌入式测验](#嵌入式测验)
   - [实践](#实践)
+  - [🎯 嵌入式测验](#-嵌入式测验)
+    - [Q1: 可变引用和不可变引用的共存规则是什么？](#q1-可变引用和不可变引用的共存规则是什么)
+    - [Q2: 以下代码为什么报错？](#q2-以下代码为什么报错)
+    - [Q3: 什么是悬垂引用（Dangling Reference）？](#q3-什么是悬垂引用dangling-reference)
+    - [Q4: 何时应该使用 `clone()` 而非借用？](#q4-何时应该使用-clone-而非借用)
+    - [Q5: 以下代码的编译结果是什么？](#q5-以下代码的编译结果是什么)
   - [参考来源](#参考来源)
 
 ## 一、权威定义（Definition）
@@ -1473,7 +1478,7 @@ fn main() {
 <details>
 <summary>点击查看答案</summary>
 
-**错误**: `cannot borrow `s` as mutable because it is also borrowed as immutable`
+**错误**: `cannot borrow`s`as mutable because it is also borrowed as immutable`
 
 `r1` 是不可变引用，`r2` 是可变引用，二者在同一作用域内不能共存。即使 `r1` 在 `println!` 之后不再使用，编译器仍按作用域整体检查。
 
@@ -1568,7 +1573,7 @@ fn main() {
 <details>
 <summary>点击查看答案</summary>
 
-**编译错误**: `cannot borrow `data` as mutable because it is also borrowed as immutable`
+**编译错误**: `cannot borrow`data`as mutable because it is also borrowed as immutable`
 
 `first` 是对 `data[0]` 的不可变引用，`data.push(4)` 需要 `&mut data`。虽然 `first` 只指向第一个元素，`push` 可能重新分配整个 vector 的内存，导致 `first` 悬垂。
 
