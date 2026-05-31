@@ -1,16 +1,21 @@
 # Rust 知识体系失效分析树集（Fault Tree Analysis Collection）
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **Bloom 层级**: 元（Meta）
-> **定位**: 本文件建立 Rust 知识体系中的**标准故障树分析（FTA）**体系，将现有反例路径升级为工程安全标准的失效分析格式。每棵树从**顶事件**（系统级失效）出发，通过**与门/或门**分解为**中间事件**和**基本事件**，揭示失效的根因路径和补偿机制。
-> **对齐来源**: [IEC 61025 — 故障树分析标准] · [NASA FTA 手册] · [RustBelt POPL 2018 — 安全性定理的反面] · [The Rustonomicon — What Unsafe Rust Can Do] · [MIRI 未定义行为检测]
+> **定位**:
+> 本文件建立 Rust 知识体系中的**标准故障树分析（FTA）**体系，将现有反例路径升级为工程安全标准的失效分析格式。
+> 每棵树从**顶事件**（系统级失效）出发，通过**与门/或门**分解为**中间事件**和**基本事件**，揭示失效的根因路径和补偿机制。
+> **对齐来源**:
+> [IEC 61025 — 故障树分析标准] ·
+> [NASA FTA 手册] ·
+> [RustBelt POPL 2018 — 安全性定理的反面] ·
+> [The Rustonomicon — What Unsafe Rust Can Do] ·
+> [MIRI 未定义行为检测]
 > **符号约定**: ⬡ 顶事件 / ◇ 中间事件 / ○ 基本事件 / ∧ 与门 / ∨ 或门
 
 ---
 
 > **来源**: [IEC 61025 — *Fault Tree Analysis*]
->
 > **来源**: [NASA — *Fault Tree Handbook with Aerospace Applications*]
 > **来源**: [RustBelt (Jung et al., POPL 2018) — Safety Theorem & Counterexamples]
 > **来源**: [The Rustonomicon — *What Unsafe Rust Can Do*]

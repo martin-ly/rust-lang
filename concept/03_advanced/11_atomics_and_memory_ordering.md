@@ -10,7 +10,12 @@
 
 ---
 
-> **来源**: [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) · [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) · [Wikipedia — Memory Ordering](https://en.wikipedia.org/wiki/Memory_ordering)
+> **来源**:
+> [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) ·
+> [Rust Atomics and Locks](https://marabos.nl/atomics/) ·
+> [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·
+> [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) ·
+> [Wikipedia — Memory Ordering](https://en.wikipedia.org/wiki/Memory_ordering)
 
 ## 📑 目录
 
@@ -744,7 +749,17 @@ fn main() {
 }
 ```
 
-> **修正**: `Ordering::Relaxed` 是**最弱**的原子顺序：保证原子操作本身不撕裂，但不建立**happens-before**关系。两个线程分别 `Relaxed` store/load 同一变量，load 可能看到旧值——因为编译器/CPU 可能重排序。需要同步的场景：1) `Release`/`Acquire` 对（建立单向 happens-before）；2) `SeqCst`（全局总序，最强但最慢）；3) `AcqRel`（组合读写）。Rust 的内存模型与 C++20 一致（`std::memory_order`），但 Rust 要求显式指定 Ordering（无默认）。这与 Java 的 `volatile`（等价于 `SeqCst`）或 Go 的原子操作（类似 C++，但 API 更简单）不同——Rust 的原子 API 精确暴露硬件能力，开发者需理解内存模型。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] · [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
+> **修正**: `Ordering::Relaxed` 是**最弱**的原子顺序：保证原子操作本身不撕裂，但不建立**happens-before**关系。
+> 两个线程分别 `Relaxed` store/load 同一变量，load 可能看到旧值——因为编译器/CPU 可能重排序。
+> 需要同步的场景：
+>
+> 1) `Release`/`Acquire` 对（建立单向 happens-before）；
+> 2) `SeqCst`（全局总序，最强但最慢）；
+> 3) `AcqRel`（组合读写）。
+> Rust 的内存模型与 C++20 一致（`std::memory_order`），但 Rust 要求显式指定 Ordering（无默认）。
+> 这与 Java 的 `volatile`（等价于 `SeqCst`）或 Go 的原子操作（类似 C++，但 API 更简单）不同——Rust 的原子 API 精确暴露硬件能力，开发者需理解内存模型。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] ·
+> [来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)]
 
 ### 10.9 边界测试：match 分支返回类型不一致
 
@@ -765,12 +780,8 @@ fn main() {
 ## 参考来源
 
 > [来源: [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html)]
-
 > [来源: [C++ Memory Model — ISO/IEC 14882](https://www.iso.org/standard/83626.html)]
-
 > [来源: [RFC 1505 — Atomic Ordering](https://rust-lang.github.io/rfcs/1505-ordering-atomic-ops.html)]
-
 > [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
-
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

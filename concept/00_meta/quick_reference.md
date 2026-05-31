@@ -1,7 +1,6 @@
 # Rust 概念速查卡片（Quick Reference）
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 记忆 → 应用
 > **定位**：面试前/编码时的快速查阅手册。每个核心概念"一页纸"——定义 + 代码 + 错误码 + 关联概念。
 > **使用方式**：按 Ctrl+F 搜索概念名，或按字母序浏览。
@@ -78,8 +77,6 @@
   - [四、跨语言对照速查](#四跨语言对照速查)
 
 ## 一、核心概念速查（按字母序） [来源: 速查内容基于 Rust Reference / TRPL / Rustonomicon / RFCs; 概念定义与 concept/ 目录核心文件保持一致]
->
->
 
 > **[来源: Rust Standard Library / 2025; Rust Reference / 2025; TRPL / 2024]** 本速查表的所有概念定义均来源于 Rust 官方文档和学术论文。
 
@@ -724,7 +721,13 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 > **深入阅读**: 本速查的完整理论背景见 [`semantic_space.md`](./semantic_space.md) §4（等价表达的语义保持）；系统学习路径见 [`learning_guide.md`](./learning_guide.md)。
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Async Book](https://rust-lang.github.io/async-book/), [Cargo Book](https://doc.rust-lang.org/cargo/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/),
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/),
+> [Rust Standard Library](https://doc.rust-lang.org/std/),
+> [Rust Async Book](https://rust-lang.github.io/async-book/),
+> [Cargo Book](https://doc.rust-lang.org/cargo/)
 >
 > **速查来源索引**
 >
@@ -737,7 +740,8 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 > | Rust Async Book | [rust-lang.github.io/async-book](https://rust-lang.github.io/async-book/) |
 > | Cargo Book | [doc.rust-lang.org/cargo](https://doc.rust-lang.org/cargo/) |
 > | Wikipedia — PL Comparison | [en.wikipedia.org/wiki/Comparison_of_programming_languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) |
-> **权威来源对齐变更日志**: 2026-05-22 批量补充来源标注（Rust Reference、TRPL、Rustonomicon、标准库、Wikipedia 等） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-22 批量补充来源标注（Rust Reference、TRPL、Rustonomicon、标准库、Wikipedia 等）
+> [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)

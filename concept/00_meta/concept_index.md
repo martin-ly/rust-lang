@@ -1,7 +1,6 @@
 # 全局概念索引（Concept Index）
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 应用
 > **定位**：本文件是 `concept/` 知识体系的**倒排索引**，从概念名称快速定位到定义文件、交叉引用位置、Bloom 认知层级和语义链接关系。
 > **方法论对齐**: Wikipedia Infobox Pattern · Semantic Link Network · Knowledge Graph Indexing
@@ -9,7 +8,6 @@
 ---
 
 ## 📑 目录
->
 
 - [全局概念索引（Concept Index）](#全局概念索引concept-index)
   - [📑 目录](#-目录)

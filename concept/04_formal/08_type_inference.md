@@ -1,10 +1,8 @@
 # 类型推断：Hindley-Milner 算法与 Rust 的工业实现
->
-> **受众**: [研究者]
 
+> **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
-
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 HM 类型推断算法
@@ -14,7 +12,11 @@
 
 ---
 
-> **来源**: [Hindley 1969 — Principal Type-Schemes](https://doi.org/10.1093/comjnl/12.2.166) · [Milner 1978 — A Theory of Type Polymorphism](https://doi.org/10.1016/0022-0000(78)90014-4) · [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html) · [Wikipedia — Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) · [Rust RFC 438 — Type Inference](https://github.com/rust-lang/rfcs/pull/438)
+> **来源**: [Hindley 1969 — Principal Type-Schemes](https://doi.org/10.1093/comjnl/12.2.166) ·
+> [Milner 1978 — A Theory of Type Polymorphism](https://doi.org/10.1016/0022-0000(78)90014-4) ·
+> [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html) ·
+> [Wikipedia — Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) ·
+> [Rust RFC 438 — Type Inference](https://github.com/rust-lang/rfcs/pull/438)
 
 ## 📑 目录
 

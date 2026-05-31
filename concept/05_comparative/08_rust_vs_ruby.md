@@ -1,7 +1,6 @@
 # Rust vs Ruby：性能与表达力的两极
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust** 与 **Ruby** 的设计哲学——从动态类型的极致表达力到静态类型的编译期安全，揭示两种语言在Web开发、脚本编写和系统编程中的互补定位。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md) · [Rust vs Python](./07_rust_vs_python.md)

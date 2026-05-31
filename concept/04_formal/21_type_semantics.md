@@ -1,10 +1,8 @@
 # Type Semantics（类型语义）
->
-> **受众**: [研究者]
 
+> **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
-
 > **层次定位**: L4 形式化理论 / 类型语义子域 [来源: [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Rust 类型系统的语义表达能力
@@ -131,7 +129,15 @@ Progress + Preservation（类型安全）
 | `dyn Trait` | 存在类型 | `∃α. α × (α → TraitMethods)` | `let d: Box<dyn Debug> = ...` | ⚠️ 动态分发开销 |
 | `impl Trait` | 全称/存在混合 | 存在量化（返回位置）或全称量化（参数位置）| `fn f() -> impl Trait` | ✅ 零成本抽象 |
 
-> **洞察**: Rust 的类型系统是一个**多范式融合**：标量类型来自 SML/Haskell 的传统类型论；`&T/&mut T` 来自能力类型系统（Capability Types）；`Box<T>` 来自线性逻辑；`Option/Result` 来自代数数据类型 + 效应系统；`dyn/impl Trait` 来自存在/全称类型（System F-ω）。这种融合使 Rust 在表达力的丰富性和编译期保证的强度之间取得了独特平衡。[来源: [Pierce 2002, Ch.23-24](https://www.cis.upenn.edu/~bcpierce/tapl/)] · [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
+> **洞察**:
+> Rust 的类型系统是一个**多范式融合**：标量类型来自 SML/Haskell 的传统类型论；
+> `&T/&mut T` 来自能力类型系统（Capability Types）；
+> `Box<T>` 来自线性逻辑；
+> `Option/Result` 来自代数数据类型 + 效应系统；
+> `dyn/impl Trait` 来自存在/全称类型（System F-ω）。
+> 这种融合使 Rust 在表达力的丰富性和编译期保证的强度之间取得了独特平衡。
+> [来源: [Pierce 2002, Ch.23-24](https://www.cis.upenn.edu/~bcpierce/tapl/)] ·
+> [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]
 
 ---
 

@@ -12,7 +12,11 @@
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Traits](./01_traits.md)
 > **后置概念**: [Advanced Lifetimes](../01_foundation/03_lifetimes.md) · [GATs](../03_advanced/02_async.md) · [Const Generics [来源: [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)]]
-> **主要来源**: [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) · [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) · [Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming) · [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)
+> **主要来源**:
+> [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) ·
+> [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) ·
+> [Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming) ·
+> [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)
 
 ---
 
@@ -36,7 +40,6 @@
 ---
 
 ## 📑 目录
->
 
 - [Generics（泛型系统）](#generics泛型系统)
   - [📑 目录](#-目录)
@@ -1530,12 +1533,13 @@ impl Factory for WidgetFactory {
 
 ### 9.2 补充：`min_specialization` 的当前状态与使用
 
-> **[RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)** · **[Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844)** `min_specialization` 是 Rust 当前可用的 specialization 子集，限制为仅允许"更具体参数类型"的特化，禁止基于 trait bound 的特化。⚠️ nightly only。
+> **[RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)** ·
+> **[Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844)** `min_specialization` 是 Rust 当前可用的 specialization 子集，限制为仅允许"更具体参数类型"的特化，禁止基于 trait bound 的特化。⚠️ nightly only。
 
 #### 与 full specialization 的核心区别
 
 | **维度** | `min_specialization` | Full specialization（RFC 1210） |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | **稳定性** | nightly only | 未实现 |
 | **特化依据** | 仅参数类型具体度 | 参数类型 + trait bound |
 | **部分特化** | ❌ 不支持 | ✅ 支持（如 `Vec<T>` vs `T`） |

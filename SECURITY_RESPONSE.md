@@ -10,7 +10,7 @@
 ## 一、安全事件分级 (Severity Levels)
 
 | 级别 | 标准 | 响应时间 | 行动 |
-|:---|:---|:---:|:---|
+| :--- | :--- | :---: | :--- |
 | **P0 — Critical** | RUSTSEC `severity = critical`; 可导致 RCE/UAF/沙箱逃逸 | 24h | 立即隔离/降级依赖，发布修复，通知所有下游 |
 | **P1 — High** | RUSTSEC `severity = high`; 可导致 DoS/信息泄露/权限提升 | 72h | 优先升级依赖或应用补丁，更新 deny.toml |
 | **P2 — Medium/Low** | RUSTSEC `severity = medium/low`; 有限影响 | 1 周 | 纳入常规 `cargo update` 周期处理 |

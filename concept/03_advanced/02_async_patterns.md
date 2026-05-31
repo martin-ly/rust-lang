@@ -1,7 +1,6 @@
 # 异步模式：从 Future 到生产级并发
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析异步模式的状态机变换
@@ -11,7 +10,12 @@
 
 ---
 
-> **来源**: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Rust Book](https://rust-lang.github.io/async-book/) · [tokio.rs](https://tokio.rs/) · [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Wikipedia — Futures and Promises](https://en.wikipedia.org/wiki/Futures_and_promises)
+> **来源**:
+> [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
+> [Async Rust Book](https://rust-lang.github.io/async-book/) ·
+> [tokio.rs](https://tokio.rs/) ·
+> [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) ·
+> [Wikipedia — Futures and Promises](https://en.wikipedia.org/wiki/Futures_and_promises)
 
 ## 📑 目录
 
@@ -45,11 +49,8 @@
 ---
 
 ## 一、核心概念
->
->
 
 ### 1.1 Future 与状态机
->
 
 ```text
 Future 的本质:
@@ -746,7 +747,29 @@ impl AsyncTrait for MyStruct {
 fn main() {}
 ```
 
-> **修正**: **`async fn` in trait**（稳定于 1.75）：1) `trait T { async fn method(&self) -> i32; }` — trait 定义；2) `impl T for S { async fn method(&self) -> i32 { ... } }` — 实现。底层是 **RPITIT**（Return Position Impl Trait In Traits）：`async fn` 返回 `impl Future<Output = i32>`。限制：1) `async fn` 隐式捕获所有输入 lifetime；2) 不能混用 `async fn` 和返回具体 `Future` 类型；3) `dyn Trait` 不支持 `async fn`（返回类型大小未知）。`dyn Trait` 替代方案：1) `// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 宏（将 `async fn` 转为返回 `Pin<Box<dyn Future>>`）；2) `trait T { fn method(&self) -> impl Future<Output = i32>; }` + 手动 `Box::pin`（复杂）。这与 JavaScript 的 `async` 方法（接口中直接声明，无特殊限制）或 Kotlin 的 `suspend` 函数（类似，但编译器处理）不同——Rust 的 `async fn` in trait 是类型系统的重大扩展。[来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/21/async-fn-rpitit.html)] · [来源: [RPITIT](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)]
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **修正**:
+> **`async fn` in trait**（稳定于 1.75）：
+>
+> 1) `trait T { async fn method(&self) -> i32; }` — trait 定义；
+> 2) `impl T for S { async fn method(&self) -> i32 { ... } }` — 实现。
+> 底层是 **RPITIT**（Return Position Impl Trait In Traits）：`async fn` 返回 `impl Future<Output = i32>`。
+>
+> 限制：
+>
+> 1) `async fn` 隐式捕获所有输入 lifetime；
+> 2) 不能混用 `async fn` 和返回具体 `Future` 类型；
+> 3) `dyn Trait` 不支持 `async fn`（返回类型大小未知）。
+>
+> `dyn Trait` 替代方案：
+>
+> 1) `// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait]` 宏（将 `async fn` 转为返回 `Pin<Box<dyn Future>>`）；
+> 2) `trait T { fn method(&self) -> impl Future<Output = i32>; }` + 手动 `Box::pin`（复杂）。
+> 这与 JavaScript 的 `async` 方法（接口中直接声明，无特殊限制）或 Kotlin 的 `suspend` 函数（类似，但编译器处理）不同
+> ——Rust 的 `async fn` in trait 是类型系统的重大扩展。
+> [来源: [Async Fn In Traits](https://blog.rust-lang.org/2023/12/21/async-fn-rpitit.html)] ·
+> [来源: [RPITIT](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)]
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

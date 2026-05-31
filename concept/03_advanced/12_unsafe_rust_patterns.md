@@ -1,7 +1,6 @@
 # Unsafe Rust 模式：安全抽象的核心技术
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **unsafe 代码的工程模式**——从原始指针操作、内存布局控制到与 C 的互操作，揭示如何在 unsafe 边界内构建安全抽象。
 > **前置概念**: [Unsafe](./03_unsafe.md) · [FFI](./05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
@@ -9,7 +8,12 @@
 
 ---
 
-> **来源**: [Rust Nomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)
+> **来源**:
+> [Rust Nomicon](https://doc.rust-lang.org/nomicon/) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
+> [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
+> [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)
 
 ## 📑 目录
 
@@ -524,12 +528,6 @@ graph TD
 
 ## 权威来源索引
 
->
->
->
->
->
-
 > **补充来源**
 
 ## 十、边界测试：Unsafe Rust 模式的编译错误
@@ -573,7 +571,12 @@ impl Drop for SafeDrop {
 }
 ```
 
-> **修正**: 自定义 `Drop` 中的 unsafe 操作必须处理 panic 安全（panic safety）。若 `Drop` 中 panic（如 `dealloc` 失败），栈展开会调用其他值的 `Drop`，可能访问已释放内存。使用 `Option::take` 模式确保内存只释放一次，即使 `Drop` 被重复调用（如 panic 后）。这与 C++ 的异常安全（exception safety）基本保证、强保证、不抛异常分级类似。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> 自定义 `Drop` 中的 unsafe 操作必须处理 panic 安全（panic safety）。
+> 若 `Drop` 中 panic（如 `dealloc` 失败），栈展开会调用其他值的 `Drop`，可能访问已释放内存。
+> 使用 `Option::take` 模式确保内存只释放一次，即使 `Drop` 被重复调用（如 panic 后）。
+> 这与 C++ 的异常安全（exception safety）基本保证、强保证、不抛异常分级类似。
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.2 边界测试：`unsafe impl` 的 trait 契约违反（编译错误 / 运行时 UB）
 
@@ -606,7 +609,11 @@ struct ThreadSafe {
 unsafe impl Sync for ThreadSafe {} // 安全，因为 Mutex 保证同步
 ```
 
-> **修正**: `unsafe impl Sync` / `unsafe impl Send` 是 Rust 中最危险的操作之一——它告诉编译器"我保证此类型在多线程环境下是安全的"，但编译器**不验证**此保证。`RefCell` 内部使用非原子借用计数，多线程共享会导致数据竞争。正确的线程安全必须通过 `Mutex`、`RwLock`、原子类型等同步原语实现。`unsafe impl Sync` 仅在封装了底层同步机制时使用（如标准库的 `Mutex` 本身）。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**: `unsafe impl Sync` / `unsafe impl Send` 是 Rust 中最危险的操作之一——它告诉编译器"我保证此类型在多线程环境下是安全的"，但编译器**不验证**此保证。
+> `RefCell` 内部使用非原子借用计数，多线程共享会导致数据竞争。
+> 正确的线程安全必须通过 `Mutex`、`RwLock`、原子类型等同步原语实现。
+> `unsafe impl Sync` 仅在封装了底层同步机制时使用（如标准库的 `Mutex` 本身）。
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：自引用结构的 `Pin` 误用（编译错误/运行时 UB）
 
@@ -635,7 +642,18 @@ fn main() {
 }
 ```
 
-> **修正**: 自引用结构（字段 A 引用字段 B）在 Rust 中无法直接实现，因为 struct 是**可移动的**——赋值、传参、返回都可能改变内存地址，使自引用字段悬垂。`Pin<&mut T>` 是解决方案：`T` 被"固定"在内存中，不能移动（除非 `T: Unpin`）。正确实现：1) `new` 返回 `Pin<Box<SelfRef>>`；2) 使用 `unsafe` 设置自引用指针；3) 确保 `SelfRef: !Unpin`（通过 `std::marker::PhantomPinned`）。这是 Rust 异步生态的核心模式：async 状态机是自引用的（局部变量引用其他局部变量），`Pin` 保证状态机在 `.await` 点不被移动。与 C++ 的 `std::pin`（C++20，类似概念但无 `Unpin` 区分）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 Pin 是类型系统的原生组成部分。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-04-pin.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/pinning.html)]
+> **修正**:
+> 自引用结构（字段 A 引用字段 B）在 Rust 中无法直接实现，因为 struct 是**可移动的**——赋值、传参、返回都可能改变内存地址，使自引用字段悬垂。
+> `Pin<&mut T>` 是解决方案：`T` 被"固定"在内存中，不能移动（除非 `T: Unpin`）。
+> 正确实现：
+>
+> 1) `new` 返回 `Pin<Box<SelfRef>>`；
+> 2) 使用 `unsafe` 设置自引用指针；
+> 3) 确保 `SelfRef: !Unpin`（通过 `std::marker::PhantomPinned`）。
+> 这是 Rust 异步生态的核心模式：async 状态机是自引用的（局部变量引用其他局部变量），`Pin` 保证状态机在 `.await` 点不被移动。
+> 与 C++ 的 `std::pin`（C++20，类似概念但无 `Unpin` 区分）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 Pin 是类型系统的原生组成部分。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-04-pin.html)] ·
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/pinning.html)]
 
 ### 10.4 边界测试：`MaybeUninit` 的数组初始化模式（编译错误）
 
@@ -657,7 +675,19 @@ fn main() {
 }
 ```
 
-> **修正**: `MaybeUninit<T>` 是 Rust 中处理部分初始化结构的底层原语。数组 `[MaybeUninit<T>; N]` 允许逐个元素初始化，但编译器不追踪哪些元素已初始化——这是开发者的责任。常见错误：1) `assume_init` 未初始化元素；2) 对已 `assume_init`（移动）的元素再次读取；3) `drop` 时未区分已初始化和未初始化元素。安全封装：`arrayvec` crate 的 `ArrayVec`（追踪长度），`smallvec` 的 `SmallVec`。对于固定大小数组，手动追踪初始化状态是唯一选择。这与 C 的 `malloc` + 部分初始化（无追踪，完全信任开发者）或 C++ 的 `std::optional<T[]>`（无标准支持）不同——Rust 的 `MaybeUninit` 提供了类型安全的基础，但上层追踪仍需手工实现。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/uninitialized.html)]
+> **修正**: `MaybeUninit<T>` 是 Rust 中处理部分初始化结构的底层原语。
+> 数组 `[MaybeUninit<T>; N]` 允许逐个元素初始化，但编译器不追踪哪些元素已初始化——这是开发者的责任。
+> 常见错误：
+>
+> 1) `assume_init` 未初始化元素；
+> 2) 对已 `assume_init`（移动）的元素再次读取；
+> 3) `drop` 时未区分已初始化和未初始化元素。
+> 安全封装：`arrayvec` crate 的 `ArrayVec`（追踪长度），`smallvec` 的 `SmallVec`。
+> 对于固定大小数组，手动追踪初始化状态是唯一选择。
+> 这与 C 的 `malloc` + 部分初始化（无追踪，完全信任开发者）或 C++ 的 `std::optional<T[]>`（无标准支持）不同
+> ——Rust 的 `MaybeUninit` 提供了类型安全的基础，但上层追踪仍需手工实现。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] ·
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/uninitialized.html)]
 
 ### 10.5 边界测试：`std::ptr::read` 的重复读取（运行时 UB）
 
@@ -674,7 +704,19 @@ fn main() {
 }
 ```
 
-> **修正**: `std::ptr::read` 从指针位置按值读取，**复制所有权**（对非 `Copy` 类型）。同一位置的两次 `read` 产生两个拥有相同堆数据的所有者，drop 时双重释放。`read` 的使用前提：1) 指针有效且对齐；2) 读取后原位置不再使用（除非重新写入）；3) 不重复读取同一非 `Copy` 位置。安全替代：`ptr::copy`（移动，源位置失效）、`ptr::copy_nonoverlapping`（非重叠拷贝）、`Clone::clone_from_ptr`（手动克隆）。这与 C 的 `memcpy`（逐字节复制，无所有权概念）或 C++ 的 `std::uninitialized_copy`（类似 `read`，但范围操作）不同——Rust 的 `ptr::read` 在类型系统层面是"按值移动"，需谨慎使用。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/ptr/fn.read.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> **修正**:
+> `std::ptr::read` 从指针位置按值读取，**复制所有权**（对非 `Copy` 类型）。
+> 同一位置的两次 `read` 产生两个拥有相同堆数据的所有者，drop 时双重释放。
+> `read` 的使用前提：
+>
+> 1) 指针有效且对齐；
+> 2) 读取后原位置不再使用（除非重新写入）；
+> 3) 不重复读取同一非 `Copy` 位置。
+> 安全替代：`ptr::copy`（移动，源位置失效）、`ptr::copy_nonoverlapping`（非重叠拷贝）、`Clone::clone_from_ptr`（手动克隆）。
+> 这与 C 的 `memcpy`（逐字节复制，无所有权概念）或 C++ 的 `std::uninitialized_copy`（类似 `read`，但范围操作）不同
+> ——Rust 的 `ptr::read` 在类型系统层面是"按值移动"，需谨慎使用。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/ptr/fn.read.html)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 10.3 边界测试：`MaybeUninit` 的未初始化读取（运行时 UB）
 
@@ -690,7 +732,19 @@ fn main() {
 }
 ```
 
-> **修正**: `MaybeUninit<T>` 是 Rust 中处理**未初始化内存**的安全抽象：1) `uninit()` 创建未初始化值（不调用 `T::new()`）；2) `write(val)` 安全写入（`&mut` 保证唯一访问）；3) `assume_init()` **unsafe**，要求调用者保证已初始化，否则 UB。常见模式：堆栈上分配数组（`let mut buf = [MaybeUninit::<u8>::uninit(); 1024]`），填充后 `transmute` 为初始化数组。`MaybeUninit` 替代了已废弃的 `mem::uninitialized()`（后者读取未初始化值是 instant UB）。这与 C 的 `malloc` + `memcpy`（未初始化内存默认合法读取，但值不确定）或 C++ 的 `std::optional`（有状态跟踪）不同——Rust 的 `MaybeUninit` 将未初始化状态编码到类型系统，强制显式初始化。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/uninit.html)]
+> **修正**: `MaybeUninit<T>` 是 Rust 中处理**未初始化内存**的安全抽象：
+>
+> 1) `uninit()` 创建未初始化值（不调用 `T::new()`）；
+> 2) `write(val)` 安全写入（`&mut` 保证唯一访问）；
+> 3) `assume_init()` **unsafe**，要求调用者保证已初始化，否则 UB。
+>
+> 常见模式：
+> 堆栈上分配数组（`let mut buf = [MaybeUninit::<u8>::uninit(); 1024]`），填充后 `transmute` 为初始化数组。
+> `MaybeUninit` 替代了已废弃的 `mem::uninitialized()`（后者读取未初始化值是 instant UB）。
+> 这与 C 的 `malloc` + `memcpy`（未初始化内存默认合法读取，但值不确定）或 C++ 的 `std::optional`（有状态跟踪）不同
+> ——Rust 的 `MaybeUninit` 将未初始化状态编码到类型系统，强制显式初始化。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/uninit.html)]
 
 ### 10.4 边界测试：MaybeUninit 的未初始化内存读取（运行时 UB）
 
@@ -719,7 +773,15 @@ const fn foo(x: i32) -> i32 {
 fn main() {}
 ```
 
-> **修正**: **Const fn**：1) 函数体必须是编译期可计算的；2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **修正**:
+> **Const fn**：
+>
+> 1) 函数体必须是编译期可计算的；
+> 2) `Vec::new()` 在某些 Rust 版本中不是 `const fn`；
+> 3) 编译期限制逐步放宽（`const_mut_refs`、`const_vec_string` 等）。
+>
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

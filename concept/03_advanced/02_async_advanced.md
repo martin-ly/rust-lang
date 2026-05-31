@@ -783,7 +783,6 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 ---
 
 ### 8.12 `loom` 并发模型检测工具
->
 
 > **章节过渡**：异步代码的正确性不仅依赖类型系统，还依赖并发执行的时序。`loom` 通过穷举所有可能的线程交错（interleaving），在测试中发现数据竞争和死锁，是验证并发原语（如自定义 Mutex、Channel）的利器。
 

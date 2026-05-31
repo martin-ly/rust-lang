@@ -1,10 +1,8 @@
 # RustBelt & Verification Toolchain（RustBelt 与验证工具链）
->
-> **受众**: [研究者]
 
+> **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
-
 > **层次定位**: L4 形式化理论 / RustBelt 子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价安全性定理的假设边界
@@ -12,7 +10,6 @@
 > **后置延伸**: [L7 形式化方法](../07_future/02_formal_methods.md) · [L6 验证工具](../06_ecosystem/01_toolchain.md)
 > **跨层映射**: L4→L7 机械证明 → 自动化验证 | L4→L6 逻辑规则 → 工具实现
 > **定理链编号**: T-110 Iris 逻辑可靠性 → T-111 高阶幽灵状态 → T-112 类型系统 soundness
-
 > **层级**: L4 形式化理论
 > **前置概念**: [Ownership Formalization](./03_ownership_formal.md) · [Linear Logic](./01_linear_logic.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md) [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)

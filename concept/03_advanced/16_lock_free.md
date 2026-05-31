@@ -1,7 +1,6 @@
 # 无锁编程与内存模型
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入探讨 Rust 中的**无锁编程**——从原子操作到内存序，分析 lock-free 算法的内存安全保证与性能优势。
 > **前置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Atomics](./11_atomics_and_memory_ordering.md) · [Unsafe](../03_advanced/03_unsafe.md)
@@ -9,7 +8,12 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) · [Wikipedia — Lock-free](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.amazon.com/Art-Multiprocessor-Programming-Revised-Reprint/dp/0123973376)
+> **来源**:
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·
+> [Wikipedia — Lock-free](https://en.wikipedia.org/wiki/Non-blocking_algorithm) ·
+> [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.amazon.com/Art-Multiprocessor-Programming-Revised-Reprint/dp/0123973376)
 
 ## 📑 目录
 
@@ -636,7 +640,19 @@ fn read() -> Option<i32> {
 }
 ```
 
-> **修正**: `Release`/`Acquire` 内存序建立**happens-before 关系**：`Release` store 之前的所有写入对匹配的 `Acquire` load 可见。上述代码中，`node.value = 42` 在 `HEAD.store(Release)` 之前，因此 `HEAD.load(Acquire)` 后 `(*node).value` 必为 42。若使用 `Relaxed`：1) `HEAD.load` 可能看到非空指针；2) 但 `node.value` 的写入可能尚未对其他 CPU 可见；3) 读取到 0 或旧值。这是弱内存模型（ARM、RISC-V）上的真实问题，x86 的强模型通常掩盖此 bug（x86 的 loads/stores 自动是 Acquire/Release）。Rust 的原子类型默认 `SeqCst`（最强），但性能关键代码需正确选择较弱顺序。这与 C++ 的 `memory_order_release/acquire`（相同语义）或 Java 的 `volatile`（等价于 `SeqCst`）相同——内存序是并发编程的底层细节，错误选择导致难以复现的 bug。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html)]
+> **修正**:
+> `Release`/`Acquire` 内存序建立**happens-before 关系**：`Release` store 之前的所有写入对匹配的 `Acquire` load 可见。
+> 上述代码中，`node.value = 42` 在 `HEAD.store(Release)` 之前，因此 `HEAD.load(Acquire)` 后 `(*node).value` 必为 42。
+> 若使用 `Relaxed`：
+>
+> 1) `HEAD.load` 可能看到非空指针；
+> 2) 但 `node.value` 的写入可能尚未对其他 CPU 可见；
+> 3) 读取到 0 或旧值。这是弱内存模型（ARM、RISC-V）上的真实问题，x86 的强模型通常掩盖此 bug（x86 的 loads/stores 自动是 Acquire/Release）。
+>
+> Rust 的原子类型默认 `SeqCst`（最强），但性能关键代码需正确选择较弱顺序。
+> 这与 C++ 的 `memory_order_release/acquire`（相同语义）或 Java 的 `volatile`（等价于 `SeqCst`）相同——内存序是并发编程的底层细节，错误选择导致难以复现的 bug。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html)]
 
 ### 10.3 边界测试：ABA 问题与无锁栈的内存安全（运行时 UB）
 
@@ -695,12 +711,10 @@ fn main() {}
 ## 参考来源
 
 > [来源: [Herlihy & Shavit — Art of Multiprocessor Programming](https://dl.acm.org/doi/book/10.5555/2385452)]
-
 > [来源: [RFC 1543 — Compare and Exchange Weak](https://rust-lang.github.io/rfcs/1543-compare-exchange-weak.html)]
-
 > [来源: [LLVM AtomicRMW](https://llvm.org/docs/LangRef.html#atomicrmw-instruction)]
-
 > [来源: [Lock-free Algorithms — Michael Scott](https://dl.acm.org/doi/10.1145/248052.248106)]
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)

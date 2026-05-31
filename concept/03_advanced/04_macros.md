@@ -30,23 +30,15 @@
 
 <!-- 层级一致性: L3 理论根基 → L2 概念对比 → L1 工程实践 -->
 
->
 ## 一、权威定义（Definition）
->
 
->
 ### 1.1 Wikipedia 权威定义
->
 
 > **[Wikipedia: Macro (computer science)]** A macro (short for "macroinstruction") is a rule or pattern that specifies how a certain input sequence should be mapped to a replacement output sequence according to a defined procedure. The mapping process that instantiates a macro use into a specific sequence is known as macro expansion.
-
 > **[Wikipedia: Metaprogramming]** Metaprogramming is a programming technique in which computer programs have the ability to treat other programs as their data. It means that a program can be designed to read, generate, analyze or transform other programs, and even modify itself while running.
-
 > **[Wikipedia: Hygienic macro]** Hygienic macros are macros whose expansion is guaranteed not to cause the accidental capture of identifiers. A hygienic macro system preserves lexical scoping and ensures that binding structure is respected during macro expansion.
 
->
 ### 1.2 TRPL 官方定义
->
 
 > **[TRPL: Ch19.5]** Macros are a way of writing code that writes other code, which is known as metaprogramming. In Appendix C, we discuss the derive attribute, which generates an implementation of various traits for you. We've also used the `println!` and `vec!` macros throughout the book. All of these macros expand to produce more code than the code you've written manually.
 
@@ -54,7 +46,6 @@
 > **[Rust Reference: Macros]** Rust 宏在编译期展开，展开后的代码再进行类型检查，因此宏本身不感知类型，但生成代码受类型系统约束。✅ 已验证
 
 ### 1.3 形式化定义
->
 
 宏对应**编译期元编程**（compile-time metaprogramming），在语法树层面操作：
 
@@ -76,10 +67,8 @@ Rust 宏 hygiene:
 <!-- 层级一致性: L2 概念分类矩阵 — 横向对比四种宏类型，纵向对比多语言元编程机制 -->
 
 ## 二、概念属性矩阵（Attribute Matrix）
->
 
 ### 2.1 宏类型对比矩阵
->
 
 | **维度** | **macro_rules!** | **Derive 宏** | **属性宏** | **函数宏** |
 |:---|:---|:---|:---|:---|
@@ -2201,14 +2190,12 @@ fn main() {}
 ## 参考来源
 
 > [来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)]
-
 > [来源: [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html)]
-
 > [来源: [Rust By Example — Macros](https://doc.rust-lang.org/rust-by-example/macros.html)]
-
 > [来源: [proc-macro2 crate](https://docs.rs/proc-macro2/)]
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Standard Library](https://doc.rust-lang.org/std/)
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## `expr` → `cfg` 迁移（Rust 1.96）

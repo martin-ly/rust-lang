@@ -1,7 +1,6 @@
 # Rust vs Java：系统编程与托管运行时的范式对比
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 从**内存模型**、**并发语义**、**类型系统**和**运行时架构**四个维度，系统对比 Rust 与 Java 的设计哲学差异，分析两种范式在系统编程、云原生和嵌入式场景的适用边界。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Type System](../01_foundation/04_type_system.md)

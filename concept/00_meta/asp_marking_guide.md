@@ -8,7 +8,6 @@
 ---
 
 > **来源**: [Microsoft RustTraining — github.com/microsoft/RustTraining]
->
 > **来源**: [arxiv 2604.06331v1 — *Knowledge Markers (A/S/P) in Programming Education*]
 > **来源**: [Krathwohl, D.R. (2002) — *A Revision of Bloom's Taxonomy: An Overview*]
 > **来源**: [Bloom, B.S. et al. (2001) — *Taxonomy of Educational Objectives*]

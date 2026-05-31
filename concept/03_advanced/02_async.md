@@ -1,7 +1,6 @@
 # Async/Await（异步编程）
->
+
 > **受众**: [专家]
->
 > **层次定位**: L3 高级概念 / 异步子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
@@ -9,12 +8,21 @@
 > **后置延伸**: [L4 异步语义形式化](../04_formal/03_ownership_formal.md) · [L6 Tokio](../06_ecosystem/03_core_crates.md) · [L7 效果系统](../07_future/04_effects_system.md)
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → T-052 async/await 转换正确性
-
 > **层级**: L3 高级概念
-> **层级一致性**: 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Error Handling](../02_intermediate/04_error_handling.md)
+> **层级一致性**:
+> 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。
+> 前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。
+> **前置概念**:
+> [Ownership](../01_foundation/01_ownership.md) ·
+> [Lifetimes](../01_foundation/03_lifetimes.md) ·
+> [Traits](../02_intermediate/01_traits.md) ·
+> [Generics](../02_intermediate/02_generics.md) ·
+> [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [Pin/Unpin] · [Streams]
-> **主要来源**: [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) · [RFC 2394] · [RFC 2349]
+> **主要来源**:
+> [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
+> [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) ·
+> [RFC 2394] · [RFC 2349]
 
 ---
 
@@ -173,28 +181,20 @@ Step 6: "什么时候会阻塞？"
 > **章节过渡**：在深入 Rust 的 async/await 之前，需先建立跨语言的语义坐标系。以下定义从 Wikipedia 的通用概念出发，收敛到 Rust 官方文档的精确语义，最终形式化为状态机与 trait 系统。三层定义形成"宽泛→精确→可执行"的漏斗。
 
 ### 1.1 Wikipedia 权威定义
->
 
 > **[Wikipedia: Asynchronous programming]** Asynchronous programming is a means of parallel programming in which a unit of work runs separately from the main application thread and notifies the calling thread of its completion, failure or progress. It is a programming paradigm that enables non-blocking operations.
-
 > **[Wikipedia: Coroutine]** Coroutines are computer program components that generalize subroutines for non-preemptive multitasking, by allowing execution to be suspended and resumed. Coroutines are well-suited for implementing familiar program components such as cooperative tasks, exceptions, event loops, iterators, infinite lists and pipes.
-
 > **[Wikipedia: Futures and promises]** Futures and promises originated in functional programming and related paradigms (such as logic programming) to decouple a value (a future) from how it was computed (a promise). A future is a read-only placeholder view of a variable, while a promise is a writable, single-assignment container which sets the value of the future.
 
 ### 1.2 官方文档定义
->
 
 > **[Async Book]** Asynchronous code allows us to run multiple tasks concurrently on the same OS thread. In Rust, asynchronous code is lazy: it does nothing until it is actively executed by calling `.await`.
-
 > **[TRPL: Ch17]** A future is an asynchronous computation that can produce a value. `async fn` returns a future. When you call an `async fn`, it returns a future that is a suspended computation, not the result. Futures are lazy: they don't do any work until you await them.
-
 > **[Rust Reference: Async await]** `async fn` 被编译器转换为返回 `impl Future<Output = T>` 的函数，`.await` 被转换为对 `Future::poll` 的循环调用。✅ 已验证
 > **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。 ✅ 已验证
-
 > **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on RFC 2394, with the `Pin` type introduced in RFC 2349 to support self-referential async state machines. ✅ 已验证
 
 ### 1.3 形式化定义
->
 
 `async/await` 可以形式化为**基于状态机的协程**（coroutines）或**可恢复函数**（resumable functions）：
 
@@ -228,7 +228,6 @@ Poll 类型:
 ## 二、概念属性矩阵（Attribute Matrix）
 
 > **章节过渡**：定义之后需辨析 async 在并发光谱中的精确位置。以下矩阵将 async 与线程、并行对比，澄清"异步≠并行≠并发"的常见误解；随后给出 Future 组合子与运行时选型矩阵，为工程决策提供依据。
-
 > **[Wikipedia: Async/await]** Rust's `async/await` draws inspiration from C# 5.0 (2012) and ECMAScript 2017 (JavaScript), but Rust compiles async blocks to zero-cost state machines rather than runtime task objects. ✅ 已验证
 
 ### 2.1 异步 vs 并发 vs 并行对比矩阵

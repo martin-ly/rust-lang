@@ -1,7 +1,6 @@
 # Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **层级**: L5 对比分析
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析多语言类型系统谱系

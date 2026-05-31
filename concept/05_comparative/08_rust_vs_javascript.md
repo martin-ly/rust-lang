@@ -1,7 +1,6 @@
 # Rust vs JavaScript：系统编程与脚本执行的范式差异
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 对比分析 **Rust**（编译型、强类型、内存安全）与 **JavaScript**（解释型、动态类型、事件驱动）在语言语义、运行时模型、异步处理和生态工具链四个维度的本质差异，特别关注 WASM 作为两者交汇点的作用。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md)
@@ -9,7 +8,13 @@
 
 ---
 
-> **来源**: [ECMAScript Specification](https://tc39.es/ecma262/) · [MDN — JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [TRPL](https://doc.rust-lang.org/book/) · [WASM Specification](https://webassembly.github.io/spec/) · [Rust and WASM](https://rustwasm.github.io/book/) · [V8 Blog](https://v8.dev/blog)
+> **来源**:
+> [ECMAScript Specification](https://tc39.es/ecma262/) ·
+> [MDN — JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) ·
+> [TRPL](https://doc.rust-lang.org/book/) ·
+> [WASM Specification](https://webassembly.github.io/spec/) ·
+> [Rust and WASM](https://rustwasm.github.io/book/) ·
+> [V8 Blog](https://v8.dev/blog)
 
 ## 📑 目录
 

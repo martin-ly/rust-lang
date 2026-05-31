@@ -1,7 +1,6 @@
 # Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **定位**: 本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。
 > **原则**: 不做"并发编程教程"，聚焦"Rust 的执行模型在数学上与什么同构、与什么不同构、同构的精确条件是什么"。
 > **对齐来源**: [Rust Async Book] · [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] · [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]

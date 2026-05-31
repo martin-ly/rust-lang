@@ -1,12 +1,11 @@
 # Concept Audit Guide（概念审计指南）
->
-> **受众**: [专家]
 
+> **受众**: [专家]
 > **Bloom 层级**: 应用 → 评价
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×Eva — 评价概念文件质量
 
-### 10.4 边界测试：代码块标记的 `compile_fail` 与 `no_run` 的误用（读者误导）
+## 10.4 边界测试：代码块标记的 `compile_fail` 与 `no_run` 的误用（读者误导）
 
 ```rust,ignore
 /// ```rust,compile_fail

@@ -1,7 +1,6 @@
 # Rust 安全保证的边界条件全景（Safety Boundary Panorama）
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **定位**: 本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的"安全 ⇄ 不安全"边界地图。
 > **方法论对齐**: 反事实推理 · 边界测试 · 知识库一致性 (Torchiano et al. 2018)
 > **对应**: 所有 L1-L4 文件的"反命题与边界分析"章节的**全局汇总**
@@ -22,20 +21,15 @@
 >
 
 ### 1.1 Wikipedia 权威定义
->
 
 > **[Wikipedia: Memory safety]** Memory safety is the state of being protected from various software bugs and security vulnerabilities when dealing with memory access, such as buffer overflows and dangling pointers.
 > **来源**: <https://en.wikipedia.org/wiki/Memory_safety>
-
 > **[Wikipedia: Undefined behavior]** Undefined behavior is the result of executing computer code whose behavior is not prescribed by the language specification to which the code can adhere.
 > **来源**: <https://en.wikipedia.org/wiki/Undefined_behavior>
-
 > **[Wikipedia: Type safety]** Type safety is the extent to which a programming language discourages or prevents type errors.
 > **来源**: <https://en.wikipedia.org/wiki/Type_safety>
-
 > **[Wikipedia: Race condition]** A race condition is the condition of a system where the system's substantive behavior is dependent on the sequence or timing of other uncontrollable events.
 > **来源**: <https://en.wikipedia.org/wiki/Race_condition>
-
 > **[Wikipedia: Deadlock]** A deadlock is a state in which each member of a group is waiting for another member, including itself, to take action.
 > **来源**: <https://en.wikipedia.org/wiki/Deadlock>
 
