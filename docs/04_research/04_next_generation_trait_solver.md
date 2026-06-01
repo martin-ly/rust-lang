@@ -1,4 +1,6 @@
 # Next-generation Trait Solver 深度研究
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)

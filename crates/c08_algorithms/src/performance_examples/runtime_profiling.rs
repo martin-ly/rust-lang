@@ -1,5 +1,5 @@
 //! 运行时性能分析实践示例
-//! runtime performance analyze example
+//! Run performanceanalysispractice
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
@@ -23,7 +23,7 @@ impl SimpleProfiler {
     }
 
     /// 测量函数执行时间
-    /// function time
+    /// functionexecution time
     pub fn measure<F, T>(&mut self, name: &str, f: F) -> T
     where
         F: FnOnce() -> T,
@@ -41,7 +41,7 @@ impl SimpleProfiler {
     }
 
     /// 获取平均执行时间
-    /// time
+    /// Get executiontime
     pub fn get_average_time(&self, name: &str) -> Option<Duration> {
         self.measurements.get(name).map(|durations| {
             let total: Duration = durations.iter().sum();
@@ -95,18 +95,19 @@ impl MemoryMonitor {
     }
 
     /// 开始监控
+    /// Start monitoring
     pub fn start_monitoring(&mut self) {
         self.initial_usage = Some(0);
     }
 
     /// 获取当前内存使用（模拟）
-    /// when before memory （）
+    /// Get currentmemoryuse
     pub fn get_current_usage(&self) -> Option<usize> {
         Some(1024 * 1024) // 模拟1MB
     }
 
     /// 计算内存增长
-    /// memory
+    /// Compute memorylong
     pub fn calculate_growth(&self) -> Option<usize> {
         if let Some(initial) = self.initial_usage {
             self.get_current_usage().map(|current| current - initial)
@@ -155,6 +156,7 @@ impl MetricsCollector {
     }
 
     /// 获取计数器值
+    /// Get value
     pub fn get_counter(&self, name: &str) -> Option<u64> {
         self.counters.get(name).copied()
     }

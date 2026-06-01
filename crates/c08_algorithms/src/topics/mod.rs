@@ -4,13 +4,13 @@
 //! 本库按照算法主题进行组织，每个主题包含：
 //! this library algorithm organize ，：
 //! - 同步实现
-//! - synchronous
+//! - synchronous implementation
 //! - 并行实现（使用 Rayon）
 //! - parallelism （ Rayon）
 //! - 异步实现（使用 Tokio）
 //! - async （ Tokio）
 //! - 形式化验证和证明
-//! - and
+//! - formalverify proof
 //! - 完整的文档和注释
 //! - complete and
 // 基础算法主题
@@ -37,18 +37,18 @@ pub mod sorting;
 // pub mod async_algorithms;
 
 /// 算法库版本信息
-/// algorithm library this
+/// algorithmlibraryversion information
 pub const VERSION: &str = "0.2.0";
 pub const RUST_VERSION: &str = "1.90";
 
 /// 获取库版本信息
-/// library this
+/// Get library version info
 pub fn get_version() -> &'static str {
     VERSION
 }
 
 /// 获取支持的 Rust 版本
-/// Rust this
+/// Get support Rust version
 pub fn get_rust_version() -> &'static str {
     RUST_VERSION
 }
@@ -58,13 +58,13 @@ pub fn get_rust_version() -> &'static str {
 #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub enum AlgorithmCategory {
     /// 排序算法
-    /// sorting algorithm
+    /// sort algorithm
     Sorting,
     /// 搜索算法
-    /// searching algorithm
+    /// Search algorithm
     Searching,
     /// 图论算法
-    /// algorithm
+    /// graph algorithm
     GraphTheory,
     /// 动态规划
     /// dynamic programming
@@ -100,11 +100,12 @@ pub enum AlgorithmCategory {
     /// async algorithm
     AsyncAlgorithms,
     /// 形式化验证
+    /// formal verification
     FormalVerification,
 }
 
 /// 算法复杂度类型
-/// algorithm complex type
+/// algorithmcomplexity type
 #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub enum ComplexityType {
     /// 时间复杂度
@@ -148,24 +149,24 @@ pub struct AlgorithmInfo {
 }
 
 /// 实现类型
-/// type
+/// implementation type
 #[derive(Debug, Clone, PartialEq, Eq, Hash, serde::Serialize, serde::Deserialize)]
 pub enum ImplementationType {
     /// 同步实现
-    /// synchronous
+    /// synchronous implementation
     Synchronous,
     /// 并行实现
-    /// parallelism
+    /// parallel implementation
     Parallel,
     /// 异步实现
-    /// async
+    /// async implementation
     Asynchronous,
     /// 混合实现
     Hybrid,
 }
 
 /// 算法性能基准测试结果
-/// algorithm Performance benchmark result
+/// algorithmperformancetest result
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct BenchmarkResult {
     pub algorithm_name: String,
@@ -178,7 +179,7 @@ pub struct BenchmarkResult {
 }
 
 /// 算法库统计信息
-/// algorithm library
+/// algorithmlibrary information
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct LibraryStats {
     pub total_algorithms: usize,
@@ -188,7 +189,7 @@ pub struct LibraryStats {
 }
 
 /// 获取算法库统计信息
-/// algorithm library
+/// Get algorithmlibraryinformation
 pub fn get_library_stats() -> LibraryStats {
     // 这里会根据实际实现的算法数量来填充统计信息
     // 暂时返回基础结构
@@ -201,7 +202,7 @@ pub fn get_library_stats() -> LibraryStats {
 }
 
 /// 获取所有算法信息
-/// all algorithm
+/// Get hasalgorithminformation
 pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
     vec![
         // 排序算法
@@ -259,7 +260,7 @@ pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
 }
 
 /// 搜索算法
-/// searching algorithm
+/// Search algorithm
 pub fn search_algorithms(query: &str) -> Vec<AlgorithmInfo> {
     let query_lower = query.to_lowercase();
     get_all_algorithms()
@@ -276,7 +277,7 @@ pub fn search_algorithms(query: &str) -> Vec<AlgorithmInfo> {
 }
 
 /// 根据分类获取算法
-/// according to classification algorithm
+/// get algorithm
 pub fn get_algorithms_by_category(category: AlgorithmCategory) -> Vec<AlgorithmInfo> {
     get_all_algorithms()
         .into_iter()
@@ -323,7 +324,7 @@ impl AlgorithmBenchmark {
     }
 
     /// 获取平均执行时间
-    /// time
+    /// Get executiontime
     pub fn get_average_time(&self, name: &str) -> Option<std::time::Duration> {
         self.results.get(name).map(|results| {
             let total: std::time::Duration = results.iter().map(|r| r.execution_time).sum();

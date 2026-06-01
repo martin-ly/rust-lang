@@ -2,12 +2,12 @@
 //! Rust 1.95 feature —— algorithm scenario
 //!
 //! # 概述
-//! #
+//! # Overview
 //!
 //! Rust 1.95 为算法设计带来的增强：
 //! Rust 1.95 as algorithm design ：
 //! - **`core::range::RangeInclusive`** — 闭区间算法、区间树
-//! - **`if let` guards** — 搜索与排序中的条件匹配
+//! - **`core::range::RangeInclusive`** algorithm tree
 //! - **`if let` guards** — and ordering in condition
 //! - **`Atomic*::update`** — 并发算法的无锁计数器
 //! - **`Atomic*::update`** — concurrency algorithm lock-free
@@ -70,7 +70,7 @@ impl RangeAlgorithmExamples {
 // ============================================================================
 
 /// # 条件搜索模式
-/// # condition
+/// # search pattern
 ///
 /// `if let` guards 在搜索和过滤算法中提供更精确的控制流。
 /// `if let` guards in and algorithm in stream 。
@@ -101,7 +101,7 @@ impl SearchAlgorithmExamples {
 // ============================================================================
 
 /// # 并发算法中的原子操作
-/// # concurrency algorithm in atomic operation
+/// # concurrentalgorithmatomic operation
 ///
 /// 并行算法的统计和协调。
 /// parallel algorithm and 。
@@ -132,7 +132,7 @@ impl ConcurrentAlgorithmExamples {
 // ============================================================================
 
 /// # 算法边界路径优化
-/// # algorithm edge optimization
+/// # algorithmedgepath optimization
 ///
 /// 算法中很少触发的边界情况。
 /// algorithm in edge situation 。
@@ -140,7 +140,7 @@ pub struct AlgorithmColdPathExamples;
 
 impl AlgorithmColdPathExamples {
     /// 数组访问：越界为冷路径
-    /// ：as
+    /// array path
     pub fn safe_get<T: Clone>(arr: &[T], index: usize) -> Option<T> {
         if index < arr.len() {
             Some(arr[index].clone())
@@ -151,7 +151,7 @@ impl AlgorithmColdPathExamples {
     }
 
     /// 除法：除零为冷路径
-    /// ：as
+    /// zero path
     pub fn safe_divide(a: i32, b: i32) -> Option<i32> {
         if b != 0 {
             Some(a / b)

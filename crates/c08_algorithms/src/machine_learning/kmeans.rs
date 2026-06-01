@@ -1,8 +1,8 @@
 //! K-means 聚类算法实现
-//! K-means algorithm
+//! K-means algorithm implementation
 //!
 //! 本模块提供了 K-means 聚类算法的基础实现
-//! This module provides K-means algorithm foundation
+//! This module provides K-means algorithmimplementation
 use super::*;
 use rand::RngExt;
 
@@ -22,12 +22,13 @@ pub struct KMeans {
     /// 收敛阈值
     tolerance: f64,
     /// 是否已训练
+    /// Whether trained
     is_fitted: bool,
 }
 
 impl KMeans {
     /// 创建新的 K-means 聚类器
-    /// K-means
+    /// Create new K-means
     pub fn new(k: usize) -> Self {
         Self {
             k,
@@ -45,19 +46,21 @@ impl KMeans {
     }
 
     /// 设置最大迭代次数
-    /// maximum
+    /// Set maximum
     pub fn max_iterations(mut self, max_iter: usize) -> Self {
         self.max_iterations = max_iter;
         self
     }
 
     /// 设置收敛阈值
+    /// Set value
     pub fn tolerance(mut self, tol: f64) -> Self {
         self.tolerance = tol;
         self
     }
 
     /// 计算欧几里得距离
+    /// Compute Euclidean distance
     fn euclidean_distance(a: &DataPoint, b: &DataPoint) -> f64 {
         a.iter()
             .zip(b.iter())

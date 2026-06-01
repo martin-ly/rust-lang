@@ -2,7 +2,7 @@
 //! # Rust 1.96.0 feature demonstration module （async ）
 //!
 //! 本模块展示 Rust 1.96.0 在异步编程中的关键新 API：
-//! This module demonstrates Rust 1.96.0 in async in key API：
+//! This module demonstrates Rust 1.96.0 asynckeynew API
 //! - `core::range::Range` — `Copy` 语义，适用于异步任务分批范围
 //! - `core::range::Range` — `Copy` ，async task scope
 //! - `std::assert_matches!` / `debug_assert_matches!` — 异步 Result/Option 模式断言
@@ -45,7 +45,7 @@ impl AsyncTaskBatcher {
     }
 
     /// 计算给定批次范围的总任务数。
-    /// scope task 。
+    /// Compute task
     pub fn total_in_ranges(ranges: &[core::range::Range<usize>]) -> usize {
         ranges.iter().map(|r| r.end - r.start).sum()
     }
@@ -95,7 +95,7 @@ impl AsyncRuntimeConfig {
     }
 
     /// 获取配置摘要。
-    /// summary 。
+    /// Get configuration
     pub fn summary(&self) -> String {
         format!(
             "max_concurrency={}, batch_size={}, timeout_ms={}",
@@ -168,7 +168,7 @@ pub fn check_async_invariants(state: AsyncState) {
 // ============================================================================
 
 /// 运行 Rust 1.96 异步特性演示
-/// Run Rust 1.96 async feature demonstration
+/// Run Rust 1.96 asyncfeatures
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
     println!("   Rust 1.96.0 异步特性演示");
@@ -187,7 +187,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取特性信息
-/// feature
+/// Get featuresinformation
 pub fn get_rust_196_async_info() -> String {
     "Rust 1.96.0 异步特性:\n- core::range::Range { start, end } — Copy 语义，异步任务分批\n- \
      LazyLock::from(value) — 异步运行时配置（非 const）\n- assert_matches! / debug_assert_matches! \

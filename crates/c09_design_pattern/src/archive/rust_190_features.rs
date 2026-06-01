@@ -2,10 +2,10 @@
 //! Rust 1.90 / Edition 2024 feature example (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//! ⚠️ **this ** - this as reference
+//! ⚠️ **Historical Version File** - This file is retained for historical reference only
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
+//! **Currently Recommended Version**: Rust 1.92.0+ | For latest features, please refer to `rust_192_features.rs`
 pub mod highlights {
     /// 展示 never 类型在不可达终止函数中的使用
     /// never type in function in
@@ -66,9 +66,10 @@ pub mod gats_demo {
 }
 
 /// RPITIT（在 trait 方法中返回 impl Trait）示例
+/// RPITIT trait method impl Trait example
 pub mod rpitit_demo {
     /// 文本源：提供按词迭代视图
-    /// this ：
+    /// provide graph
     pub trait TextSource {
         /// 在 trait 方法中返回位置 impl Iterator（RPITIT）
         fn words<'a>(&'a self) -> impl Iterator<Item = &'a str> + 'a;
@@ -110,7 +111,7 @@ pub mod rpitit_demo {
 }
 
 /// dyn upcasting（子 trait 到父 trait 的动态上行转型）示例
-/// dyn upcasting（ trait to trait on ）example
+/// dyn upcasting trait trait dynamicupper example
 pub mod dyn_upcasting_demo {
     pub trait Logger {
         fn log(&self, msg: &str) -> String;

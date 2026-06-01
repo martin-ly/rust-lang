@@ -1,5 +1,6 @@
 # Miri 集成总结报告
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 
@@ -8,7 +9,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Miri 集成总结报告](#miri-集成总结报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [完成的工作](#完成的工作)
     - [1. Miri 配置](#1-miri-配置)
     - [2. Miri 测试文件](#2-miri-测试文件)
@@ -290,11 +291,8 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ## 权威来源索引
 
 > **[来源: Wikipedia - Undefined Behavior]**
-
 > **[来源: Miri Documentation]**
-
 > **[来源: Rust Reference - Miri]**
-
 > **[来源: RFC 2585 - Unsafe Code Guidelines]**
 
 ---

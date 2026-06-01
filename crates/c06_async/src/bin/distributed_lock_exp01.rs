@@ -4,7 +4,7 @@ use tokio::sync::Mutex;
 use tokio::time::sleep;
 
 /// 模拟分布式锁实现
-/// distribution lock
+/// distributed implementation
 /// 在实际生产环境中，这通常基于 Redis、ZooKeeper 或 etcd
 /// in actual environment in ， Redis 、ZooKeeper or etcd
 #[derive(Debug)]
@@ -27,7 +27,7 @@ impl DistributedLock {
     }
 
     /// 尝试获取锁
-    /// lock
+    /// Try to acquire lock
     async fn try_acquire(&mut self) -> bool {
         // 模拟网络延迟和竞争
         sleep(Duration::from_millis(rand::random::<u64>() % 100)).await;
@@ -80,7 +80,7 @@ impl DistributedLock {
 }
 
 /// 分布式锁管理器
-/// distribution lock
+/// distributed manager
 struct LockManager {
     locks: Arc<Mutex<Vec<DistributedLock>>>,
 }
@@ -93,7 +93,7 @@ impl LockManager {
     }
 
     /// 获取指定资源的锁
-    /// lock
+    /// Get resource
     async fn acquire_lock(&self, resource: &str, ttl: Duration) -> Option<String> {
         let mut lock = DistributedLock::new(resource.to_string(), ttl);
 
@@ -119,7 +119,7 @@ impl LockManager {
     }
 
     /// 获取所有活跃锁的状态
-    /// all lock state
+    /// Get hasactivestatus
     async fn get_locks_status(&self) -> Vec<(String, String, bool)> {
         let locks = self.locks.lock().await;
         locks

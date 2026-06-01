@@ -1,8 +1,8 @@
 # Docs目录重组完成报告
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)
-
 > **重组日期**: 2026-03-18
 > **状态**: ✅ 完成
 
@@ -11,20 +11,19 @@
 ## 📑 目录
 
 - [Docs目录重组完成报告](#docs目录重组完成报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [重组成果](#重组成果)
     - [最终docs结构](#最终docs结构)
     - [重组前后对比](#重组前后对比)
     - [文档分类](#文档分类)
-      - [🔬 生态与权威 (3个)](#生态与权威-3个)
-      - [🚀 学习与路径 (4个)](#学习与路径-4个)
-      - [📝 迁移与规划 (2个)](#迁移与规划-2个)
-      - [📖 索引与标准 (3个)](#索引与标准-3个)
+      - [🔬 生态与权威 (3个)](#-生态与权威-3个)
+      - [🚀 学习与路径 (4个)](#-学习与路径-4个)
+      - [📝 迁移与规划 (2个)](#-迁移与规划-2个)
+      - [📖 索引与标准 (3个)](#-索引与标准-3个)
   - [归档文件](#归档文件)
   - [导航体验](#导航体验)
     - [快速入口](#快速入口)
   - [状态](#状态)
-  - ✅ **重组完成** - docs目录已清晰组织
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -127,6 +126,7 @@ docs/
 ## 状态
 
 ✅ **重组完成** - docs目录已清晰组织
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -153,17 +153,10 @@ docs/
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

@@ -1,5 +1,5 @@
 //! # 性能优化模块
-//! # performance optimization module
+//! # performanceoptimization module
 //!
 //! 本模块提供算法性能优化的工具和方法。
 //! This module provides algorithm performance optimization tool and method 。

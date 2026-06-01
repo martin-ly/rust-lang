@@ -1,14 +1,14 @@
 /// 使用Rust 1.89新特性优化的享元模式实现
-/// Rust 1.89feature optimization flyweight
+/// useRust 1.89newfeaturesoptimizationpattern implementation
 ///
 /// 特性：
 /// feature ：
 /// - 利用数组与Vec转换优化数据结构
 /// - and Vecconversion optimization data structure
 /// - 使用更高效的内存管理策略
-/// - efficient memory strategy
+/// - useefficientmemorymanagement strategy
 /// - 支持批量操作和缓存优化
-/// - and optimization
+/// - supportoperation optimization
 use std::collections::HashMap;
 use std::sync::Arc;
 
@@ -81,7 +81,7 @@ impl OptimizedFlyweightFactory {
     }
 
     /// 批量创建享元对象，利用数组转换优化
-    /// flyweight to ，conversion optimization
+    /// createobjectarrayconversion optimization
     pub fn batch_create_flyweights(
         &mut self,
         specs: &[(String, String)],
@@ -98,7 +98,7 @@ impl OptimizedFlyweightFactory {
     }
 
     /// 获取所有享元对象的统计信息
-    /// all flyweight to
+    /// Get hasobjectinformation
     pub fn get_statistics(&self) -> (usize, Vec<u32>) {
         let count = self.flyweights.len();
         let ids: Vec<u32> = self.flyweights.values().map(|f| f.get_id()).collect();
@@ -106,7 +106,7 @@ impl OptimizedFlyweightFactory {
     }
 
     /// 返回位置 impl Trait：按 ID 升序返回享元 ID 的只读迭代器
-    /// position impl Trait： ID flyweight ID
+    /// impl Trait ID ID iterator
     pub fn iter_ids(&self) -> impl Iterator<Item = u32> + '_ {
         let mut ids: Vec<u32> = self.flyweights.values().map(|f| f.get_id()).collect();
         ids.sort_unstable();
@@ -234,7 +234,7 @@ pub fn test_array_conversion_optimization() {
 }
 
 /// 测试享元池管理器
-/// flyweight
+/// Test manager
 #[allow(unused)]
 pub fn test_flyweight_pool() {
     println!("\n=== 享元池管理器测试 ===");

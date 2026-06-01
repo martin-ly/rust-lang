@@ -1,5 +1,5 @@
 //! 搜索算法：同步 / Rayon并行 / Tokio异步
-//! searching algorithm ：synchronous / Rayonparallelism / Tokioasync
+//! Search algorithmsynchronous / Rayonparallel / Tokioasync
 use anyhow::Result;
 use rayon::prelude::*;
 use std::collections::{HashMap, VecDeque};
@@ -194,7 +194,7 @@ where
 // =========================
 
 /// 插值查找：适用于近似均匀分布的有序数组
-/// ：distribution
+/// valuesearchhas array
 pub fn interpolation_search_sync(data: &[i64], target: i64) -> Option<usize> {
     if data.is_empty() {
         return None;

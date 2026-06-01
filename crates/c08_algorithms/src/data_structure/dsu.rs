@@ -1,5 +1,5 @@
 //! 并查集（DSU/Union-Find）：按秩合并 + 路径压缩
-//! disjoint set union （DSU/Union-Find）：and +
+//! Disjoint Set Union (DSU/Union-Find): Union by rank + path compression
 #[derive(Clone, Debug)]
 pub struct DisjointSet {
     parent: Vec<usize>,

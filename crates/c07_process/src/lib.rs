@@ -18,11 +18,11 @@
 //!
 //! fn main() -> c07_process::Result<()> {
 //!     // 创建进程管理器
-//!     // process
+//! // createprocess manager
 //!     let pm = ProcessManager::new();
 //!
 //!     // 创建进程配置
-//!     // process
+//! // createprocess configuration
 //!     let mut env = HashMap::new();
 //!     env.insert("PATH".to_string(), "/usr/bin:/bin".to_string());
 //!
@@ -185,15 +185,15 @@ pub fn init() -> Result<()> {
 }
 
 /// 库清理函数
-/// library function
+/// librarycleanup function
 ///
 /// 清理全局资源和状态
-/// global and state
+/// Cleanup globalresourcestatus
 /// 清理进程管理库资源
-/// process library
+/// Cleanup processmanagementlibraryresource
 ///
 /// 清理进程管理库占用的资源。
-/// process library 。
+/// Cleanup processmanagementlibraryresource
 ///
 /// # Examples
 ///
@@ -220,9 +220,9 @@ pub fn cleanup() -> Result<()> {
 }
 
 /// 获取库信息
-/// library
+/// Get libraryinformation
 /// 获取库信息
-/// library
+/// Get libraryinformation
 ///
 /// 返回进程管理库的版本和功能信息。
 /// process library this and functionality 。
@@ -258,7 +258,7 @@ pub struct LibraryInfo {
 }
 
 /// 获取启用的特性列表
-/// feature
+/// Get enablefeatureslist
 fn get_enabled_features() -> Vec<String> {
     // 使用 allow 属性来抑制条件编译导致的未使用 mut 警告
     #[allow(unused_mut)]

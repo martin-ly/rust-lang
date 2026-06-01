@@ -2,26 +2,26 @@
 //! # Rust 1.89 feature example (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//! ⚠️ **this ** - this as reference
+//! ⚠️ **Historical Version File** - This file is retained for historical reference only
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
+//! **Currently Recommended Version**: Rust 1.92.0+ | For latest features, please refer to `rust_192_features.rs`
 //!
 //! ## 版本历史说明
 //! ## this explain
 //!
 //! 本文件展示 Rust 1.89 版本的特性，当前项目已升级到 Rust 1.92.0。
-//! this Rust 1.89 this feature ，when before project to Rust 1.92.0。
+//! This file demonstrate Rust 1.89 versionfeaturescurrent Rust 1.92.0
 //!
 //! ### Rust 1.92.0 主要改进
 //! ### Rust 1.92.0 main
 //!
 //! - **MaybeUninit 改进**: 更安全的对象池和单例模式实现
-//! - **MaybeUninit **: to and singleton
+//! - **MaybeUninit improvements**: safetyobjectsinglepattern implementation
 //! - **关联项多边界**: 更灵活的设计模式 Trait 定义
 //! - **edge **: design Trait definition
 //! - **Location::file_as_c_str**: 更好的错误定位和调试信息
-//! - **Location::file_as_c_str**: and
+//! - **Location::file_as_c_str**: bettererrordebugging information
 //!
 //! ### 迁移建议
 //! ###
@@ -39,10 +39,10 @@
 //! ---
 //!
 //! # Rust 1.89 新特性演示模块
-//! # Rust 1.89 feature demonstration module
+//! # Rust 1.89 newfeatures module
 //!
 //! 本模块展示了如何在设计模式中充分利用 Rust 1.89 的新特性
-//! This module demonstrates in design in Rust 1.89 feature
+//! This module demonstrates designpattern Rust 1.89 newfeatures
 use std::cell::Cell;
 use std::ptr;
 use std::sync::OnceLock;
@@ -50,7 +50,7 @@ use std::sync::OnceLock;
 /// 演示 Cell::update 方法的使用
 /// demonstration Cell::update method
 /// 这是 Rust 1.89 中新增的原子更新方法
-/// Rust 1.89 in method
+/// Rust 1.89 newatomicupdate method
 pub struct CellUpdateDemo {
     counter: Cell<i32>,
     data: Cell<Option<String>>,
@@ -81,19 +81,19 @@ impl CellUpdateDemo {
     }
 
     /// 设置数据（使用传统方法，因为 String 不实现 Copy）
-    /// （method ，because String Copy）
+    /// Set datausemethod String implementation Copy
     pub fn set_data(&self, value: String) {
         self.data.set(Some(value));
     }
 
     /// 获取当前计数器值
-    /// when before
+    /// Get currentvalue
     pub fn get_counter(&self) -> i32 {
         self.counter.get()
     }
 
     /// 获取当前数据
-    /// when before
+    /// Get currentdata
     pub fn get_data(&self) -> Option<String> {
         self.data.take()
     }
@@ -117,14 +117,14 @@ impl PointerDefaultDemo {
     }
 
     /// 设置指针值
-    /// pointer
+    /// Set pointervalue
     pub fn set_pointer(&mut self, value: i32) {
         let boxed_value = Box::new(value);
         self.raw_ptr = Box::into_raw(boxed_value);
     }
 
     /// 获取指针值（如果有效）
-    /// pointer （if effective ）
+    /// Get pointervaluehas
     pub fn get_pointer(&self) -> Option<i32> {
         if self.raw_ptr.is_null() {
             None
@@ -134,7 +134,7 @@ impl PointerDefaultDemo {
     }
 
     /// 获取 ID
-    /// ID
+    /// Get ID
     pub fn get_id(&self) -> u32 {
         self.id
     }
@@ -193,6 +193,7 @@ impl ArrayConversionDemo {
     }
 
     /// 获取数据
+    /// Get data
     pub fn get_data(&self) -> &[i32] {
         &self.data
     }
@@ -228,7 +229,7 @@ impl<T> AdvancedSingleton<T> {
     }
 
     /// 获取或初始化实例，同时设置元数据
-    /// or ，
+    /// Get initialsetdata
     pub fn get_or_init<F>(&self, initializer: F) -> &T
     where
         F: FnOnce() -> T,
@@ -237,12 +238,13 @@ impl<T> AdvancedSingleton<T> {
     }
 
     /// 设置元数据（使用传统方法，因为 String 不实现 Copy）
-    /// （method ，because String Copy）
+    /// Set datausemethod String implementation Copy
     pub fn set_metadata(&self, metadata: String) {
         self.metadata.set(Some(metadata));
     }
 
     /// 获取元数据
+    /// Get data
     pub fn get_metadata(&self) -> Option<String> {
         self.metadata.take()
     }
@@ -316,7 +318,7 @@ impl SocketDemo {
 }
 
 /// 综合演示函数
-/// synthesize demonstration function
+/// Comprehensive demo function
 pub fn demonstrate_rust_189_features() {
     println!("=== Rust 1.89 新特性演示 ===");
 

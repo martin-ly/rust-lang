@@ -1,9 +1,10 @@
 //! 游戏引擎设计模式应用
-//! design application
+//! Game Engine Design Pattern Application
 //!
 //! 本模块展示了在游戏引擎中应用各种设计模式的实践案例，
-//! This module demonstrates in in application design ，
+//! This module demonstrates practical cases of applying various design patterns in game engines,
 //! 包括Component、Observer、State等经典模式。
+//! Including classic patterns such as Component, Observer, and State.
 use std::any::{Any, TypeId};
 use std::collections::HashMap;
 
@@ -12,10 +13,11 @@ use std::collections::HashMap;
 // ============================================================================
 
 /// 实体ID类型
-/// volume IDtype
+/// Entity ID type
 pub type EntityId = u64;
 
 /// 组件接口
+/// Component interface
 pub trait Component: Any + Send + Sync {
     fn get_type_id(&self) -> TypeId {
         TypeId::of::<Self>()
@@ -143,7 +145,7 @@ impl EntityManager {
 }
 
 /// 系统接口
-/// system
+/// system interface
 pub trait System {
     fn update(&mut self, entity_manager: &mut EntityManager, delta_time: f32);
 }
@@ -350,7 +352,7 @@ impl Observer for LoggingSystem {
 // ============================================================================
 
 /// 游戏状态接口
-/// state
+/// status interface
 pub trait GameState {
     fn enter(&mut self);
     fn update(&mut self, delta_time: f32) -> Option<Box<dyn GameState>>;
@@ -359,7 +361,7 @@ pub trait GameState {
 }
 
 /// 主菜单状态
-/// state
+/// single status
 pub struct MainMenuState {
     selected_option: usize,
     options: Vec<String>,
@@ -573,7 +575,7 @@ impl GameState for GameOverState {
 }
 
 /// 设置状态
-/// state
+/// Set status
 pub struct SettingsState;
 
 impl Default for SettingsState {
@@ -633,7 +635,7 @@ impl GameState for ExitState {
 }
 
 /// 游戏状态管理器
-/// state
+/// status manager
 pub struct GameStateManager {
     current_state: Option<Box<dyn GameState>>,
 }

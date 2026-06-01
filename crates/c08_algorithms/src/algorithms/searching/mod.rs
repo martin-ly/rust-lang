@@ -1,12 +1,12 @@
 //! # 搜索算法模块
-//! # searching algorithm module
+//! # searchalgorithm module
 //!
 //! 本模块实现了各种搜索算法。
-//! this module searching algorithm 。
+//! This module implements searchalgorithm
 use serde::{Deserialize, Serialize};
 
 /// 搜索算法类型
-/// searching algorithm type
+/// Search algorithmtype
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum SearchingAlgorithm {
     LinearSearch,
@@ -16,7 +16,7 @@ pub enum SearchingAlgorithm {
 }
 
 /// 搜索结果
-/// result
+/// Search result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SearchResult {
     pub found: bool,
@@ -26,7 +26,7 @@ pub struct SearchResult {
 }
 
 /// 搜索算法实现
-/// searching algorithm
+/// Search algorithmimplementation
 pub struct SearchingAlgorithms;
 
 impl SearchingAlgorithms {

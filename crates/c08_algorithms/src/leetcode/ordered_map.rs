@@ -2,15 +2,15 @@
 //! LeetCode algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的有序映射类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
-//! this module LeetCode ， Rust 1.92 feature 。
+//! This module implements classichasmap LeetCode Rust 1.92 newfeatures
 //!
 //! ## Rust 1.92 特性应用
-//! ## Rust 1.92 feature application
+//! ## Rust 1.92 Feature Application
 //!
 //! 1. **性能优化**: 使用 BTreeMap 等有序映射数据结构
 //! 1. **performance optimization **: BTreeMap etc. data structure
 //! 2. **内存优化**: 高效的有序映射实现
-//! 2. **memory optimization **: efficient
+//! 2. **memoryoptimization**: efficienthasmap implementation
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::BTreeMap;
 
@@ -134,7 +134,7 @@ pub fn falling_squares_ordered_map(positions: Vec<Vec<i32>>) -> Vec<i32> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有有序映射类问题
-/// all problem
+/// Get hashasmapproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

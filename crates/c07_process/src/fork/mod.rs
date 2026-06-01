@@ -15,7 +15,7 @@ pub mod windows_fork;
 pub use windows_fork::WindowsFork;
 
 /// Fork trait，提供跨平台的进程分叉接口
-/// Fork trait，platform process
+/// Fork traitprovideprocess interface
 pub trait Fork {
     /// 分叉当前进程
     /// when before process

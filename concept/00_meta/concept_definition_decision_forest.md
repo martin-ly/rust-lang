@@ -1,5 +1,6 @@
 # Rust 知识体系概念定义判定森林（Concept Definition Decision Forest）
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件为 L1-L4 核心概念建立从**定义**出发的完整判定链：**前提假设 → 推理规则 → 判定条件 → 边界 → 失效模式**。与 `theorem_inference_forest.md`（从 L4 公理出发的定理链）形成互补：后者回答「安全保证从哪来」，本文件回答「编译器/开发者如何逐步判定代码是否合法」。
@@ -1065,9 +1066,7 @@ graph TD
 | Rust 知识体系概念定义判定森林（Concept Definition Decision Forest） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: Rust 知识体系概念定义判定森林（Concept Definition Decision Forest） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 Rust 知识体系概念定义判定森林（Concept Definition Decision Forest） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

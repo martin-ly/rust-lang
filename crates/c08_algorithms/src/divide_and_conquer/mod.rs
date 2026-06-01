@@ -8,7 +8,7 @@ use rayon::prelude::*;
 // =========================
 
 /// 同步：Kadane 线性算法
-/// synchronous ：Kadane line algorithm
+/// synchronousKadane algorithm
 pub fn max_subarray_sum_sync(nums: &[i64]) -> i64 {
     let mut best = i64::MIN;
     let mut cur = 0i64;

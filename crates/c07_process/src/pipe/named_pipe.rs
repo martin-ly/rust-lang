@@ -59,6 +59,7 @@ impl NamedPipe {
     }
 
     /// 发送消息
+    /// Send message
     pub fn send<T: Serialize + Send>(&self, msg: Message<T>) -> IpcResult<()> {
         let pipe_path = format!("{}.pipe", self.name);
 
@@ -78,6 +79,7 @@ impl NamedPipe {
     }
 
     /// 接收消息
+    /// Receive message
     pub fn receive<T: for<'de> Deserialize<'de> + Send>(&self) -> IpcResult<Message<T>> {
         let pipe_path = format!("{}.pipe", self.name);
 
@@ -137,7 +139,7 @@ impl NamedPipe {
     }
 
     /// 获取协议类型
-    /// type
+    /// Get type
     pub fn protocol(&self) -> IpcProtocol {
         IpcProtocol::Pipe
     }

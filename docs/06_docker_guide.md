@@ -1,5 +1,6 @@
 # Docker 使用指南
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 
@@ -10,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Docker 使用指南](#docker-使用指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [前置要求](#前置要求)
   - [快速开始](#快速开始)
     - [构建镜像](#构建镜像)
@@ -196,19 +197,12 @@ sudo chown -R $(id -u):$(id -g) .
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

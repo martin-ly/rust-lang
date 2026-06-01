@@ -1,5 +1,5 @@
 //! Rust 1.97 特性跟踪模块 —— 算法
-//! Rust 1.97 feature module —— algorithm
+//! Rust 1.97 featurestracingmodule algorithm
 #![allow(clippy::incompatible_msrv)]
 
 use std::num::NonZeroU32;

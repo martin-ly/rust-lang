@@ -17,7 +17,7 @@ impl Default for ProcessController {
 
 impl ProcessController {
     /// 创建新的进程控制器
-    /// process
+    /// Create new processcontrol
     pub fn new() -> Self {
         Self {
             processes: Arc::new(Mutex::new(std::collections::HashMap::new())),
@@ -101,7 +101,7 @@ impl ProcessController {
     }
 
     /// 获取进程信息
-    /// process
+    /// Get process info
     pub fn get_process_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let processes = self.processes.lock().expect("进程控制锁被污染");
 
@@ -112,7 +112,7 @@ impl ProcessController {
     }
 
     /// 获取所有进程信息
-    /// all process
+    /// Get hasprocessinformation
     pub fn get_all_processes(&self) -> Vec<ProcessInfo> {
         let processes = self.processes.lock().expect("进程控制锁被污染");
         processes.values().cloned().collect()

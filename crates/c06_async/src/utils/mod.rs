@@ -150,7 +150,7 @@ pub mod supervisor {
 /// Metrics module - Prometheus indicator point
 ///
 /// 注意：使用简单的 TCP HTTP 服务器实现
-/// ：simple TCP HTTP
+/// usesingle TCP HTTP service implementation
 pub mod metrics {
     use prometheus::{Encoder, Registry, TextEncoder};
     use tokio::io::AsyncWriteExt;
@@ -431,7 +431,7 @@ impl ExecHelper {
 
 impl ExecStrategyRunner {
     /// 运行操作：可选择传入可重试判定
-    /// Run ：
+    /// Run operation
     pub async fn run<F, Fut, T, E, D>(
         &self,
         make_fut: F,

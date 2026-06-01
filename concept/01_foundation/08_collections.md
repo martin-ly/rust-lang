@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **本节关键术语**: 集合 (Collection) · 向量 (Vec) · 哈希映射 (HashMap) · 哈希集合 (HashSet) · 二叉堆 (BinaryHeap) — [完整对照表](../00_meta/terminology_glossary.md)
 

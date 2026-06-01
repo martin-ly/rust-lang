@@ -1,8 +1,8 @@
 //! 异步集成框架层面分析
-//! async framework level analyze
+//! Async Integration Framework Analysis
 //!
 //! 本模块提供了异步生态系统在集成框架层面的分析，
-//! This module provides async ecosystem system in framework level analyze ，
+//! This module provides asyncsystemintegrationanalysis
 //! 包括：运行时共性、异步同步转换、聚合组合设计模式等。
 //! ：runtime 、async synchronous conversion 、aggregation combination design etc. 。
 //!
@@ -21,10 +21,10 @@ use tokio::task;
 use tokio::time::sleep;
 
 /// 异步运行时共性分析
-/// async runtime analyze
+/// asyncruntime analysis
 ///
 /// 分析不同异步运行时的共同特性和设计模式
-/// analyze async runtime feature and design
+/// analysisasyncruntimefeaturesdesign pattern
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncRuntimeCommonality {
     /// 运行时名称
@@ -34,7 +34,7 @@ pub struct AsyncRuntimeCommonality {
     /// core feature
     pub common_features: Vec<CommonFeature>,
     /// 设计模式
-    /// design
+    /// design pattern
     pub design_patterns: Vec<DesignPattern>,
     /// 性能特征
     /// performance
@@ -50,7 +50,7 @@ pub struct CommonFeature {
     /// feature describe
     pub description: String,
     /// 实现方式
-    /// way
+    /// implementation method
     pub implementation: String,
     /// 使用场景
     /// scenario
@@ -62,13 +62,13 @@ pub struct DesignPattern {
     /// 模式名称
     pub name: String,
     /// 模式类型
-    /// type
+    /// pattern type
     pub pattern_type: PatternType,
     /// 模式描述
     /// describe
     pub description: String,
     /// 实现示例
-    /// example
+    /// implementation example
     pub implementation_example: String,
 }
 
@@ -83,10 +83,10 @@ pub enum PatternType {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceProfile {
     /// 内存使用模式
-    /// memory
+    /// memoryuse pattern
     pub memory_usage_pattern: String,
     /// CPU使用模式
-    /// CPU
+    /// CPUuse pattern
     pub cpu_usage_pattern: String,
     /// 并发处理能力
     /// concurrency
@@ -240,7 +240,7 @@ impl AsyncCommonalityAnalyzer {
     }
 
     /// 获取运行时共性分析
-    /// runtime analyze
+    /// Get runtimeanalysis
     pub fn get_runtime_commonality(&self, runtime_name: &str) -> Option<&AsyncRuntimeCommonality> {
         self.runtimes.get(runtime_name)
     }
@@ -268,10 +268,10 @@ impl AsyncCommonalityAnalyzer {
 }
 
 /// 异步同步转换框架
-/// async synchronous conversion framework
+/// asyncsynchronousconversion framework
 ///
 /// 提供异步和同步代码之间的转换机制
-/// async and synchronous 's conversion mechanism
+/// provideasyncsynchronousconversion mechanism
 #[allow(unused)]
 pub struct AsyncSyncConversionFramework {
     thread_pool: Arc<Semaphore>,
@@ -287,7 +287,7 @@ impl AsyncSyncConversionFramework {
     }
 
     /// 异步到同步转换
-    /// async to synchronous conversion
+    /// Async to synchronous conversion
     pub async fn async_to_sync_conversion<T, F>(&self, async_operation: F) -> Result<T>
     where
         F: std::future::Future<Output = Result<T>> + Send + 'static,
@@ -303,7 +303,7 @@ impl AsyncSyncConversionFramework {
     }
 
     /// 同步到异步转换
-    /// synchronous to async conversion
+    /// Synchronous to async conversion
     pub async fn sync_to_async_conversion<F, T>(&self, sync_operation: F) -> Result<T>
     where
         F: FnOnce() -> Result<T> + Send + 'static,
@@ -376,10 +376,10 @@ impl AsyncSyncConversionFramework {
 }
 
 /// 聚合组合设计模式框架
-/// aggregation combination design framework
+/// designpattern framework
 ///
 /// 提供聚合和组合的设计模式实现
-/// aggregation and combination design
+/// providedesignpattern implementation
 #[allow(unused)]
 pub struct AggregationCompositionFramework {
     component_registry: Arc<RwLock<HashMap<String, Box<dyn AsyncComponent + Send + Sync>>>>,
@@ -427,6 +427,7 @@ impl AggregationCompositionFramework {
     }
 
     /// 注册组件
+    /// Register component
     pub async fn register_component(
         &self,
         component: Box<dyn AsyncComponent + Send + Sync>,
@@ -439,7 +440,7 @@ impl AggregationCompositionFramework {
     }
 
     /// 顺序聚合模式
-    /// order aggregation
+    /// sequential pattern
     pub async fn sequential_aggregation(
         &self,
         component_names: Vec<String>,
@@ -464,7 +465,7 @@ impl AggregationCompositionFramework {
     }
 
     /// 并行聚合模式
-    /// parallelism aggregation
+    /// parallel pattern
     pub async fn parallel_aggregation(
         &self,
         component_names: Vec<String>,
@@ -571,7 +572,7 @@ impl AggregationCompositionFramework {
 }
 
 /// 示例组件实现
-/// example
+/// Example component implementation
 pub struct DataProcessingComponent {
     name: String,
     processing_delay: Duration,
@@ -603,7 +604,7 @@ impl AsyncComponent for DataProcessingComponent {
 }
 
 /// 综合演示异步集成框架
-/// synthesize demonstration async framework
+/// asyncintegration framework
 pub async fn demonstrate_async_integration_framework() -> Result<()> {
     println!("🚀 异步集成框架层面分析演示");
     println!("================================================");

@@ -1,4 +1,6 @@
 # Rust 知识体系失效分析树集（Fault Tree Analysis Collection）
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **受众**: [专家]
 > **Bloom 层级**: 元（Meta）

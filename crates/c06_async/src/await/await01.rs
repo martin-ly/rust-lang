@@ -9,14 +9,14 @@
 //! can its task ，thereby significant program concurrency performance 。
 //!
 //! ## 核心概念
-//! ## core concept
+//! ## Core Concepts
 //!
 //! ### async 关键字
 //! ### async key
 //! - **作用**: 用于定义一个异步函数或异步块
 //! - **role **: definition async function or async
 //! - **返回值**: 异步函数返回一个实现了 `Future` trait 的值
-//! - **return value **: async function `Future` trait
+//! - **value**: asyncfunctionimplementation `Future` trait value
 //! - **语义**: 这个值代表一个可能在将来完成的计算
 //! - ****: may in future
 //!
@@ -42,7 +42,7 @@
 //! 4. ****: thread ，memory and CPU overhead
 //!
 //! ## 使用示例
-//! ## example
+//! ## Usage Examples
 //!
 //! ```no_run
 //! use c06_async::r#await::async_text01;
@@ -75,15 +75,15 @@ use tokio::time::sleep;
 /// 4. 等待时间到期后，任务恢复执行
 /// 4. etc. time to after ，task
 /// 5. 打印完成消息并返回结果
-/// 5. and result
+/// 5. complete result
 ///
 /// # 返回值
-/// # return value
+/// # Return Value
 /// 返回一个 `i32` 类型的值（42）
 /// `i32` type （42）
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```no_run
 /// use c06_async::r#await::async_text01;
 ///
@@ -98,13 +98,13 @@ use tokio::time::sleep;
 /// ```
 ///
 /// # 注意事项
-/// #
+/// # Notes
 /// - 异步函数必须在异步运行时环境中调用（如 tokio）
 /// - async function must in async runtime environment in （ tokio）
 /// - `await` 只能在 `async` 函数或块中使用
 /// - `await` in `async` function or in
 /// - 异步函数返回的是 `Future`，需要被等待才能获取结果
-/// - async function `Future`，is etc. result
+/// - asyncfunction `Future`needget result
 #[allow(unused)]
 pub async fn async_text01() -> i32 {
     println!("开始异步任务");

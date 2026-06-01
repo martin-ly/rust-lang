@@ -1,8 +1,8 @@
 //! # 并行算法执行模式
-//! # parallel algorithm
+//! # parallelalgorithmexecution pattern
 //!
 //! 本模块实现并行算法执行，充分利用多核 CPU 的计算能力。
-//! this module parallel algorithm ， CPU 。
+//! This module implements parallelalgorithmexecutionmultiple CPU compute
 //! 基于 rayon 实现数据并行和任务并行。
 //! rayon data parallelism and task parallelism 。
 use super::{ExecutionResult, ParallelAlgorithm};
@@ -15,7 +15,7 @@ pub struct ParallelExecutor;
 
 impl ParallelExecutor {
     /// 执行并行算法并测量性能
-    /// parallel algorithm and performance
+    /// executionparallelalgorithm performance
     pub fn execute_with_metrics<A, T, R>(
         algorithm: A,
         input: T,
@@ -43,7 +43,7 @@ impl ParallelExecutor {
     }
 
     /// 使用指定线程数执行并行算法
-    /// thread parallel algorithm
+    /// usethreadexecutionparallel algorithm
     pub fn execute_with_threads<A, T, R>(
         algorithm: A,
         input: T,
@@ -71,7 +71,7 @@ impl ParallelExecutor {
     }
 
     /// 批量执行并行算法
-    /// parallel algorithm
+    /// executionparallel algorithm
     pub fn execute_batch<A, T, R>(
         algorithm: A,
         inputs: Vec<T>,
@@ -88,7 +88,7 @@ impl ParallelExecutor {
     }
 
     /// 执行并行算法并返回详细统计信息
-    /// parallel algorithm and
+    /// executionparallelalgorithm information
     pub fn execute_with_stats<A, T, R>(
         algorithm: A,
         input: T,
@@ -136,7 +136,7 @@ impl ParallelExecutor {
     }
 
     /// 测试不同线程数的性能
-    /// thread performance
+    /// Test threadperformance
     pub fn benchmark_thread_scaling<A, T, R>(
         algorithm: A,
         input: T,
@@ -178,7 +178,7 @@ impl ParallelExecutor {
 }
 
 /// 并行执行统计信息
-/// parallelism
+/// parallelexecution information
 #[derive(Debug, Clone)]
 pub struct ParallelExecutionStats<T> {
     pub results: Vec<ExecutionResult<T>>,
@@ -191,7 +191,7 @@ pub struct ParallelExecutionStats<T> {
 
 impl<T> ParallelExecutionStats<T> {
     /// 获取最小执行时间
-    /// minimum time
+    /// Get minimum execution time
     pub fn min_execution_time(&self) -> std::time::Duration {
         self.results
             .iter()
@@ -201,7 +201,7 @@ impl<T> ParallelExecutionStats<T> {
     }
 
     /// 获取最大执行时间
-    /// maximum time
+    /// Get maximum execution time
     pub fn max_execution_time(&self) -> std::time::Duration {
         self.results
             .iter()
@@ -211,7 +211,7 @@ impl<T> ParallelExecutionStats<T> {
     }
 
     /// 获取最小内存使用
-    /// minimum memory
+    /// Get minimummemoryuse
     pub fn min_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -221,7 +221,7 @@ impl<T> ParallelExecutionStats<T> {
     }
 
     /// 获取最大内存使用
-    /// maximum memory
+    /// Get maximummemoryuse
     pub fn max_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -231,7 +231,7 @@ impl<T> ParallelExecutionStats<T> {
     }
 
     /// 计算性能稳定性（变异系数）
-    /// performance （coefficient ）
+    /// Compute performance
     pub fn performance_stability(&self) -> f64 {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
@@ -242,7 +242,7 @@ impl<T> ParallelExecutionStats<T> {
     }
 
     /// 计算并行效率
-    /// parallelism efficiency
+    /// Compute parallel
     pub fn parallel_efficiency(&self, single_thread_time: std::time::Duration) -> f64 {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
@@ -255,7 +255,7 @@ impl<T> ParallelExecutionStats<T> {
 }
 
 /// 线程扩展测试结果
-/// thread result
+/// threadtest result
 #[derive(Debug, Clone)]
 pub struct ThreadScalingResult<T> {
     pub thread_count: usize,
@@ -265,7 +265,7 @@ pub struct ThreadScalingResult<T> {
 }
 
 /// 线程扩展测试结果集合
-/// thread result set
+/// threadtestresult set
 #[derive(Debug, Clone)]
 pub struct ThreadScalingResults<T> {
     pub results: Vec<ThreadScalingResult<T>>,
@@ -273,7 +273,7 @@ pub struct ThreadScalingResults<T> {
 
 impl<T> ThreadScalingResults<T> {
     /// 获取最佳线程数
-    /// thread
+    /// Get bestthread
     pub fn optimal_thread_count(&self) -> Option<usize> {
         self.results
             .iter()
@@ -282,7 +282,7 @@ impl<T> ThreadScalingResults<T> {
     }
 
     /// 计算最大加速比
-    /// maximum
+    /// Compute maximum
     pub fn max_speedup(&self) -> Option<f64> {
         if self.results.is_empty() {
             return None;
@@ -343,7 +343,7 @@ pub struct ParallelBenchmarker;
 
 impl ParallelBenchmarker {
     /// 运行并行基准测试
-    /// Run parallelism benchmark
+    /// Run paralleltest
     pub fn benchmark<A, T, R>(
         algorithm: A,
         test_cases: Vec<ParallelBenchmarkTestCase<T>>,
@@ -373,7 +373,7 @@ impl ParallelBenchmarker {
     }
 
     /// 运行线程扩展基准测试
-    /// Run thread benchmark
+    /// Run threadtest
     pub fn benchmark_thread_scaling<A, T, R>(
         algorithm: A,
         test_cases: Vec<ThreadScalingTestCase<T>>,
@@ -421,7 +421,7 @@ pub struct ThreadScalingTestCase<T> {
 }
 
 /// 并行基准测试结果
-/// parallelism benchmark result
+/// paralleltest result
 #[derive(Debug, Clone)]
 pub struct ParallelBenchmarkResult<T> {
     pub test_case: String,
@@ -430,7 +430,7 @@ pub struct ParallelBenchmarkResult<T> {
 }
 
 /// 并行基准测试结果集合
-/// parallelism benchmark result set
+/// paralleltestresult set
 #[derive(Debug, Clone)]
 pub struct ParallelBenchmarkResults<T> {
     pub results: Vec<ParallelBenchmarkResult<T>>,
@@ -438,7 +438,7 @@ pub struct ParallelBenchmarkResults<T> {
 
 impl<T> ParallelBenchmarkResults<T> {
     /// 获取最佳性能的测试用例
-    /// performance
+    /// Get best performance test case
     pub fn best_performance(&self) -> Option<&ParallelBenchmarkResult<T>> {
         self.results
             .iter()
@@ -446,7 +446,7 @@ impl<T> ParallelBenchmarkResults<T> {
     }
 
     /// 获取最高并行效率的测试用例
-    /// parallelism efficiency
+    /// Get highestparalleltest
     pub fn best_efficiency(
         &self,
         single_thread_time: std::time::Duration,
@@ -520,7 +520,7 @@ pub struct ParallelWorkPool<T, R> {
 
 impl<T, R> ParallelWorkPool<T, R> {
     /// 创建新的并行工作池
-    /// parallelism
+    /// Create new parallel
     pub fn new(thread_count: usize) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
         let thread_pool = rayon::ThreadPoolBuilder::new()
             .num_threads(thread_count)
@@ -549,7 +549,7 @@ impl<T, R> ParallelWorkPool<T, R> {
     }
 
     /// 执行并行任务并收集结果
-    /// parallelism task and result
+    /// executionparalleltask result
     pub fn execute_and_collect<F>(
         &self,
         tasks: Vec<T>,
@@ -586,7 +586,7 @@ impl<T, R> ParallelWorkPool<T, R> {
 }
 
 /// 获取当前内存使用量（简化实现）
-/// when before memory （）
+/// Get current memory usage (simplified implementation)
 fn get_memory_usage() -> usize {
     // 在实际应用中，这里应该使用更精确的内存测量方法
     std::mem::size_of::<usize>() * 1024 // 占位实现

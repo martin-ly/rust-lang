@@ -1,14 +1,14 @@
 //! 异步批处理器
-//! async
+//! Async batch processor
 //!
 //! 提供高效的批处理功能：
 //! efficient functionality ：
 //! - 智能批处理策略
-//! - strategy
+//! - smarthandling strategy
 //! - 背压控制
-//! - backpressure
+//! - backpressure control
 //! - 批量操作优化
-//! - optimization
+//! - operation optimization
 //! - 错误处理和重试
 //! - error handling and
 //! - 性能监控
@@ -23,14 +23,14 @@ use tokio::time::{interval, sleep, timeout};
 use uuid::Uuid;
 
 /// 批处理策略
-/// strategy
+/// handling strategy
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum BatchStrategy {
     /// 按数量批处理
-    /// quantity
+    /// count processing
     ByCount(usize),
     /// 按时间批处理
-    /// time
+    /// time processing
     ByTime(Duration),
     /// 按大小批处理（字节数）
     /// （）
@@ -45,6 +45,7 @@ pub enum BatchStrategy {
 }
 
 /// 批处理配置
+/// handling configuration
 #[derive(Debug, Clone)]
 pub struct BatchConfig {
     pub strategy: BatchStrategy,
@@ -93,7 +94,7 @@ impl<T> BatchItem<T> {
 }
 
 /// 批处理结果
-/// result
+/// handling result
 #[derive(Debug)]
 pub struct BatchResult<T> {
     pub batch_id: Uuid,
@@ -104,6 +105,7 @@ pub struct BatchResult<T> {
 }
 
 /// 批处理统计信息
+/// handling information
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct BatchStats {
     pub total_batches: u64,
@@ -125,7 +127,7 @@ pub trait BatchProcessor<T>: Send + Sync {
 }
 
 /// 异步批处理器
-/// async
+/// Async batch processor
 pub struct AsyncBatchProcessor<T, P> {
     processor: Arc<P>,
     config: BatchConfig,
@@ -141,6 +143,7 @@ where
     P: BatchProcessor<T> + 'static,
 {
     /// 创建新的批处理器
+    /// Create new handling
     pub fn new(processor: P, config: BatchConfig, max_concurrent_batches: usize) -> Self {
         Self {
             processor: Arc::new(processor),
@@ -184,7 +187,7 @@ where
     }
 
     /// 添加项目到批处理队列
-    /// project to
+    /// handling queue
     pub async fn add_item(&self, item: BatchItem<T>) -> Result<()> {
         let queue_size = {
             let mut queue = self.queue.lock().await;
@@ -220,6 +223,7 @@ where
     }
 
     /// 获取统计信息
+    /// Get statistics
     pub async fn get_stats(&self) -> BatchStats {
         let mut stats = self.stats.lock().await.clone();
         let queue_size = self.queue.lock().await.len();
@@ -400,7 +404,7 @@ where
 }
 
 /// 简单的批处理器实现示例
-/// simple example
+/// singlehandlingimplementation example
 pub struct SimpleBatchProcessor<T> {
     name: String,
     _phantom: std::marker::PhantomData<T>,

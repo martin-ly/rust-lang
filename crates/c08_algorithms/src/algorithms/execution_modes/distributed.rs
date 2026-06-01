@@ -1,8 +1,8 @@
 //! # 分布式算法执行模式
-//! # distributed algorithm
+//! # distributedalgorithmexecution pattern
 //!
 //! 本模块实现分布式算法执行，支持跨节点的分布式计算。
-//! this module distributed algorithm ，node distribution 。
+//! This module implements distributedalgorithmexecutionsupportnodedistributedcompute
 //! 适用于大规模数据处理和需要水平扩展的场景。
 //! scale and level scenario 。
 use super::{DistributedAlgorithm, ExecutionResult};
@@ -12,7 +12,7 @@ use std::sync::{Arc, Mutex};
 use std::time::Instant;
 
 /// 分布式节点信息
-/// distribution node
+/// distributednode information
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NodeInfo {
     pub id: String,
@@ -24,7 +24,7 @@ pub struct NodeInfo {
 }
 
 /// 节点状态
-/// node state
+/// node status
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum NodeStatus {
     Available,
@@ -45,7 +45,7 @@ pub struct DistributedTask<T> {
 }
 
 /// 任务优先级
-/// task
+/// Task priority
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum TaskPriority {
     Low,
@@ -55,7 +55,7 @@ pub enum TaskPriority {
 }
 
 /// 分布式任务结果
-/// distribution task result
+/// distributedtask result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DistributedTaskResult<R> {
     pub task_id: String,
@@ -81,7 +81,7 @@ impl Default for DistributedExecutor {
 
 impl DistributedExecutor {
     /// 创建新的分布式执行器
-    /// distribution
+    /// Create new distributedexecution
     pub fn new() -> Self {
         Self {
             nodes: Arc::new(Mutex::new(HashMap::new())),
@@ -105,7 +105,7 @@ impl DistributedExecutor {
     }
 
     /// 获取可用节点
-    /// node
+    /// Get node
     pub fn get_available_nodes(&self) -> Vec<NodeInfo> {
         let nodes = self.nodes.lock().expect("分布式节点锁被污染");
         nodes
@@ -116,7 +116,7 @@ impl DistributedExecutor {
     }
 
     /// 执行分布式算法
-    /// distributed algorithm
+    /// executiondistributed algorithm
     pub fn execute_distributed<A, T, R>(
         &self,
         _algorithm: A,
@@ -233,7 +233,7 @@ impl DistributedExecutor {
     }
 
     /// 获取任务执行统计
-    /// task
+    /// Get taskexecution
     pub fn get_task_stats(&self) -> TaskExecutionStats {
         let task_queue = self.task_queue.lock().expect("任务队列锁被污染");
         let results = self.results.lock().expect("任务结果锁被污染");
@@ -270,7 +270,7 @@ pub struct TaskExecutionStats {
 
 impl TaskExecutionStats {
     /// 计算任务完成率
-    /// task
+    /// Compute taskcomplete
     pub fn completion_rate(&self) -> f64 {
         if self.total_tasks == 0 {
             return 0.0;
@@ -279,7 +279,7 @@ impl TaskExecutionStats {
     }
 
     /// 计算节点利用率
-    /// node
+    /// Compute node
     pub fn node_utilization(&self) -> f64 {
         if self.total_nodes == 0 {
             return 0.0;
@@ -294,7 +294,7 @@ pub struct DistributedBenchmarker;
 
 impl DistributedBenchmarker {
     /// 运行分布式基准测试
-    /// Run distribution benchmark
+    /// Run distributedtest
     pub fn benchmark<A, T, R>(
         algorithm: A,
         test_cases: Vec<DistributedBenchmarkTestCase<T>>,
@@ -369,7 +369,7 @@ pub struct DistributedBenchmarkTestCase<T> {
 }
 
 /// 分布式执行统计信息
-/// distribution
+/// distributedexecution information
 #[derive(Debug, Clone)]
 pub struct DistributedExecutionStats {
     pub average_execution_time: std::time::Duration,
@@ -382,7 +382,7 @@ pub struct DistributedExecutionStats {
 
 impl DistributedExecutionStats {
     /// 获取最小执行时间
-    /// minimum time
+    /// Get minimum execution time
     pub fn min_execution_time(&self) -> std::time::Duration {
         self.execution_times
             .iter()
@@ -392,7 +392,7 @@ impl DistributedExecutionStats {
     }
 
     /// 获取最大执行时间
-    /// maximum time
+    /// Get maximum execution time
     pub fn max_execution_time(&self) -> std::time::Duration {
         self.execution_times
             .iter()
@@ -402,7 +402,7 @@ impl DistributedExecutionStats {
     }
 
     /// 计算执行时间标准差
-    /// time standard
+    /// Compute executiontimestandard
     pub fn execution_time_std_dev(&self) -> std::time::Duration {
         if self.execution_times.is_empty() {
             return std::time::Duration::ZERO;
@@ -423,7 +423,7 @@ impl DistributedExecutionStats {
     }
 
     /// 计算性能稳定性
-    /// performance
+    /// Compute performance
     pub fn performance_stability(&self) -> f64 {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
@@ -447,7 +447,7 @@ impl DistributedExecutionStats {
 }
 
 /// 分布式基准测试结果
-/// distribution benchmark result
+/// distributedtest result
 #[derive(Debug, Clone)]
 pub struct DistributedBenchmarkResult {
     pub test_case: String,
@@ -455,7 +455,7 @@ pub struct DistributedBenchmarkResult {
 }
 
 /// 分布式基准测试结果集合
-/// distribution benchmark result set
+/// distributedtestresult set
 #[derive(Debug, Clone)]
 pub struct DistributedBenchmarkResults {
     pub results: Vec<DistributedBenchmarkResult>,
@@ -463,7 +463,7 @@ pub struct DistributedBenchmarkResults {
 
 impl DistributedBenchmarkResults {
     /// 获取最佳性能的测试用例
-    /// performance
+    /// Get best performance test case
     pub fn best_performance(&self) -> Option<&DistributedBenchmarkResult> {
         self.results
             .iter()
@@ -471,7 +471,7 @@ impl DistributedBenchmarkResults {
     }
 
     /// 获取最高扩展效率的测试用例
-    /// efficiency
+    /// Get highesttest
     pub fn best_scaling_efficiency(
         &self,
         single_node_time: std::time::Duration,
@@ -551,7 +551,7 @@ impl Default for DistributedLoadBalancer {
 
 impl DistributedLoadBalancer {
     /// 创建新的负载均衡器
-    /// load balancer
+    /// Create new negative
     pub fn new() -> Self {
         Self {
             nodes: Arc::new(Mutex::new(HashMap::new())),
@@ -571,7 +571,7 @@ impl DistributedLoadBalancer {
     }
 
     /// 选择最佳节点
-    /// node
+    /// best node
     pub fn select_best_node(&self) -> Option<String> {
         let nodes = self.nodes.lock().expect("分布式节点锁被污染");
         let node_loads = self.node_loads.lock().expect("节点负载锁被污染");
@@ -584,14 +584,14 @@ impl DistributedLoadBalancer {
     }
 
     /// 分配任务到节点
-    /// task to node
+    /// task node
     pub fn assign_task(&self, node_id: &str) {
         let mut node_loads = self.node_loads.lock().expect("节点负载锁被污染");
         *node_loads.entry(node_id.to_string()).or_insert(0) += 1;
     }
 
     /// 完成任务
-    /// task
+    /// Complete task
     pub fn complete_task(&self, node_id: &str) {
         let mut node_loads = self.node_loads.lock().expect("节点负载锁被污染");
         if let Some(load) = node_loads.get_mut(node_id)
@@ -602,7 +602,7 @@ impl DistributedLoadBalancer {
     }
 
     /// 获取节点负载信息
-    /// node
+    /// Get nodenegativeinformation
     pub fn get_node_loads(&self) -> HashMap<String, usize> {
         let node_loads = self.node_loads.lock().expect("节点负载锁被污染");
         node_loads.clone()
@@ -610,7 +610,7 @@ impl DistributedLoadBalancer {
 }
 
 /// 获取当前内存使用量（简化实现）
-/// when before memory （）
+/// Get current memory usage (simplified implementation)
 fn get_memory_usage() -> usize {
     // 在实际应用中，这里应该使用更精确的内存测量方法
     std::mem::size_of::<usize>() * 1024 // 占位实现

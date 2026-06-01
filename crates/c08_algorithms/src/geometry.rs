@@ -1,5 +1,5 @@
 //! 计算几何：凸包（Andrew）与旋转卡壳直径
-//! ：（Andrew）and
+//! Computational Geometry: Convex Hull (Andrew) and Rotating Calipers Diameter
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Pt {
     pub x: f64,
@@ -14,7 +14,7 @@ fn dist2(a: Pt, b: Pt) -> f64 {
 }
 
 /// 凸包：返回按逆时针顺序的顶点（包含共线最外点）
-/// ：order vertex （line outside point ）
+/// Convex Hull: Returns vertices in counter-clockwise order (including outermost collinear points)
 pub fn convex_hull(mut pts: Vec<Pt>) -> Vec<Pt> {
     pts.sort_by(|p, q| {
         p.x.partial_cmp(&q.x)

@@ -7,9 +7,11 @@ use std::sync::{Arc, Mutex};
 // 重新设计IpcChannel trait，使其与dyn兼容
 pub trait IpcChannel: Send + Sync {
     /// 发送消息
+    /// Send message
     fn send_message(&self, msg: &Message<Vec<u8>>) -> IpcResult<()>;
 
     /// 接收消息
+    /// Receive message
     fn receive_message(&self) -> IpcResult<Message<Vec<u8>>>;
 
     /// 获取通道名称
@@ -104,6 +106,7 @@ impl IpcManager {
     }
 
     /// 创建消息队列
+    /// create queue
     pub fn create_message_queue(&mut self, name: &str, capacity: usize) -> IpcResult<()> {
         let queue = message_queue::MessageQueue::new(name, capacity, self.config.clone())?;
         let mut channels = self.channels.lock().expect("IPC通道锁被污染");
@@ -131,7 +134,7 @@ impl IpcManager {
     }
 
     /// 清理所有通道
-    /// all channel
+    /// Cleanup has
     pub fn cleanup(&mut self) -> IpcResult<()> {
         let mut channels = self.channels.lock().expect("IPC通道锁被污染");
         for (_, mut channel) in channels.drain() {
@@ -141,14 +144,14 @@ impl IpcManager {
     }
 
     /// 获取通道列表
-    /// channel
+    /// Get list
     pub fn list_channels(&self) -> Vec<String> {
         let channels = self.channels.lock().expect("IPC通道锁被污染");
         channels.keys().cloned().collect()
     }
 
     /// 获取通道统计信息
-    /// channel
+    /// Get information
     pub fn get_channel_stats(&self, name: &str) -> Option<ChannelStats> {
         let channels = self.channels.lock().expect("IPC通道锁被污染");
         if channels.contains_key(name) {
@@ -195,14 +198,14 @@ impl IpcManager {
     }
 
     /// 获取总体统计信息
-    /// overall
+    /// Get information
     pub fn get_stats(&self) -> ChannelStats {
         self.stats.lock().expect("IPC统计锁被污染").clone()
     }
 }
 
 /// 异步IPC管理器
-/// async IP C
+/// asyncIPC manager
 pub struct AsyncIpcManager {
     manager: IpcManager,
 }

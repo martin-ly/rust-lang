@@ -1,4 +1,6 @@
 # Rust for Linux：从实验到生产
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -13,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust for Linux：从实验到生产](#rust-for-linux从实验到生产)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [一、历史里程碑：Rust 正式成为 Linux 内核永久组成部分](#一历史里程碑rust-正式成为-linux-内核永久组成部分)
     - [1.1 时间线](#11-时间线)
     - [1.2 这意味着什么？](#12-这意味着什么)

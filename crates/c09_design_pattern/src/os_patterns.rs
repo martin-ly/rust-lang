@@ -1,8 +1,8 @@
 //! 操作系统设计模式应用
-//! operating system design application
+//! OS Design Pattern Application
 //!
 //! 本模块展示了在操作系统开发中应用各种设计模式的实践案例，
-//! This module demonstrates in operating system in application design ，
+//! This module demonstrates operationsystemapplicationdesignpatternpracticecases
 //! 包括Singleton、Factory、Strategy等经典模式。
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, OnceLock};
@@ -92,7 +92,7 @@ impl SystemResourceManager {
 }
 
 /// 线程安全的单例实现
-/// thread-safe singleton
+/// threadsafetysingle implementation
 pub struct SystemResourceManagerSingleton {
     instance: OnceLock<Arc<Mutex<SystemResourceManager>>>,
 }
@@ -367,7 +367,7 @@ impl DeviceFactory for OSDeviceFactory {
 // ============================================================================
 
 /// 进程调度策略接口
-/// process strategy
+/// processscheduling interface
 pub trait SchedulingStrategy {
     fn select_next_process(&self, processes: &[Process]) -> Option<usize>;
     fn get_name(&self) -> &str;
@@ -386,7 +386,7 @@ pub struct Process {
 }
 
 /// 先来先服务调度策略
-/// strategy
+/// servicescheduling strategy
 pub struct FirstComeFirstServeStrategy;
 
 impl SchedulingStrategy for FirstComeFirstServeStrategy {
@@ -405,7 +405,7 @@ impl SchedulingStrategy for FirstComeFirstServeStrategy {
 }
 
 /// 最短作业优先调度策略
-/// strategy
+/// shortexcellentscheduling strategy
 pub struct ShortestJobFirstStrategy;
 
 impl SchedulingStrategy for ShortestJobFirstStrategy {
@@ -424,7 +424,7 @@ impl SchedulingStrategy for ShortestJobFirstStrategy {
 }
 
 /// 优先级调度策略
-/// strategy
+/// excellentscheduling strategy
 pub struct PrioritySchedulingStrategy;
 
 impl SchedulingStrategy for PrioritySchedulingStrategy {
@@ -443,7 +443,7 @@ impl SchedulingStrategy for PrioritySchedulingStrategy {
 }
 
 /// 轮转调度策略
-/// strategy
+/// scheduling strategy
 pub struct RoundRobinStrategy {
     _time_quantum: u32,
     current_index: usize,
@@ -552,7 +552,7 @@ impl ProcessScheduler {
 // ============================================================================
 
 /// 系统命令接口
-/// system command
+/// system interface
 pub trait SystemCommand {
     fn execute(&self) -> Result<String, String>;
     fn undo(&self) -> Result<String, String>;
@@ -622,7 +622,7 @@ impl SystemCommand for CreateDirectoryCommand {
 }
 
 /// 系统命令管理器
-/// system command
+/// system manager
 pub struct SystemCommandManager {
     commands: Vec<Box<dyn SystemCommand>>,
     history: Vec<Box<dyn SystemCommand>>,

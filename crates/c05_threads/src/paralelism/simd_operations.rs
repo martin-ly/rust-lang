@@ -33,6 +33,7 @@ impl SimdVector {
 
     /// 创建零向量
     /// Creates零向量
+    /// Createszerovector
     pub fn zeros(length: usize) -> Self {
         Self {
             data: vec![0.0; length],
@@ -42,6 +43,7 @@ impl SimdVector {
 
     /// 创建单位向量
     /// Creates单位向量
+    /// Createssinglebitvector
     pub fn ones(length: usize) -> Self {
         Self {
             data: vec![1.0; length],
@@ -64,6 +66,7 @@ impl SimdVector {
 
     /// 获取向量数据
     /// Gets向量数据
+    /// Getsvectordata
     pub fn data(&self) -> &[f32] {
         &self.data
     }

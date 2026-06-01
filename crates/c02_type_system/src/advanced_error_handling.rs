@@ -634,6 +634,7 @@ impl ErrorHandler {
 
     /// 处理错误
     /// Processes错误
+    /// Processeserror
     pub fn handle_error(&self, error: AppError, context: ErrorContext) -> Result<(), AppError> {
         // 转换错误
         let transformed_error = self.transformer.transform(error);
@@ -667,6 +668,7 @@ impl ErrorHandler {
 
     /// 获取错误统计
     /// Gets错误统计
+    /// Getserrorstatistics
     pub fn get_error_stats(&self) -> ErrorMetrics {
         self.monitor.get_metrics()
     }

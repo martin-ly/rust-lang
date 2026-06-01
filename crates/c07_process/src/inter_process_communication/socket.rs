@@ -13,7 +13,7 @@ pub struct UnixSocket {
 
 impl UnixSocket {
     /// 创建新的Unix域套接字
-    /// Unixdomain socket
+    /// Create new Unix
     pub fn new(path: &str, _config: IpcConfig) -> IpcResult<Self> {
         // 简化实现：在Windows上使用TCP套接字
         Ok(Self {
@@ -59,7 +59,7 @@ impl IpcChannel for UnixSocket {
 }
 
 /// TCP套接字实现
-/// TCP socket
+/// TCP implementation
 #[allow(dead_code)]
 pub struct TcpSocket {
     address: String,
@@ -69,7 +69,7 @@ pub struct TcpSocket {
 
 impl TcpSocket {
     /// 创建新的TCP套接字
-    /// TCP socket
+    /// Create new TCP
     pub fn new(address: &str, port: u16, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             address: address.to_string(),

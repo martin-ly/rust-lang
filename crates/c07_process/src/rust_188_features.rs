@@ -2,16 +2,16 @@
 //! Rust 188.0 feature module —— c07_process
 //!
 //! 本模块展示了 Rust 188.0 (2025-06-26) 的关键语言特性和工具链改进。
-//! This module demonstrates Rust 188.0 (2025-06-26) key feature and toolchain 。
+//! This module demonstrates key language features and toolchain improvements of Rust 188.0 (2025-06-26).
 //!
 //! - `naked_functions`: 裸函数 `#[naked]` 稳定
 //!
 //! # 版本信息
-//! # this
+//! # Version Info
 //! - Rust 版本: 188.0
-//! - Rust this : 188.0
+//! - Rust Version: 188.0
 //! - 稳定日期: 2025-06-26
-//! - date : 2025-06-26
+//! - Stable Date: 2025-06-26
 //! - Edition: 2024
 
 // ============================================================================
@@ -19,14 +19,13 @@
 // ============================================================================
 
 /// # 裸函数（Naked Functions）
-///
-/// Rust 1.88.0 稳定了 `#[naked]` 属性，允许函数不使用标准 prologue/epilogue，
+/// # Naked Functions
 /// Rust 1.88.0 `#[naked]` attribute ，function standard prologue/epilogue，
 /// 直接暴露原始汇编入口。
 /// expose 。
 ///
 /// ## 使用场景
-/// ## scenario
+/// ## Usage Scenarios
 /// - 操作系统中断处理程序（ISR）
 /// - operating system in program （ISR）
 /// - 引导加载程序入口点
@@ -35,7 +34,7 @@
 /// - and
 ///
 /// ## 限制
-/// ##
+/// ## Constraints
 /// - 函数体必须是单条 `asm!` 宏调用
 /// - function volume must `asm!`
 /// - 编译器不为裸函数生成栈帧管理代码

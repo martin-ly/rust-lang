@@ -1,4 +1,6 @@
 # QUIC / HTTP/3 指南
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [A]
 > **层级**: L6 生态工具 / L3 高级网络
@@ -13,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [QUIC / HTTP/3 指南](#quic--http3-指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [QUIC 核心特性](#quic-核心特性)
   - [Rust 生态](#rust-生态)

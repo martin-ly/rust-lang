@@ -1,8 +1,8 @@
 # Linux Foundation Certified Rust Programmer (LFRS) 认证映射
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L1-L2 (记忆/理解)
-
 > **创建日期**: 2026-04-24
 > **用途**: 将 LFRS 认证的 10 大考点映射到本项目内容，建立可量化的学习验证体系
 > **认证官网**: <https://www.linuxfoundation.org/certification/linux-foundation-certified-rust-programmer>
@@ -15,40 +15,40 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Linux Foundation Certified Rust Programmer (LFRS) 认证映射](#linux-foundation-certified-rust-programmer-lfrs-认证映射)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [考点总览](#考点总览)
   - [考点 1: 语法、类型与控制流](#考点-1-语法类型与控制流)
     - [映射文件](#映射文件)
     - [练习验证](#练习验证)
   - [考点 2: Ownership、Borrowing 与 Lifetimes](#考点-2-ownershipborrowing-与-lifetimes)
-    - [映射文件](#映射文件)
-    - [练习验证](#练习验证)
+    - [映射文件](#映射文件-1)
+    - [练习验证](#练习验证-1)
   - [考点 3: Structs、Enums 与模式匹配](#考点-3-structsenums-与模式匹配)
-    - [映射文件](#映射文件)
-    - [练习验证](#练习验证)
+    - [映射文件](#映射文件-2)
+    - [练习验证](#练习验证-2)
   - [考点 4: 模块与 Crates](#考点-4-模块与-crates)
-    - [映射文件](#映射文件)
-    - [练习验证](#练习验证)
+    - [映射文件](#映射文件-3)
+    - [练习验证](#练习验证-3)
   - [考点 5: 集合与字符串](#考点-5-集合与字符串)
-    - [映射文件](#映射文件)
-    - [练习验证](#练习验证)
+    - [映射文件](#映射文件-4)
+    - [练习验证](#练习验证-4)
   - [考点 6: 错误处理](#考点-6-错误处理)
-    - [映射文件](#映射文件)
-    - [练习验证](#练习验证)
+    - [映射文件](#映射文件-5)
+    - [练习验证](#练习验证-5)
   - [考点 7: Traits 与泛型](#考点-7-traits-与泛型)
-    - [映射文件](#映射文件)
-    - [练习验证](#练习验证)
+    - [映射文件](#映射文件-6)
+    - [练习验证](#练习验证-6)
   - [考点 8: 测试](#考点-8-测试)
-    - [映射文件](#映射文件)
-    - [练习验证](#练习验证)
+    - [映射文件](#映射文件-7)
+    - [练习验证](#练习验证-7)
   - [考点 9: 闭包、迭代器与 Smart Pointers](#考点-9-闭包迭代器与-smart-pointers)
-    - [映射文件](#映射文件)
+    - [映射文件](#映射文件-8)
     - [补充计划](#补充计划)
-    - [练习验证](#练习验证)
+    - [练习验证](#练习验证-8)
   - [考点 10: 并发（线程 / 通道 / async）](#考点-10-并发线程--通道--async)
-    - [映射文件](#映射文件)
+    - [映射文件](#映射文件-9)
     - [缺失内容](#缺失内容)
-    - [练习验证](#练习验证)
+    - [练习验证](#练习验证-9)
   - [学习路径建议](#学习路径建议)
     - [路径 A：按 LFRS 考点顺序学习](#路径-a按-lfrs-考点顺序学习)
     - [路径 B：以练习驱动](#路径-b以练习驱动)
@@ -56,7 +56,7 @@
   - [相关文档](#相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
-  - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 考点总览
 >
@@ -156,7 +156,7 @@
 | 结构体定义 | `crates/c02_type_system/src/type_composition/composite/struct/` | 命名字段、元组结构体、单元结构体 |
 | 枚举定义 | `crates/c02_type_system/src/type_composition/composite/enum/` | 变体、带数据变体 |
 | 模式匹配 | `crates/c02_type_system/src/type_decomposition/match/` | match、if let、while let |
-| Option<T> | `crates/c03_control_fn/src/error_handling/` | 空值安全替代 |
+| `Option<T>` | `crates/c03_control_fn/src/error_handling/` | 空值安全替代 |
 | 方法语法 | `crates/c02_type_system/src/type_class/` | impl 块、关联函数 |
 
 ### 练习验证
@@ -196,18 +196,18 @@
 ---
 
 ## 考点 5: 集合与字符串
->
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **掌握程度**: ✅ 完整
 
 ### 映射文件
->
+
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |
-| Vec<T> | `crates/c02_type_system/src/type_composition/collection/vec.rs` | 动态数组操作 |
+| `Vec<T>` | `crates/c02_type_system/src/type_composition/collection/vec.rs` | 动态数组操作 |
 | String / &str | `crates/c02_type_system/src/primitive_types/scalar_types/string/` | UTF-8、所有权差异 |
 | HashMap | `crates/c02_type_system/src/type_composition/collection/hash_map.rs` | 键值对存储 |
 | HashSet | `crates/c02_type_system/src/type_composition/collection/hash_set.rs` | 集合操作 |
@@ -215,7 +215,7 @@
 | 迭代器 | `docs/02_reference/quick_reference/02_collections_iterators_cheatsheet.md` | 迭代器适配器 |
 
 ### 练习验证
->
+
 > **[来源: [crates.io](https://crates.io/)]**
 
 - `exercises/src/type_system/ex02_struct_methods.rs` (Easy, String 使用)

@@ -1,12 +1,12 @@
 //! Rust 1.93.0 设计模式 特性模块
-//! Rust 1.93.0 design feature module
+//! Rust 1.93.0 designpattern features module
 #![allow(clippy::incompatible_msrv)]
 
 use std::fmt;
 use std::mem::MaybeUninit;
 
 /// 使用 `fmt::from_fn` 实现动态格式化策略模式
-/// `fmt::from_fn` strategy
+/// use `fmt::from_fn` implementationdynamic pattern
 pub fn dynamic_formatter(strategy: &str, value: i32) -> impl fmt::Display + use<'_> {
     fmt::from_fn(move |f: &mut fmt::Formatter<'_>| match strategy {
         "hex" => write!(f, "0x{:X}", value),

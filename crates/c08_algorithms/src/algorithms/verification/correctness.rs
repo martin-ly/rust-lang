@@ -1,12 +1,12 @@
 //! # 算法正确性验证模块
-//! # algorithm module
+//! # algorithmcorrectnessverify module
 //!
 //! 本模块提供算法正确性验证的工具和方法。
 //! This module provides algorithm tool and method 。
 use serde::{Deserialize, Serialize};
 
 /// 正确性验证结果
-/// result
+/// correctnessverify result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CorrectnessVerificationResult {
     pub algorithm_name: String,
@@ -18,6 +18,7 @@ pub struct CorrectnessVerificationResult {
 }
 
 /// 测试用例
+/// Test cases
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TestCase {
     pub name: String,
@@ -29,7 +30,7 @@ pub struct TestCase {
 }
 
 /// 测试状态
-/// state
+/// Test status
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum TestStatus {
     Passed,
@@ -43,7 +44,7 @@ pub struct CorrectnessVerifier;
 
 impl CorrectnessVerifier {
     /// 验证排序算法的正确性
-    /// sorting algorithm
+    /// Verify sortalgorithmcorrectness
     pub fn verify_sorting_correctness<T: Clone + Ord>(
         sort_fn: impl Fn(&mut [T]),
         test_cases: &[Vec<T>],
@@ -66,7 +67,7 @@ impl CorrectnessVerifier {
     }
 
     /// 验证搜索算法的正确性
-    /// searching algorithm
+    /// Verify searchalgorithmcorrectness
     pub fn verify_search_correctness<T: Clone + Ord>(
         search_fn: impl Fn(&[T], &T) -> Option<usize>,
         test_cases: &[(Vec<T>, T, Option<usize>)],
@@ -81,7 +82,7 @@ impl CorrectnessVerifier {
     }
 
     /// 检查数组是否已排序
-    /// ordering
+    /// arraywhether sort
     fn is_sorted<T: Ord>(arr: &[T]) -> bool {
         arr.windows(2).all(|w| w[0] <= w[1])
     }

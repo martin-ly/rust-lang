@@ -1,18 +1,18 @@
 //! 异步生态系统集成模块
-//! async ecosystem system module
+//! Async Ecosystem Integration Module
 //!
 //! 本模块展示了如何集成和组合使用不同的异步运行时和设计模式：
-//! This module demonstrates and combination async runtime and design ：
+//! This module demonstrates how to integrate and combine different async runtimes and design patterns:
 //! 1. 多运行时集成策略
-//! 1. runtime strategy
+//! 1. Multi-runtime integration strategy
 //! 2. 聚合组合设计模式
-//! 2. aggregation combination design
+//! 2. Aggregate combination design pattern
 //! 3. 异步同步转换最佳实践
-//! 3. async synchronous conversion
+//! 3. Async-sync conversion best practices
 //! 4. 跨运行时任务调度
-//! 4. runtime task
+//! 4. Cross-runtime task scheduling
 //! 5. 统一异步接口设计
-//! 5. async design
+//! 5. Unified async interface design
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -83,7 +83,7 @@ impl AsyncRuntime {
 }
 
 /// 运行时状态
-/// runtime state
+/// Run status
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeStatus {
     pub name: String,
@@ -96,7 +96,7 @@ pub struct RuntimeStatus {
 }
 
 /// Tokio运行时实现
-/// Tokioruntime
+/// Tokioruntime implementation
 #[derive(Debug, Clone)]
 pub struct TokioRuntime {
     runtime: Arc<tokio::runtime::Runtime>,
@@ -170,7 +170,7 @@ impl TokioRuntime {
 }
 
 /// Smol运行时实现
-/// Smolruntime
+/// Smolruntime implementation
 #[derive(Debug, Clone)]
 pub struct SmolRuntime {
     executor: Arc<smol::Executor<'static>>,
@@ -240,9 +240,9 @@ impl SmolRuntime {
 }
 
 /// 异步运行时管理器
-/// async runtime
+/// asyncruntime manager
 /// 实现聚合模式，统一管理多个运行时
-/// aggregation ，runtime
+/// implementationpatternmanagementmultiple runtime
 #[allow(dead_code)]
 pub struct AsyncRuntimeManager {
     runtimes: Arc<RwLock<HashMap<String, AsyncRuntime>>>,
@@ -258,7 +258,7 @@ impl AsyncRuntimeManager {
     }
 
     /// 注册运行时
-    /// runtime
+    /// Register runtime
     pub async fn register_runtime(&self, name: String, runtime: AsyncRuntime) -> Result<()> {
         let mut runtimes = self.runtimes.write().await;
         runtimes.insert(name.clone(), runtime);
@@ -267,20 +267,20 @@ impl AsyncRuntimeManager {
     }
 
     /// 获取运行时
-    /// runtime
+    /// Get runtime
     pub async fn get_runtime(&self, name: &str) -> Option<AsyncRuntime> {
         let runtimes = self.runtimes.read().await;
         runtimes.get(name).cloned()
     }
 
     /// 获取默认运行时
-    /// runtime
+    /// Get runtime
     pub async fn get_default_runtime(&self) -> Option<AsyncRuntime> {
         self.get_runtime(&self.default_runtime).await
     }
 
     /// 启动所有运行时
-    /// all runtime
+    /// has runtime
     pub async fn start_all(&self) -> Result<()> {
         let runtimes = self.runtimes.read().await;
         for (name, runtime) in runtimes.iter() {
@@ -291,7 +291,7 @@ impl AsyncRuntimeManager {
     }
 
     /// 停止所有运行时
-    /// all runtime
+    /// has runtime
     pub async fn stop_all(&self) -> Result<()> {
         let runtimes = self.runtimes.read().await;
         for (name, runtime) in runtimes.iter() {
@@ -326,7 +326,7 @@ impl AsyncRuntimeManager {
     }
 
     /// 获取所有运行时状态
-    /// all runtime state
+    /// Get hasruntimestatus
     pub async fn get_all_status(&self) -> Vec<RuntimeStatus> {
         let runtimes = self.runtimes.read().await;
         let mut statuses = Vec::new();
@@ -389,7 +389,7 @@ impl<T> AsyncTaskWrapper<T> {
 }
 
 /// 异步日志记录器接口
-/// async
+/// asynclogging interface
 #[async_trait::async_trait]
 pub trait AsyncLogger: Send + Sync {
     async fn log_task_start(&self, task_id: &str);
@@ -398,7 +398,7 @@ pub trait AsyncLogger: Send + Sync {
 }
 
 /// 简单异步日志记录器实现
-/// simple async
+/// singleasynclogging implementation
 #[allow(dead_code)]
 pub struct SimpleAsyncLogger;
 

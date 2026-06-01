@@ -280,7 +280,7 @@
 //! };
 //!
 //! fn main() {
-//!     // 运行 Rust 1.94 特性演示
+//!     // 运行 Rust 1.96+ 可用特性演示 (原 1.94 引入)
 //!     demonstrate_rust_194_features();
 //!
 //!     // 使用 array_windows 检测 ABBA 模式

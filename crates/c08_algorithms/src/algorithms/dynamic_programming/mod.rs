@@ -1,12 +1,12 @@
 //! # 动态规划算法模块
-//! # dynamic programming algorithm module
+//! # dynamicalgorithm module
 //!
 //! 本模块实现了各种动态规划算法。
-//! this module dynamic programming algorithm 。
+//! This module implements dynamicalgorithm
 //use serde::{Serialize, Deserialize};
 
 /// 动态规划算法实现
-/// dynamic programming algorithm
+/// dynamicalgorithm implementation
 pub struct DynamicProgrammingAlgorithms;
 
 impl DynamicProgrammingAlgorithms {

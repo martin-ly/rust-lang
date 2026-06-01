@@ -1,5 +1,5 @@
 //! 增强的性能优化系统
-//! performance optimization system
+//! strongperformanceoptimization system
 //!
 //! 这个模块提供了增强的性能优化功能，包括内存使用优化、
 //! module performance optimization functionality ，memory optimization 、
@@ -13,7 +13,7 @@ use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的性能管理器
-/// performance
+/// strongperformance manager
 #[cfg(feature = "async")]
 #[derive(Clone)]
 #[allow(dead_code)]
@@ -129,7 +129,7 @@ pub struct IoSnapshot {
 }
 
 /// I/O统计信息
-/// I/O
+/// I/O information
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -240,7 +240,7 @@ pub struct OptimizationAttempt {
 }
 
 /// 性能配置
-/// performance
+/// performance configuration
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceConfig {
@@ -312,7 +312,7 @@ pub struct BandwidthSnapshot {
 #[cfg(feature = "async")]
 impl EnhancedPerformanceManager {
     /// 创建新的增强性能管理器
-    /// performance
+    /// Create new strongperformancemanager
     pub async fn new(config: PerformanceConfig) -> Self {
         let memory_monitor = Arc::new(MemoryMonitor::new());
         let cpu_monitor = Arc::new(CpuMonitor::new());
@@ -532,7 +532,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 获取综合性能报告
-    /// synthesize performance
+    /// Get performance
     pub async fn get_performance_report(&self) -> PerformanceReport {
         let memory_stats = self.memory_monitor.get_memory_stats().await;
         let cpu_stats = self.cpu_monitor.get_cpu_stats().await;
@@ -556,7 +556,7 @@ impl EnhancedPerformanceManager {
     }
 
     /// 计算性能分数
-    /// performance
+    /// Compute performance
     async fn calculate_performance_score(
         &self,
         memory_stats: &MemorySnapshot,

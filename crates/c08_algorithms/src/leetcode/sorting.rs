@@ -2,16 +2,16 @@
 //! LeetCode ordering algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的排序类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
-//! this module ordering LeetCode ， Rust 1.92 feature 。
+//! This module implements classicsort LeetCode Rust 1.92 newfeatures
 //!
 //! ## Rust 1.92 特性应用
-//! ## Rust 1.92 feature application
+//! ## Rust 1.92 Feature Application
 //!
 //! 1. **性能优化**: 使用 `<[_]>::rotate_right` 等新 API
 //! 1. **performance optimization **: `<[_]>::rotate_right` etc. API
 //! 2. **迭代器优化**: Iterator::eq 和 Iterator::eq_by 特化
 //! 3. **内存优化**: 使用标准库排序算法优化
-//! 3. **memory optimization **: standard library sorting algorithm optimization
+//! 3. **memoryoptimization**: usestandardlibrarysortalgorithm optimization
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 // ==================== 经典题目实现 ====================
@@ -132,7 +132,7 @@ pub fn is_anagram_sorting(s: String, t: String) -> bool {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有排序类问题
-/// all ordering problem
+/// Get hassortproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

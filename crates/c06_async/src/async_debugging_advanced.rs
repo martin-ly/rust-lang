@@ -1,18 +1,18 @@
 //! 高级异步调试和日志系统
-//! async and system
+//! Advanced Async Debugging and Logging System
 //!
 //! 本模块提供了完整的异步调试解决方案，重点解决以下问题：
-//! This module provides complete async solution ，emphasis under problem ：
+//! This module provides a complete async debugging solution, focusing on the following problems:
 //! 1. 异步执行流的同步化跟踪
-//! 1. async stream synchronous
+//! 1. Synchronous tracking of async execution flows
 //! 2. 跨任务上下文传播
-//! 2. task on under propagation
+//! 2. Cross-task context propagation
 //! 3. 性能瓶颈识别
-//! 3. performance
+//! 3. Performance bottleneck identification
 //! 4. 分布式追踪集成
-//! 4. distribution
+//! 4. Distributed tracing integration
 //! 5. 实时监控和可视化
-//! 5. and
+//! 5. Real-time monitoring and visualization
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -37,19 +37,19 @@ pub struct ExecutionFlow {
     /// stream
     pub name: String,
     /// 开始时间
-    /// time
+    /// Start time
     pub start_time: SystemTime,
     /// 结束时间
-    /// time
+    /// End time
     pub end_time: Option<SystemTime>,
     /// 执行步骤
-    /// step
+    /// execution step
     pub steps: Vec<ExecutionStep>,
     /// 上下文信息
-    /// on under
+    /// Context information
     pub context: HashMap<String, String>,
     /// 性能指标
-    /// performance indicator
+    /// Performance metrics
     pub metrics: FlowMetrics,
 }
 
@@ -65,22 +65,22 @@ pub struct ExecutionStep {
     /// step type
     pub step_type: StepType,
     /// 开始时间
-    /// time
+    /// Start time
     pub start_time: SystemTime,
     /// 结束时间
-    /// time
+    /// End time
     pub end_time: Option<SystemTime>,
     /// 执行状态
-    /// state
+    /// execution status
     pub status: StepStatus,
     /// 错误信息
-    /// error message
+    /// Error information
     pub error: Option<String>,
     /// 子步骤
-    /// step
+    /// Sub-steps
     pub sub_steps: Vec<ExecutionStep>,
     /// 上下文数据
-    /// on under
+    /// Context data
     pub context: HashMap<String, String>,
 }
 
@@ -93,13 +93,13 @@ pub enum StepType {
     /// network
     NetworkRequest,
     /// 数据库操作
-    /// database
+    /// datalibrary operation
     DatabaseOperation,
     /// 文件操作
     /// file operation
     FileOperation,
     /// 计算任务
-    /// task
+    /// Compute task
     Computation,
     /// 等待操作
     /// etc.
@@ -122,13 +122,13 @@ pub enum StepStatus {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FlowMetrics {
     /// 总执行时间
-    /// time
+    /// execution time
     pub total_duration: Duration,
     /// 异步等待时间
-    /// async etc. time
+    /// async time
     pub async_wait_time: Duration,
     /// 同步执行时间
-    /// synchronous time
+    /// synchronousexecution time
     pub sync_execution_time: Duration,
     /// 网络延迟
     /// network
@@ -137,7 +137,7 @@ pub struct FlowMetrics {
     /// database
     pub database_latency: Duration,
     /// 内存使用峰值
-    /// memory
+    /// memoryuse value
     pub peak_memory_usage: u64,
     /// CPU使用率
     /// CPU
@@ -145,7 +145,7 @@ pub struct FlowMetrics {
 }
 
 /// 异步执行流管理器
-/// async stream
+/// asyncexecutionflow manager
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct AsyncExecutionFlowManager {
@@ -163,12 +163,12 @@ pub struct FlowManagerConfig {
     /// maximum process
     pub max_flows: usize,
     /// 流程保留时间
-    /// process time
+    /// flowretained time
     pub flow_retention: Duration,
     /// 是否启用详细跟踪
     pub enable_detailed_tracking: bool,
     /// 是否启用性能监控
-    /// performance
+    /// Whether performance monitoring is enabled
     pub enable_performance_monitoring: bool,
     /// 采样率 (0.0-1.0)
     /// (0.0-1.0)
@@ -226,7 +226,7 @@ impl AsyncExecutionFlowManager {
     }
 
     /// 开始新的执行流
-    /// stream
+    /// Start newexecutionflow
     pub async fn start_flow(&self, name: String, context: HashMap<String, String>) -> String {
         let flow_id = Uuid::new_v4().to_string();
 
@@ -274,7 +274,7 @@ impl AsyncExecutionFlowManager {
     }
 
     /// 开始执行步骤
-    /// step
+    /// Start executionstep
     pub async fn start_step(
         &self,
         flow_id: &str,
@@ -322,7 +322,7 @@ impl AsyncExecutionFlowManager {
     }
 
     /// 完成执行步骤
-    /// step
+    /// Complete executionstep
     pub async fn complete_step(&self, flow_id: &str, step_id: &str) -> Result<()> {
         let end_time = SystemTime::now();
 
@@ -353,7 +353,7 @@ impl AsyncExecutionFlowManager {
     }
 
     /// 失败执行步骤
-    /// step
+    /// execution step
     pub async fn fail_step(&self, flow_id: &str, step_id: &str, error: String) -> Result<()> {
         let end_time = SystemTime::now();
 
@@ -387,7 +387,7 @@ impl AsyncExecutionFlowManager {
     }
 
     /// 完成执行流
-    /// stream
+    /// Complete executionflow
     pub async fn complete_flow(&self, flow_id: &str) -> Result<()> {
         let end_time = SystemTime::now();
 
@@ -440,14 +440,14 @@ impl AsyncExecutionFlowManager {
     }
 
     /// 获取执行流信息
-    /// stream
+    /// Get executionflowinformation
     pub async fn get_flow(&self, flow_id: &str) -> Option<ExecutionFlow> {
         let flows = self.flows.read().await;
         flows.get(flow_id).cloned()
     }
 
     /// 获取所有执行流
-    /// all stream
+    /// Get hasexecutionflow
     pub async fn get_all_flows(&self) -> Vec<ExecutionFlow> {
         let flows = self.flows.read().await;
         flows.values().cloned().collect()
@@ -584,12 +584,12 @@ pub struct DebugConfig {
     /// 是否启用自动跟踪
     pub enable_auto_tracking: bool,
     /// 是否启用性能监控
-    /// performance
+    /// Whether performance monitoring is enabled
     pub enable_performance_monitoring: bool,
     /// 是否启用详细日志
     pub enable_verbose_logging: bool,
     /// 超时时间
-    /// time
+    /// Timeout
     pub timeout: Option<Duration>,
     /// 重试次数
     pub retry_count: u32,
@@ -734,7 +734,7 @@ impl AsyncDebugDecorator {
     }
 
     /// 装饰数据库操作
-    /// database
+    /// datalibrary operation
     pub async fn debug_database_operation<F, T>(
         &self,
         operation: String,
@@ -856,7 +856,7 @@ pub struct FlowReport {
 }
 
 /// 综合演示函数
-/// synthesize demonstration function
+/// Comprehensive demo function
 pub async fn demonstrate_advanced_async_debugging() -> Result<()> {
     println!("🚀 高级异步调试系统演示");
     println!("================================================");

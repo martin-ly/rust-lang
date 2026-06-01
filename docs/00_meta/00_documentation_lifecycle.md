@@ -1,8 +1,8 @@
 # 文档生命周期管理制度
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)
-
 > **创建日期**: 2026-05-12
 > **版本**: 1.0
 > **状态**: ✅ 已生效
@@ -12,7 +12,7 @@
 ## 📑 目录
 
 - [文档生命周期管理制度](#文档生命周期管理制度)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 生命周期阶段](#1-生命周期阶段)
   - [2. 归档流程（强制）](#2-归档流程强制)
     - [2.1 触发归档的条件](#21-触发归档的条件)
@@ -32,7 +32,7 @@
   - [权威来源索引](#权威来源索引)
 
 ## 1. 生命周期阶段
->
+
 > **[来源: Rust Official Docs]**
 
 ```
@@ -198,17 +198,10 @@ python3 scripts/check_deprecated_markers.py --days 30
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**

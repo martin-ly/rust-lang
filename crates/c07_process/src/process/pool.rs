@@ -5,26 +5,26 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, SystemTime};
 
 /// 进程池配置
-/// process
+/// process configuration
 #[derive(Debug, Clone)]
 pub struct ProcessPoolConfig {
     /// 最小进程数量
-    /// minimum process quantity
+    /// minimumprocess count
     pub min_processes: usize,
     /// 最大进程数量
-    /// maximum process quantity
+    /// maximumprocess count
     pub max_processes: usize,
     /// 初始进程数量
-    /// process quantity
+    /// initialprocess count
     pub initial_processes: usize,
     /// 进程空闲超时时间
-    /// process time
+    /// processnull time
     pub idle_timeout: Duration,
     /// 健康检查间隔
     /// health check
     pub health_check_interval: Duration,
     /// 负载均衡策略
-    /// strategy
+    /// negative strategy
     pub load_balancing_strategy: LoadBalancingStrategy,
     /// 自动扩展策略
     /// strategy
@@ -32,7 +32,7 @@ pub struct ProcessPoolConfig {
 }
 
 /// 负载均衡策略
-/// strategy
+/// negative strategy
 #[derive(Debug, Clone)]
 pub enum LoadBalancingStrategy {
     /// 轮询
@@ -52,10 +52,10 @@ pub struct AutoScalingConfig {
     /// 启用自动扩展
     pub enabled: bool,
     /// CPU使用率阈值
-    /// CPU
+    /// CPUuse value
     pub cpu_threshold: f64,
     /// 内存使用率阈值
-    /// memory
+    /// memoryuse value
     pub memory_threshold: f64,
     /// 扩展检查间隔
     pub check_interval: Duration,
@@ -65,7 +65,7 @@ pub struct AutoScalingConfig {
 }
 
 /// 进程池
-/// process
+/// Process pool
 pub struct ProcessPool {
     config: ProcessPoolConfig,
     processes: Arc<Mutex<HashMap<u32, PooledProcess>>>,
@@ -89,7 +89,7 @@ struct PooledProcess {
 }
 
 /// 进程健康状态
-/// process state
+/// process status
 #[derive(Debug, Clone, PartialEq)]
 enum HealthStatus {
     Healthy,
@@ -98,7 +98,7 @@ enum HealthStatus {
 
 impl ProcessPool {
     /// 创建新的进程池
-    /// process
+    /// Create new process
     pub fn new(config: ProcessPoolConfig, base_config: ProcessConfig) -> ProcessResult<Self> {
         let pool = Self {
             config,
@@ -174,7 +174,7 @@ impl ProcessPool {
     }
 
     /// 获取可用进程
-    /// process
+    /// Get process
     pub fn get_process(&self) -> ProcessResult<u32> {
         // 检查是否需要自动扩展
         self.check_auto_scaling()?;
@@ -247,7 +247,7 @@ impl ProcessPool {
     }
 
     /// 检查进程健康状态
-    /// process state
+    /// process status
     fn is_process_healthy(&self, pid: u32) -> ProcessResult<bool> {
         // 简化实现，实际应该检查进程是否响应
         let processes = self.processes.lock().expect("进程池锁被污染");
@@ -352,7 +352,7 @@ impl ProcessPool {
     }
 
     /// 获取平均CPU使用率
-    /// CPU
+    /// Get CPUuse
     fn get_average_cpu_usage(&self) -> f64 {
         let processes = self.processes.lock().expect("进程池锁被污染");
         if processes.is_empty() {
@@ -364,7 +364,7 @@ impl ProcessPool {
     }
 
     /// 获取平均内存使用率
-    /// memory
+    /// Get memoryuse
     fn get_average_memory_usage(&self) -> f64 {
         let processes = self.processes.lock().expect("进程池锁被污染");
         if processes.is_empty() {
@@ -376,7 +376,7 @@ impl ProcessPool {
     }
 
     /// 获取进程池统计信息
-    /// process
+    /// Get processinformation
     pub fn get_stats(&self) -> ProcessPoolStats {
         let processes = self.processes.lock().expect("进程池锁被污染");
         let available = self
@@ -398,7 +398,7 @@ impl ProcessPool {
     }
 
     /// 清理不健康的进程
-    /// process
+    /// Cleanup process
     pub fn cleanup_unhealthy_processes(&self) -> ProcessResult<usize> {
         let mut removed_count = 0;
         let mut processes = self.processes.lock().expect("进程池锁被污染");
@@ -426,7 +426,7 @@ impl ProcessPool {
 }
 
 /// 进程池统计信息
-/// process
+/// process information
 #[derive(Debug, Clone)]
 pub struct ProcessPoolStats {
     pub total_processes: usize,

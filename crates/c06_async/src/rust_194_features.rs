@@ -1,8 +1,8 @@
 //! Rust 1.94.0 异步编程特性实现模块
-//! Rust 1.94.0 async feature module
+//! Rust 1.94.0 asyncfeaturesimplementation module
 //!
 //! 本模块展示了 Rust 1.94.0 在异步编程场景中的增强，包括：
-//! This module demonstrates Rust 1.94.0 in async scenario in ，：
+//! This module demonstrates Rust 1.94.0 asyncstrongincluding
 //! - 异步上下文中的 LazyLock / LazyLock in Async Context
 //! - 数学常量在异步计算中的应用 / Math Constants in Async Computation
 //! - Peekable 流处理 / Peekable Stream Processing
@@ -10,14 +10,14 @@
 //! - char 转换在异步解析中的应用 / char Conversion in Async Parsing
 //!
 //! # 文件信息
-//! #
+//! # File Info
 //! - 文件: rust_194_features.rs
-//! - 创建日期: 2026-03-06
+//! - File: rust_194_features.rs
 //! - date : 2026-03-06
 //! - 版本: 1.0
-//! - this : 1.0
+//! - Version: 1.0
 //! - Rust版本: 1.94.0
-//! - Rustthis : 1.94.0
+//! - Rust Version: 1.94.0
 //! - Edition: 2024
 use std::iter::Peekable;
 use std::sync::LazyLock;
@@ -36,10 +36,10 @@ use std::time::Duration;
 /// - method in async on under in useful ，can in async fn in
 ///
 /// 异步全局配置
-/// async global
+/// asyncglobal configuration
 ///
 /// Rust 1.94.0: 在异步上下文中使用 LazyLock 管理全局配置
-/// Rust 1.94.0: in async on under in LazyLock global
+/// Rust 1.94.0: asynccontextuse LazyLock managementglobal configuration
 pub static ASYNC_GLOBAL_CONFIG: LazyLock<AsyncConfig> = LazyLock::new(|| {
     println!("异步初始化全局配置...");
     AsyncConfig {
@@ -62,7 +62,7 @@ pub struct AsyncConfig {
 /// async database connection pool
 ///
 /// Rust 1.94.0: 在异步上下文中管理昂贵资源
-/// Rust 1.94.0: in async on under in
+/// Rust 1.94.0: asynccontextmanagement resource
 pub static ASYNC_DB_POOL: LazyLock<AsyncDbPool> = LazyLock::new(|| {
     println!("初始化异步数据库连接池...");
     AsyncDbPool {
@@ -88,23 +88,25 @@ impl AsyncDbPool {
     }
 
     /// 获取活跃连接数
+    /// Get active
     pub fn active_count(&self) -> u64 {
         self.active_count.load(Ordering::Relaxed)
     }
 }
 
 /// 异步配置管理器
-/// async
+/// asyncconfiguration manager
 ///
 /// Rust 1.94.0: 使用 LazyLock::get 在异步上下文中安全访问配置
-/// Rust 1.94.0: LazyLock::get in async on under in
+/// Rust 1.94.0: use LazyLock::get asynccontextsafety configuration
 pub struct AsyncConfigManager;
 
 impl AsyncConfigManager {
     /// 获取配置引用
-    /// reference
+    /// Get configurationreference
     ///
     /// Rust 1.94.0: 使用 Deref
+    /// Rust 1.94.0: Using Deref
     pub fn get_config() -> &'static AsyncConfig {
         &ASYNC_GLOBAL_CONFIG
     }
@@ -118,7 +120,7 @@ impl AsyncConfigManager {
     }
 
     /// 异步获取超时时间
-    /// async time
+    /// asyncget time
     pub async fn get_timeout() -> Duration {
         tokio::time::sleep(Duration::from_millis(1)).await;
         Duration::from_secs(Self::get_config().timeout_seconds)
@@ -151,7 +153,7 @@ pub async fn demonstrate_async_lazylock() {
 }
 
 /// 异步懒加载值
-/// async
+/// async value
 ///
 /// Rust 1.94.0: 在异步任务中使用 LazyLock
 /// Rust 1.94.0: in async task in LazyLock
@@ -161,7 +163,7 @@ pub struct AsyncLazyValue<T: Send + Sync> {
 
 impl<T: Send + Sync> AsyncLazyValue<T> {
     /// 创建新的异步懒加载值
-    /// async
+    /// Create new asyncvalue
     pub fn new(f: fn() -> T) -> Self {
         Self {
             inner: LazyLock::new(f),
@@ -169,7 +171,7 @@ impl<T: Send + Sync> AsyncLazyValue<T> {
     }
 
     /// 异步获取值
-    /// async
+    /// asyncget value
     ///
     /// Rust 1.94.0: 使用 Deref 在异步上下文中安全访问
     /// Rust 1.94.0: Deref in async on under in
@@ -188,7 +190,7 @@ impl<T: Send + Sync> AsyncLazyValue<T> {
 /// # 2. 数学常量在异步计算中的应用 / Math Constants in Async Computation
 ///
 /// Rust 1.94.0 添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量，
-/// 这些常量在异步数值计算和科学计算中非常有用。
+/// Rust 1.94.0 Added EULER_GAMMA and GOLDEN_RATIO constants,
 /// constant in async and in useful 。
 /// 异步数学计算器
 /// async
@@ -263,7 +265,7 @@ pub async fn demonstrate_async_math() {
 /// async
 ///
 /// Rust 1.94.0: 使用数学常量进行异步数值分析
-/// Rust 1.94.0: constant async analyze
+/// Rust 1.94.0: useconstantasyncvalue analysis
 pub async fn async_numerical_integration<F>(f: F, a: f64, b: f64, n: usize) -> f64
 where
     F: Fn(f64) -> f64 + Send + 'static,
@@ -289,7 +291,7 @@ where
 /// # 3. Peekable 流处理 / Peekable Stream Processing
 ///
 /// Rust 1.94.0 为 Peekable 添加了 next_if_map 和 next_if_map_mut 方法，
-/// 这些方法在异步流处理和解析中特别有用。
+/// Rust 1.94.0 Added next_if_map and next_if_map_mut methods to Peekable,
 /// method in async stream and in useful 。
 /// 异步令牌流
 /// async stream
@@ -303,7 +305,7 @@ pub struct AsyncTokenStream {
 
 impl AsyncTokenStream {
     /// 创建新的令牌流
-    /// stream
+    /// Create new flow
     pub fn new(tokens: Vec<String>) -> Self {
         Self {
             tokens,
@@ -333,6 +335,7 @@ impl AsyncTokenStream {
     /// async
     ///
     /// Rust 1.94.0: 使用 next_if_map 模式
+    /// Rust 1.94.0: use next_if_map pattern
     pub async fn parse_number(&mut self) -> Option<f64> {
         if let Some(token) = self.peek().await
             && let Ok(num) = token.parse::<f64>()
@@ -406,7 +409,7 @@ impl<I: Iterator<Item = String>> AsyncExpressionParser<I> {
 }
 
 /// 演示异步流处理
-/// demonstration async stream
+/// asyncflow processing
 #[allow(dead_code)]
 pub async fn demonstrate_async_stream_processing() {
     println!("\n=== 异步流处理演示 ===\n");
@@ -511,7 +514,7 @@ impl AsyncSlidingWindowProcessor {
 }
 
 /// 演示异步窗口处理
-/// demonstration async
+/// async processing
 #[allow(dead_code)]
 pub async fn demonstrate_async_windows() {
     println!("\n=== 异步数组窗口处理演示 ===\n");
@@ -542,7 +545,7 @@ pub async fn demonstrate_async_windows() {
 /// async Unicode
 ///
 /// Rust 1.94.0: 使用 char 到 usize 转换进行异步文本处理
-/// Rust 1.94.0: char to usize conversion async this
+/// Rust 1.94.0: use char usize conversionasync processing
 pub struct AsyncUnicodeParser;
 
 impl AsyncUnicodeParser {
@@ -596,7 +599,7 @@ impl AsyncUnicodeParser {
 }
 
 /// Unicode 组成分析结果
-/// Unicode component result
+/// Unicode analysis result
 #[derive(Debug, Default)]
 pub struct UnicodeComposition {
     pub ascii_chars: Vec<char>,
@@ -638,7 +641,7 @@ pub async fn demonstrate_async_char_conversion() {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
-/// ，to goal before
+/// Search 2D array, early exit when target found
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
         for (j, &val) in row.iter().enumerate() {
@@ -651,7 +654,7 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
-/// pipe
+/// Data validation pipeline
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -663,6 +666,7 @@ pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
 }
 
 /// 批量处理带错误控制
+/// Batch processing with error control
 pub fn batch_process<T, E>(
     items: &[T],
     processor: impl Fn(&T) -> Result<(), E>,
@@ -720,7 +724,7 @@ pub async fn demonstrate_rust_194_async_features() {
 }
 
 /// 获取 Rust 1.94.0 异步编程特性信息
-/// Rust 1.94.0 async feature
+/// Get Rust 1.94.0 asyncfeaturesinformation
 pub fn get_rust_194_async_info() -> String {
     "Rust 1.94.0 异步编程特性:\n- 异步上下文中的 LazyLock (get, get_mut, force_mut)\n- \
      数学常量在异步计算中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n- Peekable 流处理 (next_if_map, \
@@ -855,10 +859,10 @@ mod tests {
     // ==================== 异步边界测试 ====================
 
     /// 测试 AsyncLazyValue 的并发访问
-    /// AsyncLazyValue concurrency
+    /// Test AsyncLazyValue concurrent
     ///
     /// 验证多个并发任务同时访问同一个 LazyValue 时的行为
-    /// concurrency task LazyValue as
+    /// Verify multipleconcurrenttask LazyValue
     #[tokio::test]
     #[cfg_attr(miri, ignore)]
     async fn test_async_lazy_value_concurrent() {
@@ -899,10 +903,10 @@ mod tests {
     }
 
     /// 测试异步数学计算的超时
-    /// async
+    /// Test asynccompute
     ///
     /// 验证长时间计算可以被正确取消
-    /// time can is
+    /// Verify longtimecomputecanpositive
     #[tokio::test]
     #[cfg_attr(miri, ignore)]
     async fn test_async_math_timeout() {
@@ -934,10 +938,10 @@ mod tests {
     }
 
     /// 测试 AsyncUnicodeParser 对空字符串的分析
-    /// AsyncUnicodeParser to analyze
+    /// Test AsyncUnicodeParser nullstringanalysis
     ///
     /// 验证空字符串和边界情况的处理
-    /// and edge situation
+    /// Verify nullstringedgehandling
     #[tokio::test]
     #[cfg_attr(miri, ignore)]
     async fn test_unicode_analyzer_empty() {

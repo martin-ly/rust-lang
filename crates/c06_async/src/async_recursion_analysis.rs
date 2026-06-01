@@ -1,17 +1,16 @@
 //! 异步递归深度分析 - Async Recursion Deep Analysis
 //!
 //! # 概述 (Overview)
-//!
-//! 本模块深入分析 Rust 中的异步递归，包括：
+//! # Overview
 //! this module analyze Rust in async ，：
 //! - 异步递归与同步递归的等价关系
 //! - async and synchronous etc.
 //! - 异步递归的实现技术（Box、async-recursion）
 //! - async technique （Box、async-recursion）
 //! - 尾递归优化在异步中的应用
-//! - optimization in async in application
+//! - optimizationasync application
 //! - 递归与迭代的转换证明
-//! - and conversion
+//! - conversion proof
 //! - 内存模型与栈管理
 //! - memory model and stack
 //!
@@ -66,7 +65,7 @@
 //! async fn f(n: u32) -> u32 {
 //!     if n == 0 { 0 }
 //!     else { f(n-1).await + 1 }  // ❌ 编译错误
-//! }
+//! else { f(n-1).await + 1 } // error
 //!
 //! 原因: Future 包含捕获的状态，递归调用导致无限大小
 //! cause : Future state ，
@@ -96,7 +95,7 @@
 //!
 //! ```text
 //! 尾递归定义: f 是尾递归的，如果递归调用是函数的最后一个操作
-//! definition : f ，if function finally
+//! : f functionback operation
 //!
 //! 尾递归形式:
 //! :
@@ -144,14 +143,14 @@
 //!
 //! ```text
 //! 同步递归: 使用系统栈
-//! synchronous : system stack
+//! synchronous: usesystem stack
 //! - 每次调用占用栈帧
 //! - stack
 //! - 深度受限于栈大小 (通常 2-8 MB)
 //! - stack ( 2-8 MB)
 //!
 //! 异步递归: 使用堆内存
-//! async : heap memory
+//! async: useheap memory
 //! - 每个 Future 在堆上分配 (通过 Box)
 //! - Future in heap on ( Box)
 //! - 深度受限于堆大小 (通常远大于栈)
@@ -168,7 +167,7 @@ use tokio::time::sleep;
 /// # example 1: this async
 ///
 /// 展示如何正确实现异步递归函数
-/// async function
+/// demonstratepositiveimplementationasync function
 pub mod basic_async_recursion {
     use super::*;
 
@@ -176,7 +175,7 @@ pub mod basic_async_recursion {
     /// synchronous :
     ///
     /// ## 形式化定义
-    /// ## definition
+    /// ## Formal Definition
     /// ```text
     /// fact : ℕ → ℕ
     /// fact(n) = Π_{i=1}^{n} i
@@ -234,7 +233,7 @@ pub mod basic_async_recursion {
     }
 
     /// 验证等价性
-    /// etc.
+    /// Verify equivalence
     pub async fn verify_equivalence() {
         println!("\n=== 异步递归基础示例 ===");
 
@@ -256,10 +255,10 @@ pub mod basic_async_recursion {
 }
 
 /// # 示例 2: 尾递归优化
-/// # example 2: optimization
+/// # 2: optimization
 ///
 /// 展示尾递归及其在异步中的应用
-/// and its in async in application
+/// demonstrateasync application
 pub mod tail_recursion {
     use super::*;
 
@@ -326,7 +325,7 @@ pub mod tail_recursion {
     /// this （etc. ）
     ///
     /// ## 等价性证明
-    /// ## etc.
+    /// ## proof
     /// ```text
     /// 对于所有 n,
     /// to all n,
@@ -373,7 +372,7 @@ pub mod tail_recursion {
     }
 
     /// 验证所有版本的等价性
-    /// all this etc.
+    /// Verify hasversion
     pub async fn verify_all_versions() {
         println!("\n=== 尾递归优化示例 ===");
 
@@ -400,7 +399,7 @@ pub mod tail_recursion {
 }
 
 /// # 示例 3: 树的递归遍历
-/// # example 3: tree
+/// # 3: tree traversal
 ///
 /// 展示更复杂的递归结构
 /// complex structure
@@ -417,7 +416,7 @@ pub mod tree_traversal {
 
     impl Tree {
         /// 创建示例树
-        /// example tree
+        /// create tree
         ///
         /// ```text
         ///       10
@@ -469,17 +468,17 @@ pub mod tree_traversal {
     }
 
     /// 迭代版本: 使用显式栈
-    /// this : stack
+    /// version: use stack
     ///
     /// ## 转换方法
     /// ## conversion method
     /// ```text
     /// 1. 创建栈存储待处理节点
-    /// 1. stack node
+    /// 1. createstackhandling node
     /// 2. 深度优先遍历
-    /// 2.
+    /// 2. excellent traversal
     /// 3. 累加所有值
-    /// 3. all
+    /// 3. has value
     /// ```
     pub fn sum_iter(tree: &Tree) -> i32 {
         let mut stack = vec![tree];
@@ -525,7 +524,7 @@ pub mod tree_traversal {
     }
 
     /// 验证等价性
-    /// etc.
+    /// Verify equivalence
     pub async fn verify_equivalence() {
         println!("\n=== 树遍历递归示例 ===");
 
@@ -600,7 +599,7 @@ pub mod deep_recursion {
     /// this （O(1) time complexity ）
     ///
     /// ## 数学证明
-    /// ##
+    /// ## proof
     /// ```text
     /// sum(1..n) = Σ_{i=1}^{n} i = n(n+1)/2
     ///
@@ -664,7 +663,7 @@ pub mod deep_recursion {
 /// # 示例 5: 互递归 (Mutual Recursion)
 ///
 /// 展示相互调用的递归函数
-/// function
+/// demonstrate function
 pub mod mutual_recursion {
     use super::*;
 
@@ -729,7 +728,7 @@ pub mod mutual_recursion {
 }
 
 /// # 综合示例: 运行所有演示
-/// # synthesize example : Run all demonstrations
+/// # Comprehensive Example: Run All Demos
 pub async fn run_all_examples() {
     println!("╔══════════════════════════════════════════════════════════╗");
     println!("║       Rust 异步递归深度分析                              ║");

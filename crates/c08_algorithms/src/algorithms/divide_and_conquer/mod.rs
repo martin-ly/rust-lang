@@ -1,12 +1,12 @@
 //! # 分治算法模块
-//! # divide and conquer algorithm module
+//! # algorithm module
 //!
 //! 本模块实现了各种分治算法。
-//! this module divide and conquer algorithm 。
+//! This module implements algorithm
 //use serde::{Serialize, Deserialize};
 
 /// 分治算法实现
-/// divide and conquer algorithm
+/// algorithm implementation
 pub struct DivideAndConquerAlgorithms;
 
 impl DivideAndConquerAlgorithms {

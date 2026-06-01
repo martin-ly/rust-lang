@@ -2,14 +2,14 @@
 //! Rust 1.95 feature —— process scenario
 //!
 //! # 概述
-//! #
+//! # Overview
 //!
 //! Rust 1.95 在进程管理和系统编程方面的增强：
 //! Rust 1.95 in process and system surface ：
 //! - **`Atomic*::update`/`try_update`** — 进程间共享计数器（如信号量）
 //! - **`Atomic*::update`/`try_update`** — process （semaphore ）
 //! - **`core::hint::cold_path`** — fork/spawn 失败路径优化
-//! - **`if let` guards** — 进程状态转换条件匹配
+//! - **`core::hint::cold_path`** fork/spawn path optimization
 //! - **`if let` guards** — process state conversion condition
 //! - **`cfg_select!`** — 跨平台进程创建标志
 //! - **`cfg_select!`** — platform process mark
@@ -21,7 +21,7 @@ use std::sync::atomic::{AtomicI32, AtomicUsize, Ordering};
 // ============================================================================
 
 /// # 进程间原子操作
-/// # process atomic operation
+/// # processatomic operation
 ///
 /// 在多进程环境中（如通过共享内存），原子操作是协调的基础。
 /// in process environment in （shared memory ），atomic operation foundation 。
@@ -70,7 +70,7 @@ impl ProcessAtomicExamples {
 // ============================================================================
 
 /// # 进程创建错误路径优化
-/// # process optimization
+/// # processcreateerrorpath optimization
 ///
 /// fork/spawn 失败在正常运行中应该是极少数情况。
 /// fork/spawn in Run in should situation 。
@@ -159,7 +159,7 @@ impl ProcessCfgSelectExamples {
     };
 
     /// 最大进程数软限制推荐值
-    /// maximum process
+    /// maximumprocesssoftrecommended value
     pub const MAX_PROCESSES_RECOMMENDED: usize = cfg_select! {
         target_os = "linux" => 32768,
         target_os = "macos" => 2666,

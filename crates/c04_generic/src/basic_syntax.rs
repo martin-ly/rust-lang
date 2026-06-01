@@ -1864,6 +1864,7 @@ pub mod rust_189_new_features {
         impl<T: Default + Copy, const N: usize> FixedVector<T, N> {
             /// 创建零向量
             /// Creates零向量
+            /// Createszerovector
             pub fn zero() -> Self {
                 Self {
                     data: [T::default(); N],

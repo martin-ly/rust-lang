@@ -297,7 +297,7 @@ where
 
 #[tokio::main]
 async fn main() {
-    println!("=== Rust 1.94 ControlFlow 深度示例 ===\n");
+    println!("=== Rust 1.96+ ControlFlow 深度示例 ===\n");
     
     // 1. 连接池示例
     let connections = vec![

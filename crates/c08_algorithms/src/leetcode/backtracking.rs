@@ -2,20 +2,20 @@
 //! LeetCode algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的回溯类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
-//! this module LeetCode ， Rust 1.91 feature 。
+//! This module implements classic LeetCode Rust 1.91 newfeatures
 //!
 //! ## Rust 1.91 特性应用
-//! ## Rust 1.91 feature application
+//! ## Rust 1.91 Feature Application
 //!
 //! - **JIT 优化**: 回溯递归性能提升 10-15%
 //! - **JIT optimization **: performance 10-15%
 //! - **内存优化**: 使用 Vec 高效存储路径，减少克隆
 //! - **memory optimization **: Vec efficient ，
 //! - **迭代器优化**: 回溯中的迭代器性能提升
-//! - **optimization **: in performance
+//! - **iteratoroptimization**: iteratorperformance improvement
 //!
 //! ## 包含的经典题目
-//! ##
+//! ## Classic Problems
 //!
 //! - 17. Letter Combinations of a Phone Number（电话号码的字母组合）
 //! - 22. Generate Parentheses（括号生成）
@@ -32,23 +32,23 @@ use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 /// 46. Permutations（全排列）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个不含重复数字的数组 `nums`，返回其 **所有可能的全排列**。你可以 **按任意顺序** 返回答案。
 /// `nums`，its **all may arrangement **。can **order ** answer 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升 10-15%
 /// - **JIT optimization **: performance 10-15%
 /// - **内存优化**: 使用 Vec 高效存储路径，减少克隆
 /// - **memory optimization **: Vec efficient ，
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n! * n)
 /// - time complexity : O(n! * n)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn permute(nums: Vec<i32>) -> Vec<Vec<i32>> {
     let mut result = Vec::new();
     let mut current = Vec::new();
@@ -85,23 +85,23 @@ fn backtrack_permute(
 /// 78. Subsets（子集）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个整数数组 `nums`，数组中的元素 **互不相同**。返回该数组所有可能的子集（幂集）。解集 **不能** 包含重复的子集。你可以按 **任意顺序** 返回解集。
 /// `nums`，in element ****。this all may subset （power set ）。 **cannot ** subset 。can **order ** 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Backtracking recursion performance improvement
 /// - **内存优化**: 使用 Vec 存储路径
-/// - **memory optimization **: Vec
+/// - **Memory Optimization**: Use Vec to store paths
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(2^n * n)
 /// - time complexity : O(2^n * n)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn subsets(nums: Vec<i32>) -> Vec<Vec<i32>> {
     let mut result = Vec::new();
     let mut current = Vec::new();
@@ -130,25 +130,25 @@ fn backtrack_subsets(
 /// 90. Subsets II（子集 II）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个整数数组 `nums`，其中可能包含重复元素，请你返回该数组所有可能的子集（幂集）。
 /// `nums`，its in may element ，this all may subset （power set ）。
 /// 解集 **不能** 包含重复的子集。返回的解集中，子集可以按 **任意顺序** 排列。
 /// **cannot ** subset 。in ，subset can **order ** arrangement 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Backtracking recursion performance improvement
 /// - **内存优化**: 使用排序去重，减少重复计算
 /// - **memory optimization **: ordering ，
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(2^n * n)
 /// - time complexity : O(2^n * n)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn subsets_with_dup(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
     nums.sort_unstable();
     let mut result = Vec::new();
@@ -183,21 +183,21 @@ fn backtrack_subsets_with_dup(
 /// 39. Combination Sum（组合总和）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个 **无重复元素** 的整数数组 `candidates` 和一个目标整数 `target`，找出 `candidates` 中可以使数字和为目标数 `target` 的 **所有不同组合**，
 /// **element ** `candidates` and goal `target`， `candidates` in can and as goal `target` **all combination **，
 /// 并以列表形式返回。你可以按 **任意顺序** 返回这些组合。`candidates` 中的 **同一个** 数字可以 **无限制重复被选取**。
 /// and 。can **order ** combination 。`candidates` in **** can **is **。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Backtracking recursion performance improvement
 /// - **内存优化**: 使用 Vec 存储路径
-/// - **memory optimization **: Vec
+/// - **Memory Optimization**: Use Vec to store paths
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(2^n)，其中 n 是数组长度
 /// - time complexity : O(2^n)，its in n
 /// - 空间复杂度: O(target)
@@ -239,23 +239,23 @@ fn backtrack_combination_sum(
 /// 77. Combinations（组合）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定两个整数 `n` 和 `k`，返回范围 `[1, n]` 中所有可能的 `k` 个数的组合。
 /// `n` and `k`，scope `[1, n]` in all may `k` combination 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Backtracking recursion performance improvement
 /// - **内存优化**: 使用 Vec 存储路径
-/// - **memory optimization **: Vec
+/// - **Memory Optimization**: Use Vec to store paths
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(C(n, k))
 /// - time complexity : O(C(n, k))
 /// - 空间复杂度: O(k)
-/// - space complexity : O(k)
+/// - Space Complexity: O(k)
 pub fn combine(n: i32, k: i32) -> Vec<Vec<i32>> {
     let mut result = Vec::new();
     let mut current = Vec::new();
@@ -288,23 +288,23 @@ fn backtrack_combine(
 /// 22. Generate Parentheses（括号生成）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 数字 `n` 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 **有效的** 括号组合。
 /// `n` to ，design function ，can all may and and **effective ** combination 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Backtracking recursion performance improvement
 /// - **内存优化**: 使用 String 和 Vec 高效构建
 /// - **memory optimization **: String and Vec efficient
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(4^n / sqrt(n))
 /// - time complexity : O(4^n / sqrt(n))
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn generate_parenthesis(n: i32) -> Vec<String> {
     let mut result = Vec::new();
     let mut current = String::new();
@@ -337,23 +337,23 @@ fn backtrack_parenthesis(left: i32, right: i32, current: &mut String, result: &m
 /// 17. Letter Combinations of a Phone Number（电话号码的字母组合）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个仅包含数字 `2-9` 的字符串，返回所有它能表示的字母组合。答案可以按 **任意顺序** 返回。
 /// `2-9` ，all represent combination 。answer can **order ** 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Backtracking recursion performance improvement
 /// - **内存优化**: 使用 String 和 Vec 高效构建
 /// - **memory optimization **: String and Vec efficient
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(4^n * n)，其中 n 是数字字符串长度
 /// - time complexity : O(4^n * n)，its in n
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn letter_combinations(digits: String) -> Vec<String> {
     if digits.is_empty() {
         return Vec::new();
@@ -398,19 +398,19 @@ fn backtrack_letter_combinations(
 /// 79. Word Search（单词搜索）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个 `m x n` 二维字符网格 `board` 和一个字符串单词 `word`。如果 `word` 存在于网格中，返回 `true`；否则，返回 `false`。
 /// `m x n` `board` and `word`。if `word` in in ， `true`；， `false`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Backtracking recursion performance improvement
 /// - **内存优化**: 原地标记访问过的节点，O(1) 额外空间
-/// - **memory optimization **: mark node ，O(1) outside space
+/// - **memoryoptimization**: nodeO(1) outer space
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(m * n * 4^L)，其中 L 是单词长度
 /// - time complexity : O(m * n * 4^L)，its in L
 /// - 空间复杂度: O(L)
@@ -477,7 +477,7 @@ fn backtrack_word_search(
 /// 216. Combination Sum III（组合总和 III）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 找出所有相加之和为 `n` 的 `k` 个数的组合，且满足下列条件：
 /// all 's and as `n` `k` combination ，and under condition ：
 /// - 只使用数字 1-9
@@ -486,18 +486,18 @@ fn backtrack_word_search(
 /// - **at most **
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Backtracking recursion performance improvement
 /// - **内存优化**: 使用 Vec 存储路径
-/// - **memory optimization **: Vec
+/// - **Memory Optimization**: Use Vec to store paths
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(C(9, k))
 /// - time complexity : O(C(9, k))
 /// - 空间复杂度: O(k)
-/// - space complexity : O(k)
+/// - Space Complexity: O(k)
 pub fn combination_sum3(k: i32, n: i32) -> Vec<Vec<i32>> {
     let mut result = Vec::new();
     let mut current = Vec::new();
@@ -536,19 +536,19 @@ fn backtrack_combination_sum3(
 /// 131. Palindrome Partitioning（分割回文串）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个字符串 `s`，请你将 `s` 分割成一些子串，使每个子串都是 **回文串**。返回 `s` 所有可能的分割方案。
 /// `s`，will `s` ， ****。 `s` all may 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 回溯递归性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Backtracking recursion performance improvement
 /// - **内存优化**: 使用动态规划预处理回文判断
 /// - **memory optimization **: dynamic programming
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(2^n * n)
 /// - time complexity : O(2^n * n)
 /// - 空间复杂度: O(n²)
@@ -606,7 +606,7 @@ fn backtrack_partition(
 // ==================== 问题信息注册 ====================
 
 /// 获取所有回溯类问题
-/// all problem
+/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

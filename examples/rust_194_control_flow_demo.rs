@@ -317,7 +317,7 @@ fn batch_operation<T>(
 // =============================================================================
 
 fn main() {
-    println!("=== Rust 1.94 ControlFlow 演示 ===\n");
+    println!("=== Rust 1.96+ ControlFlow 演示 ===\n");
 
     // 1. 基础查找
     println!("1. 基础查找示例");

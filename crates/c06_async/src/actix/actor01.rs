@@ -1,5 +1,5 @@
 //! Actix 最小可运行示例：定义消息/Actor，发送并接收响应。
-//! Actix minimum Run example ：definition /Actor，and 。
+//! Actix Minimum Runnable Example: Define Message/Actor, Send and Receive Response.
 //!
 //! 用法：
 //! ：
@@ -51,7 +51,7 @@ pub async fn actor_exp01() {
 }
 
 /// 同步封装：内部创建并运行 Actix `System`，方便示例/二进制入口直接调用
-/// synchronous ：inside and Run Actix `System`，example /
+/// Synchronous Wrapper: Internally create and run Actix `System`, convenient for example/binary entry direct call
 #[allow(unused)]
 pub fn actor_exp01_run() {
     let sys = System::new();

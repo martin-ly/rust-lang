@@ -1,5 +1,5 @@
 //! # Glommio 高性能异步运行时模块
-//! # Glommio performance async runtime module
+//! # Glommio high-performanceasyncruntime module
 //!
 //! Glommio 是由 DataDog 开发的基于 io_uring 的高性能异步运行时。
 //! Glommio DataDog io_uring performance async runtime 。
@@ -7,14 +7,14 @@
 //! thread-per-core architecture ，as performance design 。
 //!
 //! ## 核心特性
-//! ## core feature
+//! ## Core Features
 //!
 //! - **Thread-per-core 架构**: 每个 CPU 核心一个线程，避免线程切换开销
 //! - **Thread-per-core architecture **: CPU core thread ，thread switching overhead
 //! - **基于 io_uring**: 利用 Linux 5.1+ 的高性能 I/O 接口
-//! - ** io_uring**: Linux 5.1+ performance I/O
+//! - ** io_uring**: Linux 5.1+ high-performance I/O interface
 //! - **NUMA 感知**: 针对多 socket 系统优化
-//! - **NUMA **: to socket system optimization
+//! - **NUMA **: multiple socket system optimization
 //! - **零拷贝 I/O**: 最小化数据复制
 //! - ** I/O**: minimum
 //! - **CPU 亲和性**: 精确控制任务调度到特定核心
@@ -24,22 +24,22 @@
 //! ## scenario
 //!
 //! - 高频交易系统
-//! - system
+//! - high system
 //! - 数据库引擎
-//! - database
+//! - datalibrary engine
 //! - 高性能网络服务
-//! - performance network
+//! - high-performance service
 //! - 实时数据处理
-//! -
+//! - real-timedata processing
 //!
 //! ## 限制
-//! ##
+//! ## Constraints
 //!
 //! - **仅支持 Linux**: 依赖 io_uring (Linux 5.1+)
 //! - **学习曲线**: thread-per-core 模型需要特殊的编程思维
 //! - **learn line **: thread-per-core
 //! - **生态系统**: 相对较小的生态系统
-//! - **ecosystem system **: to ecosystem system
+//! - **system**: small system
 #![cfg(target_os = "linux")]
 
 use std::time::Duration;
@@ -48,7 +48,7 @@ use std::time::Duration;
 /// Glommio runtime example
 ///
 /// # 示例
-/// # example
+/// # Examples
 ///
 /// ```rust,no_run
 /// use c06_async::glommio::GlommioExample;
@@ -60,7 +60,7 @@ pub struct GlommioExample;
 
 impl GlommioExample {
     /// 运行基本示例
-    /// Run this example
+    /// run example
     pub fn run_basic_example() {
         #[cfg(target_os = "linux")]
         {
@@ -87,7 +87,7 @@ impl GlommioExample {
     }
 
     /// 运行 I/O 密集型示例
-    /// Run I/O example
+    /// Run I/O
     pub fn run_io_intensive_example() {
         #[cfg(target_os = "linux")]
         {
@@ -122,7 +122,7 @@ impl GlommioExample {
     }
 
     /// 运行多核并行示例
-    /// Run parallelism example
+    /// Run multipleparallel
     pub fn run_multicore_example() {
         #[cfg(target_os = "linux")]
         {
@@ -165,12 +165,12 @@ impl GlommioExample {
 }
 
 /// Glommio 性能特性分析
-/// Glommio performance feature analyze
+/// Glommio performancefeatures analysis
 pub struct GlommioPerformance;
 
 impl GlommioPerformance {
     /// 获取性能特性描述
-    /// performance feature describe
+    /// Get performancefeatures
     pub fn get_characteristics() -> Vec<(&'static str, &'static str)> {
         vec![
             ("架构模型", "Thread-per-core (每核心一线程)"),
@@ -207,6 +207,7 @@ pub struct GlommioBestPractices;
 
 impl GlommioBestPractices {
     /// 获取最佳实践建议
+    /// Get bestpractice
     pub fn get_practices() -> Vec<(&'static str, &'static str)> {
         vec![
             ("任务分配", "将任务固定到特定核心，避免跨核心通信"),

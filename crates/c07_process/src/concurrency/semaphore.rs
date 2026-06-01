@@ -95,7 +95,7 @@ impl ProcessSemaphore {
     }
 
     /// 获取当前可用许可数量
-    /// when before quantity
+    /// Get currentcount
     pub fn available_permits(&self) -> usize {
         *self.permits.lock().expect("信号量许可锁被污染")
     }

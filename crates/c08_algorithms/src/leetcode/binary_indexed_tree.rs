@@ -2,15 +2,15 @@
 //! LeetCode Fenwick tree algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的树状数组类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
-//! this module Fenwick tree LeetCode ， Rust 1.92 feature 。
+//! This module implements classictreearray LeetCode Rust 1.92 newfeatures
 //!
 //! ## Rust 1.92 特性应用
-//! ## Rust 1.92 feature application
+//! ## Rust 1.92 Feature Application
 //!
 //! 1. **性能优化**: 使用树状数组进行前缀和查询和更新
 //! 1. **performance optimization **: Fenwick tree before and and
 //! 2. **内存优化**: 高效的树状数组实现
-//! 2. **memory optimization **: efficient Fenwick tree
+//! 2. **memoryoptimization**: efficienttreearray implementation
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 // ==================== 数据结构定义 ====================
@@ -155,7 +155,7 @@ pub fn count_range_sum_bit(nums: Vec<i32>, lower: i32, upper: i32) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有树状数组类问题
-/// all Fenwick tree problem
+/// Get hastreearrayproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

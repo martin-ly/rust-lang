@@ -1,4 +1,5 @@
 //! 原生 async fn in trait 示例（Rust 1.75.0 / Edition 2021+）
+//! Native async fn in trait example (Rust 1.75.0 / Edition 2021+)
 #![allow(async_fn_in_trait)] // 教学示例：在公开 trait 中使用 async fn，抑制 lint 提示
 
 #[allow(unused)]

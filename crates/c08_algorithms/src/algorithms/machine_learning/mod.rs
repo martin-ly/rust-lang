@@ -1,12 +1,12 @@
 //! # 机器学习算法模块
-//! # machine learning algorithm module
+//! # learningalgorithm module
 //!
 //! 本模块实现了各种机器学习算法。
-//! this module machine learning algorithm 。
+//! This module implements learningalgorithm
 //use serde::{Serialize, Deserialize};
 
 /// 机器学习算法实现
-/// machine learning algorithm
+/// learningalgorithm implementation
 pub struct MachineLearningAlgorithms;
 
 impl MachineLearningAlgorithms {
@@ -79,6 +79,7 @@ impl MachineLearningAlgorithms {
     }
 
     /// 计算欧几里得距离
+    /// Compute Euclidean distance
     fn euclidean_distance(p1: &[f64], p2: &[f64]) -> f64 {
         p1.iter()
             .zip(p2.iter())

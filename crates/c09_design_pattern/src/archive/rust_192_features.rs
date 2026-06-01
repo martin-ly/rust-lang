@@ -1,24 +1,24 @@
 //! Rust 1.92.0 设计模式特性实现模块
-//! Rust 1.92.0 design feature module
+//! Rust 1.92.0 designpatternfeaturesimplementation module
 //!
 //! 本模块展示了 Rust 1.92.0 在设计模式场景中的应用，包括：
-//! This module demonstrates Rust 1.92.0 in design scenario in application ，：
+//! This module demonstrates Rust 1.92.0 designpatternapplicationincluding
 //! - `MaybeUninit` 在对象池模式中的应用
-//! - `MaybeUninit` in to in application
+//! - `MaybeUninit` objectpattern application
 //! - 关联项多边界在设计模式中的应用
-//! - edge in design in application
+//! - multipleedgedesignpattern application
 //! - `Location::file_as_c_str` 在设计模式错误处理中的应用
-//! - `Location::file_as_c_str` in design error handling in application
+//! - `Location::file_as_c_str` designpatternerrorhandling application
 //!
 //! # 文件信息
-//! #
+//! # File Info
 //! - 文件: rust_192_features.rs
-//! - 创建日期: 2025-12-11
+//! - File: rust_192_features.rs
 //! - date : 2025-12-11
 //! - 版本: 1.0
-//! - this : 1.0
+//! - Version: 1.0
 //! - Rust版本: 1.92.0
-//! - Rustthis : 1.92.0
+//! - Rust Version: 1.92.0
 //! - Edition: 2024
 use std::mem::MaybeUninit;
 use std::panic::Location;
@@ -47,7 +47,7 @@ impl<T> ObjectPool<T> {
     }
 
     /// 从池中获取一个对象
-    /// from in to
+    /// get object
     ///
     /// Rust 1.92.0: 使用 MaybeUninit 确保安全性
     ///
@@ -60,9 +60,9 @@ impl<T> ObjectPool<T> {
     /// - 从池中获取的对象在使用完后必须正确归还
     /// - from in to in after must
     /// - 不会并发调用此方法
-    /// - concurrency this method
+    /// - concurrent method
     /// - 返回的对象必须是有效的已初始化值
-    /// - to must effective
+    /// - objectmusthasinitial value
     pub unsafe fn acquire(&mut self) -> Option<T> {
         if self.size == 0 {
             return None;
@@ -80,9 +80,9 @@ impl<T> ObjectPool<T> {
     /// must ：
     /// - 对象池未满（size < pool.len()）
     /// - `obj` 是从同一个对象池获取的，或者是新创建的有效对象
-    /// - `obj` from to ，or effective to
+    /// - `obj` objectgetnewcreatehas object
     /// - 不会并发调用此方法
-    /// - concurrency this method
+    /// - concurrent method
     /// - 对象在归还后不应再使用
     /// - to in after
     pub unsafe fn release(&mut self, obj: T) {
@@ -93,7 +93,7 @@ impl<T> ObjectPool<T> {
     }
 
     /// 获取池中可用对象数量
-    /// in to quantity
+    /// Get objectcount
     pub fn available(&self) -> usize {
         self.size
     }
@@ -114,7 +114,7 @@ impl<T> Default for Singleton<T> {
 
 impl<T> Singleton<T> {
     /// 创建新的单例（未初始化）
-    /// singleton （）
+    /// Create new singleinitial
     pub const fn new() -> Self {
         Singleton {
             instance: MaybeUninit::uninit(),
@@ -132,7 +132,7 @@ impl<T> Singleton<T> {
     }
 
     /// 获取单例实例的引用
-    /// singleton reference
+    /// Get singlereference
     pub fn get(&self) -> Option<&T> {
         if self.initialized {
             unsafe { Some(self.instance.assume_init_ref()) }
@@ -142,7 +142,7 @@ impl<T> Singleton<T> {
     }
 
     /// 获取单例实例的可变引用
-    /// singleton reference
+    /// Get singlemutablereference
     pub fn get_mut(&mut self) -> Option<&mut T> {
         if self.initialized {
             unsafe { Some(self.instance.assume_init_mut()) }
@@ -167,12 +167,12 @@ where
     type Error: std::error::Error + Send;
 
     /// 执行策略
-    /// strategy
+    /// execution strategy
     fn execute(&self, input: T) -> Result<Self::Output, Self::Error>;
 }
 
 /// 具体的排序策略实现
-/// volume ordering strategy
+/// sort implementation
 pub struct SortingStrategy;
 
 impl Strategy<Vec<i32>> for SortingStrategy {
@@ -201,7 +201,7 @@ impl std::fmt::Display for StrategyError {
 impl std::error::Error for StrategyError {}
 
 /// 上下文结构，使用策略模式
-/// on under structure ，strategy
+/// contextuse pattern
 pub struct Context<T, S>
 where
     S: Strategy<T>,
@@ -229,7 +229,7 @@ where
 // ==================== 3. Location::file_as_c_str 在设计模式错误处理中的应用 ====================
 
 /// 设计模式错误，包含位置信息
-/// design ，position
+/// designpatternerrorcontain information
 #[derive(Debug, Clone)]
 pub struct PatternError {
     pub message: String,
@@ -264,7 +264,7 @@ impl std::fmt::Display for PatternError {
 impl std::error::Error for PatternError {}
 
 /// 工厂模式错误处理示例
-/// factory error handling example
+/// patternerrorhandling example
 #[derive(Debug)]
 pub struct FactoryError {
     inner: PatternError,
@@ -297,7 +297,7 @@ pub trait Factory<T> {
 }
 
 /// 简单的字符串工厂实现
-/// simple factory
+/// singlestring implementation
 pub struct StringFactory;
 
 impl Factory<String> for StringFactory {

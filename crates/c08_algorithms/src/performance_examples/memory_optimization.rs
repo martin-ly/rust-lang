@@ -1,9 +1,9 @@
 //! 内存优化实践示例
-//! memory optimization example
+//! memoryoptimizationpractice example
 use std::collections::VecDeque;
 
 /// 简单对象池实现
-/// simple to
+/// singleobject implementation
 pub struct ObjectPool<T> {
     objects: VecDeque<T>,
     factory: Box<dyn Fn() -> T>,

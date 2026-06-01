@@ -14,6 +14,7 @@ pub mod petgraph_bridge {
     use petgraph::graph::NodeIndex;
 
     /// 将 HashMap<T, Vec<(T, f64)>> 装载为 petgraph 无向加权图
+    /// HashMap<T, Vec<(T, f64)>> petgraph without graph
     pub fn to_petgraph_undirected<T: Eq + Hash + Clone>(
         g: &HashMap<T, Vec<(T, f64)>>,
     ) -> (Graph<T, f64, petgraph::Undirected>, HashMap<T, NodeIndex>) {
@@ -900,7 +901,7 @@ impl<T: Eq + Hash + Clone> TarjanState<T> {
 }
 
 /// Tarjan 强连通分量（同步）：返回每个 SCC 的顶点集合
-/// Tarjan strongly connected component （synchronous ）： SCC vertex set
+/// Tarjan strongsynchronous SCC vertex set
 pub fn tarjan_scc_sync<T>(graph: &HashMap<T, Vec<T>>) -> Vec<Vec<T>>
 where
     T: Eq + Hash + Clone,
@@ -1075,7 +1076,7 @@ where
 // =========================
 
 /// 返回最大流值
-/// maximum flow
+/// maximumflow value
 pub fn max_flow_edmonds_karp(adj: &HashMap<usize, Vec<(usize, i64)>>, s: usize, t: usize) -> i64 {
     // 构建残量网络
     let n = adj

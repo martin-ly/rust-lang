@@ -27,7 +27,7 @@ pub struct ExponentialBackoff {
     /// when before （inside state ， next_backoff ）
     pub current_interval: Duration,
     /// 开始时间（内部状态，由 next_backoff 维护）
-    /// time （inside state ， next_backoff ）
+    /// Start timeinternalstatus next_backoff
     pub start_time: Option<Instant>,
 }
 
@@ -47,7 +47,7 @@ impl Default for ExponentialBackoff {
 
 impl ExponentialBackoff {
     /// 计算下一次退避延迟
-    /// under
+    /// Compute lower
     pub fn next_backoff(&mut self) -> Option<Duration> {
         if self.start_time.is_none() {
             self.start_time = Some(Instant::now());

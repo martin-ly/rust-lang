@@ -17,7 +17,7 @@ pub struct SharedMemoryRegion {
 
 impl SharedMemoryRegion {
     /// 创建新的共享内存区域
-    /// shared memory area
+    /// Create new sharedmemory
     pub fn new(name: &str, size: usize, config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             name: name.to_string(),

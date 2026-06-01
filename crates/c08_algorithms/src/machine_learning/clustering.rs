@@ -1,8 +1,8 @@
 //! 聚类算法实现
-//! algorithm
+//! algorithm implementation
 //!
 //! 本模块提供了常用的聚类算法，包括：
-//! This module provides algorithm ，：
+//! This module provides algorithmincluding
 //! - K-means 聚类
 //! - DBSCAN 聚类
 use super::*;
@@ -24,12 +24,13 @@ pub struct KMeans {
     /// center
     centroids: Option<Dataset>,
     /// 是否已训练
+    /// Whether trained
     is_fitted: bool,
 }
 
 impl KMeans {
     /// 创建新的 K-means 实例
-    /// K-means
+    /// Create new K-means
     pub fn new(k: usize) -> Self {
         Self {
             k,
@@ -41,13 +42,14 @@ impl KMeans {
     }
 
     /// 设置最大迭代次数
-    /// maximum
+    /// Set maximum
     pub fn with_max_iterations(mut self, max_iterations: usize) -> Self {
         self.max_iterations = max_iterations;
         self
     }
 
     /// 设置收敛阈值
+    /// Set value
     pub fn with_tolerance(mut self, tolerance: f64) -> Self {
         self.tolerance = tolerance;
         self
@@ -145,7 +147,7 @@ impl KMeans {
     }
 
     /// 计算惯性（簇内平方和）
-    /// （inside and ）
+    /// Compute inner
     pub fn inertia(&self, data: &Dataset) -> MLResult<f64> {
         if !self.is_fitted {
             return Err(MLError::ModelNotTrained);
@@ -222,12 +224,13 @@ pub struct DBSCAN {
     /// minimum this
     min_samples: usize,
     /// 是否已训练
+    /// Whether trained
     is_fitted: bool,
 }
 
 impl DBSCAN {
     /// 创建新的 DBSCAN 实例
-    /// DBSCAN
+    /// Create new DBSCAN
     pub fn new(eps: f64, min_samples: usize) -> Self {
         Self {
             eps,
@@ -237,6 +240,7 @@ impl DBSCAN {
     }
 
     /// 计算欧几里得距离
+    /// Compute Euclidean distance
     fn euclidean_distance(&self, point1: &DataPoint, point2: &DataPoint) -> f64 {
         point1
             .iter()
@@ -414,6 +418,7 @@ impl ClusteringMetrics {
     }
 
     /// 计算 Davies-Bouldin 指数
+    /// Compute Davies-Bouldin
     pub fn davies_bouldin_score(data: &Dataset, labels: &Labels) -> MLResult<f64> {
         if data.len() != labels.len() {
             return Err(MLError::DimensionMismatch {
@@ -482,6 +487,7 @@ impl ClusteringMetrics {
     }
 
     /// 计算欧几里得距离
+    /// Compute Euclidean distance
     fn euclidean_distance(point1: &DataPoint, point2: &DataPoint) -> f64 {
         point1
             .iter()

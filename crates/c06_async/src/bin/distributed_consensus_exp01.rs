@@ -7,7 +7,7 @@ use tokio::sync::{RwLock, mpsc};
 use tokio::time::sleep;
 
 /// Raft 节点状态
-/// Raft node state
+/// Raft node status
 #[derive(Debug, Clone, PartialEq)]
 enum RaftState {
     Follower,
@@ -360,7 +360,7 @@ impl RaftNode {
     }
 
     /// 为任务克隆节点引用
-    /// as task node reference
+    /// tasknode reference
     fn clone_for_task(&self) -> Self {
         Self {
             id: self.id.clone(),
@@ -380,7 +380,7 @@ impl RaftNode {
     }
 
     /// 显示系统状态
-    /// display system state
+    /// system status
     async fn show_system_status(&self) {
         let state = self.state.read().await.clone();
         let term = *self.current_term.read().await;
@@ -395,7 +395,7 @@ impl RaftNode {
 }
 
 /// 分布式一致性系统
-/// distribution consistency system
+/// distributed system
 struct ConsensusSystem {
     nodes: Vec<Arc<RaftNode>>,
 }
@@ -450,7 +450,7 @@ impl ConsensusSystem {
     }
 
     /// 显示系统状态
-    /// display system state
+    /// system status
     async fn show_system_status(&self) {
         println!("\n📊 系统状态:");
         for node in &self.nodes {

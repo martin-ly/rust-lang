@@ -1,5 +1,5 @@
 //! # 算法最佳实践模块
-//! # algorithm module
+//! # algorithmbestpractice module
 //!
 //! 本模块提供算法实现和使用的最佳实践。
 //! This module provides algorithm and 。

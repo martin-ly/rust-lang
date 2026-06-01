@@ -1,36 +1,37 @@
 # Cargo 编译速度优化指南
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 
 本文档提供针对大型 Rust 项目（2000+ 依赖）的编译速度优化方案。
 
 ## 📑 目录
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
+
 - [Cargo 编译速度优化指南](#cargo-编译速度优化指南)
-  - [📑 目录](#目录)
-  - [🚀 快速开始](#快速开始)
+  - [📑 目录](#-目录)
+  - [🚀 快速开始](#-快速开始)
     - [1. 安装优化工具](#1-安装优化工具)
     - [2. 使用优化脚本编译](#2-使用优化脚本编译)
-  - [⚙️ 环境变量配置](#环境变量配置)
+  - [⚙️ 环境变量配置](#️-环境变量配置)
     - [Windows (PowerShell)](#windows-powershell)
     - [Linux/macOS (Bash/Zsh)](#linuxmacos-bashzsh)
-  - [📊 优化效果对比](#优化效果对比)
-  - [🔧 配置文件说明](#配置文件说明)
+  - [📊 优化效果对比](#-优化效果对比)
+  - [🔧 配置文件说明](#-配置文件说明)
     - [.cargo/config.toml](#cargoconfigtoml)
     - [Cargo.toml Profile 配置](#cargotoml-profile-配置)
-  - [🛠️ 推荐工具](#推荐工具)
-  - [📈 性能监控](#性能监控)
+  - [🛠️ 推荐工具](#️-推荐工具)
+  - [📈 性能监控](#-性能监控)
     - [查看编译时间](#查看编译时间)
     - [sccache 统计](#sccache-统计)
-  - [🧹 清理和重置](#清理和重置)
-  - [🔬 进阶优化](#进阶优化)
+  - [🧹 清理和重置](#-清理和重置)
+  - [🔬 进阶优化](#-进阶优化)
     - [使用 Nightly 工具链（可选）](#使用-nightly-工具链可选)
     - [内存优化（大型项目）](#内存优化大型项目)
-  - [⚠️ 注意事项](#注意事项)
-  - [📚 参考资源](#参考资源)
+  - [⚠️ 注意事项](#️-注意事项)
+  - [📚 参考资源](#-参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -325,19 +326,12 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 ## 权威来源索引
 
 > **[来源: Wikipedia - Program Optimization]**
-
 > **[来源: Criterion.rs]**
-
 > **[来源: ACM - Performance Engineering]**
-
 > **[来源: Rust Performance Book]**
-
 > **[来源: Wikipedia - Build Automation]**
-
 > **[来源: Cargo Book]**
-
 > **[来源: Rust Reference - Cargo]**
-
 > **[来源: crates.io Documentation]**
 
 ---

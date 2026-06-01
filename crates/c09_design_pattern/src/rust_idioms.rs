@@ -1,5 +1,5 @@
 //! Rust 特定设计惯用法与模式
-//! Rust design and
+//! Rust design pattern
 //!
 //! 本模块涵盖 Rust 生态中独特且广泛使用的设计惯用法（idioms）和模式，
 //! this module Rust ecosystem in and design （idioms）and ，
@@ -23,8 +23,7 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 // ============================================================================
 
 /// # Typestate 模式
-///
-/// Typestate 模式是一种利用 Rust 的类型系统来编码状态机的设计模式。
+/// # Typestate pattern
 /// Typestate Rust type system state machine design 。
 /// 通过将不同的状态表示为不同的类型，并在状态转换时返回新的类型，
 /// will state represent as type ，and in state conversion type ，
@@ -34,11 +33,11 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 /// ## 核心思想
 /// ## core thought
 /// - 每个状态是一个独立的类型
-/// - state type
+/// - status type
 /// - 状态转换通过消耗旧值并返回新值来实现
-/// - state conversion and
+/// - statusconversionoldvaluenewvalue implementation
 /// - 只能在特定状态下调用的方法，只在该状态的类型上实现
-/// - in state under method ，in this state type on
+/// - statuslowermethodstatustypeupper implementation
 ///
 /// ## 优势
 /// ## strength
@@ -59,7 +58,7 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 /// - scenario under generic parameter ，complex
 ///
 /// ## 真实应用
-/// ## real application
+/// ## true application
 /// - Rocket 框架的 Request Guards
 /// - `typed-builder` crate
 /// - HTTP 客户端/服务器的状态管理
@@ -128,7 +127,7 @@ pub struct FileWriting {
 
 impl FileClosed {
     /// 创建新的关闭状态文件句柄
-    /// state file handle
+    /// Create new statusfile
     pub fn new(path: impl Into<PathBuf>) -> Self {
         Self { path: path.into() }
     }
@@ -143,6 +142,7 @@ impl FileClosed {
     }
 
     /// 获取文件路径
+    /// Get filepath
     pub fn path(&self) -> &PathBuf {
         &self.path
     }
@@ -186,13 +186,13 @@ impl FileReading {
     }
 
     /// 获取当前读取位置
-    /// when before position
+    /// Get current
     pub fn position(&self) -> usize {
         self.position
     }
 
     /// 完成读取，返回 Open 状态
-    /// ， Open state
+    /// Complete Open status
     pub fn finish(self) -> FileOpen {
         FileOpen {
             path: self.path,
@@ -210,7 +210,7 @@ impl FileWriting {
     }
 
     /// 完成写入，返回 Open 状态
-    /// ， Open state
+    /// Complete Open status
     pub fn finish(self) -> FileOpen {
         FileOpen {
             path: self.path,
@@ -222,17 +222,17 @@ impl FileWriting {
 // -------------------- 示例 B：HTTP 请求构建器 --------------------
 
 /// HTTP 请求构建器 —— 无 URL 状态
-/// HTTP builder —— URL state
+/// HTTP without URL status
 pub struct HttpRequestBuilderNoUrl;
 
 /// HTTP 请求构建器 —— 已有 URL 状态
-/// HTTP builder —— URL state
+/// HTTP has URL status
 pub struct HttpRequestBuilderHasUrl {
     url: String,
 }
 
 /// HTTP 请求构建器 —— 已有 URL 和方法状态
-/// HTTP builder —— URL and method state
+/// HTTP has URL method status
 pub struct HttpRequestBuilderHasMethod {
     url: String,
     method: String,
@@ -267,7 +267,7 @@ impl HttpRequestBuilderNoUrl {
     }
 
     /// 设置 URL，状态从 NoUrl 转换为 HasUrl
-    /// URL，state from NoUrl conversion as HasUrl
+    /// Set URLstatus NoUrl conversion HasUrl
     pub fn url(self, url: impl Into<String>) -> HttpRequestBuilderHasUrl {
         HttpRequestBuilderHasUrl { url: url.into() }
     }
@@ -275,7 +275,7 @@ impl HttpRequestBuilderNoUrl {
 
 impl HttpRequestBuilderHasUrl {
     /// 设置 HTTP 方法，状态从 HasUrl 转换为 HasMethod
-    /// HTTP method ，state from HasUrl conversion as HasMethod
+    /// Set HTTP methodstatus HasUrl conversion HasMethod
     pub fn method(self, method: impl Into<String>) -> HttpRequestBuilderHasMethod {
         HttpRequestBuilderHasMethod {
             url: self.url,
@@ -301,7 +301,7 @@ impl HttpRequestBuilderHasMethod {
     }
 
     /// 完成构建，转换为 Ready 状态
-    /// ，conversion as Ready state
+    /// Complete conversion Ready status
     pub fn build(self) -> HttpRequestBuilderReady {
         HttpRequestBuilderReady {
             url: self.url,
@@ -337,8 +337,7 @@ impl HttpRequestBuilderReady {
 // ============================================================================
 
 /// # Newtype 模式
-///
-/// Newtype 模式是一种为现有类型创建薄包装结构体的惯用法，
+/// # Newtype pattern
 /// Newtype as type struct ，
 /// 在 Rust 中通常表现为包含单个字段的元组结构体（如 `UserId(u64)`）。
 /// in Rust in as field struct （ `UserId(u64)`）。
@@ -350,11 +349,11 @@ impl HttpRequestBuilderReady {
 /// ## 核心思想
 /// ## core thought
 /// - 用编译器区分不同语义但底层相同的类型
-/// - but type
+/// - type
 /// - 在不改变运行时开销的前提下增强类型安全
-/// - in runtime overhead prerequisite under type
+/// - runtimefrontlowerstrongtype safety
 /// - 为基础类型提供自定义的行为实现
-/// - as foundation type definition as
+/// - typeprovidecustom implementation
 ///
 /// ## 优势
 /// ## strength
@@ -368,7 +367,7 @@ impl HttpRequestBuilderReady {
 /// ## 常用派生
 /// ##
 /// - `Deref` / `DerefMut`：允许透明地访问内部值
-/// - `Deref` / `DerefMut`：inside
+/// - `Deref` / `DerefMut`internal value
 /// - `From<T>` / `Into<T>`：零成本转换
 /// - `From<T>` / `Into<T>`：cost conversion
 /// - `Display`、`Debug`：自定义输出格式
@@ -423,7 +422,7 @@ pub struct Email(String);
 
 impl Email {
     /// 创建新的 Email，执行基础验证
-    /// Email，foundation
+    /// Create new Emailexecutionverify
     pub fn new(addr: impl Into<String>) -> Result<Self, String> {
         let addr = addr.into();
         if addr.contains('@') && addr.len() > 3 {
@@ -434,7 +433,7 @@ impl Email {
     }
 
     /// 获取内部字符串引用
-    /// inside reference
+    /// Get internalstringreference
     pub fn as_str(&self) -> &str {
         &self.0
     }
@@ -496,8 +495,7 @@ impl fmt::Display for Fahrenheit {
 // ============================================================================
 
 /// # Rust 中的 Visitor 模式
-///
-/// Visitor 模式的目标是在不改变现有类型结构的前提下，为其添加新的操作。
+/// # Rust Visitor pattern
 /// Visitor goal in type structure prerequisite under ，as its 。
 /// 在 Rust 中，由于没有传统继承，visitor 通常有两种实现方式：
 /// in Rust in ，，visitor way ：
@@ -533,7 +531,7 @@ impl fmt::Display for Fahrenheit {
 /// - Rust enum way ，explicit
 ///
 /// ## 对比传统面向对象
-/// ## to object-oriented
+/// ## object
 /// | 特性 | 枚举 Visitor | Trait Visitor | 继承 Visitor |
 /// |------|-------------|---------------|-------------|
 /// | 分派方式 | 静态 | 动态 | 动态 |
@@ -624,7 +622,7 @@ impl Expr {
     }
 
     /// 枚举 Visitor：求值
-    /// enum Visitor：
+    /// enum Visitor value
     pub fn eval(&self) -> Result<f64, String> {
         match self {
             Self::Lit(v) => Ok(*v),
@@ -657,7 +655,7 @@ impl Expr {
     }
 
     /// 枚举 Visitor：统计节点数量
-    /// enum Visitor：node quantity
+    /// enum Visitornode count
     pub fn node_count(&self) -> usize {
         match self {
             Self::Lit(_) => 1,
@@ -692,7 +690,7 @@ pub trait AstVisitor {
 }
 
 /// 二元操作类型
-/// type
+/// operation type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum BinaryOp {
     Add,
@@ -702,7 +700,7 @@ pub enum BinaryOp {
 }
 
 /// 一元操作类型
-/// type
+/// operation type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum UnaryOp {
     Neg,
@@ -716,7 +714,7 @@ pub struct LitNode {
 
 impl LitNode {
     /// 创建字面量节点
-    /// surface node
+    /// create node
     pub fn new(value: f64) -> Self {
         Self { value }
     }
@@ -729,7 +727,7 @@ impl AstNode for LitNode {
 }
 
 /// 二元操作节点
-/// node
+/// operation node
 pub struct BinaryNode {
     op: BinaryOp,
     lhs: Box<dyn AstNode>,
@@ -738,7 +736,7 @@ pub struct BinaryNode {
 
 impl BinaryNode {
     /// 创建二元操作节点
-    /// node
+    /// createoperation node
     pub fn new(op: BinaryOp, lhs: Box<dyn AstNode>, rhs: Box<dyn AstNode>) -> Self {
         Self { op, lhs, rhs }
     }
@@ -751,7 +749,7 @@ impl AstNode for BinaryNode {
 }
 
 /// 一元操作节点
-/// node
+/// operation node
 pub struct UnaryNode {
     op: UnaryOp,
     operand: Box<dyn AstNode>,
@@ -759,7 +757,7 @@ pub struct UnaryNode {
 
 impl UnaryNode {
     /// 创建一元操作节点
-    /// node
+    /// createoperation node
     pub fn new(op: UnaryOp, operand: Box<dyn AstNode>) -> Self {
         Self { op, operand }
     }
@@ -779,13 +777,13 @@ pub struct EvalVisitor {
 
 impl EvalVisitor {
     /// 创建新的求值访问者
-    /// visitor
+    /// Create new value
     pub fn new() -> Self {
         Self { stack: Vec::new() }
     }
 
     /// 执行求值，返回结果
-    /// ，result
+    /// executionvalue result
     pub fn eval(mut self, root: &dyn AstNode) -> Result<f64, String> {
         root.accept(&mut self);
         self.stack.pop().ok_or_else(|| "空表达式".to_string())
@@ -843,7 +841,7 @@ impl AstVisitor for EvalVisitor {
 /// ## inside
 /// - RAII 守卫模式（Scope Guard）
 /// - `Into` 特质用于 ergonomic API 设计
-/// - 错误累积模式（Error Accumulation）
+/// - `Into` ergonomic API design
 /// - 内部可变性决策树（Cell vs RefCell vs Atomic vs Mutex）
 pub struct OtherRustIdioms;
 
@@ -910,12 +908,12 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
 // -------------------- Into 特质 ergonomic API 示例 --------------------
 
 /// 演示 `Into` 特质用于接受灵活参数类型
-/// demonstration `Into` trait parameter type
+/// `Into` flexible type
 pub struct PathOpener;
 
 impl PathOpener {
     /// 接受任何可转换为 PathBuf 的类型
-    /// conversion as PathBuf type
+    /// conversion PathBuf type
     pub fn open<P: Into<PathBuf>>(path: P) -> PathBuf {
         let path = path.into();
         // 模拟打开操作
@@ -923,7 +921,7 @@ impl PathOpener {
     }
 
     /// 接受任何可转换为 String 的类型
-    /// conversion as String type
+    /// conversion String type
     pub fn greet<N: Into<String>>(name: N) -> String {
         format!("Hello, {}!", name.into())
     }
@@ -932,6 +930,7 @@ impl PathOpener {
 // -------------------- 错误累积模式示例 --------------------
 
 /// 验证错误
+/// Verify error
 #[derive(Debug, Clone, PartialEq)]
 pub struct ValidationError {
     pub field: String,
@@ -946,6 +945,7 @@ pub struct ErrorAccumulator {
 
 impl ErrorAccumulator {
     /// 创建新的错误累积器
+    /// Create new error
     pub fn new() -> Self {
         Self::default()
     }
@@ -959,7 +959,7 @@ impl ErrorAccumulator {
     }
 
     /// 条件验证：如果失败则累积错误
-    /// condition ：if
+    /// verify error
     pub fn validate(
         &mut self,
         field: impl Into<String>,
@@ -972,12 +972,13 @@ impl ErrorAccumulator {
     }
 
     /// 获取所有错误
-    /// all
+    /// Get haserror
     pub fn errors(&self) -> &[ValidationError] {
         &self.errors
     }
 
     /// 检查是否有错误
+    /// whetherhas error
     pub fn is_empty(&self) -> bool {
         self.errors.is_empty()
     }
@@ -1016,7 +1017,7 @@ impl CellCounter {
     }
 
     /// 获取当前值
-    /// when before
+    /// Get current value
     pub fn get(&self) -> u64 {
         self.value.get()
     }
@@ -1036,6 +1037,7 @@ pub struct RefCellLog {
 
 impl RefCellLog {
     /// 创建新日志
+    /// Create new logging
     pub fn new() -> Self {
         Self {
             entries: RefCell::new(Vec::new()),
@@ -1049,7 +1051,7 @@ impl RefCellLog {
     }
 
     /// 获取日志数量
-    /// quantity
+    /// Get loggingcount
     pub fn len(&self) -> usize {
         self.entries.borrow().len()
     }
@@ -1061,7 +1063,7 @@ impl RefCellLog {
     }
 
     /// 获取所有日志的克隆
-    /// all
+    /// Get haslogging
     pub fn get_all(&self) -> Vec<String> {
         self.entries.borrow().clone()
     }
@@ -1081,7 +1083,7 @@ pub struct AtomicCounter {
 
 impl AtomicCounter {
     /// 创建新原子计数器
-    /// atomic counter
+    /// Create new atomic
     pub fn new() -> Self {
         Self {
             value: AtomicUsize::new(0),
@@ -1094,7 +1096,7 @@ impl AtomicCounter {
     }
 
     /// 获取当前值
-    /// when before
+    /// Get current value
     pub fn get(&self) -> usize {
         self.value.load(Ordering::Relaxed)
     }
@@ -1114,7 +1116,7 @@ pub struct MutexLog {
 
 impl MutexLog {
     /// 创建新的线程安全日志
-    /// thread-safe
+    /// Create new threadsafetylogging
     pub fn new() -> Self {
         Self {
             entries: Mutex::new(Vec::new()),
@@ -1130,7 +1132,7 @@ impl MutexLog {
     }
 
     /// 获取日志数量
-    /// quantity
+    /// Get loggingcount
     pub fn len(&self) -> usize {
         self.entries.lock().expect("mutex poisoned").len()
     }
@@ -1142,7 +1144,7 @@ impl MutexLog {
     }
 
     /// 获取所有日志
-    /// all
+    /// Get haslogging
     pub fn get_all(&self) -> Vec<String> {
         self.entries.lock().expect("mutex poisoned").clone()
     }

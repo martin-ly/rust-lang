@@ -381,6 +381,7 @@ pub struct AdvancedConcurrentProcessor<T> {
     results: Arc<Mutex<Vec<ProcessingResult>>>,
     /// 停止信号
     /// Stops信号
+    /// Stopssignal
     stop_signal: Arc<Mutex<bool>>,
 }
 
@@ -514,6 +515,7 @@ where
 pub enum AdvancedError {
     /// 处理错误
     /// Processes错误
+    /// Processeserror
     Processing(ProcessingError),
     /// 并发错误
     /// concurrenterror
@@ -578,6 +580,7 @@ impl ErrorHandler {
 
     /// 获取错误日志
     /// Gets错误日志
+    /// Getserrorlog
     pub fn get_errors(&self) -> Vec<AdvancedError> {
         let log = self.error_log.lock().unwrap();
         log.clone()
@@ -585,6 +588,7 @@ impl ErrorHandler {
 
     /// 清空错误日志
     /// Clears错误日志
+    /// Clearserrorlog
     pub fn clear_errors(&self) {
         let mut log = self.error_log.lock().unwrap();
         log.clear();

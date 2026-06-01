@@ -2,14 +2,14 @@
 //! Rust 191.0 feature module —— c06_async
 //!
 //! 本模块展示了 Rust 191.0 (2025-10-30) 的关键语言特性和工具链改进。
-//! This module demonstrates Rust 191.0 (2025-10-30) key feature and toolchain 。
+//! This module demonstrates Rust 191.0 (2025-10-30) keylanguagefeaturestoolchainimprovements
 //!
 //! - `c_variadic`: C 风格变参函数声明稳定
 //! - `c_variadic`: C function
 //! - `aarch64_windows_tier1`: `aarch64-pc-windows-msvc` 晋升 Tier 1
 //!
 //! # 版本信息
-//! # this
+//! # Version Info
 //! - Rust 版本: 191.0
 //! - Rust this : 191.0
 //! - 稳定日期: 2025-10-30
@@ -28,22 +28,22 @@
 /// C ABI and C `...` 。
 ///
 /// ## 声明方式
-/// ## way
+/// ## method
 /// ```ignore
 /// unsafe extern "C" fn printf(fmt: *const c_char, ...) { }
 /// ```
 ///
 /// ## 使用场景
-/// ## scenario
+/// ## Usage Scenarios
 /// - 实现 C 标准库函数（如 `printf`、`scanf`）的 Rust 包装
 /// - C standard library function （ `printf`、`scanf`） Rust
 /// - 与使用变参的 C 库直接交互
 /// - and C library
 /// - 编写兼容 C 的插件接口
-/// - C
+/// - C interface
 ///
 /// ## 限制
-/// ##
+/// ## Constraints
 /// - 仅在 `extern "C"` 函数中可用
 /// - in `extern "C"` function in
 /// - 必须使用 `unsafe`（因为编译器无法验证变参类型安全）
@@ -89,7 +89,7 @@ fn test_c_variadic_placeholder() {
 /// - 所有稳定版都提供预编译二进制
 /// - all
 /// - 通过完整 CI 测试
-/// - complete CI
+/// - complete CI test
 /// - 保证与 x86_64 Windows 相同的稳定性
 /// - and x86_64 Windows
 ///

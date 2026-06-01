@@ -2,8 +2,7 @@
 //! Actor 与 Reactor 模式深度分析 - Actor and Reactor Patterns Deep Analysis
 //!
 //! # 概述 (Overview)
-//!
-//! 本模块深入分析异步编程中的两种核心并发模式：
+//! # Overview
 //! this module analyze async in core concurrency ：
 //! - Actor 模式: 基于消息传递的并发模型
 //! - Actor : concurrency
@@ -23,7 +22,7 @@
 //! Actor = (State, Mailbox, Behavior)
 //!
 //! 其中:
-//! its in :
+//! Where:
 //! - State: 私有状态 σ ∈ Σ
 //! - State: state σ ∈ Σ
 //! - Mailbox: 消息队列 M = [m₁, m₂, ..., mₙ]
@@ -43,7 +42,7 @@
 //! 配置: C = (A, M)
 //! : C = (A, M)
 //! - A: Actor 集合
-//! - M: 消息传输中的集合
+//! - A: Actor set
 //! - M: transmission in set
 //!
 //! 转换规则:
@@ -71,7 +70,7 @@
 //!
 //! 3. 异步通信 (Asynchronous Communication):
 //!    send(addr, msg) 立即返回，不等待处理
-//!    send(addr, msg) ，etc.
+//! send(addr, msg) processing
 //!
 //! 4. 无共享状态 (No Shared State):
 //!    actors 之间只通过消息通信
@@ -88,7 +87,7 @@
 //! Reactor = (EventDemultiplexer, EventHandlers, EventLoop)
 //!
 //! 其中:
-//! its in :
+//! Where:
 //! - EventDemultiplexer: 事件多路分解器（如 epoll, kqueue）
 //! - EventHandlers: 事件处理器集合 {h₁, h₂, ..., hₙ}
 //! - EventLoop: 事件循环
@@ -132,7 +131,7 @@
 //!
 //! Proactor 模式（异步 I/O）:
 //! 1. 发起异步 I/O 操作
-//! 1. async I/O
+//! 1. async I/O operation
 //! 2. 等待完成通知
 //! 2. etc.
 //! 3. 处理完成的操作（数据已准备好）
@@ -168,10 +167,10 @@ use tokio::sync::mpsc;
 use tokio::time::sleep;
 
 /// # 示例 1: 手写 Actor 系统
-/// # example 1: Actor system
+/// # 1: Actor system
 ///
 /// 从零实现一个简单的 Actor 系统，理解其核心机制
-/// from simple Actor system ，its core mechanism
+/// zeroimplementationsingle Actor system mechanism
 pub mod simple_actor_system {
     use super::*;
     use std::collections::HashMap;
@@ -284,6 +283,7 @@ pub mod simple_actor_system {
     }
 
     /// Handler trait: Actor 处理特定消息类型
+    /// Handler trait: Actor handling type
     pub trait Handler<M: Message>: Actor {
         fn handle_message(
             &mut self,
@@ -293,6 +293,7 @@ pub mod simple_actor_system {
     }
 
     /// Actor 系统
+    /// Actor system
     pub struct ActorSystem {
         next_id: Arc<RwLock<u64>>,
         actors: ActorRegistry,
@@ -300,7 +301,7 @@ pub mod simple_actor_system {
 
     impl ActorSystem {
         /// 创建新的 Actor 系统
-        /// Actor system
+        /// Create new Actor system
         pub fn new() -> Arc<Self> {
             Arc::new(Self {
                 next_id: Arc::new(RwLock::new(0)),
@@ -412,7 +413,7 @@ pub mod simple_actor_system {
     }
 
     /// 演示简单 Actor 系统
-    /// demonstration simple Actor system
+    /// single Actor system
     pub async fn demo() {
         println!("\n=== 简单 Actor 系统示例 ===");
 
@@ -430,7 +431,7 @@ pub mod simple_actor_system {
 }
 
 /// # 示例 2: Actix 框架分析
-/// # example 2: Actix framework analyze
+/// # 2: Actix analysis
 ///
 /// 分析 Actix Actor 框架的实现原理
 /// analyze Actix Actor framework
@@ -504,7 +505,7 @@ pub mod actix_analysis {
     }
 
     /// Actix 的关键特性分析
-    /// Actix key feature analyze
+    /// Actix keyfeatures analysis
     ///
     /// ## 1. 类型安全的消息传递
     /// ## 1. type
@@ -514,11 +515,11 @@ pub mod actix_analysis {
     /// - 编译期检查消息类型
     /// - type
     /// - 运行时保证类型安全
-    /// - runtime type
+    /// - runtimetype safety
     /// ```
     ///
     /// ## 2. 异步消息处理
-    /// ## 2. async
+    /// ## 2. async processing
     /// ```text
     /// Actor::handle() 可以返回:
     /// - 同步值: i32
@@ -564,7 +565,7 @@ pub mod actix_analysis {
 }
 
 /// # 示例 3: Reactor 模式实现
-/// # example 3: Reactor
+/// # 3: Reactor pattern implementation
 ///
 /// 展示 Reactor 模式的核心概念
 /// Reactor core concept
@@ -602,7 +603,7 @@ pub mod reactor_pattern {
     type EventHandlerRegistry = Arc<Mutex<HashMap<(u64, EventType), Arc<dyn EventHandler>>>>;
 
     /// 简单的 Reactor 实现
-    /// simple Reactor
+    /// single Reactor implementation
     pub struct SimpleReactor {
         handlers: EventHandlerRegistry,
         event_queue: Arc<Mutex<Vec<Event>>>,
@@ -623,6 +624,7 @@ pub mod reactor_pattern {
         }
 
         /// 注册事件处理器
+        /// Register handling
         pub fn register(&self, source: u64, event_type: EventType, handler: Arc<dyn EventHandler>) {
             let mut handlers = self
                 .handlers
@@ -749,7 +751,7 @@ pub mod reactor_pattern {
     }
 
     /// 演示 Reactor 模式
-    /// demonstration Reactor
+    /// Reactor pattern
     pub async fn demo() {
         println!("\n=== Reactor 模式示例 ===");
 
@@ -795,8 +797,7 @@ pub mod reactor_pattern {
 }
 
 /// # 示例 4: Tokio 的 Reactor 分析
-///
-/// 分析 Tokio 运行时的 Reactor 实现
+/// # 4: Tokio Reactor analysis
 /// analyze Tokio runtime Reactor
 pub mod tokio_reactor_analysis {
     use super::*;
@@ -825,7 +826,7 @@ pub mod tokio_reactor_analysis {
     /// ```
     ///
     /// ## 关键组件
-    /// ## key
+    /// ## key component
     ///
     /// 1. **Driver**: 驱动 I/O 事件
     /// 1. **Driver**: driver I/O
@@ -902,13 +903,14 @@ pub mod tokio_reactor_analysis {
 /// # 示例 5: Actor vs Reactor 对比
 ///
 /// 直接对比两种模式的实现
-/// to
+/// pattern implementation
 pub mod actor_vs_reactor {
 
     /// 场景: 处理多个并发请求
     /// scenario : concurrency
     ///
     /// ## Actor 方式
+    /// ## Actor method
     pub mod actor_approach {
         use actix::prelude::*;
 
@@ -965,6 +967,7 @@ pub mod actor_vs_reactor {
     }
 
     /// ## Reactor 方式
+    /// ## Reactor method
     pub mod reactor_approach {
         use std::time::Duration;
         use tokio::time::sleep;
@@ -1015,7 +1018,7 @@ pub mod actor_vs_reactor {
 }
 
 /// # 综合示例: 运行所有演示
-/// # synthesize example : Run all demonstrations
+/// # Comprehensive Example: Run All Demos
 pub async fn run_all_examples() {
     println!("╔══════════════════════════════════════════════════════════╗");
     println!("║       Actor 与 Reactor 模式深度分析                      ║");

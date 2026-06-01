@@ -1,12 +1,12 @@
 //! # 组合数学算法模块
-//! # combination algorithm module
+//! # algorithm module
 //!
 //! 本模块实现了各种组合数学算法。
-//! this module combination algorithm 。
+//! This module implements algorithm
 //use serde::{Serialize, Deserialize};
 
 /// 组合数学算法实现
-/// combination algorithm
+/// algorithm implementation
 pub struct CombinatoricsAlgorithms;
 
 impl CombinatoricsAlgorithms {
@@ -20,7 +20,7 @@ impl CombinatoricsAlgorithms {
     }
 
     /// 计算组合数 C(n, k)
-    /// combination C(n, k)
+    /// Compute C(n, k)
     pub fn combination(n: u64, k: u64) -> u64 {
         if k > n {
             0
@@ -32,7 +32,7 @@ impl CombinatoricsAlgorithms {
     }
 
     /// 计算排列数 P(n, k)
-    /// arrangement P(n, k)
+    /// Compute P(n, k)
     pub fn permutation(n: u64, k: u64) -> u64 {
         if k > n {
             0

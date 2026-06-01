@@ -1,8 +1,8 @@
 //! Web框架设计模式应用
-//! Web framework design application
+//! Webdesignpattern application
 //!
 //! 本模块展示了在Web框架中应用各种设计模式的实践案例，
-//! This module demonstrates in Web framework in application design ，
+//! This module demonstrates Webapplicationdesignpatternpracticecases
 //! 包括MVC、MVVM、Repository等经典模式。
 use std::any::Any;
 use std::collections::HashMap;
@@ -29,7 +29,7 @@ pub trait UserRepository {
 }
 
 /// 内存中的用户存储实现
-/// memory in
+/// memory implementation
 pub struct InMemoryUserRepository {
     users: HashMap<u64, User>,
     next_id: u64,
@@ -117,12 +117,13 @@ impl UserController {
 }
 
 /// 视图接口
+/// graph interface
 pub trait View {
     fn render(&self, data: &dyn Any) -> String;
 }
 
 /// HTML视图实现
-/// HTML
+/// HTMLgraph implementation
 pub struct HtmlView;
 
 impl View for HtmlView {
@@ -144,7 +145,7 @@ impl View for HtmlView {
 }
 
 /// JSON视图实现
-/// JSON
+/// JSONgraph implementation
 pub struct JsonView;
 
 impl View for JsonView {
@@ -224,6 +225,7 @@ impl UserViewModel {
 // ============================================================================
 
 /// 通用Repository接口
+/// genericRepository interface
 pub trait Repository<T> {
     fn find_by_id(&self, id: u64) -> Option<T>;
     fn save(&mut self, entity: T) -> Result<(), String>;
@@ -243,6 +245,7 @@ pub struct Article {
 }
 
 /// 文章Repository实现
+/// Repository implementation
 pub struct ArticleRepository {
     articles: HashMap<u64, Article>,
     next_id: u64,

@@ -7,6 +7,7 @@ use tokio::sync::RwLock;
 use tokio::time::sleep;
 
 /// 服务实例信息
+/// service information
 #[derive(Debug, Clone)]
 struct ServiceInstance {
     id: String,
@@ -50,6 +51,7 @@ impl ServiceRegistry {
     }
 
     /// 注册服务实例
+    /// Register service
     async fn register_service(&self, service_name: &str, instance: ServiceInstance) {
         let mut services = self.services.write().await;
         let instance_id = instance.id.clone();
@@ -62,6 +64,7 @@ impl ServiceRegistry {
     }
 
     /// 获取服务实例列表
+    /// Get servicelist
     async fn get_service_instances(&self, service_name: &str) -> Vec<ServiceInstance> {
         let services = self.services.read().await;
         services
@@ -162,7 +165,7 @@ impl CircuitBreaker {
     }
 
     /// 检查是否可以执行操作
-    /// can
+    /// whethercanexecution operation
     fn can_execute(&self) -> bool {
         let state = self.state.load(Ordering::Relaxed);
         match state {
@@ -182,7 +185,7 @@ impl CircuitBreaker {
     }
 
     /// 更新熔断器状态
-    /// state
+    /// Update status
     fn update_state<T>(&self, result: &Result<T, anyhow::Error>) {
         match result {
             Ok(_) => {
@@ -233,7 +236,7 @@ async fn simulate_service_call(service_name: &str, instance: &ServiceInstance) -
 }
 
 /// 服务发现和负载均衡测试
-/// service discovery and
+/// servicenegative test
 async fn test_service_discovery_and_lb() {
     println!("🚀 服务发现和负载均衡测试");
     println!("{}", "=".repeat(50));

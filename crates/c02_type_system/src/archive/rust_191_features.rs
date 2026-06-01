@@ -414,6 +414,7 @@ pub mod type_checker_optimizations {
 
         /// 获取统计信息
         /// Gets统计信息
+        /// Getsstatisticsinformation
         pub fn get_statistics(&self) -> &TypeInferenceStatistics {
             &self.statistics
         }

@@ -1,11 +1,10 @@
 //! AFIDT (async fn in dyn trait) 跟踪模块（Nightly）
-//!
-//! ⚠️ **警告**: 本模块需要 nightly Rust 编译器和 `#![feature(async_fn_in_dyn_trait)]`。
+//! AFIDT (async fn in dyn trait) Tracking Module (Nightly)
 //! 预计稳定版本: **1.97-1.98**。
 //! this : **1.97-1.98**。
 //!
 //! # 概念定义
-//! # concept definition
+//! # Concept Definitions
 //!
 //! AFIDT 允许在 trait object (`dyn Trait`) 中使用 `async fn`。
 //! 这是 async Rust 的最后一个主要拼图，解决了 `async_trait` 宏的大部分使用场景。
@@ -22,7 +21,7 @@
 //! ```
 //!
 //! # 权威来源
-//! # Source
+//! # Authoritative Sources
 //! - 跟踪: [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119)
 //! - 设计文档: [AFIDT Design Doc](https://rust-lang.github.io/async-fundamentals-initiative/)
 
@@ -72,7 +71,7 @@ pub trait DataSource {
 }
 
 /// 数据库实现
-/// database
+/// datalibrary implementation
 #[cfg(feature = "nightly_afidt")]
 pub struct Database;
 
@@ -104,7 +103,7 @@ impl DataSource for Cache {
 
 #[cfg(feature = "nightly_afidt")]
 /// 运行时分发枚举（AFIDT 当前限制：async trait 尚不支持 dyn）
-/// runtime enum （AFIDT when before ：async trait dyn）
+/// Run enumAFIDT currentasync trait support dyn
 pub enum DataSourceKind {
     Database(Database),
     Cache(Cache),
@@ -245,7 +244,7 @@ impl AfidtLimitations {
 /// ```
 ///
 /// # 权威来源
-/// # Source
+/// # Authoritative Sources
 /// - RFC: [RFC 3654](https://rust-lang.github.io/rfcs/3654-return-type-notation.html)
 /// - 预计稳定: 1.97+
 /// - : 1.97+

@@ -182,6 +182,7 @@ pub mod enhanced_const_generics {
     impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
         /// 创建零矩阵
         /// Creates零矩阵
+        /// Createszeromatrix
         pub fn zero() -> Self {
             Self {
                 data: [[T::default(); COLS]; ROWS],

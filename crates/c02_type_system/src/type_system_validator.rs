@@ -192,6 +192,7 @@ pub struct TypeValidator {
     validation_rules: Vec<ValidationRule>,
     /// 验证统计
     /// Validates统计
+    /// Validatesstatistics
     stats: Arc<Mutex<ValidationStats>>,
 }
 
@@ -252,6 +253,7 @@ pub enum ValidationSeverity {
 
 /// 验证统计
 /// Validates统计
+/// Validatesstatistics
 #[derive(Debug, Default)]
 #[allow(dead_code)]
 pub struct ValidationStats {
@@ -491,6 +493,7 @@ impl TypeValidator {
 
     /// 获取验证统计
     /// Gets验证统计
+    /// Getsverificationstatistics
     pub fn get_stats(&self) -> ValidationStats {
         self.stats.lock().expect("统计信息锁定失败").clone()
     }

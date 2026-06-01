@@ -94,6 +94,7 @@ impl<'a> SimpleLexer<'a> {
 
     /// 解析标识符
     /// Parses标识符
+    /// Parsesidentifier
     /// 在 Rust 1.94 中可以使用 next_if_map 简化此逻辑
     /// in Rust 1.94 in can next_if_map this
     pub fn parse_identifier(&mut self) -> Option<String> {
@@ -124,6 +125,7 @@ impl<'a> SimpleLexer<'a> {
 
     /// 解析特定字符
     /// Parses特定字符
+    /// Parsesspecificcharacter
     pub fn expect_char(&mut self, expected: char) -> Option<char> {
         self.input.next_if(|c| *c == expected)
     }

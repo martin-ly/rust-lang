@@ -15,7 +15,7 @@ use std::time::SystemTime;
 use std::time::{Duration, Instant};
 
 /// 进程管理器
-/// process
+/// process manager
 pub struct ProcessManager {
     processes: Arc<Mutex<HashMap<u32, ManagedProcess>>>,
     next_pid: Arc<Mutex<u32>>,
@@ -30,7 +30,7 @@ struct ManagedProcess {
 
 impl ProcessManager {
     /// 创建新的进程管理器
-    /// process
+    /// Create new processmanager
     pub fn new() -> Self {
         Self {
             processes: Arc::new(Mutex::new(HashMap::new())),
@@ -147,7 +147,7 @@ impl ProcessManager {
     }
 
     /// 获取进程输出（阻塞直到进程退出，返回实际 stdout/stderr）
-    /// process （to process ，actual stdout/stderr）
+    /// Get processprocess stdout/stderr
     pub fn get_output(&mut self, pid: u32) -> ProcessResult<std::process::Output> {
         let mut processes = self.processes.lock().expect("进程管理锁被污染");
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -280,7 +280,7 @@ impl ProcessManager {
     }
 
     /// 读取子进程标准错误的全部可用数据
-    /// process standard error all
+    /// processstandarderror data
     pub fn read_stderr(&mut self, pid: u32) -> ProcessResult<Vec<u8>> {
         let mut processes = self.processes.lock().expect("进程管理锁被污染");
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -319,7 +319,7 @@ impl ProcessManager {
     }
 
     /// 获取进程信息
-    /// process
+    /// Get process info
     pub fn get_process_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let processes = self.processes.lock().expect("进程管理锁被污染");
 
@@ -331,7 +331,7 @@ impl ProcessManager {
     }
 
     /// 获取所有进程信息
-    /// all process
+    /// Get hasprocessinformation
     pub fn get_all_processes(&self) -> Vec<ProcessInfo> {
         let processes = self.processes.lock().expect("进程管理锁被污染");
         processes.values().map(|p| p.info.clone()).collect()
@@ -348,14 +348,14 @@ impl ProcessManager {
     }
 
     /// 获取进程数量
-    /// process quantity
+    /// Get processcount
     pub fn process_count(&self) -> usize {
         let processes = self.processes.lock().expect("进程管理锁被污染");
         processes.len()
     }
 
     /// 清理已终止的进程
-    /// process
+    /// Cleanup terminated processes
     pub fn cleanup_terminated(&mut self) {
         let mut processes = self.processes.lock().expect("进程管理锁被污染");
         processes
@@ -377,7 +377,7 @@ pub struct ProcessBuilder {
 
 impl ProcessBuilder {
     /// 创建新的进程构建器
-    /// process builder
+    /// Create new process
     pub fn new(program: impl Into<String>) -> Self {
         Self {
             config: ProcessConfig {
@@ -423,40 +423,42 @@ impl ProcessBuilder {
     }
 
     /// 设置用户ID
-    /// ID
+    /// Set ID
     pub fn user_id(mut self, uid: u32) -> Self {
         self.config.user_id = Some(uid);
         self
     }
 
     /// 设置组ID
-    /// ID
+    /// Set ID
     pub fn group_id(mut self, gid: u32) -> Self {
         self.config.group_id = Some(gid);
         self
     }
 
     /// 设置优先级
+    /// Set excellent
     pub fn priority(mut self, priority: i32) -> Self {
         self.config.priority = Some(priority);
         self
     }
 
     /// 设置资源限制
+    /// Set resource
     pub fn resource_limits(mut self, limits: ResourceLimits) -> Self {
         self.config.resource_limits = limits;
         self
     }
 
     /// 构建进程配置
-    /// process
+    /// process configuration
     pub fn build(self) -> ProcessConfig {
         self.config
     }
 }
 
 /// 进程组管理器
-/// process
+/// process manager
 pub struct ProcessGroupManager {
     groups: Arc<Mutex<HashMap<u32, ProcessGroup>>>,
     next_pgid: Arc<Mutex<u32>>,
@@ -474,7 +476,7 @@ struct ProcessGroup {
 
 impl ProcessGroupManager {
     /// 创建新的进程组管理器
-    /// process
+    /// Create new processmanager
     pub fn new() -> Self {
         Self {
             groups: Arc::new(Mutex::new(HashMap::new())),
@@ -536,7 +538,7 @@ impl ProcessGroupManager {
     }
 
     /// 获取进程组信息
-    /// process
+    /// Get processinformation
     pub fn get_group(&self, pgid: u32) -> Option<crate::types::ProcessGroup> {
         let groups = self.groups.lock().expect("进程组锁被污染");
 

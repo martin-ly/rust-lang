@@ -1,8 +1,8 @@
 //! # 同步算法执行模式
-//! # synchronous algorithm
+//! # synchronousalgorithmexecution pattern
 //!
 //! 本模块实现同步算法执行，提供传统的单线程算法执行方式。
-//! this module synchronous algorithm ，thread algorithm way 。
+//! This module implements synchronousalgorithmexecutionprovidesinglethreadalgorithmexecutionmethod
 //! 适用于 CPU 密集型任务和需要确定性执行顺序的场景。
 //! CPU task and order scenario 。
 use super::{ExecutionResult, SyncAlgorithm};
@@ -14,7 +14,7 @@ pub struct SyncExecutor;
 
 impl SyncExecutor {
     /// 执行同步算法并测量性能
-    /// synchronous algorithm and performance
+    /// executionsynchronousalgorithm performance
     pub fn execute_with_metrics<A, T, R>(
         algorithm: A,
         input: T,
@@ -41,7 +41,7 @@ impl SyncExecutor {
     }
 
     /// 批量执行同步算法
-    /// synchronous algorithm
+    /// executionsynchronous algorithm
     pub fn execute_batch<A, T, R>(
         algorithm: A,
         inputs: Vec<T>,
@@ -57,7 +57,7 @@ impl SyncExecutor {
     }
 
     /// 执行同步算法并返回详细统计信息
-    /// synchronous algorithm and
+    /// executionsynchronousalgorithm information
     pub fn execute_with_stats<A, T, R>(
         algorithm: A,
         input: T,
@@ -104,7 +104,7 @@ impl SyncExecutor {
 }
 
 /// 同步执行统计信息
-/// synchronous
+/// synchronousexecution information
 #[derive(Debug, Clone)]
 pub struct SyncExecutionStats<T> {
     pub results: Vec<ExecutionResult<T>>,
@@ -116,7 +116,7 @@ pub struct SyncExecutionStats<T> {
 
 impl<T> SyncExecutionStats<T> {
     /// 获取最小执行时间
-    /// minimum time
+    /// Get minimum execution time
     pub fn min_execution_time(&self) -> std::time::Duration {
         self.results
             .iter()
@@ -126,7 +126,7 @@ impl<T> SyncExecutionStats<T> {
     }
 
     /// 获取最大执行时间
-    /// maximum time
+    /// Get maximum execution time
     pub fn max_execution_time(&self) -> std::time::Duration {
         self.results
             .iter()
@@ -136,7 +136,7 @@ impl<T> SyncExecutionStats<T> {
     }
 
     /// 获取最小内存使用
-    /// minimum memory
+    /// Get minimummemoryuse
     pub fn min_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -146,7 +146,7 @@ impl<T> SyncExecutionStats<T> {
     }
 
     /// 获取最大内存使用
-    /// maximum memory
+    /// Get maximummemoryuse
     pub fn max_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -156,7 +156,7 @@ impl<T> SyncExecutionStats<T> {
     }
 
     /// 计算性能稳定性（变异系数）
-    /// performance （coefficient ）
+    /// Compute performance
     pub fn performance_stability(&self) -> f64 {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
@@ -168,7 +168,7 @@ impl<T> SyncExecutionStats<T> {
 }
 
 /// 获取当前内存使用量（简化实现）
-/// when before memory （）
+/// Get current memory usage (simplified implementation)
 fn get_memory_usage() -> usize {
     // 在实际应用中，这里应该使用更精确的内存测量方法
     // 例如使用 `sysinfo` crate 或系统特定的 API
@@ -219,7 +219,7 @@ pub struct BenchmarkTestCase<T> {
 }
 
 /// 基准测试结果
-/// benchmark result
+/// test result
 #[derive(Debug, Clone)]
 pub struct BenchmarkResult<T> {
     pub test_case: String,
@@ -227,7 +227,7 @@ pub struct BenchmarkResult<T> {
 }
 
 /// 基准测试结果集合
-/// benchmark result set
+/// testresult set
 #[derive(Debug, Clone)]
 pub struct BenchmarkResults<T> {
     pub results: Vec<BenchmarkResult<T>>,
@@ -235,7 +235,7 @@ pub struct BenchmarkResults<T> {
 
 impl<T> BenchmarkResults<T> {
     /// 获取最佳性能的测试用例
-    /// performance
+    /// Get best performance test case
     pub fn best_performance(&self) -> Option<&BenchmarkResult<T>> {
         self.results
             .iter()
@@ -243,7 +243,7 @@ impl<T> BenchmarkResults<T> {
     }
 
     /// 获取最稳定性能的测试用例
-    /// performance
+    /// Get performancetest
     pub fn most_stable(&self) -> Option<&BenchmarkResult<T>> {
         self.results.iter().min_by(|a, b| {
             a.stats

@@ -33,9 +33,9 @@ impl AppConfig {
     }
 }
 
-/// ✅ Rust 1.94: 使用 get() 进行热路径优化
-/// ✅ Rust 1.94: get() optimization
-/// ✅ Rust 1.94: Use get() 进行热路径optimization
+/// ✅ Rust 1.96+: 使用 get() 进行热路径优化 (Rust 1.94 引入)
+/// ✅ Rust 1.96+: get() optimization (introduced in Rust 1.94)
+/// ✅ Rust 1.96+: Use get() for hot path optimization
 /// 如果配置已初始化，直接返回；不会触发初始化
 /// if configuration ，；
 /// if ，；
@@ -80,8 +80,8 @@ impl ConnectionPool {
     }
 }
 
-/// 性能关键路径：使用 Rust 1.94 get() 优化
-/// performance key ： Rust 1.94 get() optimization
+/// 性能关键路径：使用 Rust 1.96+ get() 优化 (1.94 引入)
+/// Performance critical path: Rust 1.96+ get() optimization (introduced in 1.94)
 pub fn execute_query_optimized(query: &str) -> Result<String, String> {
     // 热路径：检查是否已初始化（无锁）
     if let Some(pool) = LazyLock::get(&CONNECTION_POOL) {
@@ -118,9 +118,9 @@ impl LocalCache {
         }
     }
 
-    /// ✅ Rust 1.94: get() - 安全读取，不触发初始化
-    /// ✅ Rust 1.94: get() - ，
-    /// ✅ Rust 1.94: get() - 安全Read，不触发Initialize
+    /// ✅ Rust 1.96+: get() - 安全读取，不触发初始化 (1.94 引入)
+    /// ✅ Rust 1.96+: get() - safe read without triggering initialization
+    /// ✅ Rust 1.96+: get() - safe read, no initialization triggered
     pub fn peek(&self) -> Option<&[u8]> {
         LazyCell::get(&self.data).map(|v| v.as_slice())
     }
@@ -131,8 +131,8 @@ impl LocalCache {
         &*self.data
     }
 
-    /// ✅ Rust 1.94: force_mut() - 强制初始化并获取可变引用
-    /// ✅ Rust 1.94: force_mut() - and reference
+    /// ✅ Rust 1.96+: force_mut() - 强制初始化并获取可变引用 (1.94 引入)
+    /// ✅ Rust 1.96+: force_mut() - force initialization and get mutable reference
     pub fn update(&mut self, new_data: Vec<u8>) {
         println!("[UPDATE] 替换缓存数据");
         let cache = LazyCell::force_mut(&mut self.data);
@@ -247,7 +247,7 @@ pub fn benchmark_lazy_access() {
 // ==================== 主函数 ====================
 
 fn main() {
-    println!("=== Rust 1.94 LazyLock/LazyCell 深度示例 ===\n");
+    println!("=== Rust 1.96+ LazyLock/LazyCell 深度示例 ===\n");
 
     // 1. 配置访问示例
     println!("--- 配置访问 ---");

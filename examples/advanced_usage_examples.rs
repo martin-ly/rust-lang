@@ -150,10 +150,10 @@ pub fn advanced_performance_example() {
     println!("  - 结果: {}", sum);
 }
 
-/// Rust 1.94 特性示例
-/// Rust 1.94 feature example
+/// Rust 1.96 可用特性示例 (原 Rust 1.94 引入)
+/// Rust 1.96 available feature example (introduced in Rust 1.94)
 pub fn rust_194_features_example() {
-    println!("\n🆕 Rust 1.94 特性示例");
+    println!("\n🆕 Rust 1.96 可用特性示例");
 
     // array_windows 示例
     let data = [1, 2, 3, 4, 5];

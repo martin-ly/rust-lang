@@ -1,12 +1,11 @@
 //! Rust for Linux 预研模块
-//!
-//! ⚠️ **警告**: 本模块内容基于 Rust-for-Linux 项目文档和内核 6.12+ 实践，
+//! Rust for Linux module
 //! ⚠️ **warning **: this module inside Rust-for-Linux project and kernel 6.12+ ，
 //! 需要特定内核环境和交叉编译工具链，不能在用户态直接运行。
 //! kernel environment and toolchain ，cannot in Run 。
 //!
 //! # 概念定义
-//! # concept definition
+//! # Concept Definitions
 //!
 //! [Rust for Linux](https://github.com/Rust-for-Linux/linux) 是 Linux 内核官方支持的
 //! Rust 开发框架，从内核 6.1 开始引入，允许用 Rust 编写内核模块、驱动程序。
@@ -19,23 +18,23 @@
 //! - 影响: 系统编程的终极场景
 //! - impact : system scenario
 //! - 学习价值: 理解 `no_std`、FFI、`unsafe` 的极致应用
-//! - learn value : `no_std`、FFI、`unsafe` application
+//! - learningvalue: `no_std`FFI`unsafe` application
 //!
 //! ## 核心概念
-//! ## core concept
+//! ## Core Concepts
 //!
 //! ```text
 //! What:   用 Rust 替代 C 编写 Linux 内核模块
-//! What: Rust C Linux kernel module
+//! What: Rust C Linux inner module
 //! How:    kernel crate + no_std + unsafe FFI + 内核 ABI
 //! When:   设备驱动、文件系统、网络协议栈
-//! When: driver 、file system 、network protocol stack
+//! When: filesystem stack
 //! Not:    不是用户态程序！没有 std，没有 libc，只有 core/alloc
 //! Not: program ！ std， libc， core/alloc
 //! ```
 //!
 //! # 权威来源
-//! # Source
+//! # Authoritative Sources
 //! - 项目: [Rust-for-Linux](https://github.com/Rust-for-Linux/linux)
 //! - 文档: [docs.kernel.org/rust](https://docs.kernel.org/rust/)
 //! - 预计生产化: 内核 6.12+
@@ -117,7 +116,7 @@ pub struct NoStdKernelPatterns;
 
 impl NoStdKernelPatterns {
     /// 内核中的错误处理模式
-    /// kernel in error handling
+    /// innererrorhandling pattern
     pub fn kernel_error_handling() -> &'static str {
         "内核中没有 unwrap() 的奢侈：\n- 所有分配可能失败（返回 ENOMEM）\n- 使用 Result<T, Error> \
          传播错误\n- 关键路径使用 GFP_ATOMIC（不可睡眠）"
@@ -182,7 +181,7 @@ impl DeviceDriverFramework {
 // ============================================================================
 
 /// # 内核模块构建流程
-/// # kernel module process
+/// # innermodule flow
 ///
 /// ```text
 /// 1. 获取 Rust-for-Linux 内核源码
@@ -194,7 +193,7 @@ impl DeviceDriverFramework {
 ///    make menuconfig  # 选择 Device Drivers -> Rust support
 ///
 /// 3. 编写 Rust 内核模块
-/// 3. Rust kernel module
+/// 3. Rust inner module
 ///    保存到 drivers/char/rust_example.rs
 ///
 /// 4. 编译

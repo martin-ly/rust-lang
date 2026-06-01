@@ -1,15 +1,15 @@
 //! # 异步排序算法实现
-//! # async sorting algorithm
+//! # asyncsortalgorithm implementation
 //!
 //! 本模块实现了各种异步排序算法。
-//! this module async sorting algorithm 。
+//! This module implements asyncsortalgorithm
 use super::*;
 use crate::algorithms::execution_modes::AsyncAlgorithm;
 use std::future::Future;
 use std::pin::Pin;
 
 /// 异步快速排序算法
-/// async quick sort algorithm
+/// asyncfastsort algorithm
 pub struct AsyncQuickSort;
 
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncQuickSort {
@@ -53,7 +53,7 @@ impl AsyncSortingAlgorithm for AsyncQuickSort {
 }
 
 /// 异步归并排序算法
-/// async merge sort algorithm
+/// asyncsort algorithm
 pub struct AsyncMergeSort;
 
 impl AsyncAlgorithm<Vec<i32>, Vec<i32>> for AsyncMergeSort {
@@ -301,7 +301,7 @@ impl AsyncSortingAlgorithm for AsyncTimSort {
 }
 
 /// 快速排序递归实现
-/// quick sort
+/// fastsort implementation
 fn quick_sort_recursive(arr: &mut [i32], low: usize, high: usize) {
     if low < high {
         let pi = partition(arr, low, high);
@@ -332,7 +332,7 @@ fn partition(arr: &mut [i32], low: usize, high: usize) -> usize {
 }
 
 /// 归并排序递归实现
-/// merge sort
+/// sort implementation
 fn merge_sort_recursive(arr: &mut [i32]) {
     if arr.len() <= 1 {
         return;

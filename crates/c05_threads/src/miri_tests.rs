@@ -39,6 +39,7 @@ fn test_atomic_basic() {
 /// objective : exchange and exchange
 /// 测试场景: 使用 swap 和 compare_exchange
 /// Tests场景: 使用 swap 和 compare_exchange
+/// Testsscenario: use swap and compare_exchange
 /// 预期结果: 应该正确完成交换操作
 /// result : should exchange
 #[test]

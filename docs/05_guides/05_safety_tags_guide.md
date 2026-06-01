@@ -1,4 +1,6 @@
 # Safety Tags 预研指南
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [A]
 > **层级**: L7 前沿 / L3 高级 Unsafe
@@ -13,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Safety Tags 预研指南](#safety-tags-预研指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [为什么需要 Safety Tags](#为什么需要-safety-tags)
   - [提议设计（草案阶段）](#提议设计草案阶段)

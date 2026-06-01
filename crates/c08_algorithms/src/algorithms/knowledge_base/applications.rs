@@ -1,5 +1,5 @@
 //! # 算法应用模块
-//! # algorithm application module
+//! # algorithmapplication module
 //!
 //! 本模块提供算法的应用场景和实际案例。
 //! This module provides algorithm application scenario and actual 。

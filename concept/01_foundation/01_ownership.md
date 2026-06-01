@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **本节关键术语**: 所有权 (Ownership) · 移动 (Move) · 借用 (Borrow) · 引用 (Reference) · 生命周期 (Lifetime) — [完整对照表](../00_meta/terminology_glossary.md)
 

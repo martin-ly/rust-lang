@@ -1,5 +1,5 @@
 //! Rust 1.93.0 异步编程 特性模块
-//! Rust 1.93.0 async feature module
+//! Rust 1.93.0 async features module
 #![allow(clippy::incompatible_msrv)]
 
 use std::collections::VecDeque;

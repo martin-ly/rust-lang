@@ -1,4 +1,6 @@
 # libp2p 指南
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [A]
 > **层级**: L6 生态工具 / L3 高级网络
@@ -13,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [libp2p 指南](#libp2p-指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [核心概念](#核心概念)
     - [Multiaddr —— 统一的地址格式](#multiaddr--统一的地址格式)

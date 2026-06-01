@@ -2,7 +2,7 @@
 //! classification
 //!
 //! 本模块提供了朴素贝叶斯分类器的基础实现
-//! This module provides classification foundation
+//! This module provides implementation
 use super::*;
 use std::collections::HashMap;
 
@@ -11,6 +11,7 @@ use std::collections::HashMap;
 #[derive(Debug, Clone)]
 pub struct NaiveBayesClassifier {
     /// 是否已训练
+    /// Whether trained
     is_fitted: bool,
     /// 类别先验概率
     class_priors: Option<HashMap<Label, f64>>,
@@ -45,7 +46,7 @@ impl NaiveBayesClassifier {
     }
 
     /// 计算特征的条件概率（高斯分布假设）
-    /// condition （distribution hypothesize ）
+    /// Compute highfalse
     fn calculate_gaussian_probability(&self, feature_value: f64, mean: f64, variance: f64) -> f64 {
         if variance == 0.0 {
             return if (feature_value - mean).abs() < 1e-10 {
@@ -62,7 +63,7 @@ impl NaiveBayesClassifier {
     }
 
     /// 计算特征的均值和方差
-    /// and
+    /// Compute value
     fn calculate_feature_stats(
         &self,
         data: &Dataset,
@@ -199,6 +200,7 @@ impl SupervisedLearning for NaiveBayesClassifier {
 #[derive(Debug, Clone)]
 pub struct MultinomialNaiveBayes {
     /// 是否已训练
+    /// Whether trained
     is_fitted: bool,
     /// 类别先验概率
     class_priors: Option<HashMap<Label, f64>>,
@@ -214,7 +216,7 @@ pub struct MultinomialNaiveBayes {
 
 impl MultinomialNaiveBayes {
     /// 创建新的多项式朴素贝叶斯分类器
-    /// classification
+    /// Create new multiple
     pub fn new() -> Self {
         Self {
             is_fitted: false,

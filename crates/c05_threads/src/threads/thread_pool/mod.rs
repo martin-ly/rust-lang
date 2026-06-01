@@ -274,6 +274,7 @@ impl ConfigurableThreadPool {
 
     /// 获取配置信息
     /// Gets配置信息
+    /// Getsconfigurationinformation
     pub fn config(&self) -> &ThreadPoolConfig {
         &self.config
     }

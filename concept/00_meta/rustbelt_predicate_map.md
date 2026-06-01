@@ -1,4 +1,6 @@
 # RustBelt 谓词映射图（RustBelt Predicate Map）
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **受众**: [研究者]
 > **Bloom 层级**: 分析 → 评价

@@ -115,7 +115,7 @@
 > **[来源: Rust Official Docs]**
 
 1. **学术理论基础**: Tree Borrows (PLDI 2025), Miri (POPL 2026)
-2. **工具链与语言**: Rust 1.94/95, core库认证
+2. **工具链与语言**: Rust 1.96 (MSRV), core库认证
 3. **工业应用标准**: ISO 26262, IEC 61508, DO-178C
 4. **国防航天应用**: NASA cFS, ESA空间系统
 5. **教育体系**: Stanford CS110L, CMU 15-411

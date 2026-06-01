@@ -1,5 +1,5 @@
 //! 通用优先队列封装：最小堆/最大堆，支持同步/异步批处理
-//! ：minimum heap /maximum heap ，synchronous /async
+//! genericexcellentqueueminimumheap/maximumheapsupportsynchronous/async processing
 use anyhow::Result;
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
@@ -13,6 +13,7 @@ pub enum HeapKind {
 }
 
 /// 通用优先队列
+/// genericexcellent queue
 #[derive(Clone, Debug)]
 pub struct PriorityQueue<T> {
     kind: HeapKind,

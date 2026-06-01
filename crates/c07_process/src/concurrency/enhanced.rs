@@ -15,7 +15,7 @@ use std::time::{Duration, Instant};
 use tokio::sync::{Barrier, Mutex as TokioMutex, RwLock as TokioRwLock, Semaphore};
 
 /// 增强的同步管理器
-/// synchronous
+/// strongsynchronous manager
 #[cfg(feature = "async")]
 pub struct EnhancedSyncManager {
     primitives: Arc<TokioRwLock<HashMap<String, Arc<dyn EnhancedSyncPrimitiveTrait>>>>,
@@ -33,7 +33,7 @@ pub trait EnhancedSyncPrimitiveTrait: Send + Sync {
     fn name(&self) -> &str;
 
     /// 获取原语类型
-    /// type
+    /// Get type
     fn primitive_type(&self) -> SyncPrimitive;
 
     /// 检查是否被锁定
@@ -41,14 +41,15 @@ pub trait EnhancedSyncPrimitiveTrait: Send + Sync {
     fn is_locked(&self) -> bool;
 
     /// 获取等待者数量
-    /// etc. quantity
+    /// Get waiter count
     fn waiter_count(&self) -> usize;
 
     /// 获取统计信息
+    /// Get statistics
     fn get_stats(&self) -> EnhancedPrimitiveStats;
 
     /// 获取性能指标
-    /// performance indicator
+    /// Get performance metrics
     fn get_performance_metrics(&self) -> SyncPerformanceMetrics;
 
     /// 检查死锁风险
@@ -296,6 +297,7 @@ pub struct AdaptiveScheduler {
 }
 
 /// 增强的原语统计信息
+/// strong information
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -350,7 +352,7 @@ pub enum DeadlockRisk {
 }
 
 /// 性能分析结果
-/// performance analyze result
+/// performanceanalysis result
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -364,7 +366,7 @@ pub struct PerformanceAnalysis {
 }
 
 /// 单个原语性能分析
-/// performance analyze
+/// singleperformance analysis
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -375,7 +377,7 @@ pub struct PrimitiveAnalysis {
 }
 
 /// 增强的互斥锁统计信息
-/// mutex
+/// strong information
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedMutexStats {
@@ -388,7 +390,7 @@ struct EnhancedMutexStats {
 }
 
 /// 增强的读写锁统计信息
-/// rwlock
+/// strong information
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedRwLockStats {
@@ -403,7 +405,7 @@ struct EnhancedRwLockStats {
 }
 
 /// 增强的信号量统计信息
-/// semaphore
+/// strong information
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedSemaphoreStats {
@@ -416,7 +418,7 @@ struct EnhancedSemaphoreStats {
 }
 
 /// 增强的屏障统计信息
-/// barrier
+/// strong information
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedBarrierStats {
@@ -431,7 +433,7 @@ struct EnhancedBarrierStats {
 #[allow(dead_code)]
 impl EnhancedSyncManager {
     /// 创建新的增强同步管理器
-    /// synchronous
+    /// Create new strongsynchronousmanager
     pub async fn new(config: SyncConfig) -> SyncResult<Self> {
         let primitives = Arc::new(TokioRwLock::new(HashMap::new()));
         let deadlock_detector = Arc::new(DeadlockDetector::new());
@@ -614,7 +616,7 @@ impl EnhancedSyncManager {
     }
 
     /// 获取所有原语名称
-    /// all
+    /// Get has
     pub async fn get_primitive_names(&self) -> Vec<String> {
         self.primitives.read().await.keys().cloned().collect()
     }
@@ -626,13 +628,14 @@ impl EnhancedSyncManager {
     }
 
     /// 获取原语统计信息
+    /// Get information
     pub async fn get_primitive_stats(&self, name: &str) -> Option<EnhancedPrimitiveStats> {
         let primitives = self.primitives.read().await;
         primitives.get(name).map(|p| p.get_stats())
     }
 
     /// 获取所有原语统计信息
-    /// all
+    /// Get hasinformation
     pub async fn get_all_stats(&self) -> HashMap<String, EnhancedPrimitiveStats> {
         let primitives = self.primitives.read().await;
         let mut stats = HashMap::new();
@@ -645,13 +648,13 @@ impl EnhancedSyncManager {
     }
 
     /// 获取性能指标
-    /// performance indicator
+    /// Get performance metrics
     pub async fn get_performance_metrics(&self, name: &str) -> Option<SyncPerformanceMetrics> {
         self.performance_monitor.get_metrics(name).await
     }
 
     /// 获取所有性能指标
-    /// all performance indicator
+    /// Get hasperformance
     pub async fn get_all_performance_metrics(&self) -> HashMap<String, SyncPerformanceMetrics> {
         self.performance_monitor.get_all_metrics().await
     }
@@ -660,7 +663,7 @@ impl EnhancedSyncManager {
     /// performance analyze （ Rust 1.90 ）
     ///
     /// 使用 Rust 1.90 的改进迭代器特性进行性能分析
-    /// Rust 1.90 feature performance analyze
+    /// use Rust 1.90 improvementsiteratorfeaturesperformance analysis
     pub async fn analyze_performance(&self) -> SyncResult<PerformanceAnalysis> {
         let all_metrics = self.get_all_performance_metrics().await;
 
@@ -831,7 +834,7 @@ impl EnhancedMutex {
     }
 
     /// 获取锁（带死锁检测和 Rust 1.90 智能模式匹配）
-    /// lock （lock and Rust 1.90 ）
+    /// Get Rust 1.90 smartpattern
     ///
     /// 使用 Rust 1.90 的改进模式匹配和错误处理特性
     /// Rust 1.90 and error handling feature
@@ -910,7 +913,7 @@ impl EnhancedMutex {
     }
 
     /// 尝试获取锁
-    /// lock
+    /// Try to acquire lock
     pub fn try_lock(&self) -> Option<EnhancedMutexGuard<'_>> {
         if let Ok(guard) = self.inner.try_lock() {
             self.stats.lock_count.fetch_add(1, Ordering::Relaxed);

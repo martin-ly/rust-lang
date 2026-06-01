@@ -1,16 +1,16 @@
 //! Rust 1.90 异步控制流增强模块
-//! Rust 1.90 async stream module
+//! Rust 1.90 asynccontrolflowstrong module
 //! 
 //! 本模块实现了Rust 1.90版本中的异步控制流增强特性，包括：
-//! this module Rust 1.90this in async stream feature ，：
+//! This module implements Rust 1.90versionasynccontrolflowstrongfeaturesincluding
 //! - 异步状态机
 //! - async state machine
 //! - 异步资源管理
 //! - async
 //! - 异步错误处理
-//! - async error handling
+//! - asyncerror processing
 //! - 异步并发控制
-//! - async concurrency
+//! - asyncconcurrent control
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::time::sleep;
@@ -150,7 +150,7 @@ impl AsyncStateMachine190 {
 }
 
 /// 异步资源管理器
-/// async
+/// asyncresource manager
 #[allow(unused)]
 pub struct AsyncResourceManager {
     resources: Arc<Mutex<HashMap<String, Box<dyn AsyncResource + Send + Sync>>>>,
@@ -206,7 +206,7 @@ impl AsyncResourceManager {
 }
 
 /// 数据库连接资源
-/// database
+/// datalibrary resource
 #[allow(unused)]
 pub struct DatabaseResource {
     id: String,

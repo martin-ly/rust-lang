@@ -4,7 +4,7 @@ use anyhow::Result;
 use rayon::prelude::*;
 
 /// 检查在 `row` 行把皇后放在 `col` 是否安全
-/// in `row` after in `col`
+/// `row` back `col` whether safety
 fn is_safe(partial: &[usize], row: usize, col: usize) -> bool {
     for (r, &c) in partial.iter().enumerate() {
         if c == col {
@@ -39,7 +39,7 @@ fn solve_sync_inner(
 }
 
 /// 同步：返回所有解，每个解为长度为 n 的列索引数组
-/// synchronous ：all ，as as n
+/// synchronoushaslong n array
 pub fn nqueens_solutions_sync(n: usize) -> Vec<Vec<usize>> {
     let mut solutions = Vec::new();
     let mut partial = Vec::with_capacity(n);

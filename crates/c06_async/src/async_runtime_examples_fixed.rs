@@ -1,8 +1,8 @@
 //! 异步运行时具体示例和组合模式
-//! async runtime volume example and combination
+//! Async Runtime Examples and Combined Patterns
 //! 
 //! 本模块提供了各个异步运行时的具体使用示例，
-//! This module provides async runtime volume example ，
+//! This module provides asyncruntimeuse
 //! 包括：std、tokio、async-std、smol的实际应用场景和组合模式。
 //! ：std、tokio、async-std、smolactual application scenario and combination 。
 use std::sync::Arc;
@@ -18,7 +18,7 @@ use futures::future::{join_all, try_join_all};
 use futures::stream::StreamExt;
 
 /// 1. std 标准库异步示例
-/// 1. std standard library async example
+/// 1. std standardlibraryasync example
 /// 
 /// 展示如何使用标准库的基础异步功能
 /// standard library foundation async functionality
@@ -34,7 +34,7 @@ impl StdAsyncExamples {
     }
 
     /// 基础异步函数示例
-    /// foundation async function example
+    /// asyncfunction example
     pub async fn basic_async_function(&self, input: &str) -> Result<String> {
         // 模拟异步操作
         tokio::time::sleep(Duration::from_millis(100)).await;
@@ -42,7 +42,7 @@ impl StdAsyncExamples {
     }
 
     /// 异步迭代器示例
-    /// async example
+    /// asynciterator example
     pub async fn async_iterator_example(&self) -> Result<Vec<String>> {
         let mut results = Vec::new();
         
@@ -55,7 +55,7 @@ impl StdAsyncExamples {
     }
 
     /// 异步错误处理示例
-    /// async error handling example
+    /// asyncerrorhandling example
     pub async fn async_error_handling(&self, should_fail: bool) -> Result<String> {
         if should_fail {
             return Err(anyhow::anyhow!("模拟异步错误"));
@@ -99,7 +99,7 @@ impl TokioExamples {
     }
 
     /// 高性能并发处理示例
-    /// performance concurrency example
+    /// high-performanceconcurrenthandling example
     pub async fn high_performance_concurrent_processing(&self, tasks: Vec<String>) -> Result<Vec<String>> {
         let semaphore = Arc::clone(&self.connection_pool);
         let mut handles = Vec::new();
@@ -118,7 +118,7 @@ impl TokioExamples {
     }
 
     /// 流处理示例
-    /// stream example
+    /// flowhandling example
     pub async fn stream_processing_example(&self) -> Result<()> {
         println!("🌊 Tokio 流处理示例:");
         
@@ -141,7 +141,7 @@ impl TokioExamples {
     }
 
     /// 定时器和调度示例
-    /// and example
+    /// scheduling example
     pub async fn timer_and_scheduling_example(&self) -> Result<()> {
         println!("⏰ Tokio 定时器和调度示例:");
         
@@ -183,7 +183,7 @@ impl AsyncStdExamples {
     }
 
     /// 标准库风格的异步文件操作
-    /// standard library async file operation
+    /// standardlibraryasyncfile operation
     pub async fn file_operations_example(&self) -> Result<()> {
         println!("📁 async-std 文件操作示例:");
         
@@ -220,7 +220,7 @@ impl AsyncStdExamples {
     }
 
     /// 任务管理示例
-    /// task example
+    /// taskmanagement example
     pub async fn task_management_example(&self) -> Result<()> {
         println!("📋 async-std 任务管理示例:");
         
@@ -239,7 +239,7 @@ impl AsyncStdExamples {
     }
 
     /// 标准库兼容性示例
-    /// standard library example
+    /// standardlibrary example
     pub async fn std_compatibility_example(&self) -> Result<()> {
         println!("🔄 async-std 标准库兼容性示例:");
         
@@ -303,7 +303,7 @@ impl SmolExamples {
     }
 
     /// 轻量级任务调度示例
-    /// task example
+    /// lightweighttaskscheduling example
     pub async fn lightweight_task_scheduling(&self) -> Result<()> {
         println!("⚡ smol 轻量级任务调度示例:");
         
@@ -322,7 +322,7 @@ impl SmolExamples {
     }
 
     /// 嵌入式友好示例
-    /// example
+    /// good example
     pub async fn embedded_friendly_example(&self) -> Result<()> {
         println!("🔧 smol 嵌入式友好示例:");
         
@@ -356,7 +356,7 @@ impl SmolExamples {
     }
 
     /// 零依赖示例
-    /// example
+    /// zero example
     pub async fn zero_dependency_example(&self) -> Result<()> {
         println!("🎯 smol 零依赖示例:");
         
@@ -410,10 +410,10 @@ impl SmolExamples {
 }
 
 /// 5. 运行时组合模式示例
-/// 5. runtime combination example
+/// 5. runtimepattern example
 /// 
 /// 展示如何组合不同的异步运行时
-/// combination async runtime
+/// demonstrateasync runtime
 pub struct RuntimeCompositionExamples {
     runtime_selector: Arc<Mutex<String>>,
 }
@@ -426,7 +426,7 @@ impl RuntimeCompositionExamples {
     }
 
     /// 运行时选择器模式
-    /// runtime
+    /// Run pattern
     pub async fn runtime_selector_pattern(&self, task_type: &str) -> Result<String> {
         println!("🎛️ 运行时选择器模式:");
         
@@ -445,7 +445,7 @@ impl RuntimeCompositionExamples {
     }
 
     /// 运行时适配器模式
-    /// runtime adapter
+    /// Run pattern
     pub async fn runtime_adapter_pattern(&self) -> Result<()> {
         println!("🔌 运行时适配器模式:");
         
@@ -465,7 +465,7 @@ impl RuntimeCompositionExamples {
     }
 
     /// 运行时桥接模式
-    /// runtime bridge
+    /// Run pattern
     pub async fn runtime_bridge_pattern(&self) -> Result<()> {
         println!("🌉 运行时桥接模式:");
         

@@ -33,7 +33,7 @@ pub struct ProcessInfo {
     /// process
     pub name: String,
     /// 进程状态
-    /// process state
+    /// process status
     pub status: ProcessStatus,
     /// 内存使用量（字节）
     /// memory （）
@@ -42,18 +42,18 @@ pub struct ProcessInfo {
     /// CPU（）
     pub cpu_usage: f64,
     /// 创建时间
-    /// time
+    /// create time
     pub created_at: SystemTime,
     /// 父进程ID
     /// process ID
     pub parent_pid: Option<u32>,
     /// 子进程ID列表
-    /// process ID
+    /// processID table
     pub children_pids: Vec<u32>,
 }
 
 /// IPC协议类型
-/// IP Ctype
+/// IPC type
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum IpcProtocol {
     /// 管道通信
@@ -79,7 +79,7 @@ pub struct IpcConfig {
     /// 通信协议
     pub protocol: IpcProtocol,
     /// 超时时间
-    /// time
+    /// Timeout
     pub timeout: Duration,
     /// 重试次数
     pub retry_count: u32,
@@ -122,12 +122,12 @@ pub struct SyncConfig {
     /// synchronous type
     pub primitive: SyncPrimitive,
     /// 超时时间
-    /// time
+    /// Timeout
     pub timeout: Duration,
     /// 是否公平
     pub fair: bool,
     /// 最大等待者数量
-    /// maximum etc. quantity
+    /// maximum count
     pub max_waiters: Option<usize>,
 }
 
@@ -166,7 +166,7 @@ pub struct ResourceLimits {
     /// maximum memory （）
     pub max_memory: Option<u64>,
     /// 最大文件描述符数量
-    /// maximum file descriptor quantity
+    /// maximumfile count
     pub max_file_descriptors: Option<u64>,
     /// 最大CPU时间（秒）
     /// maximum CPUtime （）
@@ -239,13 +239,14 @@ impl<T> Message<T> {
     }
 
     /// 设置目标进程
-    /// goal process
+    /// Set process
     pub fn with_target(mut self, target_pid: u32) -> Self {
         self.target_pid = Some(target_pid);
         self
     }
 
     /// 设置优先级
+    /// Set excellent
     pub fn with_priority(mut self, priority: u8) -> Self {
         self.priority = priority;
         self
@@ -253,7 +254,7 @@ impl<T> Message<T> {
 }
 
 /// 进程组信息
-/// process
+/// process information
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProcessGroup {
     /// 进程组ID
@@ -263,13 +264,13 @@ pub struct ProcessGroup {
     /// process ID
     pub leader_pid: u32,
     /// 成员进程ID列表
-    /// process ID
+    /// processID table
     pub member_pids: Vec<u32>,
     /// 进程组名称
     /// process
     pub name: String,
     /// 创建时间
-    /// time
+    /// create time
     pub created_at: SystemTime,
 }
 
@@ -296,13 +297,13 @@ pub struct SystemResources {
     /// space （）
     pub available_disk: u64,
     /// 当前时间
-    /// when before time
+    /// current time
     pub timestamp: SystemTime,
 }
 
 impl SystemResources {
     /// 获取内存使用率
-    /// memory
+    /// Get memoryuse
     pub fn memory_usage_percent(&self) -> f64 {
         if self.total_memory == 0 {
             return 0.0;
@@ -312,6 +313,7 @@ impl SystemResources {
     }
 
     /// 获取磁盘使用率
+    /// Get use
     pub fn disk_usage_percent(&self) -> f64 {
         if self.total_disk == 0 {
             return 0.0;

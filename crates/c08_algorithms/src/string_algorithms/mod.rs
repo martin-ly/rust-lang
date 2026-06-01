@@ -9,7 +9,7 @@ use anyhow::Result;
 // =========================
 
 /// 计算前缀函数（最长相等真前后缀）
-/// before function （etc. before after ）
+/// Compute frontfunctionlongtruefrontback
 fn compute_lps(pat: &[u8]) -> Vec<usize> {
     let mut lps = vec![0usize; pat.len()];
     let (mut len, mut i) = (0usize, 1usize);
@@ -248,7 +248,7 @@ pub fn aho_search(text: &str, patterns: &[&str]) -> Vec<(usize, usize)> {
 // =========================
 
 /// 计算 Z 数组：`z[i]` 为 `s` 与 `s[i..]` 的最长公共前缀长度
-/// Z ：`z[i]` as `s` and `s[i..]` before
+/// Compute Z array`z[i]` `s` `s[i..]` longpublicfrontlong
 pub fn z_algorithm(s: &str) -> Vec<usize> {
     let a = s.as_bytes();
     let n = a.len();

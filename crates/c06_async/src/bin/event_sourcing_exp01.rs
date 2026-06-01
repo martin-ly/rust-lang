@@ -133,14 +133,14 @@ impl EventStore {
     }
 
     /// 获取聚合的所有事件
-    /// aggregation all
+    /// Get has
     async fn get_events(&self, aggregate_id: &str) -> Vec<DomainEvent> {
         let events = self.events.read().await;
         events.get(aggregate_id).cloned().unwrap_or_default()
     }
 
     /// 获取所有事件
-    /// all
+    /// Get has
     async fn get_all_events(&self) -> Vec<DomainEvent> {
         let events = self.events.read().await;
         events.values().flatten().cloned().collect()
@@ -148,7 +148,7 @@ impl EventStore {
 }
 
 /// 命令处理器
-/// command
+/// Command processor
 struct CommandHandler {
     event_store: Arc<EventStore>,
 }
@@ -280,7 +280,7 @@ impl QueryHandler {
     }
 
     /// 获取所有用户
-    /// Get all users
+    /// Get has
     async fn get_all_users(&self) -> Vec<User> {
         let read_models = self.read_models.read().await;
         read_models.values().cloned().collect()
@@ -327,7 +327,7 @@ impl EventSourcingSystem {
     }
 
     /// 运行事件溯源示例
-    /// Run event sourcing example
+    /// run example
     async fn run_example(&self) -> Result<()> {
         println!("🚀 事件溯源示例启动");
         println!("{}", "=".repeat(50));

@@ -1,8 +1,8 @@
 //! 回归算法实现
-//! algorithm
+//! algorithm implementation
 //!
 //! 本模块提供了回归算法的实现，包括线性回归等
-//! This module provides algorithm ，line etc.
+//! This module provides algorithmimplementationincluding
 use super::*;
 
 /// 线性回归模型
@@ -15,6 +15,7 @@ pub struct LinearRegression {
     /// 截距
     intercept: Option<f64>,
     /// 是否已训练
+    /// Whether trained
     is_fitted: bool,
 }
 

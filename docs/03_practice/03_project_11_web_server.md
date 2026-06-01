@@ -1,4 +1,6 @@
 # 实践项目 11: HTTP Web服务器
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [A]
 > **Bloom 层级**: L3 (应用)
@@ -14,13 +16,13 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 11: HTTP Web服务器](#实践项目-11-http-web服务器)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [项目目标](#项目目标)
   - [功能需求](#功能需求)
   - [学习要点](#学习要点)
     - [HTTP解析](#http解析)
   - [参考实现](#参考实现)
-  - 完整参考实现位于: `examples/web-server/`
+  - [完整参考实现位于: `examples/web-server/`](#完整参考实现位于-examplesweb-server)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 

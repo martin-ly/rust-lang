@@ -2,15 +2,15 @@
 //! LeetCode algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的链表类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
-//! this module LeetCode ， Rust 1.92 feature 。
+//! This module implements classiclinked list LeetCode Rust 1.92 newfeatures
 //!
 //! ## Rust 1.92 特性应用
-//! ## Rust 1.92 feature application
+//! ## Rust 1.92 Feature Application
 //!
 //! 1. **性能优化**: 使用智能指针优化内存管理
 //! 1. **performance optimization **: pointer optimization memory
 //! 2. **内存安全**: 利用 Rust 的所有权系统
-//! 2. **memory safety **: Rust ownership system
+//! 2. **memorysafety**: Rust ownership system
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 // ==================== 数据结构定义 ====================
@@ -35,17 +35,17 @@ impl ListNode {
 /// 2. Add Two Numbers（两数相加）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
 /// ，represent 。 way ，and and node 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **链表操作**: 使用迭代方式处理链表
-/// - ****: way
+/// - **linked listoperation**: usemethodhandling table
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(max(m, n))
 /// - time complexity : O(max(m, n))
 /// - 空间复杂度: O(max(m, n))
@@ -84,21 +84,21 @@ pub fn add_two_numbers(
 /// 19. Remove Nth Node From End of List（删除链表的倒数第 N 个结点）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
 /// ， n point ，and and point 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **双指针**: 使用快慢指针一次遍历
-/// - **pointer **: pointer
+/// - **doublepointer**: usefastslowpointer traversal
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(L)
 /// - time complexity : O(L)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
     let mut dummy = Box::new(ListNode { val: 0, next: head });
     let mut fast = dummy.clone();
@@ -128,21 +128,21 @@ pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<Li
 /// 21. Merge Two Sorted Lists（合并两个有序链表）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 /// will and as and 。all node 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **递归优化**: 使用递归简化代码
 /// - **optimization **:
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(m + n)
 /// - time complexity : O(m + n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn merge_two_lists(
     list1: Option<Box<ListNode>>,
     list2: Option<Box<ListNode>>,
@@ -165,21 +165,21 @@ pub fn merge_two_lists(
 /// 23. Merge k Sorted Lists（合并 K 个升序链表）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个链表数组，每个链表都已经按升序排列。请你将所有链表合并到一个升序链表中，返回合并后的链表。
 /// ，arrangement 。will all and to in ，and after 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **分治算法**: 使用分治合并多个链表
-/// - **divide and conquer algorithm **: and
+/// - **algorithm**: usemultiple table
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n log k)
-/// - time complexity : O(n log k)
+/// - Time Complexity: O(n log k)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn merge_k_lists(lists: Vec<Option<Box<ListNode>>>) -> Option<Box<ListNode>> {
     if lists.is_empty() {
         return None;
@@ -206,21 +206,21 @@ pub fn merge_k_lists(lists: Vec<Option<Box<ListNode>>>) -> Option<Box<ListNode>>
 /// 141. Linked List Cycle（环形链表）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个链表的头节点 head ，判断链表中是否有环。
 /// node head ，in 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **快慢指针**: 使用 Floyd 判圈算法
-/// - **pointer **: Floyd algorithm
+/// - **fastslowpointer**: use Floyd algorithm
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn has_cycle(head: Option<Box<ListNode>>) -> bool {
     let mut slow = head.as_ref();
     let mut fast = head.as_ref();
@@ -240,21 +240,21 @@ pub fn has_cycle(head: Option<Box<ListNode>>) -> bool {
 /// 142. Linked List Cycle II（环形链表 II）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个链表的头节点 head ，返回链表开始入环的第一个节点。如果链表无环，则返回 null。
 /// node head ，first node 。if ， null。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **快慢指针**: 使用 Floyd 判圈算法找到环的入口
 /// - **pointer **: Floyd algorithm to
 /// - **HashSet 方案**: 由于 Rust 所有权限制，使用 HashSet 存储节点地址
 /// - **HashSet **: Rust ownership ， HashSet node
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(n)（使用 HashSet 存储访问过的节点）
 /// - space complexity : O(n)（ HashSet node ）
 ///
@@ -295,19 +295,19 @@ pub fn detect_cycle(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
 /// 148. Sort List（ordering ）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
 /// point head ，will its arrangement and ordering after 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **归并排序**: 使用归并排序对链表排序
-/// - **merge sort **: merge sort to ordering
+/// - **sort**: usesortlinked list sort
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n log n)
-/// - time complexity : O(n log n)
+/// - Time Complexity: O(n log n)
 /// - 空间复杂度: O(log n)
 /// - space complexity : O(log n)
 pub fn sort_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
@@ -336,21 +336,21 @@ pub fn sort_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
 /// 206. Reverse Linked List（反转链表）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
 /// node head ，，and after 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **迭代优化**: 使用迭代方法，O(1) 空间复杂度
 /// - **optimization **: method ，O(1) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     let mut prev = None;
     let mut current = head;
@@ -367,7 +367,7 @@ pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有链表类问题
-/// all problem
+/// Get haslinked listproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

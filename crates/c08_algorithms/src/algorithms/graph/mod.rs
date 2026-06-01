@@ -1,8 +1,8 @@
 //! # 图算法模块
-//! # graph algorithm module
+//! # graphalgorithm module
 //!
 //! 本模块实现了各种图算法。
-//! this module graph algorithm 。
+//! This module implements graphalgorithm
 use serde::{Deserialize, Serialize};
 use std::collections::{
     //HashMap,
@@ -18,7 +18,7 @@ pub struct Graph {
 }
 
 /// 图算法结果
-/// graph algorithm result
+/// graphalgorithm result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum GraphResult {
     Distances(Vec<f64>),
@@ -27,12 +27,12 @@ pub enum GraphResult {
 }
 
 /// 图算法实现
-/// graph algorithm
+/// graphalgorithm implementation
 pub struct GraphAlgorithms;
 
 impl GraphAlgorithms {
     /// BFS 搜索
-    /// BFS
+    /// BFS search
     pub fn bfs(graph: &Graph, start: usize) -> GraphResult {
         let mut visited = vec![false; graph.vertices];
         let mut queue = VecDeque::new();
@@ -56,7 +56,7 @@ impl GraphAlgorithms {
     }
 
     /// DFS 搜索
-    /// DFS
+    /// DFS search
     pub fn dfs(graph: &Graph, start: usize) -> GraphResult {
         let mut visited = vec![false; graph.vertices];
         let mut path = Vec::new();

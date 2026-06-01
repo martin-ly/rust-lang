@@ -337,9 +337,9 @@ fn main() {
     rust_194_features_demo();
 }
 
-// Rust 1.94 特性示例
+// Rust 1.96 可用特性示例 (原 1.94 引入)
 fn rust_194_features_demo() {
-    println!("\n🆕 Rust 1.94 特性演示");
+    println!("\n🆕 Rust 1.96 可用特性演示");
 
     // array_windows
     let data = [1, 2, 3, 4, 5];

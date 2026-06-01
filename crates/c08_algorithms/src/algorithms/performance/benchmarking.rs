@@ -1,12 +1,12 @@
 //! # 基准测试模块
-//! # benchmark module
+//! # test module
 //!
 //! 本模块提供算法基准测试的工具和方法。
 //! This module provides algorithm benchmark tool and method 。
 use serde::{Deserialize, Serialize};
 
 /// 基准测试结果
-/// benchmark result
+/// test result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BenchmarkResult {
     pub algorithm_name: String,
@@ -52,7 +52,7 @@ impl Benchmarker {
     }
 
     /// 使用 try 块聚合多次基准以返回平均结果
-    /// try aggregation result
+    /// use try multiple result
     pub fn run_benchmark_try<F>(
         algorithm_name: &str,
         input_size: usize,

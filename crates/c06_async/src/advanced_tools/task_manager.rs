@@ -1,10 +1,10 @@
 //! 异步任务管理器
-//! async task
+//! Async task manager
 //!
 //! 提供高级任务管理功能：
 //! task functionality ：
 //! - 任务优先级队列
-//! - task
+//! - taskexcellent queue
 //! - 任务依赖管理
 //! - task dependency management
 //! - 任务生命周期管理
@@ -26,7 +26,7 @@ use tokio::time::sleep;
 use uuid::Uuid;
 
 /// 任务优先级
-/// task
+/// Task priority
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
 pub enum TaskPriority {
     Low = 1,
@@ -36,7 +36,7 @@ pub enum TaskPriority {
 }
 
 /// 任务状态
-/// task state
+/// Task status
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum TaskStatus {
     Pending,
@@ -48,7 +48,7 @@ pub enum TaskStatus {
 }
 
 /// 任务信息
-/// task
+/// task information
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct TaskInfo {
@@ -108,7 +108,7 @@ pub trait TaskExecutor: Send + Sync {
 }
 
 /// 任务统计信息
-/// task
+/// task information
 #[derive(Debug, Default, Clone)]
 #[allow(dead_code)]
 pub struct TaskStats {
@@ -124,7 +124,7 @@ pub struct TaskStats {
 }
 
 /// 异步任务管理器
-/// async task
+/// Async task manager
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct TaskManager {
@@ -140,7 +140,7 @@ pub struct TaskManager {
 
 impl TaskManager {
     /// 创建新的任务管理器
-    /// task
+    /// Create new taskmanager
     pub fn new(executor: Arc<dyn TaskExecutor>, max_concurrent_tasks: usize) -> Self {
         let (tx, _rx) = mpsc::unbounded_channel();
 
@@ -252,14 +252,14 @@ impl TaskManager {
     }
 
     /// 获取任务信息
-    /// task
+    /// Get taskinformation
     pub async fn get_task(&self, task_id: Uuid) -> Option<TaskInfo> {
         let tasks = self.tasks.read().await;
         tasks.get(&task_id).cloned()
     }
 
     /// 获取任务统计信息
-    /// task
+    /// Get taskinformation
     pub async fn get_stats(&self) -> TaskStats {
         self.stats.lock().await.clone()
     }
@@ -298,7 +298,7 @@ impl TaskManager {
     }
 
     /// 关闭任务管理器
-    /// task
+    /// task manager
     pub async fn shutdown(&self) -> Result<()> {
         self.shutdown_notify.notify_waiters();
 
@@ -673,7 +673,7 @@ impl TaskManagerClone {
 }
 
 /// 简单的任务执行器实现示例
-/// simple task example
+/// singletaskexecutionimplementation example
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct SimpleTaskExecutor {

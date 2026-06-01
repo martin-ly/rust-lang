@@ -1,12 +1,12 @@
 //! # 复杂度分析模块
-//! # complex analyze module
+//! # complexityanalysis module
 //!
 //! 本模块提供算法复杂度分析的工具和方法。
 //! This module provides algorithm complex analyze tool and method 。
 use serde::{Deserialize, Serialize};
 
 /// 复杂度分析结果
-/// complex analyze result
+/// complexityanalysis result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ComplexityAnalysisResult {
     pub algorithm_name: String,

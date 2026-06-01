@@ -1,8 +1,8 @@
 //! 改进的异步特性实现
-//! async feature
+//! improvementsasyncfeatures implementation
 //! 
 //! 本模块实现了当前稳定版本中实际可用的异步特性，
-//! this module when before this in actual async feature ，
+//! This module implements currentversionasyncfeatures
 //! 包括超时控制、结构化并发、错误处理等实际功能。
 //! 、structure concurrency 、error handling etc. actual functionality 。
 use std::sync::Arc;
@@ -14,7 +14,7 @@ use anyhow::{Result, Context};
 use tracing::{warn, error};
 
 /// 改进的异步资源管理器
-/// async
+/// improvementsasyncresource manager
 #[derive(Debug, Clone)]
 pub struct ImprovedAsyncResourceManager {
     resources: Arc<Mutex<Vec<AsyncResource>>>,
@@ -23,7 +23,7 @@ pub struct ImprovedAsyncResourceManager {
 }
 
 /// 异步资源
-/// async
+/// async resource
 #[derive(Debug, Clone)]
 pub struct AsyncResource {
     pub id: String,
@@ -33,6 +33,7 @@ pub struct AsyncResource {
 
 impl ImprovedAsyncResourceManager {
     /// 创建新的资源管理器
+    /// Create new resourcemanager
     pub fn new(max_concurrent: usize) -> Self {
         Self {
             resources: Arc::new(Mutex::new(Vec::new())),
@@ -62,7 +63,7 @@ impl ImprovedAsyncResourceManager {
     }
 
     /// 结构化并发处理
-    /// structure concurrency
+    /// concurrent processing
     pub async fn process_with_structured_concurrency<T>(
         &self,
         tasks: Vec<Box<dyn std::future::Future<Output = Result<T>> + Send>>,
@@ -99,6 +100,7 @@ impl ImprovedAsyncResourceManager {
     }
 
     /// 批量处理资源
+    /// handling resource
     pub async fn batch_process_resources(
         &self,
         resource_ids: Vec<String>,
@@ -132,6 +134,7 @@ impl ImprovedAsyncResourceManager {
     }
 
     /// 处理单个资源
+    /// handlingsingle resource
     async fn process_single_resource(
         &self,
         mut resource: AsyncResource,
@@ -150,6 +153,7 @@ impl ImprovedAsyncResourceManager {
     }
 
     /// 获取统计信息
+    /// Get statistics
     pub async fn get_statistics(&self) -> ManagerStatistics {
         let resources = self.resources.lock().await;
         ManagerStatistics {
@@ -161,7 +165,7 @@ impl ImprovedAsyncResourceManager {
 }
 
 /// 处理后的资源
-/// after
+/// handlingback resource
 #[derive(Debug, Clone)]
 pub struct ProcessedResource {
     pub original_id: String,
@@ -170,6 +174,7 @@ pub struct ProcessedResource {
 }
 
 /// 管理器统计信息
+/// manager information
 #[derive(Debug)]
 pub struct ManagerStatistics {
     pub total_resources: usize,
@@ -206,7 +211,7 @@ impl std::fmt::Debug for ScheduledTask {
 
 impl AsyncTaskScheduler {
     /// 创建新的任务调度器
-    /// task
+    /// Create new taskscheduling
     pub fn new(max_concurrent_tasks: usize) -> Self {
         Self {
             task_queue: Arc::new(Mutex::new(VecDeque::new())),
@@ -241,7 +246,7 @@ impl AsyncTaskScheduler {
     }
 
     /// 获取下一个就绪的任务
-    /// under task
+    /// Get lowertask
     async fn get_next_ready_task(&self) -> Option<ScheduledTask> {
         let mut queue = self.task_queue.lock().await;
         let now = Instant::now();
@@ -275,7 +280,7 @@ impl AsyncTaskScheduler {
     }
 
     /// 清理已完成的任务
-    /// task
+    /// Cleanup completetask
     async fn cleanup_completed_tasks(&self) {
         let mut running = self.running_tasks.lock().await;
         running.retain(|handle| !handle.is_finished());
@@ -283,7 +288,7 @@ impl AsyncTaskScheduler {
 }
 
 /// 异步错误恢复机制
-/// async error recovery mechanism
+/// asyncerror mechanism
 #[derive(Debug)]
 pub struct AsyncErrorRecovery {
     max_retries: usize,
@@ -291,7 +296,7 @@ pub struct AsyncErrorRecovery {
 }
 
 /// 退避策略
-/// strategy
+/// Backoff Strategy
 #[derive(Debug, Clone)]
 pub enum BackoffStrategy {
     Linear(Duration),
@@ -301,7 +306,7 @@ pub enum BackoffStrategy {
 
 impl AsyncErrorRecovery {
     /// 创建新的错误恢复器
-    /// error recovery
+    /// Create new error
     pub fn new(max_retries: usize, backoff_strategy: BackoffStrategy) -> Self {
         Self {
             max_retries,
@@ -310,7 +315,7 @@ impl AsyncErrorRecovery {
     }
 
     /// 执行带重试的异步操作
-    /// async
+    /// executionasync operation
     pub async fn execute_with_retry<F, T>(&self, mut operation: F) -> Result<T>
     where
         F: FnMut() -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<T>> + Send>> + Send,

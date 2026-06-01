@@ -2,7 +2,7 @@
 //! Rust 1.95 feature —— design scenario
 //!
 //! # 概述
-//! #
+//! # Overview
 //!
 //! Rust 1.95 为设计模式实现带来的增强：
 //! Rust 1.95 as design ：
@@ -13,7 +13,7 @@
 //! - **`if let` guards** — 状态机模式的条件转换
 //! - **`if let` guards** — state machine condition conversion
 //! - **`cold_path`** — 错误处理路径优化
-//! - **`cold_path`** — error handling optimization
+//! - **`cold_path`** errorhandlingpath optimization
 
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -30,7 +30,7 @@ pub struct PlatformAbstractFactory;
 
 impl PlatformAbstractFactory {
     /// 创建平台特定的线程池大小推荐值
-    /// platform thread pool
+    /// createthreadlargesmallrecommended value
     pub const DEFAULT_THREAD_POOL_SIZE: usize = cfg_select! {
         target_os = "linux" => 8,
         target_os = "macos" => 4,
@@ -57,7 +57,7 @@ impl PlatformAbstractFactory {
 // ============================================================================
 
 /// # 并发设计模式中的原子操作
-/// # concurrency design in atomic operation
+/// # concurrentdesignpatternatomic operation
 ///
 /// 对象池、连接池等模式中的原子计数。
 /// to 、etc. in 。
@@ -102,7 +102,7 @@ impl ConcurrentPatternExamples {
 // ============================================================================
 
 /// # 状态机设计模式
-/// # state machine design
+/// # state machinedesign pattern
 ///
 /// `if let` guards 简化了状态机的条件转换逻辑。
 /// `if let` guards state machine condition conversion 。
@@ -148,7 +148,7 @@ impl StateMachinePatternExamples {
 // ============================================================================
 
 /// # 设计模式中的异常路径
-/// # design in
+/// # designpattern path
 ///
 /// 错误处理、验证失败等罕见路径。
 /// error handling 、etc. 。
@@ -156,7 +156,7 @@ pub struct PatternColdPathExamples;
 
 impl PatternColdPathExamples {
     /// 访问者模式：未处理的类型为冷路径
-    /// visitor ：type as
+    /// patternhandlingtype path
     pub fn visit_supported_type(ty: &str) -> Result<(), &'static str> {
         match ty {
             "int" | "float" | "string" | "bool" => Ok(()),
@@ -168,7 +168,7 @@ impl PatternColdPathExamples {
     }
 
     /// 策略模式：策略验证失败为冷路径
-    /// strategy ：strategy as
+    /// patternverify path
     pub fn validate_strategy(name: &str) -> bool {
         match name {
             "round_robin" | "least_conn" | "ip_hash" => true,
@@ -250,7 +250,7 @@ pub struct RealRust195Features;
 
 impl RealRust195Features {
     /// 使用 `AsyncFn` 实现异步策略模式
-    /// `AsyncFn` async strategy
+    /// use `AsyncFn` implementationasync pattern
     ///
     /// `async |x| x * 2` 闭包实现了 `AsyncFn` trait，可作为策略注入。
     /// `async |x| x * 2` `AsyncFn` trait，as strategy 。
@@ -259,8 +259,7 @@ impl RealRust195Features {
     }
 
     /// 使用 `ControlFlow::map_continue` 实现访问者模式
-    ///
-    /// 在遍历过程中对 `Continue` 值进行映射转换。
+    /// use `ControlFlow::map_continue` implementation pattern
     /// in in to `Continue` conversion 。
     pub fn control_flow_visitor() -> ControlFlow<&'static str, i32> {
         let intermediate = ControlFlow::Continue(5);

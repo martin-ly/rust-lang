@@ -1,4 +1,6 @@
 # LLM 辅助 C to Rust 迁移工具评估报告
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [B]
 > **Bloom 层级**: L4-L5 (分析/评价)
@@ -15,7 +17,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [LLM 辅助 C to Rust 迁移工具评估报告](#llm-辅助-c-to-rust-迁移工具评估报告)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 概述](#1-概述)
   - [2. C2Rust 工具介绍与使用](#2-c2rust-工具介绍与使用)
     - [2.1 工具概述](#21-工具概述)

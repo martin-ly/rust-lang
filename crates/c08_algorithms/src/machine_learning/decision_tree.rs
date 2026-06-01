@@ -1,8 +1,8 @@
 //! 决策树算法实现
-//! tree algorithm
+//! treealgorithm implementation
 //!
 //! 本模块提供了决策树算法的基础实现
-//! This module provides tree algorithm foundation
+//! This module provides treealgorithmimplementation
 use super::*;
 
 /// 决策树分类器（简化版本）
@@ -10,6 +10,7 @@ use super::*;
 #[derive(Debug, Clone)]
 pub struct DecisionTreeClassifier {
     /// 是否已训练
+    /// Whether trained
     is_fitted: bool,
     /// 简化的规则存储
     /// rule
@@ -18,7 +19,7 @@ pub struct DecisionTreeClassifier {
 
 impl DecisionTreeClassifier {
     /// 创建新的决策树分类器
-    /// tree classification
+    /// Create new tree
     pub fn new() -> Self {
         Self {
             is_fitted: false,

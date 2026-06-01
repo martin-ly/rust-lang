@@ -231,6 +231,7 @@ pub struct MichaelScottQueue<T> {
 impl<T> MichaelScottQueue<T> {
     /// 创建空队列
     /// Creates空队列
+    /// Createsemptyqueue
     pub fn new() -> Self {
         Self {
             inner: Mutex::new(VecDeque::new()),

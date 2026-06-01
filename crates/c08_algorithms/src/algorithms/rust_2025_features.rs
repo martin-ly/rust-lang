@@ -1,8 +1,8 @@
 //! # Rust 2025 新特性在算法中的应用
-//! # Rust 2025 feature in algorithm in application
+//! # Rust 2025 newfeaturesalgorithm application
 //!
 //! 本模块展示了如何在算法实现中充分利用 Rust 2025 的最新特性，
-//! This module demonstrates in algorithm in Rust 2025 feature ，
+//! This module demonstrates algorithmimplementation Rust 2025 latestfeatures
 //! 包括异步闭包、RPITIT、AFIT、TAIT、生成器等。
 //! async 、RPITIT、AFIT、TAIT、etc. 。
 use futures::StreamExt;
@@ -13,15 +13,15 @@ use std::pin::Pin;
 /// Rust 2025 async example
 ///
 /// 异步闭包允许我们创建更简洁的异步算法接口
-/// async async algorithm
+/// asynccreateasyncalgorithm interface
 pub struct AsyncClosureAlgorithms;
 
 impl AsyncClosureAlgorithms {
     /// 使用异步闭包的并行映射算法
-    /// async parallelism algorithm
+    /// useasyncparallelmap algorithm
     ///
     /// 这个函数展示了如何使用异步闭包来创建更灵活的算法接口
-    /// function async algorithm
+    /// functiondemonstrateuseasynccreateflexiblealgorithm interface
     pub async fn parallel_map_async<F, T, R>(
         data: Vec<T>,
         mapper: F,
@@ -65,10 +65,10 @@ impl AsyncClosureAlgorithms {
     }
 
     /// 使用异步闭包的流式处理算法
-    /// async stream algorithm
+    /// useasyncflowhandling algorithm
     ///
     /// Rust 1.91 优化：异步迭代器性能提升约 15-20%
-    /// Rust 1.91 optimization ：async performance 15-20%
+    /// Rust 1.91 Optimization: Async iterator performance improved by ~15-20%
     pub async fn stream_process_async<F, T, R>(
         mut stream: impl futures::Stream<Item = T> + Unpin,
         processor: F,
@@ -91,16 +91,15 @@ impl AsyncClosureAlgorithms {
 }
 
 /// Rust 2025 生成器示例
-/// Rust 2025 example
+/// Rust 2025 generator example
 ///
 /// 生成器允许我们创建更高效的迭代器
-/// efficient
+/// generatorcreateefficient iterator
 pub struct GeneratorAlgorithms;
 
 impl GeneratorAlgorithms {
     /// 使用生成器的斐波那契数列生成器
-    ///
-    /// 这个函数展示了如何使用生成器来创建高效的序列生成器
+    /// usegenerator generator
     /// function efficient sequence
     pub fn fibonacci_generator() -> impl Iterator<Item = u64> {
         let mut a = 0u64;
@@ -115,8 +114,7 @@ impl GeneratorAlgorithms {
     }
 
     /// 使用生成器的素数生成器
-    ///
-    /// 这个函数展示了如何使用生成器来创建高效的素数生成器
+    /// usegenerator generator
     /// function efficient
     pub fn prime_generator() -> impl Iterator<Item = u64> {
         let mut primes = Vec::new();
@@ -136,10 +134,10 @@ impl GeneratorAlgorithms {
     }
 
     /// 使用生成器的组合生成器
-    /// combination
+    /// usegenerator generator
     ///
     /// 这个函数展示了如何使用生成器来创建组合生成器
-    /// function combination
+    /// functiondemonstrateusegeneratorcreate generator
     pub fn combinations_generator<T: Clone>(
         items: Vec<T>,
         k: usize,
@@ -176,10 +174,10 @@ impl GeneratorAlgorithms {
 }
 
 /// Rust 1.91 增强的 const 上下文示例
-/// Rust 1.91 const on under example
+/// Rust 1.91 strong const context example
 ///
 /// Rust 1.91 增强了 const 上下文，支持对非静态常量的引用
-/// Rust 1.91 const on under ，to constant reference
+/// Rust 1.91 strong const contextsupportstaticconstant reference
 pub struct ConstContextAlgorithms;
 
 impl ConstContextAlgorithms {
@@ -258,7 +256,7 @@ impl ConstContextAlgorithms {
 }
 
 /// Rust 2025 结构更新示例
-/// Rust 2025 structure example
+/// Rust 2025 update example
 ///
 /// 结构更新允许我们更灵活地处理数据结构
 /// structure data structure
@@ -269,7 +267,7 @@ impl StructuralUpdateAlgorithms {
     /// structure tree node
     ///
     /// 这个函数展示了如何使用结构更新来更新树节点
-    /// function structure tree node
+    /// functiondemonstrateuseupdateupdatetree node
     pub fn update_tree_node<T>(
         mut node: TreeNode<T>,
         updates: impl FnOnce(&mut TreeNode<T>),
@@ -285,7 +283,7 @@ impl StructuralUpdateAlgorithms {
     /// structure node
     ///
     /// 这个函数展示了如何使用结构更新来更新图节点
-    /// function structure node
+    /// functiondemonstrateuseupdateupdategraph node
     pub fn update_graph_node<T>(
         mut node: GraphNode<T>,
         updates: impl FnOnce(&mut GraphNode<T>),
@@ -344,7 +342,7 @@ pub type AsyncAlgorithmResult<T> = Pin<Box<dyn Future<Output = AlgorithmResult<T
 pub type AlgorithmIterator<T> = Box<dyn Iterator<Item = T> + Send>;
 
 /// Rust 1.91 异步迭代器示例
-/// Rust 1.91 async example
+/// Rust 1.91 asynciterator example
 ///
 /// Rust 1.91 改进了异步迭代器，性能提升约 15-20%
 /// Rust 1.91 async ，performance 15-20%
@@ -352,10 +350,10 @@ pub struct AsyncIteratorAlgorithms;
 
 impl AsyncIteratorAlgorithms {
     /// 异步迭代器实现的流式排序
-    /// async stream ordering
+    /// asynciteratorimplementationflow sort
     ///
     /// Rust 1.91 优化：异步迭代器链式操作性能提升
-    /// Rust 1.91 optimization ：async performance
+    /// Rust 1.91 optimizationasynciteratoroperationperformance improvement
     pub async fn stream_sort<T>(
         mut stream: impl futures::Stream<Item = T> + Unpin,
     ) -> Result<Vec<T>, Box<dyn std::error::Error + Send + Sync>>
@@ -377,7 +375,7 @@ impl AsyncIteratorAlgorithms {
     /// async stream
     ///
     /// Rust 1.91 优化：使用改进的异步过滤操作
-    /// Rust 1.91 optimization ：async
+    /// Rust 1.91 optimizationuseimprovementsasync operation
     pub async fn stream_deduplicate<T>(
         mut stream: impl futures::Stream<Item = T> + Unpin,
     ) -> Result<Vec<T>, Box<dyn std::error::Error + Send + Sync>>
@@ -400,7 +398,7 @@ impl AsyncIteratorAlgorithms {
     }
 
     /// Rust 1.91 新增：使用改进的异步迭代器链式操作
-    /// Rust 1.91 ：async
+    /// Rust 1.91 newuseimprovementsasynciterator operation
     ///
     /// 性能提升约 15-20%
     /// performance 15-20%
@@ -426,10 +424,10 @@ impl AsyncIteratorAlgorithms {
 }
 
 /// Rust 2025 性能优化示例
-/// Rust 2025 performance optimization example
+/// Rust 2025 performanceoptimization example
 ///
 /// 这个模块展示了如何使用 Rust 2025 的新特性来优化算法性能
-/// module Rust 2025 feature optimization algorithm performance
+/// moduledemonstrateuse Rust 2025 newfeaturesoptimizationalgorithm performance
 pub struct PerformanceOptimizedAlgorithms;
 
 impl PerformanceOptimizedAlgorithms {

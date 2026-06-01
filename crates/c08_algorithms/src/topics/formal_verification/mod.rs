@@ -2,46 +2,50 @@
 //! module - Rust 1.90 feature to
 //!
 //! 本模块实现了算法形式化验证和证明，包括：
-//! this module algorithm and ，：
+//! This module implements algorithmformalverifyproofincluding
 //! - 算法正确性证明
-//! - algorithm
+//! - algorithmcorrectness proof
 //! - 复杂度分析证明
-//! - complex analyze
+//! - complexityanalysis proof
 //! - 不变式验证
-//! -
+//! - verification
 //! - 终止性证明
-//! -
+//! - termination proof
 //! - 安全性验证
-//! -
+//! - safety verification
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fmt;
 
 /// 形式化验证类型
-/// type
+/// formalverify type
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum VerificationType {
     /// 正确性验证
+    /// correctness verification
     Correctness,
     /// 复杂度验证
-    /// complex
+    /// complexity verification
     Complexity,
     /// 终止性验证
+    /// termination verification
     Termination,
     /// 安全性验证
+    /// safety verification
     Safety,
     /// 不变式验证
     Invariant,
     /// 完整性验证
-    /// complete
+    /// complete verification
     Completeness,
     /// 最优性验证
+    /// excellent verification
     Optimality,
 }
 
 /// 验证状态
-/// state
+/// Verify status
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum VerificationStatus {
     /// 已验证
@@ -59,6 +63,7 @@ pub enum VerificationStatus {
 }
 
 /// 形式化证明
+/// formal proof
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FormalProof {
     /// 证明ID
@@ -68,13 +73,13 @@ pub struct FormalProof {
     /// algorithm
     pub algorithm_name: String,
     /// 验证类型
-    /// type
+    /// Verify type
     pub verification_type: VerificationType,
     /// 证明状态
-    /// state
+    /// proof status
     pub status: VerificationStatus,
     /// 证明步骤
-    /// step
+    /// Proof steps
     pub steps: Vec<ProofStep>,
     /// 前置条件
     /// before condition
@@ -85,7 +90,7 @@ pub struct FormalProof {
     /// 不变式
     pub invariants: Vec<String>,
     /// 证明时间
-    /// time
+    /// proof time
     pub proof_time: std::time::Duration,
     /// 证明者
     pub prover: String,
@@ -95,7 +100,7 @@ pub struct FormalProof {
 }
 
 /// 证明步骤
-/// step
+/// Proof steps
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProofStep {
     /// 步骤编号
@@ -113,6 +118,7 @@ pub struct ProofStep {
     /// 结论
     pub conclusion: String,
     /// 是否已验证
+    /// whether verification
     pub verified: bool,
 }
 
@@ -159,7 +165,7 @@ pub struct InputSpecification {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OutputSpecification {
     /// 返回值类型
-    /// return value type
+    /// value type
     pub return_type: String,
     /// 输出约束
     pub constraints: Vec<String>,
@@ -262,7 +268,7 @@ pub struct FormalVerifier;
 
 impl FormalVerifier {
     /// 验证算法正确性
-    /// algorithm
+    /// Verify algorithmcorrectness
     pub fn verify_correctness(
         &self,
         spec: &AlgorithmSpecification,
@@ -341,7 +347,7 @@ impl FormalVerifier {
     }
 
     /// 验证算法复杂度
-    /// algorithm complex
+    /// Verify algorithmcomplexity
     pub fn verify_complexity(
         &self,
         spec: &AlgorithmSpecification,
@@ -398,7 +404,7 @@ impl FormalVerifier {
     }
 
     /// 验证算法终止性
-    /// algorithm
+    /// Verify algorithmtermination
     pub fn verify_termination(
         &self,
         spec: &AlgorithmSpecification,
@@ -453,7 +459,7 @@ impl FormalVerifier {
     }
 
     /// 验证算法安全性
-    /// algorithm
+    /// Verify algorithmsafety
     pub fn verify_safety(
         &self,
         spec: &AlgorithmSpecification,
@@ -512,19 +518,20 @@ impl FormalVerifier {
 /// algorithm
 pub trait AlgorithmImplementation {
     /// 获取算法名称
-    /// algorithm
+    /// Get algorithm
     fn name(&self) -> &str;
 
     /// 执行算法
-    /// algorithm
+    /// execution algorithm
     fn execute(&self, input: &[i32]) -> Result<Vec<i32>>;
 
     /// 获取算法复杂度
-    /// algorithm complex
+    /// Get algorithmcomplexity
     fn complexity(&self) -> ComplexitySpecification;
 }
 
 /// 证明管理器
+/// proof manager
 pub struct ProofManager {
     proofs: HashMap<String, FormalProof>,
     specifications: HashMap<String, AlgorithmSpecification>,
@@ -545,7 +552,7 @@ impl ProofManager {
     }
 
     /// 获取算法规范
-    /// algorithm norm
+    /// Get algorithm
     pub fn get_specification(&self, name: &str) -> Option<&AlgorithmSpecification> {
         self.specifications.get(name)
     }
@@ -556,12 +563,13 @@ impl ProofManager {
     }
 
     /// 获取证明
+    /// Get proof
     pub fn get_proof(&self, id: &str) -> Option<&FormalProof> {
         self.proofs.get(id)
     }
 
     /// 获取算法的所有证明
-    /// algorithm all
+    /// Get algorithmhasproof
     pub fn get_algorithm_proofs(&self, algorithm_name: &str) -> Vec<&FormalProof> {
         self.proofs
             .values()
@@ -570,7 +578,7 @@ impl ProofManager {
     }
 
     /// 验证算法
-    /// algorithm
+    /// Verify algorithm
     pub fn verify_algorithm(
         &mut self,
         algorithm_name: &str,
@@ -651,7 +659,7 @@ pub struct ProofValidator;
 
 impl ProofValidator {
     /// 验证证明的有效性
-    /// effective
+    /// Verify proofhas
     pub fn validate_proof(proof: &FormalProof) -> bool {
         // 检查证明步骤的逻辑一致性
         for step in &proof.steps {
@@ -671,7 +679,7 @@ impl ProofValidator {
     }
 
     /// 验证证明的完整性
-    /// complete
+    /// Verify proofcomplete
     pub fn validate_completeness(proof: &FormalProof) -> bool {
         // 检查是否有足够的步骤
         if proof.steps.is_empty() {

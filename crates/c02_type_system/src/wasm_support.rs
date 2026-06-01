@@ -132,6 +132,7 @@ impl WasmOperations {
 
     /// 比较操作
     /// Compares操作
+    /// Comparesoperation
     pub fn compare(a: WasmType, b: WasmType) -> i32 {
         match (a, b) {
             (WasmType::I32(x), WasmType::I32(y)) => {
@@ -260,6 +261,7 @@ impl WasmMemoryManager {
 
     /// 写入数据
     /// Writes数据
+    /// Writesdata
     pub fn write(&mut self, offset: usize, data: &[u8]) -> Result<(), String> {
         if offset + data.len() > self.memory.len() {
             return Err("Memory access out of bounds".to_string());
@@ -271,6 +273,7 @@ impl WasmMemoryManager {
 
     /// 读取数据
     /// Reads数据
+    /// Readsdata
     pub fn read(&self, offset: usize, size: usize) -> Result<&[u8], String> {
         if offset + size > self.memory.len() {
             return Err("Memory access out of bounds".to_string());

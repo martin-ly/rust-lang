@@ -541,6 +541,7 @@ impl ControlFlowProfiler {
 
     /// 重置统计
     /// Resets统计
+    /// Resetsstatistics
     pub fn reset(&mut self) {
         self.branch_times.clear();
         self.loop_times.clear();

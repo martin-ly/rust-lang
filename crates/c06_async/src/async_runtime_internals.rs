@@ -18,7 +18,7 @@ use std::sync::Arc;
 // ============================================================================
 
 /// 概念性 Waker 实现
-/// concept Waker
+/// Waker implementation
 ///
 /// 真实 Waker 由 `std::task::RawWaker` 和 vtable 构成，需要 unsafe 代码。
 /// 这里使用 `Arc<AtomicBool>` 模拟"唤醒标记"的语义。
@@ -29,7 +29,7 @@ pub struct ConceptWaker {
 
 impl ConceptWaker {
     /// 创建新的 Waker，唤醒标记为 false
-    /// Waker，mark as false
+    /// Create new Waker false
     pub fn new() -> Self {
         Self {
             awakened: Arc::new(AtomicBool::new(false)),
@@ -49,7 +49,7 @@ impl ConceptWaker {
     }
 
     /// 获取底层的 `Arc<AtomicBool>`（用于克隆）
-    /// `Arc<AtomicBool>`（）
+    /// Get `Arc<AtomicBool>`
     pub fn inner(&self) -> Arc<AtomicBool> {
         Arc::clone(&self.awakened)
     }
@@ -80,7 +80,7 @@ impl Clone for ConceptWaker {
 // ============================================================================
 
 /// 概念性异步任务队列
-/// concept async task
+/// asynctask queue
 ///
 /// 真实运行时（如 Tokio）使用复杂的队列结构（全局注入器 + 本地工作窃取队列）。
 /// real runtime （ Tokio）complex structure （global + this ）。
@@ -92,7 +92,7 @@ pub struct ConceptTaskQueue {
 
 impl ConceptTaskQueue {
     /// 创建空任务队列
-    /// task
+    /// createnulltask queue
     pub fn new() -> Self {
         Self {
             tasks: VecDeque::new(),
@@ -124,6 +124,7 @@ impl ConceptTaskQueue {
     }
 
     /// 清空队列
+    /// null queue
     pub fn clear(&mut self) {
         self.tasks.clear();
     }
@@ -215,7 +216,7 @@ spawn -> 全局队列 -> 工作线程获取 -> 本地队列 -> 执行
 // ============================================================================
 
 /// Future 状态机概念图
-/// Future state machine concept
+/// Future state machine graph
 pub struct FutureStateMachine;
 
 impl FutureStateMachine {

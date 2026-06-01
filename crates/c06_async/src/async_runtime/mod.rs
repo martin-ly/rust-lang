@@ -1,6 +1,6 @@
 // [来源: tokio docs / Rust Reference]
 //! 运行时说明与示例：Tokio/当前线程/多线程
-//! runtime explain and example ：Tokio/when before thread /thread
+//! Run Tokio/currentthread/multiplethread
 use std::time::Duration;
 
 /// 在当前线程创建一个临时运行时并执行异步任务

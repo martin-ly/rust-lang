@@ -640,6 +640,7 @@ impl PatternMatchingOptimizer {
 
     /// 清空缓存
     /// Clears缓存
+    /// Clearscache
     pub fn clear_cache(&mut self) {
         self.cache.clear();
     }

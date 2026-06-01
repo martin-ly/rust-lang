@@ -1,4 +1,6 @@
 # io_uring 高性能 I/O 指南
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [A]
 > **层级**: L6 生态工具
@@ -13,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [io\_uring 高性能 I/O 指南](#io_uring-高性能-io-指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [核心概念](#核心概念)
     - [队列对（Queue Pair）](#队列对queue-pair)

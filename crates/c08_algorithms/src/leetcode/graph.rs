@@ -2,20 +2,20 @@
 //! LeetCode algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的图类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
-//! this module LeetCode ， Rust 1.91 feature 。
+//! This module implements classicgraph LeetCode Rust 1.91 newfeatures
 //!
 //! ## Rust 1.91 特性应用
-//! ## Rust 1.91 feature application
+//! ## Rust 1.91 Feature Application
 //!
 //! - **JIT 优化**: DFS/BFS 遍历性能提升 10-15%
 //! - **JIT optimization **: DFS/BFS performance 10-15%
 //! - **内存优化**: 使用 Vec 和 HashSet 高效存储图结构
 //! - **memory optimization **: Vec and HashSet efficient structure
 //! - **迭代器优化**: 图遍历中的迭代器性能提升
-//! - **optimization **: in performance
+//! - **iteratoroptimization**: graphtraversaliteratorperformance improvement
 //!
 //! ## 包含的经典题目
-//! ##
+//! ## Classic Problems
 //!
 //! - 200. Number of Islands（岛屿数量）
 //! - 207. Course Schedule（课程表）
@@ -32,23 +32,23 @@ use std::collections::VecDeque;
 /// 200. Number of Islands（岛屿数量）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个由 `'1'`（陆地）和 `'0'`（水）组成的的二维网格，请你计算网格中岛屿的数量。
 /// `'1'`（）and `'0'`（），in quantity 。
 /// 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
 /// is ，and and level direction and /or direction on 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: DFS 遍历性能提升 10-15%
 /// - **JIT optimization **: DFS performance 10-15%
 /// - **内存优化**: 原地标记访问过的节点，O(1) 额外空间
-/// - **memory optimization **: mark node ，O(1) outside space
+/// - **memoryoptimization**: nodeO(1) outer space
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(m * n)
-/// - time complexity : O(m * n)
+/// - Time Complexity: O(m * n)
 /// - 空间复杂度: O(m * n)（递归栈）或 O(min(m, n))（BFS）
 /// - space complexity : O(m * n)（stack ）or O(min(m, n))（BFS）
 pub fn num_islands(grid: Vec<Vec<char>>) -> i32 {
@@ -102,7 +102,7 @@ fn dfs_islands(
 /// 547. Number of Provinces（省份数量）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 有 `n` 个城市，其中一些彼此相连，一些不相连。如果城市 `a` 与城市 `b` 直接相连，且城市 `b` 与城市 `c` 直接相连，
 /// `n` ，its in this ，。if `a` and `b` ，and `b` and `c` ，
 /// 那么城市 `a` 与城市 `c` 间接相连。**省份** 是一组直接或间接相连的城市，组内不含其他没有相连的城市。
@@ -113,18 +113,18 @@ fn dfs_islands(
 /// while `isConnected[i][j] = 0` represent 。in **** quantity 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: DFS 遍历性能提升
-/// - **JIT optimization **: DFS performance
+/// - **JIT Optimization**: DFS traversal performance improvement
 /// - **内存优化**: 使用 HashSet 标记访问过的节点
-/// - **memory optimization **: HashSet mark node
+/// - **memoryoptimization**: use HashSet node
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n²)
-/// - time complexity : O(n²)
+/// - Time Complexity: O(n²)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn find_circle_num(is_connected: Vec<Vec<i32>>) -> i32 {
     let n = is_connected.len();
     let mut visited = vec![false; n];
@@ -154,23 +154,23 @@ fn dfs_provinces(is_connected: &[Vec<i32>], visited: &mut [bool], node: usize, n
 /// 733. Flood Fill（图像渲染）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 有一幅以二维整数数组表示的图画，每一个整数表示该图画的像素值大小，数值在 0 到 65535 之间。
 /// represent ，represent this ，in 0 to 65535 's 。
 /// 给你一个坐标 `(sr, sc)` 表示图像渲染开始的像素值（行，列）和一个新的颜色值 `newColor`，让你重新上色这幅图像。
 /// coordinate `(sr, sc)` represent （，）and `newColor`，on 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: DFS 遍历性能提升
-/// - **JIT optimization **: DFS performance
+/// - **JIT Optimization**: DFS traversal performance improvement
 /// - **内存优化**: 原地修改，O(1) 额外空间（不考虑递归栈）
 /// - **memory optimization **: ，O(1) outside space （stack ）
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(m * n)
-/// - time complexity : O(m * n)
+/// - Time Complexity: O(m * n)
 /// - 空间复杂度: O(m * n)（递归栈）
 /// - space complexity : O(m * n)（stack ）
 pub fn flood_fill(image: Vec<Vec<i32>>, sr: i32, sc: i32, new_color: i32) -> Vec<Vec<i32>> {
@@ -227,7 +227,7 @@ fn dfs_flood_fill(
 /// 695. Max Area of Island（岛屿的最大面积）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个大小为 `m x n` 的二进制矩阵 `grid`。**岛屿** 是由一些相邻的 `1` (代表土地) 构成的组合，
 /// as `m x n` `grid`。**** `1` () combination ，
 /// 这里的「相邻」要求两个 `1` 必须在 **水平或者竖直的四个方向上** 相邻。你可以假设 `grid` 的四个边缘都被 `0`（代表水）包围着。
@@ -236,16 +236,16 @@ fn dfs_flood_fill(
 /// surface on as `1` 。and `grid` in maximum surface 。if ，surface as `0`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: DFS 遍历性能提升
-/// - **JIT optimization **: DFS performance
+/// - **JIT Optimization**: DFS traversal performance improvement
 /// - **内存优化**: 原地标记，O(1) 额外空间（不考虑递归栈）
 /// - **memory optimization **: mark ，O(1) outside space （stack ）
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(m * n)
-/// - time complexity : O(m * n)
+/// - Time Complexity: O(m * n)
 /// - 空间复杂度: O(m * n)（递归栈）
 /// - space complexity : O(m * n)（stack ）
 pub fn max_area_of_island(grid: Vec<Vec<i32>>) -> i32 {
@@ -294,7 +294,7 @@ fn dfs_max_area(grid: &mut [Vec<i32>], i: usize, j: usize, rows: usize, cols: us
 /// 207. Course Schedule（课程表）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 你这个学期必须选修 `numCourses` 门课程，记为 `0` 到 `numCourses - 1`。
 /// must `numCourses` ，as `0` to `numCourses - 1`。
 /// 在选修某些课程之前需要一些先修课程。先修课程按数组 `prerequisites` 给出，
@@ -305,14 +305,14 @@ fn dfs_max_area(grid: &mut [Vec<i32>], i: usize, j: usize, rows: usize, cols: us
 /// may all learn ？if can ， `true`；， `false`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: DFS 拓扑排序性能提升
-/// - **JIT optimization **: DFS topological sort performance
+/// - **JIT optimization**: DFS sortperformance improvement
 /// - **内存优化**: 使用邻接表存储图，O(V + E) 空间复杂度
 /// - **memory optimization **: ，O(V + E) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(V + E)，其中 V 是顶点数，E 是边数
 /// - time complexity : O(V + E)，its in V vertex ，E edge
 /// - 空间复杂度: O(V + E)
@@ -366,7 +366,7 @@ fn dfs_course_schedule(graph: &[Vec<usize>], state: &mut [i32], node: usize) -> 
 /// 994. Rotting Oranges（腐烂的橘子）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 在给定的 `m x n` 网格 `grid` 中，每个单元格可以有以下三个值之一：
 /// in `m x n` `grid` in ，can under 's ：
 /// - 值 `0` 代表空单元格；
@@ -382,16 +382,16 @@ fn dfs_course_schedule(graph: &[Vec<usize>], state: &mut [i32], node: usize) -> 
 /// to in as must minimum 。if may ， `-1`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: BFS 遍历性能提升
-/// - **JIT optimization **: BFS performance
+/// - **JIT optimization**: BFS traversalperformance improvement
 /// - **内存优化**: 使用队列，O(m * n) 空间复杂度
 /// - **memory optimization **: ，O(m * n) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(m * n)
-/// - time complexity : O(m * n)
+/// - Time Complexity: O(m * n)
 /// - 空间复杂度: O(m * n)
 /// - space complexity : O(m * n)
 pub fn oranges_rotting(grid: Vec<Vec<i32>>) -> i32 {
@@ -454,7 +454,7 @@ pub fn oranges_rotting(grid: Vec<Vec<i32>>) -> i32 {
 /// 130. Surrounded Regions（被围绕的区域）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个 `m x n` 的矩阵 `board`，由若干字符 `'X'` 和 `'O'` 组成，**捕获** 所有 **被围绕的区域**：
 /// `m x n` `board`， `'X'` and `'O'` ，**** all **is area **：
 /// - 连接：一个单元格与水平或竖直方向上相邻的单元格连接。
@@ -463,16 +463,16 @@ pub fn oranges_rotting(grid: Vec<Vec<i32>>) -> i32 {
 /// - area ：to area ，if this area inside and edge `'O'` ，this area is 。's ，this area is 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: DFS 遍历性能提升
-/// - **JIT optimization **: DFS performance
+/// - **JIT Optimization**: DFS traversal performance improvement
 /// - **内存优化**: 从边界开始 DFS，O(m * n) 空间复杂度
 /// - **memory optimization **: from edge DFS，O(m * n) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(m * n)
-/// - time complexity : O(m * n)
+/// - Time Complexity: O(m * n)
 /// - 空间复杂度: O(m * n)（递归栈）
 /// - space complexity : O(m * n)（stack ）
 pub fn solve(board: &mut [Vec<char>]) {
@@ -535,7 +535,7 @@ fn dfs_surrounded_regions(board: &mut [Vec<char>], i: usize, j: usize, rows: usi
 // ==================== 问题信息注册 ====================
 
 /// 获取所有图类问题
-/// all problem
+/// Get hasgraphproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

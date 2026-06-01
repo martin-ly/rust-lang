@@ -9,7 +9,7 @@
 //! this project all async runtime [Tokio](https://tokio.rs/)。
 //!
 //! # 迁移路径
-//! #
+//! # path
 //!
 //! | async-std API | Tokio 等价 API |
 //! |---------------|---------------|
@@ -39,7 +39,7 @@
 //! - **glommio**: thread per core，scenario
 //!
 //! # 参考
-//! # reference
+//! # References
 //! - [async-std 归档公告](https://github.com/async-rs/async-std)
 //! - [Tokio 迁移指南](https://tokio.rs/tokio/topics/bridging)
 

@@ -265,6 +265,7 @@ pub mod data_structures {
 
         /// 清空缓存
         /// Clears缓存
+        /// Clearscache
         pub fn clear(&mut self) {
             self.cache.clear();
             self.access_order.clear();
@@ -791,6 +792,7 @@ pub mod concurrency {
 
         /// 读取数据
         /// Reads数据
+        /// Readsdata
         pub fn read<F, R>(&self, reader: F) -> R
         where
             F: FnOnce(&T) -> R,
@@ -801,6 +803,7 @@ pub mod concurrency {
 
         /// 写入数据
         /// Writes数据
+        /// Writesdata
         pub fn write<F, R>(&self, writer: F) -> R
         where
             F: FnOnce(&mut T) -> R,
@@ -1076,6 +1079,7 @@ pub mod performance {
 
         /// 清空缓存
         /// Clears缓存
+        /// Clearscache
         pub fn clear(&mut self) {
             self.cache.clear();
             self.order.clear();

@@ -1,8 +1,8 @@
 # Unsafe Fields 预览指南
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
 > **Bloom 层级**: L3-L4 (应用/分析)
-
 > **创建日期**: 2026-05-08
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 实验性 (未稳定)
@@ -15,22 +15,22 @@
 > **[来源: Rust Official Docs]**
 
 - [Unsafe Fields 预览指南](#unsafe-fields-预览指南)
-  - [📋 目录](#目录)
-  - [🔑 什么是 Unsafe Fields](#什么是-unsafe-fields)
-  - [💡 动机](#动机)
+  - [📋 目录](#-目录)
+  - [🔑 什么是 Unsafe Fields](#-什么是-unsafe-fields)
+  - [💡 动机](#-动机)
     - [问题：当前 `unsafe` 的粒度太粗](#问题当前-unsafe-的粒度太粗)
     - [Unsafe Fields 的目标](#unsafe-fields-的目标)
-  - [📝 提议语法](#提议语法)
+  - [📝 提议语法](#-提议语法)
     - [基本语法](#基本语法)
     - [访问规则](#访问规则)
     - [模式匹配](#模式匹配)
-  - [⚖️ 与当前 `unsafe` 块的对比](#与当前-unsafe-块的对比)
-  - [🧪 当前状态](#当前状态)
+  - [⚖️ 与当前 `unsafe` 块的对比](#️-与当前-unsafe-块的对比)
+  - [🧪 当前状态](#-当前状态)
     - [已知的设计问题](#已知的设计问题)
-  - [🔧 与 Rust for Linux 的关系](#与-rust-for-linux-的关系)
+  - [🔧 与 Rust for Linux 的关系](#-与-rust-for-linux-的关系)
     - [Linux 内核的需求](#linux-内核的需求)
     - [为什么内核特别需要这个特性](#为什么内核特别需要这个特性)
-  - [📖 参考文献](#参考文献)
+  - [📖 参考文献](#-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 
@@ -356,11 +356,8 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 ## 权威来源索引
 
 > **[来源: Wikipedia - Memory Safety]**
-
 > **[来源: Rustonomicon]**
-
 > **[来源: Rust Reference - Unsafe]**
-
 > **[来源: RFC 2585 - Unsafe Guidelines]**
 
 ---

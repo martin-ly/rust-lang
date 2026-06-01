@@ -1,8 +1,8 @@
 //! 组合模式工程案例
-//! combination
+//! Combined Pattern Engineering Cases
 //!
 //! 本模块展示了如何组合多个设计模式来解决复杂的工程问题。
-//! This module demonstrates combination design complex problem 。
+//! This module demonstrates multipledesignpatternproblems
 //! 这些案例展示了模式之间的协作和组合使用。
 //! 's and combination 。
 use std::collections::HashMap;
@@ -68,7 +68,7 @@ impl RoutingStrategy for ExactMatchRouting {
 }
 
 /// 前缀匹配路由策略
-/// before strategy
+/// front strategy
 pub struct PrefixMatchRouting {
     prefixes: Vec<(String, String)>,
 }
@@ -254,6 +254,7 @@ impl CircuitBreaker {
 }
 
 /// 服务接口
+/// service interface
 pub trait Service: Send + Sync {
     fn handle(&self, request: &HttpRequest) -> Result<HttpResponse, String>;
 }
@@ -287,6 +288,7 @@ impl Service for PostService {
 /// Web 服务器外观（Facade 模式）
 /// Web server facade （Facade ）
 /// 组合了 Builder、Strategy 和 Circuit Breaker 模式
+/// BuilderStrategy Circuit Breaker pattern
 pub struct WebServerFacade {
     routing_strategy: Box<dyn RoutingStrategy>,
     services: HashMap<String, Arc<dyn Service>>,
@@ -365,6 +367,7 @@ impl WebServerFacade {
 }
 
 /// 服务器统计信息
+/// service information
 #[derive(Debug, Clone)]
 pub struct ServerStats {
     pub total_requests: u64,

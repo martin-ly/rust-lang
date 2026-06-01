@@ -1,18 +1,18 @@
 //! Rust 1.90 性能优化模块
-//! Rust 1.90 performance optimization module
+//! Rust 1.90 performanceoptimization module
 //! 
 //! 本模块实现了Rust 1.90版本中的性能优化特性，包括：
-//! this module Rust 1.90this in performance optimization feature ，：
+//! This module implements Rust 1.90versionperformanceoptimizationfeaturesincluding
 //! - 并行编译优化
-//! - parallelism optimization
+//! - parallel optimization
 //! - 特质求解器性能优化
-//! - trait performance optimization
+//! - performance optimization
 //! - 借用检查器性能优化
-//! - borrowing performance optimization
+//! - borrowingperformance optimization
 //! - 内存布局优化
-//! - memory layout optimization
+//! - memory optimization
 //! - 零成本抽象验证
-//! - cost
+//! - zero-cost abstraction verification
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::time::sleep;
@@ -342,7 +342,7 @@ impl MemoryLayoutOptimization {
 }
 
 /// 零成本抽象验证
-/// cost
+/// zero-cost abstraction verification
 pub struct ZeroCostAbstractionDemo;
 
 impl ZeroCostAbstractionDemo {

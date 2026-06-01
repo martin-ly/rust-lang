@@ -4,6 +4,7 @@
 
 /// 演示 `char::MAX_LEN_UTF8` 和 `char::MAX_LEN_UTF16`
 /// Demonstrates `char::MAX_LEN_UTF8` 和 `char::MAX_LEN_UTF16`
+/// Demonstrates `char::MAX_LEN_UTF8` and `char::MAX_LEN_UTF16`
 pub fn char_encoding_limits() -> (usize, usize) {
     (char::MAX_LEN_UTF8, char::MAX_LEN_UTF16)
 }

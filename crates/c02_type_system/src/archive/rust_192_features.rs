@@ -200,6 +200,7 @@ impl<T> TypeSafeUninitManager<T> {
 
     /// 初始化存储
     /// Initializes存储
+    /// Initializesstorage
     pub fn initialize(&mut self, value: T) {
         unsafe {
             self.storage.as_mut_ptr().write(value);

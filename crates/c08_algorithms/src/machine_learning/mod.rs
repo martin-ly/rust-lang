@@ -1,8 +1,8 @@
 //! 机器学习算法模块
-//! machine learning algorithm module
+//! learningalgorithm module
 //!
 //! 本模块提供了常用的机器学习算法实现，包括：
-//! This module provides machine learning algorithm ，：
+//! This module provides learningalgorithmimplementationincluding
 //! - 聚类算法 (K-means, DBSCAN)
 //! - 分类算法 (决策树, SVM)
 //! - classification algorithm (tree, SVM)
@@ -22,7 +22,7 @@ use std::error::Error;
 use std::fmt;
 
 /// 机器学习算法错误类型
-/// machine learning algorithm error type
+/// learningalgorithmerror type
 #[derive(Debug, Clone)]
 pub enum MLError {
     /// 输入数据无效
@@ -57,7 +57,7 @@ impl fmt::Display for MLError {
 impl Error for MLError {}
 
 /// 机器学习算法结果类型
-/// machine learning algorithm result type
+/// learningalgorithmresult type
 pub type MLResult<T> = Result<T, MLError>;
 
 /// 数据点表示
@@ -111,7 +111,7 @@ pub trait UnsupervisedLearning {
     fn fit(&mut self, data: &Dataset) -> MLResult<()>;
 
     /// 获取聚类结果
-    /// result
+    /// Get result
     fn predict(&self, data: &Dataset) -> MLResult<Labels>;
 
     /// 获取聚类中心（如适用）
@@ -150,7 +150,7 @@ pub trait Regression {
     }
 
     /// 计算R²分数
-    /// R²
+    /// Compute R
     fn r2_score(&self, data: &Dataset, targets: &[f64]) -> MLResult<f64> {
         let predictions = self.predict_batch(data)?;
         let mean_target = targets.iter().sum::<f64>() / targets.len() as f64;
@@ -237,7 +237,7 @@ pub mod preprocessing {
     use super::*;
 
     /// 标准化数据
-    /// standard
+    /// standard data
     pub fn standardize(data: &mut Dataset) -> MLResult<(Vec<f64>, Vec<f64>)> {
         if data.is_empty() {
             return Err(MLError::InvalidInput("数据集为空".to_string()));

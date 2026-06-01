@@ -1,8 +1,8 @@
 //! # 几何算法模块
-//! # geometric algorithm module
+//! # algorithm module
 //!
 //! 本模块实现了各种几何算法。
-//! this module geometric algorithm 。
+//! This module implements algorithm
 use serde::{Deserialize, Serialize};
 
 /// 点结构
@@ -14,7 +14,7 @@ pub struct Point {
 }
 
 /// 几何算法实现
-/// geometric algorithm
+/// algorithm implementation
 pub struct GeometryAlgorithms;
 
 impl GeometryAlgorithms {

@@ -1,4 +1,6 @@
 # Kani 实战指南 —— Rust 的 bounded model checker
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [A]
 > **Bloom 层级**: L4-L5 (形式化验证入门 → 工程实践)

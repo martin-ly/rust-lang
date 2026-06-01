@@ -142,7 +142,7 @@ impl ProcessRwLock {
     }
 
     /// 获取等待者数量
-    /// etc. quantity
+    /// Get waiter count
     pub fn waiter_count(&self) -> usize {
         0 // 标准库读写锁不提供等待者数量
     }

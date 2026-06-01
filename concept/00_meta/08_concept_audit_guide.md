@@ -1,4 +1,6 @@
 # Concept Audit Guide（概念审计指南）
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **受众**: [专家]
 > **Bloom 层级**: 应用 → 评价

@@ -218,7 +218,7 @@ async fn demonstrate_integration_with_existing_features() -> Result<()> {
 }
 
 /// 使用新特性创建进程配置
-/// feature process
+/// usenewfeaturescreateprocess configuration
 fn create_config_with_new_features() -> Result<ProcessConfig> {
     // 使用改进的迭代器和模式匹配
     let args = vec!["Hello", "Rust", "1.90"]

@@ -2,27 +2,27 @@
 //! Rust async feature module (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//! ⚠️ **this ** - this as reference
+//! ⚠️ **Historical Version File** - This file is retained for historical reference only
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
+//! **Currently Recommended Version**: Rust 1.92.0+ | For latest features, please refer to `rust_192_features.rs`
 //!
 //! 本模块实现了当前稳定版本中的异步编程特性，包括：
-//! this module when before this in async feature ，：
+//! This module implements currentversionasyncfeaturesincluding
 //! - 改进的异步性能优化
-//! - async performance optimization
+//! - improvementsasyncperformance optimization
 //! - 增强的错误处理机制
-//! - error handling mechanism
+//! - strongerrorhandling mechanism
 //! - 稳定的异步 Traits
 //! - async Traits
 //! - 结构化并发支持
 //! - structure concurrency
 //! - 超时控制和取消机制
-//! - and mechanism
+//! - control mechanism
 //!
 //! 注意：AsyncDrop、Async Generators 等特性仍在开发中，
 //! 本模块提供了模拟实现以供学习和测试使用。
-//! This module provides learn and 。
+//! This module provides implementationforlearningtestuse
 use anyhow::Result;
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -31,7 +31,7 @@ use tokio::sync::{Mutex, Semaphore};
 use tokio::time::sleep;
 
 /// 异步资源管理模拟实现
-/// async
+/// asyncresourcemanagement implementation
 ///
 /// 注意：AsyncDrop trait 仍在开发中，这里使用 Drop trait 模拟异步资源清理
 /// ：AsyncDrop trait in in ， Drop trait async
@@ -74,10 +74,10 @@ impl Drop for AsyncResource {
 }
 
 /// 异步生成器模拟实现
-/// async
+/// asyncgenerator implementation
 ///
 /// 在Rust 1.90中，AsyncIterator trait尚未稳定，这里使用自定义实现
-/// in Rust 1.90in ，AsyncIterator trait，definition
+/// Rust 1.90AsyncIterator traitusecustom implementation
 pub struct AsyncDataGenerator {
     current: usize,
     max: usize,
@@ -188,7 +188,7 @@ impl TraitSolverDemo {
     }
 
     /// 演示特质求解器的性能优化
-    /// demonstration trait performance optimization
+    /// performance optimization
     pub async fn trait_solver_performance_test(&self, input: &str) -> Result<usize> {
         let start = std::time::Instant::now();
 
@@ -243,7 +243,7 @@ impl ParallelFrontendDemo {
     }
 
     /// 演示并行编译优化
-    /// demonstration parallelism optimization
+    /// parallel optimization
     pub async fn parallel_compilation_demo(&self, tasks: Vec<String>) -> Result<Vec<String>> {
         let semaphore = Arc::new(Semaphore::new(self.workers));
         let mut handles = Vec::new();

@@ -458,6 +458,7 @@ impl<T: PartialEq + Eq> FairSchedulingPriorityChannel<T> {
 
     /// 发送消息
     /// Sends消息
+    /// Sendsmessage
     pub fn send(&self, priority: u32, data: T) -> Result<(), T> {
         let message = PriorityMessage::new(priority, data);
 

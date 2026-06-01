@@ -1,14 +1,14 @@
 //! 高级算法实现模块
-//! algorithm module
+//! Advanced Algorithm Implementation Module
 //!
 //! 本模块提供了Rust中的高级算法实现，包括：
-//! This module provides Rustin algorithm ，：
+//! This module provides advanced algorithm implementations in Rust, including:
 //! - 并行算法
 //! - parallel algorithm
 //! - 分布式算法  
 //! - distributed algorithm
 //! - 机器学习算法
-//! - machine learning algorithm
+//! - learning algorithm
 //! - 密码学算法
 //! - algorithm
 use rayon::prelude::*;
@@ -16,12 +16,12 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
 /// 并行排序算法实现
-/// parallel sort algorithm
+/// Parallel Sorting Algorithm Implementation
 pub struct ParallelSort;
 
 impl ParallelSort {
     /// 并行快速排序
-    /// parallelism quick sort
+    /// parallelfast sort
     pub fn parallel_quicksort<T: Ord + Send + Sync>(arr: &mut [T]) {
         if arr.len() <= 1 {
             return;
@@ -38,7 +38,7 @@ impl ParallelSort {
     }
 
     /// 并行归并排序
-    /// parallelism merge sort
+    /// parallel sort
     pub fn parallel_mergesort<T: Ord + Send + Sync + Clone>(arr: &mut [T]) {
         if arr.len() <= 1 {
             return;
@@ -58,7 +58,7 @@ impl ParallelSort {
     }
 
     /// 并行基数排序
-    /// parallelism radix sort
+    /// parallel sort
     pub fn parallel_radix_sort(arr: &mut [u32]) {
         const RADIX: usize = 256;
         const BITS: usize = 32;
@@ -156,12 +156,12 @@ impl ParallelSort {
 }
 
 /// 分布式算法实现
-/// distributed algorithm
+/// distributedalgorithm implementation
 pub struct DistributedAlgorithms;
 
 impl DistributedAlgorithms {
     /// 分布式MapReduce实现
-    /// distribution MapReduce
+    /// distributedMapReduce implementation
     pub fn map_reduce<T, U, V, F, G>(data: Vec<T>, map_fn: F, reduce_fn: G, num_workers: usize) -> V
     where
         T: Send + Sync + Clone,
@@ -243,7 +243,7 @@ impl PaxosNode {
 }
 
 /// 分布式哈希表 (DHT) 实现
-/// distribution (DHT)
+/// distributedtable (DHT) implementation
 pub struct DistributedHashTable<K, V> {
     nodes: HashMap<u64, Arc<Mutex<HashMap<K, V>>>>,
     num_nodes: usize,
@@ -340,7 +340,7 @@ impl LinearRegression {
 }
 
 /// K-means聚类算法
-/// K-meansalgorithm
+/// K-means algorithm
 pub struct KMeans {
     k: usize,
     centroids: Vec<Vec<f64>>,
@@ -439,7 +439,7 @@ impl KMeans {
 }
 
 /// 决策树实现
-/// tree
+/// tree implementation
 pub struct DecisionTree {
     root: Option<Box<TreeNode>>,
     max_depth: usize,
@@ -621,11 +621,11 @@ impl DecisionTree {
 }
 
 /// 密码学算法实现
-/// algorithm
+/// algorithm implementation
 pub struct CryptographicAlgorithms;
 
 /// RSA加密算法实现
-/// RSAalgorithm
+/// RSAalgorithm implementation
 #[allow(clippy::upper_case_acronyms)]
 pub struct RSA {
     public_key: (u64, u64),
@@ -935,7 +935,7 @@ impl AES {
 }
 
 /// SHA-256哈希算法实现
-/// SHA-256algorithm
+/// SHA-256algorithm implementation
 pub struct SHA256 {
     state: [u32; 8],
 }

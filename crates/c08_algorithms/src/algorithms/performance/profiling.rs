@@ -1,12 +1,12 @@
 //! # 性能分析模块
-//! # performance analyze module
+//! # performanceanalysis module
 //!
 //! 本模块提供算法性能分析的工具和方法。
 //! This module provides algorithm performance analyze tool and method 。
 use serde::{Deserialize, Serialize};
 
 /// 性能分析结果
-/// performance analyze result
+/// performanceanalysis result
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProfilingResult {
     pub algorithm_name: String,
@@ -23,7 +23,7 @@ pub struct Profiler;
 
 impl Profiler {
     /// 分析算法性能
-    /// analyze algorithm performance
+    /// analysisalgorithm performance
     pub fn profile_algorithm<F>(algorithm_name: &str, algorithm_fn: F) -> ProfilingResult
     where
         F: Fn() -> std::time::Duration,

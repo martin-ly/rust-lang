@@ -1,8 +1,8 @@
 //! # 排序算法模块
-//! # sorting algorithm module
+//! # sortalgorithm module
 //!
 //! 本模块实现了各种排序算法，包括同步、异步、并行、分布式四个版本。
-//! this module sorting algorithm ，synchronous 、async 、parallelism 、distribution this 。
+//! This module implements sortalgorithmincludingsynchronousasyncparalleldistributedversion
 //! 充分利用 Rust 1.90 的新特性，提供高性能、类型安全的排序实现。
 //! Rust 1.90 feature ，performance 、type ordering 。
 pub mod async_exec;
@@ -18,7 +18,7 @@ use crate::algorithms::execution_modes::*;
 use std::cmp::Ordering;
 
 /// 排序算法类型
-/// sorting algorithm type
+/// sortalgorithm type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SortingAlgorithm {
     QuickSort,
@@ -34,7 +34,7 @@ pub enum SortingAlgorithm {
 }
 
 /// 排序结果
-/// ordering result
+/// sort result
 #[derive(Debug, Clone)]
 pub struct SortingResult<T> {
     pub sorted_data: Vec<T>,
@@ -62,7 +62,7 @@ pub struct SortingAlgorithmFactory;
 
 impl SortingAlgorithmFactory {
     /// 创建同步排序算法
-    /// synchronous sorting algorithm
+    /// createsynchronoussort algorithm
     pub fn create_sync(algorithm: SortingAlgorithm) -> Box<dyn SyncSortingAlgorithm> {
         match algorithm {
             SortingAlgorithm::QuickSort => Box::new(sync::QuickSort),
@@ -79,7 +79,7 @@ impl SortingAlgorithmFactory {
     }
 
     /// 创建异步排序算法
-    /// async sorting algorithm
+    /// createasyncsort algorithm
     pub fn create_async(algorithm: SortingAlgorithm) -> Box<dyn AsyncSortingAlgorithm> {
         match algorithm {
             SortingAlgorithm::QuickSort => Box::new(async_exec::AsyncQuickSort),
@@ -96,7 +96,7 @@ impl SortingAlgorithmFactory {
     }
 
     /// 创建并行排序算法
-    /// parallel sort algorithm
+    /// createparallelsort algorithm
     pub fn create_parallel(algorithm: SortingAlgorithm) -> Box<dyn ParallelSortingAlgorithm> {
         match algorithm {
             SortingAlgorithm::QuickSort => Box::new(parallel::ParallelQuickSort),
@@ -113,7 +113,7 @@ impl SortingAlgorithmFactory {
     }
 
     /// 创建分布式排序算法
-    /// distribution sorting algorithm
+    /// createdistributedsort algorithm
     pub fn create_distributed(algorithm: SortingAlgorithm) -> Box<dyn DistributedSortingAlgorithm> {
         match algorithm {
             SortingAlgorithm::QuickSort => Box::new(distributed::DistributedQuickSort),
@@ -159,7 +159,7 @@ pub trait DistributedSortingAlgorithm {
 }
 
 /// 算法复杂度信息
-/// algorithm complex
+/// algorithmcomplexity information
 #[derive(Debug, Clone)]
 pub struct AlgorithmComplexity {
     pub time_best: String,
@@ -196,7 +196,7 @@ pub struct SortingBenchmarker;
 
 impl SortingBenchmarker {
     /// 运行完整的排序算法基准测试
-    /// Run complete sorting algorithm benchmark
+    /// Run completesortalgorithmtest
     pub async fn run_comprehensive_benchmark(
         data_sizes: Vec<usize>,
         algorithms: Vec<SortingAlgorithm>,
@@ -298,6 +298,7 @@ impl SortingBenchmarker {
     }
 
     /// 生成测试数据
+    /// test data
     fn generate_test_data(size: usize) -> Vec<i32> {
         use rand::RngExt;
         let mut rng = rand::rng();
@@ -306,6 +307,7 @@ impl SortingBenchmarker {
 }
 
 /// 执行模式
+/// execution pattern
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ExecutionMode {
     Sync,
@@ -315,7 +317,7 @@ pub enum ExecutionMode {
 }
 
 /// 排序基准测试结果
-/// ordering benchmark result
+/// sorttest result
 #[derive(Debug, Clone)]
 pub struct SortingBenchmarkResult {
     pub algorithm: SortingAlgorithm,
@@ -325,7 +327,7 @@ pub struct SortingBenchmarkResult {
 }
 
 /// 综合排序基准测试结果
-/// synthesize ordering benchmark result
+/// sorttest result
 #[derive(Debug, Clone)]
 pub struct ComprehensiveSortingBenchmark {
     pub sync_results: Vec<SortingBenchmarkResult>,
@@ -404,7 +406,7 @@ impl ComprehensiveSortingBenchmark {
     }
 
     /// 返回位置 impl Trait：按算法产出最佳用例摘要的迭代器
-    /// position impl Trait：algorithm summary
+    /// impl Traitalgorithmbest iterator
     pub fn best_summary_iter(&self) -> impl Iterator<Item = String> + '_ {
         let modes = [
             ExecutionMode::Sync,
@@ -439,7 +441,7 @@ impl ComprehensiveSortingBenchmark {
     }
 
     /// 获取指定算法和模式的最佳性能
-    /// algorithm and performance
+    /// Get algorithmpatternbestperformance
     fn get_best_performance(
         &self,
         algorithm: SortingAlgorithm,

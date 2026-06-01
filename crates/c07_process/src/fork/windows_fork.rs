@@ -2,7 +2,7 @@ use super::{Fork, ForkResult};
 use crate::error::Result;
 
 /// Windows平台的fork实现
-/// 由于Windows不支持fork，这里提供基于CreateProcess的替代方案
+/// Windowsfork implementation
 /// Windowsfork，CreateProcess
 pub struct WindowsFork {
     is_child: bool,
@@ -10,7 +10,7 @@ pub struct WindowsFork {
 
 impl WindowsFork {
     /// 创建新的Windows fork实例
-    /// Windows fork
+    /// Create new Windows fork
     pub fn new() -> Self {
         Self { is_child: false }
     }

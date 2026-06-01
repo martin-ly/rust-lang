@@ -13,7 +13,7 @@ pub struct SharedMemoryRegion {
 
 impl SharedMemoryRegion {
     /// 创建新的共享内存区域
-    /// shared memory area
+    /// Create new sharedmemory
     pub fn new(name: &str, _size: usize, _config: crate::types::IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             name: name.to_string(),

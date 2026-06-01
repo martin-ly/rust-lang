@@ -4,8 +4,7 @@
 //! `AsyncFn` / `AsyncFnMut` / `AsyncFnOnce` traits 已进入 prelude。
 //!
 //! 本模块展示了 async closures 的完整用法，无需 nightly feature gate。
-//!
-//! # 概念定义
+//! This module demonstrates async closures completewithout nightly feature gate
 //! # concept definition
 //!
 //! Async Closures (`async || {}`) 是 RFC 3668 定义的新语法，允许创建**真正的异步闭包**。
@@ -31,7 +30,7 @@
 //! | | this | **1.85.0 ** |
 //!
 //! # 权威来源
-//! # Source
+//! # Authoritative Sources
 //! - RFC: [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html)
 //! - 跟踪: [rust-lang/rust#132706](https://github.com/rust-lang/rust/pull/132706)
 //! - AsyncFn traits: **1.94.0** 已入 prelude
@@ -114,7 +113,7 @@ impl AsyncClosureSyntaxExamples {
 /// ```
 ///
 /// ## 使用场景：接受异步回调的函数
-/// ## scenario ：async function
+/// ## useasync function
 pub struct AsyncFnTraitExamples;
 
 impl AsyncFnTraitExamples {
@@ -168,7 +167,7 @@ impl AsyncFnTraitExamples {
 /// ```
 ///
 /// ## ❌ 与 `Fn() -> impl Future` 的互操作
-/// 旧式闭包和 async closures 的 trait 实现不同，直接互操作需要适配。
+/// ## `Fn() -> impl Future` operation
 /// and async closures trait ，。
 ///
 /// ## ❌ 发送性约束复杂
@@ -190,7 +189,7 @@ impl AsyncClosureLimitations {
 // ============================================================================
 
 /// # 场景：异步过滤迭代器
-/// # scenario ：async
+/// # async iterator
 ///
 /// 展示了 async closures 在流处理中的应用。
 /// async closures in stream in application 。

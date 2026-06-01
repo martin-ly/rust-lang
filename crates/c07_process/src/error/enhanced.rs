@@ -1,5 +1,5 @@
 //! 增强的错误处理系统
-//! error handling system
+//! strongerrorhandling system
 //!
 //! 这个模块提供了增强的错误处理功能，包括错误恢复、
 //! module error handling functionality ，error recovery 、
@@ -15,6 +15,7 @@ use std::time::{Duration, SystemTime};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的错误管理器
+/// strongerror manager
 #[cfg(feature = "async")]
 #[derive(Clone)]
 pub struct EnhancedErrorManager {
@@ -272,6 +273,7 @@ pub struct Notification {
 }
 
 /// 错误管理器配置
+/// errormanager configuration
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -311,6 +313,7 @@ pub enum RecoveryResult {
 #[cfg(feature = "async")]
 impl EnhancedErrorManager {
     /// 创建新的增强错误管理器
+    /// Create new strongerrormanager
     pub async fn new(config: ErrorManagerConfig) -> Self {
         let error_history = Arc::new(TokioRwLock::new(Vec::new()));
         let error_recovery = Arc::new(ErrorRecovery::new());
@@ -454,6 +457,7 @@ impl EnhancedErrorManager {
     }
 
     /// 获取错误历史
+    /// Get errorhistorical
     pub async fn get_error_history(&self, limit: Option<usize>) -> Vec<EnhancedErrorEntry> {
         let history = self.error_history.read().await;
         let start = if let Some(limit) = limit {
@@ -465,6 +469,7 @@ impl EnhancedErrorManager {
     }
 
     /// 获取错误统计
+    /// Get error
     pub async fn get_error_statistics(&self) -> ErrorStatistics {
         let history = self.error_history.read().await;
         let mut stats = ErrorStatistics::new();
@@ -508,7 +513,7 @@ impl EnhancedErrorManager {
     }
 
     /// 分类错误类型
-    /// classification error type
+    /// error type
     fn classify_error_type(&self, error: &dyn StdError) -> ErrorType {
         let msg = error.to_string().to_lowercase();
         if msg.contains("process") {
@@ -555,7 +560,7 @@ impl EnhancedErrorManager {
     }
 
     /// 执行恢复策略
-    /// strategy
+    /// execution strategy
     #[allow(unused_variables)]
     async fn execute_recovery_strategy(
         &self,
@@ -909,6 +914,7 @@ impl EnhancedErrorManager {
 }
 
 /// 错误统计信息
+/// error information
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct ErrorStatistics {
@@ -921,7 +927,7 @@ pub struct ErrorStatistics {
 }
 
 /// 错误模式分析结果
-/// analyze result
+/// errorpatternanalysis result
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ErrorPatternAnalysis {

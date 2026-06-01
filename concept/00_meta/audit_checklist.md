@@ -1,5 +1,6 @@
 # 概念一致性检查清单（Concept Consistency Audit Checklist）
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 应用
 > **定位**: 本文件定义 `concept/` 知识体系的**质量门禁**，用于定期审计概念文件的一致性、完备性和关系清晰度。
 > **使用方法**: 每轮内容更新后，逐条检查并标记状态。
@@ -332,9 +333,7 @@ python scripts/cross_concept_diff.py
 | 概念一致性检查清单（Concept Consistency Audit Checklist） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: 概念一致性检查清单（Concept Consistency Audit Checklist） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 概念一致性检查清单（Concept Consistency Audit Checklist） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

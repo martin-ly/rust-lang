@@ -22,7 +22,7 @@ use tokio::process::Command as TokioCommand;
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, mpsc, oneshot};
 
 /// 异步进程管理器
-/// async process
+/// asyncprocess manager
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct AsyncProcessManager {
@@ -70,7 +70,7 @@ enum AsyncCommand {
 #[allow(dead_code)]
 impl AsyncProcessManager {
     /// 创建新的异步进程管理器
-    /// async process
+    /// Create new asyncprocessmanager
     pub async fn new() -> Self {
         let (command_sender, command_receiver) = mpsc::channel(100);
         let processes = Arc::new(TokioRwLock::new(HashMap::new()));
@@ -282,7 +282,7 @@ impl AsyncProcessManager {
     }
 
     /// 异步获取进程信息
-    /// async process
+    /// asyncgetprocess information
     pub async fn get_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -320,7 +320,7 @@ impl AsyncProcessManager {
     }
 
     /// 命令处理器
-    /// command
+    /// Command processor
     async fn command_handler(
         mut receiver: mpsc::Receiver<AsyncCommand>,
         processes: Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
@@ -466,7 +466,7 @@ pub struct AsyncProcessPool {
 #[cfg(feature = "async")]
 impl AsyncProcessPool {
     /// 创建新的异步进程池
-    /// async process
+    /// Create new asyncprocess
     pub async fn new(pool_size: usize) -> ProcessResult<Self> {
         let manager = AsyncProcessManager::new().await;
         let available_processes = Arc::new(TokioMutex::new(Vec::new()));
@@ -581,7 +581,7 @@ pub struct AsyncTask {
 #[allow(dead_code)]
 impl AsyncTaskScheduler {
     /// 创建新的异步任务调度器
-    /// async task
+    /// Create new asynctaskscheduling
     pub fn new(worker_count: usize) -> Self {
         Self {
             task_queue: Arc::new(TokioMutex::new(Vec::new())),
@@ -641,7 +641,7 @@ impl AsyncTaskScheduler {
 }
 
 /// 非异步版本的占位符实现
-/// async this
+/// asyncversion implementation
 #[cfg(not(feature = "async"))]
 #[allow(dead_code)]
 pub struct AsyncProcessManager;

@@ -2,12 +2,12 @@
 //! Performance benchmark module
 //!
 //! 本模块提供了各种设计模式的性能基准测试
-//! This module provides design Performance benchmark
+//! This module provides designpatternperformancetest
 use std::sync::Arc;
 use std::time::Instant;
 
 /// 单例模式性能测试
-/// singleton performance test
+/// singlepatternperformance test
 pub struct SingletonBenchmark {
     iterations: usize,
 }
@@ -18,7 +18,7 @@ impl SingletonBenchmark {
     }
 
     /// 测试单例模式的获取性能
-    /// singleton performance
+    /// Test singlepatterngetperformance
     pub fn benchmark_singleton_access(&self) -> f64 {
         use crate::creational::singleton::define::Singleton;
 
@@ -34,7 +34,7 @@ impl SingletonBenchmark {
     }
 
     /// 测试单例模式的线程安全性能
-    /// singleton thread-safe performance
+    /// Test singlepatternthreadsafety
     pub fn benchmark_singleton_thread_safety(&self) -> f64 {
         use crate::creational::singleton::define::Singleton;
         use std::thread;
@@ -67,7 +67,7 @@ impl SingletonBenchmark {
 }
 
 /// 享元模式性能测试
-/// flyweight performance test
+/// patternperformance test
 pub struct FlyweightBenchmark {
     iterations: usize,
 }
@@ -78,7 +78,7 @@ impl FlyweightBenchmark {
     }
 
     /// 测试享元模式的创建性能
-    /// flyweight performance
+    /// Test patterncreateperformance
     pub fn benchmark_flyweight_creation(&self) -> f64 {
         use crate::structural::flyweight::define::OptimizedFlyweightFactory;
 
@@ -97,7 +97,7 @@ impl FlyweightBenchmark {
     }
 
     /// 测试享元模式的批量创建性能
-    /// flyweight performance
+    /// Test patterncreateperformance
     pub fn benchmark_flyweight_batch_creation(&self) -> f64 {
         use crate::structural::flyweight::define::OptimizedFlyweightFactory;
 
@@ -125,7 +125,7 @@ impl FlyweightBenchmark {
 }
 
 /// 代理模式性能测试
-/// proxy pattern performance test
+/// patternperformance test
 pub struct ProxyBenchmark {
     iterations: usize,
 }
@@ -136,7 +136,7 @@ impl ProxyBenchmark {
     }
 
     /// 测试代理模式的请求处理性能
-    /// proxy pattern performance
+    /// Test patternhandlingperformance
     pub fn benchmark_proxy_requests(&self) -> f64 {
         use crate::structural::proxy::define::{Proxy, RealSubject, Subject};
 
@@ -154,7 +154,7 @@ impl ProxyBenchmark {
 }
 
 /// 并行模式性能测试
-/// parallelism performance test
+/// parallelpatternperformance test
 #[cfg(not(miri))]
 pub struct ParallelBenchmark {
     data_size: usize,
@@ -167,7 +167,7 @@ impl ParallelBenchmark {
     }
 
     /// 测试并行归约性能
-    /// parallelism performance
+    /// Test parallelperformance
     pub fn benchmark_parallel_reduction(&self) -> f64 {
         use crate::parallel::parallel_reduction::define::parallel_reduction;
 
@@ -181,7 +181,7 @@ impl ParallelBenchmark {
     }
 
     /// 测试数据并行处理性能
-    /// data parallelism performance
+    /// Test dataparallelhandlingperformance
     pub fn benchmark_data_parallelism(&self) -> f64 {
         use crate::parallel::data_parrallelism::define::parallel_process;
 
@@ -226,7 +226,7 @@ impl PerformanceTestSuite {
     }
 
     /// 运行所有性能测试
-    /// Run all performance test
+    /// Run hasperformancetest
     pub fn run_all_benchmarks(&self) -> BenchmarkResults {
         println!("开始运行性能基准测试...");
 
@@ -274,7 +274,7 @@ impl PerformanceTestSuite {
 }
 
 /// 基准测试结果
-/// benchmark result
+/// test result
 #[derive(Debug, Clone)]
 pub struct BenchmarkResults {
     pub singleton_access: f64,
@@ -322,7 +322,7 @@ impl BenchmarkResults {
 }
 
 /// 运行性能测试的便捷函数
-/// Run performance test function
+/// Run performancetestfunction
 pub fn run_performance_tests() -> BenchmarkResults {
     let test_suite = PerformanceTestSuite::new();
     test_suite.run_all_benchmarks()

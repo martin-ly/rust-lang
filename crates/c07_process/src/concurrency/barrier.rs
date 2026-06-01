@@ -7,7 +7,7 @@ use std::sync::{Arc, Condvar, Mutex};
 use std::time::{Duration, Instant};
 
 /// 进程安全的屏障
-/// process barrier
+/// Process-safe barrier
 #[allow(dead_code)]
 pub struct ProcessBarrier {
     name: String,
@@ -132,7 +132,7 @@ impl ProcessBarrier {
     }
 
     /// 获取等待者数量
-    /// etc. quantity
+    /// Get waiter count
     pub fn waiter_count(&self) -> usize {
         let current = self.current.lock().expect("屏障计数锁被污染");
         self.parties - *current
@@ -153,13 +153,13 @@ pub enum BarrierWaitResult {
 
 impl BarrierWaitResult {
     /// 检查是否为等待状态
-    /// as etc. state
+    /// whether status
     pub const fn is_wait(&self) -> bool {
         matches!(self, BarrierWaitResult::Wait)
     }
 
     /// 检查是否为屏障状态
-    /// as barrier state
+    /// whether status
     pub const fn is_barrier(&self) -> bool {
         matches!(self, BarrierWaitResult::Barrier)
     }

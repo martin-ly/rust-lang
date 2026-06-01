@@ -2,10 +2,10 @@
 //! LeetCode algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的数组类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
-//! this module LeetCode ， Rust 1.91 feature 。
+//! This module implements classicarray LeetCode Rust 1.91 newfeatures
 //!
 //! ## Rust 1.91 特性应用
-//! ## Rust 1.91 feature application
+//! ## Rust 1.91 Feature Application
 //!
 //! 1. **const 上下文增强**: 编译时计算数组配置常量
 //! 1. **const on under **: compile-time constant
@@ -16,10 +16,10 @@
 //! 4. **内存优化**: 使用 `Vec::try_reserve_exact` 精确分配
 //! 4. **memory optimization **: `Vec::try_reserve_exact`
 //! 5. **ControlFlow 改进**: 更好的错误处理和流程控制
-//! 5. **ControlFlow **: error handling and process
+//! 5. **ControlFlow improvements**: bettererrorhandlingflow control
 //!
 //! ## 包含的经典题目
-//! ##
+//! ## Classic Problems
 //!
 //! - 1. Two Sum（两数之和）
 //! - 1. Two Sum（'s and ）
@@ -54,6 +54,7 @@ pub mod const_config {
     pub const DOUBLE_THRESHOLD: usize = *MAX_SIZE_REF * DEFAULT_THRESHOLD / 5000;
 
     /// 获取配置信息
+    /// Get configurationinformation
     pub fn get_config() -> (usize, usize, usize) {
         (MAX_ARRAY_SIZE, DEFAULT_THRESHOLD, DOUBLE_THRESHOLD)
     }
@@ -65,23 +66,23 @@ pub mod const_config {
 /// 1. Two Sum（'s and ）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个整数数组 `nums` 和一个整数目标值 `target`，请你在该数组中找出 **和为目标值** `target` 的那 **两个** 整数，并返回它们的数组下标。
 /// `nums` and goal `target`，in this in **and as goal ** `target` **** ，and under 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 使用迭代器链式操作，性能提升 10-15%
 /// - **JIT optimization **: ，performance 10-15%
 /// - **内存优化**: 使用 `HashMap` 的 `try_reserve_exact`（如果支持）
 /// - **memory optimization **: `HashMap` `try_reserve_exact`（if ）
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
     use std::collections::HashMap;
 
@@ -104,22 +105,22 @@ pub fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
 /// 15. 3Sum（'s and ）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个整数数组 `nums`，判断是否存在三元组 `[nums[i], nums[j], nums[k]]`
 /// `nums`，in `[nums[i], nums[j], nums[k]]`
 /// 满足 `i != j`、`i != k` 且 `j != k`，同时还满足 `nums[i] + nums[j] + nums[k] == 0`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **const 上下文**: 使用 const 配置的数组大小限制
 /// - **const on under **: const
 /// - **JIT 优化**: 嵌套迭代器性能提升 15-25%
 /// - **JIT optimization **: performance 15-25%
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n²)
-/// - time complexity : O(n²)
+/// - Time Complexity: O(n²)
 /// - 空间复杂度: O(1)（不包括返回结果）
 /// - space complexity : O(1)（result ）
 pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
@@ -170,23 +171,23 @@ pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
 /// 53. Maximum Subarray（最大子数组和）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个整数数组 `nums`，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
 /// `nums`，has maximum and （at least element ），its maximum and 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 迭代器 fold 操作性能提升
-/// - **JIT optimization **: fold performance
+/// - **JIT optimization**: iterator fold operationperformance improvement
 /// - **ControlFlow 改进**: 使用改进的流程控制
-/// - **ControlFlow **: process
+/// - **ControlFlow improvements**: useimprovementsflow control
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn max_subarray(nums: &[i32]) -> i32 {
     // Rust 1.91 JIT 优化：使用 fold 操作
     nums.iter()
@@ -200,7 +201,7 @@ pub fn max_subarray(nums: &[i32]) -> i32 {
 /// 121. Best Time to Buy and Sell Stock（买卖股票的最佳时机）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个数组 `prices`，它的第 `i` 个元素 `prices[i]` 表示一支给定股票第 `i` 天的价格。
 /// `prices`， `i` element `prices[i]` represent `i` price 。
 /// 你只能选择 **某一天** 买入这只股票，并选择在 **未来的某一个不同的日子** 卖出该股票。
@@ -209,18 +210,18 @@ pub fn max_subarray(nums: &[i32]) -> i32 {
 /// design algorithm maximum profit 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 迭代器链式操作
-/// - **JIT optimization **:
+/// - **JIT optimization**: iterator operation
 /// - **内存优化**: O(1) 空间复杂度
-/// - **memory optimization **: O(1) space complexity
+/// - **Memory Optimization**: O(1) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn max_profit(prices: &[i32]) -> i32 {
     if prices.is_empty() {
         return 0;
@@ -241,21 +242,21 @@ pub fn max_profit(prices: &[i32]) -> i32 {
 /// 238. Product of Array Except Self（除自身以外数组的乘积）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个整数数组 `nums`，返回数组 `answer`，其中 `answer[i]` 等于 `nums` 中除 `nums[i]` 之外其余各元素的乘积。
 /// `nums`， `answer`，its in `answer[i]` etc. `nums` in `nums[i]` 's outside its element 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **内存优化**: 使用 `try_reserve_exact` 精确分配
 /// - **memory optimization **: `try_reserve_exact`
 /// - **JIT 优化**: 迭代器操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Iterator operation performance improvement
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)（不包括返回结果）
 /// - space complexity : O(1)（result ）
 pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
@@ -284,23 +285,23 @@ pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
 /// 283. Move Zeroes（移动零）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个数组 `nums`，编写一个函数将所有 `0` 移动到数组的末尾，同时保持非零元素的相对顺序。
 /// `nums`，function will all `0` to ，element to order 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 迭代器链式操作
-/// - **JIT optimization **:
+/// - **JIT optimization**: iterator operation
 /// - **内存优化**: 原地操作
-/// - **memory optimization **:
+/// - **Memory Optimization**: In-place operation
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn move_zeroes(nums: &mut [i32]) {
     let mut write_pos = 0;
 
@@ -319,7 +320,7 @@ pub fn move_zeroes(nums: &mut [i32]) {
 /// Rust 1.91 API
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **BufRead::skip_while**: 跳过空白字符
 pub fn parse_array_input(input: &str) -> Result<Vec<i32>, Box<dyn std::error::Error>> {
     let mut cursor = Cursor::new(input.as_bytes());
@@ -340,25 +341,25 @@ pub fn parse_array_input(input: &str) -> Result<Vec<i32>, Box<dyn std::error::Er
 /// 11. Container With Most Water（盛最多水的容器）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个长度为 `n` 的整数数组 `height`。有 `n` 条垂线，第 `i` 条线的两个端点是 `(i, 0)` 和 `(i, height[i])`。
 /// as `n` `height`。 `n` line ， `i` line point `(i, 0)` and `(i, height[i])`。
 /// 找出其中的两条线，使得它们与 `x` 轴共同构成的容器可以容纳最多的水。
 /// its in line ，and `x` axis can at most 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 双指针遍历性能提升
-/// - **JIT optimization **: pointer performance
+/// - **JIT Optimization**: Two-pointer traversal performance improvement
 /// - **内存优化**: O(1) 空间复杂度
-/// - **memory optimization **: O(1) space complexity
+/// - **Memory Optimization**: O(1) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn max_area(height: Vec<i32>) -> i32 {
     let mut left = 0;
     let mut right = height.len() - 1;
@@ -384,25 +385,25 @@ pub fn max_area(height: Vec<i32>) -> i32 {
 /// 26. Remove Duplicates from Sorted Array（删除有序数组中的重复项）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个 **非严格递增排列** 的数组 `nums`，请你 **原地** 删除重复出现的元素，使每个元素 **只出现一次**，
 /// **arrangement ** `nums`， **** element ，element ****，
 /// 返回删除后数组的新长度。元素的 **相对顺序** 应该保持 **一致**。
 /// after 。element **to order ** should ****。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 双指针遍历
-/// - **JIT optimization **: pointer
+/// - **JIT Optimization**: Two-pointer traversal
 /// - **内存优化**: 原地操作
-/// - **memory optimization **:
+/// - **Memory Optimization**: In-place operation
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn remove_duplicates(nums: &mut [i32]) -> usize {
     if nums.is_empty() {
         return 0;
@@ -424,23 +425,23 @@ pub fn remove_duplicates(nums: &mut [i32]) -> usize {
 /// 27. Remove Element（移除元素）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个数组 `nums` 和一个值 `val`，你需要 **原地** 移除所有数值等于 `val` 的元素，并返回移除后数组的新长度。
 /// `nums` and `val`， **** all etc. `val` element ，and after 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 双指针遍历
-/// - **JIT optimization **: pointer
+/// - **JIT Optimization**: Two-pointer traversal
 /// - **内存优化**: 原地操作
-/// - **memory optimization **:
+/// - **Memory Optimization**: In-place operation
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn remove_element(nums: &mut [i32], val: i32) -> usize {
     let mut write_pos = 0;
 
@@ -458,23 +459,23 @@ pub fn remove_element(nums: &mut [i32], val: i32) -> usize {
 /// 189. Rotate Array（轮转数组）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个整数数组 `nums`，将数组中的元素向右轮转 `k` 个位置，其中 `k` 是非负数。
 /// `nums`，will in element `k` position ，its in `k` 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 三次反转操作
-/// - **JIT optimization **:
+/// - **JIT optimization**: operation
 /// - **内存优化**: 原地操作
-/// - **memory optimization **:
+/// - **Memory Optimization**: In-place operation
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn rotate(nums: &mut [i32], k: i32) {
     let n = nums.len();
     if n == 0 {
@@ -492,23 +493,23 @@ pub fn rotate(nums: &mut [i32], k: i32) {
 /// 217. Contains Duplicate（存在重复元素）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个整数数组 `nums`。如果任一值在数组中出现 **至少两次**，返回 `true`；如果数组中每个元素互不相同，返回 `false`。
 /// `nums`。if in in ****， `true`；if in element ， `false`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 使用 HashSet 快速查找
 /// - **JIT optimization **: HashSet fast
 /// - **内存优化**: 使用 HashSet 存储已访问元素
 /// - **memory optimization **: HashSet element
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn contains_duplicate(nums: &[i32]) -> bool {
     use std::collections::HashSet;
 
@@ -527,23 +528,23 @@ pub fn contains_duplicate(nums: &[i32]) -> bool {
 /// 228. Summary Ranges（汇总区间）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个 **无重复元素** 的 **有序** 整数数组 `nums`。返回 **恰好覆盖数组中所有数字** 的 **最小有序** 区间范围列表。
 /// **element ** **** `nums`。 **in all ** **minimum ** interval scope 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 单次遍历
-/// - **JIT optimization **:
+/// - **JIT optimization**: single traversal
 /// - **内存优化**: 使用 Vec 存储结果
-/// - **memory optimization **: Vec result
+/// - **memoryoptimization**: use Vec result
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn summary_ranges(nums: Vec<i32>) -> Vec<String> {
     if nums.is_empty() {
         return Vec::new();
@@ -581,7 +582,7 @@ pub fn summary_ranges(nums: Vec<i32>) -> Vec<String> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有数组类问题
-/// all problem
+/// Get hasarrayproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

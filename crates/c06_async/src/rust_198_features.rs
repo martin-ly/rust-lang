@@ -1,5 +1,5 @@
 //! Rust 1.98 Nightly 前瞻 —— 异步迭代与生成器
-//! Rust 1.98 Nightly before —— async and
+//! Rust 1.98 Nightly front async generator
 #![allow(clippy::incompatible_msrv)]
 
 use std::async_iter::AsyncIterator;
@@ -10,11 +10,11 @@ use std::task::{Context, Poll};
 /// # Rust 1.98 Nightly async feature before
 ///
 /// 本模块展示 nightly 1.98 中的前沿异步特性：
-/// This module demonstrates nightly 1.98 in before async feature ：
+/// This module demonstrates nightly 1.98 frontasyncfeatures
 /// - `for await` 循环 — 原生异步迭代语法糖
 /// - `for await` circulation — async
 /// - `AsyncIterator` trait — 标准异步迭代器接口
-/// - `AsyncIterator` trait — standard async
+/// - `AsyncIterator` trait standardasynciterator interface
 /// - `gen` 块与异步流的结合
 /// - `gen` and async stream
 ///
@@ -34,7 +34,7 @@ pub struct CountingAsyncIter {
 
 impl CountingAsyncIter {
     /// 创建新的计数异步迭代器
-    /// async
+    /// Create new asynciterator
     pub fn new(start: i32, end: i32) -> Self {
         Self { current: start, end }
     }
@@ -56,7 +56,7 @@ impl AsyncIterator for CountingAsyncIter {
 }
 
 /// 异步迭代器包装器：对 item 应用变换函数
-/// async ：to item application transformation function
+/// asynciterator item application function
 pub struct MapAsyncIter<I, F> {
     inner: I,
     f: F,
@@ -123,7 +123,7 @@ impl Rust198AsyncFeatures {
     }
 
     /// 使用 `for await` 实现异步流式批处理
-    /// `for await` async stream
+    /// use `for await` implementationasyncflow processing
     ///
     /// 从异步迭代器读取数据，当累积 `batch_size` 个元素时 yield 一批。
     /// from async ，when `batch_size` element yield 。

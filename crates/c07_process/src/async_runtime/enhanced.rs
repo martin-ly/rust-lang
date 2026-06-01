@@ -16,7 +16,7 @@ use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, Semaphore, mpsc, o
 use tokio::time::timeout;
 
 /// 增强的异步进程管理器
-/// async process
+/// strongasyncprocess manager
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedAsyncProcessManager {
@@ -68,7 +68,7 @@ pub struct ProcessMetrics {
 }
 
 /// 性能统计信息
-/// performance
+/// performance information
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 #[derive(Debug, Clone, Default)]
@@ -103,7 +103,7 @@ pub struct ErrorRecovery {
 }
 
 /// 重试策略
-/// strategy
+/// Retry strategy
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
@@ -163,7 +163,7 @@ enum EnhancedAsyncCommand {
 #[cfg(feature = "async")]
 impl EnhancedAsyncProcessManager {
     /// 创建新的增强异步进程管理器
-    /// async process
+    /// Create new strongasyncprocessmanager
     pub async fn new(max_concurrent_processes: usize) -> ProcessResult<Self> {
         let (command_sender, command_receiver) = mpsc::unbounded_channel();
         let processes = Arc::new(TokioRwLock::new(HashMap::new()));
@@ -278,7 +278,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步获取进程信息
-    /// async process
+    /// asyncgetprocess information
     pub async fn get_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -334,7 +334,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 获取性能统计信息（使用 Rust 1.90 改进的模式匹配）
-    /// performance （ Rust 1.90 ）
+    /// Get performanceinformationuse Rust 1.90 improvementspattern
     pub async fn get_performance_stats(&self) -> ProcessResult<PerformanceStats> {
         let processes = self.processes.read().await;
         let mut stats = PerformanceStats::default();
@@ -372,7 +372,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步清理资源
-    /// async
+    /// asynccleanup resource
     pub async fn cleanup(&self) -> ProcessResult<()> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -512,7 +512,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步读取标准错误
-    /// async standard error
+    /// asyncstandard error
     async fn read_stderr(&self, pid: u32) -> ProcessResult<Vec<u8>> {
         let mut processes = self.processes.write().await;
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -535,7 +535,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 命令处理器
-    /// command
+    /// Command processor
     async fn command_handler(
         mut receiver: mpsc::UnboundedReceiver<EnhancedAsyncCommand>,
         processes: Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,

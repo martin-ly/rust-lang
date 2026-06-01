@@ -289,6 +289,7 @@ pub struct ConceptualLockFreeQueue<T> {
 impl<T> ConceptualLockFreeQueue<T> {
     /// 创建空队列
     /// Creates空队列
+    /// Createsemptyqueue
     pub fn new() -> Self {
         let dummy = Box::into_raw(Box::new(AtomicNode {
             next: AtomicPtr::new(std::ptr::null_mut()),

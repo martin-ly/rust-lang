@@ -1,6 +1,5 @@
 //! Portable SIMD 向量化操作
-//!
-//! 本模块展示 Rust 的向量化编程：
+//! Portable SIMD vector operation
 //! This module demonstrates Rust vectorization ：
 //! - `std::simd` (portable_simd): 跨平台 SIMD 抽象（需要 nightly feature `portable_simd`）
 //! - `std::arch`: 平台特定的 SIMD 指令（stable）
@@ -10,7 +9,7 @@
 //!
 //! - 启用 `portable_simd` feature 时，使用 `core::simd` 进行跨平台 SIMD 编程
 //! - 默认情况下，使用 `std::arch::x86_64` 的 SSE2/AVX 回退或纯标量实现
-//! - situation under ， `std::arch::x86_64` SSE2/AVX or
+//! - loweruse `std::arch::x86_64` SSE2/AVX implementation
 
 #[cfg(feature = "portable_simd")]
 pub mod portable {

@@ -1,5 +1,5 @@
 //! 并发性能优化实践示例
-//! concurrency performance optimization example
+//! concurrencyoptimizationpractice example
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;

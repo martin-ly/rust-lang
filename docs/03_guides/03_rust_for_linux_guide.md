@@ -1,4 +1,6 @@
 # Rust for Linux 指南
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [A]
 >
 > **层次定位**: L3-L7 高级-前沿 / 内核开发应用域
@@ -12,7 +14,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust for Linux 指南](#rust-for-linux-指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [核心概念](#核心概念)
     - [内核 Rust vs 用户态 Rust](#内核-rust-vs-用户态-rust)

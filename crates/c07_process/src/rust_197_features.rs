@@ -44,23 +44,21 @@ impl Rust197ProcessFeatures {
     }
 
     /// 使用 `File::set_modified` 快捷设置修改时间
-    /// `File::set_modified` time
+    /// use `File::set_modified` fastset time
     pub fn set_modified_time(path: &str, time: SystemTime) -> io::Result<()> {
         let file = File::options().write(true).open(path)?;
         file.set_modified(time)
     }
 
     /// 创建 `io::ErrorKind::QuotaExceeded` 错误
-    ///
-    /// 表示磁盘配额已耗尽。
+    /// create `io::ErrorKind::QuotaExceeded` error
     /// represent 。
     pub fn quota_exceeded_error() -> io::ErrorKind {
         io::ErrorKind::QuotaExceeded
     }
 
     /// 创建 `io::ErrorKind::CrossesDevices` 错误
-    ///
-    /// 表示操作会跨越设备边界（例如跨文件系统的 rename）。
+    /// create `io::ErrorKind::CrossesDevices` error
     /// represent edge （for example file system rename）。
     pub fn crosses_devices_error() -> io::ErrorKind {
         io::ErrorKind::CrossesDevices

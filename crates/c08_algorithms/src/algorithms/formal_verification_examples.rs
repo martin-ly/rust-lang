@@ -1,8 +1,8 @@
 //! # 算法形式化验证与注释示例
-//! # algorithm and example
+//! # algorithmformalverify example
 //!
 //! 本模块展示如何为算法添加：
-//! This module demonstrates as algorithm ：
+//! This module demonstrates algorithm
 //! - 完整的数学注释
 //! - complete
 //! - 形式化前置/后置条件
@@ -10,9 +10,9 @@
 //! - 循环不变量
 //! - circulation variable
 //! - 复杂度分析
-//! - complex analyze
+//! - complexity analysis
 //! - 正确性证明
-//! -
+//! - correctness proof
 //!
 //! 对标 Rust 1.90 特性，结合形式化方法。
 //! to Rust 1.90 feature ，method 。
@@ -22,12 +22,12 @@ use std::cmp::Ordering;
 /// # （this ）
 ///
 /// ## 形式化规约
-/// ##
+/// ## Formal Specification
 ///
 /// **前置条件** (Precondition):
 /// ```text
 /// ∀i ∈ [0, n-2]. arr[i] ≤ arr[i+1]  // 数组已排序
-/// ∀i ∈ [0, n-2]. arr[i] ≤ arr[i+1] // ordering
+/// i [0, n-2]. arr[i] arr[i+1] // array sort
 /// ```
 ///
 /// **后置条件** (Postcondition):
@@ -37,7 +37,7 @@ use std::cmp::Ordering;
 /// ```
 ///
 /// ## 复杂度分析
-/// ## complex analyze
+/// ## Complexity Analysis
 ///
 /// - **时间复杂度**: O(log n)
 /// - **time complexity **: O(log n)
@@ -167,36 +167,36 @@ pub fn binary_search_verified<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 /// # insertion sort （complete ）
 ///
 /// ## 形式化规约
-/// ##
+/// ## Formal Specification
 ///
 /// **前置条件**:
 /// **before condition **:
 /// ```text
 /// arr: &mut [T]  // 任意可比较元素数组
-/// arr: &mut [T] // element
+/// arr: &mut [T] // array
 /// ```
 ///
 /// **后置条件**:
 /// **after condition **:
 /// ```text
 /// 1. ∀i ∈ [0, n-2]. arr[i] ≤ arr[i+1]  // 已排序
-/// 2. multiset(arr_after) = multiset(arr_before)  // 保持元素集合
+/// 1. i [0, n-2]. arr[i] arr[i+1] // sort
 /// ```
 ///
 /// ## 复杂度分析
-/// ## complex analyze
+/// ## Complexity Analysis
 ///
 /// - **时间复杂度**:
 /// - **time complexity **:
 ///   - 最好情况: O(n) - 已排序
-///   - best situation : O(n) - ordering
+/// - best: O(n) - sort
 ///   - 平均情况: O(n²) - 随机排列
 ///   - situation : O(n²) - arrangement
 ///   - 最坏情况: O(n²) - 逆序
 ///   - worst situation : O(n²) -
 ///
 /// - **空间复杂度**: O(1) - 原地排序
-/// - **space complexity **: O(1) - ordering
+/// - **spacecomplexity**: O(1) - sort
 ///
 /// ## 循环不变量
 /// ## circulation variable
@@ -206,7 +206,7 @@ pub fn binary_search_verified<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 /// ```text
 /// I_outer(i):
 ///   arr[0..i] 已排序
-///   arr[0..i] ordering
+/// arr[0..i] sort
 ///   ∧ multiset(arr[0..n]) = multiset(arr_original)
 /// ```
 ///
@@ -215,14 +215,14 @@ pub fn binary_search_verified<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 /// ```text
 /// I_inner(j):
 ///   arr[0..i+1] 除 arr[j] 外已排序
-///   arr[0..i+1] arr[j] outside ordering
+/// arr[0..i+1] arr[j] outer sort
 ///   ∧ arr[j] 是待插入元素
 ///   ∧ arr[j] element
 ///   ∧ arr[j+1..i+1] > arr[j]
 /// ```
 ///
 /// ## 正确性证明
-/// ##
+/// ## correctness proof
 ///
 /// ```text
 /// 外层循环：
@@ -236,7 +236,7 @@ pub fn binary_search_verified<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 /// 维护 (i → i+1):
 /// (i → i+1):
 ///   假设 arr[0..i] 已排序
-///   hypothesize arr[0..i] ordering
+/// false arr[0..i] sort
 ///   执行内层循环插入 arr[i]
 ///   inside circulation arr[i]
 ///   结果 arr[0..i+1] 已排序 ✓
@@ -312,7 +312,7 @@ pub fn insertion_sort_verified<T: Ord>(arr: &mut [T]) {
 /// # merge sort （divide and conquer algorithm ）
 ///
 /// ## 形式化规约
-/// ##
+/// ## Formal Specification
 ///
 /// **递归定义**:
 /// **definition **:
@@ -326,7 +326,7 @@ pub fn insertion_sort_verified<T: Ord>(arr: &mut [T]) {
 /// ```
 ///
 /// ## 复杂度分析
-/// ## complex analyze
+/// ## Complexity Analysis
 ///
 /// **递归关系**:
 /// ****:
@@ -350,7 +350,7 @@ pub fn insertion_sort_verified<T: Ord>(arr: &mut [T]) {
 /// **空间复杂度**: O(n)
 /// **space complexity **: O(n)
 /// - 需要临时数组存储合并结果
-/// - temporary and result
+/// - needtemporaryarray result
 ///
 /// ## 正确性证明（结构归纳）
 /// ## （structure summarize ）
@@ -373,9 +373,9 @@ pub fn insertion_sort_verified<T: Ord>(arr: &mut [T]) {
 ///   2. 由归纳假设:
 ///   2. summarize hypothesize :
 ///      left' = MergeSort(left) 已排序
-///      right' = MergeSort(right) 已排序
+/// left' = MergeSort(left) sort
 ///   3. result = merge(left', right') 已排序
-///      （merge的正确性见下）
+/// 3. result = merge(left', right') sort
 ///      （mergeunder ）
 ///   4. 因此 MergeSort(arr) 正确 ✓
 /// ```
@@ -389,7 +389,7 @@ pub fn insertion_sort_verified<T: Ord>(arr: &mut [T]) {
 /// I(i, j):
 ///   result[0..i+j] 包含 left[0..i] ∪ right[0..j] 的元素
 ///   ∧ result[0..i+j] 已排序
-/// ```
+/// result[0..i+j] sort
 ///
 /// **证明**:
 /// ****:
@@ -434,7 +434,7 @@ pub fn merge_sort_verified<T: Ord + Clone>(arr: Vec<T>) -> Vec<T> {
 }
 
 /// 合并两个已排序数组
-/// and ordering
+/// sort array
 ///
 /// **前置条件**:
 /// **before condition **:
@@ -476,7 +476,7 @@ fn merge_verified<T: Ord + Clone>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
 /// # quick sort （ordering ）
 ///
 /// ## 形式化规约
-/// ##
+/// ## Formal Specification
 ///
 /// **递归定义**:
 /// **definition **:
@@ -504,7 +504,7 @@ fn merge_verified<T: Ord + Clone>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
 /// ```
 ///
 /// ## 复杂度分析
-/// ## complex analyze
+/// ## Complexity Analysis
 ///
 /// **最好/平均情况**: O(n log n)
 /// **best /situation **: O(n log n)
@@ -529,7 +529,7 @@ fn merge_verified<T: Ord + Clone>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
 /// - stack （situation ）
 ///
 /// ## 正确性证明
-/// ##
+/// ## correctness proof
 ///
 /// ```text
 /// 基础情况 (|arr| ≤ 1):
@@ -551,11 +551,11 @@ fn merge_verified<T: Ord + Clone>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
 ///
 ///   2. QuickSort(arr[0..pivot_idx])
 ///      由归纳假设，左半部分已排序
-///      summarize hypothesize ，part ordering
+/// falseleft sort
 ///
 ///   3. QuickSort(arr[pivot_idx+1..])
 ///      由归纳假设，右半部分已排序
-///      summarize hypothesize ，part ordering
+/// falseright sort
 ///
 ///   4. 组合：left_sorted ≤ pivot ≤ right_sorted
 ///      整个数组已排序 ✓
@@ -584,7 +584,7 @@ pub fn quick_sort_verified<T: Ord>(arr: &mut [T]) {
 ///   arr[0..store) ≤ pivot
 ///   arr[store..i) > pivot
 ///   arr[i..] 未处理
-///   arr[i..]
+/// arr[i..] processing
 /// ```
 #[inline]
 fn partition_verified<T: Ord>(arr: &mut [T]) -> usize {
@@ -690,7 +690,7 @@ mod tests {
     }
 
     /// 验证排序算法的性质
-    /// sorting algorithm
+    /// Verify sortalgorithm
     #[test]
     fn test_sorting_properties() {
         let test_cases = vec![
@@ -723,7 +723,7 @@ mod tests {
     }
 
     /// 检查数组是否已排序
-    /// ordering
+    /// arraywhether sort
     fn is_sorted<T: Ord>(arr: &[T]) -> bool {
         arr.windows(2).all(|w| w[0] <= w[1])
     }

@@ -2,7 +2,7 @@
 //! neural network
 //!
 //! 本模块提供了基础的神经网络实现，包括：
-//! This module provides foundation neural network ，：
+//! This module provides implementationincluding
 //! - 多层感知机 (MLP)
 //! - (MLP)
 //! - 前向传播
@@ -12,7 +12,7 @@
 use super::*;
 
 /// 激活函数类型
-/// activation function type
+/// function type
 #[derive(Debug, Clone)]
 pub enum ActivationFunction {
     Sigmoid,
@@ -23,7 +23,7 @@ pub enum ActivationFunction {
 
 impl ActivationFunction {
     /// 计算激活函数值
-    /// activation function
+    /// Compute functionvalue
     pub fn apply(&self, x: f64) -> f64 {
         match self {
             ActivationFunction::Sigmoid => 1.0 / (1.0 + (-x).exp()),
@@ -34,7 +34,7 @@ impl ActivationFunction {
     }
 
     /// 计算激活函数的导数
-    /// activation function
+    /// Compute function
     pub fn derivative(&self, x: f64) -> f64 {
         match self {
             ActivationFunction::Sigmoid => {
@@ -114,19 +114,19 @@ impl Layer {
     }
 
     /// 获取权重的可变引用
-    /// reference
+    /// Get mutablereference
     pub fn weights_mut(&mut self) -> &mut Vec<Vec<f64>> {
         &mut self.weights
     }
 
     /// 获取偏置的可变引用
-    /// reference
+    /// Get mutablereference
     pub fn biases_mut(&mut self) -> &mut Vec<f64> {
         &mut self.biases
     }
 
     /// 获取激活函数
-    /// activation function
+    /// Get function
     pub fn activation(&self) -> &ActivationFunction {
         &self.activation
     }
@@ -143,12 +143,13 @@ pub struct MLP {
     /// learning rate
     learning_rate: f64,
     /// 是否已训练
+    /// Whether trained
     is_fitted: bool,
 }
 
 impl MLP {
     /// 创建新的 MLP
-    /// MLP
+    /// Create new MLP
     pub fn new(
         layer_sizes: &[usize],
         activations: Vec<ActivationFunction>,

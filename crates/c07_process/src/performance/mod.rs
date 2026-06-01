@@ -1,5 +1,5 @@
 //! 性能优化模块
-//! performance optimization module
+//! performanceoptimization module
 //!
 //! 这个模块提供了全面的性能优化功能，包括内存使用优化、
 //! module surface performance optimization functionality ，memory optimization 、

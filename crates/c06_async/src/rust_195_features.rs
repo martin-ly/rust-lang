@@ -1,15 +1,15 @@
 //! Rust 1.95.0 异步编程新特性实现模块
-//! Rust 1.95.0 async feature module
+//! Rust 1.95.0 asyncnewfeaturesimplementation module
 //!
 //! 本模块展示了 Rust 1.95.0 在异步编程场景中的应用，包括：
-//! This module demonstrates Rust 1.95.0 in async scenario in application ，：
+//! This module demonstrates Rust 1.95.0 asyncapplicationincluding
 //! - `if let` guards 在异步流处理中的应用 ⭐
 //! - `if let` guards in async stream in application ⭐
 //! - `ControlFlow::is_break` / `is_continue` (const) 在异步状态机中的应用
-//! - Tokio 1.52 `task::Builder` 命名任务 API (需 `tokio_unstable`)
+//! - `ControlFlow::is_break` / `is_continue` (const) asyncstate machine application
 //!
 //! # 版本信息
-//! # this
+//! # Version Info
 //! - Rust版本: 1.95.0
 //! - Rustthis : 1.95.0
 //! - 稳定日期: 2026-04-16
@@ -17,7 +17,7 @@
 //! - Edition: 2024
 //!
 //! # 参考
-//! # reference
+//! # References
 //! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
 
 use std::ops::ControlFlow;
@@ -27,7 +27,7 @@ use std::ops::ControlFlow;
 // ============================================================================
 
 /// # `if let` Guards 在异步场景中的深度应用
-/// # `if let` Guards in async scenario in application
+/// # `if let` Guards async application
 ///
 /// `if let` guards (Rust 1.95.0 稳定) 在处理异步结果、流数据、状态机时
 /// `if let` guards (Rust 1.95.0 ) in async result 、stream 、state machine
@@ -37,6 +37,7 @@ pub struct AsyncIfLetGuardExamples;
 
 impl AsyncIfLetGuardExamples {
     /// 解析超时配置字符串
+    /// configuration string
     pub fn parse_timeout_ms(input: Option<&str>) -> Result<u64, &'static str> {
         match input {
             Some(s)
@@ -53,7 +54,7 @@ impl AsyncIfLetGuardExamples {
     }
 
     /// 评估异步任务结果：`Result<Option<T>>` 扁平化处理
-    /// async task result ：`Result<Option<T>>`
+    /// asynctaskresult`Result<Option<T>>` processing
     pub fn evaluate_task_result(result: Result<Option<u32>, &'static str>) -> &'static str {
         match result {
             Ok(Some(0)) => "任务成功完成",
@@ -218,7 +219,7 @@ impl AsyncControlFlowExamples {
     }
 
     /// 批量任务处理：部分成功模式
-    /// task ：part
+    /// taskhandling pattern
     pub fn process_batch_results(
         results: &[Result<i32, String>],
     ) -> ControlFlow<Vec<String>, Vec<i32>> {
@@ -253,7 +254,7 @@ impl AsyncControlFlowExamples {
 /// - **调试效率**: tracing 日志中直接显示任务名称
 /// - **efficiency **: tracing in display task
 /// - **性能分析**: 性能分析工具可按任务名聚合数据
-/// - **performance analyze **: performance analyze tool task aggregation
+/// - **performanceanalysis**: performanceanalysistask data
 ///
 /// # 使用前提
 /// # prerequisite
@@ -390,7 +391,7 @@ impl NamedTaskExamples {
     }
 
     /// 获取命名任务在 tokio-console 中的展示说明
-    /// task in tokio-console in explain
+    /// Get task tokio-console demonstrate
     ///
     /// 返回一段文档字符串，说明如何在 tokio-console 中查看命名任务。
     /// ，explain in tokio-console in task 。

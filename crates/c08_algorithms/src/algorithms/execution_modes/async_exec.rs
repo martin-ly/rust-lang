@@ -1,8 +1,8 @@
 //! # 异步算法执行模式
-//! # async algorithm
+//! # asyncalgorithmexecution pattern
 //!
 //! 本模块实现异步算法执行，充分利用 Rust 1.90 的异步特性。
-//! this module async algorithm ， Rust 1.90 async feature 。
+//! This module implements asyncalgorithmexecution Rust 1.90 asyncfeatures
 //! 适用于 I/O 密集型任务和需要非阻塞执行的场景。
 //! I/O task and scenario 。
 
@@ -20,7 +20,7 @@ pub struct AsyncExecutor;
 
 impl AsyncExecutor {
     /// 执行异步算法并测量性能
-    /// async algorithm and performance
+    /// executionasyncalgorithm performance
     pub async fn execute_with_metrics<A, T, R>(
         algorithm: A,
         input: T,
@@ -79,7 +79,7 @@ impl AsyncExecutor {
     }
 
     /// 批量执行异步算法
-    /// async algorithm
+    /// executionasync algorithm
     pub async fn execute_batch<A, T, R>(
         algorithm: A,
         inputs: Vec<T>,
@@ -148,7 +148,7 @@ impl AsyncExecutor {
     }
 
     /// 执行异步算法并返回详细统计信息
-    /// async algorithm and
+    /// executionasyncalgorithm information
     pub async fn execute_with_stats<A, T, R>(
         algorithm: A,
         input: T,
@@ -196,7 +196,7 @@ impl AsyncExecutor {
 }
 
 /// 异步执行统计信息
-/// async
+/// asyncexecution information
 #[derive(Debug, Clone)]
 pub struct AsyncExecutionStats<T> {
     pub results: Vec<ExecutionResult<T>>,
@@ -208,7 +208,7 @@ pub struct AsyncExecutionStats<T> {
 
 impl<T> AsyncExecutionStats<T> {
     /// 获取最小执行时间
-    /// minimum time
+    /// Get minimum execution time
     pub fn min_execution_time(&self) -> Duration {
         self.results
             .iter()
@@ -218,7 +218,7 @@ impl<T> AsyncExecutionStats<T> {
     }
 
     /// 获取最大执行时间
-    /// maximum time
+    /// Get maximum execution time
     pub fn max_execution_time(&self) -> Duration {
         self.results
             .iter()
@@ -228,7 +228,7 @@ impl<T> AsyncExecutionStats<T> {
     }
 
     /// 获取最小内存使用
-    /// minimum memory
+    /// Get minimummemoryuse
     pub fn min_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -238,7 +238,7 @@ impl<T> AsyncExecutionStats<T> {
     }
 
     /// 获取最大内存使用
-    /// maximum memory
+    /// Get maximummemoryuse
     pub fn max_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -248,7 +248,7 @@ impl<T> AsyncExecutionStats<T> {
     }
 
     /// 计算性能稳定性（变异系数）
-    /// performance （coefficient ）
+    /// Compute performance
     pub fn performance_stability(&self) -> f64 {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
@@ -265,7 +265,7 @@ pub struct AsyncBenchmarker;
 
 impl AsyncBenchmarker {
     /// 运行异步基准测试
-    /// Run async benchmark
+    /// Run asynctest
     pub async fn benchmark<A, T, R>(
         algorithm: A,
         test_cases: Vec<AsyncBenchmarkTestCase<T>>,
@@ -296,7 +296,7 @@ impl AsyncBenchmarker {
     }
 
     /// 运行并发基准测试
-    /// Run concurrency benchmark
+    /// Run concurrenttest
     pub async fn benchmark_concurrent<A, T, R>(
         algorithm: A,
         test_cases: Vec<AsyncBenchmarkTestCase<T>>,
@@ -353,7 +353,7 @@ pub struct AsyncBenchmarkTestCase<T> {
 }
 
 /// 异步基准测试结果
-/// async benchmark result
+/// asynctest result
 #[derive(Debug, Clone)]
 pub struct AsyncBenchmarkResult<T> {
     pub test_case: String,
@@ -362,7 +362,7 @@ pub struct AsyncBenchmarkResult<T> {
 }
 
 /// 异步基准测试结果集合
-/// async benchmark result set
+/// asynctestresult set
 #[derive(Debug, Clone)]
 pub struct AsyncBenchmarkResults<T> {
     pub results: Vec<AsyncBenchmarkResult<T>>,
@@ -370,7 +370,7 @@ pub struct AsyncBenchmarkResults<T> {
 
 impl<T> AsyncBenchmarkResults<T> {
     /// 获取最佳性能的测试用例
-    /// performance
+    /// Get best performance test case
     pub fn best_performance(&self) -> Option<&AsyncBenchmarkResult<T>> {
         self.results
             .iter()
@@ -378,7 +378,7 @@ impl<T> AsyncBenchmarkResults<T> {
     }
 
     /// 获取最稳定性能的测试用例
-    /// performance
+    /// Get performancetest
     pub fn most_stable(&self) -> Option<&AsyncBenchmarkResult<T>> {
         self.results.iter().min_by(|a, b| {
             a.stats
@@ -463,7 +463,7 @@ impl<T> Default for AsyncPipeline<T> {
 
 impl<T> AsyncPipeline<T> {
     /// 创建新的异步管道
-    /// async pipe
+    /// Create new async
     pub fn new() -> Self {
         Self { stages: Vec::new() }
     }
@@ -496,7 +496,7 @@ impl<T> AsyncPipeline<T> {
 }
 
 /// 获取当前内存使用量（简化实现）
-/// when before memory （）
+/// Get current memory usage (simplified implementation)
 fn get_memory_usage() -> usize {
     // 在实际应用中，这里应该使用更精确的内存测量方法
     std::mem::size_of::<usize>() * 1024 // 占位实现

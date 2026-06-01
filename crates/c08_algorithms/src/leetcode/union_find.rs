@@ -2,13 +2,13 @@
 //! LeetCode disjoint set union algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的并查集类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
-//! this module disjoint set union LeetCode ， Rust 1.92 feature 。
+//! This module implements classic LeetCode Rust 1.92 newfeatures
 //!
 //! ## Rust 1.92 特性应用
-//! ## Rust 1.92 feature application
+//! ## Rust 1.92 Feature Application
 //!
 //! 1. **性能优化**: 使用路径压缩和按秩合并优化
-//! 1. **performance optimization **: and and optimization
+//! 1. **performanceoptimization**: usepath optimization
 //! 2. **内存优化**: 高效的并查集数据结构
 //! 2. **memory optimization **: efficient disjoint set union data structure
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
@@ -69,21 +69,21 @@ impl UnionFind {
 /// 128. Longest Consecutive Sequence（最长连续序列）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
 /// ordering nums ，sequence （sequence element in in ）。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **哈希表优化**: 使用 HashSet 快速查找
 /// - **optimization **: HashSet fast
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
     if nums.is_empty() {
         return 0;
@@ -114,17 +114,17 @@ pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
 /// 200. Number of Islands（quantity ）- disjoint set union
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
 /// '1'（）and '0'（），in quantity 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **并查集优化**: 使用并查集合并相邻的陆地
 /// - **disjoint set union optimization **: disjoint set union and
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(m * n * α(m * n))
 /// - time complexity : O(m * n * α(m * n))
 /// - 空间复杂度: O(m * n)
@@ -168,23 +168,23 @@ pub fn num_islands_union_find(grid: Vec<Vec<char>>) -> i32 {
 /// 547. Number of Provinces（省份数量）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 有 n 个城市，其中一些彼此相连，另一些没有相连。
 /// n ，its in this ，。
 /// 给你一个 n x n 的矩阵 isConnected ，返回矩阵中 省份 的数量。
 /// n x n isConnected ，in quantity 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **并查集优化**: 使用并查集合并相连的城市
 /// - **disjoint set union optimization **: disjoint set union and
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n² * α(n))
 /// - time complexity : O(n² * α(n))
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn find_circle_num(is_connected: Vec<Vec<i32>>) -> i32 {
     let n = is_connected.len();
     let mut uf = UnionFind::new(n);
@@ -203,23 +203,23 @@ pub fn find_circle_num(is_connected: Vec<Vec<i32>>) -> i32 {
 /// 684. Redundant Connection（冗余连接）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定往一棵 n 个节点的树中添加一条边后的图。
 /// n node tree in edge after 。
 /// 请找出一条可以删去的边，删除后可使得剩余部分是一个有着 n 个节点的树。
 /// can edge ，after part n node tree 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **并查集优化**: 使用并查集检测环
 /// - **disjoint set union optimization **: disjoint set union
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n * α(n))
 /// - time complexity : O(n * α(n))
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn find_redundant_connection(edges: Vec<Vec<i32>>) -> Vec<i32> {
     let n = edges.len();
     let mut uf = UnionFind::new(n + 1);
@@ -241,17 +241,17 @@ pub fn find_redundant_connection(edges: Vec<Vec<i32>>) -> Vec<i32> {
 /// 721. Accounts Merge（账户合并）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个列表 accounts，合并具有共同邮箱的账户。
 /// accounts，and has 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **并查集优化**: 使用并查集合并账户
 /// - **disjoint set union optimization **: disjoint set union and
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n * k * log(n * k))
 /// - time complexity : O(n * k * log(n * k))
 /// - 空间复杂度: O(n * k)
@@ -298,7 +298,7 @@ pub fn accounts_merge(accounts: Vec<Vec<String>>) -> Vec<Vec<String>> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有并查集类问题
-/// all disjoint set union problem
+/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

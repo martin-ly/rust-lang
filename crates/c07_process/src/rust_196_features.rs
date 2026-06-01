@@ -1,15 +1,15 @@
 //! # Rust 1.96.0 特性 — 进程管理与系统编程模块
-//! # Rust 1.96.0 feature — process and system module
+//! # Rust 1.96.0 features processmanagementsystem module
 //!
 //! 本模块展示 Rust 1.96.0 中与进程管理、系统编程、懒加载相关的稳定特性：
-//! This module demonstrates Rust 1.96.0 in and process 、system 、feature ：
+//! This module demonstrates Rust 1.96.0 processmanagementsystemfeatures
 //! - `From<T> for LazyCell<T, F>` / `LazyLock<T, F>` — 值直接构造懒加载容器
-//! - `assert_matches!` / `debug_assert_matches!` — 模式匹配断言
+//! - `From<T> for LazyCell<T, F>` / `LazyLock<T, F>` value container
 //! - `core::range::Range` — 进程 ID 范围、资源限制范围的可复用迭代
 //! - `core::range::Range` — process ID scope 、scope
 //!
 //! # 版本信息
-//! # this
+//! # Version Info
 //! - Rust 版本: 1.96.0+ stable
 //! - 稳定日期: 2026-05-28
 //! - date : 2026-05-28
@@ -24,7 +24,7 @@ use std::sync::LazyLock;
 // ============================================================================
 
 /// # 懒加载容器的 `From` 实现
-/// # `From`
+/// # container `From` implementation
 ///
 /// Rust 1.96 稳定了从值直接构造 `LazyCell` 和 `LazyLock` 的 `From` 实现，
 /// Rust 1.96 from `LazyCell` and `LazyLock` `From` ，
@@ -67,7 +67,7 @@ impl LazyFromExamples {
 // ============================================================================
 
 /// # 模式匹配断言在进程管理中的应用
-/// # in process in application
+/// # patternprocessmanagement application
 ///
 /// `assert_matches!` 允许对 `Result`、`Option` 和自定义枚举进行模式匹配断言，
 /// `assert_matches!` to `Result`、`Option` and definition enum ，
@@ -77,14 +77,14 @@ pub struct ProcessAssertMatchesExamples;
 
 impl ProcessAssertMatchesExamples {
     /// 验证进程退出状态
-    /// process state
+    /// Verify processstatus
     pub fn verify_exit_status(status: Result<i32, &'static str>) -> bool {
         assert_matches!(status, Ok(code) if code >= 0);
         true
     }
 
     /// 验证进程信号
-    /// process
+    /// Verify process
     pub fn verify_signal(signal: Option<i32>) -> bool {
         assert_matches!(signal, Some(sig) if sig > 0 && sig < 64);
         true
@@ -96,7 +96,7 @@ impl ProcessAssertMatchesExamples {
 // ============================================================================
 
 /// # `core::range::Range` 在进程资源管理中的应用
-/// # `core::range::Range` in process in application
+/// # `core::range::Range` processresourcemanagement application
 ///
 /// Rust 1.96.0 的 `core::range::Range` 实现 `Copy`，可多次迭代，
 /// 适合表示进程 ID 范围、内存地址范围、资源限制等。
@@ -105,7 +105,7 @@ pub struct ProcessRangeExamples;
 
 impl ProcessRangeExamples {
     /// 验证 PID 是否在有效范围内
-    /// PID in effective scope inside
+    /// Verify PID whetherhasinner
     pub fn is_valid_pid(pid: u32) -> bool {
         use core::range::Range;
         let valid_range: Range<u32> = Range {

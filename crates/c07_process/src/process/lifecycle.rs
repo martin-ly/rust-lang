@@ -2,14 +2,14 @@ use crate::error::ProcessResult;
 use crate::types::{ProcessInfo, ProcessStatus};
 
 /// 进程生命周期管理器
-/// process lifetime
+/// Process lifecycle manager
 pub struct ProcessLifecycleManager {
     processes: std::collections::HashMap<u32, ProcessInfo>,
 }
 
 impl ProcessLifecycleManager {
     /// 创建新的生命周期管理器
-    /// lifetime
+    /// Create new lifecycle manager
     pub fn new() -> Self {
         Self {
             processes: std::collections::HashMap::new(),
@@ -17,14 +17,14 @@ impl ProcessLifecycleManager {
     }
 
     /// 注册进程
-    /// process
+    /// Register process
     pub fn register_process(&mut self, info: ProcessInfo) -> ProcessResult<()> {
         self.processes.insert(info.pid, info);
         Ok(())
     }
 
     /// 更新进程状态
-    /// process state
+    /// Update process status
     pub fn update_status(&mut self, pid: u32, status: ProcessStatus) -> ProcessResult<()> {
         if let Some(process) = self.processes.get_mut(&pid) {
             process.status = status;
@@ -35,19 +35,19 @@ impl ProcessLifecycleManager {
     }
 
     /// 获取进程信息
-    /// process
+    /// Get process info
     pub fn get_process(&self, pid: u32) -> Option<&ProcessInfo> {
         self.processes.get(&pid)
     }
 
     /// 获取所有进程
-    /// all process
+    /// Get all processes
     pub fn get_all_processes(&self) -> Vec<&ProcessInfo> {
         self.processes.values().collect()
     }
 
     /// 清理已终止的进程
-    /// process
+    /// Cleanup terminated processes
     pub fn cleanup_terminated(&mut self) {
         self.processes.retain(|_, process| {
             process.status != ProcessStatus::Stopped && process.status != ProcessStatus::Zombie

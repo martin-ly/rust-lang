@@ -90,7 +90,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md) - Rust 1.94
+- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/02_iterators.md) - Rust 1.94 引入，1.96+ 可用
 - **async/await** - [03_advanced/async/async_await.md](03_advanced/async/01_async_await.md)
 - **async closure** - [03_advanced/async/async_closure.md](03_advanced/async/02_async_closure.md) - Rust 1.85+
 - **atomics** - [03_advanced/concurrency/atomics.md](03_advanced/concurrency/01_atomics.md)

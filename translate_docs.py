@@ -559,7 +559,7 @@ def process_file(filepath):
         lines = f.readlines()
     modified = False
     new_lines = []
-    for line in lines:
+    for i, line in enumerate(lines):
         new_lines.append(line)
         m = re.match(r'^(\s*(///|//!))(\s*)(.*)$', line)
         if not m:
@@ -569,8 +569,24 @@ def process_file(filepath):
         content = m.group(4).rstrip('\n')
         if not CHINESE_RE.search(content):
             continue
+        # Check if next line is already an English doc comment
+        if i + 1 < len(lines):
+            next_m = re.match(r'^(\s*(///|//!))(\s*)(.*)$', lines[i + 1])
+            if next_m:
+                next_content = next_m.group(4).rstrip('\n')
+                if next_content and not CHINESE_RE.search(next_content):
+                    continue
         translation = translate_line(content)
         if translation:
+            # Check if next line is already this translation or starts with it
+            if i + 1 < len(lines):
+                next_m = re.match(r'^(\s*(///|//!))(\s*)(.*)$', lines[i + 1])
+                if next_m:
+                    next_content = next_m.group(4).rstrip('\n')
+                    if next_content:
+                        first_word = translation.split()[0] if translation.split() else translation
+                        if next_content == translation or next_content.startswith(first_word):
+                            continue
             new_lines.append(f"{prefix}{spaces}{translation}\n")
             modified = True
     if modified:

@@ -1,18 +1,18 @@
 //! 异步运行时集成框架
-//! async runtime framework
+//! asyncruntimeintegration framework
 //!
 //! 本模块提供了一个高级的异步运行时集成框架，支持：
-//! This module provides async runtime framework ，：
+//! This module provides advancedasyncruntimeintegrationsupport
 //! - 多运行时组合和切换
 //! - runtime combination and switching
 //! - 运行时适配器模式
-//! - runtime adapter
+//! - runtime pattern
 //! - 异步同步转换机制
-//! - async synchronous conversion mechanism
+//! - asyncsynchronousconversion mechanism
 //! - 聚合组合设计模式
-//! - aggregation combination design
+//! - design pattern
 //! - 性能监控和优化
-//! - performance and optimization
+//! - performancemonitoring optimization
 use std::sync::Arc;
 use std::time::Duration;
 use std::collections::HashMap;
@@ -36,7 +36,7 @@ pub enum AsyncRuntimeType {
 }
 
 /// 运行时配置
-/// runtime
+/// Run configuration
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeConfig {
     pub runtime_type: AsyncRuntimeType,
@@ -59,7 +59,7 @@ impl Default for RuntimeConfig {
 }
 
 /// 运行时性能指标
-/// runtime performance indicator
+/// Run performance
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeMetrics {
     pub task_count: u64,
@@ -96,7 +96,7 @@ pub trait AsyncTask: Send + Sync {
 }
 
 /// 任务优先级
-/// task
+/// Task priority
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
 pub enum TaskPriority {
     Low = 1,
@@ -106,7 +106,7 @@ pub enum TaskPriority {
 }
 
 /// 运行时适配器接口
-/// runtime adapter
+/// runtime interface
 #[async_trait]
 pub trait RuntimeAdapter: Send + Sync {
     async fn execute_task(&self, task: Box<dyn AsyncTask>) -> Result<String>;
@@ -220,7 +220,7 @@ impl Clone for TokioRuntimeAdapter {
 }
 
 /// 异步运行时集成框架
-/// async runtime framework
+/// asyncruntimeintegration framework
 pub struct AsyncRuntimeIntegrationFramework {
     adapters: Arc<RwLock<HashMap<AsyncRuntimeType, Box<dyn RuntimeAdapter>>>>,
     config: RuntimeConfig,
@@ -266,7 +266,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 注册运行时适配器
-    /// runtime adapter
+    /// Register runtime
     pub async fn register_adapter(&self, adapter: Box<dyn RuntimeAdapter>) -> Result<()> {
         let runtime_type = adapter.get_runtime_type();
         let mut adapters = self.adapters.write().await;
@@ -333,7 +333,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 运行时性能监控
-    /// runtime performance
+    /// Run performancemonitoring
     pub async fn monitor_performance(&self) -> Result<()> {
         let adapters = self.adapters.read().await;
         let mut collector = self.metrics_collector.lock().await;
@@ -385,7 +385,7 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 选择最优运行时
-    /// runtime
+    /// excellent runtime
     async fn select_optimal_runtime(&self, task: &dyn AsyncTask) -> AsyncRuntimeType {
         // 简化的运行时选择逻辑
         match task.get_priority() {
@@ -429,7 +429,7 @@ impl AsyncTask for HealthCheckTask {
 }
 
 /// 示例任务实现
-/// example task
+/// task implementation
 pub struct ExampleTask {
     name: String,
     priority: TaskPriority,
@@ -467,7 +467,7 @@ impl AsyncTask for ExampleTask {
 }
 
 /// 异步同步转换服务
-/// async synchronous conversion
+/// asyncsynchronousconversion service
 pub struct AsyncSyncConversionService {
     thread_pool: Arc<Semaphore>,
     conversion_cache: Arc<RwLock<HashMap<String, String>>>,
@@ -482,7 +482,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 异步到同步转换
-    /// async to synchronous conversion
+    /// Async to synchronous conversion
     pub async fn async_to_sync<T, F>(&self, async_operation: F) -> Result<T>
     where
         F: Future<Output = Result<T>> + Send + 'static,
@@ -493,7 +493,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 同步到异步转换
-    /// synchronous to async conversion
+    /// Synchronous to async conversion
     pub async fn sync_to_async<F, T>(&self, sync_operation: F) -> Result<T>
     where
         F: FnOnce() -> Result<T> + Send + 'static,
@@ -504,7 +504,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 混合转换模式
-    /// conversion
+    /// conversion pattern
     pub async fn hybrid_conversion(&self) -> Result<(String, String)> {
         // 异步操作
         let async_result = self.async_to_sync(async {
@@ -523,7 +523,7 @@ impl AsyncSyncConversionService {
 }
 
 /// 聚合组合设计模式服务
-/// aggregation combination design
+/// designpattern service
 pub struct AggregationCompositionService {
     component_registry: Arc<RwLock<HashMap<String, Box<dyn AsyncComponent + Send + Sync>>>>,
     aggregation_strategies: Arc<RwLock<HashMap<String, AggregationStrategy>>>,
@@ -554,6 +554,7 @@ impl AggregationCompositionService {
     }
 
     /// 注册组件
+    /// Register component
     pub async fn register_component(&self, component: Box<dyn AsyncComponent + Send + Sync>) -> Result<()> {
         let name = component.get_name().to_string();
         let mut registry = self.component_registry.write().await;
@@ -613,7 +614,7 @@ impl AggregationCompositionService {
 }
 
 /// 示例组件实现
-/// example
+/// Example component implementation
 pub struct DataProcessingComponent {
     name: String,
     processing_delay: Duration,
@@ -645,7 +646,7 @@ impl AsyncComponent for DataProcessingComponent {
 }
 
 /// 综合演示函数
-/// synthesize demonstration function
+/// Comprehensive demo function
 pub async fn demonstrate_async_runtime_integration_framework() -> Result<()> {
     println!("🚀 异步运行时集成框架演示");
     println!("================================================");

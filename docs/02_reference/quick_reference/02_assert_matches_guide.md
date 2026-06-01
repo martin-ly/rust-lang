@@ -1,4 +1,6 @@
 # `assert_matches!` / `debug_assert_matches!` 速查指南
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [A]
 > **Rust 版本**: 1.96.0+ Stable
@@ -13,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [`assert_matches!` / `debug_assert_matches!` 速查指南](#assert_matches--debug_assert_matches-速查指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [语法](#语法)
   - [对比：`assert!` vs `assert_matches!`](#对比assert-vs-assert_matches)

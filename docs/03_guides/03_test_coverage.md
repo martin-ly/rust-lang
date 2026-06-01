@@ -1,5 +1,6 @@
 > **权威来源**: [The Rust Programming Language — Ch11](https://doc.rust-lang.org/book/ch11-00-testing.html), [cargo test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html), [cargo-tarpaulin 文档](https://github.com/xd009642/tarpaulin)
 > **分级**: [A]
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Book、cargo test、cargo-tarpaulin 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 
@@ -17,15 +18,15 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [代码覆盖率测试指南](#代码覆盖率测试指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [1. 覆盖率工具选择](#1-覆盖率工具选择)
   - [2. cargo-tarpaulin 使用](#2-cargo-tarpaulin-使用)
     - [安装](#安装)
     - [基本使用](#基本使用)
     - [输出文件](#输出文件)
   - [3. cargo-llvm-cov 使用](#3-cargo-llvm-cov-使用)
-    - [安装](#安装)
-    - [基本使用](#基本使用)
+    - [安装](#安装-1)
+    - [基本使用](#基本使用-1)
   - [4. CI 集成](#4-ci-集成)
     - [与 Codecov 集成](#与-codecov-集成)
   - [5. 覆盖率目标](#5-覆盖率目标)

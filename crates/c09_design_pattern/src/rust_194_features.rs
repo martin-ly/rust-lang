@@ -1,38 +1,38 @@
 //! Rust 1.94.0 设计模式特性实现模块
-//! Rust 1.94.0 design feature module
+//! Rust 1.94.0 designpatternfeaturesimplementation module
 //!
 //! 本模块展示了 Rust 1.94.0 真实特性在设计模式场景中的应用，包括：
-//! This module demonstrates Rust 1.94.0 real feature in design scenario in application ，：
+//! This module demonstrates Rust 1.94.0 truefeaturesdesignpatternapplicationincluding
 //! - array_windows - 切片数组窗口迭代器
-//! - array_windows -
+//! - array_windows - slicearray iterator
 //! - LazyCell/LazyLock 新方法 - get(), get_mut(), force_mut()
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - Peekable 新方法 - next_if_map(), next_if_map_mut()
 //! - char 到 usize 转换 - `TryFrom<char>` for usize
 //!
 //! # 文件信息
-//! #
+//! # File Info
 //! - 文件: rust_194_features.rs
-//! - 创建日期: 2026-03-06
+//! - File: rust_194_features.rs
 //! - date : 2026-03-06
 //! - 版本: 1.0
-//! - this : 1.0
+//! - Version: 1.0
 //! - Rust版本: 1.94.0
-//! - Rustthis : 1.94.0
+//! - Rust Version: 1.94.0
 //! - Edition: 2024
 use std::sync::LazyLock;
 
 // ==================== 1. array_windows - 滑动窗口模式 ====================
 
 /// # 1. array_windows - 滑动窗口模式
-/// # 1. array_windows -
+/// # 1. array_windows - pattern
 ///
 /// Rust 1.94.0 引入了 `array_windows` 方法，可以创建固定大小的滑动窗口迭代器。
 /// Rust 1.94.0 `array_windows` method ，can 。
 /// 这在设计模式中非常有用，特别是需要处理连续数据序列的模式。
 /// in design in useful ，sequence 。
 /// 使用 array_windows 实现滑动窗口日志模式
-/// array_windows
+/// use array_windows implementationlogging pattern
 ///
 /// 展示如何使用 array_windows 实现一个固定大小的滑动窗口日志记录器
 /// array_windows
@@ -43,6 +43,7 @@ pub struct SlidingWindowLogger<const N: usize> {
 
 impl<const N: usize> SlidingWindowLogger<N> {
     /// 创建新的滑动窗口日志记录器
+    /// Create new logging
     pub fn new() -> Self {
         Self { logs: Vec::new() }
     }
@@ -53,7 +54,7 @@ impl<const N: usize> SlidingWindowLogger<N> {
     }
 
     /// 获取最近的 N 条日志作为窗口
-    /// N as
+    /// Get N loggingas
     ///
     /// Rust 1.94.0: 使用 array_windows 获取固定大小的日志窗口
     /// Rust 1.94.0: array_windows
@@ -81,7 +82,7 @@ impl<const N: usize> SlidingWindowLogger<N> {
     }
 
     /// 获取日志数量
-    /// quantity
+    /// Get loggingcount
     pub fn len(&self) -> usize {
         self.logs.len()
     }
@@ -118,7 +119,7 @@ pub struct StateTransitionValidator;
 
 impl StateTransitionValidator {
     /// 验证状态转换序列是否有效
-    /// state conversion sequence effective
+    /// Verify statusconversionwhetherhas
     ///
     /// Rust 1.94.0: 使用 array_windows 检查连续状态转换
     /// Rust 1.94.0: array_windows state conversion
@@ -150,7 +151,7 @@ impl StateTransitionValidator {
 // ==================== 2. LazyLock 新方法 - 单例模式优化 ====================
 
 /// # 2. LazyLock 新方法 - 单例模式优化
-/// # 2. LazyLock method - singleton optimization
+/// # 2. LazyLock newmethod - singlepattern optimization
 ///
 /// Rust 1.94.0 为 LazyLock 添加了新的方法：get(), get_mut(), force_mut()
 /// 这些方法使得在单例模式中更灵活地访问和修改全局状态。
@@ -159,7 +160,7 @@ impl StateTransitionValidator {
 /// LazyLock thread-safe singleton
 ///
 /// Rust 1.94.0: 利用 LazyLock 的新方法实现可变的全局配置
-/// Rust 1.94.0: LazyLock method global
+/// Rust 1.94.0: LazyLock newmethodimplementationmutableglobal configuration
 pub struct GlobalConfig {
     settings: std::collections::HashMap<String, String>,
     version: u32,
@@ -167,6 +168,7 @@ pub struct GlobalConfig {
 
 impl GlobalConfig {
     /// 创建默认配置
+    /// create configuration
     fn new() -> Self {
         let mut settings = std::collections::HashMap::new();
         settings.insert("theme".to_string(), "dark".to_string());
@@ -178,18 +180,20 @@ impl GlobalConfig {
     }
 
     /// 获取配置值
+    /// Get configurationvalue
     pub fn get(&self, key: &str) -> Option<&String> {
         self.settings.get(key)
     }
 
     /// 设置配置值
+    /// Set configurationvalue
     pub fn set(&mut self, key: impl Into<String>, value: impl Into<String>) {
         self.settings.insert(key.into(), value.into());
         self.version += 1;
     }
 
     /// 获取版本号
-    /// this
+    /// Get version
     pub fn version(&self) -> u32 {
         self.version
     }
@@ -201,10 +205,10 @@ static GLOBAL_CONFIG: LazyLock<std::sync::Mutex<GlobalConfig>> =
     LazyLock::new(|| std::sync::Mutex::new(GlobalConfig::new()));
 
 /// 获取全局配置的只读访问
-/// global
+/// Get globalconfiguration
 ///
 /// Rust 1.94.0: 使用 LazyLock::get() 获取已初始化的引用
-/// Rust 1.94.0: LazyLock::get() reference
+/// Rust 1.94.0: use LazyLock::get() getinitial reference
 /// 通过闭包提供安全的只读访问
 pub fn with_config_readonly<F, R>(f: F) -> R
 where
@@ -215,7 +219,7 @@ where
 }
 
 /// 获取全局配置的可变访问
-/// global
+/// Get globalconfigurationmutable
 ///
 /// Rust 1.94.0: 使用 LazyLock 配合 Mutex 实现安全的可变访问
 /// Rust 1.94.0: LazyLock Mutex
@@ -228,7 +232,7 @@ where
 }
 
 /// 使用 LazyLock 实现缓存模式
-/// LazyLock
+/// use LazyLock implementation pattern
 ///
 /// Rust 1.94.0: 利用 LazyLock 的 force_mut() 实现可重新计算的缓存
 /// Rust 1.94.0: LazyLock force_mut()
@@ -247,8 +251,7 @@ impl<T: Default + 'static> ComputedCache<T> {
     }
 
     /// 获取缓存值
-    ///
-    /// Rust 1.94.0: 使用 LazyLock::get() 检查是否已初始化
+    /// Get value
     /// Rust 1.94.0: LazyLock::get()
     pub fn get(&self) -> &T {
         &self.cache
@@ -270,6 +273,7 @@ impl<T: Default + 'static> ComputedCache<T> {
     }
 
     /// 获取重新计算次数
+    /// Get newcompute
     pub fn recompute_count(&self) -> usize {
         self.recompute_count
             .load(std::sync::atomic::Ordering::Relaxed)
@@ -279,7 +283,7 @@ impl<T: Default + 'static> ComputedCache<T> {
 // ==================== 3. 数学常量 - 工厂模式优化 ====================
 
 /// # 3. 数学常量 - 工厂模式优化
-/// # 3. constant - factory optimization
+/// # 3. constant - pattern optimization
 ///
 /// Rust 1.94.0 在 f32 和 f64 上添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量。
 /// 这些常量可以在工厂模式中用于几何计算和优化算法。
@@ -288,7 +292,7 @@ impl<T: Default + 'static> ComputedCache<T> {
 /// factory
 ///
 /// 使用 GOLDEN_RATIO 实现基于黄金分割的工厂模式
-/// GOLDEN_RATIO factory
+/// use GOLDEN_RATIO implementation pattern
 pub struct GoldenRatioFactory;
 
 impl GoldenRatioFactory {
@@ -330,7 +334,7 @@ impl GoldenRatioFactory {
     }
 
     /// 使用黄金分割搜索查找函数最小值
-    /// function minimum
+    /// usesearchsearchfunctionminimum value
     ///
     /// # Arguments
     /// * `left` - 搜索区间左边界
@@ -338,11 +342,11 @@ impl GoldenRatioFactory {
     /// * `right` - 搜索区间右边界
     /// * `right` - interval edge
     /// * `epsilon` - 精度阈值
-    /// * `epsilon` -
+    /// * `epsilon` - value
     /// * `max_iterations` - 最大迭代次数，防止无限循环
     /// * `max_iterations` - maximum ，circulation
     /// * `f` - 目标函数
-    /// * `f` - goal function
+    /// * `f` - function
     pub fn golden_section_search<F>(
         mut left: f64,
         mut right: f64,
@@ -462,7 +466,7 @@ pub struct Lexer<'a> {
 
 impl<'a> Lexer<'a> {
     /// 创建新的词法分析器
-    /// analyze
+    /// Create new analysis
     pub fn new(input: &'a str) -> Self {
         Self {
             input: input.chars().peekable(),
@@ -530,7 +534,7 @@ impl<'a> Lexer<'a> {
     }
 
     /// 获取下一个 token
-    /// under token
+    /// Get lower token
     pub fn next_token(&mut self) -> Token {
         self.skip_whitespace();
 
@@ -556,7 +560,7 @@ impl<'a> Lexer<'a> {
 }
 
 /// 使用 Peekable 实现过滤链模式
-/// Peekable
+/// use Peekable implementation pattern
 ///
 /// Rust 1.94.0: 利用 next_if_map() 实现复杂的过滤逻辑
 /// Rust 1.94.0: next_if_map() complex
@@ -609,7 +613,7 @@ where
 // ==================== 5. char 到 usize 转换 - 解析器模式 ====================
 
 /// # 5. char 到 usize 转换 - 解析器模式
-/// # 5. char to usize conversion -
+/// # 5. char usize conversion - pattern
 ///
 /// Rust 1.94.0 实现了 `TryFrom<char>` for usize。
 /// 这在解析器模式中非常有用，可以将字符直接转换为索引位置。
@@ -648,7 +652,7 @@ impl CharPositionMapper {
     }
 
     /// 计算字符的数值表示（用于哈希等）
-    /// represent （etc. ）
+    /// Compute valuetable
     ///
     /// Rust 1.94.0: 使用 `TryFrom<char>` for usize
     pub fn char_to_numeric_value(c: char) -> Option<usize> {
@@ -670,6 +674,7 @@ pub struct SimpleCharCalculator;
 
 impl SimpleCharCalculator {
     /// 解析多位数字字符串
+    /// multiple string
     pub fn parse_number(s: &str) -> Option<usize> {
         let mut result: usize = 0;
 
@@ -683,7 +688,7 @@ impl SimpleCharCalculator {
     }
 
     /// 计算字符串中所有数字字符的和
-    /// in all and
+    /// Compute stringhas
     pub fn sum_digits(s: &str) -> usize {
         s.chars()
             .filter_map(CharPositionMapper::char_to_numeric_value)
@@ -785,7 +790,7 @@ pub fn demonstrate_rust_194_design_patterns() {
 }
 
 /// 获取 Rust 1.94.0 设计模式特性信息
-/// Rust 1.94.0 design feature
+/// Get Rust 1.94.0 designpatternfeaturesinformation
 pub fn get_rust_194_design_pattern_info() -> String {
     "Rust 1.94.0 设计模式特性:\n- array_windows - 滑动窗口模式\n- LazyLock 新方法 - \
      单例模式优化\n- 数学常量 (EULER_GAMMA, GOLDEN_RATIO) - 工厂模式优化\n- Peekable 新方法 - \
@@ -798,7 +803,7 @@ pub fn get_rust_194_design_pattern_info() -> String {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
-/// ，to goal before
+/// Search 2D array, early exit when target found
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
         for (j, &val) in row.iter().enumerate() {
@@ -811,7 +816,7 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
-/// pipe
+/// Data validation pipeline
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -823,6 +828,7 @@ pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
 }
 
 /// 批量处理带错误控制
+/// Batch processing with error control
 pub fn batch_process<T, E>(
     items: &[T],
     processor: impl Fn(&T) -> Result<(), E>,
@@ -977,10 +983,10 @@ mod tests {
     // ==================== 边界测试和反例测试 ====================
 
     /// 测试全局配置线程安全
-    /// global thread-safe
+    /// Test globalconfigurationthreadsafety
     ///
     /// 验证全局配置在多线程环境下能正确工作
-    /// global in thread environment under
+    /// Verify globalconfigurationmultiplethreadlowerpositive
     /// 预期行为：多个线程同时读写配置不会导致数据竞争或 panic
     /// as ：thread or panic
     #[test]
@@ -1047,7 +1053,7 @@ mod tests {
     /// 测试缓存淘汰
     ///
     /// 验证计算缓存的行为和"淘汰"逻辑
-    /// as and ""
+    /// Verify compute""
     /// 预期行为：缓存应该保持值直到显式重新计算
     /// as ：should to
     #[test]
@@ -1081,10 +1087,10 @@ mod tests {
     }
 
     /// 测试无效状态转换
-    /// ineffective state conversion
+    /// Test withoutstatusconversion
     ///
     /// 验证状态转换验证器能正确检测无效的状态转换
-    /// state conversion ineffective state conversion
+    /// Verify statusconversionverifypositivewithoutstatusconversion
     /// 预期行为：返回 false 对于无效转换，true 对于有效转换
     /// as ： false to ineffective conversion ，true to effective conversion
     #[test]
@@ -1147,10 +1153,10 @@ mod tests {
     }
 
     /// 测试黄金比例工厂边界
-    /// factory edge
+    /// Test edge
     ///
     /// 验证黄金比例工厂能正确处理边界值
-    /// factory edge
+    /// Verify positivehandlingedgevalue
     /// 预期行为：正确处理零、负数和极大值输入
     /// as ：、and
     #[test]

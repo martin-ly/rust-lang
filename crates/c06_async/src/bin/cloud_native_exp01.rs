@@ -7,7 +7,7 @@ use tokio::time::sleep;
 // 移除未使用的导入
 
 /// 应用配置
-/// application
+/// application configuration
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct AppConfig {
@@ -36,6 +36,7 @@ impl Default for AppConfig {
 }
 
 /// 配置管理器
+/// configuration manager
 #[allow(dead_code)]
 struct ConfigManager {
     config: Arc<RwLock<AppConfig>>,
@@ -55,12 +56,13 @@ impl ConfigManager {
     }
 
     /// 获取当前配置
-    /// when before
+    /// Get currentconfiguration
     async fn get_config(&self) -> AppConfig {
         self.config.read().await.clone()
     }
 
     /// 更新配置
+    /// Update configuration
     async fn update_config(&self, new_config: AppConfig) -> Result<(), anyhow::Error> {
         let mut config = self.config.write().await;
         *config = new_config;
@@ -83,7 +85,7 @@ impl ConfigManager {
     }
 
     /// 注册配置观察者
-    /// observer
+    /// Register configuration
     async fn watch_config(&self) -> tokio::sync::mpsc::Receiver<AppConfig> {
         let (tx, rx) = tokio::sync::mpsc::channel(100);
         self.watchers.lock().await.push(tx);
@@ -250,7 +252,7 @@ impl HealthChecker {
     }
 
     /// 检查系统资源
-    /// system
+    /// system resource
     async fn check_resources(&self) -> CheckResult {
         let start = Instant::now();
 
@@ -276,7 +278,7 @@ impl HealthChecker {
     }
 
     /// 获取当前健康状态
-    /// when before state
+    /// Get currentstatus
     async fn get_status(&self) -> HealthStatus {
         self.status.read().await.clone()
     }
@@ -307,6 +309,7 @@ async fn liveness_probe(health_checker: Arc<HealthChecker>) -> Result<(), anyhow
 }
 
 /// 配置热重载测试
+/// configuration test
 #[allow(dead_code)]
 async fn test_config_hot_reload(config_manager: Arc<ConfigManager>) {
     println!("🚀 配置热重载测试");
@@ -367,6 +370,7 @@ async fn test_health_checks(health_checker: Arc<HealthChecker>) {
 }
 
 /// Kubernetes 探针测试
+/// Kubernetes test
 async fn test_kubernetes_probes(health_checker: Arc<HealthChecker>) {
     println!("\n🚀 Kubernetes 探针测试");
     println!("{}", "=".repeat(40));

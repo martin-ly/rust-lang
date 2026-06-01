@@ -2,19 +2,19 @@
 //! Tokio async rwlock （RwLock）
 //!
 //! 本模块展示了如何使用 `tokio::sync::RwLock` 在异步环境中实现读写锁。
-//! This module demonstrates `tokio::sync::RwLock` in async environment in rwlock 。
+//! This module demonstrates use `tokio::sync::RwLock` asyncimplementation
 //! 读写锁允许多个读取操作并发执行，但写入操作是独占的，从而提高读多写少场景的性能。
 //! rwlock concurrency ，but ，thereby scenario performance 。
 //!
 //! ## 核心概念
-//! ## core concept
+//! ## Core Concepts
 //!
 //! ### 读写锁的特性
 //! ### rwlock feature
 //! - **读锁（共享锁）**: 多个任务可以同时获取读锁，允许并发读取
 //! - **lock （lock ）**: task can lock ，concurrency
 //! - **写锁（排他锁）**: 只有一个任务可以获取写锁，写入期间阻止所有其他操作
-//! - **lock （lock ）**: task can lock ，all its
+//! - ****: hastaskcangethas operation
 //! - **互斥性**: 读锁和写锁不能同时存在
 //! - ****: lock and lock cannot in
 //!
@@ -28,10 +28,10 @@
 //! - lock ，task is while
 //!
 //! ## 使用场景
-//! ## scenario
+//! ## Usage Scenarios
 //!
 //! 1. **读多写少**: 频繁读取但偶尔写入的数据
-//! 1. ****: but
+//! 1. **multiplefew**: data
 //! 2. **配置数据**: 运行时配置的读取和更新
 //! 2. ****: runtime and
 //! 3. **缓存系统**: 缓存的读取和更新
@@ -50,7 +50,7 @@
 //! - ****: in performance
 //!
 //! ## 注意事项
-//! ##
+//! ## Notes
 //!
 //! - 写锁会阻塞所有读锁，要避免长时间持有写锁
 //! - lock all lock ，time lock
@@ -62,7 +62,7 @@
 //! - lock as lock ，may lock
 //!
 //! ## 使用示例
-//! ## example
+//! ## Usage Examples
 //!
 //! ```no_run
 //! use c06_async::tokio::sync::rwlock_test01;
@@ -84,27 +84,27 @@ use tokio::sync::RwLock;
 /// task concurrency ，task ，rwlock 。
 ///
 /// # 实现原理
-/// #
+/// # Implementation Principle
 ///
 /// ## 读写分离
 /// ## read-write splitting
 /// - 读锁：多个任务可以同时获取，允许并发读取
 /// - lock ：task can ，concurrency
 /// - 写锁：独占访问，获取时会阻止所有其他操作
-/// - lock ：，all its
+/// - exclusivegethas operation
 /// - 自动释放：锁在离开作用域时自动释放
 /// - ：lock in role domain
 ///
 /// ## 异步特性
-/// ## async feature
+/// ## Async Features
 /// - `read().await` 和 `write().await` 是异步操作
-/// - 锁获取失败时，任务被挂起而不是阻塞线程
+/// - `read().await` `write().await` async operation
 /// - lock ，task is while thread
 /// - 锁可用时，任务自动恢复执行
 /// - lock ，task
 ///
 /// ## 并发控制
-/// ## concurrency
+/// ## concurrent control
 /// - 5 个读任务可以并发执行
 /// - 5 task can concurrency
 /// - 1 个写任务独占访问
@@ -113,18 +113,18 @@ use tokio::sync::RwLock;
 /// -
 ///
 /// # 执行流程
-/// # process
+/// # Execution Flow
 /// 1. 创建共享数据（初始值为 [1, 2, 3]）
 /// 1. （as [1, 2, 3]）
 /// 2. 启动 5 个并发读任务，获取读锁并读取数据
-/// 2. 5 concurrency task ，lock and
+/// 2. 5 concurrenttaskget data
 /// 3. 启动 1 个写任务，获取写锁并修改数据
-/// 3. 1 task ，lock and
+/// 3. 1 taskget data
 /// 4. 等待所有任务完成
 /// 4. etc. all task
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```no_run
 /// use c06_async::tokio::sync::rwlock_test01;
 ///
@@ -145,7 +145,7 @@ use tokio::sync::RwLock;
 /// # 性能特点
 /// # performance point
 /// - 读操作可以并发执行，提高读取性能
-/// - can concurrency ，performance
+/// - operationcanconcurrentexecutionhigh performance
 /// - 写操作独占访问，确保数据一致性
 /// - ，consistency
 /// - 适合读多写少的场景
@@ -154,6 +154,7 @@ use tokio::sync::RwLock;
 /// - Mutex，in scenario under performance
 ///
 /// 测试 RwLock
+/// Test RwLock
 pub async fn rwlock_test01() {
     // 创建一个 Arc 包裹的 RwLock，内部数据为一个 Vec
     // Arc 提供多所有权，RwLock 提供读写锁功能

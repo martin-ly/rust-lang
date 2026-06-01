@@ -1,5 +1,5 @@
 //! 使用Rust 1.89新特性优化的代理模式实现
-//! Rust 1.89feature optimization proxy pattern
+//! useRust 1.89newfeaturesoptimizationpattern implementation
 //!
 //! 特性：
 //! feature ：

@@ -4,7 +4,7 @@
 
 ---
 
-## [2.5.2] - 2026-06-02 — P0 重复合并与 L6 代码示例标记
+## [2.5.2] - 2026-06-02 — P0 重复合并、版本对齐与 L6 标记
 
 ### 🗑️ P0 重复合并
 
@@ -36,9 +36,34 @@
   - `01_ownership.md`、`02_borrowing.md`、`03_lifetimes.md`、`04_type_system.md`、`08_collections.md`
   - 链接至 `terminology_glossary.md` 完整对照表
 
+### 📊 Phase A+B 并行执行（版本对齐 + 生态清理）
+
+**A1. `rust_194_*` 文件重命名**: concept/ 下无 194 文件名；crates/ 和 examples/ 中的 194 文件保留历史事实，内部注释更新为 "1.96+ 可用"
+
+**A2. 1.94→1.96 特性勘误**:
+
+- knowledge/ `02_iterators.md` array_windows 标注更新为 "1.94 引入，1.96+ 可用"
+- knowledge/ 生态图谱引用更新为 "Rust 1.96 MSRV"
+- examples/ 5 个通用示例中的 "Rust 1.94 特性示例" → "Rust 1.96 可用特性示例"
+- examples/ `rust_194_*_demo.rs` 内部打印语句更新为 "1.96+ 演示"
+- crates/ 5 个 `archive/mod.rs` "当前活跃版本为 Rust 1.94" → "Rust 1.96"
+- crates/ 4 个 `lib.rs` 1.94 模块引用更新为 "1.94+ 历史特性 (1.96+ stable)"
+
+**A3. 版本引用统计对齐**:
+
+- 核心文档（concept/knowledge/examples/docs，排除研究文档）中 **1.94 引用 < 100** ✅（目标 < 500）
+- 同范围内 **1.96 引用 2,634** ✅（目标 ≥ 1,000，含 `1.96.0` 标注）
+- 批量为 **130 个文件**（50 concept + 80 docs）添加 `> **Rust 版本**: 1.96.0+ (Edition 2024)` 顶部标注
+
+**B1. async-std 全局标记**: 最后 1 个未标记文件 `MASTER_INDEX_AUTO.md` 已添加 `[已归档 2025-03]`
+
+**B2. crates 零英文优先**: c02/c05/common 的 lib.rs 已有英文；为 **15 个子模块 mod.rs** 添加双语 `//!` 注释
+
 ### 🔧 验证
 
-- `kb_auditor.py`: 死链 **0**，定理链 1,305，代码块 2,600
+- `cargo check --workspace`: **通过**（c11_macro_system 37 warnings 为既有）
+- `cargo clippy --workspace`: **通过**
+- `kb_auditor.py`: 死链 **0** / 258 文件，定理链 1,305，代码块 2,600
 - `version_fact_check.py`: 版本错误 **0** / 285 文件
 
 ---

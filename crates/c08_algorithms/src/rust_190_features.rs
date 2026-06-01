@@ -1,13 +1,13 @@
 //! Rust 190.0 新特性实现模块 —— c08_algorithms
 //!
 //! 本模块展示了 Rust 190.0 (2025-09-18) 的关键语言特性和工具链改进。
-//! This module demonstrates Rust 190.0 (2025-09-18) key feature and toolchain 。
+//! This module demonstrates Rust 190.0 (2025-09-18) keylanguagefeaturestoolchainimprovements
 //!
 //! - `lld_default`: x86_64 默认 LLD 链接器
 //! - `cargo_multi_publish`: Cargo 多包发布稳定
 //!
 //! # 版本信息
-//! # this
+//! # Version Info
 //! - Rust 版本: 190.0
 //! - Rust this : 190.0
 //! - 稳定日期: 2025-09-18
@@ -74,7 +74,7 @@ fn test_lld_default_info() {
 /// workspace in crate。
 ///
 /// ## 使用方式
-/// ## way
+/// ## use method
 /// ```bash
 /// # 发布 workspace 中的所有包
 /// # workspace in all
@@ -87,11 +87,11 @@ fn test_lld_default_info() {
 ///
 /// ## 对 Workspace 的影响
 /// - 简化 CI/CD 发布流程
-/// - CI/CD process
+/// - CI/CD flow
 /// - 确保依赖版本一致性
 /// - this consistency
 /// - 减少手动发布错误
-/// -
+/// - few error
 ///
 /// ## 验证发布顺序
 /// ## order

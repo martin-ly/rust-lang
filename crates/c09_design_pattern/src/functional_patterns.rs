@@ -1,5 +1,5 @@
 //! # 函数式编程模式
-//! # functional
+//! # function pattern
 //!
 //! Rust 支持多种函数式编程模式，包括高阶函数、闭包组合、
 //! Rust functional ，function 、combination 、
@@ -7,7 +7,7 @@
 //! adapter 、Monoid concept etc. 。
 
 /// 高阶函数模式
-/// function
+/// Higher-order Function Pattern
 ///
 /// 接受函数作为参数或返回函数的函数。
 /// function as parameter or function function 。
@@ -15,6 +15,7 @@ pub struct HigherOrderFunctions;
 
 impl HigherOrderFunctions {
     /// map-reduce 模式
+    /// map-reduce pattern
     pub fn map_reduce<T, R>(
         items: &[T],
         map: impl Fn(&T) -> R,
@@ -40,7 +41,7 @@ impl HigherOrderFunctions {
 }
 
 /// 迭代器适配器链模式
-/// adapter
+/// iterator pattern
 ///
 /// 通过链式调用构建惰性计算管道。
 /// pipe 。
@@ -48,7 +49,7 @@ pub struct IteratorPipeline;
 
 impl IteratorPipeline {
     /// 数据处理管道示例
-    /// pipe example
+    /// datahandling example
     pub fn process_numbers(numbers: &[i32]) -> Vec<i32> {
         numbers
             .iter()
@@ -114,14 +115,13 @@ pub fn fold_monoid<T: Monoid>(items: impl Iterator<Item = T>) -> T {
 }
 
 /// Option/Result 组合子模式
-///
-/// 函数式错误处理的核心技巧。
+/// Option/Result combinator pattern
 /// functional error handling core tip 。
 pub struct Combinators;
 
 impl Combinators {
     /// 链式 Option 处理
-    /// Option
+    /// Option processing
     pub fn chain_options(x: Option<i32>) -> Option<i32> {
         x.map(|n| n * 2).filter(|&n| n > 10).or(Some(0))
     }

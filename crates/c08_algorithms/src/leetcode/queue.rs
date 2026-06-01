@@ -2,15 +2,15 @@
 //! LeetCode algorithm （ Rust 1.92 feature ）
 //!
 //! 本模块实现经典的队列类 LeetCode 题目，充分利用 Rust 1.92 的新特性。
-//! this module LeetCode ， Rust 1.92 feature 。
+//! This module implements classicqueue LeetCode Rust 1.92 newfeatures
 //!
 //! ## Rust 1.92 特性应用
-//! ## Rust 1.92 feature application
+//! ## Rust 1.92 Feature Application
 //!
 //! 1. **性能优化**: 使用 VecDeque 高效队列操作
-//! 1. **performance optimization **: VecDeque efficient
+//! 1. **performanceoptimization**: use VecDeque efficientqueue operation
 //! 2. **内存优化**: 队列内存管理优化
-//! 2. **memory optimization **: memory optimization
+//! 2. **memoryoptimization**: queuememorymanagement optimization
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::VecDeque;
 
@@ -130,7 +130,7 @@ impl MovingAverage {
 /// 239. Sliding Window Maximum（滑动窗口最大值）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。
 /// nums，as k from to 。
 /// 你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
@@ -139,16 +139,16 @@ impl MovingAverage {
 /// in maximum 。
 ///
 /// ## Rust 1.92 特性应用
-/// ## Rust 1.92 feature application
+/// ## Rust 1.92 Feature Application
 /// - **单调队列**: 使用双端队列维护单调递减序列
 /// - ****: sequence
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(k)
-/// - space complexity : O(k)
+/// - Space Complexity: O(k)
 pub fn max_sliding_window_queue(nums: Vec<i32>, k: i32) -> Vec<i32> {
     let k = k as usize;
     let mut deque = VecDeque::new();
@@ -179,7 +179,7 @@ pub fn max_sliding_window_queue(nums: Vec<i32>, k: i32) -> Vec<i32> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有队列类问题
-/// all problem
+/// Get hasqueueproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

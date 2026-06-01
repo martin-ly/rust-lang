@@ -1,5 +1,5 @@
 //! Rust 1.93.0 进程与性能 特性模块
-//! Rust 1.93.0 process and performance feature module
+//! Rust 1.93.0 processperformance features module
 #![allow(clippy::incompatible_msrv)]
 
 /// 演示 `String::into_raw_parts` 用于进程间数据元信息提取
@@ -13,7 +13,7 @@ pub fn string_raw_meta(s: String) -> (usize, usize, usize) {
 }
 
 /// 演示 `Vec::into_raw_parts` 用于缓冲区内存分析
-/// demonstration `Vec::into_raw_parts` buffering memory analyze
+/// `Vec::into_raw_parts` memory analysis
 pub fn vec_raw_meta<T>(v: Vec<T>) -> (usize, usize, usize) {
     let (ptr, len, cap) = v.into_raw_parts();
     let meta = (ptr as usize, len, cap);

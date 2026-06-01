@@ -1,8 +1,8 @@
 //! # Rust 1.92.0 算法特性实现模块
-//! # Rust 1.92.0 algorithm feature module
+//! # Rust 1.92.0 algorithmfeaturesimplementation module
 //!
 //! 本模块展示了 Rust 1.92.0 在算法实现场景中的应用，包括：
-//! This module demonstrates Rust 1.92.0 in algorithm scenario in application ，：
+//! This module demonstrates Rust 1.92.0 algorithmimplementationapplicationincluding
 //! - 新的稳定 API（`rotate_right`, `NonZero::div_ceil`）
 //! - 性能优化（迭代器方法特化）
 //! - performance optimization （method ）
@@ -10,14 +10,14 @@
 //! - Lint as
 //!
 //! # 文件信息
-//! #
+//! # File Info
 //! - 文件: rust_192_features.rs
-//! - 创建日期: 2025-12-11
+//! - File: rust_192_features.rs
 //! - date : 2025-12-11
 //! - 版本: 1.0
-//! - this : 1.0
+//! - Version: 1.0
 //! - Rust版本: 1.92.0
-//! - Rustthis : 1.92.0
+//! - Rust Version: 1.92.0
 //! - Edition: 2024
 use std::collections::BTreeMap;
 use std::num::NonZeroUsize;
@@ -25,7 +25,7 @@ use std::num::NonZeroUsize;
 // ==================== 1. rotate_right 在算法中的应用 ====================
 
 /// 使用 rotate_right 实现循环移位算法
-/// rotate_right circulation algorithm
+/// use rotate_right implementation algorithm
 ///
 /// Rust 1.92.0: 新增的 `rotate_right` 方法可以高效实现循环移位
 /// Rust 1.92.0: `rotate_right` method can efficient circulation
@@ -81,7 +81,7 @@ impl<T> CircularBuffer<T> {
 // ==================== 2. NonZero::div_ceil 在算法中的应用 ====================
 
 /// 使用 NonZero::div_ceil 计算数组分块数量
-/// NonZero::div_ceil quantity
+/// use NonZero::div_ceil computearray count
 ///
 /// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算向上取整除法
 /// Rust 1.92.0: `div_ceil` method can on
@@ -92,7 +92,7 @@ pub fn calculate_chunks<T>(arr: &[T], chunk_size: NonZeroUsize) -> usize {
 }
 
 /// 使用 div_ceil 实现分页算法
-/// div_ceil algorithm
+/// use div_ceil implementation algorithm
 pub fn calculate_pages(total_items: usize, items_per_page: NonZeroUsize) -> usize {
     if total_items == 0 {
         return 0;
@@ -106,7 +106,7 @@ pub fn calculate_pages(total_items: usize, items_per_page: NonZeroUsize) -> usiz
 // ==================== 3. 迭代器方法特化在算法中的应用 ====================
 
 /// 使用特化的迭代器比较方法
-/// method
+/// useiterator method
 ///
 /// Rust 1.92.0: Iterator::eq 和 Iterator::eq_by 为 TrustedLen 迭代器特化
 pub fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
@@ -115,7 +115,7 @@ pub fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
 }
 
 /// 使用特化的迭代器比较方法比较排序结果
-/// method ordering result
+/// useiteratormethodsort result
 pub fn verify_sorted<T: PartialEq + Ord>(arr: &[T], expected: &[T]) -> bool {
     // Rust 1.92.0: 使用特化的 eq 方法（性能优化）
     arr.iter().eq(expected.iter())
@@ -143,7 +143,7 @@ fn find_pivot(arr: &[i32]) -> Option<usize> {
 }
 
 /// 案例2: 使用 div_ceil 实现内存对齐算法
-/// 2: div_ceil memory alignment algorithm
+/// cases2: use div_ceil implementationmemory algorithm
 pub fn align_size(size: usize, alignment: NonZeroUsize) -> usize {
     if size == 0 {
         return alignment.get();
@@ -155,7 +155,7 @@ pub fn align_size(size: usize, alignment: NonZeroUsize) -> usize {
 }
 
 /// 案例3: 使用新特性优化排序算法
-/// 3: feature optimization sorting algorithm
+/// cases3: usenewfeaturesoptimizationsort algorithm
 pub fn optimized_merge_sort<T: Clone + Ord>(arr: &mut [T]) {
     if arr.len() <= 1 {
         return;

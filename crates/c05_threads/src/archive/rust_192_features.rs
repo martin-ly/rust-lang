@@ -306,6 +306,7 @@ impl ThreadPoolTaskQueue {
 
     /// 清空队列
     /// Clears队列
+    /// Clearsqueue
     pub fn clear(&mut self) {
         self.tasks.clear();
     }

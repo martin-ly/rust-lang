@@ -2,10 +2,10 @@
 //! LeetCode algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的字符串类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
-//! this module LeetCode ， Rust 1.91 feature 。
+//! This module implements classicstring LeetCode Rust 1.91 newfeatures
 //!
 //! ## Rust 1.91 特性应用
-//! ## Rust 1.91 feature application
+//! ## Rust 1.91 Feature Application
 //!
 //! - **JIT 优化**: 字符串迭代器操作性能提升 15-20%
 //! - **JIT optimization **: performance 15-20%
@@ -14,7 +14,7 @@
 //! - **新的稳定 API**: `str::split_ascii_whitespace` 等
 //!
 //! ## 包含的经典题目
-//! ##
+//! ## Classic Problems
 //!
 //! - 3. Longest Substring Without Repeating Characters（无重复字符的最长子串）
 //! - 14. Longest Common Prefix（最长公共前缀）
@@ -36,23 +36,23 @@ use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 /// 14. Longest Common Prefix（最长公共前缀）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 `""`。
 /// function in before 。if in before ， `""`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 字符串迭代器操作性能提升 15-20%
 /// - **JIT optimization **: performance 15-20%
 /// - **内存优化**: 使用字符串切片，避免不必要的分配
 /// - **memory optimization **: ，
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(S)，其中 S 是所有字符串字符的总数
 /// - time complexity : O(S)，its in S all
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn longest_common_prefix(strs: Vec<String>) -> String {
     if strs.is_empty() {
         return String::new();
@@ -75,23 +75,23 @@ pub fn longest_common_prefix(strs: Vec<String>) -> String {
 /// 20. Valid Parentheses（有效的括号）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个只包括 `'('`，`')'`，`'{'`，`'}'`，`'['`，`']'` 的字符串 `s`，判断字符串是否有效。
 /// `'('`，`')'`，`'{'`，`'}'`，`'['`，`']'` `s`，effective 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 字符迭代器操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT optimization**: iteratoroperationperformance improvement
 /// - **内存优化**: 使用栈进行匹配
 /// - **memory optimization **: stack
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn is_valid_parentheses(s: String) -> bool {
     let mut stack = Vec::new();
 
@@ -124,25 +124,25 @@ pub fn is_valid_parentheses(s: String) -> bool {
 /// 28. Find the Index of the First Occurrence in a String（找出字符串中第一个匹配项的下标）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你两个字符串 `haystack` 和 `needle`，请你在 `haystack` 字符串中找出 `needle` 字符串的第一个匹配项的下标（下标从 0 开始）。
 /// `haystack` and `needle`，in `haystack` in `needle` first under （under from 0 ）。
 /// 如果 `needle` 不是 `haystack` 的一部分，则返回 `-1`。
 /// if `needle` `haystack` part ， `-1`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 字符串匹配操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT optimization**: stringoperationperformance improvement
 /// - **内存优化**: 使用滑动窗口，O(1) 额外空间
-/// - **memory optimization **: ，O(1) outside space
+/// - **memoryoptimization**: useO(1) outer space
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n*m)，其中 n 是 haystack 长度，m 是 needle 长度
 /// - time complexity : O(n*m)，its in n haystack ，m needle
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn str_str(haystack: String, needle: String) -> i32 {
     if needle.is_empty() {
         return 0;
@@ -168,21 +168,21 @@ pub fn str_str(haystack: String, needle: String) -> i32 {
 /// 383. Ransom Note（赎金信）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你两个字符串：`ransomNote` 和 `magazine`，判断 `ransomNote` 能不能由 `magazine` 里面的字符构成。
 /// ：`ransomNote` and `magazine`， `ransomNote` cannot `magazine` surface 。
 /// 如果可以，返回 `true`；否则返回 `false`。`magazine` 中的每个字符只能在 `ransomNote` 中使用一次。
 /// if can ， `true`； `false`。`magazine` in in `ransomNote` in 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 字符频率统计性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Character frequency statistics performance improvement
 /// - **内存优化**: 使用 HashMap 或数组计数
 /// - **memory optimization **: HashMap or
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(m + n)，其中 m 是 magazine 长度，n 是 ransomNote 长度
 /// - time complexity : O(m + n)，its in m magazine ，n ransomNote
 /// - 空间复杂度: O(k)，其中 k 是字符集大小（最多 26）
@@ -217,21 +217,21 @@ pub fn can_construct(ransom_note: String, magazine: String) -> bool {
 /// 387. First Unique Character in a String（字符串中的第一个唯一字符）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个字符串 `s`，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 `-1`。
 /// `s`，to first ，and 。if in ， `-1`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 字符频率统计性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Character frequency statistics performance improvement
 /// - **内存优化**: 使用数组计数，O(1) 空间复杂度
 /// - **memory optimization **: ，O(1) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)（字符集大小固定）
 /// - space complexity : O(1)（）
 pub fn first_uniq_char(s: String) -> i32 {
@@ -262,25 +262,25 @@ pub fn first_uniq_char(s: String) -> i32 {
 /// 392. Is Subsequence（判断子序列）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定字符串 `s` 和 `t`，判断 `s` 是否为 `t` 的子序列。字符串的一个子序列是原始字符串删除一些（也可以不删除）
 /// `s` and `t`， `s` as `t` sequence 。sequence （can ）
 /// 字符而不改变剩余字符相对位置形成的新字符串。
 /// while to position 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 双指针遍历性能提升
-/// - **JIT optimization **: pointer performance
+/// - **JIT Optimization**: Two-pointer traversal performance improvement
 /// - **内存优化**: O(1) 空间复杂度
-/// - **memory optimization **: O(1) space complexity
+/// - **Memory Optimization**: O(1) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)，其中 n 是 t 的长度
 /// - time complexity : O(n)，its in n t
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn is_subsequence(s: String, t: String) -> bool {
     if s.is_empty() {
         return true;
@@ -307,23 +307,23 @@ pub fn is_subsequence(s: String, t: String) -> bool {
 /// 409. Longest Palindrome（最长回文串）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个包含大写字母和小写字母的字符串 `s`，返回通过这些字母构造成的最长回文串的长度。
 /// and `s`，。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 字符频率统计性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Character frequency statistics performance improvement
 /// - **内存优化**: 使用数组计数
 /// - **memory optimization **:
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn longest_palindrome(s: String) -> i32 {
     let mut counts = [0i32; 58]; // 包含大小写字母（A-Z: 65-90, a-z: 97-122）
 
@@ -357,19 +357,19 @@ pub fn longest_palindrome(s: String) -> i32 {
 /// 415. Add Strings（）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定两个字符串形式的非负整数 `num1` 和 `num2`，计算它们的和并同样以字符串形式返回。
 /// `num1` and `num2`，and and 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 字符迭代器操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT optimization**: iteratoroperationperformance improvement
 /// - **内存优化**: 使用 Vec 预分配容量
 /// - **memory optimization **: Vec
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(max(m, n))，其中 m 和 n 是字符串长度
 /// - time complexity : O(max(m, n))，its in m and n
 /// - 空间复杂度: O(max(m, n))
@@ -409,22 +409,22 @@ pub fn add_strings(num1: String, num2: String) -> String {
 /// 434. Number of Segments in a String（字符串中的单词数）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。
 /// in ，。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **新的稳定 API**: 使用 `str::split_ascii_whitespace`
 /// - **JIT 优化**: 字符串分割性能提升
-/// - **JIT optimization **: performance
+/// - **JIT optimization**: stringperformance improvement
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn count_segments(s: String) -> i32 {
     // Rust 1.91 新 API: split_ascii_whitespace 仅处理 ASCII 空白字符，性能更好
     s.split_ascii_whitespace().count() as i32
@@ -433,23 +433,23 @@ pub fn count_segments(s: String) -> i32 {
 /// 459. Repeated Substring Pattern（重复的子字符串）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个非空的字符串 `s`，检查它是否可以由它的一个子串重复多次构成。
 /// `s`，can 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 字符串匹配性能提升
-/// - **JIT optimization **: performance
+/// - **JIT optimization**: stringperformance improvement
 /// - **内存优化**: 使用字符串切片
-/// - **memory optimization **:
+/// - **memoryoptimization**: usestring slice
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n²)
-/// - time complexity : O(n²)
+/// - Time Complexity: O(n²)
 /// - 空间复杂度: O(n)
-/// - space complexity : O(n)
+/// - Space Complexity: O(n)
 pub fn repeated_substring_pattern(s: String) -> bool {
     let n = s.len();
 
@@ -470,7 +470,7 @@ pub fn repeated_substring_pattern(s: String) -> bool {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有字符串类问题
-/// all problem
+/// Get hasstringproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

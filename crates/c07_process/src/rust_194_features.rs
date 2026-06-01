@@ -1,8 +1,8 @@
 //! Rust 1.94.0 进程管理特性实现模块
-//! Rust 1.94.0 process feature module
+//! Rust 1.94.0 processmanagementfeaturesimplementation module
 //!
 //! 本模块展示了 Rust 1.94.0 在进程管理场景中的增强，包括：
-//! This module demonstrates Rust 1.94.0 in process scenario in ，：
+//! This module demonstrates Rust 1.94.0 processmanagementstrongincluding
 //! - array_windows 在数据处理中的应用 / Array Windows in Data Processing
 //! - LazyLock 在进程配置中的应用 / LazyLock in Process Configuration
 //! - 数学常量在数据分析中的应用 / Math Constants in Data Analysis
@@ -10,14 +10,14 @@
 //! - char 转换在进程通信中的应用 / char Conversion in Process Communication
 //!
 //! # 文件信息
-//! #
+//! # File Info
 //! - 文件: rust_194_features.rs
-//! - 创建日期: 2026-03-06
+//! - File: rust_194_features.rs
 //! - date : 2026-03-06
 //! - 版本: 1.0
-//! - this : 1.0
+//! - Version: 1.0
 //! - Rust版本: 1.94.0
-//! - Rustthis : 1.94.0
+//! - Rust Version: 1.94.0
 //! - Edition: 2024
 use std::collections::HashMap;
 use std::iter::Peekable;
@@ -155,8 +155,7 @@ pub struct LogAnalyzer;
 
 impl LogAnalyzer {
     /// 检测连续的错误模式
-    ///
-    /// Rust 1.96.0: array_windows::<3>() 用于检测连续错误
+    /// error pattern
     /// Rust 1.96.0: array_windows::<3>()
     pub fn detect_error_patterns(entries: &[LogEntry]) -> Vec<usize> {
         let mut patterns = Vec::new();
@@ -188,7 +187,7 @@ impl LogAnalyzer {
 }
 
 /// 演示 array_windows 在数据处理中的应用
-/// demonstration array_windows in in application
+/// array_windows datahandling application
 #[allow(dead_code)]
 pub fn demonstrate_array_windows_processing() {
     println!("\n=== array_windows 数据处理演示 ===\n");
@@ -224,10 +223,10 @@ pub fn demonstrate_array_windows_processing() {
 /// Rust 1.94.0 为 LazyLock 添加了新方法，使其在进程配置管理中更加灵活。
 /// Rust 1.94.0 as LazyLock method ，its in process in 。
 /// 全局进程配置
-/// global process
+/// globalprocess configuration
 ///
 /// Rust 1.94.0: 使用 LazyLock 管理进程全局配置
-/// Rust 1.94.0: LazyLock process global
+/// Rust 1.94.0: use LazyLock managementprocessglobal configuration
 pub static PROCESS_CONFIG: LazyLock<ProcessConfig> = LazyLock::new(|| {
     println!("初始化进程配置...");
     ProcessConfig {
@@ -240,7 +239,7 @@ pub static PROCESS_CONFIG: LazyLock<ProcessConfig> = LazyLock::new(|| {
 });
 
 /// 进程配置
-/// process
+/// process configuration
 #[derive(Debug, Clone)]
 pub struct ProcessConfig {
     pub max_processes: usize,
@@ -273,22 +272,24 @@ pub struct ResourceLimits {
 }
 
 /// 进程配置管理器
-/// process
+/// processconfiguration manager
 ///
 /// Rust 1.94.0: 使用 LazyLock::get 访问配置
+/// Rust 1.94.0: use LazyLock::get configuration
 pub struct ProcessConfigManager;
 
 impl ProcessConfigManager {
     /// 获取进程配置引用
-    /// process reference
+    /// Get processconfigurationreference
     ///
     /// Rust 1.94.0: 使用 Deref
+    /// Rust 1.94.0: Using Deref
     pub fn get_config() -> &'static ProcessConfig {
         &PROCESS_CONFIG
     }
 
     /// 获取资源限制引用
-    /// reference
+    /// Get resourcereference
     pub fn get_limits() -> &'static ResourceLimits {
         &RESOURCE_LIMITS
     }
@@ -307,7 +308,7 @@ impl ProcessConfigManager {
 }
 
 /// 演示 LazyLock 在进程配置中的应用
-/// demonstration LazyLock in process in application
+/// LazyLock processconfiguration application
 #[allow(dead_code)]
 pub fn demonstrate_lazylock_config() {
     println!("\n=== LazyLock 进程配置演示 ===\n");
@@ -336,13 +337,13 @@ pub fn demonstrate_lazylock_config() {
 /// # 3. 数学常量在数据分析中的应用 / Math Constants in Data Analysis
 ///
 /// Rust 1.94.0 添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量，
-/// 这些常量在进程数据分析和算法中非常有用。
+/// Rust 1.94.0 Added EULER_GAMMA and GOLDEN_RATIO constants,
 /// constant in process analyze and algorithm in useful 。
 /// 数据分析器
 /// analyze
 ///
 /// Rust 1.94.0: 使用数学常量进行数据分析
-/// Rust 1.94.0: constant analyze
+/// Rust 1.94.0: useconstantdata analysis
 pub struct DataAnalyzer;
 
 impl DataAnalyzer {
@@ -350,7 +351,7 @@ impl DataAnalyzer {
     /// optimization interval
     ///
     /// Rust 1.94.0: GOLDEN_RATIO 在黄金分割搜索中的应用
-    /// Rust 1.94.0: GOLDEN_RATIO in in application
+    /// Rust 1.94.0: GOLDEN_RATIO search application
     pub fn golden_section_search<F>(mut a: f64, mut b: f64, epsilon: f64, f: F) -> f64
     where
         F: Fn(f64) -> f64,
@@ -386,7 +387,7 @@ impl DataAnalyzer {
     /// to
     ///
     /// Rust 1.94.0: EULER_GAMMA 在级数分析中的应用
-    /// Rust 1.94.0: EULER_GAMMA in analyze in application
+    /// Rust 1.94.0: EULER_GAMMA analysis application
     pub fn estimate_harmonic_series(n: u64) -> f64 {
         let gamma = std::f64::consts::EULER_GAMMA;
         (n as f64).ln() + gamma + 1.0 / (2.0 * n as f64)
@@ -396,7 +397,7 @@ impl DataAnalyzer {
     /// articulation point
     ///
     /// Rust 1.94.0: GOLDEN_RATIO 在数据分割中的应用
-    /// Rust 1.94.0: GOLDEN_RATIO in in application
+    /// Rust 1.94.0: GOLDEN_RATIO data application
     pub fn golden_ratio_split(data: &[f64]) -> Option<usize> {
         if data.len() < 2 {
             return None;
@@ -427,7 +428,7 @@ impl DataAnalyzer {
 }
 
 /// 演示数学常量在数据分析中的应用
-/// demonstration constant in analyze in application
+/// constantdataanalysis application
 #[allow(dead_code)]
 pub fn demonstrate_math_constants() {
     println!("\n=== 数学常量数据分析演示 ===\n");
@@ -467,7 +468,7 @@ pub fn demonstrate_math_constants() {
 /// # 4. Peekable 在日志处理中的应用 / Peekable in Log Processing
 ///
 /// Rust 1.94.0 为 Peekable 添加了 next_if_map 和 next_if_map_mut 方法，
-/// 这些方法在日志处理和解析中特别有用。
+/// Rust 1.94.0 Added next_if_map and next_if_map_mut methods to Peekable,
 /// method in and in useful 。
 /// 日志解析器
 ///
@@ -479,6 +480,7 @@ pub struct LogParser<I: Iterator<Item = LogEntry>> {
 
 impl<I: Iterator<Item = LogEntry>> LogParser<I> {
     /// 创建新的日志解析器
+    /// Create new logging
     pub fn new(entries: I) -> Self {
         Self {
             entries: entries.peekable(),
@@ -561,7 +563,7 @@ impl<I: Iterator<Item = LogEntry>> LogParser<I> {
 }
 
 /// 演示 Peekable 在日志处理中的应用
-/// demonstration Peekable in in application
+/// Peekable logginghandling application
 #[allow(dead_code)]
 pub fn demonstrate_peekable_logs() {
     println!("\n=== Peekable 日志处理演示 ===\n");
@@ -627,7 +629,7 @@ pub struct ProcessCommunicationEncoder;
 
 impl ProcessCommunicationEncoder {
     /// 将字符串编码为 usize 数组
-    /// will as usize
+    /// string usize array
     ///
     /// Rust 1.94.0: `TryFrom<char>` for usize
     pub fn encode_string(s: &str) -> Vec<usize> {
@@ -635,7 +637,7 @@ impl ProcessCommunicationEncoder {
     }
 
     /// 解码 usize 数组为字符串
-    /// usize as
+    /// usize array string
     pub fn decode_codepoints(codepoints: &[usize]) -> Result<String, String> {
         let mut result = String::with_capacity(codepoints.len());
 
@@ -695,7 +697,7 @@ pub struct ProcessMessage {
 }
 
 /// 演示 char 转换在进程通信中的应用
-/// demonstration char conversion in process in application
+/// char conversionprocess application
 #[allow(dead_code)]
 pub fn demonstrate_char_conversion() {
     println!("\n=== char 转换进程通信演示 ===\n");
@@ -727,7 +729,7 @@ pub fn demonstrate_char_conversion() {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
-/// ，to goal before
+/// Search 2D array, early exit when target found
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
         for (j, &val) in row.iter().enumerate() {
@@ -740,7 +742,7 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
-/// pipe
+/// Data validation pipeline
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -752,6 +754,7 @@ pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
 }
 
 /// 批量处理带错误控制
+/// Batch processing with error control
 pub fn batch_process<T, E>(
     items: &[T],
     processor: impl Fn(&T) -> Result<(), E>,
@@ -816,7 +819,7 @@ pub fn demonstrate_rust_194_process_features() {
 }
 
 /// 获取 Rust 1.94.0 进程管理特性信息
-/// Rust 1.94.0 process feature
+/// Get Rust 1.94.0 processmanagementfeaturesinformation
 pub fn get_rust_194_process_info() -> String {
     "Rust 1.94.0 进程管理特性:\n\
         - array_windows 在数据处理中的应用\n\
@@ -978,8 +981,7 @@ mod tests {
     // ==================== 边界测试和反例测试 ====================
 
     /// 测试空日志处理
-    /// 
-    /// 验证当传入空日志切片时，日志分析器能正确处理而不 panic
+    /// Test nulllogginghandling
     /// when ，analyze while panic
     /// 预期行为：返回空结果向量
     /// as ：result
@@ -1006,12 +1008,12 @@ mod tests {
     }
 
     /// 测试大日志性能
-    /// performance
+    /// Test largeloggingperformance
     /// 
     /// 验证日志分析器能处理大量日志数据而不显著降低性能
-    /// analyze while significant performance
+    /// Verify logginganalysishandlinglargeloggingdatalowperformance
     /// 预期行为：在合理时间内完成处理并返回正确结果
-    /// as ：in time inside and result
+    /// timeinnercompletehandlingpositive result
     #[test]
     #[cfg_attr(miri, ignore)]
     fn test_log_analyzer_large_input() {
@@ -1045,10 +1047,10 @@ mod tests {
     }
 
     /// 测试空数据分析
-    /// analyze
+    /// Test nulldataanalysis
     /// 
     /// 验证指标分析器能正确处理空数据或极小数据集
-    /// indicator analyze or
+    /// Verify analysispositivehandlingnulldatasmalldata
     /// 预期行为：返回空结果或默认值，不 panic
     /// as ：result or ， panic
     #[test]
@@ -1087,10 +1089,10 @@ mod tests {
     }
 
     /// 测试无效 Unicode 处理
-    /// ineffective Unicode
+    /// Test without Unicode handling
     /// 
     /// 验证进程通信编码器能正确处理无效的 Unicode 码点
-    /// process ineffective Unicode point
+    /// Verify processpositivehandlingwithout Unicode
     /// 预期行为：返回错误或跳过无效字符，不 panic
     /// as ：or ineffective ， panic
     #[test]

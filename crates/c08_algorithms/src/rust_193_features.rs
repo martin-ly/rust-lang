@@ -1,5 +1,5 @@
 //! Rust 1.93.0 算法 特性模块
-//! Rust 1.93.0 algorithm feature module
+//! Rust 1.93.0 algorithm features module
 #![allow(clippy::incompatible_msrv)]
 
 use std::collections::VecDeque;
@@ -24,7 +24,7 @@ pub fn trim_tail_greater_than(deque: &mut VecDeque<i32>, limit: i32) -> Vec<i32>
 }
 
 /// 使用 `slice::as_array` 提取定长子数组用于算法处理
-/// `slice::as_array` algorithm
+/// use `slice::as_array` longarrayalgorithm processing
 pub fn extract_window<const N: usize>(slice: &[i32]) -> Option<&[i32; N]> {
     slice.as_array::<N>()
 }

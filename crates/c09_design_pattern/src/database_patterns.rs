@@ -1,9 +1,10 @@
 //! 数据库系统设计模式应用
-//! database system design application
+//! Database System Design Pattern Application
 //!
 //! 本模块展示了在数据库系统中应用各种设计模式的实践案例，
-//! This module demonstrates in database system in application design ，
+//! This module demonstrates practical cases of applying various design patterns in database systems,
 //! 包括DAO、Active Record、Unit of Work等经典模式。
+//! Including classic patterns such as DAO, Active Record, and Unit of Work.
 use std::any::Any;
 use std::collections::HashMap;
 
@@ -12,7 +13,7 @@ use std::collections::HashMap;
 // ============================================================================
 
 /// 数据库连接接口
-/// database
+/// datalibrary interface
 pub trait DatabaseConnection {
     fn execute(&mut self, query: &str) -> Result<(), String>;
     fn query(&self, query: &str) -> Result<Vec<HashMap<String, String>>, String>;
@@ -97,7 +98,7 @@ pub struct User {
 }
 
 /// 用户DAO接口
-/// DAO
+/// DAO interface
 pub trait UserDao {
     fn find_by_id(&self, id: i32) -> Result<Option<User>, String>;
     fn find_all(&self) -> Result<Vec<User>, String>;
@@ -107,7 +108,7 @@ pub trait UserDao {
 }
 
 /// 用户DAO实现
-/// DAO
+/// DAO implementation
 pub struct UserDaoImpl {
     connection: Box<dyn DatabaseConnection>,
 }
@@ -435,6 +436,7 @@ impl UnitOfWork for UnitOfWorkImpl {
 // ============================================================================
 
 /// 通用Repository接口
+/// genericRepository interface
 pub trait Repository<T> {
     fn add(&mut self, entity: T) -> Result<(), String>;
     fn update(&mut self, entity: T) -> Result<(), String>;
@@ -444,6 +446,7 @@ pub trait Repository<T> {
 }
 
 /// 用户Repository实现
+/// Repository implementation
 pub struct UserRepository {
     unit_of_work: UnitOfWorkImpl,
 }

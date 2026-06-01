@@ -2,7 +2,7 @@
 //! sorting algorithm module - Rust 1.90 feature to
 //!
 //! 本模块实现了各种排序算法，包括：
-//! this module sorting algorithm ，：
+//! This module implements sortalgorithmincluding
 //! - 基础排序算法（冒泡、选择、插入）
 //! - foundation sorting algorithm （、、）
 //! - 高效排序算法（快速、归并、堆排序）
@@ -10,9 +10,9 @@
 //! - 特殊排序算法（计数、基数、桶排序）
 //! - sorting algorithm （、、bucket sort ）
 //! - 并行和异步实现
-//! - parallelism and async
+//! - parallelasync implementation
 //! - 形式化验证和证明
-//! - and
+//! - formalverify proof
 use anyhow::Result;
 use rayon::prelude::*;
 use std::time::Instant;
@@ -56,11 +56,11 @@ pub enum SortingAlgorithm {
 }
 
 /// 排序算法实现类型
-/// sorting algorithm type
+/// sortalgorithmimplementation type
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum ImplementationType {
     /// 同步实现
-    /// synchronous
+    /// synchronous implementation
     Synchronous,
     /// 并行实现（Rayon）
     /// parallelism （Rayon）
@@ -71,14 +71,14 @@ pub enum ImplementationType {
 }
 
 /// 排序结果
-/// ordering result
+/// sort result
 #[derive(Debug, Clone)]
 pub struct SortingResult<T> {
     /// 排序后的数据
-    /// ordering after
+    /// sortback data
     pub data: Vec<T>,
     /// 执行时间
-    /// time
+    /// execution time
     pub execution_time: std::time::Duration,
     /// 比较次数
     pub comparisons: usize,
@@ -92,12 +92,12 @@ pub struct SortingResult<T> {
     /// algorithm type
     pub algorithm: SortingAlgorithm,
     /// 实现类型
-    /// type
+    /// implementation type
     pub implementation: ImplementationType,
 }
 
 /// 排序算法复杂度信息
-/// sorting algorithm complex
+/// sortalgorithmcomplexity information
 #[derive(Debug, Clone)]
 pub struct SortingComplexity {
     pub algorithm: SortingAlgorithm,
@@ -110,7 +110,7 @@ pub struct SortingComplexity {
 
 impl SortingComplexity {
     /// 获取所有排序算法的复杂度信息
-    /// all sorting algorithm complex
+    /// Get hassortalgorithmcomplexityinformation
     pub fn get_all_complexities() -> Vec<Self> {
         vec![
             SortingComplexity {
@@ -211,7 +211,7 @@ pub struct SortingEngine;
 
 impl SortingEngine {
     /// 同步排序实现
-    /// synchronous ordering
+    /// synchronoussort implementation
     pub fn sort_sync<T>(mut data: Vec<T>, algorithm: SortingAlgorithm) -> SortingResult<T>
     where
         T: Ord + Clone,
@@ -276,7 +276,7 @@ impl SortingEngine {
     }
 
     /// 并行排序实现
-    /// parallel sort
+    /// parallelsort implementation
     pub fn sort_parallel<T>(mut data: Vec<T>, algorithm: SortingAlgorithm) -> SortingResult<T>
     where
         T: Ord + Send + Clone,
@@ -314,7 +314,7 @@ impl SortingEngine {
     }
 
     /// 异步排序实现
-    /// async ordering
+    /// asyncsort implementation
     pub async fn sort_async<T>(
         data: Vec<T>,
         algorithm: SortingAlgorithm,
@@ -404,7 +404,7 @@ impl SortingEngine {
     }
 
     /// 快速排序
-    /// quick sort
+    /// fast sort
     fn quick_sort<T: Ord>(data: &mut [T]) -> (usize, usize) {
         if data.len() <= 1 {
             return (0, 0);
@@ -601,13 +601,13 @@ pub struct SortingValidator;
 
 impl SortingValidator {
     /// 验证排序结果是否正确
-    /// ordering result
+    /// Verify sortresultwhetherpositive
     pub fn is_sorted<T: Ord>(data: &[T]) -> bool {
         data.windows(2).all(|w| w[0] <= w[1])
     }
 
     /// 验证排序结果的稳定性（对于稳定排序算法）
-    /// ordering result （to sorting algorithm ）
+    /// Verify sortresultsortalgorithm
     pub fn is_stable<T: Ord + Clone>(_original: &[(T, usize)], _sorted: &[(T, usize)]) -> bool {
         // 简化实现：检查相同元素的相对位置是否保持不变
         // 实际实现需要更复杂的逻辑
@@ -615,7 +615,7 @@ impl SortingValidator {
     }
 
     /// 验证排序算法的正确性
-    /// sorting algorithm
+    /// Verify sortalgorithmcorrectness
     pub fn validate_sorting<T: Ord + Clone>(original: Vec<T>, result: &SortingResult<T>) -> bool {
         // 检查长度是否一致
         if original.len() != result.data.len() {

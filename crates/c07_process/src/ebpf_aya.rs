@@ -1,12 +1,11 @@
 //! eBPF + Rust (Aya) 预研模块
-//!
-//! ⚠️ **警告**: 本模块内容基于 Aya 框架文档，需要 Linux 内核 5.7+ 和特定工具链。
+//! eBPF + Rust (Aya) Research Module
 //! ⚠️ **warning **: this module inside Aya framework ， Linux kernel 5.7+ and toolchain 。
 //! eBPF 程序需要 root 权限或 CAP_BPF 能力。
-//! eBPF program root or CAP_BPF 。
+//! eBPF programs require root privileges or CAP_BPF capability.
 //!
 //! # 概念定义
-//! # concept definition
+//! # Concept Definitions
 //!
 //! [Aya](https://aya-rs.dev/) 是一个纯 Rust eBPF 开发框架，允许用 Rust 编写
 //! 内核态和用户态 eBPF 程序，无需 libbpf 或 C。
@@ -20,7 +19,7 @@
 //! - Rust cost perfect eBPF
 //!
 //! ## 核心概念
-//! ## core concept
+//! ## Core Concepts
 //!
 //! ```text
 //! What:   用 Rust 编写 eBPF 程序并加载到内核
@@ -49,7 +48,7 @@
 //! ├── XDP: 网络包处理（最早介入点）
 //! ├── XDP: network （point ）
 //! ├── TC: 流量控制
-//! ├── TC: flow rate
+//! TC: flow control
 //! ├── Tracepoint: 内核事件追踪
 //! ├── Tracepoint: kernel
 //! ├── Kprobe: 内核函数探针
@@ -59,7 +58,7 @@
 //! ```
 //!
 //! # 权威来源
-//! # Source
+//! # Authoritative Sources
 //! - 项目: [aya-rs/aya](https://github.com/aya-rs/aya)
 //! - 文档: [aya-rs.dev](https://aya-rs.dev/)
 //! - 书籍: [Aya Book](https://aya-rs.dev/book/)
@@ -160,7 +159,7 @@ impl XdpFirewallConcept {
 /// #[tracepoint]
 /// pub fn trace_sched_switch(ctx: TracePointContext) -> u32 {
 ///     // 读取当前进程信息
-///     // when before process
+/// // currentprocess information
 ///     let pid: u32 = unsafe { ctx.read_at_offset(16) };
 ///
 ///     // 尝试写入 ring buffer
@@ -191,8 +190,7 @@ impl TracepointConcept {
 // ============================================================================
 
 /// # BPF Map 类型
-///
-/// BPF Map 是内核态和用户态共享的键值存储，用于：
+/// # BPF Map type
 /// BPF Map kernel and ，：
 /// - 配置传递（用户态 → 内核态）
 /// - （ → kernel ）

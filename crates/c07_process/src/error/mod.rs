@@ -7,7 +7,7 @@ use thiserror::Error;
 pub mod enhanced;
 
 /// 进程管理相关错误
-/// process
+/// processmanagement error
 #[derive(Error, Debug)]
 pub enum ProcessError {
     /// 进程创建失败
@@ -44,7 +44,7 @@ pub enum ProcessError {
     ResourceExhausted(String),
 
     /// 无效的进程配置
-    /// ineffective process
+    /// withoutprocess configuration
     #[error("Invalid process configuration: {0}")]
     InvalidConfig(String),
 
@@ -54,7 +54,7 @@ pub enum ProcessError {
     AlreadyTerminated,
 
     /// 子进程错误
-    /// process
+    /// process error
     #[error("Child process error: {0}")]
     ChildError(#[from] ChildProcessError),
 
@@ -65,7 +65,7 @@ pub enum ProcessError {
 }
 
 /// 子进程相关错误
-/// process
+/// process error
 #[derive(Error, Debug)]
 pub enum ChildProcessError {
     /// 子进程异常退出
@@ -90,7 +90,7 @@ pub enum ChildProcessError {
 }
 
 /// IPC相关错误
-/// IP C
+/// IPC error
 #[derive(Error, Debug)]
 pub enum IpcError {
     /// 连接失败
@@ -134,17 +134,18 @@ pub enum IpcError {
     DeserializationError(String),
 
     /// 共享内存错误
-    /// shared memory
+    /// sharedmemory error
     #[error("Shared memory error: {0}")]
     SharedMemoryError(String),
 
     /// 信号处理错误
+    /// handling error
     #[error("Signal handling error: {0}")]
     SignalError(String),
 }
 
 /// 同步相关错误
-/// synchronous
+/// synchronous error
 #[derive(Error, Debug)]
 pub enum SyncError {
     /// 锁获取失败
@@ -182,13 +183,13 @@ pub enum SyncError {
     BarrierError(String),
 
     /// 原子操作错误
-    /// atomic operation
+    /// atomicoperation error
     #[error("Atomic operation error: {0}")]
     AtomicError(String),
 }
 
 /// 系统资源错误
-/// system
+/// systemresource error
 #[derive(Error, Debug)]
 pub enum ResourceError {
     /// 内存不足
@@ -221,12 +222,12 @@ pub enum ResourceError {
 #[derive(Error, Debug)]
 pub enum PlatformError {
     /// Unix系统错误
-    /// Unixsystem
+    /// Unixsystem error
     #[error("Unix system error: {0}")]
     Unix(String),
 
     /// Windows系统错误
-    /// Windowssystem
+    /// Windowssystem error
     #[error("Windows system error: {0}")]
     Windows(String),
 
@@ -242,6 +243,7 @@ pub enum PlatformError {
 }
 
 /// 配置错误
+/// Configuration error
 #[derive(Error, Debug)]
 pub enum ConfigError {
     /// 配置文件不存在
@@ -250,6 +252,7 @@ pub enum ConfigError {
     FileNotFound(String),
 
     /// 配置文件格式错误
+    /// configurationfile error
     #[error("Configuration file format error: {0}")]
     FormatError(String),
 
@@ -268,11 +271,11 @@ pub enum ConfigError {
 }
 
 /// 通用错误类型
-/// error type
+/// genericerror type
 #[derive(Error, Debug)]
 pub enum C07ProcessError {
     /// 进程错误
-    /// process
+    /// process error
     #[error("Process error: {0}")]
     Process(#[from] ProcessError),
 
@@ -282,11 +285,12 @@ pub enum C07ProcessError {
     Ipc(#[from] IpcError),
 
     /// 同步错误
-    /// synchronous
+    /// synchronous error
     #[error("Synchronization error: {0}")]
     Sync(#[from] SyncError),
 
     /// 资源错误
+    /// resource error
     #[error("Resource error: {0}")]
     Resource(#[from] ResourceError),
 
@@ -296,6 +300,7 @@ pub enum C07ProcessError {
     Platform(#[from] PlatformError),
 
     /// 配置错误
+    /// Configuration error
     #[error("Configuration error: {0}")]
     Config(#[from] ConfigError),
 

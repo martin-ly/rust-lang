@@ -1,11 +1,12 @@
 //! # 形式化证明模块
-//! # module
+//! # formalproof module
 //!
 //! 本模块提供算法的形式化证明框架和具体证明实现。
 //! This module provides algorithm framework and volume 。
 use serde::{Deserialize, Serialize};
 
 /// 形式化证明
+/// formal proof
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FormalProof {
     pub algorithm_name: String,
@@ -16,7 +17,7 @@ pub struct FormalProof {
 }
 
 /// 证明步骤
-/// step
+/// Proof steps
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProofStep {
     pub step_number: usize,
@@ -27,7 +28,7 @@ pub struct ProofStep {
 }
 
 /// 证明类型
-/// type
+/// proof type
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ProofType {
     Invariant,
@@ -39,7 +40,7 @@ pub enum ProofType {
 }
 
 /// 证明状态
-/// state
+/// proof status
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ProofStatus {
     Pending,
@@ -54,7 +55,7 @@ pub struct FormalProver;
 
 impl FormalProver {
     /// 生成快速排序的形式化证明
-    /// quick sort
+    /// fastsortformal proof
     pub fn prove_quicksort() -> FormalProof {
         FormalProof {
             algorithm_name: "QuickSort".to_string(),
@@ -101,7 +102,7 @@ impl FormalProver {
     }
 
     /// 生成归并排序的形式化证明
-    /// merge sort
+    /// sortformal proof
     pub fn prove_mergesort() -> FormalProof {
         FormalProof {
             algorithm_name: "MergeSort".to_string(),
@@ -145,7 +146,7 @@ impl FormalProver {
     }
 
     /// 生成二分搜索的形式化证明
-    /// binary search
+    /// searchformal proof
     pub fn prove_binary_search() -> FormalProof {
         FormalProof {
             algorithm_name: "BinarySearch".to_string(),

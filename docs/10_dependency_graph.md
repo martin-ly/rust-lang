@@ -1,8 +1,8 @@
 # 依赖关系图
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > **最后更新**: 2026-04-10
 > **版本**: 基于 Cargo.toml 解析
 
@@ -13,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [依赖关系图](#依赖关系图)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [Crate 依赖图](#crate-依赖图)
     - [视觉表示](#视觉表示)
   - [依赖矩阵](#依赖矩阵)
@@ -42,7 +42,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
                 外部依赖
                 /   |   \
                 /    |    \
@@ -256,19 +256,12 @@
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
 > **[来源: ACM - Systems Programming Languages]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ---

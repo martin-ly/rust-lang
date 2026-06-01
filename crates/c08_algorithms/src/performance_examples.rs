@@ -1,5 +1,5 @@
 //! 性能优化实践示例模块
-//! performance optimization example module
+//! Performance Optimization Practice Example Module
 //!
 //! 本模块提供四个主要性能优化领域的实践示例：
 //! This module provides main performance optimization domain example ：
@@ -15,7 +15,7 @@ pub mod runtime_profiling;
 use std::time::{Duration, Instant};
 
 /// 性能基准测试结果
-/// Performance benchmark result
+/// Performance benchmark results
 #[derive(Debug, Clone)]
 pub struct BenchmarkResult {
     pub name: String,
@@ -70,7 +70,7 @@ impl PerformanceBenchmarker {
     }
 
     /// 获取所有基准测试结果
-    /// all benchmark result
+    /// Get hastestresult
     pub fn get_results(&self) -> &[BenchmarkResult] {
         &self.results
     }
@@ -106,20 +106,21 @@ impl MemoryMonitor {
     }
 
     /// 开始监控
+    /// Start monitoring
     pub fn start_monitoring(&mut self) {
         // 在实际应用中，这里会调用系统API获取内存使用情况
         self.initial_usage = Some(0);
     }
 
     /// 获取当前内存使用
-    /// when before memory
+    /// Get currentmemoryuse
     pub fn get_current_usage(&self) -> Option<usize> {
         // 模拟内存使用监控
         Some(1024 * 1024) // 1MB
     }
 
     /// 计算内存增长
-    /// memory
+    /// Compute memorylong
     pub fn calculate_growth(&self) -> Option<usize> {
         if let Some(initial) = self.initial_usage {
             self.get_current_usage().map(|current| current - initial)
@@ -149,7 +150,7 @@ impl PerformanceProfiler {
     }
 
     /// 测量函数执行时间
-    /// function time
+    /// functionexecution time
     pub fn measure<F, T>(&mut self, name: &str, f: F) -> T
     where
         F: FnOnce() -> T,
@@ -163,7 +164,7 @@ impl PerformanceProfiler {
     }
 
     /// 获取测量结果
-    /// result
+    /// Get result
     pub fn get_measurements(&self) -> &[(String, Duration)] {
         &self.measurements
     }

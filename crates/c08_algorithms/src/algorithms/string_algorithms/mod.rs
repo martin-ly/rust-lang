@@ -1,12 +1,12 @@
 //! # 字符串算法模块
-//! # string algorithm module
+//! # stringalgorithm module
 //!
 //! 本模块实现了各种字符串算法。
-//! this module string algorithm 。
+//! This module implements stringalgorithm
 //use serde::{Serialize, Deserialize};
 
 /// 字符串算法实现
-/// string algorithm
+/// stringalgorithm implementation
 pub struct StringAlgorithms;
 
 impl StringAlgorithms {

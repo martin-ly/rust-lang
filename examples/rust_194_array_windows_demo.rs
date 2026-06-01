@@ -1,4 +1,4 @@
-//! Rust 1.94 array_windows 特性完整示例
+//! Rust 1.94 array_windows 特性完整示例 (Rust 1.96+ 稳定可用)
 //! 运行方式: rustc --edition 2024 examples/rust_194_array_windows_demo.rs && ./rust_194_array_windows_demo
 
 #![allow(dead_code)]
@@ -255,7 +255,7 @@ fn benchmark_comparison() {
 // =============================================================================
 
 fn main() {
-    println!("=== Rust 1.94 array_windows 特性演示 ===\n");
+    println!("=== Rust 1.96+ array_windows 特性演示 (1.94 引入) ===\n");
 
     // 1. 基础示例
     println!("1. ABBA 模式检测");

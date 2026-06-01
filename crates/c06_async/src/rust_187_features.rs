@@ -2,18 +2,17 @@
 //! Rust 187.0 feature module —— c06_async
 //!
 //! 本模块展示了 Rust 187.0 (2025-05-15) 的关键语言特性和工具链改进。
-//! This module demonstrates Rust 187.0 (2025-05-15) key feature and toolchain 。
+//! This module demonstrates key language features and toolchain improvements of Rust 187.0 (2025-05-15).
 //!
 //! - `open_ranges_parsing`: 开放范围 `..EXPR` 可在一元操作符后解析
 //! - `open_ranges_parsing`: scope `..EXPR` in after
 //! - `use_in_traits`: trait 中 RPIT 的 `use<...>` precise capturing
-//!
-//! # 版本信息
+//! - `use_in_traits`: `use<...>` precise capturing in trait RPIT
 //! # this
 //! - Rust 版本: 187.0
-//! - Rust this : 187.0
+//! - Rust Version: 187.0
 //! - 稳定日期: 2025-05-15
-//! - date : 2025-05-15
+//! - Stable Date: 2025-05-15
 //! - Edition: 2024
 
 // ============================================================================
@@ -21,18 +20,18 @@
 // ============================================================================
 
 /// # 开放范围与一元操作符
-/// # scope and
+/// # Open Ranges and Unary Operators
 ///
 /// Rust 1.87.0 修复了开放范围 `..expr` 在一元操作符后的解析问题。
 /// Rust 1.87.0 scope `..expr` in after problem 。
 ///
 /// ## 之前
-/// ## 's before
+/// ## Before
 /// `..-5` 会被解析错误，需要写成 `..(-5)`。
 /// `..-5` is ， `..(-5)`。
 ///
 /// ## 现在
-/// ## present
+/// ## Now
 /// `..-5` 可以直接解析为 `RangeTo { end: -5 }`。
 /// `..-5` can as `RangeTo { end: -5 }`。
 pub fn negative_range_example() -> Vec<i32> {
@@ -51,13 +50,12 @@ fn test_open_range_parsing() {
 // ============================================================================
 
 /// # Trait 中的 `use<...>` Precise Capturing
-///
-/// Rust 1.87.0 将 `use<...>` precise capturing 扩展到 trait 定义中，
+/// # `use<...>` Precise Capturing in Traits
 /// 允许在 trait 方法的返回类型中精确控制生命周期捕获。
 /// in trait method type in lifetime 。
 ///
 /// ## 背景
-/// ## background
+/// ## Background
 /// 在 2024 Edition 中，`impl Trait` 的隐式生命周期捕获规则更严格。
 /// in 2024 Edition in ，`impl Trait` lifetime rule 。
 /// `use<'a>` 语法允许显式声明需要捕获哪些生命周期。

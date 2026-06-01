@@ -2,17 +2,16 @@
 //! Rust 189.0 feature module —— c07_process
 //!
 //! 本模块展示了 Rust 189.0 (2025-08-07) 的关键语言特性和工具链改进。
-//! This module demonstrates Rust 189.0 (2025-08-07) key feature and toolchain 。
+//! This module demonstrates key language features and toolchain improvements of Rust 189.0 (2025-08-07).
 //!
 //! - `repr128`: `#[repr(u128/i128)]` 稳定
 //! - `explicit_inferred_const`: 显式推断 const 参数
-//!
-//! # 版本信息
+//! - `explicit_inferred_const`: Explicit inferred const parameters
 //! # this
 //! - Rust 版本: 189.0
-//! - Rust this : 189.0
+//! - Rust Version: 189.0
 //! - 稳定日期: 2025-08-07
-//! - date : 2025-08-07
+//! - Stable Date: 2025-08-07
 //! - Edition: 2024
 
 // ============================================================================
@@ -26,18 +25,18 @@
 /// enum type 128 as represent 。
 ///
 /// ## 使用场景
-/// ## scenario
+/// ## Usage Scenarios
 /// - 与使用 128 位标识符的外部协议/格式交互
 /// - and 128 outside /
 /// - 需要极大取值范围的枚举（如 UUID 命名空间标识符）
 /// - scope enum （ UUID space ）
 ///
 /// ## 限制
-/// ##
+/// ## Constraints
 /// - 仅在支持 128 位整数的平台上有效
 /// - in 128 platform on effective
 /// - FFI 中使用需谨慎，因为 C 标准没有固定大小的 128 位整数类型
-/// - FFI in ，because C standard 128 type
+/// - FFI use C standardhaslargesmall 128 type
 #[repr(u128)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum LargeId {
@@ -69,18 +68,18 @@ fn test_repr128() {
 // ============================================================================
 
 /// # 显式推断 const 参数
-/// # infer const parameter
+/// # Explicit Inferred Const Parameters
 ///
 /// Rust 1.89.0 允许在 turbofish 语法中显式使用 `_` 来让编译器推断 const 泛型参数。
 /// Rust 1.89.0 in turbofish in `_` infer const generic parameter 。
 ///
 /// ## 语法
-/// ##
+/// ## Syntax
 /// `foo::<_, N>(...)` — `_` 表示"让编译器推断这个 const 参数"
 /// `foo::<_, N>(...)` — `_` represent "infer const parameter "
 ///
 /// ## 使用场景
-/// ## scenario
+/// ## Usage Scenarios
 /// - 只需显式指定部分 const 参数时
 /// - part const parameter
 /// - 提高代码可读性，避免写出冗余的 const 表达式

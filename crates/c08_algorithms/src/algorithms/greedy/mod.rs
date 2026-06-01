@@ -1,12 +1,12 @@
 //! # 贪心算法模块
-//! # greedy algorithm module
+//! # algorithm module
 //!
 //! 本模块实现了各种贪心算法。
-//! this module greedy algorithm 。
+//! This module implements algorithm
 //use serde::{Serialize, Deserialize};
 
 /// 贪心算法实现
-/// greedy algorithm
+/// algorithm implementation
 pub struct GreedyAlgorithms;
 
 impl GreedyAlgorithms {

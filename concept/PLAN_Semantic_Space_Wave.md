@@ -1,4 +1,6 @@
 # Wave 11 计划：Rust 表征空间与语义边界全面梳理
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 ## 📑 目录
 
@@ -23,7 +25,6 @@
   - [四、权威来源对齐](#四权威来源对齐)
   - [五、验收标准](#五验收标准)
   - [六、执行建议](#六执行建议)
-  - [预计工作量：1-2 轮会话（核心文件）+ 1 轮会话（映射标注）](#预计工作量1-2-轮会话核心文件-1-轮会话映射标注)
 
 ## 一、核心问题定义
 
@@ -272,6 +273,7 @@ Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597
 **推荐路径**：先完成 `semantic_space.md`（核心交付物），再批量增强现有文件的映射标注。
 
 预计工作量：1-2 轮会话（核心文件）+ 1 轮会话（映射标注）
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

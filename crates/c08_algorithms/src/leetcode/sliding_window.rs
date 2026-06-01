@@ -2,20 +2,20 @@
 //! LeetCode algorithm （ Rust 1.91 feature ）
 //!
 //! 本模块实现经典的滑动窗口类 LeetCode 题目，充分利用 Rust 1.91 的新特性。
-//! this module LeetCode ， Rust 1.91 feature 。
+//! This module implements classic LeetCode Rust 1.91 newfeatures
 //!
 //! ## Rust 1.91 特性应用
-//! ## Rust 1.91 feature application
+//! ## Rust 1.91 Feature Application
 //!
 //! - **JIT 优化**: 滑动窗口操作性能提升 10-15%
 //! - **JIT optimization **: performance 10-15%
 //! - **内存优化**: 使用 HashMap 和数组优化窗口状态
-//! - **memory optimization **: HashMap and optimization state
+//! - **memoryoptimization**: use HashMap arrayoptimization status
 //! - **新的稳定 API**: 改进的迭代器操作
-//! - ** API**:
+//! - **new API**: improvementsiterator operation
 //!
 //! ## 包含的经典题目
-//! ##
+//! ## Classic Problems
 //!
 //! - 3. Longest Substring Without Repeating Characters（无重复字符的最长子串）
 //! - 76. Minimum Window Substring（最小覆盖子串）
@@ -34,21 +34,21 @@ use std::collections::HashMap;
 /// 3. Longest Substring Without Repeating Characters（无重复字符的最长子串）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个字符串 `s`，请你找出其中不含有重复字符的 **最长子串** 的长度。
 /// `s`，its in **** 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 滑动窗口操作性能提升 10-15%
 /// - **JIT optimization **: performance 10-15%
 /// - **内存优化**: 使用 HashMap 存储字符位置
 /// - **memory optimization **: HashMap position
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(min(n, m))，其中 m 是字符集大小
 /// - space complexity : O(min(n, m))，its in m
 pub fn length_of_longest_substring(s: String) -> i32 {
@@ -75,21 +75,21 @@ pub fn length_of_longest_substring(s: String) -> i32 {
 /// 76. Minimum Window Substring（最小覆盖子串）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个字符串 `s`、一个字符串 `t`。返回 `s` 中涵盖 `t` 所有字符的最小子串。
 /// `s`、 `t`。 `s` in `t` all minimum 。
 /// 如果 `s` 中不存在涵盖 `t` 所有字符的子串，则返回空字符串 `""`。
 /// if `s` in in `t` all ， `""`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 滑动窗口操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Sliding window operation performance improvement
 /// - **内存优化**: 使用 HashMap 和数组优化窗口状态
-/// - **memory optimization **: HashMap and optimization state
+/// - **memoryoptimization**: use HashMap arrayoptimization status
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(|s| + |t|)
 /// - time complexity : O(|s| + |t|)
 /// - 空间复杂度: O(|s| + |t|)
@@ -161,7 +161,7 @@ pub fn min_window(s: String, t: String) -> String {
 /// 209. Minimum Size Subarray Sum（长度最小的子数组）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定一个含有 `n` 个正整数的数组和一个正整数 `target`。
 /// `n` and `target`。
 /// 找出该数组中满足其和 `≥ target` 的长度最小的 **连续子数组** `[nums_l, nums_l+1, ..., nums_r-1, nums_r]`，
@@ -170,18 +170,18 @@ pub fn min_window(s: String, t: String) -> String {
 /// and its 。if in condition ， `0`。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 滑动窗口操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Sliding window operation performance improvement
 /// - **内存优化**: O(1) 额外空间复杂度
 /// - **memory optimization **: O(1) outside space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn min_sub_array_len(target: i32, nums: Vec<i32>) -> i32 {
     let mut min_len = i32::MAX;
     let mut left = 0;
@@ -204,7 +204,7 @@ pub fn min_sub_array_len(target: i32, nums: Vec<i32>) -> i32 {
 /// 239. Sliding Window Maximum（滑动窗口最大值）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个整数数组 `nums`，有一个大小为 `k` 的滑动窗口从数组的最左侧移动到数组的最右侧。
 /// `nums`，as `k` from to 。
 /// 你只可以看到在滑动窗口内的 `k` 个数字。滑动窗口每次只向右移动一位。
@@ -213,18 +213,18 @@ pub fn min_sub_array_len(target: i32, nums: Vec<i32>) -> i32 {
 /// **in maximum **。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 单调队列操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT optimization**: singlequeueoperationperformance improvement
 /// - **内存优化**: 使用双端队列存储索引
 /// - **memory optimization **:
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(k)
-/// - space complexity : O(k)
+/// - Space Complexity: O(k)
 pub fn max_sliding_window(nums: Vec<i32>, k: i32) -> Vec<i32> {
     use std::collections::VecDeque;
 
@@ -267,23 +267,23 @@ pub fn max_sliding_window(nums: Vec<i32>, k: i32) -> Vec<i32> {
 /// 438. Find All Anagrams in a String（to in all ）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给定两个字符串 `s` 和 `p`，找到 `s` 中所有 `p` 的 **字母异位词** 的子串，返回这些子串的起始索引。
 /// `s` and `p`，to `s` in all `p` **** ，。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 滑动窗口 + 字符频率统计性能提升
-/// - **JIT optimization **: + performance
+/// - **JIT optimization**: + performance improvement
 /// - **内存优化**: 使用数组计数
 /// - **memory optimization **:
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
     if s.len() < p.len() {
         return Vec::new();
@@ -347,23 +347,23 @@ pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
 /// 567. Permutation in String（字符串的排列）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你两个字符串 `s1` 和 `s2`，写一个函数来判断 `s2` 是否包含 `s1` 的排列。
 /// `s1` and `s2`，function `s2` `s1` arrangement 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 滑动窗口 + 字符频率统计性能提升
-/// - **JIT optimization **: + performance
+/// - **JIT optimization**: + performance improvement
 /// - **内存优化**: 使用数组计数
 /// - **memory optimization **:
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn check_inclusion(s1: String, s2: String) -> bool {
     if s1.len() > s2.len() {
         return false;
@@ -413,25 +413,25 @@ pub fn check_inclusion(s1: String, s2: String) -> bool {
 /// 643. Maximum Average Subarray I（子数组最大平均数 I）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个由 `n` 个元素组成的整数数组 `nums` 和一个整数 `k`。请你找出平均数最大且 **长度为 `k`** 的连续子数组，
 /// `n` element `nums` and `k`。maximum and **as `k`** ，
 /// 并输出该最大平均数。
 /// and this maximum 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 滑动窗口操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Sliding window operation performance improvement
 /// - **内存优化**: O(1) 空间复杂度
-/// - **memory optimization **: O(1) space complexity
+/// - **Memory Optimization**: O(1) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn find_max_average(nums: Vec<i32>, k: i32) -> f64 {
     let k = k as usize;
     let mut sum: i64 = 0;
@@ -455,23 +455,23 @@ pub fn find_max_average(nums: Vec<i32>, k: i32) -> f64 {
 /// 713. Subarray Product Less Than K（乘积小于 K 的子数组）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 给你一个整数数组 `nums` 和一个整数 `k`，请你返回子数组内所有元素的乘积严格小于 `k` 的连续子数组的数目。
 /// `nums` and `k`，inside all element `k` 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 滑动窗口操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Sliding window operation performance improvement
 /// - **内存优化**: O(1) 空间复杂度
-/// - **memory optimization **: O(1) space complexity
+/// - **Memory Optimization**: O(1) space complexity
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)
-/// - space complexity : O(1)
+/// - Space Complexity: O(1)
 pub fn num_subarray_product_less_than_k(nums: Vec<i32>, k: i32) -> i32 {
     if k <= 1 {
         return 0;
@@ -500,7 +500,7 @@ pub fn num_subarray_product_less_than_k(nums: Vec<i32>, k: i32) -> i32 {
 /// 904. Fruit Into Baskets（水果成篮）
 ///
 /// ## 问题描述
-/// ## problem describe
+/// ## Problem Description
 /// 你正在探访一家农场，农场从左到右种植了一排果树。这些树用一个整数数组 `fruits` 表示，其中 `fruits[i]` 是第 `i` 棵树上的水果 **种类**。
 /// in ，from to tree 。tree `fruits` represent ，its in `fruits[i]` `i` tree on ****。
 /// 你想要尽可能多地收集水果。然而，农场的主人设定了一些严格的规矩，你必须按照要求采摘水果：
@@ -515,16 +515,16 @@ pub fn num_subarray_product_less_than_k(nums: Vec<i32>, k: i32) -> i32 {
 /// - to tree before ，but type ，must 。
 ///
 /// ## Rust 1.91 特性应用
-/// ## Rust 1.91 feature application
+/// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: 滑动窗口操作性能提升
-/// - **JIT optimization **: performance
+/// - **JIT Optimization**: Sliding window operation performance improvement
 /// - **内存优化**: 使用 HashMap 存储水果类型计数
 /// - **memory optimization **: HashMap type
 ///
 /// ## 复杂度
-/// ## complex
+/// ## Complexity
 /// - 时间复杂度: O(n)
-/// - time complexity : O(n)
+/// - Time Complexity: O(n)
 /// - 空间复杂度: O(1)（最多存储 2 种水果类型）
 /// - space complexity : O(1)（at most 2 type ）
 pub fn total_fruit(fruits: Vec<i32>) -> i32 {
@@ -554,7 +554,7 @@ pub fn total_fruit(fruits: Vec<i32>) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有滑动窗口类问题
-/// all problem
+/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

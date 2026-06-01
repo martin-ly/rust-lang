@@ -77,6 +77,7 @@ impl<T> SimplePriorityChannel<T> {
 
     /// 发送消息
     /// Sends消息
+    /// Sendsmessage
     pub fn send(&self, priority: u32, data: T) {
         let message = SimplePriorityMessage::new(priority, data);
         let mut queue = self.queue.lock().unwrap();

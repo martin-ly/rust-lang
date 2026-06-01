@@ -496,6 +496,7 @@ impl<T: Clone + Send + Sync + 'static> TypedContainer<T> {
 
     /// 映射操作
     /// Maps操作
+    /// Mapsoperation
     /// Rust 1.94.0: 改进closuretype inference
     /// Rust 1.94.0: improveclosuretype inference
     pub fn map<F, R>(&self, f: F) -> TypedContainer<R>

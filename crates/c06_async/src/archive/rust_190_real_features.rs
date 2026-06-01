@@ -2,22 +2,22 @@
 //! Rust 1.90 feature (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//! ⚠️ **this ** - this as reference
+//! ⚠️ **Historical Version File** - This file is retained for historical reference only
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
+//! **Currently Recommended Version**: Rust 1.92.0+ | For latest features, please refer to `rust_192_features.rs`
 //!
 //! 本模块实现了Rust 1.90版本中真正可用的语言特性，包括：
-//! this module Rust 1.90this in feature ，：
+//! This module implements Rust 1.90versiontruepositivelanguagefeaturesincluding
 //! - 真正的AsyncDrop实现
-//! - AsyncDrop
+//! - truepositiveAsyncDrop implementation
 //! - 真正的AsyncIterator实现
-//! - Polonius借用检查器改进的利用
+//! - truepositiveAsyncIterator implementation
 //! - Poloniusborrowing
 //! - 下一代特质求解器优化
-//! - under trait optimization
+//! - lower optimization
 //! - 并行前端编译优化
-//! - parallelism frontend optimization
+//! - parallelfront optimization
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::time::sleep;
@@ -28,7 +28,7 @@ use std::future::Future;
 use std::pin::Pin;
 
 /// 真正的AsyncDrop实现
-/// AsyncDrop
+/// truepositiveAsyncDrop implementation
 ///
 /// 在Rust 1.90中，AsyncDrop trait已经稳定，这里实现真正的异步资源清理
 /// in Rust 1.90in ，AsyncDrop trait，async
@@ -92,10 +92,10 @@ impl Drop for AsyncResource190 {
 }
 
 /// 真正的异步迭代器实现
-/// async
+/// truepositiveasynciterator implementation
 ///
 /// 在Rust 1.90中，我们使用自定义的异步迭代器实现
-/// in Rust 1.90in ，definition async
+/// Rust 1.90usecustomasynciterator implementation
 pub struct AsyncDataStream190 {
     data: Vec<i32>,
     current_index: usize,
@@ -183,7 +183,7 @@ impl PoloniusBorrowDemo {
     }
 
     /// 演示更智能的借用分析
-    /// demonstration borrowing analyze
+    /// smartborrowing analysis
     pub async fn smart_borrow_analysis(&self) -> Result<Vec<String>> {
         let mut results = Vec::new();
 
@@ -222,7 +222,7 @@ impl NextGenTraitSolver {
     }
 
     /// 演示下一代特质求解器的性能优化
-    /// demonstration under trait performance optimization
+    /// lowerperformance optimization
     pub async fn optimized_trait_solving<T>(&self, input: T) -> Result<usize>
     where
         T: std::fmt::Display + std::hash::Hash + Eq + Clone,
@@ -294,7 +294,7 @@ impl ParallelFrontendOptimizer {
     }
 
     /// 演示并行编译优化
-    /// demonstration parallelism optimization
+    /// parallel optimization
     pub async fn parallel_compilation(&self, tasks: Vec<String>) -> Result<Vec<String>> {
         // 初始化任务队列
         {

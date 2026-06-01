@@ -1,5 +1,6 @@
 > **权威来源**: [ISO C++20](https://isocpp.org/std/the-standard), [cppreference](https://en.cppreference.com/), [cxx crate 文档](https://cxx.rs/), [Rust FFI 文档](https://doc.rust-lang.org/nomicon/ffi.html)
 > **分级**: [A]
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 ISO C++20、cxx crate 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 
@@ -12,14 +13,14 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [C++ 互操作指南（cxx + bindgen）](#c-互操作指南cxx--bindgen)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [cxx crate](#cxx-crate)
     - [核心理念](#核心理念)
     - [工作流程](#工作流程)
     - [build.rs](#buildrs)
   - [bindgen](#bindgen)
-    - [工作流程](#工作流程)
+    - [工作流程](#工作流程-1)
   - [cxx vs bindgen 对比](#cxx-vs-bindgen-对比)
   - [项目中的使用](#项目中的使用)
   - [参考](#参考)

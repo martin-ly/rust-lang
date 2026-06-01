@@ -1,5 +1,6 @@
 > **权威来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/rpit-lifetime-capture.html), [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
 > **分级**: [A]
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2289 来源标注 [来源: Authority Source Sprint Batch 8]
 
@@ -12,7 +13,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition RPIT Lifetime Capture 迁移指南](#rust-2024-edition-rpit-lifetime-capture-迁移指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [变化详情](#变化详情)
     - [Rust 2021 及之前](#rust-2021-及之前)

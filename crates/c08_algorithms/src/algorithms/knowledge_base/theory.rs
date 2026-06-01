@@ -1,5 +1,5 @@
 //! # 算法理论知识模块
-//! # algorithm theory module
+//! # algorithm module
 //!
 //! 本模块提供算法的理论基础和数学原理。
 //! This module provides algorithm theory foundation and 。

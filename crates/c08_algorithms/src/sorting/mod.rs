@@ -1,11 +1,11 @@
 //! 排序算法：同步 / Rayon并行 / Tokio异步 统一接口
-//! sorting algorithm ：synchronous / Rayonparallelism / Tokioasync
+//! sortalgorithmsynchronous / Rayonparallel / Tokioasync interface
 use anyhow::Result;
 use rayon::prelude::*;
 use rayon::slice::{ParallelSlice, ParallelSliceMut};
 
 /// 排序算法类型
-/// sorting algorithm type
+/// sortalgorithm type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SortingAlgo {
     Quick,

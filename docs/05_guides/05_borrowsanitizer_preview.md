@@ -1,4 +1,6 @@
 # BorrowSanitizer 预览
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [A]
 > **层级**: L7 前沿 / L3 高级 Unsafe
@@ -13,7 +15,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [BorrowSanitizer 预览](#borrowsanitizer-预览)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [概述](#概述)
   - [核心技术](#核心技术)
   - [检测能力](#检测能力)

@@ -3,14 +3,14 @@ use crate::types::{ProcessConfig, ResourceLimits};
 use std::collections::HashMap;
 
 /// 进程属性管理器
-/// process attribute
+/// process manager
 pub struct ProcessAttributesManager {
     configs: HashMap<u32, ProcessConfig>,
 }
 
 impl ProcessAttributesManager {
     /// 创建新的属性管理器
-    /// attribute
+    /// Create new manager
     pub fn new() -> Self {
         Self {
             configs: HashMap::new(),
@@ -18,19 +18,20 @@ impl ProcessAttributesManager {
     }
 
     /// 设置进程配置
-    /// process
+    /// Set processconfiguration
     pub fn set_config(&mut self, pid: u32, config: ProcessConfig) -> ProcessResult<()> {
         self.configs.insert(pid, config);
         Ok(())
     }
 
     /// 获取进程配置
-    /// process
+    /// Get processconfiguration
     pub fn get_config(&self, pid: u32) -> Option<&ProcessConfig> {
         self.configs.get(&pid)
     }
 
     /// 更新资源限制
+    /// Update resource
     pub fn update_resource_limits(
         &mut self,
         pid: u32,

@@ -1,5 +1,6 @@
 # sccache 配置指南
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 
@@ -10,7 +11,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [sccache 配置指南](#sccache-配置指南)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [什么是 sccache?](#什么是-sccache)
   - [安装](#安装)
     - [方式 1: 使用 cargo 安装 (推荐)](#方式-1-使用-cargo-安装-推荐)
@@ -277,15 +278,10 @@ sccache --start-server
 ## 权威来源索引
 
 > **[来源: Wikipedia - Compiler Cache]**
-
 > **[来源: Mozilla - sccache]**
-
 > **[来源: ACM - Build System Optimization]**
-
 > **[来源: IEEE - Software Build Automation]**
-
 > **[来源: Rust CI Best Practices]**
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference]**
 > **[来源: TRPL - The Rust Programming Language]**

@@ -41,7 +41,7 @@ impl ProcessMutex {
     }
 
     /// 尝试获取锁
-    /// lock
+    /// Try to acquire lock
     #[allow(dead_code)]
     pub fn try_lock(&self) -> Option<MutexGuard<'_>> {
         if let Ok(guard) = self.inner.try_lock() {
@@ -131,7 +131,7 @@ impl ProcessMutex {
     }
 
     /// 获取等待者数量（互斥锁总是0或1）
-    /// etc. quantity （mutex 0or 1）
+    /// Get count01
     pub fn waiter_count(&self) -> usize {
         if self.is_locked() {
             1

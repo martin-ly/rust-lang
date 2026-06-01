@@ -16,6 +16,7 @@ pub struct MessageQueue {
 #[allow(dead_code)]
 impl MessageQueue {
     /// 创建新的消息队列
+    /// Create new queue
     pub fn new(name: &str, capacity: usize, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             name: name.to_string(),
@@ -26,7 +27,7 @@ impl MessageQueue {
     }
 
     /// 连接到现有的消息队列
-    /// to
+    /// existing queue
     pub fn connect(name: &str, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             name: name.to_string(),

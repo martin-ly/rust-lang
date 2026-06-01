@@ -2,13 +2,13 @@
 //! # algorithm tree
 //!
 //! 本模块提供了各种算法选择的决策树，帮助开发者根据问题特征选择最合适的算法。
-//! This module provides algorithm tree ，according to problem algorithm 。
+//! This module provides algorithmtreeproblemsalgorithm
 //!
 //! 每个决策树以结构体形式组织，通过关联函数返回详细的决策指南（Markdown + ASCII 图表）。
 //! tree struct organize ，associated function （Markdown + ASCII ）。
 //!
 //! ## 决策树列表
-//! ## tree
+//! ## tree table
 //!
 //! | 结构体 | 覆盖领域 |
 //! | struct | domain |
@@ -24,7 +24,7 @@
 // ============================================================
 
 /// 排序算法决策树
-/// sorting algorithm tree
+/// sortalgorithm tree
 ///
 /// 根据数据规模、稳定性需求、内存限制和键类型，选择最合适的排序算法。
 /// according to scale 、、memory and type ，sorting algorithm 。
@@ -298,7 +298,7 @@ v2.sort_by_key(|k| k.0);          // 稳定，保留原始相对顺序
 // ============================================================
 
 /// 搜索算法决策树
-/// searching algorithm tree
+/// Search algorithmtree
 ///
 /// 根据数据是否有序、访问模式、键类型选择搜索策略。
 /// according to 、、type strategy 。
@@ -306,7 +306,7 @@ pub struct SearchingDecisionTree;
 
 impl SearchingDecisionTree {
     /// 线性搜索 vs 二分搜索 vs 插值搜索
-    /// linear search vs binary search vs interpolation search
+    /// search vs search vs value search
     pub fn linear_vs_binary_vs_interpolation() -> &'static str {
         r#"# 线性搜索 vs 二分搜索 vs 插值搜索
 
@@ -548,7 +548,7 @@ fn rabin_karp(text: &[u8], pattern: &[u8]) -> Vec<usize> {
 // ============================================================
 
 /// 图算法决策树
-/// graph algorithm tree
+/// graphalgorithm tree
 ///
 /// 根据图的类型（稀疏/稠密、有向/无向、权重特征）选择图算法。
 /// according to type （/、/、）graph algorithm 。
@@ -823,7 +823,7 @@ fn kahn_topological_sort(graph: &[Vec<usize>], n: usize) -> Option<Vec<usize>> {
 // ============================================================
 
 /// 动态规划决策树
-/// dynamic programming tree
+/// dynamic tree
 ///
 /// 帮助判断问题是否适合 DP，以及选择实现方式。
 /// problem DP，and way 。
@@ -1099,7 +1099,7 @@ impl AlgorithmSkeletons {
     /// - 最坏时间: O(n²)
     /// - worst time : O(n²)
     /// - 空间: O(log n) 递归栈
-    /// - space : O(log n) stack
+    /// - space: O(log n) stack
     pub fn quick_sort(arr: &mut [i32]) {
         if arr.len() <= 1 {
             return;
@@ -1125,14 +1125,14 @@ impl AlgorithmSkeletons {
     }
 
     /// BFS 图遍历
-    /// BFS
+    /// BFS graph traversal
     ///
     /// # 参数
-    /// # parameter
+    /// # Parameters
     /// - `n`: 节点数（0..n-1）
     /// - `n`: node （0..n-1）
     /// - `edges`: 无向边列表
-    /// - `edges`: edge
+    /// - `edges`: withoutedge table
     /// - `start`: 起始节点
     /// - `start`: node
     ///
@@ -1172,7 +1172,7 @@ impl AlgorithmSkeletons {
 // ============================================================
 
 /// 并发算法决策树
-/// concurrency algorithm tree
+/// concurrentalgorithm tree
 ///
 /// 根据问题特征选择并行策略、同步原语和向量化方案。
 /// according to problem parallelism strategy 、synchronous and vectorization 。

@@ -1,4 +1,6 @@
 # 概念文档标准模板（Concept Document Standard Template）
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **分级**: [B]
 > **Bloom 层级**: L2 (理解)
@@ -12,7 +14,7 @@
 ## 📑 目录
 
 - [概念文档标准模板（Concept Document Standard Template）](#概念文档标准模板concept-document-standard-template)
-  - [📑 目录](#目录)
+  - [📑 目录](#-目录)
   - [检查清单（提交前自检）](#检查清单提交前自检)
   - [模块 1: 概念定义（Concept Definition）](#模块-1-概念定义concept-definition)
     - [1.1 直观定义（Intuitive）](#11-直观定义intuitive)
@@ -50,7 +52,7 @@
     - [概念性问题](#概念性问题)
     - [代码修复题](#代码修复题)
     - [开放设计题](#开放设计题)
-  - **最后更新**: 2026-05-09
+  - [**最后更新**: 2026-05-09](#最后更新-2026-05-09)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
 

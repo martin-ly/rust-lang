@@ -2,10 +2,10 @@
 //! Rust 1.90 Edition 2024 feature (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//! ⚠️ **this ** - this as reference
+//! ⚠️ **Historical Version File** - This file is retained for historical reference only
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
+//! **Currently Recommended Version**: Rust 1.92.0+ | For latest features, please refer to `rust_192_features.rs`
 //!
 //! 这个模块展示了如何在 c07_process 项目中使用最新的 Rust 1.90 特性
 //! module in c07_process project in Rust 1.90 feature
@@ -16,7 +16,7 @@ use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
 /// Rust 1.90 新特性演示和实现
-/// Rust 1.90 feature demonstration and
+/// Rust 1.90 newfeatures implementation
 #[allow(unused_variables)]
 #[allow(dead_code)]
 pub struct Rust190Features {
@@ -35,7 +35,7 @@ macro_rules! process_error {
 
 impl Rust190Features {
     /// 创建新的特性演示实例
-    /// feature demonstration
+    /// Create new features
     #[allow(dead_code)]
     pub fn new() -> Self {
         Self {
@@ -90,7 +90,7 @@ impl Rust190Features {
     /// demonstration
     ///
     /// Rust 1.90 改进了模式匹配的精确性和性能
-    /// Rust 1.90 and performance
+    /// Rust 1.90 improvementspattern performance
     #[allow(dead_code)]
     pub fn demonstrate_improved_pattern_matching(&self, result: ProcessResult<u32>) {
         println!("🔍 演示改进的模式匹配");
@@ -125,10 +125,10 @@ impl Rust190Features {
     }
 
     /// 演示改进的迭代器
-    /// demonstration
+    /// improvements iterator
     ///
     /// Rust 1.90 提供了更高效的迭代器方法
-    /// Rust 1.90 efficient method
+    /// Rust 1.90 provideefficientiterator method
     #[allow(dead_code)]
     pub fn demonstrate_improved_iterators(&self, configs: Vec<ProcessConfig>) -> Vec<u32> {
         println!("🔄 演示改进的迭代器");
@@ -151,10 +151,10 @@ impl Rust190Features {
     }
 
     /// 演示改进的错误处理
-    /// demonstration error handling
+    /// improvementserror processing
     ///
     /// Rust 1.90 提供了更好的错误处理机制
-    /// Rust 1.90 error handling mechanism
+    /// Rust 1.90 providebettererrorhandling mechanism
     #[allow(dead_code)]
     pub fn demonstrate_improved_error_handling(&self) -> ProcessResult<()> {
         println!("🛠️ 演示改进的错误处理");
@@ -202,7 +202,7 @@ impl Rust190Features {
     }
 
     /// 演示改进的宏系统
-    /// demonstration system
+    /// improvements system
     ///
     /// Rust 1.90 提供了更强大的宏功能
     /// Rust 1.90 functionality

@@ -366,7 +366,7 @@ fn math_constants_demo() {
 // =============================================================================
 
 fn main() {
-    println!("=== Rust 1.94 LazyCell/LazyLock 新方法演示 ===");
+    println!("=== Rust 1.96+ LazyCell/LazyLock 新方法演示 ===");
 
     // 1. 基础延迟初始化
     println!("\n1. 基础延迟初始化");

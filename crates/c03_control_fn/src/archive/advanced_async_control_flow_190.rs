@@ -12,13 +12,13 @@
 //! - async
 //! - 异步监控和指标收集
 //! - async and indicator
+use anyhow::{Context, Result};
+use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use tokio::sync::{Mutex, RwLock, Semaphore};
 use tokio::time::{sleep, timeout};
-use anyhow::{Result, Context};
-use serde::{Deserialize, Serialize};
 
 /// 异步事件类型
 /// asynchronouseventtype
@@ -63,13 +63,18 @@ impl AdvancedDataProcessor {
 impl AsyncEventHandler {
     /// 处理事件
     /// Processes事件
+    /// Processesevent
     pub async fn handle_event(&self, event: AsyncEvent) -> Result<()> {
         match self {
             AsyncEventHandler::DataProcessor(processor) => {
                 match event {
                     AsyncEvent::DataReceived { id, data } => {
-                        println!("  处理器 {} 开始处理数据 {} (大小: {} 字节)",
-                                processor.name, id, data.len());
+                        println!(
+                            "  处理器 {} 开始处理数据 {} (大小: {} 字节)",
+                            processor.name,
+                            id,
+                            data.len()
+                        );
 
                         // 模拟处理时间
                         sleep(processor.processing_time).await;
@@ -80,27 +85,33 @@ impl AsyncEventHandler {
                         }
 
                         let result = format!("processed_{}_{}", id, data.len());
-                        println!("  处理器 {} 完成处理数据 {} -> {}", processor.name, id, result);
+                        println!(
+                            "  处理器 {} 完成处理数据 {} -> {}",
+                            processor.name, id, result
+                        );
 
                         Ok(())
                     }
                     _ => Ok(()), // 忽略其他事件
                 }
             }
-            AsyncEventHandler::ResourceManager(manager) => {
-                match event {
-                    AsyncEvent::ResourceRequested { resource_type, priority } => {
-                        println!("  资源管理器 {} 收到资源请求: {} (优先级: {})",
-                                manager.name, resource_type, priority);
-                        Ok(())
-                    }
-                    AsyncEvent::ResourceReleased { resource_id } => {
-                        println!("  资源管理器 {} 释放资源: {}", manager.name, resource_id);
-                        Ok(())
-                    }
-                    _ => Ok(()),
+            AsyncEventHandler::ResourceManager(manager) => match event {
+                AsyncEvent::ResourceRequested {
+                    resource_type,
+                    priority,
+                } => {
+                    println!(
+                        "  资源管理器 {} 收到资源请求: {} (优先级: {})",
+                        manager.name, resource_type, priority
+                    );
+                    Ok(())
                 }
-            }
+                AsyncEvent::ResourceReleased { resource_id } => {
+                    println!("  资源管理器 {} 释放资源: {}", manager.name, resource_id);
+                    Ok(())
+                }
+                _ => Ok(()),
+            },
         }
     }
 
@@ -137,7 +148,6 @@ impl ResourceManager {
         }
     }
 }
-
 
 /// 异步事件总线
 /// async line
@@ -192,6 +202,7 @@ impl AsyncEventBus {
 
     /// 处理事件队列
     /// Processes事件队列
+    /// Processeseventqueue
     pub async fn process_events(&self) -> Result<()> {
         let mut queue = self.event_queue.lock().await;
 
@@ -207,8 +218,11 @@ impl AsyncEventBus {
                     Ok(_) => success_count += 1,
                     Err(e) => {
                         error_count += 1;
-                        eprintln!("  处理器 {} 处理事件失败: {}",
-                                handler.get_handler_name(), e);
+                        eprintln!(
+                            "  处理器 {} 处理事件失败: {}",
+                            handler.get_handler_name(),
+                            e
+                        );
                     }
                 }
             }
@@ -225,7 +239,8 @@ impl AsyncEventBus {
             if total_processed > 0 {
                 metrics.average_processing_time = Duration::from_nanos(
                     (metrics.average_processing_time.as_nanos() as u64 * (total_processed - 1)
-                     + processing_time.as_nanos() as u64) / total_processed
+                        + processing_time.as_nanos() as u64)
+                        / total_processed,
                 );
             }
         }
@@ -332,7 +347,12 @@ impl AsyncWorkflowEngine {
     /// 创建新工作流
     /// Creates新工作流
     /// stream
-    pub async fn create_workflow(&self, id: String, name: String, steps: Vec<WorkflowStep>) -> Result<()> {
+    pub async fn create_workflow(
+        &self,
+        id: String,
+        name: String,
+        steps: Vec<WorkflowStep>,
+    ) -> Result<()> {
         let workflow = AsyncWorkflow {
             id: id.clone(),
             name,
@@ -351,12 +371,16 @@ impl AsyncWorkflowEngine {
     /// 执行工作流
     /// stream
     pub async fn execute_workflow(&self, workflow_id: &str) -> Result<()> {
-        let _permit = self.execution_semaphore.acquire().await
+        let _permit = self
+            .execution_semaphore
+            .acquire()
+            .await
             .context("获取执行许可失败")?;
 
         let workflow_name = {
             let workflows = self.workflows.read().await;
-            let workflow = workflows.get(workflow_id)
+            let workflow = workflows
+                .get(workflow_id)
                 .ok_or_else(|| anyhow::anyhow!("工作流 {} 不存在", workflow_id))?;
             workflow.name.clone()
         };
@@ -373,13 +397,18 @@ impl AsyncWorkflowEngine {
             // 检查工作流状态和步骤
             let (should_continue, current_step, step_to_execute) = {
                 let workflows = self.workflows.read().await;
-                let workflow = workflows.get(workflow_id)
+                let workflow = workflows
+                    .get(workflow_id)
                     .ok_or_else(|| anyhow::anyhow!("工作流 {} 不存在", workflow_id))?;
 
                 if workflow.current_step >= workflow.steps.len() {
                     (false, workflow.current_step, None)
                 } else {
-                    (true, workflow.current_step, Some(workflow.steps[workflow.current_step].clone()))
+                    (
+                        true,
+                        workflow.current_step,
+                        Some(workflow.steps[workflow.current_step].clone()),
+                    )
                 }
             };
 
@@ -404,12 +433,17 @@ impl AsyncWorkflowEngine {
                     let mut workflows = self.workflows.write().await;
                     let workflow = workflows.get_mut(workflow_id).expect("获取工作流失败");
 
-                    if workflow.steps[current_step].retry_count < workflow.steps[current_step].max_retries {
+                    if workflow.steps[current_step].retry_count
+                        < workflow.steps[current_step].max_retries
+                    {
                         workflow.steps[current_step].retry_count += 1;
-                        println!("  步骤 {} 执行失败，重试 {}/{}: {}",
-                                step.name,
-                                workflow.steps[current_step].retry_count,
-                                step.max_retries, e);
+                        println!(
+                            "  步骤 {} 执行失败，重试 {}/{}: {}",
+                            step.name,
+                            workflow.steps[current_step].retry_count,
+                            step.max_retries,
+                            e
+                        );
                     } else {
                         workflow.status = WorkflowStatus::Failed;
                         println!("  工作流 {} 执行失败: {}", workflow_id, e);
@@ -454,7 +488,8 @@ impl AsyncWorkflowEngine {
                     Ok(())
                 }
             }
-        }).await;
+        })
+        .await;
 
         match result {
             Ok(Ok(_)) => Ok(()),
@@ -538,15 +573,25 @@ impl AsyncDataPipeline {
         let start_time = Instant::now();
 
         for (stage_index, stage) in self.stages.iter().enumerate() {
-            println!("  管道阶段 {}: {} 处理数据 {}",
-                    stage_index + 1, stage.name, current_data.id);
+            println!(
+                "  管道阶段 {}: {} 处理数据 {}",
+                stage_index + 1,
+                stage.name,
+                current_data.id
+            );
 
             let stage_start = Instant::now();
-            current_data = stage.processor.process(current_data).await
+            current_data = stage
+                .processor
+                .process(current_data)
+                .await
                 .with_context(|| format!("管道阶段 {} 处理失败", stage.name))?;
             let stage_duration = stage_start.elapsed();
 
-            println!("    阶段 {} 处理完成，耗时: {:?}", stage.name, stage_duration);
+            println!(
+                "    阶段 {} 处理完成，耗时: {:?}",
+                stage.name, stage_duration
+            );
         }
 
         let total_duration = start_time.elapsed();
@@ -556,10 +601,11 @@ impl AsyncDataPipeline {
         metrics.total_processed += 1;
         metrics.average_processing_time = Duration::from_nanos(
             (metrics.average_processing_time.as_nanos() as u64 * (metrics.total_processed - 1)
-             + total_duration.as_nanos() as u64) / metrics.total_processed
+                + total_duration.as_nanos() as u64)
+                / metrics.total_processed,
         );
-        metrics.throughput_per_second = metrics.total_processed as f64 /
-            start_time.elapsed().as_secs_f64();
+        metrics.throughput_per_second =
+            metrics.total_processed as f64 / start_time.elapsed().as_secs_f64();
 
         Ok(current_data)
     }
@@ -621,7 +667,9 @@ impl PipelineProcessor {
                     }
                     TransformType::Compress => {
                         // 模拟压缩（简单示例）
-                        input.content = input.content.chunks(2)
+                        input.content = input
+                            .content
+                            .chunks(2)
                             .flat_map(|chunk| {
                                 if chunk.len() == 2 {
                                     vec![chunk[0] ^ chunk[1]]
@@ -639,9 +687,13 @@ impl PipelineProcessor {
                     }
                 }
 
-                input.metadata.insert("transformed_by".to_string(), processor.name.clone());
-                input.metadata.insert("transform_type".to_string(),
-                                    format!("{:?}", processor.transform_type));
+                input
+                    .metadata
+                    .insert("transformed_by".to_string(), processor.name.clone());
+                input.metadata.insert(
+                    "transform_type".to_string(),
+                    format!("{:?}", processor.transform_type),
+                );
 
                 Ok(input)
             }
@@ -669,21 +721,31 @@ pub async fn demonstrate_advanced_async_control_flow_190() -> Result<()> {
     let event_bus = Arc::new(AsyncEventBus::new());
 
     // 注册事件处理器
-    event_bus.register_handler(AsyncEventHandler::DataProcessor(AdvancedDataProcessor::new(
-        "data_processor_1".to_string(),
-        Duration::from_millis(100),
-        0.1, // 10% 错误率
-    ))).await?;
+    event_bus
+        .register_handler(AsyncEventHandler::DataProcessor(
+            AdvancedDataProcessor::new(
+                "data_processor_1".to_string(),
+                Duration::from_millis(100),
+                0.1, // 10% 错误率
+            ),
+        ))
+        .await?;
 
-    event_bus.register_handler(AsyncEventHandler::DataProcessor(AdvancedDataProcessor::new(
-        "data_processor_2".to_string(),
-        Duration::from_millis(150),
-        0.05, // 5% 错误率
-    ))).await?;
+    event_bus
+        .register_handler(AsyncEventHandler::DataProcessor(
+            AdvancedDataProcessor::new(
+                "data_processor_2".to_string(),
+                Duration::from_millis(150),
+                0.05, // 5% 错误率
+            ),
+        ))
+        .await?;
 
-    event_bus.register_handler(AsyncEventHandler::ResourceManager(ResourceManager::new(
-        "resource_manager_1".to_string()
-    ))).await?;
+    event_bus
+        .register_handler(AsyncEventHandler::ResourceManager(ResourceManager::new(
+            "resource_manager_1".to_string(),
+        )))
+        .await?;
 
     // 发布事件
     for i in 0..10 {
@@ -720,7 +782,7 @@ pub async fn demonstrate_advanced_async_control_flow_190() -> Result<()> {
             id: "step_1".to_string(),
             name: "数据验证".to_string(),
             action: WorkflowAction::ValidateResult {
-                expected: "valid_data".to_string()
+                expected: "valid_data".to_string(),
             },
             timeout: Duration::from_secs(5),
             retry_count: 0,
@@ -730,7 +792,7 @@ pub async fn demonstrate_advanced_async_control_flow_190() -> Result<()> {
             id: "step_2".to_string(),
             name: "数据处理".to_string(),
             action: WorkflowAction::ProcessData {
-                data: b"test_data".to_vec()
+                data: b"test_data".to_vec(),
             },
             timeout: Duration::from_secs(10),
             retry_count: 0,
@@ -740,7 +802,7 @@ pub async fn demonstrate_advanced_async_control_flow_190() -> Result<()> {
             id: "step_3".to_string(),
             name: "服务调用".to_string(),
             action: WorkflowAction::CallService {
-                service_url: "https://api.example.com/process".to_string()
+                service_url: "https://api.example.com/process".to_string(),
             },
             timeout: Duration::from_secs(15),
             retry_count: 0,
@@ -748,11 +810,13 @@ pub async fn demonstrate_advanced_async_control_flow_190() -> Result<()> {
         },
     ];
 
-    workflow_engine.create_workflow(
-        "workflow_1".to_string(),
-        "数据处理工作流".to_string(),
-        steps,
-    ).await?;
+    workflow_engine
+        .create_workflow(
+            "workflow_1".to_string(),
+            "数据处理工作流".to_string(),
+            steps,
+        )
+        .await?;
 
     // 执行工作流
     workflow_engine.execute_workflow("workflow_1").await?;
@@ -811,8 +875,14 @@ pub async fn demonstrate_advanced_async_control_flow_190() -> Result<()> {
     let pipeline_metrics = pipeline.get_metrics().await;
     println!("  管道指标:");
     println!("    总处理数: {}", pipeline_metrics.total_processed);
-    println!("    平均处理时间: {:?}", pipeline_metrics.average_processing_time);
-    println!("    吞吐量: {:.2} 项/秒", pipeline_metrics.throughput_per_second);
+    println!(
+        "    平均处理时间: {:?}",
+        pipeline_metrics.average_processing_time
+    );
+    println!(
+        "    吞吐量: {:.2} 项/秒",
+        pipeline_metrics.throughput_per_second
+    );
 
     println!("\n✅ Rust 1.90 高级异步控制流演示完成!");
     Ok(())
@@ -826,16 +896,24 @@ mod tests {
     async fn test_async_event_bus() {
         let event_bus = AsyncEventBus::new();
 
-        event_bus.register_handler(AsyncEventHandler::DataProcessor(AdvancedDataProcessor::new(
-            "test_processor".to_string(),
-            Duration::from_millis(10),
-            0.0,
-        ))).await.unwrap();
+        event_bus
+            .register_handler(AsyncEventHandler::DataProcessor(
+                AdvancedDataProcessor::new(
+                    "test_processor".to_string(),
+                    Duration::from_millis(10),
+                    0.0,
+                ),
+            ))
+            .await
+            .unwrap();
 
-        event_bus.publish_event(AsyncEvent::DataReceived {
-            id: "test_data".to_string(),
-            data: vec![1, 2, 3],
-        }).await.expect("发布事件失败");
+        event_bus
+            .publish_event(AsyncEvent::DataReceived {
+                id: "test_data".to_string(),
+                data: vec![1, 2, 3],
+            })
+            .await
+            .expect("发布事件失败");
 
         event_bus.process_events().await.expect("处理事件失败");
 
@@ -849,26 +927,26 @@ mod tests {
         let event_bus = Arc::new(AsyncEventBus::new());
         let workflow_engine = AsyncWorkflowEngine::new(event_bus, 1);
 
-        let steps = vec![
-            WorkflowStep {
-                id: "test_step".to_string(),
-                name: "测试步骤".to_string(),
-                action: WorkflowAction::ProcessData {
-                    data: b"test".to_vec()
-                },
-                timeout: Duration::from_secs(1),
-                retry_count: 0,
-                max_retries: 1,
+        let steps = vec![WorkflowStep {
+            id: "test_step".to_string(),
+            name: "测试步骤".to_string(),
+            action: WorkflowAction::ProcessData {
+                data: b"test".to_vec(),
             },
-        ];
+            timeout: Duration::from_secs(1),
+            retry_count: 0,
+            max_retries: 1,
+        }];
 
-        workflow_engine.create_workflow(
-            "test_workflow".to_string(),
-            "测试工作流".to_string(),
-            steps,
-        ).await.expect("创建工作流失败");
+        workflow_engine
+            .create_workflow("test_workflow".to_string(), "测试工作流".to_string(), steps)
+            .await
+            .expect("创建工作流失败");
 
-        workflow_engine.execute_workflow("test_workflow").await.expect("执行工作流失败");
+        workflow_engine
+            .execute_workflow("test_workflow")
+            .await
+            .expect("执行工作流失败");
 
         let status = workflow_engine.get_workflow_status("test_workflow").await;
         assert_eq!(status, Some(WorkflowStatus::Completed));

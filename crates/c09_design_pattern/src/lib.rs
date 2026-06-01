@@ -6,7 +6,7 @@
 //! Rustdesign library
 //!
 //! 本库提供了Rust中各种设计模式的完整实现和实际应用案例，
-//! this library Rustin design complete and actual application ，
+//! This library provides Rustdesignpatterncompleteimplementationapplicationcases
 //! 包括基础设计模式、高级设计模式以及在特定领域的应用。
 //! foundation design 、design and in domain application 。
 // 基础设计模式模块
@@ -64,11 +64,11 @@ pub mod rust_idioms;
 // pub mod bin; // 暂时注释掉，避免编译错误
 
 /// 设计模式库版本信息
-/// design library this
+/// designpatternlibraryversion information
 pub const VERSION: &str = "1.0.1";
 
 /// 获取库版本信息
-/// library this
+/// Get library version info
 ///
 /// # Examples
 ///
@@ -110,7 +110,7 @@ pub enum ExecutionModel {
 }
 
 /// 设计模式信息
-/// design
+/// designpattern information
 #[derive(Debug, Clone)]
 pub struct PatternInfo {
     pub name: String,
@@ -123,7 +123,7 @@ pub struct PatternInfo {
 }
 
 /// 获取所有设计模式信息
-/// all design
+/// Get hasdesignpatterninformation
 ///
 /// # Examples
 ///
@@ -321,7 +321,7 @@ pub fn get_all_patterns() -> Vec<PatternInfo> {
 }
 
 /// 根据分类获取设计模式
-/// according to classification design
+/// getdesign pattern
 pub fn get_patterns_by_category(category: PatternCategory) -> Vec<PatternInfo> {
     get_all_patterns()
         .into_iter()
@@ -330,7 +330,7 @@ pub fn get_patterns_by_category(category: PatternCategory) -> Vec<PatternInfo> {
 }
 
 /// 搜索设计模式
-/// design
+/// Search designpattern
 pub fn search_patterns(query: &str) -> Vec<PatternInfo> {
     let query_lower = query.to_lowercase();
     get_all_patterns()
@@ -347,7 +347,7 @@ pub fn search_patterns(query: &str) -> Vec<PatternInfo> {
 }
 
 /// 按执行模型获取设计模式
-/// design
+/// executiongetdesign pattern
 pub fn get_patterns_by_execution_model(model: ExecutionModel) -> Vec<PatternInfo> {
     get_all_patterns()
         .into_iter()

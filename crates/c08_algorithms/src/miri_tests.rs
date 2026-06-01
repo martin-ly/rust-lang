@@ -1,11 +1,11 @@
 //! Miri 测试模块 - 算法内存安全验证
-//! Miri module - algorithm memory safety
+//! Miri Test Module - Algorithm Memory Safety Verification
 //!
 //! 本模块包含用于 Miri 测试的算法相关代码示例。
-//! This module contains Miri algorithm example 。
+//! This module contains Miri testalgorithm
 //!
 //! 运行方式:
-//! Run way :
+//! How to run:
 //!   cargo miri test miri_tests
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
@@ -14,11 +14,11 @@ use std::mem::MaybeUninit;
 // ==================== 排序算法 ====================
 
 /// 测试目的: 验证快速排序内存安全
-/// objective : quick sort memory safety
+/// Test : verifyfastsortmemorysafety
 /// 测试场景: 对数组进行快速排序
-/// scenario : to quick sort
+/// Test : arrayfastsort
 /// 预期结果: 数组应该被正确排序
-/// result : should is ordering
+/// result: arrayshouldpositive sort
 #[test]
 fn test_quicksort_safety() {
     fn quicksort<T: Ord>(arr: &mut [T]) {
@@ -53,7 +53,7 @@ fn test_quicksort_safety() {
 // ==================== 链表 ====================
 
 /// 链表节点
-/// node
+/// linked list node
 struct ListNode<T> {
     data: T,
     next: Option<Box<ListNode<T>>>,
@@ -86,11 +86,11 @@ impl<T> LinkedList<T> {
 }
 
 /// 测试目的: 验证链表内存安全
-/// objective : memory safety
+/// Test : verifylinked listmemorysafety
 /// 测试场景: push 和 pop 操作
-/// scenario : push and pop
+/// Test : push pop operation
 /// 预期结果: 应该正确管理内存
-/// result : should memory
+/// result: shouldpositivemanagement memory
 #[test]
 fn test_linked_list_safety() {
     let mut list = LinkedList::new();
@@ -113,7 +113,7 @@ struct TreeNode<T> {
 }
 
 /// 二叉搜索树
-/// tree
+/// search tree
 struct BinarySearchTree<T: Ord> {
     root: Option<Box<TreeNode<T>>>,
 }
@@ -164,9 +164,9 @@ impl<T: Ord> BinarySearchTree<T> {
 }
 
 /// 测试目的: 验证二叉搜索树内存安全
-/// objective : tree memory safety
+/// Test : verifysearchtreememorysafety
 /// 测试场景: 插入多个节点
-/// scenario : node
+/// Test : multiplenode
 /// 预期结果: 应该正确构建树结构
 /// result : should tree structure
 #[test]
@@ -199,11 +199,11 @@ impl<T> Stack<T> {
 }
 
 /// 测试目的: 验证栈内存安全
-/// objective : stack memory
+/// Test : verifystackmemorysafety
 /// 测试场景: push 和 pop 操作
-/// scenario : push and pop
+/// Test : push pop operation
 /// 预期结果: 应该正确管理内存
-/// result : should memory
+/// result: shouldpositivemanagement memory
 #[test]
 fn test_stack_safety() {
     let mut stack = Stack::new();
@@ -216,9 +216,9 @@ fn test_stack_safety() {
 // ==================== 不安全数组操作 ====================
 
 /// 测试目的: 验证安全的原地数组反转
-/// objective :
+/// Test : verifysafetyarray
 /// 测试场景: 反转数组元素
-/// scenario : element
+/// Test : array
 /// 预期结果: 数组应该被正确反转
 /// result : should is
 #[test]
@@ -236,9 +236,9 @@ fn test_inplace_reverse() {
 }
 
 /// 测试目的: 验证 MaybeUninit 数组处理
-/// objective : MaybeUninit
+/// Test : verify MaybeUninit arrayhandling
 /// 测试场景: 使用 MaybeUninit 初始化数组
-/// scenario : MaybeUninit
+/// Test : use MaybeUninit initialarray
 /// 预期结果: 应该正确初始化和读取
 /// result : should and
 #[test]

@@ -1,10 +1,10 @@
 //! 编译时优化实践示例
-//! compile-time optimization example
+//! compile-timeoptimizationpractice example
 //!
 //! 本模块演示Rust中的编译时优化技术：
 //! this module demonstration Rustin compile-time optimization technique ：
 //! - const fn 函数
-//! - 泛型优化
+//! - const fn function
 //! - generic optimization
 //! - 编译时计算
 //! - compile-time
@@ -12,7 +12,7 @@
 //! - cost
 
 /// 编译时常量函数
-/// compile-time constant function
+/// compile-timeconstant function
 ///
 /// 在编译时计算，运行时零开销
 /// in compile-time ，runtime overhead
@@ -37,11 +37,11 @@ pub const fn create_lookup_table() -> [u32; 10] {
 }
 
 /// 编译时优化的查找表
-/// compile-time optimization
+/// compile-timeoptimizationsearch table
 pub static FIBONACCI_TABLE: [u32; 10] = create_lookup_table();
 
 /// 泛型优化的向量操作
-/// generic optimization
+/// genericoptimizationvector operation
 pub struct OptimizedVector<T, const N: usize> {
     data: [T; N],
     len: usize,
@@ -99,7 +99,7 @@ impl<T> CompileTimeCheck for T {
 }
 
 /// 编译时优化的字符串处理
-/// compile-time optimization
+/// compile-timeoptimizationstring processing
 pub const fn string_length(s: &str) -> usize {
     s.len()
 }
@@ -111,7 +111,7 @@ pub const fn power_of_two(n: u32) -> u32 {
 }
 
 /// 编译时优化的位操作
-/// compile-time optimization
+/// compile-timeoptimization operation
 pub const fn count_bits(mut n: u32) -> u32 {
     let mut count = 0;
     while n > 0 {

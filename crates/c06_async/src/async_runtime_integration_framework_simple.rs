@@ -1,16 +1,16 @@
 //! 简化的异步运行时集成框架
-//! async runtime framework
+//! asyncruntimeintegration framework
 //!
 //! 本模块提供了一个简化的异步运行时集成框架，支持：
-//! This module provides async runtime framework ，：
+//! This module provides asyncruntimeintegrationsupport
 //! - 多运行时组合和切换
 //! - runtime combination and switching
 //! - 运行时适配器模式
-//! - runtime adapter
+//! - runtime pattern
 //! - 异步同步转换机制
-//! - async synchronous conversion mechanism
+//! - asyncsynchronousconversion mechanism
 //! - 聚合组合设计模式
-//! - aggregation combination design
+//! - design pattern
 use anyhow::Result;
 use async_trait::async_trait;
 use futures::future::try_join_all;
@@ -33,7 +33,7 @@ pub enum AsyncRuntimeType {
 }
 
 /// 运行时配置
-/// runtime
+/// Run configuration
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeConfig {
     pub runtime_type: AsyncRuntimeType,
@@ -54,7 +54,7 @@ impl Default for RuntimeConfig {
 }
 
 /// 运行时性能指标
-/// runtime performance indicator
+/// Run performance
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeMetrics {
     pub task_count: u64,
@@ -85,7 +85,7 @@ pub trait AsyncTask: Send + Sync {
 }
 
 /// 任务优先级
-/// task
+/// Task priority
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
 pub enum TaskPriority {
     Low = 1,
@@ -95,7 +95,7 @@ pub enum TaskPriority {
 }
 
 /// 简化的异步运行时集成框架
-/// async runtime framework
+/// asyncruntimeintegration framework
 pub struct SimpleAsyncRuntimeFramework {
     config: RuntimeConfig,
     semaphore: Arc<Semaphore>,
@@ -167,7 +167,7 @@ impl SimpleAsyncRuntimeFramework {
     }
 
     /// 获取性能指标
-    /// performance indicator
+    /// Get performance metrics
     pub async fn get_metrics(&self) -> RuntimeMetrics {
         self.metrics.lock().await.clone()
     }
@@ -214,7 +214,7 @@ impl AsyncTask for HealthCheckTask {
 }
 
 /// 示例任务实现
-/// example task
+/// task implementation
 pub struct ExampleTask {
     name: String,
     priority: TaskPriority,
@@ -252,7 +252,7 @@ impl AsyncTask for ExampleTask {
 }
 
 /// 异步同步转换服务
-/// async synchronous conversion
+/// asyncsynchronousconversion service
 pub struct AsyncSyncConversionService {
     thread_pool: Arc<Semaphore>,
 }
@@ -265,7 +265,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 异步到同步转换
-    /// async to synchronous conversion
+    /// Async to synchronous conversion
     pub async fn async_to_sync<T, F>(&self, async_operation: F) -> Result<T>
     where
         F: std::future::Future<Output = Result<T>> + Send + 'static,
@@ -276,7 +276,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 同步到异步转换
-    /// synchronous to async conversion
+    /// Synchronous to async conversion
     pub async fn sync_to_async<F, T>(&self, sync_operation: F) -> Result<T>
     where
         F: FnOnce() -> Result<T> + Send + 'static,
@@ -287,7 +287,7 @@ impl AsyncSyncConversionService {
     }
 
     /// 混合转换模式
-    /// conversion
+    /// conversion pattern
     pub async fn hybrid_conversion(&self) -> Result<(String, String)> {
         // 异步操作
         let async_result = self
@@ -310,7 +310,7 @@ impl AsyncSyncConversionService {
 }
 
 /// 聚合组合设计模式服务
-/// aggregation combination design
+/// designpattern service
 pub struct AggregationCompositionService {
     component_registry: Arc<RwLock<HashMap<String, Box<dyn AsyncComponent + Send + Sync>>>>,
 }
@@ -335,6 +335,7 @@ impl AggregationCompositionService {
     }
 
     /// 注册组件
+    /// Register component
     pub async fn register_component(
         &self,
         component: Box<dyn AsyncComponent + Send + Sync>,
@@ -390,7 +391,7 @@ impl AggregationCompositionService {
 }
 
 /// 示例组件实现
-/// example
+/// Example component implementation
 pub struct DataProcessingComponent {
     name: String,
     processing_delay: Duration,
@@ -418,7 +419,7 @@ impl AsyncComponent for DataProcessingComponent {
 }
 
 /// 综合演示函数
-/// synthesize demonstration function
+/// Comprehensive demo function
 pub async fn demonstrate_simple_async_runtime_framework() -> Result<()> {
     println!("🚀 简化异步运行时集成框架演示");
     println!("================================================");

@@ -1,8 +1,7 @@
 //! 形式化验证与证明 - Formal Verification and Proofs
 //!
 //! # 概述 (Overview)
-//!
-//! 本模块提供异步编程的形式化验证技术，包括：
+//! # Overview
 //! This module provides async technique ，：
 //! - 不变式证明 (Invariant Proofs)
 //! - 活性证明 (Liveness Proofs)
@@ -19,7 +18,7 @@
 //! {P} C {Q}
 //!
 //! 其中:
-//! its in :
+//! Where:
 //! - P: 前置条件 (Precondition)
 //! - C: 命令/程序 (Command/Program)
 //! - Q: 后置条件 (Postcondition)
@@ -84,7 +83,7 @@
 //! ```
 //!
 //! ## 3. 并发验证
-//! ## 3. concurrency
+//! ## 3. concurrent verification
 //!
 //! ```text
 //! 并发程序 P || Q 的验证:
@@ -112,10 +111,10 @@ use tokio::sync::Mutex;
 use tokio::time::sleep;
 
 /// # 示例 1: 不变式验证
-/// # example 1:
+/// # 1: verification
 ///
 /// 验证程序在执行过程中保持特定不变式
-/// program in in
+/// Verify execution
 pub mod invariant_verification {
     use super::*;
 
@@ -285,7 +284,7 @@ pub mod invariant_verification {
 }
 
 /// # 示例 2: 终止性证明
-/// # example 2:
+/// # 2: termination proof
 ///
 /// 使用度量函数证明程序终止
 /// function program
@@ -380,8 +379,7 @@ pub mod deadlock_detection {
     use super::*;
 
     /// 资源分配图
-    ///
-    /// 用于死锁检测的数据结构
+    /// resource graph
     /// lock data structure
     pub struct ResourceGraph {
         /// 资源 -> 等待该资源的任务
@@ -491,7 +489,7 @@ pub mod deadlock_detection {
 }
 
 /// # 综合示例: 运行所有验证
-/// # synthesize example : Run all
+/// # : runhas verification
 pub async fn run_all_verifications() {
     println!("╔══════════════════════════════════════════════════════════╗");
     println!("║       形式化验证与证明                                   ║");

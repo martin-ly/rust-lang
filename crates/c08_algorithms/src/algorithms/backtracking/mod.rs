@@ -1,12 +1,12 @@
 //! # 回溯算法模块
-//! # backtracking algorithm module
+//! # algorithm module
 //!
 //! 本模块实现了各种回溯算法。
-//! this module backtracking algorithm 。
+//! This module implements algorithm
 //use serde::{Serialize, Deserialize};
 
 /// 回溯算法实现
-/// backtracking algorithm
+/// algorithm implementation
 pub struct BacktrackingAlgorithms;
 
 impl BacktrackingAlgorithms {

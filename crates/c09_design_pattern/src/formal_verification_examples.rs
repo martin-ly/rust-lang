@@ -1,16 +1,16 @@
 //! 形式化验证示例：设计模式的正确性证明
-//! example ：design
+//! Formal Verification Example: Correctness Proof of Design Patterns
 //!
 //! 本模块提供设计模式的形式化验证示例，包括：
 //! This module provides design example ，：
 //! - 类型级证明
-//! - type
+//! - type-level proof
 //! - 不变量验证
-//! - variable
+//! - invariant verification
 //! - 终止性证明
-//! -
+//! - termination proof
 //! - 并发安全性证明
-//! - concurrency
+//! - concurrentsafety proof
 
 // 允许文档注释后空行，因为本模块需要格式化分隔
 #![allow(clippy::empty_line_after_doc_comments)]
@@ -50,7 +50,7 @@ impl FileHandle<Uninitialized> {
     }
 
     /// 打开文件，转换到Initialized状态
-    /// ，conversion to Initializedstate
+    /// fileconversionInitialized status
     pub fn open(self) -> Result<FileHandle<Initialized>, std::io::Error> {
         // 实际IO操作
         println!("Opening file: {}", self.path);
@@ -76,7 +76,7 @@ impl FileHandle<Initialized> {
     }
 
     /// 关闭文件，转换到Closed状态
-    /// ，conversion to Closedstate
+    /// fileconversionClosed status
     pub fn close(self) -> FileHandle<Closed> {
         println!("Closing file: {}", self.path);
         FileHandle {
@@ -88,7 +88,7 @@ impl FileHandle<Initialized> {
 
 impl FileHandle<Closed> {
     /// 获取文件路径（Closed状态仍可访问）
-    /// （Closedstate ）
+    /// Get filepathClosedstatus
     pub fn path(&self) -> &str {
         &self.path
     }
@@ -106,14 +106,14 @@ impl FileHandle<Closed> {
 /// 2. `FileHandle<Initialized>` 只能调用 `read()/write()/close()`
 /// 3. `FileHandle<Closed>` 只能调用 `path()`
 /// 4. 类型系统保证无法跨状态调用方法
-/// 4. type system state method
+/// 4. typesystemwithoutstatus method
 ///
 /// 例如，以下代码无法编译：
 /// for example ，under ：
 /// ```compile_fail
 /// let file = FileHandle::<Uninitialized>::new("test.txt".into());
 /// file.read(); // 错误：Uninitialized状态无read方法
-/// ```
+/// file.read(); // errorUninitializedstatuswithoutread method
 ///
 /// 因此，状态转换的正确性在**编译时**得到保证。∎
 /// therefore ，state conversion in **compile-time **to 。∎
@@ -131,7 +131,7 @@ static SINGLETON: std::sync::OnceLock<Singleton> = std::sync::OnceLock::new();
 
 impl Singleton {
     /// 获取单例实例
-    /// singleton
+    /// Get single
     ///
     /// **不变量**：在任何时刻，最多存在一个Singleton实例
     /// **variable **：in moment ，at most in Singleton
@@ -141,7 +141,7 @@ impl Singleton {
     /// 1. `OnceLock::get_or_init` 保证闭包最多执行一次
     /// 1. `OnceLock::get_or_init` at most
     /// 2. 所有调用返回相同的引用
-    /// 2. all reference
+    /// 2. has reference
     /// 3. 因此，唯一性不变量在运行时成立。∎
     /// 3. therefore ，variable in runtime 。∎
     pub fn instance() -> &'static Singleton {
@@ -217,7 +217,7 @@ impl Default for Subject {
 // ============================================================================
 
 /// 递归快速排序：终止性证明
-/// quick sort ：
+/// fastsorttermination proof
 ///
 /// **定理**：对于任意有限数组，`quick_sort` 在有限步内终止
 /// **theorem **：to ，`quick_sort` in inside
@@ -264,7 +264,7 @@ pub fn quick_sort<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
 // ============================================================================
 
 /// 线程安全的计数器：数据竞争自由证明
-/// thread-safe ：
+/// threadsafetydata proof
 ///
 /// **定理**：`SafeCounter` 的所有操作无数据竞争
 /// **theorem **：`SafeCounter` all
@@ -311,7 +311,7 @@ impl Default for SafeCounter {
 }
 
 /// 生产者-消费者：死锁自由证明
-/// -：lock
+/// - proof
 ///
 /// **定理**：使用 `mpsc::channel` 的生产者-消费者模式无死锁
 /// **theorem **： `mpsc::channel` -lock

@@ -1,13 +1,12 @@
 //! 异步语义理论基础 - Async Semantics Theory Foundations
 //!
 //! # 概述 (Overview)
-//!
-//! 本模块提供 Rust 异步编程的形式化语义理论基础，包括：
+//! # Overview
 //! This module provides Rust async theory foundation ，：
 //! - 异步计算的形式化定义
 //! - async definition
 //! - 异步与同步的等价关系证明
-//! - async and synchronous etc.
+//! - asyncsynchronous proof
 //! - 控制流与执行流的语义模型
 //! - stream and stream
 //! - 基于范畴论的异步抽象
@@ -23,12 +22,12 @@
 //! Future 可以形式化为一个状态机 M = (S, s₀, δ, F)，其中：
 //! Future can as state machine M = (S, s₀, δ, F)，its in ：
 //! - S: 状态集合
-//! - S: state set
+//! - S: status set
 //! - s₀: 初始状态
-//! - s₀: initial state
+//! - s: initial status
 //! - δ: 状态转换函数 `δ: S × Context → Poll<T> × S`
 //! - F: 终止状态集合
-//! - F: terminal state set
+//! - F: status set
 //!
 //! ```text
 //! Poll<T> = Ready(T) | Pending
@@ -115,11 +114,11 @@
 //! ```text
 //! CFG = (V, E, entry, exit)
 //! - V: 基本块集合
-//! - V: this set
+//! - V: set
 //! - E ⊆ V × V: 控制流边
-//! - E ⊆ V × V: stream edge
+//! - E V V: controlflow edge
 //! - entry, exit ∈ V: 入口和出口节点
-//! - entry, exit ∈ V: and node
+//! - entry, exit V: node
 //!
 //! 对于异步函数:
 //! to async function :
@@ -155,9 +154,9 @@
 //! 定义范畴 Async:
 //! definition Async:
 //! - 对象: Rust 类型
-//! - to : Rust type
+//! - object: Rust type
 //! - 态射: A → B 是类型为 impl Fn(A) → Future<B> 的函数
-//! - : A → B type as impl Fn(A) → Future<B> function
+//! - : A B type impl Fn(A) Future<B> function
 //! - 复合: (f ∘ g)(x) = async { f(g(x).await).await }
 //! - 单位态射: id(x) = async { x }
 //! ```
@@ -179,13 +178,13 @@ use std::task::{Context, Poll};
 use std::time::Duration;
 
 /// # 示例 1: 状态机的显式实现
-/// # example 1: state machine
+/// # 1: state machine implementation
 ///
 /// 展示 Future 的状态机本质
 /// Future state machine essence
 ///
 /// ## 状态转换图
-/// ## state conversion
+/// ## statusconversion graph
 ///
 /// ```text
 ///     Start
@@ -204,7 +203,7 @@ pub mod state_machine_example {
     #[derive(Debug)]
     pub enum TaskState {
         /// 初始状态
-        /// initial state
+        /// initial status
         Start,
         /// 等待中，记录已轮询次数
         /// etc. in ，
@@ -235,10 +234,10 @@ pub mod state_machine_example {
 
     impl ExplicitStateMachine {
         /// 创建新的状态机
-        /// state machine
+        /// Create new state machine
         ///
         /// # 参数
-        /// # parameter
+        /// # Parameters
         /// - `max_polls`: 最大轮询次数（模拟异步等待）
         /// - `max_polls`: maximum （async etc. ）
         pub fn new(max_polls: u32) -> Self {
@@ -308,7 +307,7 @@ pub mod sync_async_equivalence {
     /// synchronous :
     ///
     /// ## 形式化定义
-    /// ## definition
+    /// ## Formal Definition
     /// ```text
     /// fib : ℕ → ℕ
     /// fib(0) = 0
@@ -327,7 +326,7 @@ pub mod sync_async_equivalence {
     /// async :
     ///
     /// ## 形式化定义
-    /// ## definition
+    /// ## Formal Definition
     /// ```text
     /// fib_async : ℕ → Future<ℕ>
     /// fib_async(n) = async {
@@ -339,7 +338,7 @@ pub mod sync_async_equivalence {
     /// ```
     ///
     /// ## 等价性证明
-    /// ## etc.
+    /// ## proof
     /// ```text
     /// 对于所有 n: ℕ,
     /// to all n: ℕ,
@@ -363,7 +362,7 @@ pub mod sync_async_equivalence {
     }
 
     /// 验证等价性
-    /// etc.
+    /// Verify equivalence
     pub async fn verify_equivalence() {
         println!("\n=== 同步/异步等价性验证 ===");
 
@@ -469,7 +468,7 @@ pub mod cps_transformation {
 }
 
 /// # 示例 4: 控制流分析
-/// # example 4: control flow analysis
+/// # 4: controlflow analysis
 ///
 /// 分析 .await 点如何影响控制流
 /// analyze.await point impact stream
@@ -490,7 +489,7 @@ pub mod control_flow_analysis {
     }
 
     /// 带标记的异步函数
-    /// mark async function
+    /// async function
     ///
     /// ## 控制流图 (CFG)
     /// ## stream (CFG)
@@ -547,10 +546,10 @@ pub mod control_flow_analysis {
 }
 
 /// # 示例 5: Monad 法则验证
-/// # example 5: Monad
+/// # 5: Monad verification
 ///
 /// 验证 Future 满足 Monad 法则
-/// Future Monad
+/// Verify Future Monad
 pub mod monad_laws {
     use super::*;
 
@@ -572,7 +571,7 @@ pub mod monad_laws {
     }
 
     /// 测试函数
-    /// function
+    /// Test function
     async fn inc(x: i32) -> i32 {
         x + 1
     }
@@ -582,7 +581,7 @@ pub mod monad_laws {
     }
 
     /// 验证 Monad 法则
-    /// Monad
+    /// Verify Monad
     ///
     /// ## 法则 1: 左单位元 (Left Identity)
     /// ## 1: (Left Identity)
@@ -649,7 +648,7 @@ pub mod monad_laws {
     }
 
     /// 运行所有验证
-    /// Run all
+    /// Run hasverify
     pub async fn verify_all() {
         verify_left_identity().await;
         verify_right_identity().await;
@@ -659,7 +658,7 @@ pub mod monad_laws {
 }
 
 /// # 综合示例: 运行所有演示
-/// # synthesize example : Run all demonstrations
+/// # Comprehensive Example: Run All Demos
 pub async fn run_all_examples() {
     println!("╔══════════════════════════════════════════════════════════╗");
     println!("║       Rust 异步语义理论 - 形式化分析与证明               ║");

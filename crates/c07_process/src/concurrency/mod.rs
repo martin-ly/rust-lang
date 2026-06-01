@@ -16,7 +16,7 @@ use std::sync::{Arc, Mutex as StdMutex};
 use std::time::Duration;
 
 /// 同步管理器
-/// synchronous
+/// synchronous manager
 pub struct SyncManager {
     primitives: Arc<StdMutex<HashMap<String, Arc<dyn SyncPrimitiveTrait>>>>,
     config: SyncConfig,
@@ -29,7 +29,7 @@ pub trait SyncPrimitiveTrait: Send + Sync {
     fn name(&self) -> &str;
 
     /// 获取原语类型
-    /// type
+    /// Get type
     fn primitive_type(&self) -> SyncPrimitive;
 
     /// 检查是否被锁定
@@ -37,10 +37,11 @@ pub trait SyncPrimitiveTrait: Send + Sync {
     fn is_locked(&self) -> bool;
 
     /// 获取等待者数量
-    /// etc. quantity
+    /// Get waiter count
     fn waiter_count(&self) -> usize;
 
     /// 获取统计信息
+    /// Get statistics
     fn get_stats(&self) -> PrimitiveStats;
 }
 
@@ -59,7 +60,7 @@ pub struct PrimitiveStats {
 
 impl SyncManager {
     /// 创建新的同步管理器
-    /// synchronous
+    /// Create new synchronousmanager
     pub fn new(config: SyncConfig) -> Self {
         Self {
             primitives: Arc::new(StdMutex::new(HashMap::new())),
@@ -165,7 +166,7 @@ impl SyncManager {
     }
 
     /// 获取所有原语名称
-    /// all
+    /// Get has
     pub fn get_primitive_names(&self) -> Vec<String> {
         self.primitives.lock().expect("同步原语锁被污染").keys().cloned().collect()
     }
@@ -177,13 +178,14 @@ impl SyncManager {
     }
 
     /// 获取原语统计信息
+    /// Get information
     pub fn get_primitive_stats(&self, name: &str) -> Option<PrimitiveStats> {
         let primitives = self.primitives.lock().expect("同步原语锁被污染");
         primitives.get(name).map(|p| p.get_stats())
     }
 
     /// 获取所有原语统计信息
-    /// all
+    /// Get hasinformation
     pub fn get_all_stats(&self) -> HashMap<String, PrimitiveStats> {
         let primitives = self.primitives.lock().expect("同步原语锁被污染");
         let mut stats = HashMap::new();

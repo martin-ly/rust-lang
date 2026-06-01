@@ -2,7 +2,7 @@
 //! performance optimization
 //!
 //! 本模块展示了Rust中各种性能优化技术的实践案例，
-//! This module demonstrates Rustin performance optimization technique ，
+//! This module demonstrates Rustperformanceoptimizationpracticecases
 //! 包括内存优化、并发优化、编译时优化和运行时性能分析。
 //! memory optimization 、concurrency optimization 、compile-time optimization and runtime performance analyze 。
 use std::alloc::{Layout, alloc, dealloc};
@@ -17,7 +17,7 @@ use std::time::{Duration, Instant};
 // ============================================================================
 
 /// 内存池实现
-/// memory pool
+/// memory implementation
 pub struct MemoryPool {
     block_size: usize,
     block_count: usize,
@@ -77,7 +77,7 @@ impl Drop for MemoryPool {
 }
 
 /// 对象池实现
-/// to
+/// object implementation
 pub struct ObjectPool<T> {
     objects: Vec<T>,
     available: Vec<usize>,
@@ -128,7 +128,7 @@ impl<T> ObjectPool<T> {
 }
 
 /// 内存优化示例
-/// memory optimization example
+/// memoryoptimization example
 pub struct MemoryOptimizedBuffer {
     data: Vec<u8>,
     capacity: usize,
@@ -201,7 +201,7 @@ impl LockFreeCounter {
 }
 
 /// 线程池实现
-/// thread pool
+/// thread implementation
 pub struct ThreadPool {
     workers: Vec<Worker>,
     sender: std::sync::mpsc::Sender<Message>,
@@ -293,7 +293,7 @@ impl Drop for ThreadPool {
 }
 
 /// 并发优化示例
-/// concurrency optimization example
+/// concurrentoptimization example
 pub struct ConcurrentOptimizedProcessor {
     thread_pool: ThreadPool,
     counter: LockFreeCounter,
@@ -344,7 +344,7 @@ impl ConcurrentOptimizedProcessor {
 // ============================================================================
 
 /// 编译时常量函数
-/// compile-time constant function
+/// compile-timeconstant function
 pub const fn calculate_fibonacci(n: u32) -> u32 {
     if n <= 1 {
         n
@@ -354,7 +354,7 @@ pub const fn calculate_fibonacci(n: u32) -> u32 {
 }
 
 /// 编译时优化的查找表
-/// compile-time optimization
+/// compile-timeoptimizationsearch table
 pub const LOOKUP_TABLE: [u32; 10] = [
     calculate_fibonacci(0),
     calculate_fibonacci(1),
@@ -369,7 +369,7 @@ pub const LOOKUP_TABLE: [u32; 10] = [
 ];
 
 /// 泛型优化示例
-/// generic optimization example
+/// genericoptimization example
 pub struct OptimizedContainer<T, const N: usize> {
     data: [T; N],
     len: usize,
@@ -417,7 +417,7 @@ impl<T: Default + Copy, const N: usize> OptimizedContainer<T, N> {
 }
 
 /// 编译时优化的字符串处理
-/// compile-time optimization
+/// compile-timeoptimizationstring processing
 pub const fn string_length(s: &str) -> usize {
     s.len()
 }
@@ -504,7 +504,7 @@ impl PerformanceProfiler {
 }
 
 /// 性能基准测试
-/// Performance benchmark
+/// performance test
 pub struct BenchmarkRunner {
     profiler: PerformanceProfiler,
 }
@@ -629,12 +629,12 @@ impl MemoryProfiler {
 // ============================================================================
 
 /// 性能优化示例集合
-/// performance optimization example set
+/// performanceoptimization set
 pub struct PerformanceExamples;
 
 impl PerformanceExamples {
     /// 内存优化示例
-    /// memory optimization example
+    /// memoryoptimization example
     pub fn memory_optimization_example() {
         println!("=== 内存优化示例 ===");
 
@@ -667,7 +667,7 @@ impl PerformanceExamples {
     }
 
     /// 并发优化示例
-    /// concurrency optimization example
+    /// concurrentoptimization example
     pub fn concurrency_optimization_example() {
         println!("\n=== 并发优化示例 ===");
 
@@ -703,7 +703,7 @@ impl PerformanceExamples {
     }
 
     /// 编译时优化示例
-    /// compile-time optimization example
+    /// compile-timeoptimization example
     pub fn compile_time_optimization_example() {
         println!("\n=== 编译时优化示例 ===");
 
@@ -722,7 +722,7 @@ impl PerformanceExamples {
     }
 
     /// 运行时性能分析示例
-    /// runtime performance analyze example
+    /// Run performanceanalysis
     pub fn runtime_profiling_example() {
         println!("\n=== 运行时性能分析示例 ===");
 

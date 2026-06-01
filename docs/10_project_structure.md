@@ -1,8 +1,8 @@
 # 项目结构说明
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
-
 > **最后更新**: 2026-04-10
 > **Rust 版本**: 1.96.0
 > **Edition**: 2024
@@ -10,10 +10,10 @@
 ---
 
 ## 目录概览
->
+
 > **[来源: Rust Official Docs]**
 
-```
+```text
 rust-lang/
 ├── docs/                   # 文档中心
 ├── crates/                 # 代码 crate
@@ -28,10 +28,10 @@ rust-lang/
 ---
 
 ## 文档结构 (docs/)
->
+
 > **[来源: Rust Official Docs]**
 
-```
+```text
 docs/
 ├── 00_master_index.md                  # 主索引
 ├── ARCHITECTURE.md                      # 架构文档
@@ -85,10 +85,10 @@ docs/
 | integration_tests | crates/integration_tests/ | 集成测试套件 |
 
 ### Crate 标准结构
->
+
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 crates/cXX_name/
 ├── src/
 │   ├── lib.rs              # 库入口
@@ -105,10 +105,10 @@ crates/cXX_name/
 ---
 
 ## 示例结构 (examples/)
->
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 examples/
 ├── basic/                  # 基础示例
 ├── advanced/               # 高级示例
@@ -118,10 +118,10 @@ examples/
 ---
 
 ## 脚本工具 (scripts/)
->
+
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 scripts/
 ├── build/                  # 构建脚本
 ├── test/                   # 测试脚本
@@ -140,21 +140,21 @@ scripts/
 > **[来源: [crates.io](https://crates.io/)]**
 
 - 位置: crates/*/tests/ 或 src/ 内 #[cfg(test)]
-- 命令: cargo test -p <crate>
+- 命令: `cargo test -p <crate>`
 
 ### 集成测试
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - 位置: crates/integration_tests/
-- 命令: cargo test -p integration_tests
+- 命令: `cargo test -p integration_tests`
 
 ### 基准测试
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 位置: crates/*/benches/
-- 命令: cargo bench -p <crate>
+- 命令: `cargo bench -p <crate>`
 
 ---
 
@@ -203,15 +203,15 @@ serde = "1.0"
 | 类型 | 格式 | 示例 |
 |------|------|------|
 | Rust 源文件 | snake_case.rs | my_module.rs |
-| 测试文件 | <name>_test.rs | math_test.rs |
-| 示例文件 | <description>_example.rs | tcp_echo_example.rs |
+| 测试文件 | `<name>_test.rs` | math_test.rs |
+| 示例文件 | `<description>_example.rs` | tcp_echo_example.rs |
 | 文档文件 | UPPER_SNAKE_CASE.md | 10_api_guide.md |
 
 ### Crate 命名
->
+
 > **[来源: [crates.io](https://crates.io/)]**
 
-```
+```text
 cXX_<描述>          # 学习 crate
 common              # 共享库
 integration_tests   # 集成测试
@@ -243,7 +243,7 @@ integration_tests   # 集成测试
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 .github/workflows/
 ├── ci.yml                 # 主 CI 流程
 ├── test.yml               # 测试流程
@@ -252,7 +252,7 @@ integration_tests   # 集成测试
 ```
 
 ### 质量检查
->
+
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 编译: cargo build --workspace
@@ -293,19 +293,12 @@ integration_tests   # 集成测试
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---
@@ -320,37 +313,3 @@ integration_tests   # 集成测试
 >
 
 ---
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
-> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
-> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-
-> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-
-> **[来源: [crates.io](https://crates.io/)]**
-
-> **[来源: [docs.rs](https://docs.rs/)]**
-
-> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
----
-
-> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-
-> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
-
-> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

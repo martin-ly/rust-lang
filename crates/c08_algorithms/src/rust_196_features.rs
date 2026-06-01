@@ -2,20 +2,20 @@
 //! # Rust 1.96 feature module （feature and 1.96 before ）
 //!
 //! 本模块展示了 Rust 范围类型的应用，包括：
-//! This module demonstrates Rust scope type application ，：
+//! This module demonstrates Rust typeapplicationincluding
 //! - `RangeInclusive` 和 `RangeToInclusive` 的方法支持
 //! - 范围类型在算法中的高级应用
-//! - scope type in algorithm in application
+//! - typealgorithmadvanced application
 //! - 迭代器与范围类型的深度集成
 //! - and scope type
 //!
 //! # 文件信息
-//! #
+//! # File Info
 //! - 文件: rust_196_features.rs
 //! - 创建日期: 2026-04-10
 //! - date : 2026-04-10
 //! - 版本: 1.0
-//! - this : 1.0
+//! - Version: 1.0
 //! - Rust版本: 1.96
 //! - Rustthis : 1.96
 //! - Edition: 2024
@@ -23,7 +23,7 @@
 use std::ops::RangeInclusive;
 
 /// if let guards (Rust 1.95.0 稳定，非当前版本新特性) 在算法中的应用
-/// if let guards (Rust 1.95.0 ，when before this feature ) in algorithm in application
+/// if let guards (Rust 1.95.0 currentversionnewfeatures) algorithm application
 ///
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// `if let` guards in match arm on and condition ，
@@ -42,7 +42,7 @@ impl AlgorithmIfLetGuardExamples {
     }
 
     /// 验证算法参数
-    /// algorithm parameter
+    /// Verify algorithm
     pub fn validate_algorithm_param(param: Result<Option<usize>, &'static str>) -> &'static str {
         match param {
             Ok(Some(n)) if n > 0 && n.is_power_of_two() => "有效的2的幂参数",
@@ -75,7 +75,7 @@ impl RangeInclusiveAlgorithms {
     /// RangeInclusive
     ///
     /// RangeInclusive 完全支持迭代和索引操作
-    /// RangeInclusive and
+    /// RangeInclusive support operation
     pub fn fibonacci_range(n: usize) -> Vec<u64> {
         let mut fib = vec![0u64, 1];
 
@@ -89,7 +89,7 @@ impl RangeInclusiveAlgorithms {
     }
 
     /// 使用 RangeInclusive 实现闭区间搜索
-    /// RangeInclusive interval
+    /// use RangeInclusive implementation search
     ///
     /// RangeInclusive 支持包含边界的二分查找
     /// RangeInclusive edge
@@ -121,7 +121,7 @@ impl RangeInclusiveAlgorithms {
     /// RangeInclusive interval
     ///
     /// 统计在指定闭区间内的元素数量
-    /// in interval inside element quantity
+    /// inner count
     pub fn count_in_range<T: Ord>(data: &[T], min: &T, max: &T) -> usize {
         data.iter().filter(|x| min <= *x && *x <= max).count()
     }
@@ -200,7 +200,7 @@ impl RangeInclusiveAlgorithms {
     }
 
     /// 使用 RangeInclusive 进行分段线性插值
-    /// RangeInclusive segmentation line
+    /// use RangeInclusive value
     pub fn piecewise_linear_interpolation(
         points: &[(f64, f64)],
         x_range: RangeInclusive<f64>,
@@ -252,7 +252,7 @@ pub struct RangeToInclusiveAlgorithms;
 
 impl RangeToInclusiveAlgorithms {
     /// 使用 RangeToInclusive 获取前缀统计信息
-    /// RangeToInclusive before
+    /// use RangeToInclusive getfront information
     ///
     /// RangeToInclusive 支持切片索引
     pub fn prefix_statistics(data: &[i32], end: usize) -> (i32, f64, i32, i32) {
@@ -320,7 +320,7 @@ impl RangeToInclusiveAlgorithms {
     /// 使用 RangeToInclusive 模式匹配
     ///
     /// 展示如何在 match 中使用范围模式
-    /// in match in scope
+    /// demonstrate match use pattern
     pub fn classify_by_range(value: usize) -> &'static str {
         match value {
             0..=10 => "small",
@@ -399,7 +399,7 @@ impl RangeCompositionAlgorithms {
     /// scope intersection
     ///
     /// 计算两个 RangeInclusive 的交集
-    /// RangeInclusive intersection
+    /// Compute RangeInclusive
     pub fn range_intersection(
         a: RangeInclusive<usize>,
         b: RangeInclusive<usize>,
@@ -418,7 +418,7 @@ impl RangeCompositionAlgorithms {
     /// scope union
     ///
     /// 计算两个 RangeInclusive 的最小并集范围
-    /// RangeInclusive minimum union scope
+    /// Compute RangeInclusive minimum
     pub fn range_union(
         a: RangeInclusive<usize>,
         b: RangeInclusive<usize>,
@@ -433,7 +433,7 @@ impl RangeCompositionAlgorithms {
     /// scope type
     ///
     /// 展示 RangeInclusive 在实际分页场景中的应用
-    /// RangeInclusive in actual scenario in application
+    /// demonstrate RangeInclusive application
     pub fn paginate<T>(data: &[T], page: usize, page_size: usize) -> &[T] {
         let start = page * page_size;
         let end = ((page + 1) * page_size - 1).min(data.len().saturating_sub(1));
@@ -469,7 +469,7 @@ use std::ops::RangeBounds;
 // ==================== 4. 实际应用示例 ====================
 
 /// # 实际应用示例
-/// # actual application example
+/// # application example
 ///
 /// 展示 RangeInclusive 和 RangeToInclusive 在实际编程中的应用。
 pub struct RangePracticalApplications;
@@ -735,7 +735,7 @@ pub fn demonstrate_rust_196_range_features() {
 }
 
 /// 获取 Rust 范围类型特性信息
-/// Rust scope type feature
+/// Get Rust typefeaturesinformation
 pub fn get_rust_196_range_info() -> String {
     "Rust 范围类型特性:\n- RangeInclusive 完整功能支持 [start..=end]\n- RangeToInclusive 功能支持 \
      [..=end]\n- 范围类型组合和转换\n- 范围交集、并集、裁剪操作\n- \
@@ -944,7 +944,7 @@ mod tests {
 use std::collections::VecDeque;
 
 /// 使用 gen 块实现斐波那契数列生成器
-/// gen
+/// use gen implementation generator
 ///
 /// 经典的无限序列生成，gen 块使实现极为简洁。
 /// sequence ，gen as 。
@@ -983,7 +983,7 @@ pub fn prime_sieve_gen(limit: usize) -> impl Iterator<Item = usize> {
 }
 
 /// 使用 gen 块实现滑动窗口迭代器
-/// gen
+/// use gen implementation iterator
 ///
 /// 在数据切片上滑动固定大小的窗口，产生每个窗口的内容。
 /// in on ，inside 。
@@ -1002,19 +1002,19 @@ pub fn sliding_window_gen<T: Clone>(data: &[T], size: usize) -> impl Iterator<It
 #[derive(Debug, PartialEq, Clone)]
 pub struct TreeNode<T> {
     /// 节点值
-    /// node
+    /// node value
     pub value: T,
     /// 左子树
-    /// tree
+    /// left tree
     pub left: Option<Box<TreeNode<T>>>,
     /// 右子树
-    /// tree
+    /// right tree
     pub right: Option<Box<TreeNode<T>>>,
 }
 
 impl<T: Clone> TreeNode<T> {
     /// 使用 gen 块实现前序遍历
-    /// gen before
+    /// use gen implementationfront traversal
     ///
     /// 使用显式栈避免递归，gen 块让迭代器实现极为简洁。
     /// stack ，gen as 。
@@ -1034,7 +1034,7 @@ impl<T: Clone> TreeNode<T> {
     }
 
     /// 使用 gen 块实现中序遍历
-    /// gen in
+    /// use gen implementation traversal
     pub fn in_order_gen(&self) -> impl Iterator<Item = T> + '_ {
         gen move {
             let mut stack = Vec::new();
@@ -1072,7 +1072,7 @@ impl<T: Clone> TreeNode<T> {
 }
 
 /// 使用 gen 块实现笛卡尔积生成器
-/// gen Cartesian product
+/// use gen implementation generator
 ///
 /// 生成两个集合的所有可能组合。
 /// set all may combination 。
@@ -1360,7 +1360,7 @@ pub struct ElementOffsetExamples;
 
 impl ElementOffsetExamples {
     /// 计算两个元素在数组中的距离
-    /// element in in
+    /// Compute array
     pub fn distance_between(arr: &[i32], a: &i32, b: &i32) -> Option<usize> {
         arr.element_offset(a)
             .zip(arr.element_offset(b))
@@ -1390,7 +1390,7 @@ pub struct PeekableNextIfMapExamples;
 
 impl PeekableNextIfMapExamples {
     /// 从迭代器中消费满足条件的元素并映射
-    /// from in condition element and
+    /// iterator map
     pub fn consume_while_even(
         iter: &mut std::iter::Peekable<impl Iterator<Item = i32>>,
     ) -> Vec<i32> {
@@ -1449,7 +1449,7 @@ impl MathConstantsExamples {
     }
 
     /// 使用黄金比例生成斐波那契数列的近似值
-    /// F(n) ≈ φ^n / √5
+    /// use value
     pub fn fibonacci_approximation(n: u32) -> f64 {
         let phi = std::f64::consts::GOLDEN_RATIO;
         let sqrt5 = 5.0f64.sqrt();
@@ -1459,7 +1459,7 @@ impl MathConstantsExamples {
     /// 黄金比例搜索区间分割（一维优化）
     /// interval （optimization ）
     /// 在区间 [a, b] 内按黄金比例取点，用于单峰函数优化
-    /// in interval [a, b] inside point ，function optimization
+    /// [a, b] innersinglefunction optimization
     pub fn golden_section_points(a: f64, b: f64) -> (f64, f64) {
         let phi = std::f64::consts::GOLDEN_RATIO;
         let resphi = 2.0 - phi; // 1 / φ^2 ≈ 0.382

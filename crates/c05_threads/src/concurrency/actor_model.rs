@@ -26,6 +26,7 @@ pub trait Actor: Send + 'static {
 
     /// 处理消息
     /// Processes消息
+    /// Processesmessage
     fn handle(&mut self, msg: Self::Message);
 
     /// Actor 名称（用于调试）

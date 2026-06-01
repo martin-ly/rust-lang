@@ -1,15 +1,15 @@
 //! Rust 1.98 Nightly 前瞻 —— 生成器块与算法
-//! Rust 1.98 Nightly before —— and algorithm
+//! Rust 1.98 Nightly front generator algorithm
 #![allow(clippy::incompatible_msrv)]
 
 /// # Rust 1.98 Nightly 算法前瞻
 ///
 /// 本模块展示 nightly 1.98 中 `gen { yield ... }` 块在算法场景的应用：
-/// This module demonstrates nightly 1.98 in `gen { yield... }` in algorithm scenario application ：
+/// This module demonstrates nightly 1.98 `gen { yield ... }` algorithmapplication
 /// - 惰性序列生成（斐波那契、素数筛）
 /// - sequence （、）
 /// - 树/图的遍历生成器
-/// - tree /
+/// - tree/graphtraversal generator
 /// - 流式数据管道
 /// - stream pipe
 ///
@@ -122,19 +122,19 @@ impl Rust198AlgorithmFeatures {
 #[derive(Debug, Clone)]
 pub struct TreeNode<T> {
     /// 节点值
-    /// node
+    /// node value
     pub val: T,
     /// 左子树
-    /// tree
+    /// left tree
     pub left: Option<Box<TreeNode<T>>>,
     /// 右子树
-    /// tree
+    /// right tree
     pub right: Option<Box<TreeNode<T>>>,
 }
 
 impl<T> TreeNode<T> {
     /// 创建新的叶子节点
-    /// node
+    /// Create new node
     pub fn new(val: T) -> Self {
         Self {
             val,
@@ -144,14 +144,14 @@ impl<T> TreeNode<T> {
     }
 
     /// 添加左子节点
-    /// node
+    /// left node
     pub fn left(mut self, node: TreeNode<T>) -> Self {
         self.left = Some(Box::new(node));
         self
     }
 
     /// 添加右子节点
-    /// node
+    /// right node
     pub fn right(mut self, node: TreeNode<T>) -> Self {
         self.right = Some(Box::new(node));
         self

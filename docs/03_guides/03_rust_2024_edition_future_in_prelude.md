@@ -1,5 +1,6 @@
 > **权威来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html), [RFC 2052](https://rust-lang.github.io/rfcs/2052-epochs.html)
 > **分级**: [A]
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Edition Guide、RFC 2052 来源标注 [来源: Authority Source Sprint Batch 8]
 
@@ -265,15 +266,10 @@ where
 ## 权威来源索引
 
 > **[来源: Rust Reference - Prelude]**
-
 > **[来源: Rust Reference - Future Trait]**
-
 > **[来源: RFC 2645 - Future in Prelude]**
-
 > **[来源: TRPL - Async Programming]**
-
 > **[来源: Wikipedia - Promise (programming)]**
-
 > **[来源: ACM - Async Language Integration]**
 
 ---

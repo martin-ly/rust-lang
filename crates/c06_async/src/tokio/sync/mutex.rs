@@ -2,12 +2,12 @@
 //! Tokio async mutex （Mutex）
 //!
 //! 本模块展示了如何在 Tokio 异步运行时中使用 `tokio::sync::Mutex`。
-//! This module demonstrates in Tokio async runtime in `tokio::sync::Mutex`。
+//! This module demonstrates Tokio asyncruntimeuse `tokio::sync::Mutex`
 //! 异步 Mutex 是异步编程中保护共享数据的重要工具。
 //! async Mutex async in important tool 。
 //!
 //! ## 核心概念
-//! ## core concept
+//! ## Core Concepts
 //!
 //! ### tokio::sync::Mutex vs std::sync::Mutex
 //! - **std::sync::Mutex**: 同步互斥锁，会阻塞线程
@@ -18,27 +18,27 @@
 //! - **strength **: async Mutex thread ，its task can
 //!
 //! ### Arc + Mutex 模式
-//! - `Arc`: 原子引用计数，允许多个任务共享所有权
+//! ### Arc + Mutex pattern
 //! - `Arc`: reference counting ，task ownership
 //! - `Mutex`: 提供内部可变性，确保数据访问的安全性
 //! - `Mutex`: inside ，
 //! - 组合使用：`Arc<Mutex<T>>` 是异步编程中的经典模式
-//! - combination ：`Arc<Mutex<T>>` async in
+//! - use`Arc<Mutex<T>>` asyncclassic pattern
 //!
 //! ## 使用场景
-//! ## scenario
+//! ## Usage Scenarios
 //!
 //! 1. **共享计数器**: 多个任务同时修改同一个计数器
 //! 1. ****: task
 //! 2. **共享缓存**: 多个任务读写同一个缓存
 //! 2. ****: task
 //! 3. **共享状态**: 维护应用程序的全局状态
-//! 3. **state **: application program global state
+//! 3. **sharedstatus**: applicationglobal status
 //! 4. **资源池**: 管理有限的资源（如数据库连接）
 //! 4. ****: （database ）
 //!
 //! ## 注意事项
-//! ##
+//! ## Notes
 //!
 //! - 避免长时间持有锁，防止死锁
 //! - time lock ，lock
@@ -48,7 +48,7 @@
 //! - lock ，lock
 //!
 //! ## 使用示例
-//! ## example
+//! ## Usage Examples
 //!
 //! ```no_run
 //! use c06_async::tokio::sync::mutex_test01;
@@ -70,19 +70,19 @@ use tokio::sync::Mutex;
 /// async task and ，async lock 。
 ///
 /// # 实现原理
-/// #
+/// # Implementation Principle
 ///
 /// ## 数据保护
 /// ##
 /// - 使用 `Arc<Mutex<i32>>` 模式共享数据
-/// - `Arc<Mutex<i32>>`
+/// - use `Arc<Mutex<i32>>` patternshared data
 /// - `Arc` 提供多所有权，`Mutex` 提供互斥访问
 /// - `Arc` ownership ，`Mutex`
 /// - 确保同一时间只有一个任务可以修改数据
-/// - time task can
+/// - timehastaskcan data
 ///
 /// ## 异步特性
-/// ## async feature
+/// ## Async Features
 /// - `lock().await` 是异步操作，不会阻塞线程
 /// - `lock().await` async ，thread
 /// - 当锁被其他任务持有时，当前任务会被挂起
@@ -100,7 +100,7 @@ use tokio::sync::Mutex;
 /// - ultimately should etc. task quantity （10）
 ///
 /// # 执行流程
-/// # process
+/// # Execution Flow
 /// 1. 创建共享的计数器（初始值为 0）
 /// 1. （as 0）
 /// 2. 启动 10 个并发任务，每个任务都会增加计数器
@@ -108,10 +108,10 @@ use tokio::sync::Mutex;
 /// 3. 等待所有任务完成
 /// 3. etc. all task
 /// 4. 验证最终结果
-/// 4. ultimately result
+/// 4. verifyfinal result
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```no_run
 /// use c06_async::tokio::sync::mutex_test01;
 ///
@@ -125,14 +125,14 @@ use tokio::sync::Mutex;
 /// # 性能特点
 /// # performance point
 /// - 异步锁不会阻塞线程，提高并发性能
-/// - async lock thread ，concurrency performance
+/// - asyncthreadhighconcurrent performance
 /// - 适合高并发场景下的数据保护
 /// - concurrency scenario under
 /// - 相比同步锁，可以处理更多的并发任务
 /// - synchronous lock ，can concurrency task
 ///
 /// 测试异步 Mutex
-/// async Mutex
+/// Test async Mutex
 pub async fn mutex_test01() {
     // 创建一个 Arc 包裹的 Mutex，内部数据为 0
     // Arc 允许在多个任务之间共享所有权

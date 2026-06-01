@@ -1,4 +1,6 @@
 # Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **受众**: [研究者]
 > **定位**: 本文件从**横向语义维度**梳理 Rust 语言的表达能力光谱，与 L0-L7 纵向概念体系形成正交互补。

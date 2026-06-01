@@ -1,5 +1,6 @@
 # Miri 使用指南
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **分级**: [B]
 > **Bloom 层级**: L2-L3 (理解/应用)
 
@@ -276,7 +277,7 @@ let _ = x; // 错误: 使用未初始化的值
 
 每个 crate 的 Miri 测试位于 `src/miri_tests.rs`：
 
-```
+```text
 crates/
 ├── c01_ownership_borrow_scope/src/miri_tests.rs
 ├── c02_type_system/src/miri_tests.rs
@@ -415,19 +416,12 @@ mod non_miri_tests {
 ## 权威来源索引
 
 > **[来源: Wikipedia - Rust (programming language)]**
-
 > **[来源: Rust Reference]**
-
 > **[来源: TRPL - The Rust Programming Language]**
-
 > **[来源: Rust Standard Library]**
-
 > **[来源: ACM - Systems Programming]**
-
 > **[来源: IEEE - Programming Language Standards]**
-
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
-
 > **[来源: Rustonomicon]**
 
 ---

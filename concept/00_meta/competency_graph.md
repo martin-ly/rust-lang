@@ -1,5 +1,6 @@
 # Rust 知识体系能力图谱（Competency Graph）
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **Bloom 层级**: 元（Meta）
 > **定位**: 本文件建立 `concept/` 知识体系的**能力评估与提升框架**，定义 Rust 编程能力的六维雷达模型，提供自评工具、薄弱点诊断和个性化训练路径推荐。与 `problem_graph.md`（"遇到什么问题"）和 `cognitive_dimension_matrix.md`（"认知类型是什么"）形成三角互补。
 > **对齐来源**: [ACM 能力图谱框架] · [Bloom 修订版 2001 — 认知过程维度] · [Dreyfus 技能获取模型] · [Microsoft RustTraining — 能力评估]
@@ -353,9 +354,7 @@ graph LR
 | Rust 知识体系能力图谱（Competency Graph） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: Rust 知识体系能力图谱（Competency Graph） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 Rust 知识体系能力图谱（Competency Graph） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界

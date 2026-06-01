@@ -1,8 +1,7 @@
 //! CSP 模型对比分析 - CSP (Communicating Sequential Processes) Model Comparison
 //!
 //! # 概述 (Overview)
-//!
-//! 本模块深入对比 Rust 和 Golang 的并发模型，重点分析：
+//! # Overview
 //! this module to Rust and Golang concurrency ，emphasis analyze ：
 //! - CSP 理论基础
 //! - CSP theory foundation
@@ -170,7 +169,7 @@
 //! 语法:
 //! :
 //! async fn foo() { ... }       // 异步函数
-//! foo().await                  // 等待完成
+//! async fn foo() { ... } // async function
 //! foo().await // etc.
 //! tokio::spawn(async { ... })  // 生成任务
 //! ```
@@ -182,7 +181,7 @@
 //! - mpsc: 多生产者单消费者
 //! - mpsc: multi-producer single-consumer
 //!   - unbounded: 无界队列
-//!   - bounded: 有界队列
+//! - unbounded: without queue
 //!   - bounded:
 //! - oneshot: 一次性通信
 //! - oneshot:
@@ -221,10 +220,10 @@ use tokio::sync::mpsc;
 use tokio::time::sleep;
 
 /// # 示例 1: 基本 CSP 模式
-/// # example 1: this CSP
+/// # 1: CSP pattern
 ///
 /// 经典的生产者-消费者模式
-/// -
+/// classic- pattern
 pub mod producer_consumer {
     use super::*;
 
@@ -332,16 +331,15 @@ pub mod producer_consumer {
 }
 
 /// # 示例 2: Select 模式
-/// # example 2: Select
+/// # 2: Select pattern
 ///
 /// 多路复用 channel 操作
-/// channel
+/// multiple channel operation
 pub mod select_pattern {
     use super::*;
 
     /// Golang select 示例
-    ///
-    /// ```go
+    /// Golang select example
     /// func main() {
     ///     ch1 := make(chan string)
     ///     ch2 := make(chan string)
@@ -446,8 +444,7 @@ pub mod select_pattern {
 }
 
 /// # 示例 3: Worker Pool 模式
-///
-/// 工作池并发处理任务
+/// # 3: Worker Pool pattern
 /// concurrency task
 pub mod worker_pool {
     use super::*;
@@ -600,10 +597,10 @@ pub mod worker_pool {
 }
 
 /// # 示例 4: Pipeline 模式
-/// # example 4: Pipeline
+/// # 4: Pipeline pattern
 ///
 /// 流水线处理数据
-/// pipeline
+/// flowhandling data
 pub mod pipeline {
     use super::*;
 
@@ -773,7 +770,7 @@ pub mod fan_in_out {
 }
 
 /// # 综合示例: 运行所有演示
-/// # synthesize example : Run all demonstrations
+/// # Comprehensive Example: Run All Demos
 pub async fn run_all_examples() {
     println!("╔══════════════════════════════════════════════════════════╗");
     println!("║       CSP 模型对比分析 (Rust vs Golang)                 ║");

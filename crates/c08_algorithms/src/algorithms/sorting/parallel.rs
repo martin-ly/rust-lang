@@ -1,8 +1,8 @@
 //! # 并行排序算法
-//! # parallel sort algorithm
+//! # parallelsort algorithm
 //!
 //! 本模块实现了各种排序算法的并行版本，充分利用多核 CPU 的计算能力。
-//! this module sorting algorithm parallelism this ， CPU 。
+//! This module implements sortalgorithmparallelversionmultiple CPU compute
 //! 基于 rayon 实现数据并行和任务并行。
 //! rayon data parallelism and task parallelism 。
 use super::{AlgorithmComplexity, SortingAlgorithm};
@@ -10,7 +10,7 @@ use crate::algorithms::execution_modes::ParallelAlgorithm;
 use rayon::prelude::*;
 
 /// 并行快速排序
-/// parallelism quick sort
+/// parallelfast sort
 pub struct ParallelQuickSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelQuickSort {
@@ -77,7 +77,7 @@ impl super::ParallelSortingAlgorithm for ParallelQuickSort {
 }
 
 /// 并行归并排序
-/// parallelism merge sort
+/// parallel sort
 pub struct ParallelMergeSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelMergeSort {
@@ -136,7 +136,7 @@ impl super::ParallelSortingAlgorithm for ParallelMergeSort {
 }
 
 /// 并行堆排序
-/// parallelism heap sort
+/// parallelheap sort
 pub struct ParallelHeapSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelHeapSort {
@@ -187,7 +187,7 @@ impl super::ParallelSortingAlgorithm for ParallelHeapSort {
 }
 
 /// 并行插入排序
-/// parallelism insertion sort
+/// parallel sort
 pub struct ParallelInsertionSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelInsertionSort {
@@ -229,7 +229,7 @@ impl super::ParallelSortingAlgorithm for ParallelInsertionSort {
 }
 
 /// 并行选择排序
-/// parallelism selection sort
+/// parallel sort
 pub struct ParallelSelectionSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelSelectionSort {
@@ -265,7 +265,7 @@ impl super::ParallelSortingAlgorithm for ParallelSelectionSort {
 }
 
 /// 并行冒泡排序
-/// parallelism bubble sort
+/// parallel sort
 pub struct ParallelBubbleSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelBubbleSort {
@@ -305,7 +305,7 @@ impl super::ParallelSortingAlgorithm for ParallelBubbleSort {
 }
 
 /// 并行基数排序
-/// parallelism radix sort
+/// parallel sort
 pub struct ParallelRadixSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelRadixSort {
@@ -349,7 +349,7 @@ impl super::ParallelSortingAlgorithm for ParallelRadixSort {
 }
 
 /// 并行计数排序
-/// parallelism counting sort
+/// parallel sort
 pub struct ParallelCountingSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelCountingSort {
@@ -403,7 +403,7 @@ impl super::ParallelSortingAlgorithm for ParallelCountingSort {
 }
 
 /// 并行桶排序
-/// parallelism bucket sort
+/// parallel sort
 pub struct ParallelBucketSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelBucketSort {
@@ -467,7 +467,7 @@ impl super::ParallelSortingAlgorithm for ParallelBucketSort {
 }
 
 /// 并行 Tim 排序
-/// parallelism Tim ordering
+/// parallel Tim sort
 pub struct ParallelTimSort;
 
 impl ParallelAlgorithm<Vec<i32>, Vec<i32>> for ParallelTimSort {

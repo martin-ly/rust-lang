@@ -2,12 +2,12 @@
 //! async stream （Stream）
 //!
 //! 本模块展示了 Rust 中异步流（Stream）的概念和用法。
-//! This module demonstrates Rust in async stream （Stream）concept and 。
+//! This module demonstrates Rust asyncflowStream
 //! Stream 是异步编程中处理连续数据的重要抽象，类似于同步编程中的迭代器。
 //! Stream async in important ，similar to synchronous in 。
 //!
 //! ## 核心概念
-//! ## core concept
+//! ## Core Concepts
 //!
 //! ### Stream Trait
 //! ```ignore
@@ -32,13 +32,13 @@
 //! ## main feature
 //!
 //! ### 1. 自定义 Stream 实现
-//! ### 1. definition Stream
+//! ### 1. custom Stream implementation
 //! - 展示如何实现 Stream trait
 //! - Stream trait
 //! - 基于计时器的时间序列流
 //! - time sequence stream
 //! - 状态管理和生命周期控制
-//! - state and lifetime
+//! - statusmanagementlifetime control
 //!
 //! ### 2. Stream 组合子
 //! ### 2. Stream combination
@@ -47,19 +47,19 @@
 //! - `filter`: 过滤流中的元素
 //! - `filter`: stream in element
 //! - `take`: 限制流中元素的数量
-//! - `take`: stream in element quantity
+//! - `take`: flow count
 //! - `collect`: 收集所有元素到集合中
 //! - `collect`: all element to set in
 //!
 //! ### 3. 并发处理
-//! ### 3. concurrency
+//! ### 3. concurrent processing
 //! - `buffer_unordered`: 并发处理流中的元素
 //! - `buffer_unordered`: concurrency stream in element
 //! - 限制并发数量，避免资源耗尽
 //! - concurrency quantity ，
 //!
 //! ## 使用示例
-//! ## example
+//! ## Usage Examples
 //!
 //! ```no_run
 //! use c06_async::streams::*;
@@ -86,7 +86,7 @@ use futures::{Stream, StreamExt, stream};
 use tokio::time::{Interval, interval};
 
 /// 基于计时器的自定义 Stream 实现
-/// definition Stream
+/// custom Stream implementation
 ///
 /// 这个结构体演示了如何实现 Stream trait 来创建一个自定义的异步流。
 /// struct demonstration Stream trait definition async stream 。
@@ -100,21 +100,21 @@ use tokio::time::{Interval, interval};
 /// - `remaining`: 剩余要产生的计时次数
 /// - `remaining`:
 /// - `counter`: 当前计时器的计数值
-/// - `counter`: when before
+/// - `counter`: current value
 ///
 /// # 工作原理
 /// #
 /// 1. 创建时设置总的计时次数和间隔时间
-/// 1. and time
+/// 1. createset time
 /// 2. 每次 `poll_next` 被调用时，等待下一次计时器触发
 /// 2. `poll_next` is ，etc. under
 /// 3. 计时器触发时，返回当前的计数值
-/// 3. ，when before
+/// 3. current value
 /// 4. 当达到设定的次数时，流结束（返回 `None`）
 /// 4. when to ，stream （ `None`）
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```no_run
 /// use c06_async::streams::TickStream;
 /// use futures::StreamExt;
@@ -135,7 +135,7 @@ pub struct TickStream {
     /// 剩余要产生的计时次数
     remaining: u64,
     /// 当前计数值
-    /// when before
+    /// current value
     counter: u64,
 }
 
@@ -144,19 +144,19 @@ impl TickStream {
     /// stream
     ///
     /// # 参数
-    /// # parameter
+    /// # Parameters
     /// - `ticks`: 总共要产生的计时次数
     /// - `ticks`:
     /// - `period`: 每次计时的间隔时间
     /// - `period`: time
     ///
     /// # 返回值
-    /// # return value
+    /// # Return Value
     /// 返回一个新的 `TickStream` 实例
     /// `TickStream`
     ///
     /// # 示例
-    /// # example
+    /// # Examples
     /// ```no_run
     /// use c06_async::streams::TickStream;
     /// use std::time::Duration;
@@ -199,7 +199,7 @@ impl TickStream {
 /// 3. **更新状态**: 计时器触发时，更新计数器和剩余次数
 /// 3. **state **: ，and
 /// 4. **返回元素**: 返回当前的计数值
-/// 4. **element **: when before
+/// 4. ****: current value
 ///
 /// # 生命周期
 /// # lifetime
@@ -211,21 +211,21 @@ impl TickStream {
 /// - to after
 impl Stream for TickStream {
     /// 流中元素的类型
-    /// stream in element type
+    /// flow type
     type Item = u64;
 
     /// 轮询流中的下一个元素
     /// stream in under element
     ///
     /// # 参数
-    /// # parameter
+    /// # Parameters
     /// - `self`: 被固定的 Stream 引用
-    /// - `self`: is Stream reference
+    /// - `self`: Stream reference
     /// - `cx`: 执行上下文，包含 Waker 等信息
-    /// - `cx`: on under ， Waker etc.
+    /// - `cx`: executioncontextcontain Waker information
     ///
     /// # 返回值
-    /// # return value
+    /// # Return Value
     /// - `Poll::Ready(Some(item))`: 有新的元素可用
     /// - `Poll::Ready(None)`: 流已结束，没有更多元素
     /// - `Poll::Ready(None)`: stream ，element
@@ -267,17 +267,17 @@ impl Stream for TickStream {
 /// `stream::iter` futures library tool ，can will conversion as Stream。
 ///
 /// # 参数
-/// # parameter
+/// # Parameters
 /// - `n`: 要生成的数字范围的上限（包含）
 /// - `n`: scope on （）
 ///
 /// # 返回值
-/// # return value
+/// # Return Value
 /// 返回一个产生 1 到 n 数字的 Stream
 /// 1 to n Stream
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```rust
 /// use c06_async::streams::make_iter_stream;
 /// use futures::StreamExt;
@@ -296,7 +296,7 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 }
 
 /// 演示 Stream 组合子的链式操作
-/// demonstration Stream combination
+/// Stream combinator operation
 ///
 /// 这个函数展示了如何使用 Stream 的组合子来对数据流进行变换和过滤。
 /// function Stream combination to stream transformation and 。
@@ -308,7 +308,7 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 ///
 /// ## map
 /// - 对流中的每个元素应用转换函数
-/// - to stream in element application conversion function
+/// - flowapplicationconversion function
 /// - 类似于 `Iterator::map`
 ///
 /// ## filter
@@ -319,7 +319,7 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 ///
 /// ## take
 /// - 限制流中元素的数量
-/// - stream in element quantity
+/// - flow count
 /// - 类似于 `Iterator::take`
 ///
 /// ## collect
@@ -328,17 +328,17 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 /// - 类似于 `Iterator::collect`
 ///
 /// # 参数
-/// # parameter
+/// # Parameters
 /// - `n`: 输入流的元素数量
-/// - `n`: stream element quantity
+/// - `n`: flow count
 ///
 /// # 返回值
-/// # return value
+/// # Return Value
 /// 经过变换和过滤后的结果向量
 /// transformation and after result
 ///
 /// # 处理流程
-/// # process
+/// # handling flow
 /// 1. 生成 1 到 n 的数字流
 /// 1. 1 to n stream
 /// 2. 每个数字乘以 2
@@ -351,7 +351,7 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 /// 5. to in
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```no_run
 /// use c06_async::streams::demo_basic_combinators;
 ///
@@ -373,7 +373,7 @@ pub async fn demo_basic_combinators(n: u32) -> Vec<u32> {
 }
 
 /// 演示并发流处理
-/// demonstration concurrency stream
+/// concurrentflow processing
 ///
 /// 这个函数展示了如何使用 `buffer_unordered` 来并发处理流中的元素。
 /// function `buffer_unordered` concurrency stream in element 。
@@ -381,7 +381,7 @@ pub async fn demo_basic_combinators(n: u32) -> Vec<u32> {
 /// to async （network ）useful 。
 ///
 /// # 并发处理策略
-/// # concurrency strategy
+/// # concurrenthandling strategy
 ///
 /// ## buffer_unordered
 /// - 并发处理流中的多个元素
@@ -392,26 +392,26 @@ pub async fn demo_basic_combinators(n: u32) -> Vec<u32> {
 /// - can concurrency quantity
 ///
 /// ## 使用场景
-/// ## scenario
+/// ## Usage Scenarios
 /// - 批量网络请求
 /// - network
 /// - 文件处理
-/// -
+/// - file processing
 /// - 数据库查询
 /// - database
 ///
 /// # 参数
-/// # parameter
+/// # Parameters
 /// - `urls`: 要请求的 URL 列表
-/// - `urls`: URL
+/// - `urls`: URL table
 ///
 /// # 返回值
-/// # return value
+/// # Return Value
 /// 每个 URL 请求的结果向量（成功时包含响应长度，失败时包含错误）
 /// URL result （，）
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```no_run
 /// use c06_async::streams::demo_buffer_unordered;
 ///
@@ -460,19 +460,19 @@ pub async fn demo_buffer_unordered(urls: Vec<String>) -> Vec<Result<usize, reqwe
 /// etc. ，and all 。
 ///
 /// # 参数
-/// # parameter
+/// # Parameters
 /// - `ticks`: 要产生的计时次数
 /// - `ticks`:
 /// - `period`: 每次计时的间隔时间
 /// - `period`: time
 ///
 /// # 返回值
-/// # return value
+/// # Return Value
 /// 包含所有计数值的向量
 /// all
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```no_run
 /// use c06_async::streams::demo_tick_stream;
 /// use std::time::Duration;

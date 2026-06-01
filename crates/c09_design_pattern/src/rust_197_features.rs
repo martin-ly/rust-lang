@@ -1,5 +1,5 @@
 //! Rust 1.97 特性跟踪模块 —— 设计模式
-//! Rust 1.97 feature module —— design
+//! Rust 1.97 featurestracingmodule design pattern
 #![allow(clippy::incompatible_msrv)]
 
 use std::ffi::CString;
@@ -13,14 +13,15 @@ use std::str::FromStr;
 /// Rust 1.97 稳定化的核心设计模式相关 API：
 /// Rust 1.97 core design API：
 /// - `FromStr` for `CString` — 从字符串解析 C 字符串
-/// - `FromStr` for `CString` — from C
+/// - `FromStr` for `CString` string C string
 /// - `LowerExp` / `UpperExp` for `NonZero` — 科学计数法格式化
 /// - `Option::as_slice` / `as_mut_slice` — Null Object 模式
+/// - `Option::as_slice` / `as_mut_slice` Null Object pattern
 pub struct Rust197DesignPatternFeatures;
 
 impl Rust197DesignPatternFeatures {
     /// 使用 `FromStr` for `CString` 从字符串创建 C 字符串
-    /// `FromStr` for `CString` from C
+    /// use `FromStr` for `CString` stringcreate C string
     ///
     /// 如果输入包含 NUL 字节，返回错误。
     /// if NUL ，。
@@ -39,8 +40,7 @@ impl Rust197DesignPatternFeatures {
     }
 
     /// 使用 `Option::as_slice` 实现 Null Object 模式
-    ///
-    /// `None` 映射为空切片，`Some` 映射为单元素切片，
+    /// use `Option::as_slice` implementation Null Object pattern
     /// `None` as ，`Some` as element ，
     /// 统一处理"可能存在的值"和"空值"两种情况。
     /// "may in "and ""situation 。
@@ -50,7 +50,7 @@ impl Rust197DesignPatternFeatures {
 }
 
 /// `CString` 解析错误的标记类型
-/// `CString` mark type
+/// `CString` error type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct CStringParseError;
 

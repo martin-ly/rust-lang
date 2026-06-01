@@ -1,5 +1,5 @@
 //! # 算法执行模式
-//! # algorithm
+//! # algorithmexecution pattern
 //!
 //! 本模块定义了算法的不同执行模式，充分利用 Rust 1.90 的特性：
 //! this module definition algorithm ， Rust 1.90 feature ：
@@ -27,7 +27,7 @@ use std::future::Future;
 use std::pin::Pin;
 
 /// 算法执行结果
-/// algorithm result
+/// algorithmexecution result
 #[derive(Debug, Clone)]
 pub struct ExecutionResult<T> {
     pub result: T,
@@ -80,7 +80,7 @@ pub struct AlgorithmExecutor;
 
 impl AlgorithmExecutor {
     /// 执行同步算法
-    /// synchronous algorithm
+    /// executionsynchronous algorithm
     pub fn execute_sync<A, T, R>(
         algorithm: A,
         input: T,
@@ -103,7 +103,7 @@ impl AlgorithmExecutor {
     }
 
     /// 执行异步算法
-    /// async algorithm
+    /// executionasync algorithm
     pub async fn execute_async<A, T, R>(
         algorithm: A,
         input: T,
@@ -127,7 +127,7 @@ impl AlgorithmExecutor {
     }
 
     /// 执行并行算法
-    /// parallel algorithm
+    /// executionparallel algorithm
     pub fn execute_parallel<A, T, R>(
         algorithm: A,
         input: T,
@@ -150,7 +150,7 @@ impl AlgorithmExecutor {
     }
 
     /// 执行分布式算法
-    /// distributed algorithm
+    /// executiondistributed algorithm
     pub fn execute_distributed<A, T, R>(
         algorithm: A,
         input: T,

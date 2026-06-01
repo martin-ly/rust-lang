@@ -2,15 +2,15 @@
 //! Smol async runtime
 //!
 //! 本模块展示了如何使用 `smol` 轻量级异步运行时。
-//! This module demonstrates `smol` async runtime 。
+//! This module demonstrates use `smol` lightweightasyncruntime
 //! Smol 是一个简洁、高效的异步运行时，专注于性能和易用性。
 //! Smol 、efficient async runtime ，performance and 。
 //!
 //! ## 核心特性
-//! ## core feature
+//! ## Core Features
 //!
 //! ### 轻量级设计
-//! ### design
+//! ### lightweight design
 //! - **最小化依赖**: 相比其他运行时，依赖更少
 //! - **minimum **: its runtime ，
 //! - **快速启动**: 启动时间短，适合短期任务
@@ -19,9 +19,9 @@
 //! - **memory **: memory ，environment
 //!
 //! ### 高性能
-//! ### performance
+//! ### high performance
 //! - **优化的事件循环**: 高效的 I/O 事件处理
-//! - **optimization circulation **: efficient I/O
+//! - **optimization**: efficient I/O processing
 //! - **低延迟**: 任务调度延迟低
 //! - ****: task
 //! - **高吞吐量**: 在 I/O 密集型任务中表现优秀
@@ -36,18 +36,18 @@
 //! - ****: environment
 //!
 //! ## 使用场景
-//! ## scenario
+//! ## Usage Scenarios
 //!
 //! 1. **轻量级应用**: 不需要完整运行时功能的应用
-//! 1. **application **: complete runtime functionality application
+//! 1. **lightweightapplication**: needcompleteruntime application
 //! 2. **嵌入式系统**: 资源受限的环境
 //! 2. **system **: environment
 //! 3. **命令行工具**: 简单的异步 CLI 应用
-//! 3. **command tool **: simple async CLI application
+//! 3. ****: singleasync CLI application
 //! 4. **测试环境**: 快速测试异步代码
 //! 4. **environment **: fast async
 //! 5. **微服务**: 轻量级的微服务应用
-//! 5. **microservice **: microservice application
+//! 5. **service**: lightweightservice application
 //!
 //! ## 与其他运行时的比较
 //! ## rather than runtime
@@ -69,7 +69,7 @@
 //! ## this
 //!
 //! ### 创建运行时
-//! ### runtime
+//! ### create runtime
 //! ```rust
 //! use smol::Task;
 //!
@@ -93,10 +93,10 @@
 //! ```
 //!
 //! ## 注意事项
-//! ##
+//! ## Notes
 //!
 //! - Smol 功能相对简单，不适合复杂的异步应用
-//! - Smol functionality to simple ，complex async application
+//! - Smol singleasync application
 //! - 对于需要丰富功能的项目，建议使用 Tokio
 //! - to functionality project ， Tokio
 //! - 适合学习和原型开发
@@ -125,10 +125,10 @@
 /// - 简单的异步执行
 /// - simple async
 /// - 基本的并发处理
-/// - this concurrency
+/// - concurrent processing
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```no_run
 /// use c06_async::smol::demo_basic_usage;
 ///
@@ -162,7 +162,7 @@ pub async fn demo_basic_usage() {
 }
 
 /// 演示 Smol 的 I/O 操作
-/// demonstration Smol I/O
+/// Smol I/O operation
 ///
 /// 这个函数展示了如何使用 Smol 进行异步 I/O 操作。
 /// function Smol async I/O 。
@@ -170,7 +170,7 @@ pub async fn demo_basic_usage() {
 /// 、network etc. async 。
 ///
 /// # 示例
-/// # example
+/// # Examples
 /// ```no_run
 /// use c06_async::smol::demo_io_operations;
 ///

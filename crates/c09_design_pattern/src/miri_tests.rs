@@ -1,11 +1,11 @@
 //! Miri 测试模块 - 设计模式内存安全验证
-//! Miri module - design memory safety
+//! Miri Test Module - Design Pattern Memory Safety Verification
 //!
 //! 本模块包含用于 Miri 测试的设计模式相关代码示例。
-//! This module contains Miri design example 。
+//! This module contains Miri testdesignpattern
 //!
 //! 运行方式:
-//! Run way :
+//! How to run:
 //!   cargo miri test miri_tests
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
@@ -14,9 +14,9 @@ use std::rc::{Rc, Weak};
 // ==================== 单例模式 ====================
 
 /// 测试目的: 验证线程不安全单例
-/// objective : thread singleton
+/// Test : verifythreadsafetysingle
 /// 测试场景: 创建并使用单例模式
-/// scenario : and singleton
+/// Test : createusesinglepattern
 /// 预期结果: 应该正确初始化和访问单例
 /// result : should and singleton
 #[test]
@@ -92,11 +92,11 @@ impl Subject {
 }
 
 /// 测试目的: 验证观察者模式内存安全
-/// objective : observer memory safety
+/// Test : verifypatternmemorysafety
 /// 测试场景: 添加观察者并通知
-/// scenario : observer and
+/// Test :
 /// 预期结果: 应该正确管理弱引用
-/// result : should reference
+/// result: shouldpositivemanagementweak reference
 #[test]
 fn test_observer_pattern() {
     struct ConcreteObserver;
@@ -148,9 +148,9 @@ impl SubjectTrait for Proxy {
 }
 
 /// 测试目的: 验证代理模式
-/// objective : proxy pattern
+/// Test : verifypattern
 /// 测试场景: 延迟初始化并调用
-/// scenario : and
+/// Test : initial
 /// 预期结果: 应该正确代理请求
 /// result : should
 #[test]
@@ -200,9 +200,9 @@ impl Factory {
 }
 
 /// 测试目的: 验证工厂模式
-/// objective : factory
+/// Test : verifypattern
 /// 测试场景: 创建不同类型产品
-/// scenario : type
+/// Test : createtype
 /// 预期结果: 应该正确创建产品实例
 /// result : should
 #[test]
@@ -255,9 +255,9 @@ struct BuiltProduct {
 }
 
 /// 测试目的: 验证建造者模式
-/// objective :
+/// Test : verifypattern
 /// 测试场景: 链式调用设置属性
-/// scenario : attribute
+/// Test : set
 /// 预期结果: 应该正确构建产品
 /// result : should
 #[test]
@@ -297,11 +297,11 @@ impl Target for Adapter {
 }
 
 /// 测试目的: 验证适配器模式
-/// objective : adapter
+/// Test : verifypattern
 /// 测试场景: 通过适配器调用被适配者
-/// scenario : adapter is
+/// Test :
 /// 预期结果: 应该正确适配接口
-/// result : should
+/// result: shouldpositive interface
 #[test]
 fn test_adapter_pattern() {
     let adapter = Adapter { adaptee: Adaptee };
@@ -334,9 +334,9 @@ impl Component for Decorator {
 }
 
 /// 测试目的: 验证装饰器模式
-/// objective : decorator
+/// Test : verifypattern
 /// 测试场景: 包装组件并增强功能
-/// scenario : and functionality
+/// Test : componentstrong
 /// 预期结果: 应该正确增强功能
 /// result : should functionality
 #[test]

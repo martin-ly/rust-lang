@@ -1,6 +1,5 @@
 //! 智能重试引擎
-//!
-//! 提供高级重试机制：
+//! smart engine
 //! mechanism ：
 //! - 多种重试策略（指数退避、线性退避、固定间隔）
 //! - strategy （index 、line 、）
@@ -20,7 +19,7 @@ use std::time::{Duration, Instant};
 use tokio::time::{sleep, timeout};
 
 /// 重试策略
-/// strategy
+/// Retry strategy
 #[derive(Debug, Clone)]
 pub enum RetryStrategy {
     /// 固定间隔重试
@@ -173,6 +172,7 @@ pub struct RetryResult<T> {
 }
 
 /// 智能重试引擎
+/// smart engine
 pub struct RetryEngine {
     config: RetryConfig,
     stats: Arc<tokio::sync::Mutex<RetryStats>>,
@@ -180,6 +180,7 @@ pub struct RetryEngine {
 
 impl RetryEngine {
     /// 创建新的重试引擎
+    /// createnew engine
     pub fn new(config: RetryConfig) -> Self {
         Self {
             config,
@@ -188,7 +189,7 @@ impl RetryEngine {
     }
 
     /// 执行带重试的异步操作
-    /// async
+    /// executionasync operation
     pub async fn execute<F, Fut, T>(&self, mut operation: F) -> RetryResult<T>
     where
         F: FnMut() -> Fut,
@@ -278,6 +279,7 @@ impl RetryEngine {
     }
 
     /// 获取重试统计信息
+    /// Get information
     pub async fn get_stats(&self) -> RetryStats {
         self.stats.lock().await.clone()
     }
@@ -371,14 +373,14 @@ impl RetryEngineBuilder {
     }
 
     /// 设置最大重试次数
-    /// maximum
+    /// Set maximum
     pub fn max_attempts(mut self, max_attempts: u32) -> Self {
         self.config.max_attempts = max_attempts;
         self
     }
 
     /// 设置重试策略
-    /// strategy
+    /// set strategy
     pub fn strategy(mut self, strategy: RetryStrategy) -> Self {
         self.config.strategy = strategy;
         self
@@ -392,13 +394,14 @@ impl RetryEngineBuilder {
     }
 
     /// 设置超时时间
-    /// time
+    /// Set time
     pub fn timeout(mut self, timeout: Duration) -> Self {
         self.config.timeout = Some(timeout);
         self
     }
 
     /// 设置是否添加抖动
+    /// Set whether
     pub fn jitter(mut self, jitter: bool) -> Self {
         self.config.jitter = jitter;
         self
@@ -417,7 +420,7 @@ impl Default for RetryEngineBuilder {
 }
 
 /// 便捷宏用于快速创建重试操作
-/// fast
+/// fastcreate operation
 #[macro_export]
 macro_rules! retry {
     ($engine:expr, $operation:expr) => {{ $engine.execute(|| async { $operation }).await }};

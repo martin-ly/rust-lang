@@ -1,5 +1,5 @@
 //! LeetCode 分类算法实现模块
-//! LeetCode classification algorithm module
+//! LeetCode algorithmimplementation module
 //!
 //! 本模块按照 LeetCode 官方分类组织算法，充分利用 Rust 1.91 的新特性
 //! this module LeetCode classification organize algorithm ， Rust 1.91 feature
@@ -45,7 +45,7 @@
 //! - Queue（队列）
 //!
 //! ## Rust 1.91 特性应用
-//! ## Rust 1.91 feature application
+//! ## Rust 1.91 Feature Application
 //!
 //! 本模块充分利用 Rust 1.91 的新特性：
 //! this module Rust 1.91 feature ：
@@ -60,7 +60,7 @@
 //! - **async **: performance 15-20%
 //!
 //! ## 文件信息
-//! ##
+//! ## file information
 //! - 创建日期: 2025-11-01
 //! - date : 2025-11-01
 //! - Rust 版本: 1.91.0
@@ -89,12 +89,12 @@ pub enum LeetCodeTag {
     /// 贪心
     Greedy,
     /// 深度优先搜索
-    /// depth-first search
+    /// excellent search
     DepthFirstSearch,
     /// 二分查找
     BinarySearch,
     /// 广度优先搜索
-    /// breadth-first search
+    /// excellent search
     BreadthFirstSearch,
     /// 树
     /// tree
@@ -123,13 +123,13 @@ pub enum LeetCodeTag {
     /// tree
     Trie,
     /// 线段树
-    /// segment tree
+    /// Segment Tree
     SegmentTree,
     /// 并查集
     /// disjoint set union
     UnionFind,
     /// 树状数组
-    /// Fenwick tree
+    /// tree array
     BinaryIndexedTree,
     /// 滑动窗口
     SlidingWindow,
@@ -138,9 +138,10 @@ pub enum LeetCodeTag {
     /// 递归
     Recursion,
     /// 单调栈
-    /// stack
+    /// single stack
     MonotonicStack,
     /// 有序映射
+    /// has map
     OrderedMap,
     /// 队列
     Queue,
@@ -219,7 +220,7 @@ impl LeetCodeTag {
     }
 
     /// 获取所有标签
-    /// all
+    /// Get has
     pub fn all_tags() -> Vec<LeetCodeTag> {
         vec![
             LeetCodeTag::Array,
@@ -256,7 +257,7 @@ impl LeetCodeTag {
 }
 
 /// LeetCode 问题信息
-/// LeetCode problem
+/// LeetCode problems information
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct LeetCodeProblem {
     /// 问题编号
@@ -290,7 +291,7 @@ pub struct LeetCodeProblem {
 }
 
 /// 复杂度信息
-/// complex
+/// complexity information
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct ComplexityInfo {
     /// 时间复杂度
@@ -305,7 +306,7 @@ pub struct ComplexityInfo {
 }
 
 /// 算法实现信息
-/// algorithm
+/// algorithmimplementation information
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct AlgorithmImplementation {
     /// 问题编号
@@ -317,6 +318,7 @@ pub struct AlgorithmImplementation {
     /// 代码实现
     pub code: String,
     /// 测试用例
+    /// Test cases
     pub test_cases: Vec<TestCase>,
     /// Rust 1.91 特性说明
     /// Rust 1.91 feature explain
@@ -324,6 +326,7 @@ pub struct AlgorithmImplementation {
 }
 
 /// 测试用例
+/// Test cases
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct TestCase {
     /// 输入
@@ -456,7 +459,7 @@ pub mod binary_indexed_tree;
 pub mod ordered_map;
 
 /// 获取所有 LeetCode 分类的问题列表
-/// all LeetCode classification problem
+/// Get has LeetCode problemslist
 #[allow(unreachable_patterns)] // LeetCodeTag 是 non_exhaustive，未来可能有新值
 pub fn get_all_problems_by_tag(tag: LeetCodeTag) -> Vec<LeetCodeProblem> {
     match tag {
@@ -494,7 +497,7 @@ pub fn get_all_problems_by_tag(tag: LeetCodeTag) -> Vec<LeetCodeProblem> {
 }
 
 /// 获取问题的实现代码
-/// problem
+/// Get problemsimplementation
 pub fn get_problem_implementation(
     problem_id: u32,
     implementation_type: ImplementationType,

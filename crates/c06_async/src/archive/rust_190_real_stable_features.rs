@@ -2,13 +2,13 @@
 //! Rust async real feature (this )
 //!
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
-//! ⚠️ **this ** - this as reference
+//! ⚠️ **Historical Version File** - This file is retained for historical reference only
 //!
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
-//! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
+//! **Currently Recommended Version**: Rust 1.92.0+ | For latest features, please refer to `rust_192_features.rs`
 //! 
 //! 本模块实现当前稳定版本中实际可用的异步特性
-//! this module when before this in actual async feature
+//! This module implements currentversionasyncfeatures
 //! 包括改进的异步性能、错误处理、结构化并发等功能
 //! async performance 、error handling 、structure concurrency etc. functionality
 use std::time::{Duration, Instant};
@@ -60,7 +60,7 @@ impl Rust190AsyncFeatures {
     }
 
     /// 演示改进的异步迭代器
-    /// demonstration async
+    /// improvementsasync iterator
     pub async fn demo_enhanced_async_iterators(&self) -> Result<()> {
         info!("🚀 演示改进的异步迭代器");
         
@@ -76,7 +76,7 @@ impl Rust190AsyncFeatures {
     }
 
     /// 演示改进的异步错误处理
-    /// demonstration async error handling
+    /// improvementsasyncerror processing
     pub async fn demo_enhanced_async_error_handling(&self) -> Result<()> {
         info!("⚡ 演示 Rust 1.90.0 增强的异步错误处理");
         
@@ -99,7 +99,7 @@ impl Rust190AsyncFeatures {
     }
 
     /// 演示性能优化的异步操作
-    /// demonstration performance optimization async
+    /// performanceoptimizationasync operation
     pub async fn demo_performance_optimized_async(&self) -> Result<()> {
         info!("🏃‍♂️ 演示 Rust 1.90.0 性能优化的异步操作");
         
@@ -128,7 +128,7 @@ impl Rust190AsyncFeatures {
     }
 
     /// 演示异步流处理
-    /// demonstration async stream
+    /// asyncflow processing
     pub async fn demo_async_streams(&self) -> Result<()> {
         info!("🌊 演示 Rust 1.90.0 异步流处理");
         
@@ -144,7 +144,7 @@ impl Rust190AsyncFeatures {
     }
 
     /// 运行所有 Rust 1.90.0 特性演示
-    /// Run all Rust 1.90.0 feature demonstration
+    /// Run has Rust 1.90.0 features
     pub async fn run_all_demos(&self) -> Result<()> {
         info!("🎯 开始 Rust 1.90.0 异步特性全面演示");
         info!("==========================================");
@@ -164,6 +164,7 @@ impl Rust190AsyncFeatures {
 }
 
 /// Rust 1.90.0 AsyncDrop 资源
+/// Rust 1.90.0 AsyncDrop resource
 #[allow(dead_code)]
 pub struct AsyncResource190 {
     id: String,
@@ -333,7 +334,7 @@ pub struct PerformanceMetrics190 {
 }
 
 /// Rust 1.90.0 异步特性集成测试
-/// Rust 1.90.0 async feature
+/// Rust 1.90.0 asyncfeaturesintegration test
 #[cfg(test)]
 mod tests {
     use super::*;

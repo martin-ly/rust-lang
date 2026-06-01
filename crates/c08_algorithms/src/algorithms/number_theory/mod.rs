@@ -2,11 +2,11 @@
 //! # algorithm module
 //!
 //! 本模块实现了各种数论算法。
-//! this module algorithm 。
+//! This module implements algorithm
 //use serde::{Serialize, Deserialize};
 
 /// 数论算法实现
-/// algorithm
+/// algorithm implementation
 pub struct NumberTheoryAlgorithms;
 
 impl NumberTheoryAlgorithms {

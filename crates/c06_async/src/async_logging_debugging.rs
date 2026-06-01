@@ -1,8 +1,8 @@
 //! 异步日志调试和跟踪模块
-//! async and module
+//! asyncloggingdebuggingtracing module
 //!
 //! 本模块提供了完整的异步日志系统，包括：
-//! This module provides complete async system ，：
+//! This module provides completeasyncloggingsystemincluding
 //! - 结构化日志记录
 //! - structure
 //! - 异步任务跟踪
@@ -35,7 +35,7 @@ where
 }
 
 /// 自定义反序列化函数，为 Instant 字段提供默认值
-/// definition sequence function ，as Instant field
+/// customfunction Instant provide value
 fn deserialize_instant<'de, D>(_deserializer: D) -> Result<Instant, D::Error>
 where
     D: Deserializer<'de>,
@@ -45,7 +45,7 @@ where
 }
 
 /// 异步日志配置
-/// async
+/// asynclogging configuration
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncLoggingConfig {
     /// 日志级别
@@ -55,7 +55,7 @@ pub struct AsyncLoggingConfig {
     /// structure
     pub enable_structured_logging: bool,
     /// 是否启用性能监控
-    /// performance
+    /// Whether performance monitoring is enabled
     pub enable_performance_monitoring: bool,
     /// 是否启用分布式追踪
     /// distribution
@@ -91,7 +91,7 @@ impl Default for AsyncLoggingConfig {
 }
 
 /// 异步任务信息
-/// async task
+/// asynctask information
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncTaskInfo {
     /// 任务ID
@@ -101,20 +101,20 @@ pub struct AsyncTaskInfo {
     /// task
     pub name: String,
     /// 开始时间
-    /// time
+    /// Start time
     #[serde(
         serialize_with = "serialize_instant",
         deserialize_with = "deserialize_instant"
     )]
     pub start_time: Instant,
     /// 任务状态
-    /// task state
+    /// Task status
     pub status: TaskStatus,
     /// 任务优先级
-    /// task
+    /// Task priority
     pub priority: TaskPriority,
     /// 任务元数据
-    /// task
+    /// task data
     pub metadata: HashMap<String, String>,
     /// 错误信息（如果有）
     /// error message （if ）
@@ -139,7 +139,7 @@ pub enum TaskPriority {
 }
 
 /// 性能指标
-/// performance indicator
+/// Performance metrics
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PerformanceMetrics {
     /// 总任务数
@@ -206,7 +206,7 @@ impl AsyncTaskTracker {
     }
 
     /// 初始化日志系统
-    /// system
+    /// initiallogging system
     pub fn init_logging(&self) -> Result<()> {
         let env_filter = EnvFilter::try_from_default_env()
             .unwrap_or_else(|_| EnvFilter::new(&self.config.log_level));
@@ -234,7 +234,7 @@ impl AsyncTaskTracker {
     }
 
     /// 开始跟踪任务
-    /// task
+    /// Start tracingtask
     pub async fn start_task(
         &self,
         name: String,
@@ -268,7 +268,7 @@ impl AsyncTaskTracker {
     }
 
     /// 完成任务
-    /// task
+    /// Complete task
     pub async fn complete_task(&self, task_id: &str) -> Result<()> {
         let execution_time = {
             let mut tasks = self.tasks.write().await;
@@ -351,27 +351,27 @@ impl AsyncTaskTracker {
     }
 
     /// 获取任务信息
-    /// task
+    /// Get taskinformation
     pub async fn get_task_info(&self, task_id: &str) -> Option<AsyncTaskInfo> {
         let tasks = self.tasks.read().await;
         tasks.get(task_id).cloned()
     }
 
     /// 获取所有任务信息
-    /// all task
+    /// Get hastaskinformation
     pub async fn get_all_tasks(&self) -> Vec<AsyncTaskInfo> {
         let tasks = self.tasks.read().await;
         tasks.values().cloned().collect()
     }
 
     /// 获取性能指标
-    /// performance indicator
+    /// Get performance metrics
     pub async fn get_performance_metrics(&self) -> PerformanceMetrics {
         self.performance_monitor.get_metrics().await
     }
 
     /// 清理已完成的任务
-    /// task
+    /// Cleanup completetask
     pub async fn cleanup_completed_tasks(&self) -> Result<()> {
         let mut tasks = self.tasks.write().await;
         let initial_count = tasks.len();
@@ -631,6 +631,7 @@ impl LocalDebugger {
     }
 
     /// 获取调试信息
+    /// Get debugginginformation
     pub async fn get_debug_info(&self) -> DebugInfo {
         let tasks = self.tracker.get_all_tasks().await;
         let metrics = self.tracker.get_performance_metrics().await;
@@ -659,7 +660,7 @@ pub struct DebugInfo {
 }
 
 /// 综合演示函数
-/// synthesize demonstration function
+/// Comprehensive demo function
 pub async fn demonstrate_async_logging_debugging() -> Result<()> {
     println!("🚀 异步日志调试和跟踪系统演示");
     println!("================================================");

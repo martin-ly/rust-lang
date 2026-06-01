@@ -1,5 +1,5 @@
 //! # 算法知识体系模块
-//! # algorithm system module
+//! # algorithm module
 //!
 //! 本模块整合了完整的算法知识体系，包括理论基础、应用场景、最佳实践等。
 //! this module integration complete algorithm system ，theory foundation 、application scenario 、etc. 。
@@ -133,7 +133,7 @@ pub struct ApplicationKnowledge {
 
 impl AlgorithmKnowledgeBase {
     /// 创建新的算法知识库
-    /// algorithm library
+    /// Create new algorithmlibrary
     pub fn new() -> Self {
         let mut knowledge_base = Self {
             algorithms: HashMap::new(),
@@ -813,7 +813,7 @@ function lcs(X, Y):
     }
 
     /// 获取算法知识
-    /// algorithm
+    /// Get algorithm
     pub fn get_algorithm_knowledge(&self, name: &str) -> Option<&AlgorithmKnowledge> {
         self.algorithms.get(name)
     }
@@ -825,31 +825,31 @@ function lcs(X, Y):
     }
 
     /// 获取应用知识
-    /// application
+    /// Get application
     pub fn get_application_knowledge(&self, name: &str) -> Option<&ApplicationKnowledge> {
         self.applications.get(name)
     }
 
     /// 获取所有算法名称
-    /// all algorithm
+    /// Get hasalgorithm
     pub fn get_all_algorithm_names(&self) -> Vec<String> {
         self.algorithms.keys().cloned().collect()
     }
 
     /// 获取所有分类名称
-    /// all classification
+    /// Get has
     pub fn get_all_category_names(&self) -> Vec<String> {
         self.categories.keys().cloned().collect()
     }
 
     /// 获取所有应用名称
-    /// all application
+    /// Get hasapplication
     pub fn get_all_application_names(&self) -> Vec<String> {
         self.applications.keys().cloned().collect()
     }
 
     /// 搜索算法
-    /// searching algorithm
+    /// Search algorithm
     pub fn search_algorithms(&self, query: &str) -> Vec<&AlgorithmKnowledge> {
         self.algorithms
             .values()

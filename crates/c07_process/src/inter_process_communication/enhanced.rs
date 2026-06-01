@@ -18,7 +18,7 @@ use tokio::net::{UnixListener, UnixStream};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的IPC管理器
-/// IP C
+/// strongIPC manager
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedIpcManager {
@@ -130,7 +130,7 @@ pub struct IpcErrorRecovery {
 }
 
 /// IPC重试策略
-/// IP Cstrategy
+/// IPC strategy
 #[cfg(feature = "async")]
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -142,7 +142,7 @@ pub struct IpcRetryPolicy {
 }
 
 /// IPC恢复策略
-/// IP Cstrategy
+/// IPC strategy
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub enum IpcRecoveryStrategy {
@@ -173,7 +173,7 @@ pub struct ChannelStats {
 #[allow(dead_code)]
 impl EnhancedIpcManager {
     /// 创建新的增强IPC管理器
-    /// IP C
+    /// Create new strongIPCmanager
     pub async fn new(config: IpcConfig) -> IpcResult<Self> {
         let channels = Arc::new(TokioRwLock::new(HashMap::new()));
         let connection_pool = Arc::new(ConnectionPool::new(10, Duration::from_secs(30)));
@@ -363,7 +363,7 @@ impl EnhancedIpcManager {
     /// （optimization ）
     ///
     /// 使用 Rust 1.90 新特性进行零拷贝数据传输优化
-    /// Rust 1.90 feature transmission optimization
+    /// use Rust 1.90 newfeatureszero-copydata optimization
     #[allow(dead_code)]
     pub async fn send_message_zero_copy<T>(
         &self,
@@ -460,7 +460,7 @@ impl EnhancedIpcManager {
     /// （optimization ）
     ///
     /// 使用 Rust 1.90 新特性进行零拷贝数据接收优化
-    /// Rust 1.90 feature optimization
+    /// use Rust 1.90 newfeatureszero-copydata optimization
     #[allow(dead_code)]
     pub async fn receive_message_zero_copy<T>(&self, channel_name: &str) -> IpcResult<Message<T>>
     where
@@ -537,7 +537,7 @@ impl EnhancedIpcManager {
     }
 
     /// 获取通道统计信息
-    /// channel
+    /// Get information
     #[allow(dead_code)]
     pub async fn get_channel_stats(&self, channel_name: &str) -> Option<ChannelStats> {
         let channels = self.channels.read().await;
@@ -551,7 +551,7 @@ impl EnhancedIpcManager {
     /// （ Rust 1.90 ）
     ///
     /// 使用 Rust 1.90 的改进迭代器特性进行批量消息处理
-    /// Rust 1.90 feature
+    /// use Rust 1.90 improvementsiteratorfeatures processing
     #[allow(dead_code)]
     pub async fn send_batch_messages<T>(
         &self,
@@ -779,7 +779,7 @@ impl EnhancedIpcManager {
     }
 
     /// 获取所有通道统计信息
-    /// all channel
+    /// Get hasinformation
     pub async fn get_all_channel_stats(&self) -> HashMap<String, ChannelStats> {
         let channels = self.channels.read().await;
         let mut stats = HashMap::new();
@@ -794,7 +794,7 @@ impl EnhancedIpcManager {
     }
 
     /// 清理所有通道
-    /// all channel
+    /// Cleanup has
     pub async fn cleanup(&self) -> IpcResult<()> {
         let mut channels = self.channels.write().await;
         channels.clear();
@@ -802,7 +802,7 @@ impl EnhancedIpcManager {
     }
 
     /// 更新通道统计信息
-    /// channel
+    /// Update information
     async fn update_channel_stats(
         &self,
         channel_name: &str,

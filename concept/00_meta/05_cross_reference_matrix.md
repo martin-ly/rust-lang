@@ -1,4 +1,6 @@
 # Cross Reference Matrix（交叉引用矩阵）
+>
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价

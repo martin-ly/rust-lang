@@ -1,5 +1,6 @@
 # 权威来源映射表（Authority Source Map）
 
+> **Rust 版本**: 1.96.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **版本**: v1.1
@@ -12,7 +13,7 @@
 ---
 
 > **相关概念文件**:
-
+>
 > - [`concept/01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) — 所有权的形式化基础
 > - [`concept/02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) — Trait 系统的跨语言对比
 > - [`concept/05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) — Rust vs C++ 深度对比
@@ -39,8 +40,6 @@
 ---
 
 ## 二、二级来源：跨语言权威入口 [来源: 跨语言对比方法论参照 concept/05_comparative/ 系列文件的对比框架]
->
->
 
 ### C++
 
@@ -134,9 +133,7 @@ dtolnay:               https://dtolnay.github.io/
 | 权威来源映射表（Authority Source Map） 跨层映射 ⟹ 系统掌握 | 打通 L0-L7 的关联路径 | 形成完整的 Rust 能力图谱 | 高 |
 
 > **过渡**: 利用本文件的导航结构，读者可以从当前位置快速跃迁到任意概念层级，实现非线性学习。
-
 > **过渡**: 权威来源映射表（Authority Source Map） 的维护需要与概念内容同步更新，确保元数据与实际知识体系的一致性。
-
 > **过渡**: 将 权威来源映射表（Authority Source Map） 作为学习起点或复习锚点，有助于建立全局视野，避免陷入局部细节而忽视整体架构。
 
 ### 反命题与边界
