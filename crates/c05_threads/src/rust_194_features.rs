@@ -597,12 +597,10 @@ pub fn demonstrate_rust_194_thread_features() {
 /// Gets Rust 1.94.0 线程特性信息
 /// Rust 1.94.0 thread feature
 pub fn get_rust_194_thread_info() -> String {
-    "Rust 1.94.0 线程与并发特性:\n\
-        - LazyCell 和 LazyLock 新方法 (get, get_mut, force_mut)\n\
-        - 数学常量 (EULER_GAMMA, GOLDEN_RATIO)\n\
-        - Peekable 迭代器新方法 (next_if_map, next_if_map_mut)\n\
-        - 数组窗口迭代器 (array_windows)\n\
-        - char 到 usize 转换 (`TryFrom<char>` for usize)"
+    "Rust 1.94.0 线程与并发特性:\n- LazyCell 和 LazyLock 新方法 (get, get_mut, force_mut)\n- \
+     数学常量 (EULER_GAMMA, GOLDEN_RATIO)\n- Peekable 迭代器新方法 (next_if_map, \
+     next_if_map_mut)\n- 数组窗口迭代器 (array_windows)\n- char 到 usize 转换 (`TryFrom<char>` for \
+     usize)"
         .to_string()
 }
 
@@ -728,12 +726,18 @@ mod tests {
     #[test]
     fn test_control_flow_matrix_search() {
         let matrix = vec![vec![1, 2], vec![3, 4]];
-        assert!(matches!(search_in_matrix(&matrix, 3), ControlFlow::Break((1, 0))));
+        assert!(matches!(
+            search_in_matrix(&matrix, 3),
+            ControlFlow::Break((1, 0))
+        ));
     }
 
     #[test]
     fn test_control_flow_validate() {
-        assert!(matches!(validate_data("valid123"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("valid123"),
+            ControlFlow::Continue(())
+        ));
         assert!(matches!(validate_data(""), ControlFlow::Break(_)));
     }
 
@@ -791,14 +795,18 @@ mod tests {
 
         // 获取初始值
         {
-            let mgr = shared.lock().expect("ThreadSafeResourceManager mutex poisoned");
+            let mgr = shared
+                .lock()
+                .expect("ThreadSafeResourceManager mutex poisoned");
             assert_eq!(*mgr.get(), 42);
         }
 
         // 在一个线程中引发 panic
         let shared_clone = Arc::clone(&shared);
         let handle = thread::spawn(move || {
-            let _guard = shared_clone.lock().expect("ThreadSafeResourceManager mutex poisoned");
+            let _guard = shared_clone
+                .lock()
+                .expect("ThreadSafeResourceManager mutex poisoned");
             panic!("故意 panic 以测试 poison");
         });
 

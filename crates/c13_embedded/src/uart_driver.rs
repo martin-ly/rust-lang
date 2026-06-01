@@ -62,7 +62,6 @@ unsafe impl Sync for UartDriver {}
 impl UartDriver {
     /// 创建 UART 驱动实例
     /// UART driver
-    ///
     pub const unsafe fn new(base: usize) -> Self {
         Self {
             base: base as *mut UartRegisters,
@@ -162,14 +161,14 @@ impl fmt::Write for UartDriver {
 /// 3. ISR，in in in /
 /// 4. 使用环形缓冲区解耦 ISR 和应用代码
 /// 4. buffering ISR and application
-/// #[interrupt]
+/// #\[interrupt\]
 /// fn UART0() {
 ///     let uart = unsafe { UART_DRIVER.as_mut().unwrap() };
 ///     if uart.is_data_ready() {
 ///         let byte = uart.receive_byte().unwrap();
 ///         RX_BUFFER.push(byte);
 ///     }
-/// ```
+/// ```text
 pub struct InterruptDrivenUart;
 
 #[cfg(test)]

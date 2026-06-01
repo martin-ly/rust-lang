@@ -196,10 +196,10 @@ where
 /// ## 语法
 /// ## syntax
 /// ##
-///     std::arch::asm!(
+///   std::arch::asm!(
 /// }
-/// ```
-///
+/// ```text
+/// 
 /// ## 平台支持状态（1.95）
 /// ## platform state （1.95）
 pub struct PowerPcAsmExamples;
@@ -262,8 +262,8 @@ impl PowerPcAsmExamples {
 ///     "arm_specific_instruction",
 ///     options(nomem, nostack),
 /// );
-/// ```
-///
+/// ```text
+/// 
 /// ## 对比：传统方式 vs asm_cfg
 /// ## to ：way vs asm_cfg
 /// ## to比：传统way vs asm_cfg

@@ -34,8 +34,8 @@
 ///     let _ = ap.arg::<c_int>();
 ///     0
 /// }
-/// ```
-///
+/// ```text
+/// 
 /// ## 使用场景
 /// ## scenario
 /// - Implementation of C standardlibraryfunction（如 `printf`、`scanf`） Rust 包装

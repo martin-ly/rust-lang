@@ -70,6 +70,8 @@ impl ExprMetavariableToCfgExamples {
 pub enum ExpansionResult {
     /// 展开成功
     Success {
+        /// 令牌数量
+        /// token count
         tokens: usize,
         /// span 数量
         /// span quantity
@@ -120,6 +122,8 @@ impl MacroExpansionAssertions {
 // Rust 1.96.0: core::range 用于 token span 范围
 // ============================================================================
 
+/// 令牌跨度范围
+/// token span range
 pub struct TokenSpanRange {
     /// 左闭右开范围
     /// scope
@@ -131,6 +135,8 @@ pub struct TokenSpanRange {
 }
 
 impl TokenSpanRange {
+    /// 创建新的令牌跨度范围
+    /// create new token span range
     pub fn new(start: usize, end: usize) -> Self {
         Self {
             range: core::range::Range { start, end },
@@ -161,6 +167,8 @@ impl TokenSpanRange {
 // Rust 1.96: ManuallyDrop 用于宏卫生标记类型
 // ============================================================================
 
+/// 宏卫生标记类型
+/// macro hygiene marker type
 pub struct HygieneMarker<T> {
     inner: ManuallyDrop<T>,
 }

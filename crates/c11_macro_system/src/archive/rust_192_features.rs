@@ -98,6 +98,8 @@ impl MacroExpansionQueue {
 
 // ==================== 2. NonZero::div_ceil 在宏缓存大小计算中的应用 ====================
 
+/// 计算宏缓存大小
+/// calculate macro cache size
 pub fn calculate_macro_cache_size(
     total_macros: usize,
     macros_per_cache_entry: NonZeroUsize,
@@ -246,6 +248,8 @@ impl MacroExpansionPerformanceMonitor {
 
 // ==================== 5. 综合应用示例 ====================
 
+/// 演示 Rust 1.92 宏系统特性
+/// demonstrate Rust 1.92 macro system features
 pub fn demonstrate_rust_192_macro_features() {
     println!("\n=== Rust 1.92.0 宏系统特性演示 ===\n");
 

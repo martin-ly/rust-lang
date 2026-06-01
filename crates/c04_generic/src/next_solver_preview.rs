@@ -1,6 +1,7 @@
 //! Next-generation Trait Solver 预览
 //! **编译要求**: 需要 nightly Rust + `RUSTFLAGS="-Znext-solver=globally"`
 //! **编译要求**: Requires nightly Rust + `RUSTFLAGS="-Znext-solver=globally"`
+//! ```text
 //! ```
 //!
 //! **来源**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
@@ -25,7 +26,7 @@
 ///     fn process(&self, item: T);
 /// }
 ///
-/// struct Wrapper<T>(T);
+/// struct `Wrapper<T>`(T);
 ///
 /// // impl A: 仅当 T: Clone 时实现
 /// // impl A: 仅when T: Clone 时Implementation of
@@ -36,7 +37,7 @@
 /// // impl B: 仅when T: Default 时Implementation of
 ///         let _ = T::default();
 ///     }
-/// ```
+/// ```text
 
 // ============================================================================
 // 2. Implied Bounds 自动推导
@@ -137,8 +138,8 @@
 /// # 3. 在 .cargo/config.toml 中配置（团队迁移）
 /// # 3. in.cargo/config.toml in （）
 /// # rustdocflags = ["-Znext-solver=globally"]
-/// ```
-///
+/// ```text
+/// 
 /// **迁移检查清单**:
 /// ****:
 /// | 检查项 | 旧行为 | 新行为 | 你的代码是否受影响 |

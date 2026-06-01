@@ -29,13 +29,13 @@ async fn test_async_runtime_analyzer() {
     assert!(analyzer.get_runtime_analysis("smol").is_some());
     assert!(analyzer.get_runtime_analysis("std").is_some());
 
-    // 测试运行时比较
-    let comparison = analyzer.compare_runtimes("tokio", "async-std [已归档]");
+    // 测试运行时比较（async-std 已于 2025-03 归档，保留为历史参考）
+    let comparison = analyzer.compare_runtimes("tokio", "async-std");
     assert!(comparison.is_some());
 
     let comparison = comparison.unwrap();
     assert_eq!(comparison.runtime1.runtime_name, "tokio");
-    assert_eq!(comparison.runtime2.runtime_name, "async-std [已归档]");
+    assert_eq!(comparison.runtime2.runtime_name, "async-std");
 }
 
 /// 测试异步集成模式

@@ -1,7 +1,7 @@
 //! Bare-metal 基础概念
 //! 演示 `#![no_std]`、`#![no_main]`、panic handler 和启动代码概念。
 //! #![no_main]
-//! ```
+//! ```text
 //!
 
 /// 自定义 panic handler 概念说明
@@ -11,12 +11,12 @@
 /// in `#![no_std]` environment in ，must `#[panic_handler]`：
 /// use core::panic::PanicInfo;
 ///
-/// #[panic_handler]
+/// #\[panic_handler\]
 /// fn panic(_info: &PanicInfo) -> ! {
 ///     // 真实硬件上：闪烁 LED、写入调试串口、触发看门狗复位
 ///     // real hardware on ： LED、、
-/// ```
-///
+/// ```text
+/// 
 /// `-> !` 表示发散函数（永不返回）。
 /// `->!` represent function （）。
 /// 常用 panic handler crate：
@@ -49,11 +49,11 @@ impl PanicHandlerConcept {
 /// 在 Cortex-M 上，`cortex-m-rt` crate 自动处理这些步骤：
 /// use cortex_m_rt::entry;
 ///
-/// #[entry]
+/// #\[entry\]
 /// fn main() -> ! {
 ///     // 用户代码
 ///     //
-/// ```
+/// ```text
 pub struct StartupCode;
 
 impl StartupCode {
@@ -79,10 +79,10 @@ impl StartupCode {
 ///     unsafe fn dealloc(&self, _ptr: *mut u8, _layout: core::alloc::Layout) {}
 /// }
 ///
-/// #[global_allocator]
+/// #\[global_allocator\]
 /// static ALLOCATOR: DummyAllocator = DummyAllocator;
-/// ```
-///
+/// ```text
+/// 
 /// 实际项目中常用 `embedded-alloc` 或自定义 slab allocator。
 pub struct GlobalAllocatorConcept;
 

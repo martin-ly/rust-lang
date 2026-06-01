@@ -18,7 +18,7 @@
 /// -
 /// 示例定义：
 /// example definition ：
-/// #[proc_macro_attribute]
+/// #\[proc_macro_attribute\]
 /// pub fn trace(attr: TokenStream, item: TokenStream) -> TokenStream {
 ///     // attr: attributeparameter，如 #[trace(level = "debug")] in level = "debug"
 ///
@@ -30,7 +30,7 @@
 /// struct User {
 ///     name: String,
 /// }
-/// ```
+/// ```text
 pub struct DeriveExample;
 
 /// 2. 测试属性
@@ -38,9 +38,9 @@ pub struct DeriveExample;
 /// #[test]
 /// fn my_test() {}
 ///
-/// #[should_panic]
+/// #\[should_panic\]
 /// fn panicking_test() {}
-/// ```
+/// ```text
 pub struct TestAttributes;
 
 /// 3. 条件编译
@@ -49,7 +49,7 @@ pub struct TestAttributes;
 ///
 /// #[cfg_attr(feature = "serde", derive(Serialize))]
 /// struct MyStruct;
-/// ```
+/// ```text
 pub struct CfgAttributes;
 
 /// 4. 文档属性
@@ -69,9 +69,9 @@ pub struct DocAttributes;
 /// #[inline(always)]
 /// fn must_inline() {}
 ///
-/// #[cold]
+/// #\[cold\]
 /// fn rare_path() {}
-/// ```
+/// ```text
 pub struct InlineAttributes;
 
 /// 自定义属性宏的设计模式
@@ -81,7 +81,7 @@ pub mod patterns {
     /// parameter
     /// #[my_macro(key = value, flag)]
     /// fn item() {}
-    /// ```
+    /// ```text
     pub fn parse_key_value_args() {}
 
     /// 条件修改模式
@@ -105,6 +105,8 @@ pub mod patterns {
 /// 属性宏调试技巧
 /// attribute tip
 pub mod debugging {
+    /// 使用 cargo expand 查看宏展开结果
+    /// use cargo expand to view macro expansion results
     pub fn use_cargo_expand() {
         // cargo install cargo-expand
         // cargo expand --lib
@@ -117,6 +119,8 @@ pub mod debugging {
         // compile_error!("This should fail with a helpful message");
     }
 
+    /// 打印令牌流用于调试
+    /// print token stream for debugging
     pub fn print_token_stream() {
         // eprintln!("Tokens: {}", tokens);
     }

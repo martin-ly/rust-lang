@@ -5,8 +5,10 @@
 
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{parse2, DeriveInput};
+use syn::{DeriveInput, parse2};
 
+/// 派生自定义 Debug trait 实现
+/// derive custom Debug trait implementation
 pub fn derive_custom_debug(input: TokenStream) -> TokenStream {
     let input: DeriveInput = parse2(input).expect("Failed to parse input");
     let name = &input.ident;

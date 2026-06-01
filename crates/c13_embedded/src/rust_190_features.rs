@@ -43,7 +43,7 @@
 /// ，in `.cargo/config.toml` in ：
 /// linker = "clang"
 /// rustflags = ["-C", "link-arg=-fuse-ld=lld"]
-/// ```
+/// ```text
 pub fn verify_linker_info() -> &'static str {
     // 这是一个信息性模块，无运行时逻辑
     "Rust 1.90+ x86_64-linux 默认使用 LLD 链接器"

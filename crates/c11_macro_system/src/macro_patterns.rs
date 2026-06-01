@@ -5,6 +5,8 @@
 //! design and 。
 
 #[macro_export]
+/// 为字段生成 getter 和 setter 方法的宏
+/// macro generating getter and setter methods for fields
 macro_rules! getter_setter {
     // 为每个字段生成getter和setter
     ($($field:ident: $type:ty),* $(,)?) => {
@@ -23,6 +25,8 @@ macro_rules! getter_setter {
 }
 
 #[macro_export]
+/// 为类型生成 Builder 模式的宏
+/// macro generating Builder pattern for a type
 macro_rules! builder {
     ($name:ident { $($field:ident: $type:ty),* $(,)? }) => {
         pub struct $name {
@@ -59,6 +63,8 @@ macro_rules! builder {
 }
 
 #[macro_export]
+/// 定义错误枚举和 Display 实现的宏
+/// macro defining error enum and Display implementation
 macro_rules! define_error {
     (
         $name:ident {
@@ -89,6 +95,8 @@ macro_rules! define_error {
 }
 
 #[macro_export]
+/// 为新类型模式生成代码的宏
+/// macro generating code for newtype pattern
 macro_rules! newtype {
     ($name:ident, $type:ty) => {
         #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]

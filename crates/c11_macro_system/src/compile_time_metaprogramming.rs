@@ -175,6 +175,8 @@ impl ConstMetaprogramming {
 pub struct MacroAndConstSynergy;
 
 impl MacroAndConstSynergy {
+    /// 返回宏生成常量的概念文档
+    /// return concept documentation for macro-generated constants
     pub fn macro_generates_const_concept() -> &'static str {
         r#"
 # 宏生成 `const` 声明

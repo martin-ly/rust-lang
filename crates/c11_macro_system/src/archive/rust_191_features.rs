@@ -38,6 +38,8 @@ use std::ops::ControlFlow;
 
 // ==================== 1. const 上下文增强在宏系统配置中的应用 ====================
 
+/// const 上下文宏系统配置模块
+/// const context macro system configuration module
 pub mod const_macro_config {
     /// 宏系统配置
     /// system configuration
@@ -57,6 +59,10 @@ pub mod const_macro_config {
         pub const BUFFER_SIZE: usize = 4096;
 
         // Rust 1.91: 使用 const 引用进行计算
+        /// 最大参数数量引用
+        /// maximum argument count reference
+        /// 最大参数数量引用
+        /// maximum argument count reference
         pub const MAX_ARGS_REF: &usize = &Self::MAX_MACRO_ARGS;
         /// 总缓冲区大小（基于最大参数数和缓冲区大小计算）
         /// buffering （maximum parameter and buffering ）
@@ -109,6 +115,8 @@ pub mod const_macro_config {
         pub const CACHE_SIZE: usize = 1024;
 
         // Rust 1.91: const 引用计算
+        /// 最大令牌数量引用
+        /// maximum token count reference
         pub const MAX_TOKENS_REF: &usize = &Self::MAX_TOKENS;
         /// 最大递归深度的引用
         /// maximum recursive reference
@@ -142,6 +150,8 @@ pub mod const_macro_config {
 pub mod macro_new_apis {
     use super::*;
 
+    /// 解析宏输入数据
+    /// parse macro input data
     pub fn parse_macro_input<R: BufRead>(reader: &mut R) -> Result<Vec<String>, std::io::Error> {
         let mut lines = Vec::new();
         let mut buf = String::new();
@@ -164,6 +174,8 @@ pub mod macro_new_apis {
         Ok(lines)
     }
 
+    /// 验证宏展开深度
+    /// validate macro expansion depth
     pub fn validate_macro_expansion(
         current_depth: usize,
         max_depth: usize,
@@ -178,6 +190,8 @@ pub mod macro_new_apis {
         }
     }
 
+    /// 检查宏参数数量
+    /// check macro argument count
     pub fn check_macro_args(args: &[String], max_args: usize) -> ControlFlow<String, Vec<String>> {
         if args.len() > max_args {
             return ControlFlow::Break(format!(
@@ -193,6 +207,8 @@ pub mod macro_new_apis {
 
 // ==================== 3. JIT 编译器优化在宏系统中的应用 ====================
 
+/// JIT 编译器优化在宏系统中的应用模块
+/// JIT compiler optimization in macro system application module
 pub mod macro_jit_optimizations {
     /// 处理宏展开数据
     /// data
@@ -264,6 +280,8 @@ pub mod macro_jit_optimizations {
 
 // ==================== 4. 内存分配器优化在宏数据结构中的应用 ====================
 
+/// 内存分配器优化在宏数据结构中的应用模块
+/// memory allocator optimization in macro data structure application module
 pub mod macro_memory_optimizations {
     /// 创建小对象用于宏数据结构
     /// to data structure
@@ -308,6 +326,8 @@ pub mod macro_memory_optimizations {
 
 // ==================== 5. 标准库新 API 在宏系统中的应用 ====================
 
+/// 标准库新 API 在宏系统中的应用模块
+/// standard library new API in macro system application module
 pub mod macro_std_new_apis {
     /// str::split_ascii_whitespace 示例
     /// Rust 1.91 新增：仅处理 ASCII 空白字符，性能更好
@@ -376,6 +396,8 @@ pub mod comprehensive_macro_examples {
         pub const BUFFER_SIZE: usize = 4096;
 
         // Rust 1.91: 使用 const 引用
+        /// 最大参数数量引用
+        /// maximum argument count reference
         pub const MAX_ARGS_REF: &usize = &Self::MAX_MACRO_ARGS;
         /// 总缓冲区大小（基于最大参数数和缓冲区大小计算）
         /// buffering （maximum parameter and buffering ）
@@ -507,8 +529,8 @@ pub fn demonstrate_rust_191_macro_features() {
 /// Rust 1.91 mechanism
 /// Rust 1.91 宏展开缓存mechanism
 pub mod macro_expansion_cache {
-    use std::collections::hash_map::DefaultHasher;
     use std::collections::HashMap;
+    use std::collections::hash_map::DefaultHasher;
     use std::hash::{Hash, Hasher};
 
     /// 宏展开结果
@@ -681,6 +703,8 @@ pub mod macro_expansion_cache {
 
 // ==================== 8. 改进的宏错误消息（开发体验提升）====================
 
+/// 改进的宏错误消息模块
+/// improved macro error messages module
 pub mod improved_macro_errors {
     /// 宏错误类型
     /// error type

@@ -22,6 +22,8 @@ macro_rules! problematic_in_other_languages {
 }
 
 #[macro_export]
+/// 使用 crate 路径的宏示例
+/// macro example using crate path
 macro_rules! use_crate_path {
     () => {
         // $crate确保宏使用的是定义它的crate中的项
@@ -29,6 +31,8 @@ macro_rules! use_crate_path {
     };
 }
 
+/// 内部函数示例
+/// internal function example
 pub fn some_internal_fn() {
     println!("Internal function called");
 }
@@ -97,6 +101,8 @@ mod hygiene_tests {
 /// best practice summary
 /// summary
 pub mod best_practices {
+    /// 使用 crate 路径
+    /// use crate path
     pub fn use_crate_path() {}
 
     /// 2. 避免在宏中创建可能冲突的变量名

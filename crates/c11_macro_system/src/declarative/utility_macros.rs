@@ -52,6 +52,7 @@ macro_rules! impl_getter_setter {
 ///     test_sub: {
 ///         assert_eq!(2 - 1, 1);
 ///     }
+/// }
 /// ```
 #[macro_export]
 macro_rules! test_module {

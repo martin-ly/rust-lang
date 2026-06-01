@@ -69,7 +69,6 @@ pub extern "C" fn rust_initialize_sensor(id: u32) -> i32 {
 /// 接受 C 风格字符串的函数
 /// C function
 /// Accept C 风格字符串function
-///
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn rust_process_name(c_str: *const u8) -> i32 {
     if c_str.is_null() {
@@ -102,7 +101,7 @@ pub type CCallback = extern "C" fn(data: *mut core::ffi::c_void);
 ///     fn hal_read_register(addr: u32) -> u32;
 ///     fn hal_write_register(addr: u32, value: u32);
 /// }
-/// ```
+/// ```text
 pub struct CBindingsConcept;
 
 impl CBindingsConcept {
@@ -117,7 +116,7 @@ impl CBindingsConcept {
 
 /// build.rs 示例概念
 /// build.rs example concept
-/// ```rust,ignore
+/// ```text
 /// use std::env;
 /// use std::path::PathBuf;
 ///

@@ -343,6 +343,8 @@ impl RealRust195Features {
         unsafe { *ptr }
     }
 
+    /// 返回 const 块宏输出数组
+    /// return const block macro output array
     pub fn const_block_macro_output() -> [u8; 8] {
         [0u8; const { 4 + 4 }]
     }

@@ -39,7 +39,7 @@
 //! # Host on
 //! # 运行演示程序
 //! # Run demonstration program
-//! ```
+//! ```text
 
 // 核心模块
 pub mod bare_metal_basics;

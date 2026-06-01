@@ -56,8 +56,8 @@ impl NvicConcept {
 /// interrupt::free(|_cs| {
 ///     // 此处中断被全局禁用
 ///     // this in is global
-/// ```
-///
+/// ```text
+/// 
 /// **注意**：临界区应尽可能短，以减少中断延迟。
 /// ****：as much as possible ，in 。
 pub struct CriticalSectionConcept;
@@ -76,14 +76,14 @@ impl CriticalSectionConcept {
 /// Use `cortex-m-rt` `#[interrupt]` 宏：
 /// use cortex_m_rt::interrupt;
 ///
-/// #[interrupt]
+/// #\[interrupt\]
 /// fn TIM2() {
 ///     // 清除中断标志（必须！否则中断会重复触发）
 ///     // in mark （must ！in ）
 ///         tim2.sr.modify(|_, w| w.uif().clear_bit());
 ///     }
-/// ```
-///
+/// ```text
+/// 
 /// ISR 设计原则：
 /// ISR design principle ：
 /// 1. **快速执行**：ISR 应尽快返回，复杂处理放到主循环
@@ -106,9 +106,9 @@ pub struct IsrTemplate;
 /// Use `core::cell::Cell`（to于 `Copy` type）or自definitionatomic operation。
 /// use core::cell::Cell;
 ///
-/// static FLAG: Cell<bool> = Cell::new(false);
+/// static FLAG: `Cell<bool>` = Cell::new(false);
 ///
-/// #[interrupt]
+/// #\[interrupt\]
 /// fn EXTI0() {
 ///     FLAG.set(true);
 /// }
