@@ -36,7 +36,9 @@ impl<T> WorkStealingScheduler<T> {
     /// 创建新的工作窃取调度器
     /// Creates新的工作窃取调度器
     pub fn new(worker_count: usize) -> Self {
-        let workers: Vec<Mutex<Worker<T>>> = (0..worker_count).map(|_| Mutex::new(Worker::new_fifo())).collect();
+        let workers: Vec<Mutex<Worker<T>>> = (0..worker_count)
+            .map(|_| Mutex::new(Worker::new_fifo()))
+            .collect();
 
         Self {
             workers: Arc::new(workers),
@@ -57,9 +59,10 @@ impl<T> WorkStealingScheduler<T> {
     /// task to worker thread
     pub fn push_task(&self, worker_index: usize, task: T) {
         if worker_index < self.workers.len()
-            && let Ok(worker) = self.workers[worker_index].lock() {
-                worker.push(task);
-            }
+            && let Ok(worker) = self.workers[worker_index].lock()
+        {
+            worker.push(task);
+        }
     }
 
     /// 推送任务到全局注入器
@@ -78,9 +81,10 @@ impl<T> WorkStealingScheduler<T> {
 
         // 首先尝试从自己的队列获取任务
         if let Ok(worker) = self.workers[worker_index].lock()
-            && let Some(task) = worker.pop() {
-                return Some(task);
-            }
+            && let Some(task) = worker.pop()
+        {
+            return Some(task);
+        }
 
         // 尝试从全局注入器获取任务
         if let Some(task) = self.injector.steal().success() {
@@ -90,13 +94,14 @@ impl<T> WorkStealingScheduler<T> {
         // 尝试从其他工作线程窃取任务
         for i in 0..self.workers.len() {
             if i != worker_index
-                && let Ok(worker) = self.workers[i].lock() {
-                    let stealer = worker.stealer();
-                    drop(worker); // 释放锁后再窃取，避免死锁
-                    if let Some(task) = stealer.steal().success() {
-                        return Some(task);
-                    }
+                && let Ok(worker) = self.workers[i].lock()
+            {
+                let stealer = worker.stealer();
+                drop(worker); // 释放锁后再窃取，避免死锁
+                if let Some(task) = stealer.steal().success() {
+                    return Some(task);
                 }
+            }
         }
 
         None
@@ -129,7 +134,10 @@ impl<T> WorkStealingScheduler<T> {
                         local_results.push(result);
                         thread::sleep(Duration::from_millis(1));
                     }
-                    results.lock().expect("获取结果锁不应失败").extend(local_results);
+                    results
+                        .lock()
+                        .expect("获取结果锁不应失败")
+                        .extend(local_results);
                 });
             }
         });
@@ -173,8 +181,9 @@ pub struct PriorityWorkStealingScheduler<T> {
 
 impl<T> PriorityWorkStealingScheduler<T> {
     pub fn new(worker_count: usize) -> Self {
-        let workers: Vec<Mutex<Worker<PriorityTask<T>>>> =
-            (0..worker_count).map(|_| Mutex::new(Worker::new_fifo())).collect();
+        let workers: Vec<Mutex<Worker<PriorityTask<T>>>> = (0..worker_count)
+            .map(|_| Mutex::new(Worker::new_fifo()))
+            .collect();
 
         Self {
             workers,
@@ -209,9 +218,10 @@ impl<T> PriorityWorkStealingScheduler<T> {
 
         // 首先尝试从自己的队列获取任务
         if let Ok(worker) = self.workers[worker_index].lock()
-            && let Some(priority_task) = worker.pop() {
-                return Some(priority_task.into_task());
-            }
+            && let Some(priority_task) = worker.pop()
+        {
+            return Some(priority_task.into_task());
+        }
 
         // 尝试从高优先级注入器获取任务
         if let Some(priority_task) = self.high_priority_injector.steal().success() {
@@ -226,13 +236,14 @@ impl<T> PriorityWorkStealingScheduler<T> {
         // 尝试从其他工作线程窃取任务
         for i in 0..self.workers.len() {
             if i != worker_index
-                && let Ok(worker) = self.workers[i].lock() {
-                    let stealer = worker.stealer();
-                    drop(worker);
-                    if let Some(priority_task) = stealer.steal().success() {
-                        return Some(priority_task.into_task());
-                    }
+                && let Ok(worker) = self.workers[i].lock()
+            {
+                let stealer = worker.stealer();
+                drop(worker);
+                if let Some(priority_task) = stealer.steal().success() {
+                    return Some(priority_task.into_task());
                 }
+            }
         }
 
         None
@@ -269,7 +280,10 @@ impl<T> PriorityWorkStealingScheduler<T> {
                         local_results.push((worker_id as u32, result as i32));
                         thread::sleep(Duration::from_millis(1));
                     }
-                    results.lock().expect("获取结果锁不应失败").extend(local_results);
+                    results
+                        .lock()
+                        .expect("获取结果锁不应失败")
+                        .extend(local_results);
                 });
             }
         });
@@ -295,7 +309,9 @@ pub struct AdaptiveWorkStealingScheduler<T> {
 
 impl<T> AdaptiveWorkStealingScheduler<T> {
     pub fn new(worker_count: usize) -> Self {
-        let workers: Vec<Mutex<Worker<T>>> = (0..worker_count).map(|_| Mutex::new(Worker::new_fifo())).collect();
+        let workers: Vec<Mutex<Worker<T>>> = (0..worker_count)
+            .map(|_| Mutex::new(Worker::new_fifo()))
+            .collect();
 
         Self {
             workers,
@@ -324,9 +340,10 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
 
         // 首先尝试从自己的队列获取任务
         if let Ok(worker) = self.workers[worker_index].lock()
-            && let Some(task) = worker.pop() {
-                return Some(task);
-            }
+            && let Some(task) = worker.pop()
+        {
+            return Some(task);
+        }
 
         // 检查是否需要适应
         self.check_adaptation();
@@ -383,14 +400,15 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
         // 尝试从所有其他工作线程窃取
         for i in 0..self.workers.len() {
             if i != worker_index
-                && let Ok(worker) = self.workers[i].lock() {
-                    let stealer = worker.stealer();
-                    drop(worker);
-                    if let Some(task) = stealer.steal().success() {
-                        self.record_successful_steal();
-                        return Some(task);
-                    }
+                && let Ok(worker) = self.workers[i].lock()
+            {
+                let stealer = worker.stealer();
+                drop(worker);
+                if let Some(task) = stealer.steal().success() {
+                    self.record_successful_steal();
+                    return Some(task);
                 }
+            }
         }
 
         self.record_failed_steal();
@@ -448,7 +466,10 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
                         local_results.push(result);
                         thread::sleep(Duration::from_millis(1));
                     }
-                    results.lock().expect("获取结果锁不应失败").extend(local_results);
+                    results
+                        .lock()
+                        .expect("获取结果锁不应失败")
+                        .extend(local_results);
                 });
             }
         });
@@ -471,7 +492,11 @@ pub struct NumaAwareWorkStealingScheduler<T> {
 impl<T> NumaAwareWorkStealingScheduler<T> {
     pub fn new(numa_node_count: usize, workers_per_node: usize) -> Self {
         let numa_nodes: Vec<Vec<Mutex<Worker<T>>>> = (0..numa_node_count)
-            .map(|_| (0..workers_per_node).map(|_| Mutex::new(Worker::new_fifo())).collect())
+            .map(|_| {
+                (0..workers_per_node)
+                    .map(|_| Mutex::new(Worker::new_fifo()))
+                    .collect()
+            })
             .collect();
 
         let node_injectors: Vec<Arc<Injector<T>>> = (0..numa_node_count)
@@ -511,9 +536,10 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
 
         // 首先尝试从自己的队列获取任务
         if let Ok(worker) = self.numa_nodes[node_id][worker_id].lock()
-            && let Some(task) = worker.pop() {
-                return Some(task);
-            }
+            && let Some(task) = worker.pop()
+        {
+            return Some(task);
+        }
 
         // 尝试从本地NUMA节点的注入器获取任务
         if let Some(task) = self.node_injectors[node_id].steal().success() {
@@ -523,13 +549,14 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
         // 尝试从本地NUMA节点的其他工作线程窃取任务
         for i in 0..self.numa_nodes[node_id].len() {
             if i != worker_id
-                && let Ok(worker) = self.numa_nodes[node_id][i].lock() {
-                    let stealer = worker.stealer();
-                    drop(worker);
-                    if let Some(task) = stealer.steal().success() {
-                        return Some(task);
-                    }
+                && let Ok(worker) = self.numa_nodes[node_id][i].lock()
+            {
+                let stealer = worker.stealer();
+                drop(worker);
+                if let Some(task) = stealer.steal().success() {
+                    return Some(task);
                 }
+            }
         }
 
         // 尝试从全局注入器获取任务
@@ -588,7 +615,10 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
                             local_results.push((node_id, worker_id, result as i32));
                             thread::sleep(Duration::from_millis(1));
                         }
-                        results.lock().expect("获取结果锁不应失败").extend(local_results);
+                        results
+                            .lock()
+                            .expect("获取结果锁不应失败")
+                            .extend(local_results);
                     });
                 }
             }

@@ -400,7 +400,7 @@ pub fn get_never_type_info() -> String {
 /// assert_eq!(iter.next(), Some(1));
 /// // ... 2, 3, 4, 5, None
 /// ```
-///
+/// 
 /// ## 与 `std::ops` 的关系
 /// ## and `std::ops`
 /// ## and `std::ops` 关系
@@ -443,7 +443,7 @@ pub fn core_range_demo() {
 ///     println!("NonZero: {}", nz.get()); // 1, 2, 3, 4
 /// }
 /// ```
-///
+/// 
 /// **应用场景**:
 /// **application scenario **:
 /// - 数据库 ID 范围扫描（ID 永不为 0）
@@ -479,7 +479,7 @@ pub fn nonzero_range_demo() {
 /// let option: Option<String> = Some("hello".to_string());
 /// assert_matches!(option, Some(s) if s.len() > 0);
 /// ```
-///
+/// 
 /// **and `assert!(matches!(...))` 区别**:
 /// **and `assert!(matches!(...))` difference**:
 /// - 错误信息更友好（显示实际值 vs 模式）
@@ -691,7 +691,6 @@ pub mod anti_patterns_and_edge_cases {
 // ============================================================================
 
 /// # `From<T>` for `LazyLock<T, F>` / `LazyCell<T, F>` / `AssertUnwindSafe<T>`
-///
 pub mod from_for_cell_types {
     use std::cell::LazyCell;
     use std::panic::AssertUnwindSafe;

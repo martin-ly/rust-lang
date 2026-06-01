@@ -276,7 +276,7 @@ impl CollectionMutMethodsExamples {
     /// let last = v.last_mut().unwrap();
     /// last.push_str("hello");
     /// ```
-    ///
+    /// 
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -301,7 +301,7 @@ impl CollectionMutMethodsExamples {
     /// let inserted = v.get_mut(1).unwrap();
     /// *inserted = 2;
     /// ```
-    ///
+    /// 
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -325,7 +325,7 @@ impl CollectionMutMethodsExamples {
     /// let head = dq.front_mut().unwrap();
     /// *head += 1;
     /// ```
-    ///
+    /// 
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -347,7 +347,7 @@ impl CollectionMutMethodsExamples {
     /// let back = dq.back_mut().unwrap();
     /// *back += 1;
     /// ```
-    ///
+    /// 
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -369,7 +369,7 @@ impl CollectionMutMethodsExamples {
     /// let mid = dq.get_mut(1).unwrap();
     /// *mid = 20;
     /// ```
-    ///
+    /// 
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -391,7 +391,7 @@ impl CollectionMutMethodsExamples {
     /// let front = list.front_mut().unwrap();
     /// *front += 1;
     /// ```
-    ///
+    /// 
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
@@ -413,7 +413,7 @@ impl CollectionMutMethodsExamples {
     /// let back = list.back_mut().unwrap();
     /// *back += 1;
     /// ```
-    ///
+    /// 
     /// ## 1.95 方式
     /// ## 1.95 Approach
     /// ## 1.95 way
