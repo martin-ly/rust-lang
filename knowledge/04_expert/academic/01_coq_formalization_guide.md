@@ -97,7 +97,7 @@ opam install coq-stdpp
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 rust_formalization/
 ├── theories/
 │   ├── syntax.v          # 语法定义
@@ -182,10 +182,10 @@ graph TD
 
 **形式化验证的三层结构**：
 
-```
+```text
 ┌─────────────────────────────────────────┐
 │  第一层: 语法 (Syntax)                   │
-│  • 定义合法的 Rust 程序结构              │
+│  • 定义合法的 Rust 程序结构               │
 │  • Coq: Inductive expr / Inductive value │
 └─────────────────────────────────────────┘
                     │
@@ -213,7 +213,7 @@ graph TD
 
 **类型安全的经典定义（Wright & Felleisen, 1994）**：
 
-```
+```text
 Progress:    ⊢ e : T  →  value(e)  ∨  ∃e'. e ⟶ e'
              （良类型的表达式要么是值，要么可以进一步求值）
 

@@ -22,7 +22,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 已确认特性:
 ├── gen关键字 (生成器)
 ├── 异步闭包
@@ -50,7 +50,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 Tree Borrows:
 ├── 当前状态: Miri默认
 ├── 下一步: rustc集成评估
@@ -73,7 +73,7 @@ Tree Borrows:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```
+```text
 rustc改进:
 ├── 并行编译
 │   ├── 当前: 前端并行
@@ -100,7 +100,7 @@ rustc改进:
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
 Kani发展:
 ├── 当前: 0.40+
 ├── 路线图:
@@ -133,7 +133,7 @@ Verus发展:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 RISC-V:
 ├── 状态: 快速发展
 ├── Rust支持: 良好
@@ -156,7 +156,7 @@ ARM:
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 可信执行环境:
 ├── ARM TrustZone
 ├── Intel SGX
@@ -179,7 +179,7 @@ ARM:
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```
+```text
 ISO 26262:
 ├── 第三版规划
 │   ├── 预期: 2028+
@@ -210,7 +210,7 @@ IEC 61508:
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```
+```text
 汽车:
 ├── AUTOSAR Adaptive
 │   ├── Rust绑定
@@ -253,7 +253,7 @@ IEC 61508:
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
 2024-2025:
 ├── 试点项目扩展
 ├── 供应商采用
@@ -276,7 +276,7 @@ IEC 61508:
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 当前:
 ├── 研究项目
 ├── 供应商评估
@@ -303,7 +303,7 @@ IEC 61508:
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 形式化验证:
 ├── 自动化证明
 ├── 并发程序验证
@@ -325,7 +325,7 @@ IEC 61508:
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```
+```text
 学术会议:
 ├── PLDI (编程语言)
 ├── POPL (原则)
@@ -351,7 +351,7 @@ IEC 61508:
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```
+```text
 高风险/高回报:
 ├── 效果系统
 │   ├── 风险: 复杂性
@@ -370,7 +370,7 @@ IEC 61508:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```
+```text
 技术挑战:
 ├── 编译时间
 ├── 二进制大小
@@ -394,7 +394,7 @@ IEC 61508:
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 定期评估:
 ├── 季度: 工具更新
 ├── 半年: 标准动态
@@ -412,7 +412,7 @@ IEC 61508:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 短期 (6个月):
 ├── 当前工具链稳定化
 ├── 团队培训
@@ -438,6 +438,7 @@ IEC 61508:
 ---
 
 *保持对新技术的关注，但谨慎评估生产采用。*
+
 ---
 
 **最后更新**: 2026-05-19

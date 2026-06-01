@@ -86,7 +86,7 @@ TB 将引用视为**树节点**：`y` 是 `x` 的子节点。`y` 的使用不剥
 
 Tree Borrows 为每个内存位置的每个引用分配一个**权限状态**：
 
-```
+```text
 Reserved ──read──► Active ──write──► Active
     │                │                │
     │                │ read           │ read/write

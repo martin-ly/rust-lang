@@ -488,7 +488,7 @@ Day 2: Verus/Creusot
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```
+```text
 免费资源:
 ├── Rustlings (官方)
 ├── Exercism Rust Track
@@ -507,7 +507,7 @@ Day 2: Verus/Creusot
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
 练习平台:
 ├── LeetCode (Rust)
 ├── Advent of Code
@@ -578,7 +578,7 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
 参与方式:
 ├── Rust官方论坛
 ├── Reddit r/rust
@@ -598,7 +598,7 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 订阅:
 ├── Rust官方博客
 ├── This Week in Rust

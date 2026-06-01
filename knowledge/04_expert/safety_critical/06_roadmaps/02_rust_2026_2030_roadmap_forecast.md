@@ -23,7 +23,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 2020: Linux内核实验性支持
       const泛型稳定化
 
@@ -81,7 +81,7 @@
 
 **预测特性**:
 
-```
+```text
 高概率 (>80%):
 ├── 关联类型默认值
 ├── const trait改进
@@ -114,7 +114,7 @@
 
 #### 行业采用
 
-```
+```text
 汽车:
 ├── Tesla: 公开Rust使用案例
 ├── BMW/Mercedes: 生产项目启动
@@ -150,7 +150,7 @@
 
 **可能内容**:
 
-```
+```text
 如果发布:
 ├── 效果系统 (Effects/Keywords)
 │   ├── const fn统一
@@ -163,7 +163,7 @@
 
 #### 编译器技术
 
-```
+```text
 rustc改进:
 ├── 增量编译速度提升50%
 ├── 内存使用减少30%
@@ -183,7 +183,7 @@ rustc改进:
 
 #### 标准化进展
 
-```
+```text
 MISRA Rust 2027:
 ├── 发布v1.0标准
 ├── 配套检查工具
@@ -218,7 +218,7 @@ ISO更新:
 
 #### Rust + AI/ML
 
-```
+```text
 AI开发:
 ├── burn框架成熟 (纯Rust深度学习)
 ├── candle生产就绪 (轻量级推理)
@@ -234,7 +234,7 @@ AI开发:
 
 #### WebAssembly演进
 
-```
+```text
 WASI 0.3:
 ├── 组件模型成熟
 ├── 异步I/O标准化
@@ -254,7 +254,7 @@ WASI 0.3:
 
 #### 汽车电子
 
-```
+```text
 2028年预测:
 ├── 10+量产车型使用Rust ECU
 ├── 自动驾驶核心模块Rust化
@@ -270,7 +270,7 @@ WASI 0.3:
 
 #### 航空航天
 
-```
+```text
 2028年预测:
 ├── 首个DO-178C认证Rust项目
 ├── 卫星软件Rust占比30%
@@ -296,7 +296,7 @@ WASI 0.3:
 
 #### Rust 2030语言状态
 
-```
+```text
 语言特性:
 ├── 效果系统成熟 (const/async/unsafe统一)
 ├── 高级类型系统 (依赖类型子集)
@@ -313,7 +313,7 @@ WASI 0.3:
 
 #### 生态系统成熟度
 
-```
+```text
 包管理:
 ├── cargov2发布 (供应链安全)
 ├── 分布式注册系统
@@ -333,7 +333,7 @@ WASI 0.3:
 
 #### 安全关键系统革命
 
-```
+```text
 2030年状态:
 ├── Rust占新安全关键项目50%+
 ├── C/C++新项目减少70%
@@ -349,7 +349,7 @@ WASI 0.3:
 
 #### 教育变革
 
-```
+```text
 大学课程:
 ├── 系统编程首选Rust
 ├── 形式化方法必修课
@@ -373,7 +373,7 @@ WASI 0.3:
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 2026-2030演进:
 
 2026:
@@ -401,7 +401,7 @@ WASI 0.3:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```
+```text
 当前 (2026):
 ├── async/await成熟
 ├── Send/Sync静态保证
@@ -425,7 +425,7 @@ WASI 0.3:
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 2026: 专家工具
 ├── Kani/Verus专业使用
 ├── 学术主导
@@ -467,7 +467,7 @@ WASI 0.3:
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 挑战:
 ├── 认证机构接受度
 ├── 保险行业认可
@@ -491,7 +491,7 @@ WASI 0.3:
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```
+```text
 技术准备:
 ├── 建立Rust卓越中心
 ├── 培训核心团队
@@ -509,7 +509,7 @@ WASI 0.3:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```
+```text
 标准制定:
 ├── MISRA Rust工作组
 ├── ISO/IEC委员会
@@ -533,7 +533,7 @@ WASI 0.3:
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 高置信度 (>90%):
 ├── Rust在Linux内核主导地位
 ├── 汽车电子广泛采用

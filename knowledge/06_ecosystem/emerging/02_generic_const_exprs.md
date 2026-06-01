@@ -118,7 +118,7 @@ where
 
 `generic_const_exprs` 将 Rust 的类型系统从**简单参数化**提升到**依赖类型（Dependent Types）**的边缘。类型现在可以依赖于通过表达式计算的值：
 
-```
+```text
 Matrix<i32, 3, 4> 的完整类型:
   • N = 3, M = 4
   • where [i32; 3 * 4]: Sized
