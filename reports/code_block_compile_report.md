@@ -16,12 +16,12 @@
 ## 编译失败的代码块（concept/）
 
 | 文件 | 行号 | 模式 | 预览 | 错误信息 |
-|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---|:---|
 | concept\00_meta\semantic_bridge_algorithms_patterns.md | 69 | normal | `fn merge_sort<T: Ord + Clone>(data: &[T]` | error[E0425]: cannot find function `merge` in this scope   --> target\tmp\code_b |
 | concept\00_meta\semantic_bridge_algorithms_patterns.md | 85 | normal | `// Composite: 递归数据结构 trait DataStructure` | error[E0425]: cannot find function `merge` in this scope   --> target\tmp\code_b |
 | concept\01_foundation\01_ownership.md | 860 | normal | `// Rust: 初始化 = 所有权获取 let w1 = Widget::ne` | error[E0433]: cannot find type `Widget` in this scope  --> target\tmp\code_block |
 | concept\01_foundation\21_effects_and_purity.md | 96 | normal | `// Rust: 副作用通过参数类型和返回类型显式表达 fn process_p` | error[E0433]: cannot find module or crate `io` in this scope  --> target\tmp\cod |
-| concept\01_foundation\21_effects_and_purity.md | 176 | normal | `// 显式异常效果: 调用者必须处理 Err 分支 fn may_fail()` | error[E0425]: cannot find type `Error` in this scope  --> target\tmp\code_block_ |
+| concept\01_foundation\21_effects_and_purity.md | 176 | normal | `// 显式异常效果: 调用者必须处理 Err 分支 fn may_fail()` | error[E0425]: cannot find type `Error` in this scope  --> target\tmp\code_block_|
 | concept\01_foundation\21_effects_and_purity.md | 205 | normal | `// async 效果: 函数返回 Future，实际计算延迟到 await a` | error[E0728]: `await` is only allowed inside `async` functions and blocks   -->  |
 | concept\01_foundation\21_effects_and_purity.md | 232 | normal | `// 纯函数 fn add(a: i32, b: i32) -> i32 { a` | error[E0433]: cannot find module or crate `rand` in this scope  --> target\tmp\c |
 | concept\01_foundation\21_effects_and_purity.md | 247 | normal | `// 纯函数的 Rust 签名特征: // 1. 不接受 &mut T 参数 /` | error[E0277]: the trait bound `T: Clone` is not satisfied    --> target\tmp\code |
@@ -34,7 +34,7 @@
 | concept\01_foundation\22_data_abstraction_spectrum.md | 337 | normal | `enum Result<T, E> {     Ok(T),     Err(E` | error[E0433]: cannot find module or crate `io` in this scope  --> target\tmp\cod |
 | concept\02_intermediate\04_error_handling.md | 2198 | normal | `// Rust: Result（强制处理） fn parse_int(s: &s` | error[E0425]: cannot find type `ParseIntError` in this scope  --> target\tmp\cod |
 | concept\02_intermediate\04_error_handling.md | 2228 | normal | `// Rust: Drop 不能失败 impl Drop for Safe {` | error[E0425]: cannot find type `Safe` in this scope  --> target\tmp\code_block_t |
-| concept\02_intermediate\14_newtype_and_wrapper.md | 554 | normal | `struct Container<T> {     ptr: *const u` | error[E0425]: cannot find type `PhantomData` in this scope  --> target\tmp\code_ |
+| concept\02_intermediate\14_newtype_and_wrapper.md | 554 | normal | `struct Container<T> {     ptr: *const u` | error[E0425]: cannot find type `PhantomData` in this scope  --> target\tmp\code_|
 | concept\02_intermediate\20_type_system_advanced.md | 553 | normal | `// Rust: Deref 和 Mul 是两个不同的 trait let a` | error[E0369]: cannot multiply `Box<{integer}>` by `{integer}`    --> target\tmp\ |
 | concept\03_advanced\02_async.md | 3737 | normal | `pub trait Stream {     type Item;     fn` | error[E0425]: cannot find type `Pin` in this scope  --> target\tmp\code_block_te |
 | concept\03_advanced\06_pin_unpin.md | 499 | normal | `use std::pin::Pin; use std::marker::Phan` | warning: unused import: `std::pin::Pin`  --> target\tmp\code_block_tests\06_pin_ |
@@ -53,7 +53,7 @@
 | concept\05_comparative\02_cpp_abi_object_model.md | 173 | normal | `trait Drawable {     fn draw(&self);` | error[E0425]: cannot find type `Rect` in this scope  --> target\tmp\code_block_t |
 | concept\05_comparative\02_cpp_abi_object_model.md | 208 | normal | `fn draw_shape(shape: &dyn Drawable) {` | error[E0405]: cannot find trait `Drawable` in this scope  --> target\tmp\code_bl |
 | concept\05_comparative\02_cpp_abi_object_model.md | 451 | normal | `// Cargo.toml 中配置 panic 策略 [profile.rele` | error: expected `;`, found `panic`  --> target\tmp\code_block_tests\02_cpp_abi_o |
-| concept\05_comparative\02_cpp_abi_object_model.md | 473 | normal | `// Rust 端（错误：忘记 #[repr(C)]） struct Point` | error: unsafe attribute used without unsafe  --> target\tmp\code_block_tests\02_ |
+| concept\05_comparative\02_cpp_abi_object_model.md | 473 | normal | `// Rust 端（错误：忘记 #[repr(C)]） struct Point` | error: unsafe attribute used without unsafe  --> target\tmp\code_block_tests\02_|
 | concept\05_comparative\02_cpp_abi_object_model.md | 524 | normal | `// 错误：试图将 dyn Trait 传递给 C #[no_mangle] p` | error[E0405]: cannot find trait `Drawable` in this scope  --> target\tmp\code_bl |
 | concept\06_ecosystem\06_blockchain.md | 768 | normal | `fn main() {     let secret = [1u8, 2, 3,` | error[E0432]: unresolved import `subtle`   --> target\tmp\code_block_tests\06_bl |
 | concept\06_ecosystem\08_wasi.md | 484 | normal | `// 边界测试：Resource 句柄在跨组件传递时的生命周期  // 宿主创建` | error[E0425]: cannot find function `preopen_file` in this scope  --> target\tmp\ |
@@ -66,8 +66,8 @@
 | concept\06_ecosystem\35_pattern_composition_algebra.md | 85 | normal | `// CircuitBreaker ⊕ Retry ⊕ Fallback //` | error[E0425]: cannot find type `CircuitBreaker` in this scope  --> target\tmp\co |
 | concept\06_ecosystem\35_pattern_composition_algebra.md | 110 | normal | `// Strategy → Command: 策略的执行被封装为命令  trai` | error[E0425]: cannot find type `Data` in this scope  --> target\tmp\code_block_t |
 | concept\06_ecosystem\35_pattern_composition_algebra.md | 227 | normal | `// Typestate 模式: 编译期保证状态转换合法 struct Unin` | error[E0425]: cannot find type `Config` in this scope  --> target\tmp\code_block |
-| concept\06_ecosystem\35_pattern_composition_algebra.md | 301 | normal | `// 编译期多态（零成本）+ 运行期多态（动态分发）的组合  trait Pay` | error[E0425]: cannot find type `Transaction` in this scope  --> target\tmp\code_ |
-| concept\06_ecosystem\35_pattern_composition_algebra.md | 358 | normal | `// Saga = T1 ∘ T2 ∘ ... ∘ Tn ∘ (Compensa` | error[E0425]: cannot find type `Error` in this scope  --> target\tmp\code_block_ |
+| concept\06_ecosystem\35_pattern_composition_algebra.md | 301 | normal | `// 编译期多态（零成本）+ 运行期多态（动态分发）的组合  trait Pay` | error[E0425]: cannot find type `Transaction` in this scope  --> target\tmp\code_|
+| concept\06_ecosystem\35_pattern_composition_algebra.md | 358 | normal | `// Saga = T1 ∘ T2 ∘ ... ∘ Tn ∘ (Compensa` | error[E0425]: cannot find type `Error` in this scope  --> target\tmp\code_block_|
 | concept\06_ecosystem\35_pattern_composition_algebra.md | 467 | normal | `// 边界测试: 当组合的模式数量增加时，状态空间呈指数增长  // 2 个模式` | error[E0425]: cannot find type `Duration` in this scope   --> target\tmp\code_bl |
 | concept\06_ecosystem\36_stream_processing_ecosystem.md | 66 | normal | `use timely::dataflow::operators::{ToStre` | error[E0433]: cannot find module or crate `timely` in this scope  --> target\tmp |
 | concept\06_ecosystem\36_stream_processing_ecosystem.md | 90 | normal | `use differential_dataflow::input::Input;` | error[E0433]: cannot find module or crate `differential_dataflow` in this scope  |

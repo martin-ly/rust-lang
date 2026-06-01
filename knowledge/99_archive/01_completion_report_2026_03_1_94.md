@@ -28,7 +28,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 knowledge/
 ├── INDEX.md                          ← 快速查找索引
 ├── README.md                         ← 项目介绍
