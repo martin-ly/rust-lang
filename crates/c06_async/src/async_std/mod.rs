@@ -5,7 +5,6 @@
 //! # state : (2025-03)
 //!
 //! [async-std](https://async.rs/) 已于 **2025 年 3 月** 停止维护。
-//! 本项目的所有异步运行时依赖已统一迁移至 [Tokio](https://tokio.rs/)。
 //! this project all async runtime [Tokio](https://tokio.rs/)。
 //!
 //! # 迁移路径
@@ -41,7 +40,6 @@
 //! # 参考
 //! # References
 //! - [async-std 归档公告](https://github.com/async-rs/async-std)
-//! - [Tokio 迁移指南](https://tokio.rs/tokio/topics/bridging)
 
 use std::time::Duration;
 

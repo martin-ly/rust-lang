@@ -20,7 +20,6 @@ pub struct AsyncExecutor;
 
 impl AsyncExecutor {
     /// 执行异步算法并测量性能
-    /// executionasyncalgorithm performance
     pub async fn execute_with_metrics<A, T, R>(
         algorithm: A,
         input: T,
@@ -48,7 +47,6 @@ impl AsyncExecutor {
     }
 
     /// 带超时的异步算法执行
-    /// async algorithm
     pub async fn execute_with_timeout<A, T, R>(
         algorithm: A,
         input: T,
@@ -79,7 +77,6 @@ impl AsyncExecutor {
     }
 
     /// 批量执行异步算法
-    /// executionasync algorithm
     pub async fn execute_batch<A, T, R>(
         algorithm: A,
         inputs: Vec<T>,
@@ -148,7 +145,6 @@ impl AsyncExecutor {
     }
 
     /// 执行异步算法并返回详细统计信息
-    /// executionasyncalgorithm information
     pub async fn execute_with_stats<A, T, R>(
         algorithm: A,
         input: T,
@@ -196,7 +192,6 @@ impl AsyncExecutor {
 }
 
 /// 异步执行统计信息
-/// asyncexecution information
 #[derive(Debug, Clone)]
 pub struct AsyncExecutionStats<T> {
     pub results: Vec<ExecutionResult<T>>,
@@ -228,7 +223,7 @@ impl<T> AsyncExecutionStats<T> {
     }
 
     /// 获取最小内存使用
-    /// Get minimummemoryuse
+    /// Get minimum memory usage
     pub fn min_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -238,7 +233,7 @@ impl<T> AsyncExecutionStats<T> {
     }
 
     /// 获取最大内存使用
-    /// Get maximummemoryuse
+    /// Get maximum memory usage
     pub fn max_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -248,7 +243,7 @@ impl<T> AsyncExecutionStats<T> {
     }
 
     /// 计算性能稳定性（变异系数）
-    /// Compute performance
+    /// Compute performance stability (coefficient of variation)
     pub fn performance_stability(&self) -> f64 {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
@@ -265,7 +260,6 @@ pub struct AsyncBenchmarker;
 
 impl AsyncBenchmarker {
     /// 运行异步基准测试
-    /// Run asynctest
     pub async fn benchmark<A, T, R>(
         algorithm: A,
         test_cases: Vec<AsyncBenchmarkTestCase<T>>,
@@ -296,7 +290,6 @@ impl AsyncBenchmarker {
     }
 
     /// 运行并发基准测试
-    /// Run concurrenttest
     pub async fn benchmark_concurrent<A, T, R>(
         algorithm: A,
         test_cases: Vec<AsyncBenchmarkTestCase<T>>,
@@ -343,7 +336,6 @@ impl AsyncBenchmarker {
 }
 
 /// 异步基准测试用例
-/// async benchmark
 #[derive(Debug, Clone)]
 pub struct AsyncBenchmarkTestCase<T> {
     pub name: String,
@@ -353,7 +345,6 @@ pub struct AsyncBenchmarkTestCase<T> {
 }
 
 /// 异步基准测试结果
-/// asynctest result
 #[derive(Debug, Clone)]
 pub struct AsyncBenchmarkResult<T> {
     pub test_case: String,
@@ -362,7 +353,6 @@ pub struct AsyncBenchmarkResult<T> {
 }
 
 /// 异步基准测试结果集合
-/// asynctestresult set
 #[derive(Debug, Clone)]
 pub struct AsyncBenchmarkResults<T> {
     pub results: Vec<AsyncBenchmarkResult<T>>,
@@ -378,7 +368,6 @@ impl<T> AsyncBenchmarkResults<T> {
     }
 
     /// 获取最稳定性能的测试用例
-    /// Get performancetest
     pub fn most_stable(&self) -> Option<&AsyncBenchmarkResult<T>> {
         self.results.iter().min_by(|a, b| {
             a.stats
@@ -389,7 +378,6 @@ impl<T> AsyncBenchmarkResults<T> {
     }
 
     /// 生成异步性能报告
-    /// async performance
     pub fn generate_report(&self) -> String {
         let mut report = String::new();
         report.push_str("=== 异步算法基准测试报告 ===\n\n");

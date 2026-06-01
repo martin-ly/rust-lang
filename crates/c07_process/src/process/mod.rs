@@ -147,7 +147,6 @@ impl ProcessManager {
     }
 
     /// 获取进程输出（阻塞直到进程退出，返回实际 stdout/stderr）
-    /// Get processprocess stdout/stderr
     pub fn get_output(&mut self, pid: u32) -> ProcessResult<std::process::Output> {
         let mut processes = self.processes.lock().expect("进程管理锁被污染");
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -187,7 +186,7 @@ impl ProcessManager {
     }
 
     /// 带超时等待进程完成
-    /// etc. process
+    /// Wait for process completion with timeout
     /// 返回 Ok(Some(status)) 表示在超时时间内进程已退出；
     /// Ok(Some(status)) represent in time inside process ；
     /// 返回 Ok(None) 表示超时未退出；Err 表示等待过程中出错或找不到进程。
@@ -229,7 +228,6 @@ impl ProcessManager {
     }
 
     /// 向子进程标准输入写入数据（不自动关闭stdin）
-    /// process standard input （stdin）
     pub fn write_stdin(&mut self, pid: u32, data: &[u8]) -> ProcessResult<()> {
         let mut processes = self.processes.lock().expect("进程管理锁被污染");
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -280,7 +278,6 @@ impl ProcessManager {
     }
 
     /// 读取子进程标准错误的全部可用数据
-    /// processstandarderror data
     pub fn read_stderr(&mut self, pid: u32) -> ProcessResult<Vec<u8>> {
         let mut processes = self.processes.lock().expect("进程管理锁被污染");
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -331,14 +328,12 @@ impl ProcessManager {
     }
 
     /// 获取所有进程信息
-    /// Get hasprocessinformation
     pub fn get_all_processes(&self) -> Vec<ProcessInfo> {
         let processes = self.processes.lock().expect("进程管理锁被污染");
         processes.values().map(|p| p.info.clone()).collect()
     }
 
     /// 检查进程是否运行
-    /// process Run
     pub fn is_running(&self, pid: u32) -> bool {
         let processes = self.processes.lock().expect("进程管理锁被污染");
         processes
@@ -401,7 +396,6 @@ impl ProcessBuilder {
     }
 
     /// 添加多个命令行参数
-    /// command parameter
     pub fn args(mut self, args: impl IntoIterator<Item = impl Into<String>>) -> Self {
         for arg in args {
             self.config.args.push(arg.into());
@@ -504,7 +498,6 @@ impl ProcessGroupManager {
     }
 
     /// 向进程组添加进程
-    /// process process
     pub fn add_to_group(&mut self, pgid: u32, pid: u32) -> bool {
         let mut groups = self.groups.lock().expect("进程组锁被污染");
 

@@ -1,10 +1,7 @@
 //! Rust 190.0 新特性实现模块 —— c08_algorithms
-//!
-//! 本模块展示了 Rust 190.0 (2025-09-18) 的关键语言特性和工具链改进。
 //! This module demonstrates Rust 190.0 (2025-09-18) keylanguagefeaturestoolchainimprovements
 //!
 //! - `lld_default`: x86_64 默认 LLD 链接器
-//! - `cargo_multi_publish`: Cargo 多包发布稳定
 //!
 //! # 版本信息
 //! # Version Info
@@ -22,7 +19,6 @@
 /// # x86_64 LLD
 ///
 /// Rust 1.90.0 在 `x86_64-unknown-linux-gnu` 目标上默认使用 LLD 链接器，
-/// 显著减少链接时间（尤其是大型项目）。
 /// significant time （its project ）。
 ///
 /// ## 影响
@@ -32,8 +28,7 @@
 /// - 二进制兼容性：LLD 生成的二进制与 GNU ld 基本一致
 /// - ：LLD and GNU ld this
 /// - 可通过 `-C link-arg=-fuse-ld=gold` 等覆盖
-///
-/// ## 验证当前链接器
+/// - Can be overridden via `-C link-arg=-fuse-ld=gold` etc.
 /// ## when before
 /// ```bash
 /// rustc --print cfg | grep target_abi
@@ -43,7 +38,6 @@
 /// ```
 ///
 /// ## 对 Cargo.toml 的影响
-/// 无需修改配置，工具链自动处理。
 /// ，toolchain 。
 /// 若需显式指定链接器，可在 `.cargo/config.toml` 中设置：
 /// ，in `.cargo/config.toml` in ：
@@ -67,8 +61,7 @@ fn test_lld_default_info() {
 // ============================================================================
 
 /// # Cargo 多包发布（Multi-Package Publishing）
-///
-/// Rust 1.90.0 稳定了 `cargo publish` 的多包发布支持，
+/// # Cargo Multi-Package Publishing
 /// Rust 1.90.0 `cargo publish` ，
 /// 允许一次性发布 workspace 中的多个 crate。
 /// workspace in crate。
@@ -86,7 +79,6 @@ fn test_lld_default_info() {
 /// ```
 ///
 /// ## 对 Workspace 的影响
-/// - 简化 CI/CD 发布流程
 /// - CI/CD flow
 /// - 确保依赖版本一致性
 /// - this consistency
@@ -96,7 +88,6 @@ fn test_lld_default_info() {
 /// ## 验证发布顺序
 /// ## order
 /// Cargo 会自动计算依赖拓扑，按正确顺序发布。
-/// Cargo ，order 。
 pub fn publish_order_example() -> Vec<&'static str> {
     // 模拟 workspace 发布顺序
     vec!["common", "c01_ownership", "c02_type_system", "c10_networks"]

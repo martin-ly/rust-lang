@@ -2,7 +2,6 @@
 //! async tool library
 //!
 //! 本模块提供了生产环境中常用的高级异步工具和实用程序：
-//! This module provides advancedasync
 //! - 异步任务管理器
 //! - asynctask manager
 //! - 智能重试机制

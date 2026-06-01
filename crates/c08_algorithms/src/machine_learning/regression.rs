@@ -2,7 +2,6 @@
 //! algorithm implementation
 //!
 //! 本模块提供了回归算法的实现，包括线性回归等
-//! This module provides algorithmimplementationincluding
 use super::*;
 
 /// 线性回归模型
@@ -21,7 +20,6 @@ pub struct LinearRegression {
 
 impl LinearRegression {
     /// 创建新的线性回归模型
-    /// line
     pub fn new() -> Self {
         Self {
             coefficients: None,

@@ -3,8 +3,6 @@
 #![allow(clippy::incompatible_msrv)]
 
 /// # Rust 1.98 Nightly 算法前瞻
-///
-/// 本模块展示 nightly 1.98 中 `gen { yield ... }` 块在算法场景的应用：
 /// This module demonstrates nightly 1.98 `gen { yield ... }` algorithmapplication
 /// - 惰性序列生成（斐波那契、素数筛）
 /// - sequence （、）
@@ -18,10 +16,8 @@ pub struct Rust198AlgorithmFeatures;
 
 impl Rust198AlgorithmFeatures {
     /// 使用 gen 块生成惰性斐波那契序列
-    /// gen sequence
     ///
     /// 对比 `std::iter::from_fn`，`gen` 块语法更直观，无需显式闭包包装。
-    /// to `std::iter::from_fn`，`gen` ，。
     pub fn fibonacci() -> impl Iterator<Item = u64> {
         gen {
             let (mut a, mut b) = (0, 1);
@@ -33,7 +29,6 @@ impl Rust198AlgorithmFeatures {
     }
 
     /// 使用 gen 块实现埃拉托斯特尼筛法（惰性素数序列）
-    /// gen （sequence ）
     ///
     /// 每次 `yield` 产生一个素数，然后筛去其倍数。算法惰性执行，
     /// `yield` ，then its 。algorithm ，

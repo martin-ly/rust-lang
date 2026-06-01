@@ -1,6 +1,4 @@
 //! 异步递归深度分析 - Async Recursion Deep Analysis
-//!
-//! # 概述 (Overview)
 //! # Overview
 //! this module analyze Rust in async ，：
 //! - 异步递归与同步递归的等价关系
@@ -15,8 +13,7 @@
 //! - memory model and stack
 //!
 //! # 理论基础 (Theoretical Foundations)
-//!
-//! ## 1. 递归的形式化定义
+//! # Theoretical Foundations
 //! ## 1. definition
 //!
 //! ### 1.1 同步递归
@@ -57,8 +54,6 @@
 //! ## 2. async challenge
 //!
 //! ### 2.1 大小问题 (Sized Issue)
-//!
-//! ```text
 //! 问题: 异步函数返回 impl Future，其大小在编译时未知
 //! problem : async function impl Future，its in compile-time
 //!
@@ -70,7 +65,6 @@
 //! 原因: Future 包含捕获的状态，递归调用导致无限大小
 //! cause : Future state ，
 //! sizeof(F) = sizeof(State) + sizeof(F)  // 无法求解
-//! ```
 //!
 //! ### 2.2 解决方案: Box 堆分配
 //! ### 2.2 solution : Box heap
@@ -92,10 +86,7 @@
 //! ## 3. and etc.
 //!
 //! ### 3.1 尾递归 (Tail Recursion)
-//!
-//! ```text
 //! 尾递归定义: f 是尾递归的，如果递归调用是函数的最后一个操作
-//! : f functionback operation
 //!
 //! 尾递归形式:
 //! :
@@ -113,13 +104,11 @@
 //!     acc
 //! }
 //! ```
-//!
+//! 
 //! ### 3.2 一般递归到迭代的转换
 //! ### 3.2 to conversion
-//!
 //! ```text
 //! 使用显式栈模拟递归:
-//! stack :
 //!
 //! 递归版本:
 //! this :
@@ -137,15 +126,13 @@
 //!     }
 //! }
 //! ```
-//!
+//! 
 //! ## 4. 异步递归的内存模型
 //! ## 4. async memory model
-//!
 //! ```text
 //! 同步递归: 使用系统栈
 //! synchronous: usesystem stack
 //! - 每次调用占用栈帧
-//! - stack
 //! - 深度受限于栈大小 (通常 2-8 MB)
 //! - stack ( 2-8 MB)
 //!
@@ -156,7 +143,6 @@
 //! - 深度受限于堆大小 (通常远大于栈)
 //! - heap (stack )
 //! - 可以处理更深的递归
-//! - can
 //! ```
 use std::future::Future;
 use std::pin::Pin;
@@ -167,12 +153,10 @@ use tokio::time::sleep;
 /// # example 1: this async
 ///
 /// 展示如何正确实现异步递归函数
-/// demonstratepositiveimplementationasync function
 pub mod basic_async_recursion {
     use super::*;
 
     /// 同步递归: 计算阶乘
-    /// synchronous :
     ///
     /// ## 形式化定义
     /// ## Formal Definition
@@ -196,7 +180,6 @@ pub mod basic_async_recursion {
     /// ## main point
     /// ```text
     /// 1. 返回类型: Pin<Box<dyn Future<Output = u64>>>
-    /// 2. 使用 Box::pin 包装 async block
     /// 3. async move 捕获所有权
     /// 3. async move ownership
     /// ```
@@ -216,7 +199,6 @@ pub mod basic_async_recursion {
     /// async this （）
     ///
     /// ## 使用尾递归避免装箱开销
-    /// ## overhead
     pub async fn factorial_async_tail_wrapper(n: u64) -> u64 {
         factorial_async_tail_impl(n, 1).await
     }
@@ -258,12 +240,10 @@ pub mod basic_async_recursion {
 /// # 2: optimization
 ///
 /// 展示尾递归及其在异步中的应用
-/// demonstrateasync application
 pub mod tail_recursion {
     use super::*;
 
     /// 非尾递归版本: 阶乘
-    /// this :
     ///
     /// ## 问题
     /// ## problem
@@ -372,7 +352,6 @@ pub mod tail_recursion {
     }
 
     /// 验证所有版本的等价性
-    /// Verify hasversion
     pub async fn verify_all_versions() {
         println!("\n=== 尾递归优化示例 ===");
 
@@ -389,7 +368,8 @@ pub mod tail_recursion {
             assert_eq!(async_tail, async_iter);
 
             println!(
-                "✓ n={:2} | 非尾递归={:10} | 尾递归={:10} | 迭代={:10} | 异步尾递归={:10} | 异步迭代={:10}",
+                "✓ n={:2} | 非尾递归={:10} | 尾递归={:10} | 迭代={:10} | 异步尾递归={:10} | \
+                 异步迭代={:10}",
                 n, non_tail, tail, iter, async_tail, async_iter
             );
         }
@@ -402,7 +382,6 @@ pub mod tail_recursion {
 /// # 3: tree traversal
 ///
 /// 展示更复杂的递归结构
-/// complex structure
 pub mod tree_traversal {
     use super::*;
 
@@ -661,20 +640,16 @@ pub mod deep_recursion {
 }
 
 /// # 示例 5: 互递归 (Mutual Recursion)
-///
-/// 展示相互调用的递归函数
 /// demonstrate function
 pub mod mutual_recursion {
     use super::*;
 
     /// 判断偶数（通过互递归）
-    /// （）
     pub fn is_even_sync(n: u32) -> bool {
         if n == 0 { true } else { is_odd_sync(n - 1) }
     }
 
     /// 判断奇数（通过互递归）
-    /// （）
     pub fn is_odd_sync(n: u32) -> bool {
         if n == 0 { false } else { is_even_sync(n - 1) }
     }
@@ -760,31 +735,31 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_basic_recursion() {
         basic_async_recursion::verify_equivalence().await;
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_tail_recursion() {
         tail_recursion::verify_all_versions().await;
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_tree_traversal() {
         tree_traversal::verify_equivalence().await;
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_deep_recursion() {
         deep_recursion::test_different_depths().await;
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_mutual_recursion() {
         mutual_recursion::verify_mutual_recursion().await;
     }

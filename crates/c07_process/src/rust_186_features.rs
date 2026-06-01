@@ -25,8 +25,6 @@
 /// Rust 1.86.0 稳定了 trait 对象的向上转换（upcasting）：
 /// Rust 1.86.0 trait to on conversion （upcasting）：
 /// 可以将 `dyn SubTrait` 转换为 `dyn SuperTrait`。
-///
-/// ## 使用场景
 /// ## Usage Scenarios
 /// - 抽象层解耦：在运行时根据具体类型降级到更通用的 trait 对象
 /// - Abstraction decoupling: downgrade to more general trait objects at runtime based on specific types
@@ -78,7 +76,6 @@ mod tests {
 /// ## 之前限制
 /// ## 's before
 /// 1.86 之前，``#[target_feature]`` 只能用于 `unsafe fn`，
-/// 因为调用未启用对应特性的函数是 UB。
 /// because to feature function UB。
 ///
 /// ## 现在

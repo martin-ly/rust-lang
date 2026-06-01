@@ -36,7 +36,6 @@
 //! ## Constraints
 //!
 //! - **仅支持 Linux**: 依赖 io_uring (Linux 5.1+)
-//! - **学习曲线**: thread-per-core 模型需要特殊的编程思维
 //! - **learn line **: thread-per-core
 //! - **生态系统**: 相对较小的生态系统
 //! - **system**: small system
@@ -122,7 +121,6 @@ impl GlommioExample {
     }
 
     /// 运行多核并行示例
-    /// Run multipleparallel
     pub fn run_multicore_example() {
         #[cfg(target_os = "linux")]
         {
@@ -170,7 +168,6 @@ pub struct GlommioPerformance;
 
 impl GlommioPerformance {
     /// 获取性能特性描述
-    /// Get performancefeatures
     pub fn get_characteristics() -> Vec<(&'static str, &'static str)> {
         vec![
             ("架构模型", "Thread-per-core (每核心一线程)"),
@@ -207,7 +204,6 @@ pub struct GlommioBestPractices;
 
 impl GlommioBestPractices {
     /// 获取最佳实践建议
-    /// Get bestpractice
     pub fn get_practices() -> Vec<(&'static str, &'static str)> {
         vec![
             ("任务分配", "将任务固定到特定核心，避免跨核心通信"),

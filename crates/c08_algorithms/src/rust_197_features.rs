@@ -40,7 +40,6 @@ impl Rust197AlgorithmFeatures {
     }
 
     /// 使用 `u32::isqrt` 计算整数平方根
-    /// `u32::isqrt`
     ///
     /// 返回 floor(sqrt(n))，即不大于 sqrt(n) 的最大整数。
     /// floor(sqrt(n))， sqrt(n) maximum 。
@@ -49,7 +48,6 @@ impl Rust197AlgorithmFeatures {
     }
 
     /// 使用 `i32::checked_isqrt` 安全计算有符号整数平方根
-    /// `i32::checked_isqrt` symbol
     ///
     /// 对负数返回 `None`，避免 panic。
     /// to `None`， panic。
@@ -58,7 +56,6 @@ impl Rust197AlgorithmFeatures {
     }
 
     /// 使用 `NonZeroU32::isqrt` 计算非零整数的平方根
-    /// `NonZeroU32::isqrt`
     pub fn nonzero_sqrt(n: NonZeroU32) -> NonZeroU32 {
         n.isqrt()
     }

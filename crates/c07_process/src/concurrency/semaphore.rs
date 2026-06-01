@@ -7,7 +7,6 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 /// 进程安全的信号量
-/// process semaphore
 #[allow(dead_code)]
 pub struct ProcessSemaphore {
     name: String,
@@ -60,7 +59,6 @@ impl ProcessSemaphore {
     }
 
     /// 获取许可（阻塞）
-    /// （）
     pub fn acquire(&self) -> SyncResult<SemaphorePermit> {
         let start = Instant::now();
 
@@ -95,7 +93,6 @@ impl ProcessSemaphore {
     }
 
     /// 获取当前可用许可数量
-    /// Get currentcount
     pub fn available_permits(&self) -> usize {
         *self.permits.lock().expect("信号量许可锁被污染")
     }

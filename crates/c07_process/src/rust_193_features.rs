@@ -23,7 +23,6 @@ pub fn vec_raw_meta<T>(v: Vec<T>) -> (usize, usize, usize) {
 }
 
 /// 使用 `slice::as_array` 解析固定长度头部
-/// `slice::as_array`
 pub fn parse_fixed_header(slice: &[u8]) -> Option<&[u8; 4]> {
     slice.as_array::<4>()
 }

@@ -1,7 +1,5 @@
 // [来源: Rust Reference / tokio docs]
 //! Actor 与 Reactor 模式深度分析 - Actor and Reactor Patterns Deep Analysis
-//!
-//! # 概述 (Overview)
 //! # Overview
 //! this module analyze async in core concurrency ：
 //! - Actor 模式: 基于消息传递的并发模型
@@ -26,18 +24,14 @@
 //! - State: 私有状态 σ ∈ Σ
 //! - State: state σ ∈ Σ
 //! - Mailbox: 消息队列 M = [m₁, m₂, ..., mₙ]
-//! - Behavior: 行为函数 β: Σ × Message → (Σ, [Action])
 //!
 //! Action 可以是:
 //! Action can :
 //! 1. Send(actor, message): 发送消息
-//! 2. Create(actor_spec): 创建新 Actor
 //! 3. Become(new_behavior): 改变行为
-//! ```
 //!
 //! ### 1.2 Actor 系统的语义规则
 //! ### 1.2 Actor system rule
-//!
 //! ```text
 //! 配置: C = (A, M)
 //! : C = (A, M)
@@ -56,45 +50,36 @@
 //!   - M := M ∪ {messages from actions}
 //!   - A := A ∪ {new actors from actions}
 //! ```
-//!
+//! 
 //! ### 1.3 Actor 模型的特性
 //! ### 1.3 Actor feature
-//!
 //! ```text
 //! 1. 封装性 (Encapsulation):
 //!    ∀ a ∈ Actors: state(a) is private
 //!
 //! 2. 位置透明 (Location Transparency):
-//!    send(addr, msg) 不依赖于 actor 的物理位置
 //!    send(addr, msg) actor position
 //!
 //! 3. 异步通信 (Asynchronous Communication):
-//!    send(addr, msg) 立即返回，不等待处理
 //! send(addr, msg) processing
 //!
 //! 4. 无共享状态 (No Shared State):
-//!    actors 之间只通过消息通信
 //!    actors 's
 //! ```
-//!
+//! 
 //! ## 2. Reactor 模式理论基础
 //! ## 2. Reactor theory foundation
 //!
 //! ### 2.1 基本组成
 //! ### 2.1 this
-//!
 //! ```text
 //! Reactor = (EventDemultiplexer, EventHandlers, EventLoop)
 //!
 //! 其中:
 //! Where:
 //! - EventDemultiplexer: 事件多路分解器（如 epoll, kqueue）
-//! - EventHandlers: 事件处理器集合 {h₁, h₂, ..., hₙ}
 //! - EventLoop: 事件循环
-//!
-//! 事件: e = (source, event_type, data)
 //! 处理器: handler: Event → Action
-//! ```
 //!
 //! ### 2.2 Reactor 的执行模型
 //! ### 2.2 Reactor
@@ -130,17 +115,14 @@
 //! 3. （synchronous ）
 //!
 //! Proactor 模式（异步 I/O）:
-//! 1. 发起异步 I/O 操作
 //! 1. async I/O operation
 //! 2. 等待完成通知
 //! 2. etc.
 //! 3. 处理完成的操作（数据已准备好）
-//! 3. （）
 //!
 //! Rust 的 tokio 结合了两者:
 //! Rust tokio :
 //! - 底层使用 epoll/kqueue (Reactor)
-//! - 上层提供异步 API (Proactor 风格)
 //! - on async API (Proactor )
 //! ```
 //!
@@ -149,7 +131,6 @@
 //! ```text
 //! ┌──────────────┬─────────────────────────┬──────────────────────────┐
 //! │ 特性         │ Actor                   │ Reactor                  │
-//! ├──────────────┼─────────────────────────┼──────────────────────────┤
 //! │ 抽象层次     │ 高层并发抽象            │ 低层 I/O 抽象            │
 //! │ hierarchy │ concurrency │ I/O │
 //! │ 通信方式     │ 消息传递                │ 事件通知                 │
@@ -159,7 +140,6 @@
 //! │ 典型应用     │ 业务逻辑、有状态服务    │ 网络服务器、I/O 密集型   │
 //! │ application │ 、state │ network 、I/O │
 //! │ Rust 实现    │ actix, xtra             │ tokio, smol [历史: async-std 已停止维护] │
-//! └──────────────┴─────────────────────────┴──────────────────────────┘
 //! ```
 use std::sync::Arc;
 use std::time::Duration;
@@ -170,7 +150,6 @@ use tokio::time::sleep;
 /// # 1: Actor system
 ///
 /// 从零实现一个简单的 Actor 系统，理解其核心机制
-/// zeroimplementationsingle Actor system mechanism
 pub mod simple_actor_system {
     use super::*;
     use std::collections::HashMap;
@@ -182,7 +161,6 @@ pub mod simple_actor_system {
     pub struct ActorId(u64);
 
     /// Actor 消息发送器类型别名
-    /// Actor type
     type ActorMessageSender = mpsc::UnboundedSender<Box<dyn std::any::Any + Send>>;
 
     /// Actor 注册表类型别名
@@ -240,7 +218,6 @@ pub mod simple_actor_system {
     }
 
     /// Actor 地址（用于发送消息）
-    /// Actor （）
     pub struct Addr<A: Actor> {
         id: ActorId,
         tx: ActorMessageSender,
@@ -259,7 +236,6 @@ pub mod simple_actor_system {
 
     impl<A: Actor> Addr<A> {
         /// 发送消息（不等待响应）
-        /// （etc. ）
         pub fn do_send<M>(&self, msg: M)
         where
             M: Message,
@@ -270,7 +246,6 @@ pub mod simple_actor_system {
         }
 
         /// 发送消息并等待响应
-        /// and etc.
         pub async fn send<M>(&self, msg: M) -> Result<M::Result, &'static str>
         where
             M: Message,
@@ -513,7 +488,6 @@ pub mod actix_analysis {
     /// - 消息类型通过 #[rtype] 指定返回类型
     /// - type #[rtype] type
     /// - 编译期检查消息类型
-    /// - type
     /// - 运行时保证类型安全
     /// - runtimetype safety
     /// ```
@@ -522,11 +496,9 @@ pub mod actix_analysis {
     /// ## 2. async processing
     /// ```text
     /// Actor::handle() 可以返回:
-    /// - 同步值: i32
     /// - synchronous : i32
     /// - Future: impl Future<Output = i32>
     /// - MessageResponse: 自定义响应
-    /// ```
     ///
     /// ## 3. Actor 生命周期
     /// ## 3. Actor lifetime
@@ -534,9 +506,7 @@ pub mod actix_analysis {
     /// 生命周期钩子:
     /// lifetime :
     /// - started(): Actor 启动时
-    /// - stopping(): Actor 即将停止
     /// - stopped(): Actor 已停止
-    /// ```
     pub async fn analyze_actix_features() {
         println!("\n=== Actix 框架特性分析 ===");
 
@@ -599,7 +569,6 @@ pub mod reactor_pattern {
     }
 
     /// 事件处理器注册表类型别名
-    /// type
     type EventHandlerRegistry = Arc<Mutex<HashMap<(u64, EventType), Arc<dyn EventHandler>>>>;
 
     /// 简单的 Reactor 实现
@@ -638,7 +607,6 @@ pub mod reactor_pattern {
         }
 
         /// 提交事件（模拟）
-        /// （）
         pub fn submit_event(&self, event: Event) {
             let mut queue = self
                 .event_queue
@@ -803,8 +771,6 @@ pub mod tokio_reactor_analysis {
     use super::*;
 
     /// Tokio Reactor 的层次结构
-    ///
-    /// ```text
     /// ┌─────────────────────────────────────────┐
     /// │     Runtime (多线程调度器)              │
     /// │ Runtime (thread scheduling ) │
@@ -824,7 +790,7 @@ pub mod tokio_reactor_analysis {
     /// │  └──────────────────────────────────┘  │
     /// └─────────────────────────────────────────┘
     /// ```
-    ///
+    /// 
     /// ## 关键组件
     /// ## key component
     ///
@@ -901,8 +867,6 @@ pub mod tokio_reactor_analysis {
 }
 
 /// # 示例 5: Actor vs Reactor 对比
-///
-/// 直接对比两种模式的实现
 /// pattern implementation
 pub mod actor_vs_reactor {
 

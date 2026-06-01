@@ -7,8 +7,6 @@
 //! - `c_variadic`: C 风格变参函数声明稳定
 //! - `c_variadic`: C function
 //! - `aarch64_windows_tier1`: `aarch64-pc-windows-msvc` 晋升 Tier 1
-//!
-//! # 版本信息
 //! # Version Info
 //! - Rust 版本: 191.0
 //! - Rust this : 191.0
@@ -21,8 +19,6 @@
 // ============================================================================
 
 /// # C 风格变参函数（C Variadic Functions）
-///
-/// Rust 1.91.0 稳定了 C 风格变参函数的声明，允许 Rust 函数接受可变数量的参数，
 /// Rust 1.91.0 C function ， Rust function quantity parameter ，
 /// 使用 C ABI 与 C 的 `...` 语法兼容。
 /// C ABI and C `...` 。
@@ -82,12 +78,9 @@ fn test_c_variadic_placeholder() {
 // ============================================================================
 
 /// # `aarch64-pc-windows-msvc` 晋升 Tier 1
-///
-/// Rust 1.91.0 将 `aarch64-pc-windows-msvc`（Windows on ARM64）
 /// 提升为 **Tier 1 支持平台**，意味着：
 /// as **Tier 1 platform **，：
 /// - 所有稳定版都提供预编译二进制
-/// - all
 /// - 通过完整 CI 测试
 /// - complete CI test
 /// - 保证与 x86_64 Windows 相同的稳定性
@@ -96,11 +89,8 @@ fn test_c_variadic_placeholder() {
 /// ## 影响
 /// ## impact
 /// - Windows ARM 设备（如 Surface Pro X、Snapdragon X Elite PC）
-///   可直接使用官方 Rust 工具链，无需交叉编译
 ///   Rust toolchain ，
 /// - `cargo build --target aarch64-pc-windows-msvc` 获得一级支持
-///
-/// ## 交叉编译对比
 /// ## to
 /// | 平台 | Tier | 预编译二进制 | 测试覆盖 |
 /// | platform | Tier | | |

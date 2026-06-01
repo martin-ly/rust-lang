@@ -1,29 +1,18 @@
 //! 形式化验证与证明 - Formal Verification and Proofs
-//!
-//! # 概述 (Overview)
 //! # Overview
 //! This module provides async technique ，：
 //! - 不变式证明 (Invariant Proofs)
-//! - 活性证明 (Liveness Proofs)
 //! - 安全性证明 (Safety Proofs)
-//! - 终止性证明 (Termination Proofs)
 //! - 死锁检测 (Deadlock Detection)
-//!
-//! # 理论基础
 //! # theory foundation
 //!
 //! ## 1. Hoare 逻辑 (Hoare Logic)
-//!
-//! ```text
 //! {P} C {Q}
 //!
 //! 其中:
 //! Where:
 //! - P: 前置条件 (Precondition)
-//! - C: 命令/程序 (Command/Program)
 //! - Q: 后置条件 (Postcondition)
-//!
-//! 推理规则:
 //! reason rule :
 //!
 //! 1. 空命令:
@@ -57,11 +46,8 @@
 //!    其中 I 是循环不变式
 //!    its in I circulation
 //! ```
-//!
+//! 
 //! ## 2. 时序逻辑 (Temporal Logic)
-//!
-//! ### 线性时序逻辑 (LTL - Linear Temporal Logic)
-//!
 //! ```text
 //! 算子:
 //! :
@@ -81,29 +67,24 @@
 //! - 活性 (Liveness): □◇Good (无限次到达好状态)
 //! - (Liveness): □◇Good (to state )
 //! ```
-//!
+//! 
 //! ## 3. 并发验证
 //! ## 3. concurrent verification
-//!
 //! ```text
 //! 并发程序 P || Q 的验证:
 //! concurrency program P || Q :
 //!
 //! 1. 不干扰原则 (Non-interference):
-//!    如果 {P} C {Q}，则 C 不修改 P 和 Q 中的共享变量
 //!    if {P} C {Q}， C P and Q in variable
 //!
 //! 2. 资源不变式 (Resource Invariant):
-//!    对于共享资源 R，定义不变式 I(R)
 //!    to R，definition I(R)
 //!    每个访问 R 的线程必须维护 I(R)
 //!    R thread must I(R)
 //!
 //! 3. 所有权 (Ownership):
-//!    每个资源有唯一所有者
 //!    all
 //!    访问资源需要获取所有权
-//!    ownership
 //! ```
 use std::sync::Arc;
 use std::time::Duration;
@@ -114,12 +95,10 @@ use tokio::time::sleep;
 /// # 1: verification
 ///
 /// 验证程序在执行过程中保持特定不变式
-/// Verify execution
 pub mod invariant_verification {
     use super::*;
 
     /// 银行账户 - 演示不变式维护
-    /// - demonstration
     ///
     /// ## 不变式
     /// ##
@@ -133,8 +112,6 @@ pub mod invariant_verification {
 
     impl BankAccount {
         /// 创建账户
-        ///
-        /// ## 前置条件
         /// ## before condition
         /// ```text
         /// P: initial_balance ≥ 0
@@ -153,8 +130,6 @@ pub mod invariant_verification {
         }
 
         /// 存款操作
-        ///
-        /// ## Hoare 三元组
         /// ## Hoare
         /// ```text
         /// {balance = old_balance ∧ amount > 0}
@@ -182,8 +157,6 @@ pub mod invariant_verification {
         }
 
         /// 取款操作
-        ///
-        /// ## Hoare 三元组
         /// ## Hoare
         /// ```text
         /// {balance = old_balance ∧ amount > 0 ∧ amount ≤ old_balance}
@@ -226,7 +199,6 @@ pub mod invariant_verification {
     }
 
     /// 演示并发转账的不变式维护
-    /// demonstration concurrency
     ///
     /// ## 全局不变式
     /// ## global
@@ -287,15 +259,12 @@ pub mod invariant_verification {
 /// # 2: termination proof
 ///
 /// 使用度量函数证明程序终止
-/// function program
 pub mod termination_proofs {
     use super::*;
 
     /// 证明异步循环的终止性
-    /// async circulation
     ///
     /// ## 度量函数 (Ranking Function)
-    /// ```text
     /// φ(n) = n
     ///
     /// 性质:
@@ -303,7 +272,6 @@ pub mod termination_proofs {
     /// 1. φ(n) ≥ 0  (非负)
     /// 1. φ(n) ≥ 0 ()
     /// 2. 每次迭代 φ 严格递减
-    /// 2. φ
     /// 3. φ = 0 时循环终止
     /// 3. φ = 0 circulation
     /// ```
@@ -327,7 +295,6 @@ pub mod termination_proofs {
     }
 
     /// 更复杂的终止性证明：二分查找
-    /// complex ：
     ///
     /// ## 度量函数
     /// ## function
@@ -518,19 +485,19 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_invariant() {
         invariant_verification::demo_concurrent_transfers().await;
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_termination() {
         termination_proofs::countdown_with_proof(3).await;
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_deadlock() {
         deadlock_detection::demo_deadlock_scenario().await;
     }

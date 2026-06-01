@@ -1,6 +1,4 @@
 //! Rust 188.0 新特性实现模块 —— c09_design_pattern
-//!
-//! 本模块展示了 Rust 188.0 (2025-06-26) 的关键语言特性和工具链改进。
 //! This module demonstrates key language features and toolchain improvements of Rust 188.0 (2025-06-26).
 //!
 //! - `let_chains`: Let Chains 在 2024 Edition 中稳定

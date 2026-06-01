@@ -41,15 +41,12 @@ impl HigherOrderFunctions {
 }
 
 /// 迭代器适配器链模式
-/// iterator pattern
 ///
 /// 通过链式调用构建惰性计算管道。
-/// pipe 。
 pub struct IteratorPipeline;
 
 impl IteratorPipeline {
     /// 数据处理管道示例
-    /// datahandling example
     pub fn process_numbers(numbers: &[i32]) -> Vec<i32> {
         numbers
             .iter()
@@ -79,7 +76,6 @@ impl IteratorPipeline {
 /// Monoid concept
 ///
 /// Monoid 是带有结合律二元运算和单位元的代数结构。
-/// Monoid and structure 。
 /// Rust 中通过 trait 表达。
 /// Rust in trait express 。
 pub trait Monoid {
@@ -109,7 +105,6 @@ impl Monoid for String {
 }
 
 /// 使用 Monoid 进行泛化折叠
-/// Monoid
 pub fn fold_monoid<T: Monoid>(items: impl Iterator<Item = T>) -> T {
     items.fold(T::identity(), |acc, item| acc.combine(item))
 }
@@ -136,7 +131,6 @@ impl Combinators {
     }
 
     /// 早期返回模式（使用 ? 运算符）
-    /// （? ）
     pub fn validate_and_compute(a: Option<i32>, b: Option<i32>) -> Option<i32> {
         let x = a?;
         let y = b?;

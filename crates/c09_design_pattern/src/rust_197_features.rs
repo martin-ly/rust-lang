@@ -15,7 +15,6 @@ use std::str::FromStr;
 /// - `FromStr` for `CString` — 从字符串解析 C 字符串
 /// - `FromStr` for `CString` string C string
 /// - `LowerExp` / `UpperExp` for `NonZero` — 科学计数法格式化
-/// - `Option::as_slice` / `as_mut_slice` — Null Object 模式
 /// - `Option::as_slice` / `as_mut_slice` Null Object pattern
 pub struct Rust197DesignPatternFeatures;
 
@@ -30,7 +29,6 @@ impl Rust197DesignPatternFeatures {
     }
 
     /// 使用 `NonZeroU32` 的科学计数法格式化
-    /// `NonZeroU32`
     ///
     /// Rust 1.97 为 `NonZero` 类型实现了 `LowerExp` 和 `UpperExp`。
     pub fn format_nonzero_scientific(n: NonZeroU32) -> (String, String) {

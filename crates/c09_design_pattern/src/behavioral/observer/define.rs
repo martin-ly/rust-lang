@@ -93,7 +93,6 @@ pub trait ObserverRef<T: ?Sized> {
 //
 
 /// 借用视图主题（示例固定观察者/元素类型），通知时仅借用数据
-/// borrowinggraph/typeonlyborrowing data
 pub struct BorrowingSubjectString {
     observers: Vec<BorrowingObserver>,
 }

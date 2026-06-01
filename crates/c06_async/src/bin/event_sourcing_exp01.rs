@@ -133,7 +133,6 @@ impl EventStore {
     }
 
     /// 获取聚合的所有事件
-    /// Get has
     async fn get_events(&self, aggregate_id: &str) -> Vec<DomainEvent> {
         let events = self.events.read().await;
         events.get(aggregate_id).cloned().unwrap_or_default()
@@ -228,7 +227,6 @@ impl CommandHandler {
 }
 
 /// 查询处理器 (CQRS 的查询端)
-/// (CQRS )
 struct QueryHandler {
     event_store: Arc<EventStore>,
     read_models: Arc<RwLock<HashMap<String, User>>>,
@@ -327,7 +325,6 @@ impl EventSourcingSystem {
     }
 
     /// 运行事件溯源示例
-    /// run example
     async fn run_example(&self) -> Result<()> {
         println!("🚀 事件溯源示例启动");
         println!("{}", "=".repeat(50));

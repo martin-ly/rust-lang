@@ -13,15 +13,12 @@ use std::pin::Pin;
 /// Rust 2025 async example
 ///
 /// 异步闭包允许我们创建更简洁的异步算法接口
-/// asynccreateasyncalgorithm interface
 pub struct AsyncClosureAlgorithms;
 
 impl AsyncClosureAlgorithms {
     /// 使用异步闭包的并行映射算法
-    /// useasyncparallelmap algorithm
     ///
     /// 这个函数展示了如何使用异步闭包来创建更灵活的算法接口
-    /// functiondemonstrateuseasynccreateflexiblealgorithm interface
     pub async fn parallel_map_async<F, T, R>(
         data: Vec<T>,
         mapper: F,
@@ -65,7 +62,6 @@ impl AsyncClosureAlgorithms {
     }
 
     /// 使用异步闭包的流式处理算法
-    /// useasyncflowhandling algorithm
     ///
     /// Rust 1.91 优化：异步迭代器性能提升约 15-20%
     /// Rust 1.91 Optimization: Async iterator performance improved by ~15-20%
@@ -94,12 +90,10 @@ impl AsyncClosureAlgorithms {
 /// Rust 2025 generator example
 ///
 /// 生成器允许我们创建更高效的迭代器
-/// generatorcreateefficient iterator
 pub struct GeneratorAlgorithms;
 
 impl GeneratorAlgorithms {
     /// 使用生成器的斐波那契数列生成器
-    /// usegenerator generator
     /// function efficient sequence
     pub fn fibonacci_generator() -> impl Iterator<Item = u64> {
         let mut a = 0u64;
@@ -114,7 +108,6 @@ impl GeneratorAlgorithms {
     }
 
     /// 使用生成器的素数生成器
-    /// usegenerator generator
     /// function efficient
     pub fn prime_generator() -> impl Iterator<Item = u64> {
         let mut primes = Vec::new();
@@ -134,10 +127,8 @@ impl GeneratorAlgorithms {
     }
 
     /// 使用生成器的组合生成器
-    /// usegenerator generator
     ///
     /// 这个函数展示了如何使用生成器来创建组合生成器
-    /// functiondemonstrateusegeneratorcreate generator
     pub fn combinations_generator<T: Clone>(
         items: Vec<T>,
         k: usize,
@@ -185,7 +176,6 @@ impl ConstContextAlgorithms {
     /// compile-time
     ///
     /// 这个函数展示了如何在编译时计算阶乘
-    /// function in compile-time
     pub const fn factorial(n: u32) -> u32 {
         match n {
             0 | 1 => 1,
@@ -194,10 +184,8 @@ impl ConstContextAlgorithms {
     }
 
     /// 编译时计算斐波那契数
-    /// compile-time
     ///
     /// 这个函数展示了如何在编译时计算斐波那契数
-    /// function in compile-time
     pub const fn fibonacci(n: u32) -> u32 {
         match n {
             0 => 0,
@@ -207,10 +195,8 @@ impl ConstContextAlgorithms {
     }
 
     /// 编译时计算最大公约数
-    /// compile-time maximum
     ///
     /// 这个函数展示了如何在编译时计算最大公约数
-    /// function in compile-time maximum
     pub const fn gcd(mut a: u32, mut b: u32) -> u32 {
         while b != 0 {
             let temp = b;
@@ -221,10 +207,8 @@ impl ConstContextAlgorithms {
     }
 
     /// 编译时计算最小公倍数
-    /// compile-time minimum
     ///
     /// 这个函数展示了如何在编译时计算最小公倍数
-    /// function in compile-time minimum
     pub const fn lcm(a: u32, b: u32) -> u32 {
         a * b / Self::gcd(a, b)
     }
@@ -259,7 +243,6 @@ impl ConstContextAlgorithms {
 /// Rust 2025 update example
 ///
 /// 结构更新允许我们更灵活地处理数据结构
-/// structure data structure
 pub struct StructuralUpdateAlgorithms;
 
 impl StructuralUpdateAlgorithms {
@@ -267,7 +250,6 @@ impl StructuralUpdateAlgorithms {
     /// structure tree node
     ///
     /// 这个函数展示了如何使用结构更新来更新树节点
-    /// functiondemonstrateuseupdateupdatetree node
     pub fn update_tree_node<T>(
         mut node: TreeNode<T>,
         updates: impl FnOnce(&mut TreeNode<T>),
@@ -280,10 +262,8 @@ impl StructuralUpdateAlgorithms {
     }
 
     /// 使用结构更新的图节点更新
-    /// structure node
     ///
     /// 这个函数展示了如何使用结构更新来更新图节点
-    /// functiondemonstrateuseupdateupdategraph node
     pub fn update_graph_node<T>(
         mut node: GraphNode<T>,
         updates: impl FnOnce(&mut GraphNode<T>),
@@ -336,7 +316,6 @@ impl<T> GraphNode<T> {
 /// Rust 2025 type example
 ///
 /// 类型别名允许我们创建更清晰的类型定义
-/// type clear type definition
 pub type AlgorithmResult<T> = Result<T, Box<dyn std::error::Error + Send + Sync>>;
 pub type AsyncAlgorithmResult<T> = Pin<Box<dyn Future<Output = AlgorithmResult<T>> + Send>>;
 pub type AlgorithmIterator<T> = Box<dyn Iterator<Item = T> + Send>;
@@ -350,10 +329,8 @@ pub struct AsyncIteratorAlgorithms;
 
 impl AsyncIteratorAlgorithms {
     /// 异步迭代器实现的流式排序
-    /// asynciteratorimplementationflow sort
     ///
     /// Rust 1.91 优化：异步迭代器链式操作性能提升
-    /// Rust 1.91 optimizationasynciteratoroperationperformance improvement
     pub async fn stream_sort<T>(
         mut stream: impl futures::Stream<Item = T> + Unpin,
     ) -> Result<Vec<T>, Box<dyn std::error::Error + Send + Sync>>
@@ -372,7 +349,6 @@ impl AsyncIteratorAlgorithms {
     }
 
     /// 异步迭代器实现的流式去重
-    /// async stream
     ///
     /// Rust 1.91 优化：使用改进的异步过滤操作
     /// Rust 1.91 optimizationuseimprovementsasync operation
@@ -398,7 +374,6 @@ impl AsyncIteratorAlgorithms {
     }
 
     /// Rust 1.91 新增：使用改进的异步迭代器链式操作
-    /// Rust 1.91 newuseimprovementsasynciterator operation
     ///
     /// 性能提升约 15-20%
     /// performance 15-20%
@@ -432,10 +407,8 @@ pub struct PerformanceOptimizedAlgorithms;
 
 impl PerformanceOptimizedAlgorithms {
     /// 使用 SIMD 优化的向量加法
-    /// SIMD optimization
     ///
     /// 这个函数展示了如何使用 SIMD 指令来优化向量运算
-    /// function SIMD optimization
     pub fn simd_vector_add(
         a: &[f32],
         b: &[f32],

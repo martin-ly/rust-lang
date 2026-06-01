@@ -2,9 +2,7 @@
 //! Combined Pattern Engineering Cases
 //!
 //! 本模块展示了如何组合多个设计模式来解决复杂的工程问题。
-//! This module demonstrates multipledesignpatternproblems
 //! 这些案例展示了模式之间的协作和组合使用。
-//! 's and combination 。
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::{Arc, Mutex};
@@ -40,7 +38,6 @@ pub trait RoutingStrategy: Send + Sync {
 }
 
 /// 精确匹配路由策略
-/// strategy
 pub struct ExactMatchRouting {
     routes: HashMap<String, String>,
 }
@@ -68,7 +65,6 @@ impl RoutingStrategy for ExactMatchRouting {
 }
 
 /// 前缀匹配路由策略
-/// front strategy
 pub struct PrefixMatchRouting {
     prefixes: Vec<(String, String)>,
 }

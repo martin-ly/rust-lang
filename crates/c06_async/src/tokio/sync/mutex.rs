@@ -21,21 +21,15 @@
 //! ### Arc + Mutex pattern
 //! - `Arc`: reference counting ，task ownership
 //! - `Mutex`: 提供内部可变性，确保数据访问的安全性
-//! - `Mutex`: inside ，
 //! - 组合使用：`Arc<Mutex<T>>` 是异步编程中的经典模式
-//! - use`Arc<Mutex<T>>` asyncclassic pattern
 //!
 //! ## 使用场景
 //! ## Usage Scenarios
 //!
 //! 1. **共享计数器**: 多个任务同时修改同一个计数器
-//! 1. ****: task
 //! 2. **共享缓存**: 多个任务读写同一个缓存
-//! 2. ****: task
 //! 3. **共享状态**: 维护应用程序的全局状态
-//! 3. **sharedstatus**: applicationglobal status
 //! 4. **资源池**: 管理有限的资源（如数据库连接）
-//! 4. ****: （database ）
 //!
 //! ## 注意事项
 //! ## Notes
@@ -65,7 +59,6 @@ use tokio::sync::Mutex;
 /// demonstration async Mutex this
 ///
 /// 这个函数展示了如何使用 `tokio::sync::Mutex` 来保护共享数据。
-/// function `tokio::sync::Mutex` 。
 /// 多个异步任务同时访问和修改同一个计数器，展示异步锁的工作原理。
 /// async task and ，async lock 。
 ///
@@ -79,7 +72,6 @@ use tokio::sync::Mutex;
 /// - `Arc` 提供多所有权，`Mutex` 提供互斥访问
 /// - `Arc` ownership ，`Mutex`
 /// - 确保同一时间只有一个任务可以修改数据
-/// - timehastaskcan data
 ///
 /// ## 异步特性
 /// ## Async Features
@@ -125,7 +117,6 @@ use tokio::sync::Mutex;
 /// # 性能特点
 /// # performance point
 /// - 异步锁不会阻塞线程，提高并发性能
-/// - asyncthreadhighconcurrent performance
 /// - 适合高并发场景下的数据保护
 /// - concurrency scenario under
 /// - 相比同步锁，可以处理更多的并发任务

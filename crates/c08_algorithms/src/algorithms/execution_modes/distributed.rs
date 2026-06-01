@@ -2,7 +2,6 @@
 //! # distributedalgorithmexecution pattern
 //!
 //! 本模块实现分布式算法执行，支持跨节点的分布式计算。
-//! This module implements distributedalgorithmexecutionsupportnodedistributedcompute
 //! 适用于大规模数据处理和需要水平扩展的场景。
 //! scale and level scenario 。
 use super::{DistributedAlgorithm, ExecutionResult};
@@ -66,7 +65,6 @@ pub struct DistributedTaskResult<R> {
 }
 
 /// 分布式算法执行器
-/// distributed algorithm
 pub struct DistributedExecutor {
     nodes: Arc<Mutex<HashMap<String, NodeInfo>>>,
     task_queue: Arc<Mutex<Vec<DistributedTask<serde_json::Value>>>>,
@@ -210,7 +208,6 @@ impl DistributedExecutor {
     }
 
     /// 批量执行分布式任务
-    /// distribution task
     pub fn execute_batch<A, T, R>(
         &self,
         algorithm: A,
@@ -233,7 +230,6 @@ impl DistributedExecutor {
     }
 
     /// 获取任务执行统计
-    /// Get taskexecution
     pub fn get_task_stats(&self) -> TaskExecutionStats {
         let task_queue = self.task_queue.lock().expect("任务队列锁被污染");
         let results = self.results.lock().expect("任务结果锁被污染");
@@ -294,7 +290,6 @@ pub struct DistributedBenchmarker;
 
 impl DistributedBenchmarker {
     /// 运行分布式基准测试
-    /// Run distributedtest
     pub fn benchmark<A, T, R>(
         algorithm: A,
         test_cases: Vec<DistributedBenchmarkTestCase<T>>,
@@ -360,7 +355,6 @@ impl DistributedBenchmarker {
 }
 
 /// 分布式基准测试用例
-/// distribution benchmark
 #[derive(Debug, Clone)]
 pub struct DistributedBenchmarkTestCase<T> {
     pub name: String,
@@ -369,7 +363,6 @@ pub struct DistributedBenchmarkTestCase<T> {
 }
 
 /// 分布式执行统计信息
-/// distributedexecution information
 #[derive(Debug, Clone)]
 pub struct DistributedExecutionStats {
     pub average_execution_time: std::time::Duration,
@@ -402,7 +395,6 @@ impl DistributedExecutionStats {
     }
 
     /// 计算执行时间标准差
-    /// Compute executiontimestandard
     pub fn execution_time_std_dev(&self) -> std::time::Duration {
         if self.execution_times.is_empty() {
             return std::time::Duration::ZERO;
@@ -447,7 +439,6 @@ impl DistributedExecutionStats {
 }
 
 /// 分布式基准测试结果
-/// distributedtest result
 #[derive(Debug, Clone)]
 pub struct DistributedBenchmarkResult {
     pub test_case: String,
@@ -455,7 +446,6 @@ pub struct DistributedBenchmarkResult {
 }
 
 /// 分布式基准测试结果集合
-/// distributedtestresult set
 #[derive(Debug, Clone)]
 pub struct DistributedBenchmarkResults {
     pub results: Vec<DistributedBenchmarkResult>,
@@ -471,7 +461,6 @@ impl DistributedBenchmarkResults {
     }
 
     /// 获取最高扩展效率的测试用例
-    /// Get highesttest
     pub fn best_scaling_efficiency(
         &self,
         single_node_time: std::time::Duration,
@@ -486,7 +475,6 @@ impl DistributedBenchmarkResults {
     }
 
     /// 生成分布式性能报告
-    /// component performance
     pub fn generate_report(&self, single_node_time: std::time::Duration) -> String {
         let mut report = String::new();
         report.push_str("=== 分布式算法基准测试报告 ===\n\n");
@@ -602,7 +590,6 @@ impl DistributedLoadBalancer {
     }
 
     /// 获取节点负载信息
-    /// Get nodenegativeinformation
     pub fn get_node_loads(&self) -> HashMap<String, usize> {
         let node_loads = self.node_loads.lock().expect("节点负载锁被污染");
         node_loads.clone()

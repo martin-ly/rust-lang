@@ -4,7 +4,6 @@ use tokio::sync::Mutex;
 use tokio::time::sleep;
 
 /// 模拟分布式锁实现
-/// distributed implementation
 /// 在实际生产环境中，这通常基于 Redis、ZooKeeper 或 etcd
 /// in actual environment in ， Redis 、ZooKeeper or etcd
 #[derive(Debug)]
@@ -57,7 +56,6 @@ impl DistributedLock {
     }
 
     /// 检查锁是否仍然有效
-    /// lock effective
     fn is_valid(&self) -> bool {
         if let Some(acquired_at) = self.acquired_at {
             acquired_at.elapsed() < self.ttl
@@ -93,7 +91,6 @@ impl LockManager {
     }
 
     /// 获取指定资源的锁
-    /// Get resource
     async fn acquire_lock(&self, resource: &str, ttl: Duration) -> Option<String> {
         let mut lock = DistributedLock::new(resource.to_string(), ttl);
 
@@ -119,7 +116,6 @@ impl LockManager {
     }
 
     /// 获取所有活跃锁的状态
-    /// Get hasactivestatus
     async fn get_locks_status(&self) -> Vec<(String, String, bool)> {
         let locks = self.locks.lock().await;
         locks
@@ -130,7 +126,6 @@ impl LockManager {
 }
 
 /// 模拟分布式任务执行
-/// distribution task
 async fn execute_distributed_task(manager: Arc<LockManager>, resource: &str, task_id: u32) {
     println!("🚀 任务 {} 尝试获取资源 {} 的锁", task_id, resource);
 

@@ -95,21 +95,18 @@ impl ProcessMonitor {
     }
 
     /// 获取所有监控的进程
-    /// Get hasmonitoringprocess
     pub fn get_processes(&self) -> Vec<ProcessInfo> {
         let processes = self.processes.lock().expect("进程监控锁被污染");
         processes.values().cloned().collect()
     }
 
     /// 获取特定进程信息
-    /// Get processinformation
     pub fn get_process(&self, pid: u32) -> Option<ProcessInfo> {
         let processes = self.processes.lock().expect("进程监控锁被污染");
         processes.get(&pid).cloned()
     }
 
     /// 更新系统资源信息
-    /// Update systemresourceinformation
     pub fn update_resources(&self, resources: SystemResources) {
         let mut current_resources = self.resources.lock().expect("系统资源锁被污染");
         *current_resources = resources.clone();
@@ -122,14 +119,12 @@ impl ProcessMonitor {
     }
 
     /// 获取系统资源信息
-    /// Get systemresourceinformation
     pub fn get_resources(&self) -> SystemResources {
         let resources = self.resources.lock().expect("系统资源锁被污染");
         resources.clone()
     }
 
     /// 获取最后更新时间
-    /// Get backupdatetime
     pub fn last_update(&self) -> SystemTime {
         let last_update = self.last_update.lock().expect("最后更新时间锁被污染");
         *last_update
@@ -142,7 +137,6 @@ impl ProcessMonitor {
     }
 
     /// 获取进程统计信息
-    /// Get processinformation
     pub fn get_stats(&self) -> ProcessStats {
         let processes = self.processes.lock().expect("进程监控锁被污染");
         let total = processes.len();
@@ -211,7 +205,6 @@ impl ProcessMonitor {
     }
 
     /// 获取内存使用率趋势
-    /// Get memoryuse
     pub fn get_memory_trend(&self, duration: Duration) -> Vec<(SystemTime, u64)> {
         let metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         let cutoff = SystemTime::now() - duration;
@@ -225,7 +218,6 @@ impl ProcessMonitor {
     }
 
     /// 清理旧的历史数据
-    /// Cleanup oldhistoricaldata
     pub fn cleanup_old_data(&self, max_age: Duration) {
         let mut metrics = self.performance_metrics.lock().expect("性能指标锁被污染");
         let cutoff = SystemTime::now() - max_age;

@@ -104,7 +104,6 @@ use tokio::time::sleep;
 /// - `await` 只能在 `async` 函数或块中使用
 /// - `await` in `async` function or in
 /// - 异步函数返回的是 `Future`，需要被等待才能获取结果
-/// - asyncfunction `Future`needget result
 #[allow(unused)]
 pub async fn async_text01() -> i32 {
     println!("开始异步任务");

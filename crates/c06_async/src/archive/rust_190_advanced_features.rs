@@ -8,9 +8,7 @@
 //! **Currently Recommended Version**: Rust 1.92.0+ | For latest features, please refer to `rust_192_features.rs`
 //! 
 //! 本模块实现当前稳定版本中的高级异步特性
-//! This module implements currentversionadvancedasyncfeatures
 //! 包括改进的编译器优化、内存管理、并发控制等
-//! optimization 、memory 、concurrency etc.
 use std::sync::Arc;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::time::{Duration, Instant};
@@ -46,7 +44,6 @@ pub struct AsyncFeature {
 }
 
 /// 高性能异步资源池
-/// performance async
 #[allow(dead_code)]
 pub struct ResourcePool190 {
     pool: Arc<Mutex<VecDeque<PooledResource>>>,
@@ -96,7 +93,6 @@ pub struct PriorityLevel {
 }
 
 /// 高级异步流处理器
-/// async stream
 #[allow(dead_code)]
 pub struct AdvancedAsyncStream190 {
     buffer: Arc<Mutex<VecDeque<StreamItem>>>,
@@ -222,7 +218,6 @@ impl AdvancedAsyncFeatures190 {
     }
 
     /// 演示高级资源池管理
-    /// demonstration
     pub async fn demo_advanced_resource_pool(&self) -> Result<()> {
         info!("🏊‍♂️ 演示高级异步资源池管理");
         
@@ -253,7 +248,6 @@ impl AdvancedAsyncFeatures190 {
     }
 
     /// 演示智能并发控制
-    /// smartconcurrent control
     pub async fn demo_intelligent_concurrency_control(&self) -> Result<()> {
         info!("🧠 演示智能并发控制");
         
@@ -280,7 +274,6 @@ impl AdvancedAsyncFeatures190 {
     }
 
     /// 演示高级异步流处理
-    /// advancedasyncflow processing
     pub async fn demo_advanced_async_streams(&self) -> Result<()> {
         info!("🌊 演示高级异步流处理");
         
@@ -319,7 +312,6 @@ impl AdvancedAsyncFeatures190 {
     }
 
     /// 演示智能异步缓存
-    /// demonstration async
     pub async fn demo_smart_async_cache(&self) -> Result<()> {
         info!("💾 演示智能异步缓存");
         

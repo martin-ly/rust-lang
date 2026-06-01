@@ -29,7 +29,6 @@ pub struct SingletonConfig {
 
 impl SingletonConfig {
     /// 从已知值创建单例配置
-    /// valuecreatesingle configuration
     pub fn from_value(value: String) -> Self {
         Self {
             value: LazyLock::from(value),
@@ -44,7 +43,6 @@ impl SingletonConfig {
 }
 
 /// 使用 LazyLock::from 实现线程安全的单例计数器描述
-/// LazyLock::from thread-safe singleton describe
 pub struct SingletonCounter {
     description: LazyLock<String>,
 }
@@ -114,13 +112,11 @@ impl MarkerType<i32> {
     }
 
     /// 检查是否为特殊标记值
-    /// whether value
     pub fn is_special(&self) -> bool {
         matches!(self.value, Self::SPECIAL)
     }
 
     /// 使用模式匹配处理特殊标记
-    /// mark
     pub fn process(&self) -> &'static str {
         match self.value {
             Self::SPECIAL => "special_marker",
@@ -138,7 +134,6 @@ pub enum TaggedValue {
 
 impl TaggedValue {
     /// 默认整数标记常量
-    /// mark constant
     pub const DEFAULT_INT: ManuallyDrop<i32> = ManuallyDrop::new(0);
 
     /// 匹配默认标记

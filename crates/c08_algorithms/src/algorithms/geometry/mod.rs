@@ -19,7 +19,6 @@ pub struct GeometryAlgorithms;
 
 impl GeometryAlgorithms {
     /// 计算两点之间的距离
-    /// point 's
     pub fn distance(p1: Point, p2: Point) -> f64 {
         ((p1.x - p2.x).powi(2) + (p1.y - p2.y).powi(2)).sqrt()
     }

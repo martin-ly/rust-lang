@@ -4,7 +4,6 @@
 //! 本模块提供算法的形式化证明、正确性验证和复杂度分析。
 //! This module provides algorithm 、and complex analyze 。
 //! 确保算法的数学正确性和性能保证。
-//! algorithm and performance 。
 pub mod complexity_analysis;
 pub mod correctness;
 pub mod formal_proofs;
@@ -124,7 +123,7 @@ pub struct AlgorithmVerifier;
 
 impl AlgorithmVerifier {
     /// 验证排序算法的正确性
-    /// Verify sortalgorithmcorrectness
+    /// Verify sorting algorithm correctness
     pub fn verify_sorting_algorithm<T: Clone + Ord + Send + Sync>(
         algorithm_name: &str,
         sort_fn: impl Fn(&mut [T]) + Send + Sync,
@@ -159,7 +158,6 @@ impl AlgorithmVerifier {
     }
 
     /// 验证搜索算法的正确性
-    /// Verify searchalgorithmcorrectness
     pub fn verify_search_algorithm<T: Clone + Ord + Send + Sync>(
         algorithm_name: &str,
         search_fn: impl Fn(&[T], &T) -> Option<usize> + Send + Sync,
@@ -194,7 +192,6 @@ impl AlgorithmVerifier {
     }
 
     /// 验证图算法的正确性
-    /// Verify graphalgorithmcorrectness
     pub fn verify_graph_algorithm(
         algorithm_name: &str,
         algorithm_fn: impl Fn(&Graph, usize) -> GraphResult + Send + Sync,
@@ -229,7 +226,6 @@ impl AlgorithmVerifier {
     }
 
     /// 验证排序算法正确性
-    /// Verify sortalgorithmcorrectness
     fn verify_sorting_correctness<T: Clone + Ord>(
         sort_fn: &impl Fn(&mut [T]),
         test_cases: &[Vec<T>],
@@ -252,7 +248,6 @@ impl AlgorithmVerifier {
     }
 
     /// 验证搜索算法正确性
-    /// Verify searchalgorithmcorrectness
     fn verify_search_correctness<T: Clone + Ord>(
         search_fn: &impl Fn(&[T], &T) -> Option<usize>,
         test_cases: &[(Vec<T>, T, Option<usize>)],
@@ -267,7 +262,6 @@ impl AlgorithmVerifier {
     }
 
     /// 验证图算法正确性
-    /// Verify graphalgorithmcorrectness
     fn verify_graph_correctness(
         algorithm_fn: &impl Fn(&Graph, usize) -> GraphResult,
         test_cases: &[(Graph, usize, GraphResult)],
@@ -282,13 +276,12 @@ impl AlgorithmVerifier {
     }
 
     /// 检查数组是否已排序
-    /// arraywhether sort
+    /// Check if array is sorted
     fn is_sorted<T: Ord>(arr: &[T]) -> bool {
         arr.windows(2).all(|w| w[0] <= w[1])
     }
 
     /// 检查两个数组是否包含相同的元素
-    /// element
     fn has_same_elements<T: Clone + Ord>(arr1: &[T], arr2: &[T]) -> bool {
         if arr1.len() != arr2.len() {
             return false;
@@ -495,7 +488,6 @@ impl AlgorithmVerifier {
     }
 
     /// 生成排序算法证明
-    /// sortalgorithm proof
     fn generate_sorting_proof(algorithm_name: &str) -> (bool, Vec<ProofStep>) {
         let mut proof_steps = Vec::new();
 
@@ -587,7 +579,6 @@ impl AlgorithmVerifier {
     }
 
     /// 生成搜索算法证明
-    /// searchalgorithm proof
     fn generate_search_proof(algorithm_name: &str) -> (bool, Vec<ProofStep>) {
         let mut proof_steps = Vec::new();
 
@@ -701,7 +692,6 @@ impl AlgorithmVerifier {
     }
 
     /// 执行排序算法测试
-    /// executionsortalgorithm test
     fn execute_sorting_tests<T: Clone + Ord>(
         sort_fn: &impl Fn(&mut [T]),
         test_cases: Vec<Vec<T>>,
@@ -745,7 +735,6 @@ impl AlgorithmVerifier {
     }
 
     /// 执行搜索算法测试
-    /// executionsearchalgorithm test
     fn execute_search_tests<T: Clone + Ord>(
         search_fn: &impl Fn(&[T], &T) -> Option<usize>,
         test_cases: Vec<(Vec<T>, T, Option<usize>)>,
@@ -845,7 +834,6 @@ pub enum GraphResult {
 }
 
 /// 算法验证报告生成器
-/// algorithmverify generator
 pub struct VerificationReportGenerator;
 
 impl VerificationReportGenerator {

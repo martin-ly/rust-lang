@@ -26,17 +26,12 @@
 //! - 136. Single Number（只出现一次的数字）
 //! - 136. Single Number（）
 //! - 202. Happy Number（快乐数）
-//! - 205. Isomorphic Strings（同构字符串）
 //! - 217. Contains Duplicate（存在重复元素）
-//! - 219. Contains Duplicate II（存在重复元素 II）
 //! - 242. Valid Anagram（有效的字母异位词）
 //! - 242. Valid Anagram（effective ）
 //! - 290. Word Pattern（单词规律）
-//! - 349. Intersection of Two Arrays（两个数组的交集）
 //! - 350. Intersection of Two Arrays II（两个数组的交集 II）
-//! - 383. Ransom Note（赎金信）
 //! - 389. Find the Difference（找不同）
-//! - 454. 4Sum II（四数相加 II）
 //! - 454. 4Sum II（ II）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::HashMap;
@@ -50,7 +45,6 @@ use std::collections::HashSet;
 /// 罗马数字包含以下七种字符: `I`，`V`，`X`，`L`，`C`，`D` 和 `M`。
 /// under : `I`，`V`，`X`，`L`，`C`，`D` and `M`。
 /// 给定一个罗马数字，将其转换成整数。
-/// ，will its conversion 。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -167,11 +161,8 @@ pub fn single_number(nums: Vec<i32>) -> i32 {
 }
 
 /// 202. Happy Number（快乐数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 编写一个算法来判断一个数 `n` 是不是快乐数。
-/// algorithm `n` 。
 /// 「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，
 /// 「」definition as ：to ，will this as position on and ，then to as 1，
 /// 也可能是 **无限循环** 但始终变不到 1。如果 **可以变为** 1，那么这个数就是快乐数。
@@ -216,11 +207,8 @@ fn sum_of_squares(n: i32) -> i32 {
 }
 
 /// 205. Isomorphic Strings（同构字符串）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定两个字符串 `s` 和 `t`，判断它们是否是同构的。
-/// `s` and `t`，。
 /// 如果 `s` 中的字符可以按某种映射关系替换得到 `t`，那么这两个字符串是同构的。
 /// if `s` in can to `t`，。
 ///
@@ -276,14 +264,10 @@ pub fn is_isomorphic(s: String, t: String) -> bool {
 }
 
 /// 219. Contains Duplicate II（存在重复元素 II）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 `nums` 和一个整数 `k`，判断数组中是否存在两个 **不同的索引** `i` 和 `j`，
 /// `nums` and `k`，in in **** `i` and `j`，
 /// 满足 `nums[i] == nums[j]` 且 `abs(i - j) <= k`。
-///
-/// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
 /// - **JIT 优化**: HashMap 操作性能提升
 /// - **JIT Optimization**: HashMap operation performance improvement
@@ -364,8 +348,6 @@ pub fn is_anagram(s: String, t: String) -> bool {
 }
 
 /// 290. Word Pattern（单词规律）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一种规律 `pattern` 和一个字符串 `s`，判断 `s` 是否遵循相同的规律。
 /// `pattern` and `s`， `s` 。
@@ -423,8 +405,6 @@ pub fn word_pattern(pattern: String, s: String) -> bool {
 }
 
 /// 349. Intersection of Two Arrays（两个数组的交集）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定两个数组 `nums1` 和 `nums2`，返回它们的交集。输出结果中的每个元素一定是 **唯一** 的。
 /// `nums1` and `nums2`，intersection 。result in element **** 。
@@ -451,11 +431,8 @@ pub fn intersection(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
 }
 
 /// 350. Intersection of Two Arrays II（两个数组的交集 II）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你两个整数数组 `nums1` 和 `nums2`，请你以数组形式返回两数组的交集。
-/// `nums1` and `nums2`，intersection 。
 /// 返回结果中每个元素出现的次数，应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。
 /// result in element ，and element in in （if ，）。
 ///
@@ -505,8 +482,6 @@ pub fn intersect(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
 }
 
 /// 389. Find the Difference（找不同）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定两个字符串 `s` 和 `t`，它们只包含小写字母。字符串 `t` 由字符串 `s` 随机重排，然后在随机位置添加一个字母。
 /// `s` and `t`，。 `t` `s` ，then in position 。
@@ -593,7 +568,6 @@ pub fn four_sum_count(nums1: Vec<i32>, nums2: Vec<i32>, nums3: Vec<i32>, nums4: 
 // ==================== 问题信息注册 ====================
 
 /// 获取所有哈希表类问题
-/// Get hastableproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

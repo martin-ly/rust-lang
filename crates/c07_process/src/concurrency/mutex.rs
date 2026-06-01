@@ -7,7 +7,6 @@ use std::sync::{Arc, Mutex as StdMutex};
 use std::time::{Duration, Instant};
 
 /// 进程安全的互斥锁
-/// process mutex
 #[allow(dead_code)]
 pub struct ProcessMutex {
     name: String,
@@ -119,7 +118,7 @@ impl ProcessMutex {
     }
 
     /// 检查锁是否被持有
-    /// lock is
+    /// Check if lock is held
     pub fn is_locked(&self) -> bool {
         self.inner.try_lock().is_err()
     }
@@ -131,7 +130,6 @@ impl ProcessMutex {
     }
 
     /// 获取等待者数量（互斥锁总是0或1）
-    /// Get count01
     pub fn waiter_count(&self) -> usize {
         if self.is_locked() {
             1

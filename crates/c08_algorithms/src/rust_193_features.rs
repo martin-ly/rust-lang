@@ -14,7 +14,6 @@ pub fn trim_leading_zeros(deque: &mut VecDeque<i32>) -> Vec<i32> {
 }
 
 /// 使用 `VecDeque::pop_back_if` 移除尾部大于阈值的元素
-/// `VecDeque::pop_back_if` element
 pub fn trim_tail_greater_than(deque: &mut VecDeque<i32>, limit: i32) -> Vec<i32> {
     let mut removed = Vec::new();
     while let Some(v) = deque.pop_back_if(|x| *x > limit) {
@@ -24,7 +23,6 @@ pub fn trim_tail_greater_than(deque: &mut VecDeque<i32>, limit: i32) -> Vec<i32>
 }
 
 /// 使用 `slice::as_array` 提取定长子数组用于算法处理
-/// use `slice::as_array` longarrayalgorithm processing
 pub fn extract_window<const N: usize>(slice: &[i32]) -> Option<&[i32; N]> {
     slice.as_array::<N>()
 }

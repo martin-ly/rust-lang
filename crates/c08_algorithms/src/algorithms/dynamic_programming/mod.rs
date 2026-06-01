@@ -6,7 +6,6 @@
 //use serde::{Serialize, Deserialize};
 
 /// 动态规划算法实现
-/// dynamicalgorithm implementation
 pub struct DynamicProgrammingAlgorithms;
 
 impl DynamicProgrammingAlgorithms {

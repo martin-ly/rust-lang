@@ -4,10 +4,8 @@
 //! 本模块演示在算法场景中使用 2024 edition 成熟语法：
 //! this module demonstration in algorithm scenario in 2024 edition ：
 //! - let-else 早返回
-//! - try 块聚合 `Result`
 //! - `Option::is_some_and`/`bool::then_some`
 //! - 返回位置 `impl Trait`（RPITIT）
-//! - 从不返回类型 `!`
 //! - from type `!`
 use anyhow::{anyhow, Result};
 
@@ -36,13 +34,11 @@ pub fn has_even(option: Option<i32>) -> bool {
 }
 
 /// 返回位置 impl Trait（RPITIT）：返回迭代器隐藏具体类型
-/// impl TraitRPITITiterator type
 pub fn range_even_iter(start: i32, end: i32) -> impl Iterator<Item = i32> {
     (start..end).filter(|x| x % 2 == 0)
 }
 
 /// 从不返回类型 `!`：用于致命错误的不可返回函数
-/// type `!`error function
 #[allow(dead_code)]
 pub fn abort_with(message: &str) -> ! {
     panic!("fatal: {}", message)

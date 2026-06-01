@@ -10,31 +10,23 @@
 //! 1. **const 上下文增强**: 编译时计算数学常量
 //! 1. **const on under **: compile-time constant
 //! 2. **标准库 API**: 使用 `NonZero<u{N}>::div_ceil` 等新 API
-//! 3. **性能优化**: 迭代器操作性能提升
 //! 3. **performanceoptimization**: iteratoroperationperformance improvement
 //!
 //! ## 包含的经典题目
 //! ## Classic Problems
 //!
 //! - 7. Reverse Integer（整数反转）
-//! - 9. Palindrome Number（回文数）
 //! - 50. Pow(x, n)（Pow 函数）
-//! - 69. Sqrt(x)（x 的平方根）
 //! - 69. Sqrt(x)（x ）
 //! - 202. Happy Number（快乐数）
-//! - 204. Count Primes（计数质数）
 //! - 231. Power of Two（2 的幂）
-//! - 326. Power of Three（3 的幂）
 //! - 367. Valid Perfect Square（有效的完全平方数）
-//! - 509. Fibonacci Number（斐波那契数）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::HashSet;
 
 // ==================== 经典题目实现 ====================
 
 /// 7. Reverse Integer（整数反转）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。
 /// 32 symbol x ，will x in part after result 。
@@ -73,8 +65,6 @@ pub fn reverse(x: i32) -> i32 {
 }
 
 /// 9. Palindrome Number（回文数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。
 /// x ，if x ， true ；， false 。
@@ -82,7 +72,6 @@ pub fn reverse(x: i32) -> i32 {
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
 /// - **整数操作优化**: 使用整数反转判断回文
-/// - **optimization **:
 ///
 /// ## 复杂度
 /// ## Complexity
@@ -115,8 +104,6 @@ pub fn is_palindrome(x: i32) -> bool {
 }
 
 /// 50. Pow(x, n)（Pow 函数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，x^n）。
 /// pow(x, n) ， x n function （，x^n）。
@@ -155,14 +142,12 @@ pub fn my_pow(x: f64, n: i32) -> f64 {
 /// ## 问题描述
 /// ## Problem Description
 /// 给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
-/// x ，and x 。
 /// 由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。
 /// type ，result part ，part will is 。
 ///
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
 /// - **二分查找**: 使用二分查找优化平方根计算
-/// - ****: optimization
 ///
 /// ## 复杂度
 /// ## Complexity
@@ -195,11 +180,8 @@ pub fn my_sqrt(x: i32) -> i32 {
 }
 
 /// 202. Happy Number（快乐数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 编写一个算法来判断一个数 n 是不是快乐数。
-/// algorithm n 。
 ///
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
@@ -238,16 +220,12 @@ fn get_next(n: i32) -> i32 {
 }
 
 /// 204. Count Primes（计数质数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 统计所有小于非负整数 n 的质数的数量。
-/// all n quantity 。
 ///
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
 /// - **埃拉托斯特尼筛法**: 使用筛法高效计算质数
-/// - ****: efficient
 ///
 /// ## 复杂度
 /// ## Complexity
@@ -281,8 +259,6 @@ pub fn count_primes(n: i32) -> i32 {
 }
 
 /// 231. Power of Two（2 的幂）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数 n，请你判断该整数是否是 2 的幂次方。如果是，返回 true ；否则，返回 false 。
 /// n，this 2 。if ， true ；， false 。
@@ -306,8 +282,6 @@ pub fn is_power_of_two(n: i32) -> bool {
 }
 
 /// 326. Power of Three（3 的幂）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个整数，写一个函数来判断它是否是 3 的幂次方。如果是，返回 true ；否则，返回 false 。
 /// ，function 3 。if ， true ；， false 。
@@ -337,8 +311,6 @@ pub fn is_power_of_three(n: i32) -> bool {
 }
 
 /// 367. Valid Perfect Square（有效的完全平方数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个 正整数 num ，编写一个函数，如果 num 是一个完全平方数，则返回 true ，否则返回 false 。
 /// num ，function ，if num ， true ， false 。
@@ -379,8 +351,6 @@ pub fn is_perfect_square(num: i32) -> bool {
 }
 
 /// 509. Fibonacci Number（斐波那契数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。
 /// （ F(n) represent ）sequence as 。
@@ -418,7 +388,6 @@ pub fn fib(n: i32) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有数学类问题
-/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

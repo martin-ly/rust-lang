@@ -2,7 +2,6 @@
 //! treealgorithm implementation
 //!
 //! 本模块提供了决策树算法的基础实现
-//! This module provides treealgorithmimplementation
 use super::*;
 
 /// 决策树分类器（简化版本）

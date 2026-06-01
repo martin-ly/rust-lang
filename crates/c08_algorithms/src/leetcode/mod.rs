@@ -12,39 +12,24 @@
 //! 本模块按照 LeetCode 官方标签分类：
 //! this module LeetCode classification ：
 //! - Array（数组）
-//! - String（字符串）
 //! - String（）
 //! - Hash Table（哈希表）
-//! - Dynamic Programming（动态规划）
 //! - Math（数学）
 //! - Math（）
 //! - Sorting（排序）
-//! - Greedy（贪心）
 //! - Depth-First Search（深度优先搜索）
-//! - Binary Search（二分查找）
 //! - Breadth-First Search（广度优先搜索）
-//! - Tree（树）
 //! - Matrix（矩阵）
-//! - Two Pointers（双指针）
 //! - Bit Manipulation（位操作）
-//! - Stack（栈）
 //! - Heap（堆）
-//! - Graph（图）
 //! - Design（设计）
-//! - Backtracking（回溯）
 //! - Trie（字典树）
 //! - Trie（tree ）
 //! - Segment Tree（线段树）
-//! - Union Find（并查集）
 //! - Binary Indexed Tree（树状数组）
-//! - Sliding Window（滑动窗口）
 //! - Linked List（链表）
-//! - Recursion（递归）
 //! - Monotonic Stack（单调栈）
-//! - Ordered Map（有序映射）
 //! - Queue（队列）
-//!
-//! ## Rust 1.91 特性应用
 //! ## Rust 1.91 Feature Application
 //!
 //! 本模块充分利用 Rust 1.91 的新特性：
@@ -52,7 +37,6 @@
 //! - **const 上下文增强**: 编译时算法配置计算
 //! - **const on under **: compile-time algorithm
 //! - **新的稳定 API**: `BufRead::skip_while`、改进的 `ControlFlow`
-//! - **JIT 编译器优化**: 迭代器操作性能提升 10-25%
 //! - **JIT optimization **: performance 10-25%
 //! - **内存分配器优化**: 小对象分配提升 25-30%
 //! - **allocator optimization **: to 25-30%
@@ -149,7 +133,6 @@ pub enum LeetCodeTag {
 
 impl LeetCodeTag {
     /// 获取标签的中文名称
-    /// in
     pub fn chinese_name(&self) -> &'static str {
         match self {
             LeetCodeTag::Array => "数组",
@@ -497,7 +480,6 @@ pub fn get_all_problems_by_tag(tag: LeetCodeTag) -> Vec<LeetCodeProblem> {
 }
 
 /// 获取问题的实现代码
-/// Get problemsimplementation
 pub fn get_problem_implementation(
     problem_id: u32,
     implementation_type: ImplementationType,
@@ -527,7 +509,6 @@ pub fn get_problem_implementation(
 /// （according to problem number ）
 ///
 /// 支持80+个常见LeetCode问题的代码生成，包括：
-/// 80+LeetCodeproblem ，：
 /// - 数组类：1, 11, 15, 26, 27, 53, 88, 121, 189, 217, 238, 283, 448, 485, 905, 977
 /// - ：1, 11, 15, 26, 27, 53, 88, 121, 189, 217, 238, 283, 448, 485, 905, 977
 /// - 字符串类：3, 14, 125, 344, 383, 387, 392, 409, 415, 438, 567, 647, 771, 844

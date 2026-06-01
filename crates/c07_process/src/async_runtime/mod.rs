@@ -282,7 +282,7 @@ impl AsyncProcessManager {
     }
 
     /// 异步获取进程信息
-    /// asyncgetprocess information
+    /// Async get process info
     pub async fn get_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -349,7 +349,7 @@ impl AsyncProcessManager {
     }
 
     /// 处理启动进程命令
-    /// process command
+    /// Handle start process command
     async fn handle_spawn(
         config: ProcessConfig,
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
@@ -411,7 +411,7 @@ impl AsyncProcessManager {
     }
 
     /// 处理终止进程命令
-    /// process command
+    /// Handle terminate process command
     async fn handle_kill(
         pid: u32,
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
@@ -427,7 +427,7 @@ impl AsyncProcessManager {
     }
 
     /// 处理获取进程信息命令
-    /// process command
+    /// Handle get process info command
     async fn handle_get_info(
         pid: u32,
         processes: &Arc<TokioRwLock<HashMap<u32, AsyncManagedProcess>>>,
@@ -508,7 +508,6 @@ impl AsyncProcessPool {
     }
 
     /// 异步获取可用进程
-    /// async process
     pub async fn get_process(&self) -> ProcessResult<u32> {
         let mut available = self.available_processes.lock().await;
 
@@ -526,7 +525,6 @@ impl AsyncProcessPool {
     }
 
     /// 异步释放进程回池
-    /// async process
     pub async fn release_process(&self, pid: u32) -> ProcessResult<()> {
         self.busy_processes.lock().await.remove(&pid);
         self.available_processes.lock().await.push(pid);
@@ -534,7 +532,6 @@ impl AsyncProcessPool {
     }
 
     /// 异步获取进程池统计
-    /// async process
     pub async fn get_stats(&self) -> ProcessPoolStats {
         let available_count = self.available_processes.lock().await.len();
         let busy_count = self.busy_processes.lock().await.len();
@@ -553,7 +550,6 @@ impl AsyncProcessPool {
 }
 
 /// 进程池统计信息（重新导出以避免冲突）
-/// process （）
 use crate::process::pool::ProcessPoolStats;
 
 /// 异步任务调度器
@@ -641,7 +637,6 @@ impl AsyncTaskScheduler {
 }
 
 /// 非异步版本的占位符实现
-/// asyncversion implementation
 #[cfg(not(feature = "async"))]
 #[allow(dead_code)]
 pub struct AsyncProcessManager;

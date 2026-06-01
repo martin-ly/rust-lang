@@ -8,7 +8,6 @@
 //! ## Rust 1.92 Feature Application
 //!
 //! 1. **性能优化**: 递归和迭代器操作性能提升
-//! 1. **performanceoptimization**: iteratoroperationperformance improvement
 //! 2. **内存优化**: 使用栈或递归优化
 //! 2. **memoryoptimization**: usestack optimization
 use crate::leetcode::tree::TreeNode;
@@ -152,7 +151,6 @@ pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有深度优先搜索类问题
-/// Get hasexcellentsearchproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

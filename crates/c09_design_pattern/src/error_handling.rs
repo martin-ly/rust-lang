@@ -1,6 +1,5 @@
 use std::error::Error;
 /// 设计模式错误处理模块
-/// designpatternerrorhandling module
 ///
 /// 提供统一的错误处理机制，支持各种设计模式的错误场景
 /// error handling mechanism ，design scenario
@@ -60,7 +59,6 @@ impl fmt::Display for DesignPatternError {
 impl Error for DesignPatternError {}
 
 /// 错误处理结果类型
-/// errorhandlingresult type
 pub type PatternResult<T> = Result<T, DesignPatternError>;
 
 /// 错误恢复策略
@@ -95,7 +93,6 @@ impl ErrorHandler {
     }
 
     /// 处理错误并尝试恢复
-    /// and
     pub fn handle_error<T, F>(&self, mut operation: F) -> PatternResult<T>
     where
         F: FnMut() -> PatternResult<T>,
@@ -164,7 +161,6 @@ impl ErrorHandler {
 }
 
 /// 单例模式错误处理
-/// singlepatternerror processing
 pub struct SingletonErrorHandler {
     handler: ErrorHandler,
 }
@@ -194,7 +190,6 @@ impl SingletonErrorHandler {
 }
 
 /// 工厂模式错误处理
-/// patternerror processing
 pub struct FactoryErrorHandler {
     handler: ErrorHandler,
 }
@@ -221,7 +216,6 @@ impl FactoryErrorHandler {
 }
 
 /// 代理模式错误处理
-/// patternerror processing
 pub struct ProxyErrorHandler {
     handler: ErrorHandler,
 }
@@ -251,7 +245,6 @@ impl ProxyErrorHandler {
 }
 
 /// 享元模式错误处理
-/// patternerror processing
 pub struct FlyweightErrorHandler {
     handler: ErrorHandler,
 }
@@ -344,12 +337,10 @@ macro_rules! log_pattern_error {
 }
 
 /// 错误处理工具函数
-/// errorhandling function
 pub mod utils {
     use super::*;
 
     /// 安全执行操作，自动处理错误
-    /// safetyexecutionoperationhandling error
     pub fn safe_execute<T, F>(operation: F) -> PatternResult<T>
     where
         F: Fn() -> PatternResult<T>,

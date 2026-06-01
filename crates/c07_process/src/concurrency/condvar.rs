@@ -27,7 +27,6 @@ struct CondVarStats {
 
 impl ProcessCondVar {
     /// 创建新的条件变量
-    /// condition variable
     pub fn new(name: &str, config: SyncConfig) -> Self {
         Self {
             name: name.to_string(),

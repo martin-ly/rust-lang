@@ -4,7 +4,6 @@
 //! 本模块展示了 Rust 1.92.0 在算法实现场景中的应用，包括：
 //! This module demonstrates Rust 1.92.0 algorithmimplementationapplicationincluding
 //! - 新的稳定 API（`rotate_right`, `NonZero::div_ceil`）
-//! - 性能优化（迭代器方法特化）
 //! - performance optimization （method ）
 //! - 改进的 Lint 行为
 //! - Lint as
@@ -106,7 +105,6 @@ pub fn calculate_pages(total_items: usize, items_per_page: NonZeroUsize) -> usiz
 // ==================== 3. 迭代器方法特化在算法中的应用 ====================
 
 /// 使用特化的迭代器比较方法
-/// useiterator method
 ///
 /// Rust 1.92.0: Iterator::eq 和 Iterator::eq_by 为 TrustedLen 迭代器特化
 pub fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
@@ -115,7 +113,6 @@ pub fn compare_arrays<T: PartialEq>(arr1: &[T], arr2: &[T]) -> bool {
 }
 
 /// 使用特化的迭代器比较方法比较排序结果
-/// useiteratormethodsort result
 pub fn verify_sorted<T: PartialEq + Ord>(arr: &[T], expected: &[T]) -> bool {
     // Rust 1.92.0: 使用特化的 eq 方法（性能优化）
     arr.iter().eq(expected.iter())
@@ -124,7 +121,6 @@ pub fn verify_sorted<T: PartialEq + Ord>(arr: &[T], expected: &[T]) -> bool {
 // ==================== 4. 实战案例 ====================
 
 /// 案例1: 使用 rotate_right 实现轮转数组查找
-/// 1: rotate_right
 pub fn search_rotated_array(arr: &[i32], target: i32) -> Option<usize> {
     // 假设数组已经旋转，使用 rotate_right 可以恢复原始顺序
     let mut sorted = arr.to_vec();
@@ -206,8 +202,6 @@ mod tests {
 // ==================== 4. btree_map::Entry::insert_entry (Rust 1.92.0 新增) ====================
 
 /// Rust 1.92.0 新增：btree_map::Entry::insert_entry 和 VacantEntry::insert_entry
-///
-/// 提供更高效的 BTreeMap 插入操作，返回插入的值的可变引用。
 /// efficient BTreeMap ，reference 。
 /// Rust 1.92.0: `Entry::insert_entry` 和 `VacantEntry::insert_entry` 已稳定
 pub fn demonstrate_btree_map_insert_entry() {
@@ -244,7 +238,6 @@ pub fn demonstrate_btree_map_insert_entry() {
 }
 
 /// 使用 insert_entry 实现高效的缓存更新
-/// insert_entry efficient
 pub struct Cache<K, V> {
     data: BTreeMap<K, V>,
 }

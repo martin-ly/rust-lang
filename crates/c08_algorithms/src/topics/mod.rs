@@ -166,7 +166,6 @@ pub enum ImplementationType {
 }
 
 /// 算法性能基准测试结果
-/// algorithmperformancetest result
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct BenchmarkResult {
     pub algorithm_name: String,
@@ -189,7 +188,6 @@ pub struct LibraryStats {
 }
 
 /// 获取算法库统计信息
-/// Get algorithmlibraryinformation
 pub fn get_library_stats() -> LibraryStats {
     // 这里会根据实际实现的算法数量来填充统计信息
     // 暂时返回基础结构
@@ -202,7 +200,6 @@ pub fn get_library_stats() -> LibraryStats {
 }
 
 /// 获取所有算法信息
-/// Get hasalgorithminformation
 pub fn get_all_algorithms() -> Vec<AlgorithmInfo> {
     vec![
         // 排序算法
@@ -277,7 +274,6 @@ pub fn search_algorithms(query: &str) -> Vec<AlgorithmInfo> {
 }
 
 /// 根据分类获取算法
-/// get algorithm
 pub fn get_algorithms_by_category(category: AlgorithmCategory) -> Vec<AlgorithmInfo> {
     get_all_algorithms()
         .into_iter()
@@ -324,7 +320,6 @@ impl AlgorithmBenchmark {
     }
 
     /// 获取平均执行时间
-    /// Get executiontime
     pub fn get_average_time(&self, name: &str) -> Option<std::time::Duration> {
         self.results.get(name).map(|results| {
             let total: std::time::Duration = results.iter().map(|r| r.execution_time).sum();
@@ -333,7 +328,6 @@ impl AlgorithmBenchmark {
     }
 
     /// 生成基准测试报告
-    /// benchmark
     pub fn generate_report(&self) -> String {
         let mut report = String::from("算法性能基准测试报告\n");
         report.push_str("========================\n\n");

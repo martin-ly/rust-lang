@@ -4,10 +4,8 @@
 //! 本模块展示了 Rust 1.92.0 在进程管理场景中的应用，包括：
 //! This module demonstrates Rust 1.92.0 processmanagementapplicationincluding
 //! - 新的稳定 API（`rotate_right`, `NonZero::div_ceil`）
-//! - 性能优化（迭代器方法特化）
 //! - performance optimization （method ）
 //! - 改进的进程队列管理
-//! - process
 //!
 //! # 文件信息
 //! # File Info
@@ -74,7 +72,6 @@ impl ProcessQueue {
     }
 
     /// 获取队列中的所有进程（用于演示）
-    /// Get queuehasprocess
     pub fn iter(&self) -> impl Iterator<Item = &ProcessInfo> {
         self.processes.iter()
     }
@@ -120,7 +117,6 @@ impl RoundRobinScheduler {
 // ==================== 2. NonZero::div_ceil 在进程池大小计算中的应用 ====================
 
 /// 使用 NonZero::div_ceil 计算进程池大小
-/// NonZero::div_ceil process
 ///
 /// Rust 1.92.0: 新增的 `div_ceil` 方法可以安全地计算进程池的容量
 /// Rust 1.92.0: `div_ceil` method can process
@@ -135,7 +131,6 @@ pub fn calculate_process_pool_size(total_tasks: usize, tasks_per_process: NonZer
 }
 
 /// 使用 div_ceil 实现进程资源分配
-/// div_ceil process
 pub struct ProcessResourceAllocator {
     total_memory: usize,
     memory_per_process: NonZeroUsize,
@@ -150,7 +145,6 @@ impl ProcessResourceAllocator {
     }
 
     /// 计算可以创建的进程数
-    /// Compute cancreateprocess
     pub fn max_processes(&self) -> usize {
         if self.total_memory == 0 {
             return 0;
@@ -165,7 +159,6 @@ impl ProcessResourceAllocator {
 // ==================== 3. 迭代器方法特化在进程列表比较中的应用 ====================
 
 /// 使用特化的迭代器比较方法比较进程列表
-/// useiteratormethodprocess table
 ///
 /// Rust 1.92.0: Iterator::eq 为 TrustedLen 迭代器特化，性能更好
 pub fn compare_process_lists(list1: &[ProcessInfo], list2: &[ProcessInfo]) -> bool {
@@ -174,7 +167,6 @@ pub fn compare_process_lists(list1: &[ProcessInfo], list2: &[ProcessInfo]) -> bo
 }
 
 /// 使用迭代器特化检查进程状态
-/// useiteratorprocess status
 pub fn check_process_states(processes: &[ProcessInfo], expected_pids: &[u32]) -> bool {
     let actual_pids: Vec<u32> = processes.iter().map(|p| p.pid).collect();
     // Rust 1.92.0: 特化的迭代器比较

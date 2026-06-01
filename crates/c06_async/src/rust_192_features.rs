@@ -5,7 +5,6 @@
 //! This module demonstrates Rust 192.0 (2025-12-11) keylanguagefeaturestoolchainimprovements
 //!
 //! - `maybe_uninit_docs`: `MaybeUninit` 表示和有效性文档化
-//! - `raw_ref_union`: `&raw [mut|const]` 对联合体字段在 safe 代码中允许
 //!
 //! # 版本信息
 //! # Version Info
@@ -20,19 +19,15 @@
 // ============================================================================
 
 /// # `MaybeUninit` 文档化保证
-///
-/// Rust 1.92.0 正式文档化了 `MaybeUninit` 的内存表示保证：
 /// Rust 1.92.0 `MaybeUninit` memory represent ：
 /// - `MaybeUninit<T>` 与 `T` 具有相同的内存布局和对齐方式
 /// - `MaybeUninit<T>` `T` hasmemory method
 /// - `[MaybeUninit<T>; N]` 与 `[T; N]` 保证 layout 相同
-/// - `MaybeUninit<T>` 的未初始化状态是明确定义的（不是 UB）
 /// - `MaybeUninit<T>` state explicit definition （ UB）
 ///
 /// ## 对现有代码的影响
 /// ## to impact
 /// 之前版本中，`transmute_copy` 和 `ptr::read` 在 `MaybeUninit` 上的使用
-/// 已经广泛存在。1.92 只是将这些已有保证正式写入文档。
 /// in 。1.92 will 。
 ///
 /// ## 实践意义
@@ -40,7 +35,6 @@
 /// 这使得以下模式成为官方认可的 safe/unsafe 边界：
 /// under become safe/unsafe edge ：
 /// - 从 `[MaybeUninit<T>; N]` 到 `[T; N]` 的转换
-/// - 在结构体字段中使用 `MaybeUninit` 来避免不必要的初始化
 /// - in struct field in `MaybeUninit`
 use std::mem::MaybeUninit;
 
@@ -76,7 +70,6 @@ fn test_maybe_uninit_docs() {
 /// # Safe `&raw` reference
 ///
 /// Rust 1.92.0 允许在 safe 代码中使用 `&raw const` 和 `&raw mut`
-/// 获取联合体字段的原始指针，而无需 `unsafe` 块。
 /// Get rawpointerwithout `unsafe`
 ///
 /// ## 背景
@@ -84,7 +77,6 @@ fn test_maybe_uninit_docs() {
 /// 联合体（union）字段的引用创建之前需要 `unsafe`，
 /// union volume （union）field reference 's before `unsafe`，
 /// 因为编译器无法确定哪个变体是活跃的。
-/// because volume 。
 ///
 /// ## 现在
 /// ## Now
@@ -107,7 +99,6 @@ pub union Value {
 }
 
 /// 在 safe 代码中获取联合体字段的原始指针
-/// safe getraw pointer
 pub fn get_union_raw_ptr(u: &mut Value) -> *mut i32 {
     &raw mut u.int
 }

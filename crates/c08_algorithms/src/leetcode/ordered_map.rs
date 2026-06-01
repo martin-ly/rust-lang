@@ -134,7 +134,6 @@ pub fn falling_squares_ordered_map(positions: Vec<Vec<i32>>) -> Vec<i32> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有有序映射类问题
-/// Get hashasmapproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

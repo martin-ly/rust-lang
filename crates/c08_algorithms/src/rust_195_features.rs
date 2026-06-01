@@ -29,7 +29,6 @@ pub struct RangeAlgorithmExamples;
 
 impl RangeAlgorithmExamples {
     /// 判断两个闭区间是否重叠
-    /// interval
     pub fn ranges_overlap(
         a: core::range::RangeInclusive<i32>,
         b: core::range::RangeInclusive<i32>,
@@ -90,7 +89,6 @@ impl SearchAlgorithmExamples {
     }
 
     /// 二分搜索变体：查找满足谓词的边界
-    /// binary search volume ：edge
     pub fn partition_point_with_guard<T>(arr: &[T], predicate: impl Fn(&T) -> bool) -> usize {
         arr.iter().position(|x| !predicate(x)).unwrap_or(arr.len())
     }
@@ -109,7 +107,6 @@ pub struct ConcurrentAlgorithmExamples;
 
 impl ConcurrentAlgorithmExamples {
     /// 比较计数器（用于并行算法的步数统计）
-    /// （parallel algorithm ）
     pub fn increment_step_counter(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Relaxed, Ordering::Relaxed, |old| old + 1)
     }
@@ -140,7 +137,6 @@ pub struct AlgorithmColdPathExamples;
 
 impl AlgorithmColdPathExamples {
     /// 数组访问：越界为冷路径
-    /// array path
     pub fn safe_get<T: Clone>(arr: &[T], index: usize) -> Option<T> {
         if index < arr.len() {
             Some(arr[index].clone())
@@ -151,7 +147,6 @@ impl AlgorithmColdPathExamples {
     }
 
     /// 除法：除零为冷路径
-    /// zero path
     pub fn safe_divide(a: i32, b: i32) -> Option<i32> {
         if b != 0 {
             Some(a / b)
@@ -171,8 +166,6 @@ impl AlgorithmColdPathExamples {
 // ============================================================================
 
 /// # `cfg_select!` 宏
-///
-/// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏。
 /// `cfg_select!` Rust 1.95.0 compile-time condition 。
 /// 在算法优化中，可用于编译期选择平台相关的缓存行大小，
 /// in algorithm optimization in ，platform cache line ，
@@ -201,7 +194,6 @@ impl CfgSelectAlgorithmExamples {
 /// # set reference API
 ///
 /// Rust 1.95.0 为 Vec, VecDeque, LinkedList 稳定了一组新方法，
-/// 允许在插入元素后直接获取其可变引用，避免了二次查找。
 /// in element after its reference ，。
 use std::collections::{LinkedList, VecDeque};
 
@@ -423,8 +415,6 @@ impl RealRust195Features {
     }
 
     /// `gen` block: 合并 K 个已排序序列（K-way merge）
-    ///
-    /// 使用 `gen` block 将传统的手动状态机（维护 K 个 Peekable 迭代器）
     /// `gen` block will state machine （ K Peekable ）
     /// 简化为直观的命令式循环。
     /// as imperative circulation 。
@@ -461,7 +451,6 @@ impl RealRust195Features {
     /// `gen` block: ordering sequence
     ///
     /// 等价于 `SequenceDeduplicator` 的手动 Iterator 实现，
-    /// 但 `gen` block 的源码更直观。
     /// but `gen` block 。
     pub fn gen_dedup_sorted(data: Vec<i32>) -> impl Iterator<Item = i32> {
         gen move {
@@ -548,8 +537,7 @@ mod real_rust_195_tests {
         let a = vec![1, 3, 5];
         let b = vec![2, 4, 6];
         let c = vec![0, 7];
-        let merged: Vec<i32> =
-            RealRust195Features::gen_merge_sorted(vec![a, b, c]).collect();
+        let merged: Vec<i32> = RealRust195Features::gen_merge_sorted(vec![a, b, c]).collect();
         assert_eq!(merged, vec![0, 1, 2, 3, 4, 5, 6, 7]);
     }
 

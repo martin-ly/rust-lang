@@ -12,26 +12,18 @@
 //! - **内存优化**: 使用 Vec 高效存储路径，减少克隆
 //! - **memory optimization **: Vec efficient ，
 //! - **迭代器优化**: 回溯中的迭代器性能提升
-//! - **iteratoroptimization**: iteratorperformance improvement
 //!
 //! ## 包含的经典题目
 //! ## Classic Problems
 //!
 //! - 17. Letter Combinations of a Phone Number（电话号码的字母组合）
-//! - 22. Generate Parentheses（括号生成）
 //! - 39. Combination Sum（组合总和）
-//! - 46. Permutations（全排列）
 //! - 77. Combinations（组合）
-//! - 78. Subsets（子集）
 //! - 79. Word Search（单词搜索）
-//! - 90. Subsets II（子集 II）
 //! - 131. Palindrome Partitioning（分割回文串）
-//! - 216. Combination Sum III（组合总和 III）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 46. Permutations（全排列）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个不含重复数字的数组 `nums`，返回其 **所有可能的全排列**。你可以 **按任意顺序** 返回答案。
 /// `nums`，its **all may arrangement **。can **order ** answer 。
@@ -83,8 +75,6 @@ fn backtrack_permute(
 }
 
 /// 78. Subsets（子集）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 `nums`，数组中的元素 **互不相同**。返回该数组所有可能的子集（幂集）。解集 **不能** 包含重复的子集。你可以按 **任意顺序** 返回解集。
 /// `nums`，in element ****。this all may subset （power set ）。 **cannot ** subset 。can **order ** 。
@@ -128,8 +118,6 @@ fn backtrack_subsets(
 }
 
 /// 90. Subsets II（子集 II）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 `nums`，其中可能包含重复元素，请你返回该数组所有可能的子集（幂集）。
 /// `nums`，its in may element ，this all may subset （power set ）。
@@ -181,8 +169,6 @@ fn backtrack_subsets_with_dup(
 }
 
 /// 39. Combination Sum（组合总和）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个 **无重复元素** 的整数数组 `candidates` 和一个目标整数 `target`，找出 `candidates` 中可以使数字和为目标数 `target` 的 **所有不同组合**，
 /// **element ** `candidates` and goal `target`， `candidates` in can and as goal `target` **all combination **，
@@ -237,8 +223,6 @@ fn backtrack_combination_sum(
 }
 
 /// 77. Combinations（组合）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定两个整数 `n` 和 `k`，返回范围 `[1, n]` 中所有可能的 `k` 个数的组合。
 /// `n` and `k`，scope `[1, n]` in all may `k` combination 。
@@ -286,8 +270,6 @@ fn backtrack_combine(
 }
 
 /// 22. Generate Parentheses（括号生成）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 数字 `n` 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 **有效的** 括号组合。
 /// `n` to ，design function ，can all may and and **effective ** combination 。
@@ -335,8 +317,6 @@ fn backtrack_parenthesis(left: i32, right: i32, current: &mut String, result: &m
 }
 
 /// 17. Letter Combinations of a Phone Number（电话号码的字母组合）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个仅包含数字 `2-9` 的字符串，返回所有它能表示的字母组合。答案可以按 **任意顺序** 返回。
 /// `2-9` ，all represent combination 。answer can **order ** 。
@@ -396,8 +376,6 @@ fn backtrack_letter_combinations(
 }
 
 /// 79. Word Search（单词搜索）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个 `m x n` 二维字符网格 `board` 和一个字符串单词 `word`。如果 `word` 存在于网格中，返回 `true`；否则，返回 `false`。
 /// `m x n` `board` and `word`。if `word` in in ， `true`；， `false`。
@@ -475,8 +453,6 @@ fn backtrack_word_search(
 }
 
 /// 216. Combination Sum III（组合总和 III）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 找出所有相加之和为 `n` 的 `k` 个数的组合，且满足下列条件：
 /// all 's and as `n` `k` combination ，and under condition ：
@@ -534,8 +510,6 @@ fn backtrack_combination_sum3(
 }
 
 /// 131. Palindrome Partitioning（分割回文串）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个字符串 `s`，请你将 `s` 分割成一些子串，使每个子串都是 **回文串**。返回 `s` 所有可能的分割方案。
 /// `s`，will `s` ， ****。 `s` all may 。
@@ -606,7 +580,6 @@ fn backtrack_partition(
 // ==================== 问题信息注册 ====================
 
 /// 获取所有回溯类问题
-/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

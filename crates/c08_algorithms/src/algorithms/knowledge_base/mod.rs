@@ -157,7 +157,6 @@ impl AlgorithmKnowledgeBase {
     }
 
     /// 初始化排序算法知识
-    /// sorting algorithm
     fn initialize_sorting_algorithms(&mut self) {
         // 快速排序
         self.algorithms.insert(
@@ -415,7 +414,6 @@ function merge(left, right):
     }
 
     /// 初始化搜索算法知识
-    /// searching algorithm
     fn initialize_searching_algorithms(&mut self) {
         // 二分搜索
         self.algorithms.insert(
@@ -508,7 +506,6 @@ function binary_search(array, target):
     }
 
     /// 初始化图算法知识
-    /// graph algorithm
     fn initialize_graph_algorithms(&mut self) {
         // BFS
         self.algorithms.insert(
@@ -831,19 +828,16 @@ function lcs(X, Y):
     }
 
     /// 获取所有算法名称
-    /// Get hasalgorithm
     pub fn get_all_algorithm_names(&self) -> Vec<String> {
         self.algorithms.keys().cloned().collect()
     }
 
     /// 获取所有分类名称
-    /// Get has
     pub fn get_all_category_names(&self) -> Vec<String> {
         self.categories.keys().cloned().collect()
     }
 
     /// 获取所有应用名称
-    /// Get hasapplication
     pub fn get_all_application_names(&self) -> Vec<String> {
         self.applications.keys().cloned().collect()
     }

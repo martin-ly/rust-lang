@@ -7,7 +7,6 @@
 //! # Concept Definitions
 //!
 //! AFIDT 允许在 trait object (`dyn Trait`) 中使用 `async fn`。
-//! 这是 async Rust 的最后一个主要拼图，解决了 `async_trait` 宏的大部分使用场景。
 //! async Rust finally main ， `async_trait` part scenario 。
 //!
 //! # 问题背景
@@ -16,14 +15,11 @@
 //! ```text
 //! AFIT (1.75.0): async fn in trait ✅
 //!   └── 但 trait object (dyn Trait) 不支持 async fn ❌
-//!       └── 需要 async_trait 宏 workaround
 //!           └── AFIDT (1.97+ nightly): 原生支持 dyn async trait ✅
-//! ```
 //!
 //! # 权威来源
 //! # Authoritative Sources
 //! - 跟踪: [rust-lang/rust#133119](https://github.com/rust-lang/rust/issues/133119)
-//! - 设计文档: [AFIDT Design Doc](https://rust-lang.github.io/async-fundamentals-initiative/)
 
 // 注意：async_fn_in_dyn_trait feature 已在 lib.rs 中声明
 // #![feature(async_fn_in_dyn_trait)]
@@ -38,8 +34,6 @@
 // ============================================================================
 
 /// # 原生 AFIDT vs async_trait 宏
-///
-/// ## async_trait 方式（当前 stable 方案）
 /// ```ignore
 /// use async_trait::async_trait;
 ///
@@ -50,7 +44,6 @@
 /// ```
 ///
 /// ## AFIDT 方式（nightly，未来 stable）
-/// ```ignore
 /// trait DataSource {
 ///     async fn fetch(&self, key: &str) -> Option<String>;
 /// }
@@ -149,8 +142,6 @@ impl AfidtExamples {
 // ============================================================================
 
 /// # async_trait vs 原生 AFIDT
-///
-/// | 维度 | async_trait 宏 | 原生 AFIDT (nightly) |
 /// |------|---------------|---------------------|
 /// | 额外依赖 | 需要 `async-trait` crate | 零依赖 |
 /// | outside | `async-trait` crate | |
@@ -189,11 +180,8 @@ impl AsyncTraitComparison {
 /// # AFIDT when before
 ///
 /// ## ❌ Send bound 问题
-/// AFIDT 返回的 Future 是否实现 Send 无法在 trait bound 中直接表达。
 /// AFIDT Future Send in trait bound in express 。
 /// 需要 RTN (Return Type Notation) 解决。
-///
-/// ```ignore
 /// // 当前无法表达：返回的 Future 必须是 Send 的
 /// // when before express ： Future must Send
 /// fn spawn_task<T>(source: T)
@@ -204,7 +192,7 @@ impl AsyncTraitComparison {
 ///     tokio::spawn(async move { source.fetch("key").await });
 /// }
 /// ```
-///
+/// 
 /// ## ❌ 关联类型投影
 /// ## ❌ associated type
 /// 某些复杂的关联类型场景在 AFIDT 中仍有边界情况。

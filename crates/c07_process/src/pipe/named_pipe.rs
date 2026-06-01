@@ -18,7 +18,7 @@ pub struct NamedPipe {
 
 impl NamedPipe {
     /// 创建新的命名管道
-    /// named pipe
+    /// Create new named pipe
     pub fn new(name: &str, config: IpcConfig) -> IpcResult<Self> {
         // 在Windows上，我们使用文件作为简单的IPC机制
         let pipe_path = format!("{}.pipe", name);
@@ -111,7 +111,7 @@ impl NamedPipe {
     }
 
     /// 检查管道是否关闭
-    /// pipe
+    /// Check if pipe is closed
     pub fn is_closed(&self) -> bool {
         *self.is_closed.lock().expect("管道关闭状态锁被污染")
     }

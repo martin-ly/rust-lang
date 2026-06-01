@@ -128,8 +128,7 @@ impl MovingAverage {
 // ==================== 经典题目实现 ====================
 
 /// 239. Sliding Window Maximum（滑动窗口最大值）
-///
-/// ## 问题描述
+/// 239. Sliding Window Maximum
 /// ## Problem Description
 /// 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。
 /// nums，as k from to 。
@@ -141,7 +140,6 @@ impl MovingAverage {
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
 /// - **单调队列**: 使用双端队列维护单调递减序列
-/// - ****: sequence
 ///
 /// ## 复杂度
 /// ## Complexity
@@ -179,7 +177,6 @@ pub fn max_sliding_window_queue(nums: Vec<i32>, k: i32) -> Vec<i32> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有队列类问题
-/// Get hasqueueproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

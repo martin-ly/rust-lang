@@ -1,5 +1,4 @@
 //! 增强的进程间通信功能
-//! process functionality
 //!
 //! 这个模块提供了高性能的IPC通信功能，包括零拷贝数据传输、
 //! module performance IP Cfunctionality ，transmission 、
@@ -320,7 +319,6 @@ impl EnhancedIpcManager {
     }
 
     /// 创建消息队列通道
-    /// channel
     #[allow(dead_code)]
     pub async fn create_message_queue_channel(&self, name: &str, capacity: usize) -> IpcResult<()> {
         let connection = EnhancedConnection::MessageQueue(MessageQueueConnection {
@@ -360,7 +358,6 @@ impl EnhancedIpcManager {
     }
 
     /// 发送消息（零拷贝优化）
-    /// （optimization ）
     ///
     /// 使用 Rust 1.90 新特性进行零拷贝数据传输优化
     /// use Rust 1.90 newfeatureszero-copydata optimization
@@ -457,7 +454,6 @@ impl EnhancedIpcManager {
     }
 
     /// 接收消息（零拷贝优化）
-    /// （optimization ）
     ///
     /// 使用 Rust 1.90 新特性进行零拷贝数据接收优化
     /// use Rust 1.90 newfeatureszero-copydata optimization
@@ -537,7 +533,7 @@ impl EnhancedIpcManager {
     }
 
     /// 获取通道统计信息
-    /// Get information
+    /// Get channel statistics
     #[allow(dead_code)]
     pub async fn get_channel_stats(&self, channel_name: &str) -> Option<ChannelStats> {
         let channels = self.channels.read().await;
@@ -590,7 +586,6 @@ impl EnhancedIpcManager {
     /// performance （ Rust 1.90 concurrency feature ）
     ///
     /// 使用 Rust 1.90 的改进并发特性进行消息广播
-    /// Rust 1.90 concurrency feature
     #[allow(dead_code)]
     pub async fn broadcast_message<T>(
         &self,
@@ -779,7 +774,6 @@ impl EnhancedIpcManager {
     }
 
     /// 获取所有通道统计信息
-    /// Get hasinformation
     pub async fn get_all_channel_stats(&self) -> HashMap<String, ChannelStats> {
         let channels = self.channels.read().await;
         let mut stats = HashMap::new();
@@ -802,7 +796,6 @@ impl EnhancedIpcManager {
     }
 
     /// 更新通道统计信息
-    /// Update information
     async fn update_channel_stats(
         &self,
         channel_name: &str,

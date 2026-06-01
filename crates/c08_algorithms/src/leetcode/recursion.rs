@@ -114,7 +114,6 @@ pub fn fib_recursive(n: i32) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有递归类问题
-/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

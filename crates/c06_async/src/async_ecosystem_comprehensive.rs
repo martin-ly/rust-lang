@@ -2,7 +2,6 @@
 //! Rust asyncsystemcomprehensiveanalysis module
 //!
 //! 本模块提供了对Rust异步编程生态系统中各个主要库的全面分析，
-//! This module provides Rustasyncsystemlibrarycomprehensiveanalysis
 //! 包括：std、smol、tokio等库的概念定义、属性、联系关系、
 //! ：std、smol、tokioetc. library concept definition 、attribute 、、
 //! 区别、使用场景、示例和组合设计模式。
@@ -26,7 +25,7 @@ use tokio::task;
 use tokio::time::sleep;
 
 /// 异步生态系统架构分析
-/// asyncsystem analysis
+/// Async ecosystem architecture analysis
 ///
 /// 这个结构体展示了不同异步运行时之间的关系和特性
 /// struct async runtime 's and feature
@@ -281,13 +280,13 @@ impl AsyncRuntimeAnalyzer {
     }
 
     /// 获取所有运行时分析
-    /// Get hasruntimeanalysis
+    /// Get all runtime analysis
     pub fn get_all_analyses(&self) -> &HashMap<String, AsyncEcosystemAnalysis> {
         &self.runtimes
     }
 
     /// 比较两个运行时的特性
-    /// runtime feature
+    /// Compare runtime features
     pub fn compare_runtimes(&self, runtime1: &str, runtime2: &str) -> Option<RuntimeComparison> {
         let analysis1 = self.runtimes.get(runtime1)?;
         let analysis2 = self.runtimes.get(runtime2)?;
@@ -369,9 +368,9 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式1：运行时适配器模式
-    /// pattern1runtime pattern
+    /// Pattern 1: Runtime Adapter Pattern
     /// 为不同的异步运行时提供统一的接口
-    /// asyncruntimeprovide interface
+    /// Provide unified interface for different async runtimes
     pub async fn runtime_adapter_pattern(&self) -> Result<()> {
         println!("🔄 运行时适配器模式演示");
 
@@ -389,7 +388,7 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式2：任务组合模式
-    /// pattern2task pattern
+    /// Pattern 2: Task Composition Pattern
     /// 将多个异步任务组合成更复杂的任务
     /// will async task combination complex task
     pub async fn task_composition_pattern(&self) -> Result<()> {
@@ -415,9 +414,9 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式3：运行时抽象模式
-    /// pattern3runtime pattern
+    /// Pattern 3: Runtime Abstraction Pattern
     /// 通过抽象接口支持不同的异步运行时
-    /// supportasync runtime
+    /// Support different async runtimes through abstract interfaces
     pub async fn runtime_abstraction_pattern(&self) -> Result<()> {
         println!("🏗️ 运行时抽象模式演示");
 
@@ -436,7 +435,7 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式4：异步同步转换模式
-    /// pattern4asyncsynchronousconversion pattern
+    /// Pattern 4: Async-Sync Conversion Pattern
     /// 演示异步和同步代码之间的转换
     /// demonstration async and synchronous 's conversion
     pub async fn async_sync_conversion_pattern(&self) -> Result<()> {
@@ -460,9 +459,9 @@ impl AsyncIntegrationPatterns {
     }
 
     /// 模式5：聚合组合设计模式
-    /// pattern5design pattern
+    /// Pattern 5: Aggregate Combination Design Pattern
     /// 演示聚合和组合的设计模式
-    /// design pattern
+    /// Demonstrate aggregate and combination design patterns
     pub async fn aggregation_composition_pattern(&self) -> Result<()> {
         println!("📊 聚合组合设计模式演示");
 

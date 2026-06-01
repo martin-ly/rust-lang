@@ -16,7 +16,6 @@ use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock, Semaphore, mpsc, o
 use tokio::time::timeout;
 
 /// 增强的异步进程管理器
-/// strongasyncprocess manager
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedAsyncProcessManager {
@@ -29,7 +28,6 @@ pub struct EnhancedAsyncProcessManager {
 }
 
 /// 增强的异步管理进程
-/// async process
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedManagedProcess {
@@ -278,7 +276,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步获取进程信息
-    /// asyncgetprocess information
+    /// Async get process info
     pub async fn get_info(&self, pid: u32) -> ProcessResult<ProcessInfo> {
         let (response_sender, response_receiver) = oneshot::channel();
 
@@ -470,7 +468,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 带超时等待进程完成
-    /// etc. process
+    /// Wait for process completion with timeout
     pub async fn wait_with_timeout(
         &self,
         pid: u32,
@@ -512,7 +510,6 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 异步读取标准错误
-    /// asyncstandard error
     async fn read_stderr(&self, pid: u32) -> ProcessResult<Vec<u8>> {
         let mut processes = self.processes.write().await;
         if let Some(managed_process) = processes.get_mut(&pid) {
@@ -602,7 +599,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理启动进程命令
-    /// process command
+    /// Handle start process command
     async fn handle_spawn(
         config: ProcessConfig,
         processes: &Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,
@@ -680,7 +677,6 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理带回调的启动进程命令
-    /// process command
     async fn handle_spawn_with_callback<F>(
         config: ProcessConfig,
         callback: F,
@@ -724,7 +720,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理终止进程命令
-    /// process command
+    /// Handle terminate process command
     #[allow(unused_variables)]
     async fn handle_kill(
         pid: u32,
@@ -761,7 +757,7 @@ impl EnhancedAsyncProcessManager {
     }
 
     /// 处理获取进程信息命令
-    /// process command
+    /// Handle get process info command
     async fn handle_get_info(
         pid: u32,
         processes: &Arc<TokioRwLock<HashMap<u32, EnhancedManagedProcess>>>,

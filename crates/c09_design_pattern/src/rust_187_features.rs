@@ -1,6 +1,4 @@
 //! Rust 187.0 新特性实现模块 —— c09_design_pattern
-//!
-//! 本模块展示了 Rust 187.0 (2025-05-15) 的关键语言特性和工具链改进。
 //! This module demonstrates key language features and toolchain improvements of Rust 187.0 (2025-05-15).
 //!
 //! - `open_ranges_parsing`: 开放范围 `..EXPR` 可在一元操作符后解析
@@ -58,7 +56,6 @@ fn test_open_range_parsing() {
 /// 在 2024 Edition 中，`impl Trait` 的隐式生命周期捕获规则更严格。
 /// in 2024 Edition in ，`impl Trait` lifetime rule 。
 /// `use<'a>` 语法允许显式声明需要捕获哪些生命周期。
-/// `use<'a>` lifetime 。
 pub trait Parser<'a> {
     fn parse(&self, input: &'a str) -> impl Iterator<Item = &'a str> + use<'a, Self>;
 }

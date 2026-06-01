@@ -1,5 +1,4 @@
 //! 增强的错误处理系统
-//! strongerrorhandling system
 //!
 //! 这个模块提供了增强的错误处理功能，包括错误恢复、
 //! module error handling functionality ，error recovery 、
@@ -15,7 +14,6 @@ use std::time::{Duration, SystemTime};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的错误管理器
-/// strongerror manager
 #[cfg(feature = "async")]
 #[derive(Clone)]
 pub struct EnhancedErrorManager {
@@ -534,7 +532,6 @@ impl EnhancedErrorManager {
     }
 
     /// 分类错误严重程度
-    /// classification degree
     fn classify_error_severity(
         &self,
         _error: &dyn StdError,
@@ -755,7 +752,6 @@ impl EnhancedErrorManager {
     }
 
     /// 智能错误链追踪（使用 Rust 1.90 改进的模式匹配）
-    /// （ Rust 1.90 ）
     pub async fn trace_error_chain(&self, root_error_id: &str) -> Option<ErrorChain> {
         let chains = self.error_chain_tracker.error_chains.lock().await;
 
@@ -927,7 +923,6 @@ pub struct ErrorStatistics {
 }
 
 /// 错误模式分析结果
-/// errorpatternanalysis result
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ErrorPatternAnalysis {

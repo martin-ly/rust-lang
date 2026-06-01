@@ -14,7 +14,6 @@
 //! - 异步迭代器改进（性能提升 15-20%）
 //! - async （performance 15-20%）
 //! - JIT 编译器优化对异步代码的性能提升
-//! - JIT optimizationasyncperformance improvement
 //! - 内存分配优化对异步场景的影响
 //! - memory optimization to async scenario impact
 //!
@@ -105,7 +104,6 @@ pub mod async_iterator_improvements {
     }
 
     /// 复杂异步流处理示例
-    /// asyncflowhandling example
     pub async fn complex_async_pipeline<S>(input: S) -> Vec<i32>
     where
         S: Stream<Item = i32> + Send,
@@ -142,7 +140,6 @@ pub mod async_jit_optimizations {
     use super::*;
 
     /// 异步迭代器链式操作优化示例
-    /// asynciteratoroperationoptimization example
     ///
     /// Rust 1.91 JIT 优化：异步迭代器链式操作性能提升 15-20%
     /// Rust 1.91 JIT optimization ：async performance 15-20%
@@ -161,7 +158,6 @@ pub mod async_jit_optimizations {
     }
 
     /// 异步批量处理示例
-    /// asynchandling example
     pub async fn async_batch_processing<S>(input: S, batch_size: usize) -> Vec<Vec<i32>>
     where
         S: Stream<Item = i32> + Send,
@@ -203,7 +199,6 @@ pub mod async_memory_optimizations {
     use tokio::time::sleep;
 
     /// 异步小对象分配示例
-    /// asyncsmallobject example
     ///
     /// Rust 1.91 优化：异步场景下小对象分配性能提升 25-30%
     /// Rust 1.91 optimization ：async scenario under to performance 25-30%
@@ -281,7 +276,6 @@ pub mod async_error_handling {
     }
 
     /// 异步转换错误处理示例
-    /// asyncconversionerrorhandling example
     pub async fn async_convert_items(items: Vec<String>) -> ControlFlow<String, Vec<i32>> {
         use std::ops::ControlFlow;
         let mut result = Vec::new();
@@ -338,7 +332,6 @@ pub mod comprehensive_async_examples {
     use super::*;
 
     /// 异步数据处理管道
-    /// async pipe
     pub struct AsyncPipeline {
         pub max_concurrent: usize,
         pub buffer_size: usize,
@@ -410,7 +403,6 @@ pub mod async_stream_benchmarks {
     }
 
     /// 异步流处理性能测试
-    /// asyncflowhandlingperformance test
     ///
     /// Rust 1.91 优化：性能提升 15-20%
     /// Rust 1.91 optimization ：performance 15-20%
@@ -441,7 +433,6 @@ pub mod async_stream_benchmarks {
     }
 
     /// 批量异步处理性能测试
-    /// asynchandlingperformance test
     pub async fn benchmark_batch_processing<S>(input: S, batch_size: usize) -> PerformanceResult
     where
         S: Stream<Item = i32> + Send,
@@ -489,7 +480,6 @@ pub mod async_stream_benchmarks {
 /// Rust 1.91 optimizationasynctask manager
 ///
 /// 利用内存分配优化和 JIT 优化提升任务管理性能
-/// memoryoptimization JIT optimizationimprovementtaskmanagement performance
 pub mod async_task_manager {
     use super::*;
     use std::collections::HashMap;
@@ -593,7 +583,7 @@ pub mod async_task_manager {
         }
 
         /// 获取任务统计信息
-        /// Get taskinformation
+        /// Get task statistics
         pub async fn get_statistics(&self) -> TaskStatistics {
             let tasks = self.tasks.lock().await;
 
@@ -670,7 +660,6 @@ pub mod async_task_manager {
 /// Rust 1.91 optimizationasync system
 ///
 /// 利用内存分配优化提升缓存性能
-/// memoryoptimizationimprovement performance
 pub mod async_cache_system {
     use super::*;
     use std::collections::HashMap;
@@ -712,6 +701,7 @@ pub mod async_cache_system {
         V: Clone + Send + Sync,
     {
         /// 创建新的缓存
+        /// Create new cache
         pub fn new(max_size: usize) -> Self {
             Self {
                 cache: Arc::new(RwLock::new(HashMap::new())),

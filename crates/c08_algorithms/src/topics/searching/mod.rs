@@ -23,7 +23,6 @@ use std::hash::Hash;
 use std::time::Instant;
 
 /// 搜索算法类型枚举
-/// Search algorithmtypeenum
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum SearchingAlgorithm {
     /// 线性搜索 - O(n)
@@ -58,7 +57,6 @@ pub enum SearchingAlgorithm {
 }
 
 /// 搜索算法实现类型
-/// Search algorithmimplementationtype
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum ImplementationType {
     /// 同步实现
@@ -100,15 +98,12 @@ pub struct SearchResult<T> {
     /// implementation type
     pub implementation: ImplementationType,
     /// 路径（用于图搜索）
-    /// （）
     pub path: Option<Vec<T>>,
     /// 距离（用于图搜索）
-    /// （）
     pub distance: Option<f64>,
 }
 
 /// 搜索算法复杂度信息
-/// Search algorithmcomplexityinformation
 #[derive(Debug, Clone)]
 pub struct SearchingComplexity {
     pub algorithm: SearchingAlgorithm,
@@ -121,7 +116,6 @@ pub struct SearchingComplexity {
 
 impl SearchingComplexity {
     /// 获取所有搜索算法的复杂度信息
-    /// Get hassearchalgorithmcomplexityinformation
     pub fn get_all_complexities() -> Vec<Self> {
         vec![
             SearchingComplexity {
@@ -798,7 +792,6 @@ pub struct SearchingValidator;
 
 impl SearchingValidator {
     /// 验证搜索结果是否正确
-    /// Verify searchresultwhetherpositive
     pub fn validate_search_result<T: PartialEq>(
         data: &[T],
         target: &T,
@@ -822,7 +815,6 @@ impl SearchingValidator {
     }
 
     /// 验证搜索算法的性能
-    /// Verify searchalgorithmperformance
     pub fn validate_performance(result: &SearchResult<()>) -> bool {
         result.execution_time.as_nanos() > 0 && result.comparisons > 0 && result.nodes_visited > 0
     }

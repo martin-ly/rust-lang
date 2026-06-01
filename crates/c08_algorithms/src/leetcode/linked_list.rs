@@ -33,8 +33,6 @@ impl ListNode {
 // ==================== 经典题目实现 ====================
 
 /// 2. Add Two Numbers（两数相加）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
 /// ，represent 。 way ，and and node 。
@@ -82,8 +80,6 @@ pub fn add_two_numbers(
 }
 
 /// 19. Remove Nth Node From End of List（删除链表的倒数第 N 个结点）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
 /// ， n point ，and and point 。
@@ -126,8 +122,6 @@ pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<Li
 }
 
 /// 21. Merge Two Sorted Lists（合并两个有序链表）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 /// will and as and 。all node 。
@@ -163,8 +157,6 @@ pub fn merge_two_lists(
 }
 
 /// 23. Merge k Sorted Lists（合并 K 个升序链表）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个链表数组，每个链表都已经按升序排列。请你将所有链表合并到一个升序链表中，返回合并后的链表。
 /// ，arrangement 。will all and to in ，and after 。
@@ -204,11 +196,8 @@ pub fn merge_k_lists(lists: Vec<Option<Box<ListNode>>>) -> Option<Box<ListNode>>
 }
 
 /// 141. Linked List Cycle（环形链表）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个链表的头节点 head ，判断链表中是否有环。
-/// node head ，in 。
 ///
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
@@ -238,8 +227,6 @@ pub fn has_cycle(head: Option<Box<ListNode>>) -> bool {
 }
 
 /// 142. Linked List Cycle II（环形链表 II）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个链表的头节点 head ，返回链表开始入环的第一个节点。如果链表无环，则返回 null。
 /// node head ，first node 。if ， null。
@@ -263,7 +250,6 @@ pub fn has_cycle(head: Option<Box<ListNode>>) -> bool {
 /// 由于 Rust 的所有权系统限制，使用 `Box<ListNode>` 无法直接实现 O(1) 空间的快慢指针算法。
 /// Rust ownership system ， `Box<ListNode>` O(1) space pointer algorithm 。
 /// 完整实现需要使用 `Rc<RefCell<ListNode>>` 或 `unsafe` 代码。
-/// 这里提供一个使用 HashSet 的可行方案。
 /// HashSet 。
 pub fn detect_cycle(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     use std::collections::HashSet;
@@ -334,8 +320,6 @@ pub fn sort_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
 }
 
 /// 206. Reverse Linked List（反转链表）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
 /// node head ，，and after 。

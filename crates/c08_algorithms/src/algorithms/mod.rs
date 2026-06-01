@@ -10,9 +10,7 @@
 //! ## Core Features
 //!
 //! - **形式化验证**: 包含循环不变量、霍尔逻辑、正确性证明
-//! - **formalverify**: containinvariantcorrectness proof
 //! - **复杂度分析**: 主定理、摊还分析、渐进分析
-//! - **complexityanalysis**: analysis analysis
 //! - **多种实现**: 同步、并行、异步、分布式
 //! - ****: synchronous 、parallelism 、async 、distribution
 //! - **Rust 1.90**: GATs、Async Traits、常量泛型

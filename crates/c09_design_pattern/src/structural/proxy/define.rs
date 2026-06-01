@@ -6,7 +6,6 @@
 //! - 利用裸指针Default实现简化初始化
 //! - pointer Default
 //! - 支持多种代理类型（虚拟代理、保护代理、远程代理等）
-//! - type （、、etc. ）
 //定义一个 Subject trait
 #[allow(unused)]
 pub trait Subject {

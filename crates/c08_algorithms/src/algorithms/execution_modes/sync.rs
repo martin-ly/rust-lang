@@ -2,7 +2,6 @@
 //! # synchronousalgorithmexecution pattern
 //!
 //! 本模块实现同步算法执行，提供传统的单线程算法执行方式。
-//! This module implements synchronousalgorithmexecutionprovidesinglethreadalgorithmexecutionmethod
 //! 适用于 CPU 密集型任务和需要确定性执行顺序的场景。
 //! CPU task and order scenario 。
 use super::{ExecutionResult, SyncAlgorithm};
@@ -14,7 +13,6 @@ pub struct SyncExecutor;
 
 impl SyncExecutor {
     /// 执行同步算法并测量性能
-    /// executionsynchronousalgorithm performance
     pub fn execute_with_metrics<A, T, R>(
         algorithm: A,
         input: T,
@@ -41,7 +39,6 @@ impl SyncExecutor {
     }
 
     /// 批量执行同步算法
-    /// executionsynchronous algorithm
     pub fn execute_batch<A, T, R>(
         algorithm: A,
         inputs: Vec<T>,
@@ -57,7 +54,6 @@ impl SyncExecutor {
     }
 
     /// 执行同步算法并返回详细统计信息
-    /// executionsynchronousalgorithm information
     pub fn execute_with_stats<A, T, R>(
         algorithm: A,
         input: T,
@@ -104,7 +100,6 @@ impl SyncExecutor {
 }
 
 /// 同步执行统计信息
-/// synchronousexecution information
 #[derive(Debug, Clone)]
 pub struct SyncExecutionStats<T> {
     pub results: Vec<ExecutionResult<T>>,
@@ -136,7 +131,7 @@ impl<T> SyncExecutionStats<T> {
     }
 
     /// 获取最小内存使用
-    /// Get minimummemoryuse
+    /// Get minimum memory usage
     pub fn min_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -146,7 +141,7 @@ impl<T> SyncExecutionStats<T> {
     }
 
     /// 获取最大内存使用
-    /// Get maximummemoryuse
+    /// Get maximum memory usage
     pub fn max_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -156,7 +151,7 @@ impl<T> SyncExecutionStats<T> {
     }
 
     /// 计算性能稳定性（变异系数）
-    /// Compute performance
+    /// Compute performance stability (coefficient of variation)
     pub fn performance_stability(&self) -> f64 {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
@@ -227,7 +222,6 @@ pub struct BenchmarkResult<T> {
 }
 
 /// 基准测试结果集合
-/// testresult set
 #[derive(Debug, Clone)]
 pub struct BenchmarkResults<T> {
     pub results: Vec<BenchmarkResult<T>>,
@@ -243,7 +237,6 @@ impl<T> BenchmarkResults<T> {
     }
 
     /// 获取最稳定性能的测试用例
-    /// Get performancetest
     pub fn most_stable(&self) -> Option<&BenchmarkResult<T>> {
         self.results.iter().min_by(|a, b| {
             a.stats

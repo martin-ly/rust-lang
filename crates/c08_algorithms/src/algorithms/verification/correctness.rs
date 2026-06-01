@@ -44,7 +44,7 @@ pub struct CorrectnessVerifier;
 
 impl CorrectnessVerifier {
     /// 验证排序算法的正确性
-    /// Verify sortalgorithmcorrectness
+    /// Verify sorting algorithm correctness
     pub fn verify_sorting_correctness<T: Clone + Ord>(
         sort_fn: impl Fn(&mut [T]),
         test_cases: &[Vec<T>],
@@ -67,7 +67,6 @@ impl CorrectnessVerifier {
     }
 
     /// 验证搜索算法的正确性
-    /// Verify searchalgorithmcorrectness
     pub fn verify_search_correctness<T: Clone + Ord>(
         search_fn: impl Fn(&[T], &T) -> Option<usize>,
         test_cases: &[(Vec<T>, T, Option<usize>)],
@@ -82,13 +81,12 @@ impl CorrectnessVerifier {
     }
 
     /// 检查数组是否已排序
-    /// arraywhether sort
+    /// Check if array is sorted
     fn is_sorted<T: Ord>(arr: &[T]) -> bool {
         arr.windows(2).all(|w| w[0] <= w[1])
     }
 
     /// 检查两个数组是否包含相同的元素
-    /// element
     fn has_same_elements<T: Clone + Ord>(arr1: &[T], arr2: &[T]) -> bool {
         if arr1.len() != arr2.len() {
             return false;

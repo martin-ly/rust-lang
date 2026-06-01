@@ -1,5 +1,4 @@
 //! 增强的性能优化系统
-//! strongperformanceoptimization system
 //!
 //! 这个模块提供了增强的性能优化功能，包括内存使用优化、
 //! module performance optimization functionality ，memory optimization 、
@@ -13,7 +12,6 @@ use std::time::{Duration, Instant, SystemTime};
 use tokio::sync::{Mutex as TokioMutex, RwLock as TokioRwLock};
 
 /// 增强的性能管理器
-/// strongperformance manager
 #[cfg(feature = "async")]
 #[derive(Clone)]
 #[allow(dead_code)]
@@ -532,7 +530,6 @@ impl EnhancedPerformanceManager {
     }
 
     /// 获取综合性能报告
-    /// Get performance
     pub async fn get_performance_report(&self) -> PerformanceReport {
         let memory_stats = self.memory_monitor.get_memory_stats().await;
         let cpu_stats = self.cpu_monitor.get_cpu_stats().await;
@@ -629,7 +626,6 @@ impl EnhancedPerformanceManager {
     }
 
     /// 记录批量优化统计
-    /// optimization
     async fn log_batch_optimization_stats(
         &self,
         success_count: usize,

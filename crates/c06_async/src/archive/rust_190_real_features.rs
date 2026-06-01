@@ -92,10 +92,8 @@ impl Drop for AsyncResource190 {
 }
 
 /// 真正的异步迭代器实现
-/// truepositiveasynciterator implementation
 ///
 /// 在Rust 1.90中，我们使用自定义的异步迭代器实现
-/// Rust 1.90usecustomasynciterator implementation
 pub struct AsyncDataStream190 {
     data: Vec<i32>,
     current_index: usize,
@@ -139,7 +137,6 @@ impl AsyncDataStream190 {
 }
 
 /// 利用Polonius借用检查器改进的复杂借用场景
-/// Poloniusborrowing complex borrowing scenario
 pub struct PoloniusBorrowDemo {
     data: Arc<Mutex<HashMap<String, String>>>,
     semaphore: Arc<Semaphore>,
@@ -154,7 +151,6 @@ impl PoloniusBorrowDemo {
     }
 
     /// 演示Polonius借用检查器的改进
-    /// demonstration Poloniusborrowing
     ///
     /// 在Rust 1.90中，Polonius借用检查器能够更好地处理复杂的借用场景
     /// in Rust 1.90in ，Poloniusborrowing can complex borrowing scenario
@@ -183,7 +179,6 @@ impl PoloniusBorrowDemo {
     }
 
     /// 演示更智能的借用分析
-    /// smartborrowing analysis
     pub async fn smart_borrow_analysis(&self) -> Result<Vec<String>> {
         let mut results = Vec::new();
 
@@ -222,7 +217,6 @@ impl NextGenTraitSolver {
     }
 
     /// 演示下一代特质求解器的性能优化
-    /// lowerperformance optimization
     pub async fn optimized_trait_solving<T>(&self, input: T) -> Result<usize>
     where
         T: std::fmt::Display + std::hash::Hash + Eq + Clone,
@@ -294,7 +288,7 @@ impl ParallelFrontendOptimizer {
     }
 
     /// 演示并行编译优化
-    /// parallel optimization
+    /// Demonstrate parallel compilation optimization
     pub async fn parallel_compilation(&self, tasks: Vec<String>) -> Result<Vec<String>> {
         // 初始化任务队列
         {

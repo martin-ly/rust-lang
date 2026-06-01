@@ -81,7 +81,6 @@ impl OptimizedFlyweightFactory {
     }
 
     /// 批量创建享元对象，利用数组转换优化
-    /// createobjectarrayconversion optimization
     pub fn batch_create_flyweights(
         &mut self,
         specs: &[(String, String)],
@@ -98,7 +97,6 @@ impl OptimizedFlyweightFactory {
     }
 
     /// 获取所有享元对象的统计信息
-    /// Get hasobjectinformation
     pub fn get_statistics(&self) -> (usize, Vec<u32>) {
         let count = self.flyweights.len();
         let ids: Vec<u32> = self.flyweights.values().map(|f| f.get_id()).collect();
@@ -234,7 +232,6 @@ pub fn test_array_conversion_optimization() {
 }
 
 /// 测试享元池管理器
-/// Test manager
 #[allow(unused)]
 pub fn test_flyweight_pool() {
     println!("\n=== 享元池管理器测试 ===");

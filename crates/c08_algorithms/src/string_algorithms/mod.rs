@@ -9,7 +9,6 @@ use anyhow::Result;
 // =========================
 
 /// 计算前缀函数（最长相等真前后缀）
-/// Compute frontfunctionlongtruefrontback
 fn compute_lps(pat: &[u8]) -> Vec<usize> {
     let mut lps = vec![0usize; pat.len()];
     let (mut len, mut i) = (0usize, 1usize);

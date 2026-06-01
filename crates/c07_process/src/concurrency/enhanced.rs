@@ -1,5 +1,4 @@
 //! 增强的同步原语功能
-//! synchronous functionality
 //!
 //! 这个模块提供了增强的同步原语功能，包括死锁检测、
 //! module synchronous functionality ，lock 、
@@ -15,7 +14,6 @@ use std::time::{Duration, Instant};
 use tokio::sync::{Barrier, Mutex as TokioMutex, RwLock as TokioRwLock, Semaphore};
 
 /// 增强的同步管理器
-/// strongsynchronous manager
 #[cfg(feature = "async")]
 pub struct EnhancedSyncManager {
     primitives: Arc<TokioRwLock<HashMap<String, Arc<dyn EnhancedSyncPrimitiveTrait>>>>,
@@ -297,7 +295,6 @@ pub struct AdaptiveScheduler {
 }
 
 /// 增强的原语统计信息
-/// strong information
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -366,7 +363,6 @@ pub struct PerformanceAnalysis {
 }
 
 /// 单个原语性能分析
-/// singleperformance analysis
 #[cfg(feature = "async")]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(dead_code)]
@@ -377,7 +373,6 @@ pub struct PrimitiveAnalysis {
 }
 
 /// 增强的互斥锁统计信息
-/// strong information
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedMutexStats {
@@ -390,7 +385,6 @@ struct EnhancedMutexStats {
 }
 
 /// 增强的读写锁统计信息
-/// strong information
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedRwLockStats {
@@ -405,7 +399,6 @@ struct EnhancedRwLockStats {
 }
 
 /// 增强的信号量统计信息
-/// strong information
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedSemaphoreStats {
@@ -418,7 +411,6 @@ struct EnhancedSemaphoreStats {
 }
 
 /// 增强的屏障统计信息
-/// strong information
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 struct EnhancedBarrierStats {
@@ -468,7 +460,6 @@ impl EnhancedSyncManager {
     }
 
     /// 创建增强的互斥锁
-    /// mutex
     pub async fn create_enhanced_mutex(&self, name: &str) -> SyncResult<Arc<EnhancedMutex>> {
         let mutex = EnhancedMutex::new(
             name,
@@ -490,7 +481,6 @@ impl EnhancedSyncManager {
     }
 
     /// 创建增强的读写锁
-    /// rwlock
     pub async fn create_enhanced_rwlock(&self, name: &str) -> SyncResult<Arc<EnhancedRwLock>> {
         let rwlock = EnhancedRwLock {
             name: name.to_string(),
@@ -531,7 +521,6 @@ impl EnhancedSyncManager {
     }
 
     /// 创建增强的信号量
-    /// semaphore
     pub async fn create_enhanced_semaphore(
         &self,
         name: &str,
@@ -616,26 +605,26 @@ impl EnhancedSyncManager {
     }
 
     /// 获取所有原语名称
-    /// Get has
+    /// Get all primitive names
     pub async fn get_primitive_names(&self) -> Vec<String> {
         self.primitives.read().await.keys().cloned().collect()
     }
 
     /// 检查原语是否存在
-    /// in
+    /// Check if primitive exists
     pub async fn has_primitive(&self, name: &str) -> bool {
         self.primitives.read().await.contains_key(name)
     }
 
     /// 获取原语统计信息
-    /// Get information
+    /// Get primitive statistics
     pub async fn get_primitive_stats(&self, name: &str) -> Option<EnhancedPrimitiveStats> {
         let primitives = self.primitives.read().await;
         primitives.get(name).map(|p| p.get_stats())
     }
 
     /// 获取所有原语统计信息
-    /// Get hasinformation
+    /// Get all primitive statistics
     pub async fn get_all_stats(&self) -> HashMap<String, EnhancedPrimitiveStats> {
         let primitives = self.primitives.read().await;
         let mut stats = HashMap::new();
@@ -654,7 +643,6 @@ impl EnhancedSyncManager {
     }
 
     /// 获取所有性能指标
-    /// Get hasperformance
     pub async fn get_all_performance_metrics(&self) -> HashMap<String, SyncPerformanceMetrics> {
         self.performance_monitor.get_all_metrics().await
     }
@@ -728,7 +716,6 @@ impl EnhancedSyncManager {
     }
 
     /// 自适应调整所有原语
-    /// all
     pub async fn adaptive_adjust_all(&self, load: f64) -> SyncResult<()> {
         let primitives = self.primitives.read().await;
 
@@ -834,7 +821,6 @@ impl EnhancedMutex {
     }
 
     /// 获取锁（带死锁检测和 Rust 1.90 智能模式匹配）
-    /// Get Rust 1.90 smartpattern
     ///
     /// 使用 Rust 1.90 的改进模式匹配和错误处理特性
     /// Rust 1.90 and error handling feature
@@ -1065,7 +1051,6 @@ impl EnhancedBarrier {
     }
 }
 /// 增强的互斥锁守卫
-/// mutex
 #[cfg(feature = "async")]
 #[allow(dead_code)]
 pub struct EnhancedMutexGuard<'a> {

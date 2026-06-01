@@ -12,29 +12,21 @@
 //! - **内存优化**: 使用 Vec 和 HashSet 高效存储图结构
 //! - **memory optimization **: Vec and HashSet efficient structure
 //! - **迭代器优化**: 图遍历中的迭代器性能提升
-//! - **iteratoroptimization**: graphtraversaliteratorperformance improvement
 //!
 //! ## 包含的经典题目
 //! ## Classic Problems
 //!
 //! - 200. Number of Islands（岛屿数量）
-//! - 207. Course Schedule（课程表）
 //! - 210. Course Schedule II（课程表 II）
-//! - 399. Evaluate Division（除法求值）
 //! - 547. Number of Provinces（省份数量）
-//! - 695. Max Area of Island（岛屿的最大面积）
 //! - 733. Flood Fill（图像渲染）
-//! - 994. Rotting Oranges（腐烂的橘子）
 //! - 130. Surrounded Regions（被围绕的区域）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::VecDeque;
 
 /// 200. Number of Islands（岛屿数量）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个由 `'1'`（陆地）和 `'0'`（水）组成的的二维网格，请你计算网格中岛屿的数量。
-/// `'1'`（）and `'0'`（），in quantity 。
 /// 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
 /// is ，and and level direction and /or direction on 。
 ///
@@ -100,8 +92,6 @@ fn dfs_islands(
 }
 
 /// 547. Number of Provinces（省份数量）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 有 `n` 个城市，其中一些彼此相连，一些不相连。如果城市 `a` 与城市 `b` 直接相连，且城市 `b` 与城市 `c` 直接相连，
 /// `n` ，its in this ，。if `a` and `b` ，and `b` and `c` ，
@@ -152,8 +142,6 @@ fn dfs_provinces(is_connected: &[Vec<i32>], visited: &mut [bool], node: usize, n
 }
 
 /// 733. Flood Fill（图像渲染）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 有一幅以二维整数数组表示的图画，每一个整数表示该图画的像素值大小，数值在 0 到 65535 之间。
 /// represent ，represent this ，in 0 to 65535 's 。
@@ -225,8 +213,6 @@ fn dfs_flood_fill(
 }
 
 /// 695. Max Area of Island（岛屿的最大面积）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个大小为 `m x n` 的二进制矩阵 `grid`。**岛屿** 是由一些相邻的 `1` (代表土地) 构成的组合，
 /// as `m x n` `grid`。**** `1` () combination ，
@@ -292,8 +278,6 @@ fn dfs_max_area(grid: &mut [Vec<i32>], i: usize, j: usize, rows: usize, cols: us
 }
 
 /// 207. Course Schedule（课程表）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 你这个学期必须选修 `numCourses` 门课程，记为 `0` 到 `numCourses - 1`。
 /// must `numCourses` ，as `0` to `numCourses - 1`。
@@ -364,8 +348,6 @@ fn dfs_course_schedule(graph: &[Vec<usize>], state: &mut [i32], node: usize) -> 
 }
 
 /// 994. Rotting Oranges（腐烂的橘子）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 在给定的 `m x n` 网格 `grid` 中，每个单元格可以有以下三个值之一：
 /// in `m x n` `grid` in ，can under 's ：
@@ -452,8 +434,6 @@ pub fn oranges_rotting(grid: Vec<Vec<i32>>) -> i32 {
 }
 
 /// 130. Surrounded Regions（被围绕的区域）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个 `m x n` 的矩阵 `board`，由若干字符 `'X'` 和 `'O'` 组成，**捕获** 所有 **被围绕的区域**：
 /// `m x n` `board`， `'X'` and `'O'` ，**** all **is area **：
@@ -535,7 +515,6 @@ fn dfs_surrounded_regions(board: &mut [Vec<char>], i: usize, j: usize, rows: usi
 // ==================== 问题信息注册 ====================
 
 /// 获取所有图类问题
-/// Get hasgraphproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

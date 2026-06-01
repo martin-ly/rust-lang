@@ -197,7 +197,6 @@ pub fn ladder_length(begin_word: String, end_word: String, word_list: Vec<String
 // ==================== 问题信息注册 ====================
 
 /// 获取所有广度优先搜索类问题
-/// Get hasexcellentsearchproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

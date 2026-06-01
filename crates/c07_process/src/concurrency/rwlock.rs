@@ -7,7 +7,6 @@ use std::sync::{Arc, RwLock as StdRwLock};
 use std::time::Instant;
 
 /// 进程安全的读写锁
-/// process rwlock
 #[allow(dead_code)]
 pub struct ProcessRwLock {
     name: String,
@@ -130,7 +129,7 @@ impl ProcessRwLock {
     }
 
     /// 检查锁是否被持有
-    /// lock is
+    /// Check if lock is held
     pub fn is_locked(&self) -> bool {
         self.inner.try_read().is_err() && self.inner.try_write().is_err()
     }

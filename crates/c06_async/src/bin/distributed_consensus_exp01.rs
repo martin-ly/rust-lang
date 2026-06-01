@@ -360,7 +360,6 @@ impl RaftNode {
     }
 
     /// 为任务克隆节点引用
-    /// tasknode reference
     fn clone_for_task(&self) -> Self {
         Self {
             id: self.id.clone(),
@@ -395,7 +394,6 @@ impl RaftNode {
 }
 
 /// 分布式一致性系统
-/// distributed system
 struct ConsensusSystem {
     nodes: Vec<Arc<RaftNode>>,
 }

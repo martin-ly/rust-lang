@@ -96,7 +96,6 @@ pub mod const_algorithm_config {
     }
 
     /// 计算斐波那契数列（编译时）
-    /// Compute compile-time
     pub const fn fibonacci(n: u32) -> u32 {
         match n {
             0 => 0,
@@ -106,7 +105,6 @@ pub mod const_algorithm_config {
     }
 
     /// 使用 const 上下文增强计算斐波那契数列
-    /// const on under
     pub fn demonstrate_fibonacci() {
         println!("\n=== Const 上下文斐波那契计算 ===");
 
@@ -207,7 +205,6 @@ pub mod algorithm_jit_optimizations {
     }
 
     /// 复杂链式算法操作
-    /// algorithm operation
     ///
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 15-25%
     /// Rust 1.91 JIT optimization ：complex performance 15-25%
@@ -217,7 +214,6 @@ pub mod algorithm_jit_optimizations {
     }
 
     /// 嵌套迭代器算法操作
-    /// iteratoralgorithm operation
     ///
     /// Rust 1.91 JIT 优化：嵌套迭代器性能提升约 20-30%
     /// Rust 1.91 JIT optimization ：performance 20-30%
@@ -253,7 +249,6 @@ pub mod algorithm_jit_optimizations {
 // ==================== 4. 内存分配器优化在算法数据结构中的应用 ====================
 
 /// Rust 1.91 内存分配器优化在算法数据结构中的应用
-/// Rust 1.91 memoryoptimizationalgorithmdata application
 ///
 /// Rust 1.91 改进了内存分配器，小对象分配性能提升 25-30%
 /// Rust 1.91 Improved memory allocator, small object allocation performance improved by 25-30%
@@ -273,7 +268,6 @@ pub mod algorithm_memory_optimizations {
     }
 
     /// 处理算法输入数据
-    /// handlingalgorithm data
     ///
     /// Rust 1.91 优化：在频繁的小对象分配场景下性能提升
     /// Rust 1.91 Optimization: Performance improvement in frequent small object allocation scenarios
@@ -300,7 +294,6 @@ pub mod algorithm_memory_optimizations {
 // ==================== 5. 异步迭代器改进在并行算法中的应用 ====================
 
 /// Rust 1.91 异步迭代器改进在并行算法中的应用
-/// Rust 1.91 asynciteratorimprovementsparallelalgorithm application
 ///
 /// Rust 1.91 对异步迭代器进行了优化，性能提升约 15-20%
 /// Rust 1.91 to async optimization ，performance 15-20%
@@ -400,7 +393,6 @@ pub mod comprehensive_algorithm_examples {
     use super::*;
 
     /// 综合算法管理系统
-    /// algorithmmanagement system
     ///
     /// 使用 const 上下文增强和新的 API
     /// const on under and API

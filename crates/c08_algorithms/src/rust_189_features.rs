@@ -1,6 +1,4 @@
 //! Rust 189.0 新特性实现模块 —— c08_algorithms
-//!
-//! 本模块展示了 Rust 189.0 (2025-08-07) 的关键语言特性和工具链改进。
 //! This module demonstrates key language features and toolchain improvements of Rust 189.0 (2025-08-07).
 //!
 //! - `explicit_inferred_const`: 显式推断 const 参数
@@ -32,7 +30,6 @@
 /// - 只需显式指定部分 const 参数时
 /// - part const parameter
 /// - 提高代码可读性，避免写出冗余的 const 表达式
-/// - ， const express
 pub fn array_sum<T, const N: usize>(arr: [T; N]) -> T
 where
     T: Default + std::ops::Add<Output = T> + Copy,

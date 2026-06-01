@@ -4,7 +4,6 @@
 //! 本模块展示了 Rust 1.92.0 在异步编程场景中的应用，包括：
 //! This module demonstrates Rust 1.92.0 asyncapplicationincluding
 //! - 新的稳定 API（`rotate_right`, `NonZero::div_ceil`）
-//! - 性能优化（迭代器方法特化）
 //! - performance optimization （method ）
 //! - 异步任务队列优化
 //! - asynctaskqueue optimization
@@ -43,7 +42,6 @@ pub struct TaskItem<T> {
     /// task ID
     pub id: u64,
     /// 任务优先级（数值越大优先级越高）
-    /// task （）
     pub priority: u8,
     /// 任务数据
     /// task data
@@ -52,7 +50,6 @@ pub struct TaskItem<T> {
 
 impl<T> AsyncTaskQueue<T> {
     /// 创建一个新的异步任务队列
-    /// createnewasynctask queue
     pub fn new() -> Self {
         AsyncTaskQueue {
             tasks: VecDeque::new(),
@@ -60,7 +57,6 @@ impl<T> AsyncTaskQueue<T> {
     }
 
     /// 轮转异步任务队列
-    /// asynctask queue
     ///
     /// Rust 1.92.0: 使用新的 rotate_right 方法实现高效的队列轮转
     /// Rust 1.92.0: rotate_right method efficient
@@ -76,7 +72,6 @@ impl<T> AsyncTaskQueue<T> {
     }
 
     /// 向队列末尾添加一个任务
-    /// task
     pub fn push(&mut self, task: TaskItem<T>) {
         self.tasks.push_back(task);
     }
@@ -88,7 +83,6 @@ impl<T> AsyncTaskQueue<T> {
     }
 
     /// 获取队列中的所有任务（用于演示）
-    /// Get queuehastask
     pub fn iter(&self) -> impl Iterator<Item = &TaskItem<T>> {
         self.tasks.iter()
     }
@@ -100,7 +94,6 @@ impl<T> AsyncTaskQueue<T> {
     }
 
     /// 检查队列是否为空
-    /// as
     pub fn is_empty(&self) -> bool {
         self.tasks.is_empty()
     }
@@ -112,7 +105,6 @@ impl<T> AsyncTaskQueue<T> {
     }
 
     /// 查看队列头部的任务（不移除）
-    /// task （）
     pub fn peek(&self) -> Option<&TaskItem<T>> {
         self.tasks.front()
     }
@@ -169,7 +161,6 @@ impl<T> AsyncTaskScheduler<T> {
     }
 
     /// 执行一轮调度（异步）
-    /// （async ）
     pub async fn schedule(&self) {
         let mut queue = self.queue.lock().await;
 
@@ -187,14 +178,12 @@ impl<T> AsyncTaskScheduler<T> {
     }
 
     /// 获取下一个任务（异步）
-    /// Get lowertaskasync
     pub async fn next_task(&self) -> Option<TaskItem<T>> {
         let mut queue = self.queue.lock().await;
         queue.pop()
     }
 
     /// 获取队列中的任务数量（异步）
-    /// Get queuetaskcountasync
     pub async fn task_count(&self) -> usize {
         let queue = self.queue.lock().await;
         queue.len()
@@ -247,7 +236,6 @@ pub fn calculate_async_pool_size(total_tasks: usize, tasks_per_worker: NonZeroUs
 }
 
 /// 使用 div_ceil 实现异步资源分配器
-/// div_ceil async
 pub struct AsyncResourceAllocator {
     total_resources: usize,
     resources_per_task: NonZeroUsize,
@@ -262,7 +250,6 @@ impl AsyncResourceAllocator {
     }
 
     /// 计算可以创建的异步任务数
-    /// Compute cancreateasynctask
     pub fn max_concurrent_tasks(&self) -> usize {
         if self.total_resources == 0 {
             return 0;
@@ -291,7 +278,6 @@ impl AsyncBatchConfig {
     }
 
     /// 计算需要的批次数量
-    /// Compute needcount
     pub fn calculate_batch_count(&self, total_items: usize) -> usize {
         if total_items == 0 {
             return 0;
@@ -306,7 +292,6 @@ impl AsyncBatchConfig {
 // ==================== 3. 迭代器方法特化在异步迭代中的应用 ====================
 
 /// 使用特化的迭代器比较方法比较异步任务列表
-/// useiteratormethodasynctask table
 ///
 /// Rust 1.92.0: Iterator::eq 为 TrustedLen 迭代器特化，性能更好
 pub fn compare_async_task_lists<T: PartialEq>(
@@ -318,7 +303,6 @@ pub fn compare_async_task_lists<T: PartialEq>(
 }
 
 /// 使用迭代器特化检查异步任务状态
-/// useiteratorasynctask status
 pub fn check_async_task_states<T>(tasks: &[TaskItem<T>], expected_ids: &[u64]) -> bool {
     let actual_ids: Vec<u64> = tasks.iter().map(|t| t.id).collect();
     // Rust 1.92.0: 特化的迭代器比较

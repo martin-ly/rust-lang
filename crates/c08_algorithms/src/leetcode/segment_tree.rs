@@ -284,7 +284,6 @@ pub fn falling_squares(positions: Vec<Vec<i32>>) -> Vec<i32> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有线段树类问题
-/// Get hastreeproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

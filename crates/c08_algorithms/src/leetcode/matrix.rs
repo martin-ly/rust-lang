@@ -15,13 +15,10 @@ use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 // ==================== 经典题目实现 ====================
 
 /// 48. Rotate Image（旋转图像）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。
 /// n × n matrix represent 。will 90 。
 /// 你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。
-/// must in ，。 。
 ///
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
@@ -56,8 +53,6 @@ pub fn rotate(matrix: &mut [Vec<i32>]) {
 }
 
 /// 54. Spiral Matrix（螺旋矩阵）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。
 /// m n matrix ， order ，in all element 。
@@ -123,8 +118,6 @@ pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
 }
 
 /// 73. Set Matrix Zeroes（矩阵置零）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个 m x n 的矩阵，如果一个元素为 0 ，则将其所在行和列的所有元素都设为 0 。请使用 原地 算法。
 /// m x n ，if element as 0 ，will its in and all element as 0 。 algorithm 。
@@ -134,7 +127,6 @@ pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {
 /// - **性能优化**: 使用第一行和第一列作为标记，O(1) 空间复杂度
 /// - **performance optimization **: first and first as mark ，O(1) space complexity
 /// - **内存优化**: 原地修改，不需要额外空间
-/// - **memoryoptimization**: needouter space
 ///
 /// ## 复杂度
 /// ## Complexity
@@ -190,11 +182,8 @@ pub fn set_zeroes(matrix: &mut [Vec<i32>]) {
 }
 
 /// 200. Number of Islands（岛屿数量）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
-/// '1'（）and '0'（），in quantity 。
 /// 岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
 /// is ，and and level direction and /or direction on 。
 ///
@@ -260,8 +249,6 @@ fn dfs_islands(
 }
 
 /// 240. Search a 2D Matrix II（搜索二维矩阵 II）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。
 /// efficient algorithm m x n matrix in goal target 。
@@ -314,7 +301,6 @@ pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有矩阵类问题
-/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

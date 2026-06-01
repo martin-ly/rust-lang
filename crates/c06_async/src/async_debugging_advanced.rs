@@ -25,9 +25,9 @@ use tracing::{debug, error, info};
 use uuid::Uuid;
 
 /// 异步执行流跟踪器
-/// async stream
+/// Async execution flow tracker
 /// 解决异步任务执行流难以跟踪的问题
-/// async task stream problem
+/// Solve the problem of difficult async task execution flow tracking
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ExecutionFlow {
     /// 执行流ID
@@ -145,7 +145,7 @@ pub struct FlowMetrics {
 }
 
 /// 异步执行流管理器
-/// asyncexecutionflow manager
+/// Async execution flow manager
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct AsyncExecutionFlowManager {
@@ -570,7 +570,6 @@ impl AsyncMetricsCollector {
 /// 异步调试装饰器
 /// async decorator
 /// 提供自动化的调试功能，包括执行流跟踪、性能监控等
-/// functionality ，stream 、performance etc.
 #[allow(dead_code)]
 pub struct AsyncDebugDecorator {
     flow_manager: Arc<AsyncExecutionFlowManager>,
@@ -765,7 +764,7 @@ impl ExecutionFlowVisualizer {
     }
 
     /// 生成执行流图表（DOT格式）
-    /// stream （DOT）
+    /// Generate execution flow graph (DOT format)
     pub async fn generate_dot_graph(&self, flow_id: &str) -> Result<String> {
         let flow = self
             .flow_manager

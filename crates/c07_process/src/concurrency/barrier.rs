@@ -153,13 +153,11 @@ pub enum BarrierWaitResult {
 
 impl BarrierWaitResult {
     /// 检查是否为等待状态
-    /// whether status
     pub const fn is_wait(&self) -> bool {
         matches!(self, BarrierWaitResult::Wait)
     }
 
     /// 检查是否为屏障状态
-    /// whether status
     pub const fn is_barrier(&self) -> bool {
         matches!(self, BarrierWaitResult::Barrier)
     }

@@ -2,7 +2,6 @@
 //! performance optimization
 //!
 //! 本模块展示了Rust中各种性能优化技术的实践案例，
-//! This module demonstrates Rustperformanceoptimizationpracticecases
 //! 包括内存优化、并发优化、编译时优化和运行时性能分析。
 //! memory optimization 、concurrency optimization 、compile-time optimization and runtime performance analyze 。
 use std::alloc::{Layout, alloc, dealloc};
@@ -354,7 +353,6 @@ pub const fn calculate_fibonacci(n: u32) -> u32 {
 }
 
 /// 编译时优化的查找表
-/// compile-timeoptimizationsearch table
 pub const LOOKUP_TABLE: [u32; 10] = [
     calculate_fibonacci(0),
     calculate_fibonacci(1),
@@ -417,7 +415,6 @@ impl<T: Default + Copy, const N: usize> OptimizedContainer<T, N> {
 }
 
 /// 编译时优化的字符串处理
-/// compile-timeoptimizationstring processing
 pub const fn string_length(s: &str) -> usize {
     s.len()
 }
@@ -629,7 +626,6 @@ impl MemoryProfiler {
 // ============================================================================
 
 /// 性能优化示例集合
-/// performanceoptimization set
 pub struct PerformanceExamples;
 
 impl PerformanceExamples {
@@ -722,7 +718,6 @@ impl PerformanceExamples {
     }
 
     /// 运行时性能分析示例
-    /// Run performanceanalysis
     pub fn runtime_profiling_example() {
         println!("\n=== 运行时性能分析示例 ===");
 

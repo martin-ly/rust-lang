@@ -18,9 +18,7 @@
 //! ## Classic Problems
 //!
 //! - 208. Implement Trie (Prefix Tree)（实现 Trie (前缀树)）
-//! - 211. Design Add and Search Words Data Structure（添加与搜索单词 - 数据结构设计）
 //! - 212. Word Search II（单词搜索 II）
-//! - 720. Longest Word in Dictionary（词典中最长的单词）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// Trie 节点结构
@@ -38,8 +36,6 @@ impl TrieNode {
 }
 
 /// 208. Implement Trie (Prefix Tree)（实现 Trie (前缀树)）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// Trie（发音类似 "try"）或者说 **前缀树** 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。
 /// Trie（similar to "try"）or **before tree ** tree data structure ，efficient and in 。
@@ -60,7 +56,6 @@ impl TrieNode {
 /// - search 时间复杂度: O(m)
 /// - search time complexity : O(m)
 /// - starts_with 时间复杂度: O(m)
-/// - 空间复杂度: O(ALPHABET_SIZE * N * M)
 pub struct Trie {
     root: TrieNode,
 }
@@ -75,7 +70,6 @@ impl Trie {
     }
 
     /// 向前缀树中插入字符串
-    /// fronttree string
     pub fn insert(&mut self, word: String) {
         let mut node = &mut self.root;
 
@@ -92,7 +86,6 @@ impl Trie {
     }
 
     /// 在前缀树中搜索字符串
-    /// fronttreesearch string
     pub fn search(&self, word: String) -> bool {
         let mut node = &self.root;
 
@@ -109,7 +102,6 @@ impl Trie {
     }
 
     /// 检查是否有以给定前缀开头的字符串
-    /// whetherhasfront string
     pub fn starts_with(&self, prefix: String) -> bool {
         let mut node = &self.root;
 
@@ -133,13 +125,10 @@ impl Default for Trie {
 }
 
 /// 211. Design Add and Search Words Data Structure（添加与搜索单词 - 数据结构设计）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 请你设计一个数据结构，支持 **添加新单词** 和 **查找字符串是否与任何先前添加的字符串匹配**。
 /// design data structure ， **** and **and before **。
 /// 实现词典类 `WordDictionary`：
-/// - `WordDictionary()` 初始化词典对象
 /// - `WordDictionary()` initial object
 /// - `void addWord(word)` 将 `word` 添加到数据结构中，之后可以对它进行匹配
 /// - `void addWord(word)` will `word` to data structure in ，'s after can to
@@ -228,7 +217,6 @@ impl Default for WordDictionary {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有字典树类问题
-/// Get hastreeproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

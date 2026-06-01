@@ -2,13 +2,11 @@
 //! Portable SIMD vector operation
 //! This module demonstrates Rust vectorization ：
 //! - `std::simd` (portable_simd): 跨平台 SIMD 抽象（需要 nightly feature `portable_simd`）
-//! - `std::arch`: 平台特定的 SIMD 指令（stable）
 //!
 //! ## 条件编译
 //! ## condition
 //!
 //! - 启用 `portable_simd` feature 时，使用 `core::simd` 进行跨平台 SIMD 编程
-//! - 默认情况下，使用 `std::arch::x86_64` 的 SSE2/AVX 回退或纯标量实现
 //! - loweruse `std::arch::x86_64` SSE2/AVX implementation
 
 #[cfg(feature = "portable_simd")]
@@ -17,8 +15,6 @@ pub mod portable {
     use std::simd::cmp::SimdPartialEq;
 
     /// SIMD 数组加法（portable_simd）
-    ///
-    /// 使用 8-lane f32 SIMD（256-bit），一次处理 8 个元素。
     /// 8-lane f32 SIMD （256-bit）， 8 element 。
     pub fn simd_array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
         assert_eq!(a.len(), b.len());
@@ -69,7 +65,6 @@ pub mod portable {
 #[cfg(not(feature = "portable_simd"))]
 pub mod fallback {
     //! 默认回退实现：使用平台特定 SIMD（x86_64 SSE2/AVX）或标量代码
-    //! ：platform SIMD （x86_64 SSE2/AVX）or
 
     /// 数组加法（优先 AVX2，其次 SSE2，最后标量）
     /// （ AVX2，second SSE2，finally ）
@@ -155,7 +150,6 @@ pub fn array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
 }
 
 /// 向量化数组加法（回退实现）
-/// vectorization （）
 #[cfg(not(feature = "portable_simd"))]
 pub fn array_add(a: &[f32], b: &[f32], result: &mut [f32]) {
     fallback::simd_array_add(a, b, result);
@@ -169,7 +163,6 @@ pub fn search(arr: &[f32], target: f32) -> Option<usize> {
 }
 
 /// 向量化搜索（回退实现）
-/// vectorization （）
 #[cfg(not(feature = "portable_simd"))]
 pub fn search(arr: &[f32], target: f32) -> Option<usize> {
     fallback::simd_search(arr, target)

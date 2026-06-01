@@ -617,7 +617,6 @@ pub async fn bellman_ford_async(
 }
 
 /// Floyd–Warshall：多源最短路（允许负边但无负环）。返回 n×n 距离矩阵
-/// Floyd–Warshall：（edge but ）。 n×n
 #[allow(clippy::needless_range_loop)]
 pub fn floyd_warshall_sync(n: usize, edges: &[(usize, usize, f64)]) -> Vec<Vec<f64>> {
     let mut d = vec![vec![f64::INFINITY; n]; n];
@@ -1638,14 +1637,12 @@ pub async fn tree_centroid_async<T: Eq + Hash + Clone + Send + 'static>(
 }
 
 /// 树链剖分（重链剖分）骨架
-/// tree （）
 #[derive(Debug, Clone)]
 pub struct HeavyLightDecomposition<T: Eq + Hash + Clone> {
     /// 重链的根节点
     /// node
     pub chain_heads: HashMap<T, T>,
     /// 每个节点所属的重链根
-    /// node
     pub chain_id: HashMap<T, T>,
     /// 重链中的位置
     /// in position
@@ -1748,7 +1745,6 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
     }
 
     /// 查询两个节点之间的路径长度
-    /// node 's
     pub fn path_length(&self, u: &T, v: &T) -> usize {
         let mut len = 0;
         let mut a = u.clone();
@@ -1770,7 +1766,6 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
     }
 
     /// 查询两个节点的最近公共祖先
-    /// node
     pub fn lca(&self, u: &T, v: &T) -> T {
         let mut a = u.clone();
         let mut b = v.clone();
@@ -1793,7 +1788,6 @@ impl<T: Eq + Hash + Clone> HeavyLightDecomposition<T> {
 }
 
 /// 异步版本的重链剖分构建
-/// async this
 pub async fn hld_build_async<T: Eq + Hash + Clone + Send + 'static>(
     tree: HashMap<T, Vec<T>>,
     root: T,

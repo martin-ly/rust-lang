@@ -2,7 +2,6 @@
 //! # synchronoussortalgorithm implementation
 //!
 //! 本模块实现了各种同步排序算法，提供传统的单线程排序实现。
-//! This module implements synchronoussortalgorithmprovidesinglethreadsortimplementation
 //! 适用于小到中等规模的数据排序。
 //! to in etc. scale ordering 。
 use super::*;
@@ -41,7 +40,6 @@ impl SyncSortingAlgorithm for QuickSort {
 }
 
 /// 快速排序递归实现
-/// fastsort implementation
 fn quick_sort_recursive(arr: &mut [i32], low: usize, high: usize) {
     if low < high {
         let pi = partition(arr, low, high);
@@ -108,7 +106,6 @@ impl SyncSortingAlgorithm for MergeSort {
 }
 
 /// 归并排序递归实现
-/// sort implementation
 fn merge_sort_recursive(arr: &mut [i32]) {
     if arr.len() <= 1 {
         return;

@@ -2,7 +2,6 @@
 //! OS Design Pattern Application
 //!
 //! 本模块展示了在操作系统开发中应用各种设计模式的实践案例，
-//! This module demonstrates operationsystemapplicationdesignpatternpracticecases
 //! 包括Singleton、Factory、Strategy等经典模式。
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, OnceLock};
@@ -92,7 +91,6 @@ impl SystemResourceManager {
 }
 
 /// 线程安全的单例实现
-/// threadsafetysingle implementation
 pub struct SystemResourceManagerSingleton {
     instance: OnceLock<Arc<Mutex<SystemResourceManager>>>,
 }
@@ -367,7 +365,6 @@ impl DeviceFactory for OSDeviceFactory {
 // ============================================================================
 
 /// 进程调度策略接口
-/// processscheduling interface
 pub trait SchedulingStrategy {
     fn select_next_process(&self, processes: &[Process]) -> Option<usize>;
     fn get_name(&self) -> &str;
@@ -386,7 +383,6 @@ pub struct Process {
 }
 
 /// 先来先服务调度策略
-/// servicescheduling strategy
 pub struct FirstComeFirstServeStrategy;
 
 impl SchedulingStrategy for FirstComeFirstServeStrategy {
@@ -405,7 +401,6 @@ impl SchedulingStrategy for FirstComeFirstServeStrategy {
 }
 
 /// 最短作业优先调度策略
-/// shortexcellentscheduling strategy
 pub struct ShortestJobFirstStrategy;
 
 impl SchedulingStrategy for ShortestJobFirstStrategy {

@@ -10,7 +10,6 @@
 //! 1. **性能优化**: 使用标准库高效数据结构
 //! 1. **performance optimization **: standard library efficient data structure
 //! 2. **内存优化**: 智能指针和生命周期优化
-//! 2. **memoryoptimization**: smartpointerlifetime optimization
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::HashMap;
 
@@ -114,7 +113,6 @@ pub use crate::leetcode::trie::{Trie, WordDictionary};
 // ==================== 问题信息注册 ====================
 
 /// 获取所有设计类问题
-/// Get hasdesignproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

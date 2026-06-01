@@ -56,7 +56,6 @@ pub enum SortingAlgorithm {
 }
 
 /// 排序算法实现类型
-/// sortalgorithmimplementation type
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum ImplementationType {
     /// 同步实现
@@ -97,7 +96,6 @@ pub struct SortingResult<T> {
 }
 
 /// 排序算法复杂度信息
-/// sortalgorithmcomplexity information
 #[derive(Debug, Clone)]
 pub struct SortingComplexity {
     pub algorithm: SortingAlgorithm,
@@ -110,7 +108,6 @@ pub struct SortingComplexity {
 
 impl SortingComplexity {
     /// 获取所有排序算法的复杂度信息
-    /// Get hassortalgorithmcomplexityinformation
     pub fn get_all_complexities() -> Vec<Self> {
         vec![
             SortingComplexity {
@@ -601,13 +598,11 @@ pub struct SortingValidator;
 
 impl SortingValidator {
     /// 验证排序结果是否正确
-    /// Verify sortresultwhetherpositive
     pub fn is_sorted<T: Ord>(data: &[T]) -> bool {
         data.windows(2).all(|w| w[0] <= w[1])
     }
 
     /// 验证排序结果的稳定性（对于稳定排序算法）
-    /// Verify sortresultsortalgorithm
     pub fn is_stable<T: Ord + Clone>(_original: &[(T, usize)], _sorted: &[(T, usize)]) -> bool {
         // 简化实现：检查相同元素的相对位置是否保持不变
         // 实际实现需要更复杂的逻辑
@@ -615,7 +610,7 @@ impl SortingValidator {
     }
 
     /// 验证排序算法的正确性
-    /// Verify sortalgorithmcorrectness
+    /// Verify sorting algorithm correctness
     pub fn validate_sorting<T: Ord + Clone>(original: Vec<T>, result: &SortingResult<T>) -> bool {
         // 检查长度是否一致
         if original.len() != result.data.len() {

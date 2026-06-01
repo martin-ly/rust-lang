@@ -259,7 +259,7 @@ impl TaskManager {
     }
 
     /// 获取任务统计信息
-    /// Get taskinformation
+    /// Get task statistics
     pub async fn get_stats(&self) -> TaskStats {
         self.stats.lock().await.clone()
     }
@@ -510,7 +510,6 @@ impl TaskManager {
 }
 
 /// 用于任务处理的任务管理器克隆
-/// task task
 #[allow(dead_code)]
 #[derive(Clone)]
 struct TaskManagerClone {
@@ -673,7 +672,6 @@ impl TaskManagerClone {
 }
 
 /// 简单的任务执行器实现示例
-/// singletaskexecutionimplementation example
 #[allow(dead_code)]
 #[derive(Clone)]
 pub struct SimpleTaskExecutor {

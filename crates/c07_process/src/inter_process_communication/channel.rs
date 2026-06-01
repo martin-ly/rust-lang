@@ -7,7 +7,6 @@ use std::path::Path;
 use std::sync::{Arc, Mutex};
 
 /// 文件系统通道实现
-/// filesystem implementation
 #[allow(dead_code)]
 pub struct FileSystemChannel {
     name: String,

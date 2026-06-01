@@ -12,27 +12,20 @@
 //! - **内存优化**: 使用递归和迭代优化的空间复杂度
 //! - **memory optimization **: and optimization space complexity
 //! - **递归优化**: 尾递归优化和迭代器优化
-//! - **optimization**: optimizationiterator optimization
 //!
 //! ## 包含的经典题目
 //! ## Classic Problems
 //!
 //! - 94. Binary Tree Inorder Traversal（二叉树的中序遍历）
-//! - 100. Same Tree（相同的树）
 //! - 100. Same Tree（tree ）
 //! - 101. Symmetric Tree（对称二叉树）
-//! - 104. Maximum Depth of Binary Tree（二叉树的最大深度）
 //! - 110. Balanced Binary Tree（平衡二叉树）
-//! - 111. Minimum Depth of Binary Tree（二叉树的最小深度）
 //! - 112. Path Sum（路径总和）
 //! - 112. Path Sum（and ）
 //! - 144. Binary Tree Preorder Traversal（二叉树的前序遍历）
-//! - 145. Binary Tree Postorder Traversal（二叉树的后序遍历）
 //! - 226. Invert Binary Tree（翻转二叉树）
-//! - 235. Lowest Common Ancestor（二叉搜索树的最近公共祖先）
 //! - 235. Lowest Common Ancestor（tree ）
 //! - 543. Diameter of Binary Tree（二叉树的直径）
-//! - 617. Merge Two Binary Trees（合并二叉树）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -58,8 +51,6 @@ impl TreeNode {
 }
 
 /// 104. Maximum Depth of Binary Tree（二叉树的最大深度）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个二叉树，找出其最大深度。二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
 /// binary tree ，its maximum 。binary tree as node to node on node 。
@@ -125,8 +116,6 @@ pub fn is_same_tree(p: Option<Rc<RefCell<TreeNode>>>, q: Option<Rc<RefCell<TreeN
 }
 
 /// 101. Symmetric Tree（对称二叉树）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个二叉树的根节点 `root`，检查它是否轴对称。
 /// binary tree node `root`，axis to 。
@@ -172,8 +161,6 @@ fn is_symmetric_helper(
 }
 
 /// 110. Balanced Binary Tree（平衡二叉树）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个二叉树，判断它是否是高度平衡的二叉树。
 /// binary tree ，binary tree 。
@@ -215,8 +202,6 @@ fn is_balanced_helper(root: Option<Rc<RefCell<TreeNode>>>) -> (bool, i32) {
 }
 
 /// 111. Minimum Depth of Binary Tree（二叉树的最小深度）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个二叉树，找出其最小深度。最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
 /// binary tree ，its minimum 。minimum from node to node on node quantity 。
@@ -295,8 +280,6 @@ pub fn has_path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> boo
 }
 
 /// 226. Invert Binary Tree（翻转二叉树）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一棵二叉树的根节点 `root`，翻转这棵二叉树，并返回其根节点。
 /// binary tree node `root`，binary tree ，and its node 。
@@ -332,8 +315,6 @@ pub fn invert_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<Tre
 }
 
 /// 543. Diameter of Binary Tree（二叉树的直径）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一棵二叉树的根节点，返回该树的 **直径**。
 /// binary tree node ，this tree ****。
@@ -376,8 +357,6 @@ pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 }
 
 /// 617. Merge Two Binary Trees（合并二叉树）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你两棵二叉树：`root1` 和 `root2`。想象一下，当你将其中一棵覆盖到另一棵上时，两棵树上的一些节点会重叠（而另一些不会）。
 /// binary tree ：`root1` and `root2`。imagine under ，when will its in to on ，tree on node （while ）。
@@ -420,8 +399,6 @@ pub fn merge_trees(
 }
 
 /// 94. Binary Tree Inorder Traversal（二叉树的中序遍历）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个二叉树的根节点 `root`，返回它的 **中序** 遍历。
 /// binary tree node `root`， **in ** 。
@@ -464,8 +441,6 @@ pub fn inorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
 }
 
 /// 144. Binary Tree Preorder Traversal（二叉树的前序遍历）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你二叉树的根节点 `root`，返回它节点值的 **前序** 遍历。
 /// binary tree node `root`，node **before ** 。
@@ -508,8 +483,6 @@ pub fn preorder_traversal(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
 }
 
 /// 145. Binary Tree Postorder Traversal（二叉树的后序遍历）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一棵二叉树的根节点 `root`，返回其节点值的 **后序** 遍历。
 /// binary tree node `root`，its node **after ** 。
@@ -602,7 +575,6 @@ pub fn lowest_common_ancestor(
 // ==================== 问题信息注册 ====================
 
 /// 获取所有树类问题
-/// Get hastreeproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

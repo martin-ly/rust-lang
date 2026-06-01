@@ -8,7 +8,6 @@
 //! **Currently Recommended Version**: Rust 1.92.0+ | For latest features, please refer to `rust_192_features.rs`
 //!
 //! 本模块实现了当前稳定版本中的异步编程特性，包括：
-//! This module implements currentversionasyncfeaturesincluding
 //! - 改进的异步性能优化
 //! - improvementsasyncperformance optimization
 //! - 增强的错误处理机制
@@ -21,7 +20,6 @@
 //! - control mechanism
 //!
 //! 注意：AsyncDrop、Async Generators 等特性仍在开发中，
-//! 本模块提供了模拟实现以供学习和测试使用。
 //! This module provides implementationforlearningtestuse
 use anyhow::Result;
 use std::collections::HashMap;
@@ -31,7 +29,6 @@ use tokio::sync::{Mutex, Semaphore};
 use tokio::time::sleep;
 
 /// 异步资源管理模拟实现
-/// asyncresourcemanagement implementation
 ///
 /// 注意：AsyncDrop trait 仍在开发中，这里使用 Drop trait 模拟异步资源清理
 /// ：AsyncDrop trait in in ， Drop trait async
@@ -74,10 +71,8 @@ impl Drop for AsyncResource {
 }
 
 /// 异步生成器模拟实现
-/// asyncgenerator implementation
 ///
 /// 在Rust 1.90中，AsyncIterator trait尚未稳定，这里使用自定义实现
-/// Rust 1.90AsyncIterator traitusecustom implementation
 pub struct AsyncDataGenerator {
     current: usize,
     max: usize,
@@ -114,10 +109,8 @@ impl AsyncDataGenerator {
 }
 
 /// 改进的借用检查器演示
-/// borrowing demonstration
 ///
 /// 展示Polonius借用检查器的改进，包括更好的生命周期推断
-/// Poloniusborrowing ，lifetime infer
 pub struct BorrowCheckerDemo {
     data: Arc<Mutex<HashMap<String, String>>>,
     semaphore: Arc<Semaphore>,
@@ -188,7 +181,6 @@ impl TraitSolverDemo {
     }
 
     /// 演示特质求解器的性能优化
-    /// performance optimization
     pub async fn trait_solver_performance_test(&self, input: &str) -> Result<usize> {
         let start = std::time::Instant::now();
 
@@ -243,7 +235,7 @@ impl ParallelFrontendDemo {
     }
 
     /// 演示并行编译优化
-    /// parallel optimization
+    /// Demonstrate parallel compilation optimization
     pub async fn parallel_compilation_demo(&self, tasks: Vec<String>) -> Result<Vec<String>> {
         let semaphore = Arc::new(Semaphore::new(self.workers));
         let mut handles = Vec::new();

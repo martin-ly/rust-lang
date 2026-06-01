@@ -1,6 +1,4 @@
 //! Rust 186.0 新特性实现模块 —— c09_design_pattern
-//!
-//! 本模块展示了 Rust 186.0 (2025-04-03) 的关键语言特性和工具链改进。
 //! This module demonstrates key language features and toolchain improvements of Rust 186.0 (2025-04-03).
 //!
 //! - `trait_upcasting`: Trait 对象向上转换（dyn Trait + Trait -> dyn Trait）
@@ -22,8 +20,6 @@
 /// Rust 1.86.0 稳定了 trait 对象的向上转换（upcasting）：
 /// Rust 1.86.0 trait to on conversion （upcasting）：
 /// 可以将 `dyn SubTrait` 转换为 `dyn SuperTrait`。
-///
-/// ## 使用场景
 /// ## Usage Scenarios
 /// - 抽象层解耦：在运行时根据具体类型降级到更通用的 trait 对象
 /// - Abstraction decoupling: downgrade to more general trait objects at runtime based on specific types

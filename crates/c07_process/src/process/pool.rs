@@ -18,7 +18,6 @@ pub struct ProcessPoolConfig {
     /// initialprocess count
     pub initial_processes: usize,
     /// 进程空闲超时时间
-    /// processnull time
     pub idle_timeout: Duration,
     /// 健康检查间隔
     /// health check
@@ -247,7 +246,6 @@ impl ProcessPool {
     }
 
     /// 检查进程健康状态
-    /// process status
     fn is_process_healthy(&self, pid: u32) -> ProcessResult<bool> {
         // 简化实现，实际应该检查进程是否响应
         let processes = self.processes.lock().expect("进程池锁被污染");
@@ -268,7 +266,6 @@ impl ProcessPool {
     }
 
     /// 检查是否可以生成更多进程
-    /// can process
     fn can_spawn_more_processes(&self) -> bool {
         let current_count = self.processes.lock().expect("进程池锁被污染").len();
         current_count < self.config.max_processes
@@ -331,7 +328,6 @@ impl ProcessPool {
     }
 
     /// 移除最不活跃的进程
-    /// process
     fn remove_least_active_process(&self) -> ProcessResult<()> {
         let mut processes = self.processes.lock().expect("进程池锁被污染");
         let mut available = self
@@ -364,7 +360,6 @@ impl ProcessPool {
     }
 
     /// 获取平均内存使用率
-    /// Get memoryuse
     fn get_average_memory_usage(&self) -> f64 {
         let processes = self.processes.lock().expect("进程池锁被污染");
         if processes.is_empty() {
@@ -376,7 +371,6 @@ impl ProcessPool {
     }
 
     /// 获取进程池统计信息
-    /// Get processinformation
     pub fn get_stats(&self) -> ProcessPoolStats {
         let processes = self.processes.lock().expect("进程池锁被污染");
         let available = self
@@ -398,7 +392,6 @@ impl ProcessPool {
     }
 
     /// 清理不健康的进程
-    /// Cleanup process
     pub fn cleanup_unhealthy_processes(&self) -> ProcessResult<usize> {
         let mut removed_count = 0;
         let mut processes = self.processes.lock().expect("进程池锁被污染");

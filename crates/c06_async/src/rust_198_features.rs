@@ -26,7 +26,6 @@ pub struct Rust198AsyncFeatures;
 // ============================================================================
 
 /// 计数异步迭代器：从 start 开始，每次产生下一个整数
-/// async ：from start ，under
 pub struct CountingAsyncIter {
     current: i32,
     end: i32,
@@ -56,7 +55,6 @@ impl AsyncIterator for CountingAsyncIter {
 }
 
 /// 异步迭代器包装器：对 item 应用变换函数
-/// asynciterator item application function
 pub struct MapAsyncIter<I, F> {
     inner: I,
     f: F,
@@ -107,7 +105,6 @@ impl Rust198AsyncFeatures {
     }
 
     /// 创建一个异步计数流
-    /// async stream
     pub fn count_stream(start: i32, end: i32) -> CountingAsyncIter {
         CountingAsyncIter::new(start, end)
     }

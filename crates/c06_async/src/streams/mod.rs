@@ -71,8 +71,6 @@
 //!     // demonstration this combination
 //!     let result = demo_basic_combinators(10).await;
 //!     println!("组合子结果: {:?}", result);
-//!     
-//!     // 演示时间流
 //!     // demonstration time stream
 //!     let ticks = demo_tick_stream(5, Duration::from_millis(100)).await;
 //!     println!("时间流结果: {:?}", ticks);
@@ -91,21 +89,18 @@ use tokio::time::{Interval, interval};
 /// 这个结构体演示了如何实现 Stream trait 来创建一个自定义的异步流。
 /// struct demonstration Stream trait definition async stream 。
 /// 它基于 `tokio::time::Interval` 来生成定期的计时事件。
-/// `tokio::time::Interval` 。
 ///
 /// # 字段说明
 /// # field explain
 /// - `interval`: Tokio 的计时器间隔，用于定期触发
 /// - `interval`: Tokio ，
 /// - `remaining`: 剩余要产生的计时次数
-/// - `remaining`:
 /// - `counter`: 当前计时器的计数值
 /// - `counter`: current value
 ///
 /// # 工作原理
 /// #
 /// 1. 创建时设置总的计时次数和间隔时间
-/// 1. createset time
 /// 2. 每次 `poll_next` 被调用时，等待下一次计时器触发
 /// 2. `poll_next` is ，etc. under
 /// 3. 计时器触发时，返回当前的计数值
@@ -141,19 +136,16 @@ pub struct TickStream {
 
 impl TickStream {
     /// 创建一个新的计时流
-    /// stream
     ///
     /// # 参数
     /// # Parameters
     /// - `ticks`: 总共要产生的计时次数
-    /// - `ticks`:
     /// - `period`: 每次计时的间隔时间
     /// - `period`: time
     ///
     /// # 返回值
     /// # Return Value
     /// 返回一个新的 `TickStream` 实例
-    /// `TickStream`
     ///
     /// # 示例
     /// # Examples
@@ -173,8 +165,6 @@ impl TickStream {
 }
 
 /// 为 TickStream 实现 Stream trait
-///
-/// 这是 Stream trait 的核心实现，展示了异步流的轮询机制。
 /// Stream trait core ，async stream mechanism 。
 ///
 /// # 实现细节
@@ -187,7 +177,6 @@ impl TickStream {
 /// - 如果流已结束，返回 `Poll::Ready(None)`
 /// - if stream ， `Poll::Ready(None)`
 /// - 如果有新元素，返回 `Poll::Ready(Some(item))`
-/// - 如果暂时没有元素但流未结束，返回 `Poll::Pending`
 /// - if temporary element but stream ， `Poll::Pending`
 ///
 /// ## 状态管理
@@ -197,16 +186,13 @@ impl TickStream {
 /// 2. **等待计时器**: 使用 `interval.poll_tick()` 等待下一次触发
 /// 2. **etc. **: `interval.poll_tick()` etc. under
 /// 3. **更新状态**: 计时器触发时，更新计数器和剩余次数
-/// 3. **state **: ，and
 /// 4. **返回元素**: 返回当前的计数值
 /// 4. ****: current value
 ///
 /// # 生命周期
 /// # lifetime
 /// - 创建时设置总次数和间隔
-/// - and
 /// - 每次轮询等待计时器触发
-/// - etc.
 /// - 达到设定次数后自动结束
 /// - to after
 impl Stream for TickStream {
@@ -227,7 +213,6 @@ impl Stream for TickStream {
     /// # 返回值
     /// # Return Value
     /// - `Poll::Ready(Some(item))`: 有新的元素可用
-    /// - `Poll::Ready(None)`: 流已结束，没有更多元素
     /// - `Poll::Ready(None)`: stream ，element
     /// - `Poll::Pending`: 暂时没有元素，稍后重新轮询
     /// - `Poll::Pending`: temporary element ，after
@@ -259,7 +244,6 @@ impl Stream for TickStream {
 }
 
 /// 基于迭代器快速构造一个 Stream
-/// fast Stream
 ///
 /// 这个函数展示了如何从同步迭代器创建异步流。
 /// function from synchronous async stream 。
@@ -301,7 +285,6 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 /// 这个函数展示了如何使用 Stream 的组合子来对数据流进行变换和过滤。
 /// function Stream combination to stream transformation and 。
 /// 组合子可以链式调用，形成数据处理的流水线。
-/// combination can ，pipeline 。
 ///
 /// # 组合子说明
 /// # combination explain
@@ -326,8 +309,6 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 /// - 将流中的所有元素收集到集合中
 /// - will stream in all element to set in
 /// - 类似于 `Iterator::collect`
-///
-/// # 参数
 /// # Parameters
 /// - `n`: 输入流的元素数量
 /// - `n`: flow count
@@ -359,7 +340,6 @@ pub fn make_iter_stream(n: u32) -> impl Stream<Item = u32> {
 /// async fn main() {
 ///     let result = demo_basic_combinators(10).await;
 ///     println!("结果: {:?}", result);
-///     // 可能的输出: [6, 12, 18, 24, 30]
 ///     // may : [6, 12, 18, 24, 30]
 /// }
 /// ```
@@ -408,7 +388,6 @@ pub async fn demo_basic_combinators(n: u32) -> Vec<u32> {
 /// # 返回值
 /// # Return Value
 /// 每个 URL 请求的结果向量（成功时包含响应长度，失败时包含错误）
-/// URL result （，）
 ///
 /// # 示例
 /// # Examples
@@ -425,7 +404,6 @@ pub async fn demo_basic_combinators(n: u32) -> Vec<u32> {
 ///     for result in results {
 ///         match result {
 ///             Ok(len) => println!("响应长度: {}", len),
-///             Err(e) => println!("请求失败: {}", e),
 ///         }
 ///     }
 /// }
@@ -455,21 +433,17 @@ pub async fn demo_buffer_unordered(urls: Vec<String>) -> Vec<Result<usize, reqwe
 /// demonstration definition TickStream
 ///
 /// 这个函数展示了如何消费自定义的 TickStream。
-/// function definition TickStream。
 /// 它会等待指定次数的计时器触发，并收集所有计数值。
-/// etc. ，and all 。
 ///
 /// # 参数
 /// # Parameters
 /// - `ticks`: 要产生的计时次数
-/// - `ticks`:
 /// - `period`: 每次计时的间隔时间
 /// - `period`: time
 ///
 /// # 返回值
 /// # Return Value
 /// 包含所有计数值的向量
-/// all
 ///
 /// # 示例
 /// # Examples
@@ -481,7 +455,6 @@ pub async fn demo_buffer_unordered(urls: Vec<String>) -> Vec<Result<usize, reqwe
 /// async fn main() {
 ///     let ticks = demo_tick_stream(3, Duration::from_millis(100)).await;
 ///     println!("计时结果: {:?}", ticks);
-///     // 输出: [1, 2, 3]
 ///     // : [1, 2, 3]
 /// }
 /// ```

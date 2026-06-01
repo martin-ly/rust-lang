@@ -4,12 +4,8 @@
 //! 本模块展示了 Rust 1.94.0 在算法实现场景中的增强，包括：
 //! This module demonstrates Rust 1.94.0 algorithmimplementationstrongincluding
 //! - array_windows 在滑动窗口算法中的应用 / Array Windows in Sliding Window Algorithms
-//! - LazyCell 在算法缓存中的应用 / LazyCell in Algorithm Caching
 //! - 数学常量在数值算法中的应用 / Math Constants in Numerical Algorithms
-//! - Peekable 在算法遍历中的应用 / Peekable in Algorithm Iteration
 //! - char 转换在字符串算法中的应用 / char Conversion in String Algorithms
-//!
-//! # 文件信息
 //! # File Info
 //! - 文件: rust_194_features.rs
 //! - File: rust_194_features.rs
@@ -26,15 +22,12 @@ use std::sync::LazyLock;
 // ==================== 1. array_windows 在滑动窗口算法中的应用 ====================
 
 /// # 1. array_windows 在滑动窗口算法中的应用 / Array Windows in Sliding Window Algorithms
-///
-/// Rust 1.94.0 的 `array_windows` 方法为滑动窗口算法提供了更简洁、
 /// Rust 1.94.0 `array_windows` method as algorithm 、
 /// 类型安全的实现方式。它返回固定大小的数组窗口 `[&T; N]`，
 /// type way 。 `[&T; N]`，
 /// 使得算法实现更加清晰。
 /// algorithm clear 。
 /// 滑动窗口算法集合
-/// algorithm set
 ///
 /// Rust 1.94.0: 使用 array_windows 实现各种滑动窗口算法
 /// Rust 1.94.0: use array_windows implementation algorithm
@@ -42,7 +35,6 @@ pub struct SlidingWindowAlgorithms;
 
 impl SlidingWindowAlgorithms {
     /// 固定大小窗口求和
-    /// and
     ///
     /// Rust 1.94.0: `array_windows::<N>()` 返回 `[&i32; N]`
     pub fn window_sum<const N: usize>(data: &[i32]) -> Vec<i32>
@@ -56,7 +48,6 @@ impl SlidingWindowAlgorithms {
     }
 
     /// 寻找和为目标值的子数组（使用窗口）
-    /// and as goal （）
     ///
     /// Rust 1.94.0: `array_windows::<N>` 简化子数组查找
     pub fn find_subarray_with_sum(data: &[i32], target: i32, window_size: usize) -> Vec<usize> {
@@ -73,7 +64,6 @@ impl SlidingWindowAlgorithms {
     }
 
     /// 最长连续递增子序列（使用窗口检测）
-    /// sequence （）
     ///
     /// Rust 1.96.0: array_windows::<2>() 返回 [&T; 2] 便于比较相邻元素
     /// Rust 1.96.0: array_windows::<2>() [&T; 2] element
@@ -145,7 +135,6 @@ impl SlidingWindowAlgorithms {
     }
 
     /// 计算变化点（使用二阶差分窗口）
-    /// Compute use
     ///
     /// Rust 1.96.0: array_windows::<3>() 用于计算二阶差分
     /// Rust 1.96.0: array_windows::<3>()
@@ -206,7 +195,6 @@ impl SlidingWindowAlgorithms {
 }
 
 /// 字符串滑动窗口算法
-/// string algorithm
 ///
 /// Rust 1.94.0: 使用 array_windows 处理字符串
 /// Rust 1.94.0: use array_windows handling string
@@ -231,7 +219,6 @@ impl StringWindowAlgorithms {
     }
 
     /// 查找回文子串（使用窗口检测）
-    /// （）
     ///
     /// Rust 1.96.0: array_windows 便于对称性检查
     pub fn find_palindromic_windows(s: &str, window_size: usize) -> Vec<(usize, String)> {
@@ -249,7 +236,6 @@ impl StringWindowAlgorithms {
     }
 
     /// 编辑距离窗口分析
-    /// analyze
     ///
     /// Rust 1.96.0: array_windows::<2>() 用于比较相邻字符串片段
     /// Rust 1.96.0: array_windows::<2>()
@@ -325,12 +311,8 @@ pub fn demonstrate_array_windows_algorithms() {
 // ==================== 2. LazyCell 在算法缓存中的应用 ====================
 
 /// # 2. LazyCell 在算法缓存中的应用 / LazyCell in Algorithm Caching
-///
-/// Rust 1.96.0 为 LazyCell 添加了新方法，使其在算法缓存中更加灵活。
 /// Rust 1.96.0 as LazyCell method ，its in algorithm in 。
 /// 斐波那契缓存
-///
-/// Rust 1.94.0: 使用 HashMap 实现真正的斐波那契数缓存
 /// Rust 1.94.0: HashMap
 pub struct FibonacciCache {
     cache: HashMap<u32, u64>,
@@ -338,6 +320,7 @@ pub struct FibonacciCache {
 
 impl FibonacciCache {
     /// 创建新的缓存
+    /// Create new cache
     pub fn new(_n: usize) -> Self {
         Self {
             cache: HashMap::new(),
@@ -363,7 +346,6 @@ impl FibonacciCache {
     }
 
     /// 获取第 n 个斐波那契数
-    /// Get n
     ///
     /// Rust 1.94.0: 使用 HashMap 实现真正的缓存机制
     /// Rust 1.94.0: use HashMap implementationtruepositive mechanism
@@ -389,6 +371,7 @@ pub struct AlgorithmResultCache<K, V> {
 
 impl<K: std::hash::Hash + Eq + Clone, V: Clone> AlgorithmResultCache<K, V> {
     /// 创建新的缓存
+    /// Create new cache
     pub fn new(compute: fn() -> HashMap<K, V>) -> Self {
         Self {
             cache: LazyLock::new(compute),
@@ -437,8 +420,6 @@ pub fn demonstrate_lazycell_caching() {
 // ==================== 3. 数学常量在数值算法中的应用 ====================
 
 /// # 3. 数学常量在数值算法中的应用 / Math Constants in Numerical Algorithms
-///
-/// Rust 1.94.0 添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量，
 /// Rust 1.94.0 Added EULER_GAMMA and GOLDEN_RATIO constants,
 /// constant in numerical algorithm in important 。
 /// 数值算法集合
@@ -450,7 +431,6 @@ pub struct NumericalAlgorithms;
 
 impl NumericalAlgorithms {
     /// 黄金分割搜索算法
-    /// search algorithm
     ///
     /// Rust 1.94.0: GOLDEN_RATIO 在优化算法中的应用
     /// Rust 1.94.0: GOLDEN_RATIO optimizationalgorithm application
@@ -487,7 +467,6 @@ impl NumericalAlgorithms {
     }
 
     /// 使用欧拉常数的渐近分析
-    /// use analysis
     ///
     /// Rust 1.94.0: EULER_GAMMA 在级数分析中的应用
     /// Rust 1.94.0: EULER_GAMMA analysis application
@@ -497,7 +476,6 @@ impl NumericalAlgorithms {
     }
 
     /// 斐波那契数列闭式计算（Binet 公式）
-    /// （Binet ）
     ///
     /// Rust 1.94.0: GOLDEN_RATIO 在斐波那契数列中的应用
     /// Rust 1.94.0: GOLDEN_RATIO application
@@ -510,8 +488,6 @@ impl NumericalAlgorithms {
     }
 
     /// 黄金比例哈希
-    ///
-    /// Rust 1.94.0: GOLDEN_RATIO 在哈希算法中的应用
     /// Rust 1.94.0: GOLDEN_RATIO algorithm application
     pub fn golden_ratio_hash<T: std::hash::Hash>(value: T, table_size: usize) -> usize {
         let phi = std::f64::consts::GOLDEN_RATIO;
@@ -540,7 +516,6 @@ impl NumericalAlgorithms {
 }
 
 /// 演示数学常量在数值算法中的应用
-/// constantvaluealgorithm application
 #[allow(dead_code)]
 pub fn demonstrate_math_constants_algorithms() {
     println!("\n=== 数学常量数值算法演示 ===\n");
@@ -574,8 +549,6 @@ pub fn demonstrate_math_constants_algorithms() {
 // ==================== 4. Peekable 在算法遍历中的应用 ====================
 
 /// # 4. Peekable 在算法遍历中的应用 / Peekable in Algorithm Iteration
-///
-/// Rust 1.94.0 为 Peekable 添加了 next_if_map 和 next_if_map_mut 方法，
 /// Rust 1.94.0 Added next_if_map and next_if_map_mut methods to Peekable,
 /// method in algorithm and in useful 。
 /// 有序迭代器合并
@@ -678,7 +651,6 @@ impl<I: Iterator> ConditionalExtractor<I> {
     }
 
     /// 提取满足条件的连续元素
-    /// condition element
     ///
     /// Rust 1.94.0: 使用 next_if_map 模式
     /// Rust 1.94.0: use next_if_map pattern
@@ -728,8 +700,6 @@ pub fn demonstrate_peekable_algorithms() {
 // ==================== 5. char 转换在字符串算法中的应用 ====================
 
 /// # 5. char 转换在字符串算法中的应用 / char Conversion in String Algorithms
-///
-/// Rust 1.94.0 实现了 `TryFrom<char>` for usize，
 /// 这在字符串算法和字符编码处理中非常有用。
 /// in string algorithm and in useful 。
 /// 字符串算法集合
@@ -748,7 +718,6 @@ impl StringAlgorithms {
     }
 
     /// 基于 Unicode 的字符串哈希
-    /// Unicode
     ///
     /// Rust 1.94.0: char 到 usize 转换用于哈希计算
     /// Rust 1.94.0: char to usize conversion
@@ -762,7 +731,6 @@ impl StringAlgorithms {
     }
 
     /// 查找特定 Unicode 范围的字符
-    /// Unicode scope
     ///
     /// Rust 1.94.0: 使用 char 转换进行范围检查
     /// Rust 1.94.0: char conversion scope
@@ -777,7 +745,6 @@ impl StringAlgorithms {
     }
 
     /// 统计各 Unicode 块的字符数
-    /// Unicode
     ///
     /// Rust 1.94.0: 使用 char 转换进行分类
     /// Rust 1.94.0: char conversion classification
@@ -811,7 +778,6 @@ impl StringAlgorithms {
     }
 
     /// 基于码点的排序键生成
-    /// point ordering
     ///
     /// Rust 1.94.0: char 转换用于排序键
     /// Rust 1.94.0: char conversion ordering
@@ -820,7 +786,6 @@ impl StringAlgorithms {
     }
 
     /// 查找变位词（基于排序后的字符序列）
-    /// （ordering after sequence ）
     ///
     /// Rust 1.94.0: 使用排序后的字符序列作为 key 检测变位词
     /// Rust 1.94.0: ordering after sequence as key
@@ -1136,7 +1101,6 @@ mod tests {
     /// Test large
     /// while or panic
     /// 预期行为：返回计算结果或使用 wrapping 算术
-    /// as ：result or wrapping
     #[test]
     fn test_fibonacci_cache_large_n() {
         let mut cache = FibonacciCache::new(100);
@@ -1162,7 +1126,6 @@ mod tests {
     /// Test handling
     ///
     /// 验证斐波那契缓存使用 wrapping 算术正确处理溢出
-    /// Verify use wrapping positivehandling
     /// 预期行为：返回 wrapping 后的结果，不 panic
     /// as ： wrapping after result ， panic
     #[test]
@@ -1226,12 +1189,9 @@ mod tests {
     }
 
     /// 测试字符串窗口算法边界
-    /// Test stringalgorithmedge
     ///
     /// 验证字符串窗口算法能正确处理边界情况
-    /// Verify stringalgorithmpositivehandlingedge
     /// 预期行为：正确处理空字符串、窗口大小大于字符串等边界情况
-    /// as ：、etc. edge situation
     #[test]
     fn test_string_window_algorithms_edge_cases() {
         let empty_string = "";

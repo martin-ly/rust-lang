@@ -1,6 +1,4 @@
 //! 异步语义理论基础 - Async Semantics Theory Foundations
-//!
-//! # 概述 (Overview)
 //! # Overview
 //! This module provides Rust async theory foundation ，：
 //! - 异步计算的形式化定义
@@ -10,23 +8,18 @@
 //! - 控制流与执行流的语义模型
 //! - stream and stream
 //! - 基于范畴论的异步抽象
-//! - async
 //!
 //! # 理论基础 (Theoretical Foundations)
-//!
-//! ## 1. 异步计算的形式化定义
+//! # Theoretical Foundations
 //! ## 1. async definition
 //!
 //! ### 1.1 状态机模型 (State Machine Model)
-//!
-//! Future 可以形式化为一个状态机 M = (S, s₀, δ, F)，其中：
 //! Future can as state machine M = (S, s₀, δ, F)，its in ：
 //! - S: 状态集合
 //! - S: status set
 //! - s₀: 初始状态
 //! - s: initial status
 //! - δ: 状态转换函数 `δ: S × Context → Poll<T> × S`
-//! - F: 终止状态集合
 //! - F: status set
 //!
 //! ```text
@@ -48,8 +41,6 @@
 //! ```
 //!
 //! ### 1.2 Monad 结构 (Monadic Structure)
-//!
-//! Future 形成一个 Monad，满足：
 //! Future Monad，：
 //!
 //! ```text
@@ -57,11 +48,9 @@
 //! bind   : Future<A> → (A → Future<B>) → Future<B>
 //!
 //! Monad 法则：
-//! 1. 左单位元: return(a) >>= f ≡ f(a)
 //! 2. 右单位元: m >>= return ≡ m
 //! 2. : m >>= return ≡ m
 //! 3. 结合律:   (m >>= f) >>= g ≡ m >>= (λx. f(x) >>= g)
-//! ```
 //!
 //! ## 2. 异步与同步的等价关系
 //! ## 2. async and synchronous etc.
@@ -72,7 +61,6 @@
 //! **定理**: 对于任意计算 C，存在同步实现 Cₛ 和异步实现 Cₐ，
 //! **theorem **: to C，in synchronous Cₛ and async Cₐ，
 //! 使得它们在语义上等价（忽略执行时序）。
-//! in on etc. （）。
 //!
 //! **证明**:
 //! ****:
@@ -80,8 +68,6 @@
 //! 给定同步计算: Cₛ : T
 //! synchronous : Cₛ : T
 //! 构造异步计算: Cₐ : Future<T> = async { Cₛ }
-//!
-//! 反之，给定异步计算: Cₐ : Future<T>
 //! 's ，async : Cₐ : Future<T>
 //! 构造同步计算: Cₛ : T = block_on(Cₐ)
 //! synchronous : Cₛ : T = block_on(Cₐ)
@@ -91,15 +77,12 @@
 //! ```
 //!
 //! ### 2.2 CPS 变换 (Continuation-Passing Style)
-//!
-//! 异步函数可以通过 CPS 变换与同步函数建立对应关系：
 //! async function can CPS transformation and synchronous function to ：
 //!
 //! ```text
 //! 同步函数:  f : A → B
 //! synchronous function : f : A → B
 //! CPS 变换:  f_cps : A → (B → R) → R
-//! 异步版本:  f_async : A → Future<B>
 //!
 //! 等价关系:
 //! etc. :
@@ -110,8 +93,6 @@
 //! ## 3. stream and stream
 //!
 //! ### 3.1 控制流图 (Control Flow Graph)
-//!
-//! ```text
 //! CFG = (V, E, entry, exit)
 //! - V: 基本块集合
 //! - V: set
@@ -125,15 +106,12 @@
 //! - 每个 .await 点分割基本块
 //! -.await point this
 //! - 引入挂起点 (suspension points)
-//! ```
 //!
 //! ### 3.2 执行流语义
 //! ### 3.2 stream
 //!
 //! ```text
 //! 执行配置: Conf = (State, Continuation)
-//!
-//! 小步语义 (Small-step semantics):
 //! ────────────────────────────────────────
 //!    (s, await e) → (s', ⟨suspend, k⟩)
 //! ────────────────────────────────────────
@@ -146,8 +124,6 @@
 //! ```
 //!
 //! ## 4. 范畴论视角 (Category Theory Perspective)
-//!
-//! ### 4.1 异步范畴
 //! ### 4.1 async
 //!
 //! ```text
@@ -158,7 +134,6 @@
 //! - 态射: A → B 是类型为 impl Fn(A) → Future<B> 的函数
 //! - : A B type impl Fn(A) Future<B> function
 //! - 复合: (f ∘ g)(x) = async { f(g(x).await).await }
-//! - 单位态射: id(x) = async { x }
 //! ```
 //!
 //! ### 4.2 自然变换
@@ -226,7 +201,6 @@ pub mod state_machine_example {
     /// δ(Waiting(n), cx) = (Pending, Waiting(n+1))  if n < max_polls
     /// δ(Waiting(max_polls), cx) = (Ready(result), Complete)
     /// δ(Complete, cx) = undefined (不会被调用)
-    /// ```
     pub struct ExplicitStateMachine {
         state: TaskState,
         max_polls: u32,
@@ -298,13 +272,11 @@ pub mod state_machine_example {
 /// # example 2: async and synchronous etc.
 ///
 /// 展示同一计算的同步和异步实现，证明它们的语义等价性
-/// synchronous and async ，etc.
 pub mod sync_async_equivalence {
     use super::*;
     use tokio::time::sleep;
 
     /// 同步实现: 斐波那契数列
-    /// synchronous :
     ///
     /// ## 形式化定义
     /// ## Formal Definition
@@ -323,7 +295,6 @@ pub mod sync_async_equivalence {
     }
 
     /// 异步实现: 斐波那契数列
-    /// async :
     ///
     /// ## 形式化定义
     /// ## Formal Definition
@@ -394,8 +365,6 @@ pub mod cps_transformation {
     use super::*;
 
     /// 直接风格 (Direct Style)
-    ///
-    /// ```text
     /// f : A → B
     /// ```
     pub fn direct_style_add(a: i32, b: i32) -> i32 {
@@ -403,8 +372,6 @@ pub mod cps_transformation {
     }
 
     /// CPS 风格 (Continuation-Passing Style)
-    ///
-    /// ```text
     /// f_cps : A → (B → R) → R
     /// ```
     ///
@@ -425,8 +392,6 @@ pub mod cps_transformation {
     }
 
     /// 异步风格 (Async Style)
-    ///
-    /// ```text
     /// f_async : A → Future<B>
     /// ```
     ///
@@ -442,7 +407,6 @@ pub mod cps_transformation {
     }
 
     /// 演示三种风格的等价性
-    /// demonstration etc.
     pub async fn demonstrate_equivalence() {
         println!("\n=== CPS 变换示例 ===");
 
@@ -489,7 +453,6 @@ pub mod control_flow_analysis {
     }
 
     /// 带标记的异步函数
-    /// async function
     ///
     /// ## 控制流图 (CFG)
     /// ## stream (CFG)
@@ -498,17 +461,12 @@ pub mod control_flow_analysis {
     /// Entry
     ///   ↓
     /// Block1 (执行 x = 1)
-    ///   ↓
     /// AwaitPoint1 (等待 sleep)
-    ///   ↓ [挂起/恢复]
     ///   ↓ [/]
     /// Block2 (执行 y = 2)
-    ///   ↓
     /// AwaitPoint2 (等待 sleep)
-    ///   ↓ [挂起/恢复]
     ///   ↓ [/]
     /// Block3 (计算 x + y)
-    ///   ↓
     /// Exit (返回 3)
     /// Exit ( 3)
     /// ```
@@ -605,7 +563,6 @@ pub mod monad_laws {
     }
 
     /// ## 法则 2: 右单位元 (Right Identity)
-    /// ```text
     /// m >>= return ≡ m
     /// ```
     pub async fn verify_right_identity() {
@@ -625,7 +582,6 @@ pub mod monad_laws {
     }
 
     /// ## 法则 3: 结合律 (Associativity)
-    /// ```text
     /// (m >>= f) >>= g ≡ m >>= (λx. f(x) >>= g)
     /// ```
     pub async fn verify_associativity() {

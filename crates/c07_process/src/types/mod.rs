@@ -166,13 +166,11 @@ pub struct ResourceLimits {
     /// maximum memory （）
     pub max_memory: Option<u64>,
     /// 最大文件描述符数量
-    /// maximumfile count
     pub max_file_descriptors: Option<u64>,
     /// 最大CPU时间（秒）
     /// maximum CPUtime （）
     pub max_cpu_time: Option<u64>,
     /// 最大文件大小（字节）
-    /// maximum （）
     pub max_file_size: Option<u64>,
 }
 
@@ -275,7 +273,6 @@ pub struct ProcessGroup {
 }
 
 /// 系统资源使用情况
-/// system situation
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SystemResources {
     /// 总内存（字节）
@@ -294,7 +291,6 @@ pub struct SystemResources {
     /// space （）
     pub total_disk: u64,
     /// 可用磁盘空间（字节）
-    /// space （）
     pub available_disk: u64,
     /// 当前时间
     /// current time

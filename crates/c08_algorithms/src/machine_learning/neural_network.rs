@@ -2,7 +2,6 @@
 //! neural network
 //!
 //! 本模块提供了基础的神经网络实现，包括：
-//! This module provides implementationincluding
 //! - 多层感知机 (MLP)
 //! - (MLP)
 //! - 前向传播
@@ -34,7 +33,6 @@ impl ActivationFunction {
     }
 
     /// 计算激活函数的导数
-    /// Compute function
     pub fn derivative(&self, x: f64) -> f64 {
         match self {
             ActivationFunction::Sigmoid => {
@@ -114,13 +112,11 @@ impl Layer {
     }
 
     /// 获取权重的可变引用
-    /// Get mutablereference
     pub fn weights_mut(&mut self) -> &mut Vec<Vec<f64>> {
         &mut self.weights
     }
 
     /// 获取偏置的可变引用
-    /// Get mutablereference
     pub fn biases_mut(&mut self) -> &mut Vec<f64> {
         &mut self.biases
     }
@@ -189,7 +185,6 @@ impl MLP {
     }
 
     /// 计算损失（均方误差）
-    /// loss （）
     pub fn loss(&self, predictions: &[f64], targets: &[f64]) -> f64 {
         predictions
             .iter()

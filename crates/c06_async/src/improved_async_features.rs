@@ -1,20 +1,17 @@
 //! 改进的异步特性实现
-//! improvementsasyncfeatures implementation
-//! 
+//!
 //! 本模块实现了当前稳定版本中实际可用的异步特性，
-//! This module implements currentversionasyncfeatures
 //! 包括超时控制、结构化并发、错误处理等实际功能。
 //! 、structure concurrency 、error handling etc. actual functionality 。
+use anyhow::{Context, Result};
+use std::collections::VecDeque;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
-use std::collections::VecDeque;
 use tokio::sync::{Mutex, Semaphore};
-use tokio::time::{timeout, sleep};
-use anyhow::{Result, Context};
-use tracing::{warn, error};
+use tokio::time::{sleep, timeout};
+use tracing::{error, warn};
 
 /// 改进的异步资源管理器
-/// improvementsasyncresource manager
 #[derive(Debug, Clone)]
 pub struct ImprovedAsyncResourceManager {
     resources: Arc<Mutex<Vec<AsyncResource>>>,
@@ -43,10 +40,7 @@ impl ImprovedAsyncResourceManager {
     }
 
     /// 使用超时控制的资源获取
-    pub async fn acquire_with_timeout(
-        &self,
-        timeout_duration: Duration,
-    ) -> Result<AsyncResource> {
+    pub async fn acquire_with_timeout(&self, timeout_duration: Duration) -> Result<AsyncResource> {
         let _permit = timeout(timeout_duration, self.semaphore.acquire())
             .await
             .context("获取资源超时")?
@@ -72,7 +66,7 @@ impl ImprovedAsyncResourceManager {
         T: Send + 'static,
     {
         let mut handles = Vec::new();
-        
+
         // 为每个任务创建一个spawn任务
         for task in tasks {
             let handle = tokio::spawn(async move {
@@ -107,26 +101,24 @@ impl ImprovedAsyncResourceManager {
         batch_size: usize,
     ) -> Result<Vec<ProcessedResource>> {
         let mut results = Vec::new();
-        
+
         for chunk in resource_ids.chunks(batch_size) {
             let mut batch_results = Vec::new();
-            
+
             for id in chunk {
                 match self.acquire_with_timeout(Duration::from_millis(100)).await {
-                    Ok(resource) => {
-                        match self.process_single_resource(resource, id).await {
-                            Ok(processed) => batch_results.push(processed),
-                            Err(e) => {
-                                error!("处理资源 {} 失败: {}", id, e);
-                            }
+                    Ok(resource) => match self.process_single_resource(resource, id).await {
+                        Ok(processed) => batch_results.push(processed),
+                        Err(e) => {
+                            error!("处理资源 {} 失败: {}", id, e);
                         }
-                    }
+                    },
                     Err(e) => {
                         error!("获取资源 {} 失败: {}", id, e);
                     }
                 }
             }
-            
+
             results.extend(batch_results);
         }
 
@@ -142,9 +134,9 @@ impl ImprovedAsyncResourceManager {
     ) -> Result<ProcessedResource> {
         // 模拟异步处理
         sleep(Duration::from_millis(10)).await;
-        
+
         resource.data = id.as_bytes().to_vec();
-        
+
         Ok(ProcessedResource {
             original_id: resource.id,
             processed_data: resource.data,
@@ -196,7 +188,9 @@ pub struct AsyncTaskScheduler {
 pub struct ScheduledTask {
     pub id: String,
     pub delay: Duration,
-    pub task: Box<dyn Fn() -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> + Send + Sync>,
+    pub task: Box<
+        dyn Fn() -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> + Send + Sync,
+    >,
 }
 
 impl std::fmt::Debug for ScheduledTask {
@@ -231,32 +225,31 @@ impl AsyncTaskScheduler {
     /// 启动调度器
     pub async fn start(&self) -> Result<()> {
         let mut interval = tokio::time::interval(Duration::from_millis(100));
-        
+
         loop {
             interval.tick().await;
-            
+
             // 检查是否有可执行的任务
             if let Some(task) = self.get_next_ready_task().await {
                 self.execute_task(task).await?;
             }
-            
+
             // 清理已完成的任务
             self.cleanup_completed_tasks().await;
         }
     }
 
     /// 获取下一个就绪的任务
-    /// Get lowertask
     async fn get_next_ready_task(&self) -> Option<ScheduledTask> {
         let mut queue = self.task_queue.lock().await;
         let now = Instant::now();
-        
+
         for (index, task) in queue.iter().enumerate() {
             if now.elapsed() >= task.delay {
                 return queue.remove(index);
             }
         }
-        
+
         None
     }
 
@@ -264,7 +257,7 @@ impl AsyncTaskScheduler {
     /// task
     async fn execute_task(&self, task: ScheduledTask) -> Result<()> {
         let mut running = self.running_tasks.lock().await;
-        
+
         if running.len() >= self.max_concurrent_tasks {
             warn!("达到最大并发任务数限制");
             return Ok(());
@@ -280,7 +273,7 @@ impl AsyncTaskScheduler {
     }
 
     /// 清理已完成的任务
-    /// Cleanup completetask
+    /// Cleanup completed tasks
     async fn cleanup_completed_tasks(&self) {
         let mut running = self.running_tasks.lock().await;
         running.retain(|handle| !handle.is_finished());
@@ -288,7 +281,6 @@ impl AsyncTaskScheduler {
 }
 
 /// 异步错误恢复机制
-/// asyncerror mechanism
 #[derive(Debug)]
 pub struct AsyncErrorRecovery {
     max_retries: usize,
@@ -315,19 +307,19 @@ impl AsyncErrorRecovery {
     }
 
     /// 执行带重试的异步操作
-    /// executionasync operation
+    /// Execute async operation with retry
     pub async fn execute_with_retry<F, T>(&self, mut operation: F) -> Result<T>
     where
         F: FnMut() -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<T>> + Send>> + Send,
     {
         let mut last_error = None;
-        
+
         for attempt in 0..=self.max_retries {
             match operation().await {
                 Ok(result) => return Ok(result),
                 Err(e) => {
                     last_error = Some(e);
-                    
+
                     if attempt < self.max_retries {
                         let delay = self.calculate_backoff_delay(attempt);
                         warn!("操作失败，第 {} 次重试，延迟 {:?}", attempt + 1, delay);
@@ -336,7 +328,7 @@ impl AsyncErrorRecovery {
                 }
             }
         }
-        
+
         Err(last_error.expect("最后错误应存在"))
     }
 
@@ -360,27 +352,29 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_improved_async_resource_manager() {
         let manager = ImprovedAsyncResourceManager::new(5);
-        
+
         // 测试超时控制
-        let resource = manager.acquire_with_timeout(Duration::from_millis(100)).await;
+        let resource = manager
+            .acquire_with_timeout(Duration::from_millis(100))
+            .await;
         assert!(resource.is_ok());
-        
+
         // 测试统计信息
         let stats = manager.get_statistics().await;
         assert_eq!(stats.max_concurrent, 5);
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_structured_concurrency() {
         // 使用更简单的方法测试并发处理
         let task1 = async { Ok::<i32, anyhow::Error>(1) };
         let task2 = async { Ok::<i32, anyhow::Error>(2) };
         let task3 = async { Ok::<i32, anyhow::Error>(3) };
-        
+
         let results = futures::future::join3(task1, task2, task3).await;
         assert_eq!(results.0.expect("第一个结果应存在"), 1);
         assert_eq!(results.1.expect("第二个结果应存在"), 2);
@@ -388,25 +382,27 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_error_recovery() {
         let recovery = AsyncErrorRecovery::new(
             3,
             BackoffStrategy::Exponential(Duration::from_millis(10), 2.0),
         );
-        
+
         let mut attempt_count = 0;
-        let result = recovery.execute_with_retry(|| {
-            attempt_count += 1;
-            Box::pin(async move {
-                if attempt_count < 3 {
-                    Err(anyhow::anyhow!("模拟错误"))
-                } else {
-                    Ok("成功")
-                }
+        let result = recovery
+            .execute_with_retry(|| {
+                attempt_count += 1;
+                Box::pin(async move {
+                    if attempt_count < 3 {
+                        Err(anyhow::anyhow!("模拟错误"))
+                    } else {
+                        Ok("成功")
+                    }
+                })
             })
-        }).await;
-        
+            .await;
+
         assert!(result.is_ok());
         assert_eq!(result.expect("结果应存在"), "成功");
         assert_eq!(attempt_count, 3);

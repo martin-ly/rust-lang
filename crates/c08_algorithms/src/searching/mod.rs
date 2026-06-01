@@ -10,7 +10,6 @@ use std::hash::Hash;
 // =========================
 
 /// 同步线性搜索，返回首次匹配的索引
-/// synchronous linear search ，
 pub fn linear_search_sync<T>(data: &[T], target: &T) -> Option<usize>
 where
     T: PartialEq,
@@ -194,7 +193,6 @@ where
 // =========================
 
 /// 插值查找：适用于近似均匀分布的有序数组
-/// valuesearchhas array
 pub fn interpolation_search_sync(data: &[i64], target: i64) -> Option<usize> {
     if data.is_empty() {
         return None;

@@ -278,7 +278,6 @@ impl HealthChecker {
     }
 
     /// 获取当前健康状态
-    /// Get currentstatus
     async fn get_status(&self) -> HealthStatus {
         self.status.read().await.clone()
     }

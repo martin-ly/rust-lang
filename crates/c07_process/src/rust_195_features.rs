@@ -29,13 +29,11 @@ pub struct ProcessAtomicExamples;
 
 impl ProcessAtomicExamples {
     /// 子进程计数器递增（用于进程池管理）
-    /// process （process ）
     pub fn fork_child_counter(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::SeqCst, Ordering::Relaxed, |old| old + 1)
     }
 
     /// 子进程计数器递减
-    /// process
     pub fn reap_child_counter(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::SeqCst, Ordering::Relaxed, |old| old.saturating_sub(1))
     }
@@ -131,7 +129,6 @@ impl ProcessStateMachineExamples {
     }
 
     /// 信号处理：仅对特定状态转发信号
-    /// ：to state
     pub fn route_signal(pid: Option<u32>, signal: i32, running: bool) -> bool {
         matches!((pid, signal), (Some(_), sig) if sig > 0 && running)
     }
@@ -159,7 +156,6 @@ impl ProcessCfgSelectExamples {
     };
 
     /// 最大进程数软限制推荐值
-    /// maximumprocesssoftrecommended value
     pub const MAX_PROCESSES_RECOMMENDED: usize = cfg_select! {
         target_os = "linux" => 32768,
         target_os = "macos" => 2666,

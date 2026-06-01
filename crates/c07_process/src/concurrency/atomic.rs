@@ -156,7 +156,6 @@ impl ProcessAtomicUsize {
 }
 
 /// 进程安全的原子有符号整数
-/// process symbol
 pub struct ProcessAtomicIsize {
     inner: AtomicIsize,
 }

@@ -46,7 +46,6 @@ pub fn convex_hull(mut pts: Vec<Pt>) -> Vec<Pt> {
 }
 
 /// 旋转卡壳：求凸多边形直径（最大两点间距离平方）
-/// ：edge （maximum point ）
 pub fn rotating_calipers_diameter2(hull: &[Pt]) -> f64 {
     let m = hull.len();
     if m <= 1 {

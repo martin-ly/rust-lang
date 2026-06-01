@@ -33,7 +33,6 @@ pub enum BatchStrategy {
     /// time processing
     ByTime(Duration),
     /// 按大小批处理（字节数）
-    /// （）
     BySize(usize),
     /// 混合策略
     /// strategy
@@ -187,7 +186,6 @@ where
     }
 
     /// 添加项目到批处理队列
-    /// handling queue
     pub async fn add_item(&self, item: BatchItem<T>) -> Result<()> {
         let queue_size = {
             let mut queue = self.queue.lock().await;
@@ -404,7 +402,6 @@ where
 }
 
 /// 简单的批处理器实现示例
-/// singlehandlingimplementation example
 pub struct SimpleBatchProcessor<T> {
     name: String,
     _phantom: std::marker::PhantomData<T>,

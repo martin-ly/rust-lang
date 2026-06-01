@@ -10,8 +10,8 @@
 
 use std::collections::VecDeque;
 use std::future::Future;
-use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
 
 // ============================================================================
 // 1. ConceptWaker — Waker 概念实现
@@ -21,7 +21,6 @@ use std::sync::Arc;
 /// Waker implementation
 ///
 /// 真实 Waker 由 `std::task::RawWaker` 和 vtable 构成，需要 unsafe 代码。
-/// 这里使用 `Arc<AtomicBool>` 模拟"唤醒标记"的语义。
 /// `Arc<AtomicBool>` "mark "。
 pub struct ConceptWaker {
     awakened: Arc<AtomicBool>,
@@ -43,13 +42,11 @@ impl ConceptWaker {
     }
 
     /// 检查是否已被唤醒
-    /// is
     pub fn is_awakened(&self) -> bool {
         self.awakened.load(Ordering::Acquire)
     }
 
     /// 获取底层的 `Arc<AtomicBool>`（用于克隆）
-    /// Get `Arc<AtomicBool>`
     pub fn inner(&self) -> Arc<AtomicBool> {
         Arc::clone(&self.awakened)
     }
@@ -80,7 +77,6 @@ impl Clone for ConceptWaker {
 // ============================================================================
 
 /// 概念性异步任务队列
-/// asynctask queue
 ///
 /// 真实运行时（如 Tokio）使用复杂的队列结构（全局注入器 + 本地工作窃取队列）。
 /// real runtime （ Tokio）complex structure （global + this ）。
@@ -100,13 +96,11 @@ impl ConceptTaskQueue {
     }
 
     /// 向队列尾部追加任务
-    /// task
     pub fn push(&mut self, task: Box<dyn Future<Output = ()> + 'static>) {
         self.tasks.push_back(task);
     }
 
     /// 从队列头部取出任务
-    /// from task
     pub fn pop(&mut self) -> Option<Box<dyn Future<Output = ()> + 'static>> {
         self.tasks.pop_front()
     }

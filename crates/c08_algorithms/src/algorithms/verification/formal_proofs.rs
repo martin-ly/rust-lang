@@ -55,7 +55,6 @@ pub struct FormalProver;
 
 impl FormalProver {
     /// 生成快速排序的形式化证明
-    /// fastsortformal proof
     pub fn prove_quicksort() -> FormalProof {
         FormalProof {
             algorithm_name: "QuickSort".to_string(),
@@ -102,7 +101,6 @@ impl FormalProver {
     }
 
     /// 生成归并排序的形式化证明
-    /// sortformal proof
     pub fn prove_mergesort() -> FormalProof {
         FormalProof {
             algorithm_name: "MergeSort".to_string(),
@@ -146,7 +144,6 @@ impl FormalProver {
     }
 
     /// 生成二分搜索的形式化证明
-    /// searchformal proof
     pub fn prove_binary_search() -> FormalProof {
         FormalProof {
             algorithm_name: "BinarySearch".to_string(),

@@ -22,14 +22,10 @@
 //! - 137. Single Number II（只出现一次的数字 II）
 //! - 137. Single Number II（ II）
 //! - 191. Number of 1 Bits（位1的个数）
-//! - 190. Reverse Bits（颠倒二进制位）
 //! - 190. Reverse Bits（）
 //! - 231. Power of Two（2 的幂）
-//! - 268. Missing Number（丢失的数字）
 //! - 338. Counting Bits（比特位计数）
-//! - 371. Sum of Two Integers（两整数之和）
 //! - 461. Hamming Distance（汉明距离）
-//! - 476. Number Complement（数字的补数）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 136. Single Number（只出现一次的数字）
@@ -59,8 +55,6 @@ pub fn single_number(nums: Vec<i32>) -> i32 {
 }
 
 /// 191. Number of 1 Bits（位1的个数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 `'1'` 的个数（也被称为汉明重量）。
 /// function ，symbol （），its tabulation in as `'1'` （is as ）。
@@ -97,7 +91,6 @@ pub fn hamming_weight(n: u32) -> i32 {
 /// ## 问题描述
 /// ## Problem Description
 /// 颠倒给定的 32 位无符号整数的二进制位。
-/// 32 symbol 。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -127,8 +120,6 @@ pub fn reverse_bits(n: u32) -> u32 {
 }
 
 /// 231. Power of Two（2 的幂）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数 `n`，请你判断该整数是否是 2 的幂次方。如果是，返回 `true`；否则，返回 `false`。
 /// `n`，this 2 。if ， `true`；， `false`。
@@ -157,8 +148,6 @@ pub fn is_power_of_two(n: i32) -> bool {
 }
 
 /// 268. Missing Number（丢失的数字）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个包含 `[0, n]` 中 `n` 个数的数组 `nums`，找出 `[0, n]` 这个范围内没有出现在数组中的那个数。
 /// `[0, n]` in `n` `nums`， `[0, n]` scope inside present in 。
@@ -191,8 +180,6 @@ pub fn missing_number(nums: Vec<i32>) -> i32 {
 }
 
 /// 338. Counting Bits（比特位计数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数 `n`，对于 `0 <= i <= n` 中的每个 `i`，计算其二进制表示中 **`1` 的个数**，返回一个长度为 `n + 1` 的数组 `ans` 作为答案。
 /// `n`，to `0 <= i <= n` in `i`，its tabulation in **`1` **，as `n + 1` `ans` as answer 。
@@ -225,8 +212,6 @@ pub fn count_bits(n: i32) -> Vec<i32> {
 }
 
 /// 371. Sum of Two Integers（两整数之和）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你两个整数 `a` 和 `b`，**不使用** 运算符 `+` 和 `-`，计算并返回两整数之和。
 /// `a` and `b`，**** `+` and `-`，and 's and 。
@@ -259,8 +244,6 @@ pub fn get_sum(a: i32, b: i32) -> i32 {
 }
 
 /// 461. Hamming Distance（汉明距离）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 两个整数之间的 **汉明距离** 指的是这两个数字对应二进制位不同的位置的数目。
 /// 's **** to position 。
@@ -287,13 +270,10 @@ pub fn hamming_distance(x: i32, y: i32) -> i32 {
 }
 
 /// 476. Number Complement（数字的补数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 对整数的二进制表示取反（`0` 变 `1`，`1` 变 `0`）后，再转换为十进制表示，可以得到这个整数的 **补数**。
 /// to tabulation （`0` `1`，`1` `0`）after ，conversion as tabulation ，can to ****。
 /// 给你一个整数 `num`，返回它的补数。
-/// `num`，。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -361,8 +341,6 @@ pub fn single_number_ii(nums: Vec<i32>) -> i32 {
 }
 
 /// 260. Single Number III（只出现一次的数字 III）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 `nums`，其中恰好有两个元素只出现一次，其余所有元素均出现两次。找出只出现一次的那两个元素。你可以按 **任意顺序** 返回答案。
 /// `nums`，its in element ，its all element 。element 。can **order ** answer 。
@@ -406,7 +384,6 @@ pub fn single_number_iii(nums: Vec<i32>) -> Vec<i32> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有位操作类问题
-/// Get hasoperationproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

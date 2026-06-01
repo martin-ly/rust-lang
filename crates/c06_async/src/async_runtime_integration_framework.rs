@@ -1,8 +1,7 @@
 //! 异步运行时集成框架
-//! asyncruntimeintegration framework
+//! Async Runtime Integration Framework
 //!
 //! 本模块提供了一个高级的异步运行时集成框架，支持：
-//! This module provides advancedasyncruntimeintegrationsupport
 //! - 多运行时组合和切换
 //! - runtime combination and switching
 //! - 运行时适配器模式
@@ -13,17 +12,17 @@
 //! - design pattern
 //! - 性能监控和优化
 //! - performancemonitoring optimization
-use std::sync::Arc;
-use std::time::Duration;
-use std::collections::HashMap;
-use std::future::Future;
 use anyhow::Result;
-use tokio::time::sleep;
-use tokio::sync::{Mutex, Semaphore, RwLock};
-use tokio::task;
+use async_trait::async_trait;
 use futures::future::{join_all, try_join_all};
 use serde::{Deserialize, Serialize};
-use async_trait::async_trait;
+use std::collections::HashMap;
+use std::future::Future;
+use std::sync::Arc;
+use std::time::Duration;
+use tokio::sync::{Mutex, RwLock, Semaphore};
+use tokio::task;
+use tokio::time::sleep;
 
 /// 异步运行时类型枚举
 /// async runtime type enum
@@ -106,11 +105,10 @@ pub enum TaskPriority {
 }
 
 /// 运行时适配器接口
-/// runtime interface
 #[async_trait]
 pub trait RuntimeAdapter: Send + Sync {
     async fn execute_task(&self, task: Box<dyn AsyncTask>) -> Result<String>;
-    async fn execute_batch(&self, tasks: Vec<Box<dyn AsyncTask> >) -> Result<Vec<String> >;
+    async fn execute_batch(&self, tasks: Vec<Box<dyn AsyncTask>>) -> Result<Vec<String>>;
     fn get_runtime_type(&self) -> AsyncRuntimeType;
     fn get_metrics(&self) -> RuntimeMetrics;
     async fn shutdown(&self) -> Result<()>;
@@ -140,10 +138,7 @@ impl RuntimeAdapter for TokioRuntimeAdapter {
         let start = std::time::Instant::now();
         let _permit = self.semaphore.acquire().await?;
 
-        let result = tokio::time::timeout(
-            task.get_timeout(),
-            task.execute()
-        ).await??;
+        let result = tokio::time::timeout(task.get_timeout(), task.execute()).await??;
 
         let execution_time = start.elapsed();
 
@@ -154,29 +149,31 @@ impl RuntimeAdapter for TokioRuntimeAdapter {
             metrics.success_count += 1;
             metrics.total_execution_time += execution_time;
             metrics.average_execution_time = Duration::from_nanos(
-                metrics.total_execution_time.as_nanos() as u64 / metrics.task_count
+                metrics.total_execution_time.as_nanos() as u64 / metrics.task_count,
             );
         }
 
         Ok(result)
     }
 
-    async fn execute_batch(&self, tasks: Vec<Box<dyn AsyncTask> >) -> Result<Vec<String> > {
+    async fn execute_batch(&self, tasks: Vec<Box<dyn AsyncTask>>) -> Result<Vec<String>> {
         let start = std::time::Instant::now();
 
         // 按优先级排序任务
         let mut sorted_tasks = tasks;
         sorted_tasks.sort_by(|a, b| b.get_priority().cmp(&a.get_priority()));
 
-        let batch_tasks = sorted_tasks.into_iter().map(|task| {
-            let adapter = self.clone();
-            tokio::spawn(async move {
-                adapter.execute_task(task).await
+        let batch_tasks = sorted_tasks
+            .into_iter()
+            .map(|task| {
+                let adapter = self.clone();
+                tokio::spawn(async move { adapter.execute_task(task).await })
             })
-        }).collect::<Vec<_>>();
+            .collect::<Vec<_>>();
 
         let results = join_all(batch_tasks).await;
-        let successful_results: Result<Vec<String>> = results.into_iter()
+        let successful_results: Result<Vec<String>> = results
+            .into_iter()
             .map(|r| r.map_err(|e| anyhow::anyhow!("Task execution failed: {}", e))?)
             .collect();
 
@@ -220,7 +217,7 @@ impl Clone for TokioRuntimeAdapter {
 }
 
 /// 异步运行时集成框架
-/// asyncruntimeintegration framework
+/// Async Runtime Integration Framework
 pub struct AsyncRuntimeIntegrationFramework {
     adapters: Arc<RwLock<HashMap<AsyncRuntimeType, Box<dyn RuntimeAdapter>>>>,
     config: RuntimeConfig,
@@ -243,7 +240,11 @@ impl MetricsCollector {
         }
     }
 
-    pub fn update_runtime_metrics(&mut self, runtime_type: AsyncRuntimeType, metrics: RuntimeMetrics) {
+    pub fn update_runtime_metrics(
+        &mut self,
+        runtime_type: AsyncRuntimeType,
+        metrics: RuntimeMetrics,
+    ) {
         self.runtime_metrics.insert(runtime_type, metrics);
     }
 
@@ -266,7 +267,6 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 注册运行时适配器
-    /// Register runtime
     pub async fn register_adapter(&self, adapter: Box<dyn RuntimeAdapter>) -> Result<()> {
         let runtime_type = adapter.get_runtime_type();
         let mut adapters = self.adapters.write().await;
@@ -291,7 +291,6 @@ impl AsyncRuntimeIntegrationFramework {
     }
 
     /// 执行批量任务（负载均衡）
-    /// task （）
     pub async fn execute_batch(&self, tasks: Vec<Box<dyn AsyncTask>>) -> Result<Vec<String>> {
         let adapters = self.adapters.read().await;
         let available_runtimes: Vec<_> = adapters.keys().cloned().collect();
@@ -305,7 +304,10 @@ impl AsyncRuntimeIntegrationFramework {
 
         for (i, task) in tasks.into_iter().enumerate() {
             let runtime_type = available_runtimes[i % available_runtimes.len()];
-            runtime_tasks.entry(runtime_type).or_insert_with(Vec::new).push(task);
+            runtime_tasks
+                .entry(runtime_type)
+                .or_insert_with(Vec::new)
+                .push(task);
         }
 
         // 并行执行所有运行时的任务
@@ -313,9 +315,10 @@ impl AsyncRuntimeIntegrationFramework {
         for (runtime_type, runtime_task_batch) in runtime_tasks {
             if let Some(adapter) = adapters.get(&runtime_type) {
                 let adapter_clone = adapter.clone();
-                let future = tokio::spawn(async move {
-                    adapter_clone.execute_batch(runtime_task_batch).await
-                });
+                let future =
+                    tokio::spawn(
+                        async move { adapter_clone.execute_batch(runtime_task_batch).await },
+                    );
                 batch_futures.push(future);
             }
         }
@@ -364,7 +367,11 @@ impl AsyncRuntimeIntegrationFramework {
             let is_healthy = adapter.execute_task(Box::new(health_task)).await.is_ok();
             health_status.insert(*runtime_type, is_healthy);
 
-            println!("🏥 {:?} 运行时健康状态: {}", runtime_type, if is_healthy { "健康" } else { "异常" });
+            println!(
+                "🏥 {:?} 运行时健康状态: {}",
+                runtime_type,
+                if is_healthy { "健康" } else { "异常" }
+            );
         }
 
         Ok(health_status)
@@ -467,7 +474,7 @@ impl AsyncTask for ExampleTask {
 }
 
 /// 异步同步转换服务
-/// asyncsynchronousconversion service
+/// Async-sync conversion service
 pub struct AsyncSyncConversionService {
     thread_pool: Arc<Semaphore>,
     conversion_cache: Arc<RwLock<HashMap<String, String>>>,
@@ -507,23 +514,27 @@ impl AsyncSyncConversionService {
     /// conversion pattern
     pub async fn hybrid_conversion(&self) -> Result<(String, String)> {
         // 异步操作
-        let async_result = self.async_to_sync(async {
-            sleep(Duration::from_millis(10)).await;
-            Ok("async_result".to_string())
-        }).await?;
+        let async_result = self
+            .async_to_sync(async {
+                sleep(Duration::from_millis(10)).await;
+                Ok("async_result".to_string())
+            })
+            .await?;
 
         // 同步操作
-        let sync_result = self.sync_to_async(|| {
-            std::thread::sleep(Duration::from_millis(10));
-            Ok("sync_result".to_string())
-        }).await?;
+        let sync_result = self
+            .sync_to_async(|| {
+                std::thread::sleep(Duration::from_millis(10));
+                Ok("sync_result".to_string())
+            })
+            .await?;
 
         Ok((async_result, sync_result))
     }
 }
 
 /// 聚合组合设计模式服务
-/// designpattern service
+/// Aggregate Combination Design Pattern Service
 pub struct AggregationCompositionService {
     component_registry: Arc<RwLock<HashMap<String, Box<dyn AsyncComponent + Send + Sync>>>>,
     aggregation_strategies: Arc<RwLock<HashMap<String, AggregationStrategy>>>,
@@ -555,7 +566,10 @@ impl AggregationCompositionService {
 
     /// 注册组件
     /// Register component
-    pub async fn register_component(&self, component: Box<dyn AsyncComponent + Send + Sync>) -> Result<()> {
+    pub async fn register_component(
+        &self,
+        component: Box<dyn AsyncComponent + Send + Sync>,
+    ) -> Result<()> {
         let name = component.get_name().to_string();
         let mut registry = self.component_registry.write().await;
         registry.insert(name.clone(), component);
@@ -565,7 +579,11 @@ impl AggregationCompositionService {
 
     /// 顺序聚合
     /// order aggregation
-    pub async fn sequential_aggregation(&self, component_names: Vec<String>, input: &str) -> Result<Vec<String>> {
+    pub async fn sequential_aggregation(
+        &self,
+        component_names: Vec<String>,
+        input: &str,
+    ) -> Result<Vec<String>> {
         let registry = self.component_registry.read().await;
         let mut results = Vec::new();
         let mut current_input = input.to_string();
@@ -583,7 +601,11 @@ impl AggregationCompositionService {
 
     /// 并行聚合
     /// parallelism aggregation
-    pub async fn parallel_aggregation(&self, component_names: Vec<String>, input: &str) -> Result<Vec<String>> {
+    pub async fn parallel_aggregation(
+        &self,
+        component_names: Vec<String>,
+        input: &str,
+    ) -> Result<Vec<String>> {
         let registry = self.component_registry.read().await;
         let mut tasks = Vec::new();
 
@@ -599,12 +621,18 @@ impl AggregationCompositionService {
 
     /// 管道聚合
     /// pipe aggregation
-    pub async fn pipeline_aggregation(&self, pipeline_stages: Vec<Vec<String>>, input: &str) -> Result<Vec<String>> {
+    pub async fn pipeline_aggregation(
+        &self,
+        pipeline_stages: Vec<Vec<String>>,
+        input: &str,
+    ) -> Result<Vec<String>> {
         let mut current_input = input.to_string();
         let mut all_results = Vec::new();
 
         for (stage_index, stage_components) in pipeline_stages.into_iter().enumerate() {
-            let stage_results = self.parallel_aggregation(stage_components, &current_input).await?;
+            let stage_results = self
+                .parallel_aggregation(stage_components, &current_input)
+                .await?;
             current_input = stage_results.join("|");
             all_results.extend(stage_results);
         }
@@ -689,7 +717,10 @@ pub async fn demonstrate_async_runtime_integration_framework() -> Result<()> {
     // 7. 异步同步转换服务
     let conversion_service = AsyncSyncConversionService::new(5);
     let (async_result, sync_result) = conversion_service.hybrid_conversion().await?;
-    println!("🔄 混合转换结果: async={}, sync={}", async_result, sync_result);
+    println!(
+        "🔄 混合转换结果: async={}, sync={}",
+        async_result, sync_result
+    );
 
     // 8. 聚合组合服务
     let composition_service = AggregationCompositionService::new();
@@ -704,27 +735,37 @@ pub async fn demonstrate_async_runtime_integration_framework() -> Result<()> {
     composition_service.register_component(component3).await?;
 
     // 顺序聚合
-    let sequential_results = composition_service.sequential_aggregation(
-        vec!["processor1".to_string(), "processor2".to_string()],
-        "input_data"
-    ).await?;
+    let sequential_results = composition_service
+        .sequential_aggregation(
+            vec!["processor1".to_string(), "processor2".to_string()],
+            "input_data",
+        )
+        .await?;
     println!("📊 顺序聚合结果: {:?}", sequential_results);
 
     // 并行聚合
-    let parallel_results = composition_service.parallel_aggregation(
-        vec!["processor1".to_string(), "processor2".to_string(), "processor3".to_string()],
-        "input_data"
-    ).await?;
+    let parallel_results = composition_service
+        .parallel_aggregation(
+            vec![
+                "processor1".to_string(),
+                "processor2".to_string(),
+                "processor3".to_string(),
+            ],
+            "input_data",
+        )
+        .await?;
     println!("📊 并行聚合结果: {:?}", parallel_results);
 
     // 管道聚合
-    let pipeline_results = composition_service.pipeline_aggregation(
-        vec![
-            vec!["processor1".to_string()],
-            vec!["processor2".to_string(), "processor3".to_string()],
-        ],
-        "pipeline_input"
-    ).await?;
+    let pipeline_results = composition_service
+        .pipeline_aggregation(
+            vec![
+                vec!["processor1".to_string()],
+                vec!["processor2".to_string(), "processor3".to_string()],
+            ],
+            "pipeline_input",
+        )
+        .await?;
     println!("📊 管道聚合结果: {:?}", pipeline_results);
 
     println!("\n✅ 异步运行时集成框架演示完成!");
@@ -736,7 +777,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_runtime_adapter_registration() {
         let config = RuntimeConfig::default();
         let framework = AsyncRuntimeIntegrationFramework::new(config);
@@ -745,38 +786,48 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_task_execution() {
         let config = RuntimeConfig::default();
         let framework = AsyncRuntimeIntegrationFramework::new(config);
         let adapter = Box::new(TokioRuntimeAdapter::new(RuntimeConfig::default()));
-        framework.register_adapter(adapter).await.expect("注册适配器不应失败");
+        framework
+            .register_adapter(adapter)
+            .await
+            .expect("注册适配器不应失败");
 
         let task = Box::new(ExampleTask::new("test_task", TaskPriority::Normal, 10));
-        let result = framework.execute_task(task).await.expect("执行任务不应失败");
+        let result = framework
+            .execute_task(task)
+            .await
+            .expect("执行任务不应失败");
         assert!(result.contains("test_task_completed"));
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_sync_conversion() {
         let service = AsyncSyncConversionService::new(2);
-        let (async_result, sync_result) = service.hybrid_conversion().await.expect("混合转换不应失败");
+        let (async_result, sync_result) =
+            service.hybrid_conversion().await.expect("混合转换不应失败");
         assert_eq!(async_result, "async_result");
         assert_eq!(sync_result, "sync_result");
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_aggregation_composition() {
         let service = AggregationCompositionService::new();
         let component = Box::new(DataProcessingComponent::new("test", 1));
-        service.register_component(component).await.expect("注册组件不应失败");
+        service
+            .register_component(component)
+            .await
+            .expect("注册组件不应失败");
 
-        let results = service.parallel_aggregation(
-            vec!["test".to_string()],
-            "input"
-        ).await.expect("获取结果不应失败");
+        let results = service
+            .parallel_aggregation(vec!["test".to_string()], "input")
+            .await
+            .expect("获取结果不应失败");
 
         assert_eq!(results.len(), 1);
         assert!(results[0].contains("test_processed_input"));

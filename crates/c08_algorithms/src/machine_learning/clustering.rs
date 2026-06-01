@@ -2,9 +2,7 @@
 //! algorithm implementation
 //!
 //! 本模块提供了常用的聚类算法，包括：
-//! This module provides algorithmincluding
 //! - K-means 聚类
-//! - DBSCAN 聚类
 use super::*;
 use std::collections::HashMap;
 
@@ -42,7 +40,6 @@ impl KMeans {
     }
 
     /// 设置最大迭代次数
-    /// Set maximum
     pub fn with_max_iterations(mut self, max_iterations: usize) -> Self {
         self.max_iterations = max_iterations;
         self
@@ -147,7 +144,6 @@ impl KMeans {
     }
 
     /// 计算惯性（簇内平方和）
-    /// Compute inner
     pub fn inertia(&self, data: &Dataset) -> MLResult<f64> {
         if !self.is_fitted {
             return Err(MLError::ModelNotTrained);

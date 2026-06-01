@@ -6,7 +6,6 @@
 //use serde::{Serialize, Deserialize};
 
 /// 组合数学算法实现
-/// algorithm implementation
 pub struct CombinatoricsAlgorithms;
 
 impl CombinatoricsAlgorithms {

@@ -8,7 +8,6 @@
 //! # Concept Definitions
 //!
 //! [Aya](https://aya-rs.dev/) 是一个纯 Rust eBPF 开发框架，允许用 Rust 编写
-//! 内核态和用户态 eBPF 程序，无需 libbpf 或 C。
 //! kernel and eBPF program ， libbpf or C。
 //!
 //! ## 认知必要性
@@ -36,14 +35,11 @@
 //!
 //! ```text
 //! 用户态 (Rust + Aya)
-//! ├── 编译 eBPF 字节码 (LLVM BPF target)
 //! ├── 加载到内核 (bpf syscall)
 //! ├── to kernel (bpf syscall)
 //! ├── 与 BPF Map 交互 (共享键值存储)
 //! ├── and BPF Map ()
 //! └── 处理事件 (perf buffer / ring buffer)
-//!
-//! 内核态 (eBPF VM)
 //! kernel (eBPF VM)
 //! ├── XDP: 网络包处理（最早介入点）
 //! ├── XDP: network （point ）
@@ -60,7 +56,6 @@
 //! # 权威来源
 //! # Authoritative Sources
 //! - 项目: [aya-rs/aya](https://github.com/aya-rs/aya)
-//! - 文档: [aya-rs.dev](https://aya-rs.dev/)
 //! - 书籍: [Aya Book](https://aya-rs.dev/book/)
 
 #![allow(dead_code)]
@@ -70,11 +65,8 @@
 // ============================================================================
 
 /// # XDP (eXpress Data Path) 程序
-///
-/// XDP 是 Linux 内核中最早的网络包处理点，在驱动层直接处理，
 /// XDP Linux kernel in network point ，in driver ，
 /// 性能可达百万级 PPS（每秒包数）。
-/// performance PPS（）。
 ///
 /// ## 内核态 eBPF 程序（概念）
 /// ## kernel eBPF program （concept ）
@@ -132,12 +124,8 @@ impl XdpFirewallConcept {
 // ============================================================================
 
 /// # Tracepoint 程序
-///
-/// Tracepoint 是内核预定义的静态探针，用于追踪内核子系统事件
 /// Tracepoint kernel definition ，kernel system
 ///（如 sched_switch、syscalls、net_dev_queue 等）。
-///
-/// ## 内核态 eBPF 程序（概念）
 /// ## kernel eBPF program （concept ）
 /// ```ignore
 /// #![no_std]
@@ -211,7 +199,6 @@ impl BpfMapConcepts {
     }
 
     /// 用户态读取 RingBuf 的概念代码
-    /// RingBuf concept
     pub fn userspace_ringbuf_concept() -> &'static str {
         "// 用户态 Rust 代码\n\
          use aya::maps::ring_buf::RingBuf;\n\
@@ -243,7 +230,6 @@ impl BpfMapConcepts {
 /// │   ├── Cargo.toml
 /// │   └── src/
 /// │       └── main.rs     # #[xdp] / #[tracepoint] 程序
-/// ├── my-ebpf-common/     # 共享类型定义
 /// ├── my-ebpf-common/ # type definition
 /// │   └── src/
 /// │       └── lib.rs
@@ -264,7 +250,6 @@ pub struct AyaProjectStructure;
 /// # eBPF
 ///
 /// ## ❌ Verifier 约束
-/// - 程序大小限制：最多 100 万条指令（5.2+）
 /// - program ：at most 100 （5.2+）
 /// - 循环必须可证明有界
 /// - circulation must
@@ -278,7 +263,6 @@ pub struct AyaProjectStructure;
 /// - 不能使用 `std`（只有 `core`）
 /// - cannot `std`（ `core`）
 /// - 不能使用 panic（需设置 panic handler）
-/// - 不能使用动态分配（某些 map 类型除外）
 /// - cannot （ map type outside ）
 /// - 浮点运算受限
 /// - point
@@ -313,9 +297,7 @@ impl EbpfLimitations {
 /// | tool | purpose |
 /// |------|------|
 /// | `cargo-generate aya-rs/aya-template` | 生成项目模板 |
-/// | `bpf-linker` | BPF target 链接器 |
 /// | `llvm-objcopy` | 生成 BPF 字节码 |
-/// | `bpftool` | 加载/查看/调试 eBPF |
 /// | `bpftool` | // eBPF |
 /// | `libbpf-bootstrap` | C 参考实现 |
 pub struct EbpfToolchain;
@@ -354,8 +336,6 @@ mod tests {
 // ============================================================================
 
 /// # Tracepoint 追踪
-///
-/// Tracepoint 是内核预定义的静态探针点，覆盖关键系统调用和内核事件。
 /// Tracepoint kernel definition point ，key system and kernel 。
 /// 相比 kprobe，tracepoint 具有稳定的 ABI（内核版本间不变）。
 /// kprobe，tracepoint has ABI（kernel this ）。
@@ -432,7 +412,6 @@ pub struct AyaToolchainRequirements;
 
 impl AyaToolchainRequirements {
     /// 开发工具链要求说明
-    /// toolchain explain
     pub fn requirements() -> &'static str {
         r#"
 Aya 开发环境要求：

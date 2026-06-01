@@ -52,7 +52,6 @@ impl Benchmarker {
     }
 
     /// 使用 try 块聚合多次基准以返回平均结果
-    /// use try multiple result
     pub fn run_benchmark_try<F>(
         algorithm_name: &str,
         input_size: usize,

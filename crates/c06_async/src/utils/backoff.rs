@@ -2,7 +2,6 @@
 //! index strategy （ backoff crate）
 //!
 //! 提供与 backoff 0.4.x 兼容的 `ExponentialBackoff` API，
-//! 以及一个简化的异步重试助手函数。
 //! and async function 。
 use std::time::{Duration, Instant};
 
@@ -47,7 +46,6 @@ impl Default for ExponentialBackoff {
 
 impl ExponentialBackoff {
     /// 计算下一次退避延迟
-    /// Compute lower
     pub fn next_backoff(&mut self) -> Option<Duration> {
         if self.start_time.is_none() {
             self.start_time = Some(Instant::now());
@@ -88,7 +86,6 @@ impl ExponentialBackoff {
 /// to async index
 ///
 /// 所有错误均视为可重试（transient），直到超过配置限制。
-/// all as （transient），to 。
 pub async fn retry_future<F, Fut, T, E>(
     mut operation: F,
     initial_interval: Duration,

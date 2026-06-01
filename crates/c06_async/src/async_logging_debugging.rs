@@ -1,8 +1,7 @@
 //! 异步日志调试和跟踪模块
-//! asyncloggingdebuggingtracing module
+//! Async logging debugging and tracing module
 //!
 //! 本模块提供了完整的异步日志系统，包括：
-//! This module provides completeasyncloggingsystemincluding
 //! - 结构化日志记录
 //! - structure
 //! - 异步任务跟踪
@@ -22,7 +21,9 @@ use std::time::{Duration, Instant};
 use tokio::sync::{Mutex, RwLock};
 use tokio::time::sleep;
 use tracing::{Level, debug, error, info, info_span, warn};
-use tracing_subscriber::{EnvFilter, layer::SubscriberExt, util::SubscriberInitExt};
+use tracing_subscriber::EnvFilter;
+use tracing_subscriber::layer::SubscriberExt;
+use tracing_subscriber::util::SubscriberInitExt;
 
 /// 自定义序列化函数，跳过 Instant 字段
 /// definition sequence function ， Instant field
@@ -35,7 +36,6 @@ where
 }
 
 /// 自定义反序列化函数，为 Instant 字段提供默认值
-/// customfunction Instant provide value
 fn deserialize_instant<'de, D>(_deserializer: D) -> Result<Instant, D::Error>
 where
     D: Deserializer<'de>,
@@ -52,18 +52,18 @@ pub struct AsyncLoggingConfig {
     /// level
     pub log_level: String,
     /// 是否启用结构化日志
-    /// structure
+    /// Whether structured logging is enabled
     pub enable_structured_logging: bool,
     /// 是否启用性能监控
     /// Whether performance monitoring is enabled
     pub enable_performance_monitoring: bool,
     /// 是否启用分布式追踪
-    /// distribution
+    /// Whether distributed tracing is enabled
     pub enable_distributed_tracing: bool,
     /// 日志输出格式
     pub log_format: LogFormat,
     /// 最大日志文件大小（MB）
-    /// maximum （MB）
+    /// Maximum log file size (MB)
     pub max_log_file_size_mb: u64,
     /// 日志文件保留天数
     pub log_retention_days: u32,
@@ -155,7 +155,7 @@ pub struct PerformanceMetrics {
     /// task
     pub cancelled_tasks: u64,
     /// 平均执行时间（纳秒）
-    /// time （）
+    /// Average execution time (nanoseconds)
     pub average_execution_time_ns: u64,
     /// 最大执行时间（纳秒）
     /// maximum time （）
@@ -358,7 +358,7 @@ impl AsyncTaskTracker {
     }
 
     /// 获取所有任务信息
-    /// Get hastaskinformation
+    /// Get all task information
     pub async fn get_all_tasks(&self) -> Vec<AsyncTaskInfo> {
         let tasks = self.tasks.read().await;
         tasks.values().cloned().collect()
@@ -371,7 +371,7 @@ impl AsyncTaskTracker {
     }
 
     /// 清理已完成的任务
-    /// Cleanup completetask
+    /// Cleanup completed tasks
     pub async fn cleanup_completed_tasks(&self) -> Result<()> {
         let mut tasks = self.tasks.write().await;
         let initial_count = tasks.len();
@@ -472,7 +472,6 @@ impl AsyncLoggingDecorator {
     }
 
     /// 装饰异步函数，自动添加日志和跟踪
-    /// async function ，and
     pub async fn execute_with_logging<F, T>(
         &self,
         name: String,
@@ -504,7 +503,7 @@ impl AsyncLoggingDecorator {
 }
 
 /// 结构化日志记录器
-/// structure
+/// Structured logger
 /// 日志记录器用于记录结构化日志，并将其与异步任务跟踪和性能监控集成在一起
 /// structure ，and will its and async task and performance in
 #[allow(dead_code)]
@@ -609,7 +608,7 @@ impl LocalDebugger {
     }
 
     /// 调试模式执行任务
-    /// task
+    /// Debug mode task execution
     pub async fn debug_execute<F, T>(&self, task_name: &str, operation: F) -> Result<T>
     where
         F: std::future::Future<Output = Result<T>>,
@@ -741,7 +740,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_task_tracker() {
         let config = AsyncLoggingConfig::default();
         let tracker = AsyncTaskTracker::new(config);
@@ -759,14 +758,20 @@ mod tests {
         let task_info = tracker.get_task_info(&task_id).await;
         assert!(task_info.is_some());
 
-        tracker.complete_task(&task_id).await.expect("完成任务不应失败");
+        tracker
+            .complete_task(&task_id)
+            .await
+            .expect("完成任务不应失败");
 
-        let completed_task = tracker.get_task_info(&task_id).await.expect("获取任务信息不应失败");
+        let completed_task = tracker
+            .get_task_info(&task_id)
+            .await
+            .expect("获取任务信息不应失败");
         assert!(matches!(completed_task.status, TaskStatus::Completed));
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_performance_monitor() {
         let monitor = AsyncPerformanceMonitor::new();
 
@@ -785,7 +790,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_local_debugger() {
         let config = AsyncLoggingConfig::default();
         let tracker = Arc::new(AsyncTaskTracker::new(config));

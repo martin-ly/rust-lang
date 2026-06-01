@@ -112,7 +112,6 @@ impl ProcessController {
     }
 
     /// 获取所有进程信息
-    /// Get hasprocessinformation
     pub fn get_all_processes(&self) -> Vec<ProcessInfo> {
         let processes = self.processes.lock().expect("进程控制锁被污染");
         processes.values().cloned().collect()

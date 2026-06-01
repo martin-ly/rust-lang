@@ -1,6 +1,4 @@
 //! Rust 188.0 新特性实现模块 —— c08_algorithms
-//!
-//! 本模块展示了 Rust 188.0 (2025-06-26) 的关键语言特性和工具链改进。
 //! This module demonstrates key language features and toolchain improvements of Rust 188.0 (2025-06-26).
 //!
 //! - `let_chains`: Let Chains 在 2024 Edition 中稳定
@@ -76,7 +74,6 @@ fn test_let_chains() {
 /// # Naked Functions
 /// Rust 1.88.0 `#[naked]` attribute ，function standard prologue/epilogue，
 /// 直接暴露原始汇编入口。
-/// expose 。
 ///
 /// ## 使用场景
 /// ## Usage Scenarios
@@ -85,16 +82,15 @@ fn test_let_chains() {
 /// - 引导加载程序入口点
 /// - program point
 /// - 与汇编代码直接交互的回调
-/// - and
+/// - Callbacks that directly interact with assembly code
 ///
 /// ## 限制
 /// ## Constraints
 /// - 函数体必须是单条 `asm!` 宏调用
 /// - function volume must `asm!`
 /// - 编译器不为裸函数生成栈帧管理代码
-/// - as function stack
 /// - 调用者负责保存/恢复寄存器
-/// - /
+/// - Caller is responsible for saving/restoring registers
 #[cfg(target_arch = "x86_64")]
 #[unsafe(naked)]
 pub extern "C" fn naked_syscall_handler() {

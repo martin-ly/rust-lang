@@ -6,7 +6,6 @@
 //use serde::{Serialize, Deserialize};
 
 /// 机器学习算法实现
-/// learningalgorithm implementation
 pub struct MachineLearningAlgorithms;
 
 impl MachineLearningAlgorithms {

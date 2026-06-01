@@ -37,7 +37,6 @@ pub struct AsyncIfLetGuardExamples;
 
 impl AsyncIfLetGuardExamples {
     /// 解析超时配置字符串
-    /// configuration string
     pub fn parse_timeout_ms(input: Option<&str>) -> Result<u64, &'static str> {
         match input {
             Some(s)
@@ -54,7 +53,6 @@ impl AsyncIfLetGuardExamples {
     }
 
     /// 评估异步任务结果：`Result<Option<T>>` 扁平化处理
-    /// asynctaskresult`Result<Option<T>>` processing
     pub fn evaluate_task_result(result: Result<Option<u32>, &'static str>) -> &'static str {
         match result {
             Ok(Some(0)) => "任务成功完成",
@@ -185,15 +183,12 @@ fn validate_conn_id(id: &str) -> Option<String> {
 // ============================================================================
 
 /// # `ControlFlow` 与异步迭代
-///
-/// `ControlFlow::is_break` / `is_continue` 在 const 上下文稳定后，
 /// 可在编译期构建异步状态机的静态检查。
 /// in async state machine 。
 pub struct AsyncControlFlowExamples;
 
 impl AsyncControlFlowExamples {
     /// 编译期常量检查：验证状态机终止条件
-    /// constant ：state machine condition
     /// 状态机终止检查（1.95+ `is_break`/`is_continue` 在 const 上下文稳定）
     /// state machine （1.95+ `is_break`/`is_continue` in const on under ）
     pub fn validate_state_machine_termination() -> bool {
@@ -219,7 +214,6 @@ impl AsyncControlFlowExamples {
     }
 
     /// 批量任务处理：部分成功模式
-    /// taskhandling pattern
     pub fn process_batch_results(
         results: &[Result<i32, String>],
     ) -> ControlFlow<Vec<String>, Vec<i32>> {
@@ -246,15 +240,12 @@ impl AsyncControlFlowExamples {
 // ============================================================================
 
 /// # Tokio 1.52 `task::Builder` 命名任务演示
-///
-/// `tokio::task::Builder` 提供了为异步任务命名的能力，极大提升了：
 /// `tokio::task::Builder` as async task ，：
 /// - **可观测性**: 在 tokio-console 中清晰识别每个任务
 /// - ****: in tokio-console in clear task
 /// - **调试效率**: tracing 日志中直接显示任务名称
 /// - **efficiency **: tracing in display task
 /// - **性能分析**: 性能分析工具可按任务名聚合数据
-/// - **performanceanalysis**: performanceanalysistask data
 ///
 /// # 使用前提
 /// # prerequisite
@@ -264,7 +255,6 @@ impl AsyncControlFlowExamples {
 /// - compile-time `tokio_unstable` cfg mark
 ///
 /// # 与 tokio-console 集成
-/// 启动应用时设置 `TOKIO_CONSOLE_BIND=127.0.0.1:6669`，
 /// 然后使用 `tokio-console` 命令连接，即可在任务列表中看到命名。
 /// then `tokio-console` command ，in task in to 。
 ///
@@ -276,7 +266,6 @@ pub struct NamedTaskExamples;
 
 impl NamedTaskExamples {
     /// 基础命名任务创建
-    /// foundation task
     ///
     /// 使用 `task::Builder::new().name(...)` 为单个异步任务赋予可读名称。
     /// `task::Builder::new().name(...)` as async task 。
@@ -294,7 +283,6 @@ impl NamedTaskExamples {
     }
 
     /// 批量创建命名任务池
-    /// task
     ///
     /// 为一批同类任务按序号命名，便于在 tokio-console 中区分和监控。
     /// as task serial number ，in tokio-console in and 。
@@ -319,7 +307,6 @@ impl NamedTaskExamples {
     }
 
     /// 模拟 HTTP 请求处理器：为不同后台任务命名
-    /// HTTP ：as after task
     ///
     /// 在实际 Web 服务中，可为日志写入、缓存更新、指标上报等后台任务分别命名，
     /// in actual Web service in ，as 、、indicator on etc. after task ，
@@ -424,8 +411,6 @@ impl NamedTaskExamples {
 // ============================================================================
 
 /// # `cfg_select!` 宏
-///
-/// `cfg_select!` 是 Rust 1.95.0 稳定的编译时条件选择宏。
 /// `cfg_select!` Rust 1.95.0 compile-time condition 。
 /// 在异步编程中，可用于编译期选择平台相关的运行时配置。
 /// in async in ，platform runtime 。
@@ -433,7 +418,6 @@ pub struct CfgSelectAsyncExamples;
 
 impl CfgSelectAsyncExamples {
     /// 平台相关的默认异步任务通道容量
-    /// platform async task channel
     pub const DEFAULT_CHANNEL_CAPACITY: usize = cfg_select! {
         target_arch = "wasm32" => { 4 }
         _ => { 1024 }

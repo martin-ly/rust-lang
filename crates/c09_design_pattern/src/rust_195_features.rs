@@ -30,7 +30,6 @@ pub struct PlatformAbstractFactory;
 
 impl PlatformAbstractFactory {
     /// 创建平台特定的线程池大小推荐值
-    /// createthreadlargesmallrecommended value
     pub const DEFAULT_THREAD_POOL_SIZE: usize = cfg_select! {
         target_os = "linux" => 8,
         target_os = "macos" => 4,
@@ -60,7 +59,6 @@ impl PlatformAbstractFactory {
 /// # concurrentdesignpatternatomic operation
 ///
 /// 对象池、连接池等模式中的原子计数。
-/// to 、etc. in 。
 pub struct ConcurrentPatternExamples;
 
 impl ConcurrentPatternExamples {
@@ -91,7 +89,6 @@ impl ConcurrentPatternExamples {
     }
 
     /// 观察者模式：原子事件计数器递增
-    /// observer ：
     pub fn event_notify(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Relaxed, Ordering::Relaxed, |old| old + 1)
     }
@@ -127,7 +124,6 @@ impl StateMachinePatternExamples {
     }
 
     /// 命令模式：条件执行
-    /// command ：condition
     pub fn execute_command(
         cmd: &str,
         args: Option<&str>,
@@ -156,7 +152,6 @@ pub struct PatternColdPathExamples;
 
 impl PatternColdPathExamples {
     /// 访问者模式：未处理的类型为冷路径
-    /// patternhandlingtype path
     pub fn visit_supported_type(ty: &str) -> Result<(), &'static str> {
         match ty {
             "int" | "float" | "string" | "bool" => Ok(()),
@@ -168,7 +163,6 @@ impl PatternColdPathExamples {
     }
 
     /// 策略模式：策略验证失败为冷路径
-    /// patternverify path
     pub fn validate_strategy(name: &str) -> bool {
         match name {
             "round_robin" | "least_conn" | "ip_hash" => true,

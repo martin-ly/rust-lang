@@ -1,5 +1,4 @@
 //! 异步并发编程高级示例
-//! asyncconcurrentadvanced example
 //!
 //! 本模块展示了如何使用 `futures::join!` 宏来实现并发执行多个异步操作。
 //! This module demonstrates use `futures::join!` implementationconcurrentexecutionmultipleasyncoperation
@@ -10,7 +9,6 @@
 //! ## Core Concepts
 //!
 //! ### futures::join! 宏
-//! - **作用**: 同时等待多个 Future 完成
 //! - **role **: etc. Future
 //! - **并发性**: 所有 Future 会并发执行，而不是顺序执行
 //! - **concurrency **: all Future concurrency ，while order
@@ -34,7 +32,6 @@
 //! 1. **网络请求**: 同时发起多个 HTTP 请求
 //! 1. **network **: HTTP
 //! 2. **数据库查询**: 并发执行多个数据库操作
-//! 2. **datalibraryquery**: concurrentexecutionmultipledatalibrary operation
 //! 3. **文件操作**: 同时读取多个文件
 //! 3. **file operation **:
 //! 4. **API 调用**: 调用多个外部服务
@@ -54,7 +51,6 @@
 use reqwest::{Client, Error};
 
 /// 异步获取数据的辅助函数
-/// asyncgetdata function
 ///
 /// 这个函数封装了 HTTP GET 请求的异步操作，展示了如何将同步的网络操作
 /// function HTTP GET asyncoperationdemonstratesynchronous operation
@@ -99,7 +95,6 @@ async fn fetch_data(url: &str, client: &Client) -> Result<String, Error> {
 }
 
 /// 演示异步并发编程的主要函数
-/// asyncconcurrent function
 ///
 /// 这个函数展示了如何使用 `futures::join!` 宏来并发执行多个异步操作。
 /// function `futures::join!` concurrency async 。
@@ -109,7 +104,6 @@ async fn fetch_data(url: &str, client: &Client) -> Result<String, Error> {
 /// # 并发策略
 /// # concurrent strategy
 /// 1. **不同超时**: 为不同的请求设置不同的超时时间
-/// 1. ****: set time
 /// 2. **并发执行**: 使用 `join!` 同时等待多个 Future
 /// 2. **concurrency **: `join!` etc. Future
 /// 3. **错误处理**: 处理部分成功、全部失败等不同情况

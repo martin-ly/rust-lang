@@ -39,7 +39,6 @@ fn solve_sync_inner(
 }
 
 /// 同步：返回所有解，每个解为长度为 n 的列索引数组
-/// synchronoushaslong n array
 pub fn nqueens_solutions_sync(n: usize) -> Vec<Vec<usize>> {
     let mut solutions = Vec::new();
     let mut partial = Vec::with_capacity(n);

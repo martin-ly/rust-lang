@@ -171,7 +171,6 @@ pub mod async_bus {
         }
 
         /// 处理事件，遇到取消信号则提前返回
-        /// ，to before
         pub async fn run_until_cancel(&self, events: &[String], cancel: bool) {
             for e in events {
                 if cancel {
@@ -211,7 +210,6 @@ pub mod async_bus {
         }
 
         /// 带超时取消（顺序驱动的计数截止模拟）
-        /// （order driver ）
         /// max_events 作为超时阈值的无运行时近似（处理达到阈值即视为超时）。
         /// max_events as runtime （to as ）。
         pub async fn run_with_timeout_like(&self, events: &[String], max_events: usize) {

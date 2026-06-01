@@ -4,9 +4,7 @@
 //! 本模块提供四个主要性能优化领域的实践示例：
 //! This module provides main performance optimization domain example ：
 //! - 内存优化 (Memory Optimization)
-//! - 并发性能优化 (Concurrency Performance Optimization)  
 //! - 编译时优化 (Compile-time Optimization)
-//! - 运行时性能分析 (Runtime Performance Analysis)
 pub mod compile_time_optimization;
 pub mod concurrency_optimization;
 pub mod memory_optimization;
@@ -70,13 +68,11 @@ impl PerformanceBenchmarker {
     }
 
     /// 获取所有基准测试结果
-    /// Get hastestresult
     pub fn get_results(&self) -> &[BenchmarkResult] {
         &self.results
     }
 
     /// 打印基准测试报告
-    /// benchmark
     pub fn print_report(&self) {
         println!("=== 性能优化基准测试报告 ===");
         for result in &self.results {
@@ -113,7 +109,6 @@ impl MemoryMonitor {
     }
 
     /// 获取当前内存使用
-    /// Get currentmemoryuse
     pub fn get_current_usage(&self) -> Option<usize> {
         // 模拟内存使用监控
         Some(1024 * 1024) // 1MB
@@ -150,7 +145,6 @@ impl PerformanceProfiler {
     }
 
     /// 测量函数执行时间
-    /// functionexecution time
     pub fn measure<F, T>(&mut self, name: &str, f: F) -> T
     where
         F: FnOnce() -> T,

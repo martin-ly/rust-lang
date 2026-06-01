@@ -1,10 +1,7 @@
 //! 机器学习算法模块
-//! learningalgorithm module
 //!
 //! 本模块提供了常用的机器学习算法实现，包括：
-//! This module provides learningalgorithmimplementationincluding
 //! - 聚类算法 (K-means, DBSCAN)
-//! - 分类算法 (决策树, SVM)
 //! - classification algorithm (tree, SVM)
 //! - 神经网络 (基础神经网络)
 //! - neural network (foundation neural network )
@@ -22,7 +19,6 @@ use std::error::Error;
 use std::fmt;
 
 /// 机器学习算法错误类型
-/// learningalgorithmerror type
 #[derive(Debug, Clone)]
 pub enum MLError {
     /// 输入数据无效
@@ -57,7 +53,6 @@ impl fmt::Display for MLError {
 impl Error for MLError {}
 
 /// 机器学习算法结果类型
-/// learningalgorithmresult type
 pub type MLResult<T> = Result<T, MLError>;
 
 /// 数据点表示
@@ -115,7 +110,6 @@ pub trait UnsupervisedLearning {
     fn predict(&self, data: &Dataset) -> MLResult<Labels>;
 
     /// 获取聚类中心（如适用）
-    /// center （）
     fn cluster_centers(&self) -> Option<Dataset> {
         None
     }

@@ -26,15 +26,10 @@
 //! - 15. 3Sum（三数之和）
 //! - 15. 3Sum（'s and ）
 //! - 53. Maximum Subarray（最大子数组和）
-//! - 121. Best Time to Buy and Sell Stock（买卖股票的最佳时机）
 //! - 238. Product of Array Except Self（除自身以外数组的乘积）
-//! - 283. Move Zeroes（移动零）
 //! - 11. Container With Most Water（盛最多水的容器）
-//! - 26. Remove Duplicates from Sorted Array（删除有序数组中的重复项）
 //! - 27. Remove Element（移除元素）
-//! - 189. Rotate Array（轮转数组）
 //! - 217. Contains Duplicate（存在重复元素）
-//! - 228. Summary Ranges（汇总区间）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::io::{BufRead, BufReader, Cursor};
 
@@ -107,10 +102,7 @@ pub fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
 /// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 `nums`，判断是否存在三元组 `[nums[i], nums[j], nums[k]]`
-/// `nums`，in `[nums[i], nums[j], nums[k]]`
 /// 满足 `i != j`、`i != k` 且 `j != k`，同时还满足 `nums[i] + nums[j] + nums[k] == 0`。
-///
-/// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
 /// - **const 上下文**: 使用 const 配置的数组大小限制
 /// - **const on under **: const
@@ -169,8 +161,6 @@ pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
 }
 
 /// 53. Maximum Subarray（最大子数组和）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 `nums`，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
 /// `nums`，has maximum and （at least element ），its maximum and 。
@@ -199,8 +189,6 @@ pub fn max_subarray(nums: &[i32]) -> i32 {
 }
 
 /// 121. Best Time to Buy and Sell Stock（买卖股票的最佳时机）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个数组 `prices`，它的第 `i` 个元素 `prices[i]` 表示一支给定股票第 `i` 天的价格。
 /// `prices`， `i` element `prices[i]` represent `i` price 。
@@ -240,8 +228,6 @@ pub fn max_profit(prices: &[i32]) -> i32 {
 }
 
 /// 238. Product of Array Except Self（除自身以外数组的乘积）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 `nums`，返回数组 `answer`，其中 `answer[i]` 等于 `nums` 中除 `nums[i]` 之外其余各元素的乘积。
 /// `nums`， `answer`，its in `answer[i]` etc. `nums` in `nums[i]` 's outside its element 。
@@ -283,8 +269,6 @@ pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
 }
 
 /// 283. Move Zeroes（移动零）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个数组 `nums`，编写一个函数将所有 `0` 移动到数组的末尾，同时保持非零元素的相对顺序。
 /// `nums`，function will all `0` to ，element to order 。
@@ -339,8 +323,6 @@ pub fn parse_array_input(input: &str) -> Result<Vec<i32>, Box<dyn std::error::Er
 }
 
 /// 11. Container With Most Water（盛最多水的容器）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个长度为 `n` 的整数数组 `height`。有 `n` 条垂线，第 `i` 条线的两个端点是 `(i, 0)` 和 `(i, height[i])`。
 /// as `n` `height`。 `n` line ， `i` line point `(i, 0)` and `(i, height[i])`。
@@ -383,8 +365,6 @@ pub fn max_area(height: Vec<i32>) -> i32 {
 }
 
 /// 26. Remove Duplicates from Sorted Array（删除有序数组中的重复项）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个 **非严格递增排列** 的数组 `nums`，请你 **原地** 删除重复出现的元素，使每个元素 **只出现一次**，
 /// **arrangement ** `nums`， **** element ，element ****，
@@ -423,8 +403,6 @@ pub fn remove_duplicates(nums: &mut [i32]) -> usize {
 }
 
 /// 27. Remove Element（移除元素）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个数组 `nums` 和一个值 `val`，你需要 **原地** 移除所有数值等于 `val` 的元素，并返回移除后数组的新长度。
 /// `nums` and `val`， **** all etc. `val` element ，and after 。
@@ -457,8 +435,6 @@ pub fn remove_element(nums: &mut [i32], val: i32) -> usize {
 }
 
 /// 189. Rotate Array（轮转数组）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个整数数组 `nums`，将数组中的元素向右轮转 `k` 个位置，其中 `k` 是非负数。
 /// `nums`，will in element `k` position ，its in `k` 。
@@ -491,8 +467,6 @@ pub fn rotate(nums: &mut [i32], k: i32) {
 }
 
 /// 217. Contains Duplicate（存在重复元素）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 `nums`。如果任一值在数组中出现 **至少两次**，返回 `true`；如果数组中每个元素互不相同，返回 `false`。
 /// `nums`。if in in ****， `true`；if in element ， `false`。
@@ -526,8 +500,6 @@ pub fn contains_duplicate(nums: &[i32]) -> bool {
 }
 
 /// 228. Summary Ranges（汇总区间）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个 **无重复元素** 的 **有序** 整数数组 `nums`。返回 **恰好覆盖数组中所有数字** 的 **最小有序** 区间范围列表。
 /// **element ** **** `nums`。 **in all ** **minimum ** interval scope 。
@@ -582,7 +554,6 @@ pub fn summary_ranges(nums: Vec<i32>) -> Vec<String> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有数组类问题
-/// Get hasarrayproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

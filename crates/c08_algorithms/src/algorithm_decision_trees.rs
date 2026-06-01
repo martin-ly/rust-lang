@@ -2,7 +2,6 @@
 //! # algorithm tree
 //!
 //! 本模块提供了各种算法选择的决策树，帮助开发者根据问题特征选择最合适的算法。
-//! This module provides algorithmtreeproblemsalgorithm
 //!
 //! 每个决策树以结构体形式组织，通过关联函数返回详细的决策指南（Markdown + ASCII 图表）。
 //! tree struct organize ，associated function （Markdown + ASCII ）。
@@ -14,9 +13,7 @@
 //! | struct | domain |
 //! |--------|----------|
 //! | `SortingDecisionTree` | 排序算法选择 |
-//! | `SearchingDecisionTree` | 搜索算法选择 |
 //! | `GraphAlgorithmDecisionTree` | 图算法选择 |
-//! | `DynamicProgrammingDecisionTree` | 动态规划 vs 贪心 |
 //! | `ConcurrencyAlgorithmDecisionTree` | 并发与并行策略 |
 
 // ============================================================
@@ -364,7 +361,6 @@ fn interpolation_search(arr: &[i32], target: i32) -> Option<usize> {
     }
 
     /// 哈希表查找 vs 树查找
-    /// vs tree
     pub fn hash_vs_tree_lookup() -> &'static str {
         r#"# 哈希表查找 vs 树查找
 
@@ -826,7 +822,6 @@ fn kahn_topological_sort(graph: &[Vec<usize>], n: usize) -> Option<Vec<usize>> {
 /// dynamic tree
 ///
 /// 帮助判断问题是否适合 DP，以及选择实现方式。
-/// problem DP，and way 。
 pub struct DynamicProgrammingDecisionTree;
 
 impl DynamicProgrammingDecisionTree {
@@ -1052,7 +1047,6 @@ fn activity_selection(mut activities: Vec<(usize, usize)>) -> Vec<(usize, usize)
 // ============================================================================
 
 /// 常见算法的简洁 Rust 实现骨架
-/// algorithm Rust
 ///
 /// 这些实现侧重于清晰度和教学价值，而非极致性能。
 /// clear and value ，while performance 。
@@ -1062,7 +1056,6 @@ pub struct AlgorithmSkeletons;
 
 impl AlgorithmSkeletons {
     /// 二分查找（迭代版）
-    /// （）
     ///
     /// # 前提条件
     /// # prerequisite condition
@@ -1072,7 +1065,6 @@ impl AlgorithmSkeletons {
     /// # 复杂度
     /// # complex
     /// - 时间: O(log n)
-    /// - 空间: O(1)
     /// - space : O(1)
     pub fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
         let mut left = 0usize;

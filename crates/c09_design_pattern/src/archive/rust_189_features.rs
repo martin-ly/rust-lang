@@ -27,11 +27,8 @@
 //! ###
 //!
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
-//! 2. 参考 `rust_192_features.rs` 了解最新特性
 //! 2. reference `rust_192_features.rs` feature
 //! 3. 查看 `docs/RUST_192_DESIGN_PATTERN_IMPROVEMENTS.md` 了解完整改进
-//!
-//! 参考:
 //! reference :
 //! - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
@@ -71,7 +68,6 @@ impl CellUpdateDemo {
     }
 
     /// 使用 Cell::update 进行原子更新
-    /// Cell::update
     pub fn increment_counter(&self) -> i32 {
         self.counter.update(|current| {
             println!("当前计数器值: {}", current);
@@ -87,7 +83,6 @@ impl CellUpdateDemo {
     }
 
     /// 获取当前计数器值
-    /// Get currentvalue
     pub fn get_counter(&self) -> i32 {
         self.counter.get()
     }
@@ -124,7 +119,6 @@ impl PointerDefaultDemo {
     }
 
     /// 获取指针值（如果有效）
-    /// Get pointervaluehas
     pub fn get_pointer(&self) -> Option<i32> {
         if self.raw_ptr.is_null() {
             None
@@ -170,7 +164,6 @@ impl ArrayConversionDemo {
     }
 
     /// 从固定大小数组创建
-    /// from
     pub fn from_array<const N: usize>(array: [i32; N]) -> Self {
         Self {
             // 使用 Rust 1.89 的数组转换优化
@@ -229,7 +222,6 @@ impl<T> AdvancedSingleton<T> {
     }
 
     /// 获取或初始化实例，同时设置元数据
-    /// Get initialsetdata
     pub fn get_or_init<F>(&self, initializer: F) -> &T
     where
         F: FnOnce() -> T,

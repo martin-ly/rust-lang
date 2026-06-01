@@ -2,7 +2,6 @@
 //! Async Integration Framework Analysis
 //!
 //! 本模块提供了异步生态系统在集成框架层面的分析，
-//! This module provides asyncsystemintegrationanalysis
 //! 包括：运行时共性、异步同步转换、聚合组合设计模式等。
 //! ：runtime 、async synchronous conversion 、aggregation combination design etc. 。
 //!
@@ -21,10 +20,10 @@ use tokio::task;
 use tokio::time::sleep;
 
 /// 异步运行时共性分析
-/// asyncruntime analysis
+/// Async runtime commonality analysis
 ///
 /// 分析不同异步运行时的共同特性和设计模式
-/// analysisasyncruntimefeaturesdesign pattern
+/// Analyze common features and design patterns of different async runtimes
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AsyncRuntimeCommonality {
     /// 运行时名称
@@ -240,7 +239,7 @@ impl AsyncCommonalityAnalyzer {
     }
 
     /// 获取运行时共性分析
-    /// Get runtimeanalysis
+    /// Get runtime commonality analysis
     pub fn get_runtime_commonality(&self, runtime_name: &str) -> Option<&AsyncRuntimeCommonality> {
         self.runtimes.get(runtime_name)
     }
@@ -257,7 +256,7 @@ impl AsyncCommonalityAnalyzer {
     }
 
     /// 分析设计模式共性
-    /// analyze design
+    /// Analyze design pattern commonalities
     pub fn analyze_common_patterns(&self) -> Vec<DesignPattern> {
         if let Some(first_runtime) = self.runtimes.values().next() {
             first_runtime.design_patterns.clone()
@@ -268,10 +267,10 @@ impl AsyncCommonalityAnalyzer {
 }
 
 /// 异步同步转换框架
-/// asyncsynchronousconversion framework
+/// Async-sync conversion framework
 ///
 /// 提供异步和同步代码之间的转换机制
-/// provideasyncsynchronousconversion mechanism
+/// Provide conversion mechanism between async and synchronous code
 #[allow(unused)]
 pub struct AsyncSyncConversionFramework {
     thread_pool: Arc<Semaphore>,
@@ -376,10 +375,10 @@ impl AsyncSyncConversionFramework {
 }
 
 /// 聚合组合设计模式框架
-/// designpattern framework
+/// Aggregate combination design pattern framework
 ///
 /// 提供聚合和组合的设计模式实现
-/// providedesignpattern implementation
+/// Provide aggregate and combination design pattern implementation
 #[allow(unused)]
 pub struct AggregationCompositionFramework {
     component_registry: Arc<RwLock<HashMap<String, Box<dyn AsyncComponent + Send + Sync>>>>,
@@ -604,7 +603,7 @@ impl AsyncComponent for DataProcessingComponent {
 }
 
 /// 综合演示异步集成框架
-/// asyncintegration framework
+/// Comprehensive async integration framework demo
 pub async fn demonstrate_async_integration_framework() -> Result<()> {
     println!("🚀 异步集成框架层面分析演示");
     println!("================================================");

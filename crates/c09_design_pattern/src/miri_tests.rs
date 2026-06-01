@@ -92,9 +92,7 @@ impl Subject {
 }
 
 /// 测试目的: 验证观察者模式内存安全
-/// Test : verifypatternmemorysafety
 /// 测试场景: 添加观察者并通知
-/// Test :
 /// 预期结果: 应该正确管理弱引用
 /// result: shouldpositivemanagementweak reference
 #[test]
@@ -299,7 +297,6 @@ impl Target for Adapter {
 /// 测试目的: 验证适配器模式
 /// Test : verifypattern
 /// 测试场景: 通过适配器调用被适配者
-/// Test :
 /// 预期结果: 应该正确适配接口
 /// result: shouldpositive interface
 #[test]

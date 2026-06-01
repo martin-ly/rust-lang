@@ -1,8 +1,6 @@
 //! 简化的异步运行时集成框架
-//! asyncruntimeintegration framework
 //!
 //! 本模块提供了一个简化的异步运行时集成框架，支持：
-//! This module provides asyncruntimeintegrationsupport
 //! - 多运行时组合和切换
 //! - runtime combination and switching
 //! - 运行时适配器模式
@@ -95,7 +93,6 @@ pub enum TaskPriority {
 }
 
 /// 简化的异步运行时集成框架
-/// asyncruntimeintegration framework
 pub struct SimpleAsyncRuntimeFramework {
     config: RuntimeConfig,
     semaphore: Arc<Semaphore>,
@@ -252,7 +249,7 @@ impl AsyncTask for ExampleTask {
 }
 
 /// 异步同步转换服务
-/// asyncsynchronousconversion service
+/// Async-sync conversion service
 pub struct AsyncSyncConversionService {
     thread_pool: Arc<Semaphore>,
 }
@@ -310,7 +307,7 @@ impl AsyncSyncConversionService {
 }
 
 /// 聚合组合设计模式服务
-/// designpattern service
+/// Aggregate Combination Design Pattern Service
 pub struct AggregationCompositionService {
     component_registry: Arc<RwLock<HashMap<String, Box<dyn AsyncComponent + Send + Sync>>>>,
 }
@@ -502,31 +499,38 @@ mod tests {
     use super::*;
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_simple_framework() {
         let config = RuntimeConfig::default();
         let framework = SimpleAsyncRuntimeFramework::new(config);
 
         let task = Box::new(ExampleTask::new("test_task", TaskPriority::Normal, 10));
-        let result = framework.execute_task(task).await.expect("执行任务不应失败");
+        let result = framework
+            .execute_task(task)
+            .await
+            .expect("执行任务不应失败");
         assert!(result.contains("test_task_completed"));
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_sync_conversion() {
         let service = AsyncSyncConversionService::new(2);
-        let (async_result, sync_result) = service.hybrid_conversion().await.expect("混合转换不应失败");
+        let (async_result, sync_result) =
+            service.hybrid_conversion().await.expect("混合转换不应失败");
         assert_eq!(async_result, "async_result");
         assert_eq!(sync_result, "sync_result");
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_aggregation_composition() {
         let service = AggregationCompositionService::new();
         let component = Box::new(DataProcessingComponent::new("test", 1));
-        service.register_component(component).await.expect("注册组件不应失败");
+        service
+            .register_component(component)
+            .await
+            .expect("注册组件不应失败");
 
         let results = service
             .parallel_aggregation(vec!["test".to_string()], "input")

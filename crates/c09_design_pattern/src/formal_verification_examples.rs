@@ -41,7 +41,6 @@ pub struct FileHandle<State> {
 
 impl FileHandle<Uninitialized> {
     /// 创建未初始化的文件句柄
-    /// file handle
     pub fn new(path: String) -> Self {
         FileHandle {
             path,
@@ -50,7 +49,6 @@ impl FileHandle<Uninitialized> {
     }
 
     /// 打开文件，转换到Initialized状态
-    /// fileconversionInitialized status
     pub fn open(self) -> Result<FileHandle<Initialized>, std::io::Error> {
         // 实际IO操作
         println!("Opening file: {}", self.path);
@@ -76,7 +74,6 @@ impl FileHandle<Initialized> {
     }
 
     /// 关闭文件，转换到Closed状态
-    /// fileconversionClosed status
     pub fn close(self) -> FileHandle<Closed> {
         println!("Closing file: {}", self.path);
         FileHandle {
@@ -88,7 +85,6 @@ impl FileHandle<Initialized> {
 
 impl FileHandle<Closed> {
     /// 获取文件路径（Closed状态仍可访问）
-    /// Get filepathClosedstatus
     pub fn path(&self) -> &str {
         &self.path
     }
@@ -103,9 +99,7 @@ impl FileHandle<Closed> {
 /// 证明：
 /// ：
 /// 1. `FileHandle<Uninitialized>` 只能调用 `open()`
-/// 2. `FileHandle<Initialized>` 只能调用 `read()/write()/close()`
 /// 3. `FileHandle<Closed>` 只能调用 `path()`
-/// 4. 类型系统保证无法跨状态调用方法
 /// 4. typesystemwithoutstatus method
 ///
 /// 例如，以下代码无法编译：
@@ -122,7 +116,6 @@ impl FileHandle<Closed> {
 // ============================================================================
 
 /// 单例模式：保证唯一性不变量
-/// singleton ：variable
 pub struct Singleton {
     data: i32,
 }
@@ -217,24 +210,18 @@ impl Default for Subject {
 // ============================================================================
 
 /// 递归快速排序：终止性证明
-/// fastsorttermination proof
 ///
 /// **定理**：对于任意有限数组，`quick_sort` 在有限步内终止
 /// **theorem **：to ，`quick_sort` in inside
 ///
 /// **证明**（通过良基归纳）：
-/// ****（summarize ）：
 ///
 /// 定义测度函数（measure）：`μ(arr) = arr.len()`
-///
-/// 1. **基础情况**：`arr.len() <= 1` 时，直接返回，终止。
 /// 1. **foundation situation **：`arr.len() <= 1` ，，。
 /// 2. **递归情况**：`arr.len() > 1` 时：
 /// 2. **situation **：`arr.len() > 1` ：
 ///    - 分割为 `left` 和 `right`
-///    - `μ(left) < μ(arr)` 且 `μ(right) < μ(arr)`
 ///    - 根据归纳假设，`quick_sort(left)` 和 `quick_sort(right)` 终止
-///    - 因此 `quick_sort(arr)` 终止
 /// 3. **结论**：对所有有限数组，算法终止。∎
 /// 3. ****：to all ，algorithm 。∎
 pub fn quick_sort<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
@@ -264,7 +251,6 @@ pub fn quick_sort<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
 // ============================================================================
 
 /// 线程安全的计数器：数据竞争自由证明
-/// threadsafetydata proof
 ///
 /// **定理**：`SafeCounter` 的所有操作无数据竞争
 /// **theorem **：`SafeCounter` all
@@ -272,7 +258,6 @@ pub fn quick_sort<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
 /// **证明**：
 /// ****：
 /// 1. `counter` 字段类型为 `Arc<Mutex<u64>>`
-/// 2. `Mutex::lock()` 保证互斥访问
 /// 2. `Mutex::lock()`
 /// 3. 任意时刻最多一个线程持有锁
 /// 3. moment at most thread lock
@@ -311,13 +296,10 @@ impl Default for SafeCounter {
 }
 
 /// 生产者-消费者：死锁自由证明
-/// - proof
 ///
 /// **定理**：使用 `mpsc::channel` 的生产者-消费者模式无死锁
-/// **theorem **： `mpsc::channel` -lock
 ///
 /// **证明**（通过资源排序）：
-/// ****（ordering ）：
 /// 1. 生产者只持有 `Sender`
 /// 1. `Sender`
 /// 2. 消费者只持有 `Receiver`
@@ -407,7 +389,6 @@ impl DatabaseConnection<Connected> {
 /// 证明：
 /// ：
 /// 1. `DatabaseConnection<Connected>` 拥有所有权
-/// 2. 离开作用域时，必须显式 `disconnect()` 或被drop
 /// 2. role domain ，must `disconnect()` or is drop
 /// 3. Rust的所有权系统保证资源被释放
 /// 3. Rustownership system is

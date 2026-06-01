@@ -25,13 +25,11 @@ use std::cmp::Ordering;
 /// ## Formal Specification
 ///
 /// **前置条件** (Precondition):
-/// ```text
 /// ∀i ∈ [0, n-2]. arr[i] ≤ arr[i+1]  // 数组已排序
 /// i [0, n-2]. arr[i] arr[i+1] // array sort
 /// ```
 ///
 /// **后置条件** (Postcondition):
-/// ```text
 /// result = Some(idx) ⟺ arr[idx] = target ∧ 0 ≤ idx < n
 /// result = None      ⟺ ∀i ∈ [0, n). arr[i] ≠ target
 /// ```
@@ -44,11 +42,8 @@ use std::cmp::Ordering;
 ///   - 每次迭代将搜索空间减半
 ///   - will space
 ///   - 递归关系: T(n) = T(n/2) + O(1) = O(log n)
-///
-/// - **空间复杂度**: O(1)
 /// - **space complexity **: O(1)
 ///   - 只使用常数个变量
-///   - variable
 ///
 /// ## 循环不变量
 /// ## circulation variable
@@ -63,7 +58,6 @@ use std::cmp::Ordering;
 /// ```
 ///
 /// ## 正确性证明（霍尔逻辑）
-/// ## （）
 ///
 /// ```text
 /// 初始化：
@@ -80,25 +74,21 @@ use std::cmp::Ordering;
 ///
 ///   Case 1: arr[mid] < target
 ///     新left = mid + 1
-///     ∀i < mid+1. arr[i] < target (由I和arr[mid]<target)
 ///     I仍成立 ✓
 ///     I ✓
 ///
 ///   Case 2: arr[mid] > target
 ///     新right = mid
-///     ∀i ≥ mid. arr[i] > target (由I和arr[mid]>target)
 ///     I仍成立 ✓
 ///     I ✓
 ///
 ///   Case 3: arr[mid] = target
 ///     返回 Some(mid)
-///     由I, mid ∈ [left, right), 正确 ✓
 ///
 /// 终止：
 /// ：
 ///   left ≥ right
 ///   由I, target ∉ arr
-///   返回 None，正确 ✓
 ///   None， ✓
 /// ```
 ///
@@ -119,7 +109,6 @@ use std::cmp::Ordering;
 /// 可使用以下工具进行验证：
 /// under tool ：
 /// - **Prusti**: Rust的验证工具（基于Viper）
-/// - **Creusot**: Rust的演绎验证工具（基于Why3）
 /// - **Creusot**: Rustdeduce tool （Why3）
 /// - **Kani**: Rust的模型检查器
 /// - **Kani**: Rust
@@ -258,11 +247,9 @@ pub fn binary_search_verified<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
 /// 维护 (j → j-1):
 /// (j → j-1):
 ///   若 arr[j-1] > arr[j]，交换
-///   保持 arr[0..j) ∪ arr[j+1..i+1] 已排序 ✓
 ///   arr[0..j) ∪ arr[j+1..i+1] ordering ✓
 ///
 /// 终止 (j=0 或 arr[j-1] ≤ arr[j]):
-///   arr[j] 已在正确位置
 ///   arr[j] in position
 ///   arr[0..i+1] 已排序 ✓
 ///   arr[0..i+1] ordering ✓
@@ -378,7 +365,6 @@ pub fn insertion_sort_verified<T: Ord>(arr: &mut [T]) {
 /// 3. result = merge(left', right') sort
 ///      （mergeunder ）
 ///   4. 因此 MergeSort(arr) 正确 ✓
-/// ```
 ///
 /// ## Merge函数的正确性
 /// ## Mergefunction
@@ -388,7 +374,6 @@ pub fn insertion_sort_verified<T: Ord>(arr: &mut [T]) {
 /// ```text
 /// I(i, j):
 ///   result[0..i+j] 包含 left[0..i] ∪ right[0..j] 的元素
-///   ∧ result[0..i+j] 已排序
 /// result[0..i+j] sort
 ///
 /// **证明**:
@@ -404,13 +389,9 @@ pub fn insertion_sort_verified<T: Ord>(arr: &mut [T]) {
 ///   若 left[i] ≤ right[j]:
 ///     result.push(left[i])
 ///     由不变量和 left[i] ≤ right[j..] ✓
-///
-///   否则:
 ///   :
 ///     result.push(right[j])
 ///     由不变量和 right[j] < left[i..] ✓
-///
-/// 终止 (i=|left|, j=|right|):
 ///   result 包含所有元素且已排序 ✓
 ///   result all element and ordering ✓
 /// ```
@@ -434,7 +415,6 @@ pub fn merge_sort_verified<T: Ord + Clone>(arr: Vec<T>) -> Vec<T> {
 }
 
 /// 合并两个已排序数组
-/// sort array
 ///
 /// **前置条件**:
 /// **before condition **:
@@ -540,8 +520,6 @@ fn merge_verified<T: Ord + Clone>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
 /// 归纳假设:
 /// summarize hypothesize :
 ///   QuickSort 对 |arr| < n 正确
-///
-/// 归纳步骤:
 /// summarize step :
 ///   1. pivot_idx = partition(arr)
 ///      由partition的后置条件:
@@ -551,14 +529,11 @@ fn merge_verified<T: Ord + Clone>(left: Vec<T>, right: Vec<T>) -> Vec<T> {
 ///
 ///   2. QuickSort(arr[0..pivot_idx])
 ///      由归纳假设，左半部分已排序
-/// falseleft sort
 ///
 ///   3. QuickSort(arr[pivot_idx+1..])
 ///      由归纳假设，右半部分已排序
-/// falseright sort
 ///
 ///   4. 组合：left_sorted ≤ pivot ≤ right_sorted
-///      整个数组已排序 ✓
 ///      ordering ✓
 /// ```
 #[inline]
@@ -576,8 +551,6 @@ pub fn quick_sort_verified<T: Ord>(arr: &mut [T]) {
 }
 
 /// Partition函数
-///
-/// **不变量**:
 /// **variable **:
 /// ```text
 /// I(store):
@@ -690,7 +663,6 @@ mod tests {
     }
 
     /// 验证排序算法的性质
-    /// Verify sortalgorithm
     #[test]
     fn test_sorting_properties() {
         let test_cases = vec![
@@ -723,13 +695,12 @@ mod tests {
     }
 
     /// 检查数组是否已排序
-    /// arraywhether sort
+    /// Check if array is sorted
     fn is_sorted<T: Ord>(arr: &[T]) -> bool {
         arr.windows(2).all(|w| w[0] <= w[1])
     }
 
     /// 检查两个数组是否包含相同元素（multiset相等）
-    /// element （multisetetc. ）
     fn has_same_elements<T: Ord + Clone>(a: &[T], b: &[T]) -> bool {
         let mut a_sorted = a.to_vec();
         let mut b_sorted = b.to_vec();

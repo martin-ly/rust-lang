@@ -166,26 +166,26 @@ impl SyncManager {
     }
 
     /// 获取所有原语名称
-    /// Get has
+    /// Get all primitive names
     pub fn get_primitive_names(&self) -> Vec<String> {
         self.primitives.lock().expect("同步原语锁被污染").keys().cloned().collect()
     }
 
     /// 检查原语是否存在
-    /// in
+    /// Check if primitive exists
     pub fn has_primitive(&self, name: &str) -> bool {
         self.primitives.lock().expect("同步原语锁被污染").contains_key(name)
     }
 
     /// 获取原语统计信息
-    /// Get information
+    /// Get primitive statistics
     pub fn get_primitive_stats(&self, name: &str) -> Option<PrimitiveStats> {
         let primitives = self.primitives.lock().expect("同步原语锁被污染");
         primitives.get(name).map(|p| p.get_stats())
     }
 
     /// 获取所有原语统计信息
-    /// Get hasinformation
+    /// Get all primitive statistics
     pub fn get_all_stats(&self) -> HashMap<String, PrimitiveStats> {
         let primitives = self.primitives.lock().expect("同步原语锁被污染");
         let mut stats = HashMap::new();

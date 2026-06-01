@@ -1,8 +1,6 @@
 //! 支持向量机（SVM）算法实现
-//! supportvectorSVMalgorithm implementation
 //!
 //! 本模块提供了支持向量机算法的基础实现
-//! This module provides supportvectoralgorithmimplementation
 use super::*;
 
 /// 支持向量机分类器（简化版本）

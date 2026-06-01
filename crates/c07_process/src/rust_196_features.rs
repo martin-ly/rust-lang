@@ -11,7 +11,6 @@
 //! # 版本信息
 //! # Version Info
 //! - Rust 版本: 1.96.0+ stable
-//! - 稳定日期: 2026-05-28
 //! - date : 2026-05-28
 //! - Edition: 2024
 
@@ -36,14 +35,12 @@ use std::sync::LazyLock;
 /// - 进程配置的单例懒加载
 /// - process singleton
 /// - 系统资源信息的延迟初始化
-/// - system
 /// - 环境变量的缓存封装
 /// - environment variable
 pub struct LazyFromExamples;
 
 impl LazyFromExamples {
     /// 从值直接构造 LazyLock（无需闭包）
-    /// from LazyLock（）
     pub fn process_config_from_value() -> LazyLock<String> {
         LazyLock::from("production".to_string())
     }
@@ -55,7 +52,6 @@ impl LazyFromExamples {
     }
 
     /// 进程 PID 表的懒加载初始化
-    /// process PID
     pub fn pid_table() -> &'static LazyLock<Vec<u32>> {
         static TABLE: LazyLock<Vec<u32>> = LazyLock::new(|| vec![1, 2, 4, 8, 16]);
         &TABLE
@@ -67,7 +63,6 @@ impl LazyFromExamples {
 // ============================================================================
 
 /// # 模式匹配断言在进程管理中的应用
-/// # patternprocessmanagement application
 ///
 /// `assert_matches!` 允许对 `Result`、`Option` 和自定义枚举进行模式匹配断言，
 /// `assert_matches!` to `Result`、`Option` and definition enum ，
@@ -77,7 +72,6 @@ pub struct ProcessAssertMatchesExamples;
 
 impl ProcessAssertMatchesExamples {
     /// 验证进程退出状态
-    /// Verify processstatus
     pub fn verify_exit_status(status: Result<i32, &'static str>) -> bool {
         assert_matches!(status, Ok(code) if code >= 0);
         true
@@ -99,7 +93,6 @@ impl ProcessAssertMatchesExamples {
 /// # `core::range::Range` processresourcemanagement application
 ///
 /// Rust 1.96.0 的 `core::range::Range` 实现 `Copy`，可多次迭代，
-/// 适合表示进程 ID 范围、内存地址范围、资源限制等。
 /// represent process ID scope 、memory scope 、etc. 。
 pub struct ProcessRangeExamples;
 

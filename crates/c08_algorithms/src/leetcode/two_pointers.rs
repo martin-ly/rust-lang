@@ -18,20 +18,14 @@
 //! ## Classic Problems
 //!
 //! - 11. Container With Most Water（盛最多水的容器）
-//! - 15. 3Sum（三数之和）
 //! - 15. 3Sum（'s and ）
 //! - 16. 3Sum Closest（最接近的三数之和）
 //! - 16. 3Sum Closest（'s and ）
 //! - 26. Remove Duplicates from Sorted Array（删除有序数组中的重复项）
-//! - 27. Remove Element（移除元素）
 //! - 42. Trapping Rain Water（接雨水）
-//! - 75. Sort Colors（颜色分类）
 //! - 80. Remove Duplicates from Sorted Array II（删除有序数组中的重复项 II）
-//! - 125. Valid Palindrome（验证回文串）
 //! - 167. Two Sum II - Input Array Is Sorted（两数之和 II - 输入有序数组）
-//! - 283. Move Zeroes（移动零）
 //! - 344. Reverse String（反转字符串）
-//! - 345. Reverse Vowels of a String（反转字符串中的元音字母）
 //! - 345. Reverse Vowels of a String（in ）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
@@ -87,8 +81,6 @@ pub fn three_sum_closest(mut nums: Vec<i32>, target: i32) -> i32 {
 }
 
 /// 42. Trapping Rain Water（接雨水）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定 `n` 个非负整数表示每个宽度为 `1` 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
 /// `n` represent as `1` ，this arrangement ，under 's after 。
@@ -140,8 +132,6 @@ pub fn trap(height: Vec<i32>) -> i32 {
 }
 
 /// 75. Sort Colors（颜色分类）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个包含红色、白色和蓝色、共 `n` 个元素的数组 `nums`，原地对它们进行排序，使得相同颜色的元素相邻，
 /// 、and 、 `n` element `nums`，to ordering ，element ，
@@ -185,13 +175,10 @@ pub fn sort_colors(nums: &mut [i32]) {
 }
 
 /// 80. Remove Duplicates from Sorted Array II（删除有序数组中的重复项 II）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个有序数组 `nums`，请你 **原地** 删除重复出现的元素，使每个元素 **最多出现两次**，
 /// `nums`， **** element ，element **at most **，
 /// 返回删除后数组的新长度。
-/// after 。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -226,8 +213,6 @@ pub fn remove_duplicates_ii(nums: &mut [i32]) -> usize {
 }
 
 /// 125. Valid Palindrome（验证回文串）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 如果在将所有大写字符转换为小写字符、并移除所有非字母数字字符之后，短语正着读和反着读都一样。
 /// if in will all conversion as 、and all 's after ，and 。
@@ -273,8 +258,6 @@ pub fn is_palindrome(s: &str) -> bool {
 }
 
 /// 167. Two Sum II - Input Array Is Sorted（两数之和 II - 输入有序数组）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个下标从 **1** 开始的整数数组 `numbers`，该数组已按 **非递减顺序排列**，请你从数组中找出满足相加之和等于目标数 `target` 的两个数。
 /// under from **1** `numbers`，this **order arrangement **，from in 's and etc. goal `target` 。
@@ -312,8 +295,6 @@ pub fn two_sum_ii(numbers: Vec<i32>, target: i32) -> Vec<i32> {
 }
 
 /// 344. Reverse String（反转字符串）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 `s` 的形式给出。
 /// function ，its role will 。 `s` 。
@@ -392,7 +373,6 @@ pub fn reverse_vowels(s: String) -> String {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有双指针类问题
-/// Get hasdoublepointerproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

@@ -6,7 +6,6 @@
 //! - `core::range::Range` — `Copy` 语义，适用于异步任务分批范围
 //! - `core::range::Range` — `Copy` ，async task scope
 //! - `std::assert_matches!` / `debug_assert_matches!` — 异步 Result/Option 模式断言
-//! - `LazyLock::from(value)` — 异步运行时配置（非 `const`）
 
 use std::sync::LazyLock;
 
@@ -20,13 +19,10 @@ use std::sync::LazyLock;
 /// `core::range::Range` 实现 `Copy`，因此批次范围可以在多个异步任务之间
 /// `core::range::Range` `Copy`，therefore scope can in async task 's
 /// 自由复制，无需引用或生命周期管理。
-/// ，reference or lifetime 。
 pub struct AsyncTaskBatcher;
 
 impl AsyncTaskBatcher {
     /// 将 `total_tasks` 按 `batch_size` 分成多个批次，返回 `core::range::Range` 列表。
-    ///
-    /// 使用 `core::range::Range { start, end }` 直接构造半开区间。
     pub fn batch_ranges(total_tasks: usize, batch_size: usize) -> Vec<core::range::Range<usize>> {
         if batch_size == 0 || total_tasks == 0 {
             return vec![];
@@ -45,7 +41,6 @@ impl AsyncTaskBatcher {
     }
 
     /// 计算给定批次范围的总任务数。
-    /// Compute task
     pub fn total_in_ranges(ranges: &[core::range::Range<usize>]) -> usize {
         ranges.iter().map(|r| r.end - r.start).sum()
     }
@@ -70,7 +65,6 @@ impl AsyncTaskBatcher {
 /// async runtime ， `LazyLock::from` runtime 。
 ///
 /// ⚠️ `LazyLock::from` **不是 `const`**，不能用于 `static`。
-/// 适合在异步运行时初始化阶段构造配置对象。
 /// in async runtime stage to 。
 pub struct AsyncRuntimeConfig {
     /// 最大并发任务数
@@ -79,7 +73,6 @@ pub struct AsyncRuntimeConfig {
     /// 单次批处理大小
     pub batch_size: LazyLock<usize, fn() -> usize>,
     /// 默认超时（毫秒）
-    /// （）
     pub default_timeout_ms: LazyLock<u64, fn() -> u64>,
 }
 

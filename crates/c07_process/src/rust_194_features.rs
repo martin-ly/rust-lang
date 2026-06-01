@@ -4,12 +4,8 @@
 //! 本模块展示了 Rust 1.94.0 在进程管理场景中的增强，包括：
 //! This module demonstrates Rust 1.94.0 processmanagementstrongincluding
 //! - array_windows 在数据处理中的应用 / Array Windows in Data Processing
-//! - LazyLock 在进程配置中的应用 / LazyLock in Process Configuration
 //! - 数学常量在数据分析中的应用 / Math Constants in Data Analysis
-//! - Peekable 在日志处理中的应用 / Peekable in Log Processing
 //! - char 转换在进程通信中的应用 / char Conversion in Process Communication
-//!
-//! # 文件信息
 //! # File Info
 //! - 文件: rust_194_features.rs
 //! - File: rust_194_features.rs
@@ -26,8 +22,6 @@ use std::sync::LazyLock;
 // ==================== 1. array_windows 在数据处理中的应用 ====================
 
 /// # 1. array_windows 在数据处理中的应用 / Array Windows in Data Processing
-///
-/// Rust 1.94.0 的 array_windows 方法非常适合处理进程产生的连续数据流，
 /// Rust 1.94.0 array_windows method process stream ，
 /// 如日志分析、指标计算和异常检测。
 /// analyze 、indicator and 。
@@ -40,7 +34,6 @@ pub struct ProcessMetricsAnalyzer;
 
 impl ProcessMetricsAnalyzer {
     /// 计算指标的移动平均
-    /// indicator
     ///
     /// Rust 1.94.0: 使用 array_windows 替代 windows
     pub fn moving_average<const N: usize>(data: &[f64]) -> Vec<f64>
@@ -117,7 +110,6 @@ impl ProcessMetricsAnalyzer {
     }
 
     /// 平滑数据（使用加权移动平均）
-    /// （）
     ///
     /// Rust 1.96.0: array_windows::<3>() 配合权重
     pub fn weighted_moving_average(data: &[f64]) -> Vec<f64> {
@@ -155,7 +147,6 @@ pub struct LogAnalyzer;
 
 impl LogAnalyzer {
     /// 检测连续的错误模式
-    /// error pattern
     /// Rust 1.96.0: array_windows::<3>()
     pub fn detect_error_patterns(entries: &[LogEntry]) -> Vec<usize> {
         let mut patterns = Vec::new();
@@ -175,7 +166,6 @@ impl LogAnalyzer {
     }
 
     /// 分析日志时间间隔
-    /// analyze time
     ///
     /// Rust 1.96.0: array_windows::<2>() 用于计算时间差
     pub fn analyze_time_intervals(entries: &[LogEntry]) -> Vec<u64> {
@@ -219,8 +209,6 @@ pub fn demonstrate_array_windows_processing() {
 // ==================== 2. LazyLock 在进程配置中的应用 ====================
 
 /// # 2. LazyLock 在进程配置中的应用 / LazyLock in Process Configuration
-///
-/// Rust 1.94.0 为 LazyLock 添加了新方法，使其在进程配置管理中更加灵活。
 /// Rust 1.94.0 as LazyLock method ，its in process in 。
 /// 全局进程配置
 /// globalprocess configuration
@@ -280,7 +268,6 @@ pub struct ProcessConfigManager;
 
 impl ProcessConfigManager {
     /// 获取进程配置引用
-    /// Get processconfigurationreference
     ///
     /// Rust 1.94.0: 使用 Deref
     /// Rust 1.94.0: Using Deref
@@ -289,7 +276,6 @@ impl ProcessConfigManager {
     }
 
     /// 获取资源限制引用
-    /// Get resourcereference
     pub fn get_limits() -> &'static ResourceLimits {
         &RESOURCE_LIMITS
     }
@@ -335,8 +321,6 @@ pub fn demonstrate_lazylock_config() {
 // ==================== 3. 数学常量在数据分析中的应用 ====================
 
 /// # 3. 数学常量在数据分析中的应用 / Math Constants in Data Analysis
-///
-/// Rust 1.94.0 添加了 EULER_GAMMA 和 GOLDEN_RATIO 常量，
 /// Rust 1.94.0 Added EULER_GAMMA and GOLDEN_RATIO constants,
 /// constant in process analyze and algorithm in useful 。
 /// 数据分析器
@@ -348,7 +332,6 @@ pub struct DataAnalyzer;
 
 impl DataAnalyzer {
     /// 使用黄金比例优化搜索区间
-    /// optimization interval
     ///
     /// Rust 1.94.0: GOLDEN_RATIO 在黄金分割搜索中的应用
     /// Rust 1.94.0: GOLDEN_RATIO search application
@@ -384,7 +367,6 @@ impl DataAnalyzer {
     }
 
     /// 使用欧拉常数估算对数级数
-    /// to
     ///
     /// Rust 1.94.0: EULER_GAMMA 在级数分析中的应用
     /// Rust 1.94.0: EULER_GAMMA analysis application
@@ -394,7 +376,6 @@ impl DataAnalyzer {
     }
 
     /// 计算黄金比例分割点
-    /// articulation point
     ///
     /// Rust 1.94.0: GOLDEN_RATIO 在数据分割中的应用
     /// Rust 1.94.0: GOLDEN_RATIO data application
@@ -410,8 +391,6 @@ impl DataAnalyzer {
     }
 
     /// 使用斐波那契数列进行数据采样
-    ///
-    /// Rust 1.94.0: 基于黄金比例的采样策略
     /// Rust 1.94.0: strategy
     pub fn fibonacci_sampling(data: &[f64], sample_count: usize) -> Vec<f64> {
         let phi = std::f64::consts::GOLDEN_RATIO;
@@ -428,7 +407,6 @@ impl DataAnalyzer {
 }
 
 /// 演示数学常量在数据分析中的应用
-/// constantdataanalysis application
 #[allow(dead_code)]
 pub fn demonstrate_math_constants() {
     println!("\n=== 数学常量数据分析演示 ===\n");
@@ -466,13 +444,9 @@ pub fn demonstrate_math_constants() {
 // ==================== 4. Peekable 在日志处理中的应用 ====================
 
 /// # 4. Peekable 在日志处理中的应用 / Peekable in Log Processing
-///
-/// Rust 1.94.0 为 Peekable 添加了 next_if_map 和 next_if_map_mut 方法，
 /// Rust 1.94.0 Added next_if_map and next_if_map_mut methods to Peekable,
 /// method in and in useful 。
 /// 日志解析器
-///
-/// Rust 1.94.0: 使用 Peekable 新方法解析日志
 /// Rust 1.94.0: Peekable method
 pub struct LogParser<I: Iterator<Item = LogEntry>> {
     entries: Peekable<I>,
@@ -488,7 +462,6 @@ impl<I: Iterator<Item = LogEntry>> LogParser<I> {
     }
 
     /// 解析下一条特定级别的日志
-    /// under level
     ///
     /// Rust 1.94.0: 使用 next_if_map 简化条件消费
     /// Rust 1.94.0: next_if_map condition
@@ -503,7 +476,6 @@ impl<I: Iterator<Item = LogEntry>> LogParser<I> {
     }
 
     /// 解析所有错误日志
-    /// all
     ///
     /// Rust 1.94.0: 使用 next_if_map 循环
     pub fn parse_all_errors(&mut self) -> Vec<LogEntry> {
@@ -523,7 +495,6 @@ impl<I: Iterator<Item = LogEntry>> LogParser<I> {
     }
 
     /// 跳过特定级别的日志
-    /// level
     ///
     /// Rust 1.94.0: 使用 next_if_map 跳过
     pub fn skip_level(&mut self, level: LogLevel) -> usize {
@@ -616,8 +587,6 @@ pub fn demonstrate_peekable_logs() {
 // ==================== 5. char 转换在进程通信中的应用 ====================
 
 /// # 5. char 转换在进程通信中的应用 / char Conversion in Process Communication
-///
-/// Rust 1.94.0 实现了 `TryFrom<char>` for usize，
 /// 这在进程间通信的字符编码处理中非常有用。
 /// in process in useful 。
 /// 进程通信编码器
@@ -653,7 +622,6 @@ impl ProcessCommunicationEncoder {
     }
 
     /// 分析字符编码分布
-    /// analyze distribution
     pub fn analyze_encoding_distribution(s: &str) -> HashMap<String, usize> {
         let mut distribution = HashMap::new();
 
@@ -678,7 +646,6 @@ impl ProcessCommunicationEncoder {
     }
 
     /// 验证字符编码范围
-    /// scope
     pub fn validate_codepoints(chars: &[char], max_codepoint: usize) -> Vec<bool> {
         chars
             .iter()
@@ -984,7 +951,6 @@ mod tests {
     /// Test nulllogginghandling
     /// when ，analyze while panic
     /// 预期行为：返回空结果向量
-    /// as ：result
     #[test]
     fn test_log_analyzer_empty() {
         let empty_entries: Vec<LogEntry> = vec![];
@@ -1011,9 +977,7 @@ mod tests {
     /// Test largeloggingperformance
     /// 
     /// 验证日志分析器能处理大量日志数据而不显著降低性能
-    /// Verify logginganalysishandlinglargeloggingdatalowperformance
     /// 预期行为：在合理时间内完成处理并返回正确结果
-    /// timeinnercompletehandlingpositive result
     #[test]
     #[cfg_attr(miri, ignore)]
     fn test_log_analyzer_large_input() {
@@ -1050,7 +1014,6 @@ mod tests {
     /// Test nulldataanalysis
     /// 
     /// 验证指标分析器能正确处理空数据或极小数据集
-    /// Verify analysispositivehandlingnulldatasmalldata
     /// 预期行为：返回空结果或默认值，不 panic
     /// as ：result or ， panic
     #[test]
@@ -1092,7 +1055,6 @@ mod tests {
     /// Test without Unicode handling
     /// 
     /// 验证进程通信编码器能正确处理无效的 Unicode 码点
-    /// Verify processpositivehandlingwithout Unicode
     /// 预期行为：返回错误或跳过无效字符，不 panic
     /// as ：or ineffective ， panic
     #[test]

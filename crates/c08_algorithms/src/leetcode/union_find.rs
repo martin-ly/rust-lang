@@ -8,7 +8,6 @@
 //! ## Rust 1.92 Feature Application
 //!
 //! 1. **性能优化**: 使用路径压缩和按秩合并优化
-//! 1. **performanceoptimization**: usepath optimization
 //! 2. **内存优化**: 高效的并查集数据结构
 //! 2. **memory optimization **: efficient disjoint set union data structure
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
@@ -67,8 +66,6 @@ impl UnionFind {
 // ==================== 经典题目实现 ====================
 
 /// 128. Longest Consecutive Sequence（最长连续序列）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
 /// ordering nums ，sequence （sequence element in in ）。
@@ -116,7 +113,6 @@ pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
 /// ## 问题描述
 /// ## Problem Description
 /// 给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
-/// '1'（）and '0'（），in quantity 。
 ///
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
@@ -166,8 +162,6 @@ pub fn num_islands_union_find(grid: Vec<Vec<char>>) -> i32 {
 }
 
 /// 547. Number of Provinces（省份数量）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 有 n 个城市，其中一些彼此相连，另一些没有相连。
 /// n ，its in this ，。
@@ -201,8 +195,6 @@ pub fn find_circle_num(is_connected: Vec<Vec<i32>>) -> i32 {
 }
 
 /// 684. Redundant Connection（冗余连接）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定往一棵 n 个节点的树中添加一条边后的图。
 /// n node tree in edge after 。
@@ -239,11 +231,8 @@ pub fn find_redundant_connection(edges: Vec<Vec<i32>>) -> Vec<i32> {
 }
 
 /// 721. Accounts Merge（账户合并）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个列表 accounts，合并具有共同邮箱的账户。
-/// accounts，and has 。
 ///
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
@@ -298,7 +287,6 @@ pub fn accounts_merge(accounts: Vec<Vec<String>>) -> Vec<Vec<String>> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有并查集类问题
-/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

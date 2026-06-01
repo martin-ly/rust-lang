@@ -87,7 +87,6 @@ impl Rust190Features {
     }
 
     /// 演示改进的模式匹配
-    /// demonstration
     ///
     /// Rust 1.90 改进了模式匹配的精确性和性能
     /// Rust 1.90 improvementspattern performance
@@ -125,7 +124,6 @@ impl Rust190Features {
     }
 
     /// 演示改进的迭代器
-    /// improvements iterator
     ///
     /// Rust 1.90 提供了更高效的迭代器方法
     /// Rust 1.90 provideefficientiterator method
@@ -151,7 +149,6 @@ impl Rust190Features {
     }
 
     /// 演示改进的错误处理
-    /// improvementserror processing
     ///
     /// Rust 1.90 提供了更好的错误处理机制
     /// Rust 1.90 providebettererrorhandling mechanism
@@ -202,7 +199,6 @@ impl Rust190Features {
     }
 
     /// 演示改进的宏系统
-    /// improvements system
     ///
     /// Rust 1.90 提供了更强大的宏功能
     /// Rust 1.90 functionality

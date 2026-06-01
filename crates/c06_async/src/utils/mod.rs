@@ -242,7 +242,6 @@ impl ExecHelper {
     }
 
     /// 增强版：支持可重试判定与整体截止时间（deadline）
-    /// ：and whole time （deadline）
     pub async fn run_with_decider_and_deadline<F, Fut, T, E, D>(
         &self,
         mut make_fut: F,
@@ -431,7 +430,6 @@ impl ExecHelper {
 
 impl ExecStrategyRunner {
     /// 运行操作：可选择传入可重试判定
-    /// Run operation
     pub async fn run<F, Fut, T, E, D>(
         &self,
         make_fut: F,

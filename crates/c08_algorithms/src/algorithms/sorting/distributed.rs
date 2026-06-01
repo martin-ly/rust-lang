@@ -2,7 +2,6 @@
 //! # distributedsort algorithm
 //!
 //! 本模块实现了各种排序算法的分布式版本，支持跨节点的分布式计算。
-//! This module implements sortalgorithmdistributedversionsupportnodedistributedcompute
 //! 适用于大规模数据处理和需要水平扩展的场景。
 //! scale and level scenario 。
 use super::{AlgorithmComplexity, SortingAlgorithm};

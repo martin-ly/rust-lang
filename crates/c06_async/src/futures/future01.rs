@@ -4,7 +4,6 @@
 //! 在 Rust 中，Future 的状态机和调度机制是理解异步编程的关键。
 //! in Rust in ，Future state machine and mechanism async key 。
 //! 本模块提供了对这两个概念的全面示例和解释。
-//! This module provides comprehensive
 //!
 //! ## Future 状态机模型
 //! ## Future state machine
@@ -14,7 +13,6 @@
 //! - **Pending**: 表示计算尚未完成，可能需要等待某些条件
 //! - **Pending**: represent ，may etc. condition
 //! - **Ready**: 表示计算已完成，并且可以返回结果
-//! - **Ready**: tablecomputecompletecan result
 //!
 //! ## 调度机制
 //! ## scheduling mechanism
@@ -52,7 +50,6 @@
 //! ```
 //!
 //! ### 3. Context 和 Waker
-//! - `Context` 提供对 `Waker` 的访问
 //! - `Context` to `Waker`
 //! - `Waker` 用于通知运行时重新调度 Future
 //! - `Waker` runtime Future
@@ -69,8 +66,6 @@
 //!     // demonstration Future
 //!     let result = demo_manual_future().await;
 //!     println!("手动 Future 结果: {}", result);
-//!     
-//!     // 演示 Future 组合子
 //!     // demonstration Future combination
 //!     let result = demo_future_combinators().await;
 //!     println!("组合子结果: {}", result);
@@ -141,13 +136,10 @@ pub enum State {
     /// etc. state ：
     Pending,
     /// 就绪状态：操作完成，包含结果值
-    /// statusoperationcompletecontainresult value
     Ready(i32),
 }
 
 /// 为 MyFuture 实现 Future trait
-///
-/// 这是 Future trait 的核心实现，展示了异步状态机的轮询机制。
 /// Future trait core ，async state machine mechanism 。
 ///
 /// # 实现细节
@@ -156,7 +148,6 @@ pub enum State {
 /// ## poll 方法的作用
 /// ## poll method role
 /// - 运行时定期调用此方法来检查 Future 的状态
-/// - runtimemethod Future status
 /// - 如果操作已完成，返回 `Poll::Ready(result)`
 /// - if ， `Poll::Ready(result)`
 /// - 如果操作仍在进行，返回 `Poll::Pending`
@@ -234,7 +225,6 @@ impl Future for MyFuture {
 /// demonstration Future this
 ///
 /// 这个函数展示了如何使用自定义的 Future 实现。
-/// function definition Future 。
 /// 它创建了一个 MyFuture 实例并等待其完成。
 /// MyFuture and etc. its 。
 ///
@@ -260,7 +250,6 @@ impl Future for MyFuture {
 /// - 这是一个教学示例，实际应用中很少需要手写 Future
 /// - example ，actual application in Future
 /// - 大多数异步操作都使用标准库或第三方库提供的 Future 实现
-/// - largemultipleasyncoperationusestandardlibrarylibraryprovide Future implementation
 pub async fn demo_manual_future() -> i32 {
     // 创建自定义 Future 实例
     // 注意：这里只是演示状态切换；真实延时应交给运行时计时器
@@ -281,7 +270,6 @@ pub async fn demo_manual_future() -> i32 {
 /// - `map`: 转换 Future 的结果
 /// - `map`: conversion Future result
 /// - `select`: 同时等待多个 Future，返回最先完成的那个
-/// - `select`: etc. Future，
 ///
 /// # 组合子说明
 /// # combination explain
@@ -293,7 +281,6 @@ pub async fn demo_manual_future() -> i32 {
 ///
 /// ## select
 /// - 同时执行多个 Future，返回最先完成的结果
-/// - executionmultiple Futurecomplete result
 /// - 其他未完成的 Future 会被取消
 /// - its Future is
 /// - 返回 `Either<A, B>` 类型，表示哪个 Future 先完成
@@ -302,7 +289,6 @@ pub async fn demo_manual_future() -> i32 {
 /// # 返回值
 /// # Return Value
 /// 返回组合操作的最终结果
-/// operationfinal result
 ///
 /// # 示例
 /// # Examples

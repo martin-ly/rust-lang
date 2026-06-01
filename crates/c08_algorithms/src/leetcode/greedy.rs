@@ -16,11 +16,8 @@ use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 // ==================== 经典题目实现 ====================
 
 /// 45. Jump Game II（跳跃游戏 II）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个非负整数数组 nums ，你最初位于数组的第一个位置。
-/// nums ，first position 。
 /// 数组中的每个元素代表你在该位置可以跳跃的最大长度。
 /// in element in this position can maximum 。
 /// 你的目标是使用最少的跳跃次数到达数组的最后一个位置。
@@ -104,8 +101,6 @@ pub fn can_jump(nums: Vec<i32>) -> bool {
 }
 
 /// 122. Best Time to Buy and Sell Stock II（买卖股票的最佳时机 II）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 prices ，其中 `prices[i]` 表示某支股票第 i 天的价格。
 /// prices ，its in `prices[i]` represent i price 。
@@ -138,8 +133,6 @@ pub fn max_profit_ii(prices: Vec<i32>) -> i32 {
 }
 
 /// 134. Gas Station（加油站）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 在一条环路上有 n 个加油站，其中第 i 个加油站有汽油 `gas[i]` 升。
 /// in on n ，its in i `gas[i]` 。
@@ -185,8 +178,6 @@ pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
 }
 
 /// 179. Largest Number（最大数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。
 /// nums，arrangement order （）'s maximum 。
@@ -194,7 +185,6 @@ pub fn can_complete_circuit(gas: Vec<i32>, cost: Vec<i32>) -> i32 {
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
 /// - **贪心排序**: 使用自定义比较函数排序
-/// - **sort**: usecustomfunction sort
 ///
 /// ## 复杂度
 /// ## Complexity
@@ -221,7 +211,6 @@ pub fn largest_number(nums: Vec<i32>) -> String {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有贪心类问题
-/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

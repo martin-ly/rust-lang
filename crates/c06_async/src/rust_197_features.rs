@@ -11,13 +11,11 @@ use std::task::{Context, Poll, Waker};
 /// Rust 1.97 稳定化的核心异步 API：
 /// Rust 1.97 core async API：
 /// - `AsyncFn*` trait family 加入 prelude（所有 edition）
-/// - `std::task::Waker::noop` — 无操作 Waker，用于不需要唤醒的上下文
 /// - `std::task::Waker::noop` — Waker，on under
 pub struct Rust197AsyncFeatures;
 
 impl Rust197AsyncFeatures {
     /// 使用 `Waker::noop()` 创建一个不需要唤醒的 Context
-    /// `Waker::noop()` Context
     ///
     /// 适用于同步轮询（polling）场景，例如测试或已知不会阻塞的 Future。
     /// synchronous （polling）scenario ，for example or Future。
@@ -32,8 +30,6 @@ impl Rust197AsyncFeatures {
     }
 
     /// 演示 `AsyncFn` trait 的使用（Rust 1.97+ 在 prelude 中可用）
-    ///
-    /// `AsyncFn` 允许像调用普通闭包一样调用异步闭包。
     /// `AsyncFn` async 。
     pub async fn call_async_closure<F>(f: F, arg: i32) -> i32
     where

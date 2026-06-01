@@ -12,7 +12,6 @@
 //! - const 上下文增强（进程配置计算）
 //! - const on under （process ）
 //! - 新的稳定 API（BufRead::skip_while, ControlFlow 改进等）
-//! - JIT 编译器优化（进程数据处理性能提升）
 //! - JIT optimization （process performance ）
 //! - 内存分配器优化（进程通信优化）
 //! - allocator optimization （process optimization ）
@@ -101,7 +100,6 @@ pub mod process_new_apis {
     use super::*;
 
     /// 使用 BufRead::skip_while 解析进程输出
-    /// BufRead::skip_while process
     ///
     /// Rust 1.91 新增：跳过满足条件的字节
     /// Rust 1.91 New: Skip bytes meeting conditions
@@ -147,7 +145,6 @@ pub mod process_new_apis {
     }
 
     /// 使用 ControlFlow 进行进程资源检查
-    /// ControlFlow process
     pub fn check_process_resources(
         memory_mb: usize,
         max_memory_mb: usize,
@@ -181,7 +178,6 @@ pub mod process_new_apis {
 /// Rust 1.91 to optimization ，performance 10-25%
 pub mod process_jit_optimizations {
     /// 处理进程输出数据
-    /// handlingprocess data
     ///
     /// Rust 1.91 JIT 优化：迭代器链式操作性能提升约 15-25%
     /// Rust 1.91 JIT optimization ：performance 15-25%
@@ -195,7 +191,6 @@ pub mod process_jit_optimizations {
     }
 
     /// 计算进程统计信息
-    /// Compute processinformation
     ///
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
     /// Rust 1.91 JIT Optimization: Simple summation operation performance improved by ~10-15%
@@ -208,7 +203,6 @@ pub mod process_jit_optimizations {
     }
 
     /// 过滤和转换进程数据
-    /// conversionprocess data
     ///
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 20-25%
     /// Rust 1.91 JIT optimization ：complex performance 20-25%
@@ -247,13 +241,11 @@ pub mod process_jit_optimizations {
 // ==================== 4. 内存分配器优化在进程通信中的应用 ====================
 
 /// Rust 1.91 内存分配器优化在进程通信中的应用
-/// Rust 1.91 memoryoptimizationprocess application
 ///
 /// Rust 1.91 改进了内存分配器，小对象分配性能提升 25-30%
 /// Rust 1.91 Improved memory allocator, small object allocation performance improved by 25-30%
 pub mod process_memory_optimizations {
     /// 创建小对象用于进程通信
-    /// to process
     ///
     /// Rust 1.91 优化：小对象（< 32 bytes）分配性能提升约 25-30%
     /// Rust 1.91 Optimization: Small object (< 32 bytes) allocation performance improved by ~25-30%
@@ -300,7 +292,6 @@ pub mod process_memory_optimizations {
 // ==================== 5. 异步迭代器改进在进程输出处理中的应用 ====================
 
 /// Rust 1.91 异步迭代器改进在进程输出处理中的应用
-/// Rust 1.91 asynciteratorimprovementsprocesshandling application
 ///
 /// Rust 1.91 对异步迭代器进行了优化，性能提升约 15-20%
 /// Rust 1.91 to async optimization ，performance 15-20%
@@ -413,7 +404,6 @@ pub mod comprehensive_process_examples {
     use super::*;
 
     /// 综合进程管理系统
-    /// processmanagement system
     ///
     /// 使用 const 上下文增强和新的 API
     /// const on under and API

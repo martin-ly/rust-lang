@@ -4,7 +4,6 @@
 //! 本模块展示了 Rust 范围类型的应用，包括：
 //! This module demonstrates Rust typeapplicationincluding
 //! - `RangeInclusive` 和 `RangeToInclusive` 的方法支持
-//! - 范围类型在算法中的高级应用
 //! - typealgorithmadvanced application
 //! - 迭代器与范围类型的深度集成
 //! - and scope type
@@ -12,7 +11,6 @@
 //! # 文件信息
 //! # File Info
 //! - 文件: rust_196_features.rs
-//! - 创建日期: 2026-04-10
 //! - date : 2026-04-10
 //! - 版本: 1.0
 //! - Version: 1.0
@@ -28,7 +26,6 @@ use std::ops::RangeInclusive;
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// `if let` guards in match arm on and condition ，
 /// 减少嵌套层级，使代码更扁平、更易读。
-/// ，、。
 pub struct AlgorithmIfLetGuardExamples;
 
 impl AlgorithmIfLetGuardExamples {
@@ -56,8 +53,6 @@ impl AlgorithmIfLetGuardExamples {
 // ==================== 1. RangeInclusive 完整功能展示 ====================
 
 /// # RangeInclusive 完整功能展示
-///
-/// Range 类型应用（标准库基础特性）。
 /// Range type application （standard library foundation feature ）。
 /// RangeInclusive 提供了完整的标准库支持，
 /// RangeInclusive complete standard library ，
@@ -72,7 +67,6 @@ pub struct RangeInclusiveAlgorithms;
 
 impl RangeInclusiveAlgorithms {
     /// 使用 RangeInclusive 进行斐波那契数列生成
-    /// RangeInclusive
     ///
     /// RangeInclusive 完全支持迭代和索引操作
     /// RangeInclusive support operation
@@ -92,7 +86,6 @@ impl RangeInclusiveAlgorithms {
     /// use RangeInclusive implementation search
     ///
     /// RangeInclusive 支持包含边界的二分查找
-    /// RangeInclusive edge
     pub fn inclusive_binary_search(
         arr: &[i32],
         target: i32,
@@ -118,16 +111,13 @@ impl RangeInclusiveAlgorithms {
     }
 
     /// 使用 RangeInclusive 进行区间统计
-    /// RangeInclusive interval
     ///
     /// 统计在指定闭区间内的元素数量
-    /// inner count
     pub fn count_in_range<T: Ord>(data: &[T], min: &T, max: &T) -> usize {
         data.iter().filter(|x| min <= *x && *x <= max).count()
     }
 
     /// 使用 RangeInclusive 进行数值积分（梯形法则）
-    /// RangeInclusive （）
     ///
     /// RangeInclusive 的步进迭代支持
     /// RangeInclusive
@@ -150,7 +140,6 @@ impl RangeInclusiveAlgorithms {
     }
 
     /// 使用 RangeInclusive 生成等差数列
-    /// RangeInclusive etc.
     ///
     /// 生成从 start 到 end（包含）的等差数列
     /// from start to end（）etc.
@@ -172,7 +161,6 @@ impl RangeInclusiveAlgorithms {
     }
 
     /// 使用 RangeInclusive 进行滑动窗口统计
-    /// RangeInclusive
     ///
     /// RangeInclusive 作为窗口边界
     pub fn sliding_window_stats(data: &[f64], window_size: usize) -> Vec<(f64, f64)> {
@@ -243,8 +231,6 @@ impl RangeInclusiveAlgorithms {
 // ==================== 2. RangeToInclusive 功能展示 ====================
 
 /// # RangeToInclusive 功能展示
-///
-/// Range 类型应用（标准库基础特性）。
 /// Range type application （standard library foundation feature ）。
 /// RangeToInclusive 表示从起始到指定值（包含）的范围。
 /// RangeToInclusive represent from to （）scope 。
@@ -288,7 +274,6 @@ impl RangeToInclusiveAlgorithms {
     }
 
     /// 使用 RangeToInclusive 查找最长非递减前缀
-    /// RangeToInclusive before
     pub fn longest_non_decreasing_prefix(data: &[i32]) -> usize {
         if data.len() <= 1 {
             return data.len();
@@ -304,7 +289,6 @@ impl RangeToInclusiveAlgorithms {
     }
 
     /// 使用 RangeToInclusive 进行累积最大值计算
-    /// RangeToInclusive maximum
     pub fn cumulative_maximum(data: &[i32]) -> Vec<i32> {
         let mut max_vals = Vec::with_capacity(data.len());
         let mut current_max = i32::MIN;
@@ -318,8 +302,6 @@ impl RangeToInclusiveAlgorithms {
     }
 
     /// 使用 RangeToInclusive 模式匹配
-    ///
-    /// 展示如何在 match 中使用范围模式
     /// demonstrate match use pattern
     pub fn classify_by_range(value: usize) -> &'static str {
         match value {
@@ -331,7 +313,6 @@ impl RangeToInclusiveAlgorithms {
     }
 
     /// 使用 RangeToInclusive 进行数字分桶
-    /// RangeToInclusive
     pub fn bucket_values(data: &[f64], bucket_count: usize, max_value: f64) -> Vec<usize> {
         let bucket_size = max_value / bucket_count as f64;
         let mut buckets = vec![0usize; bucket_count];
@@ -430,7 +411,6 @@ impl RangeCompositionAlgorithms {
     }
 
     /// 使用范围类型进行数据分页
-    /// scope type
     ///
     /// 展示 RangeInclusive 在实际分页场景中的应用
     /// demonstrate RangeInclusive application
@@ -449,7 +429,6 @@ impl RangeCompositionAlgorithms {
     /// scope
     ///
     /// 生成一系列连续的范围
-    /// scope
     pub fn generate_ranges(total: usize, chunk_size: usize) -> Vec<RangeInclusive<usize>> {
         let mut ranges = Vec::new();
         let mut start = 0;
@@ -529,7 +508,6 @@ impl RangePracticalApplications {
     }
 
     /// 批量处理任务分配
-    /// task
     ///
     /// 使用 RangeInclusive 为工作线程分配任务范围
     /// RangeInclusive as worker thread task scope
@@ -558,8 +536,6 @@ impl RangePracticalApplications {
     }
 
     /// 资源使用限制检查
-    ///
-    /// 使用 RangeInclusive 定义允许的资源使用范围
     /// RangeInclusive definition scope
     pub fn check_resource_usage(usage: &[f64], allowed_range: RangeInclusive<f64>) -> bool {
         usage.iter().all(|&u| allowed_range.contains(&u))
@@ -947,7 +923,6 @@ use std::collections::VecDeque;
 /// use gen implementation generator
 ///
 /// 经典的无限序列生成，gen 块使实现极为简洁。
-/// sequence ，gen as 。
 pub fn fibonacci_gen() -> impl Iterator<Item = u64> {
     gen {
         let (mut a, mut b) = (0u64, 1u64);
@@ -959,10 +934,8 @@ pub fn fibonacci_gen() -> impl Iterator<Item = u64> {
 }
 
 /// 使用 gen 块实现素数筛（埃拉托斯特尼筛法）
-/// gen （）
 ///
 /// 惰性生成素数，只在需要时计算下一个素数。
-/// ，in under 。
 pub fn prime_sieve_gen(limit: usize) -> impl Iterator<Item = usize> {
     gen move {
         if limit >= 2 {
@@ -986,7 +959,6 @@ pub fn prime_sieve_gen(limit: usize) -> impl Iterator<Item = usize> {
 /// use gen implementation iterator
 ///
 /// 在数据切片上滑动固定大小的窗口，产生每个窗口的内容。
-/// in on ，inside 。
 pub fn sliding_window_gen<T: Clone>(data: &[T], size: usize) -> impl Iterator<Item = Vec<T>> + '_ {
     gen move {
         if size > 0 && size <= data.len() {
@@ -1017,7 +989,6 @@ impl<T: Clone> TreeNode<T> {
     /// use gen implementationfront traversal
     ///
     /// 使用显式栈避免递归，gen 块让迭代器实现极为简洁。
-    /// stack ，gen as 。
     pub fn pre_order_gen(&self) -> impl Iterator<Item = T> + '_ {
         gen move {
             let mut stack = vec![self];
@@ -1053,7 +1024,6 @@ impl<T: Clone> TreeNode<T> {
     }
 
     /// 使用 gen 块实现层序遍历（BFS）
-    /// gen （BFS）
     pub fn level_order_gen(&self) -> impl Iterator<Item = T> + '_ {
         gen move {
             let mut queue = VecDeque::new();
@@ -1243,7 +1213,6 @@ mod gen_block_algorithm_tests {
 }
 
 /// 算法整数溢出反模式与边界情况专题
-/// algorithm and edge situation
 pub mod anti_patterns_and_edge_cases {
     /// 展示算法中整数溢出的反模式和边界情况
     /// algorithm in and edge situation
@@ -1251,7 +1220,6 @@ pub mod anti_patterns_and_edge_cases {
 
     impl IntegerOverflowAntiPatterns {
         /// ❌ 不推荐：在累加时不检查溢出
-        /// ❌ ：in
         pub fn dangerous_sum(values: &[u32]) -> u32 {
             // ❌ 反例：使用 wrapping_add 模拟 release 模式下的静默回绕
             // 注意：在 debug 模式下，普通的 `sum += v` 会 panic，
@@ -1351,8 +1319,6 @@ pub mod anti_patterns_and_edge_cases {
 // ============================================================================
 
 /// # `<[T]>::element_offset` — 切片元素偏移
-///
-/// Rust 1.96.0 稳定了 `element_offset` 方法，用于计算切片中两个元素的偏移量（以元素个数为单位）。
 /// Rust 1.96.0 `element_offset` method ，in element （element as ）。
 /// 这是指针算术的安全抽象，在算法中常用于计算索引差。
 /// pointer ，in algorithm in 。
@@ -1360,7 +1326,6 @@ pub struct ElementOffsetExamples;
 
 impl ElementOffsetExamples {
     /// 计算两个元素在数组中的距离
-    /// Compute array
     pub fn distance_between(arr: &[i32], a: &i32, b: &i32) -> Option<usize> {
         arr.element_offset(a)
             .zip(arr.element_offset(b))
@@ -1378,8 +1343,6 @@ impl ElementOffsetExamples {
 }
 
 /// # `Peekable::next_if_map` — 带映射的 peek 条件消费
-///
-/// Rust 1.96.0 稳定了 `next_if_map` 和 `next_if_map_mut`，允许在 peek 时进行条件映射消费。
 /// Rust 1.96.0 `next_if_map` and `next_if_map_mut`，in peek condition 。
 /// 这在解析器、词法分析器等算法场景中非常有用。
 /// in 、analyze etc. algorithm scenario in useful 。
@@ -1390,7 +1353,6 @@ pub struct PeekableNextIfMapExamples;
 
 impl PeekableNextIfMapExamples {
     /// 从迭代器中消费满足条件的元素并映射
-    /// iterator map
     pub fn consume_while_even(
         iter: &mut std::iter::Peekable<impl Iterator<Item = i32>>,
     ) -> Vec<i32> {
@@ -1402,7 +1364,6 @@ impl PeekableNextIfMapExamples {
     }
 
     /// 解析逗号分隔的数字列表（简化示例）
-    /// （example ）
     pub fn parse_csv_numbers(input: &str) -> Vec<i32> {
         let mut nums = Vec::new();
         let mut chars = input.chars().peekable();
@@ -1427,8 +1388,6 @@ impl PeekableNextIfMapExamples {
 }
 
 /// # `f32/f64::consts::EULER_GAMMA` / `GOLDEN_RATIO` — 数学常量
-///
-/// Rust 1.96.0 新增了两个数学常量：
 /// Rust 1.96.0 constant ：
 /// - `EULER_GAMMA` (γ ≈ 0.57721566) — 欧拉-马歇罗尼常数，出现在数论和积分中
 /// - `EULER_GAMMA` (γ ≈ 0.57721566) — -，present and in
@@ -1438,7 +1397,6 @@ pub struct MathConstantsExamples;
 
 impl MathConstantsExamples {
     /// 使用欧拉-马歇罗尼常数近似调和级数
-    /// -and
     /// H(n) ≈ ln(n) + γ + 1/(2n)
     pub fn harmonic_approximation(n: u32) -> f64 {
         if n == 0 {
@@ -1449,7 +1407,6 @@ impl MathConstantsExamples {
     }
 
     /// 使用黄金比例生成斐波那契数列的近似值
-    /// use value
     pub fn fibonacci_approximation(n: u32) -> f64 {
         let phi = std::f64::consts::GOLDEN_RATIO;
         let sqrt5 = 5.0f64.sqrt();
@@ -1459,7 +1416,6 @@ impl MathConstantsExamples {
     /// 黄金比例搜索区间分割（一维优化）
     /// interval （optimization ）
     /// 在区间 [a, b] 内按黄金比例取点，用于单峰函数优化
-    /// [a, b] innersinglefunction optimization
     pub fn golden_section_points(a: f64, b: f64) -> (f64, f64) {
         let phi = std::f64::consts::GOLDEN_RATIO;
         let resphi = 2.0 - phi; // 1 / φ^2 ≈ 0.382

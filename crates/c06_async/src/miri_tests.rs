@@ -91,9 +91,7 @@ impl SelfReferencing {
 /// 测试目的: 验证 Pin 保证自引用安全
 /// Test : verify Pin referencesafety
 /// 测试场景: 创建自引用结构并通过 Pin 访问
-/// Test : createreference Pin
 /// 预期结果: 应该能够安全访问自引用数据
-/// result: shouldsafetyreference data
 #[test]
 fn test_pin_self_referential() {
     let data = SelfReferencing::new(String::from("Hello, Miri!"));
@@ -229,7 +227,6 @@ where
 /// 测试场景: 创建 MapFuture 并执行
 /// Test : create MapFuture execution
 /// 预期结果: 应该应用映射函数并返回结果
-/// result: shouldapplicationmapfunction result
 #[test]
 fn test_future_combinator() {
     let fut = MapFuture {
@@ -331,13 +328,11 @@ impl PinnedData {
     }
 
     /// 安全地获取数据引用
-    /// safetygetdata reference
     fn data(self: Pin<&Self>) -> &str {
         &self.get_ref().data
     }
 
     /// 通过指针获取数据（unsafe）
-    /// pointer （unsafe）
     unsafe fn data_via_ptr(&self) -> &str {
         unsafe { &*self.ptr_to_data }
     }
@@ -411,7 +406,6 @@ impl Future for StateMachineFuture {
 /// 测试场景: 创建状态机 Future 并执行
 /// Test : createstate machine Future execution
 /// 预期结果: 应该经过所有状态并返回结果
-/// result: shouldhasstatus result
 #[test]
 fn test_state_machine_future() {
     let fut = StateMachineFuture {
@@ -464,7 +458,6 @@ fn test_pin_heap_semantics() {
 /// 测试目的: 演示不安全的 Pin 投影
 /// Test : safety Pin
 /// 测试场景: 移动包含自引用的结构体
-/// Test : containreferencestruct
 /// 预期结果: Miri 应该检测到 UB
 /// result : Miri should to UB
 #[test]

@@ -5,7 +5,6 @@
 //! This module demonstrates key language features and toolchain improvements of Rust 189.0 (2025-08-07).
 //!
 //! - `repr128`: `#[repr(u128/i128)]` 稳定
-//! - `explicit_inferred_const`: 显式推断 const 参数
 //! - `explicit_inferred_const`: Explicit inferred const parameters
 //! # this
 //! - Rust 版本: 189.0
@@ -19,8 +18,6 @@
 // ============================================================================
 
 /// # `#[repr(u128/i128)]` 稳定
-///
-/// Rust 1.89.0 稳定了 `#[repr(u128)]` 和 `#[repr(i128)]`，
 /// 允许枚举类型使用 128 位整数作为底层表示。
 /// enum type 128 as represent 。
 ///
@@ -83,7 +80,6 @@ fn test_repr128() {
 /// - 只需显式指定部分 const 参数时
 /// - part const parameter
 /// - 提高代码可读性，避免写出冗余的 const 表达式
-/// - ， const express
 pub fn array_sum<T, const N: usize>(arr: [T; N]) -> T
 where
     T: Default + std::ops::Add<Output = T> + Copy,

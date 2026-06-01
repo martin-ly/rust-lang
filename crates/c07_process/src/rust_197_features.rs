@@ -18,7 +18,6 @@ pub struct Rust197ProcessFeatures;
 
 impl Rust197ProcessFeatures {
     /// 使用 `FileTimes` 构建文件时间修改请求
-    /// `FileTimes` time
     ///
     /// `FileTimes` 允许原子地设置文件的访问时间和修改时间。
     /// `FileTimes` time and time 。
@@ -37,7 +36,6 @@ impl Rust197ProcessFeatures {
     }
 
     /// 使用 `File::set_times` 原子更新文件时间戳
-    /// `File::set_times` time
     pub fn update_file_times(path: &str, times: FileTimes) -> io::Result<()> {
         let file = File::options().write(true).open(path)?;
         file.set_times(times)

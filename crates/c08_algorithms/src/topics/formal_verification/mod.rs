@@ -2,7 +2,6 @@
 //! module - Rust 1.90 feature to
 //!
 //! 本模块实现了算法形式化验证和证明，包括：
-//! This module implements algorithmformalverifyproofincluding
 //! - 算法正确性证明
 //! - algorithmcorrectness proof
 //! - 复杂度分析证明
@@ -569,7 +568,6 @@ impl ProofManager {
     }
 
     /// 获取算法的所有证明
-    /// Get algorithmhasproof
     pub fn get_algorithm_proofs(&self, algorithm_name: &str) -> Vec<&FormalProof> {
         self.proofs
             .values()
@@ -659,7 +657,6 @@ pub struct ProofValidator;
 
 impl ProofValidator {
     /// 验证证明的有效性
-    /// Verify proofhas
     pub fn validate_proof(proof: &FormalProof) -> bool {
         // 检查证明步骤的逻辑一致性
         for step in &proof.steps {
@@ -679,7 +676,6 @@ impl ProofValidator {
     }
 
     /// 验证证明的完整性
-    /// Verify proofcomplete
     pub fn validate_completeness(proof: &FormalProof) -> bool {
         // 检查是否有足够的步骤
         if proof.steps.is_empty() {

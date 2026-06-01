@@ -64,7 +64,6 @@ impl ServiceRegistry {
     }
 
     /// 获取服务实例列表
-    /// Get servicelist
     async fn get_service_instances(&self, service_name: &str) -> Vec<ServiceInstance> {
         let services = self.services.read().await;
         services
@@ -144,7 +143,6 @@ impl CircuitBreaker {
     }
 
     /// 执行操作，应用熔断逻辑
-    /// ，application
     async fn call<F, Fut, T>(&self, operation: F) -> Result<T, anyhow::Error>
     where
         F: FnOnce() -> Fut,
@@ -165,7 +163,6 @@ impl CircuitBreaker {
     }
 
     /// 检查是否可以执行操作
-    /// whethercanexecution operation
     fn can_execute(&self) -> bool {
         let state = self.state.load(Ordering::Relaxed);
         match state {
@@ -236,7 +233,6 @@ async fn simulate_service_call(service_name: &str, instance: &ServiceInstance) -
 }
 
 /// 服务发现和负载均衡测试
-/// servicenegative test
 async fn test_service_discovery_and_lb() {
     println!("🚀 服务发现和负载均衡测试");
     println!("{}", "=".repeat(50));

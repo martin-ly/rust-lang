@@ -59,7 +59,6 @@ fn test_open_range_parsing() {
 /// 在 2024 Edition 中，`impl Trait` 的隐式生命周期捕获规则更严格。
 /// in 2024 Edition in ，`impl Trait` lifetime rule 。
 /// `use<'a>` 语法允许显式声明需要捕获哪些生命周期。
-/// `use<'a>` lifetime 。
 pub trait Parser<'a> {
     fn parse(&self, input: &'a str) -> impl Iterator<Item = &'a str> + use<'a, Self>;
 }

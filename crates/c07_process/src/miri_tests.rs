@@ -61,7 +61,6 @@ struct ProcessInfo {
 }
 
 /// 测试目的: 验证进程信息结构内存布局
-/// Test : verifyprocessinformationmemory
 /// 测试场景: 检查对齐和大小
 /// Test : largesmall
 /// 预期结果: 应该满足 C ABI 要求
@@ -76,7 +75,6 @@ fn test_process_info_layout() {
 }
 
 /// 测试目的: 验证安全的进程信息初始化
-/// Test : verifysafetyprocessinformationinitial
 /// 测试场景: 使用 MaybeUninit 初始化结构体
 /// Test : use MaybeUninit initialstruct
 /// 预期结果: 应该正确初始化所有字段
@@ -174,7 +172,6 @@ impl SigSet {
 /// 测试目的: 验证信号集合操作
 /// Test : verifysetoperation
 /// 测试场景: 添加和检查信号
-/// Test :
 /// 预期结果: 应该正确管理信号位
 /// result : should
 #[test]
@@ -202,7 +199,6 @@ struct RLimit {
 /// 测试场景: 创建 RLimit 并检查值
 /// Test : create RLimit value
 /// 预期结果: 当前值应该不超过最大值
-/// result: currentvalueshouldmaximum value
 #[test]
 fn test_rlimit_struct() {
     let limit = RLimit {

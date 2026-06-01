@@ -160,7 +160,6 @@ pub fn get_rust_version() -> &'static str {
 }
 
 /// 重新导出主题化模块的主要类型
-/// newmodule type
 pub use topics::{
     AlgorithmBenchmark, AlgorithmCategory, AlgorithmInfo, BenchmarkResult, ComplexityAnalyzer,
     ImplementationType, LibraryStats, get_library_stats,

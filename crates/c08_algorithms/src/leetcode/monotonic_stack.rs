@@ -17,8 +17,6 @@ use std::collections::VecDeque;
 // ==================== 经典题目实现 ====================
 
 /// 42. Trapping Rain Water（接雨水）- 单调栈版本
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
 /// n represent as 1 ，this arrangement ，under 's after 。
@@ -56,8 +54,6 @@ pub fn trap(height: Vec<i32>) -> i32 {
 }
 
 /// 84. Largest Rectangle in Histogram（柱状图中最大的矩形）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。
 /// n ，represent in 。this ，and as 1 。
@@ -98,8 +94,6 @@ pub fn largest_rectangle_area(heights: Vec<i32>) -> i32 {
 }
 
 /// 85. Maximal Rectangle（最大矩形）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个仅包含 0 和 1 、大小为 rows x cols 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。
 /// 0 and 1 、as rows x cols ， 1 maximum ，and its surface 。
@@ -140,8 +134,7 @@ pub fn maximal_rectangle(matrix: Vec<Vec<char>>) -> i32 {
 }
 
 /// 239. Sliding Window Maximum（滑动窗口最大值）
-///
-/// ## 问题描述
+/// 239. Sliding Window Maximum
 /// ## Problem Description
 /// 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。
 /// nums，as k from to 。
@@ -153,7 +146,6 @@ pub fn maximal_rectangle(matrix: Vec<Vec<char>>) -> i32 {
 /// ## Rust 1.92 特性应用
 /// ## Rust 1.92 Feature Application
 /// - **单调队列**: 使用双端队列维护单调递减序列
-/// - ****: sequence
 ///
 /// ## 复杂度
 /// ## Complexity
@@ -189,8 +181,6 @@ pub fn max_sliding_window(nums: Vec<i32>, k: i32) -> Vec<i32> {
 }
 
 /// 496. Next Greater Element I（下一个更大元素 I）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。
 /// nums1 in x under element x in nums2 in to position first x element 。
@@ -228,8 +218,6 @@ pub fn next_greater_element(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
 }
 
 /// 503. Next Greater Element II（下一个更大元素 II）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个循环数组 nums，返回 nums 中每个元素的 下一个更大元素。
 /// circulation nums， nums in element under element 。
@@ -269,7 +257,6 @@ pub fn next_greater_elements(nums: Vec<i32>) -> Vec<i32> {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有单调栈类问题
-/// Get hassinglestackproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

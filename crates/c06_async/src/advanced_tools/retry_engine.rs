@@ -119,7 +119,6 @@ pub enum RetryCondition {
     /// according to error type
     OnErrorType(Vec<String>),
     /// 根据错误消息重试
-    /// according to
     OnErrorMessage(String),
 }
 
@@ -180,7 +179,6 @@ pub struct RetryEngine {
 
 impl RetryEngine {
     /// 创建新的重试引擎
-    /// createnew engine
     pub fn new(config: RetryConfig) -> Self {
         Self {
             config,
@@ -189,7 +187,7 @@ impl RetryEngine {
     }
 
     /// 执行带重试的异步操作
-    /// executionasync operation
+    /// Execute async operation with retry
     pub async fn execute<F, Fut, T>(&self, mut operation: F) -> RetryResult<T>
     where
         F: FnMut() -> Fut,
@@ -279,7 +277,6 @@ impl RetryEngine {
     }
 
     /// 获取重试统计信息
-    /// Get information
     pub async fn get_stats(&self) -> RetryStats {
         self.stats.lock().await.clone()
     }
@@ -373,7 +370,6 @@ impl RetryEngineBuilder {
     }
 
     /// 设置最大重试次数
-    /// Set maximum
     pub fn max_attempts(mut self, max_attempts: u32) -> Self {
         self.config.max_attempts = max_attempts;
         self
@@ -401,7 +397,6 @@ impl RetryEngineBuilder {
     }
 
     /// 设置是否添加抖动
-    /// Set whether
     pub fn jitter(mut self, jitter: bool) -> Self {
         self.config.jitter = jitter;
         self
@@ -420,7 +415,6 @@ impl Default for RetryEngineBuilder {
 }
 
 /// 便捷宏用于快速创建重试操作
-/// fastcreate operation
 #[macro_export]
 macro_rules! retry {
     ($engine:expr, $operation:expr) => {{ $engine.execute(|| async { $operation }).await }};

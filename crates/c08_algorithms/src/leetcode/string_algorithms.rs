@@ -12,30 +12,20 @@
 //! - **内存优化**: 使用 `try_reserve_exact` 精确分配
 //! - **memory optimization **: `try_reserve_exact`
 //! - **新的稳定 API**: `str::split_ascii_whitespace` 等
-//!
-//! ## 包含的经典题目
 //! ## Classic Problems
 //!
 //! - 3. Longest Substring Without Repeating Characters（无重复字符的最长子串）
-//! - 14. Longest Common Prefix（最长公共前缀）
 //! - 20. Valid Parentheses（有效的括号）
-//! - 28. Find the Index of the First Occurrence in a String（找出字符串中第一个匹配项的下标）
 //! - 125. Valid Palindrome（验证回文串）
-//! - 344. Reverse String（反转字符串）
 //! - 383. Ransom Note（赎金信）
-//! - 387. First Unique Character in a String（字符串中的第一个唯一字符）
 //! - 392. Is Subsequence（判断子序列）
-//! - 409. Longest Palindrome（最长回文串）
 //! - 415. Add Strings（字符串相加）
 //! - 415. Add Strings（）
 //! - 434. Number of Segments in a String（字符串中的单词数）
-//! - 459. Repeated Substring Pattern（重复的子字符串）
 //! - 541. Reverse String II（反转字符串 II）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 14. Longest Common Prefix（最长公共前缀）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 `""`。
 /// function in before 。if in before ， `""`。
@@ -73,11 +63,8 @@ pub fn longest_common_prefix(strs: Vec<String>) -> String {
 }
 
 /// 20. Valid Parentheses（有效的括号）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个只包括 `'('`，`')'`，`'{'`，`'}'`，`'['`，`']'` 的字符串 `s`，判断字符串是否有效。
-/// `'('`，`')'`，`'{'`，`'}'`，`'['`，`']'` `s`，effective 。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -122,8 +109,6 @@ pub fn is_valid_parentheses(s: String) -> bool {
 }
 
 /// 28. Find the Index of the First Occurrence in a String（找出字符串中第一个匹配项的下标）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你两个字符串 `haystack` 和 `needle`，请你在 `haystack` 字符串中找出 `needle` 字符串的第一个匹配项的下标（下标从 0 开始）。
 /// `haystack` and `needle`，in `haystack` in `needle` first under （under from 0 ）。
@@ -166,8 +151,6 @@ pub fn str_str(haystack: String, needle: String) -> i32 {
 }
 
 /// 383. Ransom Note（赎金信）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你两个字符串：`ransomNote` 和 `magazine`，判断 `ransomNote` 能不能由 `magazine` 里面的字符构成。
 /// ：`ransomNote` and `magazine`， `ransomNote` cannot `magazine` surface 。
@@ -215,8 +198,6 @@ pub fn can_construct(ransom_note: String, magazine: String) -> bool {
 }
 
 /// 387. First Unique Character in a String（字符串中的第一个唯一字符）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个字符串 `s`，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 `-1`。
 /// `s`，to first ，and 。if in ， `-1`。
@@ -260,13 +241,10 @@ pub fn first_uniq_char(s: String) -> i32 {
 }
 
 /// 392. Is Subsequence（判断子序列）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定字符串 `s` 和 `t`，判断 `s` 是否为 `t` 的子序列。字符串的一个子序列是原始字符串删除一些（也可以不删除）
 /// `s` and `t`， `s` as `t` sequence 。sequence （can ）
 /// 字符而不改变剩余字符相对位置形成的新字符串。
-/// while to position 。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -305,11 +283,8 @@ pub fn is_subsequence(s: String, t: String) -> bool {
 }
 
 /// 409. Longest Palindrome（最长回文串）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个包含大写字母和小写字母的字符串 `s`，返回通过这些字母构造成的最长回文串的长度。
-/// and `s`，。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -407,16 +382,12 @@ pub fn add_strings(num1: String, num2: String) -> String {
 }
 
 /// 434. Number of Segments in a String（字符串中的单词数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。
-/// in ，。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
 /// - **新的稳定 API**: 使用 `str::split_ascii_whitespace`
-/// - **JIT 优化**: 字符串分割性能提升
 /// - **JIT optimization**: stringperformance improvement
 ///
 /// ## 复杂度
@@ -431,11 +402,8 @@ pub fn count_segments(s: String) -> i32 {
 }
 
 /// 459. Repeated Substring Pattern（重复的子字符串）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个非空的字符串 `s`，检查它是否可以由它的一个子串重复多次构成。
-/// `s`，can 。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -470,7 +438,6 @@ pub fn repeated_substring_pattern(s: String) -> bool {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有字符串类问题
-/// Get hasstringproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

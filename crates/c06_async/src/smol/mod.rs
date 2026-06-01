@@ -32,14 +32,12 @@
 //! - **标准异步接口**: 与 tokio、async-std 等运行时兼容
 //! - **standard async **: and tokio、async-std etc. runtime
 //! - **跨平台支持**: 支持 Windows、Linux、macOS
-//! - **嵌入式友好**: 适合资源受限的环境
 //! - ****: environment
 //!
 //! ## 使用场景
 //! ## Usage Scenarios
 //!
 //! 1. **轻量级应用**: 不需要完整运行时功能的应用
-//! 1. **lightweightapplication**: needcompleteruntime application
 //! 2. **嵌入式系统**: 资源受限的环境
 //! 2. **system **: environment
 //! 3. **命令行工具**: 简单的异步 CLI 应用
@@ -96,7 +94,6 @@
 //! ## Notes
 //!
 //! - Smol 功能相对简单，不适合复杂的异步应用
-//! - Smol singleasync application
 //! - 对于需要丰富功能的项目，建议使用 Tokio
 //! - to functionality project ， Tokio
 //! - 适合学习和原型开发
@@ -121,7 +118,6 @@
 /// 这个函数展示了 Smol 运行时的一些基本特性：
 /// function Smol runtime this feature ：
 /// - 轻量级的任务创建
-/// - task
 /// - 简单的异步执行
 /// - simple async
 /// - 基本的并发处理
@@ -167,7 +163,6 @@ pub async fn demo_basic_usage() {
 /// 这个函数展示了如何使用 Smol 进行异步 I/O 操作。
 /// function Smol async I/O 。
 /// 包括计时器、网络请求等常见的异步操作。
-/// 、network etc. async 。
 ///
 /// # 示例
 /// # Examples

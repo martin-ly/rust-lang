@@ -1,5 +1,4 @@
 //! 编译时优化实践示例
-//! compile-timeoptimizationpractice example
 //!
 //! 本模块演示Rust中的编译时优化技术：
 //! this module demonstration Rustin compile-time optimization technique ：
@@ -25,7 +24,6 @@ pub const fn fibonacci(n: u32) -> u32 {
 }
 
 /// 编译时数组初始化
-/// compile-time
 pub const fn create_lookup_table() -> [u32; 10] {
     let mut table = [0; 10];
     let mut i = 0;
@@ -37,11 +35,9 @@ pub const fn create_lookup_table() -> [u32; 10] {
 }
 
 /// 编译时优化的查找表
-/// compile-timeoptimizationsearch table
 pub static FIBONACCI_TABLE: [u32; 10] = create_lookup_table();
 
 /// 泛型优化的向量操作
-/// genericoptimizationvector operation
 pub struct OptimizedVector<T, const N: usize> {
     data: [T; N],
     len: usize,
@@ -99,19 +95,16 @@ impl<T> CompileTimeCheck for T {
 }
 
 /// 编译时优化的字符串处理
-/// compile-timeoptimizationstring processing
 pub const fn string_length(s: &str) -> usize {
     s.len()
 }
 
 /// 编译时优化的数学运算
-/// compile-time optimization
 pub const fn power_of_two(n: u32) -> u32 {
     1 << n
 }
 
 /// 编译时优化的位操作
-/// compile-timeoptimization operation
 pub const fn count_bits(mut n: u32) -> u32 {
     let mut count = 0;
     while n > 0 {

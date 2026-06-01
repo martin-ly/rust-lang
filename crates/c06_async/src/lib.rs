@@ -16,17 +16,14 @@
 //! ## Module Organization
 //!
 //! ### 理论基础模块 (Theoretical Foundations)
-//!
-//! - [`async_semantics_theory`] - 异步语义理论、形式化定义、等价关系证明
+//! ### Theoretical Foundations Modules
 //! - [`async_semantics_theory`] - Async semantics theory, formal definitions, equivalence proofs
 //! - [`async_recursion_analysis`] - 异步递归深度分析、尾递归优化、迭代等价
 //! - [`async_recursion_analysis`] - Async recursion deep analysis, tail recursion optimization, iteration equivalence
 //! - [`actor_reactor_patterns`] - Actor/Reactor 模式、调度机制、并发模型
-//! - [`csp_model_comparison`] - CSP 模型对比 (Rust vs Golang)、语义差异
 //!
 //! ### 核心异步原语 (Core Async Primitives)
-//!
-//! - [`futures`] - Future 状态机、组合子、调度机制
+//! ### Core Async Primitives
 //! - [`futures`] - Future state machines, combinators, scheduling mechanisms
 //! - [`streams`] - Stream 处理、异步迭代器、背压控制
 //! - [`streams`] - Stream handling, async iterators, backpressure control
@@ -41,8 +38,7 @@
 //! - [`async_runtime`] - Runtime comparison and selection
 //!
 //! ### Actor 模型与消息传递 (Actor Model)
-//!
-//! - [`actix`] - Actix Actor 框架基础
+//! ### Actor Model and Message Passing
 //!
 //! ### 高级工具与模式 (Advanced Tools)
 //! ### Advanced Tools and Patterns
@@ -53,8 +49,7 @@
 //! - [`advanced_tools`] - Batch processing, task management, retry engines
 //!
 //! ### Rust 1.95 特性 (Rust 1.95 Features)
-//!
-//! - [`rust_195_features`] - Rust 1.95 异步新特性
+//! ### Rust 1.95 Features
 //!   - if let guards 用于异步状态机匹配
 //!   - if let guards for async state machine matching
 //!   - bool 转浮点数用于异步数值计算
@@ -63,25 +58,19 @@
 //!   - RangeInclusive optimization for async iteration
 //!
 //! ### Rust 1.94 历史特性 (Rust 1.94 Historical Features)
-//!
-//! - [`rust_194_features`] - Rust 1.94 异步历史特性
+//! ### Rust 1.94 Historical Features
 //!   - array_windows 用于异步数据流处理
 //!   - array_windows for async data flow processing
 //!   - LazyCell/LazyLock 用于异步缓存
-//!   - 数学常量用于异步算法
 //!   - Mathematical constants for async algorithms
 //!
 //! ### 生态系统集成 (Ecosystem Integration)
-//!
-//! - [`async_ecosystem_comprehensive`] - 生态系统全面分析
+//! ### Ecosystem Integration
 //! - [`async_ecosystem_comprehensive`] - Comprehensive ecosystem analysis
 //! - [`async_runtime_examples`] - 运行时示例
 //! - [`async_runtime_examples`] - Runtime examples
 //! - [`async_runtime_integration_framework_simple`] - 简化集成
-//! - [`async_logging_debugging`] - 日志与调试
 //! - [`async_debugging_advanced`] - 高级调试技术
-//!
-//! ## 快速开始
 //! ## Quick Start
 //!
 //! ### 理论学习路径
@@ -104,7 +93,7 @@
 //!     async_recursion_analysis::run_all_examples().await;
 //!
 //!     // 3. 掌握并发模式
-//!   // 3. Master concurrency patterns
+//!     // 3. Master concurrency patterns
 //!     actor_reactor_patterns::run_all_examples().await;
 //!
 //!     // 4. 对比 CSP 模型
@@ -123,7 +112,7 @@
 //! #[tokio::main]
 //! async fn main() -> anyhow::Result<()> {
 //!     // 构建执行策略
-//!   // Build execution strategy
+//!     // Build execution strategy
 //!     let runner = ExecStrategyBuilder::new()
 //!         .concurrency(8)
 //!         .attempts(5)
@@ -155,7 +144,6 @@
 //! ### 🌟
 //!
 //! - **[知识分类体系](../docs/COMPREHENSIVE_ASYNC_KNOWLEDGE_CLASSIFICATION_2025.md)** ⭐⭐⭐
-//!   - 完整的知识分类: 语言特性、框架特性、库特性、设计模式、架构模式
 //! - complete: languagefeaturesfeatureslibraryfeaturesdesignpattern pattern
 //!   - 113+ 个知识点分类，180+ 个代码示例
 //! - 113+ 180+ example
@@ -169,7 +157,6 @@
 //!   - Reactor、Actor、CSP 三大模式完整分析
 //! - ReactorActorCSP largepatterncomplete analysis
 //!   - 设计模式、性能优化、错误处理完整实现
-//! - designpatternperformanceoptimizationerrorhandlingcomplete implementation
 //!
 //! - **[快速入门指南](../异步编程全面梳理_README_2025_10_06.md)** ⭐⭐
 //! - **[fast ](../async surface _README_2025_10_06.md)** ⭐⭐
@@ -181,7 +168,6 @@
 //!   - learn
 //!
 //! - **[实现总结](../docs/COMPREHENSIVE_ASYNC_IMPLEMENTATION_SUMMARY_2025.md)** ⭐
-//!   - 架构模式详细分析
 //! - pattern analysis
 //!   - 完整度统计
 //!   - complete
@@ -195,48 +181,36 @@
 //! ### 🎯 2025core example ()
 //!
 //! - **[Reactor 模式完整实现](../examples/reactor_pattern_comprehensive_2025.rs)** ⭐⭐⭐
-//!   ```bash
 //!   cargo run --example reactor_pattern_comprehensive_2025
 //!   ```
 //!   - 1,800+ 行完整实现，包含形式化定义和性质证明
-//! - 1,800+ completeimplementationcontainformal proof
 //!   - 优先级调度、批处理优化、性能基准测试
-//! - excellentschedulinghandlingoptimizationperformance test
 //!   - 网络I/O、定时器、用户输入等实际应用示例
-//! - I/Oapplication example
 //!
 //! - **[Actor 模式完整实现](../examples/actor_pattern_comprehensive_2025.rs)** ⭐⭐⭐
-//!   ```bash
 //!   cargo run --example actor_pattern_comprehensive_2025
 //!   ```
 //!   - 2,100+ 行完整实现，包含形式化定义和性质证明
-//! - 2,100+ completeimplementationcontainformal proof
 //!   - 银行账户系统应用 (存款、取款、转账、事务回滚)
-//!   - system application (、、、)
 //!   - Actor 生命周期管理、监督策略、性能测试
 //! - Actor lifetimemanagementperformance test
 //!
 //! - **[终极理论与实践指南 2025](../examples/ultimate_async_theory_practice_2025.rs)** ⭐⭐⭐
-//!   ```bash
 //!   cargo run --example ultimate_async_theory_practice_2025
 //!   ```
 //!   - Actor/Reactor/CSP 三种模式的数学模型和完整实现
 //! - Actor/Reactor/CSP patterncomplete implementation
 //!   - 异步设计模式 (Builder, Factory, Adapter, Strategy, Observer)
-//!   - 1,500+ 行深度注释代码
 //!   - 1,500+
 //!
 //! - **[Tokio & Smol 最新特性 2025](../examples/tokio_smol_latest_features_2025.rs)** ⭐⭐⭐
-//!   ```bash
 //!   cargo run --example tokio_smol_latest_features_2025
 //!   ```
 //!   - Tokio 1.41+ 新特性: JoinSet, TaskLocal, Runtime Metrics
-//!   - Smol 2.0+ 新特性: 轻量级 Executor, async-io 集成
 //!   - 性能对比和基准测试
 //! - performance test
 //!
 //! - **[异步性能优化完整指南 2025](../examples/async_performance_optimization_2025.rs)** ⭐⭐
-//!   ```bash
 //!   cargo run --example async_performance_optimization_2025 --release
 //!   ```
 //!   - 对象池 (减少 50-80% 分配开销)
@@ -247,7 +221,6 @@
 //!   - SIMD vectorization (2-8x performance )
 //!
 //! - **[异步调试与监控完整指南 2025](../examples/async_debugging_monitoring_2025.rs)** ⭐⭐
-//!   ```bash
 //!   cargo run --example async_debugging_monitoring_2025
 //!   ```
 //!   - Tracing 结构化日志
@@ -258,7 +231,6 @@
 //! - system
 //!
 //! - **[综合异步模式 2025](../examples/comprehensive_async_patterns_2025.rs)** ⭐⭐
-//!   ```bash
 //!   cargo run --example comprehensive_async_patterns_2025
 //!   ```
 //!   - Actor、Reactor、CSP 模式实际应用
@@ -268,11 +240,9 @@
 //!   - 1,100+ complete
 //!
 //! - **[CSP 模式完整实现](../examples/csp_pattern_comprehensive_2025.rs)** ⭐⭐⭐
-//!   ```bash
 //!   cargo run --example csp_pattern_comprehensive_2025
 //!   ```
 //!   - 1,100+ 行完整实现，包含形式化定义和性质证明
-//! - 1,100+ completeimplementationcontainformal proof
 //!   - 数据处理流水线、分布式任务调度、实时日志聚合
 //!   - pipeline 、distribution task 、aggregation
 //!   - 基本通信、Select 多路复用、性能基准测试
@@ -282,12 +252,8 @@
 //! ### example
 //!
 //! - 基础示例: `examples/tokio_smoke.rs`, `examples/futures_smoke.rs`
-//! - Actor 示例: `examples/actix_basic.rs`
 //! - 工具示例: `examples/utils_strategy_smoke.rs`
-//! - 混合模式: `examples/actor_csp_hybrid_minimal.rs`
 //! - API 网关: `examples/async_api_gateway_2025.rs`
-//!
-//! 提示：更多示例请查看 `examples/` 目录及各模块顶部文档注释。
 //! hint ：example `examples/` and module 。
 // ============================================================================
 // 理论基础模块 (Theoretical Foundations)
@@ -298,11 +264,9 @@
 pub mod async_semantics_theory;
 
 /// 异步递归分析 - 递归与迭代等价、尾递归优化、形式证明
-/// asyncanalysis - optimization proof
 pub mod async_recursion_analysis;
 
 /// 统一错误处理模块
-/// errorhandling module
 pub mod error;
 
 /// Actor 与 Reactor 模式 - 并发模型、调度机制、实现对比
@@ -314,7 +278,6 @@ pub mod actor_reactor_patterns;
 pub mod csp_model_comparison;
 
 /// 形式化验证与证明 - 不变式、终止性、死锁检测
-/// and - 、、lock
 pub mod formal_verification;
 
 // ============================================================================
@@ -371,7 +334,6 @@ pub mod utils;
 /// 本 crate 的部分示例代码仍使用 `#[async_trait::async_trait]`，原因如下：
 /// this crate part example `#[async_trait::async_trait]`，cause under ：
 /// - Rust 1.75.0 AFIT (async fn in trait) 已稳定，但**不支持 trait object (`dyn Trait`)**
-/// - AFIDT (async fn in dyn trait) 预计 1.97-1.98 稳定，当前仍需 nightly
 /// - 教学代码需要在 `dyn Trait` 场景下演示，因此 `async_trait` 仍是必要 workaround
 /// - in `dyn Trait` scenario under demonstration ，therefore `async_trait` workaround
 /// - 详见 [`afit_dyn_tracking`] 模块的对比分析
@@ -393,7 +355,7 @@ pub mod async_closures_preview;
 // ============================================================================
 
 /// 异步生态系统全面分析
-/// asyncsystemcomprehensive analysis
+/// Async Ecosystem Comprehensive Analysis
 pub mod async_ecosystem_comprehensive;
 pub mod rust_186_features;
 pub mod rust_187_features;
@@ -404,7 +366,6 @@ pub mod rust_191_features;
 pub mod rust_192_features;
 pub mod rust_193_features;
 /// Rust 1.95.0 异步特性 (if let guards 场景)
-/// 注: 1.94 历史特性见 rust_194_features 模块
 /// : 1.94 historicalfeatures rust_194_features module
 pub mod rust_194_features;
 pub mod rust_195_features; // Rust 1.95.0 特性 (async 场景 if let guards)
@@ -425,7 +386,6 @@ pub mod async_runtime_internals;
 pub mod async_integration_framework;
 
 /// 简化异步集成框架
-/// asyncintegration framework
 pub mod async_runtime_integration_framework_simple;
 
 /// 异步日志与调试

@@ -240,9 +240,9 @@ impl SmolRuntime {
 }
 
 /// 异步运行时管理器
-/// asyncruntime manager
+/// Async runtime manager
 /// 实现聚合模式，统一管理多个运行时
-/// implementationpatternmanagementmultiple runtime
+/// Implement aggregate pattern, uniformly manage multiple runtimes
 #[allow(dead_code)]
 pub struct AsyncRuntimeManager {
     runtimes: Arc<RwLock<HashMap<String, AsyncRuntime>>>,
@@ -326,7 +326,7 @@ impl AsyncRuntimeManager {
     }
 
     /// 获取所有运行时状态
-    /// Get hasruntimestatus
+    /// Get all runtime states
     pub async fn get_all_status(&self) -> Vec<RuntimeStatus> {
         let runtimes = self.runtimes.read().await;
         let mut statuses = Vec::new();
@@ -389,7 +389,7 @@ impl<T> AsyncTaskWrapper<T> {
 }
 
 /// 异步日志记录器接口
-/// asynclogging interface
+/// Async logger interface
 #[async_trait::async_trait]
 pub trait AsyncLogger: Send + Sync {
     async fn log_task_start(&self, task_id: &str);
@@ -398,7 +398,7 @@ pub trait AsyncLogger: Send + Sync {
 }
 
 /// 简单异步日志记录器实现
-/// singleasynclogging implementation
+/// Simple async logger implementation
 #[allow(dead_code)]
 pub struct SimpleAsyncLogger;
 
@@ -649,7 +649,7 @@ mod tests {
     }
 
     #[tokio::test]
-#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_task_wrapper() {
         let logger = Arc::new(SimpleAsyncLogger);
         let task_id = "test_task".to_string();

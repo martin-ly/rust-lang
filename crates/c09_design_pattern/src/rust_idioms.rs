@@ -35,14 +35,11 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 /// - 每个状态是一个独立的类型
 /// - status type
 /// - 状态转换通过消耗旧值并返回新值来实现
-/// - statusconversionoldvaluenewvalue implementation
 /// - 只能在特定状态下调用的方法，只在该状态的类型上实现
-/// - statuslowermethodstatustypeupper implementation
 ///
 /// ## 优势
 /// ## strength
 /// - 编译期保证状态正确性，无需运行时检查
-/// - state ，runtime
 /// - 状态转换清晰明确，API 自文档化
 /// - state conversion clear explicit ，API
 /// - 消除大量 `unwrap` 和无效状态的分支
@@ -53,7 +50,6 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 /// - 类型数量增加，代码量膨胀
 /// - type quantity ，
 /// - 学习曲线更陡峭，对初学者不够友好
-/// - learn line ，to
 /// - 某些场景下需要泛型参数传递，增加复杂度
 /// - scenario under generic parameter ，complex
 ///
@@ -81,7 +77,6 @@ impl TypestatePattern {
     }
 
     /// 返回该模式的权衡说明
-    /// this explain
     pub fn trade_offs() -> &'static str {
         "权衡：更多类型定义、更陡峭的学习曲线、可能增加代码冗余。"
     }
@@ -102,7 +97,6 @@ pub struct FileClosed {
 }
 
 /// 文件已打开（可读写）
-/// （）
 pub struct FileOpen {
     path: PathBuf,
     // 模拟文件描述符
@@ -178,7 +172,6 @@ impl FileOpen {
 
 impl FileReading {
     /// 模拟读取数据，返回读取到的字节数
-    /// ，to
     pub fn read_bytes(&mut self, buf: &mut [u8]) -> usize {
         let n = buf.len();
         self.position += n;
@@ -186,7 +179,6 @@ impl FileReading {
     }
 
     /// 获取当前读取位置
-    /// Get current
     pub fn position(&self) -> usize {
         self.position
     }
@@ -261,7 +253,6 @@ pub struct HttpRequestBuilt {
 
 impl HttpRequestBuilderNoUrl {
     /// 创建新的请求构建器
-    /// builder
     pub fn new() -> Self {
         Self
     }
@@ -314,7 +305,6 @@ impl HttpRequestBuilderHasMethod {
 
 impl HttpRequestBuilderReady {
     /// 添加额外的请求头
-    /// outside
     pub fn header(mut self, key: impl Into<String>, value: impl Into<String>) -> Self {
         self.headers.push((key.into(), value.into()));
         self
@@ -349,11 +339,8 @@ impl HttpRequestBuilderReady {
 /// ## 核心思想
 /// ## core thought
 /// - 用编译器区分不同语义但底层相同的类型
-/// - type
 /// - 在不改变运行时开销的前提下增强类型安全
-/// - runtimefrontlowerstrongtype safety
 /// - 为基础类型提供自定义的行为实现
-/// - typeprovidecustom implementation
 ///
 /// ## 优势
 /// ## strength
@@ -362,7 +349,6 @@ impl HttpRequestBuilderReady {
 /// - 可为基础类型实现外部 trait（孤儿规则绕过）
 /// - as foundation type outside trait（rule ）
 /// - 精确控制可见性和验证逻辑
-/// - and
 ///
 /// ## 常用派生
 /// ##
@@ -373,8 +359,6 @@ impl HttpRequestBuilderReady {
 /// - `Display`、`Debug`：自定义输出格式
 /// - `Display`、`Debug`：definition
 /// - `PartialEq`、`Eq`、`Hash`：用于集合和比较
-///
-/// ## 与类型别名的选择
 /// ## and type
 /// | 场景 | 推荐 |
 /// | scenario | |
@@ -433,7 +417,6 @@ impl Email {
     }
 
     /// 获取内部字符串引用
-    /// Get internalstringreference
     pub fn as_str(&self) -> &str {
         &self.0
     }
@@ -454,7 +437,6 @@ impl Deref for Email {
 }
 
 /// 摄氏度温度（防止与华氏度混用）
-/// （and ）
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Celsius(pub f64);
 
@@ -505,21 +487,16 @@ impl fmt::Display for Fahrenheit {
 /// - 将所有变体集中在枚举中定义
 /// - will all volume in in enum in definition
 /// - 通过 `match` 分派处理逻辑
-/// - `match`
 /// - 优点：静态分派、零开销、编译期穷尽检查
-/// - advantage ：、overhead 、
 /// - 缺点：添加新类型需要修改枚举定义
 /// - disadvantage ：type enum definition
 ///
 /// ## 方式二：trait 对象动态分派
 /// ## way ：trait to
 /// - 定义 `Visitor` trait 和 `Accept` trait
-/// - 通过 `dyn Trait` 实现运行时多态
 /// - `dyn Trait` runtime
 /// - 优点：易于扩展新类型（不修改现有代码）
-/// - advantage ：type （）
 /// - 缺点：动态分派开销、失去编译期穷尽检查
-/// - disadvantage ：overhead 、
 ///
 /// ## 何时使用
 /// ##
@@ -531,7 +508,6 @@ impl fmt::Display for Fahrenheit {
 /// - Rust enum way ，explicit
 ///
 /// ## 对比传统面向对象
-/// ## object
 /// | 特性 | 枚举 Visitor | Trait Visitor | 继承 Visitor |
 /// |------|-------------|---------------|-------------|
 /// | 分派方式 | 静态 | 动态 | 动态 |
@@ -552,7 +528,6 @@ impl VisitorPatternRust {
     }
 
     /// 返回何时使用该模式的建议
-    /// this
     pub fn when_to_use() -> &'static str {
         "当需要为稳定的数据结构添加多种不同操作，且希望避免修改原始类型时使用。"
     }
@@ -588,7 +563,6 @@ pub enum Expr {
 
 impl Expr {
     /// 创建字面量表达式
-    /// surface express
     pub fn lit(value: f64) -> Self {
         Self::Lit(value)
     }
@@ -736,7 +710,6 @@ pub struct BinaryNode {
 
 impl BinaryNode {
     /// 创建二元操作节点
-    /// createoperation node
     pub fn new(op: BinaryOp, lhs: Box<dyn AstNode>, rhs: Box<dyn AstNode>) -> Self {
         Self { op, lhs, rhs }
     }
@@ -757,7 +730,6 @@ pub struct UnaryNode {
 
 impl UnaryNode {
     /// 创建一元操作节点
-    /// createoperation node
     pub fn new(op: UnaryOp, operand: Box<dyn AstNode>) -> Self {
         Self { op, operand }
     }
@@ -783,7 +755,6 @@ impl EvalVisitor {
     }
 
     /// 执行求值，返回结果
-    /// executionvalue result
     pub fn eval(mut self, root: &dyn AstNode) -> Result<f64, String> {
         root.accept(&mut self);
         self.stack.pop().ok_or_else(|| "空表达式".to_string())
@@ -840,14 +811,12 @@ impl AstVisitor for EvalVisitor {
 /// ## 涵盖内容
 /// ## inside
 /// - RAII 守卫模式（Scope Guard）
-/// - `Into` 特质用于 ergonomic API 设计
 /// - `Into` ergonomic API design
 /// - 内部可变性决策树（Cell vs RefCell vs Atomic vs Mutex）
 pub struct OtherRustIdioms;
 
 impl OtherRustIdioms {
     /// 返回 RAII 守卫模式的说明
-    /// RAII explain
     pub fn raii_guard_description() -> &'static str {
         "RAII 守卫模式利用 Drop trait 在变量离开作用域时自动执行清理逻辑，确保资源安全释放。"
     }
@@ -860,7 +829,6 @@ impl OtherRustIdioms {
     }
 
     /// 返回错误累积模式的说明
-    /// explain
     pub fn error_accumulation_description() -> &'static str {
         "错误累积模式收集所有验证错误而非遇到第一个就返回，适用于配置解析和表单验证场景。"
     }
@@ -883,7 +851,6 @@ pub struct ScopeGuard<F: FnOnce()> {
 
 impl<F: FnOnce()> ScopeGuard<F> {
     /// 创建新的作用域守卫
-    /// role domain
     pub fn new(callback: F) -> Self {
         Self {
             callback: Some(callback),
@@ -891,7 +858,6 @@ impl<F: FnOnce()> ScopeGuard<F> {
     }
 
     /// 手动解除守卫（不再执行回调）
-    /// （）
     pub fn dismiss(mut self) {
         self.callback.take();
     }
@@ -959,7 +925,6 @@ impl ErrorAccumulator {
     }
 
     /// 条件验证：如果失败则累积错误
-    /// verify error
     pub fn validate(
         &mut self,
         field: impl Into<String>,
@@ -984,7 +949,6 @@ impl ErrorAccumulator {
     }
 
     /// 消耗自身，返回结果
-    /// ，result
     pub fn into_result(self) -> Result<(), Vec<ValidationError>> {
         if self.errors.is_empty() {
             Ok(())
@@ -1063,7 +1027,6 @@ impl RefCellLog {
     }
 
     /// 获取所有日志的克隆
-    /// Get haslogging
     pub fn get_all(&self) -> Vec<String> {
         self.entries.borrow().clone()
     }

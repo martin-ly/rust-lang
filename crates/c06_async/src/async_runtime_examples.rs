@@ -2,7 +2,6 @@
 //! Async Runtime Examples and Combined Patterns
 //!
 //! 本模块提供了各个异步运行时的具体使用示例，
-//! This module provides asyncruntimeuse
 //! 包括：std、tokio、smol的实际应用场景和组合模式。
 //! ：std、tokio、smolactual application scenario and combination 。
 //!
@@ -46,7 +45,7 @@ impl StdAsyncExamples {
     }
 
     /// 基础异步函数示例
-    /// asyncfunction example
+    /// Basic async function example
     pub async fn basic_async_function(&self, input: &str) -> Result<String> {
         // 模拟异步操作
         tokio::time::sleep(Duration::from_millis(100)).await;
@@ -67,7 +66,7 @@ impl StdAsyncExamples {
     }
 
     /// 异步错误处理示例
-    /// asyncerrorhandling example
+    /// Async error handling example
     pub async fn async_error_handling(&self, should_fail: bool) -> Result<String> {
         if should_fail {
             return Err(anyhow::anyhow!("模拟异步错误"));
@@ -112,7 +111,7 @@ impl TokioExamples {
     }
 
     /// 高性能并发处理示例
-    /// high-performanceconcurrenthandling example
+    /// High-performance concurrency example
     pub async fn high_performance_concurrent_processing(
         &self,
         tasks: Vec<String>,
@@ -158,7 +157,7 @@ impl TokioExamples {
     }
 
     /// 定时器和调度示例
-    /// scheduling example
+    /// Timer and scheduling example
     pub async fn timer_and_scheduling_example(&self) -> Result<()> {
         println!("⏰ Tokio 定时器和调度示例:");
 
@@ -207,7 +206,7 @@ impl AsyncStdExamples {
     }
 
     /// 标准库风格的异步文件操作
-    /// standardlibraryasyncfile operation
+    /// Standard library style async file operations
     pub async fn file_operations_example(&self) -> Result<()> {
         println!("📁 async-std 文件操作示例:");
 
@@ -263,7 +262,7 @@ impl AsyncStdExamples {
     }
 
     /// 标准库兼容性示例
-    /// standardlibrary example
+    /// Standard library compatibility example
     pub async fn std_compatibility_example(&self) -> Result<()> {
         println!("🔄 async-std 标准库兼容性示例:");
 
@@ -318,7 +317,7 @@ impl AsyncStdExamples {
 /// 4. smol runtime example
 ///
 /// 展示 smol 的轻量级特性
-/// smol feature
+/// Demonstrate smol lightweight features
 #[allow(unused)]
 pub struct SmolExamples {
     task_queue: Arc<Mutex<Vec<String>>>,
@@ -338,7 +337,7 @@ impl SmolExamples {
     }
 
     /// 轻量级任务调度示例
-    /// lightweighttaskscheduling example
+    /// Lightweight task scheduling example
     pub async fn lightweight_task_scheduling(&self) -> Result<()> {
         println!("⚡ smol 轻量级任务调度示例:");
 
@@ -378,7 +377,7 @@ impl SmolExamples {
     }
 
     /// 运行时兼容性示例
-    /// runtime example
+    /// Runtime compatibility example
     pub async fn runtime_compatibility_example(&self) -> Result<()> {
         println!("🔄 smol 运行时兼容性示例:");
 
@@ -454,7 +453,6 @@ impl SmolExamples {
 /// 5. runtimepattern example
 ///
 /// 展示如何组合不同的异步运行时
-/// demonstrateasync runtime
 #[allow(unused)]
 pub struct RuntimeCompositionExamples {
     runtime_selector: Arc<Mutex<String>>,
@@ -474,7 +472,7 @@ impl RuntimeCompositionExamples {
     }
 
     /// 运行时选择器模式
-    /// Run pattern
+    /// Runtime Selector Pattern
     pub async fn runtime_selector_pattern(&self, task_type: &str) -> Result<String> {
         println!("🎛️ 运行时选择器模式:");
 
@@ -496,7 +494,7 @@ impl RuntimeCompositionExamples {
     }
 
     /// 运行时适配器模式
-    /// Run pattern
+    /// Runtime Adapter Pattern
     pub async fn runtime_adapter_pattern(&self) -> Result<()> {
         println!("🔌 运行时适配器模式:");
 

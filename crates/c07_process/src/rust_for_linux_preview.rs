@@ -8,7 +8,6 @@
 //! # Concept Definitions
 //!
 //! [Rust for Linux](https://github.com/Rust-for-Linux/linux) 是 Linux 内核官方支持的
-//! Rust 开发框架，从内核 6.1 开始引入，允许用 Rust 编写内核模块、驱动程序。
 //! Rust framework ，from kernel 6.1 ， Rust kernel module 、driver program 。
 //!
 //! ## 认知必要性
@@ -27,7 +26,6 @@
 //! What:   用 Rust 替代 C 编写 Linux 内核模块
 //! What: Rust C Linux inner module
 //! How:    kernel crate + no_std + unsafe FFI + 内核 ABI
-//! When:   设备驱动、文件系统、网络协议栈
 //! When: filesystem stack
 //! Not:    不是用户态程序！没有 std，没有 libc，只有 core/alloc
 //! Not: program ！ std， libc， core/alloc
@@ -36,7 +34,6 @@
 //! # 权威来源
 //! # Authoritative Sources
 //! - 项目: [Rust-for-Linux](https://github.com/Rust-for-Linux/linux)
-//! - 文档: [docs.kernel.org/rust](https://docs.kernel.org/rust/)
 //! - 预计生产化: 内核 6.12+
 //! - : kernel 6.12+
 
@@ -107,7 +104,6 @@ impl KernelModuleBasics {
 /// 内核态 Rust 必须在 `#![no_std]` 环境下运行，这意味着：
 /// kernel Rust must in `#![no_std]` environment under Run ，：
 /// - 没有 `std::vec::Vec`（除非启用 `alloc`）
-/// - 没有 `std::println!`（使用 `pr_info!` / `pr_err!`）
 /// - 没有 `std::thread`（使用内核 API）
 /// - `std::thread`（kernel API）
 /// - 没有 panic 展开（必须设置 `panic = abort`）
@@ -116,7 +112,6 @@ pub struct NoStdKernelPatterns;
 
 impl NoStdKernelPatterns {
     /// 内核中的错误处理模式
-    /// innererrorhandling pattern
     pub fn kernel_error_handling() -> &'static str {
         "内核中没有 unwrap() 的奢侈：\n- 所有分配可能失败（返回 ENOMEM）\n- 使用 Result<T, Error> \
          传播错误\n- 关键路径使用 GFP_ATOMIC（不可睡眠）"
@@ -191,12 +186,8 @@ impl DeviceDriverFramework {
 /// 2. 配置内核（启用 CONFIG_RUST）
 /// 2. kernel （ CONFIG_RUST）
 ///    make menuconfig  # 选择 Device Drivers -> Rust support
-///
-/// 3. 编写 Rust 内核模块
 /// 3. Rust inner module
 ///    保存到 drivers/char/rust_example.rs
-///
-/// 4. 编译
 /// 4.
 ///    make LLVM=1 -j$(nproc)
 ///
@@ -204,8 +195,6 @@ impl DeviceDriverFramework {
 /// 5. module
 ///    insmod rust_example.ko
 ///    dmesg | tail  # 查看 pr_info! 输出
-///
-/// 6. 卸载
 /// 6.
 ///    rmmod rust_example
 /// ```
@@ -216,8 +205,6 @@ pub struct KernelBuildWorkflow;
 // ============================================================================
 
 /// # Rust for Linux 2026 趋势
-///
-/// | 里程碑 | 时间 | 状态 |
 /// | | time | state |
 /// |--------|------|------|
 /// | 内核 6.1 引入 Rust | 2022 | ✅ 完成 |

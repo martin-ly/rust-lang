@@ -155,7 +155,6 @@ pub fn count_range_sum_bit(nums: Vec<i32>, lower: i32, upper: i32) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有树状数组类问题
-/// Get hastreearrayproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

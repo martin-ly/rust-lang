@@ -6,7 +6,6 @@
 //! - `MaybeUninit` 在对象池模式中的应用
 //! - `MaybeUninit` objectpattern application
 //! - 关联项多边界在设计模式中的应用
-//! - multipleedgedesignpattern application
 //! - `Location::file_as_c_str` 在设计模式错误处理中的应用
 //! - `Location::file_as_c_str` designpatternerrorhandling application
 //!
@@ -26,7 +25,6 @@ use std::panic::Location;
 // ==================== 1. MaybeUninit 在对象池模式中的应用 ====================
 
 /// 使用 MaybeUninit 实现的对象池
-/// MaybeUninit to
 ///
 /// Rust 1.92.0: 改进的 MaybeUninit 文档和有效性检查
 /// Rust 1.92.0: MaybeUninit and effective
@@ -47,7 +45,6 @@ impl<T> ObjectPool<T> {
     }
 
     /// 从池中获取一个对象
-    /// get object
     ///
     /// Rust 1.92.0: 使用 MaybeUninit 确保安全性
     ///
@@ -56,13 +53,11 @@ impl<T> ObjectPool<T> {
     /// 调用者必须确保：
     /// must ：
     /// - 对象池已正确初始化
-    /// - to
     /// - 从池中获取的对象在使用完后必须正确归还
     /// - from in to in after must
     /// - 不会并发调用此方法
     /// - concurrent method
     /// - 返回的对象必须是有效的已初始化值
-    /// - objectmusthasinitial value
     pub unsafe fn acquire(&mut self) -> Option<T> {
         if self.size == 0 {
             return None;
@@ -79,7 +74,6 @@ impl<T> ObjectPool<T> {
     /// 调用者必须确保：
     /// must ：
     /// - 对象池未满（size < pool.len()）
-    /// - `obj` 是从同一个对象池获取的，或者是新创建的有效对象
     /// - `obj` objectgetnewcreatehas object
     /// - 不会并发调用此方法
     /// - concurrent method
@@ -93,7 +87,6 @@ impl<T> ObjectPool<T> {
     }
 
     /// 获取池中可用对象数量
-    /// Get objectcount
     pub fn available(&self) -> usize {
         self.size
     }
@@ -132,7 +125,6 @@ impl<T> Singleton<T> {
     }
 
     /// 获取单例实例的引用
-    /// Get singlereference
     pub fn get(&self) -> Option<&T> {
         if self.initialized {
             unsafe { Some(self.instance.assume_init_ref()) }
@@ -142,7 +134,6 @@ impl<T> Singleton<T> {
     }
 
     /// 获取单例实例的可变引用
-    /// Get singlemutablereference
     pub fn get_mut(&mut self) -> Option<&mut T> {
         if self.initialized {
             unsafe { Some(self.instance.assume_init_mut()) }
@@ -155,7 +146,6 @@ impl<T> Singleton<T> {
 // ==================== 2. 关联项多边界在设计模式中的应用 ====================
 
 /// 策略模式的 trait，使用关联项多边界
-/// strategy trait，edge
 ///
 /// Rust 1.92.0: 关联项现在支持多个边界
 /// Rust 1.92.0: present edge
@@ -172,7 +162,6 @@ where
 }
 
 /// 具体的排序策略实现
-/// sort implementation
 pub struct SortingStrategy;
 
 impl Strategy<Vec<i32>> for SortingStrategy {
@@ -201,7 +190,6 @@ impl std::fmt::Display for StrategyError {
 impl std::error::Error for StrategyError {}
 
 /// 上下文结构，使用策略模式
-/// contextuse pattern
 pub struct Context<T, S>
 where
     S: Strategy<T>,
@@ -229,7 +217,6 @@ where
 // ==================== 3. Location::file_as_c_str 在设计模式错误处理中的应用 ====================
 
 /// 设计模式错误，包含位置信息
-/// designpatternerrorcontain information
 #[derive(Debug, Clone)]
 pub struct PatternError {
     pub message: String,
@@ -264,7 +251,6 @@ impl std::fmt::Display for PatternError {
 impl std::error::Error for PatternError {}
 
 /// 工厂模式错误处理示例
-/// patternerrorhandling example
 #[derive(Debug)]
 pub struct FactoryError {
     inner: PatternError,
@@ -297,7 +283,6 @@ pub trait Factory<T> {
 }
 
 /// 简单的字符串工厂实现
-/// singlestring implementation
 pub struct StringFactory;
 
 impl Factory<String> for StringFactory {

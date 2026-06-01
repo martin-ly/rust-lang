@@ -19,7 +19,6 @@ pub trait IpcChannel: Send + Sync {
     fn name(&self) -> &str;
 
     /// 检查通道是否已关闭
-    /// channel
     fn is_closed(&self) -> bool;
 
     /// 关闭通道
@@ -151,7 +150,7 @@ impl IpcManager {
     }
 
     /// 获取通道统计信息
-    /// Get information
+    /// Get channel statistics
     pub fn get_channel_stats(&self, name: &str) -> Option<ChannelStats> {
         let channels = self.channels.lock().expect("IPC通道锁被污染");
         if channels.contains_key(name) {
@@ -162,7 +161,6 @@ impl IpcManager {
     }
 
     /// 发送消息到指定通道
-    /// to channel
     pub fn send_message(&self, channel_name: &str, msg: &Message<Vec<u8>>) -> IpcResult<()> {
         let channels = self.channels.lock().expect("IPC通道锁被污染");
         if let Some(channel) = channels.get(channel_name) {
@@ -180,7 +178,6 @@ impl IpcManager {
     }
 
     /// 从指定通道接收消息
-    /// from channel
     pub fn receive_message(&self, channel_name: &str) -> IpcResult<Message<Vec<u8>>> {
         let channels = self.channels.lock().expect("IPC通道锁被污染");
         if let Some(channel) = channels.get(channel_name) {
@@ -198,7 +195,6 @@ impl IpcManager {
     }
 
     /// 获取总体统计信息
-    /// Get information
     pub fn get_stats(&self) -> ChannelStats {
         self.stats.lock().expect("IPC统计锁被污染").clone()
     }

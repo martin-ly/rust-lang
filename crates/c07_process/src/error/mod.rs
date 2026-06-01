@@ -7,7 +7,6 @@ use thiserror::Error;
 pub mod enhanced;
 
 /// 进程管理相关错误
-/// processmanagement error
 #[derive(Error, Debug)]
 pub enum ProcessError {
     /// 进程创建失败
@@ -237,7 +236,6 @@ pub enum PlatformError {
     NotSupported(String),
 
     /// 平台特定功能缺失
-    /// platform functionality
     #[error("Platform-specific feature missing: {0}")]
     FeatureMissing(String),
 }
@@ -252,7 +250,6 @@ pub enum ConfigError {
     FileNotFound(String),
 
     /// 配置文件格式错误
-    /// configurationfile error
     #[error("Configuration file format error: {0}")]
     FormatError(String),
 
@@ -340,7 +337,6 @@ impl From<std::time::SystemTimeError> for C07ProcessError {
 }
 
 /// 错误结果类型别名
-/// result type
 pub type Result<T> = std::result::Result<T, C07ProcessError>;
 
 /// 进程结果类型别名
@@ -356,5 +352,4 @@ pub type IpcResult<T> = std::result::Result<T, IpcError>;
 pub type SyncResult<T> = std::result::Result<T, SyncError>;
 
 /// 资源结果类型别名
-/// result type
 pub type ResourceResult<T> = std::result::Result<T, ResourceError>;

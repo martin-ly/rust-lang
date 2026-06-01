@@ -17,7 +17,6 @@ pub struct Singleton<T> {
 }
 
 /// 支持Cell更新的单例变体
-/// Cellsingleton volume
 pub struct CellSingleton<T> {
     instance: Cell<Option<T>>,
 }
@@ -30,7 +29,6 @@ impl<T> Singleton<T> {
     }
 
     /// 获取单例实例，使用闭包进行延迟初始化
-    /// Get singleuseinitial
     pub fn get_instance<F>(&self, initializer: F) -> &T
     where
         F: FnOnce() -> T,
@@ -52,7 +50,6 @@ impl<T> CellSingleton<T> {
     }
 
     /// 使用Cell::update进行原子更新
-    /// Cell::update
     pub fn get_or_init<F>(&self, initializer: F) -> T
     where
         F: FnOnce() -> T,

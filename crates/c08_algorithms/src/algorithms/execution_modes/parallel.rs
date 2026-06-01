@@ -15,7 +15,6 @@ pub struct ParallelExecutor;
 
 impl ParallelExecutor {
     /// 执行并行算法并测量性能
-    /// executionparallelalgorithm performance
     pub fn execute_with_metrics<A, T, R>(
         algorithm: A,
         input: T,
@@ -43,7 +42,6 @@ impl ParallelExecutor {
     }
 
     /// 使用指定线程数执行并行算法
-    /// usethreadexecutionparallel algorithm
     pub fn execute_with_threads<A, T, R>(
         algorithm: A,
         input: T,
@@ -71,7 +69,6 @@ impl ParallelExecutor {
     }
 
     /// 批量执行并行算法
-    /// executionparallel algorithm
     pub fn execute_batch<A, T, R>(
         algorithm: A,
         inputs: Vec<T>,
@@ -88,7 +85,6 @@ impl ParallelExecutor {
     }
 
     /// 执行并行算法并返回详细统计信息
-    /// executionparallelalgorithm information
     pub fn execute_with_stats<A, T, R>(
         algorithm: A,
         input: T,
@@ -136,7 +132,6 @@ impl ParallelExecutor {
     }
 
     /// 测试不同线程数的性能
-    /// Test threadperformance
     pub fn benchmark_thread_scaling<A, T, R>(
         algorithm: A,
         input: T,
@@ -178,7 +173,6 @@ impl ParallelExecutor {
 }
 
 /// 并行执行统计信息
-/// parallelexecution information
 #[derive(Debug, Clone)]
 pub struct ParallelExecutionStats<T> {
     pub results: Vec<ExecutionResult<T>>,
@@ -211,7 +205,7 @@ impl<T> ParallelExecutionStats<T> {
     }
 
     /// 获取最小内存使用
-    /// Get minimummemoryuse
+    /// Get minimum memory usage
     pub fn min_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -221,7 +215,7 @@ impl<T> ParallelExecutionStats<T> {
     }
 
     /// 获取最大内存使用
-    /// Get maximummemoryuse
+    /// Get maximum memory usage
     pub fn max_memory_usage(&self) -> usize {
         self.results
             .iter()
@@ -231,7 +225,7 @@ impl<T> ParallelExecutionStats<T> {
     }
 
     /// 计算性能稳定性（变异系数）
-    /// Compute performance
+    /// Compute performance stability (coefficient of variation)
     pub fn performance_stability(&self) -> f64 {
         if self.average_execution_time.as_nanos() == 0 {
             return 0.0;
@@ -255,7 +249,6 @@ impl<T> ParallelExecutionStats<T> {
 }
 
 /// 线程扩展测试结果
-/// threadtest result
 #[derive(Debug, Clone)]
 pub struct ThreadScalingResult<T> {
     pub thread_count: usize,
@@ -265,7 +258,6 @@ pub struct ThreadScalingResult<T> {
 }
 
 /// 线程扩展测试结果集合
-/// threadtestresult set
 #[derive(Debug, Clone)]
 pub struct ThreadScalingResults<T> {
     pub results: Vec<ThreadScalingResult<T>>,
@@ -298,7 +290,6 @@ impl<T> ThreadScalingResults<T> {
     }
 
     /// 生成线程扩展报告
-    /// thread
     pub fn generate_report(&self) -> String {
         let mut report = String::new();
         report.push_str("=== 并行算法线程扩展报告 ===\n\n");
@@ -343,7 +334,6 @@ pub struct ParallelBenchmarker;
 
 impl ParallelBenchmarker {
     /// 运行并行基准测试
-    /// Run paralleltest
     pub fn benchmark<A, T, R>(
         algorithm: A,
         test_cases: Vec<ParallelBenchmarkTestCase<T>>,
@@ -373,7 +363,6 @@ impl ParallelBenchmarker {
     }
 
     /// 运行线程扩展基准测试
-    /// Run threadtest
     pub fn benchmark_thread_scaling<A, T, R>(
         algorithm: A,
         test_cases: Vec<ThreadScalingTestCase<T>>,
@@ -401,7 +390,6 @@ impl ParallelBenchmarker {
 }
 
 /// 并行基准测试用例
-/// parallelism benchmark
 #[derive(Debug, Clone)]
 pub struct ParallelBenchmarkTestCase<T> {
     pub name: String,
@@ -411,7 +399,6 @@ pub struct ParallelBenchmarkTestCase<T> {
 }
 
 /// 线程扩展测试用例
-/// thread
 #[derive(Debug, Clone)]
 pub struct ThreadScalingTestCase<T> {
     pub name: String,
@@ -421,7 +408,6 @@ pub struct ThreadScalingTestCase<T> {
 }
 
 /// 并行基准测试结果
-/// paralleltest result
 #[derive(Debug, Clone)]
 pub struct ParallelBenchmarkResult<T> {
     pub test_case: String,
@@ -430,7 +416,6 @@ pub struct ParallelBenchmarkResult<T> {
 }
 
 /// 并行基准测试结果集合
-/// paralleltestresult set
 #[derive(Debug, Clone)]
 pub struct ParallelBenchmarkResults<T> {
     pub results: Vec<ParallelBenchmarkResult<T>>,
@@ -446,7 +431,6 @@ impl<T> ParallelBenchmarkResults<T> {
     }
 
     /// 获取最高并行效率的测试用例
-    /// Get highestparalleltest
     pub fn best_efficiency(
         &self,
         single_thread_time: std::time::Duration,
@@ -461,7 +445,6 @@ impl<T> ParallelBenchmarkResults<T> {
     }
 
     /// 生成并行性能报告
-    /// parallelism performance
     pub fn generate_report(&self, single_thread_time: std::time::Duration) -> String {
         let mut report = String::new();
         report.push_str("=== 并行算法基准测试报告 ===\n\n");
@@ -549,7 +532,6 @@ impl<T, R> ParallelWorkPool<T, R> {
     }
 
     /// 执行并行任务并收集结果
-    /// executionparalleltask result
     pub fn execute_and_collect<F>(
         &self,
         tasks: Vec<T>,

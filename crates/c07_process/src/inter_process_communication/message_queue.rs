@@ -5,7 +5,6 @@ use std::collections::VecDeque;
 use std::sync::{Arc, Mutex};
 
 /// 消息队列实现（简化版本）
-/// （this ）
 pub struct MessageQueue {
     name: String,
     capacity: usize,
@@ -27,7 +26,6 @@ impl MessageQueue {
     }
 
     /// 连接到现有的消息队列
-    /// existing queue
     pub fn connect(name: &str, _config: IpcConfig) -> IpcResult<Self> {
         Ok(Self {
             name: name.to_string(),

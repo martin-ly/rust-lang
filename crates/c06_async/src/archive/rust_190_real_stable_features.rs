@@ -8,7 +8,6 @@
 //! **Currently Recommended Version**: Rust 1.92.0+ | For latest features, please refer to `rust_192_features.rs`
 //! 
 //! 本模块实现当前稳定版本中实际可用的异步特性
-//! This module implements currentversionasyncfeatures
 //! 包括改进的异步性能、错误处理、结构化并发等功能
 //! async performance 、error handling 、structure concurrency etc. functionality
 use std::time::{Duration, Instant};
@@ -41,7 +40,6 @@ impl Rust190AsyncFeatures {
     }
 
     /// 演示改进的异步资源管理
-    /// demonstration async
     pub async fn demo_enhanced_async_resource_management(&self) -> Result<()> {
         info!("🔥 演示改进的异步资源管理");
         
@@ -60,7 +58,6 @@ impl Rust190AsyncFeatures {
     }
 
     /// 演示改进的异步迭代器
-    /// improvementsasync iterator
     pub async fn demo_enhanced_async_iterators(&self) -> Result<()> {
         info!("🚀 演示改进的异步迭代器");
         
@@ -76,7 +73,6 @@ impl Rust190AsyncFeatures {
     }
 
     /// 演示改进的异步错误处理
-    /// improvementsasyncerror processing
     pub async fn demo_enhanced_async_error_handling(&self) -> Result<()> {
         info!("⚡ 演示 Rust 1.90.0 增强的异步错误处理");
         
@@ -99,7 +95,6 @@ impl Rust190AsyncFeatures {
     }
 
     /// 演示性能优化的异步操作
-    /// performanceoptimizationasync operation
     pub async fn demo_performance_optimized_async(&self) -> Result<()> {
         info!("🏃‍♂️ 演示 Rust 1.90.0 性能优化的异步操作");
         

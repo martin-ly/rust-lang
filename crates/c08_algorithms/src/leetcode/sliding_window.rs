@@ -18,25 +18,17 @@
 //! ## Classic Problems
 //!
 //! - 3. Longest Substring Without Repeating Characters（无重复字符的最长子串）
-//! - 76. Minimum Window Substring（最小覆盖子串）
 //! - 121. Best Time to Buy and Sell Stock（买卖股票的最佳时机）
-//! - 209. Minimum Size Subarray Sum（长度最小的子数组）
 //! - 239. Sliding Window Maximum（滑动窗口最大值）
-//! - 438. Find All Anagrams in a String（找到字符串中所有字母异位词）
 //! - 438. Find All Anagrams in a String（to in all ）
 //! - 567. Permutation in String（字符串的排列）
-//! - 643. Maximum Average Subarray I（子数组最大平均数 I）
 //! - 713. Subarray Product Less Than K（乘积小于 K 的子数组）
-//! - 904. Fruit Into Baskets（水果成篮）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 use std::collections::HashMap;
 
 /// 3. Longest Substring Without Repeating Characters（无重复字符的最长子串）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个字符串 `s`，请你找出其中不含有重复字符的 **最长子串** 的长度。
-/// `s`，its in **** 。
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -73,8 +65,6 @@ pub fn length_of_longest_substring(s: String) -> i32 {
 }
 
 /// 76. Minimum Window Substring（最小覆盖子串）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个字符串 `s`、一个字符串 `t`。返回 `s` 中涵盖 `t` 所有字符的最小子串。
 /// `s`、 `t`。 `s` in `t` all minimum 。
@@ -159,11 +149,8 @@ pub fn min_window(s: String, t: String) -> String {
 }
 
 /// 209. Minimum Size Subarray Sum（长度最小的子数组）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个含有 `n` 个正整数的数组和一个正整数 `target`。
-/// `n` and `target`。
 /// 找出该数组中满足其和 `≥ target` 的长度最小的 **连续子数组** `[nums_l, nums_l+1, ..., nums_r-1, nums_r]`，
 /// this in its and `≥ target` minimum **** `[nums_l, nums_l+1,..., nums_r-1, nums_r]`，
 /// 并返回其长度。如果不存在符合条件的子数组，返回 `0`。
@@ -202,8 +189,7 @@ pub fn min_sub_array_len(target: i32, nums: Vec<i32>) -> i32 {
 }
 
 /// 239. Sliding Window Maximum（滑动窗口最大值）
-///
-/// ## 问题描述
+/// 239. Sliding Window Maximum
 /// ## Problem Description
 /// 给你一个整数数组 `nums`，有一个大小为 `k` 的滑动窗口从数组的最左侧移动到数组的最右侧。
 /// `nums`，as `k` from to 。
@@ -345,8 +331,6 @@ pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
 }
 
 /// 567. Permutation in String（字符串的排列）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你两个字符串 `s1` 和 `s2`，写一个函数来判断 `s2` 是否包含 `s1` 的排列。
 /// `s1` and `s2`，function `s2` `s1` arrangement 。
@@ -411,8 +395,6 @@ pub fn check_inclusion(s1: String, s2: String) -> bool {
 }
 
 /// 643. Maximum Average Subarray I（子数组最大平均数 I）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个由 `n` 个元素组成的整数数组 `nums` 和一个整数 `k`。请你找出平均数最大且 **长度为 `k`** 的连续子数组，
 /// `n` element `nums` and `k`。maximum and **as `k`** ，
@@ -453,8 +435,6 @@ pub fn find_max_average(nums: Vec<i32>, k: i32) -> f64 {
 }
 
 /// 713. Subarray Product Less Than K（乘积小于 K 的子数组）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个整数数组 `nums` 和一个整数 `k`，请你返回子数组内所有元素的乘积严格小于 `k` 的连续子数组的数目。
 /// `nums` and `k`，inside all element `k` 。
@@ -498,8 +478,6 @@ pub fn num_subarray_product_less_than_k(nums: Vec<i32>, k: i32) -> i32 {
 }
 
 /// 904. Fruit Into Baskets（水果成篮）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 你正在探访一家农场，农场从左到右种植了一排果树。这些树用一个整数数组 `fruits` 表示，其中 `fruits[i]` 是第 `i` 棵树上的水果 **种类**。
 /// in ，from to tree 。tree `fruits` represent ，its in `fruits[i]` `i` tree on ****。
@@ -554,7 +532,6 @@ pub fn total_fruit(fruits: Vec<i32>) -> i32 {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有滑动窗口类问题
-/// Get hasproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {

@@ -69,7 +69,6 @@ pub mod gats_demo {
 /// RPITIT trait method impl Trait example
 pub mod rpitit_demo {
     /// 文本源：提供按词迭代视图
-    /// provide graph
     pub trait TextSource {
         /// 在 trait 方法中返回位置 impl Iterator（RPITIT）
         fn words<'a>(&'a self) -> impl Iterator<Item = &'a str> + 'a;

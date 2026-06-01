@@ -22,11 +22,11 @@ pub trait Fork {
     fn fork(&self) -> crate::error::Result<ForkResult>;
 
     /// 检查是否为子进程
-    /// as process
+    /// Check if child process
     fn is_child(&self) -> bool;
 
     /// 检查是否为父进程
-    /// as process
+    /// Check if parent process
     fn is_parent(&self) -> bool;
 }
 
@@ -46,13 +46,13 @@ pub enum ForkResult {
 
 impl ForkResult {
     /// 检查是否为父进程
-    /// as process
+    /// Check if parent process
     pub fn is_parent(&self) -> bool {
         matches!(self, ForkResult::Parent)
     }
 
     /// 检查是否为子进程
-    /// as process
+    /// Check if child process
     pub fn is_child(&self) -> bool {
         matches!(self, ForkResult::Child)
     }

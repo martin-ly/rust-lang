@@ -39,7 +39,6 @@ use std::ops::ControlFlow;
 /// Rust 1.91 const contextstrongdesignpatternconfiguration application
 pub mod const_pattern_config {
     /// 设计模式配置系统
-    /// designpatternconfiguration system
     ///
     /// 使用 Rust 1.91 的 const 上下文增强进行编译时配置计算
     /// Rust 1.91 const on under compile-time
@@ -176,7 +175,6 @@ pub mod pattern_new_apis {
 /// Rust 1.91 to optimization ，design performance 10-25%
 pub mod pattern_jit_optimizations {
     /// 处理观察者模式事件
-    /// observer
     ///
     /// Rust 1.91 JIT 优化：迭代器链式操作性能提升约 15-25%
     /// Rust 1.91 JIT optimization ：performance 15-25%
@@ -190,7 +188,6 @@ pub mod pattern_jit_optimizations {
     }
 
     /// 计算工厂模式统计信息
-    /// Compute patterninformation
     ///
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
     /// Rust 1.91 JIT Optimization: Simple summation operation performance improved by ~10-15%
@@ -203,7 +200,6 @@ pub mod pattern_jit_optimizations {
     }
 
     /// 过滤和转换命令模式数据
-    /// conversionpattern data
     ///
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 20-25%
     /// Rust 1.91 JIT optimization ：complex performance 20-25%
@@ -243,13 +239,11 @@ pub mod pattern_jit_optimizations {
 // ==================== 4. 内存分配器优化在设计模式对象创建中的应用 ====================
 
 /// Rust 1.91 内存分配器优化在设计模式对象创建中的应用
-/// Rust 1.91 memoryoptimizationdesignpatternobjectcreate application
 ///
 /// Rust 1.91 改进了内存分配器，小对象分配性能提升 25-30%
 /// Rust 1.91 Improved memory allocator, small object allocation performance improved by 25-30%
 pub mod pattern_memory_optimizations {
     /// 创建小对象用于设计模式实例
-    /// to design
     ///
     /// Rust 1.91 优化：小对象（< 32 bytes）分配性能提升约 25-30%
     /// Rust 1.91 Optimization: Small object (< 32 bytes) allocation performance improved by ~25-30%
@@ -263,7 +257,6 @@ pub mod pattern_memory_optimizations {
     }
 
     /// 处理设计模式数据
-    /// handlingdesignpattern data
     ///
     /// Rust 1.91 优化：在频繁的小对象分配场景下性能提升
     /// Rust 1.91 Optimization: Performance improvement in frequent small object allocation scenarios
@@ -296,7 +289,6 @@ pub mod pattern_memory_optimizations {
 // ==================== 5. 异步迭代器改进在并发设计模式中的应用 ====================
 
 /// Rust 1.91 异步迭代器改进在并发设计模式中的应用
-/// Rust 1.91 asynciteratorimprovementsconcurrentdesignpattern application
 ///
 /// Rust 1.91 对异步迭代器进行了优化，性能提升约 15-20%
 /// Rust 1.91 to async optimization ，performance 15-20%
@@ -401,7 +393,6 @@ pub mod comprehensive_pattern_examples {
     use super::*;
 
     /// 综合设计模式管理系统
-    /// designpatternmanagement system
     ///
     /// 使用 const 上下文增强和新的 API
     /// const on under and API

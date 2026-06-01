@@ -164,7 +164,6 @@ impl<T: Ord> BinarySearchTree<T> {
 }
 
 /// 测试目的: 验证二叉搜索树内存安全
-/// Test : verifysearchtreememorysafety
 /// 测试场景: 插入多个节点
 /// Test : multiplenode
 /// 预期结果: 应该正确构建树结构
@@ -216,7 +215,6 @@ fn test_stack_safety() {
 // ==================== 不安全数组操作 ====================
 
 /// 测试目的: 验证安全的原地数组反转
-/// Test : verifysafetyarray
 /// 测试场景: 反转数组元素
 /// Test : array
 /// 预期结果: 数组应该被正确反转

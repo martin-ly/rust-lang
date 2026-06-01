@@ -1,6 +1,4 @@
 //! Rust 187.0 新特性实现模块 —— c08_algorithms
-//!
-//! 本模块展示了 Rust 187.0 (2025-05-15) 的关键语言特性和工具链改进。
 //! This module demonstrates key language features and toolchain improvements of Rust 187.0 (2025-05-15).
 //!
 //! - `open_ranges_parsing`: 开放范围 `..EXPR` 可在一元操作符后解析

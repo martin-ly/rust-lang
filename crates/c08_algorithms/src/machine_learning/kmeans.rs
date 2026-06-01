@@ -40,13 +40,11 @@ impl KMeans {
     }
 
     /// 返回聚类中心的只读迭代器（若未拟合则为空）
-    /// center （as ）
     pub fn centers_iter(&self) -> impl Iterator<Item = &DataPoint> {
         self.centers.as_deref().into_iter().flatten()
     }
 
     /// 设置最大迭代次数
-    /// Set maximum
     pub fn max_iterations(mut self, max_iter: usize) -> Self {
         self.max_iterations = max_iter;
         self
@@ -70,7 +68,6 @@ impl KMeans {
     }
 
     /// 找到最近的聚类中心
-    /// to center
     fn find_closest_center_in(point: &DataPoint, centers: &[DataPoint]) -> usize {
         let mut min_distance = f64::INFINITY;
         let mut closest_center = 0;

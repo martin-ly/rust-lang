@@ -26,7 +26,6 @@
 /// ## 之前限制
 /// ## 's before
 /// 1.86 之前，``#[target_feature]`` 只能用于 `unsafe fn`，
-/// 因为调用未启用对应特性的函数是 UB。
 /// because to feature function UB。
 ///
 /// ## 现在

@@ -18,23 +18,16 @@
 //! ## Classic Problems
 //!
 //! - 33. Search in Rotated Sorted Array（搜索旋转排序数组）
-//! - 34. Find First and Last Position of Element in Sorted Array（在排序数组中查找元素的第一个和最后一个位置）
 //! - 35. Search Insert Position（搜索插入位置）
-//! - 69. Sqrt(x)（x 的平方根）
 //! - 69. Sqrt(x)（x ）
 //! - 74. Search a 2D Matrix（搜索二维矩阵）
-//! - 81. Search in Rotated Sorted Array II（搜索旋转排序数组 II）
 //! - 153. Find Minimum in Rotated Sorted Array（寻找旋转排序数组中的最小值）
-//! - 162. Find Peak Element（寻找峰值）
 //! - 278. First Bad Version（第一个错误的版本）
 //! - 278. First Bad Version（first this ）
 //! - 367. Valid Perfect Square（有效的完全平方数）
-//! - 704. Binary Search（二分查找）
 use crate::leetcode::{ComplexityInfo, LeetCodeProblem, LeetCodeTag};
 
 /// 704. Binary Search（二分查找）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个 `n` 个元素有序的（升序）整型数组 `nums` 和一个目标值 `target`，写一个函数搜索 `nums` 中的 `target`，
 /// `n` element （） `nums` and goal `target`，function `nums` in `target`，
@@ -78,8 +71,6 @@ pub fn binary_search(nums: Vec<i32>, target: i32) -> i32 {
 }
 
 /// 33. Search in Rotated Sorted Array（搜索旋转排序数组）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 整数数组 `nums` 按升序排列，数组中的值 **互不相同**。在传递给函数之前，`nums` 在预先未知的某个下标 `k`（`0 <= k < nums.length`）上进行了 **旋转**。
 /// `nums` arrangement ，in ****。in function 's before ，`nums` in under `k`（`0 <= k < nums.length`）on ****。
@@ -137,8 +128,6 @@ pub fn search_rotated(nums: Vec<i32>, target: i32) -> i32 {
 }
 
 /// 34. Find First and Last Position of Element in Sorted Array（在排序数组中查找元素的第一个和最后一个位置）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个按照非递减顺序排列的整数数组 `nums`，和一个目标值 `target`。请你找出给定目标值在数组中的开始位置和结束位置。
 /// order arrangement `nums`，and goal `target`。goal in in position and position 。
@@ -219,8 +208,6 @@ pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {
 }
 
 /// 35. Search Insert Position（搜索插入位置）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
 /// ordering and goal ，in in to goal ，and its 。if goal in in ，will is order position 。
@@ -307,15 +294,12 @@ pub fn my_sqrt(x: i32) -> i32 {
 }
 
 /// 74. Search a 2D Matrix（搜索二维矩阵）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 编写一个高效的算法来判断 `m x n` 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
 /// efficient algorithm `m x n` in ，in goal 。this has under feature ：
 /// - 每行中的整数从左到右按升序排列
 /// - in from to arrangement
 /// - 每行的第一个整数大于前一行的最后一个整数
-/// - first before finally
 ///
 /// ## Rust 1.91 特性应用
 /// ## Rust 1.91 Feature Application
@@ -362,8 +346,6 @@ pub fn search_matrix(matrix: Vec<Vec<i32>>, target: i32) -> bool {
 }
 
 /// 153. Find Minimum in Rotated Sorted Array（寻找旋转排序数组中的最小值）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 已知一个长度为 `n` 的数组，预先按照升序排列，经由 `1` 到 `n` 次 **旋转** 后，得到输入数组。
 /// as `n` ，arrangement ， `1` to `n` **** after ，to 。
@@ -406,8 +388,6 @@ pub fn find_min(nums: Vec<i32>) -> i32 {
 }
 
 /// 162. Find Peak Element（寻找峰值）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 峰值元素是指其值严格大于左右相邻值的元素。给你一个整数数组 `nums`，找到峰值元素并返回其索引。
 /// element its element 。 `nums`，to element and its 。
@@ -491,8 +471,6 @@ pub fn first_bad_version(n: i32, is_bad_version: impl Fn(i32) -> bool) -> i32 {
 }
 
 /// 367. Valid Perfect Square（有效的完全平方数）
-///
-/// ## 问题描述
 /// ## Problem Description
 /// 给你一个正整数 `num`。如果 `num` 是一个完全平方数，则返回 `true`，否则返回 `false`。
 /// `num`。if `num` ， `true`， `false`。
@@ -536,7 +514,6 @@ pub fn is_perfect_square(num: i32) -> bool {
 // ==================== 问题信息注册 ====================
 
 /// 获取所有二分查找类问题
-/// Get hassearchproblems
 pub fn get_all_problems() -> Vec<LeetCodeProblem> {
     vec![
         LeetCodeProblem {
