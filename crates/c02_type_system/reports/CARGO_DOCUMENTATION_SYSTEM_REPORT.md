@@ -54,7 +54,6 @@
     - [核心文档](#核心文档)
     - [入口文档](#入口文档)
     - [相关文档](#相关文档)
-  - [**适用版本**: Rust 1.90+](#适用版本-rust-190)
 
 **创建日期**: 2025-10-19
 **项目**: c02_type_system
@@ -529,6 +528,7 @@ c02_type_system/
 **审核状态**: ✅ 完成
 **文档版本**: 1.0
 **适用版本**: Rust 1.90+
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
