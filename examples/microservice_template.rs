@@ -1,3 +1,6 @@
+// 注意: 本示例需要 tokio crate，请通过 Cargo 项目运行:
+//   cargo add tokio --features full
+//   cargo run --example microservice_template.rs
 //! 微服务模板
 //! 
 //! 整合 C06(异步), C09(设计模式), C10(网络)

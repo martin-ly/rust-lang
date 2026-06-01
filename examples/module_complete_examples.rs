@@ -188,8 +188,6 @@ pub fn async_programming_complete_example() {
 pub fn process_management_complete_example() {
     println!("\n🔧 C07 - 进程管理完整示例");
 
-    use std::process::Command;
-
     // 注意：实际进程管理需要根据平台调整
     println!("  - 进程管理需要根据平台实现");
     println!("  - 示例：Command::new(\"ls\").output()");
@@ -321,6 +319,8 @@ fn main() {
     wasm_complete_example();
 
     println!("\n✅ 所有模块完整示例完成！");
+
+    rust_194_features_demo();
 }
 
 // Rust 1.94 特性示例

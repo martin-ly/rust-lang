@@ -23,7 +23,7 @@ fn moving_average(data: &[f64], window_size: usize) -> Vec<f64> {
     match window_size {
         3 => data
             .array_windows::<3>()
-            .map(|&[a, b, c]| (a + b + c) / 3.0)
+            .map(|[a, b, c]| (*a + *b + *c) / 3.0)
             .collect(),
         5 => data
             .array_windows::<5>()
@@ -158,7 +158,7 @@ fn moving_average_filter(signal: &[f64], window_size: usize) -> Vec<f64> {
     match window_size {
         3 => signal
             .array_windows::<3>()
-            .map(|&[a, b, c]| (a + b + c) / 3.0)
+            .map(|[a, b, c]| (*a + *b + *c) / 3.0)
             .collect(),
         5 => signal
             .array_windows::<5>()
@@ -174,9 +174,9 @@ fn moving_average_filter(signal: &[f64], window_size: usize) -> Vec<f64> {
 /// 边缘检测 (Sobel 算子简化版)
 fn edge_detection_1d(data: &[f64]) -> Vec<f64> {
     data.array_windows::<3>()
-        .map(|&[a, b, c]| {
+        .map(|[a, _b, c]| {
             // 简化梯度计算
-            ((c - a) / 2.0).abs()
+            ((*c - *a) / 2.0).abs()
         })
         .collect()
 }
@@ -213,7 +213,7 @@ fn benchmark_comparison() {
     let start = Instant::now();
     let result1: Vec<f64> = data
         .array_windows::<3>()
-        .map(|&[a, b, c]| (a + b + c) / 3.0)
+        .map(|[a, b, c]| (*a + *b + *c) / 3.0)
         .collect();
     let time1 = start.elapsed();
 

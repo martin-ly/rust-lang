@@ -9,7 +9,12 @@
 
 ---
 
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) · [Rust Blog — Edition 2024](https://blog.rust-lang.org/) · [Wikipedia — Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
+> **来源**:
+> [The Rust Programming Language](https://doc.rust-lang.org/book/) ·
+> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) ·
+> [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) ·
+> [Rust Blog — Edition 2024](https://blog.rust-lang.org/) ·
+> [Wikipedia — Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
 
 ## 📑 目录
 
@@ -33,13 +38,12 @@
 ---
 
 ## 一、核心概念
->
+
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Edition 机制
->
+
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -393,18 +397,11 @@ fn main() {
 ## 权威来源索引
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
->
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
->
 > **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
->
 > **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
->
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
->
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
->
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
->
 
 ---

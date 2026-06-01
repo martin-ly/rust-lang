@@ -15,7 +15,7 @@ use std::time::{Duration, Instant};
 
 /// 应用配置
 #[derive(Debug)]
-struct AppConfig {
+pub struct AppConfig {
     database_url: String,
     api_key: String,
     max_connections: usize,
@@ -53,7 +53,7 @@ static CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
 /// 高性能配置访问
 ///
 /// Rust 1.94 新增的 get() 方法允许无锁检查初始化状态
-pub fn get_config_fast() -> Option<&'static AppConfig> {
+pub(crate) fn get_config_fast() -> Option<&'static AppConfig> {
     // 热路径优化: 使用 get() 进行无锁检查
     LazyLock::get(&CONFIG)
 }
@@ -104,7 +104,7 @@ struct ConnectionPool {
 }
 
 #[derive(Debug)]
-struct Connection {
+pub struct Connection {
     id: usize,
     created_at: Instant,
 }

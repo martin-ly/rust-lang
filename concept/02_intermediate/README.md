@@ -180,6 +180,18 @@ Trait Bounds 是 L2 的"枢纽概念"：
 
 ---
 
+### 补充文件索引
+
+- [错误处理深入：从 Result 到自定义错误生态](./15_error_handling_deep_dive.md)
+- [Rust 迭代器模式](./15_iterator_patterns.md)
+- [迭代器模式：Rust 的惰性计算与零成本抽象](./16_iterator_patterns.md)
+- [宏模式：编译期代码生成的工程实践](./17_macro_patterns.md)
+- [生命周期高级主题：从 HRTB 到自引用类型](./18_lifetimes_advanced.md)
+- [高级 Trait 主题：从关联类型到特化](./19_advanced_traits.md)
+- [高级类型系统：从关联类型到类型级编程](./20_type_system_advanced.md)
+- [元编程：Rust 的编译期代码生成与变换](./21_metaprogramming.md)
+- [22_iterator_patterns](./22_iterator_patterns.md)
+
 ## 三、学习路径建议
 
 ```text

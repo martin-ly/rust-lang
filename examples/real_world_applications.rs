@@ -1,9 +1,8 @@
 //! 实际应用场景示例集合
 //!
 //! 本文件包含各种实际应用场景的示例，展示Rust在实际项目中的使用
-use std::sync::{Arc, Mutex};
+use std::sync::Mutex;
 use std::thread;
-use std::time::Duration;
 
 /// Web服务器示例
 pub fn web_server_example() {
@@ -61,13 +60,13 @@ pub fn data_processing_pipeline_example() {
 pub fn concurrent_task_processing_example() {
     println!("\n⚡ 并发任务处理示例");
 
-    use std::sync::{Arc, Mutex};
+    use std::sync::Arc;
 
     let tasks = Arc::new(Mutex::new(vec![1, 2, 3, 4, 5]));
     let results = Arc::new(Mutex::new(Vec::new()));
     let mut handles = vec![];
 
-    for i in 0..5 {
+    for _i in 0..5 {
         let tasks = Arc::clone(&tasks);
         let results = Arc::clone(&results);
         let handle = thread::spawn(move || {
@@ -157,6 +156,8 @@ fn main() {
     error_handling_example();
 
     println!("\n✅ 所有实际应用场景示例完成！");
+
+    rust_194_features_demo();
 }
 
 // Rust 1.94 特性示例

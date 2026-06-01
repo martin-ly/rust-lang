@@ -1,3 +1,5 @@
+// 注意: 本文件为 Cargo Script 格式，需使用 `cargo +nightly -Zscript cargo_script_demo.rs` 运行
+// 或使用 rust-script: `rust-script cargo_script_demo.rs`
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]

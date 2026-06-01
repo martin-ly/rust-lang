@@ -965,4 +965,3 @@ fn main() {
 - **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
 - **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
 - **定理**: 算法与竞赛编程 (Algorithms & Competitive Programming) 定义 ⟹ 类型安全保证
-

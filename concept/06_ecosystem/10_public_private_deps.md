@@ -46,6 +46,10 @@
     - [10.4 边界测试：feature 统一导致的编译错误（编译错误）](#104-边界测试feature-统一导致的编译错误编译错误)
     - [10.7 边界测试：public dependency 的 semver 传播（编译中断）](#107-边界测试public-dependency-的-semver-传播编译中断)
     - [10.3 边界测试：public dependency 的 semver 不兼容传播（编译中断）](#103-边界测试public-dependency-的-semver-不兼容传播编译中断)
+    - [补充定理链](#补充定理链)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ---
 

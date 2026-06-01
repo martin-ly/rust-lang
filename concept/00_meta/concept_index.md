@@ -72,6 +72,9 @@
     - [13.1 概念判定森林索引](#131-概念判定森林索引)
     - [13.2 失效分析树索引](#132-失效分析树索引)
   - [八、TODO](#八todo)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ## 一、索引使用说明 [来源: 倒排索引方法论参照信息检索标准 — Manning, Raghavan & Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论]
 

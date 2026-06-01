@@ -131,6 +131,20 @@ L1-L4 知识                L5 综合                L6-L7 决策
 
 ---
 
+### 补充文件索引
+
+- [Rust 安全保证的边界条件全景（Safety Boundary Panorama）](./04_safety_boundaries.md)
+- [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](./05_execution_model_isomorphism.md)
+- [Rust vs Ruby：性能与表达力的两极](./08_rust_vs_ruby.md)
+- [Rust vs Swift：现代系统语言的两种路径](./09_rust_vs_swift.md)
+- [Rust vs Zig：现代系统语言的两种哲学](./10_rust_vs_zig.md)
+- [Rust vs Kotlin：静态安全的两种路径](./11_rust_vs_kotlin.md)
+- [Rust vs Scala：类型系统的两种哲学](./12_rust_vs_scala.md)
+- [Rust vs C#：托管与原生之路](./13_rust_vs_csharp.md)
+- [Rust vs Elixir](./14_rust_vs_elixir.md)
+- [Rust vs TypeScript：静态类型系统的两种哲学 —— 编译期证明与渐进式工程](./15_rust_vs_typescript.md)
+- [16_rust_vs_ruby](./16_rust_vs_ruby.md)
+
 ## 三、原 `01.md` 的结构化索引
 
 原文件 [01_rust_vs_cpp.md](./01_rust_vs_cpp.md) 包含以下核心内容，可按需引用：

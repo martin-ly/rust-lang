@@ -17,6 +17,7 @@
   - [一、本层概念关系图（完整版）](#一本层概念关系图完整版)
     - [1.1 概念间语义链接](#11-概念间语义链接)
   - [二、文件索引与关系](#二文件索引与关系)
+    - [补充文件索引](#补充文件索引)
   - [三、L1-L5 → L6 的工程映射](#三l1-l5--l6-的工程映射)
   - [四、认知路径](#四认知路径)
   - [五、跨层出口](#五跨层出口)
@@ -154,6 +155,41 @@ graph TB
 | [39_os_kernel.md](./39_os_kernel.md) | 操作系统 | Rust for Linux、Theseus、Redox、eBPF | ✅ v1.0 | L3 Unsafe | Network Protocols |
 
 ---
+
+### 补充文件索引
+
+- [Rust 惯用法谱系全景（Idioms Spectrum）](./03_idioms_spectrum.md)
+- [Rust 系统设计原则与国际权威对齐](./05_system_design_principles.md)
+- [Cargo Script：单文件 Rust 程序](./09_cargo_script.md)
+- [Public/Private Dependencies：可见性控制的工程化](./10_public_private_deps.md)
+- [Rust 测试策略：从单元测试到属性验证](./12_testing_strategies.md)
+- [安全 实践：Rust 代码的防御性编程](./19_security_practices.md)
+- [许可证与合规：Rust 项目的法律工程](./20_licensing_and_compliance.md)
+- [Rust 游戏开发生态](./21_game_development.md)
+- [Rust 嵌入式系统开发](./22_embedded_systems.md)
+- [Rust 数据库访问生态](./23_database_access.md)
+- [Rust 云原生生态](./24_cloud_native.md)
+- [Rust CLI 开发生态](./25_cli_development.md)
+- [Rust 游戏开发](./26_game_development.md)
+- [Rust Web 框架对比与选型](./27_web_frameworks.md)
+- [DevOps 与 CI/CD：Rust 的持续交付工程实践](./28_devops_and_ci_cd.md)
+- [算法与竞赛编程 (Algorithms & Competitive Programming)](./29_algorithms_competitive_programming.md)
+- [系统可组合性 (System Composability)](./30_system_composability.md)
+- [33_idioms_spectrum](./33_idioms_spectrum.md)
+- [34_formal_ecosystem_tower](./34_formal_ecosystem_tower.md)
+- [Machine Learning Ecosystem（机器学习生态）](./46_machine_learning_ecosystem.md)
+- [Rust 编译器基础设施深度解析](./47_compiler_infrastructure.md)
+- [Formal Verification Tools（形式化验证工具生态）](./47_formal_verification_tools.md)
+- [Data Engineering（数据工程）](./48_data_engineering.md)
+- [Rust 工业级案例研究](./48_industrial_case_studies.md)
+- [Game Engine Internals（游戏引擎内部原理）](./49_game_engine_internals.md)
+- [Distributed Consensus（分布式共识）](./50_distributed_consensus.md)
+- [Quantum Computing in Rust（量子计算与 Rust）](./51_quantum_computing_rust.md)
+- [Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）](./52_robotics.md)
+- [Rust 嵌入式图形系统开发](./53_embedded_graphics.md)
+- [Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）](./54_webassembly_advanced.md)
+- [Rust for Data Science（Rust 数据科学）](./55_rust_for_data_science.md)
+- [C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）](./56_c_to_rust_translation.md)
 
 ## 三、L1-L5 → L6 的工程映射
 

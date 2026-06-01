@@ -56,6 +56,7 @@
     - [10.5 边界测试：Kani 的路径爆炸与有界验证](#105-边界测试kani-的路径爆炸与有界验证)
     - [10.6 边界测试：Creusot 的 Ghost 代码与零成本抽象](#106-边界测试creusot-的-ghost-代码与零成本抽象)
   - [相关概念文件](#相关概念文件)
+    - [补充定理链](#补充定理链)
 
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
@@ -872,6 +873,7 @@ fn factorial(n: Int) -> Int {
 - [RustBelt 与验证工具链](./04_rustbelt.md) — 高阶幽灵状态、验证工具生态
 - [验证工具链选择指南](./05_verification_toolchain.md) — Prusti/Creusot/Kani/Miri 选型
 - [线性逻辑与仿射逻辑](./01_linear_logic.md) — 资源敏感性基础
+
 > **过渡**: Axiomatic Semantics（公理语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Axiomatic Semantics（公理语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Axiomatic Semantics（公理语义） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
@@ -881,4 +883,3 @@ fn factorial(n: Int) -> Int {
 - **定理**: Axiomatic Semantics（公理语义） 定义 ⟹ 类型安全保证
 - **定理**: Axiomatic Semantics（公理语义） 定义 ⟹ 类型安全保证
 - **定理**: Axiomatic Semantics（公理语义） 定义 ⟹ 类型安全保证
-

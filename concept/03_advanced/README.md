@@ -171,6 +171,25 @@ graph TB
 
 ---
 
+### 补充文件索引
+
+- [Async/Await 高级主题](./02_async_advanced.md)
+- [异步模式：从 Future 到生产级并发](./02_async_patterns.md)
+- [02_async_programming](./02_async_programming.md)
+- [03_unsafe_rust](./03_unsafe_rust.md)
+- [05_macros](./05_macros.md)
+- [08_zero_cost_abstractions](./08_zero_cost_abstractions.md)
+- [FFI 高级主题：跨语言边界的安全与性能](./09_ffi_advanced.md)
+- [并发 模式：从消息 传递到锁自由的数据结构](./10_concurrency_patterns.md)
+- [原子操作与内存序：无锁并发的精确控制](./11_atomics_and_memory_ordering.md)
+- [Unsafe Rust 模式：安全抽象的核心技术](./12_unsafe_rust_patterns.md)
+- [13_async_patterns](./13_async_patterns.md)
+- [自定义分配器与内存布局优化](./14_custom_allocators.md)
+- [零拷贝解析与序列化优化](./15_zero_copy_parsing.md)
+- [无锁编程与内存模型](./16_lock_free.md)
+- [类型擦除与动态分发](./17_type_erasure.md)
+- [Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象](./18_network_programming.md)
+
 ## 三、学习路径建议
 
 ```text

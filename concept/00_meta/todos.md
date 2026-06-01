@@ -29,6 +29,9 @@
     - [Wave 4: L2-L4 精细化增强（待开始）](#wave-4-l2-l4-精细化增强待开始)
   - [六、下一步推进建议](#六下一步推进建议)
   - [相关概念文件 \[来源: concept/00\_meta/learning\_guide.md — 学习路径设计; concept/00\_meta/methodology.md — 内容结构规范\]](#相关概念文件-来源-concept00_metalearning_guidemd--学习路径设计-concept00_metamethodologymd--内容结构规范)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ## 一、高优先级 TODO（建议优先处理） [来源: 优先级排序基于概念依赖图的前置节点数量 — 前置越多的概念优先级越高]
 

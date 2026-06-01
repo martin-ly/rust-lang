@@ -57,6 +57,10 @@
     - [8.2 边界测试：Petri 网可达性分析的 state explosion（运行时性能）](#82-边界测试petri-网可达性分析的-state-explosion运行时性能)
     - [8.3 边界测试：工作流循环缺乏终止条件导致无限执行（运行时错误）](#83-边界测试工作流循环缺乏终止条件导致无限执行运行时错误)
   - [相关概念文件](#相关概念文件)
+    - [补充定理链](#补充定理链)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
@@ -1280,6 +1284,7 @@ async fn unbounded_backoff() -> Result<Output> {
 - [公理语义](../04_formal/20_axiomatic_semantics.md) — Hoare 逻辑、正确性证明
 - [类型语义](../04_formal/21_type_semantics.md) — 类型系统、Progress & Preservation
 - [操作语义](../04_formal/17_operational_semantics.md) — 结构化操作语义
+
 > **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Workflow Theory & Formalization（工作流理论与形式化） 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

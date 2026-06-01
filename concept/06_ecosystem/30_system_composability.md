@@ -735,4 +735,3 @@ fn main() {}
 - **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
 - **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
 - **定理**: 系统可组合性 (System Composability) 定义 ⟹ 类型安全保证
-

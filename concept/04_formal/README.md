@@ -186,6 +186,19 @@ graph TB
 
 ---
 
+### 补充文件索引
+
+- [07_separation_logic](./07_separation_logic.md)
+- [线性逻辑在 Rust 中的工程应用](./09_linear_logic_applications.md)
+- [09_operational_semantics](./09_operational_semantics.md)
+- [范畴论与 Rust：从函子到单子](./10_category_theory.md)
+- [指称语义与领域理论](./12_denotational_semantics.md)
+- [形式化方法在 Rust 中的应用](./13_formal_methods.md)
+- [Lambda 演算与 Rust 计算模型](./14_lambda_calculus.md)
+- [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](./16_aerospace_certification_formal_methods.md)
+- [现代 Rust 验证工具生态（2025-2026）](./22_modern_verification_tools.md)
+- [通用程序语言理论基础：Rust 的 PL 基座](./23_programming_language_foundations.md)
+
 ## 三、与上层概念的严格映射
 
 ### 3.1 映射精度评估

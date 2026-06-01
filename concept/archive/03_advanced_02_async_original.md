@@ -1,5 +1,5 @@
 # Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）
->
+
 > **层次定位**: L3 高级概念 / 异步子域
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
@@ -7,7 +7,6 @@
 > **后置延伸**: [L4 异步语义形式化](../04_formal/03_ownership_formal.md) · [L6 Tokio](../06_ecosystem/03_core_crates.md) · [L7 效果系统](../07_future/04_effects_system.md)
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → T-052 async/await 转换正确性
-
 > **层级**: L3 高级概念
 > **层级一致性**: 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Error Handling](../02_intermediate/04_error_handling.md)
@@ -111,9 +110,8 @@
   - [权威来源索引](#权威来源索引)
 
 ## 〇、认知路径（Cognitive Path）
->
-> [来源: [Rust Async Book]]
 
+> [来源: [Rust Async Book]]
 > **导读**：以下六步构成从直觉困惑到形式验证的完整递进链条。建议按顺序阅读，每步锚定后续章节的特定内容，形成"问题驱动→场景具象→模式抽象→规则形式→代码验证→边界测试"的闭环。
 
 ```text

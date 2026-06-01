@@ -154,6 +154,33 @@ graph TB
 
 ---
 
+### 补充文件索引
+
+- [Stable ABI Preview](./11_stable_abi_preview.md)
+- [Inline Const Pattern Preview](./12_inline_const_pattern_preview.md)
+- [`must_not_suspend` Lint Preview](./13_must_not_suspend_preview.md)
+- [Lifetime Capture in `impl Trait` Preview](./14_lifetime_capture_preview.md)
+- [RPITIT Preview](./15_rpitit_preview.md)
+- [TAIT Preview](./16_type_alias_impl_trait_preview.md)
+- [Arbitrary Self Types 预览：自定义方法接收器](./17_arbitrary_self_types_preview.md)
+- [Const Trait Preview](./17_const_trait_preview.md)
+- [Field Projections 预览：安全的字段级投影](./18_field_projections_preview.md)
+- [Rust 2024 Edition Preview](./19_rust_edition_preview.md)
+- [Rust for Linux ：操作系统内核中的内存安全](./19_rust_for_linux.md)
+- [Rust 在 AI 与机器学习中的新兴角色](./21_rust_in_ai.md)
+- [Edition 2024 完全指南：新特性与迁移策略](./22_edition_guide.md)
+- [Gen Blocks Preview](./22_gen_blocks_preview.md)
+- [`std::autodiff`：Rust 官方自动微分前沿追踪](./22_std_autodiff_preview.md)
+- [Rust Edition 机制与迁移指南](./23_rust_edition_guide.md)
+- [Rust 2027 Edition 及未来路线图](./24_roadmap.md)
+- [WASM Target Evolution Preview](./24_wasm_target_evolution.md)
+- [Rust in Space Preview](./26_rust_in_space.md)
+- [编译期执行与常量求值](./27_compile_time_execution.md)
+- [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](./28_rust_for_webassembly.md)
+- [eBPF / Aya / Rex 的 Rust 映射](./29_ebpf_rust.md)
+- [AI × Rust：生成-验证闭环与确定性容器](./archive/01_ai_integration_original.md)
+- [Rust 1.97 前沿特性预览](./rust_1_97_preview.md)
+
 ## 三、前沿方向与下层关联
 
 | L7 方向 | 关联下层 | 关联方式 | 预测 |

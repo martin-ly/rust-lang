@@ -1,3 +1,6 @@
+// 注意: 本示例需要 tokio crate，请通过 Cargo 项目运行:
+//   cargo add tokio --features full
+//   cargo run --example rust_194_controlflow_patterns.rs
 //! Rust 1.94 `ControlFlow` 深度示例
 //!
 //! 本文件演示 `std::ops::ControlFlow` 在实际生产场景中的高级应用，

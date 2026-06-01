@@ -178,7 +178,9 @@ Step 6: "什么时候会阻塞？"
 
 ## 一、权威定义（Definition）
 
-> **章节过渡**：在深入 Rust 的 async/await 之前，需先建立跨语言的语义坐标系。以下定义从 Wikipedia 的通用概念出发，收敛到 Rust 官方文档的精确语义，最终形式化为状态机与 trait 系统。三层定义形成"宽泛→精确→可执行"的漏斗。
+> **章节过渡**：在深入 Rust 的 async/await 之前，需先建立跨语言的语义坐标系。
+> 以下定义从 Wikipedia 的通用概念出发，收敛到 Rust 官方文档的精确语义，最终形式化为状态机与 trait 系统。
+> 三层定义形成"宽泛→精确→可执行"的漏斗。
 
 ### 1.1 Wikipedia 权威定义
 
@@ -227,11 +229,11 @@ Poll 类型:
 
 ## 二、概念属性矩阵（Attribute Matrix）
 
-> **章节过渡**：定义之后需辨析 async 在并发光谱中的精确位置。以下矩阵将 async 与线程、并行对比，澄清"异步≠并行≠并发"的常见误解；随后给出 Future 组合子与运行时选型矩阵，为工程决策提供依据。
+> **章节过渡**：定义之后需辨析 async 在并发光谱中的精确位置。
+> 以下矩阵将 async 与线程、并行对比，澄清"异步≠并行≠并发"的常见误解；随后给出 Future 组合子与运行时选型矩阵，为工程决策提供依据。
 > **[Wikipedia: Async/await]** Rust's `async/await` draws inspiration from C# 5.0 (2012) and ECMAScript 2017 (JavaScript), but Rust compiles async blocks to zero-cost state machines rather than runtime task objects. ✅ 已验证
 
 ### 2.1 异步 vs 并发 vs 并行对比矩阵
->
 
 | **维度** | **Async（异步）** | **Threading（线程）** | **Parallel（并行）** |
 |:---|:---|:---|:---|
@@ -247,7 +249,6 @@ Poll 类型:
 > **来源**: [Async Book: Execution model] · [Tokio Documentation: Runtime internals] · [Wikipedia: Cooperative multitasking]
 
 ### 2.2 Future 组合子矩阵
->
 
 | **组合子** | **签名** | **语义** | **类比** |
 |:---|:---|:---|:---|
@@ -278,13 +279,13 @@ Poll 类型:
 
 ## 三、形式化理论根基（Formal Foundation）
 
-> **章节过渡**：属性矩阵回答了"是什么"，本节回答"为什么安全"。Rust 的 async/await 安全性建立在两个形式化支柱上：(1) 编译器将 async fn 转换为状态机，(2) Pin 保证该状态机在挂起期间内存地址恒定。二者共同构成"零成本 + 内存安全"的基石。
-
+> **章节过渡**：属性矩阵回答了"是什么"，本节回答"为什么安全"。
+> Rust 的 async/await 安全性建立在两个形式化支柱上：(1) 编译器将 async fn 转换为状态机，(2) Pin 保证该状态机在挂起期间内存地址恒定。
+> 二者共同构成"零成本 + 内存安全"的基石。
 > **[Rust Reference: Async fn desugaring]** 编译器将 async fn 转换为匿名状态机类型（匿名 enum/struct），实现 Future trait，每个 await 点对应一个状态转换。✅ 已验证
 > **[TRPL: Ch17]** async fn 返回的 Future 是惰性的（lazy），直到被 .await 或执行器 poll 才会执行。✅ 已验证
 
 ### 3.1 async fn 作为状态机：精确推导
->
 
 > **[Rust Reference: Async fn desugaring]** 编译器将 async fn 转换为匿名状态机类型（匿名 enum/struct），实现 Future trait，每个 await 点对应一个状态转换。✅ 已验证
 > **[TRPL: Ch17]** async fn 返回的 Future 是惰性的（lazy），直到被 .await 或执行器 poll 才会执行。✅ 已验证
@@ -340,11 +341,9 @@ Pin<&mut Self> 的内存布局约束:
 ```
 
 > **来源**: [RFC 2349 §3: Pin invariants] · [TRPL: Ch17] · [Rustonomicon: Pinning]
-
 > **[RFC 2349]** Pin 被引入以支持自引用结构：Pin<&mut T> 保证 T 的内存地址不会被改变，除非 T: Unpin。✅ 已验证
 > **[TRPL: Ch17]** Pin 是 async/await 安全的关键——编译器生成的状态机可能包含自引用（局部变量的引用），Pin 防止状态机被 move 后引用失效。✅ 已验证
 > **[Phil-opp OS blog]** 自引用结构在操作系统开发中常见（如页表自引用），Pin 提供了类型系统级别的安全保证。✅ 已验证
-
 > **[RFC 2349: Pin]** `Pin<P<T>>` was introduced to guarantee that `!Unpin` values cannot be moved, providing the formal foundation for safe self-referential async state machines. ✅ 已验证
 
 ### 3.1b 状态机操作语义（Operational Semantics）
@@ -438,7 +437,6 @@ stateDiagram-v2
 
 > **认知功能**: 状态转移可视化工具——将编译器生成的匿名 enum 状态机映射为可读的状态图。读者可将此图作为阅读 MIR lowering 输出的"导航地图"，每个节点对应一个 enum 变体，每条边对应一次 poll 调用。关键洞察：Pin 约束不是装饰，而是 Suspend 状态期间地址恒定性的形式化保证。[来源: 💡 原创分析]
 > [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
-
 > **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; RFC 2394 §3.2]
 
 #### .await 的 CPS 变换规则

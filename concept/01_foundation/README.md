@@ -160,6 +160,23 @@ Type System（理解"类型即证明"）
 
 ---
 
+### 补充文件索引
+
+- [编程语言理论基础（PL Prerequisites）](./00_pl_prerequisites.md)
+- [Lifetimes 高级主题](./03_lifetimes_advanced.md)
+- [Never Type (`!`)：底类型与穷尽性](./05_never_type.md)
+- [Rust 错误处理基础](./10_error_handling_basics.md)
+- [模块系统与路径：Rust 的代码组织哲学](./11_modules_and_paths.md)
+- [Rust 数值类型与运算](./11_numeric_types.md)
+- [属性与声明宏：编译期元编程基础](./12_attributes_and_macros.md)
+- [Panic 与 Abort：不可恢复错误的处理机制](./13_panic_and_abort.md)
+- [类型强制与转换：显式与隐式的边界](./14_coercion_and_casting.md)
+- [闭包基础：捕获环境与匿名函数](./15_closure_basics.md)
+- [测试基础：从单元测试到集成测试](./16_testing_basics.md)
+- [高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析](./17_collections_advanced.md)
+- [字符串与编码：Rust 的文本处理类型系统](./18_strings_and_encoding.md)
+- [19_numerics](./19_numerics.md)
+
 ## 三、课程对齐路径
 
 | 阶段 | TRPL 章节 | Stanford CS340R | CMU 17-363 | Bloom 目标 |

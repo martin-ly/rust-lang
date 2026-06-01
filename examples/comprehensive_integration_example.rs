@@ -1,7 +1,7 @@
 //! 综合集成示例 - 展示多个模块的协同使用
 //!
 //! 本示例展示如何将多个Rust模块组合使用，构建一个完整的应用程序
-use std::sync::{Arc, Mutex};
+use std::sync::Mutex;
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -23,6 +23,8 @@ fn main() {
     demonstrate_network_process_integration();
 
     println!("\n✅ 综合集成示例完成！");
+
+    rust_194_features_demo();
 }
 
 /// 演示所有权与类型系统集成
@@ -52,7 +54,7 @@ fn demonstrate_ownership_type_integration() {
 fn demonstrate_concurrency_async_integration() {
     println!("\n⚡ 2. 并发与异步集成");
 
-    use std::sync::{Arc, Mutex};
+    use std::sync::Arc;
 
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];

@@ -37,6 +37,19 @@
 - `version_fact_check.py`: 版本错误 **0** / 3,878 文件
 - `code_block_compiler.py`: 代码块编译 **1,741/1,741** 通过
 
+### 📦 examples/ 目录编译清理
+
+- **9/13 文件** 通过 `rustc --edition 2024 --crate-type bin` 直接编译
+- **修复问题**:
+  - `comprehensive_integration_example.rs`: 补充 `Mutex` 导入，移除重复 `Arc` 导入
+  - `real_world_applications.rs`: 补充 `Mutex` 导入，移除未使用 `Duration` 导入，添加未调用函数调用
+  - `rust_194_array_windows_demo.rs`: 修复 3 处 `array_windows` 闭包语法错误 (`||&[a,b,c]|[a,_b,c]|` → `|[a,_b,c]|`)
+  - `rust_194_lazy_lock_demo.rs`: `AppConfig`/`Connection` 提升为 `pub`（可见性警告）
+  - `advanced_usage_examples.rs`: 未使用变量加 `_` 前缀
+  - `module_complete_examples.rs`: 移除未使用 `Command` 导入，添加未调用函数调用
+  - `rust_194_control_flow_demo.rs`: 移除 u16 冗余上界比较 (`<= 65535`)
+- **4 个外部依赖文件** 已添加运行说明注释（cargo script / tokio）
+
 ---
 
 ## [2.5.0] - 2026-05-30 — Phase 1~4 全面推进完成

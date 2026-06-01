@@ -1,9 +1,8 @@
 //! 高级用法示例集合
 //!
 //! 本文件包含各种高级Rust用法示例，展示实际应用场景
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 use std::thread;
-use std::time::Duration;
 
 /// 高级所有权模式示例
 pub fn advanced_ownership_example() {
@@ -14,13 +13,13 @@ pub fn advanced_ownership_example() {
 
     // 使用Rc实现单线程引用计数
     let rc_data = Rc::new(42);
-    let rc_clone1 = Rc::clone(&rc_data);
-    let rc_clone2 = Rc::clone(&rc_data);
+    let _rc_clone1 = Rc::clone(&rc_data);
+    let _rc_clone2 = Rc::clone(&rc_data);
     println!("  - Rc引用计数: {}", Rc::strong_count(&rc_data));
 
     // 使用Arc实现多线程引用计数
     let arc_data = Arc::new(42);
-    let arc_clone = Arc::clone(&arc_data);
+    let _arc_clone = Arc::clone(&arc_data);
     println!("  - Arc引用计数: {}", Arc::strong_count(&arc_data));
 }
 

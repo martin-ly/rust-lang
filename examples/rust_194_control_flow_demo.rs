@@ -216,7 +216,7 @@ enum StateError {
 fn transition_state(current: State, event: &str) -> ControlFlow<StateError, State> {
     match (current.clone(), event) {
         (State::Idle, "start") => ControlFlow::Continue(State::Processing(0)),
-        (State::Processing(retries), "complete") => {
+        (State::Processing(_retries), "complete") => {
             ControlFlow::Continue(State::Completed("Done".to_string()))
         }
         (State::Processing(retries), "retry") if retries < 3 => {
@@ -259,7 +259,7 @@ fn parse_config(env_vars: &[(String, String)]) -> ControlFlow<ConfigError, Confi
         match key.as_str() {
             "HOST" => host = Some(value.clone()),
             "PORT" => match value.parse::<u16>() {
-                Ok(p) if p >= 1024 && p <= 65535 => port = Some(p),
+                Ok(p) if p >= 1024 => port = Some(p),
                 Ok(p) => return ControlFlow::Break(ConfigError::PortOutOfRange(p)),
                 Err(_) => {
                     return ControlFlow::Break(ConfigError::InvalidValue("PORT", value.clone()))

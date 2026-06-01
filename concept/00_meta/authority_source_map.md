@@ -12,7 +12,7 @@
 ---
 
 > **相关概念文件**:
->
+
 > - [`concept/01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) — 所有权的形式化基础
 > - [`concept/02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) — Trait 系统的跨语言对比
 > - [`concept/05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) — Rust vs C++ 深度对比
