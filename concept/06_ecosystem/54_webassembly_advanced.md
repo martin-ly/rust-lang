@@ -1,11 +1,9 @@
 > **内容分级**: [专家级]
-
 > ⚠️ **代码示例待扩充**: 本节目前缺少可编译的 Rust 代码示例。欢迎提交 PR 补充！
->
-# Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）
->
-> **受众**: [进阶]
 
+# Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust）
+
+> **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在高级 WASM 生态中的工程实践与架构决策

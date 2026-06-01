@@ -12,7 +12,13 @@
 
 ---
 
-> **来源**: [Raft Paper — Ongaro & Ousterhout 2014](https://raft.github.io/raft.pdf) · [PBFT Paper — Castro & Liskov 1999](https://pmg.csail.mit.edu/papers/osdi99.pdf) · [HotStuff Paper — Yin et al. 2019](https://arxiv.org/abs/1803.05069) · [FLP Result — Fischer, Lynch, Paterson 1985](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf) · [Paxos Made Simple — Lamport 2001](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf) · [Tendermint BFT](https://docs.tendermint.com/master/introduction/what-is-tendermint.html)
+> **来源**:
+> [Raft Paper — Ongaro & Ousterhout 2014](https://raft.github.io/raft.pdf) ·
+> [PBFT Paper — Castro & Liskov 1999](https://pmg.csail.mit.edu/papers/osdi99.pdf) ·
+> [HotStuff Paper — Yin et al. 2019](https://arxiv.org/abs/1803.05069) ·
+> [FLP Result — Fischer, Lynch, Paterson 1985](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf) ·
+> [Paxos Made Simple — Lamport 2001](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf) ·
+> [Tendermint BFT](https://docs.tendermint.com/master/introduction/what-is-tendermint.html)
 
 ## 📑 目录
 

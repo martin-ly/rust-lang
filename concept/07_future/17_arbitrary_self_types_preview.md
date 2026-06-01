@@ -29,6 +29,10 @@
     - [4.2 设计决策](#42-设计决策)
   - [五、演进路线](#五演进路线)
   - [参考](#参考)
+    - [补充定理链](#补充定理链)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ## 一、核心概念
 >
@@ -234,6 +238,7 @@ impl<T> TaggedPtr<T> {
 |------|-----|
 | Tracking Issue | <https://github.com/rust-lang/rust/issues/44874> |
 | Rust for Linux 需求 | <https://rust-lang.github.io/rust-project-goals/2026/> |
+
 > **过渡**: Arbitrary Self Types 预览：自定义方法接收器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Arbitrary Self Types 预览：自定义方法接收器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Arbitrary Self Types 预览：自定义方法接收器 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

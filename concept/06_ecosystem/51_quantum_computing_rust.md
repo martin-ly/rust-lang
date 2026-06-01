@@ -14,7 +14,16 @@
 
 ---
 
-> **来源**: [Nielsen & Chuang — Quantum Computation and Quantum Information](https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE) · [Qiskit Textbook](https://qiskit.org/textbook/) · [IBM Quantum](https://quantum.ibm.com/) · [NIST Post-Quantum Cryptography](https://csrc.nist.gov/projects/post-quantum-cryptography) · [Are We Quantum Yet?](https://arewequantumyet.github.io/) · [roqoqo Documentation](https://docs.rs/roqoqo/) · [rustqip GitHub](https://github.com/renmusxd/rustqip) · [LogosQ arXiv 2025](https://arxiv.org/abs/2512.23183) · [rustls-post-quantum](https://crates.io/crates/rustls-post-quantum)
+> **来源**:
+> [Nielsen & Chuang — Quantum Computation and Quantum Information](https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE) ·
+> [Qiskit Textbook](https://qiskit.org/textbook/) ·
+> [IBM Quantum](https://quantum.ibm.com/) ·
+> [NIST Post-Quantum Cryptography](https://csrc.nist.gov/projects/post-quantum-cryptography) ·
+> [Are We Quantum Yet?](https://arewequantumyet.github.io/) ·
+> [roqoqo Documentation](https://docs.rs/roqoqo/) ·
+> [rustqip GitHub](https://github.com/renmusxd/rustqip) ·
+> [LogosQ arXiv 2025](https://arxiv.org/abs/2512.23183) ·
+> [rustls-post-quantum](https://crates.io/crates/rustls-post-quantum)
 
 ## 📑 目录
 

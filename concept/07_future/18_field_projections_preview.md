@@ -30,6 +30,10 @@
   - [五、演进路线](#五演进路线)
     - [相关已稳定特性](#相关已稳定特性)
   - [参考](#参考)
+    - [补充定理链](#补充定理链)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+    - [反命题与边界](#反命题与边界)
 
 ## 一、核心概念
 >
@@ -257,6 +261,7 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 | `offset_of!` 文档 | <https://doc.rust-lang.org/std/mem/macro.offset_of.html> |
 | Pin 投影模式 | <https://doc.rust-lang.org/std/pin/index.html#pin-projection> |
 | Rust for Linux 需求 | <https://rust-lang.github.io/rust-project-goals/2026/> |
+
 > **过渡**: Field Projections 预览：安全的字段级投影 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Field Projections 预览：安全的字段级投影 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。
 > **过渡**: Field Projections 预览：安全的字段级投影 的深入理解需要结合具体代码实践，建议通过编写测试用例验证边界行为。

@@ -1,9 +1,8 @@
 > **内容分级**: [综述级]
-
-# C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）
 >
-> **受众**: [进阶]
+# C-to-Rust Translation Ecosystem（C 到 Rust 翻译生态）
 
+> **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: E×Eva — 评估 C→Rust 自动化翻译工具的适用性与局限

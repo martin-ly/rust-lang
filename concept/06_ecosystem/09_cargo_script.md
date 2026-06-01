@@ -12,7 +12,7 @@
 
 ---
 
-> [来源: [RFC 3502 — Cargo Script Manifest](https://github.com/rust-lang/rfcs/pull/3502) ·
+> 来源: [RFC 3502 — Cargo Script Manifest](https://github.com/rust-lang/rfcs/pull/3502) ·
 > [RFC 3503 — Cargo Script Frontmatter](https://github.com/rust-lang/rfcs/pull/3503) ·
 > [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) ·
 > [rust-lang/cargo#12207](https://github.com/rust-lang/cargo/issues/12207) ·

@@ -1,9 +1,8 @@
 > **内容分级**: [综述级]
 
 # Robotics & ROS2 in Rust（机器人学与 ROS2 Rust 生态）
->
-> **受众**: [进阶]
 
+> **受众**: [进阶]
 > **Bloom 层级**: 分析 → 评价
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
 > **双维定位**: C×Eva — 评价 Rust 在机器人全栈中的适用性、实时约束满足度与 ROS2 集成成熟度

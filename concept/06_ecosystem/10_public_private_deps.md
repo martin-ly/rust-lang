@@ -12,7 +12,7 @@
 
 ---
 
-> [来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·
+> 来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·
 > [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) ·
 > [rust-lang/cargo#9094](https://github.com/rust-lang/cargo/issues/9094) ·
 > [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
