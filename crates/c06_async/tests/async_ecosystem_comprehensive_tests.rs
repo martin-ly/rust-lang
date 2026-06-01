@@ -1,6 +1,7 @@
 //! 异步生态系统全面测试套件
 //! async ecosystem system surface
 //! 本测试套件涵盖了所有异步运行时的功能测试，
+//! this cover all async runtime functionality ，
 //! this all async runtime functionality ，
 use anyhow::Result;
 use c06_async::async_ecosystem_comprehensive::*;
@@ -270,6 +271,7 @@ async fn test_aggregation_composition_service() {
 }
 
 /// 测试数据源
+/// data source
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_data_source() {
@@ -280,6 +282,7 @@ async fn test_data_source() {
 }
 
 /// 测试抽象异步操作
+/// async operation
 /// async
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
@@ -341,6 +344,7 @@ async fn test_runtime_metrics() {
 }
 
 /// 测试运行时配置
+/// runtime configuration
 /// runtime
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
@@ -413,6 +417,7 @@ async fn test_error_handling() {
 }
 
 /// 失败任务实现
+/// failure task
 /// task
 struct FailingTask {
     name: String,

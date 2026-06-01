@@ -88,22 +88,29 @@ use tracing::{Level, debug, error, info, instrument, span, warn};
 /// **theorem 1: (Liveness)**
 /// **theorem 1: 活性 (Liveness)**
 /// 若事件队列非空，则最终会处理所有事件
+/// event queue ，ultimately all event
 /// ，ultimately all
 /// 证明 (Proof):
 /// - 事件循环持续运行
+/// - event circulation Run
 /// - circulation Run
 /// - 每次迭代处理至少一个事件
+/// - event
 /// -
 /// - 因此最终处理所有事件 □
+/// - therefore ultimately all event □
 /// - therefore ultimately all □
 /// **定理 2: 安全性 (Safety)**
 /// **theorem 2: (Safety)**
 /// **theorem 2: 安全性 (Safety)**
 /// 不会同时处理两个事件
+/// event
 /// 证明 (Proof):
 /// - 事件循环是单线程的
+/// - event circulation thread
 /// - circulation thread
 /// - 每次只处理一个事件
+/// - event
 /// -
 /// - 因此不会并发处理 □
 /// - therefore concurrency □
@@ -111,14 +118,18 @@ use tracing::{Level, debug, error, info, instrument, span, warn};
 /// **theorem 3: (Fairness)**
 /// **theorem 3: 公平性 (Fairness)**
 /// 在无优先级的情况下，所有事件最终都会被处理
+/// in situation under ，all event ultimately is
 /// in situation under ，all ultimately is
 /// 证明 (Proof):
 /// - FIFO 队列保证顺序
+/// - FIFO queue order
 /// - FIFO order
 /// - FIFO 队列Guaranteeorder
 /// - 事件循环不会跳过事件
+/// - event circulation event
 /// - circulation
 /// - 因此所有事件都会被处理 □
+/// - therefore all event is □
 /// - therefore all is □
 // ============================================================================
 // 第二部分: 核心数据结构
@@ -127,33 +138,41 @@ use tracing::{Level, debug, error, info, instrument, span, warn};
 
 ///
 /// 事件类型枚举
+/// event type enum
 /// type enum
 /// 事件typeenum
 /// 定义了系统中所有可能的事件类型
+/// definition system in all may event type
 /// definition system in all may type
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum EventType {
     /// 网络 I/O 事件
+    /// network I/O event
     /// network I/O
     /// network I/O 事件
     NetworkIo,
 
     /// 定时器事件
+    /// event
     Timer,
 
     /// 用户输入事件
+    /// input event
     UserInput,
 
     /// 系统信号事件
+    /// system event
     /// system
     SystemSignal,
 
     /// 自定义事件
+    /// definition event
     /// definition
     Custom(String),
 }
 
 /// 事件优先级
+/// event
 /// 用于优先级调度
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Priority {
@@ -171,9 +190,11 @@ pub enum Priority {
 }
 
 /// 事件结构体
+/// event struct
 /// struct
 /// 事件struct
 /// 表示系统中的一个事件
+/// represent system in event
 /// represent system in
 #[derive(Debug, Clone)]
 pub struct Event {
@@ -199,6 +220,7 @@ pub struct Event {
 
 impl Event {
     /// 创建新事件
+    /// event
     pub fn new(id: u64, event_type: EventType, priority: Priority, data: Vec<u8>) -> Self {
         Self {
             id,
@@ -211,6 +233,7 @@ impl Event {
     }
 
     /// 添加元数据
+    /// data
     pub fn with_metadata(mut self, key: String, value: String) -> Self {
         self.metadata.insert(key, value);
         self
@@ -242,6 +265,7 @@ impl PartialEq for Event {
 impl Eq for Event {}
 
 /// 事件处理结果
+/// event result
 /// result
 /// 事件Handleresult
 #[derive(Debug)]
@@ -261,12 +285,15 @@ pub enum HandleResult {
 }
 
 /// 事件处理器 Trait
+/// event Trait
 /// Trait
 /// 定义事件处理器的接口
+/// definition event
 /// definition
 #[async_trait::async_trait]
 pub trait EventHandler: Send + Sync {
     /// 处理事件
+    /// event
     /// # 参数 (Arguments)
     /// # 返回值 (Returns)
     /// 处理结果 (Handling result)
@@ -276,6 +303,7 @@ pub trait EventHandler: Send + Sync {
     fn name(&self) -> &str;
 
     /// 是否可以处理该事件类型
+    /// can this event type
     /// can this type
     fn can_handle(&self, event_type: &EventType) -> bool;
 }
@@ -342,9 +370,11 @@ pub struct Reactor {
 
     /// 事件队列 (Event queue)
     /// 使用优先级队列实现优先级调度
+    /// queue
     event_queue: Arc<Mutex<BinaryHeap<Event>>>,
 
     /// FIFO 队列 (用于非优先级模式)
+    /// FIFO queue ()
     /// FIFO ()
     fifo_queue: Arc<Mutex<VecDeque<Event>>>,
 
@@ -383,6 +413,7 @@ impl Reactor {
     }
 
     /// 注册事件处理器
+    /// event
     /// # 参数 (Arguments)
     /// - `event_type`: 事件类型 (Event type)
     /// - `event_type`: 事件type (Event type)
@@ -399,6 +430,7 @@ impl Reactor {
     }
 
     /// 提交事件
+    /// event
     /// # 参数 (Arguments)
     /// - `event`: 要提交事件 (Event to submit)
     /// # 返回值 (Returns)
@@ -445,6 +477,7 @@ impl Reactor {
     }
 
     /// 批量提交事件
+    /// event
     pub async fn submit_events_batch(&self, events: Vec<Event>) -> Result<(), String> {
         for event in events {
             self.submit_event(event).await?;
@@ -453,6 +486,7 @@ impl Reactor {
     }
 
     /// 生成新的事件 ID
+    /// event ID
     /// ID
     async fn next_id(&self) -> u64 {
         let mut id = self.next_event_id.lock().await;
@@ -462,6 +496,7 @@ impl Reactor {
     }
 
     /// 创建事件
+    /// event
     pub async fn create_event(
         &self,
         event_type: EventType,
@@ -473,6 +508,7 @@ impl Reactor {
     }
 
     /// 运行事件循环
+    /// Run event circulation
     /// Run circulation
     /// Run事件circulation
     #[instrument(skip(self))]
@@ -519,7 +555,9 @@ impl Reactor {
     }
 
     /// 批量处理事件
+    /// event
     /// 批处理可以提高性能
+    /// can high performance
     /// can performance
     async fn process_events_batch(&self) {
         let batch_size = self.config.batch_size;
@@ -588,6 +626,7 @@ impl Reactor {
     }
 
     /// 处理单个事件
+    /// event
     #[instrument(skip(event, handlers, stats, next_event_id, event_queue, fifo_queue, config))]
     async fn process_single_event(
         event: Event,
@@ -803,6 +842,7 @@ impl Reactor {
 // ============================================================================
 
 /// 网络 I/O 事件处理器
+/// network I/O event
 /// network I/O
 struct NetworkIoHandler {
     name: String,
@@ -835,6 +875,7 @@ impl EventHandler for NetworkIoHandler {
 }
 
 /// 定时器事件处理器
+/// event
 struct TimerHandler {
     name: String,
 }
@@ -865,6 +906,7 @@ impl EventHandler for TimerHandler {
 }
 
 /// 用户输入事件处理器
+/// input event
 struct UserInputHandler {
     name: String,
 }
@@ -900,6 +942,7 @@ impl EventHandler for UserInputHandler {
 // ============================================================================
 
 /// 基础示例: 简单的事件处理
+/// foundation example : simple event
 /// foundation example : simple
 async fn basic_example() {
     println!("\n=== 基础示例: 简单的事件处理 ===");
@@ -978,6 +1021,7 @@ async fn basic_example() {
 }
 
 /// 高级示例: 优先级调度
+/// high example :
 /// example :
 async fn priority_scheduling_example() {
     println!("\n=== 高级示例: 优先级调度 ===");
@@ -1028,6 +1072,7 @@ async fn priority_scheduling_example() {
 }
 
 /// 性能测试: 高吞吐量场景
+/// performance test : high scenario
 /// performance test : scenario
 /// performance test: 高吞吐量scenario
 async fn performance_test() {

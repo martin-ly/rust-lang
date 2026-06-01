@@ -1,8 +1,10 @@
 //! Rust 1.91 泛型特性实现模块（历史版本）
 //! Rust 1.91 generic feature module （this ）
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - JIT 编译器优化对泛型函数的性能提升
 //! - JIT optimization to generic function performance
@@ -11,11 +13,15 @@
 //! - 内存分配优化对泛型容器的影响
 //! - memory optimization to generic impact
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_191_features.rs
+//! - File: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::{collections::HashMap, ops::ControlFlow};
@@ -734,6 +740,7 @@ pub fn demonstrate_rust_191_generics() {
 }
 
 /// 获取 Rust 1.91 泛型特性信息
+/// Gets Rust 1.91 泛型特性信息
 /// Rust 1.91 generic feature
 pub fn get_rust_191_generics_info() -> &'static str {
     "Rust 1.91 Generic Features Module - Comprehensive implementation of generic system improvements"

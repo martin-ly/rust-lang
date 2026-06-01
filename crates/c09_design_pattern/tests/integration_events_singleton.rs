@@ -1,4 +1,5 @@
 //! c09 设计模式：事件与单例 集成测试与简单基准
+//! c09 design ：event and singleton and simple
 //! c09 design ：and singleton and simple
 // 无需直接使用 Arc/Mutex，这里仅通过返回值进行锁操作
 use std::time::Instant;

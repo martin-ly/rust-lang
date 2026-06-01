@@ -30,6 +30,7 @@ use web_sys::{Request, RequestInit, RequestMode, Response};
 /// # 返回值
 /// # return value
 /// 返回 Promise，成功时包含文本内容，失败时包含错误信息
+/// Promise，this inside ，failure error message
 /// Promise，this inside ，error message
 /// # 示例
 /// # example
@@ -59,6 +60,7 @@ pub async fn fetch_text(url: String) -> Result<String, JsValue> {
 }
 
 /// 使用 Fetch API 获取 JSON 数据
+/// Fetch API JSON data
 /// Fetch API JSON
 /// Use Fetch API Get JSON 数据
 /// # 参数
@@ -70,6 +72,7 @@ pub async fn fetch_text(url: String) -> Result<String, JsValue> {
 /// # 返回值
 /// # return value
 /// 返回 Promise，成功时包含 JSON 对象，失败时包含错误信息
+/// Promise， JSON to ，failure error message
 /// Promise， JSON to ，error message
 /// Return Promise，成功时Contains JSON to象，失败时Containserror message
 /// # 示例

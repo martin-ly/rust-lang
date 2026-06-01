@@ -20,6 +20,7 @@ pub enum ProcMacroDiagnostic {
     /// 解析成功
     ParseOk,
     /// 语法错误
+    /// syntax
     SyntaxError {
         /// 错误描述
         /// describe
@@ -31,6 +32,7 @@ pub enum ProcMacroDiagnostic {
         offset: usize,
     },
     /// 不支持的语法结构
+    /// syntax structure
     /// structure
     Unsupported {
         /// 结构名称
@@ -54,6 +56,7 @@ impl ProcMacroDiagnosticAssertions {
     }
 
     /// 断言诊断为指定类型的语法错误
+    /// as type syntax
     /// as type
     pub fn assert_syntax_error_at(diag: &ProcMacroDiagnostic, expected_offset: usize) {
         assert_matches!(
@@ -93,6 +96,7 @@ pub struct MacroMetadataCache {
 
 impl MacroMetadataCache {
     /// 创建新的元数据缓存
+    /// data cache
     pub fn new() -> Self {
         Self {
             supported_attrs: LazyLock::from(vec!["derive", "inline", "test", "cfg", "allow"]),

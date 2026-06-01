@@ -10,6 +10,7 @@
 //! ## 核心概念
 //! ## core concept
 //! - **AST**: 抽象语法树表示
+//! - **AST**: syntax tree represent
 //! - **AST**: tree represent
 //! - **AST**: 抽象语法treerepresent
 //! - **编译时执行**: 在编译阶段运行代码

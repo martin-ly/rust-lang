@@ -5,16 +5,19 @@
 //! **版本 attribution**: Rust 1.79+ 稳定化，Rust 1.95+ 持续增强
 //! **版this attribution**: Rust 1.79+ 稳定化，Rust 1.95+ 持续增强
 //! Cargo Script 允许在单个 `.rs` 文件中编写完整 Rust 程序并直接嵌入依赖，
+//! Cargo Script allow in `.rs` in complete Rust program and ，
 //! Cargo Script in `.rs` in complete Rust program and ，
 //! 无需 `Cargo.toml` 或完整项目目录结构。
 //! `Cargo.toml` or complete project structure 。
 //! ## 核心概念
 //! ## core concept
 //! - **单文件可执行**: 将源码、依赖清单、元数据合并到一个文件。
+//! - ****: will 、、data and to 。
 //! - ****: will 、、and to 。
 //! - **嵌入式 manifest**: 使用 frontmatter 或代码块声明 `dependencies`。
 //! - **嵌入式 manifest**: Use frontmatter or代码块声明 `dependencies`。
 //! - **即时运行**: 通过 `cargo` 或 `rust-script` 直接执行，享受自动缓存。
+//! - **Run **: `cargo` or `rust-script` ，cache 。
 //! - **Run **: `cargo` or `rust-script` ，。
 //! - **即时Run**: Via `cargo` or `rust-script` 直接Execute，享受自动缓存。
 //! ## 运行方式概览

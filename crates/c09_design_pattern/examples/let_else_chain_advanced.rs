@@ -1,4 +1,5 @@
 //! Rust 1.90 let-else 责任链模式高级示例
+//! Rust 1.90 let-else chain of responsibility high example
 //! Rust 1.90 let-else chain of responsibility example
 //! 本示例展示：
 //! this example ：

@@ -11,6 +11,7 @@ use tracing::{debug, info};
 /// 2025年异步数据库模式演示
 /// 2025async database demonstration
 /// 展示最新的异步数据库编程模式和最佳实践
+/// async database and best practice
 /// async database and
 /// 1. 异步数据库连接池
 /// 1. async database connection pool
@@ -508,6 +509,7 @@ impl TransactionHandle {
 }
 
 /// 3. 异步数据库缓存系统
+/// 3. async database cache system
 /// 3. async database system
 #[derive(Debug, Clone)]
 pub struct AsyncDatabaseCache {

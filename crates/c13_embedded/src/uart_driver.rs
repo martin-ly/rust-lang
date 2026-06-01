@@ -40,6 +40,7 @@ pub struct UartRegisters {
 /// line state
 pub mod lsr_flags {
     /// 数据就绪
+    /// data
     pub const DR: u32 = 1 << 0;
     /// 发送保持寄存器空
     pub const THRE: u32 = 1 << 5;
@@ -76,12 +77,14 @@ impl UartDriver {
     }
 
     /// 检查是否有数据可读
+    /// data
     fn is_data_ready(&self) -> bool {
         let lsr = unsafe { core::ptr::read_volatile(core::ptr::addr_of!((*self.base).lsr)) };
         (lsr & lsr_flags::DR) != 0
     }
 
     /// 发送单个字节（轮询方式）
+    /// （poll way ）
     /// （way ）
     /// 阻塞直到发送保持寄存器为空。
     /// to as 。
@@ -96,8 +99,10 @@ impl UartDriver {
     }
 
     /// 接收单个字节（轮询方式）
+    /// （poll way ）
     /// （way ）
     /// 如果没有数据，返回 `None`。
+    /// if data ， `None`。
     /// if ， `None`。
     /// if没有数据，Return `None`。
     pub fn receive_byte(&self) -> Option<u8> {
@@ -120,6 +125,7 @@ impl UartDriver {
     /// 初始化 UART（概念演示）
     /// UART（concept demonstration ）
     /// 真实实现需要配置波特率分频、数据位、停止位、校验等。
+    /// real configuration 、data 、、etc. 。
     /// real 、、、etc. 。
     pub fn init(&mut self) {
         // 禁用中断（轮询模式）
@@ -143,13 +149,16 @@ impl fmt::Write for UartDriver {
 /// in driver UART concept
 /// in断driver UART concept
 /// 中断驱动模式更高效，CPU 只在有数据时才处理 UART：
+/// in driver efficient ，CPU in data UART：
 /// in driver efficient ，CPU in UART：
 /// 1. 配置 UART 中断使能（接收数据就绪中断）
+/// 1. configuration UART in （data in ）
 /// 1. UART in （in ）
 /// 2. 在 NVIC 中启用 UART 中断
 /// 2. in NVIC in UART in
 /// 2. in NVIC in启用 UART in断
 /// 3. 实现 ISR，在中断中读取/写入数据
+/// 3. ISR，in in in /data
 /// 3. ISR，in in in /
 /// 4. 使用环形缓冲区解耦 ISR 和应用代码
 /// 4. buffering ISR and application

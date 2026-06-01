@@ -2,6 +2,7 @@
 //! # 概述
 //! #
 //! 允许在 **bare-metal** 环境中使用 `async`/`await` 编写固件。
+//! allow in **bare-metal** environment in `async`/`await` firmware 。
 //! in **bare-metal** environment in `async`/`await` firmware 。
 //! # 核心特性
 //! # core feature
@@ -17,6 +18,7 @@
 //! | 模式 | 代码风格 | 调度方式 | 适用场景 |
 //! | | | way | scenario |
 //! | 裸机轮询 | 超级循环 + 状态机 | 手动 | 极简设备 |
+//! | poll | circulation + state machine | | |
 //! | | circulation + state machine | | |
 //! | 裸机Poll | 超级circulation + state machine | 手动 | 极简设备 |
 //! | RTIC | 基于硬件任务 | 优先级抢占 | 硬实时 |
@@ -35,6 +37,7 @@
 /// # Embassy Executor
 ///
 /// 所有 `async` 任务共享一个调用栈，通过 `Waker` 机制在中断事件发生时恢复执行。
+/// all `async` task stack ， `Waker` mechanism in in event 。
 /// all `async` task stack ， `Waker` mechanism in in 。
 /// ## and Tokio 差异
 // | 维度 | Tokio (用户态) | Embassy (裸机) |
@@ -130,6 +133,7 @@ pub struct EmbassyHalConcept;
 
 impl EmbassyHalConcept {
     /// GPIO 异步操作概念
+    /// GPIO async operation concept
     /// GPIO async concept
     pub fn async_gpio_concept() -> &'static str {
         r#"

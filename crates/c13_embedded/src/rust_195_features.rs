@@ -51,6 +51,7 @@
 /// └── 指针指向 MMIO 寄存器？ → as_ref_unchecked()（硬件保证有效）
 /// └── pointer MMIO ？ → as_ref_unchecked()（hardware effective ）
 /// ## 反例 / 严重误用
+/// ## anti-pattern / severe
 /// ## /
 /// - **悬垂指针**：转换后引用的内存已释放 → UB
 /// - **pointer **：conversion after reference memory → UB
@@ -113,6 +114,7 @@ impl StaticBuffer {
 
     /// # Safety
     /// 调用者必须确保指针在构造时已验证非 null 且有效。
+    /// must pointer in verified null and effective 。
     /// must pointer in null and effective 。
     pub unsafe fn as_slice(&self) -> &[u8] {
         // SAFETY: ptr 在构造时已验证非 null 且有效
@@ -121,6 +123,7 @@ impl StaticBuffer {
 
     /// # Safety
     /// 调用者必须确保指针在构造时已验证非 null 且有效，且不存在别名冲突。
+    /// must pointer in verified null and effective ，and in 。
     /// must pointer in null and effective ，and in 。
     pub unsafe fn as_mut_slice(&mut self) -> &mut [u8] {
         // SAFETY: ptr 在构造时已验证非 null 且有效
@@ -188,8 +191,10 @@ where
 /// ## 概念
 /// ## concept
 /// - **Inline Assembly**: 在高级语言中直接嵌入机器指令
+/// - **Inline Assembly**: in high in
 /// - **Inline Assembly**: in in
 /// ## 语法
+/// ## syntax
 /// ##
 ///     std::arch::asm!(
 /// }
@@ -248,6 +253,7 @@ impl PowerPcAsmExamples {
 /// 这使得编写跨平台内联汇编更加简洁，无需为每个平台维护完整的独立 `asm!` 块。
 /// platform inside ，as platform complete `asm!` 。
 /// ## 语法
+/// ## syntax
 /// ##
 ///     "common_instruction",
 ///     #[cfg(target_arch = "x86_64")]
@@ -264,10 +270,13 @@ impl PowerPcAsmExamples {
 /// | 方式 | 代码重复度 | 可维护性 |
 /// | way | | |
 /// | `#[cfg]` 包裹整个 `asm!` 块 | 高（每个平台写完整块） | 低 |
+/// | `#[cfg]` `asm!` | high （platform complete ） | low |
 /// | `#[cfg]` `asm!` | （platform complete ） | |
 /// | `asm_cfg`（指令级 `#[cfg]`） | 低（仅差异指令标记） | 高 |
+/// | `asm_cfg`（ `#[cfg]`） | low （mark ） | high |
 /// | `asm_cfg`（ `#[cfg]`） | （mark ） | |
 /// | `asm_cfg`（指令级 `#[cfg]`） | 低（仅差异指令mark） | 高 |
+/// | `asm_cfg`（ `#[cfg]`） | low （mark） | high |
 /// | `asm_cfg`（ `#[cfg]`） | （mark） | |
 pub struct AsmCfgExamples;
 
@@ -277,10 +286,12 @@ impl AsmCfgExamples {
     /// x86_64 使用 `mfence`，aarch64 使用 `dmb ish`，其他平台使用编译器屏障。
     /// x86_64 `mfence`，aarch64 `dmb ish`，its platform barrier 。
     /// 此函数调用 `std::arch::asm!`，属于 unsafe 操作。调用者需确保：
+    /// this function `std::arch::asm!`， unsafe operation 。：
     /// this function `std::arch::asm!`， unsafe 。：
     /// 1. 在正确的上下文中使用内存屏障
     /// 1. in on under in memory barrier
     /// 2. 不会导致数据竞争或死锁
+    /// 2. data or lock
     /// 2. or lock
     #[cfg(any(target_arch = "x86_64", target_arch = "aarch64"))]
     pub unsafe fn cross_platform_fence() {
@@ -308,6 +319,7 @@ impl AsmCfgExamples {
     /// x86_64 支持 `int3` 断点指令，aarch64 支持 `brk #0`，其他平台仅执行 `nop`。
     /// x86_64 `int3` point ，aarch64 `brk #0`，its platform `nop`。
     /// 此函数调用 `std::arch::asm!`，属于 unsafe 操作。调用者需确保：
+    /// this function `std::arch::asm!`， unsafe operation 。：
     /// this function `std::arch::asm!`， unsafe 。：
     /// 1. 断点指令不会破坏程序状态
     /// 1. point program state
@@ -473,6 +485,7 @@ impl RealRust195Features {
     /// 使用 `&raw const` 模拟寄存器访问
     /// `&raw const`
     /// `&raw const` 避免创建中间引用，适合 MMIO 和寄存器操作。
+    /// `&raw const` in reference ， MMIO and operation 。
     /// `&raw const` in reference ， MMIO and 。
     pub fn register_raw_ptr(value: u32) -> u32 {
         let ptr = &raw const value;

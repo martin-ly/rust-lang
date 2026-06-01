@@ -89,6 +89,7 @@ fn bench_memory_pool(c: &mut Criterion) {
 }
 
 /// 缓存性能测试
+/// cache performance test
 /// performance test
 /// 缓存performance test
 fn bench_cache_performance(c: &mut Criterion) {
@@ -130,6 +131,7 @@ fn bench_cache_performance(c: &mut Criterion) {
 }
 
 /// 数据包内存性能测试
+/// data packet memory performance test
 /// memory performance test
 /// 数据包memoryperformance test
 fn bench_packet_memory(c: &mut Criterion) {
@@ -177,6 +179,7 @@ fn bench_packet_memory(c: &mut Criterion) {
 }
 
 /// 大数据块内存性能测试
+/// data memory performance test
 /// memory performance test
 /// 大数据块memoryperformance test
 fn bench_large_memory_blocks(c: &mut Criterion) {

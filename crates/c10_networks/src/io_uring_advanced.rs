@@ -1,4 +1,5 @@
 //! io_uring 深度实践 —— Linux 高性能异步 I/O
+//! io_uring —— Linux high performance async I/O
 //! io_uring —— Linux performance async I/O
 //! io_uring 深度实践 —— Linux 高performanceasync I/O
 //! # 概述
@@ -15,6 +16,7 @@
 //! ## strength to
 //! | 特性 | epoll | io_uring |
 //! | 接口语义 | 就绪通知（readiness） | 完成通知（completion） |
+//! | | notify （readiness） | complete notify （completion） |
 //! | | （readiness） | （completion） |
 //! | 接口语义 | 就绪Notify（readiness） | 完成Notify（completion） |
 //! | 系统调用 | epoll_ctl + epoll_wait | io_uring_enter（可批量） |
@@ -53,6 +55,7 @@ pub mod linux_impl {
     /// 1.
     /// 2. 构建 Read SQE (Submission Queue Entry)
     /// 3. 提交并等待完成
+    /// 3. and etc. complete
     /// 3. and etc.
     /// 4. 处理 CQE (Completion Queue Entry)
     pub fn read_file_full(path: &str) -> std::io::Result<Vec<u8>> {

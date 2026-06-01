@@ -1,6 +1,7 @@
 use c03_control_fn::*;
 
 /// 测试错误输入情况
+/// input situation
 /// situation
 #[test]
 fn test_error_inputs() {

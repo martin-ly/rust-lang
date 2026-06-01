@@ -1,6 +1,7 @@
 //! 性能优化模块
 //! performance optimization module
 //! 包括内存池、零拷贝优化、缓存管理等。
+//! memory pool 、optimization 、cache etc. 。
 //! memory pool 、optimization 、etc. 。
 //! 包括memory pool、零拷贝optimization、缓存管理etc.。
 pub mod cache;
@@ -17,6 +18,7 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 /// 性能配置
+/// performance configuration
 /// performance
 #[derive(Debug, Clone)]
 pub struct PerformanceConfig {
@@ -74,6 +76,7 @@ impl PerformanceManager {
     }
 
     /// 获取缓存
+    /// cache
     pub fn cache(&self) -> Arc<Cache<Vec<u8>, Vec<u8>>> {
         self.cache.clone()
     }
@@ -157,12 +160,14 @@ impl ZeroCopyBuffer {
     }
 
     /// 获取数据切片
+    /// data
     pub fn as_slice(&self) -> Bytes {
         let full_slice = self.data.as_slice();
         Bytes::copy_from_slice(&full_slice[self.offset..self.offset + self.length])
     }
 
     /// 获取可变数据切片
+    /// data
     pub fn as_mut_slice(&mut self) -> &mut [u8] {
         // 由于 PooledBytes 不再提供 as_mut_slice，这里需要重新设计
         // 暂时返回空切片，实际应用中需要重新设计这个接口
@@ -276,6 +281,7 @@ impl PerformanceMonitor {
     }
 
     /// 记录操作开始
+    /// operation
     pub fn start_operation(&self, operation: &str) -> OperationTimer {
         OperationTimer::new(self.metrics.clone(), operation.to_string())
     }
@@ -358,6 +364,7 @@ impl PerformanceMonitor {
 }
 
 /// 操作计时器
+/// operation
 pub struct OperationTimer {
     metrics: Arc<MetricsCollector>,
     operation: String,
@@ -374,6 +381,7 @@ impl OperationTimer {
     }
 
     /// 完成操作并记录时间
+    /// complete operation and time
     /// and time
     pub fn finish(self) {
         let duration = self.start_time.elapsed();

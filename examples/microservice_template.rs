@@ -8,6 +8,7 @@
 //! 特性:
 //! feature :
 //! - 配置管理 (Builder 模式)
+//! - configuration (Builder )
 //! - (Builder )
 //! - 服务注册 (单例模式)
 //! - service registration (singleton )
@@ -25,6 +26,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::sync::RwLock;
 
 /// 服务配置 (Builder 模式)
+/// configuration (Builder )
 /// (Builder )
 /// 服务Configure (Builder 模式)
 pub struct ServiceConfig {

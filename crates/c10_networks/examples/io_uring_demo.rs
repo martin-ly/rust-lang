@@ -1,4 +1,5 @@
 //! Linux io_uring 高性能 I/O 实战示例
+//! Linux io_uring high performance I/O example
 //! Linux io_uring performance I/O example
 //! Linux io_uring 高performance I/O 实战Example of
 //! 包括批量读写、零拷贝网络 I/O 和异步文件操作。
@@ -36,11 +37,13 @@ use std::io;
 /// | 系统调用次数 | 每次 I/O 需 syscall | batch 后仅需 1 次 syscall |
 /// | system | I/O syscall | batch after 1 syscall |
 /// | 数据拷贝 | 内核 ↔ 用户态拷贝 | 支持 registered buffers（零拷贝） |
+/// | data | kernel ↔ | registered buffers（） |
 /// | | kernel ↔ | registered buffers（） |
 /// | 数据拷贝 | kernel ↔ 用户态拷贝 | Supports registered buffers（零拷贝） |
 /// | 异步文件 I/O | 需线程池模拟 | 原生支持（Linux AIO 替代） |
 /// | async I/O | thread pool | （Linux AIO ） |
 /// | 性能 | 高 | 更高（批处理 + 轮询模式） |
+/// | performance | high | high （ + poll ） |
 /// | performance | | （ + ） |
 fn io_uring_concepts() {
     println!("--- io_uring 核心概念 ---");

@@ -11,6 +11,7 @@ use tracing::{debug, info, warn};
 /// 2025年异步内存管理优化演示
 /// 2025async memory optimization demonstration
 /// 展示最新的异步内存管理技术和最佳实践
+/// async memory technique and best practice
 /// async memory technique and
 /// 1. 异步内存池管理器
 /// 1. async memory pool

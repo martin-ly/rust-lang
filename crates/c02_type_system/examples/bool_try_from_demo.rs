@@ -72,6 +72,7 @@ fn demo_ffi_boolean() {
 // ==================== 示例 3: 数据库 / 配置文件解析 ====================
 
 /// 从数据库或配置文件中读取整数字段并验证
+/// from database or configuration in number and
 /// from database or in field and
 fn demo_config_parsing() {
     println!("\n--- 配置解析: 数据库/JSON 整数字段 ---");

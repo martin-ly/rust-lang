@@ -60,6 +60,7 @@ impl RendererFactory {
 // ============================================================================
 
 /// HTTP 配置
+/// HTTP configuration
 /// HTTP
 #[wasm_bindgen]
 pub struct HttpConfig {
@@ -72,6 +73,7 @@ pub struct HttpConfig {
 #[wasm_bindgen]
 impl HttpConfig {
     /// 获取超时时间
+    /// timeout time
     /// time
     /// Get超时time
     #[wasm_bindgen(getter)]
@@ -80,6 +82,7 @@ impl HttpConfig {
     }
 
     /// 获取重试次数
+    /// retry
     #[wasm_bindgen(getter)]
     pub fn retries(&self) -> u32 {
         self.retries
@@ -93,6 +96,7 @@ impl HttpConfig {
     }
 
     /// 获取配置描述
+    /// configuration describe
     /// describe
     #[wasm_bindgen(js_name = "describe")]
     pub fn describe(&self) -> String {
@@ -107,8 +111,10 @@ impl HttpConfig {
 }
 
 /// HTTP 配置建造者
+/// HTTP configuration
 /// HTTP
 /// 使用建造者模式逐步构建配置对象
+/// configuration to
 /// to
 /// # 示例
 /// # example
@@ -149,6 +155,7 @@ impl HttpConfigBuilder {
     }
 
     /// 设置超时时间（毫秒）
+    /// timeout time （）
     /// time （）
     pub fn timeout(mut self, timeout: u32) -> Self {
         self.timeout = Some(timeout);
@@ -156,6 +163,7 @@ impl HttpConfigBuilder {
     }
 
     /// 设置重试次数
+    /// retry
     pub fn retries(mut self, retries: u32) -> Self {
         self.retries = Some(retries);
         self
@@ -170,6 +178,7 @@ impl HttpConfigBuilder {
     }
 
     /// 构建配置对象
+    /// configuration to
     /// to
     pub fn build(self) -> Result<HttpConfig, JsValue> {
         let url = self
@@ -190,6 +199,7 @@ impl HttpConfigBuilder {
 // ============================================================================
 
 /// 应用配置单例
+/// application configuration singleton
 /// application singleton
 static APP_CONFIG: OnceLock<AppConfig> = OnceLock::new();
 
@@ -199,6 +209,7 @@ struct AppConfig {
 }
 
 /// 初始化应用配置
+/// application configuration
 /// application
 /// # 参数
 /// # parameter
@@ -329,6 +340,7 @@ impl Sorter {
 // ============================================================================
 
 /// 事件发射器
+/// event
 /// 简单的观察者模式实现
 /// simple observer
 #[wasm_bindgen]
@@ -355,6 +367,7 @@ impl EventEmitter {
     }
 
     /// 触发事件
+    /// event
     /// # 参数
     /// # parameter
     pub fn emit(&self, data: &str) {

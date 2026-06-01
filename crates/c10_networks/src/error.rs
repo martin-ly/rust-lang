@@ -19,6 +19,7 @@ pub enum NetworkError {
     Protocol(String),
 
     /// 超时错误
+    /// timeout
     #[error("Timeout after {0:?}")]
     Timeout(Duration),
 
@@ -35,6 +36,7 @@ pub enum NetworkError {
     Encryption(String),
 
     /// 配置错误
+    /// configuration
     #[error("Configuration error: {0}")]
     Configuration(String),
 
@@ -101,6 +103,7 @@ pub enum ProtocolError {
 #[derive(Error, Debug)]
 pub enum PerformanceError {
     /// 连接池耗尽
+    /// connection pool
     #[error("Connection pool exhausted")]
     PoolExhausted,
 
@@ -114,6 +117,7 @@ pub enum PerformanceError {
     InsufficientMemory { required: usize, available: usize },
 
     /// 负载过高
+    /// high
     #[error("High load: {load}%")]
     HighLoad { load: f64 },
 }
@@ -122,11 +126,13 @@ pub enum PerformanceError {
 #[derive(Error, Debug)]
 pub enum SecurityError {
     /// 证书验证失败
+    /// certificate failure
     /// certificate
     #[error("Certificate verification failed: {0}")]
     CertificateVerification(String),
 
     /// 签名验证失败
+    /// failure
     #[error("Signature verification failed: {0}")]
     SignatureVerification(String),
 
@@ -143,13 +149,16 @@ pub enum SecurityError {
 /// error recovery strategy
 pub trait ErrorRecovery {
     /// 是否可以重试
+    /// can retry
     /// can
     fn is_retryable(&self) -> bool;
 
     /// 获取重试延迟
+    /// retry
     fn retry_delay(&self) -> Option<Duration>;
 
     /// 获取最大重试次数
+    /// maximum retry
     /// maximum
     fn max_retries(&self) -> Option<u32>;
 }

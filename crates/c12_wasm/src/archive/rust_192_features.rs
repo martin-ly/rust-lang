@@ -38,9 +38,11 @@ impl WasmBuffer {
     }
 
     /// 写入数据到缓冲区
+    /// data to buffering
     /// to buffering
     ///
     /// 调用者必须确保不会超出缓冲区容量，且写入的数据不会导致未定义行为
+    /// must buffering ，and data definition as
     /// must buffering ，and definition as
     pub unsafe fn write(&mut self, data: &[u8]) -> usize {
         let write_len = data.len().min(self.buffer.len() - self.initialized_len);
@@ -52,6 +54,7 @@ impl WasmBuffer {
     }
 
     /// 读取已初始化的数据
+    /// data
     ///
     pub unsafe fn read(&self, len: usize) -> Vec<u8> {
         let read_len = len.min(self.initialized_len);
@@ -137,6 +140,7 @@ pub fn calculate_buffer_chunks(total_size: usize, chunk_size: NonZeroUsize) -> u
 }
 
 /// WASM 内存分配器配置
+/// WASM allocator configuration
 /// WASM allocator
 pub struct WasmAllocatorConfig {
     page_size: NonZeroUsize,
@@ -164,6 +168,7 @@ impl WasmAllocatorConfig {
 }
 
 /// WASM 数据传输配置
+/// WASM data transmission configuration
 /// WASM transmission
 pub struct WasmTransferConfig {
     packet_size: NonZeroUsize,
@@ -175,6 +180,7 @@ impl WasmTransferConfig {
     }
 
     /// 计算需要的数据包数量
+    /// data packet quantity
     /// quantity
     ///
     /// This function uses Rust 1.92.0 feature `div_ceil`. MSRV warnings are expected.
@@ -193,17 +199,21 @@ impl WasmTransferConfig {
 // ==================== 3. 联合体原始引用在 WASM FFI 中的应用 ====================
 
 /// Rust 1.92.0: 允许在安全代码中使用原始引用访问联合体字段
+/// Rust 1.92.0: allow in in reference union volume field
 /// Rust 1.92.0: in in reference union volume field
 #[repr(C)]
 pub union WasmFFIUnion {
     /// 整数字段
+    /// number
     /// field
     /// 整数field
     pub integer: u32,
     /// 浮点数字段
+    /// point number
     /// point field
     pub float: f32,
     /// 字节数组字段
+    /// array field
     /// field
     /// 字节arrayfield
     pub bytes: [u8; 4],
@@ -260,6 +270,7 @@ pub fn wasm_optimized_vec_eq<T: PartialEq>(vec1: &[T], vec2: &[T]) -> bool {
 // ==================== 5. rotate_right 在 WASM 数据处理中的应用 ====================
 
 /// WASM 数据旋转处理
+/// WASM data
 /// WASM
 /// WASM 数据旋转Handle
 pub fn wasm_rotate_data<T>(data: &mut [T], positions: usize) {
@@ -346,6 +357,7 @@ impl WasmOptimizedProcessor {
     }
 
     /// 处理数据（WASM 绑定）
+    /// data （WASM ）
     /// （WASM ）
     #[wasm_bindgen]
     pub fn process(&mut self, data: &[u8]) -> usize {
@@ -353,6 +365,7 @@ impl WasmOptimizedProcessor {
     }
 
     /// 获取已处理的数据长度
+    /// data
     #[wasm_bindgen]
     pub fn processed_len(&self) -> usize {
         self.buffer.initialized_len()

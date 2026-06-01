@@ -1,6 +1,7 @@
 #![forbid(unsafe_code)]
 
 //! 本模块涵盖 WASM 二进制体积优化、启动时间优化、JS/WASM 边界开销分析，
+//! this module cover WASM volume optimization 、time optimization 、JS/WASM edge overhead analyze ，
 //! this module WASM volume optimization 、time optimization 、JS/WASM edge overhead analyze ，
 //! and wasm-bindgen and wasm-pack 构建选项to比。
 

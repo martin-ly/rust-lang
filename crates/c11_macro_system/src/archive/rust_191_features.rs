@@ -5,8 +5,10 @@
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - const 上下文增强（宏常量配置计算）
+//! - const on under （constant configuration ）
 //! - const on under （constant ）
 //! - 新的稳定 API（宏数据处理）
+//! - API（data ）
 //! - API（）
 //! - JIT 编译器优化（宏展开性能提升）
 //! - JIT optimization （performance ）
@@ -14,9 +16,11 @@
 //! - allocator optimization （data structure optimization ）
 //! - allocatoroptimization（宏data structureoptimization）
 //! - 宏展开缓存机制（编译时优化）
+//! - cache mechanism （compile-time optimization ）
 //! - mechanism （compile-time optimization ）
 //! - 宏展开缓存mechanism（compile-timeoptimization）
 //! - 改进的宏错误消息（开发体验提升）
+//! - message （volume ）
 //! - （volume ）
 //! - 过程宏编译优化（编译时间减少）
 //! - optimization （compile-time ）
@@ -36,6 +40,7 @@ use std::ops::ControlFlow;
 
 pub mod const_macro_config {
     /// 宏系统配置
+    /// system configuration
     /// system
     pub struct MacroConfigSystem;
 
@@ -66,8 +71,10 @@ pub mod const_macro_config {
         pub const MAX_EXPANSION_SIZE: usize = Self::MAX_MACRO_ARGS * Self::MAX_MACRO_DEPTH;
 
         /// 演示宏系统配置
+        /// demonstration system configuration
         /// demonstration system
         /// 打印宏系统的各种配置参数，包括最大参数数、深度和缓冲区大小
+        /// system configuration parameter ，maximum parameter 、and buffering
         /// system parameter ，maximum parameter 、and buffering
         pub fn demonstrate() {
             println!("\n=== Const 宏系统配置 ===");
@@ -81,8 +88,10 @@ pub mod const_macro_config {
     }
 
     /// 宏展开配置
+    /// configuration
     /// 宏展开Configure
     /// 使用 const 上下文计算宏展开配置
+    /// const on under configuration
     /// const on under
     pub struct MacroExpansionConfig;
 
@@ -91,25 +100,31 @@ pub mod const_macro_config {
         /// maximum quantity
         pub const MAX_TOKENS: usize = 10000;
         /// 宏展开支持的最大递归深度
+        /// maximum recursive
         /// maximum
         pub const MAX_RECURSION: usize = 100;
         /// 宏展开缓存大小（字节）
+        /// cache （）
         /// （）
         pub const CACHE_SIZE: usize = 1024;
 
         // Rust 1.91: const 引用计算
         pub const MAX_TOKENS_REF: &usize = &Self::MAX_TOKENS;
         /// 最大递归深度的引用
+        /// maximum recursive reference
         /// maximum reference
         pub const MAX_RECURSION_REF: &usize = &Self::MAX_RECURSION;
         /// 总缓存大小（基于最大令牌数和缓存大小计算）
+        /// cache （maximum and cache ）
         /// （maximum and ）
         pub const TOTAL_CACHE_SIZE: usize = *Self::MAX_TOKENS_REF * Self::CACHE_SIZE;
 
         /// 演示宏展开配置
+        /// demonstration configuration
         /// demonstration
         /// Demonstration of宏展开Configure
         /// 打印宏展开的各种配置参数，包括最大令牌数、递归深度和缓存大小
+        /// configuration parameter ，maximum 、recursive and cache
         /// parameter ，maximum 、and
         pub fn demonstrate() {
             println!("\n=== Const 宏展开配置 ===");
@@ -180,7 +195,9 @@ pub mod macro_new_apis {
 
 pub mod macro_jit_optimizations {
     /// 处理宏展开数据
+    /// data
     /// Rust 1.91 JIT 优化：迭代器链式操作性能提升约 15-25%
+    /// Rust 1.91 JIT optimization ：operation performance 15-25%
     /// Rust 1.91 JIT optimization ：performance 15-25%
     pub fn process_macro_expansion(tokens: &[String]) -> Vec<String> {
         tokens
@@ -193,6 +210,7 @@ pub mod macro_jit_optimizations {
 
     /// 计算宏统计信息
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
+    /// Rust 1.91 JIT optimization ：simple and operation performance 10-15%
     /// Rust 1.91 JIT optimization ：simple and performance 10-15%
     pub fn calculate_macro_stats(token_counts: &[usize]) -> (usize, usize, usize) {
         let sum: usize = token_counts.iter().sum();
@@ -205,6 +223,7 @@ pub mod macro_jit_optimizations {
     /// 过滤和转换宏令牌
     /// and conversion
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 20-25%
+    /// Rust 1.91 JIT optimization ：complex operation performance 20-25%
     /// Rust 1.91 JIT optimization ：complex performance 20-25%
     pub fn filter_and_transform_tokens(tokens: &[String]) -> Vec<String> {
         tokens
@@ -260,6 +279,7 @@ pub mod macro_memory_optimizations {
     }
 
     /// 处理宏数据
+    /// data
     pub fn process_macro_data(data: &str) -> Vec<String> {
         data.lines()
             .filter_map(|line| {
@@ -298,6 +318,7 @@ pub mod macro_std_new_apis {
 
     /// Vec::try_reserve_exact 示例
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
+    /// Rust 1.91 ：，may failure
     /// Rust 1.91 ：，may
     pub fn allocate_macro_buffer(
         size: usize,
@@ -361,8 +382,10 @@ pub mod comprehensive_macro_examples {
         pub const TOTAL_BUFFER_SIZE: usize = *Self::MAX_ARGS_REF * Self::BUFFER_SIZE;
 
         /// 演示综合宏系统的配置信息
+        /// demonstration synthesize system configuration
         /// demonstration synthesize system
         /// 打印宏系统的各种配置参数，包括最大参数数、深度和缓冲区大小
+        /// system configuration parameter ，maximum parameter 、and buffering
         /// system parameter ，maximum parameter 、and buffering
         pub fn demonstrate() {
             println!("\n=== 综合宏系统 ===");
@@ -374,6 +397,7 @@ pub mod comprehensive_macro_examples {
     }
 
     /// 高性能宏数据处理管道
+    /// high performance data pipe
     /// performance pipe
     /// 利用 JIT 优化和内存分配改进
     /// JIT optimization and memory
@@ -388,8 +412,10 @@ pub mod comprehensive_macro_examples {
     }
 
     /// 配置文件解析示例
+    /// configuration example
     /// example
     /// 使用新的 API 解析宏配置
+    /// API configuration
     /// API
     pub fn parse_macro_config(config_text: &str) -> Vec<String> {
         let mut cursor = Cursor::new(config_text.as_bytes());
@@ -477,6 +503,7 @@ pub fn demonstrate_rust_191_macro_features() {
 // ==================== 7. 宏展开缓存机制（编译时优化）====================
 
 /// Rust 1.91 宏展开缓存机制
+/// Rust 1.91 cache mechanism
 /// Rust 1.91 mechanism
 /// Rust 1.91 宏展开缓存mechanism
 pub mod macro_expansion_cache {
@@ -499,14 +526,17 @@ pub mod macro_expansion_cache {
     }
 
     /// 宏展开缓存
+    /// cache
     pub struct MacroExpansionCache {
         /// 缓存映射
+        /// cache
         cache: HashMap<u64, MacroExpansionResult>,
         /// 统计信息
         stats: CacheStatistics,
     }
 
     /// 缓存统计信息
+    /// cache
     #[derive(Debug, Clone)]
     pub struct CacheStatistics {
         /// 总请求数
@@ -526,6 +556,7 @@ pub mod macro_expansion_cache {
 
     impl MacroExpansionCache {
         /// 创建新的宏展开缓存
+        /// cache
         pub fn new() -> Self {
             Self {
                 cache: HashMap::new(),
@@ -539,6 +570,7 @@ pub mod macro_expansion_cache {
         }
 
         /// 计算宏输入哈希
+        /// input
         fn hash_macro_input(macro_name: &str, args: &str) -> u64 {
             let mut hasher = DefaultHasher::new();
             macro_name.hash(&mut hasher);
@@ -547,8 +579,10 @@ pub mod macro_expansion_cache {
         }
 
         /// 查找缓存中的宏展开结果
+        /// cache in result
         /// in result
         /// Rust 1.91: 使用缓存加速宏展开查找
+        /// Rust 1.91: cache
         /// Rust 1.91:
         pub fn lookup(&mut self, macro_name: &str, args: &str) -> Option<MacroExpansionResult> {
             let start_time = std::time::Instant::now();
@@ -575,6 +609,7 @@ pub mod macro_expansion_cache {
         }
 
         /// 存储宏展开结果到缓存
+        /// result to cache
         /// result to
         pub fn store(&mut self, macro_name: &str, args: &str, expanded_code: String) {
             let key = Self::hash_macro_input(macro_name, args);
@@ -594,6 +629,7 @@ pub mod macro_expansion_cache {
         }
 
         /// 清除缓存
+        /// cache
         pub fn clear(&mut self) {
             self.cache.clear();
         }
@@ -606,6 +642,7 @@ pub mod macro_expansion_cache {
     }
 
     /// 演示宏展开缓存
+    /// demonstration cache
     /// demonstration
     /// Demonstration of宏展开缓存
     pub fn demonstrate_expansion_cache() {
@@ -661,6 +698,7 @@ pub mod improved_macro_errors {
             /// actual parameter quantity
             found: usize,
             /// 宏名称
+            /// macro name
             macro_name: String,
         },
         /// 参数类型错误
@@ -678,39 +716,50 @@ pub mod improved_macro_errors {
             position: usize,
         },
         /// 递归深度超出限制
+        /// recursive
         RecursionDepth {
             /// 当前递归深度
+            /// when before recursive
             /// when before
             current_depth: usize,
             /// 最大允许深度
+            /// maximum allow
             /// maximum
             max_depth: usize,
         },
         /// 模式匹配失败
+        /// failure
         PatternMismatch {
             /// 宏名称
+            /// macro name
             macro_name: String,
             /// 期望的模式
             pattern: String,
             /// 实际的输入
+            /// actual input
             /// actual
             input: String,
         },
         /// 展开失败
+        /// failure
         ExpansionFailed {
             /// 宏名称
+            /// macro name
             macro_name: String,
             /// 展开失败的原因
+            /// failure cause
             /// cause
             reason: String,
         },
     }
 
     /// 改进的错误消息生成器
+    /// message
     pub struct ImprovedMacroErrorFormatter;
 
     impl ImprovedMacroErrorFormatter {
         /// 格式化错误消息
+        /// message
         pub fn format_error(error: &MacroError) -> String {
             match error {
                 MacroError::ArgumentCount {
@@ -808,6 +857,7 @@ pub mod improved_macro_errors {
     }
 
     /// 演示改进的错误消息
+    /// demonstration message
     /// demonstration
     /// Demonstration of改进错误消息
     pub fn demonstrate_improved_errors() {
@@ -871,12 +921,14 @@ pub mod proc_macro_compilation_optimization {
         /// compile-time （）
         pub avg_compilation_time: u64,
         /// 使用缓存的次数
+        /// cache
         pub cache_used: usize,
     }
 
     /// 过程宏编译器
     pub struct OptimizedProcMacroCompiler {
         /// 编译缓存
+        /// cache
         compilation_cache: HashMap<String, String>,
         /// 统计信息
         stats: ProcMacroCompilationStats,
@@ -899,6 +951,7 @@ pub mod proc_macro_compilation_optimization {
         /// 编译过程宏
         /// 编译procedural macro
         /// Rust 1.91: 使用缓存和增量编译优化
+        /// Rust 1.91: cache and optimization
         /// Rust 1.91: and optimization
         pub fn compile_macro(&mut self, macro_source: &str) -> String {
             let start_time = Instant::now();
@@ -932,6 +985,7 @@ pub mod proc_macro_compilation_optimization {
         }
 
         /// 清除缓存
+        /// cache
         pub fn clear_cache(&mut self) {
             self.compilation_cache.clear();
         }

@@ -1,17 +1,21 @@
 //! io_uring 高性能 I/O 演示
+//! io_uring high performance I/O demonstration
 //! io_uring performance I/O demonstration
 //! io_uring 高performance I/O Demonstration of
 //! 通过共享的提交队列（SQ）和完成队列（CQ）实现用户态与内核态的高效通信。
+//! queue （SQ）and complete queue （CQ）and kernel efficient 。
 //! （SQ）and （CQ）and kernel efficient 。
 //! ## 架构
 //! ## architecture
 //! - Submission Queue (SQ): 用户态提交 I/O 请求
 //! - Completion Queue (CQ): 内核态返回 I/O 结果
 //! - 无需系统调用即可完成批量 I/O 提交（如果开启 polling）
+//! - system complete I/O （if polling）
 //! - system I/O （if polling）
 //! ## and epoll 差异
 //! | 特性 | epoll | io_uring |
 //! | 接口 | 基于文件描述符的就绪通知 | 基于操作的完成通知 |
+//! | | file descriptor notify | operation complete notify |
 //! | | file descriptor | |
 //! | 系统调用 | 每次 wait 需 syscall | 批量提交可绕过 syscall |
 //! | system | wait syscall | syscall |
@@ -141,6 +145,7 @@ pub mod linux_impl {
 
     /// 使用 Registered Buffers（固定缓冲区）
     /// 这对高频小 I/O 场景（如数据库、缓存）有显著性能提升。
+    /// to high I/O scenario （database 、cache ）significant performance 。
     /// to I/O scenario （database 、）significant performance 。
     pub fn registered_buffers_concept() -> &'static str {
         r#"
@@ -164,6 +169,7 @@ let read_e = opcode::Read::new(fd, buf_ptr, buf_len)
 
     /// 操作链（Linked Operations）
     /// 前一个操作完成后自动触发下一个，无需用户态干预。
+    /// before operation complete after under ，。
     /// before after under ，。
     pub fn linked_operations_concept() -> &'static str {
         r#"

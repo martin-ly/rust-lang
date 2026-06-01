@@ -7,6 +7,7 @@ use tokio::time::{interval, sleep};
 use tracing::{debug, error, info, warn};
 
 /// 流处理管道配置
+/// stream pipe configuration
 /// stream pipe
 #[derive(Debug, Clone)]
 pub struct StreamConfig {
@@ -30,6 +31,7 @@ impl Default for StreamConfig {
 }
 
 /// 数据项
+/// data item
 #[derive(Debug, Clone)]
 pub struct DataItem {
     pub id: u64,
@@ -116,6 +118,7 @@ impl StreamProcessor {
     }
 
     /// 创建数据流（模拟数据源）
+    /// data stream （data source ）
     /// stream （）
     pub fn create_data_stream() -> impl futures::Stream<Item = DataItem> + Unpin {
         let (tx, rx) = mpsc::unbounded_channel();
@@ -151,6 +154,7 @@ impl StreamProcessor {
     }
 
     /// 处理单个数据项
+    /// data item
     async fn process_item(&mut self, item: DataItem) -> Result<DataItem> {
         let _permit = self.semaphore.acquire().await?;
         let start = Instant::now();

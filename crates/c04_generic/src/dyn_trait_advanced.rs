@@ -22,6 +22,7 @@ use std::{any::Any, fmt::Debug};
 /// 这in Rust 1.86 (2025) in已稳定化。
 /// in Rust 1.86 (2025) in。
 /// # 示例场景
+/// # examplescenario
 /// # example scenario
 /// 当你持有一个 `dyn Display + Debug` 对象，但只需要 `dyn Display` 时，
 /// when `dyn Display + Debug` to ，but `dyn Display` ，
@@ -63,6 +64,7 @@ impl Canine for Dog {
 }
 
 /// 演示 Dyn Upcasting Coercion
+/// Demonstrates Dyn Upcasting Coercion
 /// `&dyn Canine` → `&dyn Mammal` → `&dyn Animal` 自动conversion
 pub fn demo_dyn_upcasting() {
     println!("=== Dyn Upcasting Coercion 演示 ===");
@@ -118,6 +120,7 @@ pub fn demo_upcasting_in_api() {
 /// 4. 泛型方法的类型参数必须被具体化（不能保留未绑定的泛型）
 /// 4. generic method type parameter must is volume （cannot generic ）
 /// ✅ Object-Safe 示例
+/// ✅ Object-Safe example
 pub trait Drawable: Debug {
     fn draw(&self);
     fn bounds(&self) -> (i32, i32, i32, i32);
@@ -261,6 +264,7 @@ impl PluginManager {
     }
 
     /// 获取特定类型的插件引用
+    /// Gets特定类型的插件引用
     /// type reference
     pub fn get_plugin<T: Plugin>(&self) -> Option<&T> {
         self.plugins

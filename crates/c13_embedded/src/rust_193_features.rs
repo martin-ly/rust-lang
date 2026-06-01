@@ -19,6 +19,7 @@ pub fn safe_resource_drop() {
 }
 
 /// 使用 `char::MAX_LEN_UTF8` 配置 UART 发送缓冲区（单字符最大字节数）
+/// `char::MAX_LEN_UTF8` configuration UART buffering （maximum ）
 /// `char::MAX_LEN_UTF8` UART buffering （maximum ）
 pub fn uart_char_buffer_size() -> usize {
     char::MAX_LEN_UTF8

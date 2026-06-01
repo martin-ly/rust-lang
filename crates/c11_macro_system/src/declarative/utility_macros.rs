@@ -20,6 +20,7 @@
 /// ```
 ///
 /// 注意: 此宏使用 `paste::paste!` 进行标识符拼接。
+/// : this `paste::paste!` identifier 。
 /// : this `paste::paste!` 。
 /// 若需使用此宏，请在 Cargo.toml 中添加 `paste = "1.0"` 依赖。
 /// this ，in Cargo.toml in `paste = "1.0"` 。

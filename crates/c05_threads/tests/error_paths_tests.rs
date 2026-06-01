@@ -5,6 +5,7 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 
 /// 测试错误输入情况
+/// input situation
 /// situation
 #[test]
 fn test_error_inputs() {
@@ -94,6 +95,7 @@ fn test_concurrent_safety() {
 }
 
 /// 测试线程创建失败
+/// thread failure
 /// thread
 #[test]
 fn test_thread_creation_failure() {

@@ -1,4 +1,5 @@
 //! 示例模块
+//! examplemodule
 //! example module
 //! 包含各种类型系统示例代码
 //! type system example

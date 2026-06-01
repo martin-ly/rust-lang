@@ -58,6 +58,7 @@ mod actor_pattern {
     }
 
     /// Actor 地址（用于发送消息）
+    /// Actor （message ）
     /// Actor （）
     #[derive(Clone)]
     #[allow(dead_code)]
@@ -66,6 +67,7 @@ mod actor_pattern {
     }
 
     /// 消息信封（包含响应通道）
+    /// message （channel ）
     /// （channel ）
     #[allow(dead_code)]
     struct ActorEnvelope<A: Actor> {
@@ -77,6 +79,7 @@ mod actor_pattern {
     #[allow(unused_variables)]
     impl<A: Actor> ActorAddress<A> {
         /// 发送消息并等待响应
+        /// message and etc.
         /// and etc.
         pub async fn send(
             &self,
@@ -94,6 +97,7 @@ mod actor_pattern {
         }
 
         /// 发送消息（不等待响应）
+        /// message （etc. ）
         /// （etc. ）
         pub fn do_send(&self, msg: A::Message) {
             let (tx, _) = oneshot::channel();
@@ -252,6 +256,7 @@ mod reactor_pattern {
     use super::*;
 
     /// 事件类型
+    /// event type
     /// type
     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
     #[allow(dead_code)]
@@ -263,6 +268,7 @@ mod reactor_pattern {
     }
 
     /// 事件
+    /// event
     #[derive(Debug, Clone)]
     #[allow(dead_code)]
     pub struct Event {
@@ -273,6 +279,7 @@ mod reactor_pattern {
     }
 
     /// 事件处理器 trait
+    /// event trait
     /// trait
     #[async_trait::async_trait]
     pub trait EventHandler: Send + Sync {
@@ -296,6 +303,7 @@ mod reactor_pattern {
         }
 
         /// 注册事件处理器
+        /// event
         pub async fn register(
             &self,
             source_id: u64,
@@ -311,12 +319,14 @@ mod reactor_pattern {
         }
 
         /// 提交事件
+        /// event
         pub async fn submit_event(&self, event: Event) {
             let mut queue = self.event_queue.lock().await;
             queue.push(event);
         }
 
         /// 启动事件循环
+        /// event circulation
         /// circulation
         pub async fn run(&self) {
             {
@@ -370,6 +380,7 @@ mod reactor_pattern {
         }
 
         /// 停止事件循环
+        /// event circulation
         /// circulation
         pub async fn stop(&self) {
             let mut running = self.running.write().await;
@@ -667,6 +678,7 @@ mod design_patterns {
     use super::*;
 
     /// 重试策略模式
+    /// retry strategy
     /// strategy
     pub struct RetryStrategy {
         max_attempts: usize,
@@ -682,6 +694,7 @@ mod design_patterns {
         }
 
         /// 指数退避重试
+        /// index retry
         /// index
         pub async fn execute<F, T, E>(&self, mut operation: F) -> Result<T, E>
         where
@@ -719,6 +732,7 @@ mod design_patterns {
     }
 
     /// 熔断器模式
+    /// circuit breaker
     pub struct CircuitBreaker {
         state: Arc<Mutex<CircuitState>>,
         failure_threshold: usize,
@@ -925,6 +939,7 @@ mod production_patterns {
     }
 
     /// 缓存健康检查
+    /// cache health check
     /// health check
     /// 缓存health check
     struct CacheHealthCheck;

@@ -3,6 +3,7 @@ use c12_wasm::rust_191_features::wasm_std_new_apis;
 use c12_wasm::{basic_examples, error_examples};
 
 /// 测试错误输入情况
+/// input situation
 /// situation
 #[test]
 #[ignore] // 部分环境栈溢出

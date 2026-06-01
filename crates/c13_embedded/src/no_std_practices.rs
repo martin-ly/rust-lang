@@ -6,6 +6,7 @@
 //! - this type ：`i32`, `u8`, `bool`, `str` etc.
 //! - 基thistype：`i32`, `u8`, `bool`, `str` etc.
 //! - 切片和数组：`[T]`, `[T; N]`
+//! - and array ：`[T]`, `[T; N]`
 //! - and ：`[T]`, `[T; N]`
 //! - 切片andarray：`[T]`, `[T; N]`
 //! - `Drop`, `Clone`, `Copy`, `Send`, `Sync`
@@ -23,6 +24,7 @@ pub struct CoreUsageDemo;
 
 impl CoreUsageDemo {
     /// 使用 core::fmt 格式化数字
+    /// core::fmt number
     /// core::fmt
     pub fn format_number(value: u32, buf: &mut [u8]) -> Result<usize, fmt::Error> {
         struct Writer<'a> {
@@ -50,6 +52,7 @@ impl CoreUsageDemo {
     }
 
     /// 使用 core 迭代器处理数据
+    /// core data
     /// core
     pub fn sum_slice(data: &[u32]) -> u32 {
         // 与 std 中完全相同，因为 Iterator 定义在 core 中

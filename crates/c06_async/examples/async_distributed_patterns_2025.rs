@@ -12,6 +12,7 @@ use uuid::Uuid;
 /// 2025年分布式异步模式演示
 /// 2025distribution async demonstration
 /// 展示最新的分布式系统异步编程模式和最佳实践
+/// distribution system async and best practice
 /// distribution system async and
 /// 1. 分布式服务发现
 /// 1. distribution service discovery
@@ -383,6 +384,7 @@ impl LoadBalancer {
 }
 
 /// 3. 分布式消息队列
+/// 3. distribution message queue
 /// 3. distribution
 #[derive(Debug, Clone)]
 pub struct DistributedMessageQueue {
@@ -558,6 +560,7 @@ pub struct QueueStats {
 }
 
 /// 4. 分布式配置管理
+/// 4. distribution configuration
 /// 4. distribution
 #[derive(Debug, Clone)]
 pub struct DistributedConfigManager {

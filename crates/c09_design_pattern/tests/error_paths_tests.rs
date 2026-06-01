@@ -1,6 +1,7 @@
 //! 设计模式模块错误路径测试套件 / Design Patterns Module Error Paths Test Suite
 
 /// 测试错误输入情况
+/// input situation
 /// situation
 #[test]
 fn test_error_inputs() {

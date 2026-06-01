@@ -4,11 +4,15 @@
 //! - 数组窗口迭代器 / Array Windows Iterator
 //! - char 到 usize 转换 / char to usize Conversion
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_194_features.rs
+//! - File: rust_194_features.rs
 //! - 创建日期: 2026-03-06
+//! - Creation date: 2026-03-06
 //! - date : 2026-03-06
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::cell::LazyCell;
@@ -50,6 +54,7 @@ thread_local! {
 }
 
 /// Rust 1.94.0: get(), get_mut(), force_mut() 方法
+/// Rust 1.94.0: get(), get_mut(), force_mut() method
 #[allow(dead_code)]
 pub fn demonstrate_lazylock_methods() {
     println!("\n=== LazyLock 新方法演示 ===\n");
@@ -75,6 +80,7 @@ pub struct SingleThreadCache<T> {
 
 impl<T> SingleThreadCache<T> {
     /// 创建新的缓存
+    /// Creates新的缓存
     pub const fn new(init: fn() -> T) -> Self {
         Self { value: None, init }
     }
@@ -92,11 +98,13 @@ impl<T> SingleThreadCache<T> {
     }
 
     /// 获取缓存值
+    /// Gets缓存值
     pub fn get(&mut self) -> &T {
         self.value.get_or_insert_with(self.init)
     }
 
     /// 获取可变引用
+    /// Gets可变引用
     /// reference
     /// Get可变reference
     pub fn get_mut(&mut self) -> &mut T {
@@ -104,6 +112,7 @@ impl<T> SingleThreadCache<T> {
     }
 
     /// 检查是否已初始化
+    /// Checks if initialized
     pub fn is_initialized(&self) -> bool {
         self.value.is_some()
     }
@@ -124,6 +133,7 @@ pub struct ThreadSafeResourceManager<T: Send + Sync> {
 
 impl<T: Send + Sync> ThreadSafeResourceManager<T> {
     /// 创建新的资源管理器
+    /// Creates新的资源管理器
     pub fn new(f: fn() -> T) -> Self {
         Self {
             resource: LazyLock::new(f),
@@ -132,15 +142,18 @@ impl<T: Send + Sync> ThreadSafeResourceManager<T> {
     }
 
     /// 获取资源引用
+    /// Gets资源引用
     /// reference
     /// Get资源reference
     /// Rust 1.94.0: 使用 Deref
+    /// Rust 1.94.0: use Deref
     pub fn get(&self) -> &T {
         self.access_count.fetch_add(1, Ordering::Relaxed);
         &self.resource
     }
 
     /// 获取访问计数
+    /// Gets访问计数
     pub fn access_count(&self) -> u64 {
         self.access_count.load(Ordering::Relaxed)
     }
@@ -266,6 +279,7 @@ pub struct SimpleParser<I: Iterator> {
 
 impl<I: Iterator> SimpleParser<I> {
     /// 创建新的解析器
+    /// Creates新的解析器
     pub fn new(iter: I) -> Self {
         Self {
             iter: iter.peekable(),
@@ -273,6 +287,7 @@ impl<I: Iterator> SimpleParser<I> {
     }
 
     /// 尝试解析下一个元素
+    /// Attempts to解析下一个元素
     /// under element
     pub fn parse_next<T, F>(&mut self, f: F) -> Option<T>
     where
@@ -288,6 +303,7 @@ impl<I: Iterator> SimpleParser<I> {
     }
 
     /// 查看下一个元素
+    /// Views下一个元素
     /// under element
     pub fn peek(&mut self) -> Option<&I::Item> {
         self.iter.peek()
@@ -471,6 +487,7 @@ pub fn analyze_unicode_ranges(chars: &[char]) -> UnicodeAnalysis {
 }
 
 /// Unicode 分析结果
+/// Unicode analysisresult
 /// Unicode analyze result
 #[derive(Debug, Clone, Copy, Default)]
 pub struct UnicodeAnalysis {
@@ -500,6 +517,7 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 /// 数据验证管道
 /// pipe
 /// 数据Verifypipe
+/// dataVerifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -528,6 +546,7 @@ pub fn batch_process<T, E>(
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 线程特性
+/// Demonstrates Rust 1.94.0 线程特性
 /// demonstration Rust 1.94.0 thread feature
 pub fn demonstrate_rust_194_thread_features() {
     println!("\n=== Rust 1.94.0 线程与并发特性演示 ===\n");
@@ -575,6 +594,7 @@ pub fn demonstrate_rust_194_thread_features() {
 }
 
 /// 获取 Rust 1.94.0 线程特性信息
+/// Gets Rust 1.94.0 线程特性信息
 /// Rust 1.94.0 thread feature
 pub fn get_rust_194_thread_info() -> String {
     "Rust 1.94.0 线程与并发特性:\n\
@@ -727,6 +747,7 @@ mod tests {
     // ==================== 并发边界测试 ====================
 
     /// 测试单线程缓存在并发访问下的限制
+    /// Tests单线程缓存在并发访问下的限制
     /// thread in concurrency under
     /// 本测试验证在单线程内的正确使用模式。
     /// this in thread inside 。
@@ -800,6 +821,7 @@ mod tests {
     }
 
     /// 测试异步数据库连接池耗尽
+    /// Tests异步数据库连接池耗尽
     /// async database connection pool
     #[test]
     fn test_async_db_pool_exhaustion() {

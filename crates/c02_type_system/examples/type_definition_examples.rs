@@ -6,6 +6,7 @@
 //! 本文件包含了类型定义系统的各种示例，包括：
 //! this type definition system example ，：
 //! - 基本数据类型
+//! - this data type
 //! - this type
 //! - 复合类型
 //! - type
@@ -24,6 +25,7 @@ use std::rc::Rc;
 use std::sync::Arc;
 
 /// 基本数据类型示例
+/// this data type example
 /// this type example
 pub fn basic_data_types_examples() {
     println!("=== 基本数据类型示例 ===");
@@ -334,6 +336,7 @@ enum IpAddr {
 }
 
 /// 消息枚举
+/// message enum
 /// enum
 #[allow(dead_code)]
 #[derive(Debug)]

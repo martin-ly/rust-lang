@@ -5,12 +5,14 @@
 //! - Web API 服务器
 //! - Web API
 //! - 消息队列处理
+//! - message queue
 //! -
 //! - 文件上传和处理
 //! - on and
 //! - 定时任务调度
 //! - task
 //! - 配置热重载
+//! - configuration
 //! -
 //! - 健康检查和监控
 //! - health check and

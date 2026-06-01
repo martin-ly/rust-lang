@@ -141,6 +141,7 @@ async fn demonstrate_async_web_service() -> Result<(), Box<dyn std::error::Error
 }
 
 /// 数据处理管道演示
+/// data pipe demonstration
 /// pipe demonstration
 async fn demonstrate_data_processing_pipeline() -> Result<(), Box<dyn std::error::Error>> {
     println!("  构建数据处理管道...");
@@ -176,6 +177,7 @@ async fn demonstrate_data_processing_pipeline() -> Result<(), Box<dyn std::error
 }
 
 /// 高性能计算演示
+/// high performance demonstration
 /// performance demonstration
 async fn demonstrate_high_performance_computing() -> Result<(), Box<dyn std::error::Error>> {
     println!("  执行高性能计算...");

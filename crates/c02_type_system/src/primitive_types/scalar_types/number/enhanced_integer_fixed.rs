@@ -6,25 +6,33 @@
 //! - 类型安全的最佳实践
 //! - type
 //! - 性能优化技巧
+//! - Performance optimization tips
 //! - performance optimization tip
 //! - 完整的示例和测试用例
+//! - Complete examples and test cases
 //! - complete example and
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: enhanced_integer_fixed.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 //! - 作者: Rust 类型系统项目组
+//! - Author: Rust Type System Project Team
 //! - : Rust type system project
 // NonZero 类型现在在各自的模块中导入
 
 /// Rust 1.89 整数类型系统
 /// Rust 1.89 type system
 /// Rust 1.89 整数typesystem
+/// Rust 1.89 integertypesystem
 /// 包括类型安全、性能优化、错误处理等最佳实践。
+/// Includes best practices for type safety, performance optimization, error handling, etc.
 /// type 、performance optimization 、error handling etc. 。
 pub mod integer_types {
 
@@ -376,6 +384,7 @@ pub mod integer_types {
     /// 整数类型转换
     /// type conversion
     /// 整数typeconversion
+    /// integertypeconversion
     /// 本模块提供了安全的整数类型转换功能，包括：
     /// This module provides type conversion functionality ，：
     /// - 显式类型转换
@@ -416,6 +425,7 @@ pub mod integer_types {
         /// 安全类型转换
         /// type conversion
         /// 安全typeconversion
+        /// safetypeconversion
         pub fn safe_conversion() {
             let i32_value: i32 = 1_000_000;
 
@@ -543,6 +553,7 @@ pub mod integer_types {
 
     /// 整数格式化
     /// 整数Format
+    /// integerFormat
     /// 本模块提供了各种整数格式化功能，
     /// This module provides functionality ，
     /// 包括不同进制、对齐、填充等。
@@ -595,6 +606,7 @@ pub mod integer_types {
 /// 整数类型性能测试
 /// type performance test
 /// 整数typeperformance test
+/// integertypeperformance test
 /// 本模块提供了各种整数类型的性能测试，
 /// This module provides type performance test ，
 /// 帮助开发者选择最适合的整数类型。
@@ -671,6 +683,7 @@ pub mod performance_tests {
 /// 主函数：演示所有整数类型功能
 /// Main function ：demonstration all type functionality
 /// Main function：Demonstration of所有整数typefunctionality
+/// Main function：Demonstration ofallintegertypefunctionality
 /// 包括基本操作、类型转换、溢出处理、格式化等。
 /// this 、type conversion 、source 、etc. 。
 pub fn demonstrate_all_integer_types() {

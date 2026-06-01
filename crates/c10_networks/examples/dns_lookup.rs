@@ -8,10 +8,12 @@
 //! - **分层结构**: 树状域名空间
 //! - **layering structure **: tree domain space
 //! - **递归查询**: 客户端向 DNS 服务器查询
+//! - **recursive **: DNS
 //! - ****: DNS
 //! - **迭代查询**: DNS 服务器之间的查询
 //! - ****: DNS 's
 //! - **缓存机制**: 提高查询效率
+//! - **cache mechanism **: high efficiency
 //! - **mechanism **: efficiency
 //! - **缓存mechanism**: 提高查询efficiency
 //! ## 🔬 实现原理
@@ -51,9 +53,11 @@
 //! ## ⚠️ 注意事项
 //! ## ⚠️
 //! - **缓存策略**: 合理设置 DNS 缓存
+//! - **cache strategy **: DNS cache
 //! - **strategy **: DNS
 //! - **缓存strategy**: 合理Set DNS 缓存
 //! - **超时处理**: 处理 DNS 查询超时
+//! - **timeout **: DNS timeout
 //! - ****: DNS
 //! - **超时Handle**: Handle DNS 查询超时
 //! - **错误处理**: 处理 DNS 查询错误

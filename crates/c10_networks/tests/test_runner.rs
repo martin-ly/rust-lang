@@ -9,6 +9,7 @@
 use std::time::Instant;
 
 /// 测试运行器配置
+/// Run configuration
 /// Run
 #[derive(Debug, Clone)]
 pub struct TestRunnerConfig {
@@ -36,6 +37,7 @@ pub struct TestRunnerConfig {
     /// 是否详细输出
     pub verbose: bool,
     /// 测试超时时间
+    /// timeout time
     /// time
     pub timeout: Option<std::time::Duration>,
 }
@@ -105,6 +107,7 @@ pub struct TestSuiteResult {
     /// quantity
     pub passed_count: usize,
     /// 失败的测试数量
+    /// failure quantity
     /// quantity
     /// 失败Test forquantity
     pub failed_count: usize,
@@ -563,6 +566,7 @@ fn test_test_runner() {
 }
 
 /// 测试配置验证
+/// configuration validation
 #[test]
 fn test_test_runner_config() {
     let config = TestRunnerConfig::default();

@@ -15,8 +15,10 @@ use std::arch::x86_64::*;
 use rayon::prelude::*;
 
 /// SIMD向量类型
+/// SIMDvectortype
 /// SIMD type
 /// SIMD向量type
+/// SIMDvectortype
 #[derive(Debug, Clone)]
 pub struct SimdVector {
     data: Vec<f32>,
@@ -30,6 +32,7 @@ impl SimdVector {
     }
 
     /// 创建零向量
+    /// Creates零向量
     pub fn zeros(length: usize) -> Self {
         Self {
             data: vec![0.0; length],
@@ -38,6 +41,7 @@ impl SimdVector {
     }
 
     /// 创建单位向量
+    /// Creates单位向量
     pub fn ones(length: usize) -> Self {
         Self {
             data: vec![1.0; length],
@@ -46,22 +50,26 @@ impl SimdVector {
     }
 
     /// 获取向量长度
+    /// Gets向量长度
     pub fn len(&self) -> usize {
         self.length
     }
 
     /// 检查向量是否为空
+    /// Checks向量是否为空
     /// as
     pub fn is_empty(&self) -> bool {
         self.length == 0
     }
 
     /// 获取向量数据
+    /// Gets向量数据
     pub fn data(&self) -> &[f32] {
         &self.data
     }
 
     /// 获取向量数据的可变引用
+    /// Gets向量数据的可变引用
     /// reference
     pub fn data_mut(&mut self) -> &mut [f32] {
         &mut self.data
@@ -74,8 +82,10 @@ pub struct SimdMath;
 
 impl SimdMath {
     /// 向量加法（SIMD优化）
+    /// vectoraddition（SIMDoptimize）
     /// （SIMD optimization ）
     /// 向量加法（SIMDoptimization）
+    /// vectoraddition（SIMDoptimization）
     pub fn add(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -92,8 +102,10 @@ impl SimdMath {
     }
 
     /// 向量减法（SIMD优化）
+    /// vectorsubtraction（SIMDoptimize）
     /// （SIMD optimization ）
     /// 向量减法（SIMDoptimization）
+    /// vectorsubtraction（SIMDoptimization）
     pub fn sub(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -110,8 +122,10 @@ impl SimdMath {
     }
 
     /// 向量乘法（SIMD优化）
+    /// vectormultiplication（SIMDoptimize）
     /// （SIMD optimization ）
     /// 向量乘法（SIMDoptimization）
+    /// vectormultiplication（SIMDoptimization）
     pub fn mul(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -130,6 +144,7 @@ impl SimdMath {
     /// 向量点积（SIMD优化）
     /// dot product （SIMD optimization ）
     /// 向量dot product（SIMDoptimization）
+    /// vectordot product（SIMDoptimization）
     pub fn dot(a: &SimdVector, b: &SimdVector) -> f32 {
         if a.len() != b.len() {
             panic!("向量长度不匹配");
@@ -165,6 +180,7 @@ impl SimdMath {
     /// SIMD向量加法实现
     /// SIMD
     /// SIMD向量加法Implementation of
+    /// SIMDvectoradditionImplementation of
     unsafe fn add_simd(a: &[f32], b: &[f32], result: &mut [f32]) {
         let len = a.len();
         let mut i = 0;
@@ -190,6 +206,7 @@ impl SimdMath {
     /// SIMD向量减法实现
     /// SIMD
     /// SIMD向量减法Implementation of
+    /// SIMDvectorsubtractionImplementation of
     unsafe fn sub_simd(a: &[f32], b: &[f32], result: &mut [f32]) {
         let len = a.len();
         let mut i = 0;
@@ -215,6 +232,7 @@ impl SimdMath {
     /// SIMD向量乘法实现
     /// SIMD
     /// SIMD向量乘法Implementation of
+    /// SIMDvectormultiplicationImplementation of
     unsafe fn mul_simd(a: &[f32], b: &[f32], result: &mut [f32]) {
         let len = a.len();
         let mut i = 0;
@@ -339,6 +357,7 @@ pub struct SimdParallelDataProcessor;
 
 impl SimdParallelDataProcessor {
     /// 并行向量加法
+    /// parallelvectoraddition
     /// parallelism
     pub fn parallel_add(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
@@ -364,6 +383,7 @@ impl SimdParallelDataProcessor {
     }
 
     /// 并行向量乘法
+    /// parallelvectormultiplication
     /// parallelism
     pub fn parallel_mul(a: &SimdVector, b: &SimdVector) -> SimdVector {
         if a.len() != b.len() {
@@ -485,6 +505,7 @@ impl SimdOptimizedAlgorithms {
     /// SIMD矩阵乘法实现
     /// SIMD
     /// SIMD矩阵乘法Implementation of
+    /// SIMDmatrixmultiplicationImplementation of
     unsafe fn matrix_multiply_simd(a: &[Vec<f32>], b: &[Vec<f32>], result: &mut [Vec<f32>]) {
         let rows_a = a.len();
         let cols_a = a[0].len();

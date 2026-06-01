@@ -15,6 +15,7 @@ use std::time::Duration;
 use tokio::sync::Mutex;
 
 /// TCP 连接池
+/// TCP connection pool
 /// TCP
 #[allow(unused)]
 #[derive(Debug)]
@@ -27,6 +28,7 @@ pub struct TcpConnectionPool {
 
 impl TcpConnectionPool {
     /// 创建新的连接池
+    /// connection pool
     pub fn new(max_connections: usize, connection_timeout: Duration) -> Self {
         Self {
             connections: Mutex::new(HashMap::new()),
@@ -68,6 +70,7 @@ impl TcpConnectionPool {
     }
 
     /// 清理超时连接
+    /// timeout
     /// Clean up超时Connect
     pub async fn cleanup_timeout_connections(&self) -> usize {
         let mut connections = self.connections.lock().await;
@@ -119,6 +122,7 @@ impl TcpConnectionPool {
 }
 
 /// TCP 连接池统计信息
+/// TCP connection pool
 /// TCP
 #[derive(Debug, Clone)]
 pub struct TcpPoolStats {

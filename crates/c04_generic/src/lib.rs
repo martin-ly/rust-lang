@@ -370,6 +370,7 @@ pub mod benchmarks {
 /// 项目完成状态总结
 /// project state summary
 /// 打印项目的完成状态总结信息，包括各个模块的完成情况。
+/// Prints项目的完成状态总结信息，包括各个模块的完成情况。
 /// project state summary ，module situation 。
 ///
 /// ```

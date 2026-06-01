@@ -6,6 +6,7 @@
 //! - 关联项的多个边界性能
 //! - edge performance
 //! - 高阶生命周期处理性能
+//! - high lifetime performance
 //! - lifetime performance
 //! - 泛型内存计算性能
 //! - generic memory performance
@@ -84,6 +85,7 @@ fn bench_generic_transformer_performance(c: &mut Criterion) {
 }
 
 /// 基准测试高阶生命周期处理性能
+/// benchmark high lifetime performance
 /// benchmark lifetime performance
 fn bench_higher_ranked_lifetime_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("higher_ranked_lifetime_performance");

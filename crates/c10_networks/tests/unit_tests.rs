@@ -147,6 +147,7 @@ fn test_security_errors() {
 }
 
 /// 测试数据包创建和基本操作
+/// data packet and this operation
 /// and this
 #[test]
 fn test_packet_creation() {
@@ -163,6 +164,7 @@ fn test_packet_creation() {
 }
 
 /// 测试带序列号的数据包
+/// sequence data packet
 /// sequence
 #[test]
 fn test_packet_with_sequence() {
@@ -174,6 +176,7 @@ fn test_packet_with_sequence() {
 }
 
 /// 测试数据包构建器
+/// data packet builder
 /// builder
 #[test]
 fn test_packet_builder() {
@@ -191,6 +194,7 @@ fn test_packet_builder() {
 }
 
 /// 测试数据包统计
+/// data packet
 #[test]
 fn test_packet_stats() {
     let mut stats = PacketStats::new();
@@ -216,6 +220,7 @@ fn test_packet_stats() {
 }
 
 /// 测试数据包过滤器
+/// data packet
 #[test]
 fn test_packet_filter() {
     let filter = PacketFilter::new()
@@ -252,6 +257,7 @@ fn test_packet_filter_sequence() {
 }
 
 /// 测试数据包类型
+/// data packet type
 /// type
 #[test]
 fn test_packet_types() {
@@ -348,6 +354,7 @@ fn test_websocket_protocol() {
 }
 
 /// 测试套接字配置
+/// socket configuration
 /// socket
 #[test]
 fn test_socket_configs() {
@@ -381,6 +388,7 @@ fn test_socket_configs() {
 }
 
 /// 测试数据包序列化和反序列化
+/// data packet sequence and sequence
 /// sequence and sequence
 #[test]
 fn test_packet_serialization() {
@@ -398,6 +406,7 @@ fn test_packet_serialization() {
 }
 
 /// 测试数据包头部操作
+/// data packet operation
 #[test]
 fn test_packet_header() {
     let header = c10_networks::packet::PacketHeader::new(PacketType::Http, 100);
@@ -416,6 +425,7 @@ fn test_packet_header() {
 }
 
 /// 测试数据包显示格式
+/// data packet display
 /// display
 #[test]
 fn test_packet_display() {
@@ -428,6 +438,7 @@ fn test_packet_display() {
 }
 
 /// 测试数据包统计重置
+/// data packet
 #[test]
 fn test_packet_stats_reset() {
     let mut stats = PacketStats::new();
@@ -447,6 +458,7 @@ fn test_packet_stats_reset() {
 }
 
 /// 测试空数据包
+/// data packet
 #[test]
 fn test_empty_packet() {
     let empty_packet = Packet::new(PacketType::Raw, Bytes::new());
@@ -460,6 +472,7 @@ fn test_empty_packet() {
 }
 
 /// 测试数据包构建器链式调用
+/// data packet builder
 /// builder
 #[test]
 fn test_packet_builder_chaining() {
@@ -480,6 +493,7 @@ fn test_packet_builder_chaining() {
 }
 
 /// 测试数据包过滤器默认值
+/// data packet
 #[test]
 fn test_packet_filter_default() {
     let filter = PacketFilter::default();
@@ -490,6 +504,7 @@ fn test_packet_filter_default() {
 }
 
 /// 测试数据包类型比较
+/// data packet type
 /// type
 #[test]
 fn test_packet_type_equality() {
@@ -508,6 +523,7 @@ fn test_packet_type_equality() {
 }
 
 /// 测试数据包哈希
+/// data packet
 #[test]
 fn test_packet_type_hash() {
     use std::collections::HashMap;

@@ -34,6 +34,7 @@ pub struct WorkStealingScheduler<T> {
 
 impl<T> WorkStealingScheduler<T> {
     /// 创建新的工作窃取调度器
+    /// Creates新的工作窃取调度器
     pub fn new(worker_count: usize) -> Self {
         let workers: Vec<Mutex<Worker<T>>> = (0..worker_count).map(|_| Mutex::new(Worker::new_fifo())).collect();
 
@@ -45,12 +46,14 @@ impl<T> WorkStealingScheduler<T> {
     }
 
     /// 获取工作线程的索引
+    /// Gets工作线程的索引
     /// worker thread
     pub fn get_worker_index(&self) -> usize {
         self.stealer_count.fetch_add(1, Ordering::Relaxed) % self.workers.len()
     }
 
     /// 推送任务到指定工作线程
+    /// Pushes任务到指定工作线程
     /// task to worker thread
     pub fn push_task(&self, worker_index: usize, task: T) {
         if worker_index < self.workers.len()
@@ -60,6 +63,7 @@ impl<T> WorkStealingScheduler<T> {
     }
 
     /// 推送任务到全局注入器
+    /// Pushes任务到全局注入器
     /// task to global
     pub fn push_global_task(&self, task: T) {
         self.injector.push(task);
@@ -181,6 +185,7 @@ impl<T> PriorityWorkStealingScheduler<T> {
     }
 
     /// 推送高优先级任务
+    /// Pushes高优先级任务
     /// task
     pub fn push_high_priority_task(&self, task: T) {
         let priority_task = PriorityTask::new(0, task); // 0 是最高优先级
@@ -188,6 +193,7 @@ impl<T> PriorityWorkStealingScheduler<T> {
     }
 
     /// 推送普通优先级任务
+    /// Pushes普通优先级任务
     /// task
     pub fn push_normal_priority_task(&self, priority: u32, task: T) {
         let priority_task = PriorityTask::new(priority, task);
@@ -303,6 +309,7 @@ impl<T> AdaptiveWorkStealingScheduler<T> {
     }
 
     /// 推送任务
+    /// Pushes任务
     /// task
     pub fn push_task(&self, task: T) {
         self.injector.push(task);
@@ -480,6 +487,7 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
     }
 
     /// 推送任务到指定NUMA节点
+    /// Pushes任务到指定NUMA节点
     /// task to NUMAnode
     pub fn push_task_to_node(&self, node_id: usize, task: T) {
         if node_id < self.node_injectors.len() {
@@ -488,6 +496,7 @@ impl<T> NumaAwareWorkStealingScheduler<T> {
     }
 
     /// 推送任务到全局注入器
+    /// Pushes任务到全局注入器
     /// task to global
     pub fn push_global_task(&self, task: T) {
         self.global_injector.push(task);

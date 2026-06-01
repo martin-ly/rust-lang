@@ -1,10 +1,14 @@
 //! 区块链异步演示
+//! blockchain async demonstration
 //! async demonstration
 //! 本示例展示了异步编程在区块链应用中的使用：
+//! this example async in blockchain application in ：
 //! this example async in application in ：
 //! - 异步交易处理
+//! - async transaction
 //! - async
 //! - 区块验证和挖矿
+//! - block and
 //! - and
 //! - 智能合约执行
 //! -
@@ -16,8 +20,10 @@
 //! - 钱包管理
 //! -
 //! - 挖矿池
+//! - mining pool
 //! -
 //! - 区块链浏览器
+//! - blockchain
 //! -
 //! 运行方式：
 //! Run way ：
@@ -35,6 +41,7 @@ use tokio::time::sleep;
 use uuid::Uuid;
 
 /// 交易
+/// transaction
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Transaction {
     pub id: String,
@@ -48,6 +55,7 @@ pub struct Transaction {
 }
 
 /// 区块
+/// block
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Block {
     pub index: u64,
@@ -61,6 +69,7 @@ pub struct Block {
 }
 
 /// 区块链
+/// blockchain
 pub struct Blockchain {
     blocks: Arc<RwLock<VecDeque<Block>>>,
     pending_transactions: Arc<RwLock<VecDeque<Transaction>>>,
@@ -402,6 +411,7 @@ impl SmartContract {
 }
 
 /// 挖矿池
+/// mining pool
 pub struct MiningPool {
     pub name: String,
     pub miners: Arc<RwLock<HashMap<String, Miner>>>,
@@ -495,6 +505,7 @@ pub struct PoolStats {
 }
 
 /// 区块链网络节点
+/// blockchain network node
 /// network node
 /// 区块链networknode
 pub struct BlockchainNode {

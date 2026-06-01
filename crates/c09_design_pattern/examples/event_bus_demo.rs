@@ -6,22 +6,29 @@
 //! ### 核心概念
 //! ### core concept
 //!   - **属性**: 事件发布、事件订阅、异步处理、背压处理
+//!   - **attribute **: event 、event 、async 、backpressure
 //!   - **attribute **: 、、async 、backpressure
 //!   - **关系**: 与观察者模式、发布-订阅模式相关
 //!   - ****: and observer 、publish-subscribe
 //! ### 思维导图
+//! ### graph
 //! ###
 //! 事件总线演示
+//! event line demonstration
 //! line demonstration
 //! ├── 事件发布
+//! ├── event
 //! ├──
 //! ├── 事件Publish
 //! │   └── 发布事件
+//! │ └── event
 //! │ └──
 //! ├── 事件订阅
+//! ├── event
 //! ├──
 //! ├── 事件Subscribe
 //! │   └── 订阅事件
+//! │ └── event
 //! │ └──
 //! ├── 异步处理
 //! ├── async

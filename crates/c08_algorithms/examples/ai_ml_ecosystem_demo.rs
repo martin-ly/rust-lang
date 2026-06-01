@@ -33,6 +33,7 @@ fn main() -> Result<()> {
 }
 
 /// ## 演示 1: 张量基础操作
+/// ## demonstration 1: tensor foundation operation
 /// ## demonstration 1: tensor foundation
 /// 展示张量创建、形状变换和索引。
 /// tensor 、transformation and 。
@@ -60,9 +61,11 @@ fn demo_01_tensor_basics(device: &Device) -> Result<()> {
 }
 
 /// ## 演示 2: 矩阵运算
+/// ## demonstration 2: matrix
 /// ## demonstration 2:
 /// ## Demonstration of 2: 矩阵运算
 /// 矩阵乘法、转置和逐元素运算。
+/// matrix multiplication 、and element 。
 /// 、and element 。
 fn demo_02_matrix_operations(device: &Device) -> Result<()> {
     println!("🧮 演示 2: 矩阵运算");

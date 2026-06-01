@@ -80,6 +80,7 @@ pub mod data_structures {
 
     impl<T, const CAPACITY: usize> RingBuffer<T, CAPACITY> {
         /// 创建新的环形缓冲区
+        /// Creates新的环形缓冲区
         /// buffering
         pub fn new() -> Self {
             Self {
@@ -117,30 +118,35 @@ pub mod data_structures {
         }
 
         /// 获取缓冲区当前大小
+        /// Gets缓冲区当前大小
         /// buffering when before
         pub fn len(&self) -> usize {
             self.count
         }
 
         /// 检查缓冲区是否为空
+        /// Checks缓冲区是否为空
         /// buffering as
         pub fn is_empty(&self) -> bool {
             self.count == 0
         }
 
         /// 检查缓冲区是否已满
+        /// Checks缓冲区是否已满
         /// buffering
         pub fn is_full(&self) -> bool {
             self.count >= CAPACITY
         }
 
         /// 获取缓冲区容量
+        /// Gets缓冲区容量
         /// buffering
         pub fn capacity(&self) -> usize {
             CAPACITY
         }
 
         /// 清空缓冲区
+        /// Clears缓冲区
         /// buffering
         pub fn clear(&mut self) {
             self.buffer = [(); CAPACITY].map(|_| None);
@@ -178,6 +184,7 @@ pub mod data_structures {
         V: LruValue,
     {
         /// 创建新的LRU缓存
+        /// Creates新的LRU缓存
         /// LRU
         pub fn new() -> Self {
             Self {
@@ -187,6 +194,7 @@ pub mod data_structures {
         }
 
         /// 获取值
+        /// Gets the value
         /// Get值
         pub fn get(&mut self, key: &K) -> MaybeRef<'_, V> {
             if let Some(value) = self.cache.get(key) {
@@ -200,6 +208,7 @@ pub mod data_structures {
         }
 
         /// 设置值
+        /// Sets the value
         /// Set值
         pub fn set(&mut self, key: K, value: V) {
             if self.cache.contains_key(&key) {
@@ -210,6 +219,7 @@ pub mod data_structures {
         }
 
         /// 更新现有值
+        /// Updates现有值
         fn update_existing(&mut self, key: &K, value: V) {
             self.cache.insert(key.clone(), value);
             self.access_order.retain(|k| k != key);
@@ -217,6 +227,7 @@ pub mod data_structures {
         }
 
         /// 插入新值
+        /// Inserts新值
         fn insert_new(&mut self, key: K, value: V) {
             self.evict_if_needed();
             self.cache.insert(key.clone(), value);
@@ -240,17 +251,20 @@ pub mod data_structures {
         }
 
         /// 获取缓存大小
+        /// Gets缓存大小
         pub fn len(&self) -> usize {
             self.cache.len()
         }
 
         /// 检查缓存是否为空
+        /// Checks缓存是否为空
         /// as
         pub fn is_empty(&self) -> bool {
             self.cache.is_empty()
         }
 
         /// 清空缓存
+        /// Clears缓存
         pub fn clear(&mut self) {
             self.cache.clear();
             self.access_order.clear();
@@ -279,6 +293,7 @@ pub mod data_structures {
 
     impl<T> Stack<T> {
         /// 创建新的堆栈
+        /// Creates新的堆栈
         /// heap stack
         pub const fn new() -> Self {
             Self { items: Vec::new() }
@@ -292,25 +307,30 @@ pub mod data_structures {
         }
 
         /// 弹出元素
+        /// Pops元素
         /// element
         /// 弹出element
+        /// Popselement
         pub fn pop(&mut self) -> Maybe<T> {
             self.items.pop()
         }
 
         /// 查看栈顶元素
+        /// Views栈顶元素
         /// stack element
         pub fn peek(&self) -> MaybeRef<'_, T> {
             self.items.last()
         }
 
         /// 获取堆栈大小
+        /// Gets堆栈大小
         /// heap stack
         pub fn len(&self) -> usize {
             self.items.len()
         }
 
         /// 检查堆栈是否为空
+        /// Checks堆栈是否为空
         /// heap stack as
         pub fn is_empty(&self) -> bool {
             self.items.is_empty()
@@ -512,6 +532,7 @@ pub mod algorithms {
     }
 
     /// 计算最大公约数
+    /// Computes最大公约数
     /// maximum
     pub fn gcd<T>(a: T, b: T) -> T
     where
@@ -525,6 +546,7 @@ pub mod algorithms {
     }
 
     /// 计算最小公倍数
+    /// Computes最小公倍数
     /// minimum
     pub fn lcm<T>(a: T, b: T) -> T
     where
@@ -540,6 +562,7 @@ pub mod algorithms {
     }
 
     /// 计算斐波那契数列
+    /// Computes斐波那契数列
     pub fn fibonacci<T>(n: usize) -> T
     where
         T: Add<Output = T> + Clone + Default + From<u32>,
@@ -639,6 +662,7 @@ pub mod concurrency {
 
     impl<T> ThreadSafeCounter<T> {
         /// 创建新的线程安全计数器
+        /// Creates新的线程安全计数器
         /// thread-safe
         pub fn new(initial_value: T) -> Self {
             Self {
@@ -647,6 +671,7 @@ pub mod concurrency {
         }
 
         /// 获取当前值
+        /// Gets当前值
         /// when before
         pub fn get(&self) -> T
         where
@@ -659,12 +684,14 @@ pub mod concurrency {
         }
 
         /// 设置值
+        /// Sets the value
         /// Set值
         pub fn set(&self, new_value: T) {
             *self.value.lock().expect("ThreadSafeCounter 锁被 poisoned") = new_value;
         }
 
         /// 增加计数（仅适用于数值类型）
+        /// Increases计数（仅适用于数值类型）
         /// （type ）
         pub fn increment(&self) -> T
         where
@@ -712,6 +739,7 @@ pub mod concurrency {
         R: Send + 'static,
     {
         /// 创建新的线程池
+        /// Creates新的线程池
         /// thread pool
         pub fn new<F>(size: usize, worker_fn: F) -> Self
         where
@@ -753,6 +781,7 @@ pub mod concurrency {
 
     impl<T> ReadWriteData<T> {
         /// 创建新的读写锁保护数据
+        /// Creates新的读写锁保护数据
         /// rwlock
         pub fn new(data: T) -> Self {
             Self {
@@ -761,6 +790,7 @@ pub mod concurrency {
         }
 
         /// 读取数据
+        /// Reads数据
         pub fn read<F, R>(&self, reader: F) -> R
         where
             F: FnOnce(&T) -> R,
@@ -770,6 +800,7 @@ pub mod concurrency {
         }
 
         /// 写入数据
+        /// Writes数据
         pub fn write<F, R>(&self, writer: F) -> R
         where
             F: FnOnce(&mut T) -> R,
@@ -992,6 +1023,7 @@ pub mod performance {
         V: Clone,
     {
         /// 创建新的缓存
+        /// Creates新的缓存
         pub fn new(max_size: usize) -> Self {
             Self {
                 cache: HashMap::new(),
@@ -1001,12 +1033,14 @@ pub mod performance {
         }
 
         /// 获取值
+        /// Gets the value
         /// Get值
         pub fn get(&self, key: &K) -> GenOption<&V> {
             self.cache.get(key)
         }
 
         /// 设置值
+        /// Sets the value
         /// Set值
         pub fn set(&mut self, key: K, value: V) {
             self.update_order_if_exists(&key);
@@ -1041,17 +1075,20 @@ pub mod performance {
         }
 
         /// 清空缓存
+        /// Clears缓存
         pub fn clear(&mut self) {
             self.cache.clear();
             self.order.clear();
         }
 
         /// 获取缓存大小
+        /// Gets缓存大小
         pub fn len(&self) -> usize {
             self.cache.len()
         }
 
         /// 检查缓存是否为空
+        /// Checks缓存是否为空
         /// as
         pub fn is_empty(&self) -> bool {
             self.cache.is_empty()
@@ -1069,6 +1106,7 @@ pub mod performance {
 
     impl<T, R> BatchProcessor<T, R> {
         /// 创建新的批处理器
+        /// Creates新的批处理器
         pub fn new<F>(batch_size: usize, processor: F) -> Self
         where
             F: Fn(Vec<T>) -> Vec<R> + Send + Sync + 'static,
@@ -1080,6 +1118,7 @@ pub mod performance {
         }
 
         /// 处理数据批次
+        /// Processes数据批次
         pub fn process_batch(&self, data: GenVec<T>) -> GenVec<R> {
             (self.processor)(data)
         }
@@ -1147,6 +1186,7 @@ pub mod rust_190_improvements {
     /// 改进的泛型类型推断
     /// generic type infer
     /// 改进generictype inference
+    /// improvegenerictype inference
     pub fn improved_type_inference() {
         // Rust 1.90 在类型推断方面有所改进
         let numbers = [1, 2, 3, 4, 5];
@@ -1168,6 +1208,7 @@ pub mod rust_190_improvements {
     /// 增强的错误处理与泛型
     /// error handling and generic
     /// 增强error handlingandgeneric
+    /// enhanceerror handlingandgeneric
     pub fn enhanced_error_handling<T, E>(result: Result<T, E>) -> Result<String, String>
     where
         T: Display,
@@ -1181,6 +1222,7 @@ pub mod rust_190_improvements {
     /// 改进的异步泛型
     /// async generic
     /// 改进asyncgeneric
+    /// improveasyncgeneric
     pub async fn improved_async_generic<T>(value: T) -> T
     where
         T: Send + Sync + Clone,
@@ -1222,6 +1264,7 @@ pub mod rust_190_improvements {
     /// 更好的生命周期推断
     /// lifetime infer
     /// 更好lifetimeinfer
+    /// betterlifetimeinfer
     pub fn better_lifetime_inference<'a>(first: &'a str, second: &'a str) -> &'a str {
         if first.len() > second.len() {
             first
@@ -1231,6 +1274,7 @@ pub mod rust_190_improvements {
     }
 
     /// 增强 const generic
+    /// enhance const generic
     pub fn enhanced_const_generics<const N: usize>(arr: [i32; N]) -> i32 {
         arr.iter().sum()
     }
@@ -1291,6 +1335,7 @@ pub mod rust_190_improvements {
 }
 
 /// 综合演示函数
+/// Comprehensive demonstration function
 /// synthesize demonstration function
 pub fn demonstrate_practical_examples() {
     println!("\n=== 实用示例演示 ===");

@@ -3,6 +3,7 @@
 //! 展示异步编程中的形式化验证技术
 //! async in technique
 //! 用法:
+//! usage :
 //! :
 //! ```
 use c06_async::formal_verification;

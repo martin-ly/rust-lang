@@ -1,4 +1,5 @@
 //! # 基础加法示例
+//! # foundation addition example
 //! # foundation example
 //! ## 📐 知识结构
 //! ## 📐 structure
@@ -6,8 +7,10 @@
 //! ### 核心概念
 //! ### core concept
 //!   - **属性**: 函数导出、类型转换、互操作
+//!   - **attribute **: function 、type conversion 、operation
 //!   - **attribute **: function 、type conversion 、
 //! ### 思维导图
+//! ### graph
 //! ###
 //! WASM 基础示例
 //! WASM foundation example
@@ -35,6 +38,7 @@
 use wasm_bindgen::prelude::*;
 
 /// 简单的加法函数
+/// simple addition function
 /// simple function
 /// # 参数
 /// # parameter

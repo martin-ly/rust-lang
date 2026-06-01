@@ -9,6 +9,7 @@
 //! - 多种网络协议支持
 //! - network protocol
 //! - 高性能网络编程工具
+//! - high performance network programming tool
 //! - performance network programming tool
 //! - 高performancenetwork programmingtool
 //! - 安全的网络通信

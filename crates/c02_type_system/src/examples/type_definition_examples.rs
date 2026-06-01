@@ -12,6 +12,7 @@
 //! - definition type
 //! - 自definitiontype
 //! - 指针类型
+//! - pointertype
 //! - pointer type
 //! - 函数类型
 //! - function type
@@ -131,6 +132,7 @@ pub fn custom_types_examples() {
 }
 
 /// 指针类型示例
+/// pointertypeexample
 /// pointer type example
 #[allow(unused_variables)]
 pub fn pointer_types_examples() {

@@ -11,6 +11,7 @@
 //! -
 //! - 优雅Close
 //! - 环境变量配置
+//! - environment variable configuration
 //! - environment variable
 //! ## 编译
 //! ##
@@ -33,6 +34,7 @@ use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// 应用配置
+/// application configuration
 /// application
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
@@ -52,6 +54,7 @@ struct AppConfig {
 
 impl AppConfig {
     /// 从环境变量加载配置
+    /// from environment variable configuration
     /// from environment variable
     fn from_env() -> Self {
         Self {
@@ -78,6 +81,7 @@ struct AppMetrics {
     /// 成功请求数
     successful_requests: AtomicU64,
     /// 失败请求数
+    /// failure
     failed_requests: AtomicU64,
     /// 启动时间戳
     /// time
@@ -319,6 +323,7 @@ impl App {
     }
 
     /// 主页
+    /// home page
     fn handle_home(&self) -> Response {
         Response::json(
             r#"{

@@ -9,6 +9,7 @@ use criterion::{Criterion, criterion_group, criterion_main};
 /// 基准测试：函数组合链性能
 /// benchmark ：function combination performance
 /// 验证函数式编程风格在高频调用下的开销
+/// functional in high under overhead
 /// functional in under overhead
 fn bench_function_composition(c: &mut Criterion) {
     use c03_control_fn::compose_functions;

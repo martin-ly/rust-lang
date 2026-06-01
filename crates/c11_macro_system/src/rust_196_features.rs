@@ -18,6 +18,7 @@ use std::mem::ManuallyDrop;
 /// 不能用于 `#[cfg(...)]` 属性参数。1.96 放宽了这一限制，
 /// cannot `#[cfg(...)]` attribute parameter 。1.96 ，
 /// 允许通过宏参数动态生成条件编译属性。
+/// allow parameter condition attribute 。
 /// parameter condition attribute 。
 macro_rules! cfg_conditional {
     ($cond:expr, $item:item) => {
@@ -80,10 +81,12 @@ pub enum ExpansionResult {
         /// error message
         message: &'static str,
         /// 所在行号
+        /// in row number
         /// in
         line: u32,
     },
     /// 空展开
+    /// empty expansion
     Empty,
 }
 

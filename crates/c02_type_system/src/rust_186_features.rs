@@ -1,15 +1,21 @@
 //! Rust 186.0 新特性实现模块 —— c02_type_system
 //! - `trait_upcasting`: Trait 对象向上转换（dyn Trait + Trait -> dyn Trait）
+//! - `trait_upcasting`: Trait object upcasting (dyn Trait + Trait -> dyn Trait)
 //! - `trait_upcasting`: Trait to象向onconversion（dyn Trait + Trait -> dyn Trait）
 //! - `target_feature_safe`: 安全functionon `#[target_feature]`
+//! - `target_feature_safe`: safefunctionon `#[target_feature]`
 //! # 版本信息
+//! # Version Information
 //! # this
 //! - Rust 版本: 186.0
+//! - Rust version: 186.0
 //! - Rust this : 186.0
 //! - Rust 版this: 186.0
 //! - 稳定日期: 2025-04-03
+//! - Stabilization date: 2025-04-03
 //! - date : 2025-04-03
 //! - 稳定date: 2025-04-03
+//! - stabledate: 2025-04-03
 //! - date: 2025-04-03
 
 // ============================================================================
@@ -17,11 +23,14 @@
 // ============================================================================
 
 /// # Trait 对象向上转换
+/// # Trait Object Upcasting
 /// # Trait to on conversion
 /// # Trait to象向onconversion
 /// ## 使用场景
+/// ## Use Cases
 /// ## scenario
 /// - 插件系统：将特定插件接口转换为通用接口
+/// - Plugin system: convert specific plugin interfaces to generic interfaces
 /// - system ：will conversion as
 pub trait Animal {
     fn name(&self) -> &'static str;
@@ -61,21 +70,28 @@ mod tests {
 // ============================================================================
 
 /// # 安全function `#[target_feature]`
+/// # safefunction `#[target_feature]`
 /// Rust 1.86.0 允许在安全函数上使用 ``#[target_feature]``，
+/// Rust 1.86.0 allows ``#[target_feature]`` on safe functions,
 /// Rust 1.86.0 in function on ``#[target_feature]``，
 /// ## 之前限制
 /// ## 's before
 /// 1.86 之前，``#[target_feature]`` 只能用于 `unsafe fn`，
+/// Before 1.86, ``#[target_feature]`` could only be used on `unsafe fn`,
 /// 1.86 'sbefore，``#[target_feature]`` 只能Used for `unsafe fn`，
 /// 因为调用未启用对应特性的函数是 UB。
+/// Because calling a function without the corresponding feature enabled is UB.
 /// because to feature function UB。
 /// ## 现在
+/// ## Now
 /// ## present
 /// 安全函数 + ``#[target_feature]`` 组合允许，但调用点必须在 `unsafe` 块中。
+/// Safe functions + ``#[target_feature]`` combination is allowed, but the call site must be in an `unsafe` block.
 /// function + ``#[target_feature]`` combination ，but point must in `unsafe` in 。
 ///
 /// 调用者必须通过 `is_x86_feature_detected!("sse2")` 等方式
 /// 确保目标平台支持 SSE2 特性，否则调用此函数是未定义行为。
+/// Ensure the target platform supports SSE2; otherwise, calling this function is undefined behavior.
 /// goal platform SSE2 feature ，this function definition as 。
 #[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "sse2")]

@@ -7,6 +7,7 @@
 //! - 特征对象和动态分发
 //! - to and
 //! - 对象安全规则
+//! - objectsaferule
 //! - to rule
 //! - to象安全rule
 //! - torule
@@ -41,6 +42,7 @@ pub fn trait_basics_examples() {
 }
 
 /// 特征对象示例
+/// traitsobjectexample
 /// to example
 pub fn trait_object_examples() {
     println!("\n=== 特征对象示例 ===");
@@ -180,6 +182,7 @@ trait Shape {
 }
 
 /// 处理器特征
+/// Processes器特征
 #[allow(dead_code)]
 #[allow(unused_variables)]
 trait Processor {
@@ -208,6 +211,7 @@ trait StreamingIterator {
 }
 
 /// 常量特征
+/// constantstraits
 /// constant
 #[allow(dead_code)]
 #[allow(unused_variables)]
@@ -429,6 +433,7 @@ impl PersonBuilder {
 }
 
 /// 排序策略特征
+/// Sorts策略特征
 /// ordering strategy
 #[allow(dead_code)]
 trait SortStrategy<T> {
@@ -436,6 +441,7 @@ trait SortStrategy<T> {
 }
 
 /// 快速排序
+/// fastsort
 /// quick sort
 #[allow(dead_code)]
 struct QuickSort;
@@ -447,6 +453,7 @@ impl<T: Ord> SortStrategy<T> for QuickSort {
 }
 
 /// 排序器
+/// Sorts器
 /// ordering
 #[allow(dead_code)]
 struct Sorter<T> {
@@ -528,6 +535,7 @@ fn process_trait_object(processor: Box<dyn Processor>, data: Vec<i32>) -> String
 }
 
 /// 求和处理器
+/// Sum of处理器
 /// and
 #[allow(dead_code)]
 struct SumProcessor;

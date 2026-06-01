@@ -1,6 +1,8 @@
 //! # 数组处理性能基准测试
+//! # array Performance benchmark
 //! # Performance benchmark
 //! 测试各种数组操作的性能
+//! array operation performance
 //! performance
 //! ## 运行方式
 //! ## Run way
@@ -12,6 +14,7 @@ use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::hint::black_box;
 
 /// 测试不同大小数组的求和性能
+/// array and performance
 /// and performance
 fn bench_sum_array(c: &mut Criterion) {
     let mut group = c.benchmark_group("sum_array");
@@ -48,6 +51,7 @@ fn bench_find_max(c: &mut Criterion) {
 }
 
 /// 测试数组过滤性能
+/// array performance
 /// performance
 fn bench_filter_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("filter_operations");
@@ -62,6 +66,7 @@ fn bench_filter_operations(c: &mut Criterion) {
 }
 
 /// 测试数组反转性能
+/// array performance
 /// performance
 fn bench_reverse_array(c: &mut Criterion) {
     let mut group = c.benchmark_group("reverse_array");
@@ -78,6 +83,7 @@ fn bench_reverse_array(c: &mut Criterion) {
 }
 
 /// 测试数组映射操作
+/// array operation
 fn bench_double_elements(c: &mut Criterion) {
     let mut group = c.benchmark_group("double_elements");
 

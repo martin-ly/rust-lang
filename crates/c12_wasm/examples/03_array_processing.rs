@@ -1,4 +1,5 @@
 //! # 数组处理示例
+//! # array example
 //! # example
 //! ## 运行方式
 //! ## Run way
@@ -26,15 +27,18 @@
 use wasm_bindgen::prelude::*;
 
 /// 计算数组总和
+/// array and
 /// and
 /// # 参数
 /// # parameter
 /// - `arr`: 整数数组
+/// - `arr`: array
 /// - `arr`:
 /// - `arr`: 整数array
 /// # 返回值
 /// # return value
 /// 返回数组中所有元素的和
+/// array in all element and
 /// in all element and
 #[wasm_bindgen]
 pub fn sum_array(arr: &[i32]) -> i32 {
@@ -42,13 +46,16 @@ pub fn sum_array(arr: &[i32]) -> i32 {
 }
 
 /// 计算数组平均值
+/// array
 /// # 参数
 /// # parameter
 /// - `arr`: 浮点数数组
+/// - `arr`: point array
 /// - `arr`: point
 /// # 返回值
 /// # return value
 /// 返回平均值，如果数组为空则返回 0.0
+/// ，if array as 0.0
 /// ，if as 0.0
 #[wasm_bindgen]
 pub fn average(arr: &[f64]) -> f64 {
@@ -64,6 +71,7 @@ pub fn average(arr: &[f64]) -> f64 {
 /// # 参数
 /// # parameter
 /// - `arr`: 整数数组
+/// - `arr`: array
 /// - `arr`:
 /// - `arr`: 整数array
 /// # 返回值
@@ -84,11 +92,13 @@ pub fn find_min(arr: &[i32]) -> Option<i32> {
 /// # 参数
 /// # parameter
 /// - `arr`: 整数数组
+/// - `arr`: array
 /// - `arr`:
 /// - `arr`: 整数array
 /// # 返回值
 /// # return value
 /// 返回只包含正数的新数组
+/// array
 #[wasm_bindgen]
 pub fn filter_positive(arr: &[i32]) -> Vec<i32> {
     arr.iter().filter(|&&x| x > 0).copied().collect()
@@ -105,11 +115,13 @@ pub fn filter_even(arr: &[i32]) -> Vec<i32> {
 /// # 参数
 /// # parameter
 /// - `arr`: 整数数组
+/// - `arr`: array
 /// - `arr`:
 /// - `arr`: 整数array
 /// # 返回值
 /// # return value
 /// 返回新数组，每个元素都是原来的2倍
+/// array ，element 2
 /// ，element 2
 #[wasm_bindgen]
 pub fn double_elements(arr: &[i32]) -> Vec<i32> {
@@ -117,15 +129,18 @@ pub fn double_elements(arr: &[i32]) -> Vec<i32> {
 }
 
 /// 反转数组
+/// array
 /// 反转array
 /// # 参数
 /// # parameter
 /// - `arr`: 整数数组
+/// - `arr`: array
 /// - `arr`:
 /// - `arr`: 整数array
 /// # 返回值
 /// # return value
 /// 返回反转后的新数组
+/// after array
 /// after
 #[wasm_bindgen]
 pub fn reverse_array(arr: &[i32]) -> Vec<i32> {
@@ -133,16 +148,19 @@ pub fn reverse_array(arr: &[i32]) -> Vec<i32> {
 }
 
 /// 排序数组（升序）
+/// ordering array （）
 /// ordering （）
 /// orderingarray（升序）
 /// # 参数
 /// # parameter
 /// - `arr`: 整数数组
+/// - `arr`: array
 /// - `arr`:
 /// - `arr`: 整数array
 /// # 返回值
 /// # return value
 /// 返回排序后的新数组
+/// ordering after array
 /// ordering after
 #[wasm_bindgen]
 pub fn sort_ascending(arr: &[i32]) -> Vec<i32> {
@@ -155,11 +173,13 @@ pub fn sort_ascending(arr: &[i32]) -> Vec<i32> {
 /// # 参数
 /// # parameter
 /// - `arr`: 整数数组
+/// - `arr`: array
 /// - `arr`:
 /// - `arr`: 整数array
 /// # 返回值
 /// # return value
 /// 返回去重后的新数组（保持原始顺序）
+/// after array （order ）
 /// after （order ）
 #[wasm_bindgen]
 pub fn unique(arr: &[i32]) -> Vec<i32> {

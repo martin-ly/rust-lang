@@ -1,22 +1,28 @@
 //! 高级异步工具演示
+//! high async tool demonstration
 //! async tool demonstration
 //! 本示例展示了高级异步工具的使用：
+//! this example high async tool ：
 //! this example async tool ：
 //! - 异步任务管理器
 //! - async task
 //! - 智能重试引擎
+//! - retry
 //! -
 //! - 异步批处理器
 //! - async
 //! - 异步限流器
 //! - async stream
 //! - 异步缓存管理器
+//! - async cache
 //! - async
 //! - 异步事件总线
+//! - async event line
 //! - async line
 //! - 异步健康检查器
 //! - async health check
 //! - 异步配置管理器
+//! - async configuration
 //! - async
 //! 运行方式：
 //! Run way ：
@@ -148,6 +154,7 @@ mod mock_tools {
     }
 
     /// 模拟智能重试引擎
+    /// retry
     #[allow(dead_code)]
     pub struct MockRetryEngine {
         config: RetryConfig,
@@ -374,6 +381,7 @@ mod mock_tools {
     }
 
     /// 模拟异步缓存管理器
+    /// async cache
     /// async
     pub struct MockCacheManager<K, V> {
         cache: Arc<Mutex<std::collections::HashMap<K, CacheEntry<V>>>>,
@@ -456,6 +464,7 @@ mod mock_tools {
     }
 
     /// 模拟异步事件总线
+    /// async event line
     /// async line
     pub struct MockEventBus<T> {
         subscribers: Arc<Mutex<Vec<tokio::sync::mpsc::UnboundedSender<T>>>>,

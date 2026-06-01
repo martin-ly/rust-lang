@@ -9,12 +9,14 @@
 //!   - **属性**: Thread-per-core、io_uring、NUMA感知、零拷贝
 //!   - **attribute**: Thread-per-core、io_uring、NUMA感知、零拷贝
 //! ### 思维导图
+//! ### graph
 //! ###
 //! Glommio 演示
 //! ├── Thread-per-core 架构
 //! │   └── 每个核心一个线程
 //! │ └── core thread
 //! │   └── 高性能异步I/O
+//! │ └── high performance async I/O
 //! │ └── performance async I/O
 //! ├── NUMA 感知
 //! ├── NUMA
@@ -37,6 +39,7 @@
 //! 3. **NUMA 感知** - 优化多 socket 系统
 //! 3. **NUMA ** - optimization socket system
 //! 4. **零拷贝 I/O** - 最小化数据复制
+//! 4. ** I/O** - minimum data
 //! 4. ** I/O** - minimum
 //! 5. **CPU 亲和性** - 精确控制任务调度
 //! 5. **CPU and ** - task

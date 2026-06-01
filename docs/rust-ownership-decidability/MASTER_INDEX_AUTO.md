@@ -173,7 +173,7 @@ coq-formalization/
 | Crate | Formal Analysis |
 |-------|-----------------|
 | Tokio Runtime | [tokio-runtime-formal-analysis.md](case-studies/tokio-runtime-formal-analysis.md) |
-| Async-std | [async-std-formal-analysis.md](case-studies/async-std-formal-analysis.md) |
+| Async-std [已归档 2025-03] | [async-std-formal-analysis.md](case-studies/async-std-formal-analysis.md) |
 | Futures | [futures-crate-formal-analysis.md](case-studies/futures-crate-formal-analysis.md) |
 
 ---

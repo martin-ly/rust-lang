@@ -25,6 +25,7 @@ pub mod async_control_flow_features {
     /// 改进的异步函数
     /// async function
     /// 改进asyncfunction
+    /// improveasyncfunction
     async fn async_function_189() -> i32 {
         // 模拟异步操作
         tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;

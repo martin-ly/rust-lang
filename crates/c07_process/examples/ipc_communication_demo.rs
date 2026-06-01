@@ -9,6 +9,7 @@
 //! - 共享内存通信
 //! - shared memory
 //! - 消息队列通信
+//! - message queue
 //! -
 //! 运行方式:
 //! Run way :

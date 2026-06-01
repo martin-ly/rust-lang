@@ -3,6 +3,7 @@
 //! - World: 实体容器
 //! - World: volume
 //! - Entity: 唯一标识符
+//! - Entity: identifier
 //! - Entity:
 //! - Component: 纯数据（Position, Velocity, Health, Name）
 //! - System: 查询 + 逻辑（移动、碰撞、渲染）

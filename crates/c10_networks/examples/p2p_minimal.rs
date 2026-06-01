@@ -5,6 +5,7 @@
 //! - ✅ P2P 节点创建和身份管理
 //! - ✅ P2P node and
 //! - ✅ TCP 传输层配置
+//! - ✅ TCP transport layer configuration
 //! - ✅ TCP transport layer
 //! - ✅ Noise 加密和 Yamux 多路复用
 //! - ✅ Noise and Yamux
@@ -40,8 +41,10 @@
 //! - **节点识别**: Identify
 //! - **node **: Identify
 //! ## 配置选项
+//! ## configuration
 //! ##
 //! 可以通过环境变量配置节点：
+//! can environment variable configuration node ：
 //! can environment variable node ：
 //! - `C10_P2P_LISTEN_ADDR`: 监听地址 (默认: /ip4/0.0.0.0/tcp/0)
 //! - `C10_P2P_TOPIC`: 订阅主题 (默认: c10-demo)

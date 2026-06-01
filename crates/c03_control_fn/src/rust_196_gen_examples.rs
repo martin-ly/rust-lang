@@ -3,11 +3,13 @@
 //! 需要在 nightly 编译器中启用 `#![feature(gen_blocks)]`。
 //! Requiresin nightly 编译器in启用 `#![feature(gen_blocks)]`。
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_196_gen_examples.rs
 //! - 创建日期: 2026-04-10
 //! - date : 2026-04-10
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 
@@ -21,11 +23,13 @@
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// `if let` guards in match arm on and condition ，
 /// 减少嵌套层级，使代码更扁平、更易读。
+/// Decreases嵌套层级，使代码更扁平、更易读。
 /// ，、。
 pub struct ControlIfLetGuardExamples;
 
 impl ControlIfLetGuardExamples {
     /// 解析命令参数
+    /// Parses命令参数
     /// command parameter
     pub fn parse_command_arg(arg: Option<&str>) -> Result<i32, &'static str> {
         match arg {
@@ -36,6 +40,7 @@ impl ControlIfLetGuardExamples {
     }
 
     /// 处理嵌套结果
+    /// Processes嵌套结果
     /// result
     pub fn handle_nested_result(result: Option<Result<&str, &str>>) -> &'static str {
         match result {
@@ -57,6 +62,7 @@ impl ControlIfLetGuardExamples {
 /// 使用 `yield` 关键字可以产生值。
 /// `yield` key can 。
 /// ## 语法
+/// ## Syntax
 /// ##
 ///     yield value;
 /// }
@@ -65,8 +71,10 @@ pub mod basic_gen {
     /// 使用 gen 块创建简单的计数器
     /// gen simple
     /// 生成 1 到 n 的整数序列
+    /// Generates 1 到 n 的整数序列
     /// 1 to n sequence
     /// Generate 1 to n 整数sequence
+    /// Generate 1 to n integersequence
     #[allow(unreachable_code)]
     pub fn simple_counter(n: usize) -> impl Iterator<Item = usize> {
         // 使用 gen 块创建迭代器
@@ -84,6 +92,7 @@ pub mod basic_gen {
     /// 使用 gen 块创建斐波那契生成器
     /// gen
     /// 生成无限斐波那契数列
+    /// Generates无限斐波那契数列
     pub fn fibonacci_gen() -> impl Iterator<Item = u64> {
         // gen {
         //     let mut a = 0u64;
@@ -114,6 +123,7 @@ pub mod basic_gen {
     /// gen scope
     /// Use gen 块Createrangegenerator
     /// 生成指定范围的值，支持步长
+    /// Generates指定范围的值，支持步长
     /// scope ，
     pub fn range_gen(start: i32, end: i32, step: i32) -> impl Iterator<Item = i32> {
         // gen {
@@ -187,6 +197,7 @@ pub mod async_gen {
     /// 异步生成器 trait（模拟）
     /// async trait（）
     /// asyncgenerator trait（模拟）
+    /// asyncgenerator trait（simulate）
     pub trait AsyncIterator {
         type Item;
         fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>>;
@@ -354,6 +365,7 @@ pub mod advanced_gen {
     /// 使用 gen 实现组合迭代器
     /// gen combination
     /// 生成所有可能的组合
+    /// Generates所有可能的组合
     /// all may combination
     pub fn combinations_gen<T: Clone>(data: &[T], k: usize) -> impl Iterator<Item = Vec<T>> + '_ {
         // gen {
@@ -400,6 +412,7 @@ pub mod advanced_gen {
     /// 使用 gen 实现排列迭代器
     /// gen arrangement
     /// 生成所有可能的排列
+    /// Generates所有可能的排列
     /// all may arrangement
     pub fn permutations_gen<T: Clone>(data: &[T]) -> impl Iterator<Item = Vec<T>> + '_ {
         // gen {
@@ -493,6 +506,7 @@ pub mod advanced_gen {
         /// 层序遍历（BFS）
         /// （BFS）
         /// 层序Iterate（BFS）
+        /// level-orderIterate（BFS）
         pub fn level_order(&self) -> impl Iterator<Item = T> {
             use std::collections::VecDeque;
 
@@ -530,6 +544,7 @@ pub mod advanced_gen {
 // ==================== 4. gen 与 pin ====================
 
 /// # gen 与 Pin
+/// # gen and Pin
 /// 展示 gen 块与 Pin 的配合使用。
 /// gen and Pin 。
 /// display gen 块and Pin 配合Use。
@@ -551,6 +566,7 @@ pub mod gen_pin {
         }
 
         /// 创建带状态的生成器
+        /// Creates带状态的生成器
         /// state
         pub fn create_generator(self: Pin<&mut Self>) -> impl Iterator<Item = T> + '_ {
             // gen {
@@ -573,6 +589,7 @@ pub mod gen_pin {
 // ==================== 5. 演示函数 ====================
 
 /// 演示基础 gen 块
+/// Demonstrates基础 gen 块
 /// demonstration foundation gen
 /// Demonstration ofbasis gen 块
 #[allow(dead_code)]
@@ -619,6 +636,7 @@ pub fn demonstrate_basic_gen() {
 }
 
 /// 演示高级 gen 模式
+/// Demonstrates高级 gen 模式
 /// demonstration gen
 /// Demonstration of高级 gen 模式
 #[allow(dead_code)]
@@ -689,6 +707,7 @@ pub fn demonstrate_advanced_gen() {
 }
 
 /// 演示 gen 关键字特性
+/// Demonstrates gen 关键字特性
 /// demonstration gen key feature
 pub fn demonstrate_rust_196_gen_features() {
     println!("\n========================================");
@@ -708,6 +727,7 @@ pub fn demonstrate_rust_196_gen_features() {
 }
 
 /// 获取 gen 特性信息
+/// Gets gen 特性信息
 /// gen feature
 pub fn get_rust_196_gen_info() -> String {
     "gen 关键字特性:\n- gen 块: 使用 yield 创建迭代器\n- async gen: 创建异步生成器\n- \

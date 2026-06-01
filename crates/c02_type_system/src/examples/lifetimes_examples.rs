@@ -232,6 +232,7 @@ impl<'a> ImportantExcerpt<'a> {
 }
 
 /// 获取第一个单词
+/// Gets第一个单词
 /// first
 fn get_first_word(s: &str) -> &str {
     let bytes = s.as_bytes();
@@ -303,6 +304,7 @@ impl<'a, T: ?Sized> GenericRef<'a, T> {
 }
 
 /// 处理器特征
+/// Processes器特征
 #[allow(unused_variables)]
 trait Processor {
     type Output<'a>
@@ -415,6 +417,7 @@ impl<'a> Iterator for Words<'a> {
 /// 缓存结构
 /// structure
 /// 缓存structure
+/// cachestructure
 #[allow(dead_code)]
 struct Cache<'a, T> {
     data: std::collections::HashMap<String, &'a T>,
@@ -437,6 +440,7 @@ impl<'a, T> Cache<'a, T> {
 }
 
 /// 解析器
+/// Parses器
 #[allow(dead_code)]
 struct Parser<'a> {
     input: &'a str,

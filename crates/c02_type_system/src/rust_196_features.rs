@@ -6,10 +6,12 @@
 //! 以及历史特性复习（非 1.96 新增，但与本模块教学相关）：
 //! and feature （ 1.96 ，but and this module ）：
 //! # 版本信息
+//! # Version Information
 //! # this
 //! - 稳定日期: 2026-05-28
 //! - date : 2026-05-28
 //! - 稳定date: 2026-05-28
+//! - stabledate: 2026-05-28
 //! - date: 2026-05-28
 //! # Rust 1.96.0 类型系统新特性
 //! # Rust 1.96.0 type system feature
@@ -77,6 +79,7 @@ use std::collections::VecDeque;
 /// 使得更多数据结构可以在编译期构造，减少运行时初始化开销。
 /// data structure can in ，runtime overhead 。
 /// ## 限制
+/// ## Limitations
 /// ##
 pub struct ConstVecDequeExamples;
 
@@ -203,6 +206,7 @@ pub enum Event<T, E> {
 }
 
 /// 处理不可能出错的流事件
+/// Processes不可能出错的流事件
 /// may stream
 /// 当 `E = !` 时，Error 变体在物理上不可能被构造。
 /// when `E =!` ，Error volume in on may is 。
@@ -215,6 +219,7 @@ pub fn process_infallible_stream(event: Event<i32, !>) -> Option<i32> {
 }
 
 /// 过滤后的结果类型
+/// Filters后的结果类型
 /// after result type
 pub fn filtered_result(values: Vec<Result<i32, String>>) -> Vec<Result<i32, !>> {
     values
@@ -308,6 +313,7 @@ pub const fn compile_time_compute(input: u32) -> Result<u32, !> {
 // ==================== 演示函数 ====================
 
 /// 演示 Never 类型特性
+/// Demonstrates Never 类型特性
 /// demonstration Never type feature
 pub fn demonstrate_never_type() {
     println!("\n========================================");
@@ -350,6 +356,7 @@ pub fn demonstrate_never_type() {
 }
 
 /// 获取 never 类型特性信息
+/// Gets never 类型特性信息
 /// never type feature
 pub fn get_never_type_info() -> String {
     "Rust 2024 Edition Never 类型 (!) 特性:\n- `!` 可强制转换为任何类型\n- `Result<T, !>` \
@@ -373,8 +380,10 @@ pub fn get_never_type_info() -> String {
 /// 1. **模块统一**: 所有 range 类型集中到 `core::range`
 /// 1. **module **: all range type in to `core::range`
 /// ## 代码示例
+/// ## codeexample
 /// ## example
 /// ## 代码Example of
+/// ## codeExample of
 /// };
 ///
 /// // Range: 半开区间 [1, 5)
@@ -472,9 +481,11 @@ pub fn nonzero_range_demo() {
 /// ```
 ///
 /// **and `assert!(matches!(...))` 区别**:
+/// **and `assert!(matches!(...))` difference**:
 /// - 错误信息更友好（显示实际值 vs 模式）
 /// - error message （display actual vs ）
 /// - 支持 guard 条件（`if expr`）
+/// - support guard condition（`if expr`）
 /// - 支持变量绑定（`Ok(v) => { use v; }`）
 /// - variable （`Ok(v) => { use v; }`）
 /// **来源**: [Rust Standard Library: assert_matches]
@@ -585,6 +596,7 @@ pub mod anti_patterns_and_edge_cases {
         }
 
         /// ✅ 推荐：使用 try_into 进行安全转换
+        /// ✅ Recommended: Use try_into for safe conversion
         /// ✅ ： try_into conversion
         /// ✅ 推荐：Use try_into 进行安全conversion
         pub fn safe_narrowing(value: u64) -> Result<u8, &'static str> {
@@ -592,6 +604,7 @@ pub mod anti_patterns_and_edge_cases {
         }
 
         /// ⚠️ 边界情况：f64 到整数的精度丢失边界
+        /// ⚠️ Edge case: Precision loss boundary for f64 to integer
         /// ⚠️ edge situation ：f64 to edge
         /// 超过 2^53 的 f64 无法精确表示所有整数
         /// 2^53 f64 represent all

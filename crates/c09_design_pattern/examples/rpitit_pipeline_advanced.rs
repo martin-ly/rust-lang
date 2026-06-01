@@ -1,10 +1,12 @@
 //! Rust 1.90 RPITIT 流水线模式高级示例
+//! Rust 1.90 RPITIT pipeline high example
 //! Rust 1.90 RPITIT pipeline example
 //! 本示例展示：
 //! this example ：
 //! 2. 零成本抽象的流水线模式
 //! 2. cost pipeline
 //! 3. 可组合的数据处理管道
+//! 3. combination data pipe
 //! 3. combination pipe
 //! 4. 惰性求值与迭代器链
 //! 4. and
@@ -270,6 +272,7 @@ impl PipelineProcessor for SumReducer {
 // ============================================================================
 
 /// 数据记录
+/// data
 #[derive(Debug, Clone)]
 pub struct Record {
     pub id: u32,

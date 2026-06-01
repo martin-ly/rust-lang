@@ -4,6 +4,7 @@
 //! ```
 //!
 //! **来源**: [Rust Project Goals 2026 — Const Generics](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+//! **Source**: [Rust Project Goals 2026 — Const Generics](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 
 // ============================================================================
 // 1. adt_const_params: 结构体/枚举作为 const 泛型参数
@@ -46,8 +47,10 @@ impl AdtConstParamsConcept {
     }
 
     /// 适用场景分析
+    /// applicablescenarioanalysis
     /// scenario analyze
     /// 适用scenarioanalysis
+    /// applicablescenarioanalysis
     pub fn use_cases() -> &'static str {
         r#"adt_const_params 的典型应用场景：
 
@@ -123,8 +126,10 @@ let b: Buffer<{ Config::SIZE }> = ...; // ERROR!
     }
 
     /// 适用场景分析
+    /// applicablescenarioanalysis
     /// scenario analyze
     /// 适用scenarioanalysis
+    /// applicablescenarioanalysis
     pub fn use_cases() -> &'static str {
         r#"min_generic_const_args 的典型应用场景：
 

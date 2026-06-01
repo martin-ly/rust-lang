@@ -10,6 +10,7 @@
 //! - 并发网络请求
 //! - concurrency network
 //! - 实时数据处理
+//! - data
 //! -
 //! - 任务调度系统
 //! - task system
@@ -174,6 +175,7 @@ impl ConcurrentHttpClient {
 }
 
 /// 实时数据处理器
+/// data
 #[allow(dead_code)]
 pub struct RealTimeDataProcessor {
     buffer: Arc<Mutex<VecDeque<f64>>>,
@@ -456,6 +458,7 @@ fn demo_concurrent_requests() {
 }
 
 /// 演示实时数据处理
+/// demonstration data
 /// demonstration
 /// Demonstration of实时数据Handle
 #[allow(dead_code)]

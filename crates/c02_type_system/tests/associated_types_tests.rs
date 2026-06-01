@@ -8,6 +8,7 @@
 //! - 关联常量
 //! - associated constant
 //! - 关联类型约束
+//! - associated type constraint
 //! - associated type
 
 /// 测试基本关联类型
@@ -236,6 +237,7 @@ fn test_default_associated_types() {
 }
 
 /// 测试关联类型约束
+/// associated type constraint
 /// associated type
 #[test]
 fn test_associated_type_constraints() {

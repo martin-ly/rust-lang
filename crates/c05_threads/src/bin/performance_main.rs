@@ -88,6 +88,7 @@ fn interactive_performance_demo() {
 }
 
 /// 演示高性能线程池
+/// Demonstrates高性能线程池
 /// demonstration performance thread pool
 /// Demonstration of高performancethread pool
 fn demo_high_performance_thread_pool(data: &[i32]) {
@@ -125,6 +126,7 @@ fn demo_high_performance_thread_pool(data: &[i32]) {
 }
 
 /// 演示无锁数据结构
+/// Demonstrates无锁数据结构
 /// demonstration lock-free data structure
 fn demo_lock_free_structures() {
     // 无锁环形缓冲区
@@ -165,6 +167,7 @@ fn demo_lock_free_structures() {
 }
 
 /// 演示并发算法
+/// Demonstrates并发算法
 /// demonstration concurrency algorithm
 fn demo_concurrent_algorithms(data: &[i32]) {
     let thread_counts = [1, 2, 4, 8];
@@ -193,6 +196,7 @@ fn demo_concurrent_algorithms(data: &[i32]) {
 }
 
 /// 演示性能对比
+/// Demonstrates性能对比
 /// demonstration performance to
 fn demo_performance_comparison(data: &[i32]) {
     println!("  串行处理 vs 并行处理对比:");

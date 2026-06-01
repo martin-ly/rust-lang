@@ -1,6 +1,7 @@
 //! Rust 1.92.0 异步编程综合测试套件
 //! Rust 1.92.0 async synthesize
 //! - rotate_right 在异步任务队列中正常工作
+//! - rotate_right in async task queue in
 //! - rotate_right in async task in
 //! - 迭代器方法特化性能优化有效
 //! - method performance optimization effective
@@ -50,6 +51,7 @@ async fn test_async_task_queue_rotate() -> Result<()> {
 }
 
 /// 测试空队列的轮转
+/// queue
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_async_task_queue_rotate_empty() {
@@ -245,6 +247,7 @@ fn test_check_async_task_states() {
 }
 
 /// 测试异步任务队列的基本操作
+/// async task queue this operation
 /// async task this
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
@@ -270,6 +273,7 @@ async fn test_async_task_queue_operations() {
 }
 
 /// 测试异步任务调度器的超时处理
+/// async task timeout
 /// async task
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
@@ -339,6 +343,7 @@ async fn test_complete_async_task_workflow() -> Result<()> {
 }
 
 /// 测试新增的队列操作方法
+/// queue operation method
 /// method
 #[tokio::test]
 #[cfg_attr(miri, ignore)]

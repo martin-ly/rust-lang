@@ -5,8 +5,10 @@
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - const 上下文增强（网络配置计算）
+//! - const on under （network configuration ）
 //! - const on under （network ）
 //! - 新的稳定 API（网络数据处理）
+//! - API（network data ）
 //! - API（network ）
 //! - JIT 编译器优化（网络性能提升）
 //! - JIT optimization （network performance ）
@@ -29,6 +31,7 @@ use std::ops::ControlFlow;
 
 pub mod const_network_config {
     /// 网络配置系统
+    /// network configuration system
     /// network system
     pub struct NetworkConfigSystem;
 
@@ -59,8 +62,10 @@ pub mod const_network_config {
     }
 
     /// 协议配置
+    /// configuration
     /// 协议Configure
     /// 使用 const 上下文计算协议配置
+    /// const on under configuration
     /// const on under
     pub struct ProtocolConfig;
 
@@ -156,8 +161,10 @@ pub mod network_new_apis {
 /// Rust 1.91 JIT 编译器optimizationinnetwork programminginapplication
 pub mod network_jit_optimizations {
     /// 处理网络数据包
+    /// network data packet
     /// network
     /// Rust 1.91 JIT 优化：迭代器链式操作性能提升约 15-25%
+    /// Rust 1.91 JIT optimization ：operation performance 15-25%
     /// Rust 1.91 JIT optimization ：performance 15-25%
     pub fn process_network_packets(packets: &[Vec<u8>]) -> Vec<Vec<u8>> {
         packets
@@ -171,6 +178,7 @@ pub mod network_jit_optimizations {
     /// 计算网络统计信息
     /// network
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
+    /// Rust 1.91 JIT optimization ：simple and operation performance 10-15%
     /// Rust 1.91 JIT optimization ：simple and performance 10-15%
     pub fn calculate_network_stats(packet_sizes: &[usize]) -> (usize, usize, usize) {
         let sum: usize = packet_sizes.iter().sum();
@@ -181,8 +189,10 @@ pub mod network_jit_optimizations {
     }
 
     /// 过滤和转换网络数据
+    /// and conversion network data
     /// and conversion network
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 20-25%
+    /// Rust 1.91 JIT optimization ：complex operation performance 20-25%
     /// Rust 1.91 JIT optimization ：complex performance 20-25%
     pub fn filter_and_transform_network_data(data: &[u8]) -> Vec<u8> {
         data.iter()
@@ -228,6 +238,7 @@ pub mod network_memory_optimizations {
     }
 
     /// 处理网络数据
+    /// network data
     /// network
     pub fn process_network_data(data: &str) -> Vec<String> {
         data.lines()
@@ -261,6 +272,7 @@ pub mod network_async_improvements {
     use futures::stream::{self, Stream, StreamExt};
 
     /// 异步处理网络数据流
+    /// async network data stream
     /// async network stream
     /// Rust 1.91 优化：异步迭代器性能提升约 15-20%
     /// Rust 1.91 optimization ：async performance 15-20%
@@ -312,6 +324,7 @@ pub mod network_std_new_apis {
 
     /// Vec::try_reserve_exact 示例
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
+    /// Rust 1.91 ：，may failure
     /// Rust 1.91 ：，may
     pub fn allocate_network_buffer(
         size: usize,
@@ -377,6 +390,7 @@ pub mod comprehensive_network_examples {
     }
 
     /// 高性能网络数据处理管道
+    /// high performance network data pipe
     /// performance network pipe
     /// 利用 JIT 优化和内存分配改进
     /// JIT optimization and memory
@@ -391,8 +405,10 @@ pub mod comprehensive_network_examples {
     }
 
     /// 配置文件解析示例
+    /// configuration example
     /// example
     /// 使用新的 API 解析网络配置
+    /// API network configuration
     /// API network
     pub fn parse_network_config(config_text: &str) -> Vec<String> {
         let mut cursor = Cursor::new(config_text.as_bytes());

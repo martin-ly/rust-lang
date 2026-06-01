@@ -2,8 +2,10 @@
 //! Rust 1.90 feature module (this )
 //! Rust 1.90 新featuremodule (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - 异步生成器 (Async Generators)
 //! - 下一代特质求解器
@@ -32,6 +34,7 @@ pub struct FeatureDatabaseConnection {
 
 impl FeatureDatabaseConnection {
     /// 创建新的数据库连接
+    /// Creates新的数据库连接
     /// database
     pub fn new(id: u32, url: String) -> Self {
         Self {
@@ -42,6 +45,7 @@ impl FeatureDatabaseConnection {
     }
 
     /// 发送优雅关闭信号
+    /// Sends优雅关闭信号
     pub async fn send_close_notify(&mut self) -> Result<(), String> {
         if self.is_connected {
             println!("发送优雅关闭信号到数据库连接 {}", self.id);
@@ -143,8 +147,10 @@ impl BorrowCheckerDemo {
     }
 
     /// 演示改进的借用检查
+    /// Demonstrates改进的借用检查
     /// demonstration borrowing
     /// 减少不必要的借用错误。
+    /// Decreases不必要的借用错误。
     /// borrowing 。
     pub fn improved_borrow_analysis(&mut self) -> Result<(), String> {
         // 在Rust 1.90中，这种模式更容易被借用检查器理解
@@ -163,6 +169,7 @@ impl BorrowCheckerDemo {
     }
 
     /// 演示更智能的借用规则
+    /// Demonstrates更智能的借用规则
     /// demonstration borrowing rule
     /// Demonstration of更智能borrowrule
     pub fn smart_borrow_rules(&self) -> Vec<&str> {
@@ -207,6 +214,7 @@ impl AdvancedTrait<i32> for BorrowCheckerDemo {
 }
 
 /// 演示复杂的特质约束
+/// Demonstrates复杂的特质约束
 /// demonstration complex trait
 pub fn demonstrate_trait_solver() -> Result<(), String> {
     let demo = BorrowCheckerDemo::new();
@@ -240,6 +248,7 @@ impl AlignmentDemo {
     }
 
     /// 演示改进的对齐检查
+    /// Demonstrates改进的对齐检查
     /// demonstration to
     /// Demonstration of改进to齐Check
     /// Rust 1.90在编译时常量求值期间始终检查对齐，
@@ -284,6 +293,7 @@ impl Status {
     }
 
     /// 获取判别值
+    /// Gets判别值
     pub fn discriminant(&self) -> u8 {
         unsafe { *(self as *const Self as *const u8) }
     }
@@ -307,6 +317,7 @@ impl<'a> LifetimeDemo<'a> {
     }
 
     /// 演示生命周期转换
+    /// Demonstrates生命周期转换
     /// demonstration lifetime conversion
     pub fn convert_lifetime<'b>(self) -> LifetimeDemo<'b>
     where

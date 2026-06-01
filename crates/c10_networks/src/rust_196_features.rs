@@ -35,6 +35,7 @@ impl PortRange {
     }
 
     /// 获取结束端口
+    /// end
     pub fn end(&self) -> u16 {
         self.inner.end
     }
@@ -117,6 +118,7 @@ pub struct ConnectionPool {
 
 impl ConnectionPool {
     /// 从已知配置创建连接池
+    /// from configuration connection pool
     /// from
     pub fn from_config(name: &str, max: usize) -> Self {
         Self {

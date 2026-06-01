@@ -9,6 +9,7 @@
 //! ## 功能
 //! ## functionality
 //! - 图像分类
+//! - graph classification
 //! - classification
 //! - 图像classification
 //! - 文本生成 (LLM)
@@ -84,6 +85,7 @@ impl InferenceBackend {
 }
 
 /// 张量数据类型
+/// tensor data type
 /// tensor type
 #[derive(Debug, Clone, Copy)]
 pub enum TensorType {
@@ -94,6 +96,7 @@ pub enum TensorType {
 }
 
 /// 图像分类器
+/// graph classification
 /// classification
 pub struct ImageClassifier {
     model_path: String,
@@ -126,6 +129,7 @@ impl ImageClassifier {
     }
 
     /// 预处理图像
+    /// graph
     fn preprocess_image(&self, image_data: &[u8]) -> Result<Vec<f32>, WasiNNError> {
         // 这是一个简化版本
         // 实际应用中需要：
@@ -292,6 +296,7 @@ impl BatchInference {
     }
 
     /// 批量处理多个输入
+    /// input
     pub fn process_batch(&self, inputs: Vec<Vec<f32>>) -> Result<Vec<Vec<f32>>, WasiNNError> {
         println!("=== Batch Inference ===");
         println!("Batch size: {}", self.batch_size);

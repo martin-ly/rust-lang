@@ -34,6 +34,7 @@ where
     V: Clone + Send + Sync,
 {
     /// 创建新的B+树节点
+    /// Creates新的B+树节点
     /// B+tree node
     pub fn new(is_leaf: bool, order: usize) -> Self {
         Self {
@@ -56,18 +57,21 @@ where
     }
 
     /// 获取节点大小
+    /// Gets节点大小
     /// node
     pub fn size(&self) -> usize {
         self.size.load(Ordering::Acquire)
     }
 
     /// 检查节点是否已满
+    /// Checks节点是否已满
     /// node
     pub fn is_full(&self, order: usize) -> bool {
         self.size.load(Ordering::Acquire) >= order
     }
 
     /// 检查节点是否为空
+    /// Checks节点是否为空
     /// node as
     pub fn is_empty(&self) -> bool {
         self.size.load(Ordering::Acquire) == 0
@@ -137,6 +141,7 @@ where
     }
 
     /// 查找键的位置
+    /// Finds键的位置
     /// position
     pub fn find_key_position(&self, key: &K) -> usize {
         for (i, existing_key) in self.keys.iter().enumerate() {
@@ -148,6 +153,7 @@ where
     }
 
     /// 获取子节点指针
+    /// Gets子节点指针
     /// node pointer
     /// Get子nodepointer
     pub fn get_child(&self, index: usize) -> *mut BPlusTreeNode<K, V> {
@@ -159,6 +165,7 @@ where
     }
 
     /// 设置子节点指针
+    /// Sets子节点指针
     /// node pointer
     /// Set子nodepointer
     pub fn set_child(&self, index: usize, child_ptr: *mut BPlusTreeNode<K, V>) {
@@ -168,6 +175,7 @@ where
     }
 
     /// 获取值
+    /// Gets the value
     /// Get值
     pub fn get_value(&self, index: usize) -> Option<V> {
         if index < self.values.len() {
@@ -178,6 +186,7 @@ where
     }
 
     /// 设置值
+    /// Sets the value
     /// Set值
     pub fn set_value(&self, index: usize, value: Option<V>) {
         if index < self.values.len() {
@@ -203,6 +212,7 @@ where
     V: Clone + Send + Sync,
 {
     /// 创建新的无锁B+树
+    /// Creates新的无锁B+树
     /// lock-free B+ tree
     pub fn new(order: usize) -> Self {
         let root = Box::into_raw(Box::new(BPlusTreeNode::new(true, order)));
@@ -215,6 +225,7 @@ where
     }
 
     /// 插入键值对
+    /// Inserts a key-value pair
     /// to
     pub fn insert(&self, key: K, value: V) -> Result<(), (K, V)> {
         let guard = crossbeam_epoch::pin();
@@ -302,6 +313,7 @@ where
     }
 
     /// 查找键
+    /// Finds键
     pub fn get(&self, key: &K) -> Option<V> {
         let guard = crossbeam_epoch::pin();
         let root_ptr = self.root.load(Ordering::Acquire);
@@ -346,6 +358,7 @@ where
     }
 
     /// 删除键
+    /// Deletes键
     pub fn remove(&self, key: &K) -> Option<V> {
         let guard = crossbeam_epoch::pin();
         let root_ptr = self.root.load(Ordering::Acquire);
@@ -421,6 +434,7 @@ where
     }
 
     /// 查找叶子节点
+    /// Finds叶子节点
     /// node
     fn find_leaf_node(&self, key: &K, _guard: &Guard) -> Option<*mut BPlusTreeNode<K, V>> {
         let root_ptr = self.root.load(Ordering::Acquire);
@@ -448,6 +462,7 @@ where
     }
 
     /// 收集范围值
+    /// Collects范围值
     /// scope
     fn collect_range_values(
         &self,
@@ -483,12 +498,14 @@ where
     }
 
     /// 获取树的大小
+    /// Gets树的大小
     /// tree
     pub fn size(&self) -> usize {
         self.size.load(Ordering::Acquire)
     }
 
     /// 检查树是否为空
+    /// Checks树是否为空
     /// tree as
     pub fn is_empty(&self) -> bool {
         self.size.load(Ordering::Acquire) == 0

@@ -72,6 +72,7 @@ pub struct SuffixIter<'s> {
 
 impl<'s> SuffixIter<'s> {
     /// 创建新的后缀迭代器
+    /// Creates新的后缀迭代器
     /// after
     pub fn new(s: &'s str) -> Self {
         Self { remaining: s }
@@ -96,6 +97,7 @@ impl<'s> LendingIterator for SuffixIter<'s> {
 
 pub trait Collection<T> {
     /// 获取操作返回的元素类型，可以携带生命周期
+    /// Gets操作返回的元素类型，可以携带生命周期
     /// element type ，can lifetime
     type Item<'a>
     where
@@ -153,6 +155,7 @@ impl HrtbPatterns {
     /// 展示 `Fn(&T)` 与 `for<'a> Fn(&'a T)` 的区别
     /// `Fn(&T)` and `for<'a> Fn(&'a T)`
     /// display `Fn(&T)` and `for<'a> Fn(&'a T)` 区别
+    /// display `Fn(&T)` and `for<'a> Fn(&'a T)` difference
     /// `Fn(&T)` 会被编译器扩展为 `Fn(&'arg T)`，其中 `'arg` 是一个具体的生命周期。
     /// `Fn(&T)` is as `Fn(&'arg T)`，its in `'arg` volume lifetime 。
     /// 而 `for<'a> Fn(&'a T)` 表示闭包必须对所有生命周期都有效。
@@ -240,6 +243,7 @@ pub trait ContainerFamily {
     type Member<T>;
 
     /// 创建包含单个元素的容器
+    /// Creates包含单个元素的容器
     /// element
     fn create<T>(value: T) -> Self::Member<T>;
 }
@@ -302,6 +306,7 @@ pub mod state_machine {
         }
 
         /// 转换为可读状态
+        /// Converts为可读状态
         /// conversion as state
         pub fn open_for_read(self) -> FileHandle<OpenForRead> {
             FileHandle {
@@ -311,6 +316,7 @@ pub mod state_machine {
         }
 
         /// 转换为可写状态
+        /// Converts为可写状态
         /// conversion as state
         pub fn open_for_write(self) -> FileHandle<OpenForWrite> {
             FileHandle {
@@ -370,6 +376,7 @@ pub struct Second;
 
 impl<T: Copy> Quantity<T, Meter> {
     /// 创建以米为单位的量
+    /// Creates以米为单位的量
     /// as
     pub fn new_meters(value: T) -> Self {
         Self {
@@ -379,6 +386,7 @@ impl<T: Copy> Quantity<T, Meter> {
     }
 
     /// 获取数值
+    /// Gets数值
     pub fn value(&self) -> T {
         self.value
     }
@@ -394,6 +402,7 @@ impl<T: Copy + Add<Output = T>> Add for Quantity<T, Meter> {
 
 impl<T: Copy> Quantity<T, Second> {
     /// 创建以秒为单位的量
+    /// Creates以秒为单位的量
     /// as
     pub fn new_seconds(value: T) -> Self {
         Self {
@@ -403,6 +412,7 @@ impl<T: Copy> Quantity<T, Second> {
     }
 
     /// 获取数值
+    /// Gets数值
     pub fn value(&self) -> T {
         self.value
     }
@@ -466,9 +476,11 @@ impl GenericSpecializationConcept {
 }
 
 /// 处理策略 trait — 用于演示稳定版特化模拟
+/// Processes策略 trait — 用于演示稳定版特化模拟
 /// strategy trait — demonstration
 pub trait ProcessStrategy<T> {
     /// 处理值并返回描述字符串
+    /// Processes值并返回描述字符串
     /// and describe
     fn process(value: T) -> String;
 }

@@ -19,10 +19,12 @@
 //! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 基础语法综合示例
+//! # Rust 1.89 foundation syntax synthesize example
 //! # Rust 1.89 foundation synthesize example
 //! - 变量声明与绑定
 //! - variable and
 //! - 数据类型与类型推断
+//! - data type and type infer
 //! - type and type infer
 //! - 数据typeandtype inference
 //! - 控制流结构
@@ -62,6 +64,7 @@ use std::thread;
 use std::time::Duration;
 
 /// 主函数 - 运行所有基础语法演示
+/// Main function - Run all foundation syntax demonstration
 /// Main function - Run all foundation demonstration
 fn main() {
     println!("🚀 Rust 1.89 基础语法综合示例");
@@ -82,6 +85,7 @@ fn main() {
 }
 
 /// 运行基础语法演示
+/// Run foundation syntax demonstration
 /// Run foundation demonstration
 fn run_basic_syntax_demos() {
     println!("📚 第一部分：基础语法演示");
@@ -178,6 +182,7 @@ fn run_comprehensive_examples() {
 }
 
 /// 数据处理示例
+/// data example
 /// example
 fn data_processing_example() {
     println!("\n📊 数据处理示例");
@@ -380,6 +385,7 @@ impl UserData {
 }
 
 /// 异步操作结构
+/// async operation structure
 /// async structure
 #[derive(Debug)]
 struct AsyncOperation {
@@ -405,6 +411,7 @@ struct AsyncResult {
 }
 
 /// 复杂操作结构
+/// complex operation structure
 /// complex structure
 #[derive(Debug)]
 struct ComplexOperation {
@@ -484,6 +491,7 @@ impl AsyncTask {
 }
 
 /// 模拟异步操作
+/// async operation
 /// async
 fn simulate_async_operation(name: &str, duration_ms: u64) -> Option<String> {
     // 模拟异步操作
@@ -501,6 +509,7 @@ fn process_async_result(result: String) -> Option<AsyncResult> {
 }
 
 /// 优化数据处理
+/// optimization data
 /// optimization
 fn process_data_optimized(data: &[i32]) -> Vec<i32> {
     data.iter()

@@ -2,6 +2,7 @@
 #![allow(clippy::empty_line_after_doc_comments)]
 //!
 //! ## 📚 本示例全面涵盖
+//! ## 📚 this example surface cover
 //! ## 📚 this example surface
 //! - Reactor 模型event-driventheory
 //! - CSP 模型的进程代数表示
@@ -53,6 +54,7 @@ use tokio::time::sleep;
 /// # theory module : Actor
 /// # theorymodule: Actor 模型形式化
 /// ## 数学定义
+/// ## math definition
 /// ## definition
 /// ## 数学definition
 /// 其中:
@@ -62,14 +64,17 @@ use tokio::time::sleep;
 ///   Mailbox: 消息队列 Queue<Message>
 ///   Behavior: 行asfunction B: (S, Message) → (S', Actions)
 /// 消息传递语义:
+/// message :
 /// :
 /// ```
 ///
 /// ## 不变量 (Invariants)
 /// ## 不variable (Invariants)
 /// 1. 消息顺序性: 同一发送者的消息按发送顺序处理
+/// 1. message order : message order
 /// 1. order : order
 /// 2. 至多一次处理: 每条消息最多被处理一次
+/// 2. : message at most is
 /// 2. : at most is
 /// 3. 位置透明: Actor 可以在本地或远程
 /// 3. position : Actor can in this or
@@ -77,11 +82,14 @@ mod theory_actor_model {
     use super::*;
 
     /// ## 类型约束
+    /// ## type constraint
     /// ## type
     /// - `Send`: 消息可以在线程间安全传递
+    /// - `Send`: message can in thread
     /// - `Send`: can in thread
     pub trait Message: Send + 'static {
         /// 响应类型 - 消息处理后的返回值类型
+        /// type - message after return value type
         /// type - after return value type
         /// 响应type - 消息Handleafterreturn valuetype
         type Response: Send + 'static;
@@ -92,6 +100,7 @@ mod theory_actor_model {
     /// - `started`: Actor 启动时调用
     /// - `stopped`: Actor 停止时调用
     /// ## 数学语义
+    /// ## math
     /// ##
     /// handle(actor, msg) → (new_state, response)
     /// itsin new_state 替换 actor whenbeforestate
@@ -102,12 +111,14 @@ mod theory_actor_model {
         /// # 参数
         /// # parameter
         /// - `msg`: 接收到的消息
+        /// - `msg`: to message
         /// - `msg`: to
         /// - `ctx`: Actor 上下文,包含地址和控制信息
         /// - `ctx`: Actor on under,and
         /// # 返回
         /// #
         /// 消息的响应结果
+        /// message result
         /// result
         async fn handle(
             &mut self,
@@ -152,6 +163,7 @@ mod theory_actor_model {
     }
 
     /// Actor 地址 - 用于向 Actor 发送消息
+    /// Actor - Actor message
     /// Actor - Actor
     /// ## 设计模式: Proxy Pattern
     /// ## 线程安全
@@ -180,9 +192,11 @@ mod theory_actor_model {
     }
 
     /// 消息信封 - 封装消息和响应通道
+    /// message - message and channel
     /// - and channel
     /// ## 设计模式: Command Pattern
     /// 将消息和响应封装为一个对象,支持延迟执行
+    /// will message and as to,
     /// will and as to,
     struct ActorEnvelope<A: Actor> {
         msg: A::Message,
@@ -192,6 +206,7 @@ mod theory_actor_model {
     #[allow(dead_code)]
     impl<A: Actor> ActorAddress<A> {
         /// 发送消息并等待响应 (同步语义)
+        /// message and etc. (synchronous )
         /// and etc. (synchronous )
         /// ## 语义
         /// ##
@@ -204,6 +219,7 @@ mod theory_actor_model {
         /// # 错误处理
         /// # error handling
         /// - Actor 已停止: 返回 "Actor 已停止"
+        /// - Actor stopped : "Actor stopped "
         /// - Actor : "Actor "
         /// - Actor 已Stop: Return "Actor 已Stop"
         /// - Actor 未响应: 返回 "Actor 未响应"
@@ -225,10 +241,12 @@ mod theory_actor_model {
         }
 
         /// 发送消息不等待响应 (异步语义 - Fire and Forget)
+        /// message etc. (async - Fire and Forget)
         /// etc. (async - Fire and Forget)
         /// ## 语义
         /// ##
         /// 无等待,无响应,适用于通知类消息
+        /// wait-free,,notify message
         /// wait-free,,
         pub fn do_send(&self, msg: A::Message) {
             let (tx, _) = oneshot::channel();
@@ -259,6 +277,7 @@ mod theory_actor_model {
         /// 2. 生成 Actor 任务
         /// 2. Actor task
         /// 3. 进入消息循环
+        /// 3. message circulation
         /// 3. circulation
         /// 3. 进入消息circulation
         /// 4. 调用生命周期钩子
@@ -266,6 +285,7 @@ mod theory_actor_model {
         /// ## 并发模型
         /// ## concurrency
         /// 通过消息传递实现并发安全
+        /// message concurrency
         /// concurrency
         pub fn spawn<A: Actor>(mut actor: A) -> ActorAddress<A> {
             let (tx, mut rx) = mpsc::unbounded_channel::<ActorEnvelope<A>>();
@@ -309,16 +329,22 @@ mod theory_actor_model {
     // ========================================================================
 
     /// 账户消息枚举 - 定义账户支持的所有操作
+    /// message enum - definition all operation
     /// enum - definition all
     /// ## 消息类型
+    /// ## message type
     /// ## type
     /// ## 消息type
+    /// ## message type
     /// ## type
     /// - `Deposit`: 存款操作
+    /// - `Deposit`: operation
     /// - `Deposit`:
     /// - `Withdraw`: 取款操作
+    /// - `Withdraw`: operation
     /// - `Withdraw`:
     /// - `Transfer`: 转账操作 (演示 Actor 间通信)
+    /// - `Transfer`: operation (demonstration Actor )
     /// - `Transfer`: (demonstration Actor )
     /// - `Transfer`: 转账操作 (Demonstration of Actor 间通信)
     #[derive(Debug)]
@@ -342,6 +368,7 @@ mod theory_actor_model {
     /// - balance ≥ 0 (余额非负)
     /// - balance ≥ 0 ()
     /// - 所有操作原子性执行
+    /// - all operation
     /// - all
     pub struct BankAccount {
         balance: u64,
@@ -359,6 +386,7 @@ mod theory_actor_model {
         }
 
         /// 记录交易历史
+        /// transaction
         fn record(&mut self, transaction: String) {
             self.transaction_history.push(format!(
                 "[{}] {}",
@@ -531,11 +559,13 @@ mod theory_actor_model {
 /// # theory module : Reactor
 /// # theorymodule: Reactor 模式形式化
 /// ## 数学定义
+/// ## math definition
 /// ## definition
 /// ## 数学definition
 /// 其中:
 /// its in :
 /// 事件分发语义:
+/// event :
 /// :
 ///   handler.handle(event)
 /// ```
@@ -544,8 +574,10 @@ mod theory_actor_model {
 /// ## Reactor strength
 /// ## Reactor 模式strength
 /// 1. 解耦: 事件生成与处理分离
+/// 1. : event and
 /// 1. : and
 /// 2. 扩展性: 动态注册新的事件处理器
+/// 2. : event
 /// 2. :
 /// 3. 性能: 单线程处理多个 I/O 源
 /// 3. performance : thread I/O
@@ -553,10 +585,12 @@ mod theory_reactor_pattern {
     use super::*;
 
     /// 事件类型枚举 - 定义系统支持的事件类型
+    /// event type enum - definition system event type
     /// type enum - definition system type
     /// ## 设计考虑
     /// ## design
     /// - 可扩展: 支持自定义事件类型
+    /// - : definition event type
     /// - : definition type
     /// - 类型安全: 使用 enum 而非字符串
     /// - type : enum while
@@ -564,26 +598,33 @@ mod theory_reactor_pattern {
     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
     pub enum EventType {
         /// 读事件 - 有数据可读
+        /// event - data
         /// -
         Read,
         /// 写事件 - 可以写入数据
+        /// event - can data
         /// - can
         Write,
         /// 定时器事件 - 定时器触发
+        /// event -
         /// -
         Timer,
         /// 连接事件 - 新连接到达
+        /// event - to
         /// - to
         Connect,
         /// 断开事件 - 连接断开
+        /// event -
         /// -
         Disconnect,
         /// 自定义事件 - 用户定义的事件
+        /// definition event - definition event
         /// definition - definition
         Custom(u32),
     }
 
     /// 事件结构 - 封装事件的所有信息
+    /// event structure - event all
     /// structure - all
     /// ## 字段说明
     /// ## field explain
@@ -592,8 +633,10 @@ mod theory_reactor_pattern {
     /// - `event_type`: 事件type
     /// - `data`: 事件数据 payload
     /// - `timestamp`: 事件产生时间戳
+    /// - `timestamp`: event time
     /// - `timestamp`: time
     /// - `priority`: 事件优先级 (0-255, 越大越优先)
+    /// - `priority`: event (0-255, )
     /// - `priority`: (0-255, )
     #[allow(dead_code)]
     #[derive(Debug, Clone)]
@@ -607,6 +650,7 @@ mod theory_reactor_pattern {
 
     impl Event {
         /// 创建新事件的构建器
+        /// event builder
         /// builder
         pub fn new(source_id: u64, event_type: EventType) -> Self {
             Self {
@@ -619,12 +663,14 @@ mod theory_reactor_pattern {
         }
 
         /// 设置事件数据
+        /// event data
         pub fn with_data(mut self, data: Vec<u8>) -> Self {
             self.data = data;
             self
         }
 
         /// 设置事件优先级
+        /// event
         pub fn with_priority(mut self, priority: u8) -> Self {
             self.priority = priority;
             self
@@ -632,14 +678,17 @@ mod theory_reactor_pattern {
     }
 
     /// 事件处理器 trait - 定义如何处理事件
+    /// event trait - definition event
     /// trait - definition
     /// ## 设计模式: Strategy Pattern
     /// 不同的事件可以有不同的处理策略
+    /// event can strategy
     /// can strategy
     #[async_trait::async_trait]
     #[allow(dead_code)]
     pub trait EventHandler: Send + Sync {
         /// 处理事件
+        /// event
         /// # 参数
         /// # parameter
         /// # 返回
@@ -647,6 +696,7 @@ mod theory_reactor_pattern {
         /// - `Ok(())`: 处理成功
         /// - `Ok(())`:
         /// - `Err(e)`: 处理失败,包含错误信息
+        /// - `Err(e)`: failure,error message
         /// - `Err(e)`:,error message
         async fn handle(&self, event: Event) -> Result<(), Box<dyn std::error::Error>>;
 
@@ -674,9 +724,11 @@ mod theory_reactor_pattern {
         /// 处理器注册表: (source_id, event_type) → Handler
         handlers: Arc<Mutex<HashMap<(u64, EventType), Arc<dyn EventHandler>>>>,
         /// 事件队列: 待处理的事件
+        /// event queue : event
         /// :
         event_queue: Arc<Mutex<Vec<Event>>>,
         /// 运行标志: 控制事件循环的启停
+        /// Run mark : event circulation
         /// Run mark : circulation
         running: Arc<RwLock<bool>>,
         /// 统计信息: 用于监控和调试
@@ -705,6 +757,7 @@ mod theory_reactor_pattern {
         }
 
         /// 注册事件处理器
+        /// event
         /// ## 语义
         /// ##
         ///   HandlerRegistry[(source_id, event_type)] ← handler
@@ -736,10 +789,12 @@ mod theory_reactor_pattern {
         }
 
         /// 提交事件到队列
+        /// event to queue
         /// to
         /// ## 性能优化
         /// ## performance optimization
         /// 批量提交事件以减少锁竞争
+        /// event lock
         /// lock
         pub async fn submit_event(&self, event: Event) {
             let mut queue = self.event_queue.lock().await;
@@ -750,6 +805,7 @@ mod theory_reactor_pattern {
         }
 
         /// 批量提交事件
+        /// event
         pub async fn submit_events(&self, events: Vec<Event>) {
             let mut queue = self.event_queue.lock().await;
             queue.extend(events);
@@ -759,6 +815,7 @@ mod theory_reactor_pattern {
         }
 
         /// ## 事件循环算法
+        /// ## event circulation algorithm
         /// ## circulation algorithm
         /// ## 事件circulationalgorithm
         ///   events ← dequeue_all(EventQueue)
@@ -853,6 +910,7 @@ mod theory_reactor_pattern {
         }
 
         /// 停止事件循环
+        /// event circulation
         /// circulation
         pub async fn stop(&self) {
             let mut running = self.running.write().await;
@@ -875,6 +933,7 @@ mod theory_reactor_pattern {
     // ========================================================================
 
     /// 连接处理器 - 处理新连接事件
+    /// - event
     /// -
     struct ConnectionHandler {
         name: String,
@@ -899,6 +958,7 @@ mod theory_reactor_pattern {
     }
 
     /// 数据处理器 - 处理读写事件
+    /// data - event
     /// -
     struct DataHandler {
         name: String,
@@ -931,6 +991,7 @@ mod theory_reactor_pattern {
     }
 
     /// 定时器处理器 - 处理定时器事件
+    /// - event
     /// -
     struct TimerHandler;
 
@@ -1070,6 +1131,7 @@ mod theory_reactor_pattern {
 /// # theory module : CSP
 /// # theorymodule: CSP 模式形式化
 /// ## 数学定义 (Hoare 1978)
+/// ## math definition (Hoare 1978)
 /// ## definition (Hoare 1978)
 /// ## 数学definition (Hoare 1978)
 /// P ::= STOP                    // 停止进程
@@ -1078,6 +1140,7 @@ mod theory_reactor_pattern {
 ///     | SKIP // process
 ///     | SKIP // 空process
 ///     | a → P                   // 前缀 (事件 a 后执行 P)
+///     | a → P // before (event a after P)
 ///     | a → P // before ( a after P)
 ///     | P □ Q                   // 外部选择
 ///     | P □ Q // outside
@@ -1100,6 +1163,7 @@ mod theory_reactor_pattern {
 /// | 特性 | CSP | Actor | Reactor |
 /// | 通信 | Channel | Message | Event |
 /// | 耦合 | 低 | 低 | 中 |
+/// | | low | low | in |
 /// | | | | in |
 /// | 同步 | 支持同步/异步 | 异步 | 异步 |
 /// | synchronous | synchronous /async | async | async |
@@ -1209,11 +1273,14 @@ mod theory_csp_pattern {
     /// ## 应用场景
     /// ## application scenario
     /// - 数据处理流水线
+    /// - data pipeline
     /// - pipeline
     /// - 数据Handlepipeline
     /// - 编译器 (词法→语法→语义→代码生成)
+    /// - (→syntax →→)
     /// - (→→→)
     /// - 图像处理 (读取→滤镜→编码→保存)
+    /// - graph (→→→)
     /// - (→→→)
     /// - 图像Handle (Read→滤镜→Encode→保存)
     pub async fn pipeline_demo() {
@@ -1505,6 +1572,7 @@ mod async_design_patterns {
             }
 
             /// 设置超时时间
+            /// timeout time
             /// time
             /// Set超时time
             pub fn timeout(mut self, timeout: Duration) -> Self {
@@ -1520,6 +1588,7 @@ mod async_design_patterns {
             }
 
             /// 设置重试次数
+            /// retry
             pub fn retry_attempts(mut self, attempts: usize) -> Self {
                 self.retry_attempts = attempts;
                 self
@@ -1766,6 +1835,7 @@ mod async_design_patterns {
         use super::*;
 
         /// 新的缓存接口 - 我们期望的接口
+        /// cache -
         /// -
         #[async_trait::async_trait]
         pub trait Cache: Send + Sync {
@@ -2017,6 +2087,7 @@ mod async_design_patterns {
     /// ## 意图
     /// ## intention
     /// 定义对象间的一对多依赖,当一个对象状态改变时,所有依赖者都得到通知
+    /// definition to to,when to state,all to notify
     /// definition to to,when to state,all to
     /// ## 适用场景
     /// ## scenario
@@ -2026,6 +2097,7 @@ mod async_design_patterns {
     /// - 不知道有多少对象需要改变
     /// - to
     /// - 事件系统,发布-订阅系统
+    /// - event system,publish-subscribe system
     /// - system,publish-subscribe system
     /// - 事件system,publish-subscribesystem
     #[allow(dead_code)]
@@ -2033,6 +2105,7 @@ mod async_design_patterns {
         use super::*;
 
         /// 事件类型
+        /// event type
         /// type
         #[derive(Debug, Clone)]
         pub enum Event {
@@ -2120,6 +2193,7 @@ mod async_design_patterns {
             }
 
             /// 通知所有观察者
+            /// notify all observer
             /// all observer
             pub async fn notify(&self, event: Event) {
                 println!("\n  🔔 通知事件: {:?}", event);

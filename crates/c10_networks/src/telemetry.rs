@@ -26,6 +26,7 @@ use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 
 /// 遥测配置
+/// configuration
 /// 遥测Configure
 #[derive(Debug, Clone)]
 pub struct TelemetryConfig {
@@ -58,6 +59,7 @@ impl Default for TelemetryConfig {
 
 impl TelemetryConfig {
     /// 本地 Jaeger 开发配置
+    /// this Jaeger configuration
     /// this Jaeger
     pub fn jaeger_local() -> Self {
         Self {
@@ -70,6 +72,7 @@ impl TelemetryConfig {
     }
 
     /// 标准输出导出配置（开发调试）
+    /// standard output configuration （）
     /// standard output （）
     pub fn stdout() -> Self {
         Self {
@@ -82,6 +85,7 @@ impl TelemetryConfig {
     }
 
     /// OTLP HTTP 端点配置
+    /// OTLP HTTP point configuration
     /// OTLP HTTP point
     pub fn otlp_http(endpoint: impl Into<String>) -> Self {
         Self {
@@ -280,6 +284,7 @@ pub fn tcp_connection_span(peer_addr: &str, local_addr: &str) -> Span {
 }
 
 /// 记录网络错误事件
+/// network event
 /// network
 pub fn record_network_error(span: &Span, error: &dyn std::error::Error) {
     tracing::error!(
@@ -291,6 +296,7 @@ pub fn record_network_error(span: &Span, error: &dyn std::error::Error) {
 }
 
 /// 记录请求响应元数据
+/// data
 pub fn record_response_meta(span: &Span, status_code: u16, content_length: Option<usize>) {
     if let Some(len) = content_length {
         tracing::info!(

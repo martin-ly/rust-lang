@@ -107,6 +107,7 @@ pub fn find_first_positive(values: &[i32]) -> Option<i32> {
 // ==================== 演示函数 ====================
 
 /// 演示 Rust 1.96 控制流特性
+/// Demonstrates Rust 1.96 控制流特性
 /// demonstration Rust 1.96 stream feature
 /// Demonstration of Rust 1.96 控制streamfeature
 pub fn demonstrate_rust_196_features() {
@@ -152,6 +153,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取 Rust 1.96 特性信息
+/// Gets Rust 1.96 特性信息
 /// Rust 1.96 feature
 pub fn get_rust_196_info() -> String {
     "Rust 1.96.0 控制流特性:\n- assert_matches! 宏用于模式匹配断言\n- core::range \

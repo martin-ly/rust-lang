@@ -1,7 +1,9 @@
 //! WASM 数学工具模块
+//! WASM math tool module
 //! WASM tool module
 //! WASM 数学toolmodule
 //! 高性能数学计算，适合在浏览器中运行
+//! high performance math ，in in Run
 //! performance ，in in Run
 
 use wasm_bindgen::prelude::*;
@@ -29,6 +31,7 @@ impl Vec2 {
     }
 
     /// 向量加法
+    /// addition
     pub fn add(&self, other: &Vec2) -> Vec2 {
         Vec2 {
             x: self.x + other.x,
@@ -37,6 +40,7 @@ impl Vec2 {
     }
 
     /// 向量减法
+    /// subtraction
     pub fn sub(&self, other: &Vec2) -> Vec2 {
         Vec2 {
             x: self.x - other.x,
@@ -45,6 +49,7 @@ impl Vec2 {
     }
 
     /// 标量乘法
+    /// multiplication
     pub fn scale(&self, scalar: f64) -> Vec2 {
         Vec2 {
             x: self.x * scalar,
@@ -81,6 +86,7 @@ impl Vec2 {
 }
 
 /// 矩阵 2x2
+/// matrix 2x2
 /// 2x2
 #[wasm_bindgen]
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -94,12 +100,14 @@ pub struct Mat2 {
 #[wasm_bindgen]
 impl Mat2 {
     /// 创建新矩阵
+    /// matrix
     #[wasm_bindgen(constructor)]
     pub fn new(m00: f64, m01: f64, m10: f64, m11: f64) -> Self {
         Self { m00, m01, m10, m11 }
     }
 
     /// 单位矩阵
+    /// matrix
     pub fn identity() -> Self {
         Self {
             m00: 1.0,
@@ -110,6 +118,7 @@ impl Mat2 {
     }
 
     /// 旋转矩阵
+    /// matrix
     pub fn rotation(angle_rad: f64) -> Self {
         let cos = angle_rad.cos();
         let sin = angle_rad.sin();
@@ -122,6 +131,7 @@ impl Mat2 {
     }
 
     /// 矩阵乘法
+    /// matrix multiplication
     pub fn mul(&self, other: &Mat2) -> Mat2 {
         Mat2 {
             m00: self.m00 * other.m00 + self.m01 * other.m10,
@@ -132,6 +142,7 @@ impl Mat2 {
     }
 
     /// 矩阵与向量乘法
+    /// matrix and multiplication
     /// and
     pub fn transform(&self, vec: &Vec2) -> Vec2 {
         Vec2 {
@@ -172,6 +183,7 @@ pub fn fft(input: &[f64]) -> Vec<(f64, f64)> {
 }
 
 /// 计算数组平均值
+/// array
 #[wasm_bindgen]
 pub fn mean(data: &[f64]) -> f64 {
     if data.is_empty() {

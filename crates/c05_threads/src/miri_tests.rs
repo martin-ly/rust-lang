@@ -3,6 +3,7 @@
 //! 注意: Miri 可以检测数据竞争和内存序问题
 //! : Miri can and memory problem
 //! 运行方式:
+//! How to run:
 //! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-disable-isolation" cargo miri test miri_tests
 
@@ -13,8 +14,10 @@ use std::thread;
 // ==================== 原子操作测试 ====================
 
 /// 测试目的: 验证基本原子操作
+/// Tests目的: 验证基本原子操作
 /// objective : this atomic operation
 /// 测试场景: 使用不同 Ordering 进行原子读写
+/// Tests场景: 使用不同 Ordering 进行原子读写
 /// scenario : Ordering
 /// Test forscenario: Use不同 Ordering 进行原子读写
 /// 预期结果: 应该正确完成所有操作
@@ -32,8 +35,10 @@ fn test_atomic_basic() {
 }
 
 /// 测试目的: 验证原子交换和比较交换
+/// Tests目的: 验证原子交换和比较交换
 /// objective : exchange and exchange
 /// 测试场景: 使用 swap 和 compare_exchange
+/// Tests场景: 使用 swap 和 compare_exchange
 /// 预期结果: 应该正确完成交换操作
 /// result : should exchange
 #[test]
@@ -57,9 +62,11 @@ fn test_atomic_swap_cas() {
 // ==================== Arc 和 Mutex 测试 ====================
 
 /// 测试目的: 验证 Arc 共享所有权
+/// Tests目的: 验证 Arc 共享所有权
 /// objective : Arc ownership
 /// Test forobjective: Verify Arc 共享ownership
 /// 测试场景: 克隆 Arc 并验证引用计数
+/// Tests场景: 克隆 Arc 并验证引用计数
 /// scenario : Arc and reference counting
 /// 预期结果: 应该正确共享数据
 /// result : should
@@ -74,6 +81,7 @@ fn test_arc_shared() {
 }
 
 /// 测试场景: 多线程通过 Mutex 修改共享数据
+/// Tests场景: 多线程通过 Mutex 修改共享数据
 /// scenario : thread Mutex
 /// 预期结果: 应该正确累加计数器
 /// result : should
@@ -107,8 +115,10 @@ thread_local! {
 }
 
 /// 测试目的: 验证线程本地存储
+/// Tests目的: 验证线程本地存储
 /// objective : thread-local storage
 /// 测试场景: 在不同位置访问线程本地变量
+/// Tests场景: 在不同位置访问线程本地变量
 /// scenario : in position thread this variable
 /// 预期结果: 应该正确存储和读取值
 /// result : should and
@@ -128,6 +138,7 @@ fn test_thread_local() {
 use std::cell::UnsafeCell;
 
 /// 预期结果: 应该正确读写值
+/// Expected result: Should read and write values correctly
 /// result : should
 #[test]
 fn test_unsafe_cell() {
@@ -142,6 +153,7 @@ fn test_unsafe_cell() {
 // ==================== Send 和 Sync 测试 ====================
 
 /// 测试场景: 将 Vec 移动到另一个线程
+/// Tests场景: 将 Vec 移动到另一个线程
 /// scenario : will Vec to thread
 /// 预期结果: 应该正确传递并返回
 /// result : should and
@@ -159,6 +171,7 @@ fn test_send_trait() {
 }
 
 /// 测试场景: 多线程共享对静态数组的引用
+/// Tests场景: 多线程共享对静态数组的引用
 /// scenario : thread to reference
 /// 预期结果: 应该正确读取数据
 /// result : should
@@ -184,6 +197,7 @@ fn test_sync_trait() {
 
 /// Test forobjective: Verify Release-Acquire 语义
 /// 测试场景: 一个线程写入数据后设置标志，另一个线程读取标志后读取数据
+/// Tests场景: 一个线程写入数据后设置标志，另一个线程读取标志后读取数据
 /// scenario : thread after mark ，thread mark after
 #[test]
 fn test_release_acquire() {
@@ -237,6 +251,7 @@ fn test_seqcst() {
 use std::sync::Barrier;
 
 /// 测试场景: 多个线程在屏障处等待
+/// Tests场景: 多个线程在屏障处等待
 /// scenario : thread in barrier etc.
 /// 预期结果: 所有线程应该同步通过屏障
 /// result : all thread should synchronous barrier
@@ -264,6 +279,7 @@ fn test_barrier() {
 use std::sync::Condvar;
 
 /// 测试场景: 一个线程等待条件，另一个线程通知
+/// Tests场景: 一个线程等待条件，另一个线程通知
 /// scenario : thread etc. condition ，thread
 /// 预期结果: 应该正确同步状态
 /// result : should synchronous state
@@ -294,6 +310,7 @@ fn test_condvar() {
 use std::sync::RwLock;
 
 /// 测试场景: 多个读锁同时持有，写锁独占
+/// Tests场景: 多个读锁同时持有，写锁独占
 /// scenario : lock ，lock
 /// 预期结果: 应该正确管理并发访问
 /// result : should concurrency
@@ -380,8 +397,10 @@ impl<'a, T> std::ops::DerefMut for SpinLockGuard<'a, T> {
 }
 
 /// 测试目的: 验证自旋锁实现
+/// Tests目的: 验证自旋锁实现
 /// objective : spinlock
 /// 测试场景: 多线程使用自旋锁累加计数器
+/// Tests场景: 多线程使用自旋锁累加计数器
 /// scenario : thread spinlock
 /// 预期结果: 应该正确同步访问
 /// result : should synchronous
@@ -409,10 +428,13 @@ fn test_spinlock() {
 // ==================== Miri 会检测的错误（标记为 ignore） ====================
 
 /// 测试目的: 验证数据竞争检测
+/// Tests目的: 验证数据竞争检测
 /// objective :
 /// 测试场景: 两个线程无保护地访问同一静态变量
+/// Tests场景: 两个线程无保护地访问同一静态变量
 /// scenario : thread variable
 /// 预期结果: Miri 应该检测到 UB
+/// Expected result: Miri should detect UB
 /// result : Miri should to UB
 #[test]
 #[ignore = "This test should fail with data race"]

@@ -116,6 +116,7 @@ impl ScopedThreadsDemo {
     }
 
     /// 条件同步示例
+    /// conditionsynchronousexample
     /// condition synchronous example
     /// 展示如何在作用域线程中使用条件变量
     /// in role domain thread in condition variable

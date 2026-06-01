@@ -9,8 +9,10 @@
 //! - UDP 通信
 //! - UDP
 //! - 网络超时和重试
+//! - network timeout and retry
 //! - network and
 //! - 连接池管理
+//! - connection pool
 //! -
 //! 运行方式：
 //! Run way ：

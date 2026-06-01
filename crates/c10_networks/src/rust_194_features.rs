@@ -1,6 +1,7 @@
 //! Rust 1.94.0 网络编程特性实现模块
 //! Rust 1.94.0 network programming feature module
 //! - array_windows - 切片数组窗口迭代器（用于协议解析）
+//! - array_windows - array （）
 //! - array_windows - （）
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - 数学constant - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
@@ -167,6 +168,7 @@ impl SequenceValidator {
 }
 
 /// 数据包分片重组器
+/// data packet sharding
 /// sharding
 /// 使用 array_windows 验证分片连续性
 /// array_windows sharding
@@ -212,6 +214,7 @@ impl PacketReassembler {
     }
 
     /// 重组数据包
+    /// data packet
     pub fn reassemble(&self) -> Option<Vec<u8>> {
         if !self.is_continuous() {
             return None;
@@ -246,13 +249,16 @@ impl Default for PacketReassembler {
 // ==================== 2. LazyLock 新方法 - 网络配置管理 ====================
 
 /// 实现延迟初始化的网络配置，并支持运行时更新。
+/// network configuration ，and runtime 。
 /// network ，and runtime 。
 /// 全局网络配置
+/// global network configuration
 /// global network
 static NETWORK_CONFIG: LazyLock<Mutex<NetworkConfig>> =
     LazyLock::new(|| Mutex::new(NetworkConfig::default()));
 
 /// 网络配置结构
+/// network configuration structure
 /// network structure
 #[derive(Debug, Clone)]
 pub struct NetworkConfig {
@@ -277,6 +283,7 @@ impl Default for NetworkConfig {
 
 impl NetworkConfig {
     /// 获取超时时间
+    /// timeout time
     /// time
     /// Get超时time
     pub fn timeout(&self) -> Duration {
@@ -284,6 +291,7 @@ impl NetworkConfig {
     }
 
     /// 设置超时时间
+    /// timeout time
     /// time
     /// Set超时time
     pub fn set_timeout(&mut self, timeout: Duration) {
@@ -291,17 +299,20 @@ impl NetworkConfig {
     }
 
     /// 获取重试次数
+    /// retry
     pub fn retry_count(&self) -> u32 {
         self.retry_count
     }
 
     /// 设置重试次数
+    /// retry
     pub fn set_retry_count(&mut self, count: u32) {
         self.retry_count = count;
     }
 }
 
 /// 获取网络配置的只读引用
+/// network configuration reference
 /// network reference
 pub fn get_network_config<F, R>(f: F) -> R
 where
@@ -312,6 +323,7 @@ where
 }
 
 /// 修改网络配置
+/// network configuration
 /// network
 pub fn update_network_config<F>(f: F)
 where
@@ -322,6 +334,7 @@ where
 }
 
 /// 延迟初始化的连接池配置
+/// connection pool configuration
 static CONNECTION_POOL_CONFIG: LazyLock<ConnectionPoolSettings> = LazyLock::new(|| {
     println!("初始化连接池配置...");
     ConnectionPoolSettings {
@@ -332,6 +345,7 @@ static CONNECTION_POOL_CONFIG: LazyLock<ConnectionPoolSettings> = LazyLock::new(
 });
 
 /// 连接池设置
+/// connection pool
 #[derive(Debug, Clone)]
 pub struct ConnectionPoolSettings {
     max_connections: usize,
@@ -348,12 +362,14 @@ impl ConnectionPoolSettings {
     }
 
     /// 获取空闲超时
+    /// timeout
     pub fn idle_timeout(&self) -> Duration {
         self.idle_timeout
     }
 }
 
 /// 获取连接池设置
+/// connection pool
 pub fn get_pool_settings() -> &'static ConnectionPoolSettings {
     &CONNECTION_POOL_CONFIG
 }
@@ -390,6 +406,7 @@ where
 }
 
 /// 处理协议数据
+/// data
 pub fn handle_protocol(name: &str, data: &[u8]) -> Option<Vec<u8>> {
     let handlers = PROTOCOL_HANDLERS.lock().expect("PROTOCOL_HANDLERS mutex poisoned");
     handlers.get(name).map(|handler| handler(data))
@@ -398,6 +415,7 @@ pub fn handle_protocol(name: &str, data: &[u8]) -> Option<Vec<u8>> {
 // ==================== 3. 数学常量 - 网络算法优化 ====================
 
 /// # 3. 数学常量 - 网络算法优化
+/// # 3. math constant - network algorithm optimization
 /// # 3. constant - network algorithm optimization
 /// # 3. 数学constant - networkalgorithmoptimization
 /// 如黄金分割搜索用于负载均衡、欧拉常数用于概率计算等。
@@ -968,6 +986,7 @@ pub fn get_rust_194_network_info() -> String {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
+/// array ，to goal before
 /// ，to goal before
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
@@ -981,6 +1000,7 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
+/// data pipe
 /// pipe
 /// 数据Verifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
@@ -1174,8 +1194,10 @@ mod tests {
 
     /// 测试畸形帧处理
     /// 验证帧边界检测器能正确处理畸形或不完整的帧数据
+    /// edge or complete data
     /// edge or complete
     /// 预期行为：正确处理只有起始或结束定界符、重叠定界符等畸形情况
+    /// as ：or end 、etc. situation
     /// as ：or 、etc. situation
     #[test]
     fn test_frame_boundary_detector_malformed() {
@@ -1231,6 +1253,7 @@ mod tests {
     }
 
     /// 测试部分数据检测
+    /// part data
     /// part
     #[test]
     fn test_http2_preamble_detector_partial() {
@@ -1289,7 +1312,9 @@ mod tests {
     }
 
     /// 测试配置过载保护
+    /// configuration
     /// 预期行为：正确处理极大超时、重试次数等边界值
+    /// as ：timeout 、retry etc. edge
     /// as ：、etc. edge
     #[test]
     fn test_network_config_overload() {

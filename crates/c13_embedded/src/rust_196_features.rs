@@ -213,6 +213,7 @@ impl<T: Copy> HardwareRegisterTag<T> {
 /// DMA 描述符通常包含物理地址和控制字，
 /// DMA describe and ，
 /// 我们绝不希望在作用域结束时自动释放这些资源。
+/// in role domain end 。
 /// in role domain 。
 pub type DmaDescriptorTag = HardwareRegisterTag<u32>;
 
@@ -228,6 +229,7 @@ pub type GpioStatusTag = HardwareRegisterTag<u16>;
 /// state machine 。
 /// 嵌入式设备state machine。
 /// 典型的低功耗设备状态转换：
+/// low state conversion ：
 /// state conversion ：
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum DeviceState {
@@ -252,6 +254,7 @@ pub enum WakeSource {
 /// 使用 `core::assert_matches!` 验证状态机转换。
 /// `core::assert_matches!` state machine conversion 。
 /// 相比 `assert!(matches!(...))`，失败时打印 `Debug` 表示，
+/// `assert!(matches!(...))`，failure `Debug` represent ，
 /// `assert!(matches!(...))`， `Debug` represent ，
 /// 相比 `assert!(matches!(...))`，失败时Print `Debug` represent，
 /// 在资源受限的嵌入式调试环境中尤为宝贵。

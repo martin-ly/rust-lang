@@ -1,6 +1,7 @@
 //! 过程宏实现模块
 //! module
 //! 允许在编译时生成和转换代码。
+//! allow in compile-time and conversion 。
 //! in compile-time and conversion 。
 //! ## 宏类型
 //! ## type

@@ -9,6 +9,7 @@ chrono = "0.4"
 //! # Cargo Script 单文件脚本演示
 //! # Cargo Script this demonstration
 //! 允许在单个 `.rs` 文件中直接嵌入 Cargo 依赖清单，无需创建完整项目。
+//! allow in `.rs` in Cargo ，complete project 。
 //! in `.rs` in Cargo ，complete project 。
 //! ## 运行方式
 //! ## Run way
@@ -24,6 +25,7 @@ chrono = "0.4"
 //! ## 文件格式说明
 //! ## explain
 //! 3. 清单块内使用标准 Cargo.toml 语法
+//! 3. inside standard Cargo.toml syntax
 //! 3. inside standard Cargo.toml
 
 use clap::Parser;
@@ -85,6 +87,7 @@ fn add(a: i32, b: i32) -> i32 {
 }
 
 /// 计算斐波那契数列第 n 项 (简单递归实现，仅用于演示)
+/// n (simple recursive ，demonstration )
 /// n (simple ，demonstration )
 fn fibonacci(n: u32) -> u64 {
     match n {

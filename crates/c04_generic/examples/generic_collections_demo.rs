@@ -1,8 +1,11 @@
 //! 泛型集合操作示例
+//! generic set operation example
 //! generic set example
 //! 本示例展示如何使用泛型实现各种集合操作，包括：
+//! this example generic set operation ，：
 //! this example generic set ，：
 //! - 泛型栈和队列
+//! - generic stack and queue
 //! - generic stack and
 //! - 泛型映射和集合
 //! - generic and set
@@ -65,6 +68,7 @@ impl<T> Default for Stack<T> {
 }
 
 /// 泛型队列实现
+/// generic queue
 /// generic
 pub struct Queue<T> {
     items: Vec<T>,
@@ -72,16 +76,19 @@ pub struct Queue<T> {
 
 impl<T> Queue<T> {
     /// 创建新的空队列
+    /// queue
     pub fn new() -> Self {
         Self { items: Vec::new() }
     }
 
     /// 入队
+    /// enqueue
     pub fn enqueue(&mut self, item: T) {
         self.items.push(item);
     }
 
     /// 出队
+    /// dequeue
     pub fn dequeue(&mut self) -> Option<T> {
         if self.items.is_empty() {
             None
@@ -97,12 +104,14 @@ impl<T> Queue<T> {
     }
 
     /// 检查队列是否为空
+    /// queue as
     /// as
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
 
     /// 获取队列的大小
+    /// queue
     pub fn len(&self) -> usize {
         self.items.len()
     }
@@ -115,6 +124,7 @@ impl<T> Default for Queue<T> {
 }
 
 /// 泛型映射操作示例
+/// generic operation example
 /// generic example
 pub fn demonstrate_generic_map() {
     println!("=== 泛型映射操作示例 ===");
@@ -143,6 +153,7 @@ pub fn demonstrate_generic_map() {
 }
 
 /// 泛型集合操作示例
+/// generic set operation example
 /// generic set example
 pub fn demonstrate_generic_set() {
     println!("\n=== 泛型集合操作示例 ===");

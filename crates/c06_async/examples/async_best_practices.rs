@@ -1,6 +1,8 @@
 //! 异步编程最佳实践示例
+//! async best practice example
 //! async example
 //! 本示例展示了异步编程的最佳实践和常见陷阱：
+//! this example async best practice and ：
 //! this example async and ：
 //! - 正确的异步函数设计
 //! - async function design
@@ -57,6 +59,7 @@ async fn main() -> Result<()> {
 }
 
 /// 1. 异步函数设计最佳实践
+/// 1. async function design best practice
 /// 1. async function design
 async fn demo_async_function_design() -> Result<()> {
     println!("  演示良好的异步函数设计...");
@@ -98,6 +101,7 @@ async fn demo_async_function_design() -> Result<()> {
 }
 
 /// 2. 资源管理最佳实践
+/// 2. best practice
 /// 2.
 async fn demo_resource_management() -> Result<()> {
     println!("  演示资源管理最佳实践...");
@@ -153,6 +157,7 @@ async fn demo_resource_management() -> Result<()> {
 }
 
 /// 3. 错误处理最佳实践
+/// 3. error handling best practice
 /// 3. error handling
 async fn demo_error_handling_best_practices() -> Result<()> {
     println!("  演示错误处理最佳实践...");
@@ -183,6 +188,7 @@ async fn demo_error_handling_best_practices() -> Result<()> {
 }
 
 /// 4. 性能优化最佳实践
+/// 4. performance optimization best practice
 /// 4. performance optimization
 async fn demo_performance_best_practices() -> Result<()> {
     println!("  演示性能优化最佳实践...");
@@ -313,6 +319,7 @@ async fn demo_common_pitfalls() -> Result<()> {
 // 辅助函数和结构体
 
 /// 模拟获取用户数据
+/// data
 async fn fetch_user_data(user_id: u32) -> Result<User> {
     // 模拟网络请求
     sleep(Duration::from_millis(100)).await;
@@ -328,6 +335,7 @@ async fn fetch_user_data(user_id: u32) -> Result<User> {
 }
 
 /// 安全处理数据
+/// data
 async fn process_data_safely(data: String) -> Result<ProcessedData> {
     // 模拟数据处理
     sleep(Duration::from_millis(50)).await;
@@ -340,6 +348,7 @@ async fn process_data_safely(data: String) -> Result<ProcessedData> {
 }
 
 /// 长时间运行的操作
+/// time Run operation
 /// time Run
 async fn long_running_operation() -> String {
     sleep(Duration::from_secs(2)).await;
@@ -354,6 +363,7 @@ async fn async_task(name: &str, delay_ms: u64) -> String {
 }
 
 /// 风险操作（可能失败）
+/// risk operation （may failure ）
 /// risk （may ）
 async fn risky_operation() -> Result<String> {
     sleep(Duration::from_millis(50)).await;
@@ -366,6 +376,7 @@ async fn risky_operation() -> Result<String> {
 }
 
 /// 健壮的操作
+/// operation
 async fn robust_operation() -> Result<String> {
     // 使用重试机制
     for attempt in 1..=3 {
@@ -382,6 +393,7 @@ async fn robust_operation() -> Result<String> {
 }
 
 /// 链式操作
+/// operation
 async fn chain_operations() -> Result<String> {
     let step1 = operation_step1().await?;
     let step2 = operation_step2(step1).await?;
@@ -390,6 +402,7 @@ async fn chain_operations() -> Result<String> {
 }
 
 /// 带上下文的操作
+/// on under operation
 /// on under
 async fn operation_with_context() -> Result<String> {
     risky_operation().await.context("执行风险操作失败")?;
@@ -413,14 +426,17 @@ async fn process_item_efficiently(item: i32) -> i32 {
 }
 
 /// 昂贵的操作
+/// operation
 async fn expensive_operation() -> String {
     sleep(Duration::from_millis(100)).await;
     "昂贵操作完成".to_string()
 }
 
 /// 操作步骤1
+/// operation step 1
 /// step 1
 /// 操作step1
+/// operation step1
 /// step1
 async fn operation_step1() -> Result<String> {
     sleep(Duration::from_millis(50)).await;
@@ -428,8 +444,10 @@ async fn operation_step1() -> Result<String> {
 }
 
 /// 操作步骤2
+/// operation step 2
 /// step 2
 /// 操作step2
+/// operation step2
 /// step2
 async fn operation_step2(input: String) -> Result<String> {
     sleep(Duration::from_millis(50)).await;
@@ -437,8 +455,10 @@ async fn operation_step2(input: String) -> Result<String> {
 }
 
 /// 操作步骤3
+/// operation step 3
 /// step 3
 /// 操作step3
+/// operation step3
 /// step3
 async fn operation_step3(input: String) -> Result<String> {
     sleep(Duration::from_millis(50)).await;

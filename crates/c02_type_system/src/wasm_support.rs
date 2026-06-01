@@ -7,11 +7,14 @@
 //! - 性能优化
 //! - performance optimization
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: wasm_support.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::collections::HashMap;
@@ -24,21 +27,26 @@ use std::sync::Mutex;
 #[derive(Debug, Clone, PartialEq)]
 pub enum WasmType {
     /// 32位整数
+    /// 32bitinteger
     /// 32
     I32(i32),
     /// 64位整数
+    /// 64bitinteger
     /// 64
     I64(i64),
     /// 32位浮点数
+    /// 32bitfloating point
     /// 32point
     F32(f32),
     /// 64位浮点数
+    /// 64bitfloating point
     /// 64point
     F64(f64),
 }
 
 impl WasmType {
     /// 转换为 i32
+    /// Converts为 i32
     /// conversion as i32
     pub fn to_i32(&self) -> i32 {
         match self {
@@ -50,6 +58,7 @@ impl WasmType {
     }
 
     /// 转换为 f64
+    /// Converts为 f64
     /// conversion as f64
     pub fn to_f64(&self) -> f64 {
         match self {
@@ -73,6 +82,7 @@ impl WasmType {
 }
 
 /// WASM 类型种类
+/// WASM typekind
 /// WASM type
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum WasmTypeKind {
@@ -88,6 +98,7 @@ pub struct WasmOperations;
 
 impl WasmOperations {
     /// 加法操作
+    /// additionoperation
     pub fn add(a: WasmType, b: WasmType) -> WasmType {
         match (a, b) {
             (WasmType::I32(x), WasmType::I32(y)) => WasmType::I32(x + y),
@@ -104,6 +115,7 @@ impl WasmOperations {
     }
 
     /// 乘法操作
+    /// multiplicationoperation
     pub fn multiply(a: WasmType, b: WasmType) -> WasmType {
         match (a, b) {
             (WasmType::I32(x), WasmType::I32(y)) => WasmType::I32(x * y),
@@ -119,6 +131,7 @@ impl WasmOperations {
     }
 
     /// 比较操作
+    /// Compares操作
     pub fn compare(a: WasmType, b: WasmType) -> i32 {
         match (a, b) {
             (WasmType::I32(x), WasmType::I32(y)) => {
@@ -187,11 +200,13 @@ pub struct WasmMemoryManager {
     /// maximum memory
     max_pages: u32,
     /// 内存使用统计
+    /// memoryusestatistics
     /// memory
     usage_stats: Mutex<MemoryUsageStats>,
 }
 
 /// 内存使用统计
+/// memoryusestatistics
 /// memory
 #[derive(Debug, Default)]
 pub struct MemoryUsageStats {
@@ -203,6 +218,7 @@ pub struct MemoryUsageStats {
 
 impl WasmMemoryManager {
     /// 创建新的内存管理器
+    /// Creates新的内存管理器
     /// memory
     pub fn new(initial_pages: u32, max_pages: u32) -> Self {
         let page_size = 64 * 1024; // 64KB per page
@@ -217,6 +233,7 @@ impl WasmMemoryManager {
     }
 
     /// 分配内存
+    /// Allocates内存
     /// memory
     pub fn allocate(&self, size: usize) -> Option<usize> {
         let mut stats = self.usage_stats.lock().expect("使用统计锁定失败");
@@ -233,6 +250,7 @@ impl WasmMemoryManager {
     }
 
     /// 释放内存
+    /// Releases内存
     /// memory
     pub fn deallocate(&self, _offset: usize, _size: usize) {
         let mut stats = self.usage_stats.lock().expect("使用统计锁定失败");
@@ -241,6 +259,7 @@ impl WasmMemoryManager {
     }
 
     /// 写入数据
+    /// Writes数据
     pub fn write(&mut self, offset: usize, data: &[u8]) -> Result<(), String> {
         if offset + data.len() > self.memory.len() {
             return Err("Memory access out of bounds".to_string());
@@ -251,6 +270,7 @@ impl WasmMemoryManager {
     }
 
     /// 读取数据
+    /// Reads数据
     pub fn read(&self, offset: usize, size: usize) -> Result<&[u8], String> {
         if offset + size > self.memory.len() {
             return Err("Memory access out of bounds".to_string());
@@ -260,12 +280,14 @@ impl WasmMemoryManager {
     }
 
     /// 获取内存使用统计
+    /// Gets内存使用统计
     /// memory
     pub fn get_usage_stats(&self) -> MemoryUsageStats {
         self.usage_stats.lock().expect("使用统计锁定失败").clone()
     }
 
     /// 获取当前内存页数
+    /// Gets当前内存页数
     /// when before memory
     pub fn get_pages(&self) -> u32 {
         self.pages
@@ -321,6 +343,7 @@ pub struct WasmFunction {
 
 impl WasmFunctionExporter {
     /// 创建新的函数导出器
+    /// Creates新的函数导出器
     /// function
     pub fn new() -> Self {
         Self {
@@ -361,6 +384,7 @@ impl WasmFunctionExporter {
     }
 
     /// 获取所有导出的函数名
+    /// Gets所有导出的函数名
     /// all function
     pub fn get_exported_functions(&self) -> Vec<String> {
         self.functions.keys().cloned().collect()
@@ -379,11 +403,13 @@ impl Default for WasmFunctionExporter {
 /// WASM performance optimizer
 pub struct WasmPerformanceOptimizer {
     /// 优化统计
+    /// optimizestatistics
     /// optimization
     stats: Mutex<OptimizationStats>,
 }
 
 /// 优化统计
+/// optimizestatistics
 /// optimization
 #[derive(Debug, Default)]
 pub struct OptimizationStats {
@@ -395,6 +421,7 @@ pub struct OptimizationStats {
 
 impl WasmPerformanceOptimizer {
     /// 创建新的性能优化器
+    /// Creates新的性能优化器
     /// performance optimizer
     pub fn new() -> Self {
         Self {
@@ -419,6 +446,7 @@ impl WasmPerformanceOptimizer {
     }
 
     /// 优化参数
+    /// optimizeparameters
     /// optimization parameter
     fn optimize_arguments(&self, args: Vec<WasmType>) -> Vec<WasmType> {
         let mut stats = self.stats.lock().expect("统计信息锁定失败");
@@ -449,6 +477,7 @@ impl WasmPerformanceOptimizer {
     }
 
     /// 获取优化统计
+    /// Gets优化统计
     /// optimization
     pub fn get_stats(&self) -> OptimizationStats {
         self.stats.lock().expect("统计信息锁定失败").clone()
@@ -517,6 +546,7 @@ impl JsInterop {
     }
 
     /// 获取所有注册的回调
+    /// Gets所有注册的回调
     /// all
     pub fn get_registered_callbacks(&self) -> Vec<String> {
         let callbacks = self.callbacks.lock().expect("回调锁定失败");
@@ -533,8 +563,10 @@ impl Default for JsInterop {
 // ==================== 演示函数 ====================
 
 /// 演示所有 WASM 特性
+/// Demonstrates所有 WASM 特性
 /// demonstration all WASM feature
 /// Demonstration of所有 WASM feature
+/// Demonstration ofall WASM feature
 pub fn demonstrate_wasm_features() {
     println!("=== WebAssembly 特性演示 ===\n");
 

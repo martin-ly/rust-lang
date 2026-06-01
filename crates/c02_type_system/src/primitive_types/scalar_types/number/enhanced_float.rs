@@ -6,33 +6,42 @@
 //! - 类型安全的最佳实践
 //! - type
 //! - 性能优化技巧
+//! - Performance optimization tips
 //! - performance optimization tip
 //! - 完整的示例和测试用例
+//! - Complete examples and test cases
 //! - complete example and
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: enhanced_float.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 //! - 作者: Rust 类型系统项目组
+//! - Author: Rust Type System Project Team
 //! - : Rust type system project
 use std::{f32, f64};
 
 /// Rust 1.89 浮点数类型系统
 /// Rust 1.89 point type system
 /// 包括类型安全、性能优化、错误处理等最佳实践。
+/// Includes best practices for type safety, performance optimization, error handling, etc.
 /// type 、performance optimization 、error handling etc. 。
 pub mod float_types {
     use super::*;
 
     /// 32位浮点数类型 (f32)
+    /// 32bitfloating pointtype (f32)
     /// 32point type (f32)
     /// f32 是单精度浮点数类型，占用4字节内存。
     /// f32 point type ，4memory 。
     /// # 特性
+    /// # features
     /// # feature
     /// - 内存占用：4字节
     /// - memory ：4
@@ -44,6 +53,7 @@ pub mod float_types {
     /// - 特殊值：NaN、+∞、-∞
     /// - ：NaN、+∞、-∞
     /// # 示例
+    /// # Examples
     /// # example
     /// let value: f32 = std::f32::consts::PI;
     /// let max: f32 = f32::MAX;
@@ -154,10 +164,12 @@ pub mod float_types {
     }
 
     /// 64位浮点数类型 (f64)
+    /// 64bitfloating pointtype (f64)
     /// 64point type (f64)
     /// f64 是双精度浮点数类型，占用8字节内存。
     /// f64 point type ，8memory 。
     /// # 特性
+    /// # features
     /// # feature
     /// - 内存占用：8字节
     /// - memory ：8
@@ -169,6 +181,7 @@ pub mod float_types {
     /// - 特殊值：NaN、+∞、-∞
     /// - ：NaN、+∞、-∞
     /// # 示例
+    /// # Examples
     /// # example
     /// let value: f64 = std::f64::consts::PI;
     /// let max: f64 = f64::MAX;
@@ -326,6 +339,7 @@ pub mod float_types {
 
         /// 有序比较
         /// 有序Compare
+        /// orderedCompare
         pub fn ordered_comparison() {
             let values = vec![
                 std::f64::consts::PI,
@@ -367,12 +381,15 @@ pub mod float_types {
     /// - 安全转换
     /// - conversion
     /// - 安全conversion
+    /// - safeconversion
     /// - 字符串转换
     /// - conversion
     /// - 字符串conversion
+    /// - stringconversion
     /// - 整数转换
     /// - conversion
     /// - 整数conversion
+    /// - integerconversion
     pub mod conversion {
         use super::*;
 
@@ -397,6 +414,7 @@ pub mod float_types {
         /// 安全类型转换
         /// type conversion
         /// 安全typeconversion
+        /// safetypeconversion
         pub fn safe_conversion() {
             let f64_value: f64 = std::f64::consts::PI;
 
@@ -412,6 +430,7 @@ pub mod float_types {
         /// 字符串转换
         /// conversion
         /// 字符串conversion
+        /// stringconversion
         pub fn string_conversion() {
             let value: f64 = std::f64::consts::PI;
 
@@ -434,6 +453,7 @@ pub mod float_types {
         /// 整数转换
         /// conversion
         /// 整数conversion
+        /// integerconversion
         pub fn integer_conversion() {
             let float_value: f64 = std::f64::consts::PI;
 

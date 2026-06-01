@@ -1,8 +1,10 @@
 //! FFI 高级用法
+//! FFI high usage
 //! FFI
 //! 对照 The Rustonomicon 中 FFI 相关章节。
 //! to照 The Rustonomicon in FFI 相关章节。
 //! 涵盖：
+//! cover ：
 //! ：
 //! - 不透明结构体（Opaque Structs）
 //! - 不透明struct（Opaque Structs）

@@ -1,23 +1,32 @@
 //! # Rust 1.89 特性示例 (历史版本)
+//! # Rust 1.89 Feature Examples (Historical Version)
 //! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
+//! ## Version History
 //! ## this explain
 //! ### Rust 1.92.0 主要改进
+//! ### Rust 1.92.0 Major Improvements
 //! ### Rust 1.92.0 main
 //! - **关联项多边界**: 更灵活的类型约束表达
 //! - **edge **: type express
 //! - **高阶生命周期增强**: 更精确的生命周期处理
 //! - **lifetime **: lifetime
 //! ### 迁移建议
+//! ### Migration Suggestions
 //! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
+//! 1. Update Cargo.toml: `rust-version = "1.92"`
 //! 参考:
+//! Reference:
 //! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//! - [Historical version: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 direction GAT（Generic Associated Types）and HRTB（Higher-Rank Trait Bounds）精简Demonstration of

@@ -1,8 +1,11 @@
 //! # WASI-Crypto 加密操作示例
+//! # WASI -Crypto operation example
 //! # WASI -Crypto example
 //! 本示例展示如何使用 WASI-Crypto API 进行密码学操作
+//! this example WASI -Crypto API operation
 //! this example WASI -Crypto API
 //! ## 支持的操作
+//! ## operation
 //! ##
 //! - 非对称加密 (RSA, ECDSA, Ed25519)
 //! - to (RSA, ECDSA, Ed25519)
@@ -11,8 +14,10 @@
 //! - 哈希function (SHA-256, SHA-512, BLAKE3)
 //! - 密钥派生 (HKDF, PBKDF2)
 //! - 数字签名
+//! - number
 //! -
 //! - 消息认证码 (HMAC)
+//! - message (HMAC)
 //! - (HMAC)
 //! ## 编译
 //! ##
@@ -113,6 +118,7 @@ impl SymmetricCipher {
     }
 
     /// 生成随机 nonce
+    /// random nonce
     /// nonce
     fn generate_nonce(&self) -> Vec<u8> {
         let nonce_size = self.algorithm.nonce_size();
@@ -120,6 +126,7 @@ impl SymmetricCipher {
     }
 
     /// 加密数据
+    /// data
     pub fn encrypt(&self, key: &[u8], plaintext: &[u8]) -> Result<EncryptedData, CryptoError> {
         println!("\n=== Encryption ===");
         println!("Algorithm: {}", self.algorithm.name());
@@ -155,6 +162,7 @@ impl SymmetricCipher {
     }
 
     /// 解密数据
+    /// data
     pub fn decrypt(&self, key: &[u8], encrypted: &EncryptedData) -> Result<Vec<u8>, CryptoError> {
         println!("\n=== Decryption ===");
         println!("Algorithm: {}", self.algorithm.name());
@@ -229,6 +237,7 @@ impl AsymmetricAlgorithm {
 }
 
 /// 密钥对
+/// key pair
 /// to
 #[derive(Debug)]
 pub struct KeyPair {
@@ -237,6 +246,7 @@ pub struct KeyPair {
 }
 
 /// 数字签名器
+/// number
 pub struct DigitalSignature {
     algorithm: AsymmetricAlgorithm,
 }
@@ -247,6 +257,7 @@ impl DigitalSignature {
     }
 
     /// 生成密钥对
+    /// key pair
     /// to
     pub fn generate_keypair(&self) -> Result<KeyPair, CryptoError> {
         println!("\n=== Key Pair Generation ===");
@@ -265,6 +276,7 @@ impl DigitalSignature {
     }
 
     /// 签名数据
+    /// data
     pub fn sign(&self, _private_key: &[u8], message: &[u8]) -> Result<Vec<u8>, CryptoError> {
         println!("\n=== Digital Signature ===");
         println!("Algorithm: {}", self.algorithm.name());
@@ -429,6 +441,7 @@ mod utils {
     use super::*;
 
     /// 打印二进制数据为十六进制
+    /// data as
     /// as
     pub fn print_hex(label: &str, data: &[u8], max_len: usize) {
         let display_data = &data[..data.len().min(max_len)];
@@ -439,6 +452,7 @@ mod utils {
     }
 
     /// 比较两个字节数组
+    /// array
     pub fn compare_data(a: &[u8], b: &[u8]) -> bool {
         if a.len() != b.len() {
             return false;

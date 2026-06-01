@@ -107,6 +107,7 @@ pub fn process_deque_conditional(mut deque: VecDeque<i32>) -> VecDeque<i32> {
 // ==================== 4. slice.as_array() 在 WASM 中的应用 ====================
 
 /// 使用 Rust 1.93 as_array 处理固定大小数组
+/// Rust 1.93 as_array array
 /// Rust 1.93 as_array
 pub fn slice_to_array_four(slice: &[i32]) -> Option<[i32; 4]> {
     slice.as_array().copied()

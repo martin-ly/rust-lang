@@ -1,10 +1,13 @@
 //! Rust 1.90 Edition 2024 最新特性演示 (历史版本)
 //! Rust 1.90 Edition 2024 feature demonstration (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - 显式推断的常量泛型参数
+//! - Explicitly inferred const generic parameters
 //! - infer constant generic parameter
 //! - 显式inferconstantgeneric parameter
 //! - 改进的异步编程特性
@@ -12,6 +15,7 @@
 //! - 增强的类型系统
 //! - type system
 //! - 增强typesystem
+//! - enhancetypesystem
 //! - 新的标准库功能
 //! - standard library functionality
 //! - 新standardlibraryfunctionality
@@ -47,6 +51,7 @@ impl<T: Default + Copy, const N: usize> Default for GenericArray<T, N> {
 
 impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
     /// 创建新的泛型数组
+    /// Creates新的泛型数组
     /// generic
     pub fn new() -> Self {
         Self::default()
@@ -69,17 +74,20 @@ impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
     }
 
     /// 获取数组长度
+    /// Gets the array length
     pub const fn len(&self) -> usize {
         N
     }
 
     /// 检查数组是否为空
+    /// Checks if the array is empty
     /// as
     pub const fn is_empty(&self) -> bool {
         N == 0
     }
 
     /// 获取元素
+    /// Gets an element
     /// element
     pub fn get(&self, index: usize) -> Option<&T> {
         if index < N {
@@ -90,6 +98,7 @@ impl<T: Default + Copy, const N: usize> GenericArray<T, N> {
     }
 
     /// 设置元素
+    /// Sets an element
     /// element
     pub fn set(&mut self, index: usize, value: T) -> Result<(), &'static str> {
         if index < N {
@@ -123,6 +132,7 @@ pub async fn async_number_generator(start: u32, count: u32) -> impl Iterator<Ite
 /// 改进的异步错误处理
 /// async error handling
 /// 改进asyncerror handling
+/// improveasyncerror handling
 #[cfg(feature = "tokio")]
 pub async fn improved_async_error_handling() -> Result<String, Box<dyn std::error::Error>> {
     // 使用 ? 操作符进行错误传播
@@ -162,6 +172,7 @@ pub trait ImprovedTrait<T> {
     fn process(&self, input: T) -> impl Iterator<Item = T>;
 
     /// 异步方法支持
+    /// asynchronousmethodsupport
     /// async method
     #[cfg(feature = "tokio")]
     #[allow(async_fn_in_trait)]
@@ -169,6 +180,7 @@ pub trait ImprovedTrait<T> {
 }
 
 /// Implementation of改进 trait
+/// Implementation ofimprove trait
 pub struct ImprovedStruct<T> {
     data: T,
 }
@@ -216,6 +228,7 @@ impl StandardLibraryFeatures {
     }
 
     /// 使用改进的集合操作
+    /// useimprovecollectionoperation
     /// set
     pub fn improved_collections() {
         let mut map = HashMap::new();
@@ -325,6 +338,7 @@ impl AdvancedConcurrency {
     /// 使用改进的线程池
     /// thread pool
     /// Use改进thread pool
+    /// Useimprovethread pool
     pub fn improved_thread_pool() {
         let pool = rayon::ThreadPoolBuilder::new()
             .num_threads(4)
@@ -537,12 +551,14 @@ impl HighPerformanceCounter {
     }
 
     /// 获取当前值
+    /// Gets当前值
     /// when before
     pub fn get(&self) -> usize {
         self.value.load(Ordering::Acquire)
     }
 
     /// 重置计数器
+    /// Resets计数器
     pub fn reset(&self) {
         self.value.store(0, Ordering::Release);
     }
@@ -807,6 +823,7 @@ impl AdvancedConcurrencyPatterns {
 }
 
 /// 演示所有 Rust 1.90 高级特性
+/// Demonstrates所有 Rust 1.90 高级特性
 /// demonstration all Rust 1.90 feature
 /// Demonstration of所有 Rust 1.90 高级feature
 pub fn demonstrate_advanced_rust_190_features() {

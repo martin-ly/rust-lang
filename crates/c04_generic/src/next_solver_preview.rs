@@ -4,7 +4,9 @@
 //! ```
 //!
 //! **来源**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+//! **Source**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 //! · [rustc-next-trait-solver 源码](https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
+//! · [rustc-next-trait-solver source](https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
 //! · [来源: Rust Official Docs]
 
 // ============================================================================
@@ -142,6 +144,7 @@
 /// | 检查项 | 旧行为 | 新行为 | 你的代码是否受影响 |
 /// | | as | as | impact |
 /// | Coherence 冲突 | 某些合法代码被拒绝 | 正确接受 | 🟡 检查编译错误 |
+/// | Coherence conflict | Some valid code is rejected | Correctly accepted | 🟡 Check compile errors |
 /// | Coherence | is | | 🟡 |
 /// | 隐式 bound | 需显式标注 | 自动推导 | 🟢 通常受益 |
 /// | bound | | | 🟢 |
@@ -162,16 +165,21 @@
 /// | 里程碑 | 预计time | state |
 /// | | time | state |
 /// | Coherence 迁移 | 2026 Q2 | 🟡 推进中 |
+/// | Coherence migration | 2026 Q2 | 🟡 In progress |
 /// | Coherence | 2026 Q2 | 🟡 in |
 /// | Coherence 迁移 | 2026 Q2 | 🟡 推进in |
 /// | 全局默认启用 | 2026 Q4–2027 Q1 | 🔴 计划 |
+/// | Global default enable | 2026 Q4–2027 Q1 | 🔴 Planned |
 /// | global | 2026 Q4–2027 Q1 | 🔴 plan |
 /// | 稳定版默认 | 2027 | 🔴 远期 |
+/// | Stable default | 2027 | 🔴 Long-term |
 /// | | 2027 | 🔴 far-term |
 /// | 稳定版默认 | 2027 | 🔴 far-term |
 /// | | 2027 | 🔴 far-term |
 /// **跟踪 Issue**:
+/// **trace Issue**:
 /// - rust#107374: Next-gen trait solver 跟踪
+/// - rust#107374: Next-gen trait solver trace
 /// - rust#105782: Coherence unsoundness（旧 solver）
 /// - rust#109815: GATs 生命周期推导问题
 /// - rust#109815: GATs lifetime problem

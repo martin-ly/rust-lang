@@ -34,6 +34,7 @@ impl CalculatorApp {
     }
 
     /// 处理数字输入
+    /// number input
     fn input_digit(&mut self, digit: char) {
         if self.should_clear {
             self.current_input.clear();
@@ -48,6 +49,7 @@ impl CalculatorApp {
     }
 
     /// 处理运算符
+    /// operator
     fn input_operator(&mut self, op: char) {
         if !self.current_input.is_empty() {
             let value: f64 = self.current_input.parse().unwrap_or(0.0);

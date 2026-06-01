@@ -104,6 +104,7 @@ fn bench_resource_allocator_performance(c: &mut Criterion) {
 }
 
 /// 基准测试线程调度配置的性能
+/// benchmark thread scheduling configuration performance
 /// benchmark thread scheduling performance
 fn bench_scheduling_config_performance(c: &mut Criterion) {
     let mut group = c.benchmark_group("scheduling_config_performance");

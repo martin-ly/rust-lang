@@ -11,6 +11,7 @@ use std::collections::{LinkedList, VecDeque};
 // ==================== 示例 1: VecDeque::push_front_mut / push_back_mut ====================
 
 /// 双端队列两端插入并立即修改
+/// queue and
 /// and
 fn demo_vecdeque_push_mut() {
     println!("--- VecDeque::push_front_mut / push_back_mut ---");
@@ -34,6 +35,7 @@ fn demo_vecdeque_push_mut() {
 // ==================== 示例 2: VecDeque::insert_mut ====================
 
 /// 在双端队列指定位置插入并修改
+/// in queue position and
 /// in position and
 fn demo_vecdeque_insert_mut() {
     println!("\n--- VecDeque::insert_mut ---");
@@ -83,6 +85,7 @@ fn demo_vecdeque_cache() {
 // ==================== 示例 4: LinkedList::push_front_mut / push_back_mut ====================
 
 /// 链表两端插入并立即修改
+/// linked list and
 /// and
 fn demo_linkedlist_push_mut() {
     println!("\n--- LinkedList::push_front_mut / push_back_mut ---");
@@ -108,6 +111,7 @@ fn demo_linkedlist_push_mut() {
 // ==================== 示例 5: LinkedList 构建日志缓冲区 ====================
 
 /// 使用 `push_back_mut` 构建结构化日志链表
+/// `push_back_mut` structure linked list
 /// `push_back_mut` structure
 fn demo_linkedlist_log_buffer() {
     println!("\n--- LinkedList::push_back_mut 日志缓冲区 ---");

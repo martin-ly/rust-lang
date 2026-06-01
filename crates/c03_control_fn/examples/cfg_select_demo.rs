@@ -123,6 +123,7 @@ fn get_log_level() -> &'static str {
 }
 
 /// 获取超时配置（毫秒）
+/// timeout configuration （）
 /// （）
 /// Get超时Configure（毫秒）
 fn get_timeout_ms() -> u64 {

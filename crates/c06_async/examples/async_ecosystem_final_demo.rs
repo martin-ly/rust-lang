@@ -1,6 +1,7 @@
 //! Rust 异步生态系统最终演示
 //! Rust async ecosystem system ultimately demonstration
 //! 包括所有运行时、设计模式、集成框架和最佳实践。
+//! all runtime 、design 、framework and best practice 。
 //! all runtime 、design 、framework and 。
 use anyhow::Result;
 #[allow(unused_imports)]
@@ -228,6 +229,7 @@ async fn microservice_scenario() -> Result<()> {
 }
 
 /// 数据处理管道场景演示
+/// data pipe scenario demonstration
 /// pipe scenario demonstration
 async fn data_processing_pipeline_scenario() -> Result<()> {
     println!("    📊 数据处理管道场景:");
@@ -255,6 +257,7 @@ async fn data_processing_pipeline_scenario() -> Result<()> {
 }
 
 /// 最佳实践演示
+/// best practice demonstration
 /// demonstration
 /// 最佳实践Demonstration of
 async fn best_practices_demo() -> Result<()> {

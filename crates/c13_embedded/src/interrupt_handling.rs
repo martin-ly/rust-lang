@@ -2,6 +2,7 @@
 //! in
 //! in断Handle
 //! 中断是嵌入式系统的核心机制，允许外设在事件发生时异步通知 CPU。
+//! in system core mechanism ，allow outside in event async notify CPU。
 //! in system core mechanism ，outside in async CPU。
 //! ## Cortex-M 中断基础
 //! ## Cortex-M in foundation
@@ -22,11 +23,13 @@
 /// // 启用 UART0 in断
 /// // UART0 in
 /// // 设置优先级（数值越小优先级越高）
+/// // （high ）
 /// // （）
 pub struct NvicConcept;
 
 impl NvicConcept {
     /// 返回 NVIC 配置步骤
+    /// NVIC configuration step
     /// NVIC step
     pub fn setup_steps() -> &'static [&'static str] {
         &[
@@ -42,6 +45,7 @@ impl NvicConcept {
 /// concept
 /// 临界区concept
 /// 临界区用于保护共享资源，防止中断在中间打断导致数据竞争。
+/// ，in in in data 。
 /// ，in in in 。
 /// 在 Cortex-M 上，`cortex_m::interrupt::free` 会关闭中断执行闭包：
 /// use cortex_m::interrupt;
@@ -60,6 +64,7 @@ pub struct CriticalSectionConcept;
 
 impl CriticalSectionConcept {
     /// 描述临界区最佳实践
+    /// describe best practice
     /// describe
     pub fn best_practices() -> &'static str {
         "临界区应尽可能短，只包含必要的共享资源访问，避免在临界区内调用复杂逻辑"
@@ -87,8 +92,10 @@ impl CriticalSectionConcept {
 /// 2. **mark **：must in ISR in in mark
 /// 2. **清除mark**：mustin ISR in清除in断mark
 /// 3. **避免阻塞**：ISR 中不能使用阻塞操作
+/// 3. ****：ISR in cannot operation
 /// 3. ****：ISR in cannot
 /// 4. **使用静态可变变量**：与主循环共享数据
+/// 4. **variable **：and circulation data
 /// 4. **variable **：and circulation
 pub struct IsrTemplate;
 
@@ -111,6 +118,7 @@ pub struct IsrTemplate;
 ///         if FLAG.get() {
 ///             FLAG.set(false);
 ///             // 处理事件
+///             // event
 ///             //
 pub struct SharedStatePattern;
 

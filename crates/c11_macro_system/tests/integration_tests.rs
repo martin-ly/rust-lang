@@ -58,6 +58,7 @@ fn test_macro_pattern_matching_integration() {
 }
 
 /// 测试递归宏集成
+/// recursive
 #[test]
 fn test_recursive_macro_integration() {
     const fn factorial(n: u64) -> u64 {

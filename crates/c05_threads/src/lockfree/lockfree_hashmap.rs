@@ -58,6 +58,7 @@ where
     V: Clone,
 {
     /// 创建新的无锁哈希表
+    /// Creates新的无锁哈希表
     /// lock-free hash map
     pub fn new(capacity: usize) -> Self {
         let mut buckets = Vec::with_capacity(capacity);
@@ -73,6 +74,7 @@ where
     }
 
     /// 计算键的哈希值
+    /// Computes键的哈希值
     fn hash(&self, key: &K) -> usize {
         let mut hasher = DefaultHasher::new();
         key.hash(&mut hasher);
@@ -80,6 +82,7 @@ where
     }
 
     /// 插入键值对
+    /// Inserts a key-value pair
     /// to
     pub fn insert(&self, key: K, value: V) -> bool {
         let hash = self.hash(&key);
@@ -123,6 +126,7 @@ where
     }
 
     /// 获取值
+    /// Gets the value
     /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         let hash = self.hash(key);
@@ -142,6 +146,7 @@ where
     }
 
     /// 删除键值对
+    /// Deletes键值对
     /// to
     pub fn remove(&self, key: &K) -> Option<V> {
         let hash = self.hash(key);
@@ -211,17 +216,20 @@ where
     }
 
     /// 获取大小
+    /// Gets大小
     pub fn len(&self) -> usize {
         self.size.load(Ordering::Relaxed)
     }
 
     /// 检查是否为空
+    /// Checks if empty
     /// as
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
 
     /// 运行示例
+    /// Run example
     /// Run example
     pub fn run_example() {
         println!("=== 无锁哈希表示例 ===");
@@ -289,6 +297,7 @@ where
     V: Clone,
 {
     /// 创建新的分段无锁哈希表
+    /// Creates新的分段无锁哈希表
     /// segmentation lock-free hash map
     pub fn new(segment_count: usize, capacity_per_segment: usize) -> Self {
         let mut segments = Vec::with_capacity(segment_count);
@@ -303,6 +312,7 @@ where
     }
 
     /// 计算键应该属于哪个段
+    /// Computes键应该属于哪个段
     /// should
     fn get_segment(&self, key: &K) -> usize {
         let mut hasher = DefaultHasher::new();
@@ -311,6 +321,7 @@ where
     }
 
     /// 插入键值对
+    /// Inserts a key-value pair
     /// to
     pub fn insert(&self, key: K, value: V) -> bool {
         let segment_index = self.get_segment(&key);
@@ -318,6 +329,7 @@ where
     }
 
     /// 获取值
+    /// Gets the value
     /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         let segment_index = self.get_segment(key);
@@ -325,6 +337,7 @@ where
     }
 
     /// 删除键值对
+    /// Deletes键值对
     /// to
     pub fn remove(&self, key: &K) -> Option<V> {
         let segment_index = self.get_segment(key);
@@ -332,17 +345,20 @@ where
     }
 
     /// 获取总大小
+    /// Gets总大小
     pub fn len(&self) -> usize {
         self.segments.iter().map(|s| s.len()).sum()
     }
 
     /// 检查是否为空
+    /// Checks if empty
     /// as
     pub fn is_empty(&self) -> bool {
         self.segments.iter().all(|s| s.is_empty())
     }
 
     /// 运行示例
+    /// Run example
     /// Run example
     pub fn run_example() {
         println!("=== 分段无锁哈希表示例 ===");
@@ -396,6 +412,7 @@ where
     V: Clone,
 {
     /// 创建新的可扩展无锁哈希表
+    /// Creates新的可扩展无锁哈希表
     /// lock-free hash map
     pub fn new(initial_capacity: usize) -> Self {
         let initial_table = Arc::new(LockFreeHashMap::new(initial_capacity));
@@ -423,6 +440,7 @@ where
     }
 
     /// 插入键值对
+    /// Inserts a key-value pair
     /// to
     pub fn insert(&self, key: K, value: V) -> bool {
         let current_index = self.current_table.load(Ordering::Acquire);
@@ -440,6 +458,7 @@ where
     }
 
     /// 获取值
+    /// Gets the value
     /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         let current_index = self.current_table.load(Ordering::Acquire);
@@ -448,6 +467,7 @@ where
     }
 
     /// 运行示例
+    /// Run example
     /// Run example
     pub fn run_example() {
         println!("=== 可扩展无锁哈希表示例 ===");
@@ -489,35 +509,41 @@ where
     }
 
     /// 插入键值对
+    /// Inserts a key-value pair
     /// to
     pub fn insert(&self, key: K, value: V) -> Option<V> {
         self.map.insert(key, value)
     }
 
     /// 获取值
+    /// Gets the value
     /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         self.map.get(key).map(|entry| entry.clone())
     }
 
     /// 删除键值对
+    /// Deletes键值对
     /// to
     pub fn remove(&self, key: &K) -> Option<V> {
         self.map.remove(key).map(|(_, value)| value)
     }
 
     /// 获取大小
+    /// Gets大小
     pub fn len(&self) -> usize {
         self.map.len()
     }
 
     /// 检查是否为空
+    /// Checks if empty
     /// as
     pub fn is_empty(&self) -> bool {
         self.map.is_empty()
     }
 
     /// 运行示例
+    /// Run example
     /// Run example
     pub fn run_example() {
         println!("=== DashMap无锁哈希表示例 ===");

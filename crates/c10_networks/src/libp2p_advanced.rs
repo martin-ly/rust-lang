@@ -54,6 +54,7 @@ pub mod identity {
     }
 
     /// 序列化密钥对（用于持久化）
+    /// sequence key pair （）
     /// sequence to （）
     pub fn serialize_keypair(keypair: &Keypair) -> Vec<u8> {
         keypair
@@ -62,6 +63,7 @@ pub mod identity {
     }
 
     /// 反序列化密钥对
+    /// sequence key pair
     /// sequence to
     pub fn deserialize_keypair(bytes: &[u8]) -> Result<Keypair, String> {
         Keypair::from_protobuf_encoding(bytes).map_err(|e| e.to_string())
@@ -134,6 +136,7 @@ pub mod swarm_builder {
 // =========================================================================
 
 /// # Kademlia 分布式哈希表
+/// # Kademlia distribution hash table
 /// # Kademlia distribution
 /// - 节点发现（Peer Discovery）
 /// - 内容路由（Content Routing）
@@ -246,6 +249,7 @@ pub mod pubsub {
     }
 
     /// 主题命名最佳实践
+    /// best practice
     pub fn topic_name(application: &str, version: &str, network: &str) -> String {
         format!("/{}/{}/{}", application, version, network)
     }
@@ -435,6 +439,7 @@ pub mod relay {
 // =========================================================================
 
 /// 无需手动配置或依赖外部 STUN 服务。
+/// configuration or outside STUN 。
 /// or outside STUN 。
 /// ## 工作原理
 /// ##
@@ -452,6 +457,7 @@ pub mod autonat {
     };
 
     /// 并在状态变化时通过事件通知调用方。
+    /// and in state event notify 。
     /// and in state 。
     pub fn create_autonat_behaviour(local_peer_id: libp2p::PeerId) -> AutonatBehaviour {
         let config = AutonatConfig::default();
@@ -551,6 +557,7 @@ pub mod dcutr {
 /// # libp2p application
 pub mod patterns {
     /// 模式 1：去中心化消息应用
+    /// 1：center message application
     /// 1：center application
     pub struct DecentralizedChat {
         pub topic: String,
@@ -566,6 +573,7 @@ pub mod patterns {
     }
 
     /// 模式 3：区块链网络
+    /// 3：blockchain network
     /// 3：network
     pub struct BlockchainNetwork {
         pub genesis_peers: Vec<String>,
@@ -595,6 +603,7 @@ mod tests {
     }
 
     /// 测试密钥对的序列化与反序列化往返
+    /// key pair sequence and sequence
     /// to sequence and sequence
     #[test]
     fn test_keypair_serialization() {

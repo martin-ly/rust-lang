@@ -1,6 +1,7 @@
 //! 综合网络异步编程演示程序
 //! synthesize network async demonstration program
 //! 本示例展示如何结合网络编程（C10）和异步编程（C06）构建高性能网络应用。
+//! this example network programming （C10）and async （C06）high performance network application 。
 //! this example network programming （C10）and async （C06）performance network application 。
 //! ## 📐 知识结构
 //! ## 📐 structure
@@ -10,6 +11,7 @@
 //! - **异步网络编程**: 结合异步编程和网络编程的编程范式
 //! - **async network programming **: async and network programming
 //!   - **属性**: 非阻塞 I/O、高并发、事件驱动
+//!   - **attribute **: I/O、high concurrency 、event-driven
 //!   - **attribute **: I/O、concurrency 、event-driven
 //!   - **attribute**: Non-blocking I/O、高concurrency、event-driven
 //!   - **关系**: 与异步编程、网络编程相关
@@ -17,11 +19,13 @@
 //! - **异步服务器**: 使用异步运行时处理网络请求的服务器
 //! - **async **: async runtime network
 //!   - **属性**: 高并发、低资源占用、事件驱动
+//!   - **attribute **: high concurrency 、low 、event-driven
 //!   - **attribute **: concurrency 、、event-driven
 //!   - **attribute**: 高concurrency、低资源占用、event-driven
 //!   - **关系**: 与异步编程、网络协议相关
 //!   - ****: and async 、network protocol
 //! ### 思维导图
+//! ### graph
 //! ###
 //! 网络异步演示
 //! network async demonstration
@@ -171,6 +175,7 @@ async fn select_example() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 /// 流式处理数据
+/// stream data
 /// stream
 async fn stream_processing() -> Result<(), Box<dyn std::error::Error>> {
     println!("\n🌊 流式处理数据...");

@@ -33,6 +33,7 @@ pub struct CacheAlignedCounter {
 
 impl CacheAlignedCounter {
     /// 创建新的缓存对齐计数器
+    /// Creates新的缓存对齐计数器
     /// to
     pub fn new(initial_value: usize) -> Self {
         Self {
@@ -47,12 +48,14 @@ impl CacheAlignedCounter {
     }
 
     /// 获取当前值
+    /// Gets当前值
     /// when before
     pub fn get(&self) -> usize {
         self.value.load(Ordering::Relaxed)
     }
 
     /// 重置计数器
+    /// Resets计数器
     pub fn reset(&self) {
         self.value.store(0, Ordering::Relaxed);
     }
@@ -76,6 +79,7 @@ pub struct FalseSharingDetector {
 
 impl FalseSharingDetector {
     /// 创建新的伪共享检测器
+    /// Creates新的伪共享检测器
     /// false sharing
     pub fn new() -> Self {
         Self {
@@ -98,6 +102,7 @@ impl FalseSharingDetector {
     }
 
     /// 获取伪共享计数
+    /// Gets伪共享计数
     /// false sharing
     pub fn false_sharing_count(&self) -> usize {
         self.false_sharing_count.load(Ordering::Relaxed)
@@ -116,7 +121,9 @@ impl Default for FalseSharingDetector {
 /// cache line to ，cache hit
 pub struct CacheFriendlyArray<T> {
     /// 数据数组
+    /// dataarray
     /// 数据array
+    /// dataarray
     data: Vec<T>,
     /// 数组大小
     size: usize,
@@ -124,6 +131,7 @@ pub struct CacheFriendlyArray<T> {
 
 impl<T> CacheFriendlyArray<T> {
     /// 创建新的缓存友好数组
+    /// Creates新的缓存友好数组
     /// cache-friendly
     pub fn new(size: usize) -> Self
     where
@@ -136,17 +144,20 @@ impl<T> CacheFriendlyArray<T> {
     }
 
     /// 获取数组大小
+    /// Gets数组大小
     pub fn len(&self) -> usize {
         self.size
     }
 
     /// 检查数组是否为空
+    /// Checks if the array is empty
     /// as
     pub fn is_empty(&self) -> bool {
         self.size == 0
     }
 
     /// 获取元素（不可变）
+    /// Gets元素（不可变）
     /// element （）
     /// Getelement（不可变）
     pub fn get(&self, index: usize) -> Option<&T> {
@@ -154,6 +165,7 @@ impl<T> CacheFriendlyArray<T> {
     }
 
     /// 获取元素（可变）
+    /// Gets元素（可变）
     /// element （）
     /// Getelement（可变）
     pub fn get_mut(&mut self, index: usize) -> Option<&mut T> {
@@ -161,6 +173,7 @@ impl<T> CacheFriendlyArray<T> {
     }
 
     /// 设置元素
+    /// Sets an element
     /// element
     pub fn set(&mut self, index: usize, value: T) -> Result<(), String> {
         if index >= self.size {
@@ -238,6 +251,7 @@ pub struct CacheOptimizedAccumulator {
 
 impl CacheOptimizedAccumulator {
     /// 创建新的缓存优化累加器
+    /// Creates新的缓存优化累加器
     /// optimization
     pub fn new(thread_count: usize) -> Self {
         Self {
@@ -248,18 +262,21 @@ impl CacheOptimizedAccumulator {
     }
 
     /// 获取线程的计数器
+    /// Gets线程的计数器
     /// thread
     pub fn get_counter(&self, thread_id: usize) -> Option<&CacheAlignedCounter> {
         self.counters.get(thread_id)
     }
 
     /// 累加所有计数器的值
+    /// Accumulates所有计数器的值
     /// all
     pub fn total(&self) -> usize {
         self.counters.iter().map(|c| c.get()).sum()
     }
 
     /// 重置所有计数器
+    /// Resets所有计数器
     /// all
     pub fn reset_all(&self) {
         for counter in &self.counters {

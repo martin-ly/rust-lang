@@ -23,12 +23,14 @@ pub enum TcpState {
 
 impl TcpState {
     /// 检查状态是否允许发送数据
+    /// state allow data
     /// state
     pub fn can_send_data(&self) -> bool {
         matches!(self, TcpState::Established)
     }
 
     /// 检查状态是否允许接收数据
+    /// state allow data
     /// state
     pub fn can_receive_data(&self) -> bool {
         matches!(self, TcpState::Established | TcpState::CloseWait)
@@ -46,6 +48,7 @@ impl TcpState {
 }
 
 /// TCP 事件
+/// TCP event
 /// TCP
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum TcpEvent {
@@ -113,6 +116,7 @@ impl TcpStateMachine {
     }
 
     /// 检查是否可以执行事件
+    /// can event
     /// can
     pub fn can_execute(&self, event: &TcpEvent) -> bool {
         self.transition_table

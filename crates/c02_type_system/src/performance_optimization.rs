@@ -11,6 +11,7 @@
 //! - 缓存友好的数据结构
 //! - cache-friendly data structure
 //! - SIMD 优化
+//! - SIMD optimize
 //! - SIMD optimization
 //! - 编译时优化
 //! - compile-time optimization
@@ -79,6 +80,7 @@ pub mod memory_layout {
     }
 
     /// 演示内存布局优化的性能差异
+    /// Demonstrates内存布局优化的性能差异
     /// demonstration memory layout optimization performance
     pub fn demonstrate_memory_layout_optimization() {
         println!("=== 内存布局优化演示 ===");
@@ -175,6 +177,7 @@ pub mod zero_cost_abstractions {
     }
 
     /// 演示零成本抽象
+    /// Demonstrates零成本抽象
     /// demonstration cost
     pub fn demonstrate_zero_cost_abstractions() {
         println!("=== 零成本抽象演示 ===");
@@ -261,6 +264,7 @@ pub mod inlining_optimization {
     }
 
     /// 演示内联优化
+    /// Demonstrates内联优化
     /// demonstration inside optimization
     pub fn demonstrate_inlining_optimization() {
         println!("=== 内联优化演示 ===");
@@ -344,6 +348,7 @@ pub mod branch_prediction {
     }
 
     /// 演示分支预测优化
+    /// Demonstrates分支预测优化
     /// demonstration branch prediction optimization
     pub fn demonstrate_branch_prediction() {
         println!("=== 分支预测优化演示 ===");
@@ -379,10 +384,13 @@ pub mod simd_optimization {
     use super::*;
 
     /// SIMD 向量加法（需要 x86_64 支持）
+    /// SIMD vectoraddition（need x86_64 support）
     /// SIMD （ x86_64 ）
     /// SIMD 向量加法（Requires x86_64 Supports）
+    /// SIMD vectoraddition（Requires x86_64 Supports）
     ///
     /// 调用者必须确保：
+    /// The caller must ensure:
     /// must ：
     /// - CPU 支持 SSE 指令集
     /// - CPU SSE
@@ -425,6 +433,7 @@ pub mod simd_optimization {
     }
 
     /// 演示 SIMD 优化
+    /// Demonstrates SIMD 优化
     /// demonstration SIMD optimization
     pub fn demonstrate_simd_optimization() {
         println!("=== SIMD 优化演示 ===");
@@ -472,6 +481,7 @@ pub mod simd_optimization {
 pub mod compile_time_optimization {
 
     /// 编译时常量
+    /// Compile-time constant
     /// compile-time constant
     pub const MAX_BUFFER_SIZE: usize = 1024;
     pub const ALIGNMENT: usize = 64;
@@ -517,6 +527,7 @@ pub mod compile_time_optimization {
     }
 
     /// 演示编译时优化
+    /// Demonstrates编译时优化
     /// demonstration compile-time optimization
     pub fn demonstrate_compile_time_optimization() {
         println!("=== 编译时优化演示 ===");
@@ -567,6 +578,7 @@ pub mod profiling_tools {
     }
 
     /// 内存使用统计
+    /// memoryusestatistics
     /// memory
     #[derive(Default)]
     pub struct MemoryStats {
@@ -590,6 +602,7 @@ pub mod profiling_tools {
     }
 
     /// 演示性能分析工具
+    /// Demonstrates性能分析工具
     /// demonstration performance analyze tool
     pub fn demonstrate_profiling_tools() {
         println!("=== 性能分析工具演示 ===");

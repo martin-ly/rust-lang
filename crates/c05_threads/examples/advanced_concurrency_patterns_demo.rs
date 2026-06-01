@@ -1,4 +1,5 @@
 //! 高级并发模式示例
+//! high concurrency example
 //! concurrency example
 //! 本示例展示了复杂并发场景下的设计模式：
 //! this example complex concurrency scenario under design ：
@@ -12,6 +13,7 @@
 //! - 背压处理
 //! - backpressure
 //! - 熔断器模式
+//! - circuit breaker
 //! -
 //! - 限流器模式
 //! - stream
@@ -296,6 +298,7 @@ impl FanOutFanIn {
 }
 
 /// 熔断器模式
+/// circuit breaker
 #[allow(dead_code)]
 pub struct CircuitBreaker {
     state: Arc<Mutex<CircuitState>>,
@@ -552,6 +555,7 @@ fn demo_fan_out_fan_in() {
 }
 
 /// 演示熔断器模式
+/// demonstration circuit breaker
 /// demonstration
 /// Demonstration of熔断器模式
 fn demo_circuit_breaker() {

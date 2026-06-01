@@ -19,11 +19,13 @@
 //! - **性能监控**: 实时监控系统资源使用情况
 //! - **performance **: system situation
 //!   - **属性**: 内存监控、CPU监控、I/O监控、缓存监控
+//!   - **attribute **: memory 、CPU、I/O、cache
 //!   - **attribute **: memory 、CPU、I/O、
 //!   - **关系**: 与性能优化、资源管理相关
 //!   - ****: and performance optimization 、
 //!   - **关系**: andperformanceoptimization、资源管理相关
 //! ### 思维导图
+//! ### graph
 //! ###
 //! 性能优化演示
 //! performance optimization demonstration
@@ -54,6 +56,7 @@
 //!     ├── 实时监控
 //!     ├──
 //!     └── 历史数据
+//!     └── data
 //!     └──
 #[cfg(feature = "async")]
 use c07_process::performance::enhanced::*;

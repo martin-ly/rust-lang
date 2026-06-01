@@ -39,6 +39,7 @@ async fn main() -> Result<()> {
 /// ## 演示 1: SQLx + SQLite 内存数据库
 /// ## demonstration 1: SQLx + SQLite in-memory database
 /// 直接使用 SQL 进行创建表、插入、查询操作。
+/// SQL 、、operation 。
 /// SQL 、、。
 async fn demo_01_sqlx_sqlite() -> Result<()> {
     println!("📦 演示 1: SQLx 原始 SQL 操作 (SQLite 内存模式)");
@@ -176,9 +177,11 @@ async fn demo_02_sea_orm_crud() -> Result<()> {
 }
 
 /// ## 演示 3: Redis 缓存模式
+/// ## demonstration 3: Redis cache
 /// ## demonstration 3: Redis
 /// ## Demonstration of 3: Redis 缓存模式
 /// 演示 Redis 连接、基本 KV 操作和缓存模式。
+/// demonstration Redis 、this KV operation and cache 。
 /// demonstration Redis 、this KV and 。
 async fn demo_03_redis_cache() -> Result<()> {
     println!("🔴 演示 3: Redis 缓存模式");
@@ -248,6 +251,7 @@ async fn demo_03_redis_cache() -> Result<()> {
 }
 
 /// ## 演示 4: 连接池与缓存模式整合
+/// ## demonstration 4: connection pool and cache integration
 /// ## demonstration 4: and integration
 async fn demo_04_connection_pool_pattern() -> Result<()> {
     println!("🏗️  演示 4: 连接池与缓存模式整合");
@@ -287,6 +291,7 @@ async fn demo_04_connection_pool_pattern() -> Result<()> {
 }
 
 /// 模拟 Cache-Aside 模式：先查缓存，未命中再查数据库
+/// Cache-Aside ：cache ，in database
 /// Cache-Aside ：，in database
 async fn fetch_article_with_cache(
     pool: &SqlitePool,

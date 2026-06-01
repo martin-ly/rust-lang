@@ -48,6 +48,7 @@ impl MetricsCollector {
     }
 
     /// 记录操作
+    /// operation
     pub fn record_operation(&self) {
         let mut metrics = self
             .metrics
@@ -58,6 +59,7 @@ impl MetricsCollector {
     }
 
     /// 记录操作时间
+    /// operation time
     /// time
     pub fn record_operation_time(&self, operation: &str, duration: Duration) {
         let mut metrics = self
@@ -178,6 +180,7 @@ impl MetricsCollector {
     }
 
     /// 获取操作统计
+    /// operation
     pub fn get_operation_stats(&self) -> HashMap<String, OperationStats> {
         let timers = self
             .operation_timers
@@ -265,6 +268,7 @@ impl MetricsCollector {
 }
 
 /// 操作统计
+/// operation
 #[derive(Debug, Clone)]
 pub struct OperationStats {
     pub count: usize,

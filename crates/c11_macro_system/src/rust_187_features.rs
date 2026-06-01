@@ -17,11 +17,13 @@
 /// ## 背景
 /// ## background
 /// `use<'a>` 语法允许显式声明需要捕获哪些生命周期。
+/// `use<'a>` syntax allow lifetime 。
 /// `use<'a>` lifetime 。
 /// 字符串解析器 trait 示例
 /// trait example
 pub trait Parser<'a> {
     /// 将输入字符串解析为单词迭代器
+    /// will input as
     /// will as
     fn parse(&self, input: &'a str) -> impl Iterator<Item = &'a str> + use<'a, Self>;
 }

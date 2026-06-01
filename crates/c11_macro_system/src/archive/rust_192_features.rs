@@ -23,8 +23,10 @@ use std::num::NonZeroUsize;
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct MacroExpansionItem {
     /// 宏名称
+    /// macro name
     pub name: String,
     /// 展开优先级（数值越大优先级越高）
+    /// （high ）
     /// （）
     pub priority: u8,
     /// 宏展开深度
@@ -32,6 +34,7 @@ pub struct MacroExpansionItem {
 }
 
 /// 使用 rotate_right 实现宏展开队列
+/// rotate_right queue
 /// rotate_right
 /// Use rotate_right Implementation of宏展开队列
 #[derive(Default)]
@@ -41,11 +44,13 @@ pub struct MacroExpansionQueue {
 
 impl MacroExpansionQueue {
     /// 创建一个新的宏展开队列
+    /// queue
     pub fn new() -> Self {
         Self::default()
     }
 
     /// 轮转宏展开队列
+    /// queue
     pub fn rotate(&mut self, positions: usize) {
         if self.items.is_empty() {
             return;
@@ -58,28 +63,33 @@ impl MacroExpansionQueue {
     }
 
     /// 向队列末尾添加一个宏展开项
+    /// queue
     pub fn push(&mut self, item: MacroExpansionItem) {
         self.items.push_back(item);
     }
 
     /// 从队列头部移除并返回一个宏展开项
+    /// from queue and
     /// from and
     pub fn pop(&mut self) -> Option<MacroExpansionItem> {
         self.items.pop_front()
     }
 
     /// 获取队列中的所有项（用于演示）
+    /// queue in all （demonstration ）
     /// in all （demonstration ）
     pub fn iter(&self) -> impl Iterator<Item = &MacroExpansionItem> {
         self.items.iter()
     }
 
     /// 获取队列长度
+    /// queue
     pub fn len(&self) -> usize {
         self.items.len()
     }
 
     /// 检查队列是否为空
+    /// queue as
     /// as
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()

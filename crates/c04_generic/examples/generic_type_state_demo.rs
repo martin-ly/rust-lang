@@ -26,6 +26,7 @@ pub struct Initialized;
 pub struct Running;
 
 /// 已停止状态标记
+/// stopped state mark
 /// state mark
 /// 已Stopstatemark
 pub struct Stopped;
@@ -65,6 +66,7 @@ impl StateMachine<Uninitialized> {
 
 impl StateMachine<Initialized> {
     /// 获取值（只能在已初始化状态下调用）
+    /// get value （in state under ）
     /// （in state under ）
     pub fn get_value(&self) -> i32 {
         self.value.unwrap()
@@ -82,6 +84,7 @@ impl StateMachine<Initialized> {
 
 impl StateMachine<Running> {
     /// 获取值（运行中状态）
+    /// get value （Run in state ）
     /// （Run in state ）
     /// Get值（Runinstate）
     pub fn get_value(&self) -> i32 {
@@ -100,6 +103,7 @@ impl StateMachine<Running> {
 
 impl StateMachine<Stopped> {
     /// 获取值（已停止状态）
+    /// get value （stopped state ）
     /// （state ）
     /// Get值（已Stopstate）
     pub fn get_value(&self) -> i32 {

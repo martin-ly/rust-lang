@@ -195,6 +195,7 @@ async fn demo_async_iterators() -> NetworkResult<()> {
 }
 
 /// 演示5: 生命周期语法检查
+/// demonstration 5: lifetime syntax
 /// demonstration 5: lifetime
 async fn demo_lifetime_syntax() -> NetworkResult<()> {
     println!("\n🔗 演示5: 生命周期语法检查");

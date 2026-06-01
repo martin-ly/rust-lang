@@ -10,6 +10,7 @@ use tracing::{debug, error, info, warn};
 /// 2025年简化异步测试框架演示
 /// 2025async framework demonstration
 /// 展示实用的异步测试技术和最佳实践
+/// async technique and best practice
 /// async technique and
 /// 1. 简化异步测试运行器
 /// 1. async Run

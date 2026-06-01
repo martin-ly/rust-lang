@@ -1,26 +1,38 @@
 //! # Rust 1.89 特性示例 (历史版本)
+//! # Rust 1.89 Feature Examples (Historical Version)
 //! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
+//! ## Version History
 //! ## this explain
 //! ### Rust 1.92.0 主要改进
+//! ### Rust 1.92.0 Major Improvements
 //! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化、改进的编译优化
+//! - **Performance optimizations**: Iterator method specialization, improved compilation optimizations
 //! - **performance optimization **: method 、optimization
 //! ### 迁移建议
+//! ### Migration Suggestions
 //! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
+//! 1. Update Cargo.toml: `rust-version = "1.92"`
 //! 参考:
+//! Reference:
 //! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//! - [Historical version: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 最新特性模块
+//! # Rust 1.89 latestfeaturesmodule
 //! # Rust 1.89 feature module
 //! # Rust 1.89 最新featuremodule
+//! # Rust 1.89 latestfeaturemodule
 //! 包含异步trait、GATs、常量泛型等核心新特性
 //! async trait、GATs、constant generic etc. core feature
 use std::collections::HashMap;
@@ -228,6 +240,7 @@ pub const fn calculate_matrix_size<const ROWS: usize, const COLS: usize>() -> us
 }
 
 /// 编译时常量
+/// Compile-time constant
 /// compile-time constant
 pub const FACTORIAL_10: u64 = {
     let mut result = 1;

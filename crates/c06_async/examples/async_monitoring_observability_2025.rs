@@ -11,6 +11,7 @@ use tracing::{debug, info};
 /// 2025年异步监控和可观测性演示
 /// 2025async and demonstration
 /// 展示最新的异步监控编程模式和最佳实践
+/// async and best practice
 /// async and
 /// 1. 异步指标收集器
 /// 1. async indicator

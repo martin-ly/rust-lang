@@ -189,6 +189,7 @@ impl AsyncMonitor {
     }
 
     /// 记录任务完成
+    /// task complete
     /// task
     pub async fn record_task_complete(&self, task_id: &str, success: bool, error: Option<String>) {
         let mut executions = self.task_executions.lock().await;

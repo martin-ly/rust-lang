@@ -1,4 +1,5 @@
 //! 数据包序列化器
+//! data packet sequence
 //! sequence
 use crate::error::{NetworkError, NetworkResult};
 use bytes::{Bytes, BytesMut};
@@ -13,6 +14,7 @@ pub struct SerializeResult {
 }
 
 /// 数据包序列化器
+/// data packet sequence
 /// sequence
 pub struct PacketSerializer {
     buffer: BytesMut,
@@ -21,6 +23,7 @@ pub struct PacketSerializer {
 
 impl PacketSerializer {
     /// 创建新的数据包序列化器
+    /// data packet sequence
     /// sequence
     pub fn new(max_size: usize) -> Self {
         Self {
@@ -30,6 +33,7 @@ impl PacketSerializer {
     }
 
     /// 序列化数据包
+    /// sequence data packet
     /// sequence
     pub fn serialize(&mut self, packet: &super::Packet) -> NetworkResult<SerializeResult> {
         self.buffer.clear();
@@ -51,6 +55,7 @@ impl PacketSerializer {
     }
 
     /// 序列化数据包头部
+    /// sequence data packet
     /// sequence
     fn serialize_header(&mut self, header: &super::PacketHeader) -> NetworkResult<()> {
         // 序列化数据包类型
@@ -81,6 +86,7 @@ impl PacketSerializer {
     }
 
     /// 批量序列化数据包
+    /// sequence data packet
     /// sequence
     pub fn serialize_batch(
         &mut self,
@@ -264,11 +270,13 @@ impl WebSocketFrameSerializer {
 }
 
 /// 数据包序列化器工厂
+/// data packet sequence factory
 /// sequence factory
 pub struct SerializerFactory;
 
 impl SerializerFactory {
     /// 创建数据包序列化器
+    /// data packet sequence
     /// sequence
     pub fn create_packet_serializer(max_size: usize) -> PacketSerializer {
         PacketSerializer::new(max_size)

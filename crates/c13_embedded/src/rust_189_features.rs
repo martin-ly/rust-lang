@@ -17,10 +17,12 @@
 
 /// # `#[repr(u128/i128)]` 稳定
 /// 允许枚举类型使用 128 位整数作为底层表示。
+/// allow enum type 128 as represent 。
 /// enum type 128 as represent 。
 /// ## 使用场景
 /// ## scenario
 /// - 与使用 128 位标识符的外部协议/格式交互
+/// - and 128 identifier outside /
 /// - and 128 outside /
 /// ## 限制
 /// ##

@@ -1,6 +1,7 @@
 //! C07 进程间通信（IPC）性能基准测试
 //! C07 process （IP C）Performance benchmark
 //! 测试消息传递、进程配置创建和同步原语的性能。
+//! message 、process configuration and synchronous performance 。
 //! 、process and synchronous performance 。
 
 use c07_process::{
@@ -11,6 +12,7 @@ use std::collections::HashMap;
 use std::time::Duration;
 
 /// 基准测试：IPC 消息创建与序列化
+/// benchmark ：IP C message and sequence
 /// benchmark ：IP C and sequence
 fn bench_ipc_message_creation(c: &mut Criterion) {
     c.bench_function("ipc_message_creation", |b| {
@@ -27,6 +29,7 @@ fn bench_ipc_message_creation(c: &mut Criterion) {
 }
 
 /// 基准测试：进程配置创建
+/// benchmark ：process configuration
 /// benchmark ：process
 fn bench_process_config_creation(c: &mut Criterion) {
     c.bench_function("process_config_creation", |b| {

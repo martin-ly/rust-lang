@@ -16,6 +16,7 @@
 //! - 资源管理
 //! -
 //! - 类型安全的互操作
+//! - type operation
 //! - type
 //! ## 编译
 //! ##
@@ -49,6 +50,7 @@
 use std::fs;
 
 /// 应用配置
+/// application configuration
 /// application
 #[derive(Debug)]
 struct AppConfig {
@@ -72,6 +74,7 @@ enum LogLevel {
 
 impl AppConfig {
     /// 从环境变量加载配置
+    /// from environment variable configuration
     /// from environment variable
     fn from_env() -> Result<Self, String> {
         let work_dir = std::env::var("WORK_DIR").unwrap_or_else(|_| ".".to_string());
@@ -243,6 +246,7 @@ impl TextStats {
 }
 
 /// 数据转换器 - 展示组件间数据流
+/// data conversion - data stream
 /// conversion - stream
 struct DataTransformer {
     logger: Logger,
@@ -336,6 +340,7 @@ impl Application {
     }
 
     /// 演示文件系统操作
+    /// demonstration file system operation
     /// demonstration file system
     fn demo_filesystem(&self) -> Result<(), String> {
         self.logger.info("=== File System Demo ===");

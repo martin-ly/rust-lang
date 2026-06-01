@@ -21,6 +21,7 @@ pub mod wasmedge_examples;
 pub mod browser_api;
 
 /// 数学工具模块
+/// math tool module
 /// tool module
 /// 数学toolmodule
 pub mod math_utils;
@@ -51,6 +52,7 @@ pub mod basic_examples {
     use wasm_bindgen::prelude::*;
 
     /// 简单的加法函数
+    /// simple addition function
     /// simple function
     /// # 参数
     /// # parameter
@@ -90,18 +92,22 @@ pub mod basic_examples {
     }
 
     /// 数组求和
+    /// array and
     /// and
     /// # 参数
     /// # parameter
     /// - `arr`: 要计算的整数数组
+    /// - `arr`: array
     /// - `arr`:
     /// # 返回值
     /// # return value
     /// 返回数组中所有元素的和
+    /// array in all element and
     /// in all element and
     /// # 注意
     /// #
     /// 这个函数会克隆数组，对于大数组可能不够高效
+    /// function array ，to array may efficient
     /// function ，to may efficient
     /// # 示例
     /// # example
@@ -176,6 +182,7 @@ pub mod complex_types {
     }
 
     /// 人员信息结构体
+    /// person struct
     /// struct
     /// 展示如何传递复杂对象
     /// complex to
@@ -188,15 +195,19 @@ pub mod complex_types {
     #[wasm_bindgen]
     impl Person {
         /// 创建新的人员实例
+        /// person
         /// # 参数
         /// # parameter
         /// - `name`: 人员姓名
+        /// - `name`: person
         /// - `name`:
         /// - `age`: 人员年龄
+        /// - `age`: person
         /// - `age`:
         /// # 返回值
         /// # return value
         /// 返回新的人员实例
+        /// person
         #[wasm_bindgen(constructor)]
         pub fn new(name: String, age: u32) -> Person {
             Person { name, age }
@@ -234,23 +245,28 @@ pub mod complex_types {
 }
 
 /// 数组和向量操作示例
+/// array and operation example
 /// and example
 pub mod array_examples {
     use wasm_bindgen::prelude::*;
 
     /// 计算数组的平均值
+    /// array
     /// # 参数
     /// # parameter
     /// - `numbers`: 数字数组
+    /// - `numbers`: number array
     /// - `numbers`:
     /// - `numbers`: 数字array
     /// # 返回值
     /// # return value
     /// 返回平均值，如果数组为空则返回 0.0
+    /// ，if array as 0.0
     /// ，if as 0.0
     /// # 性能说明
     /// # performance explain
     /// 这个函数会遍历整个数组一次，时间复杂度 O(n)
+    /// function array ，time complexity O(n)
     /// function ，time complexity O(n)
     #[wasm_bindgen]
     pub fn calculate_average(numbers: &[f64]) -> f64 {
@@ -262,10 +278,12 @@ pub mod array_examples {
     }
 
     /// 查找数组中的最大值
+    /// array in maximum
     /// in maximum
     /// # 参数
     /// # parameter
     /// - `numbers`: 数字数组
+    /// - `numbers`: number array
     /// - `numbers`:
     /// - `numbers`: 数字array
     /// # 返回值
@@ -276,6 +294,7 @@ pub mod array_examples {
     }
 
     /// 反转数组
+    /// array
     /// 反转array
     /// # 参数
     /// # parameter
@@ -283,10 +302,12 @@ pub mod array_examples {
     /// # 返回值
     /// # return value
     /// 返回反转后的新数组
+    /// after array
     /// after
     /// # 注意
     /// #
     /// 这个函数会创建一个新数组，内存使用 O(n)
+    /// function array ，memory O(n)
     /// function ，memory O(n)
     #[wasm_bindgen]
     pub fn reverse_array(numbers: &[i32]) -> Vec<i32> {
@@ -294,6 +315,7 @@ pub mod array_examples {
     }
 
     /// 过滤数组中的偶数
+    /// array in
     /// in
     /// # 参数
     /// # parameter
@@ -301,6 +323,7 @@ pub mod array_examples {
     /// # 返回值
     /// # return value
     /// 返回只包含偶数的新数组
+    /// array
     #[wasm_bindgen]
     pub fn filter_even(numbers: &[i32]) -> Vec<i32> {
         numbers.iter().filter(|&&x| x % 2 == 0).copied().collect()
@@ -308,6 +331,7 @@ pub mod array_examples {
 }
 
 /// 字符串操作示例
+/// operation example
 /// example
 pub mod string_examples {
     use wasm_bindgen::prelude::*;
@@ -393,6 +417,7 @@ pub mod performance_examples {
     }
 
     /// 优化的数组处理函数（重用缓冲区）
+    /// optimization array function （buffering ）
     /// optimization function （buffering ）
     /// 这个函数展示了如何重用缓冲区来减少内存分配
     /// function buffering memory
@@ -401,6 +426,7 @@ pub mod performance_examples {
     /// # 返回值
     /// # return value
     /// 返回处理后的字节数组
+    /// after array
     /// after
     /// # 性能说明
     /// # performance explain
@@ -427,6 +453,7 @@ pub mod performance_examples {
     }
 
     /// 预分配容量的向量创建
+    /// pre-allocate capacity
     /// # 参数
     /// # parameter
     /// - `size`: 向量大小
@@ -434,6 +461,7 @@ pub mod performance_examples {
     /// # 返回值
     /// # return value
     /// 返回预分配容量的向量
+    /// pre-allocate capacity
     #[wasm_bindgen]
     pub fn create_preallocated_vector(size: usize) -> Vec<i32> {
         let mut vec = Vec::with_capacity(size);
@@ -450,6 +478,7 @@ pub mod error_examples {
     use wasm_bindgen::prelude::*;
 
     /// 安全的除法运算
+    /// division
     /// # 参数
     /// # parameter
     /// - `a`: 被除数
@@ -461,6 +490,7 @@ pub mod error_examples {
     /// # 返回值
     /// # return value
     /// 返回 `Result`，成功时包含商，失败时包含错误信息
+    /// `Result`，，failure error message
     /// `Result`，，error message
     /// # 示例
     /// # example
@@ -477,6 +507,7 @@ pub mod error_examples {
     }
 
     /// 验证输入字符串长度
+    /// input
     /// # 参数
     /// # parameter
     /// - `min_length`: 最小长度

@@ -68,13 +68,16 @@ impl NumaTopology {
     }
 
     /// 获取所有NUMA节点
+    /// Gets所有NUMA节点
     /// all NUMAnode
     /// Get所有NUMAnode
+    /// GetallNUMAnode
     pub fn get_nodes(&self) -> &[NumaNode] {
         &self.nodes
     }
 
     /// 获取NUMA节点数量
+    /// GetsNUMA节点数量
     /// NUMAnode quantity
     pub fn node_count(&self) -> usize {
         self.nodes.len()
@@ -103,6 +106,7 @@ impl NumaAwareTaskAllocator {
     }
 
     /// 分配任务到最优NUMA节点
+    /// Allocates任务到最优NUMA节点
     /// task to NUMAnode
     pub fn allocate_task(&self, _task_id: usize) -> usize {
         let mut workloads = self.node_workloads.lock().expect("获取工作负载锁不应失败");
@@ -137,6 +141,7 @@ impl NumaAwareTaskAllocator {
     }
 
     /// 获取NUMA节点工作负载
+    /// GetsNUMA节点工作负载
     /// NUMAnode
     pub fn get_node_workload(&self, node_id: usize) -> usize {
         let workloads = self.node_workloads.lock().expect("获取工作负载锁不应失败");
@@ -144,6 +149,7 @@ impl NumaAwareTaskAllocator {
     }
 
     /// 获取所有节点工作负载
+    /// Gets所有节点工作负载
     /// all node
     pub fn get_all_workloads(&self) -> HashMap<usize, usize> {
         let workloads = self.node_workloads.lock().unwrap();
@@ -186,12 +192,14 @@ impl<T> NumaAwareDataLayout<T> {
     }
 
     /// 获取所有数据
+    /// Gets所有数据
     /// all
     pub fn get_all_data(&self) -> &Vec<Vec<T>> {
         &self.data
     }
 
     /// 获取数据分布统计
+    /// Gets数据分布统计
     /// distribution
     pub fn get_distribution_stats(&self) -> Vec<usize> {
         self.data.iter().map(|node_data| node_data.len()).collect()
@@ -469,6 +477,7 @@ impl NumaAwareMemoryAllocator {
     }
 
     /// 获取NUMA节点内存使用统计
+    /// GetsNUMA节点内存使用统计
     /// NUMAnode memory
     pub fn get_memory_stats(&self) -> HashMap<usize, usize> {
         let allocations = self.node_allocations.lock().expect("获取分配锁不应失败");

@@ -9,10 +9,13 @@ use tokio::time::{sleep, timeout};
 use tracing::{debug, info, warn};
 
 /// 2025年异步错误恢复和重试机制演示
+/// 2025async error recovery and retry mechanism demonstration
 /// 2025async error recovery and mechanism demonstration
 /// 展示最新的异步错误处理和恢复最佳实践
+/// async error handling and best practice
 /// async error handling and
 /// 1. 异步重试策略
+/// 1. async retry strategy
 /// 1. async strategy
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum RetryStrategy {
@@ -178,6 +181,7 @@ impl AsyncRetryManager {
 }
 
 /// 2. 异步熔断器
+/// 2. async circuit breaker
 /// 2. async
 #[derive(Debug, Clone, PartialEq)]
 pub enum CircuitState {
@@ -350,6 +354,7 @@ impl AsyncCircuitBreaker {
 }
 
 /// 3. 异步超时管理器
+/// 3. async timeout
 /// 3. async
 pub struct AsyncTimeoutManager {
     default_timeout: Duration,
@@ -577,6 +582,7 @@ impl AsyncErrorRecoveryManager {
 }
 
 /// 演示异步错误恢复和重试机制
+/// demonstration async error recovery and retry mechanism
 /// demonstration async error recovery and mechanism
 #[tokio::main]
 async fn main() -> Result<()> {

@@ -22,6 +22,7 @@ pub struct AsyncTaskManager {
 }
 
 /// 任务句柄
+/// taskhandle
 /// task
 pub struct TaskHandle {
     id: u64,
@@ -30,6 +31,7 @@ pub struct TaskHandle {
 
 impl AsyncTaskManager {
     /// 创建新的异步任务管理器
+    /// Creates新的异步任务管理器
     /// async task
     pub fn new() -> Self {
         Self { tasks: Vec::new() }
@@ -44,14 +46,17 @@ impl AsyncTaskManager {
     }
 
     /// 获取任务数量
+    /// Gets任务数量
     /// task quantity
     pub fn task_count(&self) -> usize {
         self.tasks.len()
     }
 
     /// 获取所有任务
+    /// Gets所有任务
     /// all task
     /// Get所有task
+    /// Getalltask
     pub fn get_tasks(&self) -> &[TaskHandle] {
         &self.tasks
     }
@@ -74,12 +79,14 @@ impl Clone for TaskHandle {
 
 impl TaskHandle {
     /// 获取任务ID
+    /// Gets任务ID
     /// task ID
     pub fn id(&self) -> u64 {
         self.id
     }
 
     /// 获取任务名称
+    /// Gets任务名称
     /// task
     pub fn name(&self) -> &str {
         &self.name
@@ -97,6 +104,7 @@ pub struct AsyncChannel<T> {
 
 impl<T> AsyncChannel<T> {
     /// 创建新的异步通道
+    /// Creates新的异步通道
     /// async channel
     pub fn new() -> Self {
         let (sender, receiver) = std::sync::mpsc::channel();
@@ -107,6 +115,7 @@ impl<T> AsyncChannel<T> {
     }
 
     /// 获取发送端
+    /// Gets发送端
     pub fn sender(&self) -> AsyncSender<T> {
         AsyncSender {
             inner: Arc::clone(&self.sender),
@@ -114,6 +123,7 @@ impl<T> AsyncChannel<T> {
     }
 
     /// 获取接收端
+    /// Gets接收端
     pub fn receiver(&self) -> AsyncReceiver<T> {
         AsyncReceiver {
             inner: Arc::clone(&self.receiver),
@@ -135,6 +145,7 @@ pub struct AsyncSender<T> {
 
 impl<T> AsyncSender<T> {
     /// 发送消息（非阻塞）
+    /// Sends消息（非阻塞）
     /// （）
     pub fn send(&self, msg: T) -> Result<(), String> {
         self.inner
@@ -159,6 +170,7 @@ pub struct AsyncReceiver<T> {
 
 impl<T> AsyncReceiver<T> {
     /// 接收消息（阻塞）
+    /// Receives消息（阻塞）
     /// （）
     pub fn recv(&self) -> Result<T, String> {
         self.inner
@@ -167,6 +179,7 @@ impl<T> AsyncReceiver<T> {
     }
 
     /// 尝试接收消息（非阻塞）
+    /// Attempts to接收消息（非阻塞）
     /// （）
     pub fn try_recv(&self) -> Result<T, String> {
         self.inner
@@ -186,6 +199,7 @@ pub struct AsyncBarrier {
 
 impl AsyncBarrier {
     /// 创建新的异步屏障
+    /// Creates新的异步屏障
     /// async barrier
     pub fn new(count: usize) -> Self {
         Self {
@@ -195,6 +209,7 @@ impl AsyncBarrier {
     }
 
     /// 等待所有任务到达屏障
+    /// Waits for所有任务到达屏障
     /// etc. all task to barrier
     pub fn wait(&self) -> bool {
         let current = self.count.fetch_add(1, std::sync::atomic::Ordering::SeqCst) + 1;
@@ -202,12 +217,14 @@ impl AsyncBarrier {
     }
 
     /// 重置屏障
+    /// Resets屏障
     /// barrier
     pub fn reset(&self) {
         self.count.store(0, std::sync::atomic::Ordering::SeqCst);
     }
 
     /// 获取当前等待的任务数
+    /// Gets当前等待的任务数
     /// when before etc. task
     pub fn current_count(&self) -> usize {
         self.count.load(std::sync::atomic::Ordering::SeqCst)
@@ -225,18 +242,22 @@ pub struct AsyncTimeout {
 
 impl AsyncTimeout {
     /// 创建新的超时包装器
+    /// Creates新的超时包装器
     pub fn new(duration: Duration) -> Self {
         Self { duration }
     }
 
     /// 获取超时时间
+    /// Gets超时时间
     /// time
     /// Get超时time
+    /// Gettimeouttime
     pub fn duration(&self) -> Duration {
         self.duration
     }
 
     /// 检查是否超时（示例实现）
+    /// Checks是否超时（示例实现）
     /// （example ）
     pub fn is_timeout(&self, elapsed: Duration) -> bool {
         elapsed >= self.duration
@@ -254,6 +275,7 @@ pub struct AsyncSemaphore {
 
 impl AsyncSemaphore {
     /// 创建新的信号量
+    /// Creates新的信号量
     /// semaphore
     pub fn new(permits: usize) -> Self {
         Self {
@@ -263,6 +285,7 @@ impl AsyncSemaphore {
     }
 
     /// 获取许可（非阻塞）
+    /// Gets许可（非阻塞）
     /// （）
     /// Get许可（Non-blocking）
     pub fn try_acquire(&self) -> bool {
@@ -282,6 +305,7 @@ impl AsyncSemaphore {
     }
 
     /// 释放许可
+    /// Releases许可
     pub fn release(&self) {
         let current = self.permits.load(std::sync::atomic::Ordering::SeqCst);
         if current < self.max_permits {
@@ -291,6 +315,7 @@ impl AsyncSemaphore {
     }
 
     /// 获取可用许可数
+    /// Gets可用许可数
     pub fn available_permits(&self) -> usize {
         self.permits.load(std::sync::atomic::Ordering::SeqCst)
     }

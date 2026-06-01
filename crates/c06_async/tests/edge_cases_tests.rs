@@ -134,6 +134,7 @@ fn test_async_error_propagation_boundaries() {
 }
 
 /// 测试异步超时边界情况
+/// async timeout edge situation
 /// async edge situation
 #[test]
 fn test_async_timeout_boundaries() {

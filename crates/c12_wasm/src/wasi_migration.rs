@@ -1,5 +1,6 @@
 //! WASI 目标迁移指南 —— 从 wasm32-wasi 到 wasm32-wasip1/p2
 //! # ⚠️ 重要通知
+//! # ⚠️ important notify
 //! # ⚠️ important
 //! `wasm32-wasi` 目标已于 **Rust 1.84.0（2025年1月）** 从 Rust 中移除。
 //! `wasm32-wasi` goal **Rust 1.84.0（20251）** from Rust in 。
@@ -135,6 +136,7 @@ WASI Capability-Based Security:
 /// | 概念 | 说明 |
 /// | concept | explain |
 /// | **Component** | 高阶 WASM 单元，可导入/导出接口 |
+/// | **Component** | high WASM ，/ |
 /// | **Component** | WASM ，/ |
 /// | **WIT** | 接口定义语言（类似 IDL） |
 /// | **WIT** | definition （similar to IDL） |
@@ -281,6 +283,7 @@ cargo-component 工作流:
 // =========================================================================
 
 /// 逐项确认迁移完成度。
+/// complete 。
 /// 。
 pub struct MigrationChecklist;
 
@@ -307,6 +310,7 @@ impl MigrationChecklist {
     }
 
     /// 兼容性矩阵
+    /// matrix
     pub fn compatibility_matrix() -> &'static str {
         r#"
 WASI 兼容性矩阵 (截至 2026-05):

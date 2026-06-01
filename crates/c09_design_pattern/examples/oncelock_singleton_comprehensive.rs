@@ -1,12 +1,15 @@
 //! 本示例展示：
 //! this example ：
 //! 1. 全局配置单例（线程安全）
+//! 1. global configuration singleton （thread-safe ）
 //! 1. global singleton （thread-safe ）
 //! 2. 全局日志器单例（内部可变性）
 //! 2. global singleton （inside ）
 //! 3. 全局缓存单例（性能优化）
+//! 3. global cache singleton （performance optimization ）
 //! 3. global singleton （performance optimization ）
 //! 4. 全局连接池单例（资源管理）
+//! 4. global connection pool singleton （）
 //! 4. global singleton （）
 use std::collections::{HashMap, VecDeque};
 use std::sync::{Arc, Mutex, OnceLock};
@@ -28,11 +31,13 @@ pub struct AppConfig {
 }
 
 /// 全局配置单例
+/// global configuration singleton
 /// global singleton
 static CONFIG: OnceLock<AppConfig> = OnceLock::new();
 
 impl AppConfig {
     /// 获取全局配置实例（惰性初始化）
+    /// global configuration （）
     /// global （）
     pub fn global() -> &'static AppConfig {
         CONFIG.get_or_init(|| {
@@ -159,6 +164,7 @@ impl GlobalLogger {
 }
 
 /// 便捷日志宏
+/// log macro
 #[macro_export]
 macro_rules! log_trace {
     ($($arg:tt)*) => {
@@ -231,6 +237,7 @@ where
     }
 
     /// 插入缓存项
+    /// cache
     pub fn insert(&self, key: K, value: V, ttl: Option<Duration>) {
         let mut cache = self.cache.lock().unwrap();
 
@@ -257,6 +264,7 @@ where
     }
 
     /// 获取缓存项
+    /// cache
     pub fn get(&self, key: &K) -> Option<V> {
         let mut cache = self.cache.lock().unwrap();
 
@@ -300,6 +308,7 @@ where
     }
 
     /// 清空缓存
+    /// cache
     pub fn clear(&self) {
         self.cache.lock().unwrap().clear();
     }
@@ -314,6 +323,7 @@ pub struct CacheStats {
 }
 
 /// 全局字符串缓存单例
+/// global cache singleton
 /// global singleton
 static STRING_CACHE: OnceLock<GlobalCache<String, String>> = OnceLock::new();
 

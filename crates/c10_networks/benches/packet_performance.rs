@@ -3,6 +3,7 @@
 #![allow(clippy::bind_instead_of_map)]
 
 //! 数据包性能基准测试
+//! data packet Performance benchmark
 //! Performance benchmark
 //! 数据包performancebenchmark
 
@@ -16,6 +17,7 @@ use std::hint::black_box;
 use std::time::Duration;
 
 /// 数据包创建性能测试
+/// data packet performance test
 /// performance test
 /// 数据包Createperformance test
 fn bench_packet_creation(c: &mut Criterion) {
@@ -75,6 +77,7 @@ fn bench_packet_creation(c: &mut Criterion) {
 }
 
 /// 带序列号的数据包创建性能测试
+/// sequence data packet performance test
 /// sequence performance test
 fn bench_packet_with_sequence(c: &mut Criterion) {
     c.bench_function("packet_with_sequence", |b| {
@@ -90,6 +93,7 @@ fn bench_packet_with_sequence(c: &mut Criterion) {
 }
 
 /// 数据包构建器性能测试
+/// data packet builder performance test
 /// builder performance test
 /// 数据包builderperformance test
 fn bench_packet_builder(c: &mut Criterion) {
@@ -130,6 +134,7 @@ fn bench_packet_builder(c: &mut Criterion) {
 }
 
 /// 数据包统计性能测试
+/// data packet performance test
 /// performance test
 /// 数据包统计performance test
 fn bench_packet_stats(c: &mut Criterion) {
@@ -174,6 +179,7 @@ fn bench_packet_stats(c: &mut Criterion) {
 }
 
 /// 数据包过滤器性能测试
+/// data packet performance test
 /// performance test
 fn bench_packet_filter(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_filter");
@@ -215,6 +221,7 @@ fn bench_packet_filter(c: &mut Criterion) {
 }
 
 /// 数据包缓冲区性能测试
+/// data packet buffering performance test
 /// buffering performance test
 fn bench_packet_buffer(c: &mut Criterion) {
     let mut group = c.benchmark_group("packet_buffer");
@@ -274,6 +281,7 @@ fn bench_packet_buffer(c: &mut Criterion) {
 }
 
 /// 数据包序列化性能测试
+/// data packet sequence performance test
 /// sequence performance test
 /// 数据包Serializeperformance test
 fn bench_packet_serialization(c: &mut Criterion) {
@@ -312,6 +320,7 @@ fn bench_packet_serialization(c: &mut Criterion) {
 }
 
 /// 大数据包性能测试
+/// data packet performance test
 /// performance test
 /// 大数据包performance test
 fn bench_large_packet_performance(c: &mut Criterion) {
@@ -354,6 +363,7 @@ fn bench_large_packet_performance(c: &mut Criterion) {
 }
 
 /// 并发数据包处理性能测试
+/// concurrency data packet performance test
 /// concurrency performance test
 fn bench_concurrent_packet_processing(c: &mut Criterion) {
     use std::sync::Arc;
@@ -437,6 +447,7 @@ fn bench_concurrent_packet_processing(c: &mut Criterion) {
 }
 
 /// 数据包类型比较性能测试
+/// data packet type performance test
 /// type performance test
 #[allow(unused)]
 fn bench_packet_type_comparison(c: &mut Criterion) {

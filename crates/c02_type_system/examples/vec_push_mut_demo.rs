@@ -1,6 +1,7 @@
 //! Rust 1.95.0 `Vec::push_mut` / `insert_mut` 专题示例
 //! Rust 1.95.0 `Vec::push_mut` / `insert_mut` 专题Example of
 //! 允许在插入元素的同时获取其可变引用，避免二次查找。
+//! allow in element its reference ，。
 //! in element its reference ，。
 //! 权威来源: https://releases.rs/docs/1.95.0/
 //! 权威source: https://releases.rs/docs/1.95.0/

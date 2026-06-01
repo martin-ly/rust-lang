@@ -6,6 +6,7 @@
 //! - 属性验证
 //! - attribute
 //! - 反例生成
+//! - anti-pattern
 //! -
 //! - 反例Generate
 //! - 可达性分析
@@ -19,6 +20,7 @@ use std::time::{Duration, Instant};
 /// 模型检查器
 pub struct ModelChecker {
     /// 配置
+    /// configuration
     config: ModelCheckingConfig,
     /// 状态空间
     /// state space
@@ -32,12 +34,14 @@ pub struct ModelChecker {
 }
 
 /// 模型检查配置
+/// configuration
 #[derive(Debug, Clone, Default)]
 pub struct ModelCheckingConfig {
     /// 最大状态数
     /// maximum state
     pub max_states: usize,
     /// 超时时间
+    /// timeout time
     /// time
     pub timeout: Duration,
     /// 启用并行探索
@@ -65,6 +69,7 @@ pub struct ModelCheckingResult {
     /// 发现的违规
     pub violations: Vec<Violation>,
     /// 反例路径
+    /// anti-pattern
     pub counter_examples: Vec<CounterExample>,
     /// 检查时间
     /// time
@@ -77,9 +82,11 @@ pub struct ModelCheckingResult {
 }
 
 /// 反例
+/// anti-pattern
 #[derive(Debug, Clone)]
 pub struct CounterExample {
     /// 反例ID
+    /// anti-pattern ID
     /// ID
     pub id: String,
     /// 违规的属性
@@ -93,6 +100,7 @@ pub struct CounterExample {
     /// 违规state
     pub violating_state: NetworkState,
     /// 反例描述
+    /// anti-pattern describe
     /// describe
     /// 反例describe
     pub description: String,
@@ -368,6 +376,7 @@ impl ModelChecker {
     }
 
     /// 应用动作
+    /// application action
     /// application
     fn apply_action(&self, action: &Action, state: &mut NetworkState) {
         match action {
@@ -398,6 +407,7 @@ impl ModelChecker {
     }
 
     /// 生成反例
+    /// anti-pattern
     fn generate_counter_example(
         &self,
         violating_state: &NetworkState,
@@ -507,6 +517,7 @@ pub struct ExplorationResult {
     /// time
     pub exploration_time: Duration,
     /// 反例
+    /// anti-pattern
     pub counter_examples: Vec<CounterExample>,
     /// 覆盖度统计
     pub coverage: CoverageStats,
@@ -520,10 +531,12 @@ pub struct TlaModelChecker {
     /// TLA+norm
     spec: String,
     /// 配置
+    /// configuration
     config: TlaConfig,
 }
 
 /// TLA+配置
+/// TLA+configuration
 /// TLA+
 #[derive(Debug, Clone, Default)]
 #[allow(dead_code)]
@@ -532,6 +545,7 @@ pub struct TlaConfig {
     /// maximum state
     pub max_states: usize,
     /// 超时时间
+    /// timeout time
     /// time
     pub timeout: Duration,
     /// 启用对称约简
@@ -602,6 +616,7 @@ impl TlaModelChecker {
     }
 
     /// 生成类型OK谓词
+    /// type OKpredicate
     /// type OK
     fn generate_type_ok(&self, _model: &SemanticModel) -> String {
         // 简化实现

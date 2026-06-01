@@ -5,6 +5,7 @@
 //! - 数据类型与类型推断
 //! - type and type infer
 //! - 数据typeandtype inference
+//! - datatypeandtype inference
 //! - 控制流结构
 //! - stream structure
 //! - 控制streamstructure
@@ -37,6 +38,7 @@ where
     /// 数据字段，使用泛型类型
     /// field ，generic type
     /// 数据field，Usegenerictype
+    /// datafield，Usegenerictype
     pub data: T,
     /// 计数器字段
     /// field
@@ -50,10 +52,13 @@ where
     T: Clone + PartialEq + Display,
 {
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// # 示例
+    /// # Examples
     /// # example
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
@@ -70,12 +75,15 @@ where
     }
 
     /// 更新数据并增加计数器
+    /// Updates数据并增加计数器
     /// and
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// * `new_data` - 新数据值
     /// * `new_data` -
     /// # 示例
+    /// # Examples
     /// # example
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
@@ -90,31 +98,43 @@ where
     }
 
     /// 设置元数据
+    /// Sets元数据
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// * `metadata` - 元数据字符串
     /// * `metadata` -
     /// # 示例
+    /// # Examples
     /// # example
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
     /// let mut demo = BasicSyntaxDemo::new(42);
     /// demo.set_metadata("示例数据".to_string());
+    /// demo.set_metadata("exampledata".to_string());
     /// demo.set_metadata("Example of数据".to_string());
+    /// demo.set_metadata("Example ofdata".to_string());
     /// assert_eq!(demo.metadata, Some("示例数据".to_string()));
+    /// assert_eq!(demo.metadata, Some("exampledata".to_string()));
     /// assert_eq!(demo.metadata, Some("Example of数据".to_string()));
+    /// assert_eq!(demo.metadata, Some("Example ofdata".to_string()));
     pub fn set_metadata(&mut self, metadata: String) {
         self.metadata = Some(metadata);
     }
 
     /// 获取数据的字符串表示
+    /// Gets数据的字符串表示
     /// represent
     /// Get数据字符串represent
+    /// Getdatastringrepresent
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回数据的字符串表示
+    /// Returns数据的字符串表示
     /// represent
     /// # 示例
+    /// # Examples
     /// # example
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
@@ -715,6 +735,7 @@ pub mod functions {
     /// 加法函数
     /// function
     /// 加法function
+    /// additionfunction
     fn add(a: i32, b: i32) -> i32 {
         a + b
     }
@@ -726,6 +747,7 @@ pub mod functions {
     }
 
     /// 查找最小值和最大值
+    /// Finds最小值和最大值
     /// minimum and maximum
     fn find_min_max(slice: &[i32]) -> (i32, i32) {
         let mut min = slice[0];
@@ -753,6 +775,7 @@ pub mod functions {
     }
 
     /// 创建乘数器的函数
+    /// Creates乘数器的函数
     /// function
     fn create_multiplier(factor: i32) -> impl Fn(i32) -> i32 {
         move |x| x * factor
@@ -899,6 +922,7 @@ pub mod error_handling {
     // 辅助函数
 
     /// 解析字符串并翻倍
+    /// Parses字符串并翻倍
     /// and
     pub fn parse_and_double(s: &str) -> Result<i32, ParseIntError> {
         let number = s.parse::<i32>()?;
@@ -940,6 +964,7 @@ pub mod error_handling {
 }
 
 /// 综合演示函数
+/// Comprehensive demonstration function
 /// synthesize demonstration function
 /// 运行所有基础语法演示
 /// Run all foundation demonstration

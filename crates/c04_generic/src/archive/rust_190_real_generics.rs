@@ -1,9 +1,13 @@
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - 改进const generics
+//! - improveconst generics
 //! - 更好trait bounds
+//! - bettertrait bounds
 //! - 优化的类型推断
 //! - optimization type infer
 //! - 新的泛型约束
@@ -11,10 +15,12 @@
 //! - 改进的关联类型
 //! - associated type
 //! - 改进associated type
+//! - improveassociated type
 use anyhow::Result;
 use std::{collections::HashMap, fmt::Display};
 
 /// 利用Rust 1.90改进const generics
+/// useRust 1.90improveconst generics
 pub struct ConstGenericMatrix<T, const ROWS: usize, const COLS: usize> {
     data: [[T; COLS]; ROWS],
     current_row: usize,
@@ -73,6 +79,7 @@ impl<T: Default + Copy, const ROWS: usize, const COLS: usize> ConstGenericMatrix
 }
 
 /// 利用Rust 1.90改进trait bounds
+/// useRust 1.90improvetrait bounds
 pub trait ImprovedTraitBounds<T> {
     type Output;
     type Error;
@@ -118,6 +125,7 @@ where
 }
 
 /// 利用Rust 1.90optimizationtype inference
+/// useRust 1.90optimizationtype inference
 #[allow(dead_code)]
 pub struct TypeInferenceOptimized<T> {
     data: Vec<T>,
@@ -147,8 +155,10 @@ impl<T> TypeInferenceOptimized<T> {
     }
 
     /// 演示改进的类型推断
+    /// Demonstrates改进的类型推断
     /// demonstration type infer
     /// Demonstration of改进type inference
+    /// Demonstration ofimprovetype inference
     pub fn process_with_improved_inference<F, R>(&self, processor: F) -> Vec<R>
     where
         F: Fn(&T) -> R,
@@ -158,6 +168,7 @@ impl<T> TypeInferenceOptimized<T> {
     }
 
     /// 演示更智能的类型推断
+    /// Demonstrates更智能的类型推断
     /// demonstration type infer
     /// Demonstration of更智能type inference
     pub fn smart_type_inference<F>(&mut self, processor: F) -> Result<()>
@@ -193,6 +204,7 @@ where
     }
 
     /// 演示新的泛型约束
+    /// Demonstrates新的泛型约束
     /// demonstration generic
     pub fn process_with_new_constraints<F, R>(&self, processor: F) -> R
     where
@@ -203,6 +215,7 @@ where
     }
 
     /// 演示更智能的泛型约束
+    /// Demonstrates更智能的泛型约束
     /// demonstration generic
     pub fn smart_generic_constraints<F>(&mut self, processor: F) -> Result<()>
     where
@@ -222,6 +235,7 @@ where
 }
 
 /// 利用Rust 1.90改进associated type
+/// useRust 1.90improveassociated type
 pub trait ImprovedAssociatedTypes {
     type Input;
     type Output;

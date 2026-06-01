@@ -31,18 +31,23 @@ pub mod basic_generic_functions {
     use super::*;
 
     /// 交换后的元组类型别名
+    /// Swaps后的元组类型别名
     /// exchange after type
     pub type SwappedTuple<T, U> = (U, T);
 
     /// 泛型恒等函数 - 最简单的泛型函数示例
     /// generic etc. function - simple generic function example
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回相同类型的值
+    /// Returns相同类型的值
     /// type
     /// # 示例
+    /// # Examples
     /// # example
     /// let x = identity(42);
     /// let y = identity("hello");
@@ -54,16 +59,20 @@ pub mod basic_generic_functions {
     /// 泛型交换函数 - 展示泛型参数的使用
     /// generic exchange function - generic parameter
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// * `a` - 第一个值
     /// * `a` - first
     /// * `b` - 第二个值
     /// * `b` - second
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回交换后的元组 (b, a)
+    /// Returns交换后的元组 (b, a)
     /// exchange after (b, a)
     /// # 示例
+    /// # Examples
     /// # example
     /// let (x, y) = swap(1, 2);
     /// assert_eq!(x, 2);
@@ -77,17 +86,22 @@ pub mod basic_generic_functions {
     /// 泛型最大值函数 - 展示 trait 约束
     /// generic maximum function - trait
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// * `a` - 第一个值
     /// * `a` - first
     /// * `b` - 第二个值
     /// * `b` - second
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回较大的值
+    /// Returns较大的值
     /// # 约束
+    /// # Constraints
     /// #
     /// # 示例
+    /// # Examples
     /// # example
     /// let max_val = max(10, 20);
     /// assert_eq!(max_val, 20);
@@ -102,11 +116,14 @@ pub mod basic_generic_functions {
     /// 泛型打印函数 - 展示 Debug trait 约束
     /// generic function - Debug trait
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// # 约束
+    /// # Constraints
     /// #
     /// T 必须实现 Debug trait
     /// # 示例
+    /// # Examples
     /// # example
     /// print_debug(42);
     /// print_debug("hello");
@@ -121,15 +138,20 @@ pub mod basic_generic_functions {
     /// 泛型克隆函数 - 展示 Clone trait 约束
     /// generic function - Clone trait
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回克隆后的值
+    /// Returns克隆后的值
     /// after
     /// # 约束
+    /// # Constraints
     /// #
     /// T 必须实现 Clone trait
     /// # 示例
+    /// # Examples
     /// # example
     /// let original = vec![1, 2, 3];
     /// let cloned = clone_value(original);
@@ -188,11 +210,13 @@ pub mod generic_structs {
     /// 这是一个简单的泛型结构体，可以包装任意类型的值
     /// simple generic struct ，can type
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 被包装的值的类型
     /// * `T` - is type
     /// * `T` - is包装值type
     /// # 示例
+    /// # Examples
     /// # example
     /// let wrapper = Wrapper::new(42);
     /// let value = wrapper.get();
@@ -204,29 +228,38 @@ pub mod generic_structs {
 
     impl<T> Wrapper<T> {
         /// 创建新的包装器实例
+        /// Creates新的包装器实例
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn new(value: T) -> Self {
             Self { value }
         }
 
         /// 获取包装的值
+        /// Gets包装的值
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回包装的值的引用
+        /// Returns包装的值的引用
         /// reference
         pub fn get(&self) -> &T {
             &self.value
         }
 
         /// 获取包装的值（可变引用）
+        /// Gets包装的值（可变引用）
         /// （reference ）
         /// Get包装值（可变reference）
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回包装的值的可变引用
+        /// Returns包装的值的可变引用
         /// reference
         pub fn get_mut(&mut self) -> &mut T {
             &mut self.value
@@ -235,6 +268,7 @@ pub mod generic_structs {
         /// 解包并返回内部值
         /// and inside
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn unwrap(self) -> T {
             self.value
@@ -256,10 +290,12 @@ pub mod generic_structs {
     /// 这个结构体展示了一个简单的链表节点
     /// struct simple node
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 节点存储的数据类型
     /// * `T` - node type
     /// # 示例
+    /// # Examples
     /// # example
     /// let node = Node::new(42);
     /// ```
@@ -272,18 +308,23 @@ pub mod generic_structs {
 
     impl<T> Node<T> {
         /// 创建新的节点
+        /// Creates新的节点
         /// node
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn new(data: T) -> Self {
             Self { data, next: None }
         }
 
         /// 设置下一个节点
+        /// Sets下一个节点
         /// under node
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `next` - 下一个节点
         /// * `next` - under node
@@ -292,8 +333,10 @@ pub mod generic_structs {
         }
 
         /// 获取下一个节点的引用
+        /// Gets下一个节点的引用
         /// under node reference
         /// # 返回值
+        /// # Return Value
         /// # return value
         #[allow(clippy::type_complexity, mismatched_lifetime_syntaxes)]
         pub fn get_next(&self) -> NodeRef<T> {
@@ -302,18 +345,21 @@ pub mod generic_structs {
     }
 
     /// 交换后的对类型别名
+    /// Swaps后的对类型别名
     /// exchange after to type
     pub type SwappedPair<T, U> = Pair<U, T>;
 
     /// 泛型对结构体 - 展示多个类型参数
     /// generic to struct - type parameter
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 第一个值的类型
     /// * `T` - first type
     /// * `U` - 第二个值的类型
     /// * `U` - second type
     /// # 示例
+    /// # Examples
     /// # example
     /// let pair = Pair::new(42, "hello");
     /// ```
@@ -325,24 +371,30 @@ pub mod generic_structs {
 
     impl<T, U> Pair<T, U> {
         /// 创建新的对实例
+        /// Creates新的对实例
         /// to
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `first` - 第一个值
         /// * `first` - first
         /// * `second` - 第二个值
         /// * `second` - second
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn new(first: T, second: U) -> Self {
             Self { first, second }
         }
 
         /// 交换对中的值
+        /// Swaps对中的值
         /// exchange to in
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回交换后的新对
+        /// Returns交换后的新对
         /// exchange after to
         pub fn swap(self) -> SwappedPair<T, U> {
             Pair {
@@ -400,6 +452,7 @@ pub mod generic_enums {
     /// 泛型结果枚举 - 展示泛型枚举的基本用法
     /// generic result enum - generic enum this
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 成功值的类型
     /// * `T` - type
@@ -410,6 +463,7 @@ pub mod generic_enums {
     /// * `E` - 错误值type
     /// * `E` - type
     /// # 示例
+    /// # Examples
     /// # example
     /// let success: MyResult<i32, String> = MyResult::Ok(42);
     #[derive(Debug, Clone, PartialEq)]
@@ -420,29 +474,36 @@ pub mod generic_enums {
         /// 错误情况，包含错误信息
         /// situation ，error message
         /// 错误situation，Containserror message
+        /// errorsituation，Containserror message
         Err(E),
     }
 
     impl<T, E> MyResult<T, E> {
         /// 检查是否为成功结果
+        /// Checks是否为成功结果
         /// as result
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn is_ok(&self) -> bool {
             matches!(self, MyResult::Ok(_))
         }
 
         /// 检查是否为错误结果
+        /// Checks是否为错误结果
         /// as result
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn is_err(&self) -> bool {
             matches!(self, MyResult::Err(_))
         }
 
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回成功值
+        /// Returns成功值
         pub fn unwrap(self) -> T {
             match self {
                 MyResult::Ok(value) => value,
@@ -451,13 +512,17 @@ pub mod generic_enums {
         }
 
         /// 获取成功值，如果是错误则返回默认值
+        /// Gets成功值，如果是错误则返回默认值
         /// ，if
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `default` - 默认值
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回成功值或默认值
+        /// Returns成功值或默认值
         /// or
         pub fn unwrap_or(self, default: T) -> T {
             match self {
@@ -470,11 +535,13 @@ pub mod generic_enums {
     /// 泛型选项枚举 - 展示单参数泛型枚举
     /// generic enum - parameter generic enum
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 值的类型
     /// * `T` - type
     /// * `T` - 值type
     /// # 示例
+    /// # Examples
     /// # example
     /// let some: MyOption<i32> = MyOption::Some(42);
     /// let none: MyOption<i32> = MyOption::None;
@@ -493,22 +560,28 @@ pub mod generic_enums {
 
     impl<T> MyOption<T> {
         /// 检查是否有值
+        /// Checks是否有值
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn is_some(&self) -> bool {
             matches!(self, MyOption::Some(_))
         }
 
         /// 检查是否无值
+        /// Checks是否无值
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn is_none(&self) -> bool {
             matches!(self, MyOption::None)
         }
 
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回值
+        /// Returns值
         /// return value
         /// # Panics
         pub fn unwrap(self) -> T {
@@ -519,11 +592,14 @@ pub mod generic_enums {
         }
 
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `default` - 默认值
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回值或默认值
+        /// Returns值或默认值
         /// return value or
         pub fn unwrap_or(self, default: T) -> T {
             match self {
@@ -595,11 +671,13 @@ pub mod generic_methods {
     /// 这个结构体展示了一个简单的泛型容器
     /// struct simple generic
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 容器中存储的元素类型
     /// * `T` - in element type
     /// * `T` - 容器in存储elementtype
     /// # 示例
+    /// # Examples
     /// # example
     /// let mut container = Container::new();
     /// container.push(42);
@@ -619,9 +697,12 @@ pub mod generic_methods {
 
     impl<T> Container<T> {
         /// 创建新的空容器
+        /// Creates新的空容器
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回新的空容器
+        /// Returns新的空容器
         pub const fn new() -> Self {
             Self { items: Vec::new() }
         }
@@ -629,6 +710,7 @@ pub mod generic_methods {
         /// 向容器中添加元素
         /// in element
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `item` - 要添加element
         pub fn push(&mut self, item: T) {
@@ -638,25 +720,31 @@ pub mod generic_methods {
         /// 从容器中移除并返回最后一个元素
         /// from in and finally element
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn pop(&mut self) -> Option<T> {
             self.items.pop()
         }
 
         /// 获取容器中元素的数量
+        /// Gets容器中元素的数量
         /// in element quantity
         /// Get容器inelementquantity
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回元素数量
+        /// Returns元素数量
         /// element quantity
         pub fn len(&self) -> usize {
             self.items.len()
         }
 
         /// 检查容器是否为空
+        /// Checks容器是否为空
         /// as
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// if容器as空则Return true，否则Return false
         pub fn is_empty(&self) -> bool {
@@ -664,14 +752,18 @@ pub mod generic_methods {
         }
 
         /// 获取指定索引处的元素引用
+        /// Gets指定索引处的元素引用
         /// element reference
         /// Get指定索引处elementreference
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `index` - 索引
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回元素引用，如果索引无效则返回 None
+        /// Returns元素引用，如果索引无效则返回 None
         /// element reference ，if ineffective None
         #[allow(clippy::type_complexity, mismatched_lifetime_syntaxes)]
         pub fn get(&self, index: usize) -> ContainerElementRef<T> {
@@ -679,13 +771,17 @@ pub mod generic_methods {
         }
 
         /// 获取指定索引处的元素可变引用
+        /// Gets指定索引处的元素可变引用
         /// element reference
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `index` - 索引
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回元素可变引用，如果索引无效则返回 None
+        /// Returns元素可变引用，如果索引无效则返回 None
         /// element reference ，if ineffective None
         #[allow(clippy::type_complexity, mismatched_lifetime_syntaxes)]
         pub fn get_mut(&mut self, index: usize) -> ContainerElementMutRef<T> {
@@ -697,12 +793,16 @@ pub mod generic_methods {
     /// as type method
     impl Container<String> {
         /// 连接所有字符串元素
+        /// Joins所有字符串元素
         /// all element
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回连接后的字符串
+        /// Returns the concatenated string
         /// after
         /// # 示例
+        /// # Examples
         /// # example
         /// let mut container = Container::new();
         /// container.push("Hello".to_string());
@@ -715,13 +815,17 @@ pub mod generic_methods {
         }
 
         /// 连接所有字符串元素，使用指定分隔符
+        /// Joins所有字符串元素，使用指定分隔符
         /// all element ，
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `separator` - 分隔符
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回连接后的字符串
+        /// Returns the concatenated string
         /// after
         pub fn join_with(&self, separator: &str) -> String {
             self.items.join(separator)
@@ -733,11 +837,14 @@ pub mod generic_methods {
         T: Clone + PartialEq,
     {
         /// 查找指定元素的位置
+        /// Finds指定元素的位置
         /// element position
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `item` - 要Findelement
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// Returnelementposition，if未找to则Return None
         pub fn find(&self, item: &T) -> Option<usize> {
@@ -745,11 +852,14 @@ pub mod generic_methods {
         }
 
         /// 检查容器是否包含指定元素
+        /// Checks容器是否包含指定元素
         /// element
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `item` - 要Checkelement
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 如果包含则返回 true，否则返回 false
         /// if true， false
@@ -760,9 +870,11 @@ pub mod generic_methods {
         /// 移除指定元素
         /// element
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `item` - 要移除element
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn remove_item(&mut self, item: &T) -> bool {
             if let Some(pos) = self.find(item) {
@@ -834,14 +946,18 @@ pub mod lifetime_parameters {
     /// 这个结构体展示如何在泛型中使用生命周期参数
     /// struct in generic in lifetime parameter
     /// # 生命周期参数
+    /// # Lifetime Parameters
     /// # lifetime parameter
     /// * `'a` - 引用的生命周期
+    /// * `'a` - Lifetime of the reference
     /// * `'a` - reference lifetime
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 引用的值的类型
     /// * `T` - reference type
     /// # 示例
+    /// # Examples
     /// # example
     /// let value = 42;
     /// let wrapper = RefWrapper::new(&value);
@@ -853,22 +969,28 @@ pub mod lifetime_parameters {
 
     impl<'a, T> RefWrapper<'a, T> {
         /// 创建新的引用包装器
+        /// Creates新的引用包装器
         /// reference
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `value` - 要包装reference
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn new(value: &'a T) -> Self {
             Self { value }
         }
 
         /// 获取包装的引用
+        /// Gets包装的引用
         /// reference
         /// Get包装reference
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回包装的引用
+        /// Returns包装的引用
         /// reference
         pub fn get(&self) -> &'a T {
             self.value
@@ -876,28 +998,37 @@ pub mod lifetime_parameters {
     }
 
     /// 比较两个引用的函数
+    /// Compares两个引用的函数
     /// reference function
     /// # 生命周期参数
+    /// # Lifetime Parameters
     /// # lifetime parameter
     /// * `'a` - 引用的生命周期
+    /// * `'a` - Lifetime of the reference
     /// * `'a` - reference lifetime
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 比较的值的类型
     /// * `T` - type
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// * `a` - 第一个引用
     /// * `a` - first reference
     /// * `b` - 第二个引用
     /// * `b` - second reference
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回较长的引用
+    /// Returns the longer reference
     /// reference
     /// # 约束
+    /// # Constraints
     /// #
     /// # 示例
+    /// # Examples
     /// # example
     /// let x = 10;
     /// let y = 20;
@@ -911,23 +1042,31 @@ pub mod lifetime_parameters {
     }
 
     /// 创建引用包装器的函数
+    /// Creates引用包装器的函数
     /// reference function
     /// # 生命周期参数
+    /// # Lifetime Parameters
     /// # lifetime parameter
     /// * `'a` - 引用的生命周期
+    /// * `'a` - Lifetime of the reference
     /// * `'a` - reference lifetime
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 值的类型
     /// * `T` - type
     /// * `T` - 值type
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回引用包装器
+    /// Returns引用包装器
     /// reference
     /// # 示例
+    /// # Examples
     /// # example
     /// let value = 42;
     /// let wrapper = create_wrapper(&value);
@@ -939,18 +1078,21 @@ pub mod lifetime_parameters {
     /// 泛型结构体，包含多个生命周期参数
     /// generic struct ，lifetime parameter
     /// # 生命周期参数
+    /// # Lifetime Parameters
     /// # lifetime parameter
     /// * `'a` - 第一个引用的生命周期
     /// * `'a` - first reference lifetime
     /// * `'b` - 第二个引用的生命周期
     /// * `'b` - second reference lifetime
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 第一个值的类型
     /// * `T` - first type
     /// * `U` - 第二个值的类型
     /// * `U` - second type
     /// # 示例
+    /// # Examples
     /// # example
     /// let x = 42;
     /// let y = "hello";
@@ -964,34 +1106,43 @@ pub mod lifetime_parameters {
 
     impl<'a, 'b, T, U> RefPair<'a, 'b, T, U> {
         /// 创建新的引用对
+        /// Creates新的引用对
         /// reference to
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `first` - 第一个引用
         /// * `first` - first reference
         /// * `second` - 第二个引用
         /// * `second` - second reference
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn new(first: &'a T, second: &'b U) -> Self {
             Self { first, second }
         }
 
         /// 获取第一个引用
+        /// Gets第一个引用
         /// first reference
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回第一个引用
+        /// Returns第一个引用
         /// first reference
         pub fn first(&self) -> &'a T {
             self.first
         }
 
         /// 获取第二个引用
+        /// Gets第二个引用
         /// second reference
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回第二个引用
+        /// Returns第二个引用
         /// second reference
         pub fn second(&self) -> &'b U {
             self.second
@@ -1045,16 +1196,21 @@ pub mod generic_trait_impls {
     /// 可Compare trait
     pub trait Comparable<T> {
         /// 比较两个值
+        /// Compares两个值
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回比较结果
+        /// Returns比较结果
         /// result
         fn compare(&self, other: &T) -> ComparisonResult;
     }
 
     /// 比较结果枚举
+    /// Compares结果枚举
     /// result enum
     #[derive(Debug, Clone, PartialEq)]
     pub enum ComparisonResult {
@@ -1069,6 +1225,7 @@ pub mod generic_trait_impls {
     }
 
     /// as整数Implementation of Comparable trait
+    /// asintegerImplementation of Comparable trait
     impl Comparable<i32> for i32 {
         fn compare(&self, other: &i32) -> ComparisonResult {
             if self < other {
@@ -1082,6 +1239,7 @@ pub mod generic_trait_impls {
     }
 
     /// as字符串Implementation of Comparable trait
+    /// asstringImplementation of Comparable trait
     impl Comparable<String> for String {
         fn compare(&self, other: &String) -> ComparisonResult {
             match self.cmp(other) {
@@ -1095,23 +1253,29 @@ pub mod generic_trait_impls {
     /// 泛型比较函数
     /// generic function
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 比较的值的类型
     /// * `T` - type
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// * `a` - 第一个值
     /// * `a` - first
     /// * `b` - 第二个值
     /// * `b` - second
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回比较结果
+    /// Returns比较结果
     /// result
     /// # 约束
+    /// # Constraints
     /// #
     /// T 必须实现 `Comparable<T>` trait
     /// # 示例
+    /// # Examples
     /// # example
     /// let result = compare_values(10, 20);
     /// ```
@@ -1127,10 +1291,13 @@ pub mod generic_trait_impls {
     /// 可conversion trait
     pub trait Convertible<T> {
         /// 转换为目标类型
+        /// Converts为目标类型
         /// conversion as goal type
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回转换后的值
+        /// Returns转换后的值
         /// conversion after
         fn convert(self) -> T;
     }
@@ -1154,22 +1321,29 @@ pub mod generic_trait_impls {
     /// 泛型转换函数
     /// generic conversion function
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 源类型
     /// * `T` - type
     /// * `T` - 源type
     /// * `U` - 目标类型
+    /// * `U` - targettype
     /// * `U` - goal type
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回转换后的值
+    /// Returns转换后的值
     /// conversion after
     /// # 约束
+    /// # Constraints
     /// #
     /// T 必须实现 `Convertible<U>` trait
     /// # 示例
+    /// # Examples
     /// # example
     /// let result: String = convert_value(42);
     /// ```
@@ -1227,10 +1401,12 @@ pub mod advanced_patterns {
     /// 这个结构体用于在类型系统中标记不同的状态
     /// struct in type system in mark state
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 标记的类型
     /// * `T` - mark type
     /// # 示例
+    /// # Examples
     /// # example
     /// let marker = TypeMarker::<String>::new();
     /// ```
@@ -1247,8 +1423,10 @@ pub mod advanced_patterns {
 
     impl<T> TypeMarker<T> {
         /// 创建新的类型标记
+        /// Creates新的类型标记
         /// type mark
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub const fn new() -> Self {
             Self {
@@ -1262,13 +1440,18 @@ pub mod advanced_patterns {
     /// 这个结构体展示了一个简单的状态机
     /// struct simple state machine
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `State` - 状态类型
+    /// * `State` - statetype
     /// * `State` - state type
     /// * `Data` - 数据类型
+    /// * `Data` - datatype
     /// * `Data` - type
     /// * `Data` - 数据type
+    /// * `Data` - datatype
     /// # 示例
+    /// # Examples
     /// # example
     /// let state_machine = StateMachine::<Idle, i32>::new(42);
     /// ```
@@ -1290,18 +1473,23 @@ pub mod advanced_patterns {
     pub struct Running;
 
     /// 停止状态标记
+    /// Stops状态标记
     /// state mark
     #[derive(Debug, Clone, PartialEq)]
     pub struct Stopped;
 
     impl<State, Data> StateMachine<State, Data> {
         /// 创建新的状态机
+        /// Creates新的状态机
         /// state machine
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `data` - 初始数据
+        /// * `data` - initialdata
         /// * `data` -
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub fn new(data: Data) -> Self {
             Self {
@@ -1311,32 +1499,42 @@ pub mod advanced_patterns {
         }
 
         /// 获取数据
+        /// Gets data
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回数据的引用
+        /// Returns数据的引用
         /// reference
         pub fn data(&self) -> &Data {
             &self.data
         }
 
         /// 获取数据（可变引用）
+        /// Gets数据（可变引用）
         /// （reference ）
         /// Get数据（可变reference）
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回数据的可变引用
+        /// Returns数据的可变引用
         /// reference
         pub fn data_mut(&mut self) -> &mut Data {
             &mut self.data
         }
 
         /// 获取状态标记
+        /// Gets状态标记
         /// state mark
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回状态标记的引用
+        /// Returns状态标记的引用
         /// state mark reference
         /// # 注意
+        /// # Notes
         /// #
         /// 这个方法主要用于访问状态信息，解决 dead_code 警告
         /// method main state ， dead_code warning
@@ -1349,10 +1547,13 @@ pub mod advanced_patterns {
     /// as state method
     impl<Data> StateMachine<Idle, Data> {
         /// 启动状态机
+        /// Starts状态机
         /// state machine
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回运行状态的状态机
+        /// Returns运行状态的状态机
         /// Run state state machine
         pub fn start(self) -> StateMachine<Running, Data> {
             StateMachine {
@@ -1366,10 +1567,13 @@ pub mod advanced_patterns {
     /// as Run state method
     impl<Data> StateMachine<Running, Data> {
         /// 停止状态机
+        /// Stops状态机
         /// state machine
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回停止状态的状态机
+        /// Returns停止状态的状态机
         /// state state machine
         pub fn stop(self) -> StateMachine<Stopped, Data> {
             StateMachine {
@@ -1383,10 +1587,13 @@ pub mod advanced_patterns {
     /// as state method
     impl<Data> StateMachine<Stopped, Data> {
         /// 重置状态机
+        /// Resets状态机
         /// state machine
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回空闲状态的状态机
+        /// Returns空闲状态的状态机
         /// state state machine
         pub fn reset(self) -> StateMachine<Idle, Data> {
             StateMachine {
@@ -1401,11 +1608,13 @@ pub mod advanced_patterns {
     /// 这个结构体展示了一个泛型构建器
     /// struct generic builder
     /// # 类型参数
+    /// # Type Parameters
     /// # type parameter
     /// * `T` - 构建的目标类型
     /// * `T` - goal type
     /// * `T` - 构建goaltype
     /// # 示例
+    /// # Examples
     /// # example
     /// let builder = Builder::<String>::new();
     /// let result = builder.append("Hello").append(" ").append("World").build();
@@ -1423,8 +1632,10 @@ pub mod advanced_patterns {
 
     impl<T> Builder<T> {
         /// 创建新的构建器
+        /// Creates新的构建器
         /// builder
         /// # 返回值
+        /// # Return Value
         /// # return value
         pub const fn new() -> Self {
             Self { parts: Vec::new() }
@@ -1433,11 +1644,14 @@ pub mod advanced_patterns {
         /// 添加部分
         /// part
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `part` - 要添加part
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回构建器本身，支持链式调用
+        /// Returns构建器本身，支持链式调用
         /// builder this ，
         pub fn append(mut self, part: T) -> Self {
             self.parts.push(part);
@@ -1450,8 +1664,10 @@ pub mod advanced_patterns {
     impl Builder<String> {
         /// 构建字符串
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回连接后的字符串
+        /// Returns the concatenated string
         /// after
         pub fn build(self) -> String {
             self.parts.join("")
@@ -1459,11 +1675,14 @@ pub mod advanced_patterns {
 
         /// 使用分隔符构建字符串
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `separator` - 分隔符
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回连接后的字符串
+        /// Returns the concatenated string
         /// after
         pub fn build_with_separator(self, separator: &str) -> String {
             self.parts.join(separator)
@@ -1476,8 +1695,10 @@ pub mod advanced_patterns {
         /// 构建整数（求和）
         /// （and ）
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回所有整数的和
+        /// Returns所有整数的和
         /// all and
         pub fn build(self) -> i32 {
             self.parts.iter().sum()
@@ -1486,8 +1707,10 @@ pub mod advanced_patterns {
         /// 构建整数（求积）
         /// （）
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回所有整数的积
+        /// Returns所有整数的积
         /// all
         pub fn build_product(self) -> i32 {
             self.parts.iter().product()
@@ -1566,15 +1789,19 @@ pub mod rust_189_new_features {
         /// 数组求和函数 - 展示常量泛型推断
         /// and function - constant generic infer
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `arr` - 长度为 N 的整数数组
         /// * `arr` - as N
         /// * `arr` - 长度as N 整数array
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回数组元素之和
+        /// Returns数组元素之和
         /// element 's and
         /// # 示例
+        /// # Examples
         /// # example
         /// let arr = [1, 2, 3, 4, 5];
         /// let sum = array_sum::<_>(arr); // 编译器自动推断 N = 5
@@ -1586,12 +1813,15 @@ pub mod rust_189_new_features {
         /// 数组乘法函数 - 展示常量泛型推断
         /// function - constant generic infer
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `arr` - 长度为 N 的浮点数数组
         /// * `arr` - as N point
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回数组元素的乘积
+        /// Returns数组元素的乘积
         /// element
         pub fn array_product<const N: usize>(arr: [f64; N]) -> f64 {
             arr.iter().product()
@@ -1600,9 +1830,12 @@ pub mod rust_189_new_features {
         /// 矩阵转置函数 - 展示多维常量泛型推断
         /// function - constant generic infer
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `matrix` - ROWS x COLS 矩阵
+        /// * `matrix` - ROWS x COLS matrix
         /// # 返回值
+        /// # Return Value
         /// # return value
         #[allow(clippy::excessive_nesting, clippy::needless_range_loop)]
         pub fn transpose_matrix<const ROWS: usize, const COLS: usize>(
@@ -1630,6 +1863,7 @@ pub mod rust_189_new_features {
 
         impl<T: Default + Copy, const N: usize> FixedVector<T, N> {
             /// 创建零向量
+            /// Creates零向量
             pub fn zero() -> Self {
                 Self {
                     data: [T::default(); N],
@@ -1637,17 +1871,20 @@ pub mod rust_189_new_features {
             }
 
             /// 创建新向量
+            /// Creates新向量
             pub fn new(data: [T; N]) -> Self {
                 Self { data }
             }
 
             /// 获取元素
+            /// Gets an element
             /// element
             pub fn get(&self, index: usize) -> Option<&T> {
                 self.data.get(index)
             }
 
             /// 设置元素
+            /// Sets an element
             /// element
             #[allow(clippy::excessive_nesting)]
             pub fn set(&mut self, index: usize, value: T) -> bool {
@@ -1660,6 +1897,7 @@ pub mod rust_189_new_features {
             }
 
             /// 向量加法
+            /// vectoraddition
             #[allow(clippy::excessive_nesting, clippy::needless_range_loop)]
             pub fn add<U>(&self, other: &FV<U, N>) -> FV<T, N>
             where
@@ -1726,20 +1964,26 @@ pub mod rust_189_new_features {
         /// 正确的生命周期语法示例
         /// lifetime example
         /// # 生命周期参数
+        /// # Lifetime Parameters
         /// # lifetime parameter
         /// * `'a` - 引用的生命周期
+        /// * `'a` - Lifetime of the reference
         /// * `'a` - reference lifetime
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `x` - 第一个引用
         /// * `x` - first reference
         /// * `y` - 第二个引用
         /// * `y` - second reference
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回较长的引用
+        /// Returns the longer reference
         /// reference
         /// # 注意
+        /// # Notes
         /// #
         /// 这个函数展示了正确的生命周期语法，所有参数都使用显式生命周期标注
         /// function lifetime ，all parameter lifetime
@@ -1750,16 +1994,20 @@ pub mod rust_189_new_features {
         /// 省略生命周期语法的示例
         /// lifetime example
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `x` - 第一个引用
         /// * `x` - first reference
         /// * `y` - 第二个引用
         /// * `y` - second reference
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回较长的引用
+        /// Returns the longer reference
         /// reference
         /// # 注意
+        /// # Notes
         /// #
         /// 这个函数展示了省略生命周期语法的正确使用
         /// function lifetime
@@ -1768,10 +2016,12 @@ pub mod rust_189_new_features {
         }
 
         /// # 生命周期参数
+        /// # Lifetime Parameters
         /// # lifetime parameter
         /// * `'a` - 第一个引用的生命周期
         /// * `'a` - first reference lifetime
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `x` - 使用显式生命周期的引用
         /// * `x` - lifetime reference
@@ -1780,10 +2030,13 @@ pub mod rust_189_new_features {
         /// * `y` - lifetime reference
         /// * `y` - Use省略lifetimereference
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回较长的引用
+        /// Returns the longer reference
         /// reference
         /// # 注意
+        /// # Notes
         /// #
         /// 这个函数会产生 `mismatched_lifetime_syntaxes` lint 警告
         /// 建议统一使用显式或省略的生命周期语法
@@ -1796,22 +2049,27 @@ pub mod rust_189_new_features {
         /// 复杂生命周期推断示例
         /// complex lifetime infer example
         /// # 生命周期参数
+        /// # Lifetime Parameters
         /// # lifetime parameter
         /// * `'a` - 第一个引用的生命周期
         /// * `'a` - first reference lifetime
         /// * `'b` - 第二个引用的生命周期
         /// * `'b` - second reference lifetime
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `first` - 第一个引用
         /// * `first` - first reference
         /// * `_second` - 第二个引用（未使用）
         /// * `_second` - second reference （）
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回第一个引用
+        /// Returns第一个引用
         /// first reference
         /// # 约束
+        /// # Constraints
         /// #
         /// 'a 必须比 'b 长
         /// 'a must 'b
@@ -1870,12 +2128,16 @@ pub mod rust_189_new_features {
         /// 智能类型推断示例
         /// type infer example
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回处理后的数据
+        /// Returns处理后的数据
         /// after
         /// # 注意
+        /// # Notes
         /// #
         /// Rust 1.89 可以更好地推断复杂泛型类型
         /// Rust 1.89 can infer complex generic type
@@ -1890,14 +2152,19 @@ pub mod rust_189_new_features {
         /// 复杂类型推断场景
         /// complex type infer scenario
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `items` - 项目列表
+        /// * `items` - projectlist
         /// * `items` - project
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回处理后的项目列表
+        /// Returns处理后的项目列表
         /// after project
         /// # 注意
+        /// # Notes
         /// #
         pub fn complex_inference<T, U, F>(items: Vec<T>, processor: F) -> Vec<U>
         where
@@ -1910,14 +2177,18 @@ pub mod rust_189_new_features {
         /// 嵌套类型推断示例
         /// type infer example
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `data` - 嵌套数据结构
         /// * `data` - data structure
         /// * `data` - 嵌套data structure
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 返回扁平化的数据
+        /// Returns扁平化的数据
         /// # 注意
+        /// # Notes
         /// #
         pub fn nested_inference<T>(data: Vec<Vec<Option<T>>>) -> Vec<T>
         where
@@ -1929,15 +2200,19 @@ pub mod rust_189_new_features {
         /// 条件类型推断示例
         /// condition type infer example
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// * `condition` - 条件
+        /// * `condition` - condition
         /// * `true_value` - 真值
         /// * `false_value` - 假值
         /// # 返回值
+        /// # Return Value
         /// # return value
         /// 根据条件返回相应的值
         /// according to condition
         /// # 注意
+        /// # Notes
         /// #
         pub fn conditional_inference<T>(condition: bool, true_value: T, false_value: T) -> T {
             if condition { true_value } else { false_value }
@@ -1982,6 +2257,7 @@ pub mod rust_189_new_features {
     }
 
     /// 综合演示函数
+    /// Comprehensive demonstration function
     /// synthesize demonstration function
     /// 展示所有 Rust 1.89 新特性
     /// all Rust 1.89 feature
@@ -2016,6 +2292,7 @@ pub mod rust_189_new_features {
 }
 
 /// 演示函数 - 展示所有基础语法功能
+/// Demonstrates函数 - 展示所有基础语法功能
 /// demonstration function - all foundation functionality
 /// 这个函数展示了本模块中所有基础语法功能的使用
 /// function this module in all foundation functionality

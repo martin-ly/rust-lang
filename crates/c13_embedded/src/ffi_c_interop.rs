@@ -1,4 +1,5 @@
 //! C 语言互操作 (FFI)
+//! C operation (FFI)
 //! C (FFI)
 //! Rust 可以无缝调用 C 代码，也可以被 C 代码调用。
 //! Rust can C ，can is C 。
@@ -273,9 +274,11 @@ pub enum GpioRegister {
     /// GPIO on /under
     Pull = 0x4002_000C,
     /// GPIO 输入数据寄存器
+    /// GPIO input data
     /// GPIO
     InputData = 0x4002_0010,
     /// GPIO 输出数据寄存器
+    /// GPIO data
     /// GPIO
     OutputData = 0x4002_0014,
 }

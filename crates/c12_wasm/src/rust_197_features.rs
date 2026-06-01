@@ -36,6 +36,7 @@ impl Rust197WasmFeatures {
     }
 
     /// 通过切片视图避免额外的分支和内存分配。
+    /// graph outside and memory 。
     /// outside and memory 。
     pub fn option_as_slice_for_wasm<T>(opt: &Option<T>) -> &[T] {
         opt.as_slice()

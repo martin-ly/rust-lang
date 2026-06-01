@@ -1,4 +1,5 @@
 //! Rust 1.90 高级综合演示程序 (历史版本)
+//! Rust 1.90 high synthesize demonstration program (this )
 //! Rust 1.90 synthesize demonstration program (this )
 //! Rust 1.90 高级synthesizedemonstration program (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
@@ -9,6 +10,7 @@
 //! - async microservice architecture
 //! - 企业级asyncmicroservicearchitecture
 //! - 高性能数据处理管道
+//! - high performance data pipe
 //! - performance pipe
 //! - 智能资源管理系统
 //! - system
@@ -221,6 +223,7 @@ async fn demonstrate_microservices_architecture() -> Result<()> {
 }
 
 /// 数据处理平台演示
+/// data platform demonstration
 /// platform demonstration
 #[allow(unused)]
 #[allow(unused_variables)]

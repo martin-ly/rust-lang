@@ -36,6 +36,7 @@ pub trait Animal {
 /// 狗 trait Example of，继承自 Animal
 pub trait Dog: Animal {
     /// 让狗叫
+    /// let dog bark
     fn bark(&self);
 }
 
@@ -73,6 +74,7 @@ mod tests {
 
 /// # 安全function `#[target_feature]`
 /// Rust 1.86.0 允许在安全函数上使用 ``#[target_feature]``，
+/// Rust 1.86.0 allow in function on ``#[target_feature]``，
 /// Rust 1.86.0 in function on ``#[target_feature]``，
 /// ## 之前限制
 /// ## 's before
@@ -83,6 +85,7 @@ mod tests {
 /// ## 现在
 /// ## present
 /// 安全函数 + ``#[target_feature]`` 组合允许，但调用点必须在 `unsafe` 块中。
+/// function + ``#[target_feature]`` combination allow ，but point must in `unsafe` in 。
 /// function + ``#[target_feature]`` combination ，but point must in `unsafe` in 。
 ///
 /// 调用者必须通过 `is_x86_feature_detected!("sse2")` 等方式

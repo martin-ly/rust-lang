@@ -61,10 +61,12 @@ pub type IteratorType<T> = Box<dyn Iterator<Item = T> + Send>;
 pub type ParIteratorType<T> = rayon::slice::Iter<'static, T>;
 
 /// 映射函数类型别名
+/// Maps函数类型别名
 /// function type
 pub type MapFn<T, U> = Box<dyn Fn(T) -> U + Send + Sync>;
 
 /// 过滤函数类型别名
+/// Filters函数类型别名
 /// function type
 pub type FilterFn<T> = Box<dyn Fn(&T) -> bool + Send + Sync>;
 
@@ -85,6 +87,7 @@ pub type GenericResult<T, E = String> = Result<T, E>;
 pub type AppResult<T> = Result<T, String>;
 
 /// 处理结果类型别名
+/// Processes结果类型别名
 /// result type
 pub type ProcessResult<T> = Result<T, String>;
 
@@ -109,10 +112,12 @@ pub type MemoryData = Vec<Vec<u8>>;
 pub type SortableVec = Vec<i32>;
 
 /// 哈希集合类型别名
+/// Hashes集合类型别名
 /// set type
 pub type HashSetType<T> = HashSet<T>;
 
 /// 哈希映射类型别名
+/// Hashes映射类型别名
 /// type
 pub type HashMapType<K, V> = HashMap<K, V>;
 
@@ -150,22 +155,27 @@ pub type AsyncReceiver<T> = std::sync::mpsc::Receiver<T>;
 // =============================================================================
 
 /// 处理器类型别名
+/// Processes器类型别名
 /// type
 pub type Processor<T, R> = Box<dyn Fn(T) -> R + Send + Sync>;
 
 /// 验证器类型别名
+/// Validates器类型别名
 /// type
 pub type Validator<T> = Box<dyn Fn(&T) -> bool + Send + Sync>;
 
 /// 转换器类型别名
+/// Converts器类型别名
 /// conversion type
 pub type Converter<T, U> = Box<dyn Fn(T) -> U + Send + Sync>;
 
 /// 序列化器类型别名
+/// Serializes器类型别名
 /// sequence type
 pub type Serializer<T> = Box<dyn Fn(&T) -> Result<String, String> + Send + Sync>;
 
 /// 反序列化器类型别名
+/// Deserializes器类型别名
 /// sequence type
 pub type Deserializer<T> = Box<dyn Fn(&str) -> Result<T, String> + Send + Sync>;
 
@@ -551,18 +561,22 @@ pub type GenericError = String;
 pub type AppError = String;
 
 /// 处理错误类型别名
+/// Processes错误类型别名
 /// error type
 pub type ProcessError = String;
 
 /// 验证错误类型别名
+/// Validates错误类型别名
 /// error type
 pub type ValidationError = String;
 
 /// 序列化错误类型别名
+/// Serializes错误类型别名
 /// sequence error type
 pub type SerializationError = String;
 
 /// 反序列化错误类型别名
+/// Deserializes错误类型别名
 /// sequence error type
 pub type DeserializationError = String;
 

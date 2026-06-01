@@ -19,6 +19,7 @@ use wasm_bindgen::prelude::*;
 /// # 组件模型概述
 /// #
 /// 实现了真正的语言无关、类型安全的跨组件互操作。
+/// 、type operation 。
 /// 、type 。
 #[derive(Default)]
 pub struct ComponentModelOverview;

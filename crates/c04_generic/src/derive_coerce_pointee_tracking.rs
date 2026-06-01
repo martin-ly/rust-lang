@@ -6,11 +6,14 @@
 //! **相关feature**: Arbitrary Self Types v2, Field Projections, Smart Pointer ergonomics
 //! **来源**: [Rust Project Goals 2026 — Beyond the &] · [Arbitrary Self Types v2 跟踪]
 //! **source**: [Rust Project Goals 2026 — Beyond the &] · [Arbitrary Self Types v2 跟踪]
+//! **source**: [Rust Project Goals 2026 — Beyond the &] · [Arbitrary Self Types v2 trace]
 //! # 概念定义
+//! # conceptdefinition
 //! # concept definition
 //! let rc = Rc::new(5);         let rc: Rc<i32> = &5;  // 自动强制转换
 //! let rc = Rc::new(5); let rc: Rc<i32> = &5; // 自动强制conversion
 //!                              // 或
+//!                              // or
 //!                              // or
 //!                              foo(&5);  // &i32 → Rc<i32>
 //! ```
@@ -18,6 +21,7 @@
 //! | `Arc<str>` 从 `&str` 构造 | `Arc::from("hello")` | `let s: Arc<str> = "hello";` |
 //! | `Arc<str>` from `&str` 构造 | `Arc::from("hello")` | `let s: Arc<str> = "hello";` |
 //! | `Box<dyn Trait>` 从具体类型 | `Box::new(x) as Box<dyn Trait>` | `let b: Box<dyn Trait> = &x;` |
+//! | `Box<dyn Trait>` fromconcretetype | `Box::new(x) as Box<dyn Trait>` | `let b: Box<dyn Trait> = &x;` |
 //! | `Rc<Path>` 从 `&Path` | `Rc::from(path)` | 自动强制 |
 //! | `Rc<Path>` from `&Path` | `Rc::from(path)` | 自动强制 |
 //! # 设计状态（2026-05）
@@ -25,13 +29,16 @@
 //! | 里程碑 | 状态 | 预计 |
 //! | | state | |
 //! | 设计讨论 | 🟡 活跃 | — |
+//! | Design discussion | 🟡 Active | — |
 //! | design | 🟡 | — |
 //! | RFC 提交 | 🔴 待完成 | 2026 H2 |
 //! | RFC | 🔴 | 2026 H2 |
 //! | 原型实现 | 🔴 无 | — |
+//! | Prototype implementation | 🔴 None | — |
 //! | | 🔴 | — |
 //! | 原型Implementation of | 🔴 无 | — |
 //! | 稳定化 | 🔴 远期 | 2027+ |
+//! | Stabilization | 🔴 Long-term | 2027+ |
 //! | | 🔴 far-term | 2027+ |
 //! | 稳定化 | 🔴 far-term | 2027+ |
 //! # and Field Projections 关系
@@ -42,6 +49,7 @@
 //! │ Pin 投影已稳定 │ 仍indesignin │
 //!
 //! # 参考
+//! # References
 //! # reference
 //! - [Rust Project Goals: Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 //! - [Arbitrary Self Types v2 设计文档]
@@ -53,6 +61,7 @@
 //! > **最后更新**: 2026-05-21
 //! > **finally **: 2026-05-21
 //! > **状态**: 🟡 跟踪观察
+//! > **Status**: 🟡 Tracking
 //! > **state **: 🟡
 //! > **state**: 🟡 跟踪观察
 //! > **state**: 🟡

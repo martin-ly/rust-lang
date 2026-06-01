@@ -1,14 +1,19 @@
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - 改进const generics
+//! - improveconst generics
 //! - 更好的生命周期推断
 //! - lifetime infer
 //! - 更好lifetimeinfer
+//! - betterlifetimeinfer
 //! - 改进的错误处理
 //! - error handling
 //! - 改进error handling
+//! - improveerror handling
 //! - 新的标准库特性
 //! - standard library feature
 //! - 新standardlibraryfeature
@@ -18,6 +23,7 @@ use tokio::time::sleep;
 use anyhow::Result;
 
 /// 利用Rust 1.90改进const generics
+/// useRust 1.90improveconst generics
 pub struct ConstGenericArray<T, const N: usize> {
     data: [T; N],
     current_index: usize,
@@ -69,6 +75,7 @@ impl<T: Default + Copy, const N: usize> ConstGenericArray<T, N> {
 }
 
 /// 利用Rust 1.90改进lifetimeinfer
+/// useRust 1.90improvelifetimeinfer
 pub struct LifetimeOptimized<'a, T> {
     data: &'a T,
     metadata: HashMap<String, String>,
@@ -83,8 +90,10 @@ impl<'a, T> LifetimeOptimized<'a, T> {
     }
 
     /// 演示改进的生命周期推断
+    /// Demonstrates改进的生命周期推断
     /// demonstration lifetime infer
     /// Demonstration of改进lifetimeinfer
+    /// Demonstration ofimprovelifetimeinfer
     /// 在Rust 1.90中，编译器能够更好地推断生命周期
     /// in Rust 1.90in ，can infer lifetime
     pub fn process_with_improved_lifetimes(&self, key: &str, value: &str) -> Result<&'a T> {
@@ -101,6 +110,7 @@ impl<'a, T> LifetimeOptimized<'a, T> {
     }
 
     /// 演示更智能的生命周期分析
+    /// Demonstrates更智能的生命周期分析
     /// demonstration lifetime analyze
     /// Demonstration of更智能lifetimeanalysis
     pub fn smart_lifetime_analysis(&self, inputs: &[&str]) -> Vec<&'a T> {
@@ -134,6 +144,7 @@ impl<T: std::fmt::Display + Clone> OptimizedTrait<T> for LifetimeOptimized<'_, T
 }
 
 /// 利用Rust 1.90改进error handling
+/// useRust 1.90improveerror handling
 pub struct ErrorHandling190 {
     error_count: std::sync::atomic::AtomicUsize,
     success_count: std::sync::atomic::AtomicUsize,
@@ -154,8 +165,10 @@ impl ErrorHandling190 {
     }
 
     /// 演示改进的错误处理
+    /// Demonstrates改进的错误处理
     /// demonstration error handling
     /// Demonstration of改进error handling
+    /// Demonstration ofimproveerror handling
     pub async fn process_with_improved_error_handling<T, F, R>(
         &self,
         input: T,
@@ -217,6 +230,7 @@ impl StandardLibrary190 {
     }
 
     /// 演示新的标准库特性
+    /// Demonstrates新的标准库特性
     /// demonstration standard library feature
     /// Demonstration of新standardlibraryfeature
     pub async fn process_with_new_stdlib_features(&mut self, key: String, value: Vec<u8>) -> Result<String> {
@@ -248,6 +262,7 @@ impl StandardLibrary190 {
     }
 
     /// 获取缓存统计
+    /// Gets缓存统计
     /// Get cache stats
     pub fn get_cache_stats(&self) -> (usize, usize) {
         (self.data.len(), self.cache.len())

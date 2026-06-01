@@ -9,10 +9,12 @@
 //! - 服务间通信
 //! -
 //! - 熔断器模式
+//! - circuit breaker
 //! -
 //! - 分布式追踪
 //! - distribution
 //! - 配置管理
+//! - configuration
 //! -
 //! - 健康检查
 //! - health check
@@ -236,6 +238,7 @@ impl LoadBalancer {
 }
 
 /// 熔断器
+/// circuit breaker
 pub struct CircuitBreaker {
     #[allow(dead_code)]
     failure_threshold: u32,

@@ -30,6 +30,7 @@ impl NetDiagnostics {
     }
 
     /// TCP 连通性检测（带超时）
+    /// TCP （timeout ）
     /// TCP （）
     pub fn check_tcp_connect(&self, addr: &str, timeout_ms: u64) -> ConnectivityReport {
         let start = std::time::Instant::now();
@@ -144,6 +145,7 @@ impl NetDiagnostics {
     }
 
     /// 简单的带指数退避的重试器（异步）
+    /// simple index retry （async ）
     /// simple index （async ）
     pub async fn retry_with_backoff<T, F, Fut>(
         &self,

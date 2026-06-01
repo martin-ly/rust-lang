@@ -1,6 +1,7 @@
 //! 异步测试框架演示
 //! async framework demonstration
 //! 本示例展示了异步测试的各种技术和最佳实践：
+//! this example async technique and best practice ：
 //! this example async technique and ：
 //! - 异步单元测试
 //! - async
@@ -194,6 +195,7 @@ impl AsyncTaskScheduler {
 }
 
 /// 异步数据处理器 - 用于测试
+/// async data -
 /// async -
 #[derive(Debug)]
 pub struct AsyncDataProcessor {
@@ -305,6 +307,7 @@ pub mod test_utils {
     }
 
     /// 测量异步操作执行时间
+    /// async operation time
     /// async time
     pub async fn measure_execution_time<F, Fut, T>(operation: F) -> (T, Duration)
     where
@@ -318,6 +321,7 @@ pub mod test_utils {
     }
 
     /// 并发执行多个异步操作
+    /// concurrency async operation
     /// concurrency async
     pub async fn run_concurrent<T>(futures: Vec<std::pin::Pin<Box<dyn std::future::Future<Output = T> + Send>>>) -> Vec<T> {
         futures::future::join_all(futures).await
@@ -331,6 +335,7 @@ pub mod test_utils {
     }
 
     /// 模拟随机失败
+    /// random failure
     pub fn should_fail(failure_rate: f32) -> bool {
         rand::random::<f32>() < failure_rate
     }

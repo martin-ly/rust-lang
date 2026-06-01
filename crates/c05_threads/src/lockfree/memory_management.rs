@@ -7,6 +7,7 @@
 //! ## Epoch-Based Reclamation
 //!
 //! ## 使用 crossbeam-epoch
+//! ## use crossbeam-epoch
 //! ```ignore
 //! use crossbeam_epoch::{self, Atomic, Owned, Shared, Guard};
 //!
@@ -63,8 +64,10 @@ impl EpochManager {
     }
 
     /// 尝试推进全局 epoch
+    /// Attempts to推进全局 epoch
     /// global epoch
     /// 尝试推进global epoch
+    /// Attempts to推进global epoch
     pub fn try_advance_epoch(&self) -> bool {
         let current = GLOBAL_EPOCH.load(Ordering::Acquire);
         // 简化实现：直接推进 epoch
@@ -79,6 +82,7 @@ impl EpochManager {
     }
 
     /// 获取当前全局 epoch
+    /// Gets当前全局 epoch
     /// when before global epoch
     pub fn current_epoch() -> usize {
         GLOBAL_EPOCH.load(Ordering::Acquire)
@@ -131,6 +135,7 @@ pub struct ArcNode<T> {
 
 impl<T> ArcNode<T> {
     /// 创建新的引用计数节点
+    /// Creates新的引用计数节点
     /// reference counting node
     pub fn new(data: T) -> Self {
         Self {
@@ -140,21 +145,26 @@ impl<T> ArcNode<T> {
     }
 
     /// 增加引用计数
+    /// Increases引用计数
     /// reference counting
     /// 增加reference counting
+    /// Increasesreference counting
     pub fn acquire(&self) {
         self.ref_count.fetch_add(1, Ordering::Relaxed);
     }
 
     /// 减少引用计数，返回是否需要释放
+    /// Decreases引用计数，返回是否需要释放
     /// reference counting ，
     pub fn release(&self) -> bool {
         self.ref_count.fetch_sub(1, Ordering::Release) == 1
     }
 
     /// 获取数据引用
+    /// Gets a data reference
     /// reference
     /// Get数据reference
+    /// Getdatareference
     pub fn data(&self) -> &T {
         &self.data
     }
@@ -173,6 +183,7 @@ pub enum MemoryStrategy {
 }
 
 /// 获取内存管理策略说明
+/// Gets内存管理策略说明
 /// memory strategy explain
 pub fn strategy_description(strategy: MemoryStrategy) -> &'static str {
     match strategy {

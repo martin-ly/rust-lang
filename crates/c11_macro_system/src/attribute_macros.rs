@@ -1,6 +1,7 @@
 //! 属性宏详解
 //! attribute
 //! 属性宏允许自定义#[...]和#![...]属性的行为。
+//! attribute allow definition #[...]and #![...]attribute as 。
 //! attribute definition #[...]and #![...]attribute as 。
 
 /// 属性宏基础概念
@@ -91,6 +92,7 @@ pub mod patterns {
 
     /// 代码注入模式
     /// 在函数开始或结束处注入代码
+    /// in function or end
     /// in function or
     pub fn code_injection() {}
 

@@ -12,6 +12,7 @@ use std::thread;
 use std::time::Duration;
 
 /// Actor 消息 trait
+/// Actor message trait
 pub trait Message: Send + 'static {
     /// 消息类型标识
     /// type
@@ -19,10 +20,12 @@ pub trait Message: Send + 'static {
 }
 
 /// Actor trait - definition Actor 行as
+/// Actor trait - definition Actor rowas
 pub trait Actor: Send + 'static {
     type Message: Message;
 
     /// 处理消息
+    /// Processes消息
     fn handle(&mut self, msg: Self::Message);
 
     /// Actor 名称（用于调试）
@@ -38,6 +41,7 @@ pub struct Mailbox<M: Message> {
 
 impl<M: Message> Mailbox<M> {
     /// 创建新的邮箱
+    /// Creates新的邮箱
     pub fn new() -> Self {
         Self {
             messages: Arc::new(Mutex::new(VecDeque::new())),
@@ -45,6 +49,7 @@ impl<M: Message> Mailbox<M> {
     }
 
     /// 发送消息到邮箱
+    /// Sends消息到邮箱
     /// to
     pub fn send(&self, msg: M) -> Result<(), String> {
         let mut queue = self
@@ -56,6 +61,7 @@ impl<M: Message> Mailbox<M> {
     }
 
     /// 接收消息（非阻塞）
+    /// Receives消息（非阻塞）
     /// （）
     pub fn try_recv(&self) -> Option<M> {
         let mut queue = self.messages.lock().ok()?;
@@ -63,6 +69,7 @@ impl<M: Message> Mailbox<M> {
     }
 
     /// 接收消息（阻塞，直到有消息）
+    /// Receives消息（阻塞，直到有消息）
     /// （，to ）
     pub fn recv(&self) -> Option<M> {
         loop {
@@ -74,12 +81,14 @@ impl<M: Message> Mailbox<M> {
     }
 
     /// 检查邮箱是否为空
+    /// Checks邮箱是否为空
     /// as
     pub fn is_empty(&self) -> bool {
         self.messages.lock().map(|q| q.is_empty()).unwrap_or(true)
     }
 
     /// 获取邮箱中的消息数量
+    /// Gets邮箱中的消息数量
     /// in quantity
     /// Get邮箱in消息quantity
     pub fn len(&self) -> usize {
@@ -106,14 +115,17 @@ impl<M: Message> ActorRef<M> {
     }
 
     /// 发送消息到 Actor
+    /// Sends消息到 Actor
     /// to Actor
     pub fn tell(&self, msg: M) -> Result<(), String> {
         self.mailbox.send(msg)
     }
 
     /// 获取 Actor 名称
+    /// Gets Actor 名称
     /// Actor
     /// Get Actor 名称
+    /// Get Actor name
     pub fn name(&self) -> &str {
         &self.name
     }
@@ -141,6 +153,7 @@ impl ActorSystem {
     }
 
     /// 启动一个 Actor
+    /// Starts一个 Actor
     /// Actor
     pub fn spawn<A>(&mut self, mut actor: A, mailbox: Arc<Mailbox<A::Message>>, name: String)
     where
@@ -159,6 +172,7 @@ impl ActorSystem {
     }
 
     /// 等待所有 Actor 完成（通常 Actor 会一直运行）
+    /// Waits for所有 Actor 完成（通常 Actor 会一直运行）
     /// etc. all Actor （ Actor Run ）
     pub fn join_all(self) {
         for handle in self.actors {
@@ -178,8 +192,10 @@ impl Default for ActorSystem {
 // ============================================================================
 
 /// 示例消息类型
+/// examplemessagetype
 /// example type
 /// Example of消息type
+/// Example ofmessagetype
 #[derive(Debug, Clone)]
 pub enum CounterMessage {
     Increment,

@@ -8,6 +8,7 @@
 //!   - **属性**: 文件系统访问、命令行参数、标准I/O
 //!   - **attribute **: file system 、command parameter 、standard I/O
 //! ### 思维导图
+//! ### graph
 //! ###
 //! WASI 文件处理器
 //! WASI

@@ -12,6 +12,7 @@ use std::time::{Duration, Instant};
 // =============================================================================
 
 /// 应用配置
+/// application configuration
 /// application
 #[derive(Debug)]
 pub struct AppConfig {
@@ -50,6 +51,7 @@ static CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
 // =============================================================================
 
 /// 高性能配置访问
+/// high performance configuration
 /// performance
 pub(crate) fn get_config_fast() -> Option<&'static AppConfig> {
     // 热路径优化: 使用 get() 进行无锁检查
@@ -61,6 +63,7 @@ pub fn get_config() -> &'static AppConfig {
 }
 
 /// 模拟高频调用场景
+/// high scenario
 /// scenario
 /// 模拟高频Callscenario
 fn hot_path_optimized() {
@@ -279,6 +282,7 @@ static CACHE: LazyLock<Cache> = LazyLock::new(|| {
 });
 
 /// 带缓存的计算
+/// cache
 /// 带缓存Calculate
 fn expensive_computation(input: &str) -> String {
     // 先检查缓存

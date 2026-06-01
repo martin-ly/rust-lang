@@ -307,6 +307,7 @@ fn benchmark_error_handling(c: &mut Criterion) {
 }
 
 /// 失败任务实现（用于错误处理基准测试）
+/// failure task （error handling benchmark ）
 /// task （error handling benchmark ）
 struct FailingTask {
     name: String,
@@ -386,6 +387,7 @@ fn benchmark_runtime_type_comparison(c: &mut Criterion) {
 }
 
 /// 基准测试：超时处理性能
+/// benchmark ：timeout performance
 /// benchmark ：performance
 /// benchmark：超时Handleperformance
 fn benchmark_timeout_handling(c: &mut Criterion) {

@@ -128,6 +128,7 @@ enum ProcessingError {
 }
 
 /// 数据处理管道
+/// data pipe
 /// pipe
 /// 数据Handlepipe
 fn process_data_pipeline(
@@ -239,6 +240,7 @@ fn transition_state(current: State, event: &str) -> ControlFlow<StateError, Stat
 // =============================================================================
 
 /// 配置解析器
+/// configuration
 #[derive(Debug)]
 struct Config {
     host: String,
@@ -297,6 +299,7 @@ fn parse_config(env_vars: &[(String, String)]) -> ControlFlow<ConfigError, Confi
 }
 
 /// 批量操作
+/// operation
 fn batch_operation<T>(
     items: Vec<T>,
     operation: impl Fn(T) -> Result<(), String>,

@@ -150,6 +150,7 @@ impl LockFreeQueueBenchmark {
 }
 
 /// 有锁队列性能测试
+/// lock queue performance test
 /// lock performance test
 pub struct LockedQueueBenchmark {
     queue: Arc<Mutex<VecDeque<usize>>>,

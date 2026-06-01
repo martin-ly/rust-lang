@@ -9,6 +9,7 @@ use std::time::{Duration, Instant};
 use super::state::{TcpState, TcpStateMachine};
 
 /// TCP 连接配置
+/// TCP configuration
 /// TCP
 #[derive(Debug, Clone)]
 pub struct TcpConnectionConfig {
@@ -119,6 +120,7 @@ impl TcpConnection {
     }
 
     /// 发送数据
+    /// data
     pub async fn send(&mut self, data: &[u8]) -> NetworkResult<usize> {
         if !self.state_machine.current_state().can_send_data() {
             return Err(NetworkError::Protocol(
@@ -136,6 +138,7 @@ impl TcpConnection {
     }
 
     /// 接收数据
+    /// data
     pub async fn receive(&mut self, buffer: &mut [u8]) -> NetworkResult<usize> {
         if !self.state_machine.current_state().can_receive_data() {
             return Err(NetworkError::Protocol(
@@ -174,6 +177,7 @@ impl TcpConnection {
     }
 
     /// 检查连接是否超时
+    /// timeout
     pub fn is_timeout(&self) -> bool {
         self.last_activity.elapsed() > self.config.timeout
     }

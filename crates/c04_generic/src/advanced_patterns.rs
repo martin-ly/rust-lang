@@ -358,6 +358,7 @@ pub mod strategy_pattern {
     pub type StrategyBox<T> = Box<dyn SortStrategy<T>>;
 
     /// 排序策略 trait
+    /// Sorts策略 trait
     /// ordering strategy trait
     pub trait SortStrategy<T> {
         fn sort(&self, data: &mut [T]);
@@ -678,6 +679,7 @@ pub mod decorator_pattern {
     }
 
     /// 具体组件
+    /// concretecomponent
     /// volume
     pub struct ConcreteComponent {
         name: String,
@@ -1175,6 +1177,7 @@ pub mod command_pattern {
 }
 
 /// 综合演示函数
+/// Comprehensive demonstration function
 /// synthesize demonstration function
 pub fn demonstrate_advanced_patterns() {
     use builder_pattern::{Buildable, Builder};

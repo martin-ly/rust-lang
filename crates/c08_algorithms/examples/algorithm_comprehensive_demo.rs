@@ -8,6 +8,7 @@
 //! ### 核心概念
 //! ### core concept
 //! - **排序算法**: 将数据按特定顺序排列的算法
+//! - **sorting algorithm **: will data order arrangement algorithm
 //! - **sorting algorithm **: will order arrangement algorithm
 //!   - **属性**: 时间复杂度、空间复杂度、稳定性
 //!   - **attribute **: time complexity 、space complexity 、
@@ -15,12 +16,14 @@
 //!   - **关系**: 与数据结构、搜索算法相关
 //!   - ****: and data structure 、searching algorithm
 //! - **搜索算法**: 在数据集中查找特定元素的算法
+//! - **searching algorithm **: in data in element algorithm
 //! - **searching algorithm **: in in element algorithm
 //!   - **属性**: 时间复杂度、空间复杂度、前提条件
 //!   - **attribute **: time complexity 、space complexity 、prerequisite condition
 //!   - **关系**: 与排序算法、数据结构相关
 //!   - ****: and sorting algorithm 、data structure
 //! - **图算法**: 处理图数据结构的算法
+//! - **graph algorithm **: graph data structure algorithm
 //! - **graph algorithm **: data structure algorithm
 //!   - **属性**: BFS、DFS、最短路径
 //!   - **attribute **: BFS、DFS、
@@ -28,6 +31,7 @@
 //!   - **关系**: 与数据结构、动态规划相关
 //!   - ****: and data structure 、dynamic programming
 //! ### 思维导图
+//! ### graph
 //! ###
 //! 算法综合演示
 //! algorithm synthesize demonstration
@@ -63,11 +67,13 @@
 //!     ├── 栈
 //!     ├── stack
 //!     ├── 队列
+//!     ├── queue
 //!     ├──
 //!     └── 二叉搜索树
 //!     └── tree
 //!     └── 二叉Searchtree
 //! ### 概念矩阵
+//! ### concept matrix
 //! ### concept
 //! | 算法类型 | 时间复杂度 | 空间复杂度 | 稳定性 | 适用场景 |
 //! | algorithm type | time complexity | space complexity | | scenario |
@@ -80,9 +86,11 @@
 //! | 堆排序 | O(n log n) | O(1) | 否 | 内存受限 |
 //! | heap sort | O(n log n) | O(1) | | memory |
 //! | 二分搜索 | O(log n) | O(1) | - | 已排序数组 |
+//! | binary search | O(log n) | O(1) | - | ordering array |
 //! | binary search | O(log n) | O(1) | - | ordering |
 //! | binary search | O(log n) | O(1) | - | 已orderingarray |
 //! | 线性搜索 | O(n) | O(1) | - | 未排序数组 |
+//! | linear search | O(n) | O(1) | - | ordering array |
 //! | linear search | O(n) | O(1) | - | ordering |
 //! | linear search | O(n) | O(1) | - | 未orderingarray |
 use std::collections::HashMap;

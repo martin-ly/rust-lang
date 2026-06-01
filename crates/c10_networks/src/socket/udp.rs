@@ -7,6 +7,7 @@ use tokio::net::UdpSocket;
 use tokio::time::timeout;
 
 /// UDP 套接字配置
+/// UDP socket configuration
 /// UDP socket
 #[derive(Debug, Clone)]
 pub struct UdpConfig {
@@ -66,6 +67,7 @@ impl UdpSocketWrapper {
     }
 
     /// 发送数据到指定地址
+    /// data to
     /// to
     pub async fn send_to(&self, data: &[u8], addr: SocketAddr) -> NetworkResult<usize> {
         match self.config.timeout {
@@ -78,6 +80,7 @@ impl UdpSocketWrapper {
     }
 
     /// 接收数据
+    /// data
     pub async fn recv_from(&self, buffer: &mut [u8]) -> NetworkResult<(usize, SocketAddr)> {
         match self.config.timeout {
             Some(timeout_duration) => timeout(timeout_duration, self.socket.recv_from(buffer))
@@ -96,6 +99,7 @@ impl UdpSocketWrapper {
     }
 
     /// 发送数据（已连接套接字）
+    /// data （connected socket ）
     /// （connected socket ）
     pub async fn send(&self, data: &[u8]) -> NetworkResult<usize> {
         match self.config.timeout {
@@ -108,6 +112,7 @@ impl UdpSocketWrapper {
     }
 
     /// 接收数据（已连接套接字）
+    /// data （connected socket ）
     /// （connected socket ）
     pub async fn recv(&self, buffer: &mut [u8]) -> NetworkResult<usize> {
         match self.config.timeout {

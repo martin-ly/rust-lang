@@ -11,6 +11,7 @@ use tracing::{error, info};
 /// 2025年异步机器学习模式演示
 /// 2025async machine learning demonstration
 /// 展示最新的异步机器学习编程模式和最佳实践
+/// async machine learning and best practice
 /// async machine learning and
 /// 1. 异步模型训练管理器
 /// 1. async
@@ -435,6 +436,7 @@ impl AsyncInferenceService {
 }
 
 /// 3. 异步数据处理管道
+/// 3. async data pipe
 /// 3. async pipe
 #[derive(Debug, Clone)]
 pub struct AsyncDataPipeline {

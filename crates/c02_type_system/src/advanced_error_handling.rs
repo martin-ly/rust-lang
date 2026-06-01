@@ -5,6 +5,7 @@
 //! - definition error type
 //! - 自definitionerror type
 //! - 错误链和上下文
+//! - errorchainandcontext
 //! - and on under
 //! - 错误恢复机制
 //! - error recovery mechanism
@@ -15,11 +16,14 @@
 //! - 错误处理最佳实践
 //! - error handling
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: advanced_error_handling.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 // - Edition: 2024
@@ -44,17 +48,20 @@ pub enum AppError {
     /// database
     Database(DatabaseError),
     /// 业务逻辑错误
+    /// businesslogicalerror
     Business(BusinessError),
     /// 系统错误
     /// system
     System(SystemError),
     /// 配置错误
+    /// configurationerror
     Config(ConfigError),
     /// 权限错误
     Permission(PermissionError),
     /// 资源错误
     Resource(ResourceError),
     /// 超时错误
+    /// timeouterror
     Timeout(TimeoutError),
     /// 未知错误
     Unknown(String),
@@ -88,6 +95,7 @@ pub struct DatabaseError {
 }
 
 /// 业务逻辑错误
+/// businesslogicalerror
 #[derive(Debug, Clone)]
 pub struct BusinessError {
     pub code: String,
@@ -105,6 +113,7 @@ pub struct SystemError {
 }
 
 /// 配置错误
+/// configurationerror
 #[derive(Debug, Clone)]
 pub struct ConfigError {
     pub key: String,
@@ -129,6 +138,7 @@ pub struct ResourceError {
 }
 
 /// 超时错误
+/// timeouterror
 #[derive(Debug, Clone)]
 pub struct TimeoutError {
     pub operation: String,
@@ -181,6 +191,7 @@ impl std::error::Error for AppError {}
 // ==================== 2. 错误链和上下文 ====================
 
 /// 错误上下文
+/// errorcontext
 /// on under
 /// 提供了错误的上下文信息
 /// on under
@@ -470,6 +481,7 @@ impl Default for ErrorTransformer {
 // ==================== 5. 错误日志和监控 ====================
 
 /// 错误日志级别
+/// errorloglevel
 /// level
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum ErrorLevel {
@@ -498,8 +510,10 @@ pub struct ErrorMonitor {
 }
 
 /// 错误指标
+/// errorindicator
 /// indicator
 /// 错误indicator
+/// errorindicator
 #[derive(Debug, Default)]
 pub struct ErrorMetrics {
     pub total_errors: u64,
@@ -619,6 +633,7 @@ impl ErrorHandler {
     }
 
     /// 处理错误
+    /// Processes错误
     pub fn handle_error(&self, error: AppError, context: ErrorContext) -> Result<(), AppError> {
         // 转换错误
         let transformed_error = self.transformer.transform(error);
@@ -651,11 +666,13 @@ impl ErrorHandler {
     }
 
     /// 获取错误统计
+    /// Gets错误统计
     pub fn get_error_stats(&self) -> ErrorMetrics {
         self.monitor.get_metrics()
     }
 
     /// 获取最近错误
+    /// Gets最近错误
     pub fn get_recent_errors(&self, limit: usize) -> Vec<ErrorLogEntry> {
         self.monitor.get_recent_errors(limit)
     }
@@ -687,6 +704,7 @@ impl Default for ErrorHandler {
 // ==================== 演示函数 ====================
 
 /// 演示所有高级错误处理特性
+/// Demonstrates所有高级错误处理特性
 /// demonstration all error handling feature
 /// Demonstration of所有高级error handlingfeature
 pub fn demonstrate_advanced_error_handling() {

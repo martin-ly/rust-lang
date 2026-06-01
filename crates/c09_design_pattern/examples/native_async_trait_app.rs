@@ -5,10 +5,12 @@
 //! 1. 原生 async trait 方法（无需 async-trait 宏）
 //! 1. 原生 async trait method（无需 async-trait 宏）
 //! 2. 多种异步数据源的统一接口
+//! 2. async data source
 //! 2. async
 //! 3. 异步中间件链模式
 //! 3. async middleware
 //! 4. 异步重试和超时策略
+//! 4. async retry and timeout strategy
 //! 4. async and strategy
 //! ## 设计说明
 //! ## design explain
@@ -23,10 +25,12 @@ use std::time::{Duration, Instant};
 // ============================================================================
 
 /// 异步数据源 trait
+/// async data source trait
 /// async trait
 #[allow(async_fn_in_trait)]
 pub trait AsyncDataSource {
     /// 数据类型
+    /// data type
     /// type
     type Data;
     /// 错误类型
@@ -34,10 +38,12 @@ pub trait AsyncDataSource {
     type Error;
 
     /// 异步读取数据
+    /// async data
     /// async
     async fn read(&self) -> Result<Self::Data, Self::Error>;
 
     /// 异步写入数据
+    /// async data
     /// async
     async fn write(&mut self, data: &Self::Data) -> Result<(), Self::Error>;
 
@@ -328,6 +334,7 @@ impl AsyncMiddleware for LoggingMiddleware {
 }
 
 /// 验证中间件
+/// verifying
 /// middleware
 pub struct ValidationMiddleware {
     min_length: usize,
@@ -492,10 +499,12 @@ impl MiddlewareChain {
 #[allow(async_fn_in_trait)]
 pub trait AsyncRetryStrategy {
     /// 是否应该重试
+    /// should retry
     /// should
     async fn should_retry(&self, attempt: usize, error: &str) -> bool;
 
     /// 获取重试延迟
+    /// retry
     async fn retry_delay(&self, attempt: usize) -> Duration;
 }
 
@@ -527,6 +536,7 @@ impl AsyncRetryStrategy for ExponentialBackoff {
 }
 
 /// 带重试的异步执行
+/// retry async
 /// async
 pub async fn with_retry<F, Fut, T, E, S>(operation: F, strategy: &S) -> Result<T, E>
 where

@@ -1,8 +1,10 @@
 //! Rust 1.91 线程特性实现模块（历史版本）
 //! Rust 1.91 thread feature module （this ）
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - JIT 编译器优化对多线程代码的性能提升
 //! - JIT optimization to thread performance
@@ -11,11 +13,15 @@
 //! - 改进的错误处理在多线程中的应用
 //! - error handling in thread in application
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_191_features.rs
+//! - File: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::ops::ControlFlow;

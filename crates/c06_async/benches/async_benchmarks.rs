@@ -1,12 +1,14 @@
 //! 异步性能基准测试套件
 //! async Performance benchmark
 //! 本基准测试套件评估各种异步操作和模式的性能：
+//! this benchmark async operation and performance ：
 //! this benchmark async and performance ：
 //! - 异步任务生成和调度性能
 //! - async task and performance
 //! - 异步同步原语性能
 //! - async synchronous performance
 //! - 异步I/O操作性能
+//! - async I/Ooperation performance
 //! - async I/Operformance
 //! - 并发控制性能
 //! - concurrency performance
@@ -187,6 +189,7 @@ async fn benchmark_batch_processing(num_items: usize, batch_size: usize) {
 }
 
 /// 异步超时基准测试
+/// async timeout benchmark
 /// async benchmark
 async fn benchmark_timeout(num_operations: usize) {
     let mut handles = Vec::with_capacity(num_operations);
@@ -213,6 +216,7 @@ async fn benchmark_timeout(num_operations: usize) {
 }
 
 /// 异步重试基准测试
+/// async retry benchmark
 /// async benchmark
 async fn benchmark_retry(num_operations: usize, max_attempts: u32) {
     let mut handles = Vec::with_capacity(num_operations);
@@ -240,6 +244,7 @@ async fn benchmark_retry(num_operations: usize, max_attempts: u32) {
 }
 
 /// 异步缓存基准测试
+/// async cache benchmark
 /// async benchmark
 async fn benchmark_cache(num_operations: usize, cache_size: usize) {
     let cache = Arc::new(RwLock::new(HashMap::<usize, String>::with_capacity(
@@ -273,6 +278,7 @@ async fn benchmark_cache(num_operations: usize, cache_size: usize) {
 }
 
 /// 异步事件循环基准测试
+/// async event circulation benchmark
 /// async circulation benchmark
 async fn benchmark_event_loop(num_events: usize) {
     let (tx, mut rx) = mpsc::unbounded_channel();

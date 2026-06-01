@@ -9,8 +9,10 @@
 //! ### Rust 1.92.0 主要改进
 //! ### Rust 1.92.0 main
 //! - **关联项多边界**: 更灵活的类型约束表达
+//! - **edge **: type constraint express
 //! - **edge **: type express
 //! - **高阶生命周期增强**: 更精确的生命周期处理
+//! - **high lifetime **: lifetime
 //! - **lifetime **: lifetime
 //! ### 迁移建议
 //! ###
@@ -75,6 +77,7 @@ where
     T: Mul<Output = T>,
 {
     /// 矩阵乘法：要求维度兼容
+    /// matrix multiplication ：dimension
     /// ：dimension
     fn multiply<const OTHER_COLS: usize>(
         &self,
@@ -115,6 +118,7 @@ trait DataProcessor {
 }
 
 /// 改进的生命周期推断允许更简洁的代码
+/// lifetime infer allow
 /// lifetime infer
 struct SimpleProcessor;
 
@@ -129,6 +133,7 @@ impl DataProcessor for SimpleProcessor {
 }
 
 /// 高级生命周期推断示例
+/// high lifetime infer example
 /// lifetime infer example
 struct AdvancedProcessor<T> {
     _phantom: std::marker::PhantomData<T>,

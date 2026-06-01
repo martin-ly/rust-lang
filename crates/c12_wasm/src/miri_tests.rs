@@ -48,6 +48,7 @@ impl LinearMemory {
 }
 
 /// 测试目的: 验证线性内存基本操作
+/// objective : line memory this operation
 /// objective : line memory this
 /// 测试场景: 创建内存、写入、读取、增长
 /// scenario : memory 、、、
@@ -77,6 +78,7 @@ fn test_linear_memory() {
 /// 测试场景: 尝试越界写入和在边界处写入
 /// scenario : and in edge
 /// 预期结果: 越界应该失败，边界处应该成功
+/// result : should failure ，edge should
 /// result : should ，edge should
 #[test]
 fn test_memory_bounds_check() {
@@ -243,6 +245,7 @@ impl ModuleInstance {
 /// 测试目的: 验证模块实例状态
 /// objective : module state
 /// 测试场景: 操作全局变量和函数表
+/// scenario : operation global variable and function
 /// scenario : global variable and function
 /// 预期结果: 应该正确管理状态
 /// result : should state

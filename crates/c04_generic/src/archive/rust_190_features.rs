@@ -2,10 +2,13 @@
 //! Rust 1.90 feature demonstration module (this )
 //! Rust 1.90 featuredemonstration module (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - Returnposition impl Trait (RPITIT) 改进
+//! - Returnposition impl Trait (RPITIT) improve
 //! - 异步泛型函数的支持
 //! - async generic function
 //! - 共享状态的不同锁策略对比
@@ -27,6 +30,7 @@ impl<T> Data<T> {
     }
 
     /// 返回迭代器管道，演示 RPITIT 特性
+    /// Returns迭代器管道，演示 RPITIT 特性
     /// pipe ，demonstration RPITIT feature
     pub fn pipeline(&self) -> impl Iterator<Item = T> + '_
     where
@@ -73,6 +77,7 @@ pub mod shared_state_demo {
     }
 
     /// 生成计数器线程
+    /// Generates计数器线程
     /// thread
     fn spawn_counter_thread(counter: Arc<Mutex<i32>>, iterations: usize) -> thread::JoinHandle<()> {
         thread::spawn(move || {
@@ -105,6 +110,7 @@ pub mod shared_state_demo {
     }
 
     /// 生成读取线程
+    /// Generates读取线程
     /// thread
     fn spawn_reader_thread(data: Arc<RwLock<i32>>, iterations: usize) -> thread::JoinHandle<()> {
         thread::spawn(move || {
@@ -116,6 +122,7 @@ pub mod shared_state_demo {
     }
 
     /// 生成写入线程
+    /// Generates写入线程
     /// thread
     fn spawn_writer_thread(data: Arc<RwLock<i32>>, iterations: usize) -> thread::JoinHandle<()> {
         thread::spawn(move || {

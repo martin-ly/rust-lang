@@ -11,6 +11,7 @@ use tracing::{debug, error, info, warn};
 /// 2025年异步物联网模式演示
 /// 2025async demonstration
 /// 展示最新的物联网异步编程模式和最佳实践
+/// async and best practice
 /// async and
 /// 1. 异步物联网设备管理器
 /// 1. async
@@ -359,6 +360,7 @@ impl AsyncIoTDeviceManager {
 }
 
 /// 2. 异步物联网数据处理管道
+/// 2. async data pipe
 /// 2. async pipe
 #[derive(Debug, Clone)]
 pub struct AsyncIoTDataPipeline {

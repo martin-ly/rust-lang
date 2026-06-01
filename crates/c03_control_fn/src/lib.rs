@@ -132,11 +132,13 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub const RUST_VERSION: &str = "1.94.0";
 
 /// 项目信息
+/// projectinformation
 /// project
 pub struct ProjectInfo;
 
 impl ProjectInfo {
     /// 获取项目版本
+    /// Gets项目版本
     /// project this
     pub fn version() -> &'static str {
         VERSION
@@ -147,6 +149,7 @@ impl ProjectInfo {
     }
 
     /// 获取项目描述
+    /// Gets项目描述
     /// project describe
     pub fn description() -> &'static str {
         "Rust 1.95.0 控制流与函数特性研究项目"
@@ -154,8 +157,10 @@ impl ProjectInfo {
 }
 
 /// 初始化项目
+/// Initializes项目
 /// project
 /// 初始化控制流与函数模块，设置日志系统并打印项目信息。
+/// Initializes控制流与函数模块，设置日志系统并打印项目信息。
 /// stream and function module ，system and project 。
 ///
 /// ```

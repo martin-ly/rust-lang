@@ -7,12 +7,15 @@
 //! - 一致性哈希
 //! - consistent hashing
 //! - 分布式缓存
+//! - distribution cache
 //! - distribution
 //! - 分布式消息队列
+//! - distribution message queue
 //! - distribution
 //! - 分布式事务
 //! - distribution
 //! - 分布式配置管理
+//! - distribution configuration
 //! - distribution
 //! - 分布式日志
 //! - distribution
@@ -182,6 +185,7 @@ impl<T: Clone + Send + Sync + std::fmt::Debug> ConsistentHashRing<T> {
 }
 
 /// 分布式缓存
+/// distribution cache
 /// distribution
 #[allow(dead_code)]
 pub struct DistributedCache {
@@ -305,6 +309,7 @@ pub struct CacheStats {
 }
 
 /// 分布式消息队列
+/// distribution message queue
 /// distribution
 #[allow(dead_code)]
 pub struct DistributedMessageQueue {

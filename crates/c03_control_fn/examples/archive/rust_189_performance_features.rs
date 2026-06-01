@@ -53,6 +53,7 @@ fn fast_multiply(a: i32, b: i32) -> i32 {
 }
 
 /// 零成本抽象：编译时优化的数学运算
+/// cost ：compile-time optimization math
 /// cost ：compile-time optimization
 #[derive(Debug, Clone, Copy)]
 struct OptimizedCalculator;
@@ -60,6 +61,7 @@ struct OptimizedCalculator;
 #[allow(dead_code)]
 impl OptimizedCalculator {
     /// 编译时优化的加法
+    /// compile-time optimization addition
     /// compile-time optimization
     #[inline(always)]
     fn add(&self, a: i32, b: i32) -> i32 {
@@ -67,6 +69,7 @@ impl OptimizedCalculator {
     }
 
     /// 编译时优化的乘法
+    /// compile-time optimization multiplication
     /// compile-time optimization
     #[inline(always)]
     fn multiply(&self, a: i32, b: i32) -> i32 {
@@ -94,6 +97,7 @@ trait FastOperation {
 }
 
 /// 快速加法操作
+/// fast addition operation
 /// fast
 #[allow(dead_code)]
 struct FastAdd;
@@ -109,6 +113,7 @@ impl FastOperation for FastAdd {
 }
 
 /// 快速乘法操作
+/// fast multiplication operation
 /// fast
 #[allow(dead_code)]
 struct FastMultiply;
@@ -140,6 +145,7 @@ fn execute_operation<T: FastOperation>(op: &T, input: T::Input) -> T::Output {
 /// - to optimization
 /// - 自动to齐optimization
 /// - 缓存友好的数据组织
+/// - cache-friendly data organize
 /// - cache-friendly organize
 /// 优化前：可能存在填充的结构体
 /// optimization before ：may in struct
@@ -163,6 +169,7 @@ struct OptimizedStruct {
 }
 
 /// 缓存友好的数据组织
+/// cache-friendly data organize
 /// cache-friendly organize
 #[repr(C)]
 struct CacheFriendlyStruct {
@@ -175,6 +182,7 @@ struct CacheFriendlyStruct {
 }
 
 /// 内存布局优化：数组结构体
+/// memory layout optimization ：array struct
 /// memory layout optimization ：struct
 #[repr(C)]
 struct OptimizedArray<T, const N: usize> {
@@ -296,6 +304,7 @@ const FIRST_10_PRIMES: [u64; 10] = find_primes::<10>();
 /// - 链接时优化增强
 /// - link-time optimization
 /// 内联优化：数学运算
+/// inside optimization ：math
 /// inside optimization ：
 #[inline(always)]
 fn optimized_math_operations(a: f64, b: f64) -> (f64, f64, f64) {
@@ -317,6 +326,7 @@ fn optimized_string_operations(s: &str) -> (usize, bool, String) {
 }
 
 /// 内联优化：集合操作
+/// inside optimization ：set operation
 /// inside optimization ：set
 #[inline(always)]
 #[allow(dead_code)]
@@ -427,6 +437,7 @@ fn memory_usage_analysis() {
 }
 
 /// 优化建议和最佳实践
+/// optimization and best practice
 /// optimization and
 fn optimization_best_practices() {
     println!("\n💡 优化最佳实践");

@@ -147,6 +147,7 @@ async fn benchmark_dns_lookup(
 }
 
 /// 基准测试2: 并发异步操作性能
+/// benchmark 2: concurrency async operation performance
 /// benchmark 2: concurrency async performance
 async fn benchmark_concurrent_operations(
     client: &NetClient,
@@ -291,6 +292,7 @@ async fn benchmark_memory_pool(operations: usize) -> NetworkResult<BenchmarkResu
 }
 
 /// 基准测试5: 缓存操作性能
+/// benchmark 5: cache operation performance
 /// benchmark 5: performance
 /// benchmark5: 缓存操作performance
 async fn benchmark_cache_operations(operations: usize) -> NetworkResult<BenchmarkResult> {

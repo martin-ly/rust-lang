@@ -11,6 +11,7 @@
 //! - ✅ 连接管理和错误处理
 //! - ✅ and error handling
 //! - ✅ 可配置的套接字选项
+//! - ✅ configuration socket
 //! - ✅ socket
 //! - ✅ 完整的日志记录
 //! - ✅ complete
@@ -23,12 +24,15 @@
 //! # in
 //!
 //! ## 配置选项
+//! ## configuration
 //! ##
 //! 可以通过环境变量配置服务器：
+//! can environment variable configuration ：
 //! can environment variable ：
 //! - `C10_TCP_ADDRESS`: 监听地址 (默认: 127.0.0.1:8080)
 //! - `C10_TCP _ADDRESS`: (: 127.0.0.1:8080)
 //! - `C10_TCP_TIMEOUT`: 连接超时 (默认: 30秒)
+//! - `C10_TCP _TIMEOUT`: timeout (: 30)
 //! - `C10_TCP _TIMEOUT`: (: 30)
 //! - `C10_TCP_BUFFER_SIZE`: 缓冲区大小 (默认: 8192字节)
 //! - `C10_TCP _BUFFER_SIZE`: buffering (: 8192)

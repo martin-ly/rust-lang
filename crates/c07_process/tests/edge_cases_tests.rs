@@ -34,6 +34,7 @@ fn test_resource_limit_boundaries() {
 }
 
 /// 测试超时边界情况
+/// timeout edge situation
 /// edge situation
 #[test]
 fn test_timeout_boundaries() {

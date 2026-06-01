@@ -22,6 +22,7 @@ pub struct TcpFormalSpec {
     /// state definition
     pub states: HashSet<TcpState>,
     /// 事件定义
+    /// event definition
     /// definition
     /// 事件definition
     pub events: HashSet<TcpEvent>,
@@ -35,6 +36,7 @@ pub struct TcpFormalSpec {
 }
 
 /// TCP事件
+/// TCP event
 /// TCP
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum TcpEvent {
@@ -73,6 +75,7 @@ pub enum TcpEvent {
     /// 关闭连接
     Close,
     /// 超时
+    /// timeout
     Timeout,
     /// 重置连接
     Reset,
@@ -131,6 +134,7 @@ pub enum TcpInvariantType {
     /// state variable
     StateInvariant,
     /// 数据不变量
+    /// data variable
     /// variable
     /// 数据不variable
     DataInvariant,
@@ -184,6 +188,7 @@ impl TcpFormalSpec {
     }
 
     /// 初始化事件
+    /// event
     fn initialize_events(&mut self) {
         self.events.insert(TcpEvent::ActiveOpen);
         self.events.insert(TcpEvent::PassiveOpen);
@@ -516,6 +521,7 @@ pub struct HttpProtocolRule {
     /// rule condition
     pub condition: HttpRuleCondition,
     /// 规则动作
+    /// rule action
     /// rule
     pub action: HttpRuleAction,
     /// 规则类型
@@ -548,19 +554,23 @@ pub enum HttpRuleCondition {
 }
 
 /// HTTP规则动作
+/// HTTP rule action
 /// HTTP rule
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub enum HttpRuleAction {
     /// 允许
+    /// allow
     Allow,
     /// 拒绝
+    /// reject
     Deny,
     /// 修改头部
     ModifyHeader { name: String, value: String },
     /// 重定向
     Redirect { location: String },
     /// 缓存
+    /// cache
     Cache { duration: u64 },
 }
 

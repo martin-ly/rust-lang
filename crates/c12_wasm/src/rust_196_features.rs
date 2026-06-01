@@ -26,8 +26,10 @@
 /// ## 迁移指南
 /// ##
 /// # 1.96 之前（默认允许未定义符号）
+/// # 1.96 's before （allow definition symbol ）
 /// # 1.96 's before （definition symbol ）
 /// # 1.96 之后（默认拒绝未定义符号）
+/// # 1.96 's after （reject definition symbol ）
 /// # 1.96 's after （definition symbol ）
 /// # 1.96 'safter（默认拒绝未definitionsymbol）
 /// # 链接错误: undefined symbol
@@ -103,6 +105,7 @@ impl WasmCoreRangeExamples {
     }
 
     /// 数据段偏移范围检查
+    /// data scope
     /// scope
     pub fn data_segment_in_range(offset: usize, segment_size: usize, memory_limit: usize) -> bool {
         use core::range::Range;
@@ -133,6 +136,7 @@ pub enum WasmLoadState {
 }
 
 /// `assert_matches!` 允许对复杂枚举状态进行模式匹配断言，
+/// `assert_matches!` allow to complex enum state ，
 /// `assert_matches!` to complex enum state ，
 /// 在 WASM 运行时状态机测试中非常有用。
 /// in WASM runtime state machine in useful 。

@@ -15,8 +15,10 @@
 /// - MODER: 模式寄存器
 /// - MODER:
 /// - ODR:   输出数据寄存器
+/// - ODR: data
 /// - ODR:
 /// - IDR:   输入数据寄存器
+/// - IDR: input data
 /// - IDR:
 /// 真实硬件中，这些结构体通过 `#[repr(C)]` 保证内存布局，
 /// real hardware in ，struct `#[repr(C)]` memory layout ，
@@ -35,13 +37,16 @@ pub struct GpioRegisters {
     /// on /under
     pub pupdr: u32,
     /// 输入数据寄存器
+    /// input data
     pub idr: u32,
     /// 输出数据寄存器
+    /// data
     pub odr: u32,
     /// 位设置/清除寄存器
     /// /
     pub bsrr: u32,
     /// 配置锁定寄存器
+    /// configuration lock
     /// lock
     pub lckr: u32,
 }
@@ -72,6 +77,7 @@ impl GpioPort {
     /// MODER
     /// Read MODER 寄存器
     /// 使用 `core::ptr::read_volatile` 确保编译器不会优化掉读操作。
+    /// `core::ptr::read_volatile` optimization operation 。
     /// `core::ptr::read_volatile` optimization 。
     pub fn read_moder(&self) -> u32 {
         // Safety: 构造时已保证 base 有效
@@ -99,6 +105,7 @@ impl GpioPort {
     }
 
     /// 设置特定引脚电平（高电平）
+    /// （high ）
     /// （）
     pub fn set_pin_high(&mut self, pin: u8) {
         assert!(pin < 16, "引脚号必须在 0-15 范围内");
@@ -108,6 +115,7 @@ impl GpioPort {
     }
 
     /// 清除特定引脚电平（低电平）
+    /// （low ）
     /// （）
     pub fn set_pin_low(&mut self, pin: u8) {
         assert!(pin < 16, "引脚号必须在 0-15 范围内");
@@ -116,6 +124,7 @@ impl GpioPort {
     }
 
     /// 读取引脚输入状态
+    /// input state
     /// state
     pub fn read_pin(&self, pin: u8) -> bool {
         assert!(pin < 16, "引脚号必须在 0-15 范围内");
@@ -125,9 +134,11 @@ impl GpioPort {
 }
 
 /// 位操作工具函数
+/// bit operation tool function
 /// tool function
 /// 位操作toolfunction
 /// 嵌入式编程中大量涉及位操作。
+/// in and bit operation 。
 /// in and 。
 pub struct BitOps;
 

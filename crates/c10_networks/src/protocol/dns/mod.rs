@@ -21,6 +21,7 @@ impl std::fmt::Debug for DnsResolver {
 
 impl DnsResolver {
     /// 使用系统 DNS 配置创建解析器（/etc/resolv.conf、Registry 等）
+    /// system DNS configuration （/etc/resolv.conf、Registry etc. ）
     /// system DNS （/etc/resolv.conf、Registry etc. ）
     pub async fn from_system() -> NetworkResult<Self> {
         let resolver = TokioResolver::builder_tokio()
@@ -31,6 +32,7 @@ impl DnsResolver {
     }
 
     /// 使用给定配置与选项创建解析器（支持自定义 DoT/DoH）
+    /// configuration and （definition DoT/DoH）
     /// and （definition DoT/DoH）
     pub async fn from_config(
         config: ResolverConfig,

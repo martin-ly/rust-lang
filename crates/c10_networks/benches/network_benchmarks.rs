@@ -5,6 +5,7 @@
 //! 网络性能基准测试
 //! network Performance benchmark
 //! 本文件包含各种网络操作的性能基准测试，用于评估2025年最新优化后的性能
+//! this network operation Performance benchmark ，2025optimization after performance
 //! this network Performance benchmark ，2025optimization after performance
 use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::io::{Read, Write};
@@ -57,6 +58,7 @@ fn bench_http_request_processing(c: &mut Criterion) {
 }
 
 /// 数据序列化基准测试
+/// data sequence benchmark
 /// sequence benchmark
 /// 数据Serializebenchmark
 fn bench_data_serialization(c: &mut Criterion) {
@@ -169,6 +171,7 @@ fn bench_network_io(c: &mut Criterion) {
 }
 
 /// 连接池基准测试
+/// connection pool benchmark
 /// benchmark
 fn bench_connection_pool(c: &mut Criterion) {
     let mut group = c.benchmark_group("connection_pool");
@@ -269,6 +272,7 @@ fn bench_load_balancing(c: &mut Criterion) {
 }
 
 /// 缓存基准测试
+/// cache benchmark
 /// benchmark
 /// 缓存benchmark
 fn bench_caching(c: &mut Criterion) {
@@ -329,6 +333,7 @@ fn bench_caching(c: &mut Criterion) {
 }
 
 /// 异步操作基准测试
+/// async operation benchmark
 /// async benchmark
 fn bench_async_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("async_operations");
@@ -391,6 +396,7 @@ fn bench_async_operations(c: &mut Criterion) {
 }
 
 /// 创建测试数据
+/// data
 fn create_test_data(size: usize) -> TestData {
     TestData {
         id: 1,

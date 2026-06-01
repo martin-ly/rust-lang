@@ -65,6 +65,7 @@ fn interval_scheduling(intervals: &[(i32, i32)]) -> Vec<(i32, i32)> {
 }
 
 /// 零钱兑换（贪心版本，适用于标准硬币系统）
+/// （greedy this ，standard system ）
 /// （this ，standard system ）
 fn coin_change_greedy(coins: &[usize], amount: usize) -> Option<Vec<usize>> {
     let mut sorted_coins = coins.to_vec();

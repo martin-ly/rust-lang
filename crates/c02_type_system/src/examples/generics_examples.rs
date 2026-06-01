@@ -11,6 +11,7 @@
 //! - 高级genericfeature（GATs、HRTB、const generic）
 //! - 变型（Variance）
 //! - 性能优化技巧
+//! - Performance optimization tips
 //! - performance optimization tip
 use std::fmt::Debug;
 
@@ -143,6 +144,7 @@ pub fn identity<T>(x: T) -> T {
 }
 
 /// 创建元组的泛型函数
+/// Creates元组的泛型函数
 /// generic function
 pub fn make_pair<T, U>(first: T, second: U) -> (T, U) {
     (first, second)
@@ -174,6 +176,7 @@ impl<T> Point<T> {
 /// 多个类型参数的泛型结构体
 /// type parameter generic struct
 /// 多个typeparametergenericstruct
+/// multipletypeparametergenericstruct
 #[derive(Debug)]
 pub struct Pair<T, U> {
     pub first: T,
@@ -302,6 +305,7 @@ where
     }
 
     /// 检查数组是否为空
+    /// Checks if the array is empty
     /// as
     pub fn is_empty(&self) -> bool {
         N == 0

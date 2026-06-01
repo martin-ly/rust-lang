@@ -100,6 +100,7 @@ async fn test_runtime_metrics() {
 }
 
 /// 测试运行时配置
+/// runtime configuration
 /// runtime
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
@@ -197,6 +198,7 @@ async fn test_error_handling() {
 }
 
 /// 失败任务实现
+/// failure task
 /// task
 struct FailingTask {
     name: String,

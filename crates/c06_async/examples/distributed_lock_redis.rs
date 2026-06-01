@@ -12,8 +12,10 @@ use tracing::{error, info, warn};
 /// - 重入锁支持（可选）
 /// - reentrant lock （）
 /// - 指数退避重试
+/// - index retry
 /// - index
 /// - 超时保护
+/// - timeout
 /// -
 #[derive(Clone)]
 pub struct DistributedLock {
@@ -60,6 +62,7 @@ impl DistributedLock {
     }
 
     /// 获取锁（阻塞，带重试）
+    /// lock （，retry ）
     /// lock （，）
     /// Getlock（Block，带Retry）
     pub async fn lock(&self, max_wait: Duration) -> Result<()> {

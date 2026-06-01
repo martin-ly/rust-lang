@@ -1,4 +1,5 @@
 //! epoll/IOCP/kqueue 事件抽象（教学化占位实现）
+//! epoll/IOCP/kqueue event （）
 //! epoll/IOCP/kqueue （）
 //! epoll/IOCP/kqueue 事件抽象（教学化占位Implementation of）
 //! - Windows: IOCP
@@ -146,6 +147,7 @@ mod backend {
 pub use backend::EventLoopImpl;
 
 /// 最小事件循环 demo（跨平台占位）
+/// minimum event circulation demo（platform ）
 /// minimum circulation demo（platform ）
 pub fn minimal_demo() {
     let mut el = EventLoopImpl::new();

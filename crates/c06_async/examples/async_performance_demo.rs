@@ -10,6 +10,7 @@
 //! - optimization
 //! - 批量Handleoptimization
 //! - 缓存策略
+//! - cache strategy
 //! - strategy
 //! - 缓存strategy
 //! - 异步I/O优化

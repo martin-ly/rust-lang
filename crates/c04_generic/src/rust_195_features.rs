@@ -1,6 +1,7 @@
 //! Rust 1.95 特性 —— 泛型编程场景
 //! Rust 1.95 feature —— generic scenario
 //! # 概述
+//! # Overview
 //! #
 //! - **`cfg_select!`** — 跨平台泛型特化选择
 //! - **`cfg_select!`** — platform generic
@@ -10,6 +11,7 @@
 // ============================================================================
 
 /// # 跨平台泛型特化
+/// # Cross-platform Generic Specialization
 /// # platform generic
 pub struct GenericCfgSelectExamples;
 
@@ -45,6 +47,7 @@ impl GenericCfgSelectExamples {
 // ============================================================================
 
 /// # 泛型配置解析
+/// # Generic Configuration Parsing
 /// # generic
 pub struct GenericBoolParseExamples;
 
@@ -65,6 +68,7 @@ impl GenericBoolParseExamples {
 // ============================================================================
 
 /// # 泛型算法中的条件模式匹配
+/// # Conditional Pattern Matching in Generic Algorithms
 /// # generic algorithm in condition
 pub struct GenericIfLetGuardExamples;
 

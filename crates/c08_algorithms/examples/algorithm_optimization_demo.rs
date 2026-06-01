@@ -73,6 +73,7 @@ fn main() {
 }
 
 /// 递归版本的斐波那契（O(2^n)）
+/// recursive this （O(2^n)）
 /// this （O(2^n)）
 fn fibonacci_recursive(n: usize) -> u64 {
     if n <= 1 {

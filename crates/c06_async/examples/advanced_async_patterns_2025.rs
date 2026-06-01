@@ -9,8 +9,10 @@ use tokio::time::sleep;
 use tracing::{info, instrument};
 
 /// 2025年高级异步设计模式演示
+/// 2025high async design demonstration
 /// 2025async design demonstration
 /// 包含最新的异步编程模式和最佳实践
+/// async and best practice
 /// async and
 /// 1. 异步状态机模式
 /// 1. async state machine
@@ -620,6 +622,7 @@ impl AsyncContext {
 }
 
 /// 演示所有高级异步设计模式
+/// demonstration all high async design
 /// demonstration all async design
 #[tokio::main]
 async fn main() -> Result<()> {

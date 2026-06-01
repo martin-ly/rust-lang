@@ -332,6 +332,7 @@ async fn demo_error_handling() -> Result<()> {
 }
 
 /// 重试操作演示
+/// retry operation demonstration
 /// demonstration
 async fn retry_operation(max_attempts: u32) -> Result<String> {
     let mut attempts = 0;
@@ -349,6 +350,7 @@ async fn retry_operation(max_attempts: u32) -> Result<String> {
 }
 
 /// 慢速操作演示
+/// operation demonstration
 /// demonstration
 /// 慢速操作Demonstration of
 async fn slow_operation() -> String {
@@ -419,6 +421,7 @@ async fn async_task(name: &str, delay_ms: u64) -> String {
 }
 
 /// 模拟风险操作（可能失败）
+/// risk operation （may failure ）
 /// risk （may ）
 async fn risky_operation() -> Result<String, anyhow::Error> {
     // 模拟 30% 的失败率
@@ -437,6 +440,7 @@ async fn process_item(item: i32) -> i32 {
 }
 
 /// 模拟数据库操作
+/// database operation
 /// database
 async fn simulate_database_operation(id: i32) -> String {
     sleep(Duration::from_millis(50)).await;

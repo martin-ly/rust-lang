@@ -1,7 +1,9 @@
 //! # 字符串操作性能基准测试
+//! # operation Performance benchmark
 //! # Performance benchmark
 //! # 字符串操作performancebenchmark
 //! 测试各种字符串操作的性能
+//! operation performance
 //! performance
 //! ## 运行方式
 //! ## Run way

@@ -3,7 +3,9 @@
 //! ## 核心算法
 //! ## core algorithm
 //! 操作Implementation ofthread-safe push and pop。
+//! operationImplementation ofthread-safe push and pop。
 //! ## 内存安全
+//! ## memorysafe
 //! ## memory safety
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -28,6 +30,7 @@ impl<T> Node<T> {
 /// 线程安全的无锁栈实现，支持多生产者多消费者场景。
 /// thread-safe lock-free stack ，scenario 。
 /// # 示例
+/// # Examples
 /// # example
 /// ```
 /// use c05_threads::lockfree::lockfree_stack::LockFreeStack;
@@ -48,6 +51,7 @@ unsafe impl<T: Send> Sync for LockFreeStack<T> {}
 
 impl<T> LockFreeStack<T> {
     /// 创建新的无锁栈
+    /// Creates新的无锁栈
     /// lock-free stack
     pub fn new() -> Self {
         Self {
@@ -104,6 +108,7 @@ impl<T> LockFreeStack<T> {
     }
 
     /// 检查栈是否为空
+    /// Checks栈是否为空
     /// stack as
     pub fn is_empty(&self) -> bool {
         self.head.load(Ordering::Acquire).is_null()

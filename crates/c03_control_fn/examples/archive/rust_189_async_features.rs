@@ -45,10 +45,12 @@ use tokio_stream::{Stream, StreamExt};
 #[allow(dead_code)]
 trait AsyncProcessor: Send + Sync {
     /// 异步处理数据
+    /// async data
     /// async
     fn process<'a>(&'a self, data: &'a [u8]) -> BoxFuture<'a, Result<Vec<u8>>>;
 
     /// 异步验证数据
+    /// async data
     /// async
     fn validate<'a>(&'a self, input: &'a str) -> BoxFuture<'a, bool>;
 
@@ -100,6 +102,7 @@ impl AsyncProcessor for BasicProcessor {
 }
 
 /// 高级异步处理器实现
+/// high async
 /// async
 struct AdvancedProcessor {
     name: String,
@@ -220,6 +223,7 @@ impl Stream for AsyncNumberGenerator {
 
 impl AsyncNumberGenerator {
     /// 异步处理生成的数字
+    /// async number
     /// async
     async fn process_numbers(&mut self) -> Vec<i32> {
         let mut results = Vec::new();

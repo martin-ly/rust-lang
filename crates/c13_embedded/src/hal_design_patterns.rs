@@ -5,6 +5,7 @@
 //! ## 类型状态编程 (Type State)
 //! ## type state (Type State)
 //! 只有处于正确状态的外设才能执行对应操作。
+//! state outside to operation 。
 //! state outside to 。
 
 use core::marker::PhantomData;
@@ -83,12 +84,14 @@ impl Spi<states::Initialized> {
 
 impl Spi<states::Transmitting> {
     /// 检查传输是否完成
+    /// transmission complete
     /// transmission
     pub fn is_complete(&self) -> bool {
         true
     }
 
     /// 等待传输完成
+    /// etc. transmission complete
     /// etc. transmission
     pub fn wait(self) -> Spi<states::Initialized> {
         Spi {
@@ -99,8 +102,10 @@ impl Spi<states::Transmitting> {
 }
 
 /// 所有权转移配置模式
+/// ownership transfer configuration
 /// ownership transfer
 /// 通过消耗 self 来确保每个配置步骤只执行一次。
+/// self configuration step 。
 /// self step 。
 pub struct UartBuilder {
     base: usize,
@@ -126,6 +131,7 @@ impl UartBuilder {
     }
 
     /// 设置数据位
+    /// data
     pub fn data_bits(mut self, bits: u8) -> Self {
         self.data_bits = Some(bits);
         self

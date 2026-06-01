@@ -91,6 +91,7 @@ impl StdAsyncDemo {
 }
 
 /// 2. Tokio 高性能异步运行时演示
+/// 2. Tokio high performance async runtime demonstration
 /// 2. Tokio performance async runtime demonstration
 pub struct TokioAsyncDemo;
 
@@ -442,6 +443,7 @@ impl AsyncIntegrationFramework {
 }
 
 /// 数据源结构
+/// data source structure
 /// structure
 /// 数据源structure
 #[allow(unused)]

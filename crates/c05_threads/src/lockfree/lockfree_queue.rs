@@ -2,7 +2,9 @@
 //! ## 核心算法
 //! ## core algorithm
 //! 链表structure，Via CAS 操作Implementation ofthread-safe enqueue and dequeue。
+//! chaintablestructure，Via CAS operationImplementation ofthread-safe enqueue and dequeue。
 //! ## 内存安全
+//! ## memorysafe
 //! ## memory safety
 use std::ptr;
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -32,7 +34,9 @@ impl<T> Node<T> {
 
 /// 无锁队列 (Michael-Scott Queue)
 /// thread-safelock-free FIFO 队列Implementation of。
+/// thread-safelock-free FIFO queueImplementation of。
 /// # 示例
+/// # Examples
 /// # example
 /// ```
 /// use c05_threads::lockfree::lockfree_queue::LockFreeQueue;
@@ -54,6 +58,7 @@ unsafe impl<T: Send> Sync for LockFreeQueue<T> {}
 
 impl<T> LockFreeQueue<T> {
     /// 创建新的无锁队列
+    /// Creates新的无锁队列
     /// lock-free queue
     pub fn new() -> Self {
         let sentinel = Box::into_raw(Box::new(Node::sentinel()));
@@ -111,6 +116,7 @@ impl<T> LockFreeQueue<T> {
     /// 从队列头部移除元素
     /// from element
     /// Return `None` if队列as空。
+    /// Return `None` ifqueueasempty。
     pub fn dequeue(&self) -> Option<T> {
         loop {
             let head = self.head.load(Ordering::Acquire);
@@ -147,6 +153,7 @@ impl<T> LockFreeQueue<T> {
     }
 
     /// 检查队列是否为空
+    /// Checks队列是否为空
     /// as
     pub fn is_empty(&self) -> bool {
         let head = self.head.load(Ordering::Acquire);

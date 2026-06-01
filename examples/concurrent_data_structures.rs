@@ -10,6 +10,7 @@ use std::thread;
 use std::time::Duration;
 
 /// 泛型有界阻塞队列（生产者-消费者模式）
+/// generic queue （-）
 /// generic （-）
 pub struct BoundedQueue<T> {
     queue: Mutex<VecDeque<T>>,
@@ -27,6 +28,7 @@ impl<T> BoundedQueue<T> {
     }
 
     /// 入队（阻塞）
+    /// enqueue （）
     /// （）
     /// 入队（Block）
     pub fn enqueue(&self, item: T) {
@@ -41,6 +43,7 @@ impl<T> BoundedQueue<T> {
     }
 
     /// 出队（阻塞）
+    /// dequeue （）
     /// （）
     /// 出队（Block）
     pub fn dequeue(&self) -> T {
@@ -56,6 +59,7 @@ impl<T> BoundedQueue<T> {
     }
 
     /// 尝试入队（非阻塞）
+    /// enqueue （）
     /// （）
     /// 尝试入队（Non-blocking）
     pub fn try_enqueue(&self, item: T) -> bool {
@@ -71,6 +75,7 @@ impl<T> BoundedQueue<T> {
     }
 
     /// 尝试出队（非阻塞）
+    /// dequeue （）
     /// （）
     /// 尝试出队（Non-blocking）
     pub fn try_dequeue(&self) -> Option<T> {
@@ -143,6 +148,7 @@ impl<T> ConcurrentStack<T> {
 }
 
 /// 工作窃取队列（简化版）
+/// queue （）
 /// （）
 pub struct WorkStealingQueue<T> {
     local: Mutex<VecDeque<T>>,
@@ -182,6 +188,7 @@ impl<T> WorkStealingQueue<T> {
     }
 
     /// 分发到共享队列
+    /// to queue
     /// to
     pub fn push_shared(&self, item: T) {
         self.shared.lock().unwrap().push_back(item);

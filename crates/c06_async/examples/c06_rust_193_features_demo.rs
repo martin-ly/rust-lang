@@ -1,6 +1,7 @@
 //! Rust 1.93.0 异步编程相关 API 演示
 //! Rust 1.93.0 async API demonstration
 //! - Duration::from_nanos_u128 - 高精度纳秒级异步延迟
+//! - Duration::from_nanos_u128 - high async
 //! - Duration::from_nanos_u128 - async
 //! 运行: cargo run -p c06_async --example rust_193_features_demo
 use std::collections::VecDeque;

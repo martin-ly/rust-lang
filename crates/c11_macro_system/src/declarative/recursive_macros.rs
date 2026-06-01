@@ -1,7 +1,9 @@
 //! 递归宏实现示例
+//! recursive example
 //! example
 
 /// 计数宏 - 递归计算参数个数
+/// - recursive parameter
 /// - parameter
 /// # 示例
 /// # example

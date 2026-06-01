@@ -1,6 +1,7 @@
 //! 基础通道：标准库 `std::sync::mpsc`
 //! foundation channel ：standard library `std::sync::mpsc`
 //! 用法：
+//! Usage:
 //! ：
 //! let (tx, rx): (Sender<i32>, Receiver<i32>) = channel();
 //! tx.send(42).unwrap();
@@ -10,6 +11,7 @@ pub use std::sync::mpsc::{channel, Receiver, RecvTimeoutError, Sender, TryRecvEr
 use std::time::Duration;
 
 /// 尝试在超时内接收一条消息，映射 Err->None
+/// Attempts to在超时内接收一条消息，映射 Err->None
 /// in inside ， Err->None
 pub fn try_recv_timeout<T>(rx: &Receiver<T>, timeout: Duration) -> Option<T> {
     rx.recv_timeout(timeout).ok()

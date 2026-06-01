@@ -1,6 +1,7 @@
 #![allow(clippy::type_complexity)]
 
 //! - for<'a> 语法
+//! - for<'a> syntax
 //! - for<'a>
 //! - 实际应用场景
 //! - actual application scenario
@@ -47,6 +48,7 @@ trait LendingIterator {
 }
 
 /// 数字迭代器
+/// number
 /// 数字iterator
 struct NumberIterator {
     numbers: Vec<i32>,

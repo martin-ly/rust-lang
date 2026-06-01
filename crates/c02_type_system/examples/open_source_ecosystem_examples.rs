@@ -5,6 +5,7 @@
 //! - serde - 序列化/反序列化
 //! - serde - sequence /sequence
 //! - toml - 配置文件解析
+//! - toml - configuration
 //! - toml -
 //! - chrono - 日期时间处理
 //! - chrono - date time
@@ -40,8 +41,10 @@ mod serde_examples {
     use std::collections::HashMap;
 
     /// # Serde 序列化最佳实践
+    /// # Serde sequence best practice
     /// # Serde sequence
     /// ## 基本用法
+    /// ## this usage
     /// ## this
     #[derive(Debug, Serialize, Deserialize)]
     pub struct Config {
@@ -166,8 +169,10 @@ mod toml_examples {
     use std::collections::HashMap;
 
     /// # TOML 配置解析最佳实践
+    /// # TOML configuration best practice
     /// # TOML
     /// ## 配置文件结构
+    /// ## configuration structure
     /// ## structure
     #[derive(Debug, Serialize, Deserialize)]
     pub struct AppConfig {
@@ -176,21 +181,25 @@ mod toml_examples {
         pub app: AppInfo,
 
         /// 服务器配置
+        /// server configuration
         /// 服务器Configure
         #[serde(default)]
         pub server: ServerConfig,
 
         /// 数据库配置
+        /// database configuration
         /// database
         pub database: DatabaseConfig,
 
         /// 日志配置（可选）
+        /// log configuration （）
         /// （）
         /// 日志Configure（可选）
         #[serde(default)]
         pub logging: Option<LoggingConfig>,
 
         /// 额外配置（动态键值）
+        /// outside configuration （）
         /// outside （）
         #[serde(default)]
         pub features: HashMap<String, serde_json::Value>,
@@ -247,9 +256,11 @@ mod toml_examples {
     }
 
     /// ## 配置加载模式
+    /// ## configuration loading pattern
     /// ##
     impl AppConfig {
         /// 从文件加载配置
+        /// from configuration
         /// from
         pub fn from_file(path: &str) -> anyhow::Result<Self> {
             let content = std::fs::read_to_string(path)
@@ -263,6 +274,7 @@ mod toml_examples {
         }
 
         /// 从环境变量覆盖配置
+        /// from environment variable configuration
         /// from environment variable
         pub fn merge_env(&mut self) {
             if let Ok(port) = std::env::var("APP_PORT") {
@@ -277,6 +289,7 @@ mod toml_examples {
         }
 
         /// 配置验证
+        /// configuration validation
         fn validate(&self) -> anyhow::Result<()> {
             if self.server.port == 0 {
                 return Err(anyhow::anyhow!("Server port cannot be 0"));
@@ -291,6 +304,7 @@ mod toml_examples {
     }
 
     /// ## 示例 TOML 配置
+    /// ## example TOML configuration
     /// ## example TOML
     const SAMPLE_CONFIG: &str = r#"
 [app]
@@ -350,6 +364,7 @@ mod chrono_examples {
     use chrono::{DateTime, Duration, Local, NaiveDate, NaiveDateTime, TimeZone, Utc};
 
     /// # Chrono 日期时间处理最佳实践
+    /// # Chrono date time best practice
     /// # Chrono date time
     /// ## 创建日期时间
     /// ## date time
@@ -429,6 +444,7 @@ mod chrono_examples {
     }
 
     /// ## 时区处理
+    /// ## timezone handling
     /// ##
     /// ## 时区Handle
     pub fn timezone_examples() {
@@ -489,8 +505,10 @@ mod regex_examples {
     use std::collections::HashMap;
 
     /// # Regex 正则表达式最佳实践
+    /// # Regex express best practice
     /// # Regex express
     /// ## 编译和缓存模式
+    /// ## and cache
     /// ## and
     /// 注意：正则应该在循环外编译，避免重复编译开销
     /// ：should in circulation outside ，overhead
@@ -515,6 +533,7 @@ mod regex_examples {
     }
 
     /// ## 常用验证模式
+    /// ## common validation patterns
     /// ##
     pub fn validation_examples() {
         println!("\n=== Regex 验证示例 ===\n");
@@ -601,6 +620,7 @@ mod regex_examples {
 }
 
 /// # 错误处理最佳实践（使用 anyhow/thiserror）
+/// # error handling best practice （ anyhow/thiserror）
 /// # error handling （ anyhow/thiserror）
 #[cfg(feature = "error_handling_examples")]
 mod error_handling_examples {

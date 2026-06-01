@@ -1,6 +1,7 @@
 //! 多线程性能基准测试模块
 //! thread Performance benchmark module
 //! 多threadperformancebenchmarkmodule
+//! multiplethreadperformancebenchmarkmodule
 //! 本模块提供全面的多线程性能测试，包括：
 //! This module provides surface thread performance test ，：
 //! - 线程池性能对比
@@ -29,6 +30,7 @@ use super::advanced_concurrency::{
 // ============================================================================
 
 /// 性能测试配置
+/// Performance tests配置
 /// performance test
 #[derive(Debug, Clone)]
 pub struct BenchmarkConfig {
@@ -50,6 +52,7 @@ impl Default for BenchmarkConfig {
 }
 
 /// 性能测试结果
+/// Performance tests结果
 /// performance test result
 #[derive(Debug, Clone)]
 pub struct BenchmarkResult {
@@ -623,6 +626,7 @@ fn benchmark_rayon_algorithms(
 // ============================================================================
 
 /// 生成性能测试报告
+/// Generates性能测试报告
 /// performance test
 pub fn generate_performance_report(results: &[BenchmarkResult]) -> String {
     let mut report = String::new();

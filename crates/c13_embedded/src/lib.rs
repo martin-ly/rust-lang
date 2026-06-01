@@ -11,6 +11,7 @@
 //! - `no_std` 环境编程
 //! - `no_std` environment
 //! - 内存映射寄存器 (MMIO) 操作
+//! - memory mapping (MMIO) operation
 //! - memory mapping (MMIO)
 //! - UART 驱动设计
 //! - UART driver design
@@ -20,6 +21,7 @@
 //! - HAL 设计模式（类型状态）
 //! - HAL design （type state ）
 //! - C 语言互操作 (FFI)
+//! - C operation (FFI)
 //! - C (FFI)
 //! ## 编译说明
 //! ## explain

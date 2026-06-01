@@ -1,5 +1,6 @@
 //! 网络编程模块边界情况测试套件 / Network Programming Module Edge Cases Test Suite
 /// 测试数据包大小边界情况
+/// data packet edge situation
 /// edge situation
 #[test]
 fn test_packet_size_boundaries() {
@@ -35,6 +36,7 @@ fn test_connection_count_boundaries() {
 }
 
 /// 测试超时边界情况
+/// timeout edge situation
 /// edge situation
 #[test]
 fn test_timeout_boundaries() {
@@ -153,6 +155,7 @@ fn test_connection_state_boundaries() {
 }
 
 /// 测试网络重试边界情况
+/// network retry edge situation
 /// network edge situation
 #[test]
 fn test_retry_boundaries() {

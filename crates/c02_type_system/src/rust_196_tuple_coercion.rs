@@ -1,11 +1,13 @@
 //! # Rust 1.95.0 元组 Coercion 特性示例
 //! # Rust 1.95.0 Coercion feature example
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_196_tuple_coercion.rs
 //! - 创建日期: 2026-04-10
 //! - date : 2026-04-10
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 
@@ -15,6 +17,7 @@
 /// `if let` guards 允许在 match arm 上直接进行模式匹配和条件判断，
 /// `if let` guards in match arm on and condition ，
 /// 减少嵌套层级，使代码更扁平、更易读。
+/// Decreases嵌套层级，使代码更扁平、更易读。
 /// ，、。
 pub struct TypeIfLetGuardExamples;
 
@@ -30,6 +33,7 @@ impl TypeIfLetGuardExamples {
     }
 
     /// 验证类型转换结果
+    /// Validates类型转换结果
     /// type conversion result
     pub fn validate_conversion(result: Result<Option<i32>, &'static str>) -> &'static str {
         match result {
@@ -513,6 +517,7 @@ pub mod type_erasure {
 // ==================== 7. 演示函数 ====================
 
 /// 演示基础元组 coercion
+/// Demonstrates基础元组 coercion
 /// demonstration foundation coercion
 #[allow(dead_code)]
 pub fn demonstrate_basic_coercion() {
@@ -525,6 +530,7 @@ pub fn demonstrate_basic_coercion() {
 }
 
 /// 演示嵌套元组 coercion
+/// Demonstrates嵌套元组 coercion
 /// demonstration coercion
 /// Demonstration of嵌套tuple coercion
 #[allow(dead_code)]
@@ -537,6 +543,7 @@ pub fn demonstrate_nested_coercion() {
 }
 
 /// 演示智能指针 coercion
+/// Demonstrates智能指针 coercion
 /// demonstration pointer coercion
 #[allow(dead_code)]
 pub fn demonstrate_smart_pointer_coercion() {
@@ -548,6 +555,7 @@ pub fn demonstrate_smart_pointer_coercion() {
 }
 
 /// 演示实际应用场景
+/// Demonstrates实际应用场景
 /// demonstration actual application scenario
 #[allow(dead_code)]
 pub fn demonstrate_practical_applications() {
@@ -582,6 +590,7 @@ pub fn demonstrate_practical_applications() {
 }
 
 /// 演示 Rust 1.95.0 元组 coercion 特性
+/// Demonstrates Rust 1.95.0 元组 coercion 特性
 /// demonstration Rust 1.95.0 coercion feature
 pub fn demonstrate_rust_196_tuple_coercion() {
     println!("\n========================================");
@@ -602,6 +611,7 @@ pub fn demonstrate_rust_196_tuple_coercion() {
 }
 
 /// 获取 Rust 1.95.0 元组 coercion 特性信息
+/// Gets Rust 1.95.0 元组 coercion 特性信息
 /// Rust 1.95.0 coercion feature
 pub fn get_rust_196_tuple_info() -> String {
     "Rust 1.95.0 元组 Coercion 特性:\n- 元组元素作为 coercion site\n- 支持引用到 trait object \

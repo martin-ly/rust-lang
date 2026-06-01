@@ -1,12 +1,16 @@
 //! Rust 1.95.0 类型系统新特性实现模块
 //! Rust 1.95.0 type system feature module
 //! # 版本信息
+//! # Version Information
 //! # this
 //! - 稳定日期: 2026-04-16
+//! - Stabilization date: 2026-04-16
 //! - date : 2026-04-16
 //! - 稳定date: 2026-04-16
+//! - stabledate: 2026-04-16
 //! - date: 2026-04-16
 //! # 参考
+//! # References
 //! # reference
 //! - [RFC 3550: New Range Types](https://rust-lang.github.io/rfcs/3550-new-range.html)
 
@@ -18,10 +22,12 @@ use std::ops::RangeInclusive;
 // ============================================================================
 
 /// ## 概念定义
+/// ## Concept Definition
 /// ## concept definition
 /// 提供更丰富、更一致的区间类型系统。
 /// 、interval type system 。
 /// ## Wikipedia 概念对齐
+/// ## Wikipedia Concept Alignment
 /// ## 关键区分
 /// ## key
 /// ## key区分
@@ -233,6 +239,7 @@ impl RangeInterop {
 /// # 集合可变插入方法
 /// # set method
 /// 插入/推送方法。这些方法解决了"插入后需要立即修改元素"的常见问题，
+/// Inserts/推送方法。这些方法解决了"插入后需要立即修改元素"的常见问题，
 /// /method 。method "after element "problem ，
 /// ## 新增 API 列表
 /// ## API
@@ -262,6 +269,7 @@ impl CollectionMutMethodsExamples {
     /// `Vec::push_mut` —— 推送并立即修改
     /// `Vec::push_mut` —— and
     /// ## 1.95 之前
+    /// ## Before 1.95
     /// ## 1.95 's before
     /// let mut v = Vec::new();
     /// v.push(String::new());
@@ -270,6 +278,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 Approach
     /// ## 1.95 way
     pub fn vec_push_mut() {
         let mut names: Vec<String> = Vec::new();
@@ -285,6 +294,7 @@ impl CollectionMutMethodsExamples {
     /// `Vec::insert_mut` —— 插入并立即修改
     /// `Vec::insert_mut` —— and
     /// ## 1.95 之前
+    /// ## Before 1.95
     /// ## 1.95 's before
     /// let mut v = vec![1, 3];
     /// v.insert(1, 0);
@@ -293,6 +303,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 Approach
     /// ## 1.95 way
     /// `insert_mut` 在指定位置插入元素并返回其可变引用。
     /// `insert_mut` in position element and its reference 。
@@ -307,6 +318,7 @@ impl CollectionMutMethodsExamples {
     }
 
     /// ## 1.95 之前
+    /// ## Before 1.95
     /// ## 1.95 's before
     /// let mut dq = VecDeque::from([2, 3]);
     /// dq.push_front(0);
@@ -315,6 +327,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 Approach
     /// ## 1.95 way
     pub fn vecdeque_push_front_mut() {
         let mut queue = VecDeque::from([200, 300]);
@@ -327,6 +340,7 @@ impl CollectionMutMethodsExamples {
     }
 
     /// ## 1.95 之前
+    /// ## Before 1.95
     /// ## 1.95 's before
     /// let mut dq = VecDeque::from([1, 2]);
     /// dq.push_back(3);
@@ -335,6 +349,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 Approach
     /// ## 1.95 way
     pub fn vecdeque_push_back_mut() {
         let mut queue = VecDeque::from([1, 2]);
@@ -347,6 +362,7 @@ impl CollectionMutMethodsExamples {
     }
 
     /// ## 1.95 之前
+    /// ## Before 1.95
     /// ## 1.95 's before
     /// let mut dq = VecDeque::from([1, 3]);
     /// dq.insert(1, 2);
@@ -355,6 +371,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 Approach
     /// ## 1.95 way
     pub fn vecdeque_insert_mut() {
         let mut queue = VecDeque::from([10, 30]);
@@ -367,6 +384,7 @@ impl CollectionMutMethodsExamples {
     }
 
     /// ## 1.95 之前
+    /// ## Before 1.95
     /// ## 1.95 's before
     /// let mut list = LinkedList::from([2, 3]);
     /// list.push_front(1);
@@ -375,6 +393,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 Approach
     /// ## 1.95 way
     pub fn linkedlist_push_front_mut() {
         let mut list = LinkedList::from([20, 30]);
@@ -387,6 +406,7 @@ impl CollectionMutMethodsExamples {
     }
 
     /// ## 1.95 之前
+    /// ## Before 1.95
     /// ## 1.95 's before
     /// let mut list = LinkedList::from([1, 2]);
     /// list.push_back(3);
@@ -395,6 +415,7 @@ impl CollectionMutMethodsExamples {
     /// ```
     ///
     /// ## 1.95 方式
+    /// ## 1.95 Approach
     /// ## 1.95 way
     pub fn linkedlist_push_back_mut() {
         let mut list = LinkedList::from([1, 2]);
@@ -628,7 +649,9 @@ use std::ops::ControlFlow;
 // ============================================================================
 
 /// # `Saturating<T>` 类型
+/// # `Saturating<T>` type
 /// ## 对比
+/// ## Comparison
 /// ## to
 /// ## to比
 /// ## to

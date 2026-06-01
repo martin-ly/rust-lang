@@ -10,8 +10,10 @@ use tracing::{error, info, warn};
 /// 2025年异步性能基准测试套件
 /// 2025async Performance benchmark
 /// 展示最新的异步性能测试和基准测试最佳实践
+/// async performance test and benchmark best practice
 /// async performance test and benchmark
 /// 1. 异步基准测试配置
+/// 1. async benchmark configuration
 /// 1. async benchmark
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BenchmarkConfig {

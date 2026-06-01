@@ -98,6 +98,7 @@ impl<T: PartialEq + Eq> Default for PriorityChannel<T> {
 
 impl<T: PartialEq + Eq> PriorityChannel<T> {
     /// 创建新的优先级通道
+    /// Creates新的优先级通道
     /// priority channel
     pub fn new() -> Self {
         Self {
@@ -108,6 +109,7 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
     }
 
     /// 创建有容量限制的优先级通道
+    /// Creates有容量限制的优先级通道
     /// priority channel
     pub fn with_capacity(capacity: usize) -> Self {
         Self {
@@ -118,6 +120,7 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
     }
 
     /// 发送优先级消息
+    /// Sends优先级消息
     pub fn send(&self, priority: u32, data: T) -> Result<(), T> {
         let message = PriorityMessage::new(priority, data);
 
@@ -136,6 +139,7 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
     }
 
     /// 接收优先级消息
+    /// Receives优先级消息
     pub fn recv(&self) -> Option<T> {
         let mut queue = self.queue.lock().unwrap();
 
@@ -147,6 +151,7 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
     }
 
     /// 尝试接收优先级消息
+    /// Attempts to接收优先级消息
     pub fn try_recv(&self) -> Option<T> {
         let mut queue = self.queue.lock().unwrap();
         queue.pop().map(|msg| msg.into_data())
@@ -170,11 +175,13 @@ impl<T: PartialEq + Eq> PriorityChannel<T> {
     }
 
     /// 获取队列长度
+    /// Gets队列长度
     pub fn len(&self) -> usize {
         self.queue.lock().unwrap().len()
     }
 
     /// 检查队列是否为空
+    /// Checks队列是否为空
     /// as
     pub fn is_empty(&self) -> bool {
         self.queue.lock().unwrap().is_empty()
@@ -233,6 +240,7 @@ pub struct MultiLevelPriorityChannel<T: Eq> {
 
 impl<T: PartialEq + Eq> MultiLevelPriorityChannel<T> {
     /// 创建新的多级优先级通道
+    /// Creates新的多级优先级通道
     /// priority channel
     pub fn new(level_count: usize) -> Self {
         let channels: Vec<Arc<PriorityChannel<T>>> = (0..level_count)
@@ -246,6 +254,7 @@ impl<T: PartialEq + Eq> MultiLevelPriorityChannel<T> {
     }
 
     /// 发送消息到指定级别
+    /// Sends消息到指定级别
     /// to level
     pub fn send_to_level(&self, level: usize, data: T) -> Result<(), T> {
         if level >= self.level_count {
@@ -256,6 +265,7 @@ impl<T: PartialEq + Eq> MultiLevelPriorityChannel<T> {
     }
 
     /// 接收消息（按级别优先级）
+    /// Receives消息（按级别优先级）
     /// （level ）
     pub fn recv(&self) -> Option<T> {
         // 从高优先级级别开始接收
@@ -328,6 +338,7 @@ pub struct DynamicPriorityChannel<T: Eq> {
 
 impl<T: PartialEq + Eq> DynamicPriorityChannel<T> {
     /// 创建新的动态优先级通道
+    /// Creates新的动态优先级通道
     /// priority channel
     pub fn new<F>(priority_adjuster: F) -> Self
     where
@@ -341,6 +352,7 @@ impl<T: PartialEq + Eq> DynamicPriorityChannel<T> {
     }
 
     /// 发送消息（动态计算优先级）
+    /// Sends消息（动态计算优先级）
     /// （）
     pub fn send(&self, data: T) -> Result<(), T> {
         let priority = (self.priority_adjuster)(&data);
@@ -353,6 +365,7 @@ impl<T: PartialEq + Eq> DynamicPriorityChannel<T> {
     }
 
     /// 接收消息
+    /// Receives a message
     pub fn recv(&self) -> Option<T> {
         let mut queue = self.queue.lock().unwrap();
 
@@ -430,6 +443,7 @@ pub struct FairSchedulingPriorityChannel<T: Eq> {
 
 impl<T: PartialEq + Eq> FairSchedulingPriorityChannel<T> {
     /// 创建新的公平调度优先级通道
+    /// Creates新的公平调度优先级通道
     /// priority channel
     pub fn new(high_priority_threshold: u32, fairness_ratio: usize) -> Self {
         Self {
@@ -443,6 +457,7 @@ impl<T: PartialEq + Eq> FairSchedulingPriorityChannel<T> {
     }
 
     /// 发送消息
+    /// Sends消息
     pub fn send(&self, priority: u32, data: T) -> Result<(), T> {
         let message = PriorityMessage::new(priority, data);
 
@@ -459,6 +474,7 @@ impl<T: PartialEq + Eq> FairSchedulingPriorityChannel<T> {
     }
 
     /// 接收消息（公平调度）
+    /// Receives消息（公平调度）
     /// （）
     pub fn recv(&self) -> Option<T> {
         loop {

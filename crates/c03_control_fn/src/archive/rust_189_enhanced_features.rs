@@ -1,26 +1,38 @@
 //! # Rust 1.89 特性示例 (历史版本)
+//! # Rust 1.89 Feature Examples (Historical Version)
 //! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
+//! ## Version History
 //! ## this explain
 //! ### Rust 1.92.0 主要改进
+//! ### Rust 1.92.0 Major Improvements
 //! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化、改进的编译优化
+//! - **Performance optimizations**: Iterator method specialization, improved compilation optimizations
 //! - **performance optimization **: method 、optimization
 //! ### 迁移建议
+//! ### Migration Suggestions
 //! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
+//! 1. Update Cargo.toml: `rust-version = "1.92"`
 //! 参考:
+//! Reference:
 //! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//! - [Historical version: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 增强特性模块
+//! # Rust 1.89 enhancefeaturesmodule
 //! # Rust 1.89 feature module
 //! # Rust 1.89 增强featuremodule
+//! # Rust 1.89 enhancefeaturemodule
 //! - let_chains 特性稳定化
 //! - let_chains feature
 //! - cfg_boolean_literals 特性稳定化
@@ -47,6 +59,7 @@ pub mod let_chains_189 {
     }
 
     /// 获取当前用户状态
+    /// Gets当前用户状态
     /// when before state
     pub fn get_current_user_status() -> UserStatus {
         UserStatus::Active(12345, "Rustacean".to_string())
@@ -242,6 +255,7 @@ pub mod naked_functions_189 {
 pub mod dangerous_implicit_autorefs_189 {
 
     /// 演示危险隐式引用
+    /// Demonstrates危险隐式引用
     /// demonstration reference
     /// Demonstration of危险隐式reference
     pub fn demonstrate_dangerous_implicit_autorefs() {
@@ -263,6 +277,7 @@ pub mod dangerous_implicit_autorefs_189 {
     }
 
     /// 演示正确的指针使用方式
+    /// Demonstrates正确的指针使用方式
     /// demonstration pointer way
     pub fn demonstrate_safe_pointer_usage() {
         println!("=== 安全的指针使用方式 ===");
@@ -285,6 +300,7 @@ pub mod dangerous_implicit_autorefs_189 {
 pub mod invalid_null_arguments_189 {
 
     /// 演示无效空指针参数校验
+    /// Demonstrates无效空指针参数校验
     /// demonstration ineffective pointer parameter
     pub fn demonstrate_invalid_null_arguments() {
         println!("=== Rust 1.89 无效空指针参数校验演示 ===");
@@ -311,6 +327,7 @@ pub mod invalid_null_arguments_189 {
     }
 
     /// 演示安全的指针参数传递
+    /// Demonstrates安全的指针参数传递
     /// demonstration pointer parameter
     pub fn demonstrate_safe_pointer_arguments() {
         println!("=== 安全的指针参数传递 ===");
@@ -325,6 +342,7 @@ pub mod invalid_null_arguments_189 {
     /// 安全处理指针的函数
     /// pointer function
     /// 安全Handlepointerfunction
+    /// safeHandlepointerfunction
     fn process_pointer_safely(ptr: *const i32, len: usize) {
         if ptr.is_null() {
             println!("❌ 接收到空指针，无法处理");
@@ -382,6 +400,7 @@ impl Rust189EnhancedFeatures {
     }
 
     /// 获取 Rust 1.89 特性列表
+    /// Gets Rust 1.89 特性列表
     /// Rust 1.89 feature
     pub fn get_feature_list() -> Vec<&'static str> {
         vec![
@@ -394,6 +413,7 @@ impl Rust189EnhancedFeatures {
     }
 
     /// 检查特性支持状态
+    /// Checks特性支持状态
     /// feature state
     pub fn check_feature_support() -> std::collections::HashMap<String, bool> {
         let mut support_status = std::collections::HashMap::new();

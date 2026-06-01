@@ -4,9 +4,12 @@
 //! - 高级泛型特性 / Advanced Generic Features (Mapper, Combinator, Filter)
 //! - 高级genericfeature / Advanced Generic Features (Mapper, Combinator, Filter)
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_192_features.rs
+//! - File: rust_192_features.rs
 //! - 创建日期: 2025-12-11
+//! - Creation date: 2025-12-11
 //! - date : 2025-12-11
 //! - 版本: 1.4
 //! - this : 1.4
@@ -31,14 +34,17 @@ pub trait GenericContainer {
     type Index: Copy + PartialEq + 'static;
 
     /// 获取容器中的项
+    /// Gets容器中的项
     /// in
     fn get(&self, index: Self::Index) -> Option<&Self::Item>;
 
     /// 设置容器中的项
+    /// Sets容器中的项
     /// in
     fn set(&mut self, index: Self::Index, item: Self::Item);
 
     /// 获取容器大小
+    /// Gets容器大小
     fn size(&self) -> usize;
 }
 
@@ -51,6 +57,7 @@ pub struct GenericVector<T> {
 
 impl<T> GenericVector<T> {
     /// 创建新的泛型向量容器
+    /// Creates新的泛型向量容器
     /// generic
     pub fn new() -> Self {
         GenericVector { items: vec![] }
@@ -99,12 +106,14 @@ where
     T: Clone + Send + Sync + 'static,
 {
     /// 检查容器是否为空
+    /// Checks容器是否为空
     /// as
     pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
 
     /// 清空容器
+    /// Clears容器
     pub fn clear(&mut self) {
         self.items.clear();
     }
@@ -122,12 +131,14 @@ where
     }
 
     /// 获取容器的迭代器
+    /// Gets容器的迭代器
     /// Get容器iterator
     pub fn iter(&self) -> impl Iterator<Item = &T> {
         self.items.iter()
     }
 
     /// 获取容器的可变迭代器
+    /// Gets容器的可变迭代器
     /// Get容器可变iterator
     pub fn iter_mut(&mut self) -> impl Iterator<Item = &mut T> {
         self.items.iter_mut()
@@ -160,10 +171,12 @@ pub trait GenericTransformer<Input> {
     type Output: Clone + Send + 'static;
 
     /// 错误类型
+    /// Error type
     /// error type
     type Error: std::error::Error + Send + 'static;
 
     /// 转换输入到输出
+    /// Converts输入到输出
     /// conversion to
     fn transform(&self, input: Input) -> Result<Self::Output, Self::Error>;
 }
@@ -199,6 +212,7 @@ where
 /// generic lifetime Trait
 pub trait GenericLifetimeProcessor<T: ?Sized> {
     /// 处理任意生命周期的引用
+    /// Processes任意生命周期的引用
     /// lifetime reference
     fn process<'a>(&self, input: &'a T) -> &'a T;
 }
@@ -298,6 +312,7 @@ impl ImprovedSizedBound for SizedBoundProcessor {
 
 impl SizedBoundProcessor {
     /// 创建新的处理器
+    /// Creates新的处理器
     pub fn new() -> Self {
         SizedBoundProcessor
     }
@@ -357,30 +372,35 @@ where
     }
 
     /// 获取主要值
+    /// Gets主要值
     /// main
     pub fn primary(&self) -> &T {
         &self.primary
     }
 
     /// 获取次要值
+    /// Gets次要值
     /// secondary
     pub fn secondary(&self) -> &U {
         &self.secondary
     }
 
     /// 获取主要值的可变引用
+    /// Gets主要值的可变引用
     /// main reference
     pub fn primary_mut(&mut self) -> &mut T {
         &mut self.primary
     }
 
     /// 获取次要值的可变引用
+    /// Gets次要值的可变引用
     /// secondary reference
     pub fn secondary_mut(&mut self) -> &mut U {
         &mut self.secondary
     }
 
     /// 克隆并交换主要值和次要值（创建新实例）
+    /// Clones并交换主要值和次要值（创建新实例）
     /// and exchange main and secondary （）
     pub fn swapped(&self) -> ComplexConstraintGeneric<U, T>
     where
@@ -394,6 +414,7 @@ where
     }
 
     /// 转换为元组
+    /// Converts为元组
     /// conversion as
     pub fn into_tuple(self) -> (T, U) {
         (self.primary, self.secondary)
@@ -436,6 +457,7 @@ impl GenericMemoryAllocator {
     }
 
     /// 计算泛型类型需要的内存块数
+    /// Computes泛型类型需要的内存块数
     /// generic type memory
     pub fn calculate_blocks<T>(&self, count: usize) -> usize {
         if count == 0 {
@@ -455,17 +477,20 @@ impl GenericMemoryAllocator {
     }
 
     /// 获取块大小
+    /// Gets块大小
     pub fn block_size(&self) -> NonZeroUsize {
         self.block_size
     }
 
     /// 计算给定类型和数量的总内存大小
+    /// Computes给定类型和数量的总内存大小
     /// type and quantity memory
     pub fn calculate_total_size<T>(&self, count: usize) -> usize {
         count * std::mem::size_of::<T>()
     }
 
     /// 计算对齐后的总内存大小
+    /// Computes对齐后的总内存大小
     /// to after memory
     pub fn calculate_aligned_total_size<T>(&self, count: usize) -> usize {
         let total_size = self.calculate_total_size::<T>(count);
@@ -480,6 +505,7 @@ impl GenericMemoryAllocator {
 // ==================== 6. 迭代器方法特化在泛型数据处理中的应用 ====================
 
 /// 比较两个泛型集合
+/// Compares两个泛型集合
 /// generic set
 pub fn compare_generic_collections<T: PartialEq>(col1: &[T], col2: &[T]) -> bool {
     // Rust 1.92.0: 特化的迭代器比较方法，性能更好
@@ -499,6 +525,7 @@ impl<T: PartialEq> GenericCollectionValidator<T> {
     }
 
     /// 验证泛型集合是否匹配
+    /// Validates泛型集合是否匹配
     /// generic set
     /// Rust 1.92.0: Use特化 eq method（performanceoptimization）
     pub fn validate(&self, actual: &[T]) -> bool {
@@ -506,6 +533,7 @@ impl<T: PartialEq> GenericCollectionValidator<T> {
     }
 
     /// 获取期望的集合
+    /// Gets期望的集合
     /// set
     /// Get期望set
     pub fn expected(&self) -> &[T] {
@@ -513,12 +541,14 @@ impl<T: PartialEq> GenericCollectionValidator<T> {
     }
 
     /// 更新期望的集合
+    /// Updates期望的集合
     /// set
     pub fn update_expected(&mut self, new_expected: Vec<T>) {
         self.expected = new_expected;
     }
 
     /// 检查集合是否为空
+    /// Checks集合是否为空
     /// set as
     pub fn is_empty(&self) -> bool {
         self.expected.is_empty()
@@ -528,10 +558,13 @@ impl<T: PartialEq> GenericCollectionValidator<T> {
 // ==================== 7. 便利函数和工具方法 ====================
 
 /// 创建默认的泛型内存分配器
+/// Creates默认的泛型内存分配器
 /// generic allocator
 /// # 示例
+/// # Examples
 /// # example
 /// // 此模块为归档模块，示例代码仅供参考
+/// // This module is archived; example code is for reference only
 /// // this module as module ，example reference
 /// // 当前版本请使用 rust_194_features 模块
 /// // when before this rust_194_features module
@@ -542,8 +575,10 @@ pub fn create_default_memory_allocator() -> GenericMemoryAllocator {
 /// 批量创建泛型向量容器
 /// generic
 /// # 示例
+/// # Examples
 /// # example
 /// // 此模块为归档模块，示例代码仅供参考
+/// // This module is archived; example code is for reference only
 /// // this module as module ，example reference
 /// // 当前版本请使用 rust_194_features 模块
 /// // when before this rust_194_features module
@@ -559,8 +594,10 @@ where
 /// 从多个转换器创建转换器链
 /// from conversion conversion
 /// # 示例
+/// # Examples
 /// # example
 /// // 此模块为归档模块，示例代码仅供参考
+/// // This module is archived; example code is for reference only
 /// // this module as module ，example reference
 /// // 当前版本请使用 rust_194_features 模块
 /// // when before this rust_194_features module
@@ -575,6 +612,7 @@ pub fn create_transformer_chain(count: usize) -> Vec<StringToNumberTransformer> 
 pub type GenericResult<T, E> = Result<T, E>;
 
 /// 验证泛型类型是否满足特定约束
+/// Validates泛型类型是否满足特定约束
 /// generic type
 pub trait GenericValidator<T> {
     fn validate(&self, value: &T) -> bool;
@@ -1061,6 +1099,7 @@ where
 // ==================== 14. 综合应用示例 ====================
 
 /// 演示 Rust 1.92.0 泛型编程特性
+/// Demonstrates Rust 1.92.0 泛型编程特性
 /// demonstration Rust 1.92.0 generic feature
 pub fn demonstrate_rust_192_generic_features() {
     println!("\n=== Rust 1.92.0 泛型编程特性演示 ===\n");

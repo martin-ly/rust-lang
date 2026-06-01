@@ -7,8 +7,10 @@
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! 1. const 上下文增强（宏配置计算）
+//! 1. const on under （configuration ）
 //! 1. const on under （）
 //! 2. 新的稳定 API（宏数据处理）
+//! 2. API（data ）
 //! 2. API（）
 //! 3. JIT 编译器优化（宏展开性能提升）
 //! 3. JIT optimization （performance ）
@@ -16,9 +18,11 @@
 //! 4. allocator optimization （data structure optimization ）
 //! 4. allocatoroptimization（宏data structureoptimization）
 //! 5. 宏展开缓存机制（编译时优化）
+//! 5. cache mechanism （compile-time optimization ）
 //! 5. mechanism （compile-time optimization ）
 //! 5. 宏展开缓存mechanism（compile-timeoptimization）
 //! 6. 改进的宏错误消息（开发体验提升）
+//! 6. message （volume ）
 //! 6. （volume ）
 //! 7. 过程宏编译优化（编译时间减少）
 //! 7. optimization （compile-time ）
@@ -121,6 +125,7 @@ fn demo_memory_allocator_optimization() {
 }
 
 /// 演示宏展开缓存机制
+/// demonstration cache mechanism
 /// demonstration mechanism
 /// Demonstration of宏展开缓存mechanism
 fn demo_macro_expansion_cache() {
@@ -159,6 +164,7 @@ fn demo_macro_expansion_cache() {
 }
 
 /// 演示改进的宏错误消息
+/// demonstration message
 /// demonstration
 fn demo_improved_macro_errors() {
     println!("\n6. 改进的宏错误消息（开发体验提升）");

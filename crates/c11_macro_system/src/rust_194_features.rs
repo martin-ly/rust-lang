@@ -1,6 +1,7 @@
 //! Rust 1.94.0 宏系统特性实现模块
 //! Rust 1.94.0 system feature module
 //! - array_windows - 切片数组窗口迭代器（用于宏解析）
+//! - array_windows - array （）
 //! - array_windows - （）
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - 数学constant - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
@@ -32,12 +33,14 @@ use std::time::Instant;
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TokenKind {
     /// 标识符
+    /// identifier
     Identifier,
     /// 关键字
     /// key
     /// key字
     Keyword,
     /// 操作符
+    /// operation
     Operator,
     /// 标点符号
     /// point symbol
@@ -49,6 +52,7 @@ pub enum TokenKind {
     /// 空白字符
     Whitespace,
     /// 文件结束
+    /// end
     Eof,
 }
 
@@ -124,6 +128,7 @@ impl TokenStreamAnalyzer {
     }
 
     /// 统计操作符使用频率
+    /// operation
     pub fn count_operator_pairs(tokens: &[Token]) -> HashMap<String, usize> {
         let mut counts = HashMap::new();
 
@@ -177,15 +182,19 @@ impl MacroExpansionAnalyzer {
 }
 
 /// 语法块匹配器
+/// syntax
 /// 使用 array_windows 匹配括号块
+/// array_windows parentheses
 /// array_windows
 /// Use array_windows 匹配括号块
 pub struct BlockMatcher;
 
 impl BlockMatcher {
     /// 查找匹配的括号对
+    /// parentheses to
     /// to
     /// Rust 1.96.0: array_windows 用于快速检测相邻括号
+    /// Rust 1.96.0: array_windows fast parentheses
     /// Rust 1.96.0: array_windows fast
     pub fn find_bracket_pairs(tokens: &[Token]) -> Vec<(usize, usize)> {
         let mut pairs = Vec::new();
@@ -220,6 +229,7 @@ impl BlockMatcher {
     /// 使用 array_windows 快速检测空块 `{}`
     /// array_windows fast `{}`
     /// Rust 1.96.0: array_windows<2> 检测相邻开闭括号
+    /// Rust 1.96.0: array_windows<2> parentheses
     /// Rust 1.96.0: array_windows<2>
     pub fn find_empty_blocks(tokens: &[Token]) -> Vec<usize> {
         let mut empty_blocks = Vec::new();
@@ -240,6 +250,7 @@ impl BlockMatcher {
 // ==================== 2. LazyLock 新方法 - 宏编译缓存 ====================
 
 /// 宏编译结果缓存
+/// result cache
 /// result
 static MACRO_COMPILE_CACHE: LazyLock<Mutex<HashMap<String, CompileResult>>> =
     LazyLock::new(|| Mutex::new(HashMap::new()));
@@ -260,6 +271,7 @@ pub struct CompileResult {
 }
 
 /// 获取编译缓存
+/// cache
 pub fn get_cached_compile_result(macro_name: &str) -> Option<CompileResult> {
     let cache = MACRO_COMPILE_CACHE
         .lock()
@@ -277,12 +289,14 @@ pub fn store_compile_result(macro_name: impl Into<String>, result: CompileResult
 }
 
 /// 延迟初始化的宏元数据
+/// data
 static MACRO_METADATA: LazyLock<MacroMetadataRegistry> = LazyLock::new(|| {
     println!("初始化宏元数据注册表...");
     MacroMetadataRegistry::new()
 });
 
 /// 宏元数据注册表
+/// data
 #[derive(Debug)]
 pub struct MacroMetadataRegistry {
     macros: Mutex<HashMap<String, MacroInfo>>,
@@ -290,9 +304,11 @@ pub struct MacroMetadataRegistry {
 }
 
 /// 宏信息
+/// macro info
 #[derive(Debug, Clone)]
 pub struct MacroInfo {
     /// 宏名称
+    /// macro name
     pub name: String,
     /// 定义位置
     /// definition position
@@ -342,6 +358,7 @@ impl MacroMetadataRegistry {
     }
 
     /// 获取宏信息
+    /// macro info
     pub fn get_info(&self, name: &str) -> Option<MacroInfo> {
         let macros = self
             .macros
@@ -352,6 +369,7 @@ impl MacroMetadataRegistry {
 }
 
 /// 获取宏元数据注册表
+/// data
 pub fn get_macro_registry() -> &'static MacroMetadataRegistry {
     &MACRO_METADATA
 }
@@ -418,6 +436,7 @@ pub fn get_macro_rules() -> std::sync::MutexGuard<'static, MacroRuleLibrary> {
 // ==================== 3. 数学常量 - 宏扩展优化 ====================
 
 /// # 3. 数学常量 - 宏扩展优化
+/// # 3. math constant - optimization
 /// # 3. constant - optimization
 /// # 3. 数学constant - 宏扩展optimization
 /// 基于黄金比例的宏扩展策略
@@ -458,7 +477,9 @@ impl GoldenRatioExpansionStrategy {
 }
 
 /// 基于欧拉常数的递归限制器
+/// recursive
 /// 使用 EULER_GAMMA 调整递归深度限制
+/// EULER_GAMMA recursive
 /// EULER_GAMMA
 pub struct EulerRecursionLimiter {
     max_depth: usize,
@@ -479,6 +500,7 @@ impl EulerRecursionLimiter {
     }
 
     /// 进入递归
+    /// recursive
     /// 进入Recurse
     pub fn enter(&self) -> bool {
         let mut depth = self.current_depth.borrow_mut();
@@ -491,6 +513,7 @@ impl EulerRecursionLimiter {
     }
 
     /// 退出递归
+    /// recursive
     /// 退出Recurse
     pub fn exit(&self) {
         let mut depth = self.current_depth.borrow_mut();
@@ -515,6 +538,7 @@ impl EulerRecursionLimiter {
 /// 宏扩展时间估算器
 /// time
 /// 使用数学常数估算宏扩展时间
+/// math time
 /// time
 pub struct ExpansionTimeEstimator;
 
@@ -578,7 +602,9 @@ impl<'a> PeekableMacroParser<'a> {
     }
 
     /// 解析标识符
+    /// identifier
     /// Rust 1.94.0: 使用 next_if() 简化标识符解析
+    /// Rust 1.94.0: next_if() identifier
     /// Rust 1.94.0: next_if()
     /// Rust 1.94.0: Use next_if() 简化标识符Parse
     fn parse_identifier(&mut self) -> Option<String> {
@@ -603,8 +629,10 @@ impl<'a> PeekableMacroParser<'a> {
     }
 
     /// 解析数字字面量
+    /// number surface
     /// surface
     /// Rust 1.94.0: 使用 next_if() 简化数字解析
+    /// Rust 1.94.0: next_if() number
     /// Rust 1.94.0: next_if()
     /// Rust 1.94.0: Use next_if() 简化数字Parse
     fn parse_number(&mut self) -> Option<String> {
@@ -793,12 +821,14 @@ pub struct TokenEncoder;
 
 impl TokenEncoder {
     /// 将字符编码为数字标识符
+    /// will as number identifier
     /// will as
     pub fn encode_char(c: char) -> Option<usize> {
         usize::try_from(c).ok()
     }
 
     /// 将字符串编码为数字序列
+    /// will as number sequence
     /// will as sequence
     pub fn encode_string(s: &str) -> Vec<usize> {
         s.chars().filter_map(Self::encode_char).collect()
@@ -806,6 +836,7 @@ impl TokenEncoder {
 
     /// 计算字符的哈希值
     /// 用于宏名称的快速查找
+    /// macro name fast
     /// fast
     pub fn hash_char(c: char) -> u64 {
         if let Ok(val) = usize::try_from(c) {
@@ -845,8 +876,10 @@ impl MacroPositionCalculator {
     }
 
     /// 解析位置标识符
+    /// position identifier
     /// position
     /// 将字符位置转换为可读的行列号
+    /// will position conversion as column number
     /// will position conversion as
     pub fn parse_position(pos_id: usize, source: &str) -> Option<(usize, usize)> {
         let mut current_pos = 0;
@@ -1018,6 +1051,7 @@ pub fn get_rust_194_macro_info() -> String {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
+/// array ，to goal before
 /// ，to goal before
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
@@ -1031,6 +1065,7 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
+/// data pipe
 /// pipe
 /// 数据Verifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
@@ -1289,7 +1324,9 @@ mod tests {
     }
 
     /// 测试递归限制
+    /// recursive
     /// 验证欧拉递归限制器能正确限制递归深度
+    /// recursive recursive
     #[test]
     fn test_euler_recursion_limit() {
         // 测试正常进入和退出
@@ -1332,9 +1369,12 @@ mod tests {
     }
 
     /// 测试缓存淘汰
+    /// cache
     /// 验证宏编译缓存的行为和"淘汰"逻辑
+    /// cache as and ""
     /// as and ""
     /// 预期行为：正确存储和检索缓存结果，支持手动刷新
+    /// as ：and cache result ，
     /// as ：and result ，
     #[test]
     fn test_macro_compile_cache_eviction() {

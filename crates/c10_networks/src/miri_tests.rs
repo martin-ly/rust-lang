@@ -77,6 +77,7 @@ impl NetworkBuffer {
 /// 测试目的: 验证网络缓冲区内存安全
 /// objective : network buffering memory safety
 /// 测试场景: 写入和读取数据
+/// scenario : and data
 /// scenario : and
 /// 预期结果: 应该正确管理读写位置
 /// result : should position

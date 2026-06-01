@@ -33,6 +33,7 @@ async fn basic_timeout() {
 }
 
 /// 背压：使用有界队列并匹配消费速率，避免生产过快导致 OOM。
+/// backpressure ：queue and ， OOM。
 /// backpressure ：and ， OOM。
 async fn mpsc_backpressure() {
     let (tx, mut rx) = mpsc::channel::<u64>(256);

@@ -24,6 +24,7 @@ impl Default for ConcurrentCounter {
 
 impl ConcurrentCounter {
     /// 创建新的并发计数器
+    /// Creates新的并发计数器
     /// concurrency
     pub const fn new() -> Self {
         Self {
@@ -38,6 +39,7 @@ impl ConcurrentCounter {
     }
 
     /// 获取当前计数值
+    /// Gets当前计数值
     /// when before
     pub fn get(&self) -> usize {
         self.count.load(Ordering::Relaxed)

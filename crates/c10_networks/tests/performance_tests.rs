@@ -10,6 +10,7 @@ use c10_networks::protocol::websocket::{WebSocketFrame, WebSocketHandshakeReques
 use std::time::Instant;
 
 /// 测试数据包创建性能
+/// data packet performance
 /// performance
 #[test]
 fn test_packet_creation_performance() {
@@ -36,6 +37,7 @@ fn test_packet_creation_performance() {
 }
 
 /// 测试数据包构建器性能
+/// data packet builder performance
 /// builder performance
 #[test]
 fn test_packet_builder_performance() {
@@ -64,6 +66,7 @@ fn test_packet_builder_performance() {
 }
 
 /// 测试数据包统计性能
+/// data packet performance
 /// performance
 #[test]
 fn test_packet_stats_performance() {
@@ -199,6 +202,7 @@ fn test_websocket_handshake_performance() {
 }
 
 /// 测试数据包序列化性能
+/// data packet sequence performance
 /// sequence performance
 #[test]
 fn test_packet_serialization_performance() {
@@ -224,6 +228,7 @@ fn test_packet_serialization_performance() {
 }
 
 /// 测试数据包反序列化性能
+/// data packet sequence performance
 /// sequence performance
 #[test]
 fn test_packet_deserialization_performance() {
@@ -274,6 +279,7 @@ fn test_memory_allocation_performance() {
 }
 
 /// 测试并发数据包处理性能
+/// concurrency data packet performance
 /// concurrency performance
 #[test]
 fn test_concurrent_packet_processing_performance() {
@@ -331,6 +337,7 @@ fn test_concurrent_packet_processing_performance() {
 }
 
 /// 测试大数据包处理性能
+/// data packet performance
 /// performance
 #[test]
 fn test_large_packet_performance() {
@@ -364,6 +371,7 @@ fn test_large_packet_performance() {
 }
 
 /// 测试数据包过滤器性能
+/// data packet performance
 /// performance
 #[test]
 fn test_packet_filter_performance() {
@@ -430,6 +438,7 @@ fn test_error_handling_performance() {
 }
 
 /// 测试数据包类型比较性能
+/// data packet type performance
 /// type performance
 #[test]
 fn test_packet_type_comparison_performance() {

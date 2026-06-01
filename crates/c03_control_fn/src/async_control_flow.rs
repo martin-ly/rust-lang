@@ -146,6 +146,7 @@ pub struct AsyncControlFlowComposer;
 
 impl AsyncControlFlowComposer {
     /// 组合多个异步操作
+    /// combinationmultipleasynchronousoperation
     /// combination async
     pub async fn compose<T, U, V, F, G, Fut1, Fut2>(&self, first: F, second: G, value: T) -> V
     where
@@ -231,6 +232,7 @@ impl AsyncErrorHandler {
     }
 
     /// 超时异步操作
+    /// timeoutasynchronousoperation
     /// async
     pub async fn with_timeout<F, T>(
         &self,

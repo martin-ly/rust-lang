@@ -24,6 +24,7 @@ fn bench_mmio_register_access(c: &mut Criterion) {
 }
 
 /// 模拟位操作性能（嵌入式常见操作）
+/// bit operation performance （operation ）
 /// performance （）
 /// 对应真实场景：GPIO 控制、标志位处理
 /// to real scenario ：GPIO 、mark
@@ -70,6 +71,7 @@ fn bench_crc32_calculation(c: &mut Criterion) {
 }
 
 /// 模拟固定点数学运算（无 FPU 的嵌入式设备常用）
+/// point math （ FPU ）
 /// point （ FPU ）
 fn bench_fixed_point_math(c: &mut Criterion) {
     c.bench_function("fixed_point_math", |b| {
@@ -86,6 +88,7 @@ fn bench_fixed_point_math(c: &mut Criterion) {
 }
 
 /// 模拟环形缓冲区操作（UART/通信常用）
+/// buffering operation （UART/）
 /// buffering （UART/）
 fn bench_ring_buffer(c: &mut Criterion) {
     c.bench_function("ring_buffer_operations", |b| {

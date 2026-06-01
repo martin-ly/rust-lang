@@ -30,6 +30,7 @@ where
     V: Clone + Send + Sync + 'static,
 {
     /// 创建新的无锁跳表
+    /// Creates新的无锁跳表
     /// lock-free skip list
     pub fn new() -> Self {
         Self {
@@ -39,8 +40,10 @@ where
     }
 
     /// 插入元素（占位实现）
+    /// Inserts元素（占位实现）
     /// element （）
     /// 插入element（占位Implementation of）
+    /// Insertselement（占位Implementation of）
     pub fn insert(&self, _key: K, _value: V) -> bool {
         // 占位实现：完全无锁跳表实现非常复杂
         // 实际使用中建议使用SkipListMap
@@ -49,6 +52,7 @@ where
     }
 
     /// 查找元素（占位实现）
+    /// Finds元素（占位实现）
     /// element （）
     /// Findelement（占位Implementation of）
     pub fn get(&self, _key: &K) -> Option<V> {
@@ -57,6 +61,7 @@ where
     }
 
     /// 删除元素（占位实现）
+    /// Deletes元素（占位实现）
     /// element （）
     /// Deleteelement（占位Implementation of）
     pub fn remove(&self, _key: &K) -> Option<V> {
@@ -66,12 +71,14 @@ where
     }
 
     /// 获取跳表大小
+    /// Gets跳表大小
     /// skip list
     pub fn len(&self) -> usize {
         self.size.load(AtomicOrdering::Relaxed)
     }
 
     /// 检查跳表是否为空
+    /// Checks跳表是否为空
     /// skip list as
     pub fn is_empty(&self) -> bool {
         self.len() == 0
@@ -102,6 +109,7 @@ where
     V: Send + Sync,
 {
     /// 创建新的跳表映射
+    /// Creates新的跳表映射
     /// skip list
     pub fn new() -> Self {
         Self {
@@ -110,30 +118,36 @@ where
     }
 
     /// 插入元素
+    /// Inserts元素
     /// element
     /// 插入element
+    /// Insertselement
     pub fn insert(&self, key: K, value: V) -> Option<V> {
         self.inner.insert(key, value)
     }
 
     /// 获取元素
+    /// Gets an element
     /// element
     pub fn get(&self, key: &K) -> Option<dashmap::mapref::one::Ref<'_, K, V>> {
         self.inner.get(key)
     }
 
     /// 删除元素
+    /// Deletes元素
     /// element
     pub fn remove(&self, key: &K) -> Option<(K, V)> {
         self.inner.remove(key)
     }
 
     /// 获取大小
+    /// Gets大小
     pub fn len(&self) -> usize {
         self.inner.len()
     }
 
     /// 检查是否为空
+    /// Checks if empty
     /// as
     pub fn is_empty(&self) -> bool {
         self.inner.is_empty()

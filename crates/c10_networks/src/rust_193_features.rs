@@ -11,12 +11,14 @@ pub fn string_packet_meta(s: String) -> (usize, usize, usize) {
 }
 
 /// 使用 `char::MAX_LEN_UTF8` 预分配网络消息 UTF-8 编码缓冲区
+/// `char::MAX_LEN_UTF8` network message UTF-8 buffering
 /// `char::MAX_LEN_UTF8` network UTF-8 buffering
 pub fn utf8_encode_buffer_size() -> usize {
     char::MAX_LEN_UTF8
 }
 
 /// 使用 `char::MAX_LEN_UTF16` 预分配网络消息 UTF-16 编码缓冲区
+/// `char::MAX_LEN_UTF16` network message UTF-16 buffering
 /// `char::MAX_LEN_UTF16` network UTF-16 buffering
 pub fn utf16_encode_buffer_size() -> usize {
     char::MAX_LEN_UTF16

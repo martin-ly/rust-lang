@@ -25,6 +25,7 @@
 /// | 接口定义 | 无（宿主直接调用导出函数） | WIT (Wasm Interface Types) |
 /// | definition | （function ） | WIT (Wasm Interface Types) |
 /// | 类型系统 | 仅数字类型 | 完整类型系统（字符串、列表、记录、变体） |
+/// | type system | number type | complete type system （、、、volume ） |
 /// | type system | type | complete type system （、、、volume ） |
 /// | typesystem | 仅数字type | completetypesystem（字符串、列表、记录、变volume） |
 /// | 跨语言组合 | 困难（需 C ABI 约定） | 原生支持（语言无关接口） |

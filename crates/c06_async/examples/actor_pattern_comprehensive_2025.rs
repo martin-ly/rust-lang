@@ -89,12 +89,14 @@ use tracing::{Level, debug, info, instrument, warn};
 /// 2. **位置透明 (Location Transparency)**:
 /// 3. **异步通信 (Asynchronous Communication)**:
 ///    消息发送是异步的，不阻塞发送者
+///    message async ，
 ///    async ，
 ///    send(ref, msg) 立即返回
 ///    send(ref, msg) 立即Return
 /// 4. **消息顺序 (Message Ordering)**:
 /// 4. **消息order (Message Ordering)**:
 ///    从同一发送者到同一接收者的消息保持顺序
+///    from to message order
 ///    from to order
 ///    若 msg1 先于 msg2 发送，则 msg1 先于 msg2 到达
 ///    msg1 msg2 ， msg1 msg2 to
@@ -106,6 +108,7 @@ use tracing::{Level, debug, info, instrument, warn};
 /// ## 监督策略 (Supervision Strategy)
 /// ## 监督strategy (Supervision Strategy)
 /// 当子 Actor 失败时，监督者可以采取以下策略：
+/// when Actor failure ，can under strategy ：
 /// when Actor ，can under strategy ：
 /// 1. **Resume**: 继续处理下一条消息 (Continue with next message)
 /// 2. **Restart**: 重启 Actor (Restart the actor)
@@ -115,26 +118,32 @@ use tracing::{Level, debug, info, instrument, warn};
 /// ## 性质证明 (Property Proofs)
 /// **theorem 1: 消息传递可靠性 (Message Delivery Reliability)**
 /// 若 Actor A 向 Actor B 发送消息 m，且两者都在运行，
+/// Actor A Actor B message m，and in Run ，
 /// Actor A Actor B m，and in Run ，
 /// 则 m 最终会被 B 接收
 /// m ultimately is B
 /// 证明 (Proof):
 /// - Actor 持续处理消息
+/// - Actor message
 /// - Actor
 /// - 因此消息最终会被处理 □
+/// - therefore message ultimately is □
 /// - therefore ultimately is □
 /// **定理 2: 状态一致性 (State Consistency)**
 /// 证明 (Proof):
 /// - 每次只处理一条消息
+/// - message
 /// -
 /// - 因此不会有并发修改状态 □
 /// - therefore concurrency state □
 /// 若子 Actor 失败，监督者可以恢复系统到一致状态
+/// Actor failure ，can system to state
 /// Actor ，can system to state
 /// 证明 (Proof):
 /// - 监督者监控子 Actor
 /// - Actor
 /// - 失败时可以重启或替换
+/// - failure can or
 /// - can or
 /// - 因此系统可以恢复 □
 /// - therefore system can □
@@ -264,12 +273,15 @@ impl Default for ActorConfig {
 
 /// Actor 消息 Trait
 /// 所有 Actor 消息必须实现此 trait
+/// all Actor message must this trait
 /// all Actor must this trait
 pub trait ActorMessage: Send + fmt::Debug + 'static {}
 
 /// 系统消息枚举
+/// system message enum
 /// system enum
 /// 系统级别的控制消息
+/// system level message
 /// system level
 #[derive(Debug)]
 pub enum SystemMessage {
@@ -323,6 +335,7 @@ impl<M: ActorMessage> Clone for ActorRef<M> {
 
 impl<M: ActorMessage> ActorRef<M> {
     /// 发送消息
+    /// message
     /// # 参数 (Arguments)
     /// # 返回值 (Returns)
     pub async fn send(&self, message: M) -> Result<(), String> {
@@ -333,6 +346,7 @@ impl<M: ActorMessage> ActorRef<M> {
     }
 
     /// 发送系统消息
+    /// system message
     /// system
     pub async fn send_system(&self, message: SystemMessage) -> Result<(), String> {
         self.system_tx
@@ -491,6 +505,7 @@ pub trait Actor: Send + Sized + 'static {
     }
 
     /// 处理消息
+    /// message
     /// # 参数 (Arguments)
     /// - `ctx`: Actor 上下文 (Actor context)
     async fn receive(&mut self, message: Self::Message, ctx: &ActorContext<Self::Message>);
@@ -746,6 +761,7 @@ impl ActorSystem {
 // ============================================================================
 
 /// 银行账户消息
+/// message
 #[derive(Debug)]
 pub enum BankAccountMessage {
     /// 存款 (Deposit)
@@ -932,6 +948,7 @@ impl Actor for BankAccount {
 // ============================================================================
 
 /// 基础示例: 银行账户操作
+/// foundation example : operation
 /// foundation example :
 async fn basic_bank_example() {
     println!("\n=== 基础示例: 银行账户操作 ===");
@@ -1074,6 +1091,7 @@ async fn basic_bank_example() {
 }
 
 /// 高级示例: 监督树
+/// high example : tree
 /// example : tree
 /// 高级Example of: 监督tree
 async fn supervision_tree_example() {
@@ -1158,6 +1176,7 @@ fn _simplified_supervision_tree_example() {
 }
 
 /// 性能测试: 高并发消息处理
+/// performance test : high concurrency message
 /// performance test : concurrency
 async fn performance_test() {
     println!("\n=== 性能测试: 高并发消息处理 ===");

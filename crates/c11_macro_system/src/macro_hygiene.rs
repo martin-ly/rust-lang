@@ -94,6 +94,7 @@ mod hygiene_tests {
 }
 
 /// 宏卫生最佳实践总结
+/// best practice summary
 /// summary
 pub mod best_practices {
     pub fn use_crate_path() {}
@@ -107,6 +108,7 @@ pub mod best_practices {
     pub fn use_local_scope() {}
 
     /// 4. 文档化宏创建的所有标识符
+    /// 4. all identifier
     /// 4. all
     pub fn document_identifiers() {}
 }

@@ -82,6 +82,7 @@ impl Timer {
     }
 
     /// 结束计时并打印结果
+    /// end and result
     /// and result
     pub fn end(&self) {
         let end = web_sys::window()
@@ -95,6 +96,7 @@ impl Timer {
 }
 
 /// 本地存储操作
+/// this operation
 /// this
 pub mod local_storage {
     use super::*;
@@ -116,6 +118,7 @@ pub mod local_storage {
     }
 
     /// 获取值
+    /// get value
     /// Get值
     pub fn get_item(key: &str) -> Option<String> {
         let storage = get_storage()?;
@@ -123,6 +126,7 @@ pub mod local_storage {
     }
 
     /// 删除值
+    /// delete value
     pub fn remove_item(key: &str) -> Result<(), JsValue> {
         if let Some(storage) = get_storage() {
             storage.remove_item(key)?;

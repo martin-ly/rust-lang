@@ -1,12 +1,16 @@
 //! Rust 187.0 新特性实现模块 —— c02_type_system
 //! # 版本信息
+//! # Version Information
 //! # this
 //! - Rust 版本: 187.0
+//! - Rust version: 187.0
 //! - Rust this : 187.0
 //! - Rust 版this: 187.0
 //! - 稳定日期: 2025-05-15
+//! - Stabilization date: 2025-05-15
 //! - date : 2025-05-15
 //! - 稳定date: 2025-05-15
+//! - stabledate: 2025-05-15
 //! - date: 2025-05-15
 
 // ============================================================================
@@ -15,6 +19,7 @@
 
 /// Rust 1.87.0 will `use<...>` precise capturing 扩展to trait definitionin，
 /// ## 背景
+/// ## Background
 /// ## background
 /// `use<'a>` 语法允许显式声明需要捕获哪些生命周期。
 /// `use<'a>` lifetime 。

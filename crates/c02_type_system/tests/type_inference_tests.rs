@@ -74,6 +74,7 @@ fn test_type_coercion() {
 }
 
 /// 测试Option<T>类型操作
+/// Option<T>type operation
 /// Option<T>type
 #[test]
 fn test_option_type_operations() {
@@ -86,6 +87,7 @@ fn test_option_type_operations() {
 }
 
 /// 测试Result<T, E>类型操作
+/// Result<T, E>type operation
 /// Result<T, E>type
 #[test]
 fn test_result_type_operations() {

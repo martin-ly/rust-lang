@@ -1,6 +1,7 @@
 //! 算法模块错误路径测试套件 / Algorithms Module Error Paths Test Suite
 
 /// 测试错误输入情况
+/// input situation
 /// situation
 #[test]
 fn test_error_inputs() {

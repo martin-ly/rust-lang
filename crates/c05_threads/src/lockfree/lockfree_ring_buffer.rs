@@ -54,6 +54,7 @@ impl<T> SpscRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// Attempts to push an element
     /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         let current_tail = self.tail.load(Ordering::Relaxed);
@@ -76,6 +77,7 @@ impl<T> SpscRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// Attempts to pop an element
     /// element
     pub fn try_pop(&self) -> Option<T> {
         let current_head = self.head.load(Ordering::Relaxed);
@@ -99,6 +101,7 @@ impl<T> SpscRingBuffer<T> {
     }
 
     /// 获取缓冲区大小
+    /// Gets缓冲区大小
     /// buffering
     pub fn len(&self) -> usize {
         let tail = self.tail.load(Ordering::Acquire);
@@ -112,12 +115,14 @@ impl<T> SpscRingBuffer<T> {
     }
 
     /// 检查缓冲区是否为空
+    /// Checks缓冲区是否为空
     /// buffering as
     pub fn is_empty(&self) -> bool {
         self.head.load(Ordering::Acquire) == self.tail.load(Ordering::Acquire)
     }
 
     /// 检查缓冲区是否已满
+    /// Checks缓冲区是否已满
     /// buffering
     pub fn is_full(&self) -> bool {
         let tail = self.tail.load(Ordering::Acquire);
@@ -200,6 +205,7 @@ impl<T> MpscRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// Attempts to push an element
     /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         loop {
@@ -230,6 +236,7 @@ impl<T> MpscRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// Attempts to pop an element
     /// element
     pub fn try_pop(&self) -> Option<T> {
         let current_head = self.head.load(Ordering::Relaxed);
@@ -336,6 +343,7 @@ impl<T> MpmcRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// Attempts to push an element
     /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         loop {
@@ -371,6 +379,7 @@ impl<T> MpmcRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// Attempts to pop an element
     /// element
     pub fn try_pop(&self) -> Option<T> {
         loop {
@@ -474,6 +483,7 @@ pub struct ScalableRingBuffer<T> {
 #[cfg(feature = "custom_ring_buffers")]
 impl<T> ScalableRingBuffer<T> {
     /// 创建新的可扩展环形缓冲区
+    /// Creates新的可扩展环形缓冲区
     /// buffering
     pub fn new(initial_capacity: usize) -> Self {
         let initial_buffer = Arc::new(MpmcRingBuffer::new(initial_capacity));
@@ -500,6 +510,7 @@ impl<T> ScalableRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// Attempts to push an element
     /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         let current_index = self.current_buffer.load(Ordering::Acquire);
@@ -518,6 +529,7 @@ impl<T> ScalableRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// Attempts to pop an element
     /// element
     pub fn try_pop(&self) -> Option<T> {
         let current_index = self.current_buffer.load(Ordering::Acquire);
@@ -596,12 +608,14 @@ impl<T> CrossbeamRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// Attempts to push an element
     /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         self.queue.push(item)
     }
 
     /// 尝试弹出元素
+    /// Attempts to pop an element
     /// element
     pub fn try_pop(&self) -> Option<T> {
         self.queue.pop()

@@ -112,6 +112,7 @@ async fn demonstrate_web_api_scenario() -> Result<()> {
 }
 
 /// 数据流处理管道场景
+/// data stream pipe scenario
 /// stream pipe scenario
 async fn demonstrate_data_stream_scenario() -> Result<()> {
     println!("  模拟数据流处理管道场景...");

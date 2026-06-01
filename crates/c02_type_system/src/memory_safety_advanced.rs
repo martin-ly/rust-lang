@@ -318,6 +318,7 @@ pub mod zero_cost_abstractions {
     /// 零成本迭代器
     /// cost
     /// 零costiterator
+    /// zerocostiterator
     pub struct ZeroCostIterator<'a, T> {
         data: &'a [T],
         index: usize,
@@ -569,6 +570,7 @@ pub mod memory_leak_detection {
 pub mod buffer_overflow_protection {
 
     /// 安全缓冲区
+    /// safebuffer
     /// buffering
     pub struct SafeBuffer {
         data: Vec<u8>,
@@ -781,6 +783,7 @@ pub mod memory_alignment_cache {
         }
 
         /// 随机访问模式
+        /// Randomizes访问模式
         pub fn random_access<T>(data: &[T], indices: &[usize], mut f: impl FnMut(&T)) {
             for &index in indices {
                 if let Some(item) = data.get(index) {

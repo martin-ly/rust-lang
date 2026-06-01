@@ -4,6 +4,7 @@
 #![allow(clippy::type_complexity)]
 //!
 //! - GAT的基本语法
+//! - GATthis syntax
 //! - GATthis
 //! - 借用迭代器（Lending Iterator）
 //! - 实际应用场景

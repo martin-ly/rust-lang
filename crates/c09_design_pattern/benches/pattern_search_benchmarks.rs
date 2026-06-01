@@ -1,6 +1,7 @@
 //! C09 设计模式搜索与查询性能基准测试
 //! C09 design and Performance benchmark
 //! 测试设计模式库的查询、过滤和匹配操作性能。
+//! design library 、and operation performance 。
 //! design library 、and performance 。
 
 use c09_design_pattern::{

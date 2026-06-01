@@ -1,6 +1,7 @@
 //! Miri 测试模块 - 类型系统内存安全验证
 //! Miri module - type system memory safety
 //! 运行方式:
+//! How to run:
 //! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
@@ -22,6 +23,7 @@ fn test_maybeuninit_basic() {
 }
 
 /// 测试场景: 逐步初始化数组元素
+/// Tests场景: 逐步初始化数组元素
 /// scenario : element
 /// Test forscenario: 逐步Initializearrayelement
 /// 预期结果: 应该正确初始化所有元素
@@ -46,6 +48,7 @@ fn test_maybeuninit_array() {
 }
 
 /// 预期结果: 应该正确读写值
+/// Expected result: Should read and write values correctly
 /// result : should
 #[test]
 fn test_nonnull_basic() {
@@ -60,8 +63,10 @@ fn test_nonnull_basic() {
 }
 
 /// 测试目的: 验证裸指针别名规则
+/// Tests目的: 验证裸指针别名规则
 /// objective : pointer rule
 /// 测试场景: 创建两个指向同一位置的裸指针并交替使用
+/// Tests场景: 创建两个指向同一位置的裸指针并交替使用
 /// scenario : position pointer and alternation
 /// 预期结果: Tree Borrows 下只要遵循别名规则就应该通过
 /// result : Tree Borrows under rule should
@@ -145,6 +150,7 @@ fn test_from_ne_bytes_basic() {
 }
 
 /// 测试场景: 获取 packed struct 字段地址
+/// Tests场景: 获取 packed struct 字段地址
 /// scenario : packed struct field
 /// 预期结果: 应该能够安全获取字段地址而不创建引用
 /// result : should can field while reference
@@ -204,8 +210,10 @@ impl SelfReferential {
 }
 
 /// 测试目的: 验证自引用结构通过 Pin 保证安全
+/// Tests目的: 验证自引用结构通过 Pin 保证安全
 /// objective : reference structure Pin
 /// 测试场景: 创建自引用结构并通过 Pin 访问
+/// Tests场景: 创建自引用结构并通过 Pin 访问
 /// scenario : reference structure and Pin
 /// 预期结果: 应该能够安全访问自引用数据
 /// result : should can reference
@@ -228,8 +236,10 @@ union IntOrFloat {
 }
 
 /// 测试目的: 验证联合体基本操作
+/// Tests目的: 验证联合体基本操作
 /// objective : union volume this
 /// 测试场景: 使用联合体解释同一内存为不同类型
+/// Tests场景: 使用联合体解释同一内存为不同类型
 /// scenario : union volume explain memory as type
 /// 预期结果: 应该能够正确访问不同字段
 /// result : should can field
@@ -249,8 +259,10 @@ use std::ffi::c_void;
 use std::os::raw::c_int;
 
 /// 测试目的: 验证外部类型指针操作
+/// Tests目的: 验证外部类型指针操作
 /// objective : outside type pointer
 /// 测试场景: 使用 FFI 类型进行指针转换
+/// Tests场景: 使用 FFI 类型进行指针转换
 /// scenario : FFI type pointer conversion
 /// 预期结果: 应该能够正确转换和访问
 /// result : should can conversion and
@@ -269,8 +281,10 @@ fn test_ffi_pointer() {
 // ==================== 对齐和内存布局 ====================
 
 /// 测试目的: 验证对齐检查
+/// Tests目的: 验证对齐检查
 /// objective : to
 /// 测试场景: 创建对齐类型并验证地址对齐
+/// Tests场景: 创建对齐类型并验证地址对齐
 /// scenario : to type and to
 /// 预期结果: 地址应该满足对齐要求
 /// result : should to
@@ -287,8 +301,10 @@ fn test_alignment() {
 }
 
 /// 测试目的: 验证未对齐数据读取
+/// Tests目的: 验证未对齐数据读取
 /// objective : to
 /// 测试场景: 从可能未对齐的地址读取数据
+/// Tests场景: 从可能未对齐的地址读取数据
 /// scenario : from may to
 /// 预期结果: 使用 read_unaligned 应该安全
 /// result : read_unaligned should
@@ -308,8 +324,10 @@ fn test_unaligned_read() {
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// 测试目的: 验证原子操作内存序
+/// Tests目的: 验证原子操作内存序
 /// objective : atomic operation memory
 /// 测试场景: 使用不同内存序进行原子操作
+/// Tests场景: 使用不同内存序进行原子操作
 /// scenario : memory atomic operation
 /// 预期结果: 操作应该正确完成
 /// result : should
@@ -331,8 +349,10 @@ fn test_atomic_operations() {
 // ==================== 边界情况测试 ====================
 
 /// 测试目的: 验证零大小类型的指针操作
+/// Tests目的: 验证零大小类型的指针操作
 /// objective : type pointer
 /// 测试场景: 创建 ZST 指针并解引用
+/// Tests场景: 创建 ZST 指针并解引用
 /// scenario : ZST pointer and reference
 /// 预期结果: ZST 指针操作应该安全
 /// result : ZST pointer should
@@ -355,8 +375,10 @@ fn test_zst_pointers() {
 }
 
 /// 测试目的: 验证空指针检查
+/// Tests目的: 验证空指针检查
 /// objective : pointer
 /// 测试场景: 检查空指针和非空指针
+/// Tests场景: 检查空指针和非空指针
 /// scenario : pointer and pointer
 /// 预期结果: 应该正确识别空指针
 /// result : should pointer
@@ -372,6 +394,7 @@ fn test_null_check() {
 // ==================== Miri 特定测试 ====================
 
 /// 测试场景: 创建多个共享引用并重新借用
+/// Tests场景: 创建多个共享引用并重新借用
 /// scenario : reference and borrowing
 /// 预期结果: 共享引用应该可以共存
 /// result : reference should can
@@ -410,8 +433,10 @@ fn test_interior_mutability() {
 
 /// Test forobjective: Verify use-after-free 检测
 /// 测试场景: 使用已释放内存的指针
+/// Tests场景: 使用已释放内存的指针
 /// scenario : use-after-free memory pointer
 /// 预期结果: Miri 应该检测到 UB
+/// Expected result: Miri should detect UB
 /// result : Miri should to UB
 #[test]
 #[ignore = "This test should fail with use-after-free"]
@@ -428,8 +453,10 @@ fn test_use_after_free() {
 
 /// Test forobjective: Verify double-free 检测
 /// 测试场景: 对同一指针调用两次 Box::from_raw
+/// Tests场景: 对同一指针调用两次 Box::from_raw
 /// scenario : to pointer Box::from_raw
 /// 预期结果: Miri 应该检测到 UB
+/// Expected result: Miri should detect UB
 /// result : Miri should to UB
 #[test]
 #[ignore = "This test should fail with double-free"]
@@ -444,10 +471,13 @@ fn test_double_free() {
 }
 
 /// 测试目的: 验证越界访问检测
+/// Tests目的: 验证越界访问检测
 /// objective :
 /// 测试场景: 访问数组越界位置
+/// Tests场景: 访问数组越界位置
 /// scenario : position
 /// 预期结果: Miri 应该检测到 UB
+/// Expected result: Miri should detect UB
 /// result : Miri should to UB
 #[test]
 #[ignore = "This test should fail with out-of-bounds"]

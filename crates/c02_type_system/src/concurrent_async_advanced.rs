@@ -884,6 +884,7 @@ pub mod async_sync_primitives {
     }
 
     /// 异步条件变量
+    /// asynchronousconditionvariables
     /// async condition variable
     pub struct AsyncConditionVariable {
         inner: Arc<(AsyncMutex<bool>, Condvar)>,
@@ -980,6 +981,7 @@ pub mod concurrent_safe_structures {
     use super::*;
 
     /// 并发安全的栈
+    /// concurrentsafestack
     /// concurrency stack
     pub struct ConcurrentStack<T> {
         data: Arc<Mutex<Vec<T>>>,
@@ -1028,6 +1030,7 @@ pub mod concurrent_safe_structures {
     }
 
     /// 并发安全的队列
+    /// concurrentsafequeue
     /// concurrency
     pub struct ConcurrentQueue<T> {
         data: Arc<Mutex<VecDeque<T>>>,

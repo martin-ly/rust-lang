@@ -10,10 +10,13 @@ use tracing::{debug, error, info, warn};
 use uuid::Uuid;
 
 /// 2025年异步消息队列演示
+/// 2025async message queue demonstration
 /// 2025async demonstration
 /// 展示最新的异步消息队列编程模式和最佳实践
+/// async message queue and best practice
 /// async and
 /// 1. 异步消息队列核心
+/// 1. async message queue core
 /// 1. async core
 #[derive(Debug, Clone)]
 pub struct AsyncMessageQueue {
@@ -342,6 +345,7 @@ pub struct ReceivedMessage {
 }
 
 /// 2. 异步消息生产者
+/// 2. async message
 /// 2. async
 #[derive(Debug, Clone)]
 pub struct AsyncMessageProducer {
@@ -567,6 +571,7 @@ impl AsyncMessageProducer {
 }
 
 /// 3. 异步消息消费者
+/// 3. async message
 /// 3. async
 #[derive(Debug, Clone)]
 pub struct AsyncMessageConsumer {
@@ -771,6 +776,7 @@ impl AsyncMessageConsumer {
 }
 
 /// 4. 异步消息路由和过滤
+/// 4. async message and
 /// 4. async and
 #[allow(dead_code)]
 #[derive(Debug, Clone)]

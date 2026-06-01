@@ -242,6 +242,7 @@ async fn microservice_scenario() -> Result<()> {
 }
 
 /// 数据处理管道场景演示
+/// data pipe scenario demonstration
 /// pipe scenario demonstration
 async fn data_processing_pipeline_scenario() -> Result<()> {
     println!("    📊 数据处理管道场景:");
@@ -269,6 +270,7 @@ async fn data_processing_pipeline_scenario() -> Result<()> {
 }
 
 /// 异步生态系统最佳实践总结
+/// async ecosystem system best practice summary
 /// async ecosystem system summary
 #[allow(unused)]
 fn print_best_practices() {

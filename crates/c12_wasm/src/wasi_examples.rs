@@ -18,6 +18,7 @@ pub mod file_operations {
     /// # 返回值
     /// # return value
     /// 返回文件内容，如果文件不存在或读取失败则返回错误信息
+    /// inside ，if in or failure error message
     /// inside ，if in or error message
     /// # 使用示例
     /// # example
@@ -36,6 +37,7 @@ pub mod file_operations {
     /// # 返回值
     /// # return value
     /// 成功返回 Ok(())，失败返回错误信息
+    /// Ok(())，failure error message
     /// Ok(())，error message
     /// 成功Return Ok(())，失败Returnerror message
     pub fn write_file(path: &str, content: &str) -> Result<(), String> {
@@ -52,6 +54,7 @@ pub mod file_operations {
     /// # 返回值
     /// # return value
     /// 成功返回 Ok(())，失败返回错误信息
+    /// Ok(())，failure error message
     /// Ok(())，error message
     /// 成功Return Ok(())，失败Returnerror message
     pub fn copy_file(src: &str, dst: &str) -> Result<(), String> {

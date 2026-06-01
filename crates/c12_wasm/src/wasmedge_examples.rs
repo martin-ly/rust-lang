@@ -9,8 +9,10 @@ pub mod wasmedge_advanced {
     /// - 快速启动（AOT 编译）
     /// - fast （AOT ）
     /// - 低内存占用
+    /// - low memory
     /// - memory
     /// - 高并发支持
+    /// - high concurrency
     /// - concurrency
     /// # 使用方式
     /// # way
@@ -52,6 +54,7 @@ pub mod wasmedge_advanced {
     /// # 性能优化
     /// # performance optimization
     /// - 预分配容量
+    /// - pre-allocate capacity
     /// -
     /// - 重用缓冲区
     /// - buffering
@@ -67,6 +70,7 @@ pub mod wasmedge_advanced {
 /// WASI -NN AI reason example
 pub mod wasi_nn_examples {
     /// 图像分类示例
+    /// graph classification example
     /// classification example
     /// # 注意
     /// #
@@ -87,6 +91,7 @@ pub mod wasi_nn_examples {
         }
 
         /// 运行图像分类
+        /// Run graph classification
         /// Run classification
         /// Run图像classification
         /// # 参数
@@ -142,6 +147,7 @@ pub mod wasi_nn_examples {
 /// WASI-Crypto 示例
 pub mod wasi_crypto_examples {
     /// 数据加密示例
+    /// data example
     /// example
     /// wasmedge --enable-wasi-crypto app.wasm
     /// ```
@@ -160,6 +166,7 @@ pub mod wasi_crypto_examples {
     }
 
     /// 数据哈希示例
+    /// data example
     /// example
     pub fn hash_data(_data: &[u8]) -> Vec<u8> {
         // 使用 SHA-256 哈希
@@ -170,6 +177,7 @@ pub mod wasi_crypto_examples {
     }
 
     /// 数字签名示例
+    /// number example
     /// example
     pub fn sign_data(_data: &[u8], _private_key: &[u8]) -> Result<Vec<u8>, String> {
         // 使用 ECDSA 签名
@@ -197,6 +205,7 @@ pub mod threading_examples {
     use std::thread;
 
     /// 并行处理数据
+    /// parallelism data
     /// parallelism
     /// wasmedge --enable-threads app.wasm
     /// ```
@@ -295,6 +304,7 @@ pub mod performance_examples {
     }
 
     /// 重用缓冲区的数据处理
+    /// buffering data
     /// buffering
     /// # 性能说明
     /// # performance explain
@@ -331,8 +341,10 @@ pub mod cloud_native_examples {
     /// - 快速启动
     /// - fast
     /// - 低内存占用
+    /// - low memory
     /// - memory
     /// - 高并发
+    /// - high concurrency
     /// - concurrency
     /// - 高concurrency
     pub fn edge_function(request: &[u8]) -> Vec<u8> {

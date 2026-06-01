@@ -18,6 +18,7 @@ impl Rust197Features {
     }
 
     /// 组合两者检查宏输入
+    /// combination input
     /// combination
     pub fn check_macro_input(input: Option<&str>, expected_len: usize) -> Vec<String> {
         match input {

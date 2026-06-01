@@ -31,6 +31,7 @@ pub fn atomic_basics_demo() {
 }
 
 /// compare_exchange 常见用法
+/// compare_exchange commonusage
 pub fn compare_exchange_demo() {
     let value = AtomicUsize::new(5);
 

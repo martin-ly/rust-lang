@@ -1,14 +1,19 @@
 //! Rust 1.92.0 控制流特性实现模块
 //! Rust 1.92.0 stream feature module
 //! - `#[track_caller]` 和 `#[no_mangle]` 组合使用
+//! - `#[track_caller]` and `#[no_mangle]` combinationuse
 //! - 更严格 Never type Lint
 //! - `Location::file_as_c_str` in错误报告inapplication
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_192_features.rs
+//! - File: rust_192_features.rs
 //! - 创建日期: 2025-12-11
+//! - Creation date: 2025-12-11
 //! - date : 2025-12-11
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::panic::Location;
@@ -202,6 +207,7 @@ pub fn control_flow_match(value: Option<i32>) -> i32 {
 // ==================== 5. 综合应用示例 ====================
 
 /// 获取 Rust 1.92.0 控制流特性信息
+/// Gets Rust 1.92.0 控制流特性信息
 /// Rust 1.92.0 stream feature
 pub fn get_rust_192_control_flow_info() -> String {
     "Rust 1.92.0 控制流特性:\n\
@@ -213,6 +219,7 @@ pub fn get_rust_192_control_flow_info() -> String {
 }
 
 /// 演示 Rust 1.92.0 控制流特性
+/// Demonstrates Rust 1.92.0 控制流特性
 /// demonstration Rust 1.92.0 stream feature
 /// Demonstration of Rust 1.92.0 控制streamfeature
 pub fn demonstrate_rust_192_control_flow() {
@@ -429,6 +436,7 @@ impl ControlFlowCombinator {
     }
 
     /// 组合分析和优化
+    /// combinationanalysisandoptimize
     /// combination analyze and optimization
     pub fn analyze_and_optimize(items: &[i32]) -> (usize, usize, usize, usize) {
         let mut analyzer = ControlFlowAnalyzer::new();
@@ -507,6 +515,7 @@ impl ControlFlowProfiler {
     }
 
     /// 获取性能统计
+    /// Gets性能统计
     /// performance
     pub fn get_stats(&self) -> (f64, f64, f64) {
         let branch_avg = if !self.branch_times.is_empty() {
@@ -531,6 +540,7 @@ impl ControlFlowProfiler {
     }
 
     /// 重置统计
+    /// Resets统计
     pub fn reset(&mut self) {
         self.branch_times.clear();
         self.loop_times.clear();
@@ -545,6 +555,7 @@ pub struct ControlFlowValidator;
 
 impl ControlFlowValidator {
     /// 验证分支逻辑
+    /// Validates分支逻辑
     #[track_caller]
     pub fn validate_branch(value: i32) -> Result<i32, LocatedError> {
         if value < 0 {
@@ -557,6 +568,7 @@ impl ControlFlowValidator {
     }
 
     /// 验证循环终止条件
+    /// Validates循环终止条件
     /// circulation condition
     pub fn validate_loop_termination(max_iterations: usize) -> Result<usize, LocatedError> {
         if max_iterations == 0 {
@@ -576,6 +588,7 @@ impl ControlFlowValidator {
     }
 
     /// 验证匹配完整性
+    /// Validates匹配完整性
     /// complete
     pub fn validate_match_coverage(value: Option<i32>) -> Result<i32, LocatedError> {
         match value {

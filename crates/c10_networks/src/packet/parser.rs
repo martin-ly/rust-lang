@@ -1,4 +1,5 @@
 //! 数据包解析器
+//! data packet
 use crate::error::{NetworkError, NetworkResult};
 use bytes::{Bytes, BytesMut};
 use nom::{
@@ -18,6 +19,7 @@ pub struct ParseResult {
 }
 
 /// 数据包解析器
+/// data packet
 pub struct PacketParser {
     buffer: BytesMut,
     max_packet_size: usize,
@@ -25,6 +27,7 @@ pub struct PacketParser {
 
 impl PacketParser {
     /// 创建新的数据包解析器
+    /// data packet
     pub fn new(max_packet_size: usize) -> Self {
         Self {
             buffer: BytesMut::new(),
@@ -33,6 +36,7 @@ impl PacketParser {
     }
 
     /// 添加数据到解析缓冲区
+    /// data to buffering
     /// to buffering
     pub fn feed(&mut self, data: &[u8]) -> NetworkResult<()> {
         if self.buffer.len() + data.len() > self.max_packet_size {
@@ -44,6 +48,7 @@ impl PacketParser {
     }
 
     /// 解析数据包
+    /// data packet
     pub fn parse(&mut self) -> NetworkResult<Option<ParseResult>> {
         if self.buffer.len() < 4 {
             return Ok(None); // 需要更多数据
@@ -69,6 +74,7 @@ impl PacketParser {
     }
 
     /// 解析单个数据包
+    /// data packet
     fn parse_packet<'a>(&self, input: &'a [u8]) -> IResult<&'a [u8], super::Packet> {
         let (input, (packet_type_raw, length, timestamp, sequence_number, flags)) = (
             be_u32, // packet_type (作为 u32)
@@ -120,6 +126,7 @@ impl PacketParser {
     }
 
     /// 检查是否有待解析的数据
+    /// data
     pub fn has_data(&self) -> bool {
         !self.buffer.is_empty()
     }
@@ -257,11 +264,13 @@ impl WebSocketFrameParser {
 }
 
 /// 数据包解析器工厂
+/// data packet factory
 /// factory
 pub struct ParserFactory;
 
 impl ParserFactory {
     /// 创建数据包解析器
+    /// data packet
     pub fn create_packet_parser(max_size: usize) -> PacketParser {
         PacketParser::new(max_size)
     }

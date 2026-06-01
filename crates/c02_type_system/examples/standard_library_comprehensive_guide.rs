@@ -5,6 +5,7 @@
 //! - std::iter - 迭代器模式
 //! - std::iter - iterator pattern
 //! - std::fs/io - 文件系统操作
+//! - std::fs/io - file system operation
 //! - std::fs/io - file system
 //! - std::sync - 并发原语
 //! - std::sync - concurrency
@@ -19,6 +20,7 @@
 //! standard library surface
 //! ├── 集合类型 (Collections)
 //! │   ├── Vec - 动态数组
+//! │ ├── Vec - array
 //! │ ├── Vec -
 //! │ ├── Vec - 动态array
 //! ├── 迭代器 (Iterator)
@@ -34,6 +36,7 @@
 //! │   ├── 文件读写
 //! │ ├──
 //! │   ├── 目录操作
+//! │ ├── operation
 //! │ ├──
 //! │   └── 路径处理
 //! │ └──
@@ -60,6 +63,7 @@ use std::time::{Duration, Instant};
 /// # 集合类型深度示例
 /// # set type example
 /// ## Vec - 动态数组的最佳实践
+/// ## Vec - array best practice
 /// ## Vec -
 pub fn vec_comprehensive_examples() {
     println!("\n=== Vec 全面示例 ===\n");
@@ -368,6 +372,7 @@ impl Iterator for Fibonacci {
 }
 
 /// # 文件系统操作深度示例
+/// # file system operation example
 /// # file system example
 pub fn filesystem_comprehensive_examples() -> io::Result<()> {
     println!("\n=== 文件系统全面示例 ===\n");

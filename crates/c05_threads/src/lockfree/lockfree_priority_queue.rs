@@ -5,7 +5,9 @@
 //! 使用有序链表实现简化版的无锁优先队列，支持线程安全的
 //! lock-free ，thread-safe
 //! `push` 和 `pop` 操作。
+//! `push` and `pop` operation。
 //! `push` and `pop` 操作。
+//! `push` and `pop` operation。
 //! ## 复杂度
 //! ## complex
 //! - `push`: O(n)（简化实现）
@@ -41,6 +43,7 @@ impl<T> Node<T> {
 /// 优先级数值越高，元素越先被弹出。
 /// ，element is 。
 /// # 示例
+/// # Examples
 /// # example
 /// ```
 /// use c05_threads::lockfree::lockfree_priority_queue::LockFreePriorityQueue;
@@ -63,6 +66,7 @@ unsafe impl<T: Send> Sync for LockFreePriorityQueue<T> {}
 
 impl<T> LockFreePriorityQueue<T> {
     /// 创建新的无锁优先队列
+    /// Creates新的无锁优先队列
     /// lock-free
     pub fn new() -> Self {
         Self {
@@ -71,8 +75,10 @@ impl<T> LockFreePriorityQueue<T> {
     }
 
     /// 插入元素（按优先级排序）
+    /// Inserts元素（按优先级排序）
     /// element （ordering ）
     /// 插入element（按优先级ordering）
+    /// Insertselement（按优先级ordering）
     /// 优先级越高的元素越靠近队首。
     /// element 。
     pub fn push(&self, data: T, priority: i32) {
@@ -146,8 +152,10 @@ impl<T> LockFreePriorityQueue<T> {
     }
 
     /// 弹出优先级最高的元素
+    /// Pops优先级最高的元素
     /// element
     /// Return `None` if队列as空。
+    /// Return `None` ifqueueasempty。
     pub fn pop(&self) -> Option<T> {
         loop {
             let current_head = self.head.load(AtomicOrdering::Acquire);
@@ -177,12 +185,14 @@ impl<T> LockFreePriorityQueue<T> {
     }
 
     /// 检查队列是否为空
+    /// Checks队列是否为空
     /// as
     pub fn is_empty(&self) -> bool {
         self.head.load(AtomicOrdering::Acquire).is_null()
     }
 
     /// 查看队首元素（不弹出）
+    /// Views队首元素（不弹出）
     /// element （）
     pub fn peek(&self) -> Option<&T> {
         let head = self.head.load(AtomicOrdering::Acquire);

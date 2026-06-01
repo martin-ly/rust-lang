@@ -6,6 +6,7 @@ use std::time::Instant;
 // ==================== 全局配置示例 ====================
 
 /// 全局应用配置（延迟初始化）
+/// global application configuration （）
 /// global application （）
 static APP_CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
     println!("[INIT] 加载应用配置...");
@@ -36,6 +37,7 @@ impl AppConfig {
 /// ✅ Rust 1.94: get() optimization
 /// ✅ Rust 1.94: Use get() 进行热路径optimization
 /// 如果配置已初始化，直接返回；不会触发初始化
+/// if configuration ，；
 /// if ，；
 pub fn get_config_fast() -> Option<&'static AppConfig> {
     LazyLock::get(&APP_CONFIG)
@@ -98,6 +100,7 @@ pub fn execute_query_optimized(query: &str) -> Result<String, String> {
 // ==================== 单线程缓存示例 ====================
 
 /// 单线程延迟初始化缓存
+/// thread cache
 /// thread
 pub struct LocalCache {
     data: LazyCell<Vec<u8>>,
@@ -148,6 +151,7 @@ impl LocalCache {
 // ==================== 多阶段配置示例 ====================
 
 /// 阶段 1: 编译期配置
+/// stage 1: configuration
 /// stage 1:
 /// stage 1: 编译期Configure
 static COMPILE_CONFIG: LazyLock<ConfigMap> = LazyLock::new(|| {
@@ -158,6 +162,7 @@ static COMPILE_CONFIG: LazyLock<ConfigMap> = LazyLock::new(|| {
 });
 
 /// 阶段 2: 运行时配置
+/// stage 2: runtime configuration
 /// stage 2: runtime
 static RUNTIME_CONFIG: LazyLock<ConfigMap> = LazyLock::new(|| {
     let mut map = ConfigMap::new();
@@ -194,6 +199,7 @@ impl ConfigMap {
 }
 
 /// 高效配置查找（优先运行时，回退编译期）
+/// efficient configuration （runtime ，）
 /// efficient （runtime ，）
 pub fn lookup_config(key: &str) -> Option<&'static str> {
     // 先检查运行时配置（热路径）

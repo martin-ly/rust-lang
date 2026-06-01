@@ -1,4 +1,5 @@
 //! 包括握手、帧处理、消息传递等功能。
+//! 、、message etc. functionality 。
 //! 、、etc. functionality 。
 //! 包括握手、帧Handle、消息传递etc.functionality。
 pub mod frame;

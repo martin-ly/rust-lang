@@ -77,6 +77,7 @@ fn bench_memory_allocation(c: &mut Criterion) {
 }
 
 /// 数学运算基准测试
+/// math benchmark
 /// benchmark
 fn bench_math_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("math_operations");
@@ -103,6 +104,7 @@ fn bench_math_operations(c: &mut Criterion) {
 }
 
 /// 字符串操作基准测试
+/// operation benchmark
 /// benchmark
 fn bench_string_operations(c: &mut Criterion) {
     let mut group = c.benchmark_group("string_operations");

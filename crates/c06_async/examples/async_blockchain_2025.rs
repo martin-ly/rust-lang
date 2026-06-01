@@ -10,10 +10,13 @@ use tracing::{error, info};
 // use sha2::{Sha256, Digest}; // 注释掉，因为sha2依赖未安装
 
 /// 2025年异步区块链模式演示
+/// 2025async blockchain demonstration
 /// 2025async demonstration
 /// 展示最新的区块链异步编程模式和最佳实践
+/// blockchain async and best practice
 /// async and
 /// 1. 异步区块链网络
+/// 1. async blockchain network
 /// 1. async network
 #[derive(Debug, Clone)]
 pub struct AsyncBlockchainNetwork {

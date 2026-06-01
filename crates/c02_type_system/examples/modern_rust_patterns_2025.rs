@@ -18,6 +18,7 @@ use std::ops::{ControlFlow, Deref};
 mod let_else_patterns {
     use std::collections::HashMap;
     /// 解析配置的传统方式
+    /// configuration way
     /// way
     pub fn parse_config_legacy(input: &str) -> Option<HashMap<String, String>> {
         let lines: Vec<&str> = match input.lines().next() {
@@ -148,6 +149,7 @@ mod control_flow_patterns {
 /// constant
 mod inline_const {
     /// 编译时计算数组大小
+    /// compile-time array
     /// compile-time
     pub const fn array_size() -> usize {
         1024 * 1024 // 1MB
@@ -281,6 +283,7 @@ mod rpitit_patterns {
     }
 
     /// 更复杂的用法：返回迭代器
+    /// complex usage ：
     /// complex ：
     pub trait DataSource {
         fn items(&self) -> impl Iterator<Item = i32> + '_;
@@ -369,6 +372,7 @@ mod type_inference_patterns {
     }
 
     /// 解构赋值改进
+    /// destructuring assignment improvement
     pub fn destructuring_patterns() {
         let pair = (1, "hello");
         let (a, b) = pair;

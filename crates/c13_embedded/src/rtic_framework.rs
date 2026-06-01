@@ -14,6 +14,7 @@
 //! | **** | NVIC |
 //! | **Based on优先级** | 利用 NVIC 抢占Implementation of硬实时 |
 //! | **资源模型** | 编译期保证无数据竞争 |
+//! | **** | data |
 //! | **** | |
 //! | **任务调度** | 软件任务 + 硬件任务统一模型 |
 //! | **task ** | software task + hardware task |

@@ -77,8 +77,10 @@ mod app {
     }
 
     /// 空闲循环 —— 当没有更高优先级任务时执行
+    /// circulation —— when high task
     /// circulation —— when task
     /// RTIC 推荐在 idle 中进入低功耗模式 (WFI)。
+    /// RTIC in idle in low (WFI)。
     /// RTIC in idle in (WFI)。
     #[idle]
     fn idle(_cx: idle::Context) -> ! {

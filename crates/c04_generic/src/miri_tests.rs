@@ -1,6 +1,7 @@
 //! Miri 测试模块 - 泛型和 Trait 边界内存安全验证
 //! Miri module - generic and Trait edge memory safety
 //! 运行方式:
+//! How to run:
 //! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
@@ -14,6 +15,7 @@ use std::{
 
 /// Test forobjective: Verifygeneric transmute（安全包装）
 /// 测试场景: 将字节数组转换为整数
+/// Tests场景: 将字节数组转换为整数
 /// scenario : will conversion as
 /// 预期结果: 应该正确转换并返回
 /// result : should conversion and
@@ -32,6 +34,7 @@ where
 }
 
 /// 测试场景: 将 [u8; 4] 转换为 u32
+/// Tests场景: 将 [u8; 4] 转换为 u32
 /// scenario : will [u8; 4] conversion as u32
 /// 预期结果: 应该正确解析字节序
 /// result : should
@@ -48,6 +51,7 @@ fn test_generic_transmute() {
 }
 
 /// 测试场景: 使用闭包初始化泛型数组
+/// Tests场景: 使用闭包初始化泛型数组
 /// scenario : generic
 /// 预期结果: 应该正确初始化所有元素
 /// result : should all element
@@ -62,8 +66,10 @@ fn init_array_generic<T, const N: usize>(f: impl Fn(usize) -> T) -> [T; N] {
 }
 
 /// 测试目的: 验证泛型数组初始化
+/// Tests目的: 验证泛型数组初始化
 /// objective : generic
 /// 测试场景: 初始化 [i32; 5] 数组
+/// Tests场景: 初始化 [i32; 5] 数组
 /// scenario : [i32; 5]
 /// 预期结果: 应该正确初始化并返回
 /// result : should and
@@ -161,6 +167,7 @@ fn use_trait_object<T: MyTrait + ?Sized>(val: &T) -> i32 {
 }
 
 /// 测试场景: 传递具体类型和 trait object
+/// Tests场景: 传递具体类型和 trait object
 /// scenario : volume type and trait object
 /// Test forscenario: 传递具volumetypeand trait object
 /// 预期结果: 两者都应该工作
@@ -192,8 +199,10 @@ impl<T> Container for Wrapper<T> {
 }
 
 /// 测试目的: 验证关联类型内存布局
+/// Tests目的: 验证关联类型内存布局
 /// objective : associated type memory layout
 /// 测试场景: 使用关联类型访问数据
+/// Tests场景: 使用关联类型访问数据
 /// scenario : associated type
 /// 预期结果: 应该正确获取数据
 /// result : should
@@ -223,8 +232,10 @@ impl<'a, 'b, T, U> Borrowed<'a, 'b, T, U> {
 }
 
 /// 测试目的: 验证复杂生命周期
+/// Tests目的: 验证复杂生命周期
 /// objective : complex lifetime
 /// 测试场景: 创建包含多个引用的结构体
+/// Tests场景: 创建包含多个引用的结构体
 /// scenario : reference struct
 /// 预期结果: 应该正确访问两个字段
 /// result : should field
@@ -255,6 +266,7 @@ impl<T: Default + Copy, const N: usize> ArrayWrapper<T, N> {
 }
 
 /// 测试目的: 验证常量泛型
+/// Tests目的: 验证常量泛型
 /// objective : constant generic
 /// 预期结果: 应该创建正确大小的数组
 /// result : should
@@ -265,8 +277,10 @@ fn test_const_generic() {
 }
 
 /// 测试目的: 验证常量泛型数组分割
+/// Tests目的: 验证常量泛型数组分割
 /// objective : constant generic
 /// 测试场景: 分割数组为两部分
+/// Tests场景: 分割数组为两部分
 /// scenario : as part
 /// 预期结果: 应该正确分割数组
 /// result : should
@@ -290,8 +304,10 @@ where
 }
 
 /// 测试目的: 验证数组分割
+/// Tests目的: 验证数组分割
 /// objective :
 /// 测试场景: 分割 [i32; 6] 数组
+/// Tests场景: 分割 [i32; 6] 数组
 /// scenario : [i32; 6]
 /// Test forscenario: 分割 [i32; 6] array
 /// 预期结果: 应该正确分割为两部分
@@ -354,6 +370,7 @@ where
 }
 
 /// 测试场景: 使用 trait object 调用闭包
+/// Tests场景: 使用 trait object 调用闭包
 /// scenario : trait object
 /// 预期结果: 应该正确调用并返回结果
 /// result : should and result
@@ -380,10 +397,13 @@ fn generic_ptr_read<T: Copy>(ptr: *const T) -> T {
 }
 
 /// 测试目的: 验证泛型指针操作
+/// Tests目的: 验证泛型指针操作
 /// objective : generic pointer
 /// 测试场景: 使用泛型函数读写指针
+/// Tests场景: 使用泛型函数读写指针
 /// scenario : generic function pointer
 /// 预期结果: 应该正确读写值
+/// Expected result: Should read and write values correctly
 /// result : should
 #[test]
 fn test_generic_ptr_ops() {
@@ -403,8 +423,10 @@ fn generic_replace<T>(dest: &mut T, src: T) -> T {
 }
 
 /// 测试目的: 验证泛型替换
+/// Tests目的: 验证泛型替换
 /// objective : generic
 /// 测试场景: 替换变量的值
+/// Tests场景: 替换变量的值
 /// scenario : variable
 /// 预期结果: 应该返回旧值并设置新值
 /// result : should and
@@ -454,6 +476,7 @@ impl Drop for TypeErased {
 }
 
 /// 测试目的: 验证类型擦除
+/// Tests目的: 验证类型擦除
 /// objective : type
 /// 预期结果: 应该正确调用析构函数
 /// result : should destructor
@@ -479,8 +502,10 @@ impl<T: Default + Copy, const N: usize> Config<T, N> {
 }
 
 /// 测试目的: 验证默认类型参数
+/// Tests目的: 验证默认类型参数
 /// objective : type parameter
 /// 测试场景: 使用默认类型参数创建 Config
+/// Tests场景: 使用默认类型参数创建 Config
 /// scenario : type parameter Config
 /// 预期结果: 应该使用默认类型 i32 和大小 10
 /// result : should type i32 and 10

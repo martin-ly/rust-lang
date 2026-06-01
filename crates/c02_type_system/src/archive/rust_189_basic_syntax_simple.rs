@@ -1,54 +1,71 @@
 //! # Rust 1.89 特性示例 (历史版本)
+//! # Rust 1.89 Feature Examples (Historical Version)
 //! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
+//! ## Version History
 //! ## this explain
 //! ### Rust 1.92.0 主要改进
+//! ### Rust 1.92.0 Major Improvements
 //! ### Rust 1.92.0 main
 //! - **关联项多边界**: 更灵活的类型约束表达
 //! - **edge **: type express
 //! - **高阶生命周期增强**: 更精确的生命周期处理
 //! - **lifetime **: lifetime
 //! ### 迁移建议
+//! ### Migration Suggestions
 //! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
+//! 1. Update Cargo.toml: `rust-version = "1.92"`
 //! 参考:
+//! Reference:
 //! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//! - [Historical version: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 基础语法简化实现
 //! # Rust 1.89 foundation
 //! - 显式推断的常量泛型参数
+//! - Explicitly inferred const generic parameters
 //! - infer constant generic parameter
 //! - 显式inferconstantgeneric parameter
 //! - 不匹配的生命周期语法警告
 //! - lifetime warning
 //! - 增强genericassociated type (GATs)
+//! - enhancegenericassociated type (GATs)
 //! - 类型别名实现特征 (TAIT)
 //! - type (TAIT)
 //! - 高级类型组合模式
 //! - type combination
 //! - 完整的示例和测试用例
+//! - Complete examples and test cases
 //! - complete example and
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_189_basic_syntax_simple.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 //! - 作者: Rust 类型系统项目组
+//! - Author: Rust Type System Project Team
 //! - : Rust type system project
 use std::collections::HashMap;
 
 /// Rust 1.89 基础语法特性
 /// Rust 1.89 foundation feature
 /// 包括类型安全、性能优化、错误处理等最佳实践。
+/// Includes best practices for type safety, performance optimization, error handling, etc.
 /// type 、performance optimization 、error handling etc. 。
 pub mod basic_syntax_features {
 
@@ -68,6 +85,7 @@ pub mod basic_syntax_features {
         #[derive(Debug, Clone, PartialEq)]
         pub struct ConstGenericArray<T, const N: usize> {
             /// 内部数组数据
+            /// Internal array data
             /// inside
             /// 数组长度在编译时确定，提供类型级别的长度保证。
             /// in compile-time ，type level 。
@@ -76,12 +94,16 @@ pub mod basic_syntax_features {
 
         impl<T, const N: usize> ConstGenericArray<T, N> {
             /// 创建新的常量泛型数组
+            /// Creates新的常量泛型数组
             /// constant generic
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// # 返回
+            /// # Returns
             /// #
             /// # 示例
+            /// # Examples
             /// # example
             /// let arr = ConstGenericArray::new([1, 2, 3]);
             /// ```
@@ -90,13 +112,18 @@ pub mod basic_syntax_features {
             }
 
             /// 获取数组长度
+            /// Gets the array length
             /// 返回编译时确定的数组长度N。
+            /// Returns the compile-time determined array length N.
             /// compile-time N。
             /// # 返回
+            /// # Returns
             /// #
             /// # 性能
+            /// # Performance
             /// # performance
             /// 此方法在编译时优化为常量，无运行时开销。
+            /// This method is optimized to a constant at compile time with no runtime overhead.
             /// this method in compile-time optimization as constant ，runtime overhead 。
             /// thismethodincompile-timeoptimizationasconstant，无runtimeoverhead。
             pub fn len(&self) -> usize {
@@ -104,14 +131,19 @@ pub mod basic_syntax_features {
             }
 
             /// 检查数组是否为空
+            /// Checks if the array is empty
             /// as
             /// 基于编译时常量N判断数组是否为空。
+            /// Determines if the array is empty based on compile-time constant N.
             /// compile-time constant Nas 。
             /// # 返回
+            /// # Returns
             /// #
             /// # 性能
+            /// # Performance
             /// # performance
             /// 此方法在编译时优化为常量，无运行时开销。
+            /// This method is optimized to a constant at compile time with no runtime overhead.
             /// this method in compile-time optimization as constant ，runtime overhead 。
             /// thismethodincompile-timeoptimizationasconstant，无runtimeoverhead。
             pub fn is_empty(&self) -> bool {
@@ -119,33 +151,45 @@ pub mod basic_syntax_features {
             }
 
             /// 获取数组元素
+            /// Gets数组元素
             /// element
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `index`: 元素索引
+            /// - `index`: Element index
             /// - `index`: element
             /// # 返回
+            /// # Returns
             /// #
             /// 返回指定索引的元素引用
+            /// Returns a reference to the element at the specified index
             /// element reference
             /// 如果索引超出范围则panic
+            /// Panics if the index is out of bounds
             /// if scope panic
             pub fn get(&self, index: usize) -> Option<&T> {
                 self.data.get(index)
             }
 
             /// 获取可变数组元素
+            /// Gets可变数组元素
             /// element
             /// Get可变arrayelement
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `index`: 元素索引
+            /// - `index`: Element index
             /// - `index`: element
             /// # 返回
+            /// # Returns
             /// #
             /// 返回指定索引的可变元素引用
+            /// Returns指定索引的可变元素引用
             /// element reference
             /// 如果索引超出范围则panic
+            /// Panics if the index is out of bounds
             /// if scope panic
             pub fn get_mut(&mut self, index: usize) -> Option<&mut T> {
                 self.data.get_mut(index)
@@ -153,8 +197,10 @@ pub mod basic_syntax_features {
 
             /// 迭代器
             /// # 返回
+            /// # Returns
             /// #
             /// 返回数组元素的迭代器
+            /// Returns数组元素的迭代器
             /// element
             pub fn iter(&self) -> std::slice::Iter<T> {
                 self.data.iter()
@@ -163,8 +209,10 @@ pub mod basic_syntax_features {
             /// 可变迭代器
             /// 可变iterator
             /// # 返回
+            /// # Returns
             /// #
             /// 返回数组元素的可变迭代器
+            /// Returns数组元素的可变迭代器
             /// element
             pub fn iter_mut(&mut self) -> std::slice::IterMut<T> {
                 self.data.iter_mut()
@@ -178,6 +226,7 @@ pub mod basic_syntax_features {
         #[derive(Debug, Clone, PartialEq)]
         pub struct Matrix<T, const ROWS: usize, const COLS: usize> {
             /// 矩阵数据
+            /// matrixdata
             /// 使用二维数组存储矩阵数据，行列数在编译时确定。
             /// ，in compile-time 。
             pub data: [[T; COLS]; ROWS],
@@ -185,10 +234,14 @@ pub mod basic_syntax_features {
 
         impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
             /// 创建新的矩阵
+            /// Creates新的矩阵
             /// # 返回
+            /// # Returns
             /// #
             /// 返回用默认值填充的新矩阵
+            /// Returns用默认值填充的新矩阵
             /// # 示例
+            /// # Examples
             /// # example
             /// let matrix = Matrix::<i32, 3, 3>::new();
             /// ```
@@ -199,51 +252,71 @@ pub mod basic_syntax_features {
             }
 
             /// 获取矩阵行数
+            /// Gets矩阵行数
             /// # 返回
+            /// # Returns
             /// #
             /// 返回矩阵的行数
+            /// Returns矩阵的行数
             pub fn rows(&self) -> usize {
                 ROWS
             }
 
             /// 获取矩阵列数
+            /// Gets矩阵列数
             /// # 返回
+            /// # Returns
             /// #
             /// 返回矩阵的列数
+            /// Returns矩阵的列数
             pub fn cols(&self) -> usize {
                 COLS
             }
 
             /// 获取矩阵元素
+            /// Gets矩阵元素
             /// element
             /// Get矩阵element
+            /// Getmatrixelement
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `row`: 行索引
+            /// - `row`: Row index
             /// - `row`:
             /// - `col`: 列索引
+            /// - `col`: Column index
             /// - `col`:
             /// # 返回
+            /// # Returns
             /// #
             /// 返回指定位置的元素引用
+            /// Returns指定位置的元素引用
             /// position element reference
             pub fn get(&self, row: usize, col: usize) -> Option<&T> {
                 self.data.get(row)?.get(col)
             }
 
             /// 设置矩阵元素
+            /// Sets矩阵元素
             /// element
             /// Set矩阵element
+            /// Setmatrixelement
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `row`: 行索引
+            /// - `row`: Row index
             /// - `row`:
             /// - `col`: 列索引
+            /// - `col`: Column index
             /// - `col`:
             /// - `value`: 要Set值
             /// # 返回
+            /// # Returns
             /// #
             /// 如果设置成功返回Some(())，否则返回None
+            /// Returns Some(()) if the setting succeeds, otherwise returns None
             /// if Some(())，None
             pub fn set(&mut self, row: usize, col: usize, value: T) -> Option<()> {
                 *self.data.get_mut(row)?.get_mut(col)? = value;
@@ -258,6 +331,7 @@ pub mod basic_syntax_features {
         #[derive(Debug, Clone, PartialEq)]
         pub struct Vector<T, const DIM: usize> {
             /// 向量数据
+            /// vectordata
             /// 使用数组存储向量数据，维度在编译时确定。
             /// ，dimension in compile-time 。
             pub data: [T; DIM],
@@ -265,9 +339,12 @@ pub mod basic_syntax_features {
 
         impl<T: Default + Copy, const DIM: usize> Vector<T, DIM> {
             /// 创建新的向量
+            /// Creates新的向量
             /// # 返回
+            /// # Returns
             /// #
             /// 返回用默认值填充的新向量
+            /// Returns用默认值填充的新向量
             pub fn new() -> Self {
                 Self {
                     data: [T::default(); DIM],
@@ -275,42 +352,58 @@ pub mod basic_syntax_features {
             }
 
             /// 获取向量维度
+            /// Gets向量维度
             /// dimension
             /// Get向量dimension
+            /// Getvectordimension
             /// # 返回
+            /// # Returns
             /// #
             /// 返回向量的维度
+            /// Returns向量的维度
             /// dimension
             pub fn dim(&self) -> usize {
                 DIM
             }
 
             /// 获取向量元素
+            /// Gets向量元素
             /// element
             /// Get向量element
+            /// Getvectorelement
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `index`: 元素索引
+            /// - `index`: Element index
             /// - `index`: element
             /// # 返回
+            /// # Returns
             /// #
             /// 返回指定索引的元素引用
+            /// Returns a reference to the element at the specified index
             /// element reference
             pub fn get(&self, index: usize) -> Option<&T> {
                 self.data.get(index)
             }
 
             /// 设置向量元素
+            /// Sets向量元素
             /// element
             /// Set向量element
+            /// Setvectorelement
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `index`: 元素索引
+            /// - `index`: Element index
             /// - `index`: element
             /// - `value`: 要Set值
             /// # 返回
+            /// # Returns
             /// #
             /// 如果设置成功返回Some(())，否则返回None
+            /// Returns Some(()) if the setting succeeds, otherwise returns None
             /// if Some(())，None
             pub fn set(&mut self, index: usize, value: T) -> Option<()> {
                 *self.data.get_mut(index)? = value;
@@ -332,6 +425,7 @@ pub mod basic_syntax_features {
         #[derive(Debug)]
         pub struct LifetimeComposed<'a, 'b, T> {
             /// 第一个生命周期受限的数据
+            /// First lifetime-restricted data
             /// first lifetime
             pub data: &'a T,
             /// 第二个生命周期受限的元数据
@@ -341,30 +435,40 @@ pub mod basic_syntax_features {
 
         impl<'a, 'b, T> LifetimeComposed<'a, 'b, T> {
             /// 创建新的生命周期组合类型
+            /// Creates新的生命周期组合类型
             /// lifetime combination type
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// # 返回
+            /// # Returns
             /// #
             /// 返回新创建的生命周期组合类型
+            /// Returns新创建的生命周期组合类型
             /// lifetime combination type
             pub fn new(data: &'a T, metadata: &'b str) -> Self {
                 Self { data, metadata }
             }
 
             /// 获取数据
+            /// Gets data
             /// # 返回
+            /// # Returns
             /// #
             /// 返回生命周期受限的数据引用
+            /// Returns生命周期受限的数据引用
             /// lifetime reference
             pub fn get_data(&self) -> &'a T {
                 self.data
             }
 
             /// 获取元数据
+            /// Gets metadata
             /// # 返回
+            /// # Returns
             /// #
             /// 返回生命周期受限的元数据引用
+            /// Returns生命周期受限的元数据引用
             /// lifetime reference
             pub fn get_metadata(&self) -> &'b str {
                 self.metadata
@@ -387,12 +491,16 @@ pub mod basic_syntax_features {
 
         impl<'a, 'b, T> LifetimeManager<'a, 'b, T> {
             /// 创建新的生命周期管理器
+            /// Creates新的生命周期管理器
             /// lifetime
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// # 返回
+            /// # Returns
             /// #
             /// 返回新创建的生命周期管理器
+            /// Returns新创建的生命周期管理器
             /// lifetime
             pub fn new(data: &'a T, cache: &'b mut HashMap<String, String>) -> Self {
                 Self { data, cache }
@@ -400,14 +508,18 @@ pub mod basic_syntax_features {
 
             /// 使用缓存处理数据
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `key`: 缓存键
             /// - `key`:
             /// # 返回
+            /// # Returns
             /// #
             /// 返回处理结果
+            /// Returns处理结果
             /// result
             /// # 示例
+            /// # Examples
             /// # example
             /// let mut cache = HashMap::new();
             /// let data = "test";
@@ -430,12 +542,16 @@ pub mod basic_syntax_features {
         /// 本函数展示了正确的生命周期语法使用。
         /// This function demonstrates lifetime 。
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// # 返回
+        /// # Returns
         /// #
         /// 返回具有相同生命周期的迭代器
+        /// Returns具有相同生命周期的迭代器
         /// has lifetime
         /// # 示例
+        /// # Examples
         /// # example
         /// let scores = [1, 2, 3, 4, 5];
         /// let iter = items(&scores);
@@ -449,12 +565,16 @@ pub mod basic_syntax_features {
         /// 本函数展示了如何组合多个生命周期参数。
         /// This function demonstrates combination lifetime parameter 。
         /// # 参数
+        /// # Arguments
         /// # parameter
         /// # 返回
+        /// # Returns
         /// #
         /// 返回生命周期组合的结果
+        /// Returns生命周期组合的结果
         /// lifetime combination result
         /// # 示例
+        /// # Examples
         /// # example
         /// let data = "Hello";
         /// let metadata = "World";
@@ -469,6 +589,7 @@ pub mod basic_syntax_features {
     }
 
     /// 3. 增强genericassociated type (GATs)
+    /// 3. enhancegenericassociated type (GATs)
     /// 支持生命周期参数化的关联类型，提供更灵活的类型组合和更精确的生命周期管理。
     /// lifetime parameter associated type ，type combination and lifetime 。
     pub mod generic_associated_types {
@@ -493,22 +614,30 @@ pub mod basic_syntax_features {
                 T: Clone;
 
             /// 获取生命周期受限的项
+            /// Gets生命周期受限的项
             /// lifetime
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// # 返回
+            /// # Returns
             /// #
             /// 返回生命周期与输入相同的项引用
+            /// Returns生命周期与输入相同的项引用
             /// lifetime and reference
             fn get<'a>(&'a self) -> Option<Self::Item<'a>>;
 
             /// 获取泛型元数据
+            /// Gets泛型元数据
             /// generic
             /// # 类型参数
+            /// # Type Parameters
             /// # type parameter
             /// # 返回
+            /// # Returns
             /// #
             /// 返回与类型T相关的元数据引用
+            /// Returns与类型T相关的元数据引用
             /// and type Treference
             fn get_metadata<T: Clone>(&self) -> Option<&Self::Metadata<T>>;
         }
@@ -518,19 +647,25 @@ pub mod basic_syntax_features {
         #[derive(Debug)]
         pub struct StringContainer {
             /// 内部字符串数据
+            /// internalstringdata
             /// inside
             pub data: Vec<String>,
         }
 
         impl StringContainer {
             /// 创建新的字符串容器
+            /// Creates新的字符串容器
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `data`: 字符串数据
+            /// - `data`: stringdata
             /// - `data`:
             /// # 返回
+            /// # Returns
             /// #
             /// 返回新创建的字符串容器
+            /// Returns新创建的字符串容器
             pub fn new(data: Vec<String>) -> Self {
                 Self { data }
             }
@@ -566,21 +701,29 @@ pub mod basic_syntax_features {
                 Self: 'a;
 
             /// 获取下一个元素
+            /// Gets下一个元素
             /// under element
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// # 返回
+            /// # Returns
             /// #
             /// 返回生命周期与输入相同的项
+            /// Returns生命周期与输入相同的项
             /// lifetime and
             fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
 
             /// 获取元数据
+            /// Gets metadata
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// # 返回
+            /// # Returns
             /// #
             /// 返回生命周期与输入相同的元数据
+            /// Returns生命周期与输入相同的元数据
             /// lifetime and
             fn get_metadata<'a>(&'a self) -> Self::Metadata<'a>;
         }
@@ -598,13 +741,17 @@ pub mod basic_syntax_features {
 
         impl NumberIterator {
             /// 创建新的数字迭代器
+            /// Creates新的数字迭代器
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `data`: 数字数据
             /// - `data`:
             /// # 返回
+            /// # Returns
             /// #
             /// 返回新创建的数字迭代器
+            /// Returns新创建的数字迭代器
             pub fn new(data: Vec<i32>) -> Self {
                 Self { data, index: 0 }
             }
@@ -642,10 +789,14 @@ pub mod basic_syntax_features {
         pub type NumberProcessor = i32;
 
         /// 创建数字处理器
+        /// Creates数字处理器
         /// # 返回
+        /// # Returns
         /// #
         /// 返回数字处理器
+        /// Returns数字处理器
         /// # 示例
+        /// # Examples
         /// # example
         /// let processor = create_number_processor();
         /// assert_eq!(processor, 42);
@@ -659,12 +810,16 @@ pub mod basic_syntax_features {
         pub type ComplexType = std::vec::IntoIter<String>;
 
         /// 创建复杂类型
+        /// Creates复杂类型
         /// complex type
         /// # 返回
+        /// # Returns
         /// #
         /// 返回复杂类型实例
+        /// Returns复杂类型实例
         /// complex type
         /// # 示例
+        /// # Examples
         /// # example
         /// let complex = create_complex_type();
         /// for item in complex {
@@ -689,6 +844,7 @@ pub mod basic_syntax_features {
         #[derive(Debug)]
         pub struct SmartPointerComposition<T> {
             /// 内部数据
+            /// internaldata
             /// inside
             inner: Box<T>,
             /// 引用计数
@@ -698,12 +854,16 @@ pub mod basic_syntax_features {
 
         impl<T> SmartPointerComposition<T> {
             /// 创建新的智能指针组合
+            /// Creates新的智能指针组合
             /// pointer combination
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// # 返回
+            /// # Returns
             /// #
             /// 返回新创建的智能指针组合
+            /// Returns新创建的智能指针组合
             /// pointer combination
             pub fn new(value: T) -> Self {
                 Self {
@@ -713,22 +873,29 @@ pub mod basic_syntax_features {
             }
 
             /// 获取数据引用
+            /// Gets a data reference
             /// reference
             /// Get数据reference
+            /// Getdatareference
             /// # 返回
+            /// # Returns
             /// #
             /// 返回内部数据的引用
+            /// Returns内部数据的引用
             /// inside reference
             pub fn get(&self) -> &T {
                 &self.inner
             }
 
             /// 获取可变数据引用
+            /// Gets可变数据引用
             /// reference
             /// Get可变数据reference
             /// # 返回
+            /// # Returns
             /// #
             /// 返回内部数据的可变引用
+            /// Returns内部数据的可变引用
             /// inside reference
             pub fn get_mut(&mut self) -> &mut T {
                 &mut self.inner
@@ -742,10 +909,13 @@ pub mod basic_syntax_features {
         pub type EnhancedResult<T> = Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
         /// 错误组合 trait
+        /// errorcombination trait
         /// combination trait
         /// 错误combination trait
+        /// errorcombination trait
         pub trait ErrorComposition {
             /// 错误类型
+            /// Error type
             /// error type
             type Error;
             /// 成功类型
@@ -753,16 +923,20 @@ pub mod basic_syntax_features {
             type Success;
 
             /// 组合错误
+            /// combinationerror
             /// combination
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `e1`: 第一个错误
             /// - `e1`: first
             /// - `e2`: 第二个错误
             /// - `e2`: second
             /// # 返回
+            /// # Returns
             /// #
             /// 返回组合后的错误
+            /// Returns组合后的错误
             /// combination after
             fn combine_errors<E1, E2>(e1: E1, e2: E2) -> Self::Error
             where
@@ -782,15 +956,20 @@ pub mod basic_syntax_features {
             type IntoIter: Iterator<Item = Self::Item>;
 
             /// 转换为迭代器
+            /// Converts为迭代器
             /// conversion as
             /// # 返回
+            /// # Returns
             /// #
             /// 返回迭代器
+            /// Returns迭代器
             fn into_iter(self) -> Self::IntoIter;
 
             /// 映射函数
+            /// Maps函数
             /// function
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// - `self`: 实现者
             /// - `self`:
@@ -798,8 +977,10 @@ pub mod basic_syntax_features {
             /// - `f`: 映射函数
             /// - `f`: function
             /// # 返回
+            /// # Returns
             /// #
             /// 返回映射后的迭代器
+            /// Returns映射后的迭代器
             /// after
             fn map<F, B>(self, f: F) -> std::iter::Map<Self::IntoIter, F>
             where
@@ -807,6 +988,7 @@ pub mod basic_syntax_features {
         }
 
         /// 并发类型组合 trait
+        /// concurrenttypecombination trait
         /// concurrency type combination trait
         pub trait ConcurrentTypeComposition {
             /// 线程安全类型
@@ -815,28 +997,37 @@ pub mod basic_syntax_features {
             where
                 T: Send + Sync;
             /// 异步类型
+            /// asynchronoustype
             /// async type
             type Async<T>
             where
                 T: 'static;
 
             /// 创建线程安全类型
+            /// Creates线程安全类型
             /// thread-safe type
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// # 返回
+            /// # Returns
             /// #
             /// 返回线程安全类型
+            /// Returns线程安全类型
             /// thread-safe type
             fn make_thread_safe<T: Send + Sync>(value: T) -> Self::ThreadSafe<T>;
 
             /// 创建异步类型
+            /// Creates异步类型
             /// async type
             /// # 参数
+            /// # Arguments
             /// # parameter
             /// # 返回
+            /// # Returns
             /// #
             /// 返回异步类型
+            /// Returns异步类型
             /// async type
             fn make_async<T>(value: T) -> Self::Async<T>;
         }
@@ -844,6 +1035,7 @@ pub mod basic_syntax_features {
 }
 
 /// 使用示例和测试
+/// Usage examples and tests
 /// example and
 #[cfg(test)]
 mod tests {

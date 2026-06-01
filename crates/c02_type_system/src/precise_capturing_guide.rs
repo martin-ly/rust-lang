@@ -4,10 +4,13 @@
 //! > **最后更新**: 2026-05-08
 //! > **finally **: 2026-05-08
 //! # 概念定义
+//! # conceptdefinition
 //! # concept definition
 //! 返回类型中捕获的生命周期和类型参数**。
+//! Returns类型中捕获的生命周期和类型参数**。
 //! type in lifetime and type parameter **。
 //! ## 问题背景
+//! ## problembackground
 //! ## problem background
 //! 在 Rust 2021 Edition 中，`impl Trait` 返回类型会自动捕获所有输入生命周期：
 //! in Rust 2021 Edition in ，`impl Trait` type all lifetime ：
@@ -20,6 +23,7 @@
 //! ```
 //!
 //! ## 解决方案：`use<..>`
+//! ## solution：`use<..>`
 //! ## solution ：`use<..>`
 //! `use<T, 'a>` 语法允许你**显式声明** `impl Trait` 捕获哪些类型参数和生命周期：
 //! `use<T, 'a>` **** `impl Trait` type parameter and lifetime ：
@@ -107,6 +111,7 @@ fn process<'data, 'config>(
     }
 
     /// ## 示例 3：在 Trait 中使用
+    /// ## example 3：in Trait inuse
     /// ## example 3：in Trait in
     /// `use<..>` 在 trait 定义和实现中同样有效：
     /// `use<..>` in trait definition and in effective ：

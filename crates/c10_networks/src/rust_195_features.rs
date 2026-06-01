@@ -3,6 +3,7 @@
 //! # 概述
 //! #
 //! - **`Atomic*::update`/`try_update`** — 无锁连接池计数器、并发统计
+//! - **`Atomic*::update`/`try_update`** — lock-free connection pool 、concurrency
 //! - **`Atomic*::update`/`try_update`** — lock-free 、concurrency
 //! - **`cfg_select!`** — 跨平台网络系统调用抽象
 //! - **`cfg_select!`** — platform network system
@@ -32,6 +33,7 @@ pub struct NetworkAtomicExamples;
 
 impl NetworkAtomicExamples {
     /// 连接池引用计数递增（update）
+    /// connection pool reference counting （update）
     /// reference counting （update）
     /// 每个新连接建立时原子递增活跃连接数。
     /// 。
@@ -40,6 +42,7 @@ impl NetworkAtomicExamples {
     }
 
     /// 连接池引用计数递减（update）
+    /// connection pool reference counting （update）
     /// reference counting （update）
     pub fn decrement_active_connections(counter: &AtomicUsize) -> usize {
         counter.update(Ordering::Relaxed, Ordering::Relaxed, |old| {
@@ -76,6 +79,7 @@ impl NetworkAtomicExamples {
 /// # 冷路径优化在网络服务中的应用
 /// # optimization in network in application
 /// 网络服务中，错误路径（连接失败、超时、协议错误）应该远少于成功路径。
+/// network in ，（failure 、timeout 、）should 。
 /// network in ，（、、）should 。
 pub struct NetworkColdPathExamples;
 
@@ -151,6 +155,7 @@ impl ProtocolIfLetGuardExamples {
     }
 
     /// TCP 状态转换：仅在特定状态下允许转换
+    /// TCP state conversion ：in state under allow conversion
     /// TCP state conversion ：in state under conversion
     pub fn tcp_state_transition(state: &str, event: &str) -> Option<&'static str> {
         match (state, event) {
@@ -313,6 +318,7 @@ impl RealRust195Features {
     }
 
     /// 使用 `if let` guard 解析数据包
+    /// `if let` guard data packet
     /// `if let` guard
     /// 在 match 臂中直接解构 `Option` 并检查条件。
     /// in match in `Option` and condition 。

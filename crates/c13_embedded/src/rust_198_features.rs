@@ -13,10 +13,12 @@ impl Rust198EmbeddedFeatures {
     /// 触发调试断点
     /// point
     /// 当程序在调试器下运行时，这会暂停执行并允许检查状态。
+    /// when program in under runtime ，and allow state 。
     /// when program in under runtime ，and state 。
     /// 在没有调试器的环境中，断点指令可能导致信号/异常。
     /// in environment in ，point may /。
     /// 仅应在调试场景或已配置异常处理器的嵌入式系统中使用。
+    /// in scenario or configuration system in 。
     /// in scenario or system in 。
     #[inline(never)]
     pub unsafe fn trigger_debug_breakpoint() {

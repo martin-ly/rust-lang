@@ -5,6 +5,7 @@
 //! - 平台特定API抽象
 //! - platform API
 //! - 跨平台最佳实践
+//! - platform best practice
 //! - platform
 //! 运行方式:
 //! Run way :

@@ -126,6 +126,7 @@ fn demonstrate_user_permission_check() {
 }
 
 /// 配置管理场景
+/// configuration scenario
 /// scenario
 fn demonstrate_configuration_management() {
     println!("--- 配置管理场景 ---");

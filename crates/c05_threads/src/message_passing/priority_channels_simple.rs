@@ -67,6 +67,7 @@ impl<T> Default for SimplePriorityChannel<T> {
 
 impl<T> SimplePriorityChannel<T> {
     /// 创建新的简化优先级通道
+    /// Creates新的简化优先级通道
     /// priority channel
     pub fn new() -> Self {
         Self {
@@ -75,6 +76,7 @@ impl<T> SimplePriorityChannel<T> {
     }
 
     /// 发送消息
+    /// Sends消息
     pub fn send(&self, priority: u32, data: T) {
         let message = SimplePriorityMessage::new(priority, data);
         let mut queue = self.queue.lock().unwrap();
@@ -88,12 +90,14 @@ impl<T> SimplePriorityChannel<T> {
     }
 
     /// 接收消息
+    /// Receives a message
     pub fn recv(&self) -> Option<T> {
         let mut queue = self.queue.lock().unwrap();
         queue.pop_front().map(|msg| msg.data)
     }
 
     /// 尝试接收消息
+    /// Attempts to接收消息
     pub fn try_recv(&self) -> Option<T> {
         if let Ok(mut queue) = self.queue.try_lock() {
             queue.pop_front().map(|msg| msg.data)
@@ -103,11 +107,13 @@ impl<T> SimplePriorityChannel<T> {
     }
 
     /// 获取队列长度
+    /// Gets队列长度
     pub fn len(&self) -> usize {
         self.queue.lock().unwrap().len()
     }
 
     /// 检查是否为空
+    /// Checks if empty
     /// as
     pub fn is_empty(&self) -> bool {
         self.queue.lock().unwrap().is_empty()

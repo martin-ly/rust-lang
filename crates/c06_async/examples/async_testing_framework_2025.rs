@@ -9,8 +9,10 @@ use tokio::time::{sleep, timeout};
 use tracing::{debug, error, info, warn};
 
 /// 2025年异步测试框架和最佳实践演示
+/// 2025async framework and best practice demonstration
 /// 2025async framework and demonstration
 /// 展示最新的异步测试技术和最佳实践
+/// async technique and best practice
 /// async technique and
 /// 1. 异步测试运行器
 /// 1. async Run

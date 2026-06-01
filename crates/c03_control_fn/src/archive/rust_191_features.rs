@@ -1,6 +1,8 @@
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - const 上下文增强（在控制流中使用）
 //! - const on under （in stream in ）
@@ -9,11 +11,15 @@
 //! - JIT 编译器优化对控制流的影响
 //! - JIT optimization to stream impact
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_191_features.rs
+//! - File: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::ops::ControlFlow;
@@ -33,6 +39,7 @@ pub mod const_control_flow {
     /// 使用 const 引用进行计算
     /// const reference
     /// Rust 1.91: 可以在 const 上下文中使用引用
+    /// Rust 1.91: canin const contextinusereference
     /// Rust 1.91: can in const on under in reference
     pub const CONST_VALUE: u32 = 10;
     pub const CONST_REF: &u32 = &CONST_VALUE; // ✅ Rust 1.91 新特性
@@ -90,6 +97,7 @@ pub mod improved_control_flow {
     }
 
     /// 复杂验证流程示例
+    /// complexverificationflowexample
     /// complex process example
     pub fn validate_pipeline(data: &[i32]) -> ControlFlow<String, i32> {
         // 第一步：检查是否为空
@@ -306,6 +314,7 @@ pub mod comprehensive_examples {
     }
 
     /// 处理控制流管道
+    /// Processes控制流管道
     /// stream pipe
     pub fn process_pipeline(data: &[i32]) -> ControlFlow<String, HashMap<String, i32>> {
         let mut stats = HashMap::new();
@@ -702,6 +711,7 @@ pub fn demonstrate_rust_191_control_flow() {
 }
 
 /// 获取 Rust 1.91 控制流特性信息
+/// Gets Rust 1.91 控制流特性信息
 /// Rust 1.91 stream feature
 pub fn get_rust_191_control_flow_info() -> &'static str {
     "Rust 1.91 控制流与函数特性模块 - 包含 const 上下文增强、ControlFlow 改进、函数性能优化等"

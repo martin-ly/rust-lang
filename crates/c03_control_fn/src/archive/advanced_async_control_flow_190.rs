@@ -21,6 +21,7 @@ use anyhow::{Result, Context};
 use serde::{Deserialize, Serialize};
 
 /// 异步事件类型
+/// asynchronouseventtype
 /// async type
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum AsyncEvent {
@@ -61,6 +62,7 @@ impl AdvancedDataProcessor {
 
 impl AsyncEventHandler {
     /// 处理事件
+    /// Processes事件
     pub async fn handle_event(&self, event: AsyncEvent) -> Result<()> {
         match self {
             AsyncEventHandler::DataProcessor(processor) => {
@@ -103,6 +105,7 @@ impl AsyncEventHandler {
     }
 
     /// 获取处理器名称
+    /// Gets处理器名称
     pub fn get_handler_name(&self) -> &str {
         match self {
             AsyncEventHandler::DataProcessor(processor) => &processor.name,
@@ -188,6 +191,7 @@ impl AsyncEventBus {
     }
 
     /// 处理事件队列
+    /// Processes事件队列
     pub async fn process_events(&self) -> Result<()> {
         let mut queue = self.event_queue.lock().await;
 
@@ -230,6 +234,7 @@ impl AsyncEventBus {
     }
 
     /// 获取指标
+    /// Gets指标
     /// indicator
     pub async fn get_metrics(&self) -> EventMetrics {
         self.metrics.lock().await.clone()
@@ -325,6 +330,7 @@ impl AsyncWorkflowEngine {
     }
 
     /// 创建新工作流
+    /// Creates新工作流
     /// stream
     pub async fn create_workflow(&self, id: String, name: String, steps: Vec<WorkflowStep>) -> Result<()> {
         let workflow = AsyncWorkflow {
@@ -458,8 +464,10 @@ impl AsyncWorkflowEngine {
     }
 
     /// 获取工作流状态
+    /// Gets工作流状态
     /// stream state
     /// Get工作streamstate
+    /// Getworkstreamstate
     pub async fn get_workflow_status(&self, workflow_id: &str) -> Option<WorkflowStatus> {
         let workflows = self.workflows.read().await;
         workflows.get(workflow_id).map(|w| w.status.clone())
@@ -524,6 +532,7 @@ impl AsyncDataPipeline {
     }
 
     /// 处理数据
+    /// Processes data
     pub async fn process_data(&self, data: PipelineData) -> Result<PipelineData> {
         let mut current_data = data;
         let start_time = Instant::now();
@@ -556,6 +565,7 @@ impl AsyncDataPipeline {
     }
 
     /// 获取管道指标
+    /// Gets管道指标
     /// pipe indicator
     pub async fn get_metrics(&self) -> PipelineMetrics {
         self.metrics.lock().await.clone()
@@ -590,6 +600,7 @@ impl DataTransformProcessor {
 
 impl PipelineProcessor {
     /// 处理数据
+    /// Processes data
     pub async fn process(&self, mut input: PipelineData) -> Result<PipelineData> {
         match self {
             PipelineProcessor::DataTransform(processor) => {
@@ -638,6 +649,7 @@ impl PipelineProcessor {
     }
 
     /// 获取阶段名称
+    /// Gets阶段名称
     /// stage
     pub fn get_stage_name(&self) -> &str {
         match self {

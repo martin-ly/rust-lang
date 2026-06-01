@@ -130,6 +130,7 @@ fn bench_dynamic_programming(c: &mut Criterion) {
 }
 
 /// 数学算法基准测试
+/// math algorithm benchmark
 /// algorithm benchmark
 /// 数学algorithmbenchmark
 fn bench_math_algorithms(c: &mut Criterion) {
@@ -200,6 +201,7 @@ fn bench_concurrent_algorithms(c: &mut Criterion) {
 }
 
 /// 创建测试图
+/// graph
 fn create_test_graph(n: usize) -> c08_algorithms::algorithms::graph::Graph {
     let mut edges = Vec::new();
 

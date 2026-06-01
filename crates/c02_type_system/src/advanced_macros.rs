@@ -189,6 +189,7 @@ pub mod attribute_macros {
     /// 缓存属性宏
     /// attribute
     /// 缓存attribute macro
+    /// cacheattribute macro
     #[macro_export]
     macro_rules! cached {
         ($key:expr, $value:expr) => {{
@@ -268,6 +269,7 @@ pub mod derive_macros {
     }
 
     /// 序列化宏
+    /// Serializes宏
     /// sequence
     #[macro_export]
     macro_rules! serializable {
@@ -337,6 +339,7 @@ pub mod macro_composition {
 /// 宏元编程Demonstration of
 pub mod macro_metaprogramming {
     /// 生成函数宏
+    /// Generates函数宏
     /// function
     #[macro_export]
     macro_rules! generate_functions {
@@ -350,6 +353,7 @@ pub mod macro_metaprogramming {
     }
 
     /// 生成结构体宏
+    /// Generates结构体宏
     /// struct
     #[macro_export]
     macro_rules! generate_structs {
@@ -370,6 +374,7 @@ pub mod macro_metaprogramming {
     }
 
     /// 生成枚举宏
+    /// Generates枚举宏
     /// enum
     #[macro_export]
     macro_rules! generate_enum {
@@ -393,6 +398,7 @@ pub mod macro_metaprogramming {
     }
 
     /// 生成实现宏
+    /// Generates实现宏
     #[macro_export]
     macro_rules! generate_impl {
         ($trait_name:ident, $($type:ty),+ $(,)?) => {

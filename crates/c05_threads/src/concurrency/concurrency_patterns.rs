@@ -32,6 +32,7 @@ pub struct ProducerConsumer<T> {
 
 impl<T> ProducerConsumer<T> {
     /// 创建新的生产者-消费者实例
+    /// Creates新的生产者-消费者实例
     /// -
     pub fn new(buffer_size: usize) -> Self {
         let (sender, receiver) = bounded(buffer_size);
@@ -43,6 +44,7 @@ impl<T> ProducerConsumer<T> {
     }
 
     /// 创建无界通道的生产者-消费者
+    /// Creates无界通道的生产者-消费者
     /// unbounded channel -
     pub fn unbounded() -> Self {
         let (sender, receiver) = unbounded();
@@ -54,11 +56,13 @@ impl<T> ProducerConsumer<T> {
     }
 
     /// 获取发送端
+    /// Gets发送端
     pub fn sender(&self) -> Sender<T> {
         self.sender.clone()
     }
 
     /// 获取接收端
+    /// Gets接收端
     pub fn receiver(&self) -> Receiver<T> {
         self.receiver.clone()
     }
@@ -226,6 +230,7 @@ impl DivideAndConquer {
     }
 
     /// 并行快速排序
+    /// parallelfastsort
     /// parallelism quick sort
     pub fn parallel_quicksort<T>(&self, mut data: Vec<T>) -> Vec<T>
     where

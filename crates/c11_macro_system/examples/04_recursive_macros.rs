@@ -1,10 +1,13 @@
 //! # 示例04: 递归宏
+//! # example 04: recursive
 //! # example 04:
 //! 演示递归宏的使用
+//! demonstration recursive
 //! demonstration
 use c11_macro_system::{count, max};
 
 /// 递归反转
+/// recursive
 #[allow(unused_macros)]
 macro_rules! reverse {
     () => { () };

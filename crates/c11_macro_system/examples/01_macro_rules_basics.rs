@@ -1,5 +1,6 @@
 //! # 示例01: macro_rules!基础
 //! 本示例演示声明宏的基本用法
+//! this example demonstration this usage
 //! this example demonstration this
 //! ## 📐 知识结构
 //! ## 📐 structure
@@ -13,6 +14,7 @@
 //!   - **关系**: 与宏系统、代码生成相关
 //!   - ****: and system 、
 //! ### 思维导图
+//! ### graph
 //! ###
 //! macro_rules! 基础
 //! ├── 简单宏
@@ -32,6 +34,7 @@
 //! └──
 //! └── 向量Create
 //!     └── 便捷语法
+//!     └── syntax
 //!     └──
 use c11_macro_system::*;
 

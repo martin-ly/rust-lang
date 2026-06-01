@@ -39,6 +39,7 @@ pub fn web_server_example() {
 }
 
 /// 数据处理管道示例
+/// data pipe example
 /// pipe example
 pub fn data_processing_pipeline_example() {
     println!("\n📊 数据处理管道示例");
@@ -96,6 +97,7 @@ pub fn concurrent_task_processing_example() {
 }
 
 /// 配置管理示例
+/// configuration example
 /// example
 pub fn configuration_management_example() {
     println!("\n⚙️ 配置管理示例");

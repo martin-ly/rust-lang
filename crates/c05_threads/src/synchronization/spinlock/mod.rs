@@ -1,6 +1,7 @@
 //! 自旋锁（教学示例，生产环境请优先用 `Mutex`）
 //! spinlock （example ，environment `Mutex`）
 //! - 支持 `try_lock`
+//! - support `try_lock`
 use std::cell::UnsafeCell;
 use std::ops::{Deref, DerefMut};
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -75,6 +76,7 @@ impl<'a, T> Drop for SpinGuard<'a, T> {
 }
 
 /// 演示：多个线程在短临界区自旋更新
+/// Demonstrates：多个线程在短临界区自旋更新
 /// demonstration ：thread in
 pub fn spinlock_demo(workers: usize, iters: usize) -> usize {
     let lock = Arc::new(SpinLock::new(0usize));

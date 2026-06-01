@@ -1,12 +1,16 @@
 //! Rust 1.95.0 控制流新特性实现模块
 //! Rust 1.95.0 stream feature module
 //! # 版本信息
+//! # Version Information
 //! # this
 //! - 稳定日期: 2026-04-16
+//! - Stabilization date: 2026-04-16
 //! - date : 2026-04-16
 //! - 稳定date: 2026-04-16
+//! - stabledate: 2026-04-16
 //! - date: 2026-04-16
 //! # 参考
+//! # References
 //! # reference
 //! - [RFC 3637: Guard Patterns](https://rust-lang.github.io/rfcs/3637-guard-patterns.html)
 
@@ -17,8 +21,10 @@ use std::ops::ControlFlow;
 // ============================================================================
 
 /// # `if let` Guards 深度解析
+/// # Deep Dive into `if let` Guards
 /// # `if let` Guards 深度Parse
 /// ## 概念定义
+/// ## Concept Definition
 /// ## concept definition
 /// 无需额outside `match` 嵌套or `if` 语句。它will**模式守卫 (guard)** and
 /// **let 绑定** 合二为一。
@@ -31,6 +37,7 @@ use std::ops::ControlFlow;
 /// ```
 ///
 /// ## Wikipedia 概念对齐
+/// ## Wikipedia Concept Alignment
 /// ## 对比：传统方式 vs if let guard
 /// ## to ：way vs if let guard
 /// ## to比：传统way vs if let guard
@@ -47,10 +54,12 @@ use std::ops::ControlFlow;
 /// | 穷尽检查 | 需手动覆盖所有组合 | 更自然的穷尽模式 |
 /// | | all combination | |
 /// ## 反例 / 限制
+/// ## Counter-examples / Limitations
 /// ## /
 /// - 不能用于 `if let` 表达式本身（仅用于 `match` arms）
 /// - cannot `if let` express this （ `match` arms）
 /// - and `let chains` (1.88+) 不同：`let chains` Used for `if` condition，`if let` guards Used for `match` arms
+/// - and `let chains` (1.88+) different：`let chains` Used for `if` condition，`if let` guards Used for `match` arms
 pub struct IfLetGuardExamples;
 
 impl IfLetGuardExamples {
@@ -203,8 +212,10 @@ pub enum ConfigValue {
 }
 
 /// 日志级别
+/// loglevel
 /// level
 /// 日志level
+/// loglevel
 #[derive(Debug, Clone, PartialEq)]
 pub enum LogLevel {
     Debug,
@@ -228,6 +239,7 @@ impl std::str::FromStr for LogLevel {
 }
 
 /// 验证 session ID（辅助函数）
+/// Validates session ID（辅助函数）
 /// session ID（function ）
 /// Verify session ID（辅助function）
 fn validate_session(id: &str) -> Option<String> {
@@ -243,8 +255,10 @@ fn validate_session(id: &str) -> Option<String> {
 // ============================================================================
 
 /// ## 概念定义
+/// ## Concept Definition
 /// ## concept definition
 /// ## Wikipedia 概念对齐
+/// ## Wikipedia Concept Alignment
 /// - **Type Conversion**: 显式、可失败typeconversion，符合 Rust 显式哲学
 /// ## 反例 / 常见错误
 /// ## /
@@ -293,6 +307,7 @@ impl BoolTryFromExamples {
 // ============================================================================
 
 /// ## 概念
+/// ## concept
 /// ## concept
 /// - `Break(B)`：终止，携带值 B
 /// - `Break(B)`：， B
@@ -343,6 +358,7 @@ impl ControlFlowConstExamples {
 
 /// # `cfg_select!` 宏
 /// ## 语法
+/// ## Syntax
 /// ##
 ///     condition => { expression }
 ///     _ => { fallback_expression }
@@ -350,9 +366,12 @@ impl ControlFlowConstExamples {
 /// ```
 ///
 /// ## 与 `cfg!` 的区别
+/// ## and `cfg!` difference
 /// ## and `cfg!`
 /// ## and `cfg!` 区别
+/// ## and `cfg!` difference
 /// | 特性 | `cfg!` | `cfg_select!` |
+/// | features | `cfg!` | `cfg_select!` |
 /// | 返回值 | `bool` | 任意表达式 |
 /// | return value | `bool` | express |
 /// | 分支 | 无（仅判断） | 多分支选择 |

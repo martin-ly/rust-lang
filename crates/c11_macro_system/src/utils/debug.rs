@@ -5,6 +5,7 @@
 #[derive(Debug)]
 pub struct MacroDebugInfo {
     /// 宏名称
+    /// macro name
     pub name: String,
     /// 调用位置
     /// position

@@ -5,6 +5,7 @@
 //! - 锁竞争监控
 //! - lock
 //! - 等待时间统计
+//! - waittimestatistics
 //! - etc. time
 //! - 吞吐量测量
 //! -
@@ -469,6 +470,7 @@ impl PerformanceBenchmark {
 }
 
 /// 比较报告
+/// Compares报告
 #[derive(Debug, Clone)]
 pub struct ComparisonReport {
     reports: Vec<PerformanceReport>,

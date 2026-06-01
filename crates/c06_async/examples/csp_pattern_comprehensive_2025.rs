@@ -1,13 +1,16 @@
 //! # CSP 模式完整实现 2025
 //! # CSP complete 2025
 //! ## 📚 本示例全面涵盖
+//! ## 📚 this example surface cover
 //! ## 📚 this example surface
 //! ### 🎯 一、理论形式化 (Theoretical Formalization)
 //! - 通道语义和通信原语
 //! - channel and
 //! - 进程组合和并发操作
+//! - process combination and concurrency operation
 //! - process combination and concurrency
 //! - 死锁检测和活性证明
+//! - lock and proof
 //! - lock and
 //! ### 🏗️ 二、核心数据结构 (Core Data Structures)
 //! ### 🏗️ 二、coredata structure (Core Data Structures)
@@ -29,6 +32,7 @@
 //! - Select
 //! - Select 语句Implementation of
 //! - 超时和取消机制
+//! - timeout and mechanism
 //! - and mechanism
 //! ### 🎨 四、实际应用示例 (Practical Applications)
 //! - 数据处理流水线 (Data Processing Pipeline)
@@ -40,6 +44,7 @@
 //! - 基本通信示例
 //! - this example
 //! - 高级并发模式
+//! - high concurrency
 //! - concurrency
 //! - 性能基准测试
 //! - Performance benchmark
@@ -113,8 +118,10 @@ use tokio::time::{sleep, timeout};
 ///   - 每个进程拥有独立的状态
 ///   - process has state
 ///   - 通过消息传递共享数据
+///   - message data
 ///   -
 ///   - 避免数据竞争
+///   - data
 ///   -
 /// ### 3. 非确定性选择 (Non-deterministic Choice)
 /// - **定义**: `select!` 宏实现多路复用
@@ -126,8 +133,10 @@ use tokio::time::{sleep, timeout};
 ///   - 公平调度
 ///   -
 ///   - 随机选择就绪分支
+///   - random
 ///   -
 ///   - 支持超时和取消
+///   - timeout and
 ///   - and
 /// ## 形式化性质 (Formal Properties)
 /// ### 性质 1: 死锁自由 (Deadlock Freedom)
@@ -143,9 +152,11 @@ use tokio::time::{sleep, timeout};
 /// 假设存在死锁，则存在进程集合 {P1, P2, ..., Pn}，其中:
 /// hypothesize in lock ，in process set {P1, P2,..., Pn}，its in :
 /// - Pi 等待 P(i+1) 的消息 (i = 1..n-1)
+/// - Pi etc. P(i+1) message (i = 1..n-1)
 /// - Pi etc. P(i+1) (i = 1..n-1)
 /// - Pi Wait P(i+1) 消息 (i = 1..n-1)
 /// - Pn 等待 P1 的消息
+/// - Pn etc. P1 message
 /// - Pn etc. P1
 /// - Pn Wait P1 消息
 /// 但根据条件 3，不存在循环等待，矛盾。
@@ -154,6 +165,7 @@ use tokio::time::{sleep, timeout};
 /// therefore system lock 。 ∎
 /// ### 性质 2: 消息传递可靠性 (Message Delivery Reliability)
 /// 定理: 在 CSP 系统中，如果发送成功，则消息最终被接收。
+/// theorem : in CSP system in ，if ，message ultimately is 。
 /// theorem : in CSP system in ，if ，ultimately is 。
 /// 证明 (Proof):
 /// 1. send(ch, v) 成功 ⟹ v 在通道缓冲区中
@@ -165,6 +177,7 @@ use tokio::time::{sleep, timeout};
 /// 4. recv(ch) ⟹ 从缓冲区取出 v
 /// 4. recv(ch) ⟹ from buffering v
 /// 因此，消息 v 最终被接收。 ∎
+/// therefore ，message v ultimately is 。 ∎
 /// therefore ， v ultimately is 。 ∎
 /// ### 性质 3: 公平性 (Fairness)
 /// ### 3: (Fairness)
@@ -172,6 +185,7 @@ use tokio::time::{sleep, timeout};
 /// 1. 检查所有分支的就绪状态
 /// 1. all state
 /// 2. 从就绪分支中随机选择一个
+/// 2. from in random
 /// 2. from in
 /// 3. 执行选中的分支
 /// 3. in
@@ -181,11 +195,14 @@ use tokio::time::{sleep, timeout};
 /// ## CSP vs Actor vs Reactor to比
 /// | 特性 | CSP | Actor | Reactor |
 /// | 通信方式 | Channel (通道) | Message (消息) | Event (事件) |
+/// | way | Channel (channel ) | Message (message ) | Event (event ) |
 /// | way | Channel (channel ) | Message () | Event () |
 /// | 通信way | Channel (channel) | Message (消息) | Event (事件) |
 /// | 耦合度 | 低 (解耦) | 低 (解耦) | 中 (事件驱动) |
+/// | | low () | low () | in (event-driven ) |
 /// | | () | () | in (event-driven ) |
 /// | 耦合度 | 低 (解耦) | 低 (解耦) | in (event-driven) |
+/// | | low () | low () | in (event-driven) |
 /// | | () | () | in (event-driven) |
 /// | 同步性 | 支持同步/异步 | 异步 | 异步 |
 /// | synchronous | synchronous /async | async | async |
@@ -193,12 +210,14 @@ use tokio::time::{sleep, timeout};
 /// | mechanism | select! | - | - |
 /// | 选择mechanism | select! | - | - |
 /// | 适用场景 | Pipeline, 数据流 | 并发实体, 状态机 | I/O 密集, 事件驱动 |
+/// | scenario | Pipeline, data stream | concurrency volume, state machine | I/O, event-driven |
 /// | scenario | Pipeline, stream | concurrency volume, state machine | I/O, event-driven |
 /// | 状态管理 | 进程内部 | Actor 内部 | Handler 内部 |
 /// | state | process inside | Actor inside | Handler inside |
 /// | 容错性 | 通道关闭 | 监督树 | 错误处理 |
 /// | | channel | tree | error handling |
 /// | 性能 | 高 (零拷贝) | 中 (消息拷贝) | 高 (事件驱动) |
+/// | performance | high () | in (message ) | high (event-driven ) |
 /// | performance | () | in () | (event-driven ) |
 /// | performance | 高 (零拷贝) | in (消息拷贝) | 高 (event-driven) |
 /// ## 优势 (Advantages)
@@ -213,12 +232,15 @@ use tokio::time::{sleep, timeout};
 /// ## 使用场景 (Use Cases)
 /// ## scenario (Use Cases)
 /// 1. **数据处理流水线**: 多阶段数据处理
+/// 1. **data pipeline **: stage data
 /// 1. **pipeline **: stage
 /// 2. **并发任务调度**: 任务分发和结果收集
 /// 2. **concurrency task **: task and result
 /// 3. **实时系统**: 传感器数据处理
+/// 3. **system **: data
 /// 3. **system **:
 /// 3. **实时system**: 传感器数据Handle
+/// 3. **system**: data Handle
 /// 3. **system**: Handle
 pub mod theory_csp_formalization {
 
@@ -270,6 +292,7 @@ pub enum ChannelType {
 
     /// 广播通道 (Broadcast Channel)
     /// - 多个接收者，消息广播
+    /// - ，message
     /// - ，
     Broadcast,
 
@@ -352,6 +375,7 @@ impl ProcessStats {
 }
 
 /// CSP 系统配置
+/// CSP system configuration
 /// CSP system
 #[derive(Debug, Clone)]
 pub struct CspSystemConfig {
@@ -460,6 +484,7 @@ impl CspSystem {
 // ============================================================================
 
 /// 示例 1: 数据处理流水线
+/// example 1: data pipeline
 /// example 1: pipeline
 /// Example of 1: 数据Handlepipeline
 /// ## 形式化描述 (Formal Description)
@@ -476,9 +501,11 @@ impl CspSystem {
 /// - 日志Handle: 收集 → Parse → 存储
 /// - Handle: → Parse →
 /// - 图像处理: 读取 → 滤镜 → 编码
+/// - graph : → →
 /// - : → →
 /// - 图像Handle: Read → 滤镜 → Encode
 /// - 数据分析: 提取 → 转换 → 加载 (ETL)
+/// - data analyze : → conversion → (ETL)
 /// - analyze : → conversion → (ETL)
 /// - 数据analysis: 提取 → conversion → 加载 (ETL)
 pub async fn data_processing_pipeline_example() {
@@ -612,6 +639,7 @@ pub async fn data_processing_pipeline_example() {
 /// ## 应用场景 (Use Cases)
 /// ## application scenario (Use Cases)
 /// - 任务队列: 异步任务处理
+/// - task queue : async task
 /// - task : async task
 /// - 负载均衡: 请求分发
 /// - :
@@ -788,6 +816,7 @@ pub async fn distributed_task_scheduler_example() {
 /// - 监控系统: 实时指标收集
 /// - system : indicator
 /// - 告警系统: 事件过滤和聚合
+/// - system : event and aggregation
 /// - system : and aggregation
 /// - 告警system: 事件Filterandaggregation
 pub async fn realtime_log_aggregation_example() {

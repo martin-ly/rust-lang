@@ -3,15 +3,19 @@
 //! 涵盖语法细节、实战模式、迁移指南和性能考量。
 //! 、、and performance 。
 //! # 版本信息
+//! # Version Information
 //! # this
 //! - Rust 版本: 1.95.0
 //! - Rust this : 1.95.0
 //! - Rust 版this: 1.95.0
 //! - 稳定日期: 2026-04-16
+//! - Stabilization date: 2026-04-16
 //! - date : 2026-04-16
 //! - 稳定date: 2026-04-16
+//! - stabledate: 2026-04-16
 //! - date: 2026-04-16
 //! # 参考
+//! # References
 //! # reference
 //! - [RFC 3637: Guard Patterns](https://rust-lang.github.io/rfcs/3637-guard-patterns.html)
 
@@ -297,6 +301,7 @@ impl IfLetGuardsMigrationGuide {
     /// step 1: —— match or if-let-inside-match
     /// step 1: 识别候选代码 —— 寻找嵌套 match or if-let-inside-match
     /// 返回迁移检查清单。
+    /// Returns迁移检查清单。
     /// 。
     pub fn migration_steps() -> [&'static str; 4] {
         [
@@ -423,6 +428,7 @@ impl IfLetGuardsMigrationGuide {
 // ============================================================================
 
 /// 演示 `if let` guards 核心特性
+/// Demonstrates `if let` guards 核心特性
 /// demonstration `if let` guards core feature
 pub fn demonstrate_if_let_guards() {
     println!("\n========================================");
@@ -509,6 +515,7 @@ pub fn demonstrate_if_let_guards() {
 }
 
 /// 获取 `if let` guards 特性信息
+/// Gets `if let` guards 特性信息
 /// `if let` guards feature
 pub fn get_if_let_guards_info() -> String {
     "Rust 1.95.0 if let guards 深度解析:\n- 语法: match arm 上直接使用 if let P = expr\n- \

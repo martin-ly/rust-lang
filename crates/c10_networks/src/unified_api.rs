@@ -8,6 +8,7 @@ use std::sync::{Arc, OnceLock, RwLock};
 use std::time::{Duration, Instant};
 
 /// 连接池配置
+/// connection pool configuration
 #[derive(Debug, Clone)]
 pub struct ConnectionPoolConfig {
     pub max_connections: usize,
@@ -26,6 +27,7 @@ impl Default for ConnectionPoolConfig {
 }
 
 /// 连接池统计信息
+/// connection pool
 #[derive(Debug, Default)]
 pub struct PoolStats {
     pub active_connections: AtomicUsize,
@@ -47,6 +49,7 @@ pub struct PerformanceMetrics {
 }
 
 /// 缓存条目
+/// cache
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 struct CacheEntry {
@@ -58,6 +61,7 @@ struct CacheEntry {
 #[allow(dead_code)]
 impl CacheEntry {
     /// 获取缓存数据
+    /// cache data
     pub fn data(&self) -> &Bytes {
         &self.data
     }
@@ -68,6 +72,7 @@ impl CacheEntry {
     }
 
     /// 创建新的缓存条目
+    /// cache
     pub fn new(data: Bytes, ttl: Duration) -> Self {
         Self {
             data,
@@ -77,6 +82,7 @@ impl CacheEntry {
     }
 
     /// 获取数据大小（用于调试和监控）
+    /// data （and ）
     /// （and ）
     pub fn data_size(&self) -> usize {
         self.data.len()
@@ -84,6 +90,7 @@ impl CacheEntry {
 }
 
 /// 统一的网络客户端入口，封装常见操作（示例级）
+/// network ，operation （example ）
 /// network ，（example ）
 #[derive(Clone)]
 pub struct NetClient {
@@ -113,6 +120,7 @@ impl NetClient {
     }
 
     /// 获取连接池统计信息
+    /// connection pool
     pub fn get_stats(&self) -> PoolStats {
         PoolStats {
             active_connections: AtomicUsize::new(
@@ -125,12 +133,14 @@ impl NetClient {
     }
 
     /// 清理过期缓存
+    /// cache
     pub fn cleanup_cache(&self) {
         let mut cache = self.cache.write().expect("net client cache mutex poisoned");
         cache.retain(|_, entry| !entry.is_expired());
     }
 
     /// 从缓存获取数据
+    /// from cache data
     /// from
     #[allow(dead_code)]
     fn get_from_cache(&self, key: &str) -> Option<Bytes> {
@@ -147,6 +157,7 @@ impl NetClient {
     }
 
     /// 存储到缓存
+    /// to cache
     /// to
     #[allow(dead_code)]
     fn store_in_cache(&self, key: String, data: Bytes, ttl: Duration) {
@@ -341,6 +352,7 @@ impl NetClient {
     }
 
     /// UDP 回显（带重试）
+    /// UDP （retry ）
     /// UDP （）
     /// UDP 回显（带Retry）
     pub async fn udp_echo_with_retry(

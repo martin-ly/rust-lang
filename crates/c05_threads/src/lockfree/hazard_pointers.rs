@@ -6,8 +6,10 @@
 //! - **回收扫描**: 定期检查退役列表中的节点是否可以安全释放
 //! - ****: in node can
 //! ## 工作流程
+//! ## workflow
 //! ## process
 //! ## 工作process
+//! ## workprocess
 //! 2. 重新验证指针仍然有效
 //! 2. pointer effective
 //! 3. 使用完成后清除 Hazard Pointer
@@ -20,6 +22,7 @@ use std::sync::atomic::{AtomicPtr, AtomicUsize, Ordering};
 use std::sync::{Mutex, RwLock};
 
 /// Hazard Pointer 记录
+/// Hazard Pointer record
 #[derive(Debug)]
 pub struct HazardPointer {
     ptr: AtomicPtr<u8>,
@@ -33,6 +36,7 @@ impl HazardPointer {
     }
 
     /// 设置 Hazard Pointer
+    /// Sets Hazard Pointer
     /// # Safety
     /// 调用者必须确保 ptr 指向有效的内存。
     /// must ptr effective memory 。
@@ -46,6 +50,7 @@ impl HazardPointer {
     }
 
     /// 获取当前保护的指针
+    /// Gets当前保护的指针
     /// when before pointer
     pub fn get(&self) -> *mut u8 {
         self.ptr.load(Ordering::Acquire)
@@ -56,7 +61,9 @@ impl HazardPointer {
 pub const MAX_HAZARD_POINTERS: usize = 4;
 
 /// 全局 Hazard Pointer 记录
+/// global Hazard Pointer record
 /// global Hazard Pointer 记录
+/// global Hazard Pointer record
 pub struct HazardPointerRegistry {
     hazards: RwLock<Vec<*mut HazardPointer>>,
     retired_count: AtomicUsize,
@@ -109,6 +116,7 @@ impl HazardPointerRegistry {
     }
 
     /// 增加退役计数
+    /// Increases退役计数
     pub fn increment_retired(&self) {
         self.retired_count.fetch_add(1, Ordering::Relaxed);
     }
@@ -132,6 +140,7 @@ pub struct MemoryReclaimer {
 
 impl MemoryReclaimer {
     /// 创建新的内存回收器
+    /// Creates新的内存回收器
     /// memory
     pub const fn new(registry: &'static HazardPointerRegistry) -> Self {
         Self {
@@ -169,6 +178,7 @@ impl MemoryReclaimer {
     }
 
     /// 尝试回收不再被保护的退役节点
+    /// Attempts to回收不再被保护的退役节点
     /// is node
     pub fn try_reclaim(&self) {
         let mut to_reclaim = Vec::new();

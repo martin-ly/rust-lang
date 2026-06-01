@@ -455,6 +455,7 @@ enum CustomResult {
 }
 
 /// 异步操作结构
+/// async operation structure
 /// async structure
 #[derive(Debug)]
 struct AsyncOperation {
@@ -484,6 +485,7 @@ fn is_valid_triangle(a: f64, b: f64, c: f64) -> bool {
 }
 
 /// 创建泛型数据
+/// generic data
 /// generic
 fn create_generic_data<T>(value: T) -> GenericData<T>
 where
@@ -493,12 +495,14 @@ where
 }
 
 /// 异步操作
+/// async operation
 /// async
 async fn async_operation(x: i32) -> i32 {
     x * 2
 }
 
 /// 可恢复操作
+/// operation
 fn recoverable_operation(input: &str) -> Result<i32, String> {
     match input.parse::<i32>() {
         Ok(value) => Ok(value),

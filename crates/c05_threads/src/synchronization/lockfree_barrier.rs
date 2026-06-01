@@ -31,6 +31,7 @@ pub struct LockFreeBarrier {
 
 impl LockFreeBarrier {
     /// 创建新的无锁屏障
+    /// Creates新的无锁屏障
     /// lock-free barrier
     pub fn new(count: usize) -> Self {
         Self {
@@ -42,6 +43,7 @@ impl LockFreeBarrier {
     }
 
     /// 等待屏障
+    /// Waits for屏障
     /// etc. barrier
     pub fn wait(&self) -> bool {
         let local_sense = !self.sense.load(Ordering::Acquire);
@@ -66,12 +68,14 @@ impl LockFreeBarrier {
     }
 
     /// 获取当前等待的线程数
+    /// Gets当前等待的线程数
     /// when before etc. thread
     pub fn waiting_count(&self) -> usize {
         self.total - self.count.load(Ordering::Acquire)
     }
 
     /// 获取总线程数
+    /// Gets总线程数
     /// thread
     pub fn total_count(&self) -> usize {
         self.total
@@ -90,6 +94,7 @@ pub struct HierarchicalBarrier {
 
 impl HierarchicalBarrier {
     /// 创建新的分层屏障
+    /// Creates新的分层屏障
     /// layering barrier
     pub fn new(total_threads: usize, thread_id: usize) -> Self {
         let mut levels = Vec::new();
@@ -112,6 +117,7 @@ impl HierarchicalBarrier {
     }
 
     /// 等待分层屏障
+    /// Waits for分层屏障
     /// etc. layering barrier
     pub fn wait(&self) -> bool {
         let mut current_thread_id = self.thread_id;
@@ -134,6 +140,7 @@ impl HierarchicalBarrier {
     }
 
     /// 获取层级数
+    /// Gets层级数
     pub fn level_count(&self) -> usize {
         self.level_count
     }
@@ -155,6 +162,7 @@ pub struct AdaptiveBarrier {
 
 impl AdaptiveBarrier {
     /// 创建新的自适应屏障
+    /// Creates新的自适应屏障
     /// barrier
     pub fn new(count: usize) -> Self {
         Self {
@@ -168,6 +176,7 @@ impl AdaptiveBarrier {
     }
 
     /// 等待自适应屏障
+    /// Waits for自适应屏障
     /// etc. barrier
     pub fn wait(&self) -> bool {
         let start_time = Instant::now();
@@ -232,12 +241,14 @@ impl AdaptiveBarrier {
     }
 
     /// 获取当前自旋阈值
+    /// Gets当前自旋阈值
     /// when before
     pub fn get_spin_threshold(&self) -> usize {
         self.spin_threshold.load(Ordering::Acquire)
     }
 
     /// 设置自旋阈值
+    /// Sets自旋阈值
     pub fn set_spin_threshold(&self, threshold: usize) {
         self.spin_threshold.store(threshold, Ordering::Release);
     }
@@ -256,6 +267,7 @@ pub struct ReusableBarrier {
 
 impl ReusableBarrier {
     /// 创建新的可重用屏障
+    /// Creates新的可重用屏障
     /// barrier
     pub fn new(count: usize) -> Self {
         Self {
@@ -266,6 +278,7 @@ impl ReusableBarrier {
     }
 
     /// 等待可重用屏障
+    /// Waits for可重用屏障
     /// etc. barrier
     pub fn wait(&self) -> bool {
         let current_phase = self.phase.load(Ordering::Acquire);
@@ -285,12 +298,14 @@ impl ReusableBarrier {
     }
 
     /// 获取当前阶段
+    /// Gets当前阶段
     /// when before stage
     pub fn get_phase(&self) -> usize {
         self.phase.load(Ordering::Acquire)
     }
 
     /// 重置屏障
+    /// Resets屏障
     /// barrier
     pub fn reset(&self) {
         self.phase.store(0, Ordering::Release);
@@ -343,6 +358,7 @@ impl BarrierTrait for ReusableBarrier {
 
 impl BarrierBenchmark {
     /// 创建新的屏障性能测试
+    /// Creates新的屏障性能测试
     /// barrier performance test
     pub fn new(
         barrier: Arc<dyn BarrierTrait + Send + Sync>,

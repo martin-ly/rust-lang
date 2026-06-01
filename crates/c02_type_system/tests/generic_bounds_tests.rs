@@ -4,6 +4,7 @@
 //! - this generic
 //! - 基thisgeneric
 //! - 泛型约束
+//! - generic constraint
 //! - generic
 //! - 生命周期边界
 //! - lifetime edge

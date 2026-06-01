@@ -2,11 +2,15 @@
 //! - Edition 2024 控制流改进 / Edition 2024 Control Flow Improvements
 //! - 性能优化和编译时改进 / Performance Optimizations
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_194_features.rs
+//! - File: rust_194_features.rs
 //! - 创建日期: 2026-03-06
+//! - Creation date: 2026-03-06
 //! - date : 2026-03-06
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::fmt::Debug;
@@ -19,12 +23,14 @@ use std::fmt::Debug;
 /// - `next_if_map<F, R>(f: F) -> Option<R>` - if under element condition ，and
 /// - `next_if_map_mut<F, R>(f: F) -> Option<R>` - next_if_map 可变版this
 /// ## 特性说明
+/// ## featuresdescription
 /// ## feature explain
 /// - 只有当映射函数返回 `Some` 时才会消耗元素
 /// - when function `Some` element
 /// - 适用于解析器、词法分析器等需要前瞻并条件性消耗元素的场景
 /// - 、analyze etc. before and condition element scenario
 /// ## 使用场景
+/// ## Use Cases
 /// ## scenario
 /// - 词法分析器 (Lexer) 实现
 /// - analyze (Lexer)
@@ -37,6 +43,7 @@ use std::fmt::Debug;
 /// 在当前 Rust 版本中，`next_if_map` 可能尚未稳定或 API 有所不同。
 /// in when before Rust this in ，`next_if_map` may or API 。
 /// 演示如何使用 `next_if_map` 进行前瞻并条件性消耗标记
+/// Demonstrates如何使用 `next_if_map` 进行前瞻并条件性消耗标记
 /// demonstration `next_if_map` before and condition mark
 pub struct SimpleLexer<'a> {
     input: std::iter::Peekable<std::str::Chars<'a>>,
@@ -44,6 +51,7 @@ pub struct SimpleLexer<'a> {
 
 impl<'a> SimpleLexer<'a> {
     /// 创建新的词法分析器
+    /// Creates新的词法分析器
     /// analyze
     pub fn new(input: &'a str) -> Self {
         Self {
@@ -57,6 +65,7 @@ impl<'a> SimpleLexer<'a> {
     }
 
     /// 解析数字
+    /// Parses数字
     /// 在 Rust 1.94 中可以使用 next_if_map 简化此逻辑
     /// in Rust 1.94 in can next_if_map this
     pub fn parse_number(&mut self) -> Option<i64> {
@@ -84,6 +93,7 @@ impl<'a> SimpleLexer<'a> {
     }
 
     /// 解析标识符
+    /// Parses标识符
     /// 在 Rust 1.94 中可以使用 next_if_map 简化此逻辑
     /// in Rust 1.94 in can next_if_map this
     pub fn parse_identifier(&mut self) -> Option<String> {
@@ -113,11 +123,13 @@ impl<'a> SimpleLexer<'a> {
     }
 
     /// 解析特定字符
+    /// Parses特定字符
     pub fn expect_char(&mut self, expected: char) -> Option<char> {
         self.input.next_if(|c| *c == expected)
     }
 
     /// 查看下一个字符
+    /// Views下一个字符
     /// under
     pub fn peek(&mut self) -> Option<&char> {
         self.input.peek()
@@ -137,12 +149,14 @@ pub enum Token {
     /// 数字
     Number(i64),
     /// 标识符
+    /// identifier
     Identifier(String),
     /// 运算符
     Operator(char),
     /// 括号
     Paren(char),
     /// 结束
+    /// end
     Eof,
 }
 
@@ -191,6 +205,7 @@ impl<'a> Iterator for TokenIterator<'a> {
 }
 
 /// 演示如何在数据处理管道中使用 Peekable 新方法
+/// Demonstrates如何在数据处理管道中使用 Peekable 新方法
 /// demonstration in pipe in Peekable method
 pub struct DataFilterProcessor<T, I: Iterator<Item = T>> {
     iter: std::iter::Peekable<I>,
@@ -198,6 +213,7 @@ pub struct DataFilterProcessor<T, I: Iterator<Item = T>> {
 
 impl<T, I: Iterator<Item = T>> DataFilterProcessor<T, I> {
     /// 创建新的数据过滤器
+    /// Creates新的数据过滤器
     pub fn new(iter: I) -> Self {
         Self {
             iter: iter.peekable(),
@@ -238,6 +254,7 @@ impl<T, I: Iterator<Item = T>> DataFilterProcessor<T, I> {
     }
 
     /// 查看下一个元素
+    /// Views下一个元素
     /// under element
     pub fn peek(&mut self) -> Option<&T> {
         self.iter.peek()
@@ -245,6 +262,7 @@ impl<T, I: Iterator<Item = T>> DataFilterProcessor<T, I> {
 }
 
 /// 解析结果类型
+/// Parses结果类型
 /// result type
 #[derive(Debug, Clone, PartialEq)]
 pub enum ParseResult<T> {
@@ -252,6 +270,7 @@ pub enum ParseResult<T> {
     /// 成功Parse
     Success(T),
     /// 解析失败
+    /// Parses失败
     Failure(String),
     /// 无更多数据
     EndOfInput,
@@ -260,6 +279,7 @@ pub enum ParseResult<T> {
 /// 通用解析器（使用 next_if_map 模式）
 /// （ next_if_map ）
 /// 演示高级解析模式
+/// Demonstrates高级解析模式
 /// demonstration
 pub struct GenericParser<T, I: Iterator<Item = T>> {
     input: std::iter::Peekable<I>,
@@ -267,6 +287,7 @@ pub struct GenericParser<T, I: Iterator<Item = T>> {
 
 impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
     /// 创建新的解析器
+    /// Creates新的解析器
     pub fn new(input: I) -> Self {
         Self {
             input: input.peekable(),
@@ -274,14 +295,17 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
     }
 
     /// 尝试解析下一个元素
+    /// Attempts to解析下一个元素
     /// under element
     /// 在当前版本中，结合 peek 和 next 实现类似功能
     /// in when before this in ， peek and next similar to functionality
     /// 在 Rust 1.94 中可以使用 next_if_map 简化
     /// in Rust 1.94 in can next_if_map
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// # 返回
+    /// # Returns
     /// #
     /// - `Some(R)` 如果成功解析
     /// - `Some(R)` if
@@ -303,12 +327,15 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
 
     /// 要求解析特定模式
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// - `predicate`: 匹配函数
     /// - `predicate`: 匹配function
     /// # 返回
+    /// # Returns
     /// #
     /// 解析结果
+    /// Parses结果
     /// result
     pub fn require<F, R>(&mut self, predicate: F, expected: &str) -> ParseResult<R>
     where
@@ -324,6 +351,7 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
     }
 
     /// 解析多个元素直到条件不满足
+    /// Parses多个元素直到条件不满足
     /// element to condition
     pub fn parse_many<F, R>(&mut self, mut predicate: F) -> Vec<R>
     where
@@ -338,12 +366,14 @@ impl<T: Debug, I: Iterator<Item = T>> GenericParser<T, I> {
     }
 
     /// 检查是否还有更多元素
+    /// Checks是否还有更多元素
     /// element
     pub fn has_more(&mut self) -> bool {
         self.input.peek().is_some()
     }
 
     /// 查看下一个元素
+    /// Views下一个元素
     /// under element
     pub fn peek(&mut self) -> Option<&T> {
         self.input.peek()
@@ -362,6 +392,7 @@ pub struct ClosureCaptureAnalyzer<T> {
 
 impl<T> ClosureCaptureAnalyzer<T> {
     /// 创建新的分析器
+    /// Creates新的分析器
     /// analyze
     pub fn new(data: T) -> Self {
         Self {
@@ -371,6 +402,7 @@ impl<T> ClosureCaptureAnalyzer<T> {
     }
 
     /// 创建只读访问闭包
+    /// Creates只读访问闭包
     pub fn create_reader<F, R>(&self, f: F) -> impl Fn() -> R + use<'_, F, T, R>
     where
         F: Fn(&T) -> R,
@@ -380,6 +412,7 @@ impl<T> ClosureCaptureAnalyzer<T> {
     }
 
     /// 创建可变访问闭包
+    /// Creates可变访问闭包
     pub fn create_mutator<F>(&mut self, f: F) -> impl FnMut() + use<'_, F, T>
     where
         F: Fn(&mut T, &mut usize),
@@ -393,6 +426,7 @@ impl<T> ClosureCaptureAnalyzer<T> {
     }
 
     /// 获取访问计数
+    /// Gets访问计数
     pub fn access_count(&self) -> usize {
         self.access_count
     }
@@ -423,6 +457,7 @@ pub struct EnhancedMatcher<T> {
 
 impl<T: PartialEq + std::fmt::Debug> EnhancedMatcher<T> {
     /// 创建新的匹配器
+    /// Creates新的匹配器
     pub fn new(value: Option<T>) -> Self {
         Self { value }
     }
@@ -455,6 +490,7 @@ impl<T: PartialEq + std::fmt::Debug> EnhancedMatcher<T> {
 }
 
 /// 验证值是否有效
+/// Validates值是否有效
 /// effective
 /// 实际使用时可以根据具体类型添加验证逻辑（如检查空字符串、零值等）。
 /// actual can according to volume type （、etc. ）。
@@ -477,6 +513,7 @@ pub fn process_match_result<T: Debug>(result: MatchResult<T>) -> String {
 /// 函数指针包装器
 /// function pointer
 /// Rust 1.94.0: 改进function pointertype inference
+/// Rust 1.94.0: improvefunction pointertype inference
 pub struct FunctionPtrWrapper<T, R> {
     func: fn(T) -> R,
     call_count: usize,
@@ -484,6 +521,7 @@ pub struct FunctionPtrWrapper<T, R> {
 
 impl<T, R> FunctionPtrWrapper<T, R> {
     /// 创建新的函数指针包装器
+    /// Creates新的函数指针包装器
     /// function pointer
     pub fn new(func: fn(T) -> R) -> Self {
         Self {
@@ -500,6 +538,7 @@ impl<T, R> FunctionPtrWrapper<T, R> {
     }
 
     /// 获取调用计数
+    /// Gets调用计数
     pub fn call_count(&self) -> usize {
         self.call_count
     }
@@ -537,6 +576,7 @@ pub enum Edition2024 {
 
 impl<T> Edition2024ControlFlow<T> {
     /// 创建新的控制流处理器
+    /// Creates新的控制流处理器
     /// stream
     pub fn new(value: Option<T>) -> Self {
         Self {
@@ -549,7 +589,9 @@ impl<T> Edition2024ControlFlow<T> {
     /// try
     /// Execute try 风格操作
     /// Rust 1.94.0 + Edition 2024: 改进error propagation
+    /// Rust 1.94.0 + Edition 2024: improveerror propagation
     /// # 错误
+    /// # Errors
     /// #
     /// 当没有值存在时返回 `Err(E)`，其中 E 由调用者提供的闭包或类型决定
     /// when in `Err(E)`，its in E or type
@@ -578,9 +620,12 @@ impl<T> Edition2024ControlFlow<T> {
     }
 
     /// 使用 if let 链
+    /// use if let chain
     /// if let
     /// Use if let 链
+    /// Use if let chain
     /// Rust 1.94.0: 改进 if let 链Supports
+    /// Rust 1.94.0: improve if let chainSupports
     pub fn chain_if_let<R, F>(&self, f: F) -> Option<R>
     where
         F: FnOnce(&T) -> Option<R>,
@@ -620,6 +665,7 @@ impl StateMachineParser {
     /// 检测循环模式
     /// circulation
     /// 查找形如 [X, Y, Z, X, Y, Z] 的重复模式
+    /// Finds形如 [X, Y, Z, X, Y, Z] 的重复模式
     /// [X, Y, Z, X, Y, Z]
     pub fn detect_loops(states: &[i32]) -> Vec<(usize, usize)> {
         states
@@ -648,11 +694,13 @@ impl StateMachineParser {
 }
 
 /// 处理连续事件流
+/// Processes连续事件流
 /// stream
 pub struct EventStreamProcessor;
 
 impl EventStreamProcessor {
     /// 处理事件对
+    /// Processes事件对
     /// to
     /// 使用 array_windows 处理连续事件对
     /// array_windows to
@@ -702,6 +750,7 @@ where
     F: FnOnce() -> T,
 {
     /// 创建新的条件控制器
+    /// Creates新的条件控制器
     /// condition
     pub fn new(condition: impl Fn() -> bool + 'static, factory: F) -> Self {
         Self {
@@ -711,6 +760,7 @@ where
     }
 
     /// 尝试获取值（仅在条件满足时）
+    /// Attempts to获取值（仅在条件满足时）
     /// （in condition ）
     /// 控制流：条件判断决定是否返回值
     /// stream ：condition return value
@@ -722,12 +772,14 @@ where
     }
 
     /// 获取值
+    /// Gets the value
     /// Get值
     pub fn get(&self) -> &T {
         &self.cell
     }
 
     /// 检查条件是否满足
+    /// Checks条件是否满足
     /// condition
     pub fn check_condition(&self) -> bool {
         (self.condition)()
@@ -751,6 +803,7 @@ where
     F: FnOnce() -> T,
 {
     /// 创建新的控制流缓存
+    /// Creates新的控制流缓存
     /// stream
     pub fn new(factory: F) -> Self {
         Self {
@@ -775,11 +828,13 @@ where
     }
 
     /// 获取初始化次数
+    /// Gets初始化次数
     pub fn init_count(&self) -> usize {
         self.init_count.get()
     }
 
     /// 获取值
+    /// Gets the value
     /// Get值
     pub fn get(&self) -> &T {
         &self.cell
@@ -823,6 +878,7 @@ pub struct ConvergenceController {
 
 impl ConvergenceController {
     /// 创建新的收敛控制器
+    /// Creates新的收敛控制器
     pub fn new(tolerance: f64, max_iterations: usize) -> Self {
         Self {
             tolerance,
@@ -873,6 +929,7 @@ impl ConvergenceController {
     }
 
     /// 检查是否收敛
+    /// Checks是否收敛
     fn has_converged_f64(prev: f64, curr: f64, tolerance: f64) -> bool {
         (curr - prev).abs() < tolerance
     }
@@ -951,6 +1008,7 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 /// 数据验证管道
 /// pipe
 /// 数据Verifypipe
+/// dataVerifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
     if data.is_empty() {
         return ControlFlow::Break("数据不能为空".to_string());
@@ -1004,6 +1062,7 @@ pub fn vectorizable_loop(data: &mut [f64], factor: f64) {
 /// 分支预测友好函数
 /// branch prediction function
 /// Rust 1.94.0: 改进branch prediction
+/// Rust 1.94.0: improvebranch prediction
 pub fn branch_predictor_friendly(value: i32) -> i32 {
     // Rust 1.94.0: 编译器优化分支预测
     match value {
@@ -1030,6 +1089,7 @@ pub fn branchless_computation(values: &[i32]) -> i32 {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 控制流特性
+/// Demonstrates Rust 1.94.0 控制流特性
 /// demonstration Rust 1.94.0 stream feature
 /// Demonstration of Rust 1.94.0 控制streamfeature
 pub fn demonstrate_rust_194_control_flow() {
@@ -1173,6 +1233,7 @@ pub fn demonstrate_rust_194_control_flow() {
 }
 
 /// 获取 Rust 1.94.0 控制流特性信息
+/// Gets Rust 1.94.0 控制流特性信息
 /// Rust 1.94.0 stream feature
 pub fn get_rust_194_control_flow_info() -> String {
     "Rust 1.94.0 控制流特性:\n- Peekable 新方法: next_if_map, next_if_map_mut\n- \
@@ -1576,6 +1637,7 @@ mod tests {
     }
 
     /// 验证当输入为空字符串时，各种解析方法的行为
+    /// Validates当输入为空字符串时，各种解析方法的行为
     /// when as ，method as
     #[test]
     fn test_simple_lexer_empty_input() {
@@ -1591,6 +1653,7 @@ mod tests {
     }
 
     /// 验证验证函数在边界值上的行为
+    /// Validates验证函数在边界值上的行为
     /// function in edge on as
     #[test]
     fn test_validate_data_edge_cases() {

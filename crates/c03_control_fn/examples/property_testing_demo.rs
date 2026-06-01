@@ -2,10 +2,12 @@
 //! - 基础属性：交换律、结合律、分配律
 //! - foundation attribute ：exchange 、、
 //! - 自定义策略：生成有效输入数据
+//! - definition strategy ：effective input data
 //! - definition strategy ：effective
 //! - 状态机测试：模拟银行账户状态转换
 //! - state machine ：state conversion
 //! - 回归测试：proptest 自动发现反例并持久化
+//! - ：proptest anti-pattern and
 //! - ：proptest and
 //! 运行: cargo test --example property_testing_demo -p c03_control_fn
 //! 运行示例: cargo run --example property_testing_demo -p c03_control_fn
@@ -17,12 +19,14 @@ use proptest::prelude::*;
 // ============================================================
 
 /// 整数加法交换律: a + b == b + a
+/// addition exchange : a + b == b + a
 /// exchange : a + b == b + a
 fn add_commutative(a: i32, b: i32) -> bool {
     a.wrapping_add(b) == b.wrapping_add(a)
 }
 
 /// 整数乘法分配律: a * (b + c) == a * b + a * c
+/// multiplication : a * (b + c) == a * b + a * c
 /// : a * (b + c) == a * b + a * c
 fn mul_distributive(a: i32, b: i32, c: i32) -> bool {
     a.wrapping_mul(b.wrapping_add(c)) == a.wrapping_mul(b).wrapping_add(a.wrapping_mul(c))
@@ -134,6 +138,7 @@ proptest! {
     #![proptest_config(ProptestConfig::with_cases(1000))]
 
     /// 测试加法交换律
+    /// addition exchange
     /// exchange
     #[test]
     fn test_add_commutative(a in any::<i32>(), b in any::<i32>()) {
@@ -141,6 +146,7 @@ proptest! {
     }
 
     /// 测试乘法分配律
+    /// multiplication
     #[test]
     fn test_mul_distributive(a in any::<i32>(), b in any::<i32>(), c in any::<i32>()) {
         prop_assert!(mul_distributive(a, b, c));
@@ -177,6 +183,7 @@ proptest! {
     }
 
     /// 测试解析与字符串化互为逆操作
+    /// and as operation
     /// and as
     #[test]
     fn test_parse_u32_roundtrip(n in 0u32..=u32::MAX) {

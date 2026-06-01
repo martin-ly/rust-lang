@@ -1,14 +1,20 @@
 //! - `Atomic*::update` / `try_update` (整数类型) ⭐
+//! - `Atomic*::update` / `try_update` (integertype) ⭐
 //! - `Atomic*::update` / `try_update` (整数type) ⭐
+//! - `Atomic*::update` / `try_update` (integertype) ⭐
 //! - `thread::scope` TLS 析构函数交互文档更新
 //! - `thread::scope` TLS destructor
 //! # 版本信息
+//! # Version Information
 //! # this
 //! - 稳定日期: 2026-04-16
+//! - Stabilization date: 2026-04-16
 //! - date : 2026-04-16
 //! - 稳定date: 2026-04-16
+//! - stabledate: 2026-04-16
 //! - date: 2026-04-16
 //! # 参考
+//! # References
 //! # reference
 
 use std::sync::atomic::{AtomicBool, AtomicI32, AtomicPtr, AtomicUsize, Ordering};
@@ -20,14 +26,17 @@ use std::thread;
 // ============================================================================
 
 /// # `Atomic*::update` / `try_update` 深度解析
+/// # Deep Dive into `Atomic*::update` / `try_update`
 /// # `Atomic*::update` / `try_update` 深度Parse
 /// ## 概念定义
+/// ## Concept Definition
 /// ## concept definition
 /// - `update(f)`: 读取当前值，应用 `f` 得到新值，CAS 循环直到成功
 /// - `update(f)`: when before ，application `f` to ，CAS circulation to
 /// - `try_update(f)`: 同上，但如果 `f` 返回 `Err`，则中止并返回错误
 /// - `try_update(f)`: on ，but if `f` `Err`，in and
 /// ## Wikipedia 概念对齐
+/// ## Wikipedia Concept Alignment
 /// ## 对比：传统方式 vs update
 /// ## to ：way vs update
 /// ## to比：传统way vs update
@@ -52,6 +61,7 @@ use std::thread;
 /// ├── ？ → fetch_update ( API)
 /// └── 仅需简单加减？ → fetch_add / fetch_sub
 /// ## 反例 / 限制
+/// ## Counter-examples / Limitations
 /// ## /
 /// - 闭包可能被调用多次（CAS 失败重试），因此闭包必须是**无副作用的纯函数**
 /// - may is （CAS ），therefore must **role function **
@@ -189,13 +199,16 @@ impl Default for ConcurrentStats {
 
 /// # `core::hint::cold_path` 解析
 /// ## 概念定义
+/// ## Concept Definition
 /// ## concept definition
 /// 编译器会据此进行代码布局优化，将冷路径移到远离热路径的位置，
 /// this layout optimization ，will to position ，
 /// 改善指令缓存 (I-cache) 利用率。
 /// (I-cache) 。
 /// ## Wikipedia 概念对齐
+/// ## Wikipedia Concept Alignment
 /// ## 对比
+/// ## Comparison
 /// ## to
 /// ## to比
 /// ## to
@@ -256,6 +269,7 @@ impl ColdPathExamples {
     /// 状态机：非法状态转换
     /// state machine ：state conversion
     /// state machine：非法stateconversion
+    /// state machine：illegalstateconversion
     pub fn state_transition_safe(current: ConnectionState, event: &str) -> ConnectionState {
         match (current, event) {
             (ConnectionState::Idle, "connect") => ConnectionState::Connecting,
@@ -294,6 +308,7 @@ impl ColdPathExamples {
 /// - 但 TLS 析构函数**可能**在 scope 返回后才执行（取决于平台实现）
 /// - but TLS destructor **may **in scope after （platform ）
 /// ## Wikipedia 概念对齐
+/// ## Wikipedia Concept Alignment
 /// - **Thread-local Storage**: 线程私有存储，线程退出时析构
 /// - **Thread-local Storage**: thread ，thread
 /// ## 最佳实践
@@ -324,6 +339,7 @@ impl ScopeTlsExamples {
     }
 
     /// TLS in scope in正确Use
+    /// TLS in scope incorrectUse
     /// TLS 仅用于线程内部状态，不跨线程暴露。
     /// TLS thread inside state ，thread expose 。
     pub fn tls_inside_scope() {

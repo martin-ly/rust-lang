@@ -7,9 +7,11 @@
 //! ### 核心概念
 //! ### core concept
 //!   - **属性**: 请求构建、响应处理、错误处理、重试机制
+//!   - **attribute **: 、、error handling 、retry mechanism
 //!   - **attribute **: 、、error handling 、mechanism
 //!   - **attribute**: 请求构建、响应Handle、error handling、Retrymechanism
 //! ### 思维导图
+//! ### graph
 //! ###
 //! HTTP 客户端演示
 //! HTTP demonstration
@@ -37,6 +39,7 @@
 //!     ├── 网络错误
 //!     ├── network
 //!     └── 重试机制
+//!     └── retry mechanism
 //!     └── mechanism
 //!
 //! ## 📖 理论基础
@@ -76,6 +79,7 @@
 //! - **Web application **: Web application and API
 //! - **Web application**: 构建 Web applicationand API
 //! - **数据获取**: 从服务器获取数据
+//! - **data **: from data
 //! - ****: from
 //! - **文件传输**: 上传和下载文件
 //! - **transmission **: on and under
@@ -85,8 +89,10 @@
 //! - **错误处理**: 处理各种 HTTP 错误状态码
 //! - **error handling **: HTTP state
 //! - **超时设置**: 设置合理的请求超时时间
+//! - **timeout **: timeout time
 //! - ****: time
 //! - **重试机制**: 实现适当的重试逻辑
+//! - **retry mechanism **: when retry
 //! - **mechanism **: when
 //! - **安全考虑**: 注意 HTTPS 和安全头
 //! - ****: HTTP S and

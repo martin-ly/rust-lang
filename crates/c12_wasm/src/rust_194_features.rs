@@ -1,6 +1,7 @@
 //! Rust 1.94.0 WASM 特性实现模块
 //! Rust 1.94.0 WASM feature module
 //! - array_windows - 切片数组窗口迭代器（用于 WASM 数据处理）
+//! - array_windows - array （ WASM data ）
 //! - array_windows - （ WASM ）
 //! - 数学常量 - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
 //! - 数学constant - EULER_GAMMA, GOLDEN_RATIO (f32/f64)
@@ -22,8 +23,10 @@ use std::sync::{LazyLock, Mutex};
 /// # 1. array_windows - WASM 数据处理
 /// # 1. array_windows - WASM 数据Handle
 /// 可以用于高效处理线性内存中的数据序列。
+/// can efficient line memory in data sequence 。
 /// can efficient line memory in sequence 。
 /// WASM 线性内存视图
+/// WASM line memory graph
 /// WASM line memory
 pub struct WasmMemoryView<'a> {
     data: &'a [u8],
@@ -31,6 +34,7 @@ pub struct WasmMemoryView<'a> {
 
 impl<'a> WasmMemoryView<'a> {
     /// 从切片创建内存视图
+    /// from memory graph
     /// from memory
     pub fn new(data: &'a [u8]) -> Self {
         Self { data }
@@ -148,8 +152,10 @@ impl<'a> WasmMemoryView<'a> {
 }
 
 /// WASM 数据包解析器
+/// WASM data packet
 /// WASM
 /// 使用 array_windows 解析网络数据包
+/// array_windows network data packet
 /// array_windows network
 pub struct WasmPacketParser;
 
@@ -207,9 +213,11 @@ pub struct EthernetHeader {
 }
 
 /// WASM 图像数据处理
+/// WASM graph data
 /// WASM
 /// WASM 图像数据Handle
 /// 使用 array_windows 处理像素数据
+/// array_windows data
 /// array_windows
 pub struct WasmImageProcessor;
 
@@ -289,6 +297,7 @@ impl WasmImageProcessor {
 // ==================== 2. LazyLock 新方法 - WASM 模块管理 ====================
 
 /// 全局 WASM 实例配置
+/// global WASM configuration
 /// global WASM
 /// global WASM 实例Configure
 static WASM_INSTANCE_CONFIG: LazyLock<Mutex<WasmInstanceConfig>> = LazyLock::new(|| {
@@ -301,6 +310,7 @@ static WASM_INSTANCE_CONFIG: LazyLock<Mutex<WasmInstanceConfig>> = LazyLock::new
 });
 
 /// WASM 实例配置
+/// WASM configuration
 /// WASM
 /// WASM 实例Configure
 #[derive(Debug, Clone)]
@@ -326,6 +336,7 @@ impl WasmInstanceConfig {
 }
 
 /// 获取 WASM 配置
+/// WASM configuration
 /// WASM
 pub fn get_wasm_config<F, R>(f: F) -> R
 where
@@ -338,6 +349,7 @@ where
 }
 
 /// 更新 WASM 配置
+/// WASM configuration
 /// WASM
 pub fn update_wasm_config<F>(f: F)
 where
@@ -434,6 +446,7 @@ pub fn get_preopen_dirs() -> Vec<WasiPreopenDir> {
 // ==================== 3. 数学常量 - WASM 图形计算 ====================
 
 /// # 3. 数学常量 - WASM 图形计算
+/// # 3. math constant - WASM graph
 /// # 3. constant - WASM
 /// # 3. 数学constant - WASM 图形Calculate
 /// 黄金比例布局计算器
@@ -458,6 +471,7 @@ impl GoldenRatioLayout {
     }
 
     /// 计算黄金矩形尺寸
+    /// rectangle
     pub fn golden_rectangle(width: f64) -> (f64, f64) {
         let height = width / Self::PHI;
         (width, height)
@@ -583,8 +597,10 @@ impl EulerAudioSynthesizer {
 }
 
 /// WASM 图形变换器
+/// WASM graph transformation
 /// WASM transformation
 /// 使用数学常量进行 2D/3D 变换
+/// math constant 2D/3D transformation
 /// constant 2D/3D transformation
 pub struct WasmTransform {
     matrix: [f64; 16],
@@ -592,6 +608,7 @@ pub struct WasmTransform {
 
 impl WasmTransform {
     /// 创建单位矩阵
+    /// matrix
     pub fn identity() -> Self {
         Self {
             matrix: [
@@ -732,8 +749,10 @@ impl<'a> WatParser<'a> {
     }
 
     /// 解析标识符或关键字
+    /// identifier or key
     /// or key
     /// Rust 1.94.0: 使用 next_if() 简化标识符解析
+    /// Rust 1.94.0: next_if() identifier
     /// Rust 1.94.0: next_if()
     /// Rust 1.94.0: Use next_if() 简化标识符Parse
     fn parse_identifier(&mut self) -> Option<String> {
@@ -797,7 +816,9 @@ impl<'a> WatParser<'a> {
     }
 
     /// 解析数字
+    /// number
     /// Rust 1.94.0: 使用 next_if() 简化数字解析
+    /// Rust 1.94.0: next_if() number
     /// Rust 1.94.0: next_if()
     /// Rust 1.94.0: Use next_if() 简化数字Parse
     fn parse_number(&mut self) -> Option<f64> {
@@ -1294,6 +1315,7 @@ pub fn get_rust_194_wasm_info() -> String {
 use std::ops::ControlFlow;
 
 /// 搜索二维数组，找到目标时提前退出
+/// array ，to goal before
 /// ，to goal before
 pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize, usize), ()> {
     for (i, row) in matrix.iter().enumerate() {
@@ -1307,6 +1329,7 @@ pub fn search_in_matrix(matrix: &[Vec<i32>], target: i32) -> ControlFlow<(usize,
 }
 
 /// 数据验证管道
+/// data pipe
 /// pipe
 /// 数据Verifypipe
 pub fn validate_data(data: &str) -> ControlFlow<String, ()> {
@@ -1470,6 +1493,7 @@ mod tests {
 
     /// 测试越界访问
     /// 验证 WASM 内存视图能正确处理越界访问而不 panic
+    /// WASM memory graph while panic
     /// WASM memory while panic
     #[test]
     fn test_wasm_memory_view_out_of_bounds() {
@@ -1510,6 +1534,7 @@ mod tests {
     }
 
     /// 测试无效 WAT 语法
+    /// ineffective WAT syntax
     /// ineffective WAT
     /// Test forineffective WAT 语法
     #[test]
@@ -1611,6 +1636,7 @@ mod tests {
     /// 测试代理对处理
     /// to
     /// 验证 UTF-8 编码器能正确处理 Unicode 代理对和高码点字符
+    /// UTF-8 Unicode to and high point
     /// UTF-8 Unicode to and point
     /// 预期行为：正确处理 BMP 范围外的字符（4字节 UTF-8）
     /// as ： BMP scope outside （4 UTF-8）
@@ -1687,6 +1713,7 @@ mod tests {
     /// 测试未对齐读取
     /// to
     /// 预期行为：忽略不完整的尾部字节，只返回完整对齐的数据
+    /// as ：complete ，complete to data
     /// as ：complete ，complete to
     #[test]
     fn test_read_all_i32_le_unaligned() {

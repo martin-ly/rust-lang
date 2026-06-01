@@ -1,16 +1,22 @@
 //! Rust 189.0 新特性实现模块 —— c05_threads
 //! Rust 189.0 feature module —— c05_threads
 //! - `repr128`: `#[repr(u128/i128)]` 稳定
+//! - `repr128`: `#[repr(u128/i128)]` stable
 //! - `explicit_inferred_const`: 显式推断 const 参数
+//! - `explicit_inferred_const`: Explicitly inferred const parameters
 //! - `explicit_inferred_const`: 显式infer const parameter
 //! # 版本信息
+//! # Version Information
 //! # this
 //! - Rust 版本: 189.0
+//! - Rust version: 189.0
 //! - Rust this : 189.0
 //! - Rust 版this: 189.0
 //! - 稳定日期: 2025-08-07
+//! - Stabilization date: 2025-08-07
 //! - date : 2025-08-07
 //! - 稳定date: 2025-08-07
+//! - stabledate: 2025-08-07
 //! - date: 2025-08-07
 
 // ============================================================================
@@ -18,13 +24,16 @@
 // ============================================================================
 
 /// # `#[repr(u128/i128)]` 稳定
+/// # `#[repr(u128/i128)]` stable
 /// 允许枚举类型使用 128 位整数作为底层表示。
 /// enum type 128 as represent 。
 /// ## 使用场景
+/// ## Use Cases
 /// ## scenario
 /// - 与使用 128 位标识符的外部协议/格式交互
 /// - and 128 outside /
 /// ## 限制
+/// ## Limitations
 /// ##
 /// - 仅在支持 128 位整数的平台上有效
 /// - in 128 platform on effective
@@ -61,18 +70,24 @@ fn test_repr128() {
 // ============================================================================
 
 /// # 显式推断 const 参数
+/// # Explicit Inferred Const Parameters
 /// # infer const parameter
 /// # 显式infer const parameter
 /// Rust 1.89.0 允许在 turbofish 语法中显式使用 `_` 来让编译器推断 const 泛型参数。
+/// Rust 1.89.0 allows explicitly using `_` in turbofish syntax to let the compiler infer const generic parameters.
 /// Rust 1.89.0 in turbofish in `_` infer const generic parameter 。
 /// Rust 1.89.0 Allowsin turbofish 语法in显式Use `_` 来让编译器infer const generic parameter。
 /// ## 语法
+/// ## Syntax
 /// ##
 /// `foo::<_, N>(...)` — `_` 表示"让编译器推断这个 const 参数"
+/// `foo::<_, N>(...)` — `_` means "let the compiler infer this const parameter"
 /// `foo::<_, N>(...)` — `_` represent "infer const parameter "
 /// ## 使用场景
+/// ## Use Cases
 /// ## scenario
 /// - 只需显式指定部分 const 参数时
+/// - When only partially specifying const parameters
 /// - part const parameter
 pub fn array_sum<T, const N: usize>(arr: [T; N]) -> T
 where

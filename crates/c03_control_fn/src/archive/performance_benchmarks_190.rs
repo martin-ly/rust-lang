@@ -179,13 +179,16 @@ impl PerformanceBenchmark {
     }
 
     /// 获取所有测试结果
+    /// Gets所有测试结果
     /// all result
     /// Get所有Test forresult
+    /// GetallTest forresult
     pub async fn get_results(&self) -> Vec<BenchmarkResult> {
         self.results.lock().await.clone()
     }
 
     /// 生成性能报告
+    /// Generates性能报告
     /// performance
     pub async fn generate_report(&self) -> String {
         let results = self.get_results().await;
@@ -244,6 +247,7 @@ impl AsyncPerformanceTests {
     }
 
     /// 测试异步闭包性能
+    /// Tests异步闭包性能
     /// async performance
     pub async fn test_async_closure_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
@@ -267,6 +271,7 @@ impl AsyncPerformanceTests {
     }
 
     /// 测试异步 trait 性能
+    /// Tests异步 trait 性能
     /// async trait performance
     pub async fn test_async_trait_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
@@ -285,6 +290,7 @@ impl AsyncPerformanceTests {
     }
 
     /// 测试并发处理性能
+    /// Tests并发处理性能
     /// concurrency performance
     pub async fn test_concurrent_processing_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
@@ -316,6 +322,7 @@ impl AsyncPerformanceTests {
     }
 
     /// 测试异步状态机性能
+    /// Tests异步状态机性能
     /// async state machine performance
     pub async fn test_async_state_machine_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
@@ -339,6 +346,7 @@ impl AsyncPerformanceTests {
 }
 
 /// 测试用的异步处理器
+/// Tests用的异步处理器
 /// async
 #[allow(dead_code)]
 pub struct AsyncTestProcessor {
@@ -359,6 +367,7 @@ impl AsyncTestProcessor {
 }
 
 /// 测试用的异步状态机
+/// Tests用的异步状态机
 /// async state machine
 #[derive(Debug, Clone, PartialEq)]
 pub enum AsyncTestState {
@@ -435,6 +444,7 @@ impl MemoryPerformanceTests {
     }
 
     /// 测试元组集合内存使用
+    /// Tests元组集合内存使用
     /// set memory
     pub fn test_tuple_collection_memory(&self) -> BenchmarkResult {
         self.benchmark.benchmark_sync(
@@ -454,6 +464,7 @@ impl MemoryPerformanceTests {
     }
 
     /// 测试枚举内存使用
+    /// Tests枚举内存使用
     /// enum memory
     pub fn test_enum_memory_usage(&self) -> BenchmarkResult {
         self.benchmark.benchmark_sync(
@@ -482,6 +493,7 @@ impl MemoryPerformanceTests {
     }
 
     /// 测试异步资源内存使用
+    /// Tests异步资源内存使用
     /// async memory
     pub async fn test_async_resource_memory(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
@@ -511,6 +523,7 @@ impl MemoryPerformanceTests {
 }
 
 /// 测试用的异步资源
+/// Tests用的异步资源
 /// async
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
@@ -556,6 +569,7 @@ impl ConcurrencyPerformanceTests {
     }
 
     /// 测试并发任务处理
+    /// Tests并发任务处理
     /// concurrency task
     pub async fn test_concurrent_task_processing(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
@@ -584,6 +598,7 @@ impl ConcurrencyPerformanceTests {
     }
 
     /// 测试异步锁性能
+    /// Tests异步锁性能
     /// async lock performance
     pub async fn test_async_lock_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(
@@ -616,6 +631,7 @@ impl ConcurrencyPerformanceTests {
     }
 
     /// 测试读写锁性能
+    /// Tests读写锁性能
     /// rwlock performance
     pub async fn test_rwlock_performance(&self) -> Result<BenchmarkResult> {
         let result = self.benchmark.benchmark(

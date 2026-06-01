@@ -14,6 +14,7 @@ use uuid::Uuid;
 /// 2025年异步API网关演示
 /// 2025async APIgateway demonstration
 /// 展示最新的异步API网关编程模式和最佳实践
+/// async APIgateway and best practice
 /// async APIgateway and
 /// 1. 异步API网关核心
 /// 1. async APIgateway core

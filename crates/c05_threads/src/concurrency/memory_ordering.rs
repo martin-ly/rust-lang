@@ -12,6 +12,7 @@
 //! | ordering | | purpose |
 //! | ordering | 强度 | purpose |
 //! ### x86-64 vs ARM64 差异
+//! ### x86-64 vs ARM64 difference
 //! - **x86-64**: 具有强内存模型（TSO, Total Store Order），大多数原子操作隐式带有 Acquire/Release 语义。
 //! - **x86-64**: has memory model （TSO, Total Store Order），atomic operation Acquire/Release 。
 
@@ -22,6 +23,7 @@ use std::sync::Arc;
 use std::thread;
 
 /// 返回在不同内存序下的自增结果（用于展示 API，可编译通过）。
+/// Returns在不同内存序下的自增结果（用于展示 API，可编译通过）。
 /// in memory under result （ API，）。
 pub fn relaxed_increment(counter: &AtomicUsize) -> usize {
     counter.fetch_add(1, Ordering::Relaxed)
@@ -51,6 +53,7 @@ impl Default for RelaxedCounter {
 
 impl RelaxedCounter {
     /// 创建新计数器
+    /// Creates新计数器
     pub const fn new() -> Self {
         Self {
             value: AtomicUsize::new(0),
@@ -58,12 +61,14 @@ impl RelaxedCounter {
     }
 
     /// 自增并返回旧值
+    /// Increments并返回旧值
     /// and
     pub fn increment(&self) -> usize {
         self.value.fetch_add(1, Ordering::Relaxed)
     }
 
     /// 获取当前值（可能不是绝对最新）
+    /// Gets当前值（可能不是绝对最新）
     /// when before （may to ）
     pub fn get(&self) -> usize {
         self.value.load(Ordering::Relaxed)
@@ -77,6 +82,7 @@ impl RelaxedCounter {
 /// 使用 `store(_, Release)` 发布数据，
 /// `store(_, Release)` ，
 /// # 原理
+/// # principle
 /// #
 /// 线程 A: 写入数据 -> store(flag, Release)
 /// 线程 B: load(flag, Acquire) -> 读取数据
@@ -96,6 +102,7 @@ impl Default for AcqRelFlag {
 
 impl AcqRelFlag {
     /// 创建未就绪的标志
+    /// Creates未就绪的标志
     /// mark
     pub const fn new() -> Self {
         Self {
@@ -116,6 +123,7 @@ impl AcqRelFlag {
     }
 
     /// 等待并获取数据（线程 B）
+    /// Waits for并获取数据（线程 B）
     /// etc. and （thread B）
     pub fn wait_and_get(&self) -> Option<usize> {
         // Acquire 保证：如果看到了 true，则能看到 publish 中 data 的写入
@@ -144,6 +152,7 @@ impl Default for SimpleSpinlock {
 
 impl SimpleSpinlock {
     /// 创建未锁定的自旋锁
+    /// Creates未锁定的自旋锁
     /// lock spinlock
     pub const fn new() -> Self {
         Self {
@@ -152,8 +161,10 @@ impl SimpleSpinlock {
     }
 
     /// 尝试获取锁（自旋等待）
+    /// Attempts to获取锁（自旋等待）
     /// lock （etc. ）
     /// 尝试Getlock（自旋Wait）
+    /// Attempts toGetlock（自旋Wait）
     pub fn lock(&self) {
         while self
             .locked
@@ -168,6 +179,7 @@ impl SimpleSpinlock {
     }
 
     /// 释放锁
+    /// Releases锁
     /// lock
     /// # Safety
     ///
@@ -180,6 +192,7 @@ impl SimpleSpinlock {
 
 // ========== 示例 4: SeqCst 全局顺序 ==========
 /// 或使用 `mov` + `mfence`。
+/// oruse `mov` + `mfence`。
 /// # ARM64
 pub struct SeqCstBarrier {
     flag: AtomicBool,
@@ -193,6 +206,7 @@ impl Default for SeqCstBarrier {
 
 impl SeqCstBarrier {
     /// 创建新屏障
+    /// Creates新屏障
     /// barrier
     pub const fn new() -> Self {
         Self {
@@ -211,6 +225,7 @@ impl SeqCstBarrier {
 
 // ========== 示例 5: AtomicPtr 与无锁数据结构概念（无锁队列节点） ==========
 /// # 内存安全警告
+/// # memorysafewarning
 /// # memory safety warning
 /// 生产环境请使用 `crossbeam-queue`。
 /// environment `crossbeam-queue`。
@@ -221,6 +236,7 @@ pub struct AtomicNode<T> {
 
 impl<T> AtomicNode<T> {
     /// 创建新节点
+    /// Creates新节点
     /// node
     pub fn new(value: T) -> Self {
         Self {
@@ -230,12 +246,14 @@ impl<T> AtomicNode<T> {
     }
 
     /// 获取 next 指针（Acquire，建立 happens-before）
+    /// Gets next 指针（Acquire，建立 happens-before）
     /// Get next pointer（Acquire，建立 happens-before）
     pub fn next_acquire(&self) -> *mut AtomicNode<T> {
         self.next.load(Ordering::Acquire)
     }
 
     /// 设置 next 指针（Release，发布节点）
+    /// Sets next 指针（Release，发布节点）
     /// next pointer （Release，node ）
     /// # Safety
     ///
@@ -270,6 +288,7 @@ pub struct ConceptualLockFreeQueue<T> {
 
 impl<T> ConceptualLockFreeQueue<T> {
     /// 创建空队列
+    /// Creates空队列
     pub fn new() -> Self {
         let dummy = Box::into_raw(Box::new(AtomicNode {
             next: AtomicPtr::new(std::ptr::null_mut()),
@@ -342,6 +361,7 @@ impl<T> Default for ConceptualLockFreeQueue<T> {
 
 // ========== 平台差异总结 ==========
 /// 打印内存模型平台差异说明
+/// Prints内存模型平台差异说明
 /// memory model platform explain
 pub fn print_arch_memory_model_differences() {
     let arch = if cfg!(target_arch = "x86_64") {

@@ -14,6 +14,7 @@ pub enum WebSocketOpcode {
 
 impl WebSocketOpcode {
     /// 从字节值创建操作码
+    /// from operation
     /// from
     pub fn from_u8(value: u8) -> Result<Self, NetworkError> {
         match value {
@@ -40,6 +41,7 @@ impl WebSocketOpcode {
     }
 
     /// 检查是否为数据帧
+    /// as data
     /// as
     pub fn is_data_frame(&self) -> bool {
         matches!(

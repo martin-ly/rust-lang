@@ -5,6 +5,7 @@
 //! - 并行归并排序
 //! - parallelism merge sort
 //! - 并行快速排序
+//! - parallelfastsort
 //! - parallelism quick sort
 //! - 并行基数排序
 //! - parallelism radix sort
@@ -51,6 +52,7 @@ impl ParallelMergeSort {
     }
 
     /// 合并两个已排序的数组
+    /// Merges两个已排序的数组
     /// and ordering
     fn merge<T>(arr: &mut [T], mid: usize)
     where
@@ -105,6 +107,7 @@ impl ParallelMergeSort {
 }
 
 /// 并行快速排序
+/// parallelfastsort
 /// parallelism quick sort
 pub struct ParallelQuickSort;
 
@@ -347,6 +350,7 @@ pub struct ParallelNumericalComputing;
 
 impl ParallelNumericalComputing {
     /// 并行矩阵乘法
+    /// parallelmatrixmultiplication
     /// parallelism
     pub fn parallel_matrix_multiply(a: &[Vec<f64>], b: &[Vec<f64>]) -> Vec<Vec<f64>> {
         let rows = a.len();

@@ -15,11 +15,14 @@
 //! - optimization
 //! - 模式匹配optimization
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: advanced_pattern_matching.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::collections::HashMap;
@@ -37,6 +40,7 @@ pub enum ComplexExpression {
     /// surface
     Literal(LiteralValue),
     /// 变量
+    /// variables
     /// variable
     Variable(String),
     /// 二元运算
@@ -426,6 +430,7 @@ impl DynamicPatternMatcher {
     }
 
     /// 获取所有模式名称
+    /// Gets所有模式名称
     /// all
     pub fn get_pattern_names(&self) -> Vec<String> {
         self.patterns.iter().map(|p| p.name.clone()).collect()
@@ -450,6 +455,7 @@ pub struct PatternMatchingOptimizer {
 }
 
 /// 优化统计
+/// optimizestatistics
 /// optimization
 #[derive(Debug, Default)]
 pub struct OptimizationStats {
@@ -496,6 +502,7 @@ impl PatternMatchingOptimizer {
     }
 
     /// 生成缓存键
+    /// Generates缓存键
     fn generate_cache_key(&self, expr: &ComplexExpression) -> String {
         format!("{:?}", expr)
     }
@@ -625,12 +632,14 @@ impl PatternMatchingOptimizer {
     }
 
     /// 获取优化统计
+    /// Gets优化统计
     /// optimization
     pub fn get_stats(&self) -> &OptimizationStats {
         &self.optimization_stats
     }
 
     /// 清空缓存
+    /// Clears缓存
     pub fn clear_cache(&mut self) {
         self.cache.clear();
     }
@@ -804,6 +813,7 @@ impl NestedPatternMatcher {
 // ==================== 演示函数 ====================
 
 /// 演示所有高级模式匹配特性
+/// Demonstrates所有高级模式匹配特性
 /// demonstration all feature
 /// Demonstration of所有高级模式匹配feature
 pub fn demonstrate_advanced_pattern_matching() {

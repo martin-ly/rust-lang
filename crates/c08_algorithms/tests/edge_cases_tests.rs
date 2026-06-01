@@ -1,5 +1,6 @@
 //! 算法模块边界情况测试套件 / Algorithms Module Edge Cases Test Suite
 /// 测试空数组/集合边界情况
+/// array /set edge situation
 /// /set edge situation
 #[test]
 fn test_empty_collections() {
@@ -38,6 +39,7 @@ fn test_single_element() {
 }
 
 /// 测试大数组边界情况
+/// array edge situation
 /// edge situation
 #[test]
 fn test_large_arrays() {

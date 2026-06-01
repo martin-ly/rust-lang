@@ -134,6 +134,7 @@ pub fn ffi_bool_from_u8(flag: u8) -> Result<bool, &'static str> {
 }
 
 /// 某些旧版 WASI 绑定以 `0` 表示成功、`1` 表示失败。
+/// WASI `0` represent 、`1` represent failure 。
 /// WASI `0` represent 、`1` represent 。
 /// 若宿主环境错误地传入 `-1` 或 `2` 等值，此函数可立即捕获。
 /// environment `-1` or `2` etc. ，this function 。
@@ -144,12 +145,14 @@ pub fn wasi_status_to_bool(status: i32) -> Result<bool, &'static str> {
 }
 
 /// 批量转换 JS 回调返回的整数标志数组
+/// conversion JS mark array
 /// conversion JS mark
 /// # 参数
 /// # parameter
 /// # 返回值
 /// # return value
 /// 全部转换成功时返回 `Ok(Vec<bool>)`，任一失败则返回 `Err`
+/// all conversion `Ok(Vec<bool>)`，failure `Err`
 /// all conversion `Ok(Vec<bool>)`， `Err`
 pub fn parse_js_bool_flags(flags: &[u8]) -> Result<Vec<bool>, &'static str> {
     flags.iter().map(|&f| ffi_bool_from_u8(f)).collect()
@@ -166,6 +169,7 @@ pub fn ffi_bool_optional(flag: u32) -> Option<bool> {
 /// 验证 WASM 内存页请求，对错误路径标记 `cold_path`
 /// WASM memory ，to mark `cold_path`
 /// 在 WASM 运行时中，内存分配成功（热路径）远比失败（冷路径）常见。
+/// in WASM runtime in ，memory （）failure （）。
 /// in WASM runtime in ，memory （）（）。
 /// # 参数
 /// # parameter
@@ -203,12 +207,15 @@ pub fn validate_table_size(size: u32, limit: u32) -> Result<u32, &'static str> {
 }
 
 /// 解析并验证 WASM 数据段（data segment）大小
+/// and WASM data （data segment）
 /// and WASM （data segment）
 /// 数据段过大可能导致实例化时内存不足。
+/// data may out of memory 。
 /// may out of memory 。
 /// # 参数
 /// # parameter
 /// - `size_bytes`: 数据段字节大小
+/// - `size_bytes`: data
 /// - `size_bytes`:
 pub fn validate_data_segment(size_bytes: usize, max_bytes: usize) -> Result<usize, &'static str> {
     if size_bytes > max_bytes {
@@ -221,6 +228,7 @@ pub fn validate_data_segment(size_bytes: usize, max_bytes: usize) -> Result<usiz
 /// 验证导入模块名称格式
 /// module
 /// 无效的导入名称通常意味着宿主环境配置错误，属于异常场景。
+/// ineffective environment configuration ，scenario 。
 /// ineffective environment ，scenario 。
 /// # 参数
 /// # parameter
@@ -244,6 +252,7 @@ pub fn validate_import_name(name: &str) -> Result<&str, &'static str> {
 
 /// 空字符串或 `null`/`undefined`。`if let` guards 允许在单个
 /// `match` 表达式中完成多层解构，避免嵌套 `if let`。
+/// `match` express in complete ， `if let`。
 /// `match` express in ， `if let`。
 /// # 参数
 /// # parameter
@@ -302,10 +311,12 @@ pub fn parse_import_descriptor(desc: Option<&str>) -> Result<(String, u32), &'st
 /// # 参数
 /// # parameter
 /// - `results`: WASM 调用结果数组
+/// - `results`: WASM result array
 /// - `results`: WASM result
 /// # 返回值
 /// # return value
 /// `(成功值数组, 错误信息数组)`
+/// `(array, error message array )`
 /// `(, error message )`
 /// `(成功值array, error messagearray)`
 pub fn process_batch_results(
@@ -328,6 +339,7 @@ pub fn process_batch_results(
 /// 解析 WASM 全局变量初始化值
 /// WASM global variable
 /// 全局初始化值可能是整数、浮点数字面量或特殊标志字符串。
+/// global may 、point number surface or mark 。
 /// global may 、point surface or mark 。
 /// # 参数
 /// # parameter
@@ -370,12 +382,14 @@ pub fn is_valid_port_range(range: &RangeInclusive<u16>) -> bool {
 /// 创建 WASM 内存页范围
 /// WASM memory scope
 /// 每页大小为 64 KiB。闭区间范围清晰表达起始页和结束页均包含在内。
+/// as 64 KiB。interval scope clear express and end in inside 。
 /// as 64 KiB。interval scope clear express and in inside 。
 /// # 参数
 /// # parameter
 /// - `start`: 起始页索引
 /// - `start`:
 /// - `end`: 结束页索引（包含）
+/// - `end`: end （）
 /// - `end`: （）
 /// - `end`: 结束页索引（Contains）
 /// # 返回值
@@ -385,10 +399,12 @@ pub fn memory_page_range(start: usize, end: usize) -> RangeInclusive<usize> {
 }
 
 /// 检查数据段大小是否在允许范围内
+/// data in allow scope inside
 /// in scope inside
 /// # 参数
 /// # parameter
 /// - `size`: 数据段字节大小
+/// - `size`: data
 /// - `size`:
 pub fn is_data_size_in_range(size: usize, allowed: &RangeInclusive<usize>) -> bool {
     allowed.contains(&size)
@@ -397,6 +413,7 @@ pub fn is_data_size_in_range(size: usize, allowed: &RangeInclusive<usize>) -> bo
 /// 将模块索引分批为连续的闭区间范围
 /// will module as interval scope
 /// 加载大量 WASM 模块时，按批次处理可降低峰值内存占用。
+/// WASM module ，low memory 。
 /// WASM module ，memory 。
 /// # 参数
 /// # parameter
@@ -407,6 +424,7 @@ pub fn is_data_size_in_range(size: usize, allowed: &RangeInclusive<usize>) -> bo
 /// # 返回值
 /// # return value
 /// 各批次的闭区间索引范围数组
+/// interval scope array
 /// interval scope
 pub fn batch_module_ranges(total: usize, batch_size: usize) -> Vec<RangeInclusive<usize>> {
     if batch_size == 0 || total == 0 {
@@ -452,6 +470,7 @@ pub fn ports_in_range(range: &RangeInclusive<u16>) -> Vec<u16> {
 /// # 返回值
 /// # return value
 /// `(起始页, 结束页, 总页数)`
+/// `(, end, )`
 /// `(,, )`
 pub fn memory_range_info(range: &RangeInclusive<usize>) -> (usize, usize, usize) {
     let start = range.start;
@@ -469,6 +488,7 @@ pub fn memory_range_info(range: &RangeInclusive<usize>) -> (usize, usize, usize)
 /// # 参数
 /// # parameter
 /// - `exports`: 导出函数名称数组
+/// - `exports`: function array
 /// - `exports`: function
 /// - `target`: 目标函数名称
 /// - `target`: goal function
@@ -489,6 +509,7 @@ pub fn find_export_index(exports: &[&str], target: &str) -> ControlFlow<usize, (
 }
 
 /// 允许在编译期评估迭代器提前退出状态。
+/// allow in before state 。
 /// in before state 。
 /// # 参数
 /// # parameter
@@ -517,6 +538,7 @@ pub const fn is_continue_const<T, U>(cf: &ControlFlow<T, U>) -> bool {
 /// # 参数
 /// # parameter
 /// - `pages`: 内存页索引数组
+/// - `pages`: memory array
 /// - `pages`: memory
 /// # 返回值
 /// # return value
@@ -538,6 +560,7 @@ pub fn validate_page_sequence(pages: &[u32], max_page: u32) -> ControlFlow<usize
 /// # 参数
 /// # parameter
 /// - `imports`: `(模块名, 函数名)` 数组
+/// - `imports`: `(module, function )` array
 /// - `imports`: `(module, function )`
 /// - `module`: 目标模块名
 /// - `module`: goal module

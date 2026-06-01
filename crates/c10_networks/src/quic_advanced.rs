@@ -76,6 +76,7 @@ pub mod quic_full {
 
     /// QUIC Echo 服务器
     /// 接受连接，读取双向流中的数据，回传给客户端。
+    /// ，stream in data ，。
     /// ，stream in ，。
     pub struct QuicEchoServer {
         endpoint: Endpoint,
@@ -202,6 +203,7 @@ pub mod quic_full {
         }
 
         /// 连接到服务器并发送数据
+        /// to concurrency data
         /// to concurrency
         pub async fn echo(
             &self,
@@ -314,6 +316,7 @@ QUIC 连接迁移:
     // =====================================================================
 
     /// QUIC 高级特性：不可靠数据报、0-RTT、连接迁移
+    /// QUIC high feature ：datagram 、0-RTT、
     /// QUIC feature ：datagram 、0-RTT、
     /// 所有代码均为概念骨架，展示 API 的正确使用方式。
     /// all as concept ， API way 。
@@ -338,6 +341,7 @@ QUIC 连接迁移:
         /// - 游戏statesynchronous（position、朝向，丢帧可容忍）
         /// - 实时音视频（RTP over QUIC）
         /// - 高频遥测上报（允许部分丢失）
+        /// - high on （allow part ）
         /// - on （part ）
         /// andstream(Stream)区别：
         /// | 特性 | Stream | Datagram |
@@ -409,8 +413,10 @@ QUIC 连接迁移:
         /// warning ：
         /// 安全warning：
         /// - 0-RTT 数据可能被重放攻击，因此只能用于幂等操作。
+        /// - 0-RTT data may is ，therefore etc. operation 。
         /// - 0-RTT may is ，therefore etc. 。
         /// - 服务器可能拒绝 0-RTT，此时数据不会送达。
+        /// - may reject 0-RTT，this data 。
         /// - may 0-RTT，this 。
         /// quinn API 说明：
         /// - 客户端：`Connecting::into_0rtt()` 在持有先前会话票据时返回 `Ok`。
@@ -430,6 +436,7 @@ QUIC 连接迁移:
             /// 0.5-RTT
             /// 服务器Accept 0.5-RTT Connect
             /// 服务器端可在握手完成前就开始发送数据（0.5-RTT）。
+            /// in complete before data （0.5-RTT）。
             /// in before （0.5-RTT）。
             pub fn server_accept_0rtt(
                 connecting: Connecting,
@@ -453,10 +460,13 @@ QUIC 连接迁移:
         /// therefore IP /in 。
         /// quinn 0.11 API 现状：
         /// - `Connection::remote_address()` 会在迁移完成后返回新地址。
+        /// - `Connection::remote_address()` in complete after 。
         /// - `Connection::remote_address()` in after 。
         /// - **quinn 目前不暴露应用层迁移事件**（如 `on_path_changed` 回调），
+        /// - **quinn before expose application layer event **（ `on_path_changed` ），
         /// - **quinn before expose application layer **（ `on_path_changed` ），
         ///   应用只能通过轮询 `remote_address()` 或观察 RTT 变化间接感知。
+        ///   application poll `remote_address()` or RTT 。
         ///   application `remote_address()` or RTT 。
         pub struct ConnectionMigrationMonitor {
             connection: Connection,
@@ -469,6 +479,7 @@ QUIC 连接迁移:
             }
 
             /// 轮询检测地址是否发生变化
+            /// poll
             /// 返回 `(old, new)` 若检测到变更。
             /// `(old, new)` to 。
             /// Return `(old, new)` 若检测to变更。
@@ -510,6 +521,7 @@ QUIC 连接迁移:
         // -----------------------------------------------------------------
 
         /// 数据报配置
+        /// datagram configuration
         /// datagram
         #[derive(Debug, Clone, PartialEq, Eq)]
         pub struct DatagramConfig {
@@ -519,6 +531,7 @@ QUIC 连接迁移:
 
         impl DatagramConfig {
             /// 创建数据报配置
+            /// datagram configuration
             /// datagram
             pub fn new(max_size: usize, enabled: bool) -> Self {
                 Self { max_size, enabled }
@@ -538,6 +551,7 @@ QUIC 连接迁移:
         }
 
         /// 0-RTT 配置
+        /// 0-RTT configuration
         /// 0-RTT
         #[derive(Debug, Clone, PartialEq, Eq)]
         pub struct ZeroRttConfig {
@@ -547,6 +561,7 @@ QUIC 连接迁移:
 
         impl ZeroRttConfig {
             /// 创建 0-RTT 配置
+            /// 0-RTT configuration
             /// 0-RTT
             pub fn new(enabled: bool, max_early_data: usize) -> Self {
                 Self {
@@ -562,6 +577,7 @@ QUIC 连接迁移:
             }
 
             /// 获取最大早期数据量
+            /// maximum data
             /// maximum
             pub fn max_early_data(&self) -> usize {
                 self.max_early_data
@@ -569,6 +585,7 @@ QUIC 连接迁移:
         }
 
         /// 连接迁移配置
+        /// configuration
         #[derive(Debug, Clone, PartialEq, Eq)]
         pub struct MigrationConfig {
             enabled: bool,
@@ -577,6 +594,7 @@ QUIC 连接迁移:
 
         impl MigrationConfig {
             /// 创建连接迁移配置
+            /// configuration
             pub fn new(enabled: bool, idle_timeout_ms: u64) -> Self {
                 Self {
                     enabled,
@@ -590,6 +608,7 @@ QUIC 连接迁移:
             }
 
             /// 获取空闲超时时间（毫秒）
+            /// timeout time （）
             /// time （）
             pub fn idle_timeout_ms(&self) -> u64 {
                 self.idle_timeout_ms
@@ -669,6 +688,7 @@ QUIC 连接迁移:
         use std::net::SocketAddr;
 
         /// 测试生成自签名证书成功并返回非空数据
+        /// self-signed certificate and data
         /// self-signed certificate and
         #[test]
         fn test_generate_self_signed_cert_ok() {
@@ -704,6 +724,7 @@ QUIC 连接迁移:
         }
 
         /// 测试加载无效 PEM 数据应返回错误
+        /// ineffective PEM data
         /// ineffective PEM
         #[test]
         fn test_load_certs_from_pem_invalid() {
@@ -712,6 +733,7 @@ QUIC 连接迁移:
         }
 
         /// 测试加载空 PEM 数据应返回错误
+        /// PEM data
         /// PEM
         #[test]
         fn test_load_certs_from_pem_empty() {

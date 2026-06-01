@@ -69,6 +69,7 @@ pub struct AbaProblemConcept;
 
 impl AbaProblemConcept {
     /// ABA 问题描述
+    /// ABA problemdescription
     /// ABA problem describe
     pub fn explanation() -> &'static str {
         r#"=== ABA 问题 ===
@@ -130,6 +131,7 @@ pub struct TreiberStack<T> {
 
 impl<T> TreiberStack<T> {
     /// 创建空栈
+    /// Creates空栈
     /// stack
     pub fn new() -> Self {
         Self {
@@ -169,6 +171,7 @@ impl<T> Default for TreiberStack<T> {
 /// 真实 Treiber Stack 实现差异说明
 /// real Treiber Stack explain
 /// real Treiber Stack Implementation of差异explain
+/// real Treiber Stack Implementation ofdifferenceexplain
 pub struct TreiberStackRealImpl;
 
 impl TreiberStackRealImpl {
@@ -227,6 +230,7 @@ pub struct MichaelScottQueue<T> {
 
 impl<T> MichaelScottQueue<T> {
     /// 创建空队列
+    /// Creates空队列
     pub fn new() -> Self {
         Self {
             inner: Mutex::new(VecDeque::new()),
@@ -264,6 +268,7 @@ impl<T> Default for MichaelScottQueue<T> {
 
 /// 真实 Michael-Scott Queue 实现差异说明
 /// real Michael-Scott Queue Implementation of差异explain
+/// real Michael-Scott Queue Implementation ofdifferenceexplain
 pub struct MichaelScottQueueRealImpl;
 
 impl MichaelScottQueueRealImpl {

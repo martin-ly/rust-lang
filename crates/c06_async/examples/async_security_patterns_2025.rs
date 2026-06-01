@@ -11,6 +11,7 @@ use tracing::{debug, error, info, warn};
 /// 2025年异步安全编程模式演示
 /// 2025async demonstration
 /// 展示最新的异步安全编程技术和最佳实践
+/// async technique and best practice
 /// async technique and
 /// 1. 异步访问控制管理器
 /// 1. async
@@ -258,6 +259,7 @@ impl AsyncEncryptionService {
 }
 
 /// 3. 异步输入验证器
+/// 3. async input
 /// 3. async
 pub struct AsyncInputValidator {
     validation_rules: Arc<RwLock<HashMap<String, Vec<ValidationRule>>>>,

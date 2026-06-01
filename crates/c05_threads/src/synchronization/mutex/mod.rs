@@ -1,10 +1,12 @@
 //! Mutex 同步模块
+//! Mutex synchronousmodule
 //! Mutex synchronous module
 //! - 多线程共享状态
 //! - thread state
 //! - 死锁预防
 //! - lock
 //! - 性能优化技巧
+//! - Performance optimization tips
 //! - performance optimization tip
 use std::sync::{Arc, Mutex};
 use std::thread;

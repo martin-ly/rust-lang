@@ -6,6 +6,7 @@
 //! - 模型检查和验证
 //! - and
 //! - 定理证明支持
+//! - theorem proof
 //! - theorem
 //! - 语义不变量分析
 //! - variable analyze
@@ -89,14 +90,18 @@ pub enum PropertyType {
 #[derive(Debug, Clone, PartialEq)]
 pub enum PropertyStatus {
     /// 已验证
+    /// verified
     /// 已Verify
     Verified,
     /// 验证失败
+    /// failure
     Failed,
     /// 未验证
+    /// unverified
     /// 未Verify
     Unverified,
     /// 超时
+    /// timeout
     Timeout,
 }
 
@@ -115,6 +120,7 @@ pub struct Violation {
     /// 违规describe
     pub description: String,
     /// 严重程度
+    /// severe degree
     /// degree
     /// 严重degree
     pub severity: Severity,
@@ -142,18 +148,22 @@ pub enum ViolationType {
 }
 
 /// 严重程度
+/// severe degree
 /// degree
 /// 严重degree
 #[derive(Debug, Clone, PartialEq)]
 pub enum Severity {
     /// 低
+    /// low
     Low,
     /// 中
     /// in
     Medium,
     /// 高
+    /// high
     High,
     /// 严重
+    /// severe
     Critical,
 }
 
@@ -165,8 +175,10 @@ pub struct CodeLocation {
     /// 文件路径
     pub file: String,
     /// 行号
+    /// row number
     pub line: usize,
     /// 列号
+    /// column number
     pub column: usize,
     /// 函数名
     /// function
@@ -182,6 +194,7 @@ pub struct SemanticVerifier {
     /// 模型检查器
     model_checker: Box<dyn ModelChecker>,
     /// 配置
+    /// configuration
     config: VerificationConfig,
 }
 
@@ -223,6 +236,7 @@ pub struct NetworkState {
     /// state
     pub connections: HashMap<String, ConnectionState>,
     /// 消息队列
+    /// message queue
     pub message_queue: Vec<Message>,
     /// 全局变量
     /// global variable
@@ -246,10 +260,12 @@ pub struct ConnectionState {
     /// sequence
     pub sequence_number: u32,
     /// 确认号
+    /// confirmation number
     pub acknowledgment_number: u32,
     /// 窗口大小
     pub window_size: u16,
     /// 消息历史
+    /// message
     pub message_history: Vec<Message>,
     /// 认证状态
     /// state
@@ -276,20 +292,25 @@ pub enum TcpState {
 }
 
 /// 消息
+/// message
 #[derive(Debug, Clone, PartialEq)]
 pub struct Message {
     /// 消息ID
+    /// message ID
     /// ID
     pub id: String,
     /// 消息类型
+    /// message type
     /// type
     pub message_type: MessageType,
     /// 序列号
     /// sequence
     pub sequence_number: u32,
     /// 确认号
+    /// confirmation number
     pub acknowledgment_number: u32,
     /// 数据
+    /// data
     pub data: Vec<u8>,
     /// 时间戳
     /// time
@@ -304,6 +325,7 @@ pub struct Message {
 }
 
 /// 消息类型
+/// message type
 /// type
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum MessageType {
@@ -369,6 +391,7 @@ pub struct StateTransition {
     /// 触发condition
     pub guard: Guard,
     /// 转换动作
+    /// conversion action
     /// conversion
     pub action: Action,
 }
@@ -403,6 +426,7 @@ pub enum Guard {
 }
 
 /// 比较操作符
+/// operation
 #[derive(Debug, Clone, PartialEq)]
 pub enum ComparisonOperator {
     Equal,
@@ -414,6 +438,7 @@ pub enum ComparisonOperator {
 }
 
 /// 逻辑操作符
+/// operation
 #[derive(Debug, Clone, PartialEq)]
 pub enum LogicalOperator {
     And,
@@ -422,22 +447,27 @@ pub enum LogicalOperator {
 }
 
 /// 动作
+/// action
 #[derive(Debug, Clone)]
 pub enum Action {
     /// 无动作
+    /// no action
     NoOp,
     /// 变量赋值
     /// variable
     Assignment { variable: String, value: Value },
     /// 消息发送
+    /// message
     SendMessage {
         message: Message,
         destination: String,
     },
     /// 消息接收
+    /// message
     /// 消息Receive
     ReceiveMessage { message: Message },
     /// 复合动作
+    /// action
     Compound { actions: Vec<Action> },
 }
 
@@ -450,6 +480,7 @@ pub struct Invariant {
     /// variable
     pub name: String,
     /// 不变量谓词
+    /// variable predicate
     /// variable
     pub predicate: Predicate,
     /// 不变量类型
@@ -475,22 +506,28 @@ pub enum InvariantType {
 }
 
 /// 谓词
+/// predicate
 #[derive(Debug, Clone)]
 pub enum Predicate {
     /// 真谓词
+    /// predicate
     True,
     /// 假谓词
+    /// false predicate
     False,
     /// 变量谓词
+    /// variable predicate
     /// variable
     Variable { name: String, value: Value },
     /// 比较谓词
+    /// predicate
     Comparison {
         left: Box<Predicate>,
         operator: ComparisonOperator,
         right: Box<Predicate>,
     },
     /// 逻辑谓词
+    /// predicate
     Logical {
         operator: LogicalOperator,
         predicates: Vec<Predicate>,
@@ -545,12 +582,14 @@ pub enum Completeness {
 }
 
 /// 验证配置
+/// configuration
 #[derive(Debug, Clone)]
 pub struct VerificationConfig {
     /// 最大状态数
     /// maximum state
     pub max_states: usize,
     /// 超时时间
+    /// timeout time
     /// time
     pub timeout: std::time::Duration,
     /// 启用并行验证

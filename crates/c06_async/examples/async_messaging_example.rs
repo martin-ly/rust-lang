@@ -1,6 +1,8 @@
 //! 异步消息传递示例
+//! async message example
 //! async example
 //! 展示如何使用异步编程进行消息传递和事件处理
+//! async message and event
 //! async and
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
@@ -11,6 +13,7 @@ use tokio::sync::{RwLock, broadcast, mpsc};
 use tokio::time::sleep;
 
 /// 消息类型枚举
+/// message type enum
 /// type enum
 /// 消息typeenum
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -23,6 +26,7 @@ pub enum MessageType {
 }
 
 /// 消息结构
+/// message structure
 /// structure
 /// 消息structure
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -36,6 +40,7 @@ pub struct Message {
 }
 
 /// 消息优先级
+/// message
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
 pub enum MessagePriority {
     Low = 1,
@@ -45,6 +50,7 @@ pub enum MessagePriority {
 }
 
 /// 消息处理器trait
+/// message trait
 /// trait
 #[async_trait::async_trait]
 pub trait MessageHandler: Send + Sync {
@@ -53,6 +59,7 @@ pub trait MessageHandler: Send + Sync {
 }
 
 /// 文本消息处理器
+/// this message
 /// this
 pub struct TextMessageHandler {
     name: String,
@@ -82,6 +89,7 @@ impl MessageHandler for TextMessageHandler {
 }
 
 /// 图片消息处理器
+/// graph message
 pub struct ImageMessageHandler {
     name: String,
 }
@@ -114,6 +122,7 @@ impl MessageHandler for ImageMessageHandler {
 }
 
 /// 命令消息处理器
+/// command message
 /// command
 pub struct CommandMessageHandler {
     name: String,
@@ -143,6 +152,7 @@ impl MessageHandler for CommandMessageHandler {
 }
 
 /// 异步消息系统
+/// async message system
 /// async system
 pub struct AsyncMessageSystem {
     message_id_counter: Arc<RwLock<u64>>,
@@ -153,6 +163,7 @@ pub struct AsyncMessageSystem {
 }
 
 /// 消息统计
+/// message
 #[derive(Debug, Default)]
 pub struct MessageStatistics {
     pub total_messages: u64,
@@ -170,6 +181,7 @@ impl Default for AsyncMessageSystem {
 
 impl AsyncMessageSystem {
     /// 创建新的消息系统
+    /// message system
     /// system
     pub fn new() -> Self {
         let (message_tx, message_rx) = mpsc::unbounded_channel();
@@ -193,6 +205,7 @@ impl AsyncMessageSystem {
     }
 
     /// 注册消息处理器
+    /// message
     pub async fn register_handler(&self, handler: Box<dyn MessageHandler>) -> Result<()> {
         let name = handler.get_handler_name().to_string();
         let mut handlers = self.handlers.write().await;
@@ -202,6 +215,7 @@ impl AsyncMessageSystem {
     }
 
     /// 发送消息
+    /// message
     pub async fn send_message(
         &self,
         sender: String,
@@ -238,16 +252,19 @@ impl AsyncMessageSystem {
     }
 
     /// 订阅消息广播
+    /// message
     pub fn subscribe(&self) -> broadcast::Receiver<Message> {
         self.broadcast_tx.subscribe()
     }
 
     /// 获取消息统计
+    /// message
     pub async fn get_statistics(&self) -> MessageStatistics {
         self.statistics.read().await.clone()
     }
 
     /// 消息处理循环
+    /// message circulation
     /// circulation
     /// 消息Handlecirculation
     async fn message_processing_loop(&self, mut message_rx: mpsc::UnboundedReceiver<Message>) {
@@ -259,6 +276,7 @@ impl AsyncMessageSystem {
     }
 
     /// 处理单个消息
+    /// message
     async fn process_message(&self, message: Message) {
         let message_type_name = match &message.message_type {
             MessageType::Text(_) => "Text",
@@ -320,6 +338,7 @@ impl AsyncMessageSystem {
     }
 
     /// 判断处理器是否应该处理该消息
+    /// should this message
     /// should this
     fn should_handle_message(&self, handler: &dyn MessageHandler, message: &Message) -> bool {
         match &message.message_type {
@@ -356,6 +375,7 @@ impl Clone for MessageStatistics {
 }
 
 /// 消息订阅者
+/// message
 pub struct MessageSubscriber {
     name: String,
     receiver: broadcast::Receiver<Message>,
@@ -370,6 +390,7 @@ impl MessageSubscriber {
     }
 
     /// 开始监听消息
+    /// message
     pub async fn start_listening(&mut self) -> Result<()> {
         println!("👂 [{}] 开始监听消息", self.name);
 
@@ -388,6 +409,7 @@ impl MessageSubscriber {
 }
 
 /// 消息生产者
+/// message
 pub struct MessageProducer {
     name: String,
     system: AsyncMessageSystem,
@@ -402,6 +424,7 @@ impl MessageProducer {
     }
 
     /// 发送文本消息
+    /// this message
     /// this
     pub async fn send_text(
         &self,
@@ -420,6 +443,7 @@ impl MessageProducer {
     }
 
     /// 发送图片消息
+    /// graph message
     pub async fn send_image(
         &self,
         recipient: &str,
@@ -437,6 +461,7 @@ impl MessageProducer {
     }
 
     /// 发送命令消息
+    /// command message
     /// command
     pub async fn send_command(
         &self,
@@ -455,6 +480,7 @@ impl MessageProducer {
     }
 
     /// 批量发送消息
+    /// message
     pub async fn send_batch_messages(
         &self,
         messages: Vec<(String, MessageType, MessagePriority)>,

@@ -6,25 +6,33 @@
 //! - 类型安全的最佳实践
 //! - type
 //! - 性能优化技巧
+//! - Performance optimization tips
 //! - performance optimization tip
 //! - 完整的示例和测试用例
+//! - Complete examples and test cases
 //! - complete example and
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: enhanced_integer.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 //! - 作者: Rust 类型系统项目组
+//! - Author: Rust Type System Project Team
 //! - : Rust type system project
 use std::num::{NonZeroI8, NonZeroI16, NonZeroI32, NonZeroI64, NonZeroI128, NonZeroIsize};
 
 /// Rust 1.89 整数类型系统
 /// Rust 1.89 type system
 /// Rust 1.89 整数typesystem
+/// Rust 1.89 integertypesystem
 /// 包括类型安全、性能优化、错误处理等最佳实践。
+/// Includes best practices for type safety, performance optimization, error handling, etc.
 /// type 、performance optimization 、error handling etc. 。
 pub mod integer_types {
     use super::*;
@@ -32,6 +40,7 @@ pub mod integer_types {
     /// 有符号整数类型定义
     /// symbol type definition
     /// # 类型说明
+    /// # typedescription
     /// # type explain
     /// | 类型 | 大小 | 范围 | 用途 |
     /// | type | | scope | purpose |
@@ -53,6 +62,7 @@ pub mod integer_types {
     /// | isize| 平台相关 | 根据平台决定 | 数组索引、指针偏移 |
     /// | isize| platform | according to platform | 、pointer |
     /// # 示例
+    /// # Examples
     /// # example
     /// use c02_type_system::primitive_types::scalar_types::number::enhanced_integer::integer_types::*;
     ///
@@ -71,12 +81,15 @@ pub mod integer_types {
         /// 常用于字节处理、小范围数值计算等场景。
         /// 、scope etc. scenario 。
         /// # 特性
+        /// # features
         /// # feature
         /// - 内存占用：1字节
         /// - memory ：1
         /// - 范围：-128 到 127
+        /// - range：-128 to 127
         /// - scope ：-128 to 127
         /// # 示例
+        /// # Examples
         /// # example
         /// let value: i8 = 100;
         /// let max: i8 = i8::MAX; // 127
@@ -211,6 +224,7 @@ pub mod integer_types {
     /// 无符号整数类型只能表示非负值，但提供了更大的正数范围。
     /// symbol type represent ，but scope 。
     /// # 类型说明
+    /// # typedescription
     /// # type explain
     /// | 类型 | 大小 | 范围 | 用途 |
     /// | type | | scope | purpose |
@@ -231,6 +245,7 @@ pub mod integer_types {
     /// | usize| 平台相关 | 根据平台决定 | 数组长度、内存地址 |
     /// | usize| platform | according to platform | 、memory |
     /// # 示例
+    /// # Examples
     /// # example
     /// let byte: u8 = 255;
     /// let port: u16 = 8080;
@@ -387,11 +402,13 @@ pub mod integer_types {
     /// 可以用于优化内存布局和提供更安全的API。
     /// can optimization memory layout and API。
     /// # 类型说明
+    /// # typedescription
     /// # type explain
     /// | 类型 | 对应类型 | 用途 |
     /// | type | to type | purpose |
     /// | type | to应type | purpose |
     /// # 示例
+    /// # Examples
     /// # example
     /// use std::num::NonZeroI32;
     ///
@@ -457,6 +474,7 @@ pub mod integer_types {
     /// 整数类型转换
     /// type conversion
     /// 整数typeconversion
+    /// integertypeconversion
     /// 本模块提供了安全的整数类型转换功能，包括：
     /// This module provides type conversion functionality ，：
     /// - 显式类型转换
@@ -498,6 +516,7 @@ pub mod integer_types {
         /// 安全类型转换
         /// type conversion
         /// 安全typeconversion
+        /// safetypeconversion
         pub fn safe_conversion() {
             let i32_value: i32 = 1_000_000;
 
@@ -624,6 +643,7 @@ pub mod integer_types {
 
     /// 整数格式化
     /// 整数Format
+    /// integerFormat
     /// 本模块提供了各种整数格式化功能，
     /// This module provides functionality ，
     /// 包括不同进制、对齐、填充等。
@@ -676,6 +696,7 @@ pub mod integer_types {
 /// 整数类型性能测试
 /// type performance test
 /// 整数typeperformance test
+/// integertypeperformance test
 /// 本模块提供了各种整数类型的性能测试，
 /// This module provides type performance test ，
 /// 帮助开发者选择最适合的整数类型。
@@ -753,6 +774,7 @@ pub mod performance_tests {
 /// 主函数：演示所有整数类型功能
 /// Main function ：demonstration all type functionality
 /// Main function：Demonstration of所有整数typefunctionality
+/// Main function：Demonstration ofallintegertypefunctionality
 /// 包括基本操作、类型转换、溢出处理、格式化等。
 /// this 、type conversion 、source 、etc. 。
 pub fn demonstrate_all_integer_types() {

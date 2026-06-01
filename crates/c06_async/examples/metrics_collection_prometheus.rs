@@ -158,6 +158,7 @@ impl MetricsCollector {
     }
 
     /// 更新队列大小
+    /// queue
     pub fn update_queue_size(&self, queue_name: &str, size: usize) {
         self.custom_metrics
             .queue_size

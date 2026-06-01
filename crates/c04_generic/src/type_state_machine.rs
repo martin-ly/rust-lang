@@ -38,6 +38,7 @@ impl Default for HttpRequestBuilder<Init> {
 
 impl HttpRequestBuilder<Init> {
     /// 创建新的请求构建器
+    /// Creates新的请求构建器
     /// builder
     pub fn new() -> Self {
         Self {
@@ -94,6 +95,7 @@ impl HttpRequestBuilder<UrlSet> {
 
 impl HttpRequestBuilder<Ready> {
     /// 发送已构建的请求
+    /// Sends已构建的请求
     pub fn send(self) -> String {
         format!(
             "{} {} with body: {}",

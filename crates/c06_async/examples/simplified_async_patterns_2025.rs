@@ -9,6 +9,7 @@ use tracing::{error, info, warn};
 /// 2025年简化异步设计模式演示
 /// 2025async design demonstration
 /// 展示实用的异步编程模式和最佳实践
+/// async and best practice
 /// async and
 /// 1. 异步状态机模式
 /// 1. async state machine
@@ -72,6 +73,7 @@ impl AsyncStateMachine {
 }
 
 /// 2. 异步事件系统
+/// 2. async event system
 /// 2. async system
 pub struct AsyncEventSystem {
     subscribers: Arc<RwLock<Vec<String>>>,
@@ -194,6 +196,7 @@ impl AsyncCommandInvoker {
 }
 
 /// 4. 异步缓存系统
+/// 4. async cache system
 /// 4. async system
 pub struct AsyncCache<K, V> {
     cache: Arc<RwLock<std::collections::HashMap<K, V>>>,
@@ -306,6 +309,7 @@ impl AsyncTaskScheduler {
 }
 
 /// 6. 异步重试机制
+/// 6. async retry mechanism
 /// 6. async mechanism
 pub struct AsyncRetryManager {
     max_attempts: u32,

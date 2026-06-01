@@ -6,8 +6,10 @@
 //! TCP (传输控制协议) 是一种面向连接的、可靠的传输层协议。它提供：
 //! TCP (transmission ) surface 、transport layer 。：
 //! - **连接导向**: 建立连接、数据传输、连接释放
+//! - ****: 、data transmission 、
 //! - ****: 、transmission 、
 //! - **可靠性**: 数据包确认、重传、排序
+//! - ****: data packet 、、ordering
 //! - ****: 、、ordering
 //! - **流量控制**: 滑动窗口机制
 //! - **flow rate **: mechanism
@@ -24,8 +26,10 @@
 //! 2. **SYN-ACK**: 服务器响应 SYN-ACK 包，确认连接请求
 //! 2. **SYN-ACK**: SYN-ACK ，
 //! 3. **ACK**: 客户端发送 ACK 包，完成三次握手
+//! 3. **ACK**: ACK ，complete
 //! 3. **ACK**: ACK ，
 //! ### 配置参数说明
+//! ### configuration parameter explain
 //! ### parameter explain
 //! - `buffer_size`: 读写缓冲区大小，影响内存使用和性能
 //! - `buffer_size`: buffering ，impact memory and performance
@@ -41,6 +45,7 @@
 //! - **微服务通信**: 服务间通信
 //! - **microservice **:
 //! - **数据同步**: 定期数据同步
+//! - **data synchronous **: data synchronous
 //! - **synchronous **: synchronous
 //! - **数据synchronous**: 定期数据synchronous
 //! - **实时通信**: 聊天、游戏等实时应用
@@ -48,10 +53,12 @@
 //! ## ⚠️ 注意事项
 //! ## ⚠️
 //! - **错误处理**: 网络连接可能失败，需要适当的错误处理
+//! - **error handling **: network may failure ，when error handling
 //! - **error handling **: network may ，when error handling
 //! - **资源管理**: 及时关闭连接，避免资源泄漏
 //! - ****: and ，
 //! - **超时设置**: 合理设置超时时间，避免长时间等待
+//! - **timeout **: timeout time ，time etc.
 //! - ****: time ，time etc.
 //! - **缓冲区大小**: 根据应用需求调整缓冲区大小
 //! - **buffering **: according to application buffering

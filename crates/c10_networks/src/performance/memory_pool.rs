@@ -264,6 +264,7 @@ impl PooledBytes {
     }
 
     /// 获取数据切片
+    /// data
     pub fn as_slice(&self) -> Bytes {
         let blocks = self
             .blocks
@@ -286,6 +287,7 @@ impl PooledBytes {
     }
 
     /// 复制数据
+    /// data
     pub fn copy_from_slice(&mut self, src: &[u8]) {
         let mut blocks = self
             .blocks

@@ -52,6 +52,7 @@ impl<'a, T> LendingIterator for WindowIter<'a, T> {
 pub struct HNil;
 
 /// HList cons 单元
+/// HList cons unit
 #[derive(Debug)]
 pub struct HCons<H, T> {
     /// 头部元素
@@ -85,6 +86,7 @@ impl<H, T: HListLength> HListLength for HCons<H, T> {
 }
 
 /// 获取 HList 长度
+/// Gets HList 长度
 /// HList
 /// Get HList 长度
 pub const fn hlist_len<H, T>() -> usize

@@ -2,6 +2,7 @@
 //! module
 //! 协议Test formodule
 //! 确保各种网络协议的正确实现和互操作性。
+//! network protocol and operation 。
 //! network protocol and 。
 use bytes::Bytes;
 use c10_networks::packet::{Packet, PacketType};
@@ -278,6 +279,7 @@ fn test_tcp_congestion_control() {
 }
 
 /// 测试套接字配置
+/// socket configuration
 /// socket
 #[test]
 fn test_socket_configurations() {
@@ -313,6 +315,7 @@ fn test_socket_configurations() {
 }
 
 /// 测试协议数据包
+/// data packet
 #[test]
 fn test_protocol_packets() {
     // 测试HTTP数据包

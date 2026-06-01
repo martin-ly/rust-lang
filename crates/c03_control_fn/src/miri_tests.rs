@@ -1,6 +1,7 @@
 //! Miri 测试模块 - 控制流和函数内存安全验证
 //! Miri module - stream and function memory safety
 //! 运行方式:
+//! How to run:
 //! Run way :
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
@@ -10,6 +11,7 @@ use std::ptr;
 // ==================== 控制流和内存安全 ====================
 
 /// 测试目的: 验证复杂控制流中的初始化
+/// Tests目的: 验证复杂控制流中的初始化
 /// objective : complex stream in
 /// 预期结果: 应该正确处理初始化状态
 /// result : should state
@@ -34,8 +36,10 @@ fn test_control_flow_init() {
 }
 
 /// 测试目的: 验证提前返回的内存安全
+/// Tests目的: 验证提前返回的内存安全
 /// objective : before memory safety
 /// 测试场景: 函数可能提前返回，正确处理未初始化内存
+/// Tests场景: 函数可能提前返回，正确处理未初始化内存
 /// scenario : function may before ，memory
 /// 预期结果: 应该安全处理两种返回路径
 /// result : should
@@ -59,6 +63,7 @@ fn test_early_return_safety() {
 }
 
 /// 测试目的: 验证循环中的内存操作
+/// Tests目的: 验证循环中的内存操作
 /// objective : circulation in memory
 /// 预期结果: 应该正确完成所有操作
 /// result : should all
@@ -84,8 +89,10 @@ fn test_loop_memory_operations() {
 // ==================== 函数指针和闭包 ====================
 
 /// 测试目的: 验证函数指针调用
+/// Tests目的: 验证函数指针调用
 /// objective : function pointer
 /// 测试场景: 使用函数指针调用函数
+/// Tests场景: 使用函数指针调用函数
 /// scenario : function pointer function
 /// 预期结果: 应该正确调用并返回结果
 /// result : should and result
@@ -100,8 +107,10 @@ fn test_function_pointer() {
 }
 
 /// 测试目的: 验证不安全函数指针
+/// Tests目的: 验证不安全函数指针
 /// objective : function pointer
 /// 测试场景: 使用 unsafe fn 指针
+/// Tests场景: 使用 unsafe fn 指针
 /// scenario : unsafe fn pointer
 /// 预期结果: 应该正确调用并返回结果
 /// result : should and result
@@ -118,8 +127,10 @@ fn test_unsafe_fn_pointer() {
 }
 
 /// 测试目的: 验证闭包捕获和生命周期
+/// Tests目的: 验证闭包捕获和生命周期
 /// objective : closure capture and lifetime
 /// 测试场景: 闭包捕获外部变量
+/// Tests场景: 闭包捕获外部变量
 /// scenario : closure capture outside variable
 /// 预期结果: 应该正确捕获并使用变量
 /// result : should and variable
@@ -132,8 +143,10 @@ fn test_closure_capture() {
 }
 
 /// 测试目的: 验证可变闭包捕获
+/// Tests目的: 验证可变闭包捕获
 /// objective : closure capture
 /// 测试场景: 闭包捕获并修改外部变量
+/// Tests场景: 闭包捕获并修改外部变量
 /// scenario : closure capture and outside variable
 /// 预期结果: 应该正确修改外部变量
 /// result : should outside variable
@@ -153,8 +166,10 @@ fn test_closure_mut_capture() {
 // ==================== 递归和栈安全 ====================
 
 /// 测试目的: 验证递归深度控制
+/// Tests目的: 验证递归深度控制
 /// objective :
 /// 测试场景: 计算阶乘
+/// Tests场景: 计算阶乘
 /// scenario :
 /// 预期结果: 应该正确计算并返回结果
 /// result : should and result
@@ -172,8 +187,10 @@ fn test_recursion_depth() {
 }
 
 /// 测试目的: 验证尾递归概念
+/// Tests目的: 验证尾递归概念
 /// objective : concept
 /// 测试场景: 使用累加器实现尾递归风格
+/// Tests场景: 使用累加器实现尾递归风格
 /// scenario :
 /// 预期结果: 应该正确计算并返回结果
 /// result : should and result
@@ -193,8 +210,10 @@ fn test_tail_call_concept() {
 // ==================== 不安全的控制流 ====================
 
 /// 测试场景: 使用裸指针读写内存
+/// Tests场景: 使用裸指针读写内存
 /// scenario : pointer memory
 /// 预期结果: 应该正确读写值
+/// Expected result: Should read and write values correctly
 /// result : should
 #[test]
 fn test_ptr_read_write() {
@@ -208,6 +227,7 @@ fn test_ptr_read_write() {
 }
 
 /// 测试场景: 条件满足时才写入内存
+/// Tests场景: 条件满足时才写入内存
 /// scenario : condition memory
 /// 预期结果: 应该安全地条件写入
 /// result : should condition
@@ -225,6 +245,7 @@ fn test_conditional_ptr_write() {
 }
 
 /// 测试目的: 验证标签循环
+/// Tests目的: 验证标签循环
 /// objective : circulation
 /// 预期结果: 应该正确跳出指定循环
 /// result : should circulation
@@ -247,8 +268,10 @@ fn test_loop_as_goto() {
 // ==================== 模式匹配和析构 ====================
 
 /// 测试目的: 验证复杂模式匹配的内存安全
+/// Tests目的: 验证复杂模式匹配的内存安全
 /// objective : complex memory safety
 /// 测试场景: 对复杂枚举进行模式匹配
+/// Tests场景: 对复杂枚举进行模式匹配
 /// scenario : to complex enum
 /// 预期结果: 应该正确匹配并访问字段
 /// result : should and field
@@ -274,8 +297,10 @@ fn test_pattern_match_safety() {
 }
 
 /// 测试目的: 验证匹配中的引用重新借用
+/// Tests目的: 验证匹配中的引用重新借用
 /// objective : in reference borrowing
 /// 测试场景: 在 match 中对可变引用进行重新借用
+/// Tests场景: 在 match 中对可变引用进行重新借用
 /// scenario : in match in to reference borrowing
 /// 预期结果: 匹配后原引用应该仍然有效
 /// result : after reference should effective
@@ -294,8 +319,10 @@ fn test_match_reborrow() {
 // ==================== 迭代器适配器 ====================
 
 /// 测试目的: 验证自定义迭代器
+/// Tests目的: 验证自定义迭代器
 /// objective : definition
 /// 测试场景: 实现一个简单的计数迭代器
+/// Tests场景: 实现一个简单的计数迭代器
 /// scenario : simple
 /// 预期结果: 应该正确生成序列
 /// result : should sequence
@@ -326,6 +353,7 @@ fn test_custom_iterator() {
 }
 
 /// 测试场景: 使用裸指针遍历并修改数组
+/// Tests场景: 使用裸指针遍历并修改数组
 /// scenario : pointer and
 /// 预期结果: 应该正确修改所有元素
 /// result : should all element
@@ -346,6 +374,7 @@ fn test_iterator_unsafe() {
 // ==================== 错误处理控制流 ====================
 
 /// 测试场景: 使用 ? 运算符传播错误
+/// Tests场景: 使用 ? 运算符传播错误
 /// scenario :? propagation
 /// 预期结果: 应该正确处理成功和错误路径
 /// result : should and
@@ -370,7 +399,9 @@ fn test_result_control_flow() {
 }
 
 /// Test forobjective: Verify panic 安全
+/// Test forobjective: Verify panic safe
 /// 测试场景: 确保 Drop 在正常退出时被调用
+/// Tests场景: 确保 Drop 在正常退出时被调用
 /// scenario : Drop in is
 /// 预期结果: Drop 应该被调用，标记被设置
 /// result : Drop should is ，mark is

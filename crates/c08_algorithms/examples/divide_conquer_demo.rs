@@ -7,6 +7,7 @@
 //! - 快速排序
 //! - quick sort
 //! - 最大子数组和
+//! - maximum array and
 //! - maximum and
 //! 运行方式:
 //! Run way :
@@ -88,6 +89,7 @@ fn merge(arr: &mut [i32], mid: usize) {
 }
 
 /// 最大子数组和（分治）
+/// maximum array and （）
 /// maximum and （）
 fn max_subarray_sum(arr: &[i32]) -> i32 {
     if arr.is_empty() {

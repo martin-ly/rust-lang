@@ -1,21 +1,31 @@
 //! # Rust 1.89 特性示例 (历史版本)
+//! # Rust 1.89 Feature Examples (Historical Version)
 //! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
+//! ## Version History
 //! ## this explain
 //! ### Rust 1.92.0 主要改进
+//! ### Rust 1.92.0 Major Improvements
 //! ### Rust 1.92.0 main
 //! - **性能优化**: 迭代器方法特化、改进的编译优化
+//! - **Performance optimizations**: Iterator method specialization, improved compilation optimizations
 //! - **performance optimization **: method 、optimization
 //! ### 迁移建议
+//! ### Migration Suggestions
 //! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
+//! 1. Update Cargo.toml: `rust-version = "1.92"`
 //! 参考:
+//! Reference:
 //! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//! - [Historical version: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 基础语法新特性模块
@@ -27,12 +37,14 @@
 //! - 增强的类型推断
 //! - type infer
 //! - 增强type inference
+//! - enhancetype inference
 //! - 新的控制流特性
 //! - stream feature
 //! - 新控制streamfeature
 //! - 改进的错误处理
 //! - error handling
 //! - 改进error handling
+//! - improveerror handling
 use std::collections::HashMap;
 use std::fmt::{self, Display};
 use std::sync::Arc;
@@ -44,11 +56,13 @@ use std::sync::Arc;
 /// - 增强的生命周期推断
 /// - lifetime infer
 /// - 增强lifetimeinfer
+/// - enhancelifetimeinfer
 /// - 新的模式匹配特性
 /// - feature
 /// - 改进的错误处理
 /// - error handling
 /// - 改进error handling
+/// - improveerror handling
 #[derive(Debug, Clone, PartialEq)]
 pub struct Rust189BasicSyntax<T>
 where
@@ -57,8 +71,10 @@ where
     /// 数据字段，使用泛型类型
     /// field ，generic type
     /// 数据field，Usegenerictype
+    /// datafield，Usegenerictype
     pub data: T,
     /// 状态字段
+    /// statefields
     /// state field
     pub state: State,
     /// 元数据映射
@@ -71,12 +87,14 @@ where
 #[derive(Debug, Clone, PartialEq)]
 pub enum State {
     /// 初始化状态
+    /// Initializes状态
     /// state
     Initialized,
     /// 运行中状态
     /// Run in state
     Running,
     /// 暂停状态
+    /// Pauses状态
     /// state
     Paused,
     /// 完成状态
@@ -86,6 +104,7 @@ pub enum State {
     /// 错误状态，包含错误信息
     /// state ，error message
     /// 错误state，Containserror message
+    /// errorstate，Containserror message
     Error(String),
 }
 
@@ -94,10 +113,13 @@ where
     T: Clone + PartialEq + Display + Send + Sync,
 {
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// # 示例
+    /// # Examples
     /// # example
     /// use c03_control_fn::rust_189_basic_syntax::{Rust189BasicSyntax, State};
     ///
@@ -115,12 +137,15 @@ where
     }
 
     /// 更新状态
+    /// Updates状态
     /// state
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// * `new_state` - 新状态
     /// * `new_state` - 新state
     /// # 示例
+    /// # Examples
     /// # example
     /// use c03_control_fn::rust_189_basic_syntax::{Rust189BasicSyntax, State};
     ///
@@ -134,10 +159,12 @@ where
 
     /// 添加元数据
     /// # 参数
+    /// # Arguments
     /// # parameter
     /// * `key` - 键
     /// * `value` - 值
     /// # 示例
+    /// # Examples
     /// # example
     /// use c03_control_fn::rust_189_basic_syntax::Rust189BasicSyntax;
     ///
@@ -150,10 +177,14 @@ where
     }
 
     /// 获取共享数据的克隆
+    /// Gets共享数据的克隆
     /// # 返回值
+    /// # Return Value
     /// # return value
     /// 返回共享数据的克隆
+    /// Returns共享数据的克隆
     /// # 示例
+    /// # Examples
     /// # example
     /// use c03_control_fn::rust_189_basic_syntax::Rust189BasicSyntax;
     ///
@@ -542,6 +573,7 @@ pub mod enhanced_pattern_matching {
     }
 
     /// 检查三角形是否有效
+    /// Checks三角形是否有效
     /// effective
     fn is_valid_triangle(a: f64, b: f64, c: f64) -> bool {
         a + b > c && a + c > b && b + c > a
@@ -611,6 +643,7 @@ pub mod enhanced_type_inference {
     }
 
     /// 创建泛型数据
+    /// Creates泛型数据
     /// generic
     fn create_generic_data<T>(value: T) -> GenericData<T>
     where
@@ -620,6 +653,7 @@ pub mod enhanced_type_inference {
     }
 
     /// 异步操作
+    /// asynchronousoperation
     /// async
     #[allow(dead_code)]
     async fn async_operation(x: i32) -> i32 {
@@ -627,12 +661,14 @@ pub mod enhanced_type_inference {
     }
 
     /// 处理文本
+    /// Processes文本
     /// this
     fn process_text(text: &str) -> &str {
         text
     }
 
     /// 创建复杂数据
+    /// Creates复杂数据
     /// complex
     fn create_complex_data() -> ComplexData {
         ComplexData {
@@ -643,6 +679,7 @@ pub mod enhanced_type_inference {
     }
 
     /// 创建异步流
+    /// Creates异步流
     /// async stream
     fn create_async_stream() -> AsyncStream {
         AsyncStream {
@@ -784,6 +821,7 @@ pub mod new_control_flow {
     }
 
     /// 处理异步值
+    /// Processes异步值
     /// async
     fn process_async_value(value: i32) -> i32 {
         value * 2
@@ -878,6 +916,7 @@ pub mod improved_error_handling {
     }
 
     /// 解析并验证
+    /// Parses并验证
     /// and
     pub fn parse_and_validate(s: &str) -> Result<i32, String> {
         let parsed = s.parse::<i32>()
@@ -946,6 +985,7 @@ pub mod improved_error_handling {
 }
 
 /// 综合演示函数
+/// Comprehensive demonstration function
 /// synthesize demonstration function
 /// 运行所有 Rust 1.89 基础语法新特性演示
 /// Run all Rust 1.89 foundation feature demonstration

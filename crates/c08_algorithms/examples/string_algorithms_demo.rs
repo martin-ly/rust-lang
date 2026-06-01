@@ -91,6 +91,7 @@ fn kmp_search(text: &str, pattern: &str) -> Option<usize> {
 }
 
 /// 计算最长公共前缀后缀（LPS）数组
+/// before after （LPS）array
 /// before after （LPS）
 fn compute_lps(pattern: &[char]) -> Vec<usize> {
     let m = pattern.len();

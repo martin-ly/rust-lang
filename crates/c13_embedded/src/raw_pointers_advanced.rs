@@ -1,10 +1,13 @@
 
 /// 裸指针基础操作
+/// pointer foundation operation
 /// pointer foundation
 /// - 裸pointercanas null
 /// - 裸指针允许多个 `*mut` 指向同一地址（别名）
+/// - pointer allow `*mut` （）
 /// - pointer `*mut` （）
 /// - 裸指针不自动解引用，也不受借用规则约束
+/// - pointer reference ，borrowing rule constraint
 /// - pointer reference ，borrowing rule
 pub mod raw_pointer_basics {
     /// 安全地将引用转换为裸指针
@@ -22,9 +25,11 @@ pub mod raw_pointer_basics {
     /// 演示别名规则差异
     /// demonstration rule
     /// 引用不允许可变别名，但裸指针允许。
+    /// reference allow ，but pointer allow 。
     /// reference ，but pointer 。
     ///
     /// 调用者必须确保不会导致数据竞争。
+    /// must data 。
     /// must 。
     pub unsafe fn aliased_mutate(val: *mut i32) {
         let a = val;
@@ -78,6 +83,7 @@ pub mod volatile_access {
 /// 内联汇编概念（Rust 1.59+ `asm!` 已稳定）
 /// inside concept （Rust 1.59+ `asm!` ）
 /// `core::arch::asm!` 允许在 Rust 中直接嵌入汇编代码。
+/// `core::arch::asm!` allow in Rust in 。
 /// `core::arch::asm!` in Rust in 。
 /// `core::arch::asm!` Allowsin Rust in直接嵌入汇编代码。
 pub mod inline_asm_concepts {
@@ -90,6 +96,7 @@ pub mod inline_asm_concepts {
     }
 
     /// 空操作（NOP）概念演示
+    /// operation （NOP）concept demonstration
     /// （NOP）concept demonstration
     #[cfg(target_arch = "x86_64")]
     pub fn nop() {

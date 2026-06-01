@@ -8,6 +8,7 @@ use tokio::net::{TcpListener, TcpStream};
 use tokio::time::timeout;
 
 /// TCP 套接字配置
+/// TCP socket configuration
 /// TCP socket
 #[derive(Debug, Clone)]
 pub struct TcpConfig {
@@ -69,6 +70,7 @@ impl TcpSocket {
     }
 
     /// 异步读取数据
+    /// async data
     /// async
     pub async fn read(&mut self, buffer: &mut [u8]) -> NetworkResult<usize> {
         if let Some(ref mut stream) = self.stream {
@@ -85,6 +87,7 @@ impl TcpSocket {
     }
 
     /// 异步写入数据
+    /// async data
     /// async
     pub async fn write(&mut self, data: &[u8]) -> NetworkResult<usize> {
         if let Some(ref mut stream) = self.stream {

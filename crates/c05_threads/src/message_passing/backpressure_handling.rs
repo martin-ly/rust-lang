@@ -177,6 +177,7 @@ pub struct BlockingBackpressureChannel<T> {
 
 impl<T> BlockingBackpressureChannel<T> {
     /// 创建新的阻塞背压通道
+    /// Creates新的阻塞背压通道
     /// backpressure channel
     pub fn new(buffer_size: usize) -> Self {
         let (sender, receiver) = bounded(buffer_size);
@@ -190,6 +191,7 @@ impl<T> BlockingBackpressureChannel<T> {
     }
 
     /// 发送消息（阻塞）
+    /// Sends消息（阻塞）
     /// （）
     pub fn send(&self, message: T) -> Result<(), T> {
         match self.sender.try_send(message) {
@@ -206,6 +208,7 @@ impl<T> BlockingBackpressureChannel<T> {
     }
 
     /// 接收消息
+    /// Receives a message
     pub fn recv(&self) -> Option<T> {
         let result = self.receiver.recv();
         if result.is_ok() {
@@ -215,6 +218,7 @@ impl<T> BlockingBackpressureChannel<T> {
     }
 
     /// 尝试发送消息（非阻塞）
+    /// Attempts to发送消息（非阻塞）
     /// （）
     pub fn try_send(&self, message: T) -> Result<(), T> {
         match self.sender.try_send(message) {
@@ -228,6 +232,7 @@ impl<T> BlockingBackpressureChannel<T> {
     }
 
     /// 获取当前缓冲区使用率
+    /// Gets当前缓冲区使用率
     /// when before buffering
     pub fn usage_ratio(&self) -> f64 {
         let current = self.current_size.load(Ordering::Relaxed);
@@ -302,6 +307,7 @@ pub struct DroppingBackpressureChannel<T> {
 
 impl<T> DroppingBackpressureChannel<T> {
     /// 创建新的丢弃背压通道
+    /// Creates新的丢弃背压通道
     /// backpressure channel
     pub fn new(buffer_size: usize, drop_threshold: f64) -> Self {
         let (sender, receiver) = bounded(buffer_size);
@@ -317,6 +323,7 @@ impl<T> DroppingBackpressureChannel<T> {
     }
 
     /// 发送消息（可能丢弃）
+    /// Sends消息（可能丢弃）
     /// （may ）
     pub fn send(&self, message: T) -> Result<(), T> {
         let usage_ratio = self.usage_ratio();
@@ -342,6 +349,7 @@ impl<T> DroppingBackpressureChannel<T> {
     }
 
     /// 接收消息
+    /// Receives a message
     pub fn recv(&self) -> Option<T> {
         let result = self.receiver.recv();
         if result.is_ok() {
@@ -351,6 +359,7 @@ impl<T> DroppingBackpressureChannel<T> {
     }
 
     /// 获取当前缓冲区使用率
+    /// Gets当前缓冲区使用率
     /// when before buffering
     pub fn usage_ratio(&self) -> f64 {
         let current = self.current_size.load(Ordering::Relaxed);
@@ -358,6 +367,7 @@ impl<T> DroppingBackpressureChannel<T> {
     }
 
     /// 获取丢弃的消息数量
+    /// Gets丢弃的消息数量
     /// quantity
     /// Get丢弃消息quantity
     pub fn dropped_count(&self) -> usize {
@@ -435,6 +445,7 @@ pub struct AdaptiveBackpressureChannel<T> {
 
 impl<T> AdaptiveBackpressureChannel<T> {
     /// 创建新的自适应背压通道
+    /// Creates新的自适应背压通道
     /// backpressure channel
     pub fn new(config: BackpressureConfig) -> Self {
         let (sender, receiver) = bounded(config.buffer_size);
@@ -452,6 +463,7 @@ impl<T> AdaptiveBackpressureChannel<T> {
     }
 
     /// 发送消息（自适应策略）
+    /// Sends消息（自适应策略）
     /// （strategy ）
     pub fn send(&self, message: T) -> Result<(), T> {
         self.adapt_strategy();
@@ -535,6 +547,7 @@ impl<T> AdaptiveBackpressureChannel<T> {
     }
 
     /// 接收消息
+    /// Receives a message
     pub fn recv(&self) -> Option<T> {
         let result = self.receiver.recv();
         if result.is_ok() {
@@ -544,6 +557,7 @@ impl<T> AdaptiveBackpressureChannel<T> {
     }
 
     /// 获取当前缓冲区使用率
+    /// Gets当前缓冲区使用率
     /// when before buffering
     pub fn usage_ratio(&self) -> f64 {
         let current = self.current_size.load(Ordering::Relaxed);
@@ -551,6 +565,7 @@ impl<T> AdaptiveBackpressureChannel<T> {
     }
 
     /// 获取丢弃的消息数量
+    /// Gets丢弃的消息数量
     /// quantity
     /// Get丢弃消息quantity
     pub fn dropped_count(&self) -> usize {
@@ -636,6 +651,7 @@ pub struct FlowControlBackpressureChannel<T> {
 
 impl<T> FlowControlBackpressureChannel<T> {
     /// 创建新的流量控制背压通道
+    /// Creates新的流量控制背压通道
     /// flow rate backpressure channel
     pub fn new(buffer_size: usize, window_size: usize, window_reset_time: Duration) -> Self {
         let (sender, receiver) = bounded(buffer_size);
@@ -653,6 +669,7 @@ impl<T> FlowControlBackpressureChannel<T> {
     }
 
     /// 发送消息（流量控制）
+    /// Sends消息（流量控制）
     /// （flow rate ）
     pub fn send(&self, message: T) -> Result<(), T> {
         self.reset_window_if_needed();
@@ -673,6 +690,7 @@ impl<T> FlowControlBackpressureChannel<T> {
     }
 
     /// 接收消息
+    /// Receives a message
     pub fn recv(&self) -> Option<T> {
         let result = self.receiver.recv();
         if result.is_ok() {
@@ -690,6 +708,7 @@ impl<T> FlowControlBackpressureChannel<T> {
     }
 
     /// 获取当前缓冲区使用率
+    /// Gets当前缓冲区使用率
     /// when before buffering
     pub fn usage_ratio(&self) -> f64 {
         let current = self.current_size.load(Ordering::Relaxed);
@@ -697,6 +716,7 @@ impl<T> FlowControlBackpressureChannel<T> {
     }
 
     /// 获取当前窗口使用率
+    /// Gets当前窗口使用率
     /// when before
     pub fn window_usage_ratio(&self) -> f64 {
         let current = self.current_window.load(Ordering::Relaxed);

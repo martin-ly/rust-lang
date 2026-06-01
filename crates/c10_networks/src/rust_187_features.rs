@@ -1,6 +1,7 @@
 //! Rust 187.0 新特性实现模块 —— c10_networks
 //! Rust 187.0 feature module —— c10_networks
 //! - `open_ranges_parsing`: 开放范围 `..EXPR` 可在一元操作符后解析
+//! - `open_ranges_parsing`: scope `..EXPR` in operation after
 //! - `open_ranges_parsing`: scope `..EXPR` in after
 //! # 版本信息
 //! # this
@@ -17,6 +18,7 @@
 // ============================================================================
 
 /// # 开放范围与一元操作符
+/// # scope and operation
 /// # scope and
 /// ## 之前
 /// ## 's before
@@ -43,6 +45,7 @@ fn test_open_range_parsing() {
 /// ## 背景
 /// ## background
 /// `use<'a>` 语法允许显式声明需要捕获哪些生命周期。
+/// `use<'a>` syntax allow lifetime 。
 /// `use<'a>` lifetime 。
 pub trait Parser<'a> {
     fn parse(&self, input: &'a str) -> impl Iterator<Item = &'a str> + use<'a, Self>;

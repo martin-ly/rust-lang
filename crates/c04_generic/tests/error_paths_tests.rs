@@ -3,6 +3,7 @@
 #![allow(clippy::bool_assert_comparison)]
 
 /// 测试错误输入情况
+/// input situation
 /// situation
 #[test]
 fn test_error_inputs() {
@@ -92,6 +93,7 @@ fn test_concurrent_safety() {
 }
 
 /// 测试泛型约束错误
+/// generic constraint
 /// generic
 #[test]
 fn test_generic_constraint_errors() {

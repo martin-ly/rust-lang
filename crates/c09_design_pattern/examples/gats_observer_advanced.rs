@@ -1,14 +1,18 @@
 #![allow(clippy::type_complexity)]
 //! Rust 1.90 GATs 零拷贝观察者模式高级示例
+//! Rust 1.90 GATs observer high example
 //! Rust 1.90 GATs observer example
 //! 本示例展示：
 //! this example ：
 //! 2. 借用视图（Borrowing View）避免克隆
+//! 2. borrowing graph （Borrowing View）
 //! 2. borrowing （Borrowing View）
 //! 3. 多种数据类型的观察者
+//! 3. data type observer
 //! 3. type observer
 //! 3. 多种数据typeobserver
 //! 4. 事件过滤和转换
+//! 4. event and conversion
 //! 4. and conversion
 //! 4. 事件Filterandconversion
 //! 5. 性能对比：GATs vs 克隆方式
@@ -26,15 +30,18 @@ use std::time::Instant;
 // ============================================================================
 
 /// GATs 观察者 trait - 支持借用视图
+/// GATs observer trait - borrowing graph
 /// GATs observer trait - borrowing
 pub trait Observer {
     /// 关联类型：借用视图（带生命周期）
+    /// associated type ：borrowing graph （lifetime ）
     /// associated type ：borrowing （lifetime ）
     type ViewType<'a>
     where
         Self: 'a;
 
     /// 接收借用的数据（零拷贝）
+    /// borrowing data （）
     /// borrowing （）
     fn update<'a>(&'a mut self, view: Self::ViewType<'a>);
 
@@ -536,6 +543,7 @@ impl NumVecSubject {
 // ============================================================================
 
 /// 旧方式：克隆数据的观察者
+/// way ：data observer
 /// way ：observer
 pub trait CloningObserver {
     type Data: Clone;

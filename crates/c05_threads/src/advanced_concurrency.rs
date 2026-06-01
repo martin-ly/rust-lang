@@ -29,6 +29,7 @@ pub struct HighPerformanceThreadPool {
 
 impl HighPerformanceThreadPool {
     /// 创建新的高性能线程池
+    /// Creates新的高性能线程池
     /// performance thread pool
     pub fn new(size: usize) -> Self {
         assert!(size > 0);
@@ -82,6 +83,7 @@ impl HighPerformanceThreadPool {
     }
 
     /// 获取线程池统计信息
+    /// Gets线程池统计信息
     /// thread pool
     pub fn stats(&self) -> ThreadPoolStats {
         self.global_queue.get_stats()
@@ -161,6 +163,7 @@ impl Worker {
 // ============================================================================
 
 /// 全局任务队列
+/// globaltaskqueue
 /// global task
 struct GlobalTaskQueue {
     tasks: Mutex<VecDeque<Box<dyn FnOnce() + Send + 'static>>>,
@@ -249,6 +252,7 @@ pub struct LockFreeRingBuffer<T> {
 
 impl<T: Default + Clone> LockFreeRingBuffer<T> {
     /// 创建新的无锁环形缓冲区
+    /// Creates新的无锁环形缓冲区
     /// lock-free ring buffer
     pub fn new(size: usize) -> Self {
         // 使用 size+1 的内部容量以支持“可存放 size 个元素”的语义
@@ -267,6 +271,7 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
     }
 
     /// 尝试推送元素
+    /// Attempts to push an element
     /// element
     pub fn try_push(&self, item: T) -> Result<(), T> {
         let tail = self.tail.load(Ordering::Relaxed);
@@ -286,6 +291,7 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
     }
 
     /// 尝试弹出元素
+    /// Attempts to pop an element
     /// element
     pub fn try_pop(&self) -> Option<T> {
         let head = self.head.load(Ordering::Relaxed);
@@ -311,12 +317,14 @@ impl<T: Default + Clone> LockFreeRingBuffer<T> {
     }
 
     /// 检查是否为空
+    /// Checks if empty
     /// as
     pub fn is_empty(&self) -> bool {
         self.head.load(Ordering::Relaxed) == self.tail.load(Ordering::Relaxed)
     }
 
     /// 检查是否已满
+    /// Checks是否已满
     pub fn is_full(&self) -> bool {
         let next_tail = (self.tail.load(Ordering::Relaxed) + 1) % self.size;
         next_tail == self.head.load(Ordering::Relaxed)
@@ -338,6 +346,7 @@ struct StackNode<T> {
 
 impl<T> LockFreeStack<T> {
     /// 创建新的无锁栈
+    /// Creates新的无锁栈
     /// lock-free stack
     pub fn new(capacity: usize) -> Self {
         let mut nodes = Vec::with_capacity(capacity);
@@ -356,8 +365,10 @@ impl<T> LockFreeStack<T> {
     }
 
     /// 推送元素
+    /// Pushes元素
     /// element
     /// 推送element
+    /// Pusheselement
     pub fn push(&self, item: T) -> Result<(), T> {
         let node_idx = self.allocate_node()?;
 
@@ -388,8 +399,10 @@ impl<T> LockFreeStack<T> {
     }
 
     /// 弹出元素
+    /// Pops元素
     /// element
     /// 弹出element
+    /// Popselement
     pub fn pop(&self) -> Option<T> {
         loop {
             let current_head = self.head.load(Ordering::Acquire);

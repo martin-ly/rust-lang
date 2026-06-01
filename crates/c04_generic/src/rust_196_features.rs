@@ -34,6 +34,7 @@ impl<T: Send + Sync> GenericLazyCache<T> {
     }
 
     /// 获取缓存值
+    /// Gets缓存值
     pub fn get(&self) -> &T {
         &self.cache
     }
@@ -98,6 +99,7 @@ where
 // ==================== 演示函数 ====================
 
 /// 演示 Rust 1.96 泛型特性
+/// Demonstrates Rust 1.96 泛型特性
 /// demonstration Rust 1.96 generic feature
 pub fn demonstrate_rust_196_features() {
     println!("\n========================================");
@@ -131,6 +133,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取特性信息
+/// Gets特性信息
 /// feature
 pub fn get_rust_196_generic_info() -> String {
     "Rust 1.96.0 泛型特性:\n\

@@ -6,6 +6,7 @@ use tokio::time::sleep;
 //use tracing::{info, warn, error, debug};
 
 /// 综合演示配置
+/// synthesize demonstration configuration
 /// synthesize demonstration
 #[derive(Debug, Clone)]
 pub struct ComprehensiveDemoConfig {
@@ -88,6 +89,7 @@ async fn run_basic_demo() -> Result<()> {
 }
 
 /// 高级演示
+/// high demonstration
 /// demonstration
 /// 高级Demonstration of
 async fn run_advanced_demo() -> Result<()> {

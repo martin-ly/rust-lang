@@ -1,11 +1,14 @@
 //! Rust 1.90 完整特性实现模块 (历史版本)
 //! Rust 1.90 complete feature module (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - 异步闭包 (async closures)
 //! - 改进 async fn trait
+//! - improve async fn trait
 //! - 异步生成器 (async generators)
 //! - Polonius 借用检查器改进
 //! - Polonius borrowing
@@ -185,6 +188,7 @@ impl TupleCollectionDemo {
     }
 
     /// 简单的素数检查
+    /// simpleprime numbercheck
     /// simple
     fn is_prime(&self, n: i32) -> bool {
         if n < 2 {
@@ -200,6 +204,7 @@ impl TupleCollectionDemo {
 }
 
 /// Rust 1.90 改进 async fn trait Demonstration of
+/// Rust 1.90 improve async fn trait Demonstration of
 /// 这里使用模拟实现来演示概念
 /// demonstration concept
 /// 这里Use模拟Implementation of来Demonstration ofconcept
@@ -209,6 +214,7 @@ pub trait AsyncProcessor {
     fn process(&self, data: Vec<u8>) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<Vec<u8>>> + Send>>;
 
     /// 异步验证数据
+    /// asynchronousverificationdata
     /// async
     fn validate(&self, input: String) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<bool>> + Send>>;
 
@@ -367,6 +373,7 @@ pub struct AsyncProcessorManager {
 }
 
 /// 处理器包装器，用于在并发环境中使用
+/// Processes器包装器，用于在并发环境中使用
 /// ，in concurrency environment in
 #[allow(dead_code)]
 pub struct ProcessorWrapper {
@@ -493,6 +500,7 @@ impl DatabaseConnection {
 
 impl CompleteAsyncResource {
     /// 获取资源 ID
+    /// Gets资源 ID
     /// ID
     /// Get资源 ID
     pub fn get_id(&self) -> &str {
@@ -503,6 +511,7 @@ impl CompleteAsyncResource {
     }
 
     /// 获取资源类型
+    /// Gets资源类型
     /// type
     /// Get资源type
     pub fn get_type(&self) -> &str {

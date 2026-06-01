@@ -5,6 +5,7 @@
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - const 上下文增强（WASM 配置计算）
+//! - const on under （WASM configuration ）
 //! - const on under （WASM ）
 //! - 新稳定 API（WASM 数据Handle）
 //! - JIT 编译器优化（WASM 性能提升）
@@ -26,6 +27,7 @@ use std::ops::ControlFlow;
 
 pub mod const_wasm_config {
     /// WASM 配置系统
+    /// WASM configuration system
     /// WASM system
     pub struct WasmConfigSystem;
 
@@ -56,8 +58,10 @@ pub mod const_wasm_config {
     }
 
     /// WASM 导出配置
+    /// WASM configuration
     /// WASM
     /// 使用 const 上下文计算 WASM 导出配置
+    /// const on under WASM configuration
     /// const on under WASM
     pub struct WasmExportConfig;
 
@@ -152,9 +156,11 @@ pub mod wasm_new_apis {
 /// Rust 1.91 JIT 编译器optimizationin WASM inapplication
 pub mod wasm_jit_optimizations {
     /// 处理 WASM 数据
+    /// WASM data
     /// WASM
     /// Handle WASM 数据
     /// Rust 1.91 JIT 优化：迭代器链式操作性能提升约 15-25%
+    /// Rust 1.91 JIT optimization ：operation performance 15-25%
     /// Rust 1.91 JIT optimization ：performance 15-25%
     pub fn process_wasm_data(data: &[u8]) -> Vec<u8> {
         data.iter()
@@ -168,6 +174,7 @@ pub mod wasm_jit_optimizations {
     /// WASM
     /// Calculate WASM 统计信息
     /// Rust 1.91 JIT 优化：简单求和操作性能提升约 10-15%
+    /// Rust 1.91 JIT optimization ：simple and operation performance 10-15%
     /// Rust 1.91 JIT optimization ：simple and performance 10-15%
     pub fn calculate_wasm_stats(sizes: &[usize]) -> (usize, usize, usize) {
         let sum: usize = sizes.iter().sum();
@@ -178,9 +185,11 @@ pub mod wasm_jit_optimizations {
     }
 
     /// 过滤和转换 WASM 数据
+    /// and conversion WASM data
     /// and conversion WASM
     /// Filterandconversion WASM 数据
     /// Rust 1.91 JIT 优化：复杂链式操作性能提升约 20-25%
+    /// Rust 1.91 JIT optimization ：complex operation performance 20-25%
     /// Rust 1.91 JIT optimization ：complex performance 20-25%
     pub fn filter_and_transform_wasm_data(data: &[u8]) -> Vec<u8> {
         data.iter()
@@ -226,6 +235,7 @@ pub mod wasm_memory_optimizations {
     }
 
     /// 处理 WASM 数据
+    /// WASM data
     /// WASM
     /// Handle WASM 数据
     pub fn process_wasm_data(data: &str) -> Vec<String> {
@@ -266,6 +276,7 @@ pub mod wasm_std_new_apis {
 
     /// Vec::try_reserve_exact 示例
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
+    /// Rust 1.91 ：，may failure
     /// Rust 1.91 ：，may
     pub fn allocate_wasm_buffer(size: usize) -> Result<Vec<u8>, std::collections::TryReserveError> {
         let mut vec = Vec::new();
@@ -330,6 +341,7 @@ pub mod comprehensive_wasm_examples {
     }
 
     /// 高性能 WASM 数据处理管道
+    /// high performance WASM data pipe
     /// performance WASM pipe
     /// 高performance WASM 数据Handlepipe
     /// 利用 JIT 优化和内存分配改进
@@ -345,6 +357,7 @@ pub mod comprehensive_wasm_examples {
     }
 
     /// 配置文件解析示例
+    /// configuration example
     /// example
     /// Use新 API Parse WASM Configure
     pub fn parse_wasm_config(config_text: &str) -> Vec<String> {
@@ -482,6 +495,7 @@ pub mod wasm_bindgen_optimizations {
         pub const TARGET_REF: &str = Self::DEFAULT_TARGET;
 
         /// 创建默认配置
+        /// configuration
         #[allow(clippy::should_implement_trait)]
         pub fn default() -> Self {
             Self {
@@ -501,6 +515,7 @@ pub mod wasm_bindgen_optimizations {
     }
 
     /// 演示 wasm-bindgen 配置优化
+    /// demonstration wasm-bindgen configuration optimization
     /// demonstration wasm-bindgen optimization
     pub fn demonstrate_wasm_bindgen_config() {
         println!("\n=== wasm-bindgen 配置优化演示 ===");
@@ -529,9 +544,11 @@ pub mod wasm_binary_size_optimizations {
         /// （）
         pub code_size: usize,
         /// 数据段大小（字节）
+        /// data （）
         /// （）
         pub data_size: usize,
         /// 元数据大小（字节）
+        /// data （）
         /// （）
         pub metadata_size: usize,
     }

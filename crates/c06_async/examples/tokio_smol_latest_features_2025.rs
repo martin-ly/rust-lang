@@ -2,6 +2,7 @@
 //! # Tokio 1.41+ and Smol 2.0+ feature complete demonstration 2025
 //!
 //! ## 📚 本示例涵盖
+//! ## 📚 this example cover
 //! ## 📚 this example
 //! ### Tokio 1.41+ 最新特性
 //! ### Tokio 1.41+ feature
@@ -50,6 +51,7 @@ mod tokio_latest_features {
     /// - 并行爬虫 (动态发现新 URL)
     /// - parallelism ( URL)
     /// - 工作池 (动态任务队列)
+    /// - (task queue )
     /// - (task )
     /// - 批处理系统
     /// - system
@@ -193,6 +195,7 @@ mod tokio_latest_features {
     /// - Worker 线程利用率
     /// - Worker thread
     /// - I/O 事件统计
+    /// - I/O event
     /// - I/O
     /// ## 使用场景
     /// ## scenario
@@ -335,6 +338,7 @@ mod tokio_latest_features {
     /// ## 使用场景
     /// ## scenario
     /// - 请求超时
+    /// - timeout
     /// -
     /// - 优雅关闭
     /// -
@@ -434,6 +438,7 @@ mod smol_latest_features {
     /// - 快速任务创建
     /// - fast task
     /// - 单线程/多线程灵活配置
+    /// - thread /thread configuration
     /// - thread /thread
     /// ## 性能对比
     /// ## performance to
@@ -602,6 +607,7 @@ mod smol_latest_features {
     /// - !Send 任务支持
     /// -!Send task
     /// - 更低开销
+    /// - low overhead
     /// - overhead
     /// - 更低overhead
     /// ## 使用场景

@@ -42,6 +42,7 @@ pub mod quic_impl {
     }
 
     /// 接受连接并读取数据的示例骨架
+    /// and data example
     /// and example
     pub async fn handle_incoming(endpoint: Endpoint) -> Result<String, String> {
         if let Some(incoming) = endpoint.accept().await {
@@ -61,6 +62,7 @@ pub mod quic_impl {
     /// QUIC TLS 1.3 0-RTT：in ，
     /// QUIC Based on TLS 1.3 Supports 0-RTT：in已有会话票据时，
     /// 首个数据包即可携带应用数据，无需等待握手完成。
+    /// data packet application data ，etc. complete 。
     /// application ，etc. 。
     pub fn zero_rtt_concept() -> &'static str {
         "0-RTT 流程:\n\

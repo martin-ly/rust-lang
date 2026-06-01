@@ -2,6 +2,7 @@
 //! # Rust async performance optimization complete 2025
 //!
 //! ## 📚 本示例涵盖
+//! ## 📚 this example cover
 //! ## 📚 this example
 //! ### 🚀 一、内存优化 (Memory Optimization)
 //! ### 🚀 一、memoryoptimization (Memory Optimization)
@@ -27,9 +28,11 @@
 //! - 自动向量化优化
 //! - auto-vectorization optimization
 //! - 手动 SIMD 操作
+//! - SIMD operation
 //! - SIMD
 //! - portable_simd 使用
 //! - 批量数据处理
+//! - data
 //! -
 //! ### 📊 四、性能基准测试 (Benchmarking)
 //! ### 📊 、Performance benchmark (Benchmarking)
@@ -71,8 +74,10 @@ use tokio::sync::{Mutex, RwLock};
 /// - 50-80% time
 /// - 减少 50-80% Allocatetime
 /// - 降低内存碎片
+/// - low memory
 /// - memory
 /// - 提高缓存命中率
+/// - high cache hit
 /// - cache hit
 /// ## 适用场景
 /// ## scenario
@@ -82,6 +87,7 @@ use tokio::sync::{Mutex, RwLock};
 /// - 大对象的重用
 /// - to
 /// - 高性能网络服务
+/// - high performance network
 /// - performance network
 pub struct BufferPool {
     pool: Arc<Mutex<VecDeque<Vec<u8>>>>,
@@ -89,6 +95,7 @@ pub struct BufferPool {
     /// buffering -
     buffer_size: usize,
     /// 池容量 - 最大缓存数量
+    /// - maximum cache quantity
     /// - maximum quantity
     max_capacity: usize,
     /// 统计信息
@@ -177,6 +184,7 @@ impl BufferPool {
     /// - 如果池已满,缓冲区将被丢弃(自动回收)
     /// - if,buffering will is ()
     /// - 缓冲区会被清空以防止数据泄露
+    /// - buffering is data
     /// - buffering is
     pub async fn release(&self, mut buffer: Vec<u8>) {
         let mut pool = self.pool.lock().await;
@@ -255,15 +263,18 @@ impl Drop for PooledBuffer {
 /// ## 核心概念
 /// ## core concept
 /// - **零拷贝**: 数据不需要在内核态和用户态之间复制
+/// - ****: data in kernel and 's
 /// - ****: in kernel and 's
 /// - **引用计数**: 多个所有者共享同一块内存
 /// - **reference counting **: all memory
 /// - **reference counting**: 多个所有者共享同一块memory
 /// - **写时复制**: 只在修改时才复制数据
+/// - ****: in data
 /// - ****: in
 /// ## 使用 Bytes 库
 /// ## Bytes library
 /// - `split_to()`: O(1) 切分操作
+/// - `split_to()`: O(1) operation
 /// - `split_to()`: O(1)
 pub struct ZeroCopyBuffer {
     /// 内部缓冲区 - 使用 Bytes 实现零拷贝
@@ -297,6 +308,7 @@ impl ZeroCopyBuffer {
     /// - O(1) 时间复杂度
     /// - O(1) time complexity
     /// - 不复制底层数据
+    /// - data
     /// -
     /// - 只增加引用计数
     /// - reference counting
@@ -321,6 +333,7 @@ impl ZeroCopyBuffer {
     }
 
     /// 获取切片视图(零拷贝)
+    /// graph ()
     /// ()
     pub fn as_slice(&self) -> &[u8] {
         &self.data
@@ -339,6 +352,7 @@ impl ZeroCopyBuffer {
 /// ## 性能优势
 /// ## performance strength
 /// - 预分配容量减少重新分配
+/// - pre-allocate capacity
 /// -
 /// - 支持就地修改
 /// -
@@ -356,6 +370,7 @@ impl BytesBuilder {
     }
 
     /// 追加数据
+    /// data
     pub fn append(&mut self, data: &[u8]) {
         self.buffer.put_slice(data);
     }
@@ -391,8 +406,10 @@ impl BytesBuilder {
 // ============================================================================
 
 /// # SIMD 向量化数据处理
+/// # SIMD vectorization data
 /// # SIMD vectorization
 /// - 一条指令处理多个数据
+/// - data
 /// -
 /// - 利用 CPU 向量指令集 (SSE, AVX, NEON)
 /// - CPU (SSE, AVX, NEON)
@@ -409,6 +426,7 @@ pub struct SimdProcessor;
 
 impl SimdProcessor {
     /// # 标量加法 (Scalar Addition) - 基准实现
+    /// # addition (Scalar Addition) -
     /// # (Scalar Addition) -
     /// # 标量加法 (Scalar Addition) - 基准Implementation of
     /// 逐个元素相加,没有向量化
@@ -423,6 +441,7 @@ impl SimdProcessor {
     }
 
     /// # 向量化加法 (Vectorized Addition) - 优化版本
+    /// # vectorization addition (Vectorized Addition) - optimization this
     /// # vectorization (Vectorized Addition) - optimization this
     /// ## 编译器优化提示
     /// ## optimization hint
@@ -446,12 +465,15 @@ impl SimdProcessor {
     }
 
     /// # 批量数据处理 - 利用 SIMD 和缓存局部性
+    /// # data - SIMD and cache local
     /// # - SIMD and local
     /// ## 性能优化技巧
     /// ## performance optimization tip
     /// 1. 数据对齐 - 使用 16/32 字节对齐
+    /// 1. data to - 16/32 to
     /// 1. to - 16/32 to
     /// 1. 数据to齐 - Use 16/32 字节to齐
+    /// 1. data to - Use 16/32 to
     /// 1. to - Use 16/32 to
     /// 2. 批量处理 - 减少循环开销
     /// 2. - circulation overhead
@@ -489,6 +511,7 @@ impl SimdProcessor {
 }
 
 /// # 高性能哈希计算 - SIMD 优化
+/// # high performance - SIMD optimization
 /// # performance - SIMD optimization
 /// 使用 SIMD 加速哈希计算(简化示例)
 /// SIMD (example )

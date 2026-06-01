@@ -205,6 +205,7 @@ fn demo_loop_rare_condition() {
 // ==================== 示例 6: 配置解析 — 默认值 vs 自定义值 ====================
 
 /// 配置查找: 使用默认值是热路径，自定义值是冷路径
+/// configuration : ，definition
 /// : ，definition
 fn demo_config_lookup() {
     println!("\n--- cold_path: 配置解析优化 ---");

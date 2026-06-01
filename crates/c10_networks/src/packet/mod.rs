@@ -1,7 +1,9 @@
 //! 数据包处理模块
+//! data packet module
 //! module
 //! 数据包Handlemodule
 //! 包括数据包解析、序列化、缓冲管理等功能。
+//! data packet 、sequence 、buffering etc. functionality 。
 //! 、sequence 、buffering etc. functionality 。
 pub mod buffer;
 pub mod parser;
@@ -17,27 +19,34 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 
 /// 数据包类型
+/// data packet type
 /// type
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum PacketType {
     /// 原始字节数据包
+    /// data packet
     Raw,
     /// HTTP 数据包
+    /// HTTP data packet
     /// HTTP
     Http,
     WebSocket,
     /// TCP 数据包
+    /// TCP data packet
     /// TCP
     Tcp,
     /// UDP 数据包
+    /// UDP data packet
     /// UDP
     Udp,
     /// 自定义数据包
+    /// definition data packet
     /// definition
     Custom(String),
 }
 
 /// 数据包头部
+/// data packet
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PacketHeader {
     pub packet_type: PacketType,
@@ -49,6 +58,7 @@ pub struct PacketHeader {
 
 impl PacketHeader {
     /// 创建新的数据包头部
+    /// data packet
     pub fn new(packet_type: PacketType, length: u32) -> Self {
         Self {
             packet_type,
@@ -78,6 +88,7 @@ impl PacketHeader {
 }
 
 /// 数据包
+/// data packet
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Packet {
     pub header: PacketHeader,
@@ -86,6 +97,7 @@ pub struct Packet {
 
 impl Packet {
     /// 创建新的数据包
+    /// data packet
     pub fn new(packet_type: PacketType, payload: Bytes) -> Self {
         let length = payload.len() as u32;
         let header = PacketHeader::new(packet_type, length);
@@ -93,6 +105,7 @@ impl Packet {
     }
 
     /// 创建带序列号的数据包
+    /// sequence data packet
     /// sequence
     pub fn with_sequence(packet_type: PacketType, payload: Bytes, seq: u64) -> Self {
         let length = payload.len() as u32;
@@ -101,17 +114,20 @@ impl Packet {
     }
 
     /// 获取数据包总大小
+    /// data packet
     pub fn total_size(&self) -> usize {
         std::mem::size_of::<PacketHeader>() + self.payload.len()
     }
 
     /// 检查数据包是否为空
+    /// data packet as
     /// as
     pub fn is_empty(&self) -> bool {
         self.payload.is_empty()
     }
 
     /// 获取数据包类型
+    /// data packet type
     /// type
     /// Get数据包type
     pub fn packet_type(&self) -> &PacketType {
@@ -138,6 +154,7 @@ impl fmt::Display for Packet {
 }
 
 /// 数据包构建器
+/// data packet builder
 /// builder
 /// 数据包builder
 pub struct PacketBuilder {
@@ -149,6 +166,7 @@ pub struct PacketBuilder {
 
 impl PacketBuilder {
     /// 创建新的数据包构建器
+    /// data packet builder
     /// builder
     pub fn new(packet_type: PacketType) -> Self {
         Self {
@@ -160,6 +178,7 @@ impl PacketBuilder {
     }
 
     /// 添加数据到载荷
+    /// data to
     /// to
     pub fn add_data(&mut self, data: &[u8]) -> &mut Self {
         self.payload.extend_from_slice(data);
@@ -181,6 +200,7 @@ impl PacketBuilder {
     }
 
     /// 构建数据包
+    /// data packet
     pub fn build(self) -> Packet {
         let length = self.payload.len() as u32;
         let mut header = PacketHeader::new(self.packet_type, length).with_flags(self.flags);
@@ -197,6 +217,7 @@ impl PacketBuilder {
 }
 
 /// 数据包统计信息
+/// data packet
 #[derive(Debug, Clone, Default)]
 pub struct PacketStats {
     pub total_packets: u64,
@@ -215,6 +236,7 @@ impl PacketStats {
     }
 
     /// 添加数据包到统计
+    /// data packet to
     /// to
     pub fn add_packet(&mut self, packet: &Packet) {
         self.total_packets += 1;
@@ -241,12 +263,14 @@ impl PacketStats {
     }
 
     /// 获取指定类型的数据包数量
+    /// type data packet quantity
     /// type quantity
     pub fn packets_of_type(&self, packet_type: &PacketType) -> u64 {
         self.packets_by_type.get(packet_type).copied().unwrap_or(0)
     }
 
     /// 获取指定类型的数据包字节数
+    /// type data packet
     /// type
     pub fn bytes_of_type(&self, packet_type: &PacketType) -> u64 {
         self.bytes_by_type.get(packet_type).copied().unwrap_or(0)
@@ -254,6 +278,7 @@ impl PacketStats {
 }
 
 /// 数据包过滤器
+/// data packet
 pub struct PacketFilter {
     allowed_types: std::collections::HashSet<PacketType>,
     min_size: Option<usize>,
@@ -273,6 +298,7 @@ impl PacketFilter {
     }
 
     /// 允许指定的数据包类型
+    /// allow data packet type
     /// type
     pub fn allow_type(mut self, packet_type: PacketType) -> Self {
         self.allowed_types.insert(packet_type);
@@ -280,6 +306,7 @@ impl PacketFilter {
     }
 
     /// 设置最小数据包大小
+    /// minimum data packet
     /// minimum
     pub fn min_size(mut self, size: usize) -> Self {
         self.min_size = Some(size);
@@ -287,6 +314,7 @@ impl PacketFilter {
     }
 
     /// 设置最大数据包大小
+    /// maximum data packet
     /// maximum
     pub fn max_size(mut self, size: usize) -> Self {
         self.max_size = Some(size);
@@ -301,6 +329,7 @@ impl PacketFilter {
     }
 
     /// 检查数据包是否通过过滤器
+    /// data packet
     pub fn matches(&self, packet: &Packet) -> bool {
         // 检查类型
         if !self.allowed_types.is_empty() && !self.allowed_types.contains(packet.packet_type()) {

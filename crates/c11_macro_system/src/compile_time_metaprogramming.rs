@@ -1,6 +1,7 @@
 //! 编译时元编程（Compile-Time Metaprogramming）
 
 /// 常量元编程：利用 `const fn` 和 `const` 泛型在编译期完成计算
+/// constant ： `const fn` and `const` generic in complete
 /// constant ： `const fn` and `const` generic in
 /// 两者结合可以实现零运行时开销的元编程。
 /// can runtime overhead 。
@@ -35,6 +36,7 @@ impl ConstMetaprogramming {
     }
 
     /// 展示 `const fn` 计算数组长度
+    /// `const fn` array
     /// `const fn`
     pub const fn array_len_from_const_fn() -> usize {
         // 在编译期计算长度
@@ -446,6 +448,7 @@ macro_rules! my_muncher {
     }
 
     /// 返回递归宏模式概念文档
+    /// recursive concept
     /// concept
     pub fn recursive_macro_pattern_concept() -> &'static str {
         r#"

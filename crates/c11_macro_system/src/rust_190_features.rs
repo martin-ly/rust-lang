@@ -36,6 +36,7 @@
 /// # or verbose
 ///
 /// 无需修改配置，工具链自动处理。
+/// configuration ，toolchain 。
 /// ，toolchain 。
 /// 若需显式指定链接器，可在 `.cargo/config.toml` 中设置：
 /// ，in `.cargo/config.toml` in ：

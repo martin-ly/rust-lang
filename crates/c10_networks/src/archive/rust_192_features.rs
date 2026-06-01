@@ -48,6 +48,7 @@ impl NetworkReceiveBuffer {
     }
 
     /// 添加数据到缓冲区
+    /// data to buffering
     /// to buffering
     pub fn push(&mut self, data: u8) {
         if self.buffer.len() >= self.capacity {
@@ -57,12 +58,14 @@ impl NetworkReceiveBuffer {
     }
 
     /// 从缓冲区读取数据
+    /// from buffering data
     /// from buffering
     pub fn pop(&mut self) -> Option<u8> {
         self.buffer.pop_front()
     }
 
     /// 获取缓冲区中的数据
+    /// buffering in data
     /// buffering in
     pub fn data(&self) -> &[u8] {
         // 将 VecDeque 转换为切片（简化示例）
@@ -82,6 +85,7 @@ impl NetworkReceiveBuffer {
 }
 
 /// 网络数据包队列
+/// network data packet queue
 /// network
 pub struct NetworkPacketQueue {
     packets: VecDeque<NetworkPacket>,
@@ -102,6 +106,7 @@ impl NetworkPacketQueue {
     }
 
     /// 轮转数据包队列
+    /// data packet queue
     pub fn rotate(&mut self, positions: usize) {
         if self.packets.is_empty() {
             return;
@@ -140,6 +145,7 @@ pub fn calculate_packet_fragments(total_size: usize, fragment_size: NonZeroUsize
 }
 
 /// 使用 div_ceil 实现网络连接池
+/// div_ceil network connection pool
 /// div_ceil network
 pub struct NetworkConnectionPool {
     total_connections: usize,
@@ -155,6 +161,7 @@ impl NetworkConnectionPool {
     }
 
     /// 计算可以创建的连接池数量
+    /// can connection pool quantity
     /// can quantity
     pub fn pool_count(&self) -> usize {
         if self.total_connections == 0 {
@@ -198,6 +205,7 @@ impl NetworkBandwidthAllocator {
 // ==================== 3. 迭代器方法特化在网络数据处理中的应用 ====================
 
 /// 使用特化的迭代器比较方法比较网络数据包列表
+/// method network data packet
 /// method network
 pub fn compare_packet_lists(list1: &[NetworkPacket], list2: &[NetworkPacket]) -> bool {
     // Rust 1.92.0: 特化的迭代器比较方法，性能更好
@@ -205,6 +213,7 @@ pub fn compare_packet_lists(list1: &[NetworkPacket], list2: &[NetworkPacket]) ->
 }
 
 /// 使用迭代器特化检查网络数据包序列
+/// network data packet sequence
 /// network sequence
 pub fn check_packet_sequence(packets: &[NetworkPacket], expected_ids: &[u64]) -> bool {
     let actual_ids: Vec<u64> = packets.iter().map(|p| p.id).collect();
@@ -213,6 +222,7 @@ pub fn check_packet_sequence(packets: &[NetworkPacket], expected_ids: &[u64]) ->
 }
 
 /// 使用迭代器特化验证网络数据完整性
+/// network data complete
 /// network complete
 pub fn verify_network_data(data1: &[u8], data2: &[u8]) -> bool {
     // Rust 1.92.0: 特化的迭代器比较，性能更好

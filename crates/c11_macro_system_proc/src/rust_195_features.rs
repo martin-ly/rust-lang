@@ -16,6 +16,7 @@ impl RealRust195Features {
     }
 
     /// 使用 `c"proc_macro"` 表示过程宏名称
+    /// `c"proc_macro"` represent macro name
     /// `c"proc_macro"` represent
     pub fn c_str_for_proc_macro() -> &'static CStr {
         c"proc_macro"

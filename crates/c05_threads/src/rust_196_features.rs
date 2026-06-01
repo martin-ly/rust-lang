@@ -1,6 +1,7 @@
 //! # Rust 1.96.0 稳定特性演示模块
 //! # Rust 1.96.0 feature demonstration module
 //! # Rust 1.96.0 稳定featuredemonstration module
+//! # Rust 1.96.0 stablefeaturedemonstration module
 //! - `std::assert_matches!` — 模式匹配断言，用于线程 `Result` 测试
 //! - `std::assert_matches!` — ，thread `Result`
 //! - `std::assert_matches!` — 模式匹配断言，Used forthread `Result` Test for
@@ -61,6 +62,7 @@ impl ThreadPoolRangeManager {
     }
 
     /// 检查工作线程是否处于活跃范围
+    /// Checks工作线程是否处于活跃范围
     /// worker thread scope
     pub fn is_worker_active(&self, worker_id: usize) -> bool {
         // `core::range::Range` 目前没有 `contains`，需手动判断
@@ -68,12 +70,14 @@ impl ThreadPoolRangeManager {
     }
 
     /// 获取所有范围（`Copy` 语义保证可以安全复制）
+    /// Gets所有范围（`Copy` 语义保证可以安全复制）
     /// all scope （`Copy` can ）
     pub fn all_ranges(&self) -> &[core::range::Range<usize>] {
         &self.worker_ranges
     }
 
     /// 计算所有范围覆盖的总任务数（验证无遗漏）
+    /// Computes所有范围覆盖的总任务数（验证无遗漏）
     /// all scope task （）
     pub fn total_covered_tasks(&self) -> usize {
         self.worker_ranges.iter().map(|r| r.end - r.start).sum()
@@ -102,6 +106,7 @@ impl ThreadSafeConfig {
     }
 
     /// 获取当前配置摘要
+    /// Gets当前配置摘要
     /// when before summary
     pub fn summary(&self) -> String {
         format!(
@@ -131,6 +136,7 @@ impl ThreadPanicHandler {
     }
 
     /// 验证：即使闭包 panic，也能被安全捕获。
+    /// Validates：即使闭包 panic，也能被安全捕获。
     /// ： panic，is 。
     /// Verify：即使closure panic，也能is安全捕获。
     pub fn demo_panic_capture() -> &'static str {
@@ -211,6 +217,7 @@ pub fn demonstrate_rust_196_features() {
 }
 
 /// 获取特性信息
+/// Gets特性信息
 /// feature
 pub fn get_rust_196_thread_info() -> String {
     "Rust 1.96.0 线程特性:\n- core::range::Range { start, end } — Copy 语义，可复用的线程池范围\n- \

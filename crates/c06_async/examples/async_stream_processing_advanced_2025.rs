@@ -12,6 +12,7 @@ use tokio::time::sleep;
 use tracing::{debug, info, warn};
 
 /// 2025年高级异步流处理演示
+/// 2025high async stream demonstration
 /// 2025async stream demonstration
 /// 展示最新的异步流处理技术和模式
 /// async stream technique and
@@ -639,6 +640,7 @@ impl AsyncStreamMonitor {
 }
 
 /// 演示高级异步流处理
+/// demonstration high async stream
 /// demonstration async stream
 #[tokio::main]
 async fn main() -> Result<()> {

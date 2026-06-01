@@ -1,4 +1,5 @@
 //! 高级用法示例集合
+//! high usage example set
 //! example set
 //! 高级用法Example ofset
 //! This file contains various advanced Rust usage examples, demonstrating practical application scenarios.
@@ -6,6 +7,7 @@ use std::sync::Arc;
 use std::thread;
 
 /// 高级所有权模式示例
+/// high ownership example
 /// ownership example
 pub fn advanced_ownership_example() {
     println!("📦 高级所有权模式示例");
@@ -26,6 +28,7 @@ pub fn advanced_ownership_example() {
 }
 
 /// 高级并发模式示例
+/// high concurrency example
 /// concurrency example
 pub fn advanced_concurrency_example() {
     println!("\n⚡ 高级并发模式示例");
@@ -57,6 +60,7 @@ pub fn advanced_concurrency_example() {
 }
 
 /// 高级错误处理示例
+/// high error handling example
 /// error handling example
 pub fn advanced_error_handling_example() {
     println!("\n🛡️ 高级错误处理示例");
@@ -88,6 +92,7 @@ pub fn advanced_error_handling_example() {
 }
 
 /// 高级类型系统示例
+/// high type system example
 /// type system example
 pub fn advanced_type_system_example() {
     println!("\n🔧 高级类型系统示例");
@@ -121,6 +126,7 @@ pub fn advanced_type_system_example() {
 }
 
 /// 高级性能优化示例
+/// high performance optimization example
 /// performance optimization example
 pub fn advanced_performance_example() {
     println!("\n⚡ 高级性能优化示例");

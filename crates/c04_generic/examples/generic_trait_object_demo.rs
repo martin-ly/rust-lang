@@ -19,6 +19,7 @@ trait Shape {
 }
 
 /// 圆形
+/// circle
 struct Circle {
     radius: f64,
 }
@@ -34,6 +35,7 @@ impl Shape for Circle {
 }
 
 /// 矩形
+/// rectangle
 struct Rectangle {
     width: f64,
     height: f64,

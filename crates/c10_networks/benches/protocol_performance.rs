@@ -224,6 +224,7 @@ fn bench_tcp_protocol(c: &mut Criterion) {
 }
 
 /// 套接字配置性能测试
+/// socket configuration performance test
 /// socket performance test
 fn bench_socket_configuration(c: &mut Criterion) {
     let mut group = c.benchmark_group("socket_configuration");

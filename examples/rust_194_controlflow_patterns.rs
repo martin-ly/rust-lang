@@ -7,6 +7,7 @@
 use std::ops::ControlFlow;
 
 /// 连接池健康检查
+/// connection pool health check
 /// health check
 /// 找到第一个可用连接即停止迭代。
 /// to first 。
@@ -99,6 +100,7 @@ impl Connection {
 
 /// 批处理控制器
 /// 支持超时、错误阈值和提前终止。
+/// timeout 、and before 。
 /// 、and before 。
 pub struct BatchProcessor<T> {
     items: Vec<T>,
@@ -263,6 +265,7 @@ pub fn validate_all<T, E>(
 }
 
 /// 分页数据获取
+/// data
 pub async fn fetch_paginated_data<F, Fut, T>(
     mut fetch_page: F,
     max_items: usize,

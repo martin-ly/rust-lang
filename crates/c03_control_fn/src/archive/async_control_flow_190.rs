@@ -47,6 +47,7 @@ pub struct AsyncStateMachine190 {
 
 impl AsyncStateMachine190 {
     /// 创建新的异步状态机
+    /// Creates新的异步状态机
     /// async state machine
     pub fn new(max_concurrent: usize) -> Self {
         Self {
@@ -73,6 +74,7 @@ impl AsyncStateMachine190 {
     }
 
     /// 检查状态转换是否合法
+    /// Checks状态转换是否合法
     /// state conversion
     fn is_valid_transition(&self, from: &AsyncState, to: &AsyncState) -> bool {
         matches!((from, to),
@@ -110,12 +112,14 @@ impl AsyncStateMachine190 {
     }
 
     /// 获取当前状态
+    /// Gets当前状态
     /// when before state
     pub async fn get_state(&self) -> AsyncState {
         self.state.read().await.clone()
     }
 
     /// 获取数据快照
+    /// Gets数据快照
     pub async fn get_data_snapshot(&self) -> HashMap<String, String> {
         self.data.lock().await.clone()
     }
@@ -212,6 +216,7 @@ impl Default for AsyncResourceManager {
 
 impl AsyncResourceManager {
     /// 创建新的异步资源管理器
+    /// Creates新的异步资源管理器
     /// async
     pub fn new() -> Self {
         Self {
@@ -229,6 +234,7 @@ impl AsyncResourceManager {
     }
 
     /// 获取资源
+    /// Gets资源
     pub async fn get_resource(&self, id: &str) -> Option<String> {
         let resources = self.resources.lock().await;
         resources.get(id).map(|r| r.get_id().to_string())
@@ -270,6 +276,7 @@ pub struct AsyncErrorHandler190 {
 
 impl AsyncErrorHandler190 {
     /// 创建新的异步错误处理器
+    /// Creates新的异步错误处理器
     /// async error handling
     pub fn new(max_retries: u32) -> Self {
         Self {
@@ -333,6 +340,7 @@ pub struct AsyncConcurrencyController {
 #[allow(unused)]
 impl AsyncConcurrencyController {
     /// 创建新的异步并发控制器
+    /// Creates新的异步并发控制器
     /// async concurrency
     pub fn new(max_concurrent: usize) -> Self {
         Self {
@@ -373,6 +381,7 @@ impl AsyncConcurrencyController {
     }
 
     /// 等待任务完成
+    /// Waits for任务完成
     /// etc. task
     pub async fn wait_for_task(&self, task_id: &str) -> Result<(), String> {
         // 简化版本：直接返回成功（因为任务已经同步执行完成）
@@ -381,6 +390,7 @@ impl AsyncConcurrencyController {
     }
 
     /// 获取活跃任务数量
+    /// Gets活跃任务数量
     /// task quantity
     /// Get活跃taskquantity
     pub async fn get_active_task_count(&self) -> usize {
@@ -388,6 +398,7 @@ impl AsyncConcurrencyController {
     }
 
     /// 等待所有任务完成
+    /// Waits for所有任务完成
     /// etc. all task
     pub async fn wait_for_all_tasks(&self) -> Result<(), String> {
         // 简化版本：直接返回成功（因为任务已经同步执行完成）

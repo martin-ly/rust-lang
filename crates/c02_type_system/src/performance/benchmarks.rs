@@ -7,6 +7,7 @@ use std::collections::HashMap;
 use std::time::{Duration, Instant};
 
 /// 性能测试结果
+/// Performance tests结果
 /// performance test result
 #[derive(Debug, Clone)]
 pub struct BenchmarkResult {
@@ -111,6 +112,7 @@ impl PerformanceAnalysis {
 }
 
 /// 基准测试运行器
+/// Benchmarks运行器
 /// benchmark Run
 pub struct BenchmarkRunner {
     iterations: u64,
@@ -270,6 +272,7 @@ pub mod rust_189_benchmarks {
 }
 
 /// 测试数据结构
+/// Tests数据结构
 /// data structure
 struct ConstGenericArray<T, const N: usize> {
     data: [T; N],
@@ -337,6 +340,7 @@ fn runtime_fibonacci(n: u32) -> u32 {
 }
 
 /// 编译时常量
+/// Compile-time constant
 /// compile-time constant
 const COMPILE_TIME_FIB_10: u32 = 55;
 
@@ -398,6 +402,7 @@ pub fn run_all_benchmarks() -> PerformanceAnalysis {
 }
 
 /// 测试模块
+/// Tests模块
 /// module
 #[cfg(test)]
 mod tests {

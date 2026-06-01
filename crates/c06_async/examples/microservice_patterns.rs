@@ -31,6 +31,7 @@ pub struct ServiceInstance {
 }
 
 /// 熔断器状态
+/// circuit breaker state
 /// state
 #[derive(Debug, Clone, PartialEq)]
 pub enum CircuitState {
@@ -40,6 +41,7 @@ pub enum CircuitState {
 }
 
 /// 熔断器
+/// circuit breaker
 #[derive(Debug)]
 pub struct CircuitBreaker {
     state: Arc<RwLock<CircuitState>>,
@@ -327,6 +329,7 @@ impl ServiceDiscovery {
 }
 
 /// 重试策略
+/// retry strategy
 /// strategy
 pub struct RetryPolicy {
     max_retries: u32,

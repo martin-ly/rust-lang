@@ -1,6 +1,7 @@
 //! 宏设计模式
 //! design
 //! 常见的宏设计模式和最佳实践。
+//! design and best practice 。
 //! design and 。
 
 #[macro_export]

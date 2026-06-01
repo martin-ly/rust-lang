@@ -3,6 +3,7 @@
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features_demo.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features_demo.rs`
 //! 1. const 上下文增强（WASM 配置计算）
+//! 1. const on under （WASM configuration ）
 //! 1. const on under （WASM ）
 //! 2. 新稳定 API（WASM 数据Handle）
 //! 3. JIT 编译器优化（WASM 性能提升）

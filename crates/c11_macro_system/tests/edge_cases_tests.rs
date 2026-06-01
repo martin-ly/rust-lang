@@ -154,6 +154,7 @@ fn test_macro_performance_boundaries() {
 }
 
 /// 测试宏递归边界情况
+/// recursive edge situation
 /// edge situation
 #[test]
 fn test_macro_recursion_boundaries() {

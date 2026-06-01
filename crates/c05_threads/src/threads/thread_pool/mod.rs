@@ -29,6 +29,7 @@ pub struct SimpleThreadPool {
 
 impl SimpleThreadPool {
     /// 创建新的线程池
+    /// Creates新的线程池
     /// thread pool
     pub fn new(size: usize) -> Self {
         assert!(size > 0);
@@ -74,6 +75,7 @@ impl SimpleThreadPool {
     }
 
     /// 尝试执行任务（发送失败时返回 false）
+    /// Attempts to执行任务（发送失败时返回 false）
     /// task （ false）
     pub fn try_execute<F>(&self, f: F) -> bool
     where
@@ -168,6 +170,7 @@ impl Default for ThreadPoolConfig {
 
 impl ConfigurableThreadPool {
     /// 创建新的可配置线程池
+    /// Creates新的可配置线程池
     /// thread pool
     pub fn new(config: ThreadPoolConfig) -> Self {
         assert!(config.min_threads > 0);
@@ -208,6 +211,7 @@ impl ConfigurableThreadPool {
     }
 
     /// 尝试执行任务（队列关闭或满时返回 false）
+    /// Attempts to执行任务（队列关闭或满时返回 false）
     /// task （or false）
     pub fn try_execute<F>(&self, f: F) -> bool
     where
@@ -262,12 +266,14 @@ impl ConfigurableThreadPool {
     }
 
     /// 获取当前线程数
+    /// Gets当前线程数
     /// when before thread
     pub fn thread_count(&self) -> usize {
         self.workers.len()
     }
 
     /// 获取配置信息
+    /// Gets配置信息
     pub fn config(&self) -> &ThreadPoolConfig {
         &self.config
     }

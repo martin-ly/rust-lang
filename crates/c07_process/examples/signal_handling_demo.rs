@@ -1,6 +1,7 @@
 //! 信号处理示例
 //! example
 //! 本示例展示进程信号处理的概念和最佳实践：
+//! this example process concept and best practice ：
 //! this example process concept and ：
 //! - 信号类型说明
 //! - type explain

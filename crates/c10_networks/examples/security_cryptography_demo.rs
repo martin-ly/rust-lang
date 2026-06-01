@@ -3,6 +3,7 @@
 //! 本示例使用 [`ring`](https://docs.rs/ring) 库演示现代密码学原语，
 //! this example [`ring`](https://docs.rs/ring) library demonstration ，
 //! 覆盖哈希、HMAC、AEAD 加密和数字签名。
+//! 、HMAC、AEAD and number 。
 //! 、HMAC、AEAD and 。
 //! ## 运行
 //! ## Run
@@ -133,6 +134,7 @@ fn demo_03_aead_encryption() {
 }
 
 /// ## 演示 4: 数字签名 (Ed25519)
+/// ## demonstration 4: number (Ed25519)
 /// ## demonstration 4: (Ed25519)
 /// ## Demonstration of 4: 数字签名 (Ed25519)
 fn demo_04_digital_signature() {

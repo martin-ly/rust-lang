@@ -1,4 +1,5 @@
 //! 数据包缓冲区管理
+//! data packet buffering
 //! buffering
 use crate::error::{NetworkError, NetworkResult};
 #[cfg(test)]
@@ -29,6 +30,7 @@ impl From<BufferError> for NetworkError {
 }
 
 /// 数据包缓冲区配置
+/// data packet buffering configuration
 /// buffering
 #[derive(Debug, Clone)]
 pub struct BufferConfig {
@@ -52,6 +54,7 @@ impl Default for BufferConfig {
 }
 
 /// 数据包缓冲区
+/// data packet buffering
 /// buffering
 pub struct PacketBuffer {
     config: BufferConfig,
@@ -63,6 +66,7 @@ pub struct PacketBuffer {
 
 impl PacketBuffer {
     /// 创建新的数据包缓冲区
+    /// data packet buffering
     /// buffering
     pub fn new(config: BufferConfig) -> Self {
         Self {
@@ -75,6 +79,7 @@ impl PacketBuffer {
     }
 
     /// 添加数据包到缓冲区
+    /// data packet to buffering
     /// to buffering
     pub fn push(&mut self, packet: super::Packet) -> Result<(), BufferError> {
         let packet_size = packet.total_size();
@@ -100,6 +105,7 @@ impl PacketBuffer {
     }
 
     /// 从缓冲区取出数据包
+    /// from buffering data packet
     /// from buffering
     pub fn pop(&mut self) -> Option<super::Packet> {
         if let Some(packet) = self.packets.pop_front() {
@@ -111,6 +117,7 @@ impl PacketBuffer {
     }
 
     /// 查看下一个数据包但不移除
+    /// under data packet but
     /// under but
     pub fn peek(&self) -> Option<&super::Packet> {
         self.packets.front()
@@ -129,6 +136,7 @@ impl PacketBuffer {
     }
 
     /// 获取缓冲区中的数据包数量
+    /// buffering in data packet quantity
     /// buffering in quantity
     pub fn len(&self) -> usize {
         self.packets.len()
@@ -173,6 +181,7 @@ impl PacketBuffer {
     }
 
     /// 等待数据包到达
+    /// etc. data packet to
     /// etc. to
     pub async fn wait_for_packet(&mut self) -> NetworkResult<super::Packet> {
         let timeout_duration = self.config.timeout.unwrap_or(Duration::from_secs(30));
@@ -189,6 +198,7 @@ impl PacketBuffer {
     }
 
     /// 批量获取数据包
+    /// data packet
     pub fn drain(&mut self, max_count: usize) -> Vec<super::Packet> {
         let mut result = Vec::new();
         let count = std::cmp::min(max_count, self.packets.len());
@@ -203,6 +213,7 @@ impl PacketBuffer {
     }
 
     /// 按类型过滤数据包
+    /// type data packet
     /// type
     pub fn filter_by_type(&mut self, packet_type: &super::PacketType) -> Vec<super::Packet> {
         let mut result = Vec::new();
@@ -264,6 +275,7 @@ impl RingBuffer {
     }
 
     /// 写入数据到缓冲区
+    /// data to buffering
     /// to buffering
     pub fn write(&mut self, data: &[u8]) -> Result<usize, BufferError> {
         if data.is_empty() {
@@ -287,6 +299,7 @@ impl RingBuffer {
     }
 
     /// 从缓冲区读取数据
+    /// from buffering data
     /// from buffering
     pub fn read(&mut self, buffer: &mut [u8]) -> Result<usize, BufferError> {
         if buffer.is_empty() || self.size == 0 {

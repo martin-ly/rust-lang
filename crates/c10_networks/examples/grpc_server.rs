@@ -9,6 +9,7 @@
 #![allow(clippy::default_constructed_unit_structs)]
 
 //! ### 思维导图
+//! ### graph
 //! ###
 //! ├── 服务定义
 //! ├── definition

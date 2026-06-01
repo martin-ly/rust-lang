@@ -58,6 +58,7 @@ pub struct ApiBreakageConcepts;
 /// ```
 ///
 /// ## 基本用法
+/// ## this usage
 /// ## this
 /// # 检查当前 crate
 /// # when before crate
@@ -102,6 +103,7 @@ pub struct CargoSemverChecksTool;
 ///     Disconnected,
 ///
 /// 下游必须写 `_ => {}` 分支，从而允许未来扩展。
+/// under must `_ => {}` ，thereby allow future 。
 /// under must `_ => {}` ，thereby future 。
 #[non_exhaustive]
 pub enum NetworkEvent {
@@ -138,6 +140,7 @@ pub trait ProtocolHandler {
 // ---------------------------------------------------------------------------
 
 /// **问题**: 直接修改 `pub type` 或结构体字段类型会导致下游编译失败。
+/// **problem **: `pub type` or struct field type under failure 。
 /// **problem **: `pub type` or struct field type under 。
 /// **解决方案**:
 /// **solution **:
@@ -273,6 +276,7 @@ impl From<LegacyConfig> for NewConfig {
 /// 2. **发布前检查**: 与上一个发布的版本对比。
 /// 2. **before **: and on this to 。
 /// 3. **允许失败模式**: 对于实验性 crate，可设置 `continue-on-error: true`。
+/// 3. **allow failure **: to crate， `continue-on-error: true`。
 /// 3. ****: to crate， `continue-on-error: true`。
 /// ```mermaid
 /// flowchart LR

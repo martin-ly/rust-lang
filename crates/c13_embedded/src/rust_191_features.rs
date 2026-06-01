@@ -19,6 +19,7 @@
 /// # C 风格变参函数（C Variadic Functions）
 /// # C 风格变参function（C Variadic Functions）
 /// 使用 C ABI 与 C 的 `...` 语法兼容。
+/// C ABI and C `...` syntax 。
 /// C ABI and C `...` 。
 /// Use C ABI and C `...` 语法兼容。
 /// **注意**: 截至 Rust 1.95.0 stable，`c_variadic` 特性尚未完全稳定。

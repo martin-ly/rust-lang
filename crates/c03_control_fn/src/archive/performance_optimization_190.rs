@@ -7,6 +7,7 @@
 //! - 改进的内存布局优化
 //! - memory layout optimization
 //! - 改进memory layoutoptimization
+//! - improvememory layoutoptimization
 //! - 编译时计算增强
 //! - compile-time
 //! - 零成本抽象优化
@@ -33,6 +34,7 @@ impl Default for OptimizationBenchmark {
 
 impl OptimizationBenchmark {
     /// 创建新的性能基准测试工具
+    /// Creates新的性能基准测试工具
     /// Performance benchmark tool
     pub fn new() -> Self {
         Self {
@@ -69,12 +71,14 @@ impl OptimizationBenchmark {
     }
 
     /// 获取基准测试结果
+    /// Gets基准测试结果
     /// benchmark result
     pub async fn get_results(&self) -> HashMap<String, Vec<Duration>> {
         self.results.lock().await.clone()
     }
 
     /// 打印性能报告
+    /// Prints性能报告
     /// performance
     pub async fn print_report(&self) {
         let results = self.get_results().await;
@@ -106,6 +110,7 @@ pub struct ParallelCompilationDemo {
 
 impl ParallelCompilationDemo {
     /// 创建新的并行编译演示
+    /// Creates新的并行编译演示
     /// parallelism demonstration
     pub fn new(size: usize) -> Self {
         Self {
@@ -187,6 +192,7 @@ pub struct BorrowCheckerPerformanceDemo {
 
 impl BorrowCheckerPerformanceDemo {
     /// 创建新的借用检查器性能演示
+    /// Creates新的借用检查器性能演示
     /// borrowing performance demonstration
     pub fn new(size: usize) -> Self {
         Self {
@@ -250,12 +256,14 @@ pub struct UnoptimizedStruct {
 
 impl OptimizedStruct {
     /// 创建优化的结构体
+    /// Creates优化的结构体
     /// optimization struct
     pub fn new(id: u32, flag: bool, data: [u8; 4]) -> Self {
         Self { id, flag, data }
     }
 
     /// 处理数据
+    /// Processes data
     pub fn process(&self) -> u32 {
         self.id + if self.flag { 1 } else { 0 }
     }
@@ -263,12 +271,14 @@ impl OptimizedStruct {
 
 impl UnoptimizedStruct {
     /// 创建未优化的结构体
+    /// Creates未优化的结构体
     /// optimization struct
     pub fn new(id: u32, flag: bool, data: [u8; 4]) -> Self {
         Self { id, flag, data }
     }
 
     /// 处理数据
+    /// Processes data
     pub fn process(&self) -> u32 {
         self.id + if self.flag { 1 } else { 0 }
     }
@@ -288,6 +298,7 @@ impl Default for CompileTimeComputation {
 
 impl CompileTimeComputation {
     /// 创建编译时计算演示
+    /// Creates编译时计算演示
     /// compile-time demonstration
     pub const fn new() -> Self {
         Self {
@@ -332,6 +343,7 @@ pub struct ZeroCostAbstractionDemo {
 
 impl ZeroCostAbstractionDemo {
     /// 创建零成本抽象演示
+    /// Creates零成本抽象演示
     /// cost demonstration
     pub fn new(size: usize) -> Self {
         Self {

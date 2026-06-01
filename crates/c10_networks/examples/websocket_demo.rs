@@ -5,6 +5,7 @@
 //! - ✅ 密钥生成和验证
 //! - ✅ and
 //! - ✅ 操作码特性演示
+//! - ✅ operation feature demonstration
 //! - ✅ feature demonstration
 //! - ✅ 完整的协议支持
 //! - ✅ complete
@@ -16,13 +17,17 @@
 //! ```
 //!
 //! - **文本帧**: 用于传输 UTF-8 文本数据
+//! - **this **: transmission UTF-8 this data
 //! - **this **: transmission UTF-8 this
 //! - **二进制帧**: 用于传输二进制数据
+//! - ****: transmission data
 //! - ****: transmission
 //! - **控制帧**: Ping、Pong、Close 帧
 //! ## 配置选项
+//! ## configuration
 //! ##
 //! 可以通过环境变量配置演示：
+//! can environment variable configuration demonstration ：
 //! can environment variable demonstration ：
 //! - `C10_WS_DEMO_HOST`: 演示主机名 (默认: example.com)
 //! - `C10_WS_DEMO_HOST`: Demonstration of主机名 (默认: example.com)

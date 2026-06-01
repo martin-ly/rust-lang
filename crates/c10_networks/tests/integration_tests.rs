@@ -179,6 +179,7 @@ async fn test_tcp_connection_management() -> NetworkResult<()> {
 }
 
 /// 测试 TCP 连接池的基本功能
+/// TCP connection pool this functionality
 /// TCP this functionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
@@ -211,6 +212,7 @@ async fn test_tcp_connection_pool() -> NetworkResult<()> {
 }
 
 /// 测试数据包处理的基本功能
+/// data packet this functionality
 /// this functionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
@@ -238,6 +240,7 @@ async fn test_packet_processing() -> NetworkResult<()> {
 }
 
 /// 测试数据包缓冲区的功能
+/// data packet buffering functionality
 /// buffering functionality
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
@@ -271,6 +274,7 @@ async fn test_packet_buffer() -> NetworkResult<()> {
 }
 
 /// 测试数据包解析和序列化
+/// data packet and sequence
 /// and sequence
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
@@ -430,6 +434,7 @@ async fn test_performance_benchmark() -> NetworkResult<()> {
 }
 
 /// 测试超时处理
+/// timeout
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
 async fn test_timeout_handling() -> NetworkResult<()> {

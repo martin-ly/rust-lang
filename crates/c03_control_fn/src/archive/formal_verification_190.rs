@@ -2,6 +2,7 @@
 //! Rust 1.90 toolchain module
 //! Rust 1.90 形式化Verifytoolchainmodule
 //! - Prusti 程序验证
+//! - Prusti programverification
 //! - Prusti program
 //! - SMACK 模型检查
 //! - SMACK
@@ -12,8 +13,10 @@
 //! - Kani
 //! - Kani 模型Check
 //! - MIRAI 静态分析
+//! - MIRAI staticanalysis
 //! - MIRAI analyze
 //! - MIRAI 静态analysis
+//! - MIRAI staticanalysis
 use std::collections::HashMap;
 
 /// Prusti 程序验证演示
@@ -25,10 +28,12 @@ pub struct PrustiVerificationDemo {
 
 impl PrustiVerificationDemo {
     /// # 前置条件
+    /// # Preconditions
     /// # before condition
     /// - max_size 必须大于 0
     /// - max_size must 0
     /// # 后置条件
+    /// # Postconditions
     /// # after condition
     pub fn new(max_size: usize) -> Self {
         // Prusti 会验证 max_size > 0
@@ -44,12 +49,14 @@ impl PrustiVerificationDemo {
     /// element to data structure
     /// 添加elementtodata structure
     /// # 前置条件
+    /// # Preconditions
     /// # before condition
     /// - value 必须大于 0
     /// - value must 0
     /// - 当前大小必须小于 max_size
     /// - when before must max_size
     /// # 后置条件
+    /// # Postconditions
     /// # after condition
     /// - 数据结构的大小增加 1
     /// - data structure 1
@@ -66,12 +73,16 @@ impl PrustiVerificationDemo {
     }
 
     /// 获取元素
+    /// Gets an element
     /// element
     /// # 前置条件
+    /// # Preconditions
     /// # before condition
     /// - index 必须在有效范围内
+    /// - index mustinvalidrangeinside
     /// - index must in effective scope inside
     /// # 后置条件
+    /// # Postconditions
     /// # after condition
     /// - 返回的元素大于 0
     /// - element 0
@@ -84,8 +95,10 @@ impl PrustiVerificationDemo {
     }
 
     /// 计算所有元素的和
+    /// Computes所有元素的和
     /// all element and
     /// # 后置条件
+    /// # Postconditions
     /// # after condition
     /// - 返回值大于等于 0
     /// - return value etc. 0
@@ -94,6 +107,7 @@ impl PrustiVerificationDemo {
     }
 
     /// 验证不变量
+    /// Validates不变量
     /// variable
     /// # 不变量
     /// # variable
@@ -138,6 +152,7 @@ impl SmackModelCheckingDemo {
     /// 执行状态转换
     /// state conversion
     /// # 模型检查属性
+    /// # Model Checking Attributes
     /// # attribute
     /// # 模型Checkattribute
     /// - 状态转换必须是有效的
@@ -158,7 +173,9 @@ impl SmackModelCheckingDemo {
     }
 
     /// 检查可达性
+    /// Checks可达性
     /// # 模型检查属性
+    /// # Model Checking Attributes
     /// # attribute
     /// # 模型Checkattribute
     /// - 检查目标状态是否可达
@@ -205,6 +222,7 @@ impl CreusotSpecificationDemo {
     /// - capacity 必须大于 0
     /// - capacity must 0
     /// - 初始缓冲区为空
+    /// - initialbufferasempty
     /// - buffering as
     pub fn new(capacity: usize) -> Self {
         assert!(capacity > 0, "capacity must be positive");
@@ -216,12 +234,15 @@ impl CreusotSpecificationDemo {
     }
 
     /// 写入数据到缓冲区
+    /// Writes数据到缓冲区
     /// to buffering
     /// # 前置条件
+    /// # Preconditions
     /// # before condition
     /// - 缓冲区必须有足够空间
     /// - buffering must space
     /// # 后置条件
+    /// # Postconditions
     /// # after condition
     /// - 缓冲区包含写入的数据
     /// - buffering
@@ -243,12 +264,14 @@ impl CreusotSpecificationDemo {
     /// 从缓冲区读取数据
     /// from buffering
     /// # 前置条件
+    /// # Preconditions
     /// # before condition
     /// - size 必须大于 0
     /// - size must 0
     /// - 缓冲区必须有足够数据
     /// - buffering must
     /// # 后置条件
+    /// # Postconditions
     /// # after condition
     /// - 缓冲区大小减少 size
     /// - buffering size
@@ -266,6 +289,7 @@ impl CreusotSpecificationDemo {
     }
 
     /// 获取缓冲区状态
+    /// Gets缓冲区状态
     /// buffering state
     /// # 不变量
     /// # variable
@@ -295,7 +319,9 @@ impl KaniModelCheckingDemo {
     }
 
     /// 增加计数器
+    /// Increases计数器
     /// # 模型检查属性
+    /// # Model Checking Attributes
     /// # attribute
     /// # 模型Checkattribute
     /// - 计数器不能溢出
@@ -314,7 +340,9 @@ impl KaniModelCheckingDemo {
     }
 
     /// 减少计数器
+    /// Decreases计数器
     /// # 模型检查属性
+    /// # Model Checking Attributes
     /// # attribute
     /// # 模型Checkattribute
     /// - 计数器不能下溢
@@ -331,7 +359,9 @@ impl KaniModelCheckingDemo {
     }
 
     /// 重置计数器
+    /// Resets计数器
     /// # 后置条件
+    /// # Postconditions
     /// # after condition
     /// - 计数器值为 0
     /// - as 0
@@ -340,6 +370,7 @@ impl KaniModelCheckingDemo {
     }
 
     /// 获取计数器值
+    /// Gets计数器值
     /// # 不变量
     /// # variable
     /// # 不variable
@@ -377,10 +408,13 @@ impl MiraiStaticAnalysisDemo {
     }
 
     /// 获取当前数据
+    /// Gets当前数据
     /// when before
     /// # 静态分析属性
+    /// # staticanalysisproperties
     /// # analyze attribute
     /// # 静态analysisattribute
+    /// # staticanalysisattribute
     /// - 索引必须在有效范围内
     /// - must in effective scope inside
     /// - 索引mustineffectiverangeinside
@@ -395,10 +429,13 @@ impl MiraiStaticAnalysisDemo {
     }
 
     /// 移动到下一个数据
+    /// Moves到下一个数据
     /// to under
     /// # 静态分析属性
+    /// # staticanalysisproperties
     /// # analyze attribute
     /// # 静态analysisattribute
+    /// # staticanalysisattribute
     /// - 索引不能超出范围
     /// - cannot scope
     pub fn advance(&mut self) -> bool {
@@ -411,10 +448,13 @@ impl MiraiStaticAnalysisDemo {
     }
 
     /// 移动到上一个数据
+    /// Moves到上一个数据
     /// to on
     /// # 静态分析属性
+    /// # staticanalysisproperties
     /// # analyze attribute
     /// # 静态analysisattribute
+    /// # staticanalysisattribute
     /// - 索引不能下溢
     /// - cannot under
     pub fn previous(&mut self) -> bool {
@@ -427,6 +467,7 @@ impl MiraiStaticAnalysisDemo {
     }
 
     /// 获取数据大小
+    /// Gets数据大小
     pub fn size(&self) -> usize {
         self.data.len()
     }

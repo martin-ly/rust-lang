@@ -2,8 +2,10 @@
 //! Rust 1.90 feature demonstration module (this )
 //! Rust 1.90 高级featuredemonstration module (历史版this)
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - 高级生命周期管理
 //! - lifetime
@@ -18,11 +20,14 @@
 //! - 并发编程高级模式
 //! - concurrency
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_190_advanced_features.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::collections::HashMap;
@@ -42,6 +47,7 @@ where
     T: 'a + 'b,
 {
     /// 第一个生命周期受限的数据
+    /// First lifetime-restricted data
     /// first lifetime
     pub primary_data: &'a T,
     /// 第二个生命周期受限的数据
@@ -74,6 +80,7 @@ where
     T: 'a + 'b + Clone + std::fmt::Debug,
 {
     /// 创建新的高级生命周期组合
+    /// Creates新的高级生命周期组合
     /// lifetime combination
     pub fn new(primary_data: &'a T, secondary_data: &'b T, metadata: &'c str) -> Self {
         Self {
@@ -89,12 +96,14 @@ where
     }
 
     /// 获取组合数据
+    /// Gets组合数据
     /// combination
     pub fn get_combined_data(&self) -> (T, T) {
         (self.primary_data.clone(), self.secondary_data.clone())
     }
 
     /// 验证生命周期约束
+    /// Validates生命周期约束
     /// lifetime
     pub fn validate_lifetimes(&self) -> bool {
         // 这里可以添加生命周期验证逻辑
@@ -177,6 +186,7 @@ where
 }
 
 /// 处理错误类型
+/// Processes错误类型
 /// error type
 #[derive(Debug, Clone)]
 pub struct ProcessingError {
@@ -301,6 +311,7 @@ where
     T: Send + Sync + 'static,
 {
     /// 创建新的内存安全类型
+    /// Creates新的内存安全类型
     /// memory safety type
     pub fn new(data: T) -> Self {
         Self {
@@ -337,6 +348,7 @@ where
     }
 
     /// 获取访问计数
+    /// Gets访问计数
     pub fn get_access_count(&self) -> usize {
         *self.access_count.lock().unwrap()
     }
@@ -361,16 +373,19 @@ pub struct AdvancedConcurrentProcessor<T> {
     /// worker thread
     workers: Vec<thread::JoinHandle<()>>,
     /// 任务队列
+    /// taskqueue
     /// task
     task_queue: Arc<Mutex<Vec<T>>>,
     /// 结果收集器
     /// result
     results: Arc<Mutex<Vec<ProcessingResult>>>,
     /// 停止信号
+    /// Stops信号
     stop_signal: Arc<Mutex<bool>>,
 }
 
 /// 处理结果
+/// Processes结果
 /// result
 #[derive(Debug, Clone)]
 pub struct ProcessingResult {
@@ -385,6 +400,7 @@ where
     T: Send + Sync + 'static + Clone,
 {
     /// 创建新的并发处理器
+    /// Creates新的并发处理器
     /// concurrency
     pub fn new(worker_count: usize) -> Self {
         let task_queue = Arc::new(Mutex::new(Vec::new()));
@@ -447,6 +463,7 @@ where
     }
 
     /// 获取结果
+    /// Gets结果
     /// result
     pub fn get_results(&self) -> Vec<ProcessingResult> {
         let results = self.results.lock().unwrap();
@@ -454,6 +471,7 @@ where
     }
 
     /// 停止处理器
+    /// Stops处理器
     pub fn stop(self) -> Vec<ProcessingResult> {
         // 发送停止信号
         {
@@ -472,6 +490,7 @@ where
     }
 
     /// 处理单个任务
+    /// Processes单个任务
     /// task
     fn process_task(worker_id: u64, _task: T) -> ProcessingResult {
         // 模拟任务处理
@@ -494,14 +513,18 @@ where
 #[derive(Debug, Clone)]
 pub enum AdvancedError {
     /// 处理错误
+    /// Processes错误
     Processing(ProcessingError),
     /// 并发错误
+    /// concurrenterror
     /// concurrency
     Concurrent(String),
     /// 内存错误
+    /// memoryerror
     /// memory
     Memory(String),
     /// 类型错误
+    /// typeerror
     /// type
     Type(String),
     /// 生命周期错误
@@ -538,6 +561,7 @@ pub struct ErrorHandler {
 
 impl ErrorHandler {
     /// 创建新的错误处理器
+    /// Creates新的错误处理器
     /// error handling
     pub fn new() -> Self {
         Self {
@@ -546,18 +570,21 @@ impl ErrorHandler {
     }
 
     /// 记录错误
+    /// recorderror
     pub fn log_error(&self, error: AdvancedError) {
         let mut log = self.error_log.lock().unwrap();
         log.push(error);
     }
 
     /// 获取错误日志
+    /// Gets错误日志
     pub fn get_errors(&self) -> Vec<AdvancedError> {
         let log = self.error_log.lock().unwrap();
         log.clone()
     }
 
     /// 清空错误日志
+    /// Clears错误日志
     pub fn clear_errors(&self) {
         let mut log = self.error_log.lock().unwrap();
         log.clear();
@@ -573,6 +600,7 @@ impl Default for ErrorHandler {
 // ==================== 演示函数 ====================
 
 /// 演示所有高级特性
+/// Demonstrates所有高级特性
 /// demonstration all feature
 /// Demonstration of所有高级feature
 pub fn demonstrate_advanced_features() {

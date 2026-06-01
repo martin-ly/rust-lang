@@ -1,11 +1,13 @@
 //!
 //! ## 📚 本示例涵盖
+//! ## 📚 this example cover
 //! ## 📚 this example
 //! ### 🔍 一、结构化日志 (Structured Logging)
 //! - Span and Event 最佳实践
 //! - 日志级别和过滤器
 //! - level and
 //! - 日志订阅器配置
+//! - configuration
 //! -
 //! - 分布式追踪
 //! - distribution
@@ -61,12 +63,15 @@ use tracing_subscriber::util::SubscriberInitExt;
 // ============================================================================
 
 /// # Tracing 初始化 - 配置日志订阅器
+/// # Tracing - configuration
 /// # Tracing -
 /// ## Tracing 架构
 /// - **Subscriber**: 订阅和处理事件
+/// - **Subscriber**: and event
 /// - **Subscriber**: and
 /// - **Layer**: 可combinationmiddleware
 /// - **Event**: 单点事件(日志)
+/// - **Event**: point event ()
 /// - **Event**: point ()
 /// ## 日志级别
 /// ## level
@@ -275,6 +280,7 @@ pub struct MetricsCollector {
     /// -
     gauges: Arc<RwLock<std::collections::HashMap<String, f64>>>,
     /// 直方图 - 记录数值分布
+    /// graph - distribution
     /// - distribution
     histograms: Arc<RwLock<std::collections::HashMap<String, Vec<f64>>>>,
 }
@@ -310,6 +316,7 @@ impl MetricsCollector {
     }
 
     /// 记录直方图值
+    /// graph
     pub async fn observe_histogram(&self, name: &str, value: f64) {
         let mut histograms = self.histograms.write().await;
         histograms

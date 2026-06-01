@@ -25,6 +25,7 @@
 /// 简洁替代方案。
 /// 。
 /// ## 语法形式
+/// ## syntax
 /// ##
 ///     cfg1 => expr1,
 ///     cfg2 => expr2,
@@ -42,6 +43,7 @@
 /// | 适用位置 | 项级别 (item) | 表达式级别 | 表达式级别 |
 /// | position | level (item) | express level | express level |
 /// | 语法冗长度 | 高（需重复定义） | 中（嵌套 if） | 低（类 match） |
+/// | syntax | high （definition ） | in （ if） | low （ match） |
 /// | | （definition ） | in （ if） | （ match） |
 /// | 默认分支 | 不支持 | 需显式 else | `_ =>` 清晰表达 |
 /// | | | else | `_ =>` clear express |
@@ -68,6 +70,7 @@
 /// └── 需要表达式值？ → cfg_select!
 /// └── express ？ → cfg_select!
 /// ## 反例 / 限制
+/// ## anti-pattern /
 /// ## /
 /// - 不Supports `cfg_attr` attribute 注入scenario
 pub struct CfgSelectExamples;
@@ -328,6 +331,7 @@ pub struct RealRust195Features;
 impl RealRust195Features {
     /// Rust 2024 风格 `unsafe fn`
     /// 在 `unsafe fn` 内部，不安全操作仍需显式包裹在 `unsafe {}` 中。
+    /// in `unsafe fn` inside ，operation in `unsafe {}` in 。
     /// in `unsafe fn` inside ，in `unsafe {}` in 。
     ///
     /// `ptr` 必须是有效的、正确对齐的指向已初始化 `u32` 的指针。

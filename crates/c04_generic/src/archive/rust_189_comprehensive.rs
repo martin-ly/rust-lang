@@ -1,30 +1,42 @@
 //! # Rust 1.89 特性示例 (历史版本)
+//! # Rust 1.89 Feature Examples (Historical Version)
 //! # Rust 1.89 feature example (this )
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! ## 版本历史说明
+//! ## Version History
 //! ## this explain
 //! ### Rust 1.92.0 主要改进
+//! ### Rust 1.92.0 Major Improvements
 //! ### Rust 1.92.0 main
 //! - **语言特性**: 关联项多边界、增强的高阶生命周期、改进的自动特征推断
 //! - **feature **: edge 、lifetime 、infer
 //! - **性能优化**: 迭代器方法特化、泛型约束优化
 //! - **performance optimization **: method 、generic optimization
 //! ### 迁移建议
+//! ### Migration Suggestions
 //! ###
 //! 1. 更新 Cargo.toml: `rust-version = "1.92"`
+//! 1. Update Cargo.toml: `rust-version = "1.92"`
 //! 参考:
+//! Reference:
 //! reference :
 //! - [历史版本: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
+//! - [Historical version: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //! - [历史版this: Rust 1.90.0 Release Notes](https://blog.rust-lang.org/2025/09/18/Rust-1.90.0/)
 //!
 //! # Rust 1.89 全面特性展示模块
 //! # Rust 1.89 surface feature module
 //! # Rust 1.89 全surfacefeaturedisplaymodule
+//! # Rust 1.89 fullsurfacefeaturedisplaymodule
 //! 2. 增强const generic (Enhanced Const Generics)
+//! 2. enhanceconst generic (Enhanced Const Generics)
 //! 3. 改进 trait on行conversion (Trait Upcasting)
+//! 3. improve trait onrowconversion (Trait Upcasting)
 //! 4. 类型推断改进 (Type Inference Improvements)
 //! 5. 生命周期推断增强 (Lifetime Inference Enhancements)
 use std::{
@@ -48,11 +60,13 @@ pub mod rpitit_features {
     /// trait - RPITIT
     pub trait DataProcessor<T> {
         /// 处理数据并返回迭代器 - 使用 RPITIT
+        /// Processes数据并返回迭代器 - 使用 RPITIT
         /// and - RPITIT
         #[allow(clippy::type_complexity)]
         fn process(&self, data: Vec<T>) -> impl Iterator<Item = T> + '_;
 
         /// 过滤和处理数据 - 使用 RPITIT
+        /// Filters和处理数据 - 使用 RPITIT
         /// and - RPITIT
         #[allow(clippy::type_complexity)]
         fn filter_and_process<F>(&self, data: Vec<T>, predicate: F) -> impl Iterator<Item = T> + '_
@@ -167,6 +181,7 @@ pub mod enhanced_const_generics {
     #[allow(clippy::type_complexity)]
     impl<T: Default + Copy, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
         /// 创建零矩阵
+        /// Creates零矩阵
         pub fn zero() -> Self {
             Self {
                 data: [[T::default(); COLS]; ROWS],
@@ -174,12 +189,14 @@ pub mod enhanced_const_generics {
         }
 
         /// 获取元素
+        /// Gets an element
         /// element
         pub fn get(&self, row: usize, col: usize) -> Option<&T> {
             self.data.get(row)?.get(col)
         }
 
         /// 设置元素
+        /// Sets an element
         /// element
         #[allow(clippy::type_complexity)]
         pub fn set(&mut self, row: usize, col: usize, value: T) -> bool {
@@ -462,6 +479,7 @@ pub mod trait_upcasting {
 
     impl ShapeProcessor {
         /// 处理形状 - 展示上行转换
+        /// Processes形状 - 展示上行转换
         /// - on conversion
         #[allow(clippy::type_complexity)]
         pub fn process_shape(shape: &dyn Drawable) -> (f64, f64, String) {
@@ -540,6 +558,7 @@ pub mod type_inference_improvements {
         }
 
         /// 转换数据 - 展示类型推断
+        /// Converts数据 - 展示类型推断
         /// conversion - type infer
         #[allow(clippy::type_complexity)]
         pub fn convert<F>(&self, input: T, converter: F) -> U
@@ -640,6 +659,7 @@ pub mod lifetime_inference_enhancements {
         }
 
         /// 获取元数据
+        /// Gets metadata
         pub fn get_metadata(&self) -> &str {
             &self.metadata
         }
@@ -722,6 +742,7 @@ pub mod new_generic_constraint_syntax {
         T: Clone + Debug + PartialEq,
     {
         /// 处理数据并返回新类型
+        /// Processes数据并返回新类型
         /// and type
         fn process<U>(&self, data: T) -> U
         where
@@ -850,6 +871,7 @@ pub mod new_generic_constraint_syntax {
 }
 
 /// 综合演示函数
+/// Comprehensive demonstration function
 /// synthesize demonstration function
 pub fn demonstrate_rust_189_comprehensive() {
     use new_generic_constraint_syntax::AdvancedProcessor;

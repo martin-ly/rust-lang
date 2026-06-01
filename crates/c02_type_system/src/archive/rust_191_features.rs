@@ -1,8 +1,10 @@
 //! Rust 1.91 特性实现模块（历史版本）
 //! Rust 1.91 feature module （this ）
 //! ⚠️ **历史版本文件** - 本文件仅作为历史参考保留
+//! ⚠️ **Historical version file** - This file is kept for historical reference only
 //! ⚠️ **this ** - this as reference
 //! **当前推荐版本**: Rust 1.92.0+ | 最新特性请参考 `rust_192_features.rs`
+//! **Current recommended version**: Rust 1.92.0+ | For latest features, see `rust_192_features.rs`
 //! **when before this **: Rust 1.92.0+ | feature reference `rust_192_features.rs`
 //! - JIT 编译器优化（迭代器性能提升）
 //! - JIT optimization （performance ）
@@ -13,11 +15,15 @@
 //! - 异步迭代器改进
 //! - async
 //! # 文件信息
+//! # File Information
 //! #
 //! - 文件: rust_191_features.rs
+//! - File: rust_191_features.rs
 //! - 创建日期: 2025-01-27
+//! - Creation date: 2025-01-27
 //! - date : 2025-01-27
 //! - 版本: 1.0
+//! - Version: 1.0
 //! - this : 1.0
 //! - 版this: 1.0
 use std::io::{BufRead, BufReader, Cursor};
@@ -26,11 +32,13 @@ use std::ops::ControlFlow;
 // ==================== 1. const 上下文增强 ====================
 
 /// Rust 1.91 const 上下文增强示例模块
+/// Rust 1.91 const contextenhanceexamplemodule
 /// Rust 1.91 const on under example module
 pub mod const_context_enhancements {
     /// 在 Rust 1.90 中，只能引用静态变量（static）
     /// in Rust 1.90 in ，reference variable （static）
     /// 在 Rust 1.91 中，可以引用常量（const）
+    /// in Rust 1.91 in，canreferenceconstants（const）
     /// in Rust 1.91 in ，can reference constant （const）
     pub fn demonstrate_const_refs() {
         // Rust 1.91: 支持非静态常量的引用
@@ -349,6 +357,7 @@ pub mod type_checker_optimizations {
 
     impl OptimizedTypeInferencer {
         /// 创建新的类型推断器
+        /// Creates新的类型推断器
         /// type infer
         pub fn new() -> Self {
             Self {
@@ -368,6 +377,7 @@ pub mod type_checker_optimizations {
         /// Rust 1.91 优化：使用缓存加速类型推断
         /// Rust 1.91 optimization ：type infer
         /// Rust 1.91 optimization：Use缓存加速type inference
+        /// Rust 1.91 optimization：Usecacheacceleratetype inference
         pub fn infer_type_cached(&mut self, expression: &str) -> String {
             let start_time = Instant::now();
             self.statistics.total_inferences += 1;
@@ -403,6 +413,7 @@ pub mod type_checker_optimizations {
         }
 
         /// 获取统计信息
+        /// Gets统计信息
         pub fn get_statistics(&self) -> &TypeInferenceStatistics {
             &self.statistics
         }
@@ -547,6 +558,7 @@ pub mod async_iterator_improvements {
 /// Rust 1.91 standard library API example module
 pub mod std_new_apis {
     /// str::split_ascii_whitespace 示例
+    /// str::split_ascii_whitespace example
     /// Rust 1.91 新增：仅处理 ASCII 空白字符，性能更好
     /// Rust 1.91 ： ASCII ，performance
     pub fn demonstrate_split_ascii_whitespace() {
@@ -566,6 +578,7 @@ pub mod std_new_apis {
     }
 
     /// Vec::try_reserve_exact 示例
+    /// Vec::try_reserve_exact example
     /// Rust 1.91 新增：尝试精确分配容量，可能失败
     /// Rust 1.91 ：，may
     pub fn demonstrate_try_reserve_exact() {

@@ -18,12 +18,14 @@ pub struct ParallelIteratorAdapter<I> {
 
 impl<I> ParallelIteratorAdapter<I> {
     /// 创建新的并行迭代器适配器
+    /// Creates新的并行迭代器适配器
     /// parallelism adapter
     pub fn new(iter: I, chunk_size: usize) -> Self {
         Self { iter, chunk_size }
     }
 
     /// 设置块大小
+    /// Sets块大小
     pub fn with_chunk_size(mut self, chunk_size: usize) -> Self {
         self.chunk_size = chunk_size;
         self
@@ -39,6 +41,7 @@ pub struct ParallelResult<T> {
 
 impl<T> ParallelResult<T> {
     /// 创建新的并行处理结果
+    /// Creates新的并行处理结果
     /// parallelism result
     pub fn new(results: Vec<T>, processing_time: std::time::Duration) -> Self {
         Self {
@@ -48,12 +51,14 @@ impl<T> ParallelResult<T> {
     }
 
     /// 获取结果
+    /// Gets结果
     /// result
     pub fn results(&self) -> &[T] {
         &self.results
     }
 
     /// 获取处理时间
+    /// Gets处理时间
     /// time
     pub fn processing_time(&self) -> std::time::Duration {
         self.processing_time

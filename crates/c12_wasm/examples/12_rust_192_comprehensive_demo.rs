@@ -1,10 +1,13 @@
 //! Rust 1.92.0 WASM 综合应用示例
 //! Rust 1.92.0 WASM synthesize application example
 //! 1. 高性能内存管理器
+//! 1. high performance memory
 //! 1. performance memory
 //! 2. 优化的数据处理管道
+//! 2. optimization data pipe
 //! 2. optimization pipe
 //! 3. 安全的 FFI 互操作
+//! 3. FFI operation
 //! 3. FFI
 //! 4. 完整的性能优化方案
 //! 4. complete performance optimization
@@ -30,6 +33,7 @@ fn main() {
 }
 
 /// 演示高性能内存管理器
+/// demonstration high performance memory
 /// demonstration performance memory
 fn demo_high_performance_memory_manager() {
     println!("1. 高性能内存管理器");
@@ -60,6 +64,7 @@ fn demo_high_performance_memory_manager() {
 }
 
 /// 演示优化的数据处理管道
+/// demonstration optimization data pipe
 /// demonstration optimization pipe
 fn demo_optimized_data_pipeline() {
     println!("\n2. 优化的数据处理管道");
@@ -88,6 +93,7 @@ fn demo_optimized_data_pipeline() {
 }
 
 /// 演示安全的 FFI 互操作
+/// demonstration FFI operation
 /// demonstration FFI
 /// Demonstration of安全 FFI 互操作
 fn demo_safe_ffi_interop() {

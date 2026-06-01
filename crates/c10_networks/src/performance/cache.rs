@@ -1,4 +1,5 @@
 //! 缓存实现
+//! cache
 //! 缓存Implementation of
 use crate::error::NetworkResult;
 use std::collections::HashMap;
@@ -7,6 +8,7 @@ use std::sync::{Arc, RwLock};
 use std::time::{Duration, Instant};
 
 /// 缓存项
+/// cache
 #[derive(Debug, Clone)]
 struct CacheItem<V> {
     value: V,
@@ -42,6 +44,7 @@ impl<V> CacheItem<V> {
 }
 
 /// 缓存统计信息
+/// cache
 #[derive(Debug, Clone, Default)]
 pub struct CacheStats {
     pub hits: u64,
@@ -56,6 +59,7 @@ pub struct CacheStats {
 }
 
 /// 缓存实现
+/// cache
 /// 缓存Implementation of
 #[allow(dead_code)]
 pub struct Cache<K, V> {
@@ -73,6 +77,7 @@ where
     V: Clone + Send + Sync + 'static,
 {
     /// 创建新的缓存
+    /// cache
     pub fn new(max_size: usize) -> Self {
         let stats = CacheStats {
             max_size,
@@ -105,6 +110,7 @@ where
     }
 
     /// 获取值
+    /// get value
     /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         let mut items = self.items.write().expect("cache items mutex poisoned");
@@ -129,6 +135,7 @@ where
     }
 
     /// 插入值
+    /// insert value
     pub fn insert(&self, key: K, value: V) -> Option<V> {
         let mut items = self.items.write().expect("cache items mutex poisoned");
         let mut stats = self.stats.write().expect("cache stats mutex poisoned");
@@ -145,6 +152,7 @@ where
     }
 
     /// 移除值
+    /// remove value
     pub fn remove(&self, key: &K) -> Option<V> {
         let mut items = self.items.write().expect("cache items mutex poisoned");
         let mut stats = self.stats.write().expect("cache stats mutex poisoned");
@@ -162,6 +170,7 @@ where
     }
 
     /// 清空缓存
+    /// cache
     pub fn clear(&self) {
         let mut items = self.items.write().expect("cache items mutex poisoned");
         let mut stats = self.stats.write().expect("cache stats mutex poisoned");
@@ -171,12 +180,14 @@ where
     }
 
     /// 获取缓存大小
+    /// cache
     pub fn len(&self) -> usize {
         let items = self.items.read().expect("cache items mutex poisoned");
         items.len()
     }
 
     /// 检查缓存是否为空
+    /// cache as
     /// as
     pub fn is_empty(&self) -> bool {
         self.len() == 0
@@ -294,17 +305,20 @@ where
     }
 
     /// 获取值
+    /// get value
     /// Get值
     pub fn get(&self, key: &K) -> Option<V> {
         self.cache.get(key)
     }
 
     /// 插入值
+    /// insert value
     pub fn insert(&self, key: K, value: V) -> Option<V> {
         self.cache.insert(key, value)
     }
 
     /// 移除值
+    /// remove value
     pub fn remove(&self, key: &K) -> Option<V> {
         self.cache.remove(key)
     }
@@ -316,6 +330,7 @@ where
 }
 
 /// 缓存管理器
+/// cache
 pub struct CacheManager {
     caches: Arc<RwLock<HashMap<String, Arc<dyn CacheTrait + Send + Sync>>>>,
 }
@@ -348,6 +363,7 @@ impl Default for CacheManager {
 
 impl CacheManager {
     /// 创建新的缓存管理器
+    /// cache
     pub fn new() -> Self {
         Self {
             caches: Arc::new(RwLock::new(HashMap::new())),
@@ -355,6 +371,7 @@ impl CacheManager {
     }
 
     /// 创建缓存
+    /// cache
     pub fn create_cache<K, V>(&self, name: String, max_size: usize) -> Arc<Cache<K, V>>
     where
         K: Hash + Eq + Clone + Send + Sync + 'static,
@@ -367,6 +384,7 @@ impl CacheManager {
     }
 
     /// 获取所有缓存的统计信息
+    /// all cache
     /// all
     pub fn get_all_stats(&self) -> HashMap<String, CacheStats> {
         let caches = self.caches.read().expect("cache manager mutex poisoned");
@@ -377,6 +395,7 @@ impl CacheManager {
     }
 
     /// 清理所有缓存
+    /// all cache
     /// all
     pub async fn cleanup_all(&self) -> NetworkResult<()> {
         let caches = self.caches.read().expect("cache manager mutex poisoned");
